@@ -11,7 +11,7 @@ import {
 
 import editUtlandIcon from '@fpsak-frontend/assets/images/endre.svg';
 import editUtlandDisabledIcon from '@fpsak-frontend/assets/images/endre_disablet.svg';
-import { RadioGroupField, RadioOption, Form } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel, Form } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
@@ -125,25 +125,21 @@ const UtlandPanel: FunctionComponent<OwnProps> = ({
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <RadioGroupField
-                direction="vertical"
+              <RadioGroupPanel
                 name="utlandSakstype"
-                bredde="M"
+                hideLegend
                 validate={[required]}
-              >
-                <RadioOption
-                  label={intl.formatMessage({ id: 'UtlandPanel.Nasjonal' })}
-                  value={UtlandSakstypeKode.NASJONAL}
-                />
-                <RadioOption
-                  label={intl.formatMessage({ id: 'UtlandPanel.EøsBosattNorge' })}
-                  value={UtlandSakstypeKode.EØS_BOSATT_NORGE}
-                />
-                <RadioOption
-                  label={intl.formatMessage({ id: 'UtlandPanel.BosattUtland' })}
-                  value={UtlandSakstypeKode.BOSATT_UTLAND}
-                />
-              </RadioGroupField>
+                radios={[{
+                  label: intl.formatMessage({ id: 'UtlandPanel.Nasjonal' }),
+                  value: UtlandSakstypeKode.NASJONAL,
+                }, {
+                  label: intl.formatMessage({ id: 'UtlandPanel.EøsBosattNorge' }),
+                  value: UtlandSakstypeKode.EØS_BOSATT_NORGE,
+                }, {
+                  label: intl.formatMessage({ id: 'UtlandPanel.BosattUtland' }),
+                  value: UtlandSakstypeKode.BOSATT_UTLAND,
+                }]}
+              />
             </FlexColumn>
           </FlexRow>
           <VerticalSpacer sixteenPx />

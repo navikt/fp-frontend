@@ -2,12 +2,11 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { UseFormGetValues } from 'react-hook-form';
 import moment from 'moment';
-import { Undertekst, Element } from 'nav-frontend-typografi';
-import { SkjemaGruppe } from 'nav-frontend-skjema';
+import { Element, Undertittel } from 'nav-frontend-typografi';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import {
-  Datepicker, InputField, RadioGroupField, RadioOption, formHooks,
+  Datepicker, InputField, RadioGroupPanel, formHooks,
 } from '@navikt/ft-form-hooks';
 import {
   ArrowBox, BorderBox, VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
@@ -21,8 +20,6 @@ import {
   minValue,
   required,
 } from '@navikt/ft-form-validators';
-
-import styles from './terminFodselDatoPanel.less';
 
 const validateMinValue1 = minValue(1);
 const validateMaxValue9 = maxValue(9);
@@ -78,112 +75,124 @@ const TerminFodselDatoPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <BorderBox>
-      <div className={styles.flexContainer}>
-        <SkjemaGruppe legend={<FormattedMessage id="Registrering.TerminOgFodsel" />}>
-          <Undertekst><FormattedMessage id="Registrering.Termin.Fodt" /></Undertekst>
+      <Undertittel>{intl.formatMessage({ id: 'Registrering.TerminOgFodsel' })}</Undertittel>
+      <VerticalSpacer sixteenPx />
+      <RadioGroupPanel
+        name="erBarnetFodt"
+        label={<FormattedMessage id="Registrering.Termin.Fodt" />}
+        validate={[required]}
+        isReadOnly={readOnly}
+        isHorizontal
+        isTrueOrFalseSelection
+        radios={[{
+          label: <FormattedMessage id="Registrering.Fodsel.ErFodt" />,
+          value: 'true',
+        }, {
+          label: <FormattedMessage id="Registrering.Fodsel.ErIkkeFodt" />,
+          value: 'false',
+        }]}
+      />
+      {erBarnetFodt === false && (
+        <>
           <VerticalSpacer eightPx />
-          <RadioGroupField name="erBarnetFodt" readOnly={readOnly} validate={[required]} parse={(value: string) => value === 'true'}>
-            <RadioOption label={<FormattedMessage id="Registrering.Fodsel.ErFodt" />} value="true" />
-            <RadioOption label={<FormattedMessage id="Registrering.Fodsel.ErIkkeFodt" />} value="false" />
-          </RadioGroupField>
-          {erBarnetFodt === false && (
-            <ArrowBox alignOffset={64}>
-              <FlexContainer>
+          <ArrowBox alignOffset={64}>
+            <FlexContainer>
+              <FlexRow>
+                <FlexColumn>
+                  <Datepicker
+                    name="termindato"
+                    label={intl.formatMessage({ id: 'Registrering.Termindato' })}
+                    isReadOnly={readOnly}
+                    validate={[required, hasValidDate]}
+                    onChange={() => (isSubmitted ? trigger() : undefined)}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <InputField
+                    name="antallBarnFraTerminbekreftelse"
+                    label={intl.formatMessage({ id: 'Registrering.AntallBarn' })}
+                    readOnly={readOnly}
+                    validate={[required, hasValidInteger, validateMinValue1, validateMaxValue9]}
+                  />
+                </FlexColumn>
+              </FlexRow>
+              <VerticalSpacer sixteenPx />
+              <FlexRow>
+                <FlexColumn>
+                  <Datepicker
+                    name="terminbekreftelseDato"
+                    label={intl.formatMessage({ id: 'Registrering.UtstedtDato' })}
+                    isReadOnly={readOnly}
+                    validate={[hasValidDate, validateTermin(getValues)]}
+                  />
+                </FlexColumn>
+              </FlexRow>
+            </FlexContainer>
+          </ArrowBox>
+        </>
+      )}
+      {erBarnetFodt && (
+        <>
+          <VerticalSpacer eightPx />
+          <ArrowBox alignOffset={0}>
+            <FlexContainer>
+              <FlexRow>
+                <FlexColumn>
+                  <Datepicker
+                    name="foedselsDato"
+                    label={intl.formatMessage({ id: 'Registrering.Fodselsdato' })}
+                      /* foedselsDato is array in DTO data model, so we transform the value to/from the store/input */
+                    format={(valueFromStore) => (valueFromStore && valueFromStore.length
+                      ? moment(valueFromStore[0]).format(DDMMYYYY_DATE_FORMAT)
+                      : moment(valueFromStore).format(DDMMYYYY_DATE_FORMAT))}
+                      // @ts-ignore Fiks
+                    parse={(valueFromInput) => (valueFromInput ? [valueFromInput] : valueFromInput)}
+                    isReadOnly={readOnly}
+                    validate={[required, (value) => hasValidDate(value[0]), (value) => dateBeforeOrEqualToToday(value[0])]}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <InputField
+                    name="antallBarn"
+                    label={intl.formatMessage({ id: 'Registrering.AntallBarn' })}
+                    readOnly={readOnly}
+                    validate={[required, hasValidInteger, validateMinValue1, validateMaxValue9]}
+                  />
+                </FlexColumn>
+              </FlexRow>
+              {erForeldrepenger && (
+              <>
+                <VerticalSpacer sixteenPx />
+                <Alertstripe type="info" form="inline">
+                  <Element>
+                    <FormattedMessage id="Registrering.RettTilPrematuruker" />
+                  </Element>
+                </Alertstripe>
+                <VerticalSpacer sixteenPx />
                 <FlexRow>
                   <FlexColumn>
                     <Datepicker
                       name="termindato"
                       label={intl.formatMessage({ id: 'Registrering.Termindato' })}
                       isReadOnly={readOnly}
-                      validate={[required, hasValidDate]}
-                      onChange={() => (isSubmitted ? trigger() : undefined)}
+                      validate={[hasValidDate]}
                     />
                   </FlexColumn>
-                  <FlexColumn>
-                    <InputField
-                      name="antallBarnFraTerminbekreftelse"
-                      label={intl.formatMessage({ id: 'Registrering.AntallBarn' })}
-                      bredde="XS"
-                      readOnly={readOnly}
-                      validate={[required, hasValidInteger, validateMinValue1, validateMaxValue9]}
-                    />
-                  </FlexColumn>
-                </FlexRow>
-                <FlexRow>
                   <FlexColumn>
                     <Datepicker
                       name="terminbekreftelseDato"
                       label={intl.formatMessage({ id: 'Registrering.UtstedtDato' })}
                       isReadOnly={readOnly}
-                      validate={[hasValidDate, validateTermin(getValues)]}
+                      validate={[hasValidDate]}
                     />
                   </FlexColumn>
                 </FlexRow>
-              </FlexContainer>
-            </ArrowBox>
-          )}
-          {erBarnetFodt && (
-            <ArrowBox alignOffset={0}>
-              <FlexContainer>
-                <FlexRow>
-                  <FlexColumn>
-                    <Datepicker
-                      name="foedselsDato"
-                      label={intl.formatMessage({ id: 'Registrering.Fodselsdato' })}
-                      /* foedselsDato is array in DTO data model, so we transform the value to/from the store/input */
-                      format={(valueFromStore) => (valueFromStore && valueFromStore.length
-                        ? moment(valueFromStore[0]).format(DDMMYYYY_DATE_FORMAT)
-                        : moment(valueFromStore).format(DDMMYYYY_DATE_FORMAT))}
-                      // @ts-ignore Fiks
-                      parse={(valueFromInput) => (valueFromInput ? [valueFromInput] : valueFromInput)}
-                      isReadOnly={readOnly}
-                      validate={[required, (value) => hasValidDate(value[0]), (value) => dateBeforeOrEqualToToday(value[0])]}
-                    />
-                  </FlexColumn>
-                  <FlexColumn>
-                    <InputField
-                      name="antallBarn"
-                      label={intl.formatMessage({ id: 'Registrering.AntallBarn' })}
-                      bredde="XS"
-                      readOnly={readOnly}
-                      validate={[required, hasValidInteger, validateMinValue1, validateMaxValue9]}
-                    />
-                  </FlexColumn>
-                </FlexRow>
-                {erForeldrepenger && (
-                  <>
-                    <VerticalSpacer eightPx />
-                    <Alertstripe type="info" form="inline">
-                      <Element>
-                        <FormattedMessage id="Registrering.RettTilPrematuruker" />
-                      </Element>
-                    </Alertstripe>
-                    <VerticalSpacer eightPx />
-                    <FlexRow>
-                      <FlexColumn>
-                        <Datepicker
-                          name="termindato"
-                          label={intl.formatMessage({ id: 'Registrering.Termindato' })}
-                          isReadOnly={readOnly}
-                          validate={[hasValidDate]}
-                        />
-                      </FlexColumn>
-                      <FlexColumn>
-                        <Datepicker
-                          name="terminbekreftelseDato"
-                          label={intl.formatMessage({ id: 'Registrering.UtstedtDato' })}
-                          isReadOnly={readOnly}
-                          validate={[hasValidDate]}
-                        />
-                      </FlexColumn>
-                    </FlexRow>
-                  </>
-                )}
-              </FlexContainer>
-            </ArrowBox>
-          )}
-        </SkjemaGruppe>
-      </div>
+              </>
+              )}
+            </FlexContainer>
+          </ArrowBox>
+        </>
+      )}
     </BorderBox>
   );
 };

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, WrappedComponentProps } from 'react-intl';
 import moment from 'moment';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
@@ -32,7 +32,7 @@ const BarnPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
     >
       {Object.keys(adopsjonFodelsedatoer).map((key) => (
         <React.Fragment key={`${key}`}>
-          <FormattedMessage id="BarnPanel.ChildNumberBornData" values={{ childNumber: key }} />
+          <Element><FormattedMessage id="BarnPanel.ChildNumberBornData" values={{ childNumber: key }} /></Element>
           <Normaltekst>{moment(adopsjonFodelsedatoer[key]).format(DDMMYYYY_DATE_FORMAT)}</Normaltekst>
           <VerticalSpacer eightPx />
         </React.Fragment>

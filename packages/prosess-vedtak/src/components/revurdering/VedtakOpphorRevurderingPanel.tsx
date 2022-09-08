@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import { Behandlingsresultat } from '@fpsak-frontend/types';
 
@@ -24,9 +24,9 @@ const VedtakOpphorRevurderingPanel: FunctionComponent<OwnProps> = ({
   skalBrukeOverstyrendeFritekstBrev,
 }) => (
   <>
-    <Undertekst>
+    <Element>
       <FormattedMessage id="VedtakForm.RevurderingFP.Aarsak" />
-    </Undertekst>
+    </Element>
     {revurderingsÅrsakString && (
       <Normaltekst>
         {revurderingsÅrsakString}

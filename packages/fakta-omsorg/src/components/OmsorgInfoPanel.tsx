@@ -106,8 +106,8 @@ const OmsorgInfoPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
           <OmsorgFaktaForm
             readOnly={readOnly}
-            aksjonspunkter={aksjonspunkter}
             ytelsefordeling={ytelsefordeling}
+            aksjonspunkter={aksjonspunkter}
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           />
           <VerticalSpacer thirtyTwoPx />

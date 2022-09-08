@@ -9,7 +9,7 @@ import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import {
-  Form, RadioGroupField, RadioOption, TextAreaField,
+  Form, RadioGroupPanel, TextAreaField,
 } from '@navikt/ft-form-hooks';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -168,27 +168,41 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
               <VerticalSpacer sixteenPx />
             </>
           )}
-          <RadioGroupField name="sendVarsel" validate={[required]} parse={(verdi) => verdi === 'true'}>
-            <RadioOption label={intl.formatMessage({ id: 'VarselOmRevurderingForm.SendVarsel' })} value="true" />
-            <RadioOption label={intl.formatMessage({ id: 'VarselOmRevurderingForm.IkkeSendVarsel' })} value="false" />
-          </RadioGroupField>
+          <RadioGroupPanel
+            name="sendVarsel"
+            validate={[required]}
+            isHorizontal
+            isTrueOrFalseSelection
+            radios={[{
+              value: 'true',
+              label: intl.formatMessage({ id: 'VarselOmRevurderingForm.SendVarsel' }),
+            }, {
+              value: 'false',
+              label: intl.formatMessage({ id: 'VarselOmRevurderingForm.IkkeSendVarsel' }),
+            },
+            ]}
+          />
           {formVerdier.sendVarsel && (
-            <ArrowBox>
-              <TextAreaField
-                badges={[{ text: language, type: 'fokus', titleText: intl.formatMessage({ id: 'Malform.Beskrivelse' }) }]}
-                name="fritekst"
-                label={intl.formatMessage({ id: 'VarselOmRevurderingForm.FritekstIBrev' })}
-                validate={[required, minLength3, maxLength6000, hasValidText]}
-                maxLength={6000}
-              />
-              <a
-                href=""
-                onClick={forhåndsvisMelding}
-                className={classNames(styles.previewLink, 'lenke lenke--frittstaende')}
-              >
-                <FormattedMessage id="VarselOmRevurderingForm.Preview" />
-              </a>
-            </ArrowBox>
+            <>
+              <VerticalSpacer sixteenPx />
+              <ArrowBox>
+                <TextAreaField
+                  badges={[{ type: 'info', titleText: language }]}
+                  name="fritekst"
+                  label={intl.formatMessage({ id: 'VarselOmRevurderingForm.FritekstIBrev' })}
+                  validate={[required, minLength3, maxLength6000, hasValidText]}
+                  maxLength={6000}
+                />
+                <VerticalSpacer fourPx />
+                <a
+                  href=""
+                  onClick={forhåndsvisMelding}
+                  className={classNames(styles.previewLink, 'lenke lenke--frittstaende')}
+                >
+                  <FormattedMessage id="VarselOmRevurderingForm.Preview" />
+                </a>
+              </ArrowBox>
+            </>
           )}
           <div className={styles.flexContainer}>
             <TextAreaField

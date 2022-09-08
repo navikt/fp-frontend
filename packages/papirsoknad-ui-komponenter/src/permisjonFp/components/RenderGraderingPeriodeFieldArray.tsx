@@ -2,11 +2,11 @@ import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 import moment from 'moment/moment';
 import { UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Undertekst } from 'nav-frontend-typografi';
+import { Element } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import AlertStripe from 'nav-frontend-alertstriper';
 import {
-  VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
+  VerticalSpacer, FlexColumn, FlexContainer, FlexRow, AvsnittSkiller,
 } from '@navikt/ft-ui-komponenter';
 import {
   dateAfterOrEqual, dateBeforeOrEqual, dateRangesNotOverlapping, hasValidDate,
@@ -140,12 +140,17 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
         return (
           <Row key={field.id}>
             <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+              {index > 0 && (
+                <>
+                  <AvsnittSkiller />
+                  <VerticalSpacer sixteenPx />
+                </>
+              )}
               <FlexContainer wrap>
                 <FlexRow>
                   <FlexColumn>
                     <SelectField
                       name={`${namePart1}.periodeForGradering`}
-                      bredde="s"
                       selectValues={mapKvoter(graderingKvoter)}
                       label={intl.formatMessage({ id: 'Registrering.Permisjon.Gradering.Periode' })}
                       validate={[required]}
@@ -186,12 +191,9 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                     />
                   </FlexColumn>
                   <FlexColumn className={styles.prosentHeader}>
-                    <Undertekst>
-                      <FormattedMessage id="Registrering.Permisjon.Gradering.Prosentandel" />
-                    </Undertekst>
                     <InputField
+                      label={<FormattedMessage id="Registrering.Permisjon.Gradering.Prosentandel" />}
                       name={`${namePart1}.prosentandelArbeid`}
-                      bredde="S"
                       validate={[required, hasValidDecimal, maxValue100]}
                       normalizeOnBlur={(value: string) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
                     />
@@ -200,7 +202,6 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                     <InputField
                       label={intl.formatMessage({ id: 'Registrering.Permisjon.Orgnr' })}
                       name={`${namePart1}.arbeidsgiverIdentifikator`}
-                      bredde="S"
                       validate={[
                         (arbeidsgiverIdentifikator) => {
                           const arbeidsgiverIdentifikatorRequired = getValues(
@@ -225,7 +226,6 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                     <SelectField
                       label={intl.formatMessage({ id: 'Registrering.Permisjon.ArbeidskategoriLabel' })}
                       name={`${namePart1}.arbeidskategoriType`}
-                      bredde="m"
                       selectValues={mapArbeidskategori(arbeidskategoriTyper)}
                       validate={[required]}
                       onChange={() => (isSubmitted ? trigger() : undefined)}
@@ -233,9 +233,9 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                   </FlexColumn>
                   <FlexColumn>
                     <div className={styles.graderesHeader}>
-                      <Undertekst>
+                      <Element>
                         <FormattedMessage id="Registrering.Permisjon.Gradering.SkalGraderes" />
-                      </Undertekst>
+                      </Element>
                     </div>
                     <CheckboxField
                       name={`${namePart1}.skalGraderes`}
@@ -244,9 +244,9 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                   </FlexColumn>
                   <FlexColumn>
                     <div className={styles.smalHeader}>
-                      <Undertekst>
+                      <Element>
                         <FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />
-                      </Undertekst>
+                      </Element>
                       <CheckboxField
                         readOnly={readOnly}
                         name={`${namePart1}.flerbarnsdager`}
@@ -256,9 +256,9 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                   </FlexColumn>
                   <FlexColumn>
                     <div className={styles.smalHeader}>
-                      <Undertekst>
+                      <Element>
                         <FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />
-                      </Undertekst>
+                      </Element>
                     </div>
                     <CheckboxField
                       name={`${namePart1}.harSamtidigUttak`}
@@ -269,7 +269,6 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                     {harSamtidigUttak && (
                       <InputField
                         name={`${namePart1}.samtidigUttaksprosent`}
-                        bredde="S"
                         validate={[
                           required,
                           hasValidDecimal,

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import dayjs from 'dayjs';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import { Normaltekst, Element } from 'nav-frontend-typografi';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -64,17 +64,17 @@ const ValgtAktivitetSubForm: FunctionComponent<OwnProps> = ({
       <Row>
         <Column xs="7">
           <VerticalSpacer eightPx />
-          <Undertekst>
+          <Element>
             <FormattedMessage id={getOppdragsgiverIntlId(valgtAktivitetstype)} />
-          </Undertekst>
+          </Element>
           <Normaltekst>{finnArbeidsgivertekst(arbeidsgiverReferanse, arbeidsgiverOpplysningerPerId)}</Normaltekst>
         </Column>
         {erAvType(valgtAktivitetstype, OAType.ARBEID) && (
           <Column xs="5">
             <VerticalSpacer eightPx />
-            <Undertekst>
+            <Element>
               <FormattedMessage id="ActivityPanel.Stillingsandel" />
-            </Undertekst>
+            </Element>
             <Normaltekst>{stillingsandel}</Normaltekst>
           </Column>
         )}
@@ -84,9 +84,9 @@ const ValgtAktivitetSubForm: FunctionComponent<OwnProps> = ({
     {erAvType(valgtAktivitetstype, OAType.NARING) && (
       <Row>
         <Column xs="8">
-          <Undertekst>
+          <Element>
             <FormattedMessage id="ActivityPanel.Registreringsdato" />
-          </Undertekst>
+          </Element>
           <Normaltekst>{dayjs(naringRegistreringsdato).format(DDMMYYYY_DATE_FORMAT)}</Normaltekst>
         </Column>
       </Row>

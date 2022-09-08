@@ -23,12 +23,10 @@ const FritekstKlageBrevTextField: FunctionComponent<OwnProps & WrappedComponentP
       label={intl.formatMessage({ id: 'FritekstKlageBrevTextField.Fritekst' })}
       validate={[required, hasValidText]}
       readOnly={readOnly}
-      textareaClass={styles.explanationTextarea}
       maxLength={100000}
       badges={[{
-        type: 'fokus',
-        text: getLanguageFromSprakkode(sprakkode),
-        titleText: intl.formatMessage({ id: 'Malform.Beskrivelse' }),
+        type: 'info',
+        titleText: getLanguageFromSprakkode(sprakkode),
       }]}
       // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
       parse={(value: string) => value.replaceAll('‑', '-')}

@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Form, RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
+import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { FagsakYtelseType, KodeverkType } from '@navikt/ft-kodeverk';
 import { ariaCheck, required } from '@navikt/ft-form-validators';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -75,46 +75,42 @@ const SoknadTypePickerForm: FunctionComponent<OwnProps> = ({
           <Column xs="4">
             <Undertekst><FormattedMessage id="Registrering.Omsoknaden.soknadstype" /></Undertekst>
             <VerticalSpacer fourPx />
-            <RadioGroupField name="fagsakYtelseType" validate={[required]} direction="vertical">
-              { fagsakYtelseTyper.map((fyt) => <RadioOption disabled={!!fagsakYtelseType} key={fyt.kode} label={fyt.navn} value={fyt.kode} />) }
-            </RadioGroupField>
+            <RadioGroupPanel
+              name="fagsakYtelseType"
+              validate={[required]}
+              radios={fagsakYtelseTyper.map((fyt) => ({
+                label: fyt.navn,
+                value: fyt.kode,
+                disabled: !!fagsakYtelseType,
+              }))}
+            />
           </Column>
           <Column xs="4">
             <Undertekst><FormattedMessage id="Registrering.Omsoknaden.Tema" /></Undertekst>
             <VerticalSpacer fourPx />
-            <RadioGroupField
+            <RadioGroupPanel
               name="familieHendelseType"
               validate={selectedFagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER ? [] : [required]}
-              direction="vertical"
-            >
-              { familieHendelseTyper.filter(({ kode }) => SøknadTyper.includes(kode)).map((bmt) => (
-                <RadioOption
-                  key={bmt.kode}
-                  label={bmt.navn}
-                  value={bmt.kode}
-                  disabled={selectedFagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER}
-                />
-              ))}
-            </RadioGroupField>
+              radios={familieHendelseTyper.filter(({ kode }) => SøknadTyper.includes(kode)).map((bmt) => ({
+                label: bmt.navn,
+                value: bmt.kode,
+                disabled: selectedFagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER,
+              }))}
+            />
           </Column>
           <Column xs="4">
             <Undertekst>
               <FormattedMessage id="Registrering.Omsoknaden.Soker" />
             </Undertekst>
             <VerticalSpacer fourPx />
-            <RadioGroupField
+            <RadioGroupPanel
               name="foreldreType"
               validate={[required]}
-              direction="vertical"
-            >
-              { foreldreTyper.map((ft) => (
-                <RadioOption
-                  key={ft.kode}
-                  label={ft.navn}
-                  value={ft.kode}
-                />
-              ))}
-            </RadioGroupField>
+              radios={foreldreTyper.map((ft) => ({
+                label: ft.navn,
+                value: ft.kode,
+              }))}
+            />
           </Column>
         </Row>
         <Row>

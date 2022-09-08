@@ -1,12 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import {
+  Element, Normaltekst, Undertittel,
+} from 'nav-frontend-typografi';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
-import { RadioGroupField, RadioOption, Form } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel, Form } from '@navikt/ft-form-hooks';
 import {
   PeriodLabel, VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
@@ -40,13 +42,13 @@ export const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
 
   return (
     <Form formMethods={formMethods} onSubmit={(values: FormValues) => oppdaterAktivitetskrav(values)}>
-      <Element><FormattedMessage id="AktivitetskravFaktaDetailForm.Header" /></Element>
+      <Undertittel><FormattedMessage id="AktivitetskravFaktaDetailForm.Header" /></Undertittel>
       <VerticalSpacer fourPx />
       <Row className="">
         <Column xs="4">
-          <Undertekst>
+          <Element>
             <FormattedMessage id="AktivitetskravFaktaDetailForm.Periode" />
-          </Undertekst>
+          </Element>
           <VerticalSpacer fourPx />
           <Normaltekst>
             <PeriodLabel
@@ -57,9 +59,9 @@ export const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
         </Column>
         {valgtAktivitetskrav.morsAktivitet && (
           <Column xs="4">
-            <Undertekst>
+            <Element>
               <FormattedMessage id="AktivitetskravFaktaDetailForm.MorsAktivitet" />
-            </Undertekst>
+            </Element>
             <VerticalSpacer fourPx />
             <Normaltekst>
               {morsAktiviteter.find((ma) => ma.kode === valgtAktivitetskrav.morsAktivitet)?.navn}
@@ -68,21 +70,18 @@ export const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
         )}
       </Row>
       <VerticalSpacer sixteenPx />
-      <RadioGroupField
+      <RadioGroupPanel
         name="avklaring"
         label={<FormattedMessage id="AktivitetskravFaktaDetailForm.Avklaring" />}
         validate={[required]}
-        readOnly={readOnly}
-        isEdited={valgtAktivitetskrav.endret}
-      >
-        {[...aktivitetskravAvklaringer].sort(((a1, a2) => a1.navn.localeCompare(a2.navn))).map((avklaring) => (
-          <RadioOption
-            key={avklaring.kode}
-            label={avklaring.navn}
-            value={avklaring.kode}
-          />
-        ))}
-      </RadioGroupField>
+        isReadOnly={readOnly}
+        isHorizontal
+        radios={[...aktivitetskravAvklaringer].sort(((a1, a2) => a1.navn.localeCompare(a2.navn))).map((avklaring) => ({
+          value: avklaring.kode,
+          label: avklaring.navn,
+        }))}
+      />
+      <VerticalSpacer sixteenPx />
       <FaktaBegrunnelseTextFieldNew
         name="begrunnelse"
         isSubmittable

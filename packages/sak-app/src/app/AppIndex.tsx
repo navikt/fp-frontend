@@ -20,6 +20,8 @@ import Dekorator from './components/Dekorator';
 
 import messages from '../../i18n/nb_NO.json';
 
+import '@navikt/ds-css';
+
 import '@fpsak-frontend/assets/styles/global.less';
 
 import '@navikt/ft-ui-komponenter/dist/style.css';

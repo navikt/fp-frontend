@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import dayjs from 'dayjs';
@@ -17,9 +17,7 @@ import {
   minLength,
   required,
 } from '@navikt/ft-form-validators';
-import {
-  RadioGroupField, RadioOption, TextAreaField, Form,
-} from '@navikt/ft-form-hooks';
+import { RadioGroupPanel, TextAreaField, Form } from '@navikt/ft-form-hooks';
 import { TimeLineButton } from '@navikt/ft-tidslinje';
 import {
   ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, AlleKodeverk, OpptjeningAktivitet,
@@ -128,9 +126,9 @@ export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
         </Row>
         <Row>
           <Column xs="7">
-            <Undertekst>
+            <Element>
               <FormattedMessage id="ActivityPanel.Period" />
-            </Undertekst>
+            </Element>
             <Row>
               <Column xs="5">
                 <Normaltekst>
@@ -145,9 +143,9 @@ export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
             </Row>
           </Column>
           <Column xs="5">
-            <Undertekst>
+            <Element>
               <FormattedMessage id="ActivityPanel.Activity" />
-            </Undertekst>
+            </Element>
             <Normaltekst>
               {opptjeningAktivitetTyper.find((oat) => oat.kode === aktivitetType)?.navn}
             </Normaltekst>
@@ -163,32 +161,32 @@ export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
         {!skalIkkeKunneEditere(harAksjonspunkt, erGodkjent, erEndret) && (
           <>
             <VerticalSpacer twentyPx />
-            <RadioGroupField
+            <RadioGroupPanel
               name="erGodkjent"
+              hideLegend
               validate={[required]}
-              readOnly={readOnly}
+              isReadOnly={readOnly}
               isEdited={erEndret}
-              parse={(value: string) => value === 'true'}
-            >
-              <RadioOption value="true" label={intl.formatMessage({ id: 'ActivityPanel.Godkjent' })} />
-              <RadioOption
-                value="false"
-                label={(
-                  <FormattedMessage
-                    id="ActivityPanel.IkkeGodkjent"
-                    values={{
-                      b: (chunks: any) => <b>{chunks}</b>,
-                    }}
-                  />
-                )}
-              />
-            </RadioGroupField>
+              isHorizontal
+              isTrueOrFalseSelection
+              radios={[{
+                label: intl.formatMessage({ id: 'ActivityPanel.Godkjent' }),
+                value: 'true',
+              }, {
+                label: <FormattedMessage
+                  id="ActivityPanel.IkkeGodkjent"
+                  values={{
+                    b: (chunks: any) => <b>{chunks}</b>,
+                  }}
+                />,
+                value: 'false',
+              }]}
+            />
           </>
         )}
-        <VerticalSpacer fourPx />
+        <VerticalSpacer sixteenPx />
         <TextAreaField
           name="begrunnelse"
-          textareaClass={styles.explanationTextarea}
           label={<FormattedMessage id={finnBegrunnelseLabel(erGodkjent, erEndret, readOnly, harAksjonspunkt)} />}
           validate={[required, minLength3, maxLength1500, hasValidText]}
           maxLength={1500}

@@ -128,7 +128,6 @@ const TilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
                       name={`${fieldPrefix}.${index}.type`}
                       label={intl.formatMessage({ id: 'TilretteleggingFieldArray.Tilretteleggingsbehov' })}
                       validate={[required]}
-                      placeholder={intl.formatMessage({ id: 'TilretteleggingFieldArray.VelgTilretteleggingPlaceholder' })}
                       selectValues={[
                         <option value={tilretteleggingType.HEL_TILRETTELEGGING} key={tilretteleggingType.HEL_TILRETTELEGGING}>
                           {intl.formatMessage({ id: 'TilretteleggingFieldArray.KanGjennomfores' })}
@@ -176,6 +175,7 @@ const TilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
                     </FlexColumn>
                   </FlexRow>
                 )}
+                <VerticalSpacer sixteenPx />
                 <FlexRow>
                   <FlexColumn>
                     <Datepicker

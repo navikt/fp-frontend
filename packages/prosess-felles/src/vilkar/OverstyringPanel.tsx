@@ -65,7 +65,6 @@ const OverstyringPanel: FunctionComponent<OwnProps> = ({
             validate={[isRequiredFn, minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
             readOnly={overrideReadOnly || !erOverstyrt}
-            placeholder={intl.formatMessage({ id: 'OverstyringPanel.BegrunnVurdering' })}
           />
         </>
       )}

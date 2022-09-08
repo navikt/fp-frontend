@@ -33,9 +33,9 @@ const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
 });
 
 const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): KlageFormType => ({
-  klageMedholdArsak: klageVurderingResultat ? klageVurderingResultat.klageMedholdArsak : null,
+  klageMedholdArsak: klageVurderingResultat ? klageVurderingResultat.klageMedholdArsak : '',
   klageVurderingOmgjoer: klageVurderingResultat ? klageVurderingResultat.klageVurderingOmgjoer : null,
-  klageHjemmel: klageVurderingResultat ? klageVurderingResultat.klageHjemmel : null,
+  klageHjemmel: klageVurderingResultat ? klageVurderingResultat.klageHjemmel : '',
   klageVurdering: klageVurderingResultat ? klageVurderingResultat.klageVurdering : null,
   begrunnelse: klageVurderingResultat ? klageVurderingResultat.begrunnelse : null,
   fritekstTilBrev: klageVurderingResultat ? klageVurderingResultat.fritekstTilBrev : null,
@@ -92,7 +92,6 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
       <AksjonspunktHelpTextTemp isAksjonspunktOpen={!readOnlySubmitButton}>
         {[<FormattedMessage id="Klage.ResolveKlage.HelpText" key={aksjonspunktCodes.BEHANDLE_KLAGE_NFP} />]}
       </AksjonspunktHelpTextTemp>
-      <VerticalSpacer sixteenPx />
       <KlageVurderingRadioOptionsNfp
         readOnly={readOnly}
         klageVurdering={formValues.klageVurdering}

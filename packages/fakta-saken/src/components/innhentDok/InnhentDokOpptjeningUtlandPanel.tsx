@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Undertittel, Element } from 'nav-frontend-typografi';
+import { Undertittel } from 'nav-frontend-typografi';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@fpsak-frontend/fakta-felles';
 import { AksjonspunktBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
-import { RadioGroupField, RadioOption, Form } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel, Form } from '@navikt/ft-form-hooks';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import { MerkOpptjeningUtlandAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -77,27 +77,25 @@ const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps> = ({
         erAksjonspunktApent={harApneAksjonspunkter}
         erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted}
       >
-        <Element>
-          <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentelseDok" />
-        </Element>
+        <RadioGroupPanel
+          name="dokStatus"
+          label={<FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentelseDok" />}
+          validate={[required]}
+          isReadOnly={readOnly}
+          radios={[{
+            label: <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.Innhentes" />,
+            value: OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_BLI_INNHENTET,
+          }, {
+            label: <FormattedMessage
+              id="InnhentDokOpptjeningUtlandPanel.InnhentesIkke"
+              values={{
+                b: (chunks: any) => <b>{chunks}</b>,
+              }}
+            />,
+            value: OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET,
+          }]}
+        />
         <VerticalSpacer sixteenPx />
-        <RadioGroupField name="dokStatus" validate={[required]} direction="vertical" readOnly={readOnly}>
-          <RadioOption
-            label={<FormattedMessage id="InnhentDokOpptjeningUtlandPanel.Innhentes" />}
-            value={OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_BLI_INNHENTET}
-          />
-          <RadioOption
-            label={(
-              <FormattedMessage
-                id="InnhentDokOpptjeningUtlandPanel.InnhentesIkke"
-                values={{
-                  b: (chunks: any) => <b>{chunks}</b>,
-                }}
-              />
-            )}
-            value={OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET}
-          />
-        </RadioGroupField>
         <FaktaBegrunnelseTextFieldNew
           isSubmittable={submittable}
           isReadOnly={readOnly}

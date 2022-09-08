@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { required } from '@navikt/ft-form-validators';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { RadioGroupField, RadioOption, SelectField } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import klageVurderingOmgjoerType from '@fpsak-frontend/kodeverk/src/klageVurderingOmgjoer';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
@@ -35,51 +35,63 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps> = ({
   const hjemmelOptions = lagHjemler(alleHjemler, lagHjemmelsKoder(alleAktuelleHjemler))
     .map((mo: KodeverkMedNavn) => <option key={mo.kode} value={mo.kode}>{mo.navn}</option>);
   return (
-    <div>
-      <RadioGroupField
+    <>
+      <RadioGroupPanel
         name="klageVurdering"
         validate={[required]}
-        readOnly={readOnly}
-      >
-        <RadioOption value={klageVurderingType.MEDHOLD_I_KLAGE} label={intl.formatMessage({ id: 'Klage.ResolveKlage.ChangeVedtak' })} />
-        <RadioOption value={klageVurderingType.STADFESTE_YTELSESVEDTAK} label={intl.formatMessage({ id: 'Klage.ResolveKlage.KeepVedtakNfp' })} />
-      </RadioGroupField>
-      {(klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE)
-      && (
-        <ArrowBox>
-          <SelectField
-            readOnly={readOnly}
-            name="klageMedholdArsak"
-            selectValues={medholdOptions}
-            className={readOnly ? styles.selectReadOnly : null}
-            label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
-            validate={[required]}
-            bredde="xl"
-          />
+        isReadOnly={readOnly}
+        isHorizontal
+        radios={[{
+          value: klageVurderingType.MEDHOLD_I_KLAGE,
+          label: intl.formatMessage({ id: 'Klage.ResolveKlage.ChangeVedtak' }),
+        }, {
+          value: klageVurderingType.STADFESTE_YTELSESVEDTAK,
+          label: intl.formatMessage({ id: 'Klage.ResolveKlage.KeepVedtakNfp' }),
+        },
+        ]}
+      />
+      {klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE && (
+        <>
           <VerticalSpacer sixteenPx />
-          <RadioGroupField
-            name="klageVurderingOmgjoer"
-            validate={[required]}
-            readOnly={readOnly}
-            direction="vertical"
-          >
-            <RadioOption value={klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE} label={intl.formatMessage({ id: 'Klage.Behandle.Omgjort' })} />
-            <RadioOption value={klageVurderingOmgjoerType.UGUNST_MEDHOLD_I_KLAGE} label={intl.formatMessage({ id: 'Klage.Behandle.Ugunst' })} />
-            <RadioOption value={klageVurderingOmgjoerType.DELVIS_MEDHOLD_I_KLAGE} label={intl.formatMessage({ id: 'Klage.Behandle.DelvisOmgjort' })} />
-          </RadioGroupField>
-        </ArrowBox>
+          <ArrowBox>
+            <SelectField
+              readOnly={readOnly}
+              name="klageMedholdArsak"
+              selectValues={medholdOptions}
+              className={readOnly ? styles.selectReadOnly : styles.select}
+              label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
+              validate={[required]}
+            />
+            <VerticalSpacer sixteenPx />
+            <RadioGroupPanel
+              name="klageVurderingOmgjoer"
+              validate={[required]}
+              isReadOnly={readOnly}
+              radios={[{
+                value: klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE,
+                label: intl.formatMessage({ id: 'Klage.Behandle.Omgjort' }),
+              }, {
+                value: klageVurderingOmgjoerType.UGUNST_MEDHOLD_I_KLAGE,
+                label: intl.formatMessage({ id: 'Klage.Behandle.Ugunst' }),
+              }, {
+                value: klageVurderingOmgjoerType.DELVIS_MEDHOLD_I_KLAGE,
+                label: intl.formatMessage({ id: 'Klage.Behandle.DelvisOmgjort' }),
+              }]}
+            />
+          </ArrowBox>
+        </>
       )}
+      <VerticalSpacer sixteenPx />
       <SelectField
         readOnly={readOnly}
         name="klageHjemmel"
         selectValues={hjemmelOptions}
-        className={readOnly ? styles.selectReadOnly : null}
+        className={readOnly ? styles.selectReadOnly : styles.select}
         label={intl.formatMessage({ id: 'Klage.ResolveKlage.Hjemmel' })}
         validate={[required]}
-        bredde="xl"
       />
       <VerticalSpacer sixteenPx />
-    </div>
+    </>
   );
 };
 

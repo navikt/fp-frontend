@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm, UseFormGetValues } from 'react-hook-form';
-import { Element, Undertittel } from 'nav-frontend-typografi';
+import { Undertittel } from 'nav-frontend-typografi';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import { Column, Row } from 'nav-frontend-grid';
 import {
@@ -157,16 +157,15 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <InputField
                     name="arbeidsgiverNavn"
-                    label={<Element><FormattedMessage id="LeggTilArbeidsforholdForm.Arbeidsgiver" /></Element>}
+                    label={<FormattedMessage id="LeggTilArbeidsforholdForm.Arbeidsgiver" />}
                     validate={[required]}
-                    bredde="XXL"
                     readOnly={isReadOnly || !erOverstyrt}
                   />
                 </FlexColumn>
                 <FlexColumn>
                   <Datepicker
                     name="fom"
-                    label={<Element><FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeFra" /></Element>}
+                    label={<FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeFra" />}
                     validate={[required, hasValidDate]}
                     isReadOnly={isReadOnly || !erOverstyrt}
                   />
@@ -174,7 +173,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <Datepicker
                     name="tom"
-                    label={<Element><FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeTil" /></Element>}
+                    label={<FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeTil" />}
                     validate={[hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
                     isReadOnly={isReadOnly || !erOverstyrt}
                   />
@@ -184,13 +183,12 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
             <FlexColumn>
               <InputField
                 name="stillingsprosent"
-                label={<Element><FormattedMessage id="LeggTilArbeidsforholdForm.Stillingsprosent" /></Element>}
+                label={<FormattedMessage id="LeggTilArbeidsforholdForm.Stillingsprosent" />}
                 parse={(value: string) => {
                   const parsedValue = parseInt(value, 10);
                   return Number.isNaN(parsedValue) ? value : parsedValue;
                 }}
                 validate={[required, hasValidInteger, minValue1, maxValue100]}
-                bredde="XS"
                 readOnly={isReadOnly || !erOverstyrt}
                 maxLength={3}
               />
@@ -199,7 +197,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
         </FlexContainer>
         <VerticalSpacer twentyPx />
         <TextAreaField
-          label={<Element><FormattedMessage id="LeggTilArbeidsforholdForm.Begrunn" /></Element>}
+          label={<FormattedMessage id="LeggTilArbeidsforholdForm.Begrunn" />}
           name="begrunnelse"
           validate={[required, minLength3, maxLength1500, hasValidText]}
           maxLength={1500}

@@ -59,7 +59,6 @@ const TilretteleggingForArbeidsgiverFieldArray: FunctionComponent<OwnProps> = ({
                   readOnly={readOnly}
                   name={`${namePart1}.${index}.organisasjonsnummer`}
                   label={intl.formatMessage({ id: 'TilretteleggingForArbeidsgiverFieldArray.OrgNr' })}
-                  bredde="XL"
                   validate={[required, hasNoWhiteSpace, hasValidOrgNumberOrFodselsnr]}
                   maxLength={99}
                 />
@@ -74,6 +73,7 @@ const TilretteleggingForArbeidsgiverFieldArray: FunctionComponent<OwnProps> = ({
               </FlexColumn>
             </FlexRow>
           </FlexContainer>
+          <VerticalSpacer sixteenPx />
           <BehovForTilretteleggingFieldArray
             name={`${namePart1}.${index}.${behovForTilretteleggingFieldArrayName}`}
             readOnly={readOnly}

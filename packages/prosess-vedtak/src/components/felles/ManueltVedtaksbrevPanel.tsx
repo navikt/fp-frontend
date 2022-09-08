@@ -82,11 +82,11 @@ const ManueltVedtaksbrevPanel: FunctionComponent<OwnProps> = ({
             validate={[required, minLength3, maxLength200, hasValidText]}
             maxLength={200}
             readOnly={isReadOnly}
-            textareaClass={styles.smallTextArea}
+            className={styles.smallTextArea}
           />
         </Column>
       </Row>
-      <VerticalSpacer sixteenPx />
+      <VerticalSpacer thirtyTwoPx />
       <Row>
         <Column xs="8">
           <TextAreaField
@@ -95,7 +95,6 @@ const ManueltVedtaksbrevPanel: FunctionComponent<OwnProps> = ({
             validate={[required, minLength3, maxLength5000, hasValidText]}
             maxLength={5000}
             readOnly={isReadOnly}
-            textareaClass={styles.bigTextArea}
             // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
             parse={(value: string) => value.replaceAll('‑', '-')}
           />

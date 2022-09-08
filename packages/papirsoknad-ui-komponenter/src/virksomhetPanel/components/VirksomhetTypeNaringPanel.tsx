@@ -2,7 +2,7 @@ import React, {
   Fragment, FunctionComponent, useEffect, useMemo,
 } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Undertekst } from 'nav-frontend-typografi';
+import { Element } from 'nav-frontend-typografi';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { AlleKodeverk } from '@navikt/ft-types';
@@ -79,7 +79,8 @@ const VirksomhetTypeNaringPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <Undertekst><FormattedMessage id="Registrering.VirksomhetNaeringTypePanel.Title" /></Undertekst>
+      <VerticalSpacer eightPx />
+      <Element><FormattedMessage id="Registrering.VirksomhetNaeringTypePanel.Title" /></Element>
       <VerticalSpacer fourPx />
       <SkjemaGruppe feil={formState.isSubmitted ? formState.errors.notRegisteredInput?.message : undefined}>
         {naringvirksomhetTyper.map((nv) => (

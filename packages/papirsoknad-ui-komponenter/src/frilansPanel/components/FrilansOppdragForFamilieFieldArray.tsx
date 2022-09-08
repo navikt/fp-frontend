@@ -2,7 +2,9 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import moment from 'moment';
 import { Column, Row } from 'nav-frontend-grid';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import {
   Datepicker, formHooks, InputField, PeriodFieldArray,
@@ -137,7 +139,6 @@ export const FrilansOppdragForFamilieFieldArray: FunctionComponent<OwnProps> = (
                   <FlexColumn>
                     <InputField
                       name={`${namePart1}.oppdragsgiver`}
-                      bredde="S"
                       validate={[maxLength50]}
                       label={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.Oppdragsgiver' })}
                     />
@@ -149,6 +150,7 @@ export const FrilansOppdragForFamilieFieldArray: FunctionComponent<OwnProps> = (
                   )}
                 </FlexRow>
               </FlexContainer>
+              <VerticalSpacer sixteenPx />
             </Column>
           </Row>
         );

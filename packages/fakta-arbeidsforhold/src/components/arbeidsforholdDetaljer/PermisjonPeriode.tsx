@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { AoIArbeidsforhold } from '@fpsak-frontend/types';
 import { VerticalSpacer, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
@@ -15,9 +15,9 @@ const PermisjonPeriode: FunctionComponent<OwnProps> = ({
     return (
       <>
         <VerticalSpacer sixteenPx />
-        <Normaltekst>
+        <Element>
           <FormattedMessage id="PermisjonPeriode.Permisjon" />
-        </Normaltekst>
+        </Element>
         <Normaltekst>
           <PeriodLabel
             dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom}

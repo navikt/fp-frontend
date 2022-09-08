@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { RadioGroupField, RadioOption, formHooks } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { Element } from 'nav-frontend-typografi';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 type FormValues = {
@@ -28,46 +27,55 @@ const HarAnnenForelderRettFelter: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <RadioGroupField
+      <RadioGroupPanel
         name="harAnnenForelderRett"
-        label={<Element><FormattedMessage id="HarAnnenForelderRettFelter.HarAnnenForelderRett" /></Element>}
+        label={<FormattedMessage id="HarAnnenForelderRettFelter.HarAnnenForelderRett" />}
         validate={[required]}
-        bredde="XL"
-        readOnly={readOnly}
-        parse={(value: string) => value === 'true'}
-        direction="vertical"
-      >
-        <RadioOption value="true" label={<FormattedMessage id="HarAnnenForelderRettFelter.Ja" />} />
-        <RadioOption value="false" label={<FormattedMessage id="HarAnnenForelderRettFelter.Nei" />} />
-      </RadioGroupField>
+        isReadOnly={readOnly}
+        isTrueOrFalseSelection
+        radios={[{
+          label: <FormattedMessage id="HarAnnenForelderRettFelter.Ja" />,
+          value: 'true',
+        }, {
+          label: <FormattedMessage id="HarAnnenForelderRettFelter.Nei" />,
+          value: 'false',
+        }]}
+      />
       <VerticalSpacer thirtyTwoPx />
       {harAnnenForelderRett === false && avklareUforetrygd && (
-        <RadioGroupField
+        <RadioGroupPanel
           name="mottarAnnenForelderUforetrygd"
-          label={<Element><FormattedMessage id="HarAnnenForelderRettFelter.MottarUforetrygd" /></Element>}
+          label={<FormattedMessage id="HarAnnenForelderRettFelter.MottarUforetrygd" />}
           validate={[required]}
-          bredde="XL"
-          readOnly={readOnly}
-          parse={(value: string) => value === 'true'}
-          direction="vertical"
-        >
-          <RadioOption value="true" label={<FormattedMessage id="HarAnnenForelderRettFelter.Ja" />} />
-          <RadioOption value="false" label={<FormattedMessage id="HarAnnenForelderRettFelter.Nei" />} />
-        </RadioGroupField>
+          isReadOnly={readOnly}
+          isTrueOrFalseSelection
+          radios={[{
+            label: <FormattedMessage id="HarAnnenForelderRettFelter.Ja" />,
+            value: 'true',
+          }, {
+            label: <FormattedMessage id="HarAnnenForelderRettFelter.Nei" />,
+            value: 'false',
+          }]}
+        />
       )}
       {harAnnenForelderRett === false && mottarAnnenForelderUforetrygd === false && avklareStonadEOS && (
-        <RadioGroupField
-          name="mottarAnnenForelderStonadEOS"
-          label={<Element><FormattedMessage id="HarAnnenForelderRettFelter.MottarStonadEOS" /></Element>}
-          validate={[required]}
-          bredde="XL"
-          readOnly={readOnly}
-          parse={(value: string) => value === 'true'}
-          direction="vertical"
-        >
-          <RadioOption value="true" label={<FormattedMessage id="HarAnnenForelderRettFelter.Ja" />} />
-          <RadioOption value="false" label={<FormattedMessage id="HarAnnenForelderRettFelter.Nei" />} />
-        </RadioGroupField>
+        <>
+          <VerticalSpacer thirtyTwoPx />
+          <RadioGroupPanel
+            name="mottarAnnenForelderStonadEOS"
+            label={<FormattedMessage id="HarAnnenForelderRettFelter.MottarStonadEOS" />}
+            validate={[required]}
+            isReadOnly={readOnly}
+            isTrueOrFalseSelection
+            radios={[{
+              label: <FormattedMessage id="HarAnnenForelderRettFelter.Ja" />,
+              value: 'true',
+            }, {
+              label: <FormattedMessage id="HarAnnenForelderRettFelter.Nei" />,
+              value: 'false',
+            }]}
+          />
+        </>
       )}
     </>
   );

@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 import { useIntl } from 'react-intl';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 
 import { hasValidDate, required, dateBeforeOrEqualToToday } from '@navikt/ft-form-validators';
 import { AvklartBarn } from '@fpsak-frontend/types';
@@ -44,6 +46,7 @@ export const AvklartBarnFieldArray: FunctionComponent<OwnProps> = ({
       {(field, index, getRemoveButton) => (
         <Row key={field.id}>
           <Column xs="12">
+            <VerticalSpacer sixteenPx />
             <FlexContainer>
               <FlexRow>
                 <FlexColumn>

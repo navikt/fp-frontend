@@ -8,9 +8,7 @@ import {
 } from 'nav-frontend-typografi';
 import Panel from 'nav-frontend-paneler';
 
-import {
-  Form, Datepicker, RadioGroupField, RadioOption,
-} from '@navikt/ft-form-hooks';
+import { Form, Datepicker, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
   AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -143,19 +141,26 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
       <div className={styles.marginTop}>
         <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />
         <VerticalSpacer sixteenPx />
-        <RadioGroupField
+        <RadioGroupPanel
           name="gyldigSenFremsetting"
           validate={[required]}
-          readOnly={readOnly}
+          isReadOnly={readOnly}
+          isHorizontal
           isEdited={isEdited(aksjonspunkter.length > 0, gyldigSenFremsetting)}
-          parse={(value) => value === 'true'}
-        >
-          <RadioOption value="true" label={<FormattedMessage id="VurderSoknadsfristForeldrepengerForm.GyldigGrunn" />} />
-          <RadioOption value="false" label={<FormattedMessage id="VurderSoknadsfristForeldrepengerForm.IkkeGyldigGrunn" />} />
-        </RadioGroupField>
+          isTrueOrFalseSelection
+          radios={[{
+            value: 'true',
+            label: <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.GyldigGrunn" />,
+          }, {
+            value: 'false',
+            label: <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.IkkeGyldigGrunn" />,
+          },
+          ]}
+        />
         {gyldigSenFremsetting && (
           <Row>
-            <Column xs="4">
+            <Column xs="5">
+              <VerticalSpacer sixteenPx />
               <ArrowBox>
                 <Datepicker
                   name="ansesMottatt"
