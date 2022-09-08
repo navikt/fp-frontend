@@ -112,9 +112,9 @@ interface OwnProps {
 /**
  * InnsynForm
  *
- * Presentasjonskomponent. Viser panelet som håndterer avklaring av innsyn.
+ * Viser panelet som håndterer avklaring av innsyn.
  */
-export const InnsynForm: FunctionComponent<OwnProps> = ({
+const InnsynForm: FunctionComponent<OwnProps> = ({
   readOnly,
   readOnlySubmitButton,
   innsynMottattDato,
@@ -187,6 +187,7 @@ export const InnsynForm: FunctionComponent<OwnProps> = ({
         validate={[required]}
         isReadOnly={readOnly}
         isHorizontal
+        isEdited={!isApOpen}
         radios={innsynResultatTyper.map((irt) => ({
           value: irt.kode,
           label: irt.navn,
@@ -201,6 +202,7 @@ export const InnsynForm: FunctionComponent<OwnProps> = ({
               label={<FormattedMessage id="InnsynForm.VelgVidereAksjon" />}
               validate={[required]}
               isReadOnly={readOnly}
+              isEdited={!isApOpen}
               isHorizontal
               isTrueOrFalseSelection
               radios={[{

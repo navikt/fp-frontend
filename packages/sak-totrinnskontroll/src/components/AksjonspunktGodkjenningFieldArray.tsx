@@ -4,9 +4,9 @@ import { NavLink } from 'react-router-dom';
 import { UseFormGetValues } from 'react-hook-form';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { Location } from 'history';
-import { Undertekst, Normaltekst, Element } from 'nav-frontend-typografi';
+import { Normaltekst, Element } from 'nav-frontend-typografi';
 import {
-  ArrowBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+  ArrowBox, FlexColumn, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
 import {

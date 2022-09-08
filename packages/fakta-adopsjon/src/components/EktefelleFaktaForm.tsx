@@ -52,6 +52,7 @@ const EktefelleFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
           hideLegend
           validate={[required]}
           isReadOnly={readOnly}
+          isEdited={ektefellesBarnIsEdited}
           isHorizontal
           isTrueOrFalseSelection
           radios={[{

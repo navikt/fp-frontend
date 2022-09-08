@@ -10,6 +10,7 @@ import { DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@navikt/ft-utils';
 import { required } from '@navikt/ft-form-validators';
 import { Aksjonspunkt, AlleKodeverk } from '@navikt/ft-types';
 
+import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { MedlemPeriode, Medlemskap, Soknad } from '@fpsak-frontend/types';
@@ -74,6 +75,8 @@ const PerioderMedMedlemskapFaktaPanel: FunctionComponent<OwnProps> & StaticFunct
   const aksjonspunktKode = valgtPeriode.aksjonspunkter.find((apKode) => apKode === aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE);
   const aksjonspunkt = aksjonspunkter.find((ap) => aksjonspunktKode === ap.definisjon);
 
+  const erAksjonspunktLukket = aksjonspunkt ? !isAksjonspunktOpen(aksjonspunkt.status) : false;
+
   const getKodeverk = getKodeverknavnFn(alleKodeverk);
 
   const fodselsdato = soknad.fodselsdatoer ? Object.values(soknad.fodselsdatoer)[0] : undefined;
@@ -114,6 +117,7 @@ const PerioderMedMedlemskapFaktaPanel: FunctionComponent<OwnProps> & StaticFunct
               <RadioGroupPanel
                 name="medlemskapManuellVurderingType"
                 hideLegend
+                isEdited={erAksjonspunktLukket}
                 validate={[required]}
                 isReadOnly={readOnly}
                 isHorizontal

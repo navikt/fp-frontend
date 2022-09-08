@@ -7,7 +7,8 @@ import { required } from '@navikt/ft-form-validators';
 import {
   PeriodLabel, VerticalSpacer, FaktaGruppe, Image,
 } from '@navikt/ft-ui-komponenter';
-import { AlleKodeverk } from '@navikt/ft-types';
+import { Aksjonspunkt, AlleKodeverk } from '@navikt/ft-types';
+import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -74,6 +75,7 @@ export type FormValues = {
 interface OwnProps {
   valgtPeriode: MedlemPeriode
   soknad: Soknad,
+  aksjonspunkter: Aksjonspunkt[],
   readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   alleKodeverk: AlleKodeverk;
@@ -92,6 +94,7 @@ interface StaticFunctions {
 const OppholdINorgeOgAdresserFaktaPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   soknad,
   valgtPeriode,
+  aksjonspunkter,
   readOnly,
   alleKodeverk,
   alleMerknaderFraBeslutter,
@@ -99,6 +102,9 @@ const OppholdINorgeOgAdresserFaktaPanel: FunctionComponent<OwnProps> & StaticFun
   const intl = useIntl();
 
   const aksjonspunktKode = valgtPeriode.aksjonspunkter.find((apKode) => apKode === aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT);
+  const aksjonspunkt = aksjonspunkter.find((ap) => aksjonspunktKode === ap.definisjon);
+
+  const isBosattAksjonspunktClosed = aksjonspunktKode && aksjonspunkt ? !isAksjonspunktOpen(aksjonspunkt.status) : false;
 
   const { personopplysningBruker, personopplysningAnnenPart } = valgtPeriode;
 
@@ -157,6 +163,7 @@ const OppholdINorgeOgAdresserFaktaPanel: FunctionComponent<OwnProps> & StaticFun
                 validate={[required]}
                 isReadOnly={readOnly}
                 isHorizontal
+                isEdited={isBosattAksjonspunktClosed}
                 isTrueOrFalseSelection
                 radios={[{
                   label: intl.formatMessage({ id: 'OppholdINorgeOgAdresserFaktaPanel.ResidingInNorway' }),

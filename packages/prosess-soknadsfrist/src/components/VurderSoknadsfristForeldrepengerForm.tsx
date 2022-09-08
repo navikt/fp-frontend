@@ -23,6 +23,8 @@ import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Søknadsfrist } from '@fpsak-frontend/types/src/soknadTsType';
 import styles from './vurderSoknadsfristForeldrepengerForm.less';
 
+const isEdited = (hasAksjonspunkt: boolean, gyldigSenFremsetting?: boolean): boolean => hasAksjonspunkt && gyldigSenFremsetting !== undefined;
+
 type FormValues = {
   gyldigSenFremsetting?: boolean;
   ansesMottatt?: string;
@@ -144,6 +146,7 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
           validate={[required]}
           isReadOnly={readOnly}
           isHorizontal
+          isEdited={isEdited(aksjonspunkter.length > 0, gyldigSenFremsetting)}
           isTrueOrFalseSelection
           radios={[{
             value: 'true',

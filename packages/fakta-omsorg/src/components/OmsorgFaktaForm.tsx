@@ -27,6 +27,7 @@ export type FormValues = {
 }
 
 interface OwnProps {
+  ytelsefordeling: Ytelsefordeling;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
   className?: string;
@@ -43,12 +44,15 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
   aksjonspunkter,
   readOnly,
   className,
+  ytelsefordeling,
   alleMerknaderFraBeslutter,
 }) => {
   const intl = useIntl();
 
   const { watch } = formHooks.useFormContext<FormValues>();
   const omsorg = watch('omsorg');
+
+  const omsorgIsEdited = !!ytelsefordeling.ikkeOmsorgPerioder;
 
   return (
     <div className={className || styles.defaultAleneOmsorgFakta}>
@@ -61,6 +65,7 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
             name="omsorg"
             label={<FormattedMessage id="OmsorgFaktaForm.OppgittOmsorg" />}
             validate={[required]}
+            isEdited={omsorgIsEdited}
             isReadOnly={readOnly}
             isTrueOrFalseSelection
             radios={[{

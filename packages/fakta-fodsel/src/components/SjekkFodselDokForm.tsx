@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Column } from 'nav-frontend-grid';
 
-import { FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
+import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@fpsak-frontend/fakta-felles';
 import {
   ArrowBox, VerticalSpacer, FaktaGruppe,
 } from '@navikt/ft-ui-komponenter';
@@ -69,6 +69,7 @@ export const SjekkFodselDokForm: FunctionComponent<OwnProps> & StaticFunctions =
   const dokumentasjonForeligger = watch('dokumentasjonForeligger') || false;
   const begrunnelse = watch('begrunnelse') || false;
 
+  const dokumentasjonForeliggerIsEdited = isFieldEdited(soknad, gjeldende).dokumentasjonForeligger;
   const { termindato, vedtaksDatoSomSvangerskapsuke } = gjeldende;
 
   return (
@@ -88,6 +89,7 @@ export const SjekkFodselDokForm: FunctionComponent<OwnProps> & StaticFunctions =
       >
         <RadioGroupPanel
           name="dokumentasjonForeligger"
+          isEdited={dokumentasjonForeliggerIsEdited}
           hideLegend
           validate={[required]}
           isReadOnly={readOnly}

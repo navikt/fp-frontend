@@ -4,6 +4,7 @@ import { formHooks, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { ArrowBox, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
+import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt, MedlemPeriode } from '@fpsak-frontend/types';
 
@@ -44,6 +45,7 @@ const StatusForBorgerFaktaPanel: FunctionComponent<OwnProps> & StaticFunctions =
   const oppholdAp = valgtPeriode.aksjonspunkter
     .filter((periodeAp) => periodeAp === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT || periodeAp === aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD);
   const aksjonspunkt = aksjonspunkter.find((ap) => oppholdAp.includes(ap.definisjon));
+  const erAksjonspunktLukket = !isAksjonspunktOpen(aksjonspunkt?.status);
 
   return (
     <FaktaGruppe
@@ -73,6 +75,7 @@ const StatusForBorgerFaktaPanel: FunctionComponent<OwnProps> & StaticFunctions =
               name="oppholdsrettVurdering"
               label={<FormattedMessage id="StatusForBorgerFaktaPanel.Oppholdsrett" />}
               validate={[required]}
+              isEdited={erAksjonspunktLukket}
               isReadOnly={readOnly}
               isHorizontal
               isTrueOrFalseSelection
@@ -101,6 +104,7 @@ const StatusForBorgerFaktaPanel: FunctionComponent<OwnProps> & StaticFunctions =
               label={<FormattedMessage id="StatusForBorgerFaktaPanel.LovligOpphold" />}
               validate={[required]}
               isReadOnly={readOnly}
+              isEdited={erAksjonspunktLukket}
               isHorizontal
               isTrueOrFalseSelection
               radios={[{

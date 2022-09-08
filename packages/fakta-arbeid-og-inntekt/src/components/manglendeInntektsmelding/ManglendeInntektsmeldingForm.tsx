@@ -4,7 +4,6 @@ import React, {
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
-import { Element } from 'nav-frontend-typografi';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 

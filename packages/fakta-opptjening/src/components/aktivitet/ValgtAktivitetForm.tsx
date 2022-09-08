@@ -166,6 +166,7 @@ export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
               hideLegend
               validate={[required]}
               isReadOnly={readOnly}
+              isEdited={erEndret}
               isHorizontal
               isTrueOrFalseSelection
               radios={[{
