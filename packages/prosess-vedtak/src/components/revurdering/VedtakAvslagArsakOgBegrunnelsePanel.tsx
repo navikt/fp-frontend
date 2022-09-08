@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
 import {
   AlleKodeverk, Vilkar, Behandlingsresultat,
@@ -70,7 +70,7 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
     <>
       {avslagsårsak && (
         <>
-          <Undertekst><FormattedMessage id="VedtakForm.ArsakTilAvslag" /></Undertekst>
+          <Element><FormattedMessage id="VedtakForm.ArsakTilAvslag" /></Element>
           <Normaltekst>
             {avslagsårsak}
           </Normaltekst>

@@ -64,7 +64,6 @@ const UtilgjengeligeArbeidsforhold: FunctionComponent<OwnProps> = ({
                   <Element>{lagArbeidsforholdNavn(arbeidsforhold, arbeidsgiverOpplysningerPrId)}</Element>
                 </FlexColumn>
               </FlexRow>
-              <VerticalSpacer eightPx />
               <FlexRow>
                 <FlexColumn>
                   <Normaltekst>
@@ -77,6 +76,7 @@ const UtilgjengeligeArbeidsforhold: FunctionComponent<OwnProps> = ({
                   </Normaltekst>
                 </FlexColumn>
               </FlexRow>
+              <VerticalSpacer sixteenPx />
             </React.Fragment>
           ))}
         </FlexColumn>

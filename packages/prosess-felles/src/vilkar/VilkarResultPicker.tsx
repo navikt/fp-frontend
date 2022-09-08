@@ -100,7 +100,7 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
       )}
       {erVilkarOk !== undefined && !erVilkarOk && avslagsarsaker && (
         <>
-          <VerticalSpacer eightPx />
+          <VerticalSpacer sixteenPx />
           <SelectField
             name="avslagCode"
             label={intl.formatMessage({ id: 'VilkarResultPicker.Arsak' })}
@@ -110,16 +110,19 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
             validate={[requiredIfCustomFunctionIsTrueNew(getIsAvslagCodeRequired(erVilkarOk, getValues('avslagCode')))]}
           />
           {erMedlemskapsPanel && (
-            <Datepicker
-              name="avslagDato"
-              label={intl.formatMessage({ id: 'VilkarResultPicker.VilkarDato' })}
-              isReadOnly={readOnly}
-              validate={[required, hasValidDate]}
-            />
+            <>
+              <VerticalSpacer sixteenPx />
+              <Datepicker
+                name="avslagDato"
+                label={intl.formatMessage({ id: 'VilkarResultPicker.VilkarDato' })}
+                isReadOnly={readOnly}
+                validate={[required, hasValidDate]}
+              />
+            </>
           )}
         </>
       )}
-      <VerticalSpacer eightPx />
+      <VerticalSpacer sixteenPx />
     </div>
   );
 };

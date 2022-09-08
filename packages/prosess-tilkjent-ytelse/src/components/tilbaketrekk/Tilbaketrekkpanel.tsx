@@ -128,6 +128,7 @@ const Tilbaketrekkpanel: FunctionComponent<OwnProps> = ({
           />
         </Column>
       </Row>
+      <VerticalSpacer sixteenPx />
       <Row>
         <Column xs="6">
           <TextAreaField
@@ -141,7 +142,7 @@ const Tilbaketrekkpanel: FunctionComponent<OwnProps> = ({
       </Row>
       <Row>
         <Column xs="1">
-          <VerticalSpacer eightPx />
+          <VerticalSpacer sixteenPx />
           <ProsessStegSubmitButtonNew
             isReadOnly={readOnly}
             isSubmittable={!readOnlySubmitButton}

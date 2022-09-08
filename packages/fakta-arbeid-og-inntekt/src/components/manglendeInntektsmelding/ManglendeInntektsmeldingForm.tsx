@@ -12,7 +12,7 @@ import {
   required, hasValidText, maxLength, minLength,
 } from '@navikt/ft-form-validators';
 import {
-  TextAreaField, RadioGroupField, RadioOption, Form,
+  TextAreaField, RadioGroupPanel, Form,
 } from '@navikt/ft-form-hooks';
 import {
   AlleKodeverk,
@@ -127,44 +127,43 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
             <VerticalSpacer sixteenPx />
           </div>
         )}
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn className={styles.radioHeader}>
-              <Element><FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" /></Element>
-            </FlexColumn>
-            <FlexColumn>
-              <Hjelpetekst
-              /* @ts-ignore */
-                popoverProps={{ className: styles.hjelpetekst }}
-              >
-                <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel1" />
-                <VerticalSpacer eightPx />
-                <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel2" />
-                <VerticalSpacer eightPx />
-                <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel3" />
-              </Hjelpetekst>
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
-        <RadioGroupField
+        <RadioGroupPanel
           name="saksbehandlersVurdering"
+          label={(
+            <FlexContainer>
+              <FlexRow>
+                <FlexColumn className={styles.radioHeader}>
+                  <FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" />
+                </FlexColumn>
+                <FlexColumn>
+                  <Hjelpetekst
+                /* @ts-ignore */
+                    popoverProps={{ className: styles.hjelpetekst }}
+                  >
+                    <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel1" />
+                    <VerticalSpacer eightPx />
+                    <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel2" />
+                    <VerticalSpacer eightPx />
+                    <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel3" />
+                  </Hjelpetekst>
+                </FlexColumn>
+              </FlexRow>
+            </FlexContainer>
+)}
           validate={[required]}
-          readOnly={isReadOnly}
-          direction="vertical"
-        >
-          <RadioOption
-            value={ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING}
-            label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.TarKontakt' })}
-          />
-          <RadioOption
-            value={ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING}
-            label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.GåVidere' })}
-          />
-        </RadioGroupField>
+          isReadOnly={isReadOnly}
+          radios={[{
+            label: intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.TarKontakt' }),
+            value: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING,
+          }, {
+            label: intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.GåVidere' }),
+            value: ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING,
+          }]}
+        />
         <VerticalSpacer sixteenPx />
         <TextAreaField
           label={(
-            <Element><FormattedMessage id={erEttArbeidsforhold ? 'InntektsmeldingInnhentesForm.Begrunn' : 'InntektsmeldingInnhentesForm.Kommentar'} /></Element>
+            <FormattedMessage id={erEttArbeidsforhold ? 'InntektsmeldingInnhentesForm.Begrunn' : 'InntektsmeldingInnhentesForm.Kommentar'} />
           )}
           name="begrunnelse"
           validate={[required, minLength3, maxLength1500, hasValidText]}

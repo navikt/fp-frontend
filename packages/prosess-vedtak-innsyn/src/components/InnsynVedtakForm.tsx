@@ -1,7 +1,9 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
+import {
+  Element, Normaltekst, Undertittel,
+} from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
@@ -152,10 +154,10 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
     >
       <Undertittel><FormattedMessage id={readOnly ? 'InnsynVedtakForm.Vedtak' : 'InnsynVedtakForm.ForslagVedtak'} /></Undertittel>
       <VerticalSpacer eightPx />
-      <Undertekst><FormattedMessage id="InnsynVedtakForm.Resultat" /></Undertekst>
+      <Element><FormattedMessage id="InnsynVedtakForm.Resultat" /></Element>
       <Normaltekst><FormattedMessage id={findResultTypeMessage(innsynResultatType)} /></Normaltekst>
       <VerticalSpacer eightPx />
-      <Undertekst><FormattedMessage id="InnsynVedtakForm.Vurdering" /></Undertekst>
+      <Element><FormattedMessage id="InnsynVedtakForm.Vurdering" /></Element>
       <Normaltekst className={styles.wordwrap}>{decodeHtmlEntity(apBegrunnelse)}</Normaltekst>
       <VerticalSpacer twentyPx />
       {(innsynResultatType !== InnsynResultatType.INNVILGET) && (

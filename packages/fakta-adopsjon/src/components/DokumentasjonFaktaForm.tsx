@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import moment from 'moment';
 import { Column, Container, Row } from 'nav-frontend-grid';
-import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import { FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
 import { Datepicker, formHooks } from '@navikt/ft-form-hooks';
@@ -90,18 +90,20 @@ const DokumentasjonFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
           isEdited={editedStatus.omsorgsovertakelseDato}
         />
         {erForeldrepengerFagsak && barnetsAnkomstTilNorgeDato && (
-          <Datepicker
-            name="barnetsAnkomstTilNorgeDato"
-            label={intl.formatMessage({ id: 'DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge' })}
-            validate={[hasValidDate]}
-            isReadOnly={readOnly}
-            isEdited={editedStatus.barnetsAnkomstTilNorgeDato}
-          />
+          <>
+            <VerticalSpacer sixteenPx />
+            <Datepicker
+              name="barnetsAnkomstTilNorgeDato"
+              label={intl.formatMessage({ id: 'DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge' })}
+              validate={[hasValidDate]}
+              isReadOnly={readOnly}
+              isEdited={editedStatus.barnetsAnkomstTilNorgeDato}
+            />
+          </>
         )}
-
         {Object.keys(fodselsdatoer).map((id, i) => (
           <div key={`div-${aksjonspunktCodes.ADOPSJONSDOKUMENTAJON}-${id}`}>
-            <VerticalSpacer eightPx />
+            <VerticalSpacer sixteenPx />
             <Row>
               <Column xs="6">
                 <Datepicker
@@ -128,7 +130,7 @@ const DokumentasjonFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
           </div>
         ))}
         <VerticalSpacer twentyPx />
-        <Undertekst>{intl.formatMessage({ id: 'DokumentasjonFaktaForm.AntallBarnSomFyllerVilkaret' })}</Undertekst>
+        <Element>{intl.formatMessage({ id: 'DokumentasjonFaktaForm.AntallBarnSomFyllerVilkaret' })}</Element>
         <Normaltekst>{findAntallBarnUnder15(fodselsdatoer, omsorgsovertakelseDato)}</Normaltekst>
       </Container>
     </FaktaGruppe>

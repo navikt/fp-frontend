@@ -15,6 +15,7 @@ import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import styles from './henleggBehandlingModal.less';
 
 const maxLength1500 = maxLength(1500);
@@ -159,6 +160,7 @@ const HenleggBehandlingModal: FunctionComponent<PureOwnProps> = ({
               />
             </Column>
           </Row>
+          <VerticalSpacer sixteenPx />
           <Row>
             <Column xs="8">
               <TextAreaField
@@ -184,7 +186,8 @@ const HenleggBehandlingModal: FunctionComponent<PureOwnProps> = ({
             </Row>
           )}
           <Row>
-            <Column xs="6">
+            <Column xs="7">
+              <VerticalSpacer sixteenPx />
               <div>
                 <Hovedknapp
                   mini

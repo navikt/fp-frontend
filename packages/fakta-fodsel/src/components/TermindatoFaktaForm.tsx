@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 import AlertStripe from 'nav-frontend-alertstriper';
 
 import { DateLabel, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
@@ -116,8 +116,8 @@ export const TermindatoFaktaForm: FunctionComponent<OwnProps> & StaticFunctions 
       {fodselsdatoTps && !isOverridden && (
         <FaktaGruppe title={intl.formatMessage({ id: 'TermindatoFaktaForm.OpplysningerTPS' })}>
           <Row>
-            <Column xs="6"><Normaltekst><FormattedMessage id="TermindatoFaktaForm.FodselsdatoTps" /></Normaltekst></Column>
-            <Column xs="6"><Normaltekst><FormattedMessage id="TermindatoFaktaForm.AntallBarnTps" /></Normaltekst></Column>
+            <Column xs="6"><Element><FormattedMessage id="TermindatoFaktaForm.FodselsdatoTps" /></Element></Column>
+            <Column xs="6"><Element><FormattedMessage id="TermindatoFaktaForm.AntallBarnTps" /></Element></Column>
           </Row>
           <Row>
             <Column xs="6">

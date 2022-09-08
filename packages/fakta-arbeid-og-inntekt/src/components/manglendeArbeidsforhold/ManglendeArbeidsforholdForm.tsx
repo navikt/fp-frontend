@@ -3,7 +3,6 @@ import React, {
 } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm, UseFormGetValues } from 'react-hook-form';
-import { Element } from 'nav-frontend-typografi';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
@@ -12,7 +11,7 @@ import {
   hasValidText, maxLength, minLength, hasValidDate, hasValidInteger, required, minValue, maxValue, dateAfterOrEqual,
 } from '@navikt/ft-form-validators';
 import {
-  TextAreaField, RadioGroupField, RadioOption, Datepicker, InputField, Form,
+  TextAreaField, RadioGroupPanel, Datepicker, InputField, Form,
 } from '@navikt/ft-form-hooks';
 import {
   Inntektsmelding, ManueltArbeidsforhold, ManglendeInntektsmeldingVurdering,
@@ -156,48 +155,47 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
       </div>
       <VerticalSpacer thirtyTwoPx />
       <Form formMethods={formMethods} onSubmit={lagre}>
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <Element><FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" /></Element>
-            </FlexColumn>
-            <FlexColumn>
-              <Hjelpetekst
-                /* @ts-ignore */
-                popoverProps={{ className: styles.hjelpetekst }}
-              >
-                <FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" />
-              </Hjelpetekst>
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
-        <RadioGroupField
+        <RadioGroupPanel
           name="saksbehandlersVurdering"
+          label={(
+            <FlexContainer>
+              <FlexRow>
+                <FlexColumn>
+                  <FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" />
+                </FlexColumn>
+                <FlexColumn>
+                  <Hjelpetekst
+                  /* @ts-ignore */
+                    popoverProps={{ className: styles.hjelpetekst }}
+                  >
+                    <FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" />
+                  </Hjelpetekst>
+                </FlexColumn>
+              </FlexRow>
+            </FlexContainer>
+          )}
           validate={[required]}
-          readOnly={isReadOnly}
-          direction="vertical"
-        >
-          <RadioOption
-            value={ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD}
-            label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.TarKontakt' })}
-          />
-          <RadioOption
-            value={ArbeidsforholdKomplettVurderingType.IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING}
-            label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.GåVidere' })}
-          />
-          <RadioOption
-            value={ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING}
-            label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.OpprettArbeidsforhold' })}
-          />
-        </RadioGroupField>
+          isReadOnly={isReadOnly}
+          radios={[{
+            label: intl.formatMessage({ id: 'ManglendeOpplysningerForm.TarKontakt' }),
+            value: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD,
+          }, {
+            label: intl.formatMessage({ id: 'ManglendeOpplysningerForm.GåVidere' }),
+            value: ArbeidsforholdKomplettVurderingType.IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
+          }, {
+            label: intl.formatMessage({ id: 'ManglendeOpplysningerForm.OpprettArbeidsforhold' }),
+            value: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
+          }]}
+        />
         {saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING && (
           <>
             <FlexContainer>
+              <VerticalSpacer eightPx />
               <FlexRow>
                 <FlexColumn>
                   <Datepicker
                     name="fom"
-                    label={<Element><FormattedMessage id="ManglendeOpplysningerForm.PeriodeFra" /></Element>}
+                    label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeFra" />}
                     validate={[required, hasValidDate]}
                     isReadOnly={isReadOnly}
                   />
@@ -205,7 +203,7 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <Datepicker
                     name="tom"
-                    label={<Element><FormattedMessage id="ManglendeOpplysningerForm.PeriodeTil" /></Element>}
+                    label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeTil" />}
                     validate={[hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
                     isReadOnly={isReadOnly}
                   />
@@ -213,13 +211,12 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <InputField
                     name="stillingsprosent"
-                    label={<Element><FormattedMessage id="ManglendeOpplysningerForm.Stillingsprosent" /></Element>}
+                    label={<FormattedMessage id="ManglendeOpplysningerForm.Stillingsprosent" />}
                     parse={(value: string) => {
                       const parsedValue = parseInt(value, 10);
                       return Number.isNaN(parsedValue) ? value : parsedValue;
                     }}
                     validate={[required, hasValidInteger, minValue1, maxValue100]}
-                    bredde="XS"
                     readOnly={isReadOnly}
                     maxLength={3}
                   />
@@ -231,7 +228,7 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
         )}
         <VerticalSpacer sixteenPx />
         <TextAreaField
-          label={<Element><FormattedMessage id="ManglendeOpplysningerForm.Begrunn" /></Element>}
+          label={<FormattedMessage id="ManglendeOpplysningerForm.Begrunn" />}
           name="begrunnelse"
           validate={[required, minLength3, maxLength1500, hasValidText]}
           maxLength={1500}
