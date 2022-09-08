@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import {
-  Element, Undertekst, Undertittel, Normaltekst,
+  Element, Undertekst, Undertittel,
 } from 'nav-frontend-typografi';
 
 import { Aksjonspunkt, BeregningsresultatEs } from '@fpsak-frontend/types';
@@ -160,9 +160,9 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
             <FlexContainer>
               <FlexRow>
                 <FlexColumn>
-                  <Normaltekst className={!erIOverstyringsmodus || overrideReadOnly ? '' : styles.text}>
+                  <Element className={!erIOverstyringsmodus || overrideReadOnly ? '' : styles.text}>
                     <FormattedMessage id="BeregningEngangsstonadForm.BeregnetEngangsstonad" />
-                  </Normaltekst>
+                  </Element>
                 </FlexColumn>
                 <FlexColumn>
                   <InputField
@@ -172,8 +172,8 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
                       const parsedValue = parseInt(value, 10);
                       return Number.isNaN(parsedValue) ? value : parsedValue;
                     }}
+                    className={styles.bredde}
                     validate={[required, hasValidInteger, minValue1, maxValue500000]}
-                    bredde="XS"
                     readOnly={!erIOverstyringsmodus || overrideReadOnly}
                   />
                 </FlexColumn>
@@ -184,6 +184,7 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
                 </FlexColumn>
               </FlexRow>
             </FlexContainer>
+            <VerticalSpacer sixteenPx />
           </OverstyringPanel>
         </>
       )}

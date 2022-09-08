@@ -4,16 +4,16 @@ import { NavLink } from 'react-router-dom';
 import { UseFormGetValues } from 'react-hook-form';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { Location } from 'history';
-import { Undertekst, Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst, Element } from 'nav-frontend-typografi';
 import {
-  ArrowBox, FlexColumn, FlexContainer, FlexRow,
+  ArrowBox, FlexColumn, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
 import {
   KodeverkMedNavn, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 import {
-  CheckboxField, TextAreaField, RadioGroupField, RadioOption, SkjemaGruppeMedFeilviser, formHooks,
+  CheckboxField, TextAreaField, RadioGroupPanel, SkjemaGruppeMedFeilviser, formHooks,
 } from '@navikt/ft-form-hooks';
 import {
   hasValidText, maxLength, minLength, required, isRequiredMessage,
@@ -139,25 +139,28 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
                 </div>
               ))}
               <SkjemaGruppe>
-                <RadioGroupField
+                <RadioGroupPanel
                   name={`${fieldIndex}.totrinnskontrollGodkjent`}
-                  bredde="M"
-                  readOnly={readOnly}
-                  parse={(value: string) => value === 'true'}
-                >
-                  <RadioOption label={<FormattedMessage id="ApprovalField.Godkjent" />} value="true" />
-                  <RadioOption label={<FormattedMessage id="ApprovalField.Vurder" />} value="false" />
-                </RadioGroupField>
+                  isReadOnly={readOnly}
+                  isHorizontal
+                  isTrueOrFalseSelection
+                  hideLegend
+                  radios={[{
+                    value: 'true',
+                    label: <FormattedMessage id="ApprovalField.Godkjent" />,
+                  }, {
+                    value: 'false',
+                    label: <FormattedMessage id="ApprovalField.Vurder" />,
+                  },
+                  ]}
+                />
                 {visArsaker && (
-                  <ArrowBox alignOffset={totrinnskontrollGodkjent ? 1 : 110}>
-                    {!visKunBegrunnelse && (
-                      <FlexContainer wrap>
-                        <FlexRow>
-                          <FlexColumn>
-                            <Undertekst className="blokk-xs"><FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Arsak" /></Undertekst>
-                          </FlexColumn>
-                        </FlexRow>
-                        <FlexRow>
+                  <>
+                    <VerticalSpacer sixteenPx />
+                    <ArrowBox alignOffset={totrinnskontrollGodkjent ? 1 : 110}>
+                      {!visKunBegrunnelse && (
+                        <>
+                          <Element><FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Arsak" /></Element>
                           <SkjemaGruppeMedFeilviser
                             name={`${fieldIndex}.faktagruppe`}
                             validate={[validerValgtFakta(getValues, fieldIndex)]}
@@ -189,17 +192,19 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
                               </FlexColumn>
                             </FlexRow>
                           </SkjemaGruppeMedFeilviser>
-                        </FlexRow>
-                      </FlexContainer>
-                    )}
-                    <TextAreaField
-                      name={`${fieldIndex}.besluttersBegrunnelse`}
-                      label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Begrunnelse" />}
-                      validate={[required, minLength3, maxLength2000, hasValidText]}
-                      readOnly={readOnly}
-                    />
-                  </ArrowBox>
+                        </>
+                      )}
+                      <VerticalSpacer sixteenPx />
+                      <TextAreaField
+                        name={`${fieldIndex}.besluttersBegrunnelse`}
+                        label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Begrunnelse" />}
+                        validate={[required, minLength3, maxLength2000, hasValidText]}
+                        readOnly={readOnly}
+                      />
+                    </ArrowBox>
+                  </>
                 )}
+                <VerticalSpacer sixteenPx />
               </SkjemaGruppe>
             </div>
           </div>

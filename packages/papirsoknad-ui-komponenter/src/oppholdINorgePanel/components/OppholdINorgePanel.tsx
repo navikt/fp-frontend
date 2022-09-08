@@ -1,16 +1,13 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Undertekst } from 'nav-frontend-typografi';
-import { SkjemaGruppe } from 'nav-frontend-skjema';
-import { RadioGroupField, RadioOption, formHooks } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk } from '@navikt/ft-types';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 
 import { required } from '@navikt/ft-form-validators';
+import { Undertittel } from 'nav-frontend-typografi';
 import UtenlandsOppholdField, { FormValues as FormValuesFieldArray } from './UtenlandsOppholdField';
-
-import styles from './oppholdINorgePanel.less';
 
 export type FormValues = {
   oppholdINorge?: boolean;
@@ -55,34 +52,42 @@ const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
 
   return (
     <BorderBox>
-      <SkjemaGruppe className={styles.fullWidth} legend={formatMessage({ id: 'Registrering.Opphold' })}>
-        <Undertekst>
-          <FormattedMessage id={erAdopsjon ? 'Registrering.OppholdVedAdopsjon' : 'Registrering.OppholdVedFodsel'} />
-        </Undertekst>
-        <VerticalSpacer eightPx />
-        <RadioGroupField
-          name="oppholdINorge"
-          readOnly={readOnly}
-          parse={(value: string) => value === 'true'}
-          validate={[required]}
-        >
-          <RadioOption label={formatMessage({ id: 'Registrering.Opphold.Yes' })} value="true" />
-          <RadioOption label={formatMessage({ id: 'Registrering.Opphold.No' })} value="false" />
-        </RadioGroupField>
-        <Undertekst>
-          <FormattedMessage id="Registrering.OppholdSisteTolv" />
-        </Undertekst>
-        <VerticalSpacer eightPx />
-        <RadioGroupField
-          name="harTidligereOppholdUtenlands"
-          readOnly={readOnly}
-          parse={(value: string) => value === 'true'}
-          validate={[required]}
-        >
-          <RadioOption label={formatMessage({ id: 'Registrering.Opphold.Yes' })} value="false" />
-          <RadioOption label={formatMessage({ id: 'Registrering.Opphold.No' })} value="true" />
-        </RadioGroupField>
-        {harTidligereOppholdUtenlands ? (
+      <Undertittel><FormattedMessage id="Registrering.Opphold" /></Undertittel>
+      <VerticalSpacer sixteenPx />
+      <RadioGroupPanel
+        name="oppholdINorge"
+        label={<FormattedMessage id={erAdopsjon ? 'Registrering.OppholdVedAdopsjon' : 'Registrering.OppholdVedFodsel'} />}
+        validate={[required]}
+        isReadOnly={readOnly}
+        isTrueOrFalseSelection
+        isHorizontal
+        radios={[{
+          label: formatMessage({ id: 'Registrering.Opphold.Yes' }),
+          value: 'true',
+        }, {
+          label: formatMessage({ id: 'Registrering.Opphold.No' }),
+          value: 'false',
+        }]}
+      />
+      <VerticalSpacer sixteenPx />
+      <RadioGroupPanel
+        name="harTidligereOppholdUtenlands"
+        label={<FormattedMessage id="Registrering.OppholdSisteTolv" />}
+        validate={[required]}
+        isReadOnly={readOnly}
+        isTrueOrFalseSelection
+        isHorizontal
+        radios={[{
+          label: formatMessage({ id: 'Registrering.Opphold.Yes' }),
+          value: 'false',
+        }, {
+          label: formatMessage({ id: 'Registrering.Opphold.No' }),
+          value: 'true',
+        }]}
+      />
+      {harTidligereOppholdUtenlands ? (
+        <>
+          <VerticalSpacer eightPx />
           <ArrowBox alignOffset={64}>
             <UtenlandsOppholdField
               erTidligereOpphold
@@ -91,21 +96,27 @@ const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
               readOnly={readOnly}
             />
           </ArrowBox>
-        ) : null}
-        <Undertekst>
-          <FormattedMessage id="Registrering.OppholdNesteTolv" />
-        </Undertekst>
-        <VerticalSpacer eightPx />
-        <RadioGroupField
-          name="harFremtidigeOppholdUtenlands"
-          readOnly={readOnly}
-          parse={(value: string) => value === 'true'}
-          validate={[required]}
-        >
-          <RadioOption label={formatMessage({ id: 'Registrering.Opphold.Yes' })} value="false" />
-          <RadioOption label={formatMessage({ id: 'Registrering.Opphold.No' })} value="true" />
-        </RadioGroupField>
-        {harFremtidigeOppholdUtenlands ? (
+        </>
+      ) : null}
+      <VerticalSpacer sixteenPx />
+      <RadioGroupPanel
+        name="harFremtidigeOppholdUtenlands"
+        label={<FormattedMessage id="Registrering.OppholdNesteTolv" />}
+        validate={[required]}
+        isReadOnly={readOnly}
+        isTrueOrFalseSelection
+        isHorizontal
+        radios={[{
+          label: formatMessage({ id: 'Registrering.Opphold.Yes' }),
+          value: 'false',
+        }, {
+          label: formatMessage({ id: 'Registrering.Opphold.No' }),
+          value: 'true',
+        }]}
+      />
+      {harFremtidigeOppholdUtenlands ? (
+        <>
+          <VerticalSpacer eightPx />
           <ArrowBox alignOffset={64}>
             <UtenlandsOppholdField
               erTidligereOpphold={false}
@@ -114,8 +125,8 @@ const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
               readOnly={readOnly}
             />
           </ArrowBox>
-        ) : null}
-      </SkjemaGruppe>
+        </>
+      ) : null}
     </BorderBox>
   );
 };

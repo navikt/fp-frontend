@@ -1,14 +1,12 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { RawIntlProvider, FormattedMessage } from 'react-intl';
-import { SkjemaGruppe } from 'nav-frontend-skjema';
-import {
-  RadioGroupField, RadioOption, Datepicker, formHooks,
-} from '@navikt/ft-form-hooks';
-import { BorderBox, ArrowBox } from '@navikt/ft-ui-komponenter';
+import { ErrorMessage } from '@navikt/ds-react';
+import { RadioGroupPanel, Datepicker, formHooks } from '@navikt/ft-form-hooks';
+import { BorderBox, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
-import { Undertekst } from 'nav-frontend-typografi';
+import { Undertittel } from 'nav-frontend-typografi';
 import BehovForTilretteleggingFieldArray, { frilansFieldArrayName, selvstendigNaringsdrivendeFieldArrayName } from './BehovForTilretteleggingFieldArray';
 import TilretteleggingForArbeidsgiverFieldArray from './TilretteleggingForArbeidsgiverFieldArray';
 import messages from '../../i18n/nb_NO.json';
@@ -85,74 +83,94 @@ const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunction
   return (
     <RawIntlProvider value={intl}>
       <BorderBox>
-        <SkjemaGruppe
-          legend={<FormattedMessage id="BehovForTilretteleggingPanel.BehovForTilrettelegging" />}
-          feil={formState.isSubmitted ? formState.errors[TILRETTELEGGING_NAME_PREFIX]?.notRegisteredInput?.message : undefined}
-        >
-          <RadioGroupField
-            name={`${TILRETTELEGGING_NAME_PREFIX}.sokForSelvstendigNaringsdrivende`}
-            label={<Undertekst><FormattedMessage id="BehovForTilretteleggingPanel.SokForSelvstendigNaringsdrivende" /></Undertekst>}
-            validate={[required]}
-            readOnly={readOnly}
-            parse={(value: string) => value === 'true'}
-          >
-            <RadioOption value="true" label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Ja' })} />
-            <RadioOption value="false" label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Nei' })} />
-          </RadioGroupField>
-          {sokForSelvstendigNaringsdrivende && (
-            <ArrowBox>
-              <Datepicker
-                name={`${TILRETTELEGGING_NAME_PREFIX}.behovsdatoSN`}
-                label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.TilretteleggingFra' })}
-                validate={[required]}
-                isReadOnly={readOnly}
-              />
-              <BehovForTilretteleggingFieldArray
-                name={`${TILRETTELEGGING_NAME_PREFIX}.${selvstendigNaringsdrivendeFieldArrayName}`}
-                readOnly={readOnly}
-              />
-            </ArrowBox>
-          )}
-          <RadioGroupField
-            name={`${TILRETTELEGGING_NAME_PREFIX}.sokForFrilans`}
-            label={<Undertekst><FormattedMessage id="BehovForTilretteleggingPanel.SokForFrilans" /></Undertekst>}
-            validate={[required]}
-            readOnly={readOnly}
-            parse={(value: string) => value === 'true'}
-          >
-            <RadioOption value="true" label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Ja' })} />
-            <RadioOption value="false" label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Nei' })} />
-          </RadioGroupField>
-          {sokForFrilans && (
-            <ArrowBox>
-              <Datepicker
-                name={`${TILRETTELEGGING_NAME_PREFIX}.behovsdatoFrilans`}
-                label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.TilretteleggingFra' })}
-                validate={[required]}
-                isReadOnly={readOnly}
-              />
-              <BehovForTilretteleggingFieldArray
-                name={`${TILRETTELEGGING_NAME_PREFIX}.${frilansFieldArrayName}`}
-                readOnly={readOnly}
-              />
-            </ArrowBox>
-          )}
-          <RadioGroupField
-            name={`${TILRETTELEGGING_NAME_PREFIX}.sokForArbeidsgiver`}
-            label={<Undertekst><FormattedMessage id="BehovForTilretteleggingPanel.SokForArbeidsgiver" /></Undertekst>}
-            validate={[required]}
-            readOnly={readOnly}
-            parse={(value: string) => value === 'true'}
-          >
-            <RadioOption value="true" label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Ja' })} />
-            <RadioOption value="false" label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Nei' })} />
-          </RadioGroupField>
-          {sokForArbeidsgiver && (
-            <ArrowBox>
-              <TilretteleggingForArbeidsgiverFieldArray readOnly={readOnly} />
-            </ArrowBox>
-          )}
-        </SkjemaGruppe>
+        <Undertittel>
+          <FormattedMessage id="BehovForTilretteleggingPanel.BehovForTilrettelegging" />
+        </Undertittel>
+        <VerticalSpacer sixteenPx />
+        {formState.isSubmitted && formState.errors[TILRETTELEGGING_NAME_PREFIX]?.notRegisteredInput?.message && (
+          <ErrorMessage>{formState.errors[TILRETTELEGGING_NAME_PREFIX]?.notRegisteredInput?.message}</ErrorMessage>
+        )}
+        <RadioGroupPanel
+          name={`${TILRETTELEGGING_NAME_PREFIX}.sokForSelvstendigNaringsdrivende`}
+          label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForSelvstendigNaringsdrivende" />}
+          validate={[required]}
+          isReadOnly={readOnly}
+          isTrueOrFalseSelection
+          isHorizontal
+          radios={[{
+            label: intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Ja' }),
+            value: 'true',
+          }, {
+            label: intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Nei' }),
+            value: 'false',
+          }]}
+        />
+        <VerticalSpacer sixteenPx />
+        {sokForSelvstendigNaringsdrivende && (
+          <ArrowBox>
+            <Datepicker
+              name={`${TILRETTELEGGING_NAME_PREFIX}.behovsdatoSN`}
+              label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.TilretteleggingFra' })}
+              validate={[required]}
+              isReadOnly={readOnly}
+            />
+            <BehovForTilretteleggingFieldArray
+              name={`${TILRETTELEGGING_NAME_PREFIX}.${selvstendigNaringsdrivendeFieldArrayName}`}
+              readOnly={readOnly}
+            />
+          </ArrowBox>
+        )}
+        <RadioGroupPanel
+          name={`${TILRETTELEGGING_NAME_PREFIX}.sokForFrilans`}
+          label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForFrilans" />}
+          validate={[required]}
+          isReadOnly={readOnly}
+          isTrueOrFalseSelection
+          isHorizontal
+          radios={[{
+            label: intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Ja' }),
+            value: 'true',
+          }, {
+            label: intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Nei' }),
+            value: 'false',
+          }]}
+        />
+        <VerticalSpacer sixteenPx />
+        {sokForFrilans && (
+          <ArrowBox>
+            <Datepicker
+              name={`${TILRETTELEGGING_NAME_PREFIX}.behovsdatoFrilans`}
+              label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.TilretteleggingFra' })}
+              validate={[required]}
+              isReadOnly={readOnly}
+            />
+            <BehovForTilretteleggingFieldArray
+              name={`${TILRETTELEGGING_NAME_PREFIX}.${frilansFieldArrayName}`}
+              readOnly={readOnly}
+            />
+          </ArrowBox>
+        )}
+        <RadioGroupPanel
+          name={`${TILRETTELEGGING_NAME_PREFIX}.sokForArbeidsgiver`}
+          label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForArbeidsgiver" />}
+          validate={[required]}
+          isReadOnly={readOnly}
+          isTrueOrFalseSelection
+          isHorizontal
+          radios={[{
+            label: intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Ja' }),
+            value: 'true',
+          }, {
+            label: intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Nei' }),
+            value: 'false',
+          }]}
+        />
+        <VerticalSpacer sixteenPx />
+        {sokForArbeidsgiver && (
+          <ArrowBox>
+            <TilretteleggingForArbeidsgiverFieldArray readOnly={readOnly} />
+          </ArrowBox>
+        )}
       </BorderBox>
     </RawIntlProvider>
   );

@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import moment from 'moment';
-import { RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
   DateLabel, PeriodLabel, Table, TableColumn, TableRow, VerticalSpacer, FaktaGruppe, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
@@ -10,9 +10,9 @@ import { DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@navikt/ft-utils';
 import { required } from '@navikt/ft-form-validators';
 import { Aksjonspunkt, AlleKodeverk } from '@navikt/ft-types';
 
+import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { MedlemPeriode, Medlemskap, Soknad } from '@fpsak-frontend/types';
 
 const headerTextCodes = [
@@ -114,9 +114,18 @@ const PerioderMedMedlemskapFaktaPanel: FunctionComponent<OwnProps> & StaticFunct
         {aksjonspunkt && (
           <FlexRow>
             <FlexColumn>
-              <RadioGroupField name="medlemskapManuellVurderingType" validate={[required]} readOnly={readOnly} isEdited={erAksjonspunktLukket}>
-                {sorterteVurderingstyper.map((type) => <RadioOption key={type.kode} value={type.kode} label={type.navn} />)}
-              </RadioGroupField>
+              <RadioGroupPanel
+                name="medlemskapManuellVurderingType"
+                hideLegend
+                isEdited={erAksjonspunktLukket}
+                validate={[required]}
+                isReadOnly={readOnly}
+                isHorizontal
+                radios={sorterteVurderingstyper.map((type) => ({
+                  label: type.navn,
+                  value: type.kode,
+                }))}
+              />
             </FlexColumn>
           </FlexRow>
         )}

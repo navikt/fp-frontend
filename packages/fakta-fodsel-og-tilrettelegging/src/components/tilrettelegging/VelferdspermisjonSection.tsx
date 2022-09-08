@@ -4,7 +4,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import moment from 'moment';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { required } from '@navikt/ft-form-validators';
-import { RadioGroupField, RadioOption, formHooks } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { Permisjon } from '@fpsak-frontend/types';
@@ -64,16 +64,21 @@ const VelferdspermisjonSection: FunctionComponent<OwnProps> = ({
         )}
       </Normaltekst>
       <VerticalSpacer sixteenPx />
-      <RadioGroupField
+      <RadioGroupPanel
         name={`${formSectionName}.permisjon${permisjon.permisjonFom}`}
+        hideLegend
         validate={[required]}
-        bredde="XL"
-        readOnly={readOnly}
-        parse={(value: string) => value === 'true'}
-      >
-        <RadioOption value="true" label={intl.formatMessage({ id: 'VelferdspermisjonSection.ErGyldig' })} />
-        <RadioOption value="false" label={intl.formatMessage({ id: 'VelferdspermisjonSection.ErIkkeGyldig' })} />
-      </RadioGroupField>
+        isReadOnly={readOnly}
+        isHorizontal
+        isTrueOrFalseSelection
+        radios={[{
+          label: intl.formatMessage({ id: 'VelferdspermisjonSection.ErGyldig' }),
+          value: 'true',
+        }, {
+          label: intl.formatMessage({ id: 'VelferdspermisjonSection.ErIkkeGyldig' }),
+          value: 'false',
+        }]}
+      />
     </>
   );
 };

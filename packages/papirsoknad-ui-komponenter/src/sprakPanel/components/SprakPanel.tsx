@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import { SkjemaGruppe } from 'nav-frontend-skjema';
-import { BorderBox } from '@navikt/ft-ui-komponenter';
+import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
-import { RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { Undertittel } from 'nav-frontend-typografi';
 
 const sprakvalg = {
   BOKMAL: 'NB',
@@ -24,27 +24,25 @@ const SprakPanel: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
   return (
     <BorderBox>
-      <SkjemaGruppe legend={intl.formatMessage({ id: 'Registrering.Sprak' })}>
-        <RadioGroupField
-          name="språkkode"
-          direction="vertical"
-          readOnly={readOnly}
-          validate={[required]}
-        >
-          <RadioOption
-            label={intl.formatMessage({ id: 'Registrering.Sprak.Bokmal' })}
-            value={sprakvalg.BOKMAL}
-          />
-          <RadioOption
-            label={intl.formatMessage({ id: 'Registrering.Sprak.Nynorsk' })}
-            value={sprakvalg.NYNORSK}
-          />
-          <RadioOption
-            label={intl.formatMessage({ id: 'Registrering.Sprak.Engelsk' })}
-            value={sprakvalg.ENGELSK}
-          />
-        </RadioGroupField>
-      </SkjemaGruppe>
+      <Undertittel>
+        {intl.formatMessage({ id: 'Registrering.Sprak' })}
+      </Undertittel>
+      <VerticalSpacer sixteenPx />
+      <RadioGroupPanel
+        name="språkkode"
+        validate={[required]}
+        isReadOnly={readOnly}
+        radios={[{
+          label: intl.formatMessage({ id: 'Registrering.Sprak.Bokmal' }),
+          value: sprakvalg.BOKMAL,
+        }, {
+          label: intl.formatMessage({ id: 'Registrering.Sprak.Nynorsk' }),
+          value: sprakvalg.NYNORSK,
+        }, {
+          label: intl.formatMessage({ id: 'Registrering.Sprak.Engelsk' }),
+          value: sprakvalg.ENGELSK,
+        }]}
+      />
     </BorderBox>
   );
 };

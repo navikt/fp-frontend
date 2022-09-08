@@ -59,11 +59,11 @@ const FodselSammenligningOtherPanel: FunctionComponent<OwnProps> = ({
         {soknad.utstedtdato
           && (
           <Column xs="4">
-            <Normaltekst><FormattedMessage id="FodselsammenligningPanel.UstedtDato" /></Normaltekst>
+            <Element><FormattedMessage id="FodselsammenligningPanel.UstedtDato" /></Element>
           </Column>
           )}
-        <Column xs="4"><Normaltekst><FormattedMessage id={terminOrFodselLabel} /></Normaltekst></Column>
-        <Column xs="4"><Normaltekst><FormattedMessage id="FodselsammenligningPanel.AntallBarn" /></Normaltekst></Column>
+        <Column xs="4"><Element><FormattedMessage id={terminOrFodselLabel} /></Element></Column>
+        <Column xs="4"><Element><FormattedMessage id="FodselsammenligningPanel.AntallBarn" /></Element></Column>
       </Row>
       <Row>
         {soknad.utstedtdato

@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import { AlleKodeverk, Vilkar, Behandlingsresultat } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -59,7 +59,7 @@ const VedtakAvslagPanel: FunctionComponent<OwnProps> = ({
     <>
       {getAvslagArsak(vilkar, behandlingsresultat, getKodeverknavn) && (
         <div>
-          <Undertekst>{intl.formatMessage({ id: 'VedtakForm.ArsakTilAvslag' })}</Undertekst>
+          <Element>{intl.formatMessage({ id: 'VedtakForm.ArsakTilAvslag' })}</Element>
           <Normaltekst>
             {getAvslagArsak(vilkar, behandlingsresultat, getKodeverknavn)}
           </Normaltekst>

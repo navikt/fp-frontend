@@ -7,7 +7,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
 
-import { Form, RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
+import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import { ISO_DATE_FORMAT, getKodeverknavnFn } from '@navikt/ft-utils';
@@ -35,8 +35,6 @@ const findSoknadsfristDate = (mottattDato: string, antallDagerSoknadLevertForSen
     .subtract(antallDagerSoknadLevertForSent, 'days')
     .format(ISO_DATE_FORMAT)
 );
-
-const isEdited = (hasAksjonspunkt: boolean, erVilkarOk?: boolean): boolean => hasAksjonspunkt && erVilkarOk !== undefined;
 
 type FormValues = {
   erVilkarOk?: boolean;
@@ -128,8 +126,6 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
 
   const antallDagerSoknadLevertForSent = soknad?.søknadsfrist?.dagerOversittetFrist;
 
-  const hasAksjonspunkt = aksjonspunkter.length > 0;
-
   return (
     <Form
       formMethods={formMethods}
@@ -188,57 +184,39 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
         </Column>
       </Row>
       <VerticalSpacer sixteenPx />
-      {!readOnly && (
-        <Row>
-          <Column xs="6">
-            <RadioGroupField name="erVilkarOk" validate={[required]} parse={(value) => value === 'true'}>
-              <RadioOption
-                label={(
-                  <FormattedMessage
-                    id={findRadioButtonTextCode(true)}
-                    values={{
-                      b: (chunks: any) => <b>{chunks}</b>,
-                    }}
-                  />
-                )}
-                value="true"
-              />
-              <RadioOption
-                label={(
-                  <FormattedMessage
-                    id={findRadioButtonTextCode(false)}
-                    values={{
-                      b: (chunks: any) => <b>{chunks}</b>,
-                    }}
-                  />
-                )}
-                value="false"
-              />
-            </RadioGroupField>
-          </Column>
-        </Row>
+      <Row>
+        <Column xs="6">
+          <RadioGroupPanel
+            name="erVilkarOk"
+            validate={[required]}
+            isReadOnly={readOnly}
+            isHorizontal
+            isTrueOrFalseSelection
+            radios={[{
+              value: 'true',
+              label: <FormattedMessage
+                id={findRadioButtonTextCode(true)}
+                values={{
+                  b: (chunks: any) => <b>{chunks}</b>,
+                }}
+              />,
+            }, {
+              value: 'false',
+              label: <FormattedMessage
+                id={findRadioButtonTextCode(false)}
+                values={{
+                  b: (chunks: any) => <b>{chunks}</b>,
+                }}
+              />,
+            },
+            ]}
+          />
+        </Column>
+      </Row>
+      {readOnly && erVilkarOk === false && !!behandlingsresultat?.avslagsarsak && (
+        <Normaltekst>{getKodeverknavn(behandlingsresultat.avslagsarsak, KodeverkType.AVSLAGSARSAK, vilkarType.SOKNADFRISTVILKARET)}</Normaltekst>
       )}
-      {readOnly && (
-        <>
-          <RadioGroupField name="dummy" readOnly={readOnly} isEdited={isEdited(hasAksjonspunkt, erVilkarOk)}>
-            {[<RadioOption
-              key="dummy"
-              label={(
-                <FormattedMessage
-                  id={findRadioButtonTextCode(erVilkarOk)}
-                  values={{
-                    b: (chunks: any) => <b>{chunks}</b>,
-                  }}
-                />
-                    )}
-              value=""
-            />]}
-          </RadioGroupField>
-          {erVilkarOk === false && !!behandlingsresultat?.avslagsarsak && (
-            <Normaltekst>{getKodeverknavn(behandlingsresultat.avslagsarsak, KodeverkType.AVSLAGSARSAK, vilkarType.SOKNADFRISTVILKARET)}</Normaltekst>
-          )}
-        </>
-      )}
+      <VerticalSpacer sixteenPx />
       <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />
       <VerticalSpacer sixteenPx />
       <ProsessStegSubmitButtonNew

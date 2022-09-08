@@ -52,7 +52,7 @@ interface StaticFunctions {
  *
  * Formkomponent. Registrering og oppdatering av verge.
  */
-export const RegistrereVergeFaktaForm: FunctionComponent<OwnProps & WrappedComponentProps> & StaticFunctions = ({
+const RegistrereVergeFaktaForm: FunctionComponent<OwnProps & WrappedComponentProps> & StaticFunctions = ({
   intl,
   readOnly,
   vergetyper,
@@ -65,7 +65,6 @@ export const RegistrereVergeFaktaForm: FunctionComponent<OwnProps & WrappedCompo
         <SelectField
           name="vergeType"
           label={intl.formatMessage({ id: 'Verge.TypeVerge' })}
-          placeholder={intl.formatMessage({ id: 'Verge.TypeVerge' })}
           validate={[required]}
           selectValues={vergetyper.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
           readOnly={readOnly}
@@ -74,11 +73,10 @@ export const RegistrereVergeFaktaForm: FunctionComponent<OwnProps & WrappedCompo
     </Row>
     {valgtVergeType && (
       <>
-        <VerticalSpacer eightPx />
+        <VerticalSpacer sixteenPx />
         <Row>
           <Column xs="3">
             <InputField
-              bredde="XXL"
               name="navn"
               label={intl.formatMessage({ id: 'Verge.Navn' })}
               validate={[required, hasValidName]}
@@ -88,7 +86,6 @@ export const RegistrereVergeFaktaForm: FunctionComponent<OwnProps & WrappedCompo
           <Column xs="3">
             {valgtVergeType !== VergeType.ADVOKAT && (
               <InputField
-                bredde="S"
                 name="fnr"
                 label={intl.formatMessage({ id: 'Verge.FodselsNummer' })}
                 validate={[required, hasValidFodselsnummer]}
@@ -97,7 +94,6 @@ export const RegistrereVergeFaktaForm: FunctionComponent<OwnProps & WrappedCompo
             )}
             {valgtVergeType === VergeType.ADVOKAT && (
               <InputField
-                bredde="S"
                 name="organisasjonsnummer"
                 label={intl.formatMessage({ id: 'Verge.Organisasjonsnummer' })}
                 validate={[required]}
@@ -106,7 +102,7 @@ export const RegistrereVergeFaktaForm: FunctionComponent<OwnProps & WrappedCompo
             )}
           </Column>
         </Row>
-        <VerticalSpacer eightPx />
+        <VerticalSpacer sixteenPx />
         <FlexContainer>
           <FlexRow>
             <FlexColumn>

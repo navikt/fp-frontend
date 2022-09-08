@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
 import {
   AlleKodeverk, Vilkar, Behandlingsresultat,
@@ -60,7 +60,6 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   skalBrukeOverstyrendeFritekstBrev,
 }) => {
-  const intl = useIntl();
   const { formState: { isDirty } } = formHooks.useFormContext();
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
@@ -71,7 +70,7 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
     <>
       {avslagsårsak && (
         <>
-          <Undertekst><FormattedMessage id="VedtakForm.ArsakTilAvslag" /></Undertekst>
+          <Element><FormattedMessage id="VedtakForm.ArsakTilAvslag" /></Element>
           <Normaltekst>
             {avslagsårsak}
           </Normaltekst>
@@ -90,9 +89,8 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
                 maxLength={1500}
                 readOnly={erReadOnly}
                 badges={[{
-                  type: 'fokus',
-                  text: getLanguageFromSprakkode(språkKode),
-                  titleText: intl.formatMessage({ id: 'Malform.Beskrivelse' }),
+                  type: 'info',
+                  titleText: getLanguageFromSprakkode(språkKode),
                 }]}
               />
             </Column>

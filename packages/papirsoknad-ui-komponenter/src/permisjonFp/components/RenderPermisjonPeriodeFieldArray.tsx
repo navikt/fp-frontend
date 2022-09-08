@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 import moment from 'moment';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { UseFormGetValues } from 'react-hook-form';
-import { Undertekst } from 'nav-frontend-typografi';
+import { Element } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import AlertStripe from 'nav-frontend-alertstriper';
 import {
@@ -162,7 +162,6 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                       <SelectField
                         readOnly={readOnly}
                         name={`${namePart1}.periodeType`}
-                        bredde="m"
                         label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeType' }))}
                         selectValues={mapPeriodeTyper(periodeTyper)}
                         validate={[required]}
@@ -209,7 +208,6 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                         <SelectField
                           readOnly={readOnly}
                           disabled={sokerErMor || skalDisableMorsAktivitet}
-                          bredde="s"
                           name={`${namePart1}.morsAktivitet`}
                           label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.Fellesperiode.morsAktivitet' }))}
                           selectValues={mapAktiviteter(morsAktivitetTyper)}
@@ -218,9 +216,9 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                       </FlexColumn>
                     )}
                     <FlexColumn className={styles.smalHeader}>
-                      <Undertekst className={visEllerSkulOverskriftStyle}>
+                      <Element className={visEllerSkulOverskriftStyle}>
                         <FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />
-                      </Undertekst>
+                      </Element>
                       <CheckboxField
                         readOnly={readOnly}
                         name={`${namePart1}.flerbarnsdager`}
@@ -228,9 +226,9 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                       />
                     </FlexColumn>
                     <FlexColumn className={styles.smalHeader}>
-                      <Undertekst className={visEllerSkulOverskriftStyle}>
+                      <Element className={visEllerSkulOverskriftStyle}>
                         <FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />
-                      </Undertekst>
+                      </Element>
                       <CheckboxField
                         readOnly={readOnly}
                         name={`${namePart1}.harSamtidigUttak`}
@@ -241,7 +239,6 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                       <FlexColumn className={erForsteRad ? '' : styles.alignSamtidigUttak}>
                         <InputField
                           name={`${namePart1}.samtidigUttaksprosent`}
-                          bredde="S"
                           validate={[hasValidDecimal, maxValue100]}
                           label={intl.formatMessage({ id: 'Registrering.Permisjon.SamtidigUttaksprosent' })}
                           normalizeOnBlur={(value: string) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}

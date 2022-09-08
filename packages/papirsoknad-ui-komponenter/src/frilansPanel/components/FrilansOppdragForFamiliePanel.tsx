@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import { Normaltekst } from 'nav-frontend-typografi';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { RadioGroupField, RadioOption, formHooks } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import FrilansOppdragForFamilieFieldArray, {
@@ -29,22 +29,30 @@ const FrilansOppdragForFamiliePanel: FunctionComponent<OwnProps> & StaticFunctio
 
   return (
     <>
-      <RadioGroupField
+      <RadioGroupPanel
         name={`${FRILANS_NAME_PREFIX}.harHattOppdragForFamilie`}
-        readOnly={readOnly}
-        label={<Undertekst><FormattedMessage id="Registrering.FrilansOppdrag.HarHattOppdragForFamilie" /></Undertekst>}
-        parse={(value: string) => value === 'true'}
+        label={<FormattedMessage id="Registrering.FrilansOppdrag.HarHattOppdragForFamilie" />}
         validate={[required]}
-      >
-        <RadioOption label={<FormattedMessage id="Registrering.FrilansOppdrag.Yes" />} value="true" />
-        <RadioOption label={<FormattedMessage id="Registrering.FrilansOppdrag.No" />} value="false" />
-      </RadioGroupField>
+        isReadOnly={readOnly}
+        isHorizontal
+        isTrueOrFalseSelection
+        radios={[{
+          label: <FormattedMessage id="Registrering.FrilansOppdrag.Yes" />,
+          value: 'true',
+        }, {
+          label: <FormattedMessage id="Registrering.FrilansOppdrag.No" />,
+          value: 'false',
+        }]}
+      />
       {harHattOppdragForFamilie && (
-        <ArrowBox>
-          <Normaltekst><FormattedMessage id="Registrering.FrilansOppdrag.OppgiPeriode" /></Normaltekst>
-          <VerticalSpacer fourPx />
-          <FrilansOppdragForFamilieFieldArray readOnly={readOnly} />
-        </ArrowBox>
+        <>
+          <VerticalSpacer eightPx />
+          <ArrowBox>
+            <Normaltekst><FormattedMessage id="Registrering.FrilansOppdrag.OppgiPeriode" /></Normaltekst>
+            <VerticalSpacer fourPx />
+            <FrilansOppdragForFamilieFieldArray readOnly={readOnly} />
+          </ArrowBox>
+        </>
       )}
     </>
   );

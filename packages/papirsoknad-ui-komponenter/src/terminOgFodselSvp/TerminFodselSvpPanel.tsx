@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
-import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { createIntl } from '@navikt/ft-utils';
-import { BorderBox } from '@navikt/ft-ui-komponenter';
+import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Datepicker } from '@navikt/ft-form-hooks';
 import {
   dateBeforeOrEqualToToday,
@@ -10,6 +9,7 @@ import {
   required,
 } from '@navikt/ft-form-validators';
 
+import { Undertittel } from 'nav-frontend-typografi';
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
@@ -32,26 +32,28 @@ const TerminFodselSvpPanel: FunctionComponent<OwnProps> = ({
   readOnly,
 }) => (
   <BorderBox>
-    <SkjemaGruppe legend={intl.formatMessage({ id: 'TerminFodselSvpPanel.TerminOgFodsel' })}>
-      <Row>
-        <Column xs="3">
-          <Datepicker
-            name="termindato"
-            label={intl.formatMessage({ id: 'TerminFodselSvpPanel.Termindato' })}
-            isReadOnly={readOnly}
-            validate={[required, hasValidDate]}
-          />
-        </Column>
-        <Column xs="3">
-          <Datepicker
-            name="foedselsDato"
-            label={intl.formatMessage({ id: 'TerminFodselSvpPanel.Fodselsdato' })}
-            isReadOnly={readOnly}
-            validate={[hasValidDate, dateBeforeOrEqualToToday]}
-          />
-        </Column>
-      </Row>
-    </SkjemaGruppe>
+    <Undertittel>
+      {intl.formatMessage({ id: 'TerminFodselSvpPanel.TerminOgFodsel' })}
+    </Undertittel>
+    <VerticalSpacer sixteenPx />
+    <Row>
+      <Column xs="3">
+        <Datepicker
+          name="termindato"
+          label={intl.formatMessage({ id: 'TerminFodselSvpPanel.Termindato' })}
+          isReadOnly={readOnly}
+          validate={[required, hasValidDate]}
+        />
+      </Column>
+      <Column xs="3">
+        <Datepicker
+          name="foedselsDato"
+          label={intl.formatMessage({ id: 'TerminFodselSvpPanel.Fodselsdato' })}
+          isReadOnly={readOnly}
+          validate={[hasValidDate, dateBeforeOrEqualToToday]}
+        />
+      </Column>
+    </Row>
   </BorderBox>
 );
 

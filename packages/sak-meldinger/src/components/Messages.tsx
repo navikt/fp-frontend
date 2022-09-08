@@ -148,35 +148,31 @@ export const Messages: FunctionComponent<OwnProps> = ({
         name="brevmalkode"
         label={intl.formatMessage({ id: 'Messages.Template' })}
         validate={[required]}
-        placeholder={intl.formatMessage({ id: 'Messages.ChooseTemplate' })}
         selectValues={templates.map((template) => <option key={template.kode} value={template.kode} disabled={!template.tilgjengelig}>{template.navn}</option>)}
-        bredde="xxl"
+        className={styles.bredde}
       />
       {erVarselOmRevurdering && (
         <>
-          <VerticalSpacer eightPx />
+          <VerticalSpacer sixteenPx />
           <SelectField
             name="arsakskode"
             label={intl.formatMessage({ id: 'Messages.Årsak' })}
             validate={[required]}
-            placeholder={intl.formatMessage({ id: 'Messages.VelgÅrsak' })}
             selectValues={filtrerteRevurderingVarslingArsaker.map((cause) => <option key={cause.kode} value={cause.kode}>{cause.navn}</option>)}
-            bredde="xxl"
+            className={styles.bredde}
           />
         </>
       )}
       {showFritekst(brevmalkode, arsakskode) && (
         <>
-          <VerticalSpacer eightPx />
-          <div className="input--xxl">
-            <TextAreaField
-              name="fritekst"
-              label={intl.formatMessage({ id: getFritekstMessage(brevmalkode) })}
-              validate={[required, erVarselOmRevurdering ? maxLength6000 : maxLength4000, minLength3, hasValidText]}
-              maxLength={erVarselOmRevurdering ? 6000 : 4000}
-              badges={[{ type: 'fokus', text: language, titleText: intl.formatMessage({ id: 'Messages.Beskrivelse' }) }]}
-            />
-          </div>
+          <VerticalSpacer sixteenPx />
+          <TextAreaField
+            name="fritekst"
+            label={intl.formatMessage({ id: getFritekstMessage(brevmalkode) })}
+            validate={[required, erVarselOmRevurdering ? maxLength6000 : maxLength4000, minLength3, hasValidText]}
+            maxLength={erVarselOmRevurdering ? 6000 : 4000}
+            badges={[{ type: 'info', titleText: language }]}
+          />
         </>
       )}
       <div className={styles.buttonRow}>

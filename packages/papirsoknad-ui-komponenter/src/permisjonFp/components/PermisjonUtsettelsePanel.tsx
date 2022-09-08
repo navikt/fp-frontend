@@ -43,7 +43,7 @@ const PermisjonUtsettelsePanel: FunctionComponent<OwnProps> & StaticFunctions = 
   const skalUtsette = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalUtsette`) || false;
 
   return (
-    <div>
+    <>
       <Element><FormattedMessage id="Registrering.Permisjon.Utsettelse.Title" /></Element>
       <VerticalSpacer sixteenPx />
       <CheckboxField
@@ -58,7 +58,7 @@ const PermisjonUtsettelsePanel: FunctionComponent<OwnProps> & StaticFunctions = 
           readOnly={readOnly}
         />
       )}
-    </div>
+    </>
   );
 };
 

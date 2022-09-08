@@ -1,15 +1,17 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Undertekst } from 'nav-frontend-typografi';
+import { Element } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
   hasValidDate, hasValidInteger, required, hasValidText,
 } from '@navikt/ft-form-validators';
 import {
-  CheckboxField, Datepicker, InputField, RadioGroupField, RadioOption, TextAreaField, formHooks,
+  CheckboxField, Datepicker, InputField, RadioGroupPanel, TextAreaField, formHooks,
 } from '@navikt/ft-form-hooks';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
+
+import styles from './virksomhetStartetEndretPanel.less';
 
 type VirtuellFeilType = {
   ingenArsakValgt?: boolean;
@@ -65,18 +67,27 @@ export const VirksomhetStartetEndretPanel: FunctionComponent<OwnProps> = ({
   return (
     <>
       <VerticalSpacer sixteenPx />
-      <Undertekst><FormattedMessage id="Registrering.VirksomhetStartetPanel.NewlyStartedOrChanged" /></Undertekst>
-      <VerticalSpacer fourPx />
-      <RadioGroupField name="varigEndretEllerStartetSisteFireAr" readOnly={readOnly} parse={(value: string) => value === 'true'}>
-        <RadioOption key="Ja" label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.Yes" />} value="true" />
-        <RadioOption key="Nei" label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.No" />} value="false" />
-      </RadioGroupField>
+      <RadioGroupPanel
+        name="varigEndretEllerStartetSisteFireAr"
+        label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.NewlyStartedOrChanged" />}
+        isReadOnly={readOnly}
+        isTrueOrFalseSelection
+        isHorizontal
+        radios={[{
+          label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.Yes" />,
+          value: 'true',
+        }, {
+          label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.No" />,
+          value: 'false',
+        }]}
+      />
       {varigEndretEllerStartetSisteFireAr && (
         <Row>
           <Column xs="6">
+            <VerticalSpacer eightPx />
             <ArrowBox>
               <SkjemaGruppe feil={formState.isSubmitted ? formState.errors?.ingenArsakValgt?.message : undefined}>
-                <Undertekst><FormattedMessage id="Registrering.VirksomhetStartetPanel.Reason" /></Undertekst>
+                <Element><FormattedMessage id="Registrering.VirksomhetStartetPanel.Reason" /></Element>
                 <VerticalSpacer fourPx />
                 <CheckboxField name="harVarigEndring" label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.HarVarigEndring" />} />
                 <VerticalSpacer fourPx />
@@ -111,21 +122,23 @@ export const VirksomhetStartetEndretPanel: FunctionComponent<OwnProps> = ({
                   </>
                 )}
               </SkjemaGruppe>
+              <VerticalSpacer sixteenPx />
               <TextAreaField
                 name="beskrivelseAvEndring"
                 label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.VirksomhetEndretBeskrivelse" />}
                 validate={[hasValidText]}
               />
+              <VerticalSpacer sixteenPx />
               <InputField
                 name="inntekt"
                 label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.Inntekt" />}
                 readOnly={readOnly}
                 validate={[hasValidInteger, required]}
+                className={styles.inntektBredde}
                 parse={(value: string) => {
                   const parsedValue = parseInt(value, 10);
                   return Number.isNaN(parsedValue) ? value : parsedValue;
                 }}
-                bredde="S"
               />
             </ArrowBox>
           </Column>

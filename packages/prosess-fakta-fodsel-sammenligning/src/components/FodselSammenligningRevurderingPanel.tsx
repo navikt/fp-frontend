@@ -76,11 +76,11 @@ const FodselSammenligningRevurderingPanel: FunctionComponent<OwnProps> = ({
       <Row>
         {shouldShowVedtaksdatoAsSvangerskapsuke && (
           <Column xs="6">
-            <Normaltekst><FormattedMessage id="FodselsammenligningPanel.FodtISvangerskapsuke" /></Normaltekst>
+            <Element><FormattedMessage id="FodselsammenligningPanel.FodtISvangerskapsuke" /></Element>
           </Column>
         )}
-        <Column xs="3"><Normaltekst><FormattedMessage id={terminOrFodselLabel} /></Normaltekst></Column>
-        <Column xs="3"><Normaltekst><FormattedMessage id="FodselsammenligningPanel.AntallBarn" /></Normaltekst></Column>
+        <Column xs="3"><Element><FormattedMessage id={terminOrFodselLabel} /></Element></Column>
+        <Column xs="3"><Element><FormattedMessage id="FodselsammenligningPanel.AntallBarn" /></Element></Column>
       </Row>
       <Row>
         {shouldShowVedtaksdatoAsSvangerskapsuke && (

@@ -2,9 +2,7 @@ import React, { FunctionComponent, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import {
-  RadioGroupField, RadioOption, Form, TextAreaField,
-} from '@navikt/ft-form-hooks';
+import { RadioGroupPanel, Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import {
   hasValidText, maxLength, minLength, required,
@@ -76,28 +74,25 @@ const AleneomsorgForm: FunctionComponent<OwnProps> = ({
           withoutBorder
           merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG]}
         >
-          <RadioGroupField
+          <RadioGroupPanel
             name="harAleneomsorg"
-            label={<Element><FormattedMessage id="AleneomsorgForm.Aleneomsorg" /></Element>}
+            label={<FormattedMessage id="AleneomsorgForm.Aleneomsorg" />}
             validate={[required]}
-            bredde="XL"
-            readOnly={readOnly}
-            parse={(value: string) => value === 'true'}
-            direction="vertical"
-          >
-            <RadioOption value="true" label={<FormattedMessage id="AleneomsorgForm.HarAleneomsorg" />} />
-            <RadioOption
-              value="false"
-              label={(
-                <FormattedMessage
-                  id="AleneomsorgForm.HarIkkeAleneomsorg"
-                  values={{
-                    b: (chunks: any) => <b>{chunks}</b>,
-                  }}
-                />
-              )}
-            />
-          </RadioGroupField>
+            isReadOnly={readOnly}
+            isTrueOrFalseSelection
+            radios={[{
+              label: <FormattedMessage id="AleneomsorgForm.HarAleneomsorg" />,
+              value: 'true',
+            }, {
+              label: <FormattedMessage
+                id="AleneomsorgForm.HarIkkeAleneomsorg"
+                values={{
+                  b: (chunks: any) => <b>{chunks}</b>,
+                }}
+              />,
+              value: 'false',
+            }]}
+          />
           {harAleneomsorg === false && (
             <>
               <VerticalSpacer thirtyTwoPx />

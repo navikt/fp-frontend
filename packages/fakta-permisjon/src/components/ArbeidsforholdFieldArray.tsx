@@ -10,7 +10,7 @@ import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
 import { required } from '@navikt/ft-form-validators';
 import { TIDENES_ENDE, getKodeverknavnFraKode } from '@navikt/ft-utils';
-import { RadioGroupField, RadioOption, formHooks } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
 import {
   ArbeidOgInntektsmelding, AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, Inntektsmelding, AlleKodeverk,
 } from '@fpsak-frontend/types';
@@ -205,45 +205,44 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                       </Normaltekst>
                     </Column>
                   </Row>
-                  <FlexContainer>
-                    <FlexRow>
-                      <FlexColumn>
-                        <Element><FormattedMessage id="ArbeidsforholdFieldArray.SkalArbeidsforholdetTasMed" /></Element>
-                      </FlexColumn>
-                      <FlexColumn>
-                        <Hjelpetekst
-                          /* @ts-ignore */
-                          popoverProps={{ className: styles.hjelpetekst }}
-                        >
-                          <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel1" />
-                          <VerticalSpacer eightPx />
-                          <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel2" />
-                          <VerticalSpacer eightPx />
-                          <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel3" />
-                          <VerticalSpacer eightPx />
-                          <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel4" />
-                        </Hjelpetekst>
-                      </FlexColumn>
-                    </FlexRow>
-                  </FlexContainer>
-                  <RadioGroupField
+                  <RadioGroupPanel
                     name={`${FIELD_ARRAY_NAME}.${index}.permisjonStatus`}
+                    label={(
+                      <FlexContainer>
+                        <FlexRow>
+                          <FlexColumn>
+                            <FormattedMessage id="ArbeidsforholdFieldArray.SkalArbeidsforholdetTasMed" />
+                          </FlexColumn>
+                          <FlexColumn>
+                            <Hjelpetekst
+                          /* @ts-ignore */
+                              popoverProps={{ className: styles.hjelpetekst }}
+                            >
+                              <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel1" />
+                              <VerticalSpacer eightPx />
+                              <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel2" />
+                              <VerticalSpacer eightPx />
+                              <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel3" />
+                              <VerticalSpacer eightPx />
+                              <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel4" />
+                            </Hjelpetekst>
+                          </FlexColumn>
+                        </FlexRow>
+                      </FlexContainer>
+                    )}
                     validate={[required]}
-                    readOnly={isReadOnly}
-                    direction="vertical"
-                  >
-                    <RadioOption
-                      value={BekreftetPermisjonStatus.IKKE_BRUK_PERMISJON}
-                      label={intl.formatMessage({
+                    isReadOnly={isReadOnly}
+                    radios={[{
+                      label: intl.formatMessage({
                         id: inntektsmelding
                           ? 'ArbeidsforholdFieldArray.TaMedArbeidsforhold' : 'ArbeidsforholdFieldArray.TaMedArbeidsforholdIkkeInntektsmelding',
-                      })}
-                    />
-                    <RadioOption
-                      value={BekreftetPermisjonStatus.BRUK_PERMISJON}
-                      label={intl.formatMessage({ id: 'ArbeidsforholdFieldArray.IkkeTaMedArbeidsforhold' })}
-                    />
-                  </RadioGroupField>
+                      }),
+                      value: BekreftetPermisjonStatus.IKKE_BRUK_PERMISJON,
+                    }, {
+                      label: intl.formatMessage({ id: 'ArbeidsforholdFieldArray.IkkeTaMedArbeidsforhold' }),
+                      value: BekreftetPermisjonStatus.BRUK_PERMISJON,
+                    }]}
+                  />
                   <VerticalSpacer fourPx />
                 </FlexColumn>
               </FlexRow>

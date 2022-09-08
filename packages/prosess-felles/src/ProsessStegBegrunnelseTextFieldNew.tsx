@@ -57,10 +57,8 @@ const ProsessStegBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunct
         name="begrunnelse"
         label={text || intl.formatMessage({ id: getBegrunnelseTextCode(readOnly) })}
         validate={[requiredIfCustomFunctionIsTrueNew(isRequiredFn), minLength3, maxLength1500, hasValidText]}
-        textareaClass={styles.explanationTextarea}
         maxLength={1500}
         readOnly={readOnly}
-        placeholder={intl.formatMessage({ id: 'ProsessStegBegrunnelseTextField.BegrunnVurdering' })}
       />
     </div>
   );

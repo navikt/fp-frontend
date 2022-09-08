@@ -38,7 +38,6 @@ interface OwnProps {
  * foreldrepenger og søker har arbeidet i egen virksomhet.
  * Viser registrerte virksomheter samt knapp for å legge til nye virksomheter.
  */
-
 const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({
   readOnly = false,
   alleKodeverk,

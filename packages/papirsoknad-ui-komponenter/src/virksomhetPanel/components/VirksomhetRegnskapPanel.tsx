@@ -1,12 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
-  formHooks, InputField, RadioGroupField, RadioOption,
+  formHooks, InputField, RadioGroupPanel,
 } from '@navikt/ft-form-hooks';
 import { required, hasValidInteger, hasValidText } from '@navikt/ft-form-validators';
+
+import styles from './virksomhetRegnskapPanel.less';
 
 export type FormValues = {
   harRegnskapsforer?: boolean;
@@ -32,16 +33,25 @@ const VirksomhetRegnskapPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <Undertekst><FormattedMessage id="Registrering.VirksomhetRegnskapPanel.Accountant" /></Undertekst>
-      <VerticalSpacer fourPx />
-      <RadioGroupField name="harRegnskapsforer" readOnly={readOnly} parse={(value: string) => value === 'true'}>
-        <RadioOption key="Ja" label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.Yes" />} value="true" />
-        <RadioOption key="Nei" label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.No" />} value="false" />
-      </RadioGroupField>
+      <RadioGroupPanel
+        name="harRegnskapsforer"
+        label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.Accountant" />}
+        isReadOnly={readOnly}
+        isTrueOrFalseSelection
+        isHorizontal
+        radios={[{
+          label: <FormattedMessage id="Registrering.VirksomhetRegnskapPanel.Yes" />,
+          value: 'true',
+        }, {
+          label: <FormattedMessage id="Registrering.VirksomhetRegnskapPanel.No" />,
+          value: 'false',
+        }]}
+      />
       {harRegnskapsforer && (
         <>
           <Row>
             <Column xs="6">
+              <VerticalSpacer eightPx />
               <ArrowBox>
                 <InputField
                   name="navnRegnskapsforer"
@@ -49,10 +59,12 @@ const VirksomhetRegnskapPanel: FunctionComponent<OwnProps> = ({
                   validate={[required, hasValidText]}
                   label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.AccountantName" />}
                 />
+                <VerticalSpacer sixteenPx />
                 <InputField
                   name="tlfRegnskapsforer"
                   readOnly={readOnly}
                   validate={[required, hasValidInteger]}
+                  className={styles.tlfBredde}
                   label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.AccountantPhone" />}
                 />
               </ArrowBox>

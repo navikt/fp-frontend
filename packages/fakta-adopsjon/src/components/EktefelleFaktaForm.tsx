@@ -4,7 +4,7 @@ import { Container } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
 import { FamilieHendelse } from '@fpsak-frontend/types';
@@ -47,17 +47,22 @@ const EktefelleFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
         <Normaltekst><FormattedMessage id="EktefelleFaktaForm.EktefellesBarn" /></Normaltekst>
         <VerticalSpacer twentyPx />
         <hr className={styles.hr} />
-        <RadioGroupField
+        <RadioGroupPanel
           name="ektefellesBarn"
+          hideLegend
           validate={[required]}
-          bredde="XL"
-          readOnly={readOnly}
+          isReadOnly={readOnly}
           isEdited={ektefellesBarnIsEdited}
-          parse={(value: string) => value === 'true'}
-        >
-          <RadioOption value="false" label={intl.formatMessage({ id: 'EktefelleFaktaForm.ErIkkeValg' })} />
-          <RadioOption value="true" label={intl.formatMessage({ id: 'EktefelleFaktaForm.ErValg' })} />
-        </RadioGroupField>
+          isHorizontal
+          isTrueOrFalseSelection
+          radios={[{
+            label: intl.formatMessage({ id: 'EktefelleFaktaForm.ErIkkeValg' }),
+            value: 'false',
+          }, {
+            label: intl.formatMessage({ id: 'EktefelleFaktaForm.ErValg' }),
+            value: 'true',
+          }]}
+        />
       </Container>
     </FaktaGruppe>
   );

@@ -46,9 +46,8 @@ const VedtakFritekstPanel: FunctionComponent<OwnProps> = ({
               maxLength={1500}
               readOnly={isReadOnly}
               badges={[{
-                type: 'fokus',
-                text: getLanguageFromSprakkode(språkKode),
-                titleText: intl.formatMessage({ id: 'Malform.Beskrivelse' }),
+                type: 'info',
+                titleText: getLanguageFromSprakkode(språkKode),
               }]}
             />
           </Column>

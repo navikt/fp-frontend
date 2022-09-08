@@ -141,7 +141,6 @@ const RenderOppholdPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <SelectField
                     name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.årsak`}
-                    bredde="xl"
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.Opphold.Arsak' }) : ''}
                     selectValues={mapTyper(oppholdsReasons)}
                     validate={[required]}

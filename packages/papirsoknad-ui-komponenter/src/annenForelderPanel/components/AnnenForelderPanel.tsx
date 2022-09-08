@@ -1,12 +1,12 @@
 import React, {
   FunctionComponent, ReactElement, ReactNode, useMemo,
 } from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 import {
-  CheckboxField, formHooks, InputField, RadioGroupField, RadioOption, SelectField,
+  CheckboxField, formHooks, InputField, RadioGroupPanel, SelectField,
 } from '@navikt/ft-form-hooks';
-import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
+import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
 import { Landkode, KodeverkType } from '@navikt/ft-kodeverk';
 
@@ -14,6 +14,9 @@ import kanIkkeOppgiAnnenForelderArsaker from '@fpsak-frontend/kodeverk/src/kanIk
 import {
   hasValidFodselsnummer, hasValidFodselsnummerFormat, required, sammeFodselsnummerSomSokerMessage,
 } from '@navikt/ft-form-validators';
+import { Undertittel } from 'nav-frontend-typografi';
+
+import styles from './annenForelderPanel.less';
 
 const ANNEN_FORELDER_NAME_PREFIX = 'annenForelder';
 const KAN_IKKE_OPPGI_NAME_PREFIX = 'kanIkkeOppgiBegrunnelse';
@@ -67,67 +70,74 @@ const AnnenForelderPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <BorderBox>
-      <SkjemaGruppe legend={formatMessage({ id: 'Registrering.TheOtherParent.Title' })}>
-        <InputField
-          name={`${ANNEN_FORELDER_NAME_PREFIX}.foedselsnummer`}
-          label={formatMessage({ id: 'Registrering.TheOtherParent.Fodselsnummer' })}
-          bredde="S"
-          parse={(value: string) => (value ? value.replace(/\s/g, '') : value)}
-          readOnly={readOnly}
-          validate={kanIkkeOppgiAnnenForelder ? [] : [
-            required,
-            hasValidFodselsnummerFormat,
-            hasValidFodselsnummer,
-            (foedselsnummer) => (foedselsnummer === fagsakPersonnummer ? sammeFodselsnummerSomSokerMessage() : null),
-          ]}
-          disabled={kanIkkeOppgiAnnenForelder}
-        />
-        <CheckboxField
-          name={`${ANNEN_FORELDER_NAME_PREFIX}.kanIkkeOppgiAnnenForelder`}
-          label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent' })}
-          readOnly={readOnly}
-          onChange={() => (isSubmitted ? trigger() : undefined)}
-        />
-        {kanIkkeOppgiAnnenForelder === true && (
+      <Undertittel>
+        <FormattedMessage id={formatMessage({ id: 'Registrering.TheOtherParent.Title' })} />
+      </Undertittel>
+      <VerticalSpacer sixteenPx />
+      <InputField
+        name={`${ANNEN_FORELDER_NAME_PREFIX}.foedselsnummer`}
+        label={formatMessage({ id: 'Registrering.TheOtherParent.Fodselsnummer' })}
+        parse={(value: string) => (value ? value.replace(/\s/g, '') : value)}
+        readOnly={readOnly}
+        className={styles.inputBredde}
+        validate={kanIkkeOppgiAnnenForelder ? [] : [
+          required,
+          hasValidFodselsnummerFormat,
+          hasValidFodselsnummer,
+          (foedselsnummer) => (foedselsnummer === fagsakPersonnummer ? sammeFodselsnummerSomSokerMessage() : null),
+        ]}
+        disabled={kanIkkeOppgiAnnenForelder}
+      />
+      <VerticalSpacer sixteenPx />
+      <CheckboxField
+        name={`${ANNEN_FORELDER_NAME_PREFIX}.kanIkkeOppgiAnnenForelder`}
+        label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent' })}
+        readOnly={readOnly}
+        onChange={() => (isSubmitted ? trigger() : undefined)}
+      />
+      {kanIkkeOppgiAnnenForelder === true && (
+        <>
+          <VerticalSpacer eightPx />
           <ArrowBox>
             <SkjemaGruppe title={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.Title' })}>
-              <RadioGroupField
+              <RadioGroupPanel
                 name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.arsak`}
-                readOnly={readOnly}
-                direction="vertical"
+                hideLegend
                 validate={[required]}
-              >
-                <RadioOption
-                  label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.1' })}
-                  value={kanIkkeOppgiAnnenForelderArsaker.UKJENT_FORELDER}
-                />
-                <RadioOption
-                  label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.2' })}
-                  value={kanIkkeOppgiAnnenForelderArsaker.IKKE_NORSK_FNR}
-                />
-              </RadioGroupField>
+                isReadOnly={readOnly}
+                radios={[{
+                  label: formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.1' }),
+                  value: kanIkkeOppgiAnnenForelderArsaker.UKJENT_FORELDER,
+                }, {
+                  label: formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.2' }),
+                  value: kanIkkeOppgiAnnenForelderArsaker.IKKE_NORSK_FNR,
+                }]}
+              />
               {kanIkkeOppgiBegrunnelse?.arsak === kanIkkeOppgiAnnenForelderArsaker.IKKE_NORSK_FNR && (
-                <>
-                  <SelectField
-                    name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.land`}
-                    label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Land' })}
-                    selectValues={filtrerLandOgLagOptions(sorterteLand)}
-                    bredde="l"
-                    readOnly={readOnly}
-                  />
-                  <InputField
-                    name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.utenlandskFoedselsnummer`}
-                    label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.UtenlandsFodselsnummer' })}
-                    bredde="S"
-                    readOnly={readOnly}
-                  />
-                </>
+              <>
+                <VerticalSpacer sixteenPx />
+                <SelectField
+                  name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.land`}
+                  label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Land' })}
+                  selectValues={filtrerLandOgLagOptions(sorterteLand)}
+                  className={styles.inputBredde}
+                  readOnly={readOnly}
+                />
+                <VerticalSpacer sixteenPx />
+                <InputField
+                  name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.utenlandskFoedselsnummer`}
+                  label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.UtenlandsFodselsnummer' })}
+                  className={styles.inputBredde}
+                  readOnly={readOnly}
+                />
+              </>
               )}
             </SkjemaGruppe>
           </ArrowBox>
-        )}
-        {permisjonRettigheterPanel}
-      </SkjemaGruppe>
+        </>
+      )}
+      <VerticalSpacer sixteenPx />
+      {permisjonRettigheterPanel}
     </BorderBox>
   );
 };

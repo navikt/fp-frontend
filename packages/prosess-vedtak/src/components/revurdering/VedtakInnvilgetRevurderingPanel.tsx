@@ -52,7 +52,7 @@ const VedtakInnvilgetRevurderingPanel: FunctionComponent<OwnProps> = ({
           <>
             <Row>
               <Column xs="4">
-                <Undertekst><FormattedMessage id="VedtakForm.RevurderingFP.Aarsak" /></Undertekst>
+                <Element><FormattedMessage id="VedtakForm.RevurderingFP.Aarsak" /></Element>
                 <Normaltekst>
                   {revurderingsÅrsakString}
                 </Normaltekst>

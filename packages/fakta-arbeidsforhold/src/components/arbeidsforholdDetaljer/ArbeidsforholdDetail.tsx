@@ -1,5 +1,5 @@
 import { DateLabel, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { AoIArbeidsforhold } from '@fpsak-frontend/types';
@@ -48,7 +48,7 @@ const ArbeidsforholdDetail: FunctionComponent<PureOwnProps> = ({
     <>
       <VerticalSpacer thirtyTwoPx />
       <FaktaGruppe>
-        <Element><FormattedMessage id="ArbeidsforholdDetail.Header" /></Element>
+        <Undertittel><FormattedMessage id="ArbeidsforholdDetail.Header" /></Undertittel>
         <PermisjonPeriode arbeidsforhold={valgtArbeidsforhold} />
         {skalBrukeMedOverstyrtPeriode && (
           <>

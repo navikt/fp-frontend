@@ -8,7 +8,7 @@ import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { getKodeverknavnFn } from '@navikt/ft-utils';
 import { required } from '@navikt/ft-form-validators';
 import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { FamilieHendelse, AlleKodeverk } from '@fpsak-frontend/types';
 import { BekreftMannAdoptererAksjonspunktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -18,8 +18,8 @@ interface OwnProps {
   readOnly: boolean;
   farSokerType?: string;
   alleKodeverk: AlleKodeverk;
-  mannAdoptererAlene: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  mannAdoptererAlene: boolean;
 }
 
 export type FormValues = {
@@ -39,9 +39,9 @@ interface StaticFunctions {
 const MannAdoptererAleneFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
   farSokerType,
   readOnly,
-  mannAdoptererAlene,
   alleKodeverk,
   alleMerknaderFraBeslutter,
+  mannAdoptererAlene,
 }) => {
   const intl = useIntl();
   return (
@@ -56,17 +56,22 @@ const MannAdoptererAleneFaktaForm: FunctionComponent<OwnProps> & StaticFunctions
           && <Normaltekst>{getKodeverknavnFn(alleKodeverk)(farSokerType, KodeverkType.FAR_SOEKER_TYPE)}</Normaltekst>}
         <VerticalSpacer sixteenPx />
         <hr className={styles.hr} />
-        <RadioGroupField
+        <RadioGroupPanel
           name="mannAdoptererAlene"
-          validate={[required]}
-          bredde="XL"
-          readOnly={readOnly}
+          hideLegend
           isEdited={mannAdoptererAlene}
-          parse={(value: string) => value === 'true'}
-        >
-          <RadioOption label={intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.AdoptererAlene' })} value="true" />
-          <RadioOption label={intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.AdoptererIkkeAlene' })} value="false" />
-        </RadioGroupField>
+          validate={[required]}
+          isReadOnly={readOnly}
+          isHorizontal
+          isTrueOrFalseSelection
+          radios={[{
+            label: intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.AdoptererAlene' }),
+            value: 'true',
+          }, {
+            label: intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.AdoptererIkkeAlene' }),
+            value: 'false',
+          }]}
+        />
       </Container>
     </FaktaGruppe>
   );

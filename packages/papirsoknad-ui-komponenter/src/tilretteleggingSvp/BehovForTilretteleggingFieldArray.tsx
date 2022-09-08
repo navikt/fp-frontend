@@ -1,7 +1,9 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import { required, maxValue } from '@navikt/ft-form-validators';
 import {
   Datepicker, InputField, SelectField, PeriodFieldArray, formHooks,
@@ -68,6 +70,7 @@ const BehovForTilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
     >
       {(field, index, getRemoveButton) => (
         <Row key={field.id} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+          <VerticalSpacer sixteenPx />
           <Column xs="12">
             <FlexContainer>
               <FlexRow>
@@ -88,7 +91,6 @@ const BehovForTilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
                         {intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.KanIkkeGjennomfores' })}
                       </option>,
                     ]}
-                    bredde="xxl"
                   />
                 </FlexColumn>
                 <FlexColumn>
@@ -104,7 +106,6 @@ const BehovForTilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
                     readOnly={readOnly}
                     name={`${name}.${index}.stillingsprosent`}
                     label={index === 0 ? intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.Stillingsprosent' }) : ''}
-                    bredde="XXL"
                     validate={[required, maxValue3]}
                     maxLength={99}
                   />

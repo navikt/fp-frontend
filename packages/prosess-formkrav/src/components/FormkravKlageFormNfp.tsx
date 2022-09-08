@@ -28,7 +28,7 @@ type TilbakekrevingInfo = {
 const buildInitialValues = (klageVurdering: KlageVurdering): FormValues => {
   const klageFormkavResultatNfp = klageVurdering ? klageVurdering.klageFormkravResultatNFP : null;
   return {
-    vedtak: klageFormkavResultatNfp ? getPaKlagdVedtak(klageFormkavResultatNfp) : null,
+    vedtak: klageFormkavResultatNfp ? getPaKlagdVedtak(klageFormkavResultatNfp) : '',
     begrunnelse: klageFormkavResultatNfp ? klageFormkavResultatNfp.begrunnelse : null,
     erKlagerPart: klageFormkavResultatNfp ? klageFormkavResultatNfp.erKlagerPart : null,
     erKonkret: klageFormkavResultatNfp ? klageFormkavResultatNfp.erKlageKonkret : null,
