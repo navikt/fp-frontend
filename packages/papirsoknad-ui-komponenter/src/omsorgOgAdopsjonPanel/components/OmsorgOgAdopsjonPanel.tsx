@@ -161,10 +161,9 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
         <Row>
           <Column xs="6">
             {fields.map((field, index) => (
-              <>
+              <React.Fragment key={field.id}>
                 <VerticalSpacer sixteenPx />
                 <Datepicker
-                  key={field.id}
                   name={`${OMSORG_NAME_PREFIX}.foedselsDato.${index}.dato`}
                   isReadOnly={readOnly}
                   validate={familieHendelseType === fht.ADOPSJON
@@ -172,7 +171,7 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
                     : [hasValidDate, dateBeforeOrEqualToToday, getValideringMotAnnenFødselsdato(index, fodselsdato)]}
                   label={formatMessage({ id: 'Registrering.Adopsjon.FodselsdatoBarnN' }, { n: index + 1 })}
                 />
-              </>
+              </React.Fragment>
             ))}
           </Column>
         </Row>

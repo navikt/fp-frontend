@@ -33,9 +33,9 @@ const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
 });
 
 const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): KlageFormType => ({
-  klageMedholdArsak: klageVurderingResultat ? klageVurderingResultat.klageMedholdArsak : null,
+  klageMedholdArsak: klageVurderingResultat ? klageVurderingResultat.klageMedholdArsak : '',
   klageVurderingOmgjoer: klageVurderingResultat ? klageVurderingResultat.klageVurderingOmgjoer : null,
-  klageHjemmel: klageVurderingResultat ? klageVurderingResultat.klageHjemmel : null,
+  klageHjemmel: klageVurderingResultat ? klageVurderingResultat.klageHjemmel : '',
   klageVurdering: klageVurderingResultat ? klageVurderingResultat.klageVurdering : null,
   begrunnelse: klageVurderingResultat ? klageVurderingResultat.begrunnelse : null,
   fritekstTilBrev: klageVurderingResultat ? klageVurderingResultat.fritekstTilBrev : null,

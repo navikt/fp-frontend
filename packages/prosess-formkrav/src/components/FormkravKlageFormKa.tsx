@@ -34,7 +34,7 @@ const buildInitialValues = (klageVurdering: KlageVurdering): FormValues => {
   const hjemmelNFP = klageVurdering && klageVurdering.klageVurderingResultatNFP && klageVurdering.klageVurderingResultatNFP.klageHjemmel !== '-'
     ? klageVurdering.klageVurderingResultatNFP.klageHjemmel : null;
   return {
-    vedtak: klageFormkavResultatKa ? getPaKlagdVedtak(klageFormkavResultatKa) : null,
+    vedtak: klageFormkavResultatKa ? getPaKlagdVedtak(klageFormkavResultatKa) : '',
     begrunnelse: klageFormkavResultatKa ? klageFormkavResultatKa.begrunnelse : null,
     erKlagerPart: klageFormkavResultatKa ? klageFormkavResultatKa.erKlagerPart : null,
     erKonkret: klageFormkavResultatKa ? klageFormkavResultatKa.erKlageKonkret : null,

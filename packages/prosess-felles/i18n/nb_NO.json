@@ -15,6 +15,7 @@
   
   "ProsessStegBegrunnelseTextField.ExplanationRequired": "Vurdering",
   "ProsessStegBegrunnelseTextField.ExplanationRequiredReadOnly": "Begrunnelse",
+  "ProsessStegBegrunnelseTextField.BegrunnVurdering": "Begrunn vurderingen din",
 
   "SubmitButton.ConfirmInformation": "Bekreft og fortsett"
 }

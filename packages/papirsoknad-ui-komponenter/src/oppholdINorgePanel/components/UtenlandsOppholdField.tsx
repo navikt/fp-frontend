@@ -104,14 +104,14 @@ const UtenlandsOppholdField: FunctionComponent<OwnProps> = ({
       append={append}
     >
       {(field, index, getRemoveButton) => (
-        <>
+        <React.Fragment key={field.id}>
           {index > 0 && (
             <>
               <AvsnittSkiller />
               <VerticalSpacer sixteenPx />
             </>
           )}
-          <Row key={field.id}>
+          <Row>
             <Column xs="12">
               <SelectField
                 name={`${name}.${index}.land`}
@@ -180,7 +180,7 @@ const UtenlandsOppholdField: FunctionComponent<OwnProps> = ({
             </Column>
           </Row>
           <VerticalSpacer sixteenPx />
-        </>
+        </React.Fragment>
       )}
     </PeriodFieldArray>
   );
