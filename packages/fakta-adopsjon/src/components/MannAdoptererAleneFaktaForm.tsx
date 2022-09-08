@@ -19,6 +19,7 @@ interface OwnProps {
   farSokerType?: string;
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  mannAdoptererAlene: boolean;
 }
 
 export type FormValues = {
@@ -40,6 +41,7 @@ const MannAdoptererAleneFaktaForm: FunctionComponent<OwnProps> & StaticFunctions
   readOnly,
   alleKodeverk,
   alleMerknaderFraBeslutter,
+  mannAdoptererAlene,
 }) => {
   const intl = useIntl();
   return (
@@ -57,6 +59,7 @@ const MannAdoptererAleneFaktaForm: FunctionComponent<OwnProps> & StaticFunctions
         <RadioGroupPanel
           name="mannAdoptererAlene"
           hideLegend
+          isEdited={mannAdoptererAlene}
           validate={[required]}
           isReadOnly={readOnly}
           isHorizontal

@@ -7,6 +7,7 @@ import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image,
 } from '@navikt/ft-ui-komponenter';
 
+import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import behandleImageURL from '@fpsak-frontend/assets/images/advarsel.svg';
 import {
   hasValidText, maxLength, minLength, required,
@@ -115,8 +116,8 @@ const Tilbaketrekkpanel: FunctionComponent<OwnProps> = ({
             name={radioFieldName}
             validate={[required]}
             isReadOnly={readOnly}
+            isEdited={!isAksjonspunktOpen(vurderTilbaketrekkAP.status)}
             isHorizontal
-            isTrueOrFalseSelection
             radios={[{
               value: 'false',
               label: <FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Utfør" />,
