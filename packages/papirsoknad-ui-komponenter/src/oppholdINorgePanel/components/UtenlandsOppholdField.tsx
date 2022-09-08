@@ -143,7 +143,7 @@ const UtenlandsOppholdField: FunctionComponent<OwnProps> = ({
                         if (erTidligereOpphold) {
                           return dateBeforeOrEqual(moment().format(ISO_DATE_FORMAT))(fomVerdi);
                         }
-                        return mottattDato ? dateAfterOrEqual(mottattDato || null)(fomVerdi) : undefined;
+                        return mottattDato ? dateAfterOrEqual(mottattDato)(fomVerdi) : undefined;
                       },
                       getOverlappingValidator(getValues, name),
                     ]}
