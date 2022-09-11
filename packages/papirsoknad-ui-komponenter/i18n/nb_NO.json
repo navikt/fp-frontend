@@ -21,9 +21,9 @@
   "Registrering.Permisjon.MorUføretrygd": "Bare far rett og mor mottar uføretryd?",
   "Registrering.Permisjon.MorUføretrygd.Yes": "Ja",
   "Registrering.Permisjon.MorUføretrygd.No": "Nei",
-  "Registrering.Permisjon.MorForeldrepengerEØS": "Bare far rett og mor har foreldrepenger fra land i EØS?",
-  "Registrering.Permisjon.MorForeldrepengerEØS.Yes": "Ja",
-  "Registrering.Permisjon.MorForeldrepengerEØS.No": "Nei",
+  "Registrering.Permisjon.AnnenForelderRettEØS": "Annen forelder har tilstrekkelig opptjening fra land i EØS?",
+  "Registrering.Permisjon.AnnenForelderRettEØS.Yes": "Ja",
+  "Registrering.Permisjon.AnnenForelderRettEØS.No": "Nei",
 
   "Registrering.TerminOgFodsel": "Opplysninger om termin og fødsel",
   "Registrering.Termin.Fodt": "Er barnet født?",
@@ -133,11 +133,11 @@
   "Registrering.VirksomhetStartetPanel.VirksomhetEndretBeskrivelse": "Beskriv endringen i næring",
   "Registrering.VirksomhetStartetPanel.Inntekt": "Årsinntekt",
   "Registrering.VirksomhetStartetPanel.MaFylleUtEnArsak": "Må fylle ut minst en årsak",
-  
+
   "Registrering.VirksomhetRelasjonPanel.Relation": "Relasjon",
   "Registrering.VirksomhetRelasjonPanel.No": "Nei, har ikke nære venner eller er i familie tilknyttet næringen",
   "Registrering.VirksomhetRelasjonPanel.Yes": "Ja, har nære venner eller er i familie tilknyttet næringen",
-  
+
   "Registrering.VirksomhetRegnskapPanel.Accountant": "Har søker regnskapsfører eller revisor?",
   "Registrering.VirksomhetRegnskapPanel.Yes": "Ja",
   "Registrering.VirksomhetRegnskapPanel.No": "Nei",
@@ -156,7 +156,7 @@
   "Registrering.EgenVirksomhet.Title": "Egen næringsvirksomhet",
   "Registrering.EgenVirksomhet.Yes": "Ja, søker har arbeidet i egen næringsvirksomhet i løpet av de 10 siste månedene",
   "Registrering.EgenVirksomhet.No": "Nei, søker har ikke arbeidet i egen næringsvirksomhet i løpet av de 10 siste månedene",
-  
+
   "Registrering.RegistrerVirksomhetPanel.Add": "Legg til næringsvirksomhet",
   "Registrering.RegistrerVirksomhetPanel.Name": "Navn på virksomhet",
   "Registrering.RegistrerVirksomhetPanel.ArrayMinLength": "Listen må ha lengde større enn 1",
@@ -182,7 +182,7 @@
   "BehovForTilrettteleggingFieldArray.KanGjennomfores": "a) kan gjennomføres slik at arbeidstakeren kan fortsette med samme stilling fra og med",
   "BehovForTilrettteleggingFieldArray.RedusertArbeid": "b) kan gjennomføres slik at arbeidstakeren kan fortsette med redusert arbeidstid fra og med",
   "BehovForTilrettteleggingFieldArray.KanIkkeGjennomfores": "c) kan ikke gjennomføres og arbeidstakeren må midlertidig gå ut av sitt arbeid fra og med",
-  
+
   "TilretteleggingForArbeidsgiverFieldArray.OrgNr": "Arbeidsgivers orgnr/fnr",
   "TilretteleggingForArbeidsgiverFieldArray.TilretteleggingFra": "Jordmor/lege oppgir at tilrettelegging er nødvendig fra og med",
   "TilretteleggingForArbeidsgiverFieldArray.LeggTilArbeidsgiver": "Legg til arbeidsgiver",

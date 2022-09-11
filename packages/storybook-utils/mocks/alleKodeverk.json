@@ -6233,8 +6233,8 @@
       "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
     },
     {
-      "kode": "MOR_MOTTAR_STØNAD_EØS",
-      "navn": "Mor mottar foreldrepenger fra land i EØS",
+      "kode": "ANNEN_FORELDER_RETT_EØS",
+      "navn": "Annen forelder har tilstrekkelig opptjening fra land i EØS",
       "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
     },
     {
