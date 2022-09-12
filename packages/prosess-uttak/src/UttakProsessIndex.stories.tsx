@@ -125,7 +125,7 @@ const ytelsefordeling = {
   },
   rettigheterAnnenforelder: {
     skalAvklareAnnenforelderUføretrygd: false,
-    skalAvklareAnnenforelderStønadEØS: false,
+    skalAvklareAnnenForelderRettEØS: false,
   },
   endringsdato: '2019-10-14',
   gjeldendeDekningsgrad: 100,

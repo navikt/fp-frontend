@@ -8,8 +8,8 @@ type Ytelsefordeling = Readonly<{
     bekreftetAnnenforelderRett?: boolean;
     bekreftetAnnenforelderUføretrygd?: boolean;
     skalAvklareAnnenforelderUføretrygd: boolean;
-    bekreftetAnnenforelderStønadEØS?: boolean;
-    skalAvklareAnnenforelderStønadEØS: boolean;
+    bekreftetAnnenForelderRettEØS?: boolean;
+    skalAvklareAnnenForelderRettEØS: boolean;
   }
   endringsdato?: string;
   gjeldendeDekningsgrad: number;

@@ -117,7 +117,7 @@ export const MedUtsettelse = () => {
         ikkeOmsorgPerioder: null,
         rettigheterAnnenforelder: {
           skalAvklareAnnenforelderUføretrygd: false,
-          skalAvklareAnnenforelderStønadEØS: false,
+          skalAvklareAnnenForelderRettEØS: false,
         },
         endringsdato: '2022-01-31',
         gjeldendeDekningsgrad: 100,
