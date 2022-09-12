@@ -18,7 +18,7 @@
     "nav-frontend-grid": "2.0.2",
     "nav-frontend-grid-style": "1.0.3",
     "react": "18.2.0",
-    "react-hook-form": "7.34.2",
+    "react-hook-form": "7.35.0",
     "react-intl": "6.1.1"
   },
   "devDependencies": {
