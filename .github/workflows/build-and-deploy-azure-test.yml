@@ -6,7 +6,7 @@ on:
       - forberede-azure-ad-login
 env:
   CLUSTER: "dev-fss"
-  IMAGE_BASE: ghcr.io/navikt/fp-frontend-azure-ad-login
+  IMAGE_BASE: ghcr.io/navikt/fp-frontend-azure
   SHOULD_DEPLOY: false
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
       - name: Sette opp Node
         uses: actions/setup-node@v2.4.0
         with:
-          node-version: 15.x
+          node-version: 18.x
 
       - name: Get yarn cache
         id: yarn-cache

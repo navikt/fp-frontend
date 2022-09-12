@@ -9,4 +9,4 @@ packages
 eslint
 travis
 webpack
-!packages/server
+!server

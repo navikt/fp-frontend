@@ -1,14 +1,22 @@
 import axios from 'axios';
 import utils from './utils.js';
+import config from '../config.js'
+import TunnelAgent from 'tunnel-agent'; //axios er dårlig å håndtere proxy selv
+import * as url from 'url';
 
-const getGraphRequest = (authClient, req, url) => new Promise(((resolve, reject) => {
+const getGraphRequest = (authClient, req, graphUrl) => new Promise(((resolve, reject) => {
   const clientId = 'https://graph.microsoft.com';
   const scope = 'https://graph.microsoft.com/.default';
   utils.getOnBehalfOfAccessToken(authClient, req, clientId, scope)
-    .then((accessToken) => axios.get(url, { headers: { Authorization: `Bearer ${accessToken}` } }))
+    .then((accessToken) => axios.create({proxy: false})
+      .get(graphUrl, {
+        headers: {Authorization: `Bearer ${accessToken}`},
+        httpsAgent: TunnelAgent.httpsOverHttp({proxy: url.parse(config.server.proxy)})
+      }))
     .then((response) => resolve(response.data))
     .catch((err) => {
       if (err.response.data) {
+        console.error('Error during graph call: ', err);
         reject(err.response.data);
       } else {
         reject(err);

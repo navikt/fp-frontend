@@ -42,6 +42,4 @@ const setup = (app) => {
   app.use(session(options));
 };
 
-
-
 export default { setup };

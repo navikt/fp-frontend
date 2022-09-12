@@ -6,6 +6,7 @@ import morganBody from 'morgan-body';
 import morgan from 'morgan';
 import session from './session.js';
 import limit from './ratelimit.js';
+import * as headers from "./headers.js";
 
 // for debugging during development
 import routes from './routes.js';
@@ -21,13 +22,35 @@ async function startApp() {
     morgan('dev');
 
     session.setup(server);
+    headers.setup(server);
 
     server.use(express.json());
     server.use(express.urlencoded({ extended: true }));
     server.use(limit);
 
     // setup defaults for CORS and HTTP headers, adjust as needed
-    server.use(helmet());
+    //server.use(helmet());
+
+    server.use(
+      helmet({
+        contentSecurityPolicy: {
+          useDefaults: true,
+          directives: {
+            connectSrc: [
+              "'self'",
+              'https://sentry.gc.nav.no',
+            ],
+            frameSrc: ["'none'"],
+            childSrc: ["'none'"],
+            mediaSrc: ["'none'"],
+            objectSrc: ["'none'"],
+          },
+        },
+        hidePoweredBy: true,
+        noSniff: true
+      }),
+    );
+
     server.use(cors({
       origin: config.server.host,
       methods: ['GET'],
@@ -50,7 +73,7 @@ async function startApp() {
 
     server.listen(port, () => console.log(`Listening on port ${port}`));
   } catch (error) {
-    console.error('Error during start-up', error);
+    console.error('Error during start-up: ', error);
   }
 }
 

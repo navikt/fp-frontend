@@ -37,7 +37,7 @@ const server = {
   }),
 
   // name of the cookie, set to whatever your want
-  cookieName: 'security-blueprints-login',
+  cookieName: 'Id-login-token',
 };
 
 const azureAd = {
@@ -97,7 +97,7 @@ const reverseProxy = {
   path: envVar({
     name: 'DOWNSTREAM_API_PATH',
     required: false,
-  }) || 'downstream',
+  }) || 'fpsak',
   url: envVar({ name: 'DOWNSTREAM_API_URL' }),
 };
 

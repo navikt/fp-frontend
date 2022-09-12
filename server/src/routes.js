@@ -7,7 +7,7 @@ import reverseProxy from './proxy/reverse-proxy.js';
 import msgraph from './auth/msgraph.js';
 
 const router = express.Router();
-const ingress = '/fpsak-azure-login-test';
+const ingress = '';
 
 const ensureAuthenticated = async (req, res, next) => {
   if (req.isAuthenticated() && authUtils.hasValidAccessToken(req)) {
@@ -26,12 +26,12 @@ const setup = (authClient) => {
   router.get(`${ingress}/isReady`, (req, res) => res.send('Ready'));
 
   // Routes for passport to handle the authentication flow
-  router.get(`${ingress}/login`, passport.authenticate('azureOidc', { failureRedirect: `${ingress}/login` }));
-  router.use(`${ingress}/oauth2/callback`, passport.authenticate('azureOidc', { failureRedirect: `${ingress}/login` }), (req, res) => {
+    router.get(`${ingress}/login`, passport.authenticate('azureOidc', { failureRedirect: `${ingress}/login` }));
+    router.use(`${ingress}/oauth2/callback`, passport.authenticate('azureOidc', { failureRedirect: `${ingress}/login` }), (req, res) => {
     if (session.redirectTo) {
       res.redirect(session.redirectTo);
     } else {
-      res.redirect(`${ingress}/`);
+      res.redirect(`${ingress}/fpsak`);
     }
   });
 
@@ -70,7 +70,7 @@ const setup = (authClient) => {
   reverseProxy.setup(router, authClient);
 
   // serve static files
-  router.use(express.static('/app/fpsak/'));
+  router.use('/fpsak', express.static('/app/fpsak/'));
   router.use('*', (req, res) => {
     res.sendFile('index.html', { root: '/app/fpsak' });
   });

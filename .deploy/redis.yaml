@@ -5,8 +5,11 @@ metadata:
     team: teamforeldrepenger
   name: fpsak-redis
   namespace: teamforeldrepenger
+  annotations:
+    nais.io/run-as-group: "0" # Fix permissions for bitnami/redis
+    nais.io/read-only-file-system: "false" # Fix permissions for bitnami/redis
 spec:
-  image: redis:6.2.5-alpine # Ikke bruk bitnami siden fp-frontend ikke støtter passord ennå
+  image: bitnami/redis:6.0
   port: 6379
   replicas:
     min: 1
