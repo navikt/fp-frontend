@@ -137,8 +137,11 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
     expect(screen.getByText('Har annen forelder rett?')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Nei'));
 
+    expect(screen.getByText('Har annen forelder tilstrekkelig opptjening fra land i EØS?')).toBeInTheDocument();
+    await userEvent.click(screen.getAllByText('Nei')[1]);
+
     expect(await screen.findByText('Mottar annen forelder uføretrygd, jfr 14-14 tredje ledd?')).toBeInTheDocument();
-    await userEvent.click(screen.getAllByText('Ja')[1]);
+    await userEvent.click(screen.getAllByText('Ja')[2]);
 
     await userEvent.type(utils.getByLabelText('Begrunn vurderingen'), 'Dette er en begrunnelse');
 
@@ -149,6 +152,7 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
       kode: '5086',
       begrunnelse: 'Dette er en begrunnelse',
       annenforelderHarRett: false,
+      annenForelderHarRettEØS: false,
       annenforelderMottarUføretrygd: true,
     });
   });

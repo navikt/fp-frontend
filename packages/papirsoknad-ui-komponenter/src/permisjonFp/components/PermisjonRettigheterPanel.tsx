@@ -10,8 +10,8 @@ const ANNEN_FORELDER_NAME_PREFIX = 'annenForelder';
 export type FormValues = {
   sokerHarAleneomsorg: boolean;
   denAndreForelderenHarRettPaForeldrepenger?: boolean;
+  annenForelderRettEØS?: boolean;
   morMottarUføretrygd?: boolean;
-  morHarForeldrepengerEØS?: boolean;
 }
 
 interface OwnProps {
@@ -24,13 +24,14 @@ interface OwnProps {
 
 const PermisjonRettigheterPanel: FunctionComponent<OwnProps> = ({
   readOnly,
-  denAndreForelderenHarRettPaForeldrepenger,
   sokerErMor,
 }) => {
   const intl = useIntl();
 
   const { watch } = formHooks.useFormContext<{ [ANNEN_FORELDER_NAME_PREFIX]: FormValues }>();
   const sokerHarAleneomsorg = watch(`${ANNEN_FORELDER_NAME_PREFIX}.sokerHarAleneomsorg`);
+  const annenForelderHarRett = watch(`${ANNEN_FORELDER_NAME_PREFIX}.denAndreForelderenHarRettPaForeldrepenger`);
+  const annenForelderRettEØS = watch(`${ANNEN_FORELDER_NAME_PREFIX}.annenForelderRettEØS`);
 
   return (
     <>
@@ -67,39 +68,39 @@ const PermisjonRettigheterPanel: FunctionComponent<OwnProps> = ({
           }]}
         />
       )}
-      {!sokerErMor && sokerHarAleneomsorg === false && denAndreForelderenHarRettPaForeldrepenger === false && (
-        <>
-          <RadioGroupPanel
-            name={`${ANNEN_FORELDER_NAME_PREFIX}.morMottarUføretrygd`}
-            label={intl.formatMessage({ id: 'Registrering.Permisjon.MorUføretrygd' })}
-            validate={[required]}
-            isReadOnly={readOnly}
-            isHorizontal
-            isTrueOrFalseSelection
-            radios={[{
-              label: intl.formatMessage({ id: 'Registrering.Permisjon.MorUføretrygd.Yes' }),
-              value: 'true',
-            }, {
-              label: intl.formatMessage({ id: 'Registrering.Permisjon.MorUføretrygd.No' }),
-              value: 'false',
-            }]}
-          />
-          <RadioGroupPanel
-            name={`${ANNEN_FORELDER_NAME_PREFIX}.morHarForeldrepengerEØS`}
-            label={intl.formatMessage({ id: 'Registrering.Permisjon.MorForeldrepengerEØS' })}
-            validate={[required]}
-            isReadOnly={readOnly}
-            isHorizontal
-            isTrueOrFalseSelection
-            radios={[{
-              label: intl.formatMessage({ id: 'Registrering.Permisjon.MorForeldrepengerEØS.Yes' }),
-              value: 'true',
-            }, {
-              label: intl.formatMessage({ id: 'Registrering.Permisjon.MorForeldrepengerEØS.No' }),
-              value: 'false',
-            }]}
-          />
-        </>
+      {sokerHarAleneomsorg === false && annenForelderHarRett === false && (
+        <RadioGroupPanel
+          name={`${ANNEN_FORELDER_NAME_PREFIX}.annenForelderRettEØS`}
+          label={intl.formatMessage({ id: 'Registrering.Permisjon.AnnenForelderRettEØS' })}
+          validate={[required]}
+          isReadOnly={readOnly}
+          isHorizontal
+          isTrueOrFalseSelection
+          radios={[{
+            label: intl.formatMessage({ id: 'Registrering.Permisjon.AnnenForelderRettEØS.Yes' }),
+            value: 'true',
+          }, {
+            label: intl.formatMessage({ id: 'Registrering.Permisjon.AnnenForelderRettEØS.No' }),
+            value: 'false',
+          }]}
+        />
+      )}
+      {!sokerErMor && sokerHarAleneomsorg === false && annenForelderHarRett === false && annenForelderRettEØS === false && (
+        <RadioGroupPanel
+          name={`${ANNEN_FORELDER_NAME_PREFIX}.morMottarUføretrygd`}
+          label={intl.formatMessage({ id: 'Registrering.Permisjon.MorUføretrygd' })}
+          validate={[required]}
+          isReadOnly={readOnly}
+          isHorizontal
+          isTrueOrFalseSelection
+          radios={[{
+            label: intl.formatMessage({ id: 'Registrering.Permisjon.MorUføretrygd.Yes' }),
+            value: 'true',
+          }, {
+            label: intl.formatMessage({ id: 'Registrering.Permisjon.MorUføretrygd.No' }),
+            value: 'false',
+          }]}
+        />
       )}
     </>
   );

@@ -1,29 +1,29 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
+import { formHooks, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 type FormValues = {
   harAnnenForelderRett: boolean;
   mottarAnnenForelderUforetrygd: boolean;
-  mottarAnnenForelderStonadEOS: boolean;
+  annenForelderRettEØS: boolean;
 }
 
 interface OwnProps {
   readOnly: boolean;
   avklareUforetrygd: boolean;
-  avklareStonadEOS: boolean;
+  avklareRettEØS: boolean;
 }
 
 const HarAnnenForelderRettFelter: FunctionComponent<OwnProps> = ({
   readOnly,
   avklareUforetrygd,
-  avklareStonadEOS,
+  avklareRettEØS,
 }) => {
   const { watch } = formHooks.useFormContext<FormValues>();
   const harAnnenForelderRett = watch('harAnnenForelderRett');
-  const mottarAnnenForelderUforetrygd = watch('mottarAnnenForelderUforetrygd');
+  const annenForelderRettEØS = watch('annenForelderRettEØS');
 
   return (
     <>
@@ -42,10 +42,10 @@ const HarAnnenForelderRettFelter: FunctionComponent<OwnProps> = ({
         }]}
       />
       <VerticalSpacer thirtyTwoPx />
-      {harAnnenForelderRett === false && avklareUforetrygd && (
+      {harAnnenForelderRett === false && avklareRettEØS && (
         <RadioGroupPanel
-          name="mottarAnnenForelderUforetrygd"
-          label={<FormattedMessage id="HarAnnenForelderRettFelter.MottarUforetrygd" />}
+          name="annenForelderRettEØS"
+          label={<FormattedMessage id="HarAnnenForelderRettFelter.AnnenForelderRettEØS" />}
           validate={[required]}
           isReadOnly={readOnly}
           isTrueOrFalseSelection
@@ -58,12 +58,12 @@ const HarAnnenForelderRettFelter: FunctionComponent<OwnProps> = ({
           }]}
         />
       )}
-      {harAnnenForelderRett === false && mottarAnnenForelderUforetrygd === false && avklareStonadEOS && (
+      {harAnnenForelderRett === false && (!avklareRettEØS || annenForelderRettEØS === false) && avklareUforetrygd && (
         <>
           <VerticalSpacer thirtyTwoPx />
           <RadioGroupPanel
-            name="mottarAnnenForelderStonadEOS"
-            label={<FormattedMessage id="HarAnnenForelderRettFelter.MottarStonadEOS" />}
+            name="mottarAnnenForelderUforetrygd"
+            label={<FormattedMessage id="HarAnnenForelderRettFelter.MottarUforetrygd" />}
             validate={[required]}
             isReadOnly={readOnly}
             isTrueOrFalseSelection
