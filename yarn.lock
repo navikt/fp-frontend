@@ -4093,6 +4093,14 @@
     core-js "^3.8.2"
     global "^4.4.0"
 
+"@storybook/client-logger@6.5.11":
+  version "6.5.11"
+  resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-6.5.11.tgz#1ec2a439864915f9edd38b5cda727f156d85d910"
+  integrity sha512-8W+8xXrNAx6uFK5/3Ce6aV1qEC+up49jivGmnxPSz/edmVsCbK7Nd0/shfTAV2b6ndi8xLwMDSx/9dZuX/iZNA==
+  dependencies:
+    core-js "^3.8.2"
+    global "^4.4.0"
+
 "@storybook/codemod@6.5.10":
   version "6.5.10"
   resolved "https://registry.yarnpkg.com/@storybook/codemod/-/codemod-6.5.10.tgz#a1ad723a8602ca942cecdad6c44783d9a82a6cdc"
@@ -4609,6 +4617,16 @@
   integrity sha512-BvTQBBcSEwKKcsVmF+Ol6v0RIQUr+bxP7gb10wtfBd23mZTEFA0C1N5FnZr/dDeiBKG1pvf1UKvoYA731y0BsA==
   dependencies:
     "@storybook/client-logger" "6.5.10"
+    core-js "^3.8.2"
+    memoizerific "^1.11.3"
+    regenerator-runtime "^0.13.7"
+
+"@storybook/theming@6.5.11":
+  version "6.5.11"
+  resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-6.5.11.tgz#90f7dde0329020452bae11f431529c2a1f297f0f"
+  integrity sha512-nRas7MbMuyCw6NJbYYHLLyyBoVq+ClxodpfZxuIJ1W/T8Ysq/VT5Aje9tmT/1zYX6lYI1JjKN/Uha49aFPCHHA==
+  dependencies:
+    "@storybook/client-logger" "6.5.11"
     core-js "^3.8.2"
     memoizerific "^1.11.3"
     regenerator-runtime "^0.13.7"
@@ -7850,15 +7868,10 @@ core-js-pure@^3.20.2, core-js-pure@^3.8.1:
   resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.24.1.tgz#8839dde5da545521bf282feb7dc6d0b425f39fd3"
   integrity sha512-r1nJk41QLLPyozHUUPmILCEMtMw24NG4oWK6RbsDdjzQgg9ZvrUsPBj1MnG0wXXp1DCDU6j+wUvEmBSrtRbLXg==
 
-core-js@3.25.1:
+core-js@3.25.1, core-js@^3.0.4, core-js@^3.6.5, core-js@^3.8.2:
   version "3.25.1"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.25.1.tgz#5818e09de0db8956e16bf10e2a7141e931b7c69c"
   integrity sha512-sr0FY4lnO1hkQ4gLDr24K0DGnweGO1QwSj5BpfQjpSJPdqWalja4cTps29Y/PJVG/P7FYlPDkH3hO+Tr0CvDgQ==
-
-core-js@^3.0.4, core-js@^3.6.5, core-js@^3.8.2:
-  version "3.24.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.24.1.tgz#cf7724d41724154010a6576b7b57d94c5d66e64f"
-  integrity sha512-0QTBSYSUZ6Gq21utGzkfITDylE8jWC9Ne1D2MrhvlsZBI1x39OdDIVbzSqtgMndIy6BlHxBXpMGqzZmnztg2rg==
 
 core-util-is@~1.0.0:
   version "1.0.3"
