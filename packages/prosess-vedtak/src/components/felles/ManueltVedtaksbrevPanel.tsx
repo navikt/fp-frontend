@@ -96,7 +96,7 @@ const ManueltVedtaksbrevPanel: FunctionComponent<OwnProps> = ({
             maxLength={5000}
             readOnly={isReadOnly}
             // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
-            parse={(value: string) => value.replaceAll('‑', '-')}
+            parse={(value: string) => value.replaceAll('‑', '-').replaceAll('\t', ' ')}
           />
         </Column>
       </Row>

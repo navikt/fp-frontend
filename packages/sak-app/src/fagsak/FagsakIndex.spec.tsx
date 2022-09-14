@@ -84,7 +84,7 @@ describe('<FagsakIndex>', () => {
       </RestApiMock>,
     );
 
-    expect(await screen.findByText('Venter...')).toBeInTheDocument();
+    expect(await screen.findByText('venter...')).toBeInTheDocument();
   });
 
   it('skal hente alle behandlinger fra fpsak og fptilbake', async () => {
