@@ -1,12 +1,12 @@
 import cors from 'cors';
 import express from 'express';
+import bodyParser from 'body-parser';
+import session from './session.js';
 import helmet from 'helmet';
 import passport from 'passport';
-import morganBody from 'morgan-body';
-import morgan from 'morgan';
-import session from './session.js';
 import limit from './ratelimit.js';
 import * as headers from "./headers.js";
+import logger from './log.js';
 
 // for debugging during development
 import routes from './routes.js';
@@ -18,18 +18,16 @@ const { port } = config.server;
 
 async function startApp() {
   try {
-    morganBody(server);
-    morgan('dev');
-
     session.setup(server);
     headers.setup(server);
 
-    server.use(express.json());
-    server.use(express.urlencoded({ extended: true }));
-    server.use(limit);
+    // Logging i json format
+    server.use(logger.morganMiddleware);
 
-    // setup defaults for CORS and HTTP headers, adjust as needed
-    //server.use(helmet());
+    server.use(bodyParser.json());
+    server.use(bodyParser.urlencoded({ extended: true }));
+
+    //server.use(limit);
 
     server.use(
       helmet({
@@ -39,6 +37,8 @@ async function startApp() {
             connectSrc: [
               "'self'",
               'https://sentry.gc.nav.no',
+              'https://graph.microsoft.com',
+              'https://fplos.dev.intern.nav.no',
             ],
             frameSrc: ["'none'"],
             childSrc: ["'none'"],
@@ -51,15 +51,19 @@ async function startApp() {
       }),
     );
 
-    server.use(cors({
-      origin: config.server.host,
-      methods: ['GET'],
-      exposedHeaders: ['Origin', 'Content-Type', 'Accept', 'X-Requested-With'],
-    }));
+    // CORS konfig
+    server.use(
+      cors({
+        origin: config.server.host,
+        methods: config.cors.allowedMethods,
+        exposedHeaders: config.cors.exposedHeaders,
+        allowedHeaders: config.cors.allowedHeaders
+      })
+    );
 
     // initialize passport and restore authentication state, if any, from the session
-    server.use(passport.initialize());
-    server.use(passport.session());
+    server.use(passport.initialize({}));
+    server.use(passport.session({}));
 
     const azureAuthClient = await azure.client();
     const azureOidcStrategy = azure.strategy(azureAuthClient);
@@ -71,11 +75,11 @@ async function startApp() {
     // setup routes
     server.use('/', routes.setup(azureAuthClient));
 
-    server.listen(port, () => console.log(`Listening on port ${port}`));
+    server.listen(port, () => logger.info(`Listening on port ${port}`));
   } catch (error) {
-    console.error('Error during start-up: ', error);
+    logger.error('Error during start-up: ', error);
   }
 }
 
 startApp()
-  .catch((err) => console.log(err));
+  .catch((err) => logger.error(err));

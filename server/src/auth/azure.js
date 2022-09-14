@@ -2,6 +2,7 @@ import { custom, Issuer, Strategy } from 'openid-client';
 import authUtils from './utils.js';
 import config from '../config.js';
 import httpProxy from '../proxy/http-proxy.js';
+import logger from '../log.js';
 
 const metadata = {
   client_id: config.azureAd.clientId,
@@ -17,7 +18,7 @@ const client = async () => {
     });
   }
   const issuer = await Issuer.discover(config.azureAd.discoveryUrl);
-  console.log(`Discovered issuer ${issuer.issuer}`);
+  logger.info(`Discovered issuer ${issuer.issuer}`);
   const jwks = config.azureAd.clientJwks;
   return new issuer.Client(metadata, jwks);
 };
@@ -40,7 +41,7 @@ const strategy = (client) => {
     params: {
       response_types: config.azureAd.responseTypes,
       response_mode: config.azureAd.responseMode,
-      scope: `openid ${config.azureAd.clientId}/.default`,
+      scope: `openid profile offline_access ${config.azureAd.clientId}/.default`,
     },
     extras: { clientAssertionPayload: { aud: client.issuer.metadata.token_endpoint } },
     passReqToCallback: false,

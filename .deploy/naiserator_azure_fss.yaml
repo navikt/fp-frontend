@@ -6,7 +6,7 @@ metadata:
   labels:
     team: teamforeldrepenger
 spec:
-  image: ghcr.io/navikt/fp-frontend-azure:0.42
+  image: ghcr.io/navikt/fp-frontend-azure:0.75
   port: 9090
   ingresses:
     - "https://fpsak.dev.intern.nav.no"
@@ -40,26 +40,34 @@ spec:
           - "azp_name"
   webproxy: true
   env:
+    - name: HOST
+      value: "https://fpsak.dev.intern.nav.no"
     - name: PORT
       value: "9090"
     - name: REDIS_HOST
       value: "fpsak-redis.teamforeldrepenger.svc.nais.local"
     - name: REDIS_PORT
       value: "6379"
-    - name: DOWNSTREAM_API_URL
-      value: "https://fpsak.dev.adeo.no"
-    - name: DOWNSTREAM_API_PATH
-      value: ""
-    - name: DOWNSTREAM_API_CLIENT_ID
-      value: "dev-fss.teamforeldrepenger.fpsak"
+    - name: CORS_ALLOWED_HEADERS
+      value: "Referer, Origin, Content-Type, Accept, X-Requested-With, cache-control, x_Nav-CallId, pragma, expires"
+    - name: CORS_EXPOSED_HEADERS
+      value: "Location"
+    - name: CORS_ALLOWED_METHODS
+      value: "GET, POST"
     - name: AZURE_APP_LOGOUT_REDIRECT_URL
-      value: https://fpsak.dev.intern.nav.no/
+      value: https://familie.nav.no/
     - name: AZURE_APP_REDIRECT_URL
       value: https://fpsak.dev.intern.nav.no/oauth2/callback
-    - name: SESSION_KEY
-      value: sdfldfsdfflewrjsdjsldfl
+    - name: PROXY_CONFIG
+      value: '{"apis":[{"path":"/fpsak/api","url":"http://fpsak","scopes":"api://dev-fss.teamforeldrepenger.fpsak/.default"},
+                       {"path":"/fptilbake/api","url":"http://fptilbake","scopes":"api://dev-fss.teamforeldrepenger.fptilbake/.default"},
+                       {"path":"/fplos/api","url":"http://fplos","scopes":"api://dev-fss.teamforeldrepenger.fplos/.default"},
+                       {"path":"/fpoppdrag/api","url":"http://fpoppdrag","scopes":"api://dev-fss.teamforeldrepenger.fpoppdrag/.default"},
+                       {"path":"/fpformidling/api","url":"http://fpformidling","scopes":"api://dev-fss.teamforeldrepenger.fpformidling/.default"}
+              ]}'
   envFrom:
     - secret: redis-password
+    - secret: fp-frontend-secrets # cookie sigh and verify
 #  accessPolicy:
 #    outbound:
 #      rules:
