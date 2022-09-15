@@ -1,0 +1,70 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: fp-frontend-azure
+  namespace: teamforeldrepenger
+  labels:
+    team: teamforeldrepenger
+spec:
+  image: ghcr.io/navikt/fp-frontend-azure-gcp:0.07
+  port: 9090
+  ingresses:
+    - "https://fpsak-gcp.dev.intern.nav.no"
+  liveness:
+    path: /isAlive
+    initialDelay: 10
+    timeout: 1
+    periodSeconds: 5
+    failureThreshold: 10
+  readiness:
+    path: /isReady
+    initialDelay: 10
+    timeout: 1
+  replicas:
+    min: 1
+    max: 2
+    cpuThresholdPercentage: 50
+  resources:
+    limits:
+      cpu: 500m
+      memory: 64Mi
+    requests:
+      cpu: 200m
+      memory: 32Mi
+  azure:
+    application:
+      enabled: true
+      claims:
+        extra:
+          - "NAVident"
+          - "azp_name"
+    sidecar:
+      enabled: true
+      autoLogin: false
+  accessPolicy:
+    outbound:
+      external:
+        - host: fpsak-api.dev-fss-pub.nais.io
+        - host: fplos.dev-fss-pub.nais.io
+        - host: fpformidling.dev-fss-pub.nais.io
+        - host: fpoppdrag.dev-fss-pub.nais.io
+        - host: fptilbake.dev-fss-pub.nais.io
+  env:
+    - name: HOST
+      value: "https://fpsak-gcp.dev.intern.nav.no"
+    - name: PORT
+      value: "9090"
+    - name: CORS_ALLOWED_HEADERS
+      value: "Referer, Origin, Content-Type, Accept, X-Requested-With, cache-control, x_Nav-CallId, pragma, expires, X-Forwarded-Proto"
+    - name: CORS_EXPOSED_HEADERS
+      value: "Location"
+    - name: CORS_ALLOWED_METHODS
+      value: "GET, POST"
+    - name: PROXY_CONFIG
+      value: '{"apis":[{"path":"/fpsak/api","url":"https://fpsak-api.dev-fss-pub.nais.io","scopes":"api://dev-fss.teamforeldrepenger.fpsak/.default"},
+                       {"path":"/fptilbake/api","url":"https://fptilbake.dev-fss-pub.nais.io","scopes":"api://dev-fss.teamforeldrepenger.fptilbake/.default"},
+                       {"path":"/fplos/api","url":"https://fplos.dev-fss-pub.nais.io","scopes":"api://dev-fss.teamforeldrepenger.fplos/.default"},
+                       {"path":"/fpoppdrag/api","url":"https://fpoppdrag.dev-fss-pub.nais.io","scopes":"api://dev-fss.teamforeldrepenger.fpoppdrag/.default"},
+                       {"path":"/fpformidling/api","url":"https://formidling.dev-fss-pub.nais.io","scopes":"api://dev-fss.teamforeldrepenger.fpformidling/.default"}
+              ]}'
+

@@ -1,14 +1,3 @@
-const cspString =
-  `default-src 'self';` +
-  `connect-src 'https://sentry.gc.nav.no/';` +
-  `font-src 'self' data:;` +
-  `upgrade-insecure-requests;` +
-  `block-all-mixed-content;` +
-  `base-uri;` +
-  `object-src 'none';` +
-  `style-src 'self' 'unsafe-inline';` +
-  `script-src 'self';`;
-
 export const setup = (app) => {
   app.disable("x-powered-by");
   app.use((req, res, next) => {
@@ -17,11 +6,6 @@ export const setup = (app) => {
     res.header("X-Frame-Options", "DENY");
     res.header("Referrer-Policy", "origin");
     res.header("Strict-Transport-Security", "max-age=31536000")
-
-    // CSP
-    res.header("Content-Security-Policy", cspString);
-    res.header("X-WebKit-CSP", cspString);
-    res.header("X-Content-Security-Policy", cspString);
 
     res.header("Feature-Policy", "geolocation 'none'; microphone 'none'; camera 'none'");
     if (process.env.NODE_ENV === "development") {

@@ -1,6 +1,5 @@
 import winston from 'winston';
 import morgan from 'morgan';
-import morganJson from 'morgan-json';
 
 const { format } = winston;
 const { combine, json, timestamp, colorize } = format;
@@ -69,13 +68,7 @@ const skip = () => {
   return env !== "development";
 };
 
-const formatJson = morganJson({
-  short: ':method :url :status',
-  length: ':res[content-length]',
-  'response-time': ':response-time ms'
-});
-
-const vanligFormat = ":remote-addr :method :url :status :res[content-length] - :response-time ms";
+const vanligFormat = ":method :url :status :res[content-length] - :response-time ms";
 
 const morganMiddleware = morgan(
   vanligFormat, { stream, skip }

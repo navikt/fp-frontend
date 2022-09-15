@@ -1,24 +1,23 @@
 import cors from 'cors';
 import express from 'express';
 import bodyParser from 'body-parser';
-import session from './session.js';
 import helmet from 'helmet';
-import passport from 'passport';
 import limit from './ratelimit.js';
 import * as headers from "./headers.js";
 import logger from './log.js';
 
 // for debugging during development
-import routes from './routes.js';
 import config from './config.js';
 import azure from './auth/azure.js';
+import msgraph from "./auth/msgraph.js";
+import reverseProxy from "./reverse-proxy.js";
 
 const server = express();
 const { port } = config.server;
 
 async function startApp() {
   try {
-    session.setup(server);
+
     headers.setup(server);
 
     // Logging i json format
@@ -29,6 +28,8 @@ async function startApp() {
 
     //server.use(limit);
 
+    server.set("trust proxy", 1);
+
     server.use(
       helmet({
         contentSecurityPolicy: {
@@ -38,7 +39,9 @@ async function startApp() {
               "'self'",
               'https://sentry.gc.nav.no',
               'https://graph.microsoft.com',
-              'https://fplos.dev.intern.nav.no',
+              'dev.intern.nav.no',
+              'dev-fss-pub.nais.io',
+              'prod-fss-pub.nais.io'
             ],
             frameSrc: ["'none'"],
             childSrc: ["'none'"],
@@ -61,19 +64,64 @@ async function startApp() {
       })
     );
 
-    // initialize passport and restore authentication state, if any, from the session
-    server.use(passport.initialize({}));
-    server.use(passport.session({}));
+    // Liveness and readiness probes for Kubernetes / nais
+    server.get(['/isAlive', '/isReady'], (req, res) => {
+      res.status(200).send('Alive');
+    });
 
-    const azureAuthClient = await azure.client();
-    const azureOidcStrategy = azure.strategy(azureAuthClient);
+    server.get(["/oauth2/login"], async (req, res) => {
+      res.status(502).send({
+        message: "Wonderwall must handle /oauth2/login",
+      });
+    });
 
-    passport.use('azureOidc', azureOidcStrategy);
-    passport.serializeUser((user, done) => done(null, user));
-    passport.deserializeUser((user, done) => done(null, user));
+    const ensureAuthenticated = async (req, res, next) => {
+      if (!req.headers.authorization) {
+        res.redirect("/oauth2/login");
+      } else {
+        next();
+      }
+    };
 
-    // setup routes
-    server.use('/', routes.setup(azureAuthClient));
+    // The routes below require the user to be authenticated
+    server.use(ensureAuthenticated);
+
+    server.get(["/logout"], async (req, res) => {
+      if (req.headers.authorization) {
+        res.redirect("/oauth2/logout");
+      }
+    });
+
+    // DO NOT DO THIS IN PRODUCTION
+    server.get('/', (req, res) => {
+      res.redirect("/oauth2/session");
+    });
+
+    const authClient = await azure.client();
+
+    // return user info fetched from the Microsoft Graph API
+    server.get('/me', (req, res) => {
+      msgraph.getUserInfoFromGraphApi(authClient, req)
+        .then((userinfo) => res.json(userinfo))
+        .catch((err) => res.status(500)
+          .json(err));
+    });
+
+    // return groups that the user is a member of from the Microsoft Graph API
+    server.get('/me/memberOf', (req, res) => {
+      msgraph.getUserGroups(authClient, req)
+        .then((userinfo) => res.json(userinfo))
+        .catch((err) => res.status(500)
+          .json(err));
+    });
+
+    reverseProxy.setup(server, authClient);
+
+    // serve static files
+    server.use('/fpsak', express.static('/app/fpsak/'));
+    server.use('*', (req, res) => {
+      res.sendFile('index.html', { root: '/app/fpsak' });
+    });
 
     server.listen(port, () => logger.info(`Listening on port ${port}`));
   } catch (error) {
