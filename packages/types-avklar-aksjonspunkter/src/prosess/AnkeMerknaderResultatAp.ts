@@ -9,6 +9,10 @@ type AnkeMerknaderResultatAp = {
   trygderettVurdering?: string;
   trygderettOmgjoerArsak?: string;
   trygderettVurderingOmgjoer?: string;
+  påAnketKlageBehandlingUuid?: string;
+  sendTilKabal?: boolean;
+  klageHjemmel?: string;
+  sendtTilTrygderetten?: string;
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_VURDERING_AV_ANKE_MERKNADER>;
 
 export default AnkeMerknaderResultatAp;
