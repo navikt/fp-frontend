@@ -56,7 +56,7 @@ polyfill().then(() => {
   const root = createRoot(app);
 
   root.render(
-    <BrowserRouter basename="/fpsak/">
+    <BrowserRouter basename="/fpsak">
       <RestApiProvider>
         <RestApiErrorProvider>
           <AppIndex />
