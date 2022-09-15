@@ -56,12 +56,18 @@ interface OwnProps {
   opneSokeside: () => void;
   toggleSkalOppdatereFagsakContext: (skalOppdatereFagsak: boolean) => void;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
+  alleBehandlinger: {
+    uuid: string;
+    type: string;
+    avsluttet?: string;
+  }[];
 }
 
 const AnkeTrygderettsbehandlingProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   opneSokeside,
   toggleSkalOppdatereFagsakContext,
   oppdaterProsessStegOgFaktaPanelIUrl,
+  alleBehandlinger,
   ...props
 }) => {
   const intl = useIntl();
@@ -94,6 +100,7 @@ const AnkeTrygderettsbehandlingProsessStegInitPanel: FunctionComponent<OwnProps 
           />
           <AnkeTrygderettsbehandlingProsessIndex
             {...data}
+            behandlinger={alleBehandlinger}
           />
         </>
       )}

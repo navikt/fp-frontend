@@ -23,6 +23,7 @@ type AnkeVurdering = Readonly<{
   enableKabal?: boolean;
   underBehandlingKabal?: boolean;
   behandletAvKabal?: boolean;
+  sendtTilTrygderetten?: string;
 }>;
 
 export default AnkeVurdering;

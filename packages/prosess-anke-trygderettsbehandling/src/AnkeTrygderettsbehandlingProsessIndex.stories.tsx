@@ -49,5 +49,6 @@ export const visPanelForResultatVedStadfestYtelsesvedtak = () => (
         begrunnelse: 'Dette er en begrunnelse',
       },
     } as AnkeVurdering}
+    behandlinger={[]}
   />
 );
