@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Heading } from '@navikt/ds-react';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
 import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -57,7 +57,7 @@ const AndreYtelserPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
 
   return (
     <BorderBox>
-      <Undertittel><FormattedMessage id="Registrering.AndreYtelser.Title" /></Undertittel>
+      <Heading size="small"><FormattedMessage id="Registrering.AndreYtelser.Title" /></Heading>
       <VerticalSpacer sixteenPx />
       {filtrerteArbeidstyper.map((ay) => {
         const ytelseFieldName = `${ay.kode}_${ANDRE_YTELSER_PERIODE_SUFFIX}`;

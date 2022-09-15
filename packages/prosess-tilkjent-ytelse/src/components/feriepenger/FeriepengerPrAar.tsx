@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Label, BodyShort } from '@navikt/ds-react';
 
 import { ArbeidsgiverOpplysningerPerId, FeriepengegrunnlagAndel, AlleKodeverk } from '@fpsak-frontend/types';
 import { DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@navikt/ft-utils';
@@ -94,15 +94,15 @@ const FeriepengerPrAar: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <Element>
+      <Label size="small">
         <FormattedMessage id="TilkjentYtelse.Feriepenger.Opptjeningsår" values={{ år: opptjeningsår }} />
-      </Element>
+      </Label>
       <Table headerTextCodes={HEADER_TEXT_CODES}>
         {andelerPrId.map((andel) => (
           <TableRow key={andel.identifikator}>
-            <TableColumn><Normaltekst>{andel.visningsnavn}</Normaltekst></TableColumn>
-            <TableColumn><Normaltekst>{andel.utbetaltIRefusjon}</Normaltekst></TableColumn>
-            <TableColumn><Normaltekst>{andel.utbetaltTilSøker}</Normaltekst></TableColumn>
+            <TableColumn><BodyShort size="small">{andel.visningsnavn}</BodyShort></TableColumn>
+            <TableColumn><BodyShort size="small">{andel.utbetaltIRefusjon}</BodyShort></TableColumn>
+            <TableColumn><BodyShort size="small">{andel.utbetaltTilSøker}</BodyShort></TableColumn>
           </TableRow>
         ))}
       </Table>

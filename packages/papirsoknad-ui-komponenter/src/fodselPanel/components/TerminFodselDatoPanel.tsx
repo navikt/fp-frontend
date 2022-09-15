@@ -2,8 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { UseFormGetValues } from 'react-hook-form';
 import moment from 'moment';
-import { Element, Undertittel } from 'nav-frontend-typografi';
-import Alertstripe from 'nav-frontend-alertstriper';
+import { Alert, Label, Heading } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import {
   Datepicker, InputField, RadioGroupPanel, formHooks,
@@ -75,7 +74,7 @@ const TerminFodselDatoPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <BorderBox>
-      <Undertittel>{intl.formatMessage({ id: 'Registrering.TerminOgFodsel' })}</Undertittel>
+      <Heading size="small">{intl.formatMessage({ id: 'Registrering.TerminOgFodsel' })}</Heading>
       <VerticalSpacer sixteenPx />
       <RadioGroupPanel
         name="erBarnetFodt"
@@ -163,11 +162,11 @@ const TerminFodselDatoPanel: FunctionComponent<OwnProps> = ({
               {erForeldrepenger && (
               <>
                 <VerticalSpacer sixteenPx />
-                <Alertstripe type="info" form="inline">
-                  <Element>
+                <Alert size="small" variant="info">
+                  <Label size="small">
                     <FormattedMessage id="Registrering.RettTilPrematuruker" />
-                  </Element>
-                </Alertstripe>
+                  </Label>
+                </Alert>
                 <VerticalSpacer sixteenPx />
                 <FlexRow>
                   <FlexColumn>

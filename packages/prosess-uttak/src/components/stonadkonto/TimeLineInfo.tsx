@@ -1,7 +1,7 @@
 import React, { Component, ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Label, BodyShort } from '@navikt/ds-react';
 
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
@@ -151,17 +151,17 @@ class TimeLineInfo extends Component<OwnProps, OwnState> {
               <div className={styles.remainingUttak}>
                 <Row>
                   <Column xs="5">
-                    <Element>
+                    <Label size="small">
                       <FormattedMessage id="TimeLineInfo.Stonadinfo.DisponibleStonadsdager" />
-                    </Element>
+                    </Label>
                   </Column>
                   <Column xs="4">
-                    <Normaltekst>
+                    <BodyShort size="small">
                       <FormattedMessage
                         id="TimeLineInfo.Stonadinfo.Total"
                         values={{ ukerVerdi: findTilgjengeligeUker(stonadskonto), b: (chunks: any) => <b>{chunks}</b> }}
                       />
-                    </Normaltekst>
+                    </BodyShort>
                   </Column>
                 </Row>
                 <Row>
@@ -186,10 +186,10 @@ class TimeLineInfo extends Component<OwnProps, OwnState> {
                         {updatekonto.kontoinfo.aktivitetSaldoDtoList.map((arbforhold) => (
                           <TableRow key={createKey(arbforhold)}>
                             <TableColumn>
-                              <Normaltekst>{createTextStrings(arbforhold.aktivitetIdentifikator, arbeidsgiverOpplysningerPerId)}</Normaltekst>
+                              <BodyShort size="small">{createTextStrings(arbforhold.aktivitetIdentifikator, arbeidsgiverOpplysningerPerId)}</BodyShort>
                             </TableColumn>
                             <TableColumn>
-                              <Normaltekst>
+                              <BodyShort size="small">
                                 {arbforhold.saldo
                               && (
                               <FormattedMessage
@@ -205,7 +205,7 @@ class TimeLineInfo extends Component<OwnProps, OwnState> {
                                 }}
                               />
                               )}
-                              </Normaltekst>
+                              </BodyShort>
                             </TableColumn>
                           </TableRow>
                         ))}

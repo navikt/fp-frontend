@@ -4,10 +4,10 @@ import { action } from '@storybook/addon-actions';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 import { KodeverkType } from '@navikt/ft-kodeverk';
+import { Button } from '@navikt/ds-react';
 
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
-import { Hovedknapp } from 'nav-frontend-knapper';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import AndreYtelserPapirsoknadIndex from './AndreYtelserPapirsoknadIndex';
 
@@ -38,9 +38,9 @@ const Template: Story<{
         alleKodeverk={alleKodeverk as any}
       />
       <VerticalSpacer fourtyPx />
-      <Hovedknapp htmlType="submit">
+      <Button size="small" variant="primary">
         Lagreknapp (Kun for test)
-      </Hovedknapp>
+      </Button>
     </Form>
   );
 };

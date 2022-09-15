@@ -4,7 +4,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import {
   FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
 } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 
 import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
@@ -133,7 +133,7 @@ const RenderUttakTable: FunctionComponent<OwnProps & WrappedComponentProps> = ({
           const textStrings = createTextStrings(fields.get(index), arbeidsgiverOpplysningerPerId);
           return (
             <TableRow key={uttakElementFieldId}>
-              <TableColumn><Normaltekst className={styles.forsteKolWidth}>{textStrings.arbeidsforhold}</Normaltekst></TableColumn>
+              <TableColumn><BodyShort size="small" className={styles.forsteKolWidth}>{textStrings.arbeidsforhold}</BodyShort></TableColumn>
               <TableColumn>
                 <div className={styles.selectStonad}>
                   <SelectField
@@ -181,7 +181,7 @@ const RenderUttakTable: FunctionComponent<OwnProps & WrappedComponentProps> = ({
                   </div>
                 </Row>
               </TableColumn>
-              <TableColumn><Normaltekst>{textStrings.prosentArbeidText}</Normaltekst></TableColumn>
+              <TableColumn><BodyShort size="small">{textStrings.prosentArbeidText}</BodyShort></TableColumn>
               <TableColumn>
                 <Row>
                   <Column xs="7">

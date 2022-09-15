@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import Modal from 'nav-frontend-modal';
+import { Modal } from '@navikt/ds-react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';

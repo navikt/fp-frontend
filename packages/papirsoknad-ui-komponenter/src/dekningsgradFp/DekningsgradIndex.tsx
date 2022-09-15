@@ -4,7 +4,7 @@ import { required } from '@navikt/ft-form-validators';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
-import { Undertittel } from 'nav-frontend-typografi';
+import { Heading } from '@navikt/ds-react';
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
@@ -24,7 +24,7 @@ const DekningsgradIndex: FunctionComponent<OwnProps> = ({
   readOnly,
 }) => (
   <BorderBox>
-    <Undertittel>{intl.formatMessage({ id: 'Registrering.Dekningsgrad.Title' })}</Undertittel>
+    <Heading size="small">{intl.formatMessage({ id: 'Registrering.Dekningsgrad.Title' })}</Heading>
     <VerticalSpacer sixteenPx />
     <RadioGroupPanel
       name="dekningsgrad"

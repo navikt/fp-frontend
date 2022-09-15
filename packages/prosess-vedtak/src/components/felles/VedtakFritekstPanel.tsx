@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Undertekst } from 'nav-frontend-typografi';
+import { Detail } from '@navikt/ds-react';
 
 import { Behandlingsresultat } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -56,7 +56,7 @@ const VedtakFritekstPanel: FunctionComponent<OwnProps> = ({
       {isReadOnly && behandlingsresultat.avslagsarsakFritekst !== null && (
         <span>
           <VerticalSpacer twentyPx />
-          <Undertekst>{intl.formatMessage({ id: labelTextCode })}</Undertekst>
+          <Detail size="small">{intl.formatMessage({ id: labelTextCode })}</Detail>
           <VerticalSpacer eightPx />
           <div className={styles.fritekstItem}>{decodeHtmlEntity(behandlingsresultat.avslagsarsakFritekst)}</div>
         </span>

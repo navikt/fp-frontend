@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { RawIntlProvider } from 'react-intl';
-import Modal from 'nav-frontend-modal';
+import { Modal } from '@navikt/ds-react';
 
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import messages from '../../i18n/nb_NO.json';

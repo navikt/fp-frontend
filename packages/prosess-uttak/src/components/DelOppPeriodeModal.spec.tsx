@@ -1,6 +1,6 @@
 import React from 'react';
 import sinon from 'sinon';
-import Modal from 'nav-frontend-modal';
+import { Modal } from '@navikt/ds-react';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';

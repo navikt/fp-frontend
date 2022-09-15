@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Element } from 'nav-frontend-typografi';
+import { ErrorMessage, Label } from '@navikt/ds-react';
 import { Column, Row } from 'nav-frontend-grid';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
@@ -9,7 +9,6 @@ import {
 import {
   CheckboxField, Datepicker, InputField, RadioGroupPanel, TextAreaField, formHooks,
 } from '@navikt/ft-form-hooks';
-import { SkjemaGruppe } from 'nav-frontend-skjema';
 
 import styles from './virksomhetStartetEndretPanel.less';
 
@@ -86,42 +85,43 @@ export const VirksomhetStartetEndretPanel: FunctionComponent<OwnProps> = ({
           <Column xs="6">
             <VerticalSpacer eightPx />
             <ArrowBox>
-              <SkjemaGruppe feil={formState.isSubmitted ? formState.errors?.ingenArsakValgt?.message : undefined}>
-                <Element><FormattedMessage id="Registrering.VirksomhetStartetPanel.Reason" /></Element>
-                <VerticalSpacer fourPx />
-                <CheckboxField name="harVarigEndring" label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.HarVarigEndring" />} />
-                <VerticalSpacer fourPx />
-                {harVarigEndring && (
-                  <>
-                    <VerticalSpacer sixteenPx />
-                    <ArrowBox>
-                      <Datepicker
-                        name="varigEndringGjeldendeFom"
-                        isReadOnly={readOnly}
-                        validate={[hasValidDate, required]}
-                        label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
-                      />
-                    </ArrowBox>
-                  </>
-                )}
-                <CheckboxField name="erNyoppstartet" label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.ErNyoppstartet" />} />
-                <VerticalSpacer fourPx />
-                <CheckboxField name="erNyIArbeidslivet" label={<FormattedMessage id="Registrering.VirksomhetNyIArbeidslivetPanel.ErNyIArbeidslivet" />} />
-                <VerticalSpacer fourPx />
-                {erNyIArbeidslivet && (
-                  <>
-                    <VerticalSpacer sixteenPx />
-                    <ArrowBox>
-                      <Datepicker
-                        name="nyIArbeidslivetFom"
-                        isReadOnly={readOnly}
-                        validate={[hasValidDate, required]}
-                        label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
-                      />
-                    </ArrowBox>
-                  </>
-                )}
-              </SkjemaGruppe>
+              <Label size="small"><FormattedMessage id="Registrering.VirksomhetStartetPanel.Reason" /></Label>
+              <VerticalSpacer fourPx />
+              <CheckboxField name="harVarigEndring" label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.HarVarigEndring" />} />
+              <VerticalSpacer fourPx />
+              {harVarigEndring && (
+                <>
+                  <VerticalSpacer sixteenPx />
+                  <ArrowBox>
+                    <Datepicker
+                      name="varigEndringGjeldendeFom"
+                      isReadOnly={readOnly}
+                      validate={[hasValidDate, required]}
+                      label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
+                    />
+                  </ArrowBox>
+                </>
+              )}
+              <CheckboxField name="erNyoppstartet" label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.ErNyoppstartet" />} />
+              <VerticalSpacer fourPx />
+              <CheckboxField name="erNyIArbeidslivet" label={<FormattedMessage id="Registrering.VirksomhetNyIArbeidslivetPanel.ErNyIArbeidslivet" />} />
+              <VerticalSpacer fourPx />
+              {erNyIArbeidslivet && (
+                <>
+                  <VerticalSpacer sixteenPx />
+                  <ArrowBox>
+                    <Datepicker
+                      name="nyIArbeidslivetFom"
+                      isReadOnly={readOnly}
+                      validate={[hasValidDate, required]}
+                      label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
+                    />
+                  </ArrowBox>
+                </>
+              )}
+              {formState.isSubmitted && formState.errors?.ingenArsakValgt?.message && (
+                <ErrorMessage>{formState.errors?.ingenArsakValgt?.message}</ErrorMessage>
+              )}
               <VerticalSpacer sixteenPx />
               <TextAreaField
                 name="beskrivelseAvEndring"

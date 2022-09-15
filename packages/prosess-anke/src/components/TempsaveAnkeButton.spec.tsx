@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Button } from '@navikt/ds-react';
 
 import TempsaveAnkeButton from './TempsaveAnkeButton';
 
@@ -15,6 +15,6 @@ describe('<TempsaveAnkeButton>', () => {
       handleSubmit={() => undefined}
     />);
 
-    expect(wrapper.find(Hovedknapp)).toHaveLength(1);
+    expect(wrapper.find(Button)).toHaveLength(1);
   });
 });

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Element } from 'nav-frontend-typografi';
+import { Label } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
@@ -111,7 +111,7 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
           </>
         )}
       >
-        <Element><FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.SokerHarVurdertOpptjentRettTilForeldrepenger" /></Element>
+        <Label size="small"><FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.SokerHarVurdertOpptjentRettTilForeldrepenger" /></Label>
         <VilkarResultPicker
           readOnly={readOnly}
           customVilkarOppfyltText={<FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.ErOppfylt" />}

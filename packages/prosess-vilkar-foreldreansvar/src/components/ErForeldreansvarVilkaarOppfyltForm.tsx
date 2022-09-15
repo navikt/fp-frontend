@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Element } from 'nav-frontend-typografi';
+import { Label } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
@@ -116,7 +116,7 @@ const ErForeldreansvarVilkaarOppfyltForm: FunctionComponent<OwnProps> = ({
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
       >
-        <Element><FormattedMessage id="ErForeldreansvarVilkaarOppfyltForm.RettTilStonad" /></Element>
+        <Label size="small"><FormattedMessage id="ErForeldreansvarVilkaarOppfyltForm.RettTilStonad" /></Label>
         <VilkarResultPicker
           avslagsarsaker={avslagsarsaker}
           readOnly={readOnly}

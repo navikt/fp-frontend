@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Knapp } from 'nav-frontend-knapper';
+import { Button } from '@navikt/ds-react';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
@@ -85,9 +85,9 @@ const TilretteleggingForArbeidsgiverFieldArray: FunctionComponent<OwnProps> = ({
             </>
           )}
           {fields.length === index + 1 && (
-            <Knapp mini htmlType="button" onClick={leggTilArbeidsgiver}>
+            <Button size="small" variant="secondary" onClick={leggTilArbeidsgiver}>
               <FormattedMessage id="TilretteleggingForArbeidsgiverFieldArray.LeggTilArbeidsgiver" />
-            </Knapp>
+            </Button>
           )}
         </div>
       ))}

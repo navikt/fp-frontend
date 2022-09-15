@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Heading } from '@navikt/ds-react';
 import { Column, Row } from 'nav-frontend-grid';
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 
@@ -20,9 +20,9 @@ const finnListeMedOpptjeningsår = (andeler: FeriepengegrunnlagAndel[]): number[
 };
 
 const hentTittel = (): React.ReactNode => (
-  <Undertittel>
+  <Heading size="small">
     <FormattedMessage id="TilkjentYtelse.Feriepenger.Tittel" />
-  </Undertittel>
+  </Heading>
 );
 
 interface OwnProps {

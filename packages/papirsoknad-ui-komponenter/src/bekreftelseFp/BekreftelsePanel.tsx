@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Undertekst, Undertittel } from 'nav-frontend-typografi';
+import { Detail, Heading } from '@navikt/ds-react';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
@@ -22,11 +22,11 @@ const BekreftelsePanel: FunctionComponent<OwnProps> = ({
   annenForelderInformertRequired = false,
 }) => (
   <BorderBox>
-    <Undertittel>
+    <Heading size="small">
       {intl.formatMessage({ id: 'Registrering.TheOtherParent.Confirmation' })}
-    </Undertittel>
+    </Heading>
     <VerticalSpacer sixteenPx />
-    <Undertekst>{intl.formatMessage({ id: 'Registrering.TheOtherParent.OtherParentKnowPeriods' })}</Undertekst>
+    <Detail size="small">{intl.formatMessage({ id: 'Registrering.TheOtherParent.OtherParentKnowPeriods' })}</Detail>
     <VerticalSpacer eightPx />
     <RadioGroupPanel
       name="annenForelderInformert"

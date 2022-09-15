@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Label } from '@navikt/ds-react';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
@@ -48,7 +48,7 @@ const FrilansOppdragForFamiliePanel: FunctionComponent<OwnProps> & StaticFunctio
         <>
           <VerticalSpacer eightPx />
           <ArrowBox>
-            <Normaltekst><FormattedMessage id="Registrering.FrilansOppdrag.OppgiPeriode" /></Normaltekst>
+            <Label size="small"><FormattedMessage id="Registrering.FrilansOppdrag.OppgiPeriode" /></Label>
             <VerticalSpacer fourPx />
             <FrilansOppdragForFamilieFieldArray readOnly={readOnly} />
           </ArrowBox>

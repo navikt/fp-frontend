@@ -5,8 +5,9 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import classNames from 'classnames';
 import moment from 'moment';
-import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import {
+  Heading, Detail, BodyShort, Button,
+} from '@navikt/ds-react';
 
 import {
   Form, RadioGroupPanel, TextAreaField,
@@ -146,7 +147,7 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
         onSubmit={submitCallback}
         setDataOnUnmount={setFormData}
       >
-        <Undertittel><FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurdering" /></Undertittel>
+        <Heading size="small"><FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurdering" /></Heading>
         <VerticalSpacer eightPx />
         {(!readOnly && isAksjonspunktOpen(aksjonspunkter[0].status)) && (
         <>
@@ -212,21 +213,21 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
             />
           </div>
           <VerticalSpacer sixteenPx />
-          <Hovedknapp
-            mini
-            htmlType={formVerdier.sendVarsel ? 'button' : 'submit'}
+          <Button
+            variant="primary"
+            size="small"
             onClick={formVerdier.sendVarsel ? åpneModal : undefined}
-            spinner={formMethods.formState.isSubmitting}
+            loading={formMethods.formState.isSubmitting}
             disabled={formMethods.formState.isSubmitting}
           >
             <FormattedMessage id="VarselOmRevurderingForm.Bekreft" />
-          </Hovedknapp>
+          </Button>
         </>
         )}
         {(readOnly || !isAksjonspunktOpen(aksjonspunkter[0].status)) && (
         <>
-          <Undertekst><FormattedMessage id="VarselOmRevurderingForm.Begrunnelse" /></Undertekst>
-          <Normaltekst>{formVerdier.begrunnelse}</Normaltekst>
+          <Detail size="small"><FormattedMessage id="VarselOmRevurderingForm.Begrunnelse" /></Detail>
+          <BodyShort size="small">{formVerdier.begrunnelse}</BodyShort>
         </>
         )}
       </Form>

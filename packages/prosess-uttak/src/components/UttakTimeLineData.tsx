@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Element } from 'nav-frontend-typografi';
+import { Label } from '@navikt/ds-react';
 
 import { calcDays, getKodeverknavnFn } from '@navikt/ft-utils';
 import {
@@ -252,10 +252,10 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
       <TimeLineDataContainer key={`selectedItemData_${selectedItemData.id}`}>
         <Row>
           <Column xs="3">
-            <Element>
+            <Label size="small">
               <FormattedMessage id="UttakTimeLineData.PeriodeData.Detaljer" />
               {isEdited && <EditedIcon />}
-            </Element>
+            </Label>
           </Column>
           <Column xs="7">
             {!readOnly

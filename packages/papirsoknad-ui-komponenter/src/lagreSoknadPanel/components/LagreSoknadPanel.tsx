@@ -1,13 +1,12 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Button, Detail } from '@navikt/ds-react';
 import { CheckboxField, formHooks, TextAreaField } from '@navikt/ft-form-hooks';
 import { ariaCheck, hasValidText, maxLength } from '@navikt/ft-form-validators';
 import {
   BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
-import { Undertittel } from 'nav-frontend-typografi';
 import LukkPapirsoknadModal from './LukkPapirsoknadModal';
 
 import styles from './lagreSoknadPanel.less';
@@ -47,9 +46,9 @@ const LagreSoknadPanel: FunctionComponent<OwnProps> = ({
       <FlexContainer>
         <FlexRow>
           <FlexColumn className={styles.fullWidth}>
-            <Undertittel>
+            <Detail size="small">
               {intl.formatMessage({ id: 'Registrering.SaveApplication.Title' })}
-            </Undertittel>
+            </Detail>
             <VerticalSpacer sixteenPx />
             <FlexRow>
               <FlexColumn className={styles.halfWidth}>
@@ -78,27 +77,28 @@ const LagreSoknadPanel: FunctionComponent<OwnProps> = ({
             <FlexRow>
               <FlexColumn className="justifyItemsToFlexEnd">
                 {!ufullstendigSoeknad && (
-                  <Hovedknapp
+                  <Button
                     id="saveButton"
-                    mini
-                    spinner={submitting}
+                    size="small"
+                    variant="primary"
+                    loading={submitting}
                     disabled={readOnly || submitting}
                     onClick={ariaCheck}
                   >
                     <FormattedMessage id="Registrering.SaveApplication.SaveButton" />
-                  </Hovedknapp>
+                  </Button>
                 )}
                 {ufullstendigSoeknad && (
-                  <Hovedknapp
+                  <Button
                     id="endButton"
-                    htmlType="button"
                     onClick={toggleLukkPapirsoknadModal}
-                    mini
-                    spinner={submitting}
+                    size="small"
+                    variant="primary"
+                    loading={submitting}
                     disabled={readOnly || submitting}
                   >
                     <FormattedMessage id="Registrering.SaveApplication.EndButton" />
-                  </Hovedknapp>
+                  </Button>
                 )}
               </FlexColumn>
             </FlexRow>

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { NedChevron, OppChevron } from 'nav-frontend-chevron';
+import { Expand, Collapse } from '@navikt/ds-icons';
 
 import styles from './collapseButton.less';
 
@@ -19,7 +19,7 @@ const CollapseButton: FunctionComponent<OwnProps> = ({
 }) => (
   <button type="button" className={styles.invisibleButton} onClick={() => toggleDetails(mottakerIndex)}>
     <FormattedMessage id={buttonText(showDetails)} />
-    {showDetails ? <OppChevron /> : <NedChevron />}
+    {showDetails ? <Collapse /> : <Expand />}
   </button>
 );
 

@@ -6,7 +6,7 @@ import { change as reduxFormChange, formValueSelector, initialize as reduxFormIn
 import { bindActionCreators, Dispatch } from 'redux';
 import { FormattedMessage, IntlShape, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Button } from '@navikt/ds-react';
 
 import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import oppholdArsakType, { oppholdArsakMapper } from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
@@ -554,13 +554,14 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
                   <FlexContainer>
                     <FlexRow>
                       <FlexColumn>
-                        <Hovedknapp
-                          mini
+                        <Button
+                          size="small"
+                          variant="primary"
                           disabled={this.isConfirmButtonDisabled() || submitting || isButtonDisabled}
-                          spinner={submitting}
+                          loading={submitting}
                         >
                           <FormattedMessage id="Uttak.Confirm" />
-                        </Hovedknapp>
+                        </Button>
                       </FlexColumn>
                     </FlexRow>
                   </FlexContainer>

@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Label, BodyShort } from '@navikt/ds-react';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Soknad } from '@fpsak-frontend/types';
@@ -52,28 +52,28 @@ const FodselSammenligningOtherPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <Element>
+      <Label size="small">
         <FormattedMessage id={terminFodselHeader} />
-      </Element>
+      </Label>
       <Row>
         {soknad.utstedtdato
           && (
           <Column xs="4">
-            <Element><FormattedMessage id="FodselsammenligningPanel.UstedtDato" /></Element>
+            <Label size="small"><FormattedMessage id="FodselsammenligningPanel.UstedtDato" /></Label>
           </Column>
           )}
-        <Column xs="4"><Element><FormattedMessage id={terminOrFodselLabel} /></Element></Column>
-        <Column xs="4"><Element><FormattedMessage id="FodselsammenligningPanel.AntallBarn" /></Element></Column>
+        <Column xs="4"><Label size="small"><FormattedMessage id={terminOrFodselLabel} /></Label></Column>
+        <Column xs="4"><Label size="small"><FormattedMessage id="FodselsammenligningPanel.AntallBarn" /></Label></Column>
       </Row>
       <Row>
         {soknad.utstedtdato
           && (
           <Column xs="4">
-            <Normaltekst>{formatDate(soknad.utstedtdato)}</Normaltekst>
+            <BodyShort size="small">{formatDate(soknad.utstedtdato)}</BodyShort>
           </Column>
           )}
-        <Column xs="4"><Normaltekst>{terminOrFodselDate}</Normaltekst></Column>
-        <Column xs="4"><Normaltekst>{soknad.antallBarn}</Normaltekst></Column>
+        <Column xs="4"><BodyShort size="small">{terminOrFodselDate}</BodyShort></Column>
+        <Column xs="4"><BodyShort size="small">{soknad.antallBarn}</BodyShort></Column>
       </Row>
     </>
   );

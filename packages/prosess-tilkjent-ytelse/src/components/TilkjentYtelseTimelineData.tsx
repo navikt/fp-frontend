@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import moment from 'moment';
 import { Column, Row } from 'nav-frontend-grid';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Label, BodyShort } from '@navikt/ds-react';
 
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
@@ -129,9 +129,9 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
     <TimeLineDataContainer>
       <Row>
         <Column xs="10">
-          <Element>
+          <Label size="small">
             <FormattedMessage id="TilkjentYtelse.PeriodeData.Detaljer" />
-          </Element>
+          </Label>
         </Column>
         <Column xs="2">
           <FloatRight>
@@ -144,7 +144,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
       <div className={styles.detailsPeriode}>
         <Row>
           <Column xs="7">
-            <Element>
+            <Label size="small">
               <FormattedMessage
                 id="TilkjentYtelse.PeriodeData.Periode"
                 values={{
@@ -156,11 +156,11 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
                     .toString(),
                 }}
               />
-            </Element>
+            </Label>
           </Column>
           <div>
             <Column xs="5">
-              <Normaltekst>
+              <BodyShort size="small">
                 <FormattedMessage
                   id={numberOfDaysAndWeeks.id}
                   values={{
@@ -168,7 +168,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
                     days: numberOfDaysAndWeeks.days.toString(),
                   }}
                 />
-              </Normaltekst>
+              </BodyShort>
             </Column>
           </div>
         </Row>
@@ -190,23 +190,23 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
                 <TableRow key={`index${index + 1}`}>
                   <TableColumn>{findAndelsnavn(andel, getKodeverknavn, arbeidsgiverOpplysningerPerId)}</TableColumn>
                   {!isSoknadSvangerskapspenger && (
-                    <TableColumn><Normaltekst>{uttakPeriodeNavn[andel.uttak.stonadskontoType]}</Normaltekst></TableColumn>
+                    <TableColumn><BodyShort size="small">{uttakPeriodeNavn[andel.uttak.stonadskontoType]}</BodyShort></TableColumn>
                   )}
                   {!isSoknadSvangerskapspenger && (
-                    <TableColumn><Normaltekst>{getGradering(andel)}</Normaltekst></TableColumn>
+                    <TableColumn><BodyShort size="small">{getGradering(andel)}</BodyShort></TableColumn>
                   )}
-                  <TableColumn><Normaltekst>{andel.utbetalingsgrad ? andel.utbetalingsgrad : ''}</Normaltekst></TableColumn>
+                  <TableColumn><BodyShort size="small">{andel.utbetalingsgrad ? andel.utbetalingsgrad : ''}</BodyShort></TableColumn>
                   <TableColumn>
-                    <Normaltekst>
+                    <BodyShort size="small">
                       {andel.aktivitetStatus === aktivitetStatus.ARBEIDSTAKER && andel.refusjon ? andel.refusjon : ''}
-                    </Normaltekst>
+                    </BodyShort>
                   </TableColumn>
-                  <TableColumn><Normaltekst>{andel.tilSoker ? andel.tilSoker : ''}</Normaltekst></TableColumn>
+                  <TableColumn><BodyShort size="small">{andel.tilSoker ? andel.tilSoker : ''}</BodyShort></TableColumn>
                   <TableColumn>
-                    <Normaltekst>
+                    <BodyShort size="small">
                       {andel.sisteUtbetalingsdato ? moment(andel.sisteUtbetalingsdato)
                         .format(DDMMYYYY_DATE_FORMAT) : ''}
-                    </Normaltekst>
+                    </BodyShort>
                   </TableColumn>
                 </TableRow>
               ))}

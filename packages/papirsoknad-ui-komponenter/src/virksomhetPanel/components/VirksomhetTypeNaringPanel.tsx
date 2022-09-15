@@ -2,7 +2,7 @@ import React, {
   Fragment, FunctionComponent, useEffect, useMemo,
 } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Element } from 'nav-frontend-typografi';
+import { Label, ErrorMessage } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { AlleKodeverk } from '@navikt/ft-types';
@@ -10,7 +10,6 @@ import { KodeverkType } from '@navikt/ft-kodeverk';
 
 import naringsvirksomhetType from '@fpsak-frontend/kodeverk/src/naringsvirksomhetType';
 import { isRequiredMessage } from '@navikt/ft-form-validators';
-import { SkjemaGruppe } from 'nav-frontend-skjema';
 
 const TYPE_VIRKSOMHET_PREFIX = 'typeVirksomhet';
 
@@ -80,16 +79,17 @@ const VirksomhetTypeNaringPanel: FunctionComponent<OwnProps> = ({
   return (
     <>
       <VerticalSpacer eightPx />
-      <Element><FormattedMessage id="Registrering.VirksomhetNaeringTypePanel.Title" /></Element>
+      <Label size="small"><FormattedMessage id="Registrering.VirksomhetNaeringTypePanel.Title" /></Label>
       <VerticalSpacer fourPx />
-      <SkjemaGruppe feil={formState.isSubmitted ? formState.errors.notRegisteredInput?.message : undefined}>
-        {naringvirksomhetTyper.map((nv) => (
-          <Fragment key={nv.kode}>
-            <VerticalSpacer fourPx />
-            <CheckboxField name={`${TYPE_VIRKSOMHET_PREFIX}.${nv.kode}`} key={nv.kode} label={nv.navn} readOnly={readOnly} />
-          </Fragment>
-        ))}
-      </SkjemaGruppe>
+      {naringvirksomhetTyper.map((nv) => (
+        <Fragment key={nv.kode}>
+          <VerticalSpacer fourPx />
+          <CheckboxField name={`${TYPE_VIRKSOMHET_PREFIX}.${nv.kode}`} key={nv.kode} label={nv.navn} readOnly={readOnly} />
+        </Fragment>
+      ))}
+      {formState.isSubmitted && formState.errors.notRegisteredInput?.message && (
+        <ErrorMessage>{formState.errors.notRegisteredInput?.message}</ErrorMessage>
+      )}
     </>
   );
 };

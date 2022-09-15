@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Button } from '@navikt/ds-react';
 import { Column, Row } from 'nav-frontend-grid';
 
 import styles from './vedtakKlageSubmitPanel.less';
@@ -32,15 +32,16 @@ export const VedtakKlageSubmitPanel: FunctionComponent<OwnProps> = ({
     <Row>
       <Column xs="6">
         {!readOnly && (
-          <Hovedknapp
-            mini
+          <Button
+            variant="primary"
+            size="small"
             className={styles.mainButton}
             onClick={lagreVedtak}
             disabled={behandlingPaaVent || isSubmitting}
-            spinner={isSubmitting}
+            loading={isSubmitting}
           >
             <FormattedMessage id="VedtakKlageForm.TilGodkjenning" />
-          </Hovedknapp>
+          </Button>
         )}
         <a
           href=""

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Column, Container, Row } from 'nav-frontend-grid';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Heading } from '@navikt/ds-react';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
   dateBeforeOrEqualToToday, hasValidDate, hasValidInteger, isDatesEqual, maxValue, minValue, required,
@@ -88,9 +88,9 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
 
   return (
     <BorderBox>
-      <Undertittel>
+      <Heading size="small">
         <FormattedMessage id={familieHendelseType === fht.ADOPSJON ? 'Registrering.Adopsjon.Title' : 'Registrering.Adopsjon.OmsorgTitle'} />
-      </Undertittel>
+      </Heading>
       <VerticalSpacer sixteenPx />
       <Container fluid className={styles.formContainer}>
         {isForeldrepengerFagsak && familieHendelseType === fht.ADOPSJON && (

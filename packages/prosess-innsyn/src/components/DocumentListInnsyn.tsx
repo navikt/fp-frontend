@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import { BodyShort, Detail } from '@navikt/ds-react';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { CheckboxField } from '@navikt/ft-form-hooks';
@@ -69,7 +69,7 @@ const DocumentListInnsyn: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
   if (documents.length === 0) {
-    return <Normaltekst className={styles.noDocuments}><FormattedMessage id="DocumentListInnsyn.NoDocuments" /></Normaltekst>;
+    return <BodyShort size="small" className={styles.noDocuments}><FormattedMessage id="DocumentListInnsyn.NoDocuments" /></BodyShort>;
   }
   const headerTextCodes = readOnly
     ? ['DocumentListInnsyn.DocumentType']
@@ -82,7 +82,7 @@ const DocumentListInnsyn: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <Undertekst className={styles.noDocuments}><FormattedMessage id="DocumentListInnsyn.VelgInnsynsDok" /></Undertekst>
+      <Detail size="small" className={styles.noDocuments}><FormattedMessage id="DocumentListInnsyn.VelgInnsynsDok" /></Detail>
       <Row>
         <Column xs={readOnly ? '6' : '10'}>
           <Table headerTextCodes={headerTextCodes}>
@@ -110,7 +110,7 @@ const DocumentListInnsyn: FunctionComponent<OwnProps> = ({
                   <TableColumn hidden={readOnly}>
                     {document.tidspunkt
                       ? <DateTimeLabel dateTimeString={document.tidspunkt} />
-                      : <Normaltekst><FormattedMessage id="DocumentListInnsyn.IProduksjon" /></Normaltekst>}
+                      : <BodyShort size="small"><FormattedMessage id="DocumentListInnsyn.IProduksjon" /></BodyShort>}
                   </TableColumn>
                 </TableRow>
               );

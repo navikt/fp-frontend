@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Undertekst } from 'nav-frontend-typografi';
+import { Detail } from '@navikt/ds-react';
 
 import ProsessPanelTemplate from './ProsessPanelTemplate';
 
@@ -21,7 +21,7 @@ describe('<ProsessPanelTemplate>', () => {
       </ProsessPanelTemplate>,
     );
 
-    expect(wrapper.find(Undertekst)).toHaveLength(0);
+    expect(wrapper.find(Detail)).toHaveLength(0);
   });
 
   it('skal vise lovreferanse når dette finnes', () => {
@@ -40,6 +40,6 @@ describe('<ProsessPanelTemplate>', () => {
       </ProsessPanelTemplate>,
     );
 
-    expect(wrapper.find(Undertekst)).toHaveLength(1);
+    expect(wrapper.find(Detail)).toHaveLength(1);
   });
 });

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import { BodyShort, Detail } from '@navikt/ds-react';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
@@ -31,12 +31,12 @@ const DocumentListVedtakInnsyn: FunctionComponent<OwnProps> = ({
   saksNr,
 }) => {
   if (documents.length === 0) {
-    return <Normaltekst className={styles.noDocuments}><FormattedMessage id="DocumentListVedtakInnsyn.NoDocuments" /></Normaltekst>;
+    return <BodyShort size="small" className={styles.noDocuments}><FormattedMessage id="DocumentListVedtakInnsyn.NoDocuments" /></BodyShort>;
   }
 
   return (
     <>
-      <Undertekst className={styles.noDocuments}><FormattedMessage id="DocumentListVedtakInnsyn.InnsynsDok" /></Undertekst>
+      <Detail size="small" className={styles.noDocuments}><FormattedMessage id="DocumentListVedtakInnsyn.InnsynsDok" /></Detail>
       <Row>
         <Column xs="6">
           <Table noHover headerTextCodes={headerTextCodes}>

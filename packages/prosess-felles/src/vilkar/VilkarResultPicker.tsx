@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 import {
   FlexContainer, FlexRow, FlexColumn, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -75,8 +75,8 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
               <Image className={styles.image} src={erVilkarOk ? innvilgetImage : avslattImage} />
             </FlexColumn>
             <FlexColumn>
-              {erVilkarOk && <Normaltekst>{customVilkarOppfyltText}</Normaltekst>}
-              {!erVilkarOk && <Normaltekst>{customVilkarIkkeOppfyltText}</Normaltekst>}
+              {erVilkarOk && <BodyShort size="small">{customVilkarOppfyltText}</BodyShort>}
+              {!erVilkarOk && <BodyShort size="small">{customVilkarIkkeOppfyltText}</BodyShort>}
             </FlexColumn>
           </FlexRow>
           <VerticalSpacer eightPx />

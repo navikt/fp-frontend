@@ -1,14 +1,12 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Element, Undertittel } from 'nav-frontend-typografi';
+import { Label, Heading, ErrorMessage } from '@navikt/ds-react';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { AlleKodeverk } from '@navikt/ft-types';
 
 import ForeldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
-
 import { UseFormGetValues } from 'react-hook-form';
-import { SkjemaGruppe } from 'nav-frontend-skjema';
 
 import PermisjonUtsettelsePanel, { FormValues as FormValuesUtsettelse } from './PermisjonUtsettelsePanel';
 import PermisjonGraderingPanel, { FormValues as FormValuesGradering } from './PermisjonGraderingPanel';
@@ -93,44 +91,45 @@ const PermisjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   return (
     <BorderBox>
       <div className={styles.flexContainer}>
-        <SkjemaGruppe feil={formState.isSubmitted ? formState.errors[TIDSROM_PERMISJON_FORM_NAME_PREFIX]?.notRegisteredInput?.message : undefined}>
-          <Undertittel><FormattedMessage id="Registrering.Permisjon.Title" /></Undertittel>
-          <VerticalSpacer sixteenPx />
-          <VerticalSpacer eightPx />
-          <Element><FormattedMessage id="Registrering.Permisjon.FulltUttak" /></Element>
-          <VerticalSpacer eightPx />
-          <CheckboxField
-            readOnly={readOnly}
-            name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`}
-            label={<FormattedMessage id="Registrering.Permisjon.FulltUttak" />}
-          />
-          {fulltUttak && (
-            <RenderPermisjonPeriodeFieldArray
-              sokerErMor={foreldreType === ForeldreType.MOR}
-              readOnly={readOnly}
-              alleKodeverk={alleKodeverk}
-            />
-          )}
-          <VerticalSpacer twentyPx />
-          <PermisjonOverforingAvKvoterPanel
-            readOnly={readOnly}
-            foreldreType={foreldreType}
-            alleKodeverk={alleKodeverk}
-            erEndringssøknad={erEndringssøknad}
-          />
-          <VerticalSpacer twentyPx />
-          <PermisjonUtsettelsePanel
+        <Heading size="small"><FormattedMessage id="Registrering.Permisjon.Title" /></Heading>
+        <VerticalSpacer sixteenPx />
+        <VerticalSpacer eightPx />
+        <Label size="small"><FormattedMessage id="Registrering.Permisjon.FulltUttak" /></Label>
+        <VerticalSpacer eightPx />
+        <CheckboxField
+          readOnly={readOnly}
+          name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`}
+          label={<FormattedMessage id="Registrering.Permisjon.FulltUttak" />}
+        />
+        {fulltUttak && (
+          <RenderPermisjonPeriodeFieldArray
+            sokerErMor={foreldreType === ForeldreType.MOR}
             readOnly={readOnly}
             alleKodeverk={alleKodeverk}
           />
-          <VerticalSpacer twentyPx />
-          <PermisjonGraderingPanel
-            readOnly={readOnly}
-            alleKodeverk={alleKodeverk}
-          />
-          <VerticalSpacer twentyPx />
-          <PermisjonOppholdPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
-        </SkjemaGruppe>
+        )}
+        <VerticalSpacer twentyPx />
+        <PermisjonOverforingAvKvoterPanel
+          readOnly={readOnly}
+          foreldreType={foreldreType}
+          alleKodeverk={alleKodeverk}
+          erEndringssøknad={erEndringssøknad}
+        />
+        <VerticalSpacer twentyPx />
+        <PermisjonUtsettelsePanel
+          readOnly={readOnly}
+          alleKodeverk={alleKodeverk}
+        />
+        <VerticalSpacer twentyPx />
+        <PermisjonGraderingPanel
+          readOnly={readOnly}
+          alleKodeverk={alleKodeverk}
+        />
+        <VerticalSpacer twentyPx />
+        <PermisjonOppholdPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
+        {formState.isSubmitted && formState.errors[TIDSROM_PERMISJON_FORM_NAME_PREFIX]?.notRegisteredInput?.message && (
+          <ErrorMessage>{formState.errors[TIDSROM_PERMISJON_FORM_NAME_PREFIX]?.notRegisteredInput?.message}</ErrorMessage>
+        )}
       </div>
     </BorderBox>
   );

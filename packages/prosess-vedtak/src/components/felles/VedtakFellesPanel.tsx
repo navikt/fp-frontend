@@ -2,9 +2,9 @@ import React, {
   FunctionComponent, useMemo, useState, useCallback, ReactNode, MouseEvent,
 } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Element, Undertittel, Normaltekst } from 'nav-frontend-typografi';
-import Lenke from 'nav-frontend-lenker';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import {
+  Label, Button, Link, BodyShort, Heading,
+} from '@navikt/ds-react';
 import {
   FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer, OkAvbrytModal,
 } from '@navikt/ft-ui-komponenter';
@@ -139,7 +139,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
             </FlexColumn>
           )}
           <FlexColumn>
-            <Undertittel><FormattedMessage id={finnTekstkodeFraBehandlingstatus(status)} /></Undertittel>
+            <Heading size="small"><FormattedMessage id={finnTekstkodeFraBehandlingstatus(status)} /></Heading>
           </FlexColumn>
         </FlexRow>
       </FlexContainer>
@@ -147,43 +147,43 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
       <FlexContainer>
         <FlexRow>
           <FlexColumn className={styles.space}>
-            <Element>
+            <Label size="small">
               {vedtakstatusTekst}
               {tilbakekrevingtekst && (
                 `. ${intl.formatMessage({ id: tilbakekrevingtekst })}`
               )}
-            </Element>
+            </Label>
           </FlexColumn>
           <FlexColumn className={styles.space}>
             {skalViseLink && harIkkeKonsekvensForYtelse && kanBehandles && (
-              <Lenke href="#" onClick={previewAutomatiskBrev}>
+              <Link href="#" onClick={previewAutomatiskBrev}>
                 <span>
                   <FormattedMessage id={erBehandlingEtterKlage ? 'VedtakFellesPanel.UtkastVedtaksbrev' : 'VedtakFellesPanel.AutomatiskVedtaksbrev'} />
                 </span>
                 <Image src={popOutPilSvg} className={styles.pil} />
-              </Lenke>
+              </Link>
             )}
             {(skalViseLink && harIkkeKonsekvensForYtelse && !kanBehandles) && (
-              <Normaltekst className={styles.disabletLink}>
+              <BodyShort size="small" className={styles.disabletLink}>
                 <FormattedMessage id={erBehandlingEtterKlage ? 'VedtakFellesPanel.UtkastVedtaksbrev' : 'VedtakFellesPanel.AutomatiskVedtaksbrev'} />
-              </Normaltekst>
+              </BodyShort>
             )}
           </FlexColumn>
           <FlexColumn>
             {!readOnly && !skalBrukeManueltBrev && (
-            <Lenke href="#" onClick={onToggleOverstyring} className={skalBrukeManueltBrev && styles.test}>
+            <Link href="#" onClick={onToggleOverstyring} className={skalBrukeManueltBrev && styles.test}>
               <Image src={endreSvg} className={styles.blyant} />
               <span>
                 <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
               </span>
-            </Lenke>
+            </Link>
             )}
             {(readOnly || skalBrukeManueltBrev) && (
             <>
               <Image src={endreDisabletSvg} className={styles.blyant} />
-              <Normaltekst className={styles.disabletLink}>
+              <BodyShort size="small" className={styles.disabletLink}>
                 <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
-              </Normaltekst>
+              </BodyShort>
             </>
             )}
           </FlexColumn>
@@ -207,25 +207,25 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
             <FlexRow>
               <FlexColumn>
                 {!readOnly && (
-                  <Hovedknapp
-                    mini
-                    htmlType="submit"
+                  <Button
+                    variant="primary"
+                    size="small"
                     disabled={behandlingPaaVent || isSubmitting}
-                    spinner={isSubmitting}
+                    loading={isSubmitting}
                   >
                     <FormattedMessage id={finnKnappetekstkode(aksjonspunkter)} />
-                  </Hovedknapp>
+                  </Button>
                 )}
               </FlexColumn>
               {skalBrukeManueltBrev && (
                 <FlexColumn>
-                  <Knapp
-                    mini
-                    htmlType="button"
+                  <Button
+                    size="small"
+                    variant="secondary"
                     onClick={() => toggleVisModal(true)}
                   >
                     <FormattedMessage id="VedtakFellesPanel.ForkastManueltBrev" />
-                  </Knapp>
+                  </Button>
                 </FlexColumn>
               )}
             </FlexRow>

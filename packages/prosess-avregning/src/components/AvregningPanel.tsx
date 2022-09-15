@@ -5,9 +5,8 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import {
-  Element, Normaltekst, Undertittel,
-} from 'nav-frontend-typografi';
-import { Hovedknapp } from 'nav-frontend-knapper';
+  Label, BodyShort, Heading, Button,
+} from '@navikt/ds-react';
 
 import {
   RadioGroupPanel, TextAreaField, Form,
@@ -180,9 +179,9 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <Undertittel>
+      <Heading size="small">
         <FormattedMessage id="Avregning.Title" />
-      </Undertittel>
+      </Heading>
       <VerticalSpacer twentyPx />
       {simuleringResultatOption && (
         <Row>
@@ -211,9 +210,9 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
             />
             <VerticalSpacer twentyPx />
             {hasOpenTilbakekrevingsbehandling && (
-              <Element>
+              <Label size="small">
                 <FormattedMessage id="Avregning.ApenTilbakekrevingsbehandling" />
-              </Element>
+              </Label>
             )}
           </Column>
         </Row>
@@ -254,7 +253,7 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
                           <ArrowBox alignOffset={20}>
                             <Row>
                               <Column sm="10">
-                                <Normaltekst className={styles.bold}><FormattedMessage id="Avregning.varseltekst" /></Normaltekst>
+                                <BodyShort size="small" className={styles.bold}><FormattedMessage id="Avregning.varseltekst" /></BodyShort>
                               </Column>
                               <Column sm="2">
                                 <Image
@@ -305,14 +304,14 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
               </Row>
               <Row>
                 <Column xs="6">
-                  <Hovedknapp
-                    mini
-                    htmlType="submit"
+                  <Button
+                    size="small"
+                    variant="primary"
                     disabled={!formState.isDirty || formState.isSubmitting || readOnly}
-                    spinner={formState.isSubmitting}
+                    loading={formState.isSubmitting}
                   >
                     <FormattedMessage id="SubmitButton.ConfirmInformation" />
-                  </Hovedknapp>
+                  </Button>
                 </Column>
               </Row>
             </Form>

@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import moment from 'moment';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Heading } from '@navikt/ds-react';
 import { Row } from 'nav-frontend-grid';
 
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
@@ -162,7 +162,7 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, alleDokumenter))}
       setDataOnUnmount={setFormData}
     >
-      <Undertittel><FormattedMessage id="InnsynForm.Innsynsbehandling" /></Undertittel>
+      <Heading size="small"><FormattedMessage id="InnsynForm.Innsynsbehandling" /></Heading>
       <VerticalSpacer twentyPx />
       <AksjonspunktHelpTextTemp isAksjonspunktOpen={isApOpen}>
         {[<FormattedMessage id="InnsynForm.VurderKravetOmInnsyn" key="1" />]}

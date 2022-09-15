@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { UseFormHandleSubmit } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Button } from '@navikt/ds-react';
 
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import KlageFormType from '@fpsak-frontend/prosess-klagevurdering/src/types/klageFormType';
@@ -56,17 +56,17 @@ const TempsaveKlageButton: FunctionComponent<OwnProps> = ({
 }) => {
   if (!readOnly) {
     return (
-      <Hovedknapp
-        mini
-        htmlType="button"
-        spinner={spinner}
+      <Button
+        size="small"
+        variant="primary"
+        loading={spinner}
         onClick={handleSubmit((values: FormValues) => saveKlage(transformValues(
           values,
           aksjonspunktCode,
         )))}
       >
         <FormattedMessage id="Klage.ResolveKlage.TempSaveButton" />
-      </Hovedknapp>
+      </Button>
     );
   }
   return null;

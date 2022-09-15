@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { InjectedFormProps, reduxForm } from 'redux-form';
-import { Undertekst, Undertittel } from 'nav-frontend-typografi';
+import { Detail, Heading } from '@navikt/ds-react';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { getKodeverknavnFn } from '@navikt/ft-utils';
@@ -33,10 +33,10 @@ export const ResultatEnkel: FunctionComponent<OwnPropsResultat> = ({
   ankeVurderingResultat,
 }): ReactElement => (
   <div>
-    <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Stadfest" /></Undertekst>
+    <Detail size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Stadfest" /></Detail>
     <VerticalSpacer sixteenPx />
-    <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Undertekst>
-    <Undertekst>{ankeVurderingResultat.begrunnelse}</Undertekst>
+    <Detail size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Detail>
+    <Detail size="small">{ankeVurderingResultat.begrunnelse}</Detail>
   </div>
 );
 
@@ -44,10 +44,10 @@ export const ResultatOpphev: FunctionComponent<OwnPropsResultat> = ({
   ankeVurderingResultat,
 }): ReactElement => (
   <div>
-    <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Oppheves" /></Undertekst>
+    <Detail size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Oppheves" /></Detail>
     <VerticalSpacer sixteenPx />
-    <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Undertekst>
-    <Undertekst>{ankeVurderingResultat.begrunnelse}</Undertekst>
+    <Detail size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Detail>
+    <Detail size="small">{ankeVurderingResultat.begrunnelse}</Detail>
   </div>
 );
 
@@ -55,10 +55,10 @@ export const ResultatHjemsend: FunctionComponent<OwnPropsResultat> = ({
   ankeVurderingResultat,
 }): ReactElement => (
   <div>
-    <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Hjemsendes" /></Undertekst>
+    <Detail size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Hjemsendes" /></Detail>
     <VerticalSpacer sixteenPx />
-    <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Undertekst>
-    <Undertekst>{ankeVurderingResultat.begrunnelse}</Undertekst>
+    <Detail size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Detail>
+    <Detail size="small">{ankeVurderingResultat.begrunnelse}</Detail>
   </div>
 );
 
@@ -66,14 +66,14 @@ export const ResultatAvvise: FunctionComponent<OwnPropsResultat> = ({
   ankeVurderingResultat,
 }): ReactElement => (
   <>
-    <Undertekst>
+    <Detail size="small">
       {ankeVurderingResultat.påAnketKlageBehandlingUuid != null
       && (<FormattedMessage id="Ankebehandling.Resultat.Innstilling.Avvises" />)}
       {ankeVurderingResultat.påAnketKlageBehandlingUuid == null
       && (<FormattedMessage id="Ankebehandling.Resultat.Innstilling.AvvisesUten" />)}
-    </Undertekst>
+    </Detail>
     <VerticalSpacer sixteenPx />
-    <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Arsak" /></Undertekst>
+    <Detail size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Arsak" /></Detail>
     <ul>
       {ankeVurderingResultat.erAnkerIkkePart
       && (<li><FormattedMessage id="Ankebehandling.Avvisning.IkkePart" /></li>)}
@@ -84,16 +84,16 @@ export const ResultatAvvise: FunctionComponent<OwnPropsResultat> = ({
       {ankeVurderingResultat.erIkkeSignert
       && (<li><FormattedMessage id="Ankebehandling.Avvisning.IkkeSignert" /></li>)}
     </ul>
-    <Undertekst>
+    <Detail size="small">
       <FormattedMessage id="Ankebehandling.Realitetsbehandles" />
       <span> </span>
       <FormattedMessage id={ankeVurderingResultat.erSubsidiartRealitetsbehandles
         ? 'Ankebehandling.Realitetsbehandles.Ja' : 'Ankebehandling.Realitetsbehandles.Nei'}
       />
-    </Undertekst>
+    </Detail>
     <VerticalSpacer sixteenPx />
-    <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Undertekst>
-    <Undertekst>{ankeVurderingResultat.begrunnelse}</Undertekst>
+    <Detail size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Detail>
+    <Detail size="small">{ankeVurderingResultat.begrunnelse}</Detail>
   </>
 );
 
@@ -111,17 +111,17 @@ export const ResultatOmgjores: FunctionComponent<OwnPropsResultat & { alleKodeve
   alleKodeverk,
 }): ReactElement => (
   <>
-    <Undertekst><FormattedMessage id={hentSprakKode(ankeVurderingResultat.ankeVurderingOmgjoer)} /></Undertekst>
+    <Detail size="small"><FormattedMessage id={hentSprakKode(ankeVurderingResultat.ankeVurderingOmgjoer)} /></Detail>
     <VerticalSpacer sixteenPx />
     {ankeVurderingResultat.ankeOmgjoerArsak && (
       <>
-        <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Arsak" /></Undertekst>
-        <Undertekst>{getKodeverknavnFn(alleKodeverk)(ankeVurderingResultat.ankeOmgjoerArsak, KodeverkType.ANKE_OMGJOER_AARSAK)}</Undertekst>
+        <Detail size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Arsak" /></Detail>
+        <Detail size="small">{getKodeverknavnFn(alleKodeverk)(ankeVurderingResultat.ankeOmgjoerArsak, KodeverkType.ANKE_OMGJOER_AARSAK)}</Detail>
         <VerticalSpacer sixteenPx />
       </>
     )}
-    <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Undertekst>
-    <Undertekst>{ankeVurderingResultat.begrunnelse}</Undertekst>
+    <Detail size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Detail>
+    <Detail size="small">{ankeVurderingResultat.begrunnelse}</Detail>
   </>
 );
 
@@ -179,11 +179,11 @@ export const AnkeResultatForm: FunctionComponent<PureOwnProps & MappedOwnProps &
   ...formProps
 }) => (
   <form onSubmit={handleSubmit}>
-    <Undertittel><FormattedMessage id="Ankebehandling.Resultat.Title" /></Undertittel>
+    <Heading size="small"><FormattedMessage id="Ankebehandling.Resultat.Title" /></Heading>
     <VerticalSpacer fourPx />
     <Row>
       <Column xs="12">
-        <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling" /></Undertekst>
+        <Detail size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling" /></Detail>
         <AnkeResultat ankeVurderingResultat={ankeVurderingResultat} alleKodeverk={alleKodeverk} />
       </Column>
     </Row>

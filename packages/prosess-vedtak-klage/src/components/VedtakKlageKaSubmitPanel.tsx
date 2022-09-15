@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Button } from '@navikt/ds-react';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { KlageVurdering } from '@fpsak-frontend/types';
@@ -39,26 +39,28 @@ export const VedtakKlageKaSubmitPanel: FunctionComponent<OwnProps> = ({
     <Row>
       <Column xs="8">
         {!readOnly && (
-          <Hovedknapp
-            mini
+          <Button
+            size="small"
+            variant="primary"
             className={styles.mainButton}
             onClick={lagreVedtak}
             disabled={behandlingPaaVent || isSubmitting || klageResultat.godkjentAvMedunderskriver}
-            spinner={isSubmitting}
+            loading={isSubmitting}
           >
             <FormattedMessage id="VedtakKlageForm.TilGodkjenningKa" />
-          </Hovedknapp>
+          </Button>
         )}
         {!readOnly && (
-          <Hovedknapp
-            mini
+          <Button
+            size="small"
+            variant="primary"
             className={styles.mainButton}
             onClick={lagreVedtak}
             disabled={behandlingPaaVent || isSubmitting || !klageResultat.godkjentAvMedunderskriver}
-            spinner={isSubmitting}
+            loading={isSubmitting}
           >
             <FormattedMessage id="VedtakKlageForm.FerdigstillKlageKa" />
-          </Hovedknapp>
+          </Button>
         )}
         {!kabalisert && (
           <a
