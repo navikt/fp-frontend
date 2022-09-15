@@ -7,6 +7,11 @@
   "Ankebehandling.Merknad.Merknader.Nei": "Nei",
   "Ankebehandling.Merknad.Merknader.Kommentarer": "Kommentarer til Trygderettsbehandlingen",
   "Ankebehandling.Merknad.Merknader.LagreKommentarer": "Lagre kommentarer",
+  "Ankebehandling.Merknad.SendTilKabal": "Send til KABAL",
+  "Ankebehandling.Merknad.KabalText": "Fortsett ankebehandlingen i KABAL: Kryss av, velg hjemmel og klagebehandling, trykk deretter send",
+  "Ankebehandling.Merknad.SeKabalText": "Anken behandles i KABAL",
+  "Ankebehandling.Merknad.Hjemmel": "Hjemmel",
+
   "FritekstAnkeMerknaderTextField": "Fritekst for Trygderettsbehandling",
 
   "Ankebehandling.Resultat": "Resultat fra Trygdretten",
@@ -16,6 +21,8 @@
   "Ankebehandling.Resultat.Hjemsend": "Hjemsendt",
   "Ankebehandling.Resultat.Avvis": "Avvist",
   "Ankebehandling.Resultat.Vedtak": "Vedtaket som er anket",
+  "Ankebehandling.Resultat.SendtTrygderett": "Dato sendt Trygderetten",
+  "Ankebehandling.Resultat.IkkePaaAnketVedtak": "Ikke påanket vedtak",
   "Ankebehandling.VurderingOmgjoer.Delvis": "Delvis omgjøring, til gunst",
   "Ankebehandling.VurderingOmgjoer.Gunst": "Til gunst",
   "Ankebehandling.VurderingOmgjoer.Ugunst": "Til ugunst",

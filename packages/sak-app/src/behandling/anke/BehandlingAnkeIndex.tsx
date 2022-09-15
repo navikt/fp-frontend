@@ -94,6 +94,7 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & StandardBehandlingProps>
                 opneSokeside={opneSokeside}
                 toggleSkalOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
                 oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+                alleBehandlinger={alleBehandlinger}
               />
             </>
           )}

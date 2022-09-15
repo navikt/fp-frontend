@@ -2,17 +2,21 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import ankeVurderingType from '@fpsak-frontend/kodeverk/src/ankeVurdering';
-import { AnkeVurdering } from '@fpsak-frontend/types';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { RadioGroupField, SelectField } from '@fpsak-frontend/form';
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
+import ankeVurdering from '@fpsak-frontend/kodeverk/src/ankeVurdering';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import { TrygderettsbehandlingForm } from './TrygderettsbehandlingForm';
 import messages from '../../i18n/nb_NO.json';
 
 const intlMock = getIntlMock(messages);
+
+// @ts-ignore Fiks
+const kodeverk = alleKodeverk as AlleKodeverk;
 
 describe('<TrygderettsbehandlingForm>', () => {
   const sprakkode = 'NB';
@@ -26,12 +30,16 @@ describe('<TrygderettsbehandlingForm>', () => {
         readOnlySubmitButton={false}
         aksjonspunktCode={aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER}
         sprakkode={sprakkode}
-        ankeOmgorArsaker={[]}
-        ankeVurderingResultat={{} as AnkeVurdering['ankeVurderingResultat']}
         aksjonspunkter={[]}
+        behandlinger={[]}
         submitCallback={sinon.spy()}
         onSubmit={sinon.spy()}
-        valgtTrygderettVurdering={ankeVurderingType.ANKE_OMGJOER}
+        formValues={{
+          trygderettVurdering: ankeVurdering.ANKE_OMGJOER,
+        }}
+        ankeVurderingInput={undefined}
+        alleKodeverk={kodeverk}
+        alleAktuelleHjemler={[]}
       />,
     );
 
@@ -50,12 +58,16 @@ describe('<TrygderettsbehandlingForm>', () => {
         readOnlySubmitButton={false}
         aksjonspunktCode={aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER}
         sprakkode={sprakkode}
-        ankeOmgorArsaker={[]}
-        ankeVurderingResultat={{} as AnkeVurdering['ankeVurderingResultat']}
         aksjonspunkter={[]}
+        behandlinger={[]}
         submitCallback={sinon.spy()}
         onSubmit={sinon.spy()}
-        valgtTrygderettVurdering={ankeVurderingType.ANKE_STADFESTE_YTELSESVEDTAK}
+        formValues={{
+          trygderettVurdering: ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK,
+        }}
+        ankeVurderingInput={undefined}
+        alleKodeverk={kodeverk}
+        alleAktuelleHjemler={[]}
       />,
     );
 

@@ -1,23 +1,24 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { AnkeVurdering, StandardProsessPanelProps } from '@fpsak-frontend/types';
 import { createIntl } from '@navikt/ft-utils';
 import { ReduxWrapper } from '@fpsak-frontend/form';
 
-import TrygderettsbehandlingForm from './components/TrygderettsbehandlingForm';
+import TrygderettsbehandlingForm, { BehandlingInfo } from './components/TrygderettsbehandlingForm';
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
 interface OwnProps {
   ankeVurdering: AnkeVurdering;
+  behandlinger: BehandlingInfo[];
 }
 
 const AnkeTrygderettsbehandlingProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   behandling,
   ankeVurdering,
+  behandlinger,
   aksjonspunkter,
   submitCallback,
   isReadOnly,
@@ -30,7 +31,13 @@ const AnkeTrygderettsbehandlingProsessIndex: FunctionComponent<OwnProps & Standa
     <ReduxWrapper formName="AnkeTrygderettsbehandlingProsessIndex" formData={formData} setFormData={setFormData}>
       <TrygderettsbehandlingForm
         // @ts-ignore
-        ankeVurderingResultat={ankeVurdering.ankeVurderingResultat}
+        ankeVurderingInput={ankeVurdering}
+        // @ts-ignore
+        alleKodeverk={alleKodeverk}
+        // @ts-ignore
+        alleAktuelleHjemler={ankeVurdering.aktuelleHjemler ? ankeVurdering.aktuelleHjemler : []}
+        // @ts-ignore
+        behandlinger={behandlinger}
         // @ts-ignore
         aksjonspunkter={aksjonspunkter}
         // @ts-ignore
@@ -41,8 +48,6 @@ const AnkeTrygderettsbehandlingProsessIndex: FunctionComponent<OwnProps & Standa
         readOnly={isReadOnly}
         // @ts-ignore
         readOnlySubmitButton={readOnlySubmitButton}
-        // @ts-ignore
-        ankeOmgorArsaker={alleKodeverk[kodeverkTyper.ANKE_OMGJOER_AARSAK]}
       />
     </ReduxWrapper>
   </RawIntlProvider>
