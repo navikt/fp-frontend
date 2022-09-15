@@ -9,7 +9,6 @@ const xNavCallId = 'x_Nav-CallId';
 const xTimestamp = 'x-Timestamp';
 
 const proxyOptions = (api, authClient) => ({
-  timeout: 30000,
   proxyReqOptDecorator: (options, req) => {
     if (req.headers[xNavCallId]) {
       options.headers[xNavCallId] = req.headers[xNavCallId];
@@ -39,6 +38,12 @@ const proxyOptions = (api, authClient) => ({
     return newPath;
   },
   userResHeaderDecorator: function(headers, userReq, userRes, proxyReq, proxyRes) {
+    // FPSAK sender er redirect med full hostname - dette må man modifisere slik at det går tilbake via proxy.
+    const location = proxyRes.headers.location;
+    if (location && location.includes(api.url)) {
+      headers.location = location.split(api.url)[1];
+      logger.debug(`Location header etter endring: ${headers.location}`)
+    }
     const statusCode = proxyRes.statusCode;
     const requestTime = Date.now() - proxyReq.getHeader(xTimestamp);
     const melding = `${statusCode} ${proxyRes.statusMessage}: ${userReq.method} - ${userReq.originalUrl} (${requestTime}ms)`;

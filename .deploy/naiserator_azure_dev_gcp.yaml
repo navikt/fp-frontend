@@ -6,7 +6,7 @@ metadata:
   labels:
     team: teamforeldrepenger
 spec:
-  image: ghcr.io/navikt/fp-frontend-azure-gcp:0.07
+  image: ghcr.io/navikt/fp-frontend-azure-gcp:0.14
   port: 9090
   ingresses:
     - "https://fpsak-gcp.dev.intern.nav.no"
