@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import MockAdapter from 'axios-mock-adapter';
-import Modal from 'nav-frontend-modal';
+import { Modal } from '@navikt/ds-react';
 import { FagsakYtelseType, BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
 import { Fagsak, BehandlingAppKontekst } from '@navikt/ft-types';
 

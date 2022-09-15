@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Button, BodyShort } from '@navikt/ds-react';
 import { Column, Row } from 'nav-frontend-grid';
-import { Undertittel } from 'nav-frontend-typografi';
 
 import { VerticalSpacer, Image } from '@navikt/ft-ui-komponenter';
 import advarselIcon from '@fpsak-frontend/assets/images/advarsel.svg';
@@ -45,7 +44,7 @@ export const SearchForm: FunctionComponent<OwnProps> = ({
 
   return (
     <Form formMethods={formMethods} onSubmit={searchFagsakCallback} className={styles.container}>
-      <Undertittel>{intl.formatMessage({ id: 'Search.SearchFagsakOrPerson' })}</Undertittel>
+      <BodyShort size="small">{intl.formatMessage({ id: 'Search.SearchFagsakOrPerson' })}</BodyShort>
       <VerticalSpacer eightPx />
       <Row>
         <Column xs="7">
@@ -56,14 +55,15 @@ export const SearchForm: FunctionComponent<OwnProps> = ({
           />
         </Column>
         <Column xs="5">
-          <Hovedknapp
-            mini
+          <Button
+            variant="primary"
+            size="small"
             className={styles.button}
-            spinner={searchStarted}
+            loading={searchStarted}
             disabled={isButtonDisabled(searchStarted, searchString)}
           >
             <FormattedMessage id="Search.Search" />
-          </Hovedknapp>
+          </Button>
         </Column>
       </Row>
       {searchResultAccessDenied && (

@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import {
   FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
 } from 'react-intl';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Label, BodyShort } from '@navikt/ds-react';
 
 import { HistorikkinnslagEndretFelt } from '@fpsak-frontend/types';
 
@@ -71,9 +71,9 @@ const HistorikkMalType8: FunctionComponent<HistorikkMal & WrappedComponentProps>
             createLocationForSkjermlenke={createLocationForSkjermlenke}
           />
 
-          {historikkinnslagDel.hendelse && <Element>{findHendelseText(historikkinnslagDel.hendelse, getKodeverknavn)}</Element>}
+          {historikkinnslagDel.hendelse && <Label size="small">{findHendelseText(historikkinnslagDel.hendelse, getKodeverknavn)}</Label>}
 
-          {historikkinnslagDel.resultat && <Element>{findResultatText(historikkinnslagDel.resultat, intl)}</Element>}
+          {historikkinnslagDel.resultat && <Label size="small">{findResultatText(historikkinnslagDel.resultat, intl)}</Label>}
 
           {historikkinnslagDel.endredeFelter && historikkinnslagDel.endredeFelter
             .map((endretFelt, i) => <div key={`endredeFelter${i + 1}`}>{formatChangedField(endretFelt, intl)}</div>)}
@@ -85,7 +85,7 @@ const HistorikkMalType8: FunctionComponent<HistorikkMal & WrappedComponentProps>
             />
           ))}
 
-          {historikkinnslagDel.årsaktekst && <Normaltekst>{historikkinnslagDel.årsaktekst}</Normaltekst>}
+          {historikkinnslagDel.årsaktekst && <BodyShort size="small">{historikkinnslagDel.årsaktekst}</BodyShort>}
           {historikkinnslagDel.begrunnelsetekst && <BubbleText bodyText={historikkinnslagDel.begrunnelsetekst} />}
           {historikkinnslagDel.begrunnelseFritekst && <BubbleText bodyText={historikkinnslagDel.begrunnelseFritekst} />}
           {dokumentLinks && dokumentLinks.map((dokumentLenke) => (

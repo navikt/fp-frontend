@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 
 import { AvsnittSkiller, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
@@ -81,9 +81,9 @@ const HistorikkMalTypeAktivitetskrav: FunctionComponent<HistorikkMal> = ({
       {historikkinnslagDeler.map((historikkinnslagDel, index) => (historikkinnslagDel.endredeFelter ? (
         <div key={`historikkinnslagDel${index + 1}`}>
           <VerticalSpacer fourPx />
-          <Normaltekst>
+          <BodyShort size="small">
             { buildEndretFeltText(historikkinnslagDel, getKodeverknavn) }
-          </Normaltekst>
+          </BodyShort>
           <VerticalSpacer fourPx />
           <BubbleText
             bodyText={decodeHtmlEntity(historikkinnslagDel.begrunnelseFritekst)}

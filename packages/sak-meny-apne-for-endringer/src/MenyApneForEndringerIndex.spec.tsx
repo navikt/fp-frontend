@@ -2,13 +2,15 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
-import Modal from 'nav-frontend-modal';
+import { Modal } from '@navikt/ds-react';
 import * as stories from './MenyApneForEndringerIndex.stories';
 
 const { Default } = composeStories(stories);
 
 describe('<MenyApneForEndringerIndex>', () => {
-  Modal.setAppElement('body');
+  if (Modal.setAppElement) {
+    Modal.setAppElement('body');
+  }
 
   it('skal vise modal og velge å åpne behandling for endringer', async () => {
     const apneBehandlingForEndringer = jest.fn();

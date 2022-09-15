@@ -4,7 +4,7 @@ import React, {
 import { Link, useLocation } from 'react-router-dom';
 import { RawIntlProvider } from 'react-intl';
 import moment from 'moment';
-import Modal from 'nav-frontend-modal';
+import { Modal } from '@navikt/ds-react';
 import { createIntl, parseQueryString } from '@navikt/ft-utils';
 import { ForbiddenPage, UnauthorizedPage } from '@navikt/ft-sak-infosider';
 

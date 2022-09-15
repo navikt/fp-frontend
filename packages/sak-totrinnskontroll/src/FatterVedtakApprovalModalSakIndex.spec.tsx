@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
-import ModalWrapper from 'nav-frontend-modal';
+import { Modal } from '@navikt/ds-react';
 import * as stories from './FatterVedtakApprovalModalSakIndex.stories';
 
 const {
@@ -9,7 +9,10 @@ const {
 } = composeStories(stories);
 
 describe('<FatterVedtakApprovalModalSakIndex>', () => {
-  ModalWrapper.setAppElement('body');
+  if (Modal.setAppElement) {
+    Modal.setAppElement('body');
+  }
+
   it('skal vise modal etter godkjenning', async () => {
     render(<EtterGodkjenning />);
 

@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import Modal from 'nav-frontend-modal';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Button, BodyShort, Modal } from '@navikt/ds-react';
 import { Image } from '@navikt/ft-ui-komponenter';
 
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
@@ -30,32 +28,35 @@ const KlageBehandlingModal: FunctionComponent<OwnProps> = ({
   return (
     <Modal
       className={styles.modal}
-      isOpen={visModal}
-      contentLabel={intl.formatMessage({ id: 'KlageVurderingModal.ModalDescription' })}
-      onRequestClose={lukkModal}
+      open={visModal}
+      aria-label={intl.formatMessage({ id: 'KlageVurderingModal.ModalDescription' })}
+      onClose={lukkModal}
       closeButton={false}
       shouldCloseOnOverlayClick={false}
     >
-      <Row className="">
-        <Column xs="1">
-          <Image className={styles.image} src={innvilgetImageUrl} />
-          <div className={styles.divider} />
-        </Column>
-        <Column xs="9">
-          <Normaltekst>{intl.formatMessage({ id: 'KlageVurderingModal.VedtakOversendt' })}</Normaltekst>
-          <Normaltekst>{intl.formatMessage({ id: 'KlageVurderingModal.GoToSearchPage' })}</Normaltekst>
-        </Column>
-        <Column xs="2">
-          <Hovedknapp
-            mini
-            className={styles.button}
-            onClick={lukkModal}
-            autoFocus
-          >
-            {intl.formatMessage({ id: 'KlageVurderingModal.Ok' })}
-          </Hovedknapp>
-        </Column>
-      </Row>
+      <Modal.Content>
+        <Row className="">
+          <Column xs="1">
+            <Image className={styles.image} src={innvilgetImageUrl} />
+            <div className={styles.divider} />
+          </Column>
+          <Column xs="9">
+            <BodyShort size="small">{intl.formatMessage({ id: 'KlageVurderingModal.VedtakOversendt' })}</BodyShort>
+            <BodyShort size="small">{intl.formatMessage({ id: 'KlageVurderingModal.GoToSearchPage' })}</BodyShort>
+          </Column>
+          <Column xs="2">
+            <Button
+              variant="primary"
+              size="small"
+              className={styles.button}
+              onClick={lukkModal}
+              autoFocus
+            >
+              {intl.formatMessage({ id: 'KlageVurderingModal.Ok' })}
+            </Button>
+          </Column>
+        </Row>
+      </Modal.Content>
     </Modal>
   );
 };

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { NavLink } from 'react-router-dom';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 import { Location } from 'history';
 import { Image } from '@navikt/ft-ui-komponenter';
 
@@ -71,9 +71,9 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
                 <div key={aksjonspunkt.aksjonspunktKode} className={styles.approvalItemContainer}>
                   {aksjonspunktTexts.map((formattedMessage: ReactNode, index: number) => (
                     <div key={aksjonspunkt.aksjonspunktKode.concat('_'.concat(index.toString()))} className={styles.aksjonspunktTextContainer}>
-                      <Normaltekst>
+                      <BodyShort size="small">
                         {formattedMessage}
-                      </Normaltekst>
+                      </BodyShort>
                     </div>
                   ))}
                   <div className={styles.approvalItem}>

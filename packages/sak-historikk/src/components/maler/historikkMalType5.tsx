@@ -2,10 +2,10 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import {
   FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
 } from 'react-intl';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Label, BodyShort } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { HistorikkinnslagDel, HistorikkinnslagEndretFelt } from '@fpsak-frontend/types';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import historikkEndretFeltTypeCodes from '../../kodeverk/historikkEndretFeltTypeCodes';
@@ -174,7 +174,7 @@ const HistorikkMalType5: FunctionComponent<HistorikkMal & WrappedComponentProps>
         />
 
         {lageElementInnhold(historikkinnslagDel, intl, getKodeverknavn).map((tekst) => (
-          <div key={tekst}><Element>{tekst}</Element></div>
+          <div key={tekst}><Label size="small">{tekst}</Label></div>
         ))}
 
         {lagGjeldendeFraInnslag(historikkinnslagDel)}
@@ -197,7 +197,7 @@ const HistorikkMalType5: FunctionComponent<HistorikkMal & WrappedComponentProps>
           />
         ))}
 
-        {historikkinnslagDel.årsaktekst && <Normaltekst>{historikkinnslagDel.årsaktekst}</Normaltekst>}
+        {historikkinnslagDel.årsaktekst && <BodyShort size="small">{historikkinnslagDel.årsaktekst}</BodyShort>}
         {historikkinnslagDel.begrunnelsetekst && <BubbleText bodyText={historikkinnslagDel.begrunnelsetekst} />}
         {historikkinnslagDel.begrunnelseFritekst && <BubbleText bodyText={historikkinnslagDel.begrunnelseFritekst} />}
         {historikkinnslag.dokumentLinks && historikkinnslag.dokumentLinks.map((dokumentLenke) => (

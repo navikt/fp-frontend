@@ -4,9 +4,9 @@ import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 import { Aksjonspunkt, AlleKodeverk, Behandling } from '@navikt/ft-types';
 import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
+import { Modal } from '@navikt/ds-react';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import Modal from 'nav-frontend-modal';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import { createRequestApi, RestApiConfigBuilder } from '@fpsak-frontend/rest-api';
 
