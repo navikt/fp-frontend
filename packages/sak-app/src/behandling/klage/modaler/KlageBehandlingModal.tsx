@@ -51,6 +51,7 @@ const KlageBehandlingModal: FunctionComponent<OwnProps> = ({
               className={styles.button}
               onClick={lukkModal}
               autoFocus
+              type="button"
             >
               {intl.formatMessage({ id: 'KlageVurderingModal.Ok' })}
             </Button>

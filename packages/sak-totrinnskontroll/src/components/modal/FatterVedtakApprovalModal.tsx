@@ -173,6 +173,7 @@ const FatterVedtakApprovalModal: FunctionComponent<OwnProps & WrappedComponentPr
               className={styles.button}
               onClick={closeEvent}
               autoFocus
+              type="button"
             >
               <FormattedMessage id="FatterVedtakApprovalModal.Ok" />
             </Button>

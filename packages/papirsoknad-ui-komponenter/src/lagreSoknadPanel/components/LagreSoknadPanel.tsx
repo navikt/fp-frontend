@@ -96,6 +96,7 @@ const LagreSoknadPanel: FunctionComponent<OwnProps> = ({
                     variant="primary"
                     loading={submitting}
                     disabled={readOnly || submitting}
+                    type="button"
                   >
                     <FormattedMessage id="Registrering.SaveApplication.EndButton" />
                   </Button>

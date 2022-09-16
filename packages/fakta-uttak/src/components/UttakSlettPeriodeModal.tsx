@@ -94,6 +94,7 @@ export const UttakSlettPeriodeModalImpl: FunctionComponent<PureOwnProps & Wrappe
                 className={styles.button}
                 onClick={formProps.handleSubmit}
                 disabled={formProps.pristine}
+                type="button"
               >
                 {intl.formatMessage({ id: 'UttakInfoPanel.Ok' })}
               </Button>
@@ -104,6 +105,7 @@ export const UttakSlettPeriodeModalImpl: FunctionComponent<PureOwnProps & Wrappe
                   cancelEvent();
                   formProps.destroy();
                 }}
+                type="button"
               >
                 {intl.formatMessage({ id: 'UttakInfoPanel.Avbryt' })}
               </Button>

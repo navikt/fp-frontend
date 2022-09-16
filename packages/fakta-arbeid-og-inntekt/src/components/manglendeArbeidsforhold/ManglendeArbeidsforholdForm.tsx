@@ -243,6 +243,7 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                   variant="secondary"
                   loading={formMethods.formState.isSubmitting}
                   disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+                  type="button"
                 >
                   <FormattedMessage id="ManglendeOpplysningerForm.Lagre" />
                 </Button>
@@ -254,6 +255,7 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                   loading={false}
                   disabled={formMethods.formState.isSubmitting}
                   onClick={avbryt}
+                  type="button"
                 >
                   <FormattedMessage id="ManglendeOpplysningerForm.Avbryt" />
                 </Button>

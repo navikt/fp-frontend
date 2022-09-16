@@ -171,6 +171,7 @@ const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps> = ({
                 variant="secondary"
                 size="small"
                 onClick={slaAvEditeringAvUtland}
+                type="button"
               >
                 <FormattedMessage id="UtlandPanel.avbryt" />
               </Button>

@@ -123,6 +123,7 @@ export const DelOppPeriodeModal: FunctionComponent<PureOwnProps & MappedOwnProps
                 className={styles.button}
                 onClick={formProps.handleSubmit}
                 disabled={formProps.pristine}
+                type="button"
               >
                 <FormattedMessage id="DelOppPeriodeModalImpl.Ok" />
               </Button>
@@ -131,6 +132,7 @@ export const DelOppPeriodeModal: FunctionComponent<PureOwnProps & MappedOwnProps
                 variant="secondary"
                 onClick={cancelEvent}
                 className={styles.cancelButton}
+                type="button"
               >
                 <FormattedMessage id="DelOppPeriodeModalImpl.Avbryt" />
               </Button>

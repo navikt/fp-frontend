@@ -96,7 +96,13 @@ export const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
             </Button>
           </FlexColumn>
           <FlexColumn>
-            <Button size="small" variant="secondary" onClick={avbrytEditeringAvAktivitetskrav} disabled={readOnly}>
+            <Button
+              size="small"
+              variant="secondary"
+              onClick={avbrytEditeringAvAktivitetskrav}
+              disabled={readOnly}
+              type="button"
+            >
               <FormattedMessage id="AktivitetskravFaktaDetailForm.Avbryt" />
             </Button>
           </FlexColumn>

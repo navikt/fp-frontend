@@ -235,6 +235,7 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
           onClick={bekreft}
           disabled={valgtAktivitetIndex !== undefined || isSubmitting || readOnly || harIkkeBehandletAlle}
           loading={isSubmitting}
+          type="button"
         >
           <FormattedMessage id="OpptjeningFaktaForm.Confirm" />
         </Button>

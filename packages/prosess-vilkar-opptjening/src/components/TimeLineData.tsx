@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import moment from 'moment';
 import { Column, Row } from 'nav-frontend-grid';
-import { Element } from 'nav-frontend-typografi';
+import { Label } from '@navikt/ds-react';
 import { Image } from '@navikt/ft-ui-komponenter';
 
 import checkImg from '@fpsak-frontend/assets/images/check.svg';
@@ -48,18 +48,18 @@ const TimeLineData: FunctionComponent<OwnProps> = ({
   return (
     <div>
       <Row>
-        <Element>
+        <Label size="small">
           <FormattedMessage id="OpptjeningVilkarView.DetailsForSelectedPeriod" />
-        </Element>
+        </Label>
       </Row>
       <Row>
         <Column xs="6" className={backgroundStyle(fastsattOpptjeningAktivitet.klasse)}>
           <Row className={styles.timeLineDataContainer}>
             <Column xs="6">
               <div>
-                <Element>
+                <Label size="small">
                   {`${isoToDdMmYyyy(fastsattOpptjeningAktivitet.fom)} - ${isoToDdMmYyyy(fastsattOpptjeningAktivitet.tom)}`}
-                </Element>
+                </Label>
               </div>
             </Column>
             <Column xs="6">

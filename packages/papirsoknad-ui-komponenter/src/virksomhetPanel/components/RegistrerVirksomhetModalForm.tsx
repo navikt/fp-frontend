@@ -84,6 +84,7 @@ const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps> = ({
               onClick={formMethods.handleSubmit(onSubmit)}
               disabled={readOnly}
               className={styles.savebutton}
+              type="button"
             >
               <FormattedMessage id="Registrering.RegistrerVirksomhetModalForm.Save" />
             </Button>
@@ -93,6 +94,7 @@ const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps> = ({
               onClick={closeEvent}
               disabled={readOnly}
               className={styles.cancelbutton}
+              type="button"
             >
               <FormattedMessage id="Registrering.RegistrerVirksomhetModalForm.Cancel" />
             </Button>

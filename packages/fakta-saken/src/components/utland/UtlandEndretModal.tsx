@@ -45,6 +45,7 @@ const UtlandEndretModal: FunctionComponent<OwnProps & WrappedComponentProps> = (
               variant="primary"
               className={styles.button}
               onClick={lagreOgLukk}
+              type="button"
             >
               <FormattedMessage id="UtlandEndretModal.Ok" />
             </Button>

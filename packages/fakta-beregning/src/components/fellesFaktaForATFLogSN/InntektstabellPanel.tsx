@@ -98,6 +98,7 @@ export const InntektstabellPanelImpl: FunctionComponent<OwnProps & DispatchProps
                 size="small"
                 variant="secondary"
                 onClick={toggleOverstyring}
+                type="button"
               >
                 <FormattedMessage id="InntektstabellPanel.Avbryt" />
               </Button>

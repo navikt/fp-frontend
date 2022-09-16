@@ -3,7 +3,9 @@ import React, {
 } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Label, BodyShort, Detail, ErrorMessage } from '@navikt/ds-react';
+import {
+  Label, BodyShort, Detail, ErrorMessage,
+} from '@navikt/ds-react';
 import { Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk } from '@navikt/ft-types';
 import { formHooks } from '@navikt/ft-form-hooks';

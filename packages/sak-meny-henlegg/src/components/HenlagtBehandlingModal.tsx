@@ -51,6 +51,7 @@ const HenlagtBehandlingModal: FunctionComponent<OwnProps & WrappedComponentProps
             className={styles.button}
             onClick={closeEvent}
             autoFocus
+            type="button"
           >
             {intl.formatMessage({ id: 'HenlagtBehandlingModal.Ok' })}
           </Button>

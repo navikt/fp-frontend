@@ -6,7 +6,9 @@ import { Column, Container, Row } from 'nav-frontend-grid';
 import {
   Button, Modal, Label, BodyShort,
 } from '@navikt/ds-react';
-import { Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, FloatRight, Image, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 import { Datepicker, SelectField, Form } from '@navikt/ft-form-hooks';
@@ -201,30 +203,38 @@ const SettPaVentModal: FunctionComponent<PureOwnProps> = ({
               </Column>
             </Row>
             <VerticalSpacer sixteenPx />
-            <Row>
-              <Column xs="6" />
-              <Column>
-                <Button
-                  size="small"
-                  variant="primary"
-                  className={styles.button}
-                  onClick={showAvbryt ? ariaCheck : cancelEvent}
-                  disabled={isButtonDisabled(showAvbryt, venteArsakHasChanged, fristHasChanged, hasManualPaVent, fristFraFelt)}
-                >
-                  <FormattedMessage id="SettPaVentModal.Ok" />
-                </Button>
-                {(!hasManualPaVent || showAvbryt || !visBrevErBestilt) && (
-                  <Button
-                    size="small"
-                    variant="secondary"
-                    onClick={cancelEvent}
-                    className={styles.cancelButton}
-                  >
-                    <FormattedMessage id={hasManualPaVent ? 'SettPaVentModal.Avbryt' : 'SettPaVentModal.Lukk'} />
-                  </Button>
-                )}
-              </Column>
-            </Row>
+            <div>
+              <FloatRight>
+                <FlexContainer>
+                  <FlexRow>
+                    <FlexColumn>
+                      <Button
+                        size="small"
+                        variant="primary"
+                        className={styles.button}
+                        onClick={showAvbryt ? ariaCheck : cancelEvent}
+                        disabled={isButtonDisabled(showAvbryt, venteArsakHasChanged, fristHasChanged, hasManualPaVent, fristFraFelt)}
+                      >
+                        <FormattedMessage id="SettPaVentModal.Ok" />
+                      </Button>
+                    </FlexColumn>
+                    {(!hasManualPaVent || showAvbryt || !visBrevErBestilt) && (
+                    <FlexColumn>
+                      <Button
+                        size="small"
+                        variant="secondary"
+                        onClick={cancelEvent}
+                        className={styles.cancelButton}
+                        type="button"
+                      >
+                        <FormattedMessage id={hasManualPaVent ? 'SettPaVentModal.Avbryt' : 'SettPaVentModal.Lukk'} />
+                      </Button>
+                    </FlexColumn>
+                    )}
+                  </FlexRow>
+                </FlexContainer>
+              </FloatRight>
+            </div>
           </Form>
         </Container>
       </Modal.Content>

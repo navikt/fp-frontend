@@ -67,6 +67,7 @@ export const FaktaSubmitButton: FunctionComponent<PureOwnProps & MappedOwnProps>
         loading={isSubmitting}
         disabled={isDisabled(isDirty, isSubmitting, isSubmittable, hasEmptyRequiredFields, hasOpenAksjonspunkter)}
         onClick={onClick || ariaCheck}
+        type={onClick ? 'button' : 'submit'}
       >
         {!!buttonText && buttonText}
         {!buttonText && <FormattedMessage id="SubmitButton.ConfirmInformation" />}

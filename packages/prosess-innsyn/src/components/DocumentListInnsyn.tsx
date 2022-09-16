@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { BodyShort, Detail } from '@navikt/ds-react';
+import { BodyShort, Heading } from '@navikt/ds-react';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { CheckboxField } from '@navikt/ft-form-hooks';
@@ -82,7 +82,7 @@ const DocumentListInnsyn: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <Detail size="small" className={styles.noDocuments}><FormattedMessage id="DocumentListInnsyn.VelgInnsynsDok" /></Detail>
+      <Heading size="small" className={styles.noDocuments}><FormattedMessage id="DocumentListInnsyn.VelgInnsynsDok" /></Heading>
       <Row>
         <Column xs={readOnly ? '6' : '10'}>
           <Table headerTextCodes={headerTextCodes}>

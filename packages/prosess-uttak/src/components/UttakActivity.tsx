@@ -317,12 +317,13 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
                       variant="primary"
                       onClick={formProps.handleSubmit}
                       disabled={formProps.pristine || hasValidationError}
+                      type="button"
                     >
                       <FormattedMessage id="UttakActivity.Oppdater" />
                     </Button>
                   </FlexColumn>
                   <FlexColumn>
-                    <Button size="small" variant="secondary" onClick={cancelSelectedActivity}>
+                    <Button size="small" variant="secondary" onClick={cancelSelectedActivity} type="button">
                       <FormattedMessage id="UttakActivity.Avbryt" />
                     </Button>
                   </FlexColumn>

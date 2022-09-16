@@ -225,6 +225,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                       loading={false}
                       disabled={formMethods.formState.isSubmitting}
                       onClick={lukkRadOgResetForm}
+                      type="button"
                     >
                       <FormattedMessage id="LeggTilArbeidsforholdForm.Avbryt" />
                     </Button>
@@ -241,6 +242,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                     loading={false}
                     disabled={formMethods.formState.isSubmitting}
                     onClick={() => settVisSletteDialog(true)}
+                    type="button"
                   >
                     <Image src={binIcon} className={styles.buttonImage} />
                     <span><FormattedMessage id="LeggTilArbeidsforholdForm.Slett" /></span>

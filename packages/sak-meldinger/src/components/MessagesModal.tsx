@@ -55,6 +55,7 @@ const MessagesModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
               variant="primary"
               onClick={closeEvent}
               autoFocus
+              type="button"
             >
               {intl.formatMessage({ id: 'MessagesModal.OK' })}
             </Button>

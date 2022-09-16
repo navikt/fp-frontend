@@ -112,6 +112,7 @@ const OverstyringPanel: FunctionComponent<OwnProps> = ({
                 loading={isSubmitting}
                 disabled={isSubmitting}
                 onClick={toggleAv}
+                type="button"
               >
                 {intl.formatMessage({ id: 'OverstyringPanel.Avbryt' })}
               </Button>

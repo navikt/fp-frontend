@@ -50,6 +50,7 @@ const ProsessStegSubmitButton: FunctionComponent<OwnProps> = ({
         loading={isSubmitting}
         disabled={isDisabled(isDirty, isSubmitting, isSubmittable, hasEmptyRequiredFields)}
         onClick={onClick || ariaCheck}
+        type={onClick ? 'button' : 'submit'}
       >
         {text || intl.formatMessage({ id: 'SubmitButton.ConfirmInformation' })}
       </Button>

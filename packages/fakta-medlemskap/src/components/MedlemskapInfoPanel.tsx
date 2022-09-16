@@ -211,6 +211,7 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps> = ({
           onClick={lagre}
           disabled={isSubmitting || isConfirmButtonDisabled()}
           loading={isSubmitting}
+          type="button"
         >
           <FormattedMessage id="OppholdInntektOgPerioder.Bekreft" />
         </Button>

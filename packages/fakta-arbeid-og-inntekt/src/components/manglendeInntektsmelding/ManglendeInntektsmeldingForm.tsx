@@ -189,6 +189,7 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
                   loading={false}
                   disabled={formMethods.formState.isSubmitting}
                   onClick={avbryt}
+                  type="button"
                 >
                   <FormattedMessage id="InntektsmeldingInnhentesForm.Avbryt" />
                 </Button>

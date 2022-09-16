@@ -404,7 +404,7 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
               />
             </FlexColumn>
             <FlexColumn>
-              <Button variant="secondary" size="small" onClick={this.addNewPeriod} disabled={this.disableButtons()}>
+              <Button variant="secondary" size="small" onClick={this.addNewPeriod} disabled={this.disableButtons()} type="button">
                 <FormattedMessage id="UttakInfoPanel.LeggTilPeriode" />
               </Button>
             </FlexColumn>

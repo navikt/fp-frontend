@@ -4,10 +4,10 @@ import React, {
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { Button } from '@navikt/ds-react';
-import { Column, Row } from 'nav-frontend-grid';
 
 import { KlageVurdering } from '@fpsak-frontend/types';
 
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import styles from './vedtakKlageSubmitPanel.less';
 
 interface OwnProps {
@@ -36,44 +36,52 @@ export const VedtakKlageKaSubmitPanel: FunctionComponent<OwnProps> = ({
   }, []);
 
   return (
-    <Row>
-      <Column xs="8">
+    <FlexContainer>
+      <FlexRow>
         {!readOnly && (
-          <Button
-            size="small"
-            variant="primary"
-            className={styles.mainButton}
-            onClick={lagreVedtak}
-            disabled={behandlingPaaVent || isSubmitting || klageResultat.godkjentAvMedunderskriver}
-            loading={isSubmitting}
-          >
-            <FormattedMessage id="VedtakKlageForm.TilGodkjenningKa" />
-          </Button>
+          <FlexColumn>
+            <Button
+              size="small"
+              variant="primary"
+              className={styles.mainButton}
+              onClick={lagreVedtak}
+              disabled={behandlingPaaVent || isSubmitting || klageResultat.godkjentAvMedunderskriver}
+              loading={isSubmitting}
+              type="button"
+            >
+              <FormattedMessage id="VedtakKlageForm.TilGodkjenningKa" />
+            </Button>
+          </FlexColumn>
         )}
         {!readOnly && (
-          <Button
-            size="small"
-            variant="primary"
-            className={styles.mainButton}
-            onClick={lagreVedtak}
-            disabled={behandlingPaaVent || isSubmitting || !klageResultat.godkjentAvMedunderskriver}
-            loading={isSubmitting}
-          >
-            <FormattedMessage id="VedtakKlageForm.FerdigstillKlageKa" />
-          </Button>
+          <FlexColumn>
+            <Button
+              size="small"
+              variant="primary"
+              className={styles.mainButton}
+              onClick={lagreVedtak}
+              disabled={behandlingPaaVent || isSubmitting || !klageResultat.godkjentAvMedunderskriver}
+              loading={isSubmitting}
+              type="button"
+            >
+              <FormattedMessage id="VedtakKlageForm.FerdigstillKlageKa" />
+            </Button>
+          </FlexColumn>
         )}
         {!kabalisert && (
-          <a
-            href=""
-            onClick={forhåndsvis}
-            onKeyDown={(e) => (e.key === 'Enter' ? forhåndsvis(e) : null)}
-            className={classNames('lenke lenke--frittstaende')}
-          >
-            <FormattedMessage id="VedtakKlageForm.ForhandvisBrev" />
-          </a>
+          <FlexColumn>
+            <a
+              href=""
+              onClick={forhåndsvis}
+              onKeyDown={(e) => (e.key === 'Enter' ? forhåndsvis(e) : null)}
+              className={classNames('lenke lenke--frittstaende')}
+            >
+              <FormattedMessage id="VedtakKlageForm.ForhandvisBrev" />
+            </a>
+          </FlexColumn>
         )}
-      </Column>
-    </Row>
+      </FlexRow>
+    </FlexContainer>
   );
 };
 

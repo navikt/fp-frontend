@@ -149,6 +149,7 @@ const UtlandPanel: FunctionComponent<OwnProps> = ({
                 variant="primary"
                 onClick={slaPaVisningAvModal}
                 disabled={!formMethods.formState.isDirty}
+                type="button"
               >
                 <FormattedMessage id="UtlandPanel.lagre" />
               </Button>
@@ -157,6 +158,7 @@ const UtlandPanel: FunctionComponent<OwnProps> = ({
               variant="secondary"
               size="small"
               onClick={slaAvEditeringAvUtland}
+              type="button"
             >
               <FormattedMessage id="UtlandPanel.avbryt" />
             </Button>

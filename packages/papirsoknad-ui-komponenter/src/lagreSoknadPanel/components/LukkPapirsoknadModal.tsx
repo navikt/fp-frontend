@@ -62,6 +62,7 @@ const LukkPapirSoknadModal: FunctionComponent<OwnProps> = ({
                   variant="primary"
                   className={styles.button}
                   onClick={() => handleSubmit()}
+                  type="button"
                 >
                   {intl.formatMessage({ id: 'ModalLukkPapirSoknad.Ok' })}
                 </Button>
@@ -71,6 +72,7 @@ const LukkPapirSoknadModal: FunctionComponent<OwnProps> = ({
                 variant="secondary"
                 onClick={cancelEvent}
                 className={styles.cancelButton}
+                type="button"
               >
                 {intl.formatMessage({ id: 'ModalLukkPapirSoknad.Avbryt' })}
               </Button>

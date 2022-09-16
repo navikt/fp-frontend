@@ -202,7 +202,7 @@ export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
                   </Button>
                 </FlexColumn>
                 <FlexColumn>
-                  <Button size="small" variant="secondary" onClick={avbrytAktivitet}>
+                  <Button size="small" variant="secondary" onClick={avbrytAktivitet} type="button">
                     <FormattedMessage id="ActivityPanel.Avbryt" />
                   </Button>
                 </FlexColumn>

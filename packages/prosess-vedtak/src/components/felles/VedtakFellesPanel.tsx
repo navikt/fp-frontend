@@ -223,6 +223,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
                     size="small"
                     variant="secondary"
                     onClick={() => toggleVisModal(true)}
+                    type="button"
                   >
                     <FormattedMessage id="VedtakFellesPanel.ForkastManueltBrev" />
                   </Button>

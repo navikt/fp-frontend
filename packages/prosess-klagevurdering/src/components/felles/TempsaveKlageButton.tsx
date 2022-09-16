@@ -64,6 +64,7 @@ const TempsaveKlageButton: FunctionComponent<OwnProps> = ({
           values,
           aksjonspunktCode,
         )))}
+        type="button"
       >
         <FormattedMessage id="Klage.ResolveKlage.TempSaveButton" />
       </Button>

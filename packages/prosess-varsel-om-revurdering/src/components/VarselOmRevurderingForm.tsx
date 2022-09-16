@@ -219,6 +219,7 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
             onClick={formVerdier.sendVarsel ? åpneModal : undefined}
             loading={formMethods.formState.isSubmitting}
             disabled={formMethods.formState.isSubmitting}
+            type="button"
           >
             <FormattedMessage id="VarselOmRevurderingForm.Bekreft" />
           </Button>

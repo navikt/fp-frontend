@@ -175,6 +175,7 @@ const OppholdInntektOgPeriodeForm: FunctionComponent<OwnProps> = ({
                 size="small"
                 variant="secondary"
                 onClick={avbryt}
+                type="button"
               >
                 <FormattedMessage id="OppholdInntektOgPeriode.Avbryt" />
               </Button>

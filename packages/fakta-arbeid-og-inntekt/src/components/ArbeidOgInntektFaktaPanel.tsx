@@ -269,6 +269,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
             variant="primary"
             disabled={erKnappTrykket}
             onClick={() => settVisSettPåVentModal(true)}
+            type="button"
           >
             <FormattedMessage id="ArbeidOgInntektFaktaPanel.SettPaVent" />
           </Button>
@@ -290,6 +291,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           disabled={erKnappTrykket}
           loading={erKnappTrykket}
           onClick={lagreOgFortsett}
+          type="button"
         >
           <FormattedMessage id="ArbeidOgInntektFaktaPanel.Bekreft" />
         </Button>
@@ -306,6 +308,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
             disabled={erKnappTrykket}
             loading={erKnappTrykket}
             onClick={gjenåpneAksjonspunkt}
+            type="button"
           >
             <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyVurdering" />
           </Button>

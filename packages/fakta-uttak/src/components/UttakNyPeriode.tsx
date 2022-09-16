@@ -357,10 +357,11 @@ export const UttakNyPeriode: FunctionComponent<PureOwnProps & MappedOwnProps & I
           size="small"
           onClick={formProps.handleSubmit}
           loading={formProps.submitting}
+          type="button"
         >
           <FormattedMessage id="UttakInfoPanel.Oppdater" />
         </Button>
-        <Button variant="secondary" size="small" onClick={newPeriodeResetCallback}>
+        <Button variant="secondary" size="small" onClick={newPeriodeResetCallback} type="button">
           <FormattedMessage id="UttakInfoPanel.Avbryt" />
         </Button>
       </div>

@@ -58,6 +58,7 @@ const FatterVedtakStatusModal: FunctionComponent<OwnProps> = ({
               className={styles.button}
               onClick={lukkModal}
               autoFocus
+              type="button"
             >
               {intl.formatMessage({ id: 'FatterVedtakStatusModal.Ok' })}
             </Button>

@@ -85,7 +85,7 @@ const TilretteleggingForArbeidsgiverFieldArray: FunctionComponent<OwnProps> = ({
             </>
           )}
           {fields.length === index + 1 && (
-            <Button size="small" variant="secondary" onClick={leggTilArbeidsgiver}>
+            <Button size="small" variant="secondary" onClick={leggTilArbeidsgiver} type="button">
               <FormattedMessage id="TilretteleggingForArbeidsgiverFieldArray.LeggTilArbeidsgiver" />
             </Button>
           )}

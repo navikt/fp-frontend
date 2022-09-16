@@ -4,7 +4,9 @@ import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Modal, Button, Label } from '@navikt/ds-react';
 
-import { VerticalSpacer, Image } from '@navikt/ft-ui-komponenter';
+import {
+  VerticalSpacer, Image, FlexContainer, FlexColumn, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 import { CheckboxField, SelectField, Form } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
@@ -227,21 +229,30 @@ const NyBehandlingModal: FunctionComponent<OwnProps> = ({
                 />
               )}
               <div className={styles.right}>
-                <Button
-                  size="small"
-                  variant="primary"
-                  className={styles.button}
-                >
-                  <FormattedMessage id="MenyNyBehandlingIndex.Ok" />
-                </Button>
-                <Button
-                  size="small"
-                  variant="secondary"
-                  onClick={cancelEvent}
-                  className={styles.cancelButton}
-                >
-                  <FormattedMessage id="MenyNyBehandlingIndex.Avbryt" />
-                </Button>
+                <FlexContainer>
+                  <FlexRow>
+                    <FlexColumn>
+                      <Button
+                        size="small"
+                        variant="primary"
+                        className={styles.button}
+                      >
+                        <FormattedMessage id="MenyNyBehandlingIndex.Ok" />
+                      </Button>
+                    </FlexColumn>
+                    <FlexColumn>
+                      <Button
+                        size="small"
+                        variant="secondary"
+                        onClick={cancelEvent}
+                        className={styles.cancelButton}
+                        type="button"
+                      >
+                        <FormattedMessage id="MenyNyBehandlingIndex.Avbryt" />
+                      </Button>
+                    </FlexColumn>
+                  </FlexRow>
+                </FlexContainer>
               </div>
             </Column>
           </Row>

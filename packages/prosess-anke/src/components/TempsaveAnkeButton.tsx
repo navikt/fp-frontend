@@ -74,6 +74,7 @@ export const TempsaveAnkeButton: FunctionComponent<OwnProps> = ({
         onClick={handleSubmit((values: FormValues) => saveAnke(transformValues(
           values,
         )))}
+        type="button"
       >
         <FormattedMessage id="Ankebehandling.TempSaveButton" />
       </Button>

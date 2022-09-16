@@ -340,6 +340,7 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
                         loading={formProps.submitting}
                         disabled={formProps.submitting}
                         onClick={() => this.initializeAktiviteter()}
+                        type="button"
                       >
                         <FormattedMessage id="AvklareAktiviteter.Avbryt" />
                       </Button>

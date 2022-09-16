@@ -65,7 +65,7 @@ const FodselSammenligningPanel: FunctionComponent<OwnProps> = ({
         </Column>
         {nrOfDodfodteBarn > 0 && (
           <Column xs="3">
-            <Tag variant="info" className={styles.dodMerke}>
+            <Tag variant="info">
               <FormattedMessage id="FodselsammenligningPanel.Dodfodt" />
             </Tag>
           </Column>
@@ -90,7 +90,7 @@ const FodselSammenligningPanel: FunctionComponent<OwnProps> = ({
                   </TableColumn>
                   <TableColumn>
                     {barn.dodsdato && (
-                      <Tag variant="info" className={styles.dodMerke}>
+                      <Tag variant="info">
                         <FormattedMessage id="FodselsammenligningPanel.Dod" />
                       </Tag>
                     )}
