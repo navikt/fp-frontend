@@ -16,9 +16,7 @@ const getOnBehalfOfAccessToken = (authClient, req, scope) => new Promise(((resol
   };
 
   authClient.grant(grantBody, {clientAssertionPayload})
-    .then((tokenSet) => {
-      resolve(tokenSet.access_token);
-    })
+    .then((tokenSet) => resolve(tokenSet.access_token))
     .catch((err) => {
       logger.error(err);
       reject(err);

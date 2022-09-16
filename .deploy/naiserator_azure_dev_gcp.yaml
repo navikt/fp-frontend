@@ -6,7 +6,7 @@ metadata:
   labels:
     team: teamforeldrepenger
 spec:
-  image: ghcr.io/navikt/fp-frontend-azure-gcp:0.14
+  image: ghcr.io/navikt/fp-frontend-azure-gcp:0.16
   port: 9090
   ingresses:
     - "https://fpsak-gcp.dev.intern.nav.no"
@@ -38,9 +38,10 @@ spec:
         extra:
           - "NAVident"
           - "azp_name"
+      singlePageApplication: true
     sidecar:
       enabled: true
-      autoLogin: false
+      autoLogin: true
   accessPolicy:
     outbound:
       external:
@@ -65,6 +66,6 @@ spec:
                        {"path":"/fptilbake/api","url":"https://fptilbake.dev-fss-pub.nais.io","scopes":"api://dev-fss.teamforeldrepenger.fptilbake/.default"},
                        {"path":"/fplos/api","url":"https://fplos.dev-fss-pub.nais.io","scopes":"api://dev-fss.teamforeldrepenger.fplos/.default"},
                        {"path":"/fpoppdrag/api","url":"https://fpoppdrag.dev-fss-pub.nais.io","scopes":"api://dev-fss.teamforeldrepenger.fpoppdrag/.default"},
-                       {"path":"/fpformidling/api","url":"https://formidling.dev-fss-pub.nais.io","scopes":"api://dev-fss.teamforeldrepenger.fpformidling/.default"}
+                       {"path":"/fpformidling/api","url":"https://fpformidling.dev-fss-pub.nais.io","scopes":"api://dev-fss.teamforeldrepenger.fpformidling/.default"}
               ]}'
 

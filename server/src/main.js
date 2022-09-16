@@ -26,7 +26,7 @@ async function startApp() {
     server.use(bodyParser.json());
     server.use(bodyParser.urlencoded({ extended: true }));
 
-    //server.use(limit);
+    server.use(limit);
 
     server.set("trust proxy", 1);
 
@@ -39,9 +39,7 @@ async function startApp() {
               "'self'",
               'https://sentry.gc.nav.no',
               'https://graph.microsoft.com',
-              'dev.intern.nav.no',
-              'dev-fss-pub.nais.io',
-              'prod-fss-pub.nais.io'
+              'https://login.microsoft.com'
             ],
             frameSrc: ["'none'"],
             childSrc: ["'none'"],
@@ -77,8 +75,9 @@ async function startApp() {
 
     const ensureAuthenticated = async (req, res, next) => {
       if (!req.headers.authorization) {
-        res.redirect("/oauth2/login");
+        res.redirect(`/oauth2/login?redirect=${req.originalUrl}`);
       } else {
+        // TODO: Validate the token https://doc.nais.io/security/auth/azure-ad/sidecar/#token-validation
         next();
       }
     };
