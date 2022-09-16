@@ -6,7 +6,7 @@ import {
 import dayjs from 'dayjs';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
-import Modal from 'nav-frontend-modal';
+import { Modal } from '@navikt/ds-react';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import * as stories from './ArbeidOgInntektFaktaIndex.stories';
 

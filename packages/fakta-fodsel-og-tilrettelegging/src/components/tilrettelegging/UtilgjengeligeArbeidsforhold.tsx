@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Normaltekst, Element, Undertittel } from 'nav-frontend-typografi';
+import { BodyShort, Label, Heading } from '@navikt/ds-react';
 import moment from 'moment';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 
@@ -47,9 +47,9 @@ const UtilgjengeligeArbeidsforhold: FunctionComponent<OwnProps> = ({
     <>
       <FlexRow>
         <FlexColumn>
-          <Undertittel>
+          <Heading size="small">
             <FormattedMessage id="FodselOgTilretteleggingFaktaForm.ArbeidsforholdDetErSoktTilretteleggingForKanIkkeInnvilges" />
-          </Undertittel>
+          </Heading>
           <VerticalSpacer eightPx />
           <AvsnittSkiller />
           <VerticalSpacer eightPx />
@@ -61,19 +61,19 @@ const UtilgjengeligeArbeidsforhold: FunctionComponent<OwnProps> = ({
             <React.Fragment key={`${arbeidsforhold.arbeidsgiverReferanse}.arbeidsforhold_som_ikke_kan_brukes`}>
               <FlexRow>
                 <FlexColumn>
-                  <Element>{lagArbeidsforholdNavn(arbeidsforhold, arbeidsgiverOpplysningerPrId)}</Element>
+                  <Label size="small">{lagArbeidsforholdNavn(arbeidsforhold, arbeidsgiverOpplysningerPrId)}</Label>
                 </FlexColumn>
               </FlexRow>
               <FlexRow>
                 <FlexColumn>
-                  <Normaltekst>
+                  <BodyShort size="small">
                     <FormattedMessage id="TilretteleggingArbeidsforholdSection.DatepickerField.TilretteleggingFra" />
-                  </Normaltekst>
+                  </BodyShort>
                 </FlexColumn>
                 <FlexColumn>
-                  <Normaltekst>
+                  <BodyShort size="small">
                     {moment(arbeidsforhold.tilretteleggingBehovFom).format(DDMMYYYY_DATE_FORMAT)}
-                  </Normaltekst>
+                  </BodyShort>
                 </FlexColumn>
               </FlexRow>
               <VerticalSpacer sixteenPx />

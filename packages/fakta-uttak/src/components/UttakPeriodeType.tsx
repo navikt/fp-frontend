@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import { Label, BodyShort, Detail } from '@navikt/ds-react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Image } from '@navikt/ft-ui-komponenter';
 
@@ -144,9 +144,9 @@ export const UttakPeriodeType: FunctionComponent<OwnProps & WrappedComponentProp
     <div className={styles.periodeType}>
       <div className={styles.headerWrapper}>
         <div>
-          {isFromSøknad && <Undertekst><FormattedMessage id="UttakInfoPanel.FraSøknad" /></Undertekst>}
-          <Element>{getUttakTypeTitle(getKodeverknavn, utsettelseArsak, overforingArsak, arbeidstidprosent, oppholdArsak)}</Element>
-          <Normaltekst>{getUttakPeriode(getKodeverknavn, uttakPeriodeType, oppholdArsak)}</Normaltekst>
+          {isFromSøknad && <Detail size="small"><FormattedMessage id="UttakInfoPanel.FraSøknad" /></Detail>}
+          <Label size="small">{getUttakTypeTitle(getKodeverknavn, utsettelseArsak, overforingArsak, arbeidstidprosent, oppholdArsak)}</Label>
+          <BodyShort size="small">{getUttakPeriode(getKodeverknavn, uttakPeriodeType, oppholdArsak)}</BodyShort>
         </div>
         {!readOnly && (
           <div className={styles.iconContainer}>
@@ -166,8 +166,8 @@ export const UttakPeriodeType: FunctionComponent<OwnProps & WrappedComponentProp
         )}
       </div>
       <div className={styles.textWrapper}>
-        <Element>{`${dateFormat(fraDato)} - ${dateFormat(tilDato)}`}</Element>
-        <Undertekst>
+        <Label size="small">{`${dateFormat(fraDato)} - ${dateFormat(tilDato)}`}</Label>
+        <Detail size="small">
           <FormattedMessage
             id={numberOfDaysAndWeeks.id}
             values={{
@@ -175,43 +175,43 @@ export const UttakPeriodeType: FunctionComponent<OwnProps & WrappedComponentProp
               days: numberOfDaysAndWeeks.days,
             }}
           />
-        </Undertekst>
+        </Detail>
       </div>
 
       {samtidigUttak && (
         <div className={styles.textWrapper}>
-          <Undertekst><FormattedMessage id="UttakInfoPanel.SamtidigUttak" /></Undertekst>
+          <Detail size="small"><FormattedMessage id="UttakInfoPanel.SamtidigUttak" /></Detail>
           {samtidigUttaksprosent && (
-            <Normaltekst>{formatProsent(samtidigUttaksprosent)}</Normaltekst>
+            <BodyShort size="small">{formatProsent(samtidigUttaksprosent)}</BodyShort>
           )}
         </div>
       )}
       {flerbarnsdager && (
         <div className={styles.textWrapper}>
-          <Undertekst><FormattedMessage id="UttakInfoPanel.Flerbarnsdager" /></Undertekst>
+          <Detail size="small"><FormattedMessage id="UttakInfoPanel.Flerbarnsdager" /></Detail>
         </div>
       )}
       {finnesArbeidstidsprosent(arbeidstidprosent) && (
         <div className={styles.textWrapper}>
-          <Undertekst><FormattedMessage id="UttakInfoPanel.AndelIArbeid" /></Undertekst>
-          <Normaltekst>{formatProsent(arbeidstidprosent)}</Normaltekst>
+          <Detail size="small"><FormattedMessage id="UttakInfoPanel.AndelIArbeid" /></Detail>
+          <BodyShort size="small">{formatProsent(arbeidstidprosent)}</BodyShort>
         </div>
       )}
       {erGradering(arbeidstidprosent) && (
         <>
           {erFrilanser && (
             <div className={styles.textWrapper}>
-              <Element><FormattedMessage id="UttakInfoPanel.Frilans" /></Element>
+              <Label size="small"><FormattedMessage id="UttakInfoPanel.Frilans" /></Label>
             </div>
           )}
           {erSelvstendig && (
             <div className={styles.textWrapper}>
-              <Element><FormattedMessage id="UttakInfoPanel.Selvstendignæringsdrivende" /></Element>
+              <Label size="small"><FormattedMessage id="UttakInfoPanel.Selvstendignæringsdrivende" /></Label>
             </div>
           )}
           {harArbeidsgiverOpplysninger(arbeidsgiverOpplysningerPerId, arbeidsgiverReferanse) && (
             <div className={styles.textWrapper}>
-              <Element>{lagVisningsNavn(arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse])}</Element>
+              <Label size="small">{lagVisningsNavn(arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse])}</Label>
             </div>
           )}
         </>

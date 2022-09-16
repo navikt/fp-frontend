@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
-import { Element, Undertekst } from 'nav-frontend-typografi';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { Detail, Label, Button } from '@navikt/ds-react';
 
 import {
   CheckboxField,
@@ -181,9 +180,9 @@ export const UttakNyPeriode: FunctionComponent<PureOwnProps & MappedOwnProps & I
     <div className={styles.periodeContainer}>
       <div className={styles.periodeType}>
         <div className={styles.headerWrapper}>
-          <Element>
+          <Label size="small">
             <FormattedMessage id="UttakInfoPanel.NyPeriode" />
-          </Element>
+          </Label>
         </div>
       </div>
       <div className={styles.periodeInnhold}>
@@ -276,9 +275,9 @@ export const UttakNyPeriode: FunctionComponent<PureOwnProps & MappedOwnProps & I
           <FlexRow wrap className={styles.typeUttakStyle}>
             <FlexColumn>
               <div>
-                <Undertekst>
+                <Detail size="small">
                   <FormattedMessage id="UttakInfoPanel.TypeUttak" />
-                </Undertekst>
+                </Detail>
                 <VerticalSpacer eightPx />
               </div>
               <div>
@@ -352,18 +351,18 @@ export const UttakNyPeriode: FunctionComponent<PureOwnProps & MappedOwnProps & I
           </FlexRow>
         </FlexContainer>
         <VerticalSpacer twentyPx />
-        <Hovedknapp
+        <Button
           className={styles.oppdaterMargin}
-          htmlType="button"
-          mini
+          variant="primary"
+          size="small"
           onClick={formProps.handleSubmit}
-          spinner={formProps.submitting}
+          loading={formProps.submitting}
         >
           <FormattedMessage id="UttakInfoPanel.Oppdater" />
-        </Hovedknapp>
-        <Knapp htmlType="button" mini onClick={newPeriodeResetCallback}>
+        </Button>
+        <Button variant="secondary" size="small" onClick={newPeriodeResetCallback}>
           <FormattedMessage id="UttakInfoPanel.Avbryt" />
-        </Knapp>
+        </Button>
       </div>
     </div>
   );

@@ -4,8 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { createSelector } from 'reselect';
 import { bindActionCreators } from 'redux';
 import { change, FormAction } from 'redux-form';
-import { Knapp } from 'nav-frontend-knapper';
-import { Element } from 'nav-frontend-typografi';
+import { Label, Button } from '@navikt/ds-react';
 
 import {
   VerticalSpacer, OverstyringKnapp, FlexColumn, FlexContainer, FlexRow,
@@ -73,9 +72,9 @@ export const InntektstabellPanelImpl: FunctionComponent<OwnProps & DispatchProps
             <FlexContainer>
               <FlexRow>
                 <FlexColumn>
-                  <Element className={styles.avsnittOverskrift}>
+                  <Label size="small" className={styles.avsnittOverskrift}>
                     <FormattedMessage id="InntektstabellPanel.RapporterteInntekter" />
-                  </Element>
+                  </Label>
                 </FlexColumn>
                 {(kanOverstyre || erOverstyrt) && (
                 <FlexColumn>
@@ -89,19 +88,19 @@ export const InntektstabellPanelImpl: FunctionComponent<OwnProps & DispatchProps
             </FlexContainer>
             <VerticalSpacer sixteenPx />
             {hjelpeTekstId && (
-              <Element>
+              <Label size="small">
                 <FormattedMessage id={hjelpeTekstId} />
-              </Element>
+              </Label>
             )}
             {tabell}
             {erOverstyrt && (
-              <Knapp
-                htmlType="button"
+              <Button
+                size="small"
+                variant="secondary"
                 onClick={toggleOverstyring}
-                mini
               >
                 <FormattedMessage id="InntektstabellPanel.Avbryt" />
-              </Knapp>
+              </Button>
             )}
           </>
         )}

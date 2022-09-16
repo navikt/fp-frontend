@@ -1,8 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { Normaltekst } from 'nav-frontend-typografi';
-import Modal from 'nav-frontend-modal';
+import { Modal, BodyShort, Button } from '@navikt/ds-react';
 import {
   FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -23,34 +21,37 @@ const UtlandEndretModal: FunctionComponent<OwnProps & WrappedComponentProps> = (
 }) => (
   <Modal
     className={styles.modal}
-    isOpen={visModal}
-    contentLabel={intl.formatMessage({ id: 'UtlandEndretModal.UtlandetEndret' })}
-    onRequestClose={lagreOgLukk}
+    open={visModal}
+    aria-label={intl.formatMessage({ id: 'UtlandEndretModal.UtlandetEndret' })}
+    onClose={lagreOgLukk}
     closeButton={false}
     shouldCloseOnOverlayClick={false}
   >
-    <FlexContainer wrap>
-      <FlexRow>
-        <FlexColumn className={styles.iconContainer}>
-          <Image className={styles.icon} src={innvilgetImageUrl} alt={intl.formatMessage({ id: 'UtlandEndretModal.Ok' })} />
-        </FlexColumn>
-        <FlexColumn className={styles.fullWidth}>
-          <Normaltekst className={styles.modalLabel}>
-            <FormattedMessage id="UtlandEndretModal.UtlandEndret" />
-          </Normaltekst>
-        </FlexColumn>
-        <FlexColumn className={styles.right}>
-          <VerticalSpacer sixteenPx />
-          <Hovedknapp
-            mini
-            className={styles.button}
-            onClick={lagreOgLukk}
-          >
-            <FormattedMessage id="UtlandEndretModal.Ok" />
-          </Hovedknapp>
-        </FlexColumn>
-      </FlexRow>
-    </FlexContainer>
+    <Modal.Content>
+      <FlexContainer wrap>
+        <FlexRow>
+          <FlexColumn className={styles.iconContainer}>
+            <Image className={styles.icon} src={innvilgetImageUrl} alt={intl.formatMessage({ id: 'UtlandEndretModal.Ok' })} />
+          </FlexColumn>
+          <FlexColumn className={styles.fullWidth}>
+            <BodyShort size="small" className={styles.modalLabel}>
+              <FormattedMessage id="UtlandEndretModal.UtlandEndret" />
+            </BodyShort>
+          </FlexColumn>
+          <FlexColumn className={styles.right}>
+            <VerticalSpacer sixteenPx />
+            <Button
+              size="small"
+              variant="primary"
+              className={styles.button}
+              onClick={lagreOgLukk}
+            >
+              <FormattedMessage id="UtlandEndretModal.Ok" />
+            </Button>
+          </FlexColumn>
+        </FlexRow>
+      </FlexContainer>
+    </Modal.Content>
   </Modal>
 );
 

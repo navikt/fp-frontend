@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 import { formHooks } from '@navikt/ft-form-hooks';
 
 import relatertYtelseTilstand from '@fpsak-frontend/kodeverk/src/relatertYtelseTilstand';
@@ -47,18 +47,18 @@ const RettighetFaktaPanel: FunctionComponent<PureOwnProps> & StaticFunctions = (
       title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.Rettighet' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OMSORGSOVERTAKELSE]}
     >
-      <Normaltekst>{farSokerType || '-'}</Normaltekst>
+      <BodyShort size="small">{farSokerType || '-'}</BodyShort>
       <VerticalSpacer sixteenPx />
       <FaktaGruppe withoutBorder title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.AndreYtelseTilMor' })}>
         {ytelser.map((ytelse) => getLopendeOrAvsluttetYtelser(ytelse).map((y) => (
           <div className={styles.wrapper} key={`${relatertYtelseTypes[ytelse.relatertYtelseType]}-${y.periodeFraDato}`}>
-            <Normaltekst className={styles.iverksatt}>
+            <BodyShort size="small" className={styles.iverksatt}>
               <FormattedMessage
                 id="OmsorgOgForeldreansvarFaktaForm.YtelseIverksatt"
                 values={{ ytelseType: relatertYtelseTypes.find((r) => r.kode === ytelse.relatertYtelseType).navn }}
               />
               <DateLabel dateString={y.periodeFraDato} />
-            </Normaltekst>
+            </BodyShort>
           </div>
         )))}
         {!ytelser.some((y) => getLopendeOrAvsluttetYtelser(y).length > 0) && '-'}

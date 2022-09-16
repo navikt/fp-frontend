@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { Button } from '@navikt/ds-react';
 
-import { Hovedknapp } from 'nav-frontend-knapper';
 import { FaktaSubmitButton } from './FaktaSubmitButton';
 
 describe('<FaktaSubmitButton>', () => {
@@ -15,7 +15,7 @@ describe('<FaktaSubmitButton>', () => {
       hasOpenAksjonspunkter
     />);
 
-    expect(wrapper.find(Hovedknapp)).toHaveLength(0);
+    expect(wrapper.find(Button)).toHaveLength(0);
   });
 
   it('skal vise knapp som trykkbar når en kan avklare aksjonspunkt og en har gjort endringer', () => {
@@ -28,7 +28,7 @@ describe('<FaktaSubmitButton>', () => {
       hasOpenAksjonspunkter
     />);
 
-    const button = wrapper.find(Hovedknapp);
+    const button = wrapper.find(Button);
     expect(button).toHaveLength(1);
     expect(button.prop('disabled')).toBe(false);
   });
@@ -43,7 +43,7 @@ describe('<FaktaSubmitButton>', () => {
       hasOpenAksjonspunkter
     />);
 
-    const button = wrapper.find(Hovedknapp);
+    const button = wrapper.find(Button);
     expect(button).toHaveLength(1);
     expect(button.prop('disabled')).toBe(true);
   });
@@ -58,7 +58,7 @@ describe('<FaktaSubmitButton>', () => {
       hasOpenAksjonspunkter
     />);
 
-    const button = wrapper.find(Hovedknapp);
+    const button = wrapper.find(Button);
     expect(button).toHaveLength(1);
     expect(button.prop('disabled')).toBe(true);
   });
@@ -73,7 +73,7 @@ describe('<FaktaSubmitButton>', () => {
       hasOpenAksjonspunkter
     />);
 
-    const button = wrapper.find(Hovedknapp);
+    const button = wrapper.find(Button);
     expect(button).toHaveLength(1);
     expect(button.prop('disabled')).toBe(true);
   });
@@ -88,7 +88,7 @@ describe('<FaktaSubmitButton>', () => {
       hasOpenAksjonspunkter
     />);
 
-    const button = wrapper.find(Hovedknapp);
+    const button = wrapper.find(Button);
     expect(button).toHaveLength(1);
     expect(button.prop('disabled')).toBe(false);
   });
@@ -103,7 +103,7 @@ describe('<FaktaSubmitButton>', () => {
       hasOpenAksjonspunkter={false}
     />);
 
-    const button = wrapper.find(Hovedknapp);
+    const button = wrapper.find(Button);
     expect(button).toHaveLength(1);
     expect(button.prop('disabled')).toBe(true);
   });

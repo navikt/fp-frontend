@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from 'nav-frontend-modal';
+import { Modal } from '@navikt/ds-react';
 import {
   fireEvent, render, screen, waitFor,
 } from '@testing-library/react';

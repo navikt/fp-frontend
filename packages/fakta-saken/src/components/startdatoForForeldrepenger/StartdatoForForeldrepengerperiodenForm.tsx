@@ -2,7 +2,9 @@ import React, { FunctionComponent, useCallback, useState } from 'react';
 import dayjs from 'dayjs';
 import { useForm, UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import {
+  Label, BodyShort, Heading, Button,
+} from '@navikt/ds-react';
 import {
   hasValidDate, hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-form-validators';
@@ -10,6 +12,7 @@ import { Datepicker, TextAreaField, Form } from '@navikt/ft-form-hooks';
 import {
   FlexColumn, FlexContainer, FlexRow, AksjonspunktBox, VerticalSpacer, Image,
 } from '@navikt/ft-ui-komponenter';
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 
 import editUtlandIcon from '@fpsak-frontend/assets/images/endre.svg';
 import editUtlandDisabledIcon from '@fpsak-frontend/assets/images/endre_disablet.svg';
@@ -17,8 +20,6 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt, Soknad } from '@fpsak-frontend/types';
 import { OverstyringAvklarStartdatoForPeriodenAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
-import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import styles from './startdatoForForeldrepengerperiodenForm.less';
 
 const minLength3 = minLength(3);
@@ -97,22 +98,22 @@ const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps> = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setFormData}
     >
-      <Undertittel>
+      <Heading size="small">
         <FormattedMessage id="StartdatoForForeldrepengerperiodenForm.StartdatoForPerioden" />
-      </Undertittel>
+      </Heading>
       <VerticalSpacer sixteenPx />
       {!visEditeringsmodus && (
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Normaltekst>
+              <BodyShort size="small">
                 <FormattedMessage id="StartdatoForForeldrepengerperiodenForm.StartdatoSomBenyttes" />
-              </Normaltekst>
+              </BodyShort>
             </FlexColumn>
             <FlexColumn>
-              <Element>
+              <Label size="small">
                 {soknad.oppgittFordeling ? dayjs(soknad.oppgittFordeling.startDatoForPermisjon).format(DDMMYYYY_DATE_FORMAT) : '-'}
-              </Element>
+              </Label>
             </FlexColumn>
             <FlexColumn>
               <Image
@@ -157,22 +158,22 @@ const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps> = ({
             <VerticalSpacer sixteenPx />
             <FlexRow>
               <FlexColumn>
-                <Hovedknapp
-                  mini
-                  htmlType="submit"
+                <Button
+                  size="small"
+                  variant="primary"
                   disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-                  spinner={formMethods.formState.isSubmitting}
+                  loading={formMethods.formState.isSubmitting}
                 >
                   <FormattedMessage id="UtlandPanel.lagre" />
-                </Hovedknapp>
+                </Button>
               </FlexColumn>
-              <Knapp
-                htmlType="button"
-                mini
+              <Button
+                variant="secondary"
+                size="small"
                 onClick={slaAvEditeringAvUtland}
               >
                 <FormattedMessage id="UtlandPanel.avbryt" />
-              </Knapp>
+              </Button>
               <FlexColumn />
             </FlexRow>
           </FlexContainer>

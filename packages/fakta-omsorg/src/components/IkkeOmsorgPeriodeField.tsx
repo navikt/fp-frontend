@@ -7,7 +7,7 @@ import {
   dateAfterOrEqual,
   dateBeforeOrEqual, dateRangesNotOverlapping, hasValidDate, required,
 } from '@navikt/ft-form-validators';
-import { Undertekst } from 'nav-frontend-typografi';
+import { Detail } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
@@ -58,9 +58,9 @@ const IkkeOmsorgPeriodeField: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <Undertekst>
+      <Detail size="small">
         <FormattedMessage id="IkkeOmsorgPeriodeField.Periode" />
-      </Undertekst>
+      </Detail>
       <VerticalSpacer eightPx />
       <PeriodFieldArray<Periode>
         fields={fields}

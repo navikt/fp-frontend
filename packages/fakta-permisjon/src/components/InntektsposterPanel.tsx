@@ -3,8 +3,7 @@ import React, {
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import dayjs from 'dayjs';
-import Lenke from 'nav-frontend-lenker';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Link, Label, BodyShort } from '@navikt/ds-react';
 import {
   FlexColumn, FlexContainer, FlexRow, Image, FloatRight,
 } from '@navikt/ft-ui-komponenter';
@@ -59,31 +58,31 @@ const InntektsposterPanel: FunctionComponent<OwnProps> = ({
     <>
       {inntektsposter.length > 0 && (
         <>
-          <Element><FormattedMessage id="InntektsposterPanel.Inntekter" /></Element>
+          <Label size="small"><FormattedMessage id="InntektsposterPanel.Inntekter" /></Label>
           <FlexContainer>
             {sorterteInntektsposter.filter((_inntekt, index) => (visAlleMåneder ? true : index < 3)).map((inntekt) => (
               <FlexRow key={inntekt.fom}>
                 <FlexColumn className={styles.maanedBredde}>
-                  <Normaltekst>
+                  <BodyShort size="small">
                     <FormattedMessage id={`InntektsposterPanel.${dayjs(inntekt.fom).month() + 1}`} />
-                  </Normaltekst>
+                  </BodyShort>
                 </FlexColumn>
                 <FlexColumn className={styles.aarBredde}>
-                  <Normaltekst>
+                  <BodyShort size="small">
                     {dayjs(inntekt.fom).year()}
-                  </Normaltekst>
+                  </BodyShort>
                 </FlexColumn>
                 <FlexColumn className={styles.belopBredde}>
                   <FloatRight>
-                    <Normaltekst>
+                    <BodyShort size="small">
                       {formatCurrencyNoKr(inntekt.beløp)}
-                    </Normaltekst>
+                    </BodyShort>
                   </FloatRight>
                 </FlexColumn>
               </FlexRow>
             ))}
           </FlexContainer>
-          <Lenke
+          <Link
             onClick={(e) => {
               e.preventDefault();
               toggleMånedvisning(!visAlleMåneder);
@@ -91,18 +90,18 @@ const InntektsposterPanel: FunctionComponent<OwnProps> = ({
             href=""
           >
             <span>
-              <Normaltekst className={styles.inline}>
+              <BodyShort size="small" className={styles.inline}>
                 <FormattedMessage id={visAlleMåneder ? 'InntektsposterPanel.FaerreManeder' : 'InntektsposterPanel.TidligereManeder'} />
-              </Normaltekst>
+              </BodyShort>
             </span>
             <Image src={visAlleMåneder ? pilOppIkonUrl : pilNedIkonUrl} />
-          </Lenke>
+          </Link>
         </>
       )}
       {inntektsposter.length === 0 && (
-        <Element>
+        <Label size="small">
           <FormattedMessage id="InntektsposterPanel.IngenInntekt" />
-        </Element>
+        </Label>
       )}
     </>
   );

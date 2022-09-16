@@ -3,9 +3,10 @@ import React, {
 } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
-import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import {
+  Button, Label, BodyShort, Heading,
+} from '@navikt/ds-react';
 
 import { dateFormat } from '@navikt/ft-utils';
 import {
@@ -97,16 +98,16 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
     <>
       <Row>
         <Column xs="6">
-          <Undertittel><FormattedMessage id="PermisjonFaktaPanel.Overskrift" /></Undertittel>
+          <Heading size="small"><FormattedMessage id="PermisjonFaktaPanel.Overskrift" /></Heading>
         </Column>
         <Column xs="6">
           <FloatRight>
-            <Normaltekst>
+            <BodyShort size="small">
               <FormattedMessage
                 id="PermisjonFaktaPanel.Skjaringstidspunkt"
                 values={{ skjæringspunktDato: dateFormat(arbeidOgInntektMedPermisjon.skjæringstidspunkt) }}
               />
-            </Normaltekst>
+            </BodyShort>
           </FloatRight>
         </Column>
       </Row>
@@ -141,7 +142,7 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
         />
         <VerticalSpacer thirtyTwoPx />
         <TextAreaField
-          label={<Element><FormattedMessage id="PermisjonFaktaPanel.Begrunn" /></Element>}
+          label={<Label size="small"><FormattedMessage id="PermisjonFaktaPanel.Begrunn" /></Label>}
           name="begrunnelse"
           validate={[required, minLength3, maxLength1500, hasValidText]}
           maxLength={1500}
@@ -149,13 +150,14 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
         />
         <VerticalSpacer sixteenPx />
         {!readOnly && (
-          <Hovedknapp
-            mini
+          <Button
+            size="small"
+            variant="primary"
             disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-            spinner={formMethods.formState.isSubmitting}
+            loading={formMethods.formState.isSubmitting}
           >
             <FormattedMessage id="PermisjonFaktaPanel.Bekreft" />
-          </Hovedknapp>
+          </Button>
         )}
       </Form>
     </>

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { Button } from '@navikt/ds-react';
 
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -31,39 +31,39 @@ export const PerioderKnapper: FunctionComponent<OwnProps> = ({
   !readOnly && (
   <div>
     <VerticalSpacer sixteenPx />
-    <Hovedknapp
+    <Button
       className={styles.oppdaterMargin}
-      htmlType="button"
-      mini
+      variant="primary"
+      size="small"
       disabled={resultat === uttakPeriodeVurdering.PERIODE_IKKE_VURDERT}
       onClick={updatePeriode}
     >
       <FormattedMessage id="UttakInfoPanel.Oppdater" />
-    </Hovedknapp>
+    </Button>
     {!bekreftet && !updated
       && (
-      <Knapp
+      <Button
         className={styles.oppdaterMargin}
-        htmlType="button"
-        mini
+        size="small"
+        variant="secondary"
         disabled={resultat === uttakPeriodeVurdering.PERIODE_IKKE_VURDERT}
         onClick={() => resetPeriode()}
       >
         <FormattedMessage id="UttakInfoPanel.Nullstill" />
-      </Knapp>
+      </Button>
       )}
     {(bekreftet || (!bekreftet && updated))
       && (
-      <Knapp
-        htmlType="button"
-        mini
+      <Button
+        size="small"
+        variant="secondary"
         onClick={() => {
           resetPeriode();
           cancelEditPeriode(id);
         }}
       >
         <FormattedMessage id="UttakInfoPanel.Avbryt" />
-      </Knapp>
+      </Button>
       )}
   </div>
   )

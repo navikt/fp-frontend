@@ -5,8 +5,7 @@ import {
 import moment from 'moment';
 import classnames from 'classnames/bind';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
-import { Normaltekst } from 'nav-frontend-typografi';
-import AlertStripe from 'nav-frontend-alertstriper';
+import { BodyShort, Alert } from '@navikt/ds-react';
 import {
   FlexColumn, FlexContainer, FlexRow, Image,
 } from '@navikt/ft-ui-komponenter';
@@ -27,14 +26,14 @@ const classNames = classnames.bind(styles);
 const renderTomPeriode = (intl: IntlShape): ReactElement => (
   <div className={styles.periodeIconWrapper}>
     <Image src={tomPeriode} alt={intl.formatMessage({ id: 'UttakInfoPanel.PeriodenharTommeDagerFremTilNestePeriode' })} />
-    <Normaltekst><FormattedMessage id="UttakInfoPanel.TomPeriode" /></Normaltekst>
+    <BodyShort size="small"><FormattedMessage id="UttakInfoPanel.TomPeriode" /></BodyShort>
   </div>
 );
 
 const renderOverlappendePeriode = (intl: IntlShape): ReactElement => (
   <div className={styles.periodeIconWrapper}>
     <Image src={overlapp} alt={intl.formatMessage({ id: 'UttakInfoPanel.PeriodenErOverlappende' })} />
-    <Normaltekst><FormattedMessage id="UttakInfoPanel.OverlappendePeriode" /></Normaltekst>
+    <BodyShort size="small"><FormattedMessage id="UttakInfoPanel.OverlappendePeriode" /></BodyShort>
   </div>
 );
 
@@ -106,8 +105,8 @@ const UttakPeriode: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   arbeidsgiverOpplysningerPerId,
 }) => (
   <div>
-    {meta.error && <AlertStripe className={styles.fullWidth} type="feil">{meta.error}</AlertStripe>}
-    {meta.warning && <AlertStripe className={styles.fullWidth} type="info">{meta.warning}</AlertStripe>}
+    {meta.error && <Alert size="small" className={styles.fullWidth} variant="error">{meta.error}</Alert>}
+    {meta.warning && <Alert size="small" className={styles.fullWidth} variant="info">{meta.warning}</Alert>}
 
     <FlexContainer wrap>
       {fields.map((fieldId: string, index: number, field: FieldArrayFieldsProps<CustomUttakKontrollerFaktaPerioder>) => {

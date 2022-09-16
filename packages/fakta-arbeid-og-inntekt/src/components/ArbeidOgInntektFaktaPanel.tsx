@@ -2,8 +2,7 @@ import React, {
   FunctionComponent, useState, useEffect, useCallback, useRef,
 } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
-import { AlertStripeInfo } from 'nav-frontend-alertstriper';
+import { Button, Alert } from '@navikt/ds-react';
 
 import {
   Aksjonspunkt, AlleKodeverk, AoIArbeidsforhold, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId,
@@ -265,13 +264,14 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
       <VerticalSpacer sixteenPx />
       {skalViseSettPåVentKnapp && (
         <>
-          <Hovedknapp
-            mini
+          <Button
+            size="small"
+            variant="primary"
             disabled={erKnappTrykket}
             onClick={() => settVisSettPåVentModal(true)}
           >
             <FormattedMessage id="ArbeidOgInntektFaktaPanel.SettPaVent" />
-          </Hovedknapp>
+          </Button>
           <SettPaVentModalIndex
             submitCallback={settPaVent}
             cancelEvent={() => settVisSettPåVentModal(false)}
@@ -284,29 +284,31 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
         </>
       )}
       {skalViseBekrefteKnapp && (
-        <Hovedknapp
-          mini
+        <Button
+          size="small"
+          variant="primary"
           disabled={erKnappTrykket}
-          spinner={erKnappTrykket}
+          loading={erKnappTrykket}
           onClick={lagreOgFortsett}
         >
           <FormattedMessage id="ArbeidOgInntektFaktaPanel.Bekreft" />
-        </Hovedknapp>
+        </Button>
       )}
       {skalViseÅpneForNyVurderingKnapp && (
         <>
           <div className={styles.alertStripe}>
-            <AlertStripeInfo><FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyRevurderingForklaring" /></AlertStripeInfo>
+            <Alert variant="info"><FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyRevurderingForklaring" /></Alert>
           </div>
           <VerticalSpacer sixteenPx />
-          <Knapp
-            mini
+          <Button
+            size="small"
+            variant="secondary"
             disabled={erKnappTrykket}
-            spinner={erKnappTrykket}
+            loading={erKnappTrykket}
             onClick={gjenåpneAksjonspunkt}
           >
             <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyVurdering" />
-          </Knapp>
+          </Button>
         </>
       )}
     </>

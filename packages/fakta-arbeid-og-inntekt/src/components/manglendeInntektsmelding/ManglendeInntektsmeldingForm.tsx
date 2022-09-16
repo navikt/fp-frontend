@@ -4,8 +4,7 @@ import React, {
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
-import { Knapp, Flatknapp } from 'nav-frontend-knapper';
-import { AlertStripeInfo } from 'nav-frontend-alertstriper';
+import { Alert, Button } from '@navikt/ds-react';
 
 import {
   required, hasValidText, maxLength, minLength,
@@ -122,7 +121,7 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
       <Form formMethods={formMethods} onSubmit={lagre}>
         {(!erEttArbeidsforhold && inntektsmeldingerForRad.length > 0) && (
           <div className={styles.alertStripe}>
-            <AlertStripeInfo><FormattedMessage id="InntektsmeldingInnhentesForm.InnehentAlle" /></AlertStripeInfo>
+            <Alert variant="info"><FormattedMessage id="InntektsmeldingInnhentesForm.InnehentAlle" /></Alert>
             <VerticalSpacer sixteenPx />
           </div>
         )}
@@ -174,25 +173,25 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
           <FlexContainer>
             <FlexRow>
               <FlexColumn>
-                <Knapp
-                  mini
-                  spinner={formMethods.formState.isSubmitting}
+                <Button
+                  size="small"
+                  variant="secondary"
+                  loading={formMethods.formState.isSubmitting}
                   disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-                  htmlType="submit"
                 >
                   <FormattedMessage id="InntektsmeldingInnhentesForm.Lagre" />
-                </Knapp>
+                </Button>
               </FlexColumn>
               <FlexColumn>
-                <Flatknapp
-                  mini
-                  spinner={false}
+                <Button
+                  size="small"
+                  variant="tertiary"
+                  loading={false}
                   disabled={formMethods.formState.isSubmitting}
                   onClick={avbryt}
-                  htmlType="button"
                 >
                   <FormattedMessage id="InntektsmeldingInnhentesForm.Avbryt" />
-                </Flatknapp>
+                </Button>
               </FlexColumn>
             </FlexRow>
           </FlexContainer>

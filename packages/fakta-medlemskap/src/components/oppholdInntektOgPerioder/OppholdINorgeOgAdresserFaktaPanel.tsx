@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { Column, Row } from 'nav-frontend-grid';
-import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import { Detail, BodyShort } from '@navikt/ds-react';
 import { required } from '@navikt/ft-form-validators';
 import {
   PeriodLabel, VerticalSpacer, FaktaGruppe, Image,
@@ -41,9 +41,9 @@ const sjekkOpphold = (
         />
       </Column>
       <Column xs="11">
-        <Normaltekst>
+        <BodyShort size="small">
           <FormattedMessage id={opphold === true ? 'OppholdINorgeOgAdresserFaktaPanel.Yes' : 'OppholdINorgeOgAdresserFaktaPanel.No'} />
-        </Normaltekst>
+        </BodyShort>
       </Column>
     </Row>
   )
@@ -55,14 +55,14 @@ const lagOppholdIUtland = (
   <div key={`${u.landNavn}${u.fom}${u.tom}`}>
     <Row>
       <Column xs="4">
-        <Normaltekst>
+        <BodyShort size="small">
           {capitalizeFirstLetter(u.landNavn)}
-        </Normaltekst>
+        </BodyShort>
       </Column>
       <Column xs="8">
-        <Normaltekst>
+        <BodyShort size="small">
           <PeriodLabel showTodayString dateStringFom={u.fom} dateStringTom={u.tom} />
-        </Normaltekst>
+        </BodyShort>
       </Column>
     </Row>
   </div>
@@ -115,23 +115,23 @@ const OppholdINorgeOgAdresserFaktaPanel: FunctionComponent<OwnProps> & StaticFun
       <Row>
         <Column xs="6">
           <FaktaGruppe withoutBorder title={intl.formatMessage({ id: 'OppholdINorgeOgAdresserFaktaPanel.OppholdINorge' })}>
-            <Undertekst>
+            <Detail size="small">
               <FormattedMessage id="OppholdINorgeOgAdresserFaktaPanel.StayingInNorway" />
-            </Undertekst>
+            </Detail>
             <VerticalSpacer fourPx />
             {sjekkOpphold(soknad?.oppgittTilknytning?.oppholdNorgeNa, intl)}
             <VerticalSpacer sixteenPx />
-            <Undertekst>
+            <Detail size="small">
               <FormattedMessage id="OppholdINorgeOgAdresserFaktaPanel.StayingInNorwayLast12" />
-            </Undertekst>
+            </Detail>
             <VerticalSpacer fourPx />
             {sjekkOpphold(soknad?.oppgittTilknytning?.oppholdSistePeriode, intl)}
             <VerticalSpacer eightPx />
             {lagOppholdIUtland(soknad?.oppgittTilknytning?.utlandsoppholdFor)}
             <VerticalSpacer sixteenPx />
-            <Undertekst>
+            <Detail size="small">
               <FormattedMessage id="OppholdINorgeOgAdresserFaktaPanel.StayingInNorwayNext12" />
-            </Undertekst>
+            </Detail>
             <VerticalSpacer fourPx />
             {sjekkOpphold(soknad?.oppgittTilknytning?.oppholdNestePeriode, intl)}
             <VerticalSpacer eightPx />

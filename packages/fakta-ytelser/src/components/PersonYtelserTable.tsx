@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import moment from 'moment';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
@@ -32,12 +32,13 @@ const formatDateToDDMMYYYY = (date: string): string => {
  *
  * Viser tilgrensede ytelser.
  */
-export const PersonYtelserTable: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const PersonYtelserTable: FunctionComponent<OwnProps> = ({
   ytelser,
   relatertYtelseTyper,
   relatertYtelseStatus,
 }) => {
+  const intl = useIntl();
+
   const ytelseRows = ytelser && ytelser.map((ytelse) => {
     const ytelseNavn = relatertYtelseTyper.filter((type) => type.kode === ytelse.relatertYtelseType)[0].navn;
     if (ytelse.tilgrensendeYtelserListe.length === 0) {
@@ -68,14 +69,14 @@ export const PersonYtelserTable: FunctionComponent<OwnProps & WrappedComponentPr
     <Table headerTextCodes={HEADER_TEXT_CODES} classNameTable={styles.tableStyle} noHover>
       {ytelseRows && ytelseRows.map((ytelse, index) => (
         <TableRow key={`index${index + 1}`}>
-          <TableColumn>{ytelse.navn ? <Normaltekst>{ytelse.navn}</Normaltekst> : ''}</TableColumn>
-          <TableColumn><Normaltekst>{ytelse.periode}</Normaltekst></TableColumn>
-          <TableColumn>{ytelse.status ? <Normaltekst>{ytelse.status}</Normaltekst> : ''}</TableColumn>
-          <TableColumn>{ytelse.saksnummer ? <Normaltekst>{ytelse.saksnummer}</Normaltekst> : ''}</TableColumn>
+          <TableColumn>{ytelse.navn ? <BodyShort size="small">{ytelse.navn}</BodyShort> : ''}</TableColumn>
+          <TableColumn><BodyShort size="small">{ytelse.periode}</BodyShort></TableColumn>
+          <TableColumn>{ytelse.status ? <BodyShort size="small">{ytelse.status}</BodyShort> : ''}</TableColumn>
+          <TableColumn>{ytelse.saksnummer ? <BodyShort size="small">{ytelse.saksnummer}</BodyShort> : ''}</TableColumn>
         </TableRow>
       ))}
     </Table>
   );
 };
 
-export default injectIntl(PersonYtelserTable);
+export default PersonYtelserTable;

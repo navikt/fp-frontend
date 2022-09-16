@@ -1,7 +1,7 @@
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Heading } from '@navikt/ds-react';
 import {
   AlleKodeverk, Personoversikt, Ytelsefordeling,
 } from '@fpsak-frontend/types';
@@ -50,7 +50,7 @@ const OmsorgOgRettFaktaIndex: FunctionComponent<OwnProps> = ({
   const harAleneomsorgAksjonspunkt = aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG);
   return (
     <>
-      <Undertittel><FormattedMessage id="OmsorgOgRettFaktaForm.Overskrift" /></Undertittel>
+      <Heading size="small"><FormattedMessage id="OmsorgOgRettFaktaForm.Overskrift" /></Heading>
       <VerticalSpacer thirtyTwoPx />
       {aksjonspunktTekst && (
         <AksjonspunktHelpTextHTML>

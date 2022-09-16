@@ -3,8 +3,7 @@ import sinon from 'sinon';
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { TextAreaField } from '@fpsak-frontend/form';
-import Modal from 'nav-frontend-modal';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { Modal, Button } from '@navikt/ds-react';
 import { UttakSlettPeriodeModalImpl } from './UttakSlettPeriodeModal';
 import messages from '../../i18n/nb_NO.json';
 import CustomUttakKontrollerFaktaPerioder from '../CustomUttakKontrollerFaktaPerioderTsType';
@@ -48,16 +47,10 @@ describe('<UttakSlettPeriodeModal>', () => {
     const textField = wrapper.find(TextAreaField);
     expect(textField).toHaveLength(1);
 
-    const okKnapp = wrapper.find(Hovedknapp);
-    expect(okKnapp).toHaveLength(1);
-    expect(okKnapp.prop('mini')).toBe(true);
-    expect(okKnapp.childAt(0).text()).toEqual('OK');
-
-    const avbrytKnapp = wrapper.find(Knapp);
-    expect(avbrytKnapp).toHaveLength(1);
-    expect(avbrytKnapp.prop('mini')).toBe(true);
-    expect(avbrytKnapp.childAt(0).text()).toEqual('Avbryt');
+    const knapper = wrapper.find(Button);
+    expect(knapper).toHaveLength(2);
   });
+
   it('skal rendre lukket modal', () => {
     const wrapper = shallowWithIntl(<UttakSlettPeriodeModalImpl
       {...reduxFormPropsMock}

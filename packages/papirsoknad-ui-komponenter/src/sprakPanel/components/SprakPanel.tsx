@@ -3,6 +3,7 @@ import { useIntl } from 'react-intl';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { Heading } from '@navikt/ds-react';
 
 const sprakvalg = {
   BOKMAL: 'NB',

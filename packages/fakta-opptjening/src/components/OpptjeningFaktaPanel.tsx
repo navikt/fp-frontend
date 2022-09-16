@@ -3,9 +3,9 @@ import React, {
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
-import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { AlertStripeInfo } from 'nav-frontend-alertstriper';
+import {
+  Alert, Button, BodyShort, Detail,
+} from '@navikt/ds-react';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -178,19 +178,19 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
       )}
       {dokStatus && (
         <>
-          <AlertStripeInfo className={styles.info}>
+          <Alert size="small" variant="info" className={styles.info}>
             <FormattedMessage
               id={dokStatus === DOKUMENTASJON_VIL_BLI_INNHENTET ? 'OpptjeningFaktaForm.DetErInnhentetDok' : 'OpptjeningFaktaForm.DetErIkkeInnhentetDok'}
               values={{
                 b: (chunks: any) => <b>{chunks}</b>,
               }}
             />
-          </AlertStripeInfo>
+          </Alert>
           <VerticalSpacer twentyPx />
         </>
       )}
-      <Undertekst><FormattedMessage id="OpptjeningFaktaForm.Skjaringstidspunkt" /></Undertekst>
-      <Normaltekst><DateLabel dateString={findSkjaringstidspunkt(opptjeningTomDato)} /></Normaltekst>
+      <Detail size="small"><FormattedMessage id="OpptjeningFaktaForm.Skjaringstidspunkt" /></Detail>
+      <BodyShort size="small"><DateLabel dateString={findSkjaringstidspunkt(opptjeningTomDato)} /></BodyShort>
       <VerticalSpacer twentyPx />
       <OpptjeningTidslinje
         opptjeningPerioder={filtrerteOgSorterteOpptjeningsaktiviteter}
@@ -229,15 +229,15 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
         </>
       )}
       {hasAksjonspunkt && filtrerteOgSorterteOpptjeningsaktiviteter.length > 0 && (
-        <Hovedknapp
-          mini
-          htmlType="button"
+        <Button
+          size="small"
+          variant="primary"
           onClick={bekreft}
           disabled={valgtAktivitetIndex !== undefined || isSubmitting || readOnly || harIkkeBehandletAlle}
-          spinner={isSubmitting}
+          loading={isSubmitting}
         >
           <FormattedMessage id="OpptjeningFaktaForm.Confirm" />
-        </Hovedknapp>
+        </Button>
       )}
     </div>
   );

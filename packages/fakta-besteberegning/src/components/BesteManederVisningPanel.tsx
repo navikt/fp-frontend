@@ -1,9 +1,7 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
-import {
-  Element, Normaltekst,
-} from 'nav-frontend-typografi';
+import { Label, BodyShort } from '@navikt/ds-react';
 import { Row, Column } from 'nav-frontend-grid';
 import {
   Table, TableColumn, TableRow, VerticalSpacer,
@@ -46,16 +44,16 @@ interface BesteMånederProps {
 }
 
 const headerColumnContent = [
-  <Element key="AktivitetNøkkel">
+  <Label size="small" key="AktivitetNøkkel">
     {' '}
     <FormattedMessage id="BesteberegningProsessPanel.Måned.Inntekt.Aktivitet" />
     {' '}
-  </Element>,
-  <Element key="InntektNøkkel">
+  </Label>,
+  <Label size="small" key="InntektNøkkel">
     {' '}
     <FormattedMessage id="BesteberegningProsessPanel.Måned.Inntekt.Inntekt" />
     {' '}
-  </Element>,
+  </Label>,
 ];
 
 interface InntekttabellProps {
@@ -84,14 +82,14 @@ const lagInntektRader = (inntekter: BesteberegningInntekt[], arbeidsgiverOpplysn
     // eslint-disable-next-line react/no-array-index-key
     <TableRow key={index}>
       <TableColumn>
-        <Normaltekst>
+        <BodyShort size="small">
           {lagVisningsNavn(inntekt, arbeidsgiverOpplysninger, getKodeverkNavn)}
-        </Normaltekst>
+        </BodyShort>
       </TableColumn>
       <TableColumn>
-        <Normaltekst>
+        <BodyShort size="small">
           {formatCurrencyNoKr(inntekt.inntekt)}
-        </Normaltekst>
+        </BodyShort>
       </TableColumn>
     </TableRow>
   ))
@@ -100,14 +98,14 @@ const lagInntektRader = (inntekter: BesteberegningInntekt[], arbeidsgiverOpplysn
 const lagSummeringsRad = (inntekter: BesteberegningInntekt[], labelId: string): ReactElement => (inntekter.length === 0 ? <div /> : (
   <TableRow key="sum">
     <TableColumn>
-      <Element>
+      <Label size="small">
         <FormattedMessage id={labelId} />
-      </Element>
+      </Label>
     </TableColumn>
     <TableColumn>
-      <Element>
+      <Label size="small">
         {formatCurrencyNoKr(inntekter.map(({ inntekt }) => inntekt).reduce((i1, i2) => i1 + i2, 0)) }
-      </Element>
+      </Label>
     </TableColumn>
   </TableRow>
 ));
@@ -137,9 +135,9 @@ const lagRadMedMåneder = (måneder: Månedsgrunnlag[],
         const key = månedsgrunnlag.fom;
         return (
           <Column key={key} xs="6">
-            <Normaltekst>
+            <BodyShort size="small">
               {formatDate(månedsgrunnlag.fom)}
-            </Normaltekst>
+            </BodyShort>
             <Inntekttabell
               inntekter={månedsgrunnlag.inntekter}
               arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
@@ -171,11 +169,11 @@ const BesteManederVisningPanel: FunctionComponent<BesteMånederProps> = ({
   <div>
     <Row>
       <Column>
-        <Element>
+        <Label size="small">
           {' '}
           <FormattedMessage id="Inntekttabell.Tittel" />
           {' '}
-        </Element>
+        </Label>
       </Column>
     </Row>
     <VerticalSpacer twentyPx />
@@ -190,14 +188,14 @@ const BesteManederVisningPanel: FunctionComponent<BesteMånederProps> = ({
         <Table noHover>
           <TableRow>
             <TableColumn>
-              <Normaltekst>
+              <BodyShort size="small">
                 <FormattedMessage id="Inntekttabell.BeregnetÅrsinntekt" />
-              </Normaltekst>
+              </BodyShort>
             </TableColumn>
             <TableColumn>
-              <Normaltekst>
+              <BodyShort size="small">
                 {formatCurrencyNoKr(finnÅrsinntekt(besteMåneder))}
-              </Normaltekst>
+              </BodyShort>
             </TableColumn>
           </TableRow>
         </Table>

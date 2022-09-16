@@ -4,7 +4,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Label, BodyShort } from '@navikt/ds-react';
 import { Column, Row } from 'nav-frontend-grid';
 import { PersonopplysningerBasis } from '@fpsak-frontend/types';
 import barnIkonUrl from '@fpsak-frontend/assets/images/child.svg';
@@ -36,35 +36,35 @@ const AlleBarnPanel: FunctionComponent<OwnProps> = ({
                     <FlexContainer>
                       <FlexRow>
                         <FlexColumn>
-                          <Element>
+                          <Label size="small">
                             <FormattedMessage id="AlleBarnPanel.BarnNr" values={{ nummer: index + 1 }} />
-                          </Element>
-                          <Normaltekst>
+                          </Label>
+                          <BodyShort size="small">
                             {barn.navn ? barn.navn : '-'}
-                          </Normaltekst>
+                          </BodyShort>
                         </FlexColumn>
                       </FlexRow>
                       <VerticalSpacer sixteenPx />
                       <FlexRow>
                         <FlexColumn>
-                          <Element>
+                          <Label size="small">
                             <FormattedMessage id="AlleBarnPanel.Fodt" />
-                          </Element>
-                          <Normaltekst>
+                          </Label>
+                          <BodyShort size="small">
                             <DateLabel dateString={barn.fødselsdato ? barn.fødselsdato : '-'} />
-                          </Normaltekst>
+                          </BodyShort>
                         </FlexColumn>
                       </FlexRow>
                       <VerticalSpacer sixteenPx />
                       {barn.dødsdato && (
                         <FlexRow>
                           <FlexColumn>
-                            <Element className={styles.dodTekst}>
+                            <Label size="small" className={styles.dodTekst}>
                               <FormattedMessage id="AlleBarnPanel.Dod" />
-                            </Element>
-                            <Normaltekst className={styles.dodTekst}>
+                            </Label>
+                            <BodyShort size="small" className={styles.dodTekst}>
                               <DateLabel dateString={barn.dødsdato} />
-                            </Normaltekst>
+                            </BodyShort>
                           </FlexColumn>
                         </FlexRow>
                       )}

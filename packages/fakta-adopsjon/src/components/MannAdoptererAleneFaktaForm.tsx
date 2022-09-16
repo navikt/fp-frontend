@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Container } from 'nav-frontend-grid';
-import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import { BodyShort, Detail } from '@navikt/ds-react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -50,10 +50,10 @@ const MannAdoptererAleneFaktaForm: FunctionComponent<OwnProps> & StaticFunctions
       merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]}
     >
       <Container className={styles.container}>
-        <Undertekst><FormattedMessage id="MannAdoptererAleneFaktaForm.Opplysninger" /></Undertekst>
+        <Detail size="small"><FormattedMessage id="MannAdoptererAleneFaktaForm.Opplysninger" /></Detail>
         <VerticalSpacer fourPx />
         {farSokerType
-          && <Normaltekst>{getKodeverknavnFn(alleKodeverk)(farSokerType, KodeverkType.FAR_SOEKER_TYPE)}</Normaltekst>}
+          && <BodyShort size="small">{getKodeverknavnFn(alleKodeverk)(farSokerType, KodeverkType.FAR_SOEKER_TYPE)}</BodyShort>}
         <VerticalSpacer sixteenPx />
         <hr className={styles.hr} />
         <RadioGroupPanel

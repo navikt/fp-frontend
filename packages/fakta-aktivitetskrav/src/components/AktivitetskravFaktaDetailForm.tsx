@@ -2,9 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import {
-  Element, Normaltekst, Undertittel,
-} from 'nav-frontend-typografi';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+  Button, Label, BodyShort, Heading,
+} from '@navikt/ds-react';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
@@ -42,30 +41,30 @@ export const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
 
   return (
     <Form formMethods={formMethods} onSubmit={(values: FormValues) => oppdaterAktivitetskrav(values)}>
-      <Undertittel><FormattedMessage id="AktivitetskravFaktaDetailForm.Header" /></Undertittel>
+      <Heading size="small"><FormattedMessage id="AktivitetskravFaktaDetailForm.Header" /></Heading>
       <VerticalSpacer fourPx />
       <Row className="">
         <Column xs="4">
-          <Element>
+          <Label size="small">
             <FormattedMessage id="AktivitetskravFaktaDetailForm.Periode" />
-          </Element>
+          </Label>
           <VerticalSpacer fourPx />
-          <Normaltekst>
+          <BodyShort size="small">
             <PeriodLabel
               dateStringFom={valgtAktivitetskrav.fom}
               dateStringTom={valgtAktivitetskrav.tom}
             />
-          </Normaltekst>
+          </BodyShort>
         </Column>
         {valgtAktivitetskrav.morsAktivitet && (
           <Column xs="4">
-            <Element>
+            <Label size="small">
               <FormattedMessage id="AktivitetskravFaktaDetailForm.MorsAktivitet" />
-            </Element>
+            </Label>
             <VerticalSpacer fourPx />
-            <Normaltekst>
+            <BodyShort size="small">
               {morsAktiviteter.find((ma) => ma.kode === valgtAktivitetskrav.morsAktivitet)?.navn}
-            </Normaltekst>
+            </BodyShort>
           </Column>
         )}
       </Row>
@@ -92,14 +91,14 @@ export const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
       <FlexContainer>
         <FlexRow>
           <FlexColumn>
-            <Hovedknapp mini spinner={false} disabled={!formMethods.formState.isDirty || readOnly}>
+            <Button size="small" variant="primary" loading={false} disabled={!formMethods.formState.isDirty || readOnly}>
               <FormattedMessage id="AktivitetskravFaktaDetailForm.Oppdater" />
-            </Hovedknapp>
+            </Button>
           </FlexColumn>
           <FlexColumn>
-            <Knapp mini htmlType="button" onClick={avbrytEditeringAvAktivitetskrav} disabled={readOnly}>
+            <Button size="small" variant="secondary" onClick={avbrytEditeringAvAktivitetskrav} disabled={readOnly}>
               <FormattedMessage id="AktivitetskravFaktaDetailForm.Avbryt" />
-            </Knapp>
+            </Button>
           </FlexColumn>
         </FlexRow>
       </FlexContainer>

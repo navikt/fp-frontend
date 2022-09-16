@@ -2,8 +2,7 @@ import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
-import AlertStripe from 'nav-frontend-alertstriper';
+import { Alert, Label, BodyShort } from '@navikt/ds-react';
 
 import { DateLabel, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { Datepicker, InputField, formHooks } from '@navikt/ft-form-hooks';
@@ -116,15 +115,15 @@ export const TermindatoFaktaForm: FunctionComponent<OwnProps> & StaticFunctions 
       {fodselsdatoTps && !isOverridden && (
         <FaktaGruppe title={intl.formatMessage({ id: 'TermindatoFaktaForm.OpplysningerTPS' })}>
           <Row>
-            <Column xs="6"><Element><FormattedMessage id="TermindatoFaktaForm.FodselsdatoTps" /></Element></Column>
-            <Column xs="6"><Element><FormattedMessage id="TermindatoFaktaForm.AntallBarnTps" /></Element></Column>
+            <Column xs="6"><Label size="small"><FormattedMessage id="TermindatoFaktaForm.FodselsdatoTps" /></Label></Column>
+            <Column xs="6"><Label size="small"><FormattedMessage id="TermindatoFaktaForm.AntallBarnTps" /></Label></Column>
           </Row>
           <Row>
             <Column xs="6">
-              <Normaltekst><DateLabel dateString={fodselsdatoTps} /></Normaltekst>
+              <BodyShort size="small"><DateLabel dateString={fodselsdatoTps} /></BodyShort>
             </Column>
             <Column xs="6">
-              <Normaltekst>{antallBarnTps}</Normaltekst>
+              <BodyShort size="small">{antallBarnTps}</BodyShort>
             </Column>
           </Row>
         </FaktaGruppe>
@@ -134,11 +133,11 @@ export const TermindatoFaktaForm: FunctionComponent<OwnProps> & StaticFunctions 
       {isForTidligTerminbekreftelse && (
         <>
           <VerticalSpacer sixteenPx />
-          <AlertStripe type="advarsel" className={styles.marginBottom}>
+          <Alert variant="warning" className={styles.marginBottom}>
             <FormattedMessage
               id="TermindatoFaktaForm.AdvarselForTidligUtstedtdato"
             />
-          </AlertStripe>
+          </Alert>
         </>
       )}
     </>

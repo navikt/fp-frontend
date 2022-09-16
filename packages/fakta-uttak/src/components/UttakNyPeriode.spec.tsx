@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import sinon from 'sinon';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { Button } from '@navikt/ds-react';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -114,7 +114,7 @@ describe('<UttakNyPeriode>', () => {
     expect(okKnapp.prop('onClick')).toEqual(reduxFormPropsMock.handleSubmit);
     expect(okKnapp.find(FormattedMessage).prop('id')).toBe('UttakInfoPanel.Oppdater');
 
-    const avbrytKnapp = wrapper.find(Knapp);
+    const avbrytKnapp = wrapper.find(Button);
     expect(avbrytKnapp).toHaveLength(1);
     expect(avbrytKnapp.prop('mini')).toBe(true);
 
@@ -297,7 +297,7 @@ describe('<UttakNyPeriode>', () => {
         periodeType: 'FEDREKVOTE',
       },
     });
-    const okKnapp = wrapper.find(Hovedknapp);
+    const okKnapp = wrapper.find(Button);
     okKnapp.simulate('click');
     expect(reduxFormPropsMock.handleSubmit.called).toBe(true);
   });

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Container } from 'nav-frontend-grid';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
@@ -44,7 +44,7 @@ const EktefelleFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
       merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]}
     >
       <Container className={styles.container}>
-        <Normaltekst><FormattedMessage id="EktefelleFaktaForm.EktefellesBarn" /></Normaltekst>
+        <BodyShort size="small"><FormattedMessage id="EktefelleFaktaForm.EktefellesBarn" /></BodyShort>
         <VerticalSpacer twentyPx />
         <hr className={styles.hr} />
         <RadioGroupPanel

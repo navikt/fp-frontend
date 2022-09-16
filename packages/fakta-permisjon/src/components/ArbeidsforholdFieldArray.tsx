@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
-import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import { Label, BodyShort, Detail } from '@navikt/ds-react';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import {
   FlexColumn, FlexContainer, FlexRow, Image, Tooltip, VerticalSpacer, PeriodLabel, DateLabel,
@@ -97,47 +97,47 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                 <FlexColumn className={styles.body}>
                   <Row>
                     <Column xs="4">
-                      <Element>
+                      <Label size="small">
                         {arbeidsgiverOpplysinger.navn}
-                      </Element>
+                      </Label>
                       {arbeidsforhold.arbeidsgiverIdent && (
-                      <Undertekst>
+                      <Detail size="small">
                         (
                         {arbeidsgiverOpplysinger.erPrivatPerson
                           ? <DateLabel dateString={arbeidsgiverOpplysinger.fødselsdato} /> : arbeidsforhold.arbeidsgiverIdent}
                         )
-                      </Undertekst>
+                      </Detail>
                       )}
                     </Column>
                     <Column xs="3">
-                      <Element>
+                      <Label size="small">
                         <FormattedMessage id="ArbeidsforholdFieldArray.Periode" />
-                      </Element>
-                      <Normaltekst>
+                      </Label>
+                      <BodyShort size="small">
                         {arbeidsforhold && (
                         <PeriodLabel dateStringFom={arbeidsforhold.fom} dateStringTom={arbeidsforhold.tom !== TIDENES_ENDE ? arbeidsforhold.tom : undefined} />
                         )}
                         {!arbeidsforhold && '-'}
-                      </Normaltekst>
+                      </BodyShort>
                     </Column>
                     <Column xs="2">
-                      <Element>
+                      <Label size="small">
                         <FormattedMessage id="ArbeidsforholdFieldArray.Kilde" />
-                      </Element>
-                      <Normaltekst>
+                      </Label>
+                      <BodyShort size="small">
                         <FormattedMessage id={arbeidsforhold ? 'ArbeidsforholdFieldArray.AaRegisteret' : 'ArbeidsforholdFieldArray.Inntektsmelding'} />
-                      </Normaltekst>
+                      </BodyShort>
                     </Column>
                     <Column xs="3">
-                      <Element>
+                      <Label size="small">
                         <FormattedMessage id="ArbeidsforholdFieldArray.InntektsmeldingMottatt" />
-                      </Element>
-                      <Normaltekst>
+                      </Label>
+                      <BodyShort size="small">
                         {inntektsmelding?.motattDato && (
                           <DateLabel dateString={inntektsmelding.motattDato} />
                         )}
                         {!inntektsmelding?.motattDato && <FormattedMessage id="ArbeidsforholdFieldArray.IkkeMottatt" />}
-                      </Normaltekst>
+                      </BodyShort>
                     </Column>
                   </Row>
                   <VerticalSpacer sixteenPx />
@@ -147,18 +147,18 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                         <>
                           <FlexRow>
                             <FlexColumn>
-                              <Element><FormattedMessage id="ArbeidsforholdFieldArray.Id" /></Element>
+                              <Label size="small"><FormattedMessage id="ArbeidsforholdFieldArray.Id" /></Label>
                             </FlexColumn>
                             <FlexColumn>
                               {arbeidsforhold.eksternArbeidsforholdId.length < 50 && (
-                                <Normaltekst>{arbeidsforhold.eksternArbeidsforholdId}</Normaltekst>
+                                <BodyShort size="small">{arbeidsforhold.eksternArbeidsforholdId}</BodyShort>
                               )}
                               {arbeidsforhold.eksternArbeidsforholdId.length >= 50 && (
                                 <Tooltip
                                   content={delOppAId(arbeidsforhold.eksternArbeidsforholdId)}
                                   alignBottom
                                 >
-                                  <Normaltekst>{`${arbeidsforhold.eksternArbeidsforholdId.substring(0, 50)}...`}</Normaltekst>
+                                  <BodyShort size="small">{`${arbeidsforhold.eksternArbeidsforholdId.substring(0, 50)}...`}</BodyShort>
                                 </Tooltip>
                               )}
                             </FlexColumn>
@@ -170,10 +170,10 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                         <>
                           <FlexRow>
                             <FlexColumn>
-                              <Element><FormattedMessage id="ArbeidsforholdFieldArray.Stillingsprosent" /></Element>
+                              <Label size="small"><FormattedMessage id="ArbeidsforholdFieldArray.Stillingsprosent" /></Label>
                             </FlexColumn>
                             <FlexColumn>
-                              <Normaltekst>{`${arbeidsforhold.stillingsprosent}%`}</Normaltekst>
+                              <BodyShort size="small">{`${arbeidsforhold.stillingsprosent}%`}</BodyShort>
                             </FlexColumn>
                           </FlexRow>
                           <VerticalSpacer eightPx />
@@ -197,12 +197,12 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                       )}
                     </Column>
                     <Column xs="3">
-                      <Element>
+                      <Label size="small">
                         {`${getKodeverknavnFraKode(alleKodeverk, KodeverkType.PERMISJONSBESKRIVELSE_TYPE, arbeidsforhold.permisjonOgMangel.type)} 100%`}
-                      </Element>
-                      <Normaltekst>
+                      </Label>
+                      <BodyShort size="small">
                         <PeriodLabel dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom} dateStringTom={undefined} />
-                      </Normaltekst>
+                      </BodyShort>
                     </Column>
                   </Row>
                   <RadioGroupPanel
@@ -215,7 +215,7 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                           </FlexColumn>
                           <FlexColumn>
                             <Hjelpetekst
-                          /* @ts-ignore */
+                              /* @ts-ignore */
                               popoverProps={{ className: styles.hjelpetekst }}
                             >
                               <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel1" />

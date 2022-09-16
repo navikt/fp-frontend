@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider, FormattedMessage } from 'react-intl';
 import { isDirty as reduxIsDirty, isSubmitting as reduxIsSubmitting } from 'redux-form';
 import { connect } from 'react-redux';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Button } from '@navikt/ds-react';
 
 import { ariaCheck, isRequiredMessage } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
@@ -61,16 +61,16 @@ export const FaktaSubmitButton: FunctionComponent<PureOwnProps & MappedOwnProps>
 }) => (
   <RawIntlProvider value={intl}>
     {!isReadOnly && (
-      <Hovedknapp
-        mini
-        spinner={isSubmitting}
+      <Button
+        size="small"
+        variant="primary"
+        loading={isSubmitting}
         disabled={isDisabled(isDirty, isSubmitting, isSubmittable, hasEmptyRequiredFields, hasOpenAksjonspunkter)}
         onClick={onClick || ariaCheck}
-        htmlType={onClick ? 'button' : 'submit'}
       >
         {!!buttonText && buttonText}
         {!buttonText && <FormattedMessage id="SubmitButton.ConfirmInformation" />}
-      </Hovedknapp>
+      </Button>
     )}
   </RawIntlProvider>
 );

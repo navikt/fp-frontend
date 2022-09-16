@@ -6,9 +6,7 @@ import {
 import { createSelector } from 'reselect';
 import { bindActionCreators, Dispatch } from 'redux';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { Element } from 'nav-frontend-typografi';
-import AlertStripe from 'nav-frontend-alertstriper';
-import { Knapp } from 'nav-frontend-knapper';
+import { Label, Button, Alert } from '@navikt/ds-react';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
@@ -248,9 +246,9 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
       <FlexContainer>
         <FlexRow>
           <FlexColumn>
-            <Element className={styles.avsnittOverskrift}>
+            <Label size="small" className={styles.avsnittOverskrift}>
               <FormattedMessage id="AvklarAktivitetPanel.Overskrift" />
-            </Element>
+            </Label>
           </FlexColumn>
           {skalViseOverstyringsknapp(kanOverstyre, erOverstyrt) && (
           <FlexColumn>
@@ -286,15 +284,15 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
           {formProps.error && (
             <>
               <VerticalSpacer sixteenPx />
-              <AlertStripe type="feil">
+              <Alert variant="error">
                 <FormattedMessage id={formProps.error} />
-              </AlertStripe>
+              </Alert>
             </>
           )}
           {erOverstyrt && (
-            <Element>
+            <Label size="small">
               <FormattedMessage id="AvklareAktiviteter.OverstyrerAktivitetAdvarsel" />
-            </Element>
+            </Label>
           )}
           <VerticalSpacer twentyPx />
           {avklarAktiviteter && avklarAktiviteter.aktiviteterTomDatoMapping && (
@@ -336,15 +334,15 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
                     </FlexColumn>
                     {kanOverstyre && !hasAksjonspunkt(OVERSTYRING_AV_BEREGNINGSAKTIVITETER, aksjonspunkter) && (
                     <FlexColumn>
-                      <Knapp
-                        htmlType="button"
-                        spinner={formProps.submitting}
+                      <Button
+                        size="small"
+                        variant="secondary"
+                        loading={formProps.submitting}
                         disabled={formProps.submitting}
                         onClick={() => this.initializeAktiviteter()}
-                        mini
                       >
                         <FormattedMessage id="AvklareAktiviteter.Avbryt" />
-                      </Knapp>
+                      </Button>
                     </FlexColumn>
                     )}
                   </FlexRow>

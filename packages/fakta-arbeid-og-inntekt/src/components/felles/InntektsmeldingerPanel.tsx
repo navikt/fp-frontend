@@ -2,8 +2,7 @@ import React, {
   FunctionComponent, useState,
 } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import Lenke from 'nav-frontend-lenker';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Link, Label, BodyShort } from '@navikt/ds-react';
 import {
   Image, FlexColumn, FlexRow, Tooltip, VerticalSpacer, FloatRight, PeriodLabel, AvsnittSkiller, DateLabel,
 } from '@navikt/ft-ui-komponenter';
@@ -80,43 +79,43 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                   <Column xs="7" className={styles.forsteKolonne}>
                     <FlexRow>
                       <FlexColumn>
-                        <Element><FormattedMessage id="ArbeidsforholdInformasjonPanel.ArbeidsforholdId" /></Element>
+                        <Label size="small"><FormattedMessage id="ArbeidsforholdInformasjonPanel.ArbeidsforholdId" /></Label>
                       </FlexColumn>
                       <FlexColumn>
                         {a.eksternArbeidsforholdId && a.eksternArbeidsforholdId.length < 50 && (
-                          <Normaltekst>{a.eksternArbeidsforholdId}</Normaltekst>
+                          <BodyShort size="small">{a.eksternArbeidsforholdId}</BodyShort>
                         )}
                         {a.eksternArbeidsforholdId && a.eksternArbeidsforholdId.length >= 50 && (
                           <Tooltip
                             content={delOppAId(a.eksternArbeidsforholdId)}
                             alignBottom
                           >
-                            <Normaltekst>{`${a.eksternArbeidsforholdId.substring(0, 50)}...`}</Normaltekst>
+                            <BodyShort size="small">{`${a.eksternArbeidsforholdId.substring(0, 50)}...`}</BodyShort>
                           </Tooltip>
                         )}
                         {!a.eksternArbeidsforholdId && (
-                          <Normaltekst>-</Normaltekst>
+                          <BodyShort size="small">-</BodyShort>
                         )}
                       </FlexColumn>
                     </FlexRow>
                     <VerticalSpacer fourPx />
                     <FlexRow>
                       <FlexColumn>
-                        <Element><FormattedMessage id="ArbeidsforholdInformasjonPanel.Periode" /></Element>
+                        <Label size="small"><FormattedMessage id="ArbeidsforholdInformasjonPanel.Periode" /></Label>
                       </FlexColumn>
                       <FlexColumn>
-                        <Normaltekst>
+                        <BodyShort size="small">
                           <PeriodLabel dateStringFom={a.fom} dateStringTom={a.tom !== TIDENES_ENDE ? a.tom : undefined} />
-                        </Normaltekst>
+                        </BodyShort>
                       </FlexColumn>
                     </FlexRow>
                     <VerticalSpacer fourPx />
                     <FlexRow>
                       <FlexColumn>
-                        <Element><FormattedMessage id="ArbeidsforholdInformasjonPanel.Stillingsprosent" /></Element>
+                        <Label size="small"><FormattedMessage id="ArbeidsforholdInformasjonPanel.Stillingsprosent" /></Label>
                       </FlexColumn>
                       <FlexColumn>
-                        <Normaltekst>{`${a.stillingsprosent}%`}</Normaltekst>
+                        <BodyShort size="small">{`${a.stillingsprosent}%`}</BodyShort>
                       </FlexColumn>
                     </FlexRow>
                     {a.permisjonOgMangel && (
@@ -124,14 +123,14 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                         <VerticalSpacer fourPx />
                         <FlexRow>
                           <FlexColumn>
-                            <Element>
+                            <Label size="small">
                               {getKodeverknavnFraKode(alleKodeverk, KodeverkType.PERMISJONSBESKRIVELSE_TYPE, a.permisjonOgMangel.type)}
-                            </Element>
+                            </Label>
                           </FlexColumn>
                           <FlexColumn>
-                            <Normaltekst>
+                            <BodyShort size="small">
                               <PeriodLabel dateStringFom={a.permisjonOgMangel.permisjonFom} dateStringTom={a.permisjonOgMangel.permisjonTom} />
-                            </Normaltekst>
+                            </BodyShort>
                           </FlexColumn>
                         </FlexRow>
                       </>
@@ -146,7 +145,7 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                           />
                         )}
                         <VerticalSpacer fourPx />
-                        <Lenke
+                        <Link
                           onClick={(e) => {
                             e.preventDefault();
                             toggleInfoOmIm((info) => {
@@ -160,24 +159,24 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                           href=""
                         >
                           <span>
-                            <Normaltekst className={styles.inline}>
+                            <BodyShort size="small" className={styles.inline}>
                               <FormattedMessage
                                 id={!visInfoOmIm[a.internArbeidsforholdId]
                                   ? 'ArbeidsforholdInformasjonPanel.ApneImInfo' : 'ArbeidsforholdInformasjonPanel.LukkeImInfo'}
                               />
-                            </Normaltekst>
+                            </BodyShort>
                           </span>
                           <Image className={styles.arrow} src={visInfoOmIm[a.internArbeidsforholdId] ? pilOppIkonUrl : pilNedIkonUrl} />
-                        </Lenke>
+                        </Link>
                       </>
                     )}
                   </Column>
                   {inntektsmelding && (
                     <Column xs="5" className={styles.sisteKolonne}>
                       <FloatRight>
-                        <Element><FormattedMessage id="ArbeidsforholdInformasjonPanel.ImMottatt" /></Element>
+                        <Label size="small"><FormattedMessage id="ArbeidsforholdInformasjonPanel.ImMottatt" /></Label>
                         <FloatRight>
-                          <Normaltekst><DateLabel dateString={inntektsmelding.motattDato} /></Normaltekst>
+                          <BodyShort size="small"><DateLabel dateString={inntektsmelding.motattDato} /></BodyShort>
                         </FloatRight>
                       </FloatRight>
                     </Column>
@@ -187,7 +186,7 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                       <FloatRight>
                         <Image className={styles.aksjonpunktImage} alt={intl.formatMessage({ id: 'ArbeidsforholdRad.Aksjonspunkt' })} src={advarselIkonUrl} />
                         <div className={styles.ikkeMottatt}>
-                          <Element><FormattedMessage id="ArbeidsforholdInformasjonPanel.ImIkkeMottatt" /></Element>
+                          <Label size="small"><FormattedMessage id="ArbeidsforholdInformasjonPanel.ImIkkeMottatt" /></Label>
                         </div>
                       </FloatRight>
                     </Column>
@@ -215,10 +214,10 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
         <>
           <FlexRow>
             <FlexColumn>
-              <Element><FormattedMessage id="ArbeidsforholdInformasjonPanel.Stillingsprosent" /></Element>
+              <Label size="small"><FormattedMessage id="ArbeidsforholdInformasjonPanel.Stillingsprosent" /></Label>
             </FlexColumn>
             <FlexColumn>
-              <Normaltekst>{`${arbeidsforholdForRad[0].stillingsprosent}%`}</Normaltekst>
+              <BodyShort size="small">{`${arbeidsforholdForRad[0].stillingsprosent}%`}</BodyShort>
             </FlexColumn>
           </FlexRow>
           {arbeidsforholdForRad[0].permisjonOgMangel && (
@@ -226,18 +225,18 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
               <VerticalSpacer eightPx />
               <FlexRow>
                 <FlexColumn>
-                  <Element>
+                  <Label size="small">
                     {getKodeverknavnFraKode(alleKodeverk,
                       KodeverkType.PERMISJONSBESKRIVELSE_TYPE, arbeidsforholdForRad[0].permisjonOgMangel.type)}
-                  </Element>
+                  </Label>
                 </FlexColumn>
                 <FlexColumn>
-                  <Normaltekst>
+                  <BodyShort size="small">
                     <PeriodLabel
                       dateStringFom={arbeidsforholdForRad[0].permisjonOgMangel.permisjonFom}
                       dateStringTom={arbeidsforholdForRad[0].permisjonOgMangel.permisjonTom}
                     />
-                  </Normaltekst>
+                  </BodyShort>
                 </FlexColumn>
               </FlexRow>
             </>

@@ -1,5 +1,5 @@
 import { DateLabel, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { Label, BodyShort, Heading } from '@navikt/ds-react';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { AoIArbeidsforhold } from '@fpsak-frontend/types';
@@ -48,58 +48,58 @@ const ArbeidsforholdDetail: FunctionComponent<PureOwnProps> = ({
     <>
       <VerticalSpacer thirtyTwoPx />
       <FaktaGruppe>
-        <Undertittel><FormattedMessage id="ArbeidsforholdDetail.Header" /></Undertittel>
+        <Heading size="small"><FormattedMessage id="ArbeidsforholdDetail.Header" /></Heading>
         <PermisjonPeriode arbeidsforhold={valgtArbeidsforhold} />
         {skalBrukeMedOverstyrtPeriode && (
           <>
-            <Normaltekst>
+            <BodyShort size="small">
               <FormattedMessage id="ArbeidsforholdDetail.ArbeidsforholdetErIkkeAktivt" />
-            </Normaltekst>
-            <Normaltekst>
+            </BodyShort>
+            <BodyShort size="small">
               <FormattedMessage id="ArbeidsforholdDetail.ArbeidsforholdetAktivTomDato" />
-            </Normaltekst>
-            <Normaltekst>
+            </BodyShort>
+            <BodyShort size="small">
               <DateLabel dateString={finnOverstyrtTom(valgtArbeidsforhold)} />
-            </Normaltekst>
+            </BodyShort>
           </>
         )}
         {skalBrukeArbeidsforholdet && skalBrukePermisjon && (
-          <Normaltekst>
+          <BodyShort size="small">
             <FormattedMessage id="ArbeidsforholdDetail.SokerErIPermisjon" />
-          </Normaltekst>
+          </BodyShort>
         )}
         {skalOppretteBasertPåIM && (
-          <Normaltekst>
+          <BodyShort size="small">
             <FormattedMessage id="ArbeidsforholdDetail.OppdatertGittIm" />
-          </Normaltekst>
+          </BodyShort>
         )}
         {(erManueltOpprettetAvSaksbehandler
           || ((skalBrukeArbeidsforholdet || skalFortsetteUtenInntektsmelding) && (!valgtArbeidsforhold.permisjonOgMangel || skalIkkeBrukePermisjon))) && (
           <>
-            <Normaltekst>
+            <BodyShort size="small">
               <FormattedMessage id={utledAktivtArbeidsforholdLabel(valgtArbeidsforhold)} />
-            </Normaltekst>
+            </BodyShort>
             <VerticalSpacer sixteenPx />
             {skalFortsetteUtenInntektsmelding && (
-              <Normaltekst>
+              <BodyShort size="small">
                 <FormattedMessage id="ArbeidsforholdDetail.BenyttAInntektIBeregningsgrunnlag" />
-              </Normaltekst>
+              </BodyShort>
             )}
             {!skalFortsetteUtenInntektsmelding && !erManueltOpprettetAvSaksbehandler && (
-              <Normaltekst>
+              <BodyShort size="small">
                 <FormattedMessage id="ArbeidsforholdDetail.AvslaYtelseManglendeOpplysninger" />
-              </Normaltekst>
+              </BodyShort>
             )}
           </>
         )}
         {skalFjerneArbeidsforhold && (
-          <Normaltekst>
+          <BodyShort size="small">
             <FormattedMessage id={skalFjerneArbeidsforhold ? 'ArbeidsforholdDetail.FjernArbeidsforholdet' : 'ArbeidsforholdDetail.IMIkkeRelevant'} />
-          </Normaltekst>
+          </BodyShort>
         )}
         <VerticalSpacer sixteenPx />
-        <Element><FormattedMessage id="ArbeidsforholdDetail.Begrunnelse" /></Element>
-        <Normaltekst>{valgtArbeidsforhold.begrunnelse}</Normaltekst>
+        <Label size="small"><FormattedMessage id="ArbeidsforholdDetail.Begrunnelse" /></Label>
+        <BodyShort size="small">{valgtArbeidsforhold.begrunnelse}</BodyShort>
       </FaktaGruppe>
     </>
   );

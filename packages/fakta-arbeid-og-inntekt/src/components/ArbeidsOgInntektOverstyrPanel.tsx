@@ -2,11 +2,11 @@ import React, {
   FunctionComponent, useState, useCallback, useMemo,
 } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import {
+  Alert, Link, BodyShort, Heading,
+} from '@navikt/ds-react';
 import { Column, Row } from 'nav-frontend-grid';
-import Lenke from 'nav-frontend-lenker';
 
-import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import { dateFormat } from '@navikt/ft-utils';
 import {
@@ -96,7 +96,7 @@ const ArbeidsOgInntektOverstyrPanel: FunctionComponent<OwnProps> = ({
           <FlexContainer>
             <FlexRow>
               <FlexColumn>
-                <Undertittel><FormattedMessage id="ArbeidOgInntektFaktaPanel.Overskrift" /></Undertittel>
+                <Heading size="small"><FormattedMessage id="ArbeidOgInntektFaktaPanel.Overskrift" /></Heading>
               </FlexColumn>
               {erOverstyrer && erAksjonspunktÅpent && !readOnly && (
                 <FlexColumn>
@@ -108,12 +108,12 @@ const ArbeidsOgInntektOverstyrPanel: FunctionComponent<OwnProps> = ({
         </Column>
         <Column xs="6">
           <FloatRight>
-            <Normaltekst>
+            <BodyShort size="small">
               <FormattedMessage
                 id="ArbeidOgInntektFaktaPanel.Skjaringstidspunkt"
                 values={{ skjæringspunktDato: dateFormat(arbeidOgInntekt.skjæringstidspunkt) }}
               />
-            </Normaltekst>
+            </BodyShort>
           </FloatRight>
         </Column>
       </Row>
@@ -125,16 +125,16 @@ const ArbeidsOgInntektOverstyrPanel: FunctionComponent<OwnProps> = ({
       )}
       {arbeidsforhold.length === 0 && inntektsmeldinger.length === 0 && erOverstyrer && (
         <div className={styles.alertStripe}>
-          <AlertStripeInfo>
+          <Alert variant="info">
             <FormattedMessage id="ArbeidOgInntektFaktaPanel.IngenArbeidsforhold" />
-          </AlertStripeInfo>
+          </Alert>
         </div>
       )}
       <VerticalSpacer sixteenPx />
       {erOverstyrt && harIngenArbeidsforholdSomErManueltLagtTil && !skalVisePanelForÅLeggeTilArbeidsforhold && (
         <>
           <VerticalSpacer thirtyTwoPx />
-          <Lenke
+          <Link
             onClick={(e) => {
               e.preventDefault();
               toggleVisningAvLeggTilArbeidsforhold(true);
@@ -145,7 +145,7 @@ const ArbeidsOgInntektOverstyrPanel: FunctionComponent<OwnProps> = ({
             <span>
               <FormattedMessage id="ArbeidOgInntektFaktaPanel.LeggTilArbeidsforhold" />
             </span>
-          </Lenke>
+          </Link>
           <VerticalSpacer fourtyPx />
         </>
       )}

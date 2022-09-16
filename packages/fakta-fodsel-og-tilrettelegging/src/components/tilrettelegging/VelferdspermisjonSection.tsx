@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 import moment from 'moment';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { required } from '@navikt/ft-form-validators';
@@ -42,7 +42,7 @@ const VelferdspermisjonSection: FunctionComponent<OwnProps> = ({
   }
   return (
     <>
-      <Normaltekst className={styles.arbeidsforholdTittel}>
+      <BodyShort size="small" className={styles.arbeidsforholdTittel}>
         {permisjon.permisjonTom == null && (
           <FormattedMessage
             id="VelferdspermisjonSection.PermisjonDetaljerUendeligPeriode"
@@ -62,7 +62,7 @@ const VelferdspermisjonSection: FunctionComponent<OwnProps> = ({
             }}
           />
         )}
-      </Normaltekst>
+      </BodyShort>
       <VerticalSpacer sixteenPx />
       <RadioGroupPanel
         name={`${formSectionName}.permisjon${permisjon.permisjonFom}`}
