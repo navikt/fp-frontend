@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
-import { EtikettInfo } from 'nav-frontend-etiketter';
+import {
+  Tag, Panel, Label, BodyShort,
+} from '@navikt/ds-react';
 import { Column, Row } from 'nav-frontend-grid';
-import Panel from 'nav-frontend-paneler';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import {
   Table, TableColumn, TableRow,
@@ -61,13 +61,13 @@ const FodselSammenligningPanel: FunctionComponent<OwnProps> = ({
     <Panel className={styles.panel}>
       <Row>
         <Column xs="9">
-          <Element><FormattedMessage id="FodselsammenligningPanel.OpplysningerTPS" /></Element>
+          <Label size="small"><FormattedMessage id="FodselsammenligningPanel.OpplysningerTPS" /></Label>
         </Column>
         {nrOfDodfodteBarn > 0 && (
           <Column xs="3">
-            <EtikettInfo className={styles.dodMerke} typo="undertekst">
+            <Tag variant="info">
               <FormattedMessage id="FodselsammenligningPanel.Dodfodt" />
-            </EtikettInfo>
+            </Tag>
           </Column>
         )}
       </Row>
@@ -79,20 +79,20 @@ const FodselSammenligningPanel: FunctionComponent<OwnProps> = ({
               return (
                 <TableRow key={key} id={key}>
                   <TableColumn>
-                    <Normaltekst>
+                    <BodyShort size="small">
                       {formatDate(barn.fodselsdato)}
-                    </Normaltekst>
+                    </BodyShort>
                   </TableColumn>
                   <TableColumn>
-                    <Normaltekst>
+                    <BodyShort size="small">
                       {formatDate(barn.dodsdato)}
-                    </Normaltekst>
+                    </BodyShort>
                   </TableColumn>
                   <TableColumn>
                     {barn.dodsdato && (
-                      <EtikettInfo className={styles.dodMerke} typo="undertekst">
+                      <Tag variant="info">
                         <FormattedMessage id="FodselsammenligningPanel.Dod" />
-                      </EtikettInfo>
+                      </Tag>
                     )}
                   </TableColumn>
                 </TableRow>
@@ -103,9 +103,9 @@ const FodselSammenligningPanel: FunctionComponent<OwnProps> = ({
         {avklartBarn.length === 0 && (
           <Row>
             <Column xs="12" className={styles.noChildrenInTps}>
-              <Normaltekst>
+              <BodyShort size="small">
                 -
-              </Normaltekst>
+              </BodyShort>
             </Column>
           </Row>
         )}

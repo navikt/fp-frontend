@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import moment from 'moment';
 import { Column, Container, Row } from 'nav-frontend-grid';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Label, BodyShort } from '@navikt/ds-react';
 
 import { FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
 import { Datepicker, formHooks } from '@navikt/ft-form-hooks';
@@ -130,8 +130,8 @@ const DokumentasjonFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
           </div>
         ))}
         <VerticalSpacer twentyPx />
-        <Element>{intl.formatMessage({ id: 'DokumentasjonFaktaForm.AntallBarnSomFyllerVilkaret' })}</Element>
-        <Normaltekst>{findAntallBarnUnder15(fodselsdatoer, omsorgsovertakelseDato)}</Normaltekst>
+        <Label size="small">{intl.formatMessage({ id: 'DokumentasjonFaktaForm.AntallBarnSomFyllerVilkaret' })}</Label>
+        <BodyShort size="small">{findAntallBarnUnder15(fodselsdatoer, omsorgsovertakelseDato)}</BodyShort>
       </Container>
     </FaktaGruppe>
   );

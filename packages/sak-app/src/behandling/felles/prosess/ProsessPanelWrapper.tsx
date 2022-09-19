@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import classnames from 'classnames/bind';
 import { FormattedMessage } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 import { LoadingPanel, FadingPanel } from '@navikt/ft-ui-komponenter';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 
@@ -53,9 +53,9 @@ const ProsessPanelWrapper: FunctionComponent<OwnProps> = ({
   if (erPanelValgt && status === VilkarUtfallType.IKKE_VURDERT && !erAksjonspunktOpent) {
     return (
       <PanelContainer>
-        <Normaltekst>
+        <BodyShort size="small">
           <FormattedMessage id="ProsessPanelWrapper.IkkeBehandlet" />
-        </Normaltekst>
+        </BodyShort>
       </PanelContainer>
     );
   }

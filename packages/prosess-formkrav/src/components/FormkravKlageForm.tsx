@@ -3,7 +3,7 @@ import moment from 'moment';
 import {
   FormattedMessage, useIntl, IntlShape,
 } from 'react-intl';
-import { Undertekst, Undertittel } from 'nav-frontend-typografi';
+import { Detail, Heading } from '@navikt/ds-react';
 import { Column, Row } from 'nav-frontend-grid';
 
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -75,9 +75,9 @@ export const FormkravKlageForm: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <Undertittel>{intl.formatMessage({ id: 'Klage.Formkrav.Title' })}</Undertittel>
+      <Heading size="small">{intl.formatMessage({ id: 'Klage.Formkrav.Title' })}</Heading>
       <VerticalSpacer fourPx />
-      <Undertekst>{intl.formatMessage({ id: getLovHjemmeler(aksjonspunktCode) })}</Undertekst>
+      <Detail size="small">{intl.formatMessage({ id: getLovHjemmeler(aksjonspunktCode) })}</Detail>
       <VerticalSpacer fourPx />
       <AksjonspunktHelpTextTemp isAksjonspunktOpen={!readOnlySubmitButton}>
         {[<FormattedMessage id="Klage.Formkrav.HelpText" key={aksjonspunktCode} />]}

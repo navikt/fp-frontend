@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Undertekst, Undertittel } from 'nav-frontend-typografi';
+import { Detail, Heading } from '@navikt/ds-react';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk } from '@navikt/ft-types';
 
@@ -29,14 +29,14 @@ const InntektsgivendeArbeidPanel: FunctionComponent<OwnProps> & StaticFunctions 
   alleKodeverk,
 }) => (
   <BorderBox>
-    <Undertittel><FormattedMessage id="Registrering.InntektsgivendeArbeid.ArbeidINorge.Title" /></Undertittel>
+    <Heading size="small"><FormattedMessage id="Registrering.InntektsgivendeArbeid.ArbeidINorge.Title" /></Heading>
     <VerticalSpacer eightPx />
-    <Undertekst>
+    <Detail size="small">
       <FormattedMessage id="Registrering.InntektsgivendeArbeid.ArbeidINorge.SkalIkkeRegistrereArbeidsforhold" />
-    </Undertekst>
+    </Detail>
     <VerticalSpacer sixteenPx />
     <VerticalSpacer sixteenPx />
-    <Undertittel><FormattedMessage id="Registrering.InntektsgivendeArbeid.ArbeidIUtlandet.Title" /></Undertittel>
+    <Detail size="small"><FormattedMessage id="Registrering.InntektsgivendeArbeid.ArbeidIUtlandet.Title" /></Detail>
     <VerticalSpacer eightPx />
     <RenderInntektsgivendeArbeidFieldArray readOnly={readOnly} alleKodeverk={alleKodeverk} />
   </BorderBox>

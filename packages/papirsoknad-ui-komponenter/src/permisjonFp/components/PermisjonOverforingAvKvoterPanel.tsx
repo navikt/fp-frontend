@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { Element } from 'nav-frontend-typografi';
+import { Label } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { KodeverkType } from '@navikt/ft-kodeverk';
@@ -77,7 +77,7 @@ const PermisjonOverforingAvKvoterPanel: FunctionComponent<OwnProps> & StaticFunc
 
   return (
     <>
-      <Element><FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.OvertaKvoten" /></Element>
+      <Label size="small"><FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.OvertaKvoten" /></Label>
       <VerticalSpacer sixteenPx />
       <CheckboxField
         readOnly={readOnly}

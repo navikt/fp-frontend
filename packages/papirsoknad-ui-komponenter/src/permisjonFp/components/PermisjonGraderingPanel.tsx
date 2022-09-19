@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Element } from 'nav-frontend-typografi';
+import { Label } from '@navikt/ds-react';
 import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -46,7 +46,7 @@ const PermisjonGraderingPanel: FunctionComponent<OwnProps> & StaticFunctions = (
 
   return (
     <div>
-      <Element><FormattedMessage id="Registrering.Permisjon.Gradering.Title" /></Element>
+      <Label size="small"><FormattedMessage id="Registrering.Permisjon.Gradering.Title" /></Label>
       <VerticalSpacer sixteenPx />
       <CheckboxField
         readOnly={readOnly}

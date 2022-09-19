@@ -2,7 +2,7 @@ import React, {
   FunctionComponent, useCallback, useMemo, useState,
 } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
+import { BodyShort, Detail, Heading } from '@navikt/ds-react';
 
 import { getKodeverknavnFn } from '@navikt/ft-utils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -134,28 +134,28 @@ const VedtakKlageForm: FunctionComponent<OwnProps> = ({
   const kodeverknavn = getKodeverknavnFn(alleKodeverk);
   return (
     <>
-      <Undertittel><FormattedMessage id="VedtakKlageForm.Header" /></Undertittel>
+      <Heading size="small"><FormattedMessage id="VedtakKlageForm.Header" /></Heading>
       <VerticalSpacer twentyPx />
-      <Undertekst><FormattedMessage id="VedtakKlageForm.Resultat" /></Undertekst>
-      <Normaltekst><FormattedMessage id={behandlingsResultatTekst} /></Normaltekst>
+      <Detail size="small"><FormattedMessage id="VedtakKlageForm.Resultat" /></Detail>
+      <BodyShort size="small"><FormattedMessage id={behandlingsResultatTekst} /></BodyShort>
       <VerticalSpacer sixteenPx />
       {behandlingsresultat.type === behandlingResultatType.KLAGE_AVVIST && (
         <>
-          <Undertekst><FormattedMessage id="VedtakKlageForm.ArsakTilAvvisning" /></Undertekst>
-          { avvistArsaker.map((arsak) => <Normaltekst key={arsak}>{kodeverknavn(arsak, KodeverkType.KLAGE_AVVIST_AARSAK)}</Normaltekst>) }
+          <Detail size="small"><FormattedMessage id="VedtakKlageForm.ArsakTilAvvisning" /></Detail>
+          { avvistArsaker.map((arsak) => <BodyShort size="small" key={arsak}>{kodeverknavn(arsak, KodeverkType.KLAGE_AVVIST_AARSAK)}</BodyShort>) }
           <VerticalSpacer sixteenPx />
         </>
       )}
       {behandlingsresultat.type === behandlingResultatType.KLAGE_MEDHOLD && (
         <>
-          <Undertekst><FormattedMessage id="VedtakKlageForm.ArsakTilOmgjoring" /></Undertekst>
+          <Detail size="small"><FormattedMessage id="VedtakKlageForm.ArsakTilOmgjoring" /></Detail>
           { omgjortAarsak }
           <VerticalSpacer sixteenPx />
         </>
       )}
       {behandlingsresultat.type === behandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET && (
         <>
-          <Undertekst><FormattedMessage id="VedtakKlageForm.ArsakTilOppheving" /></Undertekst>
+          <Detail size="small"><FormattedMessage id="VedtakKlageForm.ArsakTilOppheving" /></Detail>
           { omgjortAarsak }
           <VerticalSpacer sixteenPx />
         </>

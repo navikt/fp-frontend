@@ -3,7 +3,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Label, BodyShort } from '@navikt/ds-react';
 import { Column, Row } from 'nav-frontend-grid';
 import { AlleKodeverk, KjønnkodeEnum, PersonopplysningerBasis } from '@fpsak-frontend/types';
 import kvinneIkonUrl from '@fpsak-frontend/assets/images/female.svg';
@@ -42,15 +42,15 @@ const ForelderPanel: FunctionComponent<OwnProps> = ({
                 <FlexContainer>
                   <FlexRow>
                     <FlexColumn>
-                      <Element>
+                      <Label size="small">
                         <FormattedMessage id={erSøker ? 'ForelderPanel.Soker' : 'ForelderPanel.AnnenForelder'} />
-                      </Element>
-                      <Normaltekst>
+                      </Label>
+                      <BodyShort size="small">
                         {forelder.navn}
-                      </Normaltekst>
-                      <Normaltekst>
+                      </BodyShort>
+                      <BodyShort size="small">
                         {getKodeverknavnFraKode(alleKodeverk, KodeverkType.SIVILSTAND_TYPE, forelder.sivilstand)}
-                      </Normaltekst>
+                      </BodyShort>
                     </FlexColumn>
                   </FlexRow>
                   <VerticalSpacer sixteenPx />

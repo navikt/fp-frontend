@@ -1,7 +1,7 @@
 import React, { ReactNode, FunctionComponent } from 'react';
 import {
-  Undertittel, Undertekst, Element, Normaltekst,
-} from 'nav-frontend-typografi';
+  Heading, Detail, Label, BodyShort,
+} from '@navikt/ds-react';
 import {
   FlexContainer, FlexRow, FlexColumn, Image, VerticalSpacer, AksjonspunktBox,
 } from '@navikt/ft-ui-komponenter';
@@ -58,11 +58,11 @@ const ProsessPanelTemplate: FunctionComponent<OwnProps> = ({
         </FlexColumn>
         )}
         <FlexColumn>
-          <Undertittel>{title}</Undertittel>
+          <Heading size="small">{title}</Heading>
         </FlexColumn>
         {lovReferanse && (
         <FlexColumn>
-          <Undertekst className={styles.vilkar}>{lovReferanse}</Undertekst>
+          <Detail size="small" className={styles.vilkar}>{lovReferanse}</Detail>
         </FlexColumn>
         )}
       </FlexRow>
@@ -72,19 +72,19 @@ const ProsessPanelTemplate: FunctionComponent<OwnProps> = ({
           {originalErVilkarOk && (
           <>
             <VerticalSpacer eightPx />
-            <Element>{intl.formatMessage({ id: 'ProsessPanelTemplate.ErOppfylt' })}</Element>
+            <Label size="small">{intl.formatMessage({ id: 'ProsessPanelTemplate.ErOppfylt' })}</Label>
           </>
           )}
           {originalErVilkarOk === false && (
           <>
             <VerticalSpacer eightPx />
-            <Element>{intl.formatMessage({ id: 'ProsessPanelTemplate.ErIkkeOppfylt' })}</Element>
+            <Label size="small">{intl.formatMessage({ id: 'ProsessPanelTemplate.ErIkkeOppfylt' })}</Label>
           </>
           )}
           {(!isAksjonspunktOpen && originalErVilkarOk === undefined) && (
           <>
             <VerticalSpacer eightPx />
-            <Normaltekst>{intl.formatMessage({ id: 'ProsessPanelTemplate.IkkeBehandlet' })}</Normaltekst>
+            <BodyShort size="small">{intl.formatMessage({ id: 'ProsessPanelTemplate.IkkeBehandlet' })}</BodyShort>
           </>
           )}
         </FlexColumn>

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
-import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { PeriodpickerField, PeriodFieldArray } from '@fpsak-frontend/form';
 import {
@@ -37,25 +37,28 @@ class DokumentertePerioderPeriodePicker extends PureComponent<OwnProps> {
     return (
       <PeriodFieldArray fields={fields} emptyPeriodTemplate={periode} shouldShowAddButton={!readOnly} readOnly={readOnly}>
         {(fieldId, index, getRemoveButton) => (
-          <Row key={fieldId}>
-            <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
-              <FlexColumn>
-                <FlexRow>
-                  <FlexColumn>
-                    <PeriodpickerField
-                      names={[`${fieldId}.fom`, `${fieldId}.tom`]}
-                      label={index === 0 ? { id: 'UttakInfoPanel.AvklartPeriode' } : ''}
-                      validate={[required, hasValidDate, dateRangesNotOverlapping]}
-                      readOnly={readOnly}
-                    />
-                  </FlexColumn>
-                  <FlexColumn>
-                    {getRemoveButton()}
-                  </FlexColumn>
-                </FlexRow>
-              </FlexColumn>
-            </Column>
-          </Row>
+          <React.Fragment key={fieldId}>
+            <Row>
+              <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+                <FlexColumn>
+                  <FlexRow>
+                    <FlexColumn>
+                      <PeriodpickerField
+                        names={[`${fieldId}.fom`, `${fieldId}.tom`]}
+                        label={index === 0 ? { id: 'UttakInfoPanel.AvklartPeriode' } : ''}
+                        validate={[required, hasValidDate, dateRangesNotOverlapping]}
+                        readOnly={readOnly}
+                      />
+                    </FlexColumn>
+                    <FlexColumn>
+                      {getRemoveButton()}
+                    </FlexColumn>
+                  </FlexRow>
+                </FlexColumn>
+              </Column>
+            </Row>
+            <VerticalSpacer sixteenPx />
+          </React.Fragment>
         )}
       </PeriodFieldArray>
     );

@@ -1,6 +1,7 @@
 import React from 'react';
 import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
+import { Button } from '@navikt/ds-react';
 
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -21,10 +22,8 @@ describe('<PerioderKnapper>', () => {
       readOnly
     />, messages);
 
-    const hovedknapp = wrapper.find('Hovedknapp');
-    const knapp = wrapper.find('Knapp');
-    expect(hovedknapp).toHaveLength(0);
-    expect(knapp).toHaveLength(0);
+    const knapper = wrapper.find(Button);
+    expect(knapper).toHaveLength(0);
   });
 
   it('skal vise perioder knapper', () => {
@@ -39,10 +38,8 @@ describe('<PerioderKnapper>', () => {
       readOnly={false}
     />, messages);
 
-    const hovedknapp = wrapper.find('Hovedknapp');
-    const knapp = wrapper.find('Knapp');
-    expect(hovedknapp).toHaveLength(1);
-    expect(knapp).toHaveLength(1);
+    const knapper = wrapper.find(Button);
+    expect(knapper).toHaveLength(2);
   });
 
   it('skal vise nullstil knappen når bekreftet og updated er false', () => {
@@ -57,42 +54,7 @@ describe('<PerioderKnapper>', () => {
       readOnly={false}
     />, messages);
 
-    const knapp = wrapper.find('Knapp');
-    expect(knapp).toHaveLength(1);
-    expect(knapp.find(FormattedMessage).prop('id')).toBe('UttakInfoPanel.Nullstill');
-  });
-
-  it('skal vise avbryt knappen når bekreftet er true', () => {
-    const wrapper = shallowWithIntl(<PerioderKnapper
-      resultat={uttakPeriodeVurdering.PERIODE_OK}
-      updatePeriode={sinon.spy()}
-      resetPeriode={sinon.spy()}
-      cancelEditPeriode={sinon.spy()}
-      id="2018-06-02|2018-06-25"
-      updated={false}
-      bekreftet
-      readOnly={false}
-    />, messages);
-
-    const knapp = wrapper.find('Knapp');
-    expect(knapp).toHaveLength(1);
-    expect(knapp.find(FormattedMessage).prop('id')).toBe('UttakInfoPanel.Avbryt');
-  });
-
-  it('skal vise avbryt knappen når bekreftet er false og updated er true', () => {
-    const wrapper = shallowWithIntl(<PerioderKnapper
-      resultat={uttakPeriodeVurdering.PERIODE_OK}
-      updatePeriode={sinon.spy()}
-      resetPeriode={sinon.spy()}
-      cancelEditPeriode={sinon.spy()}
-      id="2018-06-02|2018-06-25"
-      updated
-      bekreftet={false}
-      readOnly={false}
-    />, messages);
-
-    const knapp = wrapper.find('Knapp');
-    expect(knapp).toHaveLength(1);
-    expect(knapp.find(FormattedMessage).prop('id')).toBe('UttakInfoPanel.Avbryt');
+    const knapper = wrapper.find(Button);
+    expect(knapper.last().find(FormattedMessage).prop('id')).toBe('UttakInfoPanel.Nullstill');
   });
 });

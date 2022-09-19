@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import moment from 'moment';
 import { InjectedFormProps, reduxForm } from 'redux-form';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
-import { Normaltekst } from 'nav-frontend-typografi';
-import Modal from 'nav-frontend-modal';
+import { BodyShort, Modal, Button } from '@navikt/ds-react';
 import {
   FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -52,63 +50,69 @@ export const UttakSlettPeriodeModalImpl: FunctionComponent<PureOwnProps & Wrappe
   return (
     <Modal
       className={styles.modal}
-      isOpen={showModal}
-      contentLabel="Perioden slettes"
-      onRequestClose={closeEvent}
+      open={showModal}
+      aria-label="Perioden slettes"
+      onClose={closeEvent}
       closeButton={false}
       shouldCloseOnOverlayClick={false}
     >
-      <FlexContainer wrap>
-        <FlexRow>
-          <FlexColumn className={styles.iconContainer}>
-            <Image className={styles.icon} src={innvilgetImageUrl} alt={intl.formatMessage({ id: 'UttakInfoPanel.Ok' })} />
-          </FlexColumn>
-          <FlexColumn className={styles.fullWidth}>
-            <Normaltekst className={styles.modalLabel}>
-              <FormattedMessage
-                id="UttakInfoPanel.PeriodenSlettes"
-                values={{ fom, tom, uttakPeriodeType }}
-              />
-            </Normaltekst>
-            <FlexRow>
-              <FlexColumn className={styles.fullWidth}>
-                <VerticalSpacer sixteenPx />
-                <TextAreaField
-                  name="begrunnelse"
-                  textareaClass={styles.textAreaStyle}
-                  label={{ id: 'UttakInfoPanel.BegrunnEndringen' }}
-                  validate={[required, minLength3, maxLength2000, hasValidText]}
-                  maxLength={2000}
-                  autoFocus
+      <Modal.Content>
+        <FlexContainer wrap>
+          <FlexRow>
+            <FlexColumn className={styles.iconContainer}>
+              <Image className={styles.icon} src={innvilgetImageUrl} alt={intl.formatMessage({ id: 'UttakInfoPanel.Ok' })} />
+            </FlexColumn>
+            <FlexColumn className={styles.fullWidth}>
+              <BodyShort size="small" className={styles.modalLabel}>
+                <FormattedMessage
+                  id="UttakInfoPanel.PeriodenSlettes"
+                  values={{ fom, tom, uttakPeriodeType }}
                 />
-              </FlexColumn>
-            </FlexRow>
-          </FlexColumn>
-        </FlexRow>
+              </BodyShort>
+              <FlexRow>
+                <FlexColumn className={styles.fullWidth}>
+                  <VerticalSpacer sixteenPx />
+                  <TextAreaField
+                    name="begrunnelse"
+                    textareaClass={styles.textAreaStyle}
+                    label={{ id: 'UttakInfoPanel.BegrunnEndringen' }}
+                    validate={[required, minLength3, maxLength2000, hasValidText]}
+                    maxLength={2000}
+                    autoFocus
+                  />
+                </FlexColumn>
+              </FlexRow>
+            </FlexColumn>
+          </FlexRow>
 
-        <FlexRow>
-          <FlexColumn className={styles.right}>
-            <VerticalSpacer eightPx />
-            <Hovedknapp
-              mini
-              className={styles.button}
-              onClick={formProps.handleSubmit}
-              disabled={formProps.pristine}
-            >
-              {intl.formatMessage({ id: 'UttakInfoPanel.Ok' })}
-            </Hovedknapp>
-            <Knapp
-              mini
-              onClick={() => {
-                cancelEvent();
-                formProps.destroy();
-              }}
-            >
-              {intl.formatMessage({ id: 'UttakInfoPanel.Avbryt' })}
-            </Knapp>
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
+          <FlexRow>
+            <FlexColumn className={styles.right}>
+              <VerticalSpacer eightPx />
+              <Button
+                size="small"
+                variant="primary"
+                className={styles.button}
+                onClick={formProps.handleSubmit}
+                disabled={formProps.pristine}
+                type="button"
+              >
+                {intl.formatMessage({ id: 'UttakInfoPanel.Ok' })}
+              </Button>
+              <Button
+                size="small"
+                variant="secondary"
+                onClick={() => {
+                  cancelEvent();
+                  formProps.destroy();
+                }}
+                type="button"
+              >
+                {intl.formatMessage({ id: 'UttakInfoPanel.Avbryt' })}
+              </Button>
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
+      </Modal.Content>
     </Modal>
   );
 };

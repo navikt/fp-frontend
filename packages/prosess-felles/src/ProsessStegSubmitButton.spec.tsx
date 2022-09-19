@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Button } from '@navikt/ds-react';
 
 import { ProsessStegSubmitButton } from './ProsessStegSubmitButton';
 
@@ -15,7 +15,7 @@ describe('<ProsessStegSubmitButton>', () => {
       hasEmptyRequiredFields={false}
     />);
 
-    expect(wrapper.find(Hovedknapp)).toHaveLength(0);
+    expect(wrapper.find(Button)).toHaveLength(0);
   });
 
   it('skal vise submit-knapp med standard tekst når behandlingspunkt ikke er readonly', () => {
@@ -28,7 +28,7 @@ describe('<ProsessStegSubmitButton>', () => {
       hasEmptyRequiredFields={false}
     />);
 
-    const knapp = wrapper.find(Hovedknapp);
+    const knapp = wrapper.find(Button);
     expect(knapp).toHaveLength(1);
 
     expect(knapp.childAt(0).text()).toEqual('Bekreft og fortsett');
@@ -45,7 +45,7 @@ describe('<ProsessStegSubmitButton>', () => {
       text="Bekreft"
     />);
 
-    const knapp = wrapper.find(Hovedknapp);
+    const knapp = wrapper.find(Button);
     expect(knapp).toHaveLength(1);
 
     expect(knapp.childAt(0).text()).toEqual('Bekreft');
@@ -61,7 +61,7 @@ describe('<ProsessStegSubmitButton>', () => {
       hasEmptyRequiredFields={false}
     />);
 
-    const button = wrapper.find(Hovedknapp);
+    const button = wrapper.find(Button);
     expect(button).toHaveLength(1);
     expect(button.prop('disabled')).toBe(false);
   });
@@ -76,7 +76,7 @@ describe('<ProsessStegSubmitButton>', () => {
       hasEmptyRequiredFields={false}
     />);
 
-    const button = wrapper.find(Hovedknapp);
+    const button = wrapper.find(Button);
     expect(button).toHaveLength(1);
     expect(button.prop('disabled')).toBe(true);
   });
@@ -91,7 +91,7 @@ describe('<ProsessStegSubmitButton>', () => {
       hasEmptyRequiredFields={false}
     />);
 
-    const button = wrapper.find(Hovedknapp);
+    const button = wrapper.find(Button);
     expect(button).toHaveLength(1);
     expect(button.prop('disabled')).toBe(true);
   });
@@ -106,7 +106,7 @@ describe('<ProsessStegSubmitButton>', () => {
       hasEmptyRequiredFields
     />);
 
-    const button = wrapper.find(Hovedknapp);
+    const button = wrapper.find(Button);
     expect(button).toHaveLength(1);
     expect(button.prop('disabled')).toBe(true);
   });
@@ -121,7 +121,7 @@ describe('<ProsessStegSubmitButton>', () => {
       hasEmptyRequiredFields
     />);
 
-    const button = wrapper.find(Hovedknapp);
+    const button = wrapper.find(Button);
     expect(button).toHaveLength(1);
     expect(button.prop('disabled')).toBe(true);
   });

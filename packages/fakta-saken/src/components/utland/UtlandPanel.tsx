@@ -2,9 +2,8 @@ import React, { FunctionComponent, useState, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import {
-  Normaltekst, Element, Undertittel,
-} from 'nav-frontend-typografi';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+  Button, BodyShort, Label, Heading,
+} from '@navikt/ds-react';
 import {
   FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -93,22 +92,22 @@ const UtlandPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <Form formMethods={formMethods}>
-      <Undertittel>
+      <Heading size="small">
         <FormattedMessage id="UtlandPanel.utland" />
-      </Undertittel>
+      </Heading>
       <VerticalSpacer sixteenPx />
       {!visEditeringsmodus && (
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Normaltekst>
+              <BodyShort size="small">
                 <FormattedMessage id="UtlandPanel.SakenSattTil" />
-              </Normaltekst>
+              </BodyShort>
             </FlexColumn>
             <FlexColumn>
-              <Element>
+              <Label size="small">
                 <FormattedMessage id={getSakstypeId(utlandSakstype)} />
-              </Element>
+              </Label>
             </FlexColumn>
             <FlexColumn>
               <Image
@@ -145,22 +144,24 @@ const UtlandPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
           <FlexRow>
             <FlexColumn>
-              <Hovedknapp
-                mini
-                htmlType="button"
+              <Button
+                size="small"
+                variant="primary"
                 onClick={slaPaVisningAvModal}
                 disabled={!formMethods.formState.isDirty}
+                type="button"
               >
                 <FormattedMessage id="UtlandPanel.lagre" />
-              </Hovedknapp>
+              </Button>
             </FlexColumn>
-            <Knapp
-              htmlType="button"
-              mini
+            <Button
+              variant="secondary"
+              size="small"
               onClick={slaAvEditeringAvUtland}
+              type="button"
             >
               <FormattedMessage id="UtlandPanel.avbryt" />
-            </Knapp>
+            </Button>
             <FlexColumn />
           </FlexRow>
         </FlexContainer>

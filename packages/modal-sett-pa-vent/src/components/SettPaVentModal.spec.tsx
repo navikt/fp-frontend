@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { RawIntlProvider } from 'react-intl';
-import Modal from 'nav-frontend-modal';
+import { Modal } from '@navikt/ds-react';
 
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import messages from '../../i18n/nb_NO.json';
@@ -55,7 +55,7 @@ describe('<SettPaVentModal>', () => {
     );
 
     expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
-    expect(utils.getByText('OK')).toBeDisabled();
+    expect(utils.getByText('OK').closest('button')).toBeDisabled();
   });
 
   it('skal disable knapp for lagring når frist er en historisk dato', async () => {
@@ -77,7 +77,7 @@ describe('<SettPaVentModal>', () => {
     );
 
     expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
-    expect(utils.getByText('OK')).toBeDisabled();
+    expect(utils.getByText('OK').closest('button')).toBeDisabled();
   });
 
   it('skal ikke vise frist-input når behandling automatisk er satt på vent uten frist', async () => {

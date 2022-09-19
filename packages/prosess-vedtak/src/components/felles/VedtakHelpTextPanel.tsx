@@ -2,8 +2,7 @@ import React, { FunctionComponent } from 'react';
 import {
   FormattedMessage, IntlShape, useIntl,
 } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
-import Alertstripe from 'nav-frontend-alertstriper';
+import { Alert, BodyShort } from '@navikt/ds-react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
@@ -42,12 +41,12 @@ const VedtakHelpTextPanel: FunctionComponent<OwnProps> = ({
     return (
       <>
         <VerticalSpacer sixteenPx />
-        <Alertstripe type="info">
-          <Normaltekst><FormattedMessage id="VedtakHelpTextPanel.Vurder" /></Normaltekst>
+        <Alert variant="info" size="small">
+          <BodyShort size="small"><FormattedMessage id="VedtakHelpTextPanel.Vurder" /></BodyShort>
           <ul>
-            {helpTexts.map((text) => <li key={text}><Normaltekst>{text}</Normaltekst></li>)}
+            {helpTexts.map((text) => <li key={text}><BodyShort size="small">{text}</BodyShort></li>)}
           </ul>
-        </Alertstripe>
+        </Alert>
       </>
     );
   }

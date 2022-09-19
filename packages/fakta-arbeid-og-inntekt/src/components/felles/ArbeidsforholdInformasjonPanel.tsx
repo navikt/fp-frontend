@@ -3,8 +3,7 @@ import React, {
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import dayjs from 'dayjs';
-import Lenke from 'nav-frontend-lenker';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Label, BodyShort, Link } from '@navikt/ds-react';
 
 import pilOppIkonUrl from '@fpsak-frontend/assets/images/pil_opp.svg';
 import pilNedIkonUrl from '@fpsak-frontend/assets/images/pil_ned.svg';
@@ -83,35 +82,35 @@ const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
       <VerticalSpacer thirtyTwoPx />
       {visInntektsposter && (
         <>
-          <Element>
+          <Label size="small">
             <FormattedMessage id={harEttArbeidsforhold ? 'ArbeidsforholdInformasjonPanel.Inntekter' : 'ArbeidsforholdInformasjonPanel.TotaltInntekter'} />
-          </Element>
+          </Label>
           <VerticalSpacer fourPx />
           <FlexContainer>
             {sorterteInntektsposter.filter((_inntekt, index) => (visAlleMåneder ? true : index < 3)).map((inntekt) => (
               <FlexRow key={inntekt.fom}>
                 <FlexColumn className={styles.maanedBredde}>
-                  <Normaltekst>
+                  <BodyShort size="small">
                     <FormattedMessage id={`ArbeidsforholdInformasjonPanel.${dayjs(inntekt.fom).month() + 1}`} />
-                  </Normaltekst>
+                  </BodyShort>
                 </FlexColumn>
                 <FlexColumn className={styles.aarBredde}>
-                  <Normaltekst>
+                  <BodyShort size="small">
                     {dayjs(inntekt.fom).year()}
-                  </Normaltekst>
+                  </BodyShort>
                 </FlexColumn>
                 <FlexColumn className={styles.belopBredde}>
                   <FloatRight>
-                    <Normaltekst>
+                    <BodyShort size="small">
                       {formatCurrencyNoKr(inntekt.beløp)}
-                    </Normaltekst>
+                    </BodyShort>
                   </FloatRight>
                 </FlexColumn>
               </FlexRow>
             ))}
           </FlexContainer>
           <VerticalSpacer fourPx />
-          <Lenke
+          <Link
             onClick={(e) => {
               e.preventDefault();
               toggleMånedvisning(!visAlleMåneder);
@@ -119,18 +118,18 @@ const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
             href=""
           >
             <span>
-              <Normaltekst className={styles.inline}>
+              <BodyShort size="small" className={styles.inline}>
                 <FormattedMessage id={visAlleMåneder ? 'ArbeidsforholdInformasjonPanel.FaerreManeder' : 'ArbeidsforholdInformasjonPanel.TidligereManeder'} />
-              </Normaltekst>
+              </BodyShort>
             </span>
             <Image className={styles.arrow} src={visAlleMåneder ? pilOppIkonUrl : pilNedIkonUrl} />
-          </Lenke>
+          </Link>
         </>
       )}
       {!visInntektsposter && (
-        <Element>
+        <Label size="small">
           <FormattedMessage id="ArbeidsforholdInformasjonPanel.IngenInntekt" />
-        </Element>
+        </Label>
       )}
       <VerticalSpacer thirtyTwoPx />
     </>

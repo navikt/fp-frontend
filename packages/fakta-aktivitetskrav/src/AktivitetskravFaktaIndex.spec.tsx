@@ -16,8 +16,8 @@ describe('<AktivitetskravFaktaIndex>', () => {
 
     expect(await screen.findByText('Kontroller kravet til mors aktivitet')).toBeInTheDocument();
     expect(screen.getAllByText('08.01.2021 - 13.01.2021')).toHaveLength(2);
-    expect(screen.getByText('Oppdater')).toBeDisabled();
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Oppdater').closest('button')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     await userEvent.click(screen.getByText('Aktiviteten er ikke dokumentert'));
 
@@ -82,6 +82,6 @@ describe('<AktivitetskravFaktaIndex>', () => {
     await userEvent.click(screen.getAllByRole('row', { hidden: true })[1]);
 
     expect(await screen.findByText('Detaljer')).toBeInTheDocument();
-    expect(screen.getByText('Oppdater')).toBeDisabled();
+    expect(screen.getByText('Oppdater').closest('button')).toBeDisabled();
   });
 });

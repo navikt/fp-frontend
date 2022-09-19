@@ -1,6 +1,6 @@
 import React from 'react';
 import sinon from 'sinon';
-import Modal from 'nav-frontend-modal';
+import { Modal } from '@navikt/ds-react';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -31,9 +31,9 @@ describe('<DelOppPeriodeModal>', () => {
     />, messages);
     const modal = wrapper.find(Modal);
     expect(modal).toHaveLength(1);
-    expect(modal.prop('isOpen')).toBe(true);
+    expect(modal.prop('open')).toBe(true);
     expect(modal.prop('closeButton')).toBe(false);
-    expect(modal.prop('onRequestClose')).toEqual(cancelEvent);
+    expect(modal.prop('onClose')).toEqual(cancelEvent);
     const datepicker = wrapper.find('DatepickerField');
     expect(datepicker).toHaveLength(1);
   });
@@ -50,21 +50,6 @@ describe('<DelOppPeriodeModal>', () => {
       onSubmit={sinon.spy()}
     />, messages);
     const modal = wrapper.find(Modal);
-    expect(modal.prop('isOpen')).toBe(false);
-  });
-
-  it('skal lukke modal ved klikk på avbryt-knapp', () => {
-    const wrapper = shallowWithIntl(<DelOppPeriodeModal
-      {...reduxFormPropsMock}
-      periodeData={periodeData}
-      showModal
-      intl={intlMock}
-      cancelEvent={cancelEvent}
-      splitPeriod={sinon.spy()}
-      validate={sinon.spy()}
-      onSubmit={sinon.spy()}
-    />, messages);
-    wrapper.find('Knapp').simulate('click');
-    expect(cancelEvent).toHaveProperty('callCount', 1);
+    expect(modal.prop('open')).toBe(false);
   });
 });

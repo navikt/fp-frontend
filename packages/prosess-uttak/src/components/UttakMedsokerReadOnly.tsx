@@ -1,7 +1,7 @@
 import React, { MouseEvent, FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Element } from 'nav-frontend-typografi';
+import { Label } from '@navikt/ds-react';
 
 import { TimeLineButton, TimeLineDataContainer } from '@navikt/ft-tidslinje';
 import { FloatRight } from '@navikt/ft-ui-komponenter';
@@ -43,9 +43,9 @@ const UttakMedsokerReadOnly: FunctionComponent<OwnProps> = ({
     <TimeLineDataContainer>
       <Row>
         <Column xs="3">
-          <Element>
+          <Label size="small">
             <FormattedMessage id="UttakTimeLineData.PeriodeData.Detaljer" />
-          </Element>
+          </Label>
         </Column>
         <Column xs="7" />
         <Column xs="2">

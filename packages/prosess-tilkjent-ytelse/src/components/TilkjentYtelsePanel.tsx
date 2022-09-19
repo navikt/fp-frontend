@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import moment from 'moment/moment';
 import { FormattedMessage } from 'react-intl';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Heading } from '@navikt/ds-react';
 
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
@@ -90,9 +90,9 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
   const soknadMottattDato = soknad.søknadsfrist?.mottattDato ? soknad.søknadsfrist?.mottattDato : soknad.mottattDato;
   return (
     <>
-      <Undertittel>
+      <Heading size="small">
         <FormattedMessage id="TilkjentYtelse.Title" />
-      </Undertittel>
+      </Heading>
       {beregningresultat && (
         <TilkjentYtelse
           items={formatPerioder(beregningresultat.perioder)}

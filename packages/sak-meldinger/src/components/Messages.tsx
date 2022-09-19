@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 import classNames from 'classnames';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Button } from '@navikt/ds-react';
 
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
@@ -181,9 +181,15 @@ export const Messages: FunctionComponent<OwnProps> = ({
         )}
       </div>
       <div className={styles.buttonRow}>
-        <Hovedknapp mini spinner={formState.isSubmitting} disabled={formState.isSubmitting || kanVeilede} onClick={ariaCheck}>
+        <Button
+          size="small"
+          variant="primary"
+          loading={formState.isSubmitting}
+          disabled={formState.isSubmitting || kanVeilede}
+          onClick={ariaCheck}
+        >
           {intl.formatMessage({ id: 'Messages.Submit' })}
-        </Hovedknapp>
+        </Button>
         <a
           href=""
           onClick={previewMessage}

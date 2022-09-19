@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 import { FormattedMessage } from 'react-intl';
-import { Element, Undertekst } from 'nav-frontend-typografi';
+import { Label, Detail } from '@navikt/ds-react';
 import moment from 'moment/moment';
 
 import { CheckboxField, DecimalField, SelectField } from '@fpsak-frontend/form';
@@ -183,9 +183,9 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
               <Column xs="4">
                 <Row>
                   <Column xs="12">
-                    <Element>
+                    <Label size="small">
                       {typePeriode(selectedItemData, getKodeverknavn, kontoIkkeSatt)}
-                    </Element>
+                    </Label>
                   </Column>
                 </Row>
                 <Row>
@@ -259,7 +259,7 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
         <Column xs="4">
           <Row>
             <Column xs="12">
-              <Element>
+              <Label size="small">
                 <FormattedMessage
                   id="UttakActivity.PeriodeData.Periode"
                   values={{
@@ -269,7 +269,7 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
                       .format(DDMMYYYY_DATE_FORMAT),
                   }}
                 />
-              </Element>
+              </Label>
             </Column>
           </Row>
           {selectedItemData.oppholdÅrsak === '-'
@@ -292,9 +292,9 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
             <Column xs="12">
               {selectedItemData.gradertAktivitet
                   && (
-                    <Undertekst>
+                    <Detail size="small">
                       <FormattedMessage id="UttakActivity.Gradering" />
-                    </Undertekst>
+                    </Detail>
                   )}
               {selectedItemData.oppholdÅrsak !== '-'
                   && (

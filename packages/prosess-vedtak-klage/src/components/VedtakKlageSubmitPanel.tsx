@@ -3,9 +3,9 @@ import React, {
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { Column, Row } from 'nav-frontend-grid';
+import { Button } from '@navikt/ds-react';
 
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import styles from './vedtakKlageSubmitPanel.less';
 
 interface OwnProps {
@@ -29,29 +29,35 @@ export const VedtakKlageSubmitPanel: FunctionComponent<OwnProps> = ({
   }, []);
 
   return (
-    <Row>
-      <Column xs="6">
+    <FlexContainer>
+      <FlexRow>
         {!readOnly && (
-          <Hovedknapp
-            mini
-            className={styles.mainButton}
-            onClick={lagreVedtak}
-            disabled={behandlingPaaVent || isSubmitting}
-            spinner={isSubmitting}
-          >
-            <FormattedMessage id="VedtakKlageForm.TilGodkjenning" />
-          </Hovedknapp>
+          <FlexColumn>
+            <Button
+              variant="primary"
+              size="small"
+              className={styles.mainButton}
+              onClick={lagreVedtak}
+              disabled={behandlingPaaVent || isSubmitting}
+              loading={isSubmitting}
+              type="button"
+            >
+              <FormattedMessage id="VedtakKlageForm.TilGodkjenning" />
+            </Button>
+          </FlexColumn>
         )}
-        <a
-          href=""
-          onClick={forhåndsvis}
-          onKeyDown={(e) => (e.key === 'Enter' ? forhåndsvis(e) : null)}
-          className={classNames('lenke lenke--frittstaende')}
-        >
-          <FormattedMessage id="VedtakKlageForm.ForhandvisBrev" />
-        </a>
-      </Column>
-    </Row>
+        <FlexColumn>
+          <a
+            href=""
+            onClick={forhåndsvis}
+            onKeyDown={(e) => (e.key === 'Enter' ? forhåndsvis(e) : null)}
+            className={classNames('lenke lenke--frittstaende')}
+          >
+            <FormattedMessage id="VedtakKlageForm.ForhandvisBrev" />
+          </a>
+        </FlexColumn>
+      </FlexRow>
+    </FlexContainer>
   );
 };
 

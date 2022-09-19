@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Heading } from '@navikt/ds-react';
 
 const sprakvalg = {
   BOKMAL: 'NB',
@@ -24,9 +24,9 @@ const SprakPanel: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
   return (
     <BorderBox>
-      <Undertittel>
+      <Heading size="small">
         {intl.formatMessage({ id: 'Registrering.Sprak' })}
-      </Undertittel>
+      </Heading>
       <VerticalSpacer sixteenPx />
       <RadioGroupPanel
         name="språkkode"

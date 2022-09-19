@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Element } from 'nav-frontend-typografi';
+import { Label } from '@navikt/ds-react';
 import { Column, Row } from 'nav-frontend-grid';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image,
@@ -101,9 +101,9 @@ const Tilbaketrekkpanel: FunctionComponent<OwnProps> = ({
             </FlexColumn>
             <FlexColumn className={styles.aksjonspunktText}>
               <div className={styles.oneElement}>
-                <Element className={styles.wordwrap}>
+                <Label size="small" className={styles.wordwrap}>
                   <FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Aksjonspunkttekst" />
-                </Element>
+                </Label>
               </div>
             </FlexColumn>
           </FlexRow>

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Heading } from '@navikt/ds-react';
 
 import { InntektArbeidYtelse, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -19,7 +19,7 @@ const YtelserFaktaPanel: FunctionComponent<OwnProps> = ({
   relatertYtelseStatus,
 }) => (
   <>
-    <Undertittel><FormattedMessage id="YtelserFaktaPanel.SokersYtelser" /></Undertittel>
+    <Heading size="small"><FormattedMessage id="YtelserFaktaPanel.SokersYtelser" /></Heading>
     <VerticalSpacer eightPx />
     <PersonYtelserTable
       ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForSoker}
@@ -29,7 +29,7 @@ const YtelserFaktaPanel: FunctionComponent<OwnProps> = ({
     {(inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder && inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder.length > 0) && (
       <>
         <VerticalSpacer fourtyPx />
-        <Undertittel><FormattedMessage id="YtelserFaktaPanel.AnnenPartsYtelser" /></Undertittel>
+        <Heading size="small"><FormattedMessage id="YtelserFaktaPanel.AnnenPartsYtelser" /></Heading>
         <VerticalSpacer eightPx />
         <PersonYtelserTable
           ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder}

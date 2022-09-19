@@ -1,13 +1,12 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Button, Label } from '@navikt/ds-react';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import {
   hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-form-validators';
-import { Element } from 'nav-frontend-typografi';
 import { FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { Ytelsefordeling } from '@fpsak-frontend/types';
@@ -79,7 +78,7 @@ const HarAnnenForelderRettForm: FunctionComponent<OwnProps> = ({
           <HarAnnenForelderRettFelter readOnly={readOnly} avklareUforetrygd={skalAvklareUforetrygd} avklareRettEØS={skalAvklareRettEØS} />
           <VerticalSpacer thirtyTwoPx />
           <TextAreaField
-            label={<Element><FormattedMessage id="HarAnnenForelderRettForm.Begrunn" /></Element>}
+            label={<Label size="small"><FormattedMessage id="HarAnnenForelderRettForm.Begrunn" /></Label>}
             name="begrunnelse"
             validate={[required, minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
@@ -87,13 +86,14 @@ const HarAnnenForelderRettForm: FunctionComponent<OwnProps> = ({
           />
           <VerticalSpacer sixteenPx />
           {!readOnly && (
-            <Hovedknapp
-              mini
+            <Button
+              size="small"
+              variant="primary"
               disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-              spinner={formMethods.formState.isSubmitting}
+              loading={formMethods.formState.isSubmitting}
             >
               <FormattedMessage id="HarAnnenForelderRettForm.Bekreft" />
-            </Hovedknapp>
+            </Button>
           )}
         </FaktaGruppe>
       </Boks>

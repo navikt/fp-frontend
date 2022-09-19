@@ -8,7 +8,7 @@ import {
 } from 'react-intl';
 import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { BodyShort, Heading } from '@navikt/ds-react';
 
 import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
 import ankeVurderingType from '@fpsak-frontend/kodeverk/src/ankeVurdering';
@@ -161,7 +161,7 @@ export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedO
       {behandlesKabal && readOnly && (
         <Row>
           <Column xs="6">
-            <Undertittel>{intl.formatMessage({ id: 'Ankebehandling.Merknad.SeKabalText' })}</Undertittel>
+            <Heading size="small">{intl.formatMessage({ id: 'Ankebehandling.Merknad.SeKabalText' })}</Heading>
             <VerticalSpacer sixteenPx />
           </Column>
         </Row>
@@ -169,7 +169,7 @@ export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedO
       {kabalEnabled && !readOnly && (
         <Row>
           <Column xs="6">
-            <Undertittel>{intl.formatMessage({ id: 'Ankebehandling.Merknad.SendTilKabal' })}</Undertittel>
+            <Heading size="small">{intl.formatMessage({ id: 'Ankebehandling.Merknad.SendTilKabal' })}</Heading>
             <VerticalSpacer fourPx />
             <CheckboxField name="sendTilKabal" label={<FormattedMessage id="Ankebehandling.Merknad.KabalText" />} />
             <VerticalSpacer sixteenPx />
@@ -236,7 +236,7 @@ export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedO
       )}
       {!formValues.sendTilKabal && !behandlesKabal && !behandletKabal && (
         <Row>
-          <Undertittel><FormattedMessage id="Ankebehandling.Merknad.Title" /></Undertittel>
+          <Heading size="small"><FormattedMessage id="Ankebehandling.Merknad.Title" /></Heading>
           <VerticalSpacer sixteenPx />
           <AksjonspunktHelpTextTemp isAksjonspunktOpen={!readOnlySubmitButton}>
             {[<FormattedMessage id="Ankebehandling.Merknad.HelpText" key={aksjonspunktCode} />]}
@@ -266,7 +266,7 @@ export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedO
             readOnly={readOnly}
           />
           <VerticalSpacer sixteenPx />
-          <Normaltekst><FormattedMessage id="Ankebehandling.Resultat" /></Normaltekst>
+          <BodyShort size="small"><FormattedMessage id="Ankebehandling.Resultat" /></BodyShort>
           <VerticalSpacer
             fourPx
           />

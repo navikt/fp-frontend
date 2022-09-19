@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Button, Modal, Label } from '@navikt/ds-react';
 import { Column, Container, Row } from 'nav-frontend-grid';
-import { Element } from 'nav-frontend-typografi';
-import Modal from 'nav-frontend-modal';
 import { Image } from '@navikt/ft-ui-komponenter';
 
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
@@ -18,7 +16,7 @@ interface OwnProps {
 /**
  * MessagesModal
  *
- * Presentasjonskomponent. Denne modalen vises etter at et brev har blitt bestilt.
+ * Denne modalen vises etter at et brev har blitt bestilt.
  * Ved å trykke på knapp blir fritekst-feltet tømt.
  */
 const MessagesModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
@@ -28,39 +26,43 @@ const MessagesModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
 }) => (
   <Modal
     className={styles.modal}
-    isOpen={showModal}
+    open={showModal}
     closeButton={false}
-    contentLabel={intl.formatMessage({ id: 'MessagesModal.description' })}
-    onRequestClose={closeEvent}
+    aria-label={intl.formatMessage({ id: 'MessagesModal.description' })}
+    onClose={closeEvent}
     shouldCloseOnOverlayClick={false}
   >
-    <Container className={styles.container}>
-      <Row>
-        <Column xs="1">
-          <Image
-            className={styles.image}
-            alt={intl.formatMessage({ id: 'MessagesModal.description' })}
-            src={innvilgetImageUrl}
-          />
-          <div className={styles.divider} />
-        </Column>
-        <Column xs="9">
-          <Element className={styles.text}>
-            <FormattedMessage id="MessagesModal.text" />
-          </Element>
-        </Column>
-        <Column xs="2">
-          <Hovedknapp
-            className={styles.button}
-            mini
-            onClick={closeEvent}
-            autoFocus
-          >
-            {intl.formatMessage({ id: 'MessagesModal.OK' })}
-          </Hovedknapp>
-        </Column>
-      </Row>
-    </Container>
+    <Modal.Content>
+      <Container className={styles.container}>
+        <Row>
+          <Column xs="1">
+            <Image
+              className={styles.image}
+              alt={intl.formatMessage({ id: 'MessagesModal.description' })}
+              src={innvilgetImageUrl}
+            />
+            <div className={styles.divider} />
+          </Column>
+          <Column xs="9">
+            <Label size="small" className={styles.text}>
+              <FormattedMessage id="MessagesModal.text" />
+            </Label>
+          </Column>
+          <Column xs="2">
+            <Button
+              className={styles.button}
+              size="small"
+              variant="primary"
+              onClick={closeEvent}
+              autoFocus
+              type="button"
+            >
+              {intl.formatMessage({ id: 'MessagesModal.OK' })}
+            </Button>
+          </Column>
+        </Row>
+      </Container>
+    </Modal.Content>
   </Modal>
 );
 

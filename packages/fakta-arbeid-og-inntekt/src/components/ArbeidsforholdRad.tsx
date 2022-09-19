@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import classnames from 'classnames/bind';
-import { Normaltekst, Element, Undertekst } from 'nav-frontend-typografi';
+import { BodyShort, Label, Detail } from '@navikt/ds-react';
 
 import {
   AoIArbeidsforhold, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold, AksjonspunktÅrsak, ArbeidOgInntektsmelding, Inntektsmelding, AlleKodeverk,
@@ -213,37 +213,37 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
       <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>
         {erRadÅpen && (
           <>
-            <Element>
+            <Label size="small">
               {arbeidsgiverNavn}
-            </Element>
-            <Undertekst>
+            </Label>
+            <Detail size="small">
               (
               {arbeidsgiverFødselsdato ? <DateLabel dateString={arbeidsgiverFødselsdato} /> : arbeidsgiverIdent}
               )
-            </Undertekst>
+            </Detail>
           </>
         )}
         {!erRadÅpen && (
-          <Normaltekst>
+          <BodyShort size="small">
             {arbeidsgiverNavn}
-          </Normaltekst>
+          </BodyShort>
         )}
       </TableColumn>
       <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>
-        <Normaltekst>
+        <BodyShort>
           {periode && (
             <PeriodLabel dateStringFom={periode.fom} dateStringTom={periode.tom !== TIDENES_ENDE ? periode.tom : undefined} />
           )}
           {!periode && '-'}
-        </Normaltekst>
+        </BodyShort>
       </TableColumn>
       <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>
-        <Normaltekst>
+        <BodyShort>
           <FormattedMessage id={finnKildekode(erManueltOpprettet, arbeidsforholdForRad.length > 0)} />
-        </Normaltekst>
+        </BodyShort>
       </TableColumn>
       <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>
-        <Normaltekst>
+        <BodyShort>
           {arbeidsforholdForRad.length < 2 && inntektsmeldingerForRad.length === 1 && (
             <DateLabel dateString={inntektsmeldingerForRad[0].motattDato} />
           )}
@@ -253,7 +253,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
           {(erManueltOpprettet || (manglerInntektsmelding && inntektsmeldingerForRad.length < arbeidsforholdForRad.length)) && (
             <FormattedMessage id="ArbeidsforholdRad.IkkeMottatt" />
           )}
-        </Normaltekst>
+        </BodyShort>
       </TableColumn>
     </ExpandableTableRow>
   );

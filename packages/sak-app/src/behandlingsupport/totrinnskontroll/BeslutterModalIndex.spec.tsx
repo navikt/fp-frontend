@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Modal from 'nav-frontend-modal';
+import { Modal } from '@navikt/ds-react';
 import { BehandlingResultatType, BehandlingType, BehandlingStatus } from '@navikt/ft-kodeverk';
 import { Behandling } from '@navikt/ft-types';
 

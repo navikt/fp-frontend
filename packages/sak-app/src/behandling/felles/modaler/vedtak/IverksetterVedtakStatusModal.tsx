@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { Normaltekst } from 'nav-frontend-typografi';
-import Modal from 'nav-frontend-modal';
+import { Modal, Button, BodyShort } from '@navikt/ds-react';
 import { Image } from '@navikt/ft-ui-komponenter';
 import { BehandlingResultatType } from '@navikt/ft-kodeverk';
 
@@ -37,41 +35,45 @@ const IverksetterVedtakStatusModal: FunctionComponent<OwnProps> = ({
   return (
     <Modal
       className={styles.modal}
-      isOpen={visModal}
+      open={visModal}
       closeButton={false}
-      contentLabel={imageAltText}
-      onRequestClose={lukkModal}
+      aria-label={imageAltText}
+      onClose={lukkModal}
       shouldCloseOnOverlayClick={false}
     >
-      <Row className="">
-        <Column xs="1">
-          <Image
-            className={styles.image}
-            alt={imageAltText}
-            src={innvilgetImageUrl}
-          />
-          <div className={styles.divider} />
-        </Column>
-        <Column xs="9">
-          <Normaltekst>
-            {intl.formatMessage({ id: erVedtakAvslatt ? 'IverksetterVedtakStatusModal.VedtakAvslatt' : 'IverksetterVedtakStatusModal.VedtakInnvilet' })}
-          </Normaltekst>
-          <Normaltekst>
-            {intl.formatMessage({ id: 'IverksetterVedtakStatusModal.GoToSearchPage' })}
-          </Normaltekst>
-        </Column>
-        <Column xs="2">
-          <Hovedknapp
-            mini
-            className={styles.button}
-            onClick={lukkModal}
-            autoFocus
-          >
-            {intl.formatMessage({ id: 'IverksetterVedtakStatusModal.Ok' })}
-          </Hovedknapp>
-        </Column>
+      <Modal.Content>
+        <Row className="">
+          <Column xs="1">
+            <Image
+              className={styles.image}
+              alt={imageAltText}
+              src={innvilgetImageUrl}
+            />
+            <div className={styles.divider} />
+          </Column>
+          <Column xs="9">
+            <BodyShort size="small">
+              {intl.formatMessage({ id: erVedtakAvslatt ? 'IverksetterVedtakStatusModal.VedtakAvslatt' : 'IverksetterVedtakStatusModal.VedtakInnvilet' })}
+            </BodyShort>
+            <BodyShort size="small">
+              {intl.formatMessage({ id: 'IverksetterVedtakStatusModal.GoToSearchPage' })}
+            </BodyShort>
+          </Column>
+          <Column xs="2">
+            <Button
+              size="small"
+              variant="primary"
+              className={styles.button}
+              onClick={lukkModal}
+              autoFocus
+              type="button"
+            >
+              {intl.formatMessage({ id: 'IverksetterVedtakStatusModal.Ok' })}
+            </Button>
+          </Column>
 
-      </Row>
+        </Row>
+      </Modal.Content>
     </Modal>
   );
 };

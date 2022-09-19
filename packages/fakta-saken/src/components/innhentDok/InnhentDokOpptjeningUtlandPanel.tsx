@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Heading } from '@navikt/ds-react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@fpsak-frontend/fakta-felles';
@@ -68,9 +68,9 @@ const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps> = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setFormData}
     >
-      <Undertittel>
+      <Heading size="small">
         <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.OpptjeningUtland" />
-      </Undertittel>
+      </Heading>
       {harApneAksjonspunkter && <VerticalSpacer sixteenPx />}
       <AksjonspunktBox
         className={styles.aksjonspunktMargin}

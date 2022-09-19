@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
@@ -75,9 +75,9 @@ const HistorikkMalTypeFeilutbetaling: FunctionComponent<HistorikkMal> = ({
               b: (chunks: any) => <b>{chunks}</b>,
             }}
           />
-          <Normaltekst>
+          <BodyShort size="small">
             { buildEndretFeltText(historikkinnslagDel.endredeFelter, getKodeverknavn) }
-          </Normaltekst>
+          </BodyShort>
           <VerticalSpacer eightPx />
         </div>
       ) : null))}

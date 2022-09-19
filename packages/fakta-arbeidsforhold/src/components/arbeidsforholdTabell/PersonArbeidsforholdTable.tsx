@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 
 import {
   DateLabel, PeriodLabel, Table, TableColumn, TableRow, Image,
@@ -99,19 +99,19 @@ const PersonArbeidsforholdTable: FunctionComponent<OwnProps> = ({
             onKeyDown={selectArbeidsforholdCallback}
             isSelected={a.arbeidsgiverIdent === selectedId}
           >
-            <TableColumn><Normaltekst>{decodeHtmlEntity(navn)}</Normaltekst></TableColumn>
+            <TableColumn><BodyShort size="small">{decodeHtmlEntity(navn)}</BodyShort></TableColumn>
             <TableColumn>
-              <Normaltekst>
+              <BodyShort size="small">
                 <PeriodLabel dateStringFom={a.fom} dateStringTom={a.tom !== TIDENES_ENDE ? a.tom : undefined} />
-              </Normaltekst>
+              </BodyShort>
             </TableColumn>
-            <TableColumn><Normaltekst>{finnKilde(a, intl)}</Normaltekst></TableColumn>
-            <TableColumn><Normaltekst>{stillingsprosent}</Normaltekst></TableColumn>
+            <TableColumn><BodyShort size="small">{finnKilde(a, intl)}</BodyShort></TableColumn>
+            <TableColumn><BodyShort size="small">{stillingsprosent}</BodyShort></TableColumn>
             <TableColumn>
               {mottattDato && (
-                <Normaltekst>
+                <BodyShort size="small">
                   <DateLabel dateString={mottattDato} />
-                </Normaltekst>
+                </BodyShort>
               )}
             </TableColumn>
             <TableColumn>

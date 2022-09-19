@@ -1,12 +1,11 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { RawIntlProvider, FormattedMessage } from 'react-intl';
-import { ErrorMessage } from '@navikt/ds-react';
+import { ErrorMessage, Heading } from '@navikt/ds-react';
 import { RadioGroupPanel, Datepicker, formHooks } from '@navikt/ft-form-hooks';
 import { BorderBox, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
-import { Undertittel } from 'nav-frontend-typografi';
 import BehovForTilretteleggingFieldArray, { frilansFieldArrayName, selvstendigNaringsdrivendeFieldArrayName } from './BehovForTilretteleggingFieldArray';
 import TilretteleggingForArbeidsgiverFieldArray from './TilretteleggingForArbeidsgiverFieldArray';
 import messages from '../../i18n/nb_NO.json';
@@ -83,9 +82,9 @@ const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunction
   return (
     <RawIntlProvider value={intl}>
       <BorderBox>
-        <Undertittel>
+        <Heading size="small">
           <FormattedMessage id="BehovForTilretteleggingPanel.BehovForTilrettelegging" />
-        </Undertittel>
+        </Heading>
         <VerticalSpacer sixteenPx />
         {formState.isSubmitted && formState.errors[TILRETTELEGGING_NAME_PREFIX]?.notRegisteredInput?.message && (
           <ErrorMessage>{formState.errors[TILRETTELEGGING_NAME_PREFIX]?.notRegisteredInput?.message}</ErrorMessage>

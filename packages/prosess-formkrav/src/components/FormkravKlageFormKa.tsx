@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { CheckboxField, Form, SelectField } from '@navikt/ft-form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AlleKodeverk, KlageVurdering, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Heading } from '@navikt/ds-react';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { KlageFormkravKaAp } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/prosess/KlageFormkravAp';
@@ -12,7 +13,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
-import { Undertittel } from 'nav-frontend-typografi';
 import styles from './formkravKlageForm.less';
 import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
 import { erTilbakekreving, påklagdTilbakekrevingInfo } from './FormkravKlageFormNfp';
@@ -114,7 +114,7 @@ export const FormkravKlageFormKa: FunctionComponent<OwnProps> = ({
       {behandlesKabal && readOnly && (
         <Row>
           <Column xs="6">
-            <Undertittel>{intl.formatMessage({ id: 'Klage.Formkrav.SeKabalText' })}</Undertittel>
+            <Heading size="small">{intl.formatMessage({ id: 'Klage.Formkrav.SeKabalText' })}</Heading>
             <VerticalSpacer sixteenPx />
           </Column>
         </Row>
@@ -122,7 +122,7 @@ export const FormkravKlageFormKa: FunctionComponent<OwnProps> = ({
       {kabalEnabled && !readOnly && (
         <Row>
           <Column xs="6">
-            <Undertittel>{intl.formatMessage({ id: 'Klage.Formkrav.SendTilKabal' })}</Undertittel>
+            <Heading size="small">{intl.formatMessage({ id: 'Klage.Formkrav.SendTilKabal' })}</Heading>
             <VerticalSpacer fourPx />
             <CheckboxField name="sendTilKabal" label={<FormattedMessage id="Klage.Formkrav.KabalText" />} />
             <VerticalSpacer sixteenPx />

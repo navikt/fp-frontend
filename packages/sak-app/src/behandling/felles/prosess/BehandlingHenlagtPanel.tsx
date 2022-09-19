@@ -2,7 +2,7 @@ import React, {
   FunctionComponent, useEffect, useState,
 } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
@@ -45,9 +45,9 @@ const BehandlingHenlagtPanel: FunctionComponent<OwnProps> = ({
       status={VilkarUtfallType.OPPFYLT}
       dataState={RestApiState.SUCCESS}
     >
-      <Normaltekst>
+      <BodyShort size="small">
         <FormattedMessage id="BehandlingHenlagtPanel.Henlagt" />
-      </Normaltekst>
+      </BodyShort>
     </ProsessPanelWrapper>
   );
 };

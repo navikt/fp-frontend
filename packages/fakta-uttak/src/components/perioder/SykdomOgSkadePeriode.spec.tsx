@@ -1,6 +1,7 @@
 import React from 'react';
 import sinon from 'sinon';
 
+import { Detail } from '@navikt/ds-react';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { RadioGroupField } from '@fpsak-frontend/form';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
@@ -42,7 +43,7 @@ describe('<SykdomOgSkadePeriode>', () => {
       intl={intlMock}
     />, messages);
 
-    const undertekst = wrapper.find('Undertekst');
+    const undertekst = wrapper.find(Detail);
     const radioGroupField = wrapper.find('RadioGroupField');
     const radioGroupFieldComponent = wrapper.find(RadioGroupField).dive();
     expect(radioGroupFieldComponent.children()).toHaveLength(2);

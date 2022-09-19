@@ -2,7 +2,6 @@ import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-// import { NedChevron, OppChevron } from 'nav-frontend-chevron';
 
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 

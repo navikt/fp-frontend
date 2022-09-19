@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Label, BodyShort } from '@navikt/ds-react';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
@@ -72,22 +72,22 @@ const FodselSammenligningRevurderingPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <Element><FormattedMessage id="FodselsammenligningPanel.Ytelsesvedtak" /></Element>
+      <Label size="small"><FormattedMessage id="FodselsammenligningPanel.Ytelsesvedtak" /></Label>
       <Row>
         {shouldShowVedtaksdatoAsSvangerskapsuke && (
           <Column xs="6">
-            <Element><FormattedMessage id="FodselsammenligningPanel.FodtISvangerskapsuke" /></Element>
+            <Label size="small"><FormattedMessage id="FodselsammenligningPanel.FodtISvangerskapsuke" /></Label>
           </Column>
         )}
-        <Column xs="3"><Element><FormattedMessage id={terminOrFodselLabel} /></Element></Column>
-        <Column xs="3"><Element><FormattedMessage id="FodselsammenligningPanel.AntallBarn" /></Element></Column>
+        <Column xs="3"><Label size="small"><FormattedMessage id={terminOrFodselLabel} /></Label></Column>
+        <Column xs="3"><Label size="small"><FormattedMessage id="FodselsammenligningPanel.AntallBarn" /></Label></Column>
       </Row>
       <Row>
         {shouldShowVedtaksdatoAsSvangerskapsuke && (
-          <Column xs="6"><Normaltekst>{vedtaksDatoSomSvangerskapsuke}</Normaltekst></Column>
+          <Column xs="6"><BodyShort size="small">{vedtaksDatoSomSvangerskapsuke}</BodyShort></Column>
         )}
-        <Column xs="3"><Normaltekst>{terminOrFodselDate}</Normaltekst></Column>
-        <Column xs="3"><Normaltekst>{antallBarn}</Normaltekst></Column>
+        <Column xs="3"><BodyShort size="small">{terminOrFodselDate}</BodyShort></Column>
+        <Column xs="3"><BodyShort size="small">{antallBarn}</BodyShort></Column>
       </Row>
     </>
   );

@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
-import Etikettfokus from 'nav-frontend-etiketter';
+import {
+  Label, BodyShort, Detail, Tag,
+} from '@navikt/ds-react';
 import { Tooltip } from '@navikt/ft-ui-komponenter';
 import { KodeverkMedNavn } from '@navikt/ft-types';
 
@@ -45,41 +46,37 @@ export const MedlemskapBostedSokerView: FunctionComponent<OwnProps> = ({
     <div className={styles.defaultBostedSoker}>
       <Row>
         <Column xs="8">
-          <Undertekst>{sokerTypeText}</Undertekst>
-          <Element>{personopplysninger.navn ? personopplysninger.navn : '-'}</Element>
-          <Normaltekst className={styles.paddingBottom}>
+          <Detail size="small">{sokerTypeText}</Detail>
+          <Label size="small">{personopplysninger.navn ? personopplysninger.navn : '-'}</Label>
+          <BodyShort size="small" className={styles.paddingBottom}>
             {getAdresse(personopplysninger.adresser)}
-          </Normaltekst>
-          <Undertekst>
+          </BodyShort>
+          <Detail size="small">
             <FormattedMessage id="BostedSokerView.ForeignAddresse" />
-          </Undertekst>
-          <Normaltekst>{getUtlandsadresse(personopplysninger.adresser)}</Normaltekst>
+          </Detail>
+          <BodyShort size="small">{getUtlandsadresse(personopplysninger.adresser)}</BodyShort>
         </Column>
         <Column xs="4">
           {personopplysninger.personstatus && (
             <div className={styles.etikettMargin}>
               <Tooltip content={intl.formatMessage({ id: 'Personstatus.Hjelpetekst' })} alignBottom>
-                <Etikettfokus
+                <Tag
                   className={personopplysninger.personstatus === personstatusType.DOD ? styles.dodEtikett : ''}
-                  type="fokus"
-                  typo="undertekst"
+                  variant="warning"
                 >
                   {personopplysninger.personstatus === personstatusType.UDEFINERT
                     ? intl.formatMessage({ id: 'Personstatus.Ukjent' })
                     : personstatusTypes.find((s) => s.kode === personopplysninger.personstatus)?.navn}
-                </Etikettfokus>
+                </Tag>
               </Tooltip>
             </div>
           )}
           {(personopplysninger.region && personopplysninger.region !== Region.UDEFINERT) && (
             <div className={styles.etikettMargin}>
               <Tooltip content={intl.formatMessage({ id: 'BostedSokerView.Region' })} alignBottom>
-                <Etikettfokus
-                  type="fokus"
-                  typo="undertekst"
-                >
+                <Tag variant="warning">
                   {regionTypes.find((r) => r.kode === personopplysninger.region).navn}
-                </Etikettfokus>
+                </Tag>
               </Tooltip>
             </div>
           )}

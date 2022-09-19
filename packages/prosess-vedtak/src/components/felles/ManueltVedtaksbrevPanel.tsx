@@ -1,9 +1,9 @@
 import React, { FunctionComponent, MouseEvent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
-import Lenke from 'nav-frontend-lenker';
-import Alertstripe from 'nav-frontend-alertstriper';
+import {
+  BodyShort, Label, Alert, Link, Detail,
+} from '@navikt/ds-react';
 import {
   Image, FlexContainer, FlexRow, FlexColumn, EditedIcon, AvsnittSkiller, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -43,23 +43,23 @@ const ManueltVedtaksbrevPanel: FunctionComponent<OwnProps> = ({
       <FlexContainer>
         <FlexRow>
           <FlexColumn className={styles.space}>
-            <Element className={styles.avsnittOverskrift}>
+            <Label size="small" className={styles.avsnittOverskrift}>
               <FormattedMessage id="FritekstBrevPanel.ManueltVedtaksbrev" />
-            </Element>
+            </Label>
           </FlexColumn>
           <FlexColumn className={styles.space}>
-            <Undertekst>
+            <Detail size="small">
               {getLanguageFromSprakkode(språkKode)}
-            </Undertekst>
+            </Detail>
           </FlexColumn>
           <FlexColumn>
             {!isReadOnly && skalViseLink && (
-            <Lenke href="#" onClick={forhåndsvisOverstyrtBrev}>
+            <Link href="#" onClick={forhåndsvisOverstyrtBrev}>
               <span>
                 <FormattedMessage id="FritekstBrevPanel.ForhandsvisManueltVedtaksbrev" />
               </span>
               <Image src={popOutPilSvg} className={styles.pil} />
-            </Lenke>
+            </Link>
             )}
           </FlexColumn>
         </FlexRow>
@@ -67,11 +67,11 @@ const ManueltVedtaksbrevPanel: FunctionComponent<OwnProps> = ({
       <hr className={styles.line} />
       <VerticalSpacer twentyPx />
       {!isReadOnly && (
-        <Alertstripe type="info" form="inline">
-          <Element>
+        <Alert variant="info" size="small">
+          <Label size="small">
             <FormattedMessage id="VedtakFellesPanel.Forklaring" />
-          </Element>
-        </Alertstripe>
+          </Label>
+        </Alert>
       )}
       <VerticalSpacer sixteenPx />
       <Row>
@@ -109,7 +109,7 @@ const ManueltVedtaksbrevPanel: FunctionComponent<OwnProps> = ({
                 <EditedIcon />
               </FlexColumn>
               <FlexColumn>
-                <Normaltekst><FormattedMessage id="FritekstBrevPanel.Endret" /></Normaltekst>
+                <BodyShort size="small"><FormattedMessage id="FritekstBrevPanel.Endret" /></BodyShort>
               </FlexColumn>
             </FlexRow>
           </FlexContainer>

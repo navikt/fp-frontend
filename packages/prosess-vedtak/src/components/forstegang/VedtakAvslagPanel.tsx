@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Label, BodyShort } from '@navikt/ds-react';
 
 import { AlleKodeverk, Vilkar, Behandlingsresultat } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -59,10 +59,10 @@ const VedtakAvslagPanel: FunctionComponent<OwnProps> = ({
     <>
       {getAvslagArsak(vilkar, behandlingsresultat, getKodeverknavn) && (
         <div>
-          <Element>{intl.formatMessage({ id: 'VedtakForm.ArsakTilAvslag' })}</Element>
-          <Normaltekst>
+          <Label size="small">{intl.formatMessage({ id: 'VedtakForm.ArsakTilAvslag' })}</Label>
+          <BodyShort size="small">
             {getAvslagArsak(vilkar, behandlingsresultat, getKodeverknavn)}
-          </Normaltekst>
+          </BodyShort>
           <VerticalSpacer sixteenPx />
         </div>
       )}

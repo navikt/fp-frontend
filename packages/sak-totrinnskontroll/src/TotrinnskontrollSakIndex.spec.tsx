@@ -16,7 +16,7 @@ describe('<TotrinnskontrollSakIndex>', () => {
     expect(screen.getByText('Formkrav klage NFP')).toBeInTheDocument();
     expect(screen.getByText('Klageresultat Vedtaksinstans')).toBeInTheDocument();
 
-    expect(screen.getByText('Godkjenn vedtaket')).toBeDisabled();
+    expect(screen.getByText('Godkjenn vedtaket').closest('button')).toBeDisabled();
     expect(screen.getByText('Send til saksbehandler')).toBeEnabled();
 
     const checkboxes = screen.getAllByText('Godkjent');
@@ -24,7 +24,7 @@ describe('<TotrinnskontrollSakIndex>', () => {
     await userEvent.click(checkboxes[1]);
 
     expect(await screen.findByText('Godkjenn vedtaket')).toBeEnabled();
-    expect(screen.getByText('Send til saksbehandler')).toBeDisabled();
+    expect(screen.getByText('Send til saksbehandler').closest('button')).toBeDisabled();
 
     await userEvent.click(screen.getByText('Godkjenn vedtaket'));
 

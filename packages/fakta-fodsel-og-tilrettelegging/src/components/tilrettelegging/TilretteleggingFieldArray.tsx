@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import AlertStripe from 'nav-frontend-alertstriper';
-import { Element } from 'nav-frontend-typografi';
+import { Alert, Label } from '@navikt/ds-react';
 
 import {
   Datepicker, SelectField, PeriodFieldArray, formHooks, InputField,
@@ -166,11 +165,11 @@ const TilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
                 {tilretteleggingKode === tilretteleggingType.DELVIS_TILRETTELEGGING && (
                   <FlexRow>
                     <FlexColumn>
-                      <AlertStripe type="info" form="inline">
-                        <Element>
+                      <Alert variant="info">
+                        <Label size="small">
                           <FormattedMessage id="TilretteleggingFieldArray.StillingsprosentUtvidet" />
-                        </Element>
-                      </AlertStripe>
+                        </Label>
+                      </Alert>
                       <VerticalSpacer eightPx />
                     </FlexColumn>
                   </FlexRow>

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Heading } from '@navikt/ds-react';
 import { Datepicker } from '@navikt/ft-form-hooks';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
@@ -23,7 +23,7 @@ const MottattDatoPanel: FunctionComponent<OwnProps> = ({
   readOnly,
 }) => (
   <BorderBox>
-    <Undertittel><FormattedMessage key="regDatoTittel" id="Registrering.Omsoknaden.MottattDato" /></Undertittel>
+    <Heading size="small"><FormattedMessage key="regDatoTittel" id="Registrering.Omsoknaden.MottattDato" /></Heading>
     <VerticalSpacer sixteenPx />
     <Datepicker
       name="mottattDato"

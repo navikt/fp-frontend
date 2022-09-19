@@ -2,9 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { Column, Row } from 'nav-frontend-grid';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
-import ModalWrapper from 'nav-frontend-modal';
+import {
+  Label, BodyShort, Button, Modal,
+} from '@navikt/ds-react';
 import { Image } from '@navikt/ft-ui-komponenter';
 
 import advarselImageUrl from '@fpsak-frontend/assets/images/advarsel.svg';
@@ -30,52 +30,57 @@ const LukkPapirSoknadModal: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
   return (
-    <ModalWrapper
+    <Modal
       className={styles.modal}
-      isOpen={showModal}
+      open={showModal}
       closeButton={false}
-      contentLabel={intl.formatMessage({ id: 'ModalLukkPapirSoknad.ModalDescription' })}
-      onRequestClose={cancelEvent}
+      aria-label={intl.formatMessage({ id: 'ModalLukkPapirSoknad.ModalDescription' })}
+      onClose={cancelEvent}
       shouldCloseOnOverlayClick={false}
     >
-      <Row>
-        <Column xs="1">
-          <Image className={styles.image} alt={intl.formatMessage({ id: 'ModalLukkPapirSoknad.Avslutt' })} src={advarselImageUrl} />
-          <div className={styles.divider} />
-        </Column>
-        <Column xs="11">
-          <Element>
-            {intl.formatMessage({ id: 'ModalLukkPapirSoknad.AvslutterRegistrering' })}
-          </Element>
-          <Normaltekst>
-            {intl.formatMessage({ id: 'ModalLukkPapirSoknad.BekreftAvslag' })}
-          </Normaltekst>
-        </Column>
-      </Row>
-      <Row>
-        <Column>
-          <div className={styles.right}>
-            <Link to="/">
-              <Hovedknapp
-                mini
-                className={styles.button}
-                onClick={() => handleSubmit()}
+      <Modal.Content>
+        <Row>
+          <Column xs="1">
+            <Image className={styles.image} alt={intl.formatMessage({ id: 'ModalLukkPapirSoknad.Avslutt' })} src={advarselImageUrl} />
+            <div className={styles.divider} />
+          </Column>
+          <Column xs="11">
+            <Label size="small">
+              {intl.formatMessage({ id: 'ModalLukkPapirSoknad.AvslutterRegistrering' })}
+            </Label>
+            <BodyShort size="small">
+              {intl.formatMessage({ id: 'ModalLukkPapirSoknad.BekreftAvslag' })}
+            </BodyShort>
+          </Column>
+        </Row>
+        <Row>
+          <Column>
+            <div className={styles.right}>
+              <Link to="/">
+                <Button
+                  size="small"
+                  variant="primary"
+                  className={styles.button}
+                  onClick={() => handleSubmit()}
+                  type="button"
+                >
+                  {intl.formatMessage({ id: 'ModalLukkPapirSoknad.Ok' })}
+                </Button>
+              </Link>
+              <Button
+                size="small"
+                variant="secondary"
+                onClick={cancelEvent}
+                className={styles.cancelButton}
+                type="button"
               >
-                {intl.formatMessage({ id: 'ModalLukkPapirSoknad.Ok' })}
-              </Hovedknapp>
-            </Link>
-            <Knapp
-              htmlType="button"
-              mini
-              onClick={cancelEvent}
-              className={styles.cancelButton}
-            >
-              {intl.formatMessage({ id: 'ModalLukkPapirSoknad.Avbryt' })}
-            </Knapp>
-          </div>
-        </Column>
-      </Row>
-    </ModalWrapper>
+                {intl.formatMessage({ id: 'ModalLukkPapirSoknad.Avbryt' })}
+              </Button>
+            </div>
+          </Column>
+        </Row>
+      </Modal.Content>
+    </Modal>
   );
 };
 

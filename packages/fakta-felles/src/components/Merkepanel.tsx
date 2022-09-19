@@ -1,8 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider, FormattedMessage } from 'react-intl';
-import {
-  EtikettAdvarsel, EtikettFokus, EtikettInfo, EtikettSuksess,
-} from 'nav-frontend-etiketter';
+import { Tag } from '@navikt/ds-react';
 import { Tooltip } from '@navikt/ft-ui-komponenter';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -45,45 +43,45 @@ const MerkePanel: FunctionComponent<OwnProps> = ({
       <div className={styles.merkePanel}>
         {erDod && (
           <Tooltip content={formatMessage({ id: 'MerkePanel.DodTittel' })} alignBottom>
-            <EtikettInfo className={styles.dodMerke}>
+            <Tag variant="info" className={styles.dodMerke}>
               <FormattedMessage id="MerkePanel.Dod" />
-            </EtikettInfo>
+            </Tag>
           </Tooltip>
         )}
         {erDodFodt && (
           <Tooltip content={formatMessage({ id: 'MerkePanel.DodTittel' })} alignBottom>
-            <EtikettInfo className={styles.dodMerke}>
+            <Tag variant="info" className={styles.dodMerke}>
               <FormattedMessage id="MerkePanel.DodFodt" />
-            </EtikettInfo>
+            </Tag>
           </Tooltip>
         )}
         {diskresjonskode === diskresjonskodeType.KODE6 && !erDod && (
           <Tooltip content={formatMessage({ id: 'MerkePanel.Diskresjon6Tittel' })} alignBottom>
-            <EtikettAdvarsel className={styles.merkeDiskresjonskoder}>
+            <Tag variant="warning" className={styles.merkeDiskresjonskoder}>
               <FormattedMessage id="MerkePanel.Diskresjon6" />
-            </EtikettAdvarsel>
+            </Tag>
           </Tooltip>
         )}
         {diskresjonskode === diskresjonskodeType.KODE7 && !erDod && (
           <Tooltip content={formatMessage({ id: 'MerkePanel.Diskresjon7Tittel' })} alignBottom>
-            <EtikettFokus className={styles.merkeDiskresjonskoder}>
+            <Tag variant="warning" className={styles.merkeDiskresjonskoder}>
               <FormattedMessage id="MerkePanel.Diskresjon7" />
-            </EtikettFokus>
+            </Tag>
           </Tooltip>
         )}
         {erNAVAnsatt && !erDod && (
           <Tooltip content={formatMessage({ id: 'MerkePanel.EgenAnsattTittel' })} alignBottom>
-            <EtikettSuksess className={styles.navMerke}>
+            <Tag variant="success" className={styles.navMerke}>
               <FormattedMessage id="MerkePanel.EgenAnsatt" />
-            </EtikettSuksess>
+            </Tag>
           </Tooltip>
         )}
         {erVerge && !erDod && (
           <Tooltip content={formatMessage({ id: 'MerkePanel.VergeTittel' })} alignBottom>
-            <EtikettFokus className={styles.vergeMerke}>
+            <Tag variant="warning" className={styles.vergeMerke}>
               <span className={styles.vergeIcon} />
               <FormattedMessage id="MerkePanel.Verge" />
-            </EtikettFokus>
+            </Tag>
           </Tooltip>
         )}
       </div>

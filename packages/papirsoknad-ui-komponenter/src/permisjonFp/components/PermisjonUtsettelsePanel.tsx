@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Element } from 'nav-frontend-typografi';
+import { Label } from '@navikt/ds-react';
 import { formHooks, CheckboxField } from '@navikt/ft-form-hooks';
 import { AlleKodeverk } from '@navikt/ft-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -44,7 +44,7 @@ const PermisjonUtsettelsePanel: FunctionComponent<OwnProps> & StaticFunctions = 
 
   return (
     <>
-      <Element><FormattedMessage id="Registrering.Permisjon.Utsettelse.Title" /></Element>
+      <Label size="small"><FormattedMessage id="Registrering.Permisjon.Utsettelse.Title" /></Label>
       <VerticalSpacer sixteenPx />
       <CheckboxField
         readOnly={readOnly}

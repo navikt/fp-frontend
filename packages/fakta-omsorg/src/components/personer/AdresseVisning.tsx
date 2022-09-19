@@ -1,7 +1,7 @@
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Label, BodyShort } from '@navikt/ds-react';
 import { PersonopplysningerBasis } from '@fpsak-frontend/types';
 import { OpplysningAdresseType } from '@navikt/ft-kodeverk';
 
@@ -22,33 +22,33 @@ const AdresseVisning: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <Element>
+      <Label size="small">
         <FormattedMessage id="AdresseVisning.Adresse" />
-      </Element>
+      </Label>
       <VerticalSpacer fourPx />
-      <Normaltekst>
+      <BodyShort size="small">
         {adr.adresselinje1}
-      </Normaltekst>
+      </BodyShort>
       <VerticalSpacer fourPx />
       {adr.adresselinje2 && (
         <>
-          <Normaltekst>
+          <BodyShort size="small">
             {adr.adresselinje2}
-          </Normaltekst>
+          </BodyShort>
           <VerticalSpacer fourPx />
         </>
       )}
       {adr.adresselinje3 && (
         <>
-          <Normaltekst>
+          <BodyShort size="small">
             {adr.adresselinje3}
-          </Normaltekst>
+          </BodyShort>
           <VerticalSpacer fourPx />
         </>
       )}
-      <Normaltekst>
+      <BodyShort size="small">
         {`${adr.postNummer} ${adr.poststed}, ${adr.land}`}
-      </Normaltekst>
+      </BodyShort>
     </>
   );
 };

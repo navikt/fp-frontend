@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage, WrappedComponentProps } from 'react-intl';
-import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { Label, BodyShort, Heading } from '@navikt/ds-react';
 
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
@@ -57,19 +57,19 @@ const ForeldrePanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
         const parentHeader = getParentHeader(foreldre.erMor);
         return (
           <div key={`${foreldre.aktorId}`}>
-            <Undertittel>{foreldre.navn}</Undertittel>
+            <Heading size="small">{foreldre.navn}</Heading>
             <VerticalSpacer eightPx />
-            <Normaltekst><FormattedMessage id="ForeldrePanel.Address" /></Normaltekst>
+            <BodyShort size="small"><FormattedMessage id="ForeldrePanel.Address" /></BodyShort>
             {shouldShowAdress
-              && <Element>{foreldre.adresse}</Element>}
+              && <Label size="small">{foreldre.adresse}</Label>}
             {!shouldShowAdress
-              && <Normaltekst> - </Normaltekst>}
+              && <BodyShort size="small"> - </BodyShort>}
             <VerticalSpacer eightPx />
-            <Normaltekst><FormattedMessage id={parentHeader} /></Normaltekst>
+            <BodyShort size="small"><FormattedMessage id={parentHeader} /></BodyShort>
             {foreldre.dodsdato
-              && <Element><DateLabel dateString={foreldre.dodsdato} /></Element>}
+              && <Label size="small"><DateLabel dateString={foreldre.dodsdato} /></Label>}
             {!foreldre.dodsdato
-              && <Normaltekst> - </Normaltekst>}
+              && <BodyShort size="small"> - </BodyShort>}
             <VerticalSpacer sixteenPx />
           </div>
         );

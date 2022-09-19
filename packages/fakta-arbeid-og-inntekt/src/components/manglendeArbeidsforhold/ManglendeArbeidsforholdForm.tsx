@@ -4,8 +4,7 @@ import React, {
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm, UseFormGetValues } from 'react-hook-form';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
-import { Knapp, Flatknapp } from 'nav-frontend-knapper';
-import { AlertStripeInfo } from 'nav-frontend-alertstriper';
+import { Alert, Button } from '@navikt/ds-react';
 
 import {
   hasValidText, maxLength, minLength, hasValidDate, hasValidInteger, required, minValue, maxValue, dateAfterOrEqual,
@@ -151,7 +150,7 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
       />
       <VerticalSpacer fourtyPx />
       <div className={styles.alertStripe}>
-        <AlertStripeInfo><FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" /></AlertStripeInfo>
+        <Alert variant="info"><FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" /></Alert>
       </div>
       <VerticalSpacer thirtyTwoPx />
       <Form formMethods={formMethods} onSubmit={lagre}>
@@ -239,25 +238,26 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
           <FlexContainer>
             <FlexRow>
               <FlexColumn>
-                <Knapp
-                  mini
-                  spinner={formMethods.formState.isSubmitting}
+                <Button
+                  size="small"
+                  variant="secondary"
+                  loading={formMethods.formState.isSubmitting}
                   disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-                  htmlType="submit"
                 >
                   <FormattedMessage id="ManglendeOpplysningerForm.Lagre" />
-                </Knapp>
+                </Button>
               </FlexColumn>
               <FlexColumn>
-                <Flatknapp
-                  mini
-                  spinner={false}
+                <Button
+                  size="small"
+                  variant="tertiary"
+                  loading={false}
                   disabled={formMethods.formState.isSubmitting}
                   onClick={avbryt}
-                  htmlType="button"
+                  type="button"
                 >
                   <FormattedMessage id="ManglendeOpplysningerForm.Avbryt" />
-                </Flatknapp>
+                </Button>
               </FlexColumn>
             </FlexRow>
           </FlexContainer>

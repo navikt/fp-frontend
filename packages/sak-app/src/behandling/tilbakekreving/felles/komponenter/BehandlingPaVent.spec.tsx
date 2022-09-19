@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
-import Modal from 'nav-frontend-modal';
+import { Modal } from '@navikt/ds-react';
 import { BehandlingType, BehandlingStatus } from '@navikt/ft-kodeverk';
 import { Aksjonspunkt, AlleKodeverk, Behandling } from '@navikt/ft-types';
 

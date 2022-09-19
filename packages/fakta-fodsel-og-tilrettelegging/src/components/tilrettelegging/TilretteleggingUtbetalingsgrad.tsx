@@ -6,11 +6,11 @@ import { ErrorMessage } from '@hookform/error-message';
 import {
   hasValidDecimal, maxValue, minValue, required,
 } from '@navikt/ft-form-validators';
+import { BodyShort } from '@navikt/ds-react';
 
 import endreImage from '@fpsak-frontend/assets/images/endre.svg';
 import endreDisabletImage from '@fpsak-frontend/assets/images/endre_disablet.svg';
 
-import { Normaltekst } from 'nav-frontend-typografi';
 import styles from './tilretteleggingFieldArray.less';
 
 const maxValue100 = maxValue(100);
@@ -65,7 +65,7 @@ const TilretteleggingUtbetalingsgrad: FunctionComponent<OwnProps> = ({
               <ErrorMessage
                 errors={formState.errors}
                 name={`${fieldPrefix}.${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`}
-                render={({ message }) => <Normaltekst className={styles.error}>{message}</Normaltekst>}
+                render={({ message }) => <BodyShort size="small" className={styles.error}>{message}</BodyShort>}
               />
             </FlexColumn>
           </FlexRow>

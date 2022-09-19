@@ -1,6 +1,5 @@
 import React, { ReactNode, FunctionComponent } from 'react';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
-import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
+import { BodyShort, Label, Button } from '@navikt/ds-react';
 
 import {
   FlexContainer, FlexRow, FlexColumn, Image, EditedIcon, VerticalSpacer, AksjonspunktBox,
@@ -53,7 +52,7 @@ const OverstyringPanel: FunctionComponent<OwnProps> = ({
   const isRequiredFn = getIsBegrunnelseRequired(isDirty);
   return (
     <AksjonspunktBox className={styles.aksjonspunktMargin} erAksjonspunktApent={erOverstyrt} erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}>
-      <Element>{intl.formatMessage({ id: 'OverstyringPanel.AutomatiskVurdering' })}</Element>
+      <Label size="small">{intl.formatMessage({ id: 'OverstyringPanel.AutomatiskVurdering' })}</Label>
       <VerticalSpacer eightPx />
       {children}
       {(erOverstyrt || hasAksjonspunkt) && (
@@ -77,7 +76,7 @@ const OverstyringPanel: FunctionComponent<OwnProps> = ({
               <EditedIcon />
             </FlexColumn>
             <FlexColumn>
-              <Normaltekst>{intl.formatMessage({ id: 'OverstyringPanel.Endret' })}</Normaltekst>
+              <BodyShort size="small">{intl.formatMessage({ id: 'OverstyringPanel.Endret' })}</BodyShort>
             </FlexColumn>
           </FlexRow>
         </>
@@ -89,32 +88,34 @@ const OverstyringPanel: FunctionComponent<OwnProps> = ({
               <Image src={advarselIkonUrl} />
             </FlexColumn>
             <FlexColumn>
-              <Element>{intl.formatMessage({ id: 'OverstyringPanel.Unntakstilfeller' })}</Element>
+              <BodyShort size="small">{intl.formatMessage({ id: 'OverstyringPanel.Unntakstilfeller' })}</BodyShort>
             </FlexColumn>
           </FlexRow>
           <VerticalSpacer sixteenPx />
           <FlexRow>
             <FlexColumn>
               {!overrideReadOnly && (
-                <Hovedknapp
-                  mini
-                  spinner={isSubmitting}
+                <Button
+                  size="small"
+                  variant="primary"
+                  loading={isSubmitting}
                   disabled={isSubmitting || !isSolvable || isPristine}
                 >
                   {intl.formatMessage({ id: 'OverstyringPanel.ConfirmInformation' })}
-                </Hovedknapp>
+                </Button>
               )}
             </FlexColumn>
             <FlexColumn>
-              <Knapp
-                htmlType="button"
-                spinner={isSubmitting}
+              <Button
+                size="small"
+                variant="secondary"
+                loading={isSubmitting}
                 disabled={isSubmitting}
                 onClick={toggleAv}
-                mini
+                type="button"
               >
                 {intl.formatMessage({ id: 'OverstyringPanel.Avbryt' })}
-              </Knapp>
+              </Button>
             </FlexColumn>
           </FlexRow>
         </FlexContainer>

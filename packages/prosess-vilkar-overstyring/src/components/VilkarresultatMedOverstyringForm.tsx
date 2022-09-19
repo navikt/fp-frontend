@@ -5,8 +5,8 @@ import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { useForm } from 'react-hook-form';
 import {
-  Undertittel, Element, Undertekst, Normaltekst,
-} from 'nav-frontend-typografi';
+  Heading, Label, Detail, BodyShort,
+} from '@navikt/ds-react';
 import {
   FlexContainer, FlexRow, FlexColumn, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -192,11 +192,11 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
             </FlexColumn>
           )}
           <FlexColumn>
-            <Undertittel><FormattedMessage id={panelTittelKode} /></Undertittel>
+            <Heading size="small"><FormattedMessage id={panelTittelKode} /></Heading>
           </FlexColumn>
           {lovReferanse && (
             <FlexColumn>
-              <Undertekst className={styles.vilkar}>{lovReferanse}</Undertekst>
+              <Detail size="small" className={styles.vilkar}>{lovReferanse}</Detail>
             </FlexColumn>
           )}
         </FlexRow>
@@ -205,19 +205,19 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
             {originalErVilkarOk && (
               <>
                 <VerticalSpacer eightPx />
-                <Element><FormattedMessage id="VilkarresultatMedOverstyringForm.ErOppfylt" /></Element>
+                <Label size="small"><FormattedMessage id="VilkarresultatMedOverstyringForm.ErOppfylt" /></Label>
               </>
             )}
             {originalErVilkarOk === false && (
               <>
                 <VerticalSpacer eightPx />
-                <Element><FormattedMessage id="VilkarresultatMedOverstyringForm.ErIkkeOppfylt" /></Element>
+                <Label size="small"><FormattedMessage id="VilkarresultatMedOverstyringForm.ErIkkeOppfylt" /></Label>
               </>
             )}
             {originalErVilkarOk === undefined && (
               <>
                 <VerticalSpacer eightPx />
-                <Normaltekst><FormattedMessage id="VilkarresultatMedOverstyringForm.IkkeBehandlet" /></Normaltekst>
+                <BodyShort size="small"><FormattedMessage id="VilkarresultatMedOverstyringForm.IkkeBehandlet" /></BodyShort>
               </>
             )}
           </FlexColumn>

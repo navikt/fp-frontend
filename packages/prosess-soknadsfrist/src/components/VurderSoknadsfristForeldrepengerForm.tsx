@@ -4,9 +4,8 @@ import { useForm } from 'react-hook-form';
 import moment from 'moment';
 import { Column, Row } from 'nav-frontend-grid';
 import {
-  Element, Normaltekst, Undertekst, Undertittel,
-} from 'nav-frontend-typografi';
-import Panel from 'nav-frontend-paneler';
+  Label, BodyShort, Detail, Heading, Panel,
+} from '@navikt/ds-react';
 
 import { Form, Datepicker, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
@@ -96,7 +95,7 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
       onSubmit={(formValues: FormValues) => submitCallback(transformValues(formValues))}
       setDataOnUnmount={setFormData}
     >
-      <Undertittel><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Soknadsfrist" /></Undertittel>
+      <Heading size="small"><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Soknadsfrist" /></Heading>
       <VerticalSpacer twentyPx />
       <AksjonspunktHelpTextTemp isAksjonspunktOpen={isApOpen}>
         {[<FormattedMessage
@@ -112,7 +111,7 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
       <Row>
         <Column xs="6">
           <Panel className={styles.panel}>
-            <Element><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Vurder" /></Element>
+            <Label size="small"><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Vurder" /></Label>
             <ul className={styles.hyphen}>
               <li><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Punkt1" /></li>
               <li><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Punkt2" /></li>
@@ -123,16 +122,16 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
         <Column xs="6">
           <Row className={styles.marginBottom}>
             <Column xs="6">
-              <Undertekst><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.SoknadMottatt" /></Undertekst>
+              <Detail size="small"><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.SoknadMottatt" /></Detail>
               {mottattDato
-                && <Normaltekst>{moment(mottattDato).format(DDMMYYYY_DATE_FORMAT)}</Normaltekst>}
+                && <BodyShort size="small">{moment(mottattDato).format(DDMMYYYY_DATE_FORMAT)}</BodyShort>}
             </Column>
             {soknadsperiodeStart && soknadsperiodeSlutt && (
               <Column xs="6">
-                <Undertekst><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.SoknadPeriode" /></Undertekst>
-                <Normaltekst>
+                <Detail size="small"><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.SoknadPeriode" /></Detail>
+                <BodyShort size="small">
                   {`${moment(soknadsperiodeStart).format(DDMMYYYY_DATE_FORMAT)} - ${moment(soknadsperiodeSlutt).format(DDMMYYYY_DATE_FORMAT)}`}
-                </Normaltekst>
+                </BodyShort>
               </Column>
             )}
           </Row>

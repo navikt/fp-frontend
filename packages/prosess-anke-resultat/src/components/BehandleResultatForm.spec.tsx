@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
-import { Undertekst } from 'nav-frontend-typografi';
+import { Detail } from '@navikt/ds-react';
 
 import ankeVurdering from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
@@ -146,7 +146,7 @@ describe('<BehandleResultatForm>', () => {
       } as AnkeVurdering['ankeVurderingResultat']}
     />);
 
-    const tekst = wrapper.find(Undertekst);
+    const tekst = wrapper.find(Detail);
     expect(tekst).toHaveLength(3);
     expect(tekst.at(2).childAt(0).text()).toBe('test');
   });
@@ -158,7 +158,7 @@ describe('<BehandleResultatForm>', () => {
       } as AnkeVurdering['ankeVurderingResultat']}
     />);
 
-    const tekst = wrapper.find(Undertekst);
+    const tekst = wrapper.find(Detail);
     expect(tekst).toHaveLength(3);
     expect(tekst.at(2).childAt(0).text()).toBe('test');
   });
@@ -170,7 +170,7 @@ describe('<BehandleResultatForm>', () => {
       } as AnkeVurdering['ankeVurderingResultat']}
     />);
 
-    const tekst = wrapper.find(Undertekst);
+    const tekst = wrapper.find(Detail);
     expect(tekst).toHaveLength(3);
     expect(tekst.at(2).childAt(0).text()).toBe('test');
   });
@@ -182,7 +182,7 @@ describe('<BehandleResultatForm>', () => {
       } as AnkeVurdering['ankeVurderingResultat']}
     />);
 
-    const tekst = wrapper.find(Undertekst);
+    const tekst = wrapper.find(Detail);
     expect(tekst).toHaveLength(5);
     expect(tekst.at(4).childAt(0).text()).toBe('test');
   });
@@ -196,7 +196,7 @@ describe('<BehandleResultatForm>', () => {
       alleKodeverk={{} as AlleKodeverk}
     />);
 
-    const tekst = wrapper.find(Undertekst);
+    const tekst = wrapper.find(Detail);
     expect(tekst).toHaveLength(3);
     expect(tekst.at(2).childAt(0).text()).toBe('test');
   });
@@ -217,7 +217,7 @@ describe('<BehandleResultatForm>', () => {
       } as AlleKodeverk}
     />);
 
-    const tekst = wrapper.find(Undertekst);
+    const tekst = wrapper.find(Detail);
     expect(tekst).toHaveLength(5);
     expect(tekst.at(2).childAt(0).text()).toBe('Nye opplysninger');
   });

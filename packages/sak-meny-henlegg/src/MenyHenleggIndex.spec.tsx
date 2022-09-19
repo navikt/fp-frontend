@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
-import Modal from 'nav-frontend-modal';
+import { Modal } from '@navikt/ds-react';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import * as stories from './MenyHenleggIndex.stories';
 
@@ -11,13 +11,15 @@ const {
 } = composeStories(stories);
 
 describe('<MenyHenleggIndex>', () => {
-  Modal.setAppElement('body');
+  if (Modal.setAppElement) {
+    Modal.setAppElement('body');
+  }
 
   it('skal velge henlegge behandling og så vise modal som viser at behandling er henlagt', async () => {
     const henleggBehandling = jest.fn(() => Promise.resolve());
     const utils = render(<ForFørstegangssøknad henleggBehandling={henleggBehandling} />);
     expect(await screen.findAllByText('Henlegg behandling')).toHaveLength(2);
-    expect(screen.getAllByText('Henlegg behandling')[1]).toBeDisabled();
+    expect(screen.getAllByText('Henlegg behandling')[1].closest('button')).toBeDisabled();
 
     expect(screen.getByText('Søknaden er trukket')).toBeInTheDocument();
     expect(screen.getByText('Behandlingen er feilaktig opprettet')).toBeInTheDocument();

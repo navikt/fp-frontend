@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from 'nav-frontend-modal';
+import { Modal } from '@navikt/ds-react';
 import {
   fireEvent, render, screen, waitFor,
 } from '@testing-library/react';
@@ -24,7 +24,7 @@ describe('<SakenFaktaIndex>', () => {
 
     await userEvent.click(screen.getByAltText('Endre perioden'));
 
-    expect(screen.getByText('Lagre')).toBeDisabled();
+    expect(screen.getByText('Lagre').closest('button')).toBeDisabled();
 
     await userEvent.click(screen.getByText('Bosatt utland'));
 
@@ -105,7 +105,7 @@ describe('<SakenFaktaIndex>', () => {
     await userEvent.type(startdato, '{backspace}{backspace}20');
     await fireEvent.blur(startdato);
 
-    expect(screen.getByText('Lagre')).toBeDisabled();
+    expect(screen.getByText('Lagre').closest('button')).toBeDisabled();
 
     const vurdering = screen.getByText('Vurdering');
     await userEvent.type(vurdering, 'Dette er en vurdering');

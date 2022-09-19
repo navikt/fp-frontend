@@ -42,7 +42,7 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
 
     expect(screen.queryByText('Barn 2')).not.toBeInTheDocument();
 
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     expect(screen.getByText('Søker har oppgitt å ha aleneomsorg for barnet')).toBeInTheDocument();
 

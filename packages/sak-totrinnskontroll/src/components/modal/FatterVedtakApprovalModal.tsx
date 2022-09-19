@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { Normaltekst } from 'nav-frontend-typografi';
-import Modal from 'nav-frontend-modal';
+import { BodyShort, Modal, Button } from '@navikt/ds-react';
 import { Image } from '@navikt/ft-ui-komponenter';
 
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -150,34 +148,38 @@ const FatterVedtakApprovalModal: FunctionComponent<OwnProps & WrappedComponentPr
   return (
     <Modal
       className={styles.modal}
-      isOpen
+      open
       closeButton={false}
-      contentLabel={intl.formatMessage({ id: modalDescriptionTextCode })}
-      onRequestClose={closeEvent}
+      aria-label={intl.formatMessage({ id: modalDescriptionTextCode })}
+      onClose={closeEvent}
       shouldCloseOnOverlayClick={false}
     >
-      <Row>
-        <Column xs="1">
-          <Image className={styles.image} alt={intl.formatMessage({ id: altImgTextCode })} src={innvilgetImageUrl} />
-          <div className={styles.divider} />
-        </Column>
-        <Column xs="9">
-          <Normaltekst>
-            <FormattedMessage id={infoTextCode} />
-          </Normaltekst>
-          <Normaltekst><FormattedMessage id="FatterVedtakApprovalModal.GoToSearchPage" /></Normaltekst>
-        </Column>
-        <Column xs="2">
-          <Hovedknapp
-            mini
-            className={styles.button}
-            onClick={closeEvent}
-            autoFocus
-          >
-            <FormattedMessage id="FatterVedtakApprovalModal.Ok" />
-          </Hovedknapp>
-        </Column>
-      </Row>
+      <Modal.Content>
+        <Row>
+          <Column xs="1">
+            <Image className={styles.image} alt={intl.formatMessage({ id: altImgTextCode })} src={innvilgetImageUrl} />
+            <div className={styles.divider} />
+          </Column>
+          <Column xs="9">
+            <BodyShort size="small">
+              <FormattedMessage id={infoTextCode} />
+            </BodyShort>
+            <BodyShort size="small"><FormattedMessage id="FatterVedtakApprovalModal.GoToSearchPage" /></BodyShort>
+          </Column>
+          <Column xs="2">
+            <Button
+              size="small"
+              variant="primary"
+              className={styles.button}
+              onClick={closeEvent}
+              autoFocus
+              type="button"
+            >
+              <FormattedMessage id="FatterVedtakApprovalModal.Ok" />
+            </Button>
+          </Column>
+        </Row>
+      </Modal.Content>
     </Modal>
   );
 };
