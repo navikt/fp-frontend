@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import dayjs from 'dayjs';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Normaltekst, Element } from 'nav-frontend-typografi';
+import { BodyShort, Label } from '@navikt/ds-react';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -64,18 +64,18 @@ const ValgtAktivitetSubForm: FunctionComponent<OwnProps> = ({
       <Row>
         <Column xs="7">
           <VerticalSpacer eightPx />
-          <Element>
+          <Label size="small">
             <FormattedMessage id={getOppdragsgiverIntlId(valgtAktivitetstype)} />
-          </Element>
-          <Normaltekst>{finnArbeidsgivertekst(arbeidsgiverReferanse, arbeidsgiverOpplysningerPerId)}</Normaltekst>
+          </Label>
+          <BodyShort size="small">{finnArbeidsgivertekst(arbeidsgiverReferanse, arbeidsgiverOpplysningerPerId)}</BodyShort>
         </Column>
         {erAvType(valgtAktivitetstype, OAType.ARBEID) && (
           <Column xs="5">
             <VerticalSpacer eightPx />
-            <Element>
+            <Label size="small">
               <FormattedMessage id="ActivityPanel.Stillingsandel" />
-            </Element>
-            <Normaltekst>{stillingsandel}</Normaltekst>
+            </Label>
+            <BodyShort size="small">{stillingsandel}</BodyShort>
           </Column>
         )}
       </Row>
@@ -84,10 +84,10 @@ const ValgtAktivitetSubForm: FunctionComponent<OwnProps> = ({
     {erAvType(valgtAktivitetstype, OAType.NARING) && (
       <Row>
         <Column xs="8">
-          <Element>
+          <Label size="small">
             <FormattedMessage id="ActivityPanel.Registreringsdato" />
-          </Element>
-          <Normaltekst>{dayjs(naringRegistreringsdato).format(DDMMYYYY_DATE_FORMAT)}</Normaltekst>
+          </Label>
+          <BodyShort size="small">{dayjs(naringRegistreringsdato).format(DDMMYYYY_DATE_FORMAT)}</BodyShort>
         </Column>
       </Row>
     )}

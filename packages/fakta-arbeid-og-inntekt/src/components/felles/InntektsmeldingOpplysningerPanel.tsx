@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
-import Lenke from 'nav-frontend-lenker';
+import {
+  Link, Label, BodyShort, Detail,
+} from '@navikt/ds-react';
 import {
   Image, FlexColumn, FlexContainer, FlexRow, PeriodLabel, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -37,10 +38,10 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
         <>
           <FlexRow>
             <FlexColumn>
-              <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.ArbeidsforholdId" /></Element>
+              <Label size="small"><FormattedMessage id="InntektsmeldingOpplysningerPanel.ArbeidsforholdId" /></Label>
             </FlexColumn>
             <FlexColumn>
-              <Normaltekst>{inntektsmelding.eksternArbeidsforholdId}</Normaltekst>
+              <BodyShort size="small">{inntektsmelding.eksternArbeidsforholdId}</BodyShort>
             </FlexColumn>
           </FlexRow>
           <VerticalSpacer eightPx />
@@ -50,10 +51,10 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
         <>
           <FlexRow>
             <FlexColumn>
-              <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Stillingsprosent" /></Element>
+              <Label size="small"><FormattedMessage id="InntektsmeldingOpplysningerPanel.Stillingsprosent" /></Label>
             </FlexColumn>
             <FlexColumn>
-              <Normaltekst>{arbeidsforhold.stillingsprosent ? `${arbeidsforhold.stillingsprosent}%` : '-'}</Normaltekst>
+              <BodyShort size="small">{arbeidsforhold.stillingsprosent ? `${arbeidsforhold.stillingsprosent}%` : '-'}</BodyShort>
             </FlexColumn>
           </FlexRow>
           {arbeidsforhold.permisjonOgMangel && (
@@ -61,18 +62,18 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
               <VerticalSpacer eightPx />
               <FlexRow>
                 <FlexColumn>
-                  <Element>
+                  <Label size="small">
                     {getKodeverknavnFraKode(alleKodeverk,
                       KodeverkType.PERMISJONSBESKRIVELSE_TYPE, arbeidsforhold.permisjonOgMangel.type)}
-                  </Element>
+                  </Label>
                 </FlexColumn>
                 <FlexColumn>
-                  <Normaltekst>
+                  <BodyShort size="small">
                     <PeriodLabel
                       dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom}
                       dateStringTom={arbeidsforhold.permisjonOgMangel.permisjonTom}
                     />
-                  </Normaltekst>
+                  </BodyShort>
                 </FlexColumn>
               </FlexRow>
             </>
@@ -82,21 +83,21 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
       )}
       <FlexRow>
         <FlexColumn>
-          <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" /></Element>
+          <Label size="small"><FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" /></Label>
         </FlexColumn>
         <FlexColumn>
-          <Normaltekst>{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</Normaltekst>
+          <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</BodyShort>
         </FlexColumn>
       </FlexRow>
       <VerticalSpacer eightPx />
       <FlexRow>
         <FlexColumn>
-          <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjon" /></Element>
+          <Label size="small"><FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjon" /></Label>
         </FlexColumn>
         <FlexColumn>
-          <Normaltekst>
+          <BodyShort size="small">
             <FormattedMessage id={inntektsmelding.refusjonPrMnd ? 'InntektsmeldingOpplysningerPanel.Ja' : 'InntektsmeldingOpplysningerPanel.Nei'} />
-          </Normaltekst>
+          </BodyShort>
         </FlexColumn>
       </FlexRow>
       <VerticalSpacer eightPx />
@@ -104,23 +105,23 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
         <>
           <FlexRow>
             <FlexColumn>
-              <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" /></Element>
+              <Label size="small"><FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" /></Label>
             </FlexColumn>
             <FlexColumn>
-              <Normaltekst>{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd)}</Normaltekst>
+              <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd)}</BodyShort>
             </FlexColumn>
           </FlexRow>
           <VerticalSpacer eightPx />
         </>
       )}
-      <Lenke href={hentDokumentLenke(saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId)} target="_blank">
+      <Link href={hentDokumentLenke(saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId)} target="_blank">
         <span>
-          <Normaltekst className={styles.inline}>
+          <BodyShort size="small" className={styles.inline}>
             <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
-          </Normaltekst>
+          </BodyShort>
         </span>
         <Image src={dokumentSvg} />
-      </Lenke>
+      </Link>
       <VerticalSpacer sixteenPx />
       <FlexRow>
         <FlexColumn>
@@ -129,19 +130,19 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
         <FlexColumn>
           <FlexRow>
             <FlexColumn>
-              <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Kontaktinfo" /></Element>
+              <Label size="small"><FormattedMessage id="InntektsmeldingOpplysningerPanel.Kontaktinfo" /></Label>
             </FlexColumn>
           </FlexRow>
           <FlexRow>
             <FlexColumn>
-              <Undertekst>{inntektsmelding.kontaktpersonNavn}</Undertekst>
+              <Detail size="small">{inntektsmelding.kontaktpersonNavn}</Detail>
             </FlexColumn>
           </FlexRow>
           <FlexRow>
             <FlexColumn>
-              <Undertekst>
+              <Detail size="small">
                 <FormattedMessage id="InntektsmeldingOpplysningerPanel.Tlf" values={{ nr: inntektsmelding.kontaktpersonNummer }} />
-              </Undertekst>
+              </Detail>
             </FlexColumn>
           </FlexRow>
         </FlexColumn>

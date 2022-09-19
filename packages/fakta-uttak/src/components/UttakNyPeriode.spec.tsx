@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import sinon from 'sinon';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { Button } from '@navikt/ds-react';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -107,19 +107,8 @@ describe('<UttakNyPeriode>', () => {
     const textAreaField = wrapper.find(TextAreaField);
     expect(textAreaField).toHaveLength(1);
 
-    const okKnapp = wrapper.find('Hovedknapp');
-    expect(okKnapp).toHaveLength(1);
-    expect(okKnapp.prop('mini')).toBe(true);
-    expect(okKnapp.prop('htmlType')).toEqual('button');
-    expect(okKnapp.prop('onClick')).toEqual(reduxFormPropsMock.handleSubmit);
-    expect(okKnapp.find(FormattedMessage).prop('id')).toBe('UttakInfoPanel.Oppdater');
-
-    const avbrytKnapp = wrapper.find(Knapp);
-    expect(avbrytKnapp).toHaveLength(1);
-    expect(avbrytKnapp.prop('mini')).toBe(true);
-
-    expect(avbrytKnapp.prop('onClick')).toEqual(newPeriodeResetCallback);
-    expect(avbrytKnapp.find(FormattedMessage).prop('id')).toBe('UttakInfoPanel.Avbryt');
+    const knapper = wrapper.find(Button);
+    expect(knapper).toHaveLength(2);
   });
 
   it('Skal regne ut og vise antall dager i valgt periode', () => {
@@ -297,8 +286,8 @@ describe('<UttakNyPeriode>', () => {
         periodeType: 'FEDREKVOTE',
       },
     });
-    const okKnapp = wrapper.find(Hovedknapp);
-    okKnapp.simulate('click');
+    const okKnapp = wrapper.find(Button);
+    okKnapp.first().simulate('click');
     expect(reduxFormPropsMock.handleSubmit.called).toBe(true);
   });
 });

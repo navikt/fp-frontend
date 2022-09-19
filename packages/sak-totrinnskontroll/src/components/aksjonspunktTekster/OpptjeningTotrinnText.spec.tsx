@@ -2,7 +2,7 @@ import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { render, screen } from '@testing-library/react';
 import { OpptjeningAktiviteter } from '@fpsak-frontend/types';
-import ModalWrapper from 'nav-frontend-modal';
+import { Modal } from '@navikt/ds-react';
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import OpptjeningTotrinnText from './OpptjeningTotrinnText';
@@ -35,7 +35,10 @@ const lagOpptjeningAktivitet = (resultat: string): OpptjeningAktiviteter => ({
 });
 
 describe('<OpptjeningTotrinnnText>', () => {
-  ModalWrapper.setAppElement('body');
+  if (Modal.setAppElement) {
+    Modal.setAppElement('body');
+  }
+
   it('skal vise korrekt tekst for opptjening med endring av arbeid med navn', async () => {
     render(
       <RawIntlProvider value={intlMock}>

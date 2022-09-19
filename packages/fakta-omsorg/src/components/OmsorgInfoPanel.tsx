@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 
 import { Form } from '@navikt/ft-form-hooks';
+import { Heading } from '@navikt/ds-react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -12,7 +13,6 @@ import {
 } from '@fpsak-frontend/types';
 import { BekreftOmsorgVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
-import { Undertittel } from 'nav-frontend-typografi';
 import OmsorgFaktaForm, { FormValues as OmsorgFormValues } from './OmsorgFaktaForm';
 import AlleBarnPanel from './personer/AlleBarnPanel';
 import ForelderPanel from './personer/ForelderPanel';
@@ -84,7 +84,7 @@ const OmsorgInfoPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <Undertittel><FormattedMessage id="OmsorgInfoPanel.Overskrift" /></Undertittel>
+      <Heading size="small"><FormattedMessage id="OmsorgInfoPanel.Overskrift" /></Heading>
       <VerticalSpacer thirtyTwoPx />
       {!readOnly && hasOpenAksjonspunkter && (
         <AksjonspunktHelpTextHTML>

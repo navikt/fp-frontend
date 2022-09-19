@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider, FormattedMessage } from 'react-intl';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Button } from '@navikt/ds-react';
 
 import { createIntl } from '@navikt/ft-utils';
 import { ariaCheck } from '@navikt/ft-form-validators';
@@ -42,16 +42,17 @@ export const FaktaSubmitButton: FunctionComponent<OwnProps> = ({
 }) => (
   <RawIntlProvider value={intl}>
     {!isReadOnly && (
-      <Hovedknapp
-        mini
-        spinner={isSubmitting}
+      <Button
+        size="small"
+        variant="primary"
+        loading={isSubmitting}
         disabled={isDisabled(isDirty, isSubmitting, isSubmittable)}
         onClick={onClick || ariaCheck}
-        htmlType={onClick ? 'button' : 'submit'}
+        type={onClick ? 'button' : 'submit'}
       >
         {!!buttonText && buttonText}
         {!buttonText && <FormattedMessage id="SubmitButton.ConfirmInformation" />}
-      </Hovedknapp>
+      </Button>
     )}
   </RawIntlProvider>
 );

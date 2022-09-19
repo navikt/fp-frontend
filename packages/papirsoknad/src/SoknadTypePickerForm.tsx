@@ -3,9 +3,8 @@ import React, {
 } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
-import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Detail, Heading, Button } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { FagsakYtelseType, KodeverkType } from '@navikt/ft-kodeverk';
 import { ariaCheck, required } from '@navikt/ft-form-validators';
@@ -67,13 +66,13 @@ const SoknadTypePickerForm: FunctionComponent<OwnProps> = ({
   return (
     <Form formMethods={formMethods} onSubmit={onSubmit}>
       <BorderBox className={styles.container}>
-        <Undertittel>
+        <Heading size="small">
           <FormattedMessage id="Registrering.Omsoknaden.Title" />
-        </Undertittel>
+        </Heading>
         <VerticalSpacer sixteenPx />
         <Row>
           <Column xs="4">
-            <Undertekst><FormattedMessage id="Registrering.Omsoknaden.soknadstype" /></Undertekst>
+            <Detail size="small"><FormattedMessage id="Registrering.Omsoknaden.soknadstype" /></Detail>
             <VerticalSpacer fourPx />
             <RadioGroupPanel
               name="fagsakYtelseType"
@@ -86,7 +85,7 @@ const SoknadTypePickerForm: FunctionComponent<OwnProps> = ({
             />
           </Column>
           <Column xs="4">
-            <Undertekst><FormattedMessage id="Registrering.Omsoknaden.Tema" /></Undertekst>
+            <Detail size="small"><FormattedMessage id="Registrering.Omsoknaden.Tema" /></Detail>
             <VerticalSpacer fourPx />
             <RadioGroupPanel
               name="familieHendelseType"
@@ -99,9 +98,9 @@ const SoknadTypePickerForm: FunctionComponent<OwnProps> = ({
             />
           </Column>
           <Column xs="4">
-            <Undertekst>
+            <Detail size="small">
               <FormattedMessage id="Registrering.Omsoknaden.Soker" />
-            </Undertekst>
+            </Detail>
             <VerticalSpacer fourPx />
             <RadioGroupPanel
               name="foreldreType"
@@ -116,13 +115,14 @@ const SoknadTypePickerForm: FunctionComponent<OwnProps> = ({
         <Row>
           <Column xs="12">
             <div className={styles.right}>
-              <Hovedknapp
-                mini
+              <Button
+                size="small"
+                variant="primary"
                 onClick={ariaCheck}
                 disabled={formMethods.formState.isSubmitting || formMethods.formState.isSubmitted}
               >
                 <FormattedMessage id="Registrering.Omsoknaden.VisSkjema" />
-              </Hovedknapp>
+              </Button>
             </div>
           </Column>
         </Row>

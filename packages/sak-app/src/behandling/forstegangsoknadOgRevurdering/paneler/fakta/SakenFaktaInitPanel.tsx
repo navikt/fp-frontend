@@ -2,6 +2,8 @@ import React, {
   FunctionComponent,
 } from 'react';
 import { useIntl } from 'react-intl';
+import { Fagsak } from '@navikt/ft-types';
+import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import SakenFaktaIndex from '@fpsak-frontend/fakta-saken';
@@ -33,12 +35,19 @@ type EndepunktPanelData = {
   soknad: Soknad;
 }
 
+interface OwnProps {
+  fagsak: Fagsak;
+}
+
 /**
  * SakenFaktaInitPanel
  *
  * Dette faktapanelet skal alltid vises
  */
-const SakenFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => (
+const SakenFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
+  fagsak,
+  ...props
+}) => (
   <FaktaDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
     {...props}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
@@ -48,7 +57,7 @@ const SakenFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => (
     faktaPanelKode={FaktaPanelCode.SAKEN}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'SakenFaktaPanel.Title' })}
     skalPanelVisesIMeny={() => true}
-    renderPanel={(data) => <SakenFaktaIndex {...data} />}
+    renderPanel={(data) => <SakenFaktaIndex {...data} erSvangerskapspenger={fagsak.fagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER} />}
   />
 );
 

@@ -1,9 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { Button } from '@navikt/ds-react';
 
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 
 import styles from './periodeTyper.less';
 
@@ -31,40 +33,51 @@ export const PerioderKnapper: FunctionComponent<OwnProps> = ({
   !readOnly && (
   <div>
     <VerticalSpacer sixteenPx />
-    <Hovedknapp
-      className={styles.oppdaterMargin}
-      htmlType="button"
-      mini
-      disabled={resultat === uttakPeriodeVurdering.PERIODE_IKKE_VURDERT}
-      onClick={updatePeriode}
-    >
-      <FormattedMessage id="UttakInfoPanel.Oppdater" />
-    </Hovedknapp>
-    {!bekreftet && !updated
-      && (
-      <Knapp
-        className={styles.oppdaterMargin}
-        htmlType="button"
-        mini
-        disabled={resultat === uttakPeriodeVurdering.PERIODE_IKKE_VURDERT}
-        onClick={() => resetPeriode()}
-      >
-        <FormattedMessage id="UttakInfoPanel.Nullstill" />
-      </Knapp>
-      )}
-    {(bekreftet || (!bekreftet && updated))
-      && (
-      <Knapp
-        htmlType="button"
-        mini
-        onClick={() => {
-          resetPeriode();
-          cancelEditPeriode(id);
-        }}
-      >
-        <FormattedMessage id="UttakInfoPanel.Avbryt" />
-      </Knapp>
-      )}
+    <FlexContainer>
+      <FlexRow>
+        <FlexColumn>
+          <Button
+            className={styles.oppdaterMargin}
+            variant="primary"
+            size="small"
+            disabled={resultat === uttakPeriodeVurdering.PERIODE_IKKE_VURDERT}
+            onClick={updatePeriode}
+            type="button"
+          >
+            <FormattedMessage id="UttakInfoPanel.Oppdater" />
+          </Button>
+        </FlexColumn>
+        {!bekreftet && !updated && (
+        <FlexColumn>
+          <Button
+            className={styles.oppdaterMargin}
+            size="small"
+            variant="secondary"
+            disabled={resultat === uttakPeriodeVurdering.PERIODE_IKKE_VURDERT}
+            onClick={() => resetPeriode()}
+            type="button"
+          >
+            <FormattedMessage id="UttakInfoPanel.Nullstill" />
+          </Button>
+        </FlexColumn>
+        )}
+        {(bekreftet || (!bekreftet && updated)) && (
+        <FlexColumn>
+          <Button
+            size="small"
+            variant="secondary"
+            onClick={() => {
+              resetPeriode();
+              cancelEditPeriode(id);
+            }}
+            type="button"
+          >
+            <FormattedMessage id="UttakInfoPanel.Avbryt" />
+          </Button>
+        </FlexColumn>
+        )}
+      </FlexRow>
+    </FlexContainer>
   </div>
   )
 );

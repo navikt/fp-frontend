@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Element } from 'nav-frontend-typografi';
+import { Label } from '@navikt/ds-react';
 
 import BubbleText from './felles/bubbleText';
 import { findHendelseText } from './felles/historikkUtils';
@@ -15,7 +15,7 @@ const HistorikkMalType1: FunctionComponent<HistorikkMal> = ({
   return (
     <>
       {historikkinnslagDeler[0] && historikkinnslagDeler[0].hendelse && (
-        <Element className="snakkeboble-panel__tekst">{findHendelseText(historikkinnslagDeler[0].hendelse, getKodeverknavn)}</Element>
+        <Label size="small" className="snakkeboble-panel__tekst">{findHendelseText(historikkinnslagDeler[0].hendelse, getKodeverknavn)}</Label>
       )}
       {historikkinnslagDeler[0].begrunnelsetekst && (
         <BubbleText

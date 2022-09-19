@@ -3,12 +3,12 @@ import React, {
 } from 'react';
 import moment from 'moment';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { Heading } from '@navikt/ds-react';
 
 import {
   ArbeidOgInntektsmelding, AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, Inntektsmelding,
 } from '@fpsak-frontend/types';
 
-import { Undertittel } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
 import PersonArbeidsforholdTable, { erMatch } from './arbeidsforholdTabell/PersonArbeidsforholdTable';
 import ArbeidsforholdDetail from './arbeidsforholdDetaljer/ArbeidsforholdDetail';
@@ -78,7 +78,7 @@ const ArbeidsforholdInfoPanel: FunctionComponent<PureOwnProps> = ({
 
   return (
     <>
-      <Undertittel><FormattedMessage id="ArbeidsforholdInfoPanel.ArbeidsforholdHeader" /></Undertittel>
+      <Heading size="small"><FormattedMessage id="ArbeidsforholdInfoPanel.ArbeidsforholdHeader" /></Heading>
       <PersonArbeidsforholdTable
         selectedId={valgtArbeidsforhold?.arbeidsgiverIdent}
         alleArbeidsforhold={sorterteArbeidsforhold}

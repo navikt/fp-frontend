@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
-import Modal from 'nav-frontend-modal';
+import {
+  BodyShort, Modal, Button, Label,
+} from '@navikt/ds-react';
 import { Image } from '@navikt/ft-ui-komponenter';
 
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
@@ -28,32 +28,36 @@ const HenlagtBehandlingModal: FunctionComponent<OwnProps & WrappedComponentProps
 }) => (
   <Modal
     className={styles.modal}
-    isOpen={showModal}
+    open={showModal}
     closeButton={false}
-    contentLabel={intl.formatMessage({ id: 'HenlagtBehandlingModal.ModalDescription' })}
-    onRequestClose={closeEvent}
+    aria-label={intl.formatMessage({ id: 'HenlagtBehandlingModal.ModalDescription' })}
+    onClose={closeEvent}
     shouldCloseOnOverlayClick={false}
   >
-    <Row>
-      <Column xs="1">
-        <Image className={styles.image} alt={intl.formatMessage({ id: 'HenlagtBehandlingModal.Henlagt' })} src={innvilgetImageUrl} />
-        <div className={styles.divider} />
-      </Column>
-      <Column xs="9">
-        <Element><FormattedMessage id="HenlagtBehandlingModal.BehandlingenErHenlagt" /></Element>
-        <Normaltekst><FormattedMessage id="HenlagtBehandlingModal.RutetTilForsiden" /></Normaltekst>
-      </Column>
-      <Column xs="2">
-        <Hovedknapp
-          mini
-          className={styles.button}
-          onClick={closeEvent}
-          autoFocus
-        >
-          {intl.formatMessage({ id: 'HenlagtBehandlingModal.Ok' })}
-        </Hovedknapp>
-      </Column>
-    </Row>
+    <Modal.Content>
+      <Row>
+        <Column xs="1">
+          <Image className={styles.image} alt={intl.formatMessage({ id: 'HenlagtBehandlingModal.Henlagt' })} src={innvilgetImageUrl} />
+          <div className={styles.divider} />
+        </Column>
+        <Column xs="9">
+          <Label size="small"><FormattedMessage id="HenlagtBehandlingModal.BehandlingenErHenlagt" /></Label>
+          <BodyShort size="small"><FormattedMessage id="HenlagtBehandlingModal.RutetTilForsiden" /></BodyShort>
+        </Column>
+        <Column xs="2">
+          <Button
+            variant="primary"
+            size="small"
+            className={styles.button}
+            onClick={closeEvent}
+            autoFocus
+            type="button"
+          >
+            {intl.formatMessage({ id: 'HenlagtBehandlingModal.Ok' })}
+          </Button>
+        </Column>
+      </Row>
+    </Modal.Content>
   </Modal>
 );
 

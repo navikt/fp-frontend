@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 
 import { FastsattOpptjeningAktivitet } from '@fpsak-frontend/types';
 import { PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -32,9 +32,9 @@ export const OpptjeningVilkarViewImpl: FunctionComponent<OwnProps> = ({
       id="OpptjeningVilkarView.MonthsAndDays"
       values={{ months, days }}
     />
-    <Normaltekst>
+    <BodyShort size="small">
       <PeriodLabel dateStringFom={opptjeningFomDate} dateStringTom={opptjeningTomDate} />
-    </Normaltekst>
+    </BodyShort>
     <VerticalSpacer fourPx />
     {fastsattOpptjeningActivities.length > 0 && (
       <OpptjeningTimeLineLight

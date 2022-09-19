@@ -3,8 +3,7 @@ import React, {
 } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm, UseFormGetValues } from 'react-hook-form';
-import { Undertittel } from 'nav-frontend-typografi';
-import { Knapp, Flatknapp } from 'nav-frontend-knapper';
+import { Heading, Button } from '@navikt/ds-react';
 import { Column, Row } from 'nav-frontend-grid';
 import {
   Image, FlexColumn, FlexContainer, FlexRow, VerticalSpacer, FloatRight, OkAvbrytModal,
@@ -144,7 +143,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
     <>
       {!radData && (
         <>
-          <Undertittel><FormattedMessage id="LeggTilArbeidsforholdForm.LeggTilArbeidsforhold" /></Undertittel>
+          <Heading size="small"><FormattedMessage id="LeggTilArbeidsforholdForm.LeggTilArbeidsforhold" /></Heading>
           <VerticalSpacer sixteenPx />
         </>
       )}
@@ -210,25 +209,26 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
               <FlexContainer>
                 <FlexRow>
                   <FlexColumn>
-                    <Knapp
-                      mini
-                      spinner={formMethods.formState.isSubmitting}
+                    <Button
+                      size="small"
+                      variant="secondary"
+                      loading={formMethods.formState.isSubmitting}
                       disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-                      htmlType="submit"
                     >
                       <FormattedMessage id="LeggTilArbeidsforholdForm.Lagre" />
-                    </Knapp>
+                    </Button>
                   </FlexColumn>
                   <FlexColumn>
-                    <Flatknapp
-                      mini
-                      spinner={false}
+                    <Button
+                      size="small"
+                      variant="tertiary"
+                      loading={false}
                       disabled={formMethods.formState.isSubmitting}
                       onClick={lukkRadOgResetForm}
-                      htmlType="button"
+                      type="button"
                     >
                       <FormattedMessage id="LeggTilArbeidsforholdForm.Avbryt" />
-                    </Flatknapp>
+                    </Button>
                   </FlexColumn>
                 </FlexRow>
               </FlexContainer>
@@ -236,16 +236,17 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
             {radData && (
               <Column xs="4">
                 <FloatRight>
-                  <Flatknapp
-                    mini
-                    spinner={false}
+                  <Button
+                    size="small"
+                    variant="tertiary"
+                    loading={false}
                     disabled={formMethods.formState.isSubmitting}
                     onClick={() => settVisSletteDialog(true)}
-                    htmlType="button"
+                    type="button"
                   >
                     <Image src={binIcon} className={styles.buttonImage} />
                     <span><FormattedMessage id="LeggTilArbeidsforholdForm.Slett" /></span>
-                  </Flatknapp>
+                  </Button>
                 </FloatRight>
               </Column>
             )}

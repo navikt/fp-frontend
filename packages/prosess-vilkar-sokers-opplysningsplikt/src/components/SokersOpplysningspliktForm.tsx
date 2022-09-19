@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import moment from 'moment';
 import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
@@ -226,7 +226,7 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
         {sorterteManglendeVedlegg.length > 0 && (
           <>
             <VerticalSpacer twentyPx />
-            <Normaltekst><FormattedMessage id="SokersOpplysningspliktForm.ManglendeDokumentasjon" /></Normaltekst>
+            <BodyShort size="small"><FormattedMessage id="SokersOpplysningspliktForm.ManglendeDokumentasjon" /></BodyShort>
             <VerticalSpacer eightPx />
             <Row>
               <Column xs="11">
@@ -279,7 +279,9 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
             {originalErVilkarOk === false && behandlingsresultat?.avslagsarsak && (
               <>
                 <VerticalSpacer sixteenPx />
-                <Normaltekst>{getKodeverknavn(behandlingsresultat.avslagsarsak, KodeverkType.AVSLAGSARSAK, vilkarType.SOKERSOPPLYSNINGSPLIKT)}</Normaltekst>
+                <BodyShort size="small">
+                  {getKodeverknavn(behandlingsresultat.avslagsarsak, KodeverkType.AVSLAGSARSAK, vilkarType.SOKERSOPPLYSNINGSPLIKT)}
+                </BodyShort>
               </>
             )}
           </div>

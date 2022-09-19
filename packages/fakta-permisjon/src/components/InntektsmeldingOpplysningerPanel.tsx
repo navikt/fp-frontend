@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
-import Lenke from 'nav-frontend-lenker';
+import {
+  Label, BodyShort, Detail, Link,
+} from '@navikt/ds-react';
 import {
   FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -28,21 +29,21 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
     <FlexContainer>
       <FlexRow>
         <FlexColumn>
-          <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" /></Element>
+          <Label size="small"><FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" /></Label>
         </FlexColumn>
         <FlexColumn>
-          <Normaltekst>{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</Normaltekst>
+          <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</BodyShort>
         </FlexColumn>
       </FlexRow>
       <VerticalSpacer eightPx />
       <FlexRow>
         <FlexColumn>
-          <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjon" /></Element>
+          <Label size="small"><FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjon" /></Label>
         </FlexColumn>
         <FlexColumn>
-          <Normaltekst>
+          <BodyShort size="small">
             <FormattedMessage id={inntektsmelding.refusjonPrMnd ? 'InntektsmeldingOpplysningerPanel.Ja' : 'InntektsmeldingOpplysningerPanel.Nei'} />
-          </Normaltekst>
+          </BodyShort>
         </FlexColumn>
       </FlexRow>
       <VerticalSpacer eightPx />
@@ -50,23 +51,23 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
         <>
           <FlexRow>
             <FlexColumn>
-              <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" /></Element>
+              <Label size="small"><FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" /></Label>
             </FlexColumn>
             <FlexColumn>
-              <Normaltekst>{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd)}</Normaltekst>
+              <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd)}</BodyShort>
             </FlexColumn>
           </FlexRow>
           <VerticalSpacer eightPx />
         </>
       )}
-      <Lenke href={hentDokumentLenke(saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId)} target="_blank">
+      <Link href={hentDokumentLenke(saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId)} target="_blank">
         <span>
-          <Normaltekst className={styles.inline}>
+          <BodyShort size="small" className={styles.inline}>
             <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
-          </Normaltekst>
+          </BodyShort>
         </span>
         <Image src={dokumentSvg} />
-      </Lenke>
+      </Link>
       <VerticalSpacer sixteenPx />
       <FlexRow>
         <FlexColumn>
@@ -75,19 +76,19 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
         <FlexColumn>
           <FlexRow>
             <FlexColumn>
-              <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Kontaktinfo" /></Element>
+              <Label size="small"><FormattedMessage id="InntektsmeldingOpplysningerPanel.Kontaktinfo" /></Label>
             </FlexColumn>
           </FlexRow>
           <FlexRow>
             <FlexColumn>
-              <Undertekst>{inntektsmelding.kontaktpersonNavn}</Undertekst>
+              <Detail size="small">{inntektsmelding.kontaktpersonNavn}</Detail>
             </FlexColumn>
           </FlexRow>
           <FlexRow>
             <FlexColumn>
-              <Undertekst>
+              <Detail size="small">
                 <FormattedMessage id="InntektsmeldingOpplysningerPanel.Tlf" values={{ nr: inntektsmelding.kontaktpersonNummer }} />
-              </Undertekst>
+              </Detail>
             </FlexColumn>
           </FlexRow>
         </FlexColumn>

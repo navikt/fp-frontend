@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import moment from 'moment';
-import { Element } from 'nav-frontend-typografi';
+import { Label } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
@@ -126,11 +126,11 @@ const SvangerskapVilkarForm: FunctionComponent<OwnProps> = ({
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
       >
-        <Element><FormattedMessage id="SvangerskapVilkarForm.RettTilSvp" /></Element>
+        <Label size="small"><FormattedMessage id="SvangerskapVilkarForm.RettTilSvp" /></Label>
         {!finnesUttak && (
           <>
             <VerticalSpacer sixteenPx />
-            <Element><FormattedMessage id="SvangerskapVilkarForm.IkkeInnvilgetUttak" /></Element>
+            <Label size="small"><FormattedMessage id="SvangerskapVilkarForm.IkkeInnvilgetUttak" /></Label>
           </>
         )}
         <VilkarResultPicker

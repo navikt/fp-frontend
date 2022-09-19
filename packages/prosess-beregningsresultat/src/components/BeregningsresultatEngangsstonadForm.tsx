@@ -2,9 +2,7 @@ import React, { FunctionComponent, useState, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import {
-  Element, Undertekst, Undertittel,
-} from 'nav-frontend-typografi';
+import { Label, Detail, Heading } from '@navikt/ds-react';
 
 import { Aksjonspunkt, BeregningsresultatEs } from '@fpsak-frontend/types';
 import {
@@ -100,7 +98,7 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
       <FlexContainer>
         <FlexRow>
           <FlexColumn>
-            <Undertittel><FormattedMessage id="BeregningEngangsstonadForm.Beregning" /></Undertittel>
+            <Heading size="small"><FormattedMessage id="BeregningEngangsstonadForm.Beregning" /></Heading>
           </FlexColumn>
           {(kanOverstyre || overrideReadOnly) && (
             <FlexColumn>
@@ -112,18 +110,18 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
       <VerticalSpacer eightPx />
       <Row>
         <Column xs="2">
-          <Undertekst><FormattedMessage id="BeregningEngangsstonadForm.Sats" /></Undertekst>
+          <Detail size="small"><FormattedMessage id="BeregningEngangsstonadForm.Sats" /></Detail>
         </Column>
         <Column xs="2">
-          <Element>{formatCurrencyWithKr(behandlingResultatstruktur.satsVerdi)}</Element>
+          <Label size="small">{formatCurrencyWithKr(behandlingResultatstruktur.satsVerdi)}</Label>
         </Column>
       </Row>
       <Row>
         <Column xs="2">
-          <Undertekst><FormattedMessage id="BeregningEngangsstonadForm.AntallBarn" /></Undertekst>
+          <Detail size="small"><FormattedMessage id="BeregningEngangsstonadForm.AntallBarn" /></Detail>
         </Column>
         <Column xs="2">
-          <Element>{behandlingResultatstruktur.antallBarn}</Element>
+          <Label size="small">{behandlingResultatstruktur.antallBarn}</Label>
         </Column>
       </Row>
       {!erIOverstyringsmodus && !harOverstyringAksjonspunkt && (
@@ -135,10 +133,10 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
           </Row>
           <Row>
             <Column xs="2">
-              <Undertekst><FormattedMessage id="BeregningEngangsstonadForm.BeregnetEngangsstonad" /></Undertekst>
+              <Detail size="small"><FormattedMessage id="BeregningEngangsstonadForm.BeregnetEngangsstonad" /></Detail>
             </Column>
             <Column xs="2">
-              <Element>{formatCurrencyWithKr(behandlingResultatstruktur.beregnetTilkjentYtelse)}</Element>
+              <Label size="small">{formatCurrencyWithKr(behandlingResultatstruktur.beregnetTilkjentYtelse)}</Label>
             </Column>
           </Row>
         </>
@@ -160,9 +158,9 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
             <FlexContainer>
               <FlexRow>
                 <FlexColumn>
-                  <Element className={!erIOverstyringsmodus || overrideReadOnly ? '' : styles.text}>
+                  <Label size="small" className={!erIOverstyringsmodus || overrideReadOnly ? '' : styles.text}>
                     <FormattedMessage id="BeregningEngangsstonadForm.BeregnetEngangsstonad" />
-                  </Element>
+                  </Label>
                 </FlexColumn>
                 <FlexColumn>
                   <InputField
@@ -178,9 +176,9 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
                   />
                 </FlexColumn>
                 <FlexColumn>
-                  <Element className={!erIOverstyringsmodus || overrideReadOnly ? '' : styles.text}>
+                  <Label size="small" className={!erIOverstyringsmodus || overrideReadOnly ? '' : styles.text}>
                     <FormattedMessage id="BeregningEngangsstonadForm.Kroner" />
-                  </Element>
+                  </Label>
                 </FlexColumn>
               </FlexRow>
             </FlexContainer>

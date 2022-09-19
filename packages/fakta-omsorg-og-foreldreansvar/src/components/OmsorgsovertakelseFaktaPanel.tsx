@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Normaltekst, Element } from 'nav-frontend-typografi';
+import { BodyShort, Label } from '@navikt/ds-react';
 
 import { Datepicker } from '@navikt/ft-form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -76,8 +76,8 @@ const OmsorgsovertakelseFaktaPanel: FunctionComponent<OwnProps> & StaticFunction
           </Column>
           )}
         <Column xs="4">
-          <Element><FormattedMessage id="OmsorgOgForeldreansvarFaktaForm.NrOfChildren" /></Element>
-          <Normaltekst>{antallBarn}</Normaltekst>
+          <Label size="small"><FormattedMessage id="OmsorgOgForeldreansvarFaktaForm.NrOfChildren" /></Label>
+          <BodyShort size="small">{antallBarn}</BodyShort>
         </Column>
       </Row>
     </FaktaGruppe>

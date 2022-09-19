@@ -2,10 +2,10 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import moment from 'moment';
-import Panel from 'nav-frontend-paneler';
+import {
+  Detail, Heading, Panel, BodyShort,
+} from '@navikt/ds-react';
 import { Column, Row } from 'nav-frontend-grid';
-import { SkjemaGruppe } from 'nav-frontend-skjema';
-import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
 
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -132,7 +132,7 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
       onSubmit={(values: Required<FormValues>) => submitCallback(transformValues(values))}
       setDataOnUnmount={setFormData}
     >
-      <Undertittel>{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.Soknadsfrist' })}</Undertittel>
+      <Heading size="small">{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.Soknadsfrist' })}</Heading>
       <span className="typo-normal">
         <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart1" />
         <span className={styles.days}>
@@ -146,26 +146,27 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
       <Row>
         <Column xs="6">
           <Panel className={styles.panel}>
-            <SkjemaGruppe legend={intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.Consider' })}>
-              <ul className={styles.hyphen}>
-                <li><FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question1" /></li>
-                <li><FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question2" /></li>
-                <li><FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question3" /></li>
-              </ul>
-            </SkjemaGruppe>
+            <Heading size="small">
+              {intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.Consider' })}
+            </Heading>
+            <ul className={styles.hyphen}>
+              <li><FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question1" /></li>
+              <li><FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question2" /></li>
+              <li><FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question3" /></li>
+            </ul>
           </Panel>
         </Column>
         <Column xs="6">
           <Panel className={styles.panelDates}>
             <Row>
               <Column xs="6">
-                <Undertekst>{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.MottattDato' })}</Undertekst>
+                <Detail size="small">{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.MottattDato' })}</Detail>
                 <span className="typo-normal">
                   {soknad.mottattDato && <DateLabel dateString={soknad.mottattDato} />}
                 </span>
               </Column>
               <Column xs="6">
-                {textCode && <Undertekst>{intl.formatMessage({ id: textCode })}</Undertekst>}
+                {textCode && <Detail size="small">{intl.formatMessage({ id: textCode })}</Detail>}
                 <span className="typo-normal">
                   {dato && <DateLabel dateString={dato} />}
                 </span>
@@ -174,7 +175,7 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
             <VerticalSpacer twentyPx />
             <Row>
               <Column xs="11">
-                <Undertekst>{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.ExplanationFromApplication' })}</Undertekst>
+                <Detail size="small">{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.ExplanationFromApplication' })}</Detail>
                 <span className="typo-normal">
                   {soknad.begrunnelseForSenInnsending || '-'}
                 </span>
@@ -214,7 +215,7 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
         </Column>
       </Row>
       {readOnly && erVilkarOk === false && !!behandlingsresultat?.avslagsarsak && (
-        <Normaltekst>{getKodeverknavn(behandlingsresultat.avslagsarsak, KodeverkType.AVSLAGSARSAK, vilkarType.SOKNADFRISTVILKARET)}</Normaltekst>
+        <BodyShort size="small">{getKodeverknavn(behandlingsresultat.avslagsarsak, KodeverkType.AVSLAGSARSAK, vilkarType.SOKNADFRISTVILKARET)}</BodyShort>
       )}
       <VerticalSpacer sixteenPx />
       <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />

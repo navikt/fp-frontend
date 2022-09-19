@@ -5,7 +5,7 @@ import {
 } from 'redux-form';
 import { createSelector } from 'reselect';
 import { FormattedMessage, IntlShape } from 'react-intl';
-import { Undertekst } from 'nav-frontend-typografi';
+import { Detail } from '@navikt/ds-react';
 
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import overforingArsakCodes from '@fpsak-frontend/kodeverk/src/overforingArsakCodes';
@@ -126,9 +126,9 @@ export const SykdomOgSkadePeriode: FunctionComponent<PureOwnProps & MappedOwnPro
       {formProps.error}
       <FlexRow wrap>
         <FlexColumn className={styles.fieldColumn}>
-          <Undertekst>
+          <Detail size="small">
             <FormattedMessage id="UttakInfoPanel.FastsettResultat" />
-          </Undertekst>
+          </Detail>
           <VerticalSpacer fourPx />
           <RadioGroupField
             direction="vertical"

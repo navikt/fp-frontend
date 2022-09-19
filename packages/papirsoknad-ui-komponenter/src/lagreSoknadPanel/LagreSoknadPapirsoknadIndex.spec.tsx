@@ -4,7 +4,7 @@ import {
 } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
-import Modal from 'nav-frontend-modal';
+import { Modal } from '@navikt/ds-react';
 
 import * as stories from './LagreSoknadPapirsoknadIndex.stories';
 

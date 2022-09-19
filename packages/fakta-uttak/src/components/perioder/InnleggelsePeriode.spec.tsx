@@ -2,6 +2,7 @@ import React from 'react';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { RadioGroupField } from '@fpsak-frontend/form';
 import sinon from 'sinon';
+import { Detail } from '@navikt/ds-react';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { InnleggelsePeriode } from './InnleggelsePeriode';
@@ -31,7 +32,7 @@ describe('<InnleggelsePeriode>', () => {
       onSubmit={sinon.spy()}
     />, messages);
 
-    const undertekst = wrapper.find('Undertekst');
+    const undertekst = wrapper.find(Detail);
     const radioGroupField = wrapper.find('RadioGroupField');
     const radioGroupFieldComponent = wrapper.find(RadioGroupField).dive();
     expect(radioGroupFieldComponent.children()).toHaveLength(2);

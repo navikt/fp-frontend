@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { Hovedknapp } from 'nav-frontend-knapper';
-
+import { Button } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 import { ariaCheck, isRequiredMessage } from '@navikt/ft-form-validators';
+
 import { hasBehandlingFormErrorsOfType } from '@fpsak-frontend/form';
 
 import { isDirty as reduxIsDirty, isSubmitting as reduxIsSubmitting } from 'redux-form';
@@ -46,14 +46,15 @@ export const ProsessStegSubmitButton: FunctionComponent<PureOwnProps & MappedOwn
 }) => {
   if (!isReadOnly) {
     return (
-      <Hovedknapp
-        mini
-        spinner={isSubmitting}
+      <Button
+        size="small"
+        variant="primary"
+        loading={isSubmitting}
         disabled={isDisabled(isDirty, isSubmitting, isSubmittable, hasEmptyRequiredFields)}
         onClick={ariaCheck}
       >
         {text || intl.formatMessage({ id: 'SubmitButton.ConfirmInformation' })}
-      </Hovedknapp>
+      </Button>
     );
   }
   return null;

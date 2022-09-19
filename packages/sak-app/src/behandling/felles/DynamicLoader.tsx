@@ -1,7 +1,7 @@
 import React, {
   Component, ErrorInfo, ComponentType, useState, useCallback,
 } from 'react';
-import { Element } from 'nav-frontend-typografi';
+import { Label } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { ErrorPage } from '@navikt/ft-sak-infosider';
 import { captureException, withScope } from '@sentry/browser';
@@ -93,7 +93,7 @@ const DynamicLoader = <Props, >({
   return (
     <React.Suspense fallback={<LoadingPanel />}>
       <>
-        {!visPublisertModul && (<Element style={{ color: 'red' }}>Micro frontend</Element>)}
+        {!visPublisertModul && (<Label size="small" style={{ color: 'red' }}>Micro frontend</Label>)}
         <ErrorBoundary>
           <SelectedComp {...props} />
         </ErrorBoundary>

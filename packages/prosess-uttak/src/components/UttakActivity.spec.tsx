@@ -2,6 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
+import { Button } from '@navikt/ds-react';
 
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -74,10 +75,8 @@ describe('<UttakActivity>', () => {
     expect(selectAvslag).toHaveLength(1);
     const textArea = wrapper.find('TextAreaField');
     expect(textArea).toHaveLength(1);
-    const updateKnapp = wrapper.find('Hovedknapp');
-    expect(updateKnapp).toHaveLength(1);
-    const cancelKnapp = wrapper.find('Knapp');
-    expect(cancelKnapp).toHaveLength(1);
+    const knapper = wrapper.find(Button);
+    expect(knapper).toHaveLength(2);
   });
 
   it('skal rendre rows and columns', () => {
@@ -164,10 +163,8 @@ describe('<UttakActivity>', () => {
     expect(selectAvslag).toHaveLength(1);
     const textArea = wrapper.find('TextAreaField');
     expect(textArea).toHaveLength(1);
-    const updateKnapp = wrapper.find('Hovedknapp');
-    expect(updateKnapp).toHaveLength(1);
-    const cancelKnapp = wrapper.find('Knapp');
-    expect(cancelKnapp).toHaveLength(1);
+    const knapper = wrapper.find(Button);
+    expect(knapper).toHaveLength(2);
   });
 
   it('skal rendre uttakactivity med aksjonspunkt', () => {
@@ -212,10 +209,8 @@ describe('<UttakActivity>', () => {
     expect(selectAvslag).toHaveLength(1);
     const textArea = wrapper.find('TextAreaField');
     expect(textArea).toHaveLength(1);
-    const updateKnapp = wrapper.find('Hovedknapp');
-    expect(updateKnapp).toHaveLength(1);
-    const cancelKnapp = wrapper.find('Knapp');
-    expect(cancelKnapp).toHaveLength(1);
+    const knapper = wrapper.find(Button);
+    expect(knapper).toHaveLength(2);
   });
 
   it('skal rendre uttakactivity readonly', () => {

@@ -1,8 +1,7 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { Container } from 'nav-frontend-grid';
-import Panel from 'nav-frontend-paneler';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Heading, Panel } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 import { AlleKodeverk, Fagsak } from '@navikt/ft-types';
 import { FagsakYtelseType } from '@navikt/ft-kodeverk';
@@ -60,7 +59,7 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
     <RawIntlProvider value={intl}>
       <Panel className={styles.panel}>
         <Container fluid>
-          <Undertittel><FormattedMessage id="Registrering.RegistrereSoknad" /></Undertittel>
+          <Heading size="small"><FormattedMessage id="Registrering.RegistrereSoknad" /></Heading>
           <VerticalSpacer sixteenPx />
           {!readOnly && (
             <AksjonspunktHelpTextHTML>

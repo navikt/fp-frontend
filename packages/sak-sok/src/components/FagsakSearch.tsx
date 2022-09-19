@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 
 import { Fagsak, AlleKodeverk } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -45,7 +45,7 @@ const FagsakSearch: FunctionComponent<OwnProps> = ({
     />
 
     {searchResultReceived && fagsaker.length === 0 && (
-      <Normaltekst className={styles.label}><FormattedMessage id="FagsakSearch.ZeroSearchResults" /></Normaltekst>
+      <BodyShort size="small" className={styles.label}><FormattedMessage id="FagsakSearch.ZeroSearchResults" /></BodyShort>
     )}
 
     <VerticalSpacer eightPx />

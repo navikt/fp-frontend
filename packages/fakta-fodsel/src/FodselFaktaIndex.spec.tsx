@@ -25,7 +25,7 @@ describe('<FodselFaktaIndex>', () => {
     expect(screen.getByText('01.01.2019')).toBeInTheDocument();
     expect(screen.getByText('1')).toBeInTheDocument();
 
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
@@ -57,7 +57,7 @@ describe('<FodselFaktaIndex>', () => {
     expect(screen.getByText('Opplysninger om fødsel fra folkeregisteret')).toBeInTheDocument();
     expect(screen.getAllByText('10.01.2019')).toHaveLength(2);
 
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     expect(screen.getByText('Dokumentasjon av fødsel')).toBeInTheDocument();
 
@@ -115,7 +115,7 @@ describe('<FodselFaktaIndex>', () => {
     expect(screen.getByText('Opplysninger om fødsel fra folkeregisteret')).toBeInTheDocument();
     expect(screen.getAllByText('10.01.2019')).toHaveLength(2);
 
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     expect(screen.getByText('Dokumentasjon av fødsel')).toBeInTheDocument();
 
@@ -148,7 +148,7 @@ describe('<FodselFaktaIndex>', () => {
     expect(await screen.findByText('Vurder om vilkår for sykdom er oppfylt')).toBeInTheDocument();
     expect(screen.getByText('Sykdom')).toBeInTheDocument();
 
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
@@ -172,7 +172,7 @@ describe('<FodselFaktaIndex>', () => {
     expect(await screen.findByText('Vurder om vilkår for sykdom er oppfylt')).toBeInTheDocument();
     expect(screen.getByText('Sykdom')).toBeInTheDocument();
 
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 

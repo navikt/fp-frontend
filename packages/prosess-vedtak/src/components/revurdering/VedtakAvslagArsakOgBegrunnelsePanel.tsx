@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import { Label, BodyShort, Detail } from '@navikt/ds-react';
 
 import {
   AlleKodeverk, Vilkar, Behandlingsresultat,
@@ -70,10 +70,10 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
     <>
       {avslagsårsak && (
         <>
-          <Element><FormattedMessage id="VedtakForm.ArsakTilAvslag" /></Element>
-          <Normaltekst>
+          <Label size="small"><FormattedMessage id="VedtakForm.ArsakTilAvslag" /></Label>
+          <BodyShort size="small">
             {avslagsårsak}
-          </Normaltekst>
+          </BodyShort>
           <VerticalSpacer sixteenPx />
         </>
       )}
@@ -99,7 +99,7 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
       {erReadOnly && behandlingsresultat.avslagsarsakFritekst && (
         <span>
           <VerticalSpacer twentyPx />
-          <Undertekst><FormattedMessage id="VedtakForm.Fritekst" /></Undertekst>
+          <Detail size="small"><FormattedMessage id="VedtakForm.Fritekst" /></Detail>
           <VerticalSpacer eightPx />
           <div className={styles.fritekstItem}>{decodeHtmlEntity(behandlingsresultat.avslagsarsakFritekst)}</div>
         </span>

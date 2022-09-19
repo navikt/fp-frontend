@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Label, BodyShort } from '@navikt/ds-react';
 import { Column, Row } from 'nav-frontend-grid';
 
 import {
@@ -158,17 +158,17 @@ const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<PureOwnProps> & StaticF
           )}
           {(readOnly && vilkarType) && (
             <div className={styles.vilkarTypeReadOnly}>
-              <Element tag="span">
+              <Label size="small" as="span">
                 {(vilkarTypes.find((d) => d.kode === vilkarType) || {}).navn}
-              </Element>
+              </Label>
               {editedStatus.vilkarType
                 && <EditedIcon />}
             </div>
           )}
           <VerticalSpacer eightPx />
-          <Normaltekst>
+          <BodyShort size="small">
             {getDescriptionText(vilkarType)}
-          </Normaltekst>
+          </BodyShort>
         </FaktaGruppe>
       )}
     </>

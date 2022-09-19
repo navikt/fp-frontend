@@ -2,8 +2,8 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import {
-  Element, Normaltekst, Undertittel,
-} from 'nav-frontend-typografi';
+  Label, BodyShort, Heading,
+} from '@navikt/ds-react';
 import { Column, Row } from 'nav-frontend-grid';
 
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
@@ -152,13 +152,13 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setFormData}
     >
-      <Undertittel><FormattedMessage id={readOnly ? 'InnsynVedtakForm.Vedtak' : 'InnsynVedtakForm.ForslagVedtak'} /></Undertittel>
+      <Heading size="small"><FormattedMessage id={readOnly ? 'InnsynVedtakForm.Vedtak' : 'InnsynVedtakForm.ForslagVedtak'} /></Heading>
       <VerticalSpacer eightPx />
-      <Element><FormattedMessage id="InnsynVedtakForm.Resultat" /></Element>
-      <Normaltekst><FormattedMessage id={findResultTypeMessage(innsynResultatType)} /></Normaltekst>
+      <Label size="small"><FormattedMessage id="InnsynVedtakForm.Resultat" /></Label>
+      <BodyShort size="small"><FormattedMessage id={findResultTypeMessage(innsynResultatType)} /></BodyShort>
       <VerticalSpacer eightPx />
-      <Element><FormattedMessage id="InnsynVedtakForm.Vurdering" /></Element>
-      <Normaltekst className={styles.wordwrap}>{decodeHtmlEntity(apBegrunnelse)}</Normaltekst>
+      <Label size="small"><FormattedMessage id="InnsynVedtakForm.Vurdering" /></Label>
+      <BodyShort size="small" className={styles.wordwrap}>{decodeHtmlEntity(apBegrunnelse)}</BodyShort>
       <VerticalSpacer twentyPx />
       {(innsynResultatType !== InnsynResultatType.INNVILGET) && (
         <Row>

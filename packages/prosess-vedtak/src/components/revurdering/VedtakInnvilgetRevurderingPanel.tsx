@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import { Label, BodyShort, Detail } from '@navikt/ds-react';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
@@ -37,12 +37,12 @@ const VedtakInnvilgetRevurderingPanel: FunctionComponent<OwnProps> = ({
     {ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD && resultatstruktur && 'antallBarn' in resultatstruktur && (
       <Row>
         <Column xs="4">
-          <Undertekst><FormattedMessage id="VedtakForm.beregnetTilkjentYtelse" /></Undertekst>
-          <Element>{formatCurrencyWithKr((resultatstruktur as BeregningsresultatEs).beregnetTilkjentYtelse)}</Element>
+          <Detail size="small"><FormattedMessage id="VedtakForm.beregnetTilkjentYtelse" /></Detail>
+          <Label size="small">{formatCurrencyWithKr((resultatstruktur as BeregningsresultatEs).beregnetTilkjentYtelse)}</Label>
         </Column>
         <Column xs="8">
-          <Undertekst><FormattedMessage id="VedtakForm.AntallBarn" /></Undertekst>
-          <Element>{resultatstruktur.antallBarn}</Element>
+          <Detail size="small"><FormattedMessage id="VedtakForm.AntallBarn" /></Detail>
+          <Label size="small">{resultatstruktur.antallBarn}</Label>
         </Column>
       </Row>
     )}
@@ -52,10 +52,10 @@ const VedtakInnvilgetRevurderingPanel: FunctionComponent<OwnProps> = ({
           <>
             <Row>
               <Column xs="4">
-                <Element><FormattedMessage id="VedtakForm.RevurderingFP.Aarsak" /></Element>
-                <Normaltekst>
+                <Label size="small"><FormattedMessage id="VedtakForm.RevurderingFP.Aarsak" /></Label>
+                <BodyShort size="small">
                   {revurderingsÅrsakString}
-                </Normaltekst>
+                </BodyShort>
               </Column>
             </Row>
             <VerticalSpacer eightPx />

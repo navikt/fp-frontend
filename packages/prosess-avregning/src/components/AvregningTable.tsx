@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classnames from 'classnames/bind';
 import moment from 'moment/moment';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyNoKr, getRangeOfMonths } from '@navikt/ft-utils';
@@ -99,9 +99,9 @@ const createColumns = (
 
 const tableTitle = (mottaker: Mottaker): ReactElement | null => (mottaker.mottakerType === mottakerTyper.ARBG
   ? (
-    <Normaltekst className={styles.tableTitle}>
+    <BodyShort size="small" className={styles.tableTitle}>
       {`${mottaker.mottakerNavn} (${mottaker.mottakerNummer})`}
-    </Normaltekst>
+    </BodyShort>
   )
   : null);
 

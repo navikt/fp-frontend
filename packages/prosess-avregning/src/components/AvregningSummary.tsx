@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Label, BodyShort } from '@navikt/ds-react';
 
 import { DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr } from '@navikt/ft-utils';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -30,7 +30,7 @@ const AvregningSummary: FunctionComponent<OwnProps> = ({
   ingenPerioderMedAvvik,
 }) => (
   <>
-    <Normaltekst className={styles.summaryTitle}><FormattedMessage id="Avregning.bruker" /></Normaltekst>
+    <BodyShort size="small" className={styles.summaryTitle}><FormattedMessage id="Avregning.bruker" /></BodyShort>
     <VerticalSpacer eightPx />
     <div className={styles.infoSummary}>
       {ingenPerioderMedAvvik && (
@@ -42,18 +42,18 @@ const AvregningSummary: FunctionComponent<OwnProps> = ({
         <>
           <Row>
             <Column xs="12">
-              <Element>
+              <Label size="small">
                 { `${moment(fom).format(DDMMYYYY_DATE_FORMAT)} - ${moment(tom).format(DDMMYYYY_DATE_FORMAT)}`}
-              </Element>
+              </Label>
             </Column>
           </Row>
           <div className={styles.resultSum}>
             <Row>
               <Column xs="3">
-                <Normaltekst className={styles.resultName}>
+                <BodyShort size="small" className={styles.resultName}>
                   <FormattedMessage id="Avregning.etterbetaling" />
                   :
-                </Normaltekst>
+                </BodyShort>
               </Column>
               <Column xs="2">
                 <span className={styles.number}>{ formatCurrencyNoKr(etterbetaling) }</span>
@@ -61,21 +61,21 @@ const AvregningSummary: FunctionComponent<OwnProps> = ({
             </Row>
             <Row className={styles.redNumbers}>
               <Column xs="3">
-                <Normaltekst className={styles.resultName}>
+                <BodyShort size="small" className={styles.resultName}>
                   <FormattedMessage id="Avregning.tilbakekreving" />
                   :
-                </Normaltekst>
+                </BodyShort>
               </Column>
               <Column xs="2">
                 <span className={feilutbetaling ? styles.redNumber : styles.positivNumber}>{ formatCurrencyNoKr(feilutbetaling) }</span>
               </Column>
               {inntrekk !== null && (
                 <Column xs="4">
-                  <Normaltekst>
+                  <BodyShort size="small">
                     <FormattedMessage id="Avregning.inntrekk" />
                     :
                     <span className={inntrekk ? styles.lastNumberRed : styles.lastNumberPositiv}>{ formatCurrencyNoKr(inntrekk) }</span>
-                  </Normaltekst>
+                  </BodyShort>
                 </Column>
               )}
             </Row>

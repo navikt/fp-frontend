@@ -115,7 +115,7 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
           requestApi={requestFpApi}
           hentFaktaPaneler={(props) => (
             <>
-              <SakenFaktaInitPanel {...props} />
+              <SakenFaktaInitPanel {...props} fagsak={fagsak} />
               <ArbeidOgInntektFaktaInitPanel
                 {...props}
                 saksnummer={fagsak.saksnummer}

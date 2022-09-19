@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
-import Modal from 'nav-frontend-modal';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Button, Modal, Heading } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk } from '@navikt/ft-types';
 import { Form } from '@navikt/ft-form-hooks';
@@ -54,51 +52,55 @@ const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps> = ({
   return (
     <Modal
       className={styles.modal}
-      isOpen={showModal}
-      contentLabel={intl.formatMessage({ id: 'Registrering.RegistrerVirksomhetModalForm.ModalDescription' })}
-      onRequestClose={closeEvent}
+      open={showModal}
+      aria-label={intl.formatMessage({ id: 'Registrering.RegistrerVirksomhetModalForm.ModalDescription' })}
+      onClose={closeEvent}
       closeButton={false}
       shouldCloseOnOverlayClick={false}
     >
-      <div className={styles.form}>
-        <Form
-          formMethods={formMethods}
-        >
-          <Undertittel><FormattedMessage id="Registrering.RegistrerVirksomhetModalForm.Title" /></Undertittel>
-          <VerticalSpacer twentyPx />
-          <VirksomhetIdentifikasjonPanel
-            readOnly={readOnly}
-            alleKodeverk={alleKodeverk}
-          />
-          <VirksomhetTypeNaringPanel
-            readOnly={readOnly}
-            alleKodeverk={alleKodeverk}
-          />
-          <VirksomhetStartetEndretPanel readOnly={readOnly} />
-          <VirksomhetRegnskapPanel readOnly={readOnly} />
-          <VerticalSpacer sixteenPx />
-          <VirksomhetRelasjonPanel readOnly={readOnly} />
-          <VerticalSpacer sixteenPx />
-          <Hovedknapp
-            htmlType="button"
-            onClick={formMethods.handleSubmit(onSubmit)}
-            disabled={readOnly}
-            className={styles.savebutton}
-            mini
+      <Modal.Content>
+        <div className={styles.form}>
+          <Form
+            formMethods={formMethods}
           >
-            <FormattedMessage id="Registrering.RegistrerVirksomhetModalForm.Save" />
-          </Hovedknapp>
-          <Knapp
-            htmlType="button"
-            onClick={closeEvent}
-            disabled={readOnly}
-            className={styles.cancelbutton}
-            mini
-          >
-            <FormattedMessage id="Registrering.RegistrerVirksomhetModalForm.Cancel" />
-          </Knapp>
-        </Form>
-      </div>
+            <Heading size="small"><FormattedMessage id="Registrering.RegistrerVirksomhetModalForm.Title" /></Heading>
+            <VerticalSpacer twentyPx />
+            <VirksomhetIdentifikasjonPanel
+              readOnly={readOnly}
+              alleKodeverk={alleKodeverk}
+            />
+            <VirksomhetTypeNaringPanel
+              readOnly={readOnly}
+              alleKodeverk={alleKodeverk}
+            />
+            <VirksomhetStartetEndretPanel readOnly={readOnly} />
+            <VirksomhetRegnskapPanel readOnly={readOnly} />
+            <VerticalSpacer sixteenPx />
+            <VirksomhetRelasjonPanel readOnly={readOnly} />
+            <VerticalSpacer sixteenPx />
+            <Button
+              size="small"
+              variant="primary"
+              onClick={formMethods.handleSubmit(onSubmit)}
+              disabled={readOnly}
+              className={styles.savebutton}
+              type="button"
+            >
+              <FormattedMessage id="Registrering.RegistrerVirksomhetModalForm.Save" />
+            </Button>
+            <Button
+              size="small"
+              variant="secondary"
+              onClick={closeEvent}
+              disabled={readOnly}
+              className={styles.cancelbutton}
+              type="button"
+            >
+              <FormattedMessage id="Registrering.RegistrerVirksomhetModalForm.Cancel" />
+            </Button>
+          </Form>
+        </div>
+      </Modal.Content>
     </Modal>
   );
 };

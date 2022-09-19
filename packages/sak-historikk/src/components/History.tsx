@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo, useState } from 'react';
 import { Location } from 'history';
 import moment from 'moment';
 import { WrappedComponentProps } from 'react-intl';
-import { Checkbox } from 'nav-frontend-skjema';
+import { Checkbox } from '@navikt/ds-react';
 
 import { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@fpsak-frontend/types';
 import HistorikkAktor from '@fpsak-frontend/kodeverk/src/historikkAktor';
@@ -260,9 +260,11 @@ const History: FunctionComponent<OwnProps & WrappedComponentProps> = ({
           <FlexRow>
             <FlexColumn className={styles.pushRight}>
               <Checkbox
-                label={intl.formatMessage({ id: 'History.FiltrerPaBehandling' })}
+                size="small"
                 onChange={() => setSkalSortertePaBehandling(!skalSortertePaValgtBehandling)}
-              />
+              >
+                {intl.formatMessage({ id: 'History.FiltrerPaBehandling' })}
+              </Checkbox>
             </FlexColumn>
           </FlexRow>
         </FlexContainer>

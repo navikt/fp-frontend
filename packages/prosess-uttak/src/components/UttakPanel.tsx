@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { createSelector } from 'reselect';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Alert, Heading } from '@navikt/ds-react';
 
 import { omitOne } from '@navikt/ft-utils';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import AlertStripe from 'nav-frontend-alertstriper';
 import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import {
@@ -137,9 +136,9 @@ export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & W
   ...formProps
 }) => (
   <>
-    <Undertittel>
+    <Heading size="small">
       <FormattedMessage id="UttakPanel.Title" />
-    </Undertittel>
+    </Heading>
     <VerticalSpacer twentyPx />
     {aksjonspunkter.length > 0 && (
       <>
@@ -264,7 +263,7 @@ const checkMaxDager = (uttaksresultatActivity: UttaksresultatActivity[], stonads
 
         errors = {
           _error: (
-            <AlertStripe type="advarsel" className={styles.marginTop}>
+            <Alert size="small" variant="warning" className={styles.marginTop}>
               <FormattedMessage
                 id="UttakPanel.NegativeSaldo"
                 values={{
@@ -272,7 +271,7 @@ const checkMaxDager = (uttaksresultatActivity: UttaksresultatActivity[], stonads
                   days: minsteSaldo * -1,
                 }}
               />
-            </AlertStripe>
+            </Alert>
           ),
         };
       }
@@ -285,14 +284,14 @@ const checkFlerbarnsMaksDager = (stonadskonto: UttakStonadskontoer['stonadskonto
   if (stonadskonto.FLERBARNSDAGER && !stonadskonto.FLERBARNSDAGER.gyldigForbruk) {
     errors = {
       _error:
-  <AlertStripe type="advarsel" className={styles.marginTop}>
+  <Alert size="small" variant="warning" className={styles.marginTop}>
     <FormattedMessage
       id="UttakPanel.InvalidTrekkDagerFlerbarnsdager"
       values={{
         maxDays: stonadskonto.FLERBARNSDAGER.maxDager,
       }}
     />
-  </AlertStripe>,
+  </Alert>,
     };
   }
   return errors;
@@ -306,14 +305,14 @@ const checkValidStonadKonto = (uttakPerioder: UttaksresultatActivity[], stonadsk
     if (ikkeGyldigKonto && ikkeGyldigKonto.length > 0) {
       errors = {
         _error:
-  <AlertStripe type="advarsel" className={styles.marginTop}>
+  <Alert size="small" variant="warning" className={styles.marginTop}>
     <FormattedMessage
       id="UttakPanel.InvalidStonadskonto"
       values={{
         konto: uttakPeriodeNavn[ikkeGyldigKonto[0].stønadskontoType],
       }}
     />
-  </AlertStripe>,
+  </Alert>,
       };
     }
   });

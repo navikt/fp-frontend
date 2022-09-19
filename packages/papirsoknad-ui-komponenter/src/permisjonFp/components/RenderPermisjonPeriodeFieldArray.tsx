@@ -2,9 +2,8 @@ import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 import moment from 'moment';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { UseFormGetValues } from 'react-hook-form';
-import { Element } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
-import AlertStripe from 'nav-frontend-alertstriper';
+import { Label, Alert } from '@navikt/ds-react';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
@@ -216,9 +215,9 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                       </FlexColumn>
                     )}
                     <FlexColumn className={styles.smalHeader}>
-                      <Element className={visEllerSkulOverskriftStyle}>
+                      <Label size="small" className={visEllerSkulOverskriftStyle}>
                         <FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />
-                      </Element>
+                      </Label>
                       <CheckboxField
                         readOnly={readOnly}
                         name={`${namePart1}.flerbarnsdager`}
@@ -226,9 +225,9 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                       />
                     </FlexColumn>
                     <FlexColumn className={styles.smalHeader}>
-                      <Element className={visEllerSkulOverskriftStyle}>
+                      <Label size="small" className={visEllerSkulOverskriftStyle}>
                         <FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />
-                      </Element>
+                      </Label>
                       <CheckboxField
                         readOnly={readOnly}
                         name={`${namePart1}.harSamtidigUttak`}
@@ -260,9 +259,9 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                   {periodeFomForTidlig && (
                     <>
                       <FlexRow wrap>
-                        <AlertStripe type="advarsel">
+                        <Alert size="small" variant="warning">
                           <FormattedMessage id="Registrering.Permisjon.PeriodeFomForTidlig" />
-                        </AlertStripe>
+                        </Alert>
                       </FlexRow>
                       <VerticalSpacer sixteenPx />
                     </>

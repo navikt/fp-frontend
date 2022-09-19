@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
-import { Element } from 'nav-frontend-typografi';
+import { Label } from '@navikt/ds-react';
 
 import { findHendelseText, findResultatText } from './felles/historikkUtils';
 import Skjermlenke from './felles/Skjermlenke';
@@ -24,12 +24,12 @@ const HistorikkMalType2: FunctionComponent<HistorikkMal & WrappedComponentProps>
         createLocationForSkjermlenke={createLocationForSkjermlenke}
       />
       {historikkinnslagDeler[0].resultat && historikkinnslagDeler[0].hendelse && (
-        <Element className="snakkeboble-panel__tekst">
+        <Label size="small" className="snakkeboble-panel__tekst">
           {`${findHendelseText(historikkinnslagDeler[0].hendelse, getKodeverknavn)}: ${findResultatText(historikkinnslagDeler[0].resultat, intl)}`}
-        </Element>
+        </Label>
       )}
       {!historikkinnslagDeler[0].resultat && historikkinnslagDeler[0].hendelse && (
-        <Element className="snakkeboble-panel__tekst">{findHendelseText(historikkinnslagDeler[0].hendelse, getKodeverknavn)}</Element>
+        <Label size="small" className="snakkeboble-panel__tekst">{findHendelseText(historikkinnslagDeler[0].hendelse, getKodeverknavn)}</Label>
       )}
     </>
   );

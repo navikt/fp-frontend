@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Label, BodyShort } from '@navikt/ds-react';
 
 import { ProsessBeregningsgrunnlagAksjonspunktCode } from '@navikt/ft-prosess-beregningsgrunnlag';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -91,19 +91,19 @@ const formaterAksjonspunkt = (aksjonspunkt: HistorikkInnslagAksjonspunkt, intl: 
 
   if (aksjonspunkt.godkjent) {
     return (
-      <Normaltekst>
+      <BodyShort size="small">
         {aksjonspktText && `${formatMessage({ id: aksjonspktText })} ${formatMessage({ id: 'Historikk.godkjent' })}`}
         {!aksjonspktText && formatMessage({ id: 'Historikk.godkjentKomplett' })}
-      </Normaltekst>
+      </BodyShort>
     );
   }
   return (
     <span>
-      <Element>
+      <Label size="small">
         {aksjonspktText && `${formatMessage({ id: aksjonspktText })} ${formatMessage({ id: 'Historikk.ikkeGodkjent' })}`}
         {!aksjonspktText && formatMessage({ id: 'Historikk.ikkeGodkjentKomplett' })}
-      </Element>
-      <Normaltekst>{decodeHtmlEntity(aksjonspunkt.aksjonspunktBegrunnelse)}</Normaltekst>
+      </Label>
+      <BodyShort size="small">{decodeHtmlEntity(aksjonspunkt.aksjonspunktBegrunnelse)}</BodyShort>
     </span>
   );
 };
@@ -122,7 +122,7 @@ const HistorikkMalType3: FunctionComponent<HistorikkMal & WrappedComponentProps>
       <div key={`totrinnsvurdering${index + 1}`}>
         {historikkinnslagDel.hendelse && (
           <>
-            <Element>{findHendelseText(historikkinnslagDel.hendelse, getKodeverknavn)}</Element>
+            <Label size="small">{findHendelseText(historikkinnslagDel.hendelse, getKodeverknavn)}</Label>
             <VerticalSpacer fourPx />
           </>
         )}

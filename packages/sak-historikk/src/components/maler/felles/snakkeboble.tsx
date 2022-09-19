@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames/bind';
-import { Undertekst } from 'nav-frontend-typografi';
+import { Detail } from '@navikt/ds-react';
 import { Image } from '@navikt/ft-ui-komponenter';
 
 import HistorikkAktor from '@fpsak-frontend/kodeverk/src/historikkAktor';
@@ -89,9 +89,9 @@ const Snakkeboble: FunctionComponent<OwnProps> = ({
       <i className={snakkeboblePilCls(aktoer)} />
     </div>
     <div className={snakkeboblePanelCls(aktoer)}>
-      <Undertekst className={styles['snakkeboble-panel__dato']}>
+      <Detail size="small" className={styles['snakkeboble-panel__dato']}>
         {`${formatDate(dato)} // ${rolleNavn} ${opprettetAv || ''}`}
-      </Undertekst>
+      </Detail>
       {children}
     </div>
   </div>

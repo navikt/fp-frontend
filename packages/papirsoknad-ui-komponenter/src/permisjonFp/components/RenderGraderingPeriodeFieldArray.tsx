@@ -2,9 +2,8 @@ import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 import moment from 'moment/moment';
 import { UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Element } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
-import AlertStripe from 'nav-frontend-alertstriper';
+import { Alert, Label } from '@navikt/ds-react';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow, AvsnittSkiller,
 } from '@navikt/ft-ui-komponenter';
@@ -233,9 +232,9 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                   </FlexColumn>
                   <FlexColumn>
                     <div className={styles.graderesHeader}>
-                      <Element>
+                      <Label size="small">
                         <FormattedMessage id="Registrering.Permisjon.Gradering.SkalGraderes" />
-                      </Element>
+                      </Label>
                     </div>
                     <CheckboxField
                       name={`${namePart1}.skalGraderes`}
@@ -244,9 +243,9 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                   </FlexColumn>
                   <FlexColumn>
                     <div className={styles.smalHeader}>
-                      <Element>
+                      <Label size="small">
                         <FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />
-                      </Element>
+                      </Label>
                       <CheckboxField
                         readOnly={readOnly}
                         name={`${namePart1}.flerbarnsdager`}
@@ -256,9 +255,9 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                   </FlexColumn>
                   <FlexColumn>
                     <div className={styles.smalHeader}>
-                      <Element>
+                      <Label size="small">
                         <FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />
-                      </Element>
+                      </Label>
                     </div>
                     <CheckboxField
                       name={`${namePart1}.harSamtidigUttak`}
@@ -287,9 +286,9 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                 {periodeFomForTidlig && (
                   <div>
                     <FlexRow wrap>
-                      <AlertStripe type="advarsel">
+                      <Alert size="small" variant="warning">
                         <FormattedMessage id="Registrering.Permisjon.PeriodeFomForTidlig" />
-                      </AlertStripe>
+                      </Alert>
                     </FlexRow>
                     <VerticalSpacer eightPx />
                   </div>

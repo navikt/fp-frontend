@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classnames from 'classnames/bind';
 import { Column, Row } from 'nav-frontend-grid';
-import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import { BodyShort, Detail } from '@navikt/ds-react';
 
 import stonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
 import { Stonadskonto } from '@fpsak-frontend/types';
@@ -72,17 +72,17 @@ const TimeLineTab: FunctionComponent<OwnProps> = ({
         >
           <Column>
             <Row>
-              <Undertekst>
+              <Detail size="small">
                 <FormattedMessage
                   id={findKorrektLabelForKvote(stonadskonto.kontonavn)}
                   values={{
                     uker: Math.floor(stonadskonto.kontoinfo.maxDager / 5),
                   }}
                 />
-              </Undertekst>
+              </Detail>
             </Row>
             <Row>
-              <Normaltekst>
+              <BodyShort size="small">
                 <FormattedMessage
                   id="TimeLineTab.Stonadinfo.UkerDager"
                   values={{
@@ -91,7 +91,7 @@ const TimeLineTab: FunctionComponent<OwnProps> = ({
                     b: (chunks: any) => <b>{chunks}</b>,
                   }}
                 />
-              </Normaltekst>
+              </BodyShort>
             </Row>
           </Column>
         </button>

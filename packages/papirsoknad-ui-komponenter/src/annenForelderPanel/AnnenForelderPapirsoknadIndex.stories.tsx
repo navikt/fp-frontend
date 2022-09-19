@@ -3,10 +3,10 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
+import { Button } from '@navikt/ds-react';
 
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
-import { Hovedknapp } from 'nav-frontend-knapper';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import AnnenForelderPapirsoknadIndex from './AnnenForelderPapirsoknadIndex';
 
@@ -34,9 +34,9 @@ const Template: Story<{
         fagsakPersonnummer="07078518434"
       />
       <VerticalSpacer fourtyPx />
-      <Hovedknapp htmlType="submit">
+      <Button size="small" variant="primary">
         Lagreknapp (Kun for test)
-      </Hovedknapp>
+      </Button>
     </Form>
   );
 };

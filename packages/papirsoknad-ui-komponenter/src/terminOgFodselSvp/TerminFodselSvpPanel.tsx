@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 import { createIntl } from '@navikt/ft-utils';
+import { Heading } from '@navikt/ds-react';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Datepicker } from '@navikt/ft-form-hooks';
 import {
@@ -9,7 +10,6 @@ import {
   required,
 } from '@navikt/ft-form-validators';
 
-import { Undertittel } from 'nav-frontend-typografi';
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
@@ -32,9 +32,9 @@ const TerminFodselSvpPanel: FunctionComponent<OwnProps> = ({
   readOnly,
 }) => (
   <BorderBox>
-    <Undertittel>
+    <Heading size="small">
       {intl.formatMessage({ id: 'TerminFodselSvpPanel.TerminOgFodsel' })}
-    </Undertittel>
+    </Heading>
     <VerticalSpacer sixteenPx />
     <Row>
       <Column xs="3">

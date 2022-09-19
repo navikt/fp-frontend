@@ -4,9 +4,9 @@ import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk } from '@navikt/ft-types';
 import { KodeverkType } from '@navikt/ft-kodeverk';
+import { Heading } from '@navikt/ds-react';
 
 import { required } from '@navikt/ft-form-validators';
-import { Undertittel } from 'nav-frontend-typografi';
 import UtenlandsOppholdField, { FormValues as FormValuesFieldArray } from './UtenlandsOppholdField';
 
 export type FormValues = {
@@ -52,7 +52,7 @@ const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
 
   return (
     <BorderBox>
-      <Undertittel><FormattedMessage id="Registrering.Opphold" /></Undertittel>
+      <Heading size="small"><FormattedMessage id="Registrering.Opphold" /></Heading>
       <VerticalSpacer sixteenPx />
       <RadioGroupPanel
         name="oppholdINorge"

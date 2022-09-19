@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { BeregningsgrunnlagAndel, BeregningsgrunnlagPeriodeProp } from '@fpsak-frontend/types';
-import { Normaltekst, Element } from 'nav-frontend-typografi';
+import { BodyShort, Label } from '@navikt/ds-react';
 import { Column, Row } from 'nav-frontend-grid';
 import { formatCurrencyNoKr } from '@navikt/ft-utils';
 import {
@@ -33,16 +33,16 @@ const girKap8Besteberegning = (kap8Beregning: number, kap1473Beregning: number):
 const headerColumnContent = [
   // For å lage tom kolonne først
   <div key="TomKolNøkkel" />,
-  <Element key="Kap8Nøkkel">
+  <Label size="small" key="Kap8Nøkkel">
     {' '}
     <FormattedMessage id="ResultatGrunnlag.BeregningEtterKap8" />
     {' '}
-  </Element>,
-  <Element key="BBNøkkel">
+  </Label>,
+  <Label size="small" key="BBNøkkel">
     {' '}
     <FormattedMessage id="ResultatGrunnlag.BeregningEtterBesteberegning" />
     {' '}
-  </Element>,
+  </Label>,
 ];
 
 /**
@@ -60,19 +60,19 @@ const BesteberegningResultatGrunnlagPanel: FunctionComponent<OwnProps> = ({
         <Table headerColumnContent={headerColumnContent} noHover>
           <TableRow>
             <TableColumn>
-              <Normaltekst>
+              <BodyShort size="small">
                 <FormattedMessage id="ResultatGrunnlag.BruttoBeregningsgrunnlag" />
-              </Normaltekst>
+              </BodyShort>
             </TableColumn>
             <TableColumn>
-              <Normaltekst>
+              <BodyShort size="small">
                 {formatCurrencyNoKr(finnKap8Beregning(periode))}
-              </Normaltekst>
+              </BodyShort>
             </TableColumn>
             <TableColumn>
-              <Normaltekst>
+              <BodyShort size="small">
                 {formatCurrencyNoKr(finnBesteberegnet(besteMåneder))}
-              </Normaltekst>
+              </BodyShort>
             </TableColumn>
           </TableRow>
         </Table>
@@ -83,12 +83,12 @@ const BesteberegningResultatGrunnlagPanel: FunctionComponent<OwnProps> = ({
 
     <Row>
       <Column>
-        <Normaltekst>
+        <BodyShort size="small">
           {girKap8Besteberegning(finnKap8Beregning(periode), finnBesteberegnet(besteMåneder))
             && <FormattedMessage id="ResultatGrunnlag.Kap8GirBesteBeregning" />}
           {!girKap8Besteberegning(finnKap8Beregning(periode), finnBesteberegnet(besteMåneder))
             && <FormattedMessage id="ResultatGrunnlag.Kap1473GirBesteBeregning" />}
-        </Normaltekst>
+        </BodyShort>
       </Column>
     </Row>
     <VerticalSpacer twentyPx />

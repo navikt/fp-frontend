@@ -6,7 +6,7 @@ import {
 import dayjs from 'dayjs';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
-import Modal from 'nav-frontend-modal';
+import { Modal } from '@navikt/ds-react';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import * as stories from './ArbeidOgInntektFaktaIndex.stories';
 
@@ -54,7 +54,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(screen.getByText('01.10.2022 - 01.12.2022')).toBeInTheDocument();
     expect(screen.getByText('Inntekter (fra A-ordningen)')).toBeInTheDocument();
 
-    expect(screen.getByText('Lagre')).toBeDisabled();
+    expect(screen.getByText('Lagre').closest('button')).toBeDisabled();
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
     expect(screen.queryByText('Sett på vent')).not.toBeInTheDocument();
 
@@ -153,7 +153,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(screen.getByText('Tlf. 41925090')).toBeInTheDocument();
     expect(screen.getByText('Inntektsmelding er mottatt, men arbeidsforholdet er ikke registrert i A-ordningen')).toBeInTheDocument();
 
-    expect(screen.getByText('Lagre')).toBeDisabled();
+    expect(screen.getByText('Lagre').closest('button')).toBeDisabled();
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
     expect(screen.queryByText('Sett på vent')).not.toBeInTheDocument();
 

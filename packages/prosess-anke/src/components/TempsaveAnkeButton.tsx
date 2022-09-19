@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Button } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
 import { InjectedFormProps } from 'redux-form';
 
@@ -67,16 +67,17 @@ export const TempsaveAnkeButton: FunctionComponent<OwnProps> = ({
 }) => {
   if (!readOnly) {
     return (
-      <Hovedknapp
-        mini
-        htmlType="button"
-        spinner={spinner}
+      <Button
+        variant="primary"
+        size="small"
+        loading={spinner}
         onClick={handleSubmit((values: FormValues) => saveAnke(transformValues(
           values,
         )))}
+        type="button"
       >
         <FormattedMessage id="Ankebehandling.TempSaveButton" />
-      </Hovedknapp>
+      </Button>
     );
   }
   return null;

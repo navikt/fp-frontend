@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 import sinon from 'sinon';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Button } from '@navikt/ds-react';
 import { Row } from 'nav-frontend-grid';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -94,7 +94,7 @@ describe('<Uttak>', () => {
     expect(uttakTimeLine).toHaveLength(1);
     const uttakTimeLineData = wrapper.find(UttakTimeLineData);
     expect(uttakTimeLineData).toHaveLength(0);
-    const confirmKnapp = wrapper.find(Hovedknapp);
+    const confirmKnapp = wrapper.find(Button);
     expect(confirmKnapp).toHaveLength(0);
   });
 
@@ -151,7 +151,7 @@ describe('<Uttak>', () => {
     expect(uttakTimeLine).toHaveLength(1);
     const uttakTimeLineData = wrapper.find(UttakTimeLineData);
     expect(uttakTimeLineData).toHaveLength(1);
-    const confirmKnapp = wrapper.find(Hovedknapp);
+    const confirmKnapp = wrapper.find(Button);
     expect(confirmKnapp).toHaveLength(1);
     expect(confirmKnapp.first().prop('disabled')).toEqual(true);
   });
@@ -204,7 +204,7 @@ describe('<Uttak>', () => {
     expect(uttakTimeLine).toHaveLength(1);
     const uttakTimeLineData = wrapper.find(UttakTimeLineData);
     expect(uttakTimeLineData).toHaveLength(1);
-    const confirmKnapp = wrapper.find(Hovedknapp);
+    const confirmKnapp = wrapper.find(Button);
     expect(confirmKnapp).toHaveLength(0);
     const formattedMessage = wrapper.find(FormattedMessage);
     expect(formattedMessage).toHaveLength(1);
@@ -272,7 +272,7 @@ describe('<Uttak>', () => {
     expect(uttakTimeLine).toHaveLength(1);
     const uttakTimeLineData = wrapper.find(UttakTimeLineData);
     expect(uttakTimeLineData).toHaveLength(1);
-    const confirmKnapp = wrapper.find(Hovedknapp);
+    const confirmKnapp = wrapper.find(Button);
     expect(confirmKnapp).toHaveLength(1);
   });
 

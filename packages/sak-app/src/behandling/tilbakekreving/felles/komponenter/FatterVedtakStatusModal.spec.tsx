@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { RawIntlProvider } from 'react-intl';
-import Modal from 'nav-frontend-modal';
+import { Modal } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
 import FatterVedtakStatusModal from './FatterVedtakStatusModal';

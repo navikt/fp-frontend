@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { NedChevron, OppChevron } from 'nav-frontend-chevron';
+import { Expand, Collapse } from '@navikt/ds-icons';
 
 import styles from './bubbleText.less';
 
@@ -57,7 +57,7 @@ const BubbleText: FunctionComponent<OwnProps> = ({
         className={styles.clickableArea}
         title={intl.formatMessage({ id: expanded ? 'BubbleText.LukkeTekstfelt' : 'BubbleText.ApneTekstfelt' })}
       >
-        {expanded ? <OppChevron /> : <NedChevron />}
+        {expanded ? <Collapse /> : <Expand />}
       </a>
     </>
   );

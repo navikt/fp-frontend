@@ -5,7 +5,7 @@ import {
   FieldArray, formValueSelector, getFormSyncErrors, InjectedFormProps, reduxForm,
 } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import { Undertekst } from 'nav-frontend-typografi';
+import { Detail } from '@navikt/ds-react';
 
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
@@ -104,9 +104,9 @@ export const InnleggelsePeriode: FunctionComponent<PureOwnProps & MappedOwnProps
     <FlexContainer wrap>
       <FlexRow wrap>
         <FlexColumn className={styles.fieldColumn}>
-          <Undertekst>
+          <Detail size="small">
             <FormattedMessage id="UttakInfoPanel.FastsettResultat" />
-          </Undertekst>
+          </Detail>
           <VerticalSpacer fourPx />
           <RadioGroupField
             direction="vertical"

@@ -3,7 +3,7 @@ import moment from 'moment';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
-import Modal from 'nav-frontend-modal';
+import { Modal } from '@navikt/ds-react';
 import * as stories from './MenySettPaVentIndex.stories';
 
 const { Default } = composeStories(stories);
@@ -15,7 +15,9 @@ const initFrist = (): string => {
 };
 
 describe('<MenySettPaVentIndex>', () => {
-  Modal.setAppElement('body');
+  if (Modal.setAppElement) {
+    Modal.setAppElement('body');
+  }
 
   it('skal velge årsak for sett på vent og så fortsette', async () => {
     const settBehandlingPaVent = jest.fn();

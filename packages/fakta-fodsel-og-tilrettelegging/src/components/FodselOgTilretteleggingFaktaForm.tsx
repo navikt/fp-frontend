@@ -4,8 +4,7 @@ import React, {
 import { useForm } from 'react-hook-form';
 import moment from 'moment';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Element, Undertittel } from 'nav-frontend-typografi';
-import { AlertStripeInfo, AlertStripeFeil } from 'nav-frontend-alertstriper';
+import { Alert, Label, Heading } from '@navikt/ds-react';
 import {
   Image, FlexColumn, FlexContainer, FlexRow, VerticalSpacer, AvsnittSkiller, AksjonspunktHelpTextTemp,
 } from '@navikt/ft-ui-komponenter';
@@ -348,18 +347,18 @@ const FodselOgTilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
         <FlexRow>
           <FlexColumn>
             <VerticalSpacer eightPx />
-            <Undertittel className={styles.arbeidsforholdTittel}>
+            <Heading size="small" className={styles.arbeidsforholdTittel}>
               <FormattedMessage id="FodselOgTilretteleggingFaktaForm.ArbeidsforholdDetErSoktTilretteleggingFor" />
-            </Undertittel>
+            </Heading>
           </FlexColumn>
         </FlexRow>
         {visInfoAlert && (
           <FlexRow>
             <FlexColumn className={styles.fullBredde}>
               <VerticalSpacer eightPx />
-              <AlertStripeInfo className={styles.info}>
+              <Alert variant="info" className={styles.info}>
                 <FormattedMessage id="FodselOgTilretteleggingFaktaForm.UndersokNarmere" />
-              </AlertStripeInfo>
+              </Alert>
             </FlexColumn>
           </FlexRow>
         )}
@@ -367,9 +366,9 @@ const FodselOgTilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
           <FlexRow>
             <FlexColumn className={styles.fullBredde}>
               <VerticalSpacer sixteenPx />
-              <AlertStripeFeil>
+              <Alert variant="error">
                 <FormattedMessage id="FodselOgTilretteleggingFaktaForm.MinstEnTilretteleggingMåBrukes" />
-              </AlertStripeFeil>
+              </Alert>
             </FlexColumn>
           </FlexRow>
         )}
@@ -427,7 +426,7 @@ const FodselOgTilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
               <Image src={advarselIkonUrl} />
             </FlexColumn>
             <FlexColumn>
-              <Element><FormattedMessage id="FodselOgTilretteleggingFaktaForm.BegrunnOverstyring" /></Element>
+              <Label size="small"><FormattedMessage id="FodselOgTilretteleggingFaktaForm.BegrunnOverstyring" /></Label>
             </FlexColumn>
           </FlexRow>
         )}

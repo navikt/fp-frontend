@@ -106,7 +106,7 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<StandardBehandlingPro
           requestApi={requestSvpApi}
           hentFaktaPaneler={(props) => (
             <>
-              <SakenFaktaInitPanel {...props} />
+              <SakenFaktaInitPanel {...props} fagsak={fagsak} />
               <ArbeidOgInntektFaktaInitPanel
                 {...props}
                 saksnummer={fagsak.saksnummer}

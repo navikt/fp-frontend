@@ -5,9 +5,9 @@ import {
 } from 'react-intl';
 import { connect } from 'react-redux';
 import moment from 'moment/moment';
-import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
-import Modal from 'nav-frontend-modal';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import {
+  Detail, Label, BodyShort, Modal, Button,
+} from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
@@ -63,79 +63,85 @@ export const DelOppPeriodeModal: FunctionComponent<PureOwnProps & MappedOwnProps
   const numberOfDaysAndWeeks = calcDaysAndWeeks(periodeData.fom, førstePeriodeTom);
   return (
     <Modal
-      isOpen={showModal}
-      contentLabel={intl.formatMessage({ id: 'DelOppPeriodeModalImpl.ModalDescription' })}
-      onRequestClose={cancelEvent}
+      open={showModal}
+      aria-label={intl.formatMessage({ id: 'DelOppPeriodeModalImpl.ModalDescription' })}
+      onClose={cancelEvent}
       closeButton={false}
       className={styles.modal}
       shouldCloseOnOverlayClick={false}
     >
-      <FlexContainer wrap>
-        <FlexRow wrap>
-          <FlexColumn>
-            <Element className={styles.marginTop}>
-              <FormattedMessage id="DelOppPeriodeModalImpl.DelOppPerioden" />
-            </Element>
-          </FlexColumn>
-        </FlexRow>
-        <FlexRow wrap className={styles.marginTop}>
-          <FlexColumn>
-            <Undertekst><FormattedMessage id="DelOppPeriodeModalImpl.Periode" /></Undertekst>
-            <Normaltekst>
-              {`${moment(periodeData.fom.toString()).format(DDMMYYYY_DATE_FORMAT)} - ${moment(periodeData.tom.toString()).format(DDMMYYYY_DATE_FORMAT)}`}
-            </Normaltekst>
-          </FlexColumn>
-        </FlexRow>
-        <FlexRow wrap className={styles.marginTop}>
-          <FlexColumn>
-            <Undertekst><FormattedMessage id="DelOppPeriodeModalImpl.AngiTomDato" /></Undertekst>
-            <FlexRow alignItemsToBaseline>
-              <FlexColumn>
-                <DatepickerField
-                  name="ForstePeriodeTomDato"
-                  className={styles.datePicker}
-                  validate={[required, hasValidDate]}
-                  initialMonth={new Date(periodeData.fom)}
-                  disabledDays={{ before: moment(periodeData.fom).toDate(), after: moment(periodeData.tom).toDate() }}
-                />
-              </FlexColumn>
-              {førstePeriodeTom && (
+      <Modal.Content>
+        <FlexContainer wrap>
+          <FlexRow wrap>
+            <FlexColumn>
+              <Label size="small" className={styles.marginTop}>
+                <FormattedMessage id="DelOppPeriodeModalImpl.DelOppPerioden" />
+              </Label>
+            </FlexColumn>
+          </FlexRow>
+          <FlexRow wrap className={styles.marginTop}>
+            <FlexColumn>
+              <Detail size="small"><FormattedMessage id="DelOppPeriodeModalImpl.Periode" /></Detail>
+              <BodyShort size="small">
+                {`${moment(periodeData.fom.toString()).format(DDMMYYYY_DATE_FORMAT)} - ${moment(periodeData.tom.toString()).format(DDMMYYYY_DATE_FORMAT)}`}
+              </BodyShort>
+            </FlexColumn>
+          </FlexRow>
+          <FlexRow wrap className={styles.marginTop}>
+            <FlexColumn>
+              <Detail size="small"><FormattedMessage id="DelOppPeriodeModalImpl.AngiTomDato" /></Detail>
+              <FlexRow alignItemsToBaseline>
                 <FlexColumn>
-                  <FormattedMessage
-                    id={numberOfDaysAndWeeks.id.toString()}
-                    values={{
-                      weeks: numberOfDaysAndWeeks.weeks.toString(),
-                      days: numberOfDaysAndWeeks.days.toString(),
-                    }}
+                  <DatepickerField
+                    name="ForstePeriodeTomDato"
+                    className={styles.datePicker}
+                    validate={[required, hasValidDate]}
+                    initialMonth={new Date(periodeData.fom)}
+                    disabledDays={{ before: moment(periodeData.fom).toDate(), after: moment(periodeData.tom).toDate() }}
                   />
-
                 </FlexColumn>
-              )}
-            </FlexRow>
-          </FlexColumn>
-        </FlexRow>
-        <FlexRow wrap className={styles.marginTop}>
-          <FlexColumn>
-            <Hovedknapp
-              mini
-              htmlType="button"
-              className={styles.button}
-              onClick={formProps.handleSubmit}
-              disabled={formProps.pristine}
-            >
-              <FormattedMessage id="DelOppPeriodeModalImpl.Ok" />
-            </Hovedknapp>
-            <Knapp
-              htmlType="button"
-              mini
-              onClick={cancelEvent}
-              className={styles.cancelButton}
-            >
-              <FormattedMessage id="DelOppPeriodeModalImpl.Avbryt" />
-            </Knapp>
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
+                {førstePeriodeTom && (
+                  <FlexColumn>
+                    <FormattedMessage
+                      id={numberOfDaysAndWeeks.id.toString()}
+                      values={{
+                        weeks: numberOfDaysAndWeeks.weeks.toString(),
+                        days: numberOfDaysAndWeeks.days.toString(),
+                      }}
+                    />
+
+                  </FlexColumn>
+                )}
+              </FlexRow>
+            </FlexColumn>
+          </FlexRow>
+          <FlexRow wrap className={styles.marginTop}>
+            <FlexColumn>
+              <Button
+                size="small"
+                variant="primary"
+                className={styles.button}
+                onClick={formProps.handleSubmit}
+                disabled={formProps.pristine}
+                type="button"
+              >
+                <FormattedMessage id="DelOppPeriodeModalImpl.Ok" />
+              </Button>
+            </FlexColumn>
+            <FlexColumn>
+              <Button
+                size="small"
+                variant="secondary"
+                onClick={cancelEvent}
+                className={styles.cancelButton}
+                type="button"
+              >
+                <FormattedMessage id="DelOppPeriodeModalImpl.Avbryt" />
+              </Button>
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
+      </Modal.Content>
     </Modal>
   );
 };

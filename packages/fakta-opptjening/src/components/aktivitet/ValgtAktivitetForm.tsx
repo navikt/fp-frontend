@@ -1,9 +1,8 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { Button, Label, BodyShort } from '@navikt/ds-react';
 import dayjs from 'dayjs';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -117,7 +116,7 @@ export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
       >
         <Row>
           <Column xs="10">
-            <Element><FormattedMessage id="ActivityPanel.Details" /></Element>
+            <Label size="small"><FormattedMessage id="ActivityPanel.Details" /></Label>
           </Column>
           <Column xs="2">
             <TimeLineButton text={intl.formatMessage({ id: 'Timeline.prevPeriod' })} type="prev" callback={velgForrigeAktivitet} />
@@ -126,29 +125,29 @@ export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
         </Row>
         <Row>
           <Column xs="7">
-            <Element>
+            <Label size="small">
               <FormattedMessage id="ActivityPanel.Period" />
-            </Element>
+            </Label>
             <Row>
               <Column xs="5">
-                <Normaltekst>
+                <BodyShort size="small">
                   {`${dayjs(opptjeningFom).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(opptjeningTom).format(DDMMYYYY_DATE_FORMAT)}`}
-                </Normaltekst>
+                </BodyShort>
               </Column>
               <Column xs="6">
-                <Normaltekst>
+                <BodyShort size="small">
                   {finnMånederOgDager(opptjeningFom, opptjeningTom)}
-                </Normaltekst>
+                </BodyShort>
               </Column>
             </Row>
           </Column>
           <Column xs="5">
-            <Element>
+            <Label size="small">
               <FormattedMessage id="ActivityPanel.Activity" />
-            </Element>
-            <Normaltekst>
+            </Label>
+            <BodyShort size="small">
               {opptjeningAktivitetTyper.find((oat) => oat.kode === aktivitetType)?.navn}
-            </Normaltekst>
+            </BodyShort>
           </Column>
         </Row>
         <ValgtAktivitetSubForm
@@ -198,14 +197,14 @@ export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
             <FlexContainer>
               <FlexRow>
                 <FlexColumn>
-                  <Hovedknapp mini htmlType="submit" disabled={!formMethods.formState.isDirty}>
+                  <Button size="small" variant="primary" disabled={!formMethods.formState.isDirty}>
                     <FormattedMessage id="ActivityPanel.Oppdater" />
-                  </Hovedknapp>
+                  </Button>
                 </FlexColumn>
                 <FlexColumn>
-                  <Knapp mini htmlType="button" onClick={avbrytAktivitet}>
+                  <Button size="small" variant="secondary" onClick={avbrytAktivitet} type="button">
                     <FormattedMessage id="ActivityPanel.Avbryt" />
-                  </Knapp>
+                  </Button>
                 </FlexColumn>
               </FlexRow>
             </FlexContainer>

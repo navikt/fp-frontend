@@ -1,13 +1,12 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Button, Label } from '@navikt/ds-react';
 import { RadioGroupPanel, Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import {
   hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-form-validators';
-import { Element } from 'nav-frontend-typografi';
 import { FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { BekreftAleneomsorgVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -101,7 +100,7 @@ const AleneomsorgForm: FunctionComponent<OwnProps> = ({
           )}
           <VerticalSpacer thirtyTwoPx />
           <TextAreaField
-            label={<Element><FormattedMessage id="AleneomsorgForm.Begrunn" /></Element>}
+            label={<Label size="small"><FormattedMessage id="AleneomsorgForm.Begrunn" /></Label>}
             name="begrunnelse"
             validate={[required, minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
@@ -109,13 +108,14 @@ const AleneomsorgForm: FunctionComponent<OwnProps> = ({
           />
           <VerticalSpacer sixteenPx />
           {!readOnly && (
-            <Hovedknapp
-              mini
+            <Button
+              size="small"
+              variant="primary"
               disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-              spinner={formMethods.formState.isSubmitting}
+              loading={formMethods.formState.isSubmitting}
             >
               <FormattedMessage id="AleneomsorgForm.Bekreft" />
-            </Hovedknapp>
+            </Button>
           )}
         </FaktaGruppe>
       </Boks>

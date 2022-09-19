@@ -9,7 +9,7 @@ import {
   Form, formValueSelector, InjectedFormProps, reduxForm,
 } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { BodyShort, Heading } from '@navikt/ds-react';
 
 import {
   CheckboxField, RadioGroupField, RadioOption, SelectField, TextAreaField,
@@ -186,7 +186,7 @@ export const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps &
       {behandlesKabal && readOnly && (
         <Row>
           <Column xs="6">
-            <Undertittel>{intl.formatMessage({ id: 'Ankebehandling.SeKabalText' })}</Undertittel>
+            <Heading size="small">{intl.formatMessage({ id: 'Ankebehandling.SeKabalText' })}</Heading>
             <VerticalSpacer sixteenPx />
           </Column>
         </Row>
@@ -194,7 +194,7 @@ export const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps &
       {kabalEnabled && !readOnly && (
         <Row>
           <Column xs="6">
-            <Undertittel>{intl.formatMessage({ id: 'Ankebehandling.SendTilKabal' })}</Undertittel>
+            <Heading size="small">{intl.formatMessage({ id: 'Ankebehandling.SendTilKabal' })}</Heading>
             <VerticalSpacer fourPx />
             <CheckboxField name="sendTilKabal" label={<FormattedMessage id="Ankebehandling.KabalText" />} />
             <VerticalSpacer sixteenPx />
@@ -219,7 +219,7 @@ export const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps &
       )}
       {!formValues.sendTilKabal && !behandlesKabal && !behandletKabal && (
         <Row>
-          <Undertittel><FormattedMessage id="Ankebehandling.Title" /></Undertittel>
+          <Heading size="small"><FormattedMessage id="Ankebehandling.Title" /></Heading>
           <VerticalSpacer fourPx />
           <AksjonspunktHelpTextTemp isAksjonspunktOpen={!readOnlySubmitButton}>
             {[<FormattedMessage id="Ankebehandling.HelpText" key={aksjonspunktCode} />]}
@@ -254,7 +254,7 @@ export const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps &
       )}
       {!formValues.sendTilKabal && !behandlesKabal && !behandletKabal && (
         <Row>
-          <Normaltekst><FormattedMessage id="Ankebehandling.Resultat" /></Normaltekst>
+          <BodyShort size="small"><FormattedMessage id="Ankebehandling.Resultat" /></BodyShort>
           <RadioGroupField
             name="ankeVurdering"
             validate={[required]}
@@ -274,7 +274,7 @@ export const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps &
         <Row>
           <Column xs="7">
             <ArrowBox alignOffset={315}>
-              <Normaltekst><FormattedMessage id="Ankebehandling.Avvisning" /></Normaltekst>
+              <BodyShort size="small"><FormattedMessage id="Ankebehandling.Avvisning" /></BodyShort>
               <VerticalSpacer fourPx />
               <CheckboxField name="erAnkerIkkePart" label={<FormattedMessage id="Ankebehandling.Avvisning.IkkePart" />} />
               <VerticalSpacer fourPx />
@@ -284,7 +284,7 @@ export const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps &
               <VerticalSpacer fourPx />
               <CheckboxField name="erIkkeSignert" label={<FormattedMessage id="Ankebehandling.Avvisning.IkkeSignert" />} />
               <VerticalSpacer sixteenPx />
-              <Normaltekst><FormattedMessage id="Ankebehandling.Realitetsbehandles" /></Normaltekst>
+              <BodyShort size="small"><FormattedMessage id="Ankebehandling.Realitetsbehandles" /></BodyShort>
               <VerticalSpacer fourPx />
               <RadioGroupField
                 name="erSubsidiartRealitetsbehandles"

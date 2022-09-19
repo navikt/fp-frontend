@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
@@ -36,7 +36,7 @@ const lagBegrunnelseKomponent = (
       {visBegrunnelse && <VerticalSpacer eightPx />}
       {visAktsomhetBegrunnelse && decodeHtmlEntity(begrunnelseFritekst)}
       {visAktsomhetBegrunnelse && <VerticalSpacer eightPx />}
-      <Normaltekst>
+      <BodyShort size="small">
         <FormattedMessage
           id={felt.fraVerdi ? 'Historikk.Template.Tilbakekreving.ChangedFromTo' : 'Historikk.Template.Tilbakekreving.FieldSetTo'}
           values={{
@@ -46,7 +46,7 @@ const lagBegrunnelseKomponent = (
             b: (chunks: any) => <b>{chunks}</b>,
           }}
         />
-      </Normaltekst>
+      </BodyShort>
       <VerticalSpacer eightPx />
       {visSarligGrunnerBegrunnelse && sarligGrunnerBegrunnelse}
       {visSarligGrunnerBegrunnelse && <VerticalSpacer eightPx />}
@@ -86,7 +86,7 @@ const HistorikkMalTypeTilbakekreving: FunctionComponent<HistorikkMal> = ({
 
         return (
           <div key={periodeFom + periodeTom}>
-            <Normaltekst>
+            <BodyShort size="small">
               <FormattedMessage
                 id="Historikk.Template.Tilbakekreving.VurderingAvPerioden"
                 values={{
@@ -95,7 +95,7 @@ const HistorikkMalTypeTilbakekreving: FunctionComponent<HistorikkMal> = ({
                   b: (chunks: any) => <b>{chunks}</b>,
                 }}
               />
-            </Normaltekst>
+            </BodyShort>
             <VerticalSpacer eightPx />
             {endredeFelter && endredeFelter.map((felt, index) => {
               const { endretFeltNavn, tilVerdi } = felt;
@@ -109,9 +109,9 @@ const HistorikkMalTypeTilbakekreving: FunctionComponent<HistorikkMal> = ({
 
               return lagBegrunnelseKomponent(felt, index, endredeFelter, getKodeverknavn, begrunnelse, sarligGrunnerBegrunnelse, begrunnelseFritekst);
             })}
-            <Normaltekst>
+            <BodyShort size="small">
               {(!endredeFelter && begrunnelseFritekst) && begrunnelseFritekst}
-            </Normaltekst>
+            </BodyShort>
             <VerticalSpacer eightPx />
           </div>
         );

@@ -2,11 +2,11 @@ import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Heading } from '@navikt/ds-react';
 
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 
-import { Undertittel } from 'nav-frontend-typografi';
 import SoknadData from '../../felles/SoknadData';
 
 export const rettighet = {
@@ -54,7 +54,7 @@ const RettigheterPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <BorderBox>
-      <Undertittel>{intl.formatMessage({ id: 'Registrering.Rettigheter.Title' })}</Undertittel>
+      <Heading size="small">{intl.formatMessage({ id: 'Registrering.Rettigheter.Title' })}</Heading>
       <VerticalSpacer sixteenPx />
       <RadioGroupPanel
         name="rettigheter"

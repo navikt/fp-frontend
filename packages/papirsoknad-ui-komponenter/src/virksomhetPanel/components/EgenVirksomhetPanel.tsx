@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Heading } from '@navikt/ds-react';
 import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
@@ -34,7 +34,7 @@ const EgenVirksomhetPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <BorderBox>
-      <Undertittel><FormattedMessage id="Registrering.EgenVirksomhet.Title" /></Undertittel>
+      <Heading size="small"><FormattedMessage id="Registrering.EgenVirksomhet.Title" /></Heading>
       <VerticalSpacer sixteenPx />
       <RadioGroupPanel
         name={`${EGEN_VIRKSOMHET_NAME_PREFIX}.harArbeidetIEgenVirksomhet`}

@@ -2,8 +2,7 @@ import React, {
   FunctionComponent, ReactElement, useCallback, useState, useEffect, useMemo,
 } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Undertittel } from 'nav-frontend-typografi';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Heading, Button } from '@navikt/ds-react';
 import { Aksjonspunkt, AlleKodeverk } from '@navikt/ft-types';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
@@ -169,7 +168,7 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <Undertittel><FormattedMessage id="OppholdInntektOgPerioder.Overskrift" /></Undertittel>
+      <Heading size="small"><FormattedMessage id="OppholdInntektOgPerioder.Overskrift" /></Heading>
       <VerticalSpacer thirtyTwoPx />
       {aksjonspunkter.some((ap) => ap.status === AksjonspunktStatus.OPPRETTET) && (
         <>
@@ -206,15 +205,16 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps> = ({
       )}
       <VerticalSpacer twentyPx />
       {perioder.length > 1 && (
-        <Hovedknapp
-          mini
-          htmlType="button"
+        <Button
+          size="small"
+          variant="primary"
           onClick={lagre}
           disabled={isSubmitting || isConfirmButtonDisabled()}
-          spinner={isSubmitting}
+          loading={isSubmitting}
+          type="button"
         >
           <FormattedMessage id="OppholdInntektOgPerioder.Bekreft" />
-        </Hovedknapp>
+        </Button>
       )}
     </>
   );

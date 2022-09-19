@@ -2,10 +2,10 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Column, Row } from 'nav-frontend-grid';
-import { SkjemaGruppe } from 'nav-frontend-skjema';
-import Modal from 'nav-frontend-modal';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
-import { Undertekst } from 'nav-frontend-typografi';
+import { Button, Label, Modal } from '@navikt/ds-react';
+import {
+  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
@@ -15,7 +15,6 @@ import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import styles from './henleggBehandlingModal.less';
 
 const maxLength1500 = maxLength(1500);
@@ -142,14 +141,16 @@ const HenleggBehandlingModal: FunctionComponent<PureOwnProps> = ({
   return (
     <Modal
       className={styles.modal}
-      isOpen
+      open
       closeButton={false}
-      contentLabel={intl.formatMessage({ id: 'HenleggBehandlingModal.ModalDescription' })}
-      onRequestClose={cancelEvent}
+      aria-label={intl.formatMessage({ id: 'HenleggBehandlingModal.ModalDescription' })}
+      onClose={cancelEvent}
       shouldCloseOnOverlayClick={false}
     >
-      <Form formMethods={formMethods} onSubmit={handleSubmit}>
-        <SkjemaGruppe legend={intl.formatMessage({ id: 'HenleggBehandlingModal.HenleggBehandling' })}>
+      <Modal.Content>
+        <Form formMethods={formMethods} onSubmit={handleSubmit}>
+          <Label>{intl.formatMessage({ id: 'HenleggBehandlingModal.HenleggBehandling' })}</Label>
+          <VerticalSpacer sixteenPx />
           <Row>
             <Column xs="5">
               <SelectField
@@ -172,43 +173,55 @@ const HenleggBehandlingModal: FunctionComponent<PureOwnProps> = ({
             </Column>
           </Row>
           {showHenleggelseFritekst(behandlingType, årsakKode) && (
-            <Row>
-              <Column xs="8">
-                <div className={styles.fritekstTilBrevTextArea}>
-                  <TextAreaField
-                    name="fritekst"
-                    label={intl.formatMessage({ id: 'HenleggBehandlingModal.Fritekst' })}
-                    validate={[required, hasValidText]}
-                    maxLength={2000}
-                  />
-                </div>
-              </Column>
-            </Row>
+            <>
+              <VerticalSpacer sixteenPx />
+              <Row>
+                <Column xs="8">
+                  <div className={styles.fritekstTilBrevTextArea}>
+                    <TextAreaField
+                      name="fritekst"
+                      label={intl.formatMessage({ id: 'HenleggBehandlingModal.Fritekst' })}
+                      validate={[required, hasValidText]}
+                      maxLength={2000}
+                    />
+                  </div>
+                </Column>
+              </Row>
+            </>
           )}
           <Row>
             <Column xs="7">
               <VerticalSpacer sixteenPx />
-              <div>
-                <Hovedknapp
-                  mini
-                  className={styles.button}
-                  disabled={disableHovedKnapp(behandlingType, årsakKode, begrunnelse, fritekst)}
-                >
-                  {intl.formatMessage({ id: 'HenleggBehandlingModal.HenleggBehandlingSubmit' })}
-                </Hovedknapp>
-                <Knapp
-                  htmlType="button"
-                  mini
-                  onClick={cancelEvent}
-                >
-                  {intl.formatMessage({ id: 'HenleggBehandlingModal.Avbryt' })}
-                </Knapp>
-              </div>
+              <FlexContainer>
+                <FlexRow>
+                  <FlexColumn>
+                    <Button
+                      variant="primary"
+                      size="small"
+                      className={styles.button}
+                      disabled={disableHovedKnapp(behandlingType, årsakKode, begrunnelse, fritekst)}
+                    >
+                      {intl.formatMessage({ id: 'HenleggBehandlingModal.HenleggBehandlingSubmit' })}
+                    </Button>
+                  </FlexColumn>
+                  <FlexColumn>
+                    <Button
+                      variant="secondary"
+                      size="small"
+                      onClick={cancelEvent}
+                      type="button"
+                    >
+                      {intl.formatMessage({ id: 'HenleggBehandlingModal.Avbryt' })}
+                    </Button>
+                  </FlexColumn>
+                </FlexRow>
+              </FlexContainer>
             </Column>
             <Column xs="4">
               {showLink && (
                 <div className={styles.forhandsvis}>
-                  <Undertekst>{intl.formatMessage({ id: 'HenleggBehandlingModal.SokerInformeres' })}</Undertekst>
+                  <Label size="small">{intl.formatMessage({ id: 'HenleggBehandlingModal.SokerInformeres' })}</Label>
+                  <VerticalSpacer fourPx />
                   <a
                     href=""
                     onClick={previewHenleggBehandlingDoc(previewHenleggBehandling, ytelseType, fritekst, behandlingUuid)}
@@ -221,8 +234,8 @@ const HenleggBehandlingModal: FunctionComponent<PureOwnProps> = ({
               )}
             </Column>
           </Row>
-        </SkjemaGruppe>
-      </Form>
+        </Form>
+      </Modal.Content>
     </Modal>
   );
 };

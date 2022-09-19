@@ -6,8 +6,7 @@ import {
 import { FormattedMessage } from 'react-intl';
 import { bindActionCreators, Dispatch } from 'redux';
 import moment from 'moment';
-import { Element } from 'nav-frontend-typografi';
-import { Knapp } from 'nav-frontend-knapper';
+import { Label, Button } from '@navikt/ds-react';
 
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
@@ -355,9 +354,9 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Element>
+              <Label size="small">
                 <FormattedMessage id="UttakInfoPanel.SoknadsPeriode" />
-              </Element>
+              </Label>
             </FlexColumn>
             {kanOverstyre && (
               <FlexColumn className="justifyItemsToFlexEnd">
@@ -405,9 +404,9 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
               />
             </FlexColumn>
             <FlexColumn>
-              <Knapp mini htmlType="button" onClick={this.addNewPeriod} disabled={this.disableButtons()}>
+              <Button variant="secondary" size="small" onClick={this.addNewPeriod} disabled={this.disableButtons()} type="button">
                 <FormattedMessage id="UttakInfoPanel.LeggTilPeriode" />
-              </Knapp>
+              </Button>
             </FlexColumn>
           </FlexRow>
         </FlexContainer>

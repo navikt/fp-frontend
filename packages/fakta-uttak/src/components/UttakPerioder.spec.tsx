@@ -1,7 +1,7 @@
 import React from 'react';
 import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
-import { Knapp } from 'nav-frontend-knapper';
+import { Button, Label } from '@navikt/ds-react';
 import {
   AksjonspunktHelpTextHTML, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
@@ -70,7 +70,7 @@ describe('<UttakPerioder>', () => {
     const flexContainer = wrapper.find(FlexContainer);
     const flexRow = wrapper.find(FlexRow);
     const flexColumn = wrapper.find(FlexColumn);
-    const element = wrapper.find('Element');
+    const element = wrapper.find(Label);
     const uttakNyPeriode = wrapper.find('UttakNyPeriode');
     const uttakSlettPeriodeModal = wrapper.find('UttakSlettPeriodeModal');
     expect(fieldArray).toHaveLength(1);
@@ -115,7 +115,7 @@ describe('<UttakPerioder>', () => {
     const uttakSlettPeriodeModal = wrapper.find('UttakSlettPeriodeModal');
     const uttakNyPeriode = wrapper.find(UttakNyPeriode);
     const hovedknapp = wrapper.find(FaktaSubmitButton);
-    const knapp = wrapper.find(Knapp);
+    const knapp = wrapper.find(Button);
     expect(hovedknapp.prop('isReadOnly')).toBe(true);
     expect(knapp.prop('disabled')).toBe(true);
     expect(fieldArray).toHaveLength(1);
@@ -190,7 +190,7 @@ describe('<UttakPerioder>', () => {
     );
 
     const hovedknapp = wrapper.find(FaktaSubmitButton);
-    const knapp = wrapper.find(Knapp);
+    const knapp = wrapper.find(Button);
     expect(hovedknapp.prop('isReadOnly')).toBe(true);
     expect(knapp.prop('disabled')).toBe(true);
   });
@@ -223,7 +223,7 @@ describe('<UttakPerioder>', () => {
     );
 
     const hovedknapp = wrapper.find(FaktaSubmitButton);
-    const knapp = wrapper.find(Knapp);
+    const knapp = wrapper.find(Button);
     expect(hovedknapp.prop('isReadOnly')).toBe(true);
     expect(knapp.prop('disabled')).toBe(true);
   });
@@ -256,7 +256,7 @@ describe('<UttakPerioder>', () => {
     );
 
     const hovedknapp = wrapper.find(FaktaSubmitButton);
-    const knapp = wrapper.find(Knapp);
+    const knapp = wrapper.find(Button);
     expect(hovedknapp.prop('isReadOnly')).toBe(false);
     expect(knapp.prop('disabled')).toBe(false);
   });
@@ -336,7 +336,7 @@ describe('<UttakPerioder>', () => {
       />, messages,
     );
 
-    const knapp = wrapper.find(Knapp);
+    const knapp = wrapper.find(Button);
     expect(knapp.length).toBe(1);
     knapp.simulate('click');
     wrapper.update();

@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import { Location } from 'history';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Button } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
 import vurderPaNyttArsakType from '@fpsak-frontend/kodeverk/src/vurderPaNyttArsakType';
@@ -23,7 +23,7 @@ const erAlleGodkjent = (formState: TotrinnskontrollAksjonspunkt[] = []) => formS
   .every((ap) => ap.totrinnskontrollGodkjent);
 
 const erAlleGodkjentEllerAvvist = (formState: TotrinnskontrollAksjonspunkt[] = []) => formState
-  .every((ap) => ap.totrinnskontrollGodkjent !== null);
+  .every((ap) => ap.totrinnskontrollGodkjent !== undefined);
 
 const harIkkeKonsekvenserForYtelsen = (konsekvenserForYtelsenKoder: string[], behandlingResultat?: Behandling['behandlingsresultat']) => {
   if (!behandlingResultat) {
@@ -149,21 +149,23 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<OwnProps> = ({
         lagLenke={lagLenke}
       />
       <div className={styles.buttonRow}>
-        <Hovedknapp
-          mini
+        <Button
+          variant="primary"
+          size="small"
           disabled={!erAlleGodkjent(aksjonspunktGodkjenning) || !erAlleGodkjentEllerAvvist(aksjonspunktGodkjenning) || formMethods.formState.isSubmitting}
-          spinner={formMethods.formState.isSubmitting}
+          loading={formMethods.formState.isSubmitting}
         >
           <FormattedMessage id="ToTrinnsForm.Godkjenn" />
-        </Hovedknapp>
-        <Hovedknapp
-          mini
+        </Button>
+        <Button
+          variant="primary"
+          size="small"
           disabled={erAlleGodkjent(aksjonspunktGodkjenning) || !erAlleGodkjentEllerAvvist(aksjonspunktGodkjenning) || formMethods.formState.isSubmitting}
-          spinner={formMethods.formState.isSubmitting}
+          loading={formMethods.formState.isSubmitting}
           onClick={ariaCheck}
         >
           <FormattedMessage id="ToTrinnsForm.SendTilbake" />
-        </Hovedknapp>
+        </Button>
         {!erKlage && !erBehandlingEtterKlage && !erAnke && !erTilbakekreving && harIkkeKonsekvensForYtelse && (
           <>
             <VerticalSpacer eightPx />

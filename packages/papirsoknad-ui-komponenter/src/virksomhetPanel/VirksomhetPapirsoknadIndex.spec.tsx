@@ -4,14 +4,14 @@ import {
 } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
-import ModalWrapper from 'nav-frontend-modal';
+import { Modal } from '@navikt/ds-react';
 
 import * as stories from './VirksomhetPapirsoknadIndex.stories';
 
 const { Default } = composeStories(stories);
 
 describe('<VirksomhetPapirsoknadIndex>', () => {
-  ModalWrapper.setAppElement('body');
+  Modal.setAppElement('body');
 
   it('skal velge at søker ikke har arbeidet i egen næringsvirksomhet', async () => {
     const lagre = jest.fn();

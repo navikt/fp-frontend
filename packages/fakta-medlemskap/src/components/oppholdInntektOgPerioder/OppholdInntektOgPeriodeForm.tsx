@@ -3,10 +3,9 @@ import React, {
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { Button, Label } from '@navikt/ds-react';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
-import { Element } from 'nav-frontend-typografi';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { Aksjonspunkt, AlleKodeverk } from '@navikt/ft-types';
 import {
@@ -113,9 +112,9 @@ const OppholdInntektOgPeriodeForm: FunctionComponent<OwnProps> = ({
     >
       <div className={lagreEnkeltPeriode ? undefined : styles.showBorder}>
         {!lagreEnkeltPeriode && (
-          <Element>
+          <Label size="small">
             <FormattedMessage id="OppholdInntektOgPeriodeForm.Periode" values={{ dato: moment(valgtPeriode.vurderingsdato).format(DDMMYYYY_DATE_FORMAT) }} />
-          </Element>
+          </Label>
         )}
         <OppholdINorgeOgAdresserFaktaPanel
           valgtPeriode={valgtPeriode}
@@ -161,24 +160,25 @@ const OppholdInntektOgPeriodeForm: FunctionComponent<OwnProps> = ({
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Hovedknapp
-                mini
-                htmlType="submit"
+              <Button
+                size="small"
+                variant="primary"
                 disabled={!formMethods.formState.isDirty || isSubmitting}
-                spinner={isSubmitting}
+                loading={isSubmitting}
               >
                 <FormattedMessage id={lagreEnkeltPeriode ? 'OppholdInntektOgPerioder.Bekreft' : 'OppholdInntektOgPeriode.Oppdater'} />
-              </Hovedknapp>
+              </Button>
             </FlexColumn>
             {!lagreEnkeltPeriode && (
             <FlexColumn>
-              <Knapp
-                htmlType="button"
-                mini
+              <Button
+                size="small"
+                variant="secondary"
                 onClick={avbryt}
+                type="button"
               >
                 <FormattedMessage id="OppholdInntektOgPeriode.Avbryt" />
-              </Knapp>
+              </Button>
             </FlexColumn>
             )}
           </FlexRow>

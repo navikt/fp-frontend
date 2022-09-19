@@ -2,9 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { NavLink } from 'react-router-dom';
 import { UseFormGetValues } from 'react-hook-form';
-import { SkjemaGruppe } from 'nav-frontend-skjema';
+import { ErrorMessage, BodyShort, Label } from '@navikt/ds-react';
 import { Location } from 'history';
-import { Normaltekst, Element } from 'nav-frontend-typografi';
 import {
   ArrowBox, FlexColumn, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -13,7 +12,7 @@ import {
   KodeverkMedNavn, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 import {
-  CheckboxField, TextAreaField, RadioGroupPanel, SkjemaGruppeMedFeilviser, formHooks,
+  CheckboxField, TextAreaField, RadioGroupPanel, formHooks, useCustomValidation,
 } from '@navikt/ft-form-hooks';
 import {
   hasValidText, maxLength, minLength, required, isRequiredMessage,
@@ -29,16 +28,8 @@ const maxLength2000 = maxLength(2000);
 
 const FIELD_ARRAY_NAME = 'aksjonspunktGodkjenning';
 
-const validerValgtFakta = (getValues: UseFormGetValues<any>, fieldIndex: string) => () => {
-  if (!getValues(`${fieldIndex}.feilFakta`)
-    && !getValues(`${fieldIndex}.feilLov`)
-    && !getValues(`${fieldIndex}.feilRegel`)
-    && !getValues(`${fieldIndex}.annet`)
-  ) {
-    return isRequiredMessage();
-  }
-  return undefined;
-};
+const harIkkeValgtMinstEnFakta = (getValues: UseFormGetValues<any>, fieldIndex: string) => !getValues(`${fieldIndex}.feilFakta`)
+  && !getValues(`${fieldIndex}.feilLov`) && !getValues(`${fieldIndex}.feilRegel`) && !getValues(`${fieldIndex}.annet`);
 
 export type AksjonspunktGodkjenningData = {
   aksjonspunktKode: string;
@@ -123,6 +114,9 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
 
         const fieldIndex = `${FIELD_ARRAY_NAME}.${index}`;
 
+        const feilmelding = !totrinnskontrollGodkjent && harIkkeValgtMinstEnFakta(getValues, fieldIndex) ? isRequiredMessage() : undefined;
+        const errorMessage = useCustomValidation(`${fieldIndex}.faktagruppe`, feilmelding);
+
         return (
           <div key={field.id}>
             {lenke && skjermlenkeTypeKodeverk && (
@@ -133,79 +127,73 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
             <div className={styles.approvalItemContainer}>
               {aksjonspunktText.map((formattedMessage, i) => (
                 <div key={aksjonspunktKode.concat('_'.concat(i.toString()))} className={styles.aksjonspunktTextContainer}>
-                  <Normaltekst>
+                  <BodyShort size="small">
                     {formattedMessage}
-                  </Normaltekst>
+                  </BodyShort>
                 </div>
               ))}
-              <SkjemaGruppe>
-                <RadioGroupPanel
-                  name={`${fieldIndex}.totrinnskontrollGodkjent`}
-                  isReadOnly={readOnly}
-                  isHorizontal
-                  isTrueOrFalseSelection
-                  hideLegend
-                  radios={[{
-                    value: 'true',
-                    label: <FormattedMessage id="ApprovalField.Godkjent" />,
-                  }, {
-                    value: 'false',
-                    label: <FormattedMessage id="ApprovalField.Vurder" />,
-                  },
-                  ]}
-                />
-                {visArsaker && (
-                  <>
+              <RadioGroupPanel
+                name={`${fieldIndex}.totrinnskontrollGodkjent`}
+                isReadOnly={readOnly}
+                isHorizontal
+                isTrueOrFalseSelection
+                hideLegend
+                radios={[{
+                  value: 'true',
+                  label: <FormattedMessage id="ApprovalField.Godkjent" />,
+                }, {
+                  value: 'false',
+                  label: <FormattedMessage id="ApprovalField.Vurder" />,
+                },
+                ]}
+              />
+              {visArsaker && (
+                <>
+                  <VerticalSpacer sixteenPx />
+                  <ArrowBox alignOffset={totrinnskontrollGodkjent ? 1 : 110}>
+                    {!visKunBegrunnelse && (
+                      <>
+                        <Label size="small"><FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Arsak" /></Label>
+                        <FlexRow>
+                          <FlexColumn className={styles.halfColumn}>
+                            <CheckboxField
+                              name={`${fieldIndex}.feilFakta`}
+                              label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.FeilFakta" />}
+                              readOnly={readOnly}
+                            />
+                            <CheckboxField
+                              name={`${fieldIndex}.feilRegel`}
+                              label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.FeilRegelForstaelse" />}
+                              readOnly={readOnly}
+                            />
+                          </FlexColumn>
+                          <FlexColumn className={styles.halfColumn}>
+                            <CheckboxField
+                              name={`${fieldIndex}.feilLov`}
+                              label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.FeilLovanvendelse" />}
+                              readOnly={readOnly}
+                            />
+                            <CheckboxField
+                              name={`${fieldIndex}.annet`}
+                              label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Annet" />}
+                              readOnly={readOnly}
+                            />
+                          </FlexColumn>
+                        </FlexRow>
+                        {errorMessage && <ErrorMessage size="small">{errorMessage}</ErrorMessage>}
+                      </>
+                    )}
                     <VerticalSpacer sixteenPx />
-                    <ArrowBox alignOffset={totrinnskontrollGodkjent ? 1 : 110}>
-                      {!visKunBegrunnelse && (
-                        <>
-                          <Element><FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Arsak" /></Element>
-                          <SkjemaGruppeMedFeilviser
-                            name={`${fieldIndex}.faktagruppe`}
-                            validate={[validerValgtFakta(getValues, fieldIndex)]}
-                          >
-                            <FlexRow>
-                              <FlexColumn className={styles.halfColumn}>
-                                <CheckboxField
-                                  name={`${fieldIndex}.feilFakta`}
-                                  label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.FeilFakta" />}
-                                  readOnly={readOnly}
-                                />
-                                <CheckboxField
-                                  name={`${fieldIndex}.feilRegel`}
-                                  label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.FeilRegelForstaelse" />}
-                                  readOnly={readOnly}
-                                />
-                              </FlexColumn>
-                              <FlexColumn className={styles.halfColumn}>
-                                <CheckboxField
-                                  name={`${fieldIndex}.feilLov`}
-                                  label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.FeilLovanvendelse" />}
-                                  readOnly={readOnly}
-                                />
-                                <CheckboxField
-                                  name={`${fieldIndex}.annet`}
-                                  label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Annet" />}
-                                  readOnly={readOnly}
-                                />
-                              </FlexColumn>
-                            </FlexRow>
-                          </SkjemaGruppeMedFeilviser>
-                        </>
-                      )}
-                      <VerticalSpacer sixteenPx />
-                      <TextAreaField
-                        name={`${fieldIndex}.besluttersBegrunnelse`}
-                        label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Begrunnelse" />}
-                        validate={[required, minLength3, maxLength2000, hasValidText]}
-                        readOnly={readOnly}
-                      />
-                    </ArrowBox>
-                  </>
-                )}
-                <VerticalSpacer sixteenPx />
-              </SkjemaGruppe>
+                    <TextAreaField
+                      name={`${fieldIndex}.besluttersBegrunnelse`}
+                      label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Begrunnelse" />}
+                      validate={[required, minLength3, maxLength2000, hasValidText]}
+                      readOnly={readOnly}
+                    />
+                  </ArrowBox>
+                </>
+              )}
+              <VerticalSpacer sixteenPx />
             </div>
           </div>
         );

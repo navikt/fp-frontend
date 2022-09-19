@@ -6,9 +6,7 @@ import {
   FieldArray, formValueSelector, InjectedFormProps, reduxForm,
 } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
-import AlertStripe from 'nav-frontend-alertstriper';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
-import { Undertekst } from 'nav-frontend-typografi';
+import { Detail, Alert, Button } from '@navikt/ds-react';
 
 import {
   RadioGroupField, RadioOption, SelectField, TextAreaField,
@@ -284,9 +282,9 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
                             />
                             {(selectedItemData.gradertAktivitet && erOppfylt) && (
                               <div className={styles.marginTop30}>
-                                <Undertekst>
+                                <Detail size="small">
                                   <FormattedMessage id="UttakActivity.Gradering" />
-                                </Undertekst>
+                                </Detail>
                                 <VerticalSpacer eightPx />
                                 <RadioGroupField validate={[required]} name="graderingInnvilget" readOnly={readOnly}>
                                   <RadioOption value label={{ id: 'UttakActivity.Oppfylt' }} />
@@ -314,19 +312,20 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
               <FlexContainer>
                 <FlexRow>
                   <FlexColumn>
-                    <Hovedknapp
-                      mini
-                      htmlType="button"
+                    <Button
+                      size="small"
+                      variant="primary"
                       onClick={formProps.handleSubmit}
                       disabled={formProps.pristine || hasValidationError}
+                      type="button"
                     >
                       <FormattedMessage id="UttakActivity.Oppdater" />
-                    </Hovedknapp>
+                    </Button>
                   </FlexColumn>
                   <FlexColumn>
-                    <Knapp mini htmlType="button" onClick={cancelSelectedActivity}>
+                    <Button size="small" variant="secondary" onClick={cancelSelectedActivity} type="button">
                       <FormattedMessage id="UttakActivity.Avbryt" />
-                    </Knapp>
+                    </Button>
                   </FlexColumn>
                 </FlexRow>
               </FlexContainer>
@@ -394,15 +393,15 @@ const lagFeilmeldinger = (values: FormValues, rowArray: number[], invalidArbeids
     }
     if (invalidArbeidsProsentVidUsettelse && values.utsettelseType === utsettelseArsakCodes.ARBEID) {
       return (
-        <AlertStripe type="advarsel" className={styles.advarsel}>
+        <Alert size="small" variant="warning" className={styles.advarsel}>
           <FormattedMessage id="UttakActivity.MerEn100ProsentOgOgyldigUtsettlse" />
-        </AlertStripe>
+        </Alert>
       );
     }
     return (
-      <AlertStripe type="advarsel" className={styles.advarsel}>
+      <Alert size="small" variant="warning" className={styles.advarsel}>
         <FormattedMessage id="UttakActivity.MerEn100Prosent" />
-      </AlertStripe>
+      </Alert>
     );
   }
 
@@ -435,11 +434,11 @@ const warningUttakActivity = (values: FormValues): any => {
   if (invalidArbeidsProsentVidUsettelse && values.utsettelseType === utsettelseArsakCodes.ARBEID) {
     warnings = {
       _warning:
-  <AlertStripe type="advarsel" className={styles.advarsel}>
+  <Alert size="small" variant="warning" className={styles.advarsel}>
     <FormattedMessage
       id="UttakActivity.UtsettelseUtenFullArbeid"
     />
-  </AlertStripe>,
+  </Alert>,
     };
   }
 

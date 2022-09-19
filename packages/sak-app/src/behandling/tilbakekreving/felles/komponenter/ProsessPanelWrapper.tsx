@@ -2,7 +2,7 @@ import React, {
   FunctionComponent, ReactElement,
 } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 
 import { FadingPanel } from '@navikt/ft-ui-komponenter';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
@@ -39,18 +39,18 @@ const ProsessPanelWrapper: FunctionComponent<OwnProps> = ({
   if (visHenlagt) {
     return (
       <PanelContainer>
-        <Normaltekst>
+        <BodyShort size="small">
           <FormattedMessage id="ProsessPanelWrapper.Henlagt" />
-        </Normaltekst>
+        </BodyShort>
       </PanelContainer>
     );
   }
   if (status === VilkarUtfallType.IKKE_VURDERT && !erAksjonspunktOpent) {
     return (
       <PanelContainer>
-        <Normaltekst>
+        <BodyShort size="small">
           <FormattedMessage id="ProsessPanelWrapper.IkkeBehandlet" />
-        </Normaltekst>
+        </BodyShort>
       </PanelContainer>
     );
   }

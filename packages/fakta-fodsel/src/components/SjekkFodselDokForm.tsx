@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Column } from 'nav-frontend-grid';
+import { Label } from '@navikt/ds-react';
 
 import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@fpsak-frontend/fakta-felles';
 import {
@@ -15,7 +16,6 @@ import {
 } from '@fpsak-frontend/types';
 import { SjekkManglendeFodselAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
-import { Element } from 'nav-frontend-typografi';
 import AvklartBarnFieldArray from './AvklartBarnFieldArray';
 
 import styles from './SjekkFodselDokForm.less';
@@ -108,7 +108,7 @@ export const SjekkFodselDokForm: FunctionComponent<OwnProps> & StaticFunctions =
             <Column xs="12">
               <VerticalSpacer eightPx />
               <ArrowBox>
-                <Element><FormattedMessage id="SjekkFodselDokForm.FyllInnDokumenterteOpplysninger" /></Element>
+                <Label size="small"><FormattedMessage id="SjekkFodselDokForm.FyllInnDokumenterteOpplysninger" /></Label>
                 <VerticalSpacer eightPx />
                 <AvklartBarnFieldArray readOnly={readOnly} />
               </ArrowBox>

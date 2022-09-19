@@ -2,7 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 import { useForm } from 'react-hook-form';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Button } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
@@ -38,9 +38,9 @@ const Template: Story<{
         fodselsdato="2022-05-27"
       />
       <VerticalSpacer fourtyPx />
-      <Hovedknapp htmlType="submit">
+      <Button size="small" variant="primary">
         Lagreknapp (Kun for test)
-      </Hovedknapp>
+      </Button>
     </Form>
   );
 };

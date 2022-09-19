@@ -14,6 +14,7 @@ import InnhentDokOpptjeningUtlandPanel from './innhentDok/InnhentDokOpptjeningUt
 import StartdatoForForeldrepengerperiodenForm from './startdatoForForeldrepenger/StartdatoForForeldrepengerperiodenForm';
 
 interface OwnProps {
+  erSvangerskapspenger: boolean;
   soknad: Soknad;
   aksjonspunkter: Aksjonspunkt[];
   dokStatus?: string;
@@ -31,6 +32,7 @@ const erMarkertUtenlandssak = (
 ): boolean => aksjonspunkter.some((ap) => ap.definisjon === aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK);
 
 const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
+  erSvangerskapspenger,
   soknad,
   aksjonspunkter,
   dokStatus,
@@ -75,17 +77,19 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
           </>
         )}
       </Column>
-      <Column xs="6">
-        <StartdatoForForeldrepengerperiodenForm
-          aksjonspunkt={aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO)}
-          submitCallback={submitCallback}
-          readOnly={readOnly}
-          alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-          soknad={soknad}
-          formData={formData}
-          setFormData={setFormData}
-        />
-      </Column>
+      {!erSvangerskapspenger && (
+        <Column xs="6">
+          <StartdatoForForeldrepengerperiodenForm
+            aksjonspunkt={aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO)}
+            submitCallback={submitCallback}
+            readOnly={readOnly}
+            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+            soknad={soknad}
+            formData={formData}
+            setFormData={setFormData}
+          />
+        </Column>
+      )}
     </Row>
   </>
 );

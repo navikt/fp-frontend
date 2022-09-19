@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Label, BodyShort } from '@navikt/ds-react';
 
 import { Behandlingsresultat } from '@fpsak-frontend/types';
 
@@ -24,13 +24,13 @@ const VedtakOpphorRevurderingPanel: FunctionComponent<OwnProps> = ({
   skalBrukeOverstyrendeFritekstBrev,
 }) => (
   <>
-    <Element>
+    <Label size="small">
       <FormattedMessage id="VedtakForm.RevurderingFP.Aarsak" />
-    </Element>
+    </Label>
     {revurderingsÅrsakString && (
-      <Normaltekst>
+      <BodyShort size="small">
         {revurderingsÅrsakString}
-      </Normaltekst>
+      </BodyShort>
     )}
     {!skalBrukeOverstyrendeFritekstBrev && beregningErManueltFastsatt && (
       <VedtakFritekstPanel

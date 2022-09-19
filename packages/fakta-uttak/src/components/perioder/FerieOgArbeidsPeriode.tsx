@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { createSelector } from 'reselect';
-import { Undertekst } from 'nav-frontend-typografi';
+import { Detail } from '@navikt/ds-react';
 
 import oppholdArsakType from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -96,7 +96,7 @@ export const FerieOgArbeidsPeriode: FunctionComponent<PureOwnProps & MappedOwnPr
         <FlexContainer>
           <FlexRow wrap>
             <FlexColumn className={styles.fieldColumn}>
-              <Undertekst><FormattedMessage id="UttakInfoPanel.FastsettResultat" /></Undertekst>
+              <Detail size="small"><FormattedMessage id="UttakInfoPanel.FastsettResultat" /></Detail>
               <VerticalSpacer fourPx />
               <RadioGroupField
                 direction="vertical"

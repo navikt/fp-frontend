@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 
 import {
   Table, TableRow, TableColumn,
@@ -16,9 +16,9 @@ const IngenArbeidsforholdRegistrert: FunctionComponent<OwnProps> = ({
   <Table headerColumnContent={headerColumnContent} noHover>
     <TableRow>
       <TableColumn>
-        <Normaltekst>
+        <BodyShort size="small">
           <FormattedMessage id="PersonArbeidsforholdTable.IngenArbeidsforholdRegistrert" />
-        </Normaltekst>
+        </BodyShort>
       </TableColumn>
       <TableColumn />
       <TableColumn />

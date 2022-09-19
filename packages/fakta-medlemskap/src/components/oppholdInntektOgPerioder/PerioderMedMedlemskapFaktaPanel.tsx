@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { BodyShort } from '@navikt/ds-react';
 import moment from 'moment';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
@@ -65,9 +65,9 @@ const PerioderMedMedlemskapFaktaPanel: FunctionComponent<OwnProps> & StaticFunct
   if (!sortertePerioder || sortertePerioder.length === 0) {
     return (
       <FaktaGruppe title={intl.formatMessage({ id: 'PerioderMedMedlemskapFaktaPanel.ApplicationInformation' })}>
-        <Normaltekst>
+        <BodyShort size="small">
           <FormattedMessage id="PerioderMedMedlemskapFaktaPanel.NoInformation" />
-        </Normaltekst>
+        </BodyShort>
       </FaktaGruppe>
     );
   }

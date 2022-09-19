@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Undertekst, Undertittel } from 'nav-frontend-typografi';
+import { Detail, Heading } from '@navikt/ds-react';
 import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
@@ -29,7 +29,7 @@ const FrilansPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
 }) => (
   <BorderBox>
-    <Undertittel><FormattedMessage id="Registrering.Frilans.Title" /></Undertittel>
+    <Heading size="small"><FormattedMessage id="Registrering.Frilans.Title" /></Heading>
     <VerticalSpacer sixteenPx />
     <RadioGroupPanel
       name={`${FRILANS_NAME_PREFIX}.harSokerPeriodeMedFrilans`}
@@ -47,7 +47,7 @@ const FrilansPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
           <>
             <VerticalSpacer eightPx />
             <ArrowBox>
-              <Undertekst><FormattedMessage id="Registrering.Frilans.OppgiPeriode" /></Undertekst>
+              <Detail size="small"><FormattedMessage id="Registrering.Frilans.OppgiPeriode" /></Detail>
               <VerticalSpacer eightPx />
               <FrilansPerioderFieldArray readOnly={readOnly} />
               <VerticalSpacer fourPx />
