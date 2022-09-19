@@ -54,11 +54,10 @@ export const SearchForm: FunctionComponent<OwnProps> = ({
             validate={[hasValidSaksnummerOrFodselsnummerFormat]}
           />
         </Column>
-        <Column xs="5">
+        <Column xs="5" className={styles.button}>
           <Button
             variant="primary"
             size="small"
-            className={styles.button}
             loading={searchStarted}
             disabled={isButtonDisabled(searchStarted, searchString)}
           >

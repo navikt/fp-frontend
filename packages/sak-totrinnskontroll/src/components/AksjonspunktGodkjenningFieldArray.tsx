@@ -114,8 +114,8 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
 
         const fieldIndex = `${FIELD_ARRAY_NAME}.${index}`;
 
-        const hasError = harIkkeValgtMinstEnFakta(getValues, fieldIndex);
-        const errorMessage = useCustomValidation(`${fieldIndex}.faktagruppe`, hasError, isRequiredMessage());
+        const feilmelding = harIkkeValgtMinstEnFakta(getValues, fieldIndex) ? isRequiredMessage() : undefined;
+        const errorMessage = useCustomValidation(`${fieldIndex}.faktagruppe`, feilmelding);
 
         return (
           <div key={field.id}>

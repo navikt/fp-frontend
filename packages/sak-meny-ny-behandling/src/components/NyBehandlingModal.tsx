@@ -213,20 +213,26 @@ const NyBehandlingModal: FunctionComponent<OwnProps> = ({
               />
               <VerticalSpacer sixteenPx />
               {valgtBehandlingTypeKode === bType.FORSTEGANGSSOKNAD && (
-                <CheckboxField
-                  name="nyBehandlingEtterKlage"
-                  label={intl.formatMessage({ id: 'MenyNyBehandlingIndex.NyBehandlingEtterKlage' })}
-                />
+                <>
+                  <CheckboxField
+                    name="nyBehandlingEtterKlage"
+                    label={intl.formatMessage({ id: 'MenyNyBehandlingIndex.NyBehandlingEtterKlage' })}
+                  />
+                  <VerticalSpacer sixteenPx />
+                </>
               )}
               {behandlingArsakTyper.length > 0 && (
-                <SelectField
-                  name="behandlingArsakType"
-                  label=""
-                  hideLabel
-                  validate={[required]}
-                  className={styles.arsakBredde}
-                  selectValues={behandlingArsakTyper.map((b) => <option key={b.kode} value={b.kode}>{b.navn}</option>)}
-                />
+                <>
+                  <SelectField
+                    name="behandlingArsakType"
+                    label=""
+                    hideLabel
+                    validate={[required]}
+                    className={styles.arsakBredde}
+                    selectValues={behandlingArsakTyper.map((b) => <option key={b.kode} value={b.kode}>{b.navn}</option>)}
+                  />
+                  <VerticalSpacer sixteenPx />
+                </>
               )}
               <div className={styles.right}>
                 <FlexContainer>

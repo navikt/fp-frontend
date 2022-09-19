@@ -127,6 +127,8 @@ export const DelOppPeriodeModal: FunctionComponent<PureOwnProps & MappedOwnProps
               >
                 <FormattedMessage id="DelOppPeriodeModalImpl.Ok" />
               </Button>
+            </FlexColumn>
+            <FlexColumn>
               <Button
                 size="small"
                 variant="secondary"
