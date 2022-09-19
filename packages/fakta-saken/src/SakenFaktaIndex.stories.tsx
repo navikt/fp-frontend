@@ -29,13 +29,16 @@ const Template: Story<{
   aksjonspunkter: Aksjonspunkt[];
   alleMerknaderFraBeslutter?: { [key: string] : { notAccepted?: boolean }};
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
+  erSvangerskapspenger?: boolean;
 }> = ({
   aksjonspunkter,
   alleMerknaderFraBeslutter = {},
   submitCallback,
+  erSvangerskapspenger = false,
 }) => (
   <SakenFaktaIndex
     aksjonspunkter={aksjonspunkter}
+    erSvangerskapspenger={erSvangerskapspenger}
     submitCallback={submitCallback}
     readOnly={false}
     submittable
@@ -67,6 +70,18 @@ ApentAksjonspunktForInnhentingAvDokumentasjon.args = {
     erAktivt: true,
   }],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
+};
+
+export const ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp = Template.bind({});
+ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp.args = {
+  aksjonspunkter: [{
+    definisjon: aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+    status: aksjonspunktStatus.OPPRETTET,
+    kanLoses: true,
+    erAktivt: true,
+  }],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  erSvangerskapspenger: true,
 };
 
 export const AksjonspunktErIkkeGodkjentAvBeslutter = Template.bind({});

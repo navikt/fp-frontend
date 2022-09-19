@@ -100,7 +100,7 @@ const BehandlingEngangsstonadIndex: FunctionComponent<StandardBehandlingProps> =
           requestApi={requestEsApi}
           hentFaktaPaneler={(props) => (
             <>
-              <SakenFaktaInitPanel {...props} />
+              <SakenFaktaInitPanel {...props} fagsak={fagsak} />
               <YtelserFaktaInitPanel {...props} />
               <VergeFaktaInitPanel {...props} />
               <OmsorgvilkaretFaktaInitPanel {...props} personoversikt={personoversikt} />
