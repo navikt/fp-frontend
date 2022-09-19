@@ -33,7 +33,7 @@ describe('<BeregningsresultatProsessIndex>', () => {
     expect(await screen.findByAltText('Har overstyrt')).toBeInTheDocument();
     expect(screen.queryByAltText('Overstyr')).not.toBeInTheDocument();
 
-    expect(screen.getByText('Bekreft overstyring')).toBeDisabled();
+    expect(screen.getByText('Bekreft overstyring').closest('button')).toBeDisabled();
 
     await userEvent.type(utils.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
 

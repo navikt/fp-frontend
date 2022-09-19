@@ -42,7 +42,7 @@ describe('<OmsorgFaktaIndex>', () => {
 
     expect(screen.queryByText('Barn 2')).not.toBeInTheDocument();
 
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     expect(screen.getByText('Søker har oppgitt å ha omsorg for barnet')).toBeInTheDocument();
 
@@ -72,7 +72,7 @@ describe('<OmsorgFaktaIndex>', () => {
     expect(await screen.findByText('Fakta om omsorg')).toBeInTheDocument();
     expect(screen.getByText('Vurder om søker har omsorg for barnet i søknadsperioden')).toBeInTheDocument();
 
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     expect(screen.getByText('Søker har oppgitt å ha omsorg for barnet')).toBeInTheDocument();
 

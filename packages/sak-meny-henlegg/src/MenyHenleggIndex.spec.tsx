@@ -19,7 +19,7 @@ describe('<MenyHenleggIndex>', () => {
     const henleggBehandling = jest.fn(() => Promise.resolve());
     const utils = render(<ForFørstegangssøknad henleggBehandling={henleggBehandling} />);
     expect(await screen.findAllByText('Henlegg behandling')).toHaveLength(2);
-    expect(screen.getAllByText('Henlegg behandling')[1]).toBeDisabled();
+    expect(screen.getAllByText('Henlegg behandling')[1].closest('button')).toBeDisabled();
 
     expect(screen.getByText('Søknaden er trukket')).toBeInTheDocument();
     expect(screen.getByText('Behandlingen er feilaktig opprettet')).toBeInTheDocument();

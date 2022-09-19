@@ -77,7 +77,7 @@ describe('<SettPaVentModal>', () => {
     );
 
     expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
-    expect(utils.getByText('OK')).toBeDisabled();
+    expect(utils.getByText('OK').closest('button')).toBeDisabled();
   });
 
   it('skal ikke vise frist-input når behandling automatisk er satt på vent uten frist', async () => {

@@ -25,7 +25,7 @@ describe('<PermisjonFaktaIndex>', () => {
 
     expect(screen.getByText('Inntekter (fra A-inntekt)')).toBeInTheDocument();
 
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     await userEvent.click(screen.getByText('Fjern permisjonen og ta med arbeidsforholdet. Vurder om inntektsmelding må innhentes'));
 
@@ -56,7 +56,7 @@ describe('<PermisjonFaktaIndex>', () => {
     expect(screen.getByText('Autoservice AS')).toBeInTheDocument();
     expect(screen.getByText('BEDRIFT AS')).toBeInTheDocument();
 
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     await userEvent.click(screen.getAllByText('Fjern permisjonen og ta med arbeidsforholdet. Vurder om inntektsmelding må innhentes')[0]);
     await userEvent.click(screen.getAllByText('Ikke ta med arbeidsforholdet')[1]);

@@ -38,7 +38,7 @@ describe('<BesteberegningFaktaIndex>', () => {
     const utils = render(<BesteberegningMedAvvik submitCallback={lagre} />);
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeInTheDocument();
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
     expect(screen.getByText('Saken er tatt ut til kontroll på grunn av stort avvik mellom 3. og 1. ledd.'
       + ' Vennligst kontroller beregningen')).toBeInTheDocument();
 

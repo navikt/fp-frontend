@@ -24,9 +24,9 @@ describe('<OpptjeningFaktaIndex>', () => {
     expect(screen.getByText('(9 mndr. 31 dager)')).toBeInTheDocument();
     expect(screen.getAllByText('Næring')).toHaveLength(2);
 
-    expect(screen.getByText('Oppdater')).toBeDisabled();
+    expect(screen.getByText('Oppdater').closest('button')).toBeDisabled();
     expect(screen.getByText('Avbryt')).toBeEnabled();
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'D');
 

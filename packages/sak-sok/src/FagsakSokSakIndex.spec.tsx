@@ -10,7 +10,7 @@ describe('<FagsakSokSakIndex>', () => {
   it('skal skrive inn ikke gyldig saksnummer og få feilmelding', async () => {
     const utils = render(<Default />);
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
-    expect(screen.getByText('Søk')).toBeDisabled();
+    expect(screen.getByText('Søk').closest('button')).toBeDisabled();
 
     const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
     await userEvent.type(nrInput, 'TEST');
@@ -25,7 +25,7 @@ describe('<FagsakSokSakIndex>', () => {
   it('skal skrive inn gyldig saksnummer og få opp to treff', async () => {
     const utils = render(<Default />);
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
-    expect(screen.getByText('Søk')).toBeDisabled();
+    expect(screen.getByText('Søk').closest('button')).toBeDisabled();
 
     const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
     await userEvent.type(nrInput, '123');
@@ -52,7 +52,7 @@ describe('<FagsakSokSakIndex>', () => {
     const utils = render(<IngenTreff />);
 
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
-    expect(screen.getByText('Søk')).toBeDisabled();
+    expect(screen.getByText('Søk').closest('button')).toBeDisabled();
 
     const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
     await userEvent.type(nrInput, '123');

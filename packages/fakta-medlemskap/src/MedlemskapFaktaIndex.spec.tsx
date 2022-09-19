@@ -24,7 +24,7 @@ describe('<MedlemskapFaktaIndex>', () => {
     expect(screen.getByText('Oppholdstillatelser')).toBeInTheDocument();
     expect(screen.getByText('Perioder med medlemskap')).toBeInTheDocument();
 
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     await userEvent.click(screen.getAllByText('Søker er bosatt i Norge')[0]);
 
@@ -65,7 +65,7 @@ describe('<MedlemskapFaktaIndex>', () => {
     expect(screen.getByText('Bostedsadresse fra folkeregisteret')).toBeInTheDocument();
     expect(screen.getByText('Perioder med medlemskap')).toBeInTheDocument();
 
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     await userEvent.click(screen.getByText('Periode med medlemskap'));
 
@@ -123,7 +123,7 @@ describe('<MedlemskapFaktaIndex>', () => {
     expect(await screen.findByText('Fakta om medlemskap')).toBeInTheDocument();
     expect(screen.getByText('Vurder om søker er EØS-borger med oppholdsrett')).toBeInTheDocument();
 
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     await userEvent.click(screen.getAllByText('Søker har oppholdsrett')[0]);
 
@@ -163,7 +163,7 @@ describe('<MedlemskapFaktaIndex>', () => {
     expect(await screen.findByText('Fakta om medlemskap')).toBeInTheDocument();
     expect(screen.getByText('Avklar om søker har lovlig opphold')).toBeInTheDocument();
 
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     await userEvent.click(screen.getAllByText('Søker har lovlig opphold')[0]);
 
@@ -209,29 +209,29 @@ describe('<MedlemskapFaktaIndex>', () => {
 
     expect(screen.getByText('Periode - 05.10.2017')).toBeInTheDocument();
 
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
-    expect(screen.getByText('Oppdater')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
+    expect(screen.getByText('Oppdater').closest('button')).toBeDisabled();
     expect(screen.getByText('Avbryt')).toBeEnabled();
 
     await userEvent.click(screen.getAllByText('Søker har lovlig opphold')[0]);
 
     await userEvent.type(screen.getByText('Begrunn endringene'), 'Dette er en begrunnelse');
 
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     await userEvent.click(screen.getByText('Oppdater'));
 
     expect(await screen.findByText('Periode - 07.11.2019')).toBeInTheDocument();
 
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
-    expect(screen.getByText('Oppdater')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
+    expect(screen.getByText('Oppdater').closest('button')).toBeDisabled();
     expect(screen.getByText('Avbryt')).toBeEnabled();
 
     await userEvent.click(screen.getAllByText('Søker er bosatt i Norge')[0]);
 
     await userEvent.type(screen.getByText('Begrunn endringene'), 'Dette er en begrunnelse');
 
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     await userEvent.click(screen.getByText('Oppdater'));
 

@@ -15,7 +15,7 @@ describe('<VergeFaktaIndex>', () => {
     const utils = render(<Default submitCallback={lagre} />);
 
     expect(await screen.findByText('Fyll ut og kontroller vergeopplysninger')).toBeInTheDocument();
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     await userEvent.selectOptions(utils.getByLabelText('Type verge'), 'ADVOKAT');
 
