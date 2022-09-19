@@ -109,7 +109,17 @@ describe('<TotrinnskontrollIndex>', () => {
 
     expect(await screen.findByText('Kontroller endrede opplysninger og faglige vurderinger')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Send til saksbehandler'));
+    const alleGodkjentRadios = screen.getAllByText('Godkjent');
+    expect(alleGodkjentRadios).toHaveLength(7);
+    await userEvent.click(alleGodkjentRadios[0]);
+    await userEvent.click(alleGodkjentRadios[1]);
+    await userEvent.click(alleGodkjentRadios[2]);
+    await userEvent.click(alleGodkjentRadios[3]);
+    await userEvent.click(alleGodkjentRadios[4]);
+    await userEvent.click(alleGodkjentRadios[5]);
+    await userEvent.click(alleGodkjentRadios[6]);
+
+    await userEvent.click(screen.getByText('Godkjenn vedtaket'));
 
     await waitFor(() => expect(axiosMock.history.get
       .find((a) => a.url === FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT.name)?.params).toStrictEqual({
@@ -123,43 +133,43 @@ describe('<TotrinnskontrollIndex>', () => {
             aksjonspunktKode: '5027',
             arsaker: [],
             begrunnelse: undefined,
-            godkjent: undefined,
+            godkjent: true,
           },
           {
             aksjonspunktKode: '5001',
             arsaker: [],
             begrunnelse: undefined,
-            godkjent: undefined,
+            godkjent: true,
           },
           {
             aksjonspunktKode: '7002',
             arsaker: [],
             begrunnelse: undefined,
-            godkjent: undefined,
+            godkjent: true,
           },
           {
             aksjonspunktKode: '5008',
             arsaker: [],
             begrunnelse: undefined,
-            godkjent: undefined,
+            godkjent: true,
           },
           {
             aksjonspunktKode: '5011',
             arsaker: [],
             begrunnelse: undefined,
-            godkjent: undefined,
+            godkjent: true,
           },
           {
             aksjonspunktKode: '5014',
             arsaker: [],
             begrunnelse: undefined,
-            godkjent: undefined,
+            godkjent: true,
           },
           {
             aksjonspunktKode: '5013',
             arsaker: [],
             begrunnelse: undefined,
-            godkjent: undefined,
+            godkjent: true,
           },
         ],
         begrunnelse: null,

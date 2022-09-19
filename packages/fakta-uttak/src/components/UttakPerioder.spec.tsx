@@ -1,7 +1,7 @@
 import React from 'react';
 import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
-import { Button } from '@navikt/ds-react';
+import { Button, Label } from '@navikt/ds-react';
 import {
   AksjonspunktHelpTextHTML, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
@@ -70,7 +70,7 @@ describe('<UttakPerioder>', () => {
     const flexContainer = wrapper.find(FlexContainer);
     const flexRow = wrapper.find(FlexRow);
     const flexColumn = wrapper.find(FlexColumn);
-    const element = wrapper.find('Element');
+    const element = wrapper.find(Label);
     const uttakNyPeriode = wrapper.find('UttakNyPeriode');
     const uttakSlettPeriodeModal = wrapper.find('UttakSlettPeriodeModal');
     expect(fieldArray).toHaveLength(1);

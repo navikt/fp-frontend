@@ -23,7 +23,7 @@ const erAlleGodkjent = (formState: TotrinnskontrollAksjonspunkt[] = []) => formS
   .every((ap) => ap.totrinnskontrollGodkjent);
 
 const erAlleGodkjentEllerAvvist = (formState: TotrinnskontrollAksjonspunkt[] = []) => formState
-  .every((ap) => ap.totrinnskontrollGodkjent !== null);
+  .every((ap) => ap.totrinnskontrollGodkjent !== undefined);
 
 const harIkkeKonsekvenserForYtelsen = (konsekvenserForYtelsenKoder: string[], behandlingResultat?: Behandling['behandlingsresultat']) => {
   if (!behandlingResultat) {

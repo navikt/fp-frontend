@@ -1,5 +1,6 @@
 import React from 'react';
 import sinon from 'sinon';
+import { Detail } from '@navikt/ds-react';
 
 import { RadioGroupField } from '@fpsak-frontend/form';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -32,7 +33,7 @@ describe('<FerieOgArbeidsPeriode>', () => {
       {...reduxFormPropsMock}
     />, messages);
 
-    const undertekst = wrapper.find('Undertekst');
+    const undertekst = wrapper.find(Detail);
     const radioGroupField = wrapper.find('RadioGroupField');
     const textAreaField = wrapper.find('TextAreaField');
     const inntektsmeldinginfo = wrapper.find('inntektsmeldinginfo');

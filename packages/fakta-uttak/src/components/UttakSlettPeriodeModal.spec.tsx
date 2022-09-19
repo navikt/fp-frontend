@@ -40,9 +40,9 @@ describe('<UttakSlettPeriodeModal>', () => {
     />, messages);
     const modal = wrapper.find(Modal);
     expect(modal).toHaveLength(1);
-    expect(modal.prop('isOpen')).toBe(true);
+    expect(modal.prop('open')).toBe(true);
     expect(modal.prop('closeButton')).toBe(false);
-    expect(modal.prop('contentLabel')).toEqual('Perioden slettes');
+    expect(modal.prop('aria-label')).toEqual('Perioden slettes');
 
     const textField = wrapper.find(TextAreaField);
     expect(textField).toHaveLength(1);
@@ -63,6 +63,6 @@ describe('<UttakSlettPeriodeModal>', () => {
     />, messages);
     const modal = wrapper.find(Modal);
     expect(modal).toHaveLength(1);
-    expect(modal.prop('isOpen')).toBe(false);
+    expect(modal.prop('open')).toBe(false);
   });
 });

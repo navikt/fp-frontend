@@ -1,6 +1,7 @@
 import React from 'react';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import sinon from 'sinon';
+import { Alert } from '@navikt/ds-react';
 
 import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { FamilieHendelseSamling } from '@fpsak-frontend/types';
@@ -177,7 +178,7 @@ describe('<UttakPeriode>', () => {
     />, messages);
 
     const periodeContainer = wrapper.find('div.periodeContainer');
-    const alertStripe = wrapper.find('AlertStripe');
+    const alertStripe = wrapper.find(Alert);
     expect(periodeContainer.at(1).hasClass('active')).toBe(true);
     expect(alertStripe).toHaveLength(1);
   });
