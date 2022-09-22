@@ -10,9 +10,7 @@ import {
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ISO_DATE_FORMAT, addDaysToDate } from '@navikt/ft-utils';
-import {
-  AksjonspunktHelpTextTemp, DateLabel, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextTemp, DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { TimeLineNavigation } from '@navikt/ft-tidslinje';
 import {
   ArbeidsgiverOpplysningerPerId, AlleKodeverk, OpptjeningAktivitet, Opptjening,
@@ -202,9 +200,14 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
         opptjeningTomDato={opptjeningTomDato}
       />
       {filtrerteOgSorterteOpptjeningsaktiviteter.length > 0 && (
-        <TimeLineNavigation
-          openPeriodInfo={opneInfo}
-        />
+        <>
+          <VerticalSpacer eightPx />
+          <div className={styles.pushRight}>
+            <TimeLineNavigation
+              openPeriodInfo={opneInfo}
+            />
+          </div>
+        </>
       )}
       <VerticalSpacer eightPx />
       {valgtAktivitetIndex !== undefined && (

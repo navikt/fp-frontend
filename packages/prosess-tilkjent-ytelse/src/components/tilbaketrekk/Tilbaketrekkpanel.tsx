@@ -2,7 +2,6 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
-import { Column, Row } from 'nav-frontend-grid';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image,
 } from '@navikt/ft-ui-komponenter';
@@ -110,48 +109,36 @@ const Tilbaketrekkpanel: FunctionComponent<OwnProps> = ({
         </FlexContainer>
       </div>
       <VerticalSpacer twentyPx />
-      <Row>
-        <Column xs="9">
-          <RadioGroupPanel
-            name={radioFieldName}
-            validate={[required]}
-            isReadOnly={readOnly}
-            isEdited={!isAksjonspunktOpen(vurderTilbaketrekkAP.status)}
-            isHorizontal
-            radios={[{
-              value: 'false',
-              label: <FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Utfør" />,
-            }, {
-              value: 'true',
-              label: <FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Hindre" />,
-            },
-            ]}
-          />
-        </Column>
-      </Row>
+      <RadioGroupPanel
+        name={radioFieldName}
+        validate={[required]}
+        isReadOnly={readOnly}
+        isEdited={!isAksjonspunktOpen(vurderTilbaketrekkAP.status)}
+        isHorizontal
+        radios={[{
+          value: 'false',
+          label: <FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Utfør" />,
+        }, {
+          value: 'true',
+          label: <FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Hindre" />,
+        },
+        ]}
+      />
       <VerticalSpacer sixteenPx />
-      <Row>
-        <Column xs="6">
-          <TextAreaField
-            name={begrunnelseFieldName}
-            label={<FormattedMessage id="Beregningsgrunnlag.Forms.Vurdering" />}
-            validate={[required, maxLength1500, minLength3, hasValidText]}
-            maxLength={1500}
-            readOnly={readOnly}
-          />
-        </Column>
-      </Row>
-      <Row>
-        <Column xs="1">
-          <VerticalSpacer sixteenPx />
-          <ProsessStegSubmitButtonNew
-            isReadOnly={readOnly}
-            isSubmittable={!readOnlySubmitButton}
-            isSubmitting={formMethods.formState.isSubmitting}
-            isDirty={formMethods.formState.isDirty}
-          />
-        </Column>
-      </Row>
+      <TextAreaField
+        name={begrunnelseFieldName}
+        label={<FormattedMessage id="Beregningsgrunnlag.Forms.Vurdering" />}
+        validate={[required, maxLength1500, minLength3, hasValidText]}
+        maxLength={1500}
+        readOnly={readOnly}
+      />
+      <VerticalSpacer sixteenPx />
+      <ProsessStegSubmitButtonNew
+        isReadOnly={readOnly}
+        isSubmittable={!readOnlySubmitButton}
+        isSubmitting={formMethods.formState.isSubmitting}
+        isDirty={formMethods.formState.isDirty}
+      />
     </Form>
   );
 };

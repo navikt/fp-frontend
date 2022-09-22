@@ -5,6 +5,7 @@ import { Label } from '@navikt/ds-react';
 
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { scrollUp } from './historikkUtils';
 
 interface SkjermlenkeProps {
@@ -32,14 +33,17 @@ const Skjermlenke: React.FunctionComponent<SkjermlenkeProps> = ({
   }
 
   return (
-    <Label size="small">
-      <NavLink
-        to={location}
-        onClick={scrollUpOnClick ? scrollUp : undefined}
-      >
-        {getKodeverknavn(skjermlenke, KodeverkType.SKJERMLENKE_TYPE)}
-      </NavLink>
-    </Label>
+    <>
+      <Label size="small">
+        <NavLink
+          to={location}
+          onClick={scrollUpOnClick ? scrollUp : undefined}
+        >
+          {getKodeverknavn(skjermlenke, KodeverkType.SKJERMLENKE_TYPE)}
+        </NavLink>
+      </Label>
+      <VerticalSpacer fourPx />
+    </>
   );
 };
 
