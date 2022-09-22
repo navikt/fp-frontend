@@ -2,7 +2,9 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Column, Row } from 'nav-frontend-grid';
-import { Button, Label, BodyShort } from '@navikt/ds-react';
+import {
+  Button, Label, Heading, BodyShort,
+} from '@navikt/ds-react';
 import dayjs from 'dayjs';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -116,13 +118,14 @@ export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
       >
         <Row>
           <Column xs="10">
-            <Label size="small"><FormattedMessage id="ActivityPanel.Details" /></Label>
+            <Heading size="small"><FormattedMessage id="ActivityPanel.Details" /></Heading>
           </Column>
           <Column xs="2">
             <TimeLineButton text={intl.formatMessage({ id: 'Timeline.prevPeriod' })} type="prev" callback={velgForrigeAktivitet} />
             <TimeLineButton text={intl.formatMessage({ id: 'Timeline.nextPeriod' })} type="next" callback={velgNesteAktivitet} />
           </Column>
         </Row>
+        <VerticalSpacer sixteenPx />
         <Row>
           <Column xs="7">
             <Label size="small">

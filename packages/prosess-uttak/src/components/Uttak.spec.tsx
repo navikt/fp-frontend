@@ -3,14 +3,12 @@ import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 import sinon from 'sinon';
 import { Button } from '@navikt/ds-react';
-import { Row } from 'nav-frontend-grid';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { CheckboxField } from '@fpsak-frontend/form';
-import { Tidslinje } from '@navikt/ft-tidslinje';
 import { KjønnkodeEnum } from '@fpsak-frontend/types/src/Kjonnkode';
 import {
   Aksjonspunkt, AlleKodeverk, Behandling, FamilieHendelseSamling, PeriodeSokerAktivitet, Personoversikt,
@@ -21,6 +19,7 @@ import { Søknadsfrist } from '@fpsak-frontend/types/src/soknadTsType';
 import UttakTimeLineData from './UttakTimeLineData';
 import messages from '../../i18n/nb_NO.json';
 import { Uttak, UttaksresultatActivity, PeriodeMedClassName } from './Uttak';
+import Tidslinje from './Tidslinje';
 
 const intlMock = getIntlMock(messages);
 
@@ -85,8 +84,6 @@ describe('<Uttak>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
     wrapper.setState({ selectedItem: null });
-    const rows = wrapper.find(Row);
-    expect(rows).toHaveLength(3);
     const checkBox = wrapper.find(CheckboxField);
     expect(checkBox).toHaveLength(1);
     expect(checkBox.first().prop('name')).toEqual('manuellOverstyring');

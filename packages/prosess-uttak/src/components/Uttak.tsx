@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { change as reduxFormChange, formValueSelector, initialize as reduxFormInitialize } from 'redux-form';
 import { bindActionCreators, Dispatch } from 'redux';
 import { FormattedMessage, IntlShape, WrappedComponentProps } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import { Button } from '@navikt/ds-react';
 
 import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
@@ -24,7 +23,6 @@ import { CheckboxField } from '@fpsak-frontend/form';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
-import { Tidslinje, EventProps, TidslinjeTimes } from '@navikt/ft-tidslinje';
 import {
   Aksjonspunkt, Behandling, FamilieHendelseSamling,
   Soknad, UttaksresultatPeriode, Ytelsefordeling, Kjønnkode, AlleKodeverk,
@@ -38,6 +36,7 @@ import UttakTidslinjeHjelpetekster from './UttakTidslinjeHjelpetekster';
 import { AktivitetFieldArray } from './RenderUttakTable';
 
 import styles from './uttak.less';
+import Tidslinje, { EventProps, TidslinjeTimes } from './Tidslinje';
 
 type Overwrite<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;
 export type UttaksresultatActivity = Overwrite<PeriodeSoker, {
@@ -465,45 +464,37 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     const customTimes = getCustomTimes(dodeBarn, isRevurdering, person, soknadDate, fødselsdato, endringsdato);
     return (
       <div>
-        <Row>
-          {employeeHasAccess
-              && (
-                <div className={styles.manuell}>
-                  <CheckboxField
-                    key="manuellOverstyring"
-                    name="manuellOverstyring"
-                    label={{ id: 'Uttak.ManuellOverstyring' }}
-                    onChange={this.onToggleOverstyring}
-                    readOnly={isApOpen}
-                  />
-                </div>
-              )}
-        </Row>
+        {employeeHasAccess
+            && (
+              <div className={styles.manuell}>
+                <CheckboxField
+                  key="manuellOverstyring"
+                  name="manuellOverstyring"
+                  label={{ id: 'Uttak.ManuellOverstyring' }}
+                  onChange={this.onToggleOverstyring}
+                  readOnly={isApOpen}
+                />
+              </div>
+            )}
         {this.testForReadOnly(aksjonspunkter, employeeHasAccess)
             && <FormattedMessage id="Uttak.Overstyrt" />}
         <div>
-          <Row>
-            <TimeLineInfo
-              stonadskonto={stonadskonto.stonadskontoer}
-              arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-            />
-          </Row>
-          <VerticalSpacer twentyPx />
-          <Row>
-            <Column xs="12">
-              <Tidslinje
-                customTimes={customTimes}
-                hovedsokerKjonnKode={hovedsokerKjonnKode}
-                medsokerKjonnKode={medsokerKjonnKode}
-                openPeriodInfo={this.openPeriodInfo}
-                selectedPeriod={selectedItem}
-                selectPeriodCallback={this.selectHandler}
-                uttakPerioder={uttakPerioder}
-              >
-                <UttakTidslinjeHjelpetekster />
-              </Tidslinje>
-            </Column>
-          </Row>
+          <TimeLineInfo
+            stonadskonto={stonadskonto.stonadskontoer}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          />
+          <Tidslinje
+            customTimes={customTimes}
+            hovedsokerKjonnKode={hovedsokerKjonnKode}
+            medsokerKjonnKode={medsokerKjonnKode}
+            openPeriodInfo={this.openPeriodInfo}
+            selectedPeriod={selectedItem}
+            selectPeriodCallback={this.selectHandler}
+            uttakPerioder={uttakPerioder}
+          >
+            <UttakTidslinjeHjelpetekster />
+          </Tidslinje>
+          <VerticalSpacer sixteenPx />
           {selectedItem
               && (
                 <>

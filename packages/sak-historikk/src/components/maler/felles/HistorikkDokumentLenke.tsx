@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { HistorikkInnslagDokumentLink } from '@fpsak-frontend/types';
 
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import styles from '../historikkMalType.less';
 
 const DOCUMENT_SERVER_URL = '/fpsak/api/dokument/hent-dokument';
@@ -29,15 +30,18 @@ const HistorikkDokumentLenke: FunctionComponent<OwnProps> = ({
     );
   }
   return (
-    <a
-      className={styles.dokumentLenke}
-      href={`${DOCUMENT_SERVER_URL}?saksnummer=${saksnummer}&journalpostId=${journalpostId}&dokumentId=${dokumentId}`}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <i className={styles.dokumentIkon} title={tag} />
-      {tag}
-    </a>
+    <>
+      <VerticalSpacer fourPx />
+      <a
+        className={styles.dokumentLenke}
+        href={`${DOCUMENT_SERVER_URL}?saksnummer=${saksnummer}&journalpostId=${journalpostId}&dokumentId=${dokumentId}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i className={styles.dokumentIkon} title={tag} />
+        {tag}
+      </a>
+    </>
   );
 };
 

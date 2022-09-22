@@ -1,10 +1,11 @@
 import React, { Component, RefObject } from 'react';
 import moment from 'moment';
 import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 
 import { calcDaysAndWeeks, DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import {
   ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriode, AlleKodeverk, Kjønnkode,
@@ -262,54 +263,58 @@ export class TilkjentYtelse extends Component<OwnProps & WrappedComponentProps, 
     const customTimes = getCustomTimes(soknadDate, familiehendelseDate, lastPeriod);
     const nyePerioder = addClassNameGroupIdToPerioder(items, intl);
     return (
-      <div className={styles.timelineContainer}>
-        <VerticalSpacer sixteenPx />
-        <VerticalSpacer sixteenPx />
-        <Row>
-          <Column xs="1" className={styles.sokerContainer}>
-            <TimeLineSokerEnsamSoker
-              hovedsokerKjonnKode={hovedsokerKjonnKode}
-            />
-          </Column>
-          <Column xs="11">
-            <div className={styles.timeLineWrapper}>
-              <Timeline
-                ref={this.timelineRef}
-                options={getOptions(nyePerioder)}
-                // @ts-ignore Fiks
-                initialItems={nyePerioder}
-                initialGroups={groups}
-                customTimes={customTimes}
-                selectHandler={this.selectHandler}
-                selection={[selectedItem ? selectedItem.id : null]}
+      <>
+        <FlexContainer>
+          <FlexRow className={styles.timelineContainer}>
+            <FlexColumn className={styles.sokerContainer}>
+              <TimeLineSokerEnsamSoker
+                hovedsokerKjonnKode={hovedsokerKjonnKode}
               />
-            </div>
-          </Column>
-        </Row>
-        <Row>
-          <Column xs="12">
-            <TimeLineControl
-              goBackwardCallback={this.goBackward}
-              goForwardCallback={this.goForward}
-              zoomInCallback={this.zoomIn}
-              zoomOutCallback={this.zoomOut}
-              openPeriodInfo={this.openPeriodInfo}
-            />
-          </Column>
-        </Row>
+            </FlexColumn>
+            <FlexColumn className={styles.timelineWidth}>
+              <div className={styles.timeLineWrapper}>
+                <Timeline
+                  ref={this.timelineRef}
+                  options={getOptions(nyePerioder)}
+                  // @ts-ignore Fiks
+                  initialItems={nyePerioder}
+                  initialGroups={groups}
+                  customTimes={customTimes}
+                  selectHandler={this.selectHandler}
+                  selection={[selectedItem ? selectedItem.id : null]}
+                />
+              </div>
+            </FlexColumn>
+          </FlexRow>
+          <VerticalSpacer eightPx />
+          <FlexRow>
+            <FlexColumn className={styles.ctrlCol}>
+              <TimeLineControl
+                goBackwardCallback={this.goBackward}
+                goForwardCallback={this.goForward}
+                zoomInCallback={this.zoomIn}
+                zoomOutCallback={this.zoomOut}
+                openPeriodInfo={this.openPeriodInfo}
+              />
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
         {selectedItem && (
-          <TilkjentYtelseTimelineData
-            alleKodeverk={alleKodeverk}
-            selectedItemStartDate={selectedItem.fom.toString()}
-            selectedItemEndDate={selectedItem.tom.toString()}
-            selectedItemData={selectedItem}
-            callbackForward={this.nextPeriod}
-            callbackBackward={this.prevPeriod}
-            isSoknadSvangerskapspenger={isSoknadSvangerskapspenger}
-            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          />
+          <>
+            <VerticalSpacer eightPx />
+            <TilkjentYtelseTimelineData
+              alleKodeverk={alleKodeverk}
+              selectedItemStartDate={selectedItem.fom.toString()}
+              selectedItemEndDate={selectedItem.tom.toString()}
+              selectedItemData={selectedItem}
+              callbackForward={this.nextPeriod}
+              callbackBackward={this.prevPeriod}
+              isSoknadSvangerskapspenger={isSoknadSvangerskapspenger}
+              arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+            />
+          </>
         )}
-      </div>
+      </>
     );
   }
 }
