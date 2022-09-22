@@ -21,6 +21,7 @@ import {
 } from '@fpsak-frontend/types';
 import { VurderTilbaketrekkAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import Tilbaketrekkpanel, { FormValues } from './tilbaketrekk/Tilbaketrekkpanel';
 import FeriepengerIndex from './feriepenger/FeriepengerIndex';
 import TilkjentYtelse, { PeriodeMedId } from './TilkjentYtelse';
@@ -93,6 +94,7 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
       <Heading size="small">
         <FormattedMessage id="TilkjentYtelse.Title" />
       </Heading>
+      <VerticalSpacer thirtyTwoPx />
       {beregningresultat && (
         <TilkjentYtelse
           items={formatPerioder(beregningresultat.perioder)}
@@ -106,11 +108,15 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
         />
       )}
       {feriepengegrunnlag && (
-        <FeriepengerIndex
-          feriepengegrunnlag={feriepengegrunnlag}
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          alleKodeverk={alleKodeverk}
-        />
+        <>
+          <VerticalSpacer thirtyTwoPx />
+          <FeriepengerIndex
+            feriepengegrunnlag={feriepengegrunnlag}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+            alleKodeverk={alleKodeverk}
+          />
+          <VerticalSpacer thirtyTwoPx />
+        </>
       )}
       {vurderTilbaketrekkAP && (
         <Tilbaketrekkpanel

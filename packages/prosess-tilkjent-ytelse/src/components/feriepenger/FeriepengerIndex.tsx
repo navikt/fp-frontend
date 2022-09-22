@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 import { ArbeidsgiverOpplysningerPerId, Feriepengegrunnlag, AlleKodeverk } from '@fpsak-frontend/types';
-import { FeriepengerPanel } from './FeriepengerPanel';
+import FeriepengerPanel from './FeriepengerPanel';
 
 interface OwnProps {
   feriepengegrunnlag: Feriepengegrunnlag;
@@ -8,7 +8,7 @@ interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-export const FeriepengerIndex: FunctionComponent<OwnProps> = ({
+const FeriepengerIndex: FunctionComponent<OwnProps> = ({
   feriepengegrunnlag,
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,

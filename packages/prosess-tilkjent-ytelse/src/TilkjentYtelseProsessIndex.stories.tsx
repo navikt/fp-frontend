@@ -13,7 +13,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import {
   Aksjonspunkt,
-  Behandling, BeregningsresultatFp, Fagsak, FamilieHendelse, FamilieHendelseSamling, Personoversikt, Soknad,
+  Behandling, BeregningsresultatFp, Fagsak, FamilieHendelse, FamilieHendelseSamling, Feriepengegrunnlag, Personoversikt, Soknad,
 } from '@fpsak-frontend/types';
 import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -89,9 +89,11 @@ export default {
 const Template: Story<{
   submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
   aksjonspunkter: Aksjonspunkt[];
+  feriepengegrunnlag?: Feriepengegrunnlag;
 }> = ({
   submitCallback,
   aksjonspunkter,
+  feriepengegrunnlag,
 }) => (
   <TilkjentYtelseProsessIndex
     behandling={behandling}
@@ -111,6 +113,7 @@ const Template: Story<{
     soknad={soknad}
     fagsak={fagsak}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+    feriepengegrunnlag={feriepengegrunnlag}
   />
 );
 
@@ -127,4 +130,25 @@ export const ÅpentAksjonspunkt = Template.bind({});
     definisjon: aksjonspunktCodes.VURDER_TILBAKETREKK,
     status: aksjonspunktStatus.OPPRETTET,
   }] as Aksjonspunkt[],
+};
+
+export const MedFeriepengegrunnlag = Template.bind({});
+MedFeriepengegrunnlag.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  aksjonspunkter: [{
+    definisjon: aksjonspunktCodes.VURDER_TILBAKETREKK,
+    status: aksjonspunktStatus.OPPRETTET,
+  }] as Aksjonspunkt[],
+  feriepengegrunnlag: {
+    feriepengeperiodeFom: '2020-01-01',
+    feriepengeperiodeTom: '2022-10-10',
+    andeler: [{
+      aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
+      opptjeningsår: 2,
+      årsbeløp: 500000,
+      erBrukerMottaker: true,
+      ytelseperiodeFom: '2020-01-01',
+      ytelseperiodeTom: '2022-01-01',
+    }],
+  },
 };

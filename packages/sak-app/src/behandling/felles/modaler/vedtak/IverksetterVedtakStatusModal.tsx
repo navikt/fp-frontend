@@ -1,8 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
-import { Modal, Button, BodyShort } from '@navikt/ds-react';
-import { Image } from '@navikt/ft-ui-komponenter';
+import {
+  Modal, Button, BodyShort, Label,
+} from '@navikt/ds-react';
+import {
+  FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import { BehandlingResultatType } from '@navikt/ft-kodeverk';
 
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
@@ -20,7 +23,7 @@ interface OwnProps {
 /**
  * IverksetterVedtakStatusModal
  *
- * Presentasjonskomponent. Denne modalen vises etter en vilkarsvurdering der behandlingsstatusen
+ * Denne modalen vises etter en vilkarsvurdering der behandlingsstatusen
  * er satt til Iverksetter vedtak. Ved å trykke på knapp blir den NAV-ansatte tatt tilbake til sokesiden.
  */
 const IverksetterVedtakStatusModal: FunctionComponent<OwnProps> = ({
@@ -42,37 +45,37 @@ const IverksetterVedtakStatusModal: FunctionComponent<OwnProps> = ({
       shouldCloseOnOverlayClick={false}
     >
       <Modal.Content>
-        <Row className="">
-          <Column xs="1">
-            <Image
-              className={styles.image}
-              alt={imageAltText}
-              src={innvilgetImageUrl}
-            />
-            <div className={styles.divider} />
-          </Column>
-          <Column xs="9">
-            <BodyShort size="small">
-              {intl.formatMessage({ id: erVedtakAvslatt ? 'IverksetterVedtakStatusModal.VedtakAvslatt' : 'IverksetterVedtakStatusModal.VedtakInnvilet' })}
-            </BodyShort>
-            <BodyShort size="small">
-              {intl.formatMessage({ id: 'IverksetterVedtakStatusModal.GoToSearchPage' })}
-            </BodyShort>
-          </Column>
-          <Column xs="2">
-            <Button
-              size="small"
-              variant="primary"
-              className={styles.button}
-              onClick={lukkModal}
-              autoFocus
-              type="button"
-            >
-              {intl.formatMessage({ id: 'IverksetterVedtakStatusModal.Ok' })}
-            </Button>
-          </Column>
-
-        </Row>
+        <FlexContainer>
+          <FlexRow>
+            <FlexColumn>
+              <Image
+                className={styles.image}
+                alt={imageAltText}
+                src={innvilgetImageUrl}
+              />
+            </FlexColumn>
+            <FlexColumn>
+              <Label size="small">
+                {intl.formatMessage({ id: erVedtakAvslatt ? 'IverksetterVedtakStatusModal.VedtakAvslatt' : 'IverksetterVedtakStatusModal.VedtakInnvilet' })}
+              </Label>
+              <VerticalSpacer fourPx />
+              <BodyShort size="small">
+                {intl.formatMessage({ id: 'IverksetterVedtakStatusModal.GoToSearchPage' })}
+              </BodyShort>
+            </FlexColumn>
+            <FlexColumn className={styles.button}>
+              <Button
+                size="small"
+                variant="primary"
+                onClick={lukkModal}
+                autoFocus
+                type="button"
+              >
+                {intl.formatMessage({ id: 'IverksetterVedtakStatusModal.Ok' })}
+              </Button>
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
       </Modal.Content>
     </Modal>
   );

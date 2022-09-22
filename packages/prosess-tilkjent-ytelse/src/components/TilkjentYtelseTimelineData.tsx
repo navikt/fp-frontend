@@ -1,12 +1,11 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import moment from 'moment';
-import { Column, Row } from 'nav-frontend-grid';
 import { Label, BodyShort } from '@navikt/ds-react';
 
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
-  Table, TableColumn, TableRow, VerticalSpacer, FloatRight,
+  Table, TableColumn, TableRow, VerticalSpacer, FlexContainer, FlexRow, FlexColumn,
 } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@navikt/ft-utils';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
@@ -127,39 +126,37 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
 
   return (
     <TimeLineDataContainer>
-      <Row>
-        <Column xs="10">
-          <Label size="small">
-            <FormattedMessage id="TilkjentYtelse.PeriodeData.Detaljer" />
-          </Label>
-        </Column>
-        <Column xs="2">
-          <FloatRight>
+      <FlexContainer>
+        <FlexRow>
+          <FlexColumn>
+            <Label size="small">
+              <FormattedMessage id="TilkjentYtelse.PeriodeData.Detaljer" />
+            </Label>
+          </FlexColumn>
+          <FlexColumn className={styles.ctrlCol}>
             <TimeLineButton text={intl.formatMessage({ id: 'Timeline.prevPeriod' })} type="prev" callback={callbackBackward} />
             <TimeLineButton text={intl.formatMessage({ id: 'Timeline.nextPeriod' })} type="next" callback={callbackForward} />
-          </FloatRight>
-        </Column>
-      </Row>
-      <VerticalSpacer eightPx />
-      <div className={styles.detailsPeriode}>
-        <Row>
-          <Column xs="7">
-            <Label size="small">
-              <FormattedMessage
-                id="TilkjentYtelse.PeriodeData.Periode"
-                values={{
-                  fomVerdi: moment(selectedItemStartDate)
-                    .format(DDMMYYYY_DATE_FORMAT)
-                    .toString(),
-                  tomVerdi: moment(selectedItemEndDate)
-                    .format(DDMMYYYY_DATE_FORMAT)
-                    .toString(),
-                }}
-              />
-            </Label>
-          </Column>
-          <div>
-            <Column xs="5">
+          </FlexColumn>
+        </FlexRow>
+        <VerticalSpacer sixteenPx />
+        <div className={styles.detailsPeriode}>
+          <FlexRow spaceBetween>
+            <FlexColumn>
+              <Label size="small">
+                <FormattedMessage
+                  id="TilkjentYtelse.PeriodeData.Periode"
+                  values={{
+                    fomVerdi: moment(selectedItemStartDate)
+                      .format(DDMMYYYY_DATE_FORMAT)
+                      .toString(),
+                    tomVerdi: moment(selectedItemEndDate)
+                      .format(DDMMYYYY_DATE_FORMAT)
+                      .toString(),
+                  }}
+                />
+              </Label>
+            </FlexColumn>
+            <FlexColumn>
               <BodyShort size="small">
                 <FormattedMessage
                   id={numberOfDaysAndWeeks.id}
@@ -169,20 +166,20 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
                   }}
                 />
               </BodyShort>
-            </Column>
-          </div>
-        </Row>
-        <VerticalSpacer fourPx />
-        <Row>
-          <Column xs="12">
-            <FormattedMessage
-              id="TilkjentYtelse.PeriodeData.Dagsats"
-              values={{ dagsatsVerdi: selectedItemData.dagsats, b: (chunks: any) => <b>{chunks}</b> }}
-            />
-          </Column>
-        </Row>
-      </div>
-      <VerticalSpacer eightPx />
+            </FlexColumn>
+          </FlexRow>
+          <VerticalSpacer eightPx />
+          <FlexRow>
+            <FlexColumn>
+              <FormattedMessage
+                id="TilkjentYtelse.PeriodeData.Dagsats"
+                values={{ dagsatsVerdi: selectedItemData.dagsats, b: (chunks: any) => <b>{chunks}</b> }}
+              />
+            </FlexColumn>
+          </FlexRow>
+        </div>
+      </FlexContainer>
+      <VerticalSpacer sixteenPx />
       {selectedItemData.andeler.length !== 0
           && (
             <Table headerTextCodes={tableHeaderTextCodes(isSoknadSvangerskapspenger)}>

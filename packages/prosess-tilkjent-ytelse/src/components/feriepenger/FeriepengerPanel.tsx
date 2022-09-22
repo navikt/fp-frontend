@@ -1,8 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Heading } from '@navikt/ds-react';
-import { Column, Row } from 'nav-frontend-grid';
-import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
+import { Heading, Accordion } from '@navikt/ds-react';
 
 import {
   ArbeidsgiverOpplysningerPerId,
@@ -33,7 +31,7 @@ interface OwnProps {
   togglePanel: () => void;
 }
 
-export const FeriepengerPanel: FunctionComponent<OwnProps> = ({
+const FeriepengerPanel: FunctionComponent<OwnProps> = ({
   feriepengegrunnlag, alleKodeverk, arbeidsgiverOpplysningerPerId, erPanelÅpent, togglePanel,
 }) => {
   const { andeler } = feriepengegrunnlag;
@@ -42,13 +40,12 @@ export const FeriepengerPanel: FunctionComponent<OwnProps> = ({
   }
   const opptjeningsår = useMemo(() => finnListeMedOpptjeningsår(andeler), [andeler]);
   return (
-    <Row>
-      <Column xs="6">
-        <EkspanderbartpanelBase
-          tittel={hentTittel()}
-          apen={erPanelÅpent}
-          onClick={togglePanel}
-        >
+    <Accordion>
+      <Accordion.Item open={erPanelÅpent}>
+        <Accordion.Header onClick={togglePanel}>
+          {hentTittel()}
+        </Accordion.Header>
+        <Accordion.Content>
           {opptjeningsår.map((år) => (
             <div key={`div_${år}`}>
               <VerticalSpacer sixteenPx key={`spacer_${år}`} />
@@ -61,9 +58,9 @@ export const FeriepengerPanel: FunctionComponent<OwnProps> = ({
               />
             </div>
           ))}
-        </EkspanderbartpanelBase>
-      </Column>
-    </Row>
+        </Accordion.Content>
+      </Accordion.Item>
+    </Accordion>
   );
 };
 

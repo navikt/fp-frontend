@@ -1,6 +1,5 @@
 import React, { Component, RefObject } from 'react';
 import moment from 'moment';
-import { Column, Row } from 'nav-frontend-grid';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Timeline, TimeLineNavigation } from '@navikt/ft-tidslinje';
@@ -183,42 +182,40 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
     return (
       <div className="opptjening">
         <div className="timeLineLight">
-          <Row>
-            <Column xs="12">
-              <DateContainer
-                opptjeningFomDate={moment(opptjeningFomDate, ISO_DATE_FORMAT)
-                  .format(DDMMYYYY_DATE_FORMAT)}
-                opptjeningTomDate={moment(opptjeningTomDate, ISO_DATE_FORMAT)
-                  .format(DDMMYYYY_DATE_FORMAT)}
-              />
-              <div className={styles.timelineContainer}>
-                <div className={styles.timeLineWrapper}>
-                  <div className={styles.timeLine}>
-                    <Timeline
-                      ref={this.timelineRef}
-                      options={options(opptjeningFomDate, opptjeningTomDate)}
-                      // @ts-ignore Fiks
-                      initialItems={items}
-                      initialGroups={groups}
-                      customTimes={{ currentDate: new Date(opptjeningTomDate) }}
-                      selectHandler={this.selectHandler}
-                      selection={[selectedPeriod ? selectedPeriod.id : undefined]}
-                    />
-                  </div>
-                  <TimeLineNavigation
-                    openPeriodInfo={this.openPeriodInfo}
-                  />
-                  {selectedPeriod?.data && (
-                    <TimeLineData
-                      fastsattOpptjeningAktivitet={selectedPeriod.data}
-                      selectNextPeriod={this.selectNextPeriod}
-                      selectPrevPeriod={this.selectPrevPeriod}
-                    />
-                  )}
-                </div>
+          <DateContainer
+            opptjeningFomDate={moment(opptjeningFomDate, ISO_DATE_FORMAT)
+              .format(DDMMYYYY_DATE_FORMAT)}
+            opptjeningTomDate={moment(opptjeningTomDate, ISO_DATE_FORMAT)
+              .format(DDMMYYYY_DATE_FORMAT)}
+          />
+          <div className={styles.timelineContainer}>
+            <div className={styles.timeLineWrapper}>
+              <div className={styles.timeLine}>
+                <Timeline
+                  ref={this.timelineRef}
+                  options={options(opptjeningFomDate, opptjeningTomDate)}
+                  // @ts-ignore Fiks
+                  initialItems={items}
+                  initialGroups={groups}
+                  customTimes={{ currentDate: new Date(opptjeningTomDate) }}
+                  selectHandler={this.selectHandler}
+                  selection={[selectedPeriod ? selectedPeriod.id : undefined]}
+                />
               </div>
-            </Column>
-          </Row>
+              <div className={styles.floatRight}>
+                <TimeLineNavigation
+                  openPeriodInfo={this.openPeriodInfo}
+                />
+              </div>
+              {selectedPeriod?.data && (
+                <TimeLineData
+                  fastsattOpptjeningAktivitet={selectedPeriod.data}
+                  selectNextPeriod={this.selectNextPeriod}
+                  selectPrevPeriod={this.selectPrevPeriod}
+                />
+              )}
+            </div>
+          </div>
         </div>
       </div>
     );
