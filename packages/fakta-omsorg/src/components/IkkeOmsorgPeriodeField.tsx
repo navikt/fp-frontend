@@ -1,14 +1,15 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { UseFormGetValues } from 'react-hook-form';
-import { Column, Row } from 'nav-frontend-grid';
 import { Datepicker, formHooks, PeriodFieldArray } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual, dateRangesNotOverlapping, hasValidDate, required,
 } from '@navikt/ft-form-validators';
 import { Detail } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 const PERIODER_FELT_NAVN = 'ikkeOmsorgPerioder';
@@ -73,48 +74,50 @@ const IkkeOmsorgPeriodeField: FunctionComponent<OwnProps> = ({
       >
         {(field, index, getRemoveButton) => (
           <React.Fragment key={field.id}>
-            <Row>
-              <Column xs="5">
-                <Datepicker
-                  name={`${PERIODER_FELT_NAVN}.${index}.periodeFom`}
-                  label={intl.formatMessage({ id: 'IkkeOmsorgPeriodeField.PeriodeFom' })}
-                  validate={[
-                    required,
-                    hasValidDate,
-                    () => {
-                      const fomVerdi = getValues(`${PERIODER_FELT_NAVN}.${index}.periodeFom`);
-                      const tomVerdi = getValues(`${PERIODER_FELT_NAVN}.${index}.periodeTom`);
-                      return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
-                    },
-                    validerOverlappendePerioder(getValues),
-                  ]}
-                  isReadOnly={readOnly}
-                  onChange={() => (isSubmitted ? trigger() : undefined)}
-                />
-              </Column>
-              <Column xs="5">
-                <Datepicker
-                  name={`${PERIODER_FELT_NAVN}.${index}.periodeTom`}
-                  label={intl.formatMessage({ id: 'IkkeOmsorgPeriodeField.PeriodeTom' })}
-                  validate={[
-                    hasValidDate,
-                    () => {
-                      const fomVerdi = getValues(`${PERIODER_FELT_NAVN}.${index}.periodeFom`);
-                      const tomVerdi = getValues(`${PERIODER_FELT_NAVN}.${index}.periodeTom`);
-                      return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
-                    },
-                    validerOverlappendePerioder(getValues),
-                  ]}
-                  isReadOnly={readOnly}
-                  onChange={() => (isSubmitted ? trigger() : undefined)}
-                />
-              </Column>
-              {!readOnly && (
-              <Column xs="2">
-                {getRemoveButton()}
-              </Column>
-              )}
-            </Row>
+            <FlexContainer>
+              <FlexRow>
+                <FlexColumn>
+                  <Datepicker
+                    name={`${PERIODER_FELT_NAVN}.${index}.periodeFom`}
+                    label={intl.formatMessage({ id: 'IkkeOmsorgPeriodeField.PeriodeFom' })}
+                    validate={[
+                      required,
+                      hasValidDate,
+                      () => {
+                        const fomVerdi = getValues(`${PERIODER_FELT_NAVN}.${index}.periodeFom`);
+                        const tomVerdi = getValues(`${PERIODER_FELT_NAVN}.${index}.periodeTom`);
+                        return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
+                      },
+                      validerOverlappendePerioder(getValues),
+                    ]}
+                    isReadOnly={readOnly}
+                    onChange={() => (isSubmitted ? trigger() : undefined)}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <Datepicker
+                    name={`${PERIODER_FELT_NAVN}.${index}.periodeTom`}
+                    label={intl.formatMessage({ id: 'IkkeOmsorgPeriodeField.PeriodeTom' })}
+                    validate={[
+                      hasValidDate,
+                      () => {
+                        const fomVerdi = getValues(`${PERIODER_FELT_NAVN}.${index}.periodeFom`);
+                        const tomVerdi = getValues(`${PERIODER_FELT_NAVN}.${index}.periodeTom`);
+                        return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
+                      },
+                      validerOverlappendePerioder(getValues),
+                    ]}
+                    isReadOnly={readOnly}
+                    onChange={() => (isSubmitted ? trigger() : undefined)}
+                  />
+                </FlexColumn>
+                {!readOnly && (
+                <FlexColumn>
+                  {getRemoveButton()}
+                </FlexColumn>
+                )}
+              </FlexRow>
+            </FlexContainer>
             <VerticalSpacer sixteenPx />
           </React.Fragment>
         )}

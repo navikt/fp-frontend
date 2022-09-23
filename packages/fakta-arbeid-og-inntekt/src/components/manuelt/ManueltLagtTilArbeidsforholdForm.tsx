@@ -4,9 +4,8 @@ import React, {
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm, UseFormGetValues } from 'react-hook-form';
 import { Heading, Button } from '@navikt/ds-react';
-import { Column, Row } from 'nav-frontend-grid';
 import {
-  Image, FlexColumn, FlexContainer, FlexRow, VerticalSpacer, FloatRight, OkAvbrytModal,
+  Image, FlexColumn, FlexContainer, FlexRow, VerticalSpacer, OkAvbrytModal,
 } from '@navikt/ft-ui-komponenter';
 
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
@@ -204,38 +203,38 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
         />
         <VerticalSpacer twentyPx />
         {erOverstyrt && (
-          <Row>
-            <Column xs="8">
-              <FlexContainer>
-                <FlexRow>
-                  <FlexColumn>
-                    <Button
-                      size="small"
-                      variant="secondary"
-                      loading={formMethods.formState.isSubmitting}
-                      disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-                    >
-                      <FormattedMessage id="LeggTilArbeidsforholdForm.Lagre" />
-                    </Button>
-                  </FlexColumn>
-                  <FlexColumn>
-                    <Button
-                      size="small"
-                      variant="tertiary"
-                      loading={false}
-                      disabled={formMethods.formState.isSubmitting}
-                      onClick={lukkRadOgResetForm}
-                      type="button"
-                    >
-                      <FormattedMessage id="LeggTilArbeidsforholdForm.Avbryt" />
-                    </Button>
-                  </FlexColumn>
-                </FlexRow>
-              </FlexContainer>
-            </Column>
-            {radData && (
-              <Column xs="4">
-                <FloatRight>
+          <FlexContainer>
+            <FlexRow spaceBetween>
+              <FlexColumn>
+                <FlexContainer>
+                  <FlexRow>
+                    <FlexColumn>
+                      <Button
+                        size="small"
+                        variant="secondary"
+                        loading={formMethods.formState.isSubmitting}
+                        disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+                      >
+                        <FormattedMessage id="LeggTilArbeidsforholdForm.Lagre" />
+                      </Button>
+                    </FlexColumn>
+                    <FlexColumn>
+                      <Button
+                        size="small"
+                        variant="tertiary"
+                        loading={false}
+                        disabled={formMethods.formState.isSubmitting}
+                        onClick={lukkRadOgResetForm}
+                        type="button"
+                      >
+                        <FormattedMessage id="LeggTilArbeidsforholdForm.Avbryt" />
+                      </Button>
+                    </FlexColumn>
+                  </FlexRow>
+                </FlexContainer>
+              </FlexColumn>
+              {radData && (
+                <FlexColumn>
                   <Button
                     size="small"
                     variant="tertiary"
@@ -247,10 +246,10 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                     <Image src={binIcon} className={styles.buttonImage} />
                     <span><FormattedMessage id="LeggTilArbeidsforholdForm.Slett" /></span>
                   </Button>
-                </FloatRight>
-              </Column>
-            )}
-          </Row>
+                </FlexColumn>
+              )}
+            </FlexRow>
+          </FlexContainer>
         )}
         <VerticalSpacer fourtyPx />
       </Form>

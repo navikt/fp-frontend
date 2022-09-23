@@ -1,21 +1,19 @@
-@import '@{coreModulePath}nav-frontend-core/less/_variabler';
-
 .merkePanel {
   align-items: flex-end;
   display: flex;
+}
 
-  > div {
-    margin: 0 5px;
-  }
+.merkePanel > div {
+  margin: 0 5px;
+}
 
-  > div:last-child {
-    margin-right: 0;
-  }
+.merkePanel > div:last-child {
+  margin-right: 0;
 }
 
 .navMerke {
-  background-color: @navRod;
-  color: @white;
+  background-color: var(--navds-global-color-nav-red);
+  color: var(--navds-global-color-white);
   min-width: 80px;
 }
 
@@ -24,19 +22,19 @@
 }
 
 .dodMerke {
-  background-color: @navMorkGra;
-  color: @white;
+  background-color: var(--navds-global-color-gray-900);
+  color: var(--navds-global-color-white);
 }
 
 .vergeMerke {
   align-items: baseline;
   display: flex;
   min-width: 80px;
+}
 
-  .vergeIcon {
-    background: url('@fpsak-frontend/assets/images/verge.svg');
-    display: inline-block;
-    height: 15px;
-    width: 20px;
-  }
+.vergeMerke .vergeIcon {
+  background: url('@fpsak-frontend/assets/images/verge.svg');
+  display: inline-block;
+  height: 15px;
+  width: 20px;
 }

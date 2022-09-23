@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt, Soknad } from '@fpsak-frontend/types';
-import { VerticalSpacer, AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
+import {
+  VerticalSpacer, AksjonspunktHelpTextHTML, FlexContainer, FlexRow, FlexColumn,
+} from '@navikt/ft-ui-komponenter';
 import {
   OverstyringUtenlandssakMarkeringAp, MerkOpptjeningUtlandAp, OverstyringAvklarStartdatoForPeriodenAp,
 } from '@fpsak-frontend/types-avklar-aksjonspunkter';
@@ -12,6 +13,8 @@ import {
 import UtlandPanel from './utland/UtlandPanel';
 import InnhentDokOpptjeningUtlandPanel from './innhentDok/InnhentDokOpptjeningUtlandPanel';
 import StartdatoForForeldrepengerperiodenForm from './startdatoForForeldrepenger/StartdatoForForeldrepengerperiodenForm';
+
+import styles from './sakenFaktaPanel.less';
 
 interface OwnProps {
   erSvangerskapspenger: boolean;
@@ -53,44 +56,46 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
         <VerticalSpacer thirtyTwoPx />
       </>
     )}
-    <Row className="">
-      <Column xs="6">
-        <UtlandPanel
-          aksjonspunkter={aksjonspunkter}
-          submitCallback={submitCallback}
-          readOnly={readOnly}
-        />
-        {erMarkertUtenlandssak(aksjonspunkter) && (
-          <>
-            <VerticalSpacer fourtyPx />
-            <InnhentDokOpptjeningUtlandPanel
-              dokStatus={dokStatus}
-              readOnly={readOnly}
-              harApneAksjonspunkter={harApneAksjonspunkter}
-              aksjonspunkt={aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK)}
-              submittable={submittable}
+    <FlexContainer>
+      <FlexRow>
+        <FlexColumn className={styles.col}>
+          <UtlandPanel
+            aksjonspunkter={aksjonspunkter}
+            submitCallback={submitCallback}
+            readOnly={readOnly}
+          />
+          {erMarkertUtenlandssak(aksjonspunkter) && (
+            <>
+              <VerticalSpacer fourtyPx />
+              <InnhentDokOpptjeningUtlandPanel
+                dokStatus={dokStatus}
+                readOnly={readOnly}
+                harApneAksjonspunkter={harApneAksjonspunkter}
+                aksjonspunkt={aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK)}
+                submittable={submittable}
+                submitCallback={submitCallback}
+                alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+                formData={formData}
+                setFormData={setFormData}
+              />
+            </>
+          )}
+        </FlexColumn>
+        {!erSvangerskapspenger && (
+          <FlexColumn className={styles.col}>
+            <StartdatoForForeldrepengerperiodenForm
+              aksjonspunkt={aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO)}
               submitCallback={submitCallback}
+              readOnly={readOnly}
               alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+              soknad={soknad}
               formData={formData}
               setFormData={setFormData}
             />
-          </>
+          </FlexColumn>
         )}
-      </Column>
-      {!erSvangerskapspenger && (
-        <Column xs="6">
-          <StartdatoForForeldrepengerperiodenForm
-            aksjonspunkt={aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO)}
-            submitCallback={submitCallback}
-            readOnly={readOnly}
-            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-            soknad={soknad}
-            formData={formData}
-            setFormData={setFormData}
-          />
-        </Column>
-      )}
-    </Row>
+      </FlexRow>
+    </FlexContainer>
   </>
 );
 

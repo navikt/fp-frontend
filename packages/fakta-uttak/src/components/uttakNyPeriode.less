@@ -1,16 +1,14 @@
-@import '@{coreModulePath}nav-frontend-core/less/_variabler';
-
 .periodeContainer {
-  border: 1px solid @navGra20;
-  border-radius: @border-radius-base;
+  border: 1px solid var(--navds-global-color-gray-100);
+  border-radius: 4px;
   display: flex;
   margin-top: 20px;
   width: 100%;
 }
 
 .periodeType {
-  background-color: @navLysGra;
-  border-right: 1px solid @navGra20;
+  background-color: var(--navds-global-color-gray-100);
+  border-right: 1px solid var(--navds-global-color-gray-100);
   flex-basis: 24%;
   max-width: 210px;
   min-width: 185px;
@@ -52,10 +50,10 @@
   align-items: flex-end;
   display: flex;
   flex-direction: row;
+}
 
-  > div:first-child {
-    margin-right: 16px;
-  }
+.alignRightHorizontalBottom > div:first-child {
+  margin-right: 16px;
 }
 
 .textAreaStyle {
@@ -63,23 +61,23 @@
   width: 100%;
 }
 
-.typeUttakStyle {
-  @media all and (max-width: 1100px) {
+@media all and (max-width: 1100px) {
+  .typeUttakStyle {
     width: 100%;
-  }
+ }
 }
 
 .fieldHorizontal {
   display: flex;
   margin-left: 8px;
+}
 
-  label {
-    align-self: flex-end;
-    margin-bottom: 1px;
-    margin-right: 16px;
+.fieldHorizontal label {
+  align-self: flex-end;
+  margin-bottom: 1px;
+  margin-right: 16px;
+}
 
-    span {
-      font-size: 1rem;
-    }
-  }
+.fieldHorizontal label span {
+  font-size: 1rem;
 }

@@ -1,10 +1,9 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Label, BodyShort } from '@navikt/ds-react';
-import { Column, Row } from 'nav-frontend-grid';
 
 import {
-  AksjonspunktHelpTextTemp, VerticalSpacer, FaktaGruppe, EditedIcon,
+  AksjonspunktHelpTextTemp, VerticalSpacer, FaktaGruppe, EditedIcon, FlexContainer, FlexRow, FlexColumn,
 } from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { SelectField, formHooks } from '@navikt/ft-form-hooks';
@@ -103,42 +102,44 @@ const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<PureOwnProps> & StaticF
       <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
         {findAksjonspunktHelpTexts(erAksjonspunktForeldreansvar)}
       </AksjonspunktHelpTextTemp>
-      <Row>
-        <Column xs={erAksjonspunktForeldreansvar ? '12' : '6'}>
-          <OmsorgsovertakelseFaktaPanel
-            readOnly={readOnly}
-            erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
-            editedStatus={editedStatus}
-            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-            soknad={soknad}
-            familiehendelse={gjeldendeFamiliehendelse}
-          />
-        </Column>
-        {!erAksjonspunktForeldreansvar && (
-          <Column xs="6">
-            <RettighetFaktaPanel
-              relatertYtelseTypes={relatertYtelseTypes}
+      <FlexContainer>
+        <FlexRow>
+          <FlexColumn className={erAksjonspunktForeldreansvar ? styles.oneCol : styles.cols}>
+            <OmsorgsovertakelseFaktaPanel
+              readOnly={readOnly}
+              erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
+              editedStatus={editedStatus}
               alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+              soknad={soknad}
+              familiehendelse={gjeldendeFamiliehendelse}
             />
-          </Column>
-        )}
-      </Row>
-      <Row>
-        <Column xs="6">
-          <BarnPanel
-            soknad={soknad}
-            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-            intl={intl}
-          />
-        </Column>
-        <Column xs="6">
-          <ForeldrePanel
-            personoversikt={personoversikt}
-            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-            intl={intl}
-          />
-        </Column>
-      </Row>
+          </FlexColumn>
+          {!erAksjonspunktForeldreansvar && (
+            <FlexColumn className={styles.cols}>
+              <RettighetFaktaPanel
+                relatertYtelseTypes={relatertYtelseTypes}
+                alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+              />
+            </FlexColumn>
+          )}
+        </FlexRow>
+        <FlexRow>
+          <FlexColumn className={styles.cols}>
+            <BarnPanel
+              soknad={soknad}
+              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+              intl={intl}
+            />
+          </FlexColumn>
+          <FlexColumn className={styles.cols}>
+            <ForeldrePanel
+              personoversikt={personoversikt}
+              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+              intl={intl}
+            />
+          </FlexColumn>
+        </FlexRow>
+      </FlexContainer>
       {!erAksjonspunktForeldreansvar && (
         <FaktaGruppe
           title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.VelgVilkaarSomSkalAnvendes' })}

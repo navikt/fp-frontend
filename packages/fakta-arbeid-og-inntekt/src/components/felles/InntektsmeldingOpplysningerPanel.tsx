@@ -40,7 +40,7 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
             <FlexColumn>
               <Label size="small"><FormattedMessage id="InntektsmeldingOpplysningerPanel.ArbeidsforholdId" /></Label>
             </FlexColumn>
-            <FlexColumn>
+            <FlexColumn className={styles.textMargin}>
               <BodyShort size="small">{inntektsmelding.eksternArbeidsforholdId}</BodyShort>
             </FlexColumn>
           </FlexRow>
@@ -53,7 +53,7 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
             <FlexColumn>
               <Label size="small"><FormattedMessage id="InntektsmeldingOpplysningerPanel.Stillingsprosent" /></Label>
             </FlexColumn>
-            <FlexColumn>
+            <FlexColumn className={styles.textMargin}>
               <BodyShort size="small">{arbeidsforhold.stillingsprosent ? `${arbeidsforhold.stillingsprosent}%` : '-'}</BodyShort>
             </FlexColumn>
           </FlexRow>
@@ -67,7 +67,7 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
                       KodeverkType.PERMISJONSBESKRIVELSE_TYPE, arbeidsforhold.permisjonOgMangel.type)}
                   </Label>
                 </FlexColumn>
-                <FlexColumn>
+                <FlexColumn className={styles.textMargin}>
                   <BodyShort size="small">
                     <PeriodLabel
                       dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom}
@@ -85,7 +85,7 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
         <FlexColumn>
           <Label size="small"><FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" /></Label>
         </FlexColumn>
-        <FlexColumn>
+        <FlexColumn className={styles.textMargin}>
           <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</BodyShort>
         </FlexColumn>
       </FlexRow>
@@ -94,7 +94,7 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
         <FlexColumn>
           <Label size="small"><FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjon" /></Label>
         </FlexColumn>
-        <FlexColumn>
+        <FlexColumn className={styles.textMargin}>
           <BodyShort size="small">
             <FormattedMessage id={inntektsmelding.refusjonPrMnd ? 'InntektsmeldingOpplysningerPanel.Ja' : 'InntektsmeldingOpplysningerPanel.Nei'} />
           </BodyShort>
@@ -107,7 +107,7 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
             <FlexColumn>
               <Label size="small"><FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" /></Label>
             </FlexColumn>
-            <FlexColumn>
+            <FlexColumn className={styles.textMargin}>
               <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd)}</BodyShort>
             </FlexColumn>
           </FlexRow>

@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { BeregningsgrunnlagAndel, BeregningsgrunnlagPeriodeProp } from '@fpsak-frontend/types';
 import { BodyShort, Label } from '@navikt/ds-react';
-import { Column, Row } from 'nav-frontend-grid';
 import { formatCurrencyNoKr } from '@navikt/ft-utils';
 import {
   VerticalSpacer,
@@ -54,46 +53,35 @@ const BesteberegningResultatGrunnlagPanel: FunctionComponent<OwnProps> = ({
   periode,
   besteMåneder,
 }) => (
-  <div>
-    <Row>
-      <Column xs="12">
-        <Table headerColumnContent={headerColumnContent} noHover>
-          <TableRow>
-            <TableColumn>
-              <BodyShort size="small">
-                <FormattedMessage id="ResultatGrunnlag.BruttoBeregningsgrunnlag" />
-              </BodyShort>
-            </TableColumn>
-            <TableColumn>
-              <BodyShort size="small">
-                {formatCurrencyNoKr(finnKap8Beregning(periode))}
-              </BodyShort>
-            </TableColumn>
-            <TableColumn>
-              <BodyShort size="small">
-                {formatCurrencyNoKr(finnBesteberegnet(besteMåneder))}
-              </BodyShort>
-            </TableColumn>
-          </TableRow>
-        </Table>
-      </Column>
-    </Row>
-
+  <>
+    <Table headerColumnContent={headerColumnContent} noHover>
+      <TableRow>
+        <TableColumn>
+          <BodyShort size="small">
+            <FormattedMessage id="ResultatGrunnlag.BruttoBeregningsgrunnlag" />
+          </BodyShort>
+        </TableColumn>
+        <TableColumn>
+          <BodyShort size="small">
+            {formatCurrencyNoKr(finnKap8Beregning(periode))}
+          </BodyShort>
+        </TableColumn>
+        <TableColumn>
+          <BodyShort size="small">
+            {formatCurrencyNoKr(finnBesteberegnet(besteMåneder))}
+          </BodyShort>
+        </TableColumn>
+      </TableRow>
+    </Table>
     <VerticalSpacer twentyPx />
-
-    <Row>
-      <Column>
-        <BodyShort size="small">
-          {girKap8Besteberegning(finnKap8Beregning(periode), finnBesteberegnet(besteMåneder))
-            && <FormattedMessage id="ResultatGrunnlag.Kap8GirBesteBeregning" />}
-          {!girKap8Besteberegning(finnKap8Beregning(periode), finnBesteberegnet(besteMåneder))
-            && <FormattedMessage id="ResultatGrunnlag.Kap1473GirBesteBeregning" />}
-        </BodyShort>
-      </Column>
-    </Row>
+    <BodyShort size="small">
+      {girKap8Besteberegning(finnKap8Beregning(periode), finnBesteberegnet(besteMåneder))
+        && <FormattedMessage id="ResultatGrunnlag.Kap8GirBesteBeregning" />}
+      {!girKap8Besteberegning(finnKap8Beregning(periode), finnBesteberegnet(besteMåneder))
+        && <FormattedMessage id="ResultatGrunnlag.Kap1473GirBesteBeregning" />}
+    </BodyShort>
     <VerticalSpacer twentyPx />
-
-  </div>
+  </>
 );
 
 export default BesteberegningResultatGrunnlagPanel;

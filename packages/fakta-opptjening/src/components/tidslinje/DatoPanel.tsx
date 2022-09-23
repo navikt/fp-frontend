@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Column, Row } from 'nav-frontend-grid';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import styles from './datoPanel.less';
 
@@ -12,21 +12,23 @@ const DatoPanel: FunctionComponent<OwnProps> = ({
   opptjeningFomDato,
   opptjeningTomDato,
 }) => (
-  <div className={styles.dateContainer}>
-    <div className={styles.dates}>
-      <Row className={styles.dateContainer}>
-        <Column xs="1" className={styles.startDateContainer} />
-        <Column xs="9">
-          <div>{opptjeningFomDato}</div>
-        </Column>
-        <Column xs="2">
-          <div className={styles.endDate}>
-            {opptjeningTomDato}
-          </div>
-        </Column>
-      </Row>
-    </div>
-  </div>
+  <FlexContainer>
+    <FlexRow spaceBetween>
+      <FlexColumn>
+        <FlexContainer>
+          <FlexRow>
+            <FlexColumn className={styles.firstCol} />
+            <FlexColumn>
+              {opptjeningFomDato}
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
+      </FlexColumn>
+      <FlexColumn className={styles.lastCol}>
+        {opptjeningTomDato}
+      </FlexColumn>
+    </FlexRow>
+  </FlexContainer>
 );
 
 export default DatoPanel;

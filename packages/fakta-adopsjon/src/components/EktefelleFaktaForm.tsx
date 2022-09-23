@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Container } from 'nav-frontend-grid';
 import { BodyShort } from '@navikt/ds-react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -43,7 +42,7 @@ const EktefelleFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
       title={intl.formatMessage({ id: 'EktefelleFaktaForm.ApplicationInformation' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]}
     >
-      <Container className={styles.container}>
+      <div className={styles.container}>
         <BodyShort size="small"><FormattedMessage id="EktefelleFaktaForm.EktefellesBarn" /></BodyShort>
         <VerticalSpacer twentyPx />
         <hr className={styles.hr} />
@@ -63,7 +62,7 @@ const EktefelleFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
             value: 'true',
           }]}
         />
-      </Container>
+      </div>
     </FaktaGruppe>
   );
 };

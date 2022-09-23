@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import { required } from '@navikt/ft-form-validators';
 import { formHooks, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { ArrowBox, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -82,14 +81,12 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
             }]}
           />
           {omsorg === false && (
-            <Row>
-              <Column xs="7">
-                <VerticalSpacer eightPx />
-                <ArrowBox>
-                  <IkkeOmsorgPeriodeField readOnly={readOnly} />
-                </ArrowBox>
-              </Column>
-            </Row>
+            <div className={styles.arrowBoxWidth}>
+              <VerticalSpacer eightPx />
+              <ArrowBox>
+                <IkkeOmsorgPeriodeField readOnly={readOnly} />
+              </ArrowBox>
+            </div>
           )}
         </FaktaGruppe>
       )}
