@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import {
   Button, Label, BodyShort, Heading,
 } from '@navikt/ds-react';
-import { Column, Row } from 'nav-frontend-grid';
 
 import { FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
 import { RadioGroupPanel, Form } from '@navikt/ft-form-hooks';
@@ -43,31 +42,33 @@ export const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
     <Form formMethods={formMethods} onSubmit={(values: FormValues) => oppdaterAktivitetskrav(values)}>
       <Heading size="small"><FormattedMessage id="AktivitetskravFaktaDetailForm.Header" /></Heading>
       <VerticalSpacer fourPx />
-      <Row className="">
-        <Column xs="4">
-          <Label size="small">
-            <FormattedMessage id="AktivitetskravFaktaDetailForm.Periode" />
-          </Label>
-          <VerticalSpacer fourPx />
-          <BodyShort size="small">
-            <PeriodLabel
-              dateStringFom={valgtAktivitetskrav.fom}
-              dateStringTom={valgtAktivitetskrav.tom}
-            />
-          </BodyShort>
-        </Column>
-        {valgtAktivitetskrav.morsAktivitet && (
-          <Column xs="4">
+      <FlexContainer>
+        <FlexRow>
+          <FlexColumn>
             <Label size="small">
-              <FormattedMessage id="AktivitetskravFaktaDetailForm.MorsAktivitet" />
+              <FormattedMessage id="AktivitetskravFaktaDetailForm.Periode" />
             </Label>
             <VerticalSpacer fourPx />
             <BodyShort size="small">
-              {morsAktiviteter.find((ma) => ma.kode === valgtAktivitetskrav.morsAktivitet)?.navn}
+              <PeriodLabel
+                dateStringFom={valgtAktivitetskrav.fom}
+                dateStringTom={valgtAktivitetskrav.tom}
+              />
             </BodyShort>
-          </Column>
-        )}
-      </Row>
+          </FlexColumn>
+          {valgtAktivitetskrav.morsAktivitet && (
+            <FlexColumn>
+              <Label size="small">
+                <FormattedMessage id="AktivitetskravFaktaDetailForm.MorsAktivitet" />
+              </Label>
+              <VerticalSpacer fourPx />
+              <BodyShort size="small">
+                {morsAktiviteter.find((ma) => ma.kode === valgtAktivitetskrav.morsAktivitet)?.navn}
+              </BodyShort>
+            </FlexColumn>
+          )}
+        </FlexRow>
+      </FlexContainer>
       <VerticalSpacer sixteenPx />
       <RadioGroupPanel
         name="avklaring"

@@ -1,7 +1,6 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Column, Row } from 'nav-frontend-grid';
 import {
   Button, Label, Heading, BodyShort,
 } from '@navikt/ds-react';
@@ -116,43 +115,47 @@ export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
         className={styles.panel}
         merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING]}
       >
-        <Row>
-          <Column xs="10">
-            <Heading size="small"><FormattedMessage id="ActivityPanel.Details" /></Heading>
-          </Column>
-          <Column xs="2">
-            <TimeLineButton text={intl.formatMessage({ id: 'Timeline.prevPeriod' })} type="prev" callback={velgForrigeAktivitet} />
-            <TimeLineButton text={intl.formatMessage({ id: 'Timeline.nextPeriod' })} type="next" callback={velgNesteAktivitet} />
-          </Column>
-        </Row>
-        <VerticalSpacer sixteenPx />
-        <Row>
-          <Column xs="7">
-            <Label size="small">
-              <FormattedMessage id="ActivityPanel.Period" />
-            </Label>
-            <Row>
-              <Column xs="5">
-                <BodyShort size="small">
-                  {`${dayjs(opptjeningFom).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(opptjeningTom).format(DDMMYYYY_DATE_FORMAT)}`}
-                </BodyShort>
-              </Column>
-              <Column xs="6">
-                <BodyShort size="small">
-                  {finnMånederOgDager(opptjeningFom, opptjeningTom)}
-                </BodyShort>
-              </Column>
-            </Row>
-          </Column>
-          <Column xs="5">
-            <Label size="small">
-              <FormattedMessage id="ActivityPanel.Activity" />
-            </Label>
-            <BodyShort size="small">
-              {opptjeningAktivitetTyper.find((oat) => oat.kode === aktivitetType)?.navn}
-            </BodyShort>
-          </Column>
-        </Row>
+        <FlexContainer>
+          <FlexRow spaceBetween>
+            <FlexColumn>
+              <Heading size="small"><FormattedMessage id="ActivityPanel.Details" /></Heading>
+            </FlexColumn>
+            <FlexColumn>
+              <TimeLineButton text={intl.formatMessage({ id: 'Timeline.prevPeriod' })} type="prev" callback={velgForrigeAktivitet} />
+              <TimeLineButton text={intl.formatMessage({ id: 'Timeline.nextPeriod' })} type="next" callback={velgNesteAktivitet} />
+            </FlexColumn>
+          </FlexRow>
+          <VerticalSpacer sixteenPx />
+          <FlexRow>
+            <FlexColumn className={styles.colMargin}>
+              <Label size="small">
+                <FormattedMessage id="ActivityPanel.Period" />
+              </Label>
+              <FlexContainer>
+                <FlexRow>
+                  <FlexColumn>
+                    <BodyShort size="small">
+                      {`${dayjs(opptjeningFom).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(opptjeningTom).format(DDMMYYYY_DATE_FORMAT)}`}
+                    </BodyShort>
+                  </FlexColumn>
+                  <FlexColumn>
+                    <BodyShort size="small">
+                      {finnMånederOgDager(opptjeningFom, opptjeningTom)}
+                    </BodyShort>
+                  </FlexColumn>
+                </FlexRow>
+              </FlexContainer>
+            </FlexColumn>
+            <FlexColumn>
+              <Label size="small">
+                <FormattedMessage id="ActivityPanel.Activity" />
+              </Label>
+              <BodyShort size="small">
+                {opptjeningAktivitetTyper.find((oat) => oat.kode === aktivitetType)?.navn}
+              </BodyShort>
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
         <ValgtAktivitetSubForm
           valgtAktivitetstype={aktivitetType}
           arbeidsgiverReferanse={arbeidsgiverReferanse}

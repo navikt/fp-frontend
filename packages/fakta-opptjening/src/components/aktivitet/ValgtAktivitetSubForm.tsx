@@ -1,13 +1,16 @@
 import React, { FunctionComponent } from 'react';
 import dayjs from 'dayjs';
 import { FormattedMessage } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import { BodyShort, Label } from '@navikt/ds-react';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import OAType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
 import { ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
+
+import styles from './valgtAktivitetSubForm.less';
 
 const YTELSE_TYPER = [OAType.SYKEPENGER, OAType.FORELDREPENGER, OAType.PLEIEPENGER, OAType.SVANGERSKAPSPENGER, OAType.UTENLANDSK_ARBEIDSFORHOLD];
 
@@ -59,39 +62,39 @@ const ValgtAktivitetSubForm: FunctionComponent<OwnProps> = ({
   stillingsandel,
   naringRegistreringsdato,
 }) => (
-  <>
+  <FlexContainer>
     {erAvType(valgtAktivitetstype, ...[OAType.ARBEID, OAType.NARING, ...YTELSE_TYPER]) && (
-      <Row>
-        <Column xs="7">
+      <FlexRow>
+        <FlexColumn className={styles.colMargin}>
           <VerticalSpacer eightPx />
           <Label size="small">
             <FormattedMessage id={getOppdragsgiverIntlId(valgtAktivitetstype)} />
           </Label>
           <BodyShort size="small">{finnArbeidsgivertekst(arbeidsgiverReferanse, arbeidsgiverOpplysningerPerId)}</BodyShort>
-        </Column>
+        </FlexColumn>
         {erAvType(valgtAktivitetstype, OAType.ARBEID) && (
-          <Column xs="5">
+          <FlexColumn>
             <VerticalSpacer eightPx />
             <Label size="small">
               <FormattedMessage id="ActivityPanel.Stillingsandel" />
             </Label>
             <BodyShort size="small">{stillingsandel}</BodyShort>
-          </Column>
+          </FlexColumn>
         )}
-      </Row>
+      </FlexRow>
     )}
     <VerticalSpacer eightPx />
     {erAvType(valgtAktivitetstype, OAType.NARING) && (
-      <Row>
-        <Column xs="8">
+      <FlexRow>
+        <FlexColumn>
           <Label size="small">
             <FormattedMessage id="ActivityPanel.Registreringsdato" />
           </Label>
           <BodyShort size="small">{dayjs(naringRegistreringsdato).format(DDMMYYYY_DATE_FORMAT)}</BodyShort>
-        </Column>
-      </Row>
+        </FlexColumn>
+      </FlexRow>
     )}
-  </>
+  </FlexContainer>
 );
 
 export default ValgtAktivitetSubForm;

@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Container } from 'nav-frontend-grid';
 import { BodyShort, Detail } from '@navikt/ds-react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -49,7 +48,7 @@ const MannAdoptererAleneFaktaForm: FunctionComponent<OwnProps> & StaticFunctions
       title={intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.ApplicationInformation' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]}
     >
-      <Container className={styles.container}>
+      <div className={styles.container}>
         <Detail size="small"><FormattedMessage id="MannAdoptererAleneFaktaForm.Opplysninger" /></Detail>
         <VerticalSpacer fourPx />
         {farSokerType
@@ -72,7 +71,7 @@ const MannAdoptererAleneFaktaForm: FunctionComponent<OwnProps> & StaticFunctions
             value: 'false',
           }]}
         />
-      </Container>
+      </div>
     </FaktaGruppe>
   );
 };

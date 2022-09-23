@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { Column, Row } from 'nav-frontend-grid';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Alert, Label } from '@navikt/ds-react';
 
@@ -117,110 +116,108 @@ const TilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
         const data = tilretteleggingDatoer[index];
         const tilretteleggingKode = data?.type;
         return (
-          <Row key={field.id} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
-            <Column xs="12">
-              <FlexContainer>
-                <FlexRow>
-                  <FlexColumn>
-                    <SelectField
-                      readOnly={readOnly}
-                      name={`${fieldPrefix}.${index}.type`}
-                      label={intl.formatMessage({ id: 'TilretteleggingFieldArray.Tilretteleggingsbehov' })}
-                      validate={[required]}
-                      selectValues={[
-                        <option value={tilretteleggingType.HEL_TILRETTELEGGING} key={tilretteleggingType.HEL_TILRETTELEGGING}>
-                          {intl.formatMessage({ id: 'TilretteleggingFieldArray.KanGjennomfores' })}
-                        </option>,
-                        <option value={tilretteleggingType.DELVIS_TILRETTELEGGING} key={tilretteleggingType.DELVIS_TILRETTELEGGING}>
-                          {intl.formatMessage({ id: 'TilretteleggingFieldArray.RedusertArbeid' })}
-                        </option>,
-                        <option value={tilretteleggingType.INGEN_TILRETTELEGGING} key={tilretteleggingType.INGEN_TILRETTELEGGING}>
-                          {intl.formatMessage({ id: 'TilretteleggingFieldArray.KanIkkeGjennomfores' })}
-                        </option>,
-                      ]}
-                      onChange={(event) => {
-                        const value = event.target?.value;
-                        if (value === tilretteleggingType.INGEN_TILRETTELEGGING) {
-                          const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsforhold, velferdspermisjonprosent, 100);
-                          // @ts-ignore Fiks
-                          setValue(`${formSectionName}.tilretteleggingDatoer[${index}].${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`, utbetalingsgrad);
-                        }
-                        if (value === tilretteleggingType.DELVIS_TILRETTELEGGING) {
-                          const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsforhold,
-                            velferdspermisjonprosent, data.stillingsprosent);
-                          // @ts-ignore Fiks
-                          setValue(`${formSectionName}.tilretteleggingDatoer[${index}].${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`, utbetalingsgrad);
-                        }
-                      }}
-                    />
-                  </FlexColumn>
-                  <FlexColumn className={styles.removeButtonMargin}>
-                    {!readOnly && (
-                      <>
-                        {getRemoveButton()}
-                      </>
-                    )}
-                  </FlexColumn>
-                </FlexRow>
-                {tilretteleggingKode === tilretteleggingType.DELVIS_TILRETTELEGGING && (
-                  <FlexRow>
-                    <FlexColumn>
-                      <Alert variant="info">
-                        <Label size="small">
-                          <FormattedMessage id="TilretteleggingFieldArray.StillingsprosentUtvidet" />
-                        </Label>
-                      </Alert>
-                      <VerticalSpacer eightPx />
-                    </FlexColumn>
-                  </FlexRow>
-                )}
-                <VerticalSpacer sixteenPx />
-                <FlexRow>
-                  <FlexColumn>
-                    <Datepicker
-                      isReadOnly={readOnly}
-                      name={`${fieldPrefix}.${index}.fom`}
-                      label={intl.formatMessage({ id: 'TilretteleggingFieldArray.Dato' })}
-                      validate={[hasValidDate, required, validerAtDatoErUnik(intl, getValues, fieldPrefix, index)]}
-                    />
-                  </FlexColumn>
-                  {tilretteleggingKode === tilretteleggingType.DELVIS_TILRETTELEGGING && (
+          <div key={field.id} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+            <FlexContainer>
+              <FlexRow>
+                <FlexColumn>
+                  <SelectField
+                    readOnly={readOnly}
+                    name={`${fieldPrefix}.${index}.type`}
+                    label={intl.formatMessage({ id: 'TilretteleggingFieldArray.Tilretteleggingsbehov' })}
+                    validate={[required]}
+                    selectValues={[
+                      <option value={tilretteleggingType.HEL_TILRETTELEGGING} key={tilretteleggingType.HEL_TILRETTELEGGING}>
+                        {intl.formatMessage({ id: 'TilretteleggingFieldArray.KanGjennomfores' })}
+                      </option>,
+                      <option value={tilretteleggingType.DELVIS_TILRETTELEGGING} key={tilretteleggingType.DELVIS_TILRETTELEGGING}>
+                        {intl.formatMessage({ id: 'TilretteleggingFieldArray.RedusertArbeid' })}
+                      </option>,
+                      <option value={tilretteleggingType.INGEN_TILRETTELEGGING} key={tilretteleggingType.INGEN_TILRETTELEGGING}>
+                        {intl.formatMessage({ id: 'TilretteleggingFieldArray.KanIkkeGjennomfores' })}
+                      </option>,
+                    ]}
+                    onChange={(event) => {
+                      const value = event.target?.value;
+                      if (value === tilretteleggingType.INGEN_TILRETTELEGGING) {
+                        const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsforhold, velferdspermisjonprosent, 100);
+                        // @ts-ignore Fiks
+                        setValue(`${formSectionName}.tilretteleggingDatoer[${index}].${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`, utbetalingsgrad);
+                      }
+                      if (value === tilretteleggingType.DELVIS_TILRETTELEGGING) {
+                        const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsforhold,
+                          velferdspermisjonprosent, data.stillingsprosent);
+                        // @ts-ignore Fiks
+                        setValue(`${formSectionName}.tilretteleggingDatoer[${index}].${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`, utbetalingsgrad);
+                      }
+                    }}
+                  />
+                </FlexColumn>
+                <FlexColumn className={styles.removeButtonMargin}>
+                  {!readOnly && (
                     <>
-                      <FlexColumn>
-                        <InputField
-                          className={styles.textField}
-                          readOnly={readOnly}
-                          name={`${fieldPrefix}.${index}.stillingsprosent`}
-                          label={intl.formatMessage({ id: 'TilretteleggingFieldArray.Stillingsprosent' })}
-                          validate={[required, minValue0, maxValue100, hasValidDecimal]}
-                          normalizeOnBlur={(value: string) => (new RegExp(/^-?\d+\.?\d*$/).test(value) ? parseFloat(value).toFixed(2) : value)}
-                          onChange={(value) => {
-                            const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsforhold, velferdspermisjonprosent, value);
-                            // @ts-ignore Fiks
-                            setValue(`${formSectionName}.tilretteleggingDatoer.${index}.${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`, utbetalingsgrad);
-                          }}
-                        />
-                      </FlexColumn>
-                      <FlexColumn className={readOnly ? styles.buttonMarginReadOnly : styles.buttonMargin}>
-                        %
-                      </FlexColumn>
+                      {getRemoveButton()}
                     </>
                   )}
-                  {((data && data.stillingsprosent && tilretteleggingKode === tilretteleggingType.DELVIS_TILRETTELEGGING)
-                      || tilretteleggingKode === tilretteleggingType.INGEN_TILRETTELEGGING) && (
-                      <TilretteleggingUtbetalingsgrad
-                        fieldPrefix={`${fieldPrefix}.${index}`}
-                        erOverstyrer={erOverstyrer}
-                        tilretteleggingKode={tilretteleggingKode}
-                        readOnly={readOnly}
-                        setOverstyrtUtbetalingsgrad={setOverstyrtUtbetalingsgrad}
-                      />
-                  )}
+                </FlexColumn>
+              </FlexRow>
+              {tilretteleggingKode === tilretteleggingType.DELVIS_TILRETTELEGGING && (
+                <FlexRow>
+                  <FlexColumn>
+                    <Alert variant="info">
+                      <Label size="small">
+                        <FormattedMessage id="TilretteleggingFieldArray.StillingsprosentUtvidet" />
+                      </Label>
+                    </Alert>
+                    <VerticalSpacer eightPx />
+                  </FlexColumn>
                 </FlexRow>
-              </FlexContainer>
+              )}
               <VerticalSpacer sixteenPx />
-            </Column>
-          </Row>
+              <FlexRow>
+                <FlexColumn>
+                  <Datepicker
+                    isReadOnly={readOnly}
+                    name={`${fieldPrefix}.${index}.fom`}
+                    label={intl.formatMessage({ id: 'TilretteleggingFieldArray.Dato' })}
+                    validate={[hasValidDate, required, validerAtDatoErUnik(intl, getValues, fieldPrefix, index)]}
+                  />
+                </FlexColumn>
+                {tilretteleggingKode === tilretteleggingType.DELVIS_TILRETTELEGGING && (
+                  <>
+                    <FlexColumn>
+                      <InputField
+                        className={styles.textField}
+                        readOnly={readOnly}
+                        name={`${fieldPrefix}.${index}.stillingsprosent`}
+                        label={intl.formatMessage({ id: 'TilretteleggingFieldArray.Stillingsprosent' })}
+                        validate={[required, minValue0, maxValue100, hasValidDecimal]}
+                        normalizeOnBlur={(value: string) => (new RegExp(/^-?\d+\.?\d*$/).test(value) ? parseFloat(value).toFixed(2) : value)}
+                        onChange={(value) => {
+                          const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsforhold, velferdspermisjonprosent, value);
+                          // @ts-ignore Fiks
+                          setValue(`${formSectionName}.tilretteleggingDatoer.${index}.${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`, utbetalingsgrad);
+                        }}
+                      />
+                    </FlexColumn>
+                    <FlexColumn className={readOnly ? styles.buttonMarginReadOnly : styles.buttonMargin}>
+                      %
+                    </FlexColumn>
+                  </>
+                )}
+                {((data && data.stillingsprosent && tilretteleggingKode === tilretteleggingType.DELVIS_TILRETTELEGGING)
+                    || tilretteleggingKode === tilretteleggingType.INGEN_TILRETTELEGGING) && (
+                    <TilretteleggingUtbetalingsgrad
+                      fieldPrefix={`${fieldPrefix}.${index}`}
+                      erOverstyrer={erOverstyrer}
+                      tilretteleggingKode={tilretteleggingKode}
+                      readOnly={readOnly}
+                      setOverstyrtUtbetalingsgrad={setOverstyrtUtbetalingsgrad}
+                    />
+                )}
+              </FlexRow>
+            </FlexContainer>
+            <VerticalSpacer sixteenPx />
+          </div>
         );
       }}
     </PeriodFieldArray>

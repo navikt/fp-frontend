@@ -1,9 +1,11 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { Label, BodyShort } from '@navikt/ds-react';
-import { Row, Column } from 'nav-frontend-grid';
 import {
+  FlexColumn,
+  FlexContainer,
+  FlexRow,
   Table, TableColumn, TableRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT, formatCurrencyNoKr } from '@navikt/ft-utils';
@@ -13,6 +15,8 @@ import {
   ArbeidsgiverOpplysningerPerId,
 } from '@fpsak-frontend/types';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+
+import styles from './besteManederVisningPanel.less';
 
 const månedsnavn = {
   0: 'Januar',
@@ -130,23 +134,25 @@ const Inntekttabell: FunctionComponent<InntekttabellProps> = ({
 const lagRadMedMåneder = (måneder: Månedsgrunnlag[],
   arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId,
   getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType) => string): ReactElement => (
-    <Row>
-      {måneder.map((månedsgrunnlag: Månedsgrunnlag) => {
-        const key = månedsgrunnlag.fom;
-        return (
-          <Column key={key} xs="6">
-            <BodyShort size="small">
-              {formatDate(månedsgrunnlag.fom)}
-            </BodyShort>
-            <Inntekttabell
-              inntekter={månedsgrunnlag.inntekter}
-              arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
-              getKodeverkNavn={getKodeverkNavn}
-            />
-          </Column>
-        );
-      })}
-    </Row>
+    <FlexContainer>
+      <FlexRow>
+        {måneder.map((månedsgrunnlag: Månedsgrunnlag) => {
+          const key = månedsgrunnlag.fom;
+          return (
+            <FlexColumn className={styles.colWidth} key={key}>
+              <BodyShort size="small">
+                {formatDate(månedsgrunnlag.fom)}
+              </BodyShort>
+              <Inntekttabell
+                inntekter={månedsgrunnlag.inntekter}
+                arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
+                getKodeverkNavn={getKodeverkNavn}
+              />
+            </FlexColumn>
+          );
+        })}
+      </FlexRow>
+    </FlexContainer>
 );
 
 const finnÅrsinntekt = (besteMåneder : Månedsgrunnlag[]): number => {
@@ -165,43 +171,38 @@ const BesteManederVisningPanel: FunctionComponent<BesteMånederProps> = ({
   besteMåneder,
   arbeidsgiverOpplysninger,
   getKodeverkNavn,
-}) => (
-  <div>
-    <Row>
-      <Column>
-        <Label size="small">
-          {' '}
-          <FormattedMessage id="Inntekttabell.Tittel" />
-          {' '}
-        </Label>
-      </Column>
-    </Row>
-    <VerticalSpacer twentyPx />
-    {lagRadMedMåneder(sorterEtterMåned(besteMåneder).slice(0, 2), arbeidsgiverOpplysninger, getKodeverkNavn)}
-    <VerticalSpacer twentyPx />
-    {lagRadMedMåneder(sorterEtterMåned(besteMåneder).slice(2, 4), arbeidsgiverOpplysninger, getKodeverkNavn)}
-    <VerticalSpacer twentyPx />
-    {lagRadMedMåneder(sorterEtterMåned(besteMåneder).slice(4, 6), arbeidsgiverOpplysninger, getKodeverkNavn)}
-    <VerticalSpacer twentyPx />
-    <Row>
-      <Column xs="6">
-        <Table noHover>
-          <TableRow>
-            <TableColumn>
-              <BodyShort size="small">
-                <FormattedMessage id="Inntekttabell.BeregnetÅrsinntekt" />
-              </BodyShort>
-            </TableColumn>
-            <TableColumn>
-              <BodyShort size="small">
-                {formatCurrencyNoKr(finnÅrsinntekt(besteMåneder))}
-              </BodyShort>
-            </TableColumn>
-          </TableRow>
-        </Table>
-      </Column>
-    </Row>
-  </div>
-);
+}) => {
+  const sorterteMåneder = useMemo(() => sorterEtterMåned(besteMåneder), [besteMåneder]);
+  return (
+    <>
+      <Label size="small">
+        {' '}
+        <FormattedMessage id="Inntekttabell.Tittel" />
+        {' '}
+      </Label>
+      <VerticalSpacer twentyPx />
+      {lagRadMedMåneder(sorterteMåneder.slice(0, 2), arbeidsgiverOpplysninger, getKodeverkNavn)}
+      <VerticalSpacer twentyPx />
+      {lagRadMedMåneder(sorterteMåneder.slice(2, 4), arbeidsgiverOpplysninger, getKodeverkNavn)}
+      <VerticalSpacer twentyPx />
+      {lagRadMedMåneder(sorterteMåneder.slice(4, 6), arbeidsgiverOpplysninger, getKodeverkNavn)}
+      <VerticalSpacer twentyPx />
+      <Table noHover>
+        <TableRow>
+          <TableColumn>
+            <BodyShort size="small">
+              <FormattedMessage id="Inntekttabell.BeregnetÅrsinntekt" />
+            </BodyShort>
+          </TableColumn>
+          <TableColumn>
+            <BodyShort size="small">
+              {formatCurrencyNoKr(finnÅrsinntekt(besteMåneder))}
+            </BodyShort>
+          </TableColumn>
+        </TableRow>
+      </Table>
+    </>
+  );
+};
 
 export default BesteManederVisningPanel;

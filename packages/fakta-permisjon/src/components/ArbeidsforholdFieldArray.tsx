@@ -16,7 +16,6 @@ import {
 } from '@fpsak-frontend/types';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
-import { Column, Row } from 'nav-frontend-grid';
 import BekreftetPermisjonStatus from '../kodeverk/BekreftetPermisjonStatus';
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 import ArbeidsforholdBoks from './ArbeidsforholdBoks';
@@ -95,116 +94,121 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                   )}
                 </FlexColumn>
                 <FlexColumn className={styles.body}>
-                  <Row>
-                    <Column xs="4">
-                      <Label size="small">
-                        {arbeidsgiverOpplysinger.navn}
-                      </Label>
-                      {arbeidsforhold.arbeidsgiverIdent && (
-                      <Detail size="small">
-                        (
-                        {arbeidsgiverOpplysinger.erPrivatPerson
-                          ? <DateLabel dateString={arbeidsgiverOpplysinger.fødselsdato} /> : arbeidsforhold.arbeidsgiverIdent}
-                        )
-                      </Detail>
-                      )}
-                    </Column>
-                    <Column xs="3">
-                      <Label size="small">
-                        <FormattedMessage id="ArbeidsforholdFieldArray.Periode" />
-                      </Label>
-                      <BodyShort size="small">
-                        {arbeidsforhold && (
-                        <PeriodLabel dateStringFom={arbeidsforhold.fom} dateStringTom={arbeidsforhold.tom !== TIDENES_ENDE ? arbeidsforhold.tom : undefined} />
+                  <FlexContainer>
+                    <FlexRow>
+                      <FlexColumn className={styles.firstCol}>
+                        <Label size="small">
+                          {arbeidsgiverOpplysinger.navn}
+                        </Label>
+                        {arbeidsforhold.arbeidsgiverIdent && (
+                        <Detail size="small">
+                          (
+                          {arbeidsgiverOpplysinger.erPrivatPerson
+                            ? <DateLabel dateString={arbeidsgiverOpplysinger.fødselsdato} /> : arbeidsforhold.arbeidsgiverIdent}
+                          )
+                        </Detail>
                         )}
-                        {!arbeidsforhold && '-'}
-                      </BodyShort>
-                    </Column>
-                    <Column xs="2">
-                      <Label size="small">
-                        <FormattedMessage id="ArbeidsforholdFieldArray.Kilde" />
-                      </Label>
-                      <BodyShort size="small">
-                        <FormattedMessage id={arbeidsforhold ? 'ArbeidsforholdFieldArray.AaRegisteret' : 'ArbeidsforholdFieldArray.Inntektsmelding'} />
-                      </BodyShort>
-                    </Column>
-                    <Column xs="3">
-                      <Label size="small">
-                        <FormattedMessage id="ArbeidsforholdFieldArray.InntektsmeldingMottatt" />
-                      </Label>
-                      <BodyShort size="small">
-                        {inntektsmelding?.motattDato && (
-                          <DateLabel dateString={inntektsmelding.motattDato} />
+                      </FlexColumn>
+                      <FlexColumn className={styles.secCol}>
+                        <Label size="small">
+                          <FormattedMessage id="ArbeidsforholdFieldArray.Periode" />
+                        </Label>
+                        <BodyShort size="small">
+                          {arbeidsforhold && (
+                            <PeriodLabel
+                              dateStringFom={arbeidsforhold.fom}
+                              dateStringTom={arbeidsforhold.tom !== TIDENES_ENDE ? arbeidsforhold.tom : undefined}
+                            />
+                          )}
+                          {!arbeidsforhold && '-'}
+                        </BodyShort>
+                      </FlexColumn>
+                      <FlexColumn className={styles.thirdCol}>
+                        <Label size="small">
+                          <FormattedMessage id="ArbeidsforholdFieldArray.Kilde" />
+                        </Label>
+                        <BodyShort size="small">
+                          <FormattedMessage id={arbeidsforhold ? 'ArbeidsforholdFieldArray.AaRegisteret' : 'ArbeidsforholdFieldArray.Inntektsmelding'} />
+                        </BodyShort>
+                      </FlexColumn>
+                      <FlexColumn className={styles.fourthCol}>
+                        <Label size="small">
+                          <FormattedMessage id="ArbeidsforholdFieldArray.InntektsmeldingMottatt" />
+                        </Label>
+                        <BodyShort size="small">
+                          {inntektsmelding?.motattDato && (
+                            <DateLabel dateString={inntektsmelding.motattDato} />
+                          )}
+                          {!inntektsmelding?.motattDato && <FormattedMessage id="ArbeidsforholdFieldArray.IkkeMottatt" />}
+                        </BodyShort>
+                      </FlexColumn>
+                    </FlexRow>
+                    <VerticalSpacer sixteenPx />
+                    <FlexRow>
+                      <FlexColumn className={styles.firstCol}>
+                        {visArbeidsforholdId && (
+                          <>
+                            <FlexRow>
+                              <FlexColumn>
+                                <Label size="small"><FormattedMessage id="ArbeidsforholdFieldArray.Id" /></Label>
+                              </FlexColumn>
+                              <FlexColumn className={styles.topPadding}>
+                                {arbeidsforhold.eksternArbeidsforholdId.length < 50 && (
+                                  <BodyShort size="small">{arbeidsforhold.eksternArbeidsforholdId}</BodyShort>
+                                )}
+                                {arbeidsforhold.eksternArbeidsforholdId.length >= 50 && (
+                                  <Tooltip
+                                    content={delOppAId(arbeidsforhold.eksternArbeidsforholdId)}
+                                    alignBottom
+                                  >
+                                    <BodyShort size="small">{`${arbeidsforhold.eksternArbeidsforholdId.substring(0, 50)}...`}</BodyShort>
+                                  </Tooltip>
+                                )}
+                              </FlexColumn>
+                            </FlexRow>
+                            <VerticalSpacer eightPx />
+                          </>
                         )}
-                        {!inntektsmelding?.motattDato && <FormattedMessage id="ArbeidsforholdFieldArray.IkkeMottatt" />}
-                      </BodyShort>
-                    </Column>
-                  </Row>
-                  <VerticalSpacer sixteenPx />
-                  <Row>
-                    <Column xs="4">
-                      {visArbeidsforholdId && (
-                        <>
-                          <FlexRow>
-                            <FlexColumn>
-                              <Label size="small"><FormattedMessage id="ArbeidsforholdFieldArray.Id" /></Label>
-                            </FlexColumn>
-                            <FlexColumn>
-                              {arbeidsforhold.eksternArbeidsforholdId.length < 50 && (
-                                <BodyShort size="small">{arbeidsforhold.eksternArbeidsforholdId}</BodyShort>
-                              )}
-                              {arbeidsforhold.eksternArbeidsforholdId.length >= 50 && (
-                                <Tooltip
-                                  content={delOppAId(arbeidsforhold.eksternArbeidsforholdId)}
-                                  alignBottom
-                                >
-                                  <BodyShort size="small">{`${arbeidsforhold.eksternArbeidsforholdId.substring(0, 50)}...`}</BodyShort>
-                                </Tooltip>
-                              )}
-                            </FlexColumn>
-                          </FlexRow>
-                          <VerticalSpacer eightPx />
-                        </>
-                      )}
-                      {arbeidsforhold.stillingsprosent && (
-                        <>
-                          <FlexRow>
-                            <FlexColumn>
-                              <Label size="small"><FormattedMessage id="ArbeidsforholdFieldArray.Stillingsprosent" /></Label>
-                            </FlexColumn>
-                            <FlexColumn>
-                              <BodyShort size="small">{`${arbeidsforhold.stillingsprosent}%`}</BodyShort>
-                            </FlexColumn>
-                          </FlexRow>
-                          <VerticalSpacer eightPx />
-                        </>
-                      )}
-                      {inntektsmelding && (
-                        <InntektsmeldingOpplysningerPanel
-                          saksnummer={saksnummer}
-                          inntektsmelding={inntektsmelding}
-                        />
-                      )}
-                      {!inntektsmelding && inntektsposter && (
-                        <>
-                          <VerticalSpacer thirtyTwoPx />
-                          <InntektsposterPanel
-                            inntektsposter={inntektsposter}
-                            skjæringstidspunkt={skjæringstidspunkt}
+                        {arbeidsforhold.stillingsprosent && (
+                          <>
+                            <FlexRow>
+                              <FlexColumn>
+                                <Label size="small"><FormattedMessage id="ArbeidsforholdFieldArray.Stillingsprosent" /></Label>
+                              </FlexColumn>
+                              <FlexColumn className={styles.topPadding}>
+                                <BodyShort size="small">{`${arbeidsforhold.stillingsprosent}%`}</BodyShort>
+                              </FlexColumn>
+                            </FlexRow>
+                            <VerticalSpacer eightPx />
+                          </>
+                        )}
+                        {inntektsmelding && (
+                          <InntektsmeldingOpplysningerPanel
+                            saksnummer={saksnummer}
+                            inntektsmelding={inntektsmelding}
                           />
-                          <VerticalSpacer thirtyTwoPx />
-                        </>
-                      )}
-                    </Column>
-                    <Column xs="3">
-                      <Label size="small">
-                        {`${getKodeverknavnFraKode(alleKodeverk, KodeverkType.PERMISJONSBESKRIVELSE_TYPE, arbeidsforhold.permisjonOgMangel.type)} 100%`}
-                      </Label>
-                      <BodyShort size="small">
-                        <PeriodLabel dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom} dateStringTom={undefined} />
-                      </BodyShort>
-                    </Column>
-                  </Row>
+                        )}
+                        {!inntektsmelding && inntektsposter && (
+                          <>
+                            <VerticalSpacer thirtyTwoPx />
+                            <InntektsposterPanel
+                              inntektsposter={inntektsposter}
+                              skjæringstidspunkt={skjæringstidspunkt}
+                            />
+                            <VerticalSpacer thirtyTwoPx />
+                          </>
+                        )}
+                      </FlexColumn>
+                      <FlexColumn>
+                        <Label size="small">
+                          {`${getKodeverknavnFraKode(alleKodeverk, KodeverkType.PERMISJONSBESKRIVELSE_TYPE, arbeidsforhold.permisjonOgMangel.type)} 100%`}
+                        </Label>
+                        <BodyShort size="small">
+                          <PeriodLabel dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom} dateStringTom={undefined} />
+                        </BodyShort>
+                      </FlexColumn>
+                    </FlexRow>
+                  </FlexContainer>
                   <RadioGroupPanel
                     name={`${FIELD_ARRAY_NAME}.${index}.permisjonStatus`}
                     label={(

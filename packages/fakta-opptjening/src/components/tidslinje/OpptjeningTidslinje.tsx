@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import moment from 'moment';
-import { Column, Row } from 'nav-frontend-grid';
 
 import { Timeline } from '@navikt/ft-tidslinje';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
@@ -151,32 +150,28 @@ const OpptjeningTimeLine: FunctionComponent<OwnProps> = ({
 
   return (
     <div className="opptjening">
-      <Row>
-        <Column xs="12">
-          <DatoPanel
-            opptjeningFomDato={moment(opptjeningFomDato)
-              .format(DDMMYYYY_DATE_FORMAT)}
-            opptjeningTomDato={moment(opptjeningTomDato)
-              .format(DDMMYYYY_DATE_FORMAT)}
-          />
-          <div className={styles.timelineContainer}>
-            <div className={styles.timeLineWrapper}>
-              <div className={styles.timeLine}>
-                <Timeline
-                  ref={timelineRef}
-                  options={options(opptjeningFomDato, opptjeningTomDato)}
-                  // @ts-ignore Fiks
-                  initialItems={items}
-                  customTimes={{ currentDate: new Date(opptjeningTomDato) }}
-                  selectHandler={selectHandler}
-                  initialGroups={groups}
-                  selection={[valgtAktivitetIndex]}
-                />
-              </div>
-            </div>
+      <DatoPanel
+        opptjeningFomDato={moment(opptjeningFomDato)
+          .format(DDMMYYYY_DATE_FORMAT)}
+        opptjeningTomDato={moment(opptjeningTomDato)
+          .format(DDMMYYYY_DATE_FORMAT)}
+      />
+      <div className={styles.timelineContainer}>
+        <div className={styles.timeLineWrapper}>
+          <div className={styles.timeLine}>
+            <Timeline
+              ref={timelineRef}
+              options={options(opptjeningFomDato, opptjeningTomDato)}
+              // @ts-ignore Fiks
+              initialItems={items}
+              customTimes={{ currentDate: new Date(opptjeningTomDato) }}
+              selectHandler={selectHandler}
+              initialGroups={groups}
+              selection={[valgtAktivitetIndex]}
+            />
           </div>
-        </Column>
-      </Row>
+        </div>
+      </div>
     </div>
   );
 };

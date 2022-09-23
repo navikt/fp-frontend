@@ -1,13 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import moment from 'moment';
-import { Column, Container, Row } from 'nav-frontend-grid';
 import { Label, BodyShort } from '@navikt/ds-react';
 
 import { FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
 import { Datepicker, formHooks } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
-import { VerticalSpacer, FaktaGruppe, Image } from '@navikt/ft-ui-komponenter';
+import {
+  VerticalSpacer, FaktaGruppe, Image, FlexContainer, FlexRow, FlexColumn,
+} from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 import { BekreftDokumentertDatoAksjonspunktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
@@ -78,7 +79,7 @@ const DokumentasjonFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
       title={intl.formatMessage({ id: 'DokumentasjonFaktaForm.ApplicationInformation' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.ADOPSJONSDOKUMENTAJON]}
     >
-      <Container className={styles.container}>
+      <div className={styles.container}>
         <Datepicker
           name="omsorgsovertakelseDato"
           label={intl.formatMessage({
@@ -104,35 +105,37 @@ const DokumentasjonFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
         {Object.keys(fodselsdatoer).map((id, i) => (
           <div key={`div-${aksjonspunktCodes.ADOPSJONSDOKUMENTAJON}-${id}`}>
             <VerticalSpacer sixteenPx />
-            <Row>
-              <Column xs="6">
-                <Datepicker
-                  name={`fodselsdatoer.${id}`}
-                  label={intl.formatMessage({
-                    id: 'DokumentasjonFaktaForm.Fodselsdato',
-                  }, { number: i + 1 })}
-                  validate={[required, hasValidDate]}
-                  isReadOnly={readOnly}
-                  isEdited={editedStatus.adopsjonFodelsedatoer[id]}
-                />
-              </Column>
-              <Column xs="6">
-                {(!readOnly && isAgeAbove15(fodselsdatoer, omsorgsovertakelseDato, id)) && (
-                  <Image
-                    className={styles.image}
-                    alt={intl.formatMessage({ id: 'DokumentasjonFaktaForm.BarnErOver15Ar' })}
-                    tooltip={intl.formatMessage({ id: 'DokumentasjonFaktaForm.BarnErOver15Ar' })}
-                    src={advarselImageUrl}
+            <FlexContainer>
+              <FlexRow>
+                <FlexColumn>
+                  <Datepicker
+                    name={`fodselsdatoer.${id}`}
+                    label={intl.formatMessage({
+                      id: 'DokumentasjonFaktaForm.Fodselsdato',
+                    }, { number: i + 1 })}
+                    validate={[required, hasValidDate]}
+                    isReadOnly={readOnly}
+                    isEdited={editedStatus.adopsjonFodelsedatoer[id]}
                   />
-                )}
-              </Column>
-            </Row>
+                </FlexColumn>
+                <FlexColumn>
+                  {(!readOnly && isAgeAbove15(fodselsdatoer, omsorgsovertakelseDato, id)) && (
+                    <Image
+                      className={styles.image}
+                      alt={intl.formatMessage({ id: 'DokumentasjonFaktaForm.BarnErOver15Ar' })}
+                      tooltip={intl.formatMessage({ id: 'DokumentasjonFaktaForm.BarnErOver15Ar' })}
+                      src={advarselImageUrl}
+                    />
+                  )}
+                </FlexColumn>
+              </FlexRow>
+            </FlexContainer>
           </div>
         ))}
         <VerticalSpacer twentyPx />
         <Label size="small">{intl.formatMessage({ id: 'DokumentasjonFaktaForm.AntallBarnSomFyllerVilkaret' })}</Label>
         <BodyShort size="small">{findAntallBarnUnder15(fodselsdatoer, omsorgsovertakelseDato)}</BodyShort>
-      </Container>
+      </div>
     </FaktaGruppe>
   );
 };

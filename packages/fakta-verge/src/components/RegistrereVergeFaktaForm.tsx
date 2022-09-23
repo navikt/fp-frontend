@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { Column, Row } from 'nav-frontend-grid';
 import { WrappedComponentProps } from 'react-intl';
 
 import {
@@ -15,6 +14,8 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { KodeverkMedNavn, Verge } from '@fpsak-frontend/types';
 
 import VergeType from '../kodeverk/vergeType';
+
+import styles from './registrereVergeFaktaForm.less';
 
 export type FormValues = {
   navn?: string;
@@ -60,50 +61,47 @@ const RegistrereVergeFaktaForm: FunctionComponent<OwnProps & WrappedComponentPro
   valgtVergeType,
 }) => (
   <FaktaGruppe merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.AVKLAR_VERGE]}>
-    <Row>
-      <Column xs="5">
-        <SelectField
-          name="vergeType"
-          label={intl.formatMessage({ id: 'Verge.TypeVerge' })}
-          validate={[required]}
-          selectValues={vergetyper.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
-          readOnly={readOnly}
-        />
-      </Column>
-    </Row>
-    {valgtVergeType && (
-      <>
-        <VerticalSpacer sixteenPx />
-        <Row>
-          <Column xs="3">
-            <InputField
-              name="navn"
-              label={intl.formatMessage({ id: 'Verge.Navn' })}
-              validate={[required, hasValidName]}
-              readOnly={readOnly}
-            />
-          </Column>
-          <Column xs="3">
-            {valgtVergeType !== VergeType.ADVOKAT && (
+    <SelectField
+      name="vergeType"
+      className={styles.selectWidth}
+      label={intl.formatMessage({ id: 'Verge.TypeVerge' })}
+      validate={[required]}
+      selectValues={vergetyper.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
+      readOnly={readOnly}
+    />
+    <FlexContainer>
+      {valgtVergeType && (
+        <>
+          <VerticalSpacer sixteenPx />
+          <FlexRow>
+            <FlexColumn className={styles.leftCol}>
               <InputField
-                name="fnr"
-                label={intl.formatMessage({ id: 'Verge.FodselsNummer' })}
-                validate={[required, hasValidFodselsnummer]}
+                name="navn"
+                label={intl.formatMessage({ id: 'Verge.Navn' })}
+                validate={[required, hasValidName]}
                 readOnly={readOnly}
               />
-            )}
-            {valgtVergeType === VergeType.ADVOKAT && (
-              <InputField
-                name="organisasjonsnummer"
-                label={intl.formatMessage({ id: 'Verge.Organisasjonsnummer' })}
-                validate={[required]}
-                readOnly={readOnly}
-              />
-            )}
-          </Column>
-        </Row>
-        <VerticalSpacer sixteenPx />
-        <FlexContainer>
+            </FlexColumn>
+            <FlexColumn>
+              {valgtVergeType !== VergeType.ADVOKAT && (
+                <InputField
+                  name="fnr"
+                  label={intl.formatMessage({ id: 'Verge.FodselsNummer' })}
+                  validate={[required, hasValidFodselsnummer]}
+                  readOnly={readOnly}
+                />
+              )}
+              {valgtVergeType === VergeType.ADVOKAT && (
+                <InputField
+                  name="organisasjonsnummer"
+                  label={intl.formatMessage({ id: 'Verge.Organisasjonsnummer' })}
+                  validate={[required]}
+                  readOnly={readOnly}
+                />
+              )}
+            </FlexColumn>
+          </FlexRow>
+          <VerticalSpacer sixteenPx />
           <FlexRow>
             <FlexColumn>
               <Datepicker
@@ -122,9 +120,9 @@ const RegistrereVergeFaktaForm: FunctionComponent<OwnProps & WrappedComponentPro
               />
             </FlexColumn>
           </FlexRow>
-        </FlexContainer>
-      </>
-    )}
+        </>
+      )}
+    </FlexContainer>
   </FaktaGruppe>
 );
 
