@@ -1,7 +1,6 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Column, Row } from 'nav-frontend-grid';
 
 import {
   FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew, isFieldEdited, FieldEditedInfo, FaktaBegrunnelseFormValues,
@@ -10,7 +9,7 @@ import {
   Aksjonspunkt, FamilieHendelse, AlleKodeverk, Soknad,
 } from '@fpsak-frontend/types';
 import {
-  VerticalSpacer, AksjonspunktHelpTextTemp,
+  VerticalSpacer, AksjonspunktHelpTextTemp, FlexContainer, FlexRow, FlexColumn,
 } from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Form } from '@navikt/ft-form-hooks';
@@ -21,6 +20,8 @@ import {
 import MannAdoptererAleneFaktaForm, { FormValues as MannAdoptererFormValues } from './MannAdoptererAleneFaktaForm';
 import EktefelleFaktaForm, { FormValues as EktefelleFormValues } from './EktefelleFaktaForm';
 import DokumentasjonFaktaForm, { FormValues as DokFormValues } from './DokumentasjonFaktaForm';
+
+import styles from './adopsjonInfoPanel.less';
 
 const { ADOPSJONSDOKUMENTAJON, OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, OM_ADOPSJON_GJELDER_EKTEFELLES_BARN } = aksjonspunktCodes;
 const adopsjonAksjonspunkter = [OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, ADOPSJONSDOKUMENTAJON, OM_ADOPSJON_GJELDER_EKTEFELLES_BARN];
@@ -141,28 +142,29 @@ const AdopsjonInfoPanel: FunctionComponent<OwnProps> = ({
         setDataOnUnmount={setFormData}
       >
         <VerticalSpacer eightPx />
-        <Row>
-          <Column xs="6">
-            <DokumentasjonFaktaForm
-              readOnly={readOnly}
-              editedStatus={editedStatus}
-              erForeldrepengerFagsak={isForeldrepengerFagsak}
-              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-              hasEktefellesBarnAksjonspunkt={hasAksjonspunkt(
-                OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
-                aksjonspunkter,
-              )}
-            />
-          </Column>
-          <Column xs="6">
-            {hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkter) && (
+        <FlexContainer>
+          <FlexRow wrap>
+            <FlexColumn className={styles.leftCol}>
+              <DokumentasjonFaktaForm
+                readOnly={readOnly}
+                editedStatus={editedStatus}
+                erForeldrepengerFagsak={isForeldrepengerFagsak}
+                alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+                hasEktefellesBarnAksjonspunkt={hasAksjonspunkt(
+                  OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+                  aksjonspunkter,
+                )}
+              />
+            </FlexColumn>
+            <FlexColumn className={styles.rightCol}>
+              {hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkter) && (
               <EktefelleFaktaForm
                 readOnly={readOnly}
                 alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
                 ektefellesBarnIsEdited={editedStatus.ektefellesBarn}
               />
-            )}
-            {hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkter) && (
+              )}
+              {hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkter) && (
               <MannAdoptererAleneFaktaForm
                 farSokerType={soknad.farSokerType}
                 readOnly={readOnly}
@@ -170,9 +172,10 @@ const AdopsjonInfoPanel: FunctionComponent<OwnProps> = ({
                 alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
                 alleKodeverk={alleKodeverk}
               />
-            )}
-          </Column>
-        </Row>
+              )}
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
         {aksjonspunkter && aksjonspunkter.length > 0 && (
           <>
             <VerticalSpacer twentyPx />

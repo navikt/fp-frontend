@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { Column, Row } from 'nav-frontend-grid';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
@@ -38,25 +37,23 @@ class DokumentertePerioderPeriodePicker extends PureComponent<OwnProps> {
       <PeriodFieldArray fields={fields} emptyPeriodTemplate={periode} shouldShowAddButton={!readOnly} readOnly={readOnly}>
         {(fieldId, index, getRemoveButton) => (
           <React.Fragment key={fieldId}>
-            <Row>
-              <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
-                <FlexColumn>
-                  <FlexRow>
-                    <FlexColumn>
-                      <PeriodpickerField
-                        names={[`${fieldId}.fom`, `${fieldId}.tom`]}
-                        label={index === 0 ? { id: 'UttakInfoPanel.AvklartPeriode' } : ''}
-                        validate={[required, hasValidDate, dateRangesNotOverlapping]}
-                        readOnly={readOnly}
-                      />
-                    </FlexColumn>
-                    <FlexColumn>
-                      {getRemoveButton()}
-                    </FlexColumn>
-                  </FlexRow>
-                </FlexColumn>
-              </Column>
-            </Row>
+            <div className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+              <FlexColumn>
+                <FlexRow>
+                  <FlexColumn>
+                    <PeriodpickerField
+                      names={[`${fieldId}.fom`, `${fieldId}.tom`]}
+                      label={index === 0 ? { id: 'UttakInfoPanel.AvklartPeriode' } : ''}
+                      validate={[required, hasValidDate, dateRangesNotOverlapping]}
+                      readOnly={readOnly}
+                    />
+                  </FlexColumn>
+                  <FlexColumn>
+                    {getRemoveButton()}
+                  </FlexColumn>
+                </FlexRow>
+              </FlexColumn>
+            </div>
             <VerticalSpacer sixteenPx />
           </React.Fragment>
         )}

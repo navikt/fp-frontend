@@ -5,7 +5,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import {
   Alert, Link, BodyShort, Heading,
 } from '@navikt/ds-react';
-import { Column, Row } from 'nav-frontend-grid';
 
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import { dateFormat } from '@navikt/ft-utils';
@@ -91,32 +90,34 @@ const ArbeidsOgInntektOverstyrPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <Row>
-        <Column xs="6">
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <Heading size="small"><FormattedMessage id="ArbeidOgInntektFaktaPanel.Overskrift" /></Heading>
-              </FlexColumn>
-              {erOverstyrer && erAksjonspunktÅpent && !readOnly && (
+      <FlexContainer>
+        <FlexRow spaceBetween>
+          <FlexColumn>
+            <FlexContainer>
+              <FlexRow>
                 <FlexColumn>
-                  <OverstyringKnapp onClick={toggleOverstyring} />
+                  <Heading size="small"><FormattedMessage id="ArbeidOgInntektFaktaPanel.Overskrift" /></Heading>
                 </FlexColumn>
-              )}
-            </FlexRow>
-          </FlexContainer>
-        </Column>
-        <Column xs="6">
-          <FloatRight>
-            <BodyShort size="small">
-              <FormattedMessage
-                id="ArbeidOgInntektFaktaPanel.Skjaringstidspunkt"
-                values={{ skjæringspunktDato: dateFormat(arbeidOgInntekt.skjæringstidspunkt) }}
-              />
-            </BodyShort>
-          </FloatRight>
-        </Column>
-      </Row>
+                {erOverstyrer && erAksjonspunktÅpent && !readOnly && (
+                  <FlexColumn>
+                    <OverstyringKnapp onClick={toggleOverstyring} />
+                  </FlexColumn>
+                )}
+              </FlexRow>
+            </FlexContainer>
+          </FlexColumn>
+          <FlexColumn>
+            <FloatRight>
+              <BodyShort size="small">
+                <FormattedMessage
+                  id="ArbeidOgInntektFaktaPanel.Skjaringstidspunkt"
+                  values={{ skjæringspunktDato: dateFormat(arbeidOgInntekt.skjæringstidspunkt) }}
+                />
+              </BodyShort>
+            </FloatRight>
+          </FlexColumn>
+        </FlexRow>
+      </FlexContainer>
       <VerticalSpacer thirtyTwoPx />
       {aksjonspunktTekstKoder.length > 0 && (
         <AksjonspunktHelpTextHTML>

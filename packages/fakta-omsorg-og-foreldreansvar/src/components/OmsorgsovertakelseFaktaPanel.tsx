@@ -1,14 +1,17 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import { BodyShort, Label } from '@navikt/ds-react';
 
 import { Datepicker } from '@navikt/ft-form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
-import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
+import {
+  FaktaGruppe, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 import { FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
+
+import styles from './omsorgsovertakelseFaktaPanel.less';
 
 const getAntallBarn = (soknad: Soknad, familiehendelse: FamilieHendelse): number => {
   const antallBarn = soknad.antallBarn ? soknad.antallBarn : NaN;
@@ -54,32 +57,33 @@ const OmsorgsovertakelseFaktaPanel: FunctionComponent<OwnProps> & StaticFunction
       })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OMSORGSOVERTAKELSE]}
     >
-      <Row>
-        <Column xs={erAksjonspunktForeldreansvar ? '4' : '8'}>
-          <Datepicker
-            name="omsorgsovertakelseDato"
-            label={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.OmsorgsovertakelseDate' })}
-            validate={[required, hasValidDate]}
-            isReadOnly={readOnly}
-            isEdited={editedStatus.omsorgsovertakelseDato}
-          />
-        </Column>
-        {erAksjonspunktForeldreansvar
-          && (
-          <Column xs="4">
+      <FlexContainer>
+        <FlexRow>
+          <FlexColumn className={styles.marginRight}>
             <Datepicker
-              name="foreldreansvarDato"
-              label={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.ForeldreansvarDato' })}
+              name="omsorgsovertakelseDato"
+              label={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.OmsorgsovertakelseDate' })}
               validate={[required, hasValidDate]}
               isReadOnly={readOnly}
+              isEdited={editedStatus.omsorgsovertakelseDato}
             />
-          </Column>
+          </FlexColumn>
+          {erAksjonspunktForeldreansvar && (
+            <FlexColumn className={styles.marginRight}>
+              <Datepicker
+                name="foreldreansvarDato"
+                label={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.ForeldreansvarDato' })}
+                validate={[required, hasValidDate]}
+                isReadOnly={readOnly}
+              />
+            </FlexColumn>
           )}
-        <Column xs="4">
-          <Label size="small"><FormattedMessage id="OmsorgOgForeldreansvarFaktaForm.NrOfChildren" /></Label>
-          <BodyShort size="small">{antallBarn}</BodyShort>
-        </Column>
-      </Row>
+          <FlexColumn>
+            <Label size="small"><FormattedMessage id="OmsorgOgForeldreansvarFaktaForm.NrOfChildren" /></Label>
+            <BodyShort size="small">{antallBarn}</BodyShort>
+          </FlexColumn>
+        </FlexRow>
+      </FlexContainer>
     </FaktaGruppe>
   );
 };

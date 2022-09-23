@@ -31,7 +31,7 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
         <FlexColumn>
           <Label size="small"><FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" /></Label>
         </FlexColumn>
-        <FlexColumn>
+        <FlexColumn className={styles.topPadding}>
           <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</BodyShort>
         </FlexColumn>
       </FlexRow>
@@ -40,7 +40,7 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
         <FlexColumn>
           <Label size="small"><FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjon" /></Label>
         </FlexColumn>
-        <FlexColumn>
+        <FlexColumn className={styles.topPadding}>
           <BodyShort size="small">
             <FormattedMessage id={inntektsmelding.refusjonPrMnd ? 'InntektsmeldingOpplysningerPanel.Ja' : 'InntektsmeldingOpplysningerPanel.Nei'} />
           </BodyShort>
@@ -53,7 +53,7 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
             <FlexColumn>
               <Label size="small"><FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" /></Label>
             </FlexColumn>
-            <FlexColumn>
+            <FlexColumn className={styles.topPadding}>
               <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd)}</BodyShort>
             </FlexColumn>
           </FlexRow>

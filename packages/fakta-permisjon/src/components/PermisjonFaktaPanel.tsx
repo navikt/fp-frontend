@@ -3,7 +3,6 @@ import React, {
 } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import {
   Button, Label, BodyShort, Heading,
 } from '@navikt/ds-react';
@@ -17,7 +16,7 @@ import {
   Aksjonspunkt, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, AoIArbeidsforhold, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import {
-  VerticalSpacer, AksjonspunktHelpTextHTML, FloatRight,
+  VerticalSpacer, AksjonspunktHelpTextHTML, FlexContainer, FlexRow, FlexColumn,
 } from '@navikt/ft-ui-komponenter';
 import { VurderArbeidsforholdPermisjonAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -96,21 +95,21 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <Row>
-        <Column xs="6">
-          <Heading size="small"><FormattedMessage id="PermisjonFaktaPanel.Overskrift" /></Heading>
-        </Column>
-        <Column xs="6">
-          <FloatRight>
+      <FlexContainer>
+        <FlexRow spaceBetween>
+          <FlexColumn>
+            <Heading size="small"><FormattedMessage id="PermisjonFaktaPanel.Overskrift" /></Heading>
+          </FlexColumn>
+          <FlexColumn>
             <BodyShort size="small">
               <FormattedMessage
                 id="PermisjonFaktaPanel.Skjaringstidspunkt"
                 values={{ skjæringspunktDato: dateFormat(arbeidOgInntektMedPermisjon.skjæringstidspunkt) }}
               />
             </BodyShort>
-          </FloatRight>
-        </Column>
-      </Row>
+          </FlexColumn>
+        </FlexRow>
+      </FlexContainer>
       <VerticalSpacer thirtyTwoPx />
       {harÅpentAksjonspunkt && (
         <AksjonspunktHelpTextHTML>

@@ -50,7 +50,7 @@ describe('<SakenFaktaIndex>', () => {
     const utils = render(<ApentAksjonspunktForInnhentingAvDokumentasjon submitCallback={lagre} />);
 
     expect(await screen.findByText(
-      'Søker har oppgitt informasjon om opptjening i utlandet. Innhent dokumentasjon fra utenlandsk trygdemyndighet ved behov.',
+      'Se søknad for informasjon om oppgitt rettighet fra EØS. Innhent dokumentasjon fra utenlandsk trygdemyndighet ved behov',
     )).toBeInTheDocument();
     expect(screen.getByText('Innhentelse av dokumentasjon')).toBeInTheDocument();
 
@@ -75,7 +75,7 @@ describe('<SakenFaktaIndex>', () => {
     const utils = render(<ApentAksjonspunktForInnhentingAvDokumentasjon submitCallback={lagre} />);
 
     expect(await screen.findByText(
-      'Søker har oppgitt informasjon om opptjening i utlandet. Innhent dokumentasjon fra utenlandsk trygdemyndighet ved behov.',
+      'Se søknad for informasjon om oppgitt rettighet fra EØS. Innhent dokumentasjon fra utenlandsk trygdemyndighet ved behov',
     )).toBeInTheDocument();
 
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');

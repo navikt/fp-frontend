@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Column } from 'nav-frontend-grid';
 import { Label } from '@navikt/ds-react';
 
 import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@fpsak-frontend/fakta-felles';
@@ -105,14 +104,12 @@ export const SjekkFodselDokForm: FunctionComponent<OwnProps> & StaticFunctions =
         />
         {dokumentasjonForeligger && (
           <div className={styles.clearfix}>
-            <Column xs="12">
+            <VerticalSpacer eightPx />
+            <ArrowBox>
+              <Label size="small"><FormattedMessage id="SjekkFodselDokForm.FyllInnDokumenterteOpplysninger" /></Label>
               <VerticalSpacer eightPx />
-              <ArrowBox>
-                <Label size="small"><FormattedMessage id="SjekkFodselDokForm.FyllInnDokumenterteOpplysninger" /></Label>
-                <VerticalSpacer eightPx />
-                <AvklartBarnFieldArray readOnly={readOnly} />
-              </ArrowBox>
-            </Column>
+              <AvklartBarnFieldArray readOnly={readOnly} />
+            </ArrowBox>
           </div>
         )}
       </FaktaGruppe>
