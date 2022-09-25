@@ -60,7 +60,7 @@ spec:
     - name: HOST
       value: "https://fpsak-gcp.dev.intern.nav.no"
     - name: PORT
-      value: "9090"
+      value: "8080"
     - name: CORS_ALLOWED_HEADERS
       value: "Referer, Origin, Content-Type, Accept, X-Requested-With, cache-control, x_Nav-CallId, pragma, expires, X-Forwarded-Proto"
     - name: CORS_EXPOSED_HEADERS
