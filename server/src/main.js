@@ -4,13 +4,14 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import limit from './ratelimit.js';
 import * as headers from "./headers.js";
-import logger from './log.js';
+import logger from './auth/azure/log.js';
+import { getIssuer } from './auth/azure/issuer.js';
 
 // for debugging during development
-import config from './config.js';
-import azure from './auth/azure.js';
-import msgraph from "./auth/msgraph.js";
+import config from './auth/azure/config.js';
+import msgraph from "./auth/azure/msgraph.js";
 import reverseProxy from "./reverse-proxy.js";
+import { isTokenValid } from "./auth/azure/validate.js";
 
 const server = express();
 const { port } = config.server;
@@ -62,6 +63,8 @@ async function startApp() {
       })
     );
 
+    const issuer = await getIssuer();
+
     // Liveness and readiness probes for Kubernetes / nais
     server.get(['/isAlive', '/isReady'], (req, res) => {
       res.status(200).send('Alive');
@@ -74,9 +77,12 @@ async function startApp() {
     });
 
     const ensureAuthenticated = async (req, res, next) => {
-      if (!req.headers.authorization) {
+      const userToken = req.headers.authorization;
+      if (!userToken && isTokenValid(userToken)) {
+        logger.debug("NOK user token.")
         res.redirect(`/oauth2/login?redirect=${req.originalUrl}`);
       } else {
+        logger.info("OK token.")
         // TODO: Validate the token https://doc.nais.io/security/auth/azure-ad/sidecar/#token-validation
         next();
       }
@@ -96,11 +102,9 @@ async function startApp() {
       res.redirect("/oauth2/session");
     });
 
-    const authClient = await azure.client();
-
     // return user info fetched from the Microsoft Graph API
     server.get('/me', (req, res) => {
-      msgraph.getUserInfoFromGraphApi(authClient, req)
+      msgraph.getUserInfoFromGraphApi(req.headers.authorization)
         .then((userinfo) => res.json(userinfo))
         .catch((err) => res.status(500)
           .json(err));
@@ -108,13 +112,13 @@ async function startApp() {
 
     // return groups that the user is a member of from the Microsoft Graph API
     server.get('/me/memberOf', (req, res) => {
-      msgraph.getUserGroups(authClient, req)
+      msgraph.getUserGroups(req.headers.authorization)
         .then((userinfo) => res.json(userinfo))
         .catch((err) => res.status(500)
           .json(err));
     });
 
-    reverseProxy.setup(server, authClient);
+    reverseProxy.setup(server);
 
     // serve static files
     server.use('/fpsak', express.static('/app/fpsak/'));

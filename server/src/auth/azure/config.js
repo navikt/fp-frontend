@@ -50,7 +50,7 @@ const cors = {
   allowedHeaders: envVar({
     name: 'CORS_ALLOWED_HEADERS',
     required: false,
-  }) || 'x-correlation-id',
+  }) || 'x_Nav-CallId',
   exposedHeaders: envVar({
     name: 'CORS_EXPOSED_HEADERS',
     required: false,
@@ -58,7 +58,7 @@ const cors = {
   allowedMethods: envVar({
     name: 'CORS_ALLOWED_METHODS',
     required: false,
-  }) || 'x_Nav-CallId',
+  }) || '',
 }
 
 const getProxyConfig = () => {
@@ -96,9 +96,6 @@ const configValueAsJson = ({ name, secret = false, required = true }) => {
   }
 };
 
-const ENV_PREFIX = "env:"
-const PATH_PREFIX = "path:"
-const VALUE_PREFIX = "value:"
 
 const configValue = ({name, secret = false, required = true}) => {
   // Finner ut hvor vi skal lete etter config
@@ -112,16 +109,7 @@ const configValue = ({name, secret = false, required = true}) => {
   }
 
   // Setter configverdi
-  let value = null;
-  if (pointer.startsWith(ENV_PREFIX)) {
-    value = process.env[pointer.slice(ENV_PREFIX.length)];
-  } else if (pointer.startsWith(PATH_PREFIX)) {
-    value = fs.readFileSync(pointer.slice(PATH_PREFIX.length), 'utf-8');
-  } else if (pointer.startsWith(VALUE_PREFIX)) {
-    value = pointer.slice(VALUE_PREFIX.length);
-  } else {
-    value = pointer;
-  }
+  let value = pointer;
 
   // Validerer
   if (!value && required) {
