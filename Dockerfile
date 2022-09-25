@@ -1,13 +1,12 @@
-FROM node:16-alpine
+FROM navikt/node-express:16
 
-LABEL org.opencontainers.image.source=https://github.com/navikt/fp-frontend
 ENV TZ="Europe/Oslo"
+LABEL org.opencontainers.image.source=https://github.com/navikt/fp-frontend
 
-WORKDIR /usr/src/app
-
-COPY server ./
+USER root
+WORKDIR /app
 COPY dist ./
+COPY server ./
 RUN npm i
 
 EXPOSE 8080
-CMD ["npm", "run", "start-express"]
