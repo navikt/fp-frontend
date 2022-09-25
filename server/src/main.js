@@ -117,9 +117,9 @@ async function startApp() {
     reverseProxy.setup(server);
 
     // serve static files
-    server.use('/', express.static('/app/fpsak/'));
+    server.use('/', express.static('/app/'));
     server.use('*', (req, res) => {
-      res.sendFile('index.html', { root: '/app/fpsak' });
+      res.sendFile('index.html', { root: '/app' });
     });
 
     server.listen(port, () => logger.info(`Listening on port ${port}`));
