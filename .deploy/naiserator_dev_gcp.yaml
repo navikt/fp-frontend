@@ -57,6 +57,8 @@ spec:
         - host: fpoppdrag.dev-fss-pub.nais.io
         - host: fptilbake.dev-fss-pub.nais.io
   env:
+    - name: NODE_ENV
+      value: "development"
     - name: HOST
       value: "https://fpsak.dev.intern.nav.no"
     - name: PORT

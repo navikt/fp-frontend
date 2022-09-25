@@ -1,4 +1,4 @@
-import logger from './log.js';
+import logger from '../log.js';
 import {getTokenInCache, setTokenInCache} from '../cache/index.js';
 import {createOidcUnknownError} from '../utils/oidcUtils.js';
 import {getAuthClient} from './client.js';

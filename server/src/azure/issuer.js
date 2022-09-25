@@ -1,6 +1,6 @@
 import { Issuer } from 'openid-client';
-import config from './config.js';
-import logger from './log.js';
+import config from '../config.js';
+import logger from '../log.js';
 
 let issuer;
 

@@ -1,7 +1,3 @@
-import { errors } from 'openid-client';
-
-export const OPError = errors.OPError;
-export const RPError = errors.RPError;
 
 export const createOidcUnknownError = (err) =>
   `Noe gikk galt med token exchange mot Azure.

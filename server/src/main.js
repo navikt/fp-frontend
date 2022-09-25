@@ -4,14 +4,14 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import limit from './ratelimit.js';
 import * as headers from "./headers.js";
-import logger from './auth/azure/log.js';
-import { getIssuer } from './auth/azure/issuer.js';
+import logger from './log.js';
+import { getIssuer } from './azure/issuer.js';
 
 // for debugging during development
-import config from './auth/azure/config.js';
-import msgraph from "./auth/azure/msgraph.js";
+import config from './config.js';
+import msgraph from "./azure/msgraph.js";
 import reverseProxy from "./reverse-proxy.js";
-import { isTokenValid } from "./auth/azure/validate.js";
+import { isTokenValid } from "./azure/validate.js";
 
 const server = express();
 const { port } = config.server;
@@ -96,7 +96,7 @@ async function startApp() {
       }
     });
 
-    logger.info("OK.")
+    logger.debug("OK.")
 
     // return user info fetched from the Microsoft Graph API
     server.get('/me', (req, res) => {

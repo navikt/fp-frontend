@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { grantAzureOboToken } from './grant.js';
-import logger from './log.js';
+import logger from '../log.js';
 
 const getGraphRequest = (bearerToken, graphUrl) => new Promise(((resolve, reject) => {
   const scope = 'https://graph.microsoft.com/.default';

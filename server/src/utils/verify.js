@@ -1,6 +1,5 @@
 import { errors, jwtVerify } from 'jose';
 
-
 export const verifyJwt = (bearerToken, jwkSet, issuer) => new Promise( () => {
   const token = bearerToken.replace('Bearer ', '');
 

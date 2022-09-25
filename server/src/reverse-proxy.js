@@ -2,10 +2,10 @@ import proxy from 'express-http-proxy';
 import url from 'url';
 import { ulid } from 'ulid';
 
-import { grantAzureOboToken } from './auth/azure/grant.js';
+import { grantAzureOboToken } from './azure/grant.js';
 
-import config from './auth/azure/config.js';
-import logger from './auth/azure/log.js';
+import config from './config.js';
+import logger from './log.js';
 
 const xNavCallId = 'x_Nav-CallId';
 const xTimestamp = 'x-Timestamp';

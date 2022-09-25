@@ -1,9 +1,9 @@
 import { verifyJwt } from '../utils/verify.js';
 
-import config from './config.js';
 import { getIssuer } from './issuer.js';
 import { getJwkSet } from './jwk.js';
-import logger from './log.js';
+import config from '../config.js';
+import logger from '../log.js';
 
 export const isTokenValid = async (bearerToken) => {
   const verificationResult = await verifyJwt(bearerToken, await getJwkSet(), await getIssuer());

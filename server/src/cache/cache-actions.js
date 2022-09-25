@@ -1,5 +1,5 @@
 import tokenCache from './token-cache.js';
-import logger from "../azure/log.js";
+import logger from "../log.js";
 
 export const flush = () => {
   tokenCache.flushAll();
