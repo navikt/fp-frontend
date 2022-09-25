@@ -56,7 +56,7 @@ jobs:
           context: .
           file: Dockerfile
           push: ${{ env.SHOULD_DEPLOY }}
-          tags: ${{ env.IMAGE_BASE }}:${{ steps.tag.outputs.TAG }}
+          tags: ${{ env.IMAGE_BASE }}:${{ env.TAG }}
 
       - name: Deploy
         if: env.SHOULD_DEPLOY == 'true'
@@ -64,7 +64,6 @@ jobs:
         env:
           PRINT_PAYLOAD: true
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          IMAGE: ${{ steps.tag.outputs.base }}:${{ steps.tag.outputs.sha }}
           CLUSTER: ${{ env.CLUSTER }}
           RESOURCE: .deploy/naiserator_dev_gcp.yaml
           #VARS: packages/server/dev.yaml
