@@ -62,7 +62,9 @@ jobs:
         if: env.SHOULD_DEPLOY == 'true'
         uses: nais/deploy/actions/deploy@v1
         env:
+          PRINT_PAYLOAD: true
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           IMAGE: ${{ steps.tag.outputs.base }}:${{ steps.tag.outputs.sha }}
           CLUSTER: ${{ env.CLUSTER }}
-          #VARS: packages/server/dev.yaml
           RESOURCE: .deploy/naiserator_dev_gcp.yaml
+          #VARS: packages/server/dev.yaml
