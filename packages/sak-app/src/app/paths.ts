@@ -74,8 +74,8 @@ export const createLocationForSkjermlenke = (behandlingLocation: Location, skjer
   return getLocationWithQueryParams(behandlingLocation, { punkt: skjermlenke.punktNavn, fakta: skjermlenke.faktaNavn });
 };
 
-// Kan gå inn på url som ser sånn ut "http://localhost:9000/fpsak/fagsak/", men
-// da vil ein automatisk redirecte til http://localhost:9000/fpsak/fagsak/behandling/*"
+// Kan gå inn på url som ser sånn ut "http://localhost:9000/fagsak/", men
+// da vil ein automatisk redirecte til http://localhost:9000/fagsak/behandling/*"
 export const erUrlUnderBehandling = (location: Location): boolean => !location.pathname.includes('behandling/');
 
 export const erBehandlingValgt = (location: Location): boolean => location.pathname.includes('behandling') && !location.pathname.endsWith('behandling/');
