@@ -40,7 +40,7 @@ jobs:
       - name: Run yarn install
         run: yarn install --ignore-optional --no-progress --frozen-lockfile
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       #- name: Run linting
       #  run: yarn less:lint && yarn lint && yarn ts-check

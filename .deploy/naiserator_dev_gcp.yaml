@@ -1,15 +1,15 @@
 apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
-  name: fp-frontend-azure
+  name: fp-frontend
   namespace: teamforeldrepenger
   labels:
     team: teamforeldrepenger
 spec:
-  image: ghcr.io/navikt/fp-frontend-azure-gcp:0.28
+  image: {{image}}
   port: 9090
   ingresses:
-    - "https://fpsak-gcp.dev.intern.nav.no"
+    - "https://fpsak.dev.intern.nav.no"
   liveness:
     path: /isAlive
     initialDelay: 10
