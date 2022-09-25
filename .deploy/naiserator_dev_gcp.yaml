@@ -7,7 +7,7 @@ metadata:
     team: teamforeldrepenger
 spec:
   image: {{image}}
-  port: 9090
+  port: 8080
   ingresses:
     - "https://fpsak.dev.intern.nav.no"
   liveness:
