@@ -7,7 +7,6 @@ WORKDIR /usr/src/app
 
 COPY server ./
 COPY dist ./
-
 RUN npm i
 
 EXPOSE 8080
