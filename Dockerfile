@@ -4,8 +4,8 @@ ENV TZ="Europe/Oslo"
 LABEL org.opencontainers.image.source=https://github.com/navikt/fp-frontend
 
 WORKDIR /app
-COPY dist ./
-COPY server ./
+COPY --chown=apprunner:root dist ./
+COPY --chown=apprunner:root server ./
 RUN npm i
 
 EXPOSE 8080
