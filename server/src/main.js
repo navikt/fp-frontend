@@ -96,7 +96,7 @@ async function startApp() {
       }
     });
 
-    const env = process.env.NODE_ENV || 'production';
+    logger.info("OK.")
 
     // return user info fetched from the Microsoft Graph API
     server.get('/me', (req, res) => {
