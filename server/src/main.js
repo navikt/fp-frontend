@@ -82,8 +82,7 @@ async function startApp() {
         logger.debug("NOK user token.")
         res.redirect(`/oauth2/login?redirect=${req.originalUrl}`);
       } else {
-        logger.info("OK token.")
-        // TODO: Validate the token https://doc.nais.io/security/auth/azure-ad/sidecar/#token-validation
+        logger.debug("OK user token.")
         next();
       }
     };
@@ -97,10 +96,7 @@ async function startApp() {
       }
     });
 
-    // DO NOT DO THIS IN PRODUCTION
-    server.get('/', (req, res) => {
-      res.redirect("/oauth2/session");
-    });
+    const env = process.env.NODE_ENV || 'production';
 
     // return user info fetched from the Microsoft Graph API
     server.get('/me', (req, res) => {
@@ -121,7 +117,7 @@ async function startApp() {
     reverseProxy.setup(server);
 
     // serve static files
-    server.use('/fpsak', express.static('/app/fpsak/'));
+    server.use('/', express.static('/app/fpsak/'));
     server.use('*', (req, res) => {
       res.sendFile('index.html', { root: '/app/fpsak' });
     });

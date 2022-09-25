@@ -19,7 +19,7 @@ const config = {
     filename: '[name]-[contenthash].js',
     chunkFilename: '[name].[contenthash].chunk.js',
     path: path.resolve(__dirname, '../dist/public'),
-    publicPath: '/fpsak/public/',
+    publicPath: '/public/',
   },
   optimization: {
     minimizer: [
