@@ -1,13 +1,13 @@
-name: Build, push and deploy Fpsak-frontend
+name: Build, push and deploy fp-frontend
 
 on:
   push:
     branches:
-      - forberede-azure-ad-login
+      - azure_gcp
 env:
-  CLUSTER: "dev-fss"
-  IMAGE_BASE: ghcr.io/navikt/fp-frontend-azure
-  SHOULD_DEPLOY: false
+  CLUSTER: "dev-gcp"
+  IMAGE_BASE: ghcr.io/${{ github.repository }}
+  SHOULD_DEPLOY: true
 
 jobs:
   build:
@@ -52,19 +52,19 @@ jobs:
           yarn build
 
       - name: Login to GitHub Packages Docker Registry
-        uses: docker/login-action@v1
+        uses: docker/login-action@49ed152c8eca782a232dede0303416e8f356c37b
         with:
           registry: ghcr.io
-          username: ${{ github.repository_owner }}
+          username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: DockerfileAzureLogin
+          file: Dockerfile
           push: ${{ env.SHOULD_DEPLOY }}
-          tags: ${{ env.IMAGE_BASE }}:${{ steps.tag.outputs.TAG }},${{ env.IMAGE_BASE }}:latest
+          tags: ${{ env.IMAGE_BASE }}:${{ steps.tag.outputs.TAG }}
 
       - name: Deploy
         if: env.SHOULD_DEPLOY == 'true'
@@ -72,5 +72,5 @@ jobs:
         env:
           IMAGE: ${{ steps.tag.outputs.base }}:${{ steps.tag.outputs.sha }}
           CLUSTER: ${{ env.CLUSTER }}
-          VARS: packages/server/dev.yaml
-          RESOURCE: packages/server/naiserator.yaml
+          #VARS: packages/server/dev.yaml
+          RESOURCE: .deploy/naiserator_dev_gcp.yaml
