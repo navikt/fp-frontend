@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
-import { Column, Row } from 'nav-frontend-grid';
 import {
   Label, BodyShort, Button, Modal,
 } from '@navikt/ds-react';
-import { Image } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 
 import advarselImageUrl from '@fpsak-frontend/assets/images/advarsel.svg';
 
@@ -39,46 +40,47 @@ const LukkPapirSoknadModal: FunctionComponent<OwnProps> = ({
       shouldCloseOnOverlayClick={false}
     >
       <Modal.Content>
-        <Row>
-          <Column xs="1">
-            <Image className={styles.image} alt={intl.formatMessage({ id: 'ModalLukkPapirSoknad.Avslutt' })} src={advarselImageUrl} />
-            <div className={styles.divider} />
-          </Column>
-          <Column xs="11">
-            <Label size="small">
-              {intl.formatMessage({ id: 'ModalLukkPapirSoknad.AvslutterRegistrering' })}
-            </Label>
-            <BodyShort size="small">
-              {intl.formatMessage({ id: 'ModalLukkPapirSoknad.BekreftAvslag' })}
-            </BodyShort>
-          </Column>
-        </Row>
-        <Row>
-          <Column>
-            <div className={styles.right}>
+        <FlexContainer>
+          <FlexRow>
+            <FlexColumn>
+              <Image className={styles.image} alt={intl.formatMessage({ id: 'ModalLukkPapirSoknad.Avslutt' })} src={advarselImageUrl} />
+            </FlexColumn>
+            <FlexColumn>
+              <Label size="small">
+                {intl.formatMessage({ id: 'ModalLukkPapirSoknad.AvslutterRegistrering' })}
+              </Label>
+              <VerticalSpacer fourPx />
+              <BodyShort size="small">
+                {intl.formatMessage({ id: 'ModalLukkPapirSoknad.BekreftAvslag' })}
+              </BodyShort>
+            </FlexColumn>
+          </FlexRow>
+          <VerticalSpacer sixteenPx />
+          <FlexRow>
+            <FlexColumn className={styles.flowRight}>
               <Link to="/">
                 <Button
                   size="small"
                   variant="primary"
-                  className={styles.button}
                   onClick={() => handleSubmit()}
                   type="button"
                 >
                   {intl.formatMessage({ id: 'ModalLukkPapirSoknad.Ok' })}
                 </Button>
               </Link>
+            </FlexColumn>
+            <FlexColumn>
               <Button
                 size="small"
                 variant="secondary"
                 onClick={cancelEvent}
-                className={styles.cancelButton}
                 type="button"
               >
                 {intl.formatMessage({ id: 'ModalLukkPapirSoknad.Avbryt' })}
               </Button>
-            </div>
-          </Column>
-        </Row>
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
       </Modal.Content>
     </Modal>
   );

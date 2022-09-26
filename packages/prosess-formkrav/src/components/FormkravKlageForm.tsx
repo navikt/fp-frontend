@@ -4,7 +4,6 @@ import {
   FormattedMessage, useIntl, IntlShape,
 } from 'react-intl';
 import { Detail, Heading } from '@navikt/ds-react';
-import { Column, Row } from 'nav-frontend-grid';
 
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
@@ -12,7 +11,7 @@ import {
 } from '@fpsak-frontend/prosess-felles';
 import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import {
-  AksjonspunktHelpTextTemp, FlexColumn, FlexRow, VerticalSpacer,
+  AksjonspunktHelpTextTemp, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { DATE_TIME_FORMAT, getKodeverknavnFn } from '@navikt/ft-utils';
 import { required } from '@navikt/ft-form-validators';
@@ -83,99 +82,103 @@ export const FormkravKlageForm: FunctionComponent<OwnProps> = ({
         {[<FormattedMessage id="Klage.Formkrav.HelpText" key={aksjonspunktCode} />]}
       </AksjonspunktHelpTextTemp>
       <VerticalSpacer sixteenPx />
-      <Row>
-        <Column xs="6">
-          <ProsessStegBegrunnelseTextFieldNew
-            readOnly={readOnly}
-          />
-        </Column>
-        <Column xs="6">
-          <SelectField
-            readOnly={readOnly}
-            validate={[required]}
-            name="vedtak"
-            label={intl.formatMessage({ id: 'Klage.Formkrav.VelgVedtak' })}
-            selectValues={klageBareVedtakOptions}
-            className={styles.selectBredde}
-          />
-          <VerticalSpacer sixteenPx />
-          <FlexRow>
-            <FlexColumn>
-              <RadioGroupPanel
-                name="erKlagerPart"
-                label={intl.formatMessage({ id: 'Klage.Formkrav.ErKlagerPart' })}
-                validate={[required]}
-                isReadOnly={readOnly}
-                isHorizontal
-                isTrueOrFalseSelection
-                radios={[{
-                  value: 'true',
-                  label: intl.formatMessage({ id: 'Klage.Formkrav.Ja' }),
-                }, {
-                  value: 'false',
-                  label: intl.formatMessage({ id: 'Klage.Formkrav.Nei' }),
-                }]}
-              />
-            </FlexColumn>
+      <FlexContainer>
+        <FlexRow>
+          <FlexColumn className={styles.col}>
+            <ProsessStegBegrunnelseTextFieldNew
+              readOnly={readOnly}
+            />
+          </FlexColumn>
+          <FlexColumn className={styles.col}>
+            <SelectField
+              readOnly={readOnly}
+              validate={[required]}
+              name="vedtak"
+              label={intl.formatMessage({ id: 'Klage.Formkrav.VelgVedtak' })}
+              selectValues={klageBareVedtakOptions}
+              className={styles.selectBredde}
+            />
             <VerticalSpacer sixteenPx />
-            <FlexColumn>
-              <RadioGroupPanel
-                name="erKonkret"
-                label={intl.formatMessage({ id: 'Klage.Formkrav.ErKonkret' })}
-                validate={[required]}
-                isReadOnly={readOnly}
-                isHorizontal
-                isTrueOrFalseSelection
-                radios={[{
-                  value: 'true',
-                  label: intl.formatMessage({ id: 'Klage.Formkrav.Ja' }),
-                }, {
-                  value: 'false',
-                  label: intl.formatMessage({ id: 'Klage.Formkrav.Nei' }),
-                }]}
-              />
-            </FlexColumn>
-          </FlexRow>
-          <VerticalSpacer sixteenPx />
-          <FlexRow>
-            <FlexColumn>
-              <RadioGroupPanel
-                name="erFristOverholdt"
-                label={intl.formatMessage({ id: 'Klage.Formkrav.ErFristOverholdt' })}
-                validate={[required]}
-                isReadOnly={readOnly}
-                isHorizontal
-                isTrueOrFalseSelection
-                radios={[{
-                  value: 'true',
-                  label: intl.formatMessage({ id: 'Klage.Formkrav.Ja' }),
-                }, {
-                  value: 'false',
-                  label: intl.formatMessage({ id: 'Klage.Formkrav.Nei' }),
-                }]}
-              />
-            </FlexColumn>
+            <FlexContainer>
+              <FlexRow>
+                <FlexColumn>
+                  <RadioGroupPanel
+                    name="erKlagerPart"
+                    label={intl.formatMessage({ id: 'Klage.Formkrav.ErKlagerPart' })}
+                    validate={[required]}
+                    isReadOnly={readOnly}
+                    isHorizontal
+                    isTrueOrFalseSelection
+                    radios={[{
+                      value: 'true',
+                      label: intl.formatMessage({ id: 'Klage.Formkrav.Ja' }),
+                    }, {
+                      value: 'false',
+                      label: intl.formatMessage({ id: 'Klage.Formkrav.Nei' }),
+                    }]}
+                  />
+                </FlexColumn>
+                <VerticalSpacer sixteenPx />
+                <FlexColumn>
+                  <RadioGroupPanel
+                    name="erKonkret"
+                    label={intl.formatMessage({ id: 'Klage.Formkrav.ErKonkret' })}
+                    validate={[required]}
+                    isReadOnly={readOnly}
+                    isHorizontal
+                    isTrueOrFalseSelection
+                    radios={[{
+                      value: 'true',
+                      label: intl.formatMessage({ id: 'Klage.Formkrav.Ja' }),
+                    }, {
+                      value: 'false',
+                      label: intl.formatMessage({ id: 'Klage.Formkrav.Nei' }),
+                    }]}
+                  />
+                </FlexColumn>
+              </FlexRow>
+            </FlexContainer>
             <VerticalSpacer sixteenPx />
-            <FlexColumn>
-              <RadioGroupPanel
-                name="erSignert"
-                label={intl.formatMessage({ id: 'Klage.Formkrav.ErSignert' })}
-                validate={[required]}
-                isReadOnly={readOnly}
-                isHorizontal
-                isTrueOrFalseSelection
-                radios={[{
-                  value: 'true',
-                  label: intl.formatMessage({ id: 'Klage.Formkrav.Ja' }),
-                }, {
-                  value: 'false',
-                  label: intl.formatMessage({ id: 'Klage.Formkrav.Nei' }),
-                }]}
-              />
-            </FlexColumn>
-          </FlexRow>
-        </Column>
-      </Row>
+            <FlexRow>
+              <FlexColumn>
+                <RadioGroupPanel
+                  name="erFristOverholdt"
+                  label={intl.formatMessage({ id: 'Klage.Formkrav.ErFristOverholdt' })}
+                  validate={[required]}
+                  isReadOnly={readOnly}
+                  isHorizontal
+                  isTrueOrFalseSelection
+                  radios={[{
+                    value: 'true',
+                    label: intl.formatMessage({ id: 'Klage.Formkrav.Ja' }),
+                  }, {
+                    value: 'false',
+                    label: intl.formatMessage({ id: 'Klage.Formkrav.Nei' }),
+                  }]}
+                />
+              </FlexColumn>
+              <VerticalSpacer sixteenPx />
+              <FlexColumn>
+                <RadioGroupPanel
+                  name="erSignert"
+                  label={intl.formatMessage({ id: 'Klage.Formkrav.ErSignert' })}
+                  validate={[required]}
+                  isReadOnly={readOnly}
+                  isHorizontal
+                  isTrueOrFalseSelection
+                  radios={[{
+                    value: 'true',
+                    label: intl.formatMessage({ id: 'Klage.Formkrav.Ja' }),
+                  }, {
+                    value: 'false',
+                    label: intl.formatMessage({ id: 'Klage.Formkrav.Nei' }),
+                  }]}
+                />
+              </FlexColumn>
+            </FlexRow>
+          </FlexColumn>
+        </FlexRow>
+      </FlexContainer>
       <div className={styles.confirmVilkarForm}>
         <ProsessStegSubmitButtonNew
           isReadOnly={readOnly}

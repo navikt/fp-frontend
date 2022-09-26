@@ -1,8 +1,9 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Column, Row } from 'nav-frontend-grid';
-import { Button, Label, Modal } from '@navikt/ds-react';
+import {
+  Button, Heading, Label, Modal,
+} from '@navikt/ds-react';
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -142,98 +143,89 @@ const HenleggBehandlingModal: FunctionComponent<PureOwnProps> = ({
     <Modal
       className={styles.modal}
       open
-      closeButton={false}
+      closeButton
       aria-label={intl.formatMessage({ id: 'HenleggBehandlingModal.ModalDescription' })}
       onClose={cancelEvent}
       shouldCloseOnOverlayClick={false}
     >
       <Modal.Content>
         <Form formMethods={formMethods} onSubmit={handleSubmit}>
-          <Label>{intl.formatMessage({ id: 'HenleggBehandlingModal.HenleggBehandling' })}</Label>
+          <Heading size="small">{intl.formatMessage({ id: 'HenleggBehandlingModal.HenleggBehandling' })}</Heading>
           <VerticalSpacer sixteenPx />
-          <Row>
-            <Column xs="5">
-              <SelectField
-                name="årsakKode"
-                label={intl.formatMessage({ id: 'HenleggBehandlingModal.ArsakField' })}
-                validate={[required]}
-                selectValues={henleggArsaker.map((arsak) => <option value={arsak.kode} key={arsak.kode}>{intl.formatMessage({ id: arsak.kode })}</option>)}
-              />
-            </Column>
-          </Row>
+          <SelectField
+            name="årsakKode"
+            className={styles.selectWidth}
+            label={intl.formatMessage({ id: 'HenleggBehandlingModal.ArsakField' })}
+            validate={[required]}
+            selectValues={henleggArsaker.map((arsak) => <option value={arsak.kode} key={arsak.kode}>{intl.formatMessage({ id: arsak.kode })}</option>)}
+          />
           <VerticalSpacer sixteenPx />
-          <Row>
-            <Column xs="8">
-              <TextAreaField
-                name="begrunnelse"
-                label={intl.formatMessage({ id: 'HenleggBehandlingModal.BegrunnelseField' })}
-                validate={[required, maxLength1500, hasValidText]}
-                maxLength={1500}
-              />
-            </Column>
-          </Row>
+          <TextAreaField
+            name="begrunnelse"
+            label={intl.formatMessage({ id: 'HenleggBehandlingModal.BegrunnelseField' })}
+            validate={[required, maxLength1500, hasValidText]}
+            maxLength={1500}
+          />
           {showHenleggelseFritekst(behandlingType, årsakKode) && (
             <>
               <VerticalSpacer sixteenPx />
-              <Row>
-                <Column xs="8">
-                  <div className={styles.fritekstTilBrevTextArea}>
-                    <TextAreaField
-                      name="fritekst"
-                      label={intl.formatMessage({ id: 'HenleggBehandlingModal.Fritekst' })}
-                      validate={[required, hasValidText]}
-                      maxLength={2000}
-                    />
-                  </div>
-                </Column>
-              </Row>
+              <div className={styles.fritekstTilBrevTextArea}>
+                <TextAreaField
+                  name="fritekst"
+                  label={intl.formatMessage({ id: 'HenleggBehandlingModal.Fritekst' })}
+                  validate={[required, hasValidText]}
+                  maxLength={2000}
+                />
+              </div>
             </>
           )}
-          <Row>
-            <Column xs="7">
-              <VerticalSpacer sixteenPx />
-              <FlexContainer>
-                <FlexRow>
-                  <FlexColumn>
-                    <Button
-                      variant="primary"
-                      size="small"
-                      className={styles.button}
-                      disabled={disableHovedKnapp(behandlingType, årsakKode, begrunnelse, fritekst)}
+          <FlexContainer>
+            <FlexRow spaceBetween>
+              <FlexColumn>
+                <VerticalSpacer sixteenPx />
+                <FlexContainer>
+                  <FlexRow>
+                    <FlexColumn>
+                      <Button
+                        variant="primary"
+                        size="small"
+                        className={styles.button}
+                        disabled={disableHovedKnapp(behandlingType, årsakKode, begrunnelse, fritekst)}
+                      >
+                        {intl.formatMessage({ id: 'HenleggBehandlingModal.HenleggBehandlingSubmit' })}
+                      </Button>
+                    </FlexColumn>
+                    <FlexColumn>
+                      <Button
+                        variant="secondary"
+                        size="small"
+                        onClick={cancelEvent}
+                        type="button"
+                      >
+                        {intl.formatMessage({ id: 'HenleggBehandlingModal.Avbryt' })}
+                      </Button>
+                    </FlexColumn>
+                  </FlexRow>
+                </FlexContainer>
+              </FlexColumn>
+              <FlexColumn>
+                {showLink && (
+                  <div className={styles.forhandsvis}>
+                    <Label size="small">{intl.formatMessage({ id: 'HenleggBehandlingModal.SokerInformeres' })}</Label>
+                    <VerticalSpacer fourPx />
+                    <a
+                      href=""
+                      onClick={previewHenleggBehandlingDoc(previewHenleggBehandling, ytelseType, fritekst, behandlingUuid)}
+                      onKeyDown={previewHenleggBehandlingDoc(previewHenleggBehandling, ytelseType, fritekst, behandlingUuid)}
+                      className="lenke lenke--frittstaende"
                     >
-                      {intl.formatMessage({ id: 'HenleggBehandlingModal.HenleggBehandlingSubmit' })}
-                    </Button>
-                  </FlexColumn>
-                  <FlexColumn>
-                    <Button
-                      variant="secondary"
-                      size="small"
-                      onClick={cancelEvent}
-                      type="button"
-                    >
-                      {intl.formatMessage({ id: 'HenleggBehandlingModal.Avbryt' })}
-                    </Button>
-                  </FlexColumn>
-                </FlexRow>
-              </FlexContainer>
-            </Column>
-            <Column xs="4">
-              {showLink && (
-                <div className={styles.forhandsvis}>
-                  <Label size="small">{intl.formatMessage({ id: 'HenleggBehandlingModal.SokerInformeres' })}</Label>
-                  <VerticalSpacer fourPx />
-                  <a
-                    href=""
-                    onClick={previewHenleggBehandlingDoc(previewHenleggBehandling, ytelseType, fritekst, behandlingUuid)}
-                    onKeyDown={previewHenleggBehandlingDoc(previewHenleggBehandling, ytelseType, fritekst, behandlingUuid)}
-                    className="lenke lenke--frittstaende"
-                  >
-                    {intl.formatMessage({ id: 'HenleggBehandlingModal.ForhandsvisBrev' })}
-                  </a>
-                </div>
-              )}
-            </Column>
-          </Row>
+                      {intl.formatMessage({ id: 'HenleggBehandlingModal.ForhandsvisBrev' })}
+                    </a>
+                  </div>
+                )}
+              </FlexColumn>
+            </FlexRow>
+          </FlexContainer>
         </Form>
       </Modal.Content>
     </Modal>

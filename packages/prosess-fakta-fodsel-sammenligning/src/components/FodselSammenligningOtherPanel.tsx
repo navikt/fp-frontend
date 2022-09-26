@@ -1,11 +1,15 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
-import { Label, BodyShort } from '@navikt/ds-react';
+import { Label, BodyShort, Heading } from '@navikt/ds-react';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Soknad } from '@fpsak-frontend/types';
+import {
+  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
+
+import styles from './fodselSammenligningOtherPanel.less';
 
 const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
@@ -52,29 +56,28 @@ const FodselSammenligningOtherPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <Label size="small">
+      <Heading size="small">
         <FormattedMessage id={terminFodselHeader} />
-      </Label>
-      <Row>
-        {soknad.utstedtdato
-          && (
-          <Column xs="4">
-            <Label size="small"><FormattedMessage id="FodselsammenligningPanel.UstedtDato" /></Label>
-          </Column>
+      </Heading>
+      <VerticalSpacer sixteenPx />
+      <FlexContainer>
+        <FlexRow>
+          {soknad.utstedtdato && (
+            <FlexColumn className={styles.colMargin}>
+              <Label size="small"><FormattedMessage id="FodselsammenligningPanel.UstedtDato" /></Label>
+              <BodyShort size="small">{formatDate(soknad.utstedtdato)}</BodyShort>
+            </FlexColumn>
           )}
-        <Column xs="4"><Label size="small"><FormattedMessage id={terminOrFodselLabel} /></Label></Column>
-        <Column xs="4"><Label size="small"><FormattedMessage id="FodselsammenligningPanel.AntallBarn" /></Label></Column>
-      </Row>
-      <Row>
-        {soknad.utstedtdato
-          && (
-          <Column xs="4">
-            <BodyShort size="small">{formatDate(soknad.utstedtdato)}</BodyShort>
-          </Column>
-          )}
-        <Column xs="4"><BodyShort size="small">{terminOrFodselDate}</BodyShort></Column>
-        <Column xs="4"><BodyShort size="small">{soknad.antallBarn}</BodyShort></Column>
-      </Row>
+          <FlexColumn className={styles.colMargin}>
+            <Label size="small"><FormattedMessage id={terminOrFodselLabel} /></Label>
+            <BodyShort size="small">{terminOrFodselDate}</BodyShort>
+          </FlexColumn>
+          <FlexColumn>
+            <Label size="small"><FormattedMessage id="FodselsammenligningPanel.AntallBarn" /></Label>
+            <BodyShort size="small">{soknad.antallBarn}</BodyShort>
+          </FlexColumn>
+        </FlexRow>
+      </FlexContainer>
     </>
   );
 };

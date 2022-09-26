@@ -2,14 +2,13 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import moment from 'moment';
-import { Column, Row } from 'nav-frontend-grid';
 import {
   Label, BodyShort, Detail, Heading, Panel,
 } from '@navikt/ds-react';
 
 import { Form, Datepicker, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
-  AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
+  AksjonspunktHelpTextTemp, ArrowBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
@@ -108,35 +107,39 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
         />]}
       </AksjonspunktHelpTextTemp>
       <VerticalSpacer twentyPx />
-      <Row>
-        <Column xs="6">
-          <Panel className={styles.panel}>
-            <Label size="small"><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Vurder" /></Label>
-            <ul className={styles.hyphen}>
-              <li><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Punkt1" /></li>
-              <li><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Punkt2" /></li>
-              <li><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Punkt3" /></li>
-            </ul>
-          </Panel>
-        </Column>
-        <Column xs="6">
-          <Row className={styles.marginBottom}>
-            <Column xs="6">
-              <Detail size="small"><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.SoknadMottatt" /></Detail>
-              {mottattDato
-                && <BodyShort size="small">{moment(mottattDato).format(DDMMYYYY_DATE_FORMAT)}</BodyShort>}
-            </Column>
-            {soknadsperiodeStart && soknadsperiodeSlutt && (
-              <Column xs="6">
-                <Detail size="small"><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.SoknadPeriode" /></Detail>
-                <BodyShort size="small">
-                  {`${moment(soknadsperiodeStart).format(DDMMYYYY_DATE_FORMAT)} - ${moment(soknadsperiodeSlutt).format(DDMMYYYY_DATE_FORMAT)}`}
-                </BodyShort>
-              </Column>
-            )}
-          </Row>
-        </Column>
-      </Row>
+      <FlexContainer>
+        <FlexRow>
+          <FlexColumn className={styles.colWidth}>
+            <Panel className={styles.panel}>
+              <Label size="small"><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Vurder" /></Label>
+              <ul className={styles.hyphen}>
+                <li><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Punkt1" /></li>
+                <li><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Punkt2" /></li>
+                <li><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Punkt3" /></li>
+              </ul>
+            </Panel>
+          </FlexColumn>
+          <FlexColumn className={styles.colWidth}>
+            <FlexContainer>
+              <FlexRow className={styles.marginBottom}>
+                <FlexColumn className={styles.colWidth}>
+                  <Detail size="small"><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.SoknadMottatt" /></Detail>
+                  {mottattDato
+                    && <BodyShort size="small">{moment(mottattDato).format(DDMMYYYY_DATE_FORMAT)}</BodyShort>}
+                </FlexColumn>
+                {soknadsperiodeStart && soknadsperiodeSlutt && (
+                  <FlexColumn className={styles.colWidth}>
+                    <Detail size="small"><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.SoknadPeriode" /></Detail>
+                    <BodyShort size="small">
+                      {`${moment(soknadsperiodeStart).format(DDMMYYYY_DATE_FORMAT)} - ${moment(soknadsperiodeSlutt).format(DDMMYYYY_DATE_FORMAT)}`}
+                    </BodyShort>
+                  </FlexColumn>
+                )}
+              </FlexRow>
+            </FlexContainer>
+          </FlexColumn>
+        </FlexRow>
+      </FlexContainer>
       <div className={styles.marginTop}>
         <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />
         <VerticalSpacer sixteenPx />
@@ -157,19 +160,17 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
           ]}
         />
         {gyldigSenFremsetting && (
-          <Row>
-            <Column xs="5">
-              <VerticalSpacer sixteenPx />
-              <ArrowBox>
-                <Datepicker
-                  name="ansesMottatt"
-                  isReadOnly={readOnly}
-                  label={<FormattedMessage id="VurderSoknadsfristForeldrepengerForm.NyMottattDato" />}
-                  validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
-                />
-              </ArrowBox>
-            </Column>
-          </Row>
+          <>
+            <VerticalSpacer sixteenPx />
+            <ArrowBox>
+              <Datepicker
+                name="ansesMottatt"
+                isReadOnly={readOnly}
+                label={<FormattedMessage id="VurderSoknadsfristForeldrepengerForm.NyMottattDato" />}
+                validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
+              />
+            </ArrowBox>
+          </>
         )}
         <VerticalSpacer twentyPx />
         <ProsessStegSubmitButtonNew

@@ -8,10 +8,11 @@ import { Heading } from '@navikt/ds-react';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { KlageFormkravKaAp } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/prosess/KlageFormkravAp';
-import { Column, Row } from 'nav-frontend-grid';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { required } from '@navikt/ft-form-validators';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import { ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
 import styles from './formkravKlageForm.less';
 import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
@@ -111,39 +112,41 @@ export const FormkravKlageFormKa: FunctionComponent<OwnProps> = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, avsluttedeBehandlinger))}
       setDataOnUnmount={setFormData}
     >
-      {behandlesKabal && readOnly && (
-        <Row>
-          <Column xs="6">
-            <Heading size="small">{intl.formatMessage({ id: 'Klage.Formkrav.SeKabalText' })}</Heading>
-            <VerticalSpacer sixteenPx />
-          </Column>
-        </Row>
-      )}
-      {kabalEnabled && !readOnly && (
-        <Row>
-          <Column xs="6">
-            <Heading size="small">{intl.formatMessage({ id: 'Klage.Formkrav.SendTilKabal' })}</Heading>
-            <VerticalSpacer fourPx />
-            <CheckboxField name="sendTilKabal" label={<FormattedMessage id="Klage.Formkrav.KabalText" />} />
-            <VerticalSpacer sixteenPx />
-          </Column>
-        </Row>
-      )}
-      {kabalEnabled && !readOnly && formValues.sendTilKabal && (
-        <Row>
-          <Column xs="6">
-            <SelectField
-              readOnly={readOnly}
-              name="klageHjemmel"
-              selectValues={hjemmelOptions}
-              className={readOnly ? styles.selectReadOnly : null}
-              label={intl.formatMessage({ id: 'Klage.Formkrav.Hjemmel' })}
-              validate={[required]}
-            />
-            <VerticalSpacer sixteenPx />
-          </Column>
-        </Row>
-      )}
+      <FlexContainer>
+        {behandlesKabal && readOnly && (
+          <FlexRow>
+            <FlexColumn>
+              <Heading size="small">{intl.formatMessage({ id: 'Klage.Formkrav.SeKabalText' })}</Heading>
+              <VerticalSpacer sixteenPx />
+            </FlexColumn>
+          </FlexRow>
+        )}
+        {kabalEnabled && !readOnly && (
+          <FlexRow>
+            <FlexColumn>
+              <Heading size="small">{intl.formatMessage({ id: 'Klage.Formkrav.SendTilKabal' })}</Heading>
+              <VerticalSpacer fourPx />
+              <CheckboxField name="sendTilKabal" label={<FormattedMessage id="Klage.Formkrav.KabalText" />} />
+              <VerticalSpacer sixteenPx />
+            </FlexColumn>
+          </FlexRow>
+        )}
+        {kabalEnabled && !readOnly && formValues.sendTilKabal && (
+          <FlexRow>
+            <FlexColumn>
+              <SelectField
+                readOnly={readOnly}
+                name="klageHjemmel"
+                selectValues={hjemmelOptions}
+                className={readOnly ? styles.selectReadOnly : null}
+                label={intl.formatMessage({ id: 'Klage.Formkrav.Hjemmel' })}
+                validate={[required]}
+              />
+              <VerticalSpacer sixteenPx />
+            </FlexColumn>
+          </FlexRow>
+        )}
+      </FlexContainer>
       {kabalEnabled && !readOnly && formValues.sendTilKabal && (
         <div className={styles.confirmVilkarForm}>
           <ProsessStegSubmitButtonNew

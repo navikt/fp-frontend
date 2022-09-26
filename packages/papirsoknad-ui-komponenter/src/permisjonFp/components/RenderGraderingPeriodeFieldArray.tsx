@@ -2,7 +2,6 @@ import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 import moment from 'moment/moment';
 import { UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import { Alert, Label } from '@navikt/ds-react';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow, AvsnittSkiller,
@@ -137,165 +136,164 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
         const periodeFomForTidlig = periodeFom && moment(periodeFom).isBefore(moment('2019-01-01'));
         const namePart1 = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}`;
         return (
-          <Row key={field.id}>
-            <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
-              {index > 0 && (
-                <>
-                  <AvsnittSkiller />
-                  <VerticalSpacer sixteenPx />
-                </>
-              )}
-              <FlexContainer wrap>
-                <FlexRow>
-                  <FlexColumn>
-                    <SelectField
-                      name={`${namePart1}.periodeForGradering`}
-                      selectValues={mapKvoter(graderingKvoter)}
-                      label={intl.formatMessage({ id: 'Registrering.Permisjon.Gradering.Periode' })}
-                      validate={[required]}
-                    />
-                  </FlexColumn>
-                  <FlexColumn>
-                    <Datepicker
-                      label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' })}
-                      name={`${namePart1}.periodeFom`}
-                      validate={[
-                        required,
-                        hasValidDate,
-                        () => {
-                          const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
-                          const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
-                          return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
-                        },
-                        getOverlappingValidator(getValues),
-                      ]}
-                      onChange={() => (isSubmitted ? trigger() : undefined)}
-                    />
-                  </FlexColumn>
-                  <FlexColumn>
-                    <Datepicker
-                      label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' })}
-                      name={`${namePart1}.periodeTom`}
-                      validate={[
-                        required,
-                        hasValidDate,
-                        () => {
-                          const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
-                          const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
-                          return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
-                        },
-                        getOverlappingValidator(getValues),
-                      ]}
-                      onChange={() => (isSubmitted ? trigger() : undefined)}
-                    />
-                  </FlexColumn>
-                  <FlexColumn className={styles.prosentHeader}>
-                    <InputField
-                      label={<FormattedMessage id="Registrering.Permisjon.Gradering.Prosentandel" />}
-                      name={`${namePart1}.prosentandelArbeid`}
-                      validate={[required, hasValidDecimal, maxValue100]}
-                      normalizeOnBlur={(value: string) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
-                    />
-                  </FlexColumn>
-                  <FlexColumn>
-                    <InputField
-                      label={intl.formatMessage({ id: 'Registrering.Permisjon.Orgnr' })}
-                      name={`${namePart1}.arbeidsgiverIdentifikator`}
-                      validate={[
-                        (arbeidsgiverIdentifikator) => {
-                          const arbeidsgiverIdentifikatorRequired = getValues(
-                            `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.arbeidskategoriType`,
-                          ) === arbeidskategori.ARBEIDSTAKER;
-                          return arbeidsgiverIdentifikatorRequired ? required(arbeidsgiverIdentifikator) : undefined;
-                        },
-                        hasValidInteger,
-                        (arbeidsgiverIdentifikator) => {
-                          if (!arbeidsgiverIdentifikator) {
-                            return undefined;
-                          }
-                          return arbeidsgiverIdentifikator.length === 11
-                            ? hasValidFodselsnummer(arbeidsgiverIdentifikator) : maxLength9OrFodselsnr(arbeidsgiverIdentifikator);
-                        },
-                      ]}
-                    />
-                  </FlexColumn>
-                </FlexRow>
-                <FlexRow>
-                  <FlexColumn>
-                    <SelectField
-                      label={intl.formatMessage({ id: 'Registrering.Permisjon.ArbeidskategoriLabel' })}
-                      name={`${namePart1}.arbeidskategoriType`}
-                      selectValues={mapArbeidskategori(arbeidskategoriTyper)}
-                      validate={[required]}
-                      onChange={() => (isSubmitted ? trigger() : undefined)}
-                    />
-                  </FlexColumn>
-                  <FlexColumn>
-                    <div className={styles.graderesHeader}>
-                      <Label size="small">
-                        <FormattedMessage id="Registrering.Permisjon.Gradering.SkalGraderes" />
-                      </Label>
-                    </div>
+          <div key={field.id} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+            {index > 0 && (
+              <>
+                <AvsnittSkiller />
+                <VerticalSpacer sixteenPx />
+              </>
+            )}
+            <FlexContainer wrap>
+              <FlexRow>
+                <FlexColumn>
+                  <SelectField
+                    name={`${namePart1}.periodeForGradering`}
+                    selectValues={mapKvoter(graderingKvoter)}
+                    label={intl.formatMessage({ id: 'Registrering.Permisjon.Gradering.Periode' })}
+                    validate={[required]}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <Datepicker
+                    label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' })}
+                    name={`${namePart1}.periodeFom`}
+                    validate={[
+                      required,
+                      hasValidDate,
+                      () => {
+                        const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
+                        const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
+                        return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
+                      },
+                      getOverlappingValidator(getValues),
+                    ]}
+                    onChange={() => (isSubmitted ? trigger() : undefined)}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <Datepicker
+                    label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' })}
+                    name={`${namePart1}.periodeTom`}
+                    validate={[
+                      required,
+                      hasValidDate,
+                      () => {
+                        const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
+                        const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
+                        return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
+                      },
+                      getOverlappingValidator(getValues),
+                    ]}
+                    onChange={() => (isSubmitted ? trigger() : undefined)}
+                  />
+                </FlexColumn>
+                <FlexColumn className={styles.prosentHeader}>
+                  <InputField
+                    label={<FormattedMessage id="Registrering.Permisjon.Gradering.Prosentandel" />}
+                    name={`${namePart1}.prosentandelArbeid`}
+                    validate={[required, hasValidDecimal, maxValue100]}
+                    normalizeOnBlur={(value: string) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <InputField
+                    label={intl.formatMessage({ id: 'Registrering.Permisjon.Orgnr' })}
+                    name={`${namePart1}.arbeidsgiverIdentifikator`}
+                    validate={[
+                      (arbeidsgiverIdentifikator) => {
+                        const arbeidsgiverIdentifikatorRequired = getValues(
+                          `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.arbeidskategoriType`,
+                        ) === arbeidskategori.ARBEIDSTAKER;
+                        return arbeidsgiverIdentifikatorRequired ? required(arbeidsgiverIdentifikator) : undefined;
+                      },
+                      hasValidInteger,
+                      (arbeidsgiverIdentifikator) => {
+                        if (!arbeidsgiverIdentifikator) {
+                          return undefined;
+                        }
+                        return arbeidsgiverIdentifikator.length === 11
+                          ? hasValidFodselsnummer(arbeidsgiverIdentifikator) : maxLength9OrFodselsnr(arbeidsgiverIdentifikator);
+                      },
+                    ]}
+                  />
+                </FlexColumn>
+              </FlexRow>
+              <VerticalSpacer eightPx />
+              <FlexRow>
+                <FlexColumn>
+                  <SelectField
+                    label={intl.formatMessage({ id: 'Registrering.Permisjon.ArbeidskategoriLabel' })}
+                    name={`${namePart1}.arbeidskategoriType`}
+                    selectValues={mapArbeidskategori(arbeidskategoriTyper)}
+                    validate={[required]}
+                    onChange={() => (isSubmitted ? trigger() : undefined)}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <div className={styles.graderesHeader}>
+                    <Label size="small">
+                      <FormattedMessage id="Registrering.Permisjon.Gradering.SkalGraderes" />
+                    </Label>
+                  </div>
+                  <CheckboxField
+                    name={`${namePart1}.skalGraderes`}
+                    label=" "
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <div className={styles.smalHeader}>
+                    <Label size="small">
+                      <FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />
+                    </Label>
                     <CheckboxField
-                      name={`${namePart1}.skalGraderes`}
+                      readOnly={readOnly}
+                      name={`${namePart1}.flerbarnsdager`}
                       label=" "
                     />
-                  </FlexColumn>
-                  <FlexColumn>
-                    <div className={styles.smalHeader}>
-                      <Label size="small">
-                        <FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />
-                      </Label>
-                      <CheckboxField
-                        readOnly={readOnly}
-                        name={`${namePart1}.flerbarnsdager`}
-                        label=" "
-                      />
-                    </div>
-                  </FlexColumn>
-                  <FlexColumn>
-                    <div className={styles.smalHeader}>
-                      <Label size="small">
-                        <FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />
-                      </Label>
-                    </div>
-                    <CheckboxField
-                      name={`${namePart1}.harSamtidigUttak`}
-                      label=""
-                    />
-                  </FlexColumn>
-                  <FlexColumn>
-                    {harSamtidigUttak && (
-                      <InputField
-                        name={`${namePart1}.samtidigUttaksprosent`}
-                        validate={[
-                          required,
-                          hasValidDecimal,
-                          maxValue100,
-                        ]}
-                        label={intl.formatMessage({ id: 'Registrering.Permisjon.SamtidigUttaksprosent' })}
-                      />
-                    )}
-                  </FlexColumn>
-                  {getRemoveButton && (
-                    <FlexColumn className={styles.placeRemoveButton}>
-                      {getRemoveButton()}
-                    </FlexColumn>
-                  )}
-                </FlexRow>
-                {periodeFomForTidlig && (
-                  <div>
-                    <FlexRow wrap>
-                      <Alert size="small" variant="warning">
-                        <FormattedMessage id="Registrering.Permisjon.PeriodeFomForTidlig" />
-                      </Alert>
-                    </FlexRow>
-                    <VerticalSpacer eightPx />
                   </div>
+                </FlexColumn>
+                <FlexColumn>
+                  <div className={styles.smalHeader}>
+                    <Label size="small">
+                      <FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />
+                    </Label>
+                  </div>
+                  <CheckboxField
+                    name={`${namePart1}.harSamtidigUttak`}
+                    label=""
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  {harSamtidigUttak && (
+                    <InputField
+                      name={`${namePart1}.samtidigUttaksprosent`}
+                      validate={[
+                        required,
+                        hasValidDecimal,
+                        maxValue100,
+                      ]}
+                      label={intl.formatMessage({ id: 'Registrering.Permisjon.SamtidigUttaksprosent' })}
+                    />
+                  )}
+                </FlexColumn>
+                {getRemoveButton && (
+                  <FlexColumn className={styles.placeRemoveButton}>
+                    {getRemoveButton()}
+                  </FlexColumn>
                 )}
-              </FlexContainer>
-            </Column>
-          </Row>
+              </FlexRow>
+              {periodeFomForTidlig && (
+                <div>
+                  <FlexRow wrap>
+                    <Alert size="small" variant="warning">
+                      <FormattedMessage id="Registrering.Permisjon.PeriodeFomForTidlig" />
+                    </Alert>
+                  </FlexRow>
+                  <VerticalSpacer eightPx />
+                </div>
+              )}
+            </FlexContainer>
+          </div>
         );
       }}
     </PeriodFieldArray>

@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import { Label, BodyShort } from '@navikt/ds-react';
 
 import { DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr } from '@navikt/ft-utils';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 
 import styles from './avregningSummary.less';
 
@@ -40,46 +41,47 @@ const AvregningSummary: FunctionComponent<OwnProps> = ({
       )}
       {!ingenPerioderMedAvvik && (
         <>
-          <Row>
-            <Column xs="12">
-              <Label size="small">
-                { `${moment(fom).format(DDMMYYYY_DATE_FORMAT)} - ${moment(tom).format(DDMMYYYY_DATE_FORMAT)}`}
-              </Label>
-            </Column>
-          </Row>
-          <div className={styles.resultSum}>
-            <Row>
-              <Column xs="3">
-                <BodyShort size="small" className={styles.resultName}>
+          <Label size="small">
+            { `${moment(fom).format(DDMMYYYY_DATE_FORMAT)} - ${moment(tom).format(DDMMYYYY_DATE_FORMAT)}`}
+          </Label>
+          <VerticalSpacer sixteenPx />
+          <FlexContainer>
+            <FlexRow>
+              <FlexColumn className={styles.resultName}>
+                <BodyShort size="small">
                   <FormattedMessage id="Avregning.etterbetaling" />
                   :
                 </BodyShort>
-              </Column>
-              <Column xs="2">
-                <span className={styles.number}>{ formatCurrencyNoKr(etterbetaling) }</span>
-              </Column>
-            </Row>
-            <Row className={styles.redNumbers}>
-              <Column xs="3">
-                <BodyShort size="small" className={styles.resultName}>
+              </FlexColumn>
+              <FlexColumn>
+                <BodyShort size="small">
+                  { formatCurrencyNoKr(etterbetaling) }
+                </BodyShort>
+              </FlexColumn>
+            </FlexRow>
+            <FlexRow>
+              <FlexColumn className={styles.resultName}>
+                <BodyShort size="small">
                   <FormattedMessage id="Avregning.tilbakekreving" />
                   :
                 </BodyShort>
-              </Column>
-              <Column xs="2">
-                <span className={feilutbetaling ? styles.redNumber : styles.positivNumber}>{ formatCurrencyNoKr(feilutbetaling) }</span>
-              </Column>
+              </FlexColumn>
+              <FlexColumn>
+                <BodyShort size="small">
+                  <span className={feilutbetaling ? styles.redNumber : styles.positivNumber}>{ formatCurrencyNoKr(feilutbetaling) }</span>
+                </BodyShort>
+              </FlexColumn>
               {inntrekk !== null && (
-                <Column xs="4">
+                <FlexColumn>
                   <BodyShort size="small">
                     <FormattedMessage id="Avregning.inntrekk" />
                     :
-                    <span className={inntrekk ? styles.lastNumberRed : styles.lastNumberPositiv}>{ formatCurrencyNoKr(inntrekk) }</span>
+                    <span className={inntrekk ? styles.redNumber : styles.positivNumber}>{ formatCurrencyNoKr(inntrekk) }</span>
                   </BodyShort>
-                </Column>
+                </FlexColumn>
               )}
-            </Row>
-          </div>
+            </FlexRow>
+          </FlexContainer>
         </>
       )}
     </div>

@@ -1,8 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
-import { BodyShort, Modal, Button } from '@navikt/ds-react';
-import { Image } from '@navikt/ft-ui-komponenter';
+import { FormattedMessage, useIntl } from 'react-intl';
+import {
+  BodyShort, Modal, Button, Label,
+} from '@navikt/ds-react';
+import {
+  FlexColumn, FlexContainer, FlexRow, Image,
+} from '@navikt/ft-ui-komponenter';
 
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
@@ -117,11 +120,10 @@ interface OwnProps {
 /**
  * FatterVedtakApprovalModal
  *
- * Presentasjonskomponent. Denne modalen vises en lightbox etter at en beslutter har godkjent alle aksjonspunkter
+ * Denne modalen vises en lightbox etter at en beslutter har godkjent alle aksjonspunkter
  * med totrinnskontroll. Ved å trykke på knapp blir beslutter tatt tilbake til sokesiden.
  */
-const FatterVedtakApprovalModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const FatterVedtakApprovalModal: FunctionComponent<OwnProps> = ({
   closeEvent,
   allAksjonspunktApproved,
   behandlingStatusKode,
@@ -130,6 +132,7 @@ const FatterVedtakApprovalModal: FunctionComponent<OwnProps & WrappedComponentPr
   harSammeResultatSomOriginalBehandling,
   erKlageWithKA,
 }) => {
+  const intl = useIntl();
   const isBehandlingsresultatOpphor = !!behandlingsresultat && behandlingsresultat.type === behandlingResultatType.OPPHOR;
   const infoTextCode = utledInfoTextCode(
     allAksjonspunktApproved,
@@ -155,33 +158,33 @@ const FatterVedtakApprovalModal: FunctionComponent<OwnProps & WrappedComponentPr
       shouldCloseOnOverlayClick={false}
     >
       <Modal.Content>
-        <Row>
-          <Column xs="1">
-            <Image className={styles.image} alt={intl.formatMessage({ id: altImgTextCode })} src={innvilgetImageUrl} />
-            <div className={styles.divider} />
-          </Column>
-          <Column xs="9">
-            <BodyShort size="small">
-              <FormattedMessage id={infoTextCode} />
-            </BodyShort>
-            <BodyShort size="small"><FormattedMessage id="FatterVedtakApprovalModal.GoToSearchPage" /></BodyShort>
-          </Column>
-          <Column xs="2">
-            <Button
-              size="small"
-              variant="primary"
-              className={styles.button}
-              onClick={closeEvent}
-              autoFocus
-              type="button"
-            >
-              <FormattedMessage id="FatterVedtakApprovalModal.Ok" />
-            </Button>
-          </Column>
-        </Row>
+        <FlexContainer>
+          <FlexRow>
+            <FlexColumn>
+              <Image className={styles.image} alt={intl.formatMessage({ id: altImgTextCode })} src={innvilgetImageUrl} />
+            </FlexColumn>
+            <FlexColumn>
+              <Label size="small">
+                <FormattedMessage id={infoTextCode} />
+              </Label>
+              <BodyShort size="small"><FormattedMessage id="FatterVedtakApprovalModal.GoToSearchPage" /></BodyShort>
+            </FlexColumn>
+            <FlexColumn className={styles.button}>
+              <Button
+                size="small"
+                variant="primary"
+                onClick={closeEvent}
+                autoFocus
+                type="button"
+              >
+                <FormattedMessage id="FatterVedtakApprovalModal.Ok" />
+              </Button>
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
       </Modal.Content>
     </Modal>
   );
 };
 
-export default injectIntl(FatterVedtakApprovalModal);
+export default FatterVedtakApprovalModal;

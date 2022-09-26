@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Column, Row } from 'nav-frontend-grid';
 import { Heading } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
@@ -9,7 +8,9 @@ import { Form } from '@navikt/ft-form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
-import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import {
+  AksjonspunktHelpTextTemp, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
 import { KlageVurdering, AlleKodeverk, KlageVurderingResultat } from '@fpsak-frontend/types';
 import { KlageVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
@@ -110,32 +111,34 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
           readOnly={readOnly}
         />
         <VerticalSpacer sixteenPx />
-        <Row>
-          <Column xs="8">
-            <ProsessStegSubmitButtonNew
-              isReadOnly={readOnly}
-              isSubmittable={!readOnlySubmitButton}
-              isSubmitting={formMethods.formState.isSubmitting}
-              isDirty={formMethods.formState.isDirty}
-            />
-            {!readOnly && formValues.klageVurdering && formValues.fritekstTilBrev && (formValues.fritekstTilBrev.length > 2) && (
-              <PreviewKlageLink
-                previewCallback={previewCallback}
-                fritekstTilBrev={formValues.fritekstTilBrev}
-                klageVurdering={formValues.klageVurdering}
+        <FlexContainer>
+          <FlexRow>
+            <FlexColumn>
+              <ProsessStegSubmitButtonNew
+                isReadOnly={readOnly}
+                isSubmittable={!readOnlySubmitButton}
+                isSubmitting={formMethods.formState.isSubmitting}
+                isDirty={formMethods.formState.isDirty}
+              />
+              {!readOnly && formValues.klageVurdering && formValues.fritekstTilBrev && (formValues.fritekstTilBrev.length > 2) && (
+                <PreviewKlageLink
+                  previewCallback={previewCallback}
+                  fritekstTilBrev={formValues.fritekstTilBrev}
+                  klageVurdering={formValues.klageVurdering}
+                  aksjonspunktCode={aksjonspunktCodes.BEHANDLE_KLAGE_NFP}
+                />
+              )}
+            </FlexColumn>
+            <FlexColumn>
+              <TempsaveKlageButton
+                saveKlage={saveKlage}
+                handleSubmit={formMethods.handleSubmit}
+                readOnly={readOnly}
                 aksjonspunktCode={aksjonspunktCodes.BEHANDLE_KLAGE_NFP}
               />
-            )}
-          </Column>
-          <Column xs="2">
-            <TempsaveKlageButton
-              saveKlage={saveKlage}
-              handleSubmit={formMethods.handleSubmit}
-              readOnly={readOnly}
-              aksjonspunktCode={aksjonspunktCodes.BEHANDLE_KLAGE_NFP}
-            />
-          </Column>
-        </Row>
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
       </div>
     </Form>
   );

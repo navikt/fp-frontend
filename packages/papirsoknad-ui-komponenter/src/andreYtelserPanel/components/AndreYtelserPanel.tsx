@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import { Heading } from '@navikt/ds-react';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
 import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
@@ -70,17 +69,15 @@ const AndreYtelserPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
               readOnly={readOnly}
             />
             {selectedYtelser && selectedYtelser[ay.kode] && (
-              <Row>
-                <Column xs="6">
-                  <VerticalSpacer eightPx />
-                  <ArrowBox>
-                    <RenderAndreYtelserPerioderFieldArray
-                      name={ytelseFieldName}
-                      readOnly={readOnly}
-                    />
-                  </ArrowBox>
-                </Column>
-              </Row>
+              <>
+                <VerticalSpacer eightPx />
+                <ArrowBox>
+                  <RenderAndreYtelserPerioderFieldArray
+                    name={ytelseFieldName}
+                    readOnly={readOnly}
+                  />
+                </ArrowBox>
+              </>
             )}
           </React.Fragment>
         );

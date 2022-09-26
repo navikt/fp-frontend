@@ -1,13 +1,14 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FieldArrayFieldsProps } from 'redux-form';
-import { Column, Row } from 'nav-frontend-grid';
 import {
   FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
 } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 
 import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
-import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, Table, TableColumn, TableRow,
+} from '@navikt/ft-ui-komponenter';
 import { DecimalField, InputField, SelectField } from '@fpsak-frontend/form';
 import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
 import {
@@ -147,9 +148,9 @@ const RenderUttakTable: FunctionComponent<OwnProps & WrappedComponentProps> = ({
                 </div>
               </TableColumn>
               <TableColumn>
-                <Row>
-                  <div className={styles.align}>
-                    <Column xs="6">
+                <FlexContainer>
+                  <FlexRow>
+                    <FlexColumn>
                       <span className={styles.weekPosition}>
                         <InputField
                           name={`${uttakElementFieldId}.weeks`}
@@ -163,11 +164,11 @@ const RenderUttakTable: FunctionComponent<OwnProps & WrappedComponentProps> = ({
                           }}
                         />
                       </span>
-                    </Column>
-                    <Column xs="1">
+                    </FlexColumn>
+                    <FlexColumn>
                       {readOnly ? <span>/</span> : <span className={styles.verticalCharPlacementInTable}>/</span>}
-                    </Column>
-                    <Column xs="3">
+                    </FlexColumn>
+                    <FlexColumn>
                       <DecimalField
                         name={`${uttakElementFieldId}.days`}
                         id={`${uttakElementFieldId}.days`}
@@ -177,37 +178,39 @@ const RenderUttakTable: FunctionComponent<OwnProps & WrappedComponentProps> = ({
                         // @ts-ignore Fiks
                         normalizeOnBlur={(value) => (parseFloat(value).toFixed(1))}
                       />
-                    </Column>
-                  </div>
-                </Row>
+                    </FlexColumn>
+                  </FlexRow>
+                </FlexContainer>
               </TableColumn>
               <TableColumn><BodyShort size="small">{textStrings.prosentArbeidText}</BodyShort></TableColumn>
               <TableColumn>
-                <Row>
-                  <Column xs="7">
-                    <DecimalField
-                      name={`${uttakElementFieldId}.utbetalingsgrad`}
-                      validate={[required, minValue0, maxProsentValue100, hasValidDecimal, getNoMoreThanZeroIfRejectedAndNotUtsettelse(intl)]}
-                      readOnly={readOnly}
-                      bredde="XS"
-                      format={(value) => {
-                        if (value || value === 0) {
-                          return readOnly ? `${value} %` : value;
-                        }
-                        return '';
-                      }}
-                      // @ts-ignore Fiks
-                      normalizeOnBlur={(value) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
-                    />
-                  </Column>
-                  <Column xs="3">
-                    {!readOnly && (
-                      <span className={styles.verticalCharPlacementInTable}>
-                        %
-                      </span>
-                    )}
-                  </Column>
-                </Row>
+                <FlexContainer>
+                  <FlexRow>
+                    <FlexColumn>
+                      <DecimalField
+                        name={`${uttakElementFieldId}.utbetalingsgrad`}
+                        validate={[required, minValue0, maxProsentValue100, hasValidDecimal, getNoMoreThanZeroIfRejectedAndNotUtsettelse(intl)]}
+                        readOnly={readOnly}
+                        bredde="XS"
+                        format={(value) => {
+                          if (value || value === 0) {
+                            return readOnly ? `${value} %` : value;
+                          }
+                          return '';
+                        }}
+                        // @ts-ignore Fiks
+                        normalizeOnBlur={(value) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
+                      />
+                    </FlexColumn>
+                    <FlexColumn>
+                      {!readOnly && (
+                        <span className={styles.verticalCharPlacementInTable}>
+                          %
+                        </span>
+                      )}
+                    </FlexColumn>
+                  </FlexRow>
+                </FlexContainer>
               </TableColumn>
             </TableRow>
           );

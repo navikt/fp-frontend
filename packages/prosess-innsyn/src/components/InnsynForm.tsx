@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import moment from 'moment';
 import { Heading } from '@navikt/ds-react';
-import { Row } from 'nav-frontend-grid';
 
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -213,17 +212,18 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
                 label: intl.formatMessage({ id: 'InnsynForm.ForeslåOgFatteVedtak' }),
               }]}
             />
-            <Row>
-              {sattPaVent && (
-              <Datepicker
-                name="fristDato"
-                label={intl.formatMessage({ id: 'InnsynForm.FristDato' })}
-                isReadOnly={readOnly}
-                isEdited={!isApOpen}
-                validate={[required, hasValidDate]}
-              />
-              )}
-            </Row>
+            {sattPaVent && (
+              <>
+                <VerticalSpacer eightPx />
+                <Datepicker
+                  name="fristDato"
+                  label={intl.formatMessage({ id: 'InnsynForm.FristDato' })}
+                  isReadOnly={readOnly}
+                  isEdited={!isApOpen}
+                  validate={[required, hasValidDate]}
+                />
+              </>
+            )}
           </ArrowBox>
         </>
       )}

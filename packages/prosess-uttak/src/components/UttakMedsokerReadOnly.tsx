@@ -1,6 +1,5 @@
 import React, { MouseEvent, FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import { Label } from '@navikt/ds-react';
 
 import { TimeLineButton, TimeLineDataContainer } from '@navikt/ft-tidslinje';
@@ -41,20 +40,13 @@ const UttakMedsokerReadOnly: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
   return (
     <TimeLineDataContainer>
-      <Row>
-        <Column xs="3">
-          <Label size="small">
-            <FormattedMessage id="UttakTimeLineData.PeriodeData.Detaljer" />
-          </Label>
-        </Column>
-        <Column xs="7" />
-        <Column xs="2">
-          <FloatRight>
-            <TimeLineButton text={intl.formatMessage({ id: 'Timeline.prevPeriod' })} type="prev" callback={callbackBackward} />
-            <TimeLineButton text={intl.formatMessage({ id: 'Timeline.nextPeriod' })} type="next" callback={callbackForward} />
-          </FloatRight>
-        </Column>
-      </Row>
+      <Label size="small">
+        <FormattedMessage id="UttakTimeLineData.PeriodeData.Detaljer" />
+      </Label>
+      <FloatRight>
+        <TimeLineButton text={intl.formatMessage({ id: 'Timeline.prevPeriod' })} type="prev" callback={callbackBackward} />
+        <TimeLineButton text={intl.formatMessage({ id: 'Timeline.nextPeriod' })} type="next" callback={callbackForward} />
+      </FloatRight>
       { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <UttakActivity
         cancelSelectedActivity={callbackCancelSelectedActivity}

@@ -1,6 +1,5 @@
 import React, { FunctionComponent, MouseEvent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import {
   BodyShort, Label, Alert, Link, Detail,
 } from '@navikt/ds-react';
@@ -74,32 +73,24 @@ const ManueltVedtaksbrevPanel: FunctionComponent<OwnProps> = ({
         </Alert>
       )}
       <VerticalSpacer sixteenPx />
-      <Row>
-        <Column xs="8">
-          <TextAreaField
-            name="overskrift"
-            label={intl.formatMessage({ id: 'VedtakForm.Overskrift' })}
-            validate={[required, minLength3, maxLength200, hasValidText]}
-            maxLength={200}
-            readOnly={isReadOnly}
-            className={styles.smallTextArea}
-          />
-        </Column>
-      </Row>
+      <TextAreaField
+        name="overskrift"
+        label={intl.formatMessage({ id: 'VedtakForm.Overskrift' })}
+        validate={[required, minLength3, maxLength200, hasValidText]}
+        maxLength={200}
+        readOnly={isReadOnly}
+        className={styles.smallTextArea}
+      />
       <VerticalSpacer thirtyTwoPx />
-      <Row>
-        <Column xs="8">
-          <TextAreaField
-            name="brødtekst"
-            label={intl.formatMessage({ id: 'VedtakForm.Innhold' })}
-            validate={[required, minLength3, maxLength5000, hasValidText]}
-            maxLength={5000}
-            readOnly={isReadOnly}
-            // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
-            parse={(value: string) => value.replaceAll('‑', '-').replaceAll('\t', ' ')}
-          />
-        </Column>
-      </Row>
+      <TextAreaField
+        name="brødtekst"
+        label={intl.formatMessage({ id: 'VedtakForm.Innhold' })}
+        validate={[required, minLength3, maxLength5000, hasValidText]}
+        maxLength={5000}
+        readOnly={isReadOnly}
+        // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
+        parse={(value: string) => value.replaceAll('‑', '-').replaceAll('\t', ' ')}
+      />
       {isReadOnly && (
         <>
           <VerticalSpacer sixteenPx />

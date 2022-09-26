@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { ErrorMessage, Label } from '@navikt/ds-react';
-import { Column, Row } from 'nav-frontend-grid';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
   hasValidDate, hasValidInteger, required, hasValidText,
@@ -81,68 +80,66 @@ export const VirksomhetStartetEndretPanel: FunctionComponent<OwnProps> = ({
         }]}
       />
       {varigEndretEllerStartetSisteFireAr && (
-        <Row>
-          <Column xs="6">
-            <VerticalSpacer eightPx />
-            <ArrowBox>
-              <Label size="small"><FormattedMessage id="Registrering.VirksomhetStartetPanel.Reason" /></Label>
-              <VerticalSpacer fourPx />
-              <CheckboxField name="harVarigEndring" label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.HarVarigEndring" />} />
-              <VerticalSpacer fourPx />
-              {harVarigEndring && (
-                <>
-                  <VerticalSpacer sixteenPx />
-                  <ArrowBox>
-                    <Datepicker
-                      name="varigEndringGjeldendeFom"
-                      isReadOnly={readOnly}
-                      validate={[hasValidDate, required]}
-                      label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
-                    />
-                  </ArrowBox>
-                </>
-              )}
-              <CheckboxField name="erNyoppstartet" label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.ErNyoppstartet" />} />
-              <VerticalSpacer fourPx />
-              <CheckboxField name="erNyIArbeidslivet" label={<FormattedMessage id="Registrering.VirksomhetNyIArbeidslivetPanel.ErNyIArbeidslivet" />} />
-              <VerticalSpacer fourPx />
-              {erNyIArbeidslivet && (
-                <>
-                  <VerticalSpacer sixteenPx />
-                  <ArrowBox>
-                    <Datepicker
-                      name="nyIArbeidslivetFom"
-                      isReadOnly={readOnly}
-                      validate={[hasValidDate, required]}
-                      label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
-                    />
-                  </ArrowBox>
-                </>
-              )}
-              {formState.isSubmitted && formState.errors?.ingenArsakValgt?.message && (
-                <ErrorMessage>{formState.errors?.ingenArsakValgt?.message}</ErrorMessage>
-              )}
-              <VerticalSpacer sixteenPx />
-              <TextAreaField
-                name="beskrivelseAvEndring"
-                label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.VirksomhetEndretBeskrivelse" />}
-                validate={[hasValidText]}
-              />
-              <VerticalSpacer sixteenPx />
-              <InputField
-                name="inntekt"
-                label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.Inntekt" />}
-                readOnly={readOnly}
-                validate={[hasValidInteger, required]}
-                className={styles.inntektBredde}
-                parse={(value: string) => {
-                  const parsedValue = parseInt(value, 10);
-                  return Number.isNaN(parsedValue) ? value : parsedValue;
-                }}
-              />
-            </ArrowBox>
-          </Column>
-        </Row>
+        <div>
+          <VerticalSpacer eightPx />
+          <ArrowBox>
+            <Label size="small"><FormattedMessage id="Registrering.VirksomhetStartetPanel.Reason" /></Label>
+            <VerticalSpacer fourPx />
+            <CheckboxField name="harVarigEndring" label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.HarVarigEndring" />} />
+            <VerticalSpacer fourPx />
+            {harVarigEndring && (
+              <>
+                <VerticalSpacer sixteenPx />
+                <ArrowBox>
+                  <Datepicker
+                    name="varigEndringGjeldendeFom"
+                    isReadOnly={readOnly}
+                    validate={[hasValidDate, required]}
+                    label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
+                  />
+                </ArrowBox>
+              </>
+            )}
+            <CheckboxField name="erNyoppstartet" label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.ErNyoppstartet" />} />
+            <VerticalSpacer fourPx />
+            <CheckboxField name="erNyIArbeidslivet" label={<FormattedMessage id="Registrering.VirksomhetNyIArbeidslivetPanel.ErNyIArbeidslivet" />} />
+            <VerticalSpacer fourPx />
+            {erNyIArbeidslivet && (
+              <>
+                <VerticalSpacer sixteenPx />
+                <ArrowBox>
+                  <Datepicker
+                    name="nyIArbeidslivetFom"
+                    isReadOnly={readOnly}
+                    validate={[hasValidDate, required]}
+                    label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
+                  />
+                </ArrowBox>
+              </>
+            )}
+            {formState.isSubmitted && formState.errors?.ingenArsakValgt?.message && (
+              <ErrorMessage>{formState.errors?.ingenArsakValgt?.message}</ErrorMessage>
+            )}
+            <VerticalSpacer sixteenPx />
+            <TextAreaField
+              name="beskrivelseAvEndring"
+              label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.VirksomhetEndretBeskrivelse" />}
+              validate={[hasValidText]}
+            />
+            <VerticalSpacer sixteenPx />
+            <InputField
+              name="inntekt"
+              label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.Inntekt" />}
+              readOnly={readOnly}
+              validate={[hasValidInteger, required]}
+              className={styles.inntektBredde}
+              parse={(value: string) => {
+                const parsedValue = parseInt(value, 10);
+                return Number.isNaN(parsedValue) ? value : parsedValue;
+              }}
+            />
+          </ArrowBox>
+        </div>
       )}
       <VerticalSpacer eightPx />
     </>

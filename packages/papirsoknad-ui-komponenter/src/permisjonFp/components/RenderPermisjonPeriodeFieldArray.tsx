@@ -2,7 +2,6 @@ import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 import moment from 'moment';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { UseFormGetValues } from 'react-hook-form';
-import { Column, Row } from 'nav-frontend-grid';
 import { Label, Alert } from '@navikt/ds-react';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
@@ -153,122 +152,118 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
         const namePart1 = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}`;
         return (
           <div key={field.id}>
-            <Row>
-              <Column xs="12">
-                <FlexContainer>
-                  <FlexRow wrap>
-                    <FlexColumn className={styles.selectFieldWidth}>
-                      <SelectField
-                        readOnly={readOnly}
-                        name={`${namePart1}.periodeType`}
-                        label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeType' }))}
-                        selectValues={mapPeriodeTyper(periodeTyper)}
-                        validate={[required]}
-                      />
-                    </FlexColumn>
-                    <FlexColumn>
-                      <Datepicker
-                        isReadOnly={readOnly}
-                        name={`${namePart1}.periodeFom`}
-                        label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' }))}
-                        validate={[
-                          required,
-                          hasValidDate,
-                          () => {
-                            const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
-                            const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
-                            return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
-                          },
-                          getOverlappingValidator(getValues),
-                        ]}
-                        onChange={() => (isSubmitted ? trigger() : undefined)}
-                      />
-                    </FlexColumn>
-                    <FlexColumn>
-                      <Datepicker
-                        isReadOnly={readOnly}
-                        name={`${namePart1}.periodeTom`}
-                        label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' }))}
-                        validate={[
-                          required,
-                          hasValidDate,
-                          () => {
-                            const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
-                            const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
-                            return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
-                          },
-                          getOverlappingValidator(getValues),
-                        ]}
-                        onChange={() => (isSubmitted ? trigger() : undefined)}
-                      />
-                    </FlexColumn>
-                    {!sokerErMor && (
-                      <FlexColumn>
-                        <SelectField
-                          readOnly={readOnly}
-                          disabled={sokerErMor || skalDisableMorsAktivitet}
-                          name={`${namePart1}.morsAktivitet`}
-                          label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.Fellesperiode.morsAktivitet' }))}
-                          selectValues={mapAktiviteter(morsAktivitetTyper)}
-                          hideValueOnDisable
-                        />
-                      </FlexColumn>
-                    )}
-                    <FlexColumn className={styles.smalHeader}>
-                      <Label size="small" className={visEllerSkulOverskriftStyle}>
-                        <FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />
-                      </Label>
-                      <CheckboxField
-                        readOnly={readOnly}
-                        name={`${namePart1}.flerbarnsdager`}
-                        label=" "
-                      />
-                    </FlexColumn>
-                    <FlexColumn className={styles.smalHeader}>
-                      <Label size="small" className={visEllerSkulOverskriftStyle}>
-                        <FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />
-                      </Label>
-                      <CheckboxField
-                        readOnly={readOnly}
-                        name={`${namePart1}.harSamtidigUttak`}
-                        label=" "
-                      />
-                    </FlexColumn>
-                    {periode.harSamtidigUttak && (
-                      <FlexColumn className={erForsteRad ? '' : styles.alignSamtidigUttak}>
-                        <InputField
-                          name={`${namePart1}.samtidigUttaksprosent`}
-                          validate={[hasValidDecimal, maxValue100]}
-                          label={intl.formatMessage({ id: 'Registrering.Permisjon.SamtidigUttaksprosent' })}
-                          normalizeOnBlur={(value: string) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
-                        />
-                      </FlexColumn>
-                    )}
-                    <FlexColumn>
-                      {!readOnly && (
-                        <button
-                          className={erForsteRad ? styles.buttonRemoveFirst : styles.buttonRemove}
-                          type="button"
-                          onClick={() => {
-                            remove(index);
-                          }}
-                        />
-                      )}
-                    </FlexColumn>
-                  </FlexRow>
-                  {periodeFomForTidlig && (
-                    <>
-                      <FlexRow wrap>
-                        <Alert size="small" variant="warning">
-                          <FormattedMessage id="Registrering.Permisjon.PeriodeFomForTidlig" />
-                        </Alert>
-                      </FlexRow>
-                      <VerticalSpacer sixteenPx />
-                    </>
+            <FlexContainer>
+              <FlexRow wrap>
+                <FlexColumn className={styles.selectFieldWidth}>
+                  <SelectField
+                    readOnly={readOnly}
+                    name={`${namePart1}.periodeType`}
+                    label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeType' }))}
+                    selectValues={mapPeriodeTyper(periodeTyper)}
+                    validate={[required]}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <Datepicker
+                    isReadOnly={readOnly}
+                    name={`${namePart1}.periodeFom`}
+                    label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' }))}
+                    validate={[
+                      required,
+                      hasValidDate,
+                      () => {
+                        const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
+                        const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
+                        return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
+                      },
+                      getOverlappingValidator(getValues),
+                    ]}
+                    onChange={() => (isSubmitted ? trigger() : undefined)}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <Datepicker
+                    isReadOnly={readOnly}
+                    name={`${namePart1}.periodeTom`}
+                    label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' }))}
+                    validate={[
+                      required,
+                      hasValidDate,
+                      () => {
+                        const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
+                        const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
+                        return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
+                      },
+                      getOverlappingValidator(getValues),
+                    ]}
+                    onChange={() => (isSubmitted ? trigger() : undefined)}
+                  />
+                </FlexColumn>
+                {!sokerErMor && (
+                  <FlexColumn>
+                    <SelectField
+                      readOnly={readOnly}
+                      disabled={sokerErMor || skalDisableMorsAktivitet}
+                      name={`${namePart1}.morsAktivitet`}
+                      label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.Fellesperiode.morsAktivitet' }))}
+                      selectValues={mapAktiviteter(morsAktivitetTyper)}
+                      hideValueOnDisable
+                    />
+                  </FlexColumn>
+                )}
+                <FlexColumn className={styles.smalHeader}>
+                  <Label size="small" className={visEllerSkulOverskriftStyle}>
+                    <FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />
+                  </Label>
+                  <CheckboxField
+                    readOnly={readOnly}
+                    name={`${namePart1}.flerbarnsdager`}
+                    label=" "
+                  />
+                </FlexColumn>
+                <FlexColumn className={styles.smalHeader}>
+                  <Label size="small" className={visEllerSkulOverskriftStyle}>
+                    <FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />
+                  </Label>
+                  <CheckboxField
+                    readOnly={readOnly}
+                    name={`${namePart1}.harSamtidigUttak`}
+                    label=" "
+                  />
+                </FlexColumn>
+                {periode.harSamtidigUttak && (
+                  <FlexColumn className={erForsteRad ? '' : styles.alignSamtidigUttak}>
+                    <InputField
+                      name={`${namePart1}.samtidigUttaksprosent`}
+                      validate={[hasValidDecimal, maxValue100]}
+                      label={intl.formatMessage({ id: 'Registrering.Permisjon.SamtidigUttaksprosent' })}
+                      normalizeOnBlur={(value: string) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
+                    />
+                  </FlexColumn>
+                )}
+                <FlexColumn>
+                  {!readOnly && (
+                    <button
+                      className={erForsteRad ? styles.buttonRemoveFirst : styles.buttonRemove}
+                      type="button"
+                      onClick={() => {
+                        remove(index);
+                      }}
+                    />
                   )}
-                </FlexContainer>
-              </Column>
-            </Row>
+                </FlexColumn>
+              </FlexRow>
+              {periodeFomForTidlig && (
+                <>
+                  <FlexRow wrap>
+                    <Alert size="small" variant="warning">
+                      <FormattedMessage id="Registrering.Permisjon.PeriodeFomForTidlig" />
+                    </Alert>
+                  </FlexRow>
+                  <VerticalSpacer sixteenPx />
+                </>
+              )}
+            </FlexContainer>
             <VerticalSpacer eightPx />
           </div>
         );

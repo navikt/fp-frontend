@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import { Detail } from '@navikt/ds-react';
 
 import { Behandlingsresultat } from '@fpsak-frontend/types';
@@ -32,26 +31,24 @@ const VedtakFritekstPanel: FunctionComponent<OwnProps> = ({
   return (
     <>
       {!isReadOnly && (
-        <Row>
+        <>
           <VerticalSpacer sixteenPx />
-          <Column xs="8">
-            <TextAreaField
-              name="begrunnelse"
-              label={intl.formatMessage({ id: labelTextCode })}
-              validate={[
-                minLength3,
-                maxLength1500,
-                hasValidText,
-              ]}
-              maxLength={1500}
-              readOnly={isReadOnly}
-              badges={[{
-                type: 'info',
-                titleText: getLanguageFromSprakkode(språkKode),
-              }]}
-            />
-          </Column>
-        </Row>
+          <TextAreaField
+            name="begrunnelse"
+            label={intl.formatMessage({ id: labelTextCode })}
+            validate={[
+              minLength3,
+              maxLength1500,
+              hasValidText,
+            ]}
+            maxLength={1500}
+            readOnly={isReadOnly}
+            badges={[{
+              type: 'info',
+              titleText: getLanguageFromSprakkode(språkKode),
+            }]}
+          />
+        </>
       )}
       {isReadOnly && behandlingsresultat.avslagsarsakFritekst !== null && (
         <span>

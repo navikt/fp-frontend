@@ -3,12 +3,13 @@ import React, {
 } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import { Detail, Heading, Button } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { FagsakYtelseType, KodeverkType } from '@navikt/ft-kodeverk';
 import { ariaCheck, required } from '@navikt/ft-form-validators';
-import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import {
+  BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk } from '@navikt/ft-types';
 
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
@@ -70,62 +71,60 @@ const SoknadTypePickerForm: FunctionComponent<OwnProps> = ({
           <FormattedMessage id="Registrering.Omsoknaden.Title" />
         </Heading>
         <VerticalSpacer sixteenPx />
-        <Row>
-          <Column xs="4">
-            <Detail size="small"><FormattedMessage id="Registrering.Omsoknaden.soknadstype" /></Detail>
-            <VerticalSpacer fourPx />
-            <RadioGroupPanel
-              name="fagsakYtelseType"
-              validate={[required]}
-              radios={fagsakYtelseTyper.map((fyt) => ({
-                label: fyt.navn,
-                value: fyt.kode,
-                disabled: !!fagsakYtelseType,
-              }))}
-            />
-          </Column>
-          <Column xs="4">
-            <Detail size="small"><FormattedMessage id="Registrering.Omsoknaden.Tema" /></Detail>
-            <VerticalSpacer fourPx />
-            <RadioGroupPanel
-              name="familieHendelseType"
-              validate={selectedFagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER ? [] : [required]}
-              radios={familieHendelseTyper.filter(({ kode }) => SøknadTyper.includes(kode)).map((bmt) => ({
-                label: bmt.navn,
-                value: bmt.kode,
-                disabled: selectedFagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER,
-              }))}
-            />
-          </Column>
-          <Column xs="4">
-            <Detail size="small">
-              <FormattedMessage id="Registrering.Omsoknaden.Soker" />
-            </Detail>
-            <VerticalSpacer fourPx />
-            <RadioGroupPanel
-              name="foreldreType"
-              validate={[required]}
-              radios={foreldreTyper.map((ft) => ({
-                label: ft.navn,
-                value: ft.kode,
-              }))}
-            />
-          </Column>
-        </Row>
-        <Row>
-          <Column xs="12">
-            <div className={styles.right}>
-              <Button
-                size="small"
-                variant="primary"
-                onClick={ariaCheck}
-                disabled={formMethods.formState.isSubmitting || formMethods.formState.isSubmitted}
-              >
-                <FormattedMessage id="Registrering.Omsoknaden.VisSkjema" />
-              </Button>
-            </div>
-          </Column>
-        </Row>
+        <FlexContainer>
+          <FlexRow spaceBetween>
+            <FlexColumn>
+              <Detail size="small"><FormattedMessage id="Registrering.Omsoknaden.soknadstype" /></Detail>
+              <VerticalSpacer fourPx />
+              <RadioGroupPanel
+                name="fagsakYtelseType"
+                validate={[required]}
+                radios={fagsakYtelseTyper.map((fyt) => ({
+                  label: fyt.navn,
+                  value: fyt.kode,
+                  disabled: !!fagsakYtelseType,
+                }))}
+              />
+            </FlexColumn>
+            <FlexColumn>
+              <Detail size="small"><FormattedMessage id="Registrering.Omsoknaden.Tema" /></Detail>
+              <VerticalSpacer fourPx />
+              <RadioGroupPanel
+                name="familieHendelseType"
+                validate={selectedFagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER ? [] : [required]}
+                radios={familieHendelseTyper.filter(({ kode }) => SøknadTyper.includes(kode)).map((bmt) => ({
+                  label: bmt.navn,
+                  value: bmt.kode,
+                  disabled: selectedFagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER,
+                }))}
+              />
+            </FlexColumn>
+            <FlexColumn>
+              <Detail size="small">
+                <FormattedMessage id="Registrering.Omsoknaden.Soker" />
+              </Detail>
+              <VerticalSpacer fourPx />
+              <RadioGroupPanel
+                name="foreldreType"
+                validate={[required]}
+                radios={foreldreTyper.map((ft) => ({
+                  label: ft.navn,
+                  value: ft.kode,
+                }))}
+              />
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
+        <div className={styles.right}>
+          <Button
+            size="small"
+            variant="primary"
+            onClick={ariaCheck}
+            disabled={formMethods.formState.isSubmitting || formMethods.formState.isSubmitted}
+          >
+            <FormattedMessage id="Registrering.Omsoknaden.VisSkjema" />
+          </Button>
+        </div>
       </BorderBox>
     </Form>
   );

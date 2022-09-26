@@ -1,13 +1,11 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
-import { Modal, Button, Label } from '@navikt/ds-react';
+import { Modal, Button, Heading } from '@navikt/ds-react';
 
 import {
-  VerticalSpacer, Image, FlexContainer, FlexColumn, FlexRow,
+  VerticalSpacer, FlexContainer, FlexColumn, FlexRow,
 } from '@navikt/ft-ui-komponenter';
-import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 import { CheckboxField, SelectField, Form } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -184,84 +182,69 @@ const NyBehandlingModal: FunctionComponent<OwnProps> = ({
     <Modal
       className={styles.modal}
       open
-      closeButton={false}
+      closeButton
       aria-label={intl.formatMessage({ id: 'MenyNyBehandlingIndex.ModalDescription' })}
       onClose={cancelEvent}
       shouldCloseOnOverlayClick={false}
     >
       <Modal.Content>
         <Form formMethods={formMethods} onSubmit={onSubmit}>
-          <Row>
-            <Column xs="1">
-              <Image className={styles.image} src={innvilgetImageUrl} />
-              <div className={styles.divider} />
-            </Column>
-            <Column xs="11">
-              <div className={styles.label}>
-                <Label size="small">
-                  <FormattedMessage id="MenyNyBehandlingIndex.OpprettNyForstegangsbehandling" />
-                </Label>
-              </div>
-              <VerticalSpacer sixteenPx />
-              <VerticalSpacer sixteenPx />
-              <SelectField
-                name="behandlingType"
-                label=""
-                validate={[required]}
-                selectValues={behandlingTyper.map((bt) => createOptions(bt, enabledBehandlingstyper, intl))}
-                className={styles.typeBredde}
+          <Heading size="small">
+            <FormattedMessage id="MenyNyBehandlingIndex.OpprettNyForstegangsbehandling" />
+          </Heading>
+          <VerticalSpacer sixteenPx />
+          <SelectField
+            name="behandlingType"
+            label=""
+            validate={[required]}
+            selectValues={behandlingTyper.map((bt) => createOptions(bt, enabledBehandlingstyper, intl))}
+            className={styles.typeBredde}
+          />
+          <VerticalSpacer sixteenPx />
+          {valgtBehandlingTypeKode === bType.FORSTEGANGSSOKNAD && (
+            <>
+              <CheckboxField
+                name="nyBehandlingEtterKlage"
+                label={intl.formatMessage({ id: 'MenyNyBehandlingIndex.NyBehandlingEtterKlage' })}
               />
               <VerticalSpacer sixteenPx />
-              {valgtBehandlingTypeKode === bType.FORSTEGANGSSOKNAD && (
-                <>
-                  <CheckboxField
-                    name="nyBehandlingEtterKlage"
-                    label={intl.formatMessage({ id: 'MenyNyBehandlingIndex.NyBehandlingEtterKlage' })}
-                  />
-                  <VerticalSpacer sixteenPx />
-                </>
-              )}
-              {behandlingArsakTyper.length > 0 && (
-                <>
-                  <SelectField
-                    name="behandlingArsakType"
-                    label=""
-                    hideLabel
-                    validate={[required]}
-                    className={styles.arsakBredde}
-                    selectValues={behandlingArsakTyper.map((b) => <option key={b.kode} value={b.kode}>{b.navn}</option>)}
-                  />
-                  <VerticalSpacer sixteenPx />
-                </>
-              )}
-              <div className={styles.right}>
-                <FlexContainer>
-                  <FlexRow>
-                    <FlexColumn>
-                      <Button
-                        size="small"
-                        variant="primary"
-                        className={styles.button}
-                      >
-                        <FormattedMessage id="MenyNyBehandlingIndex.Ok" />
-                      </Button>
-                    </FlexColumn>
-                    <FlexColumn>
-                      <Button
-                        size="small"
-                        variant="secondary"
-                        onClick={cancelEvent}
-                        className={styles.cancelButton}
-                        type="button"
-                      >
-                        <FormattedMessage id="MenyNyBehandlingIndex.Avbryt" />
-                      </Button>
-                    </FlexColumn>
-                  </FlexRow>
-                </FlexContainer>
-              </div>
-            </Column>
-          </Row>
+            </>
+          )}
+          {behandlingArsakTyper.length > 0 && (
+            <>
+              <SelectField
+                name="behandlingArsakType"
+                label=""
+                hideLabel
+                validate={[required]}
+                className={styles.arsakBredde}
+                selectValues={behandlingArsakTyper.map((b) => <option key={b.kode} value={b.kode}>{b.navn}</option>)}
+              />
+              <VerticalSpacer sixteenPx />
+            </>
+          )}
+          <FlexContainer>
+            <FlexRow>
+              <FlexColumn>
+                <Button
+                  size="small"
+                  variant="primary"
+                >
+                  <FormattedMessage id="MenyNyBehandlingIndex.Ok" />
+                </Button>
+              </FlexColumn>
+              <FlexColumn>
+                <Button
+                  size="small"
+                  variant="secondary"
+                  onClick={cancelEvent}
+                  type="button"
+                >
+                  <FormattedMessage id="MenyNyBehandlingIndex.Avbryt" />
+                </Button>
+              </FlexColumn>
+            </FlexRow>
+          </FlexContainer>
         </Form>
       </Modal.Content>
     </Modal>

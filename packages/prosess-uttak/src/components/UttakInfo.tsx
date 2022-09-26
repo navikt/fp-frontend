@@ -1,7 +1,6 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { Column, Row } from 'nav-frontend-grid';
 import { FormattedMessage } from 'react-intl';
-import { Label, Detail } from '@navikt/ds-react';
+import { Label, Detail, BodyShort } from '@navikt/ds-react';
 import moment from 'moment/moment';
 
 import { CheckboxField, DecimalField, SelectField } from '@fpsak-frontend/form';
@@ -17,6 +16,9 @@ import {
   ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, AlleKodeverk,
 } from '@fpsak-frontend/types';
 
+import {
+  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import uttakArbeidTypeTekstCodes from '../utils/uttakArbeidTypeCodes';
 import { PeriodeMedClassName } from './Uttak';
 import styles from './uttakActivity.less';
@@ -177,179 +179,136 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
 
   return (
     <div className={periodeStatusClassName(selectedItemData)}>
-      {selectedItemData.oppholdÅrsak === '-'
-          && (
-            <Row>
-              <Column xs="4">
-                <Row>
-                  <Column xs="12">
-                    <Label size="small">
-                      {typePeriode(selectedItemData, getKodeverknavn, kontoIkkeSatt)}
-                    </Label>
-                  </Column>
-                </Row>
-                <Row>
-                  <Column xs="12">
-                    {stonadskonto(selectedItemData, getKodeverknavn, kontoIkkeSatt)}
-                  </Column>
-                </Row>
-              </Column>
-              <Column xs="5">
-                {readOnly
-                  && (
-                    <div>
-                      {isInnvilgetText(selectedItemData, getKodeverknavn)}
-                    </div>
-                  )}
-              </Column>
-              <Column xs="3">
-                <>
-                  <Row className={styles.fieldHorizontal}>
-                    <Column className={styles.textAlignRight}>
-                      {(harSoktOmFlerbarnsdager)
-                        && (
-                          <CheckboxField
-                            key="flerbarnsdager"
-                            name="flerbarnsdager"
-                            label={{ id: 'UttakActivity.Flerbarnsdager' }}
-                            disabled={readOnly}
-                          />
-                        )}
-                    </Column>
-                  </Row>
-                  <Row className={styles.fieldHorizontal}>
-                    <Column className={styles.textAlignRight}>
-                      <CheckboxField
-                        key="samtidigUttak"
-                        name="samtidigUttak"
-                        label={{ id: 'UttakActivity.SamtidigUttak' }}
-                        disabled={readOnly}
-                      />
-                    </Column>
-                  </Row>
-                </>
-                {erSamtidigUttak
-                  && (
-                    <Row className={styles.fieldHorizontal}>
-                      <Column className={styles.textAlignRight}>
-                        <DecimalField
-                          name="samtidigUttaksprosent"
-                          bredde="XS"
-                          readOnly={readOnly}
-                          value={selectedItemData.samtidigUttaksprosent}
-                          label={{ id: 'UttakInfo.SamtidigUttaksprosent' }}
-                          validate={[required, maxValue100, hasValidDecimal]}
-                          format={(value) => {
-                            if (value || value === 0) {
-                              return readOnly ? `${value} %` : value;
-                            }
-                            return '';
-                          }}
-                            // @ts-ignore Fiks dette
-                          normalizeOnBlur={(value) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
-                        />
-                      </Column>
-                        {!readOnly && <Column className={styles.suffix}>%</Column>}
-                    </Row>
-                  )}
-              </Column>
-            </Row>
-          )}
-      <Row>
-        <Column xs="4">
-          <Row>
-            <Column xs="12">
+      <FlexContainer>
+        {selectedItemData.oppholdÅrsak === '-' && (
+          <FlexRow spaceBetween>
+            <FlexColumn>
               <Label size="small">
+                {typePeriode(selectedItemData, getKodeverknavn, kontoIkkeSatt)}
+              </Label>
+              <BodyShort>
+                {stonadskonto(selectedItemData, getKodeverknavn, kontoIkkeSatt)}
+              </BodyShort>
+            </FlexColumn>
+            <FlexColumn>
+              {readOnly && isInnvilgetText(selectedItemData, getKodeverknavn)}
+            </FlexColumn>
+            <FlexColumn>
+              {(harSoktOmFlerbarnsdager) && (
+                <CheckboxField
+                  key="flerbarnsdager"
+                  name="flerbarnsdager"
+                  label={{ id: 'UttakActivity.Flerbarnsdager' }}
+                  disabled={readOnly}
+                />
+              )}
+              <CheckboxField
+                key="samtidigUttak"
+                name="samtidigUttak"
+                label={{ id: 'UttakActivity.SamtidigUttak' }}
+                disabled={readOnly}
+              />
+              {erSamtidigUttak && (
+                <FlexContainer>
+                  <FlexRow>
+                    <FlexColumn>
+                      <DecimalField
+                        name="samtidigUttaksprosent"
+                        bredde="XS"
+                        readOnly={readOnly}
+                        value={selectedItemData.samtidigUttaksprosent}
+                        label={{ id: 'UttakInfo.SamtidigUttaksprosent' }}
+                        validate={[required, maxValue100, hasValidDecimal]}
+                        format={(value) => {
+                          if (value || value === 0) {
+                            return readOnly ? `${value} %` : value;
+                          }
+                          return '';
+                        }}
+                          // @ts-ignore Fiks dette
+                        normalizeOnBlur={(value) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
+                      />
+                    </FlexColumn>
+                    {!readOnly && <FlexColumn className={styles.suffix}>%</FlexColumn>}
+                  </FlexRow>
+                </FlexContainer>
+              )}
+            </FlexColumn>
+          </FlexRow>
+        )}
+        <VerticalSpacer eightPx />
+        <FlexRow>
+          <FlexColumn>
+            <Label size="small">
+              <FormattedMessage
+                id="UttakActivity.PeriodeData.Periode"
+                values={{
+                  fomVerdi: moment(selectedItemData.fom.toString())
+                    .format(DDMMYYYY_DATE_FORMAT),
+                  tomVerdi: moment(selectedItemData.tom.toString())
+                    .format(DDMMYYYY_DATE_FORMAT),
+                }}
+              />
+            </Label>
+            {selectedItemData.oppholdÅrsak === '-' && (
+              <BodyShort>
                 <FormattedMessage
-                  id="UttakActivity.PeriodeData.Periode"
+                  id={calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom).id}
                   values={{
-                    fomVerdi: moment(selectedItemData.fom.toString())
-                      .format(DDMMYYYY_DATE_FORMAT),
-                    tomVerdi: moment(selectedItemData.tom.toString())
-                      .format(DDMMYYYY_DATE_FORMAT),
+                    weeks: calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom).weeks,
+                    days: calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom).days,
                   }}
                 />
-              </Label>
-            </Column>
-          </Row>
-          {selectedItemData.oppholdÅrsak === '-'
-              && (
-                <Row>
-                  <Column xs="12">
-                    <FormattedMessage
-                      id={calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom).id}
-                      values={{
-                        weeks: calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom).weeks,
-                        days: calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom).days,
-                      }}
-                    />
-                  </Column>
-                </Row>
-              )}
-        </Column>
-        <Column xs="6">
-          <Row>
-            <Column xs="12">
-              {selectedItemData.gradertAktivitet
-                  && (
-                    <Detail size="small">
-                      <FormattedMessage id="UttakActivity.Gradering" />
-                    </Detail>
-                  )}
-              {selectedItemData.oppholdÅrsak !== '-'
-                  && (
-                    <FormattedMessage
-                      id={calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom).id}
-                      values={{
-                        weeks: calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom).weeks,
-                        days: calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom).days,
-                      }}
-                    />
-                  )}
-            </Column>
-          </Row>
-          <Row>
-            <Column xs="12">
-              {gradertArbforhold(selectedItemData, arbeidsgiverOpplysningerPerId)}
-            </Column>
-          </Row>
-          {visGraderingIkkeInnvilget(selectedItemData, readOnly, graderingInnvilget) && (
-          <Row>
-            <Column xs="12">
-              <b>
-                <FormattedMessage id="UttakActivity.GraderingIkkeOppfylt" />
-                :
-              </b>
-              {getKodeverknavn(selectedItemData.graderingAvslagÅrsak, KodeverkType.GRADERING_AVSLAG_AARSAK)}
-            </Column>
-          </Row>
-          )}
-        </Column>
-      </Row>
-      {selectedItemData.oppholdÅrsak !== '-' && (
-        <div>
-          <Row>
-            <Column xs="12">
-              <FormattedMessage id="UttakInfo.Opphold.AnnenForelder" />
-            </Column>
-          </Row>
-          <Row>
-            <Column xs="12">
-              <SelectField
-                name="oppholdArsak"
-                selectValues={mapPeriodeTyper(oppholdArsakTyper)}
-                label=""
-                bredde="m"
-                readOnly={readOnly}
-                value={selectedItemData.oppholdÅrsak}
-                validate={[required, notDash]}
+              </BodyShort>
+            )}
+          </FlexColumn>
+          <FlexColumn>
+            {selectedItemData.gradertAktivitet && (
+              <Detail size="small">
+                <FormattedMessage id="UttakActivity.Gradering" />
+              </Detail>
+            )}
+            {selectedItemData.oppholdÅrsak !== '-' && (
+              <FormattedMessage
+                id={calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom).id}
+                values={{
+                  weeks: calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom).weeks,
+                  days: calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom).days,
+                }}
               />
-            </Column>
-          </Row>
-        </div>
+            )}
+            {gradertArbforhold(selectedItemData, arbeidsgiverOpplysningerPerId)}
+            {visGraderingIkkeInnvilget(selectedItemData, readOnly, graderingInnvilget) && (
+              <>
+                <b>
+                  <FormattedMessage id="UttakActivity.GraderingIkkeOppfylt" />
+                  :
+                </b>
+                {getKodeverknavn(selectedItemData.graderingAvslagÅrsak, KodeverkType.GRADERING_AVSLAG_AARSAK)}
+              </>
+            )}
+          </FlexColumn>
+        </FlexRow>
+      </FlexContainer>
+      {selectedItemData.oppholdÅrsak !== '-' && (
+        <>
+          <FormattedMessage id="UttakInfo.Opphold.AnnenForelder" />
+          <SelectField
+            name="oppholdArsak"
+            selectValues={mapPeriodeTyper(oppholdArsakTyper)}
+            label=""
+            bredde="m"
+            readOnly={readOnly}
+            value={selectedItemData.oppholdÅrsak}
+            validate={[required, notDash]}
+          />
+        </>
       )}
+      <VerticalSpacer eightPx />
       {selectedItemData.mottattDato && (
-        <FormattedMessage id="UttakInfo.MottattDato" values={{ dato: moment(selectedItemData.mottattDato).format(DDMMYYYY_DATE_FORMAT) }} />
+        <BodyShort>
+          <FormattedMessage id="UttakInfo.MottattDato" values={{ dato: moment(selectedItemData.mottattDato).format(DDMMYYYY_DATE_FORMAT) }} />
+        </BodyShort>
       )}
     </div>
   );

@@ -5,14 +5,15 @@ import moment from 'moment';
 import {
   Detail, Heading, Panel, BodyShort,
 } from '@navikt/ds-react';
-import { Column, Row } from 'nav-frontend-grid';
 
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import { ISO_DATE_FORMAT, getKodeverknavnFn } from '@navikt/ft-utils';
 import { required } from '@navikt/ft-form-validators';
-import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import {
+  DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
@@ -143,77 +144,77 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
           <DateLabel dateString={findSoknadsfristDate(soknad.mottattDato, antallDagerSoknadLevertForSent)} />
         )}
       </span>
-      <Row>
-        <Column xs="6">
-          <Panel className={styles.panel}>
-            <Heading size="small">
-              {intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.Consider' })}
-            </Heading>
-            <ul className={styles.hyphen}>
-              <li><FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question1" /></li>
-              <li><FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question2" /></li>
-              <li><FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question3" /></li>
-            </ul>
-          </Panel>
-        </Column>
-        <Column xs="6">
-          <Panel className={styles.panelDates}>
-            <Row>
-              <Column xs="6">
-                <Detail size="small">{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.MottattDato' })}</Detail>
-                <span className="typo-normal">
-                  {soknad.mottattDato && <DateLabel dateString={soknad.mottattDato} />}
-                </span>
-              </Column>
-              <Column xs="6">
-                {textCode && <Detail size="small">{intl.formatMessage({ id: textCode })}</Detail>}
-                <span className="typo-normal">
-                  {dato && <DateLabel dateString={dato} />}
-                </span>
-              </Column>
-            </Row>
-            <VerticalSpacer twentyPx />
-            <Row>
-              <Column xs="11">
+      <FlexContainer>
+        <FlexRow>
+          <FlexColumn className={styles.col}>
+            <Panel className={styles.panel}>
+              <Heading size="small">
+                {intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.Consider' })}
+              </Heading>
+              <ul className={styles.hyphen}>
+                <li><FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question1" /></li>
+                <li><FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question2" /></li>
+                <li><FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question3" /></li>
+              </ul>
+            </Panel>
+          </FlexColumn>
+          <FlexColumn className={styles.col}>
+            <Panel className={styles.panelDates}>
+              <FlexContainer>
+                <FlexRow>
+                  <FlexColumn className={styles.col}>
+                    <Detail size="small">{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.MottattDato' })}</Detail>
+                    <span className="typo-normal">
+                      {soknad.mottattDato && <DateLabel dateString={soknad.mottattDato} />}
+                    </span>
+                  </FlexColumn>
+                  <FlexColumn className={styles.col}>
+                    {textCode && <Detail size="small">{intl.formatMessage({ id: textCode })}</Detail>}
+                    <span className="typo-normal">
+                      {dato && <DateLabel dateString={dato} />}
+                    </span>
+                  </FlexColumn>
+                </FlexRow>
+                <VerticalSpacer twentyPx />
                 <Detail size="small">{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.ExplanationFromApplication' })}</Detail>
                 <span className="typo-normal">
                   {soknad.begrunnelseForSenInnsending || '-'}
                 </span>
-              </Column>
-            </Row>
-          </Panel>
-        </Column>
-      </Row>
-      <VerticalSpacer sixteenPx />
-      <Row>
-        <Column xs="6">
-          <RadioGroupPanel
-            name="erVilkarOk"
-            validate={[required]}
-            isReadOnly={readOnly}
-            isHorizontal
-            isTrueOrFalseSelection
-            radios={[{
-              value: 'true',
-              label: <FormattedMessage
-                id={findRadioButtonTextCode(true)}
-                values={{
-                  b: (chunks: any) => <b>{chunks}</b>,
-                }}
-              />,
-            }, {
-              value: 'false',
-              label: <FormattedMessage
-                id={findRadioButtonTextCode(false)}
-                values={{
-                  b: (chunks: any) => <b>{chunks}</b>,
-                }}
-              />,
-            },
-            ]}
-          />
-        </Column>
-      </Row>
+              </FlexContainer>
+            </Panel>
+          </FlexColumn>
+        </FlexRow>
+        <VerticalSpacer sixteenPx />
+        <FlexRow>
+          <FlexColumn className={styles.col}>
+            <RadioGroupPanel
+              name="erVilkarOk"
+              validate={[required]}
+              isReadOnly={readOnly}
+              isHorizontal
+              isTrueOrFalseSelection
+              radios={[{
+                value: 'true',
+                label: <FormattedMessage
+                  id={findRadioButtonTextCode(true)}
+                  values={{
+                    b: (chunks: any) => <b>{chunks}</b>,
+                  }}
+                />,
+              }, {
+                value: 'false',
+                label: <FormattedMessage
+                  id={findRadioButtonTextCode(false)}
+                  values={{
+                    b: (chunks: any) => <b>{chunks}</b>,
+                  }}
+                />,
+              },
+              ]}
+            />
+          </FlexColumn>
+        </FlexRow>
+      </FlexContainer>
       {readOnly && erVilkarOk === false && !!behandlingsresultat?.avslagsarsak && (
         <BodyShort size="small">{getKodeverknavn(behandlingsresultat.avslagsarsak, KodeverkType.AVSLAGSARSAK, vilkarType.SOKNADFRISTVILKARET)}</BodyShort>
       )}

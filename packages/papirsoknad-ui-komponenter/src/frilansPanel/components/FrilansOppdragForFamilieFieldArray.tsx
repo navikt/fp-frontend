@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import moment from 'moment';
-import { Column, Row } from 'nav-frontend-grid';
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -92,67 +91,65 @@ export const FrilansOppdragForFamilieFieldArray: FunctionComponent<OwnProps> = (
       {(field, index, getRemoveButton) => {
         const namePart1 = `${FRILANS_NAME_PREFIX}.oppdragPerioder.${index}`;
         return (
-          <Row key={field.id}>
-            <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
-              <FlexContainer>
-                <FlexRow>
-                  <FlexColumn>
-                    <Datepicker
-                      name={`${namePart1}.fomDato`}
-                      label={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.periodeFom' })}
-                      validate={[
-                        hasValidDate,
-                        () => {
-                          const fomVerdi = getValue(getValues, `${namePart1}.fomDato`);
-                          if (sorterteFomDatoer.length > 0 && sorterteFomDatoer[0] && fomVerdi) {
-                            const isBefore = moment(sorterteFomDatoer[0]).isSameOrBefore(moment(fomVerdi));
-                            if (!isBefore) {
-                              return intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.BeforeFomValidation' });
-                            }
+          <div key={field.id} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+            <FlexContainer>
+              <FlexRow>
+                <FlexColumn>
+                  <Datepicker
+                    name={`${namePart1}.fomDato`}
+                    label={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.periodeFom' })}
+                    validate={[
+                      hasValidDate,
+                      () => {
+                        const fomVerdi = getValue(getValues, `${namePart1}.fomDato`);
+                        if (sorterteFomDatoer.length > 0 && sorterteFomDatoer[0] && fomVerdi) {
+                          const isBefore = moment(sorterteFomDatoer[0]).isSameOrBefore(moment(fomVerdi));
+                          if (!isBefore) {
+                            return intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.BeforeFomValidation' });
                           }
-                          return null;
-                        },
-                        () => {
-                          const fomVerdi = getValue(getValues, `${namePart1}.fomDato`);
-                          const tomVerdi = getValue(getValues, `${namePart1}.tomDato`);
-                          return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
-                        },
-                      ]}
-                      onChange={() => (isSubmitted ? trigger() : undefined)}
-                    />
-                  </FlexColumn>
+                        }
+                        return null;
+                      },
+                      () => {
+                        const fomVerdi = getValue(getValues, `${namePart1}.fomDato`);
+                        const tomVerdi = getValue(getValues, `${namePart1}.tomDato`);
+                        return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
+                      },
+                    ]}
+                    onChange={() => (isSubmitted ? trigger() : undefined)}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <Datepicker
+                    name={`${namePart1}.tomDato`}
+                    label={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.periodeTom' })}
+                    validate={[
+                      hasValidDate,
+                      () => {
+                        const fomVerdi = getValue(getValues, `${namePart1}.fomDato`);
+                        const tomVerdi = getValue(getValues, `${namePart1}.tomDato`);
+                        return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
+                      },
+                    ]}
+                    onChange={() => (isSubmitted ? trigger() : undefined)}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <InputField
+                    name={`${namePart1}.oppdragsgiver`}
+                    validate={[maxLength50]}
+                    label={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.Oppdragsgiver' })}
+                  />
+                </FlexColumn>
+                {getRemoveButton && (
                   <FlexColumn>
-                    <Datepicker
-                      name={`${namePart1}.tomDato`}
-                      label={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.periodeTom' })}
-                      validate={[
-                        hasValidDate,
-                        () => {
-                          const fomVerdi = getValue(getValues, `${namePart1}.fomDato`);
-                          const tomVerdi = getValue(getValues, `${namePart1}.tomDato`);
-                          return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
-                        },
-                      ]}
-                      onChange={() => (isSubmitted ? trigger() : undefined)}
-                    />
+                    {getRemoveButton()}
                   </FlexColumn>
-                  <FlexColumn>
-                    <InputField
-                      name={`${namePart1}.oppdragsgiver`}
-                      validate={[maxLength50]}
-                      label={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.Oppdragsgiver' })}
-                    />
-                  </FlexColumn>
-                  {getRemoveButton && (
-                    <FlexColumn>
-                      {getRemoveButton()}
-                    </FlexColumn>
-                  )}
-                </FlexRow>
-              </FlexContainer>
-              <VerticalSpacer sixteenPx />
-            </Column>
-          </Row>
+                )}
+              </FlexRow>
+            </FlexContainer>
+            <VerticalSpacer sixteenPx />
+          </div>
         );
       }}
     </PeriodFieldArray>

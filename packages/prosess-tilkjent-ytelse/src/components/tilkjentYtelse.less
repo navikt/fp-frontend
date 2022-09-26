@@ -1,4 +1,3 @@
-@import '@{coreModulePath}nav-frontend-core/less/_variabler';
 @import '@{coreModulePath}@fpsak-frontend/assets/styles/global.less';
 
 /* TODO (TOR) Fjern import av global.less etter refaktorering av timeline. Hack for å tving korrekt rekkefølge etter splitt av css */
@@ -10,7 +9,7 @@
 /* our custom classes overrule the styles for selected events,
    so lets define a new style for the selected events */
 .vis-item.vis-selected {
-  background-color: @white;
+  background-color: var(--navds-global-color-white);
   border-color: black;
   box-shadow: 0 0 10px gray;
   color: black;
@@ -21,7 +20,7 @@
 }
 
 .timelineContainer {
-  background-color: @white;
+  background-color: var(--navds-global-color-white);
   max-height: 1600px;
   position: relative;
   transition: all 2s;
@@ -49,15 +48,15 @@
   border-right: 1px solid lightgrey;
   margin-left: -17px;
   padding-right: 0;
+}
 
-  &:before {
-    border-bottom: 1px solid lightgrey;
-    bottom: 0;
-    content: '';
-    left: 30px;
-    position: absolute;
-    width: 70px;
-  }
+.timeLineWrapper:before {
+  border-bottom: 1px solid lightgrey;
+  bottom: 0;
+  content: '';
+  left: 30px;
+  position: absolute;
+  width: 70px;
 }
 
 .sokerContainer {
@@ -74,7 +73,7 @@
 }
 
 .detailsPeriode {
-  background-color: @navGronnLighten80;
+  background-color: var(--navds-global-color-green-100);
   margin-right: 8px;
   max-width: 370px;
   padding: 16px;
