@@ -2,7 +2,7 @@ import winston from 'winston';
 import morgan from 'morgan';
 
 const { format } = winston;
-const { combine, json, timestamp, colorize } = format;
+const { combine, json, timestamp} = format;
 
 const levels = {
   error: 0,
@@ -13,8 +13,7 @@ const levels = {
 }
 
 const level = () => {
-  const env = process.env.NODE_ENV || 'development';
-  const isDevelopment = env === 'development';
+  const isDevelopment = process.env.NODE_ENV === 'development';
   return isDevelopment ? 'debug' : 'info';
 }
 
@@ -64,8 +63,7 @@ const stream = {
 };
 
 const skip = () => {
-  const env = process.env.NODE_ENV || "development";
-  return env !== "development";
+  return process.env.NODE_ENV === "production";
 };
 
 const vanligFormat = ":method :url :status :res[content-length] - :response-time ms";
