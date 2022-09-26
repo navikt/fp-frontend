@@ -49,8 +49,7 @@ async function startApp() {
           },
         },
         hidePoweredBy: true,
-        noSniff: true,
-        xssFilter
+        noSniff: true
       }),
     );
 

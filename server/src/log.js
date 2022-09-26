@@ -72,7 +72,6 @@ const morganMiddleware = morgan(
   vanligFormat, { stream, skip }
 );
 
-
 export default {
   debug,
   info,
