@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Button, Modal, Label } from '@navikt/ds-react';
-import { Column, Container, Row } from 'nav-frontend-grid';
-import { Image } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, Image,
+} from '@navikt/ft-ui-komponenter';
 
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 
@@ -33,24 +34,22 @@ const MessagesModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
     shouldCloseOnOverlayClick={false}
   >
     <Modal.Content>
-      <Container className={styles.container}>
-        <Row>
-          <Column xs="1">
+      <FlexContainer>
+        <FlexRow>
+          <FlexColumn>
             <Image
               className={styles.image}
               alt={intl.formatMessage({ id: 'MessagesModal.description' })}
               src={innvilgetImageUrl}
             />
-            <div className={styles.divider} />
-          </Column>
-          <Column xs="9">
-            <Label size="small" className={styles.text}>
+          </FlexColumn>
+          <FlexColumn className={styles.text}>
+            <Label size="small">
               <FormattedMessage id="MessagesModal.text" />
             </Label>
-          </Column>
-          <Column xs="2">
+          </FlexColumn>
+          <FlexColumn className={styles.button}>
             <Button
-              className={styles.button}
               size="small"
               variant="primary"
               onClick={closeEvent}
@@ -59,9 +58,9 @@ const MessagesModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
             >
               {intl.formatMessage({ id: 'MessagesModal.OK' })}
             </Button>
-          </Column>
-        </Row>
-      </Container>
+          </FlexColumn>
+        </FlexRow>
+      </FlexContainer>
     </Modal.Content>
   </Modal>
 );

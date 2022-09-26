@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import {
   BodyShort, Modal, Button, Label,
 } from '@navikt/ds-react';
-import { Image } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, Image,
+} from '@navikt/ft-ui-komponenter';
 
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 
@@ -35,28 +36,28 @@ const HenlagtBehandlingModal: FunctionComponent<OwnProps & WrappedComponentProps
     shouldCloseOnOverlayClick={false}
   >
     <Modal.Content>
-      <Row>
-        <Column xs="1">
-          <Image className={styles.image} alt={intl.formatMessage({ id: 'HenlagtBehandlingModal.Henlagt' })} src={innvilgetImageUrl} />
-          <div className={styles.divider} />
-        </Column>
-        <Column xs="9">
-          <Label size="small"><FormattedMessage id="HenlagtBehandlingModal.BehandlingenErHenlagt" /></Label>
-          <BodyShort size="small"><FormattedMessage id="HenlagtBehandlingModal.RutetTilForsiden" /></BodyShort>
-        </Column>
-        <Column xs="2">
-          <Button
-            variant="primary"
-            size="small"
-            className={styles.button}
-            onClick={closeEvent}
-            autoFocus
-            type="button"
-          >
-            {intl.formatMessage({ id: 'HenlagtBehandlingModal.Ok' })}
-          </Button>
-        </Column>
-      </Row>
+      <FlexContainer>
+        <FlexRow>
+          <FlexColumn>
+            <Image className={styles.image} alt={intl.formatMessage({ id: 'HenlagtBehandlingModal.Henlagt' })} src={innvilgetImageUrl} />
+          </FlexColumn>
+          <FlexColumn>
+            <Label size="small"><FormattedMessage id="HenlagtBehandlingModal.BehandlingenErHenlagt" /></Label>
+            <BodyShort size="small"><FormattedMessage id="HenlagtBehandlingModal.RutetTilForsiden" /></BodyShort>
+          </FlexColumn>
+          <FlexColumn className={styles.button}>
+            <Button
+              variant="primary"
+              size="small"
+              onClick={closeEvent}
+              autoFocus
+              type="button"
+            >
+              {intl.formatMessage({ id: 'HenlagtBehandlingModal.Ok' })}
+            </Button>
+          </FlexColumn>
+        </FlexRow>
+      </FlexContainer>
     </Modal.Content>
   </Modal>
 );

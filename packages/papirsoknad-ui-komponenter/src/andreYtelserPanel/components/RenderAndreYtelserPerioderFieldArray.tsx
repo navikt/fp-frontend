@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { UseFormGetValues } from 'react-hook-form';
-import { Column, Row } from 'nav-frontend-grid';
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -72,49 +71,47 @@ const RenderAndreYtelserPerioderFieldArray: FunctionComponent<OwnProps> & Static
         const namePart1 = `${ANDRE_YTELSER_NAME_PREFIX}.${name}.${index}`;
         return (
           <div key={field.id}>
-            <Row>
-              <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
-                <FlexContainer>
-                  <FlexRow>
-                    <FlexColumn>
-                      <Datepicker
-                        name={`${namePart1}.periodeFom`}
-                        label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeFom' }) : ''}
-                        validate={[
-                          required,
-                          hasValidDate,
-                          () => {
-                            const fomVerdi = getValue(getValues, `${namePart1}.periodeFom`);
-                            const tomVerdi = getValue(getValues, `${namePart1}.periodeTom`);
-                            return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
-                          },
-                        ]}
-                        onChange={() => (isSubmitted ? trigger() : undefined)}
-                      />
-                    </FlexColumn>
-                    <FlexColumn>
-                      <Datepicker
-                        name={`${namePart1}.periodeTom`}
-                        label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeTom' }) : ''}
-                        validate={[
-                          required,
-                          hasValidDate,
-                          () => {
-                            const fomVerdi = getValue(getValues, `${namePart1}.periodeFom`);
-                            const tomVerdi = getValue(getValues, `${namePart1}.periodeTom`);
-                            return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
-                          },
-                        ]}
-                        onChange={() => (isSubmitted ? trigger() : undefined)}
-                      />
-                    </FlexColumn>
-                    <FlexColumn>
-                      {getRemoveButton()}
-                    </FlexColumn>
-                  </FlexRow>
-                </FlexContainer>
-              </Column>
-            </Row>
+            <div className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+              <FlexContainer>
+                <FlexRow>
+                  <FlexColumn>
+                    <Datepicker
+                      name={`${namePart1}.periodeFom`}
+                      label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeFom' }) : ''}
+                      validate={[
+                        required,
+                        hasValidDate,
+                        () => {
+                          const fomVerdi = getValue(getValues, `${namePart1}.periodeFom`);
+                          const tomVerdi = getValue(getValues, `${namePart1}.periodeTom`);
+                          return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
+                        },
+                      ]}
+                      onChange={() => (isSubmitted ? trigger() : undefined)}
+                    />
+                  </FlexColumn>
+                  <FlexColumn>
+                    <Datepicker
+                      name={`${namePart1}.periodeTom`}
+                      label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeTom' }) : ''}
+                      validate={[
+                        required,
+                        hasValidDate,
+                        () => {
+                          const fomVerdi = getValue(getValues, `${namePart1}.periodeFom`);
+                          const tomVerdi = getValue(getValues, `${namePart1}.periodeTom`);
+                          return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
+                        },
+                      ]}
+                      onChange={() => (isSubmitted ? trigger() : undefined)}
+                    />
+                  </FlexColumn>
+                  <FlexColumn>
+                    {getRemoveButton()}
+                  </FlexColumn>
+                </FlexRow>
+              </FlexContainer>
+            </div>
             <VerticalSpacer sixteenPx />
           </div>
         );

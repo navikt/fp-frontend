@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
   formHooks, InputField, RadioGroupPanel,
@@ -49,27 +48,24 @@ const VirksomhetRegnskapPanel: FunctionComponent<OwnProps> = ({
       />
       {harRegnskapsforer && (
         <>
-          <Row>
-            <Column xs="6">
-              <VerticalSpacer eightPx />
-              <ArrowBox>
-                <InputField
-                  name="navnRegnskapsforer"
-                  readOnly={readOnly}
-                  validate={[required, hasValidText]}
-                  label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.AccountantName" />}
-                />
-                <VerticalSpacer sixteenPx />
-                <InputField
-                  name="tlfRegnskapsforer"
-                  readOnly={readOnly}
-                  validate={[required, hasValidInteger]}
-                  className={styles.tlfBredde}
-                  label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.AccountantPhone" />}
-                />
-              </ArrowBox>
-            </Column>
-          </Row>
+          <VerticalSpacer eightPx />
+          <ArrowBox>
+            <InputField
+              name="navnRegnskapsforer"
+              className={styles.navnBredde}
+              readOnly={readOnly}
+              validate={[required, hasValidText]}
+              label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.AccountantName" />}
+            />
+            <VerticalSpacer sixteenPx />
+            <InputField
+              name="tlfRegnskapsforer"
+              readOnly={readOnly}
+              validate={[required, hasValidInteger]}
+              className={styles.tlfBredde}
+              label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.AccountantPhone" />}
+            />
+          </ArrowBox>
           <VerticalSpacer sixteenPx />
         </>
       )}

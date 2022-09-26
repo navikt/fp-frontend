@@ -1,7 +1,6 @@
 import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 import { UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import {
   Datepicker, SelectField, PeriodFieldArray, formHooks,
@@ -100,61 +99,59 @@ const RenderOppholdPeriodeFieldArray: FunctionComponent<OwnProps> = ({
       remove={remove}
     >
       {(field, index, getRemoveButton) => (
-        <Row key={field.id}>
-          <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
-            <FlexContainer wrap>
-              <FlexRow>
+        <div key={field.id} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+          <FlexContainer wrap>
+            <FlexRow>
+              <FlexColumn>
+                <Datepicker
+                  name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`}
+                  label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' }) : ''}
+                  validate={[
+                    required,
+                    hasValidDate,
+                    () => {
+                      const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
+                      const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
+                      return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
+                    },
+                    getOverlappingValidator(getValues),
+                  ]}
+                  onChange={() => (isSubmitted ? trigger() : undefined)}
+                />
+              </FlexColumn>
+              <FlexColumn>
+                <Datepicker
+                  name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`}
+                  label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' }) : ''}
+                  validate={[
+                    required,
+                    hasValidDate,
+                    () => {
+                      const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
+                      const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
+                      return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
+                    },
+                    getOverlappingValidator(getValues),
+                  ]}
+                  onChange={() => (isSubmitted ? trigger() : undefined)}
+                />
+              </FlexColumn>
+              <FlexColumn>
+                <SelectField
+                  name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.årsak`}
+                  label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.Opphold.Arsak' }) : ''}
+                  selectValues={mapTyper(oppholdsReasons)}
+                  validate={[required]}
+                />
+              </FlexColumn>
+              {getRemoveButton && (
                 <FlexColumn>
-                  <Datepicker
-                    name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`}
-                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' }) : ''}
-                    validate={[
-                      required,
-                      hasValidDate,
-                      () => {
-                        const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
-                        const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
-                        return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
-                      },
-                      getOverlappingValidator(getValues),
-                    ]}
-                    onChange={() => (isSubmitted ? trigger() : undefined)}
-                  />
+                  {getRemoveButton()}
                 </FlexColumn>
-                <FlexColumn>
-                  <Datepicker
-                    name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`}
-                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' }) : ''}
-                    validate={[
-                      required,
-                      hasValidDate,
-                      () => {
-                        const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
-                        const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
-                        return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
-                      },
-                      getOverlappingValidator(getValues),
-                    ]}
-                    onChange={() => (isSubmitted ? trigger() : undefined)}
-                  />
-                </FlexColumn>
-                <FlexColumn>
-                  <SelectField
-                    name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.årsak`}
-                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.Opphold.Arsak' }) : ''}
-                    selectValues={mapTyper(oppholdsReasons)}
-                    validate={[required]}
-                  />
-                </FlexColumn>
-                {getRemoveButton && (
-                  <FlexColumn>
-                    {getRemoveButton()}
-                  </FlexColumn>
-                )}
-              </FlexRow>
-            </FlexContainer>
-          </Column>
-        </Row>
+              )}
+            </FlexRow>
+          </FlexContainer>
+        </div>
       )}
     </PeriodFieldArray>
   );

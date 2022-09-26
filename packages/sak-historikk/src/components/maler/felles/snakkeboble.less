@@ -1,77 +1,72 @@
-@import '@{coreModulePath}nav-frontend-core/less/_variabler';
-@import '@{coreModulePath}nav-frontend-core/less/_mixins';
-@import '@{coreModulePath}nav-frontend-core/less/utilities';
-@import '@{coreModulePath}nav-frontend-core/less/hide-text';
-
 .snakkeboble {
   display: flex;
   margin-bottom: 16px;
   white-space: pre-line;
+}
 
-  &--hoyre {
-    flex-direction: row-reverse;
-    margin-right: 16px;
-  }
+.snakkeboble--hoyre {
+  flex-direction: row-reverse;
+  margin-right: 16px;
+}
 
-  &--venstre {
-    flex-direction: row;
-  }
+.snakkeboble--venstre {
+  flex-direction: row;
+}
 
-  &__snakkeboble-pil-container {
-    margin-top: 1rem;
-    overflow: hidden;
-    position: relative;
-    width: 1.2rem;
-  }
+.snakkeboble__snakkeboble-pil-container {
+  margin-top: 1rem;
+  overflow: hidden;
+  position: relative;
+  width: 1.2rem;
+}
 
-  &__snakkebole-pil {
-    background: @white;
-    height: 1rem;
-    position: absolute;
-    top: 1px;
-    transform: rotate(54deg) skew(17deg);
-    width: 1rem;
-  }
+.snakkeboble__snakkebole-pil {
+  background: var(--navds-global-color-white);
+  height: 1rem;
+  position: absolute;
+  top: 1px;
+  transform: rotate(54deg) skew(17deg);
+  width: 1rem;
+}
 
-  &__snakkebole-pil--hoyre {
-    box-shadow: 0 1px 4px 1px @navGra20;
-    right: 72%;
-  }
+.snakkeboble__snakkebole-pil--hoyre {
+  box-shadow: 0 1px 4px 1px var(--navds-global-color-gray-100);
+  right: 72%;
+}
 
-  &__snakkebole-pil--venstre {
-    box-shadow: 0 2px 4px -1px @navGra20;
-    left: 72%;
-  }
+.snakkeboble__snakkebole-pil--venstre {
+  box-shadow: 0 2px 4px -1px var(--navds-global-color-gray-100);
+  left: 72%;
+}
 
-  &__snakkebole-pil--hoyre--saksbehandler {
-    background-color: @navLillaLighten80;
-    box-shadow: 0 1px 4px 1px @navGra20;
-    right: 72%;
-  }
+.snakkeboble__snakkebole-pil--hoyre--saksbehandler {
+  background-color: var(--navds-global-color-purple-100);
+  box-shadow: 0 1px 4px 1px var(--navds-global-color-gray-100);
+  right: 72%;
+}
 
-  &__snakkebole-pil--hoyre--beslutter {
-    background-color: @navGronnLighten80;
-    box-shadow: 0 1px 4px 1px @navGra20;
-    right: 72%;
-  }
+.snakkeboble__snakkebole-pil--hoyre--beslutter {
+  background-color: var(--navds-global-color-green-100);
+  box-shadow: 0 1px 4px 1px var(--navds-global-color-gray-100);
+  right: 72%;
+}
 
-  &__snakkebole-pil--hoyre--losningen {
-    background-color: @grayBackground;
-    box-shadow: 0 1px 4px 1px @navGra20;
-    right: 72%;
-  }
+.snakkeboble__snakkebole-pil--hoyre--losningen {
+  background-color: var(--navds-global-color-gray-100);
+  box-shadow: 0 1px 4px 1px var(--navds-global-color-gray-100);
+  right: 72%;
+}
 
-  &__snakkebole-pil--venstre--bruker {
-    background-color: @navOransjeLighten80;
-    box-shadow: 0 2px 4px -1px @navGra20;
-    left: 72%;
-  }
+.snakkeboble__snakkebole-pil--venstre--bruker {
+  background-color: var(--navds-global-color-orange-100);
+  box-shadow: 0 2px 4px -1px var(--navds-global-color-gray-100);
+  left: 72%;
+}
 
-  &__snakkebole-pil--venstre--ekstern {
-    background-color: @navLysBlaLighten80;
-    box-shadow: 0 2px 4px -1px @navGra20;
-    left: 72%;
-  }
+.snakkeboble__snakkebole-pil--venstre--ekstern {
+  background-color: var(--navds-global-color-lightblue-100);
+  box-shadow: 0 2px 4px -1px var(--navds-global-color-gray-100);
+  left: 72%;
 }
 
 .image {
@@ -92,9 +87,7 @@
 }
 
 .snakkeboble-panel {
-  .blokk-s();
-
-  box-shadow: 0 2px 4px 0 @navGra20;
+  box-shadow: 0 2px 4px 0 var(--navds-global-color-gray-100);
   display: inline-flex;
   flex-direction: column;
   padding: 0.5rem 1rem 1rem;
@@ -113,70 +106,46 @@
 }
 
 .snakkeboble__snakkebole-panel--saksbehandler {
-  background-color: @navLillaLighten80;
-  .snakkeboble-width;
+  background-color: var(--navds-global-color-purple-100);
+  border-radius: 4px;
+  display: block;
+  flex: 0 1 350px;
+  padding: 1rem 1rem 1rem 1rem;
+  width: 20rem;
 }
 
 .snakkeboble__snakkebole-panel--beslutter {
-  background-color: @navGronnLighten80;
-  .snakkeboble-width;
+  background-color: var(--navds-global-color-green-100);
+  border-radius: 4px;
+  display: block;
+  flex: 0 1 350px;
+  padding: 1rem 1rem 1rem 1rem;
+  width: 20rem;
 }
 
 .snakkeboble__snakkebole-panel--losningen {
-  background-color: @grayBackground;
-  .snakkeboble-width;
+  background-color: var(--navds-global-color-gray-100);
+  border-radius: 4px;
+  display: block;
+  flex: 0 1 350px;
+  padding: 1rem 1rem 1rem 1rem;
+  width: 20rem;
 }
 
 .snakkeboble__snakkebole-panel--bruker {
-  background-color: @navOransjeLighten80;
-  .snakkeboble-width;
+  background-color: var(--navds-global-color-orange-100);
+  border-radius: 4px;
+  display: block;
+  flex: 0 1 350px;
+  padding: 1rem 1rem 1rem 1rem;
+  width: 20rem;
 }
 
 .snakkeboble__snakkebole-panel--ekstern {
-  background-color: @navLysBlaLighten80;
-  .snakkeboble-width;
-}
-
-// IE-specific css to make the icon fit in place
-// IE-11 specific css to make the icon fit in place
-
-@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-  .snakkeboble {
-    &__ikon {
-      &--saksbehandler {
-        background-position-x: 8px;
-        background-position-y: 4px;
-        background-repeat: no-repeat;
-        background-size: 40px;
-      }
-    }
-  }
-}
-
-// IE Edge specifics
-@supports (-ms-ime-align:auto) {
-  .snakkeboble {
-    &__ikon {
-      &--saksbehandler {
-        background-position-x: 8px;
-        background-position-y: 4px;
-        background-repeat: no-repeat;
-        background-size: 40px;
-      }
-
-      &--brukerKvinne {
-        background-position-x: 8px;
-        background-position-y: 8px;
-        background-repeat: no-repeat;
-        background-size: 32px;
-      }
-
-      &--brukerMann {
-        background-position-x: 8px;
-        background-position-y: 8px;
-        background-repeat: no-repeat;
-        background-size: 32px;
-      }
-    }
-  }
+  background-color: var(--navds-global-color-lightblue-100);
+  border-radius: 4px;
+  display: block;
+  flex: 0 1 350px;
+  padding: 1rem 1rem 1rem 1rem;
+  width: 20rem;
 }

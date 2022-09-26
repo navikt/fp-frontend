@@ -1,10 +1,11 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import {
   formHooks, Datepicker, InputField, RadioGroupPanel, SelectField,
 } from '@navikt/ft-form-hooks';
-import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import {
+  ArrowBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import {
   dateBeforeOrEqualToToday, hasValidDate, hasValidInteger, hasValidOrgNumber, required, validPeriodeFomTom,
 } from '@navikt/ft-form-validators';
@@ -77,19 +78,17 @@ const VirksomhetIdentifikasjonPanel: FunctionComponent<OwnProps> = ({
       />
       {virksomhetRegistrertINorge && (
         <>
-          <Row>
-            <Column xs="5">
-              <VerticalSpacer eightPx />
-              <ArrowBox>
-                <InputField
-                  name="organisasjonsnummer"
-                  readOnly={readOnly}
-                  validate={[required, hasValidInteger, hasValidOrgNumber]}
-                  label={<FormattedMessage id="Registrering.VirksomhetIdentifikasjonPanel.OrganizationNumber" />}
-                />
-              </ArrowBox>
-            </Column>
-          </Row>
+          <VerticalSpacer eightPx />
+          <div className={styles.orgNrBredde}>
+            <ArrowBox>
+              <InputField
+                name="organisasjonsnummer"
+                readOnly={readOnly}
+                validate={[required, hasValidInteger, hasValidOrgNumber]}
+                label={<FormattedMessage id="Registrering.VirksomhetIdentifikasjonPanel.OrganizationNumber" />}
+              />
+            </ArrowBox>
+          </div>
           <VerticalSpacer sixteenPx />
         </>
       )}
@@ -97,35 +96,34 @@ const VirksomhetIdentifikasjonPanel: FunctionComponent<OwnProps> = ({
         <>
           <VerticalSpacer eightPx />
           <ArrowBox alignOffset={57}>
-            <Row>
-              <Column xs="6">
-                <SelectField
-                  name="landJobberFra"
-                  selectValues={countrySelectValues(sortedCountriesByName)}
-                  validate={[required]}
-                  label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.Country' })}
-                />
-              </Column>
-            </Row>
+            <SelectField
+              name="landJobberFra"
+              className={styles.landBredde}
+              selectValues={countrySelectValues(sortedCountriesByName)}
+              validate={[required]}
+              label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.Country' })}
+            />
             <VerticalSpacer sixteenPx />
-            <Row>
-              <Column xs="4">
-                <Datepicker
-                  isReadOnly={readOnly}
-                  validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
-                  name="fom"
-                  label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeFom' })}
-                />
-              </Column>
-              <Column xs="3">
-                <Datepicker
-                  isReadOnly={readOnly}
-                  validate={[hasValidDate, (fomDato) => validPeriodeFomTom(getValues('fom'), fomDato)]}
-                  name="tom"
-                  label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeTom' })}
-                />
-              </Column>
-            </Row>
+            <FlexContainer>
+              <FlexRow>
+                <FlexColumn>
+                  <Datepicker
+                    isReadOnly={readOnly}
+                    validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
+                    name="fom"
+                    label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeFom' })}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <Datepicker
+                    isReadOnly={readOnly}
+                    validate={[hasValidDate, (fomDato) => validPeriodeFomTom(getValues('fom'), fomDato)]}
+                    name="tom"
+                    label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeTom' })}
+                  />
+                </FlexColumn>
+              </FlexRow>
+            </FlexContainer>
           </ArrowBox>
         </>
       )}

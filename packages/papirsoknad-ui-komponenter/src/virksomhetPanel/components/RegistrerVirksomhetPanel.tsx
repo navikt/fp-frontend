@@ -2,11 +2,12 @@ import React, {
   FunctionComponent, useCallback, useEffect, useState,
 } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import {
   Label, BodyShort, Detail, ErrorMessage,
 } from '@navikt/ds-react';
-import { Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk } from '@navikt/ft-types';
 import { formHooks } from '@navikt/ft-form-hooks';
 
@@ -96,16 +97,12 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({
     <div className={styles.fieldsList}>
       {fields.length > 0 && (
         <React.Fragment key={1}>
-          <Row key="VirksomhetHeader">
-            <Column xs="8">
-              <Label size="small"><FormattedMessage id="Registrering.RegistrerVirksomhetPanel.Name" /></Label>
-            </Column>
-          </Row>
+          <Label size="small"><FormattedMessage id="Registrering.RegistrerVirksomhetPanel.Name" /></Label>
           <hr className={styles.divider} />
           {fields.map((field, index) => (
-            <React.Fragment key={2}>
-              <Row key={field.id}>
-                <Column xs="8">
+            <FlexContainer key={field.id}>
+              <FlexRow>
+                <FlexColumn>
                   {// eslint-disable-next-line jsx-a11y/click-events-have-key-events
                   }
                   <a
@@ -119,8 +116,8 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({
                       {field.navn}
                     </BodyShort>
                   </a>
-                </Column>
-                <Column xs="4">
+                </FlexColumn>
+                <FlexColumn>
                   {// eslint-disable-next-line jsx-a11y/click-events-have-key-events
                   }
                   <div
@@ -133,11 +130,11 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({
                   >
                     <Image src={removeIcon} />
                   </div>
-                </Column>
-              </Row>
+                </FlexColumn>
+              </FlexRow>
               <hr className={styles.divider} />
               <VerticalSpacer eightPx />
-            </React.Fragment>
+            </FlexContainer>
           ))}
         </React.Fragment>
       )}
