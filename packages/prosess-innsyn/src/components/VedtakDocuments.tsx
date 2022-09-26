@@ -1,10 +1,11 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import { Link } from '@navikt/ds-react';
 import { Collapse, Expand } from '@navikt/ds-icons';
 
-import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import {
+  DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import { InnsynVedtaksdokument, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { hentVedtakDokumentLenke } from '@fpsak-frontend/konstanter';
 
@@ -42,16 +43,18 @@ const VedtakDocuments: FunctionComponent<OwnProps> = ({
         <>
           <VerticalSpacer fourPx />
           {vedtaksdokumenter.map((document) => (
-            <Row key={document.behandlingUuid}>
-              <Column xs="2">
-                <DateLabel dateString={document.opprettetDato} />
-              </Column>
-              <Column xs="10">
-                <Link href={hentVedtakDokumentLenke(document.behandlingUuid)} target="_blank">
-                  {behandlingTypes.find((bt) => bt.kode === document.tittel).navn}
-                </Link>
-              </Column>
-            </Row>
+            <FlexContainer>
+              <FlexRow key={document.behandlingUuid}>
+                <FlexColumn>
+                  <DateLabel dateString={document.opprettetDato} />
+                </FlexColumn>
+                <FlexColumn>
+                  <Link href={hentVedtakDokumentLenke(document.behandlingUuid)} target="_blank">
+                    {behandlingTypes.find((bt) => bt.kode === document.tittel).navn}
+                  </Link>
+                </FlexColumn>
+              </FlexRow>
+            </FlexContainer>
           ))}
         </>
       )}

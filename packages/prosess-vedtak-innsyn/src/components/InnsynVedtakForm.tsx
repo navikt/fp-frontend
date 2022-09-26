@@ -4,11 +4,12 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import {
   Label, BodyShort, Heading,
 } from '@navikt/ds-react';
-import { Column, Row } from 'nav-frontend-grid';
 
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
 import { ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { decodeHtmlEntity, getLanguageFromSprakkode } from '@navikt/ft-utils';
@@ -161,53 +162,51 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
       <BodyShort size="small" className={styles.wordwrap}>{decodeHtmlEntity(apBegrunnelse)}</BodyShort>
       <VerticalSpacer twentyPx />
       {(innsynResultatType !== InnsynResultatType.INNVILGET) && (
-        <Row>
-          <Column xs="8">
-            <TextAreaField
-              name="begrunnelse"
-              label={intl.formatMessage({ id: 'InnsynVedtakForm.Fritekst' })}
-              validate={[minLength3, maxLength1500, hasValidText]}
-              maxLength={1500}
-              readOnly={readOnly}
-              badges={[{
-                type: 'info',
-                titleText: getLanguageFromSprakkode(sprakkode),
-              }]}
-            />
-          </Column>
-        </Row>
+        <TextAreaField
+          name="begrunnelse"
+          label={intl.formatMessage({ id: 'InnsynVedtakForm.Fritekst' })}
+          validate={[minLength3, maxLength1500, hasValidText]}
+          maxLength={1500}
+          readOnly={readOnly}
+          badges={[{
+            type: 'info',
+            titleText: getLanguageFromSprakkode(sprakkode),
+          }]}
+        />
       )}
       <VerticalSpacer twentyPx />
       {innsynResultatType !== InnsynResultatType.AVVIST && (
         <DocumentListVedtakInnsyn saksNr={saksNr} documents={documents.filter((document) => document.fikkInnsyn === true)} />
       )}
       <VerticalSpacer twentyPx />
-      <Row>
-        {!readOnly && (
-          <Column xs="3">
-            <ProsessStegSubmitButtonNew
-              isReadOnly={readOnly}
-              isSubmittable
-              isSubmitting={formMethods.formState.isSubmitting}
-              isDirty={formMethods.formState.isDirty}
-              hasEmptyRequiredFields={false}
-            />
-          </Column>
-        )}
-        <Column xs="4">
-          <a
-            onClick={previewBrev}
-            onKeyDown={(e) => (e.key === 'Enter' ? previewBrev(e) : null)}
-            className="lenke lenke--frittstaende"
-            target="_blank"
-            rel="noopener noreferrer"
-            role="link"
-            tabIndex={0}
-          >
-            <FormattedMessage id={readOnly ? 'InnsynVedtakForm.VisVedtaksbrev' : 'InnsynVedtakForm.ForhåndsvisBrev'} />
-          </a>
-        </Column>
-      </Row>
+      <FlexContainer>
+        <FlexRow>
+          {!readOnly && (
+            <FlexColumn>
+              <ProsessStegSubmitButtonNew
+                isReadOnly={readOnly}
+                isSubmittable
+                isSubmitting={formMethods.formState.isSubmitting}
+                isDirty={formMethods.formState.isDirty}
+                hasEmptyRequiredFields={false}
+              />
+            </FlexColumn>
+          )}
+          <FlexColumn>
+            <a
+              onClick={previewBrev}
+              onKeyDown={(e) => (e.key === 'Enter' ? previewBrev(e) : null)}
+              className="lenke lenke--frittstaende"
+              target="_blank"
+              rel="noopener noreferrer"
+              role="link"
+              tabIndex={0}
+            >
+              <FormattedMessage id={readOnly ? 'InnsynVedtakForm.VisVedtaksbrev' : 'InnsynVedtakForm.ForhåndsvisBrev'} />
+            </a>
+          </FlexColumn>
+        </FlexRow>
+      </FlexContainer>
     </Form>
   );
 };

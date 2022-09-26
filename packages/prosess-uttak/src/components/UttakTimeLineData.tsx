@@ -2,12 +2,11 @@ import React, {
   Component, MouseEvent, KeyboardEvent, ReactElement,
 } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import { Label } from '@navikt/ds-react';
 
 import { calcDays, getKodeverknavnFn } from '@navikt/ft-utils';
 import {
-  AksjonspunktHelpTextTemp, VerticalSpacer, FloatRight, EditedIcon, Image,
+  AksjonspunktHelpTextTemp, VerticalSpacer, EditedIcon, Image, FlexContainer, FlexRow, FlexColumn,
 } from '@navikt/ft-ui-komponenter';
 import splitPeriodImageHoverUrl from '@fpsak-frontend/assets/images/splitt_hover.svg';
 import splitPeriodImageUrl from '@fpsak-frontend/assets/images/splitt.svg';
@@ -250,52 +249,51 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
 
     return (
       <TimeLineDataContainer key={`selectedItemData_${selectedItemData.id}`}>
-        <Row>
-          <Column xs="3">
-            <Label size="small">
-              <FormattedMessage id="UttakTimeLineData.PeriodeData.Detaljer" />
-              {isEdited && <EditedIcon />}
-            </Label>
-          </Column>
-          <Column xs="7">
-            {!readOnly
-                && (
-                  <span className={styles.splitPeriodPosition}>
-                    <Image
-                      tabIndex={0}
-                      className={styles.splitPeriodImage}
-                      src={splitPeriodImageUrl}
-                      srcHover={splitPeriodImageHoverUrl}
-                      alt={intl.formatMessage({ id: 'UttakTimeLineData.PeriodeData.DelOppPerioden' })}
-                      onMouseDown={this.showModal}
-                      onKeyDown={(e) => (e.key === 'Enter' ? this.showModal(e) : null)}
-                    />
-                    <FormattedMessage id="UttakTimeLineData.PeriodeData.DelOppPerioden" />
-                  </span>
-                )}
-            {showDelPeriodeModal
-                && (
-                  <DelOppPeriodeModal
-                    // @ts-ignore
-                    cancelEvent={this.hideModal}
-                    // @ts-ignore
-                    showModal={showDelPeriodeModal}
-                    // @ts-ignore
-                    periodeData={selectedItemData}
-                    // @ts-ignore
-                    splitPeriod={this.splitPeriod}
-                    // @ts-ignore
-                    intl={intl}
+        <FlexContainer>
+          <FlexRow spaceBetween>
+            <FlexColumn>
+              <Label size="small">
+                <FormattedMessage id="UttakTimeLineData.PeriodeData.Detaljer" />
+                {isEdited && <EditedIcon />}
+              </Label>
+            </FlexColumn>
+            <FlexColumn>
+              {!readOnly && (
+                <span className={styles.splitPeriodPosition}>
+                  <Image
+                    tabIndex={0}
+                    className={styles.splitPeriodImage}
+                    src={splitPeriodImageUrl}
+                    srcHover={splitPeriodImageHoverUrl}
+                    alt={intl.formatMessage({ id: 'UttakTimeLineData.PeriodeData.DelOppPerioden' })}
+                    onMouseDown={this.showModal}
+                    onKeyDown={(e) => (e.key === 'Enter' ? this.showModal(e) : null)}
                   />
-                )}
-          </Column>
-          <Column xs="2">
-            <FloatRight>
+                  <FormattedMessage id="UttakTimeLineData.PeriodeData.DelOppPerioden" />
+                </span>
+              )}
+              {showDelPeriodeModal && (
+                <DelOppPeriodeModal
+                  // @ts-ignore
+                  cancelEvent={this.hideModal}
+                  // @ts-ignore
+                  showModal={showDelPeriodeModal}
+                  // @ts-ignore
+                  periodeData={selectedItemData}
+                  // @ts-ignore
+                  splitPeriod={this.splitPeriod}
+                  // @ts-ignore
+                  intl={intl}
+                />
+              )}
+            </FlexColumn>
+            <FlexColumn>
               <TimeLineButton text={intl.formatMessage({ id: 'Timeline.prevPeriod' })} type="prev" callback={callbackBackward} />
               <TimeLineButton text={intl.formatMessage({ id: 'Timeline.nextPeriod' })} type="next" callback={callbackForward} />
-            </FloatRight>
-          </Column>
-        </Row>
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
+        <VerticalSpacer sixteenPx />
         {selectedItemData.manuellBehandlingÅrsak && selectedItemData.manuellBehandlingÅrsak !== '-' && (
         <>
           <AksjonspunktHelpTextTemp isAksjonspunktOpen={selectedItemData.manuellBehandlingÅrsak !== null}>

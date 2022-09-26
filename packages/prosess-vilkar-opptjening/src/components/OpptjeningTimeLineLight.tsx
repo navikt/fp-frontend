@@ -5,6 +5,7 @@ import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Timeline, TimeLineNavigation } from '@navikt/ft-tidslinje';
 import { FastsattOpptjeningAktivitet } from '@fpsak-frontend/types';
 
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import opptjeningAktivitetKlassifisering from '../kodeverk/opptjeningAktivitetKlassifisering';
 import DateContainer from './DateContainer';
 import styles from './opptjeningTimeLineLight.less';
@@ -182,6 +183,7 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
     return (
       <div className="opptjening">
         <div className="timeLineLight">
+          <VerticalSpacer sixteenPx />
           <DateContainer
             opptjeningFomDate={moment(opptjeningFomDate, ISO_DATE_FORMAT)
               .format(DDMMYYYY_DATE_FORMAT)}

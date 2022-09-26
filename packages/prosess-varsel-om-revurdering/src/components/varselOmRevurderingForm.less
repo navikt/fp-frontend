@@ -1,8 +1,6 @@
-@import '@{coreModulePath}nav-frontend-core/less/_variabler';
-
 .divider {
-  border-left: 1px solid @navGra40;
-  border-right: 0 solid @navGra40;
+  border-left: 1px solid var(--navds-global-color-gray-200);
+  border-right: 0 solid var(--navds-global-color-gray-200);
   display: inline;
   float: right;
   height: 37px;
@@ -32,19 +30,19 @@
 }
 
 .panel {
-  border: 1px solid @navGra20;
-  border-radius: @border-radius-base;
+  border: 1px solid var(--navds-global-color-gray-100);
+  border-radius: 4px;
   display: inline-block;
   margin-right: 16px;
   width: 40%;
+}
 
-  > div {
-    margin-top: 5px;
-  }
+.panel > div {
+  margin-top: 5px;
+}
 
-  &:first-of-type {
-    width: 60%;
-  }
+.panel:first-of-type {
+  width: 60%;
 }
 
 .flexContainer {
@@ -53,17 +51,17 @@
   flex-flow: wrap;
   justify-content: flex-start;
   margin-top: 8px;
+}
 
-  > div {
-    flex: 0 0 60%;
-    margin-right: 16px;
-  }
+.flexContainer > div {
+  flex: 0 0 60%;
+  margin-right: 16px;
+}
 
-  > button {
-    flex: 0 0 50%;
-    margin-bottom: 8px;
-    max-width: 300px;
-  }
+.flexContainer > button {
+  flex: 0 0 50%;
+  margin-bottom: 8px;
+  max-width: 300px;
 }
 
 .warningRow {

@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import { Label, Detail, Heading } from '@navikt/ds-react';
 
 import { Aksjonspunkt, BeregningsresultatEs } from '@fpsak-frontend/types';
@@ -108,39 +107,41 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
         </FlexRow>
       </FlexContainer>
       <VerticalSpacer eightPx />
-      <Row>
-        <Column xs="2">
-          <Detail size="small"><FormattedMessage id="BeregningEngangsstonadForm.Sats" /></Detail>
-        </Column>
-        <Column xs="2">
-          <Label size="small">{formatCurrencyWithKr(behandlingResultatstruktur.satsVerdi)}</Label>
-        </Column>
-      </Row>
-      <Row>
-        <Column xs="2">
-          <Detail size="small"><FormattedMessage id="BeregningEngangsstonadForm.AntallBarn" /></Detail>
-        </Column>
-        <Column xs="2">
-          <Label size="small">{behandlingResultatstruktur.antallBarn}</Label>
-        </Column>
-      </Row>
-      {!erIOverstyringsmodus && !harOverstyringAksjonspunkt && (
-        <>
-          <Row>
-            <Column xs="3">
-              <hr className={styles.divider} />
-            </Column>
-          </Row>
-          <Row>
-            <Column xs="2">
-              <Detail size="small"><FormattedMessage id="BeregningEngangsstonadForm.BeregnetEngangsstonad" /></Detail>
-            </Column>
-            <Column xs="2">
-              <Label size="small">{formatCurrencyWithKr(behandlingResultatstruktur.beregnetTilkjentYtelse)}</Label>
-            </Column>
-          </Row>
-        </>
-      )}
+      <FlexContainer>
+        <FlexRow>
+          <FlexColumn className={styles.firstColWidth}>
+            <Detail size="small"><FormattedMessage id="BeregningEngangsstonadForm.Sats" /></Detail>
+          </FlexColumn>
+          <FlexColumn>
+            <Label size="small">{formatCurrencyWithKr(behandlingResultatstruktur.satsVerdi)}</Label>
+          </FlexColumn>
+        </FlexRow>
+        <FlexRow>
+          <FlexColumn className={styles.firstColWidth}>
+            <Detail size="small"><FormattedMessage id="BeregningEngangsstonadForm.AntallBarn" /></Detail>
+          </FlexColumn>
+          <FlexColumn>
+            <Label size="small">{behandlingResultatstruktur.antallBarn}</Label>
+          </FlexColumn>
+        </FlexRow>
+        {!erIOverstyringsmodus && !harOverstyringAksjonspunkt && (
+          <>
+            <FlexRow>
+              <FlexColumn className={styles.dividerWidth}>
+                <hr className={styles.divider} />
+              </FlexColumn>
+            </FlexRow>
+            <FlexRow>
+              <FlexColumn className={styles.firstColWidth}>
+                <Detail size="small"><FormattedMessage id="BeregningEngangsstonadForm.BeregnetEngangsstonad" /></Detail>
+              </FlexColumn>
+              <FlexColumn>
+                <Label size="small">{formatCurrencyWithKr(behandlingResultatstruktur.beregnetTilkjentYtelse)}</Label>
+              </FlexColumn>
+            </FlexRow>
+          </>
+        )}
+      </FlexContainer>
       {(erIOverstyringsmodus || harOverstyringAksjonspunkt) && (
         <>
           <VerticalSpacer sixteenPx />
