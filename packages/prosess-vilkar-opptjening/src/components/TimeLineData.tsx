@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import moment from 'moment';
-import { Column, Row } from 'nav-frontend-grid';
 import { Label } from '@navikt/ds-react';
-import { Image } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, Image,
+} from '@navikt/ft-ui-komponenter';
 
 import checkImg from '@fpsak-frontend/assets/images/check.svg';
 import advarselImg from '@fpsak-frontend/assets/images/remove.svg';
@@ -24,7 +25,7 @@ const isoToDdMmYyyy = (dato: string): string => {
 
 const backgroundStyle = (kode: string): string => ((kode === MELLOMLIGGENDE_PERIODE
 || kode === opptjeningAktivitetKlassifisering.ANTATT_GODKJENT
-|| kode === opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT) ? 'godkjent' : 'avvist');
+|| kode === opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT) ? styles.godkjent : styles.avvist);
 
 const periodStatus = (periodState: string): string => (periodState === opptjeningAktivitetKlassifisering.BEKREFTET_AVVIST
 || periodState === opptjeningAktivitetKlassifisering.ANTATT_AVVIST ? 'OpptjeningVilkarView.Avslatt' : 'OpptjeningVilkarView.Godkjent');
@@ -47,50 +48,47 @@ const TimeLineData: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
   return (
     <div>
-      <Row>
-        <Label size="small">
-          <FormattedMessage id="OpptjeningVilkarView.DetailsForSelectedPeriod" />
-        </Label>
-      </Row>
-      <Row>
-        <Column xs="6" className={backgroundStyle(fastsattOpptjeningAktivitet.klasse)}>
-          <Row className={styles.timeLineDataContainer}>
-            <Column xs="6">
-              <div>
-                <Label size="small">
-                  {`${isoToDdMmYyyy(fastsattOpptjeningAktivitet.fom)} - ${isoToDdMmYyyy(fastsattOpptjeningAktivitet.tom)}`}
-                </Label>
-              </div>
-            </Column>
-            <Column xs="6">
-              {isPeriodGodkjent(fastsattOpptjeningAktivitet.klasse)
-              && (
-              <span className={styles.image}>
-                <Image
-                  src={checkImg}
-                  className={styles.image}
-                />
-              </span>
-              )}
-              {!isPeriodGodkjent(fastsattOpptjeningAktivitet.klasse)
-            && (
-            <span className={styles.image}>
-              <Image
-                src={advarselImg}
-                className={styles.image}
-              />
-            </span>
-            )}
-              <FormattedMessage id={periodStatus(fastsattOpptjeningAktivitet.klasse)} />
-            </Column>
-          </Row>
-        </Column>
-        <Column xs="6">
-          <TimeLineButton text={intl.formatMessage({ id: 'TimeLineData.prevPeriod' })} type="prev" callback={selectPrevPeriod} />
-          <TimeLineButton text={intl.formatMessage({ id: 'TimeLineData.nextPeriod' })} type="next" callback={selectNextPeriod} />
-        </Column>
-      </Row>
-      <Row />
+      <Label size="small">
+        <FormattedMessage id="OpptjeningVilkarView.DetailsForSelectedPeriod" />
+      </Label>
+      <FlexContainer>
+        <FlexRow>
+          <FlexColumn className={backgroundStyle(fastsattOpptjeningAktivitet.klasse)}>
+            <FlexContainer>
+              <FlexRow>
+                <FlexColumn className={styles.colWidth}>
+                  <Label size="small">
+                    {`${isoToDdMmYyyy(fastsattOpptjeningAktivitet.fom)} - ${isoToDdMmYyyy(fastsattOpptjeningAktivitet.tom)}`}
+                  </Label>
+                </FlexColumn>
+                <FlexColumn className={styles.colWidth}>
+                  {isPeriodGodkjent(fastsattOpptjeningAktivitet.klasse) && (
+                    <span className={styles.image}>
+                      <Image
+                        src={checkImg}
+                        className={styles.image}
+                      />
+                    </span>
+                  )}
+                  {!isPeriodGodkjent(fastsattOpptjeningAktivitet.klasse) && (
+                    <span className={styles.image}>
+                      <Image
+                        src={advarselImg}
+                        className={styles.image}
+                      />
+                    </span>
+                  )}
+                  <FormattedMessage id={periodStatus(fastsattOpptjeningAktivitet.klasse)} />
+                </FlexColumn>
+              </FlexRow>
+            </FlexContainer>
+          </FlexColumn>
+          <FlexColumn className={styles.colWidth}>
+            <TimeLineButton text={intl.formatMessage({ id: 'TimeLineData.prevPeriod' })} type="prev" callback={selectPrevPeriod} />
+            <TimeLineButton text={intl.formatMessage({ id: 'TimeLineData.nextPeriod' })} type="next" callback={selectNextPeriod} />
+          </FlexColumn>
+        </FlexRow>
+      </FlexContainer>
     </div>
   );
 };

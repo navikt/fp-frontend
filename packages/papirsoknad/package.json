@@ -16,8 +16,6 @@
     "@navikt/ft-types": "^1.0.28",
     "@navikt/ft-ui-komponenter": "1.1.5",
     "@navikt/ft-utils": "1.1.2",
-    "nav-frontend-grid": "2.0.2",
-    "nav-frontend-grid-style": "1.0.3",
     "react": "18.2.0",
     "react-intl": "6.1.1",
     "react-hook-form": "7.36.0",

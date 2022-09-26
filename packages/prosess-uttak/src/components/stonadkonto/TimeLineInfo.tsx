@@ -1,9 +1,10 @@
 import React, { Component, ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import { Label, BodyShort } from '@navikt/ds-react';
 
-import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, Table, TableColumn, TableRow,
+} from '@navikt/ft-ui-komponenter';
 import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
 import stonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
 import {
@@ -147,51 +148,47 @@ class TimeLineInfo extends Component<OwnProps, OwnState> {
       <div>
         {gjelderFodsel // Denne vi lager i første omgang av iterasjonen
           && (
-            <Column xs="12">
-              <div className={styles.remainingUttak}>
-                <Row>
-                  <Column xs="5">
+            <div className={styles.remainingUttak}>
+              <FlexContainer>
+                <FlexRow>
+                  <FlexColumn>
                     <Label size="small">
                       <FormattedMessage id="TimeLineInfo.Stonadinfo.DisponibleStonadsdager" />
                     </Label>
-                  </Column>
-                  <Column xs="4">
+                  </FlexColumn>
+                  <FlexColumn>
                     <BodyShort size="small">
                       <FormattedMessage
                         id="TimeLineInfo.Stonadinfo.Total"
                         values={{ ukerVerdi: findTilgjengeligeUker(stonadskonto), b: (chunks: any) => <b>{chunks}</b> }}
                       />
                     </BodyShort>
-                  </Column>
-                </Row>
-                <Row>
-                  <div className={styles.tabs}>
-                    <ul role="tablist">
-                      {stonadArray.map((konto: CustomStonadskonto, index: number) => (
-                        <TimeLineTab
-                          key={konto.kontonavn}
-                          aktiv={index === aktiv}
-                          stonadskonto={konto}
-                          onClickCallback={() => this.handleChange(konto, index)}
-                        />
-                      ))}
-                    </ul>
-                  </div>
-                </Row>
-                <Row>
-                  {updatekonto && updatekonto.kontoinfo.aktivitetSaldoDtoList.length > 0
-                  && (
-                    <div className={styles.visKonto}>
-                      <Table headerTextCodes={headerTextCodes}>
-                        {updatekonto.kontoinfo.aktivitetSaldoDtoList.map((arbforhold) => (
-                          <TableRow key={createKey(arbforhold)}>
-                            <TableColumn>
-                              <BodyShort size="small">{createTextStrings(arbforhold.aktivitetIdentifikator, arbeidsgiverOpplysningerPerId)}</BodyShort>
-                            </TableColumn>
-                            <TableColumn>
-                              <BodyShort size="small">
-                                {arbforhold.saldo
-                              && (
+                  </FlexColumn>
+                </FlexRow>
+              </FlexContainer>
+              <div className={styles.tabs}>
+                <ul role="tablist">
+                  {stonadArray.map((konto: CustomStonadskonto, index: number) => (
+                    <TimeLineTab
+                      key={konto.kontonavn}
+                      aktiv={index === aktiv}
+                      stonadskonto={konto}
+                      onClickCallback={() => this.handleChange(konto, index)}
+                    />
+                  ))}
+                </ul>
+              </div>
+              {updatekonto && updatekonto.kontoinfo.aktivitetSaldoDtoList.length > 0 && (
+                <div className={styles.visKonto}>
+                  <Table headerTextCodes={headerTextCodes}>
+                    {updatekonto.kontoinfo.aktivitetSaldoDtoList.map((arbforhold) => (
+                      <TableRow key={createKey(arbforhold)}>
+                        <TableColumn>
+                          <BodyShort size="small">{createTextStrings(arbforhold.aktivitetIdentifikator, arbeidsgiverOpplysningerPerId)}</BodyShort>
+                        </TableColumn>
+                        <TableColumn>
+                          <BodyShort size="small">
+                            {arbforhold.saldo && (
                               <FormattedMessage
                                 id="TimeLineInfo.Stonadinfo.UkerDager"
                                 values={{
@@ -204,17 +201,15 @@ class TimeLineInfo extends Component<OwnProps, OwnState> {
                                   b: (chunks: any) => <b>{chunks}</b>,
                                 }}
                               />
-                              )}
-                              </BodyShort>
-                            </TableColumn>
-                          </TableRow>
-                        ))}
-                      </Table>
-                    </div>
-                  )}
-                </Row>
-              </div>
-            </Column>
+                            )}
+                          </BodyShort>
+                        </TableColumn>
+                      </TableRow>
+                    ))}
+                  </Table>
+                </div>
+              )}
+            </div>
           )}
       </div>
     );

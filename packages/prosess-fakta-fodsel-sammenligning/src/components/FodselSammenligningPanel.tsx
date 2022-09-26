@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
-import {
-  Tag, Panel, Label, BodyShort,
-} from '@navikt/ds-react';
-import { Column, Row } from 'nav-frontend-grid';
+import { Tag, BodyShort, Heading } from '@navikt/ds-react';
 
 import {
+  FlexColumn,
+  FlexContainer,
+  FlexRow,
   Table, TableColumn, TableRow,
 } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -46,72 +46,74 @@ const FodselSammenligningPanel: FunctionComponent<OwnProps> = ({
   soknadOriginalBehandling,
   familiehendelseOriginalBehandling,
 }) => (
-  <div className={styles.panelWrapper}>
-    <Panel className={styles.panel}>
-      {behandlingsTypeKode !== behandlingType.REVURDERING
-        && <FodselSammenligningOtherPanel soknad={soknad} termindato={termindato} />}
-      {behandlingsTypeKode === behandlingType.REVURDERING && (
-        <FodselSammenligningRevurderingPanel
-          soknadOriginalBehandling={soknadOriginalBehandling}
-          familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
-          vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
-        />
-      )}
-    </Panel>
-    <Panel className={styles.panel}>
-      <Row>
-        <Column xs="9">
-          <Label size="small"><FormattedMessage id="FodselsammenligningPanel.OpplysningerTPS" /></Label>
-        </Column>
-        {nrOfDodfodteBarn > 0 && (
-          <Column xs="3">
-            <Tag variant="info">
-              <FormattedMessage id="FodselsammenligningPanel.Dodfodt" />
-            </Tag>
-          </Column>
+  <FlexContainer>
+    <FlexRow>
+      <FlexColumn className={styles.colWidthLeft}>
+        {behandlingsTypeKode !== behandlingType.REVURDERING
+          && <FodselSammenligningOtherPanel soknad={soknad} termindato={termindato} />}
+        {behandlingsTypeKode === behandlingType.REVURDERING && (
+          <FodselSammenligningRevurderingPanel
+            soknadOriginalBehandling={soknadOriginalBehandling}
+            familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
+            vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
+          />
         )}
-      </Row>
-      <Row>
+      </FlexColumn>
+      <FlexColumn className={styles.colWidthRight}>
+        <FlexContainer>
+          <FlexRow>
+            <FlexColumn>
+              <Heading size="small">
+                <FormattedMessage id="FodselsammenligningPanel.OpplysningerTPS" />
+              </Heading>
+            </FlexColumn>
+            {nrOfDodfodteBarn > 0 && (
+            <FlexColumn>
+              <Tag variant="info">
+                <FormattedMessage id="FodselsammenligningPanel.Dodfodt" />
+              </Tag>
+            </FlexColumn>
+            )}
+          </FlexRow>
+        </FlexContainer>
         {avklartBarn.length > 0 && (
-          <Table headerTextCodes={['FodselsammenligningPanel.Fodselsdato', 'FodselsammenligningPanel.Dodsdato']}>
-            {avklartBarn.map((barn: AvklartBarn) => {
-              const key = barn.fodselsdato + barn.dodsdato;
-              return (
-                <TableRow key={key} id={key}>
-                  <TableColumn>
-                    <BodyShort size="small">
-                      {formatDate(barn.fodselsdato)}
-                    </BodyShort>
-                  </TableColumn>
-                  <TableColumn>
-                    <BodyShort size="small">
-                      {formatDate(barn.dodsdato)}
-                    </BodyShort>
-                  </TableColumn>
-                  <TableColumn>
-                    {barn.dodsdato && (
-                      <Tag variant="info">
-                        <FormattedMessage id="FodselsammenligningPanel.Dod" />
-                      </Tag>
-                    )}
-                  </TableColumn>
-                </TableRow>
-              );
-            })}
-          </Table>
+        <Table noHover headerTextCodes={['FodselsammenligningPanel.Fodselsdato', 'FodselsammenligningPanel.Dodsdato']}>
+          {avklartBarn.map((barn: AvklartBarn) => {
+            const key = barn.fodselsdato + barn.dodsdato;
+            return (
+              <TableRow key={key} id={key}>
+                <TableColumn>
+                  <BodyShort size="small">
+                    {formatDate(barn.fodselsdato)}
+                  </BodyShort>
+                </TableColumn>
+                <TableColumn>
+                  <BodyShort size="small">
+                    {formatDate(barn.dodsdato)}
+                  </BodyShort>
+                </TableColumn>
+                <TableColumn>
+                  {barn.dodsdato && (
+                  <Tag variant="info">
+                    <FormattedMessage id="FodselsammenligningPanel.Dod" />
+                  </Tag>
+                  )}
+                </TableColumn>
+              </TableRow>
+            );
+          })}
+        </Table>
         )}
         {avklartBarn.length === 0 && (
-          <Row>
-            <Column xs="12" className={styles.noChildrenInTps}>
-              <BodyShort size="small">
-                -
-              </BodyShort>
-            </Column>
-          </Row>
+        <div className={styles.noChildrenInTps}>
+          <BodyShort size="small">
+            -
+          </BodyShort>
+        </div>
         )}
-      </Row>
-    </Panel>
-  </div>
+      </FlexColumn>
+    </FlexRow>
+  </FlexContainer>
 );
 
 export default FodselSammenligningPanel;

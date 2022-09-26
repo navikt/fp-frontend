@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { Column, Row } from 'nav-frontend-grid';
 import { AlleKodeverk } from '@navikt/ft-types';
 
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
@@ -18,6 +17,9 @@ import {
   OmsorgOgAdopsjonTransformedFormValues,
 } from '@fpsak-frontend/papirsoknad-ui-komponenter';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
+
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import styles from './registreringFodselGrid.less';
 
 /*
  * RegistreringFodselForm
@@ -60,36 +62,38 @@ const RegistreringFodselGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
   fodselsdato,
   mottattDato,
 }) => (
-  <Row>
-    <Column xs="6">
-      {soknadData.getForeldreType() !== foreldreType.MOR && (
-        <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
-      )}
-      <OppholdINorgePapirsoknadIndex
-        readOnly={readOnly}
-        erAdopsjon={soknadData.getFamilieHendelseType() !== familieHendelseType.ADOPSJON}
-        alleKodeverk={alleKodeverk}
-        mottattDato={mottattDato}
-      />
-      <SprakPapirsoknadIndex readOnly={readOnly} />
-    </Column>
-    <Column xs="6">
-      {soknadData.getForeldreType() !== foreldreType.MOR && (
-        <OmsorgOgAdopsjonPapirsoknadIndex
+  <FlexContainer>
+    <FlexRow>
+      <FlexColumn className={styles.col}>
+        {soknadData.getForeldreType() !== foreldreType.MOR && (
+          <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
+        )}
+        <OppholdINorgePapirsoknadIndex
           readOnly={readOnly}
-          familieHendelseType={soknadData.getFamilieHendelseType()}
-          isForeldrepengerFagsak={false}
-          fodselsdato={fodselsdato}
+          erAdopsjon={soknadData.getFamilieHendelseType() !== familieHendelseType.ADOPSJON}
+          alleKodeverk={alleKodeverk}
+          mottattDato={mottattDato}
         />
-      )}
-      <FodselPapirsoknadIndex readOnly={readOnly} />
-      <AnnenForelderPapirsoknadIndex
-        readOnly={readOnly}
-        alleKodeverk={alleKodeverk}
-        fagsakPersonnummer={fagsakPersonnummer}
-      />
-    </Column>
-  </Row>
+        <SprakPapirsoknadIndex readOnly={readOnly} />
+      </FlexColumn>
+      <FlexColumn className={styles.col}>
+        {soknadData.getForeldreType() !== foreldreType.MOR && (
+          <OmsorgOgAdopsjonPapirsoknadIndex
+            readOnly={readOnly}
+            familieHendelseType={soknadData.getFamilieHendelseType()}
+            isForeldrepengerFagsak={false}
+            fodselsdato={fodselsdato}
+          />
+        )}
+        <FodselPapirsoknadIndex readOnly={readOnly} />
+        <AnnenForelderPapirsoknadIndex
+          readOnly={readOnly}
+          alleKodeverk={alleKodeverk}
+          fagsakPersonnummer={fagsakPersonnummer}
+        />
+      </FlexColumn>
+    </FlexRow>
+  </FlexContainer>
 );
 
 RegistreringFodselGrid.transformValues = (values) => ({

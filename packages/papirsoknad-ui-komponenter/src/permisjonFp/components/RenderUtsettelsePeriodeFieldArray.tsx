@@ -3,7 +3,6 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 import { UseFormGetValues } from 'react-hook-form';
-import { Column, Row } from 'nav-frontend-grid';
 import {
   AvsnittSkiller, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -109,94 +108,93 @@ const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps> = ({
       remove={remove}
     >
       {(field, index, getRemoveButton) => (
-        <Row key={field.id}>
-          <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
-            {index > 0 && (
-              <>
-                <AvsnittSkiller />
-                <VerticalSpacer sixteenPx />
-              </>
-            )}
-            <FlexContainer wrap>
-              <FlexRow>
+        <div key={field.id} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+          {index > 0 && (
+            <>
+              <AvsnittSkiller />
+              <VerticalSpacer sixteenPx />
+            </>
+          )}
+          <FlexContainer wrap>
+            <FlexRow>
+              <FlexColumn>
+                <SelectField
+                  name={`${fieldArrayName}.${index}.periodeForUtsettelse`}
+                  label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.Periode' }) : ''}
+                  selectValues={mapKvoter(utsettelseKvoter)}
+                  validate={[required]}
+                />
+              </FlexColumn>
+              <FlexColumn>
+                <Datepicker
+                  name={`${fieldArrayName}.${index}.periodeFom`}
+                  label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' }) : ''}
+                  validate={[
+                    required,
+                    hasValidDate,
+                    () => {
+                      const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
+                      const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
+                      return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
+                    },
+                    getOverlappingValidator(getValues),
+                  ]}
+                  onChange={() => (isSubmitted ? trigger() : undefined)}
+                />
+              </FlexColumn>
+              <FlexColumn>
+                <Datepicker
+                  name={`${fieldArrayName}.${index}.periodeTom`}
+                  label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' }) : ''}
+                  validate={[
+                    required,
+                    hasValidDate,
+                    () => {
+                      const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
+                      const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
+                      return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
+                    },
+                    getOverlappingValidator(getValues),
+                  ]}
+                  onChange={() => (isSubmitted ? trigger() : undefined)}
+                />
+              </FlexColumn>
+              <FlexColumn>
+                <SelectField
+                  name={`${fieldArrayName}.${index}.arsakForUtsettelse`}
+                  label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.Arsak' }) : ''}
+                  selectValues={mapTyper(utsettelseReasons)}
+                  validate={[required]}
+                  onChange={() => (isSubmitted ? trigger() : undefined)}
+                />
+              </FlexColumn>
+            </FlexRow>
+            <VerticalSpacer eightPx />
+            <FlexRow>
+              <FlexColumn>
+                <SelectField
+                  label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.ArbeidskategoriLabel' }) : ''}
+                  name={`${fieldArrayName}.${index}.erArbeidstaker`}
+                  selectValues={[
+                    <option value="true" key="true">{intl.formatMessage({ id: 'Registrering.Permisjon.ErArbeidstaker' })}</option>,
+                    <option value="false" key="false">{intl.formatMessage({ id: 'Registrering.Permisjon.ErIkkeArbeidstaker' })}</option>,
+                  ]}
+                  validate={[(erArbeidstaker) => {
+                    const typeArbeidRequired = getValues(
+                      `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.arsakForUtsettelse`,
+                    ) === 'ARBEID';
+                    return typeArbeidRequired ? required(erArbeidstaker) : undefined;
+                  }]}
+                />
+              </FlexColumn>
+              {getRemoveButton && (
                 <FlexColumn>
-                  <SelectField
-                    name={`${fieldArrayName}.${index}.periodeForUtsettelse`}
-                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.Periode' }) : ''}
-                    selectValues={mapKvoter(utsettelseKvoter)}
-                    validate={[required]}
-                  />
+                  {getRemoveButton()}
                 </FlexColumn>
-                <FlexColumn>
-                  <Datepicker
-                    name={`${fieldArrayName}.${index}.periodeFom`}
-                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' }) : ''}
-                    validate={[
-                      required,
-                      hasValidDate,
-                      () => {
-                        const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
-                        const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
-                        return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
-                      },
-                      getOverlappingValidator(getValues),
-                    ]}
-                    onChange={() => (isSubmitted ? trigger() : undefined)}
-                  />
-                </FlexColumn>
-                <FlexColumn>
-                  <Datepicker
-                    name={`${fieldArrayName}.${index}.periodeTom`}
-                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' }) : ''}
-                    validate={[
-                      required,
-                      hasValidDate,
-                      () => {
-                        const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
-                        const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
-                        return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
-                      },
-                      getOverlappingValidator(getValues),
-                    ]}
-                    onChange={() => (isSubmitted ? trigger() : undefined)}
-                  />
-                </FlexColumn>
-                <FlexColumn>
-                  <SelectField
-                    name={`${fieldArrayName}.${index}.arsakForUtsettelse`}
-                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.Arsak' }) : ''}
-                    selectValues={mapTyper(utsettelseReasons)}
-                    validate={[required]}
-                    onChange={() => (isSubmitted ? trigger() : undefined)}
-                  />
-                </FlexColumn>
-              </FlexRow>
-              <FlexRow>
-                <FlexColumn>
-                  <SelectField
-                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.ArbeidskategoriLabel' }) : ''}
-                    name={`${fieldArrayName}.${index}.erArbeidstaker`}
-                    selectValues={[
-                      <option value="true" key="true">{intl.formatMessage({ id: 'Registrering.Permisjon.ErArbeidstaker' })}</option>,
-                      <option value="false" key="false">{intl.formatMessage({ id: 'Registrering.Permisjon.ErIkkeArbeidstaker' })}</option>,
-                    ]}
-                    validate={[(erArbeidstaker) => {
-                      const typeArbeidRequired = getValues(
-                        `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.arsakForUtsettelse`,
-                      ) === 'ARBEID';
-                      return typeArbeidRequired ? required(erArbeidstaker) : undefined;
-                    }]}
-                  />
-                </FlexColumn>
-                {getRemoveButton && (
-                  <FlexColumn>
-                    {getRemoveButton()}
-                  </FlexColumn>
-                )}
-              </FlexRow>
-            </FlexContainer>
-          </Column>
-        </Row>
+              )}
+            </FlexRow>
+          </FlexContainer>
+        </div>
       )}
     </PeriodFieldArray>
   );

@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import { Button, BodyShort, Modal } from '@navikt/ds-react';
-import { Image } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, Image,
+} from '@navikt/ft-ui-komponenter';
 
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 
@@ -35,28 +36,28 @@ const KlageBehandlingModal: FunctionComponent<OwnProps> = ({
       shouldCloseOnOverlayClick={false}
     >
       <Modal.Content>
-        <Row className="">
-          <Column xs="1">
-            <Image className={styles.image} src={innvilgetImageUrl} />
-            <div className={styles.divider} />
-          </Column>
-          <Column xs="9">
-            <BodyShort size="small">{intl.formatMessage({ id: 'KlageVurderingModal.VedtakOversendt' })}</BodyShort>
-            <BodyShort size="small">{intl.formatMessage({ id: 'KlageVurderingModal.GoToSearchPage' })}</BodyShort>
-          </Column>
-          <Column xs="2">
-            <Button
-              variant="primary"
-              size="small"
-              className={styles.button}
-              onClick={lukkModal}
-              autoFocus
-              type="button"
-            >
-              {intl.formatMessage({ id: 'KlageVurderingModal.Ok' })}
-            </Button>
-          </Column>
-        </Row>
+        <FlexContainer>
+          <FlexRow>
+            <FlexColumn>
+              <Image className={styles.image} src={innvilgetImageUrl} />
+            </FlexColumn>
+            <FlexColumn>
+              <BodyShort size="small">{intl.formatMessage({ id: 'KlageVurderingModal.VedtakOversendt' })}</BodyShort>
+              <BodyShort size="small">{intl.formatMessage({ id: 'KlageVurderingModal.GoToSearchPage' })}</BodyShort>
+            </FlexColumn>
+            <FlexColumn className={styles.button}>
+              <Button
+                variant="primary"
+                size="small"
+                onClick={lukkModal}
+                autoFocus
+                type="button"
+              >
+                {intl.formatMessage({ id: 'KlageVurderingModal.Ok' })}
+              </Button>
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
       </Modal.Content>
     </Modal>
   );

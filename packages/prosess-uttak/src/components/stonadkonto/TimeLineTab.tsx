@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classnames from 'classnames/bind';
-import { Column, Row } from 'nav-frontend-grid';
 import { BodyShort, Detail } from '@navikt/ds-react';
 
 import stonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
 import { Stonadskonto } from '@fpsak-frontend/types';
 
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import styles from './timeLineTab.less';
 
 const classNames = classnames.bind(styles);
@@ -70,30 +70,34 @@ const TimeLineTab: FunctionComponent<OwnProps> = ({
           onClick={onClickCallback}
           aria-selected={aktiv}
         >
-          <Column>
-            <Row>
-              <Detail size="small">
-                <FormattedMessage
-                  id={findKorrektLabelForKvote(stonadskonto.kontonavn)}
-                  values={{
-                    uker: Math.floor(stonadskonto.kontoinfo.maxDager / 5),
-                  }}
-                />
-              </Detail>
-            </Row>
-            <Row>
-              <BodyShort size="small">
-                <FormattedMessage
-                  id="TimeLineTab.Stonadinfo.UkerDager"
-                  values={{
-                    ukerVerdi: fordelteDager.uker,
-                    dagerVerdi: fordelteDager.dager,
-                    b: (chunks: any) => <b>{chunks}</b>,
-                  }}
-                />
-              </BodyShort>
-            </Row>
-          </Column>
+          <FlexContainer>
+            <FlexRow>
+              <FlexColumn>
+                <Detail size="small">
+                  <FormattedMessage
+                    id={findKorrektLabelForKvote(stonadskonto.kontonavn)}
+                    values={{
+                      uker: Math.floor(stonadskonto.kontoinfo.maxDager / 5),
+                    }}
+                  />
+                </Detail>
+              </FlexColumn>
+            </FlexRow>
+            <FlexRow>
+              <FlexColumn>
+                <BodyShort size="small">
+                  <FormattedMessage
+                    id="TimeLineTab.Stonadinfo.UkerDager"
+                    values={{
+                      ukerVerdi: fordelteDager.uker,
+                      dagerVerdi: fordelteDager.dager,
+                      b: (chunks: any) => <b>{chunks}</b>,
+                    }}
+                  />
+                </BodyShort>
+              </FlexColumn>
+            </FlexRow>
+          </FlexContainer>
         </button>
       </li>
     </div>

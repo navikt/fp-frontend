@@ -1,11 +1,15 @@
 import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
-import { Label, BodyShort } from '@navikt/ds-react';
+import { Label, BodyShort, Heading } from '@navikt/ds-react';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
+import {
+  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
+
+import styles from './fodselSammenligningOtherPanel.less';
 
 const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
@@ -72,23 +76,26 @@ const FodselSammenligningRevurderingPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <Label size="small"><FormattedMessage id="FodselsammenligningPanel.Ytelsesvedtak" /></Label>
-      <Row>
-        {shouldShowVedtaksdatoAsSvangerskapsuke && (
-          <Column xs="6">
-            <Label size="small"><FormattedMessage id="FodselsammenligningPanel.FodtISvangerskapsuke" /></Label>
-          </Column>
-        )}
-        <Column xs="3"><Label size="small"><FormattedMessage id={terminOrFodselLabel} /></Label></Column>
-        <Column xs="3"><Label size="small"><FormattedMessage id="FodselsammenligningPanel.AntallBarn" /></Label></Column>
-      </Row>
-      <Row>
-        {shouldShowVedtaksdatoAsSvangerskapsuke && (
-          <Column xs="6"><BodyShort size="small">{vedtaksDatoSomSvangerskapsuke}</BodyShort></Column>
-        )}
-        <Column xs="3"><BodyShort size="small">{terminOrFodselDate}</BodyShort></Column>
-        <Column xs="3"><BodyShort size="small">{antallBarn}</BodyShort></Column>
-      </Row>
+      <Heading size="small"><FormattedMessage id="FodselsammenligningPanel.Ytelsesvedtak" /></Heading>
+      <VerticalSpacer sixteenPx />
+      <FlexContainer>
+        <FlexRow>
+          {shouldShowVedtaksdatoAsSvangerskapsuke && (
+            <FlexColumn className={styles.colMargin}>
+              <Label size="small"><FormattedMessage id="FodselsammenligningPanel.FodtISvangerskapsuke" /></Label>
+              <BodyShort size="small">{vedtaksDatoSomSvangerskapsuke}</BodyShort>
+            </FlexColumn>
+          )}
+          <FlexColumn className={styles.colMargin}>
+            <Label size="small"><FormattedMessage id={terminOrFodselLabel} /></Label>
+            <BodyShort size="small">{terminOrFodselDate}</BodyShort>
+          </FlexColumn>
+          <FlexColumn>
+            <Label size="small"><FormattedMessage id="FodselsammenligningPanel.AntallBarn" /></Label>
+            <BodyShort size="small">{antallBarn}</BodyShort>
+          </FlexColumn>
+        </FlexRow>
+      </FlexContainer>
     </>
   );
 };

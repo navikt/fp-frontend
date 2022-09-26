@@ -2,10 +2,9 @@ import React, {
   FunctionComponent, ReactElement, useCallback, useState,
 } from 'react';
 import { useIntl } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 import {
-  VerticalSpacer, AksjonspunktHelpTextHTML,
+  VerticalSpacer, AksjonspunktHelpTextHTML, FlexContainer, FlexRow, FlexColumn,
 } from '@navikt/ft-ui-komponenter';
 import { Behandling } from '@navikt/ft-types';
 
@@ -128,30 +127,32 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
           <VerticalSpacer thirtyTwoPx />
         </>
       )}
-      <Row className="">
-        <Column xs="6">
-          <div className={styles.panelLeft}>
-            {leftPanels({
-              registrerInngangsvilkarPanel,
-              erPanelValgt,
-              harInngangsvilkarApentAksjonspunkt: harApentAksjonspunkt,
-              requestApi,
-            })}
-          </div>
-        </Column>
-        {rightPanels && (
-          <Column xs="6">
-            <div className={styles.panelRight}>
-              {rightPanels({
+      <FlexContainer>
+        <FlexRow>
+          <FlexColumn className={styles.col}>
+            <div className={styles.panelLeft}>
+              {leftPanels({
                 registrerInngangsvilkarPanel,
                 erPanelValgt,
                 harInngangsvilkarApentAksjonspunkt: harApentAksjonspunkt,
                 requestApi,
               })}
             </div>
-          </Column>
-        )}
-      </Row>
+          </FlexColumn>
+          {rightPanels && (
+            <FlexColumn className={styles.col}>
+              <div className={styles.panelRight}>
+                {rightPanels({
+                  registrerInngangsvilkarPanel,
+                  erPanelValgt,
+                  harInngangsvilkarApentAksjonspunkt: harApentAksjonspunkt,
+                  requestApi,
+                })}
+              </div>
+            </FlexColumn>
+          )}
+        </FlexRow>
+      </FlexContainer>
     </ProsessPanelWrapper>
   );
 };

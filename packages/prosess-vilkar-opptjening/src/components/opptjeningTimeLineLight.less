@@ -1,4 +1,3 @@
-@import '@{coreModulePath}nav-frontend-core/less/_variabler';
 @import '@{coreModulePath}@fpsak-frontend/assets/styles/global.less';
 
 /* TODO (TOR) Fjern import av global.less etter refaktorering av timeline. Hack for å tving korrekt rekkefølge etter splitt av css */
@@ -10,7 +9,7 @@
 /* our custom classes overrule the styles for selected events,
    so lets define a new style for the selected events */
 .vis-item.vis-selected {
-  background-color: @white;
+  background-color: var(--navds-global-color-white);
   border-color: black;
   box-shadow: 0 0 10px gray;
   color: black;

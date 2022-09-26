@@ -1,7 +1,6 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { BodyShort, Heading } from '@navikt/ds-react';
-import { Column, Row } from 'nav-frontend-grid';
 
 import { CheckboxField } from '@navikt/ft-form-hooks';
 import {
@@ -83,41 +82,37 @@ const DocumentListInnsyn: FunctionComponent<OwnProps> = ({
   return (
     <>
       <Heading size="small" className={styles.noDocuments}><FormattedMessage id="DocumentListInnsyn.VelgInnsynsDok" /></Heading>
-      <Row>
-        <Column xs={readOnly ? '6' : '10'}>
-          <Table headerTextCodes={headerTextCodes}>
-            {documents.map((document) => {
-              const img = getDirectionImage(document, intl);
-              const dokId = parseInt(document.dokumentId, 10);
-              return (
-                <TableRow key={dokId} id={dokId}>
-                  <TableColumn className={styles.checkboxCol}>
-                    <CheckboxField label={noLabelHack()} name={`dokument_${dokId}`} disabled={readOnly} />
-                  </TableColumn>
-                  <TableColumn hidden={readOnly}>
-                    {img}
-                  </TableColumn>
-                  <TableColumn className={styles.linkCol}>
-                    <a
-                      href={hentDokumentLenke(saksNr, document.journalpostId, document.dokumentId)}
-                      className="lenke lenke--frittstaende"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {document.tittel}
-                    </a>
-                  </TableColumn>
-                  <TableColumn hidden={readOnly}>
-                    {document.tidspunkt
-                      ? <DateTimeLabel dateTimeString={document.tidspunkt} />
-                      : <BodyShort size="small"><FormattedMessage id="DocumentListInnsyn.IProduksjon" /></BodyShort>}
-                  </TableColumn>
-                </TableRow>
-              );
-            })}
-          </Table>
-        </Column>
-      </Row>
+      <Table headerTextCodes={headerTextCodes}>
+        {documents.map((document) => {
+          const img = getDirectionImage(document, intl);
+          const dokId = parseInt(document.dokumentId, 10);
+          return (
+            <TableRow key={dokId} id={dokId}>
+              <TableColumn className={styles.checkboxCol}>
+                <CheckboxField label={noLabelHack()} name={`dokument_${dokId}`} disabled={readOnly} />
+              </TableColumn>
+              <TableColumn hidden={readOnly}>
+                {img}
+              </TableColumn>
+              <TableColumn className={styles.linkCol}>
+                <a
+                  href={hentDokumentLenke(saksNr, document.journalpostId, document.dokumentId)}
+                  className="lenke lenke--frittstaende"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {document.tittel}
+                </a>
+              </TableColumn>
+              <TableColumn hidden={readOnly}>
+                {document.tidspunkt
+                  ? <DateTimeLabel dateTimeString={document.tidspunkt} />
+                  : <BodyShort size="small"><FormattedMessage id="DocumentListInnsyn.IProduksjon" /></BodyShort>}
+              </TableColumn>
+            </TableRow>
+          );
+        })}
+      </Table>
     </>
   );
 };

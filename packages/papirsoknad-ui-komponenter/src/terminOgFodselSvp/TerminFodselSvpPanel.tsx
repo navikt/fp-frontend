@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import { Column, Row } from 'nav-frontend-grid';
 import { createIntl } from '@navikt/ft-utils';
 import { Heading } from '@navikt/ds-react';
-import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import {
+  BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import { Datepicker } from '@navikt/ft-form-hooks';
 import {
   dateBeforeOrEqualToToday,
@@ -36,24 +37,26 @@ const TerminFodselSvpPanel: FunctionComponent<OwnProps> = ({
       {intl.formatMessage({ id: 'TerminFodselSvpPanel.TerminOgFodsel' })}
     </Heading>
     <VerticalSpacer sixteenPx />
-    <Row>
-      <Column xs="3">
-        <Datepicker
-          name="termindato"
-          label={intl.formatMessage({ id: 'TerminFodselSvpPanel.Termindato' })}
-          isReadOnly={readOnly}
-          validate={[required, hasValidDate]}
-        />
-      </Column>
-      <Column xs="3">
-        <Datepicker
-          name="foedselsDato"
-          label={intl.formatMessage({ id: 'TerminFodselSvpPanel.Fodselsdato' })}
-          isReadOnly={readOnly}
-          validate={[hasValidDate, dateBeforeOrEqualToToday]}
-        />
-      </Column>
-    </Row>
+    <FlexContainer>
+      <FlexRow>
+        <FlexColumn>
+          <Datepicker
+            name="termindato"
+            label={intl.formatMessage({ id: 'TerminFodselSvpPanel.Termindato' })}
+            isReadOnly={readOnly}
+            validate={[required, hasValidDate]}
+          />
+        </FlexColumn>
+        <FlexColumn>
+          <Datepicker
+            name="foedselsDato"
+            label={intl.formatMessage({ id: 'TerminFodselSvpPanel.Fodselsdato' })}
+            isReadOnly={readOnly}
+            validate={[hasValidDate, dateBeforeOrEqualToToday]}
+          />
+        </FlexColumn>
+      </FlexRow>
+    </FlexContainer>
   </BorderBox>
 );
 

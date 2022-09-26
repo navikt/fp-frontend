@@ -113,10 +113,6 @@ describe('<UttakActivity>', () => {
       reduxFormChange={() => undefined}
     />);
 
-    const row = wrapper.find('Row');
-    expect(row).toHaveLength(2);
-    const column = wrapper.find('Column');
-    expect(column).toHaveLength(1);
     const formattedMessage = wrapper.find(FormattedMessage);
     expect(formattedMessage).toHaveLength(2);
   });

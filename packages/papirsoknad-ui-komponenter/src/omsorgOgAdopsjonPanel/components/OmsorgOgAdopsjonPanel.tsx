@@ -1,8 +1,9 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Column, Container, Row } from 'nav-frontend-grid';
 import { Heading } from '@navikt/ds-react';
-import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import {
+  BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import {
   dateBeforeOrEqualToToday, hasValidDate, hasValidInteger, isDatesEqual, maxValue, minValue, required,
 } from '@navikt/ft-form-validators';
@@ -92,11 +93,11 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
         <FormattedMessage id={familieHendelseType === fht.ADOPSJON ? 'Registrering.Adopsjon.Title' : 'Registrering.Adopsjon.OmsorgTitle'} />
       </Heading>
       <VerticalSpacer sixteenPx />
-      <Container fluid className={styles.formContainer}>
+      <FlexContainer>
         {isForeldrepengerFagsak && familieHendelseType === fht.ADOPSJON && (
           <>
-            <Row>
-              <Column xs="6">
+            <FlexRow>
+              <FlexColumn className={styles.col}>
                 <RadioGroupPanel
                   name={`${OMSORG_NAME_PREFIX}.erEktefellesBarn`}
                   label={<FormattedMessage id="Registrering.Adopsjon.GjelderEktefellesBarn" />}
@@ -112,13 +113,13 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
                     value: 'false',
                   }]}
                 />
-              </Column>
-            </Row>
+              </FlexColumn>
+            </FlexRow>
             <VerticalSpacer sixteenPx />
           </>
         )}
-        <Row>
-          <Column xs="6" className={styles.inputMinimumWidth}>
+        <FlexRow>
+          <FlexColumn>
             <Datepicker
               name={`${OMSORG_NAME_PREFIX}.omsorgsovertakelsesdato`}
               label={formatMessage({
@@ -128,21 +129,21 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
               isReadOnly={readOnly}
               validate={familieHendelseType === fht.ADOPSJON ? [required, hasValidDate] : [hasValidDate]}
             />
-          </Column>
-        </Row>
+          </FlexColumn>
+        </FlexRow>
         <VerticalSpacer sixteenPx />
-        <Row>
+        <FlexRow>
           {familieHendelseType === fht.ADOPSJON && (
-            <Column xs="3" className={styles.inputMinimumWidth}>
+            <FlexColumn>
               <Datepicker
                 name={`${OMSORG_NAME_PREFIX}.ankomstdato`}
                 label={formatMessage({ id: 'Registrering.Adopsjon.Ankomstdato' })}
                 isReadOnly={readOnly}
                 validate={[hasValidDate]}
               />
-            </Column>
+            </FlexColumn>
           )}
-          <Column xs="6">
+          <FlexColumn className={styles.col}>
             <InputField
               name={`${OMSORG_NAME_PREFIX}.antallBarn`}
               label={formatMessage({ id: 'Registrering.Adopsjon.AntallBarn' })}
@@ -156,10 +157,10 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
                 ? [required, hasValidInteger, minAntall, maxAntall]
                 : [hasValidInteger, (value) => (value ? minAntall(value) : undefined), (value) => (value ? maxAntall(value) : undefined)]}
             />
-          </Column>
-        </Row>
-        <Row>
-          <Column xs="6">
+          </FlexColumn>
+        </FlexRow>
+        <FlexRow>
+          <FlexColumn className={styles.col}>
             {fields.map((field, index) => (
               <React.Fragment key={field.id}>
                 <VerticalSpacer sixteenPx />
@@ -173,9 +174,9 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
                 />
               </React.Fragment>
             ))}
-          </Column>
-        </Row>
-      </Container>
+          </FlexColumn>
+        </FlexRow>
+      </FlexContainer>
     </BorderBox>
   );
 };

@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { BodyShort, Detail } from '@navikt/ds-react';
-import { Column, Row } from 'nav-frontend-grid';
 
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { Dokument } from '@fpsak-frontend/types';
@@ -37,29 +36,25 @@ const DocumentListVedtakInnsyn: FunctionComponent<OwnProps> = ({
   return (
     <>
       <Detail size="small" className={styles.noDocuments}><FormattedMessage id="DocumentListVedtakInnsyn.InnsynsDok" /></Detail>
-      <Row>
-        <Column xs="6">
-          <Table noHover headerTextCodes={headerTextCodes}>
-            {documents.map((document) => {
-              const dokId = parseInt(document.dokumentId, 10);
-              return (
-                <TableRow key={dokId} id={dokId}>
-                  <TableColumn className={styles.linkCol}>
-                    <a
-                      href={hentDokumentLenke(saksNr, document.journalpostId, document.dokumentId)}
-                      className="lenke lenke--frittstaende"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {document.tittel}
-                    </a>
-                  </TableColumn>
-                </TableRow>
-              );
-            })}
-          </Table>
-        </Column>
-      </Row>
+      <Table noHover headerTextCodes={headerTextCodes}>
+        {documents.map((document) => {
+          const dokId = parseInt(document.dokumentId, 10);
+          return (
+            <TableRow key={dokId} id={dokId}>
+              <TableColumn className={styles.linkCol}>
+                <a
+                  href={hentDokumentLenke(saksNr, document.journalpostId, document.dokumentId)}
+                  className="lenke lenke--frittstaende"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {document.tittel}
+                </a>
+              </TableColumn>
+            </TableRow>
+          );
+        })}
+      </Table>
     </>
   );
 };

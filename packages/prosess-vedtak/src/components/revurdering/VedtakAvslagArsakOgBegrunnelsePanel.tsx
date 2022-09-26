@@ -1,6 +1,5 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import { Label, BodyShort, Detail } from '@navikt/ds-react';
 
 import {
@@ -79,22 +78,20 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
       )}
       {!skalBrukeOverstyrendeFritekstBrev
           && behandlingStatusKode === behandlingStatus.BEHANDLING_UTREDES && hasIkkeOppfyltSoknadsfristvilkar(vilkar) && (
-          <Row>
+          <>
             <VerticalSpacer sixteenPx />
-            <Column xs="7">
-              <TextAreaField
-                name="begrunnelse"
-                label={<FormattedMessage id="VedtakForm.Fritekst" />}
-                validate={[requiredIfCustomFunctionIsTrueNew(isRequiredFn), minLength3, maxLength1500, hasValidText]}
-                maxLength={1500}
-                readOnly={erReadOnly}
-                badges={[{
-                  type: 'info',
-                  titleText: getLanguageFromSprakkode(språkKode),
-                }]}
-              />
-            </Column>
-          </Row>
+            <TextAreaField
+              name="begrunnelse"
+              label={<FormattedMessage id="VedtakForm.Fritekst" />}
+              validate={[requiredIfCustomFunctionIsTrueNew(isRequiredFn), minLength3, maxLength1500, hasValidText]}
+              maxLength={1500}
+              readOnly={erReadOnly}
+              badges={[{
+                type: 'info',
+                titleText: getLanguageFromSprakkode(språkKode),
+              }]}
+            />
+          </>
       )}
       {erReadOnly && behandlingsresultat.avslagsarsakFritekst && (
         <span>

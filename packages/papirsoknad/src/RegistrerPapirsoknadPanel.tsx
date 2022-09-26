@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
-import { Container } from 'nav-frontend-grid';
 import { Heading, Panel } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 import { AlleKodeverk, Fagsak } from '@navikt/ft-types';
@@ -58,52 +57,50 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
   return (
     <RawIntlProvider value={intl}>
       <Panel className={styles.panel}>
-        <Container fluid>
-          <Heading size="small"><FormattedMessage id="Registrering.RegistrereSoknad" /></Heading>
-          <VerticalSpacer sixteenPx />
-          {!readOnly && (
-            <AksjonspunktHelpTextHTML>
-              <FormattedMessage key="regOpplysninger" id="Registrering.RegistrerAlleOpplysninger" />
-            </AksjonspunktHelpTextHTML>
-          )}
-          <VerticalSpacer sixteenPx />
-          <VerticalSpacer sixteenPx />
-          <SoknadTypePickerForm
-            setSoknadData={setSoknadData}
-            fagsakYtelseType={fagsak.fagsakYtelseType}
+        <Heading size="small"><FormattedMessage id="Registrering.RegistrereSoknad" /></Heading>
+        <VerticalSpacer sixteenPx />
+        {!readOnly && (
+          <AksjonspunktHelpTextHTML>
+            <FormattedMessage key="regOpplysninger" id="Registrering.RegistrerAlleOpplysninger" />
+          </AksjonspunktHelpTextHTML>
+        )}
+        <VerticalSpacer sixteenPx />
+        <VerticalSpacer sixteenPx />
+        <SoknadTypePickerForm
+          setSoknadData={setSoknadData}
+          fagsakYtelseType={fagsak.fagsakYtelseType}
+          alleKodeverk={kodeverk}
+        />
+        {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.ENGANGSSTONAD && (
+          <EngangsstonadPapirsoknadIndex
+            onSubmitUfullstendigsoknad={lagreOgAvslutt}
+            onSubmit={lagre}
+            readOnly={readOnly}
+            soknadData={soknadData}
+            alleKodeverk={kodeverk}
+            fagsakPersonnummer={fagsakPersonnummer}
+          />
+        )}
+        {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.FORELDREPENGER && (
+          <ForeldrepengerPapirsoknadIndex
+            onSubmitUfullstendigsoknad={lagreOgAvslutt}
+            onSubmit={lagre}
+            readOnly={readOnly}
+            soknadData={soknadData}
+            alleKodeverk={kodeverk}
+            fagsakPersonnummer={fagsakPersonnummer}
+            erEndringssøknad={erEndringssøknad}
+          />
+        )}
+        {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.SVANGERSKAPSPENGER && (
+          <SvangerskapspengerPapirsoknadIndex
+            onSubmitUfullstendigsoknad={lagreOgAvslutt}
+            onSubmit={lagre}
+            readOnly={readOnly}
+            soknadData={soknadData}
             alleKodeverk={kodeverk}
           />
-          {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.ENGANGSSTONAD && (
-            <EngangsstonadPapirsoknadIndex
-              onSubmitUfullstendigsoknad={lagreOgAvslutt}
-              onSubmit={lagre}
-              readOnly={readOnly}
-              soknadData={soknadData}
-              alleKodeverk={kodeverk}
-              fagsakPersonnummer={fagsakPersonnummer}
-            />
-          )}
-          {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.FORELDREPENGER && (
-            <ForeldrepengerPapirsoknadIndex
-              onSubmitUfullstendigsoknad={lagreOgAvslutt}
-              onSubmit={lagre}
-              readOnly={readOnly}
-              soknadData={soknadData}
-              alleKodeverk={kodeverk}
-              fagsakPersonnummer={fagsakPersonnummer}
-              erEndringssøknad={erEndringssøknad}
-            />
-          )}
-          {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.SVANGERSKAPSPENGER && (
-            <SvangerskapspengerPapirsoknadIndex
-              onSubmitUfullstendigsoknad={lagreOgAvslutt}
-              onSubmit={lagre}
-              readOnly={readOnly}
-              soknadData={soknadData}
-              alleKodeverk={kodeverk}
-            />
-          )}
-        </Container>
+        )}
       </Panel>
     </RawIntlProvider>
   );

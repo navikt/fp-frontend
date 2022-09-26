@@ -2,7 +2,6 @@ import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import moment from 'moment';
 import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import { BodyShort } from '@navikt/ds-react';
 
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
@@ -228,50 +227,42 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
             <VerticalSpacer twentyPx />
             <BodyShort size="small"><FormattedMessage id="SokersOpplysningspliktForm.ManglendeDokumentasjon" /></BodyShort>
             <VerticalSpacer eightPx />
-            <Row>
-              <Column xs="11">
-                <Table noHover>
-                  {sorterteManglendeVedlegg.map((vedlegg) => (
-                    <TableRow key={vedlegg.dokumentType + (vedlegg.arbeidsgiverReferanse ? vedlegg.arbeidsgiverReferanse : '')}>
-                      <TableColumn>
-                        {dokumentTypeIds.find((dti) => dti.kode === vedlegg.dokumentType)?.navn}
-                      </TableColumn>
-                      <TableColumn>
-                        {vedlegg.dokumentType === dokumentTypeId.INNTEKTSMELDING
-                      && formatArbeidsgiver(arbeidsgiverOpplysningerPerId, vedlegg.arbeidsgiverReferanse)}
-                      </TableColumn>
-                    </TableRow>
-                  ))}
-                </Table>
-              </Column>
-            </Row>
+            <Table noHover>
+              {sorterteManglendeVedlegg.map((vedlegg) => (
+                <TableRow key={vedlegg.dokumentType + (vedlegg.arbeidsgiverReferanse ? vedlegg.arbeidsgiverReferanse : '')}>
+                  <TableColumn>
+                    {dokumentTypeIds.find((dti) => dti.kode === vedlegg.dokumentType)?.navn}
+                  </TableColumn>
+                  <TableColumn>
+                    {vedlegg.dokumentType === dokumentTypeId.INNTEKTSMELDING
+                  && formatArbeidsgiver(arbeidsgiverOpplysningerPerId, vedlegg.arbeidsgiverReferanse)}
+                  </TableColumn>
+                </TableRow>
+              ))}
+            </Table>
           </>
         )}
         <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />
         {!readOnly && (
           <>
             <VerticalSpacer sixteenPx />
-            <Row>
-              <Column xs="6">
-                <RadioGroupPanel
-                  name="erVilkarOk"
-                  validate={[required]}
-                  isHorizontal
-                  isTrueOrFalseSelection
-                  radios={[{
-                    value: 'true',
-                    label: <FormattedMessage
-                      id={findRadioButtonTextCode(true)}
-                    />,
-                    disabled: !hasSoknad,
-                  }, {
-                    value: 'false',
-                    label: getLabel(intl),
-                  },
-                  ]}
-                />
-              </Column>
-            </Row>
+            <RadioGroupPanel
+              name="erVilkarOk"
+              validate={[required]}
+              isHorizontal
+              isTrueOrFalseSelection
+              radios={[{
+                value: 'true',
+                label: <FormattedMessage
+                  id={findRadioButtonTextCode(true)}
+                />,
+                disabled: !hasSoknad,
+              }, {
+                value: 'false',
+                label: getLabel(intl),
+              },
+              ]}
+            />
           </>
         )}
         {readOnly && (

@@ -5,7 +5,6 @@ import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl'
 import {
   FieldArray, formValueSelector, InjectedFormProps, reduxForm,
 } from 'redux-form';
-import { Column, Row } from 'nav-frontend-grid';
 import { Detail, Alert, Button } from '@navikt/ds-react';
 
 import {
@@ -212,7 +211,7 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
   ...formProps
 }) => (
   <div>
-    <Row className={styles.uttakDataWrapper}>
+    <div className={styles.uttakDataWrapper}>
       <UttakInfo
         oppholdArsakTyper={oppholdArsakTyper}
         selectedItemData={selectedItemData}
@@ -224,21 +223,19 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
         alleKodeverk={alleKodeverk}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
-    </Row>
+    </div>
     {selectedItemData.oppholdÅrsak === oppholdArsakType.UDEFINERT
         && (
-          <Row className={readOnly ? null : styles.marginTop}>
-            <Column xs="12">
-              <FieldArray
-                name="UttakFieldArray"
-                component={RenderUttakTable}
-                periodeTyper={periodeTyper}
-                readOnly={readOnly}
-                arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-                reduxFormChange={reduxFormChange}
-              />
-            </Column>
-          </Row>
+          <div className={readOnly ? null : styles.marginTop}>
+            <FieldArray
+              name="UttakFieldArray"
+              component={RenderUttakTable}
+              periodeTyper={periodeTyper}
+              readOnly={readOnly}
+              arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+              reduxFormChange={reduxFormChange}
+            />
+          </div>
         )}
     <div className={styles.marginBottom20}>
       <TextAreaField

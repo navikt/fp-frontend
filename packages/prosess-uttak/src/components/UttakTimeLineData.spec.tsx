@@ -1,7 +1,6 @@
 import React from 'react';
 import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
-import { Column } from 'nav-frontend-grid';
 
 import { AksjonspunktHelpTextTemp } from '@navikt/ft-ui-komponenter';
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -144,7 +143,6 @@ describe('<UttakTimeLineData>', () => {
     expect(wrapper.find(UttakActivity)).toHaveLength(1);
     expect(wrapper.find(TimeLineButton)).toHaveLength(2);
     expect(wrapper.find(TimeLineDataContainer)).toHaveLength(1);
-    expect(wrapper.find(Column)).toHaveLength(3);
   });
 
   it('skal rendre UttakTimeLineData med modal og lukke modal', () => {

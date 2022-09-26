@@ -1,25 +1,23 @@
-@import '@{coreModulePath}nav-frontend-core/less/_variabler';
-
 .invisibleButton {
   background: none;
   border: 0;
-  color: @navBla;
+  color: var(--navds-global-color-blue-500);
   cursor: pointer;
   padding: 8px;
+}
 
-  &:focus {
-    background-color: @navOransjeLighten40;
-    border: 0;
-    color: @navBla;
-    padding-bottom: 4px;
-    text-decoration: none;
+.invisibleButton:focus {
+  background-color: var(--navds-global-color-orange-300);
+  border: 0;
+  color: var(--navds-global-color-blue-500);
+  padding-bottom: 4px;
+  text-decoration: none;
+}
 
-    &:hover {
-      color: @navBla;
-    }
-  }
+.invisibleButton:focus:hover {
+  color: var(--navds-global-color-blue-500);
+}
 
-  i {
-    margin-left: 10px;
-  }
+.invisibleButton i {
+  margin-left: 10px;
 }

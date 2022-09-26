@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import { Column, Row } from 'nav-frontend-grid';
 import { Button, BodyShort, Modal } from '@navikt/ds-react';
-import { Image } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, Image,
+} from '@navikt/ft-ui-komponenter';
 
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 
@@ -36,34 +37,34 @@ const FatterVedtakStatusModal: FunctionComponent<OwnProps> = ({
       shouldCloseOnOverlayClick={false}
     >
       <Modal.Content>
-        <Row className="">
-          <Column xs="1">
-            <Image
-              className={styles.image}
-              alt={tekst}
-              src={innvilgetImageUrl}
-            />
-            <div className={styles.divider} />
-          </Column>
-          <Column xs="9">
-            <BodyShort size="small">
-              {tekst}
-            </BodyShort>
-            <BodyShort size="small">{intl.formatMessage({ id: 'FatterVedtakStatusModal.GoToSearchPage' })}</BodyShort>
-          </Column>
-          <Column xs="2">
-            <Button
-              size="small"
-              variant="primary"
-              className={styles.button}
-              onClick={lukkModal}
-              autoFocus
-              type="button"
-            >
-              {intl.formatMessage({ id: 'FatterVedtakStatusModal.Ok' })}
-            </Button>
-          </Column>
-        </Row>
+        <FlexContainer>
+          <FlexRow>
+            <FlexColumn>
+              <Image
+                className={styles.image}
+                alt={tekst}
+                src={innvilgetImageUrl}
+              />
+            </FlexColumn>
+            <FlexColumn>
+              <BodyShort size="small">
+                {tekst}
+              </BodyShort>
+              <BodyShort size="small">{intl.formatMessage({ id: 'FatterVedtakStatusModal.GoToSearchPage' })}</BodyShort>
+            </FlexColumn>
+            <FlexColumn className={styles.button}>
+              <Button
+                size="small"
+                variant="primary"
+                onClick={lukkModal}
+                autoFocus
+                type="button"
+              >
+                {intl.formatMessage({ id: 'FatterVedtakStatusModal.Ok' })}
+              </Button>
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
       </Modal.Content>
     </Modal>
   );

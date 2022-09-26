@@ -76,7 +76,7 @@ ForFørstegangssøknad.args = {
     uuid: '23r2323',
     type: behandlingType.FORSTEGANGSSOKNAD,
   } as BehandlingAppKontekst,
-  henleggBehandling: action('button-click') as (params: HenleggParams) => Promise<any>,
+  henleggBehandling: () => Promise.resolve(),
   lukkModal: action('button-click'),
   forhandsvisHenleggBehandling: action('button-click'),
 };
