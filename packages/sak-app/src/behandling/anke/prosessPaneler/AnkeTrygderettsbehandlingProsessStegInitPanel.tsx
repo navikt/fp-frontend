@@ -1,9 +1,8 @@
 import React, {
-  FunctionComponent, useState,
+  FunctionComponent,
 } from 'react';
 import { useIntl } from 'react-intl';
 import { Aksjonspunkt } from '@navikt/ft-types';
-import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AnkeTrygderettsbehandlingProsessIndex from '@fpsak-frontend/prosess-anke-trygderettsbehandling';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
@@ -12,30 +11,7 @@ import { AnkeVurdering } from '@fpsak-frontend/types';
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
-import AnkeBehandlingModal from '../modaler/AnkeBehandlingModal';
 import { requestAnkeApi, AnkeBehandlingApiKeys } from '../data/ankeBehandlingApi';
-
-const getLagringSideeffekter = (
-  toggleAnkeModal: (skalToggle: boolean) => void,
-  toggleOppdatereFagsakContext: (skalOppdatereFagsak: boolean) => void,
-  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void,
-) => (aksjonspunktModels: { kode: string }[]) => {
-  const erManuellVurderingAvAnke = aksjonspunktModels
-    .some((apValue) => apValue.kode === aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER);
-
-  if (erManuellVurderingAvAnke) {
-    toggleOppdatereFagsakContext(false);
-  }
-
-  // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
-  return () => {
-    if (erManuellVurderingAvAnke) {
-      toggleAnkeModal(true);
-    } else {
-      oppdaterProsessStegOgFaktaPanelIUrl('default', 'default');
-    }
-  };
-};
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER,
@@ -53,9 +29,6 @@ type EndepunktPanelData = {
 }
 
 interface OwnProps {
-  opneSokeside: () => void;
-  toggleSkalOppdatereFagsakContext: (skalOppdatereFagsak: boolean) => void;
-  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   alleBehandlinger: {
     uuid: string;
     type: string;
@@ -64,19 +37,10 @@ interface OwnProps {
 }
 
 const AnkeTrygderettsbehandlingProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
-  opneSokeside,
-  toggleSkalOppdatereFagsakContext,
-  oppdaterProsessStegOgFaktaPanelIUrl,
   alleBehandlinger,
   ...props
 }) => {
   const intl = useIntl();
-
-  const [visModalAnkeBehandling, toggleAnkeModal] = useState(false);
-
-  const lagringSideeffekterCallback = getLagringSideeffekter(toggleAnkeModal, toggleSkalOppdatereFagsakContext,
-    oppdaterProsessStegOgFaktaPanelIUrl);
-
   return (
     <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
       {...props}
@@ -87,22 +51,11 @@ const AnkeTrygderettsbehandlingProsessStegInitPanel: FunctionComponent<OwnProps 
       prosessPanelKode={ProsessStegCode.ANKE_MERKNADER}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.AnkeMerknader' })}
       skalPanelVisesIMeny={() => true}
-      lagringSideEffekter={lagringSideeffekterCallback}
       renderPanel={(data) => (
-        <>
-          <AnkeBehandlingModal
-            visModal={visModalAnkeBehandling}
-            lukkModal={() => { toggleAnkeModal(false); opneSokeside(); }}
-            erFerdigbehandlet={false}
-            venterTrygderett={!!data?.aksjonspunkter
-              && data.aksjonspunkter.some((ap) => ap.definisjon === aksjonspunktCodes.AUTO_VENT_ANKE_MERKNADER_FRA_BRUKER
-              && ap.status === AksjonspunktStatus.OPPRETTET)}
-          />
-          <AnkeTrygderettsbehandlingProsessIndex
-            {...data}
-            behandlinger={alleBehandlinger}
-          />
-        </>
+        <AnkeTrygderettsbehandlingProsessIndex
+          {...data}
+          behandlinger={alleBehandlinger}
+        />
       )}
     />
   );

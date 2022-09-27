@@ -42,8 +42,8 @@ const VedtakDocuments: FunctionComponent<OwnProps> = ({
       {showDocuments && (
         <>
           <VerticalSpacer fourPx />
-          {vedtaksdokumenter.map((document) => (
-            <FlexContainer>
+          <FlexContainer>
+            {vedtaksdokumenter.map((document) => (
               <FlexRow key={document.behandlingUuid}>
                 <FlexColumn>
                   <DateLabel dateString={document.opprettetDato} />
@@ -54,8 +54,8 @@ const VedtakDocuments: FunctionComponent<OwnProps> = ({
                   </Link>
                 </FlexColumn>
               </FlexRow>
-            </FlexContainer>
-          ))}
+            ))}
+          </FlexContainer>
         </>
       )}
     </>

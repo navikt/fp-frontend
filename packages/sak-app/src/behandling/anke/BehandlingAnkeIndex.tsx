@@ -34,14 +34,13 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & StandardBehandlingProps>
   oppdaterProsessStegOgFaktaPanelIUrl,
   valgtProsessSteg,
   valgtFaktaSteg,
-  opneSokeside,
   alleBehandlinger,
   setRequestPendingMessage,
 }) => {
   useInitRequestApi(requestAnkeApi, setRequestPendingMessage);
 
   const {
-    behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling,
+    behandling, behandlingState, hentBehandling, setBehandling,
   } = useBehandling(
     requestAnkeApi, behandlingUuid, oppdaterBehandlingVersjon,
   );
@@ -89,9 +88,6 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & StandardBehandlingProps>
               />
               <AnkeTrygderettsbehandlingProsessStegInitPanel
                 {...props}
-                opneSokeside={opneSokeside}
-                toggleSkalOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
-                oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
                 alleBehandlinger={alleBehandlinger}
               />
             </>
