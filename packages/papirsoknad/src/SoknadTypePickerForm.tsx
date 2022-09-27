@@ -72,8 +72,8 @@ const SoknadTypePickerForm: FunctionComponent<OwnProps> = ({
         </Heading>
         <VerticalSpacer sixteenPx />
         <FlexContainer>
-          <FlexRow spaceBetween>
-            <FlexColumn>
+          <FlexRow>
+            <FlexColumn className={styles.colWidth}>
               <Detail size="small"><FormattedMessage id="Registrering.Omsoknaden.soknadstype" /></Detail>
               <VerticalSpacer fourPx />
               <RadioGroupPanel
@@ -86,7 +86,7 @@ const SoknadTypePickerForm: FunctionComponent<OwnProps> = ({
                 }))}
               />
             </FlexColumn>
-            <FlexColumn>
+            <FlexColumn className={styles.colWidth}>
               <Detail size="small"><FormattedMessage id="Registrering.Omsoknaden.Tema" /></Detail>
               <VerticalSpacer fourPx />
               <RadioGroupPanel
@@ -99,7 +99,7 @@ const SoknadTypePickerForm: FunctionComponent<OwnProps> = ({
                 }))}
               />
             </FlexColumn>
-            <FlexColumn>
+            <FlexColumn className={styles.colWidth}>
               <Detail size="small">
                 <FormattedMessage id="Registrering.Omsoknaden.Soker" />
               </Detail>
@@ -115,7 +115,8 @@ const SoknadTypePickerForm: FunctionComponent<OwnProps> = ({
             </FlexColumn>
           </FlexRow>
         </FlexContainer>
-        <div className={styles.right}>
+        <VerticalSpacer thirtyTwoPx />
+        <div className={styles.pushRight}>
           <Button
             size="small"
             variant="primary"
