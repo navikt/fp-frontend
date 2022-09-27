@@ -1,6 +1,8 @@
 import React, { useState, useEffect, FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import { FlexColumn, FlexRow, Image } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, Image,
+} from '@navikt/ft-ui-komponenter';
 import { formHooks, InputField } from '@navikt/ft-form-hooks';
 import { ErrorMessage } from '@hookform/error-message';
 import {
@@ -45,48 +47,43 @@ const TilretteleggingUtbetalingsgrad: FunctionComponent<OwnProps> = ({
 
   const erReadOnly = readOnly || !erOverstyrer || (erOverstyrer && !erIEditeringsmodus);
   return (
-    <>
-      <FlexColumn>
+    <FlexContainer>
+      <FlexRow>
+        <FlexColumn>
+          <InputField
+            className={styles.utbetalingsgradTekst}
+            name={`${fieldPrefix}.${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`}
+            label={intl.formatMessage({ id: 'TilretteleggingFieldArray.Utbetalingsgrad' })}
+            readOnly={erReadOnly}
+            validate={[required, minValue1, maxValue100, hasValidDecimal]}
+            normalizeOnBlur={(value: string) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
+          />
+        </FlexColumn>
+        {erOverstyrer && (
+          <FlexColumn>
+            <Image
+              onClick={() => { setEditeres(true); setOverstyrtUtbetalingsgrad(true); }}
+              onKeyDown={() => { setEditeres(true); setOverstyrtUtbetalingsgrad(true); }}
+              className={erIEditeringsmodus ? styles.buttonMargin : styles.enabletImage}
+              src={erIEditeringsmodus ? endreDisabletImage : endreImage}
+              tabIndex={0}
+              tooltip={intl.formatMessage({ id: 'TilretteleggingFieldArray.EndreUtbetalingsgrad' })}
+            />
+          </FlexColumn>
+        )}
+      </FlexRow>
+      {erReadOnly && (
         <FlexRow>
           <FlexColumn>
-            <InputField
-              className={styles.textField}
+            <ErrorMessage
+              errors={formState.errors}
               name={`${fieldPrefix}.${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`}
-              label={intl.formatMessage({ id: 'TilretteleggingFieldArray.Utbetalingsgrad' })}
-              readOnly={erReadOnly}
-              validate={[required, minValue1, maxValue100, hasValidDecimal]}
-              normalizeOnBlur={(value: string) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
+              render={({ message }) => <BodyShort size="small" className={styles.error}>{message}</BodyShort>}
             />
           </FlexColumn>
         </FlexRow>
-        {erReadOnly && (
-          <FlexRow>
-            <FlexColumn>
-              <ErrorMessage
-                errors={formState.errors}
-                name={`${fieldPrefix}.${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`}
-                render={({ message }) => <BodyShort size="small" className={styles.error}>{message}</BodyShort>}
-              />
-            </FlexColumn>
-          </FlexRow>
-        )}
-      </FlexColumn>
-      <FlexColumn className={erReadOnly ? styles.buttonMarginReadOnly : styles.buttonMargin}>
-        %
-      </FlexColumn>
-      {erOverstyrer && (
-        <FlexColumn>
-          <Image
-            onClick={() => { setEditeres(true); setOverstyrtUtbetalingsgrad(true); }}
-            onKeyDown={() => { setEditeres(true); setOverstyrtUtbetalingsgrad(true); }}
-            className={erIEditeringsmodus ? styles.buttonMargin : styles.enabletImage}
-            src={erIEditeringsmodus ? endreDisabletImage : endreImage}
-            tabIndex={0}
-            tooltip={intl.formatMessage({ id: 'TilretteleggingFieldArray.EndreUtbetalingsgrad' })}
-          />
-        </FlexColumn>
       )}
-    </>
+    </FlexContainer>
   );
 };
 

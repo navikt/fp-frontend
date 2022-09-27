@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import moment from 'moment';
-import { BodyShort, Heading } from '@navikt/ds-react';
+import { Label } from '@navikt/ds-react';
 import { Datepicker, CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
@@ -100,9 +100,9 @@ const TilretteleggingArbeidsforholdSection: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <BodyShort size="small" className={styles.arbeidsforholdTittel}>
+      <Label size="small" className={styles.arbeidsforholdTittel}>
         {tittel}
-      </BodyShort>
+      </Label>
       <VerticalSpacer sixteenPx />
       <CheckboxField
         readOnly={readOnly}
@@ -126,9 +126,9 @@ const TilretteleggingArbeidsforholdSection: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
           <FlexRow>
             <FlexColumn>
-              <Heading size="small">
+              <Label size="small">
                 <FormattedMessage id="TilretteleggingFieldArray.BehovForTilrettelegging" />
-              </Heading>
+              </Label>
             </FlexColumn>
           </FlexRow>
           <VerticalSpacer sixteenPx />
