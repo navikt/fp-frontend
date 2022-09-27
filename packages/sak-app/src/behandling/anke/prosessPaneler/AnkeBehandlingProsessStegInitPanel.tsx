@@ -6,7 +6,6 @@ import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/ft-types';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AnkeProsessIndex, { AnkeProsessBrevData } from '@fpsak-frontend/prosess-anke';
-import { AnkeVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { AnkeVurdering, ForhåndsvisMeldingParams } from '@fpsak-frontend/types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
@@ -28,18 +27,6 @@ const lagForhandsvisCallback = (
     fagsakYtelseType: fagsak.fagsakYtelseType,
   };
   return forhandsvisMelding(brevData).then((response) => forhandsvisDokument(response));
-};
-
-const saveAnkeText = (
-  lagreAnkeVurdering: (params?: any, keepData?: boolean) => Promise<any>,
-  behandling: Behandling,
-) => (aksjonspunktModel: AnkeVurderingResultatAp) => {
-  const data = {
-    behandlingUuid: behandling.uuid,
-    ...aksjonspunktModel,
-  };
-
-  return lagreAnkeVurdering(data);
 };
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE];
@@ -75,10 +62,6 @@ const AnkeBehandlingProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
   const previewCallback = useCallback(lagForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
     [standardPanelProps.behandling.versjon]);
 
-  const { startRequest: lagreAnkeVurdering } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING);
-  const saveAnke = useCallback(saveAnkeText(lagreAnkeVurdering, standardPanelProps.behandling),
-    [standardPanelProps.behandling.versjon]);
-
   return (
     <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
       {...props}
@@ -93,7 +76,6 @@ const AnkeBehandlingProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
         <AnkeProsessIndex
           behandlinger={alleBehandlinger}
           previewCallback={previewCallback}
-          saveAnke={saveAnke}
           {...data}
         />
       )}

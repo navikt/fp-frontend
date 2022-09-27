@@ -39,8 +39,8 @@ const Template: Story<{
   />
 );
 
-export const PanelForResultatVedStadfestYtelsesvedtak = Template.bind({});
-PanelForResultatVedStadfestYtelsesvedtak.args = {
+export const ResultatVedStadfestYtelsesvedtak = Template.bind({});
+ResultatVedStadfestYtelsesvedtak.args = {
   ankeVurdering: {
     ankeVurderingResultat: {
       ...ankeVurderingResultat,
@@ -50,8 +50,8 @@ PanelForResultatVedStadfestYtelsesvedtak.args = {
   previewCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
-export const PanelForResultatVedOppheveOgHjemsende = Template.bind({});
-PanelForResultatVedOppheveOgHjemsende.args = {
+export const ResultatVedOppheveOgHjemsende = Template.bind({});
+ResultatVedOppheveOgHjemsende.args = {
   ankeVurdering: {
     ankeVurderingResultat: {
       ...ankeVurderingResultat,
@@ -61,8 +61,8 @@ PanelForResultatVedOppheveOgHjemsende.args = {
   previewCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
-export const PanelForResultatVedOmgjør = Template.bind({});
-PanelForResultatVedOmgjør.args = {
+export const ResultatVedOmgjør = Template.bind({});
+ResultatVedOmgjør.args = {
   ankeVurdering: {
     ankeVurderingResultat: {
       ...ankeVurderingResultat,
@@ -74,8 +74,8 @@ PanelForResultatVedOmgjør.args = {
   previewCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
-export const PanelForResultatVedAvvis = Template.bind({});
-PanelForResultatVedAvvis.args = {
+export const ResultatVedAvvis = Template.bind({});
+ResultatVedAvvis.args = {
   ankeVurdering: {
     ankeVurderingResultat,
   } as AnkeVurdering,
