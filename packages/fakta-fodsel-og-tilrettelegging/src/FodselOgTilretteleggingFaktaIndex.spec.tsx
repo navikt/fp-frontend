@@ -105,12 +105,12 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
     const dato = utils.getAllByLabelText('Dato')[2];
     await userEvent.type(dato, '06.11.2020');
 
-    expect(screen.getByText('Utbetalingsgrad')).toBeInTheDocument();
+    expect(screen.getByText('Utbetalingsgrad (%)')).toBeInTheDocument();
 
     const stillingsprosent = utils.getByLabelText('Stillingsprosent');
     await userEvent.type(stillingsprosent, '40');
 
-    expect(screen.getAllByText('Utbetalingsgrad')).toHaveLength(2);
+    expect(screen.getAllByText('Utbetalingsgrad (%)')).toHaveLength(2);
     expect(screen.getByText('20.00')).toBeInTheDocument();
 
     const begrunnEndringene = utils.getByLabelText('Begrunn endringene');
@@ -184,7 +184,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
 
     await userEvent.click(screen.getAllByRole('img')[1]);
 
-    const utbetalingsgrad = utils.getByLabelText('Utbetalingsgrad');
+    const utbetalingsgrad = utils.getByLabelText('Utbetalingsgrad (%)');
     await userEvent.clear(utbetalingsgrad);
     await userEvent.type(utbetalingsgrad, '70');
 
