@@ -106,6 +106,13 @@ const arbeidsgiverOpplysningerPerId = {
     identifikator: '1111111',
     navn: 'STATOIL',
   },
+  342352362: {
+    referanse: '342352362',
+    identifikator: '342352362',
+    navn: 'Lagt til av saksbehandler',
+    fødselsdato: null,
+    erPrivatPerson: false,
+  },
 };
 
 export default {
