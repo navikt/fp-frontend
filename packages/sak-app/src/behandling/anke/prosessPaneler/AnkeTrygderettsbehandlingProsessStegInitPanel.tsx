@@ -28,16 +28,7 @@ type EndepunktPanelData = {
   ankeVurdering: AnkeVurdering;
 }
 
-interface OwnProps {
-  alleBehandlinger: {
-    uuid: string;
-    type: string;
-    avsluttet?: string;
-  }[];
-}
-
-const AnkeTrygderettsbehandlingProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
-  alleBehandlinger,
+const AnkeTrygderettsbehandlingProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps> = ({
   ...props
 }) => {
   const intl = useIntl();
@@ -54,7 +45,6 @@ const AnkeTrygderettsbehandlingProsessStegInitPanel: FunctionComponent<OwnProps 
       renderPanel={(data) => (
         <AnkeTrygderettsbehandlingProsessIndex
           {...data}
-          behandlinger={alleBehandlinger}
         />
       )}
     />

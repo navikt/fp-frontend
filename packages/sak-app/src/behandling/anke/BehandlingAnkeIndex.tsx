@@ -88,7 +88,6 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & StandardBehandlingProps>
               />
               <AnkeTrygderettsbehandlingProsessStegInitPanel
                 {...props}
-                alleBehandlinger={alleBehandlinger}
               />
             </>
           )}
