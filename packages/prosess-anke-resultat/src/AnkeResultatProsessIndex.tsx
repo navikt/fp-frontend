@@ -1,53 +1,28 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
-
-import { AnkeVurdering, StandardProsessPanelProps } from '@fpsak-frontend/types';
+import { AnkeVurdering } from '@fpsak-frontend/types';
 import { createIntl } from '@navikt/ft-utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
+import { AlleKodeverk } from '@navikt/ft-types';
 
 import BehandleResultatForm from './components/BehandleResultatForm';
-import { BrevData } from './components/PreviewAnkeLink';
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
 interface OwnProps {
   ankeVurdering: AnkeVurdering;
-  previewCallback: (data: BrevData) => Promise<any>;
+  alleKodeverk: AlleKodeverk;
 }
 
-const AnkeResultatProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
+const AnkeResultatProsessIndex: FunctionComponent<OwnProps> = ({
   ankeVurdering,
-  aksjonspunkter,
-  submitCallback,
-  isReadOnly,
-  readOnlySubmitButton,
-  previewCallback,
   alleKodeverk,
-  formData,
-  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <ReduxWrapper formName="AnkeResultatProsessIndex" formData={formData} setFormData={setFormData}>
-      <BehandleResultatForm
-        // @ts-ignore
-        ankeVurderingResultat={ankeVurdering.ankeVurderingResultat}
-        // @ts-ignore
-        aksjonspunkter={aksjonspunkter}
-        // @ts-ignore
-        submitCallback={submitCallback}
-        // @ts-ignore
-        readOnly={isReadOnly}
-        // @ts-ignore
-        readOnlySubmitButton={readOnlySubmitButton}
-        // @ts-ignore
-        previewCallback={previewCallback}
-        // @ts-ignore
-        alleKodeverk={alleKodeverk}
-        // @ts-ignore
-        kabalisert={ankeVurdering.behandletAvKabal}
-      />
-    </ReduxWrapper>
+    <BehandleResultatForm
+      ankeVurderingResultat={ankeVurdering.ankeVurderingResultat}
+      alleKodeverk={alleKodeverk}
+    />
   </RawIntlProvider>
 );
 

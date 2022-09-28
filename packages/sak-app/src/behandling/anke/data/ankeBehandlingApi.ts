@@ -6,15 +6,11 @@ import { behandlingFellesEndepunkter } from '../../felles/data/behandlingFellesA
 
 export const AnkeBehandlingApiKeys = {
   ANKE_VURDERING: new RestKey<AnkeVurdering, void>('ANKE_VURDERING'),
-  SAVE_ANKE_VURDERING: new RestKey<AnkeVurdering, void>('SAVE_ANKE_VURDERING'),
 };
 
 const endepunkter = new RestApiConfigBuilder()
   // behandlingsdata
   .withRel('anke-vurdering', AnkeBehandlingApiKeys.ANKE_VURDERING)
-
-  // operasjoner
-  .withRel('mellomlagre-anke', AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING)
 
   .build();
 
