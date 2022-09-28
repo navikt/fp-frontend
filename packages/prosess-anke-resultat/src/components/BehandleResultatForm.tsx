@@ -1,98 +1,90 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { createSelector } from 'reselect';
-import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { InjectedFormProps, reduxForm } from 'redux-form';
-import { Detail, Heading } from '@navikt/ds-react';
-import { Column, Row } from 'nav-frontend-grid';
-
+import { FormattedMessage } from 'react-intl';
+import { Detail, Heading, Label } from '@navikt/ds-react';
 import { getKodeverknavnFn } from '@navikt/ft-utils';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { ProsessStegSubmitButton, validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
+import { AlleKodeverk } from '@navikt/ft-types';
+import { KodeverkType } from '@navikt/ft-kodeverk';
+
 import ankeVurdering from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
-import { Aksjonspunkt, AlleKodeverk, AnkeVurdering } from '@fpsak-frontend/types';
-import { BekreftVedtakUtenTotrinnskontrollAp, ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-
-import PreviewAnkeLink, { BrevData } from './PreviewAnkeLink';
-
-const isVedtakUtenToTrinn = (apCode: string): boolean => apCode === AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL;
-const isMedUnderskriver = (apCode: string): boolean => apCode === AksjonspunktCode.FORESLA_VEDTAK;
-const isFatterVedtak = (apCode: string): boolean => apCode === AksjonspunktCode.FATTER_VEDTAK;
-const skalViseForhaandlenke = (avr?: string): boolean => avr === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE
-  || avr === ankeVurdering.ANKE_OMGJOER || avr === ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV;
+import { AnkeVurdering } from '@fpsak-frontend/types';
 
 interface OwnPropsResultat {
   ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];
 }
 
-export const ResultatEnkel: FunctionComponent<OwnPropsResultat> = ({
+const ResultatEnkel: FunctionComponent<OwnPropsResultat> = ({
   ankeVurderingResultat,
 }): ReactElement => (
-  <div>
+  <>
     <Detail size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Stadfest" /></Detail>
     <VerticalSpacer sixteenPx />
-    <Detail size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Detail>
+    <Label size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Label>
     <Detail size="small">{ankeVurderingResultat.begrunnelse}</Detail>
-  </div>
+  </>
 );
 
-export const ResultatOpphev: FunctionComponent<OwnPropsResultat> = ({
+const ResultatOpphev: FunctionComponent<OwnPropsResultat> = ({
   ankeVurderingResultat,
 }): ReactElement => (
-  <div>
+  <>
     <Detail size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Oppheves" /></Detail>
     <VerticalSpacer sixteenPx />
-    <Detail size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Detail>
+    <Label size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Label>
     <Detail size="small">{ankeVurderingResultat.begrunnelse}</Detail>
-  </div>
+  </>
 );
 
-export const ResultatHjemsend: FunctionComponent<OwnPropsResultat> = ({
+const ResultatHjemsend: FunctionComponent<OwnPropsResultat> = ({
   ankeVurderingResultat,
 }): ReactElement => (
-  <div>
+  <>
     <Detail size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Hjemsendes" /></Detail>
     <VerticalSpacer sixteenPx />
-    <Detail size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Detail>
+    <Label size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Label>
     <Detail size="small">{ankeVurderingResultat.begrunnelse}</Detail>
-  </div>
+  </>
 );
 
-export const ResultatAvvise: FunctionComponent<OwnPropsResultat> = ({
+const ResultatAvvise: FunctionComponent<OwnPropsResultat> = ({
   ankeVurderingResultat,
 }): ReactElement => (
   <>
     <Detail size="small">
-      {ankeVurderingResultat.påAnketKlageBehandlingUuid != null
-      && (<FormattedMessage id="Ankebehandling.Resultat.Innstilling.Avvises" />)}
-      {ankeVurderingResultat.påAnketKlageBehandlingUuid == null
-      && (<FormattedMessage id="Ankebehandling.Resultat.Innstilling.AvvisesUten" />)}
+      {ankeVurderingResultat.påAnketKlageBehandlingUuid != null && (
+        <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Avvises" />
+      )}
+      {ankeVurderingResultat.påAnketKlageBehandlingUuid == null && (
+        <FormattedMessage id="Ankebehandling.Resultat.Innstilling.AvvisesUten" />
+      )}
     </Detail>
     <VerticalSpacer sixteenPx />
-    <Detail size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Arsak" /></Detail>
+    <Label size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Arsak" /></Label>
     <ul>
-      {ankeVurderingResultat.erAnkerIkkePart
-      && (<li><FormattedMessage id="Ankebehandling.Avvisning.IkkePart" /></li>)}
-      {ankeVurderingResultat.erIkkeKonkret
-      && (<li><FormattedMessage id="Ankebehandling.Avvisning.IkkeKonkret" /></li>)}
-      {ankeVurderingResultat.erFristIkkeOverholdt
-      && (<li><FormattedMessage id="Ankebehandling.Avvisning.IkkeFrist" /></li>)}
-      {ankeVurderingResultat.erIkkeSignert
-      && (<li><FormattedMessage id="Ankebehandling.Avvisning.IkkeSignert" /></li>)}
+      {ankeVurderingResultat.erAnkerIkkePart && (
+      <li><Detail size="small"><FormattedMessage id="Ankebehandling.Avvisning.IkkePart" /></Detail></li>
+      )}
+      {ankeVurderingResultat.erIkkeKonkret && (
+      <li><Detail size="small"><FormattedMessage id="Ankebehandling.Avvisning.IkkeKonkret" /></Detail></li>
+      )}
+      {ankeVurderingResultat.erFristIkkeOverholdt && (
+      <li><Detail size="small"><FormattedMessage id="Ankebehandling.Avvisning.IkkeFrist" /></Detail></li>
+      )}
+      {ankeVurderingResultat.erIkkeSignert && (
+      <li><Detail size="small"><FormattedMessage id="Ankebehandling.Avvisning.IkkeSignert" /></Detail></li>
+      )}
     </ul>
-    <Detail size="small">
+    <Label size="small">
       <FormattedMessage id="Ankebehandling.Realitetsbehandles" />
-      <span> </span>
+    </Label>
+    <Detail size="small">
       <FormattedMessage id={ankeVurderingResultat.erSubsidiartRealitetsbehandles
         ? 'Ankebehandling.Realitetsbehandles.Ja' : 'Ankebehandling.Realitetsbehandles.Nei'}
       />
     </Detail>
     <VerticalSpacer sixteenPx />
-    <Detail size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Detail>
+    <Label size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Label>
     <Detail size="small">{ankeVurderingResultat.begrunnelse}</Detail>
   </>
 );
@@ -106,7 +98,7 @@ const hentSprakKode = (ankeOmgjoerArsak: string): string => {
   }
 };
 
-export const ResultatOmgjores: FunctionComponent<OwnPropsResultat & { alleKodeverk: AlleKodeverk; }> = ({
+const ResultatOmgjores: FunctionComponent<OwnPropsResultat & { alleKodeverk: AlleKodeverk; }> = ({
   ankeVurderingResultat,
   alleKodeverk,
 }): ReactElement => (
@@ -120,12 +112,12 @@ export const ResultatOmgjores: FunctionComponent<OwnPropsResultat & { alleKodeve
         <VerticalSpacer sixteenPx />
       </>
     )}
-    <Detail size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Detail>
+    <Label size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" /></Label>
     <Detail size="small">{ankeVurderingResultat.begrunnelse}</Detail>
   </>
 );
 
-export const AnkeResultat: FunctionComponent<OwnPropsResultat & { alleKodeverk: AlleKodeverk; }> = ({
+const AnkeResultat: FunctionComponent<OwnPropsResultat & { alleKodeverk: AlleKodeverk; }> = ({
   ankeVurderingResultat,
   alleKodeverk,
 }): ReactElement | null => {
@@ -142,122 +134,25 @@ export const AnkeResultat: FunctionComponent<OwnPropsResultat & { alleKodeverk: 
   }
 };
 
-type FormValues = {
-  begrunnelse?: string;
-}
-
-interface PureOwnProps {
-  aksjonspunkter: Aksjonspunkt[];
-  readOnly: boolean;
-  submitCallback: (data: ForeslaVedtakAp | ForeslaVedtakManueltAp | BekreftVedtakUtenTotrinnskontrollAp) => Promise<void>;
+interface OwnProps {
   ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];
-  previewCallback: (data: BrevData) => Promise<any>;
-  readOnlySubmitButton?: boolean;
   alleKodeverk: AlleKodeverk;
-  kabalisert: boolean;
 }
 
-interface MappedOwnProps {
-  aksjonspunktCode: string;
-  ankeVurderingVerdi?: string;
-  fritekstTilBrev?: string;
-  initialValues: FormValues;
-  onSubmit: (formValues: FormValues) => any;
-}
-
-export const AnkeResultatForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
-  intl,
-  handleSubmit,
-  previewCallback,
-  aksjonspunktCode,
-  ankeVurderingVerdi,
-  fritekstTilBrev,
+const BehandleResultatForm: FunctionComponent<OwnProps> = ({
   ankeVurderingResultat,
-  readOnly = true,
   alleKodeverk,
-  kabalisert,
-  ...formProps
 }) => (
-  <form onSubmit={handleSubmit}>
-    <Heading size="small"><FormattedMessage id="Ankebehandling.Resultat.Title" /></Heading>
+  <>
+    <Heading size="small">
+      <FormattedMessage id="Ankebehandling.Resultat.Title" />
+    </Heading>
     <VerticalSpacer fourPx />
-    <Row>
-      <Column xs="12">
-        <Detail size="small"><FormattedMessage id="Ankebehandling.Resultat.Innstilling" /></Detail>
-        <AnkeResultat ankeVurderingResultat={ankeVurderingResultat} alleKodeverk={alleKodeverk} />
-      </Column>
-    </Row>
-    <VerticalSpacer sixteenPx />
-    <Row>
-      <Column xs="12">
-        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
-        <ProsessStegSubmitButton
-          formName={formProps.form}
-          isReadOnly={readOnly}
-          isSubmittable={!readOnly && isMedUnderskriver(aksjonspunktCode) && !isFatterVedtak(aksjonspunktCode)}
-          text={intl.formatMessage({ id: 'Ankebehandling.Resultat.SendTilMedunderskriver' })}
-        />
-        <span>&nbsp;</span>
-        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
-        <ProsessStegSubmitButton
-          formName={formProps.form}
-          isReadOnly={readOnly}
-          isSubmittable={!readOnly && isVedtakUtenToTrinn(aksjonspunktCode) && !isFatterVedtak(aksjonspunktCode)}
-          text={skalViseForhaandlenke(ankeVurderingVerdi)
-            ? intl.formatMessage({ id: 'Ankebehandling.Resultat.FerdigstillAnke' })
-            : intl.formatMessage({ id: 'Ankebehandling.Resultat.VentMerknader' })}
-        />
-        <span>&nbsp;</span>
-        {skalViseForhaandlenke(ankeVurderingVerdi) && !kabalisert
-          && (
-          <PreviewAnkeLink
-            previewCallback={previewCallback}
-            fritekstTilBrev={fritekstTilBrev}
-            ankeVurdering={ankeVurderingVerdi}
-          />
-          )}
-      </Column>
-    </Row>
-  </form>
+    <Label size="small">
+      <FormattedMessage id="Ankebehandling.Resultat.Innstilling" />
+    </Label>
+    <AnkeResultat ankeVurderingResultat={ankeVurderingResultat} alleKodeverk={alleKodeverk} />
+  </>
 );
-
-const transformValues = (values: FormValues, aksjonspunktCode: string): ForeslaVedtakAp | ForeslaVedtakManueltAp | BekreftVedtakUtenTotrinnskontrollAp => ({
-  begrunnelse: values.begrunnelse,
-  kode: validerApKodeOgHentApEnum(aksjonspunktCode, AksjonspunktCode.FORESLA_VEDTAK,
-    AksjonspunktCode.FORESLA_VEDTAK_MANUELT,
-    AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL),
-});
-
-const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.ankeVurderingResultat], (resultat): FormValues => ({
-  begrunnelse: resultat ? resultat.begrunnelse : null,
-}));
-
-const formName = 'ankeResultatForm';
-
-const finnAksjonspunktKode = createSelector([
-  (ownProps: PureOwnProps) => ownProps.aksjonspunkter, (ownProps: PureOwnProps) => ownProps.readOnly],
-(aksjonspunkter, readOnly): string => {
-  const vedtaksaksjonspunkt = aksjonspunkter
-    .filter((ap: Aksjonspunkt) => readOnly || ap.status === aksjonspunktStatus.OPPRETTET)
-    .filter((ap: Aksjonspunkt) => isVedtakUtenToTrinn(ap.definisjon) || isMedUnderskriver(ap.definisjon) || isFatterVedtak(ap.definisjon));
-  return !vedtaksaksjonspunkt || vedtaksaksjonspunkt.length === 0 ? AksjonspunktCode.FATTER_VEDTAK : vedtaksaksjonspunkt[0].definisjon;
-});
-
-const lagSubmitFn = createSelector([
-  (ownProps: PureOwnProps) => ownProps.submitCallback, finnAksjonspunktKode],
-(submitCallback, aksjonspunktCode) => (values: FormValues) => submitCallback(transformValues(values, aksjonspunktCode)));
-
-const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
-  aksjonspunktCode: finnAksjonspunktKode(ownProps),
-  initialValues: buildInitialValues(ownProps),
-  ankeVurderingVerdi: ownProps.ankeVurderingResultat ? ownProps.ankeVurderingResultat.ankeVurdering : null,
-  fritekstTilBrev: ownProps.ankeVurderingResultat ? ownProps.ankeVurderingResultat.fritekstTilBrev : null,
-  onSubmit: lagSubmitFn(ownProps),
-});
-
-const BehandleResultatForm = connect(mapStateToProps)(reduxForm({
-  form: formName,
-  destroyOnUnmount: false,
-})(injectIntl(AnkeResultatForm)));
 
 export default BehandleResultatForm;

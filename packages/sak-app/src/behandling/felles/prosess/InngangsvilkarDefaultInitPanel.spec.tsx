@@ -33,7 +33,7 @@ const defaultProps = {
   isReadOnly: false,
   readOnlySubmitButton: false,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
+    definisjon: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
     erAktivt: true,
     kanLoses: true,
   }] as Aksjonspunkt[],

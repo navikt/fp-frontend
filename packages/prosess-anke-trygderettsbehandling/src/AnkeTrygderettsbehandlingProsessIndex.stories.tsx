@@ -1,54 +1,105 @@
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import ankeVurdering from '@fpsak-frontend/kodeverk/src/ankeVurdering';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Aksjonspunkt, AnkeVurdering, Behandling } from '@fpsak-frontend/types';
+import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
+import ankeVurderingKodeverk from '@fpsak-frontend/kodeverk/src/ankeVurdering';
+import { AnkeVurdering } from '@fpsak-frontend/types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import ankeOmgjorArsak from '@fpsak-frontend/kodeverk/src/ankeOmgjorArsak';
 
 import AnkeTrygderettsbehandlingProsessIndex from './AnkeTrygderettsbehandlingProsessIndex';
-
-const behandling = {
-  uuid: '1',
-  versjon: 1,
-} as Behandling;
-
-const aksjonspunkter = [{
-  definisjon: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER,
-  status: aksjonspunktStatus.OPPRETTET,
-  begrunnelse: undefined,
-}] as Aksjonspunkt[];
-
-const standardProsessProps = {
-  behandling,
-  alleKodeverk: alleKodeverk as any,
-  aksjonspunkter,
-  submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: false,
-  isAksjonspunktOpen: true,
-  readOnlySubmitButton: false,
-  status: '',
-  vilkar: [],
-  alleMerknaderFraBeslutter: {},
-  formData: {},
-  setFormData: () => undefined,
-};
 
 export default {
   title: 'prosess/anke/prosess-anke-trygderettsbehandling',
   component: AnkeTrygderettsbehandlingProsessIndex,
 };
 
-export const visPanelForResultatVedStadfestYtelsesvedtak = () => (
+const Template: Story<{
+  ankeVurdering: AnkeVurdering;
+}> = ({
+  ankeVurdering,
+}) => (
   <AnkeTrygderettsbehandlingProsessIndex
-    {...standardProsessProps}
-    ankeVurdering={{
-      ankeVurderingResultat: {
-        ankeVurdering: ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK,
-        begrunnelse: 'Dette er en begrunnelse',
-      },
-    } as AnkeVurdering}
-    behandlinger={[]}
+    ankeVurdering={ankeVurdering}
+    alleKodeverk={alleKodeverk as any}
   />
 );
+
+export const ResultatVedOmgjortResultat = Template.bind({});
+ResultatVedOmgjortResultat.args = {
+  ankeVurdering: {
+    ankeVurderingResultat: {
+      erMerknaderMottatt: true,
+      merknadKommentar: 'Dette er en kommentar',
+      trygderettVurdering: ankeVurderingKodeverk.ANKE_OMGJOER,
+      trygderettOmgjoerArsak: ankeOmgjorArsak.NYE_OPPLYSNINGER,
+      trygderettVurderingOmgjoer: ankeVurderingOmgjoer.ANKE_TIL_GUNST,
+    },
+  } as AnkeVurdering,
+};
+
+export const ResultatVedOpphevetResultat = Template.bind({});
+ResultatVedOpphevetResultat.args = {
+  ankeVurdering: {
+    ankeVurderingResultat: {
+      erMerknaderMottatt: true,
+      merknadKommentar: 'Dette er en kommentar',
+      trygderettVurdering: ankeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE,
+      trygderettOmgjoerArsak: ankeOmgjorArsak.NYE_OPPLYSNINGER,
+    },
+  } as AnkeVurdering,
+};
+
+export const ResultatVedHjemsendtResultat = Template.bind({});
+ResultatVedHjemsendtResultat.args = {
+  ankeVurdering: {
+    ankeVurderingResultat: {
+      erMerknaderMottatt: true,
+      merknadKommentar: 'Dette er en kommentar',
+      trygderettVurdering: ankeVurderingKodeverk.ANKE_HJEMSENDE_UTEN_OPPHEV,
+      trygderettOmgjoerArsak: ankeOmgjorArsak.NYE_OPPLYSNINGER,
+    },
+  } as AnkeVurdering,
+};
+
+export const ResultatVedAvvistResultat = Template.bind({});
+ResultatVedAvvistResultat.args = {
+  ankeVurdering: {
+    ankeVurderingResultat: {
+      erMerknaderMottatt: true,
+      merknadKommentar: 'Dette er en kommentar',
+      trygderettVurdering: ankeVurderingKodeverk.ANKE_AVVIS,
+    },
+  } as AnkeVurdering,
+};
+
+export const ResultatVedStadfestetResultat = Template.bind({});
+ResultatVedStadfestetResultat.args = {
+  ankeVurdering: {
+    ankeVurderingResultat: {
+      erMerknaderMottatt: true,
+      merknadKommentar: 'Dette er en kommentar',
+      trygderettVurdering: ankeVurderingKodeverk.ANKE_STADFESTE_YTELSESVEDTAK,
+    },
+  } as AnkeVurdering,
+};
+
+export const ErBehandletIKabel = Template.bind({});
+ErBehandletIKabel.args = {
+  ankeVurdering: {
+    ankeVurderingResultat: {
+      trygderettVurdering: ankeVurderingKodeverk.ANKE_STADFESTE_YTELSESVEDTAK,
+    },
+    behandletAvKabal: true,
+  } as AnkeVurdering,
+};
+
+export const ErUnderBehandlingIKabel = Template.bind({});
+ErUnderBehandlingIKabel.args = {
+  ankeVurdering: {
+    ankeVurderingResultat: {
+      trygderettVurdering: ankeVurderingKodeverk.ANKE_STADFESTE_YTELSESVEDTAK,
+    },
+    underBehandlingKabal: true,
+  } as AnkeVurdering,
+};

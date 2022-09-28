@@ -1,5 +1,4 @@
 import { BeregningAksjonspunktSubmitType } from '@navikt/ft-prosess-beregningsgrunnlag';
-import AnkeVurderingResultatAp from './prosess/AnkeVurderingResultatAp';
 import BekreftSvangerskapspengervilkarAp from './prosess/BekreftSvangerskapspengervilkarAp';
 import SoknadsfristAp from './prosess/SoknadsfristAp';
 import BekreftSokersOpplysningspliktManuAp from './prosess/BekreftSokersOpplysningspliktManuAp';
@@ -14,7 +13,6 @@ import ForeslaVedtakAp from './prosess/ForeslaVedtakAp';
 import BekreftVedtakUtenTotrinnskontrollAp from './prosess/BekreftVedtakUtenTotrinnskontrollAp';
 import ForeslaVedtakManueltAp from './prosess/ForeslaVedtakManueltAp';
 import VurderFeilutbetalingAp from './prosess/VurderFeilutbetalingAp';
-import AnkeMerknaderResultatAp from './prosess/AnkeMerknaderResultatAp';
 import OverstyringBeregningAp from './prosess/OverstyringBeregningAp';
 import KlageFormkravAp, { KlageFormkravKaAp } from './prosess/KlageFormkravAp';
 import VurderInnsynAp from './prosess/VurderInnsynAp';
@@ -30,8 +28,7 @@ import KontrollAvManueltOpprettetRevurderingsbehandlingAp from './prosess/Kontro
 import VarselRevurderingAp from './prosess/VarselRevurderingAp';
 import UttakAp from './prosess/UttakAp';
 
-export type ProsessAksjonspunkt = AnkeVurderingResultatAp
-  | BekreftSvangerskapspengervilkarAp
+export type ProsessAksjonspunkt = BekreftSvangerskapspengervilkarAp
   | SoknadsfristAp
   | BekreftSokersOpplysningspliktManuAp
   | OverstyringSokersOpplysingspliktAp
@@ -45,7 +42,6 @@ export type ProsessAksjonspunkt = AnkeVurderingResultatAp
   | BekreftVedtakUtenTotrinnskontrollAp
   | ForeslaVedtakManueltAp
   | VurderInnsynAp
-  | AnkeMerknaderResultatAp
   | OverstyringBeregningAp
   | VurderFeilutbetalingAp
   | KlageFormkravAp
