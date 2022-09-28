@@ -56,7 +56,7 @@
     "react-router-dom": "6.4.1"
   },
   "devDependencies": {
-    "@babel/core": "7.19.1",
+    "@babel/core": "7.19.3",
     "@babel/eslint-parser": "7.19.1",
     "@babel/helper-regex": "7.10.5",
     "@babel/preset-env": "7.19.1",
