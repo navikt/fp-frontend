@@ -10,11 +10,6 @@ import ankeVurdering from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
 import { AnkeVurdering } from '@fpsak-frontend/types';
 
-import PreviewAnkeLink, { BrevData } from './PreviewAnkeLink';
-
-const skalViseForhaandlenke = (avr?: string): boolean => avr === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE
-  || avr === ankeVurdering.ANKE_OMGJOER || avr === ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV;
-
 interface OwnPropsResultat {
   ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];
 }
@@ -141,40 +136,23 @@ const AnkeResultat: FunctionComponent<OwnPropsResultat & { alleKodeverk: AlleKod
 
 interface OwnProps {
   ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];
-  previewCallback: (data: BrevData) => Promise<any>;
   alleKodeverk: AlleKodeverk;
-  kabalisert: boolean;
 }
 
 const BehandleResultatForm: FunctionComponent<OwnProps> = ({
-  previewCallback,
   ankeVurderingResultat,
   alleKodeverk,
-  kabalisert,
-}) => {
-  const ankeVurderingVerdi = ankeVurderingResultat?.ankeVurdering || null;
-  const fritekstTilBrev = ankeVurderingResultat?.fritekstTilBrev || null;
-
-  return (
-    <>
-      <Heading size="small">
-        <FormattedMessage id="Ankebehandling.Resultat.Title" />
-      </Heading>
-      <VerticalSpacer fourPx />
-      <Label size="small">
-        <FormattedMessage id="Ankebehandling.Resultat.Innstilling" />
-      </Label>
-      <AnkeResultat ankeVurderingResultat={ankeVurderingResultat} alleKodeverk={alleKodeverk} />
-      <VerticalSpacer sixteenPx />
-      {skalViseForhaandlenke(ankeVurderingVerdi) && !kabalisert && (
-        <PreviewAnkeLink
-          previewCallback={previewCallback}
-          fritekstTilBrev={fritekstTilBrev}
-          ankeVurdering={ankeVurderingVerdi}
-        />
-      )}
-    </>
-  );
-};
+}) => (
+  <>
+    <Heading size="small">
+      <FormattedMessage id="Ankebehandling.Resultat.Title" />
+    </Heading>
+    <VerticalSpacer fourPx />
+    <Label size="small">
+      <FormattedMessage id="Ankebehandling.Resultat.Innstilling" />
+    </Label>
+    <AnkeResultat ankeVurderingResultat={ankeVurderingResultat} alleKodeverk={alleKodeverk} />
+  </>
+);
 
 export default BehandleResultatForm;

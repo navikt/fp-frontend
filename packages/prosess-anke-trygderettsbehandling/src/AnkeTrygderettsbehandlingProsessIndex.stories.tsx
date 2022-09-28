@@ -83,3 +83,23 @@ ResultatVedStadfestetResultat.args = {
     },
   } as AnkeVurdering,
 };
+
+export const ErBehandletIKabel = Template.bind({});
+ErBehandletIKabel.args = {
+  ankeVurdering: {
+    ankeVurderingResultat: {
+      trygderettVurdering: ankeVurderingKodeverk.ANKE_STADFESTE_YTELSESVEDTAK,
+    },
+    behandletAvKabal: true,
+  } as AnkeVurdering,
+};
+
+export const ErUnderBehandlingIKabel = Template.bind({});
+ErUnderBehandlingIKabel.args = {
+  ankeVurdering: {
+    ankeVurderingResultat: {
+      trygderettVurdering: ankeVurderingKodeverk.ANKE_STADFESTE_YTELSESVEDTAK,
+    },
+    underBehandlingKabal: true,
+  } as AnkeVurdering,
+};

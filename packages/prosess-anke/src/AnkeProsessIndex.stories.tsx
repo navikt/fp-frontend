@@ -1,6 +1,5 @@
 import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
-import { action } from '@storybook/addon-actions';
 
 import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
 import ankeOmgjorArsak from '@fpsak-frontend/kodeverk/src/ankeOmgjorArsak';
@@ -17,14 +16,11 @@ export default {
 
 const Template: Story<{
   ankeVurdering: AnkeVurdering;
-  previewCallback: (data: any) => Promise<any>;
 }> = ({
   ankeVurdering,
-  previewCallback,
 }) => (
   <AnkeProsessIndex
     ankeVurdering={ankeVurdering}
-    previewCallback={previewCallback}
     behandlinger={[]}
     alleKodeverk={alleKodeverk as any}
   />
@@ -41,7 +37,6 @@ OmjørResultatTilUgunst.args = {
       fritekstTilBrev: 'Dette er en fritekst',
     },
   } as AnkeVurdering,
-  previewCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
 export const OpphevResultat = Template.bind({});
@@ -54,7 +49,6 @@ OpphevResultat.args = {
       fritekstTilBrev: 'Dette er en fritekst',
     },
   } as AnkeVurdering,
-  previewCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
 export const HjemsendResultat = Template.bind({});
@@ -67,7 +61,6 @@ HjemsendResultat.args = {
       fritekstTilBrev: 'Dette er en fritekst',
     },
   } as AnkeVurdering,
-  previewCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
 export const AvvisResultat = Template.bind({});
@@ -83,7 +76,6 @@ AvvisResultat.args = {
       fritekstTilBrev: 'Dette er en fritekst',
     },
   } as AnkeVurdering,
-  previewCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
 export const StadfestResultat = Template.bind({});
@@ -95,7 +87,6 @@ StadfestResultat.args = {
       fritekstTilBrev: 'Dette er en fritekst',
     },
   } as AnkeVurdering,
-  previewCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
 export const UnderBehandlingIKabal = Template.bind({});
@@ -104,7 +95,6 @@ UnderBehandlingIKabal.args = {
     underBehandlingKabal: true,
     behandletAvKabal: false,
   } as AnkeVurdering,
-  previewCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
 export const ErBehandletIKabal = Template.bind({});
@@ -113,5 +103,4 @@ ErBehandletIKabal.args = {
     underBehandlingKabal: false,
     behandletAvKabal: true,
   } as AnkeVurdering,
-  previewCallback: action('button-click') as (data: any) => Promise<any>,
 };

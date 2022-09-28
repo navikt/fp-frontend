@@ -1,32 +1,17 @@
 import React, {
-  FunctionComponent, useCallback,
+  FunctionComponent,
 } from 'react';
 import { useIntl } from 'react-intl';
-import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/ft-types';
+import { Aksjonspunkt } from '@navikt/ft-types';
 
-import AnkeProsessIndex, { AnkeProsessBrevData } from '@fpsak-frontend/prosess-anke';
+import AnkeProsessIndex from '@fpsak-frontend/prosess-anke';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { AnkeVurdering, ForhåndsvisMeldingParams } from '@fpsak-frontend/types';
-import { forhandsvisDokument } from '@navikt/ft-utils';
+import { AnkeVurdering } from '@fpsak-frontend/types';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
 import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
-import { restApiAnkeHooks, requestAnkeApi, AnkeBehandlingApiKeys } from '../data/ankeBehandlingApi';
-
-const lagForhandsvisCallback = (
-  forhandsvisMelding: (params: ForhåndsvisMeldingParams, keepData?: boolean) => Promise<any>,
-  fagsak: Fagsak,
-  behandling: Behandling,
-) => (data: AnkeProsessBrevData) => {
-  const brevData = {
-    ...data,
-    behandlingUuid: behandling.uuid,
-    fagsakYtelseType: fagsak.fagsakYtelseType,
-  };
-  return forhandsvisMelding(brevData).then((response) => forhandsvisDokument(response));
-};
+import { requestAnkeApi, AnkeBehandlingApiKeys } from '../data/ankeBehandlingApi';
 
 const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER];
 type EndepunktInitData = {
@@ -39,7 +24,6 @@ type EndepunktPanelData = {
 }
 
 interface OwnProps {
-  fagsak: Fagsak;
   alleBehandlinger: {
     uuid: string;
     type: string;
@@ -48,17 +32,10 @@ interface OwnProps {
 }
 
 const AnkeBehandlingProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
-  fagsak,
   alleBehandlinger,
   ...props
 }) => {
   const intl = useIntl();
-  const standardPanelProps = useStandardProsessPanelProps();
-
-  const { startRequest: forhandsvisMelding } = restApiAnkeHooks.useRestApiRunner(BehandlingFellesApiKeys.PREVIEW_MESSAGE);
-  const previewCallback = useCallback(lagForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
-    [standardPanelProps.behandling.versjon]);
-
   return (
     <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
       {...props}
@@ -71,7 +48,6 @@ const AnkeBehandlingProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
       renderPanel={(data) => (
         <AnkeProsessIndex
           behandlinger={alleBehandlinger}
-          previewCallback={previewCallback}
           {...data}
         />
       )}

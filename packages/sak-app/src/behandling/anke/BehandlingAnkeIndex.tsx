@@ -81,14 +81,9 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & StandardBehandlingProps>
           )}
           hentProsessPaneler={(props) => (
             <>
-              <AnkeBehandlingProsessStegInitPanel {...props} fagsak={fagsak} alleBehandlinger={alleBehandlinger} />
-              <AnkeResultatProsessStegInitPanel
-                {...props}
-                fagsak={fagsak}
-              />
-              <AnkeTrygderettsbehandlingProsessStegInitPanel
-                {...props}
-              />
+              <AnkeBehandlingProsessStegInitPanel {...props} alleBehandlinger={alleBehandlinger} />
+              <AnkeResultatProsessStegInitPanel {...props} />
+              <AnkeTrygderettsbehandlingProsessStegInitPanel {...props} />
             </>
           )}
         />

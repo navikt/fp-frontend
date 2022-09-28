@@ -10,26 +10,12 @@ import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgj
 import ankeVurderingKodeverk from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import { AlleKodeverk, AnkeVurdering } from '@fpsak-frontend/types';
 
-import PreviewAnkeLink, { BrevData } from './PreviewAnkeLink';
-
 export type BehandlingInfo = {
   uuid?: string;
   opprettet?: string;
   type?: string;
   status?: string;
 }
-
-const skalViseForhaandlenke = (
-  avr?: string,
-): boolean => avr === ankeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE
-  || avr === ankeVurderingKodeverk.ANKE_HJEMSENDE_UTEN_OPPHEV
-  || avr === ankeVurderingKodeverk.ANKE_OMGJOER;
-
-const canPreview = (
-  begrunnelse: string,
-  fritekstTilBrev: string,
-): boolean => (begrunnelse && begrunnelse.length > 0)
-  && (fritekstTilBrev && fritekstTilBrev.length > 0);
 
 const formatDate = (
   date: string,
@@ -61,7 +47,6 @@ const formatBehandlingId = (
 
 interface OwnProps {
   ankeVurdering?: AnkeVurdering;
-  previewCallback: (data: BrevData) => Promise<any>;
   behandlinger: BehandlingInfo[];
   alleKodeverk: AlleKodeverk;
 }
@@ -70,38 +55,45 @@ interface OwnProps {
  * Setter opp aksjonspunktet for behandling.
  */
 const BehandleAnkeForm: FunctionComponent<OwnProps> = ({
-  previewCallback,
   ankeVurdering,
   behandlinger,
   alleKodeverk,
 }) => {
-  const avr = ankeVurdering ? ankeVurdering.ankeVurderingResultat : null;
+  const avr = ankeVurdering?.ankeVurderingResultat;
   const vedtak = avr ? formatId(avr.påAnketKlageBehandlingUuid) : null;
 
   const ankeOmgorArsaker = alleKodeverk[KodeverkType.ANKE_OMGJOER_AARSAK];
 
-  const behandlesKabal = ankeVurdering && ankeVurdering.underBehandlingKabal ? ankeVurdering.underBehandlingKabal : false;
-  const behandletKabal = ankeVurdering && ankeVurdering.behandletAvKabal ? ankeVurdering.behandletAvKabal : false;
+  const behandlesKabal = ankeVurdering?.underBehandlingKabal || false;
+  const behandletKabal = ankeVurdering?.behandletAvKabal || false;
 
   return (
     <>
+      <Heading size="small"><FormattedMessage id="Ankebehandling.Title" /></Heading>
+      <VerticalSpacer sixteenPx />
       {behandlesKabal && (
         <>
           <Heading size="small"><FormattedMessage id="Ankebehandling.SeKabalText" /></Heading>
           <VerticalSpacer sixteenPx />
         </>
       )}
-      <Label size="small">
-        <FormattedMessage id="Ankebehandling.Resultat.Vedtak" />
-      </Label>
-      <BodyShort size="small">
-        {vedtak === IKKE_PAA_ANKET_BEHANDLING_ID && (
-          <FormattedMessage id="Ankebehandling.Resultat.IkkePaaAnketVedtak" />
-        )}
-        {vedtak !== IKKE_PAA_ANKET_BEHANDLING_ID && formatBehandlingId(vedtak, behandlinger, alleKodeverk)}
-      </BodyShort>
+      {behandletKabal && (
+        <>
+          <Heading size="small"><FormattedMessage id="Ankebehandling.BehandletKabal" /></Heading>
+          <VerticalSpacer sixteenPx />
+        </>
+      )}
       {!behandlesKabal && !behandletKabal && (
         <>
+          <Label size="small">
+            <FormattedMessage id="Ankebehandling.Resultat.Vedtak" />
+          </Label>
+          <BodyShort size="small">
+            {vedtak === IKKE_PAA_ANKET_BEHANDLING_ID && (
+              <FormattedMessage id="Ankebehandling.Resultat.IkkePaaAnketVedtak" />
+            )}
+            {vedtak !== IKKE_PAA_ANKET_BEHANDLING_ID && formatBehandlingId(vedtak, behandlinger, alleKodeverk)}
+          </BodyShort>
           <VerticalSpacer sixteenPx />
           <Label size="small">
             <FormattedMessage id="Ankebehandling.Resultat" />
@@ -194,14 +186,6 @@ const BehandleAnkeForm: FunctionComponent<OwnProps> = ({
             {avr.fritekstTilBrev}
           </BodyShort>
           <VerticalSpacer sixteenPx />
-          {skalViseForhaandlenke(avr.ankeVurdering) && (
-            <PreviewAnkeLink
-              readOnly={!canPreview(avr.begrunnelse, avr.fritekstTilBrev)}
-              previewCallback={previewCallback}
-              fritekstTilBrev={avr.fritekstTilBrev}
-              ankeVurdering={avr.ankeVurdering}
-            />
-          )}
         </>
       )}
     </>

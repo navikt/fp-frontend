@@ -6,14 +6,12 @@ import { createIntl } from '@navikt/ft-utils';
 
 import { AlleKodeverk } from '@navikt/ft-types';
 import BehandleAnkeForm, { BehandlingInfo } from './components/BehandleAnkeForm';
-import { BrevData } from './components/PreviewAnkeLink';
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
 interface OwnProps {
   ankeVurdering: AnkeVurdering;
-  previewCallback: (data: BrevData) => Promise<any>;
   behandlinger: BehandlingInfo[];
   alleKodeverk: AlleKodeverk;
 }
@@ -21,14 +19,12 @@ interface OwnProps {
 const AnkeProsessIndex: FunctionComponent<OwnProps> = ({
   ankeVurdering,
   behandlinger,
-  previewCallback,
   alleKodeverk,
 }) => (
   <RawIntlProvider value={intl}>
     <BehandleAnkeForm
       ankeVurdering={ankeVurdering}
       behandlinger={behandlinger}
-      previewCallback={previewCallback}
       alleKodeverk={alleKodeverk}
     />
   </RawIntlProvider>

@@ -19,18 +19,25 @@ const TrygderettsbehandlingForm: FunctionComponent<OwnProps> = ({
   ankeVurdering,
   alleKodeverk,
 }) => {
-  const avr = ankeVurdering ? ankeVurdering.ankeVurderingResultat : null;
+  const avr = ankeVurdering?.ankeVurderingResultat;
+  const behandlesKabal = ankeVurdering?.underBehandlingKabal || false;
+  const behandletKabal = ankeVurdering?.behandletAvKabal || false;
 
   const ankeOmgorArsaker = alleKodeverk[kodeverkTyper.ANKE_OMGJOER_AARSAK];
 
-  const behandlesKabal = ankeVurdering && ankeVurdering.underBehandlingKabal ? ankeVurdering.underBehandlingKabal : false;
-  const behandletKabal = ankeVurdering && ankeVurdering.behandletAvKabal ? ankeVurdering.behandletAvKabal : false;
-
   return (
     <>
+      <Heading size="small"><FormattedMessage id="Ankebehandling.Merknad.Title" /></Heading>
+      <VerticalSpacer sixteenPx />
       {behandlesKabal && (
         <>
           <Heading size="small"><FormattedMessage id="Ankebehandling.Merknad.SeKabalText" /></Heading>
+          <VerticalSpacer sixteenPx />
+        </>
+      )}
+      {behandletKabal && (
+        <>
+          <Heading size="small"><FormattedMessage id="Ankebehandling.Merknad.BehandletKabal" /></Heading>
           <VerticalSpacer sixteenPx />
         </>
       )}

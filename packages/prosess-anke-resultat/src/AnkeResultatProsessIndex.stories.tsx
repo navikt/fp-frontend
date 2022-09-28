@@ -1,6 +1,5 @@
 import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
-import { action } from '@storybook/addon-actions';
 
 import AnkeVurderingKodeverk from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
@@ -27,15 +26,12 @@ export default {
 
 const Template: Story<{
   ankeVurdering: AnkeVurdering;
-  previewCallback: (data: any) => Promise<any>;
 }> = ({
   ankeVurdering,
-  previewCallback,
 }) => (
   <AnkeResultatProsessIndex
     alleKodeverk={alleKodeverk as any}
     ankeVurdering={ankeVurdering}
-    previewCallback={previewCallback}
   />
 );
 
@@ -47,7 +43,6 @@ ResultatVedStadfestYtelsesvedtak.args = {
       ankeVurdering: AnkeVurderingKodeverk.ANKE_STADFESTE_YTELSESVEDTAK,
     },
   } as AnkeVurdering,
-  previewCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
 export const ResultatVedOppheveOgHjemsende = Template.bind({});
@@ -58,7 +53,6 @@ ResultatVedOppheveOgHjemsende.args = {
       ankeVurdering: AnkeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE,
     },
   } as AnkeVurdering,
-  previewCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
 export const ResultatVedOmgjør = Template.bind({});
@@ -71,7 +65,6 @@ ResultatVedOmgjør.args = {
       ankeOmgjoerArsakNavn: 'Testårsak',
     },
   } as AnkeVurdering,
-  previewCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
 export const ResultatVedAvvis = Template.bind({});
@@ -79,5 +72,4 @@ ResultatVedAvvis.args = {
   ankeVurdering: {
     ankeVurderingResultat,
   } as AnkeVurdering,
-  previewCallback: action('button-click') as (data: any) => Promise<any>,
 };
