@@ -17,7 +17,6 @@ import {
 import {
   hasValidText, maxLength, minLength, required, isRequiredMessage,
 } from '@navikt/ft-form-validators';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import getAksjonspunkttekst from './aksjonspunktTekster/aksjonspunktTekstUtleder';
 
@@ -94,9 +93,8 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
         }
 
         const erKlageKA = klageKA && totrinnskontrollGodkjent;
-        const erAnke = aksjonspunktKode === aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE && totrinnskontrollGodkjent;
-        const visKunBegrunnelse = erAnke || erKlageKA ? totrinnskontrollGodkjent : showBegrunnelse;
-        const visArsaker = erAnke || erKlageKA || totrinnskontrollGodkjent === false;
+        const visKunBegrunnelse = erKlageKA ? totrinnskontrollGodkjent : showBegrunnelse;
+        const visArsaker = erKlageKA || totrinnskontrollGodkjent === false;
 
         const aksjonspunktText = getAksjonspunkttekst(
           erForeldrepengerFagsak,

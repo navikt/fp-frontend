@@ -26,7 +26,6 @@ export { default as AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from '.
 export { default as AvklarAktivitetsPerioderAp, OpptjeningAktivitetAp } from './src/fakta/AvklarAktivitetsPerioderAp';
 
 export { default as ProsessAksjonspunkt } from './src/ProsessAksjonspunkt';
-export { default as AnkeVurderingResultatAp } from './src/prosess/AnkeVurderingResultatAp';
 export { default as BekreftSvangerskapspengervilkarAp } from './src/prosess/BekreftSvangerskapspengervilkarAp';
 export { default as BekreftSokersOpplysningspliktManuAp } from './src/prosess/BekreftSokersOpplysningspliktManuAp';
 export { default as OverstyringSokersOpplysingspliktAp } from './src/prosess/OverstyringSokersOpplysingspliktAp';
@@ -39,7 +38,6 @@ export { default as Foreldreansvarsvilkar2Ap } from './src/prosess/Foreldreansva
 export { default as ForeslaVedtakAp } from './src/prosess/ForeslaVedtakAp';
 export { default as ForeslaVedtakManueltAp } from './src/prosess/ForeslaVedtakManueltAp';
 export { default as BekreftVedtakUtenTotrinnskontrollAp } from './src/prosess/BekreftVedtakUtenTotrinnskontrollAp';
-export { default as AnkeMerknaderResultatAp } from './src/prosess/AnkeMerknaderResultatAp';
 export { default as OverstyringBeregningAp } from './src/prosess/OverstyringBeregningAp';
 export { default as VurderFeilutbetalingAp } from './src/prosess/VurderFeilutbetalingAp';
 export { default as KlageFormkravAp } from './src/prosess/KlageFormkravAp';

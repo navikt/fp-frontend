@@ -4,7 +4,6 @@ import React, {
 import { useIntl } from 'react-intl';
 import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/ft-types';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AnkeProsessIndex, { AnkeProsessBrevData } from '@fpsak-frontend/prosess-anke';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { AnkeVurdering, ForhåndsvisMeldingParams } from '@fpsak-frontend/types';
@@ -28,8 +27,6 @@ const lagForhandsvisCallback = (
   };
   return forhandsvisMelding(brevData).then((response) => forhandsvisDokument(response));
 };
-
-const AKSJONSPUNKT_KODER = [aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE];
 
 const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER];
 type EndepunktInitData = {
@@ -68,7 +65,6 @@ const AnkeBehandlingProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
       requestApi={requestAnkeApi}
       initEndepunkter={ENDEPUNKTER_INIT_DATA}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.ANKEBEHANDLING}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Ankebehandling' })}
       skalPanelVisesIMeny={() => true}

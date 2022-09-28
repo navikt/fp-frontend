@@ -30,7 +30,7 @@ describe('<FaktaDefaultInitPanel>', () => {
     alleKodeverk: kodeverk,
     readOnly: false,
     aksjonspunkter: [{
-      definisjon: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
+      definisjon: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
       erAktivt: true,
       kanLoses: true,
     }] as Aksjonspunkt[],

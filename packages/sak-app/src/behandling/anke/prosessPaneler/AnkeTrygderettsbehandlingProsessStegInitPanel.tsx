@@ -14,7 +14,6 @@ import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import { requestAnkeApi, AnkeBehandlingApiKeys } from '../data/ankeBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
-  aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER,
   aksjonspunktCodes.AUTO_VENT_ANKE_MERKNADER_FRA_BRUKER,
 ];
 
