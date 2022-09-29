@@ -17,9 +17,9 @@ import { KlageVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspu
 import KlageFormType from '@fpsak-frontend/prosess-klagevurdering/src/types/klageFormType';
 
 import KlageVurderingRadioOptionsNfp from './KlageVurderingRadioOptionsNfp';
-import FritekstBrevTextField from '../felles/FritekstKlageBrevTextField';
-import PreviewKlageLink, { BrevData } from '../felles/PreviewKlageLink';
-import TempsaveKlageButton, { TransformedValues } from '../felles/TempsaveKlageButton';
+import FritekstBrevTextField from './FritekstKlageBrevTextField';
+import PreviewKlageLink, { BrevData } from './PreviewKlageLink';
+import TempsaveKlageButton, { TransformedValues } from './TempsaveKlageButton';
 
 import styles from './behandleKlageFormNfp.less';
 
