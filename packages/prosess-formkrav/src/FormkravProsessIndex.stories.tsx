@@ -62,9 +62,6 @@ FormkravPanelForAksjonspunktNfp.args = {
       klageVurdering: klageVurderingCodes.AVVIS_KLAGE,
       fritekstTilBrev: 'test',
     },
-    klageFormkravResultatKA: {
-      avvistArsaker: ['TEST'],
-    },
   } as KlageVurdering,
   aksjonspunkter: [{
     definisjon: aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP,
@@ -81,9 +78,7 @@ FormkravPanelForAksjonspunktKaIkkePåklagd.args = {
       erKlageKonkret: true,
     },
   } as KlageVurdering,
-  aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [],
 };
 
 export const FormkravPanelForAksjonspunktKaValgtBehandling = Template.bind({});
@@ -97,7 +92,5 @@ FormkravPanelForAksjonspunktKaValgtBehandling.args = {
       erSignert: true,
     },
   } as KlageVurdering,
-  aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [],
 };

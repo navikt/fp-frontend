@@ -145,11 +145,6 @@ KlagevurderingMedAksjonspunktNfp.args = {
     definisjon: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
   }] as Aksjonspunkt[],
   klageVurdering: {
-    klageVurderingResultatNK: {
-      klageVurdertAv: 'NK',
-      klageVurdering: klageVurderingCodes.AVVIS_KLAGE,
-      fritekstTilBrev: 'test',
-    },
     klageFormkravResultatKA: {
       avvistArsaker: ['IKKE_KONKRET'],
     },
