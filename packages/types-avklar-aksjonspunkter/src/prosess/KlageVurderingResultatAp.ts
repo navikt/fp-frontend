@@ -10,7 +10,6 @@ type KlageVurderingResultatAp = {
   klageVurderingOmgjoer?: string;
   klageHjemmel?: string;
   vedtaksdatoPaklagdBehandling?: string;
-  erGodkjentAvMedunderskriver?: boolean;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.BEHANDLE_KLAGE_NFP | AksjonspunktKode.BEHANDLE_KLAGE_NK>;
+} & AksjonspunktTilBekreftelse<AksjonspunktKode.BEHANDLE_KLAGE_NFP>;
 
 export default KlageVurderingResultatAp;

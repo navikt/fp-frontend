@@ -8,8 +8,8 @@ import { createIntl } from '@navikt/ft-utils';
 import messages from '../i18n/nb_NO.json';
 import BehandleKlageFormKa from './components/ka/BehandleKlageFormKa';
 import BehandleKlageFormNfp from './components/nfp/BehandleKlageFormNfp';
-import { BrevData } from './components/felles/PreviewKlageLink';
-import { TransformedValues } from './components/felles/TempsaveKlageButton';
+import { BrevData } from './components/nfp/PreviewKlageLink';
+import { TransformedValues } from './components/nfp/TempsaveKlageButton';
 
 const intl = createIntl(messages);
 
@@ -33,18 +33,10 @@ const KlagevurderingProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
   setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    {aksjonspunkter.some((a) => a.definisjon === aksjonspunktCodes.BEHANDLE_KLAGE_NK) && (
+    {klageVurdering.klageVurderingResultatNK && (
       <BehandleKlageFormKa
-        sprakkode={behandling.sprakkode}
         klageVurdering={klageVurdering}
-        saveKlage={saveKlage}
-        submitCallback={submitCallback}
-        readOnly={isReadOnly}
-        previewCallback={previewCallback}
-        readOnlySubmitButton={readOnlySubmitButton}
         alleKodeverk={alleKodeverk}
-        formData={formData}
-        setFormData={setFormData}
       />
     )}
     {aksjonspunkter.some((a) => a.definisjon === aksjonspunktCodes.BEHANDLE_KLAGE_NFP) && (

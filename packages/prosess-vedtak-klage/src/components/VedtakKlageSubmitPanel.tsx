@@ -16,7 +16,7 @@ interface OwnProps {
   isSubmitting: boolean;
 }
 
-export const VedtakKlageSubmitPanel: FunctionComponent<OwnProps> = ({
+const VedtakKlageSubmitPanel: FunctionComponent<OwnProps> = ({
   behandlingPaaVent,
   previewVedtakCallback,
   readOnly,

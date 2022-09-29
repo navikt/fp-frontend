@@ -5,7 +5,6 @@ export type KlageVurderingResultat = Readonly<{
   klageMedholdArsak?: string;
   klageVurderingOmgjoer?: string;
   klageHjemmel?: string;
-  godkjentAvMedunderskriver: boolean;
   begrunnelse?: string;
 }>
 

@@ -127,8 +127,7 @@ const KlageresultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPan
             visModal={visFatterVedtakModal}
             lukkModal={() => { toggleFatterVedtakModal(false); opneSokeside(); }}
             tekst={intl.formatMessage({
-              id: (data.klageVurdering && data.klageVurdering.klageVurderingResultatNK
-                && data.klageVurdering.klageVurderingResultatNK.godkjentAvMedunderskriver)
+              id: (data.klageVurdering && data.klageVurdering.klageVurderingResultatNK)
                 ? 'FatterVedtakStatusModal.KlagenErFerdigbehandlet' : 'FatterVedtakStatusModal.SendtKlageResultatTilMedunderskriver',
             })}
           />

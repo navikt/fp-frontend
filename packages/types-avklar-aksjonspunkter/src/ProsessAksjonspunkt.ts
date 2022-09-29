@@ -14,7 +14,7 @@ import BekreftVedtakUtenTotrinnskontrollAp from './prosess/BekreftVedtakUtenTotr
 import ForeslaVedtakManueltAp from './prosess/ForeslaVedtakManueltAp';
 import VurderFeilutbetalingAp from './prosess/VurderFeilutbetalingAp';
 import OverstyringBeregningAp from './prosess/OverstyringBeregningAp';
-import KlageFormkravAp, { KlageFormkravKaAp } from './prosess/KlageFormkravAp';
+import KlageFormkravAp from './prosess/KlageFormkravAp';
 import VurderInnsynAp from './prosess/VurderInnsynAp';
 import KlageVurderingResultatAp from './prosess/KlageVurderingResultatAp';
 import VurderSoknadsfristAp from './prosess/VurderSoknadsfristAp';
@@ -45,7 +45,6 @@ export type ProsessAksjonspunkt = BekreftSvangerskapspengervilkarAp
   | OverstyringBeregningAp
   | VurderFeilutbetalingAp
   | KlageFormkravAp
-  | KlageFormkravKaAp
   | KlageVurderingResultatAp
   | VurderSoknadsfristAp
   | VurderTilbaketrekkAp

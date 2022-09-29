@@ -38,7 +38,6 @@ enum AksjonspunktCode {
   VURDERE_ANNEN_YTELSE = '5033',
   VURDERE_DOKUMENT = '5034',
   BEHANDLE_KLAGE_NFP = '5035',
-  BEHANDLE_KLAGE_NK = '5036',
   VURDER_INNSYN = '5037',
   REGISTRER_PAPIRSOKNAD_FORELDREPENGER = '5040',
   VURDER_ARBEIDSFORHOLD_PERMISJON = '5041',
@@ -71,7 +70,6 @@ enum AksjonspunktCode {
   AVKLAR_ARBEIDSFORHOLD = '5080',
   AVKLAR_FØRSTE_UTTAKSDATO = '5081',
   VURDERING_AV_FORMKRAV_KLAGE_NFP = '5082',
-  VURDERING_AV_FORMKRAV_KLAGE_KA = '5083',
   VURDER_FEILUTBETALING = '5084',
   VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING = '5085',
   AVKLAR_ANNEN_FORELDER_RETT = '5086',
@@ -106,13 +104,6 @@ enum AksjonspunktCode {
   KONTROLLER_AKTIVITETSKRAV = '5099',
 }
 
-const klageAksjonspunkter = [
-  AksjonspunktCode.BEHANDLE_KLAGE_NK,
-  AksjonspunktCode.BEHANDLE_KLAGE_NFP,
-  AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_NFP,
-  AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_KA,
-];
-
 const uttakAksjonspunkter = [
   AksjonspunktCode.AVKLAR_UTTAK,
   AksjonspunktCode.MANUELL_AVKLAR_FAKTA_UTTAK,
@@ -138,7 +129,6 @@ const aksjonspunktIsOfType = (
 export const hasAksjonspunkt = (aksjonspunktKode: string, aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
   .some((ap) => ap.definisjon === aksjonspunktKode);
 
-export const isKlageAksjonspunkt = aksjonspunktIsOfType(klageAksjonspunkter);
 export const isVilkarForSykdomOppfylt = aksjonspunktIsOfType(isVilkarForSykdomOppfyltAksjonspunkter);
 export const isUttakAksjonspunkt = aksjonspunktIsOfType(uttakAksjonspunkter);
 
