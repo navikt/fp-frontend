@@ -608,7 +608,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
   });
   it('skal vise korrekt tekst for aksjonspunkt 5036 medhold', () => {
     const aksjonspunkt = {
-      aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
+      aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
@@ -639,7 +639,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
       klageVurderingResultatNK: oppheveYtelsesVedtak,
     } as KlageVurdering;
     const aksjonspunkt = {
-      aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
+      aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
@@ -666,7 +666,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
       klageVurderingResultatNK: avvistKlage,
     } as KlageVurdering;
     const aksjonspunkt = {
-      aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
+      aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
@@ -680,7 +680,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
       klageVurderingResultatNFP: stadfesteKlage,
     } as KlageVurdering;
     const aksjonspunkt = {
-      aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
+      aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
@@ -693,7 +693,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
       klageVurderingResultatNK: stadfesteKlage,
     } as KlageVurdering;
     const aksjonspunkt = {
-      aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
+      aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;

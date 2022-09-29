@@ -41,7 +41,7 @@ const FormkravProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelPro
         setFormData={setFormData}
       />
     )}
-    {aksjonspunkter.some((a) => a.definisjon === aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_KA) && (
+    {klageVurdering.klageFormkravResultatKA && (
       <FormkravKlageKa
         klageVurdering={klageVurdering}
         alleKodeverk={alleKodeverk}

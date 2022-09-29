@@ -57,9 +57,7 @@ MedholdIKlageNk.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   mellomlagre: action('button-click') as (data: any) => Promise<any>,
   forhandsvisCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [],
   klageVurdering: {
     klageVurderingResultatNK: {
       klageVurdertAv: 'NK',
@@ -81,9 +79,7 @@ StadfestKlageNk.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   mellomlagre: action('button-click') as (data: any) => Promise<any>,
   forhandsvisCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [],
   klageVurdering: {
     klageVurderingResultatNK: {
       klageVurdertAv: 'NK',
@@ -103,9 +99,7 @@ HjemsendtIKlageNk.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   mellomlagre: action('button-click') as (data: any) => Promise<any>,
   forhandsvisCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [],
   klageVurdering: {
     klageVurderingResultatNK: {
       klageVurdertAv: 'NK',
@@ -126,9 +120,7 @@ OpphevIKlageNk.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   mellomlagre: action('button-click') as (data: any) => Promise<any>,
   forhandsvisCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [],
   klageVurdering: {
     klageVurderingResultatNK: {
       klageVurdertAv: 'NK',

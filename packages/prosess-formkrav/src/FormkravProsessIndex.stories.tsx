@@ -82,7 +82,7 @@ FormkravPanelForAksjonspunktKaIkkePåklagd.args = {
     },
   } as KlageVurdering,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_KA,
+    definisjon: aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP,
   }] as Aksjonspunkt[],
 };
 
@@ -98,6 +98,6 @@ FormkravPanelForAksjonspunktKaValgtBehandling.args = {
     },
   } as KlageVurdering,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_KA,
+    definisjon: aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP,
   }] as Aksjonspunkt[],
 };

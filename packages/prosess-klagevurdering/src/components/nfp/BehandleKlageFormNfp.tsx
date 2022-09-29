@@ -125,7 +125,6 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
                   previewCallback={previewCallback}
                   fritekstTilBrev={formValues.fritekstTilBrev}
                   klageVurdering={formValues.klageVurdering}
-                  aksjonspunktCode={aksjonspunktCodes.BEHANDLE_KLAGE_NFP}
                 />
               )}
             </FlexColumn>

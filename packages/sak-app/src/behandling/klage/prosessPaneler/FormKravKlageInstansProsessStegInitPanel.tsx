@@ -5,7 +5,6 @@ import { useIntl } from 'react-intl';
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import FormkravProsessIndex from '@fpsak-frontend/prosess-formkrav';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { KlageVurdering } from '@fpsak-frontend/types';
@@ -14,8 +13,6 @@ import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPane
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import { KlageBehandlingApiKeys, requestKlageApi } from '../data/klageBehandlingApi';
-
-const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_KA];
 
 const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER];
 type EndepunktInitData = {
@@ -52,7 +49,6 @@ const FormKravKlageInstansProsessStegInitPanel: FunctionComponent<OwnProps & Pro
       requestApi={requestKlageApi}
       initEndepunkter={ENDEPUNKTER_INIT_DATA}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.FORMKRAV_KLAGE_NAV_KLAGEINSTANS}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.FormkravKlageKA' })}
       skalPanelVisesIMeny={() => true}
