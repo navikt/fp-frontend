@@ -46,7 +46,7 @@ const formatBehandlingId = (
 };
 
 interface OwnProps {
-  ankeVurdering?: AnkeVurdering;
+  ankeVurdering: AnkeVurdering;
   behandlinger: BehandlingInfo[];
   alleKodeverk: AlleKodeverk;
 }
@@ -59,7 +59,7 @@ const BehandleAnkeForm: FunctionComponent<OwnProps> = ({
   behandlinger,
   alleKodeverk,
 }) => {
-  const avr = ankeVurdering?.ankeVurderingResultat;
+  const avr = ankeVurdering.ankeVurderingResultat;
   const vedtak = avr ? formatId(avr.påAnketKlageBehandlingUuid) : null;
 
   const ankeOmgorArsaker = alleKodeverk[KodeverkType.ANKE_OMGJOER_AARSAK];

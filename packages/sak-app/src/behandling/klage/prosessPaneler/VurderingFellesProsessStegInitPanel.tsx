@@ -9,6 +9,7 @@ import { ForhåndsvisMeldingParams, KlageVurdering } from '@fpsak-frontend/types
 import klageVurderingKodeverk from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
+import { isAksjonspunktOpen, VilkarUtfallType } from '@navikt/ft-kodeverk';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
@@ -67,13 +68,9 @@ const getLagringSideeffekter = (
   };
 };
 
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER];
+const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, KlageBehandlingApiKeys.KLAGE_VURDERING];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
-}
-
-const ENDEPUNKTER_PANEL_DATA = [KlageBehandlingApiKeys.KLAGE_VURDERING];
-type EndepunktPanelData = {
   klageVurdering: KlageVurdering;
 }
 
@@ -114,15 +111,23 @@ const VurderingFellesProsessStegInitPanel: FunctionComponent<OwnProps & ProsessP
     [standardPanelProps.behandling.versjon]);
 
   return (
-    <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+    <ProsessDefaultInitPanel<EndepunktInitData>
       {...props}
       requestApi={requestKlageApi}
       initEndepunkter={ENDEPUNKTER_INIT_DATA}
-      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={aksjonspunktKoder}
       prosessPanelKode={prosessPanelKode}
       prosessPanelMenyTekst={prosessPanelMenyTekst}
       skalPanelVisesIMeny={() => true}
+      hentOverstyrtStatus={(data) => {
+        if (aksjonspunktKoder) {
+          if (data.aksjonspunkter && data.aksjonspunkter.length > 0) {
+            return data.aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status)) ? VilkarUtfallType.IKKE_VURDERT : VilkarUtfallType.OPPFYLT;
+          }
+          return VilkarUtfallType.IKKE_VURDERT;
+        }
+        return data.klageVurdering?.klageVurderingResultatNK ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT;
+      }}
       lagringSideEffekter={lagringSideEffekter}
       renderPanel={(data) => (
         <>
@@ -138,6 +143,7 @@ const VurderingFellesProsessStegInitPanel: FunctionComponent<OwnProps & ProsessP
           <KlagevurderingProsessIndex
             previewCallback={previewCallback}
             saveKlage={lagreKlage}
+            // @ts-ignore fiks
             {...data}
           />
         </>
