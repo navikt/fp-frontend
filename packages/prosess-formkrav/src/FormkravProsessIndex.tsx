@@ -7,7 +7,7 @@ import { createIntl } from '@navikt/ft-utils';
 
 import messages from '../i18n/nb_NO.json';
 import FormkravKlageFormNfp from './components/FormkravKlageFormNfp';
-import FormkravKlageFormKa from './components/FormkravKlageFormKa';
+import FormkravKlageKa from './components/FormkravKlageKa';
 import AvsluttetBehandling from './types/avsluttetBehandlingTsType';
 
 const intl = createIntl(messages);
@@ -41,17 +41,11 @@ const FormkravProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelPro
         setFormData={setFormData}
       />
     )}
-    {aksjonspunkter.some((a) => a.definisjon === aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_KA) && (
-      <FormkravKlageFormKa
+    {klageVurdering.klageFormkravResultatKA && (
+      <FormkravKlageKa
         klageVurdering={klageVurdering}
-        submitCallback={submitCallback}
-        readOnly={isReadOnly}
-        readOnlySubmitButton={readOnlySubmitButton}
         alleKodeverk={alleKodeverk}
-        alleAktuelleHjemler={klageVurdering.aktuelleHjemler ? klageVurdering.aktuelleHjemler : []}
         avsluttedeBehandlinger={avsluttedeBehandlinger}
-        formData={formData}
-        setFormData={setFormData}
       />
     )}
   </RawIntlProvider>

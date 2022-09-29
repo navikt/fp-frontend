@@ -18,9 +18,4 @@ type KlageFormkravBasic = {
 
 type KlageFormkravAp = KlageFormkravBasic & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP>;
 
-export type KlageFormkravKaAp = KlageFormkravBasic & {
-  sendTilKabal?: boolean;
-  klageHjemmel?: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_KA>;
-
 export default KlageFormkravAp;

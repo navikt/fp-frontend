@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import * as stories from './KlagevurderingProsessIndex.stories';
 
 const {
-  KlagevurderingMedAksjonspunktNfp,
+  KlagevurderingMedAksjonspunktNfp, MedholdIKlageNk, StadfestKlageNk, HjemsendtIKlageNk, OpphevIKlageNk,
 } = composeStories(stories);
 
 describe('<KlagevurderingProsessIndex>', () => {
@@ -73,5 +73,81 @@ describe('<KlagevurderingProsessIndex>', () => {
     render(<KlagevurderingMedAksjonspunktNfp />);
     expect(await screen.findByText('Behandle klage')).toBeInTheDocument();
     expect(screen.queryByText('Forhåndsvis brev')).not.toBeInTheDocument();
+  });
+
+  it('skal vise medhold av klage for NK', async () => {
+    render(<MedholdIKlageNk />);
+
+    expect(await screen.findByText('Behandle klage')).toBeInTheDocument();
+
+    expect(screen.getByText('Vurdering')).toBeInTheDocument();
+    expect(screen.getByText('Omgjør vedtaket')).toBeInTheDocument();
+
+    expect(screen.getByText('Årsak')).toBeInTheDocument();
+    expect(screen.getByText('Ulik skjønnsvurdering')).toBeInTheDocument();
+    expect(screen.getByText('Til gunst')).toBeInTheDocument();
+
+    expect(screen.getByText('Fritekst til brev')).toBeInTheDocument();
+    expect(screen.getByText('test')).toBeInTheDocument();
+
+    expect(screen.getByText('Begrunnelse')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
+  });
+
+  it('skal vise stadfesting av klage for NK', async () => {
+    render(<StadfestKlageNk />);
+
+    expect(await screen.findByText('Behandle klage')).toBeInTheDocument();
+
+    expect(screen.getByText('Vurdering')).toBeInTheDocument();
+    expect(screen.getByText('Stadfest vedtaket')).toBeInTheDocument();
+
+    expect(screen.queryByText('Årsak')).not.toBeInTheDocument();
+    expect(screen.queryByText('Ulik skjønnsvurdering')).not.toBeInTheDocument();
+    expect(screen.queryByText('Til gunst')).not.toBeInTheDocument();
+
+    expect(screen.getByText('Fritekst til brev')).toBeInTheDocument();
+    expect(screen.getByText('test')).toBeInTheDocument();
+
+    expect(screen.getByText('Begrunnelse')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
+  });
+
+  it('skal vise hjemsending av klage for NK', async () => {
+    render(<HjemsendtIKlageNk />);
+
+    expect(await screen.findByText('Behandle klage')).toBeInTheDocument();
+
+    expect(screen.getByText('Vurdering')).toBeInTheDocument();
+    expect(screen.getByText('Hjemsend vedtaket')).toBeInTheDocument();
+
+    expect(screen.getByText('Årsak')).toBeInTheDocument();
+    expect(screen.getByText('Ulik skjønnsvurdering')).toBeInTheDocument();
+    expect(screen.queryByText('Til gunst')).not.toBeInTheDocument();
+
+    expect(screen.getByText('Fritekst til brev')).toBeInTheDocument();
+    expect(screen.getByText('test')).toBeInTheDocument();
+
+    expect(screen.getByText('Begrunnelse')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
+  });
+
+  it('skal vise oppheving av klage for NK', async () => {
+    render(<OpphevIKlageNk />);
+
+    expect(await screen.findByText('Behandle klage')).toBeInTheDocument();
+
+    expect(screen.getByText('Vurdering')).toBeInTheDocument();
+    expect(screen.getByText('Opphev og hjemsend vedtaket')).toBeInTheDocument();
+
+    expect(screen.getByText('Årsak')).toBeInTheDocument();
+    expect(screen.getByText('Ulik skjønnsvurdering')).toBeInTheDocument();
+    expect(screen.queryByText('Til gunst')).not.toBeInTheDocument();
+
+    expect(screen.getByText('Fritekst til brev')).toBeInTheDocument();
+    expect(screen.getByText('test')).toBeInTheDocument();
+
+    expect(screen.getByText('Begrunnelse')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
   });
 });

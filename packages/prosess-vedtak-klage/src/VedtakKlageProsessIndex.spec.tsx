@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import * as stories from './VedtakKlageProsessIndex.stories';
 
 const {
-  VedtakspanelDerKlageErVurdertAvNfp,
+  VedtakspanelDerKlageErVurdertAvNfp, VedtakspanelDerKlageErVurdertAvNk,
 } = composeStories(stories);
 
 describe('<VedtakKlageProsessIndex>', () => {
@@ -35,5 +35,20 @@ describe('<VedtakKlageProsessIndex>', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, [{
       kode: '5015',
     }]);
+  });
+
+  it('skal vise readonly-informasjon for NK', async () => {
+    render(<VedtakspanelDerKlageErVurdertAvNk />);
+
+    expect(await screen.findByText('Resultat')).toBeInTheDocument();
+
+    expect(screen.getByText('Resultat av klage')).toBeInTheDocument();
+    expect(screen.getByText('Avvist fordi klagen ikke oppfyller formkravene')).toBeInTheDocument();
+
+    expect(screen.getByText('Årsak til avvisning')).toBeInTheDocument();
+    expect(screen.getByText('Klagen er ikke konkret')).toBeInTheDocument();
+
+    expect(screen.queryByText('Til godkjenning')).not.toBeInTheDocument();
+    expect(screen.queryByText('Forhåndsvis vedtaksbrev')).not.toBeInTheDocument();
   });
 });

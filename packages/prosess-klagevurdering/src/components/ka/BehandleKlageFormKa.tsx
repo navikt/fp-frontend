@@ -1,142 +1,94 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Heading } from '@navikt/ds-react';
-import { useForm } from 'react-hook-form';
+import { BodyShort, Heading, Label } from '@navikt/ds-react';
 
-import { Form } from '@navikt/ft-form-hooks';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
-import { ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
-import {
-  AksjonspunktHelpTextTemp, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
-import {
-  KlageVurdering, AlleKodeverk, KlageVurderingResultat,
-} from '@fpsak-frontend/types';
-import { KlageVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import KlageFormType from '@fpsak-frontend/prosess-klagevurdering/src/types/klageFormType';
-
-import KlageVurderingRadioOptionsKa from './KlageVurderingRadioOptionsKa';
-import FritekstBrevTextField from '../felles/FritekstKlageBrevTextField';
-import PreviewKlageLink, { BrevData } from '../felles/PreviewKlageLink';
-import TempsaveKlageButton, { TransformedValues } from '../felles/TempsaveKlageButton';
-
-import styles from './behandleKlageFormKa.less';
-
-const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
-  klageMedholdArsak: (values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE
-    || values.klageVurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? values.klageMedholdArsak : null,
-  klageVurderingOmgjoer: values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
-  klageVurdering: values.klageVurdering,
-  fritekstTilBrev: values.fritekstTilBrev,
-  begrunnelse: values.begrunnelse,
-  kode: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
-});
-
-const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): KlageFormType => ({
-  klageMedholdArsak: klageVurderingResultat ? klageVurderingResultat.klageMedholdArsak : null,
-  klageVurderingOmgjoer: klageVurderingResultat ? klageVurderingResultat.klageVurderingOmgjoer : null,
-  klageVurdering: klageVurderingResultat ? klageVurderingResultat.klageVurdering : null,
-  begrunnelse: klageVurderingResultat ? klageVurderingResultat.begrunnelse : null,
-  fritekstTilBrev: klageVurderingResultat ? klageVurderingResultat.fritekstTilBrev : null,
-});
+import klageVurderingOmgjoerType from '@fpsak-frontend/kodeverk/src/klageVurderingOmgjoer';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { KlageVurdering, AlleKodeverk } from '@fpsak-frontend/types';
+import { KodeverkType } from '@navikt/ft-kodeverk';
 
 interface OwnProps {
-  previewCallback: (data: BrevData) => Promise<any>;
-  saveKlage: (data: TransformedValues) => Promise<any>;
-  readOnly?: boolean;
-  readOnlySubmitButton?: boolean;
   alleKodeverk: AlleKodeverk;
-  sprakkode: string;
-  submitCallback: (data: KlageVurderingResultatAp) => Promise<void>;
   klageVurdering: KlageVurdering;
-  formData?: KlageFormType;
-  setFormData: (data: KlageFormType) => void;
 }
 
 /**
  * BehandleklageformNfp
  *
- * Presentasjonskomponent. Setter opp aksjonspunktet for behandling av klage (KA).
+ * Setter opp readonly-panel for behandling av klage (KA).
  */
-export const BehandleKlageFormKa: FunctionComponent<OwnProps> = ({
-  readOnly,
+const BehandleKlageFormKa: FunctionComponent<OwnProps> = ({
   klageVurdering,
-  saveKlage,
-  previewCallback,
-  readOnlySubmitButton,
-  sprakkode,
   alleKodeverk,
-  submitCallback,
-  formData,
-  setFormData,
 }) => {
   const intl = useIntl();
-  const initialValues = useMemo(() => buildInitialValues(klageVurdering.klageVurderingResultatNK), [klageVurdering]);
-  const formMethods = useForm<KlageFormType>({
-    defaultValues: formData || initialValues,
-  });
 
-  const formValues = formMethods.watch();
+  const {
+    klageVurderingResultatNK: {
+      begrunnelse, fritekstTilBrev, klageVurdering: vurdering, klageMedholdArsak, klageVurderingOmgjoer,
+    },
+  } = klageVurdering;
+
+  const medholdReasons = alleKodeverk[KodeverkType.KLAGE_MEDHOLD_ARSAK];
 
   return (
-    <Form
-      formMethods={formMethods}
-      onSubmit={(values: KlageFormType) => submitCallback(transformValues(values))}
-      setDataOnUnmount={setFormData}
-    >
-      <>
-        <Heading size="small">{intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}</Heading>
-        <VerticalSpacer fourPx />
-        <AksjonspunktHelpTextTemp isAksjonspunktOpen={!readOnlySubmitButton}>
-          {[<FormattedMessage id="Klage.ResolveKlage.HelpText" key={aksjonspunktCodes.BEHANDLE_KLAGE_NK} />]}
-        </AksjonspunktHelpTextTemp>
-        <VerticalSpacer sixteenPx />
-        <KlageVurderingRadioOptionsKa
-          readOnly={readOnly}
-          klageVurdering={formValues.klageVurdering}
-          medholdReasons={alleKodeverk[kodeverkTyper.KLAGE_MEDHOLD_ARSAK]}
-        />
-        <div className={styles.confirmVilkarForm}>
+    <>
+      <Heading size="small">{intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}</Heading>
+      <VerticalSpacer sixteenPx />
+      <Label size="small">
+        <FormattedMessage id="KlageVurderingRadioOptionsKa.VurderingForKlage" />
+      </Label>
+      <BodyShort size="small">
+        {vurdering === klageVurderingType.STADFESTE_YTELSESVEDTAK && <FormattedMessage id="Klage.ResolveKlage.KeepVedtakNk" />}
+        {vurdering === klageVurderingType.MEDHOLD_I_KLAGE && <FormattedMessage id="Klage.ResolveKlage.ChangeVedtak" />}
+        {vurdering === klageVurderingType.HJEMSENDE_UTEN_Å_OPPHEVE && <FormattedMessage id="Klage.Behandle.Hjemsendt" />}
+        {vurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK && <FormattedMessage id="Klage.ResolveKlage.NullifyVedtak" />}
+      </BodyShort>
+      <VerticalSpacer sixteenPx />
+      {vurdering === klageVurderingType.MEDHOLD_I_KLAGE && (
+        <>
+          <Label size="small">
+            <FormattedMessage id="Klage.ResolveKlage.Cause" />
+          </Label>
+          <BodyShort size="small">
+            {medholdReasons.find((mo) => mo.kode === klageMedholdArsak)?.navn}
+          </BodyShort>
           <VerticalSpacer sixteenPx />
-          <FritekstBrevTextField
-            sprakkode={sprakkode}
-            readOnly={readOnly}
-          />
+          <BodyShort size="small">
+            {klageVurderingOmgjoer === klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE && <FormattedMessage id="Klage.Behandle.Omgjort" />}
+            {klageVurderingOmgjoer === klageVurderingOmgjoerType.UGUNST_MEDHOLD_I_KLAGE && <FormattedMessage id="Klage.Behandle.Ugunst" />}
+            {klageVurderingOmgjoer === klageVurderingOmgjoerType.DELVIS_MEDHOLD_I_KLAGE && <FormattedMessage id="Klage.Behandle.DelvisOmgjort" />}
+          </BodyShort>
           <VerticalSpacer sixteenPx />
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <ProsessStegSubmitButtonNew
-                  isReadOnly={readOnly}
-                  isSubmittable={!readOnlySubmitButton}
-                  isSubmitting={formMethods.formState.isSubmitting}
-                  isDirty={formMethods.formState.isDirty}
-                />
-                {!readOnly && formValues.klageVurdering && formValues.fritekstTilBrev && (formValues.fritekstTilBrev.length > 2)
-                && (
-                  <PreviewKlageLink
-                    previewCallback={previewCallback}
-                    fritekstTilBrev={formValues.fritekstTilBrev}
-                    klageVurdering={formValues.klageVurdering}
-                    aksjonspunktCode={aksjonspunktCodes.BEHANDLE_KLAGE_NK}
-                  />
-                )}
-              </FlexColumn>
-              <FlexColumn>
-                <TempsaveKlageButton
-                  saveKlage={saveKlage}
-                  readOnly={readOnly}
-                  aksjonspunktCode={aksjonspunktCodes.BEHANDLE_KLAGE_NK}
-                  handleSubmit={formMethods.handleSubmit}
-                />
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
-        </div>
-      </>
-    </Form>
+        </>
+      )}
+      {(vurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK || vurdering === klageVurderingType.HJEMSENDE_UTEN_Å_OPPHEVE) && (
+        <>
+          <Label size="small">
+            <FormattedMessage id="Klage.ResolveKlage.Cause" />
+          </Label>
+          <BodyShort size="small">
+            {medholdReasons.find((mo) => mo.kode === klageMedholdArsak)?.navn}
+          </BodyShort>
+          <VerticalSpacer sixteenPx />
+        </>
+      )}
+      <Label size="small">
+        <FormattedMessage id="FritekstKlageBrevTextField.Fritekst" />
+      </Label>
+      <BodyShort size="small">
+        {fritekstTilBrev}
+      </BodyShort>
+      <VerticalSpacer sixteenPx />
+      <Label size="small">
+        <FormattedMessage id="KlageVurderingRadioOptionsKa.Begrunnelse" />
+      </Label>
+      <BodyShort size="small">
+        {begrunnelse}
+      </BodyShort>
+      <VerticalSpacer sixteenPx />
+    </>
   );
 };
 

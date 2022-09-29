@@ -82,7 +82,7 @@ interface OwnProps {
   toggleOppdatereFagsakContext?: (skalHenteFagsak: boolean) => void,
   opneSokeside?: () => void;
   oppdaterProsessStegOgFaktaPanelIUrl?: (punktnavn?: string, faktanavn?: string) => void;
-  aksjonspunktKoder: string[];
+  aksjonspunktKoder?: string[];
   prosessPanelKode: ProsessStegCode;
   prosessPanelMenyTekst: string;
 }

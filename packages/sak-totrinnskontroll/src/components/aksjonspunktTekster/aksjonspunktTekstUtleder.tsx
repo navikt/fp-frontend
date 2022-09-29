@@ -159,9 +159,7 @@ const buildAvklarAnnenForelderText = (): ReactElement => <FormattedMessage id="T
 
 const erKlageAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt): boolean => aksjonspunkt
   .aksjonspunktKode === aksjonspunktCodes.BEHANDLE_KLAGE_NFP
-  || aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.BEHANDLE_KLAGE_NK
-  || aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP
-  || aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_KA;
+  || aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP;
 
 const getAksjonspunkttekst = (
   isForeldrepenger: boolean,
