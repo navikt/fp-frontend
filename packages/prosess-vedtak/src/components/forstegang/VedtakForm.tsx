@@ -9,7 +9,7 @@ import {
 import klageBehandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
-import behandlingResultatType, { isAvslag, isInnvilget } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
+import behandlingResultatType, { isAvslag, isInnvilget, isKlageOmgjort } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
 import { Form } from '@navikt/ft-form-hooks';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -49,7 +49,7 @@ export const finnInnvilgetResultatText = (
   if (behandlingResultatTypeKode === behandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET) {
     return 'VedtakForm.ResultatOpprettholdVedtak';
   }
-  if (behandlingResultatTypeKode === behandlingResultatType.KLAGE_MEDHOLD) {
+  if (isKlageOmgjort(behandlingResultatTypeKode)) {
     return 'VedtakForm.ResultatKlageMedhold';
   }
 
