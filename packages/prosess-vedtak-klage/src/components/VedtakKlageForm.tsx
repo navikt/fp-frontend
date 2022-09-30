@@ -7,7 +7,7 @@ import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import { getKodeverknavnFn } from '@navikt/ft-utils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import behandlingResultatType, {isKlageOmgjort} from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
+import behandlingResultatType, { isKlageOmgjort } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import {
   Aksjonspunkt, Behandling, KlageVurdering, AlleKodeverk,
