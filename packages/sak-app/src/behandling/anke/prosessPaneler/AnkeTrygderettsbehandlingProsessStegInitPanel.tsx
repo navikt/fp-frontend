@@ -17,6 +17,9 @@ type EndepunktInitData = {
   ankeVurdering: AnkeVurdering;
 }
 
+const isBehandlet = (ankeVurdering: AnkeVurdering): boolean => !!ankeVurdering?.ankeVurderingResultat?.sendtTilTrygderettenDato
+  || (!!ankeVurdering?.ankeVurderingResultat?.trygderettVurdering && ankeVurdering?.ankeVurderingResultat?.trygderettVurdering !== '-');
+
 const AnkeTrygderettsbehandlingProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps> = ({
   ...props
 }) => {
@@ -29,7 +32,7 @@ const AnkeTrygderettsbehandlingProsessStegInitPanel: FunctionComponent<ProsessPa
       prosessPanelKode={ProsessStegCode.ANKE_MERKNADER}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.AnkeMerknader' })}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={(data) => (data.ankeVurdering?.ankeVurderingResultat ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT)}
+      hentOverstyrtStatus={(data) => (isBehandlet(data.ankeVurdering) ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT)}
       renderPanel={(data) => (
         <AnkeTrygderettsbehandlingProsessIndex
           // @ts-ignore
