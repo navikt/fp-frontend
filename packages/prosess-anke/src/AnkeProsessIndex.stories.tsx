@@ -100,6 +100,10 @@ UnderBehandlingIKabal.args = {
 export const ErBehandletIKabal = Template.bind({});
 ErBehandletIKabal.args = {
   ankeVurdering: {
+    ankeVurderingResultat: {
+      ankeVurdering: AnkeVurderingKodeverk.ANKE_OMGJOER,
+      ankeVurderingOmgjoer: ankeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST,
+    },
     underBehandlingKabal: false,
     behandletAvKabal: true,
   } as AnkeVurdering,

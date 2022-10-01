@@ -21,6 +21,7 @@ const TrygderettsbehandlingForm: FunctionComponent<OwnProps> = ({
 }) => {
   const avr = ankeVurdering?.ankeVurderingResultat;
   const behandlesKabal = ankeVurdering?.underBehandlingKabal || false;
+  const behandlesKabalTrygderett = ankeVurdering?.underBehandlingKabalTrygderett || false;
   const behandletKabal = ankeVurdering?.behandletAvKabal || false;
 
   const ankeOmgorArsaker = alleKodeverk[kodeverkTyper.ANKE_OMGJOER_AARSAK];
@@ -41,7 +42,7 @@ const TrygderettsbehandlingForm: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
         </>
       )}
-      {!behandlesKabal && !behandletKabal && (
+      {!behandlesKabal && !behandlesKabalTrygderett && (
         <>
           <Label size="small">
             <FormattedMessage id="Ankebehandling.Merknad.Merknader" />
@@ -90,7 +91,7 @@ const TrygderettsbehandlingForm: FunctionComponent<OwnProps> = ({
         </>
       )}
       {(ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE === avr.trygderettVurdering
-        || ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV === avr.trygderettVurdering) && (
+        || ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV === avr.trygderettVurdering) && !behandletKabal && (
         <>
           <VerticalSpacer sixteenPx />
           <Label size="small">

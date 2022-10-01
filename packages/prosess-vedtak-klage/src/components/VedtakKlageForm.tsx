@@ -7,7 +7,7 @@ import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import { getKodeverknavnFn } from '@navikt/ft-utils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
+import behandlingResultatType, { isKlageOmgjort } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import {
   Aksjonspunkt, Behandling, KlageVurdering, AlleKodeverk,
@@ -113,6 +113,7 @@ const VedtakKlageForm: FunctionComponent<OwnProps> = ({
   const behandlingsResultatTekst = useMemo(() => getResultatText(klageVurdering), [klageVurdering]);
   const klageVurderingResultat = klageVurdering.klageVurderingResultatNK
     ? klageVurdering.klageVurderingResultatNK : klageVurdering.klageVurderingResultatNFP;
+  const erOmgjort = isKlageOmgjort(behandlingsresultat.type);
 
   const [isSubmitting, setSubmitting] = useState(false);
   const lagreVedtak = useCallback(() => {
@@ -145,7 +146,7 @@ const VedtakKlageForm: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
         </>
       )}
-      {behandlingsresultat.type === behandlingResultatType.KLAGE_MEDHOLD && (
+      {erOmgjort && (
         <>
           <Label size="small"><FormattedMessage id="VedtakKlageForm.ArsakTilOmgjoring" /></Label>
           { omgjortAarsak }

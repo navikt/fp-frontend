@@ -83,7 +83,7 @@ const BehandleAnkeForm: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
         </>
       )}
-      {!behandlesKabal && !behandletKabal && (
+      {!behandlesKabal && (
         <>
           <Label size="small">
             <FormattedMessage id="Ankebehandling.Resultat.Vedtak" />
@@ -105,7 +105,7 @@ const BehandleAnkeForm: FunctionComponent<OwnProps> = ({
             {avr.ankeVurdering === ankeVurderingKodeverk.ANKE_AVVIS && <FormattedMessage id="Ankebehandling.Resultat.Avvis" />}
             {avr.ankeVurdering === ankeVurderingKodeverk.ANKE_STADFESTE_YTELSESVEDTAK && <FormattedMessage id="Ankebehandling.Resultat.Stadfest" />}
           </BodyShort>
-          {ankeVurderingKodeverk.ANKE_AVVIS === avr.ankeVurdering && (
+          {ankeVurderingKodeverk.ANKE_AVVIS === avr.ankeVurdering && !behandletKabal && (
             <>
               <VerticalSpacer sixteenPx />
               <Label size="small">
@@ -160,7 +160,7 @@ const BehandleAnkeForm: FunctionComponent<OwnProps> = ({
             </>
           )}
           {(ankeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE === avr.ankeVurdering
-            || ankeVurderingKodeverk.ANKE_HJEMSENDE_UTEN_OPPHEV === avr.ankeVurdering) && (
+            || ankeVurderingKodeverk.ANKE_HJEMSENDE_UTEN_OPPHEV === avr.ankeVurdering) && !behandletKabal && (
             <>
               <VerticalSpacer sixteenPx />
               <Label size="small">
