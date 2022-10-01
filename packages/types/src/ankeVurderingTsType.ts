@@ -16,8 +16,10 @@ type AnkeVurdering = Readonly<{
     fritekstTilBrev?: string;
     merknadKommentar?: string;
     erMerknaderMottatt?: boolean;
+    sendtTilTrygderettenDato?: string;
  };
   underBehandlingKabal?: boolean;
+  underBehandlingKabalTrygderett?: boolean;
   behandletAvKabal?: boolean;
 }>;
 
