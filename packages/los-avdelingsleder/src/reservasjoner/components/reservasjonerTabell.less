@@ -1,0 +1,43 @@
+
+.removeImage {
+  cursor: pointer;
+  padding: 5px;
+}
+
+.calendarToggleButton {
+  background: transparent;
+  border: 1px solid transparent;
+  box-sizing: content-box;
+  cursor: pointer;
+  display: inline-block;
+  height: 22px;
+  left: 0;
+  margin: 0;
+  top: 0;
+  width: 22px;
+
+  &:after {
+    content: url('images/sharedComponents/kalender.svg');
+  }
+
+  &:hover,
+  &:focus {
+    border-color: transparent;
+    box-shadow: none;
+    outline: none;
+
+    &:after {
+      content: url('images/sharedComponents/kalender_hover.svg');
+    }
+  }
+
+  &:disabled {
+    background: transparent;
+    border-color: transparent;
+    cursor: initial;
+
+    &:after {
+      content: url('images/sharedComponents/kalender_disabled.svg');
+    }
+  }
+}
