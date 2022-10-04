@@ -6,15 +6,21 @@ import { Form } from '@navikt/ft-form-hooks';
 import { BehandlingType } from '@navikt/ft-kodeverk';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import { alleKodeverkLos } from '@fpsak-frontend/storybook-utils';
+import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
 
 import SorteringVelger from './SorteringVelger';
 import koSortering from '../../../../kodeverk/KoSortering';
 import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, requestApi } from '../../../../data/fplosRestApi';
 
+import messages from '../../../../../i18n/nb_NO.json';
+
+const withIntl = getIntlDecorator(messages);
+
 export default {
-  title: 'avdelingsleder/behandlingskoer/SorteringVelger',
+  title: 'los/avdelingsleder/behandlingskoer/SorteringVelger',
   component: SorteringVelger,
+  decorators: [withIntl],
 };
 
 const Template: Story<{ valgteBehandlingtyper: string[], erDynamiskPeriode: boolean }> = ({
@@ -22,7 +28,7 @@ const Template: Story<{ valgteBehandlingtyper: string[], erDynamiskPeriode: bool
   erDynamiskPeriode,
 }) => {
   const data = [
-    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverk },
+    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverkLos, global: true },
     { key: RestApiPathsKeys.LAGRE_SAKSLISTE_SORTERING.name, data: undefined },
     { key: RestApiPathsKeys.LAGRE_SAKSLISTE_SORTERING_INTERVALL.name, data: undefined },
     { key: RestApiPathsKeys.LAGRE_SAKSLISTE_SORTERING_DYNAMISK_PERIDE.name, data: undefined },

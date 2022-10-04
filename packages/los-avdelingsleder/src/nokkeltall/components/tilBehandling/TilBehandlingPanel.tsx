@@ -128,7 +128,7 @@ export const TilBehandlingPanel: FunctionComponent<OwnProps & WrappedComponentPr
                 label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.SVANGERSKAPSPENGER),
               }, {
                 value: ALLE_YTELSETYPER_VALGT,
-                label: <FormattedMessage id="FordelingAvBehandlingstypePanel.Alle" />,
+                label: <FormattedMessage id="TilBehandlingPanel.Alle" />,
               }]}
             />
           </FlexColumn>

@@ -4,7 +4,8 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import { alleKodeverkLos } from '@fpsak-frontend/storybook-utils';
+import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
 
 import UtvalgskriterierForSakslisteForm from './UtvalgskriterierForSakslisteForm';
 import koSortering from '../../../kodeverk/KoSortering';
@@ -12,16 +13,21 @@ import andreKriterierType from '../../../kodeverk/andreKriterierType';
 
 import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, requestApi } from '../../../data/fplosRestApi';
 
+import messages from '../../../../i18n/nb_NO.json';
+
+const withIntl = getIntlDecorator(messages);
+
 export default {
-  title: 'avdelingsleder/behandlingskoer/UtvalgskriterierForSakslisteForm',
+  title: 'los/avdelingsleder/behandlingskoer/UtvalgskriterierForSakslisteForm',
   component: UtvalgskriterierForSakslisteForm,
+  decorators: [withIntl],
 };
 
 const Template: Story<{ sakslisteNavn: string }> = ({
   sakslisteNavn,
 }) => {
   const data = [
-    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverk },
+    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverkLos, global: true },
     { key: RestApiPathsKeys.OPPGAVE_ANTALL.name, data: 1 },
     { key: RestApiPathsKeys.LAGRE_SAKSLISTE_NAVN.name, data: undefined },
     { key: RestApiPathsKeys.LAGRE_SAKSLISTE_SORTERING.name, data: undefined },

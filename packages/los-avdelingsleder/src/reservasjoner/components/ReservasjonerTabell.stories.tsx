@@ -2,13 +2,19 @@ import React, { useState, useCallback } from 'react';
 import { action } from '@storybook/addon-actions';
 import { BehandlingType } from '@navikt/ft-kodeverk';
 
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import { alleKodeverkLos } from '@fpsak-frontend/storybook-utils';
+import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
 
 import ReservasjonerTabell from './ReservasjonerTabell';
 
+import messages from '../../../i18n/nb_NO.json';
+
+const withIntl = getIntlDecorator(messages);
+
 export default {
-  title: 'avdelingsleder/reservasjoner/ReservasjonerTabell',
+  title: 'los/avdelingsleder/reservasjoner/ReservasjonerTabell',
   component: ReservasjonerTabell,
+  decorators: [withIntl],
 };
 
 export const ViseAtIngenReservasjonerBleFunnet = () => (
@@ -16,7 +22,7 @@ export const ViseAtIngenReservasjonerBleFunnet = () => (
     reservasjoner={[]}
     opphevReservasjon={action('button-click') as () => Promise<string>}
     hentAvdelingensReservasjoner={action('button-click')}
-    alleKodeverk={alleKodeverk as any}
+    alleKodeverk={alleKodeverkLos as any}
   />
 );
 
@@ -46,7 +52,7 @@ export const VisTabellMedReservasjoner = () => {
       reservasjoner={reservasjoner}
       opphevReservasjon={opphevReservasjon as () => Promise<string>}
       hentAvdelingensReservasjoner={action('button-click')}
-      alleKodeverk={alleKodeverk as any}
+      alleKodeverk={alleKodeverkLos as any}
     />
   );
 };

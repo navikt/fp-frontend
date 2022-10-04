@@ -2,14 +2,14 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import { alleKodeverk, withRouter } from '@fpsak-frontend/storybook-utils';
+import { alleKodeverkLos, withRouter } from '@fpsak-frontend/storybook-utils';
 
 import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, requestApi } from './data/fplosRestApi';
 import AvdelingslederIndex from './AvdelingslederIndex';
 import NavAnsattLos from './typer/navAnsattLosTsType';
 
 export default {
-  title: 'avdelingsleder/AvdelingslederIndex',
+  title: 'los/avdelingsleder/AvdelingslederIndex',
   component: AvdelingslederIndex,
   decorators: [withRouter],
 };
@@ -24,9 +24,9 @@ const Template: Story<{ valgtAvdelingEnhet?: string, navAnsatt: NavAnsattLos }> 
   navAnsatt,
 }) => {
   const data = [
-    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverk },
-    { key: RestApiGlobalStatePathsKeys.NAV_ANSATT_LOS.name, data: navAnsatt },
-    { key: RestApiGlobalStatePathsKeys.AVDELINGER.name, data: {} },
+    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverkLos, global: true },
+    { key: RestApiGlobalStatePathsKeys.NAV_ANSATT_LOS.name, data: navAnsatt, global: true },
+    { key: RestApiGlobalStatePathsKeys.AVDELINGER.name, data: {}, global: true },
     { key: RestApiPathsKeys.SAKSBEHANDLERE_FOR_AVDELING.name, data: [] },
     { key: RestApiPathsKeys.OPPGAVE_ANTALL.name, data: 1 },
     { key: RestApiPathsKeys.LAGRE_SAKSLISTE_NAVN.name, data: undefined },

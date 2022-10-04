@@ -1,12 +1,12 @@
 import React, {
   FunctionComponent, useMemo, useEffect, useCallback,
 } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { RawIntlProvider, FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { Location } from 'history';
 import { Heading, Panel, Tabs } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { formatQueryString, parseQueryString } from '@navikt/ft-utils';
+import { formatQueryString, parseQueryString, createIntl } from '@navikt/ft-utils';
 
 import useTrackRouteParam from './useTrackRouteParam';
 import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, restApiHooks } from './data/fplosRestApi';
@@ -19,6 +19,10 @@ import NokkeltallIndex from './nokkeltall/NokkeltallIndex';
 import EndreSaksbehandlereIndex from './saksbehandlere/EndreSaksbehandlereIndex';
 import EndreBehandlingskoerIndex from './behandlingskoer/EndreBehandlingskoerIndex';
 import ReservasjonerIndex from './reservasjoner/ReservasjonerIndex';
+
+import messages from '../i18n/nb_NO.json';
+
+const intl = createIntl(messages);
 
 const EMPTY_ARRAY: Saksbehandler[] = [];
 
@@ -163,4 +167,12 @@ const AvdelingslederIndex: FunctionComponent<OwnProps> = ({
   return <LoadingPanel />;
 };
 
-export default AvdelingslederIndex;
+const AvdelingslederIndexIntlWrapper: FunctionComponent<OwnProps> = ({
+  valgtAvdelingEnhet,
+}) => (
+  <RawIntlProvider value={intl}>
+    <AvdelingslederIndex valgtAvdelingEnhet={valgtAvdelingEnhet} />
+  </RawIntlProvider>
+);
+
+export default AvdelingslederIndexIntlWrapper;

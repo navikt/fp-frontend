@@ -5,22 +5,28 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import { alleKodeverkLos } from '@fpsak-frontend/storybook-utils';
+import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
 
 import { RestApiGlobalStatePathsKeys, requestApi } from '../../../data/fplosRestApi';
 import TilBehandlingPanel from './TilBehandlingPanel';
 import OppgaveForDato from '../../../typer/oppgaverForDatoTsType';
 
+import messages from '../../../../i18n/nb_NO.json';
+
+const withIntl = getIntlDecorator(messages);
+
 export default {
-  title: 'avdelingsleder/nokkeltall/TilBehandlingPanel',
+  title: 'los/avdelingsleder/nokkeltall/TilBehandlingPanel',
   component: TilBehandlingPanel,
+  decorators: [withIntl],
 };
 
 const Template: Story<{ oppgaverPerDato: OppgaveForDato[] }> = ({
   oppgaverPerDato,
 }) => {
   const data = [
-    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverk },
+    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverkLos, global: true },
   ];
 
   return (

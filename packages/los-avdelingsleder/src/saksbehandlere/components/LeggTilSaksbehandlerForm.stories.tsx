@@ -3,14 +3,20 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
+import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
 
 import LeggTilSaksbehandlerForm from './LeggTilSaksbehandlerForm';
 import { RestApiPathsKeys, requestApi } from '../../data/fplosRestApi';
 import SaksbehandlerAvdeling from '../../typer/saksbehandlerAvdelingTsType';
 
+import messages from '../../../i18n/nb_NO.json';
+
+const withIntl = getIntlDecorator(messages);
+
 export default {
-  title: 'avdelingsleder/saksbehandlere/LeggTilSaksbehandlerForm',
+  title: 'los/avdelingsleder/saksbehandlere/LeggTilSaksbehandlerForm',
   component: LeggTilSaksbehandlerForm,
+  decorators: [withIntl],
 };
 
 const saksbehandler = {

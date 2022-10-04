@@ -5,15 +5,21 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import { alleKodeverkLos } from '@fpsak-frontend/storybook-utils';
+import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
 
 import OppgaverManueltPaVent from '../../../typer/oppgaverManueltPaVentTsType';
 import { RestApiGlobalStatePathsKeys, requestApi } from '../../../data/fplosRestApi';
 import ManueltPaVentPanel from './ManueltPaVentPanel';
 
+import messages from '../../../../i18n/nb_NO.json';
+
+const withIntl = getIntlDecorator(messages);
+
 export default {
-  title: 'avdelingsleder/nokkeltall/ManueltPaVentPanel',
+  title: 'los/avdelingsleder/nokkeltall/ManueltPaVentPanel',
   component: ManueltPaVentPanel,
+  decorators: [withIntl],
 };
 
 // https://github.com/storybookjs/storybook/issues/12208
@@ -23,7 +29,7 @@ const Template: Story<{ oppgaverManueltPaVent: OppgaverManueltPaVent[] }> = ({
   oppgaverManueltPaVent,
 }) => {
   const data = [
-    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverk },
+    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverkLos, global: true },
   ];
 
   return (

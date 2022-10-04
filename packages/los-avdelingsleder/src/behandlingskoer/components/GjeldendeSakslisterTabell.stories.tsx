@@ -3,15 +3,21 @@ import { action } from '@storybook/addon-actions';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import { alleKodeverkLos } from '@fpsak-frontend/storybook-utils';
+import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
 
 import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, requestApi } from '../../data/fplosRestApi';
 import Saksliste from '../../typer/sakslisteAvdelingTsType';
 import { GjeldendeSakslisterTabell } from './GjeldendeSakslisterTabell';
 
+import messages from '../../../i18n/nb_NO.json';
+
+const withIntl = getIntlDecorator(messages);
+
 export default {
-  title: 'avdelingsleder/behandlingskoer/GjeldendeSakslisterTabell',
+  title: 'los/avdelingsleder/behandlingskoer/GjeldendeSakslisterTabell',
   component: GjeldendeSakslisterTabell,
+  decorators: [withIntl],
 };
 
 interface Props {
@@ -32,7 +38,7 @@ const Template: Story<Props> = ({
   const [sakslister, setSaksliste] = useState<Saksliste[]>(saksliste || []);
 
   const data = [
-    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverk },
+    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverkLos, global: true },
     { key: RestApiPathsKeys.SLETT_SAKSLISTE.name, data: {} },
   ];
 

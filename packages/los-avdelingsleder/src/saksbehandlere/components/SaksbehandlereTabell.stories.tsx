@@ -2,14 +2,20 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
+import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
 
 import Saksbehandler from '../../typer/saksbehandlerAvdelingTsType';
 import SaksbehandlereTabell from './SaksbehandlereTabell';
 import { RestApiPathsKeys, requestApi } from '../../data/fplosRestApi';
 
+import messages from '../../../i18n/nb_NO.json';
+
+const withIntl = getIntlDecorator(messages);
+
 export default {
-  title: 'avdelingsleder/saksbehandlere/SaksbehandlereTabell',
+  title: 'los/avdelingsleder/saksbehandlere/SaksbehandlereTabell',
   component: SaksbehandlereTabell,
+  decorators: [withIntl],
 };
 
 const Template: Story<{

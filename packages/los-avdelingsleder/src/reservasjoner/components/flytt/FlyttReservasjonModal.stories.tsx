@@ -9,7 +9,7 @@ import FlyttReservasjonModal from './FlyttReservasjonModal';
 import SaksbehandlerAvdeling from '../../../typer/saksbehandlerAvdelingTsType';
 
 export default {
-  title: 'saksbehandler/behandlingskoer/FlyttReservasjonModal',
+  title: 'los/avdelingsleder/behandlingskoer/FlyttReservasjonModal',
   component: FlyttReservasjonModal,
 };
 

@@ -1,12 +1,19 @@
 import React from 'react';
 import dayjs from 'dayjs';
-
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+
+import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
+
 import { OppgaverPerForsteStonadsdagPanel } from './OppgaverPerForsteStonadsdagPanel';
 
+import messages from '../../../../i18n/nb_NO.json';
+
+const withIntl = getIntlDecorator(messages);
+
 export default {
-  title: 'avdelingsleder/nokkeltall/OppgaverPerForsteStonadsdagPanel',
+  title: 'los/avdelingsleder/nokkeltall/OppgaverPerForsteStonadsdagPanel',
   component: OppgaverPerForsteStonadsdagPanel,
+  decorators: [withIntl],
 };
 
 export const Default = () => (

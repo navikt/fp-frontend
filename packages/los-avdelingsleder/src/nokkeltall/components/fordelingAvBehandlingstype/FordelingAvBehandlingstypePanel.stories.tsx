@@ -3,23 +3,29 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import { alleKodeverkLos } from '@fpsak-frontend/storybook-utils';
+import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
 
 import { RestApiGlobalStatePathsKeys, requestApi } from '../../../data/fplosRestApi';
 
 import OppgaverForAvdeling from '../../../typer/oppgaverForAvdelingTsType';
 import { FordelingAvBehandlingstypePanel } from './FordelingAvBehandlingstypePanel';
 
+import messages from '../../../../i18n/nb_NO.json';
+
+const withIntl = getIntlDecorator(messages);
+
 export default {
-  title: 'avdelingsleder/nokkeltall/FordelingAvBehandlingstypePanel',
+  title: 'los/avdelingsleder/nokkeltall/FordelingAvBehandlingstypePanel',
   component: FordelingAvBehandlingstypePanel,
+  decorators: [withIntl],
 };
 
 const Template: Story<{ oppgaverForAvdeling: OppgaverForAvdeling[] }> = ({
   oppgaverForAvdeling,
 }) => {
   const data = [
-    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverk },
+    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverkLos, global: true },
   ];
 
   return (

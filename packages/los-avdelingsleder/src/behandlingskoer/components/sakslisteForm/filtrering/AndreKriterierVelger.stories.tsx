@@ -5,22 +5,28 @@ import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import { alleKodeverkLos } from '@fpsak-frontend/storybook-utils';
+import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
 
 import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, requestApi } from '../../../../data/fplosRestApi';
 import andreKriterierType from '../../../../kodeverk/andreKriterierType';
 import AndreKriterierVelger from './AndreKriterierVelger';
 
+import messages from '../../../../../i18n/nb_NO.json';
+
+const withIntl = getIntlDecorator(messages);
+
 export default {
-  title: 'avdelingsleder/behandlingskoer/AndreKriterierVelger',
+  title: 'los/avdelingsleder/behandlingskoer/AndreKriterierVelger',
   component: AndreKriterierVelger,
+  decorators: [withIntl],
 };
 
 const Template: Story<{ defaultVerdier: Record<string, boolean> }> = ({
   defaultVerdier,
 }) => {
   const data = [
-    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverk },
+    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverkLos, global: true },
     { key: RestApiPathsKeys.LAGRE_SAKSLISTE_ANDRE_KRITERIER.name, data: {} },
   ];
 
