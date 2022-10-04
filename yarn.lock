@@ -2895,10 +2895,10 @@
     "@navikt/ds-react" "^1.3.5"
     "@navikt/ft-utils" "^1.1.4"
 
-"@navikt/ft-prosess-beregningsgrunnlag@2.4.8":
-  version "2.4.8"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-beregningsgrunnlag/2.4.8/bbcb7c3c5e6c1d3b85dc49bc6add64b8185f462b#bbcb7c3c5e6c1d3b85dc49bc6add64b8185f462b"
-  integrity sha512-21aP0SnG8/aJX7MRLo3SzDhekU7YFPePMle13bITqBD75oPfWQAZGROcQDsjzzrdFzWzdPqvh7D41ShwXuQ6Hg==
+"@navikt/ft-prosess-beregningsgrunnlag@2.4.9":
+  version "2.4.9"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-beregningsgrunnlag/2.4.9/6282aee1b35e104d7459b4228382bc45c9fdeea0#6282aee1b35e104d7459b4228382bc45c9fdeea0"
+  integrity sha512-0eK0jKOkWooONbewzKbHSbHN/refOCtzLbG9D++WwgNFcYASFedGasLIm8TVKmqs4Lg8MpjK38A+6x+OrXHQSw==
   dependencies:
     "@navikt/ds-css" "^1.3.5"
     "@navikt/ft-form-hooks" "^2.0.7"
@@ -2928,8 +2928,6 @@
     nav-frontend-paneler-style "2.0.2"
     nav-frontend-skjema "4.0.6"
     nav-frontend-skjema-style "3.0.3"
-    nav-frontend-typografi "4.0.2"
-    nav-frontend-typografi-style "2.0.2"
     react "18.2.0"
     react-collapse "5.1.1"
     react-hook-form "7.36.1"
