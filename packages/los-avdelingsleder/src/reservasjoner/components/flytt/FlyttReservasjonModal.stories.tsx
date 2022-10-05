@@ -3,14 +3,20 @@ import { action } from '@storybook/addon-actions';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
+import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
 
 import { RestApiPathsKeys, requestApi } from '../../../data/fplosRestApi';
 import FlyttReservasjonModal from './FlyttReservasjonModal';
 import SaksbehandlerAvdeling from '../../../typer/saksbehandlerAvdelingTsType';
 
+import messages from '../../../../i18n/nb_NO.json';
+
+const withIntl = getIntlDecorator(messages);
+
 export default {
   title: 'los/avdelingsleder/behandlingskoer/FlyttReservasjonModal',
   component: FlyttReservasjonModal,
+  decorators: [withIntl],
 };
 
 const Template: Story<{
