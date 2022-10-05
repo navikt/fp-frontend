@@ -1,4 +1,5 @@
 import React from 'react';
+import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
 
@@ -14,6 +15,8 @@ export default {
   decorators: [withIntl],
 };
 
-export const IkkeTilgangGrunnetKode6 = () => (
+const Template: Story = () => (
   <IkkeTilgangTilKode6AvdelingPanel />
 );
+
+export const IkkeTilgangGrunnetKode6 = Template.bind({});

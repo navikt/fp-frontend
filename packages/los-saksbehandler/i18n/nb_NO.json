@@ -1,0 +1,115 @@
+{
+  "SakslistePanel.StartBehandling": "Start behandling",
+
+  "OppgaverTabell.DineNesteSaker": "Neste behandlinger ({antall} i køen)",
+  "OppgaverTabell.IngenOppgaver": "Det er ingen behandlinger i denne køen",
+  "OppgaverTabell.Soker": "Søker",
+  "OppgaverTabell.Behandlingstype": "Behandlingstype",
+  "OppgaverTabell.BehandlingOpprettet": "Behandling opprettet",
+  "OppgaverTabell.FristForBehandling": "Frist for behandling",
+  "OppgaverTabell.OppgaveHandlinger": "Handlinger på oppgave",
+  "OppgaverTabell.OverfortReservasjon": "Overført reservasjon",
+  "OppgaverTabell.OverfortReservasjonTooltip": "Overført reservasjon {dato} - {tid} fra {uid} {navn}{br}{br}{beskrivelse}",
+
+  "Person.Age": "{age} år",
+  "Person.ImageText": "Personinformasjon",
+  "Person.Woman": "Kvinne",
+  "Person.Man": "Mann",
+  "Person.ManglerDodsdato": "Dødsdato mangler",
+  "Person.UkjentNavn": "Ukjent navn på forelder",
+  "Person.HarIkkeNorskFnrEllerDnr": "Har ikke norsk f.nr. eller d-nr.",
+
+  "Search.SearchFagsakOrPerson": "Søk på sak eller person",
+  "Search.SaksnummerOrPersonId": "Saksnummer eller fødselsnummer/D-nummer",
+  "Search.Search": "Søk",
+  "Search.ReserverBehandling": "Reserver behandlingen ved søk",
+
+  "SistBehandledeSaker.SistBehandledeSaker": "Siste behandlinger",
+  "SistBehandledeSaker.IngenBehandlinger": "Ingen behandlinger",
+  "SistBehandledeSaker.Behandling": "Behandling {index}",
+
+  "NyeOgFerdigstilteOppgaverForIdagPanel.NyeOgFerdigstilte": "Nye og ferdigstilte behandlinger",
+  "NyeOgFerdigstilteOppgaverForIdagPanel.IDag": "I dag",
+  
+  "OppgaveErReservertAvAnnenModal.ReservertAv": "{saksbehandlernavn} ({saksbehandlerid}) arbeider nå med denne behandlingen (reservert fram t.o.m {date} - {time})",
+  "OppgaveErReservertAvAnnenModal.ReservertAvEnkel": "En annen saksbehandler arbeider nå med denne behandlingen",
+  "OppgaveErReservertAvAnnenModal.Ok": "OK",
+
+  "LeggTilSaksbehandlerForm.LeggTil": "Legg til saksbehandler",
+  "LeggTilSaksbehandlerForm.Brukerident": "Brukerident",
+  "LeggTilSaksbehandlerForm.Sok": "Søk",
+  "LeggTilSaksbehandlerForm.LeggTilIListen": "Legg til i listen",
+  "LeggTilSaksbehandlerForm.Nullstill": "Nullstill",
+  "LeggTilSaksbehandlerForm.FinnesAllerede": "Brukerident finnes allerede i listen",
+  "LeggTilSaksbehandlerForm.FinnesIkke": "Kan ikke finne brukerident",
+
+  "FlyttReservasjonModal.FlyttReservasjon": "Flytt reservasjonen til annen saksbehandler",
+  "FlyttReservasjonModal.Brukerident": "Brukerident",
+  "FlyttReservasjonModal.Sok": "Søk",
+  "FlyttReservasjonModal.Begrunn": "Begrunn flytting av reservasjonen",
+  "FlyttReservasjonModal.Ok": "OK",
+  "FlyttReservasjonModal.Avbryt": "Avbryt",
+
+  "OppgaveReservasjonForlengetModal.Reservert": "Behandlingen er reservert på deg",
+  "OppgaveReservasjonForlengetModal.Til": "t.o.m. {date} - {time}",
+  "OppgaveReservasjonForlengetModal.Ok": "OK",
+
+  "OppgaveReservasjonEndringDatoModal.Header": "Velg dato som reservasjonen avsluttes",
+  "OppgaveReservasjonEndringDatoModal.Ok": "OK",
+  "OppgaveReservasjonEndringDatoModal.Avbryt": "Avbryt",
+
+  "BehandlingPollingTimoutModal.TimeoutMelding": "Din økt er gått ut på tid, trykk Fortsett",
+  "BehandlingPollingTimoutModal.Oppfrisk": "Fortsett",
+
+  "OpphevReservasjonModal.Begrunnelse":"Angi begrunnelse",
+  "OpphevReservasjonModal.Hjelpetekst":"Når en reservert sak frigjøres er begrunnelse obligatorisk",
+  "OpphevReservasjonModal.Ok":"OK",
+  "OpphevReservasjonModal.Avbryt": "Avbryt",
+
+  "FagsakSearch.ZeroSearchResults": "Søket ga ingen treff eller du mangler tilgang til saken",
+  "FagsakSearch.FlereSakerEllerBehandlinger": "Velg sak eller behandling du ønsker å åpne/reservere. (Fagsak kan ikke reserveres.)",
+
+  "OppgaveHandlingerMenu.LeggTilbake": "Legg behandling{br}tilbake i felles kø",
+  "OppgaveHandlingerMenu.ForlengReservasjon": "Forleng din reservasjon av{br}behandlingen med 24 timer",
+  "OppgaveHandlingerMenu.EndreReservasjon": "Reserver behandlingen med dato",
+  "OppgaveHandlingerMenu.ReservertTil": "{b}Reservert til {date} - {time}{b}",
+  "OppgaveHandlingerMenu.FlyttReservasjon": "Flytt reservasjonen til{br}annen saksbehandler",
+
+  "FagsakList.Saksnummer": "Saksnummer",
+  "FagsakList.Stonadstype": "Stønadstype",
+  "FagsakList.Behandlingstype": "Behandlingstype",
+  "FagsakList.Status": "Status",
+  "FagsakList.BarnFodt": "Barnet er født",
+
+  "MerkePanel.Dod": "DØD",
+  "MerkePanel.Diskresjon6": "Kode 6",
+  "MerkePanel.Diskresjon7": "Kode 7",
+  "MerkePanel.DodTittel": "Personen er død",
+  "MerkePanel.Diskresjon6Tittel": "Personen har diskresjonsmerking kode 6",
+  "MerkePanel.Diskresjon7Tittel": "Personen har diskresjonsmerking kode 7",
+
+  "NyeOgFerdigstilteOppgaverForSisteSyvPanel.SisteSyv": "Siste 7 dager",
+
+  "NyeOgFerdigstilteOppgaverForSisteSyvGraf.Ferdigstilte": "Ferdigstilte",
+  "NyeOgFerdigstilteOppgaverForSisteSyvGraf.Nye": "Nye",
+  "NyeOgFerdigstilteOppgaverForSisteSyvGraf.FerdigstiltAntall": "Ferdigstilte: {antall}",
+  "NyeOgFerdigstilteOppgaverForSisteSyvGraf.NyeAntall": "Nye: {antall}",
+
+  "NyeOgFerdigstilteOppgaverForIdagGraf.Ferdigstilte": "Ferdigstilte",
+  "NyeOgFerdigstilteOppgaverForIdagGraf.Nye": "Nye",
+  "NyeOgFerdigstilteOppgaverForIdagGraf.Førstegangsbehandling": "Førstegangsbeh.",
+
+  "SakslisteVelgerForm.Saksliste": "Behandlingskø",
+  "SakslisteVelgerForm.Utvalgskriterier": "Utvalgskriterier",
+  "SakslisteVelgerForm.Stonadstype": "Stønadstype",
+  "SakslisteVelgerForm.Behandlingstype": "Behandlingstype",
+  "SakslisteVelgerForm.Sortering": "Sortering",
+  "SakslisteVelgerForm.Alle": "Alle",
+  "SakslisteVelgerForm.AndreKriterier": "Andre filter",
+  "SakslisteVelgerForm.Uten": "Uten: {kriterie}",
+  "SakslisteVelgerForm.Saksbehandlere": "Saksbehandlere tilknyttet denne køen",
+  "SakslisteVelgerForm.SaksbehandlerToolip": "Saksbehandlere",
+  "SakslisteVelgerForm.Sorteringsinfo": "{navn}{br}Gjeldende intervall:{br}{fomDato} - {tomDato}",
+  "SakslisteVelgerForm.SorteringsinfoFom": "{navn}{br}Fra og med: {fomDato}",
+  "SakslisteVelgerForm.SorteringsinfoTom": "{navn}{br}Til og med: {tomDato}"
+}
