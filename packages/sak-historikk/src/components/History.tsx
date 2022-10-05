@@ -145,6 +145,7 @@ const velgHistorikkMal = (histType: string) => { // NOSONAR
     case historikkinnslagType.MIGRERT_FRA_INFOTRYGD_FJERNET:
     case historikkinnslagType.ANKEBEH_STARTET:
     case historikkinnslagType.KLAGEBEH_STARTET:
+    case historikkinnslagType.ENDRET_DEKNINGSGRAD:
       return HistorikkMalType1;
     case historikkinnslagType.FORSLAG_VEDTAK:
     case historikkinnslagType.FORSLAG_VEDTAK_UTEN_TOTRINN:
