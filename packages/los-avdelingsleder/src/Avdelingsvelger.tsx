@@ -1,7 +1,6 @@
 import React, { useCallback, FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { Heading, Select } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import { Select } from '@navikt/ds-react';
+import { FloatRight } from '@navikt/ft-ui-komponenter';
 
 import { setValueInLocalStorage } from './data/localStorageHelper';
 import Avdeling from './typer/avdelingTsType';
@@ -24,22 +23,15 @@ const Avdelingsvelger: FunctionComponent<OwnProps> = ({
   }, [avdelinger]);
 
   return (
-    <FlexContainer>
-      <FlexRow>
-        <FlexColumn>
-          <Heading size="small"><FormattedMessage id="Avdelingsvelger.Avdeling" /></Heading>
-        </FlexColumn>
-        <FlexColumn>
-          <Select size="small" hideLabel label="" onChange={velgAvdeling} value={valgtAvdelingEnhet}>
-            {avdelinger.map((avdeling) => (
-              <option key={avdeling.avdelingEnhet} value={avdeling.avdelingEnhet}>
-                {`${avdeling.avdelingEnhet} ${avdeling.navn}`}
-              </option>
-            ))}
-          </Select>
-        </FlexColumn>
-      </FlexRow>
-    </FlexContainer>
+    <FloatRight>
+      <Select size="small" hideLabel label="" onChange={velgAvdeling} value={valgtAvdelingEnhet}>
+        {avdelinger.map((avdeling) => (
+          <option key={avdeling.avdelingEnhet} value={avdeling.avdelingEnhet}>
+            {`${avdeling.avdelingEnhet} ${avdeling.navn}`}
+          </option>
+        ))}
+      </Select>
+    </FloatRight>
   );
 };
 

@@ -15,7 +15,9 @@
   "LeggTilSaksbehandlerForm.FinnesAllerede": "Brukerident finnes allerede i listen",
   "LeggTilSaksbehandlerForm.FinnesIkke": "Kan ikke finne brukerident",
 
-  "Avdelingsvelger.Avdeling": "Velg avdeling",
+  "EndreSakslisterPanel.KnyttetMotSaksbehandlere": "Behandlingskøen benyttes av disse saksbehandlerne",
+
+  "Avdelingsvelger.Avdeling": "Avdeling",
 
   "SorteringVelger.Sortering": "Sortering",
   "SorteringVelger.FiltrerPaTidsintervall": "Ta kun med behandlinger med dato",

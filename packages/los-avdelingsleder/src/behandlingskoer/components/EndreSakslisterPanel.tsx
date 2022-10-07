@@ -73,9 +73,8 @@ const EndreSakslisterPanel: FunctionComponent<OwnProps> = ({
       />
       <VerticalSpacer sixteenPx />
       {valgtSakId && valgtSaksliste && (
-        <>
+        <React.Fragment key={valgtSaksliste.sakslisteId}>
           <UtvalgskriterierForSakslisteForm
-            key={valgtSaksliste.sakslisteId}
             valgtSaksliste={valgtSaksliste}
             valgtAvdelingEnhet={valgtAvdelingEnhet}
             hentAvdelingensSakslister={hentAvdelingensSakslister}
@@ -101,7 +100,7 @@ const EndreSakslisterPanel: FunctionComponent<OwnProps> = ({
             avdelingensSaksbehandlere={avdelingensSaksbehandlere}
             hentAvdelingensSakslister={hentAvdelingensSakslister}
           />
-        </>
+        </React.Fragment>
       )}
     </>
   );

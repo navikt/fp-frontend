@@ -2,7 +2,7 @@ import React, { Fragment, FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 import { VerticalSpacer, ArrowBox } from '@navikt/ft-ui-komponenter';
-import { CheckboxField, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { CheckboxField, RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
 
 import { restApiHooks, RestApiPathsKeys } from '../../../../data/fplosRestApi';
 import useLosKodeverk from '../../../../data/useLosKodeverk';
@@ -27,6 +27,8 @@ const AndreKriterierVelger: FunctionComponent<OwnProps> = ({
   hentAvdelingensSakslister,
   hentAntallOppgaver,
 }) => {
+  const { setValue } = formHooks.useFormContext();
+
   const andreKriterierTyper = useLosKodeverk('AndreKriterierType');
   const { startRequest: lagreSakslisteAndreKriterier } = restApiHooks.useRestApiRunner(RestApiPathsKeys.LAGRE_SAKSLISTE_ANDRE_KRITERIER);
 
@@ -43,16 +45,19 @@ const AndreKriterierVelger: FunctionComponent<OwnProps> = ({
             key={akt.kode}
             name={akt.kode}
             label={akt.navn}
-            onChange={(isChecked) => lagreSakslisteAndreKriterier({
-              sakslisteId: valgtSakslisteId,
-              avdelingEnhet: valgtAvdelingEnhet,
-              andreKriterierType: akt.kode,
-              checked: isChecked,
-              inkluder: true,
-            }).then(() => {
-              hentAntallOppgaver(valgtSakslisteId, valgtAvdelingEnhet);
-              hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet });
-            })}
+            onChange={(isChecked) => {
+              setValue(`${akt.kode}_inkluder`, true);
+              return lagreSakslisteAndreKriterier({
+                sakslisteId: valgtSakslisteId,
+                avdelingEnhet: valgtAvdelingEnhet,
+                andreKriterierType: akt.kode,
+                checked: isChecked,
+                inkluder: true,
+              }).then(() => {
+                hentAntallOppgaver(valgtSakslisteId, valgtAvdelingEnhet);
+                hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet });
+              });
+            }}
           />
           {values[akt.kode] && (
             <>

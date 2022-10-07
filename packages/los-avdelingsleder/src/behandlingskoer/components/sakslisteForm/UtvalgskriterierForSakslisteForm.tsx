@@ -1,4 +1,6 @@
-import React, { FunctionComponent, useEffect, useCallback } from 'react';
+import React, {
+  FunctionComponent, useEffect, useCallback, useMemo,
+} from 'react';
 import {
   injectIntl, WrappedComponentProps, FormattedMessage, IntlShape,
 } from 'react-intl';
@@ -98,7 +100,7 @@ export const UtvalgskriterierForSakslisteForm: FunctionComponent<OwnProps & Wrap
       .then(() => hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet }));
   }, [valgtAvdelingEnhet, valgtSaksliste]);
 
-  const defaultValues = buildInitialValues(intl, valgtSaksliste);
+  const defaultValues = useMemo(() => buildInitialValues(intl, valgtSaksliste), [valgtSaksliste]);
 
   const formMethods = useForm<FormValues>({
     defaultValues,

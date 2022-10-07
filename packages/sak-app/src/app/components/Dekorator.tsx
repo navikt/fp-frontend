@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { FunctionComponent, useMemo, useCallback } from 'react';
 import { useIntl, IntlShape } from 'react-intl';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { useNavigate } from 'react-router-dom';
@@ -77,14 +77,14 @@ const Dekorator: FunctionComponent<OwnProps> = ({
   const navAnsatt = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
 
   const navigate = useNavigate();
-  const visSaksbehandlerside = (e: React.SyntheticEvent) => {
+  const visSaksbehandlerside = useCallback((e: React.SyntheticEvent) => {
     navigate('/');
     e.preventDefault();
-  };
-  const visAvdelingslederside = (e: React.SyntheticEvent) => {
+  }, [navigate]);
+  const visAvdelingslederside = useCallback((e: React.SyntheticEvent) => {
     navigate(AVDELINGSLEDER_PATH);
     e.preventDefault();
-  };
+  }, [navigate]);
 
   const errorMessages = useRestApiError();
   const { removeErrorMessages } = useRestApiErrorDispatcher();

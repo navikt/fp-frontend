@@ -21,7 +21,7 @@ describe('<AndreKriterierVelger>', () => {
 
     await userEvent.click(screen.getByText('Registrer papirsøknad'));
 
-    expect(getAllByLabelText('Ta med i køen')[1]).not.toBeChecked();
+    expect(getAllByLabelText('Ta med i køen')[1]).toBeChecked();
     expect(getAllByLabelText('Fjern fra køen')[1]).not.toBeChecked();
 
     await userEvent.click(getAllByLabelText('Fjern fra køen')[1]);

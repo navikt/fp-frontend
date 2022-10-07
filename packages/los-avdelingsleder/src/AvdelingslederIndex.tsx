@@ -5,7 +5,7 @@ import { RawIntlProvider, FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { Location } from 'history';
 import { Heading, Panel, Tabs } from '@navikt/ds-react';
-import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { LoadingPanel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { formatQueryString, parseQueryString, createIntl } from '@navikt/ft-utils';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
@@ -171,42 +171,42 @@ const AvdelingslederIndex: FunctionComponent<OwnProps> = ({
     return <IkkeTilgangTilKode6AvdelingPanel />;
   } if (valgtAvdelingEnhet) {
     return (
-      <>
+      <AvdelingslederDashboard key={valgtAvdelingEnhet}>
+        <VerticalSpacer sixteenPx />
         <Avdelingsvelger
           valgtAvdelingEnhet={valgtAvdelingEnhet}
           avdelinger={avdelinger}
           setValgtAvdelingEnhet={setValgtAvdelingEnhet}
         />
-        <AvdelingslederDashboard key={valgtAvdelingEnhet}>
-          <Tabs
-            size="small"
-            value={activeAvdelingslederPanel}
-            onChange={(avdelingslederPanel: string) => { navigate(getAvdelingslederPanelLocation(avdelingslederPanel)); }}
-          >
-            <Tabs.List>
-              <Tabs.Tab
-                value={AvdelingslederPanels.BEHANDLINGSKOER}
-                label={<Heading size="small"><FormattedMessage id={messageId[AvdelingslederPanels.BEHANDLINGSKOER]} /></Heading>}
-              />
-              <Tabs.Tab
-                value={AvdelingslederPanels.NOKKELTALL}
-                label={<Heading size="small"><FormattedMessage id={messageId[AvdelingslederPanels.NOKKELTALL]} /></Heading>}
-              />
-              <Tabs.Tab
-                value={AvdelingslederPanels.SAKSBEHANDLERE}
-                label={<Heading size="small"><FormattedMessage id={messageId[AvdelingslederPanels.SAKSBEHANDLERE]} /></Heading>}
-              />
-              <Tabs.Tab
-                value={AvdelingslederPanels.RESERVASJONER}
-                label={<Heading size="small"><FormattedMessage id={messageId[AvdelingslederPanels.RESERVASJONER]} /></Heading>}
-              />
-            </Tabs.List>
-          </Tabs>
-          <Panel>
-            {renderAvdelingslederPanel(activeAvdelingslederPanel, valgtAvdelingEnhet, hentAvdelingensSaksbehandlere, avdelingensSaksbehandlere)}
-          </Panel>
-        </AvdelingslederDashboard>
-      </>
+        <VerticalSpacer sixteenPx />
+        <Tabs
+          size="small"
+          value={activeAvdelingslederPanel}
+          onChange={(avdelingslederPanel: string) => { navigate(getAvdelingslederPanelLocation(avdelingslederPanel)); }}
+        >
+          <Tabs.List>
+            <Tabs.Tab
+              value={AvdelingslederPanels.BEHANDLINGSKOER}
+              label={<Heading size="small"><FormattedMessage id={messageId[AvdelingslederPanels.BEHANDLINGSKOER]} /></Heading>}
+            />
+            <Tabs.Tab
+              value={AvdelingslederPanels.NOKKELTALL}
+              label={<Heading size="small"><FormattedMessage id={messageId[AvdelingslederPanels.NOKKELTALL]} /></Heading>}
+            />
+            <Tabs.Tab
+              value={AvdelingslederPanels.SAKSBEHANDLERE}
+              label={<Heading size="small"><FormattedMessage id={messageId[AvdelingslederPanels.SAKSBEHANDLERE]} /></Heading>}
+            />
+            <Tabs.Tab
+              value={AvdelingslederPanels.RESERVASJONER}
+              label={<Heading size="small"><FormattedMessage id={messageId[AvdelingslederPanels.RESERVASJONER]} /></Heading>}
+            />
+          </Tabs.List>
+        </Tabs>
+        <Panel>
+          {renderAvdelingslederPanel(activeAvdelingslederPanel, valgtAvdelingEnhet, hentAvdelingensSaksbehandlere, avdelingensSaksbehandlere)}
+        </Panel>
+      </AvdelingslederDashboard>
     );
   }
   return <LoadingPanel />;
