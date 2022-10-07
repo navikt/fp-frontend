@@ -1,9 +1,10 @@
 import React, { useCallback, FunctionComponent } from 'react';
 import { Select } from '@navikt/ds-react';
-import { FloatRight } from '@navikt/ft-ui-komponenter';
 
-import { setValueInLocalStorage } from './data/localStorageHelper';
-import Avdeling from './typer/avdelingTsType';
+import { setValueInLocalStorage } from '../data/localStorageHelper';
+import Avdeling from '../typer/avdelingTsType';
+
+import styles from './avdelingsvelger.less';
 
 interface OwnProps {
   setValgtAvdelingEnhet: (avdelingEnhet: string) => void;
@@ -23,15 +24,15 @@ const Avdelingsvelger: FunctionComponent<OwnProps> = ({
   }, [avdelinger]);
 
   return (
-    <FloatRight>
-      <Select size="small" hideLabel label="" onChange={velgAvdeling} value={valgtAvdelingEnhet}>
+    <div className={styles.padding}>
+      <Select size="small" hideLabel label="" onChange={velgAvdeling} value={valgtAvdelingEnhet} className={styles.padding}>
         {avdelinger.map((avdeling) => (
           <option key={avdeling.avdelingEnhet} value={avdeling.avdelingEnhet}>
             {`${avdeling.avdelingEnhet} ${avdeling.navn}`}
           </option>
         ))}
       </Select>
-    </FloatRight>
+    </div>
   );
 };
 

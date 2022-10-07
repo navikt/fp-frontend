@@ -1,5 +1,4 @@
 import React, { FunctionComponent, useEffect } from 'react';
-import { Panel } from '@navikt/ds-react';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
@@ -40,34 +39,30 @@ const SaksbehandlerDashboard: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <div>
+    <>
       {driftsmeldingerData.data && (
         <DriftsmeldingPanel
           driftsmeldinger={driftsmeldingerData.data}
         />
       )}
-      <div className={styles.oppgaveContainer}>
-        <div className={styles.gridContainer}>
-          <div className={styles.leftColumn}>
-            <div className={styles.sakslisteContent}>
-              <Panel className={styles.sakslistePanel}>
-                <BehandlingskoerIndex
-                  åpneFagsak={åpneFagsak}
-                  valgtSakslisteId={valgtSakslisteId}
-                  setValgtSakslisteId={setValgtSakslisteId}
-                />
-                <FagsakSearchIndex åpneFagsak={åpneFagsak} />
-              </Panel>
-            </div>
+      <div className={styles.gridContainer}>
+        <div className={styles.leftColumn}>
+          <div className={styles.koerContainer}>
+            <BehandlingskoerIndex
+              åpneFagsak={åpneFagsak}
+              valgtSakslisteId={valgtSakslisteId}
+              setValgtSakslisteId={setValgtSakslisteId}
+            />
           </div>
-          <div className={styles.rightColumn}>
-            <Panel>
-              <SaksstotteIndex valgtSakslisteId={valgtSakslisteId} åpneFagsak={åpneFagsak} />
-            </Panel>
+          <div className={styles.sokContainer}>
+            <FagsakSearchIndex åpneFagsak={åpneFagsak} />
           </div>
         </div>
+        <div className={styles.rightColumn}>
+          <SaksstotteIndex valgtSakslisteId={valgtSakslisteId} åpneFagsak={åpneFagsak} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -10,8 +10,6 @@ import { RestApiPathsKeys, restApiHooks } from '../../data/fplosSaksbehandlerRes
 import SakslisteVelgerForm from './SakslisteVelgerForm';
 import OppgaverTabell from './OppgaverTabell';
 
-import styles from './sakslistePanel.less';
-
 interface OwnProps {
   valgtSakslisteId?: number;
   setValgtSakslisteId: (sakslisteId: number) => void;
@@ -33,24 +31,22 @@ const SakslistePanel: FunctionComponent<OwnProps> = ({
   return (
     <>
       <Heading size="small"><FormattedMessage id="SakslistePanel.StartBehandling" /></Heading>
-      <div className={styles.container}>
-        <SakslisteVelgerForm
-          sakslister={sakslister}
-          setValgtSakslisteId={setValgtSakslisteId}
-          fetchAntallOppgaver={fetchAntallOppgaver}
-          getValueFromLocalStorage={getValueFromLocalStorage}
-          setValueInLocalStorage={setValueInLocalStorage}
-          removeValueFromLocalStorage={removeValueFromLocalStorage}
+      <SakslisteVelgerForm
+        sakslister={sakslister}
+        setValgtSakslisteId={setValgtSakslisteId}
+        fetchAntallOppgaver={fetchAntallOppgaver}
+        getValueFromLocalStorage={getValueFromLocalStorage}
+        setValueInLocalStorage={setValueInLocalStorage}
+        removeValueFromLocalStorage={removeValueFromLocalStorage}
+      />
+      <VerticalSpacer twentyPx />
+      {valgtSakslisteId && (
+        <OppgaverTabell
+          reserverOppgave={reserverOppgave}
+          antallOppgaver={antallOppgaver}
+          valgtSakslisteId={valgtSakslisteId}
         />
-        <VerticalSpacer twentyPx />
-        {valgtSakslisteId && (
-          <OppgaverTabell
-            reserverOppgave={reserverOppgave}
-            antallOppgaver={antallOppgaver}
-            valgtSakslisteId={valgtSakslisteId}
-          />
-        )}
-      </div>
+      )}
     </>
   );
 };

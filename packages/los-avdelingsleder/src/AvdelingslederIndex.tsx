@@ -24,9 +24,9 @@ import ReservasjonerIndex from './reservasjoner/ReservasjonerIndex';
 import NavAnsattLos from './typer/navAnsattLosTsType';
 import Avdeling from './typer/avdelingTsType';
 import { getValueFromLocalStorage, removeValueFromLocalStorage } from './data/localStorageHelper';
+import Avdelingsvelger from './components/Avdelingsvelger';
 
 import messages from '../i18n/nb_NO.json';
-import Avdelingsvelger from './Avdelingsvelger';
 
 const intl = createIntl(messages);
 
@@ -172,7 +172,6 @@ const AvdelingslederIndex: FunctionComponent<OwnProps> = ({
   } if (valgtAvdelingEnhet) {
     return (
       <AvdelingslederDashboard key={valgtAvdelingEnhet}>
-        <VerticalSpacer sixteenPx />
         <Avdelingsvelger
           valgtAvdelingEnhet={valgtAvdelingEnhet}
           avdelinger={avdelinger}
