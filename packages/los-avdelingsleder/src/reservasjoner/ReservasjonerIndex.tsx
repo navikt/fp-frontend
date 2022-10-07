@@ -18,7 +18,7 @@ export const ReservasjonerIndex: FunctionComponent<OwnProps> = ({
   );
   const { startRequest: opphevOppgaveReservasjon } = restApiHooks.useRestApiRunner(RestApiPathsKeys.AVDELINGSLEDER_OPPHEVER_RESERVASJON);
 
-  const alleKodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK);
+  const alleKodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK_LOS);
 
   useEffect(() => {
     hentAvdelingensReservasjoner({ avdelingEnhet: valgtAvdelingEnhet });

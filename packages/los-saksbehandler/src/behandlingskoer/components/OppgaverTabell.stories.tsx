@@ -27,7 +27,7 @@ const Template: Story<{ oppgaverTilBehandling?: Oppgave[], reserverteOppgaver?: 
   reserverteOppgaver,
 }) => {
   const data = [
-    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverkLos, global: true },
+    { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
     { key: RestApiPathsKeys.FORLENG_OPPGAVERESERVASJON.name, data: {} },
     { key: RestApiPathsKeys.RESERVERTE_OPPGAVER.name, data: reserverteOppgaver },
     { key: RestApiPathsKeys.OPPGAVER_TIL_BEHANDLING.name, data: oppgaverTilBehandling },

@@ -30,7 +30,7 @@ const Template: Story<{ fagsaker: Fagsak[], fagsakOppgaver: Oppgave[] }> = ({
 }) => {
   const data = [
     { key: RestApiGlobalStatePathsKeys.NAV_ANSATT.name, data: { kanSaksbehandle: true }, global: true },
-    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverkLos, global: true },
+    { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
   ];
 
   return (

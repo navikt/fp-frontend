@@ -82,7 +82,7 @@ const OppgaverTabell: FunctionComponent<OwnProps> = ({
     top: 0,
   });
 
-  const alleKodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK);
+  const alleKodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK_LOS);
 
   const { startRequest: forlengOppgavereservasjon } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FORLENG_OPPGAVERESERVASJON);
 

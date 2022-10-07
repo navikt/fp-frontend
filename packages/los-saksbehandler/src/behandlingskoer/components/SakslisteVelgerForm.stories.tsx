@@ -30,7 +30,7 @@ const Template: Story<{ saksbehandlere: Saksbehandler[], sakslister: Saksliste[]
 }) => {
   const data = [
     { key: RestApiPathsKeys.SAKSLISTE_SAKSBEHANDLERE.name, data: saksbehandlere },
-    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverkLos, global: true },
+    { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
   ];
 
   return (

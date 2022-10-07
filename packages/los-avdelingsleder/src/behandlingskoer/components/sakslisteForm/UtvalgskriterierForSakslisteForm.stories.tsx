@@ -27,7 +27,7 @@ const Template: Story<{ sakslisteNavn: string }> = ({
   sakslisteNavn,
 }) => {
   const data = [
-    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverkLos, global: true },
+    { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
     { key: RestApiPathsKeys.OPPGAVE_ANTALL.name, data: 1 },
     { key: RestApiPathsKeys.LAGRE_SAKSLISTE_NAVN.name, data: undefined },
     { key: RestApiPathsKeys.LAGRE_SAKSLISTE_SORTERING.name, data: undefined },

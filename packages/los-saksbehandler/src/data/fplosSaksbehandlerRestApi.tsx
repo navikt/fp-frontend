@@ -12,16 +12,13 @@ import Oppgave from '../typer/oppgaveTsType';
 import Saksbehandler from '../typer/saksbehandlerTsType';
 import Saksliste from '../typer/sakslisteTsType';
 import Driftsmelding from '../typer/driftsmeldingTsType';
-import NavAnsatt from '../typer/navAnsattLosTsType';
 
 export const RestApiGlobalStatePathsKeys = {
-  KODEVERK: new RestKey<AlleKodeverk, void>('KODEVERK'),
-  NAV_ANSATT: new RestKey<NavAnsatt, void>('NAV_ANSATT'),
-  FPTILBAKE_URL: new RestKey<{ verdi: string }, void>('FPTILBAKE_URL'),
-  DRIFTSMELDINGER: new RestKey<Driftsmelding[], void>('DRIFTSMELDINGER'),
+  KODEVERK_LOS: new RestKey<AlleKodeverk, void>('KODEVERK_LOS'),
 };
 
 export const RestApiPathsKeys = {
+  DRIFTSMELDINGER: new RestKey<Driftsmelding[], void>('DRIFTSMELDINGER'),
   SEARCH_FAGSAK: new RestKey<Fagsak[], {searchString: string; skalReservere: boolean}>('SEARCH_FAGSAK'),
   OPPGAVER_FOR_FAGSAKER: new RestKey<Oppgave[], { saksnummerListe: string }>('OPPGAVER_FOR_FAGSAKER'),
   SAKSLISTE: new RestKey<Saksliste[], void>('SAKSLISTE'),
@@ -43,11 +40,10 @@ export const RestApiPathsKeys = {
 };
 
 export const endpoints = new RestApiConfigBuilder()
-  .withGet('/fplos/api/saksbehandler', RestApiGlobalStatePathsKeys.NAV_ANSATT)
-  .withGet('/fplos/api/kodeverk', RestApiGlobalStatePathsKeys.KODEVERK)
-  .withGet('/fplos/api/driftsmeldinger', RestApiGlobalStatePathsKeys.DRIFTSMELDINGER)
+  .withGet('/fplos/api/kodeverk', RestApiGlobalStatePathsKeys.KODEVERK_LOS)
 
   // Saksbehandler
+  .withGet('/fplos/api/driftsmeldinger', RestApiPathsKeys.DRIFTSMELDINGER)
   .withPost('/fplos/api/fagsak/søk', RestApiPathsKeys.SEARCH_FAGSAK)
   .withGet('/fplos/api/saksbehandler/saksliste', RestApiPathsKeys.SAKSLISTE)
   .withGet('/fplos/api/saksbehandler/oppgaver/reserverte', RestApiPathsKeys.RESERVERTE_OPPGAVER)

@@ -8,6 +8,7 @@ import { Heading, Panel, Tabs } from '@navikt/ds-react';
 import { LoadingPanel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { formatQueryString, parseQueryString, createIntl } from '@navikt/ft-utils';
 
+import { NavAnsatt } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import useTrackRouteParam from './useTrackRouteParam';
@@ -21,7 +22,6 @@ import NokkeltallIndex from './nokkeltall/NokkeltallIndex';
 import EndreSaksbehandlereIndex from './saksbehandlere/EndreSaksbehandlereIndex';
 import EndreBehandlingskoerIndex from './behandlingskoer/EndreBehandlingskoerIndex';
 import ReservasjonerIndex from './reservasjoner/ReservasjonerIndex';
-import NavAnsattLos from './typer/navAnsattLosTsType';
 import Avdeling from './typer/avdelingTsType';
 import { getValueFromLocalStorage, removeValueFromLocalStorage } from './data/localStorageHelper';
 import Avdelingsvelger from './components/Avdelingsvelger';
@@ -110,7 +110,7 @@ const messageId = {
 
 interface OwnProps {
   valgtAvdelingEnhet?: string;
-  navAnsatt: NavAnsattLos;
+  navAnsatt: NavAnsatt;
 }
 
 const getPanelFromUrlOrDefault = (location: Location) => {
@@ -213,27 +213,30 @@ const AvdelingslederIndex: FunctionComponent<OwnProps> = ({
 
 interface OwnPropsWrapper {
   setLosErIkkeTilgjengelig: () => void;
+  navAnsatt: NavAnsatt;
 }
 
 const AvdelingslederIndexIntlWrapper: FunctionComponent<OwnPropsWrapper> = ({
   setLosErIkkeTilgjengelig,
+  navAnsatt,
 }) => {
-  const navAnsattData = restApiHooks.useGlobalStateRestApi(RestApiGlobalStatePathsKeys.NAV_ANSATT_LOS);
-  const kodeverkData = restApiHooks.useGlobalStateRestApi(RestApiGlobalStatePathsKeys.KODEVERK);
+  const kodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK_LOS);
+
+  const kodeverkData = restApiHooks.useGlobalStateRestApi(RestApiGlobalStatePathsKeys.KODEVERK_LOS, undefined, { suspendRequest: !!kodeverk });
 
   useEffect(() => {
-    if (navAnsattData.state === RestApiState.ERROR) {
+    if (!kodeverk && kodeverkData.state === RestApiState.ERROR) {
       setLosErIkkeTilgjengelig();
     }
-  }, [navAnsattData.state]);
+  }, [kodeverkData.state]);
 
-  if (navAnsattData.state !== RestApiState.SUCCESS || kodeverkData.state !== RestApiState.SUCCESS) {
+  if (!kodeverk && kodeverkData.state !== RestApiState.SUCCESS) {
     return null;
   }
 
   return (
     <RawIntlProvider value={intl}>
-      <AvdelingslederIndex navAnsatt={navAnsattData.data} />
+      <AvdelingslederIndex navAnsatt={navAnsatt} />
     </RawIntlProvider>
   );
 };

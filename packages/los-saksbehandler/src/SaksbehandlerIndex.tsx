@@ -11,6 +11,7 @@ const intl = createIntl(messages);
 interface OwnProps {
   setLosErIkkeTilgjengelig: () => void;
   åpneFagsak: (saksnummer: number, behandlingUuid?: string) => void;
+  kanSaksbehandle: boolean;
 }
 
 /**
@@ -19,6 +20,7 @@ interface OwnProps {
 const SaksbehandlerIndex: FunctionComponent<OwnProps> = ({
   setLosErIkkeTilgjengelig,
   åpneFagsak,
+  kanSaksbehandle,
 }) => {
   const [valgtSakslisteId, setValgtSakslisteId] = useState<number>();
   return (
@@ -28,6 +30,7 @@ const SaksbehandlerIndex: FunctionComponent<OwnProps> = ({
         setValgtSakslisteId={setValgtSakslisteId}
         setLosErIkkeTilgjengelig={setLosErIkkeTilgjengelig}
         åpneFagsak={åpneFagsak}
+        kanSaksbehandle={kanSaksbehandle}
       />
     </RawIntlProvider>
   );

@@ -153,7 +153,7 @@ type FormValues = {
  * SakslisteVelgerForm
  *
  */
-export const SakslisteVelgerForm: FunctionComponent<OwnProps> = ({
+const SakslisteVelgerForm: FunctionComponent<OwnProps> = ({
   sakslister,
   setValgtSakslisteId,
   fetchAntallOppgaver,
@@ -164,7 +164,7 @@ export const SakslisteVelgerForm: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
 
   const { data: saksbehandlere, startRequest: fetchSaksbehandlere } = restApiHooks.useRestApiRunner(RestApiPathsKeys.SAKSLISTE_SAKSBEHANDLERE);
-  const alleKodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK);
+  const alleKodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK_LOS);
 
   useEffect(() => {
     if (sakslister.length > 0) {

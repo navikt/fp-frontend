@@ -11,6 +11,7 @@ import { NotFoundPage } from '@navikt/ft-sak-infosider';
 import SaksbehandlerIndex from '@fpsak-frontend/los-saksbehandler';
 import AvdelingslederIndex from '@fpsak-frontend/los-avdelingsleder';
 import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
+import { NavAnsatt } from '@fpsak-frontend/types';
 
 import { aktoerRoutePath, fagsakRoutePath, getFagsakHref } from '../paths';
 import FagsakIndex from '../../fagsak/FagsakIndex';
@@ -21,6 +22,7 @@ import styles from './home.less';
 
 interface OwnProps {
   headerHeight: number;
+  navAnsatt: NavAnsatt;
 }
 
 /**
@@ -30,6 +32,7 @@ interface OwnProps {
  */
 const Home: FunctionComponent<OwnProps> = ({
   headerHeight,
+  navAnsatt,
 }) => {
   const intl = useIntl();
   const { addErrorMessage } = useRestApiErrorDispatcher();
@@ -54,13 +57,13 @@ const Home: FunctionComponent<OwnProps> = ({
         <Route
           path="/"
           element={erLosTilgjengelig
-            ? <SaksbehandlerIndex setLosErIkkeTilgjengelig={setLosErIkkeTilgjengelig} åpneFagsak={åpneFagsak} />
+            ? <SaksbehandlerIndex setLosErIkkeTilgjengelig={setLosErIkkeTilgjengelig} åpneFagsak={åpneFagsak} kanSaksbehandle={navAnsatt?.kanSaksbehandle} />
             : <FagsakSearchIndex />}
         />
         <Route
           path="/avdelingsleder"
           element={erLosTilgjengelig
-            ? <AvdelingslederIndex setLosErIkkeTilgjengelig={setLosErIkkeTilgjengelig} />
+            ? <AvdelingslederIndex setLosErIkkeTilgjengelig={setLosErIkkeTilgjengelig} navAnsatt={navAnsatt} />
             : <Heading size="small"><FormattedMessage id="Los.IkkeTilgjengelig" /></Heading>}
         />
         <Route path={fagsakRoutePath} element={<FagsakIndex />} />

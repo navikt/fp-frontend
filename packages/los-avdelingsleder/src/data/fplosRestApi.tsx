@@ -4,7 +4,6 @@ import {
 } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 
-import Driftsmelding from '../typer/driftsmeldingTsType';
 import Avdeling from '../typer/avdelingTsType';
 import SakslisteAvdeling from '../typer/sakslisteAvdelingTsType';
 import SaksbehandlerAvdeling from '../typer/saksbehandlerAvdelingTsType';
@@ -14,20 +13,15 @@ import OppgaverManueltPaVent from '../typer/oppgaverManueltPaVentTsType';
 import OppgaverForForsteStonadsdag from '../typer/oppgaverForForsteStonadsdagTsType';
 import OppgaverSomErApneEllerPaVent from '../typer/oppgaverSomErApneEllerPaVentTsType';
 import Reservasjon from '../typer/reservasjonTsType';
-import NavAnsattLos from '../typer/navAnsattLosTsType';
 import SaksbehandlerForFlytting from '../typer/saksbehandlerForFlyttingTsType';
 import Oppgave from '../typer/oppgaveTsType';
 
 export const RestApiGlobalStatePathsKeys = {
-  KODEVERK: new RestKey<AlleKodeverk, void>('KODEVERK'),
-  NAV_ANSATT_LOS: new RestKey<NavAnsattLos, void>('NAV_ANSATT_LOS'),
+  KODEVERK_LOS: new RestKey<AlleKodeverk, void>('KODEVERK_LOS'),
 };
 
 export const RestApiPathsKeys = {
-  FPTILBAKE_URL: new RestKey<{ verdi: string }, void>('FPTILBAKE_URL'),
   AVDELINGER: new RestKey<Avdeling[], void>('AVDELINGER'),
-  DRIFTSMELDINGER: new RestKey<Driftsmelding[], void>('DRIFTSMELDINGER'),
-
   OPPHEV_OPPGAVERESERVASJON: new RestKey<void, { oppgaveId: number, begrunnelse: string }>('OPPHEV_OPPGAVERESERVASJON'),
   FLYTT_RESERVASJON: new RestKey<void, { oppgaveId: number, brukerIdent: string, begrunnelse: string }>('FLYTT_RESERVASJON'),
   BEHANDLINGSKO_OPPGAVE_ANTALL: new RestKey<number, {sakslisteId: number}>('BEHANDLINGSKO_OPPGAVE_ANTALL'),
@@ -77,9 +71,7 @@ export const RestApiPathsKeys = {
 };
 
 export const endpoints = new RestApiConfigBuilder()
-  .withGet('/fplos/api/saksbehandler', RestApiGlobalStatePathsKeys.NAV_ANSATT_LOS)
-  .withGet('/fplos/api/kodeverk', RestApiGlobalStatePathsKeys.KODEVERK)
-  .withGet('/fplos/api/driftsmeldinger', RestApiPathsKeys.DRIFTSMELDINGER)
+  .withGet('/fplos/api/kodeverk', RestApiGlobalStatePathsKeys.KODEVERK_LOS)
 
   // Avdelingsleder
   .withGet('/fplos/api/avdelingsleder/avdelinger', RestApiPathsKeys.AVDELINGER)

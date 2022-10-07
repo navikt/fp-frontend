@@ -28,7 +28,7 @@ const Template: Story<{ valgteBehandlingtyper: string[], erDynamiskPeriode: bool
   erDynamiskPeriode,
 }) => {
   const data = [
-    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverkLos, global: true },
+    { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
     { key: RestApiPathsKeys.LAGRE_SAKSLISTE_SORTERING.name, data: undefined },
     { key: RestApiPathsKeys.LAGRE_SAKSLISTE_SORTERING_INTERVALL.name, data: undefined },
     { key: RestApiPathsKeys.LAGRE_SAKSLISTE_SORTERING_DYNAMISK_PERIDE.name, data: undefined },

@@ -23,6 +23,7 @@ interface OwnProps {
     feilmelding?: string;
   };
   resetSearch: () => void;
+  kanSaksbehandle: boolean;
 }
 
 const skalViseListe = (fagsaker: Fagsak[], fagsakOppgaver: Oppgave[]): boolean => {
@@ -48,6 +49,7 @@ const FagsakSearch: FunctionComponent<OwnProps> = ({
   searchStarted,
   searchResultAccessDenied,
   resetSearch,
+  kanSaksbehandle,
 }) => (
   <>
     <SearchForm
@@ -55,6 +57,7 @@ const FagsakSearch: FunctionComponent<OwnProps> = ({
       searchStarted={searchStarted}
       searchResultAccessDenied={searchResultAccessDenied}
       resetSearch={resetSearch}
+      kanSaksbehandle={kanSaksbehandle}
     />
 
     {searchResultReceived && fagsaker && fagsaker.length === 0

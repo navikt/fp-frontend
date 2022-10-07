@@ -3,10 +3,10 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import { alleKodeverkLos, withRouter } from '@fpsak-frontend/storybook-utils';
+import { NavAnsatt } from '@fpsak-frontend/types';
 
 import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, requestApi } from './data/fplosRestApi';
 import AvdelingslederIndex from './AvdelingslederIndex';
-import NavAnsattLos from './typer/navAnsattLosTsType';
 
 export default {
   title: 'los/avdelingsleder/AvdelingslederIndex',
@@ -17,16 +17,14 @@ export default {
 const navAnsattDefault = {
   kanOppgavestyre: true,
   kanBehandleKode6: true,
-} as NavAnsattLos;
+} as NavAnsatt;
 
-const Template: Story<{ valgtAvdelingEnhet?: string, navAnsatt: NavAnsattLos }> = ({
-  valgtAvdelingEnhet,
+const Template: Story<{ navAnsatt: NavAnsatt }> = ({
   navAnsatt,
 }) => {
   const data = [
-    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverkLos, global: true },
-    { key: RestApiGlobalStatePathsKeys.NAV_ANSATT_LOS.name, data: navAnsatt, global: true },
-    { key: RestApiGlobalStatePathsKeys.AVDELINGER.name, data: {}, global: true },
+    { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
+    { key: RestApiPathsKeys.AVDELINGER.name, data: {}, global: true },
     { key: RestApiPathsKeys.SAKSBEHANDLERE_FOR_AVDELING.name, data: [] },
     { key: RestApiPathsKeys.OPPGAVE_ANTALL.name, data: 1 },
     { key: RestApiPathsKeys.LAGRE_SAKSLISTE_NAVN.name, data: undefined },
@@ -49,28 +47,20 @@ const Template: Story<{ valgtAvdelingEnhet?: string, navAnsatt: NavAnsattLos }> 
 
   return (
     <RestApiMock data={data} requestApi={requestApi}>
-      <AvdelingslederIndex valgtAvdelingEnhet={valgtAvdelingEnhet} />
+      <AvdelingslederIndex setLosErIkkeTilgjengelig={() => undefined} navAnsatt={navAnsatt} />
     </RestApiMock>
   );
 };
 
 export const Default = Template.bind({});
 Default.args = {
-  valgtAvdelingEnhet: 'NAV Viken',
-  navAnsatt: navAnsattDefault,
-};
-
-export const LasteIkonFørValgtAvdelingErSatt = Template.bind({});
-LasteIkonFørValgtAvdelingErSatt.args = {
-  valgtAvdelingEnhet: undefined,
   navAnsatt: navAnsattDefault,
 };
 
 export const HarIkkeTilgang = Template.bind({});
 HarIkkeTilgang.args = {
-  valgtAvdelingEnhet: undefined,
   navAnsatt: {
     kanOppgavestyre: false,
     kanBehandleKode6: false,
-  } as NavAnsattLos,
+  } as NavAnsatt,
 };

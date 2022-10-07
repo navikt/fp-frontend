@@ -63,7 +63,7 @@ const FagsakList: FunctionComponent<OwnProps> = ({
 }) => {
   const fagsakStatuser = useLosKodeverk(KodeverkType.FAGSAK_STATUS);
   const fagsakYtelseTyper = useLosKodeverk(KodeverkType.FAGSAK_YTELSE);
-  const alleKodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK);
+  const alleKodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK_LOS);
 
   const sorterteFagsaker = useMemo(() => getSorterteFagsaker(fagsaker), [fagsaker]);
 

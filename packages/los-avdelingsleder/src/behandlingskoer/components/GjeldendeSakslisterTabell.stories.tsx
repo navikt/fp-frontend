@@ -38,7 +38,7 @@ const Template: Story<Props> = ({
   const [sakslister, setSaksliste] = useState<Saksliste[]>(saksliste || []);
 
   const data = [
-    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverkLos, global: true },
+    { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
     { key: RestApiPathsKeys.SLETT_SAKSLISTE.name, data: {} },
   ];
 

@@ -6,7 +6,7 @@ import { RestApiGlobalStatePathsKeys, restApiHooks } from './fplosRestApi';
  * må @see useGlobalStateRestApi først brukes for å hente data fra backend
  */
 function useLosKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[] {
-  const alleKodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK);
+  const alleKodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK_LOS);
   // @ts-ignore Fiks
   return alleKodeverk[kodeverkType];
 }

@@ -27,7 +27,7 @@ const Template: Story<{ oppgaverApneEllerPaVent: OppgaverSomErApneEllerPaVent[] 
   oppgaverApneEllerPaVent,
 }) => {
   const data = [
-    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverkLos, global: true },
+    { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
   ];
 
   return (

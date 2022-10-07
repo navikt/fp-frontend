@@ -19,9 +19,7 @@ export default {
 
 const Template: Story = () => {
   const data = [
-    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverkLos, global: true },
-    { key: RestApiGlobalStatePathsKeys.FPSAK_URL.name, data: 'url', global: true },
-    { key: RestApiGlobalStatePathsKeys.NAV_ANSATT.name, data: { kanSaksbehandle: true }, global: true },
+    { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
     {
       key: RestApiPathsKeys.SAKSLISTE.name,
       data: [{

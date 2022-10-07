@@ -13,6 +13,7 @@ import OppgaveErReservertAvAnnenModal from '../components/OppgaveErReservertAvAn
 
 interface OwnProps {
   åpneFagsak: (saksnummer: number, behandlingUuid?: string) => void;
+  kanSaksbehandle: boolean;
 }
 
 const EMPTY_ARRAY_FAGSAK: Fagsak[] = [];
@@ -26,6 +27,7 @@ const EMPTY_ARRAY_OPPGAVER: Oppgave[] = [];
  */
 const FagsakSearchIndex: FunctionComponent<OwnProps> = ({
   åpneFagsak,
+  kanSaksbehandle,
 }) => {
   const [skalReservere, setSkalReservere] = useState(false);
   const [reservertAvAnnenSaksbehandler, setReservertAvAnnenSaksbehandler] = useState(false);
@@ -133,6 +135,7 @@ const FagsakSearchIndex: FunctionComponent<OwnProps> = ({
         searchStarted={sokStartet}
         searchResultAccessDenied={searchResultAccessDenied}
         resetSearch={resetSearchFn}
+        kanSaksbehandle={kanSaksbehandle}
       />
       {reservertAvAnnenSaksbehandler && reservertOppgave && (
       <OppgaveErReservertAvAnnenModal

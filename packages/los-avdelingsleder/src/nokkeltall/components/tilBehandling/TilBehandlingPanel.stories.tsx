@@ -26,7 +26,7 @@ const Template: Story<{ oppgaverPerDato: OppgaveForDato[] }> = ({
   oppgaverPerDato,
 }) => {
   const data = [
-    { key: RestApiGlobalStatePathsKeys.KODEVERK.name, data: alleKodeverkLos, global: true },
+    { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
   ];
 
   return (

@@ -27,21 +27,14 @@ const Template: Story<{
   kanSaksbehandle,
   searchStarted,
   onSubmit,
-}) => {
-  const data = [
-    { key: RestApiGlobalStatePathsKeys.NAV_ANSATT.name, data: { kanSaksbehandle }, global: true },
-  ];
-
-  return (
-    <RestApiMock data={data} requestApi={requestApi}>
-      <SearchForm
-        onSubmit={onSubmit}
-        searchStarted={searchStarted}
-        resetSearch={action('button-click')}
-      />
-    </RestApiMock>
-  );
-};
+}) => (
+  <SearchForm
+    onSubmit={onSubmit}
+    searchStarted={searchStarted}
+    resetSearch={action('button-click')}
+    kanSaksbehandle={kanSaksbehandle}
+  />
+);
 
 export const Søkeskjema = Template.bind({});
 Søkeskjema.args = {

@@ -10,8 +10,6 @@ import { Form, InputField, CheckboxField } from '@navikt/ft-form-hooks';
 
 import advarselIcon from '@fpsak-frontend/assets/images/advarsel.svg';
 
-import { restApiHooks, RestApiGlobalStatePathsKeys } from '../../data/fplosSaksbehandlerRestApi';
-
 import styles from './searchForm.less';
 
 const isButtonDisabled = (
@@ -34,6 +32,7 @@ interface OwnProps {
     feilmelding?: string;
   };
   resetSearch: () => void;
+  kanSaksbehandle: boolean;
 }
 
 /**
@@ -47,8 +46,8 @@ const SearchForm: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   searchResultAccessDenied,
   searchStarted,
   resetSearch,
+  kanSaksbehandle,
 }) => {
-  const { kanSaksbehandle } = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.NAV_ANSATT);
   const formMethods = useForm<FormValues>();
 
   const searchStringValue = formMethods.watch('searchString');
