@@ -4,7 +4,7 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
 
-import { RestApiPathsKeys, RestApiGlobalStatePathsKeys, requestApi } from '../../data/fplosSaksbehandlerRestApi';
+import { RestApiPathsKeys, requestApi } from '../../data/fplosSaksbehandlerRestApi';
 import Oppgave from '../../typer/oppgaveTsType';
 import SistBehandledeSaker from './SistBehandledeSaker';
 
@@ -22,13 +22,12 @@ const Template: Story<{ behandledeOppgaver?: Oppgave[] }> = ({
   behandledeOppgaver,
 }) => {
   const data = [
-    { key: RestApiGlobalStatePathsKeys.FPSAK_URL.name, data: { value: 'fpsak-url' }, global: true },
     { key: RestApiPathsKeys.BEHANDLEDE_OPPGAVER.name, data: behandledeOppgaver },
   ];
 
   return (
     <RestApiMock data={data} requestApi={requestApi}>
-      <SistBehandledeSaker />
+      <SistBehandledeSaker åpneFagsak={() => undefined} />
     </RestApiMock>
   );
 };

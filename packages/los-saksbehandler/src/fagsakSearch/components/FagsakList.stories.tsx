@@ -36,7 +36,7 @@ const Template: Story<{ fagsaker: Fagsak[], fagsakOppgaver: Oppgave[] }> = ({
     <RestApiMock data={data} requestApi={requestApi}>
       <FagsakList
         fagsaker={fagsaker}
-        selectFagsakCallback={action('button-click')}
+        åpneFagsak={action('button-click')}
         selectOppgaveCallback={action('button-click')}
         fagsakOppgaver={fagsakOppgaver}
       />

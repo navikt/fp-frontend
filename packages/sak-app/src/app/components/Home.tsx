@@ -22,7 +22,7 @@ import styles from './home.less';
 
 interface OwnProps {
   headerHeight: number;
-  navAnsatt: NavAnsatt;
+  navAnsatt?: NavAnsatt;
 }
 
 /**

@@ -5,7 +5,7 @@ import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
 
 import FagsakSearchIndex from './FagsakSearchIndex';
-import { RestApiPathsKeys, RestApiGlobalStatePathsKeys, requestApi } from '../data/fplosSaksbehandlerRestApi';
+import { RestApiPathsKeys, requestApi } from '../data/fplosSaksbehandlerRestApi';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -23,13 +23,13 @@ const Template: Story = () => {
     { key: RestApiPathsKeys.SEARCH_FAGSAK.name, data: {} },
     { key: RestApiPathsKeys.OPPGAVER_FOR_FAGSAKER.name, data: [] },
     { key: RestApiPathsKeys.HENT_RESERVASJONSSTATUS.name, data: undefined },
-    { key: RestApiGlobalStatePathsKeys.NAV_ANSATT.name, data: { kanSaksbehandle: true }, global: true },
   ];
 
   return (
     <RestApiMock data={data} requestApi={requestApi}>
       <FagsakSearchIndex
-        fpsakUrl="url"
+        åpneFagsak={() => undefined}
+        kanSaksbehandle
       />
     </RestApiMock>
   );

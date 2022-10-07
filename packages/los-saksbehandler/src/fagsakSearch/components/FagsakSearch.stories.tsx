@@ -29,7 +29,6 @@ const Template: Story<{ fagsaker: Fagsak[], fagsakOppgaver: Oppgave[] }> = ({
   fagsakOppgaver,
 }) => {
   const data = [
-    { key: RestApiGlobalStatePathsKeys.NAV_ANSATT.name, data: { kanSaksbehandle: true }, global: true },
     { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
   ];
 
@@ -40,10 +39,11 @@ const Template: Story<{ fagsaker: Fagsak[], fagsakOppgaver: Oppgave[] }> = ({
         fagsakOppgaver={fagsakOppgaver}
         searchFagsakCallback={action('button-click')}
         searchResultReceived
-        selectFagsakCallback={action('button-click')}
+        åpneFagsak={action('button-click')}
         selectOppgaveCallback={action('button-click')}
         searchStarted={false}
         resetSearch={action('button-click')}
+        kanSaksbehandle
       />
     </RestApiMock>
   );

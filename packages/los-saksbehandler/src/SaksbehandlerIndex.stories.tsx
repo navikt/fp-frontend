@@ -171,7 +171,11 @@ const Template: Story = () => {
 
   return (
     <RestApiMock data={data} requestApi={requestApi}>
-      <SaksbehandlerIndex />
+      <SaksbehandlerIndex
+        setLosErIkkeTilgjengelig={() => undefined}
+        åpneFagsak={() => undefined}
+        kanSaksbehandle
+      />
     </RestApiMock>
   );
 };
