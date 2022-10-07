@@ -35,6 +35,8 @@
   "IverksetterVedtakStatusModal.Innvilget": "Innvilget",
   "IverksetterVedtakStatusModal.GoToSearchPage": "Du kommer nå til forsiden",
 
+  "Los.IkkeTilgjengelig": "FPLOS er ikke tilgjengelig",
+
   "Behandlingspunkt.Inngangsvilkar": "Inngangsvilkår",
   "InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv": "Avventer avklaring av fakta om ",
   "ProsessPanelWrapper.IkkeBehandlet": "Dette steget er ikke behandlet",

@@ -16,7 +16,7 @@ interface OwnProps {
   fagsakOppgaver: Oppgave[];
   searchFagsakCallback: (values: { searchString: string, skalReservere: boolean }) => void;
   searchResultReceived: boolean;
-  selectFagsakCallback: (system: string, saksnummer: number) => void;
+  åpneFagsak: (saksnummer: number, behandlingUuid?: string) => void;
   selectOppgaveCallback: (oppgave: Oppgave) => void;
   searchStarted: boolean;
   searchResultAccessDenied?: {
@@ -44,7 +44,7 @@ const FagsakSearch: FunctionComponent<OwnProps> = ({
   searchFagsakCallback,
   selectOppgaveCallback,
   searchResultReceived,
-  selectFagsakCallback,
+  åpneFagsak,
   searchStarted,
   searchResultAccessDenied,
   resetSearch,
@@ -68,7 +68,7 @@ const FagsakSearch: FunctionComponent<OwnProps> = ({
           <FormattedMessage id="FagsakSearch.FlereSakerEllerBehandlinger" />
         </BodyShort>
         <FagsakList
-          selectFagsakCallback={selectFagsakCallback}
+          åpneFagsak={åpneFagsak}
           selectOppgaveCallback={selectOppgaveCallback}
           fagsaker={fagsaker}
           fagsakOppgaver={fagsakOppgaver}

@@ -4,7 +4,6 @@ import React, {
 
 import { errorOfType, ErrorTypes, getErrorResponseData } from '@fpsak-frontend/rest-api';
 
-import { åpneFagsak } from '../utils/paths';
 import Fagsak from '../typer/fagsakTsType';
 import OppgaveStatus from '../typer/oppgaveStatusTsType';
 import Oppgave from '../typer/oppgaveTsType';
@@ -12,12 +11,8 @@ import FagsakSearch from './components/FagsakSearch';
 import { RestApiPathsKeys, restApiHooks } from '../data/fplosSaksbehandlerRestApi';
 import OppgaveErReservertAvAnnenModal from '../components/OppgaveErReservertAvAnnenModal';
 
-const getGoToSakFn = (fpsakUrl: string) => (system: string, saksnummer: number, behandlingId?: string) => {
-  åpneFagsak(fpsakUrl, system, saksnummer, behandlingId);
-};
-
 interface OwnProps {
-  fpsakUrl: string;
+  åpneFagsak: (saksnummer: number, behandlingUuid?: string) => void;
 }
 
 const EMPTY_ARRAY_FAGSAK: Fagsak[] = [];
@@ -30,10 +25,8 @@ const EMPTY_ARRAY_OPPGAVER: Oppgave[] = [];
  * mot server og lagringen av resultatet i klientens state.
  */
 const FagsakSearchIndex: FunctionComponent<OwnProps> = ({
-  fpsakUrl,
+  åpneFagsak,
 }) => {
-  const goToSak = getGoToSakFn(fpsakUrl);
-
   const [skalReservere, setSkalReservere] = useState(false);
   const [reservertAvAnnenSaksbehandler, setReservertAvAnnenSaksbehandler] = useState(false);
   const [reservertOppgave, setReservertOppgave] = useState<Oppgave>();
@@ -56,7 +49,7 @@ const FagsakSearchIndex: FunctionComponent<OwnProps> = ({
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         velgFagsakOperasjoner(fagsakOppgaver[0], false);
       } else if (fagsakOppgaver.length === 0) {
-        goToSak('FPSAK', fagsaker[0].saksnummer);
+        åpneFagsak(fagsaker[0].saksnummer);
       }
     }
   }, [sokFerdig, fagsaker, fagsakOppgaver]);
@@ -67,7 +60,7 @@ const FagsakSearchIndex: FunctionComponent<OwnProps> = ({
 
   const goToFagsakEllerApneModal = (oppgave: Oppgave, oppgaveStatus?: OppgaveStatus) => {
     if (oppgaveStatus && (!oppgaveStatus.erReservert || (oppgaveStatus.erReservert && oppgaveStatus.erReservertAvInnloggetBruker))) {
-      goToSak(oppgave.system, oppgave.saksnummer, oppgave.behandlingId);
+      åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
     } else if (oppgaveStatus && oppgaveStatus.erReservert && !oppgaveStatus.erReservertAvInnloggetBruker) {
       setReservertOppgave(oppgave);
       setReservertAvAnnenSaksbehandler(true);
@@ -84,7 +77,7 @@ const FagsakSearchIndex: FunctionComponent<OwnProps> = ({
           goToFagsakEllerApneModal(oppgave, status);
         });
       } else {
-        goToSak(oppgave.system, oppgave.saksnummer, oppgave.behandlingId);
+        åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
       }
     } else {
       reserverOppgave({ oppgaveId: oppgave.id }).then((data) => {
@@ -119,7 +112,7 @@ const FagsakSearchIndex: FunctionComponent<OwnProps> = ({
   const lukkErReservertModalOgOpneOppgave = (oppgave: Oppgave) => {
     setReservertOppgave(undefined);
     setReservertAvAnnenSaksbehandler(false);
-    goToSak(oppgave.system, oppgave.saksnummer, oppgave.behandlingId);
+    åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
   };
 
   const resetSearchFn = () => {
@@ -135,7 +128,7 @@ const FagsakSearchIndex: FunctionComponent<OwnProps> = ({
         fagsakOppgaver={fagsakOppgaver || []}
         searchFagsakCallback={sokFagsakFn}
         searchResultReceived={sokFerdig}
-        selectFagsakCallback={goToSak}
+        åpneFagsak={åpneFagsak}
         selectOppgaveCallback={reserverOppgaveOgApne}
         searchStarted={sokStartet}
         searchResultAccessDenied={searchResultAccessDenied}

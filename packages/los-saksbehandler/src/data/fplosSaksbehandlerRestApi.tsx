@@ -17,7 +17,6 @@ import NavAnsatt from '../typer/navAnsattLosTsType';
 export const RestApiGlobalStatePathsKeys = {
   KODEVERK: new RestKey<AlleKodeverk, void>('KODEVERK'),
   NAV_ANSATT: new RestKey<NavAnsatt, void>('NAV_ANSATT'),
-  FPSAK_URL: new RestKey<{ verdi: string }, void>('FPSAK_URL'),
   FPTILBAKE_URL: new RestKey<{ verdi: string }, void>('FPTILBAKE_URL'),
   DRIFTSMELDINGER: new RestKey<Driftsmelding[], void>('DRIFTSMELDINGER'),
 };
@@ -45,7 +44,6 @@ export const RestApiPathsKeys = {
 
 export const endpoints = new RestApiConfigBuilder()
   .withGet('/fplos/api/saksbehandler', RestApiGlobalStatePathsKeys.NAV_ANSATT)
-  .withGet('/fplos/api/konfig/fpsak-url', RestApiGlobalStatePathsKeys.FPSAK_URL)
   .withGet('/fplos/api/kodeverk', RestApiGlobalStatePathsKeys.KODEVERK)
   .withGet('/fplos/api/driftsmeldinger', RestApiGlobalStatePathsKeys.DRIFTSMELDINGER)
 

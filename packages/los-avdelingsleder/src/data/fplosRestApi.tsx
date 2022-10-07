@@ -21,13 +21,13 @@ import Oppgave from '../typer/oppgaveTsType';
 export const RestApiGlobalStatePathsKeys = {
   KODEVERK: new RestKey<AlleKodeverk, void>('KODEVERK'),
   NAV_ANSATT_LOS: new RestKey<NavAnsattLos, void>('NAV_ANSATT_LOS'),
-  FPSAK_URL: new RestKey<{ verdi: string }, void>('FPSAK_URL'),
-  FPTILBAKE_URL: new RestKey<{ verdi: string }, void>('FPTILBAKE_URL'),
-  AVDELINGER: new RestKey<Avdeling[], void>('AVDELINGER'),
-  DRIFTSMELDINGER: new RestKey<Driftsmelding[], void>('DRIFTSMELDINGER'),
 };
 
 export const RestApiPathsKeys = {
+  FPTILBAKE_URL: new RestKey<{ verdi: string }, void>('FPTILBAKE_URL'),
+  AVDELINGER: new RestKey<Avdeling[], void>('AVDELINGER'),
+  DRIFTSMELDINGER: new RestKey<Driftsmelding[], void>('DRIFTSMELDINGER'),
+
   OPPHEV_OPPGAVERESERVASJON: new RestKey<void, { oppgaveId: number, begrunnelse: string }>('OPPHEV_OPPGAVERESERVASJON'),
   FLYTT_RESERVASJON: new RestKey<void, { oppgaveId: number, brukerIdent: string, begrunnelse: string }>('FLYTT_RESERVASJON'),
   BEHANDLINGSKO_OPPGAVE_ANTALL: new RestKey<number, {sakslisteId: number}>('BEHANDLINGSKO_OPPGAVE_ANTALL'),
@@ -78,12 +78,11 @@ export const RestApiPathsKeys = {
 
 export const endpoints = new RestApiConfigBuilder()
   .withGet('/fplos/api/saksbehandler', RestApiGlobalStatePathsKeys.NAV_ANSATT_LOS)
-  .withGet('/fplos/api/konfig/fpsak-url', RestApiGlobalStatePathsKeys.FPSAK_URL)
   .withGet('/fplos/api/kodeverk', RestApiGlobalStatePathsKeys.KODEVERK)
-  .withGet('/fplos/api/driftsmeldinger', RestApiGlobalStatePathsKeys.DRIFTSMELDINGER)
+  .withGet('/fplos/api/driftsmeldinger', RestApiPathsKeys.DRIFTSMELDINGER)
 
   // Avdelingsleder
-  .withGet('/fplos/api/avdelingsleder/avdelinger', RestApiGlobalStatePathsKeys.AVDELINGER)
+  .withGet('/fplos/api/avdelingsleder/avdelinger', RestApiPathsKeys.AVDELINGER)
   .withGet('/fplos/api/avdelingsleder/sakslister', RestApiPathsKeys.SAKSLISTER_FOR_AVDELING)
   .withGet('/fplos/api/avdelingsleder/saksbehandlere', RestApiPathsKeys.SAKSBEHANDLERE_FOR_AVDELING)
   .withGet('/fplos/api/avdelingsleder/oppgaver/avdelingantall', RestApiPathsKeys.OPPGAVE_AVDELING_ANTALL)

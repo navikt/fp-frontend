@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useMemo, useEffect, useCallback,
+  FunctionComponent, useState, useEffect, useCallback,
 } from 'react';
 import { RawIntlProvider, FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
@@ -8,8 +8,10 @@ import { Heading, Panel, Tabs } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { formatQueryString, parseQueryString, createIntl } from '@navikt/ft-utils';
 
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+
 import useTrackRouteParam from './useTrackRouteParam';
-import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, restApiHooks } from './data/fplosRestApi';
+import { RestApiPathsKeys, RestApiGlobalStatePathsKeys, restApiHooks } from './data/fplosRestApi';
 import AvdelingslederDashboard from './components/AvdelingslederDashboard';
 import IkkeTilgangTilAvdelingslederPanel from './components/IkkeTilgangTilAvdelingslederPanel';
 import IkkeTilgangTilKode6AvdelingPanel from './components/IkkeTilgangTilKode6AvdelingPanel';
@@ -19,12 +21,35 @@ import NokkeltallIndex from './nokkeltall/NokkeltallIndex';
 import EndreSaksbehandlereIndex from './saksbehandlere/EndreSaksbehandlereIndex';
 import EndreBehandlingskoerIndex from './behandlingskoer/EndreBehandlingskoerIndex';
 import ReservasjonerIndex from './reservasjoner/ReservasjonerIndex';
+import NavAnsattLos from './typer/navAnsattLosTsType';
+import Avdeling from './typer/avdelingTsType';
+import { getValueFromLocalStorage, removeValueFromLocalStorage } from './data/localStorageHelper';
 
 import messages from '../i18n/nb_NO.json';
+import Avdelingsvelger from './Avdelingsvelger';
 
 const intl = createIntl(messages);
 
 const EMPTY_ARRAY: Saksbehandler[] = [];
+
+const setAvdeling = (
+  setValgtAvdeling: (avdelingEnhet: string) => void,
+  avdelinger?: Avdeling[],
+  valgtAvdelingEnhet?: string,
+) => {
+  if (avdelinger && avdelinger.length > 0 && !valgtAvdelingEnhet) {
+    let valgtEnhet = avdelinger[0].avdelingEnhet;
+    const lagretAvdelingEnhet = getValueFromLocalStorage('avdelingEnhet');
+    if (lagretAvdelingEnhet) {
+      if (avdelinger.some((a) => a.avdelingEnhet === lagretAvdelingEnhet)) {
+        valgtEnhet = lagretAvdelingEnhet;
+      } else {
+        removeValueFromLocalStorage('avdelingEnhet');
+      }
+    }
+    setValgtAvdeling(valgtEnhet);
+  }
+};
 
 const emptyQueryString = (queryString: string) => queryString === '?' || !queryString;
 
@@ -85,6 +110,7 @@ const messageId = {
 
 interface OwnProps {
   valgtAvdelingEnhet?: string;
+  navAnsatt: NavAnsattLos;
 }
 
 const getPanelFromUrlOrDefault = (location: Location) => {
@@ -96,15 +122,24 @@ const getPanelFromUrlOrDefault = (location: Location) => {
  * AvdelingslederIndex
  */
 const AvdelingslederIndex: FunctionComponent<OwnProps> = ({
-  valgtAvdelingEnhet,
+  navAnsatt,
 }) => {
+  const [valgtAvdelingEnhet, setValgtAvdelingEnhet] = useState<string>();
+
   const { selected: activeAvdelingslederPanelTemp, location } = useTrackRouteParam<string>({
     paramName: 'fane',
     isQueryParam: true,
   });
 
-  const { kanOppgavestyre, kanBehandleKode6 } = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.NAV_ANSATT_LOS);
-  const avdelinger = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.AVDELINGER);
+  const { kanOppgavestyre, kanBehandleKode6 } = navAnsatt;
+
+  const avdelingerData = restApiHooks.useRestApi(RestApiPathsKeys.AVDELINGER, undefined, { isCachingOn: true });
+
+  useEffect(() => {
+    if (avdelingerData.state === RestApiState.SUCCESS) {
+      setAvdeling(setValgtAvdelingEnhet, avdelingerData.data, valgtAvdelingEnhet);
+    }
+  }, [avdelingerData]);
 
   const {
     startRequest: hentAvdelingensSb, data: avdelingensSaksbehandlere = EMPTY_ARRAY,
@@ -122,10 +157,13 @@ const AvdelingslederIndex: FunctionComponent<OwnProps> = ({
 
   const navigate = useNavigate();
 
-  const erKode6Avdeling = useMemo(() => {
-    const avdeling = avdelinger instanceof Array && avdelinger.find((a) => a.avdelingEnhet === valgtAvdelingEnhet);
-    return avdeling ? avdeling.kreverKode6 : false;
-  }, [avdelinger, valgtAvdelingEnhet]);
+  if (avdelingerData.state !== RestApiState.SUCCESS) {
+    return null;
+  }
+
+  const avdelinger = avdelingerData.data;
+  const avdeling = avdelinger instanceof Array && avdelinger.find((a) => a.avdelingEnhet === valgtAvdelingEnhet);
+  const erKode6Avdeling = avdeling ? avdeling.kreverKode6 : false;
 
   if (!kanOppgavestyre) {
     return <IkkeTilgangTilAvdelingslederPanel />;
@@ -133,46 +171,72 @@ const AvdelingslederIndex: FunctionComponent<OwnProps> = ({
     return <IkkeTilgangTilKode6AvdelingPanel />;
   } if (valgtAvdelingEnhet) {
     return (
-      <AvdelingslederDashboard key={valgtAvdelingEnhet}>
-        <Tabs
-          size="small"
-          value={activeAvdelingslederPanel}
-          onChange={(avdelingslederPanel: string) => { navigate(getAvdelingslederPanelLocation(avdelingslederPanel)); }}
-        >
-          <Tabs.List>
-            <Tabs.Tab
-              value={AvdelingslederPanels.BEHANDLINGSKOER}
-              label={<Heading size="small"><FormattedMessage id={messageId[AvdelingslederPanels.BEHANDLINGSKOER]} /></Heading>}
-            />
-            <Tabs.Tab
-              value={AvdelingslederPanels.NOKKELTALL}
-              label={<Heading size="small"><FormattedMessage id={messageId[AvdelingslederPanels.NOKKELTALL]} /></Heading>}
-            />
-            <Tabs.Tab
-              value={AvdelingslederPanels.SAKSBEHANDLERE}
-              label={<Heading size="small"><FormattedMessage id={messageId[AvdelingslederPanels.SAKSBEHANDLERE]} /></Heading>}
-            />
-            <Tabs.Tab
-              value={AvdelingslederPanels.RESERVASJONER}
-              label={<Heading size="small"><FormattedMessage id={messageId[AvdelingslederPanels.RESERVASJONER]} /></Heading>}
-            />
-          </Tabs.List>
-        </Tabs>
-        <Panel>
-          {renderAvdelingslederPanel(activeAvdelingslederPanel, valgtAvdelingEnhet, hentAvdelingensSaksbehandlere, avdelingensSaksbehandlere)}
-        </Panel>
-      </AvdelingslederDashboard>
+      <>
+        <Avdelingsvelger
+          valgtAvdelingEnhet={valgtAvdelingEnhet}
+          avdelinger={avdelinger}
+          setValgtAvdelingEnhet={setValgtAvdelingEnhet}
+        />
+        <AvdelingslederDashboard key={valgtAvdelingEnhet}>
+          <Tabs
+            size="small"
+            value={activeAvdelingslederPanel}
+            onChange={(avdelingslederPanel: string) => { navigate(getAvdelingslederPanelLocation(avdelingslederPanel)); }}
+          >
+            <Tabs.List>
+              <Tabs.Tab
+                value={AvdelingslederPanels.BEHANDLINGSKOER}
+                label={<Heading size="small"><FormattedMessage id={messageId[AvdelingslederPanels.BEHANDLINGSKOER]} /></Heading>}
+              />
+              <Tabs.Tab
+                value={AvdelingslederPanels.NOKKELTALL}
+                label={<Heading size="small"><FormattedMessage id={messageId[AvdelingslederPanels.NOKKELTALL]} /></Heading>}
+              />
+              <Tabs.Tab
+                value={AvdelingslederPanels.SAKSBEHANDLERE}
+                label={<Heading size="small"><FormattedMessage id={messageId[AvdelingslederPanels.SAKSBEHANDLERE]} /></Heading>}
+              />
+              <Tabs.Tab
+                value={AvdelingslederPanels.RESERVASJONER}
+                label={<Heading size="small"><FormattedMessage id={messageId[AvdelingslederPanels.RESERVASJONER]} /></Heading>}
+              />
+            </Tabs.List>
+          </Tabs>
+          <Panel>
+            {renderAvdelingslederPanel(activeAvdelingslederPanel, valgtAvdelingEnhet, hentAvdelingensSaksbehandlere, avdelingensSaksbehandlere)}
+          </Panel>
+        </AvdelingslederDashboard>
+      </>
     );
   }
   return <LoadingPanel />;
 };
 
-const AvdelingslederIndexIntlWrapper: FunctionComponent<OwnProps> = ({
-  valgtAvdelingEnhet,
-}) => (
-  <RawIntlProvider value={intl}>
-    <AvdelingslederIndex valgtAvdelingEnhet={valgtAvdelingEnhet} />
-  </RawIntlProvider>
-);
+interface OwnPropsWrapper {
+  setLosErIkkeTilgjengelig: () => void;
+}
+
+const AvdelingslederIndexIntlWrapper: FunctionComponent<OwnPropsWrapper> = ({
+  setLosErIkkeTilgjengelig,
+}) => {
+  const navAnsattData = restApiHooks.useGlobalStateRestApi(RestApiGlobalStatePathsKeys.NAV_ANSATT_LOS);
+  const kodeverkData = restApiHooks.useGlobalStateRestApi(RestApiGlobalStatePathsKeys.KODEVERK);
+
+  useEffect(() => {
+    if (navAnsattData.state === RestApiState.ERROR) {
+      setLosErIkkeTilgjengelig();
+    }
+  }, [navAnsattData.state]);
+
+  if (navAnsattData.state !== RestApiState.SUCCESS || kodeverkData.state !== RestApiState.SUCCESS) {
+    return null;
+  }
+
+  return (
+    <RawIntlProvider value={intl}>
+      <AvdelingslederIndex navAnsatt={navAnsattData.data} />
+    </RawIntlProvider>
+  );
+};
 
 export default AvdelingslederIndexIntlWrapper;

@@ -6,6 +6,7 @@ import SaksbehandlerNokkeltallIndex from '../nokkeltall/SaksbehandlerNokkeltallI
 
 interface OwnProps {
   valgtSakslisteId?: number;
+  åpneFagsak: (saksnummer: number, behandlingUuid?: string) => void;
 }
 
 /**
@@ -13,9 +14,10 @@ interface OwnProps {
  */
 const SaksstottePaneler: FunctionComponent<OwnProps> = ({
   valgtSakslisteId,
+  åpneFagsak,
 }) => (
   <>
-    <SistBehandledeSaker />
+    <SistBehandledeSaker åpneFagsak={åpneFagsak} />
     <VerticalSpacer twentyPx />
     {valgtSakslisteId && (
       <SaksbehandlerNokkeltallIndex valgtSakslisteId={valgtSakslisteId} />

@@ -25,17 +25,17 @@ const headerTextCodes = [
 interface OwnProps {
   fagsaker: Fagsak[];
   fagsakOppgaver: Oppgave[];
-  selectFagsakCallback: (system: string, saksnummer: number) => void;
+  åpneFagsak: (saksnummer: number, behandlingUuid?: string) => void;
   selectOppgaveCallback: (oppgave: Oppgave) => void;
 }
 
 const getSelectOppgaveCallback = (oppgave: Oppgave, selectOppgaveCallback: (oppgave: Oppgave) => void) => () => selectOppgaveCallback(oppgave);
 
 const getFagsakCallback = (
-  selectFagsakCallback: (system: string, saksnummer: number) => void,
+  åpneFagsak: (saksnummer: number, behandlingUuid?: string) => void,
 ) => (_event: React.KeyboardEvent | React.MouseEvent, saksnummer?: number) => {
   if (saksnummer) {
-    selectFagsakCallback('FPSAK', saksnummer);
+    åpneFagsak(saksnummer);
   }
 };
 
@@ -58,7 +58,7 @@ export const getSorterteFagsaker = (fagsaker: Fagsak[] = []) => fagsaker.concat(
 const FagsakList: FunctionComponent<OwnProps> = ({
   fagsaker,
   fagsakOppgaver,
-  selectFagsakCallback,
+  åpneFagsak,
   selectOppgaveCallback,
 }) => {
   const fagsakStatuser = useLosKodeverk(KodeverkType.FAGSAK_STATUS);
@@ -97,8 +97,8 @@ const FagsakList: FunctionComponent<OwnProps> = ({
           <Fragment key={`fagsak${fagsak.saksnummer}`}>
             <TableRow<number>
               id={fagsak.saksnummer}
-              onMouseDown={getFagsakCallback(selectFagsakCallback)}
-              onKeyDown={getFagsakCallback(selectFagsakCallback)}
+              onMouseDown={getFagsakCallback(åpneFagsak)}
+              onKeyDown={getFagsakCallback(åpneFagsak)}
               isDashedBottomBorder={oppgaver.length > 0}
             >
               <TableColumn>{fagsak.saksnummer}</TableColumn>

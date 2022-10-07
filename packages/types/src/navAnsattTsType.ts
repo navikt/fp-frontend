@@ -6,6 +6,7 @@ type NavAnsatt = Readonly<{
   kanBeslutte: boolean;
   kanOverstyre: boolean;
   kanSaksbehandle: boolean;
+  kanOppgavestyre: boolean;
   kanVeilede: boolean;
   navn: string;
   funksjonellTid?: string;

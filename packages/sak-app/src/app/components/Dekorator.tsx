@@ -1,7 +1,8 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { useIntl, IntlShape } from 'react-intl';
-import DekoratorMedFeilviserSakIndex, { Feilmelding } from '@navikt/ft-sak-dekorator';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
+import { useNavigate } from 'react-router-dom';
+import DekoratorMedFeilviserSakIndex, { Feilmelding } from '@navikt/ft-sak-dekorator';
 
 import { useRestApiError, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import { SYSTEMRUTINE_URL } from '@fpsak-frontend/konstanter';
@@ -9,6 +10,8 @@ import { SYSTEMRUTINE_URL } from '@fpsak-frontend/konstanter';
 import ErrorFormatter from './feilhandtering/ErrorFormatter';
 import ErrorMessage from './feilhandtering/ErrorMessage';
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
+
+import { AVDELINGSLEDER_PATH } from '../paths';
 
 import '@navikt/ft-sak-dekorator/dist/style.css';
 
@@ -73,21 +76,35 @@ const Dekorator: FunctionComponent<OwnProps> = ({
 
   const navAnsatt = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
 
+  const navigate = useNavigate();
+  const visSaksbehandlerside = (e: React.SyntheticEvent) => {
+    navigate('/');
+    e.preventDefault();
+  };
+  const visAvdelingslederside = (e: React.SyntheticEvent) => {
+    navigate(AVDELINGSLEDER_PATH);
+    e.preventDefault();
+  };
+
   const errorMessages = useRestApiError();
   const { removeErrorMessages } = useRestApiErrorDispatcher();
 
   const formaterteFeilmeldinger = useMemo(() => new ErrorFormatter().format(errorMessages, crashMessage), [errorMessages]);
   const resolvedErrorMessages = useMemo(() => lagFeilmeldinger(formaterteFeilmeldinger, queryStrings, intl), [formaterteFeilmeldinger, queryStrings]);
 
+  const kanOppgavestyre = navAnsatt?.kanOppgavestyre;
+
   return (
     <DekoratorMedFeilviserSakIndex
       tittel={intl.formatMessage({ id: 'Dekorator.Foreldrepenger' })}
-      tittelLenke="/fpsak"
+      visSaksbehandlerside={visSaksbehandlerside}
+      visAvdelingslederside={visAvdelingslederside}
       navAnsattNavn={navAnsatt?.navn}
       systemrutineUrl={SYSTEMRUTINE_URL}
       feilmeldinger={hideErrorMessages ? EMPTY_ARRAY : resolvedErrorMessages}
       fjernFeilmeldinger={removeErrorMessages}
       setSiteHeight={setSiteHeight}
+      kanOppgavestyre={kanOppgavestyre}
     />
   );
 };

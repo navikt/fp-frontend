@@ -38,6 +38,11 @@ const options = {
       secure: false,
       changeOrigin: (!!process.env.APP_URL_FPFORMIDLING),
     },
+    '/fplos/api/**': {
+      target: process.env.APP_URL_LOS|| 'http://localhost:8071',
+      secure: false,
+      changeOrigin: (!!process.env.APP_URL_LOS),
+    },
     '/fpsak/(api|jetty)/**': {
       target: process.env.APP_URL_FPSAK || 'http://127.0.0.1:8080',
       secure: false,
