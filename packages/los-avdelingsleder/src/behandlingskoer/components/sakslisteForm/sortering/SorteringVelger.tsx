@@ -45,11 +45,11 @@ const SorteringVelger: FunctionComponent<OwnProps> = ({
       name="sortering"
       label={<FormattedMessage id="SorteringVelger.Sortering" />}
       onChange={(sorteringType) => {
-        resetField('fra');
-        resetField('til');
-        resetField('fomDato');
-        resetField('tomDato');
-        resetField('erDynamiskPeriode');
+        resetField('fra', { defaultValue: '' });
+        resetField('til', { defaultValue: '' });
+        resetField('fomDato', { defaultValue: '' });
+        resetField('tomDato', { defaultValue: '' });
+        resetField('erDynamiskPeriode', { defaultValue: '' });
 
         return lagreSakslisteSortering({
           sakslisteId: valgtSakslisteId,

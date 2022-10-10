@@ -108,10 +108,6 @@ export const UtvalgskriterierForSakslisteForm: FunctionComponent<OwnProps & Wrap
 
   const lagreNavn = useDebounce<string>('navn', tranformValues, formMethods.trigger);
 
-  useEffect(() => {
-    formMethods.reset(defaultValues);
-  }, [valgtSaksliste.sakslisteId]);
-
   const values = formMethods.watch();
 
   return (
