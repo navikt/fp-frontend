@@ -99,6 +99,8 @@
   "NyeOgFerdigstilteOppgaverForIdagGraf.Nye": "Nye",
   "NyeOgFerdigstilteOppgaverForIdagGraf.Førstegangsbehandling": "Førstegangsbeh.",
 
+  "BehandlingskoerIndex.IngenKø": "Det finnes ingen behandlingskøer for denne saksbehandleren",
+
   "SakslisteVelgerForm.Saksliste": "Behandlingskø",
   "SakslisteVelgerForm.Utvalgskriterier": "Utvalgskriterier",
   "SakslisteVelgerForm.Stonadstype": "Stønadstype",

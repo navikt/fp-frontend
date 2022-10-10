@@ -1,6 +1,8 @@
 import React, {
   FunctionComponent, useState, useCallback,
 } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { Heading } from '@navikt/ds-react';
 
 import Saksliste from '../typer/sakslisteTsType';
 import OppgaveStatus from '../typer/oppgaveStatusTsType';
@@ -59,7 +61,7 @@ const BehandlingskoerIndex: FunctionComponent<OwnProps> = ({
   }, [åpneFagsak]);
 
   if (sakslister.length === 0) {
-    return null;
+    return <Heading size="small"><FormattedMessage id="BehandlingskoerIndex.IngenKø" /></Heading>;
   }
   return (
     <>

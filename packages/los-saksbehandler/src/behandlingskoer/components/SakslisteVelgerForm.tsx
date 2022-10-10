@@ -166,17 +166,6 @@ const SakslisteVelgerForm: FunctionComponent<OwnProps> = ({
   const { data: saksbehandlere, startRequest: fetchSaksbehandlere } = restApiHooks.useRestApiRunner(RestApiPathsKeys.SAKSLISTE_SAKSBEHANDLERE);
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK_LOS);
 
-  useEffect(() => {
-    if (sakslister.length > 0) {
-      const defaultSakslisteId = getDefaultSaksliste(sakslister, getValueFromLocalStorage, removeValueFromLocalStorage);
-      if (defaultSakslisteId) {
-        setValgtSakslisteId(defaultSakslisteId);
-        fetchSaksbehandlere({ sakslisteId: defaultSakslisteId });
-        fetchAntallOppgaver({ sakslisteId: defaultSakslisteId });
-      }
-    }
-  }, []);
-
   const tooltip = useMemo(() => createTooltip(saksbehandlere), [saksbehandlere]);
 
   const formMethods = useForm<FormValues>({
