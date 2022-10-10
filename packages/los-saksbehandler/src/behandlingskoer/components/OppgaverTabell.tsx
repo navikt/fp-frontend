@@ -20,7 +20,9 @@ import Oppgave from '../../typer/oppgaveTsType';
 import OppgaveStatus from '../../typer/oppgaveStatusTsType';
 import BehandlingPollingTimoutModal from './BehandlingPollingTimoutModal';
 import OppgaveHandlingerMenu from './menu/OppgaveHandlingerMenu';
-import { RestApiPathsKeys, RestApiGlobalStatePathsKeys, restApiHooks } from '../../data/fplosSaksbehandlerRestApi';
+import {
+  requestApi, RestApiPathsKeys, RestApiGlobalStatePathsKeys, restApiHooks,
+} from '../../data/fplosSaksbehandlerRestApi';
 
 import styles from './oppgaverTabell.less';
 
@@ -103,8 +105,13 @@ const OppgaverTabell: FunctionComponent<OwnProps> = ({
   };
 
   useEffect(() => {
+    requestApi.cancelRequest(RestApiPathsKeys.OPPGAVER_TIL_BEHANDLING.name);
     fetchSakslisteOppgaverPolling(false, valgtSakslisteId);
   }, [valgtSakslisteId]);
+
+  useEffect(() => () => {
+    requestApi.cancelRequest(RestApiPathsKeys.OPPGAVER_TIL_BEHANDLING.name);
+  }, []);
 
   const forlengOppgaveReservasjonFn = useCallback((oppgaveId: number): Promise<any> => forlengOppgavereservasjon({ oppgaveId })
     .then(() => hentReserverteOppgaver(undefined, true)), []);
