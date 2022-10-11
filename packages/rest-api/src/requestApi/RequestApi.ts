@@ -60,6 +60,8 @@ class RequestApi {
 
   cache: ResponseCache = new ResponseCache();
 
+  activeRunners: Record<string, RequestRunner> = {};
+
   constructor(httpClientApi: HttpClientApi, endpointConfigList: RequestConfig[]) {
     this.httpClientApi = httpClientApi;
     this.endpointConfigList = endpointConfigList;
@@ -80,6 +82,12 @@ class RequestApi {
   private findLinks = (rel?: string): Link | undefined => (rel
     ? Object.values(this.links).flat().find((link) => link.rel === rel)
     : undefined);
+
+  public cancelRequest = (endpointName: string): void => {
+    if (this.activeRunners[endpointName]) {
+      this.activeRunners[endpointName].cancel();
+    }
+  };
 
   public startRequest = async <T, P>(endpointName: string, params?: P, isCachingOn = false): Promise<{ payload: T }> => {
     const endpointConfig = this.endpointConfigList.find((c) => c.name === endpointName);
@@ -106,16 +114,21 @@ class RequestApi {
       runner.setNotificationEmitter(this.notificationMapper.getNotificationEmitter());
     }
 
-    if (!useCaching) {
-      return runner.start<T, P>(params || link?.requestPayload);
-    }
+    this.activeRunners = {
+      ...this.activeRunners,
+      [endpointName]: runner,
+    };
 
     try {
       const result = await runner.start<T, P>(params || link?.requestPayload);
-      this.cache.addData(endpointName, result);
+      if (useCaching) {
+        this.cache.addData(endpointName, result);
+      }
       return result;
     } catch (error) {
-      this.cache.addData(endpointName, undefined);
+      if (useCaching) {
+        this.cache.addData(endpointName, undefined);
+      }
       throw error;
     }
   };

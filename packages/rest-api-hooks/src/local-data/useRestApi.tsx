@@ -16,12 +16,14 @@ export interface Options {
   updateTriggers?: DependencyList;
   keepData?: boolean;
   suspendRequest?: boolean;
+  isCachingOn?: boolean,
 }
 
 const defaultOptions = {
   updateTriggers: [],
   keepData: false,
   suspendRequest: false,
+  isCachingOn: false,
 };
 
 const DEFAULT_STATE = {
@@ -35,7 +37,7 @@ const DEFAULT_STATE = {
   * blir oppdatert. Hook returnerer rest-kallets status/resultat/feil
   */
 const getUseRestApi = (requestApi: RequestApi) => function useRestApi<T, P>(
-  key: RestKey<T, P>, params?: P, options?: Options,
+  key: RestKey<T, P>, params?: P, options: Options = defaultOptions,
 ): RestApiData<T> {
   const allOptions = { ...defaultOptions, ...options };
 
@@ -49,7 +51,7 @@ const getUseRestApi = (requestApi: RequestApi) => function useRestApi<T, P>(
         data: allOptions.keepData ? oldState.data : undefined,
       }));
 
-      requestApi.startRequest<T, P>(key.name, params)
+      requestApi.startRequest<T, P>(key.name, params, options.isCachingOn)
         .then((dataRes) => {
           setData({
             state: RestApiState.SUCCESS,

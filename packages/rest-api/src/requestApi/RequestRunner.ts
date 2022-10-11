@@ -16,7 +16,7 @@ const wait = (ms: number) => new Promise((resolve) => {
   setTimeout(resolve, ms);
 });
 
-const hasLocationAndStatusDelayedOrHalted = (responseData: any): boolean => responseData?.location
+const hasLocationAndStatusDelayedOrHalted = (responseData: any): boolean => !!responseData?.location
   && (responseData.status === AsyncPollingStatus.DELAYED || responseData.status === AsyncPollingStatus.HALTED);
 
 type Notify = (eventType: keyof typeof EventType, data?: any, isPolling?: boolean) => void

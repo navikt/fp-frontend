@@ -17,10 +17,18 @@ const navAnsatt = {
   kanBehandleKodeEgenAnsatt: false,
   kanBeslutte: true,
   kanOverstyre: false,
+  kanOppgavestyre: true,
   kanSaksbehandle: true,
   kanVeilede: false,
   navn: 'Peder Pjokk',
 };
+
+const mockHistoryPush = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom') as any,
+  useNavigate: () => mockHistoryPush,
+}));
 
 const intl = createIntl(messages);
 
