@@ -1,21 +1,19 @@
 import React, { FunctionComponent } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { BehandlingAppKontekst, Fagsak } from '@navikt/ft-types';
 import { IngenBehandlingValgtPanel } from '@navikt/ft-sak-infosider';
 
 import { behandlingRoutePath } from '../app/paths';
 import BehandlingIndex from './BehandlingIndex';
+import FagsakData from '../fagsak/FagsakData';
 
 interface OwnProps {
-  fagsak: Fagsak;
-  alleBehandlinger: BehandlingAppKontekst[];
+  fagsakData: FagsakData;
   setBehandlingUuidOgVersjon: (behandlingUuid: string, behandlingVersjon: number) => void;
   setRequestPendingMessage: (message?: string) => void;
 }
 
 export const BehandlingerIndex: FunctionComponent<OwnProps> = ({
-  fagsak,
-  alleBehandlinger,
+  fagsakData,
   setBehandlingUuidOgVersjon,
   setRequestPendingMessage,
 }) => (
@@ -24,14 +22,13 @@ export const BehandlingerIndex: FunctionComponent<OwnProps> = ({
       path={behandlingRoutePath}
       element={(
         <BehandlingIndex
-          fagsak={fagsak}
-          alleBehandlinger={alleBehandlinger}
+          fagsakData={fagsakData}
           setBehandlingUuidOgVersjon={setBehandlingUuidOgVersjon}
           setRequestPendingMessage={setRequestPendingMessage}
         />
       )}
     />
-    <Route path="/" element={<IngenBehandlingValgtPanel numBehandlinger={alleBehandlinger.length} />} />
+    <Route path="/" element={<IngenBehandlingValgtPanel numBehandlinger={fagsakData.getAlleBehandlinger().length} />} />
   </Routes>
 );
 

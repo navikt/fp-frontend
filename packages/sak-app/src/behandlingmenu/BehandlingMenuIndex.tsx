@@ -6,7 +6,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import {
   BehandlingType, BehandlingStatus, KodeverkType,
 } from '@navikt/ft-kodeverk';
-import { BehandlingAppKontekst, Fagsak } from '@navikt/ft-types';
+import { BehandlingAppKontekst } from '@navikt/ft-types';
 import MenySakIndex, {
   MenyData,
   MenyEndreBehandlendeEnhetIndex,
@@ -30,9 +30,9 @@ import useGetEnabledApplikasjonContext from '../app/useGetEnabledApplikasjonCont
 import ApplicationContextPath from '../app/ApplicationContextPath';
 import MenyKodeverk from './MenyKodeverk';
 import BehandlingRettigheter, { VergeBehandlingmenyValg } from '../behandling/behandlingRettigheterTsType';
-import SakRettigheter from '../fagsak/sakRettigheterTsType';
 
 import '@navikt/ft-sak-meny/dist/style.css';
+import FagsakData from '../fagsak/FagsakData';
 
 const BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES = [
   BehandlingType.FORSTEGANGSSOKNAD,
@@ -62,27 +62,23 @@ const skalLageVergeFn = (
   behandlingVersjon?: number,
 ): boolean => vergeMenyvalg === vergeType && !!behandlingUuid && !!behandlingVersjon;
 
-const EMPTY_ARRAY = [] as BehandlingAppKontekst[];
-
 interface OwnProps {
-  fagsak: Fagsak;
-  alleBehandlinger: BehandlingAppKontekst[];
+  fagsakData: FagsakData;
   behandlingUuid?: string;
   behandlingVersjon?: number;
   behandlingRettigheter?: BehandlingRettigheter;
-  sakRettigheter: SakRettigheter;
   oppfriskBehandlinger: () => void;
 }
 
-export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
-  fagsak,
-  alleBehandlinger = EMPTY_ARRAY,
+const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
+  fagsakData,
   behandlingUuid,
   behandlingVersjon,
-  sakRettigheter,
   behandlingRettigheter,
   oppfriskBehandlinger,
 }) => {
+  const fagsak = fagsakData.getFagsak();
+  const alleBehandlinger = fagsakData.getAlleBehandlinger();
   const behandling = alleBehandlinger.find((b) => b.uuid === behandlingUuid);
 
   const navigate = useNavigate();
@@ -219,14 +215,14 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
               lukkModal={lukkModal}
             />
           )),
-        new MenyData(!sakRettigheter.sakSkalTilInfotrygd, getNyBehandlingMenytekst())
+        new MenyData(!fagsak.sakSkalTilInfotrygd, getNyBehandlingMenytekst())
           .medModal((lukkModal) => (
             <MenyNyBehandlingIndex
               saksnummer={fagsak.saksnummer}
               behandlingUuid={behandling?.uuid}
               behandlingVersjon={behandlingVersjon}
               uuidForSistLukkede={uuidForSistLukkede}
-              behandlingOppretting={sakRettigheter.behandlingTypeKanOpprettes}
+              behandlingOppretting={fagsakData.getBehandlingOppretting()}
               kanTilbakekrevingOpprettes={{
                 kanBehandlingOpprettes,
                 kanRevurderingOpprettes,

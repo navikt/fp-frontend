@@ -11,7 +11,7 @@ import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
-import { FagsakProfileIndex } from './FagsakProfileIndex';
+import FagsakProfileIndex from './FagsakProfileIndex';
 
 describe('<FagsakProfileIndex>', () => {
   const fagsak = {

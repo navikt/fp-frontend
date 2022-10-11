@@ -5,10 +5,9 @@ import {
   Navigate, NavLink, useLocation, useMatch,
 } from 'react-router-dom';
 import { Location } from 'history';
-import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import BehandlingVelgerSakIndex from '@navikt/ft-sak-behandling-velger';
 import FagsakProfilSakIndex from '@navikt/ft-sak-fagsak-profil';
-import { Fagsak, BehandlingAppKontekst } from '@navikt/ft-types';
+import { BehandlingAppKontekst } from '@navikt/ft-types';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 
 import UkjentAdresseMeldingIndex from '@fpsak-frontend/sak-ukjent-adresse';
@@ -22,12 +21,12 @@ import BehandlingMenuIndex from '../behandlingmenu/BehandlingMenuIndex';
 import RisikoklassifiseringIndex from './risikoklassifisering/RisikoklassifiseringIndex';
 import { FpsakApiKeys, restApiHooks, requestApi } from '../data/fpsakApi';
 import { useFpSakKodeverkMedNavn, useGetKodeverkFn } from '../data/useKodeverk';
-import SakRettigheter from '../fagsak/sakRettigheterTsType';
 import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
 
 import styles from './fagsakProfileIndex.less';
 
 import '@navikt/ft-sak-behandling-velger/dist/style.css';
+import FagsakData from '../fagsak/FagsakData';
 
 const findPathToBehandling = (saksnummer: string, location: Location, alleBehandlinger: BehandlingAppKontekst[]) => {
   if (alleBehandlinger.length === 1) {
@@ -40,33 +39,26 @@ const findPathToBehandling = (saksnummer: string, location: Location, alleBehand
 };
 
 interface OwnProps {
-  fagsak: Fagsak;
-  alleBehandlinger: BehandlingAppKontekst[];
+  fagsakData: FagsakData;
   behandlingUuid?: string;
   behandlingVersjon?: number;
-  harHentetBehandlinger: boolean;
   oppfriskBehandlinger: () => void;
-  fagsakRettigheter: SakRettigheter;
   behandlingRettigheter?: BehandlingRettigheter;
-  brukerManglerAdresse: boolean;
 }
 
-export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
-  fagsak,
-  alleBehandlinger,
-  harHentetBehandlinger,
+const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
+  fagsakData,
   behandlingUuid,
   behandlingVersjon,
   oppfriskBehandlinger,
-  fagsakRettigheter,
   behandlingRettigheter,
-  brukerManglerAdresse,
 }) => {
   const [showAll, setShowAll] = useState(!behandlingUuid);
   const toggleShowAll = useCallback(() => setShowAll(!showAll), [showAll]);
 
   const getKodeverkFn = useGetKodeverkFn();
 
+  const fagsak = fagsakData.getFagsak();
   const fagsakStatusMedNavn = useFpSakKodeverkMedNavn(fagsak.status, KodeverkType.FAGSAK_STATUS);
   const fagsakYtelseTypeMedNavn = useFpSakKodeverkMedNavn(fagsak.fagsakYtelseType, KodeverkType.FAGSAK_YTELSE);
 
@@ -94,40 +86,30 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
 
   return (
     <div className={styles.panelPadding}>
-      {brukerManglerAdresse && (
+      {fagsak.brukerManglerAdresse && (
         <UkjentAdresseMeldingIndex />
       )}
-      {!harHentetBehandlinger && (
-        <LoadingPanel />
+      {shouldRedirectToBehandlinger && (
+        <Navigate to={findPathToBehandling(fagsak.saksnummer, location, fagsakData.getAlleBehandlinger())} />
       )}
-      {harHentetBehandlinger && shouldRedirectToBehandlinger && (
-        <Navigate to={findPathToBehandling(fagsak.saksnummer, location, alleBehandlinger)} />
-      )}
-      {harHentetBehandlinger && !shouldRedirectToBehandlinger && (
+      {!shouldRedirectToBehandlinger && (
         <FagsakProfilSakIndex
           saksnummer={fagsak.saksnummer}
           fagsakYtelseType={fagsakYtelseTypeMedNavn}
           fagsakStatus={fagsakStatusMedNavn}
           dekningsgrad={fagsak.dekningsgrad}
-          renderBehandlingMeny={() => {
-            if (!fagsakRettigheter) {
-              return <LoadingPanel />;
-            }
-            return (
-              <BehandlingMenuIndex
-                fagsak={fagsak}
-                alleBehandlinger={alleBehandlinger}
-                behandlingUuid={behandlingUuid}
-                behandlingVersjon={behandlingVersjon}
-                oppfriskBehandlinger={oppfriskBehandlinger}
-                behandlingRettigheter={behandlingRettigheter}
-                sakRettigheter={fagsakRettigheter}
-              />
-            );
-          }}
+          renderBehandlingMeny={() => (
+            <BehandlingMenuIndex
+              fagsakData={fagsakData}
+              behandlingUuid={behandlingUuid}
+              behandlingVersjon={behandlingVersjon}
+              oppfriskBehandlinger={oppfriskBehandlinger}
+              behandlingRettigheter={behandlingRettigheter}
+            />
+          )}
           renderBehandlingVelger={() => (
             <BehandlingVelgerSakIndex
-              behandlinger={alleBehandlinger}
+              behandlinger={fagsakData.getAlleBehandlinger()}
               behandlingUuid={behandlingUuid}
               skalViseAlleBehandlinger={showAll}
               toggleVisAlleBehandlinger={toggleShowAll}
@@ -146,8 +128,7 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
         />
       )}
       <RisikoklassifiseringIndex
-        fagsak={fagsak}
-        alleBehandlinger={alleBehandlinger}
+        fagsakData={fagsakData}
         risikoAksjonspunkt={risikoAksjonspunkt}
         kontrollresultat={kontrollresultat}
         behandlingUuid={behandlingUuid}

@@ -9,10 +9,9 @@ import VisittkortSakIndex from '@navikt/ft-sak-visittkort';
 import { LoadingPanel, DataFetchPendingModal } from '@navikt/ft-ui-komponenter';
 import { BehandlingType } from '@navikt/ft-kodeverk';
 
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { AnnenPartBehandling } from '@fpsak-frontend/types';
 
 import BehandlingerIndex from '../behandling/BehandlingerIndex';
-import useBehandlingEndret from '../behandling/useBehandlingEndret';
 import useTrackRouteParam from '../app/useTrackRouteParam';
 import BehandlingSupportIndex from '../behandlingsupport/BehandlingSupportIndex';
 import FagsakProfileIndex from '../fagsakprofile/FagsakProfileIndex';
@@ -21,10 +20,9 @@ import {
 } from '../app/paths';
 import FagsakGrid from './components/FagsakGrid';
 import {
-  AnnenPartBehandling, FpsakApiKeys, restApiHooks, requestApi,
+  FpsakApiKeys, restApiHooks,
 } from '../data/fpsakApi';
-import useHentFagsakRettigheter from './useHentFagsakRettigheter';
-import useHentAlleBehandlinger from './useHentAlleBehandlinger';
+import useHentFagsak from './useHentFagsak';
 
 import '@navikt/ft-sak-visittkort/dist/style.css';
 
@@ -34,8 +32,6 @@ const finnLenkeTilAnnenPart = (annenPartBehandling: AnnenPartBehandling): string
 
 const erTilbakekreving = (behandlingType?: string): boolean => !!behandlingType
   && (BehandlingType.TILBAKEKREVING === behandlingType || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType);
-
-const henterData = (state: RestApiState): boolean => state === RestApiState.NOT_STARTED || state === RestApiState.LOADING;
 
 const finnSkalIkkeHenteData = (
   location: Location,
@@ -65,38 +61,7 @@ const FagsakIndex: FunctionComponent = () => {
     paramName: 'saksnummer',
   });
 
-  const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingUuid, behandlingVersjon);
-
-  const { data: fagsakPersoner, state: fagsakPersonerState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.SAK_PERSONER,
-    { saksnummer: selectedSaksnummer }, {
-      updateTriggers: [selectedSaksnummer],
-      suspendRequest: !selectedSaksnummer,
-    });
-
-  const { data: annenPartBehandling } = restApiHooks.useRestApi(FpsakApiKeys.ANNEN_PART_BEHANDLING, { saksnummer: selectedSaksnummer }, {
-    updateTriggers: [selectedSaksnummer],
-    suspendRequest: !selectedSaksnummer,
-  });
-
-  const { data: fagsak, state: fagsakState } = restApiHooks.useRestApi(FpsakApiKeys.FETCH_FAGSAK, { saksnummer: selectedSaksnummer }, {
-    updateTriggers: [selectedSaksnummer, behandlingUuid, behandlingVersjon],
-    suspendRequest: !selectedSaksnummer || erBehandlingEndretFraUndefined,
-    keepData: true,
-  });
-
-  const { data: harIkkeAdresse } = restApiHooks.useRestApi(FpsakApiKeys.HAR_IKKE_ADRESSE, { saksnummer: selectedSaksnummer }, {
-    updateTriggers: [selectedSaksnummer],
-    suspendRequest: !selectedSaksnummer,
-    keepData: true,
-  });
-
-  const [harFerdighentetfagsakRettigheter, fagsakRettigheter] = useHentFagsakRettigheter(
-    selectedSaksnummer, behandlingUuid, behandlingVersjon,
-  );
-
-  const [alleBehandlinger, harFerdighentetAlleBehandlinger] = useHentAlleBehandlinger(
-    selectedSaksnummer, behandlingerTeller, behandlingUuid, behandlingVersjon,
-  );
+  const [harHentetFagsak, fagsakData] = useHentFagsak(selectedSaksnummer, behandlingUuid, behandlingVersjon);
 
   useEffect(() => () => {
     requestApi.resetCache();
@@ -106,27 +71,25 @@ const FagsakIndex: FunctionComponent = () => {
   const location = useLocation();
   const skalIkkeHenteData = finnSkalIkkeHenteData(location, selectedSaksnummer, behandlingUuid);
 
-  const behandling = alleBehandlinger.find((b) => b.uuid === behandlingUuid);
-
   const { data: behandlingRettigheter } = restApiHooks.useRestApi(FpsakApiKeys.BEHANDLING_RETTIGHETER, undefined, {
     updateTriggers: [skalIkkeHenteData, behandlingUuid, behandlingVersjon],
     suspendRequest: skalIkkeHenteData,
     keepData: true,
   });
 
-  if (!fagsak) {
-    if (henterData(fagsakState)) {
+  if (!fagsakData) {
+    if (!harHentetFagsak) {
       return <LoadingPanel />;
     }
     return <Navigate to={pathToMissingPage()} />;
   }
-  if (henterData(fagsakPersonerState) || !harFerdighentetfagsakRettigheter || !fagsakRettigheter) {
-    return <LoadingPanel />;
-  }
 
-  if (fagsak.saksnummer !== selectedSaksnummer) {
+  if (fagsakData.getFagsak().saksnummer !== selectedSaksnummer) {
     return <Navigate to={pathToMissingPage()} />;
   }
+
+  const fagsak = fagsakData.getFagsak();
+  const behandling = fagsakData.getAlleBehandlinger().find((b) => b.uuid === behandlingUuid);
 
   return (
     <>
@@ -137,8 +100,7 @@ const FagsakIndex: FunctionComponent = () => {
               path={behandlingerRoutePath}
               element={(
                 <BehandlingerIndex
-                  fagsak={fagsak}
-                  alleBehandlinger={alleBehandlinger}
+                  fagsakData={fagsakData}
                   setBehandlingUuidOgVersjon={setBehandlingUuidOgVersjon}
                   setRequestPendingMessage={setRequestPendingMessage}
                 />
@@ -148,42 +110,40 @@ const FagsakIndex: FunctionComponent = () => {
         )}
         profileAndNavigationContent={(
           <>
-            {!fagsak && <LoadingPanel />}
-            {fagsak && (
+            {!fagsakData && <LoadingPanel />}
+            {fagsakData && (
               <FagsakProfileIndex
-                fagsak={fagsak}
+                fagsakData={fagsakData}
                 behandlingUuid={behandlingUuid}
                 behandlingVersjon={behandlingVersjon}
-                alleBehandlinger={alleBehandlinger}
-                harHentetBehandlinger={harFerdighentetAlleBehandlinger}
                 oppfriskBehandlinger={oppfriskBehandlinger}
-                fagsakRettigheter={fagsakRettigheter}
                 behandlingRettigheter={behandlingRettigheter}
-                brukerManglerAdresse={harIkkeAdresse}
               />
             )}
           </>
         )}
         supportContent={(
           <BehandlingSupportIndex
-            fagsak={fagsak}
-            alleBehandlinger={alleBehandlinger}
+            fagsakData={fagsakData}
             behandlingUuid={behandlingUuid}
             behandlingVersjon={behandlingVersjon}
             behandlingRettigheter={behandlingRettigheter}
-            brukerManglerAdresse={harIkkeAdresse}
           />
         )}
         visittkortContent={() => {
-          if (skalIkkeHenteData || !fagsakPersoner) {
+          if (skalIkkeHenteData) {
             return null;
           }
 
           return (
             <VisittkortSakIndex
-              lenkeTilAnnenPart={annenPartBehandling ? finnLenkeTilAnnenPart(annenPartBehandling) : undefined}
+              lenkeTilAnnenPart={fagsak.annenpartBehandling ? finnLenkeTilAnnenPart(fagsak.annenpartBehandling) : undefined}
               fagsak={fagsak}
-              fagsakPersoner={fagsakPersoner}
+              fagsakPersoner={{
+                bruker: fagsak.bruker,
+                annenPart: fagsak.annenPart,
+                familiehendelse: fagsak.familiehendelse,
+              }}
               harVerge={behandling?.harVerge}
               erTilbakekreving={erTilbakekreving(behandling?.type)}
             />

@@ -1,4 +1,5 @@
 import BehandlingAppKontekst from './behandlingAppKontekstTsType';
+import Historikkinnslag from './historikkinnslagTsType';
 
 export type BehandlingOppretting = Readonly<{
   behandlingType: string;
@@ -27,7 +28,7 @@ export type AnnenPartBehandling = {
   behandlingUuid: string;
 };
 
-type Fagsak = Readonly<{
+type FagsakDataFpTilbake = Readonly<{
   saksnummer: string;
   fagsakYtelseType: string;
   relasjonsRolleType: string;
@@ -42,7 +43,8 @@ type Fagsak = Readonly<{
   familiehendelse?: FagsakHendelse;
   annenpartBehandling: AnnenPartBehandling;
   behandlinger: BehandlingAppKontekst[];
+  historikkinnslag: Historikkinnslag;
   brukerManglerAdresse: boolean;
 }>;
 
-export default Fagsak;
+export default FagsakDataFpTilbake;

@@ -2,12 +2,12 @@ import React, {
   FunctionComponent, useState, useCallback, useMemo,
 } from 'react';
 import {
-  Behandling, AlleKodeverk, Fagsak, Aksjonspunkt,
+  Behandling, AlleKodeverk, Aksjonspunkt,
 } from '@navikt/ft-types';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { AksessRettigheter } from '@fpsak-frontend/types';
+import { AksessRettigheter, Fagsak } from '@fpsak-frontend/types';
 import { AsyncPollingStatus } from '@fpsak-frontend/rest-api';
 import { RegistrerPapirsoknadPanel, SoknadRegistrertModal } from '@fpsak-frontend/papirsoknad';
 
@@ -60,7 +60,6 @@ const EMPTY_ARRAY = [] as Aksjonspunkt[];
 
 interface OwnProps {
   fagsak: Fagsak;
-  fagsakPersonnummer: string;
   behandling: Behandling;
   kodeverk: AlleKodeverk;
   rettigheter: AksessRettigheter;
@@ -77,7 +76,6 @@ interface OwnProps {
  */
 const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
   fagsak,
-  fagsakPersonnummer,
   behandling,
   kodeverk,
   rettigheter,
@@ -114,7 +112,6 @@ const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
       <SoknadRegistrertModal isOpen={erAksjonspunktLagret} />
       <RegistrerPapirsoknadPanel
         fagsak={fagsak}
-        fagsakPersonnummer={fagsakPersonnummer}
         kodeverk={kodeverk}
         readOnly={readOnly}
         lagreUfullstendig={lagreUfullstendig}
