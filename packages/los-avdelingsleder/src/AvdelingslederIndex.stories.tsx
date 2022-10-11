@@ -7,6 +7,7 @@ import { NavAnsatt } from '@fpsak-frontend/types';
 
 import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, requestApi } from './data/fplosRestApi';
 import AvdelingslederIndex from './AvdelingslederIndex';
+import Avdeling from './typer/avdelingTsType';
 
 export default {
   title: 'los/avdelingsleder/AvdelingslederIndex',
@@ -19,12 +20,13 @@ const navAnsattDefault = {
   kanBehandleKode6: true,
 } as NavAnsatt;
 
-const Template: Story<{ navAnsatt: NavAnsatt }> = ({
+const Template: Story<{ valgtAvdelingEnhet?: Avdeling, navAnsatt: NavAnsatt }> = ({
+  valgtAvdelingEnhet,
   navAnsatt,
 }) => {
   const data = [
     { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
-    { key: RestApiPathsKeys.AVDELINGER.name, data: {}, global: true },
+    { key: RestApiPathsKeys.AVDELINGER.name, data: valgtAvdelingEnhet ? [valgtAvdelingEnhet] : undefined },
     { key: RestApiPathsKeys.SAKSBEHANDLERE_FOR_AVDELING.name, data: [] },
     { key: RestApiPathsKeys.OPPGAVE_ANTALL.name, data: 1 },
     { key: RestApiPathsKeys.LAGRE_SAKSLISTE_NAVN.name, data: undefined },
@@ -54,11 +56,23 @@ const Template: Story<{ navAnsatt: NavAnsatt }> = ({
 
 export const Default = Template.bind({});
 Default.args = {
+  valgtAvdelingEnhet: {
+    avdelingEnhet: '123',
+    navn: 'NAV Viken',
+    kreverKode6: false,
+  },
+  navAnsatt: navAnsattDefault,
+};
+
+export const LasteIkonFørValgtAvdelingErSatt = Template.bind({});
+LasteIkonFørValgtAvdelingErSatt.args = {
+  valgtAvdelingEnhet: undefined,
   navAnsatt: navAnsattDefault,
 };
 
 export const HarIkkeTilgang = Template.bind({});
 HarIkkeTilgang.args = {
+  valgtAvdelingEnhet: undefined,
   navAnsatt: {
     kanOppgavestyre: false,
     kanBehandleKode6: false,

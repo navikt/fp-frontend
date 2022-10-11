@@ -95,8 +95,6 @@ describe('<FodselPapirsoknadIndex>', () => {
     await userEvent.type(utstedtDatoInput, '16.09.2022');
     fireEvent.blur(utstedtDatoInput);
 
-    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
-
     expect(await screen.findByText(/Dato må være før eller lik/)).toBeInTheDocument();
 
     await userEvent.clear(utstedtDatoInput);

@@ -43,7 +43,7 @@ const FagsakSearchIndex: FunctionComponent<OwnProps> = ({
     .useRestApiRunner(RestApiPathsKeys.OPPGAVER_FOR_FAGSAKER);
   const { startRequest: hentReservasjonsstatus } = restApiHooks.useRestApiRunner(RestApiPathsKeys.HENT_RESERVASJONSSTATUS);
 
-  const searchResultAccessDenied = fagsakError && errorOfType(fagsakError, ErrorTypes.MANGLER_TILGANG_FEIL) ? getErrorResponseData(fagsakError) : undefined;
+  const searchResultAccessDenied = fagsakError && errorOfType(ErrorTypes.MANGLER_TILGANG_FEIL, fagsakError) ? getErrorResponseData(fagsakError) : undefined;
 
   useEffect(() => {
     if (sokFerdig && fagsaker.length === 1) {

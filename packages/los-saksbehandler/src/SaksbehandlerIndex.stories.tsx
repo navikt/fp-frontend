@@ -20,6 +20,7 @@ export default {
 const Template: Story = () => {
   const data = [
     { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
+    { key: RestApiPathsKeys.DRIFTSMELDINGER.name, data: [] },
     {
       key: RestApiPathsKeys.SAKSLISTE.name,
       data: [{

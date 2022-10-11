@@ -3,9 +3,14 @@ import { render, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import * as stories from './AvdelingslederIndex.stories';
 
-const { Default, HarIkkeTilgang } = composeStories(stories);
+const { Default, HarIkkeTilgang, LasteIkonFørValgtAvdelingErSatt } = composeStories(stories);
 
 describe('<AvdelingslederIndex>', () => {
+  it('skal vise lasteikon før valgt avdeling er satt', async () => {
+    render(<LasteIkonFørValgtAvdelingErSatt />);
+    expect(await screen.findByText('venter...')).toBeInTheDocument();
+  });
+
   it('skal vise avdelingsleder dashboard etter at valgt avdeling er satt', async () => {
     render(<Default />);
     expect(await screen.findByText('Gjeldende behandlingskøer')).toBeInTheDocument();
