@@ -94,7 +94,7 @@ const AppIndex: FunctionComponent = () => {
               setSiteHeight={setSiteHeight}
               crashMessage={crashMessage}
             />
-            {shouldRenderHome && (<Home headerHeight={headerHeight} />)}
+            {shouldRenderHome && (<Home headerHeight={headerHeight} navAnsatt={navAnsatt} />)}
             {forbiddenErrors.length > 0 && (<ForbiddenPage renderSomLenke={(tekst) => <Link to="/">{tekst}</Link>} />)}
             {unauthorizedErrors.length > 0 && (redirectToLogin() || <UnauthorizedPage renderSomLenke={(tekst) => <Link to="/">{tekst}</Link>} />)}
           </>

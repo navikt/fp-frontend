@@ -3,6 +3,7 @@ import RequestApi from './src/requestApi/RequestApi';
 import RequestConfig from './src/RequestConfig';
 
 export { default as RequestApi } from './src/requestApi/RequestApi';
+export { default as TimeoutError } from './src/requestApi/error/TimeoutError';
 export { REQUEST_POLLING_CANCELLED } from './src/requestApi/RequestRunner';
 export { default as RestApiConfigBuilder } from './src/RestApiConfigBuilder';
 export { ErrorTypes, errorOfType, getErrorResponseData } from './src/requestApi/error/ErrorTypes';

@@ -1,0 +1,167 @@
+{
+  "AndreKriterierType": [
+    {
+      "kode": "TIL_BESLUTTER",
+      "navn": "Til beslutter",
+      "kodeverk": "ANDRE_KRITERIER"
+    },
+    {
+      "kode": "PAPIRSOKNAD",
+      "navn": "Registrer papirsøknad",
+      "kodeverk": "ANDRE_KRITERIER"
+    },
+    {
+      "kode": "UTBETALING_TIL_BRUKER",
+      "navn": "Utbetaling til bruker",
+      "kodeverk": "ANDRE_KRITERIER"
+    },
+    {
+      "kode": "UTLANDSSAK",
+      "navn": "Utland",
+      "kodeverk": "ANDRE_KRITERIER"
+    },
+    {
+      "kode": "SOKT_GRADERING",
+      "navn": "Søkt gradering",
+      "kodeverk": "ANDRE_KRITERIER"
+    },
+    {
+      "kode": "VURDER_SYKDOM",
+      "navn": "Vurder sykdom",
+      "kodeverk": "ANDRE_KRITERIER"
+    },
+    {
+      "kode": "PLEIEPENGER",
+      "navn": "Pleiepenger",
+      "kodeverk": "ANDRE_KRITERIER"
+    },
+    {
+      "kode": "VURDER_FARESIGNALER",
+      "navn": "Vurder faresignaler",
+      "kodeverk": "ANDRE_KRITERIER"
+    },
+    {
+      "kode": "BERØRT_BEHANDLING",
+      "navn": "Berørt behandling",
+      "kodeverk": "ANDRE_KRITERIER"
+    }
+  ],
+  "BehandlingType": [
+    {
+      "kode": "BT-002",
+      "navn": "Førstegangsbehandling",
+      "kodeverk": "BEHANDLING_TYPE"
+    },
+    {
+      "kode": "BT-003",
+      "navn": "Klage",
+      "kodeverk": "BEHANDLING_TYPE"
+    },
+    {
+      "kode": "BT-004",
+      "navn": "Revurdering",
+      "kodeverk": "BEHANDLING_TYPE"
+    },
+    {
+      "kode": "BT-005",
+      "navn": "Søknad",
+      "kodeverk": "BEHANDLING_TYPE"
+    },
+    {
+      "kode": "BT-006",
+      "navn": "Innsyn",
+      "kodeverk": "BEHANDLING_TYPE"
+    },
+    {
+      "kode": "BT-007",
+      "navn": "Tilbakebetaling",
+      "kodeverk": "BEHANDLING_TYPE"
+    },
+    {
+      "kode": "BT-008",
+      "navn": "Anke",
+      "kodeverk": "BEHANDLING_TYPE"
+    },
+    {
+      "kode": "BT-009",
+      "navn": "Tilbakebet-rev",
+      "kodeverk": "BEHANDLING_TYPE"
+    }
+  ],
+  "FagsakYtelseType": [
+    {
+      "kode": "ES",
+      "navn": "Engangsstønad",
+      "kodeverk": "FAGSAK_YTELSE_TYPE"
+    },
+    {
+      "kode": "FP",
+      "navn": "Foreldrepenger",
+      "kodeverk": "FAGSAK_YTELSE_TYPE"
+    },
+    {
+      "kode": "SVP",
+      "navn": "Svangerskapspenger",
+      "kodeverk": "FAGSAK_YTELSE_TYPE"
+    }
+  ],
+  "FagsakStatus": [
+    {
+      "kode": "OPPR",
+      "navn": "Opprettet",
+      "kodeverk": "FAGSAK_STATUS"
+    },
+    {
+      "kode": "UBEH",
+      "navn": "Under behandling",
+      "kodeverk": "FAGSAK_STATUS"
+    },
+    {
+      "kode": "LOP",
+      "navn": "Løpende",
+      "kodeverk": "FAGSAK_STATUS"
+    },
+    {
+      "kode": "AVSLU",
+      "navn": "Avsluttet",
+      "kodeverk": "FAGSAK_STATUS"
+    }
+  ],
+  "KøSortering": [
+    {
+      "kode": "BEHFRIST",
+      "kodeverk": "KO_SORTERING",
+      "navn": "Dato for behandlingsfrist",
+      "felttype": "DATO",
+      "feltkategori": "UNIVERSAL"
+    },
+    {
+      "kode": "OPPRBEH",
+      "kodeverk": "KO_SORTERING",
+      "navn": "Dato for opprettelse av behandling",
+      "felttype": "DATO",
+      "feltkategori": "UNIVERSAL"
+    },
+    {
+      "kode": "FORSTONAD",
+      "kodeverk": "KO_SORTERING",
+      "navn": "Dato for første stønadsdag",
+      "felttype": "DATO",
+      "feltkategori": "UNIVERSAL"
+    },
+    {
+      "kode": "BELOP",
+      "kodeverk": "KO_SORTERING",
+      "navn": "Feilutbetalt beløp",
+      "felttype": "HELTALL",
+      "feltkategori": "TILBAKEKREVING"
+    },
+    {
+      "kode": "FEILUTBETALINGSTART",
+      "kodeverk": "KO_SORTERING",
+      "navn": "Dato for første feilutbetaling",
+      "felttype": "DATO",
+      "feltkategori": "TILBAKEKREVING"
+    }
+  ]
+}

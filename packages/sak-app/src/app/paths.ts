@@ -4,9 +4,8 @@ import { buildPath, formatQueryString, parseQueryString } from '@navikt/ft-utils
 import { skjermlenkeCodes } from '@fpsak-frontend/konstanter';
 
 const FP_FRONTEND = 'fpsak';
-const LOKAL_FP_FRONTEND_PORT = '9000';
-const FPLOS = 'fplos';
-const LOKAL_FPLOS_PORT = '9100';
+
+export const AVDELINGSLEDER_PATH = 'avdelingsleder';
 
 const DEFAULT_FAKTA = 'default';
 const DEFAULT_PROSESS_STEG = 'default';
@@ -46,6 +45,9 @@ const updateQueryParams = (queryString: string, nextParams: QueryParams): Search
   });
 };
 
+export const getFagsakHref = (saksnummer: number, behandlingUuid?: string) => (behandlingUuid
+  ? `/fagsak/${saksnummer}/behandling/${behandlingUuid}/?punkt=default&fakta=default` : `/fagsak/${saksnummer}/`);
+
 export const getLocationWithQueryParams = (location: Location, queryParams: QueryParams): Location => ({
   ...location,
   search: updateQueryParams(location.search, queryParams),
@@ -63,12 +65,6 @@ export const getRiskPanelLocationCreator = (location: Location) => (
 export const getLocationWithDefaultProsessStegAndFakta = (location: Location): Location => (
   getLocationWithQueryParams(location, { punkt: DEFAULT_PROSESS_STEG, fakta: DEFAULT_FAKTA })
 );
-
-export const getPathToFplos = (href: string): string => {
-  const hostAndContextPath = href.substr(0, href.lastIndexOf(FP_FRONTEND) + FP_FRONTEND.length);
-  // Replace av port er lagt til for at kjøring i docker skal fungere korrekt. Vil ikke påvirke miljøene
-  return hostAndContextPath.replace(new RegExp(FP_FRONTEND, 'g'), FPLOS).replace(LOKAL_FP_FRONTEND_PORT, LOKAL_FPLOS_PORT);
-};
 
 export const createLocationForSkjermlenke = (behandlingLocation: Location, skjermlenkeCode: string): Location | undefined => {
   const skjermlenke = skjermlenkeCodes[skjermlenkeCode];
