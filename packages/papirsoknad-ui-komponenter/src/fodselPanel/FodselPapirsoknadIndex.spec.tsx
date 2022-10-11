@@ -92,8 +92,10 @@ describe('<FodselPapirsoknadIndex>', () => {
     await userEvent.type(utils.getByLabelText('Antall barn'), '2');
 
     const utstedtDatoInput = utils.getByLabelText('Utstedt dato fra terminbekreftelsen');
-    await userEvent.type(utstedtDatoInput, '16.09.2022');
+    await userEvent.type(utstedtDatoInput, dayjs().format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(utstedtDatoInput);
+
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     expect(await screen.findByText(/Dato må være før eller lik/)).toBeInTheDocument();
 
