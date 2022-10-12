@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 import {
-  AlleKodeverk, Personoversikt, Ytelsefordeling,
+  AlleKodeverk, KjønnkodeEnum, Personoversikt, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { AvklarAnnenforelderHarRettAp, BekreftAleneomsorgVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import { Aksjonspunkt } from '@navikt/ft-types';
@@ -22,6 +22,8 @@ const finnAksjonspunktTekst = (aksjonspunkter: Aksjonspunkt[]): string => {
   }
   return '';
 };
+
+const finnMotsattKjønn = (kjønn: string) => (kjønn === KjønnkodeEnum.KVINNE ? KjønnkodeEnum.MANN : KjønnkodeEnum.KVINNE);
 
 interface OwnProps {
   readOnly: boolean;
@@ -59,9 +61,14 @@ const OmsorgOgRettFaktaIndex: FunctionComponent<OwnProps> = ({
       )}
       <VerticalSpacer thirtyTwoPx />
       <AlleBarnPanel alleBarn={personoversikt.barn} />
-      <ForelderPanel forelder={personoversikt.bruker} erSøker alleKodeverk={alleKodeverk} />
+      <ForelderPanel forelder={personoversikt.bruker} kjønn={personoversikt.bruker.kjønn} erSøker alleKodeverk={alleKodeverk} />
       {personoversikt.annenPart && (
-        <ForelderPanel forelder={personoversikt.annenPart} erSøker={false} alleKodeverk={alleKodeverk} />
+        <ForelderPanel
+          forelder={personoversikt.annenPart}
+          kjønn={personoversikt.annenPart.kjønn || finnMotsattKjønn(personoversikt.bruker.kjønn)}
+          erSøker={false}
+          alleKodeverk={alleKodeverk}
+        />
       )}
       {harAleneomsorgAksjonspunkt && (
         <AleneomsorgForm
