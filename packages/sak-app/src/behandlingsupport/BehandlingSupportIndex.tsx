@@ -3,7 +3,6 @@ import React, {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SupportMenySakIndex, { SupportTabs } from '@navikt/ft-sak-support-meny';
-import { Fagsak, BehandlingAppKontekst } from '@navikt/ft-types';
 
 import { getSupportPanelLocationCreator } from '../app/paths';
 import HistorikkIndex from './historikk/HistorikkIndex';
@@ -112,6 +111,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
             saksnummer={fagsak.saksnummer}
             behandlingUuid={behandlingUuid}
             behandlingVersjon={behandlingVersjon}
+            historikkinnslagFpTilbake={fagsakData.getHistorikkFpTilbake()}
           />
         )}
         {behandling && aktivtSupportPanel === SupportTabs.MELDINGER && (

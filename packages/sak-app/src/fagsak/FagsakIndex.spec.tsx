@@ -15,12 +15,6 @@ import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 import FagsakIndex from './FagsakIndex';
 
 describe('<FagsakIndex>', () => {
-  const fagsak = {
-    saksnummer: '123456',
-    status: FagsakStatus.LOPENDE,
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-  };
-
   const behandling = {
     id: 1,
     uuid: 'test',
@@ -38,6 +32,13 @@ describe('<FagsakIndex>', () => {
     behandlendeEnhetId: 'test',
     behandlendeEnhetNavn: 'NAV Viken',
     opprettet: '2017-08-02T00:54:25.455',
+  };
+
+  const fagsak = {
+    saksnummer: '123456',
+    status: FagsakStatus.LOPENDE,
+    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    behandling: [behandling, behandling2],
   };
 
   const navAnsatt = {
@@ -67,13 +68,8 @@ describe('<FagsakIndex>', () => {
     const data = [
       { key: FpsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
       { key: FpsakApiKeys.FETCH_FAGSAK.name, data: fagsak },
-      { key: FpsakApiKeys.SAK_PERSONER.name, global: true, data: {} },
-      { key: FpsakApiKeys.SAK_RETTIGHETER.name, data: { behandlingTypeKanOpprettes: [] } },
       { key: FpsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
-      { key: FpsakApiKeys.ANNEN_PART_BEHANDLING.name, data: {} },
       { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: alleKodeverk },
-      { key: FpsakApiKeys.BEHANDLINGER_FPSAK.name, data: [behandling] },
-      { key: FpsakApiKeys.BEHANDLINGER_FPTILBAKE.name, data: [behandling2] },
     ];
 
     render(
@@ -91,14 +87,8 @@ describe('<FagsakIndex>', () => {
     const data = [
       { key: FpsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
       { key: FpsakApiKeys.FETCH_FAGSAK.name, data: fagsak },
-      { key: FpsakApiKeys.SAK_PERSONER.name, global: true, data: {} },
-      { key: FpsakApiKeys.SAK_RETTIGHETER.name, data: { behandlingTypeKanOpprettes: [] } },
-      { key: FpsakApiKeys.SAK_RETTIGHETER_FPTILBAKE.name, data: { behandlingTypeKanOpprettes: [] } },
       { key: FpsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
-      { key: FpsakApiKeys.ANNEN_PART_BEHANDLING.name, data: {} },
       { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: alleKodeverk },
-      { key: FpsakApiKeys.BEHANDLINGER_FPSAK.name, data: [behandling] },
-      { key: FpsakApiKeys.BEHANDLINGER_FPTILBAKE.name, data: [behandling2] },
       { key: FpsakApiKeys.RISIKO_AKSJONSPUNKT.name, data: undefined },
       { key: FpsakApiKeys.KONTROLLRESULTAT.name, data: undefined },
       { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },

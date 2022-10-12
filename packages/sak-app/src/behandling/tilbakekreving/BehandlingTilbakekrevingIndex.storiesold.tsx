@@ -20,7 +20,7 @@ import { FeilutbetalingAksjonspunktCode } from '@navikt/ft-fakta-tilbakekreving-
 import { ForeldelseAksjonspunktCodes } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock'; // eslint-disable-line import/no-extraneous-dependencies
 import VergeType from '@fpsak-frontend/fakta-verge/src/kodeverk/vergeType';
-import { Verge } from '@fpsak-frontend/types';
+import { Fagsak, Verge } from '@fpsak-frontend/types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils'; // eslint-disable-line import/no-extraneous-dependencies
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
@@ -247,7 +247,7 @@ const Template: Story<{
           relasjonsRolleType: 'MORA',
           saksnummer: '152001002',
           status: 'LOP',
-        }}
+        } as Fagsak}
         rettigheter={{
           kanOverstyreAccess: {
             employeeHasAccess: true,

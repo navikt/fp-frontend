@@ -1,5 +1,5 @@
 import {
-  BehandlingAppKontekst, BehandlingOppretting, Fagsak, FagsakDataFpTilbake,
+  BehandlingAppKontekst, BehandlingOppretting, Fagsak, FagsakDataFpTilbake, Historikkinnslag,
 } from '@fpsak-frontend/types';
 
 class FagsakData {
@@ -41,6 +41,10 @@ class FagsakData {
 
   getAlleBehandlinger(): BehandlingAppKontekst[] {
     return this.$$alleBehandlinger;
+  }
+
+  getHistorikkFpTilbake(): Historikkinnslag[] {
+    return this.$$fpTilbakeFagsakData?.historikkinnslag;
   }
 }
 

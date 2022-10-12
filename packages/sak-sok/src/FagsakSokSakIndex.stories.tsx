@@ -7,7 +7,7 @@ import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import FagsakSokSakIndex from '@fpsak-frontend/sak-sok';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
-import { Fagsak } from '@fpsak-frontend/types';
+import { FagsakEnkel } from '@fpsak-frontend/types';
 
 export default {
   title: 'sak/sak-sok',
@@ -15,7 +15,7 @@ export default {
 };
 
 const Template: Story<{
-  fagsaker: Fagsak[],
+  fagsaker: FagsakEnkel[],
   searchResultAccessDenied?: { feilmelding: string },
 }> = ({
   fagsaker,
@@ -46,7 +46,7 @@ Default.args = {
     saksnummer: '2',
     fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
     status: fagsakStatus.OPPRETTET,
-  }] as Fagsak[],
+  }] as FagsakEnkel[],
 };
 
 export const IkkeAdgang = Template.bind({});

@@ -55,7 +55,6 @@ export const FpsakApiKeys = {
   NEW_BEHANDLING_FPSAK: new RestKey<boolean, any>('NEW_BEHANDLING_FPSAK'),
   NEW_BEHANDLING_FPTILBAKE: new RestKey<boolean, any>('NEW_BEHANDLING_FPTILBAKE'),
   HISTORY_FPSAK: new RestKey<Historikkinnslag[], { saksnummer: string }>('HISTORY_FPSAK'),
-  HISTORY_FPTILBAKE: new RestKey<Historikkinnslag[], { saksnummer: string }>('HISTORY_FPTILBAKE'),
   KONTROLLRESULTAT: new RestKey<Risikoklassifisering, void>('KONTROLLRESULTAT'),
   RISIKO_AKSJONSPUNKT: new RestKey<Aksjonspunkt, void>('RISIKO_AKSJONSPUNKT'),
   TOTRINNS_KLAGE_VURDERING: new RestKey<KlageVurdering, void>('TOTRINNS_KLAGE_VURDERING'),
@@ -90,7 +89,6 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('fagsak-full', FpsakApiKeys.FETCH_FAGSAK)
   .withRel('fagsak-fptilbake-full', FpsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE)
   .withRel('sak-historikk', FpsakApiKeys.HISTORY_FPSAK)
-  .withRel('tilbake-historikk', FpsakApiKeys.HISTORY_FPTILBAKE)
   .withRel('sak-dokumentliste', FpsakApiKeys.ALL_DOCUMENTS)
   .withRel('tilbake-kan-opprette-behandling', FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES)
   .withRel('tilbake-kan-opprette-revurdering', FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES)

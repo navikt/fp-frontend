@@ -17,10 +17,6 @@ describe('<HistorikkIndex>', () => {
         key: FpsakApiKeys.HISTORY_FPSAK.name,
         data: [],
       },
-      {
-        key: FpsakApiKeys.HISTORY_FPTILBAKE.name,
-        data: [],
-      },
     ];
 
     render(
