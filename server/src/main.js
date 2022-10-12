@@ -39,8 +39,7 @@ async function startApp() {
             connectSrc: [
               "'self'",
               'https://sentry.gc.nav.no',
-              'https://graph.microsoft.com',
-              'https://login.microsoft.com'
+              'https://graph.microsoft.com'
             ],
             frameSrc: ["'none'"],
             childSrc: ["'none'"],
