@@ -60,7 +60,9 @@ const OmsorgOgRettFaktaIndex: FunctionComponent<OwnProps> = ({
       <VerticalSpacer thirtyTwoPx />
       <AlleBarnPanel alleBarn={personoversikt.barn} />
       <ForelderPanel forelder={personoversikt.bruker} erSøker alleKodeverk={alleKodeverk} />
-      <ForelderPanel forelder={personoversikt.annenPart} erSøker={false} alleKodeverk={alleKodeverk} />
+      {personoversikt.annenPart && (
+        <ForelderPanel forelder={personoversikt.annenPart} erSøker={false} alleKodeverk={alleKodeverk} />
+      )}
       {harAleneomsorgAksjonspunkt && (
         <AleneomsorgForm
           ytelsefordeling={ytelsefordeling}
