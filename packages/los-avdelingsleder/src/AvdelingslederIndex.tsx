@@ -28,6 +28,8 @@ import Avdeling from './typer/avdelingTsType';
 import { getValueFromLocalStorage, removeValueFromLocalStorage } from './data/localStorageHelper';
 import Avdelingsvelger from './components/Avdelingsvelger';
 
+import styles from './avdelingslederIndex.less';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
@@ -184,6 +186,7 @@ const AvdelingslederIndex: FunctionComponent<OwnProps> = ({
           size="small"
           value={activeAvdelingslederPanel}
           onChange={(avdelingslederPanel: string) => { navigate(getAvdelingslederPanelLocation(avdelingslederPanel)); }}
+          className={styles.paddingHeader}
         >
           <Tabs.List>
             <Tabs.Tab
@@ -204,7 +207,7 @@ const AvdelingslederIndex: FunctionComponent<OwnProps> = ({
             />
           </Tabs.List>
         </Tabs>
-        <Panel>
+        <Panel className={styles.padding}>
           {renderAvdelingslederPanel(activeAvdelingslederPanel, valgtAvdelingEnhet, hentAvdelingensSaksbehandlere, avdelingensSaksbehandlere)}
         </Panel>
       </AvdelingslederDashboard>

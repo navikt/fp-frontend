@@ -9,7 +9,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@fpsak-frontend/fakta-felles';
 import {
-  Aksjonspunkt, AlleKodeverk, Personoversikt, Ytelsefordeling,
+  Aksjonspunkt, AlleKodeverk, KjønnkodeEnum, Personoversikt, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { BekreftOmsorgVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -39,6 +39,8 @@ const buildInitialValues = (
     ...FaktaBegrunnelseTextFieldNew.buildInitialValues(omsorgAp),
   };
 };
+
+const finnMotsattKjønn = (kjønn: string) => (kjønn === KjønnkodeEnum.KVINNE ? KjønnkodeEnum.MANN : KjønnkodeEnum.KVINNE);
 
 const transformValues = (
   values: FormValues,
@@ -93,9 +95,14 @@ const OmsorgInfoPanel: FunctionComponent<OwnProps> = ({
       )}
       <VerticalSpacer thirtyTwoPx />
       <AlleBarnPanel alleBarn={personoversikt.barn} />
-      <ForelderPanel forelder={personoversikt.bruker} erSøker alleKodeverk={alleKodeverk} />
+      <ForelderPanel forelder={personoversikt.bruker} kjønn={personoversikt.bruker.kjønn} erSøker alleKodeverk={alleKodeverk} />
       {personoversikt.annenPart && (
-        <ForelderPanel forelder={personoversikt.annenPart} erSøker={false} alleKodeverk={alleKodeverk} />
+        <ForelderPanel
+          forelder={personoversikt.annenPart}
+          kjønn={personoversikt.annenPart.kjønn || finnMotsattKjønn(personoversikt.bruker.kjønn)}
+          erSøker={false}
+          alleKodeverk={alleKodeverk}
+        />
       )}
       <Form
         formMethods={formMethods}

@@ -19,16 +19,18 @@ interface OwnProps {
   forelder: PersonopplysningerBasis;
   erSøker: boolean;
   alleKodeverk: AlleKodeverk;
+  kjønn: string;
 }
 
 const ForelderPanel: FunctionComponent<OwnProps> = ({
   forelder,
   erSøker,
   alleKodeverk,
+  kjønn,
 }) => {
   const intl = useIntl();
 
-  const erKvinne = forelder.kjønn === KjønnkodeEnum.KVINNE;
+  const erKvinne = kjønn === KjønnkodeEnum.KVINNE;
 
   return (
     <Boks harBorderTop={false}>
