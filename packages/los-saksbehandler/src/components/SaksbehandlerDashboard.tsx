@@ -1,8 +1,10 @@
 import React, { FunctionComponent, useEffect } from 'react';
 
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 
-import { restApiHooks, RestApiGlobalStatePathsKeys, RestApiPathsKeys } from '../data/fplosSaksbehandlerRestApi';
+import {
+  requestApi, restApiHooks, RestApiGlobalStatePathsKeys, RestApiPathsKeys,
+} from '../data/fplosSaksbehandlerRestApi';
 import FagsakSearchIndex from '../fagsakSearch/FagsakSearchIndex';
 import BehandlingskoerIndex from '../behandlingskoer/BehandlingskoerIndex';
 import SaksstotteIndex from '../saksstotte/SaksstotteIndex';
@@ -28,6 +30,9 @@ const SaksbehandlerDashboard: FunctionComponent<OwnProps> = ({
   åpneFagsak,
   kanSaksbehandle,
 }) => {
+  const { addErrorMessage } = useRestApiErrorDispatcher();
+  requestApi.setAddErrorMessageHandler(addErrorMessage);
+
   const kodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK_LOS);
   const kodeverkData = restApiHooks.useGlobalStateRestApi(RestApiGlobalStatePathsKeys.KODEVERK_LOS, undefined, { suspendRequest: !!kodeverk });
 

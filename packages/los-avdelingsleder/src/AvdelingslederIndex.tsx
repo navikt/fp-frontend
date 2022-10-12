@@ -9,10 +9,12 @@ import { LoadingPanel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { formatQueryString, parseQueryString, createIntl } from '@navikt/ft-utils';
 
 import { NavAnsatt } from '@fpsak-frontend/types';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 
 import useTrackRouteParam from './useTrackRouteParam';
-import { RestApiPathsKeys, RestApiGlobalStatePathsKeys, restApiHooks } from './data/fplosRestApi';
+import {
+  requestApi, RestApiPathsKeys, RestApiGlobalStatePathsKeys, restApiHooks,
+} from './data/fplosRestApi';
 import AvdelingslederDashboard from './components/AvdelingslederDashboard';
 import IkkeTilgangTilAvdelingslederPanel from './components/IkkeTilgangTilAvdelingslederPanel';
 import IkkeTilgangTilKode6AvdelingPanel from './components/IkkeTilgangTilKode6AvdelingPanel';
@@ -220,6 +222,9 @@ const AvdelingslederIndexIntlWrapper: FunctionComponent<OwnPropsWrapper> = ({
   setLosErIkkeTilgjengelig,
   navAnsatt,
 }) => {
+  const { addErrorMessage } = useRestApiErrorDispatcher();
+  requestApi.setAddErrorMessageHandler(addErrorMessage);
+
   const kodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK_LOS);
 
   const kodeverkData = restApiHooks.useGlobalStateRestApi(RestApiGlobalStatePathsKeys.KODEVERK_LOS, undefined, { suspendRequest: !!kodeverk });
