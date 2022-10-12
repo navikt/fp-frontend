@@ -7,7 +7,7 @@ import {
 } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import {
-  ForhåndsvisMeldingParams, KlageVurdering, NavAnsatt, TotrinnskontrollSkjermlenkeContext, FagsakEnkel, Fagsak, Historikkinnslag,
+  ForhåndsvisMeldingParams, KlageVurdering, NavAnsatt, TotrinnskontrollSkjermlenkeContext, FagsakEnkel, Fagsak, Historikkinnslag, FagsakDataFpTilbake,
 } from '@fpsak-frontend/types';
 
 import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
@@ -51,7 +51,7 @@ export const FpsakApiKeys = {
   BEHANDLENDE_ENHETER: new RestKey<BehandlendeEnheter, void>('BEHANDLENDE_ENHETER'),
   SEARCH_FAGSAK: new RestKey<FagsakEnkel[], { searchString: string }>('SEARCH_FAGSAK'),
   FETCH_FAGSAK: new RestKey<Fagsak, { saksnummer: string }>('FETCH_FAGSAK'),
-  FETCH_FAGSAKDATA_FPTILBAKE: new RestKey<Fagsak, { saksnummer: string }>('FETCH_FAGSAKDATA_FPTILBAKE'),
+  FETCH_FAGSAKDATA_FPTILBAKE: new RestKey<FagsakDataFpTilbake, { saksnummer: string }>('FETCH_FAGSAKDATA_FPTILBAKE'),
   NEW_BEHANDLING_FPSAK: new RestKey<boolean, any>('NEW_BEHANDLING_FPSAK'),
   NEW_BEHANDLING_FPTILBAKE: new RestKey<boolean, any>('NEW_BEHANDLING_FPTILBAKE'),
   HISTORY_FPSAK: new RestKey<Historikkinnslag[], { saksnummer: string }>('HISTORY_FPSAK'),

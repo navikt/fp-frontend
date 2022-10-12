@@ -67,7 +67,6 @@ export type { FamilieHendelse, FamilieHendelseSamling, AvklartBarn } from './src
 export type { default as Fagsak, AnnenPartBehandling, BehandlingOppretting } from './src/fagsakTsType';
 export type { default as FagsakEnkel } from './src/fagsakEnkelTsType';
 export type { default as FagsakDataFpTilbake } from './src/fagsakTilbakekrevingTsType';
-export type { default as FagsakPersoner, FagsakPerson, FagsakHendelse } from './src/fagsakPersonerTsType';
 export type {
   default as Medlemskap, MedlemPeriode, MedlemskapPeriode, Oppholdstillatelse, PersonopplysningMedlem,
 } from './src/medlemskapTsType';
