@@ -1,10 +1,11 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
-import { Fagsak, BehandlingAppKontekst } from '@navikt/ft-types';
+import { BehandlingAppKontekst } from '@navikt/ft-types';
 import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
+import { Fagsak } from '@fpsak-frontend/types';
 
 import { VergeBehandlingmenyValg } from '../behandling/behandlingRettigheterTsType';
 import BehandlingSupportIndex, { hentSynligePaneler, hentValgbarePaneler } from './BehandlingSupportIndex';
