@@ -43,6 +43,10 @@ class FagsakData {
     return this.$$alleBehandlinger;
   }
 
+  getHistorikkFpSak(): Historikkinnslag[] {
+    return this.$$fagsak.historikkinnslag;
+  }
+
   getHistorikkFpTilbake(): Historikkinnslag[] {
     return this.$$fpTilbakeFagsakData?.historikkinnslag;
   }

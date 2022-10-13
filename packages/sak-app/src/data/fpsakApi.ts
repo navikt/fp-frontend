@@ -7,7 +7,7 @@ import {
 } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import {
-  ForhåndsvisMeldingParams, KlageVurdering, NavAnsatt, TotrinnskontrollSkjermlenkeContext, FagsakEnkel, Fagsak, Historikkinnslag, FagsakDataFpTilbake,
+  ForhåndsvisMeldingParams, KlageVurdering, NavAnsatt, TotrinnskontrollSkjermlenkeContext, FagsakEnkel, Fagsak, FagsakDataFpTilbake,
 } from '@fpsak-frontend/types';
 
 import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
@@ -54,7 +54,6 @@ export const FpsakApiKeys = {
   FETCH_FAGSAKDATA_FPTILBAKE: new RestKey<FagsakDataFpTilbake, { saksnummer: string }>('FETCH_FAGSAKDATA_FPTILBAKE'),
   NEW_BEHANDLING_FPSAK: new RestKey<boolean, any>('NEW_BEHANDLING_FPSAK'),
   NEW_BEHANDLING_FPTILBAKE: new RestKey<boolean, any>('NEW_BEHANDLING_FPTILBAKE'),
-  HISTORY_FPSAK: new RestKey<Historikkinnslag[], { saksnummer: string }>('HISTORY_FPSAK'),
   KONTROLLRESULTAT: new RestKey<Risikoklassifisering, void>('KONTROLLRESULTAT'),
   RISIKO_AKSJONSPUNKT: new RestKey<Aksjonspunkt, void>('RISIKO_AKSJONSPUNKT'),
   TOTRINNS_KLAGE_VURDERING: new RestKey<KlageVurdering, void>('TOTRINNS_KLAGE_VURDERING'),
@@ -88,7 +87,6 @@ const endpoints = new RestApiConfigBuilder()
   // Fagsak
   .withRel('fagsak-full', FpsakApiKeys.FETCH_FAGSAK)
   .withRel('fagsak-fptilbake-full', FpsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE)
-  .withRel('sak-historikk', FpsakApiKeys.HISTORY_FPSAK)
   .withRel('sak-dokumentliste', FpsakApiKeys.ALL_DOCUMENTS)
   .withRel('tilbake-kan-opprette-behandling', FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES)
   .withRel('tilbake-kan-opprette-revurdering', FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES)
