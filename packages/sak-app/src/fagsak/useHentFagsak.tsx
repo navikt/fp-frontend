@@ -7,20 +7,20 @@ import useBehandlingEndret from '../behandling/useBehandlingEndret';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 import FagsakData from './FagsakData';
 
-const useHentFagsak = (saksnummer: string, behandlingUuid?: string, behandlingVersjon?: number):
+const useHentFagsak = (saksnummer: string, behandlingUuid?: string, behandlingVersjon?: number, behandlingerTeller?: number):
 [ harHentet: boolean, fagsakData: FagsakData | undefined ] => {
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingUuid, behandlingVersjon);
   const enabledApplicationContexts = useGetEnabledApplikasjonContext();
   const skalHenteFraFpTilbake = enabledApplicationContexts.includes(ApplicationContextPath.FPTILBAKE);
 
   const { data: fagsak, state: fagsakState } = restApiHooks.useRestApi(FpsakApiKeys.FETCH_FAGSAK, { saksnummer }, {
-    updateTriggers: [saksnummer, behandlingUuid, behandlingVersjon],
+    updateTriggers: [behandlingUuid, behandlingVersjon, behandlingerTeller],
     suspendRequest: !saksnummer || erBehandlingEndretFraUndefined,
     keepData: true,
   });
 
   const { data: fagsakDataTilbake, state: fagsakDataTilbakeState } = restApiHooks.useRestApi(FpsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE, { saksnummer }, {
-    updateTriggers: [saksnummer, behandlingUuid, behandlingVersjon],
+    updateTriggers: [behandlingUuid, behandlingVersjon, behandlingerTeller],
     suspendRequest: !skalHenteFraFpTilbake || !saksnummer || erBehandlingEndretFraUndefined,
     keepData: true,
   });

@@ -61,7 +61,7 @@ const FagsakIndex: FunctionComponent = () => {
     paramName: 'saksnummer',
   });
 
-  const [harHentetFagsak, fagsakData] = useHentFagsak(selectedSaksnummer, behandlingUuid, behandlingVersjon);
+  const [harHentetFagsak, fagsakData] = useHentFagsak(selectedSaksnummer, behandlingUuid, behandlingVersjon, behandlingerTeller);
 
   useEffect(() => () => {
     requestApi.resetCache();

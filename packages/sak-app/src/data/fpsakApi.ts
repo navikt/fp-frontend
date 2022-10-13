@@ -86,7 +86,7 @@ const endpoints = new RestApiConfigBuilder()
 
   // Fagsak
   .withRel('fagsak-full', FpsakApiKeys.FETCH_FAGSAK)
-  .withRel('fagsak-fptilbake-full', FpsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE)
+  .withRel('tilbake-fagsak-full', FpsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE)
   .withRel('sak-dokumentliste', FpsakApiKeys.ALL_DOCUMENTS)
   .withRel('tilbake-kan-opprette-behandling', FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES)
   .withRel('tilbake-kan-opprette-revurdering', FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES)
