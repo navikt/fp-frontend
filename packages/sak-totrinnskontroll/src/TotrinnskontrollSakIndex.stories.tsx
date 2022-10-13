@@ -7,9 +7,10 @@ import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import TotrinnskontrollSakIndex from '@fpsak-frontend/sak-totrinnskontroll';
 import {
-  Behandling, BehandlingÅrsak, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
+  Behandling, BehandlingÅrsak, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 import { withRouter, alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 
 const location = {
   key: '1', pathname: '', search: '', state: {}, hash: '',
@@ -22,6 +23,9 @@ const defaultBehandling = {
   type: behandlingType.FORSTEGANGSSOKNAD,
   behandlingÅrsaker: [] as BehandlingÅrsak[],
   toTrinnsBehandling: true,
+  behandlingsresultat: {
+    type: behandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET,
+  },
 } as Behandling;
 
 export default {
@@ -53,11 +57,6 @@ const Template: Story<{
       onSubmit={lagre}
       forhandsvisVedtaksbrev={action('button-click')}
       fagsakYtelseType={fagsakYtelseType.FORELDREPENGER}
-      behandlingKlageVurdering={{
-        klageVurderingResultatNFP: {
-          klageVurdering: 'STADFESTE_YTELSESVEDTAK',
-        },
-      } as KlageVurdering}
       alleKodeverk={alleKodeverk as any}
       createLocationForSkjermlenke={() => location}
       setBeslutterForData={() => undefined}

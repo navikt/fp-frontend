@@ -13,14 +13,12 @@ interface OwnProps {
   behandling: BehandlingAppKontekst;
   pushLocation: (location: string) => void;
   allAksjonspunktApproved: boolean,
-  erKlageWithKA?: boolean,
 }
 
 const BeslutterModalIndex: FunctionComponent<OwnProps> = ({
   behandling,
   pushLocation,
   allAksjonspunktApproved,
-  erKlageWithKA,
 }) => {
   const { data, state } = restApiHooks.useRestApi(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT, undefined, {
     updateTriggers: [behandling.uuid, behandling.versjon],
@@ -41,7 +39,6 @@ const BeslutterModalIndex: FunctionComponent<OwnProps> = ({
       behandling={behandling}
       closeEvent={goToSearchPage}
       allAksjonspunktApproved={allAksjonspunktApproved}
-      erKlageWithKA={erKlageWithKA}
       harSammeResultatSomOriginalBehandling={data?.harRevurderingSammeResultat}
     />
   );
