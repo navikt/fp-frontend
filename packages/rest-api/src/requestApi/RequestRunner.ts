@@ -138,7 +138,9 @@ class RequestRunner {
         const currentPath = encodeURIComponent(window.location.pathname + window.location.search);
         window.location.href = `${response.headers.location}?redirectTo=${currentPath}`;
       }
-      new RequestErrorEventHandler(this.notify, this.isPollingRequest).handleError(error);
+      if (error?.message !== REQUEST_POLLING_CANCELLED) {
+        new RequestErrorEventHandler(this.notify, this.isPollingRequest).handleError(error);
+      }
       throw error;
     }
   };
