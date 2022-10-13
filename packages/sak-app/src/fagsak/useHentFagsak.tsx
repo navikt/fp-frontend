@@ -27,7 +27,7 @@ const useHentFagsak = (saksnummer: string, behandlingUuid?: string, behandlingVe
 
   const harHentetFpSak = !!fagsak
     || (fagsakState !== RestApiState.NOT_STARTED && fagsakState !== RestApiState.LOADING);
-  const harHentetFpTilbake = !fagsakDataTilbake || !!fagsakDataTilbake
+  const harHentetFpTilbake = !skalHenteFraFpTilbake || !!fagsakDataTilbake
     || (fagsakDataTilbakeState !== RestApiState.NOT_STARTED && fagsakDataTilbakeState !== RestApiState.LOADING);
 
   const harHentetData = harHentetFpSak && harHentetFpTilbake;

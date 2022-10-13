@@ -38,7 +38,13 @@ describe('<FagsakIndex>', () => {
     saksnummer: '123456',
     status: FagsakStatus.LOPENDE,
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-    behandling: [behandling, behandling2],
+    behandlinger: [behandling, behandling2],
+    behandlingTypeKanOpprettes: [],
+  };
+
+  const fagsakFpTilbake = {
+    behandlingTypeKanOpprettes: [],
+    behandlinger: [],
   };
 
   const navAnsatt = {
@@ -88,6 +94,7 @@ describe('<FagsakIndex>', () => {
       { key: FpsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
       { key: FpsakApiKeys.FETCH_FAGSAK.name, data: fagsak },
       { key: FpsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
+      { key: FpsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE.name, data: fagsakFpTilbake },
       { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: alleKodeverk },
       { key: FpsakApiKeys.RISIKO_AKSJONSPUNKT.name, data: undefined },
       { key: FpsakApiKeys.KONTROLLRESULTAT.name, data: undefined },
