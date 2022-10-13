@@ -65,4 +65,3 @@ spec:
       value: "GET, POST"
     - name: PROXY_CONFIG
       value: {{proxy}}
-
