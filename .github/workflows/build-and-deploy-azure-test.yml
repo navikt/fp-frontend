@@ -19,7 +19,7 @@ jobs:
       - name: Sette opp Node
         uses: actions/setup-node@v3.3.0
         with:
-          node-version: 18.8.0
+          node-version: 16
           registry-url: https://npm.pkg.github.com/
           scope: '@navikt'
           cache: 'yarn'
@@ -66,4 +66,4 @@ jobs:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: ${{ env.CLUSTER }}
           RESOURCE: .deploy/naiserator.yaml
-          VARS: .deploy/dev_gcp.json
+          VARS: .deploy/dev-gcp.json
