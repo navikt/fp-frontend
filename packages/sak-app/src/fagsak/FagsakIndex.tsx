@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useState, useCallback,
+  FunctionComponent, useState, useCallback, useEffect,
 } from 'react';
 import {
   Route, Navigate, useLocation, Routes,
@@ -21,7 +21,7 @@ import {
 } from '../app/paths';
 import FagsakGrid from './components/FagsakGrid';
 import {
-  AnnenPartBehandling, FpsakApiKeys, restApiHooks,
+  AnnenPartBehandling, FpsakApiKeys, restApiHooks, requestApi,
 } from '../data/fpsakApi';
 import useHentFagsakRettigheter from './useHentFagsakRettigheter';
 import useHentAlleBehandlinger from './useHentAlleBehandlinger';
@@ -97,6 +97,11 @@ const FagsakIndex: FunctionComponent = () => {
   const [alleBehandlinger, harFerdighentetAlleBehandlinger] = useHentAlleBehandlinger(
     selectedSaksnummer, behandlingerTeller, behandlingUuid, behandlingVersjon,
   );
+
+  useEffect(() => () => {
+    requestApi.resetCache();
+    requestApi.resetLinks();
+  }, []);
 
   const location = useLocation();
   const skalIkkeHenteData = finnSkalIkkeHenteData(location, selectedSaksnummer, behandlingUuid);
