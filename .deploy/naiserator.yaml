@@ -64,4 +64,4 @@ spec:
     - name: CORS_ALLOWED_METHODS
       value: "GET, POST"
     - name: PROXY_CONFIG
-      value: {{proxy}}
+      value: {{{proxy}}}
