@@ -149,6 +149,10 @@ class RequestApi {
     };
   };
 
+  public resetLinks = () => {
+    this.links = {};
+  };
+
   public setRequestPendingHandler = (requestPendingHandler: (message?: string) => void): void => {
     this.notificationMapper.addUpdatePollingMessageEventHandler((data) => {
       requestPendingHandler(data);
