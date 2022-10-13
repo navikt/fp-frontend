@@ -10,6 +10,5 @@ export const getIssuer = async () => {
     issuer = await Issuer.discover(azureConfig.discoveryUrl);
     logger.info(`Discovered issuer ${issuer.issuer}`);
   }
-
   return issuer;
 }

@@ -1,5 +1,4 @@
 import { createRemoteJWKSet } from 'jose';
-
 import { getIssuer } from './issuer.js';
 
 let remoteJWKSet;

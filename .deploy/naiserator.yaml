@@ -2,30 +2,23 @@ apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
   name: fp-frontend
-  namespace: {{namespace}}
+  namespace: teamforeldrepenger
   labels:
     team: teamforeldrepenger
-  annotations:
-    nais.io/run-as-user: "101" # Fix permissions for nginx
-    nais.io/read-only-file-system: "false" # Fix permissions for nginx
 spec:
   image: {{image}}
-  port: 9000
+  port: 8080
   ingresses:
-  {{#each ingresses as |url|}}
-     - {{url}}
-  {{/each}}
-  sessionAffinity: ClientIP
-  team: teamforeldrepenger
+    - {{ingress}}
   liveness:
     path: /isAlive
-    initialDelay: 20
+    initialDelay: 10
     timeout: 1
     periodSeconds: 5
     failureThreshold: 10
   readiness:
     path: /isReady
-    initialDelay: 20
+    initialDelay: 10
     timeout: 1
   replicas:
     min: {{minReplicas}}
@@ -38,31 +31,38 @@ spec:
     requests:
       cpu: 200m
       memory: 32Mi
+  azure:
+    application:
+      enabled: true
+      claims:
+        extra:
+          - "NAVident"
+          - "azp_name"
+        groups:
+          {{#each groups as |group|}}
+          - id: "{{group}}"
+          {{/each}}
+      singlePageApplication: true
+    sidecar:
+      enabled: true
+      autoLogin: true
+  accessPolicy:
+    outbound:
+      external:
+        {{#each externals as |external|}}
+        - host: "{{external}}"
+        {{/each}}
   env:
-    - name: APP_NAME
-      value: fp-frontend
-    - name: APP_PORT
-      value: "9000"
-    - name: APP_URL
-      value: "http://fpsak"
-    - name: APP_URL_FPSAK
-      value: "http://fpsak"
-    - name: APP_URL_FPOPPDRAG
-      value: "http://fpoppdrag"
-    - name: APP_URL_FPTILBAKE
-      value: "http://fptilbake"
-    - name: APP_URL_FPFORMIDLING
-      value: "http://fpformidling"
-    - name: APP_URL_LOS
-      value: "http://fplos"
-    - name: REDIS_HOST
-      value: "fpsak-redis.teamforeldrepenger.svc.nais.local"
-    - name: REDIS_PORT
-      value: "6379"
-#  envFrom:
-#    - secret: redis-password
-#  accessPolicy:
-#    outbound:
-#      rules:
-#        - application: fpsak-redis
+    - name: HOST
+      value: {{ingress}}
+    - name: PORT
+      value: "8080"
+    - name: CORS_ALLOWED_HEADERS
+      value: "Referer, Origin, Content-Type, Accept, X-Requested-With, cache-control, x_Nav-CallId, pragma, expires, X-Forwarded-Proto"
+    - name: CORS_EXPOSED_HEADERS
+      value: "Location"
+    - name: CORS_ALLOWED_METHODS
+      value: "GET, POST"
+    - name: PROXY_CONFIG
+      value: {{proxy}}
 

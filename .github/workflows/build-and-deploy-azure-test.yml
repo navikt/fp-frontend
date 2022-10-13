@@ -65,5 +65,5 @@ jobs:
           PRINT_PAYLOAD: true
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: ${{ env.CLUSTER }}
-          RESOURCE: .deploy/naiserator_dev_gcp.yaml
-          #VARS: packages/server/dev.yaml
+          RESOURCE: .deploy/naiserator.yaml
+          VARS: .deploy/dev_gcp.json
