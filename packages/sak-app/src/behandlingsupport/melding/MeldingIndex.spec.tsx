@@ -5,10 +5,11 @@ import userEvent from '@testing-library/user-event';
 import MockAdapter from 'axios-mock-adapter';
 import { Modal } from '@navikt/ds-react';
 import { FagsakYtelseType, BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
-import { BehandlingAppKontekst, Fagsak } from '@navikt/ft-types';
+import { BehandlingAppKontekst } from '@navikt/ft-types';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
+import { Fagsak } from '@fpsak-frontend/types';
 
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import MeldingIndex from './MeldingIndex';
@@ -19,6 +20,7 @@ describe('<MeldingIndex>', () => {
   const fagsak = {
     saksnummer: '123456',
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    brukerManglerAdresse: false,
   };
 
   const valgtBehandling = {
@@ -65,7 +67,6 @@ describe('<MeldingIndex>', () => {
             fagsak={fagsak as Fagsak}
             valgtBehandling={valgtBehandling as BehandlingAppKontekst}
             setMeldingForData={() => undefined}
-            brukerManglerAdresse={false}
           />
         </MemoryRouter>
       </RestApiMock>,
@@ -94,7 +95,6 @@ describe('<MeldingIndex>', () => {
             fagsak={fagsak as Fagsak}
             valgtBehandling={valgtBehandling as BehandlingAppKontekst}
             setMeldingForData={() => undefined}
-            brukerManglerAdresse={false}
           />
         </MemoryRouter>
       </RestApiMock>,
@@ -138,7 +138,6 @@ describe('<MeldingIndex>', () => {
             fagsak={fagsak as Fagsak}
             valgtBehandling={valgtBehandling as BehandlingAppKontekst}
             setMeldingForData={() => undefined}
-            brukerManglerAdresse={false}
           />
         </MemoryRouter>
       </RestApiMock>,
@@ -186,7 +185,6 @@ describe('<MeldingIndex>', () => {
             fagsak={fagsak as Fagsak}
             valgtBehandling={valgtBehandling as BehandlingAppKontekst}
             setMeldingForData={() => undefined}
-            brukerManglerAdresse={false}
           />
         </MemoryRouter>
       </RestApiMock>,

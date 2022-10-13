@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
-
-import { Fagsak, AlleKodeverk } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { AlleKodeverk, FagsakEnkel } from '@fpsak-frontend/types';
 
 import SearchForm from './SearchForm';
 import FagsakList from './FagsakList';
@@ -11,8 +11,8 @@ import FagsakList from './FagsakList';
 import styles from './fagsakSearch.less';
 
 interface OwnProps {
-  fagsaker: Fagsak[];
-  searchFagsakCallback: (params?: { searchString: string }) => Promise<Fagsak[]>;
+  fagsaker: FagsakEnkel[];
+  searchFagsakCallback: (params?: { searchString: string }) => Promise<FagsakEnkel[]>;
   searchResultReceived: boolean;
   selectFagsakCallback: (e: React.SyntheticEvent, saksnummer?: string) => void;
   searchStarted: boolean;
@@ -25,7 +25,7 @@ interface OwnProps {
 /**
  * FagsakSearch
  *
- * Presentasjonskomponent. Denne setter sammen de ulike komponentene i søkebildet.
+ * Denne setter sammen de ulike komponentene i søkebildet.
  * Er søkeresultat mottatt vises enten trefflisten og relatert person, eller en tekst som viser ingen resultater.
  */
 const FagsakSearch: FunctionComponent<OwnProps> = ({

@@ -13,14 +13,6 @@ describe('<HistorikkIndex>', () => {
       { key: FpsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
       { key: FpsakApiKeys.KODEVERK.name, global: true, data: {} },
       { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
-      {
-        key: FpsakApiKeys.HISTORY_FPSAK.name,
-        data: [],
-      },
-      {
-        key: FpsakApiKeys.HISTORY_FPTILBAKE.name,
-        data: [],
-      },
     ];
 
     render(

@@ -10,7 +10,6 @@ import { useLagreAksjonspunkt, useBehandling, useInitBehandlingHandlinger } from
 import StandardBehandlingProps from '../felles/typer/standardBehandlingProps';
 
 interface OwnProps {
-  fagsakKjønn: string;
   harApenRevurdering: boolean;
 }
 
@@ -20,7 +19,6 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & StandardBehand
   oppdaterBehandlingVersjon,
   kodeverk: fpsakKodeverk,
   fagsak,
-  fagsakKjønn,
   rettigheter,
   oppdaterProsessStegOgFaktaPanelIUrl,
   valgtProsessSteg,
@@ -68,7 +66,7 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & StandardBehand
       />
       <ProsessIndex
         behandling={behandling}
-        fagsakKjønn={fagsakKjønn}
+        fagsakKjønn={fagsak.bruker.kjønn}
         tilbakekrevingKodeverk={tilbakekrevingKodeverk}
         valgtProsessSteg={valgtProsessSteg}
         oppdaterProsessPanelIUrl={oppdaterProsessPanelIUrl}

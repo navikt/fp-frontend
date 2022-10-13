@@ -9,7 +9,7 @@ import {
 import advarselIcon from '@fpsak-frontend/assets/images/advarsel.svg';
 import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validators';
 import { Form, InputField } from '@navikt/ft-form-hooks';
-import { Fagsak } from '@fpsak-frontend/types';
+import { FagsakEnkel } from '@fpsak-frontend/types';
 
 import styles from './searchForm.less';
 
@@ -21,15 +21,15 @@ interface OwnProps {
   searchResultAccessDenied?: {
     feilmelding: string;
   };
-  searchFagsakCallback: (params?: { searchString: string }) => Promise<Fagsak[]>;
+  searchFagsakCallback: (params?: { searchString: string }) => Promise<FagsakEnkel[]>;
 }
 
 /**
  * SearchForm
  *
- * Presentasjonskomponent. Definerer søkefelt og tilhørende søkeknapp.
+ * Definerer søkefelt og tilhørende søkeknapp.
  */
-export const SearchForm: FunctionComponent<OwnProps> = ({
+const SearchForm: FunctionComponent<OwnProps> = ({
   searchStarted,
   searchResultAccessDenied,
   searchFagsakCallback,

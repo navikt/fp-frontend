@@ -1,18 +1,28 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
-import { Fagsak, BehandlingAppKontekst } from '@navikt/ft-types';
+import { BehandlingAppKontekst } from '@navikt/ft-types';
 import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
+import { Fagsak } from '@fpsak-frontend/types';
 
 import { VergeBehandlingmenyValg } from '../behandling/behandlingRettigheterTsType';
 import BehandlingSupportIndex, { hentSynligePaneler, hentValgbarePaneler } from './BehandlingSupportIndex';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
+import FagsakData from '../fagsak/FagsakData';
 
 describe('<BehandlingSupportIndex>', () => {
+  const behandling = {
+    uuid: '1',
+    type: BehandlingType.FORSTEGANGSSOKNAD,
+    status: BehandlingStatus.OPPRETTET,
+  };
+
   const fagsak = {
     saksnummer: '123',
+    behandlinger: [behandling] as BehandlingAppKontekst[],
+    brukerManglerAdresse: false,
   };
 
   const navAnsatt = {
@@ -27,12 +37,6 @@ describe('<BehandlingSupportIndex>', () => {
     navn: 'Test',
   };
 
-  const behandling = {
-    uuid: '1',
-    type: BehandlingType.FORSTEGANGSSOKNAD,
-    status: BehandlingStatus.OPPRETTET,
-  };
-
   it('skal vise historikk-panelet som default', async () => {
     const data = [
       { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
@@ -42,11 +46,9 @@ describe('<BehandlingSupportIndex>', () => {
       <RestApiMock data={data} requestApi={requestApi}>
         <MemoryRouter>
           <BehandlingSupportIndex
-            fagsak={fagsak as Fagsak}
-            alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
+            fagsakData={new FagsakData(fagsak as Fagsak)}
             behandlingUuid="1"
             behandlingVersjon={2}
-            brukerManglerAdresse={false}
           />
         </MemoryRouter>
       </RestApiMock>,

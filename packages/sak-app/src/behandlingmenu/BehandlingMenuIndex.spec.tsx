@@ -4,13 +4,14 @@ import { render, screen } from '@testing-library/react';
 import {
   BehandlingType, FagsakStatus, BehandlingStatus, FagsakYtelseType,
 } from '@navikt/ft-kodeverk';
-import { BehandlingAppKontekst, Fagsak } from '@navikt/ft-types';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
+import { Fagsak } from '@fpsak-frontend/types';
 
 import { VergeBehandlingmenyValg } from '../behandling/behandlingRettigheterTsType';
-import { BehandlingMenuIndex } from './BehandlingMenuIndex';
+import BehandlingMenuIndex from './BehandlingMenuIndex';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
+import FagsakData from '../fagsak/FagsakData';
 
 const navAnsatt = {
   brukernavn: 'Test',
@@ -22,12 +23,6 @@ const navAnsatt = {
   kanSaksbehandle: true,
   kanVeilede: false,
   navn: 'Test',
-};
-
-const fagsak = {
-  saksnummer: '123',
-  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-  status: FagsakStatus.UNDER_BEHANDLING,
 };
 
 const alleBehandlinger = [{
@@ -43,6 +38,15 @@ const alleBehandlinger = [{
   erAktivPapirsoknad: false,
 }];
 
+const fagsak = {
+  saksnummer: '123',
+  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+  status: FagsakStatus.UNDER_BEHANDLING,
+  behandlinger: alleBehandlinger,
+  sakSkalTilInfotrygd: false,
+  behandlingTypeKanOpprettes: [],
+};
+
 describe('BehandlingMenuIndex', () => {
   it('skal vise meny der alle menyhandlinger er synlige', async () => {
     const data = [
@@ -54,11 +58,6 @@ describe('BehandlingMenuIndex', () => {
       { key: FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES.name, data: false },
       { key: FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES.name, data: false },
     ];
-
-    const sakRettigheter = {
-      sakSkalTilInfotrygd: false,
-      behandlingTypeKanOpprettes: [],
-    };
 
     const behandlingRettigheter = {
       behandlingFraBeslutter: false,
@@ -76,13 +75,11 @@ describe('BehandlingMenuIndex', () => {
       <RestApiMock data={data} requestApi={requestApi}>
         <MemoryRouter>
           <BehandlingMenuIndex
-            fagsak={fagsak as Fagsak}
-            alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
+            fagsakData={new FagsakData(fagsak as Fagsak)}
             behandlingUuid="1"
             behandlingVersjon={2}
             oppfriskBehandlinger={jest.fn()}
             behandlingRettigheter={behandlingRettigheter}
-            sakRettigheter={sakRettigheter}
           />
         </MemoryRouter>
       </RestApiMock>,

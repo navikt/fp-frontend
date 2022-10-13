@@ -1,6 +1,5 @@
 import {
-  Aksjonspunkt, Aktor, AlleKodeverk, AlleKodeverkTilbakekreving, Behandling,
-  BehandlingAppKontekst, Dokument, Fagsak, FagsakPersoner, Risikoklassifisering,
+  Aksjonspunkt, Aktor, AlleKodeverk, AlleKodeverkTilbakekreving, Behandling, Dokument, Risikoklassifisering,
 } from '@navikt/ft-types';
 
 import {
@@ -8,11 +7,10 @@ import {
 } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import {
-  ForhåndsvisMeldingParams, Historikkinnslag, KlageVurdering, NavAnsatt, TotrinnskontrollSkjermlenkeContext,
+  ForhåndsvisMeldingParams, KlageVurdering, NavAnsatt, TotrinnskontrollSkjermlenkeContext, FagsakEnkel, Fagsak, FagsakDataFpTilbake,
 } from '@fpsak-frontend/types';
 
 import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
-import SakRettigheter from '../fagsak/sakRettigheterTsType';
 
 type BehandlendeEnheter = {
   enhetId: string;
@@ -30,11 +28,6 @@ type SubmitMessageParams = {
   brevmalkode: string;
   fritekst: string;
   arsakskode?: string;
-};
-
-export type AnnenPartBehandling = {
-  saksnummer: string;
-  behandlingUuid: string;
 };
 
 type InitLinks = {
@@ -56,16 +49,11 @@ export const FpsakApiKeys = {
   KODEVERK_FPTILBAKE: new RestKey<AlleKodeverkTilbakekreving, void>('KODEVERK_FPTILBAKE'),
   NAV_ANSATT: new RestKey<NavAnsatt, void>('NAV_ANSATT'),
   BEHANDLENDE_ENHETER: new RestKey<BehandlendeEnheter, void>('BEHANDLENDE_ENHETER'),
-  SEARCH_FAGSAK: new RestKey<Fagsak[], { searchString: string }>('SEARCH_FAGSAK'),
+  SEARCH_FAGSAK: new RestKey<FagsakEnkel[], { searchString: string }>('SEARCH_FAGSAK'),
   FETCH_FAGSAK: new RestKey<Fagsak, { saksnummer: string }>('FETCH_FAGSAK'),
-  SAK_PERSONER: new RestKey<FagsakPersoner, { saksnummer: string }>('SAK_PERSONER'),
-  BEHANDLINGER_FPSAK: new RestKey<BehandlingAppKontekst[], { saksnummer: string }>('BEHANDLINGER_FPSAK'),
-  BEHANDLINGER_FPTILBAKE: new RestKey<BehandlingAppKontekst[], { saksnummer: string }>('BEHANDLINGER_FPTILBAKE'),
+  FETCH_FAGSAKDATA_FPTILBAKE: new RestKey<FagsakDataFpTilbake, { saksnummer: string }>('FETCH_FAGSAKDATA_FPTILBAKE'),
   NEW_BEHANDLING_FPSAK: new RestKey<boolean, any>('NEW_BEHANDLING_FPSAK'),
   NEW_BEHANDLING_FPTILBAKE: new RestKey<boolean, any>('NEW_BEHANDLING_FPTILBAKE'),
-  ANNEN_PART_BEHANDLING: new RestKey<AnnenPartBehandling, { saksnummer: string }>('ANNEN_PART_BEHANDLING'),
-  HISTORY_FPSAK: new RestKey<Historikkinnslag[], { saksnummer: string }>('HISTORY_FPSAK'),
-  HISTORY_FPTILBAKE: new RestKey<Historikkinnslag[], { saksnummer: string }>('HISTORY_FPTILBAKE'),
   KONTROLLRESULTAT: new RestKey<Risikoklassifisering, void>('KONTROLLRESULTAT'),
   RISIKO_AKSJONSPUNKT: new RestKey<Aksjonspunkt, void>('RISIKO_AKSJONSPUNKT'),
   TOTRINNS_KLAGE_VURDERING: new RestKey<KlageVurdering, void>('TOTRINNS_KLAGE_VURDERING'),
@@ -78,15 +66,12 @@ export const FpsakApiKeys = {
   HAR_APENT_KONTROLLER_REVURDERING_AP: new RestKey<boolean, void>('HAR_APENT_KONTROLLER_REVURDERING_AP'),
   BREVMALER: new RestKey<Brevmal[], void>('BREVMALER'),
   SUBMIT_MESSAGE: new RestKey<void, SubmitMessageParams>('SUBMIT_MESSAGE'),
-  SAK_RETTIGHETER: new RestKey<SakRettigheter, { saksnummer: string }>('SAK_RETTIGHETER'),
-  SAK_RETTIGHETER_FPTILBAKE: new RestKey<SakRettigheter, { saksnummer: string }>('SAK_RETTIGHETER_FPTILBAKE'),
   BEHANDLING_RETTIGHETER: new RestKey<BehandlingRettigheter, { uuid: string }>('BEHANDLING_RETTIGHETER'),
   KAN_TILBAKEKREVING_OPPRETTES: new RestKey<boolean, { saksnummer: string; uuid: string; }>('KAN_TILBAKEKREVING_OPPRETTES'),
   KAN_TILBAKEKREVING_REVURDERING_OPPRETTES: new RestKey<boolean, { uuid: string; }>('KAN_TILBAKEKREVING_REVURDERING_OPPRETTES'),
   PREVIEW_MESSAGE_TILBAKEKREVING: new RestKey<any, any>('PREVIEW_MESSAGE_TILBAKEKREVING'),
   PREVIEW_MESSAGE_FORMIDLING: new RestKey<any, ForhåndsvisMeldingParams>('PREVIEW_MESSAGE_FORMIDLING'),
   PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE: new RestKey<any, any>('PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE'),
-  HAR_IKKE_ADRESSE: new RestKey<boolean, { saksnummer: string }>('HAR_IKKE_ADRESSE'),
 };
 
 const endpoints = new RestApiConfigBuilder()
@@ -100,19 +85,11 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('behandlende-enheter', FpsakApiKeys.BEHANDLENDE_ENHETER)
 
   // Fagsak
-  .withRel('fagsak', FpsakApiKeys.FETCH_FAGSAK)
-  .withRel('sak-personer', FpsakApiKeys.SAK_PERSONER)
-  .withRel('sak-rettigheter', FpsakApiKeys.SAK_RETTIGHETER)
-  .withRel('tilbake-sak-rettigheter', FpsakApiKeys.SAK_RETTIGHETER_FPTILBAKE)
-  .withRel('sak-historikk', FpsakApiKeys.HISTORY_FPSAK)
-  .withRel('tilbake-historikk', FpsakApiKeys.HISTORY_FPTILBAKE)
+  .withRel('fagsak-full', FpsakApiKeys.FETCH_FAGSAK)
+  .withRel('tilbake-fagsak-full', FpsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE)
   .withRel('sak-dokumentliste', FpsakApiKeys.ALL_DOCUMENTS)
-  .withRel('sak-alle-behandlinger', FpsakApiKeys.BEHANDLINGER_FPSAK)
-  .withRel('tilbake-alle-behandlinger', FpsakApiKeys.BEHANDLINGER_FPTILBAKE)
-  .withRel('sak-annen-part-behandling', FpsakApiKeys.ANNEN_PART_BEHANDLING)
   .withRel('tilbake-kan-opprette-behandling', FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES)
   .withRel('tilbake-kan-opprette-revurdering', FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES)
-  .withRel('har-ikke-adresse', FpsakApiKeys.HAR_IKKE_ADRESSE)
 
   // Behandling
   .withRel('kontrollresultat', FpsakApiKeys.KONTROLLRESULTAT)

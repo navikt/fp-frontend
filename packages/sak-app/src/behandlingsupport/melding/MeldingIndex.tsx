@@ -1,13 +1,14 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
-import { BehandlingAppKontekst, Fagsak, KodeverkMedNavn } from '@navikt/ft-types';
+import { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/ft-types';
 
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import MeldingerSakIndex, { MessagesModalSakIndex, FormValues } from '@fpsak-frontend/sak-meldinger';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
+import { Fagsak } from '@fpsak-frontend/types';
 
 import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
 import { useFpSakKodeverk } from '../../data/useKodeverk';
@@ -83,7 +84,6 @@ interface OwnProps {
   valgtBehandling: BehandlingAppKontekst;
   meldingFormData?: any,
   setMeldingForData: (data?: any) => void,
-  brukerManglerAdresse: boolean,
 }
 
 const EMPTY_ARRAY = [] as KodeverkMedNavn[];
@@ -98,7 +98,6 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   valgtBehandling,
   meldingFormData,
   setMeldingForData,
-  brukerManglerAdresse,
 }) => {
   const [showSettPaVentModal, setShowSettPaVentModal] = useState(false);
   const [showMessagesModal, setShowMessageModal] = useState(false);
@@ -178,7 +177,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
         kanVeilede={navAnsatt.kanVeilede}
         meldingFormData={meldingFormData}
         setMeldingForData={setMeldingForData}
-        brukerManglerAdresse={brukerManglerAdresse}
+        brukerManglerAdresse={fagsak.brukerManglerAdresse}
       />
 
       {submitFinished && showSettPaVentModal && (

@@ -2,9 +2,7 @@ import React, {
   FunctionComponent, useEffect, useCallback, useMemo,
 } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import {
-  Fagsak, BehandlingAppKontekst, Aksjonspunkt, Risikoklassifisering,
-} from '@navikt/ft-types';
+import { Aksjonspunkt, Risikoklassifisering } from '@navikt/ft-types';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 import RisikoklassifiseringSakIndex, { AvklartRisikoklassifiseringAp } from '@navikt/ft-sak-risikoklassifisering';
 
@@ -15,6 +13,7 @@ import useTrackRouteParam from '../../app/useTrackRouteParam';
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 import { getRiskPanelLocationCreator } from '../../app/paths';
 import getAccessRights from '../../app/util/access';
+import FagsakData from '../../fagsak/FagsakData';
 
 import '@navikt/ft-sak-risikoklassifisering/dist/style.css';
 
@@ -27,8 +26,7 @@ const getReadOnly = (navAnsatt: NavAnsatt, rettigheter: AksessRettigheter, erPaa
 };
 
 interface OwnProps {
-  fagsak: Fagsak;
-  alleBehandlinger: BehandlingAppKontekst[];
+  fagsakData: FagsakData;
   behandlingUuid?: string;
   behandlingVersjon?: number;
   kontrollresultat?: Risikoklassifisering;
@@ -43,14 +41,14 @@ interface OwnProps {
  * om klassifisering er utført og ingen faresignaler er funnet og om klassifisering er utført og faresignaler er funnet
  */
 const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
-  fagsak,
-  alleBehandlinger,
+  fagsakData,
   risikoAksjonspunkt,
   kontrollresultat,
   behandlingVersjon,
   behandlingUuid,
 }) => {
-  const behandling = alleBehandlinger.find((b) => b.uuid === behandlingUuid);
+  const fagsak = fagsakData.getFagsak();
+  const behandling = fagsakData.getAlleBehandlinger().find((b) => b.uuid === behandlingUuid);
   const erPaaVent = behandling ? behandling.behandlingPaaVent : false;
   const behandlingStatus = behandling?.status;
   const behandlingType = behandling?.type;

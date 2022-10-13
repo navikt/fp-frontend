@@ -64,6 +64,9 @@ describe('<BehandlingTilbakekrevingIndex>', () => {
               kodeverk={alleKodeverk as AlleKodeverk}
               fagsak={{
                 fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+                bruker: {
+                  kjønn: navBrukerKjonn.KVINNE,
+                },
               } as Fagsak}
               rettigheter={{
                 writeAccess: {
@@ -78,7 +81,6 @@ describe('<BehandlingTilbakekrevingIndex>', () => {
               valgtFaktaSteg="default"
               opneSokeside={() => {}}
               setRequestPendingMessage={() => {}}
-              fagsakKjønn={navBrukerKjonn.KVINNE}
               harApenRevurdering={false}
             />
           </RestApiMock>
