@@ -1,5 +1,5 @@
-import { Fagsak, AlleKodeverk } from '@navikt/ft-types';
-import { AksessRettigheter } from '@fpsak-frontend/types';
+import { AlleKodeverk } from '@navikt/ft-types';
+import { Fagsak, AksessRettigheter } from '@fpsak-frontend/types';
 
 export type BehandlingEventHandler = {
   setHandler: (events: {[key: string]: (params: any) => Promise<any> }) => void;

@@ -11,16 +11,11 @@ import {
 import RegistrerPapirsoknad from './RegistrerPapirsoknad';
 import { requestPapirsoknadApi } from './data/papirsoknadApi';
 
-interface OwnProps {
-  fagsakPersonnummer: string;
-}
-
-const BehandlingPapirsoknadIndex: FunctionComponent<OwnProps & StandardBehandlingProps> = ({
+const BehandlingPapirsoknadIndex: FunctionComponent<StandardBehandlingProps> = ({
   behandlingEventHandler,
   behandlingUuid,
   kodeverk,
   fagsak,
-  fagsakPersonnummer,
   rettigheter,
   setRequestPendingMessage,
 }) => {
@@ -42,7 +37,6 @@ const BehandlingPapirsoknadIndex: FunctionComponent<OwnProps & StandardBehandlin
     <RegistrerPapirsoknad
       behandling={behandling}
       fagsak={fagsak}
-      fagsakPersonnummer={fagsakPersonnummer}
       kodeverk={kodeverk}
       rettigheter={rettigheter}
       hentBehandling={hentBehandling}

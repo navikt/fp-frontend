@@ -1,14 +1,16 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
-import { Fagsak, Behandling } from '@navikt/ft-types';
+import { Behandling } from '@navikt/ft-types';
 import { KontrollresultatKode } from '@navikt/ft-sak-risikoklassifisering';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
+import { Fagsak } from '@fpsak-frontend/types';
 
 import * as useTrackRouteParam from '../../app/useTrackRouteParam';
 import RisikoklassifiseringIndex from './RisikoklassifiseringIndex';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
+import FagsakData from '../../fagsak/FagsakData';
 
 const lagRisikoklassifisering = (kode: string) => ({
   kontrollresultat: kode,
@@ -16,13 +18,14 @@ const lagRisikoklassifisering = (kode: string) => ({
   iayFaresignaler: undefined,
 });
 
-const fagsak = {
-  saksnummer: '123456',
-};
-
 const behandling = {
   uuid: '1',
-};
+} as Behandling;
+
+const fagsak = {
+  saksnummer: '123456',
+  behandlinger: [behandling],
+} as Fagsak;
 
 const location = {
   key: '1',
@@ -50,8 +53,7 @@ describe('<RisikoklassifiseringIndex>', () => {
       <RestApiMock data={data} requestApi={requestApi}>
         <MemoryRouter>
           <RisikoklassifiseringIndex
-            fagsak={fagsak as Fagsak}
-            alleBehandlinger={[behandling] as Behandling[]}
+            fagsakData={new FagsakData(fagsak)}
             kontrollresultat={lagRisikoklassifisering(KontrollresultatKode.HOY)}
             behandlingVersjon={1}
             behandlingUuid="1"

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
-import { Fagsak, AlleKodeverk } from '@fpsak-frontend/types';
+import { FagsakEnkel, AlleKodeverk } from '@fpsak-frontend/types';
 import { getKodeverknavnFn } from '@navikt/ft-utils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
@@ -14,7 +14,7 @@ const headerTextCodes = [
 ];
 
 interface OwnProps {
-  fagsaker: Fagsak[];
+  fagsaker: FagsakEnkel[];
   selectFagsakCallback: (e: React.SyntheticEvent, saksnummer?: string) => void;
   alleKodeverk: AlleKodeverk;
 }

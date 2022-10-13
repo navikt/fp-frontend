@@ -6,7 +6,6 @@ import { Location } from 'history';
 import { BehandlingType, FagsakYtelseType, BehandlingStatus } from '@navikt/ft-kodeverk';
 import { replaceNorwegianCharacters, parseQueryString } from '@navikt/ft-utils';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { Fagsak, BehandlingAppKontekst } from '@navikt/ft-types';
 
 import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 
@@ -20,6 +19,7 @@ import {
 } from '../data/fpsakApi';
 import behandlingEventHandler from './BehandlingEventHandler';
 import ErrorBoundary from '../app/ErrorBoundary';
+import FagsakData from '../fagsak/FagsakData';
 
 const BehandlingEngangsstonadIndex = React.lazy(() => import('./forstegangsoknadOgRevurdering/engangsstonad/BehandlingEngangsstonadIndex'));
 const BehandlingForeldrepengerIndex = React.lazy(() => import('./forstegangsoknadOgRevurdering/foreldrepenger/BehandlingForeldrepengerIndex'));
@@ -64,8 +64,7 @@ const getOppdaterProsessStegOgFaktaPanelIUrl = (
 
 interface OwnProps {
   setBehandlingUuidOgVersjon: (behandlingUuid: string, behandlingVersjon: number) => void;
-  fagsak: Fagsak;
-  alleBehandlinger: BehandlingAppKontekst[];
+  fagsakData: FagsakData;
   setRequestPendingMessage: (message?: string) => void;
 }
 
@@ -77,8 +76,7 @@ interface OwnProps {
  */
 const BehandlingIndex: FunctionComponent<OwnProps> = ({
   setBehandlingUuidOgVersjon,
-  fagsak,
-  alleBehandlinger,
+  fagsakData,
   setRequestPendingMessage,
 }) => {
   const { selected: behandlingUuid } = useTrackRouteParam<string>({
@@ -86,6 +84,8 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     parse: (behandlingUuidFromUrl) => behandlingUuidFromUrl,
   });
 
+  const fagsak = fagsakData.getFagsak();
+  const alleBehandlinger = fagsakData.getAlleBehandlinger();
   const behandling = alleBehandlinger.find((b) => b.uuid === behandlingUuid);
 
   useEffect(() => {
@@ -100,8 +100,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   const oppdaterBehandlingVersjon = useCallback((versjon) => setBehandlingUuidOgVersjon(behandlingUuid, versjon), [behandlingUuid]);
 
   const kodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
-
-  const fagsakPersoner = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.SAK_PERSONER);
 
   const navAnsatt = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
   const rettigheter = useMemo(() => getAccessRights(navAnsatt, fagsak.status, behandling?.status, behandling?.type),
@@ -147,12 +145,8 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   if (behandling?.erAktivPapirsoknad) {
     return (
       <Suspense fallback={<LoadingPanel />}>
-        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
-          <BehandlingPapirsoknadIndex
-            {...defaultProps}
-            fagsakPersonnummer={fagsakPersoner.bruker.fødselsnummer}
-          />
+          <BehandlingPapirsoknadIndex {...defaultProps} />
         </ErrorBoundary>
       </Suspense>
     );
@@ -161,7 +155,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   if (behandlingTypeKode === BehandlingType.DOKUMENTINNSYN) {
     return (
       <Suspense fallback={<LoadingPanel />}>
-        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingInnsynIndex {...defaultProps} />
         </ErrorBoundary>
@@ -172,7 +165,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   if (behandlingTypeKode === BehandlingType.KLAGE) {
     return (
       <Suspense fallback={<LoadingPanel />}>
-        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingKlageIndex
             alleBehandlinger={fagsakBehandlingerInfo}
@@ -186,7 +178,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   if (behandlingTypeKode === BehandlingType.ANKE) {
     return (
       <Suspense fallback={<LoadingPanel />}>
-        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingAnkeIndex
             alleBehandlinger={fagsakBehandlingerInfo}
@@ -200,12 +191,10 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   if (erTilbakekreving(behandlingTypeKode)) {
     return (
       <Suspense fallback={<LoadingPanel />}>
-        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingTilbakekrevingIndex
             harApenRevurdering={fagsakBehandlingerInfo
               .some((b) => b.type === BehandlingType.REVURDERING && b.status !== BehandlingStatus.AVSLUTTET)}
-            fagsakKjønn={fagsakPersoner.bruker.kjønn}
             {...defaultProps}
           />
         </ErrorBoundary>
@@ -216,11 +205,8 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   if (!!behandling && fagsak.fagsakYtelseType === FagsakYtelseType.ENGANGSSTONAD) {
     return (
       <Suspense fallback={<LoadingPanel />}>
-        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
-          <BehandlingEngangsstonadIndex
-            {...defaultProps}
-          />
+          <BehandlingEngangsstonadIndex {...defaultProps} />
         </ErrorBoundary>
       </Suspense>
     );
@@ -229,11 +215,8 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   if (!!behandling && fagsak.fagsakYtelseType === FagsakYtelseType.FORELDREPENGER) {
     return (
       <Suspense fallback={<LoadingPanel />}>
-        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
-          <BehandlingForeldrepengerIndex
-            {...defaultProps}
-          />
+          <BehandlingForeldrepengerIndex {...defaultProps} />
         </ErrorBoundary>
       </Suspense>
     );
@@ -242,11 +225,8 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   if (!!behandling && fagsak.fagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER) {
     return (
       <Suspense fallback={<LoadingPanel />}>
-        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
-          <BehandlingSvangerskapspengerIndex
-            {...defaultProps}
-          />
+          <BehandlingSvangerskapspengerIndex {...defaultProps} />
         </ErrorBoundary>
       </Suspense>
     );

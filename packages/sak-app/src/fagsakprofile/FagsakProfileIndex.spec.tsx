@@ -2,22 +2,37 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import { MemoryRouter } from 'react-router-dom';
-import { BehandlingAppKontekst, Fagsak, Behandling } from '@navikt/ft-types';
+import { BehandlingAppKontekst, Behandling } from '@navikt/ft-types';
 import {
   BehandlingStatus, BehandlingType, FagsakYtelseType, FagsakStatus,
 } from '@navikt/ft-kodeverk';
 
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import { Fagsak } from '@fpsak-frontend/types';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
-import { FagsakProfileIndex } from './FagsakProfileIndex';
+import FagsakProfileIndex from './FagsakProfileIndex';
+import FagsakData from '../fagsak/FagsakData';
 
 describe('<FagsakProfileIndex>', () => {
+  const behandling = {
+    uuid: 'test',
+    type: BehandlingType.FORSTEGANGSSOKNAD,
+    status: BehandlingStatus.OPPRETTET,
+    behandlendeEnhetId: 'test',
+    behandlendeEnhetNavn: 'NAV Viken',
+    opprettet: '2017-08-02T00:54:25.455',
+  } as Behandling;
+
   const fagsak = {
     saksnummer: '123',
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     status: FagsakStatus.OPPRETTET,
+    behandlinger: [behandling] as BehandlingAppKontekst[],
+    sakSkalTilInfotrygd: true,
+    behandlingTypeKanOpprettes: [],
+    brukerManglerAdresse: false,
   };
 
   const navAnsatt = {
@@ -30,20 +45,6 @@ describe('<FagsakProfileIndex>', () => {
     kanSaksbehandle: true,
     kanVeilede: false,
     navn: 'Peder Pjokk',
-  };
-
-  const behandling = {
-    uuid: 'test',
-    type: BehandlingType.FORSTEGANGSSOKNAD,
-    status: BehandlingStatus.OPPRETTET,
-    behandlendeEnhetId: 'test',
-    behandlendeEnhetNavn: 'NAV Viken',
-    opprettet: '2017-08-02T00:54:25.455',
-  } as Behandling;
-
-  const fagsakRettigheter = {
-    sakSkalTilInfotrygd: true,
-    behandlingTypeKanOpprettes: [],
   };
 
   it('skal rendre komponent og vise alle behandlinger når ingen behandling er valgt', async () => {
@@ -60,12 +61,8 @@ describe('<FagsakProfileIndex>', () => {
         <RestApiMock data={data} requestApi={requestApi}>
           <MemoryRouter>
             <FagsakProfileIndex
-              fagsak={fagsak as Fagsak}
-              alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
-              harHentetBehandlinger
+              fagsakData={new FagsakData(fagsak as Fagsak)}
               oppfriskBehandlinger={jest.fn()}
-              fagsakRettigheter={fagsakRettigheter}
-              brukerManglerAdresse={false}
             />
           </MemoryRouter>
         </RestApiMock>,
@@ -90,13 +87,9 @@ describe('<FagsakProfileIndex>', () => {
         <RestApiMock data={data} requestApi={requestApi}>
           <MemoryRouter>
             <FagsakProfileIndex
-              fagsak={fagsak as Fagsak}
-              alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
-              harHentetBehandlinger
+              fagsakData={new FagsakData(fagsak as Fagsak)}
               oppfriskBehandlinger={jest.fn()}
               behandlingUuid="1"
-              fagsakRettigheter={fagsakRettigheter}
-              brukerManglerAdresse={false}
             />
           </MemoryRouter>
         </RestApiMock>,

@@ -3,7 +3,6 @@ import React, {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SupportMenySakIndex, { SupportTabs } from '@navikt/ft-sak-support-meny';
-import { Fagsak, BehandlingAppKontekst } from '@navikt/ft-types';
 
 import { getSupportPanelLocationCreator } from '../app/paths';
 import HistorikkIndex from './historikk/HistorikkIndex';
@@ -15,6 +14,7 @@ import styles from './behandlingSupportIndex.less';
 import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
 
 import '@navikt/ft-sak-support-meny/dist/style.css';
+import FagsakData from '../fagsak/FagsakData';
 
 export const hentSynligePaneler = (behandlingRettigheter?: BehandlingRettigheter): string[] => Object.values(SupportTabs)
   .filter((supportPanel) => {
@@ -39,12 +39,10 @@ export const hentValgbarePaneler = (
   });
 
 interface OwnProps {
-  fagsak: Fagsak;
-  alleBehandlinger: BehandlingAppKontekst[];
+  fagsakData: FagsakData;
   behandlingUuid?: string;
   behandlingVersjon?: number;
   behandlingRettigheter?: BehandlingRettigheter;
-  brukerManglerAdresse: boolean;
 }
 
 /**
@@ -54,12 +52,10 @@ interface OwnProps {
  * støttepanelkomponent ihht. gitt parameter i URL-en.
  */
 const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
-  fagsak,
-  alleBehandlinger,
+  fagsakData,
   behandlingUuid,
   behandlingVersjon,
   behandlingRettigheter,
-  brukerManglerAdresse,
 }) => {
   const { selected: valgtSupportPanel, location } = useTrackRouteParam<string>({
     paramName: 'stotte',
@@ -69,12 +65,13 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   const [meldingFormData, setMeldingForData] = useState();
   const [beslutterFormData, setBeslutterForData] = useState();
 
-  const behandling = alleBehandlinger.find((b) => b.uuid === behandlingUuid);
+  const fagsak = fagsakData.getFagsak();
+  const behandling = fagsakData.getAlleBehandlinger().find((b) => b.uuid === behandlingUuid);
 
   const navigate = useNavigate();
 
   const erPaVent = behandling ? behandling.behandlingPaaVent : false;
-  const erSendMeldingRelevant = fagsak && !erPaVent;
+  const erSendMeldingRelevant = fagsakData && !erPaVent;
 
   const synligeSupportPaneler = useMemo(() => hentSynligePaneler(behandlingRettigheter),
     [behandlingRettigheter]);
@@ -114,6 +111,8 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
             saksnummer={fagsak.saksnummer}
             behandlingUuid={behandlingUuid}
             behandlingVersjon={behandlingVersjon}
+            historikkinnslagFpSak={fagsakData.getHistorikkFpSak()}
+            historikkinnslagFpTilbake={fagsakData.getHistorikkFpTilbake()}
           />
         )}
         {behandling && aktivtSupportPanel === SupportTabs.MELDINGER && (
@@ -122,7 +121,6 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
             valgtBehandling={behandling}
             meldingFormData={meldingFormData}
             setMeldingForData={setMeldingForData}
-            brukerManglerAdresse={brukerManglerAdresse}
           />
         )}
         {aktivtSupportPanel === SupportTabs.DOKUMENTER && (

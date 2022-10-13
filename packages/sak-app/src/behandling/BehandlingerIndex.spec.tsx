@@ -2,24 +2,26 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 
-import { BehandlingAppKontekst, Fagsak } from '@navikt/ft-types';
+import { BehandlingAppKontekst } from '@navikt/ft-types';
 
+import { Fagsak } from '@fpsak-frontend/types';
+
+import FagsakData from '../fagsak/FagsakData';
 import { BehandlingerIndex } from './BehandlingerIndex';
 
 describe('BehandlingerIndex', () => {
   it('skal rendre komponent korrekt', async () => {
     const fagsak = {
       saksnummer: '123',
-    };
-    const alleBehandlinger = [{
-      uuid: '1',
-    }];
+      behandlinger: [{
+        uuid: '1',
+      }] as BehandlingAppKontekst[],
+    } as Fagsak;
 
     render(
       <MemoryRouter>
         <BehandlingerIndex
-          fagsak={fagsak as Fagsak}
-          alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
+          fagsakData={new FagsakData(fagsak)}
           setBehandlingUuidOgVersjon={jest.fn()}
           setRequestPendingMessage={jest.fn()}
         />
