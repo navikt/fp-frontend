@@ -20,7 +20,6 @@ const getInfoTextCode = (
   behandlingsresultat: Behandling['behandlingsresultat'],
   isOpphor: boolean,
   harSammeResultatSomOriginalBehandling?: boolean,
-  erKlageWithKA?: boolean,
 ) => {
   if (behandlingtypeKode === BehandlingType.TILBAKEKREVING) {
     return 'FatterVedtakApprovalModal.Tilbakekreving';
@@ -29,9 +28,6 @@ const getInfoTextCode = (
     return 'FatterVedtakApprovalModal.TilbakekrevingRevurdering';
   }
   if (behandlingtypeKode === BehandlingType.KLAGE) {
-    if (erKlageWithKA) {
-      return 'FatterVedtakApprovalModal.ModalDescriptionKlageKA';
-    }
     return 'FatterVedtakApprovalModal.ModalDescriptionKlage';
   }
   if (behandlingtypeKode === BehandlingType.ANKE) {
@@ -52,12 +48,8 @@ const getInfoTextCode = (
 const getModalDescriptionTextCode = (
   isOpphor: boolean,
   behandlingTypeKode: string,
-  erKlageWithKA?: boolean,
 ) => {
   if (behandlingTypeKode === BehandlingType.KLAGE) {
-    if (erKlageWithKA) {
-      return 'FatterVedtakApprovalModal.ModalDescriptionKlageKA';
-    }
     return 'FatterVedtakApprovalModal.ModalDescriptionKlage';
   }
   if (behandlingTypeKode === BehandlingType.ANKE) {
@@ -77,7 +69,6 @@ const utledInfoTextCode = (
   behandlingTypeKode: string,
   behandlingsresultat: Behandling['behandlingsresultat'],
   isBehandlingsresultatOpphor: boolean,
-  erKlageWithKA?: boolean,
   harSammeResultatSomOriginalBehandling?: boolean,
 ): string => {
   if (allAksjonspunktApproved) {
@@ -87,7 +78,6 @@ const utledInfoTextCode = (
         behandlingsresultat,
         isBehandlingsresultatOpphor,
         harSammeResultatSomOriginalBehandling,
-        erKlageWithKA,
       )
       : '';
   }
@@ -102,15 +92,13 @@ const utledModalDescriptionTextCode = (
   behandlingStatusKode: string,
   behandlingTypeKode: string,
   isBehandlingsresultatOpphor: boolean,
-  erKlageWithKA?: boolean,
 ) => (isStatusFatterVedtak(behandlingStatusKode)
-  ? getModalDescriptionTextCode(isBehandlingsresultatOpphor, behandlingTypeKode, erKlageWithKA)
+  ? getModalDescriptionTextCode(isBehandlingsresultatOpphor, behandlingTypeKode)
   : 'FatterVedtakApprovalModal.ModalDescription');
 
 interface OwnProps {
   closeEvent: () => void;
   allAksjonspunktApproved: boolean;
-  erKlageWithKA?: boolean;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   behandlingStatusKode: string;
   behandlingTypeKode: string;
@@ -130,7 +118,6 @@ const FatterVedtakApprovalModal: FunctionComponent<OwnProps> = ({
   behandlingTypeKode,
   behandlingsresultat,
   harSammeResultatSomOriginalBehandling,
-  erKlageWithKA,
 }) => {
   const intl = useIntl();
   const isBehandlingsresultatOpphor = !!behandlingsresultat && behandlingsresultat.type === behandlingResultatType.OPPHOR;
@@ -140,13 +127,12 @@ const FatterVedtakApprovalModal: FunctionComponent<OwnProps> = ({
     behandlingTypeKode,
     behandlingsresultat,
     isBehandlingsresultatOpphor,
-    erKlageWithKA,
     harSammeResultatSomOriginalBehandling,
   );
 
   const altImgTextCode = utledAltImgTextCode(behandlingStatusKode);
 
-  const modalDescriptionTextCode = utledModalDescriptionTextCode(behandlingStatusKode, behandlingTypeKode, isBehandlingsresultatOpphor, erKlageWithKA);
+  const modalDescriptionTextCode = utledModalDescriptionTextCode(behandlingStatusKode, behandlingTypeKode, isBehandlingsresultatOpphor);
 
   return (
     <Modal

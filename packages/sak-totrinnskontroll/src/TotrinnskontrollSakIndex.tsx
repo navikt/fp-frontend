@@ -13,7 +13,7 @@ import vurderPaNyttArsakType from '@fpsak-frontend/kodeverk/src/vurderPaNyttArsa
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import {
-  BehandlingAppKontekst, AlleKodeverk, KlageVurdering, TotrinnskontrollSkjermlenkeContext, AlleKodeverkTilbakekreving, KodeverkMedNavn,
+  BehandlingAppKontekst, AlleKodeverk, TotrinnskontrollSkjermlenkeContext, AlleKodeverkTilbakekreving, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import { FatterVedtakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -60,7 +60,6 @@ interface OwnProps {
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   location: Location;
   fagsakYtelseType: string;
-  behandlingKlageVurdering?: KlageVurdering;
   alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
   readOnly: boolean;
   onSubmit: (data: {
@@ -83,7 +82,6 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   readOnly,
   onSubmit,
   forhandsvisVedtaksbrev,
-  behandlingKlageVurdering,
   alleKodeverk,
   createLocationForSkjermlenke,
   beslutterFormData,
@@ -147,7 +145,6 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
           onSubmit={submitHandler}
           forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
           erForeldrepengerFagsak={fagsakYtelseType === FagsakYtelseType.FORELDREPENGER}
-          behandlingKlageVurdering={behandlingKlageVurdering}
           arbeidsforholdHandlingTyper={arbeidsforholdHandlingTyper}
           skjemalenkeTyper={skjemalenkeTyper}
           erBehandlingEtterKlage={erBehandlingEtterKlage}
@@ -160,10 +157,9 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
       )}
       {!erStatusFatterVedtak && (
         <TotrinnskontrollSaksbehandlerPanel
+          behandling={behandling}
           totrinnskontrollSkjermlenkeContext={sorterteTotrinnskontrollSkjermlenkeContext}
           erForeldrepengerFagsak={fagsakYtelseType === FagsakYtelseType.FORELDREPENGER}
-          behandlingKlageVurdering={behandlingKlageVurdering}
-          behandlingStatus={behandling.status}
           erTilbakekreving={erTilbakekreving}
           arbeidsforholdHandlingTyper={arbeidsforholdHandlingTyper}
           skjemalenkeTyper={skjemalenkeTyper}

@@ -1,14 +1,13 @@
 import React, { ReactElement } from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
-
 import { ProsessBeregningsgrunnlagAksjonspunktCode } from '@navikt/ft-prosess-beregningsgrunnlag';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
+
 import behandlingStatusCode from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import klageVurderingOmgjoerCodes from '@fpsak-frontend/kodeverk/src/klageVurderingOmgjoer';
+import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import aksjonspunktCodes, { isUttakAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { KodeverkMedNavn, KlageVurdering, TotrinnskontrollAksjonspunkt } from '@fpsak-frontend/types';
+import { KodeverkMedNavn, TotrinnskontrollAksjonspunkt, Behandlingsresultat } from '@fpsak-frontend/types';
 
 import totrinnskontrollaksjonspunktTextCodes, { totrinnsTilbakekrevingkontrollaksjonspunktTextCodes } from '../../totrinnskontrollaksjonspunktTextCodes';
 import OpptjeningTotrinnText from './OpptjeningTotrinnText';
@@ -106,36 +105,31 @@ const getFaktaOmBeregningText = (
   });
 };
 
-const omgjoerTekstMap = {
-  DELVIS_MEDHOLD_I_KLAGE: 'ToTrinnsForm.Klage.DelvisOmgjortTilGunst',
-  GUNST_MEDHOLD_I_KLAGE: 'ToTrinnsForm.Klage.OmgjortTilGunst',
-  UGUNST_MEDHOLD_I_KLAGE: 'ToTrinnsForm.Klage.OmgjortTilUgunst',
-} as Record<string, string>;
-
 const getTextForKlageHelper = (
-  klageVurderingResultat: KlageVurdering['klageVurderingResultatNK'] | KlageVurdering['klageVurderingResultatNFP'],
+  behandlingsresultat: Behandlingsresultat,
 ): ReactElement => {
   let aksjonspunktTextId = '';
-  switch (klageVurderingResultat?.klageVurdering) {
-    case klageVurderingCodes.STADFESTE_YTELSESVEDTAK:
+  switch (behandlingsresultat?.type) {
+    case behandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET:
       aksjonspunktTextId = 'ToTrinnsForm.Klage.StadfesteYtelsesVedtak';
       break;
-    case klageVurderingCodes.OPPHEVE_YTELSESVEDTAK:
+    case behandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET:
       aksjonspunktTextId = 'ToTrinnsForm.Klage.OppheveYtelsesVedtak';
       break;
-    case klageVurderingCodes.AVVIS_KLAGE:
+    case behandlingResultatType.KLAGE_AVVIST:
       aksjonspunktTextId = 'ToTrinnsForm.Klage.Avvist';
       break;
-    case klageVurderingCodes.HJEMSENDE_UTEN_Å_OPPHEVE:
+    case behandlingResultatType.HJEMSENDE_UTEN_OPPHEVE:
       aksjonspunktTextId = 'ToTrinnsForm.Klage.HjemsendUtenOpphev';
       break;
-    case klageVurderingCodes.MEDHOLD_I_KLAGE:
-      if (klageVurderingResultat.klageVurderingOmgjoer
-        && klageVurderingResultat.klageVurderingOmgjoer !== klageVurderingOmgjoerCodes.UDEFINERT) {
-        aksjonspunktTextId = omgjoerTekstMap[klageVurderingResultat.klageVurderingOmgjoer];
-        break;
-      }
-      aksjonspunktTextId = 'VedtakForm.ResultatKlageMedhold';
+    case behandlingResultatType.KLAGE_DELVIS_MEDHOLD:
+      aksjonspunktTextId = 'ToTrinnsForm.Klage.DelvisOmgjortTilGunst';
+      break;
+    case behandlingResultatType.KLAGE_OMGJORT_UGUNST:
+      aksjonspunktTextId = 'ToTrinnsForm.Klage.OmgjortTilUgunst';
+      break;
+    case behandlingResultatType.KLAGE_MEDHOLD:
+      aksjonspunktTextId = 'ToTrinnsForm.Klage.OmgjortTilGunst';
       break;
     default:
       break;
@@ -143,14 +137,9 @@ const getTextForKlageHelper = (
   return <FormattedMessage id={aksjonspunktTextId} />;
 };
 
-const getTextForKlage = (behandlingStaus: string, klagebehandlingVurdering?: KlageVurdering): ReactElement[] => {
+const getTextForKlage = (behandlingStaus: string, behandlingsresultat: Behandlingsresultat): ReactElement[] => {
   if (behandlingStaus === behandlingStatusCode.FATTER_VEDTAK) {
-    if (klagebehandlingVurdering?.klageVurderingResultatNK) {
-      return [getTextForKlageHelper(klagebehandlingVurdering.klageVurderingResultatNK)];
-    }
-    if (klagebehandlingVurdering?.klageVurderingResultatNFP) {
-      return [getTextForKlageHelper(klagebehandlingVurdering.klageVurderingResultatNFP)];
-    }
+    return [getTextForKlageHelper(behandlingsresultat)];
   }
   return [];
 };
@@ -168,7 +157,7 @@ const getAksjonspunkttekst = (
   faktaOmBeregningTilfeller: KodeverkMedNavn[],
   erTilbakekreving: boolean,
   aksjonspunkt: TotrinnskontrollAksjonspunkt,
-  klagebehandlingVurdering?: KlageVurdering,
+  behandlingsresultat?: Behandlingsresultat,
 ): ReactElement[] => {
   if (aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING) {
     return buildOpptjeningText(aksjonspunkt);
@@ -190,7 +179,7 @@ const getAksjonspunkttekst = (
     return getTextForForeldreansvarsvilkåretAndreLedd(isForeldrepenger);
   }
   if (erKlageAksjonspunkt(aksjonspunkt)) {
-    return getTextForKlage(behandlingStatus, klagebehandlingVurdering);
+    return getTextForKlage(behandlingStatus, behandlingsresultat);
   }
   if (erTilbakekreving) {
     return getTextFromTilbakekrevingAksjonspunktkode(aksjonspunkt);

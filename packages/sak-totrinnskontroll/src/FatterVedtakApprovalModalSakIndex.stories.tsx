@@ -17,18 +17,15 @@ const Template: Story<{
   closeEvent: () => void,
   behandling: Behandling,
   allAksjonspunktApproved: boolean,
-  erKlageWithKA?: boolean;
 }> = ({
   closeEvent,
   behandling,
   allAksjonspunktApproved,
-  erKlageWithKA = false,
 }) => (
   <FatterVedtakTotrinnskontrollModalSakIndex
     behandling={behandling}
     closeEvent={closeEvent}
     allAksjonspunktApproved={allAksjonspunktApproved}
-    erKlageWithKA={erKlageWithKA}
     harSammeResultatSomOriginalBehandling={false}
   />
 );
@@ -42,7 +39,6 @@ EtterFatterVedtakOgGodkjent.args = {
     type: behandlingType.FORSTEGANGSSOKNAD,
   } as Behandling,
   allAksjonspunktApproved: true,
-  erKlageWithKA: true,
 };
 
 export const EtterGodkjenning = Template.bind({});
@@ -85,16 +81,4 @@ EtterTilbakesendingTilSaksbehandler.args = {
     },
   } as Behandling,
   allAksjonspunktApproved: false,
-};
-
-export const EtterTilbakesendingTilSaksbehandlerNårKlageKa = Template.bind({});
-EtterTilbakesendingTilSaksbehandlerNårKlageKa.args = {
-  closeEvent: action('button-click'),
-  behandling: {
-    uuid: '1',
-    status: behandlingStatus.FATTER_VEDTAK,
-    type: behandlingType.KLAGE,
-  } as Behandling,
-  allAksjonspunktApproved: true,
-  erKlageWithKA: true,
 };

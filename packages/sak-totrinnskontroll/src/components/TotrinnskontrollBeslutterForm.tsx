@@ -12,7 +12,7 @@ import { ariaCheck } from '@navikt/ft-form-validators';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { VerticalSpacer, AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import {
-  Behandling, KodeverkMedNavn, KlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext,
+  BehandlingAppKontekst, KodeverkMedNavn, TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 
 import AksjonspunktGodkjenningFieldArray, { AksjonspunktGodkjenningData } from './AksjonspunktGodkjenningFieldArray';
@@ -25,7 +25,7 @@ const erAlleGodkjent = (formState: TotrinnskontrollAksjonspunkt[] = []) => formS
 const erAlleGodkjentEllerAvvist = (formState: TotrinnskontrollAksjonspunkt[] = []) => formState
   .every((ap) => ap.totrinnskontrollGodkjent !== undefined && ap.totrinnskontrollGodkjent !== null);
 
-const harIkkeKonsekvenserForYtelsen = (konsekvenserForYtelsenKoder: string[], behandlingResultat?: Behandling['behandlingsresultat']) => {
+const harIkkeKonsekvenserForYtelsen = (konsekvenserForYtelsenKoder: string[], behandlingResultat?: BehandlingAppKontekst['behandlingsresultat']) => {
   if (!behandlingResultat) {
     return true;
   }
@@ -69,16 +69,15 @@ const buildInitialValues = (totrinnskontrollSkjermlenkeContext: Totrinnskontroll
 });
 
 interface OwnProps {
-  behandling: Behandling;
+  behandling: BehandlingAppKontekst;
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   forhandsvisVedtaksbrev: () => void;
-  behandlingKlageVurdering?: KlageVurdering;
-  erBehandlingEtterKlage?: boolean;
   readOnly: boolean;
   erTilbakekreving: boolean;
   erForeldrepengerFagsak: boolean;
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],
   skjemalenkeTyper: KodeverkMedNavn[];
+  erBehandlingEtterKlage: boolean;
   faktaOmBeregningTilfeller: KodeverkMedNavn[];
   lagLenke: (skjermlenkeCode: string) => Location | undefined;
   onSubmit: (data: FormValues) => void;
@@ -97,7 +96,6 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<OwnProps> = ({
   forhandsvisVedtaksbrev,
   readOnly,
   erBehandlingEtterKlage,
-  behandlingKlageVurdering,
   erForeldrepengerFagsak,
   arbeidsforholdHandlingTyper,
   skjemalenkeTyper,
@@ -108,7 +106,7 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<OwnProps> = ({
   beslutterFormData,
   setBeslutterForData,
 }) => {
-  const erKlage = behandlingKlageVurdering && (!!behandlingKlageVurdering.klageVurderingResultatNFP || !!behandlingKlageVurdering.klageVurderingResultatNK);
+  const erKlage = behandling && behandling.type === BehandlingType.KLAGE;
   const erAnke = behandling && behandling.type === BehandlingType.ANKE;
   const harIkkeKonsekvensForYtelse = useMemo(() => harIkkeKonsekvenserForYtelsen([
     konsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, konsekvensForYtelsen.INGEN_ENDRING,
@@ -136,13 +134,11 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<OwnProps> = ({
         </>
       )}
       <AksjonspunktGodkjenningFieldArray
+        behandling={behandling}
         erForeldrepengerFagsak={erForeldrepengerFagsak}
-        klagebehandlingVurdering={behandlingKlageVurdering}
-        behandlingStatus={behandling.status}
         erTilbakekreving={erTilbakekreving}
         arbeidsforholdHandlingTyper={arbeidsforholdHandlingTyper}
         readOnly={readOnly}
-        klageKA={behandlingKlageVurdering ? !!behandlingKlageVurdering.klageVurderingResultatNK : undefined}
         totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
         skjemalenkeTyper={skjemalenkeTyper}
         faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}

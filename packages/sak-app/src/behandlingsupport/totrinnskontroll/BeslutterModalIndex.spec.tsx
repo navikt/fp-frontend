@@ -32,7 +32,6 @@ describe('<BeslutterModalIndex>', () => {
           behandling={behandling}
           pushLocation={jest.fn()}
           allAksjonspunktApproved
-          erKlageWithKA={false}
         />
       </RestApiMock>,
     );
@@ -46,7 +45,6 @@ describe('<BeslutterModalIndex>', () => {
         behandling={behandling}
         pushLocation={jest.fn()}
         allAksjonspunktApproved
-        erKlageWithKA={false}
       />,
     );
 
