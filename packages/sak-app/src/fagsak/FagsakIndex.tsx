@@ -20,7 +20,7 @@ import {
 } from '../app/paths';
 import FagsakGrid from './components/FagsakGrid';
 import {
-  FpsakApiKeys, restApiHooks,
+  FpsakApiKeys, restApiHooks, requestApi,
 } from '../data/fpsakApi';
 import useHentFagsak from './useHentFagsak';
 
