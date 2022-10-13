@@ -1583,6 +1583,14 @@
     "@formatjs/intl-localematcher" "0.2.31"
     tslib "2.4.0"
 
+"@formatjs/ecma402-abstract@1.13.0":
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/@formatjs/ecma402-abstract/-/ecma402-abstract-1.13.0.tgz#df6db3cbee0182bbd2fd6217103781c802aee819"
+  integrity sha512-CQ8Ykd51jYD1n05dtoX6ns6B9n/+6ZAxnWUAonvHC4kkuAemROYBhHkEB4tm1uVrRlE7gLDqXkAnY51Y0pRCWQ==
+  dependencies:
+    "@formatjs/intl-localematcher" "0.2.31"
+    tslib "2.4.0"
+
 "@formatjs/fast-memoize@1.2.6":
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/@formatjs/fast-memoize/-/fast-memoize-1.2.6.tgz#a442970db7e9634af556919343261a7bbe5e88c3"
@@ -1607,12 +1615,12 @@
     "@formatjs/ecma402-abstract" "1.12.0"
     tslib "2.4.0"
 
-"@formatjs/intl-datetimeformat@6.2.0":
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl-datetimeformat/-/intl-datetimeformat-6.2.0.tgz#4fce81c5045469bbc3afb4e539c3bcf0b961352a"
-  integrity sha512-5oPDeXiKKE8nOoN+a9K5HW7hr8B/Z6px4lxsHG5MJ4XspI9hnYkzpJpfKuARN33mz7ZkaGNrbt82I/4B0rtjCA==
+"@formatjs/intl-datetimeformat@6.3.0":
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-datetimeformat/-/intl-datetimeformat-6.3.0.tgz#b3a4a5e7d362197276aca9e54c7224e8bd74fe6b"
+  integrity sha512-kjEmtcQ5yZRUd2esS+L5sLsN6O5k9LGRVvt+UKzI7E6dO5LWJ5hG6QYeduILO6OfVJ3Ph/i49NA9UKtLC8oTsw==
   dependencies:
-    "@formatjs/ecma402-abstract" "1.12.0"
+    "@formatjs/ecma402-abstract" "1.13.0"
     "@formatjs/intl-localematcher" "0.2.31"
     tslib "2.4.0"
 
