@@ -7,7 +7,7 @@ import {
 } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import {
-  ForhåndsvisMeldingParams, KlageVurdering, NavAnsatt, TotrinnskontrollSkjermlenkeContext, FagsakEnkel, Fagsak, FagsakDataFpTilbake,
+  ForhåndsvisMeldingParams, NavAnsatt, TotrinnskontrollSkjermlenkeContext, FagsakEnkel, Fagsak, FagsakDataFpTilbake,
 } from '@fpsak-frontend/types';
 
 import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
@@ -56,7 +56,6 @@ export const FpsakApiKeys = {
   NEW_BEHANDLING_FPTILBAKE: new RestKey<boolean, any>('NEW_BEHANDLING_FPTILBAKE'),
   KONTROLLRESULTAT: new RestKey<Risikoklassifisering, void>('KONTROLLRESULTAT'),
   RISIKO_AKSJONSPUNKT: new RestKey<Aksjonspunkt, void>('RISIKO_AKSJONSPUNKT'),
-  TOTRINNS_KLAGE_VURDERING: new RestKey<KlageVurdering, void>('TOTRINNS_KLAGE_VURDERING'),
   TOTRINNSAKSJONSPUNKT_ARSAKER: new RestKey<TotrinnskontrollSkjermlenkeContext[], void>('TOTRINNSAKSJONSPUNKT_ARSAKER'),
   TOTRINNSAKSJONSPUNKT_ARSAKER_READONLY: new RestKey<TotrinnskontrollSkjermlenkeContext[], void>('TOTRINNSAKSJONSPUNKT_ARSAKER_READONLY'),
   AKTOER_INFO: new RestKey<Aktor, { aktoerId: string }>('AKTOER_INFO'),
@@ -94,7 +93,6 @@ const endpoints = new RestApiConfigBuilder()
   // Behandling
   .withRel('kontrollresultat', FpsakApiKeys.KONTROLLRESULTAT)
   .withRel('risikoklassifisering-aksjonspunkt', FpsakApiKeys.RISIKO_AKSJONSPUNKT)
-  .withRel('klage-vurdering', FpsakApiKeys.TOTRINNS_KLAGE_VURDERING)
   .withRel('totrinnskontroll-arsaker', FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER)
   .withRel('totrinnskontroll-arsaker-readOnly', FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER_READONLY)
   .withRel('har-samme-resultat', FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT)

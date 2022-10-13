@@ -9,7 +9,7 @@ import checkImg from '@fpsak-frontend/assets/images/check.svg';
 import avslattImg from '@fpsak-frontend/assets/images/avslaatt.svg';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import {
-  KodeverkMedNavn, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
+  KodeverkMedNavn, BehandlingAppKontekst, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 
 import getAksjonspunkttekst from './aksjonspunktTekster/aksjonspunktTekstUtleder';
@@ -17,10 +17,9 @@ import getAksjonspunkttekst from './aksjonspunktTekster/aksjonspunktTekstUtleder
 import styles from './totrinnskontrollSaksbehandlerPanel.less';
 
 interface OwnProps {
+  behandling: BehandlingAppKontekst;
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   erForeldrepengerFagsak: boolean;
-  behandlingKlageVurdering?: KlageVurdering,
-  behandlingStatus: string,
   erTilbakekreving: boolean,
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],
   skjemalenkeTyper: KodeverkMedNavn[];
@@ -30,10 +29,9 @@ interface OwnProps {
 }
 
 const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
+  behandling,
   totrinnskontrollSkjermlenkeContext,
   erForeldrepengerFagsak,
-  behandlingKlageVurdering,
-  behandlingStatus,
   arbeidsforholdHandlingTyper,
   erTilbakekreving,
   skjemalenkeTyper,
@@ -64,8 +62,15 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
               </NavLink>
             )}
             {aksjonspunkter.map((aksjonspunkt) => {
-              const aksjonspunktTexts = getAksjonspunkttekst(erForeldrepengerFagsak, behandlingStatus,
-                arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt, behandlingKlageVurdering);
+              const aksjonspunktTexts = getAksjonspunkttekst(
+                erForeldrepengerFagsak,
+                behandling.status,
+                arbeidsforholdHandlingTyper,
+                faktaOmBeregningTilfeller,
+                erTilbakekreving,
+                aksjonspunkt,
+                behandling.behandlingsresultat,
+              );
 
               return (
                 <div key={aksjonspunkt.aksjonspunktKode} className={styles.approvalItemContainer}>

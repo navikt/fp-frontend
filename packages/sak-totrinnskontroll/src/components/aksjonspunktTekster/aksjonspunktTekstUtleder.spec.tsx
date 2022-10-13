@@ -2,22 +2,14 @@ import React from 'react';
 
 import { ProsessBeregningsgrunnlagAksjonspunktCode } from '@navikt/ft-prosess-beregningsgrunnlag';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import klageVurderingOmgjoerCodes from '@fpsak-frontend/kodeverk/src/klageVurderingOmgjoer';
 import behandlingStatusCodes from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
-import { KlageVurdering, KodeverkMedNavn, TotrinnskontrollAksjonspunkt } from '@fpsak-frontend/types';
+import { Behandlingsresultat, KodeverkMedNavn, TotrinnskontrollAksjonspunkt } from '@fpsak-frontend/types';
+import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 
 import getAksjonspunkttekst from './aksjonspunktTekstUtleder';
 
-const medholdIKlage = {
-  klageVurdering: klageVurderingCodes.MEDHOLD_I_KLAGE,
-  klageVurderingOmgjoer: klageVurderingOmgjoerCodes.GUNST_MEDHOLD_I_KLAGE,
-};
-const oppheveYtelsesVedtak = { klageVurdering: klageVurderingCodes.OPPHEVE_YTELSESVEDTAK };
-const avvistKlage = { klageVurdering: klageVurderingCodes.AVVIS_KLAGE };
 const behandlingStatusFVED = behandlingStatusCodes.FATTER_VEDTAK;
-const stadfesteKlage = { klageVurdering: klageVurderingCodes.STADFESTE_YTELSESVEDTAK };
 
 const arbeidsforholdHandlingTyper = [
   { kode: 'BRUK', navn: 'aaa', kodeverk: '' },
@@ -599,10 +591,10 @@ describe('<aksjonspunktTekstUtleder>', () => {
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
-    const klagebehandlingVurdering = {
-      klageVurderingResultatNFP: medholdIKlage,
-    } as KlageVurdering;
-    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, klagebehandlingVurdering);
+    const behandlingsresultat = {
+      type: behandlingResultatType.KLAGE_MEDHOLD,
+    } as Behandlingsresultat;
+    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, behandlingsresultat);
     // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.OmgjortTilGunst');
   });
@@ -612,92 +604,92 @@ describe('<aksjonspunktTekstUtleder>', () => {
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
-    const klagebehandlingVurdering = {
-      klageVurderingResultatNK: medholdIKlage,
-    } as KlageVurdering;
-    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], faktaOmBeregningTilfeller, false, aksjonspunkt, klagebehandlingVurdering);
+    const behandlingsresultat = {
+      type: behandlingResultatType.KLAGE_MEDHOLD,
+    } as Behandlingsresultat;
+    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], faktaOmBeregningTilfeller, false, aksjonspunkt, behandlingsresultat);
     // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.OmgjortTilGunst');
   });
   // Klage avslag
   // Ytelsesvedtak opphevet
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag ytelsesvedtak opphevet', () => {
-    const klagebehandlingVurdering = {
-      klageVurderingResultatNFP: oppheveYtelsesVedtak,
-    } as KlageVurdering;
+    const behandlingsresultat = {
+      type: behandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET,
+    } as Behandlingsresultat;
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], faktaOmBeregningTilfeller, false, aksjonspunkt, klagebehandlingVurdering);
+    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], faktaOmBeregningTilfeller, false, aksjonspunkt, behandlingsresultat);
     // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.OppheveYtelsesVedtak');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5036 avslag ytelsesvedtak opphevet', () => {
-    const klagebehandlingVurdering = {
-      klageVurderingResultatNK: oppheveYtelsesVedtak,
-    } as KlageVurdering;
+    const behandlingsresultat = {
+      type: behandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET,
+    } as Behandlingsresultat;
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], faktaOmBeregningTilfeller, false, aksjonspunkt, klagebehandlingVurdering);
+    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], faktaOmBeregningTilfeller, false, aksjonspunkt, behandlingsresultat);
     // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.OppheveYtelsesVedtak');
   });
   // Klage avvist
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag klage avvist', () => {
-    const klagebehandlingVurdering = {
-      klageVurderingResultatNFP: avvistKlage,
-    } as KlageVurdering;
+    const behandlingsresultat = {
+      type: behandlingResultatType.KLAGE_AVVIST,
+    } as Behandlingsresultat;
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, klagebehandlingVurdering);
+    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, behandlingsresultat);
     // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.Avvist');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5036 avslag klage avvist', () => {
-    const klagebehandlingVurdering = {
-      klageVurderingResultatNK: avvistKlage,
-    } as KlageVurdering;
+    const behandlingsresultat = {
+      type: behandlingResultatType.KLAGE_AVVIST,
+    } as Behandlingsresultat;
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, klagebehandlingVurdering);
+    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, behandlingsresultat);
     // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.Avvist');
   });
   // Ikke fastsatt Engangsstønad
   it('skal vise korrekt tekst for aksjonspunkt 5036 avslag ikke fastsatt', () => {
-    const klagebehandlingVurdering = {
-      klageVurderingResultatNFP: stadfesteKlage,
-    } as KlageVurdering;
+    const behandlingsresultat = {
+      type: behandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET,
+    } as Behandlingsresultat;
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, klagebehandlingVurdering);
+    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, behandlingsresultat);
     // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5036 avslag ytelsesvedtak stadfestet', () => {
-    const klagebehandlingVurdering = {
-      klageVurderingResultatNK: stadfesteKlage,
-    } as KlageVurdering;
+    const behandlingsresultat = {
+      type: behandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET,
+    } as Behandlingsresultat;
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, klagebehandlingVurdering);
+    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, behandlingsresultat);
     // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
   });

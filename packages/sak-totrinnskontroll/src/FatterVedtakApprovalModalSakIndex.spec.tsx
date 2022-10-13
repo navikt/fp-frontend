@@ -5,7 +5,7 @@ import { Modal } from '@navikt/ds-react';
 import * as stories from './FatterVedtakApprovalModalSakIndex.stories';
 
 const {
-  EtterGodkjenning, EtterGodkjenningAvKlage, EtterTilbakesendingTilSaksbehandler, EtterTilbakesendingTilSaksbehandlerNårKlageKa, EtterFatterVedtakOgGodkjent,
+  EtterGodkjenning, EtterGodkjenningAvKlage, EtterTilbakesendingTilSaksbehandler, EtterFatterVedtakOgGodkjent,
 } = composeStories(stories);
 
 describe('<FatterVedtakApprovalModalSakIndex>', () => {
@@ -31,13 +31,6 @@ describe('<FatterVedtakApprovalModalSakIndex>', () => {
     render(<EtterTilbakesendingTilSaksbehandler />);
 
     expect(await screen.findByText('Vedtak returneres til saksbehandler for ny vurdering.')).toBeInTheDocument();
-    expect(screen.getByText('Du kommer nå til forsiden.')).toBeInTheDocument();
-  });
-
-  it('skal vise modal etter tilbakesending til saksbehandler for klageKa', async () => {
-    render(<EtterTilbakesendingTilSaksbehandlerNårKlageKa />);
-
-    expect(await screen.findByText('Returneres til saksbehandler for iverksettelse')).toBeInTheDocument();
     expect(screen.getByText('Du kommer nå til forsiden.')).toBeInTheDocument();
   });
 

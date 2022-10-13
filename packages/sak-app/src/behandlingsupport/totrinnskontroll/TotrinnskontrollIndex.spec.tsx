@@ -87,7 +87,6 @@ describe('<TotrinnskontrollIndex>', () => {
       { key: FpsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
       { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: kodeverk },
       { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
-      { key: FpsakApiKeys.TOTRINNS_KLAGE_VURDERING.name, data: {} },
       { key: FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT.name, data: undefined },
       { key: FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER.name, data: totrinnskontrollAksjonspunkter },
     ];

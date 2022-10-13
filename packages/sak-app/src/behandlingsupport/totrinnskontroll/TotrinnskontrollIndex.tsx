@@ -11,9 +11,7 @@ import { FatterVedtakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
 import { createLocationForSkjermlenke } from '../../app/paths';
 import { useKodeverk } from '../../data/useKodeverk';
-import {
-  FpsakApiKeys, requestApi, restApiHooks,
-} from '../../data/fpsakApi';
+import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 import BeslutterModalIndex from './BeslutterModalIndex';
 
 type Values = {
@@ -91,14 +89,6 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
     },
   );
 
-  const { data: totrinnsKlageVurdering } = restApiHooks.useRestApi(
-    FpsakApiKeys.TOTRINNS_KLAGE_VURDERING, undefined, {
-      keepData: true,
-      updateTriggers: [uuid, versjon],
-      suspendRequest: !requestApi.hasPath(FpsakApiKeys.TOTRINNS_KLAGE_VURDERING.name),
-    },
-  );
-
   const { startRequest: godkjennTotrinnsaksjonspunkter } = restApiHooks.useRestApiRunner(FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT);
 
   const forhandsvisMelding = useVisForhandsvisningAvMelding(type);
@@ -130,7 +120,6 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
         forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
         fagsakYtelseType={fagsak.fagsakYtelseType}
         alleKodeverk={alleKodeverk}
-        behandlingKlageVurdering={totrinnsKlageVurdering}
         createLocationForSkjermlenke={createLocationForSkjermlenke}
         beslutterFormData={beslutterFormData}
         setBeslutterForData={setBeslutterForData}
@@ -140,7 +129,6 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
           behandling={valgtBehandling}
           pushLocation={navigate}
           allAksjonspunktApproved={erAlleAksjonspunktGodkjent}
-          erKlageWithKA={totrinnsKlageVurdering ? !!totrinnsKlageVurdering.klageVurderingResultatNK : undefined}
         />
       )}
     </>

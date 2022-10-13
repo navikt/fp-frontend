@@ -116,7 +116,6 @@
   "FatterVedtakApprovalModal.InnvilgetVedtak": "Vedtaket er innvilget og blir iverksatt",
   "FatterVedtakApprovalModal.OpphortVedtak": "Vedtaket er opphørt.",
   "FatterVedtakApprovalModal.ModalDescriptionKlage": "Resultatet av klagebehandlingen blir iverksatt",
-  "FatterVedtakApprovalModal.ModalDescriptionKlageKA": "Returneres til saksbehandler for iverksettelse",
   "FatterVedtakApprovalModal.Tilbakekreving": "Tilbakekreving er vedtatt og iverksatt",
   "FatterVedtakApprovalModal.TilbakekrevingRevurdering": "Tilbakekreving revurdering er vedtatt og iverksatt"
 }

@@ -7,16 +7,17 @@ import { Location } from 'history';
 import {
   ArrowBox, FlexColumn, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-
-import {
-  KodeverkMedNavn, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
-} from '@fpsak-frontend/types';
+import { BehandlingType } from '@navikt/ft-kodeverk';
 import {
   CheckboxField, TextAreaField, RadioGroupPanel, formHooks, useCustomValidation,
 } from '@navikt/ft-form-hooks';
 import {
   hasValidText, maxLength, minLength, required, isRequiredMessage,
 } from '@navikt/ft-form-validators';
+
+import {
+  KodeverkMedNavn, TotrinnskontrollSkjermlenkeContext, BehandlingAppKontekst,
+} from '@fpsak-frontend/types';
 
 import getAksjonspunkttekst from './aksjonspunktTekster/aksjonspunktTekstUtleder';
 
@@ -41,13 +42,11 @@ export type AksjonspunktGodkjenningData = {
 }
 
 type OwnProps = {
+  behandling: BehandlingAppKontekst;
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   readOnly: boolean;
   showBegrunnelse?: boolean;
-  klageKA?: boolean;
   erForeldrepengerFagsak: boolean;
-  klagebehandlingVurdering?: KlageVurdering,
-  behandlingStatus: string,
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],
   erTilbakekreving: boolean,
   skjemalenkeTyper: KodeverkMedNavn[];
@@ -55,14 +54,12 @@ type OwnProps = {
   lagLenke: (skjermlenkeCode: string) => Location | undefined;
 }
 
-export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
+const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
+  behandling,
   totrinnskontrollSkjermlenkeContext,
   readOnly,
   showBegrunnelse = false,
-  klageKA = false,
   erForeldrepengerFagsak,
-  klagebehandlingVurdering,
-  behandlingStatus,
   arbeidsforholdHandlingTyper,
   erTilbakekreving,
   skjemalenkeTyper,
@@ -92,18 +89,18 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
           return null;
         }
 
-        const erKlageKA = klageKA && totrinnskontrollGodkjent;
-        const visKunBegrunnelse = erKlageKA ? totrinnskontrollGodkjent : showBegrunnelse;
-        const visArsaker = erKlageKA || totrinnskontrollGodkjent === false;
+        const erKlage = behandling.type === BehandlingType.KLAGE && totrinnskontrollGodkjent;
+        const visKunBegrunnelse = erKlage ? totrinnskontrollGodkjent : showBegrunnelse;
+        const visArsaker = erKlage || totrinnskontrollGodkjent === false;
 
         const aksjonspunktText = getAksjonspunkttekst(
           erForeldrepengerFagsak,
-          behandlingStatus,
+          behandling.status,
           arbeidsforholdHandlingTyper,
           faktaOmBeregningTilfeller,
           erTilbakekreving,
           totrinnskontrollAksjonspunkt,
-          klagebehandlingVurdering,
+          behandling.behandlingsresultat,
         );
 
         const skjermlenkeTypeKodeverk = skjemalenkeTyper.find((skjemalenkeType) => skjemalenkeType.kode === context.skjermlenkeType);
