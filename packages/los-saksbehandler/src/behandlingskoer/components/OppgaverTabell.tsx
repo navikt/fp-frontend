@@ -192,6 +192,7 @@ const OppgaverTabell: FunctionComponent<OwnProps> = ({
                     srcHover={bubbletextFilledUrl}
                     alt={intl.formatMessage({ id: 'OppgaverTabell.OverfortReservasjon' })}
                     tooltip={createTooltip(oppgave.status)}
+                    alignTooltipLeft
                   />
                   )}
                 </TableColumn>
