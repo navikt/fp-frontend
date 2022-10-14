@@ -40,14 +40,14 @@ interface OwnProps {
   fagsakData: FagsakData;
   behandlingUuid?: string;
   behandlingVersjon?: number;
-  oppfriskBehandlinger: () => void;
+  hentFagsakdataPåNytt: () => void;
 }
 
 const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   fagsakData,
   behandlingUuid,
   behandlingVersjon,
-  oppfriskBehandlinger,
+  hentFagsakdataPåNytt,
 }) => {
   const [showAll, setShowAll] = useState(!behandlingUuid);
   const toggleShowAll = useCallback(() => setShowAll(!showAll), [showAll]);
@@ -90,7 +90,7 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
               fagsakData={fagsakData}
               behandlingUuid={behandlingUuid}
               behandlingVersjon={behandlingVersjon}
-              oppfriskBehandlinger={oppfriskBehandlinger}
+              hentFagsakdataPåNytt={hentFagsakdataPåNytt}
             />
           )}
           renderBehandlingVelger={() => (

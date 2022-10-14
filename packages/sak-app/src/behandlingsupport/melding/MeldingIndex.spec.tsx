@@ -12,6 +12,7 @@ import { Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
 
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import MeldingIndex from './MeldingIndex';
+import FagsakData from '../../fagsak/FagsakData';
 
 describe('<MeldingIndex>', () => {
   Modal.setAppElement('body');
@@ -65,8 +66,8 @@ describe('<MeldingIndex>', () => {
       <RestApiMock data={data} requestApi={requestApi}>
         <MemoryRouter>
           <MeldingIndex
-            fagsak={fagsak as Fagsak}
-            valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+            fagsakData={new FagsakData(fagsak as Fagsak)}
+            valgtBehandlingUuid={valgtBehandling.uuid}
             setMeldingForData={() => undefined}
           />
         </MemoryRouter>
@@ -91,8 +92,8 @@ describe('<MeldingIndex>', () => {
       <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
         <MemoryRouter>
           <MeldingIndex
-            fagsak={fagsak as Fagsak}
-            valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+            fagsakData={new FagsakData(fagsak as Fagsak)}
+            valgtBehandlingUuid={valgtBehandling.uuid}
             setMeldingForData={() => undefined}
           />
         </MemoryRouter>
@@ -132,8 +133,8 @@ describe('<MeldingIndex>', () => {
       <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
         <MemoryRouter>
           <MeldingIndex
-            fagsak={fagsak as Fagsak}
-            valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+            fagsakData={new FagsakData(fagsak as Fagsak)}
+            valgtBehandlingUuid={valgtBehandling.uuid}
             setMeldingForData={() => undefined}
           />
         </MemoryRouter>
@@ -177,8 +178,8 @@ describe('<MeldingIndex>', () => {
       <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
         <MemoryRouter>
           <MeldingIndex
-            fagsak={fagsak as Fagsak}
-            valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+            fagsakData={new FagsakData(fagsak as Fagsak)}
+            valgtBehandlingUuid={valgtBehandling.uuid}
             setMeldingForData={() => undefined}
           />
         </MemoryRouter>

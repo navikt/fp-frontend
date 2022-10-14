@@ -53,7 +53,7 @@ const FagsakIndex: FunctionComponent = () => {
   }), []);
   const { behandlingUuid, behandlingVersjon } = behandlingUuidOgVersjon;
 
-  const oppfriskBehandlinger = useCallback(() => setBehandlingTeller(behandlingerTeller + 1), [behandlingerTeller]);
+  const hentFagsakdataPåNytt = useCallback(() => setBehandlingTeller(behandlingerTeller + 1), [behandlingerTeller]);
 
   const { selected: selectedSaksnummer } = useTrackRouteParam<string>({
     paramName: 'saksnummer',
@@ -81,7 +81,7 @@ const FagsakIndex: FunctionComponent = () => {
   }
 
   const fagsak = fagsakData.getFagsak();
-  const behandling = fagsakData.getAlleBehandlinger().find((b) => b.uuid === behandlingUuid);
+  const behandling = fagsakData.getBehandling(behandlingUuid);
 
   return (
     <>
@@ -108,7 +108,7 @@ const FagsakIndex: FunctionComponent = () => {
                 fagsakData={fagsakData}
                 behandlingUuid={behandlingUuid}
                 behandlingVersjon={behandlingVersjon}
-                oppfriskBehandlinger={oppfriskBehandlinger}
+                hentFagsakdataPåNytt={hentFagsakdataPåNytt}
               />
             )}
           </>

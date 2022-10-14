@@ -65,14 +65,14 @@ interface OwnProps {
   fagsakData: FagsakData;
   behandlingUuid?: string;
   behandlingVersjon?: number;
-  oppfriskBehandlinger: () => void;
+  hentFagsakdataPåNytt: () => void;
 }
 
 const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   fagsakData,
   behandlingUuid,
   behandlingVersjon,
-  oppfriskBehandlinger,
+  hentFagsakdataPåNytt,
 }) => {
   const fagsak = fagsakData.getFagsak();
   const alleBehandlinger = fagsakData.getAlleBehandlinger();
@@ -116,7 +116,7 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   const { startRequest: lagNyBehandlingFpTilbake } = restApiHooks.useRestApiRunner(FpsakApiKeys.NEW_BEHANDLING_FPTILBAKE);
   const lagNyBehandling = useCallback((isTilbakekreving, params) => {
     const lagNy = isTilbakekreving ? lagNyBehandlingFpTilbake : lagNyBehandlingFpSak;
-    lagNy(params).then(() => oppfriskBehandlinger());
+    lagNy(params).then(() => hentFagsakdataPåNytt());
   }, []);
 
   const uuidForSistLukkede = useMemo(() => getUuidForSisteLukkedeForsteEllerRevurd(alleBehandlinger), [alleBehandlinger]);

@@ -117,8 +117,8 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
         )}
         {behandling && aktivtSupportPanel === SupportTabs.MELDINGER && (
           <MeldingIndex
-            fagsak={fagsak}
-            valgtBehandling={behandling}
+            fagsakData={fagsakData}
+            valgtBehandlingUuid={behandlingUuid}
             meldingFormData={meldingFormData}
             setMeldingForData={setMeldingForData}
           />

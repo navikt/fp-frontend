@@ -8,12 +8,12 @@ import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import MeldingerSakIndex, { MessagesModalSakIndex, FormValues } from '@fpsak-frontend/sak-meldinger';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
-import { Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
 
 import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
 import { useFpSakKodeverk } from '../../data/useKodeverk';
 import useVisForhandsvisningAvMelding, { ForhandsvisFunksjon } from '../../data/useVisForhandsvisningAvMelding';
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
+import FagsakData from '../../fagsak/FagsakData';
 
 const getSubmitCallback = (
   setShowMessageModal: (showModal: boolean) => void,
@@ -76,8 +76,8 @@ const getPreviewCallback = (
 };
 
 interface OwnProps {
-  fagsak: Fagsak;
-  valgtBehandling: BehandlingAppKontekst;
+  fagsakData: FagsakData;
+  valgtBehandlingUuid: string;
   meldingFormData?: any,
   setMeldingForData: (data?: any) => void,
 }
@@ -90,8 +90,8 @@ const EMPTY_ARRAY = [] as KodeverkMedNavn[];
  * Container komponent. Har ansvar for å hente mottakere og brevmaler fra serveren.
  */
 const MeldingIndex: FunctionComponent<OwnProps> = ({
-  fagsak,
-  valgtBehandling,
+  fagsakData,
+  valgtBehandlingUuid,
   meldingFormData,
   setMeldingForData,
 }) => {
@@ -99,6 +99,9 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   const [showMessagesModal, setShowMessageModal] = useState(false);
 
   const navigate = useNavigate();
+
+  const fagsak = fagsakData.getFagsak();
+  const valgtBehandling = fagsakData.getBehandling(valgtBehandlingUuid);
 
   const navAnsatt = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
 
