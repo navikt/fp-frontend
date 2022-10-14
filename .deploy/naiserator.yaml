@@ -64,4 +64,8 @@ spec:
     - name: CORS_ALLOWED_METHODS
       value: "GET, POST"
     - name: PROXY_CONFIG
-      value: {{proxy}}
+      value: '{"apis":[
+              {{#each proxyRedirects}}
+                {"path":"{{path}}", "url":"{{url}}", "scopes":"{{scope}}"},
+              {{/each}}
+              ]}'

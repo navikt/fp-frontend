@@ -16,5 +16,31 @@
     "fpoppdrag.prod-fss-pub.nais.io",
     "fptilbake.prod-fss-pub.nais.io"
   ],
-  "proxy": "'{\"apis\":[{\"path\":\"/fpsak/api\",\"url\":\"https://fpsak-api.prod-fss-pub.nais.io\",\"scopes\":\"api://prod-fss.teamforeldrepenger.fpsak/.default\"}, {\"path\":\"/fptilbake/api\",\"url\":\"https://fptilbake.prod-fss-pub.nais.io\",\"scopes\":\"api://prod-fss.teamforeldrepenger.fptilbake/.default\"}, {\"path\":\"/fplos/api\",\"url\":\"https://fplos.prod-fss-pub.nais.io\",\"scopes\":\"api://prod-fss.teamforeldrepenger.fplos/.default\"}, {\"path\":\"/fpoppdrag/api\",\"url\":\"https://fpoppdrag.prod-fss-pub.nais.io\",\"scopes\":\"api://prod-fss.teamforeldrepenger.fpoppdrag/.default\"}, {\"path\":\"/fpformidling/api\",\"url\":\"https://fpformidling.prod-fss-pub.nais.io\",\"scopes\":\"api://prod-fss.teamforeldrepenger.fpformidling/.default\"}]}'"
+  "proxyRedirects": [
+    {
+      "path": "/fpsak/api",
+      "url": "https://fpsak-api.prod-fss-pub.nais.io",
+      "scope": "api://prod-fss.teamforeldrepenger.fpsak/.default"
+    },
+    {
+      "path": "/fptilbake/api",
+      "url": "https://fptilbake.prod-fss-pub.nais.io",
+      "scope": "api://prod-fss.teamforeldrepenger.fptilbake/.default"
+    },
+    {
+      "path": "/fpoppdrag/api",
+      "url": "https://fpoppdrag.prod-fss-pub.nais.io",
+      "scope": "api://prod-fss.teamforeldrepenger.fpoppdrag/.default"
+    },
+    {
+      "path": "/fpformidling/api",
+      "url": "https://fpformidling.prod-fss-pub.nais.io",
+      "scope": "api://prod-fss.teamforeldrepenger.fpformidling/.default"
+    },
+    {
+      "path": "/fplos/api",
+      "url": "https://fplos.prod-fss-pub.nais.io",
+      "scope": "api://prod-fss.teamforeldrepenger.fplos/.default"
+    }
+  ]
 }
