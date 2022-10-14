@@ -66,6 +66,7 @@ spec:
     - name: PROXY_CONFIG
       value: '{"apis":[
               {{#each proxyRedirects}}
-                {"path":"{{path}}", "url":"{{url}}", "scopes":"{{scope}}"},
+                {"path":"{{path}}", "url":"{{url}}", "scopes":"{{scope}}"}{{#unless @last}},{{/unless}}
               {{/each}}
-              ]}'
+              ]
+            }'
