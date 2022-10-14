@@ -61,6 +61,17 @@ const cors = {
   }) || '',
 }
 
+const configValueAsJson = ({ name, required = true }) => {
+  const value = envVar({ name, required });
+  if (!value) { return null; }
+  try {
+    return JSON.parse(value);
+  } catch (error) {
+    logger.error(`Config: '${name}' er ikke et gyldig JSON-objekt.`, error);
+    process.exit(1);
+  }
+};
+
 const getProxyConfig = () => {
   var config = configValueAsJson({ name: 'PROXY_CONFIG' });
   if (!config.apis) {
@@ -80,60 +91,10 @@ const getProxyConfig = () => {
       logger.error(`Api entry ${index} mangler 'scopes'`);
       process.exit(1);
     }
-    entry.id = `api-${entry.path}-${index}`;
   });
+
   return config;
 };
-
-const configValueAsJson = ({ name, secret = false, required = true }) => {
-  const value = configValue({ name, secret, required });
-  if (!value) { return null; }
-  try {
-    return JSON.parse(value);
-  } catch (error) {
-    logger.error(`Config: '${name}' er ikke et gyldig JSON-objekt.`, error);
-    process.exit(1);
-  }
-};
-
-
-const configValue = ({name, secret = false, required = true}) => {
-  // Finner ut hvor vi skal lete etter config
-  const pointer = process.env[name];
-  if (!pointer && required) {
-    logger.error(`Config: Mangler environment variable ${name}`);
-    process.exit(1);
-  } else if (!pointer) {
-    logger.info(`Config: Optional ${name} ikke satt.`);
-    return null;
-  }
-
-  // Setter configverdi
-  let value = pointer;
-
-  // Validerer
-  if (!value && required) {
-    logger.error(`Config: Mangler verdi på ${pointer}`);
-    process.exit(1);
-  } else if (!value) {
-    logger.info(`Config: Optional ${name} ikke satt.`);
-    return null;
-  }
-
-  // Logger
-  if (secret) {
-    if (pointer.startsWith(VALUE_PREFIX)) {
-      logger.info(`Config: ${name}=*** (hentet fra ${VALUE_PREFIX}***)`);
-    } else {
-      logger.info(`Config: ${name}=*** (hentet fra ${pointer})`);
-    }
-  } else {
-    logger.info(`Config: ${name}=${value} (hentet fra ${pointer})`);
-  }
-
-  return value;
-};
-
 
 export default {
   server,
