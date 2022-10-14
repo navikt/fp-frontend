@@ -43,7 +43,7 @@ const options = {
       secure: false,
       changeOrigin: (!!process.env.APP_URL_LOS),
     },
-    '/fpsak/(api|jetty)/**': {
+    '/fpsak/api/**': {
       target: process.env.APP_URL_FPSAK || 'http://127.0.0.1:8080',
       secure: false,
       changeOrigin: (!!process.env.APP_URL_FPSAK),
@@ -76,6 +76,5 @@ const wds = new WebpackDevServer(options, webpack(config));
   }
 
   console.log('Listening at http://localhost:9000/');
-
   console.log('If running agains VTP you can login or change user here: http://localhost:9000/login-with-vtp');
 })();
