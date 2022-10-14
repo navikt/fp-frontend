@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Panel } from '@navikt/ds-react';
-import { dateFormat } from '@navikt/ft-utils';
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import ReactECharts from '../../../../utils/ReactECharts';
@@ -69,7 +69,7 @@ export const NyeOgFerdigstilteOppgaverForIdagGraf: FunctionComponent<OwnProps & 
                   if (params.axisDimension === 'y') {
                     return parseInt(params.value as string, 10).toString();
                   }
-                  return dateFormat(params.value as string);
+                  return dayjs(params.value).format(DDMMYYYY_DATE_FORMAT);
                 },
               },
             },

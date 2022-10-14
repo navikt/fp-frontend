@@ -4,7 +4,7 @@ import React, {
 import dayjs from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import { Panel } from '@navikt/ds-react';
-import { dateFormat } from '@navikt/ft-utils';
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 
 import OppgaverManueltPaVent from '../../../typer/oppgaverManueltPaVentTsType';
 import ReactECharts from '../../../ReactECharts';
@@ -64,7 +64,7 @@ const ManueltPaVentGraf: FunctionComponent<OwnProps> = ({
                   if (params.axisDimension === 'y') {
                     return parseInt(params.value as string, 10).toString();
                   }
-                  return dateFormat(params.value as string);
+                  return dayjs(params.value).format(DDMMYYYY_DATE_FORMAT);
                 },
               },
             },
