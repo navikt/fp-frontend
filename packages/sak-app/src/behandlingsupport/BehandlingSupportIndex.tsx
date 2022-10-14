@@ -65,7 +65,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   const [beslutterFormData, setBeslutterForData] = useState();
 
   const fagsak = fagsakData.getFagsak();
-  const behandling = fagsakData.getAlleBehandlinger().find((b) => b.uuid === behandlingUuid);
+  const behandling = fagsakData.getBehandling(behandlingUuid);
 
   const navigate = useNavigate();
 
@@ -100,8 +100,8 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
       <div className={(aktivtSupportPanel === SupportTabs.HISTORIKK ? styles.containerHistorikk : styles.container)}>
         {behandling && (aktivtSupportPanel === SupportTabs.TIL_BESLUTTER || aktivtSupportPanel === SupportTabs.FRA_BESLUTTER) && (
           <TotrinnskontrollIndex
-            fagsak={fagsak}
-            valgtBehandling={behandling}
+            fagsakData={fagsakData}
+            valgtBehandlingUuid={behandlingUuid}
             beslutterFormData={beslutterFormData}
             setBeslutterForData={setBeslutterForData}
           />

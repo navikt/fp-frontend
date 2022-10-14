@@ -2,9 +2,7 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 
-import { BehandlingAppKontekst } from '@navikt/ft-types';
-
-import { Fagsak } from '@fpsak-frontend/types';
+import { Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
 
 import FagsakData from '../fagsak/FagsakData';
 import { BehandlingerIndex } from './BehandlingerIndex';

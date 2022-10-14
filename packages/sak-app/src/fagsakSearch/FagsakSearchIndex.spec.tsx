@@ -2,8 +2,8 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
-import { Fagsak } from '@navikt/ft-types';
 
+import { FagsakEnkel } from '@fpsak-frontend/types';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
@@ -22,8 +22,10 @@ describe('<FagsakSearchIndex>', () => {
     fagsakYtelseType: 'ES',
     status: 'OPPR',
     dekningsgrad: 100,
-  };
-  const fagsak2: Partial<Fagsak> = {
+    aktørId: '1',
+    barnFødt: '2019-10-10',
+  } as FagsakEnkel;
+  const fagsak2: Partial<FagsakEnkel> = {
     ...fagsak,
     saksnummer: '23456',
   };

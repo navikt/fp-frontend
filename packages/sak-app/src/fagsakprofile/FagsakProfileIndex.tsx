@@ -7,9 +7,9 @@ import {
 import { Location } from 'history';
 import BehandlingVelgerSakIndex from '@navikt/ft-sak-behandling-velger';
 import FagsakProfilSakIndex from '@navikt/ft-sak-fagsak-profil';
-import { BehandlingAppKontekst } from '@navikt/ft-types';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 
+import { BehandlingAppKontekst } from '@fpsak-frontend/types';
 import UkjentAdresseMeldingIndex from '@fpsak-frontend/sak-ukjent-adresse';
 
 import {

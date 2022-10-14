@@ -5,8 +5,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import TotrinnskontrollSakIndex from '@fpsak-frontend/sak-totrinnskontroll';
 import { FatterVedtakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
 
+import FagsakData from '../../fagsak/FagsakData';
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
 import { createLocationForSkjermlenke } from '../../app/paths';
 import { useKodeverk } from '../../data/useKodeverk';
@@ -42,8 +42,8 @@ const getLagreFunksjon = (
 };
 
 interface OwnProps {
-  fagsak: Fagsak;
-  valgtBehandling: BehandlingAppKontekst;
+  fagsakData: FagsakData;
+  valgtBehandlingUuid: string;
   beslutterFormData?: any;
   setBeslutterForData: (data?: any) => void;
 }
@@ -54,13 +54,16 @@ interface OwnProps {
  * Containerklass ansvarlig for att rita opp vilkår og aksjonspunkter med toTrinnskontroll
  */
 const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
-  fagsak,
-  valgtBehandling,
+  fagsakData,
+  valgtBehandlingUuid,
   beslutterFormData,
   setBeslutterForData,
 }) => {
   const [visBeslutterModal, setVisBeslutterModal] = useState(false);
   const [erAlleAksjonspunktGodkjent, setAlleAksjonspunktTilGodkjent] = useState(false);
+
+  const fagsak = fagsakData.getFagsak();
+  const valgtBehandling = fagsakData.getBehandling(valgtBehandlingUuid);
 
   const location = useLocation();
   const navigate = useNavigate();

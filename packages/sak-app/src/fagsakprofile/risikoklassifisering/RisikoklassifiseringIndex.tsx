@@ -43,7 +43,7 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
   behandlingUuid,
 }) => {
   const fagsak = fagsakData.getFagsak();
-  const behandling = fagsakData.getAlleBehandlinger().find((b) => b.uuid === behandlingUuid);
+  const behandling = fagsakData.getBehandling(behandlingUuid);
   const erPaaVent = behandling ? behandling.behandlingPaaVent : false;
   const behandlingStatus = behandling?.status;
   const behandlingType = behandling?.type;

@@ -2,13 +2,12 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import { MemoryRouter } from 'react-router-dom';
-import { BehandlingAppKontekst, Behandling } from '@navikt/ft-types';
 import {
   BehandlingStatus, BehandlingType, FagsakYtelseType, FagsakStatus,
 } from '@navikt/ft-kodeverk';
 
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import { Fagsak } from '@fpsak-frontend/types';
+import { Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
@@ -23,7 +22,7 @@ describe('<FagsakProfileIndex>', () => {
     behandlendeEnhetId: 'test',
     behandlendeEnhetNavn: 'NAV Viken',
     opprettet: '2017-08-02T00:54:25.455',
-  } as Behandling;
+  } as BehandlingAppKontekst;
 
   const fagsak = {
     saksnummer: '123',

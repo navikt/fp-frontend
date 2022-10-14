@@ -6,7 +6,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import {
   BehandlingType, BehandlingStatus, KodeverkType,
 } from '@navikt/ft-kodeverk';
-import { BehandlingAppKontekst } from '@navikt/ft-types';
 import MenySakIndex, {
   MenyData,
   MenyEndreBehandlendeEnhetIndex,
@@ -21,7 +20,7 @@ import MenySettPaVentIndex, { getMenytekst as getSettPaVentMenytekst } from '@fp
 import MenyHenleggIndex, { getMenytekst as getHenleggMenytekst } from '@fpsak-frontend/sak-meny-henlegg';
 import MenyApneForEndringerIndex, { getMenytekst as getApneForEndringerMenytekst } from '@fpsak-frontend/sak-meny-apne-for-endringer';
 import MenyNyBehandlingIndex, { getMenytekst as getNyBehandlingMenytekst } from '@fpsak-frontend/sak-meny-ny-behandling';
-import { VergeBehandlingmenyValg } from '@fpsak-frontend/types';
+import { VergeBehandlingmenyValg, BehandlingAppKontekst } from '@fpsak-frontend/types';
 
 import behandlingEventHandler from '../behandling/BehandlingEventHandler';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../app/paths';
@@ -77,7 +76,7 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
 }) => {
   const fagsak = fagsakData.getFagsak();
   const alleBehandlinger = fagsakData.getAlleBehandlinger();
-  const behandling = alleBehandlinger.find((b) => b.uuid === behandlingUuid);
+  const behandling = fagsakData.getBehandling(behandlingUuid);
 
   const navigate = useNavigate();
   const location = useLocation();
