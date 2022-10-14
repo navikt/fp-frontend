@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import { Panel } from '@navikt/ds-react';
-import { dateFormat } from '@navikt/ft-utils';
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 
 import ReactECharts from '../../../ReactECharts';
 import OppgaverForForsteStonadsdag from '../../../typer/oppgaverForForsteStonadsdagTsType';
@@ -66,7 +66,7 @@ const OppgaverPerForsteStonadsdagGraf: FunctionComponent<OwnProps> = ({
             axisPointer: {
               snap: true,
               label: {
-                formatter: (params) => dateFormat(params.value as string),
+                formatter: (params) => dayjs(params.value).format(DDMMYYYY_DATE_FORMAT),
               },
             },
           },

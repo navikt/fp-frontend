@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 import dayjs from 'dayjs';
 import { Panel } from '@navikt/ds-react';
 import { KodeverkMedNavn } from '@navikt/ft-types';
-import { ISO_DATE_FORMAT, dateFormat } from '@navikt/ft-utils';
+import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { BehandlingType } from '@navikt/ft-kodeverk';
 
 import ReactECharts from '../../../ReactECharts';
@@ -125,7 +125,7 @@ export const TilBehandlingGraf: FunctionComponent<OwnProps> = ({
                   if (params.axisDimension === 'y') {
                     return parseInt(params.value as string, 10).toString();
                   }
-                  return dateFormat(params.value as string);
+                  return dayjs(params.value).format(DDMMYYYY_DATE_FORMAT);
                 },
               },
             },
