@@ -3,8 +3,6 @@ import { Location, Search } from 'history';
 import { buildPath, formatQueryString, parseQueryString } from '@navikt/ft-utils';
 import { skjermlenkeCodes } from '@fpsak-frontend/konstanter';
 
-const FP_FRONTEND = 'fpsak';
-
 export const AVDELINGSLEDER_PATH = 'avdelingsleder';
 
 const DEFAULT_FAKTA = 'default';
@@ -33,7 +31,7 @@ export const pathToBehandling = (saksnummer: string, behandlingUuid: string): st
 export const pathToMissingPage = (): string => '/404';
 
 export const pathToAnnenPart = (saksnummer: string, behandlingUuid: string)
-  : string => `/${FP_FRONTEND}/fagsak/${saksnummer}/behandling/${behandlingUuid}/?punkt=${DEFAULT_PROSESS_STEG}&fakta=${DEFAULT_FAKTA}`;
+  : string => `/fagsak/${saksnummer}/behandling/${behandlingUuid}/?punkt=${DEFAULT_PROSESS_STEG}&fakta=${DEFAULT_FAKTA}`;
 
 const emptyQueryString = (queryString: string): boolean => queryString === '?' || !queryString;
 

@@ -68,5 +68,4 @@ spec:
               {{#each proxyRedirects}}
                 {"path":"{{path}}", "url":"{{url}}", "scopes":"{{scope}}"}{{#unless @last}},{{/unless}}
               {{/each}}
-              ]
-            }'
+              ]}'
