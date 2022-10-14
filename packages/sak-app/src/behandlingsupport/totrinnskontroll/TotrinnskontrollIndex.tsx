@@ -2,11 +2,10 @@ import React, {
   FunctionComponent, useState, useCallback,
 } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { BehandlingType, BehandlingStatus } from '@navikt/ft-kodeverk';
-import { Fagsak, BehandlingAppKontekst } from '@navikt/ft-types';
 
 import TotrinnskontrollSakIndex from '@fpsak-frontend/sak-totrinnskontroll';
 import { FatterVedtakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
 
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
 import { createLocationForSkjermlenke } from '../../app/paths';
@@ -71,23 +70,8 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
   const alleKodeverk = useKodeverk(valgtBehandling.type);
 
   const {
-    uuid, versjon, type, status,
+    uuid, versjon, type, totrinnskontrollÅrsaker,
   } = valgtBehandling;
-
-  const erInnsynBehandling = type === BehandlingType.DOKUMENTINNSYN;
-
-  const { data: totrinnArsaker } = restApiHooks.useRestApi(
-    FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER, undefined, {
-      updateTriggers: [uuid, status],
-      suspendRequest: !!erInnsynBehandling || status !== BehandlingStatus.FATTER_VEDTAK,
-    },
-  );
-  const { data: totrinnArsakerReadOnly } = restApiHooks.useRestApi(
-    FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER_READONLY, undefined, {
-      updateTriggers: [uuid, status],
-      suspendRequest: !!erInnsynBehandling || status !== BehandlingStatus.BEHANDLING_UTREDES,
-    },
-  );
 
   const { startRequest: godkjennTotrinnsaksjonspunkter } = restApiHooks.useRestApiRunner(FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT);
 
@@ -104,8 +88,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
     setAlleAksjonspunktTilGodkjent, setVisBeslutterModal, godkjennTotrinnsaksjonspunkter),
   [uuid, versjon]);
 
-  const totrinnskontrollSkjermlenkeContext = totrinnArsaker || totrinnArsakerReadOnly;
-  if (!totrinnskontrollSkjermlenkeContext) {
+  if (!totrinnskontrollÅrsaker) {
     return null;
   }
 
@@ -113,7 +96,6 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
     <>
       <TotrinnskontrollSakIndex
         behandling={valgtBehandling}
-        totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
         location={location}
         readOnly={brukernavn === valgtBehandling.ansvarligSaksbehandler || kanVeilede}
         onSubmit={onSubmit}

@@ -4,36 +4,37 @@ import React, {
 import { useNavigate } from 'react-router-dom';
 import SupportMenySakIndex, { SupportTabs } from '@navikt/ft-sak-support-meny';
 
+import { BehandlingTillatteOperasjoner } from '@fpsak-frontend/types';
+
 import { getSupportPanelLocationCreator } from '../app/paths';
 import HistorikkIndex from './historikk/HistorikkIndex';
 import MeldingIndex from './melding/MeldingIndex';
 import DokumentIndex from './dokument/DokumentIndex';
 import TotrinnskontrollIndex from './totrinnskontroll/TotrinnskontrollIndex';
 import useTrackRouteParam from '../app/useTrackRouteParam';
+import FagsakData from '../fagsak/FagsakData';
 import styles from './behandlingSupportIndex.less';
-import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
 
 import '@navikt/ft-sak-support-meny/dist/style.css';
-import FagsakData from '../fagsak/FagsakData';
 
-export const hentSynligePaneler = (behandlingRettigheter?: BehandlingRettigheter): string[] => Object.values(SupportTabs)
+export const hentSynligePaneler = (behandlingTillatteOperasjoner?: BehandlingTillatteOperasjoner): string[] => Object.values(SupportTabs)
   .filter((supportPanel) => {
     switch (supportPanel) {
       case SupportTabs.TIL_BESLUTTER:
-        return behandlingRettigheter && behandlingRettigheter.behandlingTilGodkjenning;
+        return behandlingTillatteOperasjoner && behandlingTillatteOperasjoner.behandlingTilGodkjenning;
       case SupportTabs.FRA_BESLUTTER:
-        return behandlingRettigheter && behandlingRettigheter.behandlingFraBeslutter;
+        return behandlingTillatteOperasjoner && behandlingTillatteOperasjoner.behandlingFraBeslutter;
       default:
         return true;
     }
   });
 
 export const hentValgbarePaneler = (
-  synligePaneler: string[], sendMeldingErRelevant: boolean, behandlingRettigheter?: BehandlingRettigheter,
+  synligePaneler: string[], sendMeldingErRelevant: boolean, behandlingTillatteOperasjoner?: BehandlingTillatteOperasjoner,
 ): string[] => synligePaneler
   .filter((supportPanel) => {
     if (supportPanel === SupportTabs.MELDINGER) {
-      return behandlingRettigheter && sendMeldingErRelevant ? behandlingRettigheter.behandlingKanSendeMelding : false;
+      return behandlingTillatteOperasjoner && sendMeldingErRelevant ? behandlingTillatteOperasjoner.behandlingKanSendeMelding : false;
     }
     return true;
   });
@@ -42,7 +43,6 @@ interface OwnProps {
   fagsakData: FagsakData;
   behandlingUuid?: string;
   behandlingVersjon?: number;
-  behandlingRettigheter?: BehandlingRettigheter;
 }
 
 /**
@@ -55,7 +55,6 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   fagsakData,
   behandlingUuid,
   behandlingVersjon,
-  behandlingRettigheter,
 }) => {
   const { selected: valgtSupportPanel, location } = useTrackRouteParam<string>({
     paramName: 'stotte',
@@ -71,12 +70,13 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   const navigate = useNavigate();
 
   const erPaVent = behandling ? behandling.behandlingPaaVent : false;
+  const behandlingTillatteOperasjoner = behandling?.behandlingTillatteOperasjoner;
   const erSendMeldingRelevant = fagsakData && !erPaVent;
 
-  const synligeSupportPaneler = useMemo(() => hentSynligePaneler(behandlingRettigheter),
-    [behandlingRettigheter]);
-  const valgbareSupportPaneler = useMemo(() => hentValgbarePaneler(synligeSupportPaneler, erSendMeldingRelevant, behandlingRettigheter),
-    [synligeSupportPaneler, erSendMeldingRelevant, behandlingRettigheter]);
+  const synligeSupportPaneler = useMemo(() => hentSynligePaneler(behandlingTillatteOperasjoner),
+    [behandlingTillatteOperasjoner]);
+  const valgbareSupportPaneler = useMemo(() => hentValgbarePaneler(synligeSupportPaneler, erSendMeldingRelevant, behandlingTillatteOperasjoner),
+    [synligeSupportPaneler, erSendMeldingRelevant, behandlingTillatteOperasjoner]);
 
   const defaultSupportPanel = valgbareSupportPaneler.find(() => true) || SupportTabs.HISTORIKK;
   const aktivtSupportPanel = valgbareSupportPaneler.includes(valgtSupportPanel) ? valgtSupportPanel : defaultSupportPanel;

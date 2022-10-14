@@ -51,8 +51,6 @@ describe('<FagsakProfileIndex>', () => {
     const data = [
       { key: FpsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
       { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
-      { key: FpsakApiKeys.RISIKO_AKSJONSPUNKT.name, data: undefined },
-      { key: FpsakApiKeys.KONTROLLRESULTAT.name, data: {} },
       { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
     ];
 
@@ -77,8 +75,6 @@ describe('<FagsakProfileIndex>', () => {
     const data = [
       { key: FpsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
       { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
-      { key: FpsakApiKeys.RISIKO_AKSJONSPUNKT.name, data: undefined },
-      { key: FpsakApiKeys.KONTROLLRESULTAT.name, data: {} },
       { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
     ];
 

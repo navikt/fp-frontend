@@ -21,6 +21,7 @@ import MenySettPaVentIndex, { getMenytekst as getSettPaVentMenytekst } from '@fp
 import MenyHenleggIndex, { getMenytekst as getHenleggMenytekst } from '@fpsak-frontend/sak-meny-henlegg';
 import MenyApneForEndringerIndex, { getMenytekst as getApneForEndringerMenytekst } from '@fpsak-frontend/sak-meny-apne-for-endringer';
 import MenyNyBehandlingIndex, { getMenytekst as getNyBehandlingMenytekst } from '@fpsak-frontend/sak-meny-ny-behandling';
+import { VergeBehandlingmenyValg } from '@fpsak-frontend/types';
 
 import behandlingEventHandler from '../behandling/BehandlingEventHandler';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../app/paths';
@@ -29,7 +30,6 @@ import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 import useGetEnabledApplikasjonContext from '../app/useGetEnabledApplikasjonContext';
 import ApplicationContextPath from '../app/ApplicationContextPath';
 import MenyKodeverk from './MenyKodeverk';
-import BehandlingRettigheter, { VergeBehandlingmenyValg } from '../behandling/behandlingRettigheterTsType';
 
 import '@navikt/ft-sak-meny/dist/style.css';
 import FagsakData from '../fagsak/FagsakData';
@@ -66,7 +66,6 @@ interface OwnProps {
   fagsakData: FagsakData;
   behandlingUuid?: string;
   behandlingVersjon?: number;
-  behandlingRettigheter?: BehandlingRettigheter;
   oppfriskBehandlinger: () => void;
 }
 
@@ -74,7 +73,6 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   fagsakData,
   behandlingUuid,
   behandlingVersjon,
-  behandlingRettigheter,
   oppfriskBehandlinger,
 }) => {
   const fagsak = fagsakData.getFagsak();
@@ -142,9 +140,10 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   }
 
   const erPaVent = behandling ? behandling.behandlingPaaVent : false;
-  const behandlingTypeKode = behandling ? behandling.type : undefined;
+  const behandlingTypeKode = behandling?.type;
+  const behandlingTillatteOperasjoner = behandling?.behandlingTillatteOperasjoner;
 
-  const vergeMenyvalg = behandlingRettigheter?.vergeBehandlingsmeny;
+  const vergeMenyvalg = behandlingTillatteOperasjoner?.vergeBehandlingsmeny;
   const setLocation = () => {
     navigate(getLocationWithDefaultProsessStegAndFakta({
       ...location,
@@ -159,7 +158,7 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   return (
     <MenySakIndex
       data={[
-        new MenyData(behandlingRettigheter?.behandlingKanGjenopptas, getTaAvVentMenytekst())
+        new MenyData(behandlingTillatteOperasjoner?.behandlingKanGjenopptas, getTaAvVentMenytekst())
           .medModal((lukkModal) => (
             <div>
               {behandling && (
@@ -171,7 +170,7 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
               )}
             </div>
           )),
-        new MenyData(behandlingRettigheter?.behandlingKanSettesPaVent, getSettPaVentMenytekst())
+        new MenyData(behandlingTillatteOperasjoner?.behandlingKanSettesPaVent, getSettPaVentMenytekst())
           .medModal((lukkModal) => (
             <MenySettPaVentIndex
               behandlingVersjon={behandlingVersjon}
@@ -181,7 +180,7 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
               erTilbakekreving={behandlingTypeKode === BehandlingType.TILBAKEKREVING || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING}
             />
           )),
-        new MenyData(behandlingRettigheter?.behandlingKanHenlegges, getHenleggMenytekst())
+        new MenyData(behandlingTillatteOperasjoner?.behandlingKanHenlegges, getHenleggMenytekst())
           .medModal((lukkModal) => (
             <div>
               {behandling && (
@@ -197,7 +196,7 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
               )}
             </div>
           )),
-        new MenyData(behandlingRettigheter?.behandlingKanBytteEnhet, getEndreEnhetMenytekst())
+        new MenyData(behandlingTillatteOperasjoner?.behandlingKanBytteEnhet, getEndreEnhetMenytekst())
           .medModal((lukkModal) => (
             <MenyEndreBehandlendeEnhetIndex
               behandlingVersjon={behandlingVersjon}
@@ -208,7 +207,7 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
               lukkModal={lukkModal}
             />
           )),
-        new MenyData(behandlingRettigheter?.behandlingKanOpnesForEndringer, getApneForEndringerMenytekst())
+        new MenyData(behandlingTillatteOperasjoner?.behandlingKanOpnesForEndringer, getApneForEndringerMenytekst())
           .medModal((lukkModal) => (
             <MenyApneForEndringerIndex
               apneBehandlingForEndringer={behandlingEventHandler.opneBehandlingForEndringer}

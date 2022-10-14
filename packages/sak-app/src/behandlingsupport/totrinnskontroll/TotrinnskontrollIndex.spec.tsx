@@ -5,9 +5,10 @@ import userEvent from '@testing-library/user-event';
 import MockAdapter from 'axios-mock-adapter';
 import { Modal } from '@navikt/ds-react';
 import { FagsakYtelseType, BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
-import { Fagsak, BehandlingAppKontekst } from '@navikt/ft-types';
 
-import { TotrinnskontrollAksjonspunkt, BehandlingÅrsak } from '@fpsak-frontend/types';
+import {
+  Fagsak, BehandlingAppKontekst, TotrinnskontrollAksjonspunkt, BehandlingÅrsak,
+} from '@fpsak-frontend/types';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
@@ -88,7 +89,6 @@ describe('<TotrinnskontrollIndex>', () => {
       { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: kodeverk },
       { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
       { key: FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT.name, data: undefined },
-      { key: FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER.name, data: totrinnskontrollAksjonspunkter },
     ];
 
     let axiosMock: MockAdapter;
@@ -99,7 +99,10 @@ describe('<TotrinnskontrollIndex>', () => {
         <MemoryRouter>
           <TotrinnskontrollIndex
             fagsak={fagsak as Fagsak}
-            valgtBehandling={valgtBehandling}
+            valgtBehandling={{
+              ...valgtBehandling,
+              totrinnskontrollÅrsaker: totrinnskontrollAksjonspunkter,
+            }}
             setBeslutterForData={() => undefined}
           />
         </MemoryRouter>

@@ -1,7 +1,13 @@
 export type { default as Aksjonspunkt } from './src/aksjonspunktTsType';
 export type { default as Arbeidsforhold, ArbeidsforholdPermisjon } from './src/arbeidsforholdTsType';
 export type { default as Behandling } from './src/behandlingTsType';
-export type { default as BehandlingAppKontekst, BehandlingÅrsak } from './src/behandlingAppKontekstTsType';
+export type {
+  default as BehandlingAppKontekst,
+  BehandlingTillatteOperasjoner,
+  BehandlingÅrsak,
+  TotrinnskontrollSkjermlenkeContext,
+} from './src/behandlingAppKontekstTsType';
+export { VergeBehandlingmenyValg } from './src/behandlingAppKontekstTsType';
 export type { default as Behandlingsresultat } from './src/behandlingsresultatTsType';
 export type {
   default as Beregningsgrunnlag,
@@ -80,7 +86,6 @@ export type {
 } from './src/opptjeningTsType';
 export type { default as TilbakekrevingValg } from './src/tilbakekrevingValgTsType';
 export type { default as TotrinnskontrollAksjonspunkt, OpptjeningAktiviteter } from './src/totrinnskontrollAksjonspunktTsType';
-export type { default as TotrinnskontrollSkjermlenkeContext } from './src/totrinnskontrollSkjermlenkeContextTsType';
 export type {
   default as Historikkinnslag, HistorikkInnslagDokumentLink, HistorikkinnslagDel, HistorikkinnslagEndretFelt,
   HistorikkInnslagOpplysning, HistorikkInnslagAksjonspunkt,

@@ -2,7 +2,6 @@ import React, {
   FunctionComponent, useEffect, useCallback, useMemo,
 } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Aksjonspunkt, Risikoklassifisering } from '@navikt/ft-types';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 import RisikoklassifiseringSakIndex, { AvklartRisikoklassifiseringAp } from '@navikt/ft-sak-risikoklassifisering';
 
@@ -29,21 +28,17 @@ interface OwnProps {
   fagsakData: FagsakData;
   behandlingUuid?: string;
   behandlingVersjon?: number;
-  kontrollresultat?: Risikoklassifisering;
-  risikoAksjonspunkt?: Aksjonspunkt;
 }
 
 /**
  * RisikoklassifiseringIndex
  *
- * Container komponent. Har ansvar for å vise risikoklassifisering for valgt behandling
+ * Har ansvar for å vise risikoklassifisering for valgt behandling
  * Viser en av tre komponenter avhengig av: Om ingen klassifisering er utført,
  * om klassifisering er utført og ingen faresignaler er funnet og om klassifisering er utført og faresignaler er funnet
  */
 const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
   fagsakData,
-  risikoAksjonspunkt,
-  kontrollresultat,
   behandlingVersjon,
   behandlingUuid,
 }) => {
@@ -52,6 +47,8 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
   const erPaaVent = behandling ? behandling.behandlingPaaVent : false;
   const behandlingStatus = behandling?.status;
   const behandlingType = behandling?.type;
+  const risikoAksjonspunkt = behandling?.risikoAksjonspunkt;
+  const kontrollresultat = behandling?.kontrollResultat;
 
   const { selected: isRiskPanelOpen = false } = useTrackRouteParam<boolean>({
     paramName: 'risiko',

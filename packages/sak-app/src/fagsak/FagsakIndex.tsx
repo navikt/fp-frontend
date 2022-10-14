@@ -19,9 +19,7 @@ import {
   pathToMissingPage, erUrlUnderBehandling, erBehandlingValgt, behandlingerRoutePath, pathToAnnenPart,
 } from '../app/paths';
 import FagsakGrid from './components/FagsakGrid';
-import {
-  FpsakApiKeys, restApiHooks, requestApi,
-} from '../data/fpsakApi';
+import { requestApi } from '../data/fpsakApi';
 import useHentFagsak from './useHentFagsak';
 
 import '@navikt/ft-sak-visittkort/dist/style.css';
@@ -71,12 +69,6 @@ const FagsakIndex: FunctionComponent = () => {
   const location = useLocation();
   const skalIkkeHenteData = finnSkalIkkeHenteData(location, selectedSaksnummer, behandlingUuid);
 
-  const { data: behandlingRettigheter } = restApiHooks.useRestApi(FpsakApiKeys.BEHANDLING_RETTIGHETER, undefined, {
-    updateTriggers: [skalIkkeHenteData, behandlingUuid, behandlingVersjon],
-    suspendRequest: skalIkkeHenteData,
-    keepData: true,
-  });
-
   if (!fagsakData) {
     if (!harHentetFagsak) {
       return <LoadingPanel />;
@@ -117,7 +109,6 @@ const FagsakIndex: FunctionComponent = () => {
                 behandlingUuid={behandlingUuid}
                 behandlingVersjon={behandlingVersjon}
                 oppfriskBehandlinger={oppfriskBehandlinger}
-                behandlingRettigheter={behandlingRettigheter}
               />
             )}
           </>
@@ -127,7 +118,6 @@ const FagsakIndex: FunctionComponent = () => {
             fagsakData={fagsakData}
             behandlingUuid={behandlingUuid}
             behandlingVersjon={behandlingVersjon}
-            behandlingRettigheter={behandlingRettigheter}
           />
         )}
         visittkortContent={() => {

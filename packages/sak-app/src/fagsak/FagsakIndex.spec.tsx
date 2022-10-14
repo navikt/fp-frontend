@@ -96,8 +96,6 @@ describe('<FagsakIndex>', () => {
       { key: FpsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
       { key: FpsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE.name, data: fagsakFpTilbake },
       { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: alleKodeverk },
-      { key: FpsakApiKeys.RISIKO_AKSJONSPUNKT.name, data: undefined },
-      { key: FpsakApiKeys.KONTROLLRESULTAT.name, data: undefined },
       { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
     ];
 
