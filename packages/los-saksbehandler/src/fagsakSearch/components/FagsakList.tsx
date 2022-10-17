@@ -1,6 +1,7 @@
 import React, { Fragment, FunctionComponent, useMemo } from 'react';
+import dayjs from 'dayjs';
 import { Next } from '@navikt/ds-icons';
-import { getKodeverknavnFraKode } from '@navikt/ft-utils';
+import { getKodeverknavnFraKode, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import {
   Table, TableRow, TableColumn, DateLabel,
 } from '@navikt/ft-ui-komponenter';
@@ -47,7 +48,7 @@ export const getSorterteFagsaker = (fagsaker: FagsakEnkel[] = []) => fagsaker.co
   }
   const changeTimeFagsak1 = fagsak1.endret ? fagsak1.endret : fagsak1.opprettet;
   const changeTimeFagsak2 = fagsak2.endret ? fagsak2.endret : fagsak2.opprettet;
-  return changeTimeFagsak1 > changeTimeFagsak2 ? 1 : -1;
+  return dayjs(changeTimeFagsak1, ISO_DATE_FORMAT).diff(dayjs(changeTimeFagsak2, ISO_DATE_FORMAT));
 });
 
 /**
