@@ -5,34 +5,17 @@ import userEvent from '@testing-library/user-event';
 import MockAdapter from 'axios-mock-adapter';
 import { Modal } from '@navikt/ds-react';
 import { FagsakYtelseType, BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
-import { BehandlingAppKontekst } from '@navikt/ft-types';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
-import { Fagsak } from '@fpsak-frontend/types';
+import { Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
 
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import MeldingIndex from './MeldingIndex';
+import FagsakData from '../../fagsak/FagsakData';
 
 describe('<MeldingIndex>', () => {
   Modal.setAppElement('body');
-
-  const fagsak = {
-    saksnummer: '123456',
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-    brukerManglerAdresse: false,
-  };
-
-  const valgtBehandling = {
-    uuid: '1',
-    versjon: 123,
-    type: BehandlingType.FORSTEGANGSSOKNAD,
-    sprakkode: 'nb',
-  };
-
-  const kodeverk = {
-    [KodeverkType.VENT_AARSAK]: [],
-  };
 
   const templates = [
     { kode: 'Mal1', navn: 'Mal 1', tilgjengelig: true },
@@ -40,6 +23,27 @@ describe('<MeldingIndex>', () => {
     { kode: 'Mal3', navn: 'Mal 3', tilgjengelig: true },
     { kode: dokumentMalType.INNHENTE_OPPLYSNINGER, navn: 'Innhent', tilgjengelig: true },
   ];
+
+  const valgtBehandling = {
+    uuid: '1',
+    versjon: 123,
+    type: BehandlingType.FORSTEGANGSSOKNAD,
+    sprakkode: 'nb',
+    brevmaler: templates,
+    ugunstAksjonspunkt: true,
+  } as BehandlingAppKontekst;
+
+  const fagsak = {
+    saksnummer: '123456',
+    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    brukerManglerAdresse: false,
+    behandlinger: [valgtBehandling],
+  };
+
+  const kodeverk = {
+    [KodeverkType.VENT_AARSAK]: [],
+    [KodeverkType.REVURDERING_VARSLING_ÅRSAK]: [],
+  };
 
   const assignMock = jest.fn();
   // @ts-ignore
@@ -53,19 +57,17 @@ describe('<MeldingIndex>', () => {
 
   it('skal vise messages når mottakere og brevmaler har blitt hentet fra server', async () => {
     const data = [
-      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: { navn: 'Peder' } },
+      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
       { key: FpsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
-      { key: FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, data: true },
       { key: FpsakApiKeys.SUBMIT_MESSAGE.name, data: undefined },
-      { key: FpsakApiKeys.BREVMALER.name, data: templates },
     ];
 
     render(
       <RestApiMock data={data} requestApi={requestApi}>
         <MemoryRouter>
           <MeldingIndex
-            fagsak={fagsak as Fagsak}
-            valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+            fagsakData={new FagsakData(fagsak as Fagsak)}
+            valgtBehandlingUuid={valgtBehandling.uuid}
             setMeldingForData={() => undefined}
           />
         </MemoryRouter>
@@ -78,10 +80,8 @@ describe('<MeldingIndex>', () => {
 
   it('skal sette default tom streng ved forhåndsvisning dersom fritekst ikke er fylt ut', async () => {
     const data = [
-      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: { navn: 'Peder' } },
+      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
       { key: FpsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
-      { key: FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, data: true },
-      { key: FpsakApiKeys.BREVMALER.name, data: templates },
       { key: FpsakApiKeys.PREVIEW_MESSAGE_FORMIDLING.name, data: {} },
     ];
 
@@ -92,8 +92,8 @@ describe('<MeldingIndex>', () => {
       <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
         <MemoryRouter>
           <MeldingIndex
-            fagsak={fagsak as Fagsak}
-            valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+            fagsakData={new FagsakData(fagsak as Fagsak)}
+            valgtBehandlingUuid={valgtBehandling.uuid}
             setMeldingForData={() => undefined}
           />
         </MemoryRouter>
@@ -121,10 +121,8 @@ describe('<MeldingIndex>', () => {
 
   it('skal sende melding og så lukke modal', async () => {
     const data = [
-      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: { navn: 'Peder' } },
+      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
       { key: FpsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
-      { key: FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, data: true },
-      { key: FpsakApiKeys.BREVMALER.name, data: templates },
       { key: FpsakApiKeys.SUBMIT_MESSAGE.name, data: undefined },
     ];
 
@@ -135,8 +133,8 @@ describe('<MeldingIndex>', () => {
       <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
         <MemoryRouter>
           <MeldingIndex
-            fagsak={fagsak as Fagsak}
-            valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+            fagsakData={new FagsakData(fagsak as Fagsak)}
+            valgtBehandlingUuid={valgtBehandling.uuid}
             setMeldingForData={() => undefined}
           />
         </MemoryRouter>
@@ -155,7 +153,7 @@ describe('<MeldingIndex>', () => {
 
     await userEvent.click(screen.getByText('OK'));
 
-    await waitFor(() => expect(axiosMock.history.get.length).toBe(5));
+    await waitFor(() => expect(axiosMock.history.get.length).toBe(1));
 
     await waitFor(() => expect(axiosMock.history.get
       .find((a) => a.url === FpsakApiKeys.SUBMIT_MESSAGE.name).params).toStrictEqual({
@@ -168,10 +166,8 @@ describe('<MeldingIndex>', () => {
 
   it('skal sende melding og sette saken på vent hvis INNHENT_DOK', async () => {
     const data = [
-      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: { navn: 'Peder' } },
+      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
       { key: FpsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
-      { key: FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, data: true },
-      { key: FpsakApiKeys.BREVMALER.name, data: templates },
       { key: FpsakApiKeys.SUBMIT_MESSAGE.name, data: undefined },
     ];
 
@@ -182,8 +178,8 @@ describe('<MeldingIndex>', () => {
       <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
         <MemoryRouter>
           <MeldingIndex
-            fagsak={fagsak as Fagsak}
-            valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+            fagsakData={new FagsakData(fagsak as Fagsak)}
+            valgtBehandlingUuid={valgtBehandling.uuid}
             setMeldingForData={() => undefined}
           />
         </MemoryRouter>
@@ -205,7 +201,7 @@ describe('<MeldingIndex>', () => {
 
     await userEvent.click(screen.getByText('OK'));
 
-    await waitFor(() => expect(axiosMock.history.get.length).toBe(5));
+    await waitFor(() => expect(axiosMock.history.get.length).toBe(1));
 
     await waitFor(() => expect(axiosMock.history.get
       .find((a) => a.url === FpsakApiKeys.SUBMIT_MESSAGE.name).params).toStrictEqual({

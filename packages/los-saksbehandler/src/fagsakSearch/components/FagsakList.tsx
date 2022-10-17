@@ -1,14 +1,15 @@
 import React, { Fragment, FunctionComponent, useMemo } from 'react';
+import dayjs from 'dayjs';
 import { Next } from '@navikt/ds-icons';
-import { getKodeverknavnFraKode } from '@navikt/ft-utils';
+import { getKodeverknavnFraKode, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import {
   Table, TableRow, TableColumn, DateLabel,
 } from '@navikt/ft-ui-komponenter';
 import { FagsakStatus, KodeverkType } from '@navikt/ft-kodeverk';
+import { FagsakEnkel } from '@fpsak-frontend/types';
 
 import Oppgave from '../../typer/oppgaveTsType';
 import useLosKodeverk from '../../data/useLosKodeverk';
-import Fagsak from '../../typer/fagsakTsType';
 import { restApiHooks, RestApiGlobalStatePathsKeys } from '../../data/fplosSaksbehandlerRestApi';
 
 import styles from './fagsakList.less';
@@ -23,23 +24,23 @@ const headerTextCodes = [
 ];
 
 interface OwnProps {
-  fagsaker: Fagsak[];
+  fagsaker: FagsakEnkel[];
   fagsakOppgaver: Oppgave[];
-  åpneFagsak: (saksnummer: number, behandlingUuid?: string) => void;
+  åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
   selectOppgaveCallback: (oppgave: Oppgave) => void;
 }
 
 const getSelectOppgaveCallback = (oppgave: Oppgave, selectOppgaveCallback: (oppgave: Oppgave) => void) => () => selectOppgaveCallback(oppgave);
 
 const getFagsakCallback = (
-  åpneFagsak: (saksnummer: number, behandlingUuid?: string) => void,
-) => (_event: React.KeyboardEvent | React.MouseEvent, saksnummer?: number) => {
+  åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void,
+) => (_event: React.KeyboardEvent | React.MouseEvent, saksnummer?: string) => {
   if (saksnummer) {
     åpneFagsak(saksnummer);
   }
 };
 
-export const getSorterteFagsaker = (fagsaker: Fagsak[] = []) => fagsaker.concat().sort((fagsak1, fagsak2) => {
+export const getSorterteFagsaker = (fagsaker: FagsakEnkel[] = []) => fagsaker.concat().sort((fagsak1, fagsak2) => {
   if (fagsak1.status === FagsakStatus.AVSLUTTET && fagsak2.status !== FagsakStatus.AVSLUTTET) {
     return 1;
   } if (fagsak1.status !== FagsakStatus.AVSLUTTET && fagsak2.status === FagsakStatus.AVSLUTTET) {
@@ -47,7 +48,7 @@ export const getSorterteFagsaker = (fagsaker: Fagsak[] = []) => fagsaker.concat(
   }
   const changeTimeFagsak1 = fagsak1.endret ? fagsak1.endret : fagsak1.opprettet;
   const changeTimeFagsak2 = fagsak2.endret ? fagsak2.endret : fagsak2.opprettet;
-  return changeTimeFagsak1 > changeTimeFagsak2 ? 1 : -1;
+  return dayjs(changeTimeFagsak1, ISO_DATE_FORMAT).diff(dayjs(changeTimeFagsak2, ISO_DATE_FORMAT));
 });
 
 /**
@@ -73,7 +74,7 @@ const FagsakList: FunctionComponent<OwnProps> = ({
         const fagsakStatusType = fagsakStatuser.find((type) => type.kode === fagsak.status);
         const fagsakYtelseType = fagsakYtelseTyper.find((type) => type.kode === fagsak.fagsakYtelseType);
 
-        const filtrerteOppgaver = fagsakOppgaver.filter((o) => o.saksnummer === fagsak.saksnummer);
+        const filtrerteOppgaver = fagsakOppgaver.filter((o) => o.saksnummer.toString() === fagsak.saksnummer);
         const oppgaver = filtrerteOppgaver.map((oppgave, index) => (
           <TableRow<number>
             key={`oppgave${oppgave.id}`}
@@ -95,7 +96,7 @@ const FagsakList: FunctionComponent<OwnProps> = ({
 
         return (
           <Fragment key={`fagsak${fagsak.saksnummer}`}>
-            <TableRow<number>
+            <TableRow<string>
               id={fagsak.saksnummer}
               onMouseDown={getFagsakCallback(åpneFagsak)}
               onKeyDown={getFagsakCallback(åpneFagsak)}

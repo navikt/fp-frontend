@@ -10,7 +10,7 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   setLosErIkkeTilgjengelig: () => void;
-  åpneFagsak: (saksnummer: number, behandlingUuid?: string) => void;
+  åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
   kanSaksbehandle: boolean;
 }
 

@@ -2,12 +2,11 @@ import React, {
   FunctionComponent, useState, useCallback,
 } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { BehandlingType, BehandlingStatus } from '@navikt/ft-kodeverk';
-import { Fagsak, BehandlingAppKontekst } from '@navikt/ft-types';
 
 import TotrinnskontrollSakIndex from '@fpsak-frontend/sak-totrinnskontroll';
 import { FatterVedtakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
+import FagsakData from '../../fagsak/FagsakData';
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
 import { createLocationForSkjermlenke } from '../../app/paths';
 import { useKodeverk } from '../../data/useKodeverk';
@@ -43,8 +42,8 @@ const getLagreFunksjon = (
 };
 
 interface OwnProps {
-  fagsak: Fagsak;
-  valgtBehandling: BehandlingAppKontekst;
+  fagsakData: FagsakData;
+  valgtBehandlingUuid: string;
   beslutterFormData?: any;
   setBeslutterForData: (data?: any) => void;
 }
@@ -55,39 +54,28 @@ interface OwnProps {
  * Containerklass ansvarlig for att rita opp vilkår og aksjonspunkter med toTrinnskontroll
  */
 const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
-  fagsak,
-  valgtBehandling,
+  fagsakData,
+  valgtBehandlingUuid,
   beslutterFormData,
   setBeslutterForData,
 }) => {
   const [visBeslutterModal, setVisBeslutterModal] = useState(false);
   const [erAlleAksjonspunktGodkjent, setAlleAksjonspunktTilGodkjent] = useState(false);
 
+  const fagsak = fagsakData.getFagsak();
+  const valgtBehandling = fagsakData.getBehandling(valgtBehandlingUuid);
+
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { brukernavn, kanVeilede } = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
+  const initFetchData = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.INIT_FETCH);
+  const { brukernavn, kanVeilede } = initFetchData.innloggetBruker;
 
   const alleKodeverk = useKodeverk(valgtBehandling.type);
 
   const {
-    uuid, versjon, type, status,
+    uuid, versjon, type, totrinnskontrollÅrsaker,
   } = valgtBehandling;
-
-  const erInnsynBehandling = type === BehandlingType.DOKUMENTINNSYN;
-
-  const { data: totrinnArsaker } = restApiHooks.useRestApi(
-    FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER, undefined, {
-      updateTriggers: [uuid, status],
-      suspendRequest: !!erInnsynBehandling || status !== BehandlingStatus.FATTER_VEDTAK,
-    },
-  );
-  const { data: totrinnArsakerReadOnly } = restApiHooks.useRestApi(
-    FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER_READONLY, undefined, {
-      updateTriggers: [uuid, status],
-      suspendRequest: !!erInnsynBehandling || status !== BehandlingStatus.BEHANDLING_UTREDES,
-    },
-  );
 
   const { startRequest: godkjennTotrinnsaksjonspunkter } = restApiHooks.useRestApiRunner(FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT);
 
@@ -104,8 +92,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
     setAlleAksjonspunktTilGodkjent, setVisBeslutterModal, godkjennTotrinnsaksjonspunkter),
   [uuid, versjon]);
 
-  const totrinnskontrollSkjermlenkeContext = totrinnArsaker || totrinnArsakerReadOnly;
-  if (!totrinnskontrollSkjermlenkeContext) {
+  if (!totrinnskontrollÅrsaker) {
     return null;
   }
 
@@ -113,7 +100,6 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
     <>
       <TotrinnskontrollSakIndex
         behandling={valgtBehandling}
-        totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
         location={location}
         readOnly={brukernavn === valgtBehandling.ansvarligSaksbehandler || kanVeilede}
         onSubmit={onSubmit}

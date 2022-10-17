@@ -2,7 +2,6 @@ import React, {
   FunctionComponent, useEffect, useCallback, useMemo,
 } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Aksjonspunkt, Risikoklassifisering } from '@navikt/ft-types';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 import RisikoklassifiseringSakIndex, { AvklartRisikoklassifiseringAp } from '@navikt/ft-sak-risikoklassifisering';
 
@@ -29,29 +28,27 @@ interface OwnProps {
   fagsakData: FagsakData;
   behandlingUuid?: string;
   behandlingVersjon?: number;
-  kontrollresultat?: Risikoklassifisering;
-  risikoAksjonspunkt?: Aksjonspunkt;
 }
 
 /**
  * RisikoklassifiseringIndex
  *
- * Container komponent. Har ansvar for å vise risikoklassifisering for valgt behandling
+ * Har ansvar for å vise risikoklassifisering for valgt behandling
  * Viser en av tre komponenter avhengig av: Om ingen klassifisering er utført,
  * om klassifisering er utført og ingen faresignaler er funnet og om klassifisering er utført og faresignaler er funnet
  */
 const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
   fagsakData,
-  risikoAksjonspunkt,
-  kontrollresultat,
   behandlingVersjon,
   behandlingUuid,
 }) => {
   const fagsak = fagsakData.getFagsak();
-  const behandling = fagsakData.getAlleBehandlinger().find((b) => b.uuid === behandlingUuid);
+  const behandling = fagsakData.getBehandling(behandlingUuid);
   const erPaaVent = behandling ? behandling.behandlingPaaVent : false;
   const behandlingStatus = behandling?.status;
   const behandlingType = behandling?.type;
+  const risikoAksjonspunkt = behandling?.risikoAksjonspunkt;
+  const kontrollresultat = behandling?.kontrollResultat;
 
   const { selected: isRiskPanelOpen = false } = useTrackRouteParam<boolean>({
     paramName: 'risiko',
@@ -63,7 +60,8 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
   const location = useLocation();
 
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
-  const navAnsatt = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
+  const initFetchData = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.INIT_FETCH);
+  const navAnsatt = initFetchData.innloggetBruker;
   const rettigheter = useMemo(() => getAccessRights(navAnsatt, fagsak.status, behandlingStatus, behandlingType),
     [fagsak.status, behandlingStatus, behandlingType]);
   const readOnly = useMemo(() => getReadOnly(navAnsatt, rettigheter, erPaaVent),
