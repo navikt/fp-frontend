@@ -30,7 +30,6 @@ describe('<FagsakSearchIndex>', () => {
       alder: 40,
       erKvinne: false,
       fødselsnummer: '232323',
-      personnummer: '232323',
     },
   } as FagsakEnkel;
   const fagsak2: Partial<FagsakEnkel> = {

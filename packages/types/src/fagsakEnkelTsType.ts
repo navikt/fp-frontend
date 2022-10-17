@@ -3,7 +3,6 @@ export type Person = Readonly<{
   alder: number;
   erKvinne: boolean;
   fødselsnummer: string;
-  personnummer: string;
   dødsdato?: string;
   diskresjonskode?: string;
 }>

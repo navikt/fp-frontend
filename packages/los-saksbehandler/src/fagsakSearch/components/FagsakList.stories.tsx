@@ -55,7 +55,6 @@ Default.args = {
       navn: 'Espen Utvikler',
       alder: 41,
       fødselsnummer: '1010',
-      personnummer: '1010',
       erKvinne: false,
     },
     barnFødt: '2019-12-12',
