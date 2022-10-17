@@ -1,7 +1,6 @@
 require('dotenv')
   .config();
 
-
 module.exports = function (app) {
   if (process.env.FAKE_ERROR_PATH) {
     app.all(process.env.FAKE_ERROR_PATH, function (req, res) {
@@ -11,5 +10,4 @@ module.exports = function (app) {
         .json(errorBody);
     });
   }
-
 };

@@ -14,5 +14,4 @@ ssh.exe.stackdump
 .DS_Store
 .eslintcache
 /server/node_modules
-/server/yarn.lock
 /server/package-lock.json

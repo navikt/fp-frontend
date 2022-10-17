@@ -9906,6 +9906,7 @@ expect@^29.0.0:
     jest-util "^29.0.1"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 expect@^29.3.1:
   version "29.3.1"
   resolved "https://registry.yarnpkg.com/expect/-/expect-29.3.1.tgz#92877aad3f7deefc2e3f6430dd195b92295554a6"
@@ -9939,6 +9940,8 @@ express-session@^1.17.0:
     safe-buffer "5.2.1"
     uid-safe "~2.1.5"
 
+=======
+>>>>>>> 9af905226 (Forebereder lokalt kjøring)
 expect@^29.2.2:
   version "29.2.2"
   resolved "https://registry.yarnpkg.com/expect/-/expect-29.2.2.tgz#ba2dd0d7e818727710324a6e7f13dd0e6d086106"

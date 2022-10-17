@@ -4,19 +4,15 @@ const { ModuleFederationPlugin } = require('webpack').container;
 const commonDevAndProd = require('./webpack.common');
 const deps = require('../package.json').dependencies;
 
-const ROOT_DIR = path.resolve(__dirname, '../public/client');
-const PACKAGES_DIR = path.join(__dirname, '../packages');
-const APP_DIR = path.resolve(PACKAGES_DIR, 'sak-app/src');
-
 const config = {
   mode: 'development',
   devtool: 'eval-cheap-source-map',
   entry: [
     'webpack-dev-server/client?http://localhost:9000',
-    APP_DIR + '/index.ts',
+    path.resolve(path.join(__dirname, '../packages'), 'sak-app/src') + '/index.ts',
   ],
   output: {
-    path: ROOT_DIR,
+    path: path.resolve(__dirname, '../public/client'),
     publicPath: '/',
     filename: '[name].js',
   },

@@ -18,6 +18,7 @@ const { port } = config.server;
 
 async function startApp() {
   try {
+    const isDev = process.env.NODE_ENV === 'development';
 
     headers.setup(server);
 
@@ -116,9 +117,10 @@ async function startApp() {
     reverseProxy.setup(server);
 
     // serve static files
-    server.use('/', express.static('/app/'));
-    server.use('*', (req, res) => {
-      res.sendFile('index.html', { root: '/app' });
+    const rootDir = isDev ? './dist' : '/app';
+    server.use(express.static(rootDir));
+    server.use('/', (req, res) => {
+      res.sendFile('index.html', { root: rootDir });
     });
 
     server.listen(port, () => logger.info(`Listening on port ${port}`));
