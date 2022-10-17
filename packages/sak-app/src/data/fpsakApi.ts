@@ -7,7 +7,7 @@ import {
 } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import {
-  ForhåndsvisMeldingParams, NavAnsatt, FagsakEnkel, Fagsak, FagsakDataFpTilbake,
+  ForhåndsvisMeldingParams, FagsakEnkel, Fagsak, FagsakDataFpTilbake, NavAnsatt,
 } from '@fpsak-frontend/types';
 
 type BehandlendeEnheter = {
@@ -22,9 +22,15 @@ type SubmitMessageParams = {
   arsakskode?: string;
 };
 
-type InitLinks = {
+type InitDataFpSak = {
+  behandlendeEnheter: BehandlendeEnheter;
+  innloggetBruker: NavAnsatt;
   links: Link[];
-  toggleLinks: Link[];
+  sakLinks: Link[];
+};
+
+type InitDataFpTilbake = {
+  links: Link[];
   sakLinks: Link[];
 };
 
@@ -35,12 +41,10 @@ export enum LinkCategory {
 }
 
 export const FpsakApiKeys = {
-  INIT_FETCH: new RestKey<InitLinks, void>('INIT_FETCH'),
-  INIT_FETCH_FPTILBAKE: new RestKey<InitLinks, void>('INIT_FETCH_FPTILBAKE'),
+  INIT_FETCH: new RestKey<InitDataFpSak, void>('INIT_FETCH'),
+  INIT_FETCH_FPTILBAKE: new RestKey<InitDataFpTilbake, void>('INIT_FETCH_FPTILBAKE'),
   KODEVERK: new RestKey<AlleKodeverk, void>('KODEVERK'),
   KODEVERK_FPTILBAKE: new RestKey<AlleKodeverkTilbakekreving, void>('KODEVERK_FPTILBAKE'),
-  NAV_ANSATT: new RestKey<NavAnsatt, void>('NAV_ANSATT'),
-  BEHANDLENDE_ENHETER: new RestKey<BehandlendeEnheter, void>('BEHANDLENDE_ENHETER'),
   SEARCH_FAGSAK: new RestKey<FagsakEnkel[], { searchString: string }>('SEARCH_FAGSAK'),
   FETCH_FAGSAK: new RestKey<Fagsak, { saksnummer: string }>('FETCH_FAGSAK'),
   FETCH_FAGSAKDATA_FPTILBAKE: new RestKey<FagsakDataFpTilbake, { saksnummer: string }>('FETCH_FAGSAKDATA_FPTILBAKE'),
@@ -62,10 +66,8 @@ const endpoints = new RestApiConfigBuilder()
   .withGet('/fptilbake/api/init-fetch', FpsakApiKeys.INIT_FETCH_FPTILBAKE)
 
   // Generelle
-  .withRel('nav-ansatt', FpsakApiKeys.NAV_ANSATT)
   .withRel('kodeverk', FpsakApiKeys.KODEVERK)
   .withRel('tilbake-kodeverk', FpsakApiKeys.KODEVERK_FPTILBAKE)
-  .withRel('behandlende-enheter', FpsakApiKeys.BEHANDLENDE_ENHETER)
 
   // Fagsak
   .withRel('fagsak-full', FpsakApiKeys.FETCH_FAGSAK)

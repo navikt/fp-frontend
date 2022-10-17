@@ -60,7 +60,8 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
   const location = useLocation();
 
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
-  const navAnsatt = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
+  const initFetchData = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.INIT_FETCH);
+  const navAnsatt = initFetchData.innloggetBruker;
   const rettigheter = useMemo(() => getAccessRights(navAnsatt, fagsak.status, behandlingStatus, behandlingType),
     [fagsak.status, behandlingStatus, behandlingType]);
   const readOnly = useMemo(() => getReadOnly(navAnsatt, rettigheter, erPaaVent),

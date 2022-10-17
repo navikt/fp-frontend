@@ -16,7 +16,7 @@ interface OwnProps {
   valgtSakslisteId?: number;
   setValgtSakslisteId: (valgSakslisteId: number) => void;
   setLosErIkkeTilgjengelig: () => void;
-  åpneFagsak: (saksnummer: number, behandlingUuid?: string) => void;
+  åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
   kanSaksbehandle: boolean;
 }
 

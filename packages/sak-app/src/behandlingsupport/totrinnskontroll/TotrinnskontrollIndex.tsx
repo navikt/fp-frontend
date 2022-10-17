@@ -68,7 +68,8 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { brukernavn, kanVeilede } = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
+  const initFetchData = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.INIT_FETCH);
+  const { brukernavn, kanVeilede } = initFetchData.innloggetBruker;
 
   const alleKodeverk = useKodeverk(valgtBehandling.type);
 

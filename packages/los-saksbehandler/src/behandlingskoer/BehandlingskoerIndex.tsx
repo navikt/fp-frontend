@@ -16,7 +16,7 @@ const EMPTY_ARRAY: Saksliste[] = [];
 interface OwnProps {
   valgtSakslisteId?: number;
   setValgtSakslisteId: (sakslisteId: number) => void;
-  åpneFagsak: (saksnummer: number, behandlingUuid?: string) => void;
+  åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
 }
 
 /**
@@ -37,12 +37,12 @@ const BehandlingskoerIndex: FunctionComponent<OwnProps> = ({
 
   const reserverOppgaveOgApne = useCallback((oppgave: Oppgave) => {
     if (oppgave.status.erReservert) {
-      åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
+      åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
     } else {
       reserverOppgave({ oppgaveId: oppgave.id })
         .then((nyOppgaveStatus) => {
           if (nyOppgaveStatus && nyOppgaveStatus.erReservert && nyOppgaveStatus.erReservertAvInnloggetBruker) {
-            åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
+            åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
           } else if (nyOppgaveStatus && nyOppgaveStatus.erReservert && !nyOppgaveStatus.erReservertAvInnloggetBruker) {
             setReservertAvAnnenSaksbehandler(true);
             setReservertOppgave(oppgave);
@@ -57,7 +57,7 @@ const BehandlingskoerIndex: FunctionComponent<OwnProps> = ({
     setReservertOppgave(undefined);
     setReservertOppgaveStatus(undefined);
 
-    åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
+    åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
   }, [åpneFagsak]);
 
   if (sakslister.length === 0) {

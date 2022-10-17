@@ -99,8 +99,8 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
     startRequest: sjekkTilbakeRevurdKanOpprettes, data: kanRevurderingOpprettes = false,
   } = restApiHooks.useRestApiRunner(FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES);
 
-  const navAnsatt = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
-  const behandlendeEnheter = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.BEHANDLENDE_ENHETER);
+  const initFetchData = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.INIT_FETCH);
+  const { innloggetBruker: navAnsatt, behandlendeEnheter } = initFetchData;
 
   const erTilbakekrevingAktivert = useGetEnabledApplikasjonContext().includes(ApplicationContextPath.FPTILBAKE);
 

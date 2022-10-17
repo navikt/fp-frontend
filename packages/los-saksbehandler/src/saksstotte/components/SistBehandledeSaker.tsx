@@ -11,7 +11,7 @@ const getClickEvent = (openFpsak: (oppgave: Oppgave) => void, oppgave: Oppgave) 
 const EMPTY_ARRAY: Oppgave[] = [];
 
 interface OwnProps {
-  åpneFagsak: (saksnummer: number, behandlingUuid?: string) => void;
+  åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
 }
 
 /**
@@ -25,7 +25,7 @@ const SistBehandledeSaker: FunctionComponent<OwnProps> = ({
   const { data: sistBehandledeSaker = EMPTY_ARRAY } = restApiHooks.useRestApi(RestApiPathsKeys.BEHANDLEDE_OPPGAVER);
 
   const openFpsak = useCallback((oppgave: Oppgave) => {
-    åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
+    åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
   }, [åpneFagsak]);
 
   return (

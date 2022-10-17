@@ -24,6 +24,12 @@ describe('<FagsakSearchIndex>', () => {
     dekningsgrad: 100,
     aktørId: '1',
     barnFødt: '2019-10-10',
+    person: {
+      navn: 'Petra',
+      alder: 40,
+      erKvinne: false,
+      fødselsnummer: '232323',
+    },
   } as FagsakEnkel;
   const fagsak2: Partial<FagsakEnkel> = {
     ...fagsak,

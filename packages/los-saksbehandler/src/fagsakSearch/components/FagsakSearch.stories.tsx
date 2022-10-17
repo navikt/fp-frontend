@@ -5,12 +5,12 @@ import {
   BehandlingStatus, BehandlingType, FagsakStatus, FagsakYtelseType,
 } from '@navikt/ft-kodeverk';
 
+import { FagsakEnkel } from '@fpsak-frontend/types';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
 import { alleKodeverkLos } from '@fpsak-frontend/storybook-utils';
 
 import FagsakSearch from './FagsakSearch';
-import Fagsak from '../../typer/fagsakTsType';
 import Oppgave from '../../typer/oppgaveTsType';
 import { RestApiGlobalStatePathsKeys, requestApi } from '../../data/fplosSaksbehandlerRestApi';
 
@@ -24,7 +24,7 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{ fagsaker: Fagsak[], fagsakOppgaver: Oppgave[] }> = ({
+const Template: Story<{ fagsaker: FagsakEnkel[], fagsakOppgaver: Oppgave[] }> = ({
   fagsaker,
   fagsakOppgaver,
 }) => {
@@ -52,19 +52,17 @@ const Template: Story<{ fagsaker: Fagsak[], fagsakOppgaver: Oppgave[] }> = ({
 export const Default = Template.bind({});
 Default.args = {
   fagsaker: [{
-    saksnummer: 12213234,
-    saksnummerString: '12213234',
-    system: 'SAK',
+    saksnummer: '12213234',
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     status: FagsakStatus.UNDER_BEHANDLING,
     person: {
       navn: 'Espen Utvikler',
       alder: 41,
-      personnummer: '232434234',
+      fødselsnummer: '232434234',
       erKvinne: false,
     },
     barnFødt: '2019-12-12',
-    opprettet: '2020-01-01',
+    aktørId: '23',
   }],
   fagsakOppgaver: [{
     id: 1,

@@ -10,7 +10,7 @@ import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 describe('<AppIndex>', () => {
   it('skal vise hjem-skjermbilde', async () => {
     const data = [
-      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: { navn: 'Peder' } },
+      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
     ];
 
     render(
@@ -26,7 +26,7 @@ describe('<AppIndex>', () => {
 
   it('skal vise query-feilmelding', async () => {
     const data = [
-      { key: FpsakApiKeys.NAV_ANSATT.name, data: { navn: 'Peder' } },
+      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
     ];
 
     render(

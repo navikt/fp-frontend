@@ -71,7 +71,7 @@ export type { default as Vilkar } from './src/vilkarTsType';
 export type { default as Ytelsefordeling } from './src/ytelsefordelingTsType';
 export type { FamilieHendelse, FamilieHendelseSamling, AvklartBarn } from './src/familieHendelseTsType';
 export type { default as Fagsak, AnnenPartBehandling, BehandlingOppretting } from './src/fagsakTsType';
-export type { default as FagsakEnkel } from './src/fagsakEnkelTsType';
+export type { default as FagsakEnkel, Person } from './src/fagsakEnkelTsType';
 export type { default as FagsakDataFpTilbake } from './src/fagsakTilbakekrevingTsType';
 export type {
   default as Medlemskap, MedlemPeriode, MedlemskapPeriode, Oppholdstillatelse, PersonopplysningMedlem,

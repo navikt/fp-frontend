@@ -103,7 +103,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   const fagsak = fagsakData.getFagsak();
   const valgtBehandling = fagsakData.getBehandling(valgtBehandlingUuid);
 
-  const navAnsatt = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
+  const initFetchData = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.INIT_FETCH);
 
   const ventearsaker = useFpSakKodeverk(KodeverkType.VENT_AARSAK) || EMPTY_ARRAY;
   const revurderingVarslingArsak = useFpSakKodeverk(KodeverkType.REVURDERING_VARSLING_ÅRSAK);
@@ -160,7 +160,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
         templates={valgtBehandling.brevmaler}
         isKontrollerRevurderingApOpen={valgtBehandling.ugunstAksjonspunkt}
         fagsakYtelseType={fagsak.fagsakYtelseType}
-        kanVeilede={navAnsatt.kanVeilede}
+        kanVeilede={initFetchData.innloggetBruker.kanVeilede}
         meldingFormData={meldingFormData}
         setMeldingForData={setMeldingForData}
         brukerManglerAdresse={fagsak.brukerManglerAdresse}

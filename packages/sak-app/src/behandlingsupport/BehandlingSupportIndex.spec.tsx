@@ -37,7 +37,7 @@ describe('<BehandlingSupportIndex>', () => {
 
   it('skal vise historikk-panelet som default', async () => {
     const data = [
-      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
+      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
     ];
 
     render(

@@ -44,7 +44,8 @@ const AppIndex: FunctionComponent = () => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [crashMessage, setCrashMessage] = useState<string>();
 
-  const navAnsatt = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
+  const initFetch = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.INIT_FETCH);
+  const navAnsatt = initFetch?.innloggetBruker;
 
   const location = useLocation();
 

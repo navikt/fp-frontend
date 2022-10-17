@@ -7,8 +7,8 @@ import {
 
 import urlKvinne from '@fpsak-frontend/assets/images/kvinne.svg';
 import urlMann from '@fpsak-frontend/assets/images/mann.svg';
+import { Person } from '@fpsak-frontend/types';
 
-import Person from '../../../typer/personTsType';
 import AlderVisning from './Aldervisning';
 import MerkePanel from './Merkepanel';
 

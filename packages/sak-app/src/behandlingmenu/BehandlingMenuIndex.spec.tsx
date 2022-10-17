@@ -63,8 +63,7 @@ describe('BehandlingMenuIndex', () => {
   it('skal vise meny der alle menyhandlinger er synlige', async () => {
     const data = [
       { key: FpsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
-      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
-      { key: FpsakApiKeys.BEHANDLENDE_ENHETER.name, global: true, data: [] },
+      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt, behandlendeEnheter: [] } },
       { key: FpsakApiKeys.KODEVERK.name, global: true, data: {} },
       { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
       { key: FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES.name, data: false },

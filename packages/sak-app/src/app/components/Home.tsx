@@ -47,7 +47,7 @@ const Home: FunctionComponent<OwnProps> = ({
   }, [erLosTilgjengelig]);
 
   const navigate = useNavigate();
-  const åpneFagsak = useCallback((saksnummer: number, behandlingUuid?: string) => {
+  const åpneFagsak = useCallback((saksnummer: string, behandlingUuid?: string) => {
     navigate(getFagsakHref(saksnummer, behandlingUuid));
   }, [navigate]);
 

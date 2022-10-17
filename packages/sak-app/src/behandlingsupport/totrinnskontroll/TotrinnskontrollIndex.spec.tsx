@@ -92,7 +92,7 @@ describe('<TotrinnskontrollIndex>', () => {
     const data = [
       { key: FpsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
       { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: kodeverk },
-      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
+      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
       { key: FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT.name, data: undefined },
     ];
 

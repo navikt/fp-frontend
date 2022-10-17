@@ -74,7 +74,8 @@ const Dekorator: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const navAnsatt = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
+  const initFetch = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.INIT_FETCH);
+  const navAnsatt = initFetch?.innloggetBruker;
 
   const navigate = useNavigate();
   const visSaksbehandlerside = useCallback((e: React.SyntheticEvent) => {

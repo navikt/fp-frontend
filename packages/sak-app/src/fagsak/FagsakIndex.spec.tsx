@@ -96,7 +96,7 @@ describe('<FagsakIndex>', () => {
       { key: FpsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
       { key: FpsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE.name, data: fagsakFpTilbake },
       { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: alleKodeverk },
-      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
+      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
     ];
 
     await act(async () => {

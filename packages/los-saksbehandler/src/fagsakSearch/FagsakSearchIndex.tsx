@@ -3,8 +3,8 @@ import React, {
 } from 'react';
 
 import { errorOfType, ErrorTypes, getErrorResponseData } from '@fpsak-frontend/rest-api';
+import { FagsakEnkel } from '@fpsak-frontend/types';
 
-import Fagsak from '../typer/fagsakTsType';
 import OppgaveStatus from '../typer/oppgaveStatusTsType';
 import Oppgave from '../typer/oppgaveTsType';
 import FagsakSearch from './components/FagsakSearch';
@@ -12,11 +12,11 @@ import { RestApiPathsKeys, restApiHooks } from '../data/fplosSaksbehandlerRestAp
 import OppgaveErReservertAvAnnenModal from '../components/OppgaveErReservertAvAnnenModal';
 
 interface OwnProps {
-  åpneFagsak: (saksnummer: number, behandlingUuid?: string) => void;
+  åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
   kanSaksbehandle: boolean;
 }
 
-const EMPTY_ARRAY_FAGSAK: Fagsak[] = [];
+const EMPTY_ARRAY_FAGSAK: FagsakEnkel[] = [];
 const EMPTY_ARRAY_OPPGAVER: Oppgave[] = [];
 
 /**
@@ -62,7 +62,7 @@ const FagsakSearchIndex: FunctionComponent<OwnProps> = ({
 
   const goToFagsakEllerApneModal = (oppgave: Oppgave, oppgaveStatus?: OppgaveStatus) => {
     if (oppgaveStatus && (!oppgaveStatus.erReservert || (oppgaveStatus.erReservert && oppgaveStatus.erReservertAvInnloggetBruker))) {
-      åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
+      åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
     } else if (oppgaveStatus && oppgaveStatus.erReservert && !oppgaveStatus.erReservertAvInnloggetBruker) {
       setReservertOppgave(oppgave);
       setReservertAvAnnenSaksbehandler(true);
@@ -79,7 +79,7 @@ const FagsakSearchIndex: FunctionComponent<OwnProps> = ({
           goToFagsakEllerApneModal(oppgave, status);
         });
       } else {
-        åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
+        åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
       }
     } else {
       reserverOppgave({ oppgaveId: oppgave.id }).then((data) => {
@@ -114,7 +114,7 @@ const FagsakSearchIndex: FunctionComponent<OwnProps> = ({
   const lukkErReservertModalOgOpneOppgave = (oppgave: Oppgave) => {
     setReservertOppgave(undefined);
     setReservertAvAnnenSaksbehandler(false);
-    åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
+    åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
   };
 
   const resetSearchFn = () => {
