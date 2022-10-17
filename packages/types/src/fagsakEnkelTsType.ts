@@ -3,6 +3,9 @@ export type Person = Readonly<{
   alder: number;
   erKvinne: boolean;
   fødselsnummer: string;
+  personnummer: string;
+  dødsdato?: string;
+  diskresjonskode?: string;
 }>
 
 type FagsakEnkel = Readonly<{
@@ -11,6 +14,8 @@ type FagsakEnkel = Readonly<{
   status: string;
   aktørId: string;
   barnFødt: string;
+  opprettet: string;
+  endret?: string;
   person: Person;
 }>
 

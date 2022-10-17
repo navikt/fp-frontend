@@ -27,6 +27,7 @@ const Template: Story<{ navn: string, erKvinne: boolean, diskresjonskode?: strin
       navn,
       alder: 41,
       personnummer: '23232332',
+      fødselsnummer: '23232332',
       erKvinne,
       diskresjonskode,
       dødsdato,
