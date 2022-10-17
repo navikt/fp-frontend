@@ -2,9 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FagsakEnkel } from '@fpsak-frontend/types';
 
 import Oppgave from '../../typer/oppgaveTsType';
-import Fagsak from '../../typer/fagsakTsType';
 import PersonInfo from './person/PersonInfo';
 import SearchForm from './SearchForm';
 import FagsakList from './FagsakList';
@@ -12,11 +12,11 @@ import FagsakList from './FagsakList';
 import styles from './fagsakSearch.less';
 
 interface OwnProps {
-  fagsaker: Fagsak[];
+  fagsaker: FagsakEnkel[];
   fagsakOppgaver: Oppgave[];
   searchFagsakCallback: (values: { searchString: string, skalReservere: boolean }) => void;
   searchResultReceived: boolean;
-  åpneFagsak: (saksnummer: number, behandlingUuid?: string) => void;
+  åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
   selectOppgaveCallback: (oppgave: Oppgave) => void;
   searchStarted: boolean;
   searchResultAccessDenied?: {
@@ -26,11 +26,12 @@ interface OwnProps {
   kanSaksbehandle: boolean;
 }
 
-const skalViseListe = (fagsaker: Fagsak[], fagsakOppgaver: Oppgave[]): boolean => {
+const skalViseListe = (fagsaker: FagsakEnkel[], fagsakOppgaver: Oppgave[]): boolean => {
   if (!fagsaker) {
     return false;
   }
-  return fagsaker.length > 1 || (fagsaker.length === 1 && fagsakOppgaver.filter((oppgave) => oppgave.saksnummer === fagsaker[0].saksnummer).length > 1);
+  return fagsaker.length > 1
+    || (fagsaker.length === 1 && fagsakOppgaver.filter((oppgave) => oppgave.saksnummer.toString() === fagsaker[0].saksnummer).length > 1);
 };
 
 /**

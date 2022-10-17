@@ -1,11 +1,10 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
-import { Behandling } from '@navikt/ft-types';
 import { KontrollresultatKode } from '@navikt/ft-sak-risikoklassifisering';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import { Fagsak } from '@fpsak-frontend/types';
+import { Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
 
 import * as useTrackRouteParam from '../../app/useTrackRouteParam';
 import RisikoklassifiseringIndex from './RisikoklassifiseringIndex';
@@ -20,7 +19,8 @@ const lagRisikoklassifisering = (kode: string) => ({
 
 const behandling = {
   uuid: '1',
-} as Behandling;
+  kontrollResultat: lagRisikoklassifisering(KontrollresultatKode.HOY),
+} as BehandlingAppKontekst;
 
 const fagsak = {
   saksnummer: '123456',
@@ -45,7 +45,7 @@ describe('<RisikoklassifiseringIndex>', () => {
 
   it('skal rendere komponent', async () => {
     const data = [
-      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
+      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
       { key: FpsakApiKeys.KODEVERK.name, global: true, data: {} },
     ];
 
@@ -54,7 +54,6 @@ describe('<RisikoklassifiseringIndex>', () => {
         <MemoryRouter>
           <RisikoklassifiseringIndex
             fagsakData={new FagsakData(fagsak)}
-            kontrollresultat={lagRisikoklassifisering(KontrollresultatKode.HOY)}
             behandlingVersjon={1}
             behandlingUuid="1"
           />

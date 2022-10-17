@@ -3,8 +3,8 @@ import {
   RestApiConfigBuilder, createRequestApi, RestKey,
 } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
+import { FagsakEnkel } from '@fpsak-frontend/types';
 
-import Fagsak from '../typer/fagsakTsType';
 import SaksbehandlerForFlytting from '../typer/saksbehandlerForFlyttingTsType';
 import OppgaveStatus from '../typer/oppgaveStatusTsType';
 import NyeOgFerdigstilteOppgaver from '../typer/nyeOgFerdigstilteOppgaverTsType';
@@ -19,7 +19,7 @@ export const RestApiGlobalStatePathsKeys = {
 
 export const RestApiPathsKeys = {
   DRIFTSMELDINGER: new RestKey<Driftsmelding[], void>('DRIFTSMELDINGER'),
-  SEARCH_FAGSAK: new RestKey<Fagsak[], {searchString: string; skalReservere: boolean}>('SEARCH_FAGSAK'),
+  SEARCH_FAGSAK: new RestKey<FagsakEnkel[], {searchString: string; skalReservere: boolean}>('SEARCH_FAGSAK'),
   OPPGAVER_FOR_FAGSAKER: new RestKey<Oppgave[], { saksnummerListe: string }>('OPPGAVER_FOR_FAGSAKER'),
   SAKSLISTE: new RestKey<Saksliste[], void>('SAKSLISTE'),
   RESERVERTE_OPPGAVER: new RestKey<Oppgave[], void>('RESERVERTE_OPPGAVER'),
@@ -43,8 +43,8 @@ export const endpoints = new RestApiConfigBuilder()
   .withGet('/fplos/api/kodeverk', RestApiGlobalStatePathsKeys.KODEVERK_LOS)
 
   // Saksbehandler
+  .withPost('/fpsak/api/fagsak/sok', RestApiPathsKeys.SEARCH_FAGSAK)
   .withGet('/fplos/api/driftsmeldinger', RestApiPathsKeys.DRIFTSMELDINGER)
-  .withPost('/fplos/api/fagsak/søk', RestApiPathsKeys.SEARCH_FAGSAK)
   .withGet('/fplos/api/saksbehandler/saksliste', RestApiPathsKeys.SAKSLISTE)
   .withGet('/fplos/api/saksbehandler/oppgaver/reserverte', RestApiPathsKeys.RESERVERTE_OPPGAVER)
   .withAsyncGet('/fplos/api/saksbehandler/oppgaver', RestApiPathsKeys.OPPGAVER_TIL_BEHANDLING, { maxPollingLimit: 1800 })

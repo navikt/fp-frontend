@@ -6,7 +6,7 @@ import SaksbehandlerNokkeltallIndex from '../nokkeltall/SaksbehandlerNokkeltallI
 
 interface OwnProps {
   valgtSakslisteId?: number;
-  åpneFagsak: (saksnummer: number, behandlingUuid?: string) => void;
+  åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
 }
 
 /**

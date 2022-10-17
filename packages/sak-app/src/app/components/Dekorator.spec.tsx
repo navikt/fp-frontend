@@ -35,7 +35,7 @@ const intl = createIntl(messages);
 describe('<Dekorator>', () => {
   it('skal vise dekorator', async () => {
     const data = [
-      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
+      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
     ];
 
     render(
@@ -54,7 +54,7 @@ describe('<Dekorator>', () => {
 
   it('skal vise feilmeldinger', async () => {
     const data = [
-      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
+      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
     ];
 
     const errors = [{

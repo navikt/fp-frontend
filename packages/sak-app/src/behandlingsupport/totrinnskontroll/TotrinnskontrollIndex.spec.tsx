@@ -5,36 +5,19 @@ import userEvent from '@testing-library/user-event';
 import MockAdapter from 'axios-mock-adapter';
 import { Modal } from '@navikt/ds-react';
 import { FagsakYtelseType, BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
-import { Fagsak, BehandlingAppKontekst } from '@navikt/ft-types';
 
-import { TotrinnskontrollAksjonspunkt, BehandlingÅrsak } from '@fpsak-frontend/types';
+import {
+  Fagsak, BehandlingAppKontekst, TotrinnskontrollAksjonspunkt, BehandlingÅrsak,
+} from '@fpsak-frontend/types';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
+import FagsakData from '../../fagsak/FagsakData';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import TotrinnskontrollIndex from './TotrinnskontrollIndex';
 
 describe('<TotrinnskontrollIndex>', () => {
   Modal.setAppElement('body');
-  const fagsak = {
-    saksnummer: '1',
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-  };
-
-  const valgtBehandling = {
-    uuid: '1234',
-    versjon: 123,
-    type: BehandlingType.FORSTEGANGSSOKNAD,
-    opprettet: '‎29.08.‎2017‎ ‎09‎:‎54‎:‎22',
-    status: 'FVED',
-    toTrinnsBehandling: true,
-    ansvarligSaksbehandler: 'Espen Utvikler',
-    behandlingÅrsaker: [] as BehandlingÅrsak[],
-  } as BehandlingAppKontekst;
-
-  const kodeverk = {
-    [KodeverkType.SKJERMLENKE_TYPE]: [],
-  };
 
   const createAksjonspunkt = (aksjonspunktKode: string) => (
     {
@@ -43,18 +26,6 @@ describe('<TotrinnskontrollIndex>', () => {
       vurderPaNyttArsaker: [],
     } as TotrinnskontrollAksjonspunkt
   );
-
-  const navAnsatt = {
-    brukernavn: 'Test',
-    kanBehandleKode6: false,
-    kanBehandleKode7: false,
-    kanBehandleKodeEgenAnsatt: false,
-    kanBeslutte: true,
-    kanOverstyre: false,
-    kanSaksbehandle: true,
-    kanVeilede: false,
-    navn: 'Test',
-  };
 
   const getTotrinnsaksjonspunkterFoedsel = () => ({
     skjermlenkeType: 'FAKTA_OM_FOEDSEL',
@@ -77,18 +48,52 @@ describe('<TotrinnskontrollIndex>', () => {
     ],
   });
 
+  const totrinnskontrollAksjonspunkter = [
+    getTotrinnsaksjonspunkterFoedsel(),
+    getTotrinnsaksjonspunkterOmsorg(),
+    getTotrinnsaksjonspunkterForeldreansvar(),
+  ];
+
+  const valgtBehandling = {
+    uuid: '1234',
+    versjon: 123,
+    type: BehandlingType.FORSTEGANGSSOKNAD,
+    opprettet: '‎29.08.‎2017‎ ‎09‎:‎54‎:‎22',
+    status: 'FVED',
+    toTrinnsBehandling: true,
+    ansvarligSaksbehandler: 'Espen Utvikler',
+    behandlingÅrsaker: [] as BehandlingÅrsak[],
+    totrinnskontrollÅrsaker: totrinnskontrollAksjonspunkter,
+  } as BehandlingAppKontekst;
+
+  const fagsak = {
+    saksnummer: '1',
+    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    behandlinger: [valgtBehandling],
+  };
+
+  const kodeverk = {
+    [KodeverkType.SKJERMLENKE_TYPE]: [],
+  };
+
+  const navAnsatt = {
+    brukernavn: 'Test',
+    kanBehandleKode6: false,
+    kanBehandleKode7: false,
+    kanBehandleKodeEgenAnsatt: false,
+    kanBeslutte: true,
+    kanOverstyre: false,
+    kanSaksbehandle: true,
+    kanVeilede: false,
+    navn: 'Test',
+  };
+
   it('skal vise modal når beslutter godkjenner', async () => {
-    const totrinnskontrollAksjonspunkter = [
-      getTotrinnsaksjonspunkterFoedsel(),
-      getTotrinnsaksjonspunkterOmsorg(),
-      getTotrinnsaksjonspunkterForeldreansvar(),
-    ];
     const data = [
       { key: FpsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
       { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: kodeverk },
-      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
+      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
       { key: FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT.name, data: undefined },
-      { key: FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER.name, data: totrinnskontrollAksjonspunkter },
     ];
 
     let axiosMock: MockAdapter;
@@ -98,8 +103,8 @@ describe('<TotrinnskontrollIndex>', () => {
       <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
         <MemoryRouter>
           <TotrinnskontrollIndex
-            fagsak={fagsak as Fagsak}
-            valgtBehandling={valgtBehandling}
+            fagsakData={new FagsakData(fagsak as Fagsak)}
+            valgtBehandlingUuid={valgtBehandling.uuid}
             setBeslutterForData={() => undefined}
           />
         </MemoryRouter>

@@ -6,9 +6,8 @@ import {
 } from '@navikt/ft-kodeverk';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import { Fagsak } from '@fpsak-frontend/types';
+import { Fagsak, VergeBehandlingmenyValg } from '@fpsak-frontend/types';
 
-import { VergeBehandlingmenyValg } from '../behandling/behandlingRettigheterTsType';
 import BehandlingMenuIndex from './BehandlingMenuIndex';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 import FagsakData from '../fagsak/FagsakData';
@@ -25,9 +24,21 @@ const navAnsatt = {
   navn: 'Test',
 };
 
+const behandlingTillatteOperasjoner = {
+  behandlingFraBeslutter: false,
+  behandlingKanSendeMelding: true,
+  behandlingTilGodkjenning: false,
+  behandlingKanBytteEnhet: true,
+  behandlingKanHenlegges: true,
+  behandlingKanGjenopptas: false,
+  behandlingKanOpnesForEndringer: true,
+  behandlingKanSettesPaVent: true,
+  vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
+};
+
 const alleBehandlinger = [{
   versjon: 2,
-  uuid: '423223',
+  uuid: '1',
   behandlingKoet: false,
   behandlingPaaVent: false,
   kanHenleggeBehandling: true,
@@ -36,6 +47,7 @@ const alleBehandlinger = [{
   behandlendeEnhetId: '2323',
   behandlendeEnhetNavn: 'NAV Viken',
   erAktivPapirsoknad: false,
+  behandlingTillatteOperasjoner,
 }];
 
 const fagsak = {
@@ -51,25 +63,12 @@ describe('BehandlingMenuIndex', () => {
   it('skal vise meny der alle menyhandlinger er synlige', async () => {
     const data = [
       { key: FpsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
-      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
-      { key: FpsakApiKeys.BEHANDLENDE_ENHETER.name, global: true, data: [] },
+      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt, behandlendeEnheter: [] } },
       { key: FpsakApiKeys.KODEVERK.name, global: true, data: {} },
       { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
       { key: FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES.name, data: false },
       { key: FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES.name, data: false },
     ];
-
-    const behandlingRettigheter = {
-      behandlingFraBeslutter: false,
-      behandlingKanSendeMelding: true,
-      behandlingTilGodkjenning: false,
-      behandlingKanBytteEnhet: true,
-      behandlingKanHenlegges: true,
-      behandlingKanGjenopptas: false,
-      behandlingKanOpnesForEndringer: true,
-      behandlingKanSettesPaVent: true,
-      vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
-    };
 
     render(
       <RestApiMock data={data} requestApi={requestApi}>
@@ -78,8 +77,7 @@ describe('BehandlingMenuIndex', () => {
             fagsakData={new FagsakData(fagsak as Fagsak)}
             behandlingUuid="1"
             behandlingVersjon={2}
-            oppfriskBehandlinger={jest.fn()}
-            behandlingRettigheter={behandlingRettigheter}
+            hentFagsakdataPåNytt={jest.fn()}
           />
         </MemoryRouter>
       </RestApiMock>,

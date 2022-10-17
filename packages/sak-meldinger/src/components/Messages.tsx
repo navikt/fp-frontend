@@ -97,7 +97,7 @@ interface OwnProps {
  * Presentasjonskomponent. Gir mulighet for å forhåndsvise og sende brev. Mottaker og brevtype velges fra predefinerte lister,
  * og fritekst som skal flettes inn i brevet skrives inn i et eget felt.
  */
-export const Messages: FunctionComponent<OwnProps> = ({
+const Messages: FunctionComponent<OwnProps> = ({
   templates,
   previewCallback,
   submitCallback,

@@ -7,8 +7,8 @@ import {
 
 import urlKvinne from '@fpsak-frontend/assets/images/kvinne.svg';
 import urlMann from '@fpsak-frontend/assets/images/mann.svg';
+import { Person } from '@fpsak-frontend/types';
 
-import Person from '../../../typer/personTsType';
 import AlderVisning from './Aldervisning';
 import MerkePanel from './Merkepanel';
 
@@ -25,7 +25,7 @@ interface OwnProps {
  *
  * Eksempel:
  * ```html
- * <PersonInfo person={navn:"Ola" alder:{40} personnummer:"12345678910" erKvinne:false
+ * <PersonInfo person={navn:"Ola" alder:{40} fødselsnummer:"12345678910" erKvinne:false
  * erDod:false diskresjonskode:"6" dødsdato:"1990.03.03"} medPanel />
  * ```
  */
@@ -34,7 +34,7 @@ const PersonInfo: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   intl,
 }) => {
   const {
-    erKvinne, dødsdato, diskresjonskode, alder, navn, personnummer,
+    erKvinne, dødsdato, diskresjonskode, alder, navn, fødselsnummer,
   } = person;
   return (
     <FlexContainer>
@@ -53,7 +53,7 @@ const PersonInfo: FunctionComponent<OwnProps & WrappedComponentProps> = ({
             <AlderVisning erDod={!!dødsdato} alder={alder} dodsdato={dødsdato} />
           </Heading>
           <Detail size="small">
-            {personnummer}
+            {fødselsnummer}
           </Detail>
         </FlexColumn>
         <FlexColumn>

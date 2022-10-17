@@ -101,8 +101,8 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
 
   const kodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
 
-  const navAnsatt = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
-  const rettigheter = useMemo(() => getAccessRights(navAnsatt, fagsak.status, behandling?.status, behandling?.type),
+  const initFetchData = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.INIT_FETCH);
+  const rettigheter = useMemo(() => getAccessRights(initFetchData.innloggetBruker, fagsak.status, behandling?.status, behandling?.type),
     [fagsak.status, behandlingUuid, behandling?.status, behandling?.type]);
 
   const location = useLocation();

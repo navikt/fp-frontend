@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { Location } from 'history';
-
 import { createIntl } from '@navikt/ft-utils';
+
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { skjermlenkeCodes } from '@fpsak-frontend/konstanter';
@@ -13,7 +13,7 @@ import vurderPaNyttArsakType from '@fpsak-frontend/kodeverk/src/vurderPaNyttArsa
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import {
-  BehandlingAppKontekst, AlleKodeverk, TotrinnskontrollSkjermlenkeContext, AlleKodeverkTilbakekreving, KodeverkMedNavn,
+  BehandlingAppKontekst, AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import { FatterVedtakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -57,7 +57,6 @@ const finnFaktaOmBeregningTilfeller = (alleKodeverk: AlleKodeverk | AlleKodeverk
 
 interface OwnProps {
   behandling: BehandlingAppKontekst;
-  totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   location: Location;
   fagsakYtelseType: string;
   alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
@@ -76,7 +75,6 @@ interface OwnProps {
 
 const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   behandling,
-  totrinnskontrollSkjermlenkeContext,
   location,
   fagsakYtelseType,
   readOnly,
@@ -121,11 +119,11 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   const sorterteTotrinnskontrollSkjermlenkeContext = useMemo(() => (erTilbakekreving
     ? sorterteSkjermlenkeCodesForTilbakekreving
       .flatMap((s) => {
-        const context = totrinnskontrollSkjermlenkeContext.find((el) => el.skjermlenkeType === s.kode);
+        const context = behandling.totrinnskontrollÅrsaker.find((el) => el.skjermlenkeType === s.kode);
         return context ? [context] : [];
       })
-    : totrinnskontrollSkjermlenkeContext),
-  [erTilbakekreving, totrinnskontrollSkjermlenkeContext]);
+    : behandling.totrinnskontrollÅrsaker),
+  [erTilbakekreving, behandling.totrinnskontrollÅrsaker]);
 
   const lagLenke = useCallback((skjermlenkeCode: string): Location | undefined => createLocationForSkjermlenke(location, skjermlenkeCode), [location]);
 

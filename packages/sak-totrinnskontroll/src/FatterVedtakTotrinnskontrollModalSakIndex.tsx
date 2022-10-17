@@ -12,14 +12,12 @@ interface OwnProps {
   behandling: BehandlingAppKontekst;
   closeEvent: () => void;
   allAksjonspunktApproved: boolean;
-  harSammeResultatSomOriginalBehandling?: boolean;
 }
 
 const FatterVedtakTotrinnskontrollModalSakIndex: FunctionComponent<OwnProps> = ({
   behandling,
   closeEvent,
   allAksjonspunktApproved,
-  harSammeResultatSomOriginalBehandling = false,
 }) => (
   <RawIntlProvider value={intl}>
     <FatterVedtakApprovalModal
@@ -28,7 +26,7 @@ const FatterVedtakTotrinnskontrollModalSakIndex: FunctionComponent<OwnProps> = (
       behandlingsresultat={behandling.behandlingsresultat}
       behandlingStatusKode={behandling.status}
       behandlingTypeKode={behandling.type}
-      harSammeResultatSomOriginalBehandling={harSammeResultatSomOriginalBehandling}
+      harSammeResultatSomOriginalBehandling={behandling.behandlingsresultat?.erRevurderingMedUendretUtfall || false}
     />
   </RawIntlProvider>
 );

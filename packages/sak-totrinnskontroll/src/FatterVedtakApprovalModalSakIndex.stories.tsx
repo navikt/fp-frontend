@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { Behandling } from '@navikt/ft-types';
+import { BehandlingAppKontekst } from '@fpsak-frontend/types';
 import FatterVedtakTotrinnskontrollModalSakIndex from './FatterVedtakTotrinnskontrollModalSakIndex';
 
 export default {
@@ -15,7 +15,7 @@ export default {
 
 const Template: Story<{
   closeEvent: () => void,
-  behandling: Behandling,
+  behandling: BehandlingAppKontekst,
   allAksjonspunktApproved: boolean,
 }> = ({
   closeEvent,
@@ -26,7 +26,6 @@ const Template: Story<{
     behandling={behandling}
     closeEvent={closeEvent}
     allAksjonspunktApproved={allAksjonspunktApproved}
-    harSammeResultatSomOriginalBehandling={false}
   />
 );
 
@@ -37,7 +36,7 @@ EtterFatterVedtakOgGodkjent.args = {
     uuid: '1',
     status: behandlingStatus.FATTER_VEDTAK,
     type: behandlingType.FORSTEGANGSSOKNAD,
-  } as Behandling,
+  } as BehandlingAppKontekst,
   allAksjonspunktApproved: true,
 };
 
@@ -51,7 +50,7 @@ EtterGodkjenning.args = {
     behandlingsresultat: {
       type: behandlingResultatType.OPPHOR,
     },
-  } as Behandling,
+  } as BehandlingAppKontekst,
   allAksjonspunktApproved: true,
 };
 
@@ -65,7 +64,7 @@ EtterGodkjenningAvKlage.args = {
     behandlingsresultat: {
       type: behandlingResultatType.OPPHOR,
     },
-  } as Behandling,
+  } as BehandlingAppKontekst,
   allAksjonspunktApproved: true,
 };
 
@@ -79,6 +78,6 @@ EtterTilbakesendingTilSaksbehandler.args = {
     behandlingsresultat: {
       type: behandlingResultatType.OPPHOR,
     },
-  } as Behandling,
+  } as BehandlingAppKontekst,
   allAksjonspunktApproved: false,
 };

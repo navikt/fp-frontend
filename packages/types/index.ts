@@ -1,7 +1,13 @@
 export type { default as Aksjonspunkt } from './src/aksjonspunktTsType';
 export type { default as Arbeidsforhold, ArbeidsforholdPermisjon } from './src/arbeidsforholdTsType';
 export type { default as Behandling } from './src/behandlingTsType';
-export type { default as BehandlingAppKontekst, BehandlingÅrsak } from './src/behandlingAppKontekstTsType';
+export type {
+  default as BehandlingAppKontekst,
+  BehandlingTillatteOperasjoner,
+  BehandlingÅrsak,
+  TotrinnskontrollSkjermlenkeContext,
+} from './src/behandlingAppKontekstTsType';
+export { VergeBehandlingmenyValg } from './src/behandlingAppKontekstTsType';
 export type { default as Behandlingsresultat } from './src/behandlingsresultatTsType';
 export type {
   default as Beregningsgrunnlag,
@@ -65,7 +71,7 @@ export type { default as Vilkar } from './src/vilkarTsType';
 export type { default as Ytelsefordeling } from './src/ytelsefordelingTsType';
 export type { FamilieHendelse, FamilieHendelseSamling, AvklartBarn } from './src/familieHendelseTsType';
 export type { default as Fagsak, AnnenPartBehandling, BehandlingOppretting } from './src/fagsakTsType';
-export type { default as FagsakEnkel } from './src/fagsakEnkelTsType';
+export type { default as FagsakEnkel, Person } from './src/fagsakEnkelTsType';
 export type { default as FagsakDataFpTilbake } from './src/fagsakTilbakekrevingTsType';
 export type {
   default as Medlemskap, MedlemPeriode, MedlemskapPeriode, Oppholdstillatelse, PersonopplysningMedlem,
@@ -80,7 +86,6 @@ export type {
 } from './src/opptjeningTsType';
 export type { default as TilbakekrevingValg } from './src/tilbakekrevingValgTsType';
 export type { default as TotrinnskontrollAksjonspunkt, OpptjeningAktiviteter } from './src/totrinnskontrollAksjonspunktTsType';
-export type { default as TotrinnskontrollSkjermlenkeContext } from './src/totrinnskontrollSkjermlenkeContextTsType';
 export type {
   default as Historikkinnslag, HistorikkInnslagDokumentLink, HistorikkinnslagDel, HistorikkinnslagEndretFelt,
   HistorikkInnslagOpplysning, HistorikkInnslagAksjonspunkt,

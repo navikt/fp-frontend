@@ -4,7 +4,7 @@ import SaksstottePaneler from './components/SaksstottePaneler';
 
 interface OwnProps {
   valgtSakslisteId?: number;
-  åpneFagsak: (saksnummer: number, behandlingUuid?: string) => void;
+  åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
 }
 
 /**

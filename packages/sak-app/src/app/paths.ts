@@ -45,7 +45,7 @@ const updateQueryParams = (queryString: string, nextParams: QueryParams): Search
   });
 };
 
-export const getFagsakHref = (saksnummer: number, behandlingUuid?: string) => (behandlingUuid
+export const getFagsakHref = (saksnummer: string, behandlingUuid?: string) => (behandlingUuid
   ? `/fagsak/${saksnummer}/behandling/${behandlingUuid}/?punkt=default&fakta=default` : `/fagsak/${saksnummer}/`);
 
 export const getLocationWithQueryParams = (location: Location, queryParams: QueryParams): Location => ({

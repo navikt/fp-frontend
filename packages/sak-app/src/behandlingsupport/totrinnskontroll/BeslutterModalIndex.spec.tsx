@@ -2,11 +2,9 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Modal } from '@navikt/ds-react';
 import { BehandlingResultatType, BehandlingType, BehandlingStatus } from '@navikt/ft-kodeverk';
-import { Behandling } from '@navikt/ft-types';
 
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
+import { BehandlingAppKontekst } from '@fpsak-frontend/types';
 
-import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import BeslutterModalIndex from './BeslutterModalIndex';
 
 describe('<BeslutterModalIndex>', () => {
@@ -18,28 +16,11 @@ describe('<BeslutterModalIndex>', () => {
     status: BehandlingStatus.FATTER_VEDTAK,
     behandlingsresultat: {
       type: BehandlingResultatType.OPPHOR,
+      erRevurderingMedUendretUtfall: true,
     },
-  } as Behandling;
+  } as BehandlingAppKontekst;
 
   it('skal vise modal når beslutter sender tilbake til ny vurdering', async () => {
-    const data = [
-      { key: FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT.name, data: { harRevurderingSammeResultat: true } },
-    ];
-
-    render(
-      <RestApiMock data={data} requestApi={requestApi}>
-        <BeslutterModalIndex
-          behandling={behandling}
-          pushLocation={jest.fn()}
-          allAksjonspunktApproved
-        />
-      </RestApiMock>,
-    );
-
-    expect(await screen.findByText('Resultat: Ingen endring, behandlingen avsluttes')).toBeInTheDocument();
-  });
-
-  it('skal vise modal men ikke hente data når en ikke har url', async () => {
     render(
       <BeslutterModalIndex
         behandling={behandling}
@@ -48,6 +29,6 @@ describe('<BeslutterModalIndex>', () => {
       />,
     );
 
-    expect(await screen.findByText('Vedtaket er opphørt.')).toBeInTheDocument();
+    expect(await screen.findByText('Resultat: Ingen endring, behandlingen avsluttes')).toBeInTheDocument();
   });
 });

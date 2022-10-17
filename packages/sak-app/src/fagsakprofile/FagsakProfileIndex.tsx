@@ -7,9 +7,9 @@ import {
 import { Location } from 'history';
 import BehandlingVelgerSakIndex from '@navikt/ft-sak-behandling-velger';
 import FagsakProfilSakIndex from '@navikt/ft-sak-fagsak-profil';
-import { BehandlingAppKontekst } from '@navikt/ft-types';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 
+import { BehandlingAppKontekst } from '@fpsak-frontend/types';
 import UkjentAdresseMeldingIndex from '@fpsak-frontend/sak-ukjent-adresse';
 
 import {
@@ -19,9 +19,7 @@ import {
 } from '../app/paths';
 import BehandlingMenuIndex from '../behandlingmenu/BehandlingMenuIndex';
 import RisikoklassifiseringIndex from './risikoklassifisering/RisikoklassifiseringIndex';
-import { FpsakApiKeys, restApiHooks, requestApi } from '../data/fpsakApi';
 import { useFpSakKodeverkMedNavn, useGetKodeverkFn } from '../data/useKodeverk';
-import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
 
 import styles from './fagsakProfileIndex.less';
 
@@ -42,16 +40,14 @@ interface OwnProps {
   fagsakData: FagsakData;
   behandlingUuid?: string;
   behandlingVersjon?: number;
-  oppfriskBehandlinger: () => void;
-  behandlingRettigheter?: BehandlingRettigheter;
+  hentFagsakdataPåNytt: () => void;
 }
 
 const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   fagsakData,
   behandlingUuid,
   behandlingVersjon,
-  oppfriskBehandlinger,
-  behandlingRettigheter,
+  hentFagsakdataPåNytt,
 }) => {
   const [showAll, setShowAll] = useState(!behandlingUuid);
   const toggleShowAll = useCallback(() => setShowAll(!showAll), [showAll]);
@@ -61,15 +57,6 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   const fagsak = fagsakData.getFagsak();
   const fagsakStatusMedNavn = useFpSakKodeverkMedNavn(fagsak.status, KodeverkType.FAGSAK_STATUS);
   const fagsakYtelseTypeMedNavn = useFpSakKodeverkMedNavn(fagsak.fagsakYtelseType, KodeverkType.FAGSAK_YTELSE);
-
-  const { data: risikoAksjonspunkt } = restApiHooks.useRestApi(FpsakApiKeys.RISIKO_AKSJONSPUNKT, undefined, {
-    updateTriggers: [behandlingUuid, behandlingVersjon],
-    suspendRequest: !requestApi.hasPath(FpsakApiKeys.RISIKO_AKSJONSPUNKT.name),
-  });
-  const { data: kontrollresultat } = restApiHooks.useRestApi(FpsakApiKeys.KONTROLLRESULTAT, undefined, {
-    updateTriggers: [behandlingUuid, behandlingVersjon],
-    suspendRequest: !requestApi.hasPath(FpsakApiKeys.KONTROLLRESULTAT.name),
-  });
 
   useEffect(() => {
     setShowAll(!behandlingUuid);
@@ -103,8 +90,7 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
               fagsakData={fagsakData}
               behandlingUuid={behandlingUuid}
               behandlingVersjon={behandlingVersjon}
-              oppfriskBehandlinger={oppfriskBehandlinger}
-              behandlingRettigheter={behandlingRettigheter}
+              hentFagsakdataPåNytt={hentFagsakdataPåNytt}
             />
           )}
           renderBehandlingVelger={() => (
@@ -129,8 +115,6 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
       )}
       <RisikoklassifiseringIndex
         fagsakData={fagsakData}
-        risikoAksjonspunkt={risikoAksjonspunkt}
-        kontrollresultat={kontrollresultat}
         behandlingUuid={behandlingUuid}
         behandlingVersjon={behandlingVersjon}
       />

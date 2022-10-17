@@ -43,6 +43,10 @@ class FagsakData {
     return this.$$alleBehandlinger;
   }
 
+  getBehandling(uuid: string): BehandlingAppKontekst | undefined {
+    return this.$$alleBehandlinger.find((b) => b.uuid === uuid);
+  }
+
   getHistorikkFpSak(): Historikkinnslag[] {
     return this.$$fagsak.historikkinnslag;
   }
