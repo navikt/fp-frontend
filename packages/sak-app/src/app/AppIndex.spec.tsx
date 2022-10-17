@@ -11,6 +11,8 @@ describe('<AppIndex>', () => {
   it('skal vise hjem-skjermbilde', async () => {
     const data = [
       { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
+      { key: FpsakApiKeys.KODEVERK.name, global: true, data: {} },
+      { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
     ];
 
     render(
@@ -27,6 +29,8 @@ describe('<AppIndex>', () => {
   it('skal vise query-feilmelding', async () => {
     const data = [
       { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
+      { key: FpsakApiKeys.KODEVERK.name, global: true, data: {} },
+      { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
     ];
 
     render(
