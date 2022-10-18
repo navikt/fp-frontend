@@ -6,7 +6,11 @@ const commonDevAndProd = require('./webpack.common');
 const vtpLogin = require("./mocks/login");
 const sentryMock = require("./mocks/sentry");
 const fakeError = require("./mocks/fake-error");
+const axios = require("axios");
+const qs = require("querystring");
 const deps = require('../package.json').dependencies;
+
+const vtpAccessTokenUrl = 'http://127.0.0.1:8060/rest/isso/oauth2/access_token';
 
 const PUBLIC_PATH = '/'
 
@@ -65,7 +69,46 @@ const config = {
       if (!devServer) {
         throw new Error('webpack-dev-server is not defined');
       }
-      vtpLogin(devServer.app);
+
+      middlewares.unshift({
+        name: 'login-page',
+        path: '/login-with-vtp',
+        middleware: (req, res) => {
+          const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+          const roles = ['beslut', 'klageb', 'oversty', 'saksbeh', 'saksbeh6', 'saksbeh7', 'veil'];
+          const urls = {};
+          roles.forEach((role) => {
+            const url = new URL(fullUrl + '/redirect');
+            url.searchParams.append('code', role);
+            urls[role] = url.toString();
+          });
+          res.json(urls);
+        }
+      });
+      middlewares.unshift({
+        name: 'login-page-redirect',
+        path: '/login-with-vtp/redirect',
+        middleware: (req, res) => {
+          const redirectUri = req.query.redirect_uri ? req.query.redirect_uri : '/';
+          axios.post(vtpAccessTokenUrl, qs.stringify({
+            grant_type: 'code',
+            code: req.query.code,
+          }), {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+          })
+            .then(result => {
+              res.cookie('ID_token', result.data.id_token, {
+                maxAge: 86400000,
+                httpOnly: true,
+              });
+              res.redirect(redirectUri);
+            });
+        }
+      });
+
+      //vtpLogin(devServer.app);
       sentryMock(devServer.app);
       fakeError(devServer.app);
 
@@ -85,6 +128,9 @@ const config = {
         target: process.env.BACKEND_URL || 'http://localhost:8000',
         secure: false,
         changeOrigin: (!!process.env.BACKEND_URL),
+        headers: {
+          'Authorization': 'Bearer eyJraWQiOiIxIiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJodHRwOi8vdnRwOjgwNjAvcmVzdC9pc3NvL29hdXRoMiIsImV4cCI6MTY2NjEyNDkwNywianRpIjoiTEVqenJsWF93REc2Z3dtNlFucnpmZyIsImlhdCI6MTY2NjEwMzMwNywic3ViIjoic2Frc2JlaCIsImF1ZCI6Ik9JREMiLCJhY3IiOiJMZXZlbDQiLCJhenAiOiJPSURDIn0.HtKNNtD8SdXR6JV4QAhCxqAf5dDH6NI7LExdJ4k34z58Y4E8-v61XrZjN3FXQiCsJDe9jLvy1iFCGq235hRUNoDGgNMl_GGAVkItbYYdf44_1NXbGY6NmehjZdUiQCz4zWPbFABpS1DAJEpNQj_b2v0xH-on44Yt_nBYbv0EbsWU-iPf391YOCsqYSIQlgM1FHITBDWBKjAdqhY4LWExnKwOLZzv9F-fRH8pJPI_-O4yjzSJ_nk_AIUFpXGm8wOCZAyI-uJUybzyRBoyIAoBLMqe_S2KlXWCV32jtp9gMz51vgehOHQ93ucgNOl6TDOT7a-y2lY-ECps2Pdr4xUthw'
+        }
       }
     ],
     devMiddleware: {

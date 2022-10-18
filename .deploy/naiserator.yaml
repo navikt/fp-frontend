@@ -70,4 +70,4 @@ spec:
               {{/each}}
               ]}'
     - name: NODE_ENV
-      value: {{env}}
+      value: "{{env}}"

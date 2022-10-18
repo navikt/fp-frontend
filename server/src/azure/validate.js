@@ -1,23 +1,23 @@
-import { verifyJwt } from '../utils/verify.js';
-
-import { getIssuer } from './issuer.js';
-import { getJwkSet } from './jwk.js';
+import {jwtVerify} from 'jose';
+import {getIssuer} from './issuer.js';
+import {getJwkSet} from './jwk.js';
 import config from '../config.js';
 import logger from '../log.js';
 
-export const isTokenValid = async (bearerToken) => {
-  const verificationResult = await verifyJwt(bearerToken, await getJwkSet(), await getIssuer());
+const isTokenValid = async (token) => {
+  return jwtVerify(token, await getJwkSet(), {
+    issuer: (await getIssuer()).metadata.issuer,
+    audience: config.azureAd.clientId,
+  });
+}
 
-  if ('errorType' in verificationResult) {
-    logger.error(verificationResult);
+export const validateAuthorization = async (authorization) => {
+  try {
+    const token = authorization.replace('Bearer ', '');
+    const JWTVerifyResult = await isTokenValid(token);
+    return !!JWTVerifyResult?.payload;
+  } catch (e) {
+    logger.error('Azure AD error', e);
     return false;
   }
-
-  const azureConfig = config.azureAd;
-  if (verificationResult.payload.aud !== azureConfig.clientId) {
-    logger.error("AUD != clientId")
-    return false;
-  }
-
-  return true;
 }

@@ -5,7 +5,7 @@ import logger from '../log.js';
 let issuer;
 
 export const getIssuer = async () => {
-  if (issuer == null) {
+  if (issuer === undefined) {
     const azureConfig = config.azureAd;
     issuer = await Issuer.discover(azureConfig.discoveryUrl);
     logger.info(`Discovered issuer ${issuer.issuer}`);

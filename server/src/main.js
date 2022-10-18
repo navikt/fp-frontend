@@ -11,7 +11,7 @@ import { getIssuer } from './azure/issuer.js';
 import config from './config.js';
 import msgraph from "./azure/msgraph.js";
 import reverseProxy from "./reverse-proxy.js";
-import { isTokenValid } from "./azure/validate.js";
+import {validateAuthorization} from "./azure/validate.js";
 
 const server = express();
 const { port } = config.server;
@@ -75,13 +75,20 @@ async function startApp() {
     });
 
     const ensureAuthenticated = async (req, res, next) => {
-      const userToken = req.headers.authorization;
-      if (!userToken && isTokenValid(userToken)) {
-        logger.debug("NOK user token.")
-        res.redirect(`/oauth2/login?redirect=${req.originalUrl}`);
+      const {authorization} = req.headers;
+      const loginPath = `/oauth2/login?redirect=${req.originalUrl}`;
+      if (!authorization) {
+         logger.debug("User token missing. Redirect til login.")
+         res.redirect(loginPath);
       } else {
-        logger.debug("OK user token.")
-        next();
+        // Validate token and continue to app
+        if (await validateAuthorization(authorization)) {
+          logger.debug("User token is valid. Continue.")
+          next();
+        } else {
+          logger.debug("User token is NOT valid. Redirect til login.")
+          res.redirect(loginPath);
+        }
       }
     };
 

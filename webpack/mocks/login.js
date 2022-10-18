@@ -1,6 +1,6 @@
 const axios = require('axios');
 const qs = require('querystring');
-const vtpAccessTokenUrl = 'http://localhost:8060/rest/isso/oauth2/access_token';
+const vtpAccessTokenUrl = 'http://127.0.0.1:8060/rest/isso/oauth2/access_token';
 /**
  *
  * @param Express.app
@@ -32,6 +32,9 @@ module.exports = function (app) {
           maxAge: 86400000,
           httpOnly: true,
         });
+        res.set('Authorization', result.data.id_token);
+        res.setHeader('Authorization', result.data.id_token);
+        res.header('Authorization', result.data.id_token);
         res.redirect(redirectUri);
       });
   });
