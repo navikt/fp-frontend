@@ -2,6 +2,7 @@
   "ingress": "https://fpsak.intern.nav.no",
   "minReplicas": "2",
   "maxReplicas": "4",
+  "env": "production",
   "groups": [
     "c772e71e-3e9f-47af-9027-a359e0c51e38"
   ],

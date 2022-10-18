@@ -69,3 +69,5 @@ spec:
                 {"path":"{{path}}", "url":"{{url}}", "scopes":"{{scope}}"}{{#unless @last}},{{/unless}}
               {{/each}}
               ]}'
+    - name: NODE_ENV
+      value: {{env}}
