@@ -1,4 +1,5 @@
 import React from 'react';
+import dayjs from 'dayjs';
 import { render, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import * as stories from './FagsakSearch.stories';
@@ -9,9 +10,11 @@ describe('<FagsakSearch>', () => {
   it('skal vise tabell med saksnummer og behandlinger', async () => {
     render(<Default />);
 
+    const alder = dayjs().diff('1980-10-10', 'years');
+
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
     expect(screen.getByText('Espen Utvikler')).toBeInTheDocument();
-    expect(screen.getByText('41 år')).toBeInTheDocument();
+    expect(screen.getByText(`${alder} år`)).toBeInTheDocument();
     expect(screen.getByText('12213234')).toBeInTheDocument();
   });
 

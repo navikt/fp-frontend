@@ -8,7 +8,7 @@ import {
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
 import { alleKodeverkLos } from '@fpsak-frontend/storybook-utils';
-import { FagsakEnkel } from '@fpsak-frontend/types';
+import { FagsakEnkel, KjønnkodeEnum } from '@fpsak-frontend/types';
 
 import FagsakList from './FagsakList';
 import Oppgave from '../../typer/oppgaveTsType';
@@ -53,9 +53,9 @@ Default.args = {
     status: FagsakStatus.UNDER_BEHANDLING,
     person: {
       navn: 'Espen Utvikler',
-      alder: 41,
+      fødselsdato: '1980-10-10',
       fødselsnummer: '1010',
-      erKvinne: false,
+      kjønn: KjønnkodeEnum.MANN,
     },
     barnFødt: '2019-12-12',
     opprettet: '',

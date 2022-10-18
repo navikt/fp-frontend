@@ -1,8 +1,10 @@
+import { Kjønnkode } from './Kjonnkode';
+
 export type Person = Readonly<{
   navn: string;
-  alder: number;
-  erKvinne: boolean;
+  kjønn: Kjønnkode;
   fødselsnummer: string;
+  fødselsdato: string;
   dødsdato?: string;
   diskresjonskode?: string;
 }>
