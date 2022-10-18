@@ -19,6 +19,7 @@ const proxyOptions = (api) => ({
     }
     const requestTime = Date.now();
     options.headers[xTimestamp] = requestTime;
+    options.headers['cookie'] = '';
     return new Promise(((resolve, reject) => grantAzureOboToken(req.headers.authorization, api.scopes)
       .then((access_token) => {
         logger.info(`Token veksling tok: (${Date.now() - requestTime}ms)`);
