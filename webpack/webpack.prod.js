@@ -8,7 +8,6 @@ const config = {
   mode: 'production',
   devtool: 'source-map',
   performance: { hints: false },
-
   entry: [
     path.resolve(path.resolve(__dirname, '../packages'), 'sak-app/src') + '/index.ts',
   ],

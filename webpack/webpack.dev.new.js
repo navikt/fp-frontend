@@ -2,6 +2,10 @@ const path = require('path');
 const { merge } = require('webpack-merge');
 const { ModuleFederationPlugin } = require('webpack').container;
 const commonDevAndProd = require('./webpack.common');
+
+const vtpLogin = require("./mocks/login");
+const sentryMock = require("./mocks/sentry");
+const fakeError = require("./mocks/fake-error");
 const deps = require('../package.json').dependencies;
 
 const PUBLIC_PATH = '/'
@@ -14,7 +18,7 @@ const config = {
     path.resolve(path.join(__dirname, '../packages'), 'sak-app/src') + '/index.ts',
   ],
   output: {
-    path: path.resolve(__dirname, '../public/client'),
+    path: path.resolve(__dirname, './public'),
     publicPath: PUBLIC_PATH,
     filename: '[name].js',
   },
@@ -50,8 +54,53 @@ const config = {
     },
   },
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: false,
+    port: 3000,
+    open: false,
+    static: {
+      directory: 'packages',
+      watch: true,
+    },
+    setupMiddlewares: (middlewares, devServer) => {
+      if (!devServer) {
+        throw new Error('webpack-dev-server is not defined');
+      }
+      vtpLogin(devServer.app);
+      sentryMock(devServer.app);
+      fakeError(devServer.app);
+
+      return middlewares
+    },
+    onListening: function (devServer) {
+      if (!devServer) {
+        throw new Error('webpack-dev-server is not defined');
+      }
+
+      const port = devServer.server.address().port;
+      console.log('Listening on port:', port);
+    },
+    proxy: [
+      {
+        context: ['/fpoppdrag/api', '/fptilbake/api', '/fplos/api', '/fpsak/api', '/fpformidling/api'],
+        target: process.env.BACKEND_URL || 'http://localhost:8000',
+        secure: false,
+        changeOrigin: (!!process.env.BACKEND_URL),
+      }
+    ],
+    devMiddleware: {
+      publicPath: PUBLIC_PATH,
+      stats: {
+        children: false,
+        colors: true,
+      },
+    },
   },
 };
+
+
+if (process.argv.includes('--no-fix')) {
+  console.warn('Setting eslint-loader option \'fix\' to false');
+  config.module.rules.find(rules => rules.loader === 'eslint-loader').options.fix = false;
+}
 
 module.exports = merge(commonDevAndProd, config);

@@ -117,7 +117,7 @@ async function startApp() {
     reverseProxy.setup(server);
 
     // serve static files
-    const rootDir = isDev ? './dist' : '/app';
+    const rootDir = '.';
     server.use(express.static(rootDir));
     server.use('/', (req, res) => {
       res.sendFile('index.html', { root: rootDir });
