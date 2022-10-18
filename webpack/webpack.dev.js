@@ -1,8 +1,8 @@
 const path = require('path');
-const { merge } = require('webpack-merge');
 const { ModuleFederationPlugin } = require('webpack').container;
-const commonDevAndProd = require('./webpack.common');
 const deps = require('../package.json').dependencies;
+const { merge } = require('webpack-merge');
+const commonDevAndProd = require('./webpack.common');
 
 const PUBLIC_PATH = '/'
 

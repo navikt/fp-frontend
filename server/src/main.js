@@ -18,8 +18,6 @@ const { port } = config.server;
 
 async function startApp() {
   try {
-    const isDev = process.env.NODE_ENV === 'development';
-
     headers.setup(server);
 
     // Logging i json format
