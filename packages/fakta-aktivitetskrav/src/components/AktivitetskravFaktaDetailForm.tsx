@@ -1,14 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import {
-  Button, Label, BodyShort, Heading,
-} from '@navikt/ds-react';
+import { Button } from '@navikt/ds-react';
 
 import { FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
 import { RadioGroupPanel, Form } from '@navikt/ft-form-hooks';
 import {
-  PeriodLabel, VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
+  VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
 import { KodeverkMedNavn, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
 import { required } from '@navikt/ft-form-validators';
@@ -40,36 +38,6 @@ export const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
 
   return (
     <Form formMethods={formMethods} onSubmit={(values: FormValues) => oppdaterAktivitetskrav(values)}>
-      <Heading size="small"><FormattedMessage id="AktivitetskravFaktaDetailForm.Header" /></Heading>
-      <VerticalSpacer fourPx />
-      <FlexContainer>
-        <FlexRow>
-          <FlexColumn>
-            <Label size="small">
-              <FormattedMessage id="AktivitetskravFaktaDetailForm.Periode" />
-            </Label>
-            <VerticalSpacer fourPx />
-            <BodyShort size="small">
-              <PeriodLabel
-                dateStringFom={valgtAktivitetskrav.fom}
-                dateStringTom={valgtAktivitetskrav.tom}
-              />
-            </BodyShort>
-          </FlexColumn>
-          {valgtAktivitetskrav.morsAktivitet && (
-            <FlexColumn>
-              <Label size="small">
-                <FormattedMessage id="AktivitetskravFaktaDetailForm.MorsAktivitet" />
-              </Label>
-              <VerticalSpacer fourPx />
-              <BodyShort size="small">
-                {morsAktiviteter.find((ma) => ma.kode === valgtAktivitetskrav.morsAktivitet)?.navn}
-              </BodyShort>
-            </FlexColumn>
-          )}
-        </FlexRow>
-      </FlexContainer>
-      <VerticalSpacer sixteenPx />
       <RadioGroupPanel
         name="avklaring"
         label={<FormattedMessage id="AktivitetskravFaktaDetailForm.Avklaring" />}
