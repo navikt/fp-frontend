@@ -90,7 +90,7 @@
     "@types/redux-form": "8.3.5",
     "@types/redux-logger": "3.0.9",
     "@types/sinon": "10.0.13",
-    "@typescript-eslint/eslint-plugin": "5.39.0",
+    "@typescript-eslint/eslint-plugin": "5.40.1",
     "@typescript-eslint/parser": "5.39.0",
     "@wojtekmaj/enzyme-adapter-react-17": "0.6.7",
     "axios-mock-adapter": "1.21.2",
