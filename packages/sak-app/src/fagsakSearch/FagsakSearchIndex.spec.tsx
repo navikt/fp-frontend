@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 
-import { FagsakEnkel } from '@fpsak-frontend/types';
+import { FagsakEnkel, KjønnkodeEnum } from '@fpsak-frontend/types';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
@@ -27,9 +27,9 @@ describe('<FagsakSearchIndex>', () => {
     opprettet: '',
     person: {
       navn: 'Petra',
-      alder: 40,
-      erKvinne: false,
       fødselsnummer: '232323',
+      fødselsdato: '1980-10-10',
+      kjønn: KjønnkodeEnum.KVINNE,
     },
   } as FagsakEnkel;
   const fagsak2: Partial<FagsakEnkel> = {

@@ -2,6 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
+import { Kjønnkode, KjønnkodeEnum } from '@fpsak-frontend/types';
 
 import PersonInfo from './PersonInfo';
 import diskresjonskodeType from '../../../kodeverk/diskresjonskodeType';
@@ -16,18 +17,18 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{ navn: string, erKvinne: boolean, diskresjonskode?: string, dødsdato?: string }> = ({
+const Template: Story<{ navn: string, kjønn: Kjønnkode, diskresjonskode?: string, dødsdato?: string }> = ({
   navn,
-  erKvinne,
+  kjønn,
   diskresjonskode,
   dødsdato,
 }) => (
   <PersonInfo
     person={{
       navn,
-      alder: 41,
+      fødselsdato: '1980-10-10',
+      kjønn,
       fødselsnummer: '23232332',
-      erKvinne,
       diskresjonskode,
       dødsdato,
     }}
@@ -37,13 +38,13 @@ const Template: Story<{ navn: string, erKvinne: boolean, diskresjonskode?: strin
 export const PersonkortMedDiskresjonskodeForMann = Template.bind({});
 PersonkortMedDiskresjonskodeForMann.args = {
   navn: 'Espen Utvikler',
-  erKvinne: false,
+  kjønn: KjønnkodeEnum.MANN,
   diskresjonskode: diskresjonskodeType.KODE7,
 };
 
 export const PersonkortForDødKvinne = Template.bind({});
 PersonkortForDødKvinne.args = {
   navn: 'Olga Pettersen',
-  erKvinne: true,
+  kjønn: KjønnkodeEnum.KVINNE,
   dødsdato: '2020-10-10',
 };

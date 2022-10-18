@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import dayjs from 'dayjs';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Heading, Detail } from '@navikt/ds-react';
 import {
@@ -7,7 +8,7 @@ import {
 
 import urlKvinne from '@fpsak-frontend/assets/images/kvinne.svg';
 import urlMann from '@fpsak-frontend/assets/images/mann.svg';
-import { Person } from '@fpsak-frontend/types';
+import { KjønnkodeEnum, Person } from '@fpsak-frontend/types';
 
 import AlderVisning from './Aldervisning';
 import MerkePanel from './Merkepanel';
@@ -34,15 +35,18 @@ const PersonInfo: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   intl,
 }) => {
   const {
-    erKvinne, dødsdato, diskresjonskode, alder, navn, fødselsnummer,
+    kjønn, dødsdato, diskresjonskode, fødselsdato, navn, fødselsnummer,
   } = person;
+
+  const alder = dayjs().diff(fødselsdato, 'years');
+
   return (
     <FlexContainer>
       <FlexRow>
         <FlexColumn>
           <Image
             className={styles.icon}
-            src={erKvinne ? urlKvinne : urlMann}
+            src={kjønn === KjønnkodeEnum.KVINNE ? urlKvinne : urlMann}
             alt={intl.formatMessage({ id: 'Person.ImageText' })}
           />
         </FlexColumn>
