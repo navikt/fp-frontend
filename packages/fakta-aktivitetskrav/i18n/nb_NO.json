@@ -1,6 +1,8 @@
 {
   "AktivitetskravFaktaForm.AksjonspunktHjelpetekst": "Kontroller kravet til mors aktivitet",
   "AktivitetskravFaktaForm.Aktivitetskravperioder": "Perioder med aktivitetskrav",
+  "AktivitetskravFaktaForm.Aksjonspunkt": "Åpent aksjonspunkt",
+  "AktivitetskravFaktaForm.Ok": "Arbeidsforhold er OK",
 
   "AktivitetskravFaktaTabell.Periode": "Periode",
   "AktivitetskravFaktaTabell.Avklaring": "Avklaring",
