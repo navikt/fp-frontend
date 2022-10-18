@@ -51,10 +51,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Bygg, tag og push Docker image
-        run: |
-          docker build --pull --tag ${IMAGE_BASE}:${TAG} .
-          docker push ${IMAGE_BASE} --all-tags
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: Dockerfile
+          push: ${{ env.SHOULD_DEPLOY }}
+          tags: ${{ env.IMAGE_BASE }}:${{ env.TAG }}
 
       - name: Deploy dev
         if: success() && env.SHOULD_DEPLOY == 'true'
