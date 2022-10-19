@@ -19,7 +19,7 @@
     "@navikt/ft-utils": "1.1.5",
     "dayjs": "1.11.5",
     "react": "18.2.0",
-    "react-hook-form": "7.36.1",
+    "react-hook-form": "7.38.0",
     "react-intl": "6.1.2"
   },
   "devDependencies": {
