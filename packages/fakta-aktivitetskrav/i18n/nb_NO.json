@@ -3,6 +3,7 @@
   "AktivitetskravFaktaForm.Aktivitetskravperioder": "Perioder med aktivitetskrav",
   "AktivitetskravFaktaForm.Aksjonspunkt": "Åpent aksjonspunkt",
   "AktivitetskravFaktaForm.Ok": "Arbeidsforhold er OK",
+  "AktivitetskravFaktaForm.Overskrift": "Fakta om aktivitetskrav",
 
   "AktivitetskravFaktaTabell.Periode": "Periode",
   "AktivitetskravFaktaTabell.Avklaring": "Avklaring",
@@ -13,6 +14,10 @@
   "AktivitetskravFaktaDetailForm.Oppdater": "Oppdater",
   "AktivitetskravFaktaDetailForm.Avbryt": "Avbryt",
   "AktivitetskravFaktaDetailForm.Avklaring": "Vurdering",
+  "AktivitetskravFaktaDetailForm.Fom": "Fra og med:",
+  "AktivitetskravFaktaDetailForm.Tom": "Til og med:",
   "AktivitetskravFaktaDetailForm.Periode": "Periode",
-  "AktivitetskravFaktaDetailForm.MorsAktivitet": "Mors aktivitet"
+  "AktivitetskravFaktaDetailForm.MorsAktivitet": "Mors aktivitet",
+  "AktivitetskravFaktaDetailForm.OppdaterDato": "Oppdater dato",
+  "AktivitetskravFaktaDetailForm.DelOppPeriode": "Del opp periode"
 }

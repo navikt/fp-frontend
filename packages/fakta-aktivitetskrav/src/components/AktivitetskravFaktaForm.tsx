@@ -1,21 +1,24 @@
 import React, {
   FunctionComponent, useCallback, useEffect, useMemo, useState, useRef,
 } from 'react';
-import { useIntl } from 'react-intl';
+import { useForm } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
 import classnames from 'classnames/bind';
 import { dateFormat } from '@navikt/ft-utils';
+import { Form } from '@navikt/ft-form-hooks';
 
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
 import endretFelt from '@fpsak-frontend/assets/images/endret_felt.svg';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  AksjonspunktHelpTextHTML, VerticalSpacer, FaktaGruppe, ExpandableTableRow, Table, TableColumn, Image,
+  AksjonspunktHelpTextHTML, VerticalSpacer, ExpandableTableRow, Table, TableColumn, Image,
 } from '@navikt/ft-ui-komponenter';
 import { KodeverkMedNavn, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
-import { FaktaSubmitButtonNew } from '@fpsak-frontend/fakta-felles';
+import { FaktaSubmitButtonNew, FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
 import { KontrollerAktivitetskravAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
+import { Heading } from '@navikt/ds-react';
 import AktivitetskravFaktaDetailForm from './AktivitetskravFaktaDetailForm';
 
 import styles from './aktivitetskravFaktaForm.less';
@@ -40,8 +43,8 @@ interface PureOwnProps {
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   readOnly: boolean;
   submittable: boolean;
-  formData: UttakKontrollerAktivitetskrav[],
-  setFormData: (data: UttakKontrollerAktivitetskrav[]) => void,
+  formData: { aktivitetskrav: UttakKontrollerAktivitetskrav[], begrunnelse: string },
+  setFormData: (data: { aktivitetskrav: UttakKontrollerAktivitetskrav[], begrunnelse: string }) => void,
 }
 
 const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
@@ -60,10 +63,9 @@ const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
 
   const tableRef = useRef<HTMLTableElement>(null);
 
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isDirty, setDirty] = useState<boolean>(false);
 
-  const [aktivitetskrav, updateAktivitetskrav] = useState<UttakKontrollerAktivitetskrav[]>(formData || sorterteAktivitetskrav);
+  const [aktivitetskrav, updateAktivitetskrav] = useState<UttakKontrollerAktivitetskrav[]>(formData?.aktivitetskrav || sorterteAktivitetskrav);
 
   const [valgtAktivitetskravFom, setAktivitetskravFom] = useState<string>();
   const velgAktivitetskravFom = useCallback((fom: string) => {
@@ -75,12 +77,13 @@ const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
     tableRef?.current?.scrollIntoView();
   }, [valgtAktivitetskravFom]);
 
-  useEffect(() => velgAktivitetskravFom(aktivitetskrav?.find((oa) => !oa.avklaring)?.fom), [aktivitetskrav]);
+  useEffect(() => velgAktivitetskravFom(aktivitetskrav?.find((oa) => !oa.avklaring)?.fom), []);
 
-  const oppdaterAktivitetskrav = useCallback((oppdatertKrav) => {
+  const oppdaterAktivitetskrav = useCallback((oppdatertKrav: { perioder: UttakKontrollerAktivitetskrav[] }) => {
+    const { perioder } = oppdatertKrav;
     const oppdaterteAktivitetskrav = aktivitetskrav
-      .filter((aKrav) => aKrav.fom !== oppdatertKrav.fom)
-      .concat([oppdatertKrav])
+      .filter((aKrav) => aKrav.fom !== perioder[0].fom)
+      .concat(perioder)
       .sort((a1, a2) => a1.fom.localeCompare(a2.fom));
 
     updateAktivitetskrav(oppdaterteAktivitetskrav);
@@ -92,23 +95,34 @@ const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
     velgAktivitetskravFom(undefined);
   }, []);
 
-  const bekreft = useCallback(() => {
-    setIsSubmitting(true);
+  const bekreft = useCallback((begrunnelse: string) => {
     submitCallback({
       kode: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
       avklartePerioder: aktivitetskrav as Required<UttakKontrollerAktivitetskrav>[],
-    }).then(() => setIsSubmitting(false));
+      begrunnelse,
+    });
   }, [aktivitetskrav]);
 
-  const isSubmittable = useMemo(() => submittable && !valgtAktivitetskravFom && aktivitetskrav?.every((a) => a.avklaring),
-    [aktivitetskrav, valgtAktivitetskravFom]);
+  const formMethods = useForm<{ begrunnelse: string }>({
+    defaultValues: {
+      begrunnelse: formData?.begrunnelse,
+    },
+  });
 
   useEffect(() => () => {
-    setFormData(aktivitetskrav);
-  }, [aktivitetskrav]);
+    setFormData({ aktivitetskrav, begrunnelse: formMethods.getValues('begrunnelse') });
+  }, []);
+
+  const begrunnelse = formMethods.watch('begrunnelse');
+
+  const isSubmittable = useMemo(() => submittable
+    && !valgtAktivitetskravFom && aktivitetskrav?.every((a) => a.avklaring) && !!begrunnelse,
+  [aktivitetskrav, valgtAktivitetskravFom, begrunnelse]);
 
   return (
     <>
+      <Heading size="small"><FormattedMessage id="AktivitetskravFaktaForm.Overskrift" /></Heading>
+      <VerticalSpacer thirtyTwoPx />
       {harApneAksjonspunkter && (
         <>
           <AksjonspunktHelpTextHTML>
@@ -117,68 +131,71 @@ const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
           <VerticalSpacer sixteenPx />
         </>
       )}
-      <FaktaGruppe
-        title={intl.formatMessage({ id: 'AktivitetskravFaktaForm.Aktivitetskravperioder' })}
-        merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV]}
-      >
-        {aktivitetskrav && (
-          <Table ref={tableRef} headerTextCodes={HEADER_TEXT_CODES} noHover hasGrayHeader>
-            {aktivitetskrav.map((krav) => (
-              <ExpandableTableRow
-                key={krav.fom + krav.tom}
-                isApLeftBorder={!krav.avklaring}
-                showContent={valgtAktivitetskravFom === krav.fom}
-                toggleContent={() => velgAktivitetskravFom(krav.fom)}
-                content={((valgtAktivitetskravFom
-                  && (
-                    <AktivitetskravFaktaDetailForm
-                      key={valgtAktivitetskravFom}
-                      valgtAktivitetskrav={krav}
-                      readOnly={readOnly}
-                      aktivitetskravAvklaringer={aktivitetskravAvklaringer}
-                      oppdaterAktivitetskrav={oppdaterAktivitetskrav}
-                      avbrytEditeringAvAktivitetskrav={avbrytEditeringAvAktivitetskrav}
-                      morsAktiviteter={morsAktiviteter}
-                    />
-                  )
-                ))}
-              >
-                <TableColumn className={classNames('ikon', valgtAktivitetskravFom === krav.fom ? 'imageColTopPadding' : undefined)}>
-                  {krav.avklaring && (
-                    <Image alt={intl.formatMessage({ id: 'AktivitetskravFaktaForm.Ok' })} src={okIkonUrl} />
-                  )}
-                  {!krav.avklaring && (
-                    <Image alt={intl.formatMessage({ id: 'AktivitetskravFaktaForm.Aksjonspunkt' })} src={advarselIkonUrl} />
-                  )}
-                </TableColumn>
-                <TableColumn>{`${dateFormat(krav.fom)} - ${dateFormat(krav.tom)}`}</TableColumn>
-                <TableColumn>{krav.morsAktivitet ? morsAktiviteter.find((aktivtet) => aktivtet.kode === krav.morsAktivitet)?.navn : ''}</TableColumn>
-                <TableColumn>{krav.avklaring ? aktivitetskravAvklaringer.find((avklaring) => avklaring.kode === krav.avklaring)?.navn : ''}</TableColumn>
-                <TableColumn>
-                  {krav.endret && (
-                    <Image
-                      src={endretFelt}
-                      className={styles.image}
-                      alt={intl.formatMessage({ id: 'AktivitetskravFaktaTabell.ErEndret' })}
-                      tooltip={intl.formatMessage({ id: 'AktivitetskravFaktaTabell.ErEndret' })}
-                      tabIndex={0}
-                      alignTooltipLeft
-                    />
-                  )}
-                </TableColumn>
-              </ExpandableTableRow>
-            ))}
-          </Table>
-        )}
-      </FaktaGruppe>
+      {aktivitetskrav && (
+        <Table ref={tableRef} headerTextCodes={HEADER_TEXT_CODES} noHover hasGrayHeader>
+          {aktivitetskrav.map((krav) => (
+            <ExpandableTableRow
+              key={krav.fom + krav.tom}
+              isApLeftBorder={!krav.avklaring}
+              showContent={valgtAktivitetskravFom === krav.fom}
+              toggleContent={() => velgAktivitetskravFom(krav.fom)}
+              content={((valgtAktivitetskravFom
+                && (
+                  <AktivitetskravFaktaDetailForm
+                    key={valgtAktivitetskravFom}
+                    valgtAktivitetskrav={krav}
+                    readOnly={readOnly}
+                    aktivitetskravAvklaringer={aktivitetskravAvklaringer}
+                    oppdaterAktivitetskrav={oppdaterAktivitetskrav}
+                    avbrytEditeringAvAktivitetskrav={avbrytEditeringAvAktivitetskrav}
+                    morsAktiviteter={morsAktiviteter}
+                  />
+                )
+              ))}
+            >
+              <TableColumn className={classNames('ikon', valgtAktivitetskravFom === krav.fom ? 'imageColTopPadding' : undefined)}>
+                {krav.avklaring && (
+                  <Image alt={intl.formatMessage({ id: 'AktivitetskravFaktaForm.Ok' })} src={okIkonUrl} />
+                )}
+                {!krav.avklaring && (
+                  <Image alt={intl.formatMessage({ id: 'AktivitetskravFaktaForm.Aksjonspunkt' })} src={advarselIkonUrl} />
+                )}
+              </TableColumn>
+              <TableColumn>{`${dateFormat(krav.fom)} - ${dateFormat(krav.tom)}`}</TableColumn>
+              <TableColumn>{krav.morsAktivitet ? morsAktiviteter.find((aktivtet) => aktivtet.kode === krav.morsAktivitet)?.navn : ''}</TableColumn>
+              <TableColumn>{krav.avklaring ? aktivitetskravAvklaringer.find((avklaring) => avklaring.kode === krav.avklaring)?.navn : ''}</TableColumn>
+              <TableColumn>
+                {krav.endret && (
+                  <Image
+                    src={endretFelt}
+                    className={styles.image}
+                    alt={intl.formatMessage({ id: 'AktivitetskravFaktaTabell.ErEndret' })}
+                    tooltip={intl.formatMessage({ id: 'AktivitetskravFaktaTabell.ErEndret' })}
+                    tabIndex={0}
+                    alignTooltipLeft
+                  />
+                )}
+              </TableColumn>
+            </ExpandableTableRow>
+          ))}
+        </Table>
+      )}
       <VerticalSpacer twentyPx />
-      <FaktaSubmitButtonNew
-        isSubmittable={isSubmittable}
-        isReadOnly={readOnly}
-        onClick={bekreft}
-        isSubmitting={isSubmitting}
-        isDirty={isDirty}
-      />
+      <Form formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
+        <FaktaBegrunnelseTextFieldNew
+          name="begrunnelse"
+          isSubmittable
+          isReadOnly={readOnly}
+          hasBegrunnelse
+        />
+        <VerticalSpacer twentyPx />
+        <FaktaSubmitButtonNew
+          isSubmittable={isSubmittable}
+          isReadOnly={readOnly}
+          isSubmitting={formMethods.formState.isSubmitting}
+          isDirty={isDirty || formMethods.formState.isDirty}
+        />
+      </Form>
     </>
   );
 };
