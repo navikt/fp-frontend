@@ -136,6 +136,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       status: b.status,
       opprettet: b.opprettet,
       avsluttet: b.avsluttet,
+      resultatType: b.behandlingsresultat?.type,
     })), [alleBehandlinger]);
 
   if (!behandlingUuid) {
