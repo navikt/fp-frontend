@@ -127,6 +127,17 @@ server {
     error_page 504 = @504_json;
   }
 
+  location "/fplos/api/" {
+    proxy_set_header Host       $http_host;
+    proxy_pass "${APP_URL_LOS}/fptilbake/api/";
+    proxy_intercept_errors on;
+    error_page 401 = @401_json;
+    error_page 403 = @403_json;
+    error_page 404 = @404_json;
+    error_page 504 = @504_json;
+    error_page 502 = @502_json;
+  }
+
   location "/fpsak/resource/" {
     proxy_set_header Host	$http_host;
     proxy_pass "${APP_URL}/fpsak/resource/";
@@ -161,6 +172,11 @@ server {
   location @504_json {
     default_type application/json;
     return 504 '{"feilmelding":"Timet ut","type":"GENERELL_FEIL"}';
+  }
+
+  location @502_json {
+    default_type application/json;
+    return 502 '{"feilmelding":"Kunne ikke koble til (502 bad gateway)","type":"BAD_GATEWAY_FEIL"}';
   }
 
   # If no asset matches, send it to your javascript app. Hopefully it's a route in the app!
