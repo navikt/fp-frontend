@@ -10,6 +10,7 @@ import FormkravProsessIndex from '@fpsak-frontend/prosess-formkrav';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { KlageVurdering } from '@fpsak-frontend/types';
 
+import { isKlageAvvist } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
@@ -34,6 +35,7 @@ interface OwnProps {
     status: string;
     opprettet: string;
     avsluttet?: string;
+    resultatType?: string;
   }[];
 }
 
@@ -45,7 +47,7 @@ const FormKravFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & Pro
 
   const avsluttedeBehandlinger = useMemo(() => alleBehandlinger
     .filter((b) => b.status === BehandlingStatus.AVSLUTTET)
-    .filter((b) => b.type !== BehandlingType.KLAGE && b.type !== BehandlingType.ANKE), [alleBehandlinger]);
+    .filter((b) => (b.type !== BehandlingType.KLAGE || isKlageAvvist(b.resultatType)) && b.type !== BehandlingType.ANKE), [alleBehandlinger]);
 
   return (
     <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
