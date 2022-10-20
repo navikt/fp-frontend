@@ -53,6 +53,8 @@ spec:
       value: "http://fptilbake"
     - name: APP_URL_FPFORMIDLING
       value: "http://fpformidling"
+    - name: APP_URL_LOS
+      value: "http://fplos"
 #    - name: REDIS_HOST
 #      value: "fpsak-redis.teamforeldrepenger.svc.nais.local"
 #    - name: REDIS_PORT

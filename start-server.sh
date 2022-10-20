@@ -19,7 +19,7 @@ export APP_NAME="${APP_NAME:-devimg}"
 export APP_VERSION="${APP_VERSION:-localhost}"
 export APP_CALLBACK_PATH="${APP_CALLBACK_PATH:-/callback}"
 
-envsubst '$APP_URL $APP_PORT $APP_HOSTNAME $APP_NAME $APP_VERSION $APP_PATH_PREFIX $APP_URL_FPFORMIDLING $APP_URL_FPTILBAKE $APP_URL_FPOPPDRAG $APP_URL_FPSAK $APP_CALLBACK_PATH' < /etc/nginx/conf.d/app.conf.template > /etc/nginx/conf.d/default.conf
+envsubst '$APP_URL $APP_PORT $APP_HOSTNAME $APP_NAME $APP_VERSION $APP_PATH_PREFIX $APP_URL_FPFORMIDLING $APP_URL_FPTILBAKE $APP_URL_LOS $APP_URL_FPOPPDRAG $APP_URL_FPSAK $APP_CALLBACK_PATH' < /etc/nginx/conf.d/app.conf.template > /etc/nginx/conf.d/default.conf
 
 echo "### Nginx conf ###"
 cat /etc/nginx/conf.d/default.conf
