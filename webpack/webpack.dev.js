@@ -1,8 +1,11 @@
 const path = require('path');
-const { ModuleFederationPlugin } = require('webpack').container;
-const deps = require('../package.json').dependencies;
 const { merge } = require('webpack-merge');
+const { ModuleFederationPlugin } = require('webpack').container;
 const commonDevAndProd = require('./webpack.common');
+
+const sentryMock = require("./mocks/sentry");
+const fakeError = require("./mocks/fake-error");
+const deps = require('../package.json').dependencies;
 
 const PUBLIC_PATH = '/'
 
@@ -10,11 +13,11 @@ const config = {
   mode: 'development',
   devtool: 'eval-cheap-source-map',
   entry: [
-    'webpack-dev-server/client?http://localhost:9000',
+    'webpack-dev-server/client?http://localhost:9100',
     path.resolve(path.join(__dirname, '../packages'), 'sak-app/src') + '/index.ts',
   ],
   output: {
-    path: path.resolve(__dirname, '../public/client'),
+    path: path.resolve(__dirname, './public'),
     publicPath: PUBLIC_PATH,
     filename: '[name].js',
   },
@@ -51,7 +54,51 @@ const config = {
   },
   devServer: {
     historyApiFallback: true,
+    port: 9100,
+    open: true,
+    static: {
+      directory: 'packages',
+      watch: true,
+    },
+    setupMiddlewares: (middlewares, devServer) => {
+      if (!devServer) {
+        throw new Error('webpack-dev-server is not defined');
+      }
+
+      sentryMock(devServer.app);
+      fakeError(devServer.app);
+
+      return middlewares
+    },
+    onListening: function (devServer) {
+      if (!devServer) {
+        throw new Error('webpack-dev-server is not defined');
+      }
+      const port = devServer.server.address().port;
+      console.log(`Listening at http://localhost:${port}/`);
+    },
+    proxy: [
+      {
+        context: ['/fpoppdrag/api', '/fptilbake/api', '/fplos/api', '/fpsak/api', '/fpformidling/api'],
+        target: process.env.BACKEND_URL || 'http://127.0.0.1:9000',
+        secure: false,
+        changeOrigin: (!!process.env.BACKEND_URL),
+      }
+    ],
+    devMiddleware: {
+      publicPath: PUBLIC_PATH,
+      stats: {
+        children: false,
+        colors: true,
+      },
+    },
   },
 };
+
+
+if (process.argv.includes('--no-fix')) {
+  console.warn('Setting eslint-loader option \'fix\' to false');
+  config.module.rules.find(rules => rules.loader === 'eslint-loader').options.fix = false;
+}
 
 module.exports = merge(commonDevAndProd, config);

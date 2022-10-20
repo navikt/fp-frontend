@@ -1,6 +1,63 @@
 version: '3.7'
-
 services:
+  mock-oauth2-server:
+    image: ghcr.io/navikt/mock-oauth2-server:0.5.1
+    ports:
+      - "8080:8080"
+    environment:
+      JSON_CONFIG: |
+        {
+          "interactiveLogin": false,
+          "httpServer": "NettyWrapper",
+          "tokenCallbacks": [
+            {
+              "issuerId": "azureAd",
+              "tokenExpiry": 120,
+              "requestMappings": [
+                {
+                  "requestParam": "grant_type",
+                  "match": "authorization_code",
+                  "claims": {
+                    "sub": "saksbeh",
+                    "sid": "1234"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+    hostname: host.docker.internal
+  wonderwall:
+    image: ghcr.io/nais/wonderwall:latest
+    # alternatively,
+    # build: .
+    ports:
+      - "9000:9000"
+    command: >
+      --openid.client-id=oasis
+      --openid.well-known-url=http://host.docker.internal:8080/azureAd/.well-known/openid-configuration
+      --ingress=http://localhost:9000
+      --bind-address=0.0.0.0:9000
+      --upstream-host=frontend:9090
+      --log-level=debug
+      --log-format=text
+    restart: on-failure
+    environment:
+      WONDERWALL_OPENID_CLIENT_JWK: |
+        {
+          "p": "uglj69HBqwsI8HoRZ3O3LZLagL4LASooVJktgCvTgjucVDovIYeSSUmd1LTtDKFM2W-oobbWQA-t1-pnTM0dnEgti0d3fWuiBe1StAoiCSh18KOcnMnors-MQi-WlmBUACGRYX2v0coMCLWMBkMfRjPGZ43eHutCcyRydNCopOE",
+          "kty": "RSA",
+          "q": "s1uYe4HX1HHKbVlmHbHsGjiMown3Qio0KYO8ehohVbkH9-2lFpb00h2-NZMXZxluBBWmx5ukIV07NJ9nKiFbRTkR2b2ww5WocPYRk4fAMYDe8sCHOHuOAZiI6F97x4kySPiqj_U2ut_EWkgDtUkMwtciZDzwRmcuGPb-c8OHSkU",
+          "d": "CGME29GzZxGC7CcqfiWabszarqXfCFLBkVD6cQqYBilA3DJ-3j3_txIWaQVtUplBQt6YOIL8S_-4D_LGFn5B4bHYq5pPLsV6FJfqYLz2CRppWH5cvQYqH1MraOSm0127vG19KRDK02FUC77P7X9gFiOPLerU8j02mhu6riQmfvT8fRZ3It8yN_RL0aaQ87m_acI33pS5lUhR8ooaWBKN27pWeiVMImMJ4OxiPZiU-9C8rbLwFjiXjZzjuxmWQ7zu1-aqfy4iqc4kyFLo6H6wIY3mGgK76k3zmQrerJRTZElAzm6018IWNLNkVJKjsaH5GwSmK0KVnZLj6NPrbWzvgQ",
+          "e": "AQAB",
+          "use": "sig",
+          "kid": "azureAd",
+          "qi": "g87KpFNEigeOQ2EF6hdjllzmyYu3rVIUvqKTR7RjiqDQwujRlugGbXGXxJy93X5FLpk6Z2xM-cwE2PEm1369ZZxom3EDx46sic1v5aH9mbU2BhaGOfpY4Mi9X72VkW_KBMoAfJYPi3SCScBMoqYkAOFGbtS3uARvY0-HB0P5X2U",
+          "dp": "GmTOqlxeD7hHEmcfJQBD0tFs8qsDwKyMgEQjMnYFUgrHCSQgH6-uT3uESvNIVmxkDM1MrXTVPM18qo91DG5lbxDGdWY0S7UDjbe37hcp8QauhO-RfqUev_5uNc2unbMY99PLXnuIgEkcH_gx34mSXFFoKrTz-IsEKHXZTz1zT8E",
+          "dq": "Zy48bGDoDxlfQMT7T_35O6Rok6q6CeBJndBhb0T1BGGryd9256X0NaRStnNmNTOV7Nef2JkbNO5zjvRc3wnNfec087SCqiHAgyusNNkVoeTnXXOQ1teNfDGKIVQ82y98NCqJxMNmtt7gEKf5KiNaKgSljlDYUUguZsJA48wKWpk",
+          "n": "glchA7ywlOiBhxPj6WxGcbiT2ejpfVivkWz0KdQ8BiXxZaUBMr4hdB6voYfSWaNaZle6Avy10MVr-hn8Ef15G1y4ot_vEVdomhLBsaX1UcyMSY8J-rZusq1sPmkBZbe0Xoivt__AJaXBS2OZi8PgCe80HYEN2G3PB3ytvA8YC99l3xBzTmYlSWCth9mJiR4ovlQdsswu7ruDNCrtO2MktLrFehKkha3LFiZiq0MTaXzK2XyvgjwU8o12pyWpVnmF8vttY2mQln8C5_ybTxT1C62e2Q0QR9K25t3YY6qeDjsD0SypaxCtfiQ5dwidorwTi1mKKaz_5AuAAmtmUsR6pQ",
+          "alg": "RS256"
+        }
   frontend:
     build:
       context: .
@@ -8,13 +65,32 @@ services:
     ports:
       - "9090:9090"
     environment:
-      - AZURE_APP_CLIENT_ID=local-client-123
-      - AZURE_APP_CLIENT_SECRET=none
-      - AZURE_APP_JWKS={"keys":[{"p":"36qWbr6zTCe4xM3OLpT_x9mcSbNvnx9Sr-z9GHHS4aCQS7JWirw3ez-8vWM71jypLIbUUj7ym_Dbd98IJtc9S6o8j5QejC92Y5EJqtnmKEkKnD4HWLPruCIf8mPlWFPsQQxHeAB6vv1ki036cfaHnmlV7_Fsv2ftYKHfp86-ozE","kty":"RSA","q":"19dG8TqsgmvM37F5C_0V0EjBXd2FcJQUkeoZbZRBcAGeoFyDklkMuUwlIogF0fQPrp-UBoCoY_efz5Y4Y_jR00W9xpPcb2spC9UdmMRVaw6YhKHY1NOdvF_9pV8hI5QtpSglaCr9o6lCp78_wELjZe7-tFcZyN7C-LvyX63W7qc","d":"MK-8k59azRASyjD59fPySFdeo4BzHYsjObZ5Vxmblz2uD4CDKgLldQzG7ELiO4FCDhfpQklQFTpa1wIt-wFFMYW3-crTJv3gC-s3u5215yZIQ3ilMQXdXliultOQKGUnm9QHaTW0RZpgwOmOe4iRkbunrCUTPhbmiAJWzOXg1KtMAcc_q1-F5n1YpplzKLAORgRYcvfwaEKLag-FHQgqfokTp8-Lm2zWQ_2xr34ifKuQFWi79M8PMdpMzExGVoc_rDBbweXt4CxuZQTUzYp_F9D-RP4XOPl1Xb1kVXb5vW-dw3QlFHWOszwb7GK0GLHahJrs6sUHZ4I2HIHvrRPbAQ","e":"AQAB","use":"sig","kid":"test-id","qi":"heuqSTOqX0terJoTuYmudRYuldWg52KU4U-hsEFSYiOoGCuY5O-Wkqs66i28gGOlFAaU9rGvxIQd1ro9ag1TiZxyWPPtrVdyD-HwNYs11tdROTZ8lVFs6OYj3NhwZYd5TXpq4HNf-jf7yru2NF7jSWg6UR1TBXeBTHchQKdgnTo","dp":"Wi8VUvgPoYBOrwPww7WOYM2sh8cTFczycT8UWhvjFNjB9dOls3DqygZMGuz9PofdCrgeuj7pYdk_FNlYFxkofO7aVmY53vpwOPtNM5eChvHUlmUoXyrEu8z-pqSC4BeOpjfGRWukEohnVwgNGJB35HbCkOn-mDrWauU6IhZppbE","alg":"RS256","dq":"hGbwg8XkUNTkBkyN3obPvMcEpxneY2LTA3dBRfDt-1FjByf5JesuXPSSyw351AMNI6eMXDjMExaxl9ukl97oh9t-QLQvQsHPmgyPbUjyxQtdD-9gXZ26YvXXWHx0jai2H1vzJmVI1f5cfx5Ycw4VBFCJOgM8M_ZCT-arFXpEIH0","n":"vJRalsEoApXYdEFsrYo7QOcM36shQXTQvyXuiJPzqq-WpwOM7dCLUQJ7HRO07kKJAfdldwV7j1k1KELjwUozXQC_uGL28xByaP3BZ5JcTmBWz_X2tIRkxOcj8QYJYUaRBWF8gjISkbZC_Cli94NI5qkdSegGV4tjHYwGhk3qX1Pp0NULhxmfdiiMtkMj2PEGQGxl87tgUQrWjBZj1pcn-d7Tnw8uUNMt5tfqCzVXQcJefkuPTOetvFMSyMk8ismd1uxLie1sQ4I-KFnD9OMLVAHfuXNtLrQoPaYJVzqE7ix3f9y5kS8VMn8-UN42gxm6AMenJ0TXJFaAUnGAogoC9w"}]}
-      - AZURE_APP_WELL_KNOWN_URL=http://auth.server:8030/default/.well-known/openid-configuration
-      - NODE_ENV=development
-      - PROXY_CONFIG={"apis":[{"path":"/fpsak/api","url":"http://192.168.5.2:8081","scopes":"fp-frontend/.default"}]}
-      - PORT=9090
+      NODE_ENV: development
+      AZURE_APP_CLIENT_ID: local-client-123
+      AZURE_APP_JWKS: |
+        {"keys":[
+          {
+            "p": "uglj69HBqwsI8HoRZ3O3LZLagL4LASooVJktgCvTgjucVDovIYeSSUmd1LTtDKFM2W-oobbWQA-t1-pnTM0dnEgti0d3fWuiBe1StAoiCSh18KOcnMnors-MQi-WlmBUACGRYX2v0coMCLWMBkMfRjPGZ43eHutCcyRydNCopOE",
+            "kty": "RSA",
+            "q": "s1uYe4HX1HHKbVlmHbHsGjiMown3Qio0KYO8ehohVbkH9-2lFpb00h2-NZMXZxluBBWmx5ukIV07NJ9nKiFbRTkR2b2ww5WocPYRk4fAMYDe8sCHOHuOAZiI6F97x4kySPiqj_U2ut_EWkgDtUkMwtciZDzwRmcuGPb-c8OHSkU",
+            "d": "CGME29GzZxGC7CcqfiWabszarqXfCFLBkVD6cQqYBilA3DJ-3j3_txIWaQVtUplBQt6YOIL8S_-4D_LGFn5B4bHYq5pPLsV6FJfqYLz2CRppWH5cvQYqH1MraOSm0127vG19KRDK02FUC77P7X9gFiOPLerU8j02mhu6riQmfvT8fRZ3It8yN_RL0aaQ87m_acI33pS5lUhR8ooaWBKN27pWeiVMImMJ4OxiPZiU-9C8rbLwFjiXjZzjuxmWQ7zu1-aqfy4iqc4kyFLo6H6wIY3mGgK76k3zmQrerJRTZElAzm6018IWNLNkVJKjsaH5GwSmK0KVnZLj6NPrbWzvgQ",
+            "e": "AQAB",
+            "use": "sig",
+            "kid": "azureAd",
+            "qi": "g87KpFNEigeOQ2EF6hdjllzmyYu3rVIUvqKTR7RjiqDQwujRlugGbXGXxJy93X5FLpk6Z2xM-cwE2PEm1369ZZxom3EDx46sic1v5aH9mbU2BhaGOfpY4Mi9X72VkW_KBMoAfJYPi3SCScBMoqYkAOFGbtS3uARvY0-HB0P5X2U",
+            "dp": "GmTOqlxeD7hHEmcfJQBD0tFs8qsDwKyMgEQjMnYFUgrHCSQgH6-uT3uESvNIVmxkDM1MrXTVPM18qo91DG5lbxDGdWY0S7UDjbe37hcp8QauhO-RfqUev_5uNc2unbMY99PLXnuIgEkcH_gx34mSXFFoKrTz-IsEKHXZTz1zT8E",
+            "dq": "Zy48bGDoDxlfQMT7T_35O6Rok6q6CeBJndBhb0T1BGGryd9256X0NaRStnNmNTOV7Nef2JkbNO5zjvRc3wnNfec087SCqiHAgyusNNkVoeTnXXOQ1teNfDGKIVQ82y98NCqJxMNmtt7gEKf5KiNaKgSljlDYUUguZsJA48wKWpk",
+            "n": "glchA7ywlOiBhxPj6WxGcbiT2ejpfVivkWz0KdQ8BiXxZaUBMr4hdB6voYfSWaNaZle6Avy10MVr-hn8Ef15G1y4ot_vEVdomhLBsaX1UcyMSY8J-rZusq1sPmkBZbe0Xoivt__AJaXBS2OZi8PgCe80HYEN2G3PB3ytvA8YC99l3xBzTmYlSWCth9mJiR4ovlQdsswu7ruDNCrtO2MktLrFehKkha3LFiZiq0MTaXzK2XyvgjwU8o12pyWpVnmF8vttY2mQln8C5_ybTxT1C62e2Q0QR9K25t3YY6qeDjsD0SypaxCtfiQ5dwidorwTi1mKKaz_5AuAAmtmUsR6pQ",
+            "alg": "RS256"
+          }
+        ]}
+      AZURE_APP_WELL_KNOWN_URL: http://host.docker.internal:8080/azureAd/.well-known/openid-configuration
+      PROXY_CONFIG: |
+        {"apis":
+          [
+            {"path":"/fpsak/api","url":"http://127.0.0.1:8081","scopes":"api://fpsak/.default"}, {"path":"/fptilbake/api","url":"http://127.0.0.1:8031","scopes":"api://fptilbake/.default"}]}
+      PORT: 9090
+    restart: on-failure
     container_name: frontend
     healthcheck:
       test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9090/isReady" ]
@@ -22,12 +98,4 @@ services:
       timeout: 10s
       retries: 10
     links:
-      - auth.server
-
-  auth.server:
-    image: ghcr.io/navikt/mock-oauth2-server:0.5.1
-    ports:
-      - "8030:8030"
-    environment:
-      - SERVER_PORT=8030
-    container_name: auth.server
+      - mock-oauth2-server
