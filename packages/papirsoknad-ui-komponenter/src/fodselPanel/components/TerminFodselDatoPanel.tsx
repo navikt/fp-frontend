@@ -27,7 +27,7 @@ export type FormValues = {
   termindato?: string;
   terminbekreftelseDato?: string;
   antallBarnFraTerminbekreftelse?: number;
-  foedselsDato?: string;
+  foedselsDato?: string | string[];
   antallBarn?: number;
   erBarnetFodt?: boolean;
 }

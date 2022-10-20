@@ -36,16 +36,21 @@ export type TransformedFormValues = {
 
 const getValideringMotAnnenFødselsdato = (
   index: number,
-  fodselsdato?: string,
+  fodselsdato?: string | string[],
 ) => (
   fDato?: string,
-) => (index === 0 && fodselsdato && fDato ? isDatesEqual(fDato, fodselsdato) : undefined);
+) => {
+  if (index === 0 && fodselsdato && fDato) {
+    return isDatesEqual(fDato, Array.isArray(fodselsdato) ? fodselsdato[0] : fodselsdato);
+  }
+  return undefined;
+};
 
 interface OwnProps {
   familieHendelseType: string;
   readOnly?: boolean;
   isForeldrepengerFagsak: boolean;
-  fodselsdato?: string;
+  fodselsdatoer?: string | string[];
 }
 
 interface StaticFunctions {
@@ -62,7 +67,7 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly = true,
   familieHendelseType,
   isForeldrepengerFagsak,
-  fodselsdato,
+  fodselsdatoer,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -168,8 +173,8 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
                   name={`${OMSORG_NAME_PREFIX}.foedselsDato.${index}.dato`}
                   isReadOnly={readOnly}
                   validate={familieHendelseType === fht.ADOPSJON
-                    ? [required, hasValidDate, dateBeforeOrEqualToToday, getValideringMotAnnenFødselsdato(index, fodselsdato)]
-                    : [hasValidDate, dateBeforeOrEqualToToday, getValideringMotAnnenFødselsdato(index, fodselsdato)]}
+                    ? [required, hasValidDate, dateBeforeOrEqualToToday, getValideringMotAnnenFødselsdato(index, fodselsdatoer)]
+                    : [hasValidDate, dateBeforeOrEqualToToday, getValideringMotAnnenFødselsdato(index, fodselsdatoer)]}
                   label={formatMessage({ id: 'Registrering.Adopsjon.FodselsdatoBarnN' }, { n: index + 1 })}
                 />
               </React.Fragment>
