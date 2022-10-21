@@ -94,8 +94,6 @@ async function startApp() {
     // The routes below require the user to be authenticated
     server.use(ensureAuthenticated);
 
-    server.get('/ip', (req, res) => res.send(req.headers['x-real-ip'] || req.socket.remoteAddress))
-
     server.get(["/logout"], async (req, res) => {
       if (req.headers.authorization) {
         res.redirect("/oauth2/logout");
