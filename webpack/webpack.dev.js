@@ -79,7 +79,8 @@ const config = {
     },
     proxy: [
       {
-        context: ['/fpoppdrag/api', '/fptilbake/api', '/fplos/api', '/fpsak/api', '/fpformidling/api'],
+        //context: ['/fpoppdrag/api', '/fptilbake/api', '/fplos/api', '/fpsak/api', '/fpformidling/api'],
+        context: () => true,
         target: process.env.BACKEND_URL || 'http://127.0.0.1:9000',
         secure: false,
         changeOrigin: (!!process.env.BACKEND_URL),

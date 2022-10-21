@@ -4,10 +4,15 @@ services:
     image: ghcr.io/navikt/mock-oauth2-server:0.5.1
     ports:
       - "8080:8080"
+    healthcheck:
+      test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/default/.well-known/openid-configuration" ]
+      interval: 15s
+      timeout: 10s
+      retries: 10
     environment:
       JSON_CONFIG: |
         {
-          "interactiveLogin": false,
+          "interactiveLogin": true,
           "httpServer": "NettyWrapper",
           "tokenCallbacks": [
             {
@@ -29,14 +34,13 @@ services:
     hostname: host.docker.internal
   wonderwall:
     image: ghcr.io/nais/wonderwall:latest
-    # alternatively,
-    # build: .
     ports:
       - "9000:9000"
     command: >
+      --openid.provider=azure
       --openid.client-id=oasis
       --openid.well-known-url=http://host.docker.internal:8080/azureAd/.well-known/openid-configuration
-      --ingress=http://localhost:9000
+      --ingress=http://localhost:9000,http://wonderwall:9000
       --bind-address=0.0.0.0:9000
       --upstream-host=frontend:9090
       --log-level=debug
@@ -58,6 +62,8 @@ services:
           "n": "glchA7ywlOiBhxPj6WxGcbiT2ejpfVivkWz0KdQ8BiXxZaUBMr4hdB6voYfSWaNaZle6Avy10MVr-hn8Ef15G1y4ot_vEVdomhLBsaX1UcyMSY8J-rZusq1sPmkBZbe0Xoivt__AJaXBS2OZi8PgCe80HYEN2G3PB3ytvA8YC99l3xBzTmYlSWCth9mJiR4ovlQdsswu7ruDNCrtO2MktLrFehKkha3LFiZiq0MTaXzK2XyvgjwU8o12pyWpVnmF8vttY2mQln8C5_ybTxT1C62e2Q0QR9K25t3YY6qeDjsD0SypaxCtfiQ5dwidorwTi1mKKaz_5AuAAmtmUsR6pQ",
           "alg": "RS256"
         }
+    depends_on:
+      - mock-oauth2-server
   frontend:
     build:
       context: .
@@ -88,7 +94,7 @@ services:
       PROXY_CONFIG: |
         {"apis":
           [
-            {"path":"/fpsak/api","url":"http://127.0.0.1:8081","scopes":"api://fpsak/.default"}, {"path":"/fptilbake/api","url":"http://127.0.0.1:8031","scopes":"api://fptilbake/.default"}]}
+            {"path":"/fpsak/api","url":"http://localhost:8079","scopes":"api://fpsak/.default"}, {"path":"/fptilbake/api","url":"http://localhost:8030","scopes":"api://fptilbake/.default"}]}
       PORT: 9090
     restart: on-failure
     container_name: frontend
@@ -97,5 +103,5 @@ services:
       interval: 15s
       timeout: 10s
       retries: 10
-    links:
+    depends_on:
       - mock-oauth2-server

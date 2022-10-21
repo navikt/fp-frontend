@@ -24,7 +24,7 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 
 polyfill().then(() => {
   init({
-    dsn: isDevelopment ? 'http://dev@localhost:9000/1' : 'https://d1b7de8cc42949569da03849b47d3ea1@sentry.gc.nav.no/17',
+    dsn: isDevelopment ? 'http://dev@localhost:9100/1' : 'https://d1b7de8cc42949569da03849b47d3ea1@sentry.gc.nav.no/17',
     release,
     environment,
     integrations: [new Integrations.Breadcrumbs({ console: false })],
