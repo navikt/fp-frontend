@@ -2,7 +2,7 @@ import cors from 'cors';
 import express from 'express';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
-import limit from './ratelimit.js';
+import timeout from 'connect-timeout';
 import * as headers from "./headers.js";
 import logger from './log.js';
 import { getIssuer } from './azure/issuer.js';
@@ -18,6 +18,7 @@ const { port } = config.server;
 
 async function startApp() {
   try {
+    server.use(timeout('10m'));
     headers.setup(server);
 
     // Logging i json format
@@ -25,8 +26,6 @@ async function startApp() {
 
     server.use(bodyParser.json());
     server.use(bodyParser.urlencoded({ extended: true }));
-
-    server.use(limit);
 
     server.set("trust proxy", 1);
 
@@ -94,9 +93,6 @@ async function startApp() {
 
     // The routes below require the user to be authenticated
     server.use(ensureAuthenticated);
-
-    server.get('/ip', (req, res) => res.send(req.ip))
-    server.get('/json', (req, res) => res.send(req))
 
     server.get(["/logout"], async (req, res) => {
       if (req.headers.authorization) {

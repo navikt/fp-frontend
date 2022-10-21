@@ -64,9 +64,17 @@ const proxyOptions = (api) => ({
 
 const stripTrailingSlash = (str) => (str.endsWith('/') ? str.slice(0, -1) : str);
 
+const timedOut = function (req, res, next) {
+  if (!req.timedout) {
+    next()
+  } else {
+    logger.warning('Request for ' + req.originalUrl + ' timed out!')
+  }
+}
+
 const setup = (router) => {
   config.reverseProxyConfig.apis.forEach((api) => {
-    router.use(`${api.path}/*`, proxy(api.url, proxyOptions(api)));
+    router.use(`${api.path}/*`, timedOut, proxy(api.url, proxyOptions(api)));
   });
 };
 
