@@ -96,7 +96,7 @@ async function startApp() {
     server.use(ensureAuthenticated);
 
     server.get('/ip', (req, res) => res.send(req.ip))
-    server.get('/json', (req, res) => res.json(req))
+    server.get('/json', (req, res) => res.send(req))
 
     server.get(["/logout"], async (req, res) => {
       if (req.headers.authorization) {
