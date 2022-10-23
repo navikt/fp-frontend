@@ -4,7 +4,9 @@
   "maxReplicas": "4",
   "env": "production",
   "groups": [
-    "c772e71e-3e9f-47af-9027-a359e0c51e38"
+    "73107205-17ec-4a07-a56e-e0a8542f90c9",
+    "77f05833-ebfd-45fb-8be7-88eca8e7418f",
+    "1a59da27-4c55-4a9d-8480-6abd1a856cd2"
   ],
   "externals": [
     "fpsak-api.prod-fss-pub.nais.io",
