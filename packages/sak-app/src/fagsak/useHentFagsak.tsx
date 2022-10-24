@@ -31,7 +31,7 @@ const useHentFagsak = (saksnummer: string, behandlingUuid?: string, behandlingVe
     || (fagsakDataTilbakeState !== RestApiState.NOT_STARTED && fagsakDataTilbakeState !== RestApiState.LOADING);
 
   const harHentetData = harHentetFpSak && harHentetFpTilbake;
-  const fagsakData = useMemo(() => (harHentetData && fagsak ? new FagsakData(fagsak, fagsakDataTilbake) : undefined),
+  const fagsakData = useMemo(() => (harHentetData ? new FagsakData(fagsak, fagsakDataTilbake) : undefined),
     [harHentetData, fagsak, fagsakDataTilbake]);
 
   return [harHentetData, fagsakData];
