@@ -23,7 +23,7 @@ const OMSORG_FORM_NAME_PREFIX = 'omsorg';
 
 export type FormValues = {
   rettigheter?: string;
-  foedselsDato?: string | string[];
+  foedselsDato?: string;
   [OMSORG_FORM_NAME_PREFIX]?: OmsorgOgAdopsjonFormValues;
   [ANNEN_FORELDER_FORM_NAME_PREFIX]?: AnnenForelderFormValues;
 } & OppholdINorgeFormValues;
