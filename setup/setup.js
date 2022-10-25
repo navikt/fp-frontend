@@ -15,3 +15,7 @@ window.ResizeObserver =
     observe: jest.fn(),
     unobserve: jest.fn(),
   }));
+
+// TODO Midlertidig mock til bug i ny datepicker er fiksa
+const spy = jest.spyOn(window, 'addEventListener');
+spy.mockImplementation(() => {});

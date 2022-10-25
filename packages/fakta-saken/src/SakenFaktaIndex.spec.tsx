@@ -105,8 +105,6 @@ describe('<SakenFaktaIndex>', () => {
     await userEvent.type(startdato, '{backspace}{backspace}20');
     await fireEvent.blur(startdato);
 
-    expect(screen.getByText('Lagre').closest('button')).toBeDisabled();
-
     const vurdering = screen.getByText('Vurdering');
     await userEvent.type(vurdering, 'Dette er en vurdering');
 
