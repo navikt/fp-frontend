@@ -38,7 +38,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
-    expect(await screen.findAllByText('Flere like datoer.')).toHaveLength(2);
+    expect(await screen.findByText('Flere like datoer.')).toBeInTheDocument();
 
     await userEvent.clear(dato);
     await userEvent.type(dato, '16.10.2020');
@@ -182,7 +182,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByRole('img')[1]);
+    await userEvent.click(screen.getByAltText('Endre utbetalingsgrad'));
 
     const utbetalingsgrad = utils.getByLabelText('Utbetalingsgrad (%)');
     await userEvent.clear(utbetalingsgrad);

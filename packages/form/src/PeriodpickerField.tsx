@@ -6,7 +6,7 @@ import moment from 'moment';
 import {
   ACCEPTED_DATE_INPUT_FORMATS, DDMMYYYY_DATE_FORMAT, haystack, ISO_DATE_FORMAT,
 } from '@navikt/ft-utils';
-import { Periodpicker } from '@navikt/ft-ui-komponenter';
+import Periodpicker from './pure/Periodpicker';
 import ReadOnlyField from './ReadOnlyField';
 import Label from './Label';
 import LabelType from './LabelType';

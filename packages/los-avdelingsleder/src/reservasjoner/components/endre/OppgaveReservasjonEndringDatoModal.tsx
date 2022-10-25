@@ -76,7 +76,7 @@ const OppgaveReservasjonEndringDatoModal: FunctionComponent<OwnProps & WrappedCo
             label=""
             name="reserverTil"
             validate={[hasValidDate, dateAfterOrEqual(new Date()), dateBeforeOrEqual(thirtyDaysFromNow())]}
-            disabledDays={{ before: new Date(), after: thirtyDaysFromNow() }}
+            disabledDays={{ fromDate: new Date(), toDate: thirtyDaysFromNow() }}
           />
           <div className={styles.buttonBox}>
             <FlexContainer>

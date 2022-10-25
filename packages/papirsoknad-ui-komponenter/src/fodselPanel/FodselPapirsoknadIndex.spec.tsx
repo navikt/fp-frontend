@@ -52,7 +52,7 @@ describe('<FodselPapirsoknadIndex>', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       antallBarn: '2',
       erBarnetFodt: true,
-      foedselsDato: [dayjs().subtract(10, 'day').format(ISO_DATE_FORMAT)],
+      foedselsDato: dayjs().subtract(10, 'day').format(ISO_DATE_FORMAT),
       terminbekreftelseDato: '2022-09-15',
       termindato: '2022-09-14',
     });

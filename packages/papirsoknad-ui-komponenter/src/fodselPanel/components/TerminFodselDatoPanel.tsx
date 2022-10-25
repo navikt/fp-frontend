@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { UseFormGetValues } from 'react-hook-form';
 import moment from 'moment';
 import { Alert, Label, Heading } from '@navikt/ds-react';
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import {
   Datepicker, InputField, RadioGroupPanel, formHooks,
 } from '@navikt/ft-form-hooks';
@@ -27,7 +27,7 @@ export type FormValues = {
   termindato?: string;
   terminbekreftelseDato?: string;
   antallBarnFraTerminbekreftelse?: number;
-  foedselsDato?: string | string[];
+  foedselsDato?: string;
   antallBarn?: number;
   erBarnetFodt?: boolean;
 }
@@ -140,14 +140,8 @@ const TerminFodselDatoPanel: FunctionComponent<OwnProps> = ({
                   <Datepicker
                     name="foedselsDato"
                     label={intl.formatMessage({ id: 'Registrering.Fodselsdato' })}
-                      /* foedselsDato is array in DTO data model, so we transform the value to/from the store/input */
-                    format={(valueFromStore) => (valueFromStore && valueFromStore.length
-                      ? moment(valueFromStore[0]).format(DDMMYYYY_DATE_FORMAT)
-                      : moment(valueFromStore).format(DDMMYYYY_DATE_FORMAT))}
-                      // @ts-ignore Fiks
-                    parse={(valueFromInput) => (valueFromInput ? [valueFromInput] : valueFromInput)}
                     isReadOnly={readOnly}
-                    validate={[required, (value) => hasValidDate(value[0]), (value) => dateBeforeOrEqualToToday(value[0])]}
+                    validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
                   />
                 </FlexColumn>
                 <FlexColumn>

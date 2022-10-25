@@ -77,7 +77,6 @@ const AKSJONSPUNKT_KODER = [
   ProsessBeregningsgrunnlagAksjonspunktCode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
   ProsessBeregningsgrunnlagAksjonspunktCode.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET,
   ProsessBeregningsgrunnlagAksjonspunktCode.VURDER_GRADERING_UTEN_BEREGNINGSGRUNNLAG,
-  ProsessBeregningsgrunnlagAksjonspunktCode.VURDER_DEKNINGSGRAD,
 ];
 
 const VILKAR_KODER = [vilkarType.BEREGNINGSGRUNNLAGVILKARET];

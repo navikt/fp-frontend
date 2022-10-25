@@ -68,6 +68,7 @@ const TilretteleggingUtbetalingsgrad: FunctionComponent<OwnProps> = ({
               src={erIEditeringsmodus ? endreDisabletImage : endreImage}
               tabIndex={0}
               tooltip={intl.formatMessage({ id: 'TilretteleggingFieldArray.EndreUtbetalingsgrad' })}
+              alt={intl.formatMessage({ id: 'TilretteleggingFieldArray.EndreUtbetalingsgrad' })}
             />
           </FlexColumn>
         )}
