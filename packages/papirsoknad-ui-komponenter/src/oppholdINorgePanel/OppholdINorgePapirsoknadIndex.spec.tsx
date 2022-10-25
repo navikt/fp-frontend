@@ -13,7 +13,7 @@ import * as stories from './OppholdINorgePapirsoknadIndex.stories';
 const { ForFodsel, ForAdopsjon } = composeStories(stories);
 
 describe('<OppholdINorgePapirsoknadIndex>', () => {
-  it.skip('skal svare ja på alle spørsmåla for fødsel', async () => {
+  it('skal svare ja på alle spørsmåla for fødsel', async () => {
     const lagre = jest.fn();
 
     render(<ForFodsel submitCallback={lagre} />);
@@ -41,7 +41,7 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
     });
   });
 
-  it.skip('skal ha annen tekst på første spørsmålet for adopsjon', async () => {
+  it('skal ha annen tekst på første spørsmålet for adopsjon', async () => {
     const lagre = jest.fn();
 
     render(<ForAdopsjon submitCallback={lagre} />);
@@ -115,7 +115,7 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
     });
   });
 
-  it.skip('skal svare nei på at en skal bo i norge de neste 12 månedene', async () => {
+  it('skal svare nei på at en skal bo i norge de neste 12 månedene', async () => {
     const lagre = jest.fn();
 
     const utils = render(<ForFodsel submitCallback={lagre} />);
