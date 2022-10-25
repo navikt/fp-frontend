@@ -34,7 +34,7 @@ interface OwnProps {
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
   fagsakPersonnummer: string;
-  fodselsdato?: string | string[];
+  fodselsdato?: string;
   mottattDato?: string;
 }
 

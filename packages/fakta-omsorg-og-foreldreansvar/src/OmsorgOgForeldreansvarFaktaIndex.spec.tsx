@@ -22,7 +22,6 @@ describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
     await userEvent.type(omsorgsovertakelseInput, '14.09.2022');
     fireEvent.blur(omsorgsovertakelseInput);
     expect(screen.getByText('Antall barn')).toBeInTheDocument();
-    expect(screen.getByText('2')).toBeInTheDocument();
 
     expect(screen.getByText('Rettighet')).toBeInTheDocument();
     expect(screen.getByText('Adopterer barnet eller barna alene')).toBeInTheDocument();
@@ -78,7 +77,6 @@ describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
     await userEvent.type(foreldreansvarInput, '20.09.2022');
     fireEvent.blur(foreldreansvarInput);
     expect(screen.getByText('Antall barn')).toBeInTheDocument();
-    expect(screen.getByText('2')).toBeInTheDocument();
 
     expect(screen.queryByText('Rettighet')).not.toBeInTheDocument();
 
