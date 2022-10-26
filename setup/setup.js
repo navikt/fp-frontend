@@ -16,6 +16,6 @@ window.ResizeObserver =
     unobserve: jest.fn(),
   }));
 
-// TODO Midlertidig mock til bug i ny datepicker er fiksa
+// TODO Midlertidig mock til ein kan oppdatera react-day-picker til verjson 8
 const spy = jest.spyOn(window, 'addEventListener');
 spy.mockImplementation(() => {});
