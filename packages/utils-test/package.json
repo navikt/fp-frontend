@@ -10,7 +10,7 @@
     "@fpsak-frontend/rest-api": "1.0.0",
     "@fpsak-frontend/rest-api-hooks": "1.0.0",
     "@testing-library/jest-dom": "5.16.5",
-    "@navikt/ft-ui-komponenter": "1.1.10",
+    "@navikt/ft-ui-komponenter": "1.1.11",
     "@wojtekmaj/enzyme-adapter-react-17": "0.6.7",
     "axios-mock-adapter": "1.21.2",
     "enzyme": "3.11.0",
