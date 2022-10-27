@@ -4,10 +4,11 @@ import { action } from '@storybook/addon-actions';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import AktivitetskravFaktaIndex from '@fpsak-frontend/fakta-aktivitetskrav';
 import { Behandling, UttakKontrollerAktivitetskrav, Aksjonspunkt } from '@fpsak-frontend/types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+
+import AktivitetskravFaktaIndex from './AktivitetskravFaktaIndex';
 
 const behandling = {
   uuid: '1',
@@ -16,23 +17,22 @@ const behandling = {
 
 const uttakKontrollerAktivitetskravListe = [{
   avklaring: 'I_AKTIVITET',
-  begrunnelse: 'Dette er en test',
-  fom: '2021-01-01',
-  tom: '2021-01-07',
+  fom: '2022-10-01',
+  tom: '2022-10-07',
   morsAktivitet: 'INNLAGT',
   endret: false,
 }, {
   avklaring: null,
   begrunnelse: null,
-  fom: '2021-01-08',
-  tom: '2021-01-13',
+  fom: '2022-10-08',
+  tom: '2022-10-13',
   morsAktivitet: 'ARBEID_OG_UTDANNING',
   endret: false,
 }, {
   avklaring: null,
   begrunnelse: null,
-  fom: '2021-01-15',
-  tom: '2021-01-20',
+  fom: '2022-10-15',
+  tom: '2022-10-20',
   morsAktivitet: 'ARBEID_OG_UTDANNING',
   endret: false,
 }] as UttakKontrollerAktivitetskrav[];

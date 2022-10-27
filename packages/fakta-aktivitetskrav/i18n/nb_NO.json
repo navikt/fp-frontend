@@ -19,5 +19,10 @@
   "AktivitetskravFaktaDetailForm.Periode": "Periode",
   "AktivitetskravFaktaDetailForm.MorsAktivitet": "Mors aktivitet",
   "AktivitetskravFaktaDetailForm.OppdaterDato": "Oppdater dato",
-  "AktivitetskravFaktaDetailForm.DelOppPeriode": "Del opp periode"
+  "AktivitetskravFaktaDetailForm.DelOppPeriode": "Del opp periode",
+
+  "OppdaterePeriodeModal.OppdaterePerioden": "Vil du oppdatere periode?",
+  "OppdaterePeriodeModal.Nullstilles": "Etterfølgende perioder blir nullstilt",
+  "OppdaterePeriodeModal.Oppdater": "Oppdater",
+  "OppdaterePeriodeModal.Avbryt": "Avbryt"
 }
