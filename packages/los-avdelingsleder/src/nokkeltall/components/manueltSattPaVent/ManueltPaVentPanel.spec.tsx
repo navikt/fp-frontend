@@ -6,8 +6,7 @@ import * as stories from './ManueltPaVentPanel.stories';
 const { Default } = composeStories(stories);
 
 describe('<ManueltPaVentPanel>', () => {
-  // TODO Fiks test etterpå
-  it.skip('skal vise graffilter', async () => {
+  it('skal vise graffilter', async () => {
     const { getByLabelText } = render(<Default />);
     expect(await screen.findByText('Antall behandlinger satt på vent manuelt')).toBeInTheDocument();
 

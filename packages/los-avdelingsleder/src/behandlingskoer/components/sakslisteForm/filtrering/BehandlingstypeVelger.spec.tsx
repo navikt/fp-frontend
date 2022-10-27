@@ -7,16 +7,14 @@ import * as stories from './BehandlingstypeVelger.stories';
 const { Default } = composeStories(stories);
 
 describe('<BehandlingstypeVelger>', () => {
-  // TODO Fiks test etterpå
-  it.skip('skal vise checkboxer for behandlingstyper', async () => {
+  it('skal vise checkboxer for behandlingstyper', async () => {
     const { getByLabelText } = render(<Default />);
     expect(await screen.findByText('Behandlingstype')).toBeInTheDocument();
     expect(getByLabelText('Førstegangsbehandling')).toBeChecked();
     expect(getByLabelText('Klage')).not.toBeChecked();
   });
 
-  // TODO Fiks test etterpå
-  it.skip('skal velge klage', async () => {
+  it('skal velge klage', async () => {
     const { getByLabelText } = render(<Default />);
     expect(await screen.findByText('Behandlingstype')).toBeInTheDocument();
     expect(getByLabelText('Klage')).not.toBeChecked();

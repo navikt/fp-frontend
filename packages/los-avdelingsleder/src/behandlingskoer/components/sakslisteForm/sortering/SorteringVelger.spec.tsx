@@ -12,8 +12,7 @@ const {
 } = composeStories(stories);
 
 describe('<SorteringVelger>', () => {
-  // TODO Fiks test etterpå
-  it.skip('skal vise tre sorteringsvalg når mange behandlingstyper er valgt', async () => {
+  it('skal vise tre sorteringsvalg når mange behandlingstyper er valgt', async () => {
     const { getByLabelText } = render(<SorteringsvelgerNårMangeBehandlingstyperErValgt />);
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
     expect(getByLabelText('Dato for behandlingsfrist')).toBeChecked();
@@ -82,8 +81,7 @@ describe('<SorteringVelger>', () => {
     expect(await screen.findByText('Feltet kan kun inneholde tall')).toBeInTheDocument();
   });
 
-  // TODO Fiks test etterpå
-  it.skip('skal vise fem sorteringsvalg når kun tilbakekreving er valgt', async () => {
+  it('skal vise fem sorteringsvalg når kun tilbakekreving er valgt', async () => {
     const { getByLabelText } = render(<SorteringsvelgerNårKunTilbakekrevingErValgt />);
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
     expect(getByLabelText('Dato for behandlingsfrist')).toBeChecked();
