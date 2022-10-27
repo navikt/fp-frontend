@@ -7,8 +7,7 @@ import * as stories from './AndreKriterierVelger.stories';
 const { Default } = composeStories(stories);
 
 describe('<AndreKriterierVelger>', () => {
-  // TODO Fiks test etterpå
-  it.skip('skal vise checkboxer for andre kriterier der Til beslutter er valgt fra før', async () => {
+  it('skal vise checkboxer for andre kriterier der Til beslutter er valgt fra før', async () => {
     const { getByLabelText } = render(<Default />);
     expect(await screen.findByText('Til beslutter')).toBeInTheDocument();
     expect(getByLabelText('Til beslutter')).toBeChecked();
