@@ -119,10 +119,10 @@ const VurderingFellesProsessStegInitPanel: FunctionComponent<OwnProps & ProsessP
       prosessPanelKode={prosessPanelKode}
       prosessPanelMenyTekst={prosessPanelMenyTekst}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={(data) => {
+      hentOverstyrtStatus={(data, standardData) => {
         if (aksjonspunktKoder) {
-          if (data.aksjonspunkter && data.aksjonspunkter.length > 0) {
-            return data.aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status)) ? VilkarUtfallType.IKKE_VURDERT : VilkarUtfallType.OPPFYLT;
+          if (standardData.aksjonspunkter && standardData.aksjonspunkter.length > 0) {
+            return standardData.aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status)) ? VilkarUtfallType.IKKE_VURDERT : VilkarUtfallType.OPPFYLT;
           }
           return VilkarUtfallType.IKKE_VURDERT;
         }
