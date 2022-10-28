@@ -3,12 +3,10 @@ import React, {
 } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import classnames from 'classnames/bind';
 import { dateFormat } from '@navikt/ft-utils';
 import { Form } from '@navikt/ft-form-hooks';
+import { SuccessStroke, Error, FileError } from '@navikt/ds-icons';
 
-import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
-import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
 import endretFelt from '@fpsak-frontend/assets/images/endret_felt.svg';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
@@ -23,14 +21,11 @@ import AktivitetskravFaktaDetailForm from './AktivitetskravFaktaDetailForm';
 
 import styles from './aktivitetskravFaktaForm.less';
 
-const classNames = classnames.bind(styles);
-
 const HEADER_TEXT_CODES = [
-  'EMPTY1',
   'AktivitetskravFaktaTabell.Periode',
   'AktivitetskravFaktaTabell.MorsAktivitet',
   'AktivitetskravFaktaTabell.Avklaring',
-  'EMPTY2',
+  'AktivitetskravFaktaTabell.Vurdering',
   'EMPTY3',
 ];
 
@@ -133,7 +128,7 @@ const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
       )}
       {aktivitetskrav && (
         <Table ref={tableRef} headerTextCodes={HEADER_TEXT_CODES} noHover hasGrayHeader>
-          {aktivitetskrav.map((krav) => (
+          {aktivitetskrav.map((krav, index) => (
             <ExpandableTableRow
               key={krav.fom + krav.tom}
               isApLeftBorder={!krav.avklaring}
@@ -153,17 +148,29 @@ const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
                 )
               ))}
             >
-              <TableColumn className={classNames('ikon', valgtAktivitetskravFom === krav.fom ? 'imageColTopPadding' : undefined)}>
-                {krav.avklaring && (
-                  <Image alt={intl.formatMessage({ id: 'AktivitetskravFaktaForm.Ok' })} src={okIkonUrl} />
-                )}
-                {!krav.avklaring && (
-                  <Image alt={intl.formatMessage({ id: 'AktivitetskravFaktaForm.Aksjonspunkt' })} src={advarselIkonUrl} />
-                )}
-              </TableColumn>
               <TableColumn>{`${dateFormat(krav.fom)} - ${dateFormat(krav.tom)}`}</TableColumn>
               <TableColumn>{krav.morsAktivitet ? morsAktiviteter.find((aktivtet) => aktivtet.kode === krav.morsAktivitet)?.navn : ''}</TableColumn>
               <TableColumn>{krav.avklaring ? aktivitetskravAvklaringer.find((avklaring) => avklaring.kode === krav.avklaring)?.navn : ''}</TableColumn>
+              <TableColumn>
+                {index === 0 && (
+                  <>
+                    <SuccessStroke />
+                    {intl.formatMessage({ id: 'AktivitetskravFaktaTabell.Godkjent' })}
+                  </>
+                )}
+                {index === 1 && (
+                  <>
+                    <Error />
+                    {intl.formatMessage({ id: 'AktivitetskravFaktaTabell.IkkeGodkjent' })}
+                  </>
+                )}
+                {index === 2 && (
+                  <>
+                    <FileError />
+                    {intl.formatMessage({ id: 'AktivitetskravFaktaTabell.ManglerDok' })}
+                  </>
+                )}
+              </TableColumn>
               <TableColumn>
                 {krav.endret && (
                   <Image

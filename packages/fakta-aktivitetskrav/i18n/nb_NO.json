@@ -9,6 +9,10 @@
   "AktivitetskravFaktaTabell.Avklaring": "Avklaring",
   "AktivitetskravFaktaTabell.MorsAktivitet": "Mors aktivitet",
   "AktivitetskravFaktaTabell.ErEndret": "Er endret av saksbehandler",
+  "AktivitetskravFaktaTabell.Vurdering": "Vurdering",
+  "AktivitetskravFaktaTabell.Godkjent": "Godkjent",
+  "AktivitetskravFaktaTabell.IkkeGodkjent": "Ikke godkjent",
+  "AktivitetskravFaktaTabell.ManglerDok": "Mangler dokumentasjon",
 
   "AktivitetskravFaktaDetailForm.Header": "Detaljer",
   "AktivitetskravFaktaDetailForm.Oppdater": "Oppdater",

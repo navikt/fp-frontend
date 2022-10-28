@@ -43,7 +43,7 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
   const [sistOppdeltePeriodeIndex, setSistOppdeltePeriodeIndex] = useState<number>();
   const [erDatoSatt, settDato] = useState(false);
   const [harDeltOpp, settHarDeltOpp] = useState(false);
-  const [visModal, settVisModal] = useState(false);
+  const [visModalPeriode, settVisModalForPeriode] = useState<number | undefined>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: {
@@ -51,7 +51,9 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
     },
   });
 
-  const { fields, append, update } = formHooks.useFieldArray({
+  const {
+    fields, append, update, remove,
+  } = formHooks.useFieldArray({
     control: formMethods.control,
     name: 'perioder',
   });
@@ -86,6 +88,28 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
 
     settHarDeltOpp(false);
     settDato(true);
+  };
+
+  const nullstillPerioder = () => {
+    settVisModalForPeriode(undefined);
+
+    for (let i = visModalPeriode + 2; i < fields.length; i += 1) {
+      remove(i);
+    }
+
+    const perioder = formMethods.getValues('perioder');
+
+    update(visModalPeriode, {
+      ...perioder[visModalPeriode],
+      tom: null,
+    });
+    update(visModalPeriode + 1, {
+      ...perioder[visModalPeriode + 1],
+      fom: null,
+    });
+
+    setSistOppdeltePeriodeIndex(visModalPeriode);
+    settDato(false);
   };
 
   return (
@@ -154,7 +178,7 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
                           size="small"
                           variant="tertiary"
                           icon={<Historic aria-hidden />}
-                          onClick={() => (visDatepicker ? oppdaterDato(index) : settVisModal(true))}
+                          onClick={() => (visDatepicker ? oppdaterDato(index) : settVisModalForPeriode(index))}
                           type="button"
                           disabled={!perioder[index].tom}
                         >
@@ -180,7 +204,7 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
             </React.Fragment>
           );
         })}
-        <VerticalSpacer sixteenPx />
+        <VerticalSpacer thirtyTwoPx />
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
@@ -208,8 +232,8 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
         </FlexContainer>
         <VerticalSpacer thirtyTwoPx />
       </Form>
-      {visModal && (
-        <OppdaterePeriodeModal />
+      {visModalPeriode !== undefined && (
+        <OppdaterePeriodeModal submit={nullstillPerioder} cancel={() => settVisModalForPeriode(undefined)} />
       )}
     </>
   );
