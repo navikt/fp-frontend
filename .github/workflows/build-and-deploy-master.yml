@@ -38,9 +38,18 @@ jobs:
       - name: Run linting
         run: yarn less:lint && yarn lint && yarn ts-check
 
-      - name: Run test and coverage
+      - name: Henter ut filer som har endret seg
+        run: echo "FILES_CHANGED=$(echo $(git diff --name-only ${{github.event.before}} ${{github.sha}}))" >> $GITHUB_ENV
+
+      - name: Run all test and coverage when changes to dependencies
+        if: contains(fromJson('["yarn.lock"]'), env.FILES_CHANGED)
+        id: run-all-tests
+        run: yarn test:coverage
+
+      - name: Run test and coverage only related to changes
+        if: steps.run-all-tests.outcome == 'skipped'
         run: |
-          echo "Kjøre tester for endringene mellom ${{ github.event.before }} og denne commiten"
+          echo "Kjøre tester basert på endringene mellom commit og master ${{ github.event.before }}"
           yarn test:coverage --changedSince=${{ github.event.before }}
 
       - name: Build
