@@ -10,7 +10,7 @@
     "url": "git+https://github.com/navikt/fp-frontend.git"
   },
   "scripts": {
-    "test": "jest --colors --maxWorkers=50%",
+    "test": "jest -o --colors",
     "test:all": "jest --colors",
     "test:all:testonly": "jest --colors --selectProjects test",
     "test:watch": "jest --watch --colors",
@@ -36,7 +36,7 @@
     "packages/*"
   ],
   "dependencies": {
-    "@babel/runtime": "7.20.0",
+    "@babel/runtime": "7.19.4",
     "@formatjs/intl-datetimeformat": "6.3.1",
     "@formatjs/intl-numberformat": "8.2.0",
     "axios": "0.27.2",

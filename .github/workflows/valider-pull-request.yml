@@ -24,4 +24,4 @@ jobs:
         run: yarn less:lint && yarn lint && yarn ts-check
 
       - name: Run test and coverage
-        run: yarn test --changedSince=origin/master
+        run: yarn test:coverage --changedSince=origin/master
