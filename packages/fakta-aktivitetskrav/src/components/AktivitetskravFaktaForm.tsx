@@ -6,17 +6,17 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { dateFormat } from '@navikt/ft-utils';
 import { Form } from '@navikt/ft-form-hooks';
 import { SuccessStroke, Error, FileError } from '@navikt/ds-icons';
-
-import endretFelt from '@fpsak-frontend/assets/images/endret_felt.svg';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { Heading } from '@navikt/ds-react';
 import {
   AksjonspunktHelpTextHTML, VerticalSpacer, ExpandableTableRow, Table, TableColumn, Image,
 } from '@navikt/ft-ui-komponenter';
+
+import endretFelt from '@fpsak-frontend/assets/images/endret_felt.svg';
+import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { KodeverkMedNavn, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
 import { FaktaSubmitButtonNew, FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
 import { KontrollerAktivitetskravAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
-import { Heading } from '@navikt/ds-react';
 import AktivitetskravFaktaDetailForm from './AktivitetskravFaktaDetailForm';
 
 import styles from './aktivitetskravFaktaForm.less';
@@ -26,7 +26,8 @@ const HEADER_TEXT_CODES = [
   'AktivitetskravFaktaTabell.MorsAktivitet',
   'AktivitetskravFaktaTabell.Avklaring',
   'AktivitetskravFaktaTabell.Vurdering',
-  'EMPTY3',
+  'EMPTY1',
+  'EMPTY2',
 ];
 
 interface PureOwnProps {
@@ -155,19 +156,19 @@ const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
                 {index === 0 && (
                   <>
                     <SuccessStroke />
-                    {intl.formatMessage({ id: 'AktivitetskravFaktaTabell.Godkjent' })}
+                    <div className={styles.ikon}><FormattedMessage id="AktivitetskravFaktaTabell.Godkjent" /></div>
                   </>
                 )}
                 {index === 1 && (
                   <>
                     <Error />
-                    {intl.formatMessage({ id: 'AktivitetskravFaktaTabell.IkkeGodkjent' })}
+                    <div className={styles.ikon}><FormattedMessage id="AktivitetskravFaktaTabell.IkkeGodkjent" /></div>
                   </>
                 )}
                 {index === 2 && (
                   <>
                     <FileError />
-                    {intl.formatMessage({ id: 'AktivitetskravFaktaTabell.ManglerDok' })}
+                    <div className={styles.ikon}><FormattedMessage id="AktivitetskravFaktaTabell.ManglerDok" /></div>
                   </>
                 )}
               </TableColumn>
