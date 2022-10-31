@@ -85,6 +85,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   });
 
   const fagsak = fagsakData.getFagsak();
+
   const alleBehandlinger = fagsakData.getAlleBehandlinger();
   const behandling = alleBehandlinger.find((b) => b.uuid === behandlingUuid);
 
