@@ -6,9 +6,10 @@ on:
 jobs:
   dispatcher:
     runs-on: ubuntu-latest
+    if: ${{ !github.event.issue.pull_request }}
     steps:
       - name: Slash command dispatch
-        uses: peter-evans/slash-command-dispatch@v3.0.1
+        uses: peter-evans/slash-command-dispatch@v3
         with:
           token: ${{ secrets.GH_P_TOKEN }} # Må ha PAT for å sjekke tilgang for denne actionen.. Bytte?
           commands: promote # matcher repository dispatch med navent 'promote-command'
