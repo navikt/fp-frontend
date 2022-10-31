@@ -15,14 +15,12 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-8-cores
     steps:
-
-      - name: Sjekk ut kode
-        uses: actions/checkout@v3.0.2
-      - run:  git fetch --prune --unshallow
-      - name: Sette opp Node
-        uses: actions/setup-node@v3.3.0
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
         with:
           node-version: 18.3.0
           registry-url: https://npm.pkg.github.com/
@@ -41,13 +39,7 @@ jobs:
         run: yarn less:lint && yarn lint && yarn ts-check
 
       - name: Run test and coverage
-        run: yarn test:coverage
-
-      - name: Archive code coverage results
-        uses: actions/upload-artifact@v3.1.0
-        with:
-          name: code-coverage-report
-          path: coverage
+        run: yarn test:coverage --onlyChanged
 
       - name: Build
         run: |
@@ -55,7 +47,7 @@ jobs:
           yarn build
 
       - name: Login to GitHub Packages Docker Registry
-        uses: docker/login-action@49ed152c8eca782a232dede0303416e8f356c37b # Use commit-sha1 instead of tag for security concerns
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a # Use commit-sha1 instead of tag for security concerns
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -108,3 +100,9 @@ jobs:
                             title: 'Deploy av ${{ env.TAG }}',
                             body: '/promote dev-fss'})
                });
+
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-coverage-report
+          path: coverage

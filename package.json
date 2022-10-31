@@ -10,12 +10,12 @@
     "url": "git+https://github.com/navikt/fp-frontend.git"
   },
   "scripts": {
-    "test": "jest -o --colors",
+    "test": "jest --colors --maxWorkers=50%",
     "test:all": "jest --colors",
     "test:all:testonly": "jest --colors --selectProjects test",
     "test:watch": "jest --watch --colors",
     "test:watch:all": "jest --watchAll --colors",
-    "test:coverage": "jest --coverage --colors --selectProjects test",
+    "test:coverage": "jest --coverage --colors --selectProjects test --maxWorkers=50%",
     "ts-check": "tsc  --pretty",
     "lint": "eslint \"packages/**/*.ts*\"",
     "lint:fix": "eslint --fix --cache \"packages/**/*.ts*\"",
