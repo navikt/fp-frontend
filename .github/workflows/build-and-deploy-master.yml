@@ -39,7 +39,9 @@ jobs:
         run: yarn less:lint && yarn lint && yarn ts-check
 
       - name: Run test and coverage
-        run: yarn test:coverage --onlyChanged
+        run: |
+          echo "Kjøre tester for endringene mellom ${{ github.event.before }} og denne commiten"
+          yarn test:coverage --changedSince=${{ github.event.before }}
 
       - name: Build
         run: |

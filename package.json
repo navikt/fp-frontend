@@ -10,7 +10,7 @@
     "url": "git+https://github.com/navikt/fp-frontend.git"
   },
   "scripts": {
-    "test": "jest --colors --maxWorkers=50%",
+    "test": "jest -o --colors",
     "test:all": "jest --colors",
     "test:all:testonly": "jest --colors --selectProjects test",
     "test:watch": "jest --watch --colors",
