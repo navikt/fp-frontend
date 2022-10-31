@@ -64,7 +64,7 @@
     semver "^5.4.1"
     source-map "^0.5.0"
 
-"@babel/core@7.19.6":
+"@babel/core@7.19.6", "@babel/core@^7.19.6":
   version "7.19.6"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.19.6.tgz#7122ae4f5c5a37c0946c066149abd8e75f81540f"
   integrity sha512-D2Ue4KHpc6Ys2+AxpIx1BZ8+UegLLLE2p3KJEuJRKmokHOtl49jQ5ny1773KsGLZs8MQvBidAF6yWUJxRqtKtg==
@@ -85,7 +85,7 @@
     json5 "^2.2.1"
     semver "^6.3.0"
 
-"@babel/core@^7.1.0", "@babel/core@^7.11.6", "@babel/core@^7.12.10", "@babel/core@^7.12.3", "@babel/core@^7.13.16", "@babel/core@^7.18.5", "@babel/core@^7.7.5":
+"@babel/core@^7.1.0", "@babel/core@^7.11.6", "@babel/core@^7.12.10", "@babel/core@^7.12.3", "@babel/core@^7.13.16", "@babel/core@^7.7.5":
   version "7.18.10"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.18.10.tgz#39ad504991d77f1f3da91be0b8b949a5bc466fb8"
   integrity sha512-JQM6k6ENcBFKVtWvLavlvi/mPcpYZ3+R+2EySDEMSMbp7Mn4FexlbbJVrx2R7Ijhr01T8gyqrOaABWIOgxeUyw==
@@ -1097,7 +1097,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.18.6"
 
-"@babel/plugin-transform-react-constant-elements@^7.17.12":
+"@babel/plugin-transform-react-constant-elements@^7.18.12":
   version "7.18.12"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-constant-elements/-/plugin-transform-react-constant-elements-7.18.12.tgz#edf3bec47eb98f14e84fa0af137fcc6aad8e0443"
   integrity sha512-Q99U9/ttiu+LMnRU8psd23HhvwXmKWDQIpocm0JKaICcZHnw+mdQbHm6xnSy7dOl8I5PELakYtNBubNQlBXbZw==
@@ -1220,7 +1220,7 @@
     "@babel/helper-create-regexp-features-plugin" "^7.18.6"
     "@babel/helper-plugin-utils" "^7.18.6"
 
-"@babel/preset-env@7.19.4":
+"@babel/preset-env@7.19.4", "@babel/preset-env@^7.19.4":
   version "7.19.4"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.19.4.tgz#4c91ce2e1f994f717efb4237891c3ad2d808c94b"
   integrity sha512-5QVOTXUdqTCjQuh2GGtdd7YEhoRXBMVGROAtsBeLGIbIz3obCBIfRMT1I3ZKkMgNzwkyCkftDXSSkHxnfVf4qg==
@@ -1301,7 +1301,7 @@
     core-js-compat "^3.25.1"
     semver "^6.3.0"
 
-"@babel/preset-env@^7.12.11", "@babel/preset-env@^7.18.2":
+"@babel/preset-env@^7.12.11":
   version "7.18.10"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.18.10.tgz#83b8dfe70d7eea1aae5a10635ab0a5fe60dfc0f4"
   integrity sha512-wVxs1yjFdW3Z/XkNfXKoblxoHgbtUF7/l3PvvP4m02Qz9TZ6uZGxRVYjSQeR87oQmHco9zWitW5J82DJ7sCjvA==
@@ -1402,7 +1402,7 @@
     "@babel/types" "^7.4.4"
     esutils "^2.0.2"
 
-"@babel/preset-react@7.18.6", "@babel/preset-react@^7.12.10", "@babel/preset-react@^7.17.12":
+"@babel/preset-react@7.18.6", "@babel/preset-react@^7.12.10", "@babel/preset-react@^7.18.6":
   version "7.18.6"
   resolved "https://registry.yarnpkg.com/@babel/preset-react/-/preset-react-7.18.6.tgz#979f76d6277048dc19094c217b507f3ad517dd2d"
   integrity sha512-zXr6atUmyYdiWRVLOZahakYmOBHtWc2WGCkP8PYTgZi0iJXDY2CN180TdrIW4OGOAdLc7TifzDIvtx6izaRIzg==
@@ -1414,7 +1414,7 @@
     "@babel/plugin-transform-react-jsx-development" "^7.18.6"
     "@babel/plugin-transform-react-pure-annotations" "^7.18.6"
 
-"@babel/preset-typescript@7.18.6", "@babel/preset-typescript@^7.12.7", "@babel/preset-typescript@^7.13.0", "@babel/preset-typescript@^7.17.12":
+"@babel/preset-typescript@7.18.6", "@babel/preset-typescript@^7.12.7", "@babel/preset-typescript@^7.13.0", "@babel/preset-typescript@^7.18.6":
   version "7.18.6"
   resolved "https://registry.yarnpkg.com/@babel/preset-typescript/-/preset-typescript-7.18.6.tgz#ce64be3e63eddc44240c6358daefac17b3186399"
   integrity sha512-s9ik86kXBAnD760aybBucdpnLsAt0jK1xqJn2juOn9lkOvSHV60os5hxoVJsPzMQxvnUJFAlkont2DvvaYEBtQ==
@@ -1442,12 +1442,12 @@
     core-js-pure "^3.20.2"
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@7.19.4":
-  version "7.19.4"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.19.4.tgz#a42f814502ee467d55b38dd1c256f53a7b885c78"
-  integrity sha512-EXpLCrk55f+cYqmHsSR+yD/0gAIMxxA9QK9lnQWzhMCvt+YmoBN7Zx94s++Kv0+unHk39vxNO8t+CMA2WSS3wA==
+"@babel/runtime@7.20.0":
+  version "7.20.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.20.0.tgz#824a9ef325ffde6f78056059db3168c08785e24a"
+  integrity sha512-NDYdls71fTXoU8TZHfbBWg7DiZfNzClcKui/+kyi6ppD2L1qnWW3VV6CjtaBXSUGGhiTWJ6ereOIkUvenif66Q==
   dependencies:
-    regenerator-runtime "^0.13.4"
+    regenerator-runtime "^0.13.10"
 
 "@babel/runtime@^7.0.0", "@babel/runtime@^7.10.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.12.5", "@babel/runtime@^7.13.10", "@babel/runtime@^7.16.3", "@babel/runtime@^7.17.8", "@babel/runtime@^7.18.9", "@babel/runtime@^7.5.0", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
   version "7.18.9"
@@ -1513,7 +1513,7 @@
     debug "^4.1.0"
     globals "^11.1.0"
 
-"@babel/types@^7.0.0", "@babel/types@^7.12.11", "@babel/types@^7.12.7", "@babel/types@^7.18.10", "@babel/types@^7.18.4", "@babel/types@^7.18.6", "@babel/types@^7.18.9", "@babel/types@^7.2.0", "@babel/types@^7.3.0", "@babel/types@^7.3.3", "@babel/types@^7.4.4":
+"@babel/types@^7.0.0", "@babel/types@^7.12.11", "@babel/types@^7.12.7", "@babel/types@^7.18.10", "@babel/types@^7.18.6", "@babel/types@^7.18.9", "@babel/types@^7.2.0", "@babel/types@^7.3.0", "@babel/types@^7.3.3", "@babel/types@^7.4.4":
   version "7.18.10"
   resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.18.10.tgz#4908e81b6b339ca7c6b7a555a5fc29446f26dde6"
   integrity sha512-MJvnbEiiNkpjo+LknnmRrqbY1GPUUggjv+wQVjetM/AONoupqRALB7I6jGqNUAZsKcRIEu2J6FRFvsczljjsaQ==
@@ -1535,6 +1535,15 @@
   version "7.19.4"
   resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.19.4.tgz#0dd5c91c573a202d600490a35b33246fed8a41c7"
   integrity sha512-M5LK7nAeS6+9j7hAq+b3fQs+pNfUtTGq+yFFfHnauFA8zQtLRfmuipmsKDKKLuyG+wC8ABW43A153YNawNTEtw==
+  dependencies:
+    "@babel/helper-string-parser" "^7.19.4"
+    "@babel/helper-validator-identifier" "^7.19.1"
+    to-fast-properties "^2.0.0"
+
+"@babel/types@^7.20.0":
+  version "7.20.0"
+  resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.20.0.tgz#52c94cf8a7e24e89d2a194c25c35b17a64871479"
+  integrity sha512-Jlgt3H0TajCW164wkTOTzHkZb075tMQMULzrLUoUeKmO7eFL96GgDxf7/Axhc5CAuKE3KFyVW1p6ysKsi2oXAg==
   dependencies:
     "@babel/helper-string-parser" "^7.19.4"
     "@babel/helper-validator-identifier" "^7.19.1"
@@ -2816,23 +2825,23 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@navikt/ds-css@1.3.37", "@navikt/ds-css@^1.3.37":
-  version "1.3.37"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-css/1.3.37/0600d8cab79ed0bdfe24042fa4b2c20430dd8eb4#0600d8cab79ed0bdfe24042fa4b2c20430dd8eb4"
-  integrity sha512-BcBko2pkLyP/BMQgxOULei8tTrP8L2oOwLTc9O0nY2HynY5D80uq4OfbsL3wgKyeZc/9R9+v+sVZyj0tAnlHmw==
+"@navikt/ds-css@1.4.0", "@navikt/ds-css@^1.4.0":
+  version "1.4.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-css/1.4.0/5b1fea3d6a4aa7570c1b65008f2746761f91ba02#5b1fea3d6a4aa7570c1b65008f2746761f91ba02"
+  integrity sha512-mcWt87nZEZm9nT4VUJAVrwGJMb0cNdoqE7sMUIiO6g1yV6OFxImjKFVk+YuVlq4mLkR4QeL5TuDsgLsYGoVcdg==
 
-"@navikt/ds-icons@1.3.37", "@navikt/ds-icons@^1.3.37":
-  version "1.3.37"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-icons/1.3.37/b17b99f9b45ad39ed71eabef4d7911ff31dda17e#b17b99f9b45ad39ed71eabef4d7911ff31dda17e"
-  integrity sha512-4MsDDwks/tCx7v/xzbfrSbejeMkwhsD7v1iaGOT+0uKilFsGpRaQrEgqdqXMouHqh1CX04+ILNAGoDqkBlkygg==
+"@navikt/ds-icons@1.4.0", "@navikt/ds-icons@^1.4.0":
+  version "1.4.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-icons/1.4.0/1071a6ac65d28b075b6672baa133d434ef31e544#1071a6ac65d28b075b6672baa133d434ef31e544"
+  integrity sha512-rVBM9UDqsII6M4KrNoSPDnHqqk2lX1FvDPjiPqGRfAt4GkIdYC1dAwQ/A+wcIhjniTsR1IGExydtdD8Vc59QlA==
 
-"@navikt/ds-react@1.3.37", "@navikt/ds-react@^1.3.37":
-  version "1.3.37"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-react/1.3.37/5e9b781545a297625cdf5b256c730fb30e6709d6#5e9b781545a297625cdf5b256c730fb30e6709d6"
-  integrity sha512-Wm7wEzMcGRDtfq23FbbwbtCNennSTJBgf5RQnhtthIlv0RqwMfY4cco+gU5AS96tvXEqROMPzUVuKfB0v1dhyA==
+"@navikt/ds-react@1.4.0", "@navikt/ds-react@^1.4.0":
+  version "1.4.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-react/1.4.0/dfc414eaf8815c2b7aa9ec7530bbe0e4397f934d#dfc414eaf8815c2b7aa9ec7530bbe0e4397f934d"
+  integrity sha512-q0FplCW6eZ6WZcz+qh2hdtTJnD2tWKWm8fIE6M/xlHOlEIv248XVjHsWFrUeYDuyyuauJRHnJUWZKdIZ34SYYg==
   dependencies:
     "@floating-ui/react-dom-interactions" "0.9.2"
-    "@navikt/ds-icons" "^1.3.37"
+    "@navikt/ds-icons" "^1.4.0"
     "@radix-ui/react-tabs" "1.0.0"
     "@radix-ui/react-toggle-group" "1.0.0"
     clsx "^1.2.1"
@@ -2845,18 +2854,18 @@
   resolved "https://npm.pkg.github.com/download/@navikt/fnrvalidator/1.3.3/8414963a30e59e3056c9befea7bb022498a2a742#8414963a30e59e3056c9befea7bb022498a2a742"
   integrity sha512-GsLa9ioYPGsDMBHcgKUNoYbZor09KyFIqSaWy8jy1I7f06q6DgUhdpZuRTHLVRCPjWqF2aLzKtvAfrw5dSeakg==
 
-"@navikt/ft-fakta-fordel-beregningsgrunnlag@2.1.12":
-  version "2.1.12"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-fakta-fordel-beregningsgrunnlag/2.1.12/9e05653415e5d7701b6058fa53563fe6c5782c7e#9e05653415e5d7701b6058fa53563fe6c5782c7e"
-  integrity sha512-R5RWAeQ75tF8Wm7B7wID8vo0mQoRsQm5e3MFywtoMJiRKl5ACm6Xhv6VHOrB/N4oP9Le533ta6/UrNj3sk9fWQ==
+"@navikt/ft-fakta-fordel-beregningsgrunnlag@2.1.14":
+  version "2.1.14"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-fakta-fordel-beregningsgrunnlag/2.1.14/095dc2cf6dd97cd8d86c2abee21a7a51369656e1#095dc2cf6dd97cd8d86c2abee21a7a51369656e1"
+  integrity sha512-04dB88rmzREtOcg77aU06llnUdZLjXqftVmb7kHZJhakXl7AgoExxyA9gXOjiNhlxbwc7Dsgy4Oqkxq11etSow==
   dependencies:
-    "@navikt/ds-css" "^1.3.37"
-    "@navikt/ds-react" "^1.3.37"
-    "@navikt/ft-form-hooks" "^3.0.3"
+    "@navikt/ds-css" "^1.4.0"
+    "@navikt/ds-react" "^1.4.0"
+    "@navikt/ft-form-hooks" "^3.0.5"
     "@navikt/ft-form-validators" "^1.0.36"
     "@navikt/ft-kodeverk" "^1.0.21"
     "@navikt/ft-types" "^1.0.32"
-    "@navikt/ft-ui-komponenter" "^1.1.12"
+    "@navikt/ft-ui-komponenter" "^1.1.14"
     "@navikt/ft-utils" "^1.1.7"
     classnames "2.3.2"
     core-js "3.26.0"
@@ -2876,34 +2885,34 @@
     react-hook-form "7.38.0"
     react-intl "6.2.1"
 
-"@navikt/ft-fakta-tilbakekreving-feilutbetaling@^1.1.12":
-  version "1.1.12"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-fakta-tilbakekreving-feilutbetaling/1.1.12/b5c9862c3bb61bb9d18fb58c917b7d7ea45d6f42#b5c9862c3bb61bb9d18fb58c917b7d7ea45d6f42"
-  integrity sha512-ZbgKlz34wFniIw+YfQvGCspYptLMu5zrxcMGsHuruta+YZH9pTjhA/37CKPTxVAKwDdzl/GalXlb5jAmGMq2ow==
+"@navikt/ft-fakta-tilbakekreving-feilutbetaling@^1.1.14":
+  version "1.1.14"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-fakta-tilbakekreving-feilutbetaling/1.1.14/680375d3b5d7303513dd8ee528a0ca31509a1c69#680375d3b5d7303513dd8ee528a0ca31509a1c69"
+  integrity sha512-+NzdmcpKUQ9caSU9EpPF6hzxw8frjWVpPtC0AViI3/a7LQ54WMGyadlFftKyd0ZCshp7PWpR7ssd8eLFI7KeFg==
   dependencies:
-    "@navikt/ds-css" "^1.3.37"
-    "@navikt/ds-react" "^1.3.37"
-    "@navikt/ft-form-hooks" "^3.0.3"
+    "@navikt/ds-css" "^1.4.0"
+    "@navikt/ds-react" "^1.4.0"
+    "@navikt/ft-form-hooks" "^3.0.5"
     "@navikt/ft-form-validators" "^1.0.36"
     "@navikt/ft-kodeverk" "^1.0.21"
     "@navikt/ft-types" "^1.0.32"
-    "@navikt/ft-ui-komponenter" "^1.1.12"
+    "@navikt/ft-ui-komponenter" "^1.1.14"
     "@navikt/ft-utils" "^1.1.7"
     moment "2.29.4"
     react "18.2.0"
     react-hook-form "7.38.0"
     react-intl "6.2.1"
 
-"@navikt/ft-form-hooks@3.0.3", "@navikt/ft-form-hooks@^3.0.3":
-  version "3.0.3"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-form-hooks/3.0.3/cb671a446c1db2c9ebb45fe139f910269122b02b#cb671a446c1db2c9ebb45fe139f910269122b02b"
-  integrity sha512-3ULWfs+OcO6p7uENEejL1yQb69mY4CsgFFw6ETj3xI+i9DtsFSuOqJyixrQZWTRB/eHogwK/iR6Ldu/NOj+38A==
+"@navikt/ft-form-hooks@3.0.5", "@navikt/ft-form-hooks@^3.0.5":
+  version "3.0.5"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-form-hooks/3.0.5/c79a2ebe4fc393a1286b2c9636a970ffb5282bfa#c79a2ebe4fc393a1286b2c9636a970ffb5282bfa"
+  integrity sha512-0Q+CnZ+XnwkDRgqAokqILqtNl7I7/w5MHxzYcZ6YzdIgb9/Sksl3wfP5fNMqpvn2bZx+F5kXUov4O5C0DlJ3+Q==
   dependencies:
-    "@navikt/ds-css" "^1.3.37"
-    "@navikt/ds-react" "^1.3.37"
+    "@navikt/ds-css" "^1.4.0"
+    "@navikt/ds-react" "^1.4.0"
     "@navikt/ft-form-validators" "^1.0.36"
     "@navikt/ft-types" "^1.0.32"
-    "@navikt/ft-ui-komponenter" "^1.1.12"
+    "@navikt/ft-ui-komponenter" "^1.1.14"
     "@navikt/ft-utils" "^1.1.7"
     classnames "2.3.2"
     dayjs "1.11.6"
@@ -2929,28 +2938,28 @@
   resolved "https://npm.pkg.github.com/download/@navikt/ft-konstanter/1.0.14/bcf08512ed17f95d98fe02e062e2a9168d0035a4#bcf08512ed17f95d98fe02e062e2a9168d0035a4"
   integrity sha512-e1JrvZL2pJG424GCsGiR9hkXpyyA7oB+FIGwEWEmxhpIYUskPFLv0Y4gQDd0J49LEzDwBEWGHmIOXQB3HkifXA==
 
-"@navikt/ft-plattform-komponenter@1.2.10", "@navikt/ft-plattform-komponenter@^1.2.10":
-  version "1.2.10"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-plattform-komponenter/1.2.10/8e1ba6dada32c3c323aff716079d3d2d1ac34fa0#8e1ba6dada32c3c323aff716079d3d2d1ac34fa0"
-  integrity sha512-duIRXTwVa4pbcveR2baS8hLdP61MWGG5p9QvTrH+alFRN00n42YTKktaVlEGr7ZAIbyprF9veHeIClcZP+qmIA==
+"@navikt/ft-plattform-komponenter@1.2.11", "@navikt/ft-plattform-komponenter@^1.2.11":
+  version "1.2.11"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-plattform-komponenter/1.2.11/bfef793c21c5dbde9979a07e9df46a86a5346a14#bfef793c21c5dbde9979a07e9df46a86a5346a14"
+  integrity sha512-+xYax/FGkhsCIvTUkeJrS28vtrWrdhz90Nr9ggkFZgbKmqr1a3+wt7tNiGM1MQA2dtGFUYDwgkKORiQGHL7zTw==
   dependencies:
-    "@navikt/ds-css" "^1.3.37"
-    "@navikt/ds-icons" "^1.3.37"
-    "@navikt/ds-react" "^1.3.37"
+    "@navikt/ds-css" "^1.4.0"
+    "@navikt/ds-icons" "^1.4.0"
+    "@navikt/ds-react" "^1.4.0"
     "@navikt/ft-utils" "^1.1.7"
 
-"@navikt/ft-prosess-beregningsgrunnlag@3.0.2":
-  version "3.0.2"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-beregningsgrunnlag/3.0.2/15653ae76e97c71461d662f055d6a648d0913fc1#15653ae76e97c71461d662f055d6a648d0913fc1"
-  integrity sha512-mDIwf65hT3cUEROcJZBI/jL5VRUJ2BQt4sPfqTZGULFF+cDylbCH2izYRRV1ruYjBZzxbKZTl4LSXTrUZHARoA==
+"@navikt/ft-prosess-beregningsgrunnlag@3.0.5":
+  version "3.0.5"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-beregningsgrunnlag/3.0.5/6bdedac2300926ac9e1d706c3aedb46348d4b4be#6bdedac2300926ac9e1d706c3aedb46348d4b4be"
+  integrity sha512-vpjtn90U5Z+OcFKeighK0vrFw4Kc00S0xl1jzUulYRl2cRQ05EhonofTTU4d/Bg7X60jjDsOwyzIJaLE04SJhQ==
   dependencies:
-    "@navikt/ds-css" "^1.3.37"
-    "@navikt/ft-form-hooks" "^3.0.3"
+    "@navikt/ds-css" "^1.4.0"
+    "@navikt/ft-form-hooks" "^3.0.5"
     "@navikt/ft-form-validators" "^1.0.36"
     "@navikt/ft-kodeverk" "^1.0.21"
-    "@navikt/ft-plattform-komponenter" "^1.2.10"
+    "@navikt/ft-plattform-komponenter" "^1.2.11"
     "@navikt/ft-types" "^1.0.32"
-    "@navikt/ft-ui-komponenter" "^1.1.12"
+    "@navikt/ft-ui-komponenter" "^1.1.14"
     "@navikt/ft-utils" "^1.1.7"
     classnames "2.3.2"
     dayjs "1.11.6"
@@ -2976,89 +2985,89 @@
     react-hook-form "7.38.0"
     react-intl "6.2.1"
 
-"@navikt/ft-prosess-tilbakekreving-foreldelse@^1.1.13":
-  version "1.1.13"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-tilbakekreving-foreldelse/1.1.13/4891671f87735d600d37977781f9e44fa9b7e2a9#4891671f87735d600d37977781f9e44fa9b7e2a9"
-  integrity sha512-Rwuk5XE4uiCQkxrE3iI3dsywMHPIOoMQ4PCp8Mxbmk2Ouuy8QdQ0IFoqrEqXXVj2wmJIA9C9vPl4gjtDdvCTfw==
+"@navikt/ft-prosess-tilbakekreving-foreldelse@^1.1.15":
+  version "1.1.15"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-tilbakekreving-foreldelse/1.1.15/79156cb56fe47c308c4239412efbc8d4fc11db6e#79156cb56fe47c308c4239412efbc8d4fc11db6e"
+  integrity sha512-5Ln68VjByVercwyNRkHCAX80TCOdk9Wu4cImMLMFkDSiigRkgrX70RfP+GdJSwrbHTo99iIHBVK0MV+0XUem4A==
   dependencies:
-    "@navikt/ds-css" "^1.3.37"
-    "@navikt/ds-react" "^1.3.37"
-    "@navikt/ft-form-hooks" "^3.0.3"
+    "@navikt/ds-css" "^1.4.0"
+    "@navikt/ds-react" "^1.4.0"
+    "@navikt/ft-form-hooks" "^3.0.5"
     "@navikt/ft-form-validators" "^1.0.36"
     "@navikt/ft-kodeverk" "^1.0.21"
-    "@navikt/ft-tidslinje" "^1.1.13"
+    "@navikt/ft-tidslinje" "^1.1.15"
     "@navikt/ft-types" "^1.0.32"
-    "@navikt/ft-ui-komponenter" "^1.1.12"
+    "@navikt/ft-ui-komponenter" "^1.1.14"
     "@navikt/ft-utils" "^1.1.7"
     moment "2.29.4"
     react "18.2.0"
     react-hook-form "7.38.0"
     react-intl "6.2.1"
 
-"@navikt/ft-prosess-tilbakekreving-vedtak@^1.1.12":
-  version "1.1.12"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-tilbakekreving-vedtak/1.1.12/6b473c9b9fcf5d658c9452e2aa61a3fbbcd179ea#6b473c9b9fcf5d658c9452e2aa61a3fbbcd179ea"
-  integrity sha512-MOVyZkOv7+fL/lS2tU0k14yf/NlRXGEa1kSFy7U1gV7uSCtWStEhiDaYoLUlnVdgQTnnrKibEke6GGteFbpTBQ==
+"@navikt/ft-prosess-tilbakekreving-vedtak@^1.1.14":
+  version "1.1.14"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-tilbakekreving-vedtak/1.1.14/6de2425cd70cb99dbe39d1abbb77c28ccbccc5b0#6de2425cd70cb99dbe39d1abbb77c28ccbccc5b0"
+  integrity sha512-Pf7gewRFJMMno5BlJ5grtGta/vTpmCSwVU7hcp3YW+n6YBTV0RppqGihOIrbbwMGU31E3SuR5HQBReb8+OW73Q==
   dependencies:
-    "@navikt/ds-css" "^1.3.37"
-    "@navikt/ds-react" "^1.3.37"
-    "@navikt/ft-form-hooks" "^3.0.3"
+    "@navikt/ds-css" "^1.4.0"
+    "@navikt/ds-react" "^1.4.0"
+    "@navikt/ft-form-hooks" "^3.0.5"
     "@navikt/ft-form-validators" "^1.0.36"
     "@navikt/ft-kodeverk" "^1.0.21"
     "@navikt/ft-types" "^1.0.32"
-    "@navikt/ft-ui-komponenter" "^1.1.12"
+    "@navikt/ft-ui-komponenter" "^1.1.14"
     "@navikt/ft-utils" "^1.1.7"
     classnames "2.3.2"
     react "18.2.0"
     react-hook-form "7.38.0"
     react-intl "6.2.1"
 
-"@navikt/ft-prosess-tilbakekreving@^1.1.13":
-  version "1.1.13"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-tilbakekreving/1.1.13/8531bfa73edd38a5b6117797feeaeea6cd5217be#8531bfa73edd38a5b6117797feeaeea6cd5217be"
-  integrity sha512-sqctxC5gZ9Nwy0nQnQOOxDwMEnpCPHwfgQrB72zywNt/hZ17G3zbSYtnIxouMGN8Dof0e2bzr/W9nUu8E1Gvfg==
+"@navikt/ft-prosess-tilbakekreving@^1.1.15":
+  version "1.1.15"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-tilbakekreving/1.1.15/617919c133c1b2c2a889bef28dcf7f064cec72ba#617919c133c1b2c2a889bef28dcf7f064cec72ba"
+  integrity sha512-2XSbxuU6a8084YZCDW+kH/P7yEIbWQeF7uUkLzTI88bDeGFQKKlXUZ9l8p7YWagDD1kX7aQrwnTthCafBgb85A==
   dependencies:
-    "@navikt/ds-css" "^1.3.37"
-    "@navikt/ds-react" "^1.3.37"
-    "@navikt/ft-form-hooks" "^3.0.3"
+    "@navikt/ds-css" "^1.4.0"
+    "@navikt/ds-react" "^1.4.0"
+    "@navikt/ft-form-hooks" "^3.0.5"
     "@navikt/ft-form-validators" "^1.0.36"
     "@navikt/ft-kodeverk" "^1.0.21"
-    "@navikt/ft-tidslinje" "^1.1.13"
+    "@navikt/ft-tidslinje" "^1.1.15"
     "@navikt/ft-types" "^1.0.32"
-    "@navikt/ft-ui-komponenter" "^1.1.12"
+    "@navikt/ft-ui-komponenter" "^1.1.14"
     "@navikt/ft-utils" "^1.1.7"
     moment "2.29.4"
     react "18.2.0"
     react-hook-form "7.38.0"
     react-intl "6.2.1"
 
-"@navikt/ft-sak-aktor@1.1.20":
-  version "1.1.20"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-aktor/1.1.20/da9c39b1812b362ba53fa752cc860b2e1c31207a#da9c39b1812b362ba53fa752cc860b2e1c31207a"
-  integrity sha512-GlOe1CWdpwdOwU09M8VJJRN5SxLid/rZyq8dZI844zjVHCkLEWmpKgoS0EEXaNbDGtalRJpluyJNwO3y4m+UxA==
+"@navikt/ft-sak-aktor@1.1.22":
+  version "1.1.22"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-aktor/1.1.22/6e042bdfb3698434b31458be665d278452bc075a#6e042bdfb3698434b31458be665d278452bc075a"
+  integrity sha512-Wi3BpklgD4JIprjdrgjrje3XuSoFm7y4AxR4Mhjy87A0KZ/erY0y7V+s/uhpTis2IRNvMID/9ruSaNQqhG30Cw==
   dependencies:
-    "@navikt/ds-css" "^1.3.37"
-    "@navikt/ds-react" "^1.3.37"
+    "@navikt/ds-css" "^1.4.0"
+    "@navikt/ds-react" "^1.4.0"
     "@navikt/ft-kodeverk" "^1.0.21"
-    "@navikt/ft-plattform-komponenter" "^1.2.10"
-    "@navikt/ft-sak-visittkort" "^1.1.20"
+    "@navikt/ft-plattform-komponenter" "^1.2.11"
+    "@navikt/ft-sak-visittkort" "^1.1.22"
     "@navikt/ft-types" "^1.0.32"
-    "@navikt/ft-ui-komponenter" "^1.1.12"
+    "@navikt/ft-ui-komponenter" "^1.1.14"
     "@navikt/ft-utils" "^1.1.7"
     react "18.2.0"
     react-intl "6.2.1"
 
-"@navikt/ft-sak-behandling-velger@1.1.20":
-  version "1.1.20"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-behandling-velger/1.1.20/be76acd0c36d7d9c64ab90447a29f4684738ecff#be76acd0c36d7d9c64ab90447a29f4684738ecff"
-  integrity sha512-6A+uaKbu/IRTlyS7Kmyzx2mSFGNbh+1NX8EOYikIZqgd3Ils7WjkPCXxAeLZULUAGamFbvMekaHJ/ZtLF2uIEQ==
+"@navikt/ft-sak-behandling-velger@1.1.22":
+  version "1.1.22"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-behandling-velger/1.1.22/94fe4ec71e5839236f2300d8bf38d929aedcb9df#94fe4ec71e5839236f2300d8bf38d929aedcb9df"
+  integrity sha512-Oic5fTJCH6Sb/SRQFzNM5b9ptquML5Pr0fHzB9AC7R6EILLk9wDs1VXPqhwFtVIRfiuHbVO9LAW08CMl8HeKzg==
   dependencies:
-    "@navikt/ds-css" "^1.3.37"
-    "@navikt/ds-react" "^1.3.37"
+    "@navikt/ds-css" "^1.4.0"
+    "@navikt/ds-react" "^1.4.0"
     "@navikt/ft-kodeverk" "^1.0.21"
-    "@navikt/ft-plattform-komponenter" "^1.2.10"
+    "@navikt/ft-plattform-komponenter" "^1.2.11"
     "@navikt/ft-types" "^1.0.32"
-    "@navikt/ft-ui-komponenter" "^1.1.12"
+    "@navikt/ft-ui-komponenter" "^1.1.14"
     "@navikt/ft-utils" "^1.1.7"
     classnames "2.3.2"
     history "5.3.0"
@@ -3066,91 +3075,91 @@
     react "18.2.0"
     react-intl "6.2.1"
 
-"@navikt/ft-sak-dekorator@1.1.20":
-  version "1.1.20"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-dekorator/1.1.20/efe5e3b721ce0c58df5b835b05bb2e65dcf5e617#efe5e3b721ce0c58df5b835b05bb2e65dcf5e617"
-  integrity sha512-Kp3rcTB7yuX+rwHlCAWspakYoDLAlLjevB2sDOqVfb0kuf/sxfPvj42TK1aRAOyCFaxYD1yXZu2i6lSqZ+UPFw==
+"@navikt/ft-sak-dekorator@1.1.22":
+  version "1.1.22"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-dekorator/1.1.22/1fa735d7e9da59f340b1ce9aecd25342316a6c1b#1fa735d7e9da59f340b1ce9aecd25342316a6c1b"
+  integrity sha512-r4rvC1otCiubsRaPvI/4AhS+AAksijJuNMi8EdH2rItQ8fkO/1kdt9a/WENSIW+XAh4sxruei6WVO3gqgzgfVg==
   dependencies:
-    "@navikt/ds-css" "^1.3.37"
-    "@navikt/ds-icons" "^1.3.37"
-    "@navikt/ds-react" "^1.3.37"
+    "@navikt/ds-css" "^1.4.0"
+    "@navikt/ds-icons" "^1.4.0"
+    "@navikt/ds-react" "^1.4.0"
     "@navikt/ft-kodeverk" "^1.0.21"
     "@navikt/ft-konstanter" "^1.0.14"
-    "@navikt/ft-plattform-komponenter" "^1.2.10"
+    "@navikt/ft-plattform-komponenter" "^1.2.11"
     "@navikt/ft-types" "^1.0.32"
-    "@navikt/ft-ui-komponenter" "^1.1.12"
+    "@navikt/ft-ui-komponenter" "^1.1.14"
     "@navikt/ft-utils" "^1.1.7"
     classnames "2.3.2"
     react "18.2.0"
     react-intl "6.2.1"
 
-"@navikt/ft-sak-dokumenter@1.1.12":
-  version "1.1.12"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-dokumenter/1.1.12/fd72d31c3258bca715ca417e5ac9cfa8338ba462#fd72d31c3258bca715ca417e5ac9cfa8338ba462"
-  integrity sha512-ePGwb5lGETFr/49kjEQd0jKJjyzcrqz2IOE13CrZ+Z8ove0/Uc8eHUSdIiUVCqeFEKXIovVKYvF9ss6KBgh5OA==
+"@navikt/ft-sak-dokumenter@1.1.14":
+  version "1.1.14"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-dokumenter/1.1.14/75233024fc5586177e037172b65d51a351589f5e#75233024fc5586177e037172b65d51a351589f5e"
+  integrity sha512-zCap8KPetR1fTLrylQdaQNnX8UV7QtDmGX4X4quDQbD73YkWyzKhvprIrQd1mnaQUZ/cctlWLsZgnTdWJQTGZg==
   dependencies:
-    "@navikt/ds-css" "^1.3.37"
-    "@navikt/ds-react" "^1.3.37"
+    "@navikt/ds-css" "^1.4.0"
+    "@navikt/ds-react" "^1.4.0"
     "@navikt/ft-kodeverk" "^1.0.21"
     "@navikt/ft-types" "^1.0.32"
-    "@navikt/ft-ui-komponenter" "^1.1.12"
+    "@navikt/ft-ui-komponenter" "^1.1.14"
     "@navikt/ft-utils" "^1.1.7"
     react "18.2.0"
     react-intl "6.2.1"
 
-"@navikt/ft-sak-fagsak-profil@1.1.12":
-  version "1.1.12"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-fagsak-profil/1.1.12/f5ca6c84810571a0e177b5c02471abbaf89aedc8#f5ca6c84810571a0e177b5c02471abbaf89aedc8"
-  integrity sha512-x5Z8HyXQuyaJSa1oa8JaJixbYj/dIWU7I7L0SLOPiW+n4sj1Xm5bxktP/zhEmQRjHhR+5U15o4NOdUIRO44zrQ==
+"@navikt/ft-sak-fagsak-profil@1.1.14":
+  version "1.1.14"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-fagsak-profil/1.1.14/a5250e5d0f6eeed2b15db9a0286db674af7f6d61#a5250e5d0f6eeed2b15db9a0286db674af7f6d61"
+  integrity sha512-ZJ16xzIDLJTr4QnGgnk0Xe1o+trQd+FaflEDfoyyzSR4zX70u9vR38Bu7Mo+IDjFnlDDMUi0r2IxW+nBd4ULAA==
   dependencies:
-    "@navikt/ds-css" "^1.3.37"
-    "@navikt/ds-react" "^1.3.37"
+    "@navikt/ds-css" "^1.4.0"
+    "@navikt/ds-react" "^1.4.0"
     "@navikt/ft-kodeverk" "^1.0.21"
     "@navikt/ft-types" "^1.0.32"
-    "@navikt/ft-ui-komponenter" "^1.1.12"
+    "@navikt/ft-ui-komponenter" "^1.1.14"
     "@navikt/ft-utils" "^1.1.7"
     react "18.2.0"
     react-intl "6.2.1"
 
-"@navikt/ft-sak-infosider@1.1.10":
-  version "1.1.10"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-infosider/1.1.10/e1cb7616a945f9b37cd74a4add4cad9b210bb51c#e1cb7616a945f9b37cd74a4add4cad9b210bb51c"
-  integrity sha512-5d1Obo+OO0bwbQeFEKPtg0vb2bgR1iEIrW0WNw3Cv4ri3DfALphi53zR/JTRWNQZDtUo0diJ/G7Q74vm2Q0JZw==
+"@navikt/ft-sak-infosider@1.1.11":
+  version "1.1.11"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-infosider/1.1.11/f9601ddd48d5e21a38d42e6ff04b953ffcf1b88f#f9601ddd48d5e21a38d42e6ff04b953ffcf1b88f"
+  integrity sha512-Du1bOxS5J0F9PWuYqZCcrE+EedDXp+gxo+B4lwYdswGcMmLExIw6G+561vmPEC2Ic6lhALyMMohAhIo3aytxmQ==
   dependencies:
-    "@navikt/ds-css" "^1.3.37"
-    "@navikt/ds-react" "^1.3.37"
+    "@navikt/ds-css" "^1.4.0"
+    "@navikt/ds-react" "^1.4.0"
     "@navikt/ft-utils" "^1.1.7"
     react "18.2.0"
     react-intl "6.2.1"
 
-"@navikt/ft-sak-meny@1.1.20":
-  version "1.1.20"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-meny/1.1.20/19997143a4b19a44693bd9c5ea7395cf1edc8a1c#19997143a4b19a44693bd9c5ea7395cf1edc8a1c"
-  integrity sha512-TDJTh7OBGcb5ZbWKL64+LPvqyMk9U2D2unEccYWV8bePvtgdp5f1+EkprBEA3n/QMhPU/1Uz9TLL5L5uBkfJVQ==
+"@navikt/ft-sak-meny@1.1.22":
+  version "1.1.22"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-meny/1.1.22/5e1653678ce20749bfc0d962da27067e061ef554#5e1653678ce20749bfc0d962da27067e061ef554"
+  integrity sha512-+6VU1kdg+M1U8nc62DRSspynt1vZKoDDUet9p/EEfwJEaIMU1SdsL+SOu2fh3WPucUdxWCXGyW5QxdT84oEoxw==
   dependencies:
-    "@navikt/ds-css" "^1.3.37"
-    "@navikt/ds-react" "^1.3.37"
-    "@navikt/ft-form-hooks" "^3.0.3"
+    "@navikt/ds-css" "^1.4.0"
+    "@navikt/ds-react" "^1.4.0"
+    "@navikt/ft-form-hooks" "^3.0.5"
     "@navikt/ft-form-validators" "^1.0.36"
-    "@navikt/ft-plattform-komponenter" "^1.2.10"
-    "@navikt/ft-ui-komponenter" "^1.1.12"
+    "@navikt/ft-plattform-komponenter" "^1.2.11"
+    "@navikt/ft-ui-komponenter" "^1.1.14"
     "@navikt/ft-utils" "^1.1.7"
     react "18.2.0"
     react-hook-form "7.38.0"
     react-intl "6.2.1"
 
-"@navikt/ft-sak-risikoklassifisering@1.1.12":
-  version "1.1.12"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-risikoklassifisering/1.1.12/0073583206892e851192e11102acd1d201ba6289#0073583206892e851192e11102acd1d201ba6289"
-  integrity sha512-lWifjXPEmEMKSkPrpctAsaaTJ2WxYBn5ro9hndqYde5K9SfxEMrtFJJDzOiqWPKMjdfEAd8g2MtLiyADMXUixg==
+"@navikt/ft-sak-risikoklassifisering@1.1.14":
+  version "1.1.14"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-risikoklassifisering/1.1.14/9e93a182bf6bf29bb1d2e732cb641f7bc7612465#9e93a182bf6bf29bb1d2e732cb641f7bc7612465"
+  integrity sha512-SCl4RE8zkPn44rF1OAW2ZtCL2pBQ+tGSXtuAkZTAurL2cpHlGjS3oZpJqJy0INTaB6vUNBTeFkLQX4DRkG0e4w==
   dependencies:
-    "@navikt/ds-css" "^1.3.37"
-    "@navikt/ds-react" "^1.3.37"
-    "@navikt/ft-form-hooks" "^3.0.3"
+    "@navikt/ds-css" "^1.4.0"
+    "@navikt/ds-react" "^1.4.0"
+    "@navikt/ft-form-hooks" "^3.0.5"
     "@navikt/ft-form-validators" "^1.0.36"
     "@navikt/ft-kodeverk" "^1.0.21"
     "@navikt/ft-types" "^1.0.32"
-    "@navikt/ft-ui-komponenter" "^1.1.12"
+    "@navikt/ft-ui-komponenter" "^1.1.14"
     "@navikt/ft-utils" "^1.1.7"
     react "18.2.0"
     react-collapse "5.1.1"
@@ -3158,44 +3167,44 @@
     react-hook-form "7.38.0"
     react-intl "6.2.1"
 
-"@navikt/ft-sak-support-meny@1.1.12":
-  version "1.1.12"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-support-meny/1.1.12/535623b173cf21ab3fef504ae44beed75d22657e#535623b173cf21ab3fef504ae44beed75d22657e"
-  integrity sha512-F/B17Hw2tE0b/+PUZJ/5rcRaXBSVJ11Ck7UW0sdmweEazRva97FGbnI+cN+tRv0pWtjFCk/UL6JVnXpuV92XBA==
+"@navikt/ft-sak-support-meny@1.1.14":
+  version "1.1.14"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-support-meny/1.1.14/da032a227f10daa2c961f8bbbffa5f098b6349d4#da032a227f10daa2c961f8bbbffa5f098b6349d4"
+  integrity sha512-Ipjx44OuXuiNCzNryZR5GKQMKshWt+S4RSyjrS+EcyRYMupj2ldkosLbKlO9udmk6nKID/MSftGAS6/kpMDAVg==
   dependencies:
     "@navikt/ft-kodeverk" "^1.0.21"
     "@navikt/ft-types" "^1.0.32"
-    "@navikt/ft-ui-komponenter" "^1.1.12"
+    "@navikt/ft-ui-komponenter" "^1.1.14"
     "@navikt/ft-utils" "^1.1.7"
     classnames "2.3.2"
     react "18.2.0"
     react-intl "6.2.1"
 
-"@navikt/ft-sak-visittkort@1.1.20", "@navikt/ft-sak-visittkort@^1.1.20":
-  version "1.1.20"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-visittkort/1.1.20/2fbf7af967134720970818f47d5d81ee412e5489#2fbf7af967134720970818f47d5d81ee412e5489"
-  integrity sha512-r11I5qEyVkFWMw37JnQ6yGH5y+7mw3k5SjI0VM6F1Cv8Ft+ckDjXrw5qPwbbF6YnyTl2uIfMGwUL0VAH9SNWyg==
+"@navikt/ft-sak-visittkort@1.1.22", "@navikt/ft-sak-visittkort@^1.1.22":
+  version "1.1.22"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-visittkort/1.1.22/07636503d7a2e1bdb4329d267c1a3a9c82086ae8#07636503d7a2e1bdb4329d267c1a3a9c82086ae8"
+  integrity sha512-AzoYfkyr/meF/HWHCl42ckgWMSM97gfwfzt7+iSFAyiPVnOuL1R8UQvzrqzhK/dgtl2+Yr+/N8x0shjaM8oiIw==
   dependencies:
-    "@navikt/ds-css" "^1.3.37"
-    "@navikt/ds-react" "^1.3.37"
+    "@navikt/ds-css" "^1.4.0"
+    "@navikt/ds-react" "^1.4.0"
     "@navikt/ft-kodeverk" "^1.0.21"
-    "@navikt/ft-plattform-komponenter" "^1.2.10"
+    "@navikt/ft-plattform-komponenter" "^1.2.11"
     "@navikt/ft-types" "^1.0.32"
-    "@navikt/ft-ui-komponenter" "^1.1.12"
+    "@navikt/ft-ui-komponenter" "^1.1.14"
     "@navikt/ft-utils" "^1.1.7"
     moment "2.29.4"
     react "18.2.0"
     react-intl "6.2.1"
 
-"@navikt/ft-tidslinje@1.1.13", "@navikt/ft-tidslinje@^1.1.13":
-  version "1.1.13"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-tidslinje/1.1.13/ba888af6ac31b9bf83f20c72fda26496409a67ec#ba888af6ac31b9bf83f20c72fda26496409a67ec"
-  integrity sha512-ujU7oUyjSa53ybBjZFYiXnxsM5kQTda81oKpSCwJDsNQxnxPXgUCjV2mYjBRJ6Ikp3n8OILDk0s7Ocm5KjLBEw==
+"@navikt/ft-tidslinje@1.1.15", "@navikt/ft-tidslinje@^1.1.15":
+  version "1.1.15"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-tidslinje/1.1.15/3351c2d4b0d94c7919d3ef344dbffe6d0f08ce64#3351c2d4b0d94c7919d3ef344dbffe6d0f08ce64"
+  integrity sha512-9ywFNlqVWSjTLaznA9Ta5Nks8XHqQ4cmoeOMV5qqEHuQ2cjIII2i4s+sh7WqjrENuObx9iUikzRlASsXbBei+A==
   dependencies:
-    "@navikt/ds-css" "^1.3.37"
+    "@navikt/ds-css" "^1.4.0"
     "@navikt/ft-kodeverk" "^1.0.21"
     "@navikt/ft-types" "^1.0.32"
-    "@navikt/ft-ui-komponenter" "^1.1.12"
+    "@navikt/ft-ui-komponenter" "^1.1.14"
     "@navikt/ft-utils" "^1.1.7"
     moment "2.29.4"
     react "18.2.0"
@@ -3210,13 +3219,13 @@
   dependencies:
     "@navikt/ft-kodeverk" "^1.0.21"
 
-"@navikt/ft-ui-komponenter@1.1.12", "@navikt/ft-ui-komponenter@^1.1.12":
-  version "1.1.12"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-ui-komponenter/1.1.12/5179730e3ff0692851a393527b66e8e46115ef9e#5179730e3ff0692851a393527b66e8e46115ef9e"
-  integrity sha512-+F++TqGZg5Dv5VyD7f9FizkbQc3wHVOBOdtRXq8GAy4ArXH3ZkMyhBO6/guFvqVAwadD1038TblU00VH5UNJBQ==
+"@navikt/ft-ui-komponenter@1.1.14", "@navikt/ft-ui-komponenter@^1.1.14":
+  version "1.1.14"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-ui-komponenter/1.1.14/223106b810c5c7da9c99ad49d73d5463c198685b#223106b810c5c7da9c99ad49d73d5463c198685b"
+  integrity sha512-y3gD2dithid9V3BiCpdj/g9DJ3P4rymVh/RQF4X3t50Lk9Bd9Lx9B9RVQ+6sMQArwEoQ1w/mKcQq+n9+VN2Isw==
   dependencies:
-    "@navikt/ds-css" "^1.3.37"
-    "@navikt/ds-react" "^1.3.37"
+    "@navikt/ds-css" "^1.4.0"
+    "@navikt/ds-react" "^1.4.0"
     "@navikt/fnrvalidator" "1.3.3"
     "@navikt/ft-utils" "^1.1.7"
     classnames "2.3.2"
@@ -3740,36 +3749,36 @@
   resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.0.2.tgz#1c17eadb2fa77f80a796ad5ea9bf108e6993ef06"
   integrity sha512-GRSOFhJzjGN+d4sKHTMSvNeUPoZiDHWmRnXfzaxrqe7dE/Nzlc8BiMSJdLDESZlndM7jIUrZ/F4yWqVYlI0rwQ==
 
-"@sentry/browser@7.16.0":
-  version "7.16.0"
-  resolved "https://registry.yarnpkg.com/@sentry/browser/-/browser-7.16.0.tgz#afd2bac91857d2359272a0d9d2b1ee5ca7d69828"
-  integrity sha512-tJ063zvoF8Raw7mzQEXupOFPSN6v36WIbsDVGeFdToPCwViaBuATaxvWCrudGzsnBkMyItmTLJkzn9SEIXUOiw==
+"@sentry/browser@7.17.2":
+  version "7.17.2"
+  resolved "https://registry.yarnpkg.com/@sentry/browser/-/browser-7.17.2.tgz#624c2c371c9d771311672c484fe24666a92bdbdd"
+  integrity sha512-LICJvwnES+Jp7ShN7zkmTFYIQB9jWOg/s9U58CQWfwrkMTwE4zKylojF3OTtyNaMmekVv/y/1JjeS5KAK3IrHQ==
   dependencies:
-    "@sentry/core" "7.16.0"
-    "@sentry/types" "7.16.0"
-    "@sentry/utils" "7.16.0"
+    "@sentry/core" "7.17.2"
+    "@sentry/types" "7.17.2"
+    "@sentry/utils" "7.17.2"
     tslib "^1.9.3"
 
-"@sentry/core@7.16.0":
-  version "7.16.0"
-  resolved "https://registry.yarnpkg.com/@sentry/core/-/core-7.16.0.tgz#60f9b54ef2ec524176b329e1d15be39c36da5953"
-  integrity sha512-vq6H1b/IPTvzDD9coQ3wIudvSjkAYuUlXb1dv69dRlq4v3st9dcKBps1Zf0lQ1i4TVlDLoe1iGMmNFglMF1Q5w==
+"@sentry/core@7.17.2":
+  version "7.17.2"
+  resolved "https://registry.yarnpkg.com/@sentry/core/-/core-7.17.2.tgz#0d3b5f0155f3ecefb7ddb2f050c25bf0fb69e0fb"
+  integrity sha512-mBFjngWJPN3V1A/tz/qa1jkQvmZtU07hhlWg+kmajD0nFulPHUWEvZhsi8NFveGcxMxc/wmaSSLcEOpKq5L29g==
   dependencies:
-    "@sentry/types" "7.16.0"
-    "@sentry/utils" "7.16.0"
+    "@sentry/types" "7.17.2"
+    "@sentry/utils" "7.17.2"
     tslib "^1.9.3"
 
-"@sentry/types@7.16.0":
-  version "7.16.0"
-  resolved "https://registry.yarnpkg.com/@sentry/types/-/types-7.16.0.tgz#79c06ada153a84feb949fa49b1c9d15f91decd79"
-  integrity sha512-i6D+OK6d0l/k+VQvRp/Pt21WkDEgVBUIZq+sOkEZJczbcfexVdXKeXXoYTD2vYuFq8Yy28fzlsZaKI+NoH94yQ==
+"@sentry/types@7.17.2":
+  version "7.17.2"
+  resolved "https://registry.yarnpkg.com/@sentry/types/-/types-7.17.2.tgz#49dee17896e3814d0ce6dae1b7efead5f1af8c8c"
+  integrity sha512-zxhNQ8Xt/hfP8bFZEV66ovJZK7aUqok5w1wjsHgkUz/S6/gkiMrDYT3OtRCRuY3mfQu9KmeBniM0xZkaxREJ1w==
 
-"@sentry/utils@7.16.0":
-  version "7.16.0"
-  resolved "https://registry.yarnpkg.com/@sentry/utils/-/utils-7.16.0.tgz#b832520c661d4435808969ee04814ff8e20497b1"
-  integrity sha512-3Zh1txg7IRp4kZAdG27YF7K6lD1IZyuAo9KjoPg1Xzqa4DOZyASJuEkbf+rK2a9T4HrtVHHXJUsNbKg8WM3VHg==
+"@sentry/utils@7.17.2":
+  version "7.17.2"
+  resolved "https://registry.yarnpkg.com/@sentry/utils/-/utils-7.17.2.tgz#934f900715dacc51699b44e8e61df8c7fbdd0b5f"
+  integrity sha512-l8t6qzyi+UUzD0a/oOYn4i+Eii+Ei29/TVwj/+9ogfJzBk6dSwSLvXievsyCRpcN3tftpWP0cHREcbZN64ZOWw==
   dependencies:
-    "@sentry/types" "7.16.0"
+    "@sentry/types" "7.17.2"
     tslib "^1.9.3"
 
 "@sinclair/typebox@^0.24.1":
@@ -4648,111 +4657,111 @@
     regenerator-runtime "^0.13.7"
     resolve-from "^5.0.0"
 
-"@svgr/babel-plugin-add-jsx-attribute@^6.5.0":
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/@svgr/babel-plugin-add-jsx-attribute/-/babel-plugin-add-jsx-attribute-6.5.0.tgz#21788f7e982aacafc805ed30a14048a1406fbabc"
-  integrity sha512-Cp1JR1IPrQNvPRbkfcPmax52iunBC+eQDyBce8feOIIbVH6ZpVhErYoJtPWRBj2rKi4Wi9HvCm1+L1UD6QlBmg==
+"@svgr/babel-plugin-add-jsx-attribute@^6.5.1":
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/@svgr/babel-plugin-add-jsx-attribute/-/babel-plugin-add-jsx-attribute-6.5.1.tgz#74a5d648bd0347bda99d82409d87b8ca80b9a1ba"
+  integrity sha512-9PYGcXrAxitycIjRmZB+Q0JaN07GZIWaTBIGQzfaZv+qr1n8X1XUEJ5rZ/vx6OVD9RRYlrNnXWExQXcmZeD/BQ==
 
-"@svgr/babel-plugin-remove-jsx-attribute@^6.5.0":
+"@svgr/babel-plugin-remove-jsx-attribute@*":
   version "6.5.0"
   resolved "https://registry.yarnpkg.com/@svgr/babel-plugin-remove-jsx-attribute/-/babel-plugin-remove-jsx-attribute-6.5.0.tgz#652bfd4ed0a0699843585cda96faeb09d6e1306e"
   integrity sha512-8zYdkym7qNyfXpWvu4yq46k41pyNM9SOstoWhKlm+IfdCE1DdnRKeMUPsWIEO/DEkaWxJ8T9esNdG3QwQ93jBA==
 
-"@svgr/babel-plugin-remove-jsx-empty-expression@^6.5.0":
+"@svgr/babel-plugin-remove-jsx-empty-expression@*":
   version "6.5.0"
   resolved "https://registry.yarnpkg.com/@svgr/babel-plugin-remove-jsx-empty-expression/-/babel-plugin-remove-jsx-empty-expression-6.5.0.tgz#4b78994ab7d39032c729903fc2dd5c0fa4565cb8"
   integrity sha512-NFdxMq3xA42Kb1UbzCVxplUc0iqSyM9X8kopImvFnB+uSDdzIHOdbs1op8ofAvVRtbg4oZiyRl3fTYeKcOe9Iw==
 
-"@svgr/babel-plugin-replace-jsx-attribute-value@^6.5.0":
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/@svgr/babel-plugin-replace-jsx-attribute-value/-/babel-plugin-replace-jsx-attribute-value-6.5.0.tgz#ca57c0a62a9c22ff11cdb475dc9a2b35586335d1"
-  integrity sha512-XWm64/rSPUCQ+MFyA9lhMO+w8bOZvkTvovRIU1lpIy63ysPaVAFtxjQiZj+S7QaLaLGUXkSkf8WZsaN+QPo/gA==
+"@svgr/babel-plugin-replace-jsx-attribute-value@^6.5.1":
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/@svgr/babel-plugin-replace-jsx-attribute-value/-/babel-plugin-replace-jsx-attribute-value-6.5.1.tgz#fb9d22ea26d2bc5e0a44b763d4c46d5d3f596c60"
+  integrity sha512-8DPaVVE3fd5JKuIC29dqyMB54sA6mfgki2H2+swh+zNJoynC8pMPzOkidqHOSc6Wj032fhl8Z0TVn1GiPpAiJg==
 
-"@svgr/babel-plugin-svg-dynamic-title@^6.5.0":
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/@svgr/babel-plugin-svg-dynamic-title/-/babel-plugin-svg-dynamic-title-6.5.0.tgz#57c0e0409757373d641f115d33cf2559b47bff77"
-  integrity sha512-JIF2D2ltiWFGlTw2fJ9jJg1fNT9rWjOD2Cf0/xzeW6Z2LIRQTHcRHxpZq359+SRWtEPsCXEWV2Xmd+DMBj6dBw==
+"@svgr/babel-plugin-svg-dynamic-title@^6.5.1":
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/@svgr/babel-plugin-svg-dynamic-title/-/babel-plugin-svg-dynamic-title-6.5.1.tgz#01b2024a2b53ffaa5efceaa0bf3e1d5a4c520ce4"
+  integrity sha512-FwOEi0Il72iAzlkaHrlemVurgSQRDFbk0OC8dSvD5fSBPHltNh7JtLsxmZUhjYBZo2PpcU/RJvvi6Q0l7O7ogw==
 
-"@svgr/babel-plugin-svg-em-dimensions@^6.5.0":
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/@svgr/babel-plugin-svg-em-dimensions/-/babel-plugin-svg-em-dimensions-6.5.0.tgz#dbca40a18c308f135b4b672ea8e410855e8e3352"
-  integrity sha512-uuo0FfLP4Nu2zncOcoUFDzZdXWma2bxkTGk0etRThs4/PghvPIGaW8cPhCg6yJ8zpaauWcKV0wZtzKlJRCtVzg==
+"@svgr/babel-plugin-svg-em-dimensions@^6.5.1":
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/@svgr/babel-plugin-svg-em-dimensions/-/babel-plugin-svg-em-dimensions-6.5.1.tgz#dd3fa9f5b24eb4f93bcf121c3d40ff5facecb217"
+  integrity sha512-gWGsiwjb4tw+ITOJ86ndY/DZZ6cuXMNE/SjcDRg+HLuCmwpcjOktwRF9WgAiycTqJD/QXqL2f8IzE2Rzh7aVXA==
 
-"@svgr/babel-plugin-transform-react-native-svg@^6.5.0":
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/@svgr/babel-plugin-transform-react-native-svg/-/babel-plugin-transform-react-native-svg-6.5.0.tgz#a5453127365b925a7f766615ef6f5cfd01018f98"
-  integrity sha512-VMRWyOmrV+DaEFPgP3hZMsFgs2g87ojs3txw0Rx8iz6Nf/E3UoHUwTqpkSCWd3Hsnc9gMOY9+wl6+/Ycleh1sw==
+"@svgr/babel-plugin-transform-react-native-svg@^6.5.1":
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/@svgr/babel-plugin-transform-react-native-svg/-/babel-plugin-transform-react-native-svg-6.5.1.tgz#1d8e945a03df65b601551097d8f5e34351d3d305"
+  integrity sha512-2jT3nTayyYP7kI6aGutkyfJ7UMGtuguD72OjeGLwVNyfPRBD8zQthlvL+fAbAKk5n9ZNcvFkp/b1lZ7VsYqVJg==
 
-"@svgr/babel-plugin-transform-svg-component@^6.5.0":
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/@svgr/babel-plugin-transform-svg-component/-/babel-plugin-transform-svg-component-6.5.0.tgz#ec116e9223a02c6dcd9f8cb2bdbf174a3c2ef2f5"
-  integrity sha512-b67Ul3SelaqvGEEG/1B3VJ03KUtGFgRQjRLCCjdttMQLcYa9l/izQFEclNFx53pNqhijUMNKHPhGMY/CWGVKig==
+"@svgr/babel-plugin-transform-svg-component@^6.5.1":
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/@svgr/babel-plugin-transform-svg-component/-/babel-plugin-transform-svg-component-6.5.1.tgz#48620b9e590e25ff95a80f811544218d27f8a250"
+  integrity sha512-a1p6LF5Jt33O3rZoVRBqdxL350oge54iZWHNI6LJB5tQ7EelvD/Mb1mfBiZNAan0dt4i3VArkFRjA4iObuNykQ==
 
-"@svgr/babel-preset@^6.5.0":
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/@svgr/babel-preset/-/babel-preset-6.5.0.tgz#dc14bbe1c74e0c8c4ab77221064645b3399836db"
-  integrity sha512-UWM98PKVuMqw2UZo8YO3erI6nF1n7/XBYTXBqR0QhZP7HTjYK6QxFNvPfIshddy1hBdzhVpkf148Vg8xiVOtyg==
+"@svgr/babel-preset@^6.5.1":
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/@svgr/babel-preset/-/babel-preset-6.5.1.tgz#b90de7979c8843c5c580c7e2ec71f024b49eb828"
+  integrity sha512-6127fvO/FF2oi5EzSQOAjo1LE3OtNVh11R+/8FXa+mHx1ptAaS4cknIjnUA7e6j6fwGGJ17NzaTJFUwOV2zwCw==
   dependencies:
-    "@svgr/babel-plugin-add-jsx-attribute" "^6.5.0"
-    "@svgr/babel-plugin-remove-jsx-attribute" "^6.5.0"
-    "@svgr/babel-plugin-remove-jsx-empty-expression" "^6.5.0"
-    "@svgr/babel-plugin-replace-jsx-attribute-value" "^6.5.0"
-    "@svgr/babel-plugin-svg-dynamic-title" "^6.5.0"
-    "@svgr/babel-plugin-svg-em-dimensions" "^6.5.0"
-    "@svgr/babel-plugin-transform-react-native-svg" "^6.5.0"
-    "@svgr/babel-plugin-transform-svg-component" "^6.5.0"
+    "@svgr/babel-plugin-add-jsx-attribute" "^6.5.1"
+    "@svgr/babel-plugin-remove-jsx-attribute" "*"
+    "@svgr/babel-plugin-remove-jsx-empty-expression" "*"
+    "@svgr/babel-plugin-replace-jsx-attribute-value" "^6.5.1"
+    "@svgr/babel-plugin-svg-dynamic-title" "^6.5.1"
+    "@svgr/babel-plugin-svg-em-dimensions" "^6.5.1"
+    "@svgr/babel-plugin-transform-react-native-svg" "^6.5.1"
+    "@svgr/babel-plugin-transform-svg-component" "^6.5.1"
 
-"@svgr/core@^6.5.0":
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/@svgr/core/-/core-6.5.0.tgz#13af3337b7b66a2b6ebe197b67b62badbe490bf1"
-  integrity sha512-jIbu36GMjfK8HCCQitkfVVeQ2vSXGfq0ef0GO9HUxZGjal6Kvpkk4PwpkFP+OyCzF+skQFT9aWrUqekT3pKF8w==
+"@svgr/core@^6.5.1":
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/@svgr/core/-/core-6.5.1.tgz#d3e8aa9dbe3fbd747f9ee4282c1c77a27410488a"
+  integrity sha512-/xdLSWxK5QkqG524ONSjvg3V/FkNyCv538OIBdQqPNaAta3AsXj/Bd2FbvR87yMbXO2hFSWiAe/Q6IkVPDw+mw==
   dependencies:
-    "@babel/core" "^7.18.5"
-    "@svgr/babel-preset" "^6.5.0"
-    "@svgr/plugin-jsx" "^6.5.0"
+    "@babel/core" "^7.19.6"
+    "@svgr/babel-preset" "^6.5.1"
+    "@svgr/plugin-jsx" "^6.5.1"
     camelcase "^6.2.0"
     cosmiconfig "^7.0.1"
 
-"@svgr/hast-util-to-babel-ast@^6.5.0":
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/@svgr/hast-util-to-babel-ast/-/hast-util-to-babel-ast-6.5.0.tgz#0e4aebea26328e22a6fff940711472a47ec24e5c"
-  integrity sha512-PPy94U/EiPQ2dY0b4jEqj4QOdDRq6DG7aTHjpGaL8HlKSHkpU1DpjfywCXTJqtOdCo2FywjWvg0U2FhqMeUJaA==
+"@svgr/hast-util-to-babel-ast@^6.5.1":
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/@svgr/hast-util-to-babel-ast/-/hast-util-to-babel-ast-6.5.1.tgz#81800bd09b5bcdb968bf6ee7c863d2288fdb80d2"
+  integrity sha512-1hnUxxjd83EAxbL4a0JDJoD3Dao3hmjvyvyEV8PzWmLK3B9m9NPlW7GKjFyoWE8nM7HnXzPcmmSyOW8yOddSXw==
   dependencies:
-    "@babel/types" "^7.18.4"
-    entities "^4.3.0"
+    "@babel/types" "^7.20.0"
+    entities "^4.4.0"
 
-"@svgr/plugin-jsx@^6.5.0":
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/@svgr/plugin-jsx/-/plugin-jsx-6.5.0.tgz#c23ba0048007f1591fe7a9b060be373e4771487b"
-  integrity sha512-1CHMqOBKoNk/ZPU+iGXKcQPC6q9zaD7UOI99J+BaGY5bdCztcf5bZyi0QZSDRJtCQpdofeVv7XfBYov2mtl0Pw==
+"@svgr/plugin-jsx@^6.5.1":
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/@svgr/plugin-jsx/-/plugin-jsx-6.5.1.tgz#0e30d1878e771ca753c94e69581c7971542a7072"
+  integrity sha512-+UdQxI3jgtSjCykNSlEMuy1jSRQlGC7pqBCPvkG/2dATdWo082zHTTK3uhnAju2/6XpE6B5mZ3z4Z8Ns01S8Gw==
   dependencies:
-    "@babel/core" "^7.18.5"
-    "@svgr/babel-preset" "^6.5.0"
-    "@svgr/hast-util-to-babel-ast" "^6.5.0"
+    "@babel/core" "^7.19.6"
+    "@svgr/babel-preset" "^6.5.1"
+    "@svgr/hast-util-to-babel-ast" "^6.5.1"
     svg-parser "^2.0.4"
 
-"@svgr/plugin-svgo@^6.5.0":
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/@svgr/plugin-svgo/-/plugin-svgo-6.5.0.tgz#1d9b7d0909bde9fe7d724569c7f7833f3a7bacd7"
-  integrity sha512-8Zv1Yyv6I7HlIqrqGFM0sDKQrhjbfNZJawR8UjIaVWSb0tKZP1Ra6ymhqIFu6FT6kDRD0Ct5NlQZ10VUujSspw==
+"@svgr/plugin-svgo@^6.5.1":
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/@svgr/plugin-svgo/-/plugin-svgo-6.5.1.tgz#0f91910e988fc0b842f88e0960c2862e022abe84"
+  integrity sha512-omvZKf8ixP9z6GWgwbtmP9qQMPX4ODXi+wzbVZgomNFsUIlHA1sf4fThdwTWSsZGgvGAG6yE+b/F5gWUkcZ/iQ==
   dependencies:
     cosmiconfig "^7.0.1"
     deepmerge "^4.2.2"
     svgo "^2.8.0"
 
-"@svgr/webpack@6.5.0":
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/@svgr/webpack/-/webpack-6.5.0.tgz#663407b826cb96a3c3394cfe1f9bd107e693770a"
-  integrity sha512-rM/Z4pwMhqvAXEHoHIlE4SeTb0ToQNmJuBdiHwhP2ZtywyX6XqrgCv2WX7K/UCgNYJgYbekuylgyjnuLUHTcZQ==
+"@svgr/webpack@6.5.1":
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/@svgr/webpack/-/webpack-6.5.1.tgz#ecf027814fc1cb2decc29dc92f39c3cf691e40e8"
+  integrity sha512-cQ/AsnBkXPkEK8cLbv4Dm7JGXq2XrumKnL1dRpJD9rIO2fTIlJI9a1uCciYG1F2aUsox/hJQyNGbt3soDxSRkA==
   dependencies:
-    "@babel/core" "^7.18.5"
-    "@babel/plugin-transform-react-constant-elements" "^7.17.12"
-    "@babel/preset-env" "^7.18.2"
-    "@babel/preset-react" "^7.17.12"
-    "@babel/preset-typescript" "^7.17.12"
-    "@svgr/core" "^6.5.0"
-    "@svgr/plugin-jsx" "^6.5.0"
-    "@svgr/plugin-svgo" "^6.5.0"
+    "@babel/core" "^7.19.6"
+    "@babel/plugin-transform-react-constant-elements" "^7.18.12"
+    "@babel/preset-env" "^7.19.4"
+    "@babel/preset-react" "^7.18.6"
+    "@babel/preset-typescript" "^7.18.6"
+    "@svgr/core" "^6.5.1"
+    "@svgr/plugin-jsx" "^6.5.1"
+    "@svgr/plugin-svgo" "^6.5.1"
 
 "@szmarczak/http-timer@^4.0.5":
   version "4.0.6"
@@ -5209,10 +5218,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-dom@18.0.7":
-  version "18.0.7"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.0.7.tgz#ee7cf8ec4e6977e3f0a7b1d38bd89c75aa2aec28"
-  integrity sha512-HaXc+BbqAZE1RdsK3tC8SbkFy6UL2xF76lT9rQs5JkPrJg3rWA3Ou/Lhw3YJQzEDkBpmJ79nBsfnd05WrBd2QQ==
+"@types/react-dom@18.0.8":
+  version "18.0.8"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.0.8.tgz#d2606d855186cd42cc1b11e63a71c39525441685"
+  integrity sha512-C3GYO0HLaOkk9dDAz3Dl4sbe4AKUGTCfFIZsz3n/82dPNN8Du533HzKatDxeUYWu24wJgMP1xICqkWk1YOLOIw==
   dependencies:
     "@types/react" "*"
 
@@ -5256,10 +5265,10 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/react@18.0.23":
-  version "18.0.23"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.23.tgz#4190ecd58b99fa79fe2e67832bdcb287e5f893e4"
-  integrity sha512-R1wTULtCiJkudAN2DJGoYYySbGtOdzZyUWAACYinKdiQC8auxso4kLDUhQ7AJ2kh3F6A6z4v69U6tNY39hihVQ==
+"@types/react@18.0.24":
+  version "18.0.24"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.24.tgz#2f79ed5b27f08d05107aab45c17919754cc44c20"
+  integrity sha512-wRJWT6ouziGUy+9uX0aW4YOJxAY0bG6/AOk5AW5QSvZqI7dk6VBIbXvcVgIw/W5Jrl24f77df98GEKTJGOLx7Q==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -6534,7 +6543,15 @@ babel-jest@29.2.2, babel-jest@^29.2.2:
     graceful-fs "^4.2.9"
     slash "^3.0.0"
 
-babel-loader@8.2.5, babel-loader@^8.0.0:
+babel-loader@9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-9.0.0.tgz#b90f48b49f5360e4678733755d1413e16cfee48e"
+  integrity sha512-qVGQb0PNw/B1sGhPf0/KKsHZAPfa2Bk+JbjkW7yGjAHZyvjAULXYq0et0+/+7DL/rGYU+y8UoGPzA32NP29pVQ==
+  dependencies:
+    find-cache-dir "^3.3.2"
+    schema-utils "^4.0.0"
+
+babel-loader@^8.0.0:
   version "8.2.5"
   resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-8.2.5.tgz#d45f585e654d5a5d90f5350a779d7647c5ed512e"
   integrity sha512-OSiFfH89LrEMiWd4pLNqGz4CwJDtbs2ZVc+iGu2HrkRfPxId9F2anQj38IxWpmRfsUY0aBZYi1EFcd3mhtRMLQ==
@@ -9893,7 +9910,7 @@ find-cache-dir@^2.0.0, find-cache-dir@^2.1.0:
     make-dir "^2.0.0"
     pkg-dir "^3.0.0"
 
-find-cache-dir@^3.0.0, find-cache-dir@^3.3.1:
+find-cache-dir@^3.0.0, find-cache-dir@^3.3.1, find-cache-dir@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/find-cache-dir/-/find-cache-dir-3.3.2.tgz#b30c5b6eff0730731aea9bbd9dbecbd80256d64b"
   integrity sha512-wXZV5emFEjrridIgED11OoUKLxiYjAcqot/NJdAkOhlJ+vGzwhOAfcG5OX1jP+S0PcjEn8bdMJv+g2jwQ3Onig==
@@ -12437,10 +12454,10 @@ jscodeshift@^0.13.1:
     temp "^0.8.4"
     write-file-atomic "^2.3.0"
 
-jsdom@20.0.1:
-  version "20.0.1"
-  resolved "https://registry.yarnpkg.com/jsdom/-/jsdom-20.0.1.tgz#d95b4a3b6e1eec6520aa01d9d908eade8c6ba153"
-  integrity sha512-pksjj7Rqoa+wdpkKcLzQRHhJCEE42qQhl/xLMUKHgoSejaKOdaXEAnqs6uDNwMl/fciHTzKeR8Wm8cw7N+g98A==
+jsdom@20.0.2:
+  version "20.0.2"
+  resolved "https://registry.yarnpkg.com/jsdom/-/jsdom-20.0.2.tgz#65ccbed81d5e877c433f353c58bb91ff374127db"
+  integrity sha512-AHWa+QO/cgRg4N+DsmHg1Y7xnz+8KU3EflM0LVDTdmrYOc1WWTSkOjtpUveQH+1Bqd5rtcVnb/DuxV/UjDO4rA==
   dependencies:
     abab "^2.0.6"
     acorn "^8.8.0"
@@ -16189,6 +16206,11 @@ regenerate@^1.4.2:
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/regenerate/-/regenerate-1.4.2.tgz#b9346d8827e8f5a32f7ba29637d398b69014848a"
   integrity sha512-zrceR/XhGYU/d/opr2EKO7aRHUeiBI8qjtfHqADTwZd6Szfy16la6kqD0MIUs5z5hx6AaKa+PixpPrR289+I0A==
+
+regenerator-runtime@^0.13.10:
+  version "0.13.10"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.10.tgz#ed07b19616bcbec5da6274ebc75ae95634bfc2ee"
+  integrity sha512-KepLsg4dU12hryUO7bp/axHAKvwGOCV0sGloQtpagJ12ai+ojVDqkeGSiRX1zlq+kjIMZ1t7gpze+26QqtdGqw==
 
 regenerator-runtime@^0.13.4, regenerator-runtime@^0.13.7:
   version "0.13.9"
