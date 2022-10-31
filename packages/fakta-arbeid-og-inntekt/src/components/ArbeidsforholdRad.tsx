@@ -124,6 +124,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
 
   return (
     <ExpandableTableRow
+      alignWithColumn={1}
       content={(
         <>
           {erManueltOpprettet && (
