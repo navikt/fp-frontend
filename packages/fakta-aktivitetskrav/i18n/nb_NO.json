@@ -25,6 +25,7 @@
   "AktivitetskravFaktaDetailForm.MorsAktivitet": "Mors aktivitet",
   "AktivitetskravFaktaDetailForm.OppdaterDato": "Oppdater dato",
   "AktivitetskravFaktaDetailForm.DelOppPeriode": "Del opp periode",
+  "AktivitetskravFaktaDetailForm.IkkeGyldigDato": "Dato er utenfor opprinnelig periode",
 
   "OppdaterePeriodeModal.OppdaterePerioden": "Vil du oppdatere periode?",
   "OppdaterePeriodeModal.Nullstilles": "Etterfølgende perioder blir nullstilt",

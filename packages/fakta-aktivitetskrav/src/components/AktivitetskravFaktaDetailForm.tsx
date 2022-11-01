@@ -2,7 +2,9 @@ import React, { FunctionComponent, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
-import { BodyShort, Button, Label } from '@navikt/ds-react';
+import {
+  BodyShort, Button, Label, ErrorMessage,
+} from '@navikt/ds-react';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { Historic } from '@navikt/ds-icons';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -44,6 +46,7 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
   const [erDatoSatt, settDato] = useState(false);
   const [harDeltOpp, settHarDeltOpp] = useState(false);
   const [visModalPeriode, settVisModalForPeriode] = useState<number | undefined>();
+  const [visUgyldigDato, settUgyldigDato] = useState(false);
 
   const formMethods = useForm<FormValues>({
     defaultValues: {
@@ -78,6 +81,12 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
     const perioder = formMethods.getValues('perioder');
     const periode = perioder[index];
     const nyPeriode = perioder[index + 1];
+
+    if (dayjs(periode.tom).isBefore(valgtAktivitetskrav.fom) || !dayjs(periode.tom).isBefore(valgtAktivitetskrav.tom)) {
+      settUgyldigDato(true);
+      return;
+    }
+    settUgyldigDato(false);
 
     const oppdatertPeriode = {
       ...nyPeriode,
@@ -159,6 +168,9 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
                             toDate: dayjs(perioder[index].tom || valgtAktivitetskrav.tom, ISO_DATE_FORMAT).subtract(1, 'day').toDate(),
                           }}
                         />
+                        {visUgyldigDato && (
+                          <ErrorMessage><FormattedMessage id="AktivitetskravFaktaDetailForm.IkkeGyldigDato" /></ErrorMessage>
+                        )}
                       </FlexColumn>
                     )}
                     {(erDatoSatt || sistOppdeltePeriodeIndex !== index) && (
@@ -172,6 +184,14 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
                           )}
                         </FlexColumn>
                       </>
+                    )}
+                    {(perioder[index].fom !== perioder[index].tom
+                    && (fields.length === 1 || (!harDeltOpp && fields.length > 1 && index > sistOppdeltePeriodeIndex))) && (
+                      <div className={styles.marginBtn}>
+                        <Button size="small" variant="tertiary" type="button" onClick={() => delOppPeriode(index)}>
+                          <FormattedMessage id="AktivitetskravFaktaDetailForm.DelOppPeriode" />
+                        </Button>
+                      </div>
                     )}
                     {sistOppdeltePeriodeIndex >= index && (
                       <FlexColumn className={visDatepicker ? styles.oppdaterDato : undefined}>

@@ -11,7 +11,6 @@ import {
   AksjonspunktHelpTextHTML, VerticalSpacer, ExpandableTableRow, Table, TableColumn, Image,
 } from '@navikt/ft-ui-komponenter';
 
-import endretFelt from '@fpsak-frontend/assets/images/endret_felt.svg';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { KodeverkMedNavn, Aktivitetskrav } from '@fpsak-frontend/types';
 import { FaktaSubmitButtonNew, FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
@@ -27,7 +26,6 @@ const HEADER_TEXT_CODES = [
   'AktivitetskravFaktaTabell.Arsak',
   'AktivitetskravFaktaTabell.Vurdering',
   'EMPTY1',
-  'EMPTY2',
 ];
 
 interface PureOwnProps {
@@ -64,11 +62,12 @@ const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
   const [aktivitetskrav, updateAktivitetskrav] = useState<Aktivitetskrav[]>(formData?.aktivitetskrav || sorterteAktivitetskrav);
 
   const [valgtAktivitetskravFoms, setAktivitetskravFom] = useState<string[]>([]);
-  const velgAktivitetskravFom = useCallback((fom: string, lukkAlleAndre = false) => {
+  const velgAktivitetskravFom = useCallback((fom?: string, lukkAlleAndre = false) => {
     if (valgtAktivitetskravFoms.includes(fom)) {
       setAktivitetskravFom((foms) => foms.filter((f) => f !== fom));
     } else {
-      setAktivitetskravFom((foms) => (lukkAlleAndre ? [fom] : foms.concat(fom)));
+      const nye = fom ? [fom] : [];
+      setAktivitetskravFom((foms) => (lukkAlleAndre ? nye : foms.concat(fom)));
     }
     tableRef?.current?.scrollIntoView();
   }, [valgtAktivitetskravFoms, setAktivitetskravFom]);
@@ -86,10 +85,6 @@ const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
     velgAktivitetskravFom(oppdaterteAktivitetskrav.find((oa) => !oa.vurdering)?.fom, true);
     setDirty(true);
   }, [aktivitetskrav]);
-
-  const avbrytEditeringAvAktivitetskrav = useCallback(() => {
-    velgAktivitetskravFom(undefined);
-  }, []);
 
   const bekreft = useCallback((begrunnelse: string) => {
     submitCallback({
@@ -143,7 +138,7 @@ const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
                     readOnly={readOnly}
                     aktivitetskravAvklaringer={aktivitetskravAvklaringer}
                     oppdaterAktivitetskrav={oppdaterAktivitetskrav}
-                    avbrytEditeringAvAktivitetskrav={avbrytEditeringAvAktivitetskrav}
+                    avbrytEditeringAvAktivitetskrav={() => velgAktivitetskravFom(krav.fom)}
                     morsAktiviteter={morsAktiviteter}
                   />
                 )
@@ -170,18 +165,6 @@ const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
                     <FileError />
                     <div className={styles.ikon}><FormattedMessage id="AktivitetskravFaktaTabell.ManglerDok" /></div>
                   </>
-                )}
-              </TableColumn>
-              <TableColumn>
-                {krav.endret && (
-                  <Image
-                    src={endretFelt}
-                    className={styles.image}
-                    alt={intl.formatMessage({ id: 'AktivitetskravFaktaTabell.ErEndret' })}
-                    tooltip={intl.formatMessage({ id: 'AktivitetskravFaktaTabell.ErEndret' })}
-                    tabIndex={0}
-                    alignTooltipLeft
-                  />
                 )}
               </TableColumn>
             </ExpandableTableRow>
