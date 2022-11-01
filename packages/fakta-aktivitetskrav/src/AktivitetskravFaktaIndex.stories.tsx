@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { Behandling, UttakKontrollerAktivitetskrav, Aksjonspunkt } from '@fpsak-frontend/types';
+import { Behandling, Aktivitetskrav, Aksjonspunkt } from '@fpsak-frontend/types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -17,25 +17,34 @@ const behandling = {
 
 const uttakKontrollerAktivitetskravListe = [{
   avklaring: 'I_AKTIVITET',
-  fom: '2022-10-01',
-  tom: '2022-10-07',
-  morsAktivitet: 'INNLAGT',
+  fom: '2022-11-01',
+  tom: '2022-11-07',
+  behov: 'Utsettelse',
+  behovÅrsak: 'Er arbeids eller utdanning',
+  endret: true,
+  vurdering: 'Dette er en vurdering',
+}, {
+  vurdering: null,
+  fom: '2022-11-08',
+  tom: '2022-11-13',
+  behov: 'Overføring',
+  behovÅrsak: 'Er arbeids eller utdanning',
   endret: false,
 }, {
-  avklaring: null,
-  begrunnelse: null,
-  fom: '2022-10-08',
-  tom: '2022-10-13',
-  morsAktivitet: 'ARBEID_OG_UTDANNING',
+  vurdering: null,
+  fom: '2022-12-08',
+  tom: '2022-12-13',
+  behov: 'Aktivitetskrav',
+  behovÅrsak: 'Er innlagt på institusjon',
   endret: false,
 }, {
-  avklaring: null,
-  begrunnelse: null,
-  fom: '2022-10-15',
-  tom: '2022-10-20',
-  morsAktivitet: 'ARBEID_OG_UTDANNING',
+  vurdering: null,
+  fom: '2022-11-15',
+  tom: '2022-11-20',
+  behov: 'Tidlig oppstart fedrekvote',
+  behovÅrsak: 'Er arbeids eller utdanning',
   endret: false,
-}] as UttakKontrollerAktivitetskrav[];
+}] as Aktivitetskrav[];
 
 const merknaderFraBeslutter = {
   notAccepted: true,
@@ -48,7 +57,7 @@ export default {
 
 const Template: Story<{
   aksjonspunkter: Aksjonspunkt[];
-  uttakKontrollerAktivitetskrav: UttakKontrollerAktivitetskrav[];
+  uttakKontrollerAktivitetskrav: Aktivitetskrav[];
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
   readOnly: boolean;
   submittable: boolean;

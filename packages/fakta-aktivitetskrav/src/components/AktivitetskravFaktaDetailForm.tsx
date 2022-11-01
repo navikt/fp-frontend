@@ -93,11 +93,11 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
   const nullstillPerioder = () => {
     settVisModalForPeriode(undefined);
 
-    for (let i = visModalPeriode + 2; i < fields.length; i += 1) {
+    for (let i = visModalPeriode + 1; i < fields.length; i += 1) {
       remove(i);
     }
 
-    const perioder = formMethods.getValues('perioder');
+    const perioder = formMethods.watch('perioder');
 
     update(visModalPeriode, {
       ...perioder[visModalPeriode],
@@ -106,6 +106,7 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
     update(visModalPeriode + 1, {
       ...perioder[visModalPeriode + 1],
       fom: null,
+      tom: valgtAktivitetskrav.tom,
     });
 
     setSistOppdeltePeriodeIndex(visModalPeriode);
@@ -187,16 +188,17 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
                       </FlexColumn>
                     )}
                   </FlexRow>
+                  <VerticalSpacer sixteenPx />
                 </FlexContainer>
               )}
               <VerticalSpacer sixteenPx />
               <RadioGroupPanel
-                name={`perioder.${index}.avklaring`}
-                label={<FormattedMessage id="AktivitetskravFaktaDetailForm.Avklaring" />}
+                name={`perioder.${index}.vurdering`}
+                label={<FormattedMessage id="AktivitetskravFaktaDetailForm.Vurdering" />}
                 validate={[required]}
                 isReadOnly={readOnly}
                 isHorizontal
-                radios={[...aktivitetskravAvklaringer].sort(((a1, a2) => a1.navn.localeCompare(a2.navn))).map((avklaring) => ({
+                radios={aktivitetskravAvklaringer.map((avklaring) => ({
                   value: avklaring.kode,
                   label: avklaring.navn,
                 }))}
@@ -204,7 +206,7 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
             </React.Fragment>
           );
         })}
-        <VerticalSpacer thirtyTwoPx />
+        <VerticalSpacer fourtyPx />
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
@@ -229,8 +231,8 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
               </Button>
             </FlexColumn>
           </FlexRow>
+          <VerticalSpacer sixteenPx />
         </FlexContainer>
-        <VerticalSpacer thirtyTwoPx />
       </Form>
       {visModalPeriode !== undefined && (
         <OppdaterePeriodeModal submit={nullstillPerioder} cancel={() => settVisModalForPeriode(undefined)} />

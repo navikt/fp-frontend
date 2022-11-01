@@ -13,7 +13,7 @@ import {
 
 import endretFelt from '@fpsak-frontend/assets/images/endret_felt.svg';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { KodeverkMedNavn, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
+import { KodeverkMedNavn, Aktivitetskrav } from '@fpsak-frontend/types';
 import { FaktaSubmitButtonNew, FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
 import { KontrollerAktivitetskravAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -23,8 +23,8 @@ import styles from './aktivitetskravFaktaForm.less';
 
 const HEADER_TEXT_CODES = [
   'AktivitetskravFaktaTabell.Periode',
-  'AktivitetskravFaktaTabell.MorsAktivitet',
-  'AktivitetskravFaktaTabell.Avklaring',
+  'AktivitetskravFaktaTabell.AvklaringBehov',
+  'AktivitetskravFaktaTabell.Arsak',
   'AktivitetskravFaktaTabell.Vurdering',
   'EMPTY1',
   'EMPTY2',
@@ -32,15 +32,15 @@ const HEADER_TEXT_CODES = [
 
 interface PureOwnProps {
   harApneAksjonspunkter: boolean;
-  sorterteAktivitetskrav: UttakKontrollerAktivitetskrav[];
+  sorterteAktivitetskrav: Aktivitetskrav[];
   submitCallback: (aksjonspunkter: KontrollerAktivitetskravAp) => Promise<void>;
   aktivitetskravAvklaringer: KodeverkMedNavn[];
   morsAktiviteter: KodeverkMedNavn[];
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   readOnly: boolean;
   submittable: boolean;
-  formData: { aktivitetskrav: UttakKontrollerAktivitetskrav[], begrunnelse: string },
-  setFormData: (data: { aktivitetskrav: UttakKontrollerAktivitetskrav[], begrunnelse: string }) => void,
+  formData: { aktivitetskrav: Aktivitetskrav[], begrunnelse: string },
+  setFormData: (data: { aktivitetskrav: Aktivitetskrav[], begrunnelse: string }) => void,
 }
 
 const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
@@ -61,21 +61,21 @@ const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
 
   const [isDirty, setDirty] = useState<boolean>(false);
 
-  const [aktivitetskrav, updateAktivitetskrav] = useState<UttakKontrollerAktivitetskrav[]>(formData?.aktivitetskrav || sorterteAktivitetskrav);
+  const [aktivitetskrav, updateAktivitetskrav] = useState<Aktivitetskrav[]>(formData?.aktivitetskrav || sorterteAktivitetskrav);
 
-  const [valgtAktivitetskravFom, setAktivitetskravFom] = useState<string>();
-  const velgAktivitetskravFom = useCallback((fom: string) => {
-    if (valgtAktivitetskravFom === fom) {
-      setAktivitetskravFom(undefined);
+  const [valgtAktivitetskravFoms, setAktivitetskravFom] = useState<string[]>([]);
+  const velgAktivitetskravFom = useCallback((fom: string, lukkAlleAndre = false) => {
+    if (valgtAktivitetskravFoms.includes(fom)) {
+      setAktivitetskravFom((foms) => foms.filter((f) => f !== fom));
     } else {
-      setAktivitetskravFom(fom);
+      setAktivitetskravFom((foms) => (lukkAlleAndre ? [fom] : foms.concat(fom)));
     }
     tableRef?.current?.scrollIntoView();
-  }, [valgtAktivitetskravFom]);
+  }, [valgtAktivitetskravFoms, setAktivitetskravFom]);
 
-  useEffect(() => velgAktivitetskravFom(aktivitetskrav?.find((oa) => !oa.avklaring)?.fom), []);
+  useEffect(() => velgAktivitetskravFom(aktivitetskrav?.find((oa) => !oa.vurdering)?.fom), []);
 
-  const oppdaterAktivitetskrav = useCallback((oppdatertKrav: { perioder: UttakKontrollerAktivitetskrav[] }) => {
+  const oppdaterAktivitetskrav = useCallback((oppdatertKrav: { perioder: Aktivitetskrav[] }) => {
     const { perioder } = oppdatertKrav;
     const oppdaterteAktivitetskrav = aktivitetskrav
       .filter((aKrav) => aKrav.fom !== perioder[0].fom)
@@ -83,7 +83,7 @@ const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
       .sort((a1, a2) => a1.fom.localeCompare(a2.fom));
 
     updateAktivitetskrav(oppdaterteAktivitetskrav);
-    velgAktivitetskravFom(oppdaterteAktivitetskrav.find((oa) => !oa.avklaring)?.fom);
+    velgAktivitetskravFom(oppdaterteAktivitetskrav.find((oa) => !oa.vurdering)?.fom, true);
     setDirty(true);
   }, [aktivitetskrav]);
 
@@ -94,7 +94,7 @@ const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
   const bekreft = useCallback((begrunnelse: string) => {
     submitCallback({
       kode: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
-      avklartePerioder: aktivitetskrav as Required<UttakKontrollerAktivitetskrav>[],
+      avklartePerioder: aktivitetskrav as Required<Aktivitetskrav>[],
       begrunnelse,
     });
   }, [aktivitetskrav]);
@@ -112,8 +112,8 @@ const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
   const begrunnelse = formMethods.watch('begrunnelse');
 
   const isSubmittable = useMemo(() => submittable
-    && !valgtAktivitetskravFom && aktivitetskrav?.every((a) => a.avklaring) && !!begrunnelse,
-  [aktivitetskrav, valgtAktivitetskravFom, begrunnelse]);
+    && valgtAktivitetskravFoms.length === 0 && aktivitetskrav?.every((a) => a.vurdering) && !!begrunnelse,
+  [aktivitetskrav, valgtAktivitetskravFoms, begrunnelse]);
 
   return (
     <>
@@ -132,13 +132,13 @@ const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
           {aktivitetskrav.map((krav, index) => (
             <ExpandableTableRow
               key={krav.fom + krav.tom}
-              isApLeftBorder={!krav.avklaring}
-              showContent={valgtAktivitetskravFom === krav.fom}
+              isApLeftBorder={!krav.vurdering}
+              showContent={valgtAktivitetskravFoms.includes(krav.fom)}
               toggleContent={() => velgAktivitetskravFom(krav.fom)}
-              content={((valgtAktivitetskravFom
+              content={((valgtAktivitetskravFoms.includes(krav.fom)
                 && (
                   <AktivitetskravFaktaDetailForm
-                    key={valgtAktivitetskravFom}
+                    key={krav.fom}
                     valgtAktivitetskrav={krav}
                     readOnly={readOnly}
                     aktivitetskravAvklaringer={aktivitetskravAvklaringer}
@@ -150,8 +150,8 @@ const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
               ))}
             >
               <TableColumn>{`${dateFormat(krav.fom)} - ${dateFormat(krav.tom)}`}</TableColumn>
-              <TableColumn>{krav.morsAktivitet ? morsAktiviteter.find((aktivtet) => aktivtet.kode === krav.morsAktivitet)?.navn : ''}</TableColumn>
-              <TableColumn>{krav.avklaring ? aktivitetskravAvklaringer.find((avklaring) => avklaring.kode === krav.avklaring)?.navn : ''}</TableColumn>
+              <TableColumn>{krav.behov}</TableColumn>
+              <TableColumn>{krav.behovÅrsak}</TableColumn>
               <TableColumn>
                 {index === 0 && (
                   <>
@@ -159,13 +159,13 @@ const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
                     <div className={styles.ikon}><FormattedMessage id="AktivitetskravFaktaTabell.Godkjent" /></div>
                   </>
                 )}
-                {index === 1 && (
+                {index === 50 && (
                   <>
                     <Error />
                     <div className={styles.ikon}><FormattedMessage id="AktivitetskravFaktaTabell.IkkeGodkjent" /></div>
                   </>
                 )}
-                {index === 2 && (
+                {index === 51 && (
                   <>
                     <FileError />
                     <div className={styles.ikon}><FormattedMessage id="AktivitetskravFaktaTabell.ManglerDok" /></div>

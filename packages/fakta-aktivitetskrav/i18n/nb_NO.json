@@ -7,7 +7,8 @@
 
   "AktivitetskravFaktaTabell.Periode": "Periode",
   "AktivitetskravFaktaTabell.Avklaring": "Avklaring",
-  "AktivitetskravFaktaTabell.MorsAktivitet": "Mors aktivitet",
+  "AktivitetskravFaktaTabell.AvklaringBehov": "Avklaringsbehov",
+  "AktivitetskravFaktaTabell.Arsak": "Årsak",
   "AktivitetskravFaktaTabell.ErEndret": "Er endret av saksbehandler",
   "AktivitetskravFaktaTabell.Vurdering": "Vurdering",
   "AktivitetskravFaktaTabell.Godkjent": "Godkjent",
@@ -17,7 +18,7 @@
   "AktivitetskravFaktaDetailForm.Header": "Detaljer",
   "AktivitetskravFaktaDetailForm.Oppdater": "Oppdater",
   "AktivitetskravFaktaDetailForm.Avbryt": "Avbryt",
-  "AktivitetskravFaktaDetailForm.Avklaring": "Vurdering",
+  "AktivitetskravFaktaDetailForm.Vurdering": "Vurdering",
   "AktivitetskravFaktaDetailForm.Fom": "Fra og med:",
   "AktivitetskravFaktaDetailForm.Tom": "Til og med:",
   "AktivitetskravFaktaDetailForm.Periode": "Periode",
