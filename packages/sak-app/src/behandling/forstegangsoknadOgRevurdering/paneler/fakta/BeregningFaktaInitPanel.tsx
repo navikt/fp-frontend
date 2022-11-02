@@ -86,6 +86,7 @@ const AKSJONSPUNKT_KODER = [
 const OVERSTYRING_AP_CODES = [aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSAKTIVITETER, aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG];
 
 const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG, BehandlingFellesApiKeys.VILKAR];
+
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
   beregningsgrunnlag: Beregningsgrunnlag;
@@ -117,12 +118,12 @@ const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
       <DynamicLoader<React.ComponentProps<typeof ProsessFaktaBeregning>>
         packageCompFn={() => import('@navikt/ft-fakta-beregning')}
         federatedCompFn={ProsessFaktaBeregningMF}
+        // @ts-ignore
         {...data}
         vilkar={lagBGVilkar(data.vilkar, data.beregningsgrunnlag)}
         beregningsgrunnlag={lagFormatertBG(data.beregningsgrunnlag)}
         submitCallback={lagModifisertCallback(data.submitCallback)}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        behandlingType={data.behandling ? data.behandling.type : ''}
         erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
         skalKunneOverstyreAktiviteter
       />
