@@ -42,16 +42,16 @@ describe('<FaktaDefaultInitPanel>', () => {
   }));
 
   it('skal rendre panel korrekt', async () => {
-    const AKSJONSPUNKTER_KEY = new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER_KEY');
+    const BEHANDLING_KEY = new RestKey<Behandling, void>('BEHANDLING_KEY');
 
     const endpoints = new RestApiConfigBuilder()
-      .withRel('aksjonspunkter', AKSJONSPUNKTER_KEY)
+      .withRel('behandling', BEHANDLING_KEY)
       .build();
 
     const requestMock = createRequestApi(endpoints);
 
     const data = [
-      { key: AKSJONSPUNKTER_KEY.name, data: [] },
+      { key: BEHANDLING_KEY.name, data: {} },
     ];
     render(
       <RestApiMock data={data} requestApi={requestMock}>
@@ -60,7 +60,7 @@ describe('<FaktaDefaultInitPanel>', () => {
           behandling={behandling}
           registrerFaktaPanel={() => {}}
           requestApi={requestMock}
-          initEndepunkter={[AKSJONSPUNKTER_KEY]}
+          initEndepunkter={[BEHANDLING_KEY]}
           skalPanelVisesIMeny={() => true}
           renderPanel={() => <div>Dette er et panel</div>}
           faktaPanelKode={FaktaPanelCode.AKTIVITETSKRAV}

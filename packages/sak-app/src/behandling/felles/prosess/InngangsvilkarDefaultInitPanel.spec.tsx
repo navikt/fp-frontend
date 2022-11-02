@@ -52,16 +52,16 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
       ...defaultProps,
       aksjonspunkter: [] as Aksjonspunkt[],
     }));
-    const AKSJONSPUNKTER_KEY = new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER_KEY');
+    const BEHANDLING_KEY = new RestKey<Behandling, void>('BEHANDLING_KEY');
 
     const endpoints = new RestApiConfigBuilder()
-      .withRel('aksjonspunkter', AKSJONSPUNKTER_KEY)
+      .withRel('behandling', BEHANDLING_KEY)
       .build();
 
     const requestMock = createRequestApi(endpoints);
 
     const data = [
-      { key: AKSJONSPUNKTER_KEY.name, data: [] },
+      { key: BEHANDLING_KEY.name, data: {} },
     ];
 
     render(
@@ -71,7 +71,7 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
           behandlingVersjon={1}
           registrerInngangsvilkarPanel={() => {}}
           requestApi={requestMock}
-          initEndepunkter={[AKSJONSPUNKTER_KEY]}
+          initEndepunkter={[BEHANDLING_KEY]}
           renderPanel={() => <div>Dette er komponenten</div>}
           inngangsvilkarPanelKode="test"
           hentInngangsvilkarPanelTekst={() => 'test'}
@@ -95,19 +95,22 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
       erAktivt: true,
     }] as Aksjonspunkt[];
 
-    const AKSJONSPUNKTER_KEY = new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER');
-    const VILKAR_KEY = new RestKey<Vilkar[], void>('VILKAR');
+    const BEHANDLING_KEY = new RestKey<Behandling, void>('BEHANDLING_KEY');
 
     const endpoints = new RestApiConfigBuilder()
-      .withRel('aksjonspunkter', AKSJONSPUNKTER_KEY)
-      .withRel('vilkar', VILKAR_KEY)
+      .withRel('behandling', BEHANDLING_KEY)
       .build();
 
     const requestMock = createRequestApi(endpoints);
 
     const data = [
-      { key: AKSJONSPUNKTER_KEY.name, data: aksjonspunkter },
-      { key: VILKAR_KEY.name, data: vilkar },
+      {
+        key: BEHANDLING_KEY.name,
+        data: {
+          aksjonspunkter,
+          vilkar,
+        },
+      },
     ];
 
     render(
@@ -117,7 +120,7 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
           behandlingVersjon={1}
           registrerInngangsvilkarPanel={() => {}}
           requestApi={requestMock}
-          initEndepunkter={[AKSJONSPUNKTER_KEY, VILKAR_KEY]}
+          initEndepunkter={[BEHANDLING_KEY]}
           aksjonspunktKoder={[aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR]}
           renderPanel={() => <div>Dette er komponenten</div>}
           inngangsvilkarPanelKode="test"
