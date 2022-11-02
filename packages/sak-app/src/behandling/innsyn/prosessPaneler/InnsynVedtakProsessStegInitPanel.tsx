@@ -57,9 +57,8 @@ const getLagringSideeffekter = (
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.FORESLA_VEDTAK];
 
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, InnsynBehandlingApiKeys.INNSYN];
+const ENDEPUNKTER_INIT_DATA = [InnsynBehandlingApiKeys.INNSYN];
 type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
   innsyn: Innsyn;
 }
 
@@ -93,6 +92,8 @@ const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
   const previewCallback = useCallback(hentForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
     [standardPanelProps.behandling.versjon]);
 
+  const { aksjonspunkter } = props.behandling;
+
   return (
     <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
       {...props}
@@ -103,10 +104,10 @@ const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
       prosessPanelKode={ProsessStegCode.VEDTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={(initData) => (initData.innsyn ? getVedtakStatus(initData.innsyn, initData.aksjonspunkter || []) : VilkarUtfallType.IKKE_VURDERT)}
+      hentOverstyrtStatus={(initData) => (initData.innsyn ? getVedtakStatus(initData.innsyn, aksjonspunkter || []) : VilkarUtfallType.IKKE_VURDERT)}
       lagringSideEffekter={lagringSideeffekterCallback}
       hentSkalMarkeresSomAktiv={(initData) => (!!initData.innsyn
-        && getVedtakStatus(initData.innsyn, initData.aksjonspunkter || []) !== VilkarUtfallType.IKKE_VURDERT)}
+        && getVedtakStatus(initData.innsyn, aksjonspunkter || []) !== VilkarUtfallType.IKKE_VURDERT)}
       renderPanel={(data, initData) => (
         <>
           <IverksetterVedtakStatusModal

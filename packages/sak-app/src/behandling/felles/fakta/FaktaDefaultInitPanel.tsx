@@ -16,7 +16,7 @@ const DEFAULT_INIT_DATA = {};
 
 export type OwnProps<INIT_DATA, PANEL_DATA> = {
   requestApi: RequestApi;
-  initEndepunkter: RestKey<any, any>[];
+  initEndepunkter?: RestKey<any, any>[];
   panelEndepunkter?: RestKey<any, any>[];
   aksjonspunktKoder?: string[];
   overstyringApKoder?: string[];
@@ -28,10 +28,10 @@ export type OwnProps<INIT_DATA, PANEL_DATA> = {
 
 const FaktaDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   valgtFaktaSteg,
-  behandlingVersjon,
+  behandling,
   registrerFaktaPanel,
   requestApi,
-  initEndepunkter,
+  initEndepunkter = [],
   panelEndepunkter = [],
   aksjonspunktKoder,
   overstyringApKoder,
@@ -44,7 +44,8 @@ const FaktaDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
 
   const formaterteEndepunkter = initEndepunkter.map((e) => ({ key: e }));
   const { data: initData = DEFAULT_INIT_DATA as INIT_DATA, state: initState } = restApiHooks.useMultipleRestApi<INIT_DATA, any>(formaterteEndepunkter, {
-    updateTriggers: [behandlingVersjon],
+    updateTriggers: [behandling.versjon],
+    suspendRequest: formaterteEndepunkter.length === 0,
     isCachingOn: true,
   });
 
@@ -62,7 +63,7 @@ const FaktaDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
 
   const formatertePanelEndepunkter = panelEndepunkter.map((e) => ({ key: e }));
   const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi<PANEL_DATA, any>(formatertePanelEndepunkter, {
-    updateTriggers: [erPanelValgt, behandlingVersjon],
+    updateTriggers: [erPanelValgt, behandling.versjon],
     suspendRequest: !erPanelValgt || formatertePanelEndepunkter.length === 0,
     isCachingOn: true,
   });

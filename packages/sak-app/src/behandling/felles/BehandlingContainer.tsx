@@ -2,8 +2,7 @@ import React, {
   FunctionComponent, ReactElement, useState,
 } from 'react';
 
-import { Behandling } from '@navikt/ft-types';
-
+import { Behandling } from '@fpsak-frontend/types';
 import { RequestApi } from '@fpsak-frontend/rest-api';
 
 import ProsessContainer from './prosess/ProsessContainer';
@@ -54,7 +53,7 @@ const BehandlingContainer: FunctionComponent<OwnProps> = ({
         valgtFaktaSteg={valgtFaktaSteg}
         valgtProsessSteg={valgtProsessSteg}
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-        behandlingVersjon={behandling.versjon}
+        behandling={behandling}
         setApentFaktaPanel={setApentFaktaPanel}
         apentFaktaPanelInfo={apentFaktaPanelInfo}
         requestApi={requestApi}

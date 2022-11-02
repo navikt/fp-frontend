@@ -7,7 +7,7 @@ import { FaktaFordelBeregningAksjonspunktCode } from '@navikt/ft-fakta-fordel-be
 import { Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/ft-types';
 
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } from '@fpsak-frontend/types';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
@@ -74,12 +74,6 @@ const ProsessFordelingMF = process.env.NODE_ENV !== 'development' ? undefined
 
 const AKSJONSPUNKT_KODER = [FaktaFordelBeregningAksjonspunktCode.FORDEL_BEREGNINGSGRUNNLAG, FaktaFordelBeregningAksjonspunktCode.VURDER_REFUSJON_BERGRUNN];
 
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, BehandlingFellesApiKeys.VILKAR];
-type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
-  vilkar: FpVilkar[];
-}
-
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG];
 type EndepunktPanelData = {
   beregningsgrunnlag: Beregningsgrunnlag;
@@ -96,15 +90,14 @@ const FordelingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
   arbeidsgiverOpplysningerPerId,
   ...props
 }) => (
-  <FaktaDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+  <FaktaDefaultInitPanel<Record<string, never>, EndepunktPanelData>
     {...props}
-    initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.FORDELING}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FordelBeregningsgrunnlag.Title' })}
-    skalPanelVisesIMeny={(initData) => !!initData.aksjonspunkter
-      && !!initData.aksjonspunkter.some((ap) => AKSJONSPUNKT_KODER.some((kode) => kode === ap.definisjon))}
+    skalPanelVisesIMeny={() => !!props.behandling.aksjonspunkter
+      && !!props.behandling.aksjonspunkter.some((ap) => AKSJONSPUNKT_KODER.some((kode) => kode === ap.definisjon))}
     renderPanel={(data) => (
       <DynamicLoader<React.ComponentProps<typeof ProsessFordeling>>
         packageCompFn={() => import('@navikt/ft-fakta-fordel-beregningsgrunnlag')}

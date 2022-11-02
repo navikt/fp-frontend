@@ -8,7 +8,7 @@ import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import SakenFaktaIndex from '@fpsak-frontend/fakta-saken';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import { Aksjonspunkt, Soknad } from '@fpsak-frontend/types';
+import { Soknad } from '@fpsak-frontend/types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
@@ -21,11 +21,6 @@ const AKSJONSPUNKT_KODER = [
 ];
 
 const OVERSTYRING_AP_CODES = [aksjonspunktCodes.MANUELL_MARKERING_AV_UTLAND_SAKSTYPE, aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO];
-
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER];
-type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
-}
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.UTLAND_DOK_STATUS, BehandlingFellesApiKeys.SOKNAD];
 type EndepunktPanelData = {
@@ -48,9 +43,8 @@ const SakenFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = (
   fagsak,
   ...props
 }) => (
-  <FaktaDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+  <FaktaDefaultInitPanel<Record<string, never>, EndepunktPanelData>
     {...props}
-    initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     overstyringApKoder={OVERSTYRING_AP_CODES}

@@ -8,7 +8,7 @@ import AvregningProsessIndex from '@fpsak-frontend/prosess-avregning';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { RestApiHooks, RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
-  Aksjonspunkt, Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg,
+  Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg,
 } from '@fpsak-frontend/types';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { forhandsvisDokument } from '@navikt/ft-utils';
@@ -36,9 +36,8 @@ const getForhandsvisFptilbakeCallback = (
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_FEILUTBETALING];
 
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, BehandlingFellesApiKeys.SIMULERING_RESULTAT];
+const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.SIMULERING_RESULTAT];
 type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
   simuleringResultat?: SimuleringResultat;
 }
 

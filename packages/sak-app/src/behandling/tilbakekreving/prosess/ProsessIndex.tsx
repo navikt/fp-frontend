@@ -16,12 +16,10 @@ import {
   Aksjonspunkt,
   FeilutbetalingPerioderWrapper,
   AlleKodeverkTilbakekreving,
-  Behandling,
   BeregningsresultatTilbakekreving,
 } from '@navikt/ft-types';
-import { AksessRettigheter } from '@fpsak-frontend/types';
+import { Behandling, AksessRettigheter } from '@fpsak-frontend/types';
 
-import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import { erReadOnlyCurried } from '../felles/util/readOnlyPanelUtils';
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../data/tilbakekrevingBehandlingApi';
 import ProsessMeny, { ProsessPanelMenyData } from './ProsessMeny';
@@ -35,12 +33,10 @@ import styles from './prosessIndex.less';
 const DEFAULT_PANEL_VALGT = 'default';
 
 const ENDEPUNKTER_INIT_DATA = [
-  BehandlingFellesApiKeys.AKSJONSPUNKTER,
   TilbakekrevingBehandlingApiKeys.PERIODER_FORELDELSE,
   TilbakekrevingBehandlingApiKeys.BEREGNINGSRESULTAT,
 ];
 type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
   perioderForeldelse: FeilutbetalingPerioderWrapper;
   beregningsresultat: BeregningsresultatTilbakekreving;
 }
@@ -90,13 +86,13 @@ const utledProsessPaneler = (
   initData?: EndepunktInitData,
   valgtProsessSteg?: string,
 ): ProsessPanelMenyData[] => {
-  const apForTilbakekreving = hentAksjonspunkterFor(TilbakekrevingCodes.VURDER_TILBAKEKREVING, initData?.aksjonspunkter);
+  const apForTilbakekreving = hentAksjonspunkterFor(TilbakekrevingCodes.VURDER_TILBAKEKREVING, behandling.aksjonspunkter);
 
   return [
     leggTilProsessPanel(
       ProsessStegCode.FORELDELSE,
       intl.formatMessage({ id: 'Behandlingspunkt.Foreldelse' }),
-      hentAksjonspunkterFor(ForeldelseAksjonspunktCodes.VURDER_FORELDELSE, initData?.aksjonspunkter),
+      hentAksjonspunkterFor(ForeldelseAksjonspunktCodes.VURDER_FORELDELSE, behandling.aksjonspunkter),
       initData?.perioderForeldelse ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT,
       valgtProsessSteg,
     ),
@@ -110,7 +106,7 @@ const utledProsessPaneler = (
     leggTilProsessPanel(
       ProsessStegCode.VEDTAK,
       intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' }),
-      hentAksjonspunkterFor(VedtakAksjonspunktCode.FORESLA_VEDTAK, initData?.aksjonspunkter),
+      hentAksjonspunkterFor(VedtakAksjonspunktCode.FORESLA_VEDTAK, behandling.aksjonspunkter),
       getVedtakStatus(initData?.beregningsresultat),
       valgtProsessSteg,
       behandling.status === BehandlingStatus.AVSLUTTET && valgtProsessSteg === DEFAULT_PANEL_VALGT,
@@ -195,7 +191,7 @@ const ProsessIndex: FunctionComponent<OwnProps> = ({
           {aktivtProsessPanel.id === ProsessStegCode.FORELDELSE && (
             <ForeldelseProsessInitPanel
               behandling={behandling}
-              aksjonspunkter={initData?.aksjonspunkter}
+              aksjonspunkter={behandling.aksjonspunkter}
               perioderForeldelse={initData?.perioderForeldelse}
               navBrukerKjonn={fagsakKjønn}
               erReadOnlyFn={erReadOnlyFn}
@@ -209,7 +205,7 @@ const ProsessIndex: FunctionComponent<OwnProps> = ({
             <TilbakekrevingProsessInitPanel
               behandling={behandling}
               perioderForeldelse={initData?.perioderForeldelse}
-              aksjonspunkter={initData?.aksjonspunkter}
+              aksjonspunkter={behandling.aksjonspunkter}
               navBrukerKjonn={fagsakKjønn}
               alleKodeverk={tilbakekrevingKodeverk}
               bekreftAksjonspunkter={bekreftAksjonspunkter}
@@ -222,7 +218,7 @@ const ProsessIndex: FunctionComponent<OwnProps> = ({
             <VedtakTilbakekrevingProsessInitPanel
               behandling={behandling}
               beregningsresultat={initData?.beregningsresultat}
-              aksjonspunkter={initData?.aksjonspunkter}
+              aksjonspunkter={behandling.aksjonspunkter}
               harApenRevurdering={harApenRevurdering}
               bekreftAksjonspunkterMedSideeffekter={bekreftAksjonspunkterMedSideeffekter}
               opneSokeside={opneSokeside}

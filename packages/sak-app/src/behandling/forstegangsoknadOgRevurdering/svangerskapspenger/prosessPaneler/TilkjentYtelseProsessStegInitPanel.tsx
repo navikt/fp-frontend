@@ -8,8 +8,7 @@ import TilkjentYtelseProsessIndex from '@fpsak-frontend/prosess-tilkjent-ytelse'
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, BeregningsresultatFp,
-  Fagsak, FamilieHendelseSamling, Feriepengegrunnlag, Personoversikt, Soknad,
+  ArbeidsgiverOpplysningerPerId, BeregningsresultatFp, Fagsak, FamilieHendelseSamling, Feriepengegrunnlag, Personoversikt, Soknad,
 } from '@fpsak-frontend/types';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
@@ -30,11 +29,9 @@ const getStatusFromResultatstruktur = (resultatstruktur?: BeregningsresultatFp):
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_TILBAKETREKK];
 
 const ENDEPUNKTER_INIT_DATA = [
-  BehandlingFellesApiKeys.AKSJONSPUNKTER,
   BehandlingFellesApiKeys.BEREGNINGRESULTAT_FORELDREPENGER,
 ];
 type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
   beregningresultatForeldrepenger: BeregningsresultatFp;
 }
 

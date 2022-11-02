@@ -1,11 +1,12 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Behandling, Aksjonspunkt } from '@navikt/ft-types';
+import { Aksjonspunkt } from '@navikt/ft-types';
 import { BehandlingStatus, VilkarUtfallType } from '@navikt/ft-kodeverk';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
+import { Behandling } from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 

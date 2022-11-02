@@ -29,20 +29,16 @@ describe('<BehandlingAnkeIndex>', () => {
           versjon: 1,
           status: BehandlingStatus.OPPRETTET,
           type: BehandlingType.ANKE,
+          aksjonspunkter: [],
           links: [{
             href: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name,
             rel: 'update',
             type: 'POST',
-          }, {
-            href: BehandlingFellesApiKeys.AKSJONSPUNKTER.name,
-            rel: 'aksjonspunkter',
-            type: 'GET',
           }],
         },
       },
       { key: BehandlingFellesApiKeys.PREVIEW_MESSAGE.name, noRelLink: true, data: undefined },
       { key: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name, data: undefined },
-      { key: BehandlingFellesApiKeys.AKSJONSPUNKTER.name, data: [] },
     ];
 
     await act(async () => {

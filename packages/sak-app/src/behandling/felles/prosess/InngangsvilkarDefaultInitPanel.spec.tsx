@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import { Behandling, Aksjonspunkt } from '@navikt/ft-types';
+import { Aksjonspunkt } from '@navikt/ft-types';
 import {
   VilkarUtfallType, BehandlingStatus, VilkarType, AksjonspunktStatus,
 } from '@navikt/ft-kodeverk';
@@ -9,7 +9,7 @@ import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import { Vilkar } from '@fpsak-frontend/types';
+import { Behandling, Vilkar } from '@fpsak-frontend/types';
 
 import * as Felles from './useStandardProsessPanelProps';
 import InngangsvilkarDefaultInitPanel from './InngangsvilkarDefaultInitPanel';

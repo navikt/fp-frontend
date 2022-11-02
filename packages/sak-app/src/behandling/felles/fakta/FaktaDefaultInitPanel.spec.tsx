@@ -1,12 +1,13 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Behandling, Aksjonspunkt } from '@navikt/ft-types';
+import { Aksjonspunkt } from '@navikt/ft-types';
 import { BehandlingStatus } from '@navikt/ft-kodeverk';
 
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
+import { Behandling } from '@fpsak-frontend/types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
 import * as Felles from './useStandardFaktaPanelProps';
@@ -56,7 +57,7 @@ describe('<FaktaDefaultInitPanel>', () => {
       <RestApiMock data={data} requestApi={requestMock}>
         <FaktaDefaultInitPanel
           valgtFaktaSteg="default"
-          behandlingVersjon={1}
+          behandling={behandling}
           registrerFaktaPanel={() => {}}
           requestApi={requestMock}
           initEndepunkter={[AKSJONSPUNKTER_KEY]}

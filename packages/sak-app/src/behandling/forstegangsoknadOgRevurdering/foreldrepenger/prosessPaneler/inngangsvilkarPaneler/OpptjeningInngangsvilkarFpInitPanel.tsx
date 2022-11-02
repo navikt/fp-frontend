@@ -7,9 +7,7 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import OpptjeningVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-opptjening';
-import {
-  AksessRettigheter, Aksjonspunkt, Opptjening, Vilkar,
-} from '@fpsak-frontend/types';
+import { AksessRettigheter, Opptjening } from '@fpsak-frontend/types';
 
 import InngangsvilkarPanelInitProps from '../../../../felles/typer/inngangsvilkarPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../../felles/data/behandlingFellesApi';
@@ -19,12 +17,6 @@ import OverstyringPanelDef from '../../../../felles/prosess/OverstyringPanelDef'
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_OPPTJENINGSVILKARET];
 
 const VILKAR_KODER = [vilkarType.OPPTJENINGSPERIODE, vilkarType.OPPTJENINGSVILKARET];
-
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, BehandlingFellesApiKeys.VILKAR];
-type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
-  vilkar: Vilkar[];
-}
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.OPPTJENING];
 type EndepunktPanelData = {
@@ -43,10 +35,9 @@ const OpptjeningInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangs
 }) => {
   const intl = useIntl();
   return (
-    <InngangsvilkarDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+    <InngangsvilkarDefaultInitPanel<EndepunktPanelData>
       {...props}
       behandlingVersjon={behandlingVersjon}
-      initEndepunkter={ENDEPUNKTER_INIT_DATA}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       vilkarKoder={VILKAR_KODER}
@@ -72,6 +63,7 @@ const OpptjeningInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangs
             <>
               <OpptjeningVilkarProsessIndex
                 lovReferanse={data.vilkar[0].lovReferanse}
+                // @ts-ignore fiks
                 {...data}
               />
               <VerticalSpacer thirtyTwoPx />

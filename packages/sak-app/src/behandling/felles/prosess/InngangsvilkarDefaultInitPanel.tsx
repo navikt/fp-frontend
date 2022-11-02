@@ -15,7 +15,7 @@ import useInngangsvilkarRegistrerer from './useInngangsvilkarRegistrerer';
 export type OwnProps<INIT_DATA, PANEL_DATA> = {
   behandlingVersjon: number;
   requestApi: RequestApi;
-  initEndepunkter: RestKey<any, any>[];
+  initEndepunkter?: RestKey<any, any>[];
   panelEndepunkter?: RestKey<any, any>[];
   aksjonspunktKoder?: string[];
   vilkarKoder?: string[];
@@ -42,11 +42,12 @@ const InngangsvilkarDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   const formaterteEndepunkter = initEndepunkter.map((e) => ({ key: e }));
   const { data: initData, state: initState } = restApiHooks.useMultipleRestApi<INIT_DATA, any>(formaterteEndepunkter, {
     updateTriggers: [behandlingVersjon],
+    suspendRequest: formaterteEndepunkter.length === 0,
     isCachingOn: true,
   });
   const erDataFerdighentet = initState === RestApiState.SUCCESS;
 
-  const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder, vilkarKoder);
+  const standardPanelProps = useStandardProsessPanelProps(aksjonspunktKoder, vilkarKoder);
 
   const skalVises = skalViseProsessPanel(standardPanelProps.aksjonspunkter, vilkarKoder, standardPanelProps.vilkar);
 

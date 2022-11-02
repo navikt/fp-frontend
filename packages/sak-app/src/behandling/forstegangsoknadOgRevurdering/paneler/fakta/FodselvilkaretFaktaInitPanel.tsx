@@ -2,13 +2,13 @@ import React, {
   FunctionComponent,
 } from 'react';
 import { useIntl } from 'react-intl';
-import { Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling } from '@navikt/ft-types';
+import { FamilieHendelse, FamilieHendelseSamling } from '@navikt/ft-types';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import FodselFaktaIndex from '@fpsak-frontend/fakta-fodsel';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import { fodselsvilkarene } from '@fpsak-frontend/kodeverk/src/vilkarType';
-import { Soknad, Vilkar } from '@fpsak-frontend/types';
+import { Soknad } from '@fpsak-frontend/types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
@@ -19,12 +19,6 @@ const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL,
   aksjonspunktCodes.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
 ];
-
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, BehandlingFellesApiKeys.VILKAR];
-type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
-  vilkar: Vilkar[];
-}
 
 const ENDEPUNKTER_PANEL_DATA = [
   BehandlingFellesApiKeys.FAMILIEHENDELSE,
@@ -42,17 +36,19 @@ type EndepunktPanelData = {
 /**
  * FodselvilkaretFaktaInitPanel
  */
-const FodselvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => (
-  <FaktaDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
-    {...props}
-    initEndepunkter={ENDEPUNKTER_INIT_DATA}
-    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-    aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    faktaPanelKode={FaktaPanelCode.FODSELSVILKARET}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FodselInfoPanel.Fodsel' })}
-    skalPanelVisesIMeny={(initData) => !!initData?.vilkar && initData.vilkar.some((v) => fodselsvilkarene.some((fv) => fv === v.vilkarType))}
-    renderPanel={(data) => <FodselFaktaIndex {...data} />}
-  />
-);
+const FodselvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => {
+  const { behandling: { vilkår } } = props;
+  return (
+    <FaktaDefaultInitPanel<Record<string, never>, EndepunktPanelData>
+      {...props}
+      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
+      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      faktaPanelKode={FaktaPanelCode.FODSELSVILKARET}
+      faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FodselInfoPanel.Fodsel' })}
+      skalPanelVisesIMeny={() => !!vilkår && vilkår.some((v) => fodselsvilkarene.some((fv) => fv === v.vilkarType))}
+      renderPanel={(data) => <FodselFaktaIndex {...data} />}
+    />
+  );
+};
 
 export default FodselvilkaretFaktaInitPanel;

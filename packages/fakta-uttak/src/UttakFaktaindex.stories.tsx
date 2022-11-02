@@ -2,7 +2,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import {
-  FaktaArbeidsforhold, FamilieHendelseSamling, Personoversikt, UttakKontrollerFaktaPerioderWrapper,
+  Behandling, FaktaArbeidsforhold, FamilieHendelseSamling, Personoversikt, UttakKontrollerFaktaPerioderWrapper,
 } from '@fpsak-frontend/types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
@@ -53,7 +53,8 @@ export const farSøkerFørsteSeksUker = () => {
   return (
     <UttakFaktaIndex
       {...standardFaktaProps}
-      behandling={behandlingFarSøkerFørsteSeksUker}
+      // @ts-ignore
+      behandling={behandlingFarSøkerFørsteSeksUker as Behandling}
       aksjonspunkter={aksjonspunkterFarSøkerFørsteSeksUker}
       ytelsefordeling={ytelsefordelingFarSøkerFørsteSeksUker}
       uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderFarSøkerFørsteSeksUker as UttakKontrollerFaktaPerioderWrapper}
@@ -74,7 +75,8 @@ export const overføringAvPerioder = () => {
   return (
     <UttakFaktaIndex
       {...standardFaktaProps}
-      behandling={behandlingOverføringAvPerioder}
+      // @ts-ignore
+      behandling={behandlingOverføringAvPerioder as Behandling}
       aksjonspunkter={aksjonspunkterOverføringAvPerioder}
       ytelsefordeling={ytelsefordelingOverføringAvPerioder}
       uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderOverføringAvPerioder as UttakKontrollerFaktaPerioderWrapper}
@@ -95,7 +97,8 @@ export const MedUtsettelse = () => {
   return (
     <UttakFaktaIndex
       {...standardFaktaProps}
-      behandling={behandlingOverføringAvPerioder}
+      // @ts-ignore
+      behandling={behandlingOverføringAvPerioder as Behandling}
       aksjonspunkter={[
         {
           definisjon: '5070',

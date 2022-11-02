@@ -32,19 +32,15 @@ describe('<BehandlingTilbakekrevingIndex>', () => {
           versjon: 1,
           status: behandlingStatus.OPPRETTET,
           type: behandlingType.TILBAKEKREVING,
+          aksjonspunkter: [],
           links: [{
             href: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name,
             rel: 'update',
             type: 'POST',
-          }, {
-            href: BehandlingFellesApiKeys.AKSJONSPUNKTER.name,
-            rel: 'aksjonspunkter',
-            type: 'GET',
           }],
         },
       },
       { key: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name, data: undefined },
-      { key: BehandlingFellesApiKeys.AKSJONSPUNKTER.name, data: [] },
       { key: TilbakekrevingBehandlingApiKeys.TILBAKE_KODEVERK.name, global: true, data: alleKodeverk },
     ];
 

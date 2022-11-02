@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 import {
   AksjonspunktStatus, FagsakYtelseType, BehandlingStatus, VilkarUtfallType,
 } from '@navikt/ft-kodeverk';
-import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/ft-types';
+import { Aksjonspunkt, Fagsak } from '@navikt/ft-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
@@ -14,6 +14,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import { RequestApi } from '@fpsak-frontend/rest-api';
+import { Behandling } from '@fpsak-frontend/types';
 
 import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import * as Felles from '../../felles/prosess/useStandardProsessPanelProps';
@@ -73,7 +74,6 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
 
   it('skal rendre komponent korrekt', async () => {
     const data = [
-      { key: BehandlingFellesApiKeys.AKSJONSPUNKTER.name, data: aksjonspunkter },
       { key: InnsynBehandlingApiKeys.INNSYN.name, data: innsyn },
       { key: InnsynBehandlingApiKeys.INNSYN_DOKUMENTER.name, data: [] },
     ];
@@ -86,7 +86,10 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
             toggleOppdatereFagsakContext={() => {}}
             fagsak={fagsak}
             opneSokeside={() => {}}
-            behandling={behandling}
+            behandling={{
+              ...behandling,
+              aksjonspunkter,
+            }}
             requestApi={{} as RequestApi}
           />
         </RestApiMock>
@@ -98,7 +101,6 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
 
   it('skal vise forhåndsvisning av melding', async () => {
     const data = [
-      { key: BehandlingFellesApiKeys.AKSJONSPUNKTER.name, data: aksjonspunkter },
       { key: InnsynBehandlingApiKeys.INNSYN.name, data: innsyn },
       { key: InnsynBehandlingApiKeys.INNSYN_DOKUMENTER.name, data: [] },
       { key: BehandlingFellesApiKeys.PREVIEW_MESSAGE.name, data: undefined },
@@ -116,7 +118,10 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
             toggleOppdatereFagsakContext={() => {}}
             fagsak={fagsak}
             opneSokeside={() => {}}
-            behandling={behandling}
+            behandling={{
+              ...behandling,
+              aksjonspunkter,
+            }}
             requestApi={{} as RequestApi}
           />
         </RestApiMock>

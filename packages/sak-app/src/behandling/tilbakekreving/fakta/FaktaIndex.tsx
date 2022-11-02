@@ -14,10 +14,9 @@ import {
   Aksjonspunkt,
   FeilutbetalingFakta,
   AlleKodeverkTilbakekreving,
-  Behandling,
   AlleKodeverk,
 } from '@navikt/ft-types';
-import { AksessRettigheter } from '@fpsak-frontend/types';
+import { Behandling, AksessRettigheter } from '@fpsak-frontend/types';
 import { FeilutbetalingAksjonspunktCode } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
@@ -28,7 +27,6 @@ import FeilutbetalingFaktaInitPanel from './paneler/FeilutbetalingFaktaInitPanel
 import VergeFaktaInitPanel from './paneler/VergeFaktaInitPanel';
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../data/tilbakekrevingBehandlingApi';
 import FaktaMeny, { MenyData } from './FaktaMeny';
-import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 
 import styles from './faktaIndex.less';
 import { erReadOnlyCurried } from '../felles/util/readOnlyPanelUtils';
@@ -59,6 +57,7 @@ const leggTilFaktaPanel = (
 
 const utledFaktaPaneler = (
   intl: IntlShape,
+  behandling: Behandling,
   initData?: EndepunktInitData,
   valgtFaktaSteg?: string,
 ): MenyData[] => {
@@ -67,14 +66,14 @@ const utledFaktaPaneler = (
     faktaPanelData.push(leggTilFaktaPanel(
       FaktaPanelCode.FEILUTBETALING,
       intl.formatMessage({ id: 'TilbakekrevingFakta.FaktaFeilutbetaling' }),
-      hentAksjonspunkterFor(FeilutbetalingAksjonspunktCode.AVKLAR_FAKTA_FOR_FEILUTBETALING, initData?.aksjonspunkter),
+      hentAksjonspunkterFor(FeilutbetalingAksjonspunktCode.AVKLAR_FAKTA_FOR_FEILUTBETALING, behandling.aksjonspunkter),
       valgtFaktaSteg));
   }
-  if (initData?.aksjonspunkter?.some((ap) => ap.definisjon === AksjonspunktCode.AVKLAR_VERGE)) {
+  if (behandling.aksjonspunkter?.some((ap) => ap.definisjon === AksjonspunktCode.AVKLAR_VERGE)) {
     faktaPanelData.push(leggTilFaktaPanel(
       FaktaPanelCode.VERGE,
       intl.formatMessage({ id: 'RegistrereVergeInfoPanel.Info' }),
-      hentAksjonspunkterFor(AksjonspunktCode.AVKLAR_VERGE, initData?.aksjonspunkter),
+      hentAksjonspunkterFor(AksjonspunktCode.AVKLAR_VERGE, behandling.aksjonspunkter),
       valgtFaktaSteg));
   }
   return faktaPanelData;
@@ -85,9 +84,8 @@ const erFaktaPanelAktivt = (
   faktaPanelKode: string,
 ): boolean => (faktaPanelerData.some((d) => d.id === faktaPanelKode && d.erAktiv));
 
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, TilbakekrevingBehandlingApiKeys.FEILUTBETALING_FAKTA];
+const ENDEPUNKTER_INIT_DATA = [TilbakekrevingBehandlingApiKeys.FEILUTBETALING_FAKTA];
 type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
   feilutbetalingFakta: FeilutbetalingFakta;
 }
 
@@ -132,7 +130,7 @@ const FaktaIndex: FunctionComponent<OwnProps> = ({
     }
   }, [behandling.versjon]);
 
-  const faktaPanelerData = useMemo(() => utledFaktaPaneler(intl, initData, valgtFaktaSteg), [initData, valgtFaktaSteg]);
+  const faktaPanelerData = useMemo(() => utledFaktaPaneler(intl, behandling, initData, valgtFaktaSteg), [initData, behandling, valgtFaktaSteg]);
 
   const oppdaterFaktaPanel = useCallback((index: number) => {
     oppdaterFaktaPanelIUrl(faktaPanelerData[index].id);
@@ -166,7 +164,7 @@ const FaktaIndex: FunctionComponent<OwnProps> = ({
                     fpsakKodeverk={fpsakKodeverk}
                     alleKodeverk={tilbakekrevingKodeverk}
                     feilutbetalingFakta={initData.feilutbetalingFakta}
-                    aksjonspunkter={initData.aksjonspunkter}
+                    aksjonspunkter={behandling.aksjonspunkter}
                     erReadOnlyFn={erReadOnlyFn}
                     submitCallback={bekreftAksjonspunkter}
                     formData={formData}
@@ -176,7 +174,7 @@ const FaktaIndex: FunctionComponent<OwnProps> = ({
                 {erFaktaPanelAktivt(faktaPanelerData, FaktaPanelCode.VERGE) && (
                   <VergeFaktaInitPanel
                     behandling={behandling}
-                    aksjonspunkter={initData.aksjonspunkter}
+                    aksjonspunkter={behandling.aksjonspunkter}
                     fpsakKodeverk={fpsakKodeverk}
                     erReadOnlyFn={erReadOnlyFn}
                     submitCallback={bekreftAksjonspunkter}

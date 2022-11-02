@@ -8,7 +8,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VarselOmRevurderingProsessIndex from '@fpsak-frontend/prosess-varsel-om-revurdering';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import {
-  Aksjonspunkt, Behandling, Fagsak, FamilieHendelse, FamilieHendelseSamling, ForhåndsvisMeldingParams, Soknad, Vilkar,
+  Behandling, Fagsak, FamilieHendelse, FamilieHendelseSamling, ForhåndsvisMeldingParams, Soknad,
 } from '@fpsak-frontend/types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
@@ -53,12 +53,6 @@ const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.VARSEL_REVURDERING_ETTERKONTROLL,
 ];
 
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, BehandlingFellesApiKeys.VILKAR];
-type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
-  vilkar: Vilkar[];
-}
-
 const ENDEPUNKTER_PANEL_DATA = [
   BehandlingFellesApiKeys.FAMILIEHENDELSE,
   BehandlingFellesApiKeys.FAMILIEHENDELSE_ORIGINAL_BEHANDLING,
@@ -96,9 +90,8 @@ const VarselProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
     [standardPanelProps.behandling.versjon]);
 
   return (
-    <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+    <ProsessDefaultInitPanel<Record<string, never>, EndepunktPanelData>
       {...props}
-      initEndepunkter={ENDEPUNKTER_INIT_DATA}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.VARSEL}

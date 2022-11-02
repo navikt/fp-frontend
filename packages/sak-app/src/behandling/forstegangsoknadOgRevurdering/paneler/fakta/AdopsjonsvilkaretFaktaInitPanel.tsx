@@ -2,14 +2,14 @@ import React, {
   FunctionComponent,
 } from 'react';
 import { useIntl } from 'react-intl';
-import { Fagsak, Aksjonspunkt, FamilieHendelseSamling } from '@navikt/ft-types';
+import { Fagsak, FamilieHendelseSamling } from '@navikt/ft-types';
 import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AdopsjonFaktaIndex from '@fpsak-frontend/fakta-adopsjon';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import { adopsjonsvilkarene } from '@fpsak-frontend/kodeverk/src/vilkarType';
-import { Soknad, Vilkar } from '@fpsak-frontend/types';
+import { Soknad } from '@fpsak-frontend/types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
@@ -20,12 +20,6 @@ const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.ADOPSJONSDOKUMENTAJON,
   aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
 ];
-
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, BehandlingFellesApiKeys.VILKAR];
-type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
-  vilkar: Vilkar[];
-}
 
 const ENDEPUNKTER_PANEL_DATA = [
   BehandlingFellesApiKeys.FAMILIEHENDELSE,
@@ -47,14 +41,13 @@ const AdopsjonsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelIn
   fagsak,
   ...props
 }) => (
-  <FaktaDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+  <FaktaDefaultInitPanel<Record<string, never>, EndepunktPanelData>
     {...props}
-    initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.ADOPSJONSVILKARET}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'AdopsjonInfoPanel.Adopsjon' })}
-    skalPanelVisesIMeny={(initData) => !!initData?.vilkar && initData.vilkar.some((v) => adopsjonsvilkarene.some((av) => av === v.vilkarType))}
+    skalPanelVisesIMeny={() => !!props.behandling.vilkår && props.behandling.vilkår.some((v) => adopsjonsvilkarene.some((av) => av === v.vilkarType))}
     renderPanel={(data) => (
       <AdopsjonFaktaIndex
         isForeldrepengerFagsak={fagsak.fagsakYtelseType === FagsakYtelseType.FORELDREPENGER}

@@ -2,18 +2,17 @@ import React, {
   FunctionComponent, useState, useCallback, useMemo,
 } from 'react';
 import {
-  Behandling, AlleKodeverk, Aksjonspunkt,
+  AlleKodeverk, Aksjonspunkt,
 } from '@navikt/ft-types';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { AksessRettigheter, Fagsak } from '@fpsak-frontend/types';
+import { Behandling, AksessRettigheter, Fagsak } from '@fpsak-frontend/types';
 import { AsyncPollingStatus } from '@fpsak-frontend/rest-api';
 import { RegistrerPapirsoknadPanel, SoknadRegistrertModal } from '@fpsak-frontend/papirsoknad';
 
-import { BehandlingFellesApiKeys } from '../felles/data/behandlingFellesApi';
 import BehandlingPaVent from '../felles/modaler/paVent/BehandlingPaVent';
-import { restApiPapirsoknadHooks, requestPapirsoknadApi } from './data/papirsoknadApi';
+import { requestPapirsoknadApi } from './data/papirsoknadApi';
 
 const getAktivtPapirsoknadApKode = (aksjonspunkter: Aksjonspunkt[]): string => aksjonspunkter
   .filter((a) => a.erAktivt).map((ap) => ap.definisjon)
@@ -24,7 +23,6 @@ const getAktivtPapirsoknadApKode = (aksjonspunkter: Aksjonspunkt[]): string => a
 
 const lagLagreFunksjon = (
   behandling: Behandling,
-  aksjonspunkter: Aksjonspunkt[],
   fagsak: Fagsak,
   lagreAksjonspunkt: (params?: any, keepData?: boolean) => Promise<Behandling>,
   setAksjonspunktLagret: (erApLagret: boolean) => void,
@@ -35,7 +33,7 @@ const lagLagreFunksjon = (
   foreldreType: string,
 ) => {
   const manuellRegistreringDtoList = [{
-    '@type': getAktivtPapirsoknadApKode(aksjonspunkter),
+    '@type': getAktivtPapirsoknadApKode(behandling.aksjonspunkter),
     tema: familieHendelseType,
     soknadstype: fagsakYtelseType,
     soker: foreldreType,
@@ -55,8 +53,6 @@ const lagLagreFunksjon = (
     }
   });
 };
-
-const EMPTY_ARRAY = [] as Aksjonspunkt[];
 
 interface OwnProps {
   fagsak: Fagsak;
@@ -85,21 +81,19 @@ const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
   const [erAksjonspunktLagret, setAksjonspunktLagret] = useState(false);
   const readOnly = !rettigheter.writeAccess.isEnabled || behandling.behandlingPaaVent;
 
-  const { data: aksjonspunkter = EMPTY_ARRAY } = restApiPapirsoknadHooks.useRestApi(BehandlingFellesApiKeys.AKSJONSPUNKTER);
-
-  const lagre = useMemo(() => lagLagreFunksjon(behandling, aksjonspunkter, fagsak, lagreAksjonspunkt, setAksjonspunktLagret),
-    [behandling, aksjonspunkter, fagsak, lagreAksjonspunkt, setAksjonspunktLagret]);
+  const lagre = useMemo(() => lagLagreFunksjon(behandling, fagsak, lagreAksjonspunkt, setAksjonspunktLagret),
+    [behandling, fagsak, lagreAksjonspunkt, setAksjonspunktLagret]);
   const lagreUfullstendig = useCallback((
     fagsakYtelseType: string,
     familieHendelseType: string,
     foreldreType: string,
   ) => lagre({ ufullstendigSoeknad: true }, fagsakYtelseType, familieHendelseType, foreldreType), [lagre]);
 
-  if (!aksjonspunkter) {
+  if (!behandling.aksjonspunkter) {
     return <LoadingPanel />;
   }
 
-  const erEndringssøknad = aksjonspunkter.some((ap) => ap.definisjon === aksjonspunktCodes.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER);
+  const erEndringssøknad = behandling.aksjonspunkter.some((ap) => ap.definisjon === aksjonspunktCodes.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER);
 
   return (
     <>
