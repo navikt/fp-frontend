@@ -31,6 +31,7 @@ describe('<BehandlingSvangerskapspengerIndex>', () => {
           versjon: 1,
           status: behandlingStatus.OPPRETTET,
           type: behandlingType.FORSTEGANGSSOKNAD,
+          aksjonspunkter: [],
           links: [{
             href: BehandlingFellesApiKeys.ARBEIDSGIVERE_OVERSIKT.name,
             rel: 'arbeidsgivere-oversikt',

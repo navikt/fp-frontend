@@ -2,7 +2,7 @@ import React, {
   ReactElement, useMemo,
 } from 'react';
 
-import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiHooks, RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import StandardFaktaPanelProps from '@fpsak-frontend/types/src/standardFaktaPanelPropsTsType';
 import { RequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
@@ -51,9 +51,11 @@ const FaktaDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
 
   const standardPanelProps = useStandardFaktaPanelProps(initData, aksjonspunktKoder, overstyringApKoder);
 
+  const erInitDataHentet = formaterteEndepunkter.length === 0 ? RestApiState.SUCCESS : initState;
+
   const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
-    initState,
+    erInitDataHentet,
     faktaPanelKode,
     faktaPanelMenyTekst,
     valgtFaktaSteg,
@@ -69,7 +71,7 @@ const FaktaDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   });
 
   return (
-    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={formatertePanelEndepunkter.length > 0 ? panelDataState : initState}>
+    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={formatertePanelEndepunkter.length > 0 ? panelDataState : erInitDataHentet}>
       {renderPanel({
         ...initData,
         ...panelData,

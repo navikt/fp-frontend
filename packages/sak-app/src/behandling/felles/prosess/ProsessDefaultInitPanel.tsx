@@ -69,9 +69,11 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   const skalMarkeresSomAktiv = hentSkalMarkeresSomAktiv && hentSkalMarkeresSomAktiv(initData, standardPanelProps);
   const harApentAksjonspunkt = erOverstyrt || standardPanelProps.isAksjonspunktOpen;
 
+  const erInitDataHentet = formaterteEndepunkter.length === 0 ? RestApiState.SUCCESS : initState;
+
   const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
-    initState,
+    erInitDataHentet,
     prosessPanelKode,
     prosessPanelMenyTekst,
     valgtProsessSteg,
@@ -93,7 +95,7 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
       erPanelValgt={erPanelValgt}
       erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
       status={status}
-      dataState={formatertePanelEndepunkter.length > 0 ? panelDataState : initState}
+      dataState={formatertePanelEndepunkter.length > 0 ? panelDataState : erInitDataHentet}
     >
       {renderPanel({
         ...initData,

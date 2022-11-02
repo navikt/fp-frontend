@@ -9,7 +9,6 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VedtakProsessIndex, { ForhandsvisData } from '@fpsak-frontend/prosess-vedtak';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   Aksjonspunkt, Behandling, Behandlingsresultat, BeregningsresultatEs, Fagsak, ForhåndsvisMeldingParams,
   Medlemskap, SimuleringResultat, TilbakekrevingValg, Vilkar,
@@ -168,7 +167,7 @@ const VedtakEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelIni
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.VEDTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
-      skalPanelVisesIMeny={(_data, initState) => initState === RestApiState.SUCCESS}
+      skalPanelVisesIMeny={() => true}
       hentOverstyrtStatus={(_initData, standardData) => findStatusForVedtak(
         vilkår || [], props.behandling.aksjonspunkter || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
       )}

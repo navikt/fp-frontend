@@ -29,7 +29,7 @@ const InngangsvilkarDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   behandlingVersjon,
   registrerInngangsvilkarPanel,
   requestApi,
-  initEndepunkter,
+  initEndepunkter = [],
   panelEndepunkter = [],
   aksjonspunktKoder,
   vilkarKoder,
@@ -45,7 +45,7 @@ const InngangsvilkarDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
     suspendRequest: formaterteEndepunkter.length === 0,
     isCachingOn: true,
   });
-  const erDataFerdighentet = initState === RestApiState.SUCCESS;
+  const erDataFerdighentet = formaterteEndepunkter.length === 0 || initState === RestApiState.SUCCESS;
 
   const standardPanelProps = useStandardProsessPanelProps(aksjonspunktKoder, vilkarKoder);
 

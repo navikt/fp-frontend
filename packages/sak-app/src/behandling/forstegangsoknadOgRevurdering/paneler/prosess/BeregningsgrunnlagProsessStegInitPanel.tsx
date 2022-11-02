@@ -6,7 +6,6 @@ import { useIntl } from 'react-intl';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import { ProsessBeregningsgrunnlagAksjonspunktCode } from '@navikt/ft-prosess-beregningsgrunnlag';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/ft-types';
 import { ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } from '@fpsak-frontend/types';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
@@ -101,7 +100,7 @@ const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & Prose
     vilkarKoder={VILKAR_KODER}
     prosessPanelKode={ProsessStegCode.BEREGNINGSGRUNNLAG}
     prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Beregning' })}
-    skalPanelVisesIMeny={(_initData, initState) => initState === RestApiState.SUCCESS}
+    skalPanelVisesIMeny={() => true}
     renderPanel={(data) => (
       <DynamicLoader<React.ComponentProps<typeof ProsessBeregningsgrunnlag>>
         packageCompFn={() => import('@navikt/ft-prosess-beregningsgrunnlag')}
