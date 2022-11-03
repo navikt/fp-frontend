@@ -90,7 +90,7 @@ const transformTilretteleggingsArbeidsforhold = (
 
 const transformValues = (formValues: FormValues, andreYtelserKodeverk: KodeverkMedNavn[]): any => ({
   ...OppholdINorgePapirsoknadIndex.transformValues(formValues),
-  foedselsDato: [formValues.foedselsDato],
+  foedselsDato: formValues.foedselsDato,
   tilretteleggingArbeidsforhold: transformTilretteleggingsArbeidsforhold(formValues),
   [FRILANS_NAME_PREFIX]: FrilansPapirsoknadIndex.transformValues(formValues[FRILANS_NAME_PREFIX]),
   [ANDRE_YTELSER_FORM_NAME_PREFIX]: AndreYtelserPapirsoknadIndex.transformValues(formValues, andreYtelserKodeverk),
