@@ -72,7 +72,6 @@
     "@navikt/ds-css": "1.4.0",
     "@navikt/ds-react": "1.4.0",
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": "2.1.14",
-    "@navikt/ft-fakta-beregning": "2.2.18",
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": "^1.1.14",
     "@navikt/ft-form-hooks": "3.0.5",
     "@navikt/ft-kodeverk": "^1.0.21",
