@@ -12,9 +12,10 @@ import {
   Datepicker, RadioGroupPanel, Form, formHooks,
 } from '@navikt/ft-form-hooks';
 import {
-  VerticalSpacer, FlexColumn, FlexContainer, FlexRow, AvsnittSkiller, DateLabel,
+  VerticalSpacer, FlexColumn, FlexContainer, FlexRow, AvsnittSkiller, DateLabel, Image,
 } from '@navikt/ft-ui-komponenter';
 
+import splitPeriodImageUrl from '@fpsak-frontend/assets/images/splitt.svg';
 import { KodeverkMedNavn, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
 
 import OppdaterePeriodeModal from './OppdaterePeriodeModal';
@@ -102,11 +103,11 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
   const nullstillPerioder = () => {
     settVisModalForPeriode(undefined);
 
-    for (let i = visModalPeriode + 1; i < fields.length; i += 1) {
+    const perioder = formMethods.getValues('perioder');
+
+    for (let i = fields.length - 1; i > visModalPeriode + 1; i -= 1) {
       remove(i);
     }
-
-    const perioder = formMethods.watch('perioder');
 
     update(visModalPeriode, {
       ...perioder[visModalPeriode],
@@ -137,10 +138,9 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
                   <VerticalSpacer sixteenPx />
                 </>
               )}
-              {(perioder[index].fom !== perioder[index].tom
-              && (fields.length === 1 || (!harDeltOpp && fields.length > 1 && index > sistOppdeltePeriodeIndex))) && (
+              {(perioder[index].fom !== perioder[index].tom && fields.length === 1) && (
                 <div className={styles.marginBtn}>
-                  <Button size="small" variant="tertiary" type="button" onClick={() => delOppPeriode(index)}>
+                  <Button size="small" variant="tertiary" type="button" onClick={() => delOppPeriode(index)} icon={<Image src={splitPeriodImageUrl} />}>
                     <FormattedMessage id="AktivitetskravFaktaDetailForm.DelOppPeriode" />
                   </Button>
                 </div>
@@ -185,14 +185,6 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
                         </FlexColumn>
                       </>
                     )}
-                    {(perioder[index].fom !== perioder[index].tom
-                    && (fields.length === 1 || (!harDeltOpp && fields.length > 1 && index > sistOppdeltePeriodeIndex))) && (
-                      <div className={styles.marginBtn}>
-                        <Button size="small" variant="tertiary" type="button" onClick={() => delOppPeriode(index)}>
-                          <FormattedMessage id="AktivitetskravFaktaDetailForm.DelOppPeriode" />
-                        </Button>
-                      </div>
-                    )}
                     {sistOppdeltePeriodeIndex >= index && (
                       <FlexColumn className={visDatepicker ? styles.oppdaterDato : undefined}>
                         <Button
@@ -209,6 +201,16 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
                     )}
                   </FlexRow>
                   <VerticalSpacer sixteenPx />
+                  {(perioder[index].fom !== perioder[index].tom && (!harDeltOpp && fields.length > 1 && index > sistOppdeltePeriodeIndex)) && (
+                    <>
+                      <div className={styles.marginBtn}>
+                        <Button size="small" variant="tertiary" type="button" onClick={() => delOppPeriode(index)} icon={<Image src={splitPeriodImageUrl} />}>
+                          <FormattedMessage id="AktivitetskravFaktaDetailForm.DelOppPeriode" />
+                        </Button>
+                      </div>
+                      <VerticalSpacer eightPx />
+                    </>
+                  )}
                 </FlexContainer>
               )}
               <VerticalSpacer sixteenPx />
