@@ -81,35 +81,20 @@ const UttakInfoPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <UttakFaktaForm
-      // @ts-ignore
       hasOpenAksjonspunkter={uttakApOpen}
-      // @ts-ignore
       readOnly={(overrideReadOnly && (!isRevurdering || !behandlingUtredes || behandlingPaaVent)) || !ytelsefordeling.endringsdato}
-      // @ts-ignore
       aksjonspunkter={aksjonspunkter}
-      // @ts-ignore
       submitCallback={submitCallback}
-      // @ts-ignore
       behandlingStatus={behandlingStatus}
-      // @ts-ignore
       ytelsefordeling={ytelsefordeling}
-      // @ts-ignore
       uttakPerioder={sortedUttakPerioder}
-      // @ts-ignore
       alleKodeverk={alleKodeverk}
-      // @ts-ignore
       kanOverstyre={kanOverstyre && ytelsefordeling.endringsdato !== null}
-      // @ts-ignore
       faktaArbeidsforhold={faktaArbeidsforhold}
-      // @ts-ignore
       personoversikt={personoversikt}
-      // @ts-ignore
       familiehendelse={familiehendelse}
-      // @ts-ignore
       vilkarForSykdomExists={vilkarForSykdomExists}
-      // @ts-ignore
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      // @ts-ignore
       submittable={submittable}
     />
   );
