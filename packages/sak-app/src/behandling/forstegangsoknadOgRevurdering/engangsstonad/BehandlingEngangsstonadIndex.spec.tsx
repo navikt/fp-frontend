@@ -29,7 +29,7 @@ describe('<BehandlingEngangsstonadIndex>', () => {
           versjon: 1,
           status: BehandlingStatus.OPPRETTET,
           type: BehandlingType.FORSTEGANGSSOKNAD,
-          aksjonspunkter: [],
+          aksjonspunkt: [],
           links: [{
             href: BehandlingFellesApiKeys.ARBEIDSGIVERE_OVERSIKT.name,
             rel: 'arbeidsgivere-oversikt',

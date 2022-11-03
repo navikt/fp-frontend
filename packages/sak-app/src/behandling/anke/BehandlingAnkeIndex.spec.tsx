@@ -29,7 +29,7 @@ describe('<BehandlingAnkeIndex>', () => {
           versjon: 1,
           status: BehandlingStatus.OPPRETTET,
           type: BehandlingType.ANKE,
-          aksjonspunkter: [],
+          aksjonspunkt: [],
           links: [{
             href: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name,
             rel: 'update',

@@ -32,7 +32,7 @@ describe('<BehandlingTilbakekrevingIndex>', () => {
           versjon: 1,
           status: behandlingStatus.OPPRETTET,
           type: behandlingType.TILBAKEKREVING,
-          aksjonspunkter: [],
+          aksjonspunkt: [],
           links: [{
             href: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name,
             rel: 'update',

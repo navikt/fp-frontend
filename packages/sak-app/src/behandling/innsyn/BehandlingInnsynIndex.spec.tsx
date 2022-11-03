@@ -29,7 +29,7 @@ describe('<BehandlingInnsynIndex>', () => {
           versjon: 1,
           status: BehandlingStatus.OPPRETTET,
           type: BehandlingType.DOKUMENTINNSYN,
-          aksjonspunkter: [],
+          aksjonspunkt: [],
           links: [{
             href: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name,
             rel: 'update',
