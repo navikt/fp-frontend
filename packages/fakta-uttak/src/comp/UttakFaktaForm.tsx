@@ -1,18 +1,24 @@
-import React, { FunctionComponent, useRef } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import React, {
+  useCallback, FunctionComponent, useRef, useState,
+} from 'react';
+import { FormattedMessage } from 'react-intl';
+import dayjs from 'dayjs';
 import { Heading } from '@navikt/ds-react';
 import {
   Table, AksjonspunktHelpTextHTML, VerticalSpacer, ExpandableTableRow, TableColumn,
 } from '@navikt/ft-ui-komponenter';
-import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
-import { KodeverkType } from '@navikt/ft-kodeverk';
+import { calcDaysAndWeeks, dateFormat, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import { AksjonspunktStatus, isAksjonspunktOpen, KodeverkType } from '@navikt/ft-kodeverk';
+import { AlleKodeverk } from '@navikt/ft-types';
 
 import {
+  Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelseSamling,
   Personoversikt, UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import oppholdArsakType from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
-import { AlleKodeverk } from '@navikt/ft-types';
+
+import UttakFaktaDetailForm from './UttakFaktaDetailForm';
 
 const HEADER_TEXT_CODES = [
   'EMPTY',
@@ -62,17 +68,49 @@ interface OwnProps {
   faktaArbeidsforhold: FaktaArbeidsforhold[];
   kanOverstyre: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  harApneAksjonspunkter: boolean;
   alleKodeverk: AlleKodeverk;
+  aksjonspunkter: Aksjonspunkt[];
+  readOnly: boolean;
 }
 
 const UttakFaktaForm: FunctionComponent<OwnProps> = ({
-  harApneAksjonspunkter,
   uttakKontrollerFaktaPerioder,
+  ytelsefordeling,
   alleKodeverk,
+  aksjonspunkter,
+  readOnly,
 }) => {
-  const intl = useIntl();
   const tableRef = useRef<HTMLTableElement>(null);
+
+  const harApneAksjonspunkter = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status));
+
+  const aksjonspunktTekster = aksjonspunkter
+    .filter((ap) => ap.status === AksjonspunktStatus.OPPRETTET)
+    .map((ap) => {
+      const førsteUttaksdato = ytelsefordeling && ytelsefordeling.førsteUttaksdato ? ytelsefordeling.førsteUttaksdato : undefined;
+      const førsteUttak = {
+        value: dayjs(førsteUttaksdato).format(DDMMYYYY_DATE_FORMAT),
+      };
+
+      return (
+        <FormattedMessage
+          key={`UttakInfoPanel.Aksjonspunkt.${ap.definisjon}`}
+          id={`UttakInfoPanel.Aksjonspunkt.${ap.definisjon}`}
+          values={førsteUttak}
+        />
+      );
+    });
+
+  const [valgteFoms, setValgteFoms] = useState<string[]>([]);
+  const velgPeriodeFom = useCallback((fom?: string, lukkAlleAndre = false) => {
+    if (valgteFoms.includes(fom)) {
+      setValgteFoms((foms) => foms.filter((f) => f !== fom));
+    } else {
+      const nye = fom ? [fom] : [];
+      setValgteFoms((foms) => (lukkAlleAndre ? nye : foms.concat(fom)));
+    }
+    tableRef?.current?.scrollIntoView();
+  }, [valgteFoms, setValgteFoms]);
 
   return (
     <>
@@ -81,7 +119,7 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
       {harApneAksjonspunkter && (
         <>
           <AksjonspunktHelpTextHTML>
-            {[intl.formatMessage({ id: 'AktivitetskravFaktaForm.AksjonspunktHjelpetekst' })]}
+            {aksjonspunktTekster}
           </AksjonspunktHelpTextHTML>
           <VerticalSpacer sixteenPx />
         </>
@@ -93,11 +131,10 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
             <ExpandableTableRow
               key={periode.fom + periode.tom}
               isApLeftBorder={periode.bekreftet === false}
-              showContent={false}
-              toggleContent={() => undefined}
-              content={<div>test</div>}
+              showContent={valgteFoms.includes(periode.fom)}
+              toggleContent={() => velgPeriodeFom(periode.fom)}
+              content={valgteFoms.includes(periode.fom) && (<UttakFaktaDetailForm valgtPeriode={periode} readOnly={readOnly} />)}
             >
-              <TableColumn>Rediger</TableColumn>
               <TableColumn>{`${dateFormat(periode.fom)} - ${dateFormat(periode.tom)}`}</TableColumn>
               <TableColumn>
                 <FormattedMessage

@@ -8,7 +8,6 @@ import {
 import { createIntl } from '@navikt/ft-utils';
 import { ReduxWrapper } from '@fpsak-frontend/form';
 
-import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 import UttakInfoPanel from './components/UttakInfoPanel';
 import messages from '../i18n/nb_NO.json';
 import UttakFaktaForm from './comp/UttakFaktaForm';
@@ -64,9 +63,10 @@ const UttakFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = (
       />
     </ReduxWrapper>
     <UttakFaktaForm
-      harApneAksjonspunkter={aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status))}
+      ytelsefordeling={ytelsefordeling}
       uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioder}
       alleKodeverk={alleKodeverk}
+      aksjonspunkter={aksjonspunkter}
     />
   </RawIntlProvider>
 );
