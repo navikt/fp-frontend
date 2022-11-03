@@ -33,7 +33,7 @@ const lagLagreFunksjon = (
   foreldreType: string,
 ) => {
   const manuellRegistreringDtoList = [{
-    '@type': getAktivtPapirsoknadApKode(behandling.aksjonspunkter),
+    '@type': getAktivtPapirsoknadApKode(behandling.aksjonspunkt),
     tema: familieHendelseType,
     soknadstype: fagsakYtelseType,
     soker: foreldreType,
@@ -89,11 +89,11 @@ const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
     foreldreType: string,
   ) => lagre({ ufullstendigSoeknad: true }, fagsakYtelseType, familieHendelseType, foreldreType), [lagre]);
 
-  if (!behandling.aksjonspunkter) {
+  if (!behandling.aksjonspunkt) {
     return <LoadingPanel />;
   }
 
-  const erEndringssøknad = behandling.aksjonspunkter.some((ap) => ap.definisjon === aksjonspunktCodes.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER);
+  const erEndringssøknad = behandling.aksjonspunkt.some((ap) => ap.definisjon === aksjonspunktCodes.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER);
 
   return (
     <>

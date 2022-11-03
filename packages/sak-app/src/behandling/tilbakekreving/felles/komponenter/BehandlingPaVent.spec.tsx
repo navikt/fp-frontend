@@ -32,7 +32,7 @@ describe('<BehandlingPaVent>', () => {
       <BehandlingPaVent
         behandling={{
           ...behandling,
-          aksjonspunkter,
+          aksjonspunkt: aksjonspunkter,
         } as Behandling}
         kodeverk={kodeverk}
         hentBehandling={jest.fn()}
@@ -49,7 +49,7 @@ describe('<BehandlingPaVent>', () => {
           behandling={{
             ...behandling,
             behandlingPaaVent: true,
-            aksjonspunkter,
+            aksjonspunkt: aksjonspunkter,
           } as Behandling}
           kodeverk={kodeverk}
           hentBehandling={jest.fn()}
@@ -65,7 +65,7 @@ describe('<BehandlingPaVent>', () => {
       <BehandlingPaVent
         behandling={{
           ...behandling,
-          aksjonspunkter,
+          aksjonspunkt: aksjonspunkter,
           behandlingPaaVent: true,
         } as Behandling}
         kodeverk={kodeverk}

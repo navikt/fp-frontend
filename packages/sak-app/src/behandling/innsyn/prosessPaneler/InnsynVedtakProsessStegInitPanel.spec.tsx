@@ -88,7 +88,7 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
             opneSokeside={() => {}}
             behandling={{
               ...behandling,
-              aksjonspunkter,
+              aksjonspunkt: aksjonspunkter,
             }}
             requestApi={{} as RequestApi}
           />
@@ -120,7 +120,7 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
             opneSokeside={() => {}}
             behandling={{
               ...behandling,
-              aksjonspunkter,
+              aksjonspunkt: aksjonspunkter,
             }}
             requestApi={{} as RequestApi}
           />

@@ -66,14 +66,14 @@ const utledFaktaPaneler = (
     faktaPanelData.push(leggTilFaktaPanel(
       FaktaPanelCode.FEILUTBETALING,
       intl.formatMessage({ id: 'TilbakekrevingFakta.FaktaFeilutbetaling' }),
-      hentAksjonspunkterFor(FeilutbetalingAksjonspunktCode.AVKLAR_FAKTA_FOR_FEILUTBETALING, behandling.aksjonspunkter),
+      hentAksjonspunkterFor(FeilutbetalingAksjonspunktCode.AVKLAR_FAKTA_FOR_FEILUTBETALING, behandling.aksjonspunkt),
       valgtFaktaSteg));
   }
-  if (behandling.aksjonspunkter?.some((ap) => ap.definisjon === AksjonspunktCode.AVKLAR_VERGE)) {
+  if (behandling.aksjonspunkt?.some((ap) => ap.definisjon === AksjonspunktCode.AVKLAR_VERGE)) {
     faktaPanelData.push(leggTilFaktaPanel(
       FaktaPanelCode.VERGE,
       intl.formatMessage({ id: 'RegistrereVergeInfoPanel.Info' }),
-      hentAksjonspunkterFor(AksjonspunktCode.AVKLAR_VERGE, behandling.aksjonspunkter),
+      hentAksjonspunkterFor(AksjonspunktCode.AVKLAR_VERGE, behandling.aksjonspunkt),
       valgtFaktaSteg));
   }
   return faktaPanelData;
@@ -164,7 +164,7 @@ const FaktaIndex: FunctionComponent<OwnProps> = ({
                     fpsakKodeverk={fpsakKodeverk}
                     alleKodeverk={tilbakekrevingKodeverk}
                     feilutbetalingFakta={initData.feilutbetalingFakta}
-                    aksjonspunkter={behandling.aksjonspunkter}
+                    aksjonspunkter={behandling.aksjonspunkt}
                     erReadOnlyFn={erReadOnlyFn}
                     submitCallback={bekreftAksjonspunkter}
                     formData={formData}
@@ -174,7 +174,7 @@ const FaktaIndex: FunctionComponent<OwnProps> = ({
                 {erFaktaPanelAktivt(faktaPanelerData, FaktaPanelCode.VERGE) && (
                   <VergeFaktaInitPanel
                     behandling={behandling}
-                    aksjonspunkter={behandling.aksjonspunkter}
+                    aksjonspunkter={behandling.aksjonspunkt}
                     fpsakKodeverk={fpsakKodeverk}
                     erReadOnlyFn={erReadOnlyFn}
                     submitCallback={bekreftAksjonspunkter}

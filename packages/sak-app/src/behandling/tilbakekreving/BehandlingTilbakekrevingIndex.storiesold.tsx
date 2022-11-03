@@ -271,7 +271,7 @@ export const FaktaPaneler = Template.bind({});
 FaktaPaneler.args = {
   behandling: {
     ...defaultBehandling,
-    aksjonspunkter: faktaAksjonspunkter,
+    aksjonspunkt: faktaAksjonspunkter,
   },
 };
 
@@ -279,7 +279,7 @@ export const ProsessPaneler = Template.bind({});
 ProsessPaneler.args = {
   behandling: {
     ...defaultBehandling,
-    aksjonspunkter: prosessAksjonspunkter,
+    aksjonspunkt: prosessAksjonspunkter,
   },
 };
 
@@ -289,7 +289,7 @@ HenlagtBehandling.args = {
     ...defaultBehandling,
     behandlingHenlagt: true,
     status: BehandlingStatus.AVSLUTTET,
-    aksjonspunkter: [{
+    aksjonspunkt: [{
       ...prosessAksjonspunkter[0],
       status: AksjonspunktStatus.UTFORT,
     }],

@@ -82,7 +82,7 @@ const useStandardProsessPanelProps = (
   const [formData, setFormData] = useState();
   const value = useContext(StandardPropsStateContext);
 
-  const { aksjonspunkter, vilkår } = value.behandling;
+  const { aksjonspunkt: aksjonspunkter, vilkår } = value.behandling;
 
   useEffect(() => {
     if (formData) {

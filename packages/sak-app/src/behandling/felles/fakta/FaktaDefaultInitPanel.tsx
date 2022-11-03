@@ -49,7 +49,7 @@ const FaktaDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
     isCachingOn: true,
   });
 
-  const standardPanelProps = useStandardFaktaPanelProps(initData, aksjonspunktKoder, overstyringApKoder);
+  const standardPanelProps = useStandardFaktaPanelProps(aksjonspunktKoder, overstyringApKoder);
 
   const erInitDataHentet = formaterteEndepunkter.length === 0 ? RestApiState.SUCCESS : initState;
 

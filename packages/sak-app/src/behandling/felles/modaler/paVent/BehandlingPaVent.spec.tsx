@@ -42,7 +42,7 @@ describe('<BehandlingPaVent>', () => {
       <BehandlingPaVent
         behandling={{
           ...behandling,
-          aksjonspunkter,
+          aksjonspunkt: aksjonspunkter,
         } as Behandling}
         requestApi={requestMock}
         kodeverk={kodeverk}
@@ -59,7 +59,7 @@ describe('<BehandlingPaVent>', () => {
         <BehandlingPaVent
           behandling={{
             ...behandling,
-            aksjonspunkter,
+            aksjonspunkt: aksjonspunkter,
             behandlingPaaVent: true,
           } as Behandling}
           requestApi={requestMock}
@@ -77,7 +77,7 @@ describe('<BehandlingPaVent>', () => {
       <BehandlingPaVent
         behandling={{
           ...behandling,
-          aksjonspunkter,
+          aksjonspunkt: aksjonspunkter,
           behandlingPaaVent: true,
         } as Behandling}
         requestApi={requestMock}

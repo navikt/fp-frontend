@@ -96,8 +96,8 @@ const FordelingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.FORDELING}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FordelBeregningsgrunnlag.Title' })}
-    skalPanelVisesIMeny={() => !!props.behandling.aksjonspunkter
-      && !!props.behandling.aksjonspunkter.some((ap) => AKSJONSPUNKT_KODER.some((kode) => kode === ap.definisjon))}
+    skalPanelVisesIMeny={() => !!props.behandling.aksjonspunkt
+      && !!props.behandling.aksjonspunkt.some((ap) => AKSJONSPUNKT_KODER.some((kode) => kode === ap.definisjon))}
     renderPanel={(data) => (
       <DynamicLoader<React.ComponentProps<typeof ProsessFordeling>>
         packageCompFn={() => import('@navikt/ft-fakta-fordel-beregningsgrunnlag')}

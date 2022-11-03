@@ -102,7 +102,7 @@ const KlageresultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPan
   const previewCallback = useCallback(lagForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
     [standardPanelProps.behandling.versjon]);
 
-  const { aksjonspunkter } = props.behandling;
+  const { aksjonspunkt: aksjonspunkter } = props.behandling;
 
   return (
     <ProsessDefaultInitPanel<Record<string, never>, EndepunktPanelData>

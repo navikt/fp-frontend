@@ -86,13 +86,13 @@ const utledProsessPaneler = (
   initData?: EndepunktInitData,
   valgtProsessSteg?: string,
 ): ProsessPanelMenyData[] => {
-  const apForTilbakekreving = hentAksjonspunkterFor(TilbakekrevingCodes.VURDER_TILBAKEKREVING, behandling.aksjonspunkter);
+  const apForTilbakekreving = hentAksjonspunkterFor(TilbakekrevingCodes.VURDER_TILBAKEKREVING, behandling.aksjonspunkt);
 
   return [
     leggTilProsessPanel(
       ProsessStegCode.FORELDELSE,
       intl.formatMessage({ id: 'Behandlingspunkt.Foreldelse' }),
-      hentAksjonspunkterFor(ForeldelseAksjonspunktCodes.VURDER_FORELDELSE, behandling.aksjonspunkter),
+      hentAksjonspunkterFor(ForeldelseAksjonspunktCodes.VURDER_FORELDELSE, behandling.aksjonspunkt),
       initData?.perioderForeldelse ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT,
       valgtProsessSteg,
     ),
@@ -106,7 +106,7 @@ const utledProsessPaneler = (
     leggTilProsessPanel(
       ProsessStegCode.VEDTAK,
       intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' }),
-      hentAksjonspunkterFor(VedtakAksjonspunktCode.FORESLA_VEDTAK, behandling.aksjonspunkter),
+      hentAksjonspunkterFor(VedtakAksjonspunktCode.FORESLA_VEDTAK, behandling.aksjonspunkt),
       getVedtakStatus(initData?.beregningsresultat),
       valgtProsessSteg,
       behandling.status === BehandlingStatus.AVSLUTTET && valgtProsessSteg === DEFAULT_PANEL_VALGT,
@@ -191,7 +191,7 @@ const ProsessIndex: FunctionComponent<OwnProps> = ({
           {aktivtProsessPanel.id === ProsessStegCode.FORELDELSE && (
             <ForeldelseProsessInitPanel
               behandling={behandling}
-              aksjonspunkter={behandling.aksjonspunkter}
+              aksjonspunkter={behandling.aksjonspunkt}
               perioderForeldelse={initData?.perioderForeldelse}
               navBrukerKjonn={fagsakKjønn}
               erReadOnlyFn={erReadOnlyFn}
@@ -205,7 +205,7 @@ const ProsessIndex: FunctionComponent<OwnProps> = ({
             <TilbakekrevingProsessInitPanel
               behandling={behandling}
               perioderForeldelse={initData?.perioderForeldelse}
-              aksjonspunkter={behandling.aksjonspunkter}
+              aksjonspunkter={behandling.aksjonspunkt}
               navBrukerKjonn={fagsakKjønn}
               alleKodeverk={tilbakekrevingKodeverk}
               bekreftAksjonspunkter={bekreftAksjonspunkter}
@@ -218,7 +218,7 @@ const ProsessIndex: FunctionComponent<OwnProps> = ({
             <VedtakTilbakekrevingProsessInitPanel
               behandling={behandling}
               beregningsresultat={initData?.beregningsresultat}
-              aksjonspunkter={behandling.aksjonspunkter}
+              aksjonspunkter={behandling.aksjonspunkt}
               harApenRevurdering={harApenRevurdering}
               bekreftAksjonspunkterMedSideeffekter={bekreftAksjonspunkterMedSideeffekter}
               opneSokeside={opneSokeside}

@@ -92,7 +92,7 @@ const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
   const previewCallback = useCallback(hentForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
     [standardPanelProps.behandling.versjon]);
 
-  const { aksjonspunkter } = props.behandling;
+  const { aksjonspunkt: aksjonspunkter } = props.behandling;
 
   return (
     <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>

@@ -35,7 +35,7 @@ const PermisjonFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.PERMISJON}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'PermisjonFaktaInitPanel.Title' })}
-    skalPanelVisesIMeny={() => !!props.behandling.aksjonspunkter.some((ap) => ap.definisjon === AKSJONSPUNKT_KODER[0])}
+    skalPanelVisesIMeny={() => !!props.behandling.aksjonspunkt.some((ap) => ap.definisjon === AKSJONSPUNKT_KODER[0])}
     renderPanel={(data) => (
       <PermisjonFaktaIndex
         saksnummer={saksnummer}

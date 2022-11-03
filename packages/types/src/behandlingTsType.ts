@@ -3,7 +3,7 @@ import { BehandlingFellesData } from './behandlingAppKontekstTsType';
 import Vilkar from './vilkarTsType';
 
 type Behandling = BehandlingFellesData & Readonly<{
-  aksjonspunkter: Aksjonspunkt[];
+  aksjonspunkt: Aksjonspunkt[];
   harSøknad: boolean;
   harSattEndringsdato: boolean;
   sjekkSimuleringResultat: boolean;

@@ -39,7 +39,7 @@ const OmsorgOgRettFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitPro
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.OMSORG_OG_RETT}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'OmsorgInfoPanel.OmsorgOgRett' })}
-    skalPanelVisesIMeny={() => !!props.behandling.aksjonspunkter?.some((ap) => AKSJONSPUNKT_KODER.some((kode) => kode === ap.definisjon))}
+    skalPanelVisesIMeny={() => !!props.behandling.aksjonspunkt?.some((ap) => AKSJONSPUNKT_KODER.some((kode) => kode === ap.definisjon))}
     renderPanel={(data) => <OmsorgOgRettFaktaIndex personoversikt={personoversikt} {...data} />}
   />
 );

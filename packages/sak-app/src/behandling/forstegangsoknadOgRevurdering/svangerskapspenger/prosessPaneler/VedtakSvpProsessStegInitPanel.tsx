@@ -158,7 +158,7 @@ const VedtakSvpProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelIn
   const lukkIverksetterModal = useCallback(() => { toggleIverksetterVedtakModal(false); opneSokeside(); }, []);
   const lukkFatterModal = useCallback(() => { toggleFatterVedtakModal(false); opneSokeside(); }, []);
 
-  const { aksjonspunkter, vilkår } = props.behandling;
+  const { aksjonspunkt: aksjonspunkter, vilkår } = props.behandling;
 
   return (
     <ProsessDefaultInitPanel<Record<string, never>, EndepunktPanelData>

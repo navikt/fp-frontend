@@ -169,11 +169,11 @@ const VedtakEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelIni
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
       skalPanelVisesIMeny={() => true}
       hentOverstyrtStatus={(_initData, standardData) => findStatusForVedtak(
-        vilkår || [], props.behandling.aksjonspunkter || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
+        vilkår || [], props.behandling.aksjonspunkt || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
       )}
       lagringSideEffekter={lagringSideEffekter}
       hentSkalMarkeresSomAktiv={(_initData, standardData) => !standardData.behandling.behandlingHenlagt && findStatusForVedtak(
-        vilkår || [], props.behandling.aksjonspunkter || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
+        vilkår || [], props.behandling.aksjonspunkt || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
       ) !== vilkarUtfallType.IKKE_VURDERT}
       renderPanel={(data) => (
         <>
@@ -191,7 +191,7 @@ const VedtakEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelIni
             ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD}
             previewCallback={previewCallback}
             {...data}
-            aksjonspunkter={props.behandling.aksjonspunkter}
+            aksjonspunkter={props.behandling.aksjonspunkt}
             vilkar={vilkår}
           />
         </>
