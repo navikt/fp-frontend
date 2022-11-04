@@ -1,31 +1,32 @@
 import React, {
-  useCallback, FunctionComponent, useRef, useState,
+  useCallback, FunctionComponent, useRef, useState, useEffect, useMemo,
 } from 'react';
+import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
+import { Form } from '@navikt/ft-form-hooks';
 import dayjs from 'dayjs';
 import { Heading } from '@navikt/ds-react';
 import {
   Table, AksjonspunktHelpTextHTML, VerticalSpacer, ExpandableTableRow, TableColumn,
 } from '@navikt/ft-ui-komponenter';
+import { FaktaSubmitButtonNew, FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
 import { calcDaysAndWeeks, dateFormat, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { AksjonspunktStatus, isAksjonspunktOpen, KodeverkType } from '@navikt/ft-kodeverk';
 import { AlleKodeverk } from '@navikt/ft-types';
 
 import {
-  Aksjonspunkt,
-  ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelseSamling,
-  Personoversikt, UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
+  Aksjonspunkt, UttakKontrollerFaktaPerioder, UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import oppholdArsakType from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
 
 import UttakFaktaDetailForm from './UttakFaktaDetailForm';
 
 const HEADER_TEXT_CODES = [
-  'EMPTY',
   'UttakFaktaForm.Periode',
   'UttakFaktaForm.AntallDager',
   'UttakFaktaForm.Stonadskonto',
   'UttakFaktaForm.Kilde',
+  'EMPTY',
 ];
 
 const getTextId = (weeks?: number, days?: number): string => {
@@ -62,15 +63,15 @@ const getUttakPeriode = (
 
 interface OwnProps {
   ytelsefordeling: Ytelsefordeling;
-  personoversikt: Personoversikt;
-  familiehendelse: FamilieHendelseSamling;
   uttakKontrollerFaktaPerioder: UttakKontrollerFaktaPerioderWrapper;
-  faktaArbeidsforhold: FaktaArbeidsforhold[];
-  kanOverstyre: boolean;
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   alleKodeverk: AlleKodeverk;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
+  formData: { uttakPerioder: UttakKontrollerFaktaPerioder[], begrunnelse: string },
+  setFormData: (data: { uttakPerioder: UttakKontrollerFaktaPerioder[], begrunnelse: string }) => void,
+  submitCallback: (aksjonspunkter: {}) => Promise<void>;
+  submittable: boolean;
+  kanOverstyre: boolean;
 }
 
 const UttakFaktaForm: FunctionComponent<OwnProps> = ({
@@ -79,10 +80,22 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   aksjonspunkter,
   readOnly,
+  formData,
+  setFormData,
+  submitCallback,
+  submittable,
+  kanOverstyre,
 }) => {
   const tableRef = useRef<HTMLTableElement>(null);
 
+  const [isDirty, setDirty] = useState<boolean>(false);
+
   const harApneAksjonspunkter = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status));
+
+  const sortertePerioder = useMemo(() => [...uttakKontrollerFaktaPerioder.perioder]
+    .sort((krav1, krav2) => dayjs(krav1.fom).diff(dayjs(krav2.fom))), [uttakKontrollerFaktaPerioder]);
+
+  const [uttakPerioder, updateUttakPerioder] = useState<UttakKontrollerFaktaPerioder[]>(formData?.uttakPerioder || sortertePerioder);
 
   const aksjonspunktTekster = aksjonspunkter
     .filter((ap) => ap.status === AksjonspunktStatus.OPPRETTET)
@@ -112,6 +125,46 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
     tableRef?.current?.scrollIntoView();
   }, [valgteFoms, setValgteFoms]);
 
+  useEffect(() => velgPeriodeFom(uttakPerioder?.find((oa) => !oa.bekreftet)?.fom), []);
+
+  const oppdaterPerioder = useCallback((uPerioder: { perioder: UttakKontrollerFaktaPerioder[] }) => {
+    const { perioder } = uPerioder;
+    const oppdatertePerioder = uttakPerioder
+      .filter((p) => p.fom !== perioder[0].fom)
+      .concat(perioder)
+      .sort((a1, a2) => a1.fom.localeCompare(a2.fom));
+
+    updateUttakPerioder(oppdatertePerioder);
+    velgPeriodeFom(oppdatertePerioder.find((oa) => !oa.bekreftet)?.fom, true);
+    setDirty(true);
+  }, [uttakPerioder]);
+
+  const formMethods = useForm<{ begrunnelse: string }>({
+    defaultValues: {
+      begrunnelse: formData?.begrunnelse,
+    },
+  });
+
+  useEffect(() => () => {
+    setFormData({ uttakPerioder, begrunnelse: formMethods.getValues('begrunnelse') });
+  }, []);
+
+  const bekreft = useCallback((begrunnelse: string) => {
+    submitCallback({
+      kode: '',
+      avklartePerioder: uttakPerioder,
+      begrunnelse,
+    });
+  }, [uttakPerioder]);
+
+  const begrunnelse = formMethods.watch('begrunnelse');
+
+  const isSubmittable = useMemo(() => submittable
+    && valgteFoms.length === 0 && uttakPerioder?.every((a) => a.bekreftet) && !!begrunnelse,
+  [uttakPerioder, valgteFoms, begrunnelse]);
+
+  const notExpandable = aksjonspunkter.length === 0 && !kanOverstyre;
+
   return (
     <>
       <Heading size="small"><FormattedMessage id="UttakFaktaForm.FaktaUttak" /></Heading>
@@ -125,7 +178,7 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
         </>
       )}
       <Table ref={tableRef} headerTextCodes={HEADER_TEXT_CODES} noHover hasGrayHeader>
-        {uttakKontrollerFaktaPerioder.perioder.map((periode) => {
+        {uttakPerioder.map((periode) => {
           const numberOfDaysAndWeeks = calcDaysAndWeeks(periode.fom, periode.tom);
           return (
             <ExpandableTableRow
@@ -133,7 +186,14 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
               isApLeftBorder={periode.bekreftet === false}
               showContent={valgteFoms.includes(periode.fom)}
               toggleContent={() => velgPeriodeFom(periode.fom)}
-              content={valgteFoms.includes(periode.fom) && (<UttakFaktaDetailForm valgtPeriode={periode} readOnly={readOnly} />)}
+              content={valgteFoms.includes(periode.fom) && (
+                <UttakFaktaDetailForm
+                  valgtPeriode={periode}
+                  readOnly={readOnly}
+                  oppdaterPerioder={oppdaterPerioder}
+                  avbrytEditering={() => velgPeriodeFom(periode.fom)}
+                />
+              )}
             >
               <TableColumn>{`${dateFormat(periode.fom)} - ${dateFormat(periode.tom)}`}</TableColumn>
               <TableColumn>
@@ -151,6 +211,22 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
           );
         })}
       </Table>
+      <VerticalSpacer twentyPx />
+      <Form formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
+        <FaktaBegrunnelseTextFieldNew
+          name="begrunnelse"
+          isSubmittable
+          isReadOnly={readOnly}
+          hasBegrunnelse
+        />
+        <VerticalSpacer twentyPx />
+        <FaktaSubmitButtonNew
+          isSubmittable={isSubmittable}
+          isReadOnly={readOnly}
+          isSubmitting={formMethods.formState.isSubmitting}
+          isDirty={isDirty || formMethods.formState.isDirty}
+        />
+      </Form>
     </>
   );
 };

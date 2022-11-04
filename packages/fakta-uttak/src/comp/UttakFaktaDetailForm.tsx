@@ -18,11 +18,15 @@ type FormValues = {
 
 interface OwnProps {
   valgtPeriode: UttakKontrollerFaktaPerioder;
+  avbrytEditering: () => void;
   readOnly: boolean;
+  oppdaterPerioder: (uttaksperioder: { perioder: UttakKontrollerFaktaPerioder[] }) => void;
 }
 
 const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
   valgtPeriode,
+  avbrytEditering,
+  oppdaterPerioder,
   readOnly,
 }) => {
   const formMethods = useForm<FormValues>({
@@ -32,7 +36,15 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
   });
 
   return (
-    <Form formMethods={formMethods} onSubmit={() => undefined}>
+    <Form
+      formMethods={formMethods}
+      onSubmit={(values) => oppdaterPerioder({
+        perioder: values.perioder.map((p) => ({
+          ...p,
+          bekreftet: true,
+        })),
+      })}
+    >
       <FlexContainer>
         <FlexRow>
           <FlexColumn>
@@ -104,7 +116,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
             <Button
               size="small"
               variant="tertiary"
-              onClick={() => undefined}
+              onClick={avbrytEditering}
               disabled={readOnly}
               type="button"
             >

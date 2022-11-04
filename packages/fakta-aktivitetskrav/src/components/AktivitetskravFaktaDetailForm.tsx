@@ -125,7 +125,7 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <Form formMethods={formMethods} onSubmit={(values: FormValues) => oppdaterAktivitetskrav(values)}>
+      <Form formMethods={formMethods} onSubmit={oppdaterAktivitetskrav}>
         {fields.map((field, index) => {
           const perioder = formMethods.watch('perioder');
           const visDatepicker = !erDatoSatt && sistOppdeltePeriodeIndex === index;

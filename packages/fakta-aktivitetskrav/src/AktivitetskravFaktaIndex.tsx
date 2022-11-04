@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { RawIntlProvider } from 'react-intl';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import { StandardFaktaPanelProps, Aktivitetskrav } from '@fpsak-frontend/types';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -29,7 +29,7 @@ const AktivitetskravFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelP
   setFormData,
 }) => {
   const sorterteAktivitetskrav = useMemo(() => [...uttakKontrollerAktivitetskrav]
-    .sort((krav1, krav2) => moment(krav1.fom).diff(moment(krav2.fom))), [uttakKontrollerAktivitetskrav]);
+    .sort((krav1, krav2) => dayjs(krav1.fom).diff(dayjs(krav2.fom))), [uttakKontrollerAktivitetskrav]);
   return (
     <RawIntlProvider value={intl}>
       <AktivitetskravFaktaForm
