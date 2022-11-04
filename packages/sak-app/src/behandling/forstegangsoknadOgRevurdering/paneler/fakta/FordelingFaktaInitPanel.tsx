@@ -103,7 +103,7 @@ const FordelingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
         packageCompFn={() => import('@navikt/ft-fakta-fordel-beregningsgrunnlag')}
         federatedCompFn={ProsessFordelingMF}
         {...data}
-        beregningsgrunnlagVilkår={lagBGVilkar(data.vilkar, data.beregningsgrunnlag)}
+        beregningsgrunnlagVilkår={lagBGVilkar(data.behandling.vilkår, data.beregningsgrunnlag)}
         beregningsgrunnlagListe={lagFormatertBG(data.beregningsgrunnlag)}
         submitCallback={lagModifisertCallback(data.submitCallback)}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
