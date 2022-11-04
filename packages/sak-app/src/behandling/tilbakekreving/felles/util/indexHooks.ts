@@ -1,10 +1,10 @@
 import {
   useEffect, useState, useCallback,
 } from 'react';
-import { Behandling } from '@navikt/ft-types';
 import { usePrevious } from '@navikt/ft-ui-komponenter';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { Behandling } from '@fpsak-frontend/types';
 
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import { requestTilbakekrevingApi, restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';

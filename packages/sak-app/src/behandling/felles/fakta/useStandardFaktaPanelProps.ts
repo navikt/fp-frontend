@@ -1,10 +1,10 @@
 import {
   useContext, useEffect, useMemo, useState,
 } from 'react';
-import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/ft-types';
+import { Behandling, Fagsak } from '@navikt/ft-types';
 import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 
-import { StandardFaktaPanelProps, Vilkar } from '@fpsak-frontend/types';
+import { StandardFaktaPanelProps } from '@fpsak-frontend/types';
 import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
@@ -47,13 +47,7 @@ const getBekreftAksjonspunktFaktaCallback = (
   }, true).then(() => oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE));
 };
 
-type InputData = {
-  aksjonspunkter?: Aksjonspunkt[];
-  vilkar?: Vilkar[];
-}
-
 const useStandardFaktaPanelProps = (
-  data?: InputData,
   aksjonspunktKoder?: string[],
   overstyringApCodes: string[] = [],
 ): StandardFaktaPanelProps => {
@@ -66,9 +60,11 @@ const useStandardFaktaPanelProps = (
     }
   }, [value.behandling.versjon]);
 
-  const aksjonspunkterForSteg = useMemo(() => (data?.aksjonspunkter && aksjonspunktKoder
-    ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon)) : []),
-  [data?.aksjonspunkter, aksjonspunktKoder]);
+  const { aksjonspunkt } = value.behandling;
+
+  const aksjonspunkterForSteg = useMemo(() => (aksjonspunkt && aksjonspunktKoder
+    ? aksjonspunkt.filter((ap) => aksjonspunktKoder.includes(ap.definisjon)) : []),
+  [aksjonspunkt, aksjonspunktKoder]);
 
   const readOnly = erReadOnly(value.behandling, aksjonspunkterForSteg, [], value.rettigheter, value.hasFetchError);
   const alleMerknaderFraBeslutter = useMemo(() => getAlleMerknaderFraBeslutter(value.behandling, aksjonspunkterForSteg),

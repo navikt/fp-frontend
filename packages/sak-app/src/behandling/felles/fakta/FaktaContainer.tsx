@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import { RequestApi } from '@fpsak-frontend/rest-api';
+import { Behandling } from '@fpsak-frontend/types';
 
 import FaktaMeny from './FaktaMeny';
 import FaktaPanelMenyData from '../typer/faktaPanelMenyData';
@@ -13,7 +14,7 @@ import styles from './faktaContainer.less';
 export const DEFAULT_FAKTA_KODE = 'default';
 
 interface OwnProps {
-  behandlingVersjon?: number;
+  behandling?: Behandling;
   hentPaneler?: ((props: FaktaPanelInitProps) => ReactElement);
   valgtProsessSteg?: string;
   valgtFaktaSteg?: string;
@@ -24,7 +25,7 @@ interface OwnProps {
 }
 
 const FaktaContainer: FunctionComponent<OwnProps> = ({
-  behandlingVersjon,
+  behandling,
   hentPaneler,
   valgtFaktaSteg,
   valgtProsessSteg,
@@ -89,7 +90,7 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
           </FlexColumn>
           <FlexColumn className={styles.content}>
             {hentPaneler({
-              behandlingVersjon,
+              behandling,
               valgtFaktaSteg,
               registrerFaktaPanel,
               requestApi,

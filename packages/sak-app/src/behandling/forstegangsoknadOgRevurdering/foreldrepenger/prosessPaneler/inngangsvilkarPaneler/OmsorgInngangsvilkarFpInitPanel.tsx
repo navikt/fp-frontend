@@ -7,10 +7,8 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import OmsorgVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-omsorg';
-import { Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
 
 import InngangsvilkarPanelInitProps from '../../../../felles/typer/inngangsvilkarPanelInitProps';
-import { BehandlingFellesApiKeys } from '../../../../felles/data/behandlingFellesApi';
 import InngangsvilkarDefaultInitPanel from '../../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 
 const AKSJONSPUNKT_KODER = [
@@ -22,12 +20,6 @@ const VILKAR_KODER = [
   vilkarType.OMSORGSVILKARET,
 ];
 
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, BehandlingFellesApiKeys.VILKAR];
-type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
-  vilkar: Vilkar[];
-}
-
 interface OwnProps {
   behandlingVersjon: number;
 }
@@ -38,10 +30,9 @@ const OmsorgInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangsvilk
 }) => {
   const intl = useIntl();
   return (
-    <InngangsvilkarDefaultInitPanel<EndepunktInitData>
+    <InngangsvilkarDefaultInitPanel
       {...props}
       behandlingVersjon={behandlingVersjon}
-      initEndepunkter={ENDEPUNKTER_INIT_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="OMSORG"

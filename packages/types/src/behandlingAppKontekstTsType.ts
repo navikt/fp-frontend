@@ -33,6 +33,7 @@ export type BehandlingFellesData = Readonly<{
   kanHenleggeBehandling?: boolean;
   harVerge?: boolean;
   førsteÅrsak?: BehandlingÅrsak;
+  fristBehandlingPaaVent?: string;
 }>
 
 export type BehandlingÅrsak = {

@@ -8,21 +8,13 @@ import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import OpptjeningFaktaIndex from '@fpsak-frontend/fakta-opptjening';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Opptjening, Vilkar,
-} from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, Opptjening } from '@fpsak-frontend/types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING];
-
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, BehandlingFellesApiKeys.VILKAR];
-type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
-  vilkar: Vilkar[];
-}
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.OPPTJENING, BehandlingFellesApiKeys.UTLAND_DOK_STATUS];
 type EndepunktPanelData = {
@@ -43,16 +35,15 @@ const OpptjeningsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanel
   arbeidsgiverOpplysningerPerId,
   ...props
 }) => (
-  <FaktaDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+  <FaktaDefaultInitPanel<Record<string, never>, EndepunktPanelData>
     {...props}
-    initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.OPPTJENINGSVILKARET}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'OpptjeningInfoPanel.KontrollerFaktaForOpptjening' })}
-    skalPanelVisesIMeny={(initData) => !!initData.vilkar
-      && initData.vilkar.some((v) => v.vilkarType === vilkarType.OPPTJENINGSVILKARET)
-      && initData.vilkar.some((v) => v.vilkarType === vilkarType.MEDLEMSKAPSVILKARET && v.vilkarStatus === vilkarUtfallType.OPPFYLT)}
+    skalPanelVisesIMeny={() => !!props.behandling.vilkår
+      && props.behandling.vilkår.some((v) => v.vilkarType === vilkarType.OPPTJENINGSVILKARET)
+      && props.behandling.vilkår.some((v) => v.vilkarType === vilkarType.MEDLEMSKAPSVILKARET && v.vilkarStatus === vilkarUtfallType.OPPFYLT)}
     renderPanel={(data) => <OpptjeningFaktaIndex arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} {...data} />}
   />
 );

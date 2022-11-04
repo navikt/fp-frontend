@@ -81,7 +81,6 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
   });
 
   const harIkkeHentetArbeidsgiverOpplysninger = opplysningsdataState === RestApiState.LOADING || opplysningsdataState === RestApiState.NOT_STARTED;
-
   if (!behandling || harIkkeHentetArbeidsgiverOpplysninger || !opplysningsdata) {
     return <LoadingPanel />;
   }

@@ -1,5 +1,6 @@
 import { RestApiConfigBuilder, createRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
+import { Behandling } from '@fpsak-frontend/types';
 import {
   BeregningsresultatTilbakekreving,
   DetaljerteFeilutbetalingsperioder,
@@ -9,7 +10,6 @@ import {
   Vedtaksbrev,
   VilkarsVurdertePerioderWrapper,
   AlleKodeverkTilbakekreving,
-  Behandling,
 } from '@navikt/ft-types';
 
 import { behandlingFellesEndepunkter } from '../../felles/data/behandlingFellesApi';

@@ -2,7 +2,6 @@ import React, {
   FunctionComponent,
 } from 'react';
 import { useIntl } from 'react-intl';
-import { Aksjonspunkt } from '@navikt/ft-types';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VergeFaktaIndex from '@fpsak-frontend/fakta-verge';
@@ -15,11 +14,6 @@ import { BehandlingFellesApiKeys } from '../../data/behandlingFellesApi';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.AVKLAR_VERGE];
 
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER];
-type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
-}
-
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.VERGE];
 type EndepunktPanelData = {
   verge: Verge;
@@ -28,15 +22,22 @@ type EndepunktPanelData = {
 /**
  * VergeFaktaInitPanel
  */
-const VergeFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => (
-  <FaktaDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
-    {...props}
-    initEndepunkter={ENDEPUNKTER_INIT_DATA}
+const VergeFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({
+  behandling,
+  valgtFaktaSteg,
+  registrerFaktaPanel,
+  requestApi,
+}) => (
+  <FaktaDefaultInitPanel<Record<string, never>, EndepunktPanelData>
+    behandling={behandling}
+    valgtFaktaSteg={valgtFaktaSteg}
+    registrerFaktaPanel={registrerFaktaPanel}
+    requestApi={requestApi}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.VERGE}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'RegistrereVergeInfoPanel.Info' })}
-    skalPanelVisesIMeny={(initData) => !!initData?.aksjonspunkter?.some((ap) => ap.definisjon === AKSJONSPUNKT_KODER[0])}
+    skalPanelVisesIMeny={() => !!behandling.aksjonspunkt.some((ap) => ap.definisjon === AKSJONSPUNKT_KODER[0])}
     renderPanel={(data) => <VergeFaktaIndex {...data} />}
   />
 );

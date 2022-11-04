@@ -4,13 +4,10 @@ import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
 import { Modal } from '@navikt/ds-react';
 import { BehandlingType, BehandlingStatus } from '@navikt/ft-kodeverk';
-import { Aksjonspunkt, AlleKodeverk, Behandling } from '@navikt/ft-types';
+import { Aksjonspunkt, AlleKodeverk } from '@navikt/ft-types';
 
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-
-import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
-import { requestTilbakekrevingApi } from '../../data/tilbakekrevingBehandlingApi';
+import { Behandling } from '@fpsak-frontend/types';
 
 import BehandlingPaVent from './BehandlingPaVent';
 
@@ -31,39 +28,32 @@ describe('<BehandlingPaVent>', () => {
   const kodeverk = alleKodeverk as AlleKodeverk;
 
   it('skal ikke vise modal når behandling ikke er på vent', async () => {
-    const data = [
-      { key: BehandlingFellesApiKeys.AKSJONSPUNKTER.name, data: aksjonspunkter },
-    ];
     render(
-      <RestApiMock data={data} requestApi={requestTilbakekrevingApi}>
-        <BehandlingPaVent
-          behandling={behandling as Behandling}
-          kodeverk={kodeverk}
-          hentBehandling={jest.fn()}
-        />
-      </RestApiMock>,
+      <BehandlingPaVent
+        behandling={{
+          ...behandling,
+          aksjonspunkt: aksjonspunkter,
+        } as Behandling}
+        kodeverk={kodeverk}
+        hentBehandling={jest.fn()}
+      />,
     );
 
     await waitFor(() => expect(screen.queryByText('Behandlingen settes på vent')).not.toBeInTheDocument());
   });
 
   it('skal vise modal når behandling er på vent', async () => {
-    const data = [
-      { key: BehandlingFellesApiKeys.AKSJONSPUNKTER.name, data: aksjonspunkter },
-    ];
-
     await act(async () => {
       render(
-        <RestApiMock data={data} requestApi={requestTilbakekrevingApi}>
-          <BehandlingPaVent
-            behandling={{
-              ...behandling,
-              behandlingPaaVent: true,
-            } as Behandling}
-            kodeverk={kodeverk}
-            hentBehandling={jest.fn()}
-          />
-        </RestApiMock>,
+        <BehandlingPaVent
+          behandling={{
+            ...behandling,
+            behandlingPaaVent: true,
+            aksjonspunkt: aksjonspunkter,
+          } as Behandling}
+          kodeverk={kodeverk}
+          hentBehandling={jest.fn()}
+        />,
       );
     });
 
@@ -71,20 +61,16 @@ describe('<BehandlingPaVent>', () => {
   });
 
   it('skal vise modal og så skjule den ved trykk på knapp', async () => {
-    const data = [
-      { key: BehandlingFellesApiKeys.AKSJONSPUNKTER.name, data: aksjonspunkter },
-    ];
     render(
-      <RestApiMock data={data} requestApi={requestTilbakekrevingApi}>
-        <BehandlingPaVent
-          behandling={{
-            ...behandling,
-            behandlingPaaVent: true,
-          } as Behandling}
-          kodeverk={kodeverk}
-          hentBehandling={jest.fn()}
-        />
-      </RestApiMock>,
+      <BehandlingPaVent
+        behandling={{
+          ...behandling,
+          aksjonspunkt: aksjonspunkter,
+          behandlingPaaVent: true,
+        } as Behandling}
+        kodeverk={kodeverk}
+        hentBehandling={jest.fn()}
+      />,
     );
 
     expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();

@@ -7,12 +7,9 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import SvangerskapVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-svangerskap';
-import {
-  Aksjonspunkt, FodselOgTilrettelegging, Vilkar,
-} from '@fpsak-frontend/types';
+import { FodselOgTilrettelegging } from '@fpsak-frontend/types';
 
 import InngangsvilkarPanelInitProps from '../../../../felles/typer/inngangsvilkarPanelInitProps';
-import { BehandlingFellesApiKeys } from '../../../../felles/data/behandlingFellesApi';
 import InngangsvilkarDefaultInitPanel from '../../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 
 import { SvpBehandlingApiKeys } from '../../data/svpBehandlingApi';
@@ -20,12 +17,6 @@ import { SvpBehandlingApiKeys } from '../../data/svpBehandlingApi';
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.SVANGERSKAPSVILKARET];
 
 const VILKAR_KODER = [vilkarType.SVANGERSKAPVILKARET];
-
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, BehandlingFellesApiKeys.VILKAR];
-type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
-  vilkar: Vilkar[];
-}
 
 const ENDEPUNKTER_PANEL_DATA = [SvpBehandlingApiKeys.SVANGERSKAPSPENGER_TILRETTELEGGING];
 
@@ -43,10 +34,9 @@ const SvangerskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsv
 }) => {
   const intl = useIntl();
   return (
-    <InngangsvilkarDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+    <InngangsvilkarDefaultInitPanel<Record<string, never>, EndepunktPanelData>
       {...props}
       behandlingVersjon={behandlingVersjon}
-      initEndepunkter={ENDEPUNKTER_INIT_DATA}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       vilkarKoder={VILKAR_KODER}
@@ -54,7 +44,9 @@ const SvangerskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsv
       hentInngangsvilkarPanelTekst={() => intl.formatMessage({ id: 'SvangerskapVilkarForm.FyllerVilkår' })}
       renderPanel={(data) => (
         <>
-          <SvangerskapVilkarProsessIndex {...data} />
+          <SvangerskapVilkarProsessIndex
+            {...data}
+          />
           <VerticalSpacer thirtyTwoPx />
         </>
       )}

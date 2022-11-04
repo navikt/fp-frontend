@@ -2,7 +2,7 @@ import React, {
   FunctionComponent, useCallback, useMemo,
 } from 'react';
 import { useIntl } from 'react-intl';
-import { Aksjonspunkt, ArbeidsgiverOpplysningerPerId } from '@navikt/ft-types';
+import { ArbeidsgiverOpplysningerPerId } from '@navikt/ft-types';
 
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -16,9 +16,8 @@ import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING];
 
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, BehandlingFellesApiKeys.ARBEID_OG_INNTEKT];
+const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.ARBEID_OG_INNTEKT];
 type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
   arbeidOgInntekt: ArbeidOgInntektsmelding;
 }
 
@@ -54,9 +53,9 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
   const åpneForNyVurderingOgOppfriskBehandling = useCallback(() => {
     åpneForNyVurdering({
       behandlingUuid,
-      behandlingVersjon: props.behandlingVersjon,
+      behandlingVersjon: props.behandling.versjon,
     }).then(() => hentBehandling(false));
-  }, [props.behandlingVersjon]);
+  }, [props.behandling.versjon]);
 
   return (
     <FaktaDefaultInitPanel<EndepunktInitData>
@@ -65,8 +64,8 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       faktaPanelKode={FaktaPanelCode.ARBEID_OG_INNTEKT}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'ArbeidOgInntektInfoPanel.Title' })}
-      skalPanelVisesIMeny={({ aksjonspunkter, arbeidOgInntekt }) => !!arbeidOgInntekt
-        && !aksjonspunkter.some((ap) => aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD === ap.definisjon)}
+      skalPanelVisesIMeny={({ arbeidOgInntekt }) => !!arbeidOgInntekt
+        && !props.behandling.aksjonspunkt.some((ap) => aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD === ap.definisjon)}
       renderPanel={(data) => (
         <ArbeidOgInntektFaktaIndex
           saksnummer={saksnummer}

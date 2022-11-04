@@ -7,23 +7,17 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import BeregningsresultatProsessIndex from '@fpsak-frontend/prosess-beregningsresultat';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import {
-  AksessRettigheter,
-  Aksjonspunkt, BeregningsresultatEs, Vilkar,
-} from '@fpsak-frontend/types';
+import { AksessRettigheter, BeregningsresultatEs } from '@fpsak-frontend/types';
 
 import { EsBehandlingApiKeys, requestEsApi } from '../data/esBehandlingApi';
 
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
-import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.OVERSTYR_BEREGNING];
 
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, BehandlingFellesApiKeys.VILKAR, EsBehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD];
+const ENDEPUNKTER_INIT_DATA = [EsBehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD];
 type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
-  vilkar: Vilkar[];
   beregningresultatEngangsstonad: BeregningsresultatEs;
 }
 

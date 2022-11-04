@@ -6,7 +6,7 @@ import { useIntl } from 'react-intl';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import MedlemskapFaktaIndex from '@fpsak-frontend/fakta-medlemskap';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import { Aksjonspunkt, Medlemskap, Soknad } from '@fpsak-frontend/types';
+import { Medlemskap, Soknad } from '@fpsak-frontend/types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
@@ -20,15 +20,13 @@ const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP,
 ];
 
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, BehandlingFellesApiKeys.SOKNAD];
-type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
-  soknad: Soknad;
-}
-
-const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.MEDLEMSKAP];
+const ENDEPUNKTER_PANEL_DATA = [
+  BehandlingFellesApiKeys.MEDLEMSKAP,
+  BehandlingFellesApiKeys.SOKNAD,
+];
 type EndepunktPanelData = {
   medlemskap: Medlemskap;
+  soknad: Soknad;
 }
 
 /**
@@ -37,14 +35,13 @@ type EndepunktPanelData = {
 const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({
   ...props
 }) => (
-  <FaktaDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+  <FaktaDefaultInitPanel<Record<string, never>, EndepunktPanelData>
     {...props}
-    initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.MEDLEMSKAPSVILKARET}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'MedlemskapInfoPanel.Medlemskap' })}
-    skalPanelVisesIMeny={(initData) => !!initData?.soknad}
+    skalPanelVisesIMeny={() => props.behandling.harSøknad}
     renderPanel={(data) => (
       <MedlemskapFaktaIndex {...data} />
     )}

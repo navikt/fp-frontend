@@ -2,9 +2,9 @@ import React, {
   FunctionComponent,
 } from 'react';
 import { useIntl } from 'react-intl';
-import { Fagsak } from '@navikt/ft-types';
 
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
+import { Fagsak } from '@fpsak-frontend/types';
 
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import VurderingFellesProsessStegInitPanel from './VurderingFellesProsessStegInitPanel';

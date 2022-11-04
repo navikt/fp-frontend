@@ -6,7 +6,7 @@ import { useIntl } from 'react-intl';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import {
-  AksessRettigheter, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar,
+  AksessRettigheter, ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar,
 } from '@fpsak-frontend/types';
 
 import {
@@ -85,12 +85,9 @@ const AKSJONSPUNKT_KODER = [
 
 const OVERSTYRING_AP_CODES = [aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSAKTIVITETER, aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG];
 
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG, BehandlingFellesApiKeys.VILKAR];
-
+const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG];
 type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
   beregningsgrunnlag: Beregningsgrunnlag;
-  vilkar: FpVilkar[];
 }
 
 interface OwnProps {
@@ -120,7 +117,7 @@ const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
         federatedCompFn={ProsessFaktaBeregningMF}
         // @ts-ignore
         {...data}
-        vilkar={lagBGVilkar(data.vilkar, data.beregningsgrunnlag)}
+        vilkar={lagBGVilkar(props.behandling.vilkår, data.beregningsgrunnlag)}
         beregningsgrunnlag={lagFormatertBG(data.beregningsgrunnlag)}
         submitCallback={lagModifisertCallback(data.submitCallback)}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

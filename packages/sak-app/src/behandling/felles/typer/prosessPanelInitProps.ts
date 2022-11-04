@@ -1,5 +1,5 @@
-import { Behandling } from '@navikt/ft-types';
 import { RequestApi } from '@fpsak-frontend/rest-api';
+import { Behandling } from '@fpsak-frontend/types';
 
 import ProsessPanelMenyData from './prosessPanelMenyData';
 

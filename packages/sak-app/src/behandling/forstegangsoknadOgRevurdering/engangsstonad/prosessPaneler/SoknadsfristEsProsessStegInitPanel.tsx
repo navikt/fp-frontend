@@ -8,7 +8,7 @@ import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import {
-  AksessRettigheter, Aksjonspunkt, FamilieHendelseSamling, Soknad, Vilkar,
+  AksessRettigheter, FamilieHendelseSamling, Soknad,
 } from '@fpsak-frontend/types';
 
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
@@ -23,12 +23,6 @@ const AKSJONSPUNKT_KODER = [
 ];
 
 const VILKAR_KODER = [vilkarType.SOKNADFRISTVILKARET];
-
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, BehandlingFellesApiKeys.VILKAR];
-type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
-  vilkar: Vilkar[];
-}
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.SOKNAD, BehandlingFellesApiKeys.FAMILIEHENDELSE];
 type EndepunktPanelData = {
@@ -49,9 +43,8 @@ const SoknadsfristEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
   const toggleOverstyring = useCallback(() => setOverstyrt(!erOverstyrt), [erOverstyrt]);
 
   return (
-    <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+    <ProsessDefaultInitPanel<Record<string, never>, EndepunktPanelData>
       {...props}
-      initEndepunkter={ENDEPUNKTER_INIT_DATA}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       vilkarKoder={VILKAR_KODER}
