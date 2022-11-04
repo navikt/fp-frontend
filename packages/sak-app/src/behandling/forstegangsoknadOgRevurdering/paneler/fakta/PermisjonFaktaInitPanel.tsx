@@ -5,7 +5,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import PermisjonFaktaIndex from '@fpsak-frontend/fakta-permisjon';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, ArbeidOgInntektsmelding,
+  ArbeidsgiverOpplysningerPerId, ArbeidOgInntektsmelding,
 } from '@fpsak-frontend/types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
@@ -13,11 +13,6 @@ import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesAp
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_ARBEIDSFORHOLD_PERMISJON];
-
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER];
-type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
-}
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.ARBEID_OG_INNTEKT];
 type EndepunktPanelData = {
@@ -34,14 +29,13 @@ const PermisjonFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
   arbeidsgiverOpplysningerPerId,
   ...props
 }) => (
-  <FaktaDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+  <FaktaDefaultInitPanel<Record<string, never>, EndepunktPanelData>
     {...props}
-    initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.PERMISJON}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'PermisjonFaktaInitPanel.Title' })}
-    skalPanelVisesIMeny={(initData) => !!initData?.aksjonspunkter?.some((ap) => ap.definisjon === AKSJONSPUNKT_KODER[0])}
+    skalPanelVisesIMeny={() => !!props.behandling.aksjonspunkt.some((ap) => ap.definisjon === AKSJONSPUNKT_KODER[0])}
     renderPanel={(data) => (
       <PermisjonFaktaIndex
         saksnummer={saksnummer}

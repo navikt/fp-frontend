@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
-import { Behandling } from '@navikt/ft-types';
 import { createIntl } from '@navikt/ft-utils';
 
+import { Behandling } from '@fpsak-frontend/types';
 import { RequestApi } from '@fpsak-frontend/rest-api';
 
 import BehandlingContainer from './BehandlingContainer';

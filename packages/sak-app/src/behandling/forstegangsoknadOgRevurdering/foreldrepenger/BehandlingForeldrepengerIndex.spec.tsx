@@ -30,6 +30,7 @@ describe('<BehandlingForeldrepengerIndex>', () => {
           versjon: 1,
           status: behandlingStatus.OPPRETTET,
           type: behandlingType.FORSTEGANGSSOKNAD,
+          aksjonspunkt: [],
           links: [{
             href: BehandlingFellesApiKeys.ARBEIDSGIVERE_OVERSIKT.name,
             rel: 'arbeidsgivere-oversikt',

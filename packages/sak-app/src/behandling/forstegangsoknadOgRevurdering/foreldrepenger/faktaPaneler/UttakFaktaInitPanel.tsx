@@ -7,9 +7,8 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import UttakFaktaIndex from '@fpsak-frontend/fakta-uttak';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import {
-  AksessRettigheter, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelseSamling,
-  Personoversikt,
-  UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
+  AksessRettigheter, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelseSamling,
+  Personoversikt, UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
@@ -28,24 +27,17 @@ const AKSJONSPUNKT_KODER = [
 
 const OVERSTYRING_AP_CODES = [aksjonspunktCodes.MANUELL_AVKLAR_FAKTA_UTTAK, aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK];
 
-const ENDEPUNKTER_INIT_DATA = [
-  BehandlingFellesApiKeys.AKSJONSPUNKTER,
-  BehandlingFellesApiKeys.YTELSEFORDELING,
-];
-type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
-  ytelsefordeling: Ytelsefordeling;
-}
-
 const ENDEPUNKTER_PANEL_DATA = [
   FpBehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER,
   FpBehandlingApiKeys.FAKTA_ARBEIDSFORHOLD,
   BehandlingFellesApiKeys.FAMILIEHENDELSE,
+  BehandlingFellesApiKeys.YTELSEFORDELING,
 ];
 type EndepunktPanelData = {
   uttakKontrollerFaktaPerioder: UttakKontrollerFaktaPerioderWrapper;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
   familiehendelse: FamilieHendelseSamling;
+  ytelsefordeling: Ytelsefordeling;
 }
 
 interface OwnProps {
@@ -63,15 +55,14 @@ const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = (
   personoversikt,
   ...props
 }) => (
-  <FaktaDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+  <FaktaDefaultInitPanel<Record<string, never>, EndepunktPanelData>
     {...props}
-    initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={FaktaPanelCode.UTTAK}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'UttakInfoPanel.FaktaUttak' })}
-    skalPanelVisesIMeny={(initData) => !!initData.ytelsefordeling && initData.ytelsefordeling.endringsdato !== undefined}
+    skalPanelVisesIMeny={() => props.behandling.harSattEndringsdato}
     renderPanel={(data) => (
       <UttakFaktaIndex
         kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}

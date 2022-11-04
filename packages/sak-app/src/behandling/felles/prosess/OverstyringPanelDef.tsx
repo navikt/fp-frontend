@@ -51,10 +51,7 @@ const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
   const overstyrteAksjonspunkter = useMemo(() => aksjonspunkter.filter((ap) => aksjonspunktKode === ap.definisjon),
     [aksjonspunkter]);
 
-  const standardProps = useStandardProsessPanelProps({
-    aksjonspunkter: overstyrteAksjonspunkter,
-    vilkar,
-  }, [aksjonspunktKode], vilkarKoder);
+  const standardProps = useStandardProsessPanelProps([aksjonspunktKode], vilkarKoder);
 
   const skalVises = skalViseProsessPanel(overstyrteAksjonspunkter, vilkarKoder, vilkar);
 

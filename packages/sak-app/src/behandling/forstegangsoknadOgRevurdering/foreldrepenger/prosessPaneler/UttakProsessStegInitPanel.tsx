@@ -10,8 +10,8 @@ import UttakProsessIndex from '@fpsak-frontend/prosess-uttak';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
-  AksessRettigheter, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FamilieHendelseSamling,
-  Personoversikt, Soknad, UttaksresultatPeriode, UttakStonadskontoer, Vilkar, Ytelsefordeling,
+  AksessRettigheter, ArbeidsgiverOpplysningerPerId, FamilieHendelseSamling,
+  Personoversikt, Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
@@ -48,13 +48,9 @@ const AKSJONSPUNKT_KODER = [
 ];
 
 const ENDEPUNKTER_INIT_DATA = [
-  BehandlingFellesApiKeys.AKSJONSPUNKTER,
-  BehandlingFellesApiKeys.VILKAR,
   FpBehandlingApiKeys.UTTAKSRESULTAT_PERIODER,
 ];
 type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
-  vilkar: Vilkar[];
   uttaksresultatPerioder: UttaksresultatPeriode;
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import { Behandling, Aksjonspunkt } from '@navikt/ft-types';
+import { Aksjonspunkt } from '@navikt/ft-types';
 import {
   VilkarUtfallType, BehandlingStatus, VilkarType, AksjonspunktStatus,
 } from '@navikt/ft-kodeverk';
@@ -9,7 +9,7 @@ import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import { Vilkar } from '@fpsak-frontend/types';
+import { Behandling, Vilkar } from '@fpsak-frontend/types';
 
 import * as Felles from './useStandardProsessPanelProps';
 import InngangsvilkarDefaultInitPanel from './InngangsvilkarDefaultInitPanel';
@@ -52,16 +52,16 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
       ...defaultProps,
       aksjonspunkter: [] as Aksjonspunkt[],
     }));
-    const AKSJONSPUNKTER_KEY = new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER_KEY');
+    const BEHANDLING_KEY = new RestKey<Behandling, void>('BEHANDLING_KEY');
 
     const endpoints = new RestApiConfigBuilder()
-      .withRel('aksjonspunkter', AKSJONSPUNKTER_KEY)
+      .withRel('behandling', BEHANDLING_KEY)
       .build();
 
     const requestMock = createRequestApi(endpoints);
 
     const data = [
-      { key: AKSJONSPUNKTER_KEY.name, data: [] },
+      { key: BEHANDLING_KEY.name, data: {} },
     ];
 
     render(
@@ -71,7 +71,7 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
           behandlingVersjon={1}
           registrerInngangsvilkarPanel={() => {}}
           requestApi={requestMock}
-          initEndepunkter={[AKSJONSPUNKTER_KEY]}
+          initEndepunkter={[BEHANDLING_KEY]}
           renderPanel={() => <div>Dette er komponenten</div>}
           inngangsvilkarPanelKode="test"
           hentInngangsvilkarPanelTekst={() => 'test'}
@@ -95,19 +95,22 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
       erAktivt: true,
     }] as Aksjonspunkt[];
 
-    const AKSJONSPUNKTER_KEY = new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER');
-    const VILKAR_KEY = new RestKey<Vilkar[], void>('VILKAR');
+    const BEHANDLING_KEY = new RestKey<Behandling, void>('BEHANDLING_KEY');
 
     const endpoints = new RestApiConfigBuilder()
-      .withRel('aksjonspunkter', AKSJONSPUNKTER_KEY)
-      .withRel('vilkar', VILKAR_KEY)
+      .withRel('behandling', BEHANDLING_KEY)
       .build();
 
     const requestMock = createRequestApi(endpoints);
 
     const data = [
-      { key: AKSJONSPUNKTER_KEY.name, data: aksjonspunkter },
-      { key: VILKAR_KEY.name, data: vilkar },
+      {
+        key: BEHANDLING_KEY.name,
+        data: {
+          aksjonspunkter,
+          vilkar,
+        },
+      },
     ];
 
     render(
@@ -117,7 +120,7 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
           behandlingVersjon={1}
           registrerInngangsvilkarPanel={() => {}}
           requestApi={requestMock}
-          initEndepunkter={[AKSJONSPUNKTER_KEY, VILKAR_KEY]}
+          initEndepunkter={[BEHANDLING_KEY]}
           aksjonspunktKoder={[aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR]}
           renderPanel={() => <div>Dette er komponenten</div>}
           inngangsvilkarPanelKode="test"

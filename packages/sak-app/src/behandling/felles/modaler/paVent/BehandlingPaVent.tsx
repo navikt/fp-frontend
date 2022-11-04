@@ -2,17 +2,14 @@ import React, {
   useState, useMemo, useCallback, FunctionComponent, useEffect,
 } from 'react';
 import { KodeverkType, isAksjonspunktOpen } from '@navikt/ft-kodeverk';
-import {
-  Behandling, Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving,
-} from '@navikt/ft-types';
+import { AlleKodeverk, AlleKodeverkTilbakekreving } from '@navikt/ft-types';
 
 import { RequestApi } from '@fpsak-frontend/rest-api';
+import { Behandling } from '@fpsak-frontend/types';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { BehandlingFellesApiKeys } from '../../data/behandlingFellesApi';
-
-const EMPTY_ARRAY = [] as Aksjonspunkt[];
 
 export type SettPaVentParams = {
   ventearsak: string;
@@ -43,11 +40,6 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
   const [skalViseModal, setVisModal] = useState(!skalIkkeViseModal && behandling.behandlingPaaVent);
   const skjulModal = useCallback(() => setVisModal(false), []);
 
-  const { data: aksjonspunkter = EMPTY_ARRAY } = restApiHooks.useRestApi(BehandlingFellesApiKeys.AKSJONSPUNKTER, undefined, {
-    updateTriggers: [skalViseModal],
-    suspendRequest: !skalViseModal,
-  });
-
   const { startRequest: settPaVent } = restApiHooks.useRestApiRunner(BehandlingFellesApiKeys.UPDATE_ON_HOLD);
 
   useEffect(() => {
@@ -60,8 +52,8 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
     ...formData, behandlingUuid: behandling.uuid, behandlingVersjon: behandling.versjon,
   }).then(() => hentBehandling(false)), [behandling.versjon]);
 
-  const erManueltSattPaVent = useMemo(() => aksjonspunkter.filter((ap) => isAksjonspunktOpen(ap.status))
-    .some((ap) => ap.definisjon === aksjonspunktCodes.AUTO_MANUELT_SATT_PÅ_VENT), [aksjonspunkter]);
+  const erManueltSattPaVent = useMemo(() => behandling.aksjonspunkt.filter((ap) => isAksjonspunktOpen(ap.status))
+    .some((ap) => ap.definisjon === aksjonspunktCodes.AUTO_MANUELT_SATT_PÅ_VENT), [behandling.aksjonspunkt]);
 
   return (
     <SettPaVentModalIndex

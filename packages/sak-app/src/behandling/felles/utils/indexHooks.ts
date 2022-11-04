@@ -1,9 +1,9 @@
 import {
   useEffect, useState, useCallback, useMemo,
 } from 'react';
-import { Behandling } from '@navikt/ft-types';
 import { usePrevious } from '@navikt/ft-ui-komponenter';
 
+import { Behandling } from '@fpsak-frontend/types';
 import { RestApiHooks, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import { RequestApi } from '@fpsak-frontend/rest-api';
 

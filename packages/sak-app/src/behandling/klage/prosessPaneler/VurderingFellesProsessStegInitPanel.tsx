@@ -1,11 +1,12 @@
 import React, {
   FunctionComponent, useCallback, useState,
 } from 'react';
-import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/ft-types';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import KlagevurderingProsessIndex, { AksjonspunktVerdier, KlageVurderingBrevData } from '@fpsak-frontend/prosess-klagevurdering';
-import { ForhåndsvisMeldingParams, KlageVurdering } from '@fpsak-frontend/types';
+import {
+  Behandling, Fagsak, ForhåndsvisMeldingParams, KlageVurdering,
+} from '@fpsak-frontend/types';
 import klageVurderingKodeverk from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
@@ -68,9 +69,8 @@ const getLagringSideeffekter = (
   };
 };
 
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, KlageBehandlingApiKeys.KLAGE_VURDERING];
+const ENDEPUNKTER_INIT_DATA = [KlageBehandlingApiKeys.KLAGE_VURDERING];
 type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
   klageVurdering: KlageVurdering;
 }
 

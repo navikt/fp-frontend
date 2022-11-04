@@ -13,7 +13,7 @@ import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG];
+const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG];
 type EndepunktInitData = {
   beregningsgrunnlag: Beregningsgrunnlag;
 }

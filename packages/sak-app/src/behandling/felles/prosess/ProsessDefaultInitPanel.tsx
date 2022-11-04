@@ -16,7 +16,7 @@ const DEFAULT_INIT_DATA = {};
 
 export type OwnProps<INIT_DATA, PANEL_DATA> = {
   requestApi: RequestApi;
-  initEndepunkter: RestKey<any, any>[] | { key: RestKey<INIT_DATA, any>, params?: any }[];
+  initEndepunkter?: RestKey<any, any>[] | { key: RestKey<INIT_DATA, any>, params?: any }[];
   panelEndepunkter?: RestKey<any, any>[] | { key: RestKey<any, any>, params?: any }[];
   aksjonspunktKoder?: string[];
   vilkarKoder?: string[];
@@ -35,7 +35,7 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   behandling,
   registrerProsessPanel,
   requestApi,
-  initEndepunkter,
+  initEndepunkter = [],
   panelEndepunkter = [],
   aksjonspunktKoder,
   vilkarKoder,
@@ -53,10 +53,11 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   const formaterteEndepunkter = initEndepunkter.map((e: any) => (e instanceof RestKey ? ({ key: e }) : e));
   const { data: initData = DEFAULT_INIT_DATA as INIT_DATA, state: initState } = restApiHooks.useMultipleRestApi<INIT_DATA, any>(formaterteEndepunkter, {
     updateTriggers: [behandling.versjon],
+    suspendRequest: formaterteEndepunkter.length === 0,
     isCachingOn: true,
   });
 
-  const standardPanelProps = useStandardProsessPanelProps(initData, aksjonspunktKoder, vilkarKoder, lagringSideEffekter);
+  const standardPanelProps = useStandardProsessPanelProps(aksjonspunktKoder, vilkarKoder, lagringSideEffekter);
 
   const status = hentOverstyrtStatus ? hentOverstyrtStatus(initData, standardPanelProps) : standardPanelProps.status;
 
@@ -68,9 +69,11 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   const skalMarkeresSomAktiv = hentSkalMarkeresSomAktiv && hentSkalMarkeresSomAktiv(initData, standardPanelProps);
   const harApentAksjonspunkt = erOverstyrt || standardPanelProps.isAksjonspunktOpen;
 
+  const erInitDataHentet = formaterteEndepunkter.length === 0 ? RestApiState.SUCCESS : initState;
+
   const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
-    initState,
+    erInitDataHentet,
     prosessPanelKode,
     prosessPanelMenyTekst,
     valgtProsessSteg,
@@ -92,7 +95,7 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
       erPanelValgt={erPanelValgt}
       erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
       status={status}
-      dataState={formatertePanelEndepunkter.length > 0 ? panelDataState : initState}
+      dataState={formatertePanelEndepunkter.length > 0 ? panelDataState : erInitDataHentet}
     >
       {renderPanel({
         ...initData,

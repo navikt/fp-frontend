@@ -73,11 +73,6 @@ const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL,
 ];
 
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER];
-type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
-}
-
 const ENDEPUNKTER_PANEL_DATA = [KlageBehandlingApiKeys.KLAGE_VURDERING];
 type EndepunktPanelData = {
   klageVurdering: KlageVurdering;
@@ -107,19 +102,20 @@ const KlageresultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPan
   const previewCallback = useCallback(lagForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
     [standardPanelProps.behandling.versjon]);
 
+  const { aksjonspunkt: aksjonspunkter } = props.behandling;
+
   return (
-    <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+    <ProsessDefaultInitPanel<Record<string, never>, EndepunktPanelData>
       {...props}
       requestApi={requestKlageApi}
-      initEndepunkter={ENDEPUNKTER_INIT_DATA}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.KLAGE_RESULTAT}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.ResultatKlage' })}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={(initData, standardData) => getVedtakStatus(standardData.behandling.behandlingsresultat, initData.aksjonspunkter)}
+      hentOverstyrtStatus={(initData, standardData) => getVedtakStatus(standardData.behandling.behandlingsresultat, aksjonspunkter)}
       lagringSideEffekter={lagringSideEffekter}
-      hentSkalMarkeresSomAktiv={(initData, standardData) => getVedtakStatus(standardData.behandling.behandlingsresultat, initData.aksjonspunkter)
+      hentSkalMarkeresSomAktiv={(initData, standardData) => getVedtakStatus(standardData.behandling.behandlingsresultat, aksjonspunkter)
         !== VilkarUtfallType.IKKE_VURDERT}
       renderPanel={(data) => (
         <>

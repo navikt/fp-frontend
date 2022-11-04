@@ -14,13 +14,13 @@ import {
   FagsakYtelseType,
 } from '@navikt/ft-kodeverk';
 import {
-  Aksjonspunkt, AlleKodeverkTilbakekreving, Behandling, FeilutbetalingPerioderWrapper,
+  Aksjonspunkt, AlleKodeverkTilbakekreving, FeilutbetalingPerioderWrapper,
 } from '@navikt/ft-types';
 import { FeilutbetalingAksjonspunktCode } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import { ForeldelseAksjonspunktCodes } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock'; // eslint-disable-line import/no-extraneous-dependencies
 import VergeType from '@fpsak-frontend/fakta-verge/src/kodeverk/vergeType';
-import { Fagsak, Verge } from '@fpsak-frontend/types';
+import { Fagsak, Verge, Behandling } from '@fpsak-frontend/types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils'; // eslint-disable-line import/no-extraneous-dependencies
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
@@ -44,10 +44,6 @@ const defaultBehandling = {
     href: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name,
     rel: 'update',
     type: 'POST',
-  }, {
-    href: BehandlingFellesApiKeys.AKSJONSPUNKTER.name,
-    rel: 'aksjonspunkter',
-    type: 'GET',
   }, {
     href: BehandlingFellesApiKeys.VERGE.name,
     rel: 'soeker-verge',
@@ -212,10 +208,8 @@ export default {
 };
 
 const Template: Story<{
-  aksjonspunkter: Aksjonspunkt[];
   behandling: Behandling;
 }> = ({
-  aksjonspunkter,
   behandling,
 }) => {
   const [valgtProsessSteg, setProsessSteg] = useState('default');
@@ -230,7 +224,6 @@ const Template: Story<{
     { key: TilbakekrevingBehandlingApiKeys.BEHANDLING_TILBAKE.name, data: behandling },
     { key: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name, data: undefined },
     { key: TilbakekrevingBehandlingApiKeys.TILBAKE_KODEVERK.name, global: true, data: tilbakeKodeverk },
-    { key: BehandlingFellesApiKeys.AKSJONSPUNKTER.name, data: aksjonspunkter },
     { key: TilbakekrevingBehandlingApiKeys.FEILUTBETALING_FAKTA.name, data: feilutbetalingFakta },
     { key: TilbakekrevingBehandlingApiKeys.FEILUTBETALING_AARSAK.name, data: feilutbetalingAarsak },
     { key: BehandlingFellesApiKeys.VERGE.name, data: verge },
@@ -276,14 +269,18 @@ const Template: Story<{
 
 export const FaktaPaneler = Template.bind({});
 FaktaPaneler.args = {
-  behandling: defaultBehandling,
-  aksjonspunkter: faktaAksjonspunkter,
+  behandling: {
+    ...defaultBehandling,
+    aksjonspunkt: faktaAksjonspunkter,
+  },
 };
 
 export const ProsessPaneler = Template.bind({});
 ProsessPaneler.args = {
-  behandling: defaultBehandling,
-  aksjonspunkter: prosessAksjonspunkter,
+  behandling: {
+    ...defaultBehandling,
+    aksjonspunkt: prosessAksjonspunkter,
+  },
 };
 
 export const HenlagtBehandling = Template.bind({});
@@ -292,9 +289,9 @@ HenlagtBehandling.args = {
     ...defaultBehandling,
     behandlingHenlagt: true,
     status: BehandlingStatus.AVSLUTTET,
+    aksjonspunkt: [{
+      ...prosessAksjonspunkter[0],
+      status: AksjonspunktStatus.UTFORT,
+    }],
   },
-  aksjonspunkter: [{
-    ...prosessAksjonspunkter[0],
-    status: AksjonspunktStatus.UTFORT,
-  }],
 };

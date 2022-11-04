@@ -8,9 +8,7 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import SokersOpplysningspliktVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-sokers-opplysningsplikt';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Soknad, Vilkar,
-} from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, Soknad } from '@fpsak-frontend/types';
 
 import skalViseProsessPanel from '../../../felles/prosess/skalViseProsessPanel';
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
@@ -23,12 +21,6 @@ const AKSJONSPUNKT_KODER = [
 ];
 
 const VILKAR_KODER = [vilkarType.SOKERSOPPLYSNINGSPLIKT];
-
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, BehandlingFellesApiKeys.VILKAR];
-type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
-  vilkar: Vilkar[];
-}
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.SOKNAD];
 type EndepunktPanelData = {
@@ -43,9 +35,8 @@ const OpplysningspliktProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
   arbeidsgiverOpplysningerPerId,
   ...props
 }) => (
-  <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+  <ProsessDefaultInitPanel<Record<string, never>, EndepunktPanelData>
     {...props}
-    initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     vilkarKoder={VILKAR_KODER}

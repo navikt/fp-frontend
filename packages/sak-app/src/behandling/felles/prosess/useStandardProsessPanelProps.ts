@@ -1,10 +1,12 @@
 import {
   useCallback, useContext, useEffect, useMemo, useState,
 } from 'react';
-import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/ft-types';
+import { Aksjonspunkt } from '@navikt/ft-types';
 import { AksjonspunktStatus, VilkarUtfallType, isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 
-import { StandardProsessPanelProps, Vilkar } from '@fpsak-frontend/types';
+import {
+  Behandling, Fagsak, StandardProsessPanelProps, Vilkar,
+} from '@fpsak-frontend/types';
 
 import aksjonspunktType from '@fpsak-frontend/kodeverk/src/aksjonspunktType';
 import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
@@ -72,13 +74,7 @@ const finnStatus = (vilkar: Vilkar[], aksjonspunkter: Aksjonspunkt[]) => {
   return VilkarUtfallType.IKKE_VURDERT;
 };
 
-type Data = {
-  aksjonspunkter?: Aksjonspunkt[];
-  vilkar?: Vilkar[];
-}
-
 const useStandardProsessPanelProps = (
-  data?: Data,
   aksjonspunktKoder?: string[],
   vilkarKoder?: string[],
   lagringSideEffekter?: (aksjonspunktModeller: any) => () => void,
@@ -86,19 +82,21 @@ const useStandardProsessPanelProps = (
   const [formData, setFormData] = useState();
   const value = useContext(StandardPropsStateContext);
 
+  const { aksjonspunkt: aksjonspunkter, vilkår } = value.behandling;
+
   useEffect(() => {
     if (formData) {
       setFormData(undefined);
     }
   }, [value.behandling.versjon]);
 
-  const aksjonspunkterForSteg = useMemo(() => (data?.aksjonspunkter && aksjonspunktKoder
-    ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon)) : []),
-  [data?.aksjonspunkter, aksjonspunktKoder]);
+  const aksjonspunkterForSteg = useMemo(() => (aksjonspunkter && aksjonspunktKoder
+    ? aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon)) : []),
+  [aksjonspunkter, aksjonspunktKoder]);
 
-  const vilkarForSteg = useMemo(() => (data?.vilkar && vilkarKoder
-    ? data.vilkar.filter((v) => vilkarKoder.includes(v.vilkarType)) : []),
-  [data?.vilkar, vilkarKoder]);
+  const vilkarForSteg = useMemo(() => (vilkår && vilkarKoder
+    ? vilkår.filter((v) => vilkarKoder.includes(v.vilkarType)) : []),
+  [vilkår, vilkarKoder]);
 
   const isReadOnly = erReadOnly(value.behandling, aksjonspunkterForSteg, vilkarForSteg, value.rettigheter, value.hasFetchError);
 

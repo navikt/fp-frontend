@@ -1,11 +1,12 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Behandling, Aksjonspunkt } from '@navikt/ft-types';
+import { Aksjonspunkt } from '@navikt/ft-types';
 import { BehandlingStatus, VilkarUtfallType } from '@navikt/ft-kodeverk';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
+import { Behandling } from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
@@ -43,16 +44,16 @@ const defaultProps = {
 describe('<ProsessDefaultInitPanel>', () => {
   jest.spyOn(Felles, 'default').mockImplementation(() => defaultProps);
   it('skal rendre panel korrekt', async () => {
-    const AKSJONSPUNKTER_KEY = new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER_KEY');
+    const BEHANDLING_KEY = new RestKey<Behandling, void>('BEHANDLING_KEY');
 
     const endpoints = new RestApiConfigBuilder()
-      .withRel('aksjonspunkter', AKSJONSPUNKTER_KEY)
+      .withRel('behandling', BEHANDLING_KEY)
       .build();
 
     const requestMock = createRequestApi(endpoints);
 
     const data = [
-      { key: AKSJONSPUNKTER_KEY.name, data: [] },
+      { key: BEHANDLING_KEY.name, data: [] },
     ];
 
     render(
@@ -62,7 +63,7 @@ describe('<ProsessDefaultInitPanel>', () => {
           behandling={behandling}
           registrerProsessPanel={() => {}}
           requestApi={requestMock}
-          initEndepunkter={[AKSJONSPUNKTER_KEY]}
+          initEndepunkter={[BEHANDLING_KEY]}
           skalPanelVisesIMeny={() => true}
           renderPanel={() => <div>Dette er komponenten</div>}
           prosessPanelKode={ProsessStegCode.AVREGNING}

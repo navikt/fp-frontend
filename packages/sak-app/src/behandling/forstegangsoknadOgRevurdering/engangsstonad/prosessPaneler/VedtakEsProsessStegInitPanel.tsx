@@ -9,7 +9,6 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VedtakProsessIndex, { ForhandsvisData } from '@fpsak-frontend/prosess-vedtak';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   Aksjonspunkt, Behandling, Behandlingsresultat, BeregningsresultatEs, Fagsak, ForhåndsvisMeldingParams,
   Medlemskap, SimuleringResultat, TilbakekrevingValg, Vilkar,
@@ -113,12 +112,6 @@ const AKSJONSPUNKT_KODER = [
   ...FATTER_VEDTAK_AKSJONSPUNKT_KODER,
 ];
 
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, BehandlingFellesApiKeys.VILKAR];
-type EndepunktInitData = {
-  aksjonspunkter: Aksjonspunkt[];
-  vilkar: Vilkar[];
-}
-
 const ENDEPUNKTER_PANEL_DATA = [
   BehandlingFellesApiKeys.TILBAKEKREVINGVALG,
   EsBehandlingApiKeys.BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING,
@@ -164,24 +157,25 @@ const VedtakEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelIni
   const lukkIverksetterModal = useCallback(() => { toggleIverksetterVedtakModal(false); opneSokeside(); }, []);
   const lukkFatterModal = useCallback(() => { toggleFatterVedtakModal(false); opneSokeside(); }, []);
 
+  const { vilkår } = props.behandling;
+
   return (
-    <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+    <ProsessDefaultInitPanel<Record<string, never>, EndepunktPanelData>
       {...props}
       requestApi={requestEsApi}
-      initEndepunkter={ENDEPUNKTER_INIT_DATA}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.VEDTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
-      skalPanelVisesIMeny={(_data, initState) => initState === RestApiState.SUCCESS}
-      hentOverstyrtStatus={(initData, standardData) => findStatusForVedtak(
-        initData.vilkar || [], initData.aksjonspunkter || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
+      skalPanelVisesIMeny={() => true}
+      hentOverstyrtStatus={(_initData, standardData) => findStatusForVedtak(
+        vilkår || [], props.behandling.aksjonspunkt || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
       )}
       lagringSideEffekter={lagringSideEffekter}
-      hentSkalMarkeresSomAktiv={(initData, standardData) => !standardData.behandling.behandlingHenlagt && findStatusForVedtak(
-        initData.vilkar || [], initData.aksjonspunkter || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
+      hentSkalMarkeresSomAktiv={(_initData, standardData) => !standardData.behandling.behandlingHenlagt && findStatusForVedtak(
+        vilkår || [], props.behandling.aksjonspunkt || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
       ) !== vilkarUtfallType.IKKE_VURDERT}
-      renderPanel={(data, initData) => (
+      renderPanel={(data) => (
         <>
           <IverksetterVedtakStatusModal
             visModal={visIverksetterVedtakModal}
@@ -197,8 +191,8 @@ const VedtakEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelIni
             ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD}
             previewCallback={previewCallback}
             {...data}
-            aksjonspunkter={initData.aksjonspunkter}
-            vilkar={initData.vilkar}
+            aksjonspunkter={props.behandling.aksjonspunkt}
+            vilkar={vilkår}
           />
         </>
       )}

@@ -1,12 +1,12 @@
 import {
-  FamilieHendelse, FamilieHendelseSamling, Aksjonspunkt, Behandling,
+  FamilieHendelse, FamilieHendelseSamling,
 } from '@navikt/ft-types';
 
 import { RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
 import {
-  ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerWrapper, Beregningsgrunnlag, BeregningsresultatFp, Feriepengegrunnlag,
+  ArbeidOgInntektsmelding, Behandling, ArbeidsgiverOpplysningerWrapper, Beregningsgrunnlag, BeregningsresultatFp, Feriepengegrunnlag,
   ForhåndsvisMeldingParams, InntektArbeidYtelse, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold,
-  Medlemskap, Opptjening, Personoversikt, SimuleringResultat, Soknad, TilbakekrevingValg, Verge, Vilkar, Ytelsefordeling,
+  Medlemskap, Opptjening, Personoversikt, SimuleringResultat, Soknad, TilbakekrevingValg, Verge, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
 import { SettPaVentParams } from '../modaler/paVent/BehandlingPaVent';
@@ -21,8 +21,6 @@ type NyBehandlendeEnhet = {
 
 export const BehandlingFellesApiKeys = {
   BEHANDLING: new RestKey<Behandling, { behandlingUuid: string }>('BEHANDLING'),
-  AKSJONSPUNKTER: new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER'),
-  VILKAR: new RestKey<Vilkar[], void>('VILKAR'),
   VERGE: new RestKey<Verge, void>('VERGE'),
   BEREGNINGSGRUNNLAG: new RestKey<Beregningsgrunnlag, void>('BEREGNINGSGRUNNLAG'),
   FERIEPENGEGRUNNLAG: new RestKey<Feriepengegrunnlag, void>('FERIEPENGEGRUNNLAG'),
@@ -64,8 +62,6 @@ export const behandlingFellesEndepunkter = new RestApiConfigBuilder()
   .withAsyncPost('/fpsak/api/behandlinger', BehandlingFellesApiKeys.BEHANDLING)
 
   // behandlingsdata
-  .withRel('aksjonspunkter', BehandlingFellesApiKeys.AKSJONSPUNKTER)
-  .withRel('vilkar', BehandlingFellesApiKeys.VILKAR)
   .withRel('soeker-verge', BehandlingFellesApiKeys.VERGE)
   .withRel('simuleringResultat', BehandlingFellesApiKeys.SIMULERING_RESULTAT)
   .withRel('tilbakekrevingvalg', BehandlingFellesApiKeys.TILBAKEKREVINGVALG)
