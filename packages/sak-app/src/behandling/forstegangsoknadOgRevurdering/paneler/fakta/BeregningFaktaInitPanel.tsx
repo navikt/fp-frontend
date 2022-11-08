@@ -21,6 +21,7 @@ import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
 // TODO Denne burde ligga sånn til at den kun blir importert når denne pakka dynamisk blir importert
 import '@navikt/ft-fakta-beregning/dist/style.css';
+import { requestFpApi } from '../../foreldrepenger/data/fpBehandlingApi';
 
 const ProsessFaktaBeregning = React.lazy(() => import('@navikt/ft-fakta-beregning'));
 
@@ -85,8 +86,8 @@ const AKSJONSPUNKT_KODER = [
 
 const OVERSTYRING_AP_CODES = [aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSAKTIVITETER, aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG];
 
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG];
-type EndepunktInitData = {
+const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG];
+type EndepunktPanelData = {
   beregningsgrunnlag: Beregningsgrunnlag;
 }
 
@@ -103,14 +104,14 @@ const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
   rettigheter,
   ...props
 }) => (
-  <FaktaDefaultInitPanel<EndepunktInitData>
+  <FaktaDefaultInitPanel<Record<string, never>, EndepunktPanelData>
     {...props}
-    initEndepunkter={ENDEPUNKTER_INIT_DATA}
+    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={FaktaPanelCode.BEREGNING}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'BeregningInfoPanel.Title' })}
-    skalPanelVisesIMeny={(initData) => !!initData?.beregningsgrunnlag}
+    skalPanelVisesIMeny={() => requestFpApi.hasPath(BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG.name)}
     renderPanel={(data) => (
       <DynamicLoader<React.ComponentProps<typeof ProsessFaktaBeregning>>
         packageCompFn={() => import('@navikt/ft-fakta-beregning')}

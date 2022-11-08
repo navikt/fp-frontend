@@ -14,6 +14,7 @@ type Behandling = BehandlingFellesData & Readonly<{
     readOnly: boolean;
   };
   vilkår: Vilkar[];
+  alleUttaksperioderAvslått: boolean;
 }>
 
 export default Behandling;

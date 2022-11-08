@@ -20,7 +20,7 @@ export type OwnProps<INIT_DATA, PANEL_DATA> = {
   panelEndepunkter?: RestKey<any, any>[];
   aksjonspunktKoder?: string[];
   overstyringApKoder?: string[];
-  skalPanelVisesIMeny: (data: Partial<INIT_DATA>) => boolean;
+  skalPanelVisesIMeny: () => boolean;
   renderPanel: (data: INIT_DATA & PANEL_DATA & StandardFaktaPanelProps) => ReactElement;
   faktaPanelKode: FaktaPanelCode;
   faktaPanelMenyTekst: string;
@@ -59,7 +59,7 @@ const FaktaDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
     faktaPanelKode,
     faktaPanelMenyTekst,
     valgtFaktaSteg,
-    skalPanelVisesIMeny(initData),
+    skalPanelVisesIMeny(),
     standardPanelProps.harApneAksjonspunkter,
   );
 
