@@ -20,8 +20,8 @@ type FormValues = {
 }
 
 interface OwnProps {
-  valgtPeriode: UttakKontrollerFaktaPerioder;
-  slettPeriode: () => void;
+  valgtPeriode?: UttakKontrollerFaktaPerioder;
+  slettPeriode?: () => void;
   avbrytEditering: () => void;
   readOnly: boolean;
   oppdaterPerioder: (uttaksperioder: { perioder: UttakKontrollerFaktaPerioder[] }) => void;
@@ -38,7 +38,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
 
   const formMethods = useForm<FormValues>({
     defaultValues: {
-      perioder: [valgtPeriode],
+      perioder: valgtPeriode ? [valgtPeriode] : [],
     },
   });
 
@@ -85,18 +85,20 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                 isReadOnly={readOnly}
               />
             </FlexColumn>
-            <FlexColumn className={styles.marginBtn}>
-              <Button
-                size="small"
-                variant="tertiary"
-                type="button"
-                icon={<Delete />}
-                onClick={() => settVisSletteDialog(true)}
-                disabled={readOnly}
-              >
-                <FormattedMessage id="UttakFaktaDetailForm.Slett" />
-              </Button>
-            </FlexColumn>
+            {slettPeriode && (
+              <FlexColumn className={styles.marginBtn}>
+                <Button
+                  size="small"
+                  variant="tertiary"
+                  type="button"
+                  icon={<Delete />}
+                  onClick={() => settVisSletteDialog(true)}
+                  disabled={readOnly}
+                >
+                  <FormattedMessage id="UttakFaktaDetailForm.Slett" />
+                </Button>
+              </FlexColumn>
+            )}
           </FlexRow>
           <VerticalSpacer sixteenPx />
           <FlexRow>

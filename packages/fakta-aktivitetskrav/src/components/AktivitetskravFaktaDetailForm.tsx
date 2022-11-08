@@ -32,7 +32,6 @@ interface OwnProps {
   aktivitetskravAvklaringer: KodeverkMedNavn[];
   oppdaterAktivitetskrav: (aktivitetskrav: { perioder: UttakKontrollerAktivitetskrav[] }) => void;
   avbrytEditeringAvAktivitetskrav: () => void;
-  morsAktiviteter: KodeverkMedNavn[];
 }
 
 const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
@@ -40,7 +39,6 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
   readOnly,
   aktivitetskravAvklaringer,
   avbrytEditeringAvAktivitetskrav,
-  morsAktiviteter,
   oppdaterAktivitetskrav,
 }) => {
   const [sistOppdeltePeriodeIndex, setSistOppdeltePeriodeIndex] = useState<number>();
@@ -62,7 +60,7 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
     name: 'perioder',
   });
 
-  const delOppPeriode = (index) => {
+  const delOppPeriode = (index: number) => {
     const perioder = formMethods.getValues('perioder');
     const periode = perioder[index];
     const nyPeriode = {
@@ -78,7 +76,7 @@ const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
     });
   };
 
-  const oppdaterDato = (index) => {
+  const oppdaterDato = (index: number) => {
     const perioder = formMethods.getValues('perioder');
     const periode = perioder[index];
     const nyPeriode = perioder[index + 1];

@@ -5,11 +5,12 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import dayjs from 'dayjs';
 import { Form } from '@navikt/ft-form-hooks';
-import { Heading } from '@navikt/ds-react';
+import { Button, Heading, Panel } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { AksjonspunktStatus, isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 import { AlleKodeverk } from '@navikt/ft-types';
+import { AddCircle } from '@navikt/ds-icons';
 
 import { FaktaSubmitButtonNew, FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
 import {
@@ -17,6 +18,7 @@ import {
 } from '@fpsak-frontend/types';
 
 import UttakFaktaTable from './UttakFaktaTable';
+import UttakFaktaDetailForm from './UttakFaktaDetailForm';
 
 const finnAksjonspunktTekster = (
   aksjonspunkter: Aksjonspunkt[],
@@ -98,6 +100,8 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
 
   const erRedigerbart = aksjonspunkter.length > 0 || kanOverstyre;
 
+  const [visNyPeriode, settVisNyPeriode] = useState(false);
+
   return (
     <>
       <Heading size="small"><FormattedMessage id="UttakFaktaForm.FaktaUttak" /></Heading>
@@ -118,23 +122,50 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
         setDirty={setDirty}
         erRedigerbart={erRedigerbart}
       />
-      <VerticalSpacer twentyPx />
+      <VerticalSpacer sixteenPx />
       {erRedigerbart && (
-        <Form formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
-          <FaktaBegrunnelseTextFieldNew
-            name="begrunnelse"
-            isSubmittable
-            isReadOnly={readOnly}
-            hasBegrunnelse
-          />
-          <VerticalSpacer twentyPx />
-          <FaktaSubmitButtonNew
-            isSubmittable={isSubmittable}
-            isReadOnly={readOnly}
-            isSubmitting={formMethods.formState.isSubmitting}
-            isDirty={isDirty || formMethods.formState.isDirty}
-          />
-        </Form>
+        <>
+          {!visNyPeriode && (
+            <Button
+              size="small"
+              variant="tertiary"
+              type="button"
+              icon={<AddCircle />}
+              onClick={() => settVisNyPeriode(true)}
+              disabled={readOnly}
+            >
+              <FormattedMessage id="UttakFaktaForm.LeggTilPeriode" />
+            </Button>
+          )}
+          {visNyPeriode && (
+            <Panel border>
+              <UttakFaktaDetailForm
+                avbrytEditering={() => settVisNyPeriode(false)}
+                readOnly={false}
+                oppdaterPerioder={(uttaksperioder: { perioder: UttakKontrollerFaktaPerioder[] }) => {
+                  oppdaterUttakPerioder(uttakPerioder.concat(uttaksperioder.perioder));
+                  settVisNyPeriode(false);
+                }}
+              />
+            </Panel>
+          )}
+          <VerticalSpacer sixteenPx />
+          <Form formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
+            <FaktaBegrunnelseTextFieldNew
+              name="begrunnelse"
+              isSubmittable
+              isReadOnly={readOnly}
+              hasBegrunnelse
+            />
+            <VerticalSpacer twentyPx />
+            <FaktaSubmitButtonNew
+              isSubmittable={isSubmittable}
+              isReadOnly={readOnly}
+              isSubmitting={formMethods.formState.isSubmitting}
+              isDirty={isDirty || formMethods.formState.isDirty}
+            />
+          </Form>
+        </>
       )}
     </>
   );

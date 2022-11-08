@@ -131,7 +131,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
 
         if (!erRedigerbart) {
           return (
-            <TableRow>
+            <TableRow key={periode.fom + periode.tom}>
               {kolonner}
             </TableRow>
           );

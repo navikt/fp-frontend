@@ -3,7 +3,6 @@ import { RawIntlProvider } from 'react-intl';
 import dayjs from 'dayjs';
 
 import { StandardFaktaPanelProps, Aktivitetskrav } from '@fpsak-frontend/types';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { createIntl } from '@navikt/ft-utils';
 
 import AktivitetskravFaktaForm from './components/AktivitetskravFaktaForm';
@@ -20,8 +19,6 @@ const AktivitetskravFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelP
   harApneAksjonspunkter,
   uttakKontrollerAktivitetskrav,
   submitCallback,
-  alleKodeverk,
-  alleMerknaderFraBeslutter,
   readOnly,
   submittable,
   aksjonspunkter,
@@ -49,8 +46,6 @@ const AktivitetskravFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelP
           kodeverk: 'VURDERING',
           navn: 'Ikke godkjent',
         }]}
-        morsAktiviteter={alleKodeverk[kodeverkTyper.MORS_AKTIVITET]}
-        alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
         readOnly={readOnly || aksjonspunkter.length === 0}
         submittable={submittable}
         formData={formData}
