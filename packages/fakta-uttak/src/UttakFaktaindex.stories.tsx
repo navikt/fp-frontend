@@ -59,25 +59,6 @@ const Template: Story<{
   />
 );
 
-  return (
-    <UttakFaktaIndex
-      {...standardFaktaProps}
-      // @ts-ignore
-      behandling={behandlingFarSøkerFørsteSeksUker as Behandling}
-      aksjonspunkter={aksjonspunkterFarSøkerFørsteSeksUker}
-      ytelsefordeling={ytelsefordelingFarSøkerFørsteSeksUker}
-      uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderFarSøkerFørsteSeksUker as UttakKontrollerFaktaPerioderWrapper}
-      alleKodeverk={alleKodeverk as any}
-      faktaArbeidsforhold={faktaArbeidsforholdFarSøkerFørsteSeksUker as FaktaArbeidsforhold[]}
-      personoversikt={personoversiktFarSøkerFørsteSeksUker as Personoversikt}
-      familiehendelse={familiehendelseFarSøkerFørsteSeksUker as FamilieHendelseSamling}
-      readOnly={readOnly}
-      kanOverstyre={false}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />
-  );
-};
-
 export const IngenAksjonspunkterErOverstyrer = Template.bind({});
 IngenAksjonspunkterErOverstyrer.args = {
   behandling: behandlingOverføringAvPerioder,
