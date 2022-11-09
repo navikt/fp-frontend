@@ -6,7 +6,6 @@ import { useIntl } from 'react-intl';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import TilkjentYtelseProsessIndex from '@fpsak-frontend/prosess-tilkjent-ytelse';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   ArbeidsgiverOpplysningerPerId, BeregningsresultatFp, Fagsak, FamilieHendelseSamling, Feriepengegrunnlag, Personoversikt, Soknad, UttaksresultatPeriode,
 } from '@fpsak-frontend/types';
@@ -52,7 +51,7 @@ const TilkjentYtelseFpProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     prosessPanelKode={ProsessStegCode.TILKJENT_YTELSE}
     prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}
-    skalPanelVisesIMeny={(_data, initState) => initState === RestApiState.SUCCESS}
+    skalPanelVisesIMeny={() => true}
     hentOverstyrtStatus={() => (
       requestFpApi.hasPath(BehandlingFellesApiKeys.BEREGNINGRESULTAT_FORELDREPENGER.name) ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT
     )}

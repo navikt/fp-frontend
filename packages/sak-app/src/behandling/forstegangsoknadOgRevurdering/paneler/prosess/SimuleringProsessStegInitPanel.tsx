@@ -6,7 +6,7 @@ import { useIntl } from 'react-intl';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AvregningProsessIndex from '@fpsak-frontend/prosess-avregning';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { RestApiHooks, RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import {
   Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg,
 } from '@fpsak-frontend/types';
@@ -70,13 +70,13 @@ const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelI
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.AVREGNING}
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Avregning' })}
-      skalPanelVisesIMeny={(_data, initState) => {
+      skalPanelVisesIMeny={() => {
         const harVedtakspanel = menyData.some((d) => d.id === ProsessStegCode.VEDTAK
-        && (d.status !== vilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt));
-        return requestFpApi.hasPath(BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG.name) || (initState === RestApiState.SUCCESS && !harVedtakspanel);
+          && (d.status !== vilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt));
+        return requestFpApi.hasPath(BehandlingFellesApiKeys.SIMULERING_RESULTAT.name) || !harVedtakspanel;
       }}
       hentOverstyrtStatus={() => (
-        requestFpApi.hasPath(BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG.name) ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT
+        requestFpApi.hasPath(BehandlingFellesApiKeys.SIMULERING_RESULTAT.name) ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT
       )}
       renderPanel={(data) => (
         <AvregningProsessIndex

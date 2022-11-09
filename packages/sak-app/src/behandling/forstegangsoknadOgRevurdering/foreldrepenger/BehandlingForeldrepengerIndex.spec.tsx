@@ -44,6 +44,7 @@ describe('<BehandlingForeldrepengerIndex>', () => {
       },
       { key: BehandlingFellesApiKeys.ARBEIDSGIVERE_OVERSIKT.name, data: {} },
       { key: BehandlingFellesApiKeys.BEHANDLING_PERSONOVERSIKT.name, data: {} },
+      { key: BehandlingFellesApiKeys.SIMULERING_RESULTAT.name, data: {} },
       { key: BehandlingFellesApiKeys.PREVIEW_MESSAGE.name, noRelLink: true, data: undefined },
     ];
 
