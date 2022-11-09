@@ -1,1 +1,1 @@
-export { default } from './src/DokumentkravFaktaIndex';
+export { default } from './src/UttakDokumentasjonFaktaIndex';
