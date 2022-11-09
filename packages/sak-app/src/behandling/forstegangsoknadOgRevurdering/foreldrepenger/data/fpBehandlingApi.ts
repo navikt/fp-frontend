@@ -1,7 +1,12 @@
 import { RestApiConfigBuilder, createRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import {
-  FaktaArbeidsforhold, UttakKontrollerAktivitetskrav, UttakKontrollerFaktaPerioderWrapper, UttaksresultatPeriode, UttakStonadskontoer,
+  DokumentasjonVurderingBehov,
+  FaktaArbeidsforhold,
+  UttakKontrollerAktivitetskrav,
+  UttakKontrollerFaktaPerioderWrapper,
+  UttaksresultatPeriode,
+  UttakStonadskontoer,
 } from '@fpsak-frontend/types';
 
 import { behandlingFellesEndepunkter } from '../../../felles/data/behandlingFellesApi';
@@ -19,6 +24,7 @@ export const FpBehandlingApiKeys = {
   UTTAK_KONTROLLER_FAKTA_PERIODER: new RestKey<UttakKontrollerFaktaPerioderWrapper, void>('UTTAK_KONTROLLER_FAKTA_PERIODER'),
   UTTAK_KONTROLLER_AKTIVITETSKRAV: new RestKey<UttakKontrollerAktivitetskrav[], void>('UTTAK_KONTROLLER_AKTIVITETSKRAV'),
   BEREGNINGSGRUNNLAG_BESTEBEREGNING: new RestKey<UttakKontrollerAktivitetskrav[], void>('BEREGNINGSGRUNNLAG_BESTEBEREGNING'),
+  DOKUMENTASJON_VURDERING_BEHOV: new RestKey<DokumentasjonVurderingBehov[], void>('DOKUMENTASJON_VURDERING_BEHOV'),
 };
 
 const endepunkter = new RestApiConfigBuilder()
@@ -30,6 +36,7 @@ const endepunkter = new RestApiConfigBuilder()
   .withRel('uttak-kontroller-fakta-perioder', FpBehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER)
   .withRel('uttak-kontroller-aktivitetskrav', FpBehandlingApiKeys.UTTAK_KONTROLLER_AKTIVITETSKRAV)
   .withRel('beregningsgrunnlagharbesteberegning', FpBehandlingApiKeys.BEREGNINGSGRUNNLAG_BESTEBEREGNING)
+  .withRel('uttak-vurder-dokumentasjon', FpBehandlingApiKeys.DOKUMENTASJON_VURDERING_BEHOV)
 
   // operasjoner
   .withRel('lagre-stonadskontoer-gitt-uttaksperioder', FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER)

@@ -1,8 +1,9 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { RawIntlProvider } from 'react-intl';
-import dayjs from 'dayjs';
+import moment from 'moment';
 
-import { StandardFaktaPanelProps, Aktivitetskrav } from '@fpsak-frontend/types';
+import { StandardFaktaPanelProps, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { createIntl } from '@navikt/ft-utils';
 
 import AktivitetskravFaktaForm from './components/AktivitetskravFaktaForm';
@@ -12,13 +13,15 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   harApneAksjonspunkter: boolean;
-  uttakKontrollerAktivitetskrav: Aktivitetskrav[];
+  uttakKontrollerAktivitetskrav: UttakKontrollerAktivitetskrav[];
 }
 
 const AktivitetskravFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
   harApneAksjonspunkter,
   uttakKontrollerAktivitetskrav,
   submitCallback,
+  alleKodeverk,
+  alleMerknaderFraBeslutter,
   readOnly,
   submittable,
   aksjonspunkter,
@@ -26,26 +29,16 @@ const AktivitetskravFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelP
   setFormData,
 }) => {
   const sorterteAktivitetskrav = useMemo(() => [...uttakKontrollerAktivitetskrav]
-    .sort((krav1, krav2) => dayjs(krav1.fom).diff(dayjs(krav2.fom))), [uttakKontrollerAktivitetskrav]);
+    .sort((krav1, krav2) => moment(krav1.fom).diff(moment(krav2.fom))), [uttakKontrollerAktivitetskrav]);
   return (
     <RawIntlProvider value={intl}>
       <AktivitetskravFaktaForm
         harApneAksjonspunkter={harApneAksjonspunkter}
         sorterteAktivitetskrav={sorterteAktivitetskrav}
         submitCallback={submitCallback}
-        aktivitetskravAvklaringer={[{
-          kode: 'MANGLER',
-          kodeverk: 'VURDERING',
-          navn: 'Mangler dokumentasjon',
-        }, {
-          kode: 'GODKJENT',
-          kodeverk: 'VURDERING',
-          navn: 'Godkjent',
-        }, {
-          kode: 'IKKE_GODKJENT',
-          kodeverk: 'VURDERING',
-          navn: 'Ikke godkjent',
-        }]}
+        aktivitetskravAvklaringer={alleKodeverk[kodeverkTyper.AKTIVITETSKRAV_AVKLARING]}
+        morsAktiviteter={alleKodeverk[kodeverkTyper.MORS_AKTIVITET]}
+        alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
         readOnly={readOnly || aksjonspunkter.length === 0}
         submittable={submittable}
         formData={formData}

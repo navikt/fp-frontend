@@ -21,6 +21,7 @@ enum FaktaPanelCode {
   VERGE = 'verge',
   YTELSER = 'ytelser',
   AKTIVITETSKRAV = 'aktivitetskrav',
+  UTTAK_DOKUMENTASJON = 'uttakdokumentasjon',
 }
 
 export default FaktaPanelCode;

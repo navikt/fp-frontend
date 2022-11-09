@@ -1,34 +1,16 @@
 {
   "AktivitetskravFaktaForm.AksjonspunktHjelpetekst": "Kontroller kravet til mors aktivitet",
   "AktivitetskravFaktaForm.Aktivitetskravperioder": "Perioder med aktivitetskrav",
-  "AktivitetskravFaktaForm.Aksjonspunkt": "Åpent aksjonspunkt",
-  "AktivitetskravFaktaForm.Ok": "Arbeidsforhold er OK",
-  "AktivitetskravFaktaForm.Overskrift": "Fakta om aktivitetskrav",
 
   "AktivitetskravFaktaTabell.Periode": "Periode",
   "AktivitetskravFaktaTabell.Avklaring": "Avklaring",
-  "AktivitetskravFaktaTabell.AvklaringBehov": "Avklaringsbehov",
-  "AktivitetskravFaktaTabell.Arsak": "Årsak",
+  "AktivitetskravFaktaTabell.MorsAktivitet": "Mors aktivitet",
   "AktivitetskravFaktaTabell.ErEndret": "Er endret av saksbehandler",
-  "AktivitetskravFaktaTabell.Vurdering": "Vurdering",
-  "AktivitetskravFaktaTabell.Godkjent": "Godkjent",
-  "AktivitetskravFaktaTabell.IkkeGodkjent": "Ikke godkjent",
-  "AktivitetskravFaktaTabell.ManglerDok": "Mangler dokumentasjon",
 
   "AktivitetskravFaktaDetailForm.Header": "Detaljer",
   "AktivitetskravFaktaDetailForm.Oppdater": "Oppdater",
   "AktivitetskravFaktaDetailForm.Avbryt": "Avbryt",
-  "AktivitetskravFaktaDetailForm.Vurdering": "Vurdering",
-  "AktivitetskravFaktaDetailForm.Fom": "Fra og med:",
-  "AktivitetskravFaktaDetailForm.Tom": "Til og med:",
+  "AktivitetskravFaktaDetailForm.Avklaring": "Avklaring",
   "AktivitetskravFaktaDetailForm.Periode": "Periode",
-  "AktivitetskravFaktaDetailForm.MorsAktivitet": "Mors aktivitet",
-  "AktivitetskravFaktaDetailForm.OppdaterDato": "Oppdater dato",
-  "AktivitetskravFaktaDetailForm.DelOppPeriode": "Del opp periode",
-  "AktivitetskravFaktaDetailForm.IkkeGyldigDato": "Dato er utenfor opprinnelig periode",
-
-  "OppdaterePeriodeModal.OppdaterePerioden": "Vil du oppdatere periode?",
-  "OppdaterePeriodeModal.Nullstilles": "Etterfølgende perioder blir nullstilt",
-  "OppdaterePeriodeModal.Oppdater": "Oppdater",
-  "OppdaterePeriodeModal.Avbryt": "Avbryt"
+  "AktivitetskravFaktaDetailForm.MorsAktivitet": "Mors aktivitet"
 }

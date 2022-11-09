@@ -4,66 +4,74 @@ import { action } from '@storybook/addon-actions';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import AktivitetskravFaktaIndex from '@fpsak-frontend/fakta-aktivitetskrav';
-import { Behandling, UttakKontrollerAktivitetskrav, Aksjonspunkt } from '@fpsak-frontend/types';
+import {
+  Behandling, Aksjonspunkt, DokumentasjonVurderingBehov, UttakType, UttakÅrsak, UttakVurdering,
+} from '@fpsak-frontend/types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+
+import UttakDokumentasjonFaktaIndex from './UttakDokumentasjonFaktaIndex';
 
 const behandling = {
   uuid: '1',
   versjon: 1,
 } as Behandling;
 
-const uttakKontrollerAktivitetskravListe = [{
-  avklaring: 'I_AKTIVITET',
-  begrunnelse: 'Dette er en test',
-  fom: '2021-01-01',
-  tom: '2021-01-07',
-  morsAktivitet: 'INNLAGT',
-  endret: false,
+const dokumentasjonVurderingBehovListe = [{
+  fom: '2022-11-01',
+  tom: '2022-11-07',
+  type: UttakType.UTSETTELSE,
+  årsak: UttakÅrsak.INNLEGGELSE_SØKER,
+  vurdering: UttakVurdering.GODKJENT,
 }, {
-  avklaring: null,
-  begrunnelse: null,
-  fom: '2021-01-08',
-  tom: '2021-01-13',
-  morsAktivitet: 'ARBEID_OG_UTDANNING',
-  endret: false,
+  fom: '2022-11-08',
+  tom: '2022-11-13',
+  type: UttakType.OVERFØRING,
+  årsak: UttakÅrsak.INNLEGGELSE_BARN,
 }, {
-  avklaring: null,
-  begrunnelse: null,
-  fom: '2021-01-15',
-  tom: '2021-01-20',
-  morsAktivitet: 'ARBEID_OG_UTDANNING',
-  endret: false,
-}] as UttakKontrollerAktivitetskrav[];
+  fom: '2022-12-08',
+  tom: '2022-12-13',
+  type: UttakType.AKTIVITETSKRAV,
+  årsak: UttakÅrsak.HV_OVELSE,
+}, {
+  fom: '2022-11-15',
+  tom: '2022-11-20',
+  type: UttakType.TIDLIG_OPPSTART_FAR,
+  årsak: UttakÅrsak.NAV_TILTAK,
+}, {
+  fom: '2022-12-15',
+  tom: '2022-12-20',
+  type: UttakType.OVERFØRING,
+  årsak: UttakÅrsak.SYKDOM_SØKER,
+}] as DokumentasjonVurderingBehov[];
 
 const merknaderFraBeslutter = {
   notAccepted: true,
 };
 
 export default {
-  title: 'fakta/fakta-aktivitetskrav',
-  component: AktivitetskravFaktaIndex,
+  title: 'fakta/fakta-uttaksdokumentasjon',
+  component: UttakDokumentasjonFaktaIndex,
 };
 
 const Template: Story<{
   aksjonspunkter: Aksjonspunkt[];
-  uttakKontrollerAktivitetskrav: UttakKontrollerAktivitetskrav[];
+  dokumentasjonVurderingBehov: DokumentasjonVurderingBehov[];
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
   readOnly: boolean;
   submittable: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
 }> = ({
   aksjonspunkter,
-  uttakKontrollerAktivitetskrav,
+  dokumentasjonVurderingBehov,
   submitCallback,
   readOnly,
   submittable,
   alleMerknaderFraBeslutter = {},
 }) => (
-  <AktivitetskravFaktaIndex
+  <UttakDokumentasjonFaktaIndex
     behandling={behandling}
-    uttakKontrollerAktivitetskrav={uttakKontrollerAktivitetskrav}
+    dokumentasjonVurderingBehov={dokumentasjonVurderingBehov}
     alleKodeverk={alleKodeverk as any}
     aksjonspunkter={aksjonspunkter}
     submitCallback={submitCallback}
@@ -84,7 +92,7 @@ AksjonspunktMedToUavklartePerioder.args = {
     kanLoses: true,
     erAktivt: true,
   }],
-  uttakKontrollerAktivitetskrav: uttakKontrollerAktivitetskravListe,
+  dokumentasjonVurderingBehov: dokumentasjonVurderingBehovListe,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   readOnly: false,
   submittable: true,
@@ -99,7 +107,7 @@ AksjonspunktSomErBekreftetOgBehandlingAvsluttet.args = {
     kanLoses: false,
     erAktivt: false,
   }],
-  uttakKontrollerAktivitetskrav: [uttakKontrollerAktivitetskravListe[0]],
+  dokumentasjonVurderingBehov: [dokumentasjonVurderingBehovListe[0]],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   readOnly: true,
   submittable: false,
@@ -114,7 +122,7 @@ AksjonspunktSomErReåpnetAvBeslutter.args = {
     kanLoses: true,
     erAktivt: true,
   }],
-  uttakKontrollerAktivitetskrav: uttakKontrollerAktivitetskravListe,
+  dokumentasjonVurderingBehov: dokumentasjonVurderingBehovListe,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   readOnly: false,
   submittable: true,
@@ -132,7 +140,7 @@ AksjonspunktErBekreftetMenBehandlingErÅpen.args = {
     kanLoses: true,
     erAktivt: true,
   }],
-  uttakKontrollerAktivitetskrav: [uttakKontrollerAktivitetskravListe[0]],
+  dokumentasjonVurderingBehov: [dokumentasjonVurderingBehovListe[0]],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   readOnly: false,
   submittable: true,

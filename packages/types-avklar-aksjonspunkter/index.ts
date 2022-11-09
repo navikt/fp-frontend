@@ -24,6 +24,7 @@ export { default as VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp }
 export { default as AvklarFaktaForForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForForeldreansvarAksjonspunktAp';
 export { default as AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp';
 export { default as AvklarAktivitetsPerioderAp, OpptjeningAktivitetAp } from './src/fakta/AvklarAktivitetsPerioderAp';
+export { default as VurderDokumentasjonAp } from './src/fakta/VurderDokumentasjonAp';
 
 export { default as ProsessAksjonspunkt } from './src/ProsessAksjonspunkt';
 export { default as BekreftSvangerskapspengervilkarAp } from './src/prosess/BekreftSvangerskapspengervilkarAp';

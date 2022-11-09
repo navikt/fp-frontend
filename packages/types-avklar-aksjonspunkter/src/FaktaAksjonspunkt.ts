@@ -25,6 +25,7 @@ import BekreftOppholdsrettVurderingAp from './fakta/BekreftOppholdsrettVurdering
 import OverstyringAvklarStartdatoForPeriodenAp from './fakta/OverstyringAvklarStartdatoForPeriodenAp';
 import KontrollerBesteberegningAP from './fakta/KontrollerBesteberegningAP';
 import BeregningAktivitetAP from './fakta/BeregningAktivitetAP';
+import VurderDokumentasjonAp from './fakta/VurderDokumentasjonAp';
 import BeregningFaktaAP, { BeregningOverstyringAP } from './fakta/BeregningFaktaAP';
 import VurderArbeidsforholdInntektsmeldingAp from './fakta/VurderArbeidsforholdInntektsmeldingAp';
 import VurderArbeidsforholdPermisjonAp from './fakta/VurderArbeidsforholdPermisjonAp';
@@ -60,6 +61,7 @@ export type FaktaAksjonspunkt = AvklarVergeAp
   | VurderRefusjonBeregningsgrunnlagAP
   | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp
   | VurderArbeidsforholdInntektsmeldingAp
+  | VurderDokumentasjonAp
   | VurderArbeidsforholdPermisjonAp;
 
 export default FaktaAksjonspunkt;

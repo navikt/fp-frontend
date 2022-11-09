@@ -1,34 +1,36 @@
 import React, {
   FunctionComponent, useCallback, useEffect, useMemo, useState,
 } from 'react';
-import { useForm } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { Form } from '@navikt/ft-form-hooks';
-import { Heading } from '@navikt/ds-react';
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { useIntl } from 'react-intl';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { KodeverkMedNavn, Aktivitetskrav } from '@fpsak-frontend/types';
-import { FaktaSubmitButtonNew, FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
+import { AksjonspunktHelpTextHTML, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
+import { KodeverkMedNavn, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
+import { FaktaSubmitButtonNew } from '@fpsak-frontend/fakta-felles';
 import { KontrollerAktivitetskravAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
-import AktivitetskravFaktaTable from './AktivitetskravFaktaTable';
+import AktivitetskravFaktaDetailForm from './AktivitetskravFaktaDetailForm';
+import AktivitetskravFaktaTabell from './AktivitetskravFaktaTabell';
 
 interface PureOwnProps {
   harApneAksjonspunkter: boolean;
-  sorterteAktivitetskrav: Aktivitetskrav[];
+  sorterteAktivitetskrav: UttakKontrollerAktivitetskrav[];
   submitCallback: (aksjonspunkter: KontrollerAktivitetskravAp) => Promise<void>;
   aktivitetskravAvklaringer: KodeverkMedNavn[];
+  morsAktiviteter: KodeverkMedNavn[];
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   readOnly: boolean;
   submittable: boolean;
-  formData: { aktivitetskrav: Aktivitetskrav[], begrunnelse: string },
-  setFormData: (data: { aktivitetskrav: Aktivitetskrav[], begrunnelse: string }) => void,
+  formData: UttakKontrollerAktivitetskrav[],
+  setFormData: (data: UttakKontrollerAktivitetskrav[]) => void,
 }
 
-const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
+export const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
   harApneAksjonspunkter,
   sorterteAktivitetskrav,
   aktivitetskravAvklaringer,
+  morsAktiviteter,
+  alleMerknaderFraBeslutter,
   readOnly,
   submittable,
   submitCallback,
@@ -37,37 +39,51 @@ const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const [aktivitetskrav, oppdaterAktivitetskrav] = useState<Aktivitetskrav[]>(formData?.aktivitetskrav || sorterteAktivitetskrav);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [isDirty, setDirty] = useState<boolean>(false);
 
-  const bekreft = useCallback((begrunnelse: string) => {
-    submitCallback({
-      kode: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
-      avklartePerioder: aktivitetskrav as Required<Aktivitetskrav>[],
-      begrunnelse,
-    });
+  const [aktivitetskrav, updateAktivitetskrav] = useState<UttakKontrollerAktivitetskrav[]>(formData || sorterteAktivitetskrav);
+
+  const [valgtAktivitetskrav, setAktivitetskrav] = useState<UttakKontrollerAktivitetskrav>();
+  useEffect(() => setAktivitetskrav(aktivitetskrav?.find((oa) => !oa.avklaring)), [aktivitetskrav]);
+
+  const velgAktivitetskrav = useCallback((
+    _event: React.MouseEvent | React.KeyboardEvent,
+    _id: void,
+    model: UttakKontrollerAktivitetskrav,
+  ) => setAktivitetskrav(model), []);
+
+  const oppdaterAktivitetskrav = useCallback((oppdatertKrav) => {
+    const oppdaterteAktivitetskrav = aktivitetskrav
+      .filter((aKrav) => aKrav.fom !== oppdatertKrav.fom)
+      .concat([oppdatertKrav])
+      .sort((a1, a2) => a1.fom.localeCompare(a2.fom));
+
+    updateAktivitetskrav(oppdaterteAktivitetskrav);
+    setAktivitetskrav(oppdaterteAktivitetskrav.find((oa) => !oa.avklaring));
+    setDirty(true);
   }, [aktivitetskrav]);
 
-  const formMethods = useForm<{ begrunnelse: string }>({
-    defaultValues: {
-      begrunnelse: formData?.begrunnelse,
-    },
-  });
-
-  useEffect(() => () => {
-    setFormData({ aktivitetskrav, begrunnelse: formMethods.getValues('begrunnelse') });
+  const avbrytEditeringAvAktivitetskrav = useCallback(() => {
+    setAktivitetskrav(undefined);
   }, []);
 
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const bekreft = useCallback(() => {
+    setIsSubmitting(true);
+    submitCallback({
+      kode: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
+      avklartePerioder: aktivitetskrav as Required<UttakKontrollerAktivitetskrav>[],
+    }).then(() => setIsSubmitting(false));
+  }, [aktivitetskrav]);
 
-  const isSubmittable = useMemo(() => submittable && aktivitetskrav?.every((a) => a.vurdering) && !!begrunnelse,
-    [aktivitetskrav, begrunnelse]);
+  const isSubmittable = useMemo(() => submittable && !valgtAktivitetskrav && aktivitetskrav?.every((a) => a.avklaring), [aktivitetskrav, valgtAktivitetskrav]);
 
-  const [isDirty, setDirty] = useState<boolean>(false);
+  useEffect(() => () => {
+    setFormData(aktivitetskrav);
+  }, [aktivitetskrav]);
 
   return (
     <>
-      <Heading size="small"><FormattedMessage id="AktivitetskravFaktaForm.Overskrift" /></Heading>
-      <VerticalSpacer thirtyTwoPx />
       {harApneAksjonspunkter && (
         <>
           <AksjonspunktHelpTextHTML>
@@ -76,29 +92,39 @@ const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
           <VerticalSpacer sixteenPx />
         </>
       )}
-      <AktivitetskravFaktaTable
-        aktivitetskrav={aktivitetskrav}
-        oppdaterAktivitetskrav={oppdaterAktivitetskrav}
-        aktivitetskravAvklaringer={aktivitetskravAvklaringer}
-        setDirty={setDirty}
-        readOnly={readOnly}
-      />
+      <FaktaGruppe
+        title={intl.formatMessage({ id: 'AktivitetskravFaktaForm.Aktivitetskravperioder' })}
+        merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV]}
+      >
+        {aktivitetskrav && (
+          <AktivitetskravFaktaTabell
+            aktivitetskrav={aktivitetskrav}
+            valgtAktivitetskravFom={valgtAktivitetskrav?.fom}
+            velgAktivitetskrav={velgAktivitetskrav}
+            aktivitetskravAvklaringer={aktivitetskravAvklaringer}
+            morsAktiviteter={morsAktiviteter}
+          />
+        )}
+        {valgtAktivitetskrav && (
+          <AktivitetskravFaktaDetailForm
+            key={valgtAktivitetskrav.fom}
+            valgtAktivitetskrav={valgtAktivitetskrav}
+            readOnly={readOnly}
+            aktivitetskravAvklaringer={aktivitetskravAvklaringer}
+            oppdaterAktivitetskrav={oppdaterAktivitetskrav}
+            avbrytEditeringAvAktivitetskrav={avbrytEditeringAvAktivitetskrav}
+            morsAktiviteter={morsAktiviteter}
+          />
+        )}
+      </FaktaGruppe>
       <VerticalSpacer twentyPx />
-      <Form formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
-        <FaktaBegrunnelseTextFieldNew
-          name="begrunnelse"
-          isSubmittable
-          isReadOnly={readOnly}
-          hasBegrunnelse
-        />
-        <VerticalSpacer twentyPx />
-        <FaktaSubmitButtonNew
-          isSubmittable={isSubmittable}
-          isReadOnly={readOnly}
-          isSubmitting={formMethods.formState.isSubmitting}
-          isDirty={isDirty || formMethods.formState.isDirty}
-        />
-      </Form>
+      <FaktaSubmitButtonNew
+        isSubmittable={isSubmittable}
+        isReadOnly={readOnly}
+        onClick={bekreft}
+        isSubmitting={isSubmitting}
+        isDirty={isDirty}
+      />
     </>
   );
 };
