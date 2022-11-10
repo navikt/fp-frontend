@@ -11,12 +11,12 @@ import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
-import { FpBehandlingApiKeys } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV];
 
-const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.UTTAK_KONTROLLER_AKTIVITETSKRAV];
-type EndepunktInitData = {
+const ENDEPUNKTER_PANEL_DATA = [FpBehandlingApiKeys.UTTAK_KONTROLLER_AKTIVITETSKRAV];
+type EndepunktPanelData = {
   uttakKontrollerAktivitetskrav: UttakKontrollerAktivitetskrav[];
 }
 
@@ -24,16 +24,15 @@ type EndepunktInitData = {
  * AktivitetskravFaktaInitPanel
  */
 const AktivitetskravFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => (
-  <FaktaDefaultInitPanel<EndepunktInitData>
+  <FaktaDefaultInitPanel<Record<string, never>, EndepunktPanelData>
     {...props}
-    initEndepunkter={ENDEPUNKTER_INIT_DATA}
+    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.AKTIVITETSKRAV}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'AktivitetskravInfoPanel.FaktaAktivitetskrav' })}
-    skalPanelVisesIMeny={(initData) => !!initData?.uttakKontrollerAktivitetskrav}
+    skalPanelVisesIMeny={() => requestFpApi.hasPath(FpBehandlingApiKeys.UTTAK_KONTROLLER_AKTIVITETSKRAV.name)}
     renderPanel={(data) => (
       <AktivitetskravFaktaIndex
-        // @ts-ignore Eg trur denne feilar grunna feil i typescript-pakka. Sjekk på eit seinare tidspunkt om denne er retta
         {...data}
       />
     )}

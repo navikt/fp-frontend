@@ -11,7 +11,7 @@ import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.INNTEKT_ARBEID_YTELSE];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.INNTEKT_ARBEID_YTELSE];
 type EndepunktInitData = {
   inntektArbeidYtelse: InntektArbeidYtelse;
 }
@@ -20,16 +20,14 @@ type EndepunktInitData = {
  * YtelserFaktaInitPanel
  */
 const YtelserFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => (
-  <FaktaDefaultInitPanel<EndepunktInitData>
+  <FaktaDefaultInitPanel<Record<string, never>, EndepunktInitData>
     {...props}
-    initEndepunkter={ENDEPUNKTER_INIT_DATA}
+    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     faktaPanelKode={FaktaPanelCode.YTELSER}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'YtelserFaktaIndex.Ytelser' })}
-    skalPanelVisesIMeny={(initData) => !!initData?.inntektArbeidYtelse?.relatertTilgrensendeYtelserForSoker
-      && initData.inntektArbeidYtelse.relatertTilgrensendeYtelserForSoker.length > 0}
+    skalPanelVisesIMeny={() => true}
     renderPanel={(data) => (
       <YtelserFaktaIndex
-        // @ts-ignore Eg trur denne feilar grunna feil i typescript-pakka. Sjekk på eit seinare tidspunkt om denne er retta
         {...data}
       />
     )}

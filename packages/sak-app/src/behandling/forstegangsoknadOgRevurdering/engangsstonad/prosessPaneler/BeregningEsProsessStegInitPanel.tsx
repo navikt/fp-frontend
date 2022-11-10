@@ -16,8 +16,8 @@ import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.OVERSTYR_BEREGNING];
 
-const ENDEPUNKTER_INIT_DATA = [EsBehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD];
-type EndepunktInitData = {
+const ENDEPUNKTER_PANEL_DATA = [EsBehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD];
+type EndepunktPanelData = {
   beregningresultatEngangsstonad: BeregningsresultatEs;
 }
 
@@ -33,22 +33,23 @@ const BeregningEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanel
   const toggleOverstyring = useCallback(() => setOverstyrt(!erOverstyrt), [erOverstyrt]);
 
   return (
-    <ProsessDefaultInitPanel<EndepunktInitData>
+    <ProsessDefaultInitPanel<Record<string, never>, EndepunktPanelData>
       {...props}
       requestApi={requestEsApi}
-      initEndepunkter={ENDEPUNKTER_INIT_DATA}
+      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.BEREGNING}
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Beregning' })}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={(initData) => (initData.beregningresultatEngangsstonad ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT)}
+      hentOverstyrtStatus={() => (
+        requestEsApi.hasPath(EsBehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD.name) ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT
+      )}
       erOverstyrt={erOverstyrt}
       renderPanel={(data) => (
         <BeregningsresultatProsessIndex
           overrideReadOnly={data.isReadOnly}
           kanOverstyreAccess={rettigheter.kanOverstyreAccess}
           toggleOverstyring={toggleOverstyring}
-          // @ts-ignore Eg trur denne feilar grunna feil i typescript-pakka. Sjekk på eit seinare tidspunkt om denne er retta
           {...data}
         />
       )}

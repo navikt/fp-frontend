@@ -6,7 +6,7 @@ import { useIntl } from 'react-intl';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AvregningProsessIndex from '@fpsak-frontend/prosess-avregning';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { RestApiHooks, RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import {
   Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg,
 } from '@fpsak-frontend/types';
@@ -18,6 +18,7 @@ import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitP
 import ProsessPanelMenyData from '../../../felles/typer/prosessPanelMenyData';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
+import { requestFpApi } from '../../foreldrepenger/data/fpBehandlingApi';
 
 const getForhandsvisFptilbakeCallback = (
   forhandsvisTilbakekrevingMelding: (params?: any, keepData?: boolean) => Promise<Behandling | undefined>,
@@ -36,14 +37,10 @@ const getForhandsvisFptilbakeCallback = (
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_FEILUTBETALING];
 
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.SIMULERING_RESULTAT];
-type EndepunktInitData = {
-  simuleringResultat?: SimuleringResultat;
-}
-
-const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.TILBAKEKREVINGVALG];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.TILBAKEKREVINGVALG, BehandlingFellesApiKeys.SIMULERING_RESULTAT];
 type EndepunktPanelData = {
   tilbakekrevingvalg?: TilbakekrevingValg;
+  simuleringResultat?: SimuleringResultat;
 }
 
 interface OwnProps {
@@ -67,19 +64,20 @@ const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelI
     [standardPanelProps.behandling.versjon]);
 
   return (
-    <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+    <ProsessDefaultInitPanel<Record<string, never>, EndepunktPanelData>
       {...props}
-      initEndepunkter={ENDEPUNKTER_INIT_DATA}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.AVREGNING}
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Avregning' })}
-      skalPanelVisesIMeny={(data, initState) => {
+      skalPanelVisesIMeny={() => {
         const harVedtakspanel = menyData.some((d) => d.id === ProsessStegCode.VEDTAK
-        && (d.status !== vilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt));
-        return !!data?.simuleringResultat || (initState === RestApiState.SUCCESS && !harVedtakspanel);
+          && (d.status !== vilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt));
+        return requestFpApi.hasPath(BehandlingFellesApiKeys.SIMULERING_RESULTAT.name) || !harVedtakspanel;
       }}
-      hentOverstyrtStatus={(data) => (data?.simuleringResultat ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT)}
+      hentOverstyrtStatus={() => (
+        requestFpApi.hasPath(BehandlingFellesApiKeys.SIMULERING_RESULTAT.name) ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT
+      )}
       renderPanel={(data) => (
         <AvregningProsessIndex
           fagsak={fagsak}
