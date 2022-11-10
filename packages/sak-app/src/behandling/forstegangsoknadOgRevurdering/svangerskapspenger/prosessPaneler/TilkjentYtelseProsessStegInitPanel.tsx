@@ -6,7 +6,6 @@ import { useIntl } from 'react-intl';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import TilkjentYtelseProsessIndex from '@fpsak-frontend/prosess-tilkjent-ytelse';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   ArbeidsgiverOpplysningerPerId, BeregningsresultatFp, Fagsak, FamilieHendelseSamling, Feriepengegrunnlag, Personoversikt, Soknad,
 } from '@fpsak-frontend/types';
