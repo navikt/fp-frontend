@@ -22,7 +22,7 @@ import FatterVedtakStatusModal from '../../../felles/modaler/vedtak/FatterVedtak
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 import useStandardProsessPanelProps from '../../../felles/prosess/useStandardProsessPanelProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
-import { restApiEsHooks, EsBehandlingApiKeys, requestEsApi } from '../data/esBehandlingApi';
+import { restApiEsHooks, EsBehandlingApiKeys } from '../data/esBehandlingApi';
 
 const hasOnlyClosedAps = (aksjonspunkter: Aksjonspunkt[], vedtakAksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
   .filter((ap) => !vedtakAksjonspunkter.some((vap) => vap.definisjon === ap.definisjon))
@@ -162,7 +162,6 @@ const VedtakEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelIni
   return (
     <ProsessDefaultInitPanel<Record<string, never>, EndepunktPanelData>
       {...props}
-      requestApi={requestEsApi}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.VEDTAK}

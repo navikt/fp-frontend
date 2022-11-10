@@ -11,7 +11,7 @@ import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
-import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV];
 
@@ -30,7 +30,8 @@ const AktivitetskravFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (pr
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.AKTIVITETSKRAV}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'AktivitetskravInfoPanel.FaktaAktivitetskrav' })}
-    skalPanelVisesIMeny={() => requestFpApi.hasPath(FpBehandlingApiKeys.UTTAK_KONTROLLER_AKTIVITETSKRAV.name)}
+      // eslint-disable-next-line react/destructuring-assignment
+    skalPanelVisesIMeny={() => props.requestApi.hasPath(FpBehandlingApiKeys.UTTAK_KONTROLLER_AKTIVITETSKRAV.name)}
     renderPanel={(data) => (
       <AktivitetskravFaktaIndex
         {...data}

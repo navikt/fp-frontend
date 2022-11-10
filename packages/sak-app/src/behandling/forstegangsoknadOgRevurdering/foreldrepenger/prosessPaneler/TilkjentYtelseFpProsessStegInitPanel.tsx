@@ -14,7 +14,7 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
-import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
+import { FpBehandlingApiKeys } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_TILBAKETREKK];
 
@@ -53,7 +53,7 @@ const TilkjentYtelseFpProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
     prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}
     skalPanelVisesIMeny={() => true}
     hentOverstyrtStatus={() => (
-      requestFpApi.hasPath(BehandlingFellesApiKeys.BEREGNINGRESULTAT_FORELDREPENGER.name) ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT
+      props.requestApi.hasPath(BehandlingFellesApiKeys.BEREGNINGRESULTAT_FORELDREPENGER.name) ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT
     )}
     renderPanel={(data) => (
       <TilkjentYtelseProsessIndex

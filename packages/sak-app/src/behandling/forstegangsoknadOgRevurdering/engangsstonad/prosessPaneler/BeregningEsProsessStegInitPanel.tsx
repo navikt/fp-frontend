@@ -9,7 +9,7 @@ import BeregningsresultatProsessIndex from '@fpsak-frontend/prosess-beregningsre
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { AksessRettigheter, BeregningsresultatEs } from '@fpsak-frontend/types';
 
-import { EsBehandlingApiKeys, requestEsApi } from '../data/esBehandlingApi';
+import { EsBehandlingApiKeys } from '../data/esBehandlingApi';
 
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
@@ -35,14 +35,14 @@ const BeregningEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanel
   return (
     <ProsessDefaultInitPanel<Record<string, never>, EndepunktPanelData>
       {...props}
-      requestApi={requestEsApi}
+      requestApi={props.requestApi}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.BEREGNING}
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Beregning' })}
       skalPanelVisesIMeny={() => true}
       hentOverstyrtStatus={() => (
-        requestEsApi.hasPath(EsBehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD.name) ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT
+        props.requestApi.hasPath(EsBehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD.name) ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT
       )}
       erOverstyrt={erOverstyrt}
       renderPanel={(data) => (
