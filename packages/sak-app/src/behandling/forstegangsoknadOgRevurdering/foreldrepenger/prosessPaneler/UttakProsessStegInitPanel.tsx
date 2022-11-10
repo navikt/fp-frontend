@@ -7,6 +7,7 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import UttakProsessIndex from '@fpsak-frontend/prosess-uttak';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
+import { RequestApi } from '@fpsak-frontend/rest-api';
 import {
   AksessRettigheter, ArbeidsgiverOpplysningerPerId, Behandling, FamilieHendelseSamling,
   Personoversikt, Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
@@ -16,10 +17,10 @@ import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitP
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 
-import { restApiFpHooks, FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
+import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
 
-const getStatusFromUttakresultat = (behandling: Behandling): string => {
-  const harLenke = requestFpApi.hasPath(FpBehandlingApiKeys.UTTAKSRESULTAT_PERIODER.name);
+const getStatusFromUttakresultat = (behandling: Behandling, requestApi: RequestApi): string => {
+  const harLenke = requestApi.hasPath(FpBehandlingApiKeys.UTTAKSRESULTAT_PERIODER.name);
   if (!harLenke) {
     return vilkarUtfallType.IKKE_VURDERT;
   }
@@ -75,7 +76,7 @@ const UttakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitPr
       prosessPanelKode={ProsessStegCode.UTTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Uttak' })}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={() => getStatusFromUttakresultat(props.behandling)}
+      hentOverstyrtStatus={() => getStatusFromUttakresultat(props.behandling, props.requestApi)}
       renderPanel={(data) => (
         <UttakProsessIndex
           employeeHasAccess={rettigheter.kanOverstyreAccess.isEnabled}
