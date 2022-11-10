@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - '**'
+      - '!azure_gcp'
     paths-ignore:
       - '**.md'
       - '**.MD'
