@@ -30,6 +30,8 @@ type UttakAp = {
   }[];
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.FASTSETT_UTTAKPERIODER
  | AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER
+ | AksjonspunktKode.TILKNYTTET_STORTINGET
+ | AksjonspunktKode.ANNENPART_EØS
  | AksjonspunktKode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE
  | AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_FORDELING_AV_STØNADSPERIODEN
  | AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_DØD
