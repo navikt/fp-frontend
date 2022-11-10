@@ -18,6 +18,7 @@ export const FpBehandlingApiKeys = {
   UTTAK_STONADSKONTOER: new RestKey<UttakStonadskontoer, void>('UTTAK_STONADSKONTOER'),
   UTTAK_KONTROLLER_FAKTA_PERIODER: new RestKey<UttakKontrollerFaktaPerioderWrapper, void>('UTTAK_KONTROLLER_FAKTA_PERIODER'),
   UTTAK_KONTROLLER_AKTIVITETSKRAV: new RestKey<UttakKontrollerAktivitetskrav[], void>('UTTAK_KONTROLLER_AKTIVITETSKRAV'),
+  BEREGNINGSGRUNNLAG_BESTEBEREGNING: new RestKey<UttakKontrollerAktivitetskrav[], void>('BEREGNINGSGRUNNLAG_BESTEBEREGNING'),
 };
 
 const endepunkter = new RestApiConfigBuilder()
@@ -28,6 +29,7 @@ const endepunkter = new RestApiConfigBuilder()
   .withRel('uttak-stonadskontoer', FpBehandlingApiKeys.UTTAK_STONADSKONTOER)
   .withRel('uttak-kontroller-fakta-perioder', FpBehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER)
   .withRel('uttak-kontroller-aktivitetskrav', FpBehandlingApiKeys.UTTAK_KONTROLLER_AKTIVITETSKRAV)
+  .withRel('beregningsgrunnlagharbesteberegning', FpBehandlingApiKeys.BEREGNINGSGRUNNLAG_BESTEBEREGNING)
 
   // operasjoner
   .withRel('lagre-stonadskontoer-gitt-uttaksperioder', FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER)

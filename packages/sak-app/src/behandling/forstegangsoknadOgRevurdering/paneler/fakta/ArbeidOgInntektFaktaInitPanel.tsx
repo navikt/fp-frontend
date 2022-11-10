@@ -13,11 +13,12 @@ import { ArbeidOgInntektsmelding, AksessRettigheter } from '@fpsak-frontend/type
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
+import { requestFpApi } from '../../foreldrepenger/data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING];
 
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.ARBEID_OG_INNTEKT];
-type EndepunktInitData = {
+const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.ARBEID_OG_INNTEKT];
+type EndepunktPanelData = {
   arbeidOgInntekt: ArbeidOgInntektsmelding;
 }
 
@@ -58,13 +59,13 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
   }, [props.behandling.versjon]);
 
   return (
-    <FaktaDefaultInitPanel<EndepunktInitData>
+    <FaktaDefaultInitPanel<Record<string, never>, EndepunktPanelData>
       {...props}
-      initEndepunkter={ENDEPUNKTER_INIT_DATA}
+      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       faktaPanelKode={FaktaPanelCode.ARBEID_OG_INNTEKT}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'ArbeidOgInntektInfoPanel.Title' })}
-      skalPanelVisesIMeny={({ arbeidOgInntekt }) => !!arbeidOgInntekt
+      skalPanelVisesIMeny={() => requestFpApi.hasPath(BehandlingFellesApiKeys.ARBEID_OG_INNTEKT.name)
         && !props.behandling.aksjonspunkt.some((ap) => aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD === ap.definisjon)}
       renderPanel={(data) => (
         <ArbeidOgInntektFaktaIndex
@@ -75,7 +76,6 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
           lagreVurdering={lagreVurdering}
           settBehandlingPåVentCallback={settBehandlingPåVentCallback}
           åpneForNyVurdering={åpneForNyVurderingOgOppfriskBehandling}
-          // @ts-ignore Eg trur denne feilar grunna feil i typescript-pakka. Sjekk på eit seinare tidspunkt om denne er retta
           {...data}
         />
       )}

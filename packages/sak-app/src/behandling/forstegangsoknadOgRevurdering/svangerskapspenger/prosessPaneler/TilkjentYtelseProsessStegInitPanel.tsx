@@ -15,27 +15,12 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
-
-const getStatusFromResultatstruktur = (resultatstruktur?: BeregningsresultatFp): string => {
-  if (resultatstruktur && resultatstruktur.perioder && resultatstruktur.perioder.length > 0) {
-    if (!resultatstruktur.perioder.some((p) => p.dagsats > 0)) {
-      return vilkarUtfallType.IKKE_VURDERT;
-    }
-    return vilkarUtfallType.OPPFYLT;
-  }
-  return vilkarUtfallType.IKKE_VURDERT;
-};
+import { requestFpApi } from '../../foreldrepenger/data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_TILBAKETREKK];
 
-const ENDEPUNKTER_INIT_DATA = [
-  BehandlingFellesApiKeys.BEREGNINGRESULTAT_FORELDREPENGER,
-];
-type EndepunktInitData = {
-  beregningresultatForeldrepenger: BeregningsresultatFp;
-}
-
 const ENDEPUNKTER_PANEL_DATA = [
+  BehandlingFellesApiKeys.BEREGNINGRESULTAT_FORELDREPENGER,
   BehandlingFellesApiKeys.FAMILIEHENDELSE,
   BehandlingFellesApiKeys.SOKNAD,
   BehandlingFellesApiKeys.FERIEPENGEGRUNNLAG,
@@ -44,6 +29,7 @@ type EndepunktPanelData = {
   familiehendelse: FamilieHendelseSamling;
   soknad: Soknad;
   feriepengegrunnlag: Feriepengegrunnlag;
+  beregningresultatForeldrepenger: BeregningsresultatFp;
 }
 
 interface OwnProps {
@@ -58,15 +44,16 @@ const TilkjentYtelseProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
   personoversikt,
   ...props
 }) => (
-  <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+  <ProsessDefaultInitPanel<Record<string, never>, EndepunktPanelData>
     {...props}
-    initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     prosessPanelKode={ProsessStegCode.TILKJENT_YTELSE}
     prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}
     skalPanelVisesIMeny={(_data, initState) => initState === RestApiState.SUCCESS}
-    hentOverstyrtStatus={(data) => getStatusFromResultatstruktur(data.beregningresultatForeldrepenger)}
+    hentOverstyrtStatus={() => (
+      requestFpApi.hasPath(BehandlingFellesApiKeys.BEREGNINGRESULTAT_FORELDREPENGER.name) ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT
+    )}
     renderPanel={(data) => (
       <TilkjentYtelseProsessIndex
         fagsak={fagsak}

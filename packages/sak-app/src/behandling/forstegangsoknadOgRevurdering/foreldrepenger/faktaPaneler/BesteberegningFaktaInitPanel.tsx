@@ -12,9 +12,10 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
+import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 
-const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG];
-type EndepunktInitData = {
+const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG];
+type EndepunktPanelData = {
   beregningsgrunnlag: Beregningsgrunnlag;
 }
 
@@ -29,17 +30,16 @@ const BesteberegningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
   arbeidsgiverOpplysningerPerId,
   ...props
 }) => (
-  <FaktaDefaultInitPanel<EndepunktInitData>
+  <FaktaDefaultInitPanel<Record<string, never>, EndepunktPanelData>
     {...props}
     aksjonspunktKoder={[aksjonspunktCodes.KONTROLLER_AUTOMATISK_BESTEBEREGNING, aksjonspunktCodes.MANUELL_KONTROLL_AV_BESTEBEREGNING]}
-    initEndepunkter={ENDEPUNKTER_INIT_DATA}
+    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     faktaPanelKode={FaktaPanelCode.BESTEBEREGNING}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'BesteberegningInfoPanel.Title' })}
-    skalPanelVisesIMeny={(initData) => !!initData?.beregningsgrunnlag?.ytelsesspesifiktGrunnlag?.besteberegninggrunnlag}
+    skalPanelVisesIMeny={() => requestFpApi.hasPath(FpBehandlingApiKeys.BEREGNINGSGRUNNLAG_BESTEBEREGNING.name)}
     renderPanel={(data) => (
       <BesteberegningFaktaIndex
         arbeidsgiverOpplysninger={arbeidsgiverOpplysningerPerId}
-        // @ts-ignore Eg trur denne feilar grunna feil i typescript-pakka. Sjekk på eit seinare tidspunkt om denne er retta
         {...data}
       />
     )}
