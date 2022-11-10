@@ -13,7 +13,6 @@ import { ArbeidOgInntektsmelding, AksessRettigheter } from '@fpsak-frontend/type
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
-import { requestFpApi } from '../../foreldrepenger/data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING];
 
@@ -65,7 +64,7 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       faktaPanelKode={FaktaPanelCode.ARBEID_OG_INNTEKT}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'ArbeidOgInntektInfoPanel.Title' })}
-      skalPanelVisesIMeny={() => requestFpApi.hasPath(BehandlingFellesApiKeys.ARBEID_OG_INNTEKT.name)
+      skalPanelVisesIMeny={() => requestApi.hasPath(BehandlingFellesApiKeys.ARBEID_OG_INNTEKT.name)
         && !props.behandling.aksjonspunkt.some((ap) => aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD === ap.definisjon)}
       renderPanel={(data) => (
         <ArbeidOgInntektFaktaIndex

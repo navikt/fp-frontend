@@ -21,7 +21,6 @@ import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
 // TODO Denne burde ligga sånn til at den kun blir importert når denne pakka dynamisk blir importert
 import '@navikt/ft-fakta-beregning/dist/style.css';
-import { requestFpApi } from '../../foreldrepenger/data/fpBehandlingApi';
 
 const ProsessFaktaBeregning = React.lazy(() => import('@navikt/ft-fakta-beregning'));
 
@@ -111,7 +110,7 @@ const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
     overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={FaktaPanelCode.BEREGNING}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'BeregningInfoPanel.Title' })}
-    skalPanelVisesIMeny={() => requestFpApi.hasPath(BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG.name)}
+    skalPanelVisesIMeny={() => props.requestApi.hasPath(BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG.name)}
     renderPanel={(data) => (
       <DynamicLoader<React.ComponentProps<typeof ProsessFaktaBeregning>>
         packageCompFn={() => import('@navikt/ft-fakta-beregning')}
