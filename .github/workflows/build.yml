@@ -1,0 +1,134 @@
+name: Build and deploy
+
+on:
+  push:
+    branches:
+      - '**'
+    paths-ignore:
+      - '**.md'
+      - '**.MD'
+      - '.gitignore'
+      - 'LICENSE'
+      - 'CODEOWNERS'
+      - 'dokumentasjon/**'
+      - 'lokalutvikling/**'
+
+jobs:
+  build-app:
+    name: Build and test
+    runs-on: ubuntu-latest-8-cores
+    outputs:
+      build-version: ${{ steps.generate-build-version.outputs.build-version }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.1.0
+        with:
+          fetch-depth: 0
+
+      - name: Set up NODE
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.3.0
+          registry-url: https://npm.pkg.github.com/
+          scope: '@navikt'
+          cache: 'yarn'
+
+      - name: Generate build version
+        id: generate-build-version
+        run: |
+          echo "build-version=$(date +%Y.%m.%d.%H%M%S)-$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_OUTPUT
+
+      - name: Print build version
+        run: echo "Generated build-version is ${{ steps.generate-build-version.outputs.build-version }}"
+
+      - name: Installere dependencies
+        run: yarn install --ignore-optional --no-progress --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+
+      - name: Run linting
+        run: yarn less:lint && yarn lint && yarn ts-check
+
+      - name: Henter ut filer som har endret seg
+        if: github.ref_name == 'master'
+        run: echo "FILES_CHANGED=$(echo $(git diff --name-only ${{github.event.before}} ${{github.sha}}))" >> $GITHUB_ENV
+
+      - name: Henter ut filer som har endret seg på branch
+        if: github.ref_name != 'master'
+        run: echo "FILES_CHANGED=$(echo $(git diff --name-only origin/master ${{github.sha}}))" >> $GITHUB_ENV
+
+      - name: Run all test and coverage when changes to dependencies
+        if: contains(fromJson('["yarn.lock"]'), env.FILES_CHANGED)
+        id: run-all-tests
+        run: yarn test:coverage
+
+      - name: Run test and coverage only related to changes
+        if: steps.run-all-tests.outcome == 'skipped' && github.ref_name == 'master'
+        run: |
+          echo "Kjøre tester basert på endringene mellom commit og master ${{ github.event.before }}"
+          yarn test:coverage --changedSince=${{ github.event.before }}
+
+      - name: Run test and coverage only related to changes på branch
+        if: steps.run-all-tests.outcome == 'skipped' && github.ref_name != 'master'
+        run: |
+          echo "Kjøre tester basert på endringene mellom commit og master ${{ github.event.before }}"
+          yarn test:coverage --changedSince=origin/master
+
+      - name: Build
+        if: github.ref_name == 'master'
+        run: |
+          echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV
+          yarn build
+
+      - name: Login to GitHub Packages Docker Registry
+        if: github.ref_name == 'master'
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a # Use commit-sha1 instead of tag for security concerns
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up QEMU
+        if: github.ref_name == 'master'
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        if: github.ref_name == 'master'
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and push
+        if: github.ref_name == 'master'
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          platforms: linux/amd64, linux/arm64
+          pull: true
+          push: ${{ github.ref_name == 'master' }}
+          tags: ghcr.io/${{ github.repository }}:${{ steps.generate-build-version.outputs.build-version }}, ghcr.io/${{ github.repository }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-coverage-report
+          path: coverage
+
+  create-issue:
+    name: Issues
+    if: github.ref_name == 'master'
+    needs: build-app
+    uses: navikt/fp-gha-workflows/.github/workflows/issues.yml@main
+    with:
+      build-version: ${{ needs.build-app.outputs.build-version }}
+    secrets: inherit
+
+  promote:
+    name: Deploy til dev-fss
+    if: github.ref_name == 'master'
+    needs: [ build-app, create-issue ]
+    uses: navikt/fp-gha-workflows/.github/workflows/promote.yml@main
+    with:
+      issue-number: ${{ needs.create-issue.outputs.issue-number }}
+      cluster: dev-fss
+    secrets: inherit
