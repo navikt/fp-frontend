@@ -1,5 +1,5 @@
 import React, {
-  useCallback, FunctionComponent, useRef, useState, useEffect,
+  useCallback, FunctionComponent, useState, useEffect,
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
@@ -67,8 +67,6 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
   setDirty,
   erRedigerbart,
 }) => {
-  const tableRef = useRef<HTMLTableElement>(null);
-
   const [valgteFomDatoer, setValgteFomDatoer] = useState<string[]>([]);
 
   const velgPeriodeFomDato = useCallback((fom?: string, lukkAlleAndre = false) => {
@@ -78,7 +76,6 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
       const nye = fom ? [fom] : [];
       setValgteFomDatoer((foms) => (lukkAlleAndre ? nye : foms.concat(fom)));
     }
-    tableRef?.current?.scrollIntoView();
   }, [valgteFomDatoer, setValgteFomDatoer]);
 
   useEffect(() => velgPeriodeFomDato(uttakKontrollerFaktaPerioder?.find((oa) => !oa.bekreftet)?.fom), []);
@@ -104,7 +101,6 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
 
   return (
     <Table
-      ref={tableRef}
       headerTextCodes={erRedigerbart ? HEADER_TEXT_CODES : HEADER_TEXT_CODES.filter((h) => h !== 'EMPTY')}
       noHover
       hasGrayHeader

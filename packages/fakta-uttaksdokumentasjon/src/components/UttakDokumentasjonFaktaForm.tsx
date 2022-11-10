@@ -4,18 +4,19 @@ import React, {
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Form } from '@navikt/ft-form-hooks';
-import { Heading } from '@navikt/ds-react';
+import { Button, Heading } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { DokumentasjonVurderingBehov } from '@fpsak-frontend/types';
-import { FaktaSubmitButtonNew, FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
+import { FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
 import { VurderDokumentasjonAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import UttakDokumentasjonFaktaTable from './UttakDokumentasjonFaktaTable';
 
 interface PureOwnProps {
   harApneAksjonspunkter: boolean;
+  lagretBegrunnelse?: string;
   dokumentasjonVurderingBehov: DokumentasjonVurderingBehov[];
   submitCallback: (aksjonspunkter: VurderDokumentasjonAp) => Promise<void>;
   readOnly: boolean;
@@ -26,6 +27,7 @@ interface PureOwnProps {
 
 const UttakDokumentasjonFaktaForm: FunctionComponent<PureOwnProps> = ({
   harApneAksjonspunkter,
+  lagretBegrunnelse,
   dokumentasjonVurderingBehov,
   readOnly,
   submittable,
@@ -35,9 +37,11 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<PureOwnProps> = ({
 }) => {
   const intl = useIntl();
 
+  const [erBekreftKnappTrykket, settBekreftKnappTrykket] = useState(false);
   const [dokBehov, oppdaterDokBehov] = useState<DokumentasjonVurderingBehov[]>(formData?.dokBehov || dokumentasjonVurderingBehov);
 
   const bekreft = useCallback((begrunnelse: string) => {
+    settBekreftKnappTrykket(true);
     submitCallback({
       kode: aksjonspunktCodes.VURDER_UTTAK_DOKUMENTASJON,
       vurderingBehov: dokBehov as Required<DokumentasjonVurderingBehov>[],
@@ -47,7 +51,7 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<PureOwnProps> = ({
 
   const formMethods = useForm<{ begrunnelse: string }>({
     defaultValues: {
-      begrunnelse: formData?.begrunnelse,
+      begrunnelse: formData?.begrunnelse || lagretBegrunnelse,
     },
   });
 
@@ -89,12 +93,14 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<PureOwnProps> = ({
           hasBegrunnelse
         />
         <VerticalSpacer twentyPx />
-        <FaktaSubmitButtonNew
-          isSubmittable={isSubmittable}
-          isReadOnly={readOnly}
-          isSubmitting={formMethods.formState.isSubmitting}
-          isDirty={isDirty || formMethods.formState.isDirty}
-        />
+        <Button
+          size="small"
+          variant="primary"
+          disabled={!isSubmittable || (!isDirty && !formMethods.formState.isDirty) || readOnly || erBekreftKnappTrykket}
+          loading={erBekreftKnappTrykket}
+        >
+          <FormattedMessage id="UttakDokumentasjonFaktaForm.Bekreft" />
+        </Button>
       </Form>
     </>
   );

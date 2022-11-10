@@ -17,7 +17,7 @@ import {
 
 import splitPeriodImageUrl from '@fpsak-frontend/assets/images/splitt.svg';
 import {
-  DokumentasjonVurderingBehov, UttakKontrollerAktivitetskrav, UttakType, UttakVurdering,
+  DokumentasjonVurderingBehov, UttakType, UttakVurdering,
 } from '@fpsak-frontend/types';
 
 import OppdaterePeriodeModal from './OppdaterePeriodeModal';
@@ -25,7 +25,7 @@ import OppdaterePeriodeModal from './OppdaterePeriodeModal';
 import styles from './uttakDokumentasjonFaktaDetailForm.less';
 
 type FormValues = {
-  perioder: UttakKontrollerAktivitetskrav[];
+  perioder: DokumentasjonVurderingBehov[];
 }
 
 interface OwnProps {
@@ -73,7 +73,10 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
     settDato(false);
     update(index, nyPeriode);
     append({
+      ...periode,
+      fom: null,
       tom: periode.tom,
+      vurdering: null,
     });
   };
 

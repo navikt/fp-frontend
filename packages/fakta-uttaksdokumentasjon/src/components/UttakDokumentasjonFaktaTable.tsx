@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useCallback, useEffect, useState, useRef,
+  FunctionComponent, useCallback, useEffect, useState,
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { dateFormat } from '@navikt/ft-utils';
@@ -66,8 +66,6 @@ const UttakDokumentasjonFaktaTable: FunctionComponent<PureOwnProps> = ({
   readOnly,
   setDirty,
 }) => {
-  const tableRef = useRef<HTMLTableElement>(null);
-
   const [valgtDokBehovFomDatoer, setDokBehovFomDatoer] = useState<string[]>([]);
 
   const velgDokBehovFomDato = useCallback((fom?: string, lukkAlleAndre = false) => {
@@ -77,7 +75,6 @@ const UttakDokumentasjonFaktaTable: FunctionComponent<PureOwnProps> = ({
       const nye = fom ? [fom] : [];
       setDokBehovFomDatoer((foms) => (lukkAlleAndre ? nye : foms.concat(fom)));
     }
-    tableRef?.current?.scrollIntoView();
   }, [valgtDokBehovFomDatoer, setDokBehovFomDatoer]);
 
   useEffect(() => velgDokBehovFomDato(dokumentasjonVurderingBehov?.find((oa) => !oa.vurdering)?.fom), []);
@@ -95,7 +92,7 @@ const UttakDokumentasjonFaktaTable: FunctionComponent<PureOwnProps> = ({
   }, [dokumentasjonVurderingBehov]);
 
   return (
-    <Table ref={tableRef} headerTextCodes={HEADER_TEXT_CODES} noHover hasGrayHeader>
+    <Table headerTextCodes={HEADER_TEXT_CODES} noHover hasGrayHeader>
       {dokumentasjonVurderingBehov.map((behov) => (
         <ExpandableTableRow
           key={behov.fom + behov.tom}
