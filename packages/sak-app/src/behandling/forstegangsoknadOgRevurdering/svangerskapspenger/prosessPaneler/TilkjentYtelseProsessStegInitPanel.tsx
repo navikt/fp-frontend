@@ -49,7 +49,7 @@ const TilkjentYtelseProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     prosessPanelKode={ProsessStegCode.TILKJENT_YTELSE}
     prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}
-    skalPanelVisesIMeny={(_data, initState) => initState === RestApiState.SUCCESS}
+    skalPanelVisesIMeny={() => true}
     hentOverstyrtStatus={() => (
       props.requestApi.hasPath(BehandlingFellesApiKeys.BEREGNINGRESULTAT_FORELDREPENGER.name) ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT
     )}
