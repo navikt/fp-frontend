@@ -6,36 +6,48 @@ import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './UttakDokumentasjonFaktaIndex.stories';
 
-const { AksjonspunktMedToUavklartePerioder, AksjonspunktSomErBekreftetOgBehandlingAvsluttet } = composeStories(stories);
+const {
+  AksjonspunktMedUavklartePerioder, AksjonspunktSomErBekreftetOgBehandlingAvsluttet, AksjonspunktErBekreftetMenBehandlingErÅpen,
+} = composeStories(stories);
 
-describe('<AktivitetskravFaktaIndex>', () => {
-  it.skip('skal avklare to perioder og så bekrefte aksjonspunkt', async () => {
+describe('<UttakDokumentasjonFaktaIndex>', () => {
+  it('skal avklare perioder og så bekrefte aksjonspunkt', async () => {
     const lagre = jest.fn(() => Promise.resolve());
 
-    const utils = render(<AksjonspunktMedToUavklartePerioder submitCallback={lagre} />);
+    const utils = render(<AksjonspunktMedUavklartePerioder submitCallback={lagre} />);
 
-    expect(await screen.findByText('Kontroller kravet til mors aktivitet')).toBeInTheDocument();
-    expect(screen.getAllByText('08.01.2021 - 13.01.2021')).toHaveLength(2);
+    expect(await screen.findByText('Fakta om uttaksdokumentasjon')).toBeInTheDocument();
+    expect(screen.getByText('Kontroller årsak')).toBeInTheDocument();
+    expect(screen.getByText('01.11.2022 - 07.11.2022')).toBeInTheDocument();
     expect(screen.getByText('Oppdater').closest('button')).toBeDisabled();
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
-    await userEvent.click(screen.getByText('Aktiviteten er ikke dokumentert'));
-
+    await userEvent.click(screen.getByText('Godkjent'));
     await userEvent.click(screen.getByText('Oppdater'));
 
-    expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
+    expect(await screen.findByText('Godkjent')).not.toBeChecked();
+
+    expect(screen.getByText('08.11.2022 - 13.11.2022')).toBeInTheDocument();
+    await userEvent.click(screen.getByText('Ikke godkjent'));
+    await userEvent.click(screen.getByText('Oppdater'));
+
+    expect(await screen.findByText('Ikke godkjent')).not.toBeChecked();
+
+    expect(screen.getByText('15.11.2022 - 20.11.2022')).toBeInTheDocument();
+    await userEvent.click(screen.getAllByText('Godkjent')[1]);
+    await userEvent.click(screen.getByText('Oppdater'));
+
+    expect(await screen.findByText('Ikke godkjent')).not.toBeChecked();
+
+    console.log(screen.debug(undefined, 30000));
+
+    expect(await screen.findByText('Mangler dokumentasjon')).toBeInTheDocument();
+
+    expect(screen.getByText('08.12.2022 - 13.12.2022')).toBeInTheDocument();
+    await userEvent.click(screen.getByText('Mangler dokumentasjon'));
+    await userEvent.click(screen.getByText('Oppdater'));
 
     await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
-
-    await userEvent.click(screen.getByText('Oppdater'));
-
-    expect(await screen.findAllByText('15.01.2021 - 20.01.2021')).toHaveLength(2);
-
-    await userEvent.click(screen.getByText('Mor er ikke i aktivitet'));
-
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse på andre periode');
-
-    await userEvent.click(screen.getByText('Oppdater'));
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -68,20 +80,23 @@ describe('<AktivitetskravFaktaIndex>', () => {
     });
   });
 
-  it('skal vise bekreftede perioder i tabell og så åpne en av de', async () => {
+  it('skal vise bekreftet periode i tabell når behandling er avsluttet', async () => {
     render(<AksjonspunktSomErBekreftetOgBehandlingAvsluttet />);
 
-    expect(await screen.findByText('Perioder med aktivitetskrav')).toBeInTheDocument();
-    expect(screen.queryByText('Kontroller kravet til mors aktivitet')).not.toBeInTheDocument();
-    expect(screen.getByText('01.01.2021 - 07.01.2021')).toBeInTheDocument();
-    expect(screen.getByText('Er innlagt på institusjon')).toBeInTheDocument();
-    expect(screen.getByText('Mor er i aktivitet')).toBeInTheDocument();
-    expect(screen.queryByText('Detaljer')).not.toBeInTheDocument();
+    expect(await screen.findByText('Fakta om uttaksdokumentasjon')).toBeInTheDocument();
+    expect(screen.queryByText('Kontroller årsak')).not.toBeInTheDocument();
+    expect(screen.getByText('Godkjent')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
+  });
 
-    await userEvent.click(screen.getAllByRole('row', { hidden: true })[1]);
+  it('skal vise bekreftet periode i tabell og så endre den', async () => {
+    render(<AksjonspunktErBekreftetMenBehandlingErÅpen />);
 
-    expect(await screen.findByText('Detaljer')).toBeInTheDocument();
-    expect(screen.getByText('Oppdater').closest('button')).toBeDisabled();
+    expect(await screen.findByText('Fakta om uttaksdokumentasjon')).toBeInTheDocument();
+    expect(screen.queryByText('Kontroller årsak')).not.toBeInTheDocument();
+    expect(screen.getByText('Godkjent')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
+    expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
   });
 });

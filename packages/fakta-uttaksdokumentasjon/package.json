@@ -14,13 +14,9 @@
     "@navikt/ds-react": "1.5.6",
     "@navikt/ft-form-hooks": "3.1.2",
     "@navikt/ft-form-validators": "1.0.36",
-    "@navikt/ft-kodeverk": "^1.0.21",
-    "@navikt/ft-types": "^1.0.32",
     "@navikt/ft-ui-komponenter": "1.2.2",
     "@navikt/ft-utils": "1.1.7",
-    "classnames": "2.3.2",
     "dayjs": "1.11.6",
-    "moment": "2.29.4",
     "react": "18.2.0",
     "react-intl": "6.2.1",
     "react-hook-form": "7.39.1"

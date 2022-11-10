@@ -155,9 +155,15 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
                   <VerticalSpacer sixteenPx />
                 </>
               )}
-              {(perioder[index].fom !== perioder[index].tom && fields.length === 1) && (
+              {(!readOnly && perioder[index].fom !== perioder[index].tom && fields.length === 1) && (
                 <div className={styles.marginBtn}>
-                  <Button size="small" variant="tertiary" type="button" onClick={() => delOppPeriode(index)} icon={<Image src={splitPeriodImageUrl} />}>
+                  <Button
+                    size="small"
+                    variant="tertiary"
+                    type="button"
+                    onClick={() => delOppPeriode(index)}
+                    icon={<Image src={splitPeriodImageUrl} />}
+                  >
                     <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.DelOppPeriode" />
                   </Button>
                 </div>
@@ -243,32 +249,34 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
           );
         })}
         <VerticalSpacer fourtyPx />
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <Button
-                size="small"
-                variant="secondary"
-                loading={false}
-                disabled={!formMethods.formState.isDirty || readOnly}
-              >
-                <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Oppdater" />
-              </Button>
-            </FlexColumn>
-            <FlexColumn>
-              <Button
-                size="small"
-                variant="tertiary"
-                onClick={avbrytEditeringAvAktivitetskrav}
-                disabled={readOnly}
-                type="button"
-              >
-                <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Avbryt" />
-              </Button>
-            </FlexColumn>
-          </FlexRow>
-          <VerticalSpacer sixteenPx />
-        </FlexContainer>
+        {!readOnly && (
+          <FlexContainer>
+            <FlexRow>
+              <FlexColumn>
+                <Button
+                  size="small"
+                  variant="secondary"
+                  loading={false}
+                  disabled={!formMethods.formState.isDirty || readOnly}
+                >
+                  <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Oppdater" />
+                </Button>
+              </FlexColumn>
+              <FlexColumn>
+                <Button
+                  size="small"
+                  variant="tertiary"
+                  onClick={avbrytEditeringAvAktivitetskrav}
+                  disabled={readOnly}
+                  type="button"
+                >
+                  <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Avbryt" />
+                </Button>
+              </FlexColumn>
+            </FlexRow>
+            <VerticalSpacer sixteenPx />
+          </FlexContainer>
+        )}
       </Form>
       {visModalPeriode !== undefined && (
         <OppdaterePeriodeModal submit={nullstillPerioder} cancel={() => settVisModalForPeriode(undefined)} />

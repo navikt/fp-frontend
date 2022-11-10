@@ -22,7 +22,6 @@ const dokumentasjonVurderingBehovListe = [{
   tom: '2022-11-07',
   type: UttakType.UTSETTELSE,
   årsak: UttakÅrsak.INNLEGGELSE_SØKER,
-  vurdering: UttakVurdering.GODKJENT,
 }, {
   fom: '2022-11-08',
   tom: '2022-11-13',
@@ -38,16 +37,7 @@ const dokumentasjonVurderingBehovListe = [{
   tom: '2022-11-20',
   type: UttakType.TIDLIG_OPPSTART_FAR,
   årsak: UttakÅrsak.NAV_TILTAK,
-}, {
-  fom: '2022-12-15',
-  tom: '2022-12-20',
-  type: UttakType.OVERFØRING,
-  årsak: UttakÅrsak.SYKDOM_SØKER,
 }] as DokumentasjonVurderingBehov[];
-
-const merknaderFraBeslutter = {
-  notAccepted: true,
-};
 
 export default {
   title: 'fakta/fakta-uttaksdokumentasjon',
@@ -83,8 +73,8 @@ const Template: Story<{
   />
 );
 
-export const AksjonspunktMedToUavklartePerioder = Template.bind({});
-AksjonspunktMedToUavklartePerioder.args = {
+export const AksjonspunktMedUavklartePerioder = Template.bind({});
+AksjonspunktMedUavklartePerioder.args = {
   aksjonspunkter: [{
     definisjon: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
     status: aksjonspunktStatus.OPPRETTET,
@@ -103,32 +93,20 @@ AksjonspunktSomErBekreftetOgBehandlingAvsluttet.args = {
   aksjonspunkter: [{
     definisjon: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
     status: aksjonspunktStatus.UTFORT,
-    begrunnelse: undefined,
+    begrunnelse: 'Dette er en begrunnelse',
     kanLoses: false,
     erAktivt: false,
   }],
-  dokumentasjonVurderingBehov: [dokumentasjonVurderingBehovListe[0]],
+  dokumentasjonVurderingBehov: [{
+    fom: '2022-12-08',
+    tom: '2022-12-13',
+    type: UttakType.AKTIVITETSKRAV,
+    årsak: UttakÅrsak.HV_OVELSE,
+    vurdering: UttakVurdering.GODKJENT,
+  }],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   readOnly: true,
   submittable: false,
-};
-
-export const AksjonspunktSomErReåpnetAvBeslutter = Template.bind({});
-AksjonspunktSomErReåpnetAvBeslutter.args = {
-  aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
-    status: aksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-    kanLoses: true,
-    erAktivt: true,
-  }],
-  dokumentasjonVurderingBehov: dokumentasjonVurderingBehovListe,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  readOnly: false,
-  submittable: true,
-  alleMerknaderFraBeslutter: {
-    [aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV]: merknaderFraBeslutter,
-  },
 };
 
 export const AksjonspunktErBekreftetMenBehandlingErÅpen = Template.bind({});
@@ -136,11 +114,17 @@ AksjonspunktErBekreftetMenBehandlingErÅpen.args = {
   aksjonspunkter: [{
     definisjon: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
     status: aksjonspunktStatus.UTFORT,
-    begrunnelse: undefined,
+    begrunnelse: 'Dette er en begrunnelse',
     kanLoses: true,
     erAktivt: true,
   }],
-  dokumentasjonVurderingBehov: [dokumentasjonVurderingBehovListe[0]],
+  dokumentasjonVurderingBehov: [{
+    fom: '2022-12-08',
+    tom: '2022-12-13',
+    type: UttakType.AKTIVITETSKRAV,
+    årsak: UttakÅrsak.HV_OVELSE,
+    vurdering: UttakVurdering.GODKJENT,
+  }],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   readOnly: false,
   submittable: true,

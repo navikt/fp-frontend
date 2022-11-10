@@ -93,14 +93,16 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<PureOwnProps> = ({
           hasBegrunnelse
         />
         <VerticalSpacer twentyPx />
-        <Button
-          size="small"
-          variant="primary"
-          disabled={!isSubmittable || (!isDirty && !formMethods.formState.isDirty) || readOnly || erBekreftKnappTrykket}
-          loading={erBekreftKnappTrykket}
-        >
-          <FormattedMessage id="UttakDokumentasjonFaktaForm.Bekreft" />
-        </Button>
+        {!readOnly && (
+          <Button
+            size="small"
+            variant="primary"
+            disabled={!isSubmittable || (!isDirty && !formMethods.formState.isDirty) || erBekreftKnappTrykket}
+            loading={erBekreftKnappTrykket}
+          >
+            <FormattedMessage id="UttakDokumentasjonFaktaForm.Bekreft" />
+          </Button>
+        )}
       </Form>
     </>
   );
