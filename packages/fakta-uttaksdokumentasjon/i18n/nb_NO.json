@@ -20,6 +20,10 @@
   "UttakDokumentasjonFaktaTable.HvOvelse": "Heimevernsøvelse",
   "UttakDokumentasjonFaktaTable.NavTiltak": "NAV-tilak",
   "UttakDokumentasjonFaktaTable.SykdomSoker": "Sykdom søker",
+  "UttakDokumentasjonFaktaTable.SykdomAnnenForelder": "Sykdom annen forelder",
+  "UttakDokumentasjonFaktaTable.InnleggelseAnnenForelder": "Innleggelse annen forelder",
+  "UttakDokumentasjonFaktaTable.BareSokerRett": "Bare søker rett",
+  "UttakDokumentasjonFaktaTable.Aleneomsorg": "Aleneomsorg",
 
   "UttakDokumentasjonFaktaDetailForm.Header": "Detaljer",
   "UttakDokumentasjonFaktaDetailForm.Oppdater": "Oppdater",

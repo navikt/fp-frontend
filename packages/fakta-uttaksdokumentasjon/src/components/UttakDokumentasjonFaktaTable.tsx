@@ -41,8 +41,23 @@ const finnÅrsak = (årsak) => {
   if (årsak === UttakÅrsak.NAV_TILTAK) {
     return <FormattedMessage id="UttakDokumentasjonFaktaTable.NavTiltak" />;
   }
+  if (årsak === UttakÅrsak.SYKDOM_SØKER) {
+    return <FormattedMessage id="UttakDokumentasjonFaktaTable.SykdomSoker" />;
+  }
+  if (årsak === UttakÅrsak.SYKDOM_ANNEN_FORELDER) {
+    return <FormattedMessage id="UttakDokumentasjonFaktaTable.SykdomAnnenForelder" />;
+  }
+  if (årsak === UttakÅrsak.INNLEGGELSE_ANNEN_FORELDER) {
+    return <FormattedMessage id="UttakDokumentasjonFaktaTable.InnleggelseAnnenForelder" />;
+  }
+  if (årsak === UttakÅrsak.BARE_SØKER_RETT) {
+    return <FormattedMessage id="UttakDokumentasjonFaktaTable.BareSokerRett" />;
+  }
+  if (årsak === UttakÅrsak.ALENEOMSORG) {
+    return <FormattedMessage id="UttakDokumentasjonFaktaTable.Aleneomsorg" />;
+  }
 
-  return <FormattedMessage id="UttakDokumentasjonFaktaTable.SykdomSoker" />;
+  return '';
 };
 
 const HEADER_TEXT_CODES = [
