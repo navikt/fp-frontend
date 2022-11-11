@@ -2,14 +2,13 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { Aksjonspunkt } from '@navikt/ft-types';
 import {
-  VilkarUtfallType, BehandlingStatus, VilkarType, AksjonspunktStatus,
+  VilkarUtfallType, BehandlingStatus,
 } from '@navikt/ft-kodeverk';
 
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import { Behandling, Vilkar } from '@fpsak-frontend/types';
+import { Behandling } from '@fpsak-frontend/types';
 
 import * as Felles from './useStandardProsessPanelProps';
 import InngangsvilkarDefaultInitPanel from './InngangsvilkarDefaultInitPanel';
@@ -60,24 +59,17 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
 
     const requestMock = createRequestApi(endpoints);
 
-    const data = [
-      { key: BEHANDLING_KEY.name, data: {} },
-    ];
-
     render(
-      <RestApiMock data={data} requestApi={requestMock}>
-        <InngangsvilkarDefaultInitPanel
-          erPanelValgt
-          behandlingVersjon={1}
-          registrerInngangsvilkarPanel={() => {}}
-          requestApi={requestMock}
-          initEndepunkter={[BEHANDLING_KEY]}
-          renderPanel={() => <div>Dette er komponenten</div>}
-          inngangsvilkarPanelKode="test"
-          hentInngangsvilkarPanelTekst={() => 'test'}
-          harInngangsvilkarApentAksjonspunkt={false}
-        />
-      </RestApiMock>,
+      <InngangsvilkarDefaultInitPanel
+        erPanelValgt
+        behandlingVersjon={1}
+        registrerInngangsvilkarPanel={() => {}}
+        requestApi={requestMock}
+        renderPanel={() => <div>Dette er komponenten</div>}
+        inngangsvilkarPanelKode="test"
+        hentInngangsvilkarPanelTekst={() => 'test'}
+        harInngangsvilkarApentAksjonspunkt={false}
+      />,
     );
 
     await waitFor(() => expect(screen.queryByText('Dette er komponenten')).not.toBeInTheDocument());
@@ -85,16 +77,6 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
 
   it('skal vise panel', async () => {
     jest.spyOn(Felles, 'default').mockImplementation(() => defaultProps);
-    const vilkar = [{
-      vilkarType: VilkarType.MEDLEMSKAPSVILKARET,
-    } as Vilkar];
-    const aksjonspunkter = [{
-      definisjon: aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-      status: AksjonspunktStatus.OPPRETTET,
-      kanLoses: true,
-      erAktivt: true,
-    }] as Aksjonspunkt[];
-
     const BEHANDLING_KEY = new RestKey<Behandling, void>('BEHANDLING_KEY');
 
     const endpoints = new RestApiConfigBuilder()
@@ -103,31 +85,18 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
 
     const requestMock = createRequestApi(endpoints);
 
-    const data = [
-      {
-        key: BEHANDLING_KEY.name,
-        data: {
-          aksjonspunkter,
-          vilkar,
-        },
-      },
-    ];
-
     render(
-      <RestApiMock data={data} requestApi={requestMock}>
-        <InngangsvilkarDefaultInitPanel
-          erPanelValgt
-          behandlingVersjon={1}
-          registrerInngangsvilkarPanel={() => {}}
-          requestApi={requestMock}
-          initEndepunkter={[BEHANDLING_KEY]}
-          aksjonspunktKoder={[aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR]}
-          renderPanel={() => <div>Dette er komponenten</div>}
-          inngangsvilkarPanelKode="test"
-          hentInngangsvilkarPanelTekst={() => 'test'}
-          harInngangsvilkarApentAksjonspunkt={false}
-        />
-      </RestApiMock>,
+      <InngangsvilkarDefaultInitPanel
+        erPanelValgt
+        behandlingVersjon={1}
+        registrerInngangsvilkarPanel={() => {}}
+        requestApi={requestMock}
+        aksjonspunktKoder={[aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR]}
+        renderPanel={() => <div>Dette er komponenten</div>}
+        inngangsvilkarPanelKode="test"
+        hentInngangsvilkarPanelTekst={() => 'test'}
+        harInngangsvilkarApentAksjonspunkt={false}
+      />,
     );
 
     expect(await screen.findByText('Dette er komponenten')).toBeInTheDocument();

@@ -3,7 +3,6 @@ import { render, screen } from '@testing-library/react';
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { BehandlingStatus, VilkarUtfallType } from '@navikt/ft-kodeverk';
 
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { Behandling } from '@fpsak-frontend/types';
@@ -52,24 +51,17 @@ describe('<ProsessDefaultInitPanel>', () => {
 
     const requestMock = createRequestApi(endpoints);
 
-    const data = [
-      { key: BEHANDLING_KEY.name, data: [] },
-    ];
-
     render(
-      <RestApiMock data={data} requestApi={requestMock}>
-        <ProsessDefaultInitPanel
-          valgtProsessSteg="default"
-          behandling={behandling}
-          registrerProsessPanel={() => {}}
-          requestApi={requestMock}
-          initEndepunkter={[BEHANDLING_KEY]}
-          skalPanelVisesIMeny={() => true}
-          renderPanel={() => <div>Dette er komponenten</div>}
-          prosessPanelKode={ProsessStegCode.AVREGNING}
-          prosessPanelMenyTekst="Dette er en tekst"
-        />
-      </RestApiMock>,
+      <ProsessDefaultInitPanel
+        valgtProsessSteg="default"
+        behandling={behandling}
+        registrerProsessPanel={() => {}}
+        requestApi={requestMock}
+        skalPanelVisesIMeny={() => true}
+        renderPanel={() => <div>Dette er komponenten</div>}
+        prosessPanelKode={ProsessStegCode.AVREGNING}
+        prosessPanelMenyTekst="Dette er en tekst"
+      />,
     );
 
     expect(await screen.findByText('Dette er komponenten')).toBeInTheDocument();
