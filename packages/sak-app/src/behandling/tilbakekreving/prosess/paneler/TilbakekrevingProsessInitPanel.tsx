@@ -6,12 +6,12 @@ import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import {
   Aksjonspunkt,
   AlleKodeverkTilbakekreving,
-  Behandling,
   DetaljerteFeilutbetalingsperioder,
   FeilutbetalingPerioderWrapper,
   VilkarsVurdertePerioderWrapper,
 } from '@navikt/ft-types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { Behandling } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { VilkarsVurderingAp, ForeldelseAksjonspunktCodes } from '@navikt/ft-prosess-tilbakekreving';
 
@@ -31,16 +31,16 @@ const ProsessTilbakekrveingMF = process.env.NODE_ENV !== 'development' ? undefin
 const ENDEPUNKTER_PANEL_DATA = [
   TilbakekrevingBehandlingApiKeys.VILKARVURDERINGSPERIODER,
   TilbakekrevingBehandlingApiKeys.VILKARVURDERING,
+  TilbakekrevingBehandlingApiKeys.PERIODER_FORELDELSE,
 ];
 type EndepunktPanelData = {
   vilkarvurderingsperioder: DetaljerteFeilutbetalingsperioder;
   vilkarvurdering: VilkarsVurdertePerioderWrapper;
+  perioderForeldelse: FeilutbetalingPerioderWrapper;
 }
 
 interface OwnProps {
   behandling: Behandling;
-  perioderForeldelse: FeilutbetalingPerioderWrapper;
-  aksjonspunkter: Aksjonspunkt[];
   navBrukerKjonn: string;
   alleKodeverk: AlleKodeverkTilbakekreving;
   bekreftAksjonspunkter: (aksjonspunktData: VilkarsVurderingAp) => Promise<void>;
@@ -51,8 +51,6 @@ interface OwnProps {
 
 const TilbakekrevingProsessInitPanel: FunctionComponent<OwnProps> = ({
   behandling,
-  perioderForeldelse,
-  aksjonspunkter,
   navBrukerKjonn,
   alleKodeverk,
   bekreftAksjonspunkter,
@@ -74,6 +72,8 @@ const TilbakekrevingProsessInitPanel: FunctionComponent<OwnProps> = ({
     [ProsessStegCode.TILBAKEKREVING]: data,
   })), [setFormData]);
 
+  const aksjonspunkter = behandling.aksjonspunkt || [];
+
   const aksjonspunkterForTilbakekreving = useMemo(() => (aksjonspunkter
     ? aksjonspunkter.filter((ap) => ForeldelseAksjonspunktCodes.VURDER_TILBAKEKREVING === ap.definisjon) : []),
   [aksjonspunkter]);
@@ -91,7 +91,7 @@ const TilbakekrevingProsessInitPanel: FunctionComponent<OwnProps> = ({
       packageCompFn={() => import('@navikt/ft-prosess-tilbakekreving')}
       federatedCompFn={ProsessTilbakekrveingMF}
       behandling={behandling}
-      perioderForeldelse={perioderForeldelse}
+      perioderForeldelse={initData.perioderForeldelse}
       vilkarvurderingsperioder={initData.vilkarvurderingsperioder}
       vilkarvurdering={initData.vilkarvurdering}
       submitCallback={bekreftAksjonspunkter}

@@ -1,10 +1,13 @@
 import React, { FunctionComponent, useCallback, useMemo } from 'react';
-
 import {
-  Aksjonspunkt, AlleKodeverkTilbakekreving, Behandling, FeilutbetalingPerioderWrapper,
+  Aksjonspunkt, AlleKodeverkTilbakekreving,
 } from '@navikt/ft-types';
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { ForeldelseAksjonspunktCodes, VurderForeldelseAp } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+
+import { ProsessStegCode } from '@fpsak-frontend/konstanter';
+import { Behandling } from '@fpsak-frontend/types';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
 import getAlleMerknaderFraBeslutter from '../../felles/util/getAlleMerknaderFraBeslutter';
@@ -21,8 +24,6 @@ const ProsessForeldelseMF = process.env.NODE_ENV !== 'development' ? undefined
 
 interface OwnProps {
   behandling: Behandling;
-  aksjonspunkter?: Aksjonspunkt[];
-  perioderForeldelse: FeilutbetalingPerioderWrapper;
   navBrukerKjonn: string;
   erReadOnlyFn: (aksjonspunkter: Aksjonspunkt[]) => boolean;
   alleKodeverk: AlleKodeverkTilbakekreving;
@@ -33,8 +34,6 @@ interface OwnProps {
 
 const ForeldelseProsessInitPanel: FunctionComponent<OwnProps> = ({
   behandling,
-  aksjonspunkter = [],
-  perioderForeldelse,
   navBrukerKjonn,
   erReadOnlyFn,
   alleKodeverk,
@@ -43,6 +42,10 @@ const ForeldelseProsessInitPanel: FunctionComponent<OwnProps> = ({
   setFormData,
 }) => {
   const { startRequest: beregnBelop } = restApiTilbakekrevingHooks.useRestApiRunner(TilbakekrevingBehandlingApiKeys.BEREGNE_BELØP);
+
+  const { data: perioderForeldelse, state } = restApiTilbakekrevingHooks.useRestApi(TilbakekrevingBehandlingApiKeys.PERIODER_FORELDELSE);
+
+  const aksjonspunkter = behandling.aksjonspunkt || [];
 
   const aksjonspunkterForForeldelse = useMemo(() => (
     aksjonspunkter.filter((ap) => ForeldelseAksjonspunktCodes.VURDER_FORELDELSE === ap.definisjon)),
@@ -56,6 +59,10 @@ const ForeldelseProsessInitPanel: FunctionComponent<OwnProps> = ({
     ...oldData,
     [ProsessStegCode.FORELDELSE]: data,
   })), [setFormData]);
+
+  if (state !== RestApiState.SUCCESS) {
+    return <LoadingPanel />;
+  }
 
   return (
     <DynamicLoader<React.ComponentProps<typeof ProsessForeldelse>>
