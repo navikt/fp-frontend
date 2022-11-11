@@ -12,8 +12,8 @@ import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPane
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import { requestAnkeApi, AnkeBehandlingApiKeys } from '../data/ankeBehandlingApi';
 
-const ENDEPUNKTER_INIT_DATA = [AnkeBehandlingApiKeys.ANKE_VURDERING];
-type EndepunktInitData = {
+const ENDEPUNKTER_PANEL_DATA = [AnkeBehandlingApiKeys.ANKE_VURDERING];
+type EndepunktPanelData = {
   ankeVurdering: AnkeVurdering;
 }
 
@@ -30,19 +30,19 @@ const AnkeBehandlingProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
   ...props
 }) => {
   const intl = useIntl();
+  const { behandling } = props;
   return (
-    <ProsessDefaultInitPanel<EndepunktInitData>
+    <ProsessDefaultInitPanel<EndepunktPanelData>
       {...props}
       requestApi={requestAnkeApi}
-      initEndepunkter={ENDEPUNKTER_INIT_DATA}
+      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       prosessPanelKode={ProsessStegCode.ANKEBEHANDLING}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Ankebehandling' })}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={(data) => (data.ankeVurdering?.ankeVurderingResultat ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT)}
+      hentOverstyrtStatus={() => (behandling.behandlingsresultat?.type ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT)}
       renderPanel={(data) => (
         <AnkeProsessIndex
           behandlinger={alleBehandlinger}
-          // @ts-ignore Fiks
           {...data}
         />
       )}

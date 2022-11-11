@@ -12,30 +12,26 @@ import useStandardProsessPanelProps from './useStandardProsessPanelProps';
 import useProsessMenyRegistrerer from './useProsessMenyRegistrerer';
 import ProsessPanelWrapper from './ProsessPanelWrapper';
 
-const DEFAULT_INIT_DATA = {};
-
-export type OwnProps<INIT_DATA, PANEL_DATA> = {
+export type OwnProps<PANEL_DATA> = {
   requestApi: RequestApi;
-  initEndepunkter?: RestKey<any, any>[] | { key: RestKey<INIT_DATA, any>, params?: any }[];
   panelEndepunkter?: RestKey<any, any>[] | { key: RestKey<any, any>, params?: any }[];
   aksjonspunktKoder?: string[];
   vilkarKoder?: string[];
-  skalPanelVisesIMeny: (data: Partial<INIT_DATA> & StandardProsessPanelProps, state: RestApiState) => boolean;
-  hentOverstyrtStatus?: (initData: Partial<INIT_DATA>, standardData: StandardProsessPanelProps) => string;
-  renderPanel: (data: INIT_DATA & PANEL_DATA & StandardProsessPanelProps, initData: INIT_DATA) => ReactElement;
+  skalPanelVisesIMeny: (data: StandardProsessPanelProps) => boolean;
+  hentOverstyrtStatus?: (standardData: StandardProsessPanelProps) => string;
+  renderPanel: (data: PANEL_DATA & StandardProsessPanelProps) => ReactElement;
   prosessPanelKode: ProsessStegCode;
   prosessPanelMenyTekst: string;
   lagringSideEffekter?: (aksjonspunktModeller: any) => () => void,
   erOverstyrt?: boolean;
-  hentSkalMarkeresSomAktiv?: (initData: Partial<INIT_DATA>, standardData: StandardProsessPanelProps) => boolean;
+  hentSkalMarkeresSomAktiv?: (standardData: StandardProsessPanelProps) => boolean;
 }
 
-const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
+const ProsessDefaultInitPanel = <PANEL_DATA = void, >({
   valgtProsessSteg,
   behandling,
   registrerProsessPanel,
   requestApi,
-  initEndepunkter = [],
   panelEndepunkter = [],
   aksjonspunktKoder,
   vilkarKoder,
@@ -47,37 +43,23 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   hentOverstyrtStatus,
   erOverstyrt = false,
   hentSkalMarkeresSomAktiv,
-}: OwnProps<INIT_DATA, PANEL_DATA> & ProsessPanelInitProps) => {
+}: OwnProps<PANEL_DATA> & ProsessPanelInitProps) => {
   const restApiHooks = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
-
-  const formaterteEndepunkter = initEndepunkter.map((e: any) => (e instanceof RestKey ? ({ key: e }) : e));
-  const { data: initData = DEFAULT_INIT_DATA as INIT_DATA, state: initState } = restApiHooks.useMultipleRestApi<INIT_DATA, any>(formaterteEndepunkter, {
-    updateTriggers: [behandling.versjon],
-    suspendRequest: formaterteEndepunkter.length === 0,
-    isCachingOn: true,
-  });
 
   const standardPanelProps = useStandardProsessPanelProps(aksjonspunktKoder, vilkarKoder, lagringSideEffekter);
 
-  const status = hentOverstyrtStatus ? hentOverstyrtStatus(initData, standardPanelProps) : standardPanelProps.status;
+  const status = hentOverstyrtStatus ? hentOverstyrtStatus(standardPanelProps) : standardPanelProps.status;
 
-  const data = {
-    ...initData,
-    ...standardPanelProps,
-  };
-
-  const skalMarkeresSomAktiv = hentSkalMarkeresSomAktiv && hentSkalMarkeresSomAktiv(initData, standardPanelProps);
+  const skalMarkeresSomAktiv = hentSkalMarkeresSomAktiv && hentSkalMarkeresSomAktiv(standardPanelProps);
   const harApentAksjonspunkt = erOverstyrt || standardPanelProps.isAksjonspunktOpen;
-
-  const erInitDataHentet = formaterteEndepunkter.length === 0 ? RestApiState.SUCCESS : initState;
 
   const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
-    erInitDataHentet,
+    RestApiState.SUCCESS,
     prosessPanelKode,
     prosessPanelMenyTekst,
     valgtProsessSteg,
-    skalPanelVisesIMeny(data, initState),
+    skalPanelVisesIMeny(standardPanelProps),
     harApentAksjonspunkt,
     status,
     skalMarkeresSomAktiv || harApentAksjonspunkt,
@@ -95,13 +77,12 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
       erPanelValgt={erPanelValgt}
       erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
       status={status}
-      dataState={formatertePanelEndepunkter.length > 0 ? panelDataState : erInitDataHentet}
+      dataState={formatertePanelEndepunkter.length > 0 ? panelDataState : RestApiState.SUCCESS}
     >
       {renderPanel({
-        ...initData,
         ...panelData,
         ...standardPanelProps,
-      }, initData)}
+      })}
     </ProsessPanelWrapper>
   );
 };

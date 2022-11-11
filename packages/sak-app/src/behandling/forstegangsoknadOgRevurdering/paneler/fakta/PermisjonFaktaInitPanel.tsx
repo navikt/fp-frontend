@@ -29,7 +29,7 @@ const PermisjonFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
   arbeidsgiverOpplysningerPerId,
   ...props
 }) => (
-  <FaktaDefaultInitPanel<Record<string, never>, EndepunktPanelData>
+  <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}

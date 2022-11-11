@@ -45,7 +45,7 @@ const TilkjentYtelseFpProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
   personoversikt,
   ...props
 }) => (
-  <ProsessDefaultInitPanel<Record<string, never>, EndepunktPanelData>
+  <ProsessDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}

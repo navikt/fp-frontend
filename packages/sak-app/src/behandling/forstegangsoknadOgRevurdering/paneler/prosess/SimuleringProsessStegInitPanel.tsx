@@ -63,7 +63,7 @@ const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelI
     [standardPanelProps.behandling.versjon]);
 
   return (
-    <ProsessDefaultInitPanel<Record<string, never>, EndepunktPanelData>
+    <ProsessDefaultInitPanel<EndepunktPanelData>
       {...props}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}

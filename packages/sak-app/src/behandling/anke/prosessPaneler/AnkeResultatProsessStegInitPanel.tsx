@@ -29,7 +29,7 @@ const AnkeResultatProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps>
 }) => {
   const intl = useIntl();
   return (
-    <ProsessDefaultInitPanel<Record<string, never>, EndepunktPanelData>
+    <ProsessDefaultInitPanel<EndepunktPanelData>
       {...props}
       requestApi={requestAnkeApi}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}

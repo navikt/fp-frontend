@@ -161,18 +161,18 @@ const VedtakSvpProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelIn
   const { aksjonspunkt: aksjonspunkter, vilkår } = props.behandling;
 
   return (
-    <ProsessDefaultInitPanel<Record<string, never>, EndepunktPanelData>
+    <ProsessDefaultInitPanel<EndepunktPanelData>
       {...props}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.VEDTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={(_initData, standardData) => findStatusForVedtak(
+      hentOverstyrtStatus={(standardData) => findStatusForVedtak(
         vilkår || [], aksjonspunkter || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
       )}
       lagringSideEffekter={lagringSideEffekter}
-      hentSkalMarkeresSomAktiv={(_initData, standardData) => !standardData.behandling.behandlingHenlagt && findStatusForVedtak(
+      hentSkalMarkeresSomAktiv={(standardData) => !standardData.behandling.behandlingHenlagt && findStatusForVedtak(
         vilkår || [], aksjonspunkter || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
       ) !== vilkarUtfallType.IKKE_VURDERT}
       renderPanel={(data) => (

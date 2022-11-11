@@ -2,40 +2,38 @@ import React, {
   FunctionComponent,
 } from 'react';
 import { useIntl } from 'react-intl';
-import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 
-import AnkeTrygderettsbehandlingProsessIndex from '@fpsak-frontend/prosess-anke-trygderettsbehandling';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { AnkeVurdering } from '@fpsak-frontend/types';
+import AksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import AnkeTrygderettsbehandlingProsessIndex from '@fpsak-frontend/prosess-anke-trygderettsbehandling';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import { requestAnkeApi, AnkeBehandlingApiKeys } from '../data/ankeBehandlingApi';
 
-const ENDEPUNKTER_INIT_DATA = [AnkeBehandlingApiKeys.ANKE_VURDERING];
-type EndepunktInitData = {
+const AKSJONSPUNKT_KODER = [AksjonspunktCodes.AUTO_VENT_ANKE_OVERSENDT_TIL_TRYGDERETTEN];
+
+const ENDEPUNKTER_PANEL_DATA = [AnkeBehandlingApiKeys.ANKE_VURDERING];
+type EndepunktPanelData = {
   ankeVurdering: AnkeVurdering;
 }
-
-const isBehandlet = (ankeVurdering: AnkeVurdering): boolean => !!ankeVurdering?.ankeVurderingResultat?.sendtTilTrygderettenDato
-  || (!!ankeVurdering?.ankeVurderingResultat?.trygderettVurdering && ankeVurdering?.ankeVurderingResultat?.trygderettVurdering !== '-');
 
 const AnkeTrygderettsbehandlingProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps> = ({
   ...props
 }) => {
   const intl = useIntl();
   return (
-    <ProsessDefaultInitPanel<EndepunktInitData>
+    <ProsessDefaultInitPanel<EndepunktPanelData>
       {...props}
       requestApi={requestAnkeApi}
-      initEndepunkter={ENDEPUNKTER_INIT_DATA}
+      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       prosessPanelKode={ProsessStegCode.ANKE_MERKNADER}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.AnkeMerknader' })}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={(data) => (isBehandlet(data.ankeVurdering) ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT)}
       renderPanel={(data) => (
         <AnkeTrygderettsbehandlingProsessIndex
-          // @ts-ignore
           {...data}
         />
       )}

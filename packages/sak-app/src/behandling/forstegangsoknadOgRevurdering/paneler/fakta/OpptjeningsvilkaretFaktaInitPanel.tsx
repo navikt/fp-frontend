@@ -35,7 +35,7 @@ const OpptjeningsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanel
   arbeidsgiverOpplysningerPerId,
   ...props
 }) => (
-  <FaktaDefaultInitPanel<Record<string, never>, EndepunktPanelData>
+  <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
