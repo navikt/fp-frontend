@@ -31,7 +31,7 @@ const MedlemskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvi
   rettigheter,
   ...props
 }) => (
-  <InngangsvilkarDefaultInitPanel<Record<string, never>, EndepunktPanelData>
+  <InngangsvilkarDefaultInitPanel<EndepunktPanelData>
     {...props}
     behandlingVersjon={behandlingVersjon}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}

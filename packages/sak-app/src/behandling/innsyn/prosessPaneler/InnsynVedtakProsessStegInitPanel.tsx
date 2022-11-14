@@ -3,16 +3,16 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 import { AksjonspunktStatus, VilkarUtfallType } from '@navikt/ft-kodeverk';
-import {
-  Aksjonspunkt, Behandling, Fagsak, Dokument,
-} from '@navikt/ft-types';
+import { Dokument } from '@navikt/ft-types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import innsynResultatTypeKV from '@fpsak-frontend/kodeverk/src/innsynResultatType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VedtakInnsynProsessIndex, { InnsynBrevData } from '@fpsak-frontend/prosess-vedtak-innsyn';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { ForhåndsvisMeldingParams, Innsyn } from '@fpsak-frontend/types';
+import {
+  Fagsak, Behandling, ForhåndsvisMeldingParams, Innsyn,
+} from '@fpsak-frontend/types';
+import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import IverksetterVedtakStatusModal from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
@@ -21,12 +21,14 @@ import useStandardProsessPanelProps from '../../felles/prosess/useStandardProses
 import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import { restApiInnsynHooks, requestInnsynApi, InnsynBehandlingApiKeys } from '../data/innsynBehandlingApi';
 
-const getVedtakStatus = (innsyn: Innsyn, aksjonspunkter: Aksjonspunkt[]): string => {
-  const harApentAksjonpunkt = aksjonspunkter.some((ap) => ap.status === AksjonspunktStatus.OPPRETTET);
-  if (aksjonspunkter.length === 0 || harApentAksjonpunkt) {
+const getVedtakStatus = (behandling: Behandling): string => {
+  const { aksjonspunkt, behandlingsresultat } = behandling;
+  const harApentAksjonpunkt = aksjonspunkt.some((ap) => ap.status === AksjonspunktStatus.OPPRETTET);
+  if (aksjonspunkt.length === 0 || harApentAksjonpunkt) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
-  return innsyn.innsynResultatType === innsynResultatTypeKV.INNVILGET || innsyn.innsynResultatType === innsynResultatTypeKV.DELVISTINNVILGET
+  return behandlingsresultat?.type === behandlingResultatType.INNSYN_INNVILGET
+    || behandlingsresultat?.type === behandlingResultatType.INNSYN_DELVIS_INNVILGET
     ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_OPPFYLT;
 };
 
@@ -57,16 +59,13 @@ const getLagringSideeffekter = (
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.FORESLA_VEDTAK];
 
-const ENDEPUNKTER_INIT_DATA = [InnsynBehandlingApiKeys.INNSYN];
-type EndepunktInitData = {
-  innsyn: Innsyn;
-}
-
 const getEndepunkterPanelData = (saksnummer: string) => [
+  { key: InnsynBehandlingApiKeys.INNSYN },
   { key: InnsynBehandlingApiKeys.INNSYN_DOKUMENTER, params: { saksnummer } },
 ];
 
 type EndepunktPanelData = {
+  innsyn: Innsyn;
   innsynDokumenter?: Dokument[];
 }
 
@@ -92,23 +91,19 @@ const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
   const previewCallback = useCallback(hentForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
     [standardPanelProps.behandling.versjon]);
 
-  const { aksjonspunkt: aksjonspunkter } = props.behandling;
-
   return (
-    <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+    <ProsessDefaultInitPanel<EndepunktPanelData>
       {...props}
       requestApi={requestInnsynApi}
-      initEndepunkter={ENDEPUNKTER_INIT_DATA}
       panelEndepunkter={getEndepunkterPanelData(fagsak.saksnummer)}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.VEDTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={(initData) => (initData.innsyn ? getVedtakStatus(initData.innsyn, aksjonspunkter || []) : VilkarUtfallType.IKKE_VURDERT)}
+      hentOverstyrtStatus={() => getVedtakStatus(props.behandling)}
       lagringSideEffekter={lagringSideeffekterCallback}
-      hentSkalMarkeresSomAktiv={(initData) => (!!initData.innsyn
-        && getVedtakStatus(initData.innsyn, aksjonspunkter || []) !== VilkarUtfallType.IKKE_VURDERT)}
-      renderPanel={(data, initData) => (
+      hentSkalMarkeresSomAktiv={() => getVedtakStatus(props.behandling) !== VilkarUtfallType.IKKE_VURDERT}
+      renderPanel={(data) => (
         <>
           <IverksetterVedtakStatusModal
             visModal={visIverksetterVedtakModal}
@@ -120,7 +115,6 @@ const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
             previewCallback={previewCallback}
             alleDokumenter={data?.innsynDokumenter}
             {...data}
-            {...initData}
           />
         </>
       )}

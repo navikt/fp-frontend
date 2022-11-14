@@ -12,7 +12,7 @@ import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesAp
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.INNTEKT_ARBEID_YTELSE];
-type EndepunktInitData = {
+type EndepunktPanelData = {
   inntektArbeidYtelse: InntektArbeidYtelse;
 }
 
@@ -20,7 +20,7 @@ type EndepunktInitData = {
  * YtelserFaktaInitPanel
  */
 const YtelserFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => (
-  <FaktaDefaultInitPanel<Record<string, never>, EndepunktInitData>
+  <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     faktaPanelKode={FaktaPanelCode.YTELSER}

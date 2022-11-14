@@ -33,7 +33,7 @@ const BeregningEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanel
   const toggleOverstyring = useCallback(() => setOverstyrt(!erOverstyrt), [erOverstyrt]);
 
   return (
-    <ProsessDefaultInitPanel<Record<string, never>, EndepunktPanelData>
+    <ProsessDefaultInitPanel<EndepunktPanelData>
       {...props}
       requestApi={props.requestApi}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}

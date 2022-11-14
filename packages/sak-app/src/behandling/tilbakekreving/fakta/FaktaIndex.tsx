@@ -5,27 +5,24 @@ import { IntlShape, useIntl } from 'react-intl';
 
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import {
-  LoadingPanel,
   FlexContainer,
   FlexColumn,
   FlexRow,
 } from '@navikt/ft-ui-komponenter';
 import {
   Aksjonspunkt,
-  FeilutbetalingFakta,
   AlleKodeverkTilbakekreving,
   AlleKodeverk,
 } from '@navikt/ft-types';
 import { Behandling, AksessRettigheter } from '@fpsak-frontend/types';
 import { FeilutbetalingAksjonspunktCode } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import FeilutbetalingFaktaInitPanel from './paneler/FeilutbetalingFaktaInitPanel';
 import VergeFaktaInitPanel from './paneler/VergeFaktaInitPanel';
-import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../data/tilbakekrevingBehandlingApi';
+import { TilbakekrevingBehandlingApiKeys, requestTilbakekrevingApi } from '../data/tilbakekrevingBehandlingApi';
 import FaktaMeny, { MenyData } from './FaktaMeny';
 
 import styles from './faktaIndex.less';
@@ -58,11 +55,10 @@ const leggTilFaktaPanel = (
 const utledFaktaPaneler = (
   intl: IntlShape,
   behandling: Behandling,
-  initData?: EndepunktInitData,
   valgtFaktaSteg?: string,
 ): MenyData[] => {
   const faktaPanelData = [] as MenyData[];
-  if (initData?.feilutbetalingFakta) {
+  if (requestTilbakekrevingApi.hasPath(TilbakekrevingBehandlingApiKeys.FEILUTBETALING_FAKTA.name)) {
     faktaPanelData.push(leggTilFaktaPanel(
       FaktaPanelCode.FEILUTBETALING,
       intl.formatMessage({ id: 'TilbakekrevingFakta.FaktaFeilutbetaling' }),
@@ -83,11 +79,6 @@ const erFaktaPanelAktivt = (
   faktaPanelerData: MenyData[],
   faktaPanelKode: string,
 ): boolean => (faktaPanelerData.some((d) => d.id === faktaPanelKode && d.erAktiv));
-
-const ENDEPUNKTER_INIT_DATA = [TilbakekrevingBehandlingApiKeys.FEILUTBETALING_FAKTA];
-type EndepunktInitData = {
-  feilutbetalingFakta: FeilutbetalingFakta;
-}
 
 interface OwnProps {
   behandling: Behandling;
@@ -116,13 +107,6 @@ const FaktaIndex: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const formaterteEndepunkter = ENDEPUNKTER_INIT_DATA.map((e) => ({ key: e }));
-  const { data: initData, state } = restApiTilbakekrevingHooks
-    .useMultipleRestApi<EndepunktInitData, any>(formaterteEndepunkter, {
-      updateTriggers: [behandling.versjon],
-      isCachingOn: true,
-    });
-
   const [formData, setFormData] = useState(EMPTY_FORM_DATA);
   useEffect(() => {
     if (formData) {
@@ -130,7 +114,7 @@ const FaktaIndex: FunctionComponent<OwnProps> = ({
     }
   }, [behandling.versjon]);
 
-  const faktaPanelerData = useMemo(() => utledFaktaPaneler(intl, behandling, initData, valgtFaktaSteg), [initData, behandling, valgtFaktaSteg]);
+  const faktaPanelerData = useMemo(() => utledFaktaPaneler(intl, behandling, valgtFaktaSteg), [behandling, valgtFaktaSteg]);
 
   const oppdaterFaktaPanel = useCallback((index: number) => {
     oppdaterFaktaPanelIUrl(faktaPanelerData[index].id);
@@ -152,37 +136,27 @@ const FaktaIndex: FunctionComponent<OwnProps> = ({
             />
           </FlexColumn>
           <FlexColumn className={styles.content}>
-            {state !== RestApiState.SUCCESS && (
-              <LoadingPanel />
+            {erFaktaPanelAktivt(faktaPanelerData, FaktaPanelCode.FEILUTBETALING) && (
+              <FeilutbetalingFaktaInitPanel
+                fagsakYtelseTypeKode={fagsakYtelseTypeKode}
+                behandling={behandling}
+                fpsakKodeverk={fpsakKodeverk}
+                alleKodeverk={tilbakekrevingKodeverk}
+                erReadOnlyFn={erReadOnlyFn}
+                submitCallback={bekreftAksjonspunkter}
+                formData={formData}
+                setFormData={setFormData}
+              />
             )}
-            {state === RestApiState.SUCCESS && (
-              <>
-                {erFaktaPanelAktivt(faktaPanelerData, FaktaPanelCode.FEILUTBETALING) && (
-                  <FeilutbetalingFaktaInitPanel
-                    fagsakYtelseTypeKode={fagsakYtelseTypeKode}
-                    behandling={behandling}
-                    fpsakKodeverk={fpsakKodeverk}
-                    alleKodeverk={tilbakekrevingKodeverk}
-                    feilutbetalingFakta={initData.feilutbetalingFakta}
-                    aksjonspunkter={behandling.aksjonspunkt}
-                    erReadOnlyFn={erReadOnlyFn}
-                    submitCallback={bekreftAksjonspunkter}
-                    formData={formData}
-                    setFormData={setFormData}
-                  />
-                )}
-                {erFaktaPanelAktivt(faktaPanelerData, FaktaPanelCode.VERGE) && (
-                  <VergeFaktaInitPanel
-                    behandling={behandling}
-                    aksjonspunkter={behandling.aksjonspunkt}
-                    fpsakKodeverk={fpsakKodeverk}
-                    erReadOnlyFn={erReadOnlyFn}
-                    submitCallback={bekreftAksjonspunkter}
-                    formData={formData}
-                    setFormData={setFormData}
-                  />
-                )}
-              </>
+            {erFaktaPanelAktivt(faktaPanelerData, FaktaPanelCode.VERGE) && (
+              <VergeFaktaInitPanel
+                behandling={behandling}
+                fpsakKodeverk={fpsakKodeverk}
+                erReadOnlyFn={erReadOnlyFn}
+                submitCallback={bekreftAksjonspunkter}
+                formData={formData}
+                setFormData={setFormData}
+              />
             )}
           </FlexColumn>
         </FlexRow>

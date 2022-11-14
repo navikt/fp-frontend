@@ -12,26 +12,22 @@ import useStandardFaktaPanelProps from './useStandardFaktaPanelProps';
 import useFaktaMenyRegistrerer from './useFaktaMenyRegistrerer';
 import FaktaPanelWrapper from './FaktaPanelWrapper';
 
-const DEFAULT_INIT_DATA = {};
-
-export type OwnProps<INIT_DATA, PANEL_DATA> = {
+export type OwnProps<PANEL_DATA> = {
   requestApi: RequestApi;
-  initEndepunkter?: RestKey<any, any>[];
   panelEndepunkter?: RestKey<any, any>[];
   aksjonspunktKoder?: string[];
   overstyringApKoder?: string[];
   skalPanelVisesIMeny: () => boolean;
-  renderPanel: (data: INIT_DATA & PANEL_DATA & StandardFaktaPanelProps) => ReactElement;
+  renderPanel: (data: PANEL_DATA & StandardFaktaPanelProps) => ReactElement;
   faktaPanelKode: FaktaPanelCode;
   faktaPanelMenyTekst: string;
 }
 
-const FaktaDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
+const FaktaDefaultInitPanel = <PANEL_DATA = void, >({
   valgtFaktaSteg,
   behandling,
   registrerFaktaPanel,
   requestApi,
-  initEndepunkter = [],
   panelEndepunkter = [],
   aksjonspunktKoder,
   overstyringApKoder,
@@ -39,23 +35,14 @@ const FaktaDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   renderPanel,
   faktaPanelKode,
   faktaPanelMenyTekst,
-}: OwnProps<INIT_DATA, PANEL_DATA> & FaktaPanelInitProps) => {
+}: OwnProps<PANEL_DATA> & FaktaPanelInitProps) => {
   const restApiHooks = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
-
-  const formaterteEndepunkter = initEndepunkter.map((e) => ({ key: e }));
-  const { data: initData = DEFAULT_INIT_DATA as INIT_DATA, state: initState } = restApiHooks.useMultipleRestApi<INIT_DATA, any>(formaterteEndepunkter, {
-    updateTriggers: [behandling.versjon],
-    suspendRequest: formaterteEndepunkter.length === 0,
-    isCachingOn: true,
-  });
 
   const standardPanelProps = useStandardFaktaPanelProps(aksjonspunktKoder, overstyringApKoder);
 
-  const erInitDataHentet = formaterteEndepunkter.length === 0 ? RestApiState.SUCCESS : initState;
-
   const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
-    erInitDataHentet,
+    RestApiState.SUCCESS,
     faktaPanelKode,
     faktaPanelMenyTekst,
     valgtFaktaSteg,
@@ -71,9 +58,8 @@ const FaktaDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   });
 
   return (
-    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={formatertePanelEndepunkter.length > 0 ? panelDataState : erInitDataHentet}>
+    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={formatertePanelEndepunkter.length > 0 ? panelDataState : RestApiState.SUCCESS}>
       {renderPanel({
-        ...initData,
         ...panelData,
         ...standardPanelProps,
       })}

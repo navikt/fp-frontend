@@ -28,7 +28,7 @@ const VergeFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({
   registrerFaktaPanel,
   requestApi,
 }) => (
-  <FaktaDefaultInitPanel<Record<string, never>, EndepunktPanelData>
+  <FaktaDefaultInitPanel<EndepunktPanelData>
     behandling={behandling}
     valgtFaktaSteg={valgtFaktaSteg}
     registrerFaktaPanel={registrerFaktaPanel}
