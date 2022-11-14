@@ -3270,17 +3270,27 @@
     "@navikt/ds-react" "^1.5.6"
     "@navikt/ft-utils" "^1.1.7"
 
-"@navikt/ft-prosess-beregningsgrunnlag@3.1.5":
-  version "3.1.5"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-beregningsgrunnlag/3.1.5/6ef334b5ffbb696670268d1b3e53a6bbce9e377e#6ef334b5ffbb696670268d1b3e53a6bbce9e377e"
-  integrity sha512-5hM7WnYSVX6GzLrDdpMuDlqoFQa0Yyn5yu38cKFIoNr1juQLMmui+qL3dJXgNoEjjHa3O72itkmVmQBFr9/1ew==
+"@navikt/ft-plattform-komponenter@^1.3.6":
+  version "1.3.6"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-plattform-komponenter/1.3.6/3b2312d2401a207f1120d06afc8fedf3ac668f4d#3b2312d2401a207f1120d06afc8fedf3ac668f4d"
+  integrity sha512-QoowZ3vhdSIAtpBEox3Tmku70arIMB8uGGwTHsLdlSlQORRwoobKFSIgNiJJb//6ofN6UPEbd5DXAbF/dsBkbQ==
+  dependencies:
+    "@navikt/ds-css" "^1.5.6"
+    "@navikt/ds-icons" "^1.5.6"
+    "@navikt/ds-react" "^1.5.6"
+    "@navikt/ft-utils" "^1.1.7"
+
+"@navikt/ft-prosess-beregningsgrunnlag@3.1.11":
+  version "3.1.11"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-beregningsgrunnlag/3.1.11/06aaabe11ce21ab39881be5afb94c46318509a7f#06aaabe11ce21ab39881be5afb94c46318509a7f"
+  integrity sha512-5iNoO6WK790bIbxlOLm+0HNDSHWf1BA3NIXc845+skg9taEWwtR0xj3HlRcX+jFt7ubHf2hvM1qE1tM32QOgpA==
   dependencies:
     "@navikt/ds-css" "^1.5.6"
     "@navikt/ds-react" "^1.5.6"
     "@navikt/ft-form-hooks" "^3.1.2"
     "@navikt/ft-form-validators" "^1.0.36"
     "@navikt/ft-kodeverk" "^1.0.21"
-    "@navikt/ft-plattform-komponenter" "^1.3.1"
+    "@navikt/ft-plattform-komponenter" "^1.3.6"
     "@navikt/ft-types" "^1.0.32"
     "@navikt/ft-ui-komponenter" "^1.2.2"
     "@navikt/ft-utils" "^1.1.7"
