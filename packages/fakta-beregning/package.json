@@ -19,7 +19,7 @@
     "@navikt/ft-types": "^1.0.32",
     "@navikt/ft-ui-komponenter": "1.2.2",
     "@navikt/ft-utils": "1.1.7",
-    "core-js": "3.26.0",
+    "core-js": "3.26.1",
     "moment": "2.29.4",
     "nav-frontend-grid": "2.0.2",
     "nav-frontend-grid-style": "1.0.3",
