@@ -30,7 +30,7 @@ const BesteberegningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
   arbeidsgiverOpplysningerPerId,
   ...props
 }) => (
-  <FaktaDefaultInitPanel<Record<string, never>, EndepunktPanelData>
+  <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     aksjonspunktKoder={[aksjonspunktCodes.KONTROLLER_AUTOMATISK_BESTEBEREGNING, aksjonspunktCodes.MANUELL_KONTROLL_AV_BESTEBEREGNING]}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}

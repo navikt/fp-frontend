@@ -34,7 +34,7 @@ const SvangerskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsv
 }) => {
   const intl = useIntl();
   return (
-    <InngangsvilkarDefaultInitPanel<Record<string, never>, EndepunktPanelData>
+    <InngangsvilkarDefaultInitPanel<EndepunktPanelData>
       {...props}
       behandlingVersjon={behandlingVersjon}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}

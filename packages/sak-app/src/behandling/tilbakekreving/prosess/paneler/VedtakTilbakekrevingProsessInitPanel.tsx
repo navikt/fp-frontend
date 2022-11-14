@@ -5,11 +5,12 @@ import { useIntl } from 'react-intl';
 import { WarningModal, LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { BehandlingArsakType } from '@navikt/ft-kodeverk';
 import {
-  Aksjonspunkt, AlleKodeverkTilbakekreving, Behandling, BeregningsresultatTilbakekreving,
+  AlleKodeverkTilbakekreving, Aksjonspunkt, BeregningsresultatTilbakekreving, Vedtaksbrev,
 } from '@navikt/ft-types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { Behandling } from '@fpsak-frontend/types';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import {
   VedtakAksjonspunktCode, ForeslaVedtakTilbakekrevingAp, ForhandsvisData,
@@ -48,10 +49,17 @@ const getLagringSideeffekter = (
   };
 };
 
+const ENDEPUNKTER_PANEL_DATA = [
+  TilbakekrevingBehandlingApiKeys.VEDTAKSBREV,
+  TilbakekrevingBehandlingApiKeys.BEREGNINGSRESULTAT,
+];
+type EndepunktPanelData = {
+  vedtaksbrev: Vedtaksbrev;
+  beregningsresultat: BeregningsresultatTilbakekreving;
+}
+
 interface OwnProps {
   behandling: Behandling;
-  beregningsresultat: BeregningsresultatTilbakekreving;
-  aksjonspunkter?: Aksjonspunkt[];
   harApenRevurdering: boolean;
   bekreftAksjonspunkterMedSideeffekter: (
     lagringSideEffectsCallback?: (aksjonspunktModeller: any) => () => void,
@@ -66,8 +74,6 @@ interface OwnProps {
 
 const VedtakTilbakekrevingProsessInitPanel: FunctionComponent<OwnProps> = ({
   behandling,
-  beregningsresultat,
-  aksjonspunkter,
   harApenRevurdering,
   bekreftAksjonspunkterMedSideeffekter,
   opneSokeside,
@@ -88,7 +94,14 @@ const VedtakTilbakekrevingProsessInitPanel: FunctionComponent<OwnProps> = ({
   const { startRequest: forhandsvisVedtaksbrev } = restApiTilbakekrevingHooks.useRestApiRunner(TilbakekrevingBehandlingApiKeys.PREVIEW_VEDTAKSBREV);
   const fetchPreviewVedtaksbrev = useCallback((param: ForhandsvisData) => forhandsvisVedtaksbrev(param).then((response) => forhandsvisDokument(response)), []);
 
-  const { data: vedtaksbrev, state } = restApiTilbakekrevingHooks.useRestApi(TilbakekrevingBehandlingApiKeys.VEDTAKSBREV);
+  const formaterteEndepunkter = ENDEPUNKTER_PANEL_DATA.map((e) => ({ key: e }));
+  const { data: panelData, state } = restApiTilbakekrevingHooks
+    .useMultipleRestApi<EndepunktPanelData, any>(formaterteEndepunkter, {
+      updateTriggers: [behandling.versjon],
+      isCachingOn: true,
+    });
+
+  const aksjonspunkter = behandling.aksjonspunkt || [];
 
   const aksjonspunkterForVedtak = useMemo(() => (
     aksjonspunkter.filter((ap) => VedtakAksjonspunktCode.FORESLA_VEDTAK === ap.definisjon)),
@@ -127,10 +140,10 @@ const VedtakTilbakekrevingProsessInitPanel: FunctionComponent<OwnProps> = ({
         packageCompFn={() => import('@navikt/ft-prosess-tilbakekreving-vedtak')}
         federatedCompFn={ProsessVedtakMF}
         behandling={behandling}
-        beregningsresultat={beregningsresultat}
+        beregningsresultat={panelData.beregningsresultat}
         isReadOnly={isReadOnly}
         submitCallback={bekreftAksjonspunkterMedSideeffekter(lagringSideeffekterCallback)}
-        vedtaksbrev={vedtaksbrev}
+        vedtaksbrev={panelData.vedtaksbrev}
         tilbakekrevingKodeverk={alleKodeverk}
         fetchPreviewVedtaksbrev={fetchPreviewVedtaksbrev}
         erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage}

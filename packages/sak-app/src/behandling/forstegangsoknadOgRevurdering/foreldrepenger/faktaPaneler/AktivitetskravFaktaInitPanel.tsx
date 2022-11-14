@@ -24,7 +24,7 @@ type EndepunktPanelData = {
  * AktivitetskravFaktaInitPanel
  */
 const AktivitetskravFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => (
-  <FaktaDefaultInitPanel<Record<string, never>, EndepunktPanelData>
+  <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}

@@ -3,11 +3,12 @@ import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 import { FeilutbetalingAksjonspunktCode } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import {
-  FeilutbetalingFakta, AlleKodeverk, Behandling, Aksjonspunkt, AlleKodeverkTilbakekreving,
+  FeilutbetalingFakta, AlleKodeverk, Aksjonspunkt, AlleKodeverkTilbakekreving, FeilutbetalingAarsak,
 } from '@navikt/ft-types';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
+import { Behandling } from '@fpsak-frontend/types';
 
 import DynamicLoader from '../../../felles/DynamicLoader';
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
@@ -22,11 +23,18 @@ const ProsessFeilutbetalingMF = process.env.NODE_ENV !== 'development' ? undefin
   // eslint-disable-next-line import/no-unresolved
   : () => import('ft_fakta_tilbakekreving_feilutbetaling/FeilutbetalingFaktaIndex');
 
+const ENDEPUNKTER_INIT_DATA = [
+  TilbakekrevingBehandlingApiKeys.FEILUTBETALING_FAKTA,
+  TilbakekrevingBehandlingApiKeys.FEILUTBETALING_AARSAK,
+];
+type EndepunktInitData = {
+  feilutbetalingFakta: FeilutbetalingFakta;
+  feilutbetalingAarsak: FeilutbetalingAarsak[];
+}
+
 interface OwnProps {
   behandling: Behandling;
-  feilutbetalingFakta: FeilutbetalingFakta;
   fagsakYtelseTypeKode: string;
-  aksjonspunkter: Aksjonspunkt[];
   erReadOnlyFn: (aksjonspunkter: Aksjonspunkt[]) => boolean;
   alleKodeverk: AlleKodeverkTilbakekreving;
   fpsakKodeverk: AlleKodeverk;
@@ -37,9 +45,7 @@ interface OwnProps {
 
 const FeilutbetalingFaktaInitPanel: FunctionComponent<OwnProps> = ({
   behandling,
-  feilutbetalingFakta,
   fagsakYtelseTypeKode,
-  aksjonspunkter,
   erReadOnlyFn,
   alleKodeverk,
   fpsakKodeverk,
@@ -47,6 +53,8 @@ const FeilutbetalingFaktaInitPanel: FunctionComponent<OwnProps> = ({
   formData,
   setFormData,
 }) => {
+  const aksjonspunkter = behandling.aksjonspunkt || [];
+
   const aksjonspunkterForFeilutbetalingFakta = useMemo(() => (
     aksjonspunkter.filter((ap) => FeilutbetalingAksjonspunktCode.AVKLAR_FAKTA_FOR_FEILUTBETALING === ap.definisjon)),
   [aksjonspunkter]);
@@ -60,7 +68,12 @@ const FeilutbetalingFaktaInitPanel: FunctionComponent<OwnProps> = ({
     [FaktaPanelCode.FEILUTBETALING]: data,
   })), [setFormData]);
 
-  const { data: feilutbetalingAarsak, state } = restApiTilbakekrevingHooks.useRestApi(TilbakekrevingBehandlingApiKeys.FEILUTBETALING_AARSAK);
+  const formaterteEndepunkter = ENDEPUNKTER_INIT_DATA.map((e) => ({ key: e }));
+  const { data: initData, state } = restApiTilbakekrevingHooks
+    .useMultipleRestApi<EndepunktInitData, any>(formaterteEndepunkter, {
+      updateTriggers: [behandling.versjon],
+      isCachingOn: true,
+    });
 
   if (state !== RestApiState.SUCCESS) {
     return <LoadingPanel />;
@@ -70,8 +83,8 @@ const FeilutbetalingFaktaInitPanel: FunctionComponent<OwnProps> = ({
     <DynamicLoader<React.ComponentProps<typeof ProsessFeilutbetaling>>
       packageCompFn={() => import('@navikt/ft-fakta-tilbakekreving-feilutbetaling')}
       federatedCompFn={ProsessFeilutbetalingMF}
-      feilutbetalingFakta={feilutbetalingFakta}
-      feilutbetalingAarsak={feilutbetalingAarsak}
+      feilutbetalingFakta={initData.feilutbetalingFakta}
+      feilutbetalingAarsak={initData.feilutbetalingAarsak}
       fagsakYtelseTypeKode={fagsakYtelseTypeKode}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
       alleKodeverk={fpsakKodeverk}

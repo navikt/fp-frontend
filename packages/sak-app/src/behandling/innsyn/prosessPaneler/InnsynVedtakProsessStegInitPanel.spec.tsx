@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 import {
   AksjonspunktStatus, FagsakYtelseType, BehandlingStatus, VilkarUtfallType,
 } from '@navikt/ft-kodeverk';
-import { Aksjonspunkt, Fagsak } from '@navikt/ft-types';
+import { Aksjonspunkt } from '@navikt/ft-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
@@ -14,7 +14,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import { RequestApi } from '@fpsak-frontend/rest-api';
-import { Behandling } from '@fpsak-frontend/types';
+import { Behandling, Fagsak } from '@fpsak-frontend/types';
 
 import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import * as Felles from '../../felles/prosess/useStandardProsessPanelProps';

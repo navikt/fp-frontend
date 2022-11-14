@@ -39,7 +39,7 @@ type EndepunktPanelData = {
 const FodselvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => {
   const { behandling: { vilkår } } = props;
   return (
-    <FaktaDefaultInitPanel<Record<string, never>, EndepunktPanelData>
+    <FaktaDefaultInitPanel<EndepunktPanelData>
       {...props}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}

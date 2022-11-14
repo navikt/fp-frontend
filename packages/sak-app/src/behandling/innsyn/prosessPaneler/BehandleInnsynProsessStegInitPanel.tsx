@@ -31,7 +31,7 @@ const BehandleInnsynProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
   fagsak,
   ...props
 }) => (
-  <ProsessDefaultInitPanel<Record<string, never>, EndepunktPanelData>
+  <ProsessDefaultInitPanel<EndepunktPanelData>
     {...props}
     requestApi={requestInnsynApi}
     panelEndepunkter={getEndepunkterPanelData(fagsak.saksnummer)}

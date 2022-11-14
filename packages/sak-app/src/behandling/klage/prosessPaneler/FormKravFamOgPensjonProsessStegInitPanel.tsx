@@ -43,7 +43,7 @@ const FormKravFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & Pro
     .filter((b) => (b.type !== BehandlingType.KLAGE || isKlageAvvist(b.resultatType)) && b.type !== BehandlingType.ANKE), [alleBehandlinger]);
 
   return (
-    <ProsessDefaultInitPanel<Record<string, never>, EndepunktPanelData>
+    <ProsessDefaultInitPanel<EndepunktPanelData>
       {...props}
       requestApi={requestKlageApi}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}

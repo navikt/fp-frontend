@@ -21,7 +21,7 @@ type EndepunktPanelData = {
 }
 
 const SoknadsfristProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps> = (props) => (
-  <ProsessDefaultInitPanel<Record<string, never>, EndepunktPanelData>
+  <ProsessDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}

@@ -105,7 +105,7 @@ const KlageresultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPan
   const { aksjonspunkt: aksjonspunkter } = props.behandling;
 
   return (
-    <ProsessDefaultInitPanel<Record<string, never>, EndepunktPanelData>
+    <ProsessDefaultInitPanel<EndepunktPanelData>
       {...props}
       requestApi={requestKlageApi}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -113,19 +113,16 @@ const KlageresultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPan
       prosessPanelKode={ProsessStegCode.KLAGE_RESULTAT}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.ResultatKlage' })}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={(initData, standardData) => getVedtakStatus(standardData.behandling.behandlingsresultat, aksjonspunkter)}
+      hentOverstyrtStatus={(standardData) => getVedtakStatus(standardData.behandling.behandlingsresultat, aksjonspunkter)}
       lagringSideEffekter={lagringSideEffekter}
-      hentSkalMarkeresSomAktiv={(initData, standardData) => getVedtakStatus(standardData.behandling.behandlingsresultat, aksjonspunkter)
+      hentSkalMarkeresSomAktiv={(standardData) => getVedtakStatus(standardData.behandling.behandlingsresultat, aksjonspunkter)
         !== VilkarUtfallType.IKKE_VURDERT}
       renderPanel={(data) => (
         <>
           <FatterVedtakStatusModal
             visModal={visFatterVedtakModal}
             lukkModal={() => { toggleFatterVedtakModal(false); opneSokeside(); }}
-            tekst={intl.formatMessage({
-              id: (data.klageVurdering && data.klageVurdering.klageVurderingResultatNK)
-                ? 'FatterVedtakStatusModal.KlagenErFerdigbehandlet' : 'FatterVedtakStatusModal.SendtKlageResultatTilMedunderskriver',
-            })}
+            tekst={intl.formatMessage({ id: 'FatterVedtakStatusModal.KlagenErFerdigbehandlet' })}
           />
           <VedtakKlageProsessIndex
             previewVedtakCallback={previewCallback}

@@ -12,40 +12,30 @@ import useStandardProsessPanelProps from './useStandardProsessPanelProps';
 import skalViseProsessPanel from './skalViseProsessPanel';
 import useInngangsvilkarRegistrerer from './useInngangsvilkarRegistrerer';
 
-export type OwnProps<INIT_DATA, PANEL_DATA> = {
+export type OwnProps<PANEL_DATA> = {
   behandlingVersjon: number;
   requestApi: RequestApi;
-  initEndepunkter?: RestKey<any, any>[];
   panelEndepunkter?: RestKey<any, any>[];
   aksjonspunktKoder?: string[];
   vilkarKoder?: string[];
-  renderPanel: (data: INIT_DATA & PANEL_DATA & StandardProsessPanelProps, erOverstyrt: boolean, toggleOverstyring: () => void) => ReactElement;
+  renderPanel: (data: PANEL_DATA & StandardProsessPanelProps, erOverstyrt: boolean, toggleOverstyring: () => void) => ReactElement;
   inngangsvilkarPanelKode: string;
   hentInngangsvilkarPanelTekst: (data: StandardProsessPanelProps) => string;
 }
 
-const InngangsvilkarDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
+const InngangsvilkarDefaultInitPanel = <PANEL_DATA = void, >({
   erPanelValgt,
   behandlingVersjon,
   registrerInngangsvilkarPanel,
   requestApi,
-  initEndepunkter = [],
   panelEndepunkter = [],
   aksjonspunktKoder,
   vilkarKoder,
   renderPanel,
   inngangsvilkarPanelKode,
   hentInngangsvilkarPanelTekst,
-}: OwnProps<INIT_DATA, PANEL_DATA> & InngangsvilkarPanelInitProps) => {
+}: OwnProps<PANEL_DATA> & InngangsvilkarPanelInitProps) => {
   const restApiHooks = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
-
-  const formaterteEndepunkter = initEndepunkter.map((e) => ({ key: e }));
-  const { data: initData, state: initState } = restApiHooks.useMultipleRestApi<INIT_DATA, any>(formaterteEndepunkter, {
-    updateTriggers: [behandlingVersjon],
-    suspendRequest: formaterteEndepunkter.length === 0,
-    isCachingOn: true,
-  });
-  const erDataFerdighentet = formaterteEndepunkter.length === 0 || initState === RestApiState.SUCCESS;
 
   const standardPanelProps = useStandardProsessPanelProps(aksjonspunktKoder, vilkarKoder);
 
@@ -56,7 +46,7 @@ const InngangsvilkarDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
     behandlingVersjon,
     inngangsvilkarPanelKode,
     hentInngangsvilkarPanelTekst(standardPanelProps),
-    erDataFerdighentet && skalVises,
+    skalVises,
     standardPanelProps.isAksjonspunktOpen,
     standardPanelProps.status,
   );
@@ -72,12 +62,11 @@ const InngangsvilkarDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
     return null;
   }
 
-  if (!erDataFerdighentet || (formatertePanelEndepunkter.length > 0 && panelDataState !== RestApiState.SUCCESS)) {
+  if (formatertePanelEndepunkter.length > 0 && panelDataState !== RestApiState.SUCCESS) {
     return <LoadingPanel />;
   }
 
   return renderPanel({
-    ...initData,
     ...panelData,
     ...standardPanelProps,
   }, erOverstyrt, toggleOverstyring);

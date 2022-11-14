@@ -15,7 +15,6 @@ import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesAp
 
 interface OwnProps {
   behandling: Behandling;
-  aksjonspunkter: Aksjonspunkt[];
   erReadOnlyFn: (aksjonspunkter: Aksjonspunkt[]) => boolean;
   fpsakKodeverk: AlleKodeverk;
   submitCallback: (aksjonspunktData: any) => Promise<void>;
@@ -25,13 +24,14 @@ interface OwnProps {
 
 const VergeFaktaInitPanel: FunctionComponent<OwnProps> = ({
   behandling,
-  aksjonspunkter,
   erReadOnlyFn,
   fpsakKodeverk,
   submitCallback,
   formData,
   setFormData,
 }) => {
+  const aksjonspunkter = behandling.aksjonspunkt || [];
+
   const aksjonspunkterForVergeFakta = useMemo(() => (
     aksjonspunkter.filter((ap) => AksjonspunktCode.AVKLAR_VERGE === ap.definisjon)),
   [aksjonspunkter]);
