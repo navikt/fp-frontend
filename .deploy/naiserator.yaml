@@ -38,8 +38,6 @@ spec:
     requests:
       cpu: 200m
       memory: 32Mi
-  vault:
-    enabled: true
   env:
     - name: APP_NAME
       value: fp-frontend
