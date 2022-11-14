@@ -43,9 +43,16 @@ jobs:
         run: echo "Generated build-version is ${{ steps.generate-build-version.outputs.build-version }}"
 
       - name: Installere dependencies
+        if: github.actor != 'dependabot[bot]'
         run: yarn install --ignore-optional --no-progress --frozen-lockfile
         env:
           NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+
+      - name: Installere dependencies
+        if: github.actor == 'dependabot[bot]'
+        run: yarn install --ignore-optional --no-progress --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run linting
         run: yarn less:lint && yarn lint && yarn ts-check
