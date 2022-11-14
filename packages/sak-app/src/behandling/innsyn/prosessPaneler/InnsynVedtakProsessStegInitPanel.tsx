@@ -22,12 +22,13 @@ import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import { restApiInnsynHooks, requestInnsynApi, InnsynBehandlingApiKeys } from '../data/innsynBehandlingApi';
 
 const getVedtakStatus = (behandling: Behandling): string => {
-  const { aksjonspunkt, behandlingsresultat: { type } } = behandling;
+  const { aksjonspunkt, behandlingsresultat } = behandling;
   const harApentAksjonpunkt = aksjonspunkt.some((ap) => ap.status === AksjonspunktStatus.OPPRETTET);
   if (aksjonspunkt.length === 0 || harApentAksjonpunkt) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
-  return type === behandlingResultatType.INNSYN_INNVILGET || type === behandlingResultatType.INNSYN_DELVIS_INNVILGET
+  return behandlingsresultat?.type === behandlingResultatType.INNSYN_INNVILGET
+    || behandlingsresultat?.type === behandlingResultatType.INNSYN_DELVIS_INNVILGET
     ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_OPPFYLT;
 };
 
@@ -101,7 +102,7 @@ const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
       skalPanelVisesIMeny={() => true}
       hentOverstyrtStatus={() => getVedtakStatus(props.behandling)}
       lagringSideEffekter={lagringSideeffekterCallback}
-      hentSkalMarkeresSomAktiv={() => !!getVedtakStatus(props.behandling)}
+      hentSkalMarkeresSomAktiv={() => getVedtakStatus(props.behandling) !== VilkarUtfallType.IKKE_VURDERT}
       renderPanel={(data) => (
         <>
           <IverksetterVedtakStatusModal
