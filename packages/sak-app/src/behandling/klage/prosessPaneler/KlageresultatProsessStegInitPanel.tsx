@@ -122,10 +122,7 @@ const KlageresultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPan
           <FatterVedtakStatusModal
             visModal={visFatterVedtakModal}
             lukkModal={() => { toggleFatterVedtakModal(false); opneSokeside(); }}
-            tekst={intl.formatMessage({
-              id: (data.klageVurdering && data.klageVurdering.klageVurderingResultatNK)
-                ? 'FatterVedtakStatusModal.KlagenErFerdigbehandlet' : 'FatterVedtakStatusModal.SendtKlageResultatTilMedunderskriver',
-            })}
+            tekst={intl.formatMessage({ id: 'FatterVedtakStatusModal.KlagenErFerdigbehandlet' })}
           />
           <VedtakKlageProsessIndex
             previewVedtakCallback={previewCallback}
