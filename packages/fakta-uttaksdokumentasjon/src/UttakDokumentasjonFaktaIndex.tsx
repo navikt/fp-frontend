@@ -31,7 +31,7 @@ const UttakDokumentasjonFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPa
     <RawIntlProvider value={intl}>
       <UttakDokumentasjonFaktaForm
         harApneAksjonspunkter={harApneAksjonspunkter}
-        lagretBegrunnelse={aksjonspunkter[0].begrunnelse}
+        lagretBegrunnelse={aksjonspunkter.length > 0 ? aksjonspunkter[0].begrunnelse : undefined}
         dokumentasjonVurderingBehov={sorterteBehov}
         submitCallback={submitCallback}
         readOnly={readOnly || aksjonspunkter.length === 0}

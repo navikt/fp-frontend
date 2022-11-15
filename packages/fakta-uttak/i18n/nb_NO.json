@@ -7,8 +7,6 @@
   "UttakFaktaTable.AntallDager": "Antall dager",
   "UttakFaktaTable.Stonadskonto": "Stønadskonto",
   "UttakFaktaTable.Kilde": "Kilde",
-  "UttakFaktaTable.Redigert": "Redigert",
-  "UttakFaktaTable.FraSøknad": "Fra søknad",
   "UttakFaktaTable.AntallEnDagOgEnUke": "{weeks} uke {days} dag",
   "UttakFaktaTable.AntallEnDagOgFlereUker": "{weeks} uker {days} dag",
   "UttakFaktaTable.AntallFlereDagerOgEnUke": "{weeks} uke {days} dager",
@@ -18,7 +16,7 @@
   "UttakFaktaTable.AntallNullDagerOgFlereUker": "{weeks} uker",
   "UttakFaktaTable.AntallNullDagerOgEnUke": "{weeks} uke",
   "UttakFaktaTable.TidenesEnde": "Antall uker og dager -",
-  
+
   "UttakFaktaDetailForm.Fom": "Periode fra",
   "UttakFaktaDetailForm.Tom": "Periode til",
   "UttakFaktaDetailForm.Periodetype": "Periodetype",
@@ -27,5 +25,14 @@
   "UttakFaktaDetailForm.Oppdater": "Oppdater",
   "UttakFaktaDetailForm.Avbryt": "Avbryt",
   "UttakFaktaDetailForm.Slett": "Slett periode",
-  "UttakFaktaDetailForm.VilDuSlette": "Vil du slette periode?"
+  "UttakFaktaDetailForm.VilDuSlette": "Vil du slette periode?",
+  "UttakFaktaDetailForm.Uttak": "Uttak",
+  "UttakFaktaDetailForm.Overføring": "Overføring",
+  "UttakFaktaDetailForm.Utsettelse": "Utsettelse",
+  "UttakFaktaDetailForm.Årsak": "Årsak",
+  "UttakFaktaDetailForm.MorsAktivitet": "Mors aktivitet",
+  "UttakFaktaDetailForm.Flerbarnsdager": "Flerbarnsdager",
+  "UttakFaktaDetailForm.SamtidigUttaksprosent": "Samtidig uttaksprosent",
+  "UttakFaktaDetailForm.Arbeidsgiver": "Arbeidsgiver",
+  "UttakFaktaDetailForm.Opphold": "Opphold"
 }

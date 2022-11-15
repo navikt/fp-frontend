@@ -9,13 +9,12 @@ import { Button, Heading, Panel } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { AksjonspunktStatus, isAksjonspunktOpen } from '@navikt/ft-kodeverk';
-import { AlleKodeverk } from '@navikt/ft-types';
 import { AddCircle } from '@navikt/ds-icons';
 
 import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
 import { FaktaSubmitButtonNew, FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
 import {
-  Aksjonspunkt, KontrollerFaktaPeriode, Ytelsefordeling,
+  Aksjonspunkt, KontrollerFaktaPeriode, Ytelsefordeling, AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold,
 } from '@fpsak-frontend/types';
 import { BekreftUttaksperioderAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -46,6 +45,8 @@ const finnAksjonspunktTekster = (
 interface OwnProps {
   ytelsefordeling: Ytelsefordeling;
   uttakKontrollerFaktaPerioder: KontrollerFaktaPeriode[];
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  faktaArbeidsforhold: FaktaArbeidsforhold[];
   alleKodeverk: AlleKodeverk;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
@@ -58,6 +59,8 @@ interface OwnProps {
 
 const UttakFaktaForm: FunctionComponent<OwnProps> = ({
   uttakKontrollerFaktaPerioder,
+  arbeidsgiverOpplysningerPerId,
+  faktaArbeidsforhold,
   ytelsefordeling,
   alleKodeverk,
   aksjonspunkter,
@@ -99,7 +102,7 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
-  const isSubmittable = useMemo(() => submittable && uttakPerioder?.every((a) => a.bekreftet) && !!begrunnelse,
+  const isSubmittable = useMemo(() => submittable && !!begrunnelse,
     [uttakPerioder, begrunnelse]);
 
   const [isDirty, setDirty] = useState<boolean>(false);
@@ -130,6 +133,8 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
         readOnly={readOnly}
         setDirty={setDirty}
         erRedigerbart={erRedigerbart}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        faktaArbeidsforhold={faktaArbeidsforhold}
       />
       <VerticalSpacer sixteenPx />
       {erRedigerbart && (
@@ -151,10 +156,13 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
               <UttakFaktaDetailForm
                 avbrytEditering={() => settVisNyPeriode(false)}
                 readOnly={false}
+                alleKodeverk={alleKodeverk}
                 oppdaterPerioder={(uttaksperioder: { perioder: KontrollerFaktaPeriode[] }) => {
                   oppdaterUttakPerioder(uttakPerioder.concat(uttaksperioder.perioder));
                   settVisNyPeriode(false);
                 }}
+                arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+                faktaArbeidsforhold={faktaArbeidsforhold}
               />
             </Panel>
           )}

@@ -140,7 +140,7 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
               <FordelingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
               <OmsorgOgRettFaktaInitPanel {...props} personoversikt={personoversikt} />
               <OmsorgFaktaInitPanel {...props} personoversikt={personoversikt} />
-              <UttakFaktaInitPanel {...props} rettigheter={rettigheter} />
+              <UttakFaktaInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
               <UttakFaktaLegacyInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} personoversikt={personoversikt} />
               <AktivitetskravFaktaInitPanel {...props} />
               <UttakDokumentasjonFaktaInitPanel {...props} />

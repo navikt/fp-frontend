@@ -6,11 +6,11 @@ import {
   Table, ExpandableTableRow, TableColumn, TableRow,
 } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
-import { KodeverkType } from '@navikt/ft-kodeverk';
-import { AlleKodeverk } from '@navikt/ft-types';
 
-import { KontrollerFaktaPeriode } from '@fpsak-frontend/types';
-import oppholdArsakType from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
+import {
+  AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, KontrollerFaktaPeriode,
+} from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import UttakFaktaDetailForm from './UttakFaktaDetailForm';
 
@@ -46,12 +46,14 @@ const getUttakPeriode = (
   alleKodeverk: AlleKodeverk,
   uttakPeriodeType: string,
   oppholdArsak?: string,
-): string => (oppholdArsak === oppholdArsakType.UDEFINERT
-  ? alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE].find((k) => k.kode === uttakPeriodeType)?.navn
-  : alleKodeverk[KodeverkType.OPPHOLD_ARSAK].find((k) => k.kode === KodeverkType.MORS_AKTIVITET)?.navn);
+): string => (oppholdArsak
+  ? alleKodeverk[KodeverkType.OPPHOLD_ARSAK].find((k) => k.kode === KodeverkType.MORS_AKTIVITET)?.navn
+  : alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE].find((k) => k.kode === uttakPeriodeType)?.navn);
 
 interface OwnProps {
   uttakKontrollerFaktaPerioder: KontrollerFaktaPeriode[];
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  faktaArbeidsforhold: FaktaArbeidsforhold[];
   oppdaterUttakPerioder: (perioder: KontrollerFaktaPeriode[]) => void;
   alleKodeverk: AlleKodeverk;
   readOnly: boolean;
@@ -61,6 +63,8 @@ interface OwnProps {
 
 const UttakFaktaTable: FunctionComponent<OwnProps> = ({
   uttakKontrollerFaktaPerioder,
+  arbeidsgiverOpplysningerPerId,
+  faktaArbeidsforhold,
   oppdaterUttakPerioder,
   alleKodeverk,
   readOnly,
@@ -121,7 +125,9 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
               />
             </TableColumn>
             <TableColumn>{getUttakPeriode(alleKodeverk, periode.uttakPeriodeType, periode.oppholdÅrsak)}</TableColumn>
-            <TableColumn><FormattedMessage id={periode.begrunnelse ? 'UttakFaktaTable.Redigert' : 'UttakFaktaTable.FraSøknad'} /></TableColumn>
+            <TableColumn>
+              <FormattedMessage id={alleKodeverk[KodeverkType.FORDELING_PERIODE_KILDE].find((k) => k.kode === periode.periodeKilde)?.navn} />
+            </TableColumn>
           </>
         );
 
@@ -146,6 +152,9 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
                 oppdaterPerioder={oppdaterPerioder}
                 slettPeriode={() => slettPeriode(periode.fom)}
                 avbrytEditering={() => velgPeriodeFomDato(periode.fom)}
+                alleKodeverk={alleKodeverk}
+                arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+                faktaArbeidsforhold={faktaArbeidsforhold}
               />
             )}
           >

@@ -6,7 +6,9 @@ import { useIntl } from 'react-intl';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import UttakFaktaIndex from '@fpsak-frontend/fakta-uttak';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import { AksessRettigheter, KontrollerFaktaPeriode, Ytelsefordeling } from '@fpsak-frontend/types';
+import {
+  AksessRettigheter, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, KontrollerFaktaPeriode, Ytelsefordeling,
+} from '@fpsak-frontend/types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
@@ -25,15 +27,18 @@ const OVERSTYRING_AP_CODES = [aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK];
 
 const ENDEPUNKTER_PANEL_DATA = [
   FpBehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER_V2,
+  FpBehandlingApiKeys.FAKTA_ARBEIDSFORHOLD,
   BehandlingFellesApiKeys.YTELSEFORDELING,
 ];
 type EndepunktPanelData = {
   uttakKontrollerFaktaPerioderV2: KontrollerFaktaPeriode[];
+  faktaArbeidsforhold: FaktaArbeidsforhold[];
   ytelsefordeling: Ytelsefordeling;
 }
 
 interface OwnProps {
   rettigheter: AksessRettigheter;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 /**
@@ -41,6 +46,7 @@ interface OwnProps {
  */
 const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
   rettigheter,
+  arbeidsgiverOpplysningerPerId,
   ...props
 }) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
@@ -50,10 +56,11 @@ const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = (
     overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={FaktaPanelCode.UTTAK}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'UttakInfoPanel.FaktaUttak' })}
-    skalPanelVisesIMeny={() => props.behandling.harSattEndringsdato}
+    skalPanelVisesIMeny={() => props.behandling.harSattEndringsdato && props.requestApi.hasPath(FpBehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER_V2.name)}
     renderPanel={(data) => (
       <UttakFaktaIndex
         kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...data}
         uttakKontrollerFaktaPerioder={data.uttakKontrollerFaktaPerioderV2}
       />
