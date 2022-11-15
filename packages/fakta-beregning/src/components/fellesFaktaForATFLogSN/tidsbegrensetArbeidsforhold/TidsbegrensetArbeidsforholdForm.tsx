@@ -45,7 +45,7 @@ interface StaticFunctions {
  * TidsbegrensetArbeidsforholdForm
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet VURDER_FAKTA_FOR_ATFL_SN for Vurder Tidsbegrenset Arbeidsforhold som ber
- * bruker bestemme om en liste med arbeidsforhold er tidsbegrenset eller ikke.
+ * saksbehandler bestemme om en liste med arbeidsforhold er tidsbegrenset eller ikke.
  */
 
 export const TidsbegrensetArbeidsforholdForm: FunctionComponent<OwnProps> & StaticFunctions = ({
