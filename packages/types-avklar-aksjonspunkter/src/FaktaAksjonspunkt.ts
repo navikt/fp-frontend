@@ -19,6 +19,7 @@ import AvklarFortsattMedlemskapAp from './fakta/AvklarFortsattMedlemskapAp';
 import BekreftTerminbekreftelseAp from './fakta/BekreftTerminbekreftelseAp';
 import SjekkManglendeFodselAp from './fakta/SjekkManglendeFodselAp';
 import FaktaUttakAp from './fakta/FaktaUttakAp';
+import BekreftUttaksperioderAp from './fakta/BekreftUttaksperioderAp';
 import AvklarAnnenforelderHarRettAp from './fakta/AvklarAnnenforelderHarRettAp';
 import VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp from './fakta/VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp';
 import BekreftOppholdsrettVurderingAp from './fakta/BekreftOppholdsrettVurderingAp';
@@ -50,6 +51,7 @@ export type FaktaAksjonspunkt = AvklarVergeAp
   | SjekkManglendeFodselAp
   | AvklarAnnenforelderHarRettAp
   | FaktaUttakAp
+  | BekreftUttaksperioderAp
   | VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp
   | OverstyringAvklarStartdatoForPeriodenAp
   | AvklarFaktaForForeldreansvarAksjonspunktAp

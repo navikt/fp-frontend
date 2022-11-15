@@ -1,0 +1,46 @@
+{
+    "bruker": {
+        "fnr": "13079726804",
+        "aktoerId": "9913079726804",
+        "diskresjonskode": "UDEF",
+        "kjønn": "M",
+        "sivilstand": "UGIF",
+        "navn": "Påfugl Pawel",
+        "fødselsdato": "1969-12-04",
+        "adresser": []
+    },
+    "annenPart": {
+        "fnr": "31019446487",
+        "aktoerId": "9931019446487",
+        "diskresjonskode": "UDEF",
+        "kjønn": "K",
+        "sivilstand": "GIFT",
+        "navn": "Harepus Hjørdis",
+        "fødselsdato": "1969-12-04",
+        "adresser": [
+            {
+                "adresseType": "BOSTEDSADRESSE",
+                "adresselinje1": "Fjordlandet 10 B",
+                "postNummer": "2500",
+                "poststed": "Tynset",
+                "land": "NOR"
+            }
+        ]
+    },
+    "barn": [
+        {
+            "fnr": "18041769498",
+            "aktoerId": "9918041769498",
+            "diskresjonskode": "UDEF",
+            "kjønn": "K",
+            "sivilstand": "UGIF",
+            "navn": "Duck Dole",
+            "fødselsdato": "2019-10-09",
+            "adresser": [
+                {
+                    "adresseType": "UKJENT_ADRESSE"
+                }
+            ]
+        }
+    ]
+}

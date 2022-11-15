@@ -10,21 +10,21 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { Delete } from '@navikt/ds-icons';
 
-import { UttakKontrollerFaktaPerioder } from '@fpsak-frontend/types';
+import { KontrollerFaktaPeriode } from '@fpsak-frontend/types';
 import { Button } from '@navikt/ds-react';
 
 import styles from './uttakFaktaDetailForm.less';
 
 type FormValues = {
-  perioder: UttakKontrollerFaktaPerioder[];
+  perioder: KontrollerFaktaPeriode[];
 }
 
 interface OwnProps {
-  valgtPeriode?: UttakKontrollerFaktaPerioder;
+  valgtPeriode?: KontrollerFaktaPeriode;
   slettPeriode?: () => void;
   avbrytEditering: () => void;
   readOnly: boolean;
-  oppdaterPerioder: (uttaksperioder: { perioder: UttakKontrollerFaktaPerioder[] }) => void;
+  oppdaterPerioder: (uttaksperioder: { perioder: KontrollerFaktaPeriode[] }) => void;
 }
 
 const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({

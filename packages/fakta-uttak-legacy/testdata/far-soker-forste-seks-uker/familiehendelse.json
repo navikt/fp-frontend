@@ -1,0 +1,32 @@
+{
+    "oppgitt": {
+        "@type": "AvklartDataFodselDto",
+        "skjaringstidspunkt": "2019-10-09",
+        "avklartBarn": [
+            {
+                "fodselsdato": "2019-10-09"
+            }
+        ],
+        "soknadType": "ST-001"
+    },
+    "gjeldende": {
+        "@type": "AvklartDataFodselDto",
+        "skjaringstidspunkt": "2019-10-09",
+        "avklartBarn": [
+            {
+                "fodselsdato": "2019-10-09"
+            }
+        ],
+        "soknadType": "ST-001"
+    },
+    "register": {
+        "@type": "AvklartDataFodselDto",
+        "skjaringstidspunkt": "2019-10-09",
+        "avklartBarn": [
+            {
+                "fodselsdato": "2019-10-09"
+            }
+        ],
+        "soknadType": "ST-001"
+    }
+}

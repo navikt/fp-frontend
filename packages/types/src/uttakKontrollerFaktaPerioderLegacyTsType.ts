@@ -1,4 +1,4 @@
-export type UttakKontrollerFaktaPerioder = Readonly<{
+export type UttakKontrollerFaktaPerioderLegacy = Readonly<{
   fom: string;
   tom: string;
   bekreftet: boolean;
@@ -20,7 +20,7 @@ export type UttakKontrollerFaktaPerioder = Readonly<{
 }>
 
 type UttakKontrollerFaktaPerioderWrapper = Readonly<{
-  perioder: UttakKontrollerFaktaPerioder[];
+  perioder: UttakKontrollerFaktaPerioderLegacy[];
 }>
 
 export default UttakKontrollerFaktaPerioderWrapper;

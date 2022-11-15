@@ -9,7 +9,7 @@ import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 import { AlleKodeverk } from '@navikt/ft-types';
 
-import { UttakKontrollerFaktaPerioder } from '@fpsak-frontend/types';
+import { KontrollerFaktaPeriode } from '@fpsak-frontend/types';
 import oppholdArsakType from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
 
 import UttakFaktaDetailForm from './UttakFaktaDetailForm';
@@ -51,8 +51,8 @@ const getUttakPeriode = (
   : alleKodeverk[KodeverkType.OPPHOLD_ARSAK].find((k) => k.kode === KodeverkType.MORS_AKTIVITET)?.navn);
 
 interface OwnProps {
-  uttakKontrollerFaktaPerioder: UttakKontrollerFaktaPerioder[];
-  oppdaterUttakPerioder: (perioder: UttakKontrollerFaktaPerioder[]) => void;
+  uttakKontrollerFaktaPerioder: KontrollerFaktaPeriode[];
+  oppdaterUttakPerioder: (perioder: KontrollerFaktaPeriode[]) => void;
   alleKodeverk: AlleKodeverk;
   readOnly: boolean;
   setDirty: (isDirty: boolean) => void;
@@ -80,7 +80,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
 
   useEffect(() => velgPeriodeFomDato(uttakKontrollerFaktaPerioder?.find((oa) => !oa.bekreftet)?.fom), []);
 
-  const oppdaterPerioder = useCallback((uPerioder: { perioder: UttakKontrollerFaktaPerioder[] }) => {
+  const oppdaterPerioder = useCallback((uPerioder: { perioder: KontrollerFaktaPeriode[] }) => {
     const { perioder } = uPerioder;
     const oppdatertePerioder = uttakKontrollerFaktaPerioder
       .filter((p) => p.fom !== perioder[0].fom)

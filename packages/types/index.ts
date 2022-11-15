@@ -80,7 +80,7 @@ export type { default as Risikoklassifisering } from './src/risikoklassifisering
 export type { default as AnkeVurdering } from './src/ankeVurderingTsType';
 export type { default as KlageVurdering, KlageVurderingResultat } from './src/klageVurderingTsType';
 export type { default as Innsyn, InnsynDokument, InnsynVedtaksdokument } from './src/innsynTsType';
-export type { default as UttakKontrollerFaktaPerioderWrapper, UttakKontrollerFaktaPerioder } from './src/uttakKontrollerFaktaPerioderTsType';
+export type { default as UttakKontrollerFaktaPerioderWrapper, UttakKontrollerFaktaPerioderLegacy } from './src/uttakKontrollerFaktaPerioderLegacyTsType';
 export type {
   default as Opptjening, OpptjeningAktivitet, FastsattOpptjening, FastsattOpptjeningAktivitet,
 } from './src/opptjeningTsType';
@@ -99,6 +99,7 @@ export type { Kjønnkode } from './src/Kjonnkode';
 export { KjønnkodeEnum } from './src/Kjonnkode';
 export type { default as Personoversikt, PersonopplysningerBasis } from './src/personoversiktTsType';
 export type { default as Personadresse } from './src/personadresseTsType';
+export type { default as KontrollerFaktaPeriode } from './src/kontrollerFaktaPeriode';
 export type { default as AksessRettigheter, Aksess } from './src/aksessRettigheterTsType';
 export type { default as StandardFaktaPanelProps } from './src/standardFaktaPanelPropsTsType';
 export type { default as StandardFaktaPanelPropsTilbakekreving } from './src/standardFaktaPanelPropsTilbakekrevingTsType';

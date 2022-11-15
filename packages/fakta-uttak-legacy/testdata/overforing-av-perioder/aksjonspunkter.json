@@ -1,0 +1,19 @@
+[
+  {
+    "definisjon": "5070",
+    "status": "OPPR",
+    "toTrinnsBehandling": false,
+    "aksjonspunktType": "MANU",
+    "kanLoses": true,
+    "erAktivt": true
+  },
+  {
+    "definisjon": "7003",
+    "status": "UTFO",
+    "toTrinnsBehandling": false,
+    "aksjonspunktType": "AUTO",
+    "kanLoses": false,
+    "erAktivt": true,
+    "fristTid": "2019-12-11T00:00:00"
+  }
+]

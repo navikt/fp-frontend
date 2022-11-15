@@ -18,6 +18,7 @@ export { default as BekreftTerminbekreftelseAp } from './src/fakta/BekreftTermin
 export { default as SjekkManglendeFodselAp } from './src/fakta/SjekkManglendeFodselAp';
 export { default as AvklarAnnenforelderHarRettAp } from './src/fakta/AvklarAnnenforelderHarRettAp';
 export { default as FaktaUttakAp } from './src/fakta/FaktaUttakAp';
+export { default as BekreftUttaksperioderAp } from './src/fakta/BekreftUttaksperioderAp';
 export { default as VurderArbeidsforholdPermisjonAp } from './src/fakta/VurderArbeidsforholdPermisjonAp';
 export { default as OverstyringAvklarStartdatoForPeriodenAp } from './src/fakta/OverstyringAvklarStartdatoForPeriodenAp';
 export { default as VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp } from './src/fakta/VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp';
