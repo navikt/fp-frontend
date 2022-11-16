@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import moment from 'moment';
-import { BodyShort } from '@navikt/ds-react';
+import { BodyShort, Link } from '@navikt/ds-react';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
@@ -72,7 +72,10 @@ const PersonYtelserTable: FunctionComponent<OwnProps> = ({
           <TableColumn>{ytelse.navn ? <BodyShort size="small">{ytelse.navn}</BodyShort> : ''}</TableColumn>
           <TableColumn><BodyShort size="small">{ytelse.periode}</BodyShort></TableColumn>
           <TableColumn>{ytelse.status ? <BodyShort size="small">{ytelse.status}</BodyShort> : ''}</TableColumn>
-          <TableColumn>{ytelse.saksnummer ? <BodyShort size="small">{ytelse.saksnummer}</BodyShort> : ''}</TableColumn>
+          <TableColumn>
+            {ytelse.saksnummer
+              ? <BodyShort size="small"><Link href={`/fpsak/fagsak/${ytelse.saksnummer}`} target="_blank">{ytelse.saksnummer}</Link></BodyShort> : ''}
+          </TableColumn>
         </TableRow>
       ))}
     </Table>
