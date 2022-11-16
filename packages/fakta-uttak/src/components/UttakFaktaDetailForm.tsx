@@ -160,6 +160,8 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
 
   const perioder = formMethods.watch('perioder');
 
+  const årsakstype = perioder.length > 0 ? perioder[0].arsakstype : undefined;
+
   return (
     <>
       {visSletteDialog && (
@@ -173,7 +175,10 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
       <Form
         formMethods={formMethods}
         onSubmit={(values) => oppdaterPerioder({
-          perioder: transformValues(values.perioder),
+          perioder: transformValues(values.perioder.map((p) => ({
+            ...p,
+            periodeKilde: 'SØKNAD',
+          }))),
         })}
       >
         <FlexContainer>
@@ -228,7 +233,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
           <FlexRow>
             <FlexColumn>
-              {perioder[0].arsakstype === Arsakstype.UTSETTELSE && (
+              {årsakstype === Arsakstype.UTSETTELSE && (
                 <SelectField
                   name={`perioder.${0}.utsettelseÅrsak`}
                   label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
@@ -238,7 +243,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                   readOnly={readOnly}
                 />
               )}
-              {perioder[0].arsakstype === Arsakstype.OVERFØRING && (
+              {årsakstype === Arsakstype.OVERFØRING && (
                 <SelectField
                   name={`perioder.${0}.overføringÅrsak`}
                   label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
@@ -248,7 +253,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                   readOnly={readOnly}
                 />
               )}
-              {perioder[0].arsakstype === Arsakstype.OPPHOLD && (
+              {årsakstype === Arsakstype.OPPHOLD && (
                 <SelectField
                   name={`perioder.${0}.oppholdÅrsak`}
                   label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
@@ -262,7 +267,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
           </FlexRow>
           <VerticalSpacer sixteenPx />
           <FlexRow>
-            {perioder[0].arsakstype !== Arsakstype.UTSETTELSE && (
+            {årsakstype !== Arsakstype.UTSETTELSE && (
               <FlexColumn>
                 <SelectField
                   name={`perioder.${0}.uttakPeriodeType`}
@@ -273,7 +278,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                 />
               </FlexColumn>
             )}
-            {perioder[0].arsakstype === Arsakstype.UTTAK && (
+            {årsakstype === Arsakstype.UTTAK && (
               <FlexColumn>
                 <InputField
                   name={`perioder.${0}.arbeidstidsprosent`}
@@ -282,7 +287,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                 />
               </FlexColumn>
             )}
-            {perioder[0].arbeidstidsprosent && (
+            {perioder.length > 0 && perioder[0].arbeidstidsprosent && (
               <FlexColumn>
                 <SelectField
                   name={`perioder.${0}.arbeidsgiverId`}
@@ -292,7 +297,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                 />
               </FlexColumn>
             )}
-            {perioder[0].arsakstype === Arsakstype.UTTAK && (
+            {årsakstype === Arsakstype.UTTAK && (
               <FlexColumn>
                 <InputField
                   name={`perioder.${0}.samtidigUttaksprosent`}
@@ -314,7 +319,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                 readOnly={readOnly}
               />
             </FlexColumn>
-            {perioder[0].arsakstype === Arsakstype.UTTAK && (
+            {årsakstype === Arsakstype.UTTAK && (
               <FlexColumn>
                 <CheckboxField
                   readOnly={readOnly}
