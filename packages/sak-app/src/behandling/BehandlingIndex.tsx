@@ -20,15 +20,16 @@ import {
 import behandlingEventHandler from './BehandlingEventHandler';
 import ErrorBoundary from '../app/ErrorBoundary';
 import FagsakData from '../fagsak/FagsakData';
+import lazyWithRetry from './lazyUtils';
 
-const BehandlingEngangsstonadIndex = React.lazy(() => import('./forstegangsoknadOgRevurdering/engangsstonad/BehandlingEngangsstonadIndex'));
-const BehandlingForeldrepengerIndex = React.lazy(() => import('./forstegangsoknadOgRevurdering/foreldrepenger/BehandlingForeldrepengerIndex'));
-const BehandlingSvangerskapspengerIndex = React.lazy(() => import('./forstegangsoknadOgRevurdering/svangerskapspenger/BehandlingSvangerskapspengerIndex'));
-const BehandlingInnsynIndex = React.lazy(() => import('./innsyn/BehandlingInnsynIndex'));
-const BehandlingKlageIndex = React.lazy(() => import('./klage/BehandlingKlageIndex'));
-const BehandlingTilbakekrevingIndex = React.lazy(() => import('./tilbakekreving/BehandlingTilbakekrevingIndex'));
-const BehandlingPapirsoknadIndex = React.lazy(() => import('./papirsoknad/BehandlingPapirsoknadIndex'));
-const BehandlingAnkeIndex = React.lazy(() => import('./anke/BehandlingAnkeIndex'));
+const BehandlingEngangsstonadIndex = lazyWithRetry(() => import('./forstegangsoknadOgRevurdering/engangsstonad/BehandlingEngangsstonadIndex'));
+const BehandlingForeldrepengerIndex = lazyWithRetry(() => import('./forstegangsoknadOgRevurdering/foreldrepenger/BehandlingForeldrepengerIndex'));
+const BehandlingSvangerskapspengerIndex = lazyWithRetry(() => import('./forstegangsoknadOgRevurdering/svangerskapspenger/BehandlingSvangerskapspengerIndex'));
+const BehandlingInnsynIndex = lazyWithRetry(() => import('./innsyn/BehandlingInnsynIndex'));
+const BehandlingKlageIndex = lazyWithRetry(() => import('./klage/BehandlingKlageIndex'));
+const BehandlingTilbakekrevingIndex = lazyWithRetry(() => import('./tilbakekreving/BehandlingTilbakekrevingIndex'));
+const BehandlingPapirsoknadIndex = lazyWithRetry(() => import('./papirsoknad/BehandlingPapirsoknadIndex'));
+const BehandlingAnkeIndex = lazyWithRetry(() => import('./anke/BehandlingAnkeIndex'));
 
 const erTilbakekreving = (behandlingTypeKode?:string): boolean => behandlingTypeKode === BehandlingType.TILBAKEKREVING
   || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING;
