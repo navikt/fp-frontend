@@ -52,7 +52,7 @@ const defaultPersonoversikt = {
     fødselsdato: '2018-01-01',
     adresser,
     aktoerId: '3',
-    kjønn: KjønnkodeEnum.KVINNE,
+    kjønn: KjønnkodeEnum.KVINNE.toString(),
     sivilstand: sivilstandType.UGIFT,
   }],
 };
@@ -108,7 +108,7 @@ HarAksjonspunktForAvklarAleneomsorgMedFlereBarn.args = {
       fødselsdato: '2018-01-01',
       adresser,
       aktoerId: '4',
-      kjønn: KjønnkodeEnum.MANN,
+      kjønn: KjønnkodeEnum.MANN.toString(),
       sivilstand: sivilstandType.UGIFT,
     }),
   },
