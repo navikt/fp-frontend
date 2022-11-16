@@ -7,7 +7,7 @@
   "dependencies": {
     "@fpsak-frontend/kodeverk": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "2.2.3",
-    "@navikt/ft-prosess-beregningsgrunnlag": "3.1.13"
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "2.2.4",
+    "@navikt/ft-prosess-beregningsgrunnlag": "3.1.14"
   }
 }
