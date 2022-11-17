@@ -79,7 +79,12 @@ const Dekorator: FunctionComponent<OwnProps> = ({
 
   const navigate = useNavigate();
   const visSaksbehandlerside = useCallback((e: React.SyntheticEvent) => {
-    navigate('/');
+    if (e.type === 'click') {
+      navigate('/');
+    }
+    if (e.type === 'contextmenu') {
+      window.open('/fpsak/', '_newtab');
+    }
     e.preventDefault();
   }, [navigate]);
   const visAvdelingslederside = useCallback((e: React.SyntheticEvent) => {
