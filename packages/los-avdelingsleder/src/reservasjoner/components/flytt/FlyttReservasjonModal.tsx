@@ -66,7 +66,7 @@ export const FlyttReservasjonModal: FunctionComponent<OwnProps & WrappedComponen
   const {
     startRequest, state, data: saksbehandler, resetRequestData,
   } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK);
-  const finnSaksbehandler = useCallback((brukerIdent: string) => startRequest(brukerIdent), []);
+  const finnSaksbehandler = useCallback((brukerIdent: string) => startRequest({ brukerIdent }), []);
 
   const { startRequest: flyttOppgavereservasjon } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FLYTT_RESERVASJON);
   const flyttReservasjon = useCallback((brukerident: string, begrunnelse: string) => flyttOppgavereservasjon({
