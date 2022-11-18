@@ -67,7 +67,7 @@ jobs:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: ${{ env.CLUSTER_DEV }}
           RESOURCE: .deploy/naiserator.yaml
-          VARS: .deploy/dev-gcp.json
+          VARS: .deploy/dev-gcp-teamforeldrepenger.json
 
       - name: Deploy prod
         if: success() && env.SHOULD_DEPLOY == 'true'
@@ -77,4 +77,4 @@ jobs:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: ${{ env.CLUSTER_PROD }}
           RESOURCE: .deploy/naiserator.yaml
-          VARS: .deploy/prod-gcp.json
+          VARS: .deploy/prod-gcp-teamforeldrepenger.json
