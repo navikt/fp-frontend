@@ -1,0 +1,80 @@
+name: Build, push and deploy fp-frontend
+
+on:
+  push:
+    branches:
+      - azure_gcp
+env:
+  CLUSTER_DEV: "dev-gcp"
+  CLUSTER_PROD: "prod-gcp"
+  IMAGE_BASE: ghcr.io/${{ github.repository }}
+  SHOULD_DEPLOY: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hente kode
+        uses: actions/checkout@v3.0.2
+
+      - name: Sette opp Node
+        uses: actions/setup-node@v3.3.0
+        with:
+          node-version: 16
+          registry-url: https://npm.pkg.github.com/
+          scope: '@navikt'
+          cache: 'yarn'
+
+      - name: Hent tag
+        run: echo "TAG=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: Run yarn install
+        run: yarn install --ignore-optional --no-progress --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      #- name: Run linting
+      #  run: yarn less:lint && yarn lint && yarn ts-check
+
+      #- name: Run test and coverage
+      #  run: yarn test:coverage
+
+      - name: Build
+        run: |
+          echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV
+          yarn build
+
+      - name: Login to GitHub Packages Docker Registry
+        uses: docker/login-action@49ed152c8eca782a232dede0303416e8f356c37b
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: Dockerfile
+          push: ${{ env.SHOULD_DEPLOY }}
+          tags: ${{ env.IMAGE_BASE }}:${{ env.TAG }}
+
+      - name: Deploy dev
+        if: success() && env.SHOULD_DEPLOY == 'true'
+        uses: nais/deploy/actions/deploy@v1
+        env:
+          PRINT_PAYLOAD: true
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: ${{ env.CLUSTER_DEV }}
+          RESOURCE: .deploy/naiserator.yaml
+          VARS: .deploy/dev-gcp-teamforeldrepenger.json
+
+      - name: Deploy prod
+        if: success() && env.SHOULD_DEPLOY == 'true'
+        uses: nais/deploy/actions/deploy@v1
+        env:
+          PRINT_PAYLOAD: true
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: ${{ env.CLUSTER_PROD }}
+          RESOURCE: .deploy/naiserator.yaml
+          VARS: .deploy/prod-gcp-teamforeldrepenger.json
