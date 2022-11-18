@@ -13,3 +13,5 @@ lerna-debug.log
 ssh.exe.stackdump
 .DS_Store
 .eslintcache
+/server/node_modules
+/server/package-lock.json

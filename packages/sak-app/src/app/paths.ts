@@ -3,8 +3,6 @@ import { Location, Search } from 'history';
 import { buildPath, formatQueryString, parseQueryString } from '@navikt/ft-utils';
 import { skjermlenkeCodes } from '@fpsak-frontend/konstanter';
 
-const FP_FRONTEND = 'fpsak';
-
 export const AVDELINGSLEDER_PATH = 'avdelingsleder';
 
 const DEFAULT_FAKTA = 'default';
@@ -33,7 +31,7 @@ export const pathToBehandling = (saksnummer: string, behandlingUuid: string): st
 export const pathToMissingPage = (): string => '/404';
 
 export const pathToAnnenPart = (saksnummer: string, behandlingUuid: string)
-  : string => `/${FP_FRONTEND}/fagsak/${saksnummer}/behandling/${behandlingUuid}/?punkt=${DEFAULT_PROSESS_STEG}&fakta=${DEFAULT_FAKTA}`;
+  : string => `/fagsak/${saksnummer}/behandling/${behandlingUuid}/?punkt=${DEFAULT_PROSESS_STEG}&fakta=${DEFAULT_FAKTA}`;
 
 const emptyQueryString = (queryString: string): boolean => queryString === '?' || !queryString;
 
@@ -74,8 +72,8 @@ export const createLocationForSkjermlenke = (behandlingLocation: Location, skjer
   return getLocationWithQueryParams(behandlingLocation, { punkt: skjermlenke.punktNavn, fakta: skjermlenke.faktaNavn });
 };
 
-// Kan gå inn på url som ser sånn ut "http://localhost:9000/fpsak/fagsak/", men
-// da vil ein automatisk redirecte til http://localhost:9000/fpsak/fagsak/behandling/*"
+// Kan gå inn på url som ser sånn ut "http://localhost:9000/fagsak/", men
+// da vil ein automatisk redirecte til http://localhost:9000/fagsak/behandling/*"
 export const erUrlUnderBehandling = (location: Location): boolean => !location.pathname.includes('behandling/');
 
 export const erBehandlingValgt = (location: Location): boolean => location.pathname.includes('behandling') && !location.pathname.endsWith('behandling/');

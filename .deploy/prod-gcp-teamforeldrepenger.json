@@ -1,0 +1,45 @@
+{
+  "ingress": "https://fpsak.intern.nav.no",
+  "minReplicas": "2",
+  "maxReplicas": "4",
+  "env": "production",
+  "groups": [
+    "73107205-17ec-4a07-a56e-e0a8542f90c9",
+    "77f05833-ebfd-45fb-8be7-88eca8e7418f",
+    "1a59da27-4c55-4a9d-8480-6abd1a856cd2"
+  ],
+  "externals": [
+    "fpsak-api.prod-fss-pub.nais.io",
+    "fplos.prod-fss-pub.nais.io",
+    "fpformidling.prod-fss-pub.nais.io",
+    "fpoppdrag.prod-fss-pub.nais.io",
+    "fptilbake.prod-fss-pub.nais.io"
+  ],
+  "proxyRedirects": [
+    {
+      "path": "/fpsak/api",
+      "url": "https://fpsak-api.prod-fss-pub.nais.io",
+      "scope": "api://prod-fss.teamforeldrepenger.fpsak/.default"
+    },
+    {
+      "path": "/fptilbake/api",
+      "url": "https://fptilbake.prod-fss-pub.nais.io",
+      "scope": "api://prod-fss.teamforeldrepenger.fptilbake/.default"
+    },
+    {
+      "path": "/fpoppdrag/api",
+      "url": "https://fpoppdrag.prod-fss-pub.nais.io",
+      "scope": "api://prod-fss.teamforeldrepenger.fpoppdrag/.default"
+    },
+    {
+      "path": "/fpformidling/api",
+      "url": "https://fpformidling.prod-fss-pub.nais.io",
+      "scope": "api://prod-fss.teamforeldrepenger.fpformidling/.default"
+    },
+    {
+      "path": "/fplos/api",
+      "url": "https://fplos.prod-fss-pub.nais.io",
+      "scope": "api://prod-fss.teamforeldrepenger.fplos/.default"
+    }
+  ]
+}
