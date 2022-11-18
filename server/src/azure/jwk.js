@@ -10,5 +10,6 @@ export const getJwkSet = async () => {
   return remoteJWKSet;
 };
 
-
-
+export default {
+  getJwkSet,
+};

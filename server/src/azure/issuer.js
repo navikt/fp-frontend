@@ -11,4 +11,8 @@ export const getIssuer = async () => {
     logger.info(`Discovered issuer ${issuer.issuer}`);
   }
   return issuer;
-}
+};
+
+export default {
+  getIssuer,
+};

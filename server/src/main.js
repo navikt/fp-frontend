@@ -9,7 +9,7 @@ import { getIssuer } from './azure/issuer.js';
 
 // for debugging during development
 import config from './config.js';
-import msgraph from "./azure/msgraph.js";
+import msgraph from './azure/msgraph.js';
 import reverseProxy from "./reverse-proxy.js";
 import {validateAuthorization} from "./azure/validate.js";
 

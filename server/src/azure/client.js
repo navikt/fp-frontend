@@ -20,3 +20,7 @@ export const getAuthClient = async () => {
 
   return client;
 };
+
+export default {
+  getAuthClient,
+};

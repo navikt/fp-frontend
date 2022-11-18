@@ -59,8 +59,9 @@ const cors = {
     name: 'CORS_ALLOWED_METHODS',
     required: false,
   }) || '',
-}
+};
 
+// eslint-disable-next-line consistent-return
 const configValueAsJson = ({ name, required = true }) => {
   const value = envVar({ name, required });
   if (!value) { return null; }
@@ -73,7 +74,7 @@ const configValueAsJson = ({ name, required = true }) => {
 };
 
 const getProxyConfig = () => {
-  var config = configValueAsJson({ name: 'PROXY_CONFIG' });
+  const config = configValueAsJson({ name: 'PROXY_CONFIG' });
   if (!config.apis) {
     logger.error("Config: 'PROXY_CONFIG' mangler 'apis' entry.");
     exit(1);

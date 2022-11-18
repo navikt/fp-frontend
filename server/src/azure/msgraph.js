@@ -6,7 +6,7 @@ const getGraphRequest = (bearerToken, graphUrl) => new Promise(((resolve, reject
   const scope = 'https://graph.microsoft.com/.default';
   grantAzureOboToken(bearerToken, scope)
     .then((accessToken) => axios.get(graphUrl, {
-        headers: {Authorization: `Bearer ${accessToken}`}
+      headers: { Authorization: `Bearer ${accessToken}` },
       }))
     .then((response) => resolve(response.data))
     .catch((err) => {

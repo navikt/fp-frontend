@@ -9,6 +9,7 @@ import logger from './log.js';
 
 const xNavCallId = 'x_Nav-CallId';
 const xTimestamp = 'x-Timestamp';
+const stripTrailingSlash = (str) => (str.endsWith('/') ? str.slice(0, -1) : str);
 
 const proxyOptions = (api) => ({
   proxyReqOptDecorator: (options, req) => {
@@ -19,11 +20,13 @@ const proxyOptions = (api) => ({
     }
     const requestTime = Date.now();
     options.headers[xTimestamp] = requestTime;
-    options.headers['cookie'] = '';
+    options.headers.cookie = '';
+    // eslint-disable-next-line no-promise-executor-return
     return new Promise(((resolve, reject) => grantAzureOboToken(req.headers.authorization, api.scopes)
-      .then((access_token) => {
+      .then((accessToken) => {
         logger.info(`Token veksling tok: (${Date.now() - requestTime}ms)`);
-        options.headers['Authorization'] = `Bearer ${access_token}`;
+        // eslint-disable-next-line camelcase
+        options.headers.Authorization = `Bearer ${accessToken}`;
         resolve(options);
       },
       (error) => reject(error))
@@ -47,14 +50,14 @@ const proxyOptions = (api) => ({
     const location = proxyRes.headers.location;
     if (location && location.includes(api.url)) {
       headers.location = location.split(api.url)[1];
-      logger.debug(`Location header etter endring: ${headers.location}`)
+      logger.debug(`Location header etter endring: ${headers.location}`);
     }
     const statusCode = proxyRes.statusCode;
     const requestTime = Date.now() - proxyReq.getHeader(xTimestamp);
     const melding = `${statusCode} ${proxyRes.statusMessage}: ${userReq.method} - ${userReq.originalUrl} (${requestTime}ms)`;
     const callIdValue = proxyReq.getHeader(xNavCallId);
     if (statusCode >= 500) {
-      logger.error(melding, {message: callIdValue});
+      logger.error(melding, { message: callIdValue});
     } else {
       logger.info(melding);
     }
@@ -62,15 +65,14 @@ const proxyOptions = (api) => ({
   },
 });
 
-const stripTrailingSlash = (str) => (str.endsWith('/') ? str.slice(0, -1) : str);
-
+// eslint-disable-next-line func-names
 const timedOut = function (req, res, next) {
   if (!req.timedout) {
-    next()
+    next();
   } else {
-    logger.warning('Request for ' + req.originalUrl + ' timed out!')
+    logger.warning(`Request for ${req.originalUrl} timed out!`);
   }
-}
+};
 
 const setup = (router) => {
   config.reverseProxyConfig.apis.forEach((api) => {
