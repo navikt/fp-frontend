@@ -29,7 +29,7 @@ export const RestApiPathsKeys = {
   ENDRE_OPPGAVERESERVASJON: new RestKey<Oppgave[], { oppgaveId: number, reserverTil: string }>('ENDRE_OPPGAVERESERVASJON'),
   FLYTT_RESERVASJON: new RestKey<void, { oppgaveId: number, brukerIdent: string, begrunnelse: string }>('FLYTT_RESERVASJON'),
   RESERVER_OPPGAVE: new RestKey<OppgaveStatus, { oppgaveId: number }>('RESERVER_OPPGAVE'),
-  FLYTT_RESERVASJON_SAKSBEHANDLER_SOK: new RestKey<SaksbehandlerForFlytting, string>('FLYTT_RESERVASJON_SAKSBEHANDLER_SOK'),
+  FLYTT_RESERVASJON_SAKSBEHANDLER_SOK: new RestKey<SaksbehandlerForFlytting, { brukerIdent: string }>('FLYTT_RESERVASJON_SAKSBEHANDLER_SOK'),
   HENT_RESERVASJONSSTATUS: new RestKey<OppgaveStatus, { oppgaveId: number }>('HENT_RESERVASJONSSTATUS'),
   HENT_NYE_OG_FERDIGSTILTE_OPPGAVER: new RestKey<NyeOgFerdigstilteOppgaver[], { sakslisteId: number }>('HENT_NYE_OG_FERDIGSTILTE_OPPGAVER'),
   SAKSLISTE_SAKSBEHANDLERE: new RestKey<Saksbehandler[], { sakslisteId: number }>('SAKSLISTE_SAKSBEHANDLERE'),
