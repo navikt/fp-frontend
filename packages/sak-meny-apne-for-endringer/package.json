@@ -5,11 +5,11 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@navikt/ds-react": "1.5.8",
-    "@navikt/ft-kodeverk": "^1.0.22",
-    "@navikt/ft-types": "^1.0.33",
-    "@navikt/ft-ui-komponenter": "1.2.4",
-    "@navikt/ft-utils": "1.1.8",
+    "@navikt/ds-react": "1.5.9",
+    "@navikt/ft-kodeverk": "^1.0.23",
+    "@navikt/ft-types": "^1.0.34",
+    "@navikt/ft-ui-komponenter": "1.2.5",
+    "@navikt/ft-utils": "1.1.9",
     "react": "18.2.0",
     "react-intl": "6.2.1"
   },
