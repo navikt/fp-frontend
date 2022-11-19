@@ -31,7 +31,7 @@ const finnÅrsak = (årsak) => {
   if (årsak === UttakÅrsak.INNLEGGELSE_BARN) {
     return <FormattedMessage id="UttakDokumentasjonFaktaTable.InnleggelseBarn" />;
   }
-  if (årsak === UttakÅrsak.HV_OVELSE) {
+  if (årsak === UttakÅrsak.HV_ØVELSE) {
     return <FormattedMessage id="UttakDokumentasjonFaktaTable.HvOvelse" />;
   }
   if (årsak === UttakÅrsak.NAV_TILTAK) {
