@@ -3,21 +3,21 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
 import {
-  BodyShort, Button, Label, ErrorMessage,
+  BodyShort, Button, ErrorMessage, Label,
 } from '@navikt/ds-react';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { Historic } from '@navikt/ds-icons';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import {
-  Datepicker, RadioGroupPanel, Form, formHooks,
+  Datepicker, Form, formHooks, RadioGroupPanel,
 } from '@navikt/ft-form-hooks';
 import {
-  VerticalSpacer, FlexColumn, FlexContainer, FlexRow, AvsnittSkiller, DateLabel, Image,
+  AvsnittSkiller, DateLabel, FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
 import splitPeriodImageUrl from '@fpsak-frontend/assets/images/splitt.svg';
 import {
-  DokumentasjonVurderingBehov, UttakType, UttakVurdering,
+  DokumentasjonVurderingBehov, UttakType, UttakVurdering, UttakÅrsak,
 } from '@fpsak-frontend/types';
 
 import OppdaterePeriodeModal from './OppdaterePeriodeModal';
@@ -133,7 +133,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
     label: intl.formatMessage({ id: 'UttakDokumentasjonFaktaDetailForm.IkkeGodkjent' }),
   }];
 
-  if (valgtDokBehov.type === UttakType.AKTIVITETSKRAV) {
+  if (valgtDokBehov.type === UttakType.UTTAK && valgtDokBehov.årsak === UttakÅrsak.AKTIVITETSKRAV) {
     vurderingsalternativer.push({
       value: UttakVurdering.IKKE_DOKUMENTERT,
       label: intl.formatMessage({ id: 'UttakDokumentasjonFaktaDetailForm.IkkeDokumentert' }),

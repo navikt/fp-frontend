@@ -18,14 +18,10 @@ const finnType = (type) => {
   if (type === UttakType.UTSETTELSE) {
     return <FormattedMessage id="UttakDokumentasjonFaktaTable.Utsettelse" />;
   }
-  if (type === UttakType.TIDLIG_OPPSTART_FAR) {
-    return <FormattedMessage id="UttakDokumentasjonFaktaTable.TidligOppstartFar" />;
-  }
   if (type === UttakType.OVERFØRING) {
     return <FormattedMessage id="UttakDokumentasjonFaktaTable.Overforing" />;
   }
-
-  return <FormattedMessage id="UttakDokumentasjonFaktaTable.Aktivitetskrav" />;
+  return <FormattedMessage id="UttakDokumentasjonFaktaTable.Uttak" />;
 };
 
 const finnÅrsak = (årsak) => {
@@ -55,6 +51,12 @@ const finnÅrsak = (årsak) => {
   }
   if (årsak === UttakÅrsak.ALENEOMSORG) {
     return <FormattedMessage id="UttakDokumentasjonFaktaTable.Aleneomsorg" />;
+  }
+  if (årsak === UttakÅrsak.AKTIVITETSKRAV) {
+    return <FormattedMessage id="UttakDokumentasjonFaktaTable.Aktivitetskrav" />;
+  }
+  if (årsak === UttakÅrsak.TIDLIG_OPPSTART_FAR) {
+    return <FormattedMessage id="UttakDokumentasjonFaktaTable.TidligOppstartFar" />;
   }
 
   return '';

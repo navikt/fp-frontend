@@ -26,17 +26,17 @@ const dokumentasjonVurderingBehovListe = [{
   fom: '2022-11-08',
   tom: '2022-11-13',
   type: UttakType.OVERFØRING,
-  årsak: UttakÅrsak.INNLEGGELSE_BARN,
+  årsak: UttakÅrsak.SYKDOM_ANNEN_FORELDER,
 }, {
   fom: '2022-12-08',
   tom: '2022-12-13',
-  type: UttakType.AKTIVITETSKRAV,
-  årsak: UttakÅrsak.HV_OVELSE,
+  type: UttakType.UTTAK,
+  årsak: UttakÅrsak.AKTIVITETSKRAV,
 }, {
   fom: '2022-11-15',
   tom: '2022-11-20',
-  type: UttakType.TIDLIG_OPPSTART_FAR,
-  årsak: UttakÅrsak.NAV_TILTAK,
+  type: UttakType.UTTAK,
+  årsak: UttakÅrsak.TIDLIG_OPPSTART_FAR,
 }] as DokumentasjonVurderingBehov[];
 
 export default {
@@ -100,7 +100,7 @@ AksjonspunktSomErBekreftetOgBehandlingAvsluttet.args = {
   dokumentasjonVurderingBehov: [{
     fom: '2022-12-08',
     tom: '2022-12-13',
-    type: UttakType.AKTIVITETSKRAV,
+    type: UttakType.UTSETTELSE,
     årsak: UttakÅrsak.HV_OVELSE,
     vurdering: UttakVurdering.GODKJENT,
   }],
@@ -121,7 +121,7 @@ AksjonspunktErBekreftetMenBehandlingErÅpen.args = {
   dokumentasjonVurderingBehov: [{
     fom: '2022-12-08',
     tom: '2022-12-13',
-    type: UttakType.AKTIVITETSKRAV,
+    type: UttakType.UTTAK,
     årsak: UttakÅrsak.HV_OVELSE,
     vurdering: UttakVurdering.GODKJENT,
   }],
