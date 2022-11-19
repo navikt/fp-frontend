@@ -45,14 +45,14 @@ const proxyOptions = (api) => ({
     logger.info(`Proxying request from '${req.originalUrl}' to '${stripTrailingSlash(urlFromApi.href)}${newPath}'`);
     return newPath;
   },
-  userResHeaderDecorator: function(headers, userReq, userRes, proxyReq, proxyRes) {
-    // FPSAK sender er redirect med full hostname - dette må man modifisere slik at det går tilbake via proxy.
+  userResHeaderDecorator: function (headers, userReq, userRes, proxyReq, proxyRes) {
+    // FPSAK og TILBAKE sender er redirect med full hostname - dette må man modifisere slik at det går tilbake via proxy.
     const location = proxyRes.headers.location;
     if (location && location.includes(api.url)) {
       headers.location = location.split(api.url)[1];
       logger.debug(`Location header etter endring: ${headers.location}`);
     }
-    const statusCode = proxyRes.statusCode;
+    const { statusCode } = proxyRes;
     const requestTime = Date.now() - proxyReq.getHeader(xTimestamp);
     const melding = `${statusCode} ${proxyRes.statusMessage}: ${userReq.method} - ${userReq.originalUrl} (${requestTime}ms)`;
     const callIdValue = proxyReq.getHeader(xNavCallId);

@@ -83,7 +83,7 @@ const Dekorator: FunctionComponent<OwnProps> = ({
       navigate('/');
     }
     if (e.type === 'contextmenu') {
-      window.open('/fpsak/', '_newtab');
+      window.open('/', '_newtab');
     }
     e.preventDefault();
   }, [navigate]);

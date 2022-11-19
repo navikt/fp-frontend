@@ -74,7 +74,7 @@ const PersonYtelserTable: FunctionComponent<OwnProps> = ({
           <TableColumn>{ytelse.status ? <BodyShort size="small">{ytelse.status}</BodyShort> : ''}</TableColumn>
           <TableColumn>
             {ytelse.saksnummer
-              ? <BodyShort size="small"><Link href={`/fpsak/fagsak/${ytelse.saksnummer}`} target="_blank">{ytelse.saksnummer}</Link></BodyShort> : ''}
+              ? <BodyShort size="small"><Link href={`/fagsak/${ytelse.saksnummer}`} target="_blank">{ytelse.saksnummer}</Link></BodyShort> : ''}
           </TableColumn>
         </TableRow>
       ))}
