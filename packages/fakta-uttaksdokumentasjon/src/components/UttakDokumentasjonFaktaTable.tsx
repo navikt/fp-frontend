@@ -52,8 +52,29 @@ const finnÅrsak = (årsak) => {
   if (årsak === UttakÅrsak.ALENEOMSORG) {
     return <FormattedMessage id="UttakDokumentasjonFaktaTable.Aleneomsorg" />;
   }
-  if (årsak === UttakÅrsak.AKTIVITETSKRAV) {
-    return <FormattedMessage id="UttakDokumentasjonFaktaTable.Aktivitetskrav" />;
+  if (årsak === UttakÅrsak.AKTIVITETSKRAV_ARBEID) {
+    return <FormattedMessage id="UttakDokumentasjonFaktaTable.AktivitetskravArbeid" />;
+  }
+  if (årsak === UttakÅrsak.AKTIVITETSKRAV_UTDANNING) {
+    return <FormattedMessage id="UttakDokumentasjonFaktaTable.AktivitetskravUtdanning" />;
+  }
+  if (årsak === UttakÅrsak.AKTIVITETSKRAV_KVALPROG) {
+    return <FormattedMessage id="UttakDokumentasjonFaktaTable.AktivitetskravKvalprog" />;
+  }
+  if (årsak === UttakÅrsak.AKTIVITETSKRAV_INTROPROG) {
+    return <FormattedMessage id="UttakDokumentasjonFaktaTable.AktivitetskravIntroprog" />;
+  }
+  if (årsak === UttakÅrsak.AKTIVITETSKRAV_TRENGER_HJELP) {
+    return <FormattedMessage id="UttakDokumentasjonFaktaTable.AktivitetskravTrengerHjelp" />;
+  }
+  if (årsak === UttakÅrsak.AKTIVITETSKRAV_INNLAGT) {
+    return <FormattedMessage id="UttakDokumentasjonFaktaTable.AktivitetskravInnlagt" />;
+  }
+  if (årsak === UttakÅrsak.AKTIVITETSKRAV_ARBEID_OG_UTDANNING) {
+    return <FormattedMessage id="UttakDokumentasjonFaktaTable.AktivitetskravArbeidUtdanning" />;
+  }
+  if (årsak === UttakÅrsak.AKTIVITETSKRAV_IKKE_OPPGITT) {
+    return <FormattedMessage id="UttakDokumentasjonFaktaTable.AktivitetskravIkkeOppgitt" />;
   }
   if (årsak === UttakÅrsak.TIDLIG_OPPSTART_FAR) {
     return <FormattedMessage id="UttakDokumentasjonFaktaTable.TidligOppstartFar" />;

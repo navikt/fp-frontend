@@ -31,7 +31,7 @@ const dokumentasjonVurderingBehovListe = [{
   fom: '2022-12-08',
   tom: '2022-12-13',
   type: UttakType.UTTAK,
-  årsak: UttakÅrsak.AKTIVITETSKRAV,
+  årsak: UttakÅrsak.AKTIVITETSKRAV_ARBEID,
 }, {
   fom: '2022-11-15',
   tom: '2022-11-20',
