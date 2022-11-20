@@ -15,7 +15,7 @@ export const validateAuthorization = async (authorization) => {
     const JWTVerifyResult = await isTokenValid(token);
     return !!JWTVerifyResult?.payload;
   } catch (e) {
-    logger.error('Azure AD error', e);
+    logger.warning('Azure AD error', e);
     return false;
   }
 };

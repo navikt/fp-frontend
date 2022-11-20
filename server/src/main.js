@@ -3,15 +3,15 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import timeout from 'connect-timeout';
-import * as headers from "./headers.js";
+import * as headers from './headers.js';
 import logger from './log.js';
 import { getIssuer } from './azure/issuer.js';
 
 // for debugging during development
 import config from './config.js';
 import msgraph from './azure/msgraph.js';
-import reverseProxy from "./reverse-proxy.js";
-import {validateAuthorization} from "./azure/validate.js";
+import reverseProxy from './reverse-proxy.js';
+import { validateAuthorization } from './azure/validate.js';
 
 const server = express();
 const { port } = config.server;
@@ -27,7 +27,7 @@ async function startApp() {
     server.use(bodyParser.json());
     server.use(bodyParser.urlencoded({ extended: true }));
 
-    server.set("trust proxy", 1);
+    server.set('trust proxy', 1);
 
     server.use(
       helmet({
@@ -37,7 +37,7 @@ async function startApp() {
             connectSrc: [
               "'self'",
               'https://sentry.gc.nav.no',
-              'https://graph.microsoft.com'
+              'https://graph.microsoft.com',
             ],
             frameSrc: ["'none'"],
             childSrc: ["'none'"],
@@ -46,7 +46,7 @@ async function startApp() {
           },
         },
         hidePoweredBy: true,
-        noSniff: true
+        noSniff: true,
       }),
     );
 
@@ -56,36 +56,37 @@ async function startApp() {
         origin: config.server.host,
         methods: config.cors.allowedMethods,
         exposedHeaders: config.cors.exposedHeaders,
-        allowedHeaders: config.cors.allowedHeaders
-      })
+        allowedHeaders: config.cors.allowedHeaders,
+      }),
     );
 
-    const issuer = await getIssuer();
+    await getIssuer();
 
     // Liveness and readiness probes for Kubernetes / nais
-    server.get(['/isAlive', '/isReady'], (req, res) => {
+    server.get(['/health/isAlive', '/health/isReady'], (req, res) => {
       res.status(200).send('Alive');
     });
 
-    server.get(["/oauth2/login"], async (req, res) => {
+    server.get(['/oauth2/login'], async (req, res) => {
       res.status(502).send({
-        message: "Wonderwall must handle /oauth2/login",
+        message: 'Wonderwall must handle /oauth2/login',
       });
     });
 
     const ensureAuthenticated = async (req, res, next) => {
-      const {authorization} = req.headers;
+      const { authorization } = req.headers;
       const loginPath = `/oauth2/login?redirect=${req.originalUrl}`;
       if (!authorization) {
-         logger.debug("User token missing. Redirect til login.")
-         res.redirect(loginPath);
+        logger.debug('User token missing. Redirect til login.');
+        res.redirect(loginPath);
       } else {
         // Validate token and continue to app
+        // eslint-disable-next-line no-lonely-if
         if (await validateAuthorization(authorization)) {
-          logger.debug("User token is valid. Continue.")
+          logger.debug('User token is valid. Continue.');
           next();
         } else {
-          logger.debug("User token is NOT valid. Redirect til login.")
+          logger.debug('User token is NOT valid. Redirect til login.');
           res.redirect(loginPath);
         }
       }
@@ -94,13 +95,11 @@ async function startApp() {
     // The routes below require the user to be authenticated
     server.use(ensureAuthenticated);
 
-    server.get(["/logout"], async (req, res) => {
+    server.get(['/logout'], async (req, res) => {
       if (req.headers.authorization) {
-        res.redirect("/oauth2/logout");
+        res.redirect('/oauth2/logout');
       }
     });
-
-    logger.debug("OK.")
 
     // return user info fetched from the Microsoft Graph API
     server.get('/me', (req, res) => {
@@ -121,9 +120,9 @@ async function startApp() {
     reverseProxy.setup(server);
 
     // serve static files
-    const rootDir = '.';
+    const rootDir = './dist';
     server.use(express.static(rootDir));
-    server.use('/', (req, res) => {
+    server.use(/^\/(?!.*dist).*$/, (req, res) => {
       res.sendFile('index.html', { root: rootDir });
     });
 

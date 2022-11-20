@@ -7,9 +7,8 @@ RUN chmod +x /dumb-init
 
 WORKDIR /app
 
-COPY dist ./
+COPY dist ./dist
 COPY server ./
-RUN npm i
 
 USER node
 EXPOSE 8080

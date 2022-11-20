@@ -7,7 +7,7 @@ const getGraphRequest = (bearerToken, graphUrl) => new Promise(((resolve, reject
   grantAzureOboToken(bearerToken, scope)
     .then((accessToken) => axios.get(graphUrl, {
       headers: { Authorization: `Bearer ${accessToken}` },
-      }))
+    }))
     .then((response) => resolve(response.data))
     .catch((err) => {
       if (err.response.data) {
