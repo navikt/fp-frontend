@@ -1,12 +1,4 @@
-.git*
-*Dockerfile*
-*docker-compose*
-**/node_modules
-cypress
-coverage
-.nyc_output
-packages
-eslint
-travis
-webpack
+*
+!dist
 !server
+server/yarn.lock
