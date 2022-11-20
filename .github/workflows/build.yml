@@ -93,7 +93,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 
-      - name: Bygg server dependabot
+      - name: Bygg server
         if: github.actor == 'dependabot[bot]'
         run: cd ./server && yarn install --ignore-optional --no-progress --frozen-lockfile
         env:
