@@ -87,6 +87,18 @@ jobs:
         run: |
           yarn build
 
+      - name: Bygg server
+        if: github.actor != 'dependabot[bot]'
+        run: cd ./server && yarn install --ignore-optional --no-progress --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+
+      - name: Bygg server
+        if: github.actor == 'dependabot[bot]'
+        run: cd ./server && yarn install --ignore-optional --no-progress --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Login to GitHub Packages Docker Registry
         if: github.ref_name == 'master'
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
