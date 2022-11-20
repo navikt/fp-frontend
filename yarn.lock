@@ -14704,7 +14704,7 @@ promzard@^0.3.0:
   dependencies:
     read "1"
 
-prop-types@^15.0.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.0, prop-types@^15.7.2, prop-types@^15.8.1:
+prop-types@^15.0.0, prop-types@^15.6.1, prop-types@^15.7.0, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -14947,13 +14947,6 @@ react-collapse@5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/react-collapse/-/react-collapse-5.1.1.tgz#a2fa08ef13f372141b02e6a7d49ef72427bcbc2b"
   integrity sha512-k6cd7csF1o9LBhQ4AGBIdxB60SUEUMQDAnL2z1YvYNr9KoKr+nDkhN6FK7uGaBd/rYrYfrMpzpmJEIeHRYogBw==
-
-react-day-picker@7.4.10:
-  version "7.4.10"
-  resolved "https://registry.yarnpkg.com/react-day-picker/-/react-day-picker-7.4.10.tgz#d3928fa65c04379ad28c76de22aa85374a8361e1"
-  integrity sha512-/QkK75qLKdyLmv0kcVzhL7HoJPazoZXS8a6HixbVoK6vWey1Od1WRLcxfyEiUsRfccAlIlf6oKHShqY2SM82rA==
-  dependencies:
-    prop-types "^15.6.2"
 
 react-day-picker@8.3.4:
   version "8.3.4"
