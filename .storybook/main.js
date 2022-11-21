@@ -145,6 +145,18 @@ module.exports = {
     
     config.resolve.extensions.push('.ts', '.tsx', '.less');
 
+    config.resolve.fallback = {
+      "fs": false,
+      "tls": false,
+      "net": false,
+      "path": false,
+      "zlib": false,
+      "http": false,
+      "https": false,
+      "stream": false,
+      "crypto": false,
+    }
+
     // Return the altered config
     return config;
   },
