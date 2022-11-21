@@ -23,14 +23,14 @@ spec:
   replicas:
     min: {{minReplicas}}
     max: {{maxReplicas}}
-    cpuThresholdPercentage: 50
+    cpuThresholdPercentage: 80
   resources:
     limits:
       cpu: 500m
-      memory: 64Mi
+      memory: 128Mi
     requests:
-      cpu: 200m
-      memory: 32Mi
+      cpu: 300m
+      memory: 64Mi
   azure:
     application:
       enabled: true
