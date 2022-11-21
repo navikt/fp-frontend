@@ -144,7 +144,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
         }, {
           fom: '2020-11-06',
           overstyrtUtbetalingsgrad: undefined,
-          stillingsprosent: '40.00',
+          stillingsprosent: '40',
           type: 'DELVIS_TILRETTELEGGING',
         }],
         tilretteleggingId: 1116961,
@@ -208,7 +208,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
         tilretteleggingBehovFom: '2020-03-17',
         tilretteleggingDatoer: [{
           fom: '2020-03-17',
-          overstyrtUtbetalingsgrad: '70.00',
+          overstyrtUtbetalingsgrad: '70',
           stillingsprosent: undefined,
           type: 'INGEN_TILRETTELEGGING',
         }, {

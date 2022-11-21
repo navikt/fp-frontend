@@ -3,7 +3,7 @@ import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Alert, Label } from '@navikt/ds-react';
 
 import {
-  Datepicker, SelectField, PeriodFieldArray, formHooks, InputField,
+  Datepicker, SelectField, PeriodFieldArray, formHooks, NumberField,
 } from '@navikt/ft-form-hooks';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
@@ -186,13 +186,13 @@ const TilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
               </FlexColumn>
               {tilretteleggingKode === tilretteleggingType.DELVIS_TILRETTELEGGING && (
                 <FlexColumn className={styles.colMargin}>
-                  <InputField
+                  <NumberField
                     className={styles.stillingsprosentTekst}
                     readOnly={readOnly}
                     name={`${fieldPrefix}.${index}.stillingsprosent`}
                     label={intl.formatMessage({ id: 'TilretteleggingFieldArray.Stillingsprosent' })}
                     validate={[required, minValue0, maxValue100, hasValidDecimal]}
-                    normalizeOnBlur={(value: string) => (new RegExp(/^-?\d+\.?\d*$/).test(value) ? parseFloat(value).toFixed(2) : value)}
+                    forceTwoDecimalDigits
                     onChange={(value) => {
                       const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsforhold, velferdspermisjonprosent, value);
                       // @ts-ignore Fiks
