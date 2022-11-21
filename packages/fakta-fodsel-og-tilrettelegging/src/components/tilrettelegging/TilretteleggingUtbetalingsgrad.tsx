@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import {
   FlexColumn, FlexContainer, FlexRow, Image,
 } from '@navikt/ft-ui-komponenter';
-import { formHooks, InputField } from '@navikt/ft-form-hooks';
+import { formHooks, NumberField } from '@navikt/ft-form-hooks';
 import { ErrorMessage } from '@hookform/error-message';
 import {
   hasValidDecimal, maxValue, minValue, required,
@@ -50,13 +50,13 @@ const TilretteleggingUtbetalingsgrad: FunctionComponent<OwnProps> = ({
     <FlexContainer>
       <FlexRow>
         <FlexColumn>
-          <InputField
+          <NumberField
             className={styles.utbetalingsgradTekst}
             name={`${fieldPrefix}.${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`}
             label={intl.formatMessage({ id: 'TilretteleggingFieldArray.Utbetalingsgrad' })}
+            forceTwoDecimalDigits
             readOnly={erReadOnly}
             validate={[required, minValue1, maxValue100, hasValidDecimal]}
-            normalizeOnBlur={(value: string) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
           />
         </FlexColumn>
         {erOverstyrer && (
