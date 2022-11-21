@@ -14,7 +14,7 @@ import { VurderDokumentasjonAp } from '@fpsak-frontend/types-avklar-aksjonspunkt
 
 import UttakDokumentasjonFaktaTable from './UttakDokumentasjonFaktaTable';
 
-interface PureOwnProps {
+interface OwnProps {
   harApneAksjonspunkter: boolean;
   lagretBegrunnelse?: string;
   dokumentasjonVurderingBehov: DokumentasjonVurderingBehov[];
@@ -25,7 +25,7 @@ interface PureOwnProps {
   setFormData: (data: { dokBehov: DokumentasjonVurderingBehov[], begrunnelse: string }) => void,
 }
 
-const UttakDokumentasjonFaktaForm: FunctionComponent<PureOwnProps> = ({
+const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
   harApneAksjonspunkter,
   lagretBegrunnelse,
   dokumentasjonVurderingBehov,
@@ -44,7 +44,7 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<PureOwnProps> = ({
     settBekreftKnappTrykket(true);
     submitCallback({
       kode: aksjonspunktCodes.VURDER_UTTAK_DOKUMENTASJON,
-      vurderingBehov: dokBehov as Required<DokumentasjonVurderingBehov>[],
+      vurderingBehov: dokBehov,
       begrunnelse,
     });
   }, [dokBehov]);

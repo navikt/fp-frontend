@@ -91,14 +91,14 @@ const HEADER_TEXT_CODES = [
   'EMPTY1',
 ];
 
-interface PureOwnProps {
+interface OwnProps {
   dokumentasjonVurderingBehov: DokumentasjonVurderingBehov[];
   oppdaterDokBehov: (dokBehov: DokumentasjonVurderingBehov[]) => void;
   readOnly: boolean;
   setDirty: (isDirty: boolean) => void;
 }
 
-const UttakDokumentasjonFaktaTable: FunctionComponent<PureOwnProps> = ({
+const UttakDokumentasjonFaktaTable: FunctionComponent<OwnProps> = ({
   dokumentasjonVurderingBehov,
   oppdaterDokBehov,
   readOnly,

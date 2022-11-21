@@ -25,21 +25,19 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
     await userEvent.click(screen.getByText('Godkjent'));
     await userEvent.click(screen.getByText('Oppdater'));
 
-    expect(await screen.findByText('Godkjent')).not.toBeChecked();
+    await waitFor(() => expect(screen.getByText('Oppdater').closest('button')).toBeDisabled());
 
     expect(screen.getByText('08.11.2022 - 13.11.2022')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Ikke godkjent'));
     await userEvent.click(screen.getByText('Oppdater'));
 
-    expect(await screen.findByText('Ikke godkjent')).not.toBeChecked();
+    await waitFor(() => expect(screen.getByText('Oppdater').closest('button')).toBeDisabled());
 
     expect(screen.getByText('15.11.2022 - 20.11.2022')).toBeInTheDocument();
     await userEvent.click(screen.getAllByText('Godkjent')[1]);
     await userEvent.click(screen.getByText('Oppdater'));
 
-    expect(await screen.findByText('Ikke godkjent')).not.toBeChecked();
-
-    console.log(screen.debug(undefined, 30000));
+    await waitFor(() => expect(screen.getByText('Oppdater').closest('button')).toBeDisabled());
 
     expect(await screen.findByText('Mangler dokumentasjon')).toBeInTheDocument();
 
@@ -53,30 +51,33 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      avklartePerioder: [{
-        avklaring: 'I_AKTIVITET',
-        begrunnelse: 'Dette er en test',
-        endret: false,
-        fom: '2021-01-01',
-        morsAktivitet: 'INNLAGT',
-        tom: '2021-01-07',
+      kode: '5074',
+      begrunnelse: 'Dette er en begrunnelse',
+      vurderingBehov: [{
+        fom: '2022-11-01',
+        tom: '2022-11-07',
+        type: 'UTSETTELSE',
+        vurdering: 'GODKJENT',
+        årsak: 'INNLEGGELSE_SØKER',
       }, {
-        avklaring: 'IKKE_I_AKTIVITET_IKKE_DOKUMENTERT',
-        begrunnelse: 'Dette er en begrunnelse',
-        endret: false,
-        fom: '2021-01-08',
-        morsAktivitet: 'ARBEID_OG_UTDANNING',
-        tom: '2021-01-13',
-      },
-      {
-        avklaring: 'IKKE_I_AKTIVITET_DOKUMENTERT',
-        begrunnelse: 'Dette er en begrunnelse på andre periode',
-        endret: false,
-        fom: '2021-01-15',
-        morsAktivitet: 'ARBEID_OG_UTDANNING',
-        tom: '2021-01-20',
+        fom: '2022-11-08',
+        tom: '2022-11-13',
+        type: 'OVERFØRING',
+        vurdering: 'IKKE_GODKJENT',
+        årsak: 'SYKDOM_ANNEN_FORELDER',
+      }, {
+        fom: '2022-11-15',
+        tom: '2022-11-20',
+        type: 'UTTAK',
+        vurdering: 'GODKJENT',
+        årsak: 'TIDLIG_OPPSTART_FAR',
+      }, {
+        fom: '2022-12-08',
+        tom: '2022-12-13',
+        type: 'UTTAK',
+        vurdering: 'IKKE_DOKUMENTERT',
+        årsak: 'AKTIVITETSKRAV_ARBEID',
       }],
-      kode: '5099',
     });
   });
 
@@ -91,12 +92,34 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
   });
 
   it('skal vise bekreftet periode i tabell og så endre den', async () => {
-    render(<AksjonspunktErBekreftetMenBehandlingErÅpen />);
+    const lagre = jest.fn(() => Promise.resolve());
+    render(<AksjonspunktErBekreftetMenBehandlingErÅpen submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttaksdokumentasjon')).toBeInTheDocument();
     expect(screen.queryByText('Kontroller årsak')).not.toBeInTheDocument();
     expect(screen.getByText('Godkjent')).toBeInTheDocument();
     expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
-    expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
+
+    await userEvent.click(screen.getByAltText('Åpne rad'));
+
+    expect(await screen.findByText('Del opp periode')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Ikke godkjent'));
+    await userEvent.click(screen.getByText('Oppdater'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+    expect(lagre).toHaveBeenNthCalledWith(1, {
+      begrunnelse: 'Dette er en begrunnelse',
+      kode: '5074',
+      vurderingBehov: [{
+        fom: '2022-12-08',
+        tom: '2022-12-13',
+        type: 'UTTAK',
+        vurdering: 'IKKE_GODKJENT',
+        årsak: 'HV_ØVELSE',
+      }],
+    });
   });
 });

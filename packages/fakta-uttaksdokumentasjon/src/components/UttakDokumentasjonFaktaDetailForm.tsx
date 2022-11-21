@@ -17,7 +17,7 @@ import {
 
 import splitPeriodImageUrl from '@fpsak-frontend/assets/images/splitt.svg';
 import {
-  DokumentasjonVurderingBehov, UttakType, UttakVurdering, UttakÅrsak,
+  DokumentasjonVurderingBehov, UttakType, UttakVurdering,
 } from '@fpsak-frontend/types';
 
 import OppdaterePeriodeModal from './OppdaterePeriodeModal';
@@ -133,7 +133,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
     label: intl.formatMessage({ id: 'UttakDokumentasjonFaktaDetailForm.IkkeGodkjent' }),
   }];
 
-  if (valgtDokBehov.type === UttakType.UTTAK && valgtDokBehov.årsak === UttakÅrsak.AKTIVITETSKRAV) {
+  if (valgtDokBehov.type === UttakType.UTTAK && valgtDokBehov.årsak.includes('AKTIVITETSKRAV')) {
     vurderingsalternativer.push({
       value: UttakVurdering.IKKE_DOKUMENTERT,
       label: intl.formatMessage({ id: 'UttakDokumentasjonFaktaDetailForm.IkkeDokumentert' }),
