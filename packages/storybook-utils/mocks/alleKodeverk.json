@@ -6451,6 +6451,11 @@
       "kode": "TILRETTELEGGING_BEHOV_FOM",
       "navn": "Tilrettelegging behov FOM",
       "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
+    },
+    {
+      "kode": "TILRETTELEGGING_SKAL_BRUKES",
+      "navn": "Tilrettelegging skal brukes",
+      "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
     }
   ],
   "RelatertYtelseTilstand": [

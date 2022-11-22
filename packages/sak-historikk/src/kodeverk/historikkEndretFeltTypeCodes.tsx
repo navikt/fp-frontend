@@ -453,6 +453,10 @@ const historikkEndretFeltTypeCodes = {
     kode: 'TILRETTELEGGING_BEHOV_FOM',
     feltId: 'HistorikkEndretFelt.TilrettelseBehovFom',
   },
+  TILRETTELEGGING_SKAL_BRUKES: {
+    kode: 'TILRETTELEGGING_SKAL_BRUKES',
+    feltId: 'HistorikkEndretFelt.TilrettelseSkalBrukes',
+  },
   SVANGERSKAPSPENGERVILKÅRET: {
     kode: 'SVANGERSKAPSPENGERVILKÅRET',
     feltId: 'HistorikkEndretFelt.Svangerskapsvilkåret',
