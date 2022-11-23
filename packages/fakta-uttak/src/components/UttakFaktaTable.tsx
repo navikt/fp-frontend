@@ -6,6 +6,8 @@ import {
   Table, ExpandableTableRow, TableColumn, TableRow,
 } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
+import { Button, Panel } from '@navikt/ds-react';
+import { AddCircle } from '@navikt/ds-icons';
 
 import {
   AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, KontrollerFaktaPeriode,
@@ -100,65 +102,103 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
     setDirty(true);
   }, [uttakKontrollerFaktaPerioder]);
 
+  const [visNyPeriode, settVisNyPeriode] = useState(false);
+
   return (
-    <Table
-      headerTextCodes={erRedigerbart ? HEADER_TEXT_CODES : HEADER_TEXT_CODES.filter((h) => h !== 'EMPTY')}
-      noHover
-      hasGrayHeader
-    >
-      {uttakKontrollerFaktaPerioder.map((periode) => {
-        const numberOfDaysAndWeeks = calcDaysAndWeeks(periode.fom, periode.tom);
+    <>
+      <Table
+        headerTextCodes={erRedigerbart ? HEADER_TEXT_CODES : HEADER_TEXT_CODES.filter((h) => h !== 'EMPTY')}
+        noHover
+        hasGrayHeader
+      >
+        {uttakKontrollerFaktaPerioder.map((periode) => {
+          const numberOfDaysAndWeeks = calcDaysAndWeeks(periode.fom, periode.tom);
 
-        const kolonner = (
-          <>
-            <TableColumn>{`${dateFormat(periode.fom)} - ${dateFormat(periode.tom)}`}</TableColumn>
-            <TableColumn>
-              <FormattedMessage
-                id={getTextId(numberOfDaysAndWeeks.weeks, numberOfDaysAndWeeks.days)}
-                values={{
-                  weeks: numberOfDaysAndWeeks.weeks,
-                  days: numberOfDaysAndWeeks.days,
-                }}
-              />
-            </TableColumn>
-            <TableColumn>{getUttakPeriode(alleKodeverk, periode.uttakPeriodeType, periode.oppholdÅrsak)}</TableColumn>
-            <TableColumn>
-              <FormattedMessage id={alleKodeverk[KodeverkType.FORDELING_PERIODE_KILDE].find((k) => k.kode === periode.periodeKilde)?.navn} />
-            </TableColumn>
-          </>
-        );
-
-        if (!erRedigerbart) {
-          return (
-            <TableRow key={periode.fom + periode.tom}>
-              {kolonner}
-            </TableRow>
+          const kolonner = (
+            <>
+              <TableColumn>{`${dateFormat(periode.fom)} - ${dateFormat(periode.tom)}`}</TableColumn>
+              <TableColumn>
+                <FormattedMessage
+                  id={getTextId(numberOfDaysAndWeeks.weeks, numberOfDaysAndWeeks.days)}
+                  values={{
+                    weeks: numberOfDaysAndWeeks.weeks,
+                    days: numberOfDaysAndWeeks.days,
+                  }}
+                />
+              </TableColumn>
+              <TableColumn>{getUttakPeriode(alleKodeverk, periode.uttakPeriodeType, periode.oppholdÅrsak)}</TableColumn>
+              <TableColumn>
+                <FormattedMessage id={alleKodeverk[KodeverkType.FORDELING_PERIODE_KILDE].find((k) => k.kode === periode.periodeKilde)?.navn} />
+              </TableColumn>
+            </>
           );
-        }
 
-        return (
-          <ExpandableTableRow
-            key={periode.fom + periode.tom}
-            showContent={valgteFomDatoer.includes(periode.fom)}
-            toggleContent={() => velgPeriodeFomDato(periode.fom)}
-            content={valgteFomDatoer.includes(periode.fom) && (
+          if (!erRedigerbart) {
+            return (
+              <TableRow key={periode.fom + periode.tom}>
+                {kolonner}
+              </TableRow>
+            );
+          }
+
+          return (
+            <ExpandableTableRow
+              key={periode.fom + periode.tom}
+              showContent={valgteFomDatoer.includes(periode.fom)}
+              toggleContent={() => velgPeriodeFomDato(periode.fom)}
+              content={valgteFomDatoer.includes(periode.fom) && (
+                <UttakFaktaDetailForm
+                  valgtPeriode={periode}
+                  readOnly={readOnly}
+                  oppdaterPerioder={oppdaterPerioder}
+                  slettPeriode={() => slettPeriode(periode.fom)}
+                  avbrytEditering={() => velgPeriodeFomDato(periode.fom)}
+                  alleKodeverk={alleKodeverk}
+                  arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+                  faktaArbeidsforhold={faktaArbeidsforhold}
+                />
+              )}
+            >
+              {kolonner}
+            </ExpandableTableRow>
+          );
+        })}
+      </Table>
+      {erRedigerbart && (
+        <>
+          {!visNyPeriode && (
+            <Button
+              size="small"
+              variant="tertiary"
+              type="button"
+              icon={<AddCircle />}
+              onClick={() => {
+                velgPeriodeFomDato(undefined, true);
+                settVisNyPeriode(true);
+              }}
+              disabled={readOnly}
+            >
+              <FormattedMessage id="UttakFaktaForm.LeggTilPeriode" />
+            </Button>
+          )}
+          {visNyPeriode && (
+            <Panel border>
               <UttakFaktaDetailForm
-                valgtPeriode={periode}
-                readOnly={readOnly}
-                oppdaterPerioder={oppdaterPerioder}
-                slettPeriode={() => slettPeriode(periode.fom)}
-                avbrytEditering={() => velgPeriodeFomDato(periode.fom)}
+                avbrytEditering={() => settVisNyPeriode(false)}
+                readOnly={false}
                 alleKodeverk={alleKodeverk}
+                oppdaterPerioder={(uttaksperioder: { perioder: KontrollerFaktaPeriode[] }) => {
+                  oppdaterUttakPerioder(uttakKontrollerFaktaPerioder.concat(uttaksperioder.perioder));
+                  settVisNyPeriode(false);
+                }}
                 arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
                 faktaArbeidsforhold={faktaArbeidsforhold}
               />
-            )}
-          >
-            {kolonner}
-          </ExpandableTableRow>
-        );
-      })}
-    </Table>
+            </Panel>
+          )}
+        </>
+      )}
+    </>
   );
 };
 

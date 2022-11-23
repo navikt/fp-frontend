@@ -305,7 +305,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                   name={`perioder.${0}.utsettelseÅrsak`}
                   label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
                   validate={[required]}
-                  className={styles.select}
+                  className={styles.selectArsak}
                   selectValues={sorterteUtsettelseÅrsaker.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
                   readOnly={readOnly}
                 />
@@ -315,7 +315,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                   name={`perioder.${0}.overføringÅrsak`}
                   label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
                   validate={[required]}
-                  className={styles.select}
+                  className={styles.selectArsak}
                   selectValues={sorterteOverføringÅrsaker.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
                   readOnly={readOnly}
                 />
@@ -325,7 +325,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                   name={`perioder.${0}.oppholdÅrsak`}
                   label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
                   validate={[required]}
-                  className={styles.select}
+                  className={styles.selectArsak}
                   selectValues={sorterteOppholdÅrsaker.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
                   readOnly={readOnly}
                 />
