@@ -20,6 +20,7 @@ import {
 } from '@fpsak-frontend/types';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import uttakArbeidType from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
+import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 
 import styles from './uttakFaktaDetailForm.less';
 
@@ -152,7 +153,10 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
     slettPeriode();
   }, []);
 
-  const sorterteUttakPeriodeTyper = useMemo(() => [...alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE]].sort((k1, k2) => k1.navn.localeCompare(k2.navn)), []);
+  const sorterteUttakPeriodeTyper = useMemo(() => [...alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE]]
+    .sort((k1, k2) => k1.navn.localeCompare(k2.navn))
+    .filter((k) => k.kode !== uttakPeriodeType.ANNET),
+  []);
   const sorterteOverføringÅrsaker = useMemo(() => [...alleKodeverk[KodeverkType.OVERFOERING_AARSAK_TYPE]].sort((k1, k2) => k1.navn.localeCompare(k2.navn)), []);
   const sorterteUtsettelseÅrsaker = useMemo(() => [...alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE]].sort((k1, k2) => k1.navn.localeCompare(k2.navn)), []);
   const sorterteOppholdÅrsaker = useMemo(() => [...alleKodeverk[KodeverkType.OPPHOLD_ARSAK]].sort((k1, k2) => k1.navn.localeCompare(k2.navn)), []);
@@ -232,6 +236,20 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
           </FlexRow>
           <VerticalSpacer sixteenPx />
           <FlexRow>
+            {(årsakstype === Arsakstype.UTTAK || årsakstype === Arsakstype.OVERFØRING) && (
+              <FlexColumn>
+                <SelectField
+                  name={`perioder.${0}.uttakPeriodeType`}
+                  label={<FormattedMessage id="UttakFaktaDetailForm.Stonadskonto" />}
+                  validate={[required]}
+                  selectValues={sorterteUttakPeriodeTyper.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
+                  readOnly={readOnly}
+                />
+              </FlexColumn>
+            )}
+          </FlexRow>
+          <VerticalSpacer sixteenPx />
+          <FlexRow>
             <FlexColumn>
               {årsakstype === Arsakstype.UTSETTELSE && (
                 <SelectField
@@ -267,17 +285,6 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
           </FlexRow>
           <VerticalSpacer sixteenPx />
           <FlexRow>
-            {årsakstype !== Arsakstype.UTSETTELSE && (
-              <FlexColumn>
-                <SelectField
-                  name={`perioder.${0}.uttakPeriodeType`}
-                  label={<FormattedMessage id="UttakFaktaDetailForm.Stonadskonto" />}
-                  validate={[required]}
-                  selectValues={sorterteUttakPeriodeTyper.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
-                  readOnly={readOnly}
-                />
-              </FlexColumn>
-            )}
             {årsakstype === Arsakstype.UTTAK && (
               <FlexColumn>
                 <InputField
@@ -313,7 +320,6 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
               <SelectField
                 name={`perioder.${0}.morsAktivitet`}
                 label={<FormattedMessage id="UttakFaktaDetailForm.MorsAktivitet" />}
-                validate={[required]}
                 className={styles.select}
                 selectValues={sorterteMorsAktiviteter.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
                 readOnly={readOnly}

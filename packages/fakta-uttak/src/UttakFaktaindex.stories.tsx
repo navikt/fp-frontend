@@ -4,22 +4,26 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 
 import { Aksjonspunkt } from '@navikt/ft-types';
 import {
-  Behandling, UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
+  KontrollerFaktaPeriode, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-
-import aksjonspunkterFarSøkerFørsteSeksUker from '../testdata/far-soker-forste-seks-uker/aksjonspunkter.json';
-import behandlingFarSøkerFørsteSeksUker from '../testdata/far-soker-forste-seks-uker/behandling.json';
-import uttakKontrollerFaktaPerioderFarSøkerFørsteSeksUker from '../testdata/far-soker-forste-seks-uker/kontrollerFaktaPerioder.json';
-import ytelsefordelingFarSøkerFørsteSeksUker from '../testdata/far-soker-forste-seks-uker/ytelsefordeling.json';
-
-import aksjonspunkterOverføringAvPerioder from '../testdata/overforing-av-perioder/aksjonspunkter.json';
-import behandlingOverføringAvPerioder from '../testdata/overforing-av-perioder/behandling.json';
-import uttakKontrollerFaktaPerioderOverføringAvPerioder from '../testdata/overforing-av-perioder/kontrollerFaktaPerioder.json';
-import ytelsefordelingOverføringAvPerioder from '../testdata/overforing-av-perioder/ytelsefordeling.json';
+import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
+import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
 import UttakFaktaIndex from './UttakFaktaIndex';
+import UtsettelseÅrsak from './kodeverk/utsettelseÅrsak';
+import OverføringÅrsak from './kodeverk/overføringÅrsak';
+import OppholdÅrsak from './kodeverk/oppholdÅrsak';
+
+const arbeidsgiverOpplysningerPerId = {
+  910909088: {
+    erPrivatPerson: false,
+    identifikator: '910909088',
+    navn: 'BEDRIFT AS',
+  },
+};
 
 export default {
   title: 'fakta/fakta-uttak',
@@ -28,15 +32,13 @@ export default {
 
 const Template: Story<{
   aksjonspunkter: Aksjonspunkt[];
-  behandling: Behandling;
-  uttakKontrollerFaktaPerioder: UttakKontrollerFaktaPerioderWrapper;
+  uttakKontrollerFaktaPerioder: KontrollerFaktaPeriode[];
   ytelsefordeling: Ytelsefordeling;
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
   readOnly?: boolean;
   submittable?: boolean;
   kanOverstyre?: boolean;
 }> = ({
-  behandling,
   aksjonspunkter,
   uttakKontrollerFaktaPerioder,
   ytelsefordeling,
@@ -46,67 +48,26 @@ const Template: Story<{
   kanOverstyre = false,
 }) => (
   <UttakFaktaIndex
-    behandling={behandling}
     aksjonspunkter={aksjonspunkter}
     ytelsefordeling={ytelsefordeling}
     uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioder}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     alleKodeverk={alleKodeverk as any}
     readOnly={readOnly}
     kanOverstyre={kanOverstyre}
     submitCallback={submitCallback}
     setFormData={() => undefined}
     submittable={submittable}
+    faktaArbeidsforhold={[{
+      arbeidsgiverReferanse: '910909088',
+      arbeidType: 'ORDINÆRT_ARBEID',
+    }]}
   />
 );
 
-export const IngenAksjonspunkterErOverstyrer = Template.bind({});
-IngenAksjonspunkterErOverstyrer.args = {
-  behandling: behandlingOverføringAvPerioder,
+export const VisUttaksperiodeUtenAksjonspunkt = Template.bind({});
+VisUttaksperiodeUtenAksjonspunkt.args = {
   aksjonspunkter: [],
-  ytelsefordeling: ytelsefordelingOverføringAvPerioder,
-  uttakKontrollerFaktaPerioder: uttakKontrollerFaktaPerioderOverføringAvPerioder,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  kanOverstyre: true,
-};
-
-export const FarSøkerFørsteSeksUker = Template.bind({});
-FarSøkerFørsteSeksUker.args = {
-  behandling: behandlingFarSøkerFørsteSeksUker,
-  aksjonspunkter: aksjonspunkterFarSøkerFørsteSeksUker,
-  ytelsefordeling: ytelsefordelingFarSøkerFørsteSeksUker,
-  uttakKontrollerFaktaPerioder: uttakKontrollerFaktaPerioderFarSøkerFørsteSeksUker,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
-
-export const OverføringAvPerioder = Template.bind({});
-OverføringAvPerioder.args = {
-  behandling: behandlingOverføringAvPerioder,
-  aksjonspunkter: aksjonspunkterOverføringAvPerioder,
-  ytelsefordeling: ytelsefordelingOverføringAvPerioder,
-  uttakKontrollerFaktaPerioder: uttakKontrollerFaktaPerioderOverføringAvPerioder,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
-
-export const MedUtsettelse = Template.bind({});
-MedUtsettelse.args = {
-  behandling: behandlingOverføringAvPerioder,
-  aksjonspunkter: [
-    {
-      definisjon: '5070',
-      status: 'OPPR',
-      begrunnelse: null,
-      vilkarType: null,
-      toTrinnsBehandling: false,
-      toTrinnsBehandlingGodkjent: null,
-      vurderPaNyttArsaker: null,
-      besluttersBegrunnelse: null,
-      aksjonspunktType: 'MANU',
-      kanLoses: true,
-      erAktivt: true,
-      endretTidspunkt: null,
-      endretAv: null,
-    },
-  ],
   ytelsefordeling: {
     ikkeOmsorgPerioder: null,
     rettigheterAnnenforelder: {
@@ -117,148 +78,181 @@ MedUtsettelse.args = {
     gjeldendeDekningsgrad: 100,
     førsteUttaksdato: '2022-01-31',
   },
-  uttakKontrollerFaktaPerioder: {
-    perioder: [
-      {
-        tom: '2022-02-18',
-        fom: '2022-01-31',
-        uttakPeriodeType: 'FORELDREPENGER_FØR_FØDSEL',
-        utsettelseÅrsak: '-',
-        overføringÅrsak: '-',
-        oppholdÅrsak: '-',
-        resultat: 'PERIODE_OK',
-        arbeidstidsprosent: null,
-        begrunnelse: null,
-        bekreftet: true,
-        arbeidsgiverReferanse: null,
-        erArbeidstaker: false,
-        erFrilanser: false,
-        erSelvstendig: false,
-        samtidigUttak: false,
-        samtidigUttaksprosent: null,
-        flerbarnsdager: false,
-        morsAktivitet: '-',
-      },
-      {
-        tom: '2022-03-25',
-        fom: '2022-02-21',
-        uttakPeriodeType: 'MØDREKVOTE',
-        utsettelseÅrsak: '-',
-        overføringÅrsak: '-',
-        oppholdÅrsak: '-',
-        resultat: 'PERIODE_OK',
-        arbeidstidsprosent: null,
-        begrunnelse: null,
-        bekreftet: true,
-        arbeidsgiverReferanse: null,
-        erArbeidstaker: false,
-        erFrilanser: false,
-        erSelvstendig: false,
-        samtidigUttak: false,
-        samtidigUttaksprosent: null,
-        flerbarnsdager: false,
-        morsAktivitet: '-',
-      },
-      {
-        tom: '2022-04-01',
-        fom: '2022-03-28',
-        uttakPeriodeType: '-',
-        utsettelseÅrsak: 'SYKDOM',
-        overføringÅrsak: '-',
-        oppholdÅrsak: '-',
-        resultat: 'PERIODE_IKKE_VURDERT',
-        arbeidstidsprosent: null,
-        begrunnelse: null,
-        bekreftet: false,
-        arbeidsgiverReferanse: null,
-        erArbeidstaker: false,
-        erFrilanser: false,
-        erSelvstendig: false,
-        samtidigUttak: false,
-        samtidigUttaksprosent: null,
-        flerbarnsdager: false,
-        morsAktivitet: '-',
-      },
-      {
-        tom: '2022-06-03',
-        fom: '2022-04-04',
-        uttakPeriodeType: '-',
-        utsettelseÅrsak: 'FRI',
-        overføringÅrsak: '-',
-        oppholdÅrsak: '-',
-        resultat: 'PERIODE_IKKE_VURDERT',
-        arbeidstidsprosent: null,
-        begrunnelse: null,
-        bekreftet: true,
-        arbeidsgiverReferanse: null,
-        erArbeidstaker: false,
-        erFrilanser: false,
-        erSelvstendig: false,
-        samtidigUttak: false,
-        samtidigUttaksprosent: null,
-        flerbarnsdager: false,
-        morsAktivitet: '-',
-      },
-      {
-        tom: '2022-08-05',
-        fom: '2022-06-06',
-        uttakPeriodeType: 'FELLESPERIODE',
-        utsettelseÅrsak: '-',
-        overføringÅrsak: '-',
-        oppholdÅrsak: '-',
-        resultat: 'PERIODE_OK',
-        arbeidstidsprosent: null,
-        begrunnelse: null,
-        bekreftet: true,
-        arbeidsgiverReferanse: null,
-        erArbeidstaker: false,
-        erFrilanser: false,
-        erSelvstendig: false,
-        samtidigUttak: false,
-        samtidigUttaksprosent: null,
-        flerbarnsdager: false,
-        morsAktivitet: '-',
-      },
-      {
-        tom: '2022-08-26',
-        fom: '2022-08-08',
-        uttakPeriodeType: 'FELLESPERIODE',
-        utsettelseÅrsak: '-',
-        overføringÅrsak: '-',
-        oppholdÅrsak: '-',
-        resultat: 'PERIODE_OK',
-        arbeidstidsprosent: null,
-        begrunnelse: null,
-        bekreftet: true,
-        arbeidsgiverReferanse: null,
-        erArbeidstaker: false,
-        erFrilanser: false,
-        erSelvstendig: false,
-        samtidigUttak: true,
-        flerbarnsdager: false,
-        morsAktivitet: '-',
-      },
-      {
-        tom: '2022-09-16',
-        fom: '2022-08-29',
-        uttakPeriodeType: 'FELLESPERIODE',
-        utsettelseÅrsak: '-',
-        overføringÅrsak: '-',
-        oppholdÅrsak: '-',
-        resultat: 'PERIODE_OK',
-        arbeidstidsprosent: null,
-        begrunnelse: null,
-        bekreftet: true,
-        arbeidsgiverReferanse: null,
-        erArbeidstaker: false,
-        erFrilanser: false,
-        erSelvstendig: false,
-        samtidigUttak: false,
-        samtidigUttaksprosent: null,
-        flerbarnsdager: false,
-        morsAktivitet: '-',
-      },
-    ],
-  },
+  uttakKontrollerFaktaPerioder: [{
+    fom: '2022-11-12',
+    tom: '2022-12-01',
+    uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+    arbeidsforhold: {
+      arbeidsgiverReferanse: '910909088',
+      arbeidType: 'test',
+    },
+    flerbarnsdager: false,
+    periodeKilde: 'SØKNAD',
+  }],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
+  kanOverstyre: false,
+};
+
+export const VisUttaksperiodeUtenAksjonspunktKanOverstyre = Template.bind({});
+VisUttaksperiodeUtenAksjonspunktKanOverstyre.args = {
+  aksjonspunkter: [],
+  ytelsefordeling: {
+    ikkeOmsorgPerioder: null,
+    rettigheterAnnenforelder: {
+      skalAvklareAnnenforelderUføretrygd: false,
+      skalAvklareAnnenForelderRettEØS: false,
+    },
+    endringsdato: '2022-01-31',
+    gjeldendeDekningsgrad: 100,
+    førsteUttaksdato: '2022-01-31',
+  },
+  uttakKontrollerFaktaPerioder: [{
+    fom: '2022-11-12',
+    tom: '2022-12-01',
+    uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+    arbeidsforhold: {
+      arbeidsgiverReferanse: '910909088',
+      arbeidType: 'test',
+    },
+    flerbarnsdager: false,
+    periodeKilde: 'SØKNAD',
+  }],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  kanOverstyre: true,
+};
+
+export const VisUttaksperiodeMedAksjonspunkt = Template.bind({});
+VisUttaksperiodeMedAksjonspunkt.args = {
+  aksjonspunkter: [{
+    definisjon: AksjonspunktCode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
+    status: aksjonspunktStatus.OPPRETTET,
+    begrunnelse: undefined,
+    kanLoses: true,
+    erAktivt: true,
+  }],
+  ytelsefordeling: {
+    ikkeOmsorgPerioder: null,
+    rettigheterAnnenforelder: {
+      skalAvklareAnnenforelderUføretrygd: false,
+      skalAvklareAnnenForelderRettEØS: false,
+    },
+    endringsdato: '2022-01-31',
+    gjeldendeDekningsgrad: 100,
+    førsteUttaksdato: '2022-01-31',
+  },
+  uttakKontrollerFaktaPerioder: [{
+    fom: '2022-11-12',
+    tom: '2022-12-01',
+    uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+    arbeidsforhold: {
+      arbeidsgiverReferanse: '910909088',
+      arbeidType: 'test',
+    },
+    flerbarnsdager: false,
+    periodeKilde: 'SØKNAD',
+  }],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  kanOverstyre: false,
+};
+
+export const VisUtsettelseperiodeMedAksjonspunkt = Template.bind({});
+VisUtsettelseperiodeMedAksjonspunkt.args = {
+  aksjonspunkter: [{
+    definisjon: AksjonspunktCode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
+    status: aksjonspunktStatus.OPPRETTET,
+    begrunnelse: undefined,
+    kanLoses: true,
+    erAktivt: true,
+  }],
+  ytelsefordeling: {
+    ikkeOmsorgPerioder: null,
+    rettigheterAnnenforelder: {
+      skalAvklareAnnenforelderUføretrygd: false,
+      skalAvklareAnnenForelderRettEØS: false,
+    },
+    endringsdato: '2022-01-31',
+    gjeldendeDekningsgrad: 100,
+    førsteUttaksdato: '2022-01-31',
+  },
+  uttakKontrollerFaktaPerioder: [{
+    fom: '2022-11-12',
+    tom: '2022-12-01',
+    utsettelseÅrsak: UtsettelseÅrsak.ARBEID,
+    arbeidsforhold: {
+      arbeidsgiverReferanse: '910909088',
+      arbeidType: 'test',
+    },
+    flerbarnsdager: false,
+    periodeKilde: 'SØKNAD',
+  }],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  kanOverstyre: false,
+};
+
+export const VisOverføringsperiodeMedAksjonspunkt = Template.bind({});
+VisOverføringsperiodeMedAksjonspunkt.args = {
+  aksjonspunkter: [{
+    definisjon: AksjonspunktCode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
+    status: aksjonspunktStatus.OPPRETTET,
+    begrunnelse: undefined,
+    kanLoses: true,
+    erAktivt: true,
+  }],
+  ytelsefordeling: {
+    ikkeOmsorgPerioder: null,
+    rettigheterAnnenforelder: {
+      skalAvklareAnnenforelderUføretrygd: false,
+      skalAvklareAnnenForelderRettEØS: false,
+    },
+    endringsdato: '2022-01-31',
+    gjeldendeDekningsgrad: 100,
+    førsteUttaksdato: '2022-01-31',
+  },
+  uttakKontrollerFaktaPerioder: [{
+    fom: '2022-11-12',
+    tom: '2022-12-01',
+    overføringÅrsak: OverføringÅrsak.IKKE_RETT_ANNEN_FORELDER,
+    arbeidsforhold: {
+      arbeidsgiverReferanse: '910909088',
+      arbeidType: 'test',
+    },
+    flerbarnsdager: false,
+    periodeKilde: 'SØKNAD',
+  }],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  kanOverstyre: false,
+};
+
+export const VisOppholdperiodeMedAksjonspunkt = Template.bind({});
+VisOppholdperiodeMedAksjonspunkt.args = {
+  aksjonspunkter: [{
+    definisjon: AksjonspunktCode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
+    status: aksjonspunktStatus.OPPRETTET,
+    begrunnelse: undefined,
+    kanLoses: true,
+    erAktivt: true,
+  }],
+  ytelsefordeling: {
+    ikkeOmsorgPerioder: null,
+    rettigheterAnnenforelder: {
+      skalAvklareAnnenforelderUføretrygd: false,
+      skalAvklareAnnenForelderRettEØS: false,
+    },
+    endringsdato: '2022-01-31',
+    gjeldendeDekningsgrad: 100,
+    førsteUttaksdato: '2022-01-31',
+  },
+  uttakKontrollerFaktaPerioder: [{
+    fom: '2022-11-12',
+    tom: '2022-12-01',
+    oppholdÅrsak: OppholdÅrsak.UTTAK_FEDREKVOTE_ANNEN_FORELDER,
+    arbeidsforhold: {
+      arbeidsgiverReferanse: '910909088',
+      arbeidType: 'test',
+    },
+    flerbarnsdager: false,
+    periodeKilde: 'SØKNAD',
+  }],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  kanOverstyre: false,
 };

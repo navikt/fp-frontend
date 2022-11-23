@@ -4,7 +4,7 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import UttakFaktaIndex from '@fpsak-frontend/fakta-uttak-legacy';
+import UttakFaktaLegacyIndex from '@fpsak-frontend/fakta-uttak-legacy';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import {
   AksessRettigheter, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelseSamling,
@@ -55,7 +55,7 @@ const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = (
   personoversikt,
   ...props
 }) => (
-  <FaktaDefaultInitPanel<Record<string, never>, EndepunktPanelData>
+  <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
@@ -64,7 +64,7 @@ const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = (
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'UttakInfoPanel.FaktaUttak' })}
     skalPanelVisesIMeny={() => props.behandling.harSattEndringsdato && !props.requestApi.hasPath(FpBehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER_V2.name)}
     renderPanel={(data) => (
-      <UttakFaktaIndex
+      <UttakFaktaLegacyIndex
         kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         personoversikt={personoversikt}

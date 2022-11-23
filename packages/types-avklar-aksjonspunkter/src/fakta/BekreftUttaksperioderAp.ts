@@ -9,7 +9,7 @@ type BekreftUttaksperioderAp = {
   | AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE
   | AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE
   | AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE
-  | AksjonspunktKode.OVERSTYR_AVKLAR_FAKTA_UTTAK
+  | AksjonspunktKode.OVERSTYR_FAKTA_UTTAK
 >
 
 export default BekreftUttaksperioderAp;

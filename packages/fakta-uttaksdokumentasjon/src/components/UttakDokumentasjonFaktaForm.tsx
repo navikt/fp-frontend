@@ -75,7 +75,7 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
           <AksjonspunktHelpTextHTML>
             {[intl.formatMessage({ id: 'UttakDokumentasjonFaktaForm.AksjonspunktHjelpetekst' })]}
           </AksjonspunktHelpTextHTML>
-          <VerticalSpacer sixteenPx />
+          <VerticalSpacer twentyPx />
         </>
       )}
       <UttakDokumentasjonFaktaTable
@@ -92,7 +92,7 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
           isReadOnly={readOnly}
           hasBegrunnelse
         />
-        <VerticalSpacer twentyPx />
+        <VerticalSpacer sixteenPx />
         {!readOnly && (
           <Button
             size="small"

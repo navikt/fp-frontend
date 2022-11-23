@@ -1,5 +1,5 @@
 import React, {
-  useCallback, FunctionComponent, useState, useEffect,
+  useCallback, FunctionComponent, useState,
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
@@ -82,8 +82,6 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
     }
   }, [valgteFomDatoer, setValgteFomDatoer]);
 
-  useEffect(() => velgPeriodeFomDato(uttakKontrollerFaktaPerioder?.find((oa) => !oa.bekreftet)?.fom), []);
-
   const oppdaterPerioder = useCallback((uPerioder: { perioder: KontrollerFaktaPeriode[] }) => {
     const { perioder } = uPerioder;
     const oppdatertePerioder = uttakKontrollerFaktaPerioder
@@ -92,14 +90,12 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
       .sort((a1, a2) => a1.fom.localeCompare(a2.fom));
 
     oppdaterUttakPerioder(oppdatertePerioder);
-    velgPeriodeFomDato(oppdatertePerioder.find((oa) => !oa.bekreftet)?.fom, true);
     setDirty(true);
   }, [uttakKontrollerFaktaPerioder]);
 
   const slettPeriode = useCallback((fom: string) => {
     const oppdatertePerioder = uttakKontrollerFaktaPerioder.filter((p) => p.fom !== fom);
     oppdaterUttakPerioder(oppdatertePerioder);
-    velgPeriodeFomDato(oppdatertePerioder.find((oa) => !oa.bekreftet)?.fom, true);
     setDirty(true);
   }, [uttakKontrollerFaktaPerioder]);
 
@@ -142,7 +138,6 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
         return (
           <ExpandableTableRow
             key={periode.fom + periode.tom}
-            isApLeftBorder={periode.bekreftet === false}
             showContent={valgteFomDatoer.includes(periode.fom)}
             toggleContent={() => velgPeriodeFomDato(periode.fom)}
             content={valgteFomDatoer.includes(periode.fom) && (

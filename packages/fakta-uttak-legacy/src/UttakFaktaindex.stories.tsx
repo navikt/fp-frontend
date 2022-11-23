@@ -43,7 +43,7 @@ const standardFaktaProps = {
 };
 
 export default {
-  title: 'fakta/fakta-uttak',
+  title: 'fakta/fakta-uttak-legacy',
   component: UttakFaktaIndex,
 };
 

@@ -150,9 +150,9 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
             <React.Fragment key={field.id}>
               {index > 0 && (
                 <>
-                  <VerticalSpacer sixteenPx />
+                  <VerticalSpacer fourtyPx />
                   <AvsnittSkiller dividerParagraf className={styles.skiller} />
-                  <VerticalSpacer sixteenPx />
+                  <VerticalSpacer twentyPx />
                 </>
               )}
               {(!readOnly && perioder[index].fom !== perioder[index].tom && fields.length === 1) && (
@@ -223,9 +223,9 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
                       </FlexColumn>
                     )}
                   </FlexRow>
-                  <VerticalSpacer sixteenPx />
                   {(perioder[index].fom !== perioder[index].tom && (!harDeltOpp && fields.length > 1 && index > sistOppdeltePeriodeIndex)) && (
                     <>
+                      <VerticalSpacer sixteenPx />
                       <div className={styles.marginBtn}>
                         <Button size="small" variant="tertiary" type="button" onClick={() => delOppPeriode(index)} icon={<Image src={splitPeriodImageUrl} />}>
                           <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.DelOppPeriode" />
@@ -236,7 +236,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
                   )}
                 </FlexContainer>
               )}
-              <VerticalSpacer sixteenPx />
+              <VerticalSpacer twentyPx />
               <RadioGroupPanel
                 name={`perioder.${index}.vurdering`}
                 label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Vurdering" />}

@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
+import { createIntl } from '@navikt/ft-utils';
 
 import {
-  StandardFaktaPanelProps, KontrollerFaktaPeriode, Ytelsefordeling, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold,
+  KontrollerFaktaPeriode, Ytelsefordeling, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, Aksjonspunkt, AlleKodeverk,
 } from '@fpsak-frontend/types';
-import { createIntl } from '@navikt/ft-utils';
+import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import UttakFaktaForm from './components/UttakFaktaForm';
 
@@ -18,9 +19,16 @@ interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
   kanOverstyre: boolean;
+  aksjonspunkter: Aksjonspunkt[];
+  readOnly: boolean;
+  submittable: boolean;
+  submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
+  alleKodeverk: AlleKodeverk;
+  formData?: any,
+  setFormData: (data: any) => void,
 }
 
-const UttakFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
+const UttakFaktaIndex: FunctionComponent<OwnProps> = ({
   aksjonspunkter,
   submitCallback,
   ytelsefordeling,

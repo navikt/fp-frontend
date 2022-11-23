@@ -4,14 +4,14 @@ type KontrollerFaktaPeriode = Readonly<{
   fom: string;
   tom: string;
   uttakPeriodeType?: string;
-  utsettelseÅrsak: string;
-  overføringÅrsak: string;
-  oppholdÅrsak: string;
+  utsettelseÅrsak?: string;
+  overføringÅrsak?: string;
+  oppholdÅrsak?: string;
   arbeidstidsprosent?: number;
   arbeidsforhold: FaktaArbeidsforhold;
   samtidigUttaksprosent?: string;
   flerbarnsdager: boolean;
-  morsAktivitet: string;
+  morsAktivitet?: string;
   periodeKilde: string;
 }>
 

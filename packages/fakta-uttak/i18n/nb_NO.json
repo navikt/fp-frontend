@@ -1,7 +1,11 @@
 {
   "UttakFaktaForm.FaktaUttak": "Fakta om uttak",
   "UttakFaktaForm.LeggTilPeriode": "Legg til periode",
-  "UttakFaktaForm.Aksjonspunkt.5063": "Manuelt satt startdato er ulik startdato fra søknad",
+  "UttakFaktaForm.Aksjonspunkt.5063": "Første periode starter ikke på avklart startdato. Legg inn periode fra startdato",
+  "UttakFaktaForm.Aksjonspunkt.5064": "Ingen perioder å vurdere. Vurder om behandlingen er feilopprettet og kan henlegges",
+  "UttakFaktaForm.Aksjonspunkt.5065": "Gradering av ukjent arbeidsforhold. Vurder gradering",
+  "UttakFaktaForm.Aksjonspunkt.5066": "Gradering av aktivitet uten beregningsgrunnlag. Vurder gradering",
+  "UttakFaktaForm.Aksjonspunkt.5074": "Vurder dokumentasjon",
 
   "UttakFaktaTable.Periode": "Periode",
   "UttakFaktaTable.AntallDager": "Antall dager",
