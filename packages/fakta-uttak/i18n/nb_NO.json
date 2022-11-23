@@ -25,7 +25,7 @@
   "UttakFaktaDetailForm.Tom": "Periode til",
   "UttakFaktaDetailForm.Periodetype": "Periodetype",
   "UttakFaktaDetailForm.Stonadskonto": "Stønadskonto",
-  "UttakFaktaDetailForm.Gradering": "Gradering %",
+  "UttakFaktaDetailForm.GraderingProsent": "Gradering %",
   "UttakFaktaDetailForm.Oppdater": "Oppdater",
   "UttakFaktaDetailForm.Avbryt": "Avbryt",
   "UttakFaktaDetailForm.Slett": "Slett periode",
@@ -38,5 +38,8 @@
   "UttakFaktaDetailForm.Flerbarnsdager": "Flerbarnsdager",
   "UttakFaktaDetailForm.SamtidigUttaksprosent": "Samtidig uttaksprosent",
   "UttakFaktaDetailForm.Arbeidsgiver": "Arbeidsgiver",
-  "UttakFaktaDetailForm.Opphold": "Opphold"
+  "UttakFaktaDetailForm.Opphold": "Opphold",
+  "UttakFaktaDetailForm.Uttakstype": "Uttakstype",
+  "UttakFaktaDetailForm.100prosent": "Fullt uttak",
+  "UttakFaktaDetailForm.Gradering": "Gradering"
 }

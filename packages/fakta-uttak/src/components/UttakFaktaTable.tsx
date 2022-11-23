@@ -90,6 +90,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
       .sort((a1, a2) => a1.fom.localeCompare(a2.fom));
 
     oppdaterUttakPerioder(oppdatertePerioder);
+    velgPeriodeFomDato(undefined, true);
     setDirty(true);
   }, [uttakKontrollerFaktaPerioder]);
 
