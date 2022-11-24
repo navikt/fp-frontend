@@ -1,7 +1,7 @@
 import React, {
   FunctionComponent, useCallback, useState, useMemo, ReactElement, useEffect,
 } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import { useForm, UseFormGetValues } from 'react-hook-form';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
@@ -12,11 +12,11 @@ import {
   FlexColumn, FlexContainer, FlexRow, OkAvbrytModal, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { Delete } from '@navikt/ds-icons';
-import { Button } from '@navikt/ds-react';
+import { Alert, Button } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT, guid, omitMany } from '@navikt/ft-utils';
 
 import {
-  AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, KontrollerFaktaPeriode, ArbeidsgiverOpplysninger,
+  AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, ArbeidsgiverOpplysninger,
 } from '@fpsak-frontend/types';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import uttakArbeidType from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
@@ -25,8 +25,9 @@ import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import FordelingPeriodeKilde from '../kodeverk/fordelingPeriodeKilde';
 
 import styles from './uttakFaktaDetailForm.less';
+import KontrollerFaktaPeriodeMedApMarkering, { PeriodeApType } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 
-type FormValues = KontrollerFaktaPeriode & {
+type FormValues = KontrollerFaktaPeriodeMedApMarkering & {
   arsakstype: string;
   arbeidsgiverId: string;
 };
@@ -88,7 +89,7 @@ const mapArbeidsforhold = (
   );
 });
 
-const utledÅrsakstype = (valgtPeriode: KontrollerFaktaPeriode): Årsakstype => {
+const utledÅrsakstype = (valgtPeriode: KontrollerFaktaPeriodeMedApMarkering): Årsakstype => {
   if (valgtPeriode.utsettelseÅrsak) {
     return Årsakstype.UTSETTELSE;
   }
@@ -101,38 +102,65 @@ const utledÅrsakstype = (valgtPeriode: KontrollerFaktaPeriode): Årsakstype => 
   return Årsakstype.UTTAK;
 };
 
-const lagDefaultVerdier = (valgtPeriode: KontrollerFaktaPeriode): FormValues => {
+const lagDefaultVerdier = (
+  valgtPeriode: KontrollerFaktaPeriodeMedApMarkering,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+): FormValues => {
   const arsakstype = utledÅrsakstype(valgtPeriode);
+
+  const aRef = valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse;
+  const arbeidsgiverFinnes = aRef ? !!arbeidsgiverOpplysningerPerId[aRef] : false;
+
   return {
     ...valgtPeriode,
     arsakstype,
-    arbeidsgiverId: valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse
+    arbeidsgiverId: arbeidsgiverFinnes
       ? `${valgtPeriode.arbeidsforhold.arbeidsgiverReferanse}-${valgtPeriode.arbeidsforhold.arbeidType}`
       : undefined,
   };
 };
 
-const transformValues = (values: FormValues): KontrollerFaktaPeriode => ({
+const transformValues = (values: FormValues): KontrollerFaktaPeriodeMedApMarkering => ({
   ...omitMany(values, ['arsakstype', 'arbeidsgiverId']),
   arbeidsforhold: values.arbeidsgiverId ? {
     arbeidsgiverReferanse: values.arbeidsgiverId.split('-')[0],
     arbeidType: values.arbeidsgiverId.split('-')[1],
   } : undefined,
+  periodeKilde: FordelingPeriodeKilde.SØKNAD,
+  aksjonspunktType: undefined,
 });
 
 const requiredNårGraderingErOppgitt = (
   getValues: UseFormGetValues<FormValues>,
 ) => (arbeidsgiverId?: string) => (getValues('arbeidstidsprosent') ? required(arbeidsgiverId) : null);
 
+const validerTomEtterFom = (
+  intl: IntlShape,
+  getValues: UseFormGetValues<FormValues>,
+) => (tom?: string) => (dayjs(tom).isBefore(getValues('fom')) ? intl.formatMessage({ id: 'UttakFaktaDetailForm.TomForFom' }) : null);
+
+const validerPeriodeFra = (
+  førsteUttaksdato: string,
+  intl: IntlShape,
+  valgtPeriode?: KontrollerFaktaPeriodeMedApMarkering,
+) => (fomDato: string) => {
+  if (valgtPeriode?.aksjonspunktType === PeriodeApType.START_FOM && !dayjs(fomDato).isSame(førsteUttaksdato)) {
+    return intl.formatMessage({ id: 'UttakFaktaDetailForm.ErIkkeLikForsteUttaksdato' });
+  }
+
+  return dayjs(fomDato).isBefore(førsteUttaksdato) ? intl.formatMessage({ id: 'UttakFaktaDetailForm.ErTidligereEnnForsteUttaksdato' }) : null;
+};
+
 interface OwnProps {
-  valgtPeriode?: KontrollerFaktaPeriode;
+  valgtPeriode?: KontrollerFaktaPeriodeMedApMarkering;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
   slettPeriode?: () => void;
   avbrytEditering: () => void;
   readOnly: boolean;
-  oppdaterPeriode: (uttaksperiode: KontrollerFaktaPeriode) => void;
+  oppdaterPeriode: (uttaksperiode: KontrollerFaktaPeriodeMedApMarkering) => void;
   alleKodeverk: AlleKodeverk;
+  førsteUttaksdato: string;
 }
 
 const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
@@ -144,11 +172,12 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
   oppdaterPeriode,
   readOnly,
   alleKodeverk,
+  førsteUttaksdato,
 }) => {
   const intl = useIntl();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: valgtPeriode ? lagDefaultVerdier(valgtPeriode) : undefined,
+    defaultValues: valgtPeriode ? lagDefaultVerdier(valgtPeriode, arbeidsgiverOpplysningerPerId) : undefined,
   });
 
   const [visSletteDialog, settVisSletteDialog] = useState(false);
@@ -180,6 +209,9 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
     }
   }, [årsakstype]);
 
+  const aRef = valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse;
+  const arbeidsgiverFinnesIkke = (aRef && !arbeidsgiverOpplysningerPerId[aRef]);
+
   return (
     <>
       {visSletteDialog && (
@@ -192,10 +224,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
       )}
       <Form
         formMethods={formMethods}
-        onSubmit={(values) => oppdaterPeriode(transformValues({
-          ...values,
-          periodeKilde: FordelingPeriodeKilde.SØKNAD,
-        }))}
+        onSubmit={(values) => oppdaterPeriode(transformValues(values))}
       >
         <FlexContainer>
           <FlexRow>
@@ -203,7 +232,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
               <Datepicker
                 name="fom"
                 label={<FormattedMessage id="UttakFaktaDetailForm.Fom" />}
-                validate={[required, hasValidDate]}
+                validate={[required, hasValidDate, validerPeriodeFra(førsteUttaksdato, intl, valgtPeriode)]}
                 isReadOnly={readOnly}
               />
             </FlexColumn>
@@ -211,7 +240,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
               <Datepicker
                 name="tom"
                 label={<FormattedMessage id="UttakFaktaDetailForm.Tom" />}
-                validate={[required, hasValidDate]}
+                validate={[required, hasValidDate, validerTomEtterFom(intl, formMethods.getValues)]}
                 isReadOnly={readOnly}
               />
             </FlexColumn>
@@ -298,6 +327,14 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
           {årsakstype === Årsakstype.UTTAK && (
             <>
               <VerticalSpacer sixteenPx />
+              {arbeidsgiverFinnesIkke && (
+                <>
+                  <Alert variant="info">
+                    <FormattedMessage id="UttakFaktaDetailForm.UkjentArbeidsgiver" values={{ aRef }} />
+                  </Alert>
+                  <VerticalSpacer sixteenPx />
+                </>
+              )}
               <FlexRow>
                 <FlexColumn>
                   <NumberField

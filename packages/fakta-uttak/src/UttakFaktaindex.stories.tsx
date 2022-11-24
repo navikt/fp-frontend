@@ -145,6 +145,28 @@ VisUttaksperiodeMedAksjonspunkt.args = {
     samtidigUttaksprosent: 80,
     flerbarnsdager: true,
     periodeKilde: 'SØKNAD',
+  }, {
+    fom: '2022-12-02',
+    tom: '2022-12-10',
+    uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+    arbeidstidsprosent: 50,
+    arbeidsforhold: {
+      arbeidsgiverReferanse: '910909088',
+      arbeidType: 'ORDINÆRT_ARBEID',
+    },
+    flerbarnsdager: false,
+    periodeKilde: 'SØKNAD',
+  }, {
+    fom: '2022-12-11',
+    tom: '2022-12-20',
+    uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+    arbeidstidsprosent: 50,
+    arbeidsforhold: {
+      arbeidsgiverReferanse: '910909088',
+      arbeidType: 'ORDINÆRT_ARBEID',
+    },
+    flerbarnsdager: false,
+    periodeKilde: 'SØKNAD',
   }],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   kanOverstyre: false,

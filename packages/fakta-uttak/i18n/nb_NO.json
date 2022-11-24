@@ -7,6 +7,7 @@
   "UttakFaktaForm.Aksjonspunkt.5066": "Gradering av aktivitet uten beregningsgrunnlag. Vurder gradering",
   "UttakFaktaForm.Aksjonspunkt.5074": "Vurder dokumentasjon",
   "UttakFaktaForm.NyPeriode": "Ny periode",
+  "UttakFaktaForm.OverlappendePerioder": "Det finnes overlappende perioder",
 
   "UttakFaktaTable.Periode": "Periode",
   "UttakFaktaTable.AntallDager": "Antall dager",
@@ -39,5 +40,9 @@
   "UttakFaktaDetailForm.Flerbarnsdager": "Flerbarnsdager",
   "UttakFaktaDetailForm.SamtidigUttaksprosent": "Samtidig uttaksprosent",
   "UttakFaktaDetailForm.Arbeidsgiver": "Arbeidsgiver",
-  "UttakFaktaDetailForm.Opphold": "Opphold"
+  "UttakFaktaDetailForm.Opphold": "Opphold",
+  "UttakFaktaDetailForm.ErTidligereEnnForsteUttaksdato": "Dato kan ikke være før første uttaksdato",
+  "UttakFaktaDetailForm.ErIkkeLikForsteUttaksdato": "Dato må være lik første uttaksdato",
+  "UttakFaktaDetailForm.TomForFom": "Dato kan ikke være før fra",
+  "UttakFaktaDetailForm.UkjentArbeidsgiver": "Arbeidsgiver oppgitt for perioden er ukjent. Referanse: {aRef}"
 }

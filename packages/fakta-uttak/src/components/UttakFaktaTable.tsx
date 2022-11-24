@@ -9,12 +9,11 @@ import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
 import { Button, Heading } from '@navikt/ds-react';
 import { AddCircle } from '@navikt/ds-icons';
 
-import {
-  AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, KontrollerFaktaPeriode,
-} from '@fpsak-frontend/types';
+import { AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold } from '@fpsak-frontend/types';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import UttakFaktaDetailForm from './UttakFaktaDetailForm';
+import KontrollerFaktaPeriodeMedApMarkering from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 
 import styles from './uttakFaktaTable.less';
 
@@ -55,14 +54,15 @@ const getUttakPeriode = (
   : alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE].find((k) => k.kode === uttakPeriodeType)?.navn);
 
 interface OwnProps {
-  uttakKontrollerFaktaPerioder: KontrollerFaktaPeriode[];
+  uttakKontrollerFaktaPerioder: KontrollerFaktaPeriodeMedApMarkering[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
-  oppdaterUttakPerioder: (perioder: KontrollerFaktaPeriode[]) => void;
+  oppdaterUttakPerioder: (perioder: KontrollerFaktaPeriodeMedApMarkering[]) => void;
   alleKodeverk: AlleKodeverk;
   readOnly: boolean;
   setDirty: (isDirty: boolean) => void;
   erRedigerbart: boolean;
+  førsteUttaksdato: string;
 }
 
 const UttakFaktaTable: FunctionComponent<OwnProps> = ({
@@ -74,6 +74,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
   readOnly,
   setDirty,
   erRedigerbart,
+  førsteUttaksdato,
 }) => {
   const [valgteFomDatoer, setValgteFomDatoer] = useState<string[]>([]);
 
@@ -86,9 +87,9 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
     }
   }, [valgteFomDatoer, setValgteFomDatoer]);
 
-  const oppdaterPerioder = useCallback((uPeriode: KontrollerFaktaPeriode) => {
+  const oppdaterPeriode = useCallback((uPeriode: KontrollerFaktaPeriodeMedApMarkering) => {
     const oppdatertePerioder = uttakKontrollerFaktaPerioder
-      .filter((p) => p.fom !== uPeriode.fom)
+      .filter((p) => p.fom !== uPeriode.originalFom)
       .concat(uPeriode)
       .sort((a1, a2) => a1.fom.localeCompare(a2.fom));
 
@@ -98,7 +99,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
   }, [uttakKontrollerFaktaPerioder]);
 
   const slettPeriode = useCallback((fom: string) => {
-    const oppdatertePerioder = uttakKontrollerFaktaPerioder.filter((p) => p.fom !== fom);
+    const oppdatertePerioder = uttakKontrollerFaktaPerioder.filter((p) => p.originalFom !== fom);
     oppdaterUttakPerioder(oppdatertePerioder);
     setDirty(true);
   }, [uttakKontrollerFaktaPerioder]);
@@ -145,18 +146,20 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
           return (
             <ExpandableTableRow
               key={periode.fom + periode.tom}
+              isApLeftBorder={!!periode.aksjonspunktType}
               showContent={valgteFomDatoer.includes(periode.fom)}
               toggleContent={() => velgPeriodeFomDato(periode.fom)}
               content={valgteFomDatoer.includes(periode.fom) && (
                 <UttakFaktaDetailForm
                   valgtPeriode={periode}
                   readOnly={readOnly}
-                  oppdaterPeriode={oppdaterPerioder}
-                  slettPeriode={() => slettPeriode(periode.fom)}
+                  oppdaterPeriode={oppdaterPeriode}
+                  slettPeriode={() => slettPeriode(periode.originalFom)}
                   avbrytEditering={() => velgPeriodeFomDato(periode.fom)}
                   alleKodeverk={alleKodeverk}
                   arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
                   faktaArbeidsforhold={faktaArbeidsforhold}
+                  førsteUttaksdato={førsteUttaksdato}
                 />
               )}
             >
@@ -192,12 +195,13 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
                 avbrytEditering={() => settVisNyPeriode(false)}
                 readOnly={false}
                 alleKodeverk={alleKodeverk}
-                oppdaterPeriode={(uttaksperiode: KontrollerFaktaPeriode) => {
+                oppdaterPeriode={(uttaksperiode: KontrollerFaktaPeriodeMedApMarkering) => {
                   oppdaterUttakPerioder(uttakKontrollerFaktaPerioder.concat(uttaksperiode));
                   settVisNyPeriode(false);
                 }}
                 arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
                 faktaArbeidsforhold={faktaArbeidsforhold}
+                førsteUttaksdato={førsteUttaksdato}
               />
             </div>
           )}
