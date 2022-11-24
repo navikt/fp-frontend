@@ -6,6 +6,7 @@
   "UttakFaktaForm.Aksjonspunkt.5065": "Første periode starter ikke på avklart startdato {value}. Legg inn periode fra startdato",
   "UttakFaktaForm.Aksjonspunkt.5066": "Gradering av aktivitet uten beregningsgrunnlag. Vurder gradering",
   "UttakFaktaForm.Aksjonspunkt.5074": "Vurder dokumentasjon",
+  "UttakFaktaForm.NyPeriode": "Ny periode",
 
   "UttakFaktaTable.Periode": "Periode",
   "UttakFaktaTable.AntallDager": "Antall dager",

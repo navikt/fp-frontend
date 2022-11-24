@@ -3,10 +3,10 @@ import React, {
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
-  Table, ExpandableTableRow, TableColumn, TableRow,
+  Table, ExpandableTableRow, TableColumn, TableRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
-import { Button, Panel } from '@navikt/ds-react';
+import { Button, Heading } from '@navikt/ds-react';
 import { AddCircle } from '@navikt/ds-icons';
 
 import {
@@ -15,6 +15,8 @@ import {
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import UttakFaktaDetailForm from './UttakFaktaDetailForm';
+
+import styles from './uttakFaktaTable.less';
 
 const HEADER_TEXT_CODES = [
   'UttakFaktaTable.Periode',
@@ -181,7 +183,11 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
             </Button>
           )}
           {visNyPeriode && (
-            <Panel border>
+            <div className={styles.panel}>
+              <Heading size="small">
+                <FormattedMessage id="UttakFaktaForm.NyPeriode" />
+              </Heading>
+              <VerticalSpacer sixteenPx />
               <UttakFaktaDetailForm
                 avbrytEditering={() => settVisNyPeriode(false)}
                 readOnly={false}
@@ -193,7 +199,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
                 arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
                 faktaArbeidsforhold={faktaArbeidsforhold}
               />
-            </Panel>
+            </div>
           )}
         </>
       )}
