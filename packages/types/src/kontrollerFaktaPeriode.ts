@@ -8,9 +8,9 @@ type KontrollerFaktaPeriode = Readonly<{
   overføringÅrsak?: string;
   oppholdÅrsak?: string;
   arbeidstidsprosent?: number;
-  arbeidsforhold: FaktaArbeidsforhold;
-  samtidigUttaksprosent?: string;
-  flerbarnsdager: boolean;
+  arbeidsforhold?: FaktaArbeidsforhold;
+  samtidigUttaksprosent?: number;
+  flerbarnsdager?: boolean;
   morsAktivitet?: string;
   periodeKilde: string;
 }>

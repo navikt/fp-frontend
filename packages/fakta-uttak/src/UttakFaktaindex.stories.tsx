@@ -15,7 +15,6 @@ import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus'
 import UttakFaktaIndex from './UttakFaktaIndex';
 import UtsettelseÅrsak from './kodeverk/utsettelseÅrsak';
 import OverføringÅrsak from './kodeverk/overføringÅrsak';
-import OppholdÅrsak from './kodeverk/oppholdÅrsak';
 
 const arbeidsgiverOpplysningerPerId = {
   910909088: {
@@ -82,10 +81,7 @@ VisUttaksperiodeUtenAksjonspunkt.args = {
     fom: '2022-11-12',
     tom: '2022-12-01',
     uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
-    arbeidsforhold: {
-      arbeidsgiverReferanse: '910909088',
-      arbeidType: 'test',
-    },
+    arbeidsforhold: null,
     flerbarnsdager: false,
     periodeKilde: 'SØKNAD',
   }],
@@ -110,10 +106,7 @@ VisUttaksperiodeUtenAksjonspunktKanOverstyre.args = {
     fom: '2022-11-12',
     tom: '2022-12-01',
     uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
-    arbeidsforhold: {
-      arbeidsgiverReferanse: '910909088',
-      arbeidType: 'test',
-    },
+    arbeidsforhold: null,
     flerbarnsdager: false,
     periodeKilde: 'SØKNAD',
   }],
@@ -144,11 +137,13 @@ VisUttaksperiodeMedAksjonspunkt.args = {
     fom: '2022-11-12',
     tom: '2022-12-01',
     uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+    arbeidstidsprosent: 10,
     arbeidsforhold: {
       arbeidsgiverReferanse: '910909088',
-      arbeidType: 'test',
+      arbeidType: 'ORDINÆRT_ARBEID',
     },
-    flerbarnsdager: false,
+    samtidigUttaksprosent: 80,
+    flerbarnsdager: true,
     periodeKilde: 'SØKNAD',
   }],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -158,7 +153,7 @@ VisUttaksperiodeMedAksjonspunkt.args = {
 export const VisUtsettelseperiodeMedAksjonspunkt = Template.bind({});
 VisUtsettelseperiodeMedAksjonspunkt.args = {
   aksjonspunkter: [{
-    definisjon: AksjonspunktCode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
+    definisjon: AksjonspunktCode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
@@ -178,11 +173,6 @@ VisUtsettelseperiodeMedAksjonspunkt.args = {
     fom: '2022-11-12',
     tom: '2022-12-01',
     utsettelseÅrsak: UtsettelseÅrsak.ARBEID,
-    arbeidsforhold: {
-      arbeidsgiverReferanse: '910909088',
-      arbeidType: 'test',
-    },
-    flerbarnsdager: false,
     periodeKilde: 'SØKNAD',
   }],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -191,6 +181,60 @@ VisUtsettelseperiodeMedAksjonspunkt.args = {
 
 export const VisOverføringsperiodeMedAksjonspunkt = Template.bind({});
 VisOverføringsperiodeMedAksjonspunkt.args = {
+  aksjonspunkter: [{
+    definisjon: AksjonspunktCode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
+    status: aksjonspunktStatus.OPPRETTET,
+    begrunnelse: undefined,
+    kanLoses: true,
+    erAktivt: true,
+  }],
+  ytelsefordeling: {
+    ikkeOmsorgPerioder: null,
+    rettigheterAnnenforelder: {
+      skalAvklareAnnenforelderUføretrygd: false,
+      skalAvklareAnnenForelderRettEØS: false,
+    },
+    endringsdato: '2022-01-31',
+    gjeldendeDekningsgrad: 100,
+    førsteUttaksdato: '2022-01-31',
+  },
+  uttakKontrollerFaktaPerioder: [{
+    fom: '2022-11-12',
+    tom: '2022-12-01',
+    overføringÅrsak: OverføringÅrsak.IKKE_RETT_ANNEN_FORELDER,
+    uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+    periodeKilde: 'SØKNAD',
+  }],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  kanOverstyre: false,
+};
+
+export const VisAksjonspunktDerIngenPerioderFinnes = Template.bind({});
+VisAksjonspunktDerIngenPerioderFinnes.args = {
+  aksjonspunkter: [{
+    definisjon: AksjonspunktCode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
+    status: aksjonspunktStatus.OPPRETTET,
+    begrunnelse: undefined,
+    kanLoses: true,
+    erAktivt: true,
+  }],
+  ytelsefordeling: {
+    ikkeOmsorgPerioder: null,
+    rettigheterAnnenforelder: {
+      skalAvklareAnnenforelderUføretrygd: false,
+      skalAvklareAnnenForelderRettEØS: false,
+    },
+    endringsdato: '2022-01-31',
+    gjeldendeDekningsgrad: 100,
+    førsteUttaksdato: '2022-01-31',
+  },
+  uttakKontrollerFaktaPerioder: [],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  kanOverstyre: false,
+};
+
+export const VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering = Template.bind({});
+VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering.args = {
   aksjonspunkter: [{
     definisjon: AksjonspunktCode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
     status: aksjonspunktStatus.OPPRETTET,
@@ -211,10 +255,11 @@ VisOverføringsperiodeMedAksjonspunkt.args = {
   uttakKontrollerFaktaPerioder: [{
     fom: '2022-11-12',
     tom: '2022-12-01',
-    overføringÅrsak: OverføringÅrsak.IKKE_RETT_ANNEN_FORELDER,
+    uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+    arbeidstidsprosent: 50,
     arbeidsforhold: {
-      arbeidsgiverReferanse: '910909088',
-      arbeidType: 'test',
+      arbeidsgiverReferanse: '91090823',
+      arbeidType: 'ORDINÆRT_ARBEID',
     },
     flerbarnsdager: false,
     periodeKilde: 'SØKNAD',
@@ -223,8 +268,8 @@ VisOverføringsperiodeMedAksjonspunkt.args = {
   kanOverstyre: false,
 };
 
-export const VisOppholdperiodeMedAksjonspunkt = Template.bind({});
-VisOppholdperiodeMedAksjonspunkt.args = {
+export const VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering = Template.bind({});
+VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering.args = {
   aksjonspunkter: [{
     definisjon: AksjonspunktCode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
     status: aksjonspunktStatus.OPPRETTET,
@@ -245,10 +290,11 @@ VisOppholdperiodeMedAksjonspunkt.args = {
   uttakKontrollerFaktaPerioder: [{
     fom: '2022-11-12',
     tom: '2022-12-01',
-    oppholdÅrsak: OppholdÅrsak.UTTAK_FEDREKVOTE_ANNEN_FORELDER,
+    uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+    arbeidstidsprosent: 50,
     arbeidsforhold: {
-      arbeidsgiverReferanse: '910909088',
-      arbeidType: 'test',
+      arbeidsgiverReferanse: '910923',
+      arbeidType: 'ORDINÆRT_ARBEID',
     },
     flerbarnsdager: false,
     periodeKilde: 'SØKNAD',

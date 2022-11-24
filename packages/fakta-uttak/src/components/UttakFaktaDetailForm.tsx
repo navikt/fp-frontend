@@ -3,10 +3,10 @@ import React, {
 } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
-import { useForm } from 'react-hook-form';
+import { useForm, UseFormGetValues } from 'react-hook-form';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import {
-  Datepicker, RadioGroupPanel, Form, SelectField, InputField, CheckboxField,
+  Datepicker, RadioGroupPanel, Form, SelectField, CheckboxField, NumberField,
 } from '@navikt/ft-form-hooks';
 import {
   FlexColumn, FlexContainer, FlexRow, OkAvbrytModal, VerticalSpacer,
@@ -28,7 +28,6 @@ import styles from './uttakFaktaDetailForm.less';
 
 type FormValues = KontrollerFaktaPeriode & {
   arsakstype: string;
-  uttakstype: string;
   arbeidsgiverId: string;
 };
 
@@ -39,23 +38,11 @@ enum Årsakstype {
   OPPHOLD = 'OPPHOLD',
 }
 
-enum Uttakstype {
-  UTTAK_100_PROSENT = 'UTTAK_100_PROSENT',
-  GRADERING = 'GRADERING',
-  SAMTIDIG_UTTAKSPROSENT = 'SAMTIDIG_UTTAKSPROSENT',
-}
-
 const ÅRSAKSTYPE_TEKST_KODER = {
   [Årsakstype.UTTAK]: 'UttakFaktaDetailForm.Uttak',
   [Årsakstype.OVERFØRING]: 'UttakFaktaDetailForm.Overføring',
   [Årsakstype.UTSETTELSE]: 'UttakFaktaDetailForm.Utsettelse',
   [Årsakstype.OPPHOLD]: 'UttakFaktaDetailForm.Opphold',
-};
-
-const UTTAKSTYPE_TEKST_KODER = {
-  [Uttakstype.UTTAK_100_PROSENT]: 'UttakFaktaDetailForm.100prosent',
-  [Uttakstype.GRADERING]: 'UttakFaktaDetailForm.Gradering',
-  [Uttakstype.SAMTIDIG_UTTAKSPROSENT]: 'UttakFaktaDetailForm.SamtidigUttaksprosent',
 };
 
 // vanlig arbeidsgivernavn (orgnr)...arbeidsforholdid
@@ -114,36 +101,28 @@ const utledÅrsakstype = (valgtPeriode: KontrollerFaktaPeriode): Årsakstype => 
   return Årsakstype.UTTAK;
 };
 
-const utledUttakstype = (valgtPeriode: KontrollerFaktaPeriode): Uttakstype => {
-  if (valgtPeriode.arbeidstidsprosent) {
-    return Uttakstype.GRADERING;
-  }
-  if (valgtPeriode.samtidigUttaksprosent) {
-    return Uttakstype.SAMTIDIG_UTTAKSPROSENT;
-  }
-  return Uttakstype.UTTAK_100_PROSENT;
-};
-
 const lagDefaultVerdier = (valgtPeriode: KontrollerFaktaPeriode): FormValues => {
   const arsakstype = utledÅrsakstype(valgtPeriode);
-  const uttakstype = utledUttakstype(valgtPeriode);
   return {
     ...valgtPeriode,
     arsakstype,
-    uttakstype,
     arbeidsgiverId: valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse
-      ? `${valgtPeriode.arbeidsforhold.arbeidsgiverReferanse}-${valgtPeriode.arbeidsforhold.arbeidType}}`
+      ? `${valgtPeriode.arbeidsforhold.arbeidsgiverReferanse}-${valgtPeriode.arbeidsforhold.arbeidType}`
       : undefined,
   };
 };
 
-const transformValues = (values: FormValues[]): KontrollerFaktaPeriode[] => values.map((v) => ({
-  ...omitMany(v, ['arsakstype', 'uttakstype', 'arbeidsgiverId']),
-  arbeidsforhold: {
-    arbeidsgiverReferanse: v.arbeidsgiverId ? v.arbeidsgiverId.split('-')[0] : undefined,
-    arbeidType: v.arbeidsgiverId ? v.arbeidsgiverId.split('-')[1] : undefined,
-  },
-}));
+const transformValues = (values: FormValues): KontrollerFaktaPeriode => ({
+  ...omitMany(values, ['arsakstype', 'arbeidsgiverId']),
+  arbeidsforhold: values.arbeidsgiverId ? {
+    arbeidsgiverReferanse: values.arbeidsgiverId.split('-')[0],
+    arbeidType: values.arbeidsgiverId.split('-')[1],
+  } : undefined,
+});
+
+const requiredNårGraderingErOppgitt = (
+  getValues: UseFormGetValues<FormValues>,
+) => (arbeidsgiverId?: string) => (getValues('arbeidstidsprosent') ? required(arbeidsgiverId) : null);
 
 interface OwnProps {
   valgtPeriode?: KontrollerFaktaPeriode;
@@ -152,7 +131,7 @@ interface OwnProps {
   slettPeriode?: () => void;
   avbrytEditering: () => void;
   readOnly: boolean;
-  oppdaterPerioder: (uttaksperioder: { perioder: KontrollerFaktaPeriode[] }) => void;
+  oppdaterPeriode: (uttaksperiode: KontrollerFaktaPeriode) => void;
   alleKodeverk: AlleKodeverk;
 }
 
@@ -162,16 +141,14 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
   faktaArbeidsforhold,
   slettPeriode,
   avbrytEditering,
-  oppdaterPerioder,
+  oppdaterPeriode,
   readOnly,
   alleKodeverk,
 }) => {
   const intl = useIntl();
 
-  const formMethods = useForm<{ perioder: FormValues[] }>({
-    defaultValues: {
-      perioder: valgtPeriode ? [lagDefaultVerdier(valgtPeriode)] : [],
-    },
+  const formMethods = useForm<FormValues>({
+    defaultValues: valgtPeriode ? lagDefaultVerdier(valgtPeriode) : undefined,
   });
 
   const [visSletteDialog, settVisSletteDialog] = useState(false);
@@ -189,29 +166,17 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
   const sorterteOppholdÅrsaker = useMemo(() => [...alleKodeverk[KodeverkType.OPPHOLD_ARSAK]].sort((k1, k2) => k1.navn.localeCompare(k2.navn)), []);
   const sorterteMorsAktiviteter = useMemo(() => [...alleKodeverk[KodeverkType.MORS_AKTIVITET]].sort((k1, k2) => k1.navn.localeCompare(k2.navn)), []);
 
-  const perioder = formMethods.watch('perioder');
+  const årsakstype = formMethods.watch('arsakstype');
 
-  const årsakstype = perioder.length > 0 ? perioder[0].arsakstype : undefined;
-  const uttakstype = perioder.length > 0 ? perioder[0].uttakstype : undefined;
-
-  useEffect(() => {
-    if (uttakstype !== Uttakstype.GRADERING) {
-      formMethods.unregister(`perioder.${0}.arbeidstidsprosent`);
-      formMethods.unregister(`perioder.${0}.arbeidsgiverId`);
-    }
-    if (uttakstype !== Uttakstype.SAMTIDIG_UTTAKSPROSENT) {
-      formMethods.unregister(`perioder.${0}.samtidigUttaksprosent`);
-    }
-  }, [uttakstype]);
   useEffect(() => {
     if (årsakstype !== Årsakstype.OVERFØRING) {
-      formMethods.unregister(`perioder.${0}.overføringÅrsak`);
+      formMethods.unregister('overføringÅrsak');
     }
     if (årsakstype !== Årsakstype.OPPHOLD) {
-      formMethods.unregister(`perioder.${0}.oppholdÅrsak`);
+      formMethods.unregister('oppholdÅrsak');
     }
     if (årsakstype !== Årsakstype.UTSETTELSE) {
-      formMethods.unregister(`perioder.${0}.utsettelseÅrsak`);
+      formMethods.unregister('utsettelseÅrsak');
     }
   }, [årsakstype]);
 
@@ -227,18 +192,16 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
       )}
       <Form
         formMethods={formMethods}
-        onSubmit={(values) => oppdaterPerioder({
-          perioder: transformValues(values.perioder.map((p) => ({
-            ...p,
-            periodeKilde: FordelingPeriodeKilde.SØKNAD,
-          }))),
-        })}
+        onSubmit={(values) => oppdaterPeriode(transformValues({
+          ...values,
+          periodeKilde: FordelingPeriodeKilde.SØKNAD,
+        }))}
       >
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
               <Datepicker
-                name={`perioder.${0}.fom`}
+                name="fom"
                 label={<FormattedMessage id="UttakFaktaDetailForm.Fom" />}
                 validate={[required, hasValidDate]}
                 isReadOnly={readOnly}
@@ -246,7 +209,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
             </FlexColumn>
             <FlexColumn>
               <Datepicker
-                name={`perioder.${0}.tom`}
+                name="tom"
                 label={<FormattedMessage id="UttakFaktaDetailForm.Tom" />}
                 validate={[required, hasValidDate]}
                 isReadOnly={readOnly}
@@ -271,7 +234,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
           <FlexRow>
             <FlexColumn>
               <RadioGroupPanel
-                name={`perioder.${0}.arsakstype`}
+                name="arsakstype"
                 label={<FormattedMessage id="UttakFaktaDetailForm.Periodetype" />}
                 validate={[required]}
                 isReadOnly={readOnly}
@@ -288,7 +251,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
             <FlexRow>
               <FlexColumn>
                 <SelectField
-                  name={`perioder.${0}.uttakPeriodeType`}
+                  name="uttakPeriodeType"
                   label={<FormattedMessage id="UttakFaktaDetailForm.Stonadskonto" />}
                   validate={[required]}
                   selectValues={sorterteUttakPeriodeTyper.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
@@ -302,7 +265,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
             <FlexColumn>
               {årsakstype === Årsakstype.UTSETTELSE && (
                 <SelectField
-                  name={`perioder.${0}.utsettelseÅrsak`}
+                  name="utsettelseÅrsak"
                   label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
                   validate={[required]}
                   className={styles.selectArsak}
@@ -312,7 +275,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
               )}
               {årsakstype === Årsakstype.OVERFØRING && (
                 <SelectField
-                  name={`perioder.${0}.overføringÅrsak`}
+                  name="overføringÅrsak"
                   label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
                   validate={[required]}
                   className={styles.selectArsak}
@@ -322,7 +285,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
               )}
               {årsakstype === Årsakstype.OPPHOLD && (
                 <SelectField
-                  name={`perioder.${0}.oppholdÅrsak`}
+                  name="oppholdÅrsak"
                   label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
                   validate={[required]}
                   className={styles.selectArsak}
@@ -332,58 +295,35 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
               )}
             </FlexColumn>
           </FlexRow>
-          <VerticalSpacer sixteenPx />
-          {årsakstype === Årsakstype.UTTAK && (
-            <FlexRow>
-              <FlexColumn>
-                <RadioGroupPanel
-                  name={`perioder.${0}.uttakstype`}
-                  label={<FormattedMessage id="UttakFaktaDetailForm.Uttakstype" />}
-                  validate={[required]}
-                  isReadOnly={readOnly}
-                  isHorizontal
-                  radios={Object.keys(Uttakstype).map((type) => ({
-                    value: type,
-                    label: intl.formatMessage({ id: UTTAKSTYPE_TEKST_KODER[type] }),
-                  }))}
-                />
-              </FlexColumn>
-            </FlexRow>
-          )}
           {årsakstype === Årsakstype.UTTAK && (
             <>
               <VerticalSpacer sixteenPx />
               <FlexRow>
-                {uttakstype === Uttakstype.GRADERING && (
-                  <FlexColumn>
-                    <InputField
-                      name={`perioder.${0}.arbeidstidsprosent`}
-                      label={<FormattedMessage id="UttakFaktaDetailForm.GraderingProsent" />}
-                      validate={[required]}
-                      readOnly={readOnly}
-                    />
-                  </FlexColumn>
-                )}
-                {uttakstype === Uttakstype.GRADERING && (
-                  <FlexColumn>
-                    <SelectField
-                      name={`perioder.${0}.arbeidsgiverId`}
-                      label={<FormattedMessage id="UttakFaktaDetailForm.Arbeidsgiver" />}
-                      validate={[required]}
-                      selectValues={mapArbeidsforhold(faktaArbeidsforhold, alleKodeverk, arbeidsgiverOpplysningerPerId)}
-                    />
-                  </FlexColumn>
-                )}
-                {uttakstype === Uttakstype.SAMTIDIG_UTTAKSPROSENT && (
-                  <FlexColumn>
-                    <InputField
-                      name={`perioder.${0}.samtidigUttaksprosent`}
-                      label={<FormattedMessage id="UttakFaktaDetailForm.SamtidigUttaksprosent" />}
-                      validate={[required]}
-                      readOnly={readOnly}
-                    />
-                  </FlexColumn>
-                )}
+                <FlexColumn>
+                  <NumberField
+                    name="arbeidstidsprosent"
+                    label={<FormattedMessage id="UttakFaktaDetailForm.GraderingProsent" />}
+                    forceTwoDecimalDigits
+                    className={styles.gradering}
+                    readOnly={readOnly}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <SelectField
+                    name="arbeidsgiverId"
+                    label={<FormattedMessage id="UttakFaktaDetailForm.Arbeidsgiver" />}
+                    validate={[requiredNårGraderingErOppgitt(formMethods.getValues)]}
+                    selectValues={mapArbeidsforhold(faktaArbeidsforhold, alleKodeverk, arbeidsgiverOpplysningerPerId)}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <NumberField
+                    name="samtidigUttaksprosent"
+                    label={<FormattedMessage id="UttakFaktaDetailForm.SamtidigUttaksprosent" />}
+                    forceTwoDecimalDigits
+                    readOnly={readOnly}
+                  />
+                </FlexColumn>
               </FlexRow>
             </>
           )}
@@ -391,7 +331,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
           <FlexRow>
             <FlexColumn>
               <SelectField
-                name={`perioder.${0}.morsAktivitet`}
+                name="morsAktivitet"
                 label={<FormattedMessage id="UttakFaktaDetailForm.MorsAktivitet" />}
                 className={styles.select}
                 selectValues={sorterteMorsAktiviteter.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
@@ -405,8 +345,8 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
               <FlexRow>
                 <FlexColumn>
                   <CheckboxField
+                    name="flerbarnsdager"
                     readOnly={readOnly}
-                    name={`perioder.${0}.flerbarnsdager`}
                     label={<FormattedMessage id="UttakFaktaDetailForm.Flerbarnsdager" />}
                   />
                 </FlexColumn>

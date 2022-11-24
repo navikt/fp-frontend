@@ -84,11 +84,10 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
     }
   }, [valgteFomDatoer, setValgteFomDatoer]);
 
-  const oppdaterPerioder = useCallback((uPerioder: { perioder: KontrollerFaktaPeriode[] }) => {
-    const { perioder } = uPerioder;
+  const oppdaterPerioder = useCallback((uPeriode: KontrollerFaktaPeriode) => {
     const oppdatertePerioder = uttakKontrollerFaktaPerioder
-      .filter((p) => p.fom !== perioder[0].fom)
-      .concat(perioder)
+      .filter((p) => p.fom !== uPeriode.fom)
+      .concat(uPeriode)
       .sort((a1, a2) => a1.fom.localeCompare(a2.fom));
 
     oppdaterUttakPerioder(oppdatertePerioder);
@@ -150,7 +149,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
                 <UttakFaktaDetailForm
                   valgtPeriode={periode}
                   readOnly={readOnly}
-                  oppdaterPerioder={oppdaterPerioder}
+                  oppdaterPeriode={oppdaterPerioder}
                   slettPeriode={() => slettPeriode(periode.fom)}
                   avbrytEditering={() => velgPeriodeFomDato(periode.fom)}
                   alleKodeverk={alleKodeverk}
@@ -187,8 +186,8 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
                 avbrytEditering={() => settVisNyPeriode(false)}
                 readOnly={false}
                 alleKodeverk={alleKodeverk}
-                oppdaterPerioder={(uttaksperioder: { perioder: KontrollerFaktaPeriode[] }) => {
-                  oppdaterUttakPerioder(uttakKontrollerFaktaPerioder.concat(uttaksperioder.perioder));
+                oppdaterPeriode={(uttaksperiode: KontrollerFaktaPeriode) => {
+                  oppdaterUttakPerioder(uttakKontrollerFaktaPerioder.concat(uttaksperiode));
                   settVisNyPeriode(false);
                 }}
                 arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
