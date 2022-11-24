@@ -134,6 +134,7 @@
   "HistorikkEndretFelt.Opptjeningsvilkaret": "Opptjeningsvilkåret",
   "HistorikkEndretFelt.Organisasjonsnummer": "Organisasjonsnummer",
   "HistorikkEndretFelt.Soknadsfristvilkaret": "Søknadsfristvilkåret",
+  "HistorikkEndretFelt.UttakDokumentasjonVurdering": "Perioden {value}",
   "HistorikkEndretFelt.Personstatus": "Personstatus",
   "HistorikkEndretFelt.StartdatoFraSoknad": "Startdato fra søknad",
   "HistorikkEndretFelt.IkkeOmsorgPerioden": "Søker har ikke omsorg for barnet i perioden",
