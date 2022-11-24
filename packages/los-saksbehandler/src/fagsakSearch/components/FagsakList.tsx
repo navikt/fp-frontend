@@ -1,12 +1,13 @@
 import React, { Fragment, FunctionComponent, useMemo } from 'react';
 import dayjs from 'dayjs';
 import { Next } from '@navikt/ds-icons';
-import { getKodeverknavnFraKode, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import {
   Table, TableRow, TableColumn, DateLabel,
 } from '@navikt/ft-ui-komponenter';
 import { FagsakStatus, KodeverkType } from '@navikt/ft-kodeverk';
 import { FagsakEnkel } from '@fpsak-frontend/types';
+import { getKodeverknavnFraKode } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
 
 import Oppgave from '../../typer/oppgaveTsType';
 import useLosKodeverk from '../../data/useLosKodeverk';

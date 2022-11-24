@@ -7,14 +7,16 @@ import { Button, Label } from '@navikt/ds-react';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import { Aksjonspunkt, AlleKodeverk } from '@navikt/ft-types';
+import { Aksjonspunkt } from '@navikt/ft-types';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { MedlemPeriode, Medlemskap, Soknad } from '@fpsak-frontend/types';
+import {
+  AlleKodeverk, MedlemPeriode, Medlemskap, Soknad,
+} from '@fpsak-frontend/types';
 
 import OppholdstillatelseTabell from './OppholdstillatelseTabell';
 import OppholdINorgeOgAdresserFaktaPanel, { FormValues as OppholdFormValues } from './OppholdINorgeOgAdresserFaktaPanel';

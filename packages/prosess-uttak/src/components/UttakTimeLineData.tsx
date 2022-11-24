@@ -4,10 +4,11 @@ import React, {
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 
-import { calcDays, getKodeverknavnFn } from '@navikt/ft-utils';
+import { calcDays } from '@navikt/ft-utils';
 import {
   AksjonspunktHelpTextTemp, VerticalSpacer, EditedIcon, Image, FlexContainer, FlexRow, FlexColumn,
 } from '@navikt/ft-ui-komponenter';
+import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
 import splitPeriodImageHoverUrl from '@fpsak-frontend/assets/images/splitt_hover.svg';
 import splitPeriodImageUrl from '@fpsak-frontend/assets/images/splitt.svg';
 import { TimeLineButton, TimeLineDataContainer } from '@navikt/ft-tidslinje';

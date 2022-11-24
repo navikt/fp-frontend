@@ -4,7 +4,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { required } from '@navikt/ft-form-validators';
-import { getKodeverknavnFn, removeSpacesFromNumber } from '@navikt/ft-utils';
+import { removeSpacesFromNumber } from '@navikt/ft-utils';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
@@ -15,6 +15,7 @@ import {
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { FaktaBeregningTransformedValues } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
+import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
 import {
   andelsnrMottarYtelseMap,
   finnFrilansFieldName,

@@ -9,7 +9,8 @@ import {
 
 import telefonImageUrl from '@fpsak-frontend/assets/images/phone-3.svg';
 import { Inntektsmelding, AoIArbeidsforhold, AlleKodeverk } from '@fpsak-frontend/types';
-import { formatCurrencyNoKr, getKodeverknavnFraKode } from '@navikt/ft-utils';
+import { formatCurrencyNoKr } from '@navikt/ft-utils';
+import { getKodeverknavnFraKode } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { hentDokumentLenke } from '@fpsak-frontend/konstanter';
 import dokumentSvg from '@fpsak-frontend/assets/images/dokument_filled.svg';

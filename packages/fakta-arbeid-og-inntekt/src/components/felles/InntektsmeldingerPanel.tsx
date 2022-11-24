@@ -11,7 +11,8 @@ import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import pilOppIkonUrl from '@fpsak-frontend/assets/images/pil_opp.svg';
 import pilNedIkonUrl from '@fpsak-frontend/assets/images/pil_ned.svg';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
-import { TIDENES_ENDE, getKodeverknavnFraKode } from '@navikt/ft-utils';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
+import { getKodeverknavnFraKode } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
 import { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@fpsak-frontend/types';
 
 import styles from './inntektsmeldingerPanel.less';

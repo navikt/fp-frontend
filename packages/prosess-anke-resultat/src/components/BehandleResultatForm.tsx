@@ -1,14 +1,13 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Detail, Heading, Label } from '@navikt/ds-react';
-import { getKodeverknavnFn } from '@navikt/ft-utils';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { AlleKodeverk } from '@navikt/ft-types';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 
+import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
 import ankeVurdering from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
-import { AnkeVurdering } from '@fpsak-frontend/types';
+import { AnkeVurdering, AlleKodeverk } from '@fpsak-frontend/types';
 
 interface OwnPropsResultat {
   ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];

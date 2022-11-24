@@ -4,12 +4,13 @@ import React, {
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Label } from '@navikt/ds-react';
 import { Next } from '@navikt/ds-icons';
-import { getDateAndTime, getKodeverknavnFraKode } from '@navikt/ft-utils';
+import { getDateAndTime } from '@navikt/ft-utils';
 import {
   Image, VerticalSpacer, Table, TableRow, TableColumn, DateLabel,
 } from '@navikt/ft-ui-komponenter';
-import { KodeverkType } from '@navikt/ft-kodeverk';
 
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { getKodeverknavnFraKode } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
 import { TimeoutError } from '@fpsak-frontend/rest-api';
 import menuIconBlueUrl from '@fpsak-frontend/assets/images/ic-menu-18px_blue.svg';
 import menuIconBlackUrl from '@fpsak-frontend/assets/images/ic-menu-18px_black.svg';

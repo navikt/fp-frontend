@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { UseFormGetValues } from 'react-hook-form';
 import { Label, Heading, ErrorMessage } from '@navikt/ds-react';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
-import { AlleKodeverk } from '@navikt/ft-types';
 
+import { AlleKodeverk } from '@fpsak-frontend/types';
 import ForeldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
-import { UseFormGetValues } from 'react-hook-form';
 
 import PermisjonUtsettelsePanel, { FormValues as FormValuesUtsettelse } from './PermisjonUtsettelsePanel';
 import PermisjonGraderingPanel, { FormValues as FormValuesGradering } from './PermisjonGraderingPanel';

@@ -5,15 +5,14 @@ import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 
-import {
-  dateFormat, guid, getKodeverknavnFn, omitMany,
-} from '@navikt/ft-utils';
+import { dateFormat, guid, omitMany } from '@navikt/ft-utils';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelseSamling,
   AlleKodeverk, Personoversikt, UttakKontrollerFaktaPerioderLegacy, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { FaktaUttakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
 
 import UttakPerioder from './UttakPerioder';
 import {

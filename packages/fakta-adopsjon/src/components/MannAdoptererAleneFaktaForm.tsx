@@ -4,7 +4,7 @@ import { BodyShort, Detail } from '@navikt/ds-react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { getKodeverknavnFn } from '@navikt/ft-utils';
+import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
 import { required } from '@navikt/ft-form-validators';
 import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';

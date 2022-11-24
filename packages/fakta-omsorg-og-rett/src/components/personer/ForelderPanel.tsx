@@ -8,7 +8,8 @@ import { AlleKodeverk, KjønnkodeEnum, PersonopplysningerBasis } from '@fpsak-fr
 import kvinneIkonUrl from '@fpsak-frontend/assets/images/female.svg';
 import mannIkonUrl from '@fpsak-frontend/assets/images/male.svg';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { getKodeverknavnFraKode } from '@navikt/ft-utils';
+import { getKodeverknavnFraKode } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
+
 import Boks from '../Boks';
 
 import AdresseVisning from './AdresseVisning';
