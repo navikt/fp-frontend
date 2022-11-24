@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import dayjs from 'dayjs';
 import { Form } from '@navikt/ft-form-hooks';
-import { ErrorMessage, ErrorSummary, Heading } from '@navikt/ds-react';
+import { ErrorSummary, Heading } from '@navikt/ds-react';
 import {
   AksjonspunktHelpTextHTML, FlexColumn, FlexContainer, FlexRow, OverstyringKnapp, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -197,6 +197,16 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
         </>
       )}
+      {harOverlappendePerioder && (
+        <>
+          <ErrorSummary>
+            <ErrorSummary.Item>
+              <FormattedMessage id="UttakFaktaForm.OverlappendePerioder" />
+            </ErrorSummary.Item>
+          </ErrorSummary>
+          <VerticalSpacer sixteenPx />
+        </>
+      )}
       <UttakFaktaTable
         uttakKontrollerFaktaPerioder={uttakPerioder}
         oppdaterUttakPerioder={oppdaterUttakPerioder}
@@ -208,16 +218,6 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
         faktaArbeidsforhold={faktaArbeidsforhold}
         førsteUttaksdato={ytelsefordeling.førsteUttaksdato}
       />
-      {harOverlappendePerioder && (
-        <>
-          <VerticalSpacer sixteenPx />
-          <ErrorSummary>
-            <ErrorSummary.Item>
-              <FormattedMessage id="UttakFaktaForm.OverlappendePerioder" />
-            </ErrorSummary.Item>
-          </ErrorSummary>
-        </>
-      )}
       <VerticalSpacer sixteenPx />
       {erRedigerbart && (
         <>

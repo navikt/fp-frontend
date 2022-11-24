@@ -89,7 +89,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
 
   const oppdaterPeriode = useCallback((uPeriode: KontrollerFaktaPeriodeMedApMarkering) => {
     const oppdatertePerioder = uttakKontrollerFaktaPerioder
-      .filter((p) => p.fom !== uPeriode.originalFom)
+      .filter((p) => p.originalFom !== uPeriode.originalFom)
       .concat(uPeriode)
       .sort((a1, a2) => a1.fom.localeCompare(a2.fom));
 

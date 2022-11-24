@@ -209,7 +209,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
     }
   }, [årsakstype]);
 
-  const aRef = valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse;
+  const aRef = valgtPeriode?.arbeidsforhold?.arbeidsgiverReferanse;
   const arbeidsgiverFinnesIkke = (aRef && !arbeidsgiverOpplysningerPerId[aRef]);
 
   return (
