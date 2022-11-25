@@ -48,8 +48,11 @@
   "UttakDokumentasjonFaktaDetailForm.IkkeGodkjent": "Ikke godkjent",
   "UttakDokumentasjonFaktaDetailForm.IkkeDokumentert": "Mangler dokumentasjon",
 
-  "OppdaterePeriodeModal.OppdaterePerioden": "Vil du oppdatere periode?",
-  "OppdaterePeriodeModal.Nullstilles": "Etterfølgende perioder blir nullstilt",
-  "OppdaterePeriodeModal.Oppdater": "Oppdater",
-  "OppdaterePeriodeModal.Avbryt": "Avbryt"
+  "DelOppPeriodeModal.Periode": "Periode",
+  "DelOppPeriodeModal.RedigerPeriode": "Vil du redigere periode?",
+  "DelOppPeriodeModal.Nullstilles": "Etterfølgende perioder blir nullstilt",
+  "DelOppPeriodeModal.Oppdater": "Oppdater",
+  "DelOppPeriodeModal.Dato": "Dato",
+  "DelOppPeriodeModal.Splitt": "Angi til og med dato. Denne datoen blir automatisk definert som fra og med dato for neste periode",
+  "DelOppPeriodeModal.Avbryt": "Avbryt"
 }

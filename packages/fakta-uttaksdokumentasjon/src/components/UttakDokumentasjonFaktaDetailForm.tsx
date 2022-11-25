@@ -20,7 +20,7 @@ import {
   DokumentasjonVurderingBehov, UttakType, UttakVurdering,
 } from '@fpsak-frontend/types';
 
-import OppdaterePeriodeModal from './OppdaterePeriodeModal';
+import DelOppPeriodeModal from './DelOppPeriodeModal';
 
 import styles from './uttakDokumentasjonFaktaDetailForm.less';
 
@@ -161,7 +161,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
                     size="small"
                     variant="tertiary"
                     type="button"
-                    onClick={() => delOppPeriode(index)}
+                    onClick={() => settVisModalForPeriode(index)}
                     icon={<Image src={splitPeriodImageUrl} />}
                   >
                     <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.DelOppPeriode" />
@@ -279,7 +279,11 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
         )}
       </Form>
       {visModalPeriode !== undefined && (
-        <OppdaterePeriodeModal submit={nullstillPerioder} cancel={() => settVisModalForPeriode(undefined)} />
+        <DelOppPeriodeModal
+          valgtDokBehov={valgtDokBehov}
+          submit={nullstillPerioder}
+          cancel={() => settVisModalForPeriode(undefined)}
+        />
       )}
     </>
   );
