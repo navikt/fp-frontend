@@ -41,12 +41,12 @@
   "UttakDokumentasjonFaktaDetailForm.Tom": "Til og med:",
   "UttakDokumentasjonFaktaDetailForm.Periode": "Periode",
   "UttakDokumentasjonFaktaDetailForm.MorsAktivitet": "Mors aktivitet",
-  "UttakDokumentasjonFaktaDetailForm.OppdaterDato": "Oppdater dato",
   "UttakDokumentasjonFaktaDetailForm.DelOppPeriode": "Del opp periode",
   "UttakDokumentasjonFaktaDetailForm.IkkeGyldigDato": "Dato er utenfor opprinnelig periode",
   "UttakDokumentasjonFaktaDetailForm.Godkjent": "Godkjent",
   "UttakDokumentasjonFaktaDetailForm.IkkeGodkjent": "Ikke godkjent",
   "UttakDokumentasjonFaktaDetailForm.IkkeDokumentert": "Mangler dokumentasjon",
+  "UttakDokumentasjonFaktaDetailForm.RedigerPeriode": "Rediger periode",
 
   "DelOppPeriodeModal.Periode": "Periode",
   "DelOppPeriodeModal.RedigerPeriode": "Vil du redigere periode?",
@@ -54,5 +54,6 @@
   "DelOppPeriodeModal.Oppdater": "Oppdater",
   "DelOppPeriodeModal.Dato": "Dato",
   "DelOppPeriodeModal.Splitt": "Angi til og med dato. Denne datoen blir automatisk definert som fra og med dato for neste periode",
-  "DelOppPeriodeModal.Avbryt": "Avbryt"
+  "DelOppPeriodeModal.Avbryt": "Avbryt",
+  "DelOppPeriodeModal.UgyldigDato": "Dato er ikke innenfor intervall"
 }

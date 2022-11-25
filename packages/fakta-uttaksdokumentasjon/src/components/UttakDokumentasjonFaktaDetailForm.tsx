@@ -3,14 +3,12 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
 import {
-  BodyShort, Button, ErrorMessage, Label,
+  BodyShort, Button, Label,
 } from '@navikt/ds-react';
-import { hasValidDate, required } from '@navikt/ft-form-validators';
-import { Historic } from '@navikt/ds-icons';
+import { required } from '@navikt/ft-form-validators';
+import { Edit } from '@navikt/ds-icons';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import {
-  Datepicker, Form, formHooks, RadioGroupPanel,
-} from '@navikt/ft-form-hooks';
+import { Form, formHooks, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
   AvsnittSkiller, DateLabel, FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -42,11 +40,9 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
   oppdaterDokBehov,
 }) => {
   const intl = useIntl();
-  const [sistOppdeltePeriodeIndex, setSistOppdeltePeriodeIndex] = useState<number>();
-  const [erDatoSatt, settDato] = useState(false);
-  const [harDeltOpp, settHarDeltOpp] = useState(false);
-  const [visModalPeriode, settVisModalForPeriode] = useState<number | undefined>();
-  const [visUgyldigDato, settUgyldigDato] = useState(false);
+
+  const [sistOppdeltPeriodeIndex, setSistOppdeltPeriodeIndex] = useState<number>();
+  const [valgtPeriodeIndex, settValgtPeriodeIndex] = useState<number | undefined>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: {
@@ -61,68 +57,44 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
     name: 'perioder',
   });
 
-  const delOppPeriode = (index: number) => {
-    const perioder = formMethods.getValues('perioder');
-    const periode = perioder[index];
+  const perioder = formMethods.watch('perioder');
+
+  const lagNyPeriode = (dato: string) => {
+    const periode = perioder[valgtPeriodeIndex];
     const nyPeriode = {
       ...periode,
-      tom: null,
+      tom: dato,
     };
-    setSistOppdeltePeriodeIndex(index);
-    settHarDeltOpp(true);
-    settDato(false);
-    update(index, nyPeriode);
+    update(valgtPeriodeIndex, nyPeriode);
     append({
       ...periode,
-      fom: null,
+      fom: dayjs(dato).add(1, 'day').format(ISO_DATE_FORMAT),
       tom: periode.tom,
       vurdering: null,
     });
+
+    settValgtPeriodeIndex(undefined);
+    setSistOppdeltPeriodeIndex(valgtPeriodeIndex);
   };
 
-  const oppdaterDato = (index: number) => {
-    const perioder = formMethods.getValues('perioder');
-    const periode = perioder[index];
-    const nyPeriode = perioder[index + 1];
+  const oppdaterOgNullstillPerioder = (dato: string) => {
+    settValgtPeriodeIndex(undefined);
 
-    if (dayjs(periode.tom).isBefore(valgtDokBehov.fom) || !dayjs(periode.tom).isBefore(valgtDokBehov.tom)) {
-      settUgyldigDato(true);
-      return;
-    }
-    settUgyldigDato(false);
-
-    const oppdatertPeriode = {
-      ...nyPeriode,
-      fom: dayjs(periode.tom).add(1, 'day').format(ISO_DATE_FORMAT),
-    };
-
-    update(index + 1, oppdatertPeriode);
-
-    settHarDeltOpp(false);
-    settDato(true);
-  };
-
-  const nullstillPerioder = () => {
-    settVisModalForPeriode(undefined);
-
-    const perioder = formMethods.getValues('perioder');
-
-    for (let i = fields.length - 1; i > visModalPeriode + 1; i -= 1) {
+    for (let i = fields.length - 1; i > valgtPeriodeIndex + 1; i -= 1) {
       remove(i);
     }
 
-    update(visModalPeriode, {
-      ...perioder[visModalPeriode],
-      tom: null,
+    update(valgtPeriodeIndex, {
+      ...perioder[valgtPeriodeIndex],
+      tom: dato,
     });
-    update(visModalPeriode + 1, {
-      ...perioder[visModalPeriode + 1],
-      fom: null,
+    update(valgtPeriodeIndex + 1, {
+      ...perioder[valgtPeriodeIndex + 1],
+      fom: dayjs(dato).add(1, 'day').format(ISO_DATE_FORMAT),
       tom: valgtDokBehov.tom,
     });
 
-    setSistOppdeltePeriodeIndex(visModalPeriode);
-    settDato(false);
+    setSistOppdeltPeriodeIndex(valgtPeriodeIndex);
   };
 
   const vurderingsalternativer = [{
@@ -143,111 +115,93 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
   return (
     <>
       <Form formMethods={formMethods} onSubmit={oppdaterDokBehov}>
-        {fields.map((field, index) => {
-          const perioder = formMethods.watch('perioder');
-          const visDatepicker = !erDatoSatt && sistOppdeltePeriodeIndex === index;
-          return (
-            <React.Fragment key={field.id}>
-              {index > 0 && (
-                <>
-                  <VerticalSpacer fourtyPx />
-                  <AvsnittSkiller dividerParagraf className={styles.skiller} />
-                  <VerticalSpacer twentyPx />
-                </>
-              )}
-              {(!readOnly && perioder[index].fom !== perioder[index].tom && fields.length === 1) && (
-                <div className={styles.marginBtn}>
-                  <Button
-                    size="small"
-                    variant="tertiary"
-                    type="button"
-                    onClick={() => settVisModalForPeriode(index)}
-                    icon={<Image src={splitPeriodImageUrl} />}
-                  >
-                    <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.DelOppPeriode" />
-                  </Button>
-                </div>
-              )}
-              {fields.length > 1 && (
-                <FlexContainer>
-                  <FlexRow>
-                    <FlexColumn>
-                      <Label size="small"><FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Fom" /></Label>
+        <VerticalSpacer eightPx />
+        {fields.map((field, index) => (
+          <React.Fragment key={field.id}>
+            {index > 0 && (
+              <>
+                <VerticalSpacer fourtyPx />
+                <AvsnittSkiller dividerParagraf className={styles.skiller} />
+                <VerticalSpacer twentyPx />
+              </>
+            )}
+            {(!readOnly && perioder[index].fom !== perioder[index].tom && fields.length === 1) && (
+              <div className={styles.marginBtn}>
+                <Button
+                  size="small"
+                  variant="tertiary"
+                  type="button"
+                  onClick={() => settValgtPeriodeIndex(index)}
+                  icon={<Image src={splitPeriodImageUrl} />}
+                >
+                  <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.DelOppPeriode" />
+                </Button>
+              </div>
+            )}
+            {fields.length > 1 && (
+              <FlexContainer>
+                <FlexRow>
+                  <FlexColumn>
+                    <Label size="small"><FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Fom" /></Label>
+                  </FlexColumn>
+                  <FlexColumn className={styles.fomDato}>
+                    {perioder[index].fom && (
+                      <BodyShort size="small"><DateLabel dateString={perioder[index].fom} /></BodyShort>
+                    )}
+                  </FlexColumn>
+                  <FlexColumn>
+                    <Label size="small"><FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Tom" /></Label>
+                  </FlexColumn>
+                  <FlexColumn className={styles.tomDato}>
+                    {perioder[index].tom && (
+                      <BodyShort size="small"><DateLabel dateString={perioder[index].tom} /></BodyShort>
+                    )}
+                  </FlexColumn>
+                  {sistOppdeltPeriodeIndex >= index && (
+                    <FlexColumn className={styles.redigerKnapp}>
+                      <Button
+                        size="small"
+                        variant="tertiary"
+                        icon={<Edit aria-hidden />}
+                        onClick={() => settValgtPeriodeIndex(index)}
+                        type="button"
+                        disabled={!perioder[index].tom}
+                      >
+                        <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.RedigerPeriode" />
+                      </Button>
                     </FlexColumn>
-                    <FlexColumn className={styles.fomDato}>
-                      {perioder[index].fom && (
-                        <BodyShort size="small"><DateLabel dateString={perioder[index].fom} /></BodyShort>
-                      )}
-                    </FlexColumn>
-                    {visDatepicker && (
-                      <FlexColumn>
-                        <Datepicker
-                          name={`perioder.${index}.tom`}
-                          label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Tom" />}
-                          validate={[required, hasValidDate]}
-                          isReadOnly={readOnly}
-                          disabledDays={{
-                            fromDate: dayjs(perioder[index].fom, ISO_DATE_FORMAT).toDate(),
-                            toDate: dayjs(perioder[index].tom || valgtDokBehov.tom, ISO_DATE_FORMAT).subtract(1, 'day').toDate(),
-                          }}
-                        />
-                        {visUgyldigDato && (
-                          <ErrorMessage><FormattedMessage id="UttakDokumentasjonFaktaDetailForm.IkkeGyldigDato" /></ErrorMessage>
-                        )}
-                      </FlexColumn>
-                    )}
-                    {(erDatoSatt || sistOppdeltePeriodeIndex !== index) && (
-                      <>
-                        <FlexColumn>
-                          <Label size="small"><FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Tom" /></Label>
-                        </FlexColumn>
-                        <FlexColumn className={styles.tomDato}>
-                          {perioder[index].tom && (
-                            <BodyShort size="small"><DateLabel dateString={perioder[index].tom} /></BodyShort>
-                          )}
-                        </FlexColumn>
-                      </>
-                    )}
-                    {sistOppdeltePeriodeIndex >= index && (
-                      <FlexColumn className={visDatepicker ? styles.oppdaterDato : undefined}>
-                        <Button
-                          size="small"
-                          variant="tertiary"
-                          icon={<Historic aria-hidden />}
-                          onClick={() => (visDatepicker ? oppdaterDato(index) : settVisModalForPeriode(index))}
-                          type="button"
-                          disabled={!perioder[index].tom}
-                        >
-                          <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.OppdaterDato" />
-                        </Button>
-                      </FlexColumn>
-                    )}
-                  </FlexRow>
-                  {(perioder[index].fom !== perioder[index].tom && (!harDeltOpp && fields.length > 1 && index > sistOppdeltePeriodeIndex)) && (
-                    <>
-                      <VerticalSpacer sixteenPx />
-                      <div className={styles.marginBtn}>
-                        <Button size="small" variant="tertiary" type="button" onClick={() => delOppPeriode(index)} icon={<Image src={splitPeriodImageUrl} />}>
-                          <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.DelOppPeriode" />
-                        </Button>
-                      </div>
-                      <VerticalSpacer eightPx />
-                    </>
                   )}
-                </FlexContainer>
-              )}
-              <VerticalSpacer twentyPx />
-              <RadioGroupPanel
-                name={`perioder.${index}.vurdering`}
-                label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Vurdering" />}
-                validate={[required]}
-                isReadOnly={readOnly}
-                isHorizontal
-                radios={vurderingsalternativer}
-              />
-            </React.Fragment>
-          );
-        })}
+                </FlexRow>
+                {(perioder[index].fom !== perioder[index].tom && fields.length > 1 && index === fields.length - 1) && (
+                  <>
+                    <VerticalSpacer sixteenPx />
+                    <div className={styles.marginBtn}>
+                      <Button
+                        size="small"
+                        variant="tertiary"
+                        type="button"
+                        onClick={() => settValgtPeriodeIndex(index)}
+                        icon={<Image src={splitPeriodImageUrl} />}
+                      >
+                        <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.DelOppPeriode" />
+                      </Button>
+                    </div>
+                    <VerticalSpacer eightPx />
+                  </>
+                )}
+              </FlexContainer>
+            )}
+            <VerticalSpacer twentyPx />
+            <RadioGroupPanel
+              name={`perioder.${index}.vurdering`}
+              label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Vurdering" />}
+              validate={[required]}
+              isReadOnly={readOnly}
+              isHorizontal
+              radios={vurderingsalternativer}
+            />
+          </React.Fragment>
+        ))}
         <VerticalSpacer fourtyPx />
         {!readOnly && (
           <FlexContainer>
@@ -278,11 +232,13 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
           </FlexContainer>
         )}
       </Form>
-      {visModalPeriode !== undefined && (
+      {valgtPeriodeIndex !== undefined && (
         <DelOppPeriodeModal
-          valgtDokBehov={valgtDokBehov}
-          submit={nullstillPerioder}
-          cancel={() => settVisModalForPeriode(undefined)}
+          periode={perioder[valgtPeriodeIndex]}
+          originalTom={valgtDokBehov.tom}
+          submit={(dato) => (valgtPeriodeIndex + 1 < fields.length ? oppdaterOgNullstillPerioder(dato) : lagNyPeriode(dato))}
+          cancel={() => settValgtPeriodeIndex(undefined)}
+          visSlettEtterfølgendePerioder={valgtPeriodeIndex < fields.length}
         />
       )}
     </>

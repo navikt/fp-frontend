@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import { useForm } from 'react-hook-form';
 import {
@@ -17,15 +17,28 @@ import advarselImageUrl from '@fpsak-frontend/assets/images/advarsel.svg';
 
 import styles from './delOppPeriodeModal.less';
 
+const validerInnenforIntervall = (
+  fom: string,
+  tom: string,
+  intl: IntlShape,
+) => (dato: string) => {
+  if (!dayjs(dato).isBefore(fom) && dayjs(dato).isBefore(tom)) {
+    return null;
+  }
+  return intl.formatMessage({ id: 'DelOppPeriodeModal.UgyldigDato' });
+};
+
 interface OwnProps {
-  valgtDokBehov: DokumentasjonVurderingBehov;
+  periode: DokumentasjonVurderingBehov;
+  originalTom: string;
   cancel: () => void;
   submit: (dato: string) => void;
   visSlettEtterfølgendePerioder: boolean;
 }
 
 const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({
-  valgtDokBehov,
+  periode,
+  originalTom,
   visSlettEtterfølgendePerioder,
   cancel,
   submit,
@@ -73,7 +86,7 @@ const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({
         </Label>
         <VerticalSpacer fourPx />
         <BodyShort size="small">
-          <PeriodLabel dateStringFom={valgtDokBehov.fom} dateStringTom={valgtDokBehov.tom} />
+          <PeriodLabel dateStringFom={periode.fom} dateStringTom={periode.tom} />
         </BodyShort>
         <VerticalSpacer twentyPx />
         <BodyShort size="small">
@@ -84,10 +97,10 @@ const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({
           <Datepicker
             name="dato"
             label={<FormattedMessage id="DelOppPeriodeModal.Dato" />}
-            validate={[required, hasValidDate]}
+            validate={[required, hasValidDate, validerInnenforIntervall(periode.fom, originalTom, intl)]}
             disabledDays={{
-              fromDate: dayjs(valgtDokBehov.fom, ISO_DATE_FORMAT).toDate(),
-              toDate: dayjs(valgtDokBehov.tom, ISO_DATE_FORMAT).subtract(1, 'day').toDate(),
+              fromDate: dayjs(periode.fom, ISO_DATE_FORMAT).toDate(),
+              toDate: dayjs(originalTom, ISO_DATE_FORMAT).subtract(1, 'day').toDate(),
             }}
           />
           <VerticalSpacer sixteenPx />
