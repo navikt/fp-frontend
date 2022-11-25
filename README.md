@@ -18,6 +18,71 @@ yarn dev
 yarn build
 ````
 
+## Innlogging og utlogging lokalt mot autotest
+
+Den lokale frontenden kjører på post 9100 for å logge seg inn må man kalle wonderwall på http://localhost:9000.
+
+Ved innlogging gå til http://localhost:9000 - loggin der med den brukeren du ønsker å teste med så fortsett å jobbe videre med den lokale frontenden på http://localhost:9100.
+
+Følgende test brukere er tilgjengelige. Navn/subject ved innlogging er irrelevant.
+
+* Sakbehandler
+  ```
+  {
+    "aud": ["fpfrontend"],
+    "sub": "saksbeh",
+    "NAVident": "saksbeh"
+  }
+  ```
+* Beslutter
+  ```
+  {
+    "aud": ["fpfrontend"],
+    "sub": "beslut",
+    "NAVident": "beslut"
+  }
+  ```
+* Overstyrer
+  ```
+  {
+    "aud": ["fpfrontend"],
+    "sub": "oversty",
+    "NAVident": "oversty"
+  }
+  ```
+* Veileder
+  ```
+  {
+    "aud": ["fpfrontend"],
+    "sub": "veil",
+    "NAVident": "veil"
+  }
+  ```
+* Klagebehandler
+  ```
+  {
+    "aud": ["fpfrontend"],
+    "sub": "klageb",
+    "NAVident": "klageb"
+  }
+  ```
+* Sakbehandler kode 6
+  ```
+  {
+    "aud": ["fpfrontend"],
+    "sub": "saksbeh6",
+    "NAVident": "saksbeh6"
+  }
+  ```
+* Sakbehandler kode 7
+  ```
+  {
+    "aud": ["fpfrontend"],
+    "sub": "saksbeh7",
+    "NAVident": "saksbeh7"
+  }
+  ```
+
 #### TODO
 * velge namespace, bruker scoped nå(@fpsak-frontend)
 * Sette opp lerna publish for de pakkene som skal være åpne

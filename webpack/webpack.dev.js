@@ -75,7 +75,9 @@ const config = {
         throw new Error('webpack-dev-server is not defined');
       }
       const port = devServer.server.address().port;
-      console.log(`Listening at http://localhost:${port}/`);
+      console.log(`Local frontend listening at http://localhost:${port}`);
+      console.log(`For login go to http://localhost:9000`);
+      console.log(`For logout go to http://localhost:9000/logout`);
     },
     proxy: [
       {
