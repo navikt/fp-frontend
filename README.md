@@ -20,9 +20,9 @@ yarn build
 
 ## Innlogging og utlogging lokalt mot autotest
 
-Den lokale frontenden kjører på post 9100 for å logge seg inn må man kalle wonderwall på http://localhost:9000.
+Den lokale frontenden kjører på port 9100, for å logge seg inn må man kalle wonderwall på http://localhost:9000/oauth2/login?redirect=http://localhost:9100.
 
-Ved innlogging gå til http://localhost:9000 - loggin der med den brukeren du ønsker å teste med så fortsett å jobbe videre med den lokale frontenden på http://localhost:9100.
+Ved innlogging gå til http://localhost:9000 - logg inn der med den brukeren du ønsker å teste med, så fortsett å jobbe videre med den lokale frontenden på http://localhost:9100.
 
 Følgende test brukere er tilgjengelige. Navn/subject ved innlogging er irrelevant.
 
