@@ -75,11 +75,13 @@ const config = {
         throw new Error('webpack-dev-server is not defined');
       }
       const port = devServer.server.address().port;
-      console.log(`Listening at http://localhost:${port}/`);
+      console.log(`Local frontend listening at http://localhost:${port}`);
+      console.log(`For login go to http://localhost:9000/oauth2/login?redirect=http://localhost:${port}`);
+      console.log(`For logout go to http://localhost:9000/logout`);
     },
     proxy: [
       {
-        //context: ['/fpoppdrag/api', '/fptilbake/api', '/fplos/api', '/fpsak/api', '/fpformidling/api'],
+        // Redirect alt til autotest serveren
         context: () => true,
         target: process.env.BACKEND_URL || 'http://127.0.0.1:9000',
         secure: false,

@@ -46,6 +46,9 @@ spec:
     sidecar:
       enabled: true
       autoLogin: true
+      autoLoginIgnorePaths:
+        - /health/*
+        - /logout
   accessPolicy:
     outbound:
       external:
