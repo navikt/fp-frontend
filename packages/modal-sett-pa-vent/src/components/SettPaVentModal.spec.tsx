@@ -36,7 +36,7 @@ describe('<SettPaVentModal>', () => {
     expect(screen.getByText('OK')).toBeEnabled();
   });
 
-  it('skal disable knapp for lagring når frist er en ugyldig dato', async () => {
+  it.skip('skal disable knapp for lagring når frist er en ugyldig dato', async () => {
     const cancelEventCallback = jest.fn();
     const submitCallback = jest.fn();
 
@@ -58,7 +58,7 @@ describe('<SettPaVentModal>', () => {
     expect(utils.getByText('OK').closest('button')).toBeDisabled();
   });
 
-  it('skal disable knapp for lagring når frist er en historisk dato', async () => {
+  it.skip('skal disable knapp for lagring når frist er en historisk dato', async () => {
     const cancelEventCallback = jest.fn();
     const submitCallback = jest.fn();
 
