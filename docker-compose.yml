@@ -99,7 +99,7 @@ services:
     restart: on-failure
     container_name: frontend
     healthcheck:
-      test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9090/isReady" ]
+      test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9090/health/isReady" ]
       interval: 15s
       timeout: 10s
       retries: 10

@@ -57,7 +57,7 @@ const proxyOptions = (api) => ({
     const melding = `${statusCode} ${proxyRes.statusMessage}: ${userReq.method} - ${userReq.originalUrl} (${requestTime}ms)`;
     const callIdValue = proxyReq.getHeader(xNavCallId);
     if (statusCode >= 500) {
-      logger.warning(melding, { message: callIdValue});
+      logger.warning(melding, { message: callIdValue });
     } else {
       logger.info(melding);
     }
