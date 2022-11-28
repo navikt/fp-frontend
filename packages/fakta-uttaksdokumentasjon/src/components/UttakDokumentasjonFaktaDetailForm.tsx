@@ -140,6 +140,9 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
             )}
             {fields.length > 1 && (
               <FlexContainer>
+                <Label size="medium">
+                  <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.PeriodeMedIndex" values={{ index: index + 1 }} />
+                </Label>
                 <FlexRow>
                   <FlexColumn>
                     <Label size="small"><FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Fom" /></Label>

@@ -47,6 +47,7 @@
   "UttakDokumentasjonFaktaDetailForm.IkkeGodkjent": "Ikke godkjent",
   "UttakDokumentasjonFaktaDetailForm.IkkeDokumentert": "Mangler dokumentasjon",
   "UttakDokumentasjonFaktaDetailForm.RedigerPeriode": "Rediger periode",
+  "UttakDokumentasjonFaktaDetailForm.PeriodeMedIndex": "Periode {index}",
 
   "DelOppPeriodeModal.Periode": "Periode",
   "DelOppPeriodeModal.RedigerPeriode": "Vil du redigere periode?",
