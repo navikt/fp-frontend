@@ -7,7 +7,6 @@ type KontrollerAktivitetskravAp = {
     fom: string;
     tom: string;
     avklaring: string;
-    begrunnelse: string;
   }[];
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.KONTROLLER_AKTIVITETSKRAV>
 

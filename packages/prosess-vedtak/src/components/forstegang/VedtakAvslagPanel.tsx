@@ -4,7 +4,7 @@ import { Label, BodyShort } from '@navikt/ds-react';
 
 import { AlleKodeverk, Vilkar, Behandlingsresultat } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { getKodeverknavnFn } from '@navikt/ft-utils';
+import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';

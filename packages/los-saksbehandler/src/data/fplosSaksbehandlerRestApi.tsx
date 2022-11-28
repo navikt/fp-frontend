@@ -1,9 +1,8 @@
-import { AlleKodeverk } from '@navikt/ft-types';
 import {
   RestApiConfigBuilder, createRequestApi, RestKey,
 } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
-import { FagsakEnkel } from '@fpsak-frontend/types';
+import { FagsakEnkel, AlleKodeverk } from '@fpsak-frontend/types';
 
 import SaksbehandlerForFlytting from '../typer/saksbehandlerForFlyttingTsType';
 import OppgaveStatus from '../typer/oppgaveStatusTsType';

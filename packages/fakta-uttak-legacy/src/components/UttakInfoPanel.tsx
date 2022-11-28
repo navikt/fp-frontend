@@ -8,7 +8,7 @@ import behandlingStatuser from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, FaktaArbeidsforhold, FamilieHendelseSamling, AlleKodeverk,
   Personoversikt,
-  UttakKontrollerFaktaPerioder, Ytelsefordeling,
+  UttakKontrollerFaktaPerioderLegacy, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { FaktaUttakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -29,7 +29,7 @@ const getErManueltOpprettet = (behandlingArsaker: Behandling['behandlingÅrsaker
 
 const getErArsakTypeHendelseFodsel = (behandlingArsakTyper: string[] = []): boolean => behandlingArsakTyper.some((bt) => bt === 'RE-HENDELSE-FØDSEL');
 
-const sortUttaksperioder = (p1: UttakKontrollerFaktaPerioder, p2: UttakKontrollerFaktaPerioder): number => moment(p1.tom).diff(moment(p2.tom));
+const sortUttaksperioder = (p1: UttakKontrollerFaktaPerioderLegacy, p2: UttakKontrollerFaktaPerioderLegacy): number => moment(p1.tom).diff(moment(p2.tom));
 
 interface OwnProps {
   submitCallback: (data: FaktaUttakAp[]) => Promise<void>;
@@ -39,7 +39,7 @@ interface OwnProps {
   behandlingArsaker: Behandling['behandlingÅrsaker'];
   behandlingStatus: string;
   ytelsefordeling: Ytelsefordeling;
-  uttakPerioder: UttakKontrollerFaktaPerioder[];
+  uttakPerioder: UttakKontrollerFaktaPerioderLegacy[];
   alleKodeverk: AlleKodeverk;
   kanOverstyre: boolean;
   faktaArbeidsforhold: FaktaArbeidsforhold[];

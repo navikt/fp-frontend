@@ -7,14 +7,15 @@ import {
   useIntl, FormattedMessage, IntlShape,
 } from 'react-intl';
 import { Label, BodyShort } from '@navikt/ds-react';
-import { DDMMYYYY_DATE_FORMAT, getKodeverknavnFraKode } from '@navikt/ft-utils';
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import {
   Image, FlexContainer, FlexRow, FlexColumn, VerticalSpacer, LabelWithHeader,
 } from '@navikt/ft-ui-komponenter';
 import { Form, SelectField } from '@navikt/ft-form-hooks';
-import { AlleKodeverk } from '@navikt/ft-types';
-import { KodeverkType } from '@navikt/ft-kodeverk';
 
+import { AlleKodeverk } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { getKodeverknavnFraKode } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
 import gruppeHoverUrl from '@fpsak-frontend/assets/images/gruppe_hover.svg';
 import gruppeUrl from '@fpsak-frontend/assets/images/gruppe.svg';
 

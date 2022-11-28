@@ -80,7 +80,7 @@ export type { default as Risikoklassifisering } from './src/risikoklassifisering
 export type { default as AnkeVurdering } from './src/ankeVurderingTsType';
 export type { default as KlageVurdering, KlageVurderingResultat } from './src/klageVurderingTsType';
 export type { default as Innsyn, InnsynDokument, InnsynVedtaksdokument } from './src/innsynTsType';
-export type { default as UttakKontrollerFaktaPerioderWrapper, UttakKontrollerFaktaPerioder } from './src/uttakKontrollerFaktaPerioderTsType';
+export type { default as UttakKontrollerFaktaPerioderWrapper, UttakKontrollerFaktaPerioderLegacy } from './src/uttakKontrollerFaktaPerioderLegacyTsType';
 export type {
   default as Opptjening, OpptjeningAktivitet, FastsattOpptjening, FastsattOpptjeningAktivitet,
 } from './src/opptjeningTsType';
@@ -93,11 +93,13 @@ export type {
 export type { default as ArbeidsgiverOpplysningerPerId, ArbeidsgiverOpplysningerWrapper, ArbeidsgiverOpplysninger } from './src/arbeidsgiverOpplysningerTsType';
 export type { default as BeregningsresultatTilbakekreving, BeregningResultatPeriode } from './src/beregningsresultatTilbakekrevingTsType';
 export type { default as UttakKontrollerAktivitetskrav } from './src/uttakKontrollerAktivitetskravTsType';
+export type { default as Aktivitetskrav } from './src/aktivitetskravTsType';
 export type { default as Aktor } from './src/aktorTsType';
 export type { Kjønnkode } from './src/Kjonnkode';
 export { KjønnkodeEnum } from './src/Kjonnkode';
 export type { default as Personoversikt, PersonopplysningerBasis } from './src/personoversiktTsType';
 export type { default as Personadresse } from './src/personadresseTsType';
+export type { default as KontrollerFaktaPeriode } from './src/kontrollerFaktaPeriode';
 export type { default as AksessRettigheter, Aksess } from './src/aksessRettigheterTsType';
 export type { default as StandardFaktaPanelProps } from './src/standardFaktaPanelPropsTsType';
 export type { default as StandardFaktaPanelPropsTilbakekreving } from './src/standardFaktaPanelPropsTilbakekrevingTsType';
@@ -107,6 +109,8 @@ export type { default as Verge } from './src/vergeTsType';
 export type { default as ForhåndsvisMeldingParams } from './src/forhåndsvisMeldingParamsTsType';
 export type { default as ManueltArbeidsforhold } from './src/manueltArbeidsforholdTsType';
 export type { default as ManglendeInntektsmeldingVurdering } from './src/manglendeInntektsmeldingVurderingTsType';
+export type { default as DokumentasjonVurderingBehov } from './src/dokumentasjonVurderingBehovTsType';
+export { UttakType, UttakVurdering, UttakÅrsak } from './src/dokumentasjonVurderingBehovTsType';
 export type { default as VilkarsVurdertePerioderWrapper, VilkarsVurdertPeriode, AktsomhetInfo } from './src/vilkarsVurdertePerioderTsType';
 export type {
   default as ArbeidOgInntektsmelding, Inntekt, Arbeidsforhold as AoIArbeidsforhold, Inntektsmelding, Inntektspost,

@@ -1,8 +1,9 @@
 import React, {
   createContext, FunctionComponent, ReactElement, useMemo,
 } from 'react';
-import { AlleKodeverk } from '@navikt/ft-types';
-import { Fagsak, Behandling, AksessRettigheter } from '@fpsak-frontend/types';
+import {
+  AlleKodeverk, Fagsak, Behandling, AksessRettigheter,
+} from '@fpsak-frontend/types';
 
 type InputValues = {
   behandling: Behandling;

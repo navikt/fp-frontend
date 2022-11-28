@@ -4,7 +4,7 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  AlleKodeverk, FamilieHendelseSamling, Personoversikt, UttakKontrollerFaktaPerioder, Ytelsefordeling,
+  AlleKodeverk, FamilieHendelseSamling, Personoversikt, UttakKontrollerFaktaPerioderLegacy, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 
@@ -83,7 +83,7 @@ describe('<UttakFaktaForm>', () => {
         behandlingStatus={behandlingStatus.OPPRETTET}
         familiehendelse={{} as FamilieHendelseSamling}
         vilkarForSykdomExists
-        uttakPerioder={{} as UttakKontrollerFaktaPerioder[]}
+        uttakPerioder={{} as UttakKontrollerFaktaPerioderLegacy[]}
         ytelsefordeling={{} as Ytelsefordeling}
         submitCallback={() => undefined}
         validate={() => undefined}

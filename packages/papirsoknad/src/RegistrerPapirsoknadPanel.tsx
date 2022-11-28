@@ -2,12 +2,11 @@ import React, { FunctionComponent, useCallback, useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { Heading, Panel } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
-import { AlleKodeverk } from '@navikt/ft-types';
 import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { SoknadData } from '@fpsak-frontend/papirsoknad-ui-komponenter';
-import { Fagsak } from '@fpsak-frontend/types';
+import { AlleKodeverk, Fagsak } from '@fpsak-frontend/types';
 
 import EngangsstonadPapirsoknadIndex from './engangsstonad/EngangsstonadPapirsoknadIndex';
 import ForeldrepengerPapirsoknadIndex from './foreldrepenger/ForeldrepengerPapirsoknadIndex';

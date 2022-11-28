@@ -9,7 +9,7 @@ import {
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import { ISO_DATE_FORMAT, getKodeverknavnFn } from '@navikt/ft-utils';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { required } from '@navikt/ft-form-validators';
 import {
   DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
@@ -17,6 +17,7 @@ import {
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
+import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
 import {
   ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew,
 } from '@fpsak-frontend/prosess-felles';

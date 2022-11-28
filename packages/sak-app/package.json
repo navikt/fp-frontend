@@ -24,6 +24,8 @@
     "@fpsak-frontend/fakta-permisjon": "1.0.0",
     "@fpsak-frontend/fakta-saken": "1.0.0",
     "@fpsak-frontend/fakta-uttak": "1.0.0",
+    "@fpsak-frontend/fakta-uttak-legacy": "1.0.0",
+    "@fpsak-frontend/fakta-uttaksdokumentasjon": "1.0.0",
     "@fpsak-frontend/fakta-verge": "1.0.0",
     "@fpsak-frontend/fakta-ytelser": "1.0.0",
     "@fpsak-frontend/kodeverk": "1.0.0",

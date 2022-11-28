@@ -13,9 +13,8 @@ import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   Table, TableColumn, TableRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import {
-  DDMMYYYY_DATE_FORMAT, isObject, getKodeverknavnFn,
-} from '@navikt/ft-utils';
+import { DDMMYYYY_DATE_FORMAT, isObject } from '@navikt/ft-utils';
+import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
 import { required } from '@navikt/ft-form-validators';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';

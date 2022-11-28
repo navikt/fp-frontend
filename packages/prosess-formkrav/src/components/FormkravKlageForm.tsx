@@ -13,10 +13,11 @@ import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import {
   AksjonspunktHelpTextTemp, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import { DATE_TIME_FORMAT, getKodeverknavnFn } from '@navikt/ft-utils';
+import { DATE_TIME_FORMAT } from '@navikt/ft-utils';
 import { required } from '@navikt/ft-form-validators';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AlleKodeverk, KlageVurdering } from '@fpsak-frontend/types';
+import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
 
 import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
 import styles from './formkravKlageForm.less';

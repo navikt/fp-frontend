@@ -18,12 +18,14 @@ export { default as BekreftTerminbekreftelseAp } from './src/fakta/BekreftTermin
 export { default as SjekkManglendeFodselAp } from './src/fakta/SjekkManglendeFodselAp';
 export { default as AvklarAnnenforelderHarRettAp } from './src/fakta/AvklarAnnenforelderHarRettAp';
 export { default as FaktaUttakAp } from './src/fakta/FaktaUttakAp';
+export { default as BekreftUttaksperioderAp } from './src/fakta/BekreftUttaksperioderAp';
 export { default as VurderArbeidsforholdPermisjonAp } from './src/fakta/VurderArbeidsforholdPermisjonAp';
 export { default as OverstyringAvklarStartdatoForPeriodenAp } from './src/fakta/OverstyringAvklarStartdatoForPeriodenAp';
 export { default as VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp } from './src/fakta/VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp';
 export { default as AvklarFaktaForForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForForeldreansvarAksjonspunktAp';
 export { default as AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp';
 export { default as AvklarAktivitetsPerioderAp, OpptjeningAktivitetAp } from './src/fakta/AvklarAktivitetsPerioderAp';
+export { default as VurderDokumentasjonAp } from './src/fakta/VurderDokumentasjonAp';
 
 export { default as ProsessAksjonspunkt } from './src/ProsessAksjonspunkt';
 export { default as BekreftSvangerskapspengervilkarAp } from './src/prosess/BekreftSvangerskapspengervilkarAp';

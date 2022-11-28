@@ -12,9 +12,8 @@ import {
 import {
   Aksjonspunkt,
   AlleKodeverkTilbakekreving,
-  AlleKodeverk,
 } from '@navikt/ft-types';
-import { Behandling, AksessRettigheter } from '@fpsak-frontend/types';
+import { Behandling, AksessRettigheter, AlleKodeverk } from '@fpsak-frontend/types';
 import { FeilutbetalingAksjonspunktCode } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
