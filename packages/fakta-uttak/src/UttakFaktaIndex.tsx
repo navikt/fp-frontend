@@ -1,66 +1,62 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
+import { createIntl } from '@navikt/ft-utils';
 
 import {
-  ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps, FaktaArbeidsforhold, FamilieHendelseSamling,
-  Personoversikt, UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
+  KontrollerFaktaPeriode, Ytelsefordeling, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, Aksjonspunkt, AlleKodeverk,
 } from '@fpsak-frontend/types';
-import { createIntl } from '@navikt/ft-utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
+import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
-import UttakInfoPanel from './components/UttakInfoPanel';
+import UttakFaktaForm from './components/UttakFaktaForm';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
 interface OwnProps {
   ytelsefordeling: Ytelsefordeling;
-  personoversikt: Personoversikt;
-  familiehendelse: FamilieHendelseSamling;
-  uttakKontrollerFaktaPerioder: UttakKontrollerFaktaPerioderWrapper;
+  uttakKontrollerFaktaPerioder: KontrollerFaktaPeriode[];
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
   kanOverstyre: boolean;
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  aksjonspunkter: Aksjonspunkt[];
+  readOnly: boolean;
+  submittable: boolean;
+  submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
+  alleKodeverk: AlleKodeverk;
+  formData?: any,
+  setFormData: (data: any) => void,
 }
 
-const UttakFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
-  behandling,
+const UttakFaktaIndex: FunctionComponent<OwnProps> = ({
   aksjonspunkter,
   submitCallback,
   ytelsefordeling,
   uttakKontrollerFaktaPerioder,
-  alleKodeverk,
+  arbeidsgiverOpplysningerPerId,
   faktaArbeidsforhold,
-  personoversikt,
-  familiehendelse,
+  alleKodeverk,
   readOnly,
   kanOverstyre,
-  arbeidsgiverOpplysningerPerId,
   submittable,
   formData,
   setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <ReduxWrapper formName="UttakFaktaIndex" formData={formData} setFormData={setFormData}>
-      <UttakInfoPanel
-        behandlingType={behandling.type}
-        behandlingArsaker={behandling.behandlingÅrsaker}
-        behandlingStatus={behandling.status}
-        behandlingPaaVent={behandling.behandlingPaaVent}
-        ytelsefordeling={ytelsefordeling}
-        uttakPerioder={uttakKontrollerFaktaPerioder.perioder}
-        alleKodeverk={alleKodeverk}
-        faktaArbeidsforhold={faktaArbeidsforhold}
-        aksjonspunkter={aksjonspunkter}
-        submitCallback={submitCallback}
-        readOnly={readOnly}
-        kanOverstyre={kanOverstyre}
-        personoversikt={personoversikt}
-        familiehendelse={familiehendelse}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        submittable={submittable}
-      />
-    </ReduxWrapper>
+    <UttakFaktaForm
+      ytelsefordeling={ytelsefordeling}
+      uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioder}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      faktaArbeidsforhold={faktaArbeidsforhold}
+      alleKodeverk={alleKodeverk}
+      aksjonspunkter={aksjonspunkter}
+      submittable={submittable}
+      formData={formData}
+      setFormData={setFormData}
+      readOnly={readOnly}
+      submitCallback={submitCallback}
+      kanOverstyre={kanOverstyre}
+    />
   </RawIntlProvider>
 );
 

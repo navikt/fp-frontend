@@ -8,9 +8,10 @@ import moment from 'moment';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { RadioGroupField, RadioOption, DatepickerField } from '@fpsak-frontend/form';
 import { required, hasValidDate } from '@navikt/ft-form-validators';
-import { getKodeverknavnFn, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import opptjeningAktivitetTyper from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
+import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
 
 import {
   Table, TableRow, TableColumn, PeriodLabel, DateLabel, EditedIcon,

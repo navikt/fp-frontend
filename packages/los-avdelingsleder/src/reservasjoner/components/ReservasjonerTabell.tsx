@@ -3,13 +3,14 @@ import React, {
 } from 'react';
 import { Label, BodyShort } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
-import { AlleKodeverk } from '@navikt/ft-types';
-import { KodeverkType } from '@navikt/ft-kodeverk';
 import {
   Table, TableRow, TableColumn, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import { getDateAndTime, getKodeverknavnFraKode } from '@navikt/ft-utils';
+import { getDateAndTime } from '@navikt/ft-utils';
 
+import { AlleKodeverk } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { getKodeverknavnFraKode } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
 import removeIcon from '@fpsak-frontend/assets/images/remove.svg';
 import gruppeHoverUrl from '@fpsak-frontend/assets/images/gruppe_hover.svg';
 import gruppeUrl from '@fpsak-frontend/assets/images/gruppe.svg';

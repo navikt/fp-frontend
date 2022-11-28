@@ -1,10 +1,11 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
-import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
-import { KodeverkType } from '@navikt/ft-kodeverk';
+import { KodeverkMedNavn } from '@navikt/ft-types';
 import { omitOne } from '@navikt/ft-utils';
 
+import { AlleKodeverk } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 import {

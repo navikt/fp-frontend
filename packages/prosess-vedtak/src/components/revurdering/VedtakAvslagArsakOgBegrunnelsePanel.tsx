@@ -11,11 +11,11 @@ import { TextAreaField, formHooks } from '@navikt/ft-form-hooks';
 import {
   hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew,
 } from '@navikt/ft-form-validators';
-import {
-  decodeHtmlEntity, getLanguageFromSprakkode, getKodeverknavnFn,
-} from '@navikt/ft-utils';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { decodeHtmlEntity, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import { hasIkkeOppfyltSoknadsfristvilkar } from '../felles/VedtakHelper';
 

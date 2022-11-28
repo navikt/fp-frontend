@@ -1,5 +1,5 @@
 import {
-  Aktor, AlleKodeverk, AlleKodeverkTilbakekreving, Behandling, Dokument,
+  Aktor, AlleKodeverkTilbakekreving, Behandling, Dokument,
 } from '@navikt/ft-types';
 
 import {
@@ -7,7 +7,7 @@ import {
 } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import {
-  ForhåndsvisMeldingParams, FagsakEnkel, Fagsak, FagsakDataFpTilbake, NavAnsatt,
+  ForhåndsvisMeldingParams, FagsakEnkel, Fagsak, FagsakDataFpTilbake, NavAnsatt, AlleKodeverk,
 } from '@fpsak-frontend/types';
 
 type BehandlendeEnheter = {

@@ -6,14 +6,17 @@ import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
   DateLabel, PeriodLabel, Table, TableColumn, TableRow, VerticalSpacer, FaktaGruppe, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
-import { DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@navikt/ft-utils';
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { required } from '@navikt/ft-form-validators';
-import { Aksjonspunkt, AlleKodeverk } from '@navikt/ft-types';
+import { Aksjonspunkt } from '@navikt/ft-types';
 
+import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { MedlemPeriode, Medlemskap, Soknad } from '@fpsak-frontend/types';
+import {
+  MedlemPeriode, Medlemskap, Soknad, AlleKodeverk,
+} from '@fpsak-frontend/types';
 
 const headerTextCodes = [
   'PerioderMedMedlemskapFaktaPanel.Period',

@@ -1,5 +1,8 @@
-import { KodeverkMedNavn, AlleKodeverk, AlleKodeverkTilbakekreving } from '@navikt/ft-types';
-import { BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
+import { KodeverkMedNavn, AlleKodeverkTilbakekreving } from '@navikt/ft-types';
+import { BehandlingType } from '@navikt/ft-kodeverk';
+
+import { AlleKodeverk } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import { FpsakApiKeys, restApiHooks } from './fpsakApi';
 

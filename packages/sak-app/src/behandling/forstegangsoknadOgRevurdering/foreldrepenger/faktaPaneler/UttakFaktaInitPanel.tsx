@@ -7,8 +7,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import UttakFaktaIndex from '@fpsak-frontend/fakta-uttak';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import {
-  AksessRettigheter, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelseSamling,
-  Personoversikt, UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
+  AksessRettigheter, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, KontrollerFaktaPeriode, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
@@ -17,42 +16,37 @@ import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 import { FpBehandlingApiKeys } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
-  aksjonspunktCodes.AVKLAR_UTTAK,
-  aksjonspunktCodes.AVKLAR_FØRSTE_UTTAKSDATO,
-  aksjonspunktCodes.MANUELL_AVKLAR_FAKTA_UTTAK,
-  aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK,
-  aksjonspunktCodes.AVKLAR_FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET,
-  aksjonspunktCodes.AVKLAR_FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG,
+  aksjonspunktCodes.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
+  aksjonspunktCodes.FAKTA_UTTAK_INGEN_PERIODER_KODE,
+  aksjonspunktCodes.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
+  aksjonspunktCodes.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
+  aksjonspunktCodes.OVERSTYR_FAKTA_UTTAK,
 ];
 
-const OVERSTYRING_AP_CODES = [aksjonspunktCodes.MANUELL_AVKLAR_FAKTA_UTTAK, aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK];
+const OVERSTYRING_AP_CODES = [aksjonspunktCodes.OVERSTYR_FAKTA_UTTAK];
 
 const ENDEPUNKTER_PANEL_DATA = [
-  FpBehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER,
+  FpBehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER_V2,
   FpBehandlingApiKeys.FAKTA_ARBEIDSFORHOLD,
-  BehandlingFellesApiKeys.FAMILIEHENDELSE,
   BehandlingFellesApiKeys.YTELSEFORDELING,
 ];
 type EndepunktPanelData = {
-  uttakKontrollerFaktaPerioder: UttakKontrollerFaktaPerioderWrapper;
+  uttakKontrollerFaktaPerioderV2: KontrollerFaktaPeriode[];
   faktaArbeidsforhold: FaktaArbeidsforhold[];
-  familiehendelse: FamilieHendelseSamling;
   ytelsefordeling: Ytelsefordeling;
 }
 
 interface OwnProps {
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   rettigheter: AksessRettigheter;
-  personoversikt: Personoversikt;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 /**
  * UttakFaktaInitPanel
  */
 const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
-  arbeidsgiverOpplysningerPerId,
   rettigheter,
-  personoversikt,
+  arbeidsgiverOpplysningerPerId,
   ...props
 }) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
@@ -62,13 +56,13 @@ const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = (
     overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={FaktaPanelCode.UTTAK}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'UttakInfoPanel.FaktaUttak' })}
-    skalPanelVisesIMeny={() => props.behandling.harSattEndringsdato}
+    skalPanelVisesIMeny={() => props.behandling.harSattEndringsdato && props.requestApi.hasPath(FpBehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER_V2.name)}
     renderPanel={(data) => (
       <UttakFaktaIndex
         kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        personoversikt={personoversikt}
         {...data}
+        uttakKontrollerFaktaPerioder={data.uttakKontrollerFaktaPerioderV2}
       />
     )}
   />

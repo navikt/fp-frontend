@@ -3,11 +3,13 @@ import React, {
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Heading, Button } from '@navikt/ds-react';
-import { Aksjonspunkt, AlleKodeverk } from '@navikt/ft-types';
+import { Aksjonspunkt } from '@navikt/ft-types';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
-import { Medlemskap, Soknad, MedlemPeriode } from '@fpsak-frontend/types';
+import {
+  AlleKodeverk, Medlemskap, Soknad, MedlemPeriode,
+} from '@fpsak-frontend/types';
 import {
   AvklarFortsattMedlemskapAp, BekreftBosattVurderingAp, BekreftErMedlemVurderingAp, BekreftLovligOppholdVurderingAp,
   BekreftOppholdsrettVurderingAp, OverstyringAvklarStartdatoForPeriodenAp,

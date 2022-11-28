@@ -4,8 +4,9 @@ import moment from 'moment';
 import { Label, BodyShort } from '@navikt/ds-react';
 
 import { ArbeidsgiverOpplysningerPerId, FeriepengegrunnlagAndel, AlleKodeverk } from '@fpsak-frontend/types';
-import { DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@navikt/ft-utils';
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 
 const finnAlleAndelerForOpptjeningsår = (andeler: FeriepengegrunnlagAndel[],

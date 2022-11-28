@@ -1,8 +1,8 @@
-import { AlleKodeverk } from '@navikt/ft-types';
 import {
   RestApiConfigBuilder, createRequestApi, RestKey,
 } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import Avdeling from '../typer/avdelingTsType';
 import SakslisteAvdeling from '../typer/sakslisteAvdelingTsType';

@@ -2,7 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
-import { AlleKodeverk } from '@navikt/ft-types';
+
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import PermisjonPanel, { FormValues } from './components/PermisjonPanel';
 import messages from '../../i18n/nb_NO.json';

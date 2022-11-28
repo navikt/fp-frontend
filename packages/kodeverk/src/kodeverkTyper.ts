@@ -70,6 +70,7 @@ enum KodeverkType {
   AKTIVITETSKRAV_AVKLARING = 'KontrollerAktivitetskravAvklaring',
   OPPHOLDSTILLATELSE_TYPE = 'OppholdstillatelseType',
   FARESIGNAL_VURDERING = 'FaresignalVurdering',
+  FORDELING_PERIODE_KILDE = 'FordelingPeriodeKilde',
 }
 
 export default KodeverkType;

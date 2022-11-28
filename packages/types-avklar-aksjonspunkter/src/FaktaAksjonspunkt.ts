@@ -19,12 +19,14 @@ import AvklarFortsattMedlemskapAp from './fakta/AvklarFortsattMedlemskapAp';
 import BekreftTerminbekreftelseAp from './fakta/BekreftTerminbekreftelseAp';
 import SjekkManglendeFodselAp from './fakta/SjekkManglendeFodselAp';
 import FaktaUttakAp from './fakta/FaktaUttakAp';
+import BekreftUttaksperioderAp from './fakta/BekreftUttaksperioderAp';
 import AvklarAnnenforelderHarRettAp from './fakta/AvklarAnnenforelderHarRettAp';
 import VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp from './fakta/VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp';
 import BekreftOppholdsrettVurderingAp from './fakta/BekreftOppholdsrettVurderingAp';
 import OverstyringAvklarStartdatoForPeriodenAp from './fakta/OverstyringAvklarStartdatoForPeriodenAp';
 import KontrollerBesteberegningAP from './fakta/KontrollerBesteberegningAP';
 import BeregningAktivitetAP from './fakta/BeregningAktivitetAP';
+import VurderDokumentasjonAp from './fakta/VurderDokumentasjonAp';
 import BeregningFaktaAP, { BeregningOverstyringAP } from './fakta/BeregningFaktaAP';
 import VurderArbeidsforholdInntektsmeldingAp from './fakta/VurderArbeidsforholdInntektsmeldingAp';
 import VurderArbeidsforholdPermisjonAp from './fakta/VurderArbeidsforholdPermisjonAp';
@@ -49,6 +51,7 @@ export type FaktaAksjonspunkt = AvklarVergeAp
   | SjekkManglendeFodselAp
   | AvklarAnnenforelderHarRettAp
   | FaktaUttakAp
+  | BekreftUttaksperioderAp
   | VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp
   | OverstyringAvklarStartdatoForPeriodenAp
   | AvklarFaktaForForeldreansvarAksjonspunktAp
@@ -60,6 +63,7 @@ export type FaktaAksjonspunkt = AvklarVergeAp
   | VurderRefusjonBeregningsgrunnlagAP
   | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp
   | VurderArbeidsforholdInntektsmeldingAp
+  | VurderDokumentasjonAp
   | VurderArbeidsforholdPermisjonAp;
 
 export default FaktaAksjonspunkt;
