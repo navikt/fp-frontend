@@ -21,7 +21,8 @@ const Template: Story<{ visSlettEtterfølgendePerioder?: boolean }> = ({ visSlet
   <DelOppPeriodeModal
     submit={action('button-click')}
     cancel={action('button-click')}
-    valgtDokBehov={{
+    originalTom="2022-11-07"
+    periode={{
       fom: '2022-11-01',
       tom: '2022-11-07',
       type: UttakType.UTSETTELSE,
