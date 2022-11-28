@@ -238,7 +238,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
           originalTom={valgtDokBehov.tom}
           submit={(dato) => (valgtPeriodeIndex + 1 < fields.length ? oppdaterOgNullstillPerioder(dato) : lagNyPeriode(dato))}
           cancel={() => settValgtPeriodeIndex(undefined)}
-          visSlettEtterfølgendePerioder={valgtPeriodeIndex < fields.length}
+          visSlettEtterfølgendePerioder={valgtPeriodeIndex < fields.length - 1}
         />
       )}
     </>

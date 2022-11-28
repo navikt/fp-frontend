@@ -102,6 +102,7 @@ const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({
               fromDate: dayjs(periode.fom, ISO_DATE_FORMAT).toDate(),
               toDate: dayjs(originalTom, ISO_DATE_FORMAT).subtract(1, 'day').toDate(),
             }}
+            strategy="fixed"
           />
           <VerticalSpacer sixteenPx />
           <FlexContainer>
