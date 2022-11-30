@@ -79,15 +79,13 @@ const config = {
       console.log(`For login go to http://localhost:9000/oauth2/login?redirect=http://localhost:${port}`);
       console.log(`For logout go to http://localhost:9000/logout`);
     },
-    proxy: [
-      {
-        // Redirect alt til autotest serveren
-        context: () => true,
-        target: process.env.BACKEND_URL || 'http://127.0.0.1:9000',
+    proxy: {
+      '**/api/**': {
+        target: 'http://localhost:9000',
         secure: false,
-        changeOrigin: (!!process.env.BACKEND_URL),
-      }
-    ],
+        changeOrigin: false,
+      },
+    },
     devMiddleware: {
       publicPath: PUBLIC_PATH,
       stats: {
