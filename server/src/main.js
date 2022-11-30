@@ -45,6 +45,7 @@ async function startApp() {
             objectSrc: ["'none'"],
           },
         },
+        referrerPolicy: { policy: 'origin' },
         hidePoweredBy: true,
         noSniff: true,
       }),

@@ -12,6 +12,7 @@ const xTimestamp = 'x-Timestamp';
 const stripTrailingSlash = (str) => (str.endsWith('/') ? str.slice(0, -1) : str);
 
 const proxyOptions = (api) => ({
+  timeout: 10000,
   proxyReqOptDecorator: (options, req) => {
     if (req.headers[xNavCallId]) {
       options.headers[xNavCallId] = req.headers[xNavCallId];
@@ -45,7 +46,7 @@ const proxyOptions = (api) => ({
     logger.info(`Proxying request from '${req.originalUrl}' to '${stripTrailingSlash(urlFromApi.href)}${newPath}'`);
     return newPath;
   },
-  userResHeaderDecorator: function (headers, userReq, userRes, proxyReq, proxyRes) {
+  userResHeaderDecorator: (headers, userReq, userRes, proxyReq, proxyRes) => {
     // FPSAK og TILBAKE sender er redirect med full hostname - dette må man modifisere slik at det går tilbake via proxy.
     const location = proxyRes.headers.location;
     if (location && location.includes(api.url)) {
@@ -62,6 +63,14 @@ const proxyOptions = (api) => ({
       logger.info(melding);
     }
     return headers;
+  },
+  proxyErrorHandler: function(err, res, next) {
+    switch (err && err.code) {
+      case 'ENOTFOUND': { logger.warning(`${err}, with code: ${err.code}`); return res.status(404).send(); }
+      case 'ECONNRESET': { return res.status(504).send(); }
+      case 'ECONNREFUSED': { return res.status(500).send(); }
+      default: { logger.warning(`${err}, with code: ${err.code}`); next(err); }
+    }
   },
 });
 
