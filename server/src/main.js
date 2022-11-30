@@ -32,17 +32,26 @@ async function startApp() {
     server.use(
       helmet({
         contentSecurityPolicy: {
-          useDefaults: true,
+          useDefaults: false,
           directives: {
-            connectSrc: [
+            'default-src': ["'self'"],
+            'base-uri': ["'self'"],
+            'connect-src': [
               "'self'",
               'https://sentry.gc.nav.no',
               'https://graph.microsoft.com',
             ],
-            frameSrc: ["'none'"],
-            childSrc: ["'none'"],
-            mediaSrc: ["'none'"],
-            objectSrc: ["'none'"],
+            'font-src': [
+              "'self'",
+              'https://cdn.nav.no',
+              'data:',
+            ],
+            'img-src': ["'self'", 'data:'],
+            'style-src': ["'self'", "'unsafe-inline'"],
+            'frame-src': ["'none'"],
+            'child-src': ["'none'"],
+            'media-src': ["'none'"],
+            'object-src': ["'none'"],
           },
         },
         referrerPolicy: { policy: 'origin' },
