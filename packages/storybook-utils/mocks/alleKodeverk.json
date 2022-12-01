@@ -1545,6 +1545,11 @@
       "navn": "Fakta om uttak"
     },
     {
+      "kode": "FAKTA_OM_UTTAK_DOKUMENTASJON",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Fakta om uttaksdokumentasjon"
+    },
+    {
       "kode": "FAKTA_OM_ADOPSJON",
       "kodeverk": "SKJERMLENKE_TYPE",
       "navn": "Fakta om adopsjon"
