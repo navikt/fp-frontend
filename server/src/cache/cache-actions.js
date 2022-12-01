@@ -16,7 +16,6 @@ export const getTokenInCache = (cacheKey) => {
 };
 
 export const setTokenInCache = (cacheKey, tokenSet) => {
-  if (tokenSet.access_token == null) return;
   logger.debug('Set token in cache.');
   tokenCache.set(cacheKey, tokenSet.access_token, (tokenSet.expires_in ?? 65) - 5);
 };
