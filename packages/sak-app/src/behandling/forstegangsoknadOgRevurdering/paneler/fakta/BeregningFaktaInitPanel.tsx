@@ -3,7 +3,8 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { FaktaBeregningAksjonspunktCode } from '@navikt/ft-fakta-beregning';
+
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import {
   AksessRettigheter, ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar,
@@ -77,13 +78,13 @@ const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): Beregningsgrunn
 };
 
 const AKSJONSPUNKT_KODER = [
-  aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
-  aksjonspunktCodes.AVKLAR_AKTIVITETER,
-  aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
-  aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
+  FaktaBeregningAksjonspunktCode.VURDER_FAKTA_FOR_ATFL_SN,
+  FaktaBeregningAksjonspunktCode.AVKLAR_AKTIVITETER,
+  FaktaBeregningAksjonspunktCode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
+  FaktaBeregningAksjonspunktCode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
 ];
 
-const OVERSTYRING_AP_CODES = [aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSAKTIVITETER, aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG];
+const OVERSTYRING_AP_CODES = [FaktaBeregningAksjonspunktCode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER, FaktaBeregningAksjonspunktCode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG];
 type EndepunktPanelData = {

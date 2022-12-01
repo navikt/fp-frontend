@@ -3,6 +3,7 @@ import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
 import { Label, BodyShort } from '@navikt/ds-react';
 
 import { ProsessBeregningsgrunnlagAksjonspunktCode } from '@navikt/ft-prosess-beregningsgrunnlag';
+import { FaktaBeregningAksjonspunktCode } from '@navikt/ft-fakta-beregning';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { HistorikkInnslagAksjonspunkt } from '@fpsak-frontend/types';
@@ -74,7 +75,7 @@ const aksjonspunktCodesToTextCode = {
     'Historikk.BeregningsgrunnlagManueltTidsbegrenset',
   [ProsessBeregningsgrunnlagAksjonspunktCode.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET]:
     'Historikk.BeregningsgrunnlagManueltSNNYIArbeidslivet',
-  [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: 'Historikk.VurderFaktaATFLSN',
+  [FaktaBeregningAksjonspunktCode.VURDER_FAKTA_FOR_ATFL_SN]: 'Historikk.VurderFaktaATFLSN',
   [aksjonspunktCodes.FORESLA_VEDTAK]: 'Historikk.Vedtak.Fritekstbrev',
   [aksjonspunktCodes.AVKLAR_FØRSTE_UTTAKSDATO]: 'Historikk.FaktaUttak.ForsteUttakDato',
   [aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT]: 'Historikk.FaktaUttak.VurderAnnenForelder',
