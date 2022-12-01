@@ -3,6 +3,7 @@ import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { ProsessBeregningsgrunnlagAksjonspunktCode } from '@navikt/ft-prosess-beregningsgrunnlag';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { FaktaBeregningAksjonspunktCode } from '@navikt/ft-fakta-beregning';
 
 import behandlingStatusCode from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
@@ -165,7 +166,7 @@ const getAksjonspunkttekst = (
   if (aksjonspunkt.aksjonspunktKode === ProsessBeregningsgrunnlagAksjonspunktCode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE) {
     return [buildVarigEndringBeregningText(aksjonspunkt.beregningDto)];
   }
-  if (aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN) {
+  if (aksjonspunkt.aksjonspunktKode === FaktaBeregningAksjonspunktCode.VURDER_FAKTA_FOR_ATFL_SN) {
     return getFaktaOmBeregningText(faktaOmBeregningTilfeller, aksjonspunkt.beregningDto);
   }
   if (isUttakAksjonspunkt(aksjonspunkt.aksjonspunktKode) && aksjonspunkt.uttakPerioder && aksjonspunkt.uttakPerioder.length > 0) {

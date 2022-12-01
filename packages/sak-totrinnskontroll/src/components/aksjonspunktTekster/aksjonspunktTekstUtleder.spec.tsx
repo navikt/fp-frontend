@@ -4,6 +4,7 @@ import { ProsessBeregningsgrunnlagAksjonspunktCode } from '@navikt/ft-prosess-be
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingStatusCodes from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
+import { FaktaBeregningAksjonspunktCode } from '@navikt/ft-fakta-beregning';
 import { Behandlingsresultat, KodeverkMedNavn, TotrinnskontrollAksjonspunkt } from '@fpsak-frontend/types';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 
@@ -702,7 +703,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     }];
     const beregningDto = { faktaOmBeregningTilfeller: [faktaOmBeregningTilfelle.VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD] };
     const aksjonspunkt = {
-      aksjonspunktKode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+      aksjonspunktKode: FaktaBeregningAksjonspunktCode.VURDER_FAKTA_FOR_ATFL_SN,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
       beregningDto,
@@ -718,7 +719,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     }];
     const beregningDto = { faktaOmBeregningTilfeller: [faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON] };
     const aksjonspunkt = {
-      aksjonspunktKode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+      aksjonspunktKode: FaktaBeregningAksjonspunktCode.VURDER_FAKTA_FOR_ATFL_SN,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
       beregningDto,
@@ -740,7 +741,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
       faktaOmBeregningTilfeller: [faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING, faktaOmBeregningTilfelle.VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD],
     };
     const aksjonspunkt = {
-      aksjonspunktKode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+      aksjonspunktKode: FaktaBeregningAksjonspunktCode.VURDER_FAKTA_FOR_ATFL_SN,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
       beregningDto,
