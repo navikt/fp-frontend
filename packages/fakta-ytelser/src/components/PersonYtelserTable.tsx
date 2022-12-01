@@ -6,6 +6,7 @@ import { BodyShort, Link } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { KodeverkMedNavn, RelatertTilgrensedYtelse } from '@fpsak-frontend/types';
+import relatertYtelseType from '@fpsak-frontend/kodeverk/src/relatertYtelseType';
 
 import styles from './personYtelserTable.less';
 
@@ -41,12 +42,18 @@ const PersonYtelserTable: FunctionComponent<OwnProps> = ({
 
   const ytelseRows = ytelser && ytelser.map((ytelse) => {
     const ytelseNavn = relatertYtelseTyper.filter((type) => type.kode === ytelse.relatertYtelseType)[0].navn;
+
+    const skalViseLenke = ytelse.relatertYtelseType === relatertYtelseType.ENGANGSSTONAD
+      || ytelse.relatertYtelseType === relatertYtelseType.FORELDREPENGER
+      || ytelse.relatertYtelseType === relatertYtelseType.SVANGERSKAPSPENGER;
+
     if (ytelse.tilgrensendeYtelserListe.length === 0) {
       return [{
         navn: ytelseNavn,
         periode: intl.formatMessage({ id: 'PersonYtelserTable.Ingen' }),
         status: '',
         saksnummer: '',
+        skalViseLenke,
       }];
     }
 
@@ -61,6 +68,7 @@ const PersonYtelserTable: FunctionComponent<OwnProps> = ({
         periode: `${fraDato} - ${tilDato}`,
         status: statusNavn,
         saksnummer: ytelseInfo.saksNummer,
+        skalViseLenke,
       };
     });
   }).reduce((allRows, rows) => allRows.concat(rows), []);
@@ -73,8 +81,10 @@ const PersonYtelserTable: FunctionComponent<OwnProps> = ({
           <TableColumn><BodyShort size="small">{ytelse.periode}</BodyShort></TableColumn>
           <TableColumn>{ytelse.status ? <BodyShort size="small">{ytelse.status}</BodyShort> : ''}</TableColumn>
           <TableColumn>
-            {ytelse.saksnummer
-              ? <BodyShort size="small"><Link href={`/fagsak/${ytelse.saksnummer}`} target="_blank">{ytelse.saksnummer}</Link></BodyShort> : ''}
+            {ytelse.saksnummer && ytelse.skalViseLenke
+              && <BodyShort size="small"><Link href={`/fagsak/${ytelse.saksnummer}`} target="_blank">{ytelse.saksnummer}</Link></BodyShort>}
+            {ytelse.saksnummer && !ytelse.skalViseLenke
+              ? <BodyShort size="small">{ytelse.saksnummer}</BodyShort> : ''}
           </TableColumn>
         </TableRow>
       ))}
