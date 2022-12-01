@@ -17,7 +17,7 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
     const utils = render(<AksjonspunktMedUavklartePerioder submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttaksdokumentasjon')).toBeInTheDocument();
-    expect(screen.getByText('Kontroller årsak')).toBeInTheDocument();
+    expect(screen.getByText('Kontroller dokumentasjon')).toBeInTheDocument();
     expect(screen.getByText('01.11.2022 - 07.11.2022')).toBeInTheDocument();
     expect(screen.getByText('Oppdater').closest('button')).toBeDisabled();
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
@@ -85,7 +85,7 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
     render(<AksjonspunktSomErBekreftetOgBehandlingAvsluttet />);
 
     expect(await screen.findByText('Fakta om uttaksdokumentasjon')).toBeInTheDocument();
-    expect(screen.queryByText('Kontroller årsak')).not.toBeInTheDocument();
+    expect(screen.queryByText('Kontroller dokumentasjon')).not.toBeInTheDocument();
     expect(screen.getByText('Godkjent')).toBeInTheDocument();
     expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
@@ -96,7 +96,7 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
     render(<AksjonspunktErBekreftetMenBehandlingErÅpen submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttaksdokumentasjon')).toBeInTheDocument();
-    expect(screen.queryByText('Kontroller årsak')).not.toBeInTheDocument();
+    expect(screen.queryByText('Kontroller dokumentasjon')).not.toBeInTheDocument();
     expect(screen.getByText('Godkjent')).toBeInTheDocument();
     expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
