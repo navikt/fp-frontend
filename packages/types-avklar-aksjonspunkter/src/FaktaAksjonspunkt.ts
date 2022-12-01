@@ -1,4 +1,7 @@
 import { FordelBeregningsgrunnlagAP, VurderRefusjonBeregningsgrunnlagAP } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
+import {
+  BeregningFaktaAP, BeregningOverstyringAP, AvklarBeregningsaktiviteterAP, OverstyrBeregningsaktiviteterAP,
+} from '@navikt/ft-fakta-beregning';
 import AvklarVergeAp from './fakta/AvklarVergeAp';
 import MerkOpptjeningUtlandAp from './fakta/MerkOpptjeningUtlandAp';
 import OverstyringUtenlandssakMarkeringAp from './fakta/OverstyringUtenlandssakMarkeringAp';
@@ -25,9 +28,7 @@ import VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp from './fakta/
 import BekreftOppholdsrettVurderingAp from './fakta/BekreftOppholdsrettVurderingAp';
 import OverstyringAvklarStartdatoForPeriodenAp from './fakta/OverstyringAvklarStartdatoForPeriodenAp';
 import KontrollerBesteberegningAP from './fakta/KontrollerBesteberegningAP';
-import BeregningAktivitetAP from './fakta/BeregningAktivitetAP';
 import VurderDokumentasjonAp from './fakta/VurderDokumentasjonAp';
-import BeregningFaktaAP, { BeregningOverstyringAP } from './fakta/BeregningFaktaAP';
 import VurderArbeidsforholdInntektsmeldingAp from './fakta/VurderArbeidsforholdInntektsmeldingAp';
 import VurderArbeidsforholdPermisjonAp from './fakta/VurderArbeidsforholdPermisjonAp';
 
@@ -56,7 +57,8 @@ export type FaktaAksjonspunkt = AvklarVergeAp
   | OverstyringAvklarStartdatoForPeriodenAp
   | AvklarFaktaForForeldreansvarAksjonspunktAp
   | KontrollerBesteberegningAP
-  | BeregningAktivitetAP
+  | AvklarBeregningsaktiviteterAP
+  | OverstyrBeregningsaktiviteterAP
   | BeregningFaktaAP
   | BeregningOverstyringAP
   | FordelBeregningsgrunnlagAP
