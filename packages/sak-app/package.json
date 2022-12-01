@@ -12,7 +12,6 @@
     "@fpsak-frontend/fakta-aktivitetskrav": "1.0.0",
     "@fpsak-frontend/fakta-arbeidsforhold": "1.0.0",
     "@fpsak-frontend/fakta-arbeid-og-inntekt": "1.0.0",
-    "@fpsak-frontend/fakta-beregning": "1.0.0",
     "@fpsak-frontend/fakta-besteberegning": "1.0.0",
     "@fpsak-frontend/fakta-fodsel": "1.0.0",
     "@fpsak-frontend/fakta-fodsel-og-tilrettelegging": "1.0.0",
