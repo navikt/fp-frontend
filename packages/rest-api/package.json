@@ -10,6 +10,6 @@
   },
   "devDependencies": {
     "axios-mock-adapter": "1.21.2",
-    "sinon": "14.0.2"
+    "sinon": "15.0.0"
   }
 }
