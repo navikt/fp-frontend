@@ -1550,6 +1550,11 @@
       "navn": "Fakta om uttaksdokumentasjon"
     },
     {
+      "kode": "KONTROLL_AV_SAKSOPPLYSNINGER",
+      "kodeverk": "SKJERMLENKE_TYPE",
+      "navn": "Fakta om saken"
+    },
+    {
       "kode": "FAKTA_OM_ADOPSJON",
       "kodeverk": "SKJERMLENKE_TYPE",
       "navn": "Fakta om adopsjon"

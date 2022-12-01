@@ -154,6 +154,11 @@ const skjermlenkeCodes = {
     faktaNavn: FaktaPanelCode.UTTAK_DOKUMENTASJON,
     punktNavn: '',
   },
+  KONTROLL_AV_SAKSOPPLYSNINGER: {
+    kode: 'KONTROLL_AV_SAKSOPPLYSNINGER',
+    faktaNavn: FaktaPanelCode.SAKEN,
+    punktNavn: '',
+  },
   UTTAK: {
     kode: 'UTTAK',
     faktaNavn: FaktaPanelCode.DEFAULT,
