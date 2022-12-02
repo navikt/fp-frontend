@@ -324,3 +324,41 @@ VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   kanOverstyre: false,
 };
+
+export const VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet = Template.bind({});
+VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet.args = {
+  aksjonspunkter: [{
+    definisjon: AksjonspunktCode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
+    status: aksjonspunktStatus.UTFORT,
+    begrunnelse: 'Dette er en begrunnelse',
+    kanLoses: false,
+    erAktivt: false,
+  }],
+  ytelsefordeling: {
+    ikkeOmsorgPerioder: null,
+    rettigheterAnnenforelder: {
+      skalAvklareAnnenforelderUføretrygd: false,
+      skalAvklareAnnenForelderRettEØS: false,
+    },
+    endringsdato: '2022-01-31',
+    gjeldendeDekningsgrad: 100,
+    førsteUttaksdato: '2022-01-31',
+  },
+  uttakKontrollerFaktaPerioder: [{
+    fom: '2022-11-12',
+    tom: '2022-12-01',
+    uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+    arbeidstidsprosent: 50,
+    arbeidsforhold: {
+      arbeidsgiverReferanse: '910909088',
+      arbeidType: 'ORDINÆRT_ARBEID',
+    },
+    samtidigUttaksprosent: 50,
+    morsAktivitet: 'ARBEID',
+    flerbarnsdager: true,
+    periodeKilde: 'SØKNAD',
+  }],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  kanOverstyre: false,
+  readOnly: true,
+};

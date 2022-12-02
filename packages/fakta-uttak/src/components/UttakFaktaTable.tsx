@@ -169,7 +169,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
           );
         })}
       </Table>
-      {erRedigerbart && (
+      {!readOnly && erRedigerbart && (
         <>
           {!visNyPeriode && (
             <Button
@@ -181,7 +181,6 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
                 velgPeriodeFomDato(undefined, true);
                 settVisNyPeriode(true);
               }}
-              disabled={readOnly}
             >
               <FormattedMessage id="UttakFaktaForm.LeggTilPeriode" />
             </Button>
