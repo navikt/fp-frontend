@@ -11,7 +11,7 @@
     "@fpsak-frontend/rest-api-hooks": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
     "@navikt/ds-react": "2.0.5",
-    "@navikt/ft-form-hooks": "3.2.0",
+    "@navikt/ft-form-hooks": "3.2.1",
     "@navikt/ft-form-validators": "1.0.38",
     "@navikt/ft-kodeverk": "^1.0.23",
     "@navikt/ft-types": "^1.0.34",
