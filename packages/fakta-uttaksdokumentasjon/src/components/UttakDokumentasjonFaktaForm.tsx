@@ -8,15 +8,15 @@ import { Button, Heading } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { DokumentasjonVurderingBehov } from '@fpsak-frontend/types';
+import { Aksjonspunkt, DokumentasjonVurderingBehov } from '@fpsak-frontend/types';
 import { FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
 import { VurderDokumentasjonAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
 import UttakDokumentasjonFaktaTable from './UttakDokumentasjonFaktaTable';
 
 interface OwnProps {
-  harApneAksjonspunkter: boolean;
-  lagretBegrunnelse?: string;
+  aksjonspunkter: Aksjonspunkt[];
   dokumentasjonVurderingBehov: DokumentasjonVurderingBehov[];
   submitCallback: (aksjonspunkter: VurderDokumentasjonAp) => Promise<void>;
   readOnly: boolean;
@@ -26,8 +26,7 @@ interface OwnProps {
 }
 
 const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
-  harApneAksjonspunkter,
-  lagretBegrunnelse,
+  aksjonspunkter,
   dokumentasjonVurderingBehov,
   readOnly,
   submittable,
@@ -49,6 +48,7 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
     });
   }, [dokBehov]);
 
+  const lagretBegrunnelse = aksjonspunkter.length > 0 ? aksjonspunkter[0].begrunnelse : undefined;
   const formMethods = useForm<{ begrunnelse: string }>({
     defaultValues: {
       begrunnelse: formData?.begrunnelse || lagretBegrunnelse,
@@ -70,7 +70,7 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
     <>
       <Heading size="small"><FormattedMessage id="UttakDokumentasjonFaktaForm.Overskrift" /></Heading>
       <VerticalSpacer thirtyTwoPx />
-      {harApneAksjonspunkter && (
+      {aksjonspunkter.some((a) => a.status === aksjonspunktStatus.OPPRETTET) && (
         <>
           <AksjonspunktHelpTextHTML>
             {[intl.formatMessage({ id: 'UttakDokumentasjonFaktaForm.AksjonspunktHjelpetekst' })]}
@@ -79,6 +79,7 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
         </>
       )}
       <UttakDokumentasjonFaktaTable
+        harAksjonspunkt={aksjonspunkter.length > 0}
         dokumentasjonVurderingBehov={dokBehov}
         oppdaterDokBehov={oppdaterDokBehov}
         setDirty={setDirty}

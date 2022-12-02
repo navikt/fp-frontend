@@ -130,3 +130,12 @@ AksjonspunktErBekreftetMenBehandlingErÅpen.args = {
   submittable: true,
   alleMerknaderFraBeslutter: {},
 };
+
+export const UavklartePerioderMenIkkeAksjonspunktEnnå = Template.bind({});
+UavklartePerioderMenIkkeAksjonspunktEnnå.args = {
+  aksjonspunkter: [],
+  dokumentasjonVurderingBehov: dokumentasjonVurderingBehovListe,
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  readOnly: false,
+  submittable: true,
+};

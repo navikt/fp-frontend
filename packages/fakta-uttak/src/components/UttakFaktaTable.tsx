@@ -2,6 +2,7 @@ import React, {
   useCallback, FunctionComponent, useState,
 } from 'react';
 import { FormattedMessage } from 'react-intl';
+import dayjs from 'dayjs';
 import {
   Table, ExpandableTableRow, TableColumn, TableRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -91,7 +92,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
     const oppdatertePerioder = uttakKontrollerFaktaPerioder
       .filter((p) => p.originalFom !== uPeriode.originalFom)
       .concat(uPeriode)
-      .sort((a1, a2) => a1.fom.localeCompare(a2.fom));
+      .sort((a1, a2) => dayjs(a1.fom).diff(dayjs(a2.fom)));
 
     oppdaterUttakPerioder(oppdatertePerioder);
     velgPeriodeFomDato(undefined, true);
@@ -130,7 +131,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
               </TableColumn>
               <TableColumn>{getUttakPeriode(alleKodeverk, periode.uttakPeriodeType, periode.oppholdÅrsak)}</TableColumn>
               <TableColumn>
-                <FormattedMessage id={alleKodeverk[KodeverkType.FORDELING_PERIODE_KILDE].find((k) => k.kode === periode.periodeKilde)?.navn} />
+                {alleKodeverk[KodeverkType.FORDELING_PERIODE_KILDE].find((k) => k.kode === periode.periodeKilde)?.navn}
               </TableColumn>
             </>
           );
@@ -196,7 +197,8 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
                 readOnly={false}
                 alleKodeverk={alleKodeverk}
                 oppdaterPeriode={(uttaksperiode: KontrollerFaktaPeriodeMedApMarkering) => {
-                  oppdaterUttakPerioder(uttakKontrollerFaktaPerioder.concat(uttaksperiode));
+                  const nyeSortertePerioder = uttakKontrollerFaktaPerioder.concat(uttaksperiode).sort((a1, a2) => dayjs(a1.fom).diff(dayjs(a2.fom)));
+                  oppdaterUttakPerioder(nyeSortertePerioder);
                   settVisNyPeriode(false);
                 }}
                 arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
