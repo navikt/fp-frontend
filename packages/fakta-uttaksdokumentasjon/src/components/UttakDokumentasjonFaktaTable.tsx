@@ -4,7 +4,9 @@ import React, {
 import { FormattedMessage } from 'react-intl';
 import { dateFormat } from '@navikt/ft-utils';
 import { SuccessStroke, Error, FileError } from '@navikt/ds-icons';
-import { ExpandableTableRow, Table, TableColumn } from '@navikt/ft-ui-komponenter';
+import {
+  ExpandableTableRow, Table, TableColumn, TableRow,
+} from '@navikt/ft-ui-komponenter';
 
 import {
   DokumentasjonVurderingBehov, UttakVurdering, UttakÅrsak, UttakType,
@@ -96,6 +98,7 @@ interface OwnProps {
   oppdaterDokBehov: (dokBehov: DokumentasjonVurderingBehov[]) => void;
   readOnly: boolean;
   setDirty: (isDirty: boolean) => void;
+  harAksjonspunkt: boolean;
 }
 
 const UttakDokumentasjonFaktaTable: FunctionComponent<OwnProps> = ({
@@ -103,6 +106,7 @@ const UttakDokumentasjonFaktaTable: FunctionComponent<OwnProps> = ({
   oppdaterDokBehov,
   readOnly,
   setDirty,
+  harAksjonspunkt,
 }) => {
   const [valgtDokBehovFomDatoer, setDokBehovFomDatoer] = useState<string[]>([]);
 
@@ -131,49 +135,64 @@ const UttakDokumentasjonFaktaTable: FunctionComponent<OwnProps> = ({
 
   return (
     <Table headerTextCodes={HEADER_TEXT_CODES} noHover hasGrayHeader>
-      {dokumentasjonVurderingBehov.map((behov) => (
-        <ExpandableTableRow
-          key={behov.fom + behov.tom}
-          isApLeftBorder={!behov.vurdering}
-          showContent={valgtDokBehovFomDatoer.includes(behov.fom)}
-          toggleContent={() => velgDokBehovFomDato(behov.fom)}
-          content={((valgtDokBehovFomDatoer.includes(behov.fom)
-            && (
-              <UttakDokumentasjonFaktaDetailForm
-                key={behov.fom}
-                valgtDokBehov={behov}
-                readOnly={readOnly}
-                oppdaterDokBehov={oppdaterPeriode}
-                avbrytEditeringAvAktivitetskrav={() => velgDokBehovFomDato(behov.fom)}
-              />
-            )
-          ))}
-        >
-          <TableColumn>{`${dateFormat(behov.fom)} - ${dateFormat(behov.tom)}`}</TableColumn>
-          <TableColumn>{finnType(behov.type)}</TableColumn>
-          <TableColumn>{finnÅrsak(behov.årsak)}</TableColumn>
-          <TableColumn>
-            {behov.vurdering === UttakVurdering.GODKJENT && (
-              <>
-                <SuccessStroke />
-                <div className={styles.ikon}><FormattedMessage id="UttakDokumentasjonFaktaTable.Godkjent" /></div>
-              </>
-            )}
-            {behov.vurdering === UttakVurdering.IKKE_GODKJENT && (
-              <>
-                <Error />
-                <div className={styles.ikon}><FormattedMessage id="UttakDokumentasjonFaktaTable.IkkeGodkjent" /></div>
-              </>
-            )}
-            {behov.vurdering === UttakVurdering.IKKE_DOKUMENTERT && (
-              <>
-                <FileError />
-                <div className={styles.ikon}><FormattedMessage id="UttakDokumentasjonFaktaTable.ManglerDok" /></div>
-              </>
-            )}
-          </TableColumn>
-        </ExpandableTableRow>
-      ))}
+      {dokumentasjonVurderingBehov.map((behov) => {
+        const kolonner = (
+          <>
+            <TableColumn>{`${dateFormat(behov.fom)} - ${dateFormat(behov.tom)}`}</TableColumn>
+            <TableColumn>{finnType(behov.type)}</TableColumn>
+            <TableColumn>{finnÅrsak(behov.årsak)}</TableColumn>
+            <TableColumn>
+              {behov.vurdering === UttakVurdering.GODKJENT && (
+                <>
+                  <SuccessStroke />
+                  <div className={styles.ikon}><FormattedMessage id="UttakDokumentasjonFaktaTable.Godkjent" /></div>
+                </>
+              )}
+              {behov.vurdering === UttakVurdering.IKKE_GODKJENT && (
+                <>
+                  <Error />
+                  <div className={styles.ikon}><FormattedMessage id="UttakDokumentasjonFaktaTable.IkkeGodkjent" /></div>
+                </>
+              )}
+              {behov.vurdering === UttakVurdering.IKKE_DOKUMENTERT && (
+                <>
+                  <FileError />
+                  <div className={styles.ikon}><FormattedMessage id="UttakDokumentasjonFaktaTable.ManglerDok" /></div>
+                </>
+              )}
+            </TableColumn>
+          </>
+        );
+
+        if (harAksjonspunkt) {
+          return (
+            <ExpandableTableRow
+              key={behov.fom + behov.tom}
+              isApLeftBorder={!behov.vurdering}
+              showContent={valgtDokBehovFomDatoer.includes(behov.fom)}
+              toggleContent={() => velgDokBehovFomDato(behov.fom)}
+              content={((valgtDokBehovFomDatoer.includes(behov.fom)
+                && (
+                  <UttakDokumentasjonFaktaDetailForm
+                    key={behov.fom}
+                    valgtDokBehov={behov}
+                    readOnly={readOnly}
+                    oppdaterDokBehov={oppdaterPeriode}
+                    avbrytEditeringAvAktivitetskrav={() => velgDokBehovFomDato(behov.fom)}
+                  />
+                )
+              ))}
+            >
+              {kolonner}
+            </ExpandableTableRow>
+          );
+        }
+        return (
+          <TableRow key={behov.fom + behov.tom}>
+            {kolonner}
+          </TableRow>
+        );
+      })}
     </Table>
   );
 };

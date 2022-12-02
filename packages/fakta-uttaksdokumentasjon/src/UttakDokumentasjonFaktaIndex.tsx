@@ -16,7 +16,6 @@ interface OwnProps {
 }
 
 const UttakDokumentasjonFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
-  harApneAksjonspunkter,
   dokumentasjonVurderingBehov,
   submitCallback,
   readOnly,
@@ -30,8 +29,7 @@ const UttakDokumentasjonFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPa
   return (
     <RawIntlProvider value={intl}>
       <UttakDokumentasjonFaktaForm
-        harApneAksjonspunkter={harApneAksjonspunkter}
-        lagretBegrunnelse={aksjonspunkter.length > 0 ? aksjonspunkter[0].begrunnelse : undefined}
+        aksjonspunkter={aksjonspunkter}
         dokumentasjonVurderingBehov={sorterteBehov}
         submitCallback={submitCallback}
         readOnly={readOnly || aksjonspunkter.length === 0}
