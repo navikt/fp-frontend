@@ -297,6 +297,10 @@ const historikkEndretFeltTypeCodes = {
     kode: 'UTTAK_STØNADSKONTOTYPE',
     feltId: 'HistorikkEndretFelt.Stonadskonto',
   },
+  FAKTA_UTTAK_PERIODE: {
+    kode: 'FAKTA_UTTAK_PERIODE',
+    feltId: 'HistorikkEndretFelt.FaktaUttakPeriodeEndring',
+  },
   UTTAKPERIODE_DOK_AVKLARING: {
     kode: 'UTTAKPERIODE_DOK_AVKLARING',
     feltId: 'HistorikkEndretFelt.UttakDokumentasjonVurdering',
