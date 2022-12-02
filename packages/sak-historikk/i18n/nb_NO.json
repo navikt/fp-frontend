@@ -134,6 +134,7 @@
   "HistorikkEndretFelt.Opptjeningsvilkaret": "Opptjeningsvilkåret",
   "HistorikkEndretFelt.Organisasjonsnummer": "Organisasjonsnummer",
   "HistorikkEndretFelt.Soknadsfristvilkaret": "Søknadsfristvilkåret",
+  "HistorikkEndretFelt.FaktaUttakPeriodeEndring": "Perioden {value}",
   "HistorikkEndretFelt.UttakDokumentasjonVurdering": "Perioden {value}",
   "HistorikkEndretFelt.Personstatus": "Personstatus",
   "HistorikkEndretFelt.StartdatoFraSoknad": "Startdato fra søknad",
