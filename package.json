@@ -70,7 +70,7 @@
     "@babel/register": "7.18.9",
     "@commercetools/enzyme-extensions": "5.0.0",
     "@navikt/ds-codemod": "2.0.5",
-    "@storybook/addon-actions": "6.5.13",
+    "@storybook/addon-actions": "6.5.14",
     "@storybook/addon-docs": "6.5.13",
     "@storybook/addons": "6.5.13",
     "@storybook/builder-webpack5": "6.5.13",
