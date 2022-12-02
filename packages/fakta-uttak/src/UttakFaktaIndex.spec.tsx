@@ -49,7 +49,7 @@ describe('<UttakFaktaIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{
-      kode: '6063',
+      kode: '6065',
       begrunnelse: 'Dette er en begrunnelse',
       perioder: [{
         fom: '2022-11-12',
