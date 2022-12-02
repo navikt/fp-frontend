@@ -7,7 +7,10 @@ import userEvent from '@testing-library/user-event';
 import * as stories from './UttakDokumentasjonFaktaIndex.stories';
 
 const {
-  AksjonspunktMedUavklartePerioder, AksjonspunktSomErBekreftetOgBehandlingAvsluttet, AksjonspunktErBekreftetMenBehandlingErÅpen,
+  AksjonspunktMedUavklartePerioder,
+  AksjonspunktSomErBekreftetOgBehandlingAvsluttet,
+  AksjonspunktErBekreftetMenBehandlingErÅpen,
+  UavklartePerioderMenIkkeAksjonspunktEnnå,
 } = composeStories(stories);
 
 describe('<UttakDokumentasjonFaktaIndex>', () => {
@@ -121,5 +124,13 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
         årsak: 'HV_ØVELSE',
       }],
     });
+  });
+
+  it('skal vise tabellrader som ikke kan ekspanderes når det ikke er aksjonspunkt', async () => {
+    render(<UavklartePerioderMenIkkeAksjonspunktEnnå />);
+
+    expect(await screen.findByText('Fakta om uttaksdokumentasjon')).toBeInTheDocument();
+
+    expect(await screen.queryByAltText('Åpne rad')).not.toBeInTheDocument();
   });
 });

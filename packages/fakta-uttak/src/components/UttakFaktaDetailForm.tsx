@@ -244,7 +244,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                 isReadOnly={readOnly}
               />
             </FlexColumn>
-            {slettPeriode && (
+            {slettPeriode && !readOnly && (
               <FlexColumn className={styles.marginBtn}>
                 <Button
                   size="small"
@@ -252,7 +252,6 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                   type="button"
                   icon={<Delete />}
                   onClick={() => settVisSletteDialog(true)}
-                  disabled={readOnly}
                 >
                   <FormattedMessage id="UttakFaktaDetailForm.Slett" />
                 </Button>
@@ -327,13 +326,13 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
           {årsakstype === Årsakstype.UTTAK && (
             <>
               <VerticalSpacer sixteenPx />
-              {arbeidsgiverFinnesIkke && (
-                <>
+              {!readOnly && arbeidsgiverFinnesIkke && (
+                <div className={styles.alert}>
                   <Alert variant="info">
                     <FormattedMessage id="UttakFaktaDetailForm.UkjentArbeidsgiver" values={{ aRef }} />
                   </Alert>
-                  <VerticalSpacer sixteenPx />
-                </>
+                  <VerticalSpacer twentyPx />
+                </div>
               )}
               <FlexRow>
                 <FlexColumn>
@@ -351,6 +350,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                     label={<FormattedMessage id="UttakFaktaDetailForm.Arbeidsgiver" />}
                     validate={[requiredNårGraderingErOppgitt(formMethods.getValues)]}
                     selectValues={mapArbeidsforhold(faktaArbeidsforhold, alleKodeverk, arbeidsgiverOpplysningerPerId)}
+                    readOnly={readOnly}
                   />
                 </FlexColumn>
                 <FlexColumn>
@@ -390,30 +390,34 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
               </FlexRow>
             </>
           )}
-          <VerticalSpacer thirtyTwoPx />
-          <FlexRow>
-            <FlexColumn>
-              <Button
-                size="small"
-                variant="secondary"
-                loading={false}
-                disabled={!formMethods.formState.isDirty || readOnly}
-              >
-                <FormattedMessage id="UttakFaktaDetailForm.Oppdater" />
-              </Button>
-            </FlexColumn>
-            <FlexColumn>
-              <Button
-                size="small"
-                variant="tertiary"
-                onClick={avbrytEditering}
-                disabled={readOnly}
-                type="button"
-              >
-                <FormattedMessage id="UttakFaktaDetailForm.Avbryt" />
-              </Button>
-            </FlexColumn>
-          </FlexRow>
+          {!readOnly && (
+            <>
+              <VerticalSpacer thirtyTwoPx />
+              <FlexRow>
+                <FlexColumn>
+                  <Button
+                    size="small"
+                    variant="secondary"
+                    loading={false}
+                    disabled={!formMethods.formState.isDirty || readOnly}
+                  >
+                    <FormattedMessage id="UttakFaktaDetailForm.Oppdater" />
+                  </Button>
+                </FlexColumn>
+                <FlexColumn>
+                  <Button
+                    size="small"
+                    variant="tertiary"
+                    onClick={avbrytEditering}
+                    disabled={readOnly}
+                    type="button"
+                  >
+                    <FormattedMessage id="UttakFaktaDetailForm.Avbryt" />
+                  </Button>
+                </FlexColumn>
+              </FlexRow>
+            </>
+          )}
         </FlexContainer>
         <VerticalSpacer thirtyTwoPx />
       </Form>
