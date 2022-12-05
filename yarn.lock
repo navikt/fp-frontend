@@ -1244,6 +1244,14 @@
     "@formatjs/intl-localematcher" "0.2.31"
     tslib "2.4.0"
 
+"@formatjs/ecma402-abstract@1.14.3":
+  version "1.14.3"
+  resolved "https://registry.yarnpkg.com/@formatjs/ecma402-abstract/-/ecma402-abstract-1.14.3.tgz#6428f243538a11126180d121ce8d4b2f17465738"
+  integrity sha512-SlsbRC/RX+/zg4AApWIFNDdkLtFbkq3LNoZWXZCE/nHVKqoIJyaoQyge/I0Y38vLxowUn9KTtXgusLD91+orbg==
+  dependencies:
+    "@formatjs/intl-localematcher" "0.2.32"
+    tslib "^2.4.0"
+
 "@formatjs/fast-memoize@1.2.6":
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/@formatjs/fast-memoize/-/fast-memoize-1.2.6.tgz#a442970db7e9634af556919343261a7bbe5e88c3"
@@ -1268,14 +1276,14 @@
     "@formatjs/ecma402-abstract" "1.13.0"
     tslib "2.4.0"
 
-"@formatjs/intl-datetimeformat@6.3.1":
-  version "6.3.1"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl-datetimeformat/-/intl-datetimeformat-6.3.1.tgz#a5909ee5b6f26572758c2d8e809c7cd888e01b68"
-  integrity sha512-6uJS+ipQo4m8+F8sSbTOd+4osoDe/9V10Me0OYL2jFCgxC/fKemRVqqGccNOg4l3rQghGHnmrsJLsZ1ydBo5LQ==
+"@formatjs/intl-datetimeformat@6.4.3":
+  version "6.4.3"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-datetimeformat/-/intl-datetimeformat-6.4.3.tgz#1ef2b578186c9843603d1c07f9f9c369f5ab292d"
+  integrity sha512-+fLPuBHTZZqJJzjfK4cqamW00j8yCtcQekkAVvfSn/2xibJaQvhqrpDs++4/qM847lZtnDU3q33lelM3H5JMbQ==
   dependencies:
-    "@formatjs/ecma402-abstract" "1.13.0"
-    "@formatjs/intl-localematcher" "0.2.31"
-    tslib "2.4.0"
+    "@formatjs/ecma402-abstract" "1.14.3"
+    "@formatjs/intl-localematcher" "0.2.32"
+    tslib "^2.4.0"
 
 "@formatjs/intl-displaynames@6.1.4":
   version "6.1.4"
@@ -1301,6 +1309,13 @@
   integrity sha512-9QTjdSBpQ7wHShZgsNzNig5qT3rCPvmZogS/wXZzKotns5skbXgs0I7J8cuN0PPqXyynvNVuN+iOKhNS2eb+ZA==
   dependencies:
     tslib "2.4.0"
+
+"@formatjs/intl-localematcher@0.2.32":
+  version "0.2.32"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-localematcher/-/intl-localematcher-0.2.32.tgz#00d4d307cd7d514b298e15a11a369b86c8933ec1"
+  integrity sha512-k/MEBstff4sttohyEpXxCmC3MqbUn9VvHGlZ8fauLzkbwXmVrEeyzS+4uhrvAk9DWU9/7otYWxyDox4nT/KVLQ==
+  dependencies:
+    tslib "^2.4.0"
 
 "@formatjs/intl-numberformat@8.2.0":
   version "8.2.0"
