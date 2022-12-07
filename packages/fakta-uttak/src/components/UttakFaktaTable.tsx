@@ -17,6 +17,7 @@ import UttakFaktaDetailForm from './UttakFaktaDetailForm';
 import KontrollerFaktaPeriodeMedApMarkering from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 
 import styles from './uttakFaktaTable.less';
+import FordelingPeriodeKilde from '../kodeverk/fordelingPeriodeKilde';
 
 const HEADER_TEXT_CODES = [
   'UttakFaktaTable.Periode',
@@ -45,6 +46,13 @@ const getTextId = (weeks?: number, days?: number): string => {
   }
   return id;
 };
+
+const getKildenavnForVisning = (alleKodeverk: AlleKodeverk, periode?: KontrollerFaktaPeriodeMedApMarkering): string => {
+  if (periode.periodeKilde === FordelingPeriodeKilde.SAKSBEHANDLER) {
+    return '';
+  }
+  return alleKodeverk[KodeverkType.FORDELING_PERIODE_KILDE].find((k) => k.kode === periode.periodeKilde)?.navn;
+}
 
 const getUttakPeriode = (
   alleKodeverk: AlleKodeverk,
@@ -130,9 +138,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
                 />
               </TableColumn>
               <TableColumn>{getUttakPeriode(alleKodeverk, periode.uttakPeriodeType, periode.oppholdÅrsak)}</TableColumn>
-              <TableColumn>
-                {alleKodeverk[KodeverkType.FORDELING_PERIODE_KILDE].find((k) => k.kode === periode.periodeKilde)?.navn}
-              </TableColumn>
+              <TableColumn>{getKildenavnForVisning(alleKodeverk, periode)}</TableColumn>
             </>
           );
 

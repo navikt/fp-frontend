@@ -2520,6 +2520,11 @@
       "kode": "ANDRE_NAV_VEDTAK",
       "kodeverk": "FORDELING_PERIODE_KILDE",
       "navn": "Vedtak andre ytelser"
+    },
+    {
+      "kode": "SAKSBEHANDLER",
+      "kodeverk": "SAKSBEHANDLER",
+      "navn": "Endret eller lagt til av saksbehandler i denne behandlingen"
     }
   ],
   "KlageVurderingOmgjør": [

@@ -126,7 +126,7 @@ const transformValues = (values: FormValues): KontrollerFaktaPeriodeMedApMarkeri
     arbeidsgiverReferanse: values.arbeidsgiverId.split('-')[0],
     arbeidType: values.arbeidsgiverId.split('-')[1],
   } : undefined,
-  periodeKilde: FordelingPeriodeKilde.SØKNAD,
+  periodeKilde: FordelingPeriodeKilde.SAKSBEHANDLER,
   aksjonspunktType: undefined,
 });
 
