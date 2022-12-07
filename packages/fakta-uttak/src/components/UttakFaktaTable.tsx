@@ -52,7 +52,7 @@ const getKildenavnForVisning = (alleKodeverk: AlleKodeverk, periode?: Kontroller
     return '';
   }
   return alleKodeverk[KodeverkType.FORDELING_PERIODE_KILDE].find((k) => k.kode === periode.periodeKilde)?.navn;
-}
+};
 
 const getUttakPeriode = (
   alleKodeverk: AlleKodeverk,
