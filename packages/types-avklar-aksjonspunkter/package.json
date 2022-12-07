@@ -9,6 +9,6 @@
     "@fpsak-frontend/types": "1.0.0",
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": "3.1.0",
     "@navikt/ft-fakta-beregning": "2.5.1",
-    "@navikt/ft-prosess-beregningsgrunnlag": "3.3.1"
+    "@navikt/ft-prosess-beregningsgrunnlag": "3.3.3"
   }
 }
