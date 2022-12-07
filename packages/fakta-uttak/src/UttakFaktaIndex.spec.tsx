@@ -55,7 +55,7 @@ describe('<UttakFaktaIndex>', () => {
         fom: '2022-11-12',
         tom: '2022-12-01',
         originalFom: '2022-11-12',
-        periodeKilde: 'SØKNAD',
+        periodeKilde: 'SAKSBEHANDLER',
         samtidigUttaksprosent: '10',
         uttakPeriodeType: 'MØDREKVOTE',
         arbeidsforhold: undefined,

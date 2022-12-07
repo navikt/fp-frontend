@@ -356,7 +356,7 @@ VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet.args = {
     samtidigUttaksprosent: 50,
     morsAktivitet: 'ARBEID',
     flerbarnsdager: true,
-    periodeKilde: 'SØKNAD',
+    periodeKilde: 'SAKSBEHANDLER',
   }],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   kanOverstyre: false,
