@@ -3,13 +3,14 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
-import { FaktaFordelBeregningAksjonspunktCode } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
+import { FaktaFordelBeregningAvklaringsbehovCode } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
 import { Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/ft-types';
 
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import { ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } from '@fpsak-frontend/types';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 
+import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import DynamicLoader from '../../../felles/DynamicLoader';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
@@ -20,12 +21,23 @@ import '@navikt/ft-fakta-fordel-beregningsgrunnlag/dist/style.css';
 
 const ProsessFordeling = React.lazy(() => import('@navikt/ft-fakta-fordel-beregningsgrunnlag'));
 
+const mapBGKodeTilFpsakKode = (bgKode: string): string => {
+  switch (bgKode) {
+    case FaktaFordelBeregningAvklaringsbehovCode.FORDEL_BEREGNINGSGRUNNLAG:
+      return AksjonspunktCode.FORDEL_BEREGNINGSGRUNNLAG;
+    case FaktaFordelBeregningAvklaringsbehovCode.VURDER_REFUSJON_BERGRUNN:
+      return AksjonspunktCode.VURDER_REFUSJON_BERGRUNN;
+    default:
+      throw new Error(`Ukjent avklaringspunkt ${bgKode}`);
+  }
+};
+
 const lagModifisertCallback = (
   submitCallback: (params: any, keepData?: boolean) => Promise<any>,
 ) => (aksjonspunkterSomSkalLagres: any | any[]) => {
   const apListe = Array.isArray(aksjonspunkterSomSkalLagres) ? aksjonspunkterSomSkalLagres : [aksjonspunkterSomSkalLagres];
   const transformerteData = apListe.map((apData) => ({
-    kode: apData.kode,
+    kode: mapBGKodeTilFpsakKode(apData.kode),
     ...apData.grunnlag[0],
   }));
   return submitCallback(transformerteData);
@@ -72,7 +84,7 @@ const ProsessFordelingMF = process.env.NODE_ENV !== 'development' ? undefined
   // eslint-disable-next-line import/no-unresolved
   : () => import('ft_fakta_fordel_beregningsgrunnlag/FaktaFordelBeregningsgrunnlag');
 
-const AKSJONSPUNKT_KODER = [FaktaFordelBeregningAksjonspunktCode.FORDEL_BEREGNINGSGRUNNLAG, FaktaFordelBeregningAksjonspunktCode.VURDER_REFUSJON_BERGRUNN];
+const AKSJONSPUNKT_KODER = [AksjonspunktCode.FORDEL_BEREGNINGSGRUNNLAG, AksjonspunktCode.VURDER_REFUSJON_BERGRUNN];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG];
 type EndepunktPanelData = {
