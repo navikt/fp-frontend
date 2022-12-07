@@ -2556,10 +2556,10 @@
     "@navikt/ds-react" "2.0.5"
     "@navikt/ft-utils" "^1.1.9"
 
-"@navikt/ft-prosess-beregningsgrunnlag@3.3.1":
-  version "3.3.1"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-beregningsgrunnlag/3.3.1/4bbe51d113d6b0014734fa87a8fc114df3adeb2d#4bbe51d113d6b0014734fa87a8fc114df3adeb2d"
-  integrity sha512-EhshEoHVX1A2auaQO9CaRfgYJ24ti6VX0FpKmU7PYd8O+ecBOw6v/H5+dcvoSHPtRsl5uZyNEUU8EH5lveSM8A==
+"@navikt/ft-prosess-beregningsgrunnlag@3.3.3":
+  version "3.3.3"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-beregningsgrunnlag/3.3.3/e5fee9d771411dd398fd28c2b61bb2de01f9865d#e5fee9d771411dd398fd28c2b61bb2de01f9865d"
+  integrity sha512-yHX5/eM+YbEGcm/T3MriKWeWEVsR9yXYbmyh1xhnalrqE95UukyyV6rSg+BnGyzM/sv6ubuTcnGEWTRw+RwSaA==
   dependencies:
     "@navikt/ds-css" "2.0.5"
     "@navikt/ds-react" "2.0.5"
