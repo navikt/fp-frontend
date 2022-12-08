@@ -5,16 +5,16 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@navikt/ds-react": "2.0.5",
-    "@navikt/ft-kodeverk": "^1.0.23",
-    "@navikt/ft-types": "^1.0.34",
-    "@navikt/ft-ui-komponenter": "1.3.0",
-    "@navikt/ft-utils": "1.1.9",
+    "@navikt/ds-react": "2.0.8",
+    "@navikt/ft-kodeverk": "^1.0.24",
+    "@navikt/ft-types": "^1.0.35",
+    "@navikt/ft-ui-komponenter": "1.3.1",
+    "@navikt/ft-utils": "1.1.10",
     "react": "18.2.0",
-    "react-intl": "6.2.1"
+    "react-intl": "6.2.5"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "6.5.13",
+    "@storybook/addon-actions": "6.5.14",
     "@storybook/testing-react": "1.3.0",
     "@testing-library/react": "13.4.0",
     "@testing-library/user-event": "14.4.3"
