@@ -3,8 +3,6 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import { FaktaBeregningAksjonspunktCode } from '@navikt/ft-fakta-beregning';
-
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import {
   AksessRettigheter, ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar,
@@ -15,6 +13,8 @@ import {
 } from '@navikt/ft-types';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
+import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { FaktaBeregningAvklaringsbehovCode } from '@navikt/ft-fakta-beregning';
 import DynamicLoader from '../../../felles/DynamicLoader';
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
@@ -29,12 +29,27 @@ const ProsessFaktaBeregningMF = process.env.NODE_ENV !== 'development' ? undefin
   // eslint-disable-next-line import/no-unresolved
   : () => import('ft_fakta_beregning/FaktaBeregning');
 
+const mapBGKodeTilFpsakKode = (bgKode: string): string => {
+  switch (bgKode) {
+    case FaktaBeregningAvklaringsbehovCode.AVKLAR_AKTIVITETER:
+      return AksjonspunktCode.AVKLAR_AKTIVITETER;
+    case FaktaBeregningAvklaringsbehovCode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER:
+      return AksjonspunktCode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER;
+    case FaktaBeregningAvklaringsbehovCode.VURDER_FAKTA_FOR_ATFL_SN:
+      return AksjonspunktCode.VURDER_FAKTA_FOR_ATFL_SN;
+    case FaktaBeregningAvklaringsbehovCode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG:
+      return AksjonspunktCode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG;
+    default:
+      throw new Error(`Ukjent avklaringspunkt ${bgKode}`);
+  }
+};
+
 const lagModifisertCallback = (
   submitCallback: (params: any, keepData?: boolean) => Promise<any>,
 ) => (aksjonspunkterSomSkalLagres: any | any[]) => {
   const apListe = Array.isArray(aksjonspunkterSomSkalLagres) ? aksjonspunkterSomSkalLagres : [aksjonspunkterSomSkalLagres];
   const transformerteData = apListe.map((apData) => ({
-    kode: apData.kode,
+    kode: mapBGKodeTilFpsakKode(apData.kode),
     ...apData.grunnlag[0],
   }));
   return submitCallback(transformerteData);
@@ -78,14 +93,14 @@ const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): Beregningsgrunn
 };
 
 const AKSJONSPUNKT_KODER = [
-  FaktaBeregningAksjonspunktCode.VURDER_FAKTA_FOR_ATFL_SN,
-  FaktaBeregningAksjonspunktCode.AVKLAR_AKTIVITETER,
-  FaktaBeregningAksjonspunktCode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
-  FaktaBeregningAksjonspunktCode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
+  AksjonspunktCode.VURDER_FAKTA_FOR_ATFL_SN,
+  AksjonspunktCode.AVKLAR_AKTIVITETER,
+  AksjonspunktCode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
+  AksjonspunktCode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
 ];
 
-const OVERSTYRING_AP_CODES = [FaktaBeregningAksjonspunktCode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
-  FaktaBeregningAksjonspunktCode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG];
+const OVERSTYRING_AP_CODES = [AksjonspunktCode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
+  AksjonspunktCode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG];
 type EndepunktPanelData = {

@@ -1,10 +1,8 @@
 import React from 'react';
 
-import { ProsessBeregningsgrunnlagAksjonspunktCode } from '@navikt/ft-prosess-beregningsgrunnlag';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingStatusCodes from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
-import { FaktaBeregningAksjonspunktCode } from '@navikt/ft-fakta-beregning';
 import { Behandlingsresultat, KodeverkMedNavn, TotrinnskontrollAksjonspunkt } from '@fpsak-frontend/types';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 
@@ -173,7 +171,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
 
   it('skal vise korrekt tekst for aksjonspunkt 5038', () => {
     const aksjonspunkt = {
-      aksjonspunktKode: ProsessBeregningsgrunnlagAksjonspunktCode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
+      aksjonspunktKode: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
@@ -183,7 +181,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
   });
   it('skal vise korrekt tekst for aksjonspunkt 5042', () => {
     const aksjonspunkt = {
-      aksjonspunktKode: ProsessBeregningsgrunnlagAksjonspunktCode.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE,
+      aksjonspunktKode: aksjonspunktCodes.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
@@ -203,7 +201,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
   });
   it('skal vise korrekt tekst for aksjonspunkt 5047', () => {
     const aksjonspunkt = {
-      aksjonspunktKode: ProsessBeregningsgrunnlagAksjonspunktCode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
+      aksjonspunktKode: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
@@ -307,7 +305,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
 
   it('skal vise korrekt tekst for aksjonspunkt 5039 varig endring', () => {
     const aksjonspunkt = {
-      aksjonspunktKode: ProsessBeregningsgrunnlagAksjonspunktCode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
+      aksjonspunktKode: aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
       beregningDto: { fastsattVarigEndringNaering: true },
@@ -318,7 +316,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
   });
   it('skal vise korrekt tekst for aksjonspunkt 5039 ikkje varig endring', () => {
     const aksjonspunkt = {
-      aksjonspunktKode: ProsessBeregningsgrunnlagAksjonspunktCode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
+      aksjonspunktKode: aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
       beregningDto: { fastsattVarigEndringNaering: false },
@@ -703,7 +701,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     }];
     const beregningDto = { faktaOmBeregningTilfeller: [faktaOmBeregningTilfelle.VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD] };
     const aksjonspunkt = {
-      aksjonspunktKode: FaktaBeregningAksjonspunktCode.VURDER_FAKTA_FOR_ATFL_SN,
+      aksjonspunktKode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
       beregningDto,
@@ -719,7 +717,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     }];
     const beregningDto = { faktaOmBeregningTilfeller: [faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON] };
     const aksjonspunkt = {
-      aksjonspunktKode: FaktaBeregningAksjonspunktCode.VURDER_FAKTA_FOR_ATFL_SN,
+      aksjonspunktKode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
       beregningDto,
@@ -741,7 +739,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
       faktaOmBeregningTilfeller: [faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING, faktaOmBeregningTilfelle.VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD],
     };
     const aksjonspunkt = {
-      aksjonspunktKode: FaktaBeregningAksjonspunktCode.VURDER_FAKTA_FOR_ATFL_SN,
+      aksjonspunktKode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
       beregningDto,
