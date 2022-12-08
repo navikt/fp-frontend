@@ -107,6 +107,10 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
 
   const [visNyPeriode, settVisNyPeriode] = useState(false);
 
+  const sisteMåned = uttakKontrollerFaktaPerioder.length > 0
+    ? new Date(uttakKontrollerFaktaPerioder[uttakKontrollerFaktaPerioder.length - 1].tom)
+    : undefined;
+
   return (
     <>
       <Table
@@ -203,6 +207,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
                 arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
                 faktaArbeidsforhold={faktaArbeidsforhold}
                 førsteUttaksdato={førsteUttaksdato}
+                defaultMonth={sisteMåned}
               />
             </div>
           )}

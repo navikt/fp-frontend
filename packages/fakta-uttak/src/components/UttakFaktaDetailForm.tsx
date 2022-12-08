@@ -161,6 +161,7 @@ interface OwnProps {
   oppdaterPeriode: (uttaksperiode: KontrollerFaktaPeriodeMedApMarkering) => void;
   alleKodeverk: AlleKodeverk;
   førsteUttaksdato: string;
+  defaultMonth?: Date;
 }
 
 const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
@@ -173,6 +174,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
   readOnly,
   alleKodeverk,
   førsteUttaksdato,
+  defaultMonth,
 }) => {
   const intl = useIntl();
 
@@ -234,6 +236,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                 label={<FormattedMessage id="UttakFaktaDetailForm.Fom" />}
                 validate={[required, hasValidDate, validerPeriodeFra(førsteUttaksdato, intl, valgtPeriode)]}
                 isReadOnly={readOnly}
+                defaultMonth={defaultMonth}
               />
             </FlexColumn>
             <FlexColumn>
@@ -242,6 +245,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                 label={<FormattedMessage id="UttakFaktaDetailForm.Tom" />}
                 validate={[required, hasValidDate, validerTomEtterFom(intl, formMethods.getValues)]}
                 isReadOnly={readOnly}
+                defaultMonth={defaultMonth}
               />
             </FlexColumn>
             {slettPeriode && !readOnly && (
@@ -364,18 +368,22 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
               </FlexRow>
             </>
           )}
-          <VerticalSpacer sixteenPx />
-          <FlexRow>
-            <FlexColumn>
-              <SelectField
-                name="morsAktivitet"
-                label={<FormattedMessage id="UttakFaktaDetailForm.MorsAktivitet" />}
-                className={styles.select}
-                selectValues={sorterteMorsAktiviteter.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
-                readOnly={readOnly}
-              />
-            </FlexColumn>
-          </FlexRow>
+          {årsakstype !== Årsakstype.OPPHOLD && (
+            <>
+              <VerticalSpacer sixteenPx />
+              <FlexRow>
+                <FlexColumn>
+                  <SelectField
+                    name="morsAktivitet"
+                    label={<FormattedMessage id="UttakFaktaDetailForm.MorsAktivitet" />}
+                    className={styles.select}
+                    selectValues={sorterteMorsAktiviteter.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
+                    readOnly={readOnly}
+                  />
+                </FlexColumn>
+              </FlexRow>
+            </>
+          )}
           {årsakstype === Årsakstype.UTTAK && (
             <>
               <VerticalSpacer sixteenPx />
