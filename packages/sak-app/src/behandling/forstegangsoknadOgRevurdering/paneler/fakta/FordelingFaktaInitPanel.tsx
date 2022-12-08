@@ -119,7 +119,6 @@ const FordelingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
         beregningsgrunnlagListe={lagFormatertBG(data.beregningsgrunnlag)}
         submitCallback={lagModifisertCallback(data.submitCallback)}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        behandlingType={data.behandling ? data.behandling.type : ''}
       />
     )}
   />
