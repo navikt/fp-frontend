@@ -9,10 +9,13 @@ configureEnzyme({ adapter: new Adapter() });
 jest.setTimeout(15000);
 
 // Skjul warning fra echarts
+// eslint-disable-next-line no-console
 const originalWarn = console.warn.bind(console.warn);
 beforeAll(() => {
+  // eslint-disable-next-line no-console
   console.warn = (msg) => !msg.toString().includes('Can\'t get DOM width or height.') && originalWarn(msg);
 });
 afterAll(() => {
+  // eslint-disable-next-line no-console
   console.warn = originalWarn;
 });

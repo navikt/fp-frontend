@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
@@ -7,7 +8,9 @@ import * as stories from './AvregningProsessIndex.stories';
 const { AksjonspunktVurderFeilutbetaling, SimuleringspanelUtenAksjonspunkt } = composeStories(stories);
 
 describe('<AvregningProsessIndex>', () => {
-  it.skip('skal velge ingen tilbakebetaling og så bekrefte', async () => {
+  moment.locale('nb');
+
+  it('skal velge ingen tilbakebetaling og så bekrefte', async () => {
     const lagre = jest.fn();
 
     const utils = render(<AksjonspunktVurderFeilutbetaling submitCallback={lagre} />);
@@ -65,7 +68,7 @@ describe('<AvregningProsessIndex>', () => {
     });
   });
 
-  it.skip('skal vise og så skjule verdier i tabell', async () => {
+  it('skal vise og så skjule verdier i tabell', async () => {
     render(<AksjonspunktVurderFeilutbetaling />);
 
     expect(await screen.findByText('Simulering')).toBeInTheDocument();
