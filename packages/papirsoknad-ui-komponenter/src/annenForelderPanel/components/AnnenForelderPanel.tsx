@@ -70,7 +70,7 @@ const AnnenForelderPanel: FunctionComponent<OwnProps> = ({
   return (
     <BorderBox>
       <Heading size="small">
-        <FormattedMessage id={formatMessage({ id: 'Registrering.TheOtherParent.Title' })} />
+        <FormattedMessage id="Registrering.TheOtherParent.Title" />
       </Heading>
       <VerticalSpacer sixteenPx />
       <InputField
