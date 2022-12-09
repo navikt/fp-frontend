@@ -13,6 +13,9 @@ const { Default } = composeStories(stories);
 describe('<VirksomhetPapirsoknadIndex>', () => {
   Modal.setAppElement('body');
 
+  // TODO Testane bør ikkje vera så treige!
+  jest.setTimeout(20000);
+
   it('skal velge at søker ikke har arbeidet i egen næringsvirksomhet', async () => {
     const lagre = jest.fn();
 

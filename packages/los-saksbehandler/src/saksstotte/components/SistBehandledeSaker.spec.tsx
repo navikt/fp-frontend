@@ -17,7 +17,9 @@ describe('<SistBehandledeSaker>', () => {
   });
 
   it('skal vise ingen behandlinger', async () => {
-    render(<IngenBehandlinger />);
+    await act(async () => {
+      render(<IngenBehandlinger />);
+    });
     expect(await screen.findByText('Siste behandlinger')).toBeInTheDocument();
     expect(screen.getByText('Ingen behandlinger')).toBeInTheDocument();
   });
