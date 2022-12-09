@@ -61,9 +61,6 @@ const KontrollerBesteberegningPanel: FunctionComponent<OwnProps> = ({
   formData,
   setFormData,
 }) => {
-  if (!aksjonspunkt) {
-    return null;
-  }
   const [erKnappEnabled, toggleKnapp] = useState(false);
   const formMethods = useForm<FormValues>({
     defaultValues: formData || buildInitialValues(venteårsak, aksjonspunkt),
