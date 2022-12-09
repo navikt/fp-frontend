@@ -120,7 +120,7 @@ export default {
   component: BehandlingContainer,
 };
 
-export const visKunFaktaPaneler = () => {
+export const VisKunFaktaPaneler = () => {
   const [valgtFaktaPanel, setValgtFaktaPanel] = useState<string | undefined>('default');
   return (
     <RawIntlProvider value={intl}>
@@ -140,7 +140,7 @@ export const visKunFaktaPaneler = () => {
   );
 };
 
-export const visKunProsessPaneler = () => {
+export const VisKunProsessPaneler = () => {
   const [valgtProsessPanel, setValgtProsessPanel] = useState<string | undefined>('default');
   return (
     <BehandlingContainer

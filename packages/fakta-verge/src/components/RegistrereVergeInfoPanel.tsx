@@ -66,14 +66,15 @@ const RegistrereVergeInfoPanel: FunctionComponent<PureOwnProps> = ({
     shouldUnregister: true,
   });
 
+  const valgtVergeType = formMethods.watch('vergeType');
+  const begrunnelse = formMethods.watch('begrunnelse');
+
+  const vergetyper = useMemo(() => alleKodeverk[kodeverkTyper.VERGE_TYPE].sort((k1, k2) => k1.navn.localeCompare(k2.navn)),
+    [alleKodeverk[kodeverkTyper.VERGE_TYPE]]);
+
   if (aksjonspunkter.length === 0) {
     return null;
   }
-
-  const valgtVergeType = formMethods.watch('vergeType');
-  const begrunnelse = formMethods.watch('begrunnelse');
-  const vergetyper = useMemo(() => alleKodeverk[kodeverkTyper.VERGE_TYPE].sort((k1, k2) => k1.navn.localeCompare(k2.navn)),
-    [alleKodeverk[kodeverkTyper.VERGE_TYPE]]);
 
   return (
     <>
