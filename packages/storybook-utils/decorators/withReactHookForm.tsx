@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 
-const withReactHookForm = (Story: any) => {
+const WithReactHookForm = (Story: any) => {
   const formMethods = useForm();
   return (
     <Form formMethods={formMethods}>
@@ -11,4 +11,4 @@ const withReactHookForm = (Story: any) => {
   );
 };
 
-export default withReactHookForm;
+export default WithReactHookForm;

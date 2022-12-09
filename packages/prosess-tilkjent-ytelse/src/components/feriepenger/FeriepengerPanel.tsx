@@ -35,10 +35,13 @@ const FeriepengerPanel: FunctionComponent<OwnProps> = ({
   feriepengegrunnlag, alleKodeverk, arbeidsgiverOpplysningerPerId, erPanelÅpent, togglePanel,
 }) => {
   const { andeler } = feriepengegrunnlag;
-  if (!andeler || andeler.length < 1) {
+  const harIngenAndeler = !andeler || andeler.length < 1;
+  const opptjeningsår = useMemo(() => (harIngenAndeler ? undefined : finnListeMedOpptjeningsår(andeler)), [andeler]);
+
+  if (harIngenAndeler) {
     return null;
   }
-  const opptjeningsår = useMemo(() => finnListeMedOpptjeningsår(andeler), [andeler]);
+
   return (
     <Accordion>
       <Accordion.Item open={erPanelÅpent}>

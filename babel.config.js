@@ -2,8 +2,10 @@
 const { NODE_ENV, BABEL_ENV } = process.env;
 
 module.exports = function (api) {
-  // eslint-disable-next-line no-unused-expressions
-  api ? api.cache(true) : null;
+  if (api) {
+    api.cache(true);
+  }
+
   const presets = [
     '@babel/preset-react',
     [

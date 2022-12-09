@@ -85,13 +85,16 @@ const FeriepengerPrAar: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
 }) => {
-  if (!alleAndeler || alleAndeler.length < 1) {
+  const harIngenAndeler = !alleAndeler || alleAndeler.length < 1;
+
+  const alleAndelerForÅret = useMemo(() => (harIngenAndeler ? undefined : finnAlleAndelerForOpptjeningsår(alleAndeler, opptjeningsår)),
+    [alleAndeler, opptjeningsår]);
+  const andelerPrId = useMemo(() => (alleAndelerForÅret ? lagAndelerPrIdMap(alleAndelerForÅret, arbeidsgiverOpplysningerPerId, alleKodeverk) : undefined),
+    [alleAndelerForÅret]);
+
+  if (harIngenAndeler) {
     return null;
   }
-  const alleAndelerForÅret = useMemo(() => finnAlleAndelerForOpptjeningsår(alleAndeler, opptjeningsår),
-    [alleAndeler, opptjeningsår]);
-  const andelerPrId = useMemo(() => lagAndelerPrIdMap(alleAndelerForÅret, arbeidsgiverOpplysningerPerId, alleKodeverk),
-    [alleAndelerForÅret]);
 
   return (
     <>
