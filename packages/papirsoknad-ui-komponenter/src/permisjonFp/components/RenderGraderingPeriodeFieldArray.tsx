@@ -14,6 +14,7 @@ import {
   CheckboxField, Datepicker, InputField, SelectField, PeriodFieldArray, formHooks,
 } from '@navikt/ft-form-hooks';
 import { KodeverkMedNavn } from '@navikt/ft-types';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 import arbeidskategori from '@fpsak-frontend/kodeverk/src/arbeidskategori';
 
@@ -133,7 +134,7 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
     >
       {(field, index, getRemoveButton) => {
         const { harSamtidigUttak, periodeFom } = graderingValues[index];
-        const periodeFomForTidlig = periodeFom && moment(periodeFom).isBefore(moment('2019-01-01'));
+        const periodeFomForTidlig = periodeFom && moment(periodeFom, ISO_DATE_FORMAT).isBefore(moment('2019-01-01'));
         const namePart1 = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}`;
         return (
           <div key={field.id} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
