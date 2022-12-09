@@ -9,7 +9,7 @@ import * as stories from './AktivitetskravFaktaIndex.stories';
 const { AksjonspunktMedToUavklartePerioder, AksjonspunktSomErBekreftetOgBehandlingAvsluttet } = composeStories(stories);
 
 describe('<AktivitetskravFaktaIndex>', () => {
-  it.skip('skal avklare to perioder og så bekrefte aksjonspunkt', async () => {
+  it('skal avklare to perioder og så bekrefte aksjonspunkt', async () => {
     const lagre = jest.fn(() => Promise.resolve());
 
     const utils = render(<AksjonspunktMedToUavklartePerioder submitCallback={lagre} />);
@@ -29,7 +29,9 @@ describe('<AktivitetskravFaktaIndex>', () => {
 
     await userEvent.click(screen.getByText('Oppdater'));
 
-    expect(await screen.findAllByText('15.01.2021 - 20.01.2021')).toHaveLength(2);
+    await waitFor(() => expect(screen.getByText('Oppdater').closest('button')).toBeDisabled());
+
+    expect(screen.getAllByText('15.01.2021 - 20.01.2021')).toHaveLength(2);
 
     await userEvent.click(screen.getByText('Mor er ikke i aktivitet'));
 
@@ -55,8 +57,7 @@ describe('<AktivitetskravFaktaIndex>', () => {
         fom: '2021-01-08',
         morsAktivitet: 'ARBEID_OG_UTDANNING',
         tom: '2021-01-13',
-      },
-      {
+      }, {
         avklaring: 'IKKE_I_AKTIVITET_DOKUMENTERT',
         begrunnelse: 'Dette er en begrunnelse på andre periode',
         endret: false,
