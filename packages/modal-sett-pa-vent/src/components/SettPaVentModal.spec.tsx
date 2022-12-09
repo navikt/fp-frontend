@@ -36,29 +36,7 @@ describe('<SettPaVentModal>', () => {
     expect(screen.getByText('OK')).toBeEnabled();
   });
 
-  it.skip('skal disable knapp for lagring når frist er en ugyldig dato', async () => {
-    const cancelEventCallback = jest.fn();
-    const submitCallback = jest.fn();
-
-    const utils = render(
-      <RawIntlProvider value={intlMock}>
-        <SettPaVentModal
-          submitCallback={submitCallback}
-          cancelEvent={cancelEventCallback}
-          frist="20-10-10"
-          hasManualPaVent
-          ventearsaker={[]}
-          erTilbakekreving={false}
-          showModal
-        />
-      </RawIntlProvider>,
-    );
-
-    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
-    expect(utils.getByText('OK').closest('button')).toBeDisabled();
-  });
-
-  it.skip('skal disable knapp for lagring når frist er en historisk dato', async () => {
+  it('skal disable knapp for lagring når frist er en historisk dato', async () => {
     const cancelEventCallback = jest.fn();
     const submitCallback = jest.fn();
 
