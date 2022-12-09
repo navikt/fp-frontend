@@ -21,6 +21,7 @@ describe('<MeldingIndex>', () => {
     { kode: 'Mal1', navn: 'Mal 1', tilgjengelig: true },
     { kode: 'Mal2', navn: 'Mal 2', tilgjengelig: true },
     { kode: 'Mal3', navn: 'Mal 3', tilgjengelig: true },
+    { kode: dokumentMalType.VARSEL_OM_REVURDERING, navn: 'Varsel om revurdering', tilgjengelig: true },
     { kode: dokumentMalType.INNHENTE_OPPLYSNINGER, navn: 'Innhent', tilgjengelig: true },
   ];
 
