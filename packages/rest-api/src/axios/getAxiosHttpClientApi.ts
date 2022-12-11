@@ -14,7 +14,6 @@ const getAxiosHttpClientApi = (): HttpClientApi => {
     const navCallId = `CallId_${(new Date()).getTime()}_${Math.floor(Math.random() * 1000000000)}`;
     const config = { ...c };
     config.headers['Nav-Callid'] = navCallId;
-    config.headers['x_Nav-CallId'] = navCallId;
     return config;
   });
 

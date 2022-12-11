@@ -11,7 +11,7 @@ const getGraphRequest = (bearerToken, graphUrl) => new Promise(((resolve, reject
     .then((response) => resolve(response.data))
     .catch((err) => {
       if (err.response.data) {
-        logger.warning('Error during graph call: ', err);
+        logger.warning(`Error during graph call: ${err}`);
         reject(err.response.data);
       } else {
         reject(err);
