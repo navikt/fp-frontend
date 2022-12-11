@@ -15,7 +15,7 @@ const proxyOptions = (api) => ({
     const requestTime = Date.now();
     options.headers[xTimestamp] = requestTime;
     options.headers.cookie = '';
-    delete headers.cookie;
+    delete options.headers.cookie;
     // eslint-disable-next-line no-promise-executor-return
     return new Promise(((resolve, reject) => grantAzureOboToken(req.headers.authorization, api.scopes)
       .then((accessToken) => {
