@@ -14,7 +14,6 @@ const proxyOptions = (api) => ({
   proxyReqOptDecorator: (options, req) => {
     const requestTime = Date.now();
     options.headers[xTimestamp] = requestTime;
-    options.headers.cookie = '';
     delete options.headers.cookie;
     // eslint-disable-next-line no-promise-executor-return
     return new Promise(((resolve, reject) => grantAzureOboToken(req.headers.authorization, api.scopes)
@@ -54,7 +53,7 @@ const proxyOptions = (api) => ({
     if (statusCode >= 500) {
       log.logger.warn(melding, { 'Nav-Callid': callIdValue });
     } else {
-      log.info(melding);
+      log.logger.info(melding, { 'Nav-Callid': callIdValue });
     }
     return headers;
   },
