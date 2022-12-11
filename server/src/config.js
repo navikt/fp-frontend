@@ -50,7 +50,7 @@ const cors = {
   allowedHeaders: envVar({
     name: 'CORS_ALLOWED_HEADERS',
     required: false,
-  }) || 'x_Nav-CallId',
+  }) || 'Nav-CallId',
   exposedHeaders: envVar({
     name: 'CORS_EXPOSED_HEADERS',
     required: false,
