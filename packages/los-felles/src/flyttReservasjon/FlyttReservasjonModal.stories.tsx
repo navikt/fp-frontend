@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
-import { RestApiPathsKeys, requestApi } from '../../../data/fplosRestApi';
 import FlyttReservasjonModal from './FlyttReservasjonModal';
-import SaksbehandlerAvdeling from '../../../typer/saksbehandlerAvdelingTsType';
+import SaksbehandlerAvdeling from '../typer/saksbehandlerAvdelingTsType';
 
-import messages from '../../../../i18n/nb_NO.json';
+import messages from '../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
@@ -26,21 +25,25 @@ const Template: Story<{
   saksbehandler,
   hentReserverteOppgaver,
 }) => {
-  const data = [
-    { key: RestApiPathsKeys.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK.name, data: saksbehandler },
-    { key: RestApiPathsKeys.FLYTT_RESERVASJON.name, data: undefined },
-  ];
+  const [harHentet, setHentet] = useState(false);
+  const hentSaksbehandler = () => {
+    setHentet(true);
+    return Promise.resolve(saksbehandler);
+  };
 
   return (
-    <RestApiMock data={data} requestApi={requestApi}>
-      <FlyttReservasjonModal
-        showModal
-        oppgaveId={1}
-        closeModal={action('button-click')}
-        toggleMenu={action('button-click')}
-        hentReserverteOppgaver={hentReserverteOppgaver}
-      />
-    </RestApiMock>
+    <FlyttReservasjonModal
+      showModal
+      oppgaveId={1}
+      closeModal={action('button-click')}
+      toggleMenu={action('button-click')}
+      hentReserverteOppgaver={hentReserverteOppgaver}
+      flyttOppgavereservasjon={() => Promise.resolve()}
+      hentSaksbehandler={hentSaksbehandler}
+      hentSaksbehandlerState={harHentet ? RestApiState.SUCCESS : RestApiState.NOT_STARTED}
+      saksbehandler={saksbehandler}
+      resetHentSaksbehandler={() => undefined}
+    />
   );
 };
 

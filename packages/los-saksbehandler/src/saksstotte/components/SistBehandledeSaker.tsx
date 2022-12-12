@@ -3,7 +3,8 @@ import { FormattedMessage } from 'react-intl';
 import { Link, BodyShort, Heading } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import Oppgave from '../../typer/oppgaveTsType';
+import { Oppgave } from '@fpsak-frontend/los-felles';
+
 import { RestApiPathsKeys, restApiHooks } from '../../data/fplosSaksbehandlerRestApi';
 
 const getClickEvent = (openFpsak: (oppgave: Oppgave) => void, oppgave: Oppgave) => () => openFpsak(oppgave);

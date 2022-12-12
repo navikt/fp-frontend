@@ -3,11 +3,9 @@ import {
 } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import { FagsakEnkel, AlleKodeverk } from '@fpsak-frontend/types';
+import { SaksbehandlerForFlytting, Oppgave, OppgaveStatus } from '@fpsak-frontend/los-felles';
 
-import SaksbehandlerForFlytting from '../typer/saksbehandlerForFlyttingTsType';
-import OppgaveStatus from '../typer/oppgaveStatusTsType';
 import NyeOgFerdigstilteOppgaver from '../typer/nyeOgFerdigstilteOppgaverTsType';
-import Oppgave from '../typer/oppgaveTsType';
 import Saksbehandler from '../typer/saksbehandlerTsType';
 import Saksliste from '../typer/sakslisteTsType';
 import Driftsmelding from '../typer/driftsmeldingTsType';

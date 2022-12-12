@@ -3,8 +3,8 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Panel } from '@navikt/ds-react';
 import { KodeverkMedNavn } from '@navikt/ft-types';
 import { BehandlingType } from '@navikt/ft-kodeverk';
+import { ReactECharts } from '@fpsak-frontend/los-felles';
 
-import ReactECharts from '../../../ReactECharts';
 import OppgaverForAvdeling from '../../../typer/oppgaverForAvdelingTsType';
 
 const behandlingstypeOrder = [

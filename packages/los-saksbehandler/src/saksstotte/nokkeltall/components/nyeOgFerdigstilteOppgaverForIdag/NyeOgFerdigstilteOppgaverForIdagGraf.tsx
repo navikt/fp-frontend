@@ -3,9 +3,9 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Panel } from '@navikt/ds-react';
 import { KodeverkMedNavn } from '@navikt/ft-types';
 import { BehandlingType } from '@navikt/ft-kodeverk';
+import { ReactECharts } from '@fpsak-frontend/los-felles';
 
 import NyeOgFerdigstilteOppgaver from '../../../../typer/nyeOgFerdigstilteOppgaverTsType';
-import ReactECharts from '../../../../utils/ReactECharts';
 
 const behandlingstypeOrder = [
   BehandlingType.TILBAKEKREVING_REVURDERING,

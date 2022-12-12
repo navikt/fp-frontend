@@ -1,14 +1,17 @@
-import React, { Component, MouseEvent } from 'react';
+import React, {
+  useEffect, FunctionComponent, MouseEvent, useState, useRef, useCallback,
+} from 'react';
 import { FormattedMessage } from 'react-intl';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { getDateAndTime } from '@navikt/ft-utils';
+import {
+  Oppgave, OppgaveReservasjonEndringDatoModal, FlyttReservasjonModal,
+} from '@fpsak-frontend/los-felles';
 
-import Oppgave from '../../../typer/oppgaveTsType';
+import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosSaksbehandlerRestApi';
 import MenuButton from './MenuButton';
 import OpphevReservasjonModal from './OpphevReservasjonModal';
 import OppgaveReservasjonForlengetModal from './forleng/OppgaveReservasjonForlengetModal';
-import OppgaveReservasjonEndringDatoModal from './endre/OppgaveReservasjonEndringDatoModal';
-import FlyttReservasjonModal from './flytt/FlyttReservasjonModal';
 
 import styles from './oppgaveHandlingerMenu.less';
 
@@ -37,200 +40,179 @@ interface OwnProps {
   toggleMenu: (valgtOppgave: Oppgave) => void;
   offset: Offset;
   oppgave: Oppgave;
-  imageNode: any;
+  imageNode: HTMLDivElement | null;
   forlengOppgaveReservasjon: (oppgaveId: number) => Promise<string>;
   hentReserverteOppgaver: (params: any, keepData: boolean) => void;
 }
 
-interface OwnState {
-  showOpphevReservasjonModal: boolean;
-  showForlengetReservasjonModal: boolean;
-  showReservasjonEndringDatoModal: boolean;
-  showFlyttReservasjonModal: boolean;
-}
+const OppgaveHandlingerMenu: FunctionComponent<OwnProps> = ({
+  toggleMenu,
+  offset,
+  oppgave,
+  imageNode,
+  forlengOppgaveReservasjon,
+  hentReserverteOppgaver,
+}) => {
+  const [showOpphevReservasjonModal, setOpphevReservasjonModal] = useState(false);
+  const [showForlengetReservasjonModal, setForlengetReservasjonModal] = useState(false);
+  const [showReservasjonEndringDatoModal, setReservasjonEndringDatoModal] = useState(false);
+  const [showFlyttReservasjonModal, setFlyttReservasjonModal] = useState(false);
 
-// TODO Refaktorer til funksjonell komponent
+  const menuButtonRef = useRef<HTMLButtonElement>();
+  const divRef = useRef<HTMLDivElement>();
 
-/**
- * OppgaveHandlingerMenu
- */
-export class OppgaveHandlingerMenu extends Component<OwnProps, OwnState> {
-  node: any;
-
-  menuButtonRef: any;
-
-  constructor(props: OwnProps) {
-    super(props);
-
-    this.state = {
-      showOpphevReservasjonModal: false,
-      showForlengetReservasjonModal: false,
-      showReservasjonEndringDatoModal: false,
-      showFlyttReservasjonModal: false,
-    };
-
-    this.menuButtonRef = React.createRef();
-    toggleEventListeners(true, this.handleOutsideClick);
-  }
-
-  // eslint-disable-next-line react/no-arrow-function-lifecycle
-  componentDidMount = () => {
-    if (this.menuButtonRef && this.menuButtonRef.current) {
-      this.menuButtonRef.current.focus();
-    }
-  };
-
-  // eslint-disable-next-line react/no-arrow-function-lifecycle
-  componentWillUnmount = () => {
-    toggleEventListeners(false, this.handleOutsideClick);
-  };
-
-  handleOutsideClick = (event: MouseEvent<HTMLButtonElement>) => {
-    const { imageNode } = this.props;
+  const handleOutsideClick = (event: MouseEvent<HTMLButtonElement>) => {
     // ignore clicks on the component itself
-    const harKlikketMeny = this.node && this.node.contains(event.target);
-    const harKlikketIkon = imageNode && imageNode.contains(event.target);
+    const harKlikketMeny = divRef.current && divRef.current.contains(event.target as Node);
+    const harKlikketIkon = imageNode && imageNode.contains(event.target as Node);
     if (harKlikketMeny || harKlikketIkon) {
       return;
     }
 
-    const { toggleMenu, oppgave } = this.props;
     toggleMenu(oppgave);
   };
 
-  showBegrunnelseModal = () => {
-    toggleEventListeners(false, this.handleOutsideClick);
-    this.setState((prevState) => ({ ...prevState, showOpphevReservasjonModal: true }));
-  };
+  useEffect(() => {
+    toggleEventListeners(true, handleOutsideClick);
+    if (menuButtonRef && menuButtonRef.current) {
+      menuButtonRef.current.focus();
+    }
+    return () => {
+      toggleEventListeners(false, handleOutsideClick);
+    };
+  }, []);
 
-  closeBegrunnelseModal = () => {
-    const { toggleMenu, oppgave } = this.props;
+  const showBegrunnelseModal = useCallback(() => {
+    toggleEventListeners(false, handleOutsideClick);
+    setOpphevReservasjonModal(true);
+  }, [handleOutsideClick]);
+
+  const closeBegrunnelseModal = useCallback(() => {
     toggleMenu(oppgave);
-    toggleEventListeners(true, this.handleOutsideClick);
-    this.setState((prevState) => ({ ...prevState, showOpphevReservasjonModal: false }));
-  };
+    toggleEventListeners(true, handleOutsideClick);
+    setOpphevReservasjonModal(false);
+  }, [toggleMenu, oppgave, handleOutsideClick]);
 
-  showFlytteModal = () => {
-    toggleEventListeners(false, this.handleOutsideClick);
-    this.setState((prevState) => ({ ...prevState, showFlyttReservasjonModal: true }));
-  };
+  const showFlytteModal = useCallback(() => {
+    toggleEventListeners(false, handleOutsideClick);
+    setFlyttReservasjonModal(true);
+  }, [handleOutsideClick]);
 
-  closeFlytteModal = () => {
-    const { toggleMenu, oppgave } = this.props;
+  const closeFlytteModal = useCallback(() => {
     toggleMenu(oppgave);
-    toggleEventListeners(true, this.handleOutsideClick);
-    this.setState((prevState) => ({ ...prevState, showFlyttReservasjonModal: false }));
-  };
+    toggleEventListeners(true, handleOutsideClick);
+    setFlyttReservasjonModal(false);
+  }, [toggleMenu, oppgave, handleOutsideClick]);
 
-  closeForlengReservasjonModal = (event: MouseEvent<HTMLButtonElement>) => {
-    const { toggleMenu, oppgave } = this.props;
+  const closeForlengReservasjonModal = useCallback((event: MouseEvent<HTMLButtonElement>) => {
     toggleMenu(oppgave);
-    this.handleOutsideClick(event);
-  };
+    handleOutsideClick(event);
+  }, [toggleMenu, oppgave, handleOutsideClick]);
 
-  forlengReserverasjon = () => {
-    const { oppgave, forlengOppgaveReservasjon } = this.props;
+  const forlengReserverasjon = useCallback(() => {
     forlengOppgaveReservasjon(oppgave.id).then(() => {
-      toggleEventListeners(false, this.handleOutsideClick);
-      this.setState((prevState) => ({ ...prevState, showForlengetReservasjonModal: true }));
+      toggleEventListeners(false, handleOutsideClick);
+      setForlengetReservasjonModal(true);
     });
-  };
+  }, [forlengOppgaveReservasjon, oppgave, handleOutsideClick]);
 
-  closeReservasjonEndringDatoModal = (event: MouseEvent<HTMLButtonElement>) => {
-    const { toggleMenu, oppgave } = this.props;
+  const closeReservasjonEndringDatoModal = useCallback((event: MouseEvent<HTMLButtonElement>) => {
     toggleMenu(oppgave);
-    this.handleOutsideClick(event);
-  };
+    handleOutsideClick(event);
+  }, [toggleMenu, oppgave, handleOutsideClick]);
 
-  showReservasjonEndringDato = () => {
-    toggleEventListeners(false, this.handleOutsideClick);
-    this.setState((prevState) => ({ ...prevState, showReservasjonEndringDatoModal: true }));
-  };
+  const showReservasjonEndringDato = useCallback(() => {
+    toggleEventListeners(false, handleOutsideClick);
+    setReservasjonEndringDatoModal(true);
+  }, [handleOutsideClick]);
 
-  endreReserverasjonState = () => {
-    toggleEventListeners(false, this.handleOutsideClick);
-    this.setState((prevState) => ({ ...prevState, showForlengetReservasjonModal: true }));
-  };
+  const endreReserverasjonState = useCallback(() => {
+    toggleEventListeners(false, handleOutsideClick);
+    setForlengetReservasjonModal(true);
+  }, [handleOutsideClick]);
 
-  toggleMeny = () => {
-    const { toggleMenu, oppgave } = this.props;
+  const toggleMeny = useCallback(() => {
     toggleMenu(oppgave);
-  };
+  }, [toggleMenu, oppgave]);
 
-  // eslint-disable-next-line react/no-arrow-function-lifecycle
-  render = () => {
-    const {
-      oppgave, offset, hentReserverteOppgaver,
-    } = this.props;
-    const {
-      showOpphevReservasjonModal, showForlengetReservasjonModal, showReservasjonEndringDatoModal, showFlyttReservasjonModal,
-    } = this.state;
+  const { startRequest: endreOppgavereservasjon } = restApiHooks.useRestApiRunner(RestApiPathsKeys.ENDRE_OPPGAVERESERVASJON);
 
-    return (
-      <>
-        <div className={styles.containerMenu} style={getOffsetPositionStyle(offset)} ref={(node) => { this.node = node; }}>
-          {oppgave.status.reservertTilTidspunkt && (
-            <FormattedMessage
-              id="OppgaveHandlingerMenu.ReservertTil"
-              values={{
-                ...getDateAndTime(oppgave.status.reservertTilTidspunkt),
-                b: (...chunks: any) => <b>{chunks}</b>,
-              }}
-            />
-          )}
-          <VerticalSpacer eightPx />
-          <MenuButton onClick={this.showBegrunnelseModal} ref={this.menuButtonRef}>
-            <FormattedMessage id="OppgaveHandlingerMenu.LeggTilbake" values={{ br: <br /> }} />
-          </MenuButton>
-          <MenuButton onClick={this.forlengReserverasjon}>
-            <FormattedMessage id="OppgaveHandlingerMenu.ForlengReservasjon" values={{ br: <br /> }} />
-          </MenuButton>
+  const { startRequest: flyttOppgavereservasjon } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FLYTT_RESERVASJON);
 
-          <MenuButton onClick={this.showReservasjonEndringDato}>
-            <FormattedMessage id="OppgaveHandlingerMenu.EndreReservasjon" />
-          </MenuButton>
-          <MenuButton onClick={this.showFlytteModal}>
-            <FormattedMessage id="OppgaveHandlingerMenu.FlyttReservasjon" values={{ br: <br /> }} />
-          </MenuButton>
-        </div>
-        {showOpphevReservasjonModal && (
-          <OpphevReservasjonModal
-            oppgave={oppgave}
-            showModal={showOpphevReservasjonModal}
-            cancel={this.closeBegrunnelseModal}
-            toggleMenu={this.toggleMeny}
-            hentReserverteOppgaver={hentReserverteOppgaver}
+  const {
+    startRequest: hentSaksbehandler, state: hentSaksbehandlerState, data: saksbehandler, resetRequestData: resetHentSaksbehandler,
+  } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK);
+
+  return (
+    <>
+      <div className={styles.containerMenu} style={getOffsetPositionStyle(offset)} ref={divRef}>
+        {oppgave.status.reservertTilTidspunkt && (
+          <FormattedMessage
+            id="OppgaveHandlingerMenu.ReservertTil"
+            values={{
+              ...getDateAndTime(oppgave.status.reservertTilTidspunkt),
+              b: (...chunks: any) => <b>{chunks}</b>,
+            }}
           />
         )}
-        {showReservasjonEndringDatoModal && (
-          <OppgaveReservasjonEndringDatoModal
-            showModal={showReservasjonEndringDatoModal}
-            closeModal={this.closeReservasjonEndringDatoModal}
-            reserverTilDefault={oppgave.status.reservertTilTidspunkt}
-            oppgaveId={oppgave.id}
-            hentReserverteOppgaver={hentReserverteOppgaver}
-            endreReserverasjonState={this.endreReserverasjonState}
-          />
-        )}
-        {showForlengetReservasjonModal && (
-          <OppgaveReservasjonForlengetModal
-            oppgave={oppgave}
-            showModal={showForlengetReservasjonModal}
-            closeModal={this.closeForlengReservasjonModal}
-          />
-        )}
-        {showFlyttReservasjonModal && (
-          <FlyttReservasjonModal
-            oppgaveId={oppgave.id}
-            showModal={showFlyttReservasjonModal}
-            closeModal={this.closeFlytteModal}
-            toggleMenu={this.toggleMeny}
-            hentReserverteOppgaver={hentReserverteOppgaver}
-          />
-        )}
-      </>
-    );
-  };
-}
+        <VerticalSpacer eightPx />
+        <MenuButton onClick={showBegrunnelseModal} ref={menuButtonRef}>
+          <FormattedMessage id="OppgaveHandlingerMenu.LeggTilbake" values={{ br: <br /> }} />
+        </MenuButton>
+        <MenuButton onClick={forlengReserverasjon}>
+          <FormattedMessage id="OppgaveHandlingerMenu.ForlengReservasjon" values={{ br: <br /> }} />
+        </MenuButton>
+
+        <MenuButton onClick={showReservasjonEndringDato}>
+          <FormattedMessage id="OppgaveHandlingerMenu.EndreReservasjon" />
+        </MenuButton>
+        <MenuButton onClick={showFlytteModal}>
+          <FormattedMessage id="OppgaveHandlingerMenu.FlyttReservasjon" values={{ br: <br /> }} />
+        </MenuButton>
+      </div>
+      {showOpphevReservasjonModal && (
+        <OpphevReservasjonModal
+          oppgave={oppgave}
+          showModal={showOpphevReservasjonModal}
+          cancel={closeBegrunnelseModal}
+          toggleMenu={toggleMeny}
+          hentReserverteOppgaver={hentReserverteOppgaver}
+        />
+      )}
+      {showReservasjonEndringDatoModal && (
+        <OppgaveReservasjonEndringDatoModal
+          showModal={showReservasjonEndringDatoModal}
+          closeModal={closeReservasjonEndringDatoModal}
+          reserverTilDefault={oppgave.status.reservertTilTidspunkt}
+          oppgaveId={oppgave.id}
+          hentReserverteOppgaver={hentReserverteOppgaver}
+          endreReserverasjonState={endreReserverasjonState}
+          endreOppgavereservasjon={endreOppgavereservasjon}
+        />
+      )}
+      {showForlengetReservasjonModal && (
+        <OppgaveReservasjonForlengetModal
+          oppgave={oppgave}
+          showModal={showForlengetReservasjonModal}
+          closeModal={closeForlengReservasjonModal}
+        />
+      )}
+      {showFlyttReservasjonModal && (
+        <FlyttReservasjonModal
+          oppgaveId={oppgave.id}
+          showModal={showFlyttReservasjonModal}
+          closeModal={closeFlytteModal}
+          toggleMenu={toggleMeny}
+          hentReserverteOppgaver={hentReserverteOppgaver}
+          flyttOppgavereservasjon={flyttOppgavereservasjon}
+          hentSaksbehandler={hentSaksbehandler}
+          hentSaksbehandlerState={hentSaksbehandlerState}
+          saksbehandler={saksbehandler}
+          resetHentSaksbehandler={resetHentSaksbehandler}
+        />
+      )}
+    </>
+  );
+};
 
 export default OppgaveHandlingerMenu;

@@ -1,4 +1,16 @@
-import OppgaveStatus from './oppgaveStatusTsType';
+export type OppgaveStatus = Readonly<{
+  erReservert: boolean;
+  reservertTilTidspunkt?: string;
+  erReservertAvInnloggetBruker?: boolean;
+  reservertAvUid?: string;
+  reservertAvNavn?: string;
+  flyttetReservasjon?: {
+    tidspunkt: string;
+    uid: string;
+    navn: string;
+    begrunnelse: string;
+  };
+}>
 
 type Oppgave = Readonly<{
   id: number;

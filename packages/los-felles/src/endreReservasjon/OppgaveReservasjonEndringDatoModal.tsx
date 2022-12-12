@@ -6,8 +6,8 @@ import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate } from '@navikt/ft-fo
 import { Form, Datepicker } from '@navikt/ft-form-hooks';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
-import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosRestApi';
-import Modal from '../../../components/Modal';
+import Modal from '../Modal';
+import Oppgave from '../typer/oppgaveTsType';
 
 import styles from './oppgaveReservasjonEndringDatoModal.less';
 
@@ -28,6 +28,7 @@ interface OwnProps {
   oppgaveId: number;
   endreReserverasjonState: () => void;
   hentReserverteOppgaver: (params: any, keepData: boolean) => void;
+  endreOppgavereservasjon: (input: { oppgaveId: number, reserverTil: string }) => Promise<Oppgave[]>;
 }
 
 /**
@@ -41,9 +42,8 @@ const OppgaveReservasjonEndringDatoModal: FunctionComponent<OwnProps & WrappedCo
   oppgaveId,
   hentReserverteOppgaver,
   endreReserverasjonState,
+  endreOppgavereservasjon,
 }) => {
-  const { startRequest: endreOppgavereservasjon } = restApiHooks.useRestApiRunner(RestApiPathsKeys.ENDRE_OPPGAVERESERVASJON);
-
   const endreOppgaveReservasjonFn = useCallback((reserverTil: string) => endreOppgavereservasjon({ oppgaveId, reserverTil })
     .then(() => {
       endreReserverasjonState();

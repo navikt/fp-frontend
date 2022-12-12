@@ -4,9 +4,9 @@ import { action } from '@storybook/addon-actions';
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
+import { Oppgave } from '@fpsak-frontend/los-felles';
 
 import OppgaveErReservertAvAnnenModal from './OppgaveErReservertAvAnnenModal';
-import Oppgave from '../typer/oppgaveTsType';
 
 import messages from '../../i18n/nb_NO.json';
 

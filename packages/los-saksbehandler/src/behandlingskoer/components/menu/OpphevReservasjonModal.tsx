@@ -9,10 +9,9 @@ import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
+import { Oppgave, Modal } from '@fpsak-frontend/los-felles';
 
 import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosSaksbehandlerRestApi';
-import Oppgave from '../../../typer/oppgaveTsType';
-import Modal from '../../../components/Modal';
 
 import styles from './opphevReservasjonModal.less';
 

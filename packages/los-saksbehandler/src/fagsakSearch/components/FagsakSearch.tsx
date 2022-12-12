@@ -3,8 +3,8 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FagsakEnkel } from '@fpsak-frontend/types';
+import { Oppgave } from '@fpsak-frontend/los-felles';
 
-import Oppgave from '../../typer/oppgaveTsType';
 import PersonInfo from './person/PersonInfo';
 import SearchForm from './SearchForm';
 import FagsakList from './FagsakList';

@@ -2,8 +2,8 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
 import dayjs from 'dayjs';
 import { Panel } from '@navikt/ds-react';
+import { ReactECharts } from '@fpsak-frontend/los-felles';
 
-import ReactECharts from '../../../ReactECharts';
 import OppgaverSomErApneEllerPaVent from '../../../typer/oppgaverSomErApneEllerPaVentTsType';
 import BehandlingVenteStatus from '../../../kodeverk/behandlingVenteStatus';
 

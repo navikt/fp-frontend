@@ -4,9 +4,8 @@ import React, {
 
 import { errorOfType, ErrorTypes, getErrorResponseData } from '@fpsak-frontend/rest-api';
 import { FagsakEnkel } from '@fpsak-frontend/types';
+import { OppgaveStatus, Oppgave } from '@fpsak-frontend/los-felles';
 
-import OppgaveStatus from '../typer/oppgaveStatusTsType';
-import Oppgave from '../typer/oppgaveTsType';
 import FagsakSearch from './components/FagsakSearch';
 import { RestApiPathsKeys, restApiHooks } from '../data/fplosSaksbehandlerRestApi';
 import OppgaveErReservertAvAnnenModal from '../components/OppgaveErReservertAvAnnenModal';

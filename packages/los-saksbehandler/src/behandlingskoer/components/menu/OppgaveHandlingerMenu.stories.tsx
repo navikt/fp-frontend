@@ -5,10 +5,10 @@ import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/ft-k
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
+import { Oppgave } from '@fpsak-frontend/los-felles';
 
 import { RestApiPathsKeys, requestApi } from '../../../data/fplosSaksbehandlerRestApi';
 import OppgaveHandlingerMenu from './OppgaveHandlingerMenu';
-import Oppgave from '../../../typer/oppgaveTsType';
 
 import messages from '../../../../i18n/nb_NO.json';
 
@@ -42,7 +42,7 @@ const Template: Story<{ oppgave: Oppgave }> = ({
         toggleMenu={action('button-click')}
         offset={{ top: 50, left: 0 }}
         oppgave={oppgave}
-        imageNode=""
+        imageNode={null}
         forlengOppgaveReservasjon={() => Promise.resolve('')}
         hentReserverteOppgaver={action('button-click')}
       />
