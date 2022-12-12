@@ -18,6 +18,7 @@ jobs:
   build-app:
     name: Build and test
     runs-on: ubuntu-latest-8-cores
+    timeout-minutes: 10
     outputs:
       build-version: ${{ steps.generate-build-version.outputs.build-version }}
     steps:
