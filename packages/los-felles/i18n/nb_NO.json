@@ -1,0 +1,14 @@
+{
+  "LeggTilSaksbehandlerForm.FinnesIkke": "Kan ikke finne brukerident",
+
+  "FlyttReservasjonModal.FlyttReservasjon": "Flytt reservasjonen til annen saksbehandler",
+  "FlyttReservasjonModal.Brukerident": "Brukerident",
+  "FlyttReservasjonModal.Sok": "Søk",
+  "FlyttReservasjonModal.Begrunn": "Begrunn flytting av reservasjonen",
+  "FlyttReservasjonModal.Ok": "OK",
+  "FlyttReservasjonModal.Avbryt": "Avbryt",
+
+  "OppgaveReservasjonEndringDatoModal.Header": "Velg dato som reservasjonen avsluttes",
+  "OppgaveReservasjonEndringDatoModal.Ok": "OK",
+  "OppgaveReservasjonEndringDatoModal.Avbryt": "Avbryt"
+}

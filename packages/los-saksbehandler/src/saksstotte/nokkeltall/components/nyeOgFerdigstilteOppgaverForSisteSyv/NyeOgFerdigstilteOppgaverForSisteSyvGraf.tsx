@@ -4,7 +4,8 @@ import { Panel } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import ReactECharts from '../../../../utils/ReactECharts';
+import { ReactECharts } from '@fpsak-frontend/los-felles';
+
 import NyeOgFerdigstilteOppgaver from '../../../../typer/nyeOgFerdigstilteOppgaverTsType';
 
 export const slaSammenBehandlingstyperOgFyllInnTomme = (nyeOgFerdigstilteOppgaver: NyeOgFerdigstilteOppgaver[]):

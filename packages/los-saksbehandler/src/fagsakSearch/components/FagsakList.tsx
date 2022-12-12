@@ -8,8 +8,8 @@ import {
 import { FagsakStatus, KodeverkType } from '@navikt/ft-kodeverk';
 import { FagsakEnkel } from '@fpsak-frontend/types';
 import { getKodeverknavnFraKode } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
+import { Oppgave } from '@fpsak-frontend/los-felles';
 
-import Oppgave from '../../typer/oppgaveTsType';
 import useLosKodeverk from '../../data/useLosKodeverk';
 import { restApiHooks, RestApiGlobalStatePathsKeys } from '../../data/fplosSaksbehandlerRestApi';
 

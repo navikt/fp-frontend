@@ -16,9 +16,8 @@ import menuIconBlueUrl from '@fpsak-frontend/assets/images/ic-menu-18px_blue.svg
 import menuIconBlackUrl from '@fpsak-frontend/assets/images/ic-menu-18px_black.svg';
 import bubbletextUrl from '@fpsak-frontend/assets/images/bubbletext.svg';
 import bubbletextFilledUrl from '@fpsak-frontend/assets/images/bubbletext_filled.svg';
+import { Oppgave, OppgaveStatus } from '@fpsak-frontend/los-felles';
 
-import Oppgave from '../../typer/oppgaveTsType';
-import OppgaveStatus from '../../typer/oppgaveStatusTsType';
 import BehandlingPollingTimoutModal from './BehandlingPollingTimoutModal';
 import OppgaveHandlingerMenu from './menu/OppgaveHandlingerMenu';
 import {

@@ -5,8 +5,8 @@ import {
   FlexColumn, FlexContainer, FlexRow, Image,
 } from '@navikt/ft-ui-komponenter';
 import advarselImageUrl from '@fpsak-frontend/assets/images/advarsel.svg';
+import { Modal } from '@fpsak-frontend/los-felles';
 
-import Modal from '../../components/Modal';
 import Saksbehandler from '../../typer/saksbehandlerAvdelingTsType';
 
 import styles from './sletteSaksbehandlerModal.less';

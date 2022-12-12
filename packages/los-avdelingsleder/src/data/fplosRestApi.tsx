@@ -3,6 +3,7 @@ import {
 } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import { AlleKodeverk } from '@fpsak-frontend/types';
+import { Oppgave } from '@fpsak-frontend/los-felles';
 
 import Avdeling from '../typer/avdelingTsType';
 import SakslisteAvdeling from '../typer/sakslisteAvdelingTsType';
@@ -14,7 +15,6 @@ import OppgaverForForsteStonadsdag from '../typer/oppgaverForForsteStonadsdagTsT
 import OppgaverSomErApneEllerPaVent from '../typer/oppgaverSomErApneEllerPaVentTsType';
 import Reservasjon from '../typer/reservasjonTsType';
 import SaksbehandlerForFlytting from '../typer/saksbehandlerForFlyttingTsType';
-import Oppgave from '../typer/oppgaveTsType';
 
 export const RestApiGlobalStatePathsKeys = {
   KODEVERK_LOS: new RestKey<AlleKodeverk, void>('KODEVERK_LOS'),

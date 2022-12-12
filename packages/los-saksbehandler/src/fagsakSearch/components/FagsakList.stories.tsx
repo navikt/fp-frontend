@@ -9,9 +9,9 @@ import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
 import { alleKodeverkLos } from '@fpsak-frontend/storybook-utils';
 import { FagsakEnkel, KjønnkodeEnum } from '@fpsak-frontend/types';
+import { Oppgave } from '@fpsak-frontend/los-felles';
 
 import FagsakList from './FagsakList';
-import Oppgave from '../../typer/oppgaveTsType';
 import { RestApiGlobalStatePathsKeys, requestApi } from '../../data/fplosSaksbehandlerRestApi';
 
 import messages from '../../../i18n/nb_NO.json';

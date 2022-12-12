@@ -3,11 +3,11 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, BodyShort } from '@navikt/ds-react';
 
 import advarselImageUrl from '@fpsak-frontend/assets/images/advarsel.svg';
+import { Modal } from '@fpsak-frontend/los-felles';
 
 import {
   FlexColumn, FlexContainer, FlexRow, Image,
 } from '@navikt/ft-ui-komponenter';
-import Modal from '../../components/Modal';
 import Saksliste from '../../typer/sakslisteAvdelingTsType';
 
 import styles from './sletteSakslisteModal.less';

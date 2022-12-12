@@ -5,8 +5,8 @@ import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/ft-k
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
+import { Oppgave } from '@fpsak-frontend/los-felles';
 
-import Oppgave from '../../../typer/oppgaveTsType';
 import { RestApiPathsKeys, requestApi } from '../../../data/fplosSaksbehandlerRestApi';
 import OpphevReservasjonModal from './OpphevReservasjonModal';
 
