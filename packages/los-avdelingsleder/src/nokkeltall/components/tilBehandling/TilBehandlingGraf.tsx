@@ -4,8 +4,7 @@ import { Panel } from '@navikt/ds-react';
 import { KodeverkMedNavn } from '@navikt/ft-types';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { BehandlingType } from '@navikt/ft-kodeverk';
-
-import ReactECharts from '../../../ReactECharts';
+import { ReactECharts } from '@fpsak-frontend/los-felles';
 
 const behandlingstypeOrder = [
   BehandlingType.TILBAKEKREVING_REVURDERING,

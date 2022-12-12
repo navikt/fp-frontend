@@ -9,14 +9,14 @@ import {
 import { getDateAndTime } from '@navikt/ft-utils';
 
 import { AlleKodeverk } from '@fpsak-frontend/types';
+import { OppgaveReservasjonEndringDatoModal, FlyttReservasjonModal } from '@fpsak-frontend/los-felles';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { getKodeverknavnFraKode } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
 import removeIcon from '@fpsak-frontend/assets/images/remove.svg';
 import gruppeHoverUrl from '@fpsak-frontend/assets/images/gruppe_hover.svg';
 import gruppeUrl from '@fpsak-frontend/assets/images/gruppe.svg';
 
-import FlyttReservasjonModal from './flytt/FlyttReservasjonModal';
-import OppgaveReservasjonEndringDatoModal from './endre/OppgaveReservasjonEndringDatoModal';
+import { restApiHooks, RestApiPathsKeys } from '../../data/fplosRestApi';
 import Reservasjon from '../../typer/reservasjonTsType';
 import CalendarToggleButton from './CalendarToggleButton';
 
@@ -70,6 +70,14 @@ const ReservasjonerTabell: FunctionComponent<OwnProps> = ({
   const sorterteReservasjoner = useMemo(() => reservasjoner
     .sort((reservasjon1, reservasjon2) => reservasjon1.reservertAvNavn.localeCompare(reservasjon2.reservertAvNavn)),
   [reservasjoner]);
+
+  const { startRequest: endreOppgavereservasjon } = restApiHooks.useRestApiRunner(RestApiPathsKeys.ENDRE_OPPGAVERESERVASJON);
+
+  const { startRequest: flyttOppgavereservasjon } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FLYTT_RESERVASJON);
+
+  const {
+    startRequest: hentSaksbehandler, state: hentSaksbehandlerState, data: saksbehandler, resetRequestData: resetHentSaksbehandler,
+  } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK);
 
   return (
     <>
@@ -126,6 +134,7 @@ const ReservasjonerTabell: FunctionComponent<OwnProps> = ({
           endreReserverasjonState={closeReservasjonEndringDatoModal}
           hentReserverteOppgaver={hentAvdelingensReservasjoner}
           oppgaveId={valgtReservasjon.oppgaveId}
+          endreOppgavereservasjon={endreOppgavereservasjon}
         />
       )}
       {valgtReservasjon && showFlyttReservasjonModal && (
@@ -135,6 +144,11 @@ const ReservasjonerTabell: FunctionComponent<OwnProps> = ({
           oppgaveId={valgtReservasjon.oppgaveId}
           toggleMenu={closeFlytteModal}
           hentReserverteOppgaver={hentAvdelingensReservasjoner}
+          flyttOppgavereservasjon={flyttOppgavereservasjon}
+          hentSaksbehandler={hentSaksbehandler}
+          hentSaksbehandlerState={hentSaksbehandlerState}
+          saksbehandler={saksbehandler}
+          resetHentSaksbehandler={resetHentSaksbehandler}
         />
       )}
     </>

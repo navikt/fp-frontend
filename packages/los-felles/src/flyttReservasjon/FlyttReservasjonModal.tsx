@@ -1,7 +1,5 @@
 import React, { FunctionComponent, useEffect, useCallback } from 'react';
-import {
-  injectIntl, WrappedComponentProps, FormattedMessage, IntlShape,
-} from 'react-intl';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Label, Button, BodyShort } from '@navikt/ds-react';
 import { Form, TextAreaField, InputField } from '@navikt/ft-form-hooks';
@@ -14,9 +12,8 @@ import {
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
-import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosRestApi';
-import Modal from '../../../components/Modal';
-import SaksbehandlerForFlytting from '../../../typer/saksbehandlerForFlyttingTsType';
+import Modal from '../Modal';
+import SaksbehandlerForFlytting from '../typer/saksbehandlerForFlyttingTsType';
 
 import styles from './flyttReservasjonModal.less';
 
@@ -48,34 +45,41 @@ interface OwnProps {
   closeModal: () => void;
   toggleMenu: () => void;
   hentReserverteOppgaver: (params: any, keepData: boolean) => void;
+  flyttOppgavereservasjon: (params: { oppgaveId: number, brukerIdent: string, begrunnelse: string }) => Promise<void>;
+  hentSaksbehandler: (params: { brukerIdent: string }) => Promise<SaksbehandlerForFlytting>;
+  hentSaksbehandlerState: RestApiState;
+  saksbehandler: SaksbehandlerForFlytting;
+  resetHentSaksbehandler: () => void;
 }
 
 /**
  * FlyttReservasjonModal
  *
- * Presentasjonskomponent. Modal som lar en søke opp en saksbehandler som saken skal flyttes til. En kan også begrunne hvorfor saken skal flyttes.
+ * Modal som lar en søke opp en saksbehandler som saken skal flyttes til. En kan også begrunne hvorfor saken skal flyttes.
  */
-export const FlyttReservasjonModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const FlyttReservasjonModal: FunctionComponent<OwnProps> = ({
   showModal,
   closeModal,
   oppgaveId,
   toggleMenu,
   hentReserverteOppgaver,
+  flyttOppgavereservasjon,
+  hentSaksbehandler,
+  hentSaksbehandlerState,
+  saksbehandler,
+  resetHentSaksbehandler,
 }) => {
-  const {
-    startRequest, state, data: saksbehandler, resetRequestData,
-  } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK);
-  const finnSaksbehandler = useCallback((brukerIdent: string) => startRequest({ brukerIdent }), []);
+  const intl = useIntl();
 
-  const { startRequest: flyttOppgavereservasjon } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FLYTT_RESERVASJON);
+  const finnSaksbehandler = useCallback((brukerIdent: string) => hentSaksbehandler({ brukerIdent }), []);
+
   const flyttReservasjon = useCallback((brukerident: string, begrunnelse: string) => flyttOppgavereservasjon({
     oppgaveId, brukerIdent: brukerident, begrunnelse,
   }).then(() => hentReserverteOppgaver({}, true)),
   []);
 
   useEffect(() => () => {
-    resetRequestData();
+    resetHentSaksbehandler();
   }, []);
 
   const søkFormMethods = useForm<SøkFormValues>();
@@ -112,17 +116,17 @@ export const FlyttReservasjonModal: FunctionComponent<OwnProps & WrappedComponen
               <Button
                 size="small"
                 variant="primary"
-                loading={state === RestApiState.LOADING}
-                disabled={!brukerIdentValue || state === RestApiState.LOADING}
+                loading={hentSaksbehandlerState === RestApiState.LOADING}
+                disabled={!brukerIdentValue || hentSaksbehandlerState === RestApiState.LOADING}
               >
                 <FormattedMessage id="FlyttReservasjonModal.Sok" />
               </Button>
             </FlexColumn>
           </FlexRow>
         </FlexContainer>
-        {state === RestApiState.SUCCESS && (
+        {hentSaksbehandlerState === RestApiState.SUCCESS && (
           <>
-            <BodyShort size="small">{formatText(state, intl, saksbehandler)}</BodyShort>
+            <BodyShort size="small">{formatText(hentSaksbehandlerState, intl, saksbehandler)}</BodyShort>
             <VerticalSpacer sixteenPx />
           </>
         )}
@@ -151,7 +155,7 @@ export const FlyttReservasjonModal: FunctionComponent<OwnProps & WrappedComponen
                 variant="primary"
                 disabled={!saksbehandler || (!begrunnelseValue || begrunnelseValue.length < 3)}
               >
-                {intl.formatMessage({ id: 'FlyttReservasjonModal.Ok' })}
+                <FormattedMessage id="FlyttReservasjonModal.Ok" />
               </Button>
             </FlexColumn>
             <FlexColumn>
@@ -162,7 +166,7 @@ export const FlyttReservasjonModal: FunctionComponent<OwnProps & WrappedComponen
                 onClick={closeModal}
                 type="button"
               >
-                {intl.formatMessage({ id: 'FlyttReservasjonModal.Avbryt' })}
+                <FormattedMessage id="FlyttReservasjonModal.Avbryt" />
               </Button>
             </FlexColumn>
           </FlexRow>
@@ -172,4 +176,4 @@ export const FlyttReservasjonModal: FunctionComponent<OwnProps & WrappedComponen
   );
 };
 
-export default injectIntl(FlyttReservasjonModal);
+export default FlyttReservasjonModal;

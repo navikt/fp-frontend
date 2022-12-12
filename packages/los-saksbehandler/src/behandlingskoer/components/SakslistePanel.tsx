@@ -3,9 +3,10 @@ import { FormattedMessage } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
+import { Oppgave } from '@fpsak-frontend/los-felles';
+
 import { getValueFromLocalStorage, setValueInLocalStorage, removeValueFromLocalStorage } from '../../data/localStorageHelper';
 import Saksliste from '../../typer/sakslisteTsType';
-import Oppgave from '../../typer/oppgaveTsType';
 import { RestApiPathsKeys, restApiHooks } from '../../data/fplosSaksbehandlerRestApi';
 import SakslisteVelgerForm from './SakslisteVelgerForm';
 import OppgaverTabell from './OppgaverTabell';

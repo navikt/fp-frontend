@@ -3,9 +3,9 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
+import { Oppgave } from '@fpsak-frontend/los-felles';
 
 import { RestApiPathsKeys, requestApi } from '../../data/fplosSaksbehandlerRestApi';
-import Oppgave from '../../typer/oppgaveTsType';
 import SistBehandledeSaker from './SistBehandledeSaker';
 
 import messages from '../../../i18n/nb_NO.json';

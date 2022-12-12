@@ -4,9 +4,9 @@ import React, {
 import { FormattedMessage } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 
+import { Oppgave, OppgaveStatus } from '@fpsak-frontend/los-felles';
+
 import Saksliste from '../typer/sakslisteTsType';
-import OppgaveStatus from '../typer/oppgaveStatusTsType';
-import Oppgave from '../typer/oppgaveTsType';
 import OppgaveErReservertAvAnnenModal from '../components/OppgaveErReservertAvAnnenModal';
 import { RestApiPathsKeys, restApiHooks } from '../data/fplosSaksbehandlerRestApi';
 import SakslistePanel from './components/SakslistePanel';
