@@ -44,7 +44,8 @@ const getFagsakCallback = (
 export const getSorterteFagsaker = (fagsaker: FagsakEnkel[] = []) => fagsaker.concat().sort((fagsak1, fagsak2) => {
   if (fagsak1.status === FagsakStatus.AVSLUTTET && fagsak2.status !== FagsakStatus.AVSLUTTET) {
     return 1;
-  } if (fagsak1.status !== FagsakStatus.AVSLUTTET && fagsak2.status === FagsakStatus.AVSLUTTET) {
+  }
+  if (fagsak1.status !== FagsakStatus.AVSLUTTET && fagsak2.status === FagsakStatus.AVSLUTTET) {
     return -1;
   }
   const changeTimeFagsak1 = fagsak1.endret ? fagsak1.endret : fagsak1.opprettet;

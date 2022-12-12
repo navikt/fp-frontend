@@ -1,4 +1,6 @@
-import React, { FunctionComponent, ReactElement, useMemo } from 'react';
+import React, {
+  FunctionComponent, ReactElement, useCallback, useMemo,
+} from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 
@@ -131,6 +133,8 @@ const AdopsjonInfoPanel: FunctionComponent<OwnProps> = ({
 
   const editedStatus = useMemo(() => getEditedStatus(soknad, gjeldendeFamiliehendelse), [soknad, gjeldendeFamiliehendelse]);
 
+  const onSubmit = useCallback((values: FormValues): Promise<any> => submitCallback(transformValues(values, aksjonspunkter)), [submitCallback, aksjonspunkter]);
+
   return (
     <>
       <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
@@ -138,7 +142,7 @@ const AdopsjonInfoPanel: FunctionComponent<OwnProps> = ({
       </AksjonspunktHelpTextTemp>
       <Form
         formMethods={formMethods}
-        onSubmit={(values: FormValues): Promise<any> => submitCallback(transformValues(values, aksjonspunkter))}
+        onSubmit={onSubmit}
         setDataOnUnmount={setFormData}
       >
         <VerticalSpacer eightPx />

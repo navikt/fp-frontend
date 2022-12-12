@@ -127,7 +127,8 @@ const getSorteringsnavn = (intl: IntlShape, alleKodeverk: AlleKodeverk, sakslist
 
   if (!values.fomDato) {
     return intl.formatMessage({ id: 'SakslisteVelgerForm.SorteringsinfoTom' }, values) as string;
-  } if (!values.tomDato) {
+  }
+  if (!values.tomDato) {
     return intl.formatMessage({ id: 'SakslisteVelgerForm.SorteringsinfoFom' }, values) as string;
   }
   return intl.formatMessage({ id: 'SakslisteVelgerForm.Sorteringsinfo' }, values) as string;

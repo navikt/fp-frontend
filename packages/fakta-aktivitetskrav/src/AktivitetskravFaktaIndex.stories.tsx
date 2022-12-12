@@ -41,6 +41,8 @@ const merknaderFraBeslutter = {
   notAccepted: true,
 };
 
+const setFormData = () => undefined;
+
 export default {
   title: 'fakta/fakta-aktivitetskrav',
   component: AktivitetskravFaktaIndex,
@@ -71,7 +73,7 @@ const Template: Story<{
     harApneAksjonspunkter={aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET)}
     submittable={submittable}
     alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-    setFormData={() => undefined}
+    setFormData={setFormData}
   />
 );
 

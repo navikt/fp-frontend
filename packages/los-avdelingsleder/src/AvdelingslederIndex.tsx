@@ -171,9 +171,11 @@ const AvdelingslederIndex: FunctionComponent<OwnProps> = ({
 
   if (!kanOppgavestyre) {
     return <IkkeTilgangTilAvdelingslederPanel />;
-  } if (erKode6Avdeling && !kanBehandleKode6) {
+  }
+  if (erKode6Avdeling && !kanBehandleKode6) {
     return <IkkeTilgangTilKode6AvdelingPanel />;
-  } if (valgtAvdelingEnhet) {
+  }
+  if (valgtAvdelingEnhet) {
     return (
       <AvdelingslederDashboard key={valgtAvdelingEnhet}>
         <Avdelingsvelger

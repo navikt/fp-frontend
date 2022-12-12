@@ -245,7 +245,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
         {tabellRader.map((radData, index) => (
           <ArbeidsforholdRad
             // eslint-disable-next-line react/no-array-index-key
-            key={`${radData.arbeidsgiverNavn}${radData.arbeidsgiverIdent}${index}`}
+            key={`${radData.arbeidsgiverNavn}${radData.arbeidsgiverIdent}${index}`} // nosonar
             arbeidOgInntekt={arbeidOgInntekt}
             saksnummer={saksnummer}
             behandlingUuid={behandling.uuid}

@@ -19,6 +19,8 @@ const promiseAction = () => (...args: any): Promise<any> => {
   return Promise.resolve();
 };
 
+const setFormData = () => undefined;
+
 export default {
   title: 'fakta/fakta-arbeid-og-inntekter',
   component: ArbeidOgInntektFaktaIndex,
@@ -61,7 +63,7 @@ const Template: Story<{
     alleMerknaderFraBeslutter={{}}
     readOnly={readOnly}
     alleKodeverk={alleKodeverk as any}
-    setFormData={() => undefined}
+    setFormData={setFormData}
     arbeidOgInntekt={arbeidOgInntekt}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     registrerArbeidsforhold={registrerArbeidsforhold}

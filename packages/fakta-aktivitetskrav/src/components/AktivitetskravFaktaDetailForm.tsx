@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import {
@@ -38,8 +38,10 @@ export const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
     },
   });
 
+  const onSubmit = useCallback((values: FormValues) => oppdaterAktivitetskrav(values), [oppdaterAktivitetskrav]);
+
   return (
-    <Form formMethods={formMethods} onSubmit={(values: FormValues) => oppdaterAktivitetskrav(values)}>
+    <Form formMethods={formMethods} onSubmit={onSubmit}>
       <Heading size="small"><FormattedMessage id="AktivitetskravFaktaDetailForm.Header" /></Heading>
       <VerticalSpacer fourPx />
       <FlexContainer>

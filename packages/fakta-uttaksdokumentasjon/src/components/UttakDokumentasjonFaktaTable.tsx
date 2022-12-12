@@ -16,6 +16,27 @@ import UttakDokumentasjonFaktaDetailForm from './UttakDokumentasjonFaktaDetailFo
 
 import styles from './uttakDokumentasjonFaktaTable.less';
 
+const UTTAK_ÅRSAK_TEKSTER = {
+  [UttakÅrsak.INNLEGGELSE_SØKER]: 'UttakDokumentasjonFaktaTable.InnleggelseSoker',
+  [UttakÅrsak.INNLEGGELSE_BARN]: 'UttakDokumentasjonFaktaTable.InnleggelseBarn',
+  [UttakÅrsak.HV_ØVELSE]: 'UttakDokumentasjonFaktaTable.HvOvelse',
+  [UttakÅrsak.NAV_TILTAK]: 'UttakDokumentasjonFaktaTable.NavTiltak',
+  [UttakÅrsak.SYKDOM_SØKER]: 'UttakDokumentasjonFaktaTable.SykdomSoker',
+  [UttakÅrsak.SYKDOM_ANNEN_FORELDER]: 'UttakDokumentasjonFaktaTable.SykdomAnnenForelder',
+  [UttakÅrsak.INNLEGGELSE_ANNEN_FORELDER]: 'UttakDokumentasjonFaktaTable.InnleggelseAnnenForelder',
+  [UttakÅrsak.BARE_SØKER_RETT]: 'UttakDokumentasjonFaktaTable.BareSokerRett',
+  [UttakÅrsak.ALENEOMSORG]: 'UttakDokumentasjonFaktaTable.Aleneomsorg',
+  [UttakÅrsak.AKTIVITETSKRAV_ARBEID]: 'UttakDokumentasjonFaktaTable.AktivitetskravArbeid',
+  [UttakÅrsak.AKTIVITETSKRAV_UTDANNING]: 'UttakDokumentasjonFaktaTable.AktivitetskravUtdanning',
+  [UttakÅrsak.AKTIVITETSKRAV_KVALPROG]: 'UttakDokumentasjonFaktaTable.AktivitetskravKvalprog',
+  [UttakÅrsak.AKTIVITETSKRAV_INTROPROG]: 'UttakDokumentasjonFaktaTable.AktivitetskravIntroprog',
+  [UttakÅrsak.AKTIVITETSKRAV_TRENGER_HJELP]: 'UttakDokumentasjonFaktaTable.AktivitetskravTrengerHjelp',
+  [UttakÅrsak.AKTIVITETSKRAV_INNLAGT]: 'UttakDokumentasjonFaktaTable.AktivitetskravInnlagt',
+  [UttakÅrsak.AKTIVITETSKRAV_ARBEID_OG_UTDANNING]: 'UttakDokumentasjonFaktaTable.AktivitetskravArbeidUtdanning',
+  [UttakÅrsak.AKTIVITETSKRAV_IKKE_OPPGITT]: 'UttakDokumentasjonFaktaTable.AktivitetskravIkkeOppgitt',
+  [UttakÅrsak.TIDLIG_OPPSTART_FAR]: 'UttakDokumentasjonFaktaTable.TidligOppstartFar',
+};
+
 const finnType = (type) => {
   if (type === UttakType.UTSETTELSE) {
     return <FormattedMessage id="UttakDokumentasjonFaktaTable.Utsettelse" />;
@@ -24,65 +45,6 @@ const finnType = (type) => {
     return <FormattedMessage id="UttakDokumentasjonFaktaTable.Overforing" />;
   }
   return <FormattedMessage id="UttakDokumentasjonFaktaTable.Uttak" />;
-};
-
-const finnÅrsak = (årsak) => {
-  if (årsak === UttakÅrsak.INNLEGGELSE_SØKER) {
-    return <FormattedMessage id="UttakDokumentasjonFaktaTable.InnleggelseSoker" />;
-  }
-  if (årsak === UttakÅrsak.INNLEGGELSE_BARN) {
-    return <FormattedMessage id="UttakDokumentasjonFaktaTable.InnleggelseBarn" />;
-  }
-  if (årsak === UttakÅrsak.HV_ØVELSE) {
-    return <FormattedMessage id="UttakDokumentasjonFaktaTable.HvOvelse" />;
-  }
-  if (årsak === UttakÅrsak.NAV_TILTAK) {
-    return <FormattedMessage id="UttakDokumentasjonFaktaTable.NavTiltak" />;
-  }
-  if (årsak === UttakÅrsak.SYKDOM_SØKER) {
-    return <FormattedMessage id="UttakDokumentasjonFaktaTable.SykdomSoker" />;
-  }
-  if (årsak === UttakÅrsak.SYKDOM_ANNEN_FORELDER) {
-    return <FormattedMessage id="UttakDokumentasjonFaktaTable.SykdomAnnenForelder" />;
-  }
-  if (årsak === UttakÅrsak.INNLEGGELSE_ANNEN_FORELDER) {
-    return <FormattedMessage id="UttakDokumentasjonFaktaTable.InnleggelseAnnenForelder" />;
-  }
-  if (årsak === UttakÅrsak.BARE_SØKER_RETT) {
-    return <FormattedMessage id="UttakDokumentasjonFaktaTable.BareSokerRett" />;
-  }
-  if (årsak === UttakÅrsak.ALENEOMSORG) {
-    return <FormattedMessage id="UttakDokumentasjonFaktaTable.Aleneomsorg" />;
-  }
-  if (årsak === UttakÅrsak.AKTIVITETSKRAV_ARBEID) {
-    return <FormattedMessage id="UttakDokumentasjonFaktaTable.AktivitetskravArbeid" />;
-  }
-  if (årsak === UttakÅrsak.AKTIVITETSKRAV_UTDANNING) {
-    return <FormattedMessage id="UttakDokumentasjonFaktaTable.AktivitetskravUtdanning" />;
-  }
-  if (årsak === UttakÅrsak.AKTIVITETSKRAV_KVALPROG) {
-    return <FormattedMessage id="UttakDokumentasjonFaktaTable.AktivitetskravKvalprog" />;
-  }
-  if (årsak === UttakÅrsak.AKTIVITETSKRAV_INTROPROG) {
-    return <FormattedMessage id="UttakDokumentasjonFaktaTable.AktivitetskravIntroprog" />;
-  }
-  if (årsak === UttakÅrsak.AKTIVITETSKRAV_TRENGER_HJELP) {
-    return <FormattedMessage id="UttakDokumentasjonFaktaTable.AktivitetskravTrengerHjelp" />;
-  }
-  if (årsak === UttakÅrsak.AKTIVITETSKRAV_INNLAGT) {
-    return <FormattedMessage id="UttakDokumentasjonFaktaTable.AktivitetskravInnlagt" />;
-  }
-  if (årsak === UttakÅrsak.AKTIVITETSKRAV_ARBEID_OG_UTDANNING) {
-    return <FormattedMessage id="UttakDokumentasjonFaktaTable.AktivitetskravArbeidUtdanning" />;
-  }
-  if (årsak === UttakÅrsak.AKTIVITETSKRAV_IKKE_OPPGITT) {
-    return <FormattedMessage id="UttakDokumentasjonFaktaTable.AktivitetskravIkkeOppgitt" />;
-  }
-  if (årsak === UttakÅrsak.TIDLIG_OPPSTART_FAR) {
-    return <FormattedMessage id="UttakDokumentasjonFaktaTable.TidligOppstartFar" />;
-  }
-
-  return '';
 };
 
 const HEADER_TEXT_CODES = [
@@ -140,7 +102,7 @@ const UttakDokumentasjonFaktaTable: FunctionComponent<OwnProps> = ({
           <>
             <TableColumn>{`${dateFormat(behov.fom)} - ${dateFormat(behov.tom)}`}</TableColumn>
             <TableColumn>{finnType(behov.type)}</TableColumn>
-            <TableColumn>{finnÅrsak(behov.årsak)}</TableColumn>
+            <TableColumn>{UTTAK_ÅRSAK_TEKSTER[behov.årsak] ? <FormattedMessage id={UTTAK_ÅRSAK_TEKSTER[behov.årsak]} /> : ''}</TableColumn>
             <TableColumn>
               {behov.vurdering === UttakVurdering.GODKJENT && (
                 <>

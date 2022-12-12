@@ -41,6 +41,8 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
+const setFormData = () => undefined;
+
 export default {
   title: 'fakta/fakta-adopsjon',
   component: AdopsjonFaktaIndex,
@@ -65,7 +67,7 @@ const Template: Story<{
     harApneAksjonspunkter
     submittable
     alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-    setFormData={() => undefined}
+    setFormData={setFormData}
     behandling={behandling}
     aksjonspunkter={aksjonspunkter}
     alleKodeverk={alleKodeverk as any}
