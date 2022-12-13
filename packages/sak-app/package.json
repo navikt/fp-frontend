@@ -78,7 +78,7 @@
     "@navikt/ft-form-hooks": "3.2.5",
     "@navikt/ft-kodeverk": "^1.0.24",
     "@navikt/ft-plattform-komponenter": "1.4.1",
-    "@navikt/ft-prosess-beregningsgrunnlag": "4.0.6",
+    "@navikt/ft-prosess-beregningsgrunnlag": "4.0.7",
     "@navikt/ft-prosess-tilbakekreving": "^1.3.5",
     "@navikt/ft-prosess-tilbakekreving-foreldelse": "^1.3.5",
     "@navikt/ft-prosess-tilbakekreving-vedtak": "^1.3.5",
