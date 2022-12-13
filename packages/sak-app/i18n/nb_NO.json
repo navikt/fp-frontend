@@ -24,6 +24,8 @@
   
   "Behandlingspunkt.Uttak": "Uttak",
 
+  "ErrorBoundary.Error": "Det har oppstått en teknisk feil i visning av {name}. Meld feilen i Porten. Ta med feilmeldingsteksten.",
+
   "FatterVedtakStatusModal.SendtBeslutter": "Forslag til vedtak er sendt til beslutter",
   
   "ErForeldreansvarVilkaarOppfyltForm.2LeddParagrafForeldrepenger": "Vurder om vilkår om foreldreansvaret etter § 14-5 andre ledd er oppfylt",
