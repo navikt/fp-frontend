@@ -170,6 +170,7 @@ const config = {
       failOnError: true,
     }),
     new ExternalTemplateRemotesPlugin(),
+    new webpack.EnvironmentPlugin({ SENTRY_RELEASE: null }),
   ],
 };
 
