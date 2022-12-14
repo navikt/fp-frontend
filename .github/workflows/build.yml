@@ -88,6 +88,12 @@ jobs:
         run: |
           yarn build
 
+      - name: Opprett release med Sentry
+        if: github.ref_name == 'master'
+        run: yarn sentry-release
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+
       - name: Bygg server
         if: github.actor != 'dependabot[bot]'
         run: cd ./server && yarn install --ignore-optional --no-progress --frozen-lockfile
