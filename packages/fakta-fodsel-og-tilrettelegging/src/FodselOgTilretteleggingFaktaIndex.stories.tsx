@@ -7,12 +7,15 @@ import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingTyp
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
-  ArbeidsforholdFodselOgTilrettelegging, Behandling, InntektArbeidYtelse, FodselOgTilrettelegging,
+  ArbeidsforholdFodselOgTilrettelegging,
+  Behandling,
+  FodselOgTilrettelegging,
+  ArbeidOgInntektsmelding,
 } from '@fpsak-frontend/types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
-import { tilrettelegging as tilretteleggingPermisjon, inntektArbeidYtelse as iayPermisjon } from '../testdata/tilretteleggningMedPermisjon';
+import tilretteleggingPermisjon from '../testdata/tilretteleggningMedPermisjon';
 
 import FodselOgTilretteleggingFaktaIndex from './FodselOgTilretteleggingFaktaIndex';
 
@@ -48,32 +51,26 @@ const svangerskapspengerTilretteleggingForFrilanser = {
   }] as ArbeidsforholdFodselOgTilrettelegging[],
 };
 
-const defaultInntektArbeidYtelse = {
+const defaultArbeidOgInntekt = {
   arbeidsforhold: [{
-    id: '555864629-null',
-    arbeidsgiverReferanse: '555864629',
-    kilde: {
-      navn: 'AA-Registeret',
-    },
-    stillingsprosent: 100.00,
-    skjaeringstidspunkt: '2020-01-30',
-    mottattDatoInntektsmelding: '2020-01-28',
-    fomDato: '2016-01-28',
-    ikkeRegistrertIAaRegister: false,
-    tilVurdering: false,
-    vurderOmSkalErstattes: false,
-    brukArbeidsforholdet: true,
-    fortsettBehandlingUtenInntektsmelding: false,
-    erNyttArbeidsforhold: false,
-    erEndret: false,
-    brukMedJustertPeriode: false,
-    lagtTilAvSaksbehandler: false,
-    basertPaInntektsmelding: false,
-    permisjoner: [],
-    kanOppretteNyttArbforFraIM: false,
+    arbeidsgiverIdent: '555864629',
+    internArbeidsforholdId: '555864629-null',
   }],
-  skalKunneLeggeTilNyeArbeidsforhold: false,
-} as InntektArbeidYtelse;
+} as ArbeidOgInntektsmelding;
+
+const spesiellArbeidOgInntekt = {
+  inntektsmeldinger: [{
+    arbeidsgiverIdent: '999999999',
+    motattDato: '2020-03-20',
+    refusjonPrMnd: 5170.00,
+  }],
+  arbeidsforhold: [{
+    internArbeidsforholdId: '999999999-null',
+    arbeidsgiverIdent: '999999999',
+    fom: '2019-04-01',
+    stillingsprosent: 100.00,
+  }],
+} as ArbeidOgInntektsmelding;
 
 const arbeidsgiverOpplysningerPerId = {
   1: {
@@ -124,13 +121,13 @@ const Template: Story<{
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
-  inntektArbeidYtelse: InntektArbeidYtelse;
+  arbeidOgInntekt: ArbeidOgInntektsmelding;
   erOverstyrer?: boolean;
 }> = ({
   aksjonspunkter,
   submitCallback,
   svangerskapspengerTilrettelegging,
-  inntektArbeidYtelse,
+  arbeidOgInntekt,
   erOverstyrer = false,
 }) => (
   <FodselOgTilretteleggingFaktaIndex
@@ -143,10 +140,10 @@ const Template: Story<{
     behandling={behandling}
     svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
     aksjonspunkter={aksjonspunkter}
-    inntektArbeidYtelse={inntektArbeidYtelse}
     erOverstyrer={erOverstyrer}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     alleKodeverk={alleKodeverk as any}
+    arbeidOgInntekt={arbeidOgInntekt}
   />
 );
 
@@ -161,7 +158,7 @@ TilretteleggingMedVelferdspermisjon.args = {
     erAktivt: true,
   }],
   svangerskapspengerTilrettelegging: tilretteleggingPermisjon,
-  inntektArbeidYtelse: iayPermisjon,
+  arbeidOgInntekt: spesiellArbeidOgInntekt,
 };
 
 export const AksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigNæringsdrivende = Template.bind({});
@@ -175,7 +172,7 @@ AksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigNæringsdrivende.
     erAktivt: true,
   }],
   svangerskapspengerTilrettelegging: svangerskapspengerTilretteleggingForFrilanser,
-  inntektArbeidYtelse: defaultInntektArbeidYtelse,
+  arbeidOgInntekt: defaultArbeidOgInntekt,
 };
 
 export const ErOverstyrer = Template.bind({});
@@ -189,6 +186,6 @@ ErOverstyrer.args = {
     erAktivt: true,
   }],
   svangerskapspengerTilrettelegging: tilretteleggingPermisjon,
-  inntektArbeidYtelse: iayPermisjon,
+  arbeidOgInntekt: spesiellArbeidOgInntekt,
   erOverstyrer: true,
 };

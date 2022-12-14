@@ -1,5 +1,3 @@
-import Arbeidsforhold from './arbeidsforholdTsType';
-
 export type RelatertTilgrensedYtelse = Readonly<{
   relatertYtelseType: string;
   tilgrensendeYtelserListe: {
@@ -19,9 +17,6 @@ type InntektArbeidYtelse = Readonly<{
   relatertTilgrensendeYtelserForSoker?: RelatertTilgrensedYtelse[];
   relatertTilgrensendeYtelserForAnnenForelder?: RelatertTilgrensedYtelse[];
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder?: RelatertTilgrensedYtelse[];
-  inntektsmeldinger?: IAYInntektsmelding[];
-  arbeidsforhold?: Arbeidsforhold[];
-  skalKunneLeggeTilNyeArbeidsforhold: boolean;
 }>
 
 export default InntektArbeidYtelse;

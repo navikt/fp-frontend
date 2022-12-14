@@ -4,7 +4,10 @@ import { KodeverkType } from '@navikt/ft-kodeverk';
 import { createIntl } from '@navikt/ft-utils';
 
 import {
-  ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps, InntektArbeidYtelse, FodselOgTilrettelegging,
+  ArbeidsgiverOpplysningerPerId,
+  StandardFaktaPanelProps,
+  FodselOgTilrettelegging,
+  ArbeidOgInntektsmelding,
 } from '@fpsak-frontend/types';
 
 import FodselOgTilretteleggingFaktaForm from './components/FodselOgTilretteleggingFaktaForm';
@@ -15,7 +18,7 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
-  inntektArbeidYtelse: InntektArbeidYtelse;
+  arbeidOgInntekt: ArbeidOgInntektsmelding;
   erOverstyrer: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
@@ -23,7 +26,6 @@ interface OwnProps {
 const FodselOgTilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
   behandling,
   svangerskapspengerTilrettelegging,
-  inntektArbeidYtelse,
   aksjonspunkter,
   submitCallback,
   readOnly,
@@ -34,12 +36,13 @@ const FodselOgTilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFa
   alleKodeverk,
   formData,
   setFormData,
+  arbeidOgInntekt,
 }) => (
   <RawIntlProvider value={intl}>
     <FodselOgTilretteleggingFaktaForm
       behandlingVersjon={behandling.versjon}
       svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
-      iayArbeidsforhold={inntektArbeidYtelse.arbeidsforhold}
+      arbeidsforhold={arbeidOgInntekt.arbeidsforhold}
       aksjonspunkter={aksjonspunkter}
       submitCallback={submitCallback}
       readOnly={readOnly}
