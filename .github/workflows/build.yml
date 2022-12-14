@@ -83,15 +83,15 @@ jobs:
           echo "Kjøre tester basert på endringene mellom commit og master ${{ github.event.before }}"
           yarn test:coverage --changedSince=origin/master
 
-      - name: Opprett release med Sentry
-        run: yarn sentry-release
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-
       - name: Build
         if: github.ref_name == 'master'
         run: |
           yarn build
+
+      - name: Opprett release med Sentry
+        run: yarn sentry-release
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
       - name: Bygg server
         if: github.actor != 'dependabot[bot]'
