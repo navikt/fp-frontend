@@ -1,5 +1,4 @@
 export type { default as Aksjonspunkt } from './src/aksjonspunktTsType';
-export type { default as Arbeidsforhold, ArbeidsforholdPermisjon } from './src/arbeidsforholdTsType';
 export type { default as Behandling } from './src/behandlingTsType';
 export type {
   default as BehandlingAppKontekst,
