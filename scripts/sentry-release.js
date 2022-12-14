@@ -21,7 +21,7 @@ async function opprettReleaseTilSentry() {
 
     console.log('Laster opp source maps');
     await cli.releases.uploadSourceMaps(release, {
-      include: ['dist/fpsak'],
+      include: ['dist/public'],
       urlPrefix: '~/fpsak/',
       rewrite: false,
     });
