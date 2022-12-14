@@ -21,7 +21,7 @@
     "lint:fix": "eslint --fix --cache \"packages/**/*.ts*\"",
     "less:lint": "stylelint \"packages/**/*.less\"",
     "dev": "cross-env NODE_ENV=development webpack serve --config webpack/webpack.dev.js",
-    "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.prod.js",
+    "build": "cross-env NODE_ENV=production SENTRY_RELEASE=$(git rev-parse --short HEAD) webpack --config webpack/webpack.prod.js",
     "lerna": "lerna",
     "lerna:publish": "(lerna updated && lerna publish --cd-version patch --yes -m \"publish [ci skip]\") || echo \"Ingen endringer avslutter OK\"",
     "doc": "react-asciidoc-generator ./packages/ -o ../../docs/generated/react.adoc --handlebar-template src/docs/asciidoc-template.handlebars",
@@ -30,7 +30,8 @@
     "remove-node-modules": "find . -name \"node_modules\" -exec rm -rf '{}' +",
     "lint:config": "node -e 'console.dir(require(\"./.eslintrc.js\"))'",
     "storybook": "cross-env NODE_ENV=test start-storybook -p 9002",
-    "deploy-storybook": "cross-env NODE_ENV=test build-storybook -o .static_storybook && storybook-to-ghpages --existing-output-dir=.static_storybook"
+    "deploy-storybook": "cross-env NODE_ENV=test build-storybook -o .static_storybook && storybook-to-ghpages --existing-output-dir=.static_storybook",
+    "sentry-release": "(export SENTRY_RELEASE=$(git rev-parse --short HEAD); node ./scripts/sentry-release)"
   },
   "workspaces": [
     "packages/*"
@@ -70,6 +71,7 @@
     "@babel/register": "7.18.9",
     "@commercetools/enzyme-extensions": "5.0.0",
     "@navikt/ds-codemod": "2.0.8",
+    "@sentry/cli": "^2.10.0",
     "@storybook/addon-actions": "6.5.14",
     "@storybook/addon-docs": "6.5.14",
     "@storybook/addons": "6.5.14",
