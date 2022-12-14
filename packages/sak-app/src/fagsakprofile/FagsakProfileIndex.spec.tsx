@@ -1,6 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
+import { RawIntlProvider } from 'react-intl';
+import { createIntl } from '@navikt/ft-utils';
 import { MemoryRouter } from 'react-router-dom';
 import {
   BehandlingStatus, BehandlingType, FagsakYtelseType, FagsakStatus,
@@ -13,6 +15,7 @@ import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 import FagsakProfileIndex from './FagsakProfileIndex';
 import FagsakData from '../fagsak/FagsakData';
+import messages from '../../i18n/nb_NO.json';
 
 describe('<FagsakProfileIndex>', () => {
   const behandling = {
@@ -46,6 +49,8 @@ describe('<FagsakProfileIndex>', () => {
     navn: 'Peder Pjokk',
   };
 
+  const intl = createIntl(messages);
+
   it('skal rendre komponent og vise alle behandlinger når ingen behandling er valgt', async () => {
     const data = [
       { key: FpsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
@@ -55,14 +60,16 @@ describe('<FagsakProfileIndex>', () => {
 
     await act(async () => {
       render(
-        <RestApiMock data={data} requestApi={requestApi}>
-          <MemoryRouter>
-            <FagsakProfileIndex
-              fagsakData={new FagsakData(fagsak as Fagsak)}
-              hentFagsakdataPåNytt={jest.fn()}
-            />
-          </MemoryRouter>
-        </RestApiMock>,
+        <RawIntlProvider value={intl}>
+          <RestApiMock data={data} requestApi={requestApi}>
+            <MemoryRouter>
+              <FagsakProfileIndex
+                fagsakData={new FagsakData(fagsak as Fagsak)}
+                hentFagsakdataPåNytt={jest.fn()}
+              />
+            </MemoryRouter>
+          </RestApiMock>
+        </RawIntlProvider>,
       );
     });
 
@@ -79,15 +86,17 @@ describe('<FagsakProfileIndex>', () => {
 
     await act(async () => {
       render(
-        <RestApiMock data={data} requestApi={requestApi}>
-          <MemoryRouter>
-            <FagsakProfileIndex
-              fagsakData={new FagsakData(fagsak as Fagsak)}
-              hentFagsakdataPåNytt={jest.fn()}
-              behandlingUuid="1"
-            />
-          </MemoryRouter>
-        </RestApiMock>,
+        <RawIntlProvider value={intl}>
+          <RestApiMock data={data} requestApi={requestApi}>
+            <MemoryRouter>
+              <FagsakProfileIndex
+                fagsakData={new FagsakData(fagsak as Fagsak)}
+                hentFagsakdataPåNytt={jest.fn()}
+                behandlingUuid="1"
+              />
+            </MemoryRouter>
+          </RestApiMock>
+        </RawIntlProvider>,
       );
     });
 
