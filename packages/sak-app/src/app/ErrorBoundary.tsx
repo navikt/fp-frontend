@@ -1,12 +1,13 @@
 import React, { Component, ReactNode, ErrorInfo } from 'react';
 import { captureException, withScope } from '@sentry/browser';
-
+import { ErrorMessage } from '@navikt/ds-react';
 import { ErrorPage } from '@navikt/ft-sak-infosider';
 
 interface OwnProps {
   errorMessageCallback: (error: any) => void;
   children: ReactNode;
-  doNotShowErrorPage?: boolean;
+  errorMessage?: string;
+  showChild?: boolean;
 }
 
 interface State {
@@ -15,7 +16,7 @@ interface State {
 
 export class ErrorBoundary extends Component<OwnProps, State> {
   static defaultProps = {
-    doNotShowErrorPage: false,
+    showChild: false,
   };
 
   constructor(props: OwnProps) {
@@ -52,10 +53,30 @@ export class ErrorBoundary extends Component<OwnProps, State> {
   }
 
   render(): ReactNode {
-    const { children, doNotShowErrorPage } = this.props;
+    const { children, showChild, errorMessage } = this.props;
     const { hasError } = this.state;
 
-    return hasError && !doNotShowErrorPage ? <ErrorPage /> : children;
+    if (hasError) {
+      if (errorMessage) {
+        return (
+          <ErrorMessage size="small" style={{ margin: '20px' }}>
+            {errorMessage}
+          </ErrorMessage>
+        );
+      }
+      return (
+        <>
+          {showChild && (
+            <div style={{ marginTop: '150px' }}>
+              {children}
+            </div>
+          )}
+          <ErrorPage />
+        </>
+      );
+    }
+
+    return children;
   }
 }
 

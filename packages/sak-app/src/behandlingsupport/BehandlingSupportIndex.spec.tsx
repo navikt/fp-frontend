@@ -1,4 +1,6 @@
 import React from 'react';
+import { RawIntlProvider } from 'react-intl';
+import { createIntl } from '@navikt/ft-utils';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
@@ -9,6 +11,9 @@ import { BehandlingAppKontekst, Fagsak, VergeBehandlingmenyValg } from '@fpsak-f
 import BehandlingSupportIndex, { hentSynligePaneler, hentValgbarePaneler } from './BehandlingSupportIndex';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 import FagsakData from '../fagsak/FagsakData';
+import messages from '../../i18n/nb_NO.json';
+
+const intl = createIntl(messages);
 
 describe('<BehandlingSupportIndex>', () => {
   const behandling = {
@@ -41,15 +46,17 @@ describe('<BehandlingSupportIndex>', () => {
     ];
 
     render(
-      <RestApiMock data={data} requestApi={requestApi}>
-        <MemoryRouter>
-          <BehandlingSupportIndex
-            fagsakData={new FagsakData(fagsak as Fagsak)}
-            behandlingUuid="1"
-            behandlingVersjon={2}
-          />
-        </MemoryRouter>
-      </RestApiMock>,
+      <RawIntlProvider value={intl}>
+        <RestApiMock data={data} requestApi={requestApi}>
+          <MemoryRouter>
+            <BehandlingSupportIndex
+              fagsakData={new FagsakData(fagsak as Fagsak)}
+              behandlingUuid="1"
+              behandlingVersjon={2}
+            />
+          </MemoryRouter>
+        </RestApiMock>
+      </RawIntlProvider>,
     );
     expect(await screen.findByText('Filtrer på behandling')).toBeInTheDocument();
   });

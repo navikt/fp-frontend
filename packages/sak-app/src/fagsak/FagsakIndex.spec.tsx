@@ -1,18 +1,22 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
+import { RawIntlProvider } from 'react-intl';
 import { render, screen } from '@testing-library/react';
 import {
   BehandlingType, BehandlingStatus, FagsakStatus, FagsakYtelseType,
 } from '@navikt/ft-kodeverk';
+import { createIntl } from '@navikt/ft-utils';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
 import * as useTrackRouteParam from '../app/useTrackRouteParam';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
-
+import messages from '../../i18n/nb_NO.json';
 import FagsakIndex from './FagsakIndex';
+
+const intl = createIntl(messages);
 
 describe('<FagsakIndex>', () => {
   const behandling = {
@@ -79,11 +83,13 @@ describe('<FagsakIndex>', () => {
     ];
 
     render(
-      <RestApiMock data={data} requestApi={requestApi}>
-        <MemoryRouter>
-          <FagsakIndex />
-        </MemoryRouter>
-      </RestApiMock>,
+      <RawIntlProvider value={intl}>
+        <RestApiMock data={data} requestApi={requestApi}>
+          <MemoryRouter>
+            <FagsakIndex />
+          </MemoryRouter>
+        </RestApiMock>
+      </RawIntlProvider>,
     );
 
     expect(await screen.findByText('venter...')).toBeInTheDocument();
@@ -101,11 +107,13 @@ describe('<FagsakIndex>', () => {
 
     await act(async () => {
       render(
-        <RestApiMock data={data} requestApi={requestApi}>
-          <MemoryRouter initialEntries={['/behandling']}>
-            <FagsakIndex />
-          </MemoryRouter>
-        </RestApiMock>,
+        <RawIntlProvider value={intl}>
+          <RestApiMock data={data} requestApi={requestApi}>
+            <MemoryRouter initialEntries={['/behandling']}>
+              <FagsakIndex />
+            </MemoryRouter>
+          </RestApiMock>
+        </RawIntlProvider>,
       );
     });
 
