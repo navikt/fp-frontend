@@ -5,12 +5,14 @@ import {
   Navigate, NavLink, useLocation, useMatch,
 } from 'react-router-dom';
 import { Location } from 'history';
+import { useIntl } from 'react-intl';
 import BehandlingVelgerSakIndex from '@navikt/ft-sak-behandling-velger';
 import FagsakProfilSakIndex from '@navikt/ft-sak-fagsak-profil';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 
 import { BehandlingAppKontekst } from '@fpsak-frontend/types';
 import UkjentAdresseMeldingIndex from '@fpsak-frontend/sak-ukjent-adresse';
+import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 
 import {
   getLocationWithDefaultProsessStegAndFakta,
@@ -20,11 +22,12 @@ import {
 import BehandlingMenuIndex from '../behandlingmenu/BehandlingMenuIndex';
 import RisikoklassifiseringIndex from './risikoklassifisering/RisikoklassifiseringIndex';
 import { useFpSakKodeverkMedNavn, useGetKodeverkFn } from '../data/useKodeverk';
+import FagsakData from '../fagsak/FagsakData';
+import ErrorBoundary from '../app/ErrorBoundary';
 
 import styles from './fagsakProfileIndex.less';
 
 import '@navikt/ft-sak-behandling-velger/dist/style.css';
-import FagsakData from '../fagsak/FagsakData';
 
 const findPathToBehandling = (saksnummer: string, location: Location, alleBehandlinger: BehandlingAppKontekst[]) => {
   if (alleBehandlinger.length === 1) {
@@ -49,6 +52,7 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   behandlingVersjon,
   hentFagsakdataPåNytt,
 }) => {
+  const intl = useIntl();
   const [showAll, setShowAll] = useState(!behandlingUuid);
   const toggleShowAll = useCallback(() => setShowAll(!showAll), [showAll]);
 
@@ -57,6 +61,8 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   const fagsak = fagsakData.getFagsak();
   const fagsakStatusMedNavn = useFpSakKodeverkMedNavn(fagsak.status, KodeverkType.FAGSAK_STATUS);
   const fagsakYtelseTypeMedNavn = useFpSakKodeverkMedNavn(fagsak.fagsakYtelseType, KodeverkType.FAGSAK_YTELSE);
+
+  const { addErrorMessage } = useRestApiErrorDispatcher();
 
   useEffect(() => {
     setShowAll(!behandlingUuid);
@@ -86,38 +92,53 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
           fagsakStatus={fagsakStatusMedNavn}
           dekningsgrad={fagsak.dekningsgrad}
           renderBehandlingMeny={() => (
-            <BehandlingMenuIndex
-              fagsakData={fagsakData}
-              behandlingUuid={behandlingUuid}
-              behandlingVersjon={behandlingVersjon}
-              hentFagsakdataPåNytt={hentFagsakdataPåNytt}
-            />
+            <ErrorBoundary
+              errorMessageCallback={addErrorMessage}
+              errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Meny' })}
+            >
+              <BehandlingMenuIndex
+                fagsakData={fagsakData}
+                behandlingUuid={behandlingUuid}
+                behandlingVersjon={behandlingVersjon}
+                hentFagsakdataPåNytt={hentFagsakdataPåNytt}
+              />
+            </ErrorBoundary>
           )}
           renderBehandlingVelger={() => (
-            <BehandlingVelgerSakIndex
-              behandlinger={fagsakData.getAlleBehandlinger()}
-              behandlingUuid={behandlingUuid}
-              skalViseAlleBehandlinger={showAll}
-              toggleVisAlleBehandlinger={toggleShowAll}
-              renderRadSomLenke={(className, behandlingInfoKomponent, uuid) => (
-                <NavLink
-                  className={className}
-                  to={getBehandlingLocation(uuid)}
-                  onClick={toggleShowAll}
-                >
-                  {behandlingInfoKomponent}
-                </NavLink>
-              )}
-              getKodeverkMedNavn={getKodeverkFn}
-            />
+            <ErrorBoundary
+              errorMessageCallback={addErrorMessage}
+              errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Behandlingsvelger' })}
+            >
+              <BehandlingVelgerSakIndex
+                behandlinger={fagsakData.getAlleBehandlinger()}
+                behandlingUuid={behandlingUuid}
+                skalViseAlleBehandlinger={showAll}
+                toggleVisAlleBehandlinger={toggleShowAll}
+                renderRadSomLenke={(className, behandlingInfoKomponent, uuid) => (
+                  <NavLink
+                    className={className}
+                    to={getBehandlingLocation(uuid)}
+                    onClick={toggleShowAll}
+                  >
+                    {behandlingInfoKomponent}
+                  </NavLink>
+                )}
+                getKodeverkMedNavn={getKodeverkFn}
+              />
+            </ErrorBoundary>
           )}
         />
       )}
-      <RisikoklassifiseringIndex
-        fagsakData={fagsakData}
-        behandlingUuid={behandlingUuid}
-        behandlingVersjon={behandlingVersjon}
-      />
+      <ErrorBoundary
+        errorMessageCallback={addErrorMessage}
+        errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Risikoklassifisering' })}
+      >
+        <RisikoklassifiseringIndex
+          fagsakData={fagsakData}
+          behandlingUuid={behandlingUuid}
+          behandlingVersjon={behandlingVersjon}
+        />
+      </ErrorBoundary>
     </div>
   );
 };

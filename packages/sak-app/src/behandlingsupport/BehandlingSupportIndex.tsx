@@ -2,9 +2,11 @@ import React, {
   FunctionComponent, useCallback, useMemo, useState,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useIntl } from 'react-intl';
 import SupportMenySakIndex, { SupportTabs } from '@navikt/ft-sak-support-meny';
 
 import { BehandlingTillatteOperasjoner } from '@fpsak-frontend/types';
+import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 
 import { getSupportPanelLocationCreator } from '../app/paths';
 import HistorikkIndex from './historikk/HistorikkIndex';
@@ -13,6 +15,8 @@ import DokumentIndex from './dokument/DokumentIndex';
 import TotrinnskontrollIndex from './totrinnskontroll/TotrinnskontrollIndex';
 import useTrackRouteParam from '../app/useTrackRouteParam';
 import FagsakData from '../fagsak/FagsakData';
+import ErrorBoundary from '../app/ErrorBoundary';
+
 import styles from './behandlingSupportIndex.less';
 
 import '@navikt/ft-sak-support-meny/dist/style.css';
@@ -56,6 +60,8 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   behandlingUuid,
   behandlingVersjon,
 }) => {
+  const intl = useIntl();
+
   const { selected: valgtSupportPanel, location } = useTrackRouteParam<string>({
     paramName: 'stotte',
     isQueryParam: true,
@@ -68,6 +74,8 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   const behandling = fagsakData.getBehandling(behandlingUuid);
 
   const navigate = useNavigate();
+
+  const { addErrorMessage } = useRestApiErrorDispatcher();
 
   const erPaVent = behandling ? behandling.behandlingPaaVent : false;
   const behandlingTillatteOperasjoner = behandling?.behandlingTillatteOperasjoner;
@@ -97,40 +105,45 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
           onClick={changeRouteCallback}
         />
       </div>
-      <div className={(aktivtSupportPanel === SupportTabs.HISTORIKK ? styles.containerHistorikk : styles.container)}>
-        {behandling && (aktivtSupportPanel === SupportTabs.TIL_BESLUTTER || aktivtSupportPanel === SupportTabs.FRA_BESLUTTER) && (
-          <TotrinnskontrollIndex
-            fagsakData={fagsakData}
-            valgtBehandlingUuid={behandlingUuid}
-            beslutterFormData={beslutterFormData}
-            setBeslutterForData={setBeslutterForData}
-          />
-        )}
-        {aktivtSupportPanel === SupportTabs.HISTORIKK && (
-          <HistorikkIndex
-            saksnummer={fagsak.saksnummer}
-            behandlingUuid={behandlingUuid}
-            behandlingVersjon={behandlingVersjon}
-            historikkinnslagFpSak={fagsakData.getHistorikkFpSak()}
-            historikkinnslagFpTilbake={fagsakData.getHistorikkFpTilbake()}
-          />
-        )}
-        {behandling && aktivtSupportPanel === SupportTabs.MELDINGER && (
-          <MeldingIndex
-            fagsakData={fagsakData}
-            valgtBehandlingUuid={behandlingUuid}
-            meldingFormData={meldingFormData}
-            setMeldingForData={setMeldingForData}
-          />
-        )}
-        {aktivtSupportPanel === SupportTabs.DOKUMENTER && (
-          <DokumentIndex
-            saksnummer={fagsak.saksnummer}
-            behandlingUuid={behandlingUuid}
-            behandlingVersjon={behandlingVersjon}
-          />
-        )}
-      </div>
+      <ErrorBoundary
+        errorMessageCallback={addErrorMessage}
+        errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Support' })}
+      >
+        <div className={(aktivtSupportPanel === SupportTabs.HISTORIKK ? styles.containerHistorikk : styles.container)}>
+          {behandling && (aktivtSupportPanel === SupportTabs.TIL_BESLUTTER || aktivtSupportPanel === SupportTabs.FRA_BESLUTTER) && (
+            <TotrinnskontrollIndex
+              fagsakData={fagsakData}
+              valgtBehandlingUuid={behandlingUuid}
+              beslutterFormData={beslutterFormData}
+              setBeslutterForData={setBeslutterForData}
+            />
+          )}
+          {aktivtSupportPanel === SupportTabs.HISTORIKK && (
+            <HistorikkIndex
+              saksnummer={fagsak.saksnummer}
+              behandlingUuid={behandlingUuid}
+              behandlingVersjon={behandlingVersjon}
+              historikkinnslagFpSak={fagsakData.getHistorikkFpSak()}
+              historikkinnslagFpTilbake={fagsakData.getHistorikkFpTilbake()}
+            />
+          )}
+          {behandling && aktivtSupportPanel === SupportTabs.MELDINGER && (
+            <MeldingIndex
+              fagsakData={fagsakData}
+              valgtBehandlingUuid={behandlingUuid}
+              meldingFormData={meldingFormData}
+              setMeldingForData={setMeldingForData}
+            />
+          )}
+          {aktivtSupportPanel === SupportTabs.DOKUMENTER && (
+            <DokumentIndex
+              saksnummer={fagsak.saksnummer}
+              behandlingUuid={behandlingUuid}
+              behandlingVersjon={behandlingVersjon}
+            />
+          )}
+        </div>
+      </ErrorBoundary>
     </>
   );
 };

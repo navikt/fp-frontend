@@ -4,11 +4,13 @@ import React, {
 import {
   Route, Navigate, useLocation, Routes,
 } from 'react-router-dom';
+import { useIntl } from 'react-intl';
 import { Location } from 'history';
 import VisittkortSakIndex from '@navikt/ft-sak-visittkort';
 import { LoadingPanel, DataFetchPendingModal } from '@navikt/ft-ui-komponenter';
 import { BehandlingType } from '@navikt/ft-kodeverk';
 
+import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import { AnnenPartBehandling } from '@fpsak-frontend/types';
 
 import BehandlingerIndex from '../behandling/BehandlingerIndex';
@@ -21,6 +23,7 @@ import {
 import FagsakGrid from './components/FagsakGrid';
 import { requestApi } from '../data/fpsakApi';
 import useHentFagsak from './useHentFagsak';
+import ErrorBoundary from '../app/ErrorBoundary';
 
 import '@navikt/ft-sak-visittkort/dist/style.css';
 
@@ -43,6 +46,8 @@ const finnSkalIkkeHenteData = (
  * Container komponent. Er rot for for fagsakdelen av hovedvinduet, og har ansvar å legge valgt saksnummer fra URL-en i staten.
  */
 const FagsakIndex: FunctionComponent = () => {
+  const intl = useIntl();
+
   const [behandlingerTeller, setBehandlingTeller] = useState(0);
   const [requestPendingMessage, setRequestPendingMessage] = useState<string>();
 
@@ -52,6 +57,8 @@ const FagsakIndex: FunctionComponent = () => {
     behandlingVersjon: nyBehandlingVersjon,
   }), []);
   const { behandlingUuid, behandlingVersjon } = behandlingUuidOgVersjon;
+
+  const { addErrorMessage } = useRestApiErrorDispatcher();
 
   const hentFagsakdataPåNytt = useCallback(() => setBehandlingTeller(behandlingerTeller + 1), [behandlingerTeller]);
 
@@ -126,17 +133,22 @@ const FagsakIndex: FunctionComponent = () => {
           }
 
           return (
-            <VisittkortSakIndex
-              lenkeTilAnnenPart={fagsak.annenpartBehandling ? finnLenkeTilAnnenPart(fagsak.annenpartBehandling) : undefined}
-              fagsak={fagsak}
-              fagsakPersoner={{
-                bruker: fagsak.bruker,
-                annenPart: fagsak.annenPart,
-                familiehendelse: fagsak.familiehendelse,
-              }}
-              harVerge={behandling?.harVerge}
-              erTilbakekreving={erTilbakekreving(behandling?.type)}
-            />
+            <ErrorBoundary
+              errorMessageCallback={addErrorMessage}
+              errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Visittkort' })}
+            >
+              <VisittkortSakIndex
+                lenkeTilAnnenPart={fagsak.annenpartBehandling ? finnLenkeTilAnnenPart(fagsak.annenpartBehandling) : undefined}
+                fagsak={fagsak}
+                fagsakPersoner={{
+                  bruker: fagsak.bruker,
+                  annenPart: fagsak.annenPart,
+                  familiehendelse: fagsak.familiehendelse,
+                }}
+                harVerge={behandling?.harVerge}
+                erTilbakekreving={erTilbakekreving(behandling?.type)}
+              />
+            </ErrorBoundary>
           );
         }}
       />

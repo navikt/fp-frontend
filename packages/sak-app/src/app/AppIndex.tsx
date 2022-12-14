@@ -86,7 +86,7 @@ const AppIndex: FunctionComponent = () => {
 
   return (
     <RawIntlProvider value={intl}>
-      <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} doNotShowErrorPage>
+      <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} showChild>
         <AppConfigResolver>
           <>
             <Dekorator
