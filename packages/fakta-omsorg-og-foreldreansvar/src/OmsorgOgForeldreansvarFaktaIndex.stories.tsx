@@ -78,7 +78,6 @@ const inntektArbeidYtelse = {
     }],
     relatertYtelseType: relatertYtelseType.FORELDREPENGER,
   }],
-  skalKunneLeggeTilNyeArbeidsforhold: false,
 } as InntektArbeidYtelse;
 
 const merknaderFraBeslutter = {

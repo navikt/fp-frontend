@@ -75,14 +75,9 @@ YtelserForHovedsøkerOgAnnenPart.args = {
 export const UtenTilgrensedeYtelser = Template.bind({});
 UtenTilgrensedeYtelser.args = {
   inntektArbeidYtelse: {
-    inntektsmeldinger: [{
-      arbeidsgiverStartdato: '2019-02-02',
-      arbeidsgiverReferanse: '123',
-    }],
     relatertTilgrensendeYtelserForSoker: [{
       relatertYtelseType: relatertYtelseType.SVANGERSKAPSPENGER,
       tilgrensendeYtelserListe: [],
     }],
-    skalKunneLeggeTilNyeArbeidsforhold: true,
   },
 };

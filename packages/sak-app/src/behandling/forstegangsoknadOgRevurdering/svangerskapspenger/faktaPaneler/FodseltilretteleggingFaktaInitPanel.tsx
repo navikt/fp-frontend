@@ -7,7 +7,10 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import FodselOgTilretteleggingFaktaIndex from '@fpsak-frontend/fakta-fodsel-og-tilrettelegging';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import {
-  AksessRettigheter, ArbeidsgiverOpplysningerPerId, FodselOgTilrettelegging, InntektArbeidYtelse,
+  AksessRettigheter,
+  ArbeidOgInntektsmelding,
+  ArbeidsgiverOpplysningerPerId,
+  FodselOgTilrettelegging,
 } from '@fpsak-frontend/types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
@@ -19,9 +22,9 @@ const AKSJONSPUNKT_KODER = [aksjonspunktCodes.FODSELTILRETTELEGGING];
 
 const OVERSTYRING_AP_CODES = [aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.INNTEKT_ARBEID_YTELSE, SvpBehandlingApiKeys.SVANGERSKAPSPENGER_TILRETTELEGGING];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.ARBEID_OG_INNTEKT, SvpBehandlingApiKeys.SVANGERSKAPSPENGER_TILRETTELEGGING];
 type EndepunktPanelData = {
-  inntektArbeidYtelse: InntektArbeidYtelse;
+  arbeidOgInntekt: ArbeidOgInntektsmelding;
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
 }
 
