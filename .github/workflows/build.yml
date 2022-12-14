@@ -89,6 +89,7 @@ jobs:
           yarn build
 
       - name: Opprett release med Sentry
+        if: github.ref_name == 'master'
         run: yarn sentry-release
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
