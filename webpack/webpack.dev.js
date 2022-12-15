@@ -11,7 +11,7 @@ const PUBLIC_PATH = '/'
 
 const config = {
   mode: 'development',
-  devtool: 'eval-cheap-source-map',
+  devtool: 'source-map',
   entry: [
     'webpack-dev-server/client?http://localhost:9100',
     path.resolve(path.join(__dirname, '../packages'), 'sak-app/src') + '/index.ts',

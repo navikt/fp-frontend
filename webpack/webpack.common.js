@@ -122,8 +122,15 @@ const config = {
           filename: '[name]_[contenthash].[ext]',
         },
         include: [CORE_DIR],
+      }, {
+        test: /\.(js?)$/,
+        enforce: 'pre',
+        use: ['source-map-loader'],
+        include: [CORE_DIR],
       }],
   },
+
+  ignoreWarnings: [/Failed to parse source map/],
 
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.less'],
