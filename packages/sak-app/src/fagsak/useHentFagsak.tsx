@@ -13,7 +13,7 @@ const useHentFagsak = (saksnummer: string, behandlingUuid?: string, behandlingVe
   const enabledApplicationContexts = useGetEnabledApplikasjonContext();
   const skalHenteFraFpTilbake = enabledApplicationContexts.includes(ApplicationContextPath.FPTILBAKE);
 
-  const { data: fagsak, state: fagsakState } = restApiHooks.useRestApi(FpsakApiKeys.FETCH_FAGSAK, { saksnummer }, {
+  const { data: fagsak } = restApiHooks.useRestApi(FpsakApiKeys.FETCH_FAGSAK, { saksnummer }, {
     updateTriggers: [behandlingUuid, behandlingVersjon, behandlingerTeller],
     suspendRequest: !saksnummer || erBehandlingEndretFraUndefined,
     keepData: true,
@@ -25,10 +25,10 @@ const useHentFagsak = (saksnummer: string, behandlingUuid?: string, behandlingVe
     keepData: true,
   });
 
-  const harHentetFpSak = !!fagsak
-    || (fagsakState !== RestApiState.NOT_STARTED && fagsakState !== RestApiState.LOADING);
-  const harHentetFpTilbake = !skalHenteFraFpTilbake || !!fagsakDataTilbake
-    || (fagsakDataTilbakeState !== RestApiState.NOT_STARTED && fagsakDataTilbakeState !== RestApiState.LOADING);
+  const harHentetFpSak = !!fagsak;
+  const harHentetFpTilbake = !skalHenteFraFpTilbake
+    || !!fagsakDataTilbake
+    || fagsakDataTilbakeState === RestApiState.ERROR;
 
   const harHentetData = harHentetFpSak && harHentetFpTilbake;
   const fagsakData = useMemo(() => (harHentetData ? new FagsakData(fagsak, fagsakDataTilbake) : undefined),
