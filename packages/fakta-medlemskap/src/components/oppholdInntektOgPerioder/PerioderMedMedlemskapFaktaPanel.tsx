@@ -114,7 +114,7 @@ const PerioderMedMedlemskapFaktaPanel: FunctionComponent<OwnProps> & StaticFunct
         })}
       </Table>
       <FlexContainer>
-        {aksjonspunkt && (
+        {aksjonspunktKode && (
           <FlexRow>
             <FlexColumn>
               <RadioGroupPanel
