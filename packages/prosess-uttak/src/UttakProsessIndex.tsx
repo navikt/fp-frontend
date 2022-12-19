@@ -9,6 +9,7 @@ import { createIntl } from '@navikt/ft-utils';
 import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import UttakPanel from './components/UttakPanel';
+import UttakProsessPanel from './nye/UttakProsessPanel';
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
@@ -49,6 +50,25 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
   setFormData,
 }) => (
   <RawIntlProvider value={intl}>
+    <UttakProsessPanel
+      behandling={behandling}
+      uttaksresultatPerioder={uttaksresultatPerioder}
+      uttakStonadskontoer={uttakStonadskontoer}
+      aksjonspunkter={aksjonspunkter}
+      familiehendelse={familiehendelse}
+      soknad={soknad}
+      personoversikt={personoversikt}
+      ytelsefordeling={ytelsefordeling}
+      alleKodeverk={alleKodeverk}
+      employeeHasAccess={employeeHasAccess}
+      submitCallback={submitCallback}
+      tempUpdateStonadskontoer={tempUpdateStonadskontoer}
+      isReadOnly={isReadOnly}
+      readOnlySubmitButton={readOnlySubmitButton}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      formData={formData}
+      setFormData={setFormData}
+    />
     <ReduxWrapper formName="UttakProsessIndex" formData={formData} setFormData={setFormData}>
       <UttakPanel
         // @ts-ignore

@@ -1,0 +1,41 @@
+.tabs {
+  .tab {
+    border: 1px solid #c9c9c9;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    margin-right: 0.5rem;
+    top: 0;
+
+    &.aktiv {
+      background-color: #fff;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-color: transparent;
+      height: 78px;
+      margin-bottom: 0;
+      position: relative;
+    }
+
+    &.error {
+      border-color: transparent;
+    }
+
+    .tabInner {
+      align-items: flex-end;
+      background: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: flex;
+      padding: 0.75rem 1rem 0.3rem 1rem;
+      text-align: left;
+      text-decoration: none;
+      width: 110px;
+
+      &.error {
+        background-color: mix(#c30000, #fff, 20%);
+        border-color: #c30000;
+        border-radius: 4px;
+      }
+    }
+  }
+}
