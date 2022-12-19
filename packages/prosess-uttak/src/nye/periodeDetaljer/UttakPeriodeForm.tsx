@@ -2,30 +2,30 @@ import React, { FunctionComponent } from 'react';
 import { Button } from '@navikt/ds-react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Form, TextAreaField, RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
+import { Form, TextAreaField, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
   hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-form-validators';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
-import UttakAktiviteterTabell from './UttakAktiviteterTabell';
+import {
+  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
+
+import { PeriodeSoker } from '@fpsak-frontend/types';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
-type FormValues = {
-  begrunnelse: string;
-  erOppfylt: boolean;
-}
+type FormValues = PeriodeSoker;
 
 interface OwnProps {
+  valgtPeriode: PeriodeSoker;
   isReadOnly: boolean;
-  periode: any;
   oppdaterPeriode: (periode: any) => void;
   lukkPeriodeVisning: () => void;
 }
 
 const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
-  periode,
+  valgtPeriode,
   oppdaterPeriode,
   lukkPeriodeVisning,
   isReadOnly,
@@ -33,12 +33,11 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: periode,
+    defaultValues: valgtPeriode,
   });
 
   return (
     <Form formMethods={formMethods} onSubmit={oppdaterPeriode}>
-      <UttakAktiviteterTabell />
       <TextAreaField
         name="begrunnelse"
         label={intl.formatMessage({ id: 'UttakActivity.Vurdering' })}
@@ -46,6 +45,7 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
         maxLength={1500}
         readOnly={isReadOnly}
       />
+      <VerticalSpacer sixteenPx />
       <RadioGroupPanel
         name="erOppfylt"
         hideLegend
@@ -58,6 +58,7 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
           { label: intl.formatMessage({ id: 'UttakActivity.IkkeOppfylt' }), value: 'false' },
         ]}
       />
+      <VerticalSpacer sixteenPx />
       <FlexContainer>
         <FlexRow>
           <FlexColumn>

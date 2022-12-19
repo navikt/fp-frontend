@@ -1,4 +1,6 @@
-import React, { useState, FunctionComponent, ReactElement } from 'react';
+import React, {
+  useCallback, useState, FunctionComponent, ReactElement,
+} from 'react';
 import { FormattedMessage } from 'react-intl';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 import { Button, Heading } from '@navikt/ds-react';
@@ -7,7 +9,7 @@ import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponen
 import { UttakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import {
   ArbeidsgiverOpplysningerPerId, FamilieHendelseSamling, Personoversikt,
-  Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling, Behandling, Aksjonspunkt, AlleKodeverk,
+  Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling, Behandling, Aksjonspunkt, AlleKodeverk, PeriodeSoker,
 } from '@fpsak-frontend/types';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
@@ -107,7 +109,19 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
     submitCallback(values);
   };
 
-  const { perioder, setPerioder } = useState(uttaksresultatPerioder.perioderSøker);
+  const [perioder, setPerioder] = useState<PeriodeSoker[]>(uttaksresultatPerioder.perioderSøker);
+  const [valgtPeriodeIndex, setValgtPeriodeIndex] = useState<number>();
+
+  const visForrigePeriode = useCallback(() => {
+    setValgtPeriodeIndex((index) => index - 1);
+  }, []);
+  const visNestePeriode = useCallback(() => {
+    setValgtPeriodeIndex((index) => index + 1);
+  }, []);
+  const oppdaterPeriode = useCallback((oppdatertPeriode: PeriodeSoker) => {
+    const filtrertePerioder = perioder.filter((p) => p.fom === oppdatertPeriode.fom);
+    setPerioder(filtrertePerioder.concat(oppdatertPeriode));
+  }, [perioder]);
 
   const erAksjonspunktÅpent = aksjonspunkter.some((ap) => ap.status === AksjonspunktStatus.OPPRETTET);
   const tilknyttetStortinget = !!aksjonspunkter.find((ap) => ap.definisjon === AksjonspunktCode.TILKNYTTET_STORTINGET && erAksjonspunktÅpent);
@@ -131,17 +145,34 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
       <UttakTidslinjeIndex
+        perioderSøker={perioder}
+        perioderAnnenpart={uttaksresultatPerioder.perioderAnnenpart}
+        valgtPeriodeIndex={valgtPeriodeIndex}
+        setValgtPeriodeIndex={setValgtPeriodeIndex}
         behandling={behandling}
         søknad={soknad}
-        perioderAnnenpart={uttaksresultatPerioder.perioderAnnenpart}
         personoversikt={personoversikt}
         familiehendelse={familiehendelse}
         ytelsefordeling={ytelsefordeling}
-        perioderSøker={perioder}
         alleKodeverk={alleKodeverk}
         tilknyttetStortinget={tilknyttetStortinget}
       />
-      <UttakPeriodeDetaljer />
+      {valgtPeriodeIndex && (
+        <UttakPeriodeDetaljer
+          perioderSøker={perioder}
+          perioderAnnenpart={uttaksresultatPerioder.perioderAnnenpart}
+          valgtPeriodeIndex={valgtPeriodeIndex}
+          oppdaterPeriode={oppdaterPeriode}
+          isEdited={false}
+          isReadOnly={isReadOnly}
+          visForrigePeriode={visForrigePeriode}
+          visNestePeriode={visNestePeriode}
+          alleKodeverk={alleKodeverk}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          uttakStonadskontoer={uttakStonadskontoer}
+          setValgtPeriodeIndex={setValgtPeriodeIndex}
+        />
+      )}
       <VerticalSpacer sixteenPx />
       {!isReadOnly && (
         <Button
@@ -152,7 +183,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
           onClick={bekreftAksjonspunkter}
           role="button"
         >
-          <FormattedMessage id="UttakDokumentasjonFaktaForm.Bekreft" />
+          <FormattedMessage id="Uttak.Confirm" />
         </Button>
       )}
     </>

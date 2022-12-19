@@ -1,7 +1,6 @@
 import React, { Component, MouseEvent, KeyboardEvent } from 'react';
 import moment from 'moment';
 import dayjs from 'dayjs';
-
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Kjønnkode } from '@navikt/ft-types';
 import {
@@ -21,6 +20,7 @@ export interface EventProps {
 }
 
 export type PeriodeSøkerMedTidslinjedata = {
+  id: number;
   periode: PeriodeSoker;
   tomMoment: dayjs.Dayjs;
   className: string;
@@ -36,26 +36,15 @@ export type TidslinjeTimes = {
   dodSoker: string;
 };
 
-interface TidslinjeProps {
-  customTimes: TidslinjeTimes;
-  hovedsokerKjonnKode: Kjønnkode;
-  medsokerKjonnKode?: Kjønnkode;
-  openPeriodInfo: (event: MouseEvent | KeyboardEvent) => void;
-  selectedPeriod?: Periode;
-  selectPeriodCallback: (eventProps: EventProps) => void;
-  uttakPerioder: Periode[];
-  children?: React.ReactNode;
-}
-
-const getOptions = (customTimes: TidslinjeTimes, sortedUttakPeriods: Periode[]) => ({
-  end: moment(sortedUttakPeriods[sortedUttakPeriods.length - 1].tom)
+const getOptions = (customTimes: TidslinjeTimes, sortedUttakPeriods: PeriodeSøkerMedTidslinjedata[]) => ({
+  end: moment(sortedUttakPeriods[sortedUttakPeriods.length - 1].periode.tom)
     .add(2, 'days')
     .toDate(),
   locale: moment.locale('nb'),
   margin: { item: 14 },
   max: moment(customTimes.fodsel).add(4, 'years').toDate(),
   min: moment
-    .min([moment(customTimes.fodsel), moment(sortedUttakPeriods[0].fom)])
+    .min([moment(customTimes.fodsel), moment(sortedUttakPeriods[0].periode.fom)])
     .subtract(4, 'weeks')
     .toDate(),
   moment,
@@ -63,7 +52,7 @@ const getOptions = (customTimes: TidslinjeTimes, sortedUttakPeriods: Periode[]) 
   orientation: { axis: 'top' },
   showCurrentTime: false,
   stack: false,
-  start: moment(sortedUttakPeriods[0].fom).subtract(1, 'days').toDate(),
+  start: moment(sortedUttakPeriods[0].periode.fom).subtract(1, 'days').toDate(),
   tooltip: { followMouse: true },
   verticalScroll: false,
   width: '100%',
@@ -74,11 +63,11 @@ const getOptions = (customTimes: TidslinjeTimes, sortedUttakPeriods: Periode[]) 
 
 const parseDateString = (dateString: string | dayjs.Dayjs): Date => dayjs(dateString, ISO_DATE_FORMAT).toDate();
 
-const sortByDate = (a: Periode, b: Periode): number => {
-  if (a.fom < b.fom) {
+const sortByDate = (a: PeriodeSøkerMedTidslinjedata, b: PeriodeSøkerMedTidslinjedata): number => {
+  if (a.periode.fom < b.periode.fom) {
     return -1;
   }
-  if (a.fom > b.fom) {
+  if (a.periode.fom > b.periode.fom) {
     return 1;
   }
   return 0;
@@ -87,16 +76,16 @@ const sortByDate = (a: Periode, b: Periode): number => {
 type PeriodeMedStartOgSlutt = {
   start: Date;
   end: Date;
-} & Periode;
+} & PeriodeSøkerMedTidslinjedata;
 
-const parseDates = (item: Periode): PeriodeMedStartOgSlutt => ({
-  ...item,
-  start: parseDateString(item.fom),
-  end: parseDateString(item.tomMoment),
-});
-
-const formatItems = (periodItems: Periode[] = []): PeriodeMedStartOgSlutt[] => {
-  const itemsWithDates = periodItems.map(parseDates);
+const formatItems = (
+  perioder: PeriodeSøkerMedTidslinjedata[] = [],
+): PeriodeMedStartOgSlutt[] => {
+  const itemsWithDates = perioder.map((periode) => ({
+    ...periode,
+    start: parseDateString(periode.periode.fom),
+    end: parseDateString(periode.tomMoment),
+  }));
   const formattedItemsArray: PeriodeMedStartOgSlutt[] = [];
   formattedItemsArray.length = 0;
   itemsWithDates.forEach((item) => {
@@ -105,8 +94,10 @@ const formatItems = (periodItems: Periode[] = []): PeriodeMedStartOgSlutt[] => {
   return formattedItemsArray;
 };
 
-const formatGroups = (periodItems: Periode[] = []) => {
-  const duplicatesRemoved = periodItems.reduce<Periode[]>((accPeriods, period) => {
+const formatGroups = (
+  perioder: PeriodeSøkerMedTidslinjedata[] = [],
+) => {
+  const duplicatesRemoved = perioder.reduce((accPeriods, period) => {
     // @ts-ignore Fiks
     const hasPeriod = accPeriods.some((p) => p.group === period.group);
     if (!hasPeriod) accPeriods.push(period);
@@ -118,6 +109,17 @@ const formatGroups = (periodItems: Periode[] = []) => {
     content: '',
   }));
 };
+
+interface TidslinjeProps {
+  tidslinjeTider: TidslinjeTimes;
+  hovedsokerKjonnKode: Kjønnkode;
+  medsokerKjonnKode?: Kjønnkode;
+  openPeriodInfo: (event: MouseEvent | KeyboardEvent) => void;
+  selectedPeriod?: PeriodeSøkerMedTidslinjedata;
+  selectPeriodCallback: (eventProps: EventProps) => void;
+  uttakPerioder: PeriodeSøkerMedTidslinjedata[];
+  children?: React.ReactNode;
+}
 
 /**
  * UttakTidslinje
@@ -170,7 +172,7 @@ class UttakTidslinje extends Component<TidslinjeProps> {
   render() {
     const {
       children,
-      customTimes,
+      tidslinjeTider,
       hovedsokerKjonnKode,
       medsokerKjonnKode,
       openPeriodInfo,
@@ -181,6 +183,14 @@ class UttakTidslinje extends Component<TidslinjeProps> {
     const groups = formatGroups(uttakPerioder);
     const items = formatItems(uttakPerioder);
 
+    const valgtPeriode = selectedPeriod ? {
+      fom: selectedPeriod.periode.fom,
+      tom: selectedPeriod.periode.tom,
+      id: selectedPeriod.id,
+      className: selectedPeriod.className,
+      hoverText: selectedPeriod.title,
+    } : undefined;
+
     return (
       <FlexContainer>
         <VerticalSpacer sixteenPx />
@@ -189,20 +199,22 @@ class UttakTidslinje extends Component<TidslinjeProps> {
             {medsokerKjonnKode && (
               <TimeLineSoker soker1KjonnKode={medsokerKjonnKode} soker2KjonnKode={hovedsokerKjonnKode} />
             )}
-            {!medsokerKjonnKode && <TimeLineSokerEnsamSoker hovedsokerKjonnKode={hovedsokerKjonnKode} />}
+            {!medsokerKjonnKode && (
+              <TimeLineSokerEnsamSoker hovedsokerKjonnKode={hovedsokerKjonnKode} />
+            )}
           </FlexColumn>
           <FlexColumn className={styles.timelineWidth}>
             <div className={medsokerKjonnKode ? styles.timeLineWrapperTwo : styles.timeLineWrapper}>
               <div className="uttakTimeline">
                 <Timeline
                   ref={this.timelineRef}
-                  options={getOptions(customTimes, [...uttakPerioder].sort(sortByDate))}
-                  // @ts-ignore Fiks
+                  options={getOptions(tidslinjeTider, [...uttakPerioder].sort(sortByDate))}
+                  // @ts-ignore
                   initialItems={items}
                   initialGroups={groups}
-                  customTimes={customTimes}
+                  customTimes={tidslinjeTider}
                   selectHandler={selectPeriodCallback}
-                  selection={selectedPeriod ? [selectedPeriod.id] : undefined}
+                  selection={valgtPeriode ? [valgtPeriode.id] : undefined}
                 />
               </div>
             </div>
@@ -217,7 +229,7 @@ class UttakTidslinje extends Component<TidslinjeProps> {
               zoomInCallback={this.zoomIn}
               zoomOutCallback={this.zoomOut}
               openPeriodInfo={openPeriodInfo}
-              selectedPeriod={selectedPeriod}
+              selectedPeriod={valgtPeriode}
             >
               {children}
             </TimeLineControl>

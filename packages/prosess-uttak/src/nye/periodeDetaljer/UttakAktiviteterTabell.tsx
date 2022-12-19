@@ -4,7 +4,9 @@ import { useIntl } from 'react-intl';
 import {
   formHooks, SelectField, InputField, NumberField,
 } from '@navikt/ft-form-hooks';
-import { hasValidDecimal, hasValidInteger, maxLength, minValue, notDash, required } from '@navikt/ft-form-validators';
+import {
+  hasValidDecimal, hasValidInteger, maxLength, maxValue, minValue, notDash, required,
+} from '@navikt/ft-form-validators';
 import {
   FlexColumn, FlexContainer, FlexRow, TableColumn, TableRow,
 } from '@navikt/ft-ui-komponenter';

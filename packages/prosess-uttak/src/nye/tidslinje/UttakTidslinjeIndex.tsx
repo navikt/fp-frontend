@@ -1,8 +1,10 @@
-import React, { useMemo, FunctionComponent, ReactElement } from 'react';
+import React, {
+  useCallback, useMemo, FunctionComponent, ReactElement,
+} from 'react';
 import dayjs from 'dayjs';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { BehandlingType, NavBrukerKjonn } from '@navikt/ft-kodeverk';
-import { AvklartBarn, Kjønnkode } from '@navikt/ft-types';
+import { Kjønnkode } from '@navikt/ft-types';
 import {
   calcDays, calcDaysAndWeeks, DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT,
 } from '@navikt/ft-utils';
@@ -24,35 +26,12 @@ import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType'
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 
-import UttakTidslinje, { PeriodeSøkerMedTidslinjedata, TidslinjeTimes } from './UttakTidslinje';
+import UttakTidslinje, { EventProps, PeriodeSøkerMedTidslinjedata, TidslinjeTimes } from './UttakTidslinje';
 import UttakTidslinjeHjelpetekster from './UttakTidslinjeHjelpetekster';
 
 const godkjentKlassenavn = 'godkjentPeriode';
 const avvistKlassenavn = 'avvistPeriode';
 const endretClassnavn = 'endretPeriode';
-
-const finnTidslinjeTider = (
-  dodeBarn: AvklartBarn[],
-  isRevurdering: boolean,
-  person: Personoversikt,
-  soknadDate: string,
-  fødselsdato: string,
-  endringsdato?: string,
-): TidslinjeTimes => {
-  const customTimesBuilder = {
-    soknad: soknadDate,
-    fodsel: fødselsdato,
-    revurdering: isRevurdering ? endringsdato : '1950-01-01',
-    dodSoker: person?.bruker?.dødsdato ? person.bruker.dødsdato : '1950-01-01',
-  };
-
-  dodeBarn.forEach((barn, index: number) => {
-    Object.defineProperty(customTimesBuilder, `barndod${index}`, {
-      value: dayjs(barn.dodsdato, ISO_DATE_FORMAT).toDate(), enumerable: true,
-    });
-  });
-  return customTimesBuilder;
-};
 
 const finnSøknadsdato = (
   søknad: Soknad,
@@ -83,6 +62,43 @@ const getFodselTerminDato = (
     return Object.values(adopsjonFodelsedatoer)[0];
   }
   return undefined;
+};
+
+const finnTidslinjeTider = (
+  behandling: Behandling,
+  søknad: Soknad,
+  familiehendelse: FamilieHendelseSamling,
+  ytelsefordeling: Ytelsefordeling,
+  personoversikt: Personoversikt,
+): TidslinjeTimes => {
+  const gjeldendeFamiliehendelse = familiehendelse?.gjeldende;
+  const familiehendelseDate = getFodselTerminDato(søknad, gjeldendeFamiliehendelse);
+  const endringsdato = ytelsefordeling.endringsdato ? ytelsefordeling.endringsdato : undefined;
+  const endredFodselsDato = gjeldendeFamiliehendelse && gjeldendeFamiliehendelse.avklartBarn && gjeldendeFamiliehendelse.avklartBarn.length > 0
+    ? gjeldendeFamiliehendelse.avklartBarn[0].fodselsdato : undefined;
+  const fødselsdato = søknad.soknadType === soknadType.FODSEL ? (endredFodselsDato || familiehendelseDate) : søknad.omsorgsovertakelseDato;
+  const isRevurdering = behandling.type === BehandlingType.REVURDERING;
+
+  const barnFraTps = familiehendelse.register ? familiehendelse.register.avklartBarn : [];
+  const dodeBarn = gjeldendeFamiliehendelse
+    && !gjeldendeFamiliehendelse.brukAntallBarnFraTps
+    && gjeldendeFamiliehendelse.avklartBarn
+    && gjeldendeFamiliehendelse.avklartBarn.length > 0
+    ? gjeldendeFamiliehendelse.avklartBarn.filter((barn) => barn.dodsdato) : barnFraTps.filter((barn) => barn.dodsdato);
+
+  const customTimesBuilder = {
+    soknad: finnSøknadsdato(søknad),
+    fodsel: fødselsdato,
+    revurdering: isRevurdering ? endringsdato : '1950-01-01',
+    dodSoker: personoversikt?.bruker?.dødsdato ? personoversikt.bruker.dødsdato : '1950-01-01',
+  };
+
+  dodeBarn.forEach((barn, index: number) => {
+    Object.defineProperty(customTimesBuilder, `barndod${index}`, {
+      value: dayjs(barn.dodsdato, ISO_DATE_FORMAT).toDate(), enumerable: true,
+    });
+  });
+  return customTimesBuilder;
 };
 
 const finnStønadskontoNavn = (
@@ -161,7 +177,7 @@ const leggTidslinjedataTilPeriode = (
 ): PeriodeSøkerMedTidslinjedata[] => {
   const perioder = erHovedsøker ? hovedsøkerPerioder : annenpartPerioder;
 
-  return perioder.map((periode) => {
+  return perioder.map((periode, index) => {
     const opphold = periode.oppholdÅrsak !== oppholdArsakType.UDEFINERT;
 
     const gradertClassName = periode.gradertAktivitet && periode.graderingInnvilget ? 'gradert' : '';
@@ -176,6 +192,7 @@ const leggTidslinjedataTilPeriode = (
 
     return {
       periode,
+      id: index,
       tomMoment: dayjs(periode.tom).add(1, 'days'),
       className: opphold ? oppholdStatusClassName : `${statusClassName} ${isEndretClassName} ${gradertClassName}`,
       hovedsoker: erHovedsøker,
@@ -207,10 +224,12 @@ interface OwnProps {
   personoversikt: Personoversikt;
   perioderSøker: PeriodeSoker[];
   perioderAnnenpart: PeriodeSoker[];
+  valgtPeriodeIndex: number | undefined;
   familiehendelse: FamilieHendelseSamling;
   ytelsefordeling: Ytelsefordeling;
   alleKodeverk: AlleKodeverk;
   tilknyttetStortinget: boolean;
+  setValgtPeriodeIndex: (valgtPeriodeIndex: number | undefined) => void;
 }
 
 const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
@@ -219,60 +238,59 @@ const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
   personoversikt,
   perioderSøker,
   perioderAnnenpart,
+  valgtPeriodeIndex,
   familiehendelse,
   ytelsefordeling,
   alleKodeverk,
   tilknyttetStortinget,
+  setValgtPeriodeIndex,
 }) => {
   const intl = useIntl();
 
-  const søknadsdato = useMemo(() => finnSøknadsdato(søknad), [søknad]);
-
   const uttakMedOpphold = lagUttakMedOpphold(perioderSøker);
 
-  const hovedsokerPerioder = leggTidslinjedataTilPeriode(
+  const hovedsøkerPerioder = leggTidslinjedataTilPeriode(
     true, uttakMedOpphold, perioderAnnenpart, intl, behandling.status, alleKodeverk, tilknyttetStortinget,
   );
   const annenForelderPerioder = leggTidslinjedataTilPeriode(
     false, uttakMedOpphold, perioderAnnenpart, intl, behandling.status, alleKodeverk, tilknyttetStortinget,
   );
 
-  const sorterteUttaksperioder = useMemo(() => ([...hovedsokerPerioder.concat(annenForelderPerioder)].sort((pers1, pers2) => {
-    if (pers1.group === pers2.group) {
-      return 0;
-    }
-    return pers1.group < pers2.group ? -1 : 1;
-  })), [hovedsokerPerioder, annenForelderPerioder]);
+  const sorterteUttaksperioder = useMemo(() => (annenForelderPerioder.concat(hovedsøkerPerioder.map((p) => ({
+    ...p,
+    id: p.id + annenForelderPerioder.length,
+  })))), [hovedsøkerPerioder, annenForelderPerioder]);
 
   const viseUttakMedsoker = perioderAnnenpart.length > 0;
   const medsøkerKjønnKode = (viseUttakMedsoker && personoversikt && personoversikt.annenPart) ? personoversikt.annenPart.kjønn as Kjønnkode : undefined;
   // hvis ukjent annenpart og annenpart uttak, vis ukjent ikon
   const medsokerKjonnKode = viseUttakMedsoker && medsøkerKjønnKode === undefined ? NavBrukerKjonn.UDEFINERT : medsøkerKjønnKode;
 
-  const barnFraTps = familiehendelse.register ? familiehendelse.register.avklartBarn : [];
-  const gjeldendeFamiliehendelse = familiehendelse?.gjeldende;
-  const dodeBarn = gjeldendeFamiliehendelse
-    && !gjeldendeFamiliehendelse.brukAntallBarnFraTps
-    && gjeldendeFamiliehendelse.avklartBarn
-    && gjeldendeFamiliehendelse.avklartBarn.length > 0
-    ? gjeldendeFamiliehendelse.avklartBarn.filter((barn) => barn.dodsdato) : barnFraTps.filter((barn) => barn.dodsdato);
+  const tidslinjeTider = useMemo(() => finnTidslinjeTider(behandling, søknad, familiehendelse, ytelsefordeling, personoversikt),
+    [behandling, søknad, familiehendelse, ytelsefordeling, personoversikt]);
 
-  const familiehendelseDate = getFodselTerminDato(søknad, gjeldendeFamiliehendelse);
-  const endringsdato = ytelsefordeling.endringsdato ? ytelsefordeling.endringsdato : undefined;
-  const endredFodselsDato = gjeldendeFamiliehendelse && gjeldendeFamiliehendelse.avklartBarn && gjeldendeFamiliehendelse.avklartBarn.length > 0
-    ? gjeldendeFamiliehendelse.avklartBarn[0].fodselsdato : undefined;
-  const fødselsdato = søknad.soknadType === soknadType.FODSEL ? (endredFodselsDato || familiehendelseDate) : søknad.omsorgsovertakelseDato;
-  const isRevurdering = behandling.type === BehandlingType.REVURDERING;
-  const tidslinjeTider = finnTidslinjeTider(dodeBarn, isRevurdering, personoversikt, søknadsdato, fødselsdato, endringsdato);
+  const velgPeriode = useCallback((eventProps: EventProps) => {
+    const periodeIndex = sorterteUttaksperioder.findIndex((item) => item.id === eventProps.items[0]);
+    const valgtPeriode = valgtPeriodeIndex ? sorterteUttaksperioder[valgtPeriodeIndex] : undefined;
+
+    if (valgtPeriode?.periode.fom !== sorterteUttaksperioder[periodeIndex]?.periode.fom) {
+      setValgtPeriodeIndex(periodeIndex);
+    } else {
+      setValgtPeriodeIndex(undefined);
+    }
+    eventProps.event.preventDefault();
+  }, []);
+
+  const åpneFørstePeriodeEllerLukk = useCallback(() => setValgtPeriodeIndex(valgtPeriodeIndex ? undefined : 0), [valgtPeriodeIndex]);
 
   return (
     <UttakTidslinje
-      customTimes={tidslinjeTider}
+      tidslinjeTider={tidslinjeTider}
       hovedsokerKjonnKode={personoversikt ? personoversikt.bruker.kjønn as Kjønnkode : undefined}
       medsokerKjonnKode={medsokerKjonnKode}
-      openPeriodInfo={() => undefined}
-      selectedPeriod={undefined}
-      selectPeriodCallback={() => undefined}
+      openPeriodInfo={åpneFørstePeriodeEllerLukk}
+      selectedPeriod={valgtPeriodeIndex ? sorterteUttaksperioder[valgtPeriodeIndex] : undefined}
+      selectPeriodCallback={velgPeriode}
       uttakPerioder={sorterteUttaksperioder}
     >
       <UttakTidslinjeHjelpetekster />
