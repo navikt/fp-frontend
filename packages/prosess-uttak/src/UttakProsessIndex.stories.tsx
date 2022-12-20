@@ -162,11 +162,11 @@ const Template: Story<{
     personoversikt={personoversikt}
     ytelsefordeling={ytelsefordeling}
     alleKodeverk={alleKodeverk as any}
-    employeeHasAccess
+    kanOverstyre
     submitCallback={submitCallback}
     isReadOnly={false}
     readOnlySubmitButton={false}
-    tempUpdateStonadskontoer={action('button-click') as (params: {
+    oppdaterStønadskontoer={action('button-click') as (params: {
       behandlingUuid: string;
       perioder: any;
     }) => Promise<any>}

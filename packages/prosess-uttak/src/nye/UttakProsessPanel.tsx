@@ -1,10 +1,12 @@
 import React, {
-  useCallback, useState, FunctionComponent, ReactElement,
+  useCallback, useState, FunctionComponent, ReactElement, useEffect,
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 import { Button, Heading } from '@navikt/ds-react';
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import {
+  AksjonspunktHelpTextHTML, FlexColumn, FlexContainer, FlexRow, OverstyringKnapp, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 
 import { UttakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import {
@@ -72,17 +74,17 @@ interface OwnProps {
   personoversikt: Personoversikt;
   ytelsefordeling: Ytelsefordeling;
   alleKodeverk: AlleKodeverk;
-  employeeHasAccess: boolean;
+  kanOverstyre: boolean;
   submitCallback: (data: UttakAp[]) => Promise<void>;
-  tempUpdateStonadskontoer: (params: {
+  oppdaterStønadskontoer: (params: {
     behandlingUuid: string;
-    perioder: any;
+    perioder: PeriodeSoker[];
   }) => Promise<any>;
   isReadOnly: boolean;
   readOnlySubmitButton: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  formData?: any;
-  setFormData: (data: any) => void;
+  formData?: PeriodeSoker[];
+  setFormData: (data: PeriodeSoker[]) => void;
 }
 
 const UttakProsessPanel: FunctionComponent<OwnProps> = ({
@@ -95,22 +97,31 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   personoversikt,
   ytelsefordeling,
   alleKodeverk,
-  employeeHasAccess,
+  kanOverstyre,
   submitCallback,
-  tempUpdateStonadskontoer,
+  oppdaterStønadskontoer,
   isReadOnly,
   readOnlySubmitButton,
   arbeidsgiverOpplysningerPerId,
   formData,
   setFormData,
 }) => {
-  const bekreftAksjonspunkter = (values) => {
-    // TODO
-    submitCallback(values);
-  };
+  const [erOverstyrt, setErOverstyrt] = useState(false);
+  const toggleOverstyring = useCallback(() => {
+    setErOverstyrt(!erOverstyrt);
+  }, [erOverstyrt]);
 
-  const [perioder, setPerioder] = useState<PeriodeSoker[]>(uttaksresultatPeriode.perioderSøker);
+  const [perioder, setPerioder] = useState<PeriodeSoker[]>(formData || uttaksresultatPeriode.perioderSøker);
   const [valgtPeriodeIndex, setValgtPeriodeIndex] = useState<number>();
+
+  const [stønadskonto, setStønadskonto] = useState(uttakStonadskontoer);
+
+  useEffect(() => () => setFormData(perioder), [perioder]);
+
+  const bekreftAksjonspunkter = () => {
+    // TODO
+    submitCallback(perioder);
+  };
 
   const visForrigePeriode = useCallback(() => {
     setValgtPeriodeIndex((index) => index - 1);
@@ -121,16 +132,30 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   const oppdaterPeriode = useCallback((oppdatertPeriode: PeriodeSoker) => {
     const filtrertePerioder = perioder.filter((p) => p.fom === oppdatertPeriode.fom);
     setPerioder(filtrertePerioder.concat(oppdatertPeriode));
+
+    oppdaterStønadskontoer({ behandlingUuid: behandling.uuid, perioder })
+      .then((oppdatertStønadskonto: UttakStonadskontoer) => setStønadskonto(oppdatertStønadskonto));
   }, [perioder]);
 
   const erAksjonspunktÅpent = aksjonspunkter.some((ap) => ap.status === AksjonspunktStatus.OPPRETTET);
-  const erTilknyttetStortinget = !!aksjonspunkter.find((ap) => ap.definisjon === AksjonspunktCode.TILKNYTTET_STORTINGET && erAksjonspunktÅpent);
+  const erTilknyttetStortinget = aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.TILKNYTTET_STORTINGET && erAksjonspunktÅpent);
 
   return (
     <>
-      <Heading size="small">
-        <FormattedMessage id="UttakPanel.Title" />
-      </Heading>
+      <FlexContainer>
+        <FlexRow>
+          <FlexColumn>
+            <Heading size="small">
+              <FormattedMessage id="UttakPanel.Title" />
+            </Heading>
+          </FlexColumn>
+          {kanOverstyre && erAksjonspunktÅpent && !isReadOnly && (
+            <FlexColumn>
+              <OverstyringKnapp onClick={toggleOverstyring} />
+            </FlexColumn>
+          )}
+        </FlexRow>
+      </FlexContainer>
       <VerticalSpacer twentyPx />
       {aksjonspunkter.length > 0 && erAksjonspunktÅpent && (
         <>
@@ -141,7 +166,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
         </>
       )}
       <DisponibleStonadskontoerPanel
-        stønadskontoer={uttakStonadskontoer.stonadskontoer ? Object.values(uttakStonadskontoer.stonadskontoer) : undefined}
+        stønadskontoer={stønadskonto.stonadskontoer ? Object.values(stønadskonto.stonadskontoer) : undefined}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
       <UttakTidslinjeIndex
@@ -159,6 +184,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
       />
       {valgtPeriodeIndex && (
         <UttakPeriodePanel
+          key={valgtPeriodeIndex}
           perioderSøker={perioder}
           uttaksresultatPeriode={uttaksresultatPeriode}
           valgtPeriodeIndex={valgtPeriodeIndex}
@@ -169,7 +195,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
           visNestePeriode={visNestePeriode}
           alleKodeverk={alleKodeverk}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          uttakStonadskontoer={uttakStonadskontoer}
+          uttakStonadskontoer={stønadskonto}
           setValgtPeriodeIndex={setValgtPeriodeIndex}
           erTilknyttetStortinget={erTilknyttetStortinget}
         />
@@ -179,7 +205,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
         <Button
           size="small"
           variant="primary"
-          disabled={false}
+          disabled={readOnlySubmitButton}
           loading={false}
           onClick={bekreftAksjonspunkter}
           role="button"

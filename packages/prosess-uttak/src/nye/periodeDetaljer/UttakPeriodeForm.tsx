@@ -1,4 +1,6 @@
-import React, { ReactElement, FunctionComponent, useMemo } from 'react';
+import React, {
+  useCallback, ReactElement, FunctionComponent, useMemo,
+} from 'react';
 import { Button, Detail } from '@navikt/ds-react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -176,6 +178,16 @@ const finnDager = (
   return parseFloat(((aktivitet.trekkdagerDesimaler % 5).toFixed(1)));
 };
 
+const lagOptionsTilGraderingAvslagsårsakerSelect = (
+  alleKodeverk: AlleKodeverk,
+): ReactElement[] => {
+  const årsakKoder = alleKodeverk[KodeverkType.GRADERING_AVSLAG_AARSAK] as ArsakKodeverk[];
+  return årsakKoder.sort(sorterÅrsakKodeverk).map(({
+    kode,
+    navn,
+  }) => <option value={kode} key={kode}>{navn}</option>);
+};
+
 const byggDefaultValues = (
   valgtPeriode: PeriodeSoker,
   periodeResultatårsakKoder: ArsakKodeverk[],
@@ -201,20 +213,18 @@ const byggDefaultValues = (
   };
 };
 
-const lagOptionsTilGraderingAvslagsårsakerSelect = (
-  alleKodeverk: AlleKodeverk,
-): ReactElement[] => {
-  const årsakKoder = alleKodeverk[KodeverkType.GRADERING_AVSLAG_AARSAK] as ArsakKodeverk[];
-  return årsakKoder.sort(sorterÅrsakKodeverk).map(({
-    kode,
-    navn,
-  }) => <option value={kode} key={kode}>{navn}</option>);
-};
+const transformValues = (
+  values: FormValues,
+  valgtPeriode: PeriodeSoker,
+): PeriodeSoker => ({
+  ...valgtPeriode,
+  ...values,
+});
 
 interface OwnProps {
   valgtPeriode: PeriodeSoker;
   isReadOnly: boolean;
-  oppdaterPeriode: (periode: any) => void;
+  oppdaterPeriode: (periode: PeriodeSoker) => void;
   lukkPeriodeVisning: () => void;
   alleKodeverk: AlleKodeverk;
   årsakFilter: AarsakFilter;
@@ -258,8 +268,10 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
 
   const graderingAvslagsårsakOptions = useMemo(() => lagOptionsTilGraderingAvslagsårsakerSelect(alleKodeverk), []);
 
+  const submit = useCallback((values: FormValues) => oppdaterPeriode(transformValues(values, valgtPeriode)), [valgtPeriode]);
+
   return (
-    <Form formMethods={formMethods} onSubmit={oppdaterPeriode}>
+    <Form formMethods={formMethods} onSubmit={submit}>
       <UttakPeriodeInfo
         valgtPeriode={valgtPeriode}
         alleKodeverk={alleKodeverk}

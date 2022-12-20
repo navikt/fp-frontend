@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import {
   ArbeidsgiverOpplysningerPerId, StandardProsessPanelProps, FamilieHendelseSamling, Personoversikt,
-  Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
+  Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling, PeriodeSoker,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@navikt/ft-utils';
 import { ReduxWrapper } from '@fpsak-frontend/form';
@@ -21,10 +21,10 @@ interface OwnProps {
   familiehendelse: FamilieHendelseSamling;
   personoversikt: Personoversikt;
   ytelsefordeling: Ytelsefordeling;
-  employeeHasAccess: boolean;
-  tempUpdateStonadskontoer: (params: {
+  kanOverstyre: boolean;
+  oppdaterStønadskontoer: (params: {
     behandlingUuid: string;
-    perioder: any;
+    perioder: PeriodeSoker;
   }) => Promise<any>;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
@@ -39,11 +39,11 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
   personoversikt,
   ytelsefordeling,
   alleKodeverk,
-  employeeHasAccess,
+  kanOverstyre,
   submitCallback,
   isReadOnly,
   readOnlySubmitButton,
-  tempUpdateStonadskontoer,
+  oppdaterStønadskontoer,
   isAksjonspunktOpen,
   arbeidsgiverOpplysningerPerId,
   formData,
@@ -60,9 +60,9 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
       personoversikt={personoversikt}
       ytelsefordeling={ytelsefordeling}
       alleKodeverk={alleKodeverk}
-      employeeHasAccess={employeeHasAccess}
+      kanOverstyre={kanOverstyre}
       submitCallback={submitCallback}
-      tempUpdateStonadskontoer={tempUpdateStonadskontoer}
+      oppdaterStønadskontoer={oppdaterStønadskontoer}
       isReadOnly={isReadOnly}
       readOnlySubmitButton={readOnlySubmitButton}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -88,7 +88,7 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
         // @ts-ignore
         aksjonspunkter={aksjonspunkter}
         // @ts-ignore
-        employeeHasAccess={employeeHasAccess}
+        employeeHasAccess={kanOverstyre}
         // @ts-ignore
         soknad={soknad}
         // @ts-ignore
@@ -100,7 +100,7 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
         // @ts-ignore
         ytelsefordeling={ytelsefordeling}
         // @ts-ignore
-        tempUpdateStonadskontoer={tempUpdateStonadskontoer}
+        tempUpdateStonadskontoer={oppdaterStønadskontoer}
         // @ts-ignore
         submitCallback={submitCallback}
         // @ts-ignore
