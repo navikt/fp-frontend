@@ -61,7 +61,7 @@ export type {
 } from './src/simuleringResultatTsType';
 export type { default as Soknad, ManglendeVedleggSoknad, UtlandsoppholdPeriode } from './src/soknadTsType';
 export type {
-  default as UttaksresultatPeriode, PeriodeSoker, PeriodeSokerAktivitet,
+  default as UttaksresultatPeriode, PeriodeSoker, PeriodeSokerAktivitet, AarsakFilter,
 } from './src/uttaksresultatPeriodeTsType';
 export type {
   default as UttakStonadskontoer, Stonadskonto, AktivitetSaldo, AktivitetIdentifikator,

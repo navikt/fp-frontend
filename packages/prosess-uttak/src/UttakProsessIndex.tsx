@@ -52,7 +52,7 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
   <RawIntlProvider value={intl}>
     <UttakProsessPanel
       behandling={behandling}
-      uttaksresultatPerioder={uttaksresultatPerioder}
+      uttaksresultatPeriode={uttaksresultatPerioder}
       uttakStonadskontoer={uttakStonadskontoer}
       aksjonspunkter={aksjonspunkter}
       familiehendelse={familiehendelse}

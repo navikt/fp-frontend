@@ -8,17 +8,18 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { TimeLineButton } from '@navikt/ft-tidslinje';
 import { Label } from '@navikt/ds-react';
+import { KodeverkType } from '@navikt/ft-kodeverk';
 
 import splitPeriodImageHoverUrl from '@fpsak-frontend/assets/images/splitt_hover.svg';
 import splitPeriodImageUrl from '@fpsak-frontend/assets/images/splitt.svg';
 import {
-  AlleKodeverk, ArbeidsgiverOpplysningerPerId, PeriodeSoker, UttakStonadskontoer,
+  AlleKodeverk, ArbeidsgiverOpplysningerPerId, PeriodeSoker, UttaksresultatPeriode, UttakStonadskontoer,
 } from '@fpsak-frontend/types';
 
-import { KodeverkType } from '@navikt/ft-kodeverk';
-import styles from './uttakPeriodeDetaljer.less';
 import SplittPeriodeModal from './splitt/SplittPeriodeModal';
 import UttakPeriodeForm from './UttakPeriodeForm';
+
+import styles from './uttakPeriodePanel.less';
 
 const getCorrectEmptyArbeidsForhold = (
   alleKodeverk: AlleKodeverk,
@@ -97,7 +98,7 @@ const hentApTekst = (
 
 interface OwnProps {
   perioderSøker: PeriodeSoker[];
-  perioderAnnenpart: PeriodeSoker[];
+  uttaksresultatPeriode: UttaksresultatPeriode;
   valgtPeriodeIndex: number | undefined;
   oppdaterPeriode: (oppdatertPeriode: PeriodeSoker) => void;
   isEdited: boolean;
@@ -108,11 +109,12 @@ interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   uttakStonadskontoer: UttakStonadskontoer;
   setValgtPeriodeIndex: (index: number) => void;
+  erTilknyttetStortinget: boolean;
 }
 
-const UttakPeriodeDetaljer: FunctionComponent<OwnProps> = ({
+const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
   perioderSøker,
-  perioderAnnenpart,
+  uttaksresultatPeriode,
   valgtPeriodeIndex,
   oppdaterPeriode,
   isEdited,
@@ -123,13 +125,14 @@ const UttakPeriodeDetaljer: FunctionComponent<OwnProps> = ({
   arbeidsgiverOpplysningerPerId,
   uttakStonadskontoer,
   setValgtPeriodeIndex,
+  erTilknyttetStortinget,
 }) => {
   const intl = useIntl();
 
   const [visModal, setVisModal] = useState(false);
   const toggleVisningAvModal = useCallback(() => setVisModal((verdi) => !verdi), []);
 
-  const allePerioder = perioderAnnenpart.concat(perioderSøker);
+  const allePerioder = uttaksresultatPeriode.perioderAnnenpart.concat(perioderSøker);
   const valgtPeriode = allePerioder[valgtPeriodeIndex];
 
   const splittPeriode = useCallback((dato: string) => {
@@ -137,6 +140,8 @@ const UttakPeriodeDetaljer: FunctionComponent<OwnProps> = ({
   }, []);
 
   const lukkPeriode = useCallback(() => setValgtPeriodeIndex(undefined), []);
+
+  const harSoktOmFlerbarnsdager = perioderSøker.some((p) => p.flerbarnsdager === true);
 
   return (
     <>
@@ -197,9 +202,14 @@ const UttakPeriodeDetaljer: FunctionComponent<OwnProps> = ({
         oppdaterPeriode={oppdaterPeriode}
         isReadOnly={isReadOnly}
         lukkPeriodeVisning={lukkPeriode}
+        alleKodeverk={alleKodeverk}
+        årsakFilter={uttaksresultatPeriode.årsakFilter}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        harSoktOmFlerbarnsdager={harSoktOmFlerbarnsdager}
+        erTilknyttetStortinget={erTilknyttetStortinget}
       />
     </>
   );
 };
 
-export default UttakPeriodeDetaljer;
+export default UttakPeriodePanel;

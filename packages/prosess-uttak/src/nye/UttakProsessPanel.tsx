@@ -16,7 +16,7 @@ import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatTyp
 
 import DisponibleStonadskontoerPanel from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';
 import UttakTidslinjeIndex from './tidslinje/UttakTidslinjeIndex';
-import UttakPeriodeDetaljer from './periodeDetaljer/UttakPeriodeDetaljer';
+import UttakPeriodePanel from './periodeDetaljer/UttakPeriodePanel';
 
 const UTTAK_PANEL_AKSJONSPUNKT_KODER = {
   5069: 'UttakPanel.Aksjonspunkt.5069',
@@ -64,7 +64,7 @@ const hentApTekster = (
 
 interface OwnProps {
   behandling: Behandling;
-  uttaksresultatPerioder: UttaksresultatPeriode;
+  uttaksresultatPeriode: UttaksresultatPeriode;
   uttakStonadskontoer: UttakStonadskontoer;
   aksjonspunkter: Aksjonspunkt[];
   familiehendelse: FamilieHendelseSamling;
@@ -87,7 +87,7 @@ interface OwnProps {
 
 const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   behandling,
-  uttaksresultatPerioder,
+  uttaksresultatPeriode,
   uttakStonadskontoer,
   aksjonspunkter,
   familiehendelse,
@@ -109,7 +109,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
     submitCallback(values);
   };
 
-  const [perioder, setPerioder] = useState<PeriodeSoker[]>(uttaksresultatPerioder.perioderSøker);
+  const [perioder, setPerioder] = useState<PeriodeSoker[]>(uttaksresultatPeriode.perioderSøker);
   const [valgtPeriodeIndex, setValgtPeriodeIndex] = useState<number>();
 
   const visForrigePeriode = useCallback(() => {
@@ -124,7 +124,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   }, [perioder]);
 
   const erAksjonspunktÅpent = aksjonspunkter.some((ap) => ap.status === AksjonspunktStatus.OPPRETTET);
-  const tilknyttetStortinget = !!aksjonspunkter.find((ap) => ap.definisjon === AksjonspunktCode.TILKNYTTET_STORTINGET && erAksjonspunktÅpent);
+  const erTilknyttetStortinget = !!aksjonspunkter.find((ap) => ap.definisjon === AksjonspunktCode.TILKNYTTET_STORTINGET && erAksjonspunktÅpent);
 
   return (
     <>
@@ -135,7 +135,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
       {aksjonspunkter.length > 0 && erAksjonspunktÅpent && (
         <>
           <AksjonspunktHelpTextHTML>
-            {hentApTekster(uttaksresultatPerioder, aksjonspunkter)}
+            {hentApTekster(uttaksresultatPeriode, aksjonspunkter)}
           </AksjonspunktHelpTextHTML>
           <VerticalSpacer twentyPx />
         </>
@@ -146,7 +146,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
       />
       <UttakTidslinjeIndex
         perioderSøker={perioder}
-        perioderAnnenpart={uttaksresultatPerioder.perioderAnnenpart}
+        perioderAnnenpart={uttaksresultatPeriode.perioderAnnenpart}
         valgtPeriodeIndex={valgtPeriodeIndex}
         setValgtPeriodeIndex={setValgtPeriodeIndex}
         behandling={behandling}
@@ -155,12 +155,12 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
         familiehendelse={familiehendelse}
         ytelsefordeling={ytelsefordeling}
         alleKodeverk={alleKodeverk}
-        tilknyttetStortinget={tilknyttetStortinget}
+        tilknyttetStortinget={erTilknyttetStortinget}
       />
       {valgtPeriodeIndex && (
-        <UttakPeriodeDetaljer
+        <UttakPeriodePanel
           perioderSøker={perioder}
-          perioderAnnenpart={uttaksresultatPerioder.perioderAnnenpart}
+          uttaksresultatPeriode={uttaksresultatPeriode}
           valgtPeriodeIndex={valgtPeriodeIndex}
           oppdaterPeriode={oppdaterPeriode}
           isEdited={false}
@@ -171,6 +171,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           uttakStonadskontoer={uttakStonadskontoer}
           setValgtPeriodeIndex={setValgtPeriodeIndex}
+          erTilknyttetStortinget={erTilknyttetStortinget}
         />
       )}
       <VerticalSpacer sixteenPx />

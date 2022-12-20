@@ -1,16 +1,20 @@
-import React, { FunctionComponent } from 'react';
-import { BodyShort, Table } from '@navikt/ds-react';
-import { useIntl } from 'react-intl';
-import {
-  formHooks, SelectField, InputField, NumberField,
-} from '@navikt/ft-form-hooks';
+import React, { FunctionComponent, ReactElement } from 'react';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { BodyShort } from '@navikt/ds-react';
+import { formHooks, SelectField, NumberField } from '@navikt/ft-form-hooks';
 import {
   hasValidDecimal, hasValidInteger, maxLength, maxValue, minValue, notDash, required,
 } from '@navikt/ft-form-validators';
 import {
-  FlexColumn, FlexContainer, FlexRow, TableColumn, TableRow,
+  FlexColumn, FlexContainer, FlexRow, Table, TableColumn, TableRow,
 } from '@navikt/ft-ui-komponenter';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+
+import UttakArbeidType from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
+import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, PeriodeSokerAktivitet } from '@fpsak-frontend/types';
+import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
+
+import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';
+import lagVisningsNavn from '../../utils/lagVisningsNavn';
 
 import styles from './uttakAktiviteterTabell.less';
 
@@ -26,43 +30,90 @@ const headerTextCodes = [
   'RenderUttakTable.PeriodeData.Utbetalingsgrad',
 ];
 
-const getNoMoreThanZeroIfRejectedAndNotUtsettelse = (intl: IntlShape) => (
-  value: string, { erOppfylt, utsettelseType }: FormValues,
-): string | null => (utsettelse(
-  erOppfylt, utsettelseType,
-) && parseFloat(value) > 0
-  ? intl.formatMessage({ id: 'RenderUttakTable.MerEnNullUtaksprosent' }) : null);
+const createTextStrings = (
+  aktivitet: PeriodeSokerAktivitet,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+) => {
+  const {
+    prosentArbeid, arbeidsgiverReferanse, eksternArbeidsforholdId, uttakArbeidType,
+  } = aktivitet;
 
-const checkForMonthsOrDays = (fieldName: string): boolean => {
-  // @ts-ignore Fiks
-  const weeksValue = document.getElementById(`${fieldName}.weeks`) ? document.getElementById(`${fieldName}.weeks`).value : null;
-  // @ts-ignore Fiks
-  const daysValue = document.getElementById(`${fieldName}.days`) ? document.getElementById(`${fieldName}.days`).value : null;
-  return weeksValue !== '0' || (daysValue !== '0' && daysValue !== '0.0');
+  const prosentArbeidText = (typeof prosentArbeid !== 'undefined') ? `${prosentArbeid}%` : '';
+  let arbeidsforhold;
+  if (uttakArbeidType && uttakArbeidType !== UttakArbeidType.ORDINÆRT_ARBEID) {
+    arbeidsforhold = <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType]} />;
+  }
+  if (arbeidsgiverReferanse) {
+    const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
+    arbeidsforhold = arbeidsgiverOpplysninger ? lagVisningsNavn(arbeidsgiverOpplysninger, eksternArbeidsforholdId) : arbeidsgiverReferanse;
+  }
+  return {
+    prosentArbeidText,
+    arbeidsforhold: arbeidsforhold || '',
+  };
 };
 
-type FormValuesTabell = {
+const getNoMoreThanZeroIfRejectedAndNotUtsettelse = (
+  intl: IntlShape,
+  erOppfylt,
+  utsettelseType,
+) => (
+  value: any,
+): string | null => {
+  const harUtsettelse = !erOppfylt && (!utsettelseType || utsettelseType === '-');
+  if (harUtsettelse && parseFloat(value) > 0) {
+    return intl.formatMessage({ id: 'RenderUttakTable.MerEnNullUtaksprosent' });
+  }
+  return null;
+};
+
+const GYLDIGE_UTTAK_PERIODER = [
+  uttakPeriodeType.FELLESPERIODE,
+  uttakPeriodeType.FEDREKVOTE,
+  uttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
+  uttakPeriodeType.FORELDREPENGER,
+  uttakPeriodeType.MODREKVOTE,
+  uttakPeriodeType.UDEFINERT];
+
+const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] => typer
+  .filter(({
+    kode,
+  }) => GYLDIGE_UTTAK_PERIODER.includes(kode))
+  .map(({
+    kode,
+    navn,
+  }) => <option value={kode} key={kode}>{navn}</option>);
+
+export type FormValues = {
   stønadskontoType: string;
-  weeks: number;
-  days: number;
+  weeks: string;
+  days: string;
   utbetalingsgrad: number;
 }
 
 interface OwnProps {
   periodeTyper: KodeverkMedNavn[];
   isReadOnly: boolean;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  aktiviteter: PeriodeSokerAktivitet[];
+  erOppfylt: boolean;
+  utsettelseType: string;
 }
 
 const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
   periodeTyper,
   isReadOnly,
+  arbeidsgiverOpplysningerPerId,
+  aktiviteter,
+  erOppfylt,
+  utsettelseType,
 }) => {
   const intl = useIntl();
 
-  const { control } = formHooks.useFormContext<FormValuesTabell>();
+  const { control, getValues } = formHooks.useFormContext<{ aktiviteter: FormValues[] }>();
   const { fields } = formHooks.useFieldArray({
     control,
-    name: 'UttakFieldArray',
+    name: 'aktiviteter',
   });
 
   return (
@@ -70,18 +121,33 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
       {fields.length > 0 && (
         <Table headerTextCodes={headerTextCodes}>
           {fields.map((field, index: number) => {
-            const textStrings = createTextStrings(fields.get(index), arbeidsgiverOpplysningerPerId);
+            const textStrings = createTextStrings(aktiviteter[index], arbeidsgiverOpplysningerPerId);
             return (
               <TableRow key={field.id}>
                 <TableColumn><BodyShort size="small" className={styles.forsteKolWidth}>{textStrings.arbeidsforhold}</BodyShort></TableColumn>
                 <TableColumn>
                   <div className={styles.selectStonad}>
                     <SelectField
-                      name={`${index}.stønadskontoType`}
+                      name={`aktiviteter.${index}.stønadskontoType`}
                       selectValues={mapPeriodeTyper(periodeTyper)}
                       label=""
                       readOnly={isReadOnly}
-                      validate={checkForMonthsOrDays(uttakElementFieldId) ? [required, notDash] : []}
+                      validate={[(value: string) => {
+                        const weeks = getValues(`aktiviteter.${index}.weeks`);
+                        const days = getValues(`aktiviteter.${index}.days`);
+                        const skalSjekke = weeks !== '0' || (days !== '0' && days !== '0.0');
+                        if (skalSjekke) {
+                          const requiredMessage = required(value);
+                          if (requiredMessage) {
+                            return [requiredMessage];
+                          }
+                          const notDashMessage = notDash(value);
+                          if (notDashMessage) {
+                            return [notDashMessage];
+                          }
+                        }
+                        return [];
+                      }]}
                     />
                   </div>
                 </TableColumn>
@@ -90,14 +156,10 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                     <FlexRow>
                       <FlexColumn>
                         <span className={styles.weekPosition}>
-                          <InputField
-                            name={`${index}.weeks`}
+                          <NumberField
+                            name={`aktiviteter.${index}.weeks`}
                             readOnly={isReadOnly}
                             validate={[required, hasValidInteger, maxLength3]}
-                            parse={(value: string) => {
-                              const parsedValue = parseInt(value, 10);
-                              return Number.isNaN(parsedValue) ? value : parsedValue;
-                            }}
                           />
                         </span>
                       </FlexColumn>
@@ -106,10 +168,9 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                       </FlexColumn>
                       <FlexColumn>
                         <NumberField
-                          name={`${index}.days`}
+                          name={`aktiviteter.${index}.days`}
                           readOnly={isReadOnly}
                           validate={[required, hasValidDecimal, maxLength3]}
-                          forceTwoDecimalDigits
                         />
                       </FlexColumn>
                     </FlexRow>
@@ -121,8 +182,14 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                     <FlexRow>
                       <FlexColumn>
                         <NumberField
-                          name={`${index}.utbetalingsgrad`}
-                          validate={[required, minValue0, maxProsentValue100, hasValidDecimal, getNoMoreThanZeroIfRejectedAndNotUtsettelse(intl)]}
+                          name={`aktiviteter.${index}.utbetalingsgrad`}
+                          validate={[
+                            required,
+                            minValue0,
+                            maxProsentValue100,
+                            hasValidDecimal,
+                            getNoMoreThanZeroIfRejectedAndNotUtsettelse(intl, erOppfylt, utsettelseType),
+                          ]}
                           readOnly={isReadOnly}
                           forceTwoDecimalDigits
                         />
