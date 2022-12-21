@@ -99,6 +99,7 @@ const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({
                       validate={[required, hasValidDate, validerInnenforIntervall(fomDato, tomDato, intl)]}
                       defaultMonth={new Date(fomDato)}
                       disabledDays={{ fromDate: dayjs(fomDato).toDate(), toDate: dayjs(tomDato).toDate() }}
+                      strategy="fixed"
                     />
                   </FlexColumn>
                   {dato && (

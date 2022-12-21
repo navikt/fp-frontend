@@ -119,7 +119,7 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
   return (
     <div className={styles.tableOverflow}>
       {fields.length > 0 && (
-        <Table headerTextCodes={headerTextCodes}>
+        <Table headerTextCodes={headerTextCodes} noHover>
           {fields.map((field, index: number) => {
             const textStrings = createTextStrings(aktiviteter[index], arbeidsgiverOpplysningerPerId);
             return (

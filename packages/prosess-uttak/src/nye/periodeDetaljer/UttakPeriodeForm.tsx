@@ -311,8 +311,9 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
         ]}
       />
       {erOppfylt !== undefined && (
-        <div className={styles.marginBottom20}>
-          <ArrowBox alignOffset={erOppfylt ? 0 : 98}>
+        <>
+          <VerticalSpacer eightPx />
+          <ArrowBox alignOffset={erOppfylt ? 0 : 92}>
             <SelectField
               name="periodeAarsak"
               selectValues={periodeÅrsakOptions}
@@ -350,7 +351,7 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
               </div>
             )}
           </ArrowBox>
-        </div>
+        </>
       )}
       <VerticalSpacer sixteenPx />
       <FlexContainer>

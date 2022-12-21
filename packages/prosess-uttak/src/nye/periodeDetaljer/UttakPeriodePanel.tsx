@@ -144,7 +144,7 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
   const harSoktOmFlerbarnsdager = perioderSøker.some((p) => p.flerbarnsdager === true);
 
   return (
-    <>
+    <div className={styles.panel}>
       <FlexContainer>
         <FlexRow spaceBetween>
           <FlexColumn>
@@ -208,7 +208,7 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
         harSoktOmFlerbarnsdager={harSoktOmFlerbarnsdager}
         erTilknyttetStortinget={erTilknyttetStortinget}
       />
-    </>
+    </div>
   );
 };
 

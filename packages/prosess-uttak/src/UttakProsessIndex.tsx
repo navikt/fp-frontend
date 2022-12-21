@@ -24,7 +24,7 @@ interface OwnProps {
   kanOverstyre: boolean;
   oppdaterStønadskontoer: (params: {
     behandlingUuid: string;
-    perioder: PeriodeSoker;
+    perioder: PeriodeSoker[];
   }) => Promise<any>;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }

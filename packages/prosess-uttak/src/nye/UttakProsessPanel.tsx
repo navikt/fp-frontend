@@ -183,22 +183,25 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
         tilknyttetStortinget={erTilknyttetStortinget}
       />
       {valgtPeriodeIndex && (
-        <UttakPeriodePanel
-          key={valgtPeriodeIndex}
-          perioderSøker={perioder}
-          uttaksresultatPeriode={uttaksresultatPeriode}
-          valgtPeriodeIndex={valgtPeriodeIndex}
-          oppdaterPeriode={oppdaterPeriode}
-          isEdited={false}
-          isReadOnly={isReadOnly}
-          visForrigePeriode={visForrigePeriode}
-          visNestePeriode={visNestePeriode}
-          alleKodeverk={alleKodeverk}
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          uttakStonadskontoer={stønadskonto}
-          setValgtPeriodeIndex={setValgtPeriodeIndex}
-          erTilknyttetStortinget={erTilknyttetStortinget}
-        />
+        <>
+          <VerticalSpacer sixteenPx />
+          <UttakPeriodePanel
+            key={valgtPeriodeIndex}
+            perioderSøker={perioder}
+            uttaksresultatPeriode={uttaksresultatPeriode}
+            valgtPeriodeIndex={valgtPeriodeIndex}
+            oppdaterPeriode={oppdaterPeriode}
+            isEdited={false}
+            isReadOnly={isReadOnly}
+            visForrigePeriode={visForrigePeriode}
+            visNestePeriode={visNestePeriode}
+            alleKodeverk={alleKodeverk}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+            uttakStonadskontoer={stønadskonto}
+            setValgtPeriodeIndex={setValgtPeriodeIndex}
+            erTilknyttetStortinget={erTilknyttetStortinget}
+          />
+        </>
       )}
       <VerticalSpacer sixteenPx />
       {!isReadOnly && (
