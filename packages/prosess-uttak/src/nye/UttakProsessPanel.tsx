@@ -137,11 +137,12 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   const visNestePeriode = useCallback(() => {
     setValgtPeriodeIndex((index) => index + 1);
   }, []);
-  const oppdaterPeriode = useCallback((oppdatertPeriode: PeriodeSoker) => {
-    const filtrertePerioder = perioder.filter((p) => p.fom === oppdatertPeriode.fom);
-    setPerioder(filtrertePerioder.concat(oppdatertPeriode));
+  const oppdaterPeriode = useCallback((oppdatertePerioder: PeriodeSoker[]) => {
+    const andrePerioder = perioder.filter((p) => p.fom !== oppdatertePerioder[0].fom);
+    const nyePerioder = andrePerioder.concat(oppdatertePerioder);
+    setPerioder(nyePerioder);
 
-    oppdaterStønadskontoer({ behandlingUuid: behandling.uuid, perioder })
+    oppdaterStønadskontoer({ behandlingUuid: behandling.uuid, perioder: nyePerioder })
       .then((oppdatertStønadskonto: UttakStonadskontoer) => setStønadskonto(oppdatertStønadskonto));
   }, [perioder]);
 
@@ -190,7 +191,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
         alleKodeverk={alleKodeverk}
         tilknyttetStortinget={erTilknyttetStortinget}
       />
-      {valgtPeriodeIndex && (
+      {valgtPeriodeIndex !== undefined && (
         <>
           <VerticalSpacer sixteenPx />
           <UttakPeriodePanel

@@ -166,10 +166,10 @@ const Template: Story<{
     submitCallback={submitCallback}
     isReadOnly={false}
     readOnlySubmitButton={false}
-    oppdaterStønadskontoer={action('button-click') as (params: {
-      behandlingUuid: string;
-      perioder: any;
-    }) => Promise<any>}
+    oppdaterStønadskontoer={(v) => {
+      action('button-click')(v);
+      return Promise.resolve(uttakStonadskontoer);
+    }}
     isAksjonspunktOpen
     status="test"
     vilkar={[]}

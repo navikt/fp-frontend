@@ -8,7 +8,9 @@ import {
   Detail, Label, BodyShort, Modal, Button,
 } from '@navikt/ds-react';
 import { Datepicker, Form } from '@navikt/ft-form-hooks';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
@@ -48,7 +50,7 @@ interface OwnProps {
   submit: (dato: string) => void;
 }
 
-const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({
+const SplittPeriodeModal: FunctionComponent<OwnProps> = ({
   fomDato,
   tomDato,
   submit,
@@ -92,32 +94,29 @@ const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({
             <FlexRow wrap className={styles.marginTop}>
               <FlexColumn>
                 <Detail size="small"><FormattedMessage id="DelOppPeriodeModalImpl.AngiTomDato" /></Detail>
-                <FlexRow alignItemsToBaseline>
-                  <FlexColumn>
-                    <Datepicker
-                      name="ForstePeriodeTomDato"
-                      validate={[required, hasValidDate, validerInnenforIntervall(fomDato, tomDato, intl)]}
-                      defaultMonth={new Date(fomDato)}
-                      disabledDays={{ fromDate: dayjs(fomDato).toDate(), toDate: dayjs(tomDato).toDate() }}
-                      strategy="fixed"
-                    />
-                  </FlexColumn>
-                  {dato && (
-                    <FlexColumn>
-                      <FormattedMessage
-                        id={numberOfDaysAndWeeks.id.toString()}
-                        values={{
-                          weeks: numberOfDaysAndWeeks.weeks.toString(),
-                          days: numberOfDaysAndWeeks.days.toString(),
-                        }}
-                      />
+                <Datepicker
+                  name="dato"
+                  validate={[required, hasValidDate, validerInnenforIntervall(fomDato, tomDato, intl)]}
+                  defaultMonth={new Date(fomDato)}
+                  disabledDays={{ fromDate: dayjs(fomDato).toDate(), toDate: dayjs(tomDato).toDate() }}
+                  strategy="fixed"
+                />
 
-                    </FlexColumn>
-                  )}
-                </FlexRow>
               </FlexColumn>
+              {dato && (
+                <FlexColumn className={styles.dager}>
+                  <FormattedMessage
+                    id={numberOfDaysAndWeeks.id.toString()}
+                    values={{
+                      weeks: numberOfDaysAndWeeks.weeks.toString(),
+                      days: numberOfDaysAndWeeks.days.toString(),
+                    }}
+                  />
+                </FlexColumn>
+              )}
             </FlexRow>
-            <FlexRow wrap className={styles.marginTop}>
+            <VerticalSpacer sixteenPx />
+            <FlexRow wrap>
               <FlexColumn>
                 <Button
                   size="small"
@@ -144,26 +143,4 @@ const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({
   );
 };
 
-/*
-const transformValues = (values: FormValues, periodeData: PeriodeMedClassName): DeltPeriodeData => {
-  const addDay = moment(values.ForstePeriodeTomDato).add(1, 'days');
-  const forstePeriode = {
-    fom: periodeData.fom,
-    tom: values.ForstePeriodeTomDato,
-  };
-  const andrePeriode = {
-    fom: moment(addDay.toString()).format('YYYY-MM-DD'),
-    tom: periodeData.tom,
-  };
-  return {
-    periodeId: periodeData.id,
-    hovedsoker: periodeData.hovedsoker,
-    gradertProsentandelArbeid: periodeData.gradertAktivitet ? periodeData.gradertAktivitet.prosentArbeid : null,
-    gradertTrekkdager: periodeData.gradertAktivitet ? periodeData.gradertAktivitet.trekkdagerDesimaler : null,
-    forstePeriode,
-    andrePeriode,
-  };
-};
-*/
-
-export default DelOppPeriodeModal;
+export default SplittPeriodeModal;

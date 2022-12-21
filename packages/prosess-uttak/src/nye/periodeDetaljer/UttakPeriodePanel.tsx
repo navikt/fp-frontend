@@ -1,19 +1,20 @@
 import React, {
   ReactElement, FunctionComponent, useCallback, useState,
 } from 'react';
+import dayjs from 'dayjs';
 import { FormattedMessage, useIntl } from 'react-intl';
 import {
-  AksjonspunktHelpTextHTML,
-  EditedIcon, FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
+  AksjonspunktHelpTextHTML, EditedIcon, FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { TimeLineButton } from '@navikt/ft-tidslinje';
 import { Label } from '@navikt/ds-react';
 import { KodeverkType } from '@navikt/ft-kodeverk';
+import { calcDays } from '@navikt/ft-utils';
 
 import splitPeriodImageHoverUrl from '@fpsak-frontend/assets/images/splitt_hover.svg';
 import splitPeriodImageUrl from '@fpsak-frontend/assets/images/splitt.svg';
 import {
-  AlleKodeverk, ArbeidsgiverOpplysningerPerId, PeriodeSoker, UttaksresultatPeriode, UttakStonadskontoer,
+  AlleKodeverk, ArbeidsgiverOpplysningerPerId, PeriodeSoker, UttaksresultatPeriode, UttakStonadskontoer, PeriodeSokerAktivitet,
 } from '@fpsak-frontend/types';
 
 import SplittPeriodeModal from './splitt/SplittPeriodeModal';
@@ -96,11 +97,51 @@ const hentApTekst = (
   return aksjonspunktTekster;
 };
 
+const kalkulerTrekkdager = (
+  aktivitet: PeriodeSokerAktivitet,
+  virkedager: number,
+  samtidigUttak?: boolean,
+  samtidigUttaksprosent?: number,
+) => {
+  let uttaksgrad = aktivitet.gradering ? (100 - aktivitet.prosentArbeid) / 100 : 1;
+  uttaksgrad = samtidigUttak ? samtidigUttaksprosent / 100 : uttaksgrad;
+
+  const trekkdager = uttaksgrad * virkedager;
+
+  return {
+    weeks: Math.trunc(trekkdager / 5),
+    days: parseFloat((trekkdager % 5).toFixed(1)),
+    trekkdagerDesimaler: trekkdager,
+  };
+};
+
+const lagPeriode = (
+  valgtPeriode: PeriodeSoker,
+  fom: string,
+  tom: string,
+) => {
+  const { aktiviteter, samtidigUttak, samtidigUttaksprosent } = valgtPeriode;
+
+  const virkedager = calcDays(fom, tom);
+  const oppdaterteAktiviteter = aktiviteter
+    .map((aktivitet) => (aktivitet.trekkdagerDesimaler > 0 ? {
+      ...aktivitet,
+      ...kalkulerTrekkdager(aktivitet, virkedager, samtidigUttak, samtidigUttaksprosent),
+    } : aktivitet));
+
+  return {
+    ...valgtPeriode,
+    fom,
+    tom,
+    aktiviteter: oppdaterteAktiviteter,
+  };
+};
+
 interface OwnProps {
   perioderSøker: PeriodeSoker[];
   uttaksresultatPeriode: UttaksresultatPeriode;
   valgtPeriodeIndex: number | undefined;
-  oppdaterPeriode: (oppdatertPeriode: PeriodeSoker) => void;
+  oppdaterPeriode: (perioder: PeriodeSoker[]) => void;
   isEdited: boolean;
   isReadOnly: boolean;
   visForrigePeriode: () => void;
@@ -136,8 +177,11 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
   const valgtPeriode = allePerioder[valgtPeriodeIndex];
 
   const splittPeriode = useCallback((dato: string) => {
-
-  }, []);
+    const periode1 = lagPeriode(valgtPeriode, valgtPeriode.fom, dato);
+    const periode2 = lagPeriode(valgtPeriode, dayjs(dato).add(1, 'days').format('YYYY-MM-DD'), valgtPeriode.tom);
+    oppdaterPeriode([periode1, periode2]);
+    toggleVisningAvModal();
+  }, [valgtPeriodeIndex]);
 
   const lukkPeriode = useCallback(() => setValgtPeriodeIndex(undefined), []);
 

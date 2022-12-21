@@ -1,102 +1,21 @@
 import React, {
-  Component, MouseEvent, KeyboardEvent, ReactElement,
+  FunctionComponent, MouseEvent,
 } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 
-import { calcDays } from '@navikt/ft-utils';
 import {
-  AksjonspunktHelpTextTemp, VerticalSpacer, EditedIcon, Image, FlexContainer, FlexRow, FlexColumn,
+  VerticalSpacer, EditedIcon, FlexContainer, FlexRow, FlexColumn,
 } from '@navikt/ft-ui-komponenter';
-import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
-import splitPeriodImageHoverUrl from '@fpsak-frontend/assets/images/splitt_hover.svg';
-import splitPeriodImageUrl from '@fpsak-frontend/assets/images/splitt.svg';
 import { TimeLineButton, TimeLineDataContainer } from '@navikt/ft-tidslinje';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   ArbeidsgiverOpplysningerPerId, Behandling, AlleKodeverk, UttakStonadskontoer,
 } from '@fpsak-frontend/types';
 import { AarsakFilter } from '@fpsak-frontend/types/src/uttaksresultatPeriodeTsType';
 import UttakActivity from './UttakActivity';
-import DelOppPeriodeModal, { DeltPeriodeData } from './DelOppPeriodeModal';
 import { PeriodeMedClassName, UttaksresultatActivity } from './Uttak';
 
-import styles from './uttakTimeLineData.less';
 import { AktivitetFieldArray } from './RenderUttakTable';
-
-const getCorrectEmptyArbeidsForhold = (
-  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  periodeTypeKode?: string,
-  stonadskonto?: UttakStonadskontoer,
-): string[] => {
-  const arbeidsForholdMedNullDagerIgjenArray: string[] = [];
-  let arbeidsforholdMedPositivSaldoFinnes = false;
-  if (stonadskonto && stonadskonto.stonadskontoer[periodeTypeKode] && stonadskonto.stonadskontoer[periodeTypeKode].aktivitetSaldoDtoList) {
-    stonadskonto.stonadskontoer[periodeTypeKode].aktivitetSaldoDtoList.forEach((item) => {
-      if (item.saldo === 0) {
-        if (item.aktivitetIdentifikator.arbeidsgiverReferanse) {
-          const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[item.aktivitetIdentifikator.arbeidsgiverReferanse];
-          arbeidsForholdMedNullDagerIgjenArray.push(arbeidsgiverOpplysninger.navn);
-        } else {
-          arbeidsForholdMedNullDagerIgjenArray.push(getKodeverknavn(item.aktivitetIdentifikator.uttakArbeidType, KodeverkType.UTTAK_ARBEID_TYPE));
-        }
-      } else {
-        arbeidsforholdMedPositivSaldoFinnes = true;
-      }
-    });
-  }
-  if (arbeidsforholdMedPositivSaldoFinnes) {
-    return arbeidsForholdMedNullDagerIgjenArray;
-  }
-  return [];
-};
-
-const hentApTekst = (
-  manuellBehandlingÅrsak: string,
-  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  stonadskonto?: UttakStonadskontoer,
-  periodeTypeKode?: string,
-): ReactElement[] => {
-  const texts = [];
-
-  // Fix - ta bort 5001 med verdi fra kodeverk
-  if (manuellBehandlingÅrsak === '5001') {
-    const arbeidsForhold = getCorrectEmptyArbeidsForhold(getKodeverknavn, arbeidsgiverOpplysningerPerId, periodeTypeKode, stonadskonto);
-    const arbeidsForholdMedNullDagerIgjen = arbeidsForhold.join();
-    if (arbeidsForhold.length > 1) {
-      texts.push(
-        <FormattedMessage
-          key="manuellÅrsak"
-          id="UttakPanel.manuellBehandlingÅrsakArbeidsforhold"
-          values={{ arbeidsforhold: arbeidsForholdMedNullDagerIgjen }}
-        />,
-      );
-    } else if (arbeidsForhold.length === 1) {
-      texts.push(
-        <FormattedMessage
-          key="manuellÅrsak"
-          id="UttakPanel.manuellBehandlingÅrsakEnskiltArbeidsforhold"
-          values={{ arbeidsforhold: arbeidsForhold }}
-        />,
-      );
-    } else {
-      texts.push(
-        <React.Fragment key={`kode-${manuellBehandlingÅrsak}`}>
-          {getKodeverknavn(manuellBehandlingÅrsak, KodeverkType.MANUELL_BEHANDLING_AARSAK)}
-        </React.Fragment>,
-      );
-    }
-  } else {
-    texts.push(
-      <React.Fragment key={`kode-${manuellBehandlingÅrsak}`}>
-        {getKodeverknavn(manuellBehandlingÅrsak, KodeverkType.MANUELL_BEHANDLING_AARSAK)}
-      </React.Fragment>);
-  }
-
-  return texts;
-};
 
 export const kalkulerTrekkdager = (aktivitet: AktivitetFieldArray, virkedager: number, samtidigUttak?: boolean, samtidigUttaksprosent?: number) => {
   let uttaksgrad = aktivitet.gradering ? (100 - aktivitet.prosentArbeid) / 100 : 1;
@@ -132,206 +51,65 @@ interface OwnProps {
   aarsakFilter: AarsakFilter;
 }
 
-interface OwnState {
-  showDelPeriodeModal: boolean;
-}
+const UttakTimeLineData: FunctionComponent<OwnProps> = ({
+  callbackBackward,
+  callbackCancelSelectedActivity,
+  callbackForward,
+  callbackUpdateActivity,
+  harSoktOmFlerbarnsdager,
+  alleKodeverk,
+  behandlingsresultat,
+  isApOpen = false,
+  readOnly,
+  selectedItemData,
+  arbeidsgiverOpplysningerPerId,
+  aarsakFilter,
+  reduxFormChange: formChange,
+}) => {
+  const intl = useIntl();
+  const isEdited = !!selectedItemData.begrunnelse && !isApOpen;
 
-export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProps, OwnState> {
-  constructor(props: OwnProps & WrappedComponentProps) {
-    super(props);
-    this.showModal = this.showModal.bind(this);
-    this.hideModal = this.hideModal.bind(this);
-    this.splitPeriod = this.splitPeriod.bind(this);
+  return (
+    <TimeLineDataContainer key={`selectedItemData_${selectedItemData.id}`}>
+      <FlexContainer>
+        <FlexRow spaceBetween>
+          <FlexColumn>
+            <Label size="small">
+              <FormattedMessage id="UttakTimeLineData.PeriodeData.Detaljer" />
+              {isEdited && <EditedIcon />}
+            </Label>
+          </FlexColumn>
+          <FlexColumn>
+            <TimeLineButton text={intl.formatMessage({ id: 'Timeline.prevPeriod' })} type="prev" callback={callbackBackward} />
+            <TimeLineButton text={intl.formatMessage({ id: 'Timeline.nextPeriod' })} type="next" callback={callbackForward} />
+          </FlexColumn>
+        </FlexRow>
+      </FlexContainer>
+      <VerticalSpacer sixteenPx />
+      <UttakActivity
+        // @ts-ignore
+        cancelSelectedActivity={callbackCancelSelectedActivity}
+        // @ts-ignore
+        updateActivity={callbackUpdateActivity}
+        // @ts-ignore
+        selectedItemData={selectedItemData}
+        // @ts-ignore
+        readOnly={readOnly}
+        // @ts-ignore
+        harSoktOmFlerbarnsdager={harSoktOmFlerbarnsdager}
+        // @ts-ignore
+        alleKodeverk={alleKodeverk}
+        // @ts-ignore
+        behandlingsresultat={behandlingsresultat}
+        // @ts-ignore
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        // @ts-ignore
+        aarsakFilter={aarsakFilter}
+        // @ts-ignore
+        reduxFormChange={formChange}
+      />
+    </TimeLineDataContainer>
+  );
+};
 
-    this.state = {
-      showDelPeriodeModal: false,
-    };
-  }
-
-  setFormField(fieldName: string, fieldValue: UttaksresultatActivity[]): void {
-    const { formName, reduxFormChange: formChange } = this.props;
-    formChange(formName, fieldName, fieldValue);
-  }
-
-  showModal(event: MouseEvent | KeyboardEvent): void {
-    event.preventDefault();
-    this.setState({
-      showDelPeriodeModal: true,
-    });
-    const { reduxFormChange: formChange } = this.props;
-    formChange('DelOppPeriode', 'ForstePeriodeTomDato', null);
-  }
-
-  hideModal(): void {
-    this.setState({
-      showDelPeriodeModal: false,
-    });
-  }
-
-  splitPeriod(formValues: DeltPeriodeData): void {
-    const { uttaksresultatActivity, activityPanelName, callbackSetSelected: setSelected } = this.props;
-    const {
-      periodeId, forstePeriode, andrePeriode, hovedsoker,
-    } = formValues;
-
-    const periodeSomSkalSplittes = uttaksresultatActivity.find((o) => o.id === periodeId);
-    const alleAndrePerioder = uttaksresultatActivity.filter((o) => o.id !== periodeId);
-    const nyId = periodeId + 1;
-
-    const virkedagerForPeriode1 = calcDays(forstePeriode.fom, forstePeriode.tom);
-    const virkedagerForPeriode2 = calcDays(andrePeriode.fom, andrePeriode.tom);
-
-    const { samtidigUttak, samtidigUttaksprosent, aktiviteter } = periodeSomSkalSplittes;
-    const oppdaterteAktiviteterPeriode1 = aktiviteter
-      .map((aktivitet) => (aktivitet.trekkdagerDesimaler > 0 ? {
-        ...aktivitet,
-        ...kalkulerTrekkdager(aktivitet, virkedagerForPeriode1, samtidigUttak, samtidigUttaksprosent),
-      } : aktivitet));
-    const oppdaterteAktiviteterPeriode2 = aktiviteter
-      .map((aktivitet) => (aktivitet.trekkdagerDesimaler > 0 ? {
-        ...aktivitet,
-        ...kalkulerTrekkdager(aktivitet, virkedagerForPeriode2, samtidigUttak, samtidigUttaksprosent),
-      } : aktivitet));
-
-    const nyPeriode1 = {
-      ...periodeSomSkalSplittes,
-      fom: forstePeriode.fom,
-      tom: forstePeriode.tom,
-      begrunnelse: periodeSomSkalSplittes.begrunnelse ? periodeSomSkalSplittes.begrunnelse : ' ',
-      aktiviteter: oppdaterteAktiviteterPeriode1,
-      hovedsoker,
-    };
-    const nyPeriode2 = {
-      ...periodeSomSkalSplittes,
-      id: nyId,
-      fom: andrePeriode.fom,
-      tom: andrePeriode.tom,
-      begrunnelse: periodeSomSkalSplittes.begrunnelse ? periodeSomSkalSplittes.begrunnelse : ' ',
-      aktiviteter: oppdaterteAktiviteterPeriode2,
-      hovedsoker,
-    };
-
-    alleAndrePerioder.forEach((p) => {
-      if (p.id >= nyId) {
-        // eslint-disable-next-line no-param-reassign
-        p.id += 1;
-      }
-    });
-
-    const sorterteAktiviteter = alleAndrePerioder.concat(nyPeriode1, nyPeriode2);
-    sorterteAktiviteter.sort((a, b) => a.id - b.id);
-
-    this.setFormField(activityPanelName, sorterteAktiviteter);
-    this.hideModal();
-    setSelected(nyPeriode1);
-  }
-
-  render() {
-    const {
-      callbackBackward,
-      callbackCancelSelectedActivity,
-      callbackForward,
-      callbackUpdateActivity,
-      harSoktOmFlerbarnsdager,
-      alleKodeverk,
-      behandlingsresultat,
-      intl,
-      isApOpen = false,
-      readOnly,
-      selectedItemData,
-      stonadskonto,
-      arbeidsgiverOpplysningerPerId,
-      aarsakFilter,
-      reduxFormChange: formChange,
-    } = this.props;
-    const { showDelPeriodeModal } = this.state;
-    const isEdited = !!selectedItemData.begrunnelse && !isApOpen;
-    const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
-
-    return (
-      <TimeLineDataContainer key={`selectedItemData_${selectedItemData.id}`}>
-        <FlexContainer>
-          <FlexRow spaceBetween>
-            <FlexColumn>
-              <Label size="small">
-                <FormattedMessage id="UttakTimeLineData.PeriodeData.Detaljer" />
-                {isEdited && <EditedIcon />}
-              </Label>
-            </FlexColumn>
-            <FlexColumn>
-              {!readOnly && (
-                <span className={styles.splitPeriodPosition}>
-                  <Image
-                    tabIndex={0}
-                    className={styles.splitPeriodImage}
-                    src={splitPeriodImageUrl}
-                    srcHover={splitPeriodImageHoverUrl}
-                    alt={intl.formatMessage({ id: 'UttakTimeLineData.PeriodeData.DelOppPerioden' })}
-                    onMouseDown={this.showModal}
-                    onKeyDown={(e) => (e.key === 'Enter' ? this.showModal(e) : null)}
-                  />
-                  <FormattedMessage id="UttakTimeLineData.PeriodeData.DelOppPerioden" />
-                </span>
-              )}
-              {showDelPeriodeModal && (
-                <DelOppPeriodeModal
-                  // @ts-ignore
-                  cancelEvent={this.hideModal}
-                  // @ts-ignore
-                  showModal={showDelPeriodeModal}
-                  // @ts-ignore
-                  periodeData={selectedItemData}
-                  // @ts-ignore
-                  splitPeriod={this.splitPeriod}
-                  // @ts-ignore
-                  intl={intl}
-                />
-              )}
-            </FlexColumn>
-            <FlexColumn>
-              <TimeLineButton text={intl.formatMessage({ id: 'Timeline.prevPeriod' })} type="prev" callback={callbackBackward} />
-              <TimeLineButton text={intl.formatMessage({ id: 'Timeline.nextPeriod' })} type="next" callback={callbackForward} />
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
-        <VerticalSpacer sixteenPx />
-        {selectedItemData.manuellBehandlingÅrsak && selectedItemData.manuellBehandlingÅrsak !== '-' && (
-        <>
-          <AksjonspunktHelpTextTemp isAksjonspunktOpen={selectedItemData.manuellBehandlingÅrsak !== null}>
-            {selectedItemData.periodeType
-              ? hentApTekst(selectedItemData.manuellBehandlingÅrsak, getKodeverknavn, arbeidsgiverOpplysningerPerId, stonadskonto,
-                selectedItemData.periodeType)
-              : hentApTekst(selectedItemData.manuellBehandlingÅrsak, getKodeverknavn, arbeidsgiverOpplysningerPerId, stonadskonto)}
-          </AksjonspunktHelpTextTemp>
-          <VerticalSpacer twentyPx />
-        </>
-        )}
-        <UttakActivity
-          // @ts-ignore
-          cancelSelectedActivity={callbackCancelSelectedActivity}
-          // @ts-ignore
-          updateActivity={callbackUpdateActivity}
-          // @ts-ignore
-          selectedItemData={selectedItemData}
-          // @ts-ignore
-          readOnly={readOnly}
-          // @ts-ignore
-          harSoktOmFlerbarnsdager={harSoktOmFlerbarnsdager}
-          // @ts-ignore
-          alleKodeverk={alleKodeverk}
-          // @ts-ignore
-          behandlingsresultat={behandlingsresultat}
-          // @ts-ignore
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          // @ts-ignore
-          aarsakFilter={aarsakFilter}
-          // @ts-ignore
-          reduxFormChange={formChange}
-        />
-      </TimeLineDataContainer>
-    );
-  }
-}
-
-// @ts-ignore
-export default injectIntl(UttakTimeLineData);
+export default UttakTimeLineData;

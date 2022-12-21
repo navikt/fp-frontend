@@ -30,7 +30,6 @@ import {
   AvklartBarn, UttakStonadskontoer, PeriodeSoker, ArbeidsgiverOpplysningerPerId, Personoversikt,
 } from '@fpsak-frontend/types';
 
-import TimeLineInfo from './stonadkonto/TimeLineInfo';
 import UttakTimeLineData from './UttakTimeLineData';
 import UttakMedsokerReadOnly from './UttakMedsokerReadOnly';
 import UttakTidslinjeHjelpetekster from './UttakTidslinjeHjelpetekster';
@@ -480,10 +479,6 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
         {this.testForReadOnly(aksjonspunkter, employeeHasAccess)
             && <FormattedMessage id="Uttak.Overstyrt" />}
         <div>
-          <TimeLineInfo
-            stonadskonto={stonadskonto.stonadskontoer}
-            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          />
           <Tidslinje
             customTimes={customTimes}
             hovedsokerKjonnKode={hovedsokerKjonnKode}

@@ -224,7 +224,7 @@ const transformValues = (
 interface OwnProps {
   valgtPeriode: PeriodeSoker;
   isReadOnly: boolean;
-  oppdaterPeriode: (periode: PeriodeSoker) => void;
+  oppdaterPeriode: (perioder: PeriodeSoker[]) => void;
   lukkPeriodeVisning: () => void;
   alleKodeverk: AlleKodeverk;
   årsakFilter: AarsakFilter;
@@ -268,7 +268,7 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
 
   const graderingAvslagsårsakOptions = useMemo(() => lagOptionsTilGraderingAvslagsårsakerSelect(alleKodeverk), []);
 
-  const submit = useCallback((values: FormValues) => oppdaterPeriode(transformValues(values, valgtPeriode)), [valgtPeriode]);
+  const submit = useCallback((values: FormValues) => oppdaterPeriode([transformValues(values, valgtPeriode)]), [valgtPeriode]);
 
   return (
     <Form formMethods={formMethods} onSubmit={submit}>
