@@ -74,7 +74,7 @@
     "@sentry/cli": "^2.10.0",
     "@storybook/addon-actions": "6.5.14",
     "@storybook/addon-docs": "6.5.14",
-    "@storybook/addons": "6.5.14",
+    "@storybook/addons": "6.5.15",
     "@storybook/builder-webpack5": "6.5.14",
     "@storybook/cli": "6.5.14",
     "@storybook/manager-webpack5": "6.5.14",
