@@ -76,7 +76,7 @@
     "@storybook/addon-docs": "6.5.14",
     "@storybook/addons": "6.5.14",
     "@storybook/builder-webpack5": "6.5.14",
-    "@storybook/cli": "6.5.14",
+    "@storybook/cli": "6.5.15",
     "@storybook/manager-webpack5": "6.5.14",
     "@storybook/react": "6.5.14",
     "@storybook/storybook-deployer": "2.8.16",
