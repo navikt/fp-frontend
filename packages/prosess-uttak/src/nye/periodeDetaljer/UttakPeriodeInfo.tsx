@@ -213,7 +213,7 @@ const UttakPeriodeInfo: FunctionComponent<OwnProps> = ({
               {erSamtidigUttak && (
                 <FlexContainer>
                   <FlexRow>
-                    <FlexColumn>
+                    <FlexColumn className={styles.bredde}>
                       <NumberField
                         name="samtidigUttaksprosent"
                         readOnly={isReadOnly}
@@ -284,8 +284,11 @@ const UttakPeriodeInfo: FunctionComponent<OwnProps> = ({
         </FlexRow>
       </FlexContainer>
       {valgtPeriode.oppholdÅrsak !== '-' && (
-        <>
-          <FormattedMessage id="UttakInfo.Opphold.AnnenForelder" />
+        <div className={styles.select}>
+          <VerticalSpacer sixteenPx />
+          <Detail size="small">
+            <FormattedMessage id="UttakInfo.Opphold.AnnenForelder" />
+          </Detail>
           <SelectField
             name="oppholdArsak"
             selectValues={mapPeriodeTyper(oppholdArsakTyper)}
@@ -293,7 +296,7 @@ const UttakPeriodeInfo: FunctionComponent<OwnProps> = ({
             readOnly={isReadOnly}
             validate={[required, notDash]}
           />
-        </>
+        </div>
       )}
       <VerticalSpacer eightPx />
       {valgtPeriode.mottattDato && (

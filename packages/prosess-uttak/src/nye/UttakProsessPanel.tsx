@@ -118,6 +118,14 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
 
   useEffect(() => () => setFormData(perioder), [perioder]);
 
+  useEffect(() => {
+    const allePerioder = uttaksresultatPeriode.perioderAnnenpart.concat(perioder);
+    const index = allePerioder.findIndex((period) => period.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING);
+    if (index !== -1) {
+      setValgtPeriodeIndex(index);
+    }
+  }, []);
+
   const bekreftAksjonspunkter = () => {
     // TODO
     submitCallback(perioder);

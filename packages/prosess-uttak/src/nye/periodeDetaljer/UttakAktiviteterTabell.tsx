@@ -55,8 +55,8 @@ const createTextStrings = (
 
 const getNoMoreThanZeroIfRejectedAndNotUtsettelse = (
   intl: IntlShape,
-  erOppfylt,
-  utsettelseType,
+  erOppfylt: boolean,
+  utsettelseType?: string,
 ) => (
   value: any,
 ): string | null => {
@@ -154,7 +154,7 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                 <TableColumn>
                   <FlexContainer>
                     <FlexRow>
-                      <FlexColumn>
+                      <FlexColumn className={styles.ukeOgDag}>
                         <span className={styles.weekPosition}>
                           <NumberField
                             name={`aktiviteter.${index}.weeks`}
@@ -166,7 +166,7 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                       <FlexColumn>
                         {isReadOnly ? <span>/</span> : <span className={styles.verticalCharPlacementInTable}>/</span>}
                       </FlexColumn>
-                      <FlexColumn>
+                      <FlexColumn className={styles.ukeOgDag}>
                         <NumberField
                           name={`aktiviteter.${index}.days`}
                           readOnly={isReadOnly}
@@ -176,11 +176,15 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                     </FlexRow>
                   </FlexContainer>
                 </TableColumn>
-                <TableColumn><BodyShort size="small">{textStrings.prosentArbeidText}</BodyShort></TableColumn>
+                <TableColumn>
+                  <BodyShort size="small">
+                    {textStrings.prosentArbeidText}
+                  </BodyShort>
+                </TableColumn>
                 <TableColumn>
                   <FlexContainer>
                     <FlexRow>
-                      <FlexColumn>
+                      <FlexColumn className={styles.utbetalingsgrad}>
                         <NumberField
                           name={`aktiviteter.${index}.utbetalingsgrad`}
                           validate={[
