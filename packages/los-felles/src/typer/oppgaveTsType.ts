@@ -26,7 +26,6 @@ type Oppgave = Readonly<{
   fagsakYtelseType: string;
   erTilSaksbehandling: boolean;
   behandlingId: string;
-  href: string;
 }>
 
 export default Oppgave;

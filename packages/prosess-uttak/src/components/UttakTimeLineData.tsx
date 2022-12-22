@@ -15,9 +15,7 @@ import { AarsakFilter } from '@fpsak-frontend/types/src/uttaksresultatPeriodeTsT
 import UttakActivity from './UttakActivity';
 import { PeriodeMedClassName, UttaksresultatActivity } from './Uttak';
 
-import { AktivitetFieldArray } from './RenderUttakTable';
-
-export const kalkulerTrekkdager = (aktivitet: AktivitetFieldArray, virkedager: number, samtidigUttak?: boolean, samtidigUttaksprosent?: number) => {
+export const kalkulerTrekkdager = (aktivitet: any, virkedager: number, samtidigUttak?: boolean, samtidigUttaksprosent?: number) => {
   let uttaksgrad = aktivitet.gradering ? (100 - aktivitet.prosentArbeid) / 100 : 1;
   uttaksgrad = samtidigUttak ? samtidigUttaksprosent / 100 : uttaksgrad;
 

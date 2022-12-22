@@ -1,5 +1,5 @@
 import React, {
-  useCallback, useMemo, FunctionComponent, ReactElement,
+  useCallback, useMemo, FunctionComponent, ReactElement, useEffect, useState,
 } from 'react';
 import dayjs from 'dayjs';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
@@ -269,17 +269,25 @@ const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
   const tidslinjeTider = useMemo(() => finnTidslinjeTider(behandling, søknad, familiehendelse, ytelsefordeling, personoversikt),
     [behandling, søknad, familiehendelse, ytelsefordeling, personoversikt]);
 
-  const velgPeriode = useCallback((eventProps: EventProps) => {
-    const periodeIndex = sorterteUttaksperioder.findIndex((item) => item.id === eventProps.items[0]);
-    const valgtPeriode = valgtPeriodeIndex ? sorterteUttaksperioder[valgtPeriodeIndex] : undefined;
+  const [eventProps, setEventProps] = useState<EventProps>();
 
-    if (valgtPeriode?.periode.fom !== sorterteUttaksperioder[periodeIndex]?.periode.fom) {
-      setValgtPeriodeIndex(periodeIndex);
-    } else {
-      setValgtPeriodeIndex(undefined);
+  const velgPeriode = useCallback((eventPropsValue: EventProps) => {
+    setEventProps(eventPropsValue);
+    eventPropsValue.event.preventDefault();
+  }, []);
+
+  useEffect(() => {
+    if (eventProps) {
+      const periodeIndex = sorterteUttaksperioder.findIndex((item) => item.id === eventProps.items[0]);
+      const valgtPeriode = valgtPeriodeIndex ? sorterteUttaksperioder[valgtPeriodeIndex] : undefined;
+
+      if (valgtPeriode?.periode.fom !== sorterteUttaksperioder[periodeIndex]?.periode.fom) {
+        setValgtPeriodeIndex(periodeIndex);
+      } else {
+        setValgtPeriodeIndex(undefined);
+      }
     }
-    eventProps.event.preventDefault();
-  }, [sorterteUttaksperioder, valgtPeriodeIndex]);
+  }, [eventProps]);
 
   const åpneFørstePeriodeEllerLukk = useCallback(() => setValgtPeriodeIndex(valgtPeriodeIndex ? undefined : 0), [valgtPeriodeIndex]);
 

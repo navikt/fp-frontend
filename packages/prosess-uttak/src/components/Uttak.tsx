@@ -32,8 +32,6 @@ import {
 
 import UttakTimeLineData from './UttakTimeLineData';
 import UttakMedsokerReadOnly from './UttakMedsokerReadOnly';
-import UttakTidslinjeHjelpetekster from './UttakTidslinjeHjelpetekster';
-import { AktivitetFieldArray } from './RenderUttakTable';
 
 import styles from './uttak.less';
 import Tidslinje, { EventProps, TidslinjeTimes } from './Tidslinje';
@@ -43,7 +41,7 @@ export type UttaksresultatActivity = Overwrite<PeriodeSoker, {
   id: number;
   tilknyttetStortinget?: boolean;
   erOppfylt?: boolean;
-  aktiviteter: AktivitetFieldArray[];
+  aktiviteter: any[];
  }>
 
 export type PeriodeMedClassName = {
@@ -488,7 +486,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
             selectPeriodCallback={this.selectHandler}
             uttakPerioder={uttakPerioder}
           >
-            <UttakTidslinjeHjelpetekster />
+            <div />
           </Tidslinje>
           <VerticalSpacer sixteenPx />
           {selectedItem

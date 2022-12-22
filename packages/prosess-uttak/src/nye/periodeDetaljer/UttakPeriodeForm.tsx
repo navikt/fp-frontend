@@ -282,14 +282,16 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
         erSamtidigUttak={samtidigUttak}
         erTilknyttetStortinget={erTilknyttetStortinget}
       />
-      <UttakAktiviteterTabell
-        isReadOnly={isReadOnly}
-        periodeTyper={alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE]}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        aktiviteter={valgtPeriode.aktiviteter}
-        erOppfylt={erOppfylt}
-        utsettelseType={valgtPeriode.utsettelseType}
-      />
+      {valgtPeriode.oppholdÅrsak === oppholdArsakType.UDEFINERT && (
+        <UttakAktiviteterTabell
+          isReadOnly={isReadOnly}
+          periodeTyper={alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE]}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          aktiviteter={valgtPeriode.aktiviteter}
+          erOppfylt={erOppfylt}
+          utsettelseType={valgtPeriode.utsettelseType}
+        />
+      )}
       <TextAreaField
         name="begrunnelse"
         label={intl.formatMessage({ id: 'UttakActivity.Vurdering' })}

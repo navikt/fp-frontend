@@ -1,4 +1,6 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, {
+  FunctionComponent, ReactElement, useMemo,
+} from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 import { formHooks, SelectField, NumberField } from '@navikt/ft-form-hooks';
@@ -22,7 +24,7 @@ const maxLength3 = maxLength(3);
 const minValue0 = minValue(0);
 const maxProsentValue100 = maxValue(100);
 
-const headerTextCodes = [
+const HEADER_TEXT_CODES = [
   'RenderUttakTable.PeriodeData.Aktivitet',
   'RenderUttakTable.PeriodeData.Stonadskonto',
   'RenderUttakTable.PeriodeData.Trekk',
@@ -30,7 +32,7 @@ const headerTextCodes = [
   'RenderUttakTable.PeriodeData.Utbetalingsgrad',
 ];
 
-const createTextStrings = (
+const finnArbeidsforholdNavnOgProsentArbeid = (
   aktivitet: PeriodeSokerAktivitet,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ) => {
@@ -75,7 +77,7 @@ const GYLDIGE_UTTAK_PERIODER = [
   uttakPeriodeType.MODREKVOTE,
   uttakPeriodeType.UDEFINERT];
 
-const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] => typer
+const lagPeriodeTypeOptions = (typer: KodeverkMedNavn[]): ReactElement[] => typer
   .filter(({
     kode,
   }) => GYLDIGE_UTTAK_PERIODER.includes(kode))
@@ -116,20 +118,23 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
     name: 'aktiviteter',
   });
 
+  const periodeTypeOptions = useMemo(() => lagPeriodeTypeOptions(periodeTyper), [periodeTyper]);
+
   return (
     <div className={styles.tableOverflow}>
       {fields.length > 0 && (
-        <Table headerTextCodes={headerTextCodes} noHover>
+        <Table headerTextCodes={HEADER_TEXT_CODES} noHover>
           {fields.map((field, index: number) => {
-            const textStrings = createTextStrings(aktiviteter[index], arbeidsgiverOpplysningerPerId);
+            const arbeidsforholdData = finnArbeidsforholdNavnOgProsentArbeid(aktiviteter[index], arbeidsgiverOpplysningerPerId);
             return (
               <TableRow key={field.id}>
-                <TableColumn><BodyShort size="small" className={styles.forsteKolWidth}>{textStrings.arbeidsforhold}</BodyShort></TableColumn>
+                <TableColumn><BodyShort size="small" className={styles.forsteKolWidth}>{arbeidsforholdData.arbeidsforhold}</BodyShort></TableColumn>
                 <TableColumn>
                   <div className={styles.selectStonad}>
                     <SelectField
                       name={`aktiviteter.${index}.stønadskontoType`}
-                      selectValues={mapPeriodeTyper(periodeTyper)}
+                      selectValues={periodeTypeOptions}
+                      hideLabel
                       label=""
                       readOnly={isReadOnly}
                       validate={[(value: string) => {
@@ -178,7 +183,7 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                 </TableColumn>
                 <TableColumn>
                   <BodyShort size="small">
-                    {textStrings.prosentArbeidText}
+                    {arbeidsforholdData.prosentArbeidText}
                   </BodyShort>
                 </TableColumn>
                 <TableColumn>

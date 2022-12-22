@@ -1,4 +1,6 @@
-import React, { Component, MouseEvent, KeyboardEvent } from 'react';
+import React, {
+  useRef, MouseEvent, KeyboardEvent, FunctionComponent, useMemo, useCallback,
+} from 'react';
 import moment from 'moment';
 import dayjs from 'dayjs';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -36,7 +38,10 @@ export type TidslinjeTimes = {
   dodSoker: string;
 };
 
-const getOptions = (customTimes: TidslinjeTimes, sortedUttakPeriods: PeriodeSøkerMedTidslinjedata[]) => ({
+const getOptions = (
+  customTimes: TidslinjeTimes,
+  sortedUttakPeriods: PeriodeSøkerMedTidslinjedata[],
+) => ({
   end: moment(sortedUttakPeriods[sortedUttakPeriods.length - 1].periode.tom)
     .add(2, 'days')
     .toDate(),
@@ -63,7 +68,10 @@ const getOptions = (customTimes: TidslinjeTimes, sortedUttakPeriods: PeriodeSøk
 
 const parseDateString = (dateString: string | dayjs.Dayjs): Date => dayjs(dateString, ISO_DATE_FORMAT).toDate();
 
-const sortByDate = (a: PeriodeSøkerMedTidslinjedata, b: PeriodeSøkerMedTidslinjedata): number => {
+const sortByDate = (
+  a: PeriodeSøkerMedTidslinjedata,
+  b: PeriodeSøkerMedTidslinjedata,
+): number => {
   if (a.periode.fom < b.periode.fom) {
     return -1;
   }
@@ -126,118 +134,113 @@ interface TidslinjeProps {
  *
  * Formaterer tidslinjen for uttak
  */
-class UttakTidslinje extends Component<TidslinjeProps> {
-  timelineRef: React.RefObject<any>;
+const UttakTidslinje: FunctionComponent<TidslinjeProps> = ({
+  children,
+  tidslinjeTider,
+  hovedsokerKjonnKode,
+  medsokerKjonnKode,
+  openPeriodInfo,
+  selectedPeriod,
+  selectPeriodCallback,
+  uttakPerioder,
+}) => {
+  const timelineRef = useRef<any>();
 
-  constructor(props: TidslinjeProps) {
-    super(props);
+  const zoomIn = useCallback(() => {
+    if (timelineRef.current) {
+      timelineRef.current.zoomIn(0.5);
+    }
+  }, [timelineRef]);
 
-    this.goForward = this.goForward.bind(this);
-    this.goBackward = this.goBackward.bind(this);
-    this.zoomIn = this.zoomIn.bind(this);
-    this.zoomOut = this.zoomOut.bind(this);
+  const zoomOut = useCallback(() => {
+    if (timelineRef.current) {
+      timelineRef.current.zoomOut(0.5);
+    }
+  }, [timelineRef]);
 
-    this.timelineRef = React.createRef();
-  }
+  const goForward = useCallback(() => {
+    const timeline = timelineRef.current;
+    if (timeline) {
+      const currentWindowTimes = timeline.getWindow();
+      const newWindowTimes = {
+        start: new Date(currentWindowTimes.start).setDate(currentWindowTimes.start.getDate() + 42),
+        end: new Date(currentWindowTimes.end).setDate(currentWindowTimes.end.getDate() + 42),
+      };
 
-  zoomIn(): void {
-    this.timelineRef.current.zoomIn(0.5);
-  }
+      timeline.setWindow(newWindowTimes.start, newWindowTimes.end);
+    }
+  }, [timelineRef]);
 
-  zoomOut(): void {
-    this.timelineRef.current.zoomOut(0.5);
-  }
+  const goBackward = useCallback(() => {
+    const timeline = timelineRef.current;
+    if (timeline) {
+      const currentWindowTimes = timeline.getWindow();
+      const newWindowTimes = {
+        start: new Date(currentWindowTimes.start).setDate(currentWindowTimes.start.getDate() - 42),
+        end: new Date(currentWindowTimes.end).setDate(currentWindowTimes.end.getDate() - 42),
+      };
+      timeline.setWindow(newWindowTimes.start, newWindowTimes.end);
+    }
+  }, [timelineRef]);
 
-  goForward(): void {
-    const timeline = this.timelineRef.current;
-    const currentWindowTimes = timeline.getWindow();
-    const newWindowTimes = {
-      start: new Date(currentWindowTimes.start).setDate(currentWindowTimes.start.getDate() + 42),
-      end: new Date(currentWindowTimes.end).setDate(currentWindowTimes.end.getDate() + 42),
-    };
+  const groups = useMemo(() => formatGroups(uttakPerioder), [uttakPerioder]);
+  const items = useMemo(() => formatItems(uttakPerioder), [uttakPerioder]);
+  const options = useMemo(() => getOptions(tidslinjeTider, [...uttakPerioder].sort(sortByDate)), [tidslinjeTider, uttakPerioder]);
 
-    timeline.setWindow(newWindowTimes.start, newWindowTimes.end);
-  }
+  const valgtPeriode = useMemo(() => (selectedPeriod ? {
+    fom: selectedPeriod.periode.fom,
+    tom: selectedPeriod.periode.tom,
+    id: selectedPeriod.id,
+    className: selectedPeriod.className,
+    hoverText: selectedPeriod.title,
+  } : undefined), [selectedPeriod]);
 
-  goBackward(): void {
-    const timeline = this.timelineRef.current;
-    const currentWindowTimes = timeline.getWindow();
-    const newWindowTimes = {
-      start: new Date(currentWindowTimes.start).setDate(currentWindowTimes.start.getDate() - 42),
-      end: new Date(currentWindowTimes.end).setDate(currentWindowTimes.end.getDate() - 42),
-    };
-    timeline.setWindow(newWindowTimes.start, newWindowTimes.end);
-  }
-
-  render() {
-    const {
-      children,
-      tidslinjeTider,
-      hovedsokerKjonnKode,
-      medsokerKjonnKode,
-      openPeriodInfo,
-      selectedPeriod,
-      selectPeriodCallback,
-      uttakPerioder,
-    } = this.props;
-    const groups = formatGroups(uttakPerioder);
-    const items = formatItems(uttakPerioder);
-
-    const valgtPeriode = selectedPeriod ? {
-      fom: selectedPeriod.periode.fom,
-      tom: selectedPeriod.periode.tom,
-      id: selectedPeriod.id,
-      className: selectedPeriod.className,
-      hoverText: selectedPeriod.title,
-    } : undefined;
-
-    return (
-      <FlexContainer>
-        <VerticalSpacer sixteenPx />
-        <FlexRow className={styles.timelineContainer}>
-          <FlexColumn className={styles.sokerContainer}>
-            {medsokerKjonnKode && (
-              <TimeLineSoker soker1KjonnKode={medsokerKjonnKode} soker2KjonnKode={hovedsokerKjonnKode} />
-            )}
-            {!medsokerKjonnKode && (
-              <TimeLineSokerEnsamSoker hovedsokerKjonnKode={hovedsokerKjonnKode} />
-            )}
-          </FlexColumn>
-          <FlexColumn className={styles.timelineWidth}>
-            <div className={medsokerKjonnKode ? styles.timeLineWrapperTwo : styles.timeLineWrapper}>
-              <div className="uttakTimeline">
-                <Timeline
-                  ref={this.timelineRef}
-                  options={getOptions(tidslinjeTider, [...uttakPerioder].sort(sortByDate))}
-                  // @ts-ignore
-                  initialItems={items}
-                  initialGroups={groups}
-                  customTimes={tidslinjeTider}
-                  selectHandler={selectPeriodCallback}
-                  selection={valgtPeriode ? [valgtPeriode.id] : undefined}
-                />
-              </div>
+  return (
+    <FlexContainer>
+      <VerticalSpacer sixteenPx />
+      <FlexRow className={styles.timelineContainer}>
+        <FlexColumn className={styles.sokerContainer}>
+          {medsokerKjonnKode && (
+            <TimeLineSoker soker1KjonnKode={medsokerKjonnKode} soker2KjonnKode={hovedsokerKjonnKode} />
+          )}
+          {!medsokerKjonnKode && (
+            <TimeLineSokerEnsamSoker hovedsokerKjonnKode={hovedsokerKjonnKode} />
+          )}
+        </FlexColumn>
+        <FlexColumn className={styles.timelineWidth}>
+          <div className={medsokerKjonnKode ? styles.timeLineWrapperTwo : styles.timeLineWrapper}>
+            <div className="uttakTimeline">
+              <Timeline
+                ref={timelineRef}
+                options={options}
+                // @ts-ignore
+                initialItems={items}
+                initialGroups={groups}
+                customTimes={tidslinjeTider}
+                selectHandler={selectPeriodCallback}
+                selection={valgtPeriode ? [valgtPeriode.id] : undefined}
+              />
             </div>
-          </FlexColumn>
-        </FlexRow>
-        <VerticalSpacer eightPx />
-        <FlexRow>
-          <FlexColumn className={styles.ctrlCol}>
-            <TimeLineControl
-              goBackwardCallback={this.goBackward}
-              goForwardCallback={this.goForward}
-              zoomInCallback={this.zoomIn}
-              zoomOutCallback={this.zoomOut}
-              openPeriodInfo={openPeriodInfo}
-              selectedPeriod={valgtPeriode}
-            >
-              {children}
-            </TimeLineControl>
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
-    );
-  }
-}
+          </div>
+        </FlexColumn>
+      </FlexRow>
+      <VerticalSpacer eightPx />
+      <FlexRow>
+        <FlexColumn className={styles.ctrlCol}>
+          <TimeLineControl
+            goBackwardCallback={goBackward}
+            goForwardCallback={goForward}
+            zoomInCallback={zoomIn}
+            zoomOutCallback={zoomOut}
+            openPeriodInfo={openPeriodInfo}
+            selectedPeriod={valgtPeriode}
+          >
+            {children}
+          </TimeLineControl>
+        </FlexColumn>
+      </FlexRow>
+    </FlexContainer>
+  );
+};
 
 export default UttakTidslinje;

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import {
-  FieldArray, formValueSelector, InjectedFormProps, reduxForm,
+  formValueSelector, InjectedFormProps, reduxForm,
 } from 'redux-form';
 import { Detail, Alert, Button } from '@navikt/ds-react';
 
@@ -32,7 +32,6 @@ import {
   ArbeidsgiverOpplysningerPerId, AlleKodeverk, Behandling, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import { AarsakFilter } from '@fpsak-frontend/types/src/uttaksresultatPeriodeTsType';
-import RenderUttakTable, { AktivitetFieldArray } from './RenderUttakTable';
 import UttakInfo from './UttakInfo';
 
 import styles from './uttakActivity.less';
@@ -173,7 +172,7 @@ const mapGraderingAarsak = (
 };
 
 export type FormValues = {
-  UttakFieldArray?: AktivitetFieldArray[];
+  UttakFieldArray?: any;
   begrunnelse?: string;
   flerbarnsdager?: boolean;
   samtidigUttak?: boolean;
@@ -221,7 +220,6 @@ interface MappedOwnProps {
 }
 
 export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
-  periodeTyper,
   oppholdArsakTyper,
   readOnly,
   cancelSelectedActivity,
@@ -238,7 +236,6 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
   currentlySelectedStønadskonto,
   arbeidsgiverOpplysningerPerId,
   aarsakFilter,
-  reduxFormChange,
   ...formProps
 }) => (
   <div>
@@ -255,19 +252,6 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
     </div>
-    {selectedItemData.oppholdÅrsak === oppholdArsakType.UDEFINERT
-        && (
-          <div className={readOnly ? null : styles.marginTop}>
-            <FieldArray
-              name="UttakFieldArray"
-              component={RenderUttakTable}
-              periodeTyper={periodeTyper}
-              readOnly={readOnly}
-              arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-              reduxFormChange={reduxFormChange}
-            />
-          </div>
-        )}
     <div className={styles.marginBottom20}>
       <TextAreaField
         name="begrunnelse"
@@ -438,7 +422,7 @@ const lagFeilmeldinger = (values: FormValues, rowArray: number[], invalidArbeids
 
 const isArbeidsProsentVidUtsettelse100 = (
   values: FormValues,
-  aktivitetArray: AktivitetFieldArray[],
+  aktivitetArray: any[],
 ): string => {
   const andelIArbeid = [0];
   if (values.utsettelseType && values.erOppfylt && aktivitetArray) {
@@ -562,7 +546,7 @@ const transformValues = (
 };
 
 // https://jira.adeo.no/browse/PFP-7937
-const calculateCorrectWeeks = (aktivitet: AktivitetFieldArray, item: PeriodeMedClassName): number => {
+const calculateCorrectWeeks = (aktivitet: any, item: PeriodeMedClassName): number => {
   if (item.periodeResultatType && !aktivitet.trekkdagerDesimaler && (item.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING)) {
     return 0;
   }
@@ -572,7 +556,7 @@ const calculateCorrectWeeks = (aktivitet: AktivitetFieldArray, item: PeriodeMedC
   return Math.floor(aktivitet.trekkdagerDesimaler / 5);
 };
 
-const calculateCorrectDays = (aktivitet: AktivitetFieldArray, item: PeriodeMedClassName): number => {
+const calculateCorrectDays = (aktivitet: any, item: PeriodeMedClassName): number => {
   if (item.periodeResultatType && !aktivitet.trekkdagerDesimaler && (item.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING)) {
     return 0;
   }
@@ -582,7 +566,7 @@ const calculateCorrectDays = (aktivitet: AktivitetFieldArray, item: PeriodeMedCl
   return parseFloat(((aktivitet.trekkdagerDesimaler % 5).toFixed(1)));
 };
 
-const finnUker = (aktivitet: AktivitetFieldArray, selectedItem: PeriodeMedClassName): number => {
+const finnUker = (aktivitet: any, selectedItem: PeriodeMedClassName): number => {
   let weeks = typeof aktivitet.weeks !== 'undefined' ? aktivitet.weeks : calculateCorrectWeeks(aktivitet, selectedItem);
   if (aktivitet.weeks === 0 && aktivitet.days === 0 && selectedItem.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING) {
     weeks = undefined;
@@ -593,7 +577,7 @@ const finnUker = (aktivitet: AktivitetFieldArray, selectedItem: PeriodeMedClassN
   return weeks;
 };
 
-const finnDager = (aktivitet: AktivitetFieldArray, selectedItem: PeriodeMedClassName): number => {
+const finnDager = (aktivitet: any, selectedItem: PeriodeMedClassName): number => {
   let dager = typeof aktivitet.weeks !== 'undefined' ? aktivitet.days : calculateCorrectDays(aktivitet, selectedItem);
   if (aktivitet.weeks === 0 && aktivitet.days === 0 && selectedItem.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING) {
     dager = undefined;
@@ -604,8 +588,8 @@ const finnDager = (aktivitet: AktivitetFieldArray, selectedItem: PeriodeMedClass
   return dager;
 };
 
-export const lagAktiviteter = (selectedItem: PeriodeMedClassName, kontoIkkeSatt: boolean): AktivitetFieldArray[] => selectedItem.aktiviteter
-  .map((aktivitet): AktivitetFieldArray => ({
+export const lagAktiviteter = (selectedItem: PeriodeMedClassName, kontoIkkeSatt: boolean): any[] => selectedItem.aktiviteter
+  .map((aktivitet): any => ({
     ...aktivitet,
     utbetalingsgrad: !kontoIkkeSatt ? aktivitet.utbetalingsgrad : '0',
     fom: selectedItem.fom,
