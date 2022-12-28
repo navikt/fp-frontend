@@ -25,7 +25,7 @@
     "nav-frontend-popover": "2.0.4",
     "nav-frontend-popover-style": "2.0.2",
     "react": "18.2.0",
-    "react-hook-form": "7.40.0",
+    "react-hook-form": "7.41.2",
     "react-intl": "6.2.5"
   },
   "devDependencies": {
