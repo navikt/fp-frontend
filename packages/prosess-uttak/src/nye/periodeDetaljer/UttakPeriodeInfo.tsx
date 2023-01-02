@@ -286,7 +286,7 @@ const UttakPeriodeInfo: FunctionComponent<OwnProps> = ({
       {valgtPeriode.oppholdÅrsak !== '-' && (
         <div className={styles.select}>
           <VerticalSpacer sixteenPx />
-          <Detail size="small">
+          <Detail>
             <FormattedMessage id="UttakInfo.Opphold.AnnenForelder" />
           </Detail>
           <SelectField

@@ -6,8 +6,10 @@ import { createSelector } from 'reselect';
 import { Alert, Heading } from '@navikt/ds-react';
 
 import { omitOne } from '@navikt/ft-utils';
+import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
+import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, FamilieHendelseSamling, AlleKodeverk,
   Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling, Stonadskonto, Personoversikt,
@@ -22,12 +24,18 @@ import styles from './uttakPanel.less';
 const formName = 'UttakForm';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> aaf75f737 (div)
 const hentApTekst = (uttaksresultat: UttaksresultatPeriode, isApOpen: boolean, aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   const helptTextAksjonspunkter = aksjonspunkter.filter((ap) => ap.definisjon !== AksjonspunktCode.FASTSETT_UTTAKPERIODER
     && ap.definisjon !== AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER);
 
   const uttakPanelAksjonsPunktKoder = {
+<<<<<<< HEAD
     5067: 'UttakPanel.Aksjonspunkt.5067',
+=======
+>>>>>>> aaf75f737 (div)
     5069: 'UttakPanel.Aksjonspunkt.5069',
     5072: 'UttakPanel.Aksjonspunkt.5072',
     5073: 'UttakPanel.Aksjonspunkt.5073',
@@ -75,8 +83,11 @@ const hentApTekst = (uttaksresultat: UttaksresultatPeriode, isApOpen: boolean, a
   return texts;
 };
 
+<<<<<<< HEAD
 =======
 >>>>>>> 12d053065 (div)
+=======
+>>>>>>> aaf75f737 (div)
 interface FormValues {
   uttaksresultatActivity?: UttaksresultatActivity[];
   stonadskonto?: UttakStonadskontoer;
@@ -142,6 +153,15 @@ export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & W
     <Heading size="small">
       <FormattedMessage id="UttakPanel.Title" />
     </Heading>
+    <VerticalSpacer twentyPx />
+    {aksjonspunkter.length > 0 && (
+      <>
+        <AksjonspunktHelpTextTemp isAksjonspunktOpen={isApOpen}>
+          {hentApTekst(uttaksresultat, isApOpen, aksjonspunkter)}
+        </AksjonspunktHelpTextTemp>
+        <VerticalSpacer twentyPx />
+      </>
+    )}
     {uttaksresultat && (
       <form onSubmit={formProps.handleSubmit}>
         { /* @ts-ignore Fiks cannot be used as a JSX component */ }

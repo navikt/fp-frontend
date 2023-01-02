@@ -15,6 +15,7 @@ import UttakArbeidType from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
 import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, PeriodeSokerAktivitet } from '@fpsak-frontend/types';
 import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 
+import { UseFormGetValues } from 'react-hook-form';
 import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';
 import lagVisningsNavn from '../../utils/lagVisningsNavn';
 
@@ -55,16 +56,47 @@ const finnArbeidsforholdNavnOgProsentArbeid = (
   };
 };
 
-const getNoMoreThanZeroIfRejectedAndNotUtsettelse = (
+const sjekkOmUtbetalingsgradEr0OmAvslått = (
   intl: IntlShape,
   erOppfylt: boolean,
   utsettelseType?: string,
 ) => (
-  value: any,
+  utbetalingsgrad: number,
 ): string | null => {
   const harUtsettelse = !erOppfylt && (!utsettelseType || utsettelseType === '-');
-  if (harUtsettelse && parseFloat(value) > 0) {
+  if (harUtsettelse && utbetalingsgrad > 0) {
     return intl.formatMessage({ id: 'RenderUttakTable.MerEnNullUtaksprosent' });
+  }
+  return null;
+};
+
+const sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent = (
+  intl: IntlShape,
+  getValues: UseFormGetValues<{ aktiviteter: FormValues[] }>,
+) => (utbetalingsgrad: number): string | null => {
+  const samtidigUttak = getValues('samtidigUttak');
+  const samtidigUttaksProsent = getValues('samtidigUttaksProsent');
+  if (samtidigUttak && samtidigUttaksProsent < utbetalingsgrad) {
+    return intl.formatMessage({
+      id: 'ValidationMessage.utbetalingsgradErMerSamtidigUttaksprosent',
+    });
+  }
+  return null;
+};
+
+const sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0 = (
+  intl: IntlShape,
+  getValues: UseFormGetValues<{ aktiviteter: FormValues[] }>,
+  index: number,
+) => (utbetalingsgrad: number): string | null => {
+  const aktiviteter = getValues('aktiviteter');
+  const aktivitet = aktiviteter[index];
+  if (aktivitet.weeks === 0
+    && aktivitet.days === 0
+    && utbetalingsgrad > 0) {
+    return intl.formatMessage({
+      id: 'ValidationMessage.ukerOgDagerVidNullUtbetalningsgradMessage',
+    });
   }
   return null;
 };
@@ -164,7 +196,16 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                           <NumberField
                             name={`aktiviteter.${index}.weeks`}
                             readOnly={isReadOnly}
-                            validate={[required, hasValidInteger, maxLength3]}
+                            validate={[
+                              required,
+                              hasValidInteger,
+                              maxLength3,
+                              (uker: number) => {
+                                const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
+                                return harUtsettelsestype && getValues('erOppfylt') && uker > 0
+                                  ? intl.formatMessage({ id: 'ValidationMessage.trekkdagerErMerEnnNullUtsettelse' }) : null;
+                              },
+                            ]}
                           />
                         </span>
                       </FlexColumn>
@@ -175,7 +216,16 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                         <NumberField
                           name={`aktiviteter.${index}.days`}
                           readOnly={isReadOnly}
-                          validate={[required, hasValidDecimal, maxLength3]}
+                          validate={[
+                            required,
+                            hasValidDecimal,
+                            maxLength3,
+                            (dager: number) => {
+                              const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
+                              return harUtsettelsestype && getValues('erOppfylt') && dager > 0
+                                ? intl.formatMessage({ id: 'ValidationMessage.trekkdagerErMerEnnNullUtsettelse' }) : null;
+                            },
+                          ]}
                         />
                       </FlexColumn>
                     </FlexRow>
@@ -197,7 +247,14 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                             minValue0,
                             maxProsentValue100,
                             hasValidDecimal,
-                            getNoMoreThanZeroIfRejectedAndNotUtsettelse(intl, erOppfylt, utsettelseType),
+                            sjekkOmUtbetalingsgradEr0OmAvslått(intl, erOppfylt, utsettelseType),
+                            sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0(intl, getValues, index),
+                            sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent(intl, getValues),
+                            (utbetalingsgrad: number) => {
+                              const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
+                              return harUtsettelsestype && getValues('erOppfylt') && utbetalingsgrad > 0
+                                ? intl.formatMessage({ id: 'ValidationMessage.utbetalingMerEnnNullUtsettelse' }) : null;
+                            },
                           ]}
                           readOnly={isReadOnly}
                           forceTwoDecimalDigits

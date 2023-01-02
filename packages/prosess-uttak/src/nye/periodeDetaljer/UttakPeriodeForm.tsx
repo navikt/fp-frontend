@@ -363,7 +363,11 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
           <FlexContainer>
             <FlexRow>
               <FlexColumn>
-                <Button size="small" variant="primary">
+                <Button
+                  size="small"
+                  variant="primary"
+                  disabled={!formMethods.formState.isDirty}
+                >
                   <FormattedMessage id="UttakActivity.Oppdater" />
                 </Button>
               </FlexColumn>
