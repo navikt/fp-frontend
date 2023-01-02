@@ -1,9 +1,9 @@
 import React, {
   useCallback, ReactElement, FunctionComponent, useMemo,
 } from 'react';
-import { Button, Detail } from '@navikt/ds-react';
+import { Alert, Button, Detail } from '@navikt/ds-react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import {
   Form, TextAreaField, RadioGroupPanel, SelectField,
 } from '@navikt/ft-form-hooks';
@@ -188,6 +188,32 @@ const lagOptionsTilGraderingAvslagsårsakerSelect = (
   }) => <option value={kode} key={kode}>{navn}</option>);
 };
 
+const hentTekstForÅVurdereUtsettelseVedMindreEnn100ProsentStilling = (
+  utsettelseType: string,
+  erOppfylt: boolean,
+  aktiviteter: PeriodeSokerAktivitet[],
+  intl: IntlShape,
+): string => {
+  if (utsettelseType && utsettelseType === utsettelseArsakCodes.ARBEID && erOppfylt && aktiviteter) {
+    const prosentIArbeid = aktiviteter.reduce((total, aktivitet): number => total + aktivitet.prosentArbeid, 0);
+    if (prosentIArbeid < 100) {
+      return intl.formatMessage({ id: 'UttakActivity.MerEn100ProsentOgOgyldigUtsettlse' });
+    }
+  }
+  return null;
+};
+
+const hentTekstNårUtbetalingPlusArbeidsprosentMerEn100 = (
+  formAktiviteter: Aktivitet[],
+  aktiviteter: PeriodeSokerAktivitet[],
+  intl: IntlShape,
+): string => {
+  const harMerEnn100 = formAktiviteter.some((aktivitet, index) => aktivitet.utbetalingsgrad + aktiviteter[index].prosentArbeid > 100);
+  return harMerEnn100
+    ? intl.formatMessage({ id: 'UttakActivity.MerEn100Prosent' })
+    : null;
+};
+
 const byggDefaultValues = (
   valgtPeriode: PeriodeSoker,
   periodeResultatårsakKoder: ArsakKodeverk[],
@@ -257,7 +283,8 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
   const erOppfylt = formMethods.watch('erOppfylt');
   const graderingInnvilget = formMethods.watch('graderingInnvilget');
   const samtidigUttak = formMethods.watch('samtidigUttak');
-  const førsteValgteStønadskonto = formMethods.watch('aktiviteter')[0].stønadskontoType;
+  const aktiviteter = formMethods.watch('aktiviteter');
+  const førsteValgteStønadskonto = aktiviteter[0].stønadskontoType;
 
   const periodeÅrsakOptions = useMemo(() => lagOptionsTilPeriodeÅrsakSelect(
     periodeResultatårsakKoder,
@@ -271,6 +298,10 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
   const graderingAvslagsårsakOptions = useMemo(() => lagOptionsTilGraderingAvslagsårsakerSelect(alleKodeverk), []);
 
   const submit = useCallback((values: FormValues) => oppdaterPeriode([transformValues(values, valgtPeriode)]), [valgtPeriode]);
+
+  const warning1 = hentTekstForÅVurdereUtsettelseVedMindreEnn100ProsentStilling(valgtPeriode.utsettelseType, erOppfylt, valgtPeriode.aktiviteter, intl);
+  const warning2 = hentTekstNårUtbetalingPlusArbeidsprosentMerEn100(aktiviteter, valgtPeriode.aktiviteter, intl);
+  const warning = warning1 || warning2;
 
   return (
     <Form formMethods={formMethods} onSubmit={submit}>
@@ -360,6 +391,14 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
             </>
           )}
           <VerticalSpacer sixteenPx />
+          {warning && (
+            <>
+              <Alert size="small" variant="info" className={styles.alert}>
+                {warning}
+              </Alert>
+              <VerticalSpacer sixteenPx />
+            </>
+          )}
           <FlexContainer>
             <FlexRow>
               <FlexColumn>
