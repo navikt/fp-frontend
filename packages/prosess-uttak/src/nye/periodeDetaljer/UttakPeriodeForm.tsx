@@ -224,6 +224,7 @@ const transformValues = (
 interface OwnProps {
   valgtPeriode: PeriodeSoker;
   isReadOnly: boolean;
+  erHovedsøkersPeriode: boolean;
   oppdaterPeriode: (perioder: PeriodeSoker[]) => void;
   lukkPeriodeVisning: () => void;
   alleKodeverk: AlleKodeverk;
@@ -238,6 +239,7 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
   oppdaterPeriode,
   lukkPeriodeVisning,
   isReadOnly,
+  erHovedsøkersPeriode,
   alleKodeverk,
   årsakFilter,
   arbeidsgiverOpplysningerPerId,
@@ -292,84 +294,88 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
           utsettelseType={valgtPeriode.utsettelseType}
         />
       )}
-      <TextAreaField
-        name="begrunnelse"
-        label={intl.formatMessage({ id: 'UttakActivity.Vurdering' })}
-        validate={[required, minLength3, maxLength1500, hasValidText]}
-        maxLength={1500}
-        readOnly={isReadOnly}
-      />
-      <VerticalSpacer sixteenPx />
-      <RadioGroupPanel
-        name="erOppfylt"
-        hideLegend
-        validate={[required]}
-        isReadOnly={isReadOnly}
-        isHorizontal
-        isTrueOrFalseSelection
-        radios={[
-          { label: intl.formatMessage({ id: 'UttakActivity.Oppfylt' }), value: 'true' },
-          { label: intl.formatMessage({ id: 'UttakActivity.IkkeOppfylt' }), value: 'false' },
-        ]}
-      />
-      {erOppfylt !== undefined && (
+      {erHovedsøkersPeriode && (
         <>
-          <VerticalSpacer eightPx />
-          <ArrowBox alignOffset={erOppfylt ? 0 : 92}>
-            <SelectField
-              name="periodeAarsak"
-              selectValues={periodeÅrsakOptions}
-              validate={[required, notDash]}
-              label={intl.formatMessage({ id: erOppfylt ? 'UttakActivity.InnvilgelseAarsaker' : 'UttakActivity.AvslagAarsak' })}
-              readOnly={isReadOnly}
-            />
-            {(valgtPeriode.gradertAktivitet && erOppfylt) && (
-              <div className={styles.marginTop30}>
-                <Detail>
-                  <FormattedMessage id="UttakActivity.Gradering" />
-                </Detail>
-                <VerticalSpacer eightPx />
-                <RadioGroupPanel
-                  name="graderingInnvilget"
-                  hideLegend
-                  validate={[required]}
-                  isReadOnly={isReadOnly}
-                  isHorizontal
-                  isTrueOrFalseSelection
-                  radios={[
-                    { label: intl.formatMessage({ id: 'UttakActivity.Oppfylt' }), value: 'true' },
-                    { label: intl.formatMessage({ id: 'UttakActivity.IkkeOppfylt' }), value: 'false' },
-                  ]}
+          <TextAreaField
+            name="begrunnelse"
+            label={intl.formatMessage({ id: 'UttakActivity.Vurdering' })}
+            validate={[required, minLength3, maxLength1500, hasValidText]}
+            maxLength={1500}
+            readOnly={isReadOnly}
+          />
+          <VerticalSpacer sixteenPx />
+          <RadioGroupPanel
+            name="erOppfylt"
+            hideLegend
+            validate={[required]}
+            isReadOnly={isReadOnly}
+            isHorizontal
+            isTrueOrFalseSelection
+            radios={[
+              { label: intl.formatMessage({ id: 'UttakActivity.Oppfylt' }), value: 'true' },
+              { label: intl.formatMessage({ id: 'UttakActivity.IkkeOppfylt' }), value: 'false' },
+            ]}
+          />
+          {erOppfylt !== undefined && (
+            <>
+              <VerticalSpacer eightPx />
+              <ArrowBox alignOffset={erOppfylt ? 0 : 92}>
+                <SelectField
+                  name="periodeAarsak"
+                  selectValues={periodeÅrsakOptions}
+                  validate={[required, notDash]}
+                  label={intl.formatMessage({ id: erOppfylt ? 'UttakActivity.InnvilgelseAarsaker' : 'UttakActivity.AvslagAarsak' })}
+                  readOnly={isReadOnly}
                 />
-                {graderingInnvilget === false && (
-                  <SelectField
-                    name="graderingAvslagAarsak"
-                    selectValues={graderingAvslagsårsakOptions}
-                    validate={[required, notDash]}
-                    label={intl.formatMessage({ id: 'UttakActivity.GraderingAvslagAarsaker' })}
-                    readOnly={isReadOnly}
-                  />
+                {(valgtPeriode.gradertAktivitet && erOppfylt) && (
+                  <div className={styles.marginTop30}>
+                    <Detail>
+                      <FormattedMessage id="UttakActivity.Gradering" />
+                    </Detail>
+                    <VerticalSpacer eightPx />
+                    <RadioGroupPanel
+                      name="graderingInnvilget"
+                      hideLegend
+                      validate={[required]}
+                      isReadOnly={isReadOnly}
+                      isHorizontal
+                      isTrueOrFalseSelection
+                      radios={[
+                        { label: intl.formatMessage({ id: 'UttakActivity.Oppfylt' }), value: 'true' },
+                        { label: intl.formatMessage({ id: 'UttakActivity.IkkeOppfylt' }), value: 'false' },
+                      ]}
+                    />
+                    {graderingInnvilget === false && (
+                      <SelectField
+                        name="graderingAvslagAarsak"
+                        selectValues={graderingAvslagsårsakOptions}
+                        validate={[required, notDash]}
+                        label={intl.formatMessage({ id: 'UttakActivity.GraderingAvslagAarsaker' })}
+                        readOnly={isReadOnly}
+                      />
+                    )}
+                  </div>
                 )}
-              </div>
-            )}
-          </ArrowBox>
+              </ArrowBox>
+            </>
+          )}
+          <VerticalSpacer sixteenPx />
+          <FlexContainer>
+            <FlexRow>
+              <FlexColumn>
+                <Button size="small" variant="primary">
+                  <FormattedMessage id="UttakActivity.Oppdater" />
+                </Button>
+              </FlexColumn>
+              <FlexColumn>
+                <Button size="small" variant="secondary" onClick={lukkPeriodeVisning} type="button">
+                  <FormattedMessage id="UttakActivity.Avbryt" />
+                </Button>
+              </FlexColumn>
+            </FlexRow>
+          </FlexContainer>
         </>
       )}
-      <VerticalSpacer sixteenPx />
-      <FlexContainer>
-        <FlexRow>
-          <FlexColumn>
-            <Button size="small" variant="primary">
-              <FormattedMessage id="UttakActivity.Oppdater" />
-            </Button>
-          </FlexColumn>
-          <FlexColumn>
-            <Button size="small" variant="secondary" onClick={lukkPeriodeVisning} type="button">
-              <FormattedMessage id="UttakActivity.Avbryt" />
-            </Button>
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
     </Form>
   );
 };

@@ -1,5 +1,5 @@
 import React, {
-  useCallback, useState, FunctionComponent, ReactElement, useEffect,
+  useCallback, useState, FunctionComponent, ReactElement, useEffect, useMemo,
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
@@ -107,9 +107,11 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   setFormData,
 }) => {
   const [erOverstyrt, setErOverstyrt] = useState(false);
+  const [isDirty, setDirty] = useState(false);
+  const [isSubmitting, setSubmitting] = useState(false);
   const toggleOverstyring = useCallback(() => {
-    setErOverstyrt(!erOverstyrt);
-  }, [erOverstyrt]);
+    setErOverstyrt((forrigeVerdi) => !forrigeVerdi);
+  }, []);
 
   const [perioder, setPerioder] = useState<PeriodeSoker[]>(formData || uttaksresultatPeriode.perioderSøker);
   const [valgtPeriodeIndex, setValgtPeriodeIndex] = useState<number>();
@@ -128,6 +130,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
 
   const bekreftAksjonspunkter = () => {
     // TODO
+    setSubmitting(true);
     submitCallback(perioder);
   };
 
@@ -137,10 +140,12 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   const visNestePeriode = useCallback(() => {
     setValgtPeriodeIndex((index) => index + 1);
   }, []);
+
   const oppdaterPeriode = useCallback((oppdatertePerioder: PeriodeSoker[]) => {
     const andrePerioder = perioder.filter((p) => p.fom !== oppdatertePerioder[0].fom);
     const nyePerioder = andrePerioder.concat(oppdatertePerioder);
     setPerioder(nyePerioder);
+    setDirty(true);
 
     oppdaterStønadskontoer({ behandlingUuid: behandling.uuid, perioder: nyePerioder })
       .then((oppdatertStønadskonto: UttakStonadskontoer) => setStønadskonto(oppdatertStønadskonto));
@@ -148,6 +153,17 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
 
   const erAksjonspunktÅpent = aksjonspunkter.some((ap) => ap.status === AksjonspunktStatus.OPPRETTET);
   const erTilknyttetStortinget = aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.TILKNYTTET_STORTINGET && erAksjonspunktÅpent);
+
+  const erBekreftKnappDisablet = useMemo(() => {
+    if (perioder.some((p) => p.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING)) {
+      return true;
+    }
+    const harIkkeGyldigForbruk = Object.values(stønadskonto.stonadskontoer).some((s) => !s.gyldigForbruk);
+    if (harIkkeGyldigForbruk) {
+      return true;
+    }
+    return !isDirty;
+  }, [perioder, stønadskonto]);
 
   return (
     <>
@@ -158,7 +174,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
               <FormattedMessage id="UttakPanel.Title" />
             </Heading>
           </FlexColumn>
-          {kanOverstyre && erAksjonspunktÅpent && !isReadOnly && (
+          {kanOverstyre && !erAksjonspunktÅpent && !isReadOnly && (
             <FlexColumn>
               <OverstyringKnapp onClick={toggleOverstyring} />
             </FlexColumn>
@@ -197,11 +213,13 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
           <UttakPeriodePanel
             key={valgtPeriodeIndex}
             perioderSøker={perioder}
+            behandling={behandling}
+            ytelsefordeling={ytelsefordeling}
             uttaksresultatPeriode={uttaksresultatPeriode}
             valgtPeriodeIndex={valgtPeriodeIndex}
             oppdaterPeriode={oppdaterPeriode}
             isEdited={false}
-            isReadOnly={isReadOnly}
+            isReadOnly={isReadOnly && !erOverstyrt}
             visForrigePeriode={visForrigePeriode}
             visNestePeriode={visNestePeriode}
             alleKodeverk={alleKodeverk}
@@ -213,12 +231,12 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
         </>
       )}
       <VerticalSpacer sixteenPx />
-      {!isReadOnly && (
+      {(!isReadOnly || erOverstyrt) && (
         <Button
           size="small"
           variant="primary"
-          disabled={readOnlySubmitButton}
-          loading={false}
+          disabled={isSubmitting || readOnlySubmitButton || erBekreftKnappDisablet}
+          loading={isSubmitting}
           onClick={bekreftAksjonspunkter}
           role="button"
         >

@@ -8,13 +8,13 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { TimeLineButton } from '@navikt/ft-tidslinje';
 import { Label } from '@navikt/ds-react';
-import { KodeverkType } from '@navikt/ft-kodeverk';
+import { BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
 import { calcDays } from '@navikt/ft-utils';
 
 import splitPeriodImageHoverUrl from '@fpsak-frontend/assets/images/splitt_hover.svg';
 import splitPeriodImageUrl from '@fpsak-frontend/assets/images/splitt.svg';
 import {
-  AlleKodeverk, ArbeidsgiverOpplysningerPerId, PeriodeSoker, UttaksresultatPeriode, UttakStonadskontoer, PeriodeSokerAktivitet,
+  AlleKodeverk, ArbeidsgiverOpplysningerPerId, PeriodeSoker, UttaksresultatPeriode, UttakStonadskontoer, PeriodeSokerAktivitet, Behandling, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
 import SplittPeriodeModal from './splitt/SplittPeriodeModal';
@@ -102,31 +102,24 @@ const kalkulerTrekkdager = (
   virkedager: number,
   samtidigUttak?: boolean,
   samtidigUttaksprosent?: number,
-) => {
+): number => {
   let uttaksgrad = aktivitet.gradering ? (100 - aktivitet.prosentArbeid) / 100 : 1;
   uttaksgrad = samtidigUttak ? samtidigUttaksprosent / 100 : uttaksgrad;
-
-  const trekkdager = uttaksgrad * virkedager;
-
-  return {
-    weeks: Math.trunc(trekkdager / 5),
-    days: parseFloat((trekkdager % 5).toFixed(1)),
-    trekkdagerDesimaler: trekkdager,
-  };
+  return uttaksgrad * virkedager;
 };
 
 const lagPeriode = (
   valgtPeriode: PeriodeSoker,
   fom: string,
   tom: string,
-) => {
+): PeriodeSoker => {
   const { aktiviteter, samtidigUttak, samtidigUttaksprosent } = valgtPeriode;
 
   const virkedager = calcDays(fom, tom);
   const oppdaterteAktiviteter = aktiviteter
     .map((aktivitet) => (aktivitet.trekkdagerDesimaler > 0 ? {
       ...aktivitet,
-      ...kalkulerTrekkdager(aktivitet, virkedager, samtidigUttak, samtidigUttaksprosent),
+      trekkdagerDesimaler: kalkulerTrekkdager(aktivitet, virkedager, samtidigUttak, samtidigUttaksprosent),
     } : aktivitet));
 
   return {
@@ -139,6 +132,8 @@ const lagPeriode = (
 
 interface OwnProps {
   perioderSøker: PeriodeSoker[];
+  behandling: Behandling;
+  ytelsefordeling: Ytelsefordeling;
   uttaksresultatPeriode: UttaksresultatPeriode;
   valgtPeriodeIndex: number | undefined;
   oppdaterPeriode: (perioder: PeriodeSoker[]) => void;
@@ -155,6 +150,8 @@ interface OwnProps {
 
 const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
   perioderSøker,
+  behandling,
+  ytelsefordeling,
   uttaksresultatPeriode,
   valgtPeriodeIndex,
   oppdaterPeriode,
@@ -173,8 +170,12 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
   const [visModal, setVisModal] = useState(false);
   const toggleVisningAvModal = useCallback(() => setVisModal((verdi) => !verdi), []);
 
-  const allePerioder = uttaksresultatPeriode.perioderAnnenpart.concat(perioderSøker);
+  const { perioderAnnenpart } = uttaksresultatPeriode;
+
+  const allePerioder = perioderAnnenpart.concat(perioderSøker);
   const valgtPeriode = allePerioder[valgtPeriodeIndex];
+
+  const erHovedsøkersPeriode = valgtPeriodeIndex + 1 > perioderAnnenpart.length;
 
   const splittPeriode = useCallback((dato: string) => {
     const periode1 = lagPeriode(valgtPeriode, valgtPeriode.fom, dato);
@@ -185,7 +186,13 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
 
   const lukkPeriode = useCallback(() => setValgtPeriodeIndex(undefined), []);
 
-  const harSoktOmFlerbarnsdager = perioderSøker.some((p) => p.flerbarnsdager === true);
+  const harSoktOmFlerbarnsdager = erHovedsøkersPeriode
+    ? perioderSøker.some((p) => p.flerbarnsdager === true)
+    : perioderAnnenpart.some((p) => p.flerbarnsdager === true);
+
+  const erRevurderingFørEndringsdato = ytelsefordeling.endringsdato
+    && behandling.type === BehandlingType.REVURDERING
+    && valgtPeriode.tom < ytelsefordeling.endringsdato;
 
   return (
     <div className={styles.panel}>
@@ -197,8 +204,8 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
               {isEdited && <EditedIcon />}
             </Label>
           </FlexColumn>
-          <FlexColumn>
-            {!isReadOnly && (
+          {!isReadOnly && erHovedsøkersPeriode && !erRevurderingFørEndringsdato && (
+            <FlexColumn>
               <span className={styles.splitPeriodPosition}>
                 <Image
                   tabIndex={0}
@@ -211,16 +218,16 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
                 />
                 <FormattedMessage id="UttakTimeLineData.PeriodeData.DelOppPerioden" />
               </span>
-            )}
-            {visModal && (
-              <SplittPeriodeModal
-                cancel={toggleVisningAvModal}
-                fomDato={valgtPeriode.fom}
-                tomDato={valgtPeriode.tom}
-                submit={splittPeriode}
-              />
-            )}
-          </FlexColumn>
+              {visModal && (
+                <SplittPeriodeModal
+                  cancel={toggleVisningAvModal}
+                  fomDato={valgtPeriode.fom}
+                  tomDato={valgtPeriode.tom}
+                  submit={splittPeriode}
+                />
+              )}
+            </FlexColumn>
+          )}
           <FlexColumn>
             <TimeLineButton text={intl.formatMessage({ id: 'Timeline.prevPeriod' })} type="prev" callback={visForrigePeriode} />
             <TimeLineButton text={intl.formatMessage({ id: 'Timeline.nextPeriod' })} type="next" callback={visNestePeriode} />
@@ -244,7 +251,8 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
       <UttakPeriodeForm
         valgtPeriode={valgtPeriode}
         oppdaterPeriode={oppdaterPeriode}
-        isReadOnly={isReadOnly}
+        isReadOnly={isReadOnly || !erHovedsøkersPeriode || erRevurderingFørEndringsdato}
+        erHovedsøkersPeriode={erHovedsøkersPeriode}
         lukkPeriodeVisning={lukkPeriode}
         alleKodeverk={alleKodeverk}
         årsakFilter={uttaksresultatPeriode.årsakFilter}

@@ -6,10 +6,8 @@ import { createSelector } from 'reselect';
 import { Alert, Heading } from '@navikt/ds-react';
 
 import { omitOne } from '@navikt/ft-utils';
-import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
-import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, FamilieHendelseSamling, AlleKodeverk,
   Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling, Stonadskonto, Personoversikt,
@@ -23,6 +21,7 @@ import styles from './uttakPanel.less';
 
 const formName = 'UttakForm';
 
+<<<<<<< HEAD
 const hentApTekst = (uttaksresultat: UttaksresultatPeriode, isApOpen: boolean, aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   const helptTextAksjonspunkter = aksjonspunkter.filter((ap) => ap.definisjon !== AksjonspunktCode.FASTSETT_UTTAKPERIODER
     && ap.definisjon !== AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER);
@@ -76,6 +75,8 @@ const hentApTekst = (uttaksresultat: UttaksresultatPeriode, isApOpen: boolean, a
   return texts;
 };
 
+=======
+>>>>>>> 12d053065 (div)
 interface FormValues {
   uttaksresultatActivity?: UttaksresultatActivity[];
   stonadskonto?: UttakStonadskontoer;
@@ -141,15 +142,6 @@ export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & W
     <Heading size="small">
       <FormattedMessage id="UttakPanel.Title" />
     </Heading>
-    <VerticalSpacer twentyPx />
-    {aksjonspunkter.length > 0 && (
-      <>
-        <AksjonspunktHelpTextTemp isAksjonspunktOpen={isApOpen}>
-          {hentApTekst(uttaksresultat, isApOpen, aksjonspunkter)}
-        </AksjonspunktHelpTextTemp>
-        <VerticalSpacer twentyPx />
-      </>
-    )}
     {uttaksresultat && (
       <form onSubmit={formProps.handleSubmit}>
         { /* @ts-ignore Fiks cannot be used as a JSX component */ }
@@ -342,6 +334,7 @@ const validateUttakPanelForm = (values: FormValues) => {
   return null;
 };
 
+// **
 export const buildInitialValues = createSelector(
   [(props: PureOwnProps) => props.uttaksresultat, (props: PureOwnProps) => props.stonadskonto],
   (uttaksresultat, stonadskonto): FormValues => ({

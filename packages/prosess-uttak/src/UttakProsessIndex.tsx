@@ -6,10 +6,9 @@ import {
   Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling, PeriodeSoker,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@navikt/ft-utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 
-import UttakPanel from './components/UttakPanel';
 import UttakProsessPanel from './nye/UttakProsessPanel';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
@@ -44,7 +43,6 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
   isReadOnly,
   readOnlySubmitButton,
   oppdaterStønadskontoer,
-  isAksjonspunktOpen,
   arbeidsgiverOpplysningerPerId,
   formData,
   setFormData,
@@ -69,52 +67,6 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
       formData={formData}
       setFormData={setFormData}
     />
-    <ReduxWrapper formName="UttakProsessIndex" formData={formData} setFormData={setFormData}>
-      <UttakPanel
-        // @ts-ignore
-        behandlingUuid={behandling.uuid}
-        // @ts-ignore
-        behandlingType={behandling.type}
-        // @ts-ignore
-        behandlingsresultat={behandling.behandlingsresultat}
-        // @ts-ignore
-        behandlingStatus={behandling.status}
-        // @ts-ignore
-        sprakkode={behandling.sprakkode}
-        // @ts-ignore
-        uttaksresultat={uttaksresultatPerioder}
-        // @ts-ignore
-        stonadskonto={uttakStonadskontoer}
-        // @ts-ignore
-        aksjonspunkter={aksjonspunkter}
-        // @ts-ignore
-        employeeHasAccess={kanOverstyre}
-        // @ts-ignore
-        soknad={soknad}
-        // @ts-ignore
-        person={personoversikt}
-        // @ts-ignore
-        familiehendelse={familiehendelse}
-        // @ts-ignore
-        alleKodeverk={alleKodeverk}
-        // @ts-ignore
-        ytelsefordeling={ytelsefordeling}
-        // @ts-ignore
-        tempUpdateStonadskontoer={oppdaterStønadskontoer}
-        // @ts-ignore
-        submitCallback={submitCallback}
-        // @ts-ignore
-        readOnly={isReadOnly}
-        // @ts-ignore
-        readOnlySubmitButton={readOnlySubmitButton}
-        // @ts-ignore
-        apCodes={aksjonspunkter.map((a) => a.definisjon)}
-        // @ts-ignore
-        isApOpen={isAksjonspunktOpen}
-        // @ts-ignore
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      />
-    </ReduxWrapper>
   </RawIntlProvider>
 );
 
