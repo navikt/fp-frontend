@@ -79,7 +79,7 @@ const finnTidslinjeTider = (
   const fødselsdato = søknad.soknadType === soknadType.FODSEL ? (endredFodselsDato || familiehendelseDate) : søknad.omsorgsovertakelseDato;
   const isRevurdering = behandling.type === BehandlingType.REVURDERING;
 
-  const barnFraTps = familiehendelse.register ? familiehendelse.register.avklartBarn : [];
+  const barnFraTps = familiehendelse.register?.avklartBarn ? familiehendelse.register.avklartBarn : [];
   const dodeBarn = gjeldendeFamiliehendelse
     && !gjeldendeFamiliehendelse.brukAntallBarnFraTps
     && gjeldendeFamiliehendelse.avklartBarn
