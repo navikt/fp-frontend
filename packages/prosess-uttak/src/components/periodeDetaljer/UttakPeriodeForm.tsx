@@ -23,10 +23,11 @@ import {
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import oppholdArsakType from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
 
-import UttakAktiviteterTabell, { FormValues as Aktivitet } from './UttakAktiviteterTabell';
+import UttakAktiviteterTabell from './UttakAktiviteterTabell';
+import UttakPeriodeInfo from './UttakPeriodeInfo';
+import { UttakAktivitet, UttakAktivitetType } from './UttakAktivitetType';
 
 import styles from './uttakPeriodeForm.less';
-import UttakPeriodeInfo from './UttakPeriodeInfo';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -39,19 +40,6 @@ export type ArsakKodeverk = {
   gyldigForLovendringer: string[];
   synligForRolle?: string[];
 } & KodeverkMedNavn;
-
-type FormValues = {
-  begrunnelse: string;
-  erOppfylt: boolean;
-  periodeAarsak: string;
-  graderingInnvilget: boolean;
-  graderingAvslagAarsak: string;
-  samtidigUttaksprosent?: number;
-  flerbarnsdager: boolean;
-  samtidigUttak?: boolean;
-  oppholdArsak: string;
-  aktiviteter: Aktivitet[];
-};
 
 const erPeriodeOppfylt = (
   valgtPeriode: PeriodeSoker,
@@ -204,7 +192,7 @@ const hentTekstForÅVurdereUtsettelseVedMindreEnn100ProsentStilling = (
 };
 
 const hentTekstNårUtbetalingPlusArbeidsprosentMerEn100 = (
-  formAktiviteter: Aktivitet[],
+  formAktiviteter: UttakAktivitet[],
   aktiviteter: PeriodeSokerAktivitet[],
   intl: IntlShape,
 ): string => {
@@ -217,7 +205,7 @@ const hentTekstNårUtbetalingPlusArbeidsprosentMerEn100 = (
 const byggDefaultValues = (
   valgtPeriode: PeriodeSoker,
   periodeResultatårsakKoder: ArsakKodeverk[],
-): FormValues => {
+): UttakAktivitetType => {
   const kontoIkkeSatt = !valgtPeriode.periodeType
     && (valgtPeriode.aktiviteter[0].stønadskontoType === '-');
   return {
@@ -234,13 +222,13 @@ const byggDefaultValues = (
       stønadskontoType: a.stønadskontoType,
       weeks: finnUker(a, valgtPeriode),
       days: finnDager(a, valgtPeriode),
-      utbetalingsgrad: !kontoIkkeSatt ? a.utbetalingsgrad : '0',
+      utbetalingsgrad: !kontoIkkeSatt ? a.utbetalingsgrad : 0,
     })),
   };
 };
 
 const transformValues = (
-  values: FormValues,
+  values: UttakAktivitetType,
   valgtPeriode: PeriodeSoker,
 ): PeriodeSoker => ({
   ...valgtPeriode,
@@ -276,7 +264,7 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
 
   const periodeResultatårsakKoder = alleKodeverk[KodeverkType.PERIODE_RESULTAT_AARSAK] as ArsakKodeverk[];
 
-  const formMethods = useForm<FormValues>({
+  const formMethods = useForm<UttakAktivitetType>({
     defaultValues: useMemo(() => byggDefaultValues(valgtPeriode, periodeResultatårsakKoder), [valgtPeriode]),
   });
 
@@ -297,7 +285,7 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
 
   const graderingAvslagsårsakOptions = useMemo(() => lagOptionsTilGraderingAvslagsårsakerSelect(alleKodeverk), []);
 
-  const submit = useCallback((values: FormValues) => oppdaterPeriode([transformValues(values, valgtPeriode)]), [valgtPeriode]);
+  const submit = useCallback((values: UttakAktivitetType) => oppdaterPeriode([transformValues(values, valgtPeriode)]), [valgtPeriode]);
 
   const warning1 = hentTekstForÅVurdereUtsettelseVedMindreEnn100ProsentStilling(valgtPeriode.utsettelseType, erOppfylt, valgtPeriode.aktiviteter, intl);
   const warning2 = hentTekstNårUtbetalingPlusArbeidsprosentMerEn100(aktiviteter, valgtPeriode.aktiviteter, intl);

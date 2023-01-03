@@ -18,6 +18,7 @@ import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import { UseFormGetValues } from 'react-hook-form';
 import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';
 import lagVisningsNavn from '../../utils/lagVisningsNavn';
+import { UttakAktivitetType } from './UttakAktivitetType';
 
 import styles from './uttakAktiviteterTabell.less';
 
@@ -72,11 +73,11 @@ const sjekkOmUtbetalingsgradEr0OmAvslått = (
 
 const sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent = (
   intl: IntlShape,
-  getValues: UseFormGetValues<{ aktiviteter: FormValues[] }>,
+  getValues: UseFormGetValues<UttakAktivitetType>,
 ) => (utbetalingsgrad: number): string | null => {
   const samtidigUttak = getValues('samtidigUttak');
-  const samtidigUttaksProsent = getValues('samtidigUttaksProsent');
-  if (samtidigUttak && samtidigUttaksProsent < utbetalingsgrad) {
+  const samtidigUttaksprosent = getValues('samtidigUttaksprosent');
+  if (samtidigUttak && samtidigUttaksprosent < utbetalingsgrad) {
     return intl.formatMessage({
       id: 'ValidationMessage.utbetalingsgradErMerSamtidigUttaksprosent',
     });
@@ -86,7 +87,7 @@ const sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent = (
 
 const sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0 = (
   intl: IntlShape,
-  getValues: UseFormGetValues<{ aktiviteter: FormValues[] }>,
+  getValues: UseFormGetValues<UttakAktivitetType>,
   index: number,
 ) => (utbetalingsgrad: number): string | null => {
   const aktiviteter = getValues('aktiviteter');
@@ -118,13 +119,6 @@ const lagPeriodeTypeOptions = (typer: KodeverkMedNavn[]): ReactElement[] => type
     navn,
   }) => <option value={kode} key={kode}>{navn}</option>);
 
-export type FormValues = {
-  stønadskontoType: string;
-  weeks: string;
-  days: string;
-  utbetalingsgrad: number;
-}
-
 interface OwnProps {
   periodeTyper: KodeverkMedNavn[];
   isReadOnly: boolean;
@@ -144,7 +138,7 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const { control, getValues } = formHooks.useFormContext<{ aktiviteter: FormValues[] }>();
+  const { control, getValues } = formHooks.useFormContext<UttakAktivitetType>();
   const { fields } = formHooks.useFieldArray({
     control,
     name: 'aktiviteter',
@@ -172,7 +166,7 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                       validate={[(value: string) => {
                         const weeks = getValues(`aktiviteter.${index}.weeks`);
                         const days = getValues(`aktiviteter.${index}.days`);
-                        const skalSjekke = weeks !== '0' || (days !== '0' && days !== '0.0');
+                        const skalSjekke = weeks !== 0 || days !== 0;
                         if (skalSjekke) {
                           const requiredMessage = required(value);
                           if (requiredMessage) {
