@@ -7,7 +7,7 @@ import {
 } from '@fpsak-frontend/types';
 import { createIntl } from '@navikt/ft-utils';
 
-import UttakProsessPanel from './nye/UttakProsessPanel';
+import UttakProsessPanel from './components/UttakProsessPanel';
 
 import messages from '../i18n/nb_NO.json';
 

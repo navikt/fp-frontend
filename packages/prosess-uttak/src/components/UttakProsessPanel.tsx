@@ -17,6 +17,7 @@ import {
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
+import StonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
 
 import DisponibleStonadskontoerPanel from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';
 import UttakTidslinjeIndex from './tidslinje/UttakTidslinjeIndex';
@@ -209,8 +210,9 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
       }
     }
 
-    if (feil.length === 0 && stønadskonto.FLERBARNSDAGER && !stønadskonto.FLERBARNSDAGER.gyldigForbruk) {
-      feil.push(intl.formatMessage({ id: 'UttakPanel.InvalidTrekkDagerFlerbarnsdager' }, { maxDays: stønadskonto.FLERBARNSDAGER.maxDager }));
+    const konto = stønadskonto[StonadskontoType.FLERBARNSDAGER];
+    if (feil.length === 0 && konto && !konto.gyldigForbruk) {
+      feil.push(intl.formatMessage({ id: 'UttakPanel.InvalidTrekkDagerFlerbarnsdager' }, { maxDays: konto.maxDager }));
     }
 
     return feil;

@@ -6,7 +6,6 @@
   "private": true,
   "dependencies": {
     "@fpsak-frontend/assets": "1.0.0",
-    "@fpsak-frontend/form": "1.0.0",
     "@fpsak-frontend/kodeverk": "1.0.0",
     "@fpsak-frontend/prosess-felles": "1.0.0",
     "@fpsak-frontend/storybook-utils": "1.0.0",
@@ -25,16 +24,10 @@
     "moment": "2.29.4",
     "react": "18.2.0",
     "react-intl": "6.2.5",
-    "react-hook-form": "7.40.0",
-    "react-redux": "8.0.5",
-    "redux": "4.2.0",
-    "redux-form": "8.3.9",
-    "reselect": "4.1.7"
+    "react-hook-form": "7.40.0"
   },
   "devDependencies": {
     "@fpsak-frontend/utils-test": "1.0.0",
-    "@storybook/addon-actions": "6.5.15",
-    "enzyme": "3.11.0",
-    "sinon": "15.0.1"
+    "@storybook/addon-actions": "6.5.15"
   }
 }

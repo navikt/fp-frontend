@@ -1,3 +1,5 @@
+import StonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
+
 export type AktivitetIdentifikator = Readonly<{
   uttakArbeidType: string;
   arbeidsforholdId?: string;
@@ -21,20 +23,8 @@ export type Stonadskonto = Readonly<{
   };
 }>
 
-enum Test {
-  FELLESPERIODE = 'FELLESPERIODE',
-  MODREKVOTE = 'MØDREKVOTE',
-  FEDREKVOTE = 'FEDREKVOTE',
-  FORELDREPENGER = 'FORELDREPENGER',
-  UTEN_AKTIVITETSKRAV = 'UTEN_AKTIVITETSKRAV',
-  MINSTERETT = 'MINSTERETT',
-  FLERBARNSDAGER = 'FLERBARNSDAGER',
-  FORELDREPENGER_FOR_FODSEL = 'FORELDREPENGER_FØR_FØDSEL',
-  UDEFINERT = '-',
-}
-
 type UttakStonadskontoer = Readonly<{
-  stonadskontoer: Record<Test, Stonadskonto>;
+  stonadskontoer: Record<StonadskontoType, Stonadskonto>;
   tapteDagerFpff: number;
 }>
 
