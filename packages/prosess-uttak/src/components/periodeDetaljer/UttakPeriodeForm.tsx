@@ -232,7 +232,20 @@ const transformValues = (
   valgtPeriode: PeriodeSoker,
 ): PeriodeSoker => ({
   ...valgtPeriode,
-  ...values,
+  begrunnelse: values.begrunnelse,
+  graderingInnvilget: values.erOppfylt ? values.graderingInnvilget : false,
+  oppholdÅrsak: values.oppholdArsak,
+  periodeResultatType: values.erOppfylt || values.oppholdArsak !== oppholdArsakType.UDEFINERT
+    ? periodeResultatType.INNVILGET : periodeResultatType.AVSLATT,
+  graderingAvslagÅrsak: values.graderingAvslagAarsak,
+  periodeResultatÅrsak: values.periodeAarsak,
+  samtidigUttaksprosent: values.samtidigUttaksprosent,
+  samtidigUttak: values.samtidigUttak,
+  flerbarnsdager: values.flerbarnsdager,
+  aktiviteter: valgtPeriode.aktiviteter.map((a, index) => ({
+    ...a,
+    trekkdagerDesimaler: (values.aktiviteter[index].weeks * 5) + values.aktiviteter[index].days,
+  })),
 });
 
 interface OwnProps {
