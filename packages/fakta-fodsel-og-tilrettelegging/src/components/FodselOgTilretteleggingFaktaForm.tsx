@@ -72,7 +72,7 @@ const utledFormSectionName = (
   if (arbeidsforhold.arbeidsgiverReferanse) {
     const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse];
     if (arbeidsgiverOpplysninger) {
-      navn += arbeidsgiverOpplysninger.navn.replaceAll(/[-.,]/ig, '_');
+      navn += arbeidsgiverOpplysninger.navn.replaceAll(/[-.,']/ig, '_');
     }
     navn += arbeidsforhold.arbeidsgiverReferanse;
   } else {
