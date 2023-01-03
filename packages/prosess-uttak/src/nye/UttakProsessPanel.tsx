@@ -1,13 +1,14 @@
 import React, {
   useCallback, useState, FunctionComponent, ReactElement, useEffect, useMemo,
 } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
-import { Button, Heading } from '@navikt/ds-react';
+import { Alert, Button, Heading } from '@navikt/ds-react';
 import {
   AksjonspunktHelpTextHTML, FlexColumn, FlexContainer, FlexRow, OverstyringKnapp, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
+import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
 import { UttakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import {
   ArbeidsgiverOpplysningerPerId, FamilieHendelseSamling, Personoversikt,
@@ -15,6 +16,7 @@ import {
 } from '@fpsak-frontend/types';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
+import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 
 import DisponibleStonadskontoerPanel from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';
 import UttakTidslinjeIndex from './tidslinje/UttakTidslinjeIndex';
@@ -64,6 +66,29 @@ const hentApTekster = (
   return aksjonspunktTekster;
 };
 
+const transformValues = (
+  perioder: PeriodeSoker[],
+  aksjonspunkter: Aksjonspunkt[],
+): UttakAp[] => {
+  const apKoder = aksjonspunkter.length > 0
+    ? aksjonspunkter.map((ap) => ap.definisjon)
+    : [AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER];
+
+  return apKoder.map((ap) => ({
+    kode: validerApKodeOgHentApEnum(ap, AksjonspunktCode.FASTSETT_UTTAKPERIODER,
+      AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER,
+      AksjonspunktCode.TILKNYTTET_STORTINGET,
+      AksjonspunktCode.ANNENPART_EØS,
+      AksjonspunktCode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE,
+      AksjonspunktCode.KONTROLLER_OPPLYSNINGER_OM_FORDELING_AV_STØNADSPERIODEN,
+      AksjonspunktCode.KONTROLLER_OPPLYSNINGER_OM_DØD,
+      AksjonspunktCode.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST,
+      AksjonspunktCode.KONTROLLER_TILSTØTENDE_YTELSER_INNVILGET,
+      AksjonspunktCode.KONTROLLER_TILSTØTENDE_YTELSER_OPPHØRT),
+    perioder,
+  }));
+};
+
 interface OwnProps {
   behandling: Behandling;
   uttaksresultatPeriode: UttaksresultatPeriode;
@@ -106,6 +131,8 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   formData,
   setFormData,
 }) => {
+  const intl = useIntl();
+
   const [erOverstyrt, setErOverstyrt] = useState(false);
   const [isDirty, setDirty] = useState(false);
   const [isSubmitting, setSubmitting] = useState(false);
@@ -128,11 +155,10 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
     }
   }, []);
 
-  const bekreftAksjonspunkter = () => {
-    // TODO
+  const bekreftAksjonspunkter = useCallback(() => {
     setSubmitting(true);
-    submitCallback(perioder);
-  };
+    submitCallback(transformValues(perioder, aksjonspunkter));
+  }, [perioder, aksjonspunkter]);
 
   const visForrigePeriode = useCallback(() => {
     setValgtPeriodeIndex((index) => index - 1);
@@ -158,12 +184,37 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
     if (perioder.some((p) => p.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING)) {
       return true;
     }
-    const harIkkeGyldigForbruk = Object.values(stønadskonto.stonadskontoer).some((s) => !s.gyldigForbruk);
-    if (harIkkeGyldigForbruk) {
-      return true;
+    return valgtPeriodeIndex === -1 || !isDirty;
+  }, [perioder, stønadskonto, valgtPeriodeIndex, isDirty]);
+
+  const feilmeldinger = useMemo(() => {
+    if (!isDirty || valgtPeriodeIndex !== -1) {
+      return [];
     }
-    return !isDirty;
-  }, [perioder, stønadskonto]);
+
+    const feil = [];
+
+    perioder.forEach((p) => {
+      const ikkeGyldigeAktiviteter = p.aktiviteter
+        .filter((a) => stønadskonto.stonadskontoer[a.stønadskontoType] === undefined && a.trekkdagerDesimaler > 0);
+      if (ikkeGyldigeAktiviteter.length > 0) {
+        feil.push(intl.formatMessage({ id: 'UttakPanel.InvalidStonadskonto' }, { konto: uttakPeriodeNavn[ikkeGyldigeAktiviteter[0].stønadskontoType] }));
+      }
+    });
+
+    if (feil.length === 0) {
+      const kontoerMedUgyldigForbruk = Object.values(stønadskonto.stonadskontoer).filter((s) => !s.gyldigForbruk);
+      if (kontoerMedUgyldigForbruk.length > 0) {
+        feil.push(intl.formatMessage({ id: 'UttakPanel.KontoMedUgyldigForbruk' }, { konto: uttakPeriodeNavn[kontoerMedUgyldigForbruk[0].stonadskontotype] }));
+      }
+    }
+
+    if (feil.length === 0 && stønadskonto.FLERBARNSDAGER && !stønadskonto.FLERBARNSDAGER.gyldigForbruk) {
+      feil.push(intl.formatMessage({ id: 'UttakPanel.InvalidTrekkDagerFlerbarnsdager' }, { maxDays: stønadskonto.FLERBARNSDAGER.maxDager }));
+    }
+
+    return feil;
+  }, [perioder, stønadskonto, valgtPeriodeIndex, isDirty]);
 
   return (
     <>
@@ -232,16 +283,28 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
       )}
       <VerticalSpacer sixteenPx />
       {(!isReadOnly || erOverstyrt) && (
-        <Button
-          size="small"
-          variant="primary"
-          disabled={isSubmitting || readOnlySubmitButton || erBekreftKnappDisablet}
-          loading={isSubmitting}
-          onClick={bekreftAksjonspunkter}
-          role="button"
-        >
-          <FormattedMessage id="Uttak.Confirm" />
-        </Button>
+        <>
+          {feilmeldinger.length > 0 && (
+            <>
+              {feilmeldinger.map((fm) => (
+                <Alert size="small" variant="error">
+                  {fm}
+                </Alert>
+              ))}
+              <VerticalSpacer sixteenPx />
+            </>
+          )}
+          <Button
+            size="small"
+            variant="primary"
+            disabled={feilmeldinger.length > 0 || isSubmitting || readOnlySubmitButton || erBekreftKnappDisablet}
+            loading={isSubmitting}
+            onClick={bekreftAksjonspunkter}
+            role="button"
+          >
+            <FormattedMessage id="Uttak.Confirm" />
+          </Button>
+        </>
       )}
     </>
   );

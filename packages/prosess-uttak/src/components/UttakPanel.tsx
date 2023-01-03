@@ -3,13 +3,11 @@ import { connect } from 'react-redux';
 import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { createSelector } from 'reselect';
-import { Alert, Heading } from '@navikt/ds-react';
+import { Alert } from '@navikt/ds-react';
 
 import { omitOne } from '@navikt/ft-utils';
-import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
-import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, FamilieHendelseSamling, AlleKodeverk,
   Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling, Stonadskonto, Personoversikt,
@@ -18,11 +16,11 @@ import { UttakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
-import Uttak, { UttaksresultatActivity } from './Uttak';
 import styles from './uttakPanel.less';
 
 const formName = 'UttakForm';
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -88,6 +86,8 @@ const hentApTekst = (uttaksresultat: UttaksresultatPeriode, isApOpen: boolean, a
 >>>>>>> 12d053065 (div)
 =======
 >>>>>>> aaf75f737 (div)
+=======
+>>>>>>> ed3cc7d58 (div)
 interface FormValues {
   uttaksresultatActivity?: UttaksresultatActivity[];
   stonadskonto?: UttakStonadskontoer;
@@ -150,18 +150,6 @@ export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & W
   ...formProps
 }) => (
   <>
-    <Heading size="small">
-      <FormattedMessage id="UttakPanel.Title" />
-    </Heading>
-    <VerticalSpacer twentyPx />
-    {aksjonspunkter.length > 0 && (
-      <>
-        <AksjonspunktHelpTextTemp isAksjonspunktOpen={isApOpen}>
-          {hentApTekst(uttaksresultat, isApOpen, aksjonspunkter)}
-        </AksjonspunktHelpTextTemp>
-        <VerticalSpacer twentyPx />
-      </>
-    )}
     {uttaksresultat && (
       <form onSubmit={formProps.handleSubmit}>
         { /* @ts-ignore Fiks cannot be used as a JSX component */ }
@@ -354,6 +342,7 @@ const validateUttakPanelForm = (values: FormValues) => {
   return null;
 };
 
+<<<<<<< HEAD
 // **
 export const buildInitialValues = createSelector(
   [(props: PureOwnProps) => props.uttaksresultat, (props: PureOwnProps) => props.stonadskonto],
@@ -451,4 +440,6 @@ const UttakPanel = connect(mapStateToPropsFactory)(reduxForm({
   destroyOnUnmount: false,
 })(injectIntl(UttakPanelImpl)));
 
+=======
+>>>>>>> ed3cc7d58 (div)
 export default UttakPanel;
