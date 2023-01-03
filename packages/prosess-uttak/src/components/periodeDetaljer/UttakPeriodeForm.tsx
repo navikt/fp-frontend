@@ -325,21 +325,19 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
           utsettelseType={valgtPeriode.utsettelseType}
         />
       )}
-      {erHovedsøkersPeriode && (
+      {erHovedsøkersPeriode && !isReadOnly && (
         <>
           <TextAreaField
             name="begrunnelse"
             label={intl.formatMessage({ id: 'UttakActivity.Vurdering' })}
             validate={[required, minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
-            readOnly={isReadOnly}
           />
           <VerticalSpacer sixteenPx />
           <RadioGroupPanel
             name="erOppfylt"
             hideLegend
             validate={[required]}
-            isReadOnly={isReadOnly}
             isHorizontal
             isTrueOrFalseSelection
             radios={[
@@ -356,7 +354,6 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
                   selectValues={periodeÅrsakOptions}
                   validate={[required, notDash]}
                   label={intl.formatMessage({ id: erOppfylt ? 'UttakActivity.InnvilgelseAarsaker' : 'UttakActivity.AvslagAarsak' })}
-                  readOnly={isReadOnly}
                 />
                 {(valgtPeriode.gradertAktivitet && erOppfylt) && (
                   <div className={styles.marginTop30}>
@@ -368,7 +365,6 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
                       name="graderingInnvilget"
                       hideLegend
                       validate={[required]}
-                      isReadOnly={isReadOnly}
                       isHorizontal
                       isTrueOrFalseSelection
                       radios={[
@@ -382,7 +378,6 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
                         selectValues={graderingAvslagsårsakOptions}
                         validate={[required, notDash]}
                         label={intl.formatMessage({ id: 'UttakActivity.GraderingAvslagAarsaker' })}
-                        readOnly={isReadOnly}
                       />
                     )}
                   </div>

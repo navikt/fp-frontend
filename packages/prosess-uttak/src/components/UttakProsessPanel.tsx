@@ -142,14 +142,14 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   }, []);
 
   const [perioder, setPerioder] = useState<PeriodeSoker[]>(formData || uttaksresultatPeriode.perioderSøker);
-  const [valgtPeriodeIndex, setValgtPeriodeIndex] = useState<number>();
+  const [valgtPeriodeIndex, setValgtPeriodeIndex] = useState<number | undefined>();
 
   const [stønadskonto, setStønadskonto] = useState(uttakStonadskontoer);
 
   useEffect(() => () => setFormData(perioder), [perioder]);
 
+  const allePerioder = uttaksresultatPeriode.perioderAnnenpart.concat(perioder);
   useEffect(() => {
-    const allePerioder = uttaksresultatPeriode.perioderAnnenpart.concat(perioder);
     const index = allePerioder.findIndex((period) => period.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING);
     if (index !== -1) {
       setValgtPeriodeIndex(index);
@@ -162,11 +162,11 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   }, [perioder, aksjonspunkter]);
 
   const visForrigePeriode = useCallback(() => {
-    setValgtPeriodeIndex((index) => index - 1);
+    setValgtPeriodeIndex((index) => (index === 0 ? index : index - 1));
   }, []);
   const visNestePeriode = useCallback(() => {
-    setValgtPeriodeIndex((index) => index + 1);
-  }, []);
+    setValgtPeriodeIndex((index) => (index === allePerioder.length - 1 ? index : index + 1));
+  }, [allePerioder.length]);
 
   const oppdaterPeriode = useCallback((oppdatertePerioder: PeriodeSoker[]) => {
     const andrePerioder = perioder.filter((p) => p.fom !== oppdatertePerioder[0].fom);
@@ -185,11 +185,11 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
     if (perioder.some((p) => p.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING)) {
       return true;
     }
-    return valgtPeriodeIndex === -1 || !isDirty;
+    return valgtPeriodeIndex === undefined || !isDirty;
   }, [perioder, stønadskonto, valgtPeriodeIndex, isDirty]);
 
   const feilmeldinger = useMemo(() => {
-    if (!isDirty || valgtPeriodeIndex !== -1) {
+    if (!isDirty || valgtPeriodeIndex !== undefined) {
       return [];
     }
 
@@ -217,6 +217,10 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
 
     return feil;
   }, [perioder, stønadskonto, valgtPeriodeIndex, isDirty]);
+
+  const filtrerteAksjonspunkter = aksjonspunkter.filter((ap) => ap.definisjon !== AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER);
+  const harLukkedeAksjonspunkt = filtrerteAksjonspunkter.length < 1
+    || filtrerteAksjonspunkter.some((ap) => ap.toTrinnsBehandlingGodkjent === true && ap.status === 'UTFO');
 
   return (
     <>
@@ -272,7 +276,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
             valgtPeriodeIndex={valgtPeriodeIndex}
             oppdaterPeriode={oppdaterPeriode}
             isEdited={false}
-            isReadOnly={isReadOnly && !erOverstyrt}
+            isReadOnly={harLukkedeAksjonspunkt || (isReadOnly && !erOverstyrt)}
             visForrigePeriode={visForrigePeriode}
             visNestePeriode={visNestePeriode}
             alleKodeverk={alleKodeverk}
@@ -284,7 +288,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
         </>
       )}
       <VerticalSpacer sixteenPx />
-      {(!isReadOnly || erOverstyrt) && (
+      {((!harLukkedeAksjonspunkt && !isReadOnly) || erOverstyrt) && (
         <>
           {feilmeldinger.length > 0 && (
             <>

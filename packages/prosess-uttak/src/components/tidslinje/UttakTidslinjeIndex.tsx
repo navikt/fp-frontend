@@ -289,7 +289,7 @@ const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
     }
   }, [eventProps]);
 
-  const åpneFørstePeriodeEllerLukk = useCallback(() => setValgtPeriodeIndex(valgtPeriodeIndex ? undefined : 0), [valgtPeriodeIndex]);
+  const åpneFørstePeriodeEllerLukk = useCallback(() => setValgtPeriodeIndex(valgtPeriodeIndex === undefined ? 0 : undefined), [valgtPeriodeIndex]);
 
   return (
     <UttakTidslinje
