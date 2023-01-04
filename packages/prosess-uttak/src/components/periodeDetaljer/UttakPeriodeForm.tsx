@@ -143,27 +143,27 @@ const lagOptionsTilPeriodeÅrsakSelect = (
 const finnUker = (
   aktivitet: PeriodeSokerAktivitet,
   valgtPeriode: PeriodeSoker,
-): number => {
+): string => {
   if (valgtPeriode.periodeResultatType && !aktivitet.trekkdagerDesimaler && (valgtPeriode.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING)) {
-    return 0;
+    return '0';
   }
   if (aktivitet.trekkdagerDesimaler && aktivitet.trekkdagerDesimaler < 0) {
-    return 0;
+    return '0';
   }
-  return Math.floor(aktivitet.trekkdagerDesimaler / 5);
+  return Math.floor(aktivitet.trekkdagerDesimaler / 5).toString();
 };
 
 const finnDager = (
   aktivitet: PeriodeSokerAktivitet,
   valgtPeriode: PeriodeSoker,
-): number => {
+): string => {
   if (valgtPeriode.periodeResultatType && !aktivitet.trekkdagerDesimaler && (valgtPeriode.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING)) {
-    return 0;
+    return '0';
   }
   if (aktivitet.trekkdagerDesimaler && aktivitet.trekkdagerDesimaler < 0) {
-    return 0;
+    return '0';
   }
-  return parseFloat(((aktivitet.trekkdagerDesimaler % 5).toFixed(1)));
+  return parseFloat(((aktivitet.trekkdagerDesimaler % 5).toFixed(1))).toString();
 };
 
 const lagOptionsTilGraderingAvslagsårsakerSelect = (
@@ -196,7 +196,7 @@ const hentTekstNårUtbetalingPlusArbeidsprosentMerEn100 = (
   aktiviteter: PeriodeSokerAktivitet[],
   intl: IntlShape,
 ): string => {
-  const harMerEnn100 = formAktiviteter.some((aktivitet, index) => aktivitet.utbetalingsgrad + aktiviteter[index].prosentArbeid > 100);
+  const harMerEnn100 = formAktiviteter.some((aktivitet, index) => parseFloat(aktivitet.utbetalingsgrad) + aktiviteter[index].prosentArbeid > 100);
   return harMerEnn100
     ? intl.formatMessage({ id: 'UttakActivity.MerEn100Prosent' })
     : null;
@@ -215,14 +215,14 @@ const byggDefaultValues = (
     graderingInnvilget: valgtPeriode.graderingInnvilget,
     samtidigUttak: valgtPeriode.samtidigUttak,
     graderingAvslagAarsak: valgtPeriode.graderingAvslagÅrsak ? valgtPeriode.graderingAvslagÅrsak : '-',
-    samtidigUttaksprosent: valgtPeriode.samtidigUttaksprosent,
+    samtidigUttaksprosent: valgtPeriode.samtidigUttaksprosent ? valgtPeriode.samtidigUttaksprosent.toString() : undefined,
     flerbarnsdager: valgtPeriode.flerbarnsdager,
     oppholdArsak: valgtPeriode.oppholdÅrsak,
     aktiviteter: valgtPeriode.aktiviteter.map((a) => ({
       stønadskontoType: a.stønadskontoType,
       weeks: finnUker(a, valgtPeriode),
       days: finnDager(a, valgtPeriode),
-      utbetalingsgrad: !kontoIkkeSatt ? a.utbetalingsgrad : 0,
+      utbetalingsgrad: !kontoIkkeSatt ? a.utbetalingsgrad?.toString() : '0',
     })),
   };
 };
@@ -239,12 +239,12 @@ const transformValues = (
     ? periodeResultatType.INNVILGET : periodeResultatType.AVSLATT,
   graderingAvslagÅrsak: values.graderingAvslagAarsak,
   periodeResultatÅrsak: values.periodeAarsak,
-  samtidigUttaksprosent: values.samtidigUttaksprosent,
+  samtidigUttaksprosent: values.samtidigUttaksprosent ? parseFloat(values.samtidigUttaksprosent) : undefined,
   samtidigUttak: values.samtidigUttak,
   flerbarnsdager: values.flerbarnsdager,
   aktiviteter: valgtPeriode.aktiviteter.map((a, index) => ({
     ...a,
-    trekkdagerDesimaler: (values.aktiviteter[index].weeks * 5) + values.aktiviteter[index].days,
+    trekkdagerDesimaler: (parseFloat(values.aktiviteter[index].weeks) * 5) + parseFloat(values.aktiviteter[index].days),
   })),
 });
 
@@ -298,11 +298,7 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
 
   const graderingAvslagsårsakOptions = useMemo(() => lagOptionsTilGraderingAvslagsårsakerSelect(alleKodeverk), []);
 
-  const submit = useCallback((values: UttakAktivitetType) => {
-    const v = transformValues(values, valgtPeriode);
-    debugger;
-    return oppdaterPeriode([v]);
-  }, [valgtPeriode]);
+  const submit = useCallback((values: UttakAktivitetType) => oppdaterPeriode([transformValues(values, valgtPeriode)]), [valgtPeriode]);
 
   const warning1 = hentTekstForÅVurdereUtsettelseVedMindreEnn100ProsentStilling(valgtPeriode.utsettelseType, erOppfylt, valgtPeriode.aktiviteter, intl);
   const warning2 = hentTekstNårUtbetalingPlusArbeidsprosentMerEn100(aktiviteter, valgtPeriode.aktiviteter, intl);

@@ -149,11 +149,18 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   useEffect(() => () => setFormData(perioder), []);
 
   const allePerioder = uttaksresultatPeriode.perioderAnnenpart.concat(perioder);
-  useEffect(() => {
+
+  const velgPeriodeMedAp = useCallback(() => {
     const index = allePerioder.findIndex((period) => period.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING);
     if (index !== -1) {
       setValgtPeriodeIndex(index);
+    } else if (valgtPeriodeIndex !== undefined) {
+      setValgtPeriodeIndex(undefined);
     }
+  }, [perioder, valgtPeriodeIndex]);
+
+  useEffect(() => {
+    velgPeriodeMedAp();
   }, []);
 
   const bekreftAksjonspunkter = useCallback(() => {
@@ -175,8 +182,11 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
     setDirty(true);
 
     oppdaterStønadskontoer({ behandlingUuid: behandling.uuid, perioder: nyePerioder })
-      .then((oppdatertStønadskonto: UttakStonadskontoer) => setStønadskonto(oppdatertStønadskonto));
-  }, [perioder]);
+      .then((oppdatertStønadskonto: UttakStonadskontoer) => {
+        setStønadskonto(oppdatertStønadskonto);
+        velgPeriodeMedAp();
+      });
+  }, [perioder, valgtPeriodeIndex]);
 
   const erAksjonspunktÅpent = aksjonspunkter.some((ap) => ap.status === AksjonspunktStatus.OPPRETTET);
   const erTilknyttetStortinget = aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.TILKNYTTET_STORTINGET && erAksjonspunktÅpent);

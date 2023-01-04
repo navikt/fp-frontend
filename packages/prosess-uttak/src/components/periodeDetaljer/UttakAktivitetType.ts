@@ -1,8 +1,8 @@
 export type UttakAktivitet = {
   stønadskontoType: string;
-  weeks: number;
-  days: number;
-  utbetalingsgrad: number;
+  weeks: string;
+  days: string;
+  utbetalingsgrad: string;
 }
 
 export type UttakAktivitetType = {
@@ -11,7 +11,7 @@ export type UttakAktivitetType = {
   periodeAarsak: string;
   graderingInnvilget: boolean;
   graderingAvslagAarsak: string;
-  samtidigUttaksprosent?: number;
+  samtidigUttaksprosent?: string;
   flerbarnsdager: boolean;
   samtidigUttak?: boolean;
   oppholdArsak: string;

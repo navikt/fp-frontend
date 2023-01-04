@@ -275,7 +275,7 @@ const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
   const velgPeriode = useCallback((eventPropsValue: EventProps) => {
     setValgtPeriodeITidslinje(eventPropsValue.items[0]);
     eventPropsValue.event.preventDefault();
-  }, []);
+  }, [setValgtPeriodeITidslinje]);
 
   const previousValgtIndex = usePrevious(periodeValgtITidslinje);
 

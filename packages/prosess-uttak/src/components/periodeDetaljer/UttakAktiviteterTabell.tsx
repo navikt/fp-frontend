@@ -62,10 +62,10 @@ const sjekkOmUtbetalingsgradEr0OmAvslått = (
   erOppfylt: boolean,
   utsettelseType?: string,
 ) => (
-  utbetalingsgrad: number,
+  utbetalingsgrad: string,
 ): string | null => {
   const harUtsettelse = !erOppfylt && (!utsettelseType || utsettelseType === '-');
-  if (harUtsettelse && utbetalingsgrad > 0) {
+  if (harUtsettelse && parseFloat(utbetalingsgrad) > 0) {
     return intl.formatMessage({ id: 'RenderUttakTable.MerEnNullUtaksprosent' });
   }
   return null;
@@ -74,7 +74,7 @@ const sjekkOmUtbetalingsgradEr0OmAvslått = (
 const sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent = (
   intl: IntlShape,
   getValues: UseFormGetValues<UttakAktivitetType>,
-) => (utbetalingsgrad: number): string | null => {
+) => (utbetalingsgrad: string): string | null => {
   const samtidigUttak = getValues('samtidigUttak');
   const samtidigUttaksprosent = getValues('samtidigUttaksprosent');
   if (samtidigUttak && samtidigUttaksprosent < utbetalingsgrad) {
@@ -89,12 +89,12 @@ const sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0 = (
   intl: IntlShape,
   getValues: UseFormGetValues<UttakAktivitetType>,
   index: number,
-) => (utbetalingsgrad: number): string | null => {
+) => (utbetalingsgrad: string): string | null => {
   const aktiviteter = getValues('aktiviteter');
   const aktivitet = aktiviteter[index];
-  if (aktivitet.weeks === 0
-    && aktivitet.days === 0
-    && utbetalingsgrad > 0) {
+  if (parseFloat(aktivitet.weeks) === 0
+    && parseFloat(aktivitet.days) === 0
+    && parseFloat(utbetalingsgrad) > 0) {
     return intl.formatMessage({
       id: 'ValidationMessage.ukerOgDagerVidNullUtbetalningsgradMessage',
     });
@@ -166,18 +166,18 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                       validate={[(value: string) => {
                         const weeks = getValues(`aktiviteter.${index}.weeks`);
                         const days = getValues(`aktiviteter.${index}.days`);
-                        const skalSjekke = weeks !== 0 || days !== 0;
+                        const skalSjekke = parseFloat(weeks) !== 0 || parseFloat(days) !== 0;
                         if (skalSjekke) {
                           const requiredMessage = required(value);
                           if (requiredMessage) {
-                            return [requiredMessage];
+                            return requiredMessage;
                           }
                           const notDashMessage = notDash(value);
                           if (notDashMessage) {
-                            return [notDashMessage];
+                            return notDashMessage;
                           }
                         }
-                        return [];
+                        return null;
                       }]}
                     />
                   </div>
@@ -194,9 +194,9 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                               required,
                               hasValidInteger,
                               maxLength3,
-                              (uker: number) => {
+                              (uker: string) => {
                                 const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
-                                return harUtsettelsestype && getValues('erOppfylt') && uker > 0
+                                return harUtsettelsestype && getValues('erOppfylt') && parseFloat(uker) > 0
                                   ? intl.formatMessage({ id: 'ValidationMessage.trekkdagerErMerEnnNullUtsettelse' }) : null;
                               },
                             ]}
@@ -214,9 +214,9 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                             required,
                             hasValidDecimal,
                             maxLength3,
-                            (dager: number) => {
+                            (dager: string) => {
                               const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
-                              return harUtsettelsestype && getValues('erOppfylt') && dager > 0
+                              return harUtsettelsestype && getValues('erOppfylt') && parseFloat(dager) > 0
                                 ? intl.formatMessage({ id: 'ValidationMessage.trekkdagerErMerEnnNullUtsettelse' }) : null;
                             },
                           ]}
@@ -236,6 +236,7 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                       <FlexColumn className={styles.utbetalingsgrad}>
                         <NumberField
                           name={`aktiviteter.${index}.utbetalingsgrad`}
+                          // @ts-ignore Fiks typen til utbetalingsgrad. Bør vera number
                           validate={[
                             required,
                             minValue0,
@@ -244,9 +245,9 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                             sjekkOmUtbetalingsgradEr0OmAvslått(intl, erOppfylt, utsettelseType),
                             sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0(intl, getValues, index),
                             sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent(intl, getValues),
-                            (utbetalingsgrad: number) => {
+                            (utbetalingsgrad: string) => {
                               const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
-                              return harUtsettelsestype && getValues('erOppfylt') && utbetalingsgrad > 0
+                              return harUtsettelsestype && getValues('erOppfylt') && parseFloat(utbetalingsgrad) > 0
                                 ? intl.formatMessage({ id: 'ValidationMessage.utbetalingMerEnnNullUtsettelse' }) : null;
                             },
                           ]}
