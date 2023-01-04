@@ -8,6 +8,7 @@ import { Kjønnkode } from '@navikt/ft-types';
 import {
   calcDays, calcDaysAndWeeks, DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT,
 } from '@navikt/ft-utils';
+import { usePrevious } from '@navikt/ft-ui-komponenter';
 
 import {
   Behandling,
@@ -269,17 +270,21 @@ const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
   const tidslinjeTider = useMemo(() => finnTidslinjeTider(behandling, søknad, familiehendelse, ytelsefordeling, personoversikt),
     [behandling, søknad, familiehendelse, ytelsefordeling, personoversikt]);
 
-  const [eventProps, setEventProps] = useState<EventProps>();
+  const [periodeValgtITidslinje, setValgtPeriodeITidslinje] = useState<string | number>();
 
   const velgPeriode = useCallback((eventPropsValue: EventProps) => {
-    setEventProps(eventPropsValue);
+    setValgtPeriodeITidslinje(eventPropsValue.items[0]);
     eventPropsValue.event.preventDefault();
   }, []);
 
+  const previousValgtIndex = usePrevious(periodeValgtITidslinje);
+
   useEffect(() => {
-    if (eventProps) {
-      const periodeIndex = sorterteUttaksperioder.findIndex((item) => item.id === eventProps.items[0]);
-      const valgtPeriode = valgtPeriodeIndex ? sorterteUttaksperioder[valgtPeriodeIndex] : undefined;
+    if (periodeValgtITidslinje === undefined && previousValgtIndex !== undefined) {
+      setValgtPeriodeIndex(undefined);
+    } else if (periodeValgtITidslinje !== undefined) {
+      const periodeIndex = sorterteUttaksperioder.findIndex((item) => item.id === periodeValgtITidslinje);
+      const valgtPeriode = valgtPeriodeIndex !== undefined ? sorterteUttaksperioder[valgtPeriodeIndex] : undefined;
 
       if (valgtPeriode?.periode.fom !== sorterteUttaksperioder[periodeIndex]?.periode.fom) {
         setValgtPeriodeIndex(periodeIndex);
@@ -287,9 +292,11 @@ const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
         setValgtPeriodeIndex(undefined);
       }
     }
-  }, [eventProps]);
+  }, [periodeValgtITidslinje]);
 
-  const åpneFørstePeriodeEllerLukk = useCallback(() => setValgtPeriodeIndex(valgtPeriodeIndex === undefined ? 0 : undefined), [valgtPeriodeIndex]);
+  const åpneFørstePeriodeEllerLukk = useCallback(() => {
+    setValgtPeriodeIndex((index) => (index === undefined ? 0 : undefined));
+  }, []);
 
   return (
     <UttakTidslinje
@@ -297,7 +304,7 @@ const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
       hovedsokerKjonnKode={personoversikt ? personoversikt.bruker.kjønn as Kjønnkode : undefined}
       medsokerKjonnKode={medsokerKjonnKode}
       openPeriodInfo={åpneFørstePeriodeEllerLukk}
-      selectedPeriod={valgtPeriodeIndex ? sorterteUttaksperioder[valgtPeriodeIndex] : undefined}
+      selectedPeriod={valgtPeriodeIndex !== undefined ? sorterteUttaksperioder[valgtPeriodeIndex] : undefined}
       selectPeriodCallback={velgPeriode}
       uttakPerioder={sorterteUttaksperioder}
     >

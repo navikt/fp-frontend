@@ -298,7 +298,11 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
 
   const graderingAvslagsårsakOptions = useMemo(() => lagOptionsTilGraderingAvslagsårsakerSelect(alleKodeverk), []);
 
-  const submit = useCallback((values: UttakAktivitetType) => oppdaterPeriode([transformValues(values, valgtPeriode)]), [valgtPeriode]);
+  const submit = useCallback((values: UttakAktivitetType) => {
+    const v = transformValues(values, valgtPeriode);
+    debugger;
+    return oppdaterPeriode([v]);
+  }, [valgtPeriode]);
 
   const warning1 = hentTekstForÅVurdereUtsettelseVedMindreEnn100ProsentStilling(valgtPeriode.utsettelseType, erOppfylt, valgtPeriode.aktiviteter, intl);
   const warning2 = hentTekstNårUtbetalingPlusArbeidsprosentMerEn100(aktiviteter, valgtPeriode.aktiviteter, intl);

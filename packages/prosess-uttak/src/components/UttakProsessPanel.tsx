@@ -146,7 +146,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
 
   const [stønadskonto, setStønadskonto] = useState(uttakStonadskontoer);
 
-  useEffect(() => () => setFormData(perioder), [perioder]);
+  useEffect(() => () => setFormData(perioder), []);
 
   const allePerioder = uttaksresultatPeriode.perioderAnnenpart.concat(perioder);
   useEffect(() => {

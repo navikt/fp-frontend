@@ -182,7 +182,7 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
     const periode2 = lagPeriode(valgtPeriode, dayjs(dato).add(1, 'days').format('YYYY-MM-DD'), valgtPeriode.tom);
     oppdaterPeriode([periode1, periode2]);
     toggleVisningAvModal();
-  }, [valgtPeriodeIndex]);
+  }, [valgtPeriodeIndex, valgtPeriode]);
 
   const lukkPeriode = useCallback(() => setValgtPeriodeIndex(undefined), []);
 

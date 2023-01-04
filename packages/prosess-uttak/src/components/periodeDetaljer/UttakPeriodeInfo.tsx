@@ -293,6 +293,7 @@ const UttakPeriodeInfo: FunctionComponent<OwnProps> = ({
             name="oppholdArsak"
             selectValues={mapPeriodeTyper(oppholdArsakTyper)}
             label=""
+            hideLabel
             readOnly={isReadOnly}
             validate={[required, notDash]}
           />
