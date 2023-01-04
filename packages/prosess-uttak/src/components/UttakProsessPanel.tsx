@@ -107,7 +107,6 @@ interface OwnProps {
     perioder: PeriodeSoker[];
   }) => Promise<any>;
   isReadOnly: boolean;
-  readOnlySubmitButton: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   formData?: PeriodeSoker[];
   setFormData: (data: PeriodeSoker[]) => void;
@@ -127,7 +126,6 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   submitCallback,
   oppdaterStønadskontoer,
   isReadOnly,
-  readOnlySubmitButton,
   arbeidsgiverOpplysningerPerId,
   formData,
   setFormData,
@@ -195,7 +193,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
     if (perioder.some((p) => p.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING)) {
       return true;
     }
-    return valgtPeriodeIndex === undefined || !isDirty;
+    return valgtPeriodeIndex !== undefined || !isDirty;
   }, [perioder, stønadskonto, valgtPeriodeIndex, isDirty]);
 
   const feilmeldinger = useMemo(() => {
@@ -313,7 +311,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
           <Button
             size="small"
             variant="primary"
-            disabled={feilmeldinger.length > 0 || isSubmitting || readOnlySubmitButton || erBekreftKnappDisablet}
+            disabled={feilmeldinger.length > 0 || isSubmitting || erBekreftKnappDisablet}
             loading={isSubmitting}
             onClick={bekreftAksjonspunkter}
             role="button"

@@ -41,7 +41,6 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
   kanOverstyre,
   submitCallback,
   isReadOnly,
-  readOnlySubmitButton,
   oppdaterStønadskontoer,
   arbeidsgiverOpplysningerPerId,
   formData,
@@ -62,7 +61,6 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
       submitCallback={submitCallback}
       oppdaterStønadskontoer={oppdaterStønadskontoer}
       isReadOnly={isReadOnly}
-      readOnlySubmitButton={readOnlySubmitButton}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       formData={formData}
       setFormData={setFormData}

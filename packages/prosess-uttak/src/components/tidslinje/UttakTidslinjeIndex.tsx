@@ -1,5 +1,5 @@
 import React, {
-  useCallback, useMemo, FunctionComponent, ReactElement, useEffect, useState,
+  useCallback, useMemo, FunctionComponent, ReactElement,
 } from 'react';
 import dayjs from 'dayjs';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
@@ -8,7 +8,6 @@ import { Kjønnkode } from '@navikt/ft-types';
 import {
   calcDays, calcDaysAndWeeks, DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT,
 } from '@navikt/ft-utils';
-import { usePrevious } from '@navikt/ft-ui-komponenter';
 
 import {
   Behandling,
@@ -230,7 +229,7 @@ interface OwnProps {
   ytelsefordeling: Ytelsefordeling;
   alleKodeverk: AlleKodeverk;
   tilknyttetStortinget: boolean;
-  setValgtPeriodeIndex: (valgtPeriodeIndex: number | undefined) => void;
+  setValgtPeriodeIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
@@ -270,29 +269,17 @@ const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
   const tidslinjeTider = useMemo(() => finnTidslinjeTider(behandling, søknad, familiehendelse, ytelsefordeling, personoversikt),
     [behandling, søknad, familiehendelse, ytelsefordeling, personoversikt]);
 
-  const [periodeValgtITidslinje, setValgtPeriodeITidslinje] = useState<string | number>();
+  const velgPeriode = (eventPropsValue: EventProps) => {
+    const periodeIndex = sorterteUttaksperioder.findIndex((item) => item.id === eventPropsValue.items[0]);
+    const valgtPeriode = valgtPeriodeIndex !== undefined ? sorterteUttaksperioder[valgtPeriodeIndex] : undefined;
 
-  const velgPeriode = useCallback((eventPropsValue: EventProps) => {
-    setValgtPeriodeITidslinje(eventPropsValue.items[0]);
-    eventPropsValue.event.preventDefault();
-  }, [setValgtPeriodeITidslinje]);
-
-  const previousValgtIndex = usePrevious(periodeValgtITidslinje);
-
-  useEffect(() => {
-    if (periodeValgtITidslinje === undefined && previousValgtIndex !== undefined) {
+    if (valgtPeriode?.periode.fom !== sorterteUttaksperioder[periodeIndex]?.periode.fom) {
+      setValgtPeriodeIndex(periodeIndex);
+    } else {
       setValgtPeriodeIndex(undefined);
-    } else if (periodeValgtITidslinje !== undefined) {
-      const periodeIndex = sorterteUttaksperioder.findIndex((item) => item.id === periodeValgtITidslinje);
-      const valgtPeriode = valgtPeriodeIndex !== undefined ? sorterteUttaksperioder[valgtPeriodeIndex] : undefined;
-
-      if (valgtPeriode?.periode.fom !== sorterteUttaksperioder[periodeIndex]?.periode.fom) {
-        setValgtPeriodeIndex(periodeIndex);
-      } else {
-        setValgtPeriodeIndex(undefined);
-      }
     }
-  }, [periodeValgtITidslinje]);
+    eventPropsValue.event.preventDefault();
+  };
 
   const åpneFørstePeriodeEllerLukk = useCallback(() => {
     setValgtPeriodeIndex((index) => (index === undefined ? 0 : undefined));
