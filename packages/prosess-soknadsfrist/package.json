@@ -18,7 +18,7 @@
     "@navikt/ft-utils": "1.1.12",
     "moment": "2.29.4",
     "react": "18.2.0",
-    "react-hook-form": "7.40.0",
+    "react-hook-form": "7.41.5",
     "react-intl": "6.2.5"
   },
   "devDependencies": {
