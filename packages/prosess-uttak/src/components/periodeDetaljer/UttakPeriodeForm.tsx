@@ -1,7 +1,7 @@
 import React, {
   useCallback, ReactElement, FunctionComponent, useMemo,
 } from 'react';
-import { Alert, Button, Detail } from '@navikt/ds-react';
+import { Alert, Button } from '@navikt/ds-react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import {
@@ -357,19 +357,16 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
               <ArrowBox alignOffset={erOppfylt ? 0 : 92}>
                 <SelectField
                   name="periodeAarsak"
+                  label={intl.formatMessage({ id: erOppfylt ? 'UttakActivity.InnvilgelseAarsaker' : 'UttakActivity.AvslagAarsak' })}
                   selectValues={periodeÅrsakOptions}
                   validate={[required, notDash]}
-                  label={intl.formatMessage({ id: erOppfylt ? 'UttakActivity.InnvilgelseAarsaker' : 'UttakActivity.AvslagAarsak' })}
                 />
                 {(valgtPeriode.gradertAktivitet && erOppfylt) && (
-                  <div className={styles.marginTop30}>
-                    <Detail>
-                      <FormattedMessage id="UttakActivity.Gradering" />
-                    </Detail>
-                    <VerticalSpacer eightPx />
+                  <>
+                    <VerticalSpacer sixteenPx />
                     <RadioGroupPanel
                       name="graderingInnvilget"
-                      hideLegend
+                      label={intl.formatMessage({ id: 'UttakActivity.Gradering' })}
                       validate={[required]}
                       isHorizontal
                       isTrueOrFalseSelection
@@ -379,19 +376,23 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
                       ]}
                     />
                     {graderingInnvilget === false && (
-                      <SelectField
-                        name="graderingAvslagAarsak"
-                        selectValues={graderingAvslagsårsakOptions}
-                        validate={[required, notDash]}
-                        label={intl.formatMessage({ id: 'UttakActivity.GraderingAvslagAarsaker' })}
-                      />
+                      <>
+                        <VerticalSpacer sixteenPx />
+                        <SelectField
+                          name="graderingAvslagAarsak"
+                          label={intl.formatMessage({ id: 'UttakActivity.GraderingAvslagAarsaker' })}
+                          validate={[required, notDash]}
+                          selectValues={graderingAvslagsårsakOptions}
+                        />
+                      </>
                     )}
-                  </div>
+                    <VerticalSpacer eightPx />
+                  </>
                 )}
               </ArrowBox>
             </>
           )}
-          <VerticalSpacer sixteenPx />
+          <VerticalSpacer twentyPx />
           {warning && (
             <>
               <Alert size="small" variant="info" className={styles.alert}>
