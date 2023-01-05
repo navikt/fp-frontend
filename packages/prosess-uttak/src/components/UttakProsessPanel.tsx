@@ -148,17 +148,17 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
 
   const allePerioder = uttaksresultatPeriode.perioderAnnenpart.concat(perioder);
 
-  const velgPeriodeMedAp = useCallback(() => {
-    const index = allePerioder.findIndex((period) => period.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING);
+  const velgPeriodeMedAp = useCallback((per) => {
+    const index = per.findIndex((period) => period.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING);
     if (index !== -1) {
       setValgtPeriodeIndex(index);
     } else if (valgtPeriodeIndex !== undefined) {
       setValgtPeriodeIndex(undefined);
     }
-  }, [perioder, valgtPeriodeIndex]);
+  }, [valgtPeriodeIndex]);
 
   useEffect(() => {
-    velgPeriodeMedAp();
+    velgPeriodeMedAp(allePerioder);
   }, []);
 
   const bekreftAksjonspunkter = useCallback(() => {
@@ -182,7 +182,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
     oppdaterStønadskontoer({ behandlingUuid: behandling.uuid, perioder: nyePerioder })
       .then((oppdatertStønadskonto: UttakStonadskontoer) => {
         setStønadskonto(oppdatertStønadskonto);
-        velgPeriodeMedAp();
+        velgPeriodeMedAp(nyePerioder);
       });
   }, [perioder, valgtPeriodeIndex]);
 
@@ -239,7 +239,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
               <FormattedMessage id="UttakPanel.Title" />
             </Heading>
           </FlexColumn>
-          {kanOverstyre && !erAksjonspunktÅpent && !isReadOnly && (
+          {kanOverstyre && !erAksjonspunktÅpent && isReadOnly && (
             <FlexColumn>
               <OverstyringKnapp onClick={toggleOverstyring} />
             </FlexColumn>

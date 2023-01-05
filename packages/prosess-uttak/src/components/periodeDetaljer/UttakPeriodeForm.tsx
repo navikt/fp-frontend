@@ -242,10 +242,15 @@ const transformValues = (
   samtidigUttaksprosent: values.samtidigUttaksprosent ? parseFloat(values.samtidigUttaksprosent) : undefined,
   samtidigUttak: values.samtidigUttak,
   flerbarnsdager: values.flerbarnsdager,
-  aktiviteter: valgtPeriode.aktiviteter.map((a, index) => ({
-    ...a,
-    trekkdagerDesimaler: (parseFloat(values.aktiviteter[index].weeks) * 5) + parseFloat(values.aktiviteter[index].days),
-  })),
+  aktiviteter: valgtPeriode.aktiviteter.map((a, index) => {
+    const aktivitet = values.aktiviteter[index];
+    return {
+      ...a,
+      stønadskontoType: aktivitet.stønadskontoType,
+      utbetalingsgrad: parseFloat(aktivitet.utbetalingsgrad),
+      trekkdagerDesimaler: (parseFloat(aktivitet.weeks) * 5) + parseFloat(aktivitet.days),
+    };
+  }),
 });
 
 interface OwnProps {

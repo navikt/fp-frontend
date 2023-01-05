@@ -1,19 +1,23 @@
 import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
+import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 import UttakProsessIndex from '@fpsak-frontend/prosess-uttak';
 import {
   Behandling, FamilieHendelseSamling, Personoversikt, Soknad, UttaksresultatPeriode, UttakStonadskontoer,
 } from '@fpsak-frontend/types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import aksjonspunktType from '@fpsak-frontend/kodeverk/src/aksjonspunktType';
+import { Aksjonspunkt } from '@navikt/ft-types';
 
-const aksjonspunkter = [{
-  definisjon: '5071',
-  status: 'OPPR',
+const åpentAksjonspunkt = [{
+  definisjon: AksjonspunktCode.FASTSETT_UTTAKPERIODER,
+  status: AksjonspunktStatus.OPPRETTET,
   toTrinnsBehandling: true,
-  aksjonspunktType: 'MANU',
+  aksjonspunktType: aksjonspunktType.MANUELL,
   kanLoses: true,
   erAktivt: true,
 }];
@@ -133,10 +137,19 @@ const ytelsefordeling = {
 };
 
 const arbeidsgiverOpplysningerPerId = {
-  910909088: {
+  342352362: {
+    referanse: '342352362',
+    identifikator: '342352362',
+    navn: 'Lagt til av saksbehandler',
+    fødselsdato: null,
     erPrivatPerson: false,
+  },
+  910909088: {
+    referanse: '910909088',
     identifikator: '910909088',
     navn: 'BEDRIFT AS',
+    fødselsdato: null,
+    erPrivatPerson: false,
   },
 };
 
@@ -146,29 +159,37 @@ export default {
 };
 
 const Template: Story<{
-  submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
+  submitCallback?: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
+  stønadskontoer?: UttakStonadskontoer;
+  kanOverstyre?: boolean;
+  isReadOnly?: boolean;
   uttaksresultatPerioder: UttaksresultatPeriode;
+  aksjonspunkter?: Aksjonspunkt[];
 }> = ({
-  submitCallback,
+  submitCallback = action('button-click') as (data: any) => Promise<any>,
+  stønadskontoer = uttakStonadskontoer,
   uttaksresultatPerioder,
+  kanOverstyre = false,
+  isReadOnly = false,
+  aksjonspunkter = [],
 }) => (
   <UttakProsessIndex
     behandling={behandling}
     uttaksresultatPerioder={uttaksresultatPerioder}
-    uttakStonadskontoer={uttakStonadskontoer}
+    uttakStonadskontoer={stønadskontoer}
     aksjonspunkter={aksjonspunkter}
     familiehendelse={familiehendelse}
     soknad={soknad}
     personoversikt={personoversikt}
     ytelsefordeling={ytelsefordeling}
     alleKodeverk={alleKodeverk as any}
-    kanOverstyre
+    kanOverstyre={kanOverstyre}
     submitCallback={submitCallback}
-    isReadOnly={false}
+    isReadOnly={isReadOnly}
     readOnlySubmitButton={false}
     oppdaterStønadskontoer={(v) => {
       action('button-click')(v);
-      return Promise.resolve(uttakStonadskontoer);
+      return Promise.resolve(stønadskontoer);
     }}
     isAksjonspunktOpen
     status="test"
@@ -179,113 +200,296 @@ const Template: Story<{
   />
 );
 
-export const ProsessUttak = Template.bind({});
-ProsessUttak.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+export const PeriodeMedGraderingUtenAksjonspunkt = Template.bind({});
+PeriodeMedGraderingUtenAksjonspunkt.args = {
+  isReadOnly: true,
+  kanOverstyre: true,
   uttaksresultatPerioder: {
     perioderSøker: [{
-      fom: '2019-10-14',
-      tom: '2019-11-03',
+      fom: '2019-10-11',
+      tom: '2019-10-31',
       aktiviteter: [{
         stønadskontoType: 'FORELDREPENGER_FØR_FØDSEL',
         prosentArbeid: 0,
+        arbeidsforholdId: 'efaf22ef-76aa-4576-8c96-92bd31af8815',
+        eksternArbeidsforholdId: 'ARB001-001',
         arbeidsgiverReferanse: '910909088',
         utbetalingsgrad: 100,
         uttakArbeidType: 'ORDINÆRT_ARBEID',
         gradering: false,
-        trekkdagerDesimaler: 15,
+        trekkdagerDesimaler: 15.0,
       }],
       periodeResultatType: 'INNVILGET',
+      begrunnelse: null,
       periodeResultatÅrsak: '2006',
       manuellBehandlingÅrsak: '-',
       graderingAvslagÅrsak: '-',
       flerbarnsdager: false,
       samtidigUttak: false,
+      samtidigUttaksprosent: null,
       graderingInnvilget: false,
       periodeType: 'FORELDREPENGER_FØR_FØDSEL',
       utsettelseType: '-',
       oppholdÅrsak: '-',
+      mottattDato: '2019-11-01',
+      gradertAktivitet: null,
     }, {
-      fom: '2019-11-04',
-      tom: '2019-12-15',
+      fom: '2019-11-01',
+      tom: '2019-12-12',
       aktiviteter: [{
         stønadskontoType: 'MØDREKVOTE',
         prosentArbeid: 0,
+        arbeidsforholdId: 'efaf22ef-76aa-4576-8c96-92bd31af8815',
+        eksternArbeidsforholdId: 'ARB001-001',
         arbeidsgiverReferanse: '910909088',
         utbetalingsgrad: 100,
         uttakArbeidType: 'ORDINÆRT_ARBEID',
         gradering: false,
-        trekkdagerDesimaler: 30,
+        trekkdagerDesimaler: 30.0,
       }],
       periodeResultatType: 'INNVILGET',
+      begrunnelse: null,
       periodeResultatÅrsak: '2003',
       manuellBehandlingÅrsak: '-',
       graderingAvslagÅrsak: '-',
       flerbarnsdager: false,
       samtidigUttak: false,
+      samtidigUttaksprosent: null,
       graderingInnvilget: false,
       periodeType: 'MØDREKVOTE',
       utsettelseType: '-',
       oppholdÅrsak: '-',
-    },
-    {
-      fom: '2019-12-16',
-      tom: '2019-12-29',
+      mottattDato: '2019-11-01',
+      gradertAktivitet: null,
+    }, {
+      fom: '2019-12-13',
+      tom: '2020-01-23',
       aktiviteter: [{
         stønadskontoType: 'MØDREKVOTE',
-        prosentArbeid: 0,
+        prosentArbeid: 50,
+        arbeidsforholdId: 'efaf22ef-76aa-4576-8c96-92bd31af8815',
+        eksternArbeidsforholdId: 'ARB001-001',
         arbeidsgiverReferanse: '910909088',
-        utbetalingsgrad: 100,
+        utbetalingsgrad: 50,
         uttakArbeidType: 'ORDINÆRT_ARBEID',
-        gradering: false,
-        trekkdagerDesimaler: 10,
+        gradering: true,
+        trekkdagerDesimaler: 15.0,
       }],
       periodeResultatType: 'INNVILGET',
-      periodeResultatÅrsak: '2003',
+      begrunnelse: null,
+      periodeResultatÅrsak: '2031',
       manuellBehandlingÅrsak: '-',
       graderingAvslagÅrsak: '-',
       flerbarnsdager: false,
       samtidigUttak: false,
-      graderingInnvilget: false,
+      samtidigUttaksprosent: null,
+      graderingInnvilget: true,
       periodeType: 'MØDREKVOTE',
       utsettelseType: '-',
       oppholdÅrsak: '-',
-    }, {
-      fom: '2019-12-30',
-      tom: '2020-02-02',
-      aktiviteter: [{
-        stønadskontoType: 'FEDREKVOTE',
-        prosentArbeid: 0,
+      mottattDato: '2019-11-01',
+      gradertAktivitet: {
+        stønadskontoType: 'MØDREKVOTE',
+        prosentArbeid: 50,
+        arbeidsforholdId: 'efaf22ef-76aa-4576-8c96-92bd31af8815',
+        eksternArbeidsforholdId: 'ARB001-001',
         arbeidsgiverReferanse: '910909088',
+        utbetalingsgrad: 50,
+        uttakArbeidType: 'ORDINÆRT_ARBEID',
+        gradering: true,
+        trekkdagerDesimaler: 15.0,
+      },
+    }, {
+      fom: '2020-01-24',
+      tom: '2020-02-13',
+      aktiviteter: [{
+        stønadskontoType: '-',
+        prosentArbeid: 100,
+        arbeidsforholdId: 'efaf22ef-76aa-4576-8c96-92bd31af8815',
+        eksternArbeidsforholdId: 'ARB001-001',
+        arbeidsgiverReferanse: '910909088',
+        utbetalingsgrad: 0,
         uttakArbeidType: 'ORDINÆRT_ARBEID',
         gradering: false,
-        trekkdagerDesimaler: 25,
+        trekkdagerDesimaler: 0.0,
       }],
-      periodeResultatType: 'MANUELL_BEHANDLING',
-      periodeResultatÅrsak: '4007',
-      manuellBehandlingÅrsak: '5002',
+      periodeResultatType: 'INNVILGET',
+      begrunnelse: null,
+      periodeResultatÅrsak: '2011',
+      manuellBehandlingÅrsak: '-',
       graderingAvslagÅrsak: '-',
       flerbarnsdager: false,
       samtidigUttak: false,
+      samtidigUttaksprosent: null,
       graderingInnvilget: false,
-      periodeType: 'FEDREKVOTE',
+      periodeType: '-',
+      utsettelseType: 'ARBEID',
+      oppholdÅrsak: '-',
+      mottattDato: '2019-11-01',
+      gradertAktivitet: null,
+    }, {
+      fom: '2020-02-14',
+      tom: '2020-02-20',
+      aktiviteter: [{
+        stønadskontoType: 'FELLESPERIODE',
+        prosentArbeid: 0,
+        arbeidsforholdId: 'efaf22ef-76aa-4576-8c96-92bd31af8815',
+        eksternArbeidsforholdId: 'ARB001-001',
+        arbeidsgiverReferanse: '910909088',
+        utbetalingsgrad: 100,
+        uttakArbeidType: 'ORDINÆRT_ARBEID',
+        gradering: false,
+        trekkdagerDesimaler: 5.0,
+      }],
+      periodeResultatType: 'INNVILGET',
+      begrunnelse: null,
+      periodeResultatÅrsak: '2002',
+      manuellBehandlingÅrsak: '-',
+      graderingAvslagÅrsak: '-',
+      flerbarnsdager: false,
+      samtidigUttak: false,
+      samtidigUttaksprosent: null,
+      graderingInnvilget: false,
+      periodeType: 'FELLESPERIODE',
       utsettelseType: '-',
       oppholdÅrsak: '-',
+      mottattDato: '2020-01-24',
+      gradertAktivitet: null,
     }],
     perioderAnnenpart: [],
     annenForelderHarRett: true,
     aleneomsorg: false,
-    årsakFilter: {
-      kreverSammenhengendeUttak: false,
-      utenMinsterett: false,
-      søkerErMor: true,
-    },
+    årsakFilter: { kreverSammenhengendeUttak: true, utenMinsterett: true, søkerErMor: true },
+  },
+};
+
+export const AksjonspunktIRevurdering = Template.bind({});
+AksjonspunktIRevurdering.args = {
+  aksjonspunkter: åpentAksjonspunkt,
+  uttaksresultatPerioder: {
+    perioderSøker: [{
+      fom: '2019-10-11',
+      tom: '2019-10-31',
+      aktiviteter: [{
+        stønadskontoType: 'FORELDREPENGER_FØR_FØDSEL',
+        prosentArbeid: 0,
+        arbeidsforholdId: '0716ce9f-d93d-40cd-a52c-c7c569995948',
+        eksternArbeidsforholdId: 'ARB001-001',
+        arbeidsgiverReferanse: '910909088',
+        utbetalingsgrad: 100,
+        uttakArbeidType: 'ORDINÆRT_ARBEID',
+        gradering: false,
+        trekkdagerDesimaler: 15.0,
+      }],
+      periodeResultatType: 'INNVILGET',
+      begrunnelse: null,
+      periodeResultatÅrsak: '2006',
+      manuellBehandlingÅrsak: '-',
+      graderingAvslagÅrsak: '-',
+      flerbarnsdager: false,
+      samtidigUttak: false,
+      samtidigUttaksprosent: null,
+      graderingInnvilget: false,
+      periodeType: 'FORELDREPENGER_FØR_FØDSEL',
+      utsettelseType: '-',
+      oppholdÅrsak: '-',
+      mottattDato: '2019-09-20',
+      gradertAktivitet: null,
+    }, {
+      fom: '2019-11-01',
+      tom: '2019-12-12',
+      aktiviteter: [{
+        stønadskontoType: 'MØDREKVOTE',
+        prosentArbeid: 0,
+        arbeidsforholdId: '0716ce9f-d93d-40cd-a52c-c7c569995948',
+        eksternArbeidsforholdId: 'ARB001-001',
+        arbeidsgiverReferanse: '910909088',
+        utbetalingsgrad: 100,
+        uttakArbeidType: 'ORDINÆRT_ARBEID',
+        gradering: false,
+        trekkdagerDesimaler: 30.0,
+      }],
+      periodeResultatType: 'INNVILGET',
+      begrunnelse: null,
+      periodeResultatÅrsak: '2003',
+      manuellBehandlingÅrsak: '-',
+      graderingAvslagÅrsak: '-',
+      flerbarnsdager: false,
+      samtidigUttak: false,
+      samtidigUttaksprosent: null,
+      graderingInnvilget: false,
+      periodeType: 'MØDREKVOTE',
+      utsettelseType: '-',
+      oppholdÅrsak: '-',
+      mottattDato: '2019-09-20',
+      gradertAktivitet: null,
+    }, {
+      fom: '2019-12-13',
+      tom: '2019-12-26',
+      aktiviteter: [{
+        stønadskontoType: 'MØDREKVOTE',
+        prosentArbeid: 100,
+        arbeidsforholdId: '0716ce9f-d93d-40cd-a52c-c7c569995948',
+        eksternArbeidsforholdId: 'ARB001-001',
+        arbeidsgiverReferanse: '910909088',
+        utbetalingsgrad: null,
+        uttakArbeidType: 'ORDINÆRT_ARBEID',
+        gradering: false,
+        trekkdagerDesimaler: 10.0,
+      }],
+      periodeResultatType: 'MANUELL_BEHANDLING',
+      begrunnelse: null,
+      periodeResultatÅrsak: '4082',
+      manuellBehandlingÅrsak: '5010',
+      graderingAvslagÅrsak: '-',
+      flerbarnsdager: false,
+      samtidigUttak: false,
+      samtidigUttaksprosent: null,
+      graderingInnvilget: false,
+      periodeType: '-',
+      utsettelseType: 'ARBEID',
+      oppholdÅrsak: '-',
+      mottattDato: '2019-12-27',
+      gradertAktivitet: null,
+    }, {
+      fom: '2019-12-27',
+      tom: '2020-01-09',
+      aktiviteter: [{
+        stønadskontoType: '-',
+        prosentArbeid: 100,
+        arbeidsforholdId: '0716ce9f-d93d-40cd-a52c-c7c569995948',
+        eksternArbeidsforholdId: 'ARB001-001',
+        arbeidsgiverReferanse: '910909088',
+        utbetalingsgrad: 0,
+        uttakArbeidType: 'ORDINÆRT_ARBEID',
+        gradering: false,
+        trekkdagerDesimaler: 0.0,
+      }],
+      periodeResultatType: 'INNVILGET',
+      begrunnelse: null,
+      periodeResultatÅrsak: '2011',
+      manuellBehandlingÅrsak: '-',
+      graderingAvslagÅrsak: '-',
+      flerbarnsdager: false,
+      samtidigUttak: false,
+      samtidigUttaksprosent: null,
+      graderingInnvilget: false,
+      periodeType: '-',
+      utsettelseType: 'ARBEID',
+      oppholdÅrsak: '-',
+      mottattDato: '2019-12-27',
+      gradertAktivitet: null,
+    }],
+    perioderAnnenpart: [],
+    annenForelderHarRett: true,
+    aleneomsorg: false,
+    årsakFilter: { kreverSammenhengendeUttak: true, utenMinsterett: true, søkerErMor: true },
   },
 };
 
 export const ProsessUttakToParter = Template.bind({});
 ProsessUttakToParter.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  aksjonspunkter: åpentAksjonspunkt,
   uttaksresultatPerioder: {
     perioderSøker: [{
       fom: '2022-04-04',
