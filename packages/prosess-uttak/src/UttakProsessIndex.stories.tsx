@@ -12,7 +12,6 @@ import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import aksjonspunktType from '@fpsak-frontend/kodeverk/src/aksjonspunktType';
-import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 
 const åpentAksjonspunkt = [{
   definisjon: AksjonspunktCode.FASTSETT_UTTAKPERIODER,
@@ -168,7 +167,7 @@ const Template: Story<{
   kanOverstyre = false,
   isReadOnly = false,
   aksjonspunkter = [],
-  brukerKjønn = navBrukerKjonn.KVINNE,
+  brukerKjønn = NavBrukerKjonn.KVINNE,
 }) => (
   <UttakProsessIndex
     behandling={behandling}
@@ -766,7 +765,7 @@ ProsessUttakToParter.args = {
 export const AksjonspunktForFar = Template.bind({});
 AksjonspunktForFar.args = {
   aksjonspunkter: åpentAksjonspunkt,
-  brukerKjønn: navBrukerKjonn.MANN,
+  brukerKjønn: NavBrukerKjonn.MANN,
   uttaksresultatPerioder: {
     perioderSøker: [{
       fom: '2022-11-10',

@@ -1,7 +1,7 @@
 import React, {
   useCallback, useState, FunctionComponent, ReactElement, useEffect, useMemo,
 } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 import { Alert, Button, Heading } from '@navikt/ds-react';
 import {
@@ -65,6 +65,36 @@ const hentApTekster = (
   }
 
   return aksjonspunktTekster;
+};
+
+const validerPerioder = (
+  perioder: PeriodeSoker[],
+  stønadskonto: UttakStonadskontoer,
+  intl: IntlShape,
+) => {
+  const feil = [];
+
+  perioder.forEach((p) => {
+    const ikkeGyldigeAktiviteter = p.aktiviteter
+      .filter((a) => stønadskonto.stonadskontoer[a.stønadskontoType] === undefined && a.trekkdagerDesimaler > 0);
+    if (p.periodeResultatType === periodeResultatType.INNVILGET && ikkeGyldigeAktiviteter.length > 0) {
+      feil.push(intl.formatMessage({ id: 'UttakPanel.InvalidStonadskonto' }, { konto: uttakPeriodeNavn[ikkeGyldigeAktiviteter[0].stønadskontoType] }));
+    }
+  });
+
+  if (feil.length === 0) {
+    const kontoerMedUgyldigForbruk = Object.values(stønadskonto.stonadskontoer).filter((s) => !s.gyldigForbruk);
+    if (kontoerMedUgyldigForbruk.length > 0) {
+      feil.push(intl.formatMessage({ id: 'UttakPanel.KontoMedUgyldigForbruk' }, { konto: uttakPeriodeNavn[kontoerMedUgyldigForbruk[0].stonadskontotype] }));
+    }
+  }
+
+  const konto = stønadskonto[StonadskontoType.FLERBARNSDAGER];
+  if (feil.length === 0 && konto && !konto.gyldigForbruk) {
+    feil.push(intl.formatMessage({ id: 'UttakPanel.InvalidTrekkDagerFlerbarnsdager' }, { maxDays: konto.maxDager }));
+  }
+
+  return feil;
 };
 
 const transformValues = (
@@ -200,30 +230,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
     if (!isDirty || valgtPeriodeIndex !== undefined) {
       return [];
     }
-
-    const feil = [];
-
-    perioder.forEach((p) => {
-      const ikkeGyldigeAktiviteter = p.aktiviteter
-        .filter((a) => stønadskonto.stonadskontoer[a.stønadskontoType] === undefined && a.trekkdagerDesimaler > 0);
-      if (ikkeGyldigeAktiviteter.length > 0) {
-        feil.push(intl.formatMessage({ id: 'UttakPanel.InvalidStonadskonto' }, { konto: uttakPeriodeNavn[ikkeGyldigeAktiviteter[0].stønadskontoType] }));
-      }
-    });
-
-    if (feil.length === 0) {
-      const kontoerMedUgyldigForbruk = Object.values(stønadskonto.stonadskontoer).filter((s) => !s.gyldigForbruk);
-      if (kontoerMedUgyldigForbruk.length > 0) {
-        feil.push(intl.formatMessage({ id: 'UttakPanel.KontoMedUgyldigForbruk' }, { konto: uttakPeriodeNavn[kontoerMedUgyldigForbruk[0].stonadskontotype] }));
-      }
-    }
-
-    const konto = stønadskonto[StonadskontoType.FLERBARNSDAGER];
-    if (feil.length === 0 && konto && !konto.gyldigForbruk) {
-      feil.push(intl.formatMessage({ id: 'UttakPanel.InvalidTrekkDagerFlerbarnsdager' }, { maxDays: konto.maxDager }));
-    }
-
-    return feil;
+    return validerPerioder(perioder, stønadskonto, intl);
   }, [perioder, stønadskonto, valgtPeriodeIndex, isDirty]);
 
   const filtrerteAksjonspunkter = aksjonspunkter.filter((ap) => ap.definisjon !== AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER);
