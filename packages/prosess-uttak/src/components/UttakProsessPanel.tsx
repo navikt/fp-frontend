@@ -142,6 +142,19 @@ interface OwnProps {
   setFormData: (data: PeriodeSoker[]) => void;
 }
 
+const sortByDate = (
+  a: PeriodeSoker,
+  b: PeriodeSoker,
+): number => {
+  if (a.fom < b.fom) {
+    return -1;
+  }
+  if (a.fom > b.fom) {
+    return 1;
+  }
+  return 0;
+};
+
 const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   behandling,
   uttaksresultatPeriode,
@@ -196,16 +209,9 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
     submitCallback(transformValues(perioder, aksjonspunkter));
   }, [perioder, aksjonspunkter]);
 
-  const visForrigePeriode = useCallback(() => {
-    setValgtPeriodeIndex((index) => (index === 0 ? index : index - 1));
-  }, []);
-  const visNestePeriode = useCallback(() => {
-    setValgtPeriodeIndex((index) => (index === allePerioder.length - 1 ? index : index + 1));
-  }, [allePerioder.length]);
-
   const oppdaterPeriode = useCallback((oppdatertePerioder: PeriodeSoker[]) => {
     const andrePerioder = perioder.filter((p) => p.fom !== oppdatertePerioder[0].fom);
-    const nyePerioder = andrePerioder.concat(oppdatertePerioder);
+    const nyePerioder = [...andrePerioder.concat(oppdatertePerioder)].sort(sortByDate);
     setPerioder(nyePerioder);
     setDirty(true);
 
@@ -292,8 +298,6 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
             oppdaterPeriode={oppdaterPeriode}
             isEdited={false}
             isReadOnly={(harLukkedeAksjonspunkt || isReadOnly) && !erOverstyrt}
-            visForrigePeriode={visForrigePeriode}
-            visNestePeriode={visNestePeriode}
             alleKodeverk={alleKodeverk}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             uttakStonadskontoer={stønadskonto}

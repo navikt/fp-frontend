@@ -139,12 +139,10 @@ interface OwnProps {
   oppdaterPeriode: (perioder: PeriodeSoker[]) => void;
   isEdited: boolean;
   isReadOnly: boolean;
-  visForrigePeriode: () => void;
-  visNestePeriode: () => void;
   alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   uttakStonadskontoer: UttakStonadskontoer;
-  setValgtPeriodeIndex: (index: number) => void;
+  setValgtPeriodeIndex: React.Dispatch<React.SetStateAction<number>>;
   erTilknyttetStortinget: boolean;
 }
 
@@ -157,8 +155,6 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
   oppdaterPeriode,
   isEdited,
   isReadOnly,
-  visForrigePeriode,
-  visNestePeriode,
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
   uttakStonadskontoer,
@@ -182,7 +178,7 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
     const periode2 = lagPeriode(valgtPeriode, dayjs(dato).add(1, 'days').format('YYYY-MM-DD'), valgtPeriode.tom);
     oppdaterPeriode([periode1, periode2]);
     toggleVisningAvModal();
-  }, [valgtPeriodeIndex, valgtPeriode]);
+  }, [valgtPeriodeIndex]);
 
   const lukkPeriode = useCallback(() => setValgtPeriodeIndex(undefined), []);
 
@@ -193,6 +189,13 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
   const erRevurderingFørEndringsdato = ytelsefordeling.endringsdato
     && behandling.type === BehandlingType.REVURDERING
     && valgtPeriode.tom < ytelsefordeling.endringsdato;
+
+  const visForrigePeriode = useCallback(() => {
+    setValgtPeriodeIndex((index) => (index === 0 ? index : index - 1));
+  }, []);
+  const visNestePeriode = useCallback(() => {
+    setValgtPeriodeIndex((index) => (index === allePerioder.length - 1 ? index : index + 1));
+  }, [allePerioder.length]);
 
   return (
     <div className={styles.panel}>

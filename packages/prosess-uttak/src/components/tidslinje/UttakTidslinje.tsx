@@ -17,7 +17,7 @@ import { PeriodeSoker } from '@fpsak-frontend/types';
 import styles from './uttakTidslinje.less';
 
 export interface EventProps {
-  items: string[] | number[];
+  items: number[];
   event: Event;
 }
 

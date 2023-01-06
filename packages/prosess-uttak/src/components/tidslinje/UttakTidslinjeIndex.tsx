@@ -256,7 +256,7 @@ const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
     false, uttakMedOpphold, perioderAnnenpart, intl, behandling.status, alleKodeverk, tilknyttetStortinget,
   );
 
-  const sorterteUttaksperioder = useMemo(() => (annenForelderPerioder.concat(hovedsøkerPerioder.map((p) => ({
+  const alleUttaksperioderMedId = useMemo(() => (annenForelderPerioder.concat(hovedsøkerPerioder.map((p) => ({
     ...p,
     id: p.id + annenForelderPerioder.length,
   })))), [hovedsøkerPerioder, annenForelderPerioder]);
@@ -269,17 +269,10 @@ const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
   const tidslinjeTider = useMemo(() => finnTidslinjeTider(behandling, søknad, familiehendelse, ytelsefordeling, personoversikt),
     [behandling, søknad, familiehendelse, ytelsefordeling, personoversikt]);
 
-  const velgPeriode = (eventPropsValue: EventProps) => {
-    const periodeIndex = sorterteUttaksperioder.findIndex((item) => item.id === eventPropsValue.items[0]);
-    const valgtPeriode = valgtPeriodeIndex !== undefined ? sorterteUttaksperioder[valgtPeriodeIndex] : undefined;
-
-    if (valgtPeriode?.periode.fom !== sorterteUttaksperioder[periodeIndex]?.periode.fom) {
-      setValgtPeriodeIndex(periodeIndex);
-    } else {
-      setValgtPeriodeIndex(undefined);
-    }
+  const velgPeriode = useCallback((eventPropsValue: EventProps) => {
+    setValgtPeriodeIndex(eventPropsValue.items[0]);
     eventPropsValue.event.preventDefault();
-  };
+  }, []);
 
   const åpneFørstePeriodeEllerLukk = useCallback(() => {
     setValgtPeriodeIndex((index) => (index === undefined ? 0 : undefined));
@@ -291,9 +284,9 @@ const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
       hovedsokerKjonnKode={personoversikt ? personoversikt.bruker.kjønn as Kjønnkode : undefined}
       medsokerKjonnKode={medsokerKjonnKode}
       openPeriodInfo={åpneFørstePeriodeEllerLukk}
-      selectedPeriod={valgtPeriodeIndex !== undefined ? sorterteUttaksperioder[valgtPeriodeIndex] : undefined}
+      selectedPeriod={valgtPeriodeIndex !== undefined ? alleUttaksperioderMedId[valgtPeriodeIndex] : undefined}
       selectPeriodCallback={velgPeriode}
-      uttakPerioder={sorterteUttaksperioder}
+      uttakPerioder={alleUttaksperioderMedId}
     >
       <UttakTidslinjeHjelpetekster />
     </UttakTidslinje>
