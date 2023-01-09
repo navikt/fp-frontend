@@ -29,6 +29,8 @@ const findKorrektLabelForKvote = (stonadtype: string): string => {
       return 'TimeLineTab.Stonadinfo.UtenAktivitetskrav';
     case stonadskontoType.MINSTERETT:
       return 'TimeLineTab.Stonadinfo.Minsterett';
+    case stonadskontoType.MINSTERETT_NESTE_STØNADSPERIODE:
+      return 'TimeLineTab.Stonadinfo.MinsterettNesteStønadsperiode';
     default:
       return 'TimeLineTab.Stonadinfo.Empty';
   }
