@@ -93,9 +93,9 @@ const SplittPeriodeModal: FunctionComponent<OwnProps> = ({
           <Form formMethods={formMethods} onSubmit={(values) => submit(values.dato)}>
             <FlexRow wrap className={styles.marginTop}>
               <FlexColumn>
-                <Detail size="small"><FormattedMessage id="DelOppPeriodeModalImpl.AngiTomDato" /></Detail>
                 <Datepicker
                   name="dato"
+                  label={<FormattedMessage id="DelOppPeriodeModalImpl.AngiTomDato" />}
                   validate={[required, hasValidDate, validerInnenforIntervall(fomDato, tomDato, intl)]}
                   defaultMonth={new Date(fomDato)}
                   disabledDays={{ fromDate: dayjs(fomDato).toDate(), toDate: dayjs(tomDato).toDate() }}

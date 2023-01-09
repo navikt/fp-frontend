@@ -12,6 +12,7 @@ import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import aksjonspunktType from '@fpsak-frontend/kodeverk/src/aksjonspunktType';
+import utsettelseArsakCodes from '@fpsak-frontend/kodeverk/src/utsettelseArsakCodes';
 
 const åpentAksjonspunkt = [{
   definisjon: AksjonspunktCode.FASTSETT_UTTAKPERIODER,
@@ -922,5 +923,135 @@ AksjonspunktForFar.args = {
     annenForelderHarRett: true,
     aleneomsorg: false,
     årsakFilter: { kreverSammenhengendeUttak: false, utenMinsterett: false, søkerErMor: false },
+  },
+};
+
+export const StønadskontoMedUgyldigForbruk = Template.bind({});
+StønadskontoMedUgyldigForbruk.args = {
+  aksjonspunkter: åpentAksjonspunkt,
+  stønadskontoer: {
+    ...uttakStonadskontoer,
+    stonadskontoer: {
+      ...uttakStonadskontoer.stonadskontoer,
+      MØDREKVOTE: {
+        ...uttakStonadskontoer.stonadskontoer.MØDREKVOTE,
+        gyldigForbruk: false,
+      },
+    },
+  },
+  uttaksresultatPerioder: {
+    perioderSøker: [{
+      fom: '2022-10-20',
+      tom: '2022-11-09',
+      aktiviteter: [{
+        stønadskontoType: 'MØDREKVOTE',
+        prosentArbeid: 0,
+        arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c2',
+        eksternArbeidsforholdId: 'ARB001-002',
+        arbeidsgiverReferanse: '994884174',
+        utbetalingsgrad: null,
+        uttakArbeidType: 'ORDINÆRT_ARBEID',
+        gradering: false,
+        trekkdagerDesimaler: 15.0,
+      }],
+      periodeResultatType: 'MANUELL_BEHANDLING',
+      begrunnelse: null,
+      periodeResultatÅrsak: '4002',
+      manuellBehandlingÅrsak: '5002',
+      graderingAvslagÅrsak: '-',
+      flerbarnsdager: false,
+      samtidigUttak: false,
+      samtidigUttaksprosent: null,
+      graderingInnvilget: false,
+      periodeType: 'FORELDREPENGER',
+      utsettelseType: '-',
+      oppholdÅrsak: '-',
+      mottattDato: '2023-01-05',
+      gradertAktivitet: null,
+    }],
+    perioderAnnenpart: [],
+    annenForelderHarRett: true,
+    aleneomsorg: false,
+    årsakFilter: { kreverSammenhengendeUttak: false, utenMinsterett: false, søkerErMor: true },
+  },
+};
+
+export const VisAdvarselNårProsentIArbeidTotaltErMindreEnn100Prosent = Template.bind({});
+VisAdvarselNårProsentIArbeidTotaltErMindreEnn100Prosent.args = {
+  aksjonspunkter: åpentAksjonspunkt,
+  uttaksresultatPerioder: {
+    perioderSøker: [{
+      fom: '2022-10-20',
+      tom: '2022-11-09',
+      aktiviteter: [{
+        stønadskontoType: 'MØDREKVOTE',
+        prosentArbeid: 0,
+        arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c2',
+        eksternArbeidsforholdId: 'ARB001-002',
+        arbeidsgiverReferanse: '994884174',
+        utbetalingsgrad: null,
+        uttakArbeidType: 'ORDINÆRT_ARBEID',
+        gradering: false,
+        trekkdagerDesimaler: 15.0,
+      }],
+      periodeResultatType: 'MANUELL_BEHANDLING',
+      begrunnelse: null,
+      periodeResultatÅrsak: '4002',
+      manuellBehandlingÅrsak: '5002',
+      graderingAvslagÅrsak: '-',
+      flerbarnsdager: false,
+      samtidigUttak: false,
+      samtidigUttaksprosent: null,
+      graderingInnvilget: false,
+      periodeType: 'FORELDREPENGER',
+      utsettelseType: utsettelseArsakCodes.ARBEID,
+      oppholdÅrsak: '-',
+      mottattDato: '2023-01-05',
+      gradertAktivitet: null,
+    }],
+    perioderAnnenpart: [],
+    annenForelderHarRett: true,
+    aleneomsorg: false,
+    årsakFilter: { kreverSammenhengendeUttak: false, utenMinsterett: false, søkerErMor: true },
+  },
+};
+
+export const VisAdvarselNårUtbetalingsgradOgProsentArbeidOverstiger100Prosent = Template.bind({});
+VisAdvarselNårUtbetalingsgradOgProsentArbeidOverstiger100Prosent.args = {
+  aksjonspunkter: åpentAksjonspunkt,
+  uttaksresultatPerioder: {
+    perioderSøker: [{
+      fom: '2022-10-20',
+      tom: '2022-11-09',
+      aktiviteter: [{
+        stønadskontoType: 'MØDREKVOTE',
+        prosentArbeid: 51,
+        arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c2',
+        eksternArbeidsforholdId: 'ARB001-002',
+        arbeidsgiverReferanse: '994884174',
+        utbetalingsgrad: 50,
+        uttakArbeidType: 'ORDINÆRT_ARBEID',
+        gradering: false,
+        trekkdagerDesimaler: 15.0,
+      }],
+      periodeResultatType: 'MANUELL_BEHANDLING',
+      begrunnelse: null,
+      periodeResultatÅrsak: '4002',
+      manuellBehandlingÅrsak: '5002',
+      graderingAvslagÅrsak: '-',
+      flerbarnsdager: false,
+      samtidigUttak: false,
+      samtidigUttaksprosent: null,
+      graderingInnvilget: false,
+      periodeType: 'FORELDREPENGER',
+      utsettelseType: utsettelseArsakCodes.ARBEID,
+      oppholdÅrsak: '-',
+      mottattDato: '2023-01-05',
+      gradertAktivitet: null,
+    }],
+    perioderAnnenpart: [],
+    annenForelderHarRett: true,
+    aleneomsorg: false,
+    årsakFilter: { kreverSammenhengendeUttak: false, utenMinsterett: false, søkerErMor: true },
   },
 };

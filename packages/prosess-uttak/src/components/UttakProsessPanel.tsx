@@ -312,7 +312,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
           {feilmeldinger.length > 0 && (
             <>
               {feilmeldinger.map((fm) => (
-                <Alert size="small" variant="error">
+                <Alert size="small" variant="error" key={fm}>
                   {fm}
                 </Alert>
               ))}
