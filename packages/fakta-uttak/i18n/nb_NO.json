@@ -11,7 +11,7 @@
 
   "UttakFaktaTable.Periode": "Periode",
   "UttakFaktaTable.AntallDager": "Antall dager",
-  "UttakFaktaTable.Stonadskonto": "Stønadskonto",
+  "UttakFaktaTable.Type": "Type",
   "UttakFaktaTable.Kilde": "Kilde",
   "UttakFaktaTable.AntallEnDagOgEnUke": "{weeks} uke {days} dag",
   "UttakFaktaTable.AntallEnDagOgFlereUker": "{weeks} uker {days} dag",
@@ -22,6 +22,8 @@
   "UttakFaktaTable.AntallNullDagerOgFlereUker": "{weeks} uker",
   "UttakFaktaTable.AntallNullDagerOgEnUke": "{weeks} uke",
   "UttakFaktaTable.TidenesEnde": "Antall uker og dager -",
+  "UttakFaktaTabel.Utsettelse": "Utsettelse - {arsak}",
+  "UttakFaktaTabel.Opphold": "Opphold - {arsak}",
 
   "UttakFaktaDetailForm.Fom": "Periode fra",
   "UttakFaktaDetailForm.Tom": "Periode til",
@@ -44,5 +46,8 @@
   "UttakFaktaDetailForm.ErTidligereEnnForsteUttaksdato": "Dato kan ikke være før første uttaksdato",
   "UttakFaktaDetailForm.ErIkkeLikForsteUttaksdato": "Dato må være lik første uttaksdato",
   "UttakFaktaDetailForm.TomForFom": "Dato kan ikke være før fra",
+  "UttakFaktaDetailForm.HarFlerbarnsdager": "Har flerbarnsdager",
+  "UttakFaktaDetailForm.Ja": "Ja",
+  "UttakFaktaDetailForm.Nei": "Nei",
   "UttakFaktaDetailForm.UkjentArbeidsgiver": "Arbeidsgiver oppgitt for perioden er ukjent. Referanse: {aRef}"
 }
