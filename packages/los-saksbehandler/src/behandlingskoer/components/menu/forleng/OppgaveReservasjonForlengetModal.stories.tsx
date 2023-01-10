@@ -42,7 +42,6 @@ export const Default = () => (
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
       erTilSaksbehandling: true,
       behandlingId: '1',
-      href: '',
     }}
     closeModal={action('button-click')}
   />

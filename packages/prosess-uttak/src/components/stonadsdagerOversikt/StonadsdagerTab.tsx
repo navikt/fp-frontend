@@ -15,11 +15,11 @@ const finnKorrektLabelForKvote = (stonadtype: string): string => {
   switch (stonadtype) {
     case stonadskontoType.FEDREKVOTE:
       return 'TimeLineTab.Stonadinfo.Fedrekvote';
-    case stonadskontoType.MODREKVOTE:
+    case stonadskontoType.MØDREKVOTE:
       return 'TimeLineTab.Stonadinfo.Modrekvote';
     case stonadskontoType.FELLESPERIODE:
       return 'TimeLineTab.Stonadinfo.Fellesperiode';
-    case stonadskontoType.FORELDREPENGER_FOR_FODSEL:
+    case stonadskontoType.FORELDREPENGER_FØR_FØDSEL:
       return 'TimeLineTab.Stonadinfo.ForeldrepengerFF';
     case stonadskontoType.FLERBARNSDAGER:
       return 'TimeLineTab.Stonadinfo.Flerbarnsdager';

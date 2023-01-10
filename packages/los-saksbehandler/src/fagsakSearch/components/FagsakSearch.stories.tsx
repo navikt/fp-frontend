@@ -81,7 +81,6 @@ Default.args = {
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     erTilSaksbehandling: true,
     behandlingId: '12344',
-    href: '',
   }, {
     id: 2,
     status: {
@@ -98,7 +97,6 @@ Default.args = {
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     erTilSaksbehandling: true,
     behandlingId: '12344',
-    href: '',
   }],
 };
 

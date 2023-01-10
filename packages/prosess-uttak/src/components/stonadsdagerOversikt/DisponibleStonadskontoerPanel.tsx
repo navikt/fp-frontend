@@ -25,9 +25,9 @@ const HEADER_TEXT_CODES = [
 ];
 
 const STØNADSKONTOER_SORTERINGSREKKEFØLGE = {
-  [stonadskontoType.FORELDREPENGER_FOR_FODSEL]: 0,
+  [stonadskontoType.FORELDREPENGER_FØR_FØDSEL]: 0,
   [stonadskontoType.FELLESPERIODE]: 1,
-  [stonadskontoType.MODREKVOTE]: 2,
+  [stonadskontoType.MØDREKVOTE]: 2,
   [stonadskontoType.FEDREKVOTE]: 3,
   [stonadskontoType.FORELDREPENGER]: 4,
   [stonadskontoType.UTEN_AKTIVITETSKRAV]: 5,
