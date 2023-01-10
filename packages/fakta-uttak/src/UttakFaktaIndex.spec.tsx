@@ -61,7 +61,7 @@ describe('<UttakFaktaIndex>', () => {
         fom: '2022-11-12',
         tom: '2022-12-01',
         originalFom: '2022-11-12',
-        periodeKilde: 'SØKNAD',
+        periodeKilde: 'SAKSBEHANDLER',
         samtidigUttaksprosent: '10',
         uttakPeriodeType: 'MØDREKVOTE',
         aksjonspunktType: undefined,
@@ -105,7 +105,7 @@ describe('<UttakFaktaIndex>', () => {
         fom: '2022-01-31',
         tom: '2022-12-01',
         originalFom: '2022-11-12',
-        periodeKilde: 'SØKNAD',
+        periodeKilde: 'SAKSBEHANDLER',
         samtidigUttaksprosent: 80,
         uttakPeriodeType: 'MØDREKVOTE',
         arbeidsforhold: {
@@ -182,7 +182,7 @@ describe('<UttakFaktaIndex>', () => {
       perioder: [{
         fom: '2022-12-12',
         tom: '2022-12-14',
-        periodeKilde: 'SØKNAD',
+        periodeKilde: 'SAKSBEHANDLER',
         aksjonspunktType: undefined,
         arbeidsforhold: undefined,
         morsAktivitet: undefined,
@@ -220,7 +220,7 @@ describe('<UttakFaktaIndex>', () => {
         fom: '2022-11-12',
         tom: '2022-12-01',
         originalFom: '2022-11-12',
-        periodeKilde: 'SØKNAD',
+        periodeKilde: 'SAKSBEHANDLER',
         samtidigUttaksprosent: undefined,
         uttakPeriodeType: 'MØDREKVOTE',
         arbeidsforhold: {
