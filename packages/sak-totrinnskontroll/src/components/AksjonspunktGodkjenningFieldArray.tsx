@@ -28,7 +28,6 @@ type OwnProps = {
   behandling: BehandlingAppKontekst;
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   readOnly: boolean;
-  showBegrunnelse?: boolean;
   erForeldrepengerFagsak: boolean;
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],
   erTilbakekreving: boolean,
@@ -41,7 +40,6 @@ const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
   behandling,
   totrinnskontrollSkjermlenkeContext,
   readOnly,
-  showBegrunnelse = false,
   erForeldrepengerFagsak,
   arbeidsforholdHandlingTyper,
   erTilbakekreving,
@@ -95,10 +93,8 @@ const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
             )}
             <GodkjenningPanel
               index={index}
-              behandling={behandling}
               totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
               readOnly={readOnly}
-              showBegrunnelse={showBegrunnelse}
             />
             <div className={styles.approvalItemContainer}>
               {aksjonspunktText.map((formattedMessage, i) => (
