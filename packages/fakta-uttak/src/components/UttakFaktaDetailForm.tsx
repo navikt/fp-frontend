@@ -12,7 +12,9 @@ import {
   FlexColumn, FlexContainer, FlexRow, OkAvbrytModal, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { Delete } from '@navikt/ds-icons';
-import { Alert, Button } from '@navikt/ds-react';
+import {
+  Alert, BodyShort, Button, Label,
+} from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT, guid, omitMany } from '@navikt/ft-utils';
 
 import {
@@ -32,7 +34,7 @@ type FormValues = KontrollerFaktaPeriodeMedApMarkering & {
   arbeidsgiverId: string;
 };
 
-enum Årsakstype {
+export enum Årsakstype {
   UTTAK = 'UTTAK',
   OVERFØRING = 'OVERFØRING',
   UTSETTELSE = 'UTSETTELSE',
@@ -89,7 +91,7 @@ const mapArbeidsforhold = (
   );
 });
 
-const utledÅrsakstype = (valgtPeriode: KontrollerFaktaPeriodeMedApMarkering): Årsakstype => {
+export const utledÅrsakstype = (valgtPeriode: KontrollerFaktaPeriodeMedApMarkering): Årsakstype => {
   if (valgtPeriode.utsettelseÅrsak) {
     return Årsakstype.UTSETTELSE;
   }
@@ -120,13 +122,15 @@ const lagDefaultVerdier = (
   };
 };
 
-const transformValues = (values: FormValues): KontrollerFaktaPeriodeMedApMarkering => ({
+const transformValues = (
+  values: FormValues,
+): KontrollerFaktaPeriodeMedApMarkering => ({
   ...omitMany(values, ['arsakstype', 'arbeidsgiverId']),
   arbeidsforhold: values.arbeidsgiverId ? {
     arbeidsgiverReferanse: values.arbeidsgiverId.split('-')[0],
     arbeidType: values.arbeidsgiverId.split('-')[1],
   } : undefined,
-  periodeKilde: FordelingPeriodeKilde.SØKNAD,
+  periodeKilde: FordelingPeriodeKilde.SAKSBEHANDLER,
   aksjonspunktType: undefined,
 });
 
@@ -198,6 +202,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
   const sorterteMorsAktiviteter = useMemo(() => [...alleKodeverk[KodeverkType.MORS_AKTIVITET]].sort((k1, k2) => k1.navn.localeCompare(k2.navn)), []);
 
   const årsakstype = formMethods.watch('arsakstype');
+  const flerbarnsdager = formMethods.watch('flerbarnsdager');
 
   useEffect(() => {
     if (årsakstype !== Årsakstype.OVERFØRING) {
@@ -214,6 +219,8 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
   const aRef = valgtPeriode?.arbeidsforhold?.arbeidsgiverReferanse;
   const arbeidsgiverFinnesIkke = (aRef && !arbeidsgiverOpplysningerPerId[aRef]);
 
+  const onSubmit = useCallback((values) => oppdaterPeriode(transformValues(values)), [oppdaterPeriode]);
+
   return (
     <>
       {visSletteDialog && (
@@ -226,7 +233,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
       )}
       <Form
         formMethods={formMethods}
-        onSubmit={(values) => oppdaterPeriode(transformValues(values))}
+        onSubmit={onSubmit}
       >
         <FlexContainer>
           <FlexRow>
@@ -265,68 +272,82 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
           <FlexRow>
             <FlexColumn>
-              <RadioGroupPanel
-                name="arsakstype"
-                label={<FormattedMessage id="UttakFaktaDetailForm.Periodetype" />}
-                validate={[required]}
-                isReadOnly={readOnly}
-                isHorizontal
-                radios={Object.keys(Årsakstype).map((type) => ({
-                  value: type,
-                  label: intl.formatMessage({ id: ÅRSAKSTYPE_TEKST_KODER[type] }),
-                }))}
-              />
+              {readOnly && (
+                <>
+                  <Label size="small"><FormattedMessage id="UttakFaktaDetailForm.Periodetype" /></Label>
+                  <BodyShort size="small"><FormattedMessage id={ÅRSAKSTYPE_TEKST_KODER[årsakstype]} /></BodyShort>
+                </>
+              )}
+              {!readOnly && (
+                <RadioGroupPanel
+                  name="arsakstype"
+                  label={<FormattedMessage id="UttakFaktaDetailForm.Periodetype" />}
+                  validate={[required]}
+                  isReadOnly={readOnly}
+                  isHorizontal
+                  radios={Object.keys(Årsakstype).map((type) => ({
+                    value: type,
+                    label: intl.formatMessage({ id: ÅRSAKSTYPE_TEKST_KODER[type] }),
+                  }))}
+                />
+              )}
             </FlexColumn>
           </FlexRow>
-          <VerticalSpacer sixteenPx />
           {(årsakstype === Årsakstype.UTTAK || årsakstype === Årsakstype.OVERFØRING) && (
-            <FlexRow>
-              <FlexColumn>
-                <SelectField
-                  name="uttakPeriodeType"
-                  label={<FormattedMessage id="UttakFaktaDetailForm.Stonadskonto" />}
-                  validate={[required]}
-                  selectValues={sorterteUttakPeriodeTyper.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
-                  readOnly={readOnly}
-                />
-              </FlexColumn>
-            </FlexRow>
+            <>
+              <VerticalSpacer sixteenPx />
+              <FlexRow>
+                <FlexColumn>
+                  <SelectField
+                    name="uttakPeriodeType"
+                    label={<FormattedMessage id="UttakFaktaDetailForm.Stonadskonto" />}
+                    validate={[required]}
+                    selectValues={sorterteUttakPeriodeTyper.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
+                    readOnly={readOnly}
+                  />
+                </FlexColumn>
+              </FlexRow>
+            </>
           )}
-          <VerticalSpacer sixteenPx />
-          <FlexRow>
-            <FlexColumn>
-              {årsakstype === Årsakstype.UTSETTELSE && (
-                <SelectField
-                  name="utsettelseÅrsak"
-                  label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
-                  validate={[required]}
-                  className={styles.selectArsak}
-                  selectValues={sorterteUtsettelseÅrsaker.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
-                  readOnly={readOnly}
-                />
-              )}
-              {årsakstype === Årsakstype.OVERFØRING && (
-                <SelectField
-                  name="overføringÅrsak"
-                  label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
-                  validate={[required]}
-                  className={styles.selectArsak}
-                  selectValues={sorterteOverføringÅrsaker.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
-                  readOnly={readOnly}
-                />
-              )}
-              {årsakstype === Årsakstype.OPPHOLD && (
-                <SelectField
-                  name="oppholdÅrsak"
-                  label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
-                  validate={[required]}
-                  className={styles.selectArsak}
-                  selectValues={sorterteOppholdÅrsaker.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
-                  readOnly={readOnly}
-                />
-              )}
-            </FlexColumn>
-          </FlexRow>
+          {årsakstype !== Årsakstype.UTTAK && (
+            <>
+              <VerticalSpacer sixteenPx />
+              <FlexRow>
+                <FlexColumn>
+                  {årsakstype === Årsakstype.UTSETTELSE && (
+                    <SelectField
+                      name="utsettelseÅrsak"
+                      label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
+                      validate={[required]}
+                      className={styles.selectArsak}
+                      selectValues={sorterteUtsettelseÅrsaker.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
+                      readOnly={readOnly}
+                    />
+                  )}
+                  {årsakstype === Årsakstype.OVERFØRING && (
+                    <SelectField
+                      name="overføringÅrsak"
+                      label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
+                      validate={[required]}
+                      className={styles.selectArsak}
+                      selectValues={sorterteOverføringÅrsaker.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
+                      readOnly={readOnly}
+                    />
+                  )}
+                  {årsakstype === Årsakstype.OPPHOLD && (
+                    <SelectField
+                      name="oppholdÅrsak"
+                      label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
+                      validate={[required]}
+                      className={styles.selectArsak}
+                      selectValues={sorterteOppholdÅrsaker.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
+                      readOnly={readOnly}
+                    />
+                  )}
+                </FlexColumn>
+              </FlexRow>
+            </>
+          )}
           {årsakstype === Årsakstype.UTTAK && (
             <>
               <VerticalSpacer sixteenPx />
@@ -348,7 +369,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                     readOnly={readOnly}
                   />
                 </FlexColumn>
-                <FlexColumn>
+                <FlexColumn className={styles.marginGradering}>
                   <SelectField
                     name="arbeidsgiverId"
                     label={<FormattedMessage id="UttakFaktaDetailForm.Arbeidsgiver" />}
@@ -357,7 +378,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                     readOnly={readOnly}
                   />
                 </FlexColumn>
-                <FlexColumn>
+                <FlexColumn className={styles.marginGradering}>
                   <NumberField
                     name="samtidigUttaksprosent"
                     label={<FormattedMessage id="UttakFaktaDetailForm.SamtidigUttaksprosent" />}
@@ -389,11 +410,20 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
               <VerticalSpacer sixteenPx />
               <FlexRow>
                 <FlexColumn>
-                  <CheckboxField
-                    name="flerbarnsdager"
-                    readOnly={readOnly}
-                    label={<FormattedMessage id="UttakFaktaDetailForm.Flerbarnsdager" />}
-                  />
+                  {readOnly && (
+                    <>
+                      <Label size="small"><FormattedMessage id="UttakFaktaDetailForm.HarFlerbarnsdager" /></Label>
+                      <BodyShort size="small">
+                        <FormattedMessage id={flerbarnsdager === true ? 'UttakFaktaDetailForm.Ja' : 'UttakFaktaDetailForm.Nei'} />
+                      </BodyShort>
+                    </>
+                  )}
+                  {!readOnly && (
+                    <CheckboxField
+                      name="flerbarnsdager"
+                      label={<FormattedMessage id="UttakFaktaDetailForm.Flerbarnsdager" />}
+                    />
+                  )}
                 </FlexColumn>
               </FlexRow>
             </>
