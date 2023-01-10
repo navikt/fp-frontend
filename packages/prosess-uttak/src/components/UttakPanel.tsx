@@ -28,6 +28,7 @@ const hentApTekst = (uttaksresultat: UttaksresultatPeriode, isApOpen: boolean, a
     && ap.definisjon !== AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER);
 
   const uttakPanelAksjonsPunktKoder = {
+    5067: 'UttakPanel.Aksjonspunkt.5067',
     5069: 'UttakPanel.Aksjonspunkt.5069',
     5072: 'UttakPanel.Aksjonspunkt.5072',
     5073: 'UttakPanel.Aksjonspunkt.5073',
@@ -397,6 +398,7 @@ export const transformValues = (values: FormValues, apCodes: string[], aksjonspu
       AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER,
       AksjonspunktCode.TILKNYTTET_STORTINGET,
       AksjonspunktCode.ANNENPART_EØS,
+      AksjonspunktCode.TETTE_SAKER,
       AksjonspunktCode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE,
       AksjonspunktCode.KONTROLLER_OPPLYSNINGER_OM_FORDELING_AV_STØNADSPERIODEN,
       AksjonspunktCode.KONTROLLER_OPPLYSNINGER_OM_DØD,
