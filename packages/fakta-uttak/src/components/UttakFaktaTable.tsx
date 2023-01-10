@@ -1,7 +1,7 @@
 import React, {
   useCallback, FunctionComponent, useState,
 } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import {
   Table, ExpandableTableRow, TableColumn, TableRow, VerticalSpacer,
@@ -13,7 +13,7 @@ import { AddCircle } from '@navikt/ds-icons';
 import { AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold } from '@fpsak-frontend/types';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
-import UttakFaktaDetailForm from './UttakFaktaDetailForm';
+import UttakFaktaDetailForm, { utledÅrsakstype, Årsakstype } from './UttakFaktaDetailForm';
 import KontrollerFaktaPeriodeMedApMarkering from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 
 import styles from './uttakFaktaTable.less';
@@ -21,7 +21,7 @@ import styles from './uttakFaktaTable.less';
 const HEADER_TEXT_CODES = [
   'UttakFaktaTable.Periode',
   'UttakFaktaTable.AntallDager',
-  'UttakFaktaTable.Stonadskonto',
+  'UttakFaktaTable.Type',
   'UttakFaktaTable.Kilde',
   'EMPTY',
 ];
@@ -54,6 +54,27 @@ const getUttakPeriode = (
   ? alleKodeverk[KodeverkType.OPPHOLD_ARSAK].find((k) => k.kode === KodeverkType.MORS_AKTIVITET)?.navn
   : alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE].find((k) => k.kode === uttakPeriodeType)?.navn);
 
+const getTypeTekst = (
+  alleKodeverk: AlleKodeverk,
+  periode: KontrollerFaktaPeriodeMedApMarkering,
+  intl: IntlShape,
+): string => {
+  const årsaktype = utledÅrsakstype(periode);
+  if (årsaktype === Årsakstype.UTTAK) {
+    const tekst = getUttakPeriode(alleKodeverk, periode.uttakPeriodeType, periode.oppholdÅrsak);
+    return periode.arbeidstidsprosent > 0 ? `${tekst} - Gradert ${periode.arbeidstidsprosent}%` : tekst;
+  }
+  if (årsaktype === Årsakstype.OPPHOLD) {
+    const navn = alleKodeverk[KodeverkType.OPPHOLD_ARSAK].find((k) => k.kode === periode.oppholdÅrsak)?.navn;
+    return intl.formatMessage({ id: 'UttakFaktaTabel.Opphold' }, { arsak: navn.replace('har uttak av', '') });
+  }
+  if (årsaktype === Årsakstype.UTSETTELSE) {
+    const navn = alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE].find((k) => k.kode === periode.utsettelseÅrsak)?.navn;
+    return intl.formatMessage({ id: 'UttakFaktaTabel.Utsettelse' }, { arsak: navn });
+  }
+  return '';
+};
+
 interface OwnProps {
   uttakKontrollerFaktaPerioder: KontrollerFaktaPeriodeMedApMarkering[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -77,6 +98,8 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
   erRedigerbart,
   førsteUttaksdato,
 }) => {
+  const intl = useIntl();
+
   const [valgteFomDatoer, setValgteFomDatoer] = useState<string[]>([]);
 
   const velgPeriodeFomDato = useCallback((fom?: string, lukkAlleAndre = false) => {
@@ -133,7 +156,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
                   }}
                 />
               </TableColumn>
-              <TableColumn>{getUttakPeriode(alleKodeverk, periode.uttakPeriodeType, periode.oppholdÅrsak)}</TableColumn>
+              <TableColumn>{getTypeTekst(alleKodeverk, periode, intl)}</TableColumn>
               <TableColumn>
                 {alleKodeverk[KodeverkType.FORDELING_PERIODE_KILDE].find((k) => k.kode === periode.periodeKilde)?.navn}
               </TableColumn>
