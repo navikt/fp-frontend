@@ -112,7 +112,7 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
 
   const formMethods = useForm<{ begrunnelse: string }>({
     defaultValues: {
-      begrunnelse: formData?.begrunnelse,
+      begrunnelse: formData?.begrunnelse || (aksjonspunkter.length > 0 ? aksjonspunkter[0].begrunnelse : undefined),
     },
   });
 
@@ -140,7 +140,7 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
       begrunnelse,
     }));
 
-    submitCallback(aksjonspunkterSomSkalBekreftes.length > 0 ? aksjonspunkterSomSkalBekreftes : overstyrAp);
+    return submitCallback(aksjonspunkterSomSkalBekreftes.length > 0 ? aksjonspunkterSomSkalBekreftes : overstyrAp);
   }, [uttakPerioder]);
 
   const [harOverlappendePerioder, setOverlappendePerioder] = useState(false);
@@ -166,7 +166,7 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
   const harApneAksjonspunkter = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status));
   const aksjonspunktTekster = useMemo(() => finnAksjonspunktTekster(aksjonspunkter, ytelsefordeling), [aksjonspunkter, ytelsefordeling]);
 
-  const erRedigerbart = aksjonspunkter.length > 0 || erOverstyrt;
+  const erRedigerbart = aksjonspunkter.filter((a) => a.definisjon !== AksjonspunktKode.OVERSTYR_FAKTA_UTTAK).length > 0 || erOverstyrt;
 
   return (
     <>
@@ -219,16 +219,16 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
         førsteUttaksdato={ytelsefordeling.førsteUttaksdato}
       />
       <VerticalSpacer sixteenPx />
-      {erRedigerbart && (
-        <>
-          <VerticalSpacer sixteenPx />
-          <Form formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
-            <FaktaBegrunnelseTextFieldNew
-              name="begrunnelse"
-              isSubmittable
-              isReadOnly={readOnly}
-              hasBegrunnelse
-            />
+      <VerticalSpacer sixteenPx />
+      <Form formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
+        <FaktaBegrunnelseTextFieldNew
+          name="begrunnelse"
+          isSubmittable
+          isReadOnly={!erRedigerbart}
+          hasBegrunnelse
+        />
+        {erRedigerbart && (
+          <>
             <VerticalSpacer twentyPx />
             <FaktaSubmitButtonNew
               isSubmittable={isSubmittable}
@@ -236,9 +236,9 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
               isSubmitting={formMethods.formState.isSubmitting}
               isDirty={isDirty || formMethods.formState.isDirty}
             />
-          </Form>
-        </>
-      )}
+          </>
+        )}
+      </Form>
     </>
   );
 };
