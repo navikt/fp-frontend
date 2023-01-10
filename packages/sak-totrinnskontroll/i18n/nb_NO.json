@@ -82,6 +82,7 @@
   "ToTrinnsForm.Uttak.Soknadsfrist": "Opplysninger om søknadsfrist er kontrollert.",
   "ToTrinnsForm.Uttak.Klage": "Opplysninger om realitetsbehandling/klage er kontrollert.",
   "ToTrinnsForm.Uttak.AnnenpartEØS": "Opplysninger om annen forelders uttak EØS er kontrollert.",
+  "ToTrinnsForm.Uttak.TetteStønadsperioder": "Opplysninger om uttak etter start neste stønadsperiode er kontrollert",
   "ToTrinnsForm.Uttak.FordelingStonadsperioder": "Opplysninger om fordeling av stønadsperioden er kontrollert.",
   "ToTrinnsForm.Uttak.TilstotendeYtelser.Innvilget": "Opplysninger om tilstøtende ytelser innvilget er kontrollert.",
   "ToTrinnsForm.Uttak.TilstotendeYtelser.Opphort": "Opplysninger om tilstøtende ytelser opphørt er kontrollert.",

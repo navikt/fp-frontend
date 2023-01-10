@@ -57,6 +57,7 @@ const totrinnskontrollaksjonspunktTextCodes = {
   [aksjonspunktCodes.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST]: 'ToTrinnsForm.Uttak.Soknadsfrist',
   [aksjonspunktCodes.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE]: 'ToTrinnsForm.Uttak.Klage',
   [aksjonspunktCodes.ANNENPART_EØS]: 'ToTrinnsForm.Uttak.AnnenpartEØS',
+  [aksjonspunktCodes.TETTE_SAKER]: 'ToTrinnsForm.Uttak.TetteStønadsperioder',
   [aksjonspunktCodes.KONTROLLER_OPPLYSNINGER_OM_FORDELING_AV_STØNADSPERIODEN]:
     'ToTrinnsForm.Uttak.FordelingStonadsperioder',
   [aksjonspunktCodes.KONTROLLER_TILSTØTENDE_YTELSER_INNVILGET]: 'ToTrinnsForm.Uttak.TilstotendeYtelser.Innvilget',
