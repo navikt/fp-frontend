@@ -12,6 +12,8 @@ import editUtlandIcon from '@fpsak-frontend/assets/images/endre.svg';
 import editUtlandDisabledIcon from '@fpsak-frontend/assets/images/endre_disablet.svg';
 import { RadioGroupPanel, Form } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
+import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
+
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import { OverstyringUtenlandssakMarkeringAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
@@ -26,11 +28,12 @@ const {
 } = aksjonspunktCodes;
 
 const getUtlandSakstype = (aksjonspunkter: Aksjonspunkt[]): string => {
+  const ap = aksjonspunkter.find((a) => a.definisjon === MANUELL_MARKERING_AV_UTLAND_SAKSTYPE);
+  if (ap?.status === AksjonspunktStatus.UTFORT && ap?.begrunnelse) {
+    return ap.begrunnelse;
+  }
   if (hasAksjonspunkt(AUTOMATISK_MARKERING_AV_UTENLANDSSAK, aksjonspunkter)) {
     return UtlandSakstypeKode.EØS_BOSATT_NORGE;
-  }
-  if (hasAksjonspunkt(MANUELL_MARKERING_AV_UTLAND_SAKSTYPE, aksjonspunkter)) {
-    return aksjonspunkter.find((ap) => ap.definisjon === MANUELL_MARKERING_AV_UTLAND_SAKSTYPE).begrunnelse;
   }
   return UtlandSakstypeKode.NASJONAL;
 };
