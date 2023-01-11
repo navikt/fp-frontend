@@ -46,22 +46,14 @@ const getTextId = (weeks?: number, days?: number): string => {
   return id;
 };
 
-const getUttakPeriode = (
-  alleKodeverk: AlleKodeverk,
-  uttakPeriodeType: string,
-  oppholdArsak?: string,
-): string => (oppholdArsak
-  ? alleKodeverk[KodeverkType.OPPHOLD_ARSAK].find((k) => k.kode === KodeverkType.MORS_AKTIVITET)?.navn
-  : alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE].find((k) => k.kode === uttakPeriodeType)?.navn);
-
 const getTypeTekst = (
   alleKodeverk: AlleKodeverk,
   periode: KontrollerFaktaPeriodeMedApMarkering,
   intl: IntlShape,
 ): string => {
   const årsaktype = utledÅrsakstype(periode);
-  if (årsaktype === Årsakstype.UTTAK) {
-    const tekst = getUttakPeriode(alleKodeverk, periode.uttakPeriodeType, periode.oppholdÅrsak);
+  if (årsaktype === Årsakstype.UTTAK || årsaktype === Årsakstype.OVERFØRING) {
+    const tekst = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE].find((k) => k.kode === periode.uttakPeriodeType)?.navn;
     return periode.arbeidstidsprosent > 0 ? `${tekst} - Gradert ${periode.arbeidstidsprosent}%` : tekst;
   }
   if (årsaktype === Årsakstype.OPPHOLD) {
