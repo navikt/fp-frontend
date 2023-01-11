@@ -5,11 +5,11 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@sentry/browser": "7.24.2",
-    "axios": "1.2.1"
+    "@sentry/browser": "7.30.0",
+    "axios": "1.2.2"
   },
   "devDependencies": {
     "axios-mock-adapter": "1.21.2",
-    "sinon": "15.0.0"
+    "sinon": "15.0.1"
   }
 }
