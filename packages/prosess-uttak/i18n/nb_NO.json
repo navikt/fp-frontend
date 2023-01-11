@@ -50,6 +50,7 @@
   "TimeLineTab.Stonadinfo.ForeldrepengerFF": "Før fødsel",
   "TimeLineTab.Stonadinfo.UtenAktivitetskrav": "Uten aktivitetskrav",
   "TimeLineTab.Stonadinfo.Minsterett": "Minsterett ({uker}u)",
+  "TimeLineTab.Stonadinfo.MinsterettNesteStønadsperiode": "Gjenværende rett ({uker}u)",
   "TimeLineTab.Stonadinfo.Fellesperiode": "Fellesperiode",
   "TimeLineTab.Stonadinfo.Modrekvote": "Mødrekvote",
   "TimeLineTab.Stonadinfo.Fedrekvote": "Fedrekvote",

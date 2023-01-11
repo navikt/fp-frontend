@@ -234,6 +234,8 @@ const getGjeldendeStønadskonto = (stonadskontoTypeKode: string, stonadskontoer:
       return stonadskontoer.FEDREKVOTE;
     case stonadskontoType.UTEN_AKTIVITETSKRAV:
       return stonadskontoer.UTEN_AKTIVITETSKRAV;
+    case stonadskontoType.MINSTERETT_NESTE_STØNADSPERIODE:
+      return stonadskontoer.MINSTERETT_NESTE_STØNADSPERIODE;
     case stonadskontoType.MINSTERETT:
       return stonadskontoer.MINSTERETT;
     default:
