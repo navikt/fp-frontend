@@ -205,15 +205,16 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
   const flerbarnsdager = formMethods.watch('flerbarnsdager');
 
   useEffect(() => {
-    if (årsakstype !== Årsakstype.OVERFØRING) {
-      formMethods.unregister('overføringÅrsak');
-    }
-    if (årsakstype !== Årsakstype.OPPHOLD) {
-      formMethods.unregister('oppholdÅrsak');
-    }
-    if (årsakstype !== Årsakstype.UTSETTELSE) {
-      formMethods.unregister('utsettelseÅrsak');
-    }
+    formMethods.unregister('uttakPeriodeType');
+    formMethods.unregister('overføringÅrsak');
+    formMethods.unregister('oppholdÅrsak');
+    formMethods.unregister('utsettelseÅrsak');
+    formMethods.unregister('arbeidstidsprosent');
+    formMethods.unregister('utsettelseÅrsak');
+    formMethods.unregister('arbeidsgiverId');
+    formMethods.unregister('samtidigUttaksprosent');
+    formMethods.unregister('morsAktivitet');
+    formMethods.unregister('flerbarnsdager');
   }, [årsakstype]);
 
   const aRef = valgtPeriode?.arbeidsforhold?.arbeidsgiverReferanse;
