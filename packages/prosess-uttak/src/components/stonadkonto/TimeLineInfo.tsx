@@ -25,7 +25,8 @@ const headerTextCodes = [
 const findTilgjengeligeUker = (stonadskontoer: UttakStonadskontoer['stonadskontoer']): number => {
   let sumDager = 0;
   Object.keys(stonadskontoer).forEach((key) => {
-    if (key !== stonadskontoType.FLERBARNSDAGER && key !== stonadskontoType.UTEN_AKTIVITETSKRAV && key !== stonadskontoType.MINSTERETT) {
+    if (key !== stonadskontoType.FLERBARNSDAGER && key !== stonadskontoType.UTEN_AKTIVITETSKRAV
+      && key !== stonadskontoType.MINSTERETT && key !== stonadskontoType.MINSTERETT_NESTE_STØNADSPERIODE) {
       sumDager += stonadskontoer[key].maxDager ? stonadskontoer[key].maxDager : 0;
     }
   });
@@ -117,6 +118,7 @@ class TimeLineInfo extends Component<OwnProps, OwnState> {
       stonadskontoType.FORELDREPENGER,
       stonadskontoType.UTEN_AKTIVITETSKRAV,
       stonadskontoType.MINSTERETT,
+      stonadskontoType.MINSTERETT_NESTE_STØNADSPERIODE,
       stonadskontoType.FLERBARNSDAGER];
 
     const stonadArray = Object.keys(stonadskonto).map((key): CustomStonadskonto => ({
