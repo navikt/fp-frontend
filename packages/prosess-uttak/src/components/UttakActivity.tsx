@@ -11,20 +11,14 @@ import {
   RadioGroupField, RadioOption, SelectField, TextAreaField,
 } from '@fpsak-frontend/form';
 import {
-  merEn100ProsentMessage,
-  arbeidsprosentMåVare100VidUtsettelseAvArbeidMessage,
   hasValidText,
-  isTrekkdagerMerEnnNullUtsettelse,
-  isUkerOgDagerVidNullUtbetalningsgrad,
-  isUtbetalingMerEnnNullUtsettelse,
-  isUtbetalingsgradMerSamitidigUttaksprosent,
   maxLength,
   minLength,
   notDash,
   required,
   requiredIfNotPristine,
 } from '@navikt/ft-form-validators';
-import { omit } from '@navikt/ft-utils';
+import { omit, createIntl } from '@navikt/ft-utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
@@ -43,10 +37,47 @@ import UttakInfo from './UttakInfo';
 
 import styles from './uttakActivity.less';
 import { PeriodeMedClassName } from './Uttak';
+import messages from '../../i18n/nb_NO.json';
 
 const uttakActivityForm = 'uttaksresultatActivity';
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
+
+const intl = createIntl(messages);
+
+const merEn100ProsentMessage = (): string => intl.formatMessage({ id: 'ValidationMessage.MerEn100Prosent' });
+const arbeidsprosentMåVare100VidUtsettelseAvArbeidMessage = (): string => intl.formatMessage({ id: 'ValidationMessage.UtsettelseUtenFullArbeid' });
+
+const isTrekkdagerMerEnnNullUtsettelse = (
+  value: number,
+): string | null => (value > 0 ? intl.formatMessage({ id: 'ValidationMessage.trekkdagerErMerEnnNullUtsettelse' }) : null);
+
+const isUkerOgDagerVidNullUtbetalningsgrad = (
+  weeks: number,
+  days: number,
+  utbetalingsgrad: number,
+): string | null => {
+  if (weeks === 0 && days === 0 && utbetalingsgrad > 0) {
+    return intl.formatMessage({ id: 'ValidationMessage.ukerOgDagerVidNullUtbetalningsgradMessage' });
+  }
+  return null;
+};
+
+const isUtbetalingMerEnnNullUtsettelse = (
+  value: number,
+): string | null => (value > 0 ? intl.formatMessage({ id: 'ValidationMessage.utbetalingMerEnnNullUtsettelse' }) : null);
+
+const isUtbetalingsgradMerSamitidigUttaksprosent = (
+  samtidigUttaksProsent: number,
+  utbetalingsgrad: number,
+): string | null => {
+  if (samtidigUttaksProsent < utbetalingsgrad) {
+    return intl.formatMessage({
+      id: 'ValidationMessage.utbetalingsgradErMerSamtidigUttaksprosent',
+    });
+  }
+  return null;
+};
 
 function sortAlphabetically(a: ArsakKodeverk, b: ArsakKodeverk): number {
   if (a.sortering < b.sortering) {
