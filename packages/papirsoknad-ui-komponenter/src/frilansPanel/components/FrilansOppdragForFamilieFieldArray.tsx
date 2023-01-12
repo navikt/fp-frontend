@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { useIntl } from 'react-intl';
+import { IntlShape, useIntl } from 'react-intl';
 import moment from 'moment';
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
@@ -54,6 +54,24 @@ export const defaultFrilansPeriode: OppdragPeriode = {
 
 const maxLength50 = maxLength(50);
 
+const getValiderAtFomDatoErFørFørstePeriode = (
+  getValues: UseFormGetValues<{
+    frilans: FormValues;
+  }>,
+  namePart1: string,
+  sorterteFomDatoer: string[],
+  intl: IntlShape,
+) => () => {
+  const fomVerdi = getValue(getValues, `${namePart1}.fomDato`);
+  if (sorterteFomDatoer.length > 0 && sorterteFomDatoer[0] && fomVerdi) {
+    const isBefore = moment(sorterteFomDatoer[0]).isSameOrBefore(moment(fomVerdi));
+    if (!isBefore) {
+      return intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.BeforeFomValidation' });
+    }
+  }
+  return null;
+};
+
 interface OwnProps {
   readOnly: boolean;
 }
@@ -100,16 +118,7 @@ export const FrilansOppdragForFamilieFieldArray: FunctionComponent<OwnProps> = (
                     label={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.periodeFom' })}
                     validate={[
                       hasValidDate,
-                      () => {
-                        const fomVerdi = getValue(getValues, `${namePart1}.fomDato`);
-                        if (sorterteFomDatoer.length > 0 && sorterteFomDatoer[0] && fomVerdi) {
-                          const isBefore = moment(sorterteFomDatoer[0]).isSameOrBefore(moment(fomVerdi));
-                          if (!isBefore) {
-                            return intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.BeforeFomValidation' });
-                          }
-                        }
-                        return null;
-                      },
+                      getValiderAtFomDatoErFørFørstePeriode(getValues, namePart1, sorterteFomDatoer, intl),
                       () => {
                         const fomVerdi = getValue(getValues, `${namePart1}.fomDato`);
                         const tomVerdi = getValue(getValues, `${namePart1}.tomDato`);

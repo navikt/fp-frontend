@@ -52,6 +52,43 @@ const getOverlappingValidator = (
   return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
 };
 
+const getValiderFørEllerEtter = (
+  getValues: UseFormGetValues<{ tidsromPermisjon: { [GRADERING_PERIODE_FIELD_ARRAY_NAME]: FormValues }}>,
+  index: number,
+  sjekkFør: boolean,
+) => () => {
+  const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
+  const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
+
+  if (!tomVerdi || !fomVerdi) {
+    return null;
+  }
+
+  return sjekkFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
+};
+
+const getValiderArbeidsgiverIdNårRequired = (
+  getValues: UseFormGetValues<{ tidsromPermisjon: { [GRADERING_PERIODE_FIELD_ARRAY_NAME]: FormValues }}>,
+  index: number,
+) => (
+  arbeidsgiverIdentifikator,
+) => {
+  const arbeidsgiverIdentifikatorRequired = getValues(
+    `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.arbeidskategoriType`,
+  ) === arbeidskategori.ARBEIDSTAKER;
+  return arbeidsgiverIdentifikatorRequired ? required(arbeidsgiverIdentifikator) : undefined;
+};
+
+const validerAtArbeidsgiverIdErGyldig = (
+  arbeidsgiverIdentifikator,
+) => {
+  if (!arbeidsgiverIdentifikator) {
+    return undefined;
+  }
+  return arbeidsgiverIdentifikator.length === 11
+    ? hasValidFodselsnummer(arbeidsgiverIdentifikator) : maxLength9OrFodselsnr(arbeidsgiverIdentifikator);
+};
+
 const defaultGraderingPeriode: GraderingPeriode = {
   periodeFom: '',
   periodeTom: '',
@@ -161,11 +198,7 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                     validate={[
                       required,
                       hasValidDate,
-                      () => {
-                        const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
-                        const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
-                        return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
-                      },
+                      getValiderFørEllerEtter(getValues, index, true),
                       getOverlappingValidator(getValues),
                     ]}
                     onChange={() => (isSubmitted ? trigger() : undefined)}
@@ -178,11 +211,7 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                     validate={[
                       required,
                       hasValidDate,
-                      () => {
-                        const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
-                        const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
-                        return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
-                      },
+                      getValiderFørEllerEtter(getValues, index, false),
                       getOverlappingValidator(getValues),
                     ]}
                     onChange={() => (isSubmitted ? trigger() : undefined)}
@@ -201,20 +230,9 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                     label={intl.formatMessage({ id: 'Registrering.Permisjon.Orgnr' })}
                     name={`${namePart1}.arbeidsgiverIdentifikator`}
                     validate={[
-                      (arbeidsgiverIdentifikator) => {
-                        const arbeidsgiverIdentifikatorRequired = getValues(
-                          `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.arbeidskategoriType`,
-                        ) === arbeidskategori.ARBEIDSTAKER;
-                        return arbeidsgiverIdentifikatorRequired ? required(arbeidsgiverIdentifikator) : undefined;
-                      },
+                      getValiderArbeidsgiverIdNårRequired(getValues, index),
                       hasValidInteger,
-                      (arbeidsgiverIdentifikator) => {
-                        if (!arbeidsgiverIdentifikator) {
-                          return undefined;
-                        }
-                        return arbeidsgiverIdentifikator.length === 11
-                          ? hasValidFodselsnummer(arbeidsgiverIdentifikator) : maxLength9OrFodselsnr(arbeidsgiverIdentifikator);
-                      },
+                      validerAtArbeidsgiverIdErGyldig,
                     ]}
                   />
                 </FlexColumn>

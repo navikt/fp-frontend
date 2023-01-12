@@ -83,6 +83,20 @@ const getOverlappingValidator = (
   return dateRangesNotOverlapping(periodeMap);
 };
 
+const getValiderFomOgTomVerdi = (
+  getValues: UseFormGetValues<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: { [PERMISJON_PERIODE_FIELD_ARRAY_NAME]: FormValues[] }}>,
+  index: number,
+  erFør: boolean,
+) => () => {
+  const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
+  const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
+  if (!tomVerdi || !fomVerdi) {
+    return null;
+  }
+
+  return erFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
+};
+
 interface OwnProps {
   readOnly: boolean;
   sokerErMor: boolean;
@@ -171,11 +185,7 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                     validate={[
                       required,
                       hasValidDate,
-                      () => {
-                        const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
-                        const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
-                        return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
-                      },
+                      getValiderFomOgTomVerdi(getValues, index, true),
                       getOverlappingValidator(getValues),
                     ]}
                     onChange={() => (isSubmitted ? trigger() : undefined)}
@@ -189,11 +199,7 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                     validate={[
                       required,
                       hasValidDate,
-                      () => {
-                        const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
-                        const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
-                        return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
-                      },
+                      getValiderFomOgTomVerdi(getValues, index, false),
                       getOverlappingValidator(getValues),
                     ]}
                     onChange={() => (isSubmitted ? trigger() : undefined)}
