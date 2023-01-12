@@ -34,10 +34,10 @@ const HEADER_TEXT_CODES = [
   'RenderUttakTable.PeriodeData.Utbetalingsgrad',
 ];
 
-const finnArbeidsforholdNavnOgProsentArbeid = (
+export const finnArbeidsforholdNavnOgProsentArbeid = (
   aktivitet: PeriodeSokerAktivitet,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-) => {
+): { prosentArbeidText: string, arbeidsforhold: string } => {
   const {
     prosentArbeid, arbeidsgiverReferanse, eksternArbeidsforholdId, uttakArbeidType,
   } = aktivitet;
@@ -231,39 +231,28 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                   </BodyShort>
                 </TableColumn>
                 <TableColumn>
-                  <FlexContainer>
-                    <FlexRow>
-                      <FlexColumn className={styles.utbetalingsgrad}>
-                        <NumberField
-                          name={`aktiviteter.${index}.utbetalingsgrad`}
-                          // @ts-ignore Fiks typen til utbetalingsgrad. Bør vera number
-                          validate={[
-                            required,
-                            minValue0,
-                            maxProsentValue100,
-                            hasValidDecimal,
-                            sjekkOmUtbetalingsgradEr0OmAvslått(intl, erOppfylt, utsettelseType),
-                            sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0(intl, getValues, index),
-                            sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent(intl, getValues),
-                            (utbetalingsgrad: string) => {
-                              const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
-                              return harUtsettelsestype && getValues('erOppfylt') && parseFloat(utbetalingsgrad) > 0
-                                ? intl.formatMessage({ id: 'ValidationMessage.utbetalingMerEnnNullUtsettelse' }) : null;
-                            },
-                          ]}
-                          readOnly={isReadOnly}
-                          forceTwoDecimalDigits
-                        />
-                      </FlexColumn>
-                      <FlexColumn>
-                        {!isReadOnly && (
-                          <span className={styles.verticalCharPlacementInTable}>
-                            %
-                          </span>
-                        )}
-                      </FlexColumn>
-                    </FlexRow>
-                  </FlexContainer>
+                  <div className={styles.utbetalingsgrad}>
+                    <NumberField
+                      name={`aktiviteter.${index}.utbetalingsgrad`}
+                      // @ts-ignore Fiks typen til utbetalingsgrad. Bør vera number
+                      validate={[
+                        required,
+                        minValue0,
+                        maxProsentValue100,
+                        hasValidDecimal,
+                        sjekkOmUtbetalingsgradEr0OmAvslått(intl, erOppfylt, utsettelseType),
+                        sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0(intl, getValues, index),
+                        sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent(intl, getValues),
+                        (utbetalingsgrad: string) => {
+                          const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
+                          return harUtsettelsestype && getValues('erOppfylt') && parseFloat(utbetalingsgrad) > 0
+                            ? intl.formatMessage({ id: 'ValidationMessage.utbetalingMerEnnNullUtsettelse' }) : null;
+                        },
+                      ]}
+                      readOnly={isReadOnly}
+                      forceTwoDecimalDigits
+                    />
+                  </div>
                 </TableColumn>
               </TableRow>
             );

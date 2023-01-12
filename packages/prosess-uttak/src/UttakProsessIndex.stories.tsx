@@ -146,6 +146,13 @@ const arbeidsgiverOpplysningerPerId = {
     fødselsdato: null,
     erPrivatPerson: false,
   },
+  994884174: {
+    referanse: '994884174',
+    identifikator: '994884174',
+    navn: 'NAV',
+    fødselsdato: null,
+    erPrivatPerson: false,
+  },
 };
 
 export default {
@@ -445,6 +452,16 @@ AksjonspunktIRevurdering.args = {
         eksternArbeidsforholdId: 'ARB001-001',
         arbeidsgiverReferanse: '910909088',
         utbetalingsgrad: 100,
+        uttakArbeidType: 'ORDINÆRT_ARBEID',
+        gradering: false,
+        trekkdagerDesimaler: 15.0,
+      }, {
+        stønadskontoType: 'MØDREKVOTE',
+        prosentArbeid: 51,
+        arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c2',
+        eksternArbeidsforholdId: 'ARB001-002',
+        arbeidsgiverReferanse: '994884174',
+        utbetalingsgrad: 50,
         uttakArbeidType: 'ORDINÆRT_ARBEID',
         gradering: false,
         trekkdagerDesimaler: 15.0,

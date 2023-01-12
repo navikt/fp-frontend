@@ -23,7 +23,7 @@ import {
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import oppholdArsakType from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
 
-import UttakAktiviteterTabell from './UttakAktiviteterTabell';
+import UttakAktiviteterTabell, { finnArbeidsforholdNavnOgProsentArbeid } from './UttakAktiviteterTabell';
 import UttakPeriodeInfo from './UttakPeriodeInfo';
 import { UttakAktivitet, UttakAktivitetType } from './UttakAktivitetType';
 
@@ -202,12 +202,23 @@ const hentTekstNårUtbetalingPlusArbeidsprosentMerEn100 = (
     : null;
 };
 
+const hentSorterAktiviteterFn = (arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => (
+  aktivitet1: PeriodeSokerAktivitet,
+  aktivitet2: PeriodeSokerAktivitet,
+) => {
+  const data1 = finnArbeidsforholdNavnOgProsentArbeid(aktivitet1, arbeidsgiverOpplysningerPerId);
+  const data2 = finnArbeidsforholdNavnOgProsentArbeid(aktivitet2, arbeidsgiverOpplysningerPerId);
+  return data1.arbeidsforhold.localeCompare(data2.arbeidsforhold);
+};
+
 const byggDefaultValues = (
   valgtPeriode: PeriodeSoker,
+  sorterteAktiviteter: PeriodeSokerAktivitet[],
   periodeResultatårsakKoder: ArsakKodeverk[],
 ): UttakAktivitetType => {
   const kontoIkkeSatt = !valgtPeriode.periodeType
     && (valgtPeriode.aktiviteter[0].stønadskontoType === '-');
+
   return {
     begrunnelse: valgtPeriode.begrunnelse,
     erOppfylt: erPeriodeOppfylt(valgtPeriode, periodeResultatårsakKoder),
@@ -218,7 +229,7 @@ const byggDefaultValues = (
     samtidigUttaksprosent: valgtPeriode.samtidigUttaksprosent ? valgtPeriode.samtidigUttaksprosent.toString() : undefined,
     flerbarnsdager: valgtPeriode.flerbarnsdager,
     oppholdArsak: valgtPeriode.oppholdÅrsak,
-    aktiviteter: valgtPeriode.aktiviteter.map((a) => ({
+    aktiviteter: sorterteAktiviteter.map((a) => ({
       stønadskontoType: a.stønadskontoType,
       weeks: finnUker(a, valgtPeriode),
       days: finnDager(a, valgtPeriode),
@@ -282,8 +293,14 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
 
   const periodeResultatårsakKoder = alleKodeverk[KodeverkType.PERIODE_RESULTAT_AARSAK] as ArsakKodeverk[];
 
+  const sorterteAktiviteter = useMemo(() => {
+    const sorterAktiviteter = hentSorterAktiviteterFn(arbeidsgiverOpplysningerPerId);
+    return [...valgtPeriode.aktiviteter].sort(sorterAktiviteter);
+  }, [valgtPeriode.aktiviteter]);
+
   const formMethods = useForm<UttakAktivitetType>({
-    defaultValues: useMemo(() => byggDefaultValues(valgtPeriode, periodeResultatårsakKoder), [valgtPeriode]),
+    defaultValues: useMemo(() => byggDefaultValues(valgtPeriode, sorterteAktiviteter, periodeResultatårsakKoder),
+      [valgtPeriode, sorterteAktiviteter, arbeidsgiverOpplysningerPerId]),
   });
 
   const erOppfylt = formMethods.watch('erOppfylt');
@@ -306,7 +323,7 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
   const submit = useCallback((values: UttakAktivitetType) => oppdaterPeriode([transformValues(values, valgtPeriode)]), [valgtPeriode]);
 
   const warning1 = hentTekstForÅVurdereUtsettelseVedMindreEnn100ProsentStilling(valgtPeriode.utsettelseType, erOppfylt, valgtPeriode.aktiviteter, intl);
-  const warning2 = hentTekstNårUtbetalingPlusArbeidsprosentMerEn100(aktiviteter, valgtPeriode.aktiviteter, intl);
+  const warning2 = hentTekstNårUtbetalingPlusArbeidsprosentMerEn100(aktiviteter, sorterteAktiviteter, intl);
   const warning = warning1 || warning2;
 
   return (
@@ -326,7 +343,7 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
           isReadOnly={isReadOnly}
           periodeTyper={alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE]}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          aktiviteter={valgtPeriode.aktiviteter}
+          aktiviteter={sorterteAktiviteter}
           erOppfylt={erOppfylt}
           utsettelseType={valgtPeriode.utsettelseType}
         />
