@@ -202,12 +202,15 @@ const hentTekstNårUtbetalingPlusArbeidsprosentMerEn100 = (
     : null;
 };
 
-const hentSorterAktiviteterFn = (arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => (
+const hentSorterAktiviteterFn = (
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+  intl: IntlShape,
+) => (
   aktivitet1: PeriodeSokerAktivitet,
   aktivitet2: PeriodeSokerAktivitet,
 ) => {
-  const data1 = finnArbeidsforholdNavnOgProsentArbeid(aktivitet1, arbeidsgiverOpplysningerPerId);
-  const data2 = finnArbeidsforholdNavnOgProsentArbeid(aktivitet2, arbeidsgiverOpplysningerPerId);
+  const data1 = finnArbeidsforholdNavnOgProsentArbeid(aktivitet1, arbeidsgiverOpplysningerPerId, intl);
+  const data2 = finnArbeidsforholdNavnOgProsentArbeid(aktivitet2, arbeidsgiverOpplysningerPerId, intl);
   return data1.arbeidsforhold.localeCompare(data2.arbeidsforhold);
 };
 
@@ -294,7 +297,7 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
   const periodeResultatårsakKoder = alleKodeverk[KodeverkType.PERIODE_RESULTAT_AARSAK] as ArsakKodeverk[];
 
   const sorterteAktiviteter = useMemo(() => {
-    const sorterAktiviteter = hentSorterAktiviteterFn(arbeidsgiverOpplysningerPerId);
+    const sorterAktiviteter = hentSorterAktiviteterFn(arbeidsgiverOpplysningerPerId, intl);
     return [...valgtPeriode.aktiviteter].sort(sorterAktiviteter);
   }, [valgtPeriode.aktiviteter]);
 

@@ -1,7 +1,7 @@
 import React, {
   FunctionComponent, ReactElement, useMemo,
 } from 'react';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { IntlShape, useIntl } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 import { formHooks, SelectField, NumberField } from '@navikt/ft-form-hooks';
 import {
@@ -37,6 +37,7 @@ const HEADER_TEXT_CODES = [
 export const finnArbeidsforholdNavnOgProsentArbeid = (
   aktivitet: PeriodeSokerAktivitet,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+  intl: IntlShape,
 ): { prosentArbeidText: string, arbeidsforhold: string } => {
   const {
     prosentArbeid, arbeidsgiverReferanse, eksternArbeidsforholdId, uttakArbeidType,
@@ -45,7 +46,7 @@ export const finnArbeidsforholdNavnOgProsentArbeid = (
   const prosentArbeidText = (typeof prosentArbeid !== 'undefined') ? `${prosentArbeid}%` : '';
   let arbeidsforhold;
   if (uttakArbeidType && uttakArbeidType !== UttakArbeidType.ORDINÆRT_ARBEID) {
-    arbeidsforhold = <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType]} />;
+    arbeidsforhold = intl.formatMessage({ id: uttakArbeidTypeTekstCodes[uttakArbeidType] });
   }
   if (arbeidsgiverReferanse) {
     const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
@@ -151,7 +152,7 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
       {fields.length > 0 && (
         <Table headerTextCodes={HEADER_TEXT_CODES} noHover>
           {fields.map((field, index: number) => {
-            const arbeidsforholdData = finnArbeidsforholdNavnOgProsentArbeid(aktiviteter[index], arbeidsgiverOpplysningerPerId);
+            const arbeidsforholdData = finnArbeidsforholdNavnOgProsentArbeid(aktiviteter[index], arbeidsgiverOpplysningerPerId, intl);
             return (
               <TableRow key={field.id}>
                 <TableColumn><BodyShort size="small" className={styles.forsteKolWidth}>{arbeidsforholdData.arbeidsforhold}</BodyShort></TableColumn>
