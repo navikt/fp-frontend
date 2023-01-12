@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, ReactElement, useEffect,
+  FunctionComponent, ReactElement, useEffect, useCallback,
 } from 'react';
 import { useIntl } from 'react-intl';
 import { UseFormGetValues } from 'react-hook-form';
@@ -45,6 +45,19 @@ const getOverlappingValidator = (
     .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
     .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
   return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
+};
+
+const getValiderFomTomRekkefølge = (
+  getValues: UseFormGetValues<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {[UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: FormValues }}>,
+  index: number,
+  erFør: boolean,
+) => () => {
+  const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
+  const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
+  if (!tomVerdi && !fomVerdi) {
+    return null;
+  }
+  return erFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
 };
 
 const mapTyper = (typer: KodeverkMedNavn[]): ReactElement[] => typer
@@ -97,6 +110,8 @@ const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps> = ({
     }
   }, []);
 
+  const triggerValidationOnChange = useCallback(() => (isSubmitted ? trigger() : undefined), [isSubmitted, trigger]);
+
   const fieldArrayName = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}`;
   return (
     <PeriodFieldArray
@@ -132,14 +147,10 @@ const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps> = ({
                   validate={[
                     required,
                     hasValidDate,
-                    () => {
-                      const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
-                      const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
-                      return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
-                    },
+                    getValiderFomTomRekkefølge(getValues, index, true),
                     getOverlappingValidator(getValues),
                   ]}
-                  onChange={() => (isSubmitted ? trigger() : undefined)}
+                  onChange={triggerValidationOnChange}
                 />
               </FlexColumn>
               <FlexColumn>
@@ -149,14 +160,10 @@ const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps> = ({
                   validate={[
                     required,
                     hasValidDate,
-                    () => {
-                      const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
-                      const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
-                      return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
-                    },
+                    getValiderFomTomRekkefølge(getValues, index, false),
                     getOverlappingValidator(getValues),
                   ]}
-                  onChange={() => (isSubmitted ? trigger() : undefined)}
+                  onChange={triggerValidationOnChange}
                 />
               </FlexColumn>
               <FlexColumn>
@@ -165,7 +172,7 @@ const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps> = ({
                   label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.Arsak' }) : ''}
                   selectValues={mapTyper(utsettelseReasons)}
                   validate={[required]}
-                  onChange={() => (isSubmitted ? trigger() : undefined)}
+                  onChange={triggerValidationOnChange}
                 />
               </FlexColumn>
             </FlexRow>
