@@ -271,7 +271,6 @@ AksjonspunktDerValgtStønadskontoIkkeFinnes.args = {
 
 export const PeriodeMedGraderingUtenAksjonspunkt = Template.bind({});
 PeriodeMedGraderingUtenAksjonspunkt.args = {
-  isReadOnly: true,
   kanOverstyre: true,
   uttaksresultatPerioder: {
     perioderSøker: [{

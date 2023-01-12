@@ -18,6 +18,7 @@ import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import StonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
+import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
 import DisponibleStonadskontoerPanel from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';
 import UttakTidslinjeIndex from './tidslinje/UttakTidslinjeIndex';
@@ -241,9 +242,8 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
     return validerPerioder(perioder, stønadskonto, intl);
   }, [perioder, stønadskonto, valgtPeriodeIndex, isDirty]);
 
-  const filtrerteAksjonspunkter = aksjonspunkter.filter((ap) => ap.definisjon !== AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER);
-  const harLukkedeAksjonspunkt = filtrerteAksjonspunkter.length < 1
-    || filtrerteAksjonspunkter.some((ap) => ap.toTrinnsBehandlingGodkjent === true && ap.status === 'UTFO');
+  const harIngenEllerLukkedeAksjonspunkt = aksjonspunkter.length === 0
+    || aksjonspunkter.some((ap) => ap.toTrinnsBehandlingGodkjent === true && ap.status === aksjonspunktStatus.UTFORT);
 
   return (
     <>
@@ -254,7 +254,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
               <FormattedMessage id="UttakPanel.Title" />
             </Heading>
           </FlexColumn>
-          {kanOverstyre && !erAksjonspunktÅpent && isReadOnly && (
+          {kanOverstyre && !erAksjonspunktÅpent && !isReadOnly && (
             <FlexColumn>
               <OverstyringKnapp onClick={toggleOverstyring} />
             </FlexColumn>
@@ -299,7 +299,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
             valgtPeriodeIndex={valgtPeriodeIndex}
             oppdaterPeriode={oppdaterPeriode}
             isEdited={false}
-            isReadOnly={(harLukkedeAksjonspunkt || isReadOnly) && !erOverstyrt}
+            isReadOnly={(harIngenEllerLukkedeAksjonspunkt || isReadOnly) && !erOverstyrt}
             alleKodeverk={alleKodeverk}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             uttakStonadskontoer={stønadskonto}
@@ -309,7 +309,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
         </>
       )}
       <VerticalSpacer sixteenPx />
-      {((!harLukkedeAksjonspunkt && !isReadOnly) || erOverstyrt) && (
+      {((!harIngenEllerLukkedeAksjonspunkt && !isReadOnly) || erOverstyrt) && (
         <>
           {feilmeldinger.length > 0 && (
             <>
