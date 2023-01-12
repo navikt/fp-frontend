@@ -24,6 +24,7 @@ import UttakTidslinjeIndex from './tidslinje/UttakTidslinjeIndex';
 import UttakPeriodePanel from './periodeDetaljer/UttakPeriodePanel';
 
 const UTTAK_PANEL_AKSJONSPUNKT_KODER = {
+  5067: 'UttakPanel.Aksjonspunkt.5067',
   5069: 'UttakPanel.Aksjonspunkt.5069',
   5072: 'UttakPanel.Aksjonspunkt.5072',
   5073: 'UttakPanel.Aksjonspunkt.5073',
@@ -110,6 +111,7 @@ const transformValues = (
       AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER,
       AksjonspunktCode.TILKNYTTET_STORTINGET,
       AksjonspunktCode.ANNENPART_EØS,
+      AksjonspunktCode.TETTE_SAKER,
       AksjonspunktCode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE,
       AksjonspunktCode.KONTROLLER_OPPLYSNINGER_OM_FORDELING_AV_STØNADSPERIODEN,
       AksjonspunktCode.KONTROLLER_OPPLYSNINGER_OM_DØD,

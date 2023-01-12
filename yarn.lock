@@ -2627,7 +2627,7 @@
     "@navikt/ft-utils" "^1.1.12"
     moment "2.29.4"
 
-"@navikt/ft-kodeverk@^1.0.24":
+"@navikt/ft-kodeverk@1.0.24", "@navikt/ft-kodeverk@^1.0.24":
   version "1.0.24"
   resolved "https://npm.pkg.github.com/download/@navikt/ft-kodeverk/1.0.24/7e0a47b412090d0c60e6c4ed01bd05307ec856ca#7e0a47b412090d0c60e6c4ed01bd05307ec856ca"
   integrity sha512-L+k3U7kccPwG8OiB7Gl704gVoh37URX6BBk3QxWsd1PZ8KQpZ2MVCkgNr43tbXQwq5AoaYSiJgacdUqc2/4e+Q==
@@ -2897,7 +2897,7 @@
     vis-data "7.1.4"
     vis-timeline "7.7.0"
 
-"@navikt/ft-types@^1.0.37":
+"@navikt/ft-types@1.0.37", "@navikt/ft-types@^1.0.37":
   version "1.0.37"
   resolved "https://npm.pkg.github.com/download/@navikt/ft-types/1.0.37/324833d30e6222211c9335d9f094a881ee202116#324833d30e6222211c9335d9f094a881ee202116"
   integrity sha512-svV5wUFDKtCrtTDGiP6v90ne+Jsnjz/gg9rgBR/vAP6z67+8oB4UiVhi1R2TwMUJ8RJhzcf5YF+DvAVHtLoEtg==

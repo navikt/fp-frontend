@@ -32,7 +32,8 @@ const STØNADSKONTOER_SORTERINGSREKKEFØLGE = {
   [stonadskontoType.FORELDREPENGER]: 4,
   [stonadskontoType.UTEN_AKTIVITETSKRAV]: 5,
   [stonadskontoType.MINSTERETT]: 6,
-  [stonadskontoType.FLERBARNSDAGER]: 7,
+  [stonadskontoType.MINSTERETT_NESTE_STØNADSPERIODE]: 7,
+  [stonadskontoType.FLERBARNSDAGER]: 8,
 };
 
 const sorterKontoer = (
@@ -60,7 +61,11 @@ const finnTilgjengeligeUker = (
 ): number => {
   const sumDager = stønadskontoer.reduce((sum, konto) => {
     const type = konto.stonadskontotype;
-    if (type !== stonadskontoType.FLERBARNSDAGER && type !== stonadskontoType.UTEN_AKTIVITETSKRAV && type !== stonadskontoType.MINSTERETT) {
+    if (type !== stonadskontoType.FLERBARNSDAGER
+      && type !== stonadskontoType.UTEN_AKTIVITETSKRAV
+      && type !== stonadskontoType.MINSTERETT
+      && type !== stonadskontoType.MINSTERETT_NESTE_STØNADSPERIODE
+    ) {
       return sum + (konto.maxDager ? konto.maxDager : 0);
     }
     return sum;
