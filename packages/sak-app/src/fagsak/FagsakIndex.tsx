@@ -108,17 +108,12 @@ const FagsakIndex: FunctionComponent = () => {
           </Routes>
         )}
         profileAndNavigationContent={(
-          <>
-            {!fagsakData && <LoadingPanel />}
-            {fagsakData && (
-              <FagsakProfileIndex
-                fagsakData={fagsakData}
-                behandlingUuid={behandlingUuid}
-                behandlingVersjon={behandlingVersjon}
-                hentFagsakdataPåNytt={hentFagsakdataPåNytt}
-              />
-            )}
-          </>
+          <FagsakProfileIndex
+            fagsakData={fagsakData}
+            behandlingUuid={behandlingUuid}
+            behandlingVersjon={behandlingVersjon}
+            hentFagsakdataPåNytt={hentFagsakdataPåNytt}
+          />
         )}
         supportContent={(
           <BehandlingSupportIndex

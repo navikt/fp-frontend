@@ -45,7 +45,7 @@ const TilretteleggingUtbetalingsgrad: FunctionComponent<OwnProps> = ({
     setEditeres(false);
   }, [tilretteleggingKode]);
 
-  const erReadOnly = readOnly || !erOverstyrer || (erOverstyrer && !erIEditeringsmodus);
+  const erReadOnly = readOnly || !erOverstyrer || !erIEditeringsmodus;
   return (
     <FlexContainer>
       <FlexRow>

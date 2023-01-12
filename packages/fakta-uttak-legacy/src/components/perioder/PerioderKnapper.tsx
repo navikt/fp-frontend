@@ -61,7 +61,7 @@ export const PerioderKnapper: FunctionComponent<OwnProps> = ({
           </Button>
         </FlexColumn>
         )}
-        {(bekreftet || (!bekreftet && updated)) && (
+        {(bekreftet || updated) && (
         <FlexColumn>
           <Button
             size="small"
