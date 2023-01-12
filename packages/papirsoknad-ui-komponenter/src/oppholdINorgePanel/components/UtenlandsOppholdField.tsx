@@ -55,6 +55,22 @@ const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] =>
   .filter(({ kode }) => kode !== Landkode.NORGE)
   .map(({ kode, navn }): ReactElement => <option value={kode} key={kode}>{navn}</option>);
 
+const getValiderFørEllerEtter = (
+  getValues: UseFormGetValues<{ [K in Keys]: FormValues[] }>,
+  name: string,
+  index: number,
+  sjekkFør: boolean,
+) => () => {
+  const fomVerdi = getValue(getValues, `${name}.${index}.periodeFom`);
+  const tomVerdi = getValue(getValues, `${name}.${index}.periodeTom`);
+
+  if (!tomVerdi || !fomVerdi) {
+    return null;
+  }
+
+  return sjekkFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
+};
+
 interface OwnProps {
   erTidligereOpphold: boolean;
   mottattDato?: string;
@@ -131,11 +147,7 @@ const UtenlandsOppholdField: FunctionComponent<OwnProps> = ({
                   validate={[
                     required,
                     hasValidDate,
-                    () => {
-                      const fomVerdi = getValue(getValues, `${name}.${index}.periodeFom`);
-                      const tomVerdi = getValue(getValues, `${name}.${index}.periodeTom`);
-                      return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
-                    },
+                    getValiderFørEllerEtter(getValues, name, index, true),
                     () => {
                       const fomVerdi = getValue(getValues, `${name}.${index}.periodeFom`);
                       if (erTidligereOpphold) {
@@ -156,11 +168,7 @@ const UtenlandsOppholdField: FunctionComponent<OwnProps> = ({
                   validate={[
                     required,
                     hasValidDate,
-                    () => {
-                      const fomVerdi = getValue(getValues, `${name}.${index}.periodeFom`);
-                      const tomVerdi = getValue(getValues, `${name}.${index}.periodeTom`);
-                      return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
-                    },
+                    getValiderFørEllerEtter(getValues, name, index, false),
                     () => {
                       const tomVerdi = getValue(getValues, `${name}.${index}.periodeTom`);
                       if (erTidligereOpphold) {
