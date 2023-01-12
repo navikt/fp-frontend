@@ -97,12 +97,7 @@ const getSorteringsnavn = (intl: IntlShape, alleKodeverk: AlleKodeverk, sakslist
   const {
     erDynamiskPeriode, sorteringType, fra, til, fomDato, tomDato,
   } = saksliste.sortering;
-  let values: Record<string, string | JSX.Element | undefined > = {
-    br: <br />,
-    fomDato: undefined,
-    tomDato: undefined,
-    navn: undefined,
-  };
+  let values: Record<string, string | JSX.Element | undefined >;
   if (!erDynamiskPeriode) {
     if (!fomDato && !tomDato) {
       return getKodeverknavnFraKode(alleKodeverk, 'KøSortering', sorteringType);

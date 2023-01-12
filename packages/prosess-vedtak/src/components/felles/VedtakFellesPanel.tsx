@@ -171,20 +171,20 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
           </FlexColumn>
           <FlexColumn>
             {!readOnly && !skalBrukeManueltBrev && (
-            <Link href="#" onClick={onToggleOverstyring} className={skalBrukeManueltBrev && styles.test}>
-              <Image src={endreSvg} className={styles.blyant} />
-              <span>
-                <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
-              </span>
-            </Link>
+              <Link href="#" onClick={onToggleOverstyring}>
+                <Image src={endreSvg} className={styles.blyant} />
+                <span>
+                  <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
+                </span>
+              </Link>
             )}
             {(readOnly || skalBrukeManueltBrev) && (
-            <>
-              <Image src={endreDisabletSvg} className={styles.blyant} />
-              <BodyShort size="small" className={styles.disabletLink}>
-                <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
-              </BodyShort>
-            </>
+              <>
+                <Image src={endreDisabletSvg} className={styles.blyant} />
+                <BodyShort size="small" className={styles.disabletLink}>
+                  <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
+                </BodyShort>
+              </>
             )}
           </FlexColumn>
         </FlexRow>

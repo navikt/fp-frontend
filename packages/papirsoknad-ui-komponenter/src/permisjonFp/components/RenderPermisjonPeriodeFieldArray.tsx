@@ -203,7 +203,7 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                   <FlexColumn>
                     <SelectField
                       readOnly={readOnly}
-                      disabled={sokerErMor || skalDisableMorsAktivitet}
+                      disabled={skalDisableMorsAktivitet}
                       name={`${namePart1}.morsAktivitet`}
                       label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.Fellesperiode.morsAktivitet' }))}
                       selectValues={mapAktiviteter(morsAktivitetTyper)}
