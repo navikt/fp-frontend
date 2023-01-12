@@ -7,7 +7,7 @@ const sentryMock = require("./mocks/sentry");
 const fakeError = require("./mocks/fake-error");
 const deps = require('../package.json').dependencies;
 
-const PUBLIC_PATH = '/'
+const PUBLIC_PATH = '/';
 
 const config = {
   mode: 'development',
