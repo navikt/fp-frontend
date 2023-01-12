@@ -1,7 +1,7 @@
 import React, {
-  FunctionComponent, ReactNode, useMemo, useState, useCallback,
+  FunctionComponent, useMemo, useState, useCallback,
 } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 import { Label, BodyShort } from '@navikt/ds-react';
 
 import {
@@ -73,23 +73,24 @@ const finnTilgjengeligeUker = (
   return Math.floor(sumDager / 5);
 };
 
-const lagTekst = (
+const utledNavn = (
   arbforhold: AktivitetIdentifikator,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-): ReactNode | string => {
+  intl: IntlShape,
+): string => {
   const {
     arbeidsgiverReferanse, uttakArbeidType,
   } = arbforhold;
 
   if (uttakArbeidType && uttakArbeidType !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
-    return <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType]} />;
+    return intl.formatMessage({ id: uttakArbeidTypeTekstCodes[uttakArbeidType] });
   }
   if (arbeidsgiverReferanse) {
     const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
     return arbeidsgiverOpplysninger ? lagVisningsNavn(arbeidsgiverOpplysninger) : arbeidsgiverReferanse;
   }
 
-  return <FormattedMessage id="RenderUttakTable.ArbeidType.ANNET" />;
+  return intl.formatMessage({ id: 'RenderUttakTable.ArbeidType.ANNET' });
 };
 
 interface OwnProps {
@@ -101,6 +102,7 @@ const DisponibleStonadskontoerPanel: FunctionComponent<OwnProps> = ({
   stønadskontoer,
   arbeidsgiverOpplysningerPerId,
 }) => {
+  const intl = useIntl();
   const [valgtKonto, setValgtKonto] = useState<Stonadskonto>();
 
   const visDagerForKonto = useCallback((konto: Stonadskonto): void => {
@@ -110,6 +112,18 @@ const DisponibleStonadskontoerPanel: FunctionComponent<OwnProps> = ({
   const stønadskontoerMedNavn = useMemo(() => Object.values(stønadskontoer).sort(sorterKontoer), [stønadskontoer]);
 
   const tilgjengeligeUker = useMemo(() => finnTilgjengeligeUker(stønadskontoer), [stønadskontoer]);
+
+  const sorterteAktiviteter = useMemo(() => {
+    if (!valgtKonto) {
+      return undefined;
+    }
+    const aktiviteterMedNavn = valgtKonto.aktivitetSaldoDtoList
+      .map((aktivitet) => ({
+        ...aktivitet,
+        navn: utledNavn(aktivitet.aktivitetIdentifikator, arbeidsgiverOpplysningerPerId, intl),
+      }));
+    return aktiviteterMedNavn.sort((akt1, akt2) => akt1.navn.localeCompare(akt2.navn));
+  }, [valgtKonto?.aktivitetSaldoDtoList]);
 
   return (
     <div className={styles.disponibeltUttak}>
@@ -142,15 +156,15 @@ const DisponibleStonadskontoerPanel: FunctionComponent<OwnProps> = ({
           ))}
         </ul>
       </div>
-      {valgtKonto && valgtKonto.aktivitetSaldoDtoList.length > 0 && (
+      {valgtKonto && sorterteAktiviteter.length > 0 && (
         <div className={styles.visKonto}>
           <Table headerTextCodes={HEADER_TEXT_CODES}>
-            {valgtKonto.aktivitetSaldoDtoList.map((arbforhold) => {
+            {sorterteAktiviteter.map((arbforhold) => {
               const ukerOgDager = finnAntallUkerOgDager(arbforhold.saldo);
               return (
                 <TableRow key={lagTabellRadKey(arbforhold, arbeidsgiverOpplysningerPerId)}>
                   <TableColumn>
-                    <BodyShort size="small">{lagTekst(arbforhold.aktivitetIdentifikator, arbeidsgiverOpplysningerPerId)}</BodyShort>
+                    <BodyShort size="small">{arbforhold.navn}</BodyShort>
                   </TableColumn>
                   <TableColumn>
                     <BodyShort size="small">
