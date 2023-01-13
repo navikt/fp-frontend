@@ -89,6 +89,55 @@ const getAndreKriterier = (intl: IntlShape, alleKodeverk: AlleKodeverk, sakslist
   return [intl.formatMessage({ id: 'SakslisteVelgerForm.Alle' })];
 };
 
+const getNavn = (values, intl) => {
+  if (!values.fomDato) {
+    return intl.formatMessage({ id: 'SakslisteVelgerForm.SorteringsinfoTom' }, values) as string;
+  }
+  if (!values.tomDato) {
+    return intl.formatMessage({ id: 'SakslisteVelgerForm.SorteringsinfoFom' }, values) as string;
+  }
+  return intl.formatMessage({ id: 'SakslisteVelgerForm.Sorteringsinfo' }, values) as string;
+};
+
+const getSorteringsnavnForPeriode = (
+  intl: IntlShape,
+  alleKodeverk: AlleKodeverk,
+  sorteringType: string,
+  fomDato?: string,
+  tomDato?: string,
+) => {
+  if (!fomDato && !tomDato) {
+    return getKodeverknavnFraKode(alleKodeverk, 'KøSortering', sorteringType);
+  }
+
+  const values = {
+    navn: getKodeverknavnFraKode(alleKodeverk, 'KøSortering', sorteringType),
+    fomDato: fomDato ? dayjs(fomDato).format(DDMMYYYY_DATE_FORMAT) : undefined,
+    tomDato: tomDato ? dayjs(tomDato).format(DDMMYYYY_DATE_FORMAT) : undefined,
+    br: <br />,
+  };
+  return getNavn(values, intl);
+};
+
+const getSorteringsnavnForDynamiskPeriode = (
+  intl: IntlShape,
+  alleKodeverk: AlleKodeverk,
+  sorteringType: string,
+  fra?: number,
+  til?: number,
+) => {
+  if (!fra && !til) {
+    return getKodeverknavnFraKode(alleKodeverk, 'KøSortering', sorteringType);
+  }
+  const values = {
+    navn: getKodeverknavnFraKode(alleKodeverk, 'KøSortering', sorteringType),
+    fomDato: fra ? dayjs().add(fra, 'days').format(DDMMYYYY_DATE_FORMAT) : undefined,
+    tomDato: til ? dayjs().add(til, 'days').format(DDMMYYYY_DATE_FORMAT) : undefined,
+    br: <br />,
+  };
+  return getNavn(values, intl);
+};
+
 const getSorteringsnavn = (intl: IntlShape, alleKodeverk: AlleKodeverk, saksliste?: Saksliste): string => {
   if (!saksliste || !saksliste.sortering) {
     return '';
@@ -97,36 +146,10 @@ const getSorteringsnavn = (intl: IntlShape, alleKodeverk: AlleKodeverk, sakslist
   const {
     erDynamiskPeriode, sorteringType, fra, til, fomDato, tomDato,
   } = saksliste.sortering;
-  let values: Record<string, string | JSX.Element | undefined >;
-  if (!erDynamiskPeriode) {
-    if (!fomDato && !tomDato) {
-      return getKodeverknavnFraKode(alleKodeverk, 'KøSortering', sorteringType);
-    }
-    values = {
-      navn: getKodeverknavnFraKode(alleKodeverk, 'KøSortering', sorteringType),
-      fomDato: fomDato ? dayjs(fomDato).format(DDMMYYYY_DATE_FORMAT) : undefined,
-      tomDato: tomDato ? dayjs(tomDato).format(DDMMYYYY_DATE_FORMAT) : undefined,
-      br: <br />,
-    };
-  } else {
-    if (!fra && !til) {
-      return getKodeverknavnFraKode(alleKodeverk, 'KøSortering', sorteringType);
-    }
-    values = {
-      navn: getKodeverknavnFraKode(alleKodeverk, 'KøSortering', sorteringType),
-      fomDato: fra ? dayjs().add(fra, 'days').format(DDMMYYYY_DATE_FORMAT) : undefined,
-      tomDato: til ? dayjs().add(til, 'days').format(DDMMYYYY_DATE_FORMAT) : undefined,
-      br: <br />,
-    };
-  }
 
-  if (!values.fomDato) {
-    return intl.formatMessage({ id: 'SakslisteVelgerForm.SorteringsinfoTom' }, values) as string;
-  }
-  if (!values.tomDato) {
-    return intl.formatMessage({ id: 'SakslisteVelgerForm.SorteringsinfoFom' }, values) as string;
-  }
-  return intl.formatMessage({ id: 'SakslisteVelgerForm.Sorteringsinfo' }, values) as string;
+  return erDynamiskPeriode
+    ? getSorteringsnavnForDynamiskPeriode(intl, alleKodeverk, sorteringType, fra, til)
+    : getSorteringsnavnForPeriode(intl, alleKodeverk, sorteringType, fomDato, tomDato);
 };
 
 const createTooltip = (saksbehandlere?: Saksbehandler[]) => {
