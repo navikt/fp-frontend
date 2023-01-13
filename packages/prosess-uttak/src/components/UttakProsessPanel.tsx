@@ -221,7 +221,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
     oppdaterStønadskontoer({ behandlingUuid: behandling.uuid, perioder: nyePerioder })
       .then((oppdatertStønadskonto: UttakStonadskontoer) => {
         setStønadskonto(oppdatertStønadskonto);
-        velgPeriodeMedAp(nyePerioder);
+        velgPeriodeMedAp(uttaksresultatPeriode.perioderAnnenpart.concat(nyePerioder));
       });
   }, [perioder, valgtPeriodeIndex]);
 
