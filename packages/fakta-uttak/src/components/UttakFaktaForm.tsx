@@ -110,6 +110,8 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
 
   const [uttakPerioder, oppdaterUttakPerioder] = useState<KontrollerFaktaPeriodeMedApMarkering[]>(formData?.uttakPerioder || sortertePerioder);
 
+  const [valgteFomDatoer, setValgteFomDatoer] = useState<string[]>([]);
+
   const formMethods = useForm<{ begrunnelse: string }>({
     defaultValues: {
       begrunnelse: formData?.begrunnelse || (aksjonspunkter.length > 0 ? aksjonspunkter[0].begrunnelse : undefined),
@@ -157,7 +159,8 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
     && uttakPerioder.every((a) => a.aksjonspunktType === undefined)
     && (!harApIngenPerioder || (harApIngenPerioder && uttakPerioder.length > 0))
     && !harOverlappendePerioder
-    && !!begrunnelse;
+    && !!begrunnelse
+    && valgteFomDatoer.length === 0;
 
   const [isDirty, setDirty] = useState<boolean>(false);
 
@@ -208,6 +211,8 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
         </>
       )}
       <UttakFaktaTable
+        valgteFomDatoer={valgteFomDatoer}
+        setValgteFomDatoer={setValgteFomDatoer}
         uttakKontrollerFaktaPerioder={uttakPerioder}
         oppdaterUttakPerioder={oppdaterUttakPerioder}
         alleKodeverk={alleKodeverk}

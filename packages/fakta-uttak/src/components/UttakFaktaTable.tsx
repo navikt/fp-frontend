@@ -68,6 +68,8 @@ const getTypeTekst = (
 };
 
 interface OwnProps {
+  valgteFomDatoer: string[];
+  setValgteFomDatoer: React.Dispatch<React.SetStateAction<string[]>>;
   uttakKontrollerFaktaPerioder: KontrollerFaktaPeriodeMedApMarkering[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
@@ -80,6 +82,8 @@ interface OwnProps {
 }
 
 const UttakFaktaTable: FunctionComponent<OwnProps> = ({
+  valgteFomDatoer,
+  setValgteFomDatoer,
   uttakKontrollerFaktaPerioder,
   arbeidsgiverOpplysningerPerId,
   faktaArbeidsforhold,
@@ -91,8 +95,6 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
   førsteUttaksdato,
 }) => {
   const intl = useIntl();
-
-  const [valgteFomDatoer, setValgteFomDatoer] = useState<string[]>([]);
 
   const velgPeriodeFomDato = useCallback((fom?: string, lukkAlleAndre = false) => {
     if (valgteFomDatoer.includes(fom)) {
