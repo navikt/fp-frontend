@@ -45,7 +45,8 @@ describe('<HistorikkSakIndex>', () => {
   it('skal vise historikkinnslag for aktivitetskrav', async () => {
     render(<HistorikkinnslagAktivitetskrav />);
     expect(await screen.findByText('Fakta om aktivitetskrav')).toBeInTheDocument();
-    expect(screen.getByText('19.09.2019 - 12:16 // Søker')).toBeInTheDocument();
+    expect(screen.getByText('Søker')).toBeInTheDocument();
+    expect(screen.getByText('19.09.2019 - 12:16')).toBeInTheDocument();
     expect(screen.getByText(/Perioden/)).toBeInTheDocument();
     expect(screen.getByText(/05.01.2021 - 19.01.2021/)).toBeInTheDocument();
     expect(screen.getByText(/er avklart til/)).toBeInTheDocument();
@@ -55,7 +56,8 @@ describe('<HistorikkSakIndex>', () => {
 
   it('skal vise historikkinnslag for foreldelse', async () => {
     render(<HistorikkinnslagForeldelse />);
-    expect(await screen.findByText('19.09.2019 - 12:16 // Søker')).toBeInTheDocument();
+    expect(await screen.findByText('Søker')).toBeInTheDocument();
+    expect(screen.getByText('19.09.2019 - 12:16')).toBeInTheDocument();
     expect(screen.getByText(/Manuell vurdering/)).toBeInTheDocument();
     expect(screen.getByText(/av perioden 10.10.2018-./)).toBeInTheDocument();
     expect(screen.getByText(/endret fra Ja til/)).toBeInTheDocument();
@@ -66,7 +68,8 @@ describe('<HistorikkSakIndex>', () => {
 
   it('skal vise historikkinnslag for tilbakekreving', async () => {
     render(<HistorikkinnslagTilbakekreving />);
-    expect(await screen.findByText('19.09.2019 - 12:16 // Søker')).toBeInTheDocument();
+    expect(await screen.findByText('Søker')).toBeInTheDocument();
+    expect(screen.getByText('19.09.2019 - 12:16')).toBeInTheDocument();
     expect(screen.getByText(/Vurdering/)).toBeInTheDocument();
     expect(screen.getByText(/av perioden 10.10.2018-./)).toBeInTheDocument();
     expect(screen.getByText(/endret fra Ja til/)).toBeInTheDocument();
