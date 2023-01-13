@@ -67,10 +67,10 @@ const Snakkeboble: FunctionComponent<OwnProps> = ({
   <div className={styles.margin} data-testid={`snakkeboble-${dato}`}>
     <Chat
       avatar={<Image className={styles.image} src={utledIkon(aktoer, kjoenn)} />}
-      name={`${rolleNavn} ${opprettetAv || ''}`}
-      timestamp={formatDate(dato)}
+      timestamp={`${formatDate(dato)} // ${rolleNavn} ${opprettetAv || ''}`}
       position={utledPlassering(aktoer)}
       backgroundColor={BAKGRUNNSFARGER[aktoer]}
+      className={styles.width}
     >
       <Chat.Bubble>
         {children}
