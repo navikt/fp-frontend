@@ -78,7 +78,6 @@ interface OwnProps {
   readOnly: boolean;
   setDirty: (isDirty: boolean) => void;
   erRedigerbart: boolean;
-  førsteUttaksdato: string;
 }
 
 const UttakFaktaTable: FunctionComponent<OwnProps> = ({
@@ -92,7 +91,6 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
   readOnly,
   setDirty,
   erRedigerbart,
-  førsteUttaksdato,
 }) => {
   const intl = useIntl();
 
@@ -181,7 +179,6 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
                   alleKodeverk={alleKodeverk}
                   arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
                   faktaArbeidsforhold={faktaArbeidsforhold}
-                  førsteUttaksdato={førsteUttaksdato}
                 />
               )}
             >
@@ -223,7 +220,6 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
                 }}
                 arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
                 faktaArbeidsforhold={faktaArbeidsforhold}
-                førsteUttaksdato={førsteUttaksdato}
                 defaultMonth={sisteMåned}
               />
             </div>

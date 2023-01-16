@@ -27,7 +27,7 @@ import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import FordelingPeriodeKilde from '../kodeverk/fordelingPeriodeKilde';
 
 import styles from './uttakFaktaDetailForm.less';
-import KontrollerFaktaPeriodeMedApMarkering, { PeriodeApType } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
+import KontrollerFaktaPeriodeMedApMarkering from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 
 type FormValues = KontrollerFaktaPeriodeMedApMarkering & {
   arsakstype: string;
@@ -143,18 +143,6 @@ const validerTomEtterFom = (
   getValues: UseFormGetValues<FormValues>,
 ) => (tom?: string) => (dayjs(tom).isBefore(getValues('fom')) ? intl.formatMessage({ id: 'UttakFaktaDetailForm.TomForFom' }) : null);
 
-const validerPeriodeFra = (
-  førsteUttaksdato: string,
-  intl: IntlShape,
-  valgtPeriode?: KontrollerFaktaPeriodeMedApMarkering,
-) => (fomDato: string) => {
-  if (valgtPeriode?.aksjonspunktType === PeriodeApType.START_FOM && !dayjs(fomDato).isSame(førsteUttaksdato)) {
-    return intl.formatMessage({ id: 'UttakFaktaDetailForm.ErIkkeLikForsteUttaksdato' });
-  }
-
-  return dayjs(fomDato).isBefore(førsteUttaksdato) ? intl.formatMessage({ id: 'UttakFaktaDetailForm.ErTidligereEnnForsteUttaksdato' }) : null;
-};
-
 interface OwnProps {
   valgtPeriode?: KontrollerFaktaPeriodeMedApMarkering;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -164,7 +152,6 @@ interface OwnProps {
   readOnly: boolean;
   oppdaterPeriode: (uttaksperiode: KontrollerFaktaPeriodeMedApMarkering) => void;
   alleKodeverk: AlleKodeverk;
-  førsteUttaksdato: string;
   defaultMonth?: Date;
 }
 
@@ -177,7 +164,6 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
   oppdaterPeriode,
   readOnly,
   alleKodeverk,
-  førsteUttaksdato,
   defaultMonth,
 }) => {
   const intl = useIntl();
@@ -243,7 +229,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
               <Datepicker
                 name="fom"
                 label={<FormattedMessage id="UttakFaktaDetailForm.Fom" />}
-                validate={[required, hasValidDate, validerPeriodeFra(førsteUttaksdato, intl, valgtPeriode)]}
+                validate={[required, hasValidDate]}
                 isReadOnly={readOnly}
                 defaultMonth={defaultMonth}
               />
