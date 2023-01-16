@@ -47,6 +47,7 @@
   "UttakFaktaDetailForm.ErIkkeLikForsteUttaksdato": "Dato må være lik første uttaksdato",
   "UttakFaktaDetailForm.TomForFom": "Dato kan ikke være før fra",
   "UttakFaktaDetailForm.HarFlerbarnsdager": "Har flerbarnsdager",
+  "UttakFaktaDetailForm.Begrunnelse": "Begrunnelse",
   "UttakFaktaDetailForm.Ja": "Ja",
   "UttakFaktaDetailForm.Nei": "Nei",
   "UttakFaktaDetailForm.UkjentArbeidsgiver": "Arbeidsgiver oppgitt for perioden er ukjent. Referanse: {aRef}"
