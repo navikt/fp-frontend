@@ -2,7 +2,7 @@ import React, {
   useCallback, FunctionComponent, useState, useEffect, useMemo,
 } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import { Form } from '@navikt/ft-form-hooks';
 import { ErrorSummary, Heading } from '@navikt/ds-react';
@@ -48,15 +48,7 @@ const leggTilAksjonspunktMarkering = (
   perioder: KontrollerFaktaPeriode[],
   aksjonspunkter: Aksjonspunkt[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-): KontrollerFaktaPeriodeMedApMarkering[] => perioder.map((periode, index) => {
-  if (aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE
-      && ap.status === AksjonspunktStatus.OPPRETTET) && index === 0) {
-    return {
-      ...periode,
-      originalFom: periode.fom,
-      aksjonspunktType: PeriodeApType.START_FOM,
-    };
-  }
+): KontrollerFaktaPeriodeMedApMarkering[] => perioder.map((periode) => {
   if (aksjonspunkter.some((ap) => (ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE
     || ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE)
       && ap.status === AksjonspunktStatus.OPPRETTET) && periode.arbeidsforhold?.arbeidsgiverReferanse
@@ -73,6 +65,31 @@ const leggTilAksjonspunktMarkering = (
     originalFom: periode.fom,
   };
 });
+
+const validerPerioder = (
+  uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[],
+  aksjonspunkter: Aksjonspunkt[],
+  førsteUttaksdato: string,
+  intl: IntlShape,
+): string | null => {
+  const periodeMap = uttakPerioder.map(({ fom, tom }) => [fom, tom]);
+  const erOverlappendePerioder = periodeMap.length > 0 ? !!dateRangesNotOverlapping(periodeMap) : undefined;
+  if (erOverlappendePerioder) {
+    return intl.formatMessage({ id: 'UttakFaktaForm.OverlappendePerioder' });
+  }
+
+  if (aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE
+  && ap.status === AksjonspunktStatus.OPPRETTET)) {
+    if (uttakPerioder.every((up) => !dayjs(up.fom).isSame(førsteUttaksdato))) {
+      return intl.formatMessage({ id: 'UttakFaktaDetailForm.ErIkkeLikForsteUttaksdato' });
+    }
+  }
+
+  const harApIngenPerioder = aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE);
+
+  return uttakPerioder.every((a) => a.aksjonspunktType === undefined)
+    && (!harApIngenPerioder || (harApIngenPerioder && uttakPerioder.length > 0)) ? null : '';
+};
 
 interface OwnProps {
   ytelsefordeling: Ytelsefordeling;
@@ -103,6 +120,8 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
   submittable,
   kanOverstyre,
 }) => {
+  const intl = useIntl();
+
   const sortertePerioder = useMemo(() => {
     const sortertListe = [...uttakKontrollerFaktaPerioder].sort((krav1, krav2) => dayjs(krav1.fom).diff(dayjs(krav2.fom)));
     return leggTilAksjonspunktMarkering(sortertListe, aksjonspunkter, arbeidsgiverOpplysningerPerId);
@@ -145,24 +164,21 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
     return submitCallback(aksjonspunkterSomSkalBekreftes.length > 0 ? aksjonspunkterSomSkalBekreftes : overstyrAp);
   }, [uttakPerioder]);
 
-  const [harOverlappendePerioder, setOverlappendePerioder] = useState(false);
-  useEffect(() => {
-    const periodeMap = uttakPerioder.map(({ fom, tom }) => [fom, tom]);
-    const isOverlapping = periodeMap.length > 0 ? !!dateRangesNotOverlapping(periodeMap) : undefined;
-    setOverlappendePerioder(isOverlapping);
-  }, [uttakPerioder]);
-
   const begrunnelse = formMethods.watch('begrunnelse');
 
-  const harApIngenPerioder = aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE);
+  const [isDirty, setDirty] = useState<boolean>(false);
+
+  const feilmelding = useMemo(() => {
+    if (isDirty) {
+      return validerPerioder(uttakPerioder, aksjonspunkter, ytelsefordeling.førsteUttaksdato, intl);
+    }
+    return null;
+  }, [uttakPerioder, isDirty]);
+
   const isSubmittable = submittable
-    && uttakPerioder.every((a) => a.aksjonspunktType === undefined)
-    && (!harApIngenPerioder || (harApIngenPerioder && uttakPerioder.length > 0))
-    && !harOverlappendePerioder
+    && feilmelding === null
     && !!begrunnelse
     && valgteFomDatoer.length === 0;
-
-  const [isDirty, setDirty] = useState<boolean>(false);
 
   const [erOverstyrt, setOverstyrt] = useState(false);
 
@@ -200,11 +216,11 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
         </>
       )}
-      {harOverlappendePerioder && (
+      {feilmelding && (
         <>
           <ErrorSummary>
             <ErrorSummary.Item>
-              <FormattedMessage id="UttakFaktaForm.OverlappendePerioder" />
+              {feilmelding}
             </ErrorSummary.Item>
           </ErrorSummary>
           <VerticalSpacer sixteenPx />
@@ -221,7 +237,6 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
         erRedigerbart={erRedigerbart}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         faktaArbeidsforhold={faktaArbeidsforhold}
-        førsteUttaksdato={ytelsefordeling.førsteUttaksdato}
       />
       <VerticalSpacer sixteenPx />
       <VerticalSpacer sixteenPx />
