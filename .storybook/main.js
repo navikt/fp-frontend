@@ -7,8 +7,17 @@ const CORE_DIR = path.resolve(__dirname, '../node_modules');
 const CSS_DIR = path.join(PACKAGES_DIR, 'assets/styles');
 
 module.exports = {
+  features: {
+    storyStoreV7: true,
+  },
   core: {
-    builder: "webpack5",
+    builder: {
+      name: 'webpack5',
+      options: { 
+        lazyCompilation: true,
+        fsCache: true, 
+      }
+    }
   },
   stories: ['../packages/**/*.stories.@(tsx)'],
   addons: ['@storybook/addon-docs/preset', '@storybook/addon-actions/register'],

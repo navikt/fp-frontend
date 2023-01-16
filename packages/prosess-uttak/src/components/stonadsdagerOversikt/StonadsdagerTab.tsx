@@ -1,25 +1,25 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classnames from 'classnames/bind';
 import { BodyShort, Detail } from '@navikt/ds-react';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import stonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
 import { Stonadskonto } from '@fpsak-frontend/types';
 
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
-import styles from './timeLineTab.less';
+import styles from './stonadsdagerTab.less';
 
 const classNames = classnames.bind(styles);
 
-const findKorrektLabelForKvote = (stonadtype: string): string => {
+const finnKorrektLabelForKvote = (stonadtype: string): string => {
   switch (stonadtype) {
     case stonadskontoType.FEDREKVOTE:
       return 'TimeLineTab.Stonadinfo.Fedrekvote';
-    case stonadskontoType.MODREKVOTE:
+    case stonadskontoType.MØDREKVOTE:
       return 'TimeLineTab.Stonadinfo.Modrekvote';
     case stonadskontoType.FELLESPERIODE:
       return 'TimeLineTab.Stonadinfo.Fellesperiode';
-    case stonadskontoType.FORELDREPENGER_FOR_FODSEL:
+    case stonadskontoType.FORELDREPENGER_FØR_FØDSEL:
       return 'TimeLineTab.Stonadinfo.ForeldrepengerFF';
     case stonadskontoType.FLERBARNSDAGER:
       return 'TimeLineTab.Stonadinfo.Flerbarnsdager';
@@ -36,50 +36,54 @@ const findKorrektLabelForKvote = (stonadtype: string): string => {
   }
 };
 
-const findAntallUkerOgDager = (kontoinfo: Stonadskonto): { uker: number; dager: number } => {
-  const modifier = kontoinfo.saldo < 0 ? -1 : 1;
-  const justertSaldo = kontoinfo.saldo * modifier;
+export const finnAntallUkerOgDager = (
+  saldo: number,
+): { uker: number; dager: number } => {
+  const modifier = saldo < 0 ? -1 : 1;
+  const justertSaldo = saldo * modifier;
   return {
     uker: (Math.floor(justertSaldo / 5)) * modifier,
     dager: (justertSaldo % 5) * modifier,
   };
 };
 
-export type CustomStonadskonto = {
-  kontonavn: string;
-  kontoinfo: Stonadskonto;
-}
-
 interface OwnProps {
-  stonadskonto: CustomStonadskonto;
-  onClickCallback: (evernt: React.MouseEvent) => any;
+  stønadskonto: Stonadskonto;
+  visDagerForKonto: (stønadskonto: Stonadskonto) => void;
   aktiv?: boolean;
 }
 
-const TimeLineTab: FunctionComponent<OwnProps> = ({
-  stonadskonto,
-  onClickCallback,
+const StonadsdagerTab: FunctionComponent<OwnProps> = ({
+  stønadskonto,
+  visDagerForKonto,
   aktiv = false,
 }) => {
-  const fordelteDager = findAntallUkerOgDager(stonadskonto.kontoinfo);
+  const fordelteDager = useMemo(() => finnAntallUkerOgDager(stønadskonto.saldo), [stønadskonto]);
+  const kontonavnTekst = useMemo(() => finnKorrektLabelForKvote(stønadskonto.stonadskontotype), [stønadskonto]);
+
+  const velgKonto = useCallback(() => visDagerForKonto(stønadskonto), []);
+
   return (
     <div className={styles.tabs}>
-      <li role="presentation" className={classNames('tab', { aktiv, error: stonadskonto.kontoinfo && !stonadskonto.kontoinfo.gyldigForbruk })}>
+      <li
+        role="presentation"
+        className={classNames('tab', { aktiv, error: stønadskonto && !stønadskonto.gyldigForbruk })}
+      >
         <button
           role="tab"
-          className={classNames('tabInner', { error: stonadskonto.kontoinfo && !stonadskonto.kontoinfo.gyldigForbruk })}
+          className={classNames('tabInner', { error: stønadskonto && !stønadskonto.gyldigForbruk })}
           type="button"
-          onClick={onClickCallback}
+          onClick={velgKonto}
           aria-selected={aktiv}
         >
           <FlexContainer>
             <FlexRow>
               <FlexColumn>
-                <Detail size="small">
+                <Detail>
                   <FormattedMessage
-                    id={findKorrektLabelForKvote(stonadskonto.kontonavn)}
+                    id={kontonavnTekst}
                     values={{
-                      uker: Math.floor(stonadskonto.kontoinfo.maxDager / 5),
+                      uker: Math.floor(stønadskonto.maxDager / 5),
                     }}
                   />
                 </Detail>
@@ -106,4 +110,4 @@ const TimeLineTab: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default TimeLineTab;
+export default StonadsdagerTab;

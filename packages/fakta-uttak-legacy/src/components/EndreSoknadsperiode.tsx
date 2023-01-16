@@ -7,14 +7,15 @@ import oppholdArsakType, { oppholdArsakKontoNavn } from '@fpsak-frontend/kodever
 import {
   hasValidDecimal, maxValue, minValue, required,
 } from '@navikt/ft-form-validators';
-import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
+import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
+import StonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
 
 import styles from './perioder/periodeTyper.less';
 
 const maxValue100 = maxValue(100);
 const minValue1 = minValue(1);
 
-const selectValues = (): ReactElement[] => Object.keys(stonadskontoType)
+const selectValues = (): ReactElement[] => Object.keys(StonadskontoType)
   .map((key) => (<option key={key} value={key}>{uttakPeriodeNavn[key]}</option>));
 
 const gyldigeÅrsaker = [

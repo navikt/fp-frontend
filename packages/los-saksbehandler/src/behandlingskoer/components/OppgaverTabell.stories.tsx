@@ -67,7 +67,6 @@ Default.args = {
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     erTilSaksbehandling: true,
     behandlingId: '1',
-    href: '',
   }],
   reserverteOppgaver: [{
     id: 2,
@@ -85,7 +84,6 @@ Default.args = {
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     erTilSaksbehandling: true,
     behandlingId: '2',
-    href: '',
   }],
 };
 

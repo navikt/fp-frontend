@@ -3,12 +3,12 @@ import { RawIntlProvider } from 'react-intl';
 
 import {
   ArbeidsgiverOpplysningerPerId, StandardProsessPanelProps, FamilieHendelseSamling, Personoversikt,
-  Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
+  Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling, PeriodeSoker,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@navikt/ft-utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 
-import UttakPanel from './components/UttakPanel';
+import UttakProsessPanel from './components/UttakProsessPanel';
+
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
@@ -20,10 +20,10 @@ interface OwnProps {
   familiehendelse: FamilieHendelseSamling;
   personoversikt: Personoversikt;
   ytelsefordeling: Ytelsefordeling;
-  employeeHasAccess: boolean;
-  tempUpdateStonadskontoer: (params: {
+  kanOverstyre: boolean;
+  oppdaterStønadskontoer: (params: {
     behandlingUuid: string;
-    perioder: any;
+    perioder: PeriodeSoker[];
   }) => Promise<any>;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
@@ -38,63 +38,33 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
   personoversikt,
   ytelsefordeling,
   alleKodeverk,
-  employeeHasAccess,
+  kanOverstyre,
   submitCallback,
   isReadOnly,
-  readOnlySubmitButton,
-  tempUpdateStonadskontoer,
-  isAksjonspunktOpen,
+  oppdaterStønadskontoer,
   arbeidsgiverOpplysningerPerId,
   formData,
   setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <ReduxWrapper formName="UttakProsessIndex" formData={formData} setFormData={setFormData}>
-      <UttakPanel
-        // @ts-ignore
-        behandlingUuid={behandling.uuid}
-        // @ts-ignore
-        behandlingType={behandling.type}
-        // @ts-ignore
-        behandlingsresultat={behandling.behandlingsresultat}
-        // @ts-ignore
-        behandlingStatus={behandling.status}
-        // @ts-ignore
-        sprakkode={behandling.sprakkode}
-        // @ts-ignore
-        uttaksresultat={uttaksresultatPerioder}
-        // @ts-ignore
-        stonadskonto={uttakStonadskontoer}
-        // @ts-ignore
-        aksjonspunkter={aksjonspunkter}
-        // @ts-ignore
-        employeeHasAccess={employeeHasAccess}
-        // @ts-ignore
-        soknad={soknad}
-        // @ts-ignore
-        person={personoversikt}
-        // @ts-ignore
-        familiehendelse={familiehendelse}
-        // @ts-ignore
-        alleKodeverk={alleKodeverk}
-        // @ts-ignore
-        ytelsefordeling={ytelsefordeling}
-        // @ts-ignore
-        tempUpdateStonadskontoer={tempUpdateStonadskontoer}
-        // @ts-ignore
-        submitCallback={submitCallback}
-        // @ts-ignore
-        readOnly={isReadOnly}
-        // @ts-ignore
-        readOnlySubmitButton={readOnlySubmitButton}
-        // @ts-ignore
-        apCodes={aksjonspunkter.map((a) => a.definisjon)}
-        // @ts-ignore
-        isApOpen={isAksjonspunktOpen}
-        // @ts-ignore
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      />
-    </ReduxWrapper>
+    <UttakProsessPanel
+      behandling={behandling}
+      uttaksresultatPeriode={uttaksresultatPerioder}
+      uttakStonadskontoer={uttakStonadskontoer}
+      aksjonspunkter={aksjonspunkter}
+      familiehendelse={familiehendelse}
+      soknad={soknad}
+      personoversikt={personoversikt}
+      ytelsefordeling={ytelsefordeling}
+      alleKodeverk={alleKodeverk}
+      kanOverstyre={kanOverstyre}
+      submitCallback={submitCallback}
+      oppdaterStønadskontoer={oppdaterStønadskontoer}
+      isReadOnly={isReadOnly}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      formData={formData}
+      setFormData={setFormData}
+    />
   </RawIntlProvider>
 );
 

@@ -6,7 +6,8 @@ import { calcDaysAndWeeks, DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/f
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
+import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
+import StonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
 import {
   ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriode, AlleKodeverk, Kjønnkode,
 } from '@fpsak-frontend/types';
@@ -83,17 +84,17 @@ const createTooltipContent = (periodeType: string, intl: IntlShape, item: Period
 
 const findKorrektLabelForKvote = (stonadtype: string): string => {
   switch (stonadtype) {
-    case stonadskontoType.FEDREKVOTE:
+    case StonadskontoType.FEDREKVOTE:
       return uttakPeriodeNavn.FEDREKVOTE;
-    case stonadskontoType.MØDREKVOTE:
+    case StonadskontoType.MØDREKVOTE:
       return uttakPeriodeNavn.MØDREKVOTE;
-    case stonadskontoType.FELLESPERIODE:
+    case StonadskontoType.FELLESPERIODE:
       return uttakPeriodeNavn.FELLESPERIODE;
-    case stonadskontoType.FORELDREPENGER_FØR_FØDSEL:
+    case StonadskontoType.FORELDREPENGER_FØR_FØDSEL:
       return uttakPeriodeNavn.FORELDREPENGER_FØR_FØDSEL;
-    case stonadskontoType.FLERBARNSDAGER:
+    case StonadskontoType.FLERBARNSDAGER:
       return uttakPeriodeNavn.FLERBARNSDAGER;
-    case stonadskontoType.FORELDREPENGER:
+    case StonadskontoType.FORELDREPENGER:
       return uttakPeriodeNavn.FORELDREPENGER;
     default:
       return '';
