@@ -72,6 +72,5 @@ Default.args = {
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     erTilSaksbehandling: true,
     behandlingId: '1',
-    href: '',
   },
 };

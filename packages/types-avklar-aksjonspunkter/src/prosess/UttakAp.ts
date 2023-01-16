@@ -1,33 +1,10 @@
 import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { PeriodeSoker } from '@fpsak-frontend/types';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
 type UttakAp = {
-  perioder: {
-    fom: string;
-    tom: string;
-    aktiviteter: {
-      stønadskontoType?: string;
-      trekkdagerDesimaler?: number;
-      arbeidsgiver?: {
-        identifikator?: string;
-        aktørId?: string;
-      };
-      arbeidsgiverReferanse?: string;
-      arbeidsforholdId?: string;
-      utbetalingsgrad?: string | number;
-      uttakArbeidType?: string;
-    }[];
-    begrunnelse?: string;
-    periodeResultatType: string;
-    periodeResultatÅrsak: string;
-    oppholdÅrsak: string;
-    flerbarnsdager?: boolean;
-    samtidigUttak?: boolean;
-    samtidigUttaksprosent?: number;
-    graderingInnvilget?: boolean;
-    graderingAvslagÅrsak: string;
-  }[];
+  perioder: PeriodeSoker[];
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.FASTSETT_UTTAKPERIODER
  | AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER
  | AksjonspunktKode.TILKNYTTET_STORTINGET

@@ -1,3 +1,5 @@
+import StonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
+
 export type AktivitetIdentifikator = Readonly<{
   uttakArbeidType: string;
   arbeidsforholdId?: string;
@@ -22,7 +24,7 @@ export type Stonadskonto = Readonly<{
 }>
 
 type UttakStonadskontoer = Readonly<{
-  stonadskontoer: Record<string, Stonadskonto>;
+  stonadskontoer: Record<StonadskontoType, Stonadskonto>;
   tapteDagerFpff: number;
 }>
 

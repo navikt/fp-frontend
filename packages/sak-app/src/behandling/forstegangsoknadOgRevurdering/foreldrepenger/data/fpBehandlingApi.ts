@@ -4,6 +4,7 @@ import {
   DokumentasjonVurderingBehov,
   FaktaArbeidsforhold,
   KontrollerFaktaPeriode,
+  PeriodeSoker,
   UttakKontrollerAktivitetskrav,
   UttakKontrollerFaktaPerioderWrapper,
   UttaksresultatPeriode,
@@ -14,7 +15,7 @@ import { behandlingFellesEndepunkter } from '../../../felles/data/behandlingFell
 
 type StonadskontoGittUttaksPerioderParams = {
   behandlingUuid: string;
-  perioder: any;
+  perioder: PeriodeSoker[];
 }
 
 export const FpBehandlingApiKeys = {

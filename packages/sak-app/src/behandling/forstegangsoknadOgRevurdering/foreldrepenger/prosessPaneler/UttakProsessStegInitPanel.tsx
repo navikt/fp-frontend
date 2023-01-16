@@ -69,7 +69,7 @@ const UttakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitPr
   ...props
 }) => {
   const intl = useIntl();
-  const { startRequest: tempUpdateStonadskontoer } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER);
+  const { startRequest: oppdaterStønadskontoer } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER);
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>
       {...props}
@@ -81,10 +81,10 @@ const UttakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitPr
       hentOverstyrtStatus={() => getStatusFromUttakresultat(props.behandling, props.requestApi)}
       renderPanel={(data) => (
         <UttakProsessIndex
-          employeeHasAccess={rettigheter.kanOverstyreAccess.isEnabled}
+          kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           personoversikt={personoversikt}
-          tempUpdateStonadskontoer={tempUpdateStonadskontoer}
+          oppdaterStønadskontoer={oppdaterStønadskontoer}
           {...data}
         />
       )}
