@@ -13,6 +13,7 @@ type KontrollerFaktaPeriode = Readonly<{
   flerbarnsdager?: boolean;
   morsAktivitet?: string;
   periodeKilde: string;
+  begrunnelse?: string;
 }>
 
 export default KontrollerFaktaPeriode;

@@ -203,6 +203,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
 
   const årsakstype = formMethods.watch('arsakstype');
   const flerbarnsdager = formMethods.watch('flerbarnsdager');
+  const begrunnelse = formMethods.watch('begrunnelse');
 
   useEffect(() => {
     formMethods.unregister('uttakPeriodeType');
@@ -429,6 +430,13 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
               </FlexRow>
             </>
           )}
+          {(begrunnelse && (
+            <>
+              <VerticalSpacer sixteenPx />
+              <Label size="small"><FormattedMessage id="UttakFaktaDetailForm.Begrunnelse" /></Label>
+              <BodyShort size="small">{begrunnelse}</BodyShort>
+            </>
+          ))}
           {!readOnly && (
             <>
               <VerticalSpacer thirtyTwoPx />
