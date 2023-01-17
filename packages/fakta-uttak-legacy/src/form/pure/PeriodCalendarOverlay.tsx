@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import { getRelatedTargetIE11, isIE11, createIntl } from '@navikt/ft-utils';
 
-import messages from '../../i18n/nb_NO.json';
+import messages from '../../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 

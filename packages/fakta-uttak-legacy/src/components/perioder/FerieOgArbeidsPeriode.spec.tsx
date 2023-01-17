@@ -2,10 +2,10 @@ import React from 'react';
 import sinon from 'sinon';
 import { Detail } from '@navikt/ds-react';
 
-import { RadioGroupField } from '@fpsak-frontend/form';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
+import RadioGroupField from '../../form/RadioGroupField';
 import { FerieOgArbeidsPeriode } from './FerieOgArbeidsPeriode';
 import messages from '../../../i18n/nb_NO.json';
 

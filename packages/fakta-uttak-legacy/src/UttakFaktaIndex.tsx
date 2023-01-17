@@ -6,8 +6,8 @@ import {
   Personoversikt, UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@navikt/ft-utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 
+import ReduxWrapper from './form/ReduxWrapper';
 import UttakInfoPanel from './components/UttakInfoPanel';
 import messages from '../i18n/nb_NO.json';
 

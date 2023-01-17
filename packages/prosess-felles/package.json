@@ -6,7 +6,6 @@
   "private": true,
   "dependencies": {
     "@fpsak-frontend/assets": "1.0.0",
-    "@fpsak-frontend/form": "1.0.0",
     "@fpsak-frontend/kodeverk": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
     "@navikt/ds-react": "2.0.12",
@@ -18,14 +17,9 @@
     "@navikt/ft-utils": "1.1.12",
     "react": "18.2.0",
     "react-hook-form": "7.41.5",
-    "react-intl": "6.2.5",
-    "react-redux": "8.0.5",
-    "redux": "4.2.0",
-    "redux-form": "8.3.9"
+    "react-intl": "6.2.5"
   },
   "devDependencies": {
-    "@fpsak-frontend/utils-test": "1.0.0",
-    "enzyme": "3.11.0",
-    "sinon": "15.0.1"
+    "@fpsak-frontend/utils-test": "1.0.0"
   }
 }

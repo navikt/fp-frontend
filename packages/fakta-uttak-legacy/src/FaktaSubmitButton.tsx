@@ -6,9 +6,9 @@ import { Button } from '@navikt/ds-react';
 
 import { ariaCheck, isRequiredMessage } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
-import { hasBehandlingFormErrorsOfType } from '@fpsak-frontend/form';
+import hasBehandlingFormErrorsOfType from './form/hasBehandlingFormErrorsOfType';
 
-import messages from '../../i18n/nb_NO.json';
+import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 

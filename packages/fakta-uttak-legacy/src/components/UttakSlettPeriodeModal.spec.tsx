@@ -2,9 +2,10 @@ import React from 'react';
 import sinon from 'sinon';
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { TextAreaField } from '@fpsak-frontend/form';
 import { Modal, Button } from '@navikt/ds-react';
 import { UttakSlettPeriodeModalImpl } from './UttakSlettPeriodeModal';
+
+import TextAreaField from '../form/TextAreaField';
 import messages from '../../i18n/nb_NO.json';
 import CustomUttakKontrollerFaktaPerioder from '../CustomUttakKontrollerFaktaPerioderTsType';
 
