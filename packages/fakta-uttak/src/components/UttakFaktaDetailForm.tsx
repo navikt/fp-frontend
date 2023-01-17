@@ -132,6 +132,10 @@ const transformValues = (
   } : undefined,
   periodeKilde: FordelingPeriodeKilde.SAKSBEHANDLER,
   aksjonspunktType: undefined,
+  // @ts-ignore Fiks NumberField-komponenten
+  arbeidstidsprosent: values.arbeidstidsprosent === '' ? null : values.arbeidstidsprosent,
+  // @ts-ignore Fiks NumberField-komponenten
+  samtidigUttaksprosent: values.samtidigUttaksprosent === '' ? null : values.samtidigUttaksprosent,
 });
 
 const requiredNårGraderingErOppgitt = (
