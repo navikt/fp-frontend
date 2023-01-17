@@ -5,12 +5,14 @@ import { Button } from '@navikt/ds-react';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import {
-  CheckboxField, DecimalField, PeriodpickerField, SelectField, TextAreaField,
-} from '@fpsak-frontend/form';
 import { AlleKodeverk, FaktaArbeidsforhold, Personoversikt } from '@fpsak-frontend/types';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 
+import TextAreaField from '../form/TextAreaField';
+import SelectField from '../form/SelectField';
+import CheckboxField from '../form/CheckboxField';
+import DecimalField from '../form/DecimalField';
+import PeriodpickerField from '../form/PeriodpickerField';
 import { NyPeriode, UttakNyPeriode } from './UttakNyPeriode';
 import messages from '../../i18n/nb_NO.json';
 

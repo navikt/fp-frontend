@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { TextAreaField } from '@fpsak-frontend/form';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 
+import TextAreaField from './form/TextAreaField';
 import ProsessStegBegrunnelseTextField from './ProsessStegBegrunnelseTextField';
 
 jest.mock('react-intl', () => {

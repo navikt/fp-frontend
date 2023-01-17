@@ -4,11 +4,11 @@ import { decodeHtmlEntity, createIntl } from '@navikt/ft-utils';
 import {
   hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-form-validators';
-import { TextAreaField } from '@fpsak-frontend/form';
 
 import { Aksjonspunkt } from '@fpsak-frontend/types';
+import TextAreaField from './form/TextAreaField';
 import styles from './faktaBegrunnelseTextField.less';
-import messages from '../../i18n/nb_NO.json';
+import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 

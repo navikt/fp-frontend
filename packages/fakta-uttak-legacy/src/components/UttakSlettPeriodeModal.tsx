@@ -8,7 +8,6 @@ import {
   FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
-import { TextAreaField } from '@fpsak-frontend/form';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   hasValidText, maxLength, minLength, required,
@@ -16,8 +15,10 @@ import {
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 
-import styles from './uttakSlettPeriodeModal.less';
+import TextAreaField from '../form/TextAreaField';
 import CustomUttakKontrollerFaktaPerioder from '../CustomUttakKontrollerFaktaPerioderTsType';
+
+import styles from './uttakSlettPeriodeModal.less';
 
 const minLength3 = minLength(3);
 const maxLength2000 = maxLength(2000);

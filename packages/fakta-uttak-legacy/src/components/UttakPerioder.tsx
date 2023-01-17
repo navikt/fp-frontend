@@ -8,12 +8,10 @@ import { bindActionCreators, Dispatch } from 'redux';
 import moment from 'moment';
 import { Label, Button } from '@navikt/ds-react';
 
-import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelse,
   FamilieHendelseSamling, KodeverkMedNavn, Personoversikt, AlleKodeverk,
 } from '@fpsak-frontend/types';
-import { CheckboxField } from '@fpsak-frontend/form';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -22,10 +20,12 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
+import CheckboxField from '../form/CheckboxField';
 import UttakPeriode from './UttakPeriode';
 import UttakNyPeriode from './UttakNyPeriode';
 import UttakSlettPeriodeModal from './UttakSlettPeriodeModal';
 import CustomUttakKontrollerFaktaPerioder from '../CustomUttakKontrollerFaktaPerioderTsType';
+import FaktaSubmitButton from '../FaktaSubmitButton';
 
 const createNewPerioder = (perioder: CustomUttakKontrollerFaktaPerioder[], id: string, values: any) => {
   const updatedIndex = perioder.findIndex((p: CustomUttakKontrollerFaktaPerioder) => p.id === id);

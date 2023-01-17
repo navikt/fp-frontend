@@ -1,12 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
+import { isDirty as reduxIsDirty, isSubmitting as reduxIsSubmitting } from 'redux-form';
 import { Button } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 import { ariaCheck, isRequiredMessage } from '@navikt/ft-form-validators';
 
-import { hasBehandlingFormErrorsOfType } from '@fpsak-frontend/form';
-
-import { isDirty as reduxIsDirty, isSubmitting as reduxIsSubmitting } from 'redux-form';
+import hasBehandlingFormErrorsOfType from './form/hasBehandlingFormErrorsOfType';
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
