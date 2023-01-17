@@ -11,7 +11,7 @@ import ErrorFormatter from './feilhandtering/ErrorFormatter';
 import ErrorMessage from './feilhandtering/ErrorMessage';
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 
-import { AVDELINGSLEDER_PATH } from '../paths';
+import { AVDELINGSLEDER_PATH, JOURNALFØRING_PATH } from '../paths';
 
 import '@navikt/ft-sak-dekorator/dist/style.css';
 
@@ -91,6 +91,10 @@ const Dekorator: FunctionComponent<OwnProps> = ({
     navigate(AVDELINGSLEDER_PATH);
     e.preventDefault();
   }, [navigate]);
+  const visJournalføringsside = useCallback((e: React.SyntheticEvent) => {
+    navigate(JOURNALFØRING_PATH);
+    e.preventDefault();
+  }, [navigate]);
 
   const errorMessages = useRestApiError();
   const { removeErrorMessages } = useRestApiErrorDispatcher();
@@ -110,7 +114,9 @@ const Dekorator: FunctionComponent<OwnProps> = ({
       feilmeldinger={hideErrorMessages ? EMPTY_ARRAY : resolvedErrorMessages}
       fjernFeilmeldinger={removeErrorMessages}
       setSiteHeight={setSiteHeight}
-      kanOppgavestyre={kanOppgavestyre}
+      kanOppgavestyre
+      visJournalføringside={visJournalføringsside}
+      kanJournalføre
     />
   );
 };

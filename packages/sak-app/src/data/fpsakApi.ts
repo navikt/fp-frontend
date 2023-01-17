@@ -10,7 +10,7 @@ import {
   ForhåndsvisMeldingParams, FagsakEnkel, Fagsak, FagsakDataFpTilbake, NavAnsatt, AlleKodeverk,
 } from '@fpsak-frontend/types';
 
-type BehandlendeEnheter = {
+export type BehandlendeEnheter = {
   enhetId: string;
   enhetNavn: string;
 }[];
