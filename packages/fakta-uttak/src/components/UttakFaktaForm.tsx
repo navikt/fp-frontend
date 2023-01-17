@@ -166,7 +166,7 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
-  const [isDirty, setDirty] = useState<boolean>(false);
+  const [isDirty, setDirty] = useState(false);
 
   const feilmelding = useMemo(() => {
     if (isDirty) {
@@ -197,7 +197,7 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <Heading size="small"><FormattedMessage id="UttakFaktaForm.FaktaUttak" /></Heading>
                 </FlexColumn>
-                {kanOverstyre && !readOnly && (
+                {kanOverstyre && !readOnly && aksjonspunkter.length === 0 && (
                   <FlexColumn>
                     <OverstyringKnapp onClick={() => setOverstyrt(true)} />
                   </FlexColumn>

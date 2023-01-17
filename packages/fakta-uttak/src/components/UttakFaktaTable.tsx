@@ -109,9 +109,9 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
       .concat(uPeriode)
       .sort((a1, a2) => dayjs(a1.fom).diff(dayjs(a2.fom)));
 
+    setDirty(true);
     oppdaterUttakPerioder(oppdatertePerioder);
     velgPeriodeFomDato(undefined, true);
-    setDirty(true);
   }, [uttakKontrollerFaktaPerioder]);
 
   const slettPeriode = useCallback((fom: string) => {
@@ -215,6 +215,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
                 alleKodeverk={alleKodeverk}
                 oppdaterPeriode={(uttaksperiode: KontrollerFaktaPeriodeMedApMarkering) => {
                   const nyeSortertePerioder = uttakKontrollerFaktaPerioder.concat(uttaksperiode).sort((a1, a2) => dayjs(a1.fom).diff(dayjs(a2.fom)));
+                  setDirty(true);
                   oppdaterUttakPerioder(nyeSortertePerioder);
                   settVisNyPeriode(false);
                 }}
