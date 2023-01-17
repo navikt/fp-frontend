@@ -45,6 +45,11 @@ describe('<UttakFaktaIndex>', () => {
 
     await userEvent.click(screen.queryByAltText('Åpne rad'));
 
+    const periodeFra = utils.getByLabelText('Periode fra');
+    await userEvent.clear(periodeFra);
+    await userEvent.type(periodeFra, '31.01.2022');
+    fireEvent.blur(periodeFra);
+
     await userEvent.type(utils.getByLabelText('Samtidig uttaksprosent'), '10');
 
     await userEvent.click(screen.getByText('Oppdater'));
@@ -58,7 +63,7 @@ describe('<UttakFaktaIndex>', () => {
       kode: '6065',
       begrunnelse: 'Dette er en begrunnelse',
       perioder: [{
-        fom: '2022-11-12',
+        fom: '2022-01-31',
         tom: '2022-12-01',
         originalFom: '2022-11-12',
         periodeKilde: 'SAKSBEHANDLER',
@@ -158,7 +163,7 @@ describe('<UttakFaktaIndex>', () => {
     await userEvent.click(screen.getByText('Legg til periode'));
 
     const periodeFra = utils.getByLabelText('Periode fra');
-    await userEvent.type(periodeFra, '12.12.2022');
+    await userEvent.type(periodeFra, '31.01.2022');
     fireEvent.blur(periodeFra);
 
     const periodeTil = utils.getByLabelText('Periode til');
@@ -180,7 +185,7 @@ describe('<UttakFaktaIndex>', () => {
       kode: '5064',
       begrunnelse: 'Dette er en begrunnelse',
       perioder: [{
-        fom: '2022-12-12',
+        fom: '2022-01-31',
         tom: '2022-12-14',
         periodeKilde: 'SAKSBEHANDLER',
         aksjonspunktType: undefined,
@@ -204,6 +209,11 @@ describe('<UttakFaktaIndex>', () => {
 
     expect(await screen.findByText('Arbeidsgiver oppgitt for perioden er ukjent. Referanse: 91090823')).toBeInTheDocument();
 
+    const periodeFra = utils.getByLabelText('Periode fra');
+    await userEvent.clear(periodeFra);
+    await userEvent.type(periodeFra, '31.01.2022');
+    fireEvent.blur(periodeFra);
+
     await userEvent.selectOptions(utils.getByLabelText('Arbeidsgiver'), '910909088-ORDINÆRT_ARBEID');
 
     await userEvent.click(screen.getByText('Oppdater'));
@@ -217,7 +227,7 @@ describe('<UttakFaktaIndex>', () => {
       kode: '5063',
       begrunnelse: 'Dette er en begrunnelse',
       perioder: [{
-        fom: '2022-11-12',
+        fom: '2022-01-31',
         tom: '2022-12-01',
         originalFom: '2022-11-12',
         periodeKilde: 'SAKSBEHANDLER',

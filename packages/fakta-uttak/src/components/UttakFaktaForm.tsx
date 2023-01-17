@@ -78,11 +78,8 @@ const validerPerioder = (
     return intl.formatMessage({ id: 'UttakFaktaForm.OverlappendePerioder' });
   }
 
-  if (aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE
-  && ap.status === AksjonspunktStatus.OPPRETTET)) {
-    if (uttakPerioder.every((up) => !dayjs(up.fom).isSame(førsteUttaksdato))) {
-      return intl.formatMessage({ id: 'UttakFaktaDetailForm.ErIkkeLikForsteUttaksdato' });
-    }
+  if (uttakPerioder.every((up) => !dayjs(up.fom).isSame(førsteUttaksdato))) {
+    return intl.formatMessage({ id: 'UttakFaktaDetailForm.ErIkkeLikForsteUttaksdato' }, { dato: dayjs(førsteUttaksdato).format(DDMMYYYY_DATE_FORMAT) });
   }
 
   const harApIngenPerioder = aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE);
@@ -169,11 +166,11 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
   const [isDirty, setDirty] = useState(false);
 
   const feilmelding = useMemo(() => {
-    if (isDirty) {
+    if (isDirty || formMethods.formState.isDirty) {
       return validerPerioder(uttakPerioder, aksjonspunkter, ytelsefordeling.førsteUttaksdato, intl);
     }
     return null;
-  }, [uttakPerioder, isDirty]);
+  }, [uttakPerioder, isDirty, formMethods.formState.isDirty]);
 
   const isSubmittable = submittable
     && feilmelding === null
