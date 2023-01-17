@@ -11,11 +11,13 @@ import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurd
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
-import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form';
 import {
   hasValidPeriod, hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-form-validators';
 
+import TextAreaField from '../../form/TextAreaField';
+import RadioGroupField from '../../form/RadioGroupField';
+import RadioOption from '../../form/RadioOption';
 import EndreSoknadsperiode from '../EndreSoknadsperiode';
 import PerioderKnapper from './PerioderKnapper';
 

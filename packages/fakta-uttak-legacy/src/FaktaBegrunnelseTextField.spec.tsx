@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { TextAreaField } from '@fpsak-frontend/form';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import messages from '../../i18n/nb_NO.json';
+import TextAreaField from './form/TextAreaField';
+import messages from '../i18n/nb_NO.json';
 import FaktaBegrunnelseTextField from './FaktaBegrunnelseTextField';
 
 describe('<FaktaBegrunnelseTextField>', () => {

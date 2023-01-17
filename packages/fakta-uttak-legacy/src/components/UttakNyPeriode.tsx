@@ -4,16 +4,6 @@ import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { Detail, Label, Button } from '@navikt/ds-react';
-
-import {
-  CheckboxField,
-  DecimalField,
-  PeriodpickerField,
-  RadioGroupField,
-  RadioOption,
-  SelectField,
-  TextAreaField,
-} from '@fpsak-frontend/form';
 import { calcDaysAndWeeks, guid } from '@navikt/ft-utils';
 import {
   hasValidDate,
@@ -40,6 +30,13 @@ import {
   ArbeidsgiverOpplysningerPerId, AlleKodeverk, FaktaArbeidsforhold, KodeverkMedNavn, Personoversikt,
 } from '@fpsak-frontend/types';
 
+import TextAreaField from '../form/TextAreaField';
+import SelectField from '../form/SelectField';
+import RadioOption from '../form/RadioOption';
+import CheckboxField from '../form/CheckboxField';
+import RadioGroupField from '../form/RadioGroupField';
+import DecimalField from '../form/DecimalField';
+import PeriodpickerField from '../form/PeriodpickerField';
 import lagVisningsNavn from './utils/lagVisningsNavn';
 
 import styles from './uttakNyPeriode.less';

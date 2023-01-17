@@ -3,11 +3,11 @@ import sinon from 'sinon';
 
 import { Detail } from '@navikt/ds-react';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { RadioGroupField } from '@fpsak-frontend/form';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
 import { FamilieHendelse } from '@fpsak-frontend/types';
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
+import RadioGroupField from '../../form/RadioGroupField';
 import { SykdomOgSkadePeriode } from './SykdomOgSkadePeriode';
 import messages from '../../../i18n/nb_NO.json';
 
