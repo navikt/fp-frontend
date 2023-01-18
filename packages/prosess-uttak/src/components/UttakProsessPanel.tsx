@@ -194,7 +194,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
 
   const allePerioder = uttaksresultatPeriode.perioderAnnenpart.concat(perioder);
 
-  const velgPeriodeMedAp = useCallback((per) => {
+  const visPeriode = useCallback((per) => {
     const index = per.findIndex((period) => period.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING);
     if (index !== -1) {
       setValgtPeriodeIndex(index);
@@ -204,7 +204,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   }, [valgtPeriodeIndex]);
 
   useEffect(() => {
-    velgPeriodeMedAp(allePerioder);
+    visPeriode(allePerioder);
   }, []);
 
   const bekreftAksjonspunkter = useCallback(() => {
@@ -221,7 +221,12 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
     oppdaterStønadskontoer({ behandlingUuid: behandling.uuid, perioder: nyePerioder })
       .then((oppdatertStønadskonto: UttakStonadskontoer) => {
         setStønadskonto(oppdatertStønadskonto);
-        velgPeriodeMedAp(uttaksresultatPeriode.perioderAnnenpart.concat(nyePerioder));
+        if (oppdatertePerioder.length === 2) {
+          const index = nyePerioder.findIndex((p) => p.fom === oppdatertePerioder[0].fom);
+          setValgtPeriodeIndex(uttaksresultatPeriode.perioderAnnenpart.length + index);
+        } else {
+          visPeriode(uttaksresultatPeriode.perioderAnnenpart.concat(nyePerioder));
+        }
       });
   }, [perioder, valgtPeriodeIndex]);
 
@@ -242,7 +247,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
     return validerPerioder(perioder, stønadskonto, intl);
   }, [perioder, stønadskonto, valgtPeriodeIndex, isDirty]);
 
-  const harIngenEllerLukkedeAksjonspunkt = aksjonspunkter.length === 0
+  const harIngenEllerLukkedeAksjonspunkt = aksjonspunkter.filter((ap) => ap.definisjon !== AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER).length === 0
     || aksjonspunkter.some((ap) => ap.toTrinnsBehandlingGodkjent === true && ap.status === aksjonspunktStatus.UTFORT);
 
   return (

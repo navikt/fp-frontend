@@ -126,6 +126,7 @@ const lagPeriode = (
     ...valgtPeriode,
     fom,
     tom,
+    begrunnelse: ' ',
     aktiviteter: oppdaterteAktiviteter,
   };
 };
