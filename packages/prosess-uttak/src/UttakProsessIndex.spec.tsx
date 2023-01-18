@@ -317,7 +317,7 @@ describe('<UttakProsessIndex>', () => {
           utbetalingsgrad: 0,
           uttakArbeidType: 'ORDINÆRT_ARBEID',
         }],
-        begrunnelse: 'Dette er en vurdering på periode 2',
+        begrunnelse: ' Dette er en vurdering på periode 2',
         flerbarnsdager: false,
         fom: '2022-10-29',
         graderingAvslagÅrsak: '-',
