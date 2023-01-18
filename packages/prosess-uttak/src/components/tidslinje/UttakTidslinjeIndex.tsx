@@ -166,6 +166,14 @@ const getStatusClassnameForMedsøker = (
 ): string => (periode.periodeResultatType === periodeResultatType.INNVILGET && !tilknyttetStortinget
   ? godkjentKlassenavn : avvistKlassenavn);
 
+const getStatusClassname = (
+  erHovedsøker: boolean,
+  periode: PeriodeSoker,
+  tilknyttetStortinget: boolean,
+): string => (erHovedsøker
+  ? getStatusClassNameForHovedsøker(periode, tilknyttetStortinget)
+  : getStatusClassnameForMedsøker(periode, tilknyttetStortinget));
+
 const leggTidslinjedataTilPeriode = (
   erHovedsøker: boolean,
   hovedsøkerPerioder: PeriodeSoker[],
@@ -182,9 +190,7 @@ const leggTidslinjedataTilPeriode = (
 
     const gradertClassName = periode.gradertAktivitet && periode.graderingInnvilget ? 'gradert' : '';
 
-    const statusClassName = erHovedsøker
-      ? getStatusClassNameForHovedsøker(periode, tilknyttetStortinget)
-      : getStatusClassnameForMedsøker(periode, tilknyttetStortinget);
+    const statusClassName = getStatusClassname(erHovedsøker, periode, tilknyttetStortinget);
     const oppholdStatusClassName = statusClassName === 'undefined' ? 'opphold-manuell' : 'opphold';
 
     const isEndretClassName = periode.begrunnelse

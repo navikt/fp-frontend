@@ -120,6 +120,40 @@ const lagPeriodeTypeOptions = (typer: KodeverkMedNavn[]): ReactElement[] => type
     navn,
   }) => <option value={kode} key={kode}>{navn}</option>);
 
+const validerUkerOgDager = (
+  getValues: UseFormGetValues<UttakAktivitetType>,
+  index: number,
+) => (
+  value: string,
+) => {
+  const weeks = getValues(`aktiviteter.${index}.weeks`);
+  const days = getValues(`aktiviteter.${index}.days`);
+  const skalSjekke = parseFloat(weeks) !== 0 || parseFloat(days) !== 0;
+  if (skalSjekke) {
+    const requiredMessage = required(value);
+    if (requiredMessage) {
+      return requiredMessage;
+    }
+    const notDashMessage = notDash(value);
+    if (notDashMessage) {
+      return notDashMessage;
+    }
+  }
+  return null;
+};
+
+const validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt = (
+  getValues: UseFormGetValues<UttakAktivitetType>,
+  utsettelseType: string,
+  intl: IntlShape,
+) => (
+  ukerEllerDager: string,
+) => {
+  const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
+  return harUtsettelsestype && getValues('erOppfylt') && parseFloat(ukerEllerDager) > 0
+    ? intl.formatMessage({ id: 'ValidationMessage.trekkdagerErMerEnnNullUtsettelse' }) : null;
+};
+
 interface OwnProps {
   periodeTyper: KodeverkMedNavn[];
   isReadOnly: boolean;
@@ -164,22 +198,7 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                       hideLabel
                       label=""
                       readOnly={isReadOnly}
-                      validate={[(value: string) => {
-                        const weeks = getValues(`aktiviteter.${index}.weeks`);
-                        const days = getValues(`aktiviteter.${index}.days`);
-                        const skalSjekke = parseFloat(weeks) !== 0 || parseFloat(days) !== 0;
-                        if (skalSjekke) {
-                          const requiredMessage = required(value);
-                          if (requiredMessage) {
-                            return requiredMessage;
-                          }
-                          const notDashMessage = notDash(value);
-                          if (notDashMessage) {
-                            return notDashMessage;
-                          }
-                        }
-                        return null;
-                      }]}
+                      validate={[validerUkerOgDager(getValues, index)]}
                     />
                   </div>
                 </TableColumn>
@@ -195,11 +214,7 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                               required,
                               hasValidInteger,
                               maxLength3,
-                              (uker: string) => {
-                                const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
-                                return harUtsettelsestype && getValues('erOppfylt') && parseFloat(uker) > 0
-                                  ? intl.formatMessage({ id: 'ValidationMessage.trekkdagerErMerEnnNullUtsettelse' }) : null;
-                              },
+                              validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt(getValues, utsettelseType, intl),
                             ]}
                           />
                         </span>
@@ -215,11 +230,7 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                             required,
                             hasValidDecimal,
                             maxLength3,
-                            (dager: string) => {
-                              const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
-                              return harUtsettelsestype && getValues('erOppfylt') && parseFloat(dager) > 0
-                                ? intl.formatMessage({ id: 'ValidationMessage.trekkdagerErMerEnnNullUtsettelse' }) : null;
-                            },
+                            validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt(getValues, utsettelseType, intl),
                           ]}
                         />
                       </FlexColumn>
