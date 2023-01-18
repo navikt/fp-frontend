@@ -92,7 +92,8 @@ const lagOptionsTilPeriodeÅrsakSelect = (
   skalFiltrere?: boolean,
 ): ReactElement[] => {
   årsakKoder.sort(sorterÅrsakKodeverk);
-  let filteredNyKodeArray = årsakKoder
+
+  const filteredNyKodeArray = årsakKoder
     .filter((kodeItem) => !utfallType || kodeItem.utfallType === utfallType)
     .filter((kodeItem) => {
       if (kodeItem.gyldigForLovendringer === undefined) {
@@ -114,29 +115,23 @@ const lagOptionsTilPeriodeÅrsakSelect = (
         : kodeItem.synligForRolle.includes('IKKE_MOR');
     });
 
-  if (!skalFiltrere) {
-    return filteredNyKodeArray
-      .map(({
-        kode,
-        navn,
-      }) => <option value={kode} key={kode}>{navn}</option>);
+  const mapTilOption = ({ kode, navn }) => <option value={kode} key={kode}>{navn}</option>;
+
+  if (skalFiltrere && utsettelseType) {
+    if (utsettelseType !== utsettelseArsakCodes.UDEFINERT) {
+      return filteredNyKodeArray
+        .filter((kv) => kv.uttakTyper.includes('UTSETTELSE'))
+        .map(mapTilOption);
+    }
+    if (periodeType && utsettelseType === utsettelseArsakCodes.UDEFINERT) {
+      return filteredNyKodeArray
+        .filter((kv) => kv.uttakTyper.includes('UTTAK'))
+        .filter((kv) => kv.valgbarForKonto.includes(periodeType))
+        .map(mapTilOption);
+    }
   }
 
-  if (utsettelseType && utsettelseType !== utsettelseArsakCodes.UDEFINERT) {
-    filteredNyKodeArray = filteredNyKodeArray.filter((kv) => kv.uttakTyper.includes('UTSETTELSE'));
-  }
-
-  if (periodeType && utsettelseType && utsettelseType === utsettelseArsakCodes.UDEFINERT) {
-    filteredNyKodeArray = filteredNyKodeArray
-      .filter((kv) => kv.uttakTyper.includes('UTTAK'))
-      .filter((kv) => kv.valgbarForKonto.includes(periodeType));
-  }
-
-  return filteredNyKodeArray
-    .map(({
-      kode,
-      navn,
-    }) => <option value={kode} key={kode}>{navn}</option>);
+  return filteredNyKodeArray.map(mapTilOption);
 };
 
 // https://jira.adeo.no/browse/PFP-7937
