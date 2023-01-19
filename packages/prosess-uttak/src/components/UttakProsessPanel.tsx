@@ -230,8 +230,8 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
       });
   }, [perioder, valgtPeriodeIndex]);
 
-  const erAksjonspunktÅpent = aksjonspunkter.some((ap) => ap.status === AksjonspunktStatus.OPPRETTET);
-  const erTilknyttetStortinget = aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.TILKNYTTET_STORTINGET && erAksjonspunktÅpent);
+  const harÅpneAksjonspunkter = aksjonspunkter.some((ap) => ap.status === AksjonspunktStatus.OPPRETTET);
+  const erTilknyttetStortinget = aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.TILKNYTTET_STORTINGET && harÅpneAksjonspunkter);
 
   const erBekreftKnappDisablet = useMemo(() => {
     if (perioder.some((p) => p.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING)) {
@@ -259,7 +259,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
               <FormattedMessage id="UttakPanel.Title" />
             </Heading>
           </FlexColumn>
-          {kanOverstyre && !erAksjonspunktÅpent && !isReadOnly && (
+          {kanOverstyre && !harÅpneAksjonspunkter && !isReadOnly && (
             <FlexColumn>
               <OverstyringKnapp onClick={toggleOverstyring} erOverstyrt={erOverstyrt} />
             </FlexColumn>
@@ -267,7 +267,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
         </FlexRow>
       </FlexContainer>
       <VerticalSpacer twentyPx />
-      {aksjonspunkter.length > 0 && erAksjonspunktÅpent && (
+      {aksjonspunkter.length > 0 && harÅpneAksjonspunkter && (
         <>
           <AksjonspunktHelpTextHTML>
             {hentApTekster(uttaksresultatPeriode, aksjonspunkter)}
@@ -303,13 +303,13 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
             uttaksresultatPeriode={uttaksresultatPeriode}
             valgtPeriodeIndex={valgtPeriodeIndex}
             oppdaterPeriode={oppdaterPeriode}
-            isEdited={false}
             isReadOnly={(harIngenEllerLukkedeAksjonspunkt || isReadOnly) && !erOverstyrt}
             alleKodeverk={alleKodeverk}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             uttakStonadskontoer={stønadskonto}
             setValgtPeriodeIndex={setValgtPeriodeIndex}
             erTilknyttetStortinget={erTilknyttetStortinget}
+            harÅpneAksjonspunkter={harÅpneAksjonspunkter}
           />
         </>
       )}
