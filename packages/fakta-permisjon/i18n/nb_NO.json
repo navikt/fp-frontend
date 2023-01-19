@@ -25,6 +25,7 @@
   "ArbeidsforholdFieldArray.TaMedArbeidsforholdIkkeInntektsmelding": "Fjern permisjonen og ta med arbeidsforholdet. Vurder om inntektsmelding må innhentes",
   "ArbeidsforholdFieldArray.IkkeTaMedArbeidsforhold": "Ikke ta med arbeidsforholdet",
   "ArbeidsforholdFieldArray.IkkeMottatt": "Ikke mottatt",
+  "ArbeidsforholdFieldArray.AltHjelpetekst": "Hjelpetekst",
 
   "InntektsmeldingOpplysningerPanel.Inntektsmelding": "Inntektsmelding",
   "InntektsmeldingOpplysningerPanel.Refusjon": "Refusjon",
