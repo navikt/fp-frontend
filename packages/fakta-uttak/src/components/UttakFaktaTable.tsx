@@ -187,7 +187,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
           );
         })}
       </Table>
-      {!readOnly && erRedigerbart && (
+      {erRedigerbart && (
         <>
           {!visNyPeriode && (
             <Button

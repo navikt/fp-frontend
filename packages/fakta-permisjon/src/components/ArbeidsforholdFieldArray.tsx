@@ -46,6 +46,7 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
     <>
       {fields.map((field, index) => (
         <ArbeidsforholdField
+          key={field.id}
           fieldId={field.id}
           index={index}
           saksnummer={saksnummer}

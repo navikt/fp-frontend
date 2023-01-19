@@ -182,7 +182,7 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
   const harApneAksjonspunkter = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status));
   const aksjonspunktTekster = useMemo(() => finnAksjonspunktTekster(aksjonspunkter, ytelsefordeling), [aksjonspunkter, ytelsefordeling]);
 
-  const erRedigerbart = aksjonspunkter.filter((a) => a.definisjon !== AksjonspunktKode.OVERSTYR_FAKTA_UTTAK).length > 0 || erOverstyrt;
+  const erRedigerbart = !readOnly && (aksjonspunkter.filter((a) => a.definisjon !== AksjonspunktKode.OVERSTYR_FAKTA_UTTAK).length > 0 || erOverstyrt);
 
   return (
     <>

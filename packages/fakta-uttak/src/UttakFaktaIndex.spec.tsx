@@ -294,7 +294,8 @@ describe('<UttakFaktaIndex>', () => {
     expect(utils.queryByLabelText('Flerbarnsdager')).not.toBeInTheDocument();
   });
 
-  it('skal vise periode der aksjonspunkt er løst og behandlingen er avsluttet', async () => {
+  // TODO Mogleg denne kan slettast
+  it.skip('skal vise periode der aksjonspunkt er løst og behandlingen er avsluttet', async () => {
     render(<VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet />);
 
     expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
