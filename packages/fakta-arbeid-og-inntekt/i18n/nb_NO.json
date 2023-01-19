@@ -29,6 +29,7 @@
   "InntektsmeldingInnhentesForm.Kommentar": "Kommentar",
   "InntektsmeldingInnhentesForm.Lagre": "Lagre",
   "InntektsmeldingInnhentesForm.Avbryt": "Avbryt",
+  "InntektsmeldingInnhentesForm.AltHjelpetekst": "Hjelpetekst",
   "InntektsmeldingInnhentesForm.HjelpetekstDel1": "Vi trenger inntektsmelding for å behandle saken. Kontakt arbeidsgiveren per telefon. Hvis kontaktinformasjonen til arbeidsgiver er vanskelig å finne, kontakt bruker først.",
   "InntektsmeldingInnhentesForm.HjelpetekstDel2": "Det er kun unntaksvis at en sak skal behandles uten inntektsmelding, f.eks. at man etter gjentatte ganger ikke oppnår kontakt. Refusjon til arbeidsgiver er ikke mulig uten en inntektsmelding.",
   "InntektsmeldingInnhentesForm.HjelpetekstDel3": "Dersom det er flere arbeidsforhold i samme virksomhet må det sendes en inntektsmelding som gjelder samlet for alle, eller én per arbeidsforhold med arbeidsforholdsID.",
@@ -56,6 +57,7 @@
   "ManglendeOpplysningerForm.Stillingsprosent": "Stillingsprosent",
   "ManglendeOpplysningerForm.Lagre": "Lagre",
   "ManglendeOpplysningerForm.Avbryt": "Avbryt",
+  "ManglendeOpplysningerForm.AltHjelpetekst": "Hjelpetekst",
   "ManglendeOpplysningerForm.Hjelpetekst": "Det er kun unntaksvis at det skal opprettes manuelle arbeidsforhold basert på en inntektsmelding. Det kan være i saker hvor søker er ambassadepersonell, utenlandske ansatte eller fisker. Hvis det er andre arbeidsforhold må du kontakte arbeidsgiver eller søker for riktig registrering i AA-reg.",
 
   "ArbeidsforholdInformasjonPanel.ArbeidsforholdId": "ID",

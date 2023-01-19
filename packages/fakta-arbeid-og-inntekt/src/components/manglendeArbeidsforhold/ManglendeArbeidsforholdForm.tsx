@@ -1,10 +1,11 @@
 import React, {
-  useCallback, FunctionComponent, useMemo,
+  useCallback, FunctionComponent, useMemo, useState, useRef,
 } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm, UseFormGetValues } from 'react-hook-form';
-import Hjelpetekst from 'nav-frontend-hjelpetekst';
-import { Alert, Button } from '@navikt/ds-react';
+import {
+  Alert, BodyShort, Button, Popover,
+} from '@navikt/ds-react';
 
 import {
   hasValidText, maxLength, minLength, hasValidDate, hasValidInteger, required, minValue, maxValue, dateAfterOrEqual,
@@ -16,9 +17,11 @@ import {
   Inntektsmelding, ManueltArbeidsforhold, ManglendeInntektsmeldingVurdering,
 } from '@fpsak-frontend/types';
 import {
-  VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
+  VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image,
 } from '@navikt/ft-ui-komponenter';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
+import questionNormalUrl from '@fpsak-frontend/assets/images/question_normal.svg';
+import questionHoverUrl from '@fpsak-frontend/assets/images/question_hover.svg';
 
 import InntektsmeldingOpplysningerPanel from '../felles/InntektsmeldingOpplysningerPanel';
 import ArbeidsforholdOgInntekt from '../../types/arbeidsforholdOgInntekt';
@@ -141,6 +144,10 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
     }
   }, [inntektsmelding, oppdaterTabell]);
 
+  const imageRef = useRef<HTMLImageElement>(null);
+  const [openState, setOpenState] = useState(false);
+  const toggleHjelpetekst = useCallback(() => setOpenState((gammelVerdi) => !gammelVerdi), []);
+
   return (
     <>
       <InntektsmeldingOpplysningerPanel
@@ -163,12 +170,28 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                   <FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" />
                 </FlexColumn>
                 <FlexColumn>
-                  <Hjelpetekst
-                  /* @ts-ignore */
-                    popoverProps={{ className: styles.hjelpetekst }}
+                  <Image
+                    src={questionNormalUrl}
+                    srcHover={questionHoverUrl}
+                    ref={imageRef}
+                    onClick={toggleHjelpetekst}
+                    onKeyDown={toggleHjelpetekst}
+                    tabIndex={0}
+                    alt={intl.formatMessage({ id: 'ManglendeOpplysningerForm.AltHjelpetekst' })}
+                    className={styles.image}
+                  />
+                  <Popover
+                    open={openState}
+                    onClose={toggleHjelpetekst}
+                    anchorEl={imageRef.current}
+                    className={styles.hjelpetekst}
                   >
-                    <FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" />
-                  </Hjelpetekst>
+                    <Popover.Content className={styles.hjelpetekstInnhold}>
+                      <BodyShort>
+                        <FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" />
+                      </BodyShort>
+                    </Popover.Content>
+                  </Popover>
                 </FlexColumn>
               </FlexRow>
             </FlexContainer>
