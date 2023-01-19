@@ -1,5 +1,5 @@
 import React, {
-  useCallback, ReactElement, FunctionComponent, useMemo,
+  useCallback, ReactElement, FunctionComponent, useMemo, useEffect,
 } from 'react';
 import { Alert, Button } from '@navikt/ds-react';
 import { useForm } from 'react-hook-form';
@@ -296,10 +296,16 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
     return [...valgtPeriode.aktiviteter].sort(sorterAktiviteter);
   }, [valgtPeriode.aktiviteter]);
 
+  const defaultValues = useMemo(() => byggDefaultValues(valgtPeriode, sorterteAktiviteter, periodeResultatårsakKoder),
+    [valgtPeriode, sorterteAktiviteter, arbeidsgiverOpplysningerPerId]);
+
   const formMethods = useForm<UttakAktivitetType>({
-    defaultValues: useMemo(() => byggDefaultValues(valgtPeriode, sorterteAktiviteter, periodeResultatårsakKoder),
-      [valgtPeriode, sorterteAktiviteter, arbeidsgiverOpplysningerPerId]),
+    defaultValues,
   });
+
+  useEffect(() => {
+    formMethods.reset(defaultValues);
+  }, [defaultValues]);
 
   const erOppfylt = formMethods.watch('erOppfylt');
   const graderingInnvilget = formMethods.watch('graderingInnvilget');

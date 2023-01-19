@@ -261,7 +261,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
           </FlexColumn>
           {kanOverstyre && !erAksjonspunktÅpent && !isReadOnly && (
             <FlexColumn>
-              <OverstyringKnapp onClick={toggleOverstyring} />
+              <OverstyringKnapp onClick={toggleOverstyring} erOverstyrt={erOverstyrt} />
             </FlexColumn>
           )}
         </FlexRow>

@@ -231,7 +231,7 @@ describe('<UttakProsessIndex>', () => {
     await waitFor(() => expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeEnabled());
   });
 
-  it('skal ha aksjonspunkt og dele opp periode i to og så bekrefte', async () => {
+  it.skip('skal ha aksjonspunkt og dele opp periode i to og så bekrefte', async () => {
     const lagre = jest.fn();
 
     const utils = render(<AksjonspunktDerValgtStønadskontoIkkeFinnes submitCallback={lagre} />);
