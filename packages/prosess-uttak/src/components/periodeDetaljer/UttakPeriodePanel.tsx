@@ -139,13 +139,13 @@ interface OwnProps {
   uttaksresultatPeriode: UttaksresultatPeriode;
   valgtPeriodeIndex: number | undefined;
   oppdaterPeriode: (perioder: PeriodeSoker[]) => void;
-  isEdited: boolean;
   isReadOnly: boolean;
   alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   uttakStonadskontoer: UttakStonadskontoer;
   setValgtPeriodeIndex: React.Dispatch<React.SetStateAction<number>>;
   erTilknyttetStortinget: boolean;
+  harÅpneAksjonspunkter: boolean;
 }
 
 const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
@@ -155,13 +155,13 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
   uttaksresultatPeriode,
   valgtPeriodeIndex,
   oppdaterPeriode,
-  isEdited,
   isReadOnly,
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
   uttakStonadskontoer,
   setValgtPeriodeIndex,
   erTilknyttetStortinget,
+  harÅpneAksjonspunkter,
 }) => {
   const intl = useIntl();
 
@@ -206,7 +206,7 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
           <FlexColumn>
             <Label size="small">
               <FormattedMessage id="UttakTimeLineData.PeriodeData.Detaljer" />
-              {isEdited && <EditedIcon />}
+              {!!valgtPeriode.begrunnelse && !harÅpneAksjonspunkter && <EditedIcon />}
             </Label>
           </FlexColumn>
           {!isReadOnly && erHovedsøkersPeriode && !erRevurderingFørEndringsdato && (
