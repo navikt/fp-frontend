@@ -103,9 +103,14 @@ const transformValues = (
   perioder: PeriodeSoker[],
   aksjonspunkter: Aksjonspunkt[],
 ): UttakAp[] => {
-  const apKoder = aksjonspunkter.length > 0
-    ? aksjonspunkter.map((ap) => ap.definisjon)
-    : [AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER];
+  const harOverstyringApMedStatusOpprettet = aksjonspunkter
+    .some((ap) => ap.status === aksjonspunktStatus.OPPRETTET && ap.definisjon === AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER);
+
+  const skalSendeInnOverstyringAp = aksjonspunkter.length === 0 || (aksjonspunkter.length === 1 && harOverstyringApMedStatusOpprettet);
+
+  const apKoder = skalSendeInnOverstyringAp
+    ? [AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER]
+    : aksjonspunkter.filter((a) => a.definisjon !== AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER).map((ap) => ap.definisjon);
 
   return apKoder.map((ap) => ({
     kode: validerApKodeOgHentApEnum(ap, AksjonspunktCode.FASTSETT_UTTAKPERIODER,
