@@ -1,4 +1,4 @@
-type Oppgave = Readonly<{
+type OppgaveOversikt = Readonly<{
   id: number;
   opprettetDato: string,
   frist: string,
@@ -10,6 +10,7 @@ type Oppgave = Readonly<{
   oppgavetype: string;
   status: string;
   prioritet: string;
+  journalpostHarMangler: boolean;
 }>
 
-export default Oppgave;
+export default OppgaveOversikt;

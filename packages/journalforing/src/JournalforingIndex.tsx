@@ -7,7 +7,7 @@ import { Heading } from '@navikt/ds-react';
 import messages from '../i18n/nb_NO.json';
 import JournalforingPanel from './components/JournalforingPanel';
 import OppgaveIndex from './components/OppgaveIndex';
-import Oppgave from './typer/oppgaveTsType';
+import OppgaveOversikt from './typer/oppgaveOversiktTsType';
 
 const intl = createIntl(messages);
 
@@ -30,12 +30,13 @@ const oppgaver = [
     frist: '2022-02-01',
     status: 'ÅPEN',
     prioritet: 'NORMAL',
+    journalpostHarMangler: false,
   },
   {
     id: 631,
     tildeltEnhetsnr: '4819',
     journalpostId: '828546',
-    aktoerId: '19358140968134',
+    aktoerId: '-',
     beskrivelse: 'Journalføring',
     tema: 'FOR',
     oppgavetype: 'Journalføring',
@@ -43,6 +44,7 @@ const oppgaver = [
     frist: '2022-08-15',
     status: 'ÅPEN',
     prioritet: 'NORMAL',
+    journalpostHarMangler: true,
   },
   {
     id: 640,
@@ -56,11 +58,12 @@ const oppgaver = [
     frist: '2022-12-02',
     status: 'ÅPEN',
     prioritet: 'HØY',
+    journalpostHarMangler: false,
   },
-] as Oppgave[];
+] as OppgaveOversikt[];
 
 /**
- * SaksbehandlerIndex
+ * JournalforingIndex
  */
 const JournalforingIndex: FunctionComponent<OwnProps> = ({
   navAnsatt,

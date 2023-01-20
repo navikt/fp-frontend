@@ -1,13 +1,12 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 
 import { Heading } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
-import Oppgave from '../typer/oppgaveTsType';
-import OppgaveTabell from './OppgaveTabell';
+import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
 import styles from './oppgaveFiltrering.less';
 
 type OwnProps = Readonly<{
-  oppgaver: Oppgave[];
+  oppgaver: OppgaveOversikt[];
 }>;
 
 /**
@@ -15,12 +14,17 @@ type OwnProps = Readonly<{
  */
 const OppgaveFiltrering: FunctionComponent<OwnProps> = ({
   oppgaver,
-}) => (
-  <div className={styles.filterContainer}>
-    <Heading size="xsmall">
-      <FormattedMessage id="Journalforing.Filtrering" />
-    </Heading>
-  </div>
-);
+}) => {
+  if (!oppgaver) {
+    return null;
+  }
+  return (
+    <div className={styles.filterContainer}>
+      <Heading size="xsmall">
+        <FormattedMessage id="Journalforing.Filtrering" />
+      </Heading>
+    </div>
+  );
+};
 
 export default OppgaveFiltrering;

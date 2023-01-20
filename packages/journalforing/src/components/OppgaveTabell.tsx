@@ -6,11 +6,12 @@ import {
   Table, TableRow, TableColumn,
 } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
-import Oppgave from '../typer/oppgaveTsType';
+import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
+import styles from './journalforingPanel.less';
 
 type OwnProps = Readonly<{
-  oppgaver: Oppgave[];
-  setValgtOppgave: (oppgave: Oppgave) => void;
+  oppgaver: OppgaveOversikt[];
+  setValgtOppgave: (oppgave: OppgaveOversikt) => void;
 }>;
 
 const headerTextCodes = [
@@ -43,26 +44,37 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({
       <Heading size="small"><FormattedMessage id="Journalforing.Oppgaver.Tittel" /></Heading>
       <Table headerTextCodes={headerTextCodes}>
         {oppgaver.map((oppgave) => (
-          <TableRow>
+          <TableRow key={oppgave.id}>
             <TableColumn>{oppgave.opprettetDato}</TableColumn>
             <TableColumn>{oppgave.tema}</TableColumn>
             <TableColumn>{oppgave.frist}</TableColumn>
             <TableColumn>{oppgave.prioritet}</TableColumn>
             <TableColumn>{oppgave.aktoerId}</TableColumn>
             <TableColumn>{oppgave.tildeltEnhetsnr}</TableColumn>
-            <TableColumn>
-              <Button
-                size="small"
-                variant="tertiary"
-                loading={false}
-                disabled={false}
-                onClick={() => setValgtOppgave(oppgave)}
-                type="button"
-              >
-                <FormattedMessage id="Oppgavetabell.Velg" />
-              </Button>
+            {oppgave.journalpostHarMangler
+              && (
+              <TableColumn>
+                <a className={styles.gosysLink} href="https://gosys-q1.dev.intern.nav.no/gosys" target="_blank" rel="noreferrer">
+                  <FormattedMessage id="Oppgave.Gosys.Link" />
+                </a>
+              </TableColumn>
+              )}
+            {!oppgave.journalpostHarMangler
+              && (
+              <TableColumn>
+                <Button
+                  size="small"
+                  variant="tertiary"
+                  loading={false}
+                  disabled={false}
+                  onClick={() => setValgtOppgave(oppgave)}
+                  type="button"
+                >
+                  <FormattedMessage id="Oppgavetabell.Velg" />
+                </Button>
 
-            </TableColumn>
+              </TableColumn>
+              )}
           </TableRow>
         ))}
       </Table>

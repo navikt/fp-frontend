@@ -102,7 +102,7 @@ const Dekorator: FunctionComponent<OwnProps> = ({
   const formaterteFeilmeldinger = useMemo(() => new ErrorFormatter().format(errorMessages, crashMessage), [errorMessages]);
   const resolvedErrorMessages = useMemo(() => lagFeilmeldinger(formaterteFeilmeldinger, queryStrings, intl), [formaterteFeilmeldinger, queryStrings]);
 
-  const kanOppgavestyre = navAnsatt?.kanOppgavestyre;
+  // const kanOppgavestyre = navAnsatt?.kanOppgavestyre;
 
   return (
     <DekoratorMedFeilviserSakIndex
@@ -114,9 +114,9 @@ const Dekorator: FunctionComponent<OwnProps> = ({
       feilmeldinger={hideErrorMessages ? EMPTY_ARRAY : resolvedErrorMessages}
       fjernFeilmeldinger={removeErrorMessages}
       setSiteHeight={setSiteHeight}
-      kanOppgavestyre
+      kanOppgavestyre={false}
       visJournalføringside={visJournalføringsside}
-      kanJournalføre
+      kanJournalføre={false}
     />
   );
 };
