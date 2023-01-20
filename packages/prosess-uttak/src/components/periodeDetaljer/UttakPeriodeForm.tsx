@@ -247,6 +247,7 @@ const byggDefaultValues = (
 const transformValues = (
   values: UttakAktivitetType,
   valgtPeriode: PeriodeSoker,
+  filtrerteAktiviteter: PeriodeSokerAktivitet[],
 ): PeriodeSoker => ({
   ...valgtPeriode,
   begrunnelse: values.begrunnelse,
@@ -259,7 +260,7 @@ const transformValues = (
   samtidigUttaksprosent: values.samtidigUttaksprosent ? parseFloat(values.samtidigUttaksprosent) : undefined,
   samtidigUttak: values.samtidigUttak,
   flerbarnsdager: values.flerbarnsdager,
-  aktiviteter: valgtPeriode.aktiviteter.map((a, index) => {
+  aktiviteter: filtrerteAktiviteter.map((a, index) => {
     const aktivitet = values.aktiviteter[index];
     return {
       ...a,
@@ -332,7 +333,7 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
 
   const graderingAvslagsårsakOptions = useMemo(() => lagOptionsTilGraderingAvslagsårsakerSelect(alleKodeverk), []);
 
-  const submit = useCallback((values: UttakAktivitetType) => oppdaterPeriode([transformValues(values, valgtPeriode)]), [valgtPeriode]);
+  const submit = useCallback((values: UttakAktivitetType) => oppdaterPeriode([transformValues(values, valgtPeriode, sorterteAktiviteter)]), [valgtPeriode]);
 
   const warning1 = hentTekstForÅVurdereUtsettelseVedMindreEnn100ProsentStilling(valgtPeriode.utsettelseType, erOppfylt, valgtPeriode.aktiviteter, intl);
   const warning2 = hentTekstNårUtbetalingPlusArbeidsprosentMerEn100(aktiviteter, sorterteAktiviteter, intl);
