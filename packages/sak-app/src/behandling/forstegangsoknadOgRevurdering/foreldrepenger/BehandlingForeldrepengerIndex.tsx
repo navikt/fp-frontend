@@ -82,8 +82,7 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
     suspendRequest: !behandling,
   });
 
-  const harIkkeHentetArbeidsgiverOpplysninger = opplysningsdataState === RestApiState.LOADING || opplysningsdataState === RestApiState.NOT_STARTED;
-  if (!behandling || harIkkeHentetArbeidsgiverOpplysninger || !opplysningsdata) {
+  if (!behandling || opplysningsdataState !== RestApiState.SUCCESS || !opplysningsdata) {
     return <LoadingPanel />;
   }
 
