@@ -41,8 +41,8 @@ const formatBehandlingId = (
   const behandlingTyper = alleKodeverk[KodeverkType.BEHANDLING_TYPE];
   const behandlingStatuser = alleKodeverk[KodeverkType.BEHANDLING_STATUS];
 
-  return `${formatDate(info.opprettet)} - ${behandlingTyper.find((bt) => bt.kode === info.type)?.navn} `
-    + `- ${behandlingStatuser.find((bs) => bs.kode === info.status)?.navn}`;
+  return info ? `${formatDate(info.opprettet)} - ${behandlingTyper.find((bt) => bt.kode === info.type)?.navn} `
+    + `- ${behandlingStatuser.find((bs) => bs.kode === info.status)?.navn}` : '';
 };
 
 interface OwnProps {
