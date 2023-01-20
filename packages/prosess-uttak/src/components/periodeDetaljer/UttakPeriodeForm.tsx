@@ -352,14 +352,17 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
           utsettelseType={valgtPeriode.utsettelseType}
         />
       )}
+      {erHovedsøkersPeriode && (
+        <TextAreaField
+          name="begrunnelse"
+          label={intl.formatMessage({ id: 'UttakActivity.Vurdering' })}
+          validate={[required, minLength3, maxLength1500, hasValidText]}
+          maxLength={1500}
+          readOnly={isReadOnly}
+        />
+      )}
       {erHovedsøkersPeriode && !isReadOnly && (
         <>
-          <TextAreaField
-            name="begrunnelse"
-            label={intl.formatMessage({ id: 'UttakActivity.Vurdering' })}
-            validate={[required, minLength3, maxLength1500, hasValidText]}
-            maxLength={1500}
-          />
           <VerticalSpacer sixteenPx />
           <RadioGroupPanel
             name="erOppfylt"
