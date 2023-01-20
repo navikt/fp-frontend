@@ -83,6 +83,31 @@ const sorterÅrsakKodeverk = (a: ArsakKodeverk, b: ArsakKodeverk): number => {
   return 0;
 };
 
+const getFiltrerPåGyldighetForLovendringer = (
+  aarsakFilter: AarsakFilter,
+) => (kodeItem: ArsakKodeverk): boolean => {
+  if (kodeItem.gyldigForLovendringer === undefined) {
+    return true;
+  }
+  if (aarsakFilter.kreverSammenhengendeUttak) {
+    return kodeItem.gyldigForLovendringer.includes('KREVER_SAMMENHENGENDE_UTTAK');
+  }
+  return aarsakFilter.utenMinsterett
+    ? kodeItem.gyldigForLovendringer.includes('FRITT_UTTAK')
+    : kodeItem.gyldigForLovendringer.includes('MINSTERETT_2022');
+};
+
+const getFiltrerPåSynlighet = (
+  aarsakFilter: AarsakFilter,
+) => (kodeItem: ArsakKodeverk): boolean => {
+  if (kodeItem.synligForRolle === undefined) {
+    return true;
+  }
+  return aarsakFilter.søkerErMor
+    ? kodeItem.synligForRolle.includes('MOR')
+    : kodeItem.synligForRolle.includes('IKKE_MOR');
+};
+
 const lagOptionsTilPeriodeÅrsakSelect = (
   årsakKoder: ArsakKodeverk[],
   utfallType: string,
@@ -95,25 +120,8 @@ const lagOptionsTilPeriodeÅrsakSelect = (
 
   const filteredNyKodeArray = årsakKoder
     .filter((kodeItem) => !utfallType || kodeItem.utfallType === utfallType)
-    .filter((kodeItem) => {
-      if (kodeItem.gyldigForLovendringer === undefined) {
-        return true;
-      }
-      if (aarsakFilter.kreverSammenhengendeUttak) {
-        return kodeItem.gyldigForLovendringer.includes('KREVER_SAMMENHENGENDE_UTTAK');
-      }
-      return aarsakFilter.utenMinsterett
-        ? kodeItem.gyldigForLovendringer.includes('FRITT_UTTAK')
-        : kodeItem.gyldigForLovendringer.includes('MINSTERETT_2022');
-    })
-    .filter((kodeItem) => {
-      if (kodeItem.synligForRolle === undefined) {
-        return true;
-      }
-      return aarsakFilter.søkerErMor
-        ? kodeItem.synligForRolle.includes('MOR')
-        : kodeItem.synligForRolle.includes('IKKE_MOR');
-    });
+    .filter(getFiltrerPåGyldighetForLovendringer(aarsakFilter))
+    .filter(getFiltrerPåSynlighet(aarsakFilter));
 
   const mapTilOption = ({ kode, navn }) => <option value={kode} key={kode}>{navn}</option>;
 
