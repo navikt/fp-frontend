@@ -104,7 +104,10 @@ describe('<UttakProsessIndex>', () => {
     expect(await screen.findByText('24.01.2020 - 13.02.2020')).toBeInTheDocument();
   });
 
-  it('skal løse aksjonspunkt i en periode og så bekrefte', async () => {
+  it('skal validere at stønadskonto ikke er gyldig, endre og så bekrefte', async () => {
+    // Vil gi ein warning sidan ein prøver å setta ein ikkje gyldig verdi i dropdown
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+
     const lagre = jest.fn();
 
     const utils = render(<AksjonspunktDerValgtStønadskontoIkkeFinnes submitCallback={lagre} />);
@@ -114,13 +117,37 @@ describe('<UttakProsessIndex>', () => {
       screen.getByText('Ikke gyldig grunn for uttak av denne stønadskontoen. Vurder bruk av annen stønadskonto eller avslå perioden.')).toBeInTheDocument();
 
     const inputFelter = utils.getAllByRole('textbox');
-    expect(inputFelter).toHaveLength(4);
+    expect(inputFelter).toHaveLength(7);
 
     await userEvent.type(inputFelter[2], '0');
+    await userEvent.type(inputFelter[5], '10');
 
     await userEvent.type(utils.getByLabelText('Vurdering:'), 'Dette er en vurdering');
 
+    await userEvent.click(screen.getByText('Oppfylt'));
+
+    await userEvent.selectOptions(utils.getByLabelText('Årsak til innvilgelse'), '2002');
+
     await userEvent.click(screen.getByText('Oppdater'));
+
+    expect(await screen.findByText('Stønadskonto Foreldrepenger er ikke tilgjengelig')).toBeInTheDocument();
+
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
+
+    await userEvent.click(screen.getByAltText('Åpne info om første periode'));
+
+    expect(await screen.findByText('Detaljer for valgt periode')).toBeInTheDocument();
+
+    const dropdowns = utils.getAllByRole('combobox');
+    expect(dropdowns).toHaveLength(3);
+
+    await userEvent.selectOptions(dropdowns[0], 'MØDREKVOTE');
+    await userEvent.selectOptions(dropdowns[1], 'FELLESPERIODE');
+
+    await userEvent.click(screen.getByText('Oppdater'));
+
+    expect(screen.queryByText('Stønadskonto Foreldrepenger er ikke tilgjengelig')).not.toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeEnabled());
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -129,14 +156,24 @@ describe('<UttakProsessIndex>', () => {
       kode: '5071',
       perioder: [{
         aktiviteter: [{
+          arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c1',
+          arbeidsgiverReferanse: '910909088',
+          eksternArbeidsforholdId: 'ARB001-001',
+          gradering: false,
+          prosentArbeid: 0,
+          stønadskontoType: 'MØDREKVOTE',
+          trekkdagerDesimaler: 14,
+          utbetalingsgrad: 0,
+          uttakArbeidType: 'ORDINÆRT_ARBEID',
+        }, {
           arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c2',
           arbeidsgiverReferanse: '994884174',
           eksternArbeidsforholdId: 'ARB001-002',
           gradering: false,
           prosentArbeid: 0,
-          stønadskontoType: 'FORELDREPENGER',
+          stønadskontoType: 'FELLESPERIODE',
           trekkdagerDesimaler: 15,
-          utbetalingsgrad: 0,
+          utbetalingsgrad: 10,
           uttakArbeidType: 'ORDINÆRT_ARBEID',
         }],
         begrunnelse: 'Dette er en vurdering',
@@ -148,8 +185,8 @@ describe('<UttakProsessIndex>', () => {
         manuellBehandlingÅrsak: '5002',
         mottattDato: '2023-01-05',
         oppholdÅrsak: '-',
-        periodeResultatType: 'AVSLÅTT',
-        periodeResultatÅrsak: '4002',
+        periodeResultatType: 'INNVILGET',
+        periodeResultatÅrsak: '2002',
         periodeType: 'FORELDREPENGER',
         samtidigUttak: false,
         samtidigUttaksprosent: undefined,
@@ -185,50 +222,6 @@ describe('<UttakProsessIndex>', () => {
         utsettelseType: '-',
       }],
     }]);
-  });
-
-  it('skal validere at stønadskonto ikke er gyldig', async () => {
-    // Vil gi ein warning sidan ein prøver å setta ein ikkje gyldig verdi i dropdown
-    jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-    const lagre = jest.fn();
-
-    const utils = render(<AksjonspunktDerValgtStønadskontoIkkeFinnes submitCallback={lagre} />);
-
-    expect(await screen.findByText('Alle aksjonspunkter skal vurderes manuelt. Kontakt søker ved behov.')).toBeInTheDocument();
-    expect(
-      screen.getByText('Ikke gyldig grunn for uttak av denne stønadskontoen. Vurder bruk av annen stønadskonto eller avslå perioden.')).toBeInTheDocument();
-
-    const inputFelter = utils.getAllByRole('textbox');
-    expect(inputFelter).toHaveLength(4);
-
-    await userEvent.type(inputFelter[2], '0');
-
-    await userEvent.type(utils.getByLabelText('Vurdering:'), 'Dette er en vurdering');
-
-    await userEvent.click(screen.getByText('Oppfylt'));
-
-    await userEvent.selectOptions(utils.getByLabelText('Årsak til innvilgelse'), '2002');
-
-    await userEvent.click(screen.getByText('Oppdater'));
-
-    expect(await screen.findByText('Stønadskonto Foreldrepenger er ikke tilgjengelig')).toBeInTheDocument();
-
-    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
-
-    await userEvent.click(screen.getByAltText('Åpne info om første periode'));
-
-    expect(await screen.findByText('Detaljer for valgt periode')).toBeInTheDocument();
-
-    const dropdowns = utils.getAllByRole('combobox');
-    expect(dropdowns).toHaveLength(2);
-
-    await userEvent.selectOptions(dropdowns[0], 'MØDREKVOTE');
-
-    await userEvent.click(screen.getByText('Oppdater'));
-
-    expect(screen.queryByText('Stønadskonto Foreldrepenger er ikke tilgjengelig')).not.toBeInTheDocument();
-    await waitFor(() => expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeEnabled());
   });
 
   it.skip('skal ha aksjonspunkt og dele opp periode i to og så bekrefte', async () => {
