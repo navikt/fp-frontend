@@ -319,7 +319,7 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
   const graderingInnvilget = formMethods.watch('graderingInnvilget');
   const samtidigUttak = formMethods.watch('samtidigUttak');
   const aktiviteter = formMethods.watch('aktiviteter');
-  const førsteValgteStønadskonto = aktiviteter[0].stønadskontoType;
+  const førsteValgteStønadskonto = aktiviteter.length > 0 ? aktiviteter[0].stønadskontoType : undefined;
 
   const periodeÅrsakOptions = useMemo(() => lagOptionsTilPeriodeÅrsakSelect(
     periodeResultatårsakKoder,
