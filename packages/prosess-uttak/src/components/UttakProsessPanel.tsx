@@ -250,6 +250,8 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   const harIngenEllerLukkedeAksjonspunkt = aksjonspunkter.filter((ap) => ap.definisjon !== AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER).length === 0
     || aksjonspunkter.some((ap) => ap.toTrinnsBehandlingGodkjent === true && ap.status === aksjonspunktStatus.UTFORT);
 
+  const harOverstyrAp = aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER);
+
   return (
     <>
       <FlexContainer>
@@ -259,7 +261,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
               <FormattedMessage id="UttakPanel.Title" />
             </Heading>
           </FlexColumn>
-          {kanOverstyre && !harÅpneAksjonspunkter && !isReadOnly && (
+          {!isReadOnly && kanOverstyre && (!harÅpneAksjonspunkter || harOverstyrAp) && (
             <FlexColumn>
               <OverstyringKnapp onClick={toggleOverstyring} erOverstyrt={erOverstyrt} />
             </FlexColumn>
