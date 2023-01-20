@@ -63,7 +63,7 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  opptjeningAktiviteter: OpptjeningAktivitet[];
+  opptjeningAktiviteter?: OpptjeningAktivitet[];
   fastsattOpptjening?: Opptjening['fastsattOpptjening'];
   submitCallback: (data: AvklarAktivitetsPerioderAp) => Promise<void>;
   formData: any;
@@ -94,9 +94,12 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const opptjeningAktivitetTypes = alleKodeverk[kodeverkTyper.OPPTJENING_AKTIVITET_TYPE];
 
-  const filtrerteOgSorterteOpptjeningsaktiviteter = useMemo(() => sorterEtterOpptjeningFom(filtrerOpptjeningAktiviteter(
-    opptjeningAktiviteter, fastsattOpptjening,
-  )), [opptjeningAktiviteter, fastsattOpptjening]);
+  const filtrerteOgSorterteOpptjeningsaktiviteter = useMemo(() => {
+    if (!!opptjeningAktiviteter && !!fastsattOpptjening) {
+      return sorterEtterOpptjeningFom(filtrerOpptjeningAktiviteter(opptjeningAktiviteter, fastsattOpptjening));
+    }
+    return [];
+  }, [opptjeningAktiviteter, fastsattOpptjening]);
 
   const formValuesAktiviteter = filtrerteOgSorterteOpptjeningsaktiviteter.map((a) => ({
     erGodkjent: a.erGodkjent,
