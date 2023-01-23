@@ -66,7 +66,7 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
       const nyvalgtProsessSteg = panel.erAktiv ? undefined : panel.id;
       oppdaterProsessStegOgFaktaPanelIUrl(nyvalgtProsessSteg, valgtFaktaSteg);
     }
-  }, [currentData, valgtFaktaSteg]);
+  }, [currentData, valgtFaktaSteg, oppdaterProsessStegOgFaktaPanelIUrl]);
 
   if (!hentPaneler) {
     return null;
