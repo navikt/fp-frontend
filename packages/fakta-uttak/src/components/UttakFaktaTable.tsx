@@ -4,7 +4,7 @@ import React, {
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import {
-  Table, ExpandableTableRow, TableColumn, TableRow, VerticalSpacer,
+  Table, ExpandableTableRow, TableColumn, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
 import { Button, Heading } from '@navikt/ds-react';
@@ -135,34 +135,6 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
       >
         {uttakKontrollerFaktaPerioder.map((periode) => {
           const numberOfDaysAndWeeks = calcDaysAndWeeks(periode.fom, periode.tom);
-
-          const kolonner = (
-            <>
-              <TableColumn>{`${dateFormat(periode.fom)} - ${dateFormat(periode.tom)}`}</TableColumn>
-              <TableColumn>
-                <FormattedMessage
-                  id={getTextId(numberOfDaysAndWeeks.weeks, numberOfDaysAndWeeks.days)}
-                  values={{
-                    weeks: numberOfDaysAndWeeks.weeks,
-                    days: numberOfDaysAndWeeks.days,
-                  }}
-                />
-              </TableColumn>
-              <TableColumn>{getTypeTekst(alleKodeverk, periode, intl)}</TableColumn>
-              <TableColumn>
-                {alleKodeverk[KodeverkType.FORDELING_PERIODE_KILDE].find((k) => k.kode === periode.periodeKilde)?.navn}
-              </TableColumn>
-            </>
-          );
-
-          if (!erRedigerbart) {
-            return (
-              <TableRow key={periode.fom + periode.tom}>
-                {kolonner}
-              </TableRow>
-            );
-          }
-
           return (
             <ExpandableTableRow
               key={periode.fom + periode.tom}
@@ -182,7 +154,20 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
                 />
               )}
             >
-              {kolonner}
+              <TableColumn>{`${dateFormat(periode.fom)} - ${dateFormat(periode.tom)}`}</TableColumn>
+              <TableColumn>
+                <FormattedMessage
+                  id={getTextId(numberOfDaysAndWeeks.weeks, numberOfDaysAndWeeks.days)}
+                  values={{
+                    weeks: numberOfDaysAndWeeks.weeks,
+                    days: numberOfDaysAndWeeks.days,
+                  }}
+                />
+              </TableColumn>
+              <TableColumn>{getTypeTekst(alleKodeverk, periode, intl)}</TableColumn>
+              <TableColumn>
+                {alleKodeverk[KodeverkType.FORDELING_PERIODE_KILDE].find((k) => k.kode === periode.periodeKilde)?.navn}
+              </TableColumn>
             </ExpandableTableRow>
           );
         })}
