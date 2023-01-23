@@ -144,7 +144,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
               content={valgteFomDatoer.includes(periode.fom) && (
                 <UttakFaktaDetailForm
                   valgtPeriode={periode}
-                  readOnly={readOnly}
+                  readOnly={readOnly || !erRedigerbart}
                   oppdaterPeriode={oppdaterPeriode}
                   slettPeriode={() => slettPeriode(periode.originalFom)}
                   avbrytEditering={() => velgPeriodeFomDato(periode.fom)}
