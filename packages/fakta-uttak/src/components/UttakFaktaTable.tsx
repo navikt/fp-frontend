@@ -129,7 +129,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
   return (
     <>
       <Table
-        headerTextCodes={erRedigerbart ? HEADER_TEXT_CODES : HEADER_TEXT_CODES.filter((h) => h !== 'EMPTY')}
+        headerTextCodes={HEADER_TEXT_CODES}
         noHover
         hasGrayHeader
       >
