@@ -1,0 +1,26 @@
+{
+    "Journalforing.Tittel": "Manuell journalføring",
+    "Journalforing.Oppgaver.Tittel": "Journalføringsoppgaver",
+    "Journalforing.Oppgaver.IngenOppgaver": "Fant ingen journalføringsoppgaver",
+    "Oppgavetabell.Opprettet": "Opprettet dato",
+    "Oppgavetabell.Behandlingtype": "Behandlingstype",
+    "Oppgavetabell.Frist": "Frist",
+    "Oppgavetabell.Prioritet": "Prioritet",
+    "Oppgavetabell.Bruker": "Bruker",
+    "Oppgavetabell.Enhet": "Enhet",
+    "Oppgavetabell.Velg": "Vis oppgave",
+    "ValgtOppgave.Avbryt": "Avbryt",
+    "Oppgave.Gosys.Link": "Gå til GOSYS",
+    "ValgtOppgave.Tittel": "Journalføring",
+    "ValgtOppgave.Bruker": "Søker",
+    "ValgtOppgave.Avsender": "Avsender",
+    "ValgtOppgave.RelaterteSaker": "Knytt til tidligere behandling(er)",
+    "Saksliste.Saksnummer": "Saksnummer",
+    "Saksliste.Ytelsetype": "Ytelse",
+    "Saksliste.FørsteUttaksdag": "Første uttaksdag",
+    "Saksliste.Søknadsdato": "Søknadsdato",
+    "Saksliste.Status": "Status",
+    "Saksliste.IngenSøknad": "Ikke mottatt søknad",
+    "Saksliste.VelgBoks": " "
+  
+  }

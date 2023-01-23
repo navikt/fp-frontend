@@ -34,6 +34,7 @@
     "@fpsak-frontend/modal-sett-pa-vent": "1.0.0",
     "@fpsak-frontend/papirsoknad": "1.0.0",
     "@fpsak-frontend/prosess-anke": "1.0.0",
+    "@fpsak-frontend/journalforing": "1.0.0",
     "@fpsak-frontend/prosess-anke-resultat": "1.0.0",
     "@fpsak-frontend/prosess-anke-trygderettsbehandling": "1.0.0",
     "@fpsak-frontend/prosess-avregning": "1.0.0",

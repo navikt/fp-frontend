@@ -9,6 +9,7 @@ import { Heading } from '@navikt/ds-react';
 import { NotFoundPage } from '@navikt/ft-sak-infosider';
 
 import SaksbehandlerIndex from '@fpsak-frontend/los-saksbehandler';
+import JournalforingIndex from '@fpsak-frontend/journalforing';
 import AvdelingslederIndex from '@fpsak-frontend/los-avdelingsleder';
 import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import { NavAnsatt } from '@fpsak-frontend/types';
@@ -65,6 +66,10 @@ const Home: FunctionComponent<OwnProps> = ({
           element={erLosTilgjengelig
             ? <AvdelingslederIndex setLosErIkkeTilgjengelig={setLosErIkkeTilgjengelig} navAnsatt={navAnsatt} />
             : <Heading size="small"><FormattedMessage id="Los.IkkeTilgjengelig" /></Heading>}
+        />
+        <Route
+          path="/journalforing"
+          element={<JournalforingIndex navAnsatt={navAnsatt} />}
         />
         <Route path={fagsakRoutePath} element={<FagsakIndex />} />
         <Route path={aktoerRoutePath} element={<AktoerIndex />} />

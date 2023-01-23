@@ -4,6 +4,7 @@ import { buildPath, formatQueryString, parseQueryString } from '@navikt/ft-utils
 import { skjermlenkeCodes } from '@fpsak-frontend/konstanter';
 
 export const AVDELINGSLEDER_PATH = 'avdelingsleder';
+export const JOURNALFØRING_PATH = 'journalforing';
 
 const DEFAULT_FAKTA = 'default';
 const DEFAULT_PROSESS_STEG = 'default';
