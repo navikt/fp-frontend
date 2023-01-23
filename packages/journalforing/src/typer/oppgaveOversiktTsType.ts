@@ -1,15 +1,16 @@
+import OppgavePrioritet from "../kodeverk/oppgavePrioritet";
+
 type OppgaveOversikt = Readonly<{
     id: number;
     opprettetDato: string,
     frist: string,
-    tildeltEnhetsnr: string;
     journalpostId: string;
-    aktoerId: string;
-    beskrivelse: string;
-    tema: string;
-    oppgavetype: string;
-    status: string;
-    prioritet: string;
+    aktørId?: string;
+    fødselsnummer?: string;
+    ytelseType: string;
+    beskrivelse?: string;
+    prioritet?: OppgavePrioritet;
+    journalpostHarMangler: boolean;
   }>
   
   export default OppgaveOversikt;

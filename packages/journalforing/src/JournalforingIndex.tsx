@@ -8,6 +8,7 @@ import messages from '../i18n/nb_NO.json';
 import JournalforingPanel from './components/JournalforingPanel';
 import OppgaveIndex from './components/OppgaveIndex';
 import OppgaveOversikt from './typer/oppgaveOversiktTsType';
+import OppgavePrioritet from './kodeverk/oppgavePrioritet';
 
 const intl = createIntl(messages);
 
@@ -17,45 +18,41 @@ interface OwnProps {
   behandlendeEnheter?: any;
 }
 
+// Tulledata
 const oppgaver = [
   {
     id: 600,
-    tildeltEnhetsnr: '4816',
     journalpostId: '12345125',
-    aktoerId: '9996923456799',
-    beskrivelse: 'Journalføring',
-    tema: 'FOR',
-    oppgavetype: 'Journalføring',
+    aktørId: '9996923456799',
+    fødselsnummer: '11119047182',
     opprettetDato: '2022-01-01',
     frist: '2022-02-01',
-    status: 'ÅPEN',
-    prioritet: 'NORMAL',
+    ytelseType: 'FP',
+    journalpostHarMangler: false,
+    prioritet: OppgavePrioritet.NORM,
+    beskrivelse: 'Inntektsmelding',
   },
   {
-    id: 631,
-    tildeltEnhetsnr: '4819',
-    journalpostId: '828546',
-    aktoerId: '19358140968134',
-    beskrivelse: 'Journalføring',
-    tema: 'FOR',
-    oppgavetype: 'Journalføring',
-    opprettetDato: '2022-06-01',
-    frist: '2022-08-15',
-    status: 'ÅPEN',
-    prioritet: 'NORMAL',
+    id: 700,
+    journalpostId: '245745871',
+    aktørId: '274572457624',
+    fødselsnummer: '12018847182',
+    opprettetDato: '2022-01-01',
+    frist: '2022-03-01',
+    ytelseType: 'SVP',
+    journalpostHarMangler: false,
+    prioritet: OppgavePrioritet.NORM,
+    beskrivelse: 'Inntektsmelding',
   },
   {
-    id: 640,
-    tildeltEnhetsnr: '4815',
-    journalpostId: '4287227',
-    aktoerId: '365438761+1',
-    beskrivelse: 'Journalføring',
-    tema: 'SVP',
-    oppgavetype: 'Journalføring',
-    opprettetDato: '2022-12-01',
-    frist: '2022-12-02',
-    status: 'ÅPEN',
-    prioritet: 'HØY',
+    id: 800,
+    journalpostId: '345681257',
+    opprettetDato: '2022-01-01',
+    frist: '2022-01-01',
+    ytelseType: 'FP',
+    journalpostHarMangler: true,
+    prioritet: OppgavePrioritet.HØY,
+    beskrivelse: 'Søknad',
   },
 ] as OppgaveOversikt[];
 

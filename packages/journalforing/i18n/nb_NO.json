@@ -3,11 +3,11 @@
     "Journalforing.Oppgaver.Tittel": "Journalføringsoppgaver",
     "Journalforing.Oppgaver.IngenOppgaver": "Fant ingen journalføringsoppgaver",
     "Oppgavetabell.Opprettet": "Opprettet dato",
-    "Oppgavetabell.Behandlingtype": "Behandlingstype",
+    "Oppgavetabell.YtelseType": "Ytelse",
     "Oppgavetabell.Frist": "Frist",
     "Oppgavetabell.Prioritet": "Prioritet",
     "Oppgavetabell.Bruker": "Bruker",
-    "Oppgavetabell.Enhet": "Enhet",
+    "Oppgavetabell.Beskrivelse": "Beskrivelse",
     "Oppgavetabell.Velg": "Vis oppgave",
     "ValgtOppgave.Avbryt": "Avbryt",
     "Oppgave.Gosys.Link": "Gå til GOSYS",
@@ -22,5 +22,4 @@
     "Saksliste.Status": "Status",
     "Saksliste.IngenSøknad": "Ikke mottatt søknad",
     "Saksliste.VelgBoks": " "
-  
   }

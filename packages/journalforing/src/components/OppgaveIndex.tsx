@@ -22,15 +22,10 @@ const OppgaveIndex: FunctionComponent<OwnProps> = ({
       <OppgaveTabell oppgaver={oppgaver} setValgtOppgave={setValgtOppgave} />
       {valgtOppgave
       && (
-        <>
-          <p>
-            Valg oppgave har id
+        <p>
+          Valgt oppgave har id
             {valgtOppgave.id}
-          </p>
-          <p>
-            Få inn en kul pdf kanskje?
-          </p>
-        </>
+        </p>
       )}
     </FlexContainer>
   );
