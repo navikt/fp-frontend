@@ -73,7 +73,7 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
       const panel = currentData[index];
       oppdaterProsessStegOgFaktaPanelIUrl(valgtProsessSteg, panel.id);
     }
-  }, [currentData, valgtProsessSteg]);
+  }, [currentData, valgtProsessSteg, oppdaterProsessStegOgFaktaPanelIUrl]);
 
   if (!hentPaneler) {
     return null;
