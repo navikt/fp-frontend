@@ -24,7 +24,7 @@ describe('<UttakFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
 
-    expect(await screen.queryByAltText('Åpne rad')).not.toBeInTheDocument();
+    expect(await screen.getByAltText('Åpne rad')).toBeInTheDocument();
     expect(await screen.queryByAltText('Overstyr')).not.toBeInTheDocument();
   });
 
@@ -35,7 +35,7 @@ describe('<UttakFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
 
-    expect(await screen.queryByAltText('Åpne rad')).not.toBeInTheDocument();
+    expect(await screen.getByAltText('Åpne rad')).toBeInTheDocument();
 
     await userEvent.click(screen.getByAltText('Overstyr'));
 
