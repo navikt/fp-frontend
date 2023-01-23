@@ -1,4 +1,4 @@
-import Sak from "./sakTsType";
+import Sak from './sakTsType';
 
 type OppgaveDetaljert = Readonly<{
   id: number;

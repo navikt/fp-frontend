@@ -4,7 +4,5 @@ type Sak = Readonly<{
     status: string,
     ytelsetype: string;
     søknadDato?: string;
-  }>
-  
-  export default Sak;
-  
+}>
+export default Sak;
