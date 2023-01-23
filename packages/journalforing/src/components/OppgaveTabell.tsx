@@ -74,7 +74,6 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({
                               >
                                 <FormattedMessage id="Oppgavetabell.Velg" />
                               </Button>
-
                             </TableColumn>
                             )}
           </TableRow>
