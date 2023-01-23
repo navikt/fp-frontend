@@ -46,7 +46,7 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({
       <Heading size="small"><FormattedMessage id="Journalforing.Oppgaver.Tittel" /></Heading>
       <Table headerTextCodes={headerTextCodes}>
         {oppgaver.map((oppgave) => (
-          <TableRow>
+          <TableRow key={oppgave.id}>
             <TableColumn>{dayjs(oppgave.opprettetDato).format(DDMMYYYY_DATE_FORMAT)}</TableColumn>
             <TableColumn>{oppgave.ytelseType}</TableColumn>
             <TableColumn>{oppgave.beskrivelse}</TableColumn>
