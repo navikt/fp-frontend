@@ -4,12 +4,11 @@ import { createIntl } from '@navikt/ft-utils';
 
 import { NavAnsatt } from '@fpsak-frontend/types';
 import { Heading } from '@navikt/ds-react';
-import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import messages from '../i18n/nb_NO.json';
 import JournalforingPanel from './components/JournalforingPanel';
 import OppgaveIndex from './components/OppgaveIndex';
 import OppgaveOversikt from './typer/oppgaveOversiktTsType';
-import OppgavePrioritet from './kodeverk/oppgavePrioritet';
 import { RestApiPathsKeys, restApiHooks } from './data/fpfordelRestApi';
 
 const intl = createIntl(messages);
@@ -20,46 +19,8 @@ interface OwnProps {
   behandlendeEnheter?: any;
 }
 
-// Tulledata
-const oppgaverMock = [
-  {
-    id: 600,
-    journalpostId: '12345125',
-    aktørId: '9996923456799',
-    fødselsnummer: '11119047182',
-    opprettetDato: '2022-01-01',
-    frist: '2022-02-01',
-    ytelseType: 'FP',
-    journalpostHarMangler: false,
-    prioritet: OppgavePrioritet.NORM,
-    beskrivelse: 'Inntektsmelding',
-  },
-  {
-    id: 700,
-    journalpostId: '245745871',
-    aktørId: '274572457624',
-    fødselsnummer: '12018847182',
-    opprettetDato: '2022-01-01',
-    frist: '2022-03-01',
-    ytelseType: 'SVP',
-    journalpostHarMangler: false,
-    prioritet: OppgavePrioritet.NORM,
-    beskrivelse: 'Inntektsmelding',
-  },
-  {
-    id: 800,
-    journalpostId: '345681257',
-    opprettetDato: '2022-01-01',
-    frist: '2022-01-01',
-    ytelseType: 'FP',
-    journalpostHarMangler: true,
-    prioritet: OppgavePrioritet.HØY,
-    beskrivelse: 'Søknad',
-  },
-] as OppgaveOversikt[];
-
 /**
- * SaksbehandlerIndex
+ * JournalforingIndex - Toppkomponent, orkestrerer restkall for journalføring
  */
 const JournalforingIndex: FunctionComponent<OwnProps> = ({
   navAnsatt,
@@ -69,13 +30,16 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({
   }
 
   const [oppgaver, setOppgaveListe] = useState<OppgaveOversikt[]>([]);
-  const alleJournalføringsoppgaver = restApiHooks.useRestApi(RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER, { avdelingEnhet: undefined }, { isCachingOn: true });
+  const alleJournalføringsoppgaverKall = restApiHooks.useRestApi(RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER, { avdelingEnhet: undefined }, { isCachingOn: true });
 
   useEffect(() => {
-    if (alleJournalføringsoppgaver.state === RestApiState.SUCCESS) {
-      setOppgaveListe(alleJournalføringsoppgaver.data);
+    if (alleJournalføringsoppgaverKall.state === RestApiState.SUCCESS) {
+      const { data } = alleJournalføringsoppgaverKall;
+      if (Array.isArray(data)) {
+        setOppgaveListe(alleJournalføringsoppgaverKall.data);
+      }
     }
-  }, [alleJournalføringsoppgaver]);
+  }, [alleJournalføringsoppgaverKall]);
 
   return (
     <RawIntlProvider value={intl}>
