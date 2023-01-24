@@ -25,9 +25,6 @@ interface OwnProps {
 const JournalforingIndex: FunctionComponent<OwnProps> = ({
   navAnsatt,
 }) => {
-  if (!navAnsatt) {
-    return null;
-  }
 
   const [oppgaver, setOppgaveListe] = useState<OppgaveOversikt[]>([]);
   const alleJournalføringsoppgaverKall = restApiHooks.useRestApi(RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER, { avdelingEnhet: undefined }, { isCachingOn: true });
@@ -40,6 +37,10 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({
       }
     }
   }, [alleJournalføringsoppgaverKall]);
+  
+  if (!navAnsatt) {
+    return null;
+  }
 
   return (
     <RawIntlProvider value={intl}>
