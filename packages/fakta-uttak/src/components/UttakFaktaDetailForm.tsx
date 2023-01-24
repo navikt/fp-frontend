@@ -110,15 +110,23 @@ const lagDefaultVerdier = (
 ): FormValues => {
   const arsakstype = utledÅrsakstype(valgtPeriode);
 
-  const aRef = valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse;
-  const arbeidsgiverFinnes = aRef ? !!arbeidsgiverOpplysningerPerId[aRef] : false;
+  const aRef = valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse !== 'null'
+    ? valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse
+    : undefined;
+  const aOpplysninger = arbeidsgiverOpplysningerPerId[aRef];
+
+  let arbeidsgiverId;
+
+  if (!!aRef && aOpplysninger) {
+    arbeidsgiverId = `${valgtPeriode.arbeidsforhold.arbeidsgiverReferanse}-${valgtPeriode.arbeidsforhold.arbeidType}`;
+  } else if (valgtPeriode.arbeidsforhold && !aRef) {
+    arbeidsgiverId = `${valgtPeriode.arbeidsforhold.arbeidsgiverReferanse}-${valgtPeriode.arbeidsforhold.arbeidType}`;
+  }
 
   return {
     ...valgtPeriode,
     arsakstype,
-    arbeidsgiverId: arbeidsgiverFinnes
-      ? `${valgtPeriode.arbeidsforhold.arbeidsgiverReferanse}-${valgtPeriode.arbeidsforhold.arbeidType}`
-      : undefined,
+    arbeidsgiverId,
   };
 };
 
@@ -207,7 +215,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
   }, [årsakstype]);
 
   const aRef = valgtPeriode?.arbeidsforhold?.arbeidsgiverReferanse;
-  const arbeidsgiverFinnesIkke = (aRef && !arbeidsgiverOpplysningerPerId[aRef]);
+  const arbeidsgiverFinnesIkke = (aRef && aRef !== 'null' && !arbeidsgiverOpplysningerPerId[aRef]);
 
   const onSubmit = useCallback((values) => oppdaterPeriode(transformValues(values)), [oppdaterPeriode]);
 
