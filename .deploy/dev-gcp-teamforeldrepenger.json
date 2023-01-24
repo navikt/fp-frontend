@@ -40,6 +40,11 @@
       "path": "/fplos/api",
       "url": "https://fplos.dev-fss-pub.nais.io",
       "scope": "api://dev-fss.teamforeldrepenger.fplos/.default"
+    },
+    {
+      "path": "/fpfordel/api",
+      "url": "https://fpfordel.dev-fss-pub.nais.io",
+      "scope": "api://dev-fss.teamforeldrepenger.fpfordel/.default"
     }
   ]
 }
