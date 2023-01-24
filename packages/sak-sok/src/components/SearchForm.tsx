@@ -13,8 +13,8 @@ import { FagsakEnkel } from '@fpsak-frontend/types';
 
 import styles from './searchForm.less';
 
-const isButtonDisabled = (searchStarted: boolean, searchString: string): boolean => !!(searchStarted
-  || searchString.length < 1);
+const isButtonDisabled = (searchStarted: boolean, searchString?: string): boolean => !!(searchStarted
+  || (searchString === undefined || searchString.length < 1));
 
 interface OwnProps {
   searchStarted: boolean;
