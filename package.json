@@ -102,7 +102,7 @@
     "@typescript-eslint/parser": "5.48.1",
     "@wojtekmaj/enzyme-adapter-react-17": "0.8.0",
     "axios-mock-adapter": "1.21.2",
-    "babel-jest": "29.3.1",
+    "babel-jest": "29.4.0",
     "babel-loader": "9.1.2",
     "body-parser": "1.20.1",
     "cache-loader": "4.1.0",
