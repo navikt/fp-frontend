@@ -136,7 +136,7 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
 
   useEffect(() => () => {
     setFormData({ uttakPerioder, begrunnelse: formMethods.getValues('begrunnelse') });
-  }, []);
+  }, [uttakPerioder]);
 
   const bekreft = useCallback((begrunnelse: string) => {
     const automatiskeAksjonspunkter = aksjonspunkter.filter((a) => a.definisjon !== AksjonspunktKode.OVERSTYR_FAKTA_UTTAK);
