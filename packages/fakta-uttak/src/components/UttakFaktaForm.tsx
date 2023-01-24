@@ -138,9 +138,8 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
     setFormData({ uttakPerioder, begrunnelse: formMethods.getValues('begrunnelse') });
   }, [uttakPerioder]);
 
+  const automatiskeAksjonspunkter = aksjonspunkter.filter((a) => a.definisjon !== AksjonspunktKode.OVERSTYR_FAKTA_UTTAK);
   const bekreft = useCallback((begrunnelse: string) => {
-    const automatiskeAksjonspunkter = aksjonspunkter.filter((a) => a.definisjon !== AksjonspunktKode.OVERSTYR_FAKTA_UTTAK);
-
     const overstyrAp = [{
       // TODO Fiks hack
       kode: validerApKodeOgHentApEnum(AksjonspunktKode.OVERSTYR_FAKTA_UTTAK, AksjonspunktKode.OVERSTYR_FAKTA_UTTAK),
@@ -182,7 +181,7 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
   const harApneAksjonspunkter = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status));
   const aksjonspunktTekster = useMemo(() => finnAksjonspunktTekster(aksjonspunkter, ytelsefordeling), [aksjonspunkter, ytelsefordeling]);
 
-  const erRedigerbart = !readOnly && (aksjonspunkter.filter((a) => a.definisjon !== AksjonspunktKode.OVERSTYR_FAKTA_UTTAK).length > 0 || erOverstyrt);
+  const erRedigerbart = !readOnly && (automatiskeAksjonspunkter.length > 0 || erOverstyrt);
 
   return (
     <>
@@ -194,9 +193,9 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <Heading size="small"><FormattedMessage id="UttakFaktaForm.FaktaUttak" /></Heading>
                 </FlexColumn>
-                {kanOverstyre && !readOnly && aksjonspunkter.length === 0 && (
+                {kanOverstyre && !readOnly && automatiskeAksjonspunkter.length === 0 && (
                   <FlexColumn>
-                    <OverstyringKnapp onClick={() => setOverstyrt(true)} />
+                    <OverstyringKnapp onClick={() => setOverstyrt(true)} erOverstyrt={erOverstyrt} />
                   </FlexColumn>
                 )}
               </FlexRow>
