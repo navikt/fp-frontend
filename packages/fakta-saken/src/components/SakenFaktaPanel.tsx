@@ -18,7 +18,7 @@ import styles from './sakenFaktaPanel.less';
 
 interface OwnProps {
   erSvangerskapspenger: boolean;
-  soknad: Soknad;
+  soknad?: Soknad;
   aksjonspunkter: Aksjonspunkt[];
   dokStatus?: string;
   harApneAksjonspunkter: boolean;
@@ -81,7 +81,7 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
             </>
           )}
         </FlexColumn>
-        {!erSvangerskapspenger && (
+        {!erSvangerskapspenger && !!soknad && (
           <FlexColumn className={styles.col}>
             <StartdatoForForeldrepengerperiodenForm
               aksjonspunkt={aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO)}

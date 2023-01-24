@@ -8,7 +8,7 @@ import SakenFaktaPanel from './components/SakenFaktaPanel';
 import messages from '../i18n/nb_NO.json';
 
 interface OwnProps {
-  soknad: Soknad;
+  soknad?: Soknad;
   erSvangerskapspenger: boolean;
   utlandDokStatus?: {
     dokStatus: string;
