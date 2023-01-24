@@ -89,7 +89,7 @@ const OppgaveHandlingerMenu: FunctionComponent<OwnProps> = ({
 
   const closeBegrunnelseModal = useCallback(() => {
     toggleMenu(oppgave);
-    toggleEventListeners(true, handleOutsideClick);
+    toggleEventListeners(false, handleOutsideClick);
     setOpphevReservasjonModal(false);
   }, [toggleMenu, oppgave, handleOutsideClick]);
 
@@ -100,7 +100,7 @@ const OppgaveHandlingerMenu: FunctionComponent<OwnProps> = ({
 
   const closeFlytteModal = useCallback(() => {
     toggleMenu(oppgave);
-    toggleEventListeners(true, handleOutsideClick);
+    toggleEventListeners(false, handleOutsideClick);
     setFlyttReservasjonModal(false);
   }, [toggleMenu, oppgave, handleOutsideClick]);
 
