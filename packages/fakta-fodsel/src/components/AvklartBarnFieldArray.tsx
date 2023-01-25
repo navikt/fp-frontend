@@ -63,9 +63,11 @@ export const AvklartBarnFieldArray: FunctionComponent<OwnProps> = ({
                   isReadOnly={readOnly}
                 />
               </FlexColumn>
-              <FlexColumn>
-                {getRemoveButton()}
-              </FlexColumn>
+              {!readOnly && (
+                <FlexColumn>
+                  {getRemoveButton()}
+                </FlexColumn>
+              )}
             </FlexRow>
           </FlexContainer>
         </React.Fragment>
