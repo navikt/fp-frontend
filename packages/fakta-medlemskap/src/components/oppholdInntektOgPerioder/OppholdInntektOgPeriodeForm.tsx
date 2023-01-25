@@ -12,11 +12,11 @@ import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
 
-import { FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import {
   AlleKodeverk, MedlemPeriode, Medlemskap, Soknad,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 import OppholdstillatelseTabell from './OppholdstillatelseTabell';
 import OppholdINorgeOgAdresserFaktaPanel, { FormValues as OppholdFormValues } from './OppholdINorgeOgAdresserFaktaPanel';

@@ -2,13 +2,13 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Label, BodyShort } from '@navikt/ds-react';
 
-import { AlleKodeverk, Vilkar, Behandlingsresultat } from '@fpsak-frontend/types';
+import { AlleKodeverk, Vilkar, Behandlingsresultat } from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
+import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
+import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
+import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 
 import { hasIkkeOppfyltSoknadsfristvilkar } from '../felles/VedtakHelper';
 import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';

@@ -1,11 +1,11 @@
 {
-  "name": "@fpsak-frontend/kodeverk",
+  "name": "@navikt/fp-kodeverk",
   "version": "1.0.0",
   "module": "index.jsx",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@fpsak-frontend/types": "1.0.0"
+    "@navikt/fp-types": "1.0.0"
   },
   "devDependencies": {}
 }

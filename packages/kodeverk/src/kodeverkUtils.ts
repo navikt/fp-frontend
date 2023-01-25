@@ -1,4 +1,4 @@
-import { AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn } from '@navikt/fp-types';
 import KodeverkType from './kodeverkTyper';
 
 // TODO Fjern desse metodane. Kan like godt slå opp direkte

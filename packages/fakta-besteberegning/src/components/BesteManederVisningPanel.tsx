@@ -13,8 +13,8 @@ import {
   BesteberegningInntekt,
   Månedsgrunnlag,
   ArbeidsgiverOpplysningerPerId,
-} from '@fpsak-frontend/types';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+} from '@navikt/fp-types';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 
 import styles from './besteManederVisningPanel.less';
 

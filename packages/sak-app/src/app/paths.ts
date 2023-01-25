@@ -1,7 +1,7 @@
 import { Location, Search } from 'history';
 
 import { buildPath, formatQueryString, parseQueryString } from '@navikt/ft-utils';
-import { skjermlenkeCodes } from '@fpsak-frontend/konstanter';
+import { skjermlenkeCodes } from '@navikt/fp-konstanter';
 
 export const AVDELINGSLEDER_PATH = 'avdelingsleder';
 export const JOURNALFØRING_PATH = 'journalforing';

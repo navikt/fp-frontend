@@ -7,25 +7,25 @@ import {
 } from '@navikt/ds-react';
 
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { required } from '@navikt/ft-form-validators';
 import {
   DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
-import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
+import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
+import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import soknadType from '@navikt/fp-kodeverk/src/soknadType';
+import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
 import {
   ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew,
-} from '@fpsak-frontend/prosess-felles';
+} from '@navikt/fp-prosess-felles';
 import {
   Aksjonspunkt, AlleKodeverk, Behandling, FamilieHendelse, Soknad,
-} from '@fpsak-frontend/types';
-import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import SoknadsfristAp from '@fpsak-frontend/types-avklar-aksjonspunkter/src/prosess/SoknadsfristAp';
+} from '@navikt/fp-types';
+import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import SoknadsfristAp from '@navikt/fp-types-avklar-aksjonspunkter/src/prosess/SoknadsfristAp';
 
 import styles from './erSoknadsfristVilkaretOppfyltForm.less';
 

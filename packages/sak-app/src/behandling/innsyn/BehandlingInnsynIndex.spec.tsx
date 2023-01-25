@@ -5,9 +5,9 @@ import { act } from 'react-dom/test-utils';
 import { FagsakYtelseType, BehandlingType, BehandlingStatus } from '@navikt/ft-kodeverk';
 import { AlleKodeverk } from '@navikt/ft-types';
 
-import { AksessRettigheter, Fagsak } from '@fpsak-frontend/types';
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import { AksessRettigheter, Fagsak } from '@navikt/fp-types';
+import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { createIntl } from '@navikt/ft-utils';
 
 import { BehandlingFellesApiKeys } from '../felles/data/behandlingFellesApi';

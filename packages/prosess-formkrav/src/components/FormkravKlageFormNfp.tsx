@@ -2,10 +2,10 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Form } from '@navikt/ft-form-hooks';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { KlageVurdering, AlleKodeverk } from '@fpsak-frontend/types';
-import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { KlageFormkravAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { KlageVurdering, AlleKodeverk } from '@navikt/fp-types';
+import BehandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import { KlageFormkravAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import FormkravKlageForm, { getPaKlagdVedtak, IKKE_PA_KLAGD_VEDTAK } from './FormkravKlageForm';
 import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';

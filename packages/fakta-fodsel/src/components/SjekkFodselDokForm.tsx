@@ -2,18 +2,18 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 
-import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@fpsak-frontend/fakta-felles';
+import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@navikt/fp-fakta-felles';
 import {
   ArrowBox, VerticalSpacer, FaktaGruppe,
 } from '@navikt/ft-ui-komponenter';
-import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
+import FodselSammenligningIndex from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import {
   Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad, AvklartBarn,
-} from '@fpsak-frontend/types';
-import { SjekkManglendeFodselAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import { SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import AvklartBarnFieldArray from './AvklartBarnFieldArray';
 

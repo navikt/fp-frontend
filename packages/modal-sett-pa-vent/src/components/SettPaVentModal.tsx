@@ -13,8 +13,8 @@ import { Datepicker, SelectField, Form } from '@navikt/ft-form-hooks';
 import {
   ariaCheck, dateAfterOrEqualToToday, hasValidDate, required, dateBeforeToday,
 } from '@navikt/ft-form-validators';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
-import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
+import { KodeverkMedNavn } from '@navikt/fp-types';
+import venteArsakType from '@navikt/fp-kodeverk/src/venteArsakType';
 
 import styles from './settPaVentModal.less';
 

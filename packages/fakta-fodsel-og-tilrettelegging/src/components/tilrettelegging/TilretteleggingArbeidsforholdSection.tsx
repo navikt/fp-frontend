@@ -9,7 +9,7 @@ import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
 
-import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, ArbeidsforholdFodselOgTilrettelegging } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, ArbeidsforholdFodselOgTilrettelegging } from '@navikt/fp-types';
 
 import TilretteleggingFieldArray from './TilretteleggingFieldArray';
 import VelferdspermisjonSection from './VelferdspermisjonSection';

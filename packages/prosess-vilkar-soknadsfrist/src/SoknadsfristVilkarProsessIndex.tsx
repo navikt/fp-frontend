@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { FamilieHendelseSamling, Soknad, StandardProsessPanelProps } from '@fpsak-frontend/types';
+import { FamilieHendelseSamling, Soknad, StandardProsessPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import ErSoknadsfristVilkaretOppfyltForm from './components/ErSoknadsfristVilkaretOppfyltForm';

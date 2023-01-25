@@ -2,16 +2,16 @@ import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 
-import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@fpsak-frontend/fakta-felles';
+import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import { Form } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
 import {
   Aksjonspunkt, FamilieHendelse, Personoversikt, RelatertTilgrensedYtelse, Soknad, AlleKodeverk,
-} from '@fpsak-frontend/types';
-import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
-import { AvklarFaktaForForeldreansvarAksjonspunktAp, AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
+import { AvklarFaktaForForeldreansvarAksjonspunktAp, AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import OmsorgOgForeldreansvarFaktaForm, { FormValues as OmsorgFormValues } from './OmsorgOgForeldreansvarFaktaForm';
 

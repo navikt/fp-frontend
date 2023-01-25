@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 
-import { withRouter } from '@fpsak-frontend/storybook-utils';
+import { withRouter } from '@navikt/fp-storybook-utils';
 
 import LagreSoknadPapirsoknadIndex from './LagreSoknadPapirsoknadIndex';
 

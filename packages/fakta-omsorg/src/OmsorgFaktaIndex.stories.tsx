@@ -4,14 +4,14 @@ import { action } from '@storybook/addon-actions';
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { OpplysningAdresseType } from '@navikt/ft-kodeverk';
 
-import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import sivilstandType from '@fpsak-frontend/kodeverk/src/sivilstandType';
+import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import sivilstandType from '@navikt/fp-kodeverk/src/sivilstandType';
 import {
   Behandling, KjønnkodeEnum, Personoversikt, Ytelsefordeling,
-} from '@fpsak-frontend/types';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+} from '@navikt/fp-types';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import OmsorgFaktaIndex from './OmsorgFaktaIndex';
 

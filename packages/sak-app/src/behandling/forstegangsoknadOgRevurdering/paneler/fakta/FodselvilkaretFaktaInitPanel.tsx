@@ -4,11 +4,11 @@ import React, {
 import { useIntl } from 'react-intl';
 import { FamilieHendelse, FamilieHendelseSamling } from '@navikt/ft-types';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import FodselFaktaIndex from '@fpsak-frontend/fakta-fodsel';
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import { fodselsvilkarene } from '@fpsak-frontend/kodeverk/src/vilkarType';
-import { Soknad } from '@fpsak-frontend/types';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import FodselFaktaIndex from '@navikt/fp-fakta-fodsel';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import { fodselsvilkarene } from '@navikt/fp-kodeverk/src/vilkarType';
+import { Soknad } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';

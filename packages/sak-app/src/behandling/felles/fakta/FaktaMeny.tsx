@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { SideMenu } from '@navikt/ft-plattform-komponenter';
 
-import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel_ny.svg';
+import advarselIkonUrl from '@navikt/fp-assets/images/advarsel_ny.svg';
 import FaktaPanelMenyData from '../typer/faktaPanelMenyData';
 
 interface OwnProps {

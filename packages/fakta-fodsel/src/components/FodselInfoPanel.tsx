@@ -4,15 +4,15 @@ import { useForm } from 'react-hook-form';
 
 import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { FaktaSubmitButtonNew } from '@fpsak-frontend/fakta-felles';
-import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
+import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
+import aksjonspunktCodes, { hasAksjonspunkt } from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import FodselSammenligningIndex from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import {
   Aksjonspunkt, FamilieHendelseSamling, FamilieHendelse, Soknad,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 import {
   BekreftTerminbekreftelseAp, SjekkManglendeFodselAp, VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp,
-} from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import TermindatoFaktaForm, { FormValues as TermindatoFormValues } from './TermindatoFaktaForm';
 import SjekkFodselDokForm, { FormValues as SjekkFodselDokFormValues } from './SjekkFodselDokForm';

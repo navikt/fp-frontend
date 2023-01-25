@@ -2,13 +2,13 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import opptjeningAktivitetKlassifisering from '@fpsak-frontend/prosess-vilkar-opptjening/src/kodeverk/opptjeningAktivitetKlassifisering';
-import { Aksjonspunkt, Behandling, Opptjening } from '@fpsak-frontend/types';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import opptjeningAktivitetKlassifisering from '@navikt/fp-prosess-vilkar-opptjening/src/kodeverk/opptjeningAktivitetKlassifisering';
+import { Aksjonspunkt, Behandling, Opptjening } from '@navikt/fp-types';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import OpptjeningVilkarProsessIndex from './OpptjeningVilkarProsessIndex';
 

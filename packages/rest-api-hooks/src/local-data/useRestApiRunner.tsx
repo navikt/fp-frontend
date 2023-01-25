@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 
 import {
   REQUEST_POLLING_CANCELLED, ErrorType, RequestApi, RestKey,
-} from '@fpsak-frontend/rest-api';
+} from '@navikt/fp-rest-api';
 
 import RestApiState from '../RestApiState';
 

@@ -2,15 +2,15 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import VarselOmRevurderingProsessIndex from '@fpsak-frontend/prosess-varsel-om-revurdering';
+import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import VarselOmRevurderingProsessIndex from '@navikt/fp-prosess-varsel-om-revurdering';
 import {
   Aksjonspunkt, Behandling, FamilieHendelse, FamilieHendelseSamling, Soknad,
-} from '@fpsak-frontend/types';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 const defaultBehandling = {
   uuid: '1',

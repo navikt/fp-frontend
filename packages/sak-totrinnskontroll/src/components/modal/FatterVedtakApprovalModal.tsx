@@ -7,10 +7,10 @@ import {
   FlexColumn, FlexContainer, FlexRow, Image,
 } from '@navikt/ft-ui-komponenter';
 
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
-import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
+import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
+import behandlingResultatType from '@navikt/fp-kodeverk/src/behandlingResultatType';
+import BehandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import innvilgetImageUrl from '@navikt/fp-assets/images/innvilget_valgt.svg';
 import { Behandling } from '@navikt/ft-types';
 
 import styles from './fatterVedtakApprovalModal.less';

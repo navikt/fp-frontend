@@ -3,8 +3,8 @@ import React, {
 } from 'react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
-import { Behandling } from '@fpsak-frontend/types';
-import { RequestApi } from '@fpsak-frontend/rest-api';
+import { Behandling } from '@navikt/fp-types';
+import { RequestApi } from '@navikt/fp-rest-api';
 
 import BehandlingHenlagtPanel from './BehandlingHenlagtPanel';
 import ProsessMeny from './ProsessMeny';

@@ -10,8 +10,8 @@ import VisittkortSakIndex from '@navikt/ft-sak-visittkort';
 import { LoadingPanel, DataFetchPendingModal } from '@navikt/ft-ui-komponenter';
 import { BehandlingType } from '@navikt/ft-kodeverk';
 
-import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
-import { AnnenPartBehandling } from '@fpsak-frontend/types';
+import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { AnnenPartBehandling } from '@navikt/fp-types';
 
 import BehandlingerIndex from '../behandling/BehandlingerIndex';
 import useTrackRouteParam from '../app/useTrackRouteParam';

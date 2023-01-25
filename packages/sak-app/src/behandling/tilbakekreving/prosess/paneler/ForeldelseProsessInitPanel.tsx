@@ -5,9 +5,9 @@ import {
 import { ForeldelseAksjonspunktCodes, VurderForeldelseAp } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { Behandling } from '@fpsak-frontend/types';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { Behandling } from '@navikt/fp-types';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
 import getAlleMerknaderFraBeslutter from '../../felles/util/getAlleMerknaderFraBeslutter';

@@ -3,8 +3,8 @@ import TestRenderer from 'react-test-renderer';
 import MockAdapter from 'axios-mock-adapter';
 import { Behandling } from '@navikt/ft-types';
 
-import { createRequestApi, RestApiConfigBuilder } from '@fpsak-frontend/rest-api';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { createRequestApi, RestApiConfigBuilder } from '@navikt/fp-rest-api';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import { useBehandling, useLagreAksjonspunkt } from './indexHooks';
 import { BehandlingFellesApiKeys } from '../data/behandlingFellesApi';

@@ -6,9 +6,9 @@ import { Aksjonspunkt, AlleKodeverk } from '@navikt/ft-types';
 import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
 import { Modal } from '@navikt/ds-react';
 
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import { Behandling } from '@fpsak-frontend/types';
-import { createRequestApi, RestApiConfigBuilder } from '@fpsak-frontend/rest-api';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { Behandling } from '@navikt/fp-types';
+import { createRequestApi, RestApiConfigBuilder } from '@navikt/fp-rest-api';
 
 import BehandlingPaVent from './BehandlingPaVent';
 import { BehandlingFellesApiKeys } from '../../data/behandlingFellesApi';

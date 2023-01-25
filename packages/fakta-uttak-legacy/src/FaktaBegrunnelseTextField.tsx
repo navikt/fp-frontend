@@ -5,7 +5,7 @@ import {
   hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-form-validators';
 
-import { Aksjonspunkt } from '@fpsak-frontend/types';
+import { Aksjonspunkt } from '@navikt/fp-types';
 import TextAreaField from './form/TextAreaField';
 import styles from './faktaBegrunnelseTextField.less';
 import messages from '../i18n/nb_NO.json';

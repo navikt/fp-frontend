@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
 import { KodeverkMedNavn } from '@navikt/ft-types';
 
-import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
-import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
-import MeldingerSakIndex, { MessagesModalSakIndex, FormValues } from '@fpsak-frontend/sak-meldinger';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
+import dokumentMalType from '@navikt/fp-kodeverk/src/dokumentMalType';
+import venteArsakType from '@navikt/fp-kodeverk/src/venteArsakType';
+import MeldingerSakIndex, { MessagesModalSakIndex, FormValues } from '@navikt/fp-sak-meldinger';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import SettPaVentModalIndex from '@navikt/fp-modal-sett-pa-vent';
 
 import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
 import { useFpSakKodeverk } from '../../data/useKodeverk';

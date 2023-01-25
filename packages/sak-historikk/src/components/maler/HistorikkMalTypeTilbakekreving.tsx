@@ -4,8 +4,8 @@ import { BodyShort } from '@navikt/ds-react';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
-import { HistorikkinnslagEndretFelt } from '@fpsak-frontend/types';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { HistorikkinnslagEndretFelt } from '@navikt/fp-types';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 
 import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningTypeCodes';
 import historikkEndretFeltType from '../../kodeverk/historikkEndretFeltType';

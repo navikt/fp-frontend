@@ -1,4 +1,4 @@
-import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
+import { FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { diff } from '@navikt/ft-utils';
 
 const hasValue = (value: string | number | boolean): boolean => value !== null && value !== undefined;

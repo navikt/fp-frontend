@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
 
-import { ArbeidsgiverOpplysningerWrapper, Personoversikt } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerWrapper, Personoversikt } from '@navikt/fp-types';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import BehandlingContainer from '../../felles/BehandlingContainer';

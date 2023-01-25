@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { AlleKodeverk } from '@navikt/ft-types';
 
-import { SoknadData } from '@fpsak-frontend/papirsoknad-ui-komponenter';
+import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 
 import EngangsstonadForm from './components/EngangsstonadForm';
 

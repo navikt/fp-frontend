@@ -6,13 +6,13 @@ import { AksjonspunktStatus, VilkarUtfallType } from '@navikt/ft-kodeverk';
 import { Dokument } from '@navikt/ft-types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import VedtakInnsynProsessIndex, { InnsynBrevData } from '@fpsak-frontend/prosess-vedtak-innsyn';
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import VedtakInnsynProsessIndex, { InnsynBrevData } from '@navikt/fp-prosess-vedtak-innsyn';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
   Fagsak, Behandling, ForhåndsvisMeldingParams, Innsyn,
-} from '@fpsak-frontend/types';
-import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
+} from '@navikt/fp-types';
+import behandlingResultatType from '@navikt/fp-kodeverk/src/behandlingResultatType';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import IverksetterVedtakStatusModal from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';

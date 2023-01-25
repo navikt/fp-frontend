@@ -1,6 +1,6 @@
 import {
   BehandlingAppKontekst, BehandlingOppretting, Fagsak, FagsakDataFpTilbake, Historikkinnslag,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 class FagsakData {
   private $$fagsak: Fagsak;

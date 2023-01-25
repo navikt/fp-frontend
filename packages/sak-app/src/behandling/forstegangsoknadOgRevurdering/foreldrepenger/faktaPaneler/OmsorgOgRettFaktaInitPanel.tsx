@@ -3,10 +3,10 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import OmsorgOgRettFaktaIndex from '@fpsak-frontend/fakta-omsorg-og-rett';
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import { Personoversikt, Ytelsefordeling } from '@fpsak-frontend/types';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import OmsorgOgRettFaktaIndex from '@navikt/fp-fakta-omsorg-og-rett';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import { Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';

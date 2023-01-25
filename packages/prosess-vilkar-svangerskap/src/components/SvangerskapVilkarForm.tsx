@@ -5,14 +5,14 @@ import moment from 'moment';
 import { Label } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
+import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 import {
   ProsessStegBegrunnelseTextFieldNew, VilkarResultPicker, ProsessPanelTemplate,
-} from '@fpsak-frontend/prosess-felles';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
+} from '@navikt/fp-prosess-felles';
+import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
 import {
   Aksjonspunkt,
   AlleKodeverk,
@@ -20,9 +20,9 @@ import {
   Behandling,
   FodselOgTilrettelegging,
   Vilkar,
-} from '@fpsak-frontend/types';
-import { BekreftSvangerskapspengervilkarAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
+} from '@navikt/fp-types';
+import { BekreftSvangerskapspengervilkarAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import tilretteleggingType from '@navikt/fp-kodeverk/src/tilretteleggingType';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 const finnesUttakPåArbfor = (arbfor: ArbeidsforholdFodselOgTilrettelegging): boolean => {

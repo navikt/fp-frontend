@@ -1,4 +1,4 @@
-import { RestKey } from '@fpsak-frontend/rest-api';
+import { RestKey } from '@navikt/fp-rest-api';
 
 import RestApiConfigBuilder from './RestApiConfigBuilder';
 

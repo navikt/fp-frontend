@@ -12,18 +12,18 @@ import {
 } from '@navikt/ft-ui-komponenter';
 
 import { Form } from '@navikt/ft-form-hooks';
-import { KodeverkMedNavn, Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
-import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import { OverstyringPanel, VilkarResultPicker } from '@fpsak-frontend/prosess-felles';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { OverstyringAksjonspunkter } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { KodeverkMedNavn, Aksjonspunkt, Behandling } from '@navikt/fp-types';
+import BehandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
+import { OverstyringPanel, VilkarResultPicker } from '@navikt/fp-prosess-felles';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import { OverstyringAksjonspunkter } from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import { DDMMYYYY_DATE_FORMAT, decodeHtmlEntity } from '@navikt/ft-utils';
-import avslattImage from '@fpsak-frontend/assets/images/avslaatt_hover.svg';
-import innvilgetImage from '@fpsak-frontend/assets/images/innvilget_hover.svg';
-import keyImage from '@fpsak-frontend/assets/images/key-1-rotert.svg';
-import keyUtgraetImage from '@fpsak-frontend/assets/images/key-1-rotert-utgraet.svg';
-import { OverstyringAp, OverstyringMedlemskapsvilkaretLopendeAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import avslattImage from '@navikt/fp-assets/images/avslaatt_hover.svg';
+import innvilgetImage from '@navikt/fp-assets/images/innvilget_hover.svg';
+import keyImage from '@navikt/fp-assets/images/key-1-rotert.svg';
+import keyUtgraetImage from '@navikt/fp-assets/images/key-1-rotert-utgraet.svg';
+import { OverstyringAp, OverstyringMedlemskapsvilkaretLopendeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './vilkarresultatMedOverstyringForm.less';
 

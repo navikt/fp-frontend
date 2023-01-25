@@ -6,7 +6,7 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { getDateAndTime } from '@navikt/ft-utils';
 import {
   Oppgave, OppgaveReservasjonEndringDatoModal, FlyttReservasjonModal,
-} from '@fpsak-frontend/los-felles';
+} from '@navikt/fp-los-felles';
 
 import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosSaksbehandlerRestApi';
 import MenuButton from './MenuButton';

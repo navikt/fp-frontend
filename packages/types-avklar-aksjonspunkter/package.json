@@ -1,12 +1,12 @@
 {
-  "name": "@fpsak-frontend/types-avklar-aksjonspunkter",
+  "name": "@navikt/fp-types-avklar-aksjonspunkter",
   "version": "1.0.0",
   "module": "index.jsx",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@fpsak-frontend/kodeverk": "1.0.0",
-    "@fpsak-frontend/types": "1.0.0",
+    "@navikt/fp-kodeverk": "1.0.0",
+    "@navikt/fp-types": "1.0.0",
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": "5.1.8",
     "@navikt/ft-fakta-beregning": "3.0.10",
     "@navikt/ft-prosess-beregningsgrunnlag": "4.0.15"

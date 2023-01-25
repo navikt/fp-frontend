@@ -1,11 +1,11 @@
 import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
-import ankeVurderingKodeverk from '@fpsak-frontend/kodeverk/src/ankeVurdering';
-import { AnkeVurdering } from '@fpsak-frontend/types';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import ankeOmgjorArsak from '@fpsak-frontend/kodeverk/src/ankeOmgjorArsak';
+import ankeVurderingOmgjoer from '@navikt/fp-kodeverk/src/ankeVurderingOmgjoer';
+import ankeVurderingKodeverk from '@navikt/fp-kodeverk/src/ankeVurdering';
+import { AnkeVurdering } from '@navikt/fp-types';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import ankeOmgjorArsak from '@navikt/fp-kodeverk/src/ankeOmgjorArsak';
 
 import AnkeTrygderettsbehandlingProsessIndex from './AnkeTrygderettsbehandlingProsessIndex';
 

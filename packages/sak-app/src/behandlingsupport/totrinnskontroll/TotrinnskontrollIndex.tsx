@@ -3,8 +3,8 @@ import React, {
 } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import TotrinnskontrollSakIndex from '@fpsak-frontend/sak-totrinnskontroll';
-import { FatterVedtakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import TotrinnskontrollSakIndex from '@navikt/fp-sak-totrinnskontroll';
+import { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import FagsakData from '../../fagsak/FagsakData';
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';

@@ -1,9 +1,9 @@
 import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { render, screen } from '@testing-library/react';
-import { OpptjeningAktiviteter } from '@fpsak-frontend/types';
+import { OpptjeningAktiviteter } from '@navikt/fp-types';
 import { Modal } from '@navikt/ds-react';
-import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@navikt/fp-utils-test/src/intl-enzyme-test-helper';
 
 import OpptjeningTotrinnText from './OpptjeningTotrinnText';
 import messages from '../../../i18n/nb_NO.json';

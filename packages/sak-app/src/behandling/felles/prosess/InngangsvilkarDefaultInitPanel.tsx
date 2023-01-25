@@ -2,10 +2,10 @@ import React, {
   ReactElement, useMemo,
 } from 'react';
 
-import { RestApiHooks, RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { RequestApi, RestKey } from '@fpsak-frontend/rest-api';
+import { RestApiHooks, RestApiState } from '@navikt/fp-rest-api-hooks';
+import { RequestApi, RestKey } from '@navikt/fp-rest-api';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { StandardProsessPanelProps } from '@fpsak-frontend/types';
+import { StandardProsessPanelProps } from '@navikt/fp-types';
 
 import InngangsvilkarPanelInitProps from '../typer/inngangsvilkarPanelInitProps';
 import useStandardProsessPanelProps from './useStandardProsessPanelProps';

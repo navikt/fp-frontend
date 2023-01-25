@@ -3,9 +3,9 @@ import React, {
 } from 'react';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { AksessRettigheter, Medlemskap } from '@fpsak-frontend/types';
+import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksessRettigheter, Medlemskap } from '@navikt/fp-types';
 
 import InngangsvilkarPanelInitProps from '../../../../felles/typer/inngangsvilkarPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../../felles/data/behandlingFellesApi';

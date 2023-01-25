@@ -4,8 +4,8 @@ import { Button, BodyShort } from '@navikt/ds-react';
 import {
   FlexColumn, FlexContainer, FlexRow, Image,
 } from '@navikt/ft-ui-komponenter';
-import advarselImageUrl from '@fpsak-frontend/assets/images/advarsel.svg';
-import { Modal } from '@fpsak-frontend/los-felles';
+import advarselImageUrl from '@navikt/fp-assets/images/advarsel.svg';
+import { Modal } from '@navikt/fp-los-felles';
 
 import Saksbehandler from '../../typer/saksbehandlerAvdelingTsType';
 

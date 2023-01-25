@@ -2,9 +2,9 @@ import React, {
   useState, FunctionComponent, useEffect,
 } from 'react';
 
-import { errorOfType, ErrorTypes, getErrorResponseData } from '@fpsak-frontend/rest-api';
-import { FagsakEnkel } from '@fpsak-frontend/types';
-import { OppgaveStatus, Oppgave } from '@fpsak-frontend/los-felles';
+import { errorOfType, ErrorTypes, getErrorResponseData } from '@navikt/fp-rest-api';
+import { FagsakEnkel } from '@navikt/fp-types';
+import { OppgaveStatus, Oppgave } from '@navikt/fp-los-felles';
 
 import FagsakSearch from './components/FagsakSearch';
 import { RestApiPathsKeys, restApiHooks } from '../data/fplosSaksbehandlerRestApi';

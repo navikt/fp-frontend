@@ -3,9 +3,9 @@ import { FormattedMessage } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import arbeidskategori from '@fpsak-frontend/kodeverk/src/arbeidskategori';
-import { AlleKodeverk } from '@fpsak-frontend/types';
+import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import arbeidskategori from '@navikt/fp-kodeverk/src/arbeidskategori';
+import { AlleKodeverk } from '@navikt/fp-types';
 
 import RenderGraderingPeriodeFieldArray, {
   TIDSROM_PERMISJON_FORM_NAME_PREFIX,

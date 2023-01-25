@@ -5,13 +5,13 @@ import { render, screen } from '@testing-library/react';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import { AksessRettigheter, AlleKodeverk, Fagsak } from '@fpsak-frontend/types';
-import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
+import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import { AksessRettigheter, AlleKodeverk, Fagsak } from '@navikt/fp-types';
+import navBrukerKjonn from '@navikt/fp-kodeverk/src/navBrukerKjonn';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import BehandlingTilbakekrevingIndex from './BehandlingTilbakekrevingIndex';
 import { BehandlingFellesApiKeys } from '../felles/data/behandlingFellesApi';

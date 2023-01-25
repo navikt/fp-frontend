@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import AktorSakIndex from '@navikt/ft-sak-aktor';
 
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import useTrackRouteParam from '../app/useTrackRouteParam';
 import { restApiHooks, FpsakApiKeys } from '../data/fpsakApi';

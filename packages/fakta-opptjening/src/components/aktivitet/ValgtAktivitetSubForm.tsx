@@ -7,8 +7,8 @@ import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import OAType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
-import { ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
+import OAType from '@navikt/fp-kodeverk/src/opptjeningAktivitetType';
+import { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import styles from './valgtAktivitetSubForm.less';
 

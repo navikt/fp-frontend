@@ -5,7 +5,7 @@ import {
   FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
-import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
+import innvilgetImageUrl from '@navikt/fp-assets/images/innvilget_valgt.svg';
 
 import styles from './utlandEndretModal.less';
 

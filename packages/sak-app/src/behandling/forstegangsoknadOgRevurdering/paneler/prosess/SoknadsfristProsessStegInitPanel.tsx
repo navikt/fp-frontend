@@ -3,10 +3,10 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import VurderSoknadsfristForeldrepengerIndex from '@fpsak-frontend/prosess-soknadsfrist';
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { Soknad } from '@fpsak-frontend/types';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import VurderSoknadsfristForeldrepengerIndex from '@navikt/fp-prosess-soknadsfrist';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { Soknad } from '@navikt/fp-types';
 
 import skalViseProsessPanel from '../../../felles/prosess/skalViseProsessPanel';
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';

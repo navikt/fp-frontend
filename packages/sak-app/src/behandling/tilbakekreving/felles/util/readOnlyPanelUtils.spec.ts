@@ -1,6 +1,6 @@
 import { AksjonspunktStatus, BehandlingType, BehandlingStatus } from '@navikt/ft-kodeverk';
 import { Behandling } from '@navikt/ft-types';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 
 import { erReadOnly, harBehandlingReadOnlyStatus } from './readOnlyPanelUtils';
 

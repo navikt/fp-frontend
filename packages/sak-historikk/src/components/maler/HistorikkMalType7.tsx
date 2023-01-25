@@ -4,7 +4,7 @@ import {
 } from 'react-intl';
 import { Label, BodyShort } from '@navikt/ds-react';
 
-import { HistorikkinnslagEndretFelt } from '@fpsak-frontend/types';
+import { HistorikkinnslagEndretFelt } from '@navikt/fp-types';
 
 import {
   findEndretFeltNavn, findEndretFeltVerdi, findHendelseText, findIdForOpplysningCode, findResultatText,

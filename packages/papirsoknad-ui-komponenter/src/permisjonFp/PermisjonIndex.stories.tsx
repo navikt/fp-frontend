@@ -6,8 +6,8 @@ import { Button } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import ForeldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import ForeldreType from '@navikt/fp-kodeverk/src/foreldreType';
 
 import PermisjonIndex from './PermisjonIndex';
 import { TIDSROM_PERMISJON_FORM_NAME_PREFIX, FormValues } from './components/PermisjonPanel';

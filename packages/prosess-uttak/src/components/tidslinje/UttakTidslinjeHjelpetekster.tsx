@@ -2,14 +2,14 @@ import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { LegendBox } from '@navikt/ft-tidslinje';
 
-import ikkeOppfyltUrl from '@fpsak-frontend/assets/images/ikke_oppfylt.svg';
-import oppfyltUrl from '@fpsak-frontend/assets/images/oppfylt.svg';
-import uavklartUrl from '@fpsak-frontend/assets/images/uavklart.svg';
-import fodselUrl from '@fpsak-frontend/assets/images/fodsel.svg';
-import soknadUrl from '@fpsak-frontend/assets/images/soknad.svg';
-import revurderingUrl from '@fpsak-frontend/assets/images/endringstidspunkt.svg';
-import gradertImage from '@fpsak-frontend/assets/images/periode_gradert.svg';
-import manueltAvklart from '@fpsak-frontend/assets/images/periode_manuelt_avklart.svg';
+import ikkeOppfyltUrl from '@navikt/fp-assets/images/ikke_oppfylt.svg';
+import oppfyltUrl from '@navikt/fp-assets/images/oppfylt.svg';
+import uavklartUrl from '@navikt/fp-assets/images/uavklart.svg';
+import fodselUrl from '@navikt/fp-assets/images/fodsel.svg';
+import soknadUrl from '@navikt/fp-assets/images/soknad.svg';
+import revurderingUrl from '@navikt/fp-assets/images/endringstidspunkt.svg';
+import gradertImage from '@navikt/fp-assets/images/periode_gradert.svg';
+import manueltAvklart from '@navikt/fp-assets/images/periode_manuelt_avklart.svg';
 
 const UttakTidslinjeHjelpetekster: FunctionComponent = () => {
   const intl = useIntl();

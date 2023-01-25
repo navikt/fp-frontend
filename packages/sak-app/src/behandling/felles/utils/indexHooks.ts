@@ -3,9 +3,9 @@ import {
 } from 'react';
 import { usePrevious } from '@navikt/ft-ui-komponenter';
 
-import { Behandling } from '@fpsak-frontend/types';
-import { RestApiHooks, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
-import { RequestApi } from '@fpsak-frontend/rest-api';
+import { Behandling } from '@navikt/fp-types';
+import { RestApiHooks, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { RequestApi } from '@navikt/fp-rest-api';
 
 import { BehandlingEventHandler } from '../typer/standardBehandlingProps';
 import { BehandlingFellesApiKeys } from '../data/behandlingFellesApi';

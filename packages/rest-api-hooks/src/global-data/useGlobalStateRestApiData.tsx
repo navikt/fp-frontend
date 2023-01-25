@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { RestKey } from '@fpsak-frontend/rest-api';
+import { RestKey } from '@navikt/fp-rest-api';
 
 import { RestApiStateContext } from './RestApiContext';
 

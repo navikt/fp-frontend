@@ -10,7 +10,7 @@ import {
   hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-form-validators';
 
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import Modal from '../Modal';
 import SaksbehandlerForFlytting from '../typer/saksbehandlerForFlyttingTsType';

@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import ProsessPanelWrapper from './ProsessPanelWrapper';
 import ProsessPanelMenyData from '../typer/prosessPanelMenyData';

@@ -7,11 +7,11 @@ import { Form } from '@navikt/ft-form-hooks';
 import { Button, Heading } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Aksjonspunkt, DokumentasjonVurderingBehov } from '@fpsak-frontend/types';
-import { FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
-import { VurderDokumentasjonAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { Aksjonspunkt, DokumentasjonVurderingBehov } from '@navikt/fp-types';
+import { FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
+import { VurderDokumentasjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 
 import UttakDokumentasjonFaktaTable from './UttakDokumentasjonFaktaTable';
 

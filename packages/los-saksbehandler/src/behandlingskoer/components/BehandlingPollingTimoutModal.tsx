@@ -4,9 +4,9 @@ import { Button, Label } from '@navikt/ds-react';
 import {
   FlexColumn, FlexContainer, FlexRow, FloatRight, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import { Modal } from '@fpsak-frontend/los-felles';
+import { Modal } from '@navikt/fp-los-felles';
 
-import advarselImageUrl from '@fpsak-frontend/assets/images/advarsel.svg';
+import advarselImageUrl from '@navikt/fp-assets/images/advarsel.svg';
 
 import styles from './behandlingPollingTimoutModal.less';
 

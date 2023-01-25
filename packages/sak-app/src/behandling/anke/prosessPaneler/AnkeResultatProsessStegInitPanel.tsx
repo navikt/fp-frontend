@@ -3,10 +3,10 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import AnkeResultatProsessIndex from '@fpsak-frontend/prosess-anke-resultat';
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { AnkeVurdering } from '@fpsak-frontend/types';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import AnkeResultatProsessIndex from '@navikt/fp-prosess-anke-resultat';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { AnkeVurdering } from '@navikt/fp-types';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';

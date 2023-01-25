@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import {
   AlleKodeverk, AlleKodeverkTilbakekreving, StandardFaktaPanelProps, Verge,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import RegistrereVergeInfoPanel from './components/RegistrereVergeInfoPanel';

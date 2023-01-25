@@ -1,4 +1,4 @@
-import StonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
+import StonadskontoType from '@navikt/fp-kodeverk/src/stonadskontoType';
 
 export type AktivitetIdentifikator = Readonly<{
   uttakArbeidType: string;

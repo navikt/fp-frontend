@@ -2,13 +2,13 @@ import React, {
   FunctionComponent, useCallback, useState,
 } from 'react';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import KlagevurderingProsessIndex, { AksjonspunktVerdier, KlageVurderingBrevData } from '@fpsak-frontend/prosess-klagevurdering';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import KlagevurderingProsessIndex, { AksjonspunktVerdier, KlageVurderingBrevData } from '@navikt/fp-prosess-klagevurdering';
 import {
   Behandling, Fagsak, ForhåndsvisMeldingParams, KlageVurdering,
-} from '@fpsak-frontend/types';
-import klageVurderingKodeverk from '@fpsak-frontend/kodeverk/src/klageVurdering';
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
+} from '@navikt/fp-types';
+import klageVurderingKodeverk from '@navikt/fp-kodeverk/src/klageVurdering';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';

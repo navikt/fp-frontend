@@ -6,18 +6,18 @@ import { useForm } from 'react-hook-form';
 
 import {
   FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew, isFieldEdited, FieldEditedInfo, FaktaBegrunnelseFormValues,
-} from '@fpsak-frontend/fakta-felles';
+} from '@navikt/fp-fakta-felles';
 import {
   Aksjonspunkt, FamilieHendelse, AlleKodeverk, Soknad,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 import {
   VerticalSpacer, AksjonspunktHelpTextTemp, FlexContainer, FlexRow, FlexColumn,
 } from '@navikt/ft-ui-komponenter';
-import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import aksjonspunktCodes, { hasAksjonspunkt } from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import { Form } from '@navikt/ft-form-hooks';
 import {
   BekreftDokumentertDatoAksjonspunktAp, BekreftEktefelleAksjonspunktAp, BekreftMannAdoptererAksjonspunktAp,
-} from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import MannAdoptererAleneFaktaForm, { FormValues as MannAdoptererFormValues } from './MannAdoptererAleneFaktaForm';
 import EktefelleFaktaForm, { FormValues as EktefelleFormValues } from './EktefelleFaktaForm';

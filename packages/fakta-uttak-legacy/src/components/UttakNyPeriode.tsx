@@ -16,19 +16,19 @@ import {
   required,
   requiredIfNotPristine,
 } from '@navikt/ft-form-validators';
-import uttakArbeidType from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
-import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
+import uttakArbeidType from '@navikt/fp-kodeverk/src/uttakArbeidType';
+import uttakPeriodeVurdering from '@navikt/fp-kodeverk/src/uttakPeriodeVurdering';
 import {
   ArrowBox, VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
-import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
-import overforingArsak from '@fpsak-frontend/kodeverk/src/overforingArsak';
-import utsettelseArsakCodes from '@fpsak-frontend/kodeverk/src/utsettelseArsakCodes';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import navBrukerKjonn from '@navikt/fp-kodeverk/src/navBrukerKjonn';
+import uttakPeriodeType from '@navikt/fp-kodeverk/src/uttakPeriodeType';
+import overforingArsak from '@navikt/fp-kodeverk/src/overforingArsak';
+import utsettelseArsakCodes from '@navikt/fp-kodeverk/src/utsettelseArsakCodes';
 import {
   ArbeidsgiverOpplysningerPerId, AlleKodeverk, FaktaArbeidsforhold, KodeverkMedNavn, Personoversikt,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 import TextAreaField from '../form/TextAreaField';
 import SelectField from '../form/SelectField';

@@ -8,11 +8,11 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 import { NotFoundPage } from '@navikt/ft-sak-infosider';
 
-import SaksbehandlerIndex from '@fpsak-frontend/los-saksbehandler';
-import JournalforingIndex from '@fpsak-frontend/journalforing';
-import AvdelingslederIndex from '@fpsak-frontend/los-avdelingsleder';
-import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
-import { NavAnsatt } from '@fpsak-frontend/types';
+import SaksbehandlerIndex from '@navikt/fp-los-saksbehandler';
+import JournalforingIndex from '@navikt/fp-journalforing';
+import AvdelingslederIndex from '@navikt/fp-los-avdelingsleder';
+import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { NavAnsatt } from '@navikt/fp-types';
 
 import {
   aktoerRoutePath, fagsakRoutePath, getFagsakHref, journalføringRoutePath, avdelingslederRoutePath,

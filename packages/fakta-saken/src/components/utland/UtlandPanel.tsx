@@ -8,15 +8,15 @@ import {
   FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
-import editUtlandIcon from '@fpsak-frontend/assets/images/endre.svg';
-import editUtlandDisabledIcon from '@fpsak-frontend/assets/images/endre_disablet.svg';
+import editUtlandIcon from '@navikt/fp-assets/images/endre.svg';
+import editUtlandDisabledIcon from '@navikt/fp-assets/images/endre_disablet.svg';
 import { RadioGroupPanel, Form } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
-import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Aksjonspunkt } from '@fpsak-frontend/types';
-import { OverstyringUtenlandssakMarkeringAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import aksjonspunktCodes, { hasAksjonspunkt } from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { Aksjonspunkt } from '@navikt/fp-types';
+import { OverstyringUtenlandssakMarkeringAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import UtlandSakstypeKode from './utlandSakstypeKode';
 import UtlandEndretModal from './UtlandEndretModal';

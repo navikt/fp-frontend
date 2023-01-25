@@ -8,7 +8,7 @@ import {
   Datepicker, InputField, SelectField, PeriodFieldArray, formHooks,
 } from '@navikt/ft-form-hooks';
 
-import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
+import tilretteleggingType from '@navikt/fp-kodeverk/src/tilretteleggingType';
 
 import styles from './behovForTilretteleggingFieldArray.less';
 

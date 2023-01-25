@@ -5,9 +5,9 @@ import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 import { BehandlingType } from '@navikt/ft-kodeverk';
 
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import { alleKodeverkLos } from '@fpsak-frontend/storybook-utils';
-import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
+import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { alleKodeverkLos } from '@navikt/fp-storybook-utils';
+import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
 
 import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, requestApi } from '../../../../data/fplosRestApi';
 import BehandlingstypeVelger from './BehandlingstypeVelger';

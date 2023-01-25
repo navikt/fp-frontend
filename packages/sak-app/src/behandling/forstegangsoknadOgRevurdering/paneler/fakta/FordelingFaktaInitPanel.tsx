@@ -6,11 +6,11 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { FaktaFordelBeregningAvklaringsbehovCode } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
 import { Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/ft-types';
 
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import { ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } from '@fpsak-frontend/types';
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import { ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } from '@navikt/fp-types';
+import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
 
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import DynamicLoader from '../../../felles/DynamicLoader';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';

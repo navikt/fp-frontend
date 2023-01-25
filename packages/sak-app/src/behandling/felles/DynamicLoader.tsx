@@ -5,7 +5,7 @@ import { Label } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { ErrorPage } from '@navikt/ft-sak-infosider';
 import { captureException, withScope } from '@sentry/browser';
-import { RestApiErrorDispatchContext } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiErrorDispatchContext } from '@navikt/fp-rest-api-hooks';
 
 interface OwnPropsErrorBoundary {
   children: JSX.Element;

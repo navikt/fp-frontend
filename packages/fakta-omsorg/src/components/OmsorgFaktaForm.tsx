@@ -4,10 +4,10 @@ import { required } from '@navikt/ft-form-validators';
 import { formHooks, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { ArrowBox, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Aksjonspunkt, Ytelsefordeling } from '@fpsak-frontend/types';
-import { BekreftOmsorgVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import aksjonspunktCodes, { hasAksjonspunkt } from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
+import { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import IkkeOmsorgPeriodeField from './IkkeOmsorgPeriodeField';
 

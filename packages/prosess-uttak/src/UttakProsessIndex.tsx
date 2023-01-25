@@ -4,7 +4,7 @@ import { RawIntlProvider } from 'react-intl';
 import {
   ArbeidsgiverOpplysningerPerId, StandardProsessPanelProps, FamilieHendelseSamling, Personoversikt,
   Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling, PeriodeSoker,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import UttakProsessPanel from './components/UttakProsessPanel';

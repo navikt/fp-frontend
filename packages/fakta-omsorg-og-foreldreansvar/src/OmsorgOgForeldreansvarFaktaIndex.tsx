@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import {
   StandardFaktaPanelProps, FamilieHendelseSamling, InntektArbeidYtelse, Personoversikt, Soknad,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import OmsorgOgForeldreansvarInfoPanel from './components/OmsorgOgForeldreansvarInfoPanel';

@@ -14,13 +14,13 @@ import {
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import {
   Aksjonspunkt, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, AoIArbeidsforhold, AlleKodeverk,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 import {
   VerticalSpacer, AksjonspunktHelpTextHTML, FlexContainer, FlexRow, FlexColumn,
 } from '@navikt/ft-ui-komponenter';
-import { VurderArbeidsforholdPermisjonAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { VurderArbeidsforholdPermisjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 
 import ArbeidsforholdFieldArray from './ArbeidsforholdFieldArray';
 

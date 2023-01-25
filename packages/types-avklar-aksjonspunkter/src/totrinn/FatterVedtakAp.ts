@@ -1,5 +1,5 @@
-import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import AksjonspunktCodeTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
+import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import AksjonspunktCodeTilbakekreving from '@navikt/fp-kodeverk/src/aksjonspunktCodesTilbakekreving';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 

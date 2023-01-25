@@ -3,13 +3,13 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
+import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/ft-types';
-import { ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } from '@navikt/fp-types';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import { ProsessBeregningsgrunnlagAvklaringsbehovCode } from '@navikt/ft-prosess-beregningsgrunnlag';
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
 import DynamicLoader from '../../../felles/DynamicLoader';

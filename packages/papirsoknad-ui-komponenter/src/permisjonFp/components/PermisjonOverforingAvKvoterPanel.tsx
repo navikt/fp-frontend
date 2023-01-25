@@ -6,8 +6,8 @@ import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
 
-import ForeldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
-import overforingArsak from '@fpsak-frontend/kodeverk/src/overforingArsak';
+import ForeldreType from '@navikt/fp-kodeverk/src/foreldreType';
+import overforingArsak from '@navikt/fp-kodeverk/src/overforingArsak';
 
 import RenderOverforingAvKvoterFieldArray, {
   FormValues as KvoterPerioderFormValues,

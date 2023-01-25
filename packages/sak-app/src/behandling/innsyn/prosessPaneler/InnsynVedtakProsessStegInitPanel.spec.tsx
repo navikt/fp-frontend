@@ -9,12 +9,12 @@ import {
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { createIntl } from '@navikt/ft-utils';
 
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
-import { RequestApi } from '@fpsak-frontend/rest-api';
-import { Behandling, Fagsak } from '@fpsak-frontend/types';
+import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import dokumentMalType from '@navikt/fp-kodeverk/src/dokumentMalType';
+import { RequestApi } from '@navikt/fp-rest-api';
+import { Behandling, Fagsak } from '@navikt/fp-types';
 
 import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import * as Felles from '../../felles/prosess/useStandardProsessPanelProps';

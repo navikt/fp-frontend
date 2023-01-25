@@ -3,10 +3,10 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { AksessRettigheter } from '@fpsak-frontend/types';
+import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { AksessRettigheter } from '@navikt/fp-types';
 
 import skalViseProsessPanel from '../../../felles/prosess/skalViseProsessPanel';
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';

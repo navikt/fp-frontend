@@ -16,12 +16,12 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 
-import utsettelseArsakCodes from '@fpsak-frontend/kodeverk/src/utsettelseArsakCodes';
+import utsettelseArsakCodes from '@navikt/fp-kodeverk/src/utsettelseArsakCodes';
 import {
   AarsakFilter, AlleKodeverk, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, PeriodeSoker, PeriodeSokerAktivitet,
-} from '@fpsak-frontend/types';
-import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
-import oppholdArsakType from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
+} from '@navikt/fp-types';
+import periodeResultatType from '@navikt/fp-kodeverk/src/periodeResultatType';
+import oppholdArsakType from '@navikt/fp-kodeverk/src/oppholdArsakType';
 
 import UttakAktiviteterTabell, { finnArbeidsforholdNavnOgProsentArbeid } from './UttakAktiviteterTabell';
 import UttakPeriodeInfo from './UttakPeriodeInfo';

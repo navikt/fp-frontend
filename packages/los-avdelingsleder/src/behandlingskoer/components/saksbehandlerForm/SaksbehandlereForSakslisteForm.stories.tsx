@@ -2,8 +2,8 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
+import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
 
 import Saksliste from '../../../typer/sakslisteAvdelingTsType';
 import SaksbehandlerAvdeling from '../../../typer/saksbehandlerAvdelingTsType';

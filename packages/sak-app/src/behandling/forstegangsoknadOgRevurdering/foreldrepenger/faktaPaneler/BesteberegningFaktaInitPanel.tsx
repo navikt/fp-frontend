@@ -3,11 +3,11 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import BesteberegningFaktaIndex from '@fpsak-frontend/fakta-besteberegning';
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@fpsak-frontend/types';
+import BesteberegningFaktaIndex from '@navikt/fp-fakta-besteberegning';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@navikt/fp-types';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';

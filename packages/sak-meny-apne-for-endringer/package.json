@@ -1,5 +1,5 @@
 {
-  "name": "@fpsak-frontend/sak-meny-apne-for-endringer",
+  "name": "@navikt/fp-sak-meny-apne-for-endringer",
   "version": "1.0.0",
   "module": "index.jsx",
   "license": "MIT",

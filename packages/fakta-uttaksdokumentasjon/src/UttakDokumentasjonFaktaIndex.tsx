@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { RawIntlProvider } from 'react-intl';
 import dayjs from 'dayjs';
 
-import { StandardFaktaPanelProps, DokumentasjonVurderingBehov } from '@fpsak-frontend/types';
+import { StandardFaktaPanelProps, DokumentasjonVurderingBehov } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import UttakDokumentasjonFaktaForm from './components/UttakDokumentasjonFaktaForm';

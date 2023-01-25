@@ -3,11 +3,11 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextHTML, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { KodeverkMedNavn, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
-import { FaktaSubmitButtonNew } from '@fpsak-frontend/fakta-felles';
-import { KontrollerAktivitetskravAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import { KodeverkMedNavn, UttakKontrollerAktivitetskrav } from '@navikt/fp-types';
+import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
+import { KontrollerAktivitetskravAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import AktivitetskravFaktaDetailForm from './AktivitetskravFaktaDetailForm';
 import AktivitetskravFaktaTabell from './AktivitetskravFaktaTabell';

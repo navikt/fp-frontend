@@ -3,13 +3,13 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import SoknadsfristVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-soknadsfrist';
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
+import SoknadsfristVilkarProsessIndex from '@navikt/fp-prosess-vilkar-soknadsfrist';
+import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
   AksessRettigheter, FamilieHendelseSamling, Soknad,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
 import OverstyringPanelDef from '../../../felles/prosess/OverstyringPanelDef';

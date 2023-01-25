@@ -1,12 +1,12 @@
 {
-  "name": "@fpsak-frontend/rest-api-hooks",
+  "name": "@navikt/fp-rest-api-hooks",
   "version": "1.0.0",
   "module": "index.ts",
   "license": "MIT",
   "private": true,
   "dependencies": {
     "react": "18.2.0",
-    "@fpsak-frontend/rest-api": "1.0.0"
+    "@navikt/fp-rest-api": "1.0.0"
   },
   "devDependencies": {
     "@testing-library/react": "13.4.0"

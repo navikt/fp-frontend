@@ -4,20 +4,20 @@ import { action } from '@storybook/addon-actions';
 
 import {
   Behandling, BeregningsresultatEs, Beregningsgrunnlag, BeregningsresultatFp, Medlemskap, Vilkar, Aksjonspunkt,
-} from '@fpsak-frontend/types';
-import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
-import konsekvensForYtelsen from '@fpsak-frontend/kodeverk/src/konsekvensForYtelsen';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import VedtakProsessIndex from '@fpsak-frontend/prosess-vedtak';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import behandlingArsakType from '@navikt/fp-kodeverk/src/behandlingArsakType';
+import konsekvensForYtelsen from '@navikt/fp-kodeverk/src/konsekvensForYtelsen';
+import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
+import behandlingResultatType from '@navikt/fp-kodeverk/src/behandlingResultatType';
+import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
+import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
+import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import VedtakProsessIndex from '@navikt/fp-prosess-vedtak';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 const defaultBehandling = {
   uuid: '1',

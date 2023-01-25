@@ -9,13 +9,13 @@ import {
 import { Aksjonspunkt, AlleKodeverk } from '@navikt/ft-types';
 import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
 import {
   MedlemPeriode, Soknad, UtlandsoppholdPeriode,
-} from '@fpsak-frontend/types';
-import checkImage from '@fpsak-frontend/assets/images/check.svg';
-import avslaattImage from '@fpsak-frontend/assets/images/avslaatt.svg';
+} from '@navikt/fp-types';
+import checkImage from '@navikt/fp-assets/images/check.svg';
+import avslaattImage from '@navikt/fp-assets/images/avslaatt.svg';
 
 import MedlemskapBostedSokerView from './MedlemskapBostedSokerView';
 

@@ -1,4 +1,4 @@
-import { RequestApi } from '@fpsak-frontend/rest-api';
+import { RequestApi } from '@navikt/fp-rest-api';
 import InngangsvilkarPanelData from './inngangsvilkarPanelData';
 
 type InngangsvilkarPanelInitProps = {

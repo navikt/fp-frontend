@@ -3,11 +3,11 @@ import { render, screen } from '@testing-library/react';
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { BehandlingStatus, VilkarUtfallType } from '@navikt/ft-kodeverk';
 
-import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { Behandling } from '@fpsak-frontend/types';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import { createRequestApi, RestApiConfigBuilder, RestKey } from '@navikt/fp-rest-api';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { Behandling } from '@navikt/fp-types';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import * as Felles from './useStandardProsessPanelProps';
 import ProsessDefaultInitPanel from './ProsessDefaultInitPanel';

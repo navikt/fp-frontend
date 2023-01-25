@@ -6,8 +6,8 @@ import {
   FlexColumn, FlexContainer, FlexRow, Image,
 } from '@navikt/ft-ui-komponenter';
 
-import { Modal, Oppgave } from '@fpsak-frontend/los-felles';
-import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
+import { Modal, Oppgave } from '@navikt/fp-los-felles';
+import innvilgetImageUrl from '@navikt/fp-assets/images/innvilget_valgt.svg';
 
 import styles from './oppgaveReservasjonForlengetModal.less';
 

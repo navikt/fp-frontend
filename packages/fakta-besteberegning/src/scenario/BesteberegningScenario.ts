@@ -1,5 +1,5 @@
-import opptjeningAktivitetType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
-import { Beregningsgrunnlag, BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
+import opptjeningAktivitetType from '@navikt/fp-kodeverk/src/opptjeningAktivitetType';
+import { Beregningsgrunnlag, BeregningsgrunnlagAndel } from '@navikt/fp-types';
 
 export const besteberegninggrunnlag = {
   besteMåneder: [{

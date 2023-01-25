@@ -1,9 +1,9 @@
 import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import { alleKodeverkLos, withRouter } from '@fpsak-frontend/storybook-utils';
-import { NavAnsatt } from '@fpsak-frontend/types';
+import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { alleKodeverkLos, withRouter } from '@navikt/fp-storybook-utils';
+import { NavAnsatt } from '@navikt/fp-types';
 
 import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, requestApi } from './data/fplosRestApi';
 import AvdelingslederIndex from './AvdelingslederIndex';

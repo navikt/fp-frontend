@@ -10,8 +10,8 @@ import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
 import { Button, Heading } from '@navikt/ds-react';
 import { AddCircle } from '@navikt/ds-icons';
 
-import { AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold } from '@fpsak-frontend/types';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold } from '@navikt/fp-types';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 
 import UttakFaktaDetailForm, { utledÅrsakstype, Årsakstype } from './UttakFaktaDetailForm';
 import KontrollerFaktaPeriodeMedApMarkering from '../typer/kontrollerFaktaPeriodeMedApMarkering';

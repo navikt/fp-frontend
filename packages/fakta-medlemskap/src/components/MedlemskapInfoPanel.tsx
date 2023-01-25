@@ -9,12 +9,12 @@ import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 import {
   AlleKodeverk, Medlemskap, Soknad, MedlemPeriode,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 import {
   AvklarFortsattMedlemskapAp, BekreftBosattVurderingAp, BekreftErMedlemVurderingAp, BekreftLovligOppholdVurderingAp,
   BekreftOppholdsrettVurderingAp,
-} from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import AksjonspunktCode, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+} from '@navikt/fp-types-avklar-aksjonspunkter';
+import AksjonspunktCode, { hasAksjonspunkt } from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 
 import MedlemskapEndringerTabell from './oppholdInntektOgPerioder/MedlemskapEndringerTabell';
 import OppholdInntektOgPeriodeForm, { FormValues as OppholdFormValues } from './oppholdInntektOgPerioder/OppholdInntektOgPeriodeForm';

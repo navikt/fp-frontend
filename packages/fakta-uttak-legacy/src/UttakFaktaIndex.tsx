@@ -4,7 +4,7 @@ import { RawIntlProvider } from 'react-intl';
 import {
   ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps, FaktaArbeidsforhold, FamilieHendelseSamling,
   Personoversikt, UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import ReduxWrapper from './form/ReduxWrapper';

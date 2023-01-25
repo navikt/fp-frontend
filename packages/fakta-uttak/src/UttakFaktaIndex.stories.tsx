@@ -5,12 +5,12 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { Aksjonspunkt } from '@navikt/ft-types';
 import {
   KontrollerFaktaPeriode, Ytelsefordeling,
-} from '@fpsak-frontend/types';
-import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+} from '@navikt/fp-types';
+import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import uttakPeriodeType from '@navikt/fp-kodeverk/src/uttakPeriodeType';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 
 import UttakFaktaIndex from './UttakFaktaIndex';
 import UtsettelseÅrsak from './kodeverk/utsettelseÅrsak';

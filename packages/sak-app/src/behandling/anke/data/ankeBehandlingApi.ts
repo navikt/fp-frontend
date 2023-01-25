@@ -1,6 +1,6 @@
-import { RestApiConfigBuilder, createRequestApi, RestKey } from '@fpsak-frontend/rest-api';
-import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
-import { AnkeVurdering } from '@fpsak-frontend/types';
+import { RestApiConfigBuilder, createRequestApi, RestKey } from '@navikt/fp-rest-api';
+import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
+import { AnkeVurdering } from '@navikt/fp-types';
 
 import { behandlingFellesEndepunkter } from '../../felles/data/behandlingFellesApi';
 

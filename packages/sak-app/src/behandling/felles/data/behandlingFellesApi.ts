@@ -2,12 +2,12 @@ import {
   FamilieHendelse, FamilieHendelseSamling,
 } from '@navikt/ft-types';
 
-import { RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
+import { RestApiConfigBuilder, RestKey } from '@navikt/fp-rest-api';
 import {
   ArbeidOgInntektsmelding, Behandling, ArbeidsgiverOpplysningerWrapper, Beregningsgrunnlag, BeregningsresultatFp, Feriepengegrunnlag,
   ForhåndsvisMeldingParams, InntektArbeidYtelse, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold,
   Medlemskap, Opptjening, Personoversikt, SimuleringResultat, Soknad, TilbakekrevingValg, Verge, Ytelsefordeling,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 import { SettPaVentParams } from '../modaler/paVent/BehandlingPaVent';
 

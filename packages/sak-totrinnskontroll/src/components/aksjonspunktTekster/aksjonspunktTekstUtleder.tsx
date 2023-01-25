@@ -3,10 +3,10 @@ import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
-import behandlingStatusCode from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
-import aksjonspunktCodes, { isUttakAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { KodeverkMedNavn, TotrinnskontrollAksjonspunkt, Behandlingsresultat } from '@fpsak-frontend/types';
+import behandlingStatusCode from '@navikt/fp-kodeverk/src/behandlingStatus';
+import behandlingResultatType from '@navikt/fp-kodeverk/src/behandlingResultatType';
+import aksjonspunktCodes, { isUttakAksjonspunkt } from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { KodeverkMedNavn, TotrinnskontrollAksjonspunkt, Behandlingsresultat } from '@navikt/fp-types';
 
 import totrinnskontrollaksjonspunktTextCodes, { totrinnsTilbakekrevingkontrollaksjonspunktTextCodes } from '../../totrinnskontrollaksjonspunktTextCodes';
 import OpptjeningTotrinnText from './OpptjeningTotrinnText';

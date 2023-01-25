@@ -1,4 +1,4 @@
-import { UttakKontrollerFaktaPerioderLegacy } from '@fpsak-frontend/types';
+import { UttakKontrollerFaktaPerioderLegacy } from '@navikt/fp-types';
 
 type CustomUttakKontrollerFaktaPerioder = UttakKontrollerFaktaPerioderLegacy & {
   id: string;

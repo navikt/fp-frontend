@@ -1,4 +1,4 @@
-import { OpptjeningAktiviteter } from '@fpsak-frontend/types';
+import { OpptjeningAktiviteter } from '@navikt/fp-types';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 

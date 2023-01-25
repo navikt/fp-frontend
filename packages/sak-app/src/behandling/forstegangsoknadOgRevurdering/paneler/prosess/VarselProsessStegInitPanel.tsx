@@ -3,13 +3,13 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import VarselOmRevurderingProsessIndex from '@fpsak-frontend/prosess-varsel-om-revurdering';
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
+import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import VarselOmRevurderingProsessIndex from '@navikt/fp-prosess-varsel-om-revurdering';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
   Behandling, Fagsak, FamilieHendelse, FamilieHendelseSamling, ForhåndsvisMeldingParams, Soknad,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import skalViseProsessPanel from '../../../felles/prosess/skalViseProsessPanel';

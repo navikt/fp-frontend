@@ -4,20 +4,20 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
+import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 import {
   ProsessStegBegrunnelseTextFieldNew, VilkarResultPicker, ProsessPanelTemplate, validerApKodeOgHentApEnum,
-} from '@fpsak-frontend/prosess-felles';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
+} from '@navikt/fp-prosess-felles';
+import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
 import {
   Aksjonspunkt, AlleKodeverk, Behandling,
-} from '@fpsak-frontend/types';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+} from '@navikt/fp-types';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import {
   Foreldreansvarsvilkar1Ap, Foreldreansvarsvilkar2Ap, VurdereYtelseSammeBarnAnnenForelderAp, VurdereYtelseSammeBarnSokerAp,
-} from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types-avklar-aksjonspunkter';
 
 type FormValues = {
   erVilkarOk?: boolean;

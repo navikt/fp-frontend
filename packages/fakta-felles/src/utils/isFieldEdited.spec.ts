@@ -1,4 +1,4 @@
-import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
+import { FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 import isFieldEdited from './isFieldEdited';
 

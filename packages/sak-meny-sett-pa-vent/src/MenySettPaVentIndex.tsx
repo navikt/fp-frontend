@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
-import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
+import SettPaVentModalIndex from '@navikt/fp-modal-sett-pa-vent';
 
 import messages from '../i18n/nb_NO.json';
 

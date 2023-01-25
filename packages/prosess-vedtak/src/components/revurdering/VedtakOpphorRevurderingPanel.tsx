@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Label, BodyShort } from '@navikt/ds-react';
 
-import { Behandlingsresultat } from '@fpsak-frontend/types';
+import { Behandlingsresultat } from '@navikt/fp-types';
 
 import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
 

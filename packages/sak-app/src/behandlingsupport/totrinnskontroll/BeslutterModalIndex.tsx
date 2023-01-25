@@ -2,8 +2,8 @@ import React, {
   FunctionComponent, useCallback,
 } from 'react';
 
-import { BehandlingAppKontekst } from '@fpsak-frontend/types';
-import { FatterVedtakTotrinnskontrollModalSakIndex } from '@fpsak-frontend/sak-totrinnskontroll';
+import { BehandlingAppKontekst } from '@navikt/fp-types';
+import { FatterVedtakTotrinnskontrollModalSakIndex } from '@navikt/fp-sak-totrinnskontroll';
 
 interface OwnProps {
   behandling: BehandlingAppKontekst;

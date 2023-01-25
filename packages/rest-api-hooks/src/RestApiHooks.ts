@@ -1,4 +1,4 @@
-import { RequestApi } from '@fpsak-frontend/rest-api';
+import { RequestApi } from '@navikt/fp-rest-api';
 
 import getUseRestApi from './local-data/useRestApi';
 import getUseMultipleRestApi from './local-data/useMultipleRestApi';

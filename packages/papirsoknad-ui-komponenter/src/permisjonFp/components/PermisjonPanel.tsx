@@ -5,8 +5,8 @@ import { Label, Heading, ErrorMessage } from '@navikt/ds-react';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 
-import { AlleKodeverk } from '@fpsak-frontend/types';
-import ForeldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
+import { AlleKodeverk } from '@navikt/fp-types';
+import ForeldreType from '@navikt/fp-kodeverk/src/foreldreType';
 
 import PermisjonUtsettelsePanel, { FormValues as FormValuesUtsettelse } from './PermisjonUtsettelsePanel';
 import PermisjonGraderingPanel, { FormValues as FormValuesGradering } from './PermisjonGraderingPanel';

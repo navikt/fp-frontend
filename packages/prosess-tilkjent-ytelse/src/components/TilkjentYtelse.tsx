@@ -6,11 +6,11 @@ import { calcDaysAndWeeks, DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/f
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
-import StonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
+import { uttakPeriodeNavn } from '@navikt/fp-kodeverk/src/uttakPeriodeType';
+import StonadskontoType from '@navikt/fp-kodeverk/src/stonadskontoType';
 import {
   ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriode, AlleKodeverk, Kjønnkode,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 import { Timeline, TimeLineControl, TimeLineSokerEnsamSoker } from '@navikt/ft-tidslinje';
 
 import TilkjentYtelseTimelineData from './TilkjentYtelseTimelineData';

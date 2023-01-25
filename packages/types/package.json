@@ -1,11 +1,11 @@
 {
-  "name": "@fpsak-frontend/types",
+  "name": "@navikt/fp-types",
   "version": "1.0.0",
   "module": "index.jsx",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@fpsak-frontend/kodeverk": "1.0.0",
-    "@fpsak-frontend/types-avklar-aksjonspunkter": "1.0.0"
+    "@navikt/fp-kodeverk": "1.0.0",
+    "@navikt/fp-types-avklar-aksjonspunkter": "1.0.0"
   }
 }

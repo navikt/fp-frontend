@@ -3,15 +3,15 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 import { Aksjonspunkt } from '@navikt/ft-types';
 
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 import {
   Behandling, Medlemskap, Soknad, MedlemPeriode, PersonopplysningMedlem,
-} from '@fpsak-frontend/types';
-import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+} from '@navikt/fp-types';
+import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import MedlemskapFaktaIndex from './MedlemskapFaktaIndex';
 

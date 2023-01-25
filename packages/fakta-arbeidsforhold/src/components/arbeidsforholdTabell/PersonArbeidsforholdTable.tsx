@@ -6,9 +6,9 @@ import {
   DateLabel, PeriodLabel, Table, TableColumn, TableRow, Image,
 } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity, TIDENES_ENDE } from '@navikt/ft-utils';
-import erIBrukImageUrl from '@fpsak-frontend/assets/images/stjerne.svg';
-import { ArbeidsgiverOpplysningerPerId, AoIArbeidsforhold, Inntektsmelding } from '@fpsak-frontend/types';
-import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
+import erIBrukImageUrl from '@navikt/fp-assets/images/stjerne.svg';
+import { ArbeidsgiverOpplysningerPerId, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
+import ArbeidsforholdKomplettVurderingType from '@navikt/fp-kodeverk/src/arbeidsforholdKomplettVurderingType';
 
 import IngenArbeidsforholdRegistrert from './IngenArbeidsforholdRegistrert';
 

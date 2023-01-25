@@ -8,9 +8,9 @@ import {
   hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-form-validators';
 import { FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { BekreftAleneomsorgVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Aksjonspunkt, Ytelsefordeling } from '@fpsak-frontend/types';
+import { BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 
 import Boks from '../Boks';
 import HarAnnenForelderRettFelter from './HarAnnenForelderRettFelter';

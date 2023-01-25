@@ -5,12 +5,12 @@ import {
   Button, Label, BodyShort, Heading,
 } from '@navikt/ds-react';
 
-import { FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
+import { FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
 import { RadioGroupPanel, Form } from '@navikt/ft-form-hooks';
 import {
   PeriodLabel, VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
-import { KodeverkMedNavn, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
+import { KodeverkMedNavn, UttakKontrollerAktivitetskrav } from '@navikt/fp-types';
 import { required } from '@navikt/ft-form-validators';
 
 type FormValues = UttakKontrollerAktivitetskrav;

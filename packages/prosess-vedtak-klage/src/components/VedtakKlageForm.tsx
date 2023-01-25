@@ -4,18 +4,18 @@ import React, {
 import { FormattedMessage } from 'react-intl';
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
 
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import behandlingResultatType, { isKlageOmgjort } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
-import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
-import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
+import behandlingResultatType, { isKlageOmgjort } from '@navikt/fp-kodeverk/src/behandlingResultatType';
+import klageVurderingCodes from '@navikt/fp-kodeverk/src/klageVurdering';
+import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
 import {
   Aksjonspunkt, Behandling, KlageVurdering, AlleKodeverk,
-} from '@fpsak-frontend/types';
-import { BekreftVedtakUtenTotrinnskontrollAp, ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+} from '@navikt/fp-types';
+import { BekreftVedtakUtenTotrinnskontrollAp, ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 
 import VedtakKlageSubmitPanel from './VedtakKlageSubmitPanel';
 

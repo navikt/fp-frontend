@@ -3,7 +3,7 @@ import {
   FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
 } from 'react-intl';
 
-import { HistorikkinnslagDel, HistorikkinnslagEndretFelt } from '@fpsak-frontend/types';
+import { HistorikkinnslagDel, HistorikkinnslagEndretFelt } from '@navikt/fp-types';
 
 import historikkinnslagType from '../../kodeverk/historikkinnslagType';
 import historikkEndretFeltTypeCodes from '../../kodeverk/historikkEndretFeltTypeCodes';

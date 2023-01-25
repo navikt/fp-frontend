@@ -1,7 +1,7 @@
 import moment from 'moment';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Aksjonspunkt } from '@fpsak-frontend/types';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { Aksjonspunkt } from '@navikt/fp-types';
 
 import CustomUttakKontrollerFaktaPerioder from '../../CustomUttakKontrollerFaktaPerioderTsType';
 

@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 interface OwnProps {
   erPanelValgt: boolean;

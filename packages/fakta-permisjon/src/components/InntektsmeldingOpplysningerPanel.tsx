@@ -7,11 +7,11 @@ import {
   FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
-import telefonImageUrl from '@fpsak-frontend/assets/images/phone-3.svg';
-import { Inntektsmelding } from '@fpsak-frontend/types';
+import telefonImageUrl from '@navikt/fp-assets/images/phone-3.svg';
+import { Inntektsmelding } from '@navikt/fp-types';
 import { formatCurrencyNoKr } from '@navikt/ft-utils';
-import { hentDokumentLenke } from '@fpsak-frontend/konstanter';
-import dokumentSvg from '@fpsak-frontend/assets/images/dokument_filled.svg';
+import { hentDokumentLenke } from '@navikt/fp-konstanter';
+import dokumentSvg from '@navikt/fp-assets/images/dokument_filled.svg';
 
 import styles from './inntektsmeldingOpplysningerPanel.less';
 

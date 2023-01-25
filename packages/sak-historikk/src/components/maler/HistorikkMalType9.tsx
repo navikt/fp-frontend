@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 
-import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
-import { HistorikkinnslagEndretFelt } from '@fpsak-frontend/types';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import tilbakekrevingVidereBehandling from '@navikt/fp-kodeverk/src/tilbakekrevingVidereBehandling';
+import { HistorikkinnslagEndretFelt } from '@navikt/fp-types';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 
 import historikkinnslagType from '../../kodeverk/historikkinnslagType';
 import { findEndretFeltVerdi } from './felles/historikkUtils';

@@ -4,8 +4,8 @@ import { createIntl } from '@navikt/ft-utils';
 
 import {
   KontrollerFaktaPeriode, Ytelsefordeling, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, Aksjonspunkt, AlleKodeverk,
-} from '@fpsak-frontend/types';
-import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import UttakFaktaForm from './components/UttakFaktaForm';
 

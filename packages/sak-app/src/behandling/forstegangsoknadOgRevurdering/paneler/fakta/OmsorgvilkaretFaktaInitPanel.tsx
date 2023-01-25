@@ -4,10 +4,10 @@ import React, {
 import { useIntl } from 'react-intl';
 import { FamilieHendelseSamling } from '@navikt/ft-types';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import OmsorgOgForeldreansvarFaktaIndex from '@fpsak-frontend/fakta-omsorg-og-foreldreansvar';
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import { InntektArbeidYtelse, Personoversikt, Soknad } from '@fpsak-frontend/types';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import OmsorgOgForeldreansvarFaktaIndex from '@navikt/fp-fakta-omsorg-og-foreldreansvar';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import { InntektArbeidYtelse, Personoversikt, Soknad } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';

@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import PermisjonFaktaIndex from '@fpsak-frontend/fakta-permisjon';
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import PermisjonFaktaIndex from '@navikt/fp-fakta-permisjon';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   ArbeidsgiverOpplysningerPerId, ArbeidOgInntektsmelding,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';

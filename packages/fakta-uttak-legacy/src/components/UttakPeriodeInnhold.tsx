@@ -2,10 +2,10 @@ import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
 
-import { FamilieHendelse, FamilieHendelseSamling } from '@fpsak-frontend/types';
+import { FamilieHendelse, FamilieHendelseSamling } from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import utsettelseArsakCodes from '@fpsak-frontend/kodeverk/src/utsettelseArsakCodes';
-import overforingArsakCodes from '@fpsak-frontend/kodeverk/src/overforingArsakCodes';
+import utsettelseArsakCodes from '@navikt/fp-kodeverk/src/utsettelseArsakCodes';
+import overforingArsakCodes from '@navikt/fp-kodeverk/src/overforingArsakCodes';
 import FerieOgArbeidsPeriode from './perioder/FerieOgArbeidsPeriode';
 import SykdomOgSkadePeriode from './perioder/SykdomOgSkadePeriode';
 import InnleggelsePeriode from './perioder/InnleggelsePeriode';

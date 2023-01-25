@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
-import { NavAnsatt } from '@fpsak-frontend/types';
+import { NavAnsatt } from '@navikt/fp-types';
 import { Heading } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import messages from '../i18n/nb_NO.json';
 import JournalforingPanel from './components/JournalforingPanel';
 import OppgaveIndex from './components/OppgaveIndex';

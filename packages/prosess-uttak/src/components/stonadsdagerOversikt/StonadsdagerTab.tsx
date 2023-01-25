@@ -4,8 +4,8 @@ import classnames from 'classnames/bind';
 import { BodyShort, Detail } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
-import stonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
-import { Stonadskonto } from '@fpsak-frontend/types';
+import stonadskontoType from '@navikt/fp-kodeverk/src/stonadskontoType';
+import { Stonadskonto } from '@navikt/fp-types';
 
 import styles from './stonadsdagerTab.less';
 

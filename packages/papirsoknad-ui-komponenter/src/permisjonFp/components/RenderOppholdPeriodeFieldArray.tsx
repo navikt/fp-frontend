@@ -10,7 +10,7 @@ import {
   dateAfterOrEqual, dateBeforeOrEqual, dateRangesNotOverlapping, hasValidDate, required,
 } from '@navikt/ft-form-validators';
 
-import oppholdArsakType from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
+import oppholdArsakType from '@navikt/fp-kodeverk/src/oppholdArsakType';
 
 import styles from './renderOppholdPeriodeFieldArray.less';
 

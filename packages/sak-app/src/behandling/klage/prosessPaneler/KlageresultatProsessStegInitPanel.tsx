@@ -7,10 +7,10 @@ import {
 } from '@navikt/ft-types';
 import { VilkarUtfallType, AksjonspunktStatus, BehandlingResultatType } from '@navikt/ft-kodeverk';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import VedtakKlageProsessIndex, { VedtakKlageBrevData } from '@fpsak-frontend/prosess-vedtak-klage';
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { ForhåndsvisMeldingParams, KlageVurdering } from '@fpsak-frontend/types';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import VedtakKlageProsessIndex, { VedtakKlageBrevData } from '@navikt/fp-prosess-vedtak-klage';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { ForhåndsvisMeldingParams, KlageVurdering } from '@navikt/fp-types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';

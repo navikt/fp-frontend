@@ -3,10 +3,10 @@ import moment from 'moment/moment';
 import { FormattedMessage } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
+import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import soknadType from '@navikt/fp-kodeverk/src/soknadType';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
@@ -18,8 +18,8 @@ import {
   Soknad,
   Kjønnkode,
   FamilieHendelseSamling,
-} from '@fpsak-frontend/types';
-import { VurderTilbaketrekkAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import { VurderTilbaketrekkAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import Tilbaketrekkpanel, { FormValues } from './tilbaketrekk/Tilbaketrekkpanel';

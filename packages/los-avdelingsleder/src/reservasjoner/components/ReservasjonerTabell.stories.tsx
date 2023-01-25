@@ -2,8 +2,8 @@ import React, { useState, useCallback } from 'react';
 import { action } from '@storybook/addon-actions';
 import { BehandlingType } from '@navikt/ft-kodeverk';
 
-import { alleKodeverkLos } from '@fpsak-frontend/storybook-utils';
-import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
+import { alleKodeverkLos } from '@navikt/fp-storybook-utils';
+import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
 
 import ReservasjonerTabell from './ReservasjonerTabell';
 

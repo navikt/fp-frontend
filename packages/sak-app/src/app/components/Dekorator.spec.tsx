@@ -3,8 +3,8 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import { render, screen } from '@testing-library/react';
 
-import EventType from '@fpsak-frontend/rest-api/src/requestApi/eventType';
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
+import EventType from '@navikt/fp-rest-api/src/requestApi/eventType';
+import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
 
 import Dekorator from './Dekorator';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';

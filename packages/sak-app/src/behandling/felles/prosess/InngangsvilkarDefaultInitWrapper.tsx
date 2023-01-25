@@ -8,9 +8,9 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { Behandling } from '@navikt/ft-types';
 
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { RequestApi } from '@fpsak-frontend/rest-api';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { RequestApi } from '@navikt/fp-rest-api';
 
 import ProsessPanelWrapper from './ProsessPanelWrapper';
 import useProsessMenyRegistrerer from './useProsessMenyRegistrerer';

@@ -1,4 +1,4 @@
-import { AoIArbeidsforhold, Inntektsmelding, Inntektspost } from '@fpsak-frontend/types';
+import { AoIArbeidsforhold, Inntektsmelding, Inntektspost } from '@navikt/fp-types';
 
 type ArbeidsforholdOgInntekt = {
   arbeidsforhold: AoIArbeidsforhold;

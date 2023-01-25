@@ -3,17 +3,17 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 import { Aksjonspunkt } from '@navikt/ft-types';
 
-import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import tilretteleggingType from '@navikt/fp-kodeverk/src/tilretteleggingType';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 import {
   ArbeidsforholdFodselOgTilrettelegging,
   Behandling,
   FodselOgTilrettelegging,
   ArbeidOgInntektsmelding,
-} from '@fpsak-frontend/types';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import tilretteleggingPermisjon from '../testdata/tilretteleggningMedPermisjon';
 

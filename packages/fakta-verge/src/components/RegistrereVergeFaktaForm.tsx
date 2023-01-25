@@ -10,8 +10,8 @@ import {
 import {
   Datepicker, InputField, SelectField,
 } from '@navikt/ft-form-hooks';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { KodeverkMedNavn, Verge } from '@fpsak-frontend/types';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { KodeverkMedNavn, Verge } from '@navikt/fp-types';
 
 import VergeType from '../kodeverk/vergeType';
 

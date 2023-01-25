@@ -6,9 +6,9 @@ import {
   FlexContainer, FlexRow, FlexColumn, Image,
 } from '@navikt/ft-ui-komponenter';
 
-import urlKvinne from '@fpsak-frontend/assets/images/kvinne.svg';
-import urlMann from '@fpsak-frontend/assets/images/mann.svg';
-import { KjønnkodeEnum, Person } from '@fpsak-frontend/types';
+import urlKvinne from '@navikt/fp-assets/images/kvinne.svg';
+import urlMann from '@navikt/fp-assets/images/mann.svg';
+import { KjønnkodeEnum, Person } from '@navikt/fp-types';
 
 import AlderVisning from './Aldervisning';
 import MerkePanel from './Merkepanel';

@@ -7,13 +7,13 @@ import {
   Image, FlexColumn, FlexRow, Tooltip, VerticalSpacer, FloatRight, PeriodLabel, AvsnittSkiller, DateLabel, FlexContainer,
 } from '@navikt/ft-ui-komponenter';
 
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import pilOppIkonUrl from '@fpsak-frontend/assets/images/pil_opp.svg';
-import pilNedIkonUrl from '@fpsak-frontend/assets/images/pil_ned.svg';
-import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import pilOppIkonUrl from '@navikt/fp-assets/images/pil_opp.svg';
+import pilNedIkonUrl from '@navikt/fp-assets/images/pil_ned.svg';
+import advarselIkonUrl from '@navikt/fp-assets/images/advarsel2.svg';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
-import { getKodeverknavnFraKode } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
-import { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@fpsak-frontend/types';
+import { getKodeverknavnFraKode } from '@navikt/fp-kodeverk/src/kodeverkUtils';
+import { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
 
 import styles from './inntektsmeldingerPanel.less';
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';

@@ -19,10 +19,10 @@ import { DDMMYYYY_DATE_FORMAT, guid, omitMany } from '@navikt/ft-utils';
 
 import {
   AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, ArbeidsgiverOpplysninger,
-} from '@fpsak-frontend/types';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import uttakArbeidType from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
-import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
+} from '@navikt/fp-types';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import uttakArbeidType from '@navikt/fp-kodeverk/src/uttakArbeidType';
+import uttakPeriodeType from '@navikt/fp-kodeverk/src/uttakPeriodeType';
 
 import FordelingPeriodeKilde from '../kodeverk/fordelingPeriodeKilde';
 

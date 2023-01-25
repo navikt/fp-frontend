@@ -6,8 +6,8 @@ import { Collapse, Expand } from '@navikt/ds-icons';
 import {
   DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import { InnsynVedtaksdokument, KodeverkMedNavn } from '@fpsak-frontend/types';
-import { hentVedtakDokumentLenke } from '@fpsak-frontend/konstanter';
+import { InnsynVedtaksdokument, KodeverkMedNavn } from '@navikt/fp-types';
+import { hentVedtakDokumentLenke } from '@navikt/fp-konstanter';
 
 interface OwnProps {
   behandlingTypes: KodeverkMedNavn[];

@@ -4,8 +4,8 @@ import {
 import { Behandling, Fagsak } from '@navikt/ft-types';
 import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 
-import { StandardFaktaPanelProps } from '@fpsak-frontend/types';
-import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import { StandardFaktaPanelProps } from '@navikt/fp-types';
+import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
 import getAlleMerknaderFraBeslutter from '../utils/getAlleMerknaderFraBeslutter';

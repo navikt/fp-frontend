@@ -6,7 +6,7 @@ import { Form } from '@navikt/ft-form-hooks';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 import { Button } from '@navikt/ds-react';
 
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import AndreYtelserPapirsoknadIndex from './AndreYtelserPapirsoknadIndex';

@@ -2,8 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, BodyShort } from '@navikt/ds-react';
 
-import advarselImageUrl from '@fpsak-frontend/assets/images/advarsel.svg';
-import { Modal } from '@fpsak-frontend/los-felles';
+import advarselImageUrl from '@navikt/fp-assets/images/advarsel.svg';
+import { Modal } from '@navikt/fp-los-felles';
 
 import {
   FlexColumn, FlexContainer, FlexRow, Image,
