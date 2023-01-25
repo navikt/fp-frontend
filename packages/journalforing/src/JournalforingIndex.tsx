@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -8,7 +8,6 @@ import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import messages from '../i18n/nb_NO.json';
 import JournalforingPanel from './components/JournalforingPanel';
 import OppgaveIndex from './components/OppgaveIndex';
-import OppgaveOversikt from './typer/oppgaveOversiktTsType';
 import { RestApiPathsKeys, restApiHooks } from './data/fpfordelRestApi';
 
 const intl = createIntl(messages);
@@ -23,16 +22,9 @@ interface OwnProps {
 const JournalforingIndex: FunctionComponent<OwnProps> = ({
   navAnsatt,
 }) => {
-  const [oppgaver, setOppgaveListe] = useState<OppgaveOversikt[]>([]);
-  const alleJournalføringsoppgaverKall = restApiHooks.useRestApi(RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER, { avdelingEnhet: undefined }, { isCachingOn: true });
+  const alleJournalføringsoppgaverKall = restApiHooks.useRestApi(RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER, { avdelingEnhet: undefined });
 
-  useEffect(() => {
-    if (alleJournalføringsoppgaverKall.state === RestApiState.SUCCESS) {
-      setOppgaveListe(alleJournalføringsoppgaverKall.data);
-    }
-  }, [alleJournalføringsoppgaverKall]);
-
-  if (!navAnsatt) {
+  if (!navAnsatt || alleJournalføringsoppgaverKall.state !== RestApiState.SUCCESS) {
     return null;
   }
 
@@ -42,7 +34,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({
         <Heading size="medium">
           <FormattedMessage id="Journalforing.Tittel" />
         </Heading>
-        <OppgaveIndex oppgaver={oppgaver} />
+        <OppgaveIndex oppgaver={alleJournalføringsoppgaverKall.data} />
       </JournalforingPanel>
     </RawIntlProvider>
   );
