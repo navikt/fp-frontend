@@ -159,32 +159,34 @@ const OppholdInntektOgPeriodeForm: FunctionComponent<OwnProps> = ({
         />
         )}
         <VerticalSpacer twentyPx />
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <Button
-                size="small"
-                variant="primary"
-                disabled={!formMethods.formState.isDirty || isSubmitting}
-                loading={isSubmitting}
-              >
-                <FormattedMessage id={lagreEnkeltPeriode ? 'OppholdInntektOgPerioder.Bekreft' : 'OppholdInntektOgPeriode.Oppdater'} />
-              </Button>
-            </FlexColumn>
-            {!lagreEnkeltPeriode && (
-            <FlexColumn>
-              <Button
-                size="small"
-                variant="secondary"
-                onClick={avbryt}
-                type="button"
-              >
-                <FormattedMessage id="OppholdInntektOgPeriode.Avbryt" />
-              </Button>
-            </FlexColumn>
-            )}
-          </FlexRow>
-        </FlexContainer>
+        {!readOnly && (
+          <FlexContainer>
+            <FlexRow>
+              <FlexColumn>
+                <Button
+                  size="small"
+                  variant="primary"
+                  disabled={!formMethods.formState.isDirty || isSubmitting}
+                  loading={isSubmitting}
+                >
+                  <FormattedMessage id={lagreEnkeltPeriode ? 'OppholdInntektOgPerioder.Bekreft' : 'OppholdInntektOgPeriode.Oppdater'} />
+                </Button>
+              </FlexColumn>
+              {!lagreEnkeltPeriode && (
+              <FlexColumn>
+                <Button
+                  size="small"
+                  variant="secondary"
+                  onClick={avbryt}
+                  type="button"
+                >
+                  <FormattedMessage id="OppholdInntektOgPeriode.Avbryt" />
+                </Button>
+              </FlexColumn>
+              )}
+            </FlexRow>
+          </FlexContainer>
+        )}
       </div>
     </Form>
   );
