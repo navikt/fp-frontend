@@ -2,8 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { FagsakEnkel } from '@fpsak-frontend/types';
-import { Oppgave } from '@fpsak-frontend/los-felles';
+import { FagsakEnkel } from '@navikt/fp-types';
+import { Oppgave } from '@navikt/fp-los-felles';
 
 import PersonInfo from './person/PersonInfo';
 import SearchForm from './SearchForm';

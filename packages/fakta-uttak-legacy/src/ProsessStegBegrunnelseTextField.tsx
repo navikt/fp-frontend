@@ -4,7 +4,7 @@ import { decodeHtmlEntity, createIntl } from '@navikt/ft-utils';
 import {
   hasValidText, maxLength, minLength, requiredIfNotPristine,
 } from '@navikt/ft-form-validators';
-import { Aksjonspunkt } from '@fpsak-frontend/types';
+import { Aksjonspunkt } from '@navikt/fp-types';
 
 import TextAreaField from './form/TextAreaField';
 import messages from '../i18n/nb_NO.json';

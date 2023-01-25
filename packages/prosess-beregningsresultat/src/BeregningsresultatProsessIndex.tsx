@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { BeregningsresultatEs, StandardProsessPanelProps } from '@fpsak-frontend/types';
+import { BeregningsresultatEs, StandardProsessPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import BeregningsresultatEngangsstonadForm from './components/BeregningsresultatEngangsstonadForm';

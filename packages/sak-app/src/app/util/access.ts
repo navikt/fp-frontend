@@ -1,6 +1,6 @@
 import { FagsakStatus, BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
 
-import { NavAnsatt, AksessRettigheter, Aksess } from '@fpsak-frontend/types';
+import { NavAnsatt, AksessRettigheter, Aksess } from '@navikt/fp-types';
 
 const kanVeilede = (navAnsatt: NavAnsatt): boolean => navAnsatt && navAnsatt.kanVeilede;
 const kanSaksbehandle = (navAnsatt: NavAnsatt): boolean => navAnsatt && navAnsatt.kanSaksbehandle;

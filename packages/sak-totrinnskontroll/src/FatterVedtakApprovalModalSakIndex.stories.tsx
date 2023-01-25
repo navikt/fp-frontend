@@ -2,10 +2,10 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { BehandlingAppKontekst } from '@fpsak-frontend/types';
+import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
+import behandlingResultatType from '@navikt/fp-kodeverk/src/behandlingResultatType';
+import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import { BehandlingAppKontekst } from '@navikt/fp-types';
 import FatterVedtakTotrinnskontrollModalSakIndex from './FatterVedtakTotrinnskontrollModalSakIndex';
 
 export default {

@@ -7,7 +7,7 @@ import { BehandlingType, FagsakYtelseType, BehandlingStatus } from '@navikt/ft-k
 import { replaceNorwegianCharacters, parseQueryString } from '@navikt/ft-utils';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
-import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
+import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 
 import useTrackRouteParam from '../app/useTrackRouteParam';
 import getAccessRights from '../app/util/access';

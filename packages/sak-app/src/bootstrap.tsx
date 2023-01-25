@@ -5,7 +5,7 @@ import {
   Event, EventHint, init, Integrations,
 } from '@sentry/browser';
 
-import { RestApiErrorProvider, RestApiProvider } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiErrorProvider, RestApiProvider } from '@navikt/fp-rest-api-hooks';
 
 import polyfill from './polyfill';
 import AppIndex from './app/AppIndex';

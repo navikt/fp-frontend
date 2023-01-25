@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 
-import { Aksjonspunkt, Behandling, FastsattOpptjening } from '@fpsak-frontend/types';
-import { AvklarOpptjeningsvilkaretAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import { Aksjonspunkt, Behandling, FastsattOpptjening } from '@navikt/fp-types';
+import { AvklarOpptjeningsvilkaretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import OpptjeningVilkarView from './OpptjeningVilkarView';
 import OpptjeningVilkarAksjonspunktPanel, { FormValues } from './OpptjeningVilkarAksjonspunktPanel';

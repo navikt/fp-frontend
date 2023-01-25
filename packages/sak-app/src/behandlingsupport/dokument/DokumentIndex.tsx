@@ -3,8 +3,8 @@ import DokumenterSakIndex from '@navikt/ft-sak-dokumenter';
 import { LoadingPanel, usePrevious } from '@navikt/ft-ui-komponenter';
 import { Dokument } from '@navikt/ft-types';
 
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { hentDokumentLenke } from '@fpsak-frontend/konstanter';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { hentDokumentLenke } from '@navikt/fp-konstanter';
 
 import useBehandlingEndret from '../../behandling/useBehandlingEndret';
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';

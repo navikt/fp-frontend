@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import { Panel } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import { ReactECharts } from '@fpsak-frontend/los-felles';
+import { ReactECharts } from '@navikt/fp-los-felles';
 
 import OppgaverManueltPaVent from '../../../typer/oppgaverManueltPaVentTsType';
 

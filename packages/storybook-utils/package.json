@@ -1,5 +1,5 @@
 {
-  "name": "@fpsak-frontend/storybook-utils",
+  "name": "@navikt/fp-storybook-utils",
   "version": "1.0.0",
   "module": "index.jsx",
   "license": "MIT",

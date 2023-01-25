@@ -7,7 +7,7 @@ import {
   Feriepengegrunnlag,
   FeriepengegrunnlagAndel,
   AlleKodeverk,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import FeriepengerPrAar from './FeriepengerPrAar';

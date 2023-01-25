@@ -8,7 +8,7 @@ import {
   FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
-import advarselImageUrl from '@fpsak-frontend/assets/images/advarsel.svg';
+import advarselImageUrl from '@navikt/fp-assets/images/advarsel.svg';
 
 import styles from './lukkPapirsoknadModal.less';
 

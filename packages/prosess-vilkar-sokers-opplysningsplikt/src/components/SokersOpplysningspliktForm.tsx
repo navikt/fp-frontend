@@ -7,23 +7,23 @@ import { BodyShort } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
   ProsessStegBegrunnelseTextFieldNew, ProsessPanelTemplate,
-} from '@fpsak-frontend/prosess-felles';
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+} from '@navikt/fp-prosess-felles';
+import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 import {
   Table, TableColumn, TableRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, isObject } from '@navikt/ft-utils';
-import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
+import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
 import { required } from '@navikt/ft-form-validators';
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import dokumentTypeId from '@fpsak-frontend/kodeverk/src/dokumentTypeId';
+import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import dokumentTypeId from '@navikt/fp-kodeverk/src/dokumentTypeId';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, ManglendeVedleggSoknad, Soknad, ArbeidsgiverOpplysninger, AlleKodeverk,
-} from '@fpsak-frontend/types';
-import { BekreftSokersOpplysningspliktManuAp, OverstyringSokersOpplysingspliktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import { BekreftSokersOpplysningspliktManuAp, OverstyringSokersOpplysingspliktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 const orgPrefix = 'org_';
 const aktørPrefix = 'aktør_';

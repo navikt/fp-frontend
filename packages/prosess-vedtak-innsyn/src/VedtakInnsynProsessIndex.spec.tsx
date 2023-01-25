@@ -1,5 +1,5 @@
 import React from 'react';
-import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
+import dokumentMalType from '@navikt/fp-kodeverk/src/dokumentMalType';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';

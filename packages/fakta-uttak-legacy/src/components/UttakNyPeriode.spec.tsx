@@ -3,10 +3,10 @@ import { FormattedMessage } from 'react-intl';
 import sinon from 'sinon';
 import { Button } from '@navikt/ds-react';
 
-import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { AlleKodeverk, FaktaArbeidsforhold, Personoversikt } from '@fpsak-frontend/types';
-import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
+import { reduxFormPropsMock } from '@navikt/fp-utils-test/src/redux-form-test-helper';
+import { shallowWithIntl } from '@navikt/fp-utils-test/src/intl-enzyme-test-helper';
+import { AlleKodeverk, FaktaArbeidsforhold, Personoversikt } from '@navikt/fp-types';
+import navBrukerKjonn from '@navikt/fp-kodeverk/src/navBrukerKjonn';
 
 import TextAreaField from '../form/TextAreaField';
 import SelectField from '../form/SelectField';

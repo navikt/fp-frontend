@@ -1,4 +1,4 @@
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 
 const validerApKodeOgHentApEnum = <T extends AksjonspunktCode>(kode: string, ...kodeEnums: T[]): T => {
   const kodeEnum = kodeEnums.find((k) => k === kode);

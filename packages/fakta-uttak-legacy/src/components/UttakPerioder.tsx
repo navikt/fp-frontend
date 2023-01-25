@@ -11,14 +11,14 @@ import { Label, Button } from '@navikt/ds-react';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelse,
   FamilieHendelseSamling, KodeverkMedNavn, Personoversikt, AlleKodeverk,
-} from '@fpsak-frontend/types';
-import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
+} from '@navikt/fp-types';
+import uttakPeriodeVurdering from '@navikt/fp-kodeverk/src/uttakPeriodeVurdering';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow, AksjonspunktHelpTextHTML,
 } from '@navikt/ft-ui-komponenter';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 
 import CheckboxField from '../form/CheckboxField';
 import UttakPeriode from './UttakPeriode';

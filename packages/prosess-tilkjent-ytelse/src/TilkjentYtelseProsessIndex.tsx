@@ -11,7 +11,7 @@ import {
   Personoversikt,
   Soknad,
   StandardProsessPanelProps,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 import TilkjentYtelsePanel from './components/TilkjentYtelsePanel';
 import messages from '../i18n/nb_NO.json';

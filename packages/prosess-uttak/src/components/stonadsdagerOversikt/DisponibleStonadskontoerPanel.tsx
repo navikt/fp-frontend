@@ -7,11 +7,11 @@ import { Label, BodyShort } from '@navikt/ds-react';
 import {
   FlexColumn, FlexContainer, FlexRow, Table, TableColumn, TableRow,
 } from '@navikt/ft-ui-komponenter';
-import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
-import stonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
+import uttakArbeidTypeKodeverk from '@navikt/fp-kodeverk/src/uttakArbeidType';
+import stonadskontoType from '@navikt/fp-kodeverk/src/stonadskontoType';
 import {
   AktivitetIdentifikator, AktivitetSaldo, ArbeidsgiverOpplysningerPerId, Stonadskonto,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';
 import lagVisningsNavn from '../../utils/lagVisningsNavn';

@@ -3,16 +3,16 @@ import React from 'react';
 import { Story } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
+import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 import {
   Behandling, Aksjonspunkt, Beregningsgrunnlag,
-} from '@fpsak-frontend/types';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
-import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import venteArsakType from '@navikt/fp-kodeverk/src/venteArsakType';
+import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import BesteberegningFaktaIndex from './BesteberegningFaktaIndex';
 import { beregningsgrunnlag as scenarioBG } from './scenario/BesteberegningScenario';
 

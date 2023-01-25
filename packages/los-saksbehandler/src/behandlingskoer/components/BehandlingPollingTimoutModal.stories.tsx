@@ -1,6 +1,6 @@
 import React from 'react';
 
-import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
+import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
 
 import BehandlingPollingTimoutModal from './BehandlingPollingTimoutModal';
 

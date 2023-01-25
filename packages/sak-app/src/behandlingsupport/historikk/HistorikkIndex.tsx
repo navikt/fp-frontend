@@ -3,8 +3,8 @@ import React, {
 } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import HistorikkSakIndex from '@fpsak-frontend/sak-historikk';
-import { Historikkinnslag } from '@fpsak-frontend/types';
+import HistorikkSakIndex from '@navikt/fp-sak-historikk';
+import { Historikkinnslag } from '@navikt/fp-types';
 
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 import { pathToBehandling, createLocationForSkjermlenke } from '../../app/paths';

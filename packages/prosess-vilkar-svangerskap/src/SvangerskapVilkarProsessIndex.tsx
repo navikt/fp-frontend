@@ -4,7 +4,7 @@ import { RawIntlProvider } from 'react-intl';
 import {
   FodselOgTilrettelegging,
   StandardProsessPanelProps,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import SvangerskapVilkarForm from './components/SvangerskapVilkarForm';

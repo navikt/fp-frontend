@@ -8,9 +8,9 @@ import {
   Image, FlexColumn, FlexContainer, FlexRow, VerticalSpacer, OkAvbrytModal,
 } from '@navikt/ft-ui-komponenter';
 
-import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
-import binIcon from '@fpsak-frontend/assets/images/bin.svg';
-import { AoIArbeidsforhold, ManueltArbeidsforhold } from '@fpsak-frontend/types';
+import ArbeidsforholdKomplettVurderingType from '@navikt/fp-kodeverk/src/arbeidsforholdKomplettVurderingType';
+import binIcon from '@navikt/fp-assets/images/bin.svg';
+import { AoIArbeidsforhold, ManueltArbeidsforhold } from '@navikt/fp-types';
 import {
   hasValidText, maxLength, minLength, hasValidDate, hasValidInteger, required, minValue, maxValue, dateAfterOrEqual,
 } from '@navikt/ft-form-validators';

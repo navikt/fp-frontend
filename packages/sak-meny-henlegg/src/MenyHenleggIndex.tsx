@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { BehandlingAppKontekst, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import HenleggBehandlingModal, { FormValues } from './components/HenleggBehandlingModal';

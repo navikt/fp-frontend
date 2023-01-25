@@ -4,9 +4,9 @@ import { shallow } from 'enzyme';
 
 import {
   AlleKodeverk, FamilieHendelseSamling, Personoversikt, Ytelsefordeling,
-} from '@fpsak-frontend/types';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+} from '@navikt/fp-types';
+import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
 
 import UttakFaktaForm from './UttakFaktaForm';
 import UttakInfoPanel from './UttakInfoPanel';

@@ -9,18 +9,18 @@ import {
   FlexColumn, FlexContainer, FlexRow, Image, Tooltip, VerticalSpacer, PeriodLabel, DateLabel,
 } from '@navikt/ft-ui-komponenter';
 
-import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
-import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
+import advarselIkonUrl from '@navikt/fp-assets/images/advarsel2.svg';
+import okIkonUrl from '@navikt/fp-assets/images/check.svg';
 import { required } from '@navikt/ft-form-validators';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
   ArbeidOgInntektsmelding, AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, Inntektsmelding, AlleKodeverk,
-} from '@fpsak-frontend/types';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { getKodeverknavnFraKode } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
-import questionNormalUrl from '@fpsak-frontend/assets/images/question_normal.svg';
-import questionHoverUrl from '@fpsak-frontend/assets/images/question_hover.svg';
+} from '@navikt/fp-types';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { getKodeverknavnFraKode } from '@navikt/fp-kodeverk/src/kodeverkUtils';
+import questionNormalUrl from '@navikt/fp-assets/images/question_normal.svg';
+import questionHoverUrl from '@navikt/fp-assets/images/question_hover.svg';
 
 import BekreftetPermisjonStatus from '../kodeverk/BekreftetPermisjonStatus';
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';

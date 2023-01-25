@@ -8,10 +8,10 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { KodeverkMedNavn } from '@navikt/ft-types';
 
-import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
-import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
-import Region from '@fpsak-frontend/kodeverk/src/region';
-import { Personadresse, PersonopplysningMedlem } from '@fpsak-frontend/types';
+import opplysningAdresseType from '@navikt/fp-kodeverk/src/opplysningAdresseType';
+import personstatusType from '@navikt/fp-kodeverk/src/personstatusType';
+import Region from '@navikt/fp-kodeverk/src/region';
+import { Personadresse, PersonopplysningMedlem } from '@navikt/fp-types';
 
 import getAddresses from '../../getAddresses';
 

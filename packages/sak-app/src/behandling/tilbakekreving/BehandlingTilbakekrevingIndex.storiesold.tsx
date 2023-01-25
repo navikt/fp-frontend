@@ -18,11 +18,11 @@ import {
 } from '@navikt/ft-types';
 import { FeilutbetalingAksjonspunktCode } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import { ForeldelseAksjonspunktCodes } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock'; // eslint-disable-line import/no-extraneous-dependencies
-import VergeType from '@fpsak-frontend/fakta-verge/src/kodeverk/vergeType';
-import { Fagsak, Verge, Behandling } from '@fpsak-frontend/types';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils'; // eslint-disable-line import/no-extraneous-dependencies
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock'; // eslint-disable-line import/no-extraneous-dependencies
+import VergeType from '@navikt/fp-fakta-verge/src/kodeverk/vergeType';
+import { Fagsak, Verge, Behandling } from '@navikt/fp-types';
+import { alleKodeverk } from '@navikt/fp-storybook-utils'; // eslint-disable-line import/no-extraneous-dependencies
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 
 import BehandlingEventHandler from './felles/util/BehandlingEventHandler';
 import BehandlingTilbakekrevingIndex from './BehandlingTilbakekrevingIndex';

@@ -4,8 +4,8 @@ import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { useNavigate } from 'react-router-dom';
 import DekoratorMedFeilviserSakIndex, { Feilmelding } from '@navikt/ft-sak-dekorator';
 
-import { useRestApiError, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
-import { SYSTEMRUTINE_URL } from '@fpsak-frontend/konstanter';
+import { useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { SYSTEMRUTINE_URL } from '@navikt/fp-konstanter';
 
 import ErrorFormatter from './feilhandtering/ErrorFormatter';
 import ErrorMessage from './feilhandtering/ErrorMessage';

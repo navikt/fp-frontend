@@ -8,8 +8,8 @@ import { Heading, Panel, Tabs } from '@navikt/ds-react';
 import { LoadingPanel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { formatQueryString, parseQueryString, createIntl } from '@navikt/ft-utils';
 
-import { NavAnsatt } from '@fpsak-frontend/types';
-import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
+import { NavAnsatt } from '@navikt/fp-types';
+import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 
 import useTrackRouteParam from './useTrackRouteParam';
 import {

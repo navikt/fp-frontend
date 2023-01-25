@@ -2,15 +2,15 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import AdopsjonFaktaIndex from '@fpsak-frontend/fakta-adopsjon';
+import soknadType from '@navikt/fp-kodeverk/src/soknadType';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import AdopsjonFaktaIndex from '@navikt/fp-fakta-adopsjon';
 import {
   Behandling, FamilieHendelseSamling, Soknad, Aksjonspunkt,
-} from '@fpsak-frontend/types';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 const behandling = {
   uuid: '1',

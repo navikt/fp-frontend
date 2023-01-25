@@ -1,14 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Aksjonspunkt, Soknad } from '@fpsak-frontend/types';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import {
   VerticalSpacer, AksjonspunktHelpTextHTML, FlexContainer, FlexRow, FlexColumn,
 } from '@navikt/ft-ui-komponenter';
 import {
   OverstyringUtenlandssakMarkeringAp, MerkOpptjeningUtlandAp, OverstyringAvklarStartdatoForPeriodenAp,
-} from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import UtlandPanel from './utland/UtlandPanel';
 import InnhentDokOpptjeningUtlandPanel from './innhentDok/InnhentDokOpptjeningUtlandPanel';

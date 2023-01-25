@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import SupportMenySakIndex, { SupportTabs } from '@navikt/ft-sak-support-meny';
 
-import { BehandlingTillatteOperasjoner } from '@fpsak-frontend/types';
-import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
+import { BehandlingTillatteOperasjoner } from '@navikt/fp-types';
+import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 
 import { getSupportPanelLocationCreator } from '../app/paths';
 import HistorikkIndex from './historikk/HistorikkIndex';

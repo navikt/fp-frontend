@@ -8,9 +8,9 @@ import { FagsakYtelseType, BehandlingType, KodeverkType } from '@navikt/ft-kodev
 
 import {
   Fagsak, BehandlingAppKontekst, TotrinnskontrollAksjonspunkt, BehandlingÅrsak,
-} from '@fpsak-frontend/types';
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+} from '@navikt/fp-types';
+import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 
 import FagsakData from '../../fagsak/FagsakData';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';

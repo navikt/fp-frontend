@@ -7,16 +7,16 @@ import { createSelector } from 'reselect';
 import { FormattedMessage, IntlShape } from 'react-intl';
 import { Detail } from '@navikt/ds-react';
 
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import overforingArsakCodes from '@fpsak-frontend/kodeverk/src/overforingArsakCodes';
-import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
+import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
+import overforingArsakCodes from '@navikt/fp-kodeverk/src/overforingArsakCodes';
+import uttakPeriodeVurdering from '@navikt/fp-kodeverk/src/uttakPeriodeVurdering';
 import {
   ArrowBox, VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
 import {
   hasValidPeriod, hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-form-validators';
-import { FamilieHendelse } from '@fpsak-frontend/types';
+import { FamilieHendelse } from '@navikt/fp-types';
 
 import RadioGroupField from '../../form/RadioGroupField';
 import RadioOption from '../../form/RadioOption';

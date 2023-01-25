@@ -5,13 +5,13 @@ import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 import { Heading } from '@navikt/ds-react';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@fpsak-frontend/fakta-felles';
+import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import {
   Aksjonspunkt, AlleKodeverk, KjønnkodeEnum, Personoversikt, Ytelsefordeling,
-} from '@fpsak-frontend/types';
-import { BekreftOmsorgVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import OmsorgFaktaForm, { FormValues as OmsorgFormValues } from './OmsorgFaktaForm';
 import AlleBarnPanel from './personer/AlleBarnPanel';

@@ -8,8 +8,8 @@ import {
 } from '@navikt/ft-kodeverk';
 import { createIntl } from '@navikt/ft-utils';
 
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import * as useTrackRouteParam from '../app/useTrackRouteParam';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';

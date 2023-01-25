@@ -3,9 +3,9 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import YtelserFaktaIndex from '@fpsak-frontend/fakta-ytelser';
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import { InntektArbeidYtelse } from '@fpsak-frontend/types';
+import YtelserFaktaIndex from '@navikt/fp-fakta-ytelser';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import { InntektArbeidYtelse } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';

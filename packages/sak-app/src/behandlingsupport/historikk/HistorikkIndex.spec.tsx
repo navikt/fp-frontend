@@ -2,7 +2,7 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
+import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
 
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import HistorikkIndex from './HistorikkIndex';

@@ -4,16 +4,16 @@ import {
   FlexContainer, FlexRow, FlexColumn, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
+import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 import {
   Datepicker, RadioGroupPanel, SelectField, formHooks,
 } from '@navikt/ft-form-hooks';
 import { createIntl } from '@navikt/ft-utils';
 import { hasValidDate, required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
-import avslattImage from '@fpsak-frontend/assets/images/avslaatt.svg';
-import innvilgetImage from '@fpsak-frontend/assets/images/check.svg';
-import { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@fpsak-frontend/types';
+import avslattImage from '@navikt/fp-assets/images/avslaatt.svg';
+import innvilgetImage from '@navikt/fp-assets/images/check.svg';
+import { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@navikt/fp-types';
 
 import messages from '../../i18n/nb_NO.json';
 

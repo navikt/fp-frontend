@@ -1,6 +1,6 @@
 import { Location } from 'history';
-import { Historikkinnslag } from '@fpsak-frontend/types';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { Historikkinnslag } from '@navikt/fp-types';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 
 interface HistorikkMal {
   historikkinnslag: Historikkinnslag;

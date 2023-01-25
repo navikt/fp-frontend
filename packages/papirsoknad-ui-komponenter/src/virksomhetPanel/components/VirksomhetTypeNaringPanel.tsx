@@ -8,7 +8,7 @@ import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { AlleKodeverk } from '@navikt/ft-types';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 
-import naringsvirksomhetType from '@fpsak-frontend/kodeverk/src/naringsvirksomhetType';
+import naringsvirksomhetType from '@navikt/fp-kodeverk/src/naringsvirksomhetType';
 import { isRequiredMessage } from '@navikt/ft-form-validators';
 
 const TYPE_VIRKSOMHET_PREFIX = 'typeVirksomhet';

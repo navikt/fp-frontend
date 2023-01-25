@@ -1,4 +1,4 @@
-import { KontrollerFaktaPeriode } from '@fpsak-frontend/types';
+import { KontrollerFaktaPeriode } from '@navikt/fp-types';
 
 export enum PeriodeApType {
   START_FOM = 'START_FOM',

@@ -1,14 +1,14 @@
 {
-  "name": "@fpsak-frontend/papirsoknad",
+  "name": "@navikt/fp-papirsoknad",
   "version": "1.0.0",
   "module": "index.ts",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@fpsak-frontend/kodeverk": "1.0.0",
-    "@fpsak-frontend/papirsoknad-ui-komponenter": "1.0.0",
-    "@fpsak-frontend/storybook-utils": "1.0.0",
-    "@fpsak-frontend/types": "1.0.0",
+    "@navikt/fp-kodeverk": "1.0.0",
+    "@navikt/fp-papirsoknad-ui-komponenter": "1.0.0",
+    "@navikt/fp-storybook-utils": "1.0.0",
+    "@navikt/fp-types": "1.0.0",
     "@navikt/ds-react": "2.0.12",
     "@navikt/ft-form-hooks": "3.2.10",
     "@navikt/ft-form-validators": "1.0.45",
@@ -22,7 +22,7 @@
     "react-router-dom": "6.6.2"
   },
   "devDependencies": {
-    "@fpsak-frontend/utils-test": "1.0.0",
+    "@navikt/fp-utils-test": "1.0.0",
     "@storybook/addon-actions": "6.5.15"
   }
 }

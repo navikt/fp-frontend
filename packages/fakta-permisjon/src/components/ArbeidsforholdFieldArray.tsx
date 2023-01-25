@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 import { formHooks } from '@navikt/ft-form-hooks';
 import {
   ArbeidOgInntektsmelding, AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, AlleKodeverk,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 import ArbeidsforholdField from './ArbeidsforholdField';
 

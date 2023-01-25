@@ -2,10 +2,10 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { FamilieHendelseSamling } from '@fpsak-frontend/types';
-import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { FamilieHendelseSamling } from '@navikt/fp-types';
+import { getIntlMock } from '@navikt/fp-utils-test/src/intl-enzyme-test-helper';
 
 import { UttakPeriodeInnhold } from './UttakPeriodeInnhold';
 

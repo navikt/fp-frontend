@@ -2,8 +2,8 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
-import { UttakType, UttakÅrsak } from '@fpsak-frontend/types';
+import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
+import { UttakType, UttakÅrsak } from '@navikt/fp-types';
 
 import DelOppPeriodeModal from './DelOppPeriodeModal';
 

@@ -10,10 +10,10 @@ import { Datepicker, InputField, formHooks } from '@navikt/ft-form-hooks';
 import {
   hasValidDate, hasValidInteger, maxValue, minValue, required,
 } from '@navikt/ft-form-validators';
-import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@fpsak-frontend/fakta-felles';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Aksjonspunkt, FamilieHendelse, Soknad } from '@fpsak-frontend/types';
-import { BekreftTerminbekreftelseAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@navikt/fp-fakta-felles';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
+import { BekreftTerminbekreftelseAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './termindatoFaktaForm.less';
 

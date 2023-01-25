@@ -3,8 +3,8 @@ import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { KontrollresultatKode } from '@navikt/ft-sak-risikoklassifisering';
 
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import { Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
+import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { Fagsak, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import * as useTrackRouteParam from '../../app/useTrackRouteParam';
 import RisikoklassifiseringIndex from './RisikoklassifiseringIndex';

@@ -7,8 +7,8 @@ import {
 import { FormattedMessage } from 'react-intl';
 import { Detail } from '@navikt/ds-react';
 
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
+import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
+import uttakPeriodeVurdering from '@navikt/fp-kodeverk/src/uttakPeriodeVurdering';
 import {
   ArrowBox, VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';

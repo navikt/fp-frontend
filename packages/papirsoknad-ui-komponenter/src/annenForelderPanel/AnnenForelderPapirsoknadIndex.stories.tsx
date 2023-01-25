@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 import { Button } from '@navikt/ds-react';
 
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import AnnenForelderPapirsoknadIndex from './AnnenForelderPapirsoknadIndex';

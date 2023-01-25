@@ -4,12 +4,12 @@ import React, {
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import {
   AlleKodeverk, Behandling, AksessRettigheter, Fagsak,
-} from '@fpsak-frontend/types';
-import { AsyncPollingStatus } from '@fpsak-frontend/rest-api';
-import { RegistrerPapirsoknadPanel, SoknadRegistrertModal } from '@fpsak-frontend/papirsoknad';
+} from '@navikt/fp-types';
+import { AsyncPollingStatus } from '@navikt/fp-rest-api';
+import { RegistrerPapirsoknadPanel, SoknadRegistrertModal } from '@navikt/fp-papirsoknad';
 
 import BehandlingPaVent from '../felles/modaler/paVent/BehandlingPaVent';
 import { requestPapirsoknadApi } from './data/papirsoknadApi';

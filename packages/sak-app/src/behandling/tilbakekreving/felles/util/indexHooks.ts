@@ -3,8 +3,8 @@ import {
 } from 'react';
 import { usePrevious } from '@navikt/ft-ui-komponenter';
 
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { Behandling } from '@fpsak-frontend/types';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { Behandling } from '@navikt/fp-types';
 
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import { requestTilbakekrevingApi, restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';

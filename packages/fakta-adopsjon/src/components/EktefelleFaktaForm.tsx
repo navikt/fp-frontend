@@ -2,12 +2,12 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
-import { FamilieHendelse } from '@fpsak-frontend/types';
-import { BekreftEktefelleAksjonspunktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import { FamilieHendelse } from '@navikt/fp-types';
+import { BekreftEktefelleAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './ektefelleFaktaForm.less';
 

@@ -3,11 +3,11 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import BeregningsresultatProsessIndex from '@fpsak-frontend/prosess-beregningsresultat';
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { AksessRettigheter, BeregningsresultatEs } from '@fpsak-frontend/types';
+import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import BeregningsresultatProsessIndex from '@navikt/fp-prosess-beregningsresultat';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { AksessRettigheter, BeregningsresultatEs } from '@navikt/fp-types';
 
 import { EsBehandlingApiKeys } from '../data/esBehandlingApi';
 

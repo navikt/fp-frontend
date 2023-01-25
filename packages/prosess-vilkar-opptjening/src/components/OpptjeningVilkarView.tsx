@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 
-import { FastsattOpptjeningAktivitet } from '@fpsak-frontend/types';
+import { FastsattOpptjeningAktivitet } from '@navikt/fp-types';
 import { PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import OpptjeningTimeLineLight from './OpptjeningTimeLineLight';

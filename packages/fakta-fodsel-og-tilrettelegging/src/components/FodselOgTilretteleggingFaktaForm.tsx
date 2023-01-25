@@ -13,15 +13,15 @@ import {
   hasValidDate, hasValidText, maxLength, required,
 } from '@navikt/ft-form-validators';
 
-import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { FaktaSubmitButtonNew } from '@fpsak-frontend/fakta-felles';
+import tilretteleggingType from '@navikt/fp-kodeverk/src/tilretteleggingType';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import {
   AoIArbeidsforhold, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, FodselOgTilrettelegging,
   ArbeidsforholdFodselOgTilrettelegging, ArbeidsforholdTilretteleggingDato,
-} from '@fpsak-frontend/types';
-import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel_ny.svg';
-import { BekreftSvangerskapspengerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import advarselIkonUrl from '@navikt/fp-assets/images/advarsel_ny.svg';
+import { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import TilretteleggingArbeidsforholdSection from './tilrettelegging/TilretteleggingArbeidsforholdSection';
 import { finnSkalTaHensynTilPermisjon } from './tilrettelegging/VelferdspermisjonSection';

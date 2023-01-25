@@ -1,8 +1,8 @@
 import React from 'react';
 import { IntlShape } from 'react-intl';
 
-import { HistorikkinnslagDel, HistorikkInnslagOpplysning, HistorikkinnslagEndretFelt } from '@fpsak-frontend/types';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { HistorikkinnslagDel, HistorikkInnslagOpplysning, HistorikkinnslagEndretFelt } from '@navikt/fp-types';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 
 import historikkResultatTypeCodes from '../../../kodeverk/historikkResultatTypeCodes';
 import historikkEndretFeltVerdiTypeCodes from '../../../kodeverk/historikkEndretFeltVerdiTypeCodes';

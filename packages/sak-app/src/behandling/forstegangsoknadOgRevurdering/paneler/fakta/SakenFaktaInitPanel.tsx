@@ -5,10 +5,10 @@ import { useIntl } from 'react-intl';
 import { Fagsak } from '@navikt/ft-types';
 import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import SakenFaktaIndex from '@fpsak-frontend/fakta-saken';
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import { Soknad } from '@fpsak-frontend/types';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import SakenFaktaIndex from '@navikt/fp-fakta-saken';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import { Soknad } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';

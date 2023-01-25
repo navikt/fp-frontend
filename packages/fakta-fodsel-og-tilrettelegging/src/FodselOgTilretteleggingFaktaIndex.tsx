@@ -8,7 +8,7 @@ import {
   StandardFaktaPanelProps,
   FodselOgTilrettelegging,
   ArbeidOgInntektsmelding,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 import FodselOgTilretteleggingFaktaForm from './components/FodselOgTilretteleggingFaktaForm';
 

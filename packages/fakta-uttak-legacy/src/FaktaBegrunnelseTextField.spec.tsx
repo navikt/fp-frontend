@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl } from '@navikt/fp-utils-test/src/intl-enzyme-test-helper';
 
 import TextAreaField from './form/TextAreaField';
 import messages from '../i18n/nb_NO.json';

@@ -6,18 +6,18 @@ import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image,
 } from '@navikt/ft-ui-komponenter';
 
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import behandleImageURL from '@fpsak-frontend/assets/images/advarsel.svg';
+import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import behandleImageURL from '@navikt/fp-assets/images/advarsel.svg';
 import {
   hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-form-validators';
 import {
   Form, RadioGroupPanel, TextAreaField,
 } from '@navikt/ft-form-hooks';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
-import { Aksjonspunkt, BeregningsresultatFp } from '@fpsak-frontend/types';
-import { VurderTilbaketrekkAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
+import { Aksjonspunkt, BeregningsresultatFp } from '@navikt/fp-types';
+import { VurderTilbaketrekkAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './tilbaketrekkpanel.less';
 

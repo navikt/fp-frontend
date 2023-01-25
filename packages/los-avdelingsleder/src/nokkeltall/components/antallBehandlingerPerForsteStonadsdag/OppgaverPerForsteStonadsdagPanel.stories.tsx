@@ -2,7 +2,7 @@ import React from 'react';
 import dayjs from 'dayjs';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
-import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
+import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
 
 import { OppgaverPerForsteStonadsdagPanel } from './OppgaverPerForsteStonadsdagPanel';
 

@@ -6,13 +6,13 @@ import { BodyShort, Label, Detail } from '@navikt/ds-react';
 
 import {
   AoIArbeidsforhold, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold, AksjonspunktÅrsak, ArbeidOgInntektsmelding, Inntektsmelding, AlleKodeverk,
-} from '@fpsak-frontend/types';
-import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
-import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
+} from '@navikt/fp-types';
+import advarselIkonUrl from '@navikt/fp-assets/images/advarsel2.svg';
+import okIkonUrl from '@navikt/fp-assets/images/check.svg';
 import {
   TableColumn, PeriodLabel, DateLabel, ExpandableTableRow, Image,
 } from '@navikt/ft-ui-komponenter';
-import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
+import ArbeidsforholdKomplettVurderingType from '@navikt/fp-kodeverk/src/arbeidsforholdKomplettVurderingType';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import ManueltLagtTilArbeidsforholdForm from './manuelt/ManueltLagtTilArbeidsforholdForm';
 import ManglendeArbeidsforholdForm from './manglendeArbeidsforhold/ManglendeArbeidsforholdForm';

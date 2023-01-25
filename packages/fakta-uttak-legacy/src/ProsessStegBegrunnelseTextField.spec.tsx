@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Aksjonspunkt } from '@fpsak-frontend/types';
+import { Aksjonspunkt } from '@navikt/fp-types';
 
 import TextAreaField from './form/TextAreaField';
 import ProsessStegBegrunnelseTextField from './ProsessStegBegrunnelseTextField';
@@ -9,7 +9,7 @@ import ProsessStegBegrunnelseTextField from './ProsessStegBegrunnelseTextField';
 jest.mock('react-intl', () => {
   const reactIntl = jest.requireActual('react-intl');
   const meldinger = jest.requireActual('../i18n/nb_NO.json');
-  const intlTestHelper = jest.requireActual('@fpsak-frontend/utils-test/src/intl-enzyme-test-helper');
+  const intlTestHelper = jest.requireActual('@navikt/fp-utils-test/src/intl-enzyme-test-helper');
   return {
     ...reactIntl,
     useIntl: () => intlTestHelper.getIntlMock(meldinger),

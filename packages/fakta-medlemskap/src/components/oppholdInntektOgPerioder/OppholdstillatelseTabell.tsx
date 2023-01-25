@@ -4,8 +4,8 @@ import {
   PeriodLabel, DateLabel, Table, TableColumn, TableRow, FaktaGruppe,
 } from '@navikt/ft-ui-komponenter';
 
-import { AlleKodeverk, Oppholdstillatelse } from '@fpsak-frontend/types';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { AlleKodeverk, Oppholdstillatelse } from '@navikt/fp-types';
+import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
 
 const headerTextCodes = [
   'OppholdstillatelseTabell.Periode',

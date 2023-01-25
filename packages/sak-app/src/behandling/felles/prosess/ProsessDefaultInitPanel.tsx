@@ -2,10 +2,10 @@ import React, {
   ReactElement, useMemo,
 } from 'react';
 
-import { RestApiHooks, RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { RequestApi, RestKey } from '@fpsak-frontend/rest-api';
-import StandardProsessPanelProps from '@fpsak-frontend/types/src/standardProsessPanelPropsTsType';
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
+import { RestApiHooks, RestApiState } from '@navikt/fp-rest-api-hooks';
+import { RequestApi, RestKey } from '@navikt/fp-rest-api';
+import StandardProsessPanelProps from '@navikt/fp-types/src/standardProsessPanelPropsTsType';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
 
 import ProsessPanelInitProps from '../typer/prosessPanelInitProps';
 import useStandardProsessPanelProps from './useStandardProsessPanelProps';

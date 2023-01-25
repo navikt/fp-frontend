@@ -6,13 +6,13 @@ import { useIntl, IntlShape } from 'react-intl';
 import {
   BehandlingStatus, VilkarUtfallType, isAksjonspunktOpen,
 } from '@navikt/ft-kodeverk';
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { ForeldelseAksjonspunktCodes } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
 import { VedtakAksjonspunktCode } from '@navikt/ft-prosess-tilbakekreving-vedtak';
 import { ForeldelseAksjonspunktCodes as TilbakekrevingCodes } from '@navikt/ft-prosess-tilbakekreving';
 import { Aksjonspunkt, AlleKodeverkTilbakekreving } from '@navikt/ft-types';
-import { Behandling, AksessRettigheter, Behandlingsresultat } from '@fpsak-frontend/types';
-import VedtakResultatType from '@fpsak-frontend/kodeverk/src/vedtakResultatType';
+import { Behandling, AksessRettigheter, Behandlingsresultat } from '@navikt/fp-types';
+import VedtakResultatType from '@navikt/fp-kodeverk/src/vedtakResultatType';
 
 import { erReadOnlyCurried } from '../felles/util/readOnlyPanelUtils';
 import ProsessMeny, { ProsessPanelMenyData } from './ProsessMeny';

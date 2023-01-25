@@ -3,17 +3,17 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   AksessRettigheter, ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 import {
   Vilkar, Vilkarperiode, Beregningsgrunnlag,
 } from '@navikt/ft-types';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import { FaktaBeregningAvklaringsbehovCode } from '@navikt/ft-fakta-beregning';
 import DynamicLoader from '../../../felles/DynamicLoader';
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';

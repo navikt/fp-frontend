@@ -8,10 +8,10 @@ import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
 
-import { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@fpsak-frontend/types';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
-import HistorikkAktor from '@fpsak-frontend/kodeverk/src/historikkAktor';
+import { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
+import HistorikkAktor from '@navikt/fp-kodeverk/src/historikkAktor';
 
 import historikkinnslagType from '../kodeverk/historikkinnslagType';
 import Snakkeboble from './maler/felles/snakkeboble';

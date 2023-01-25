@@ -2,11 +2,11 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
-import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
-import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import familieHendelseType from '@navikt/fp-kodeverk/src/familieHendelseType';
+import foreldreType from '@navikt/fp-kodeverk/src/foreldreType';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
-import { SoknadData } from '@fpsak-frontend/papirsoknad-ui-komponenter';
+import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 import EngangsstonadPapirsoknadIndex from './EngangsstonadPapirsoknadIndex';
 
 export default {

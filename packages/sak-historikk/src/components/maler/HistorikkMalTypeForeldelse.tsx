@@ -4,7 +4,7 @@ import { BodyShort } from '@navikt/ds-react';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 
 import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningTypeCodes';
 import HistorikkMal from '../HistorikkMalTsType';

@@ -4,7 +4,7 @@ import {
   BehandlingType,
   AksjonspunktStatus,
 } from '@navikt/ft-kodeverk';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 
 import getAlleMerknaderFraBeslutter from './getAlleMerknaderFraBeslutter';
 

@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { RawIntlProvider } from 'react-intl';
 import { Modal } from '@navikt/ds-react';
 
-import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@navikt/fp-utils-test/src/intl-enzyme-test-helper';
 import messages from '../../i18n/nb_NO.json';
 
 import SettPaVentModal from './SettPaVentModal';

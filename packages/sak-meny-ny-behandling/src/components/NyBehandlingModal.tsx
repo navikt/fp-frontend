@@ -8,10 +8,10 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { CheckboxField, SelectField, Form } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import bType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import bType from '@navikt/fp-kodeverk/src/behandlingType';
+import behandlingArsakType from '@navikt/fp-kodeverk/src/behandlingArsakType';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './nyBehandlingModal.less';
 

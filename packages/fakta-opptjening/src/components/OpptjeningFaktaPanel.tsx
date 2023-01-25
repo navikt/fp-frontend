@@ -7,15 +7,15 @@ import {
   Alert, Button, BodyShort, Detail,
 } from '@navikt/ds-react';
 
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import { ISO_DATE_FORMAT, addDaysToDate } from '@navikt/ft-utils';
 import { AksjonspunktHelpTextTemp, DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { TimeLineNavigation } from '@navikt/ft-tidslinje';
 import {
   ArbeidsgiverOpplysningerPerId, AlleKodeverk, OpptjeningAktivitet, Opptjening,
-} from '@fpsak-frontend/types';
-import { AvklarAktivitetsPerioderAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import { AvklarAktivitetsPerioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import OpptjeningTidslinje from './tidslinje/OpptjeningTidslinje';
 import ValgtAktivitetForm, { FormValues } from './aktivitet/ValgtAktivitetForm';

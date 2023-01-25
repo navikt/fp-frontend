@@ -7,7 +7,7 @@ import { Heading } from '@navikt/ds-react';
 
 import {
   ArbeidOgInntektsmelding, AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, Inntektsmelding,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 import { FormattedMessage } from 'react-intl';
 import PersonArbeidsforholdTable, { erMatch } from './arbeidsforholdTabell/PersonArbeidsforholdTable';

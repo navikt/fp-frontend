@@ -1,4 +1,4 @@
-import { Aksjonspunkt } from '@fpsak-frontend/types';
+import { Aksjonspunkt } from '@navikt/fp-types';
 
 export type OverstyringAksjonspunkter = AksjonspunktCode.OVERSTYR_SOKNADSFRISTVILKAR
   | AksjonspunktCode.OVERSTYR_ADOPSJONSVILKAR

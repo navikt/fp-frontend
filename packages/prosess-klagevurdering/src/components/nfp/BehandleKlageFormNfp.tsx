@@ -5,16 +5,16 @@ import { Heading } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import klageVurderingType from '@navikt/fp-kodeverk/src/klageVurdering';
 import {
   AksjonspunktHelpTextTemp, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
-import { KlageVurdering, AlleKodeverk, KlageVurderingResultat } from '@fpsak-frontend/types';
-import { KlageVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import KlageFormType from '@fpsak-frontend/prosess-klagevurdering/src/types/klageFormType';
+import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
+import { KlageVurdering, AlleKodeverk, KlageVurderingResultat } from '@navikt/fp-types';
+import { KlageVurderingResultatAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import KlageFormType from '@navikt/fp-prosess-klagevurdering/src/types/klageFormType';
 
 import KlageVurderingRadioOptionsNfp from './KlageVurderingRadioOptionsNfp';
 import FritekstBrevTextField from './FritekstKlageBrevTextField';

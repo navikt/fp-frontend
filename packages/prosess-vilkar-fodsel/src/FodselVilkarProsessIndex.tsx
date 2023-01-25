@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { StandardProsessPanelProps } from '@fpsak-frontend/types';
+import { StandardProsessPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import FodselVilkarForm from './components/FodselVilkarForm';

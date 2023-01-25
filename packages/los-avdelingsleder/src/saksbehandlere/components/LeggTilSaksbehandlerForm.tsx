@@ -9,7 +9,7 @@ import { required } from '@navikt/ft-form-validators';
 import {
   FlexContainer, FlexRow, FlexColumn, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import Saksbehandler from '../../typer/saksbehandlerAvdelingTsType';
 import { RestApiPathsKeys, restApiHooks } from '../../data/fplosRestApi';

@@ -2,8 +2,8 @@ import { DateLabel, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponente
 import { Label, BodyShort, Heading } from '@navikt/ds-react';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { AoIArbeidsforhold } from '@fpsak-frontend/types';
-import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
+import { AoIArbeidsforhold } from '@navikt/fp-types';
+import ArbeidsforholdKomplettVurderingType from '@navikt/fp-kodeverk/src/arbeidsforholdKomplettVurderingType';
 
 import PermisjonPeriode from './PermisjonPeriode';
 import BekreftetPermisjonStatus from '../../kodeverk/bekreftetPermisjonStatus';

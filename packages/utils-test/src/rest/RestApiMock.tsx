@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import MockAdapter from 'axios-mock-adapter';
-import { RequestApi } from '@fpsak-frontend/rest-api';
-import { RestApiProvider, RestApiErrorProvider } from '@fpsak-frontend/rest-api-hooks';
+import { RequestApi } from '@navikt/fp-rest-api';
+import { RestApiProvider, RestApiErrorProvider } from '@navikt/fp-rest-api-hooks';
 import AxiosMock from './AxiosMock';
 import RestApiGlobalStateMock from './RestApiGlobalStateMock';
 

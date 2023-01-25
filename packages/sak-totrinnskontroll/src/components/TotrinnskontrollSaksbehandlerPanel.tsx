@@ -5,12 +5,12 @@ import { BodyShort } from '@navikt/ds-react';
 import { Location } from 'history';
 import { Image } from '@navikt/ft-ui-komponenter';
 
-import checkImg from '@fpsak-frontend/assets/images/check.svg';
-import avslattImg from '@fpsak-frontend/assets/images/avslaatt.svg';
+import checkImg from '@navikt/fp-assets/images/check.svg';
+import avslattImg from '@navikt/fp-assets/images/avslaatt.svg';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import {
   KodeverkMedNavn, BehandlingAppKontekst, TotrinnskontrollSkjermlenkeContext,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 import getAksjonspunkttekst from './aksjonspunktTekster/aksjonspunktTekstUtleder';
 

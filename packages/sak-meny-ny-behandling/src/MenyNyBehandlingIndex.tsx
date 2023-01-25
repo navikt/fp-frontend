@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import BehandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import NyBehandlingModal, { BehandlingOppretting, FormValues } from './components/NyBehandlingModal';

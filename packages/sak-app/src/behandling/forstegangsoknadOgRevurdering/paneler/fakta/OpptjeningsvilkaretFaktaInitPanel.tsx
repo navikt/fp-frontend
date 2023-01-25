@@ -3,12 +3,12 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import OpptjeningFaktaIndex from '@fpsak-frontend/fakta-opptjening';
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import { ArbeidsgiverOpplysningerPerId, Opptjening } from '@fpsak-frontend/types';
+import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
+import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import OpptjeningFaktaIndex from '@navikt/fp-fakta-opptjening';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import { ArbeidsgiverOpplysningerPerId, Opptjening } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';

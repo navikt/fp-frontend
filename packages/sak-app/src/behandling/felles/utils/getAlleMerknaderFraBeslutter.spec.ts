@@ -1,6 +1,6 @@
 import { Behandling } from '@navikt/ft-types';
 import { AksjonspunktStatus, BehandlingType, BehandlingStatus } from '@navikt/ft-kodeverk';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 
 import getAlleMerknaderFraBeslutter from './getAlleMerknaderFraBeslutter';
 

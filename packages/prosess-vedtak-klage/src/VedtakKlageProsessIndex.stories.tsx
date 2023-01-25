@@ -2,15 +2,15 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
-import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import behandlingResultatType from '@navikt/fp-kodeverk/src/behandlingResultatType';
+import klageVurderingCodes from '@navikt/fp-kodeverk/src/klageVurdering';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import {
   Aksjonspunkt, Behandling, KlageVurdering, KlageVurderingResultat,
-} from '@fpsak-frontend/types';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import VedtakKlageProsessIndex from './VedtakKlageProsessIndex';
 

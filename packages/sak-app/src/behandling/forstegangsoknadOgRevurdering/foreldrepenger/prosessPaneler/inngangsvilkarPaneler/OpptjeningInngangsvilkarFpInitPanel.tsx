@@ -4,10 +4,10 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import OpptjeningVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-opptjening';
-import { AksessRettigheter, Opptjening } from '@fpsak-frontend/types';
+import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import OpptjeningVilkarProsessIndex from '@navikt/fp-prosess-vilkar-opptjening';
+import { AksessRettigheter, Opptjening } from '@navikt/fp-types';
 
 import InngangsvilkarPanelInitProps from '../../../../felles/typer/inngangsvilkarPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../../felles/data/behandlingFellesApi';

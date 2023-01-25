@@ -3,12 +3,12 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import UttakFaktaIndex from '@fpsak-frontend/fakta-uttak';
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import UttakFaktaIndex from '@navikt/fp-fakta-uttak';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   AksessRettigheter, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, KontrollerFaktaPeriode, Ytelsefordeling,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';

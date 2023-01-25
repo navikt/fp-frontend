@@ -1,6 +1,6 @@
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import { Vilkar } from '@fpsak-frontend/types';
+import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
+import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
+import { Vilkar } from '@navikt/fp-types';
 
 import { hasIkkeOppfyltSoknadsfristvilkar } from './VedtakHelper';
 

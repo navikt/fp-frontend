@@ -12,13 +12,13 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
-import { Aksjonspunkt } from '@fpsak-frontend/types';
-import { VurderSoknadsfristAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
+import { Aksjonspunkt } from '@navikt/fp-types';
+import { VurderSoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 
-import { Søknadsfrist } from '@fpsak-frontend/types/src/soknadTsType';
+import { Søknadsfrist } from '@navikt/fp-types/src/soknadTsType';
 import styles from './vurderSoknadsfristForeldrepengerForm.less';
 
 const isEdited = (hasAksjonspunkt: boolean, gyldigSenFremsetting?: boolean): boolean => hasAksjonspunkt && gyldigSenFremsetting !== undefined;

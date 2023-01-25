@@ -5,16 +5,16 @@ import { Label, BodyShort } from '@navikt/ds-react';
 import {
   AksjonspunktHelpTextTemp, VerticalSpacer, FaktaGruppe, EditedIcon, FlexContainer, FlexRow, FlexColumn,
 } from '@navikt/ft-ui-komponenter';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import { SelectField, formHooks } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import VilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import { isFieldEdited, FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
+import VilkarType from '@navikt/fp-kodeverk/src/vilkarType';
+import { isFieldEdited, FieldEditedInfo } from '@navikt/fp-fakta-felles';
 import {
   Aksjonspunkt, FamilieHendelse, InntektArbeidYtelse, KodeverkMedNavn, Personoversikt, RelatertTilgrensedYtelse, Soknad,
-} from '@fpsak-frontend/types';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { AvklarFaktaForForeldreansvarAksjonspunktAp, AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { AvklarFaktaForForeldreansvarAksjonspunktAp, AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import OmsorgsovertakelseFaktaPanel, { FormValues as OmsorgFormValues } from './OmsorgsovertakelseFaktaPanel';
 import RettighetFaktaPanel, { FormValues as RettighetFormValues } from './RettighetFaktaPanel';

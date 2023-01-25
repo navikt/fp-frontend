@@ -8,13 +8,13 @@ import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
-import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
+import BehandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import behandlingResultatType from '@navikt/fp-kodeverk/src/behandlingResultatType';
 import { SelectField, TextAreaField, Form } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
+import { KodeverkMedNavn } from '@navikt/fp-types';
+import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import dokumentMalType from '@navikt/fp-kodeverk/src/dokumentMalType';
 
 import styles from './henleggBehandlingModal.less';
 

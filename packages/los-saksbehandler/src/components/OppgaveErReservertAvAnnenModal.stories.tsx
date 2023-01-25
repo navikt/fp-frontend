@@ -3,8 +3,8 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
 
-import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
-import { Oppgave } from '@fpsak-frontend/los-felles';
+import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
+import { Oppgave } from '@navikt/fp-los-felles';
 
 import OppgaveErReservertAvAnnenModal from './OppgaveErReservertAvAnnenModal';
 

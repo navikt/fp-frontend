@@ -2,19 +2,19 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
-import relatertYtelseTilstand from '@fpsak-frontend/kodeverk/src/relatertYtelseTilstand';
-import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
-import relatertYtelseType from '@fpsak-frontend/kodeverk/src/relatertYtelseType';
-import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import OmsorgOgForeldreansvarFaktaIndex from '@fpsak-frontend/fakta-omsorg-og-foreldreansvar';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import opplysningAdresseType from '@navikt/fp-kodeverk/src/opplysningAdresseType';
+import relatertYtelseTilstand from '@navikt/fp-kodeverk/src/relatertYtelseTilstand';
+import navBrukerKjonn from '@navikt/fp-kodeverk/src/navBrukerKjonn';
+import relatertYtelseType from '@navikt/fp-kodeverk/src/relatertYtelseType';
+import soknadType from '@navikt/fp-kodeverk/src/soknadType';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import OmsorgOgForeldreansvarFaktaIndex from '@navikt/fp-fakta-omsorg-og-foreldreansvar';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import {
   Behandling, FamilieHendelseSamling, InntektArbeidYtelse, Soknad, Aksjonspunkt,
-} from '@fpsak-frontend/types';
-import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 const behandling = {
   uuid: '1',

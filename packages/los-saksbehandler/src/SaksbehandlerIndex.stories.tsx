@@ -4,8 +4,8 @@ import dayjs from 'dayjs';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
 
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import { alleKodeverkLos } from '@fpsak-frontend/storybook-utils';
+import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { alleKodeverkLos } from '@navikt/fp-storybook-utils';
 
 import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, requestApi } from './data/fplosSaksbehandlerRestApi';
 import KoSortering from './kodeverk/KoSortering';

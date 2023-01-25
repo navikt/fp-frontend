@@ -6,10 +6,10 @@ import { AksjonspunktStatus, VilkarUtfallType, isAksjonspunktOpen } from '@navik
 
 import {
   Behandling, Fagsak, StandardProsessPanelProps, Vilkar,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
-import aksjonspunktType from '@fpsak-frontend/kodeverk/src/aksjonspunktType';
-import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import aksjonspunktType from '@navikt/fp-kodeverk/src/aksjonspunktType';
+import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
 import getAlleMerknaderFraBeslutter from '../utils/getAlleMerknaderFraBeslutter';

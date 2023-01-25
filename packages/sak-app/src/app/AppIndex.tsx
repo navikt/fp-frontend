@@ -8,8 +8,8 @@ import { Modal } from '@navikt/ds-react';
 import { createIntl, parseQueryString } from '@navikt/ft-utils';
 import { ForbiddenPage, UnauthorizedPage } from '@navikt/ft-sak-infosider';
 
-import { useRestApiError } from '@fpsak-frontend/rest-api-hooks';
-import EventType from '@fpsak-frontend/rest-api/src/requestApi/eventType';
+import { useRestApiError } from '@navikt/fp-rest-api-hooks';
+import EventType from '@navikt/fp-rest-api/src/requestApi/eventType';
 
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 import ErrorBoundary from './ErrorBoundary';
@@ -22,7 +22,7 @@ import messages from '../../i18n/nb_NO.json';
 
 import '@navikt/ds-css';
 
-import '@fpsak-frontend/assets/styles/global.less';
+import '@navikt/fp-assets/styles/global.less';
 
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';

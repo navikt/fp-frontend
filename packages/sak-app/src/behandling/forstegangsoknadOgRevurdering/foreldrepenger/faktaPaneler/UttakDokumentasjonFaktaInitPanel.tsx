@@ -3,11 +3,11 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import UttakDokumentasjonFaktaIndex from '@fpsak-frontend/fakta-uttaksdokumentasjon';
-import { DokumentasjonVurderingBehov } from '@fpsak-frontend/types';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import UttakDokumentasjonFaktaIndex from '@navikt/fp-fakta-uttaksdokumentasjon';
+import { DokumentasjonVurderingBehov } from '@navikt/fp-types';
 
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';

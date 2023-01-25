@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
+import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 
 import { requestApi } from '../data/fpsakApi';
 import useHentInitLenker from './useHentInitLenker';

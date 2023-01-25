@@ -1,9 +1,9 @@
 import {
   RestApiConfigBuilder, createRequestApi, RestKey,
-} from '@fpsak-frontend/rest-api';
-import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
-import { AlleKodeverk } from '@fpsak-frontend/types';
-import { Oppgave } from '@fpsak-frontend/los-felles';
+} from '@navikt/fp-rest-api';
+import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
+import { AlleKodeverk } from '@navikt/fp-types';
+import { Oppgave } from '@navikt/fp-los-felles';
 
 import Avdeling from '../typer/avdelingTsType';
 import SakslisteAvdeling from '../typer/sakslisteAvdelingTsType';

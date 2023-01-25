@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import FlyttReservasjonModal from './FlyttReservasjonModal';
 import SaksbehandlerAvdeling from '../typer/saksbehandlerAvdelingTsType';

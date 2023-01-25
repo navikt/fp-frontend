@@ -2,7 +2,7 @@ Håndterer rest-kall mot backend via Axios.
 
 Eksempel: 
 ```javascript
-import { createRequestApi, RequestConfig } from '@fpsak-frontend/rest-api';
+import { createRequestApi, RequestConfig } from '@navikt/fp-rest-api';
 
 const requestConfigs: [
     new RequestConfig('FAGSAK_SOK', '/api/fagsak/sok').withGetMethod(),
@@ -18,7 +18,7 @@ const payload = requestApi.startRequest('FAGSAK_SOK', params);
 
 Forenkling av oppsett av endepunktene ved bruk av builder:
 ```javascript
-import { createRequestApi, RestApiConfigBuilder } from '@fpsak-frontend/rest-api';
+import { createRequestApi, RestApiConfigBuilder } from '@navikt/fp-rest-api';
 
 const endpoints = new RestApiConfigBuilder()
   .withGet('/api/fagsak/sok', 'FAGSAK_SOK')

@@ -2,7 +2,7 @@ import React, {
   FunctionComponent,
 } from 'react';
 
-import { AksessRettigheter } from '@fpsak-frontend/types';
+import { AksessRettigheter } from '@navikt/fp-types';
 
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 import InngangsvilkarDefaultInitWrapper from '../../../felles/prosess/InngangsvilkarDefaultInitWrapper';

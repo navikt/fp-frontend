@@ -1,5 +1,5 @@
-import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { KontrollerFaktaPeriode } from '@fpsak-frontend/types';
+import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { KontrollerFaktaPeriode } from '@navikt/fp-types';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 

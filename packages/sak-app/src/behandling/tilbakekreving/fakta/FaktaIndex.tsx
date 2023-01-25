@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   FlexContainer,
   FlexColumn,
@@ -13,11 +13,11 @@ import {
   Aksjonspunkt,
   AlleKodeverkTilbakekreving,
 } from '@navikt/ft-types';
-import { Behandling, AksessRettigheter, AlleKodeverk } from '@fpsak-frontend/types';
+import { Behandling, AksessRettigheter, AlleKodeverk } from '@navikt/fp-types';
 import { FeilutbetalingAksjonspunktCode } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import FeilutbetalingFaktaInitPanel from './paneler/FeilutbetalingFaktaInitPanel';
 import VergeFaktaInitPanel from './paneler/VergeFaktaInitPanel';

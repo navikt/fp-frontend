@@ -4,8 +4,8 @@ import {
 } from 'react-intl';
 import { Alert, BodyShort } from '@navikt/ds-react';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Aksjonspunkt } from '@fpsak-frontend/types';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { Aksjonspunkt } from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 const findHelpTexts = (

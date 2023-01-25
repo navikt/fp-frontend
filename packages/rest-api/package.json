@@ -1,5 +1,5 @@
 {
-  "name": "@fpsak-frontend/rest-api",
+  "name": "@navikt/fp-rest-api",
   "version": "1.0.0",
   "module": "index.ts",
   "license": "MIT",

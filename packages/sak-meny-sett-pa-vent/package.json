@@ -1,13 +1,13 @@
 {
-  "name": "@fpsak-frontend/sak-meny-sett-pa-vent",
+  "name": "@navikt/fp-sak-meny-sett-pa-vent",
   "version": "1.0.0",
   "module": "index.jsx",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@fpsak-frontend/kodeverk": "1.0.0",
-    "@fpsak-frontend/modal-sett-pa-vent": "1.0.0",
-    "@fpsak-frontend/types": "1.0.0",
+    "@navikt/fp-kodeverk": "1.0.0",
+    "@navikt/fp-modal-sett-pa-vent": "1.0.0",
+    "@navikt/fp-types": "1.0.0",
     "@navikt/ds-react": "2.0.12",
     "@navikt/ft-kodeverk": "^1.0.24",
     "@navikt/ft-types": "^1.0.38",

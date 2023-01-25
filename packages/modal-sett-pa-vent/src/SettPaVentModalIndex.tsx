@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import SettPaVentModal, { FormValues } from './components/SettPaVentModal';

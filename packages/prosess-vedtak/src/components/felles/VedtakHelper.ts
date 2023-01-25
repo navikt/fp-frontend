@@ -1,11 +1,11 @@
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
+import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
+import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
+import tilbakekrevingVidereBehandling from '@navikt/fp-kodeverk/src/tilbakekrevingVidereBehandling';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
 import {
   AlleKodeverk, SimuleringResultat, TilbakekrevingValg, Vilkar,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 const tilbakekrevingMedInntrekk = (
   tilbakekrevingKode: string,

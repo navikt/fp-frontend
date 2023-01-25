@@ -6,10 +6,10 @@ import { BodyShort } from '@navikt/ds-react';
 
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyNoKr, getRangeOfMonths } from '@navikt/ft-utils';
-import mottakerTyper from '@fpsak-frontend/kodeverk/src/mottakerTyper';
+import mottakerTyper from '@navikt/fp-kodeverk/src/mottakerTyper';
 import {
   DetaljertSimuleringResultat, Mottaker, SimuleringResultatPerFagområde, SimuleringResultatRad,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 import CollapseButton from './CollapseButton';
 

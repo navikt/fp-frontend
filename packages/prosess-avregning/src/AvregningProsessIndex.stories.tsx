@@ -2,16 +2,16 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import mottakerTyper from '@fpsak-frontend/kodeverk/src/mottakerTyper';
-import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import AvregningProsessIndex from '@fpsak-frontend/prosess-avregning';
+import mottakerTyper from '@navikt/fp-kodeverk/src/mottakerTyper';
+import tilbakekrevingVidereBehandling from '@navikt/fp-kodeverk/src/tilbakekrevingVidereBehandling';
+import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import AvregningProsessIndex from '@navikt/fp-prosess-avregning';
 import {
   Aksjonspunkt, Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg,
-} from '@fpsak-frontend/types';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 const fagsak = {
   saksnummer: '123',

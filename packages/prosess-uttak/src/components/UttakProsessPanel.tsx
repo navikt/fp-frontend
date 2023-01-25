@@ -8,17 +8,17 @@ import {
   AksjonspunktHelpTextHTML, FlexColumn, FlexContainer, FlexRow, OverstyringKnapp, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
-import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
-import { UttakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
+import { UttakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import {
   ArbeidsgiverOpplysningerPerId, FamilieHendelseSamling, Personoversikt,
   Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling, Behandling, Aksjonspunkt, AlleKodeverk, PeriodeSoker,
-} from '@fpsak-frontend/types';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
-import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
-import StonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+} from '@navikt/fp-types';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import periodeResultatType from '@navikt/fp-kodeverk/src/periodeResultatType';
+import { uttakPeriodeNavn } from '@navikt/fp-kodeverk/src/uttakPeriodeType';
+import StonadskontoType from '@navikt/fp-kodeverk/src/stonadskontoType';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 
 import DisponibleStonadskontoerPanel from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';
 import UttakTidslinjeIndex from './tidslinje/UttakTidslinjeIndex';

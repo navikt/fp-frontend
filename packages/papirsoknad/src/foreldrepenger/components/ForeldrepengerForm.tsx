@@ -4,10 +4,10 @@ import { Form } from '@navikt/ft-form-hooks';
 import { KodeverkMedNavn } from '@navikt/ft-types';
 import { omitOne } from '@navikt/ft-utils';
 
-import { AlleKodeverk } from '@fpsak-frontend/types';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
-import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
+import { AlleKodeverk } from '@navikt/fp-types';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import familieHendelseType from '@navikt/fp-kodeverk/src/familieHendelseType';
+import foreldreType from '@navikt/fp-kodeverk/src/foreldreType';
 import {
   SoknadData,
   MottattDatoPapirsoknadIndex,
@@ -41,7 +41,7 @@ import {
   ANDRE_YTELSER_FORM_NAME_PREFIX,
   rettighet,
   TIDSROM_PERMISJON_FORM_NAME_PREFIX,
-} from '@fpsak-frontend/papirsoknad-ui-komponenter';
+} from '@navikt/fp-papirsoknad-ui-komponenter';
 
 const ANNEN_FORELDER_FORM_NAME_PREFIX = 'annenForelder';
 const OMSORG_FORM_NAME_PREFIX = 'omsorg';

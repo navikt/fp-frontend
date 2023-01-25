@@ -1,9 +1,9 @@
 import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import { skjermlenkeCodes } from '@fpsak-frontend/konstanter';
-import { Historikkinnslag, HistorikkinnslagDel } from '@fpsak-frontend/types';
-import { alleKodeverk, withRouter } from '@fpsak-frontend/storybook-utils';
+import { skjermlenkeCodes } from '@navikt/fp-konstanter';
+import { Historikkinnslag, HistorikkinnslagDel } from '@navikt/fp-types';
+import { alleKodeverk, withRouter } from '@navikt/fp-storybook-utils';
 import historikkOpplysningTypeCodes from './kodeverk/historikkOpplysningTypeCodes';
 import HistorikkSakIndex from './HistorikkSakIndex';
 import historikkEndretFeltType from './kodeverk/historikkEndretFeltType';

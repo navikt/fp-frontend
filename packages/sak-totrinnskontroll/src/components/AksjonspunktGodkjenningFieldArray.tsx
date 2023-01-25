@@ -5,7 +5,7 @@ import { BodyShort } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { formHooks } from '@navikt/ft-form-hooks';
 
-import { KodeverkMedNavn, TotrinnskontrollSkjermlenkeContext, BehandlingAppKontekst } from '@fpsak-frontend/types';
+import { KodeverkMedNavn, TotrinnskontrollSkjermlenkeContext, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import getAksjonspunkttekst from './aksjonspunktTekster/aksjonspunktTekstUtleder';
 import GodkjenningPanel from './GodkjenningPanel';

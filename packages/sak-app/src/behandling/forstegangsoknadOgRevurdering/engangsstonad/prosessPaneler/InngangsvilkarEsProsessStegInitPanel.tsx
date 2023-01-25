@@ -2,7 +2,7 @@ import React, {
   FunctionComponent,
 } from 'react';
 
-import { AksessRettigheter } from '@fpsak-frontend/types';
+import { AksessRettigheter } from '@navikt/fp-types';
 
 import FodselInngangsvilkarInitPanel from './inngangsvilkarPaneler/FodselInngangsvilkarInitPanel';
 import AdopsjonInngangsvilkarInitPanel from './inngangsvilkarPaneler/AdopsjonInngangsvilkarInitPanel';

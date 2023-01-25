@@ -2,11 +2,11 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage, WrappedComponentProps } from 'react-intl';
 import { Label, BodyShort, Heading } from '@navikt/ds-react';
 
-import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
-import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
+import navBrukerKjonn from '@navikt/fp-kodeverk/src/navBrukerKjonn';
+import opplysningAdresseType from '@navikt/fp-kodeverk/src/opplysningAdresseType';
 import { DateLabel, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { PersonopplysningerBasis, Personoversikt } from '@fpsak-frontend/types';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { PersonopplysningerBasis, Personoversikt } from '@navikt/fp-types';
 
 import getAddresses from '../getAddresses';
 

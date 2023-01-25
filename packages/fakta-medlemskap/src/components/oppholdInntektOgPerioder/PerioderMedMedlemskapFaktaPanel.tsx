@@ -10,13 +10,13 @@ import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { required } from '@navikt/ft-form-validators';
 import { Aksjonspunkt } from '@navikt/ft-types';
 
-import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
+import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 import {
   MedlemPeriode, Medlemskap, Soknad, AlleKodeverk,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 const headerTextCodes = [
   'PerioderMedMedlemskapFaktaPanel.Period',

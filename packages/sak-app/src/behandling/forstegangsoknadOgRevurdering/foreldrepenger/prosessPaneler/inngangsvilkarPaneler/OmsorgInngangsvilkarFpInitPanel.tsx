@@ -4,9 +4,9 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import OmsorgVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-omsorg';
+import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import OmsorgVilkarProsessIndex from '@navikt/fp-prosess-vilkar-omsorg';
 
 import InngangsvilkarPanelInitProps from '../../../../felles/typer/inngangsvilkarPanelInitProps';
 import InngangsvilkarDefaultInitPanel from '../../../../felles/prosess/InngangsvilkarDefaultInitPanel';

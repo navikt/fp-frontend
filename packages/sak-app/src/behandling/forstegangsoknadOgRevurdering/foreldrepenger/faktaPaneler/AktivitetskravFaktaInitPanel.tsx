@@ -3,11 +3,11 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import AktivitetskravFaktaIndex from '@fpsak-frontend/fakta-aktivitetskrav';
-import { UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import AktivitetskravFaktaIndex from '@navikt/fp-fakta-aktivitetskrav';
+import { UttakKontrollerAktivitetskrav } from '@navikt/fp-types';
 
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';

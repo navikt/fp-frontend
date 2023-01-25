@@ -1,8 +1,8 @@
 import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
-import { Kjønnkode, KjønnkodeEnum } from '@fpsak-frontend/types';
+import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
+import { Kjønnkode, KjønnkodeEnum } from '@navikt/fp-types';
 
 import PersonInfo from './PersonInfo';
 import diskresjonskodeType from '../../../kodeverk/diskresjonskodeType';

@@ -6,16 +6,16 @@ import {
   Alert, Link, BodyShort, Heading,
 } from '@navikt/ds-react';
 
-import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
+import addCircleIcon from '@navikt/fp-assets/images/add-circle.svg';
 import { dateFormat } from '@navikt/ft-utils';
 import {
   Aksjonspunkt, ArbeidOgInntektsmelding, Behandling, ManueltArbeidsforhold, AksjonspunktÅrsak,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 import {
   VerticalSpacer, AksjonspunktHelpTextHTML, FloatRight, OverstyringKnapp, Image, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
-import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import ArbeidsforholdKomplettVurderingType from '@navikt/fp-kodeverk/src/arbeidsforholdKomplettVurderingType';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 
 import ManueltLagtTilArbeidsforholdForm, { MANUELT_ORG_NR } from './manuelt/ManueltLagtTilArbeidsforholdForm';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';

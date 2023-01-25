@@ -6,7 +6,7 @@ import {
 } from '@navikt/ds-react';
 import dayjs from 'dayjs';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import {
   VerticalSpacer, FaktaGruppe, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
@@ -21,7 +21,7 @@ import { RadioGroupPanel, TextAreaField, Form } from '@navikt/ft-form-hooks';
 import { TimeLineButton } from '@navikt/ft-tidslinje';
 import {
   ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, AlleKodeverk, OpptjeningAktivitet,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 import ValgtAktivitetSubForm from './ValgtAktivitetSubForm';
 import { finnOpptjeningFom, finnOpptjeningTom } from '../../utils/opptjeningDatoUtil';

@@ -5,11 +5,11 @@ import {
   BehandlingStatus, BehandlingType, FagsakStatus, FagsakYtelseType,
 } from '@navikt/ft-kodeverk';
 
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
-import { alleKodeverkLos } from '@fpsak-frontend/storybook-utils';
-import { FagsakEnkel, KjønnkodeEnum } from '@fpsak-frontend/types';
-import { Oppgave } from '@fpsak-frontend/los-felles';
+import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
+import { alleKodeverkLos } from '@navikt/fp-storybook-utils';
+import { FagsakEnkel, KjønnkodeEnum } from '@navikt/fp-types';
+import { Oppgave } from '@navikt/fp-los-felles';
 
 import FagsakList from './FagsakList';
 import { RestApiGlobalStatePathsKeys, requestApi } from '../../data/fplosSaksbehandlerRestApi';

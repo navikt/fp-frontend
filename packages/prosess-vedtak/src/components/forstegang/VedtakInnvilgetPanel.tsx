@@ -4,8 +4,8 @@ import { Label, Detail } from '@navikt/ds-react';
 
 import {
   Behandlingsresultat, BeregningsresultatFp, BeregningsresultatEs,
-} from '@fpsak-frontend/types';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+} from '@navikt/fp-types';
+import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,

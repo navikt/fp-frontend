@@ -4,7 +4,7 @@ import React, {
 import { FormattedMessage } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 
-import { Oppgave, OppgaveStatus } from '@fpsak-frontend/los-felles';
+import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
 
 import Saksliste from '../typer/sakslisteTsType';
 import OppgaveErReservertAvAnnenModal from '../components/OppgaveErReservertAvAnnenModal';

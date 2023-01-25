@@ -1,7 +1,7 @@
 import { Behandling } from '@navikt/ft-types';
 import { BehandlingStatus } from '@navikt/ft-kodeverk';
-import { AvklarVergeAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { AvklarVergeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 
 import getBekreftAksjonspunktCallback from './bekreftAksjonspunkter';
 

@@ -6,7 +6,7 @@ import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import { DATE_TIME_FORMAT } from '@navikt/ft-utils';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 
-import { AlleKodeverk, KlageVurdering } from '@fpsak-frontend/types';
+import { AlleKodeverk, KlageVurdering } from '@navikt/fp-types';
 
 import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
 

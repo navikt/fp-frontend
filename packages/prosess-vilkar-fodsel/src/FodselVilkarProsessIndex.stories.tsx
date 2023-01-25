@@ -2,14 +2,14 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import avslagsarsakCodes from '@fpsak-frontend/kodeverk/src/avslagsarsakCodes';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import { Aksjonspunkt, Behandling, Vilkar } from '@fpsak-frontend/types';
-import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import avslagsarsakCodes from '@navikt/fp-kodeverk/src/avslagsarsakCodes';
+import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { Aksjonspunkt, Behandling, Vilkar } from '@navikt/fp-types';
+import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import FodselVilkarProsessIndex from './FodselVilkarProsessIndex';
 

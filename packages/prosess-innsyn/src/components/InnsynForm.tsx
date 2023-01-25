@@ -4,22 +4,22 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import moment from 'moment';
 import { Heading } from '@navikt/ds-react';
 
-import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import kommunikasjonsretning from '@navikt/fp-kodeverk/src/kommunikasjonsretning';
+import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
 import { Form, Datepicker, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
   AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
-import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import innsynResultatTyperKV from '@fpsak-frontend/kodeverk/src/innsynResultatType';
+import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import innsynResultatTyperKV from '@navikt/fp-kodeverk/src/innsynResultatType';
 import {
   Aksjonspunkt, Dokument, InnsynDokument, InnsynVedtaksdokument, AlleKodeverk,
-} from '@fpsak-frontend/types';
-import { VurderInnsynAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import { VurderInnsynAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import DocumentListInnsyn from './DocumentListInnsyn';
 import VedtakDocuments from './VedtakDocuments';

@@ -3,8 +3,8 @@ import { action } from '@storybook/addon-actions';
 
 import {
   Behandling, FaktaArbeidsforhold, FamilieHendelseSamling, Personoversikt, UttakKontrollerFaktaPerioderWrapper,
-} from '@fpsak-frontend/types';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+} from '@navikt/fp-types';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import aksjonspunkterFarSøkerFørsteSeksUker from '../testdata/far-soker-forste-seks-uker/aksjonspunkter.json';
 import behandlingFarSøkerFørsteSeksUker from '../testdata/far-soker-forste-seks-uker/behandling.json';

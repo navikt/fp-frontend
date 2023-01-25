@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { Medlemskap, KodeverkMedNavn, StandardProsessPanelProps } from '@fpsak-frontend/types';
+import { Medlemskap, KodeverkMedNavn, StandardProsessPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
-import { OverstyringAksjonspunkter } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { OverstyringAksjonspunkter } from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 
 import VilkarresultatMedOverstyringForm from './components/VilkarresultatMedOverstyringForm';
 import messages from '../i18n/nb_NO.json';

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import { Label, Detail, Heading } from '@navikt/ds-react';
 
-import { Aksjonspunkt, BeregningsresultatEs } from '@fpsak-frontend/types';
+import { Aksjonspunkt, BeregningsresultatEs } from '@navikt/fp-types';
 import {
   VerticalSpacer, OverstyringKnapp, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
@@ -12,9 +12,9 @@ import {
 } from '@navikt/ft-form-validators';
 import { formatCurrencyWithKr, decodeHtmlEntity } from '@navikt/ft-utils';
 import { InputField, Form } from '@navikt/ft-form-hooks';
-import aksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { OverstyringPanel } from '@fpsak-frontend/prosess-felles';
-import { OverstyringBeregningAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import aksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { OverstyringPanel } from '@navikt/fp-prosess-felles';
+import { OverstyringBeregningAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './beregningsresultatEngangsstonadForm.less';
 

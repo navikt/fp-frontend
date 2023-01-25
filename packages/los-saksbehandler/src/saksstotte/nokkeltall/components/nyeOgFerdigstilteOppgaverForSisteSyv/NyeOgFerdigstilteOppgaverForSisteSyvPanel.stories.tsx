@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { BehandlingType } from '@navikt/ft-kodeverk';
 
-import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
+import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
 
 import NyeOgFerdigstilteOppgaverForSisteSyvPanel from './NyeOgFerdigstilteOppgaverForSisteSyvPanel';
 

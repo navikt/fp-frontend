@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { AlleKodeverk, AnkeVurdering } from '@fpsak-frontend/types';
+import { AlleKodeverk, AnkeVurdering } from '@navikt/fp-types';
 import BehandleAnkeForm, { BehandlingInfo } from './components/BehandleAnkeForm';
 import messages from '../i18n/nb_NO.json';
 

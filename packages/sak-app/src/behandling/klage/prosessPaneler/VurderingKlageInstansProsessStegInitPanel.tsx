@@ -3,9 +3,9 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { Fagsak } from '@fpsak-frontend/types';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { Fagsak } from '@navikt/fp-types';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import VurderingFellesProsessStegInitPanel from './VurderingFellesProsessStegInitPanel';

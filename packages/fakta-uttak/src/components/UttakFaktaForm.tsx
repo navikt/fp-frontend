@@ -12,13 +12,13 @@ import {
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { AksjonspunktStatus, isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 
-import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
-import { FaktaSubmitButtonNew, FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
+import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
+import { FaktaSubmitButtonNew, FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
 import {
   Aksjonspunkt, KontrollerFaktaPeriode, Ytelsefordeling, AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold,
-} from '@fpsak-frontend/types';
-import { BekreftUttaksperioderAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+} from '@navikt/fp-types';
+import { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 
 import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
 import UttakFaktaTable from './UttakFaktaTable';

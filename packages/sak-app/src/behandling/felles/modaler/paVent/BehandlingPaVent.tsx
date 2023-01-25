@@ -4,11 +4,11 @@ import React, {
 import { KodeverkType, isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 import { AlleKodeverk, AlleKodeverkTilbakekreving } from '@navikt/ft-types';
 
-import { RequestApi } from '@fpsak-frontend/rest-api';
-import { Behandling } from '@fpsak-frontend/types';
-import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
-import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { RequestApi } from '@navikt/fp-rest-api';
+import { Behandling } from '@navikt/fp-types';
+import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
+import SettPaVentModalIndex from '@navikt/fp-modal-sett-pa-vent';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import { BehandlingFellesApiKeys } from '../../data/behandlingFellesApi';
 
 export type SettPaVentParams = {

@@ -17,15 +17,15 @@ import { getLanguageFromSprakkode } from '@navikt/ft-utils';
 import {
   hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-form-validators';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import questionNormalUrl from '@fpsak-frontend/assets/images/question_normal.svg';
-import questionHoverUrl from '@fpsak-frontend/assets/images/question_hover.svg';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import tilbakekrevingVidereBehandling from '@navikt/fp-kodeverk/src/tilbakekrevingVidereBehandling';
+import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import questionNormalUrl from '@navikt/fp-assets/images/question_normal.svg';
+import questionHoverUrl from '@navikt/fp-assets/images/question_hover.svg';
 import {
   Aksjonspunkt, Fagsak, SimuleringResultat, TilbakekrevingValg,
-} from '@fpsak-frontend/types';
-import { VurderFeilutbetalingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import { VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import AvregningSummary from './AvregningSummary';
 import AvregningTable from './AvregningTable';

@@ -1,5 +1,5 @@
-import { RestApiConfigBuilder, createRequestApi, RestKey } from '@fpsak-frontend/rest-api';
-import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiConfigBuilder, createRequestApi, RestKey } from '@navikt/fp-rest-api';
+import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import {
   DokumentasjonVurderingBehov,
   FaktaArbeidsforhold,
@@ -9,7 +9,7 @@ import {
   UttakKontrollerFaktaPerioderWrapper,
   UttaksresultatPeriode,
   UttakStonadskontoer,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 import { behandlingFellesEndepunkter } from '../../../felles/data/behandlingFellesApi';
 

@@ -1,6 +1,6 @@
 # fpsak
 
 ```
-yarn add @fpsak-frontend/sak-app
+yarn add @navikt/fp-sak-app
 ```
 

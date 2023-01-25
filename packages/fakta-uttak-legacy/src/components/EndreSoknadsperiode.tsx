@@ -2,12 +2,12 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import moment from 'moment';
 import { FlexColumn, FlexRow, ArrowBox } from '@navikt/ft-ui-komponenter';
 
-import oppholdArsakType, { oppholdArsakKontoNavn } from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
+import oppholdArsakType, { oppholdArsakKontoNavn } from '@navikt/fp-kodeverk/src/oppholdArsakType';
 import {
   hasValidDecimal, maxValue, minValue, required,
 } from '@navikt/ft-form-validators';
-import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
-import StonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
+import { uttakPeriodeNavn } from '@navikt/fp-kodeverk/src/uttakPeriodeType';
+import StonadskontoType from '@navikt/fp-kodeverk/src/stonadskontoType';
 
 import SelectField from '../form/SelectField';
 import DecimalField from '../form/DecimalField';

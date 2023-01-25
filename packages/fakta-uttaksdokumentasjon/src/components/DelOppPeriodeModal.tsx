@@ -12,8 +12,8 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 
-import { DokumentasjonVurderingBehov } from '@fpsak-frontend/types';
-import advarselImageUrl from '@fpsak-frontend/assets/images/advarsel.svg';
+import { DokumentasjonVurderingBehov } from '@navikt/fp-types';
+import advarselImageUrl from '@navikt/fp-assets/images/advarsel.svg';
 
 import styles from './delOppPeriodeModal.less';
 

@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import {
   ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps, Opptjening,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import OpptjeningFaktaPanel from './components/OpptjeningFaktaPanel';

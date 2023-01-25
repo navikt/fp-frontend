@@ -4,9 +4,9 @@ import React, {
 import { useIntl } from 'react-intl';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 
-import AnkeProsessIndex from '@fpsak-frontend/prosess-anke';
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { AnkeVurdering } from '@fpsak-frontend/types';
+import AnkeProsessIndex from '@navikt/fp-prosess-anke';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { AnkeVurdering } from '@navikt/fp-types';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';

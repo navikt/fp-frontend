@@ -7,7 +7,7 @@ import { required } from '@navikt/ft-form-validators';
 import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { Permisjon } from '@fpsak-frontend/types';
+import { Permisjon } from '@navikt/fp-types';
 
 import styles from './tilretteleggingArbeidsforholdSection.less';
 

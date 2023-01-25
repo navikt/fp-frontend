@@ -1,7 +1,7 @@
 import {
   FunctionComponent, useContext, useEffect, useState,
 } from 'react';
-import { RestApiDispatchContext } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiDispatchContext } from '@navikt/fp-rest-api-hooks';
 
 interface Props {
     children: any;

@@ -2,10 +2,10 @@ import React, {
   useState, useMemo, useCallback, FunctionComponent, useEffect,
 } from 'react';
 
-import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import SettPaVentModalIndex from '@navikt/fp-modal-sett-pa-vent';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen, KodeverkType } from '@navikt/ft-kodeverk';
-import { Behandling } from '@fpsak-frontend/types';
+import { Behandling } from '@navikt/fp-types';
 import { AlleKodeverk, AlleKodeverkTilbakekreving } from '@navikt/ft-types';
 
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';

@@ -3,7 +3,7 @@ import {
   DateLabel, Table, TableColumn, TableRow,
 } from '@navikt/ft-ui-komponenter';
 
-import { MedlemPeriode } from '@fpsak-frontend/types';
+import { MedlemPeriode } from '@navikt/fp-types';
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 

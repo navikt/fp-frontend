@@ -3,12 +3,12 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import OmsorgFaktaIndex from '@fpsak-frontend/fakta-omsorg';
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import OmsorgFaktaIndex from '@navikt/fakta-omsorg';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   Personoversikt, Ytelsefordeling,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';

@@ -4,10 +4,10 @@ import React, {
 import { IntlShape, useIntl } from 'react-intl';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import ForeldreansvarVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-foreldreansvar';
-import { Aksjonspunkt } from '@fpsak-frontend/types';
+import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import ForeldreansvarVilkarProsessIndex from '@navikt/fp-prosess-vilkar-foreldreansvar';
+import { Aksjonspunkt } from '@navikt/fp-types';
 
 import InngangsvilkarPanelInitProps from '../../../../felles/typer/inngangsvilkarPanelInitProps';
 import InngangsvilkarDefaultInitPanel from '../../../../felles/prosess/InngangsvilkarDefaultInitPanel';

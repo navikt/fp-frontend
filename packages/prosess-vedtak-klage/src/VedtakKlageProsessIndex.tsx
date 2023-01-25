@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { KlageVurdering, StandardProsessPanelProps } from '@fpsak-frontend/types';
+import { KlageVurdering, StandardProsessPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import VedtakKlageForm, { ForhandsvisData } from './components/VedtakKlageForm';

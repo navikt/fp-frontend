@@ -12,7 +12,7 @@ import {
   hasValidText, maxLength, minLength, required, isRequiredMessage,
 } from '@navikt/ft-form-validators';
 
-import { TotrinnskontrollSkjermlenkeContext } from '@fpsak-frontend/types';
+import { TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
 import styles from './godkjenningPanel.less';
 

@@ -12,17 +12,17 @@ import {
   formHooks,
 } from '@navikt/ft-form-hooks';
 
-import avslagsarsakCodes from '@fpsak-frontend/kodeverk/src/avslagsarsakCodes';
-import konsekvensForYtelsen from '@fpsak-frontend/kodeverk/src/konsekvensForYtelsen';
-import { isAvslag, isInnvilget, isOpphor } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
-import popOutPilSvg from '@fpsak-frontend/assets/images/pop-out-pil.svg';
-import endreSvg from '@fpsak-frontend/assets/images/endre.svg';
-import endreDisabletSvg from '@fpsak-frontend/assets/images/endre_disablet.svg';
-import { Behandling, Aksjonspunkt, Behandlingsresultat } from '@fpsak-frontend/types';
-import behandlingStatusCode from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import avslattImage from '@fpsak-frontend/assets/images/avslaatt_hover.svg';
-import innvilgetImage from '@fpsak-frontend/assets/images/innvilget_hover.svg';
-import { AsyncPollingStatus } from '@fpsak-frontend/rest-api';
+import avslagsarsakCodes from '@navikt/fp-kodeverk/src/avslagsarsakCodes';
+import konsekvensForYtelsen from '@navikt/fp-kodeverk/src/konsekvensForYtelsen';
+import { isAvslag, isInnvilget, isOpphor } from '@navikt/fp-kodeverk/src/behandlingResultatType';
+import popOutPilSvg from '@navikt/fp-assets/images/pop-out-pil.svg';
+import endreSvg from '@navikt/fp-assets/images/endre.svg';
+import endreDisabletSvg from '@navikt/fp-assets/images/endre_disablet.svg';
+import { Behandling, Aksjonspunkt, Behandlingsresultat } from '@navikt/fp-types';
+import behandlingStatusCode from '@navikt/fp-kodeverk/src/behandlingStatus';
+import avslattImage from '@navikt/fp-assets/images/avslaatt_hover.svg';
+import innvilgetImage from '@navikt/fp-assets/images/innvilget_hover.svg';
+import { AsyncPollingStatus } from '@navikt/fp-rest-api';
 
 import ManueltVedtaksbrevPanel from './ManueltVedtaksbrevPanel';
 import VedtakHelpTextPanel from './VedtakHelpTextPanel';

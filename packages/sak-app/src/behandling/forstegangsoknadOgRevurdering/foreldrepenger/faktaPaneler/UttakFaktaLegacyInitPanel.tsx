@@ -3,13 +3,13 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import UttakFaktaLegacyIndex from '@fpsak-frontend/fakta-uttak-legacy';
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import UttakFaktaLegacyIndex from '@navikt/fp-fakta-uttak-legacy';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   AksessRettigheter, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelseSamling,
   Personoversikt, UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';

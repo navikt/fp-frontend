@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { StandardFaktaPanelProps, Soknad, Medlemskap } from '@fpsak-frontend/types';
+import { StandardFaktaPanelProps, Soknad, Medlemskap } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import MedlemskapInfoPanel from './components/MedlemskapInfoPanel';
