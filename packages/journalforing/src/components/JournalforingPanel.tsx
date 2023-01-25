@@ -7,7 +7,8 @@ type OwnProps = Readonly<{
 }>;
 
 /**
- * JournalforingPanel - Wrapperkomponent som holder på alle paneler i journalføringspanelet. Children vil her være alle paneler i pakken journalforing utenom JournalforingIndex
+ * JournalforingPanel - Wrapperkomponent som holder på alle paneler i journalføringspanelet.
+ * Children vil her være alle paneler i pakken journalforing utenom JournalforingIndex
  */
 const JournalforingPanel: FunctionComponent<OwnProps> = ({
   children,
