@@ -27,6 +27,7 @@
     "@fpsak-frontend/fakta-uttaksdokumentasjon": "1.0.0",
     "@fpsak-frontend/fakta-verge": "1.0.0",
     "@fpsak-frontend/fakta-ytelser": "1.0.0",
+    "@fpsak-frontend/journalforing": "1.0.0",
     "@fpsak-frontend/kodeverk": "1.0.0",
     "@fpsak-frontend/konstanter": "1.0.0",
     "@fpsak-frontend/los-avdelingsleder": "1.0.0",
