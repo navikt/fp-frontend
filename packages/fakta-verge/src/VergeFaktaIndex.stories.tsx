@@ -2,11 +2,11 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import VergeFaktaIndex from '@fpsak-frontend/fakta-verge';
-import { Behandling } from '@fpsak-frontend/types';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import VergeFaktaIndex from '@navikt/fp-fakta-verge';
+import { Behandling } from '@navikt/fp-types';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 const aksjonspunkter = [{
   definisjon: aksjonspunktCodes.AVKLAR_VERGE,

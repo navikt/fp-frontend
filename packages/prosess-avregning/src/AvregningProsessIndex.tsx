@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import {
   Fagsak, SimuleringResultat, TilbakekrevingValg, StandardProsessPanelProps,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import AvregningPanel from './components/AvregningPanel';

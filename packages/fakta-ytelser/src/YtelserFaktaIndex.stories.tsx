@@ -1,11 +1,11 @@
 import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import relatertYtelseType from '@fpsak-frontend/kodeverk/src/relatertYtelseType';
-import relatertYtelseTilstand from '@fpsak-frontend/kodeverk/src/relatertYtelseTilstand';
-import YtelserFaktaIndex from '@fpsak-frontend/fakta-ytelser';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import { InntektArbeidYtelse } from '@fpsak-frontend/types';
+import relatertYtelseType from '@navikt/fp-kodeverk/src/relatertYtelseType';
+import relatertYtelseTilstand from '@navikt/fp-kodeverk/src/relatertYtelseTilstand';
+import YtelserFaktaIndex from '@navikt/fp-fakta-ytelser';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { InntektArbeidYtelse } from '@navikt/fp-types';
 
 const defaultInntektArbeidYtelse = {
   inntektsmeldinger: [{

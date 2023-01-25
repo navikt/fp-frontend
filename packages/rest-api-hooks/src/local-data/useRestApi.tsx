@@ -2,7 +2,7 @@ import {
   useState, useEffect, DependencyList,
 } from 'react';
 
-import { REQUEST_POLLING_CANCELLED, RequestApi, RestKey } from '@fpsak-frontend/rest-api';
+import { REQUEST_POLLING_CANCELLED, RequestApi, RestKey } from '@navikt/fp-rest-api';
 
 import RestApiState from '../RestApiState';
 

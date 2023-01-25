@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import {
   StandardFaktaPanelProps, FamilieHendelse, FamilieHendelseSamling, Soknad,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import FodselInfoPanel from './components/FodselInfoPanel';

@@ -1,7 +1,7 @@
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { VilkarType } from '@navikt/ft-kodeverk';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Vilkar } from '@fpsak-frontend/types';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { Vilkar } from '@navikt/fp-types';
 
 import skalViseProsessPanel from './skalViseProsessPanel';
 

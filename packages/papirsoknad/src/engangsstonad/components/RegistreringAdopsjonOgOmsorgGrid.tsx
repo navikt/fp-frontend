@@ -12,8 +12,8 @@ import {
   OmsorgOgAdopsjonFormValues,
   SoknadData,
   OmsorgOgAdopsjonTransformedFormValues,
-} from '@fpsak-frontend/papirsoknad-ui-komponenter';
-import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
+} from '@navikt/fp-papirsoknad-ui-komponenter';
+import familieHendelseType from '@navikt/fp-kodeverk/src/familieHendelseType';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import styles from './registreringAdopsjonOgOmsorgGrid.less';

@@ -3,17 +3,17 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import { isAvslag } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import VedtakProsessIndex, { ForhandsvisData } from '@fpsak-frontend/prosess-vedtak';
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
+import { isAvslag } from '@navikt/fp-kodeverk/src/behandlingResultatType';
+import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import VedtakProsessIndex, { ForhandsvisData } from '@navikt/fp-prosess-vedtak';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
   Aksjonspunkt, Behandling, Behandlingsresultat, Beregningsgrunnlag, BeregningsresultatFp, Fagsak,
   ForhåndsvisMeldingParams, Medlemskap, SimuleringResultat, TilbakekrevingValg, Vilkar,
-} from '@fpsak-frontend/types';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+} from '@navikt/fp-types';
+import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import { restApiSvpHooks } from '../data/svpBehandlingApi';

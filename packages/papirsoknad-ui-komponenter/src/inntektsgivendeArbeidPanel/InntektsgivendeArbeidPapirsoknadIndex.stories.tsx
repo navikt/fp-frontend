@@ -6,7 +6,7 @@ import { Button } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import InntektsgivendeArbeidPapirsoknadIndex from './InntektsgivendeArbeidPapirsoknadIndex';
 

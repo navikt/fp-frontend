@@ -9,14 +9,14 @@ import {
   Image, VerticalSpacer, Table, TableRow, TableColumn, DateLabel,
 } from '@navikt/ft-ui-komponenter';
 
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { getKodeverknavnFraKode } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
-import { TimeoutError } from '@fpsak-frontend/rest-api';
-import menuIconBlueUrl from '@fpsak-frontend/assets/images/ic-menu-18px_blue.svg';
-import menuIconBlackUrl from '@fpsak-frontend/assets/images/ic-menu-18px_black.svg';
-import bubbletextUrl from '@fpsak-frontend/assets/images/bubbletext.svg';
-import bubbletextFilledUrl from '@fpsak-frontend/assets/images/bubbletext_filled.svg';
-import { Oppgave, OppgaveStatus } from '@fpsak-frontend/los-felles';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { getKodeverknavnFraKode } from '@navikt/fp-kodeverk/src/kodeverkUtils';
+import { TimeoutError } from '@navikt/fp-rest-api';
+import menuIconBlueUrl from '@navikt/fp-assets/images/ic-menu-18px_blue.svg';
+import menuIconBlackUrl from '@navikt/fp-assets/images/ic-menu-18px_black.svg';
+import bubbletextUrl from '@navikt/fp-assets/images/bubbletext.svg';
+import bubbletextFilledUrl from '@navikt/fp-assets/images/bubbletext_filled.svg';
+import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
 
 import BehandlingPollingTimoutModal from './BehandlingPollingTimoutModal';
 import OppgaveHandlingerMenu from './menu/OppgaveHandlingerMenu';

@@ -16,7 +16,7 @@ import {
 import { KodeverkMedNavn } from '@navikt/ft-types';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
-import arbeidskategori from '@fpsak-frontend/kodeverk/src/arbeidskategori';
+import arbeidskategori from '@navikt/fp-kodeverk/src/arbeidskategori';
 
 import { gyldigeUttakperioder } from './RenderPermisjonPeriodeFieldArray';
 

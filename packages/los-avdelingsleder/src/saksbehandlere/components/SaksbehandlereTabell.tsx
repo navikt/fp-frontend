@@ -7,7 +7,7 @@ import { BodyShort, Label } from '@navikt/ds-react';
 import {
   Table, TableRow, TableColumn, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import removeIcon from '@fpsak-frontend/assets/images/remove.svg';
+import removeIcon from '@navikt/fp-assets/images/remove.svg';
 
 import Saksbehandler from '../../typer/saksbehandlerAvdelingTsType';
 import SletteSaksbehandlerModal from './SletteSaksbehandlerModal';

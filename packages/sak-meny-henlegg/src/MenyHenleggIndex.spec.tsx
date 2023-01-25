@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import { Modal } from '@navikt/ds-react';
-import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
+import dokumentMalType from '@navikt/fp-kodeverk/src/dokumentMalType';
 import * as stories from './MenyHenleggIndex.stories';
 
 const {

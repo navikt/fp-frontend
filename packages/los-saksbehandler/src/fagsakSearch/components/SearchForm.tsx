@@ -8,7 +8,7 @@ import {
 import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validators';
 import { Form, InputField, CheckboxField } from '@navikt/ft-form-hooks';
 
-import advarselIcon from '@fpsak-frontend/assets/images/advarsel.svg';
+import advarselIcon from '@navikt/fp-assets/images/advarsel.svg';
 
 import styles from './searchForm.less';
 

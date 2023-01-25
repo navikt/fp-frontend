@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { Detail } from '@navikt/ds-react';
 
-import { Behandlingsresultat } from '@fpsak-frontend/types';
+import { Behandlingsresultat } from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import { decodeHtmlEntity, getLanguageFromSprakkode } from '@navikt/ft-utils';

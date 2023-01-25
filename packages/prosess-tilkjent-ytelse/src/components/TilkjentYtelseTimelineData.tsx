@@ -3,16 +3,16 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import moment from 'moment';
 import { Label, BodyShort } from '@navikt/ds-react';
 
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 import {
   Table, TableColumn, TableRow, VerticalSpacer, FlexContainer, FlexRow, FlexColumn,
 } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
+import aktivitetStatus from '@navikt/fp-kodeverk/src/aktivitetStatus';
+import { uttakPeriodeNavn } from '@navikt/fp-kodeverk/src/uttakPeriodeType';
 import { TimeLineButton, TimeLineDataContainer } from '@navikt/ft-tidslinje';
-import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
-import { ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriodeAndel, AlleKodeverk } from '@fpsak-frontend/types';
+import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
+import { ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriodeAndel, AlleKodeverk } from '@navikt/fp-types';
 
 import { PeriodeMedId } from './TilkjentYtelse';
 

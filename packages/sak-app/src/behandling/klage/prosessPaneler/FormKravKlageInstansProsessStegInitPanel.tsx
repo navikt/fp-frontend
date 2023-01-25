@@ -4,12 +4,12 @@ import React, {
 import { useIntl } from 'react-intl';
 import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
 
-import FormkravProsessIndex from '@fpsak-frontend/prosess-formkrav';
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { KlageVurdering } from '@fpsak-frontend/types';
+import FormkravProsessIndex from '@navikt/fp-prosess-formkrav';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { KlageVurdering } from '@navikt/fp-types';
 
-import { isKlageAvvist } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
-import AksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { isKlageAvvist } from '@navikt/fp-kodeverk/src/behandlingResultatType';
+import AksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';

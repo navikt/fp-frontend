@@ -7,13 +7,13 @@ import {
   Image, FlexColumn, FlexContainer, FlexRow, PeriodLabel, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
-import telefonImageUrl from '@fpsak-frontend/assets/images/phone-3.svg';
-import { Inntektsmelding, AoIArbeidsforhold, AlleKodeverk } from '@fpsak-frontend/types';
+import telefonImageUrl from '@navikt/fp-assets/images/phone-3.svg';
+import { Inntektsmelding, AoIArbeidsforhold, AlleKodeverk } from '@navikt/fp-types';
 import { formatCurrencyNoKr } from '@navikt/ft-utils';
-import { getKodeverknavnFraKode } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { hentDokumentLenke } from '@fpsak-frontend/konstanter';
-import dokumentSvg from '@fpsak-frontend/assets/images/dokument_filled.svg';
+import { getKodeverknavnFraKode } from '@navikt/fp-kodeverk/src/kodeverkUtils';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { hentDokumentLenke } from '@navikt/fp-konstanter';
+import dokumentSvg from '@navikt/fp-assets/images/dokument_filled.svg';
 
 import styles from './inntektsmeldingOpplysningerPanel.less';
 

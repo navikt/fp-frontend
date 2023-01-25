@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { InntektArbeidYtelse, AlleKodeverk } from '@fpsak-frontend/types';
+import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { InntektArbeidYtelse, AlleKodeverk } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import YtelserFaktaPanel from './components/YtelserFaktaPanel';

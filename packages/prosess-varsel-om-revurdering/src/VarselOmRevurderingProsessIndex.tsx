@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import {
   FamilieHendelse, FamilieHendelseSamling, Soknad, StandardProsessPanelProps,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import VarselOmRevurderingForm, { ForhandsvisData } from './components/VarselOmRevurderingForm';

@@ -1,9 +1,9 @@
 import {
   RestApiConfigBuilder, createRequestApi, RestKey,
-} from '@fpsak-frontend/rest-api';
-import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
-import { FagsakEnkel, AlleKodeverk } from '@fpsak-frontend/types';
-import { SaksbehandlerForFlytting, Oppgave, OppgaveStatus } from '@fpsak-frontend/los-felles';
+} from '@navikt/fp-rest-api';
+import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
+import { FagsakEnkel, AlleKodeverk } from '@navikt/fp-types';
+import { SaksbehandlerForFlytting, Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
 
 import NyeOgFerdigstilteOppgaver from '../typer/nyeOgFerdigstilteOppgaverTsType';
 import Saksbehandler from '../typer/saksbehandlerTsType';

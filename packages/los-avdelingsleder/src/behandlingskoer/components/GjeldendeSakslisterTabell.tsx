@@ -11,8 +11,8 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 
-import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
-import removeIcon from '@fpsak-frontend/assets/images/remove.svg';
+import addCircleIcon from '@navikt/fp-assets/images/add-circle.svg';
+import removeIcon from '@navikt/fp-assets/images/remove.svg';
 
 import { restApiHooks, RestApiPathsKeys } from '../../data/fplosRestApi';
 import useLosKodeverk from '../../data/useLosKodeverk';

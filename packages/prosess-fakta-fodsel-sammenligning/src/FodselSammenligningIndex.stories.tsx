@@ -1,8 +1,8 @@
 import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { AvklartBarn, FamilieHendelse, Soknad } from '@fpsak-frontend/types';
+import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 import FodselSammenligningIndex from './FodselSammenligningIndex';
 

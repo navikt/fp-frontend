@@ -5,10 +5,10 @@ import {
   VilkarUtfallType, BehandlingStatus,
 } from '@navikt/ft-kodeverk';
 
-import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import { Behandling } from '@fpsak-frontend/types';
+import { createRequestApi, RestApiConfigBuilder, RestKey } from '@navikt/fp-rest-api';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { Behandling } from '@navikt/fp-types';
 
 import * as Felles from './useStandardProsessPanelProps';
 import InngangsvilkarDefaultInitPanel from './InngangsvilkarDefaultInitPanel';

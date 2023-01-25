@@ -3,8 +3,8 @@ import { RawIntlProvider } from 'react-intl';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 import { createIntl } from '@navikt/ft-utils';
 
-import { Behandling } from '@fpsak-frontend/types';
-import { RequestApi } from '@fpsak-frontend/rest-api';
+import { Behandling } from '@navikt/fp-types';
+import { RequestApi } from '@navikt/fp-rest-api';
 
 import BehandlingContainer from './BehandlingContainer';
 import FaktaPanelInitProps from './typer/faktaPanelInitProps';

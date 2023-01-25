@@ -2,10 +2,10 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import {
   Aksjonspunkt, AlleKodeverk, Behandling, FamilieHendelseSamling, Personoversikt, Ytelsefordeling,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 import UttakFaktaIndex from './UttakFaktaIndex';
 import UttakInfoPanel from './components/UttakInfoPanel';

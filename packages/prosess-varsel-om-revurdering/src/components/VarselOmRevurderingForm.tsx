@@ -12,24 +12,24 @@ import {
 import {
   Form, RadioGroupPanel, TextAreaField,
 } from '@navikt/ft-form-hooks';
-import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import BehandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
 import { AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 import {
   hasValidText, minLength, maxLength, required,
 } from '@navikt/ft-form-validators';
 import { ISO_DATE_FORMAT, getLanguageFromSprakkode } from '@navikt/ft-utils';
-import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
-import SettPaVentModalIndex, { FormValues as ModalFormValues } from '@fpsak-frontend/modal-sett-pa-vent';
-import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
-import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
+import FodselSammenligningIndex from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
+import SettPaVentModalIndex, { FormValues as ModalFormValues } from '@navikt/fp-modal-sett-pa-vent';
+import Behandling from '@navikt/fp-types/src/behandlingTsType';
+import dokumentMalType from '@navikt/fp-kodeverk/src/dokumentMalType';
 import {
   Aksjonspunkt, FamilieHendelseSamling, Soknad, FamilieHendelse, AlleKodeverk,
-} from '@fpsak-frontend/types';
-import { VarselRevurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
+} from '@navikt/fp-types';
+import { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 
 import styles from './varselOmRevurderingForm.less';
 

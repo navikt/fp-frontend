@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 
-import { AlleKodeverk, AnkeVurdering } from '@fpsak-frontend/types';
+import { AlleKodeverk, AnkeVurdering } from '@navikt/fp-types';
 import BehandleResultatForm from './components/BehandleResultatForm';
 import messages from '../i18n/nb_NO.json';
 

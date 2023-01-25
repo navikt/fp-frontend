@@ -4,9 +4,9 @@ import { Label, BodyShort, Detail } from '@navikt/ds-react';
 
 import {
   AlleKodeverk, Vilkar, Behandlingsresultat,
-} from '@fpsak-frontend/types';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+} from '@navikt/fp-types';
+import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
+import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
 import { TextAreaField, formHooks } from '@navikt/ft-form-hooks';
 import {
   hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew,
@@ -14,8 +14,8 @@ import {
 import { decodeHtmlEntity, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 
 import { hasIkkeOppfyltSoknadsfristvilkar } from '../felles/VedtakHelper';
 

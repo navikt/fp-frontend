@@ -2,11 +2,11 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import { BehandlingAppKontekst } from '@fpsak-frontend/types';
-import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import MenyHenleggIndex from '@fpsak-frontend/sak-meny-henlegg';
+import { BehandlingAppKontekst } from '@navikt/fp-types';
+import behandlingResultatType from '@navikt/fp-kodeverk/src/behandlingResultatType';
+import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import MenyHenleggIndex from '@navikt/fp-sak-meny-henlegg';
 
 export default {
   title: 'sak/sak-meny-henlegg',

@@ -10,7 +10,7 @@ import {
 
 import {
   DokumentasjonVurderingBehov, UttakVurdering, UttakÅrsak, UttakType,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 import UttakDokumentasjonFaktaDetailForm from './UttakDokumentasjonFaktaDetailForm';
 

@@ -1,7 +1,7 @@
 import {
   RestApiConfigBuilder, createRequestApi, RestKey,
-} from '@fpsak-frontend/rest-api';
-import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
+} from '@navikt/fp-rest-api';
+import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
 
 export const RestApiPathsKeys = {

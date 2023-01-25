@@ -10,9 +10,9 @@ import BehandlingVelgerSakIndex from '@navikt/ft-sak-behandling-velger';
 import FagsakProfilSakIndex from '@navikt/ft-sak-fagsak-profil';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 
-import { BehandlingAppKontekst } from '@fpsak-frontend/types';
-import UkjentAdresseMeldingIndex from '@fpsak-frontend/sak-ukjent-adresse';
-import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
+import { BehandlingAppKontekst } from '@navikt/fp-types';
+import UkjentAdresseMeldingIndex from '@navikt/fp-sak-ukjent-adresse';
+import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 
 import {
   getLocationWithDefaultProsessStegAndFakta,

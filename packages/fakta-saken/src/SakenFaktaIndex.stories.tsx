@@ -2,14 +2,14 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { Behandling, Aksjonspunkt, Soknad } from '@fpsak-frontend/types';
-import SakenFaktaIndex from '@fpsak-frontend/fakta-saken';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
+import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import { Behandling, Aksjonspunkt, Soknad } from '@navikt/fp-types';
+import SakenFaktaIndex from '@navikt/fp-fakta-saken';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 const behandling = {
   uuid: '1',

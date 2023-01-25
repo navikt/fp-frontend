@@ -3,16 +3,16 @@ import { useIntl } from 'react-intl';
 import moment from 'moment';
 import { Label, BodyShort } from '@navikt/ds-react';
 
-import { FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
+import { FieldEditedInfo } from '@navikt/fp-fakta-felles';
 import { Datepicker, formHooks } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import {
   VerticalSpacer, FaktaGruppe, Image, FlexContainer, FlexRow, FlexColumn,
 } from '@navikt/ft-ui-komponenter';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
-import { BekreftDokumentertDatoAksjonspunktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import advarselImageUrl from '@fpsak-frontend/assets/images/advarsel.svg';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { FamilieHendelse, Soknad } from '@navikt/fp-types';
+import { BekreftDokumentertDatoAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import advarselImageUrl from '@navikt/fp-assets/images/advarsel.svg';
 
 import styles from './dokumentasjonFaktaForm.less';
 

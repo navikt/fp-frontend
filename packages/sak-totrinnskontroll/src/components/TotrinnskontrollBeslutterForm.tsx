@@ -5,15 +5,15 @@ import { Location } from 'history';
 import { Button } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
-import vurderPaNyttArsakType from '@fpsak-frontend/kodeverk/src/vurderPaNyttArsakType';
-import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import konsekvensForYtelsen from '@fpsak-frontend/kodeverk/src/konsekvensForYtelsen';
+import vurderPaNyttArsakType from '@navikt/fp-kodeverk/src/vurderPaNyttArsakType';
+import BehandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import konsekvensForYtelsen from '@navikt/fp-kodeverk/src/konsekvensForYtelsen';
 import { ariaCheck } from '@navikt/ft-form-validators';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { VerticalSpacer, AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import {
   BehandlingAppKontekst, KodeverkMedNavn, TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 import AksjonspunktGodkjenningFieldArray, { AksjonspunktGodkjenningData } from './AksjonspunktGodkjenningFieldArray';
 

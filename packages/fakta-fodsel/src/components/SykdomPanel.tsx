@@ -6,9 +6,9 @@ import { RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import {
   hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-form-validators';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Aksjonspunkt } from '@fpsak-frontend/types';
-import { VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { Aksjonspunkt } from '@navikt/fp-types';
+import { VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);

@@ -4,10 +4,10 @@ import { FormattedMessage } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 import {
   AlleKodeverk, KjønnkodeEnum, Personoversikt, Ytelsefordeling,
-} from '@fpsak-frontend/types';
-import { AvklarAnnenforelderHarRettAp, BekreftAleneomsorgVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import { AvklarAnnenforelderHarRettAp, BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { Aksjonspunkt } from '@navikt/ft-types';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import AlleBarnPanel from './personer/AlleBarnPanel';
 import ForelderPanel from './personer/ForelderPanel';
 import AleneomsorgForm, { FormValues as AleneOmsorgValues } from './forms/AleneomsorgForm';

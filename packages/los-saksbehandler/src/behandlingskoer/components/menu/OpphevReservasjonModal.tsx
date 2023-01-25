@@ -9,7 +9,7 @@ import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import { Oppgave, Modal } from '@fpsak-frontend/los-felles';
+import { Oppgave, Modal } from '@navikt/fp-los-felles';
 
 import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosSaksbehandlerRestApi';
 

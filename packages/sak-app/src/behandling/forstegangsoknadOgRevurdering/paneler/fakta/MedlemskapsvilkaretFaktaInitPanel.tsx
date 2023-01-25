@@ -3,10 +3,10 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import MedlemskapFaktaIndex from '@fpsak-frontend/fakta-medlemskap';
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import { Medlemskap, Soknad } from '@fpsak-frontend/types';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import MedlemskapFaktaIndex from '@navikt/fp-fakta-medlemskap';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import { Medlemskap, Soknad } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';

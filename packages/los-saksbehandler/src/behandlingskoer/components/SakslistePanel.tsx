@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { Oppgave } from '@fpsak-frontend/los-felles';
+import { Oppgave } from '@navikt/fp-los-felles';
 
 import { getValueFromLocalStorage, setValueInLocalStorage, removeValueFromLocalStorage } from '../../data/localStorageHelper';
 import Saksliste from '../../typer/sakslisteTsType';

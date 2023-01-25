@@ -16,13 +16,13 @@ import {
 import {
   AlleKodeverk,
   AoIArbeidsforhold, Inntektsmelding, Inntektspost, ManglendeInntektsmeldingVurdering,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image,
 } from '@navikt/ft-ui-komponenter';
-import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
-import questionNormalUrl from '@fpsak-frontend/assets/images/question_normal.svg';
-import questionHoverUrl from '@fpsak-frontend/assets/images/question_hover.svg';
+import ArbeidsforholdKomplettVurderingType from '@navikt/fp-kodeverk/src/arbeidsforholdKomplettVurderingType';
+import questionNormalUrl from '@navikt/fp-assets/images/question_normal.svg';
+import questionHoverUrl from '@navikt/fp-assets/images/question_hover.svg';
 
 import ArbeidsforholdOgInntekt from '../../types/arbeidsforholdOgInntekt';
 import ArbeidsforholdInformasjonPanel from '../felles/ArbeidsforholdInformasjonPanel';

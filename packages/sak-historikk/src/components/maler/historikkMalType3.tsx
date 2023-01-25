@@ -2,9 +2,9 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
 import { Label, BodyShort } from '@navikt/ds-react';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { HistorikkInnslagAksjonspunkt } from '@fpsak-frontend/types';
+import { HistorikkInnslagAksjonspunkt } from '@navikt/fp-types';
 
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { findHendelseText } from './felles/historikkUtils';

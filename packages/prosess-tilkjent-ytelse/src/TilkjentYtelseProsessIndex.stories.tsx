@@ -2,20 +2,20 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import arbeidsforholdHandlingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdHandlingType';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import stonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
-import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import arbeidsforholdHandlingType from '@navikt/fp-kodeverk/src/arbeidsforholdHandlingType';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import aktivitetStatus from '@navikt/fp-kodeverk/src/aktivitetStatus';
+import stonadskontoType from '@navikt/fp-kodeverk/src/stonadskontoType';
+import navBrukerKjonn from '@navikt/fp-kodeverk/src/navBrukerKjonn';
+import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import soknadType from '@navikt/fp-kodeverk/src/soknadType';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import {
   Aksjonspunkt,
   Behandling, BeregningsresultatFp, Fagsak, FamilieHendelse, FamilieHendelseSamling, Feriepengegrunnlag, Personoversikt, Soknad,
-} from '@fpsak-frontend/types';
-import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import TilkjentYtelseProsessIndex from './TilkjentYtelseProsessIndex';
 

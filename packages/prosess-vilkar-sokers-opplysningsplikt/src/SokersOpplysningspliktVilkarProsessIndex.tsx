@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
-import { ArbeidsgiverOpplysningerPerId, Soknad, StandardProsessPanelProps } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, Soknad, StandardProsessPanelProps } from '@navikt/fp-types';
 
 import SokersOpplysningspliktForm from './components/SokersOpplysningspliktForm';
 import messages from '../i18n/nb_NO.json';

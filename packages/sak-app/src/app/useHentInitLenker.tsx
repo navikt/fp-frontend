@@ -1,4 +1,4 @@
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import {
   FpsakApiKeys, restApiHooks, requestApi, LinkCategory,

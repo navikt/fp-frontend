@@ -2,14 +2,14 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Detail } from '@navikt/ds-react';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
 import { required } from '@navikt/ft-form-validators';
 import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
-import { FamilieHendelse, AlleKodeverk } from '@fpsak-frontend/types';
-import { BekreftMannAdoptererAksjonspunktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import { FamilieHendelse, AlleKodeverk } from '@navikt/fp-types';
+import { BekreftMannAdoptererAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './mannAdoptererAleneFaktaForm.less';
 

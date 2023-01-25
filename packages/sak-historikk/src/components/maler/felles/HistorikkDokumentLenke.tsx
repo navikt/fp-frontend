@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { HistorikkInnslagDokumentLink } from '@fpsak-frontend/types';
+import { HistorikkInnslagDokumentLink } from '@navikt/fp-types';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import styles from '../historikkMalType.less';

@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { Modal } from '@navikt/ds-react';
 import { BehandlingResultatType, BehandlingType, BehandlingStatus } from '@navikt/ft-kodeverk';
 
-import { BehandlingAppKontekst } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import BeslutterModalIndex from './BeslutterModalIndex';
 

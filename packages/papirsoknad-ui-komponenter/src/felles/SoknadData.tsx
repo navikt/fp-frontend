@@ -1,7 +1,7 @@
 import { notNull } from '@navikt/ft-utils';
 import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
-import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
+import familieHendelseType from '@navikt/fp-kodeverk/src/familieHendelseType';
 
 class SoknadData {
   fagsakYtelseType: string;

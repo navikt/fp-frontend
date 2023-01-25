@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Label, BodyShort, Heading } from '@navikt/ds-react';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
+import { FamilieHendelse, Soknad } from '@navikt/fp-types';
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';

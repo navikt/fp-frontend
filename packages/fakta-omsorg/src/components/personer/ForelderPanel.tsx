@@ -4,11 +4,11 @@ import {
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Label, BodyShort } from '@navikt/ds-react';
-import { AlleKodeverk, KjønnkodeEnum, PersonopplysningerBasis } from '@fpsak-frontend/types';
-import kvinneIkonUrl from '@fpsak-frontend/assets/images/female.svg';
-import mannIkonUrl from '@fpsak-frontend/assets/images/male.svg';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { getKodeverknavnFraKode } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
+import { AlleKodeverk, KjønnkodeEnum, PersonopplysningerBasis } from '@navikt/fp-types';
+import kvinneIkonUrl from '@navikt/fp-assets/images/female.svg';
+import mannIkonUrl from '@navikt/fp-assets/images/male.svg';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { getKodeverknavnFraKode } from '@navikt/fp-kodeverk/src/kodeverkUtils';
 import Boks from '../Boks';
 
 import AdresseVisning from './AdresseVisning';

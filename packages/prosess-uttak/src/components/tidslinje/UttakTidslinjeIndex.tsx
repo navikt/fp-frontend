@@ -18,13 +18,13 @@ import {
   Ytelsefordeling,
   AlleKodeverk,
   PeriodeSoker,
-} from '@fpsak-frontend/types';
-import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
-import oppholdArsakType, { oppholdArsakMapper } from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
+} from '@navikt/fp-types';
+import soknadType from '@navikt/fp-kodeverk/src/soknadType';
+import oppholdArsakType, { oppholdArsakMapper } from '@navikt/fp-kodeverk/src/oppholdArsakType';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { uttakPeriodeNavn } from '@navikt/fp-kodeverk/src/uttakPeriodeType';
+import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
+import periodeResultatType from '@navikt/fp-kodeverk/src/periodeResultatType';
 
 import UttakTidslinje, { EventProps, PeriodeSøkerMedTidslinjedata, TidslinjeTimes } from './UttakTidslinje';
 import UttakTidslinjeHjelpetekster from './UttakTidslinjeHjelpetekster';

@@ -9,9 +9,9 @@ import {
 } from '@navikt/ft-form-validators';
 import { FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Aksjonspunkt } from '@navikt/ft-types';
-import { Ytelsefordeling } from '@fpsak-frontend/types';
-import { AvklarAnnenforelderHarRettAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { Ytelsefordeling } from '@navikt/fp-types';
+import { AvklarAnnenforelderHarRettAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 
 import Boks from '../Boks';
 import HarAnnenForelderRettFelter from './HarAnnenForelderRettFelter';

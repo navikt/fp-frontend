@@ -1,5 +1,5 @@
-import VilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import VilkarType from '@navikt/fp-kodeverk/src/vilkarType';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 
 import KodeverkMedNavn from './kodeverkMedNavnTsType';
 

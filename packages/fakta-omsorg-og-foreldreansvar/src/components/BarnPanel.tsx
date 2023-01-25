@@ -5,8 +5,8 @@ import { Label, BodyShort } from '@navikt/ds-react';
 
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Soknad } from '@fpsak-frontend/types';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { Soknad } from '@navikt/fp-types';
 
 interface OwnProps {
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};

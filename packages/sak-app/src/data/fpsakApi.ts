@@ -4,11 +4,11 @@ import {
 
 import {
   RestApiConfigBuilder, createRequestApi, RestKey, Link,
-} from '@fpsak-frontend/rest-api';
-import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
+} from '@navikt/fp-rest-api';
+import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import {
   ForhåndsvisMeldingParams, FagsakEnkel, Fagsak, FagsakDataFpTilbake, NavAnsatt, AlleKodeverk,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 type BehandlendeEnheter = {
   enhetId: string;

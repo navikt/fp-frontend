@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { BeregningsgrunnlagAndel, BeregningsgrunnlagPeriodeProp } from '@fpsak-frontend/types';
+import { BeregningsgrunnlagAndel, BeregningsgrunnlagPeriodeProp } from '@navikt/fp-types';
 import { BodyShort, Label } from '@navikt/ds-react';
 import { formatCurrencyNoKr } from '@navikt/ft-utils';
 import {
@@ -8,7 +8,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 
 import { FormattedMessage } from 'react-intl';
-import { Månedsgrunnlag } from '@fpsak-frontend/types/src/besteberegningTsTypes';
+import { Månedsgrunnlag } from '@navikt/fp-types/src/besteberegningTsTypes';
 
 interface OwnProps {
   periode: BeregningsgrunnlagPeriodeProp;

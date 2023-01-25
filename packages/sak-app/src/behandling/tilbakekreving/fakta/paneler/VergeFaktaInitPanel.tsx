@@ -1,13 +1,13 @@
 import React, { FunctionComponent, useMemo, useCallback } from 'react';
 
 import { Aksjonspunkt } from '@navikt/ft-types';
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import VergeFaktaIndex from '@fpsak-frontend/fakta-verge';
-import { AlleKodeverk, Behandling } from '@fpsak-frontend/types';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import VergeFaktaIndex from '@navikt/fp-fakta-verge';
+import { AlleKodeverk, Behandling } from '@navikt/fp-types';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 
 import { restApiTilbakekrevingHooks } from '../../data/tilbakekrevingBehandlingApi';
 import getAlleMerknaderFraBeslutter from '../../felles/util/getAlleMerknaderFraBeslutter';

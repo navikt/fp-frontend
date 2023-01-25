@@ -4,10 +4,10 @@ import { Form } from '@navikt/ft-form-hooks';
 import { AlleKodeverk } from '@navikt/ft-types';
 import { omitOne } from '@navikt/ft-utils';
 
-import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
+import familieHendelseType from '@navikt/fp-kodeverk/src/familieHendelseType';
 import {
   SoknadData, MottattDatoPapirsoknadIndex, LagreSoknadPapirsoknadIndex, rettighet, MottattDatoFormValues,
-} from '@fpsak-frontend/papirsoknad-ui-komponenter';
+} from '@navikt/fp-papirsoknad-ui-komponenter';
 
 import RegistreringAdopsjonOgOmsorgGrid, { FormValues as FormValuesAdopsjon } from './RegistreringAdopsjonOgOmsorgGrid';
 import RegistreringFodselGrid, { FormValues as FormValuesFodsel } from './RegistreringFodselGrid';

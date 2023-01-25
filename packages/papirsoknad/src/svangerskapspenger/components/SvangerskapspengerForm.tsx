@@ -25,8 +25,8 @@ import {
   Tilrettelegging,
   MottattDatoFormValues,
   ANDRE_YTELSER_FORM_NAME_PREFIX,
-} from '@fpsak-frontend/papirsoknad-ui-komponenter';
-import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
+} from '@navikt/fp-papirsoknad-ui-komponenter';
+import familieHendelseType from '@navikt/fp-kodeverk/src/familieHendelseType';
 
 const FRILANS_NAME_PREFIX = 'frilans';
 

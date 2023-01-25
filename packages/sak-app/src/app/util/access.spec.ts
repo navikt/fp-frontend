@@ -1,6 +1,6 @@
 import { FagsakStatus, BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
 
-import { NavAnsatt } from '@fpsak-frontend/types';
+import { NavAnsatt } from '@navikt/fp-types';
 
 import {
   kanOverstyreAccess,

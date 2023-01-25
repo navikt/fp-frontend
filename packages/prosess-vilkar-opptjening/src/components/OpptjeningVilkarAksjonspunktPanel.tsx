@@ -4,15 +4,15 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
+import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
   VilkarResultPicker, ProsessStegBegrunnelseTextFieldNew, ProsessPanelTemplate,
-} from '@fpsak-frontend/prosess-felles';
-import { Aksjonspunkt, Behandling, FastsattOpptjening } from '@fpsak-frontend/types';
-import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { AvklarOpptjeningsvilkaretAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-prosess-felles';
+import { Aksjonspunkt, Behandling, FastsattOpptjening } from '@navikt/fp-types';
+import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AvklarOpptjeningsvilkaretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import OpptjeningVilkarView from './OpptjeningVilkarView';
 

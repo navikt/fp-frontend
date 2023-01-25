@@ -5,10 +5,10 @@ import {
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
-import ankeVurderingType from '@fpsak-frontend/kodeverk/src/ankeVurdering';
-import { AlleKodeverk, AnkeVurdering } from '@fpsak-frontend/types';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import ankeVurderingOmgjoer from '@navikt/fp-kodeverk/src/ankeVurderingOmgjoer';
+import ankeVurderingType from '@navikt/fp-kodeverk/src/ankeVurdering';
+import { AlleKodeverk, AnkeVurdering } from '@navikt/fp-types';
+import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
 
 interface OwnProps {
   ankeVurdering?: AnkeVurdering;

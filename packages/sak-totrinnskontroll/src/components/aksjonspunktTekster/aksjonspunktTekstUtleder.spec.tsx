@@ -1,10 +1,10 @@
 import React from 'react';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import behandlingStatusCodes from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
-import { Behandlingsresultat, KodeverkMedNavn, TotrinnskontrollAksjonspunkt } from '@fpsak-frontend/types';
-import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import behandlingStatusCodes from '@navikt/fp-kodeverk/src/behandlingStatus';
+import faktaOmBeregningTilfelle from '@navikt/fp-kodeverk/src/faktaOmBeregningTilfelle';
+import { Behandlingsresultat, KodeverkMedNavn, TotrinnskontrollAksjonspunkt } from '@navikt/fp-types';
+import behandlingResultatType from '@navikt/fp-kodeverk/src/behandlingResultatType';
 
 import getAksjonspunkttekst from './aksjonspunktTekstUtleder';
 

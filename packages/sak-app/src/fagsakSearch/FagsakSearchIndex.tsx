@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 
 import {
   errorOfType, ErrorTypes, getErrorResponseData,
-} from '@fpsak-frontend/rest-api';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { FagsakEnkel } from '@fpsak-frontend/types';
-import FagsakSokSakIndex from '@fpsak-frontend/sak-sok';
+} from '@navikt/fp-rest-api';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { FagsakEnkel } from '@navikt/fp-types';
+import FagsakSokSakIndex from '@navikt/fp-sak-sok';
 
 import { pathToFagsak } from '../app/paths';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';

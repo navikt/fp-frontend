@@ -3,14 +3,14 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import AvregningProsessIndex from '@fpsak-frontend/prosess-avregning';
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import AvregningProsessIndex from '@navikt/fp-prosess-avregning';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import {
   Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg,
-} from '@fpsak-frontend/types';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+} from '@navikt/fp-types';
+import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import useStandardProsessPanelProps from '../../../felles/prosess/useStandardProsessPanelProps';

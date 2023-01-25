@@ -2,12 +2,12 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import opptjeningAktivitetType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import OpptjeningFaktaIndex from '@fpsak-frontend/fakta-opptjening';
-import { Behandling, Aksjonspunkt, Opptjening } from '@fpsak-frontend/types';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import opptjeningAktivitetType from '@navikt/fp-kodeverk/src/opptjeningAktivitetType';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import OpptjeningFaktaIndex from '@navikt/fp-fakta-opptjening';
+import { Behandling, Aksjonspunkt, Opptjening } from '@navikt/fp-types';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 const behandling = {
   uuid: '1',

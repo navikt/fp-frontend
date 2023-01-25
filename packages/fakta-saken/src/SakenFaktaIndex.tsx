@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { Soknad, StandardFaktaPanelProps } from '@fpsak-frontend/types';
+import { Soknad, StandardFaktaPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import SakenFaktaPanel from './components/SakenFaktaPanel';

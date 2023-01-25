@@ -1,4 +1,4 @@
-import TilbakekrevingKodeverkType from '@fpsak-frontend/kodeverk/src/tilbakekrevingKodeverkTyper';
+import TilbakekrevingKodeverkType from '@navikt/fp-kodeverk/src/tilbakekrevingKodeverkTyper';
 
 import KodeverkMedNavn from './kodeverkMedNavnTsType';
 

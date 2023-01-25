@@ -2,13 +2,13 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import FormkravProsessIndex from '@fpsak-frontend/prosess-formkrav';
-import { Aksjonspunkt, Behandling, KlageVurdering } from '@fpsak-frontend/types';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import klageVurderingCodes from '@navikt/fp-kodeverk/src/klageVurdering';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import FormkravProsessIndex from '@navikt/fp-prosess-formkrav';
+import { Aksjonspunkt, Behandling, KlageVurdering } from '@navikt/fp-types';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 const behandling = {
   uuid: '1',

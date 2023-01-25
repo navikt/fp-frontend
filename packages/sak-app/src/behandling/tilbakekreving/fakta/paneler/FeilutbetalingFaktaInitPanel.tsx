@@ -6,9 +6,9 @@ import {
   FeilutbetalingFakta, AlleKodeverk, Aksjonspunkt, AlleKodeverkTilbakekreving, FeilutbetalingAarsak,
 } from '@navikt/ft-types';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import { Behandling } from '@fpsak-frontend/types';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import { Behandling } from '@navikt/fp-types';
 
 import DynamicLoader from '../../../felles/DynamicLoader';
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';

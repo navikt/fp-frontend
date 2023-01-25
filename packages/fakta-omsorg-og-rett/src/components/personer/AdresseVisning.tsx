@@ -2,7 +2,7 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Label, BodyShort } from '@navikt/ds-react';
-import { PersonopplysningerBasis } from '@fpsak-frontend/types';
+import { PersonopplysningerBasis } from '@navikt/fp-types';
 import { OpplysningAdresseType } from '@navikt/ft-kodeverk';
 
 interface OwnProps {

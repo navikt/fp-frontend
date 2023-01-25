@@ -4,15 +4,15 @@ import { action } from '@storybook/addon-actions';
 import { AksjonspunktStatus, NavBrukerKjonn } from '@navikt/ft-kodeverk';
 import { Aksjonspunkt } from '@navikt/ft-types';
 
-import UttakProsessIndex from '@fpsak-frontend/prosess-uttak';
+import UttakProsessIndex from '@navikt/fp-prosess-uttak';
 import {
   Behandling, FamilieHendelseSamling, Personoversikt, Soknad, UttaksresultatPeriode, UttakStonadskontoer,
-} from '@fpsak-frontend/types';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import aksjonspunktType from '@fpsak-frontend/kodeverk/src/aksjonspunktType';
-import utsettelseArsakCodes from '@fpsak-frontend/kodeverk/src/utsettelseArsakCodes';
+} from '@navikt/fp-types';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import aksjonspunktType from '@navikt/fp-kodeverk/src/aksjonspunktType';
+import utsettelseArsakCodes from '@navikt/fp-kodeverk/src/utsettelseArsakCodes';
 
 const åpentAksjonspunkt = [{
   definisjon: AksjonspunktCode.FASTSETT_UTTAKPERIODER,

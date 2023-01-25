@@ -6,10 +6,10 @@ import { Button, BodyShort } from '@navikt/ds-react';
 import {
   VerticalSpacer, Image, FlexContainer, FlexRow, FlexColumn,
 } from '@navikt/ft-ui-komponenter';
-import advarselIcon from '@fpsak-frontend/assets/images/advarsel.svg';
+import advarselIcon from '@navikt/fp-assets/images/advarsel.svg';
 import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validators';
 import { Form, InputField } from '@navikt/ft-form-hooks';
-import { FagsakEnkel } from '@fpsak-frontend/types';
+import { FagsakEnkel } from '@navikt/fp-types';
 
 import styles from './searchForm.less';
 

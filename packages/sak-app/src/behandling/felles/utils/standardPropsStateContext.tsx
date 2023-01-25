@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import {
   AlleKodeverk, Fagsak, Behandling, AksessRettigheter,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 type InputValues = {
   behandling: Behandling;

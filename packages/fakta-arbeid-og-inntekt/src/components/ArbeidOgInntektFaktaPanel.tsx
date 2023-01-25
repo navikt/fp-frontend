@@ -7,15 +7,15 @@ import { Button, Alert } from '@navikt/ds-react';
 import {
   Aksjonspunkt, AlleKodeverk, AoIArbeidsforhold, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId,
   Behandling, Inntektsmelding, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold,
-} from '@fpsak-frontend/types';
-import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
+} from '@navikt/fp-types';
+import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import SettPaVentModalIndex from '@navikt/fp-modal-sett-pa-vent';
 import { VerticalSpacer, Table } from '@navikt/ft-ui-komponenter';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import ArbeidsforholdKomplettVurderingType from '@navikt/fp-kodeverk/src/arbeidsforholdKomplettVurderingType';
+import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import venteArsakType from '@navikt/fp-kodeverk/src/venteArsakType';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 
 import ArbeidsforholdRad from './ArbeidsforholdRad';
 import ArbeidsforholdOgInntektRadData, { Avklaring } from '../types/arbeidsforholdOgInntekt';

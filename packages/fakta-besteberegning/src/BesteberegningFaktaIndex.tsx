@@ -4,10 +4,10 @@ import { RawIntlProvider } from 'react-intl';
 import {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, AlleKodeverk, StandardFaktaPanelProps,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
-import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
+import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
 
 import messages from '../i18n/nb_NO.json';
 import BesteberegningPanel from './components/BesteberegningPanel';

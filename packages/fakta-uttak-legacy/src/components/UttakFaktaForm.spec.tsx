@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { reduxFormPropsMock } from '@navikt/fp-utils-test/src/redux-form-test-helper';
+import { shallowWithIntl } from '@navikt/fp-utils-test/src/intl-enzyme-test-helper';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import {
   AlleKodeverk, FamilieHendelseSamling, Personoversikt, UttakKontrollerFaktaPerioderLegacy, Ytelsefordeling,
-} from '@fpsak-frontend/types';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+} from '@navikt/fp-types';
+import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
 
 import { transformValues, UttakFaktaForm } from './UttakFaktaForm';
 import messages from '../../i18n/nb_NO.json';

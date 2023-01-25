@@ -4,11 +4,11 @@ import React, {
 import { useIntl } from 'react-intl';
 import { ArbeidsgiverOpplysningerPerId } from '@navikt/ft-types';
 
-import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import ArbeidOgInntektFaktaIndex from '@fpsak-frontend/fakta-arbeid-og-inntekt';
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import { ArbeidOgInntektsmelding, AksessRettigheter } from '@fpsak-frontend/types';
+import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import ArbeidOgInntektFaktaIndex from '@navikt/fp-fakta-arbeid-og-inntekt';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import { ArbeidOgInntektsmelding, AksessRettigheter } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';

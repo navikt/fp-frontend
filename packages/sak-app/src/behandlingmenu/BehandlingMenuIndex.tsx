@@ -16,11 +16,11 @@ import MenySakIndex, {
   getTaAvVentMenytekst,
 } from '@navikt/ft-sak-meny';
 
-import MenySettPaVentIndex, { getMenytekst as getSettPaVentMenytekst } from '@fpsak-frontend/sak-meny-sett-pa-vent';
-import MenyHenleggIndex, { getMenytekst as getHenleggMenytekst } from '@fpsak-frontend/sak-meny-henlegg';
-import MenyApneForEndringerIndex, { getMenytekst as getApneForEndringerMenytekst } from '@fpsak-frontend/sak-meny-apne-for-endringer';
-import MenyNyBehandlingIndex, { getMenytekst as getNyBehandlingMenytekst } from '@fpsak-frontend/sak-meny-ny-behandling';
-import { VergeBehandlingmenyValg, BehandlingAppKontekst } from '@fpsak-frontend/types';
+import MenySettPaVentIndex, { getMenytekst as getSettPaVentMenytekst } from '@navikt/fp-sak-meny-sett-pa-vent';
+import MenyHenleggIndex, { getMenytekst as getHenleggMenytekst } from '@navikt/fp-sak-meny-henlegg';
+import MenyApneForEndringerIndex, { getMenytekst as getApneForEndringerMenytekst } from '@navikt/fp-sak-meny-apne-for-endringer';
+import MenyNyBehandlingIndex, { getMenytekst as getNyBehandlingMenytekst } from '@navikt/fp-sak-meny-ny-behandling';
+import { VergeBehandlingmenyValg, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import behandlingEventHandler from '../behandling/BehandlingEventHandler';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../app/paths';

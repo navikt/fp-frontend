@@ -3,12 +3,12 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import SokersOpplysningspliktVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-sokers-opplysningsplikt';
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { ArbeidsgiverOpplysningerPerId, Soknad } from '@fpsak-frontend/types';
+import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
+import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import SokersOpplysningspliktVilkarProsessIndex from '@navikt/fp-prosess-vilkar-sokers-opplysningsplikt';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { ArbeidsgiverOpplysningerPerId, Soknad } from '@navikt/fp-types';
 
 import skalViseProsessPanel from '../../../felles/prosess/skalViseProsessPanel';
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';

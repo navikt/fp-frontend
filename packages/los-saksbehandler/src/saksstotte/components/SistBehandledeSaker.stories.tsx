@@ -1,9 +1,9 @@
 import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
-import { Oppgave } from '@fpsak-frontend/los-felles';
+import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
+import { Oppgave } from '@navikt/fp-los-felles';
 
 import { RestApiPathsKeys, requestApi } from '../../data/fplosSaksbehandlerRestApi';
 import SistBehandledeSaker from './SistBehandledeSaker';

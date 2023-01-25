@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { Location } from 'history';
 
-import { Historikkinnslag, AlleKodeverk, AlleKodeverkTilbakekreving } from '@fpsak-frontend/types';
+import { Historikkinnslag, AlleKodeverk, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import History from './components/History';

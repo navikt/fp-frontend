@@ -6,8 +6,8 @@ import {
   FlexColumn, FlexContainer, FlexRow, Image,
 } from '@navikt/ft-ui-komponenter';
 
-import { Modal, Oppgave, OppgaveStatus } from '@fpsak-frontend/los-felles';
-import advarselImageUrl from '@fpsak-frontend/assets/images/advarsel.svg';
+import { Modal, Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
+import advarselImageUrl from '@navikt/fp-assets/images/advarsel.svg';
 
 import styles from './oppgaveErReservertAvAnnenModal.less';
 

@@ -3,7 +3,7 @@ import moment from 'moment';
 
 import { Timeline } from '@navikt/ft-tidslinje';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import { KodeverkMedNavn, OpptjeningAktivitet } from '@fpsak-frontend/types';
+import { KodeverkMedNavn, OpptjeningAktivitet } from '@navikt/fp-types';
 
 import { FormValues } from '../aktivitet/ValgtAktivitetForm';
 import DatoPanel from './DatoPanel';

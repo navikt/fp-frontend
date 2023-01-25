@@ -7,7 +7,7 @@ import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import {
   AvsnittSkiller, VerticalSpacer, FlexColumn, FlexRow,
 } from '@navikt/ft-ui-komponenter';
-import { ArbeidsforholdFodselOgTilrettelegging, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
+import { ArbeidsforholdFodselOgTilrettelegging, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 const getEndCharFromId = (
   id?: string,

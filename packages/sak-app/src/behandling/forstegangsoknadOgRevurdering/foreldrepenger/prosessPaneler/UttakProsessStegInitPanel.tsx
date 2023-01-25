@@ -3,15 +3,15 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import UttakProsessIndex from '@fpsak-frontend/prosess-uttak';
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { RequestApi } from '@fpsak-frontend/rest-api';
+import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import UttakProsessIndex from '@navikt/fp-prosess-uttak';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
+import { RequestApi } from '@navikt/fp-rest-api';
 import {
   AksessRettigheter, ArbeidsgiverOpplysningerPerId, Behandling, FamilieHendelseSamling,
   Personoversikt, Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';

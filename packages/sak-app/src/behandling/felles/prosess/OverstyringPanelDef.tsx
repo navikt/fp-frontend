@@ -5,9 +5,9 @@ import { Aksjonspunkt, KodeverkMedNavn } from '@navikt/ft-types';
 import { KodeverkType, VilkarType } from '@navikt/ft-kodeverk';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import VilkarresultatMedOverstyringProsessIndex from '@fpsak-frontend/prosess-vilkar-overstyring';
-import { Medlemskap, Vilkar } from '@fpsak-frontend/types';
-import { OverstyringAksjonspunkter } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import VilkarresultatMedOverstyringProsessIndex from '@navikt/fp-prosess-vilkar-overstyring';
+import { Medlemskap, Vilkar } from '@navikt/fp-types';
+import { OverstyringAksjonspunkter } from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 
 import skalViseProsessPanel from './skalViseProsessPanel';
 import useStandardProsessPanelProps from './useStandardProsessPanelProps';

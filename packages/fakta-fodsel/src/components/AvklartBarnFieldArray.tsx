@@ -5,7 +5,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 
 import { hasValidDate, required, dateBeforeOrEqualToToday } from '@navikt/ft-form-validators';
-import { AvklartBarn } from '@fpsak-frontend/types';
+import { AvklartBarn } from '@navikt/fp-types';
 import { Datepicker, PeriodFieldArray, formHooks } from '@navikt/ft-form-hooks';
 
 const FIELD_ARRAY_NAME = 'avklartBarn';

@@ -4,7 +4,7 @@ import { Tag } from '@navikt/ds-react';
 import { Tooltip } from '@navikt/ft-ui-komponenter';
 
 import { createIntl } from '@navikt/ft-utils';
-import diskresjonskodeType from '@fpsak-frontend/kodeverk/src/diskresjonskodeType';
+import diskresjonskodeType from '@navikt/fp-kodeverk/src/diskresjonskodeType';
 
 import styles from './merkepanel.less';
 import messages from '../../i18n/nb_NO.json';

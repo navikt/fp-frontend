@@ -1,16 +1,16 @@
 import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 
-import { isVilkarForSykdomOppfylt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import behandlingTyper from '@fpsak-frontend/kodeverk/src/behandlingType';
-import behandlingStatuser from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+import { isVilkarForSykdomOppfylt } from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import behandlingTyper from '@navikt/fp-kodeverk/src/behandlingType';
+import behandlingStatuser from '@navikt/fp-kodeverk/src/behandlingStatus';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, FaktaArbeidsforhold, FamilieHendelseSamling, AlleKodeverk,
   Personoversikt,
   UttakKontrollerFaktaPerioderLegacy, Ytelsefordeling,
-} from '@fpsak-frontend/types';
-import { FaktaUttakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import { FaktaUttakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import UttakFaktaForm from './UttakFaktaForm';
 

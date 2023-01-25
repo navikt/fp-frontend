@@ -3,10 +3,10 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import VergeFaktaIndex from '@fpsak-frontend/fakta-verge';
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import { Verge } from '@fpsak-frontend/types';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import VergeFaktaIndex from '@navikt/fp-fakta-verge';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import { Verge } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../FaktaDefaultInitPanel';

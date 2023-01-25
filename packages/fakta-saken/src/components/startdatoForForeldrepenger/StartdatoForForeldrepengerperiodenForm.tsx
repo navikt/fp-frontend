@@ -14,11 +14,11 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 
-import editUtlandIcon from '@fpsak-frontend/assets/images/endre.svg';
-import editUtlandDisabledIcon from '@fpsak-frontend/assets/images/endre_disablet.svg';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Aksjonspunkt, Soknad } from '@fpsak-frontend/types';
-import { OverstyringAvklarStartdatoForPeriodenAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import editUtlandIcon from '@navikt/fp-assets/images/endre.svg';
+import editUtlandDisabledIcon from '@navikt/fp-assets/images/endre_disablet.svg';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { Aksjonspunkt, Soknad } from '@navikt/fp-types';
+import { OverstyringAvklarStartdatoForPeriodenAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './startdatoForForeldrepengerperiodenForm.less';
 

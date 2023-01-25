@@ -3,19 +3,19 @@ import { RawIntlProvider } from 'react-intl';
 import { Location } from 'history';
 import { createIntl } from '@navikt/ft-utils';
 
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import { skjermlenkeCodes } from '@fpsak-frontend/konstanter';
-import FagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import klageBehandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
-import vurderPaNyttArsakType from '@fpsak-frontend/kodeverk/src/vurderPaNyttArsakType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
+import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import BehandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
+import { skjermlenkeCodes } from '@navikt/fp-konstanter';
+import FagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import BehandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import klageBehandlingArsakType from '@navikt/fp-kodeverk/src/behandlingArsakType';
+import vurderPaNyttArsakType from '@navikt/fp-kodeverk/src/vurderPaNyttArsakType';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import aksjonspunktCodesTilbakekreving from '@navikt/fp-kodeverk/src/aksjonspunktCodesTilbakekreving';
 import {
   BehandlingAppKontekst, AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn,
-} from '@fpsak-frontend/types';
-import { FatterVedtakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import TotrinnskontrollBeslutterForm, { FormValues } from './components/TotrinnskontrollBeslutterForm';
 import { AksjonspunktGodkjenningData } from './components/AksjonspunktGodkjenningFieldArray';

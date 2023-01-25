@@ -2,7 +2,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
 
-import getIntlDecorator from '@fpsak-frontend/storybook-utils/decorators/withIntl';
+import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
 
 import OppgaveReservasjonForlengetModal from './OppgaveReservasjonForlengetModal';
 

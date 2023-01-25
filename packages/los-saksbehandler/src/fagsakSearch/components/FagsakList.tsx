@@ -6,9 +6,9 @@ import {
   Table, TableRow, TableColumn, DateLabel,
 } from '@navikt/ft-ui-komponenter';
 import { FagsakStatus, KodeverkType } from '@navikt/ft-kodeverk';
-import { FagsakEnkel } from '@fpsak-frontend/types';
-import { getKodeverknavnFraKode } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
-import { Oppgave } from '@fpsak-frontend/los-felles';
+import { FagsakEnkel } from '@navikt/fp-types';
+import { getKodeverknavnFraKode } from '@navikt/fp-kodeverk/src/kodeverkUtils';
+import { Oppgave } from '@navikt/fp-los-felles';
 
 import useLosKodeverk from '../../data/useLosKodeverk';
 import { restApiHooks, RestApiGlobalStatePathsKeys } from '../../data/fplosSaksbehandlerRestApi';

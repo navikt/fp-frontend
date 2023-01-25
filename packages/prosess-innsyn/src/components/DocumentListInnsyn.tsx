@@ -6,12 +6,12 @@ import { CheckboxField } from '@navikt/ft-form-hooks';
 import {
   DateTimeLabel, Table, TableColumn, TableRow, Image,
 } from '@navikt/ft-ui-komponenter';
-import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
-import { Dokument } from '@fpsak-frontend/types';
-import sendDokumentImageUrl from '@fpsak-frontend/assets/images/send_dokument.svg';
-import mottaDokumentImageUrl from '@fpsak-frontend/assets/images/motta_dokument.svg';
-import internDokumentImageUrl from '@fpsak-frontend/assets/images/intern_dokument.svg';
-import { hentDokumentLenke } from '@fpsak-frontend/konstanter';
+import kommunikasjonsretning from '@navikt/fp-kodeverk/src/kommunikasjonsretning';
+import { Dokument } from '@navikt/fp-types';
+import sendDokumentImageUrl from '@navikt/fp-assets/images/send_dokument.svg';
+import mottaDokumentImageUrl from '@navikt/fp-assets/images/motta_dokument.svg';
+import internDokumentImageUrl from '@navikt/fp-assets/images/intern_dokument.svg';
+import { hentDokumentLenke } from '@navikt/fp-konstanter';
 
 import styles from './documentListInnsyn.less';
 

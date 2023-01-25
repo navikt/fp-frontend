@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 import { AlleKodeverk } from '@navikt/ft-types';
 import { createIntl } from '@navikt/ft-utils';
 
-import { SoknadData } from '@fpsak-frontend/papirsoknad-ui-komponenter';
+import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 
 import SvangerskapspengerForm from './components/SvangerskapspengerForm';
 import messages from '../../i18n/nb_NO.json';

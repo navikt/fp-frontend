@@ -11,7 +11,7 @@ import {
   Datepicker, formHooks, InputField, RadioGroupPanel,
 } from '@navikt/ft-form-hooks';
 
-import fht from '@fpsak-frontend/kodeverk/src/familieHendelseType';
+import fht from '@navikt/fp-kodeverk/src/familieHendelseType';
 
 import styles from './omsorgOgAdopsjonPanel.less';
 

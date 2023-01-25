@@ -3,8 +3,8 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, Detail } from '@navikt/ds-react';
 
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
-import { Dokument } from '@fpsak-frontend/types';
-import { hentDokumentLenke } from '@fpsak-frontend/konstanter';
+import { Dokument } from '@navikt/fp-types';
+import { hentDokumentLenke } from '@navikt/fp-konstanter';
 
 import styles from './documentListVedtakInnsyn.less';
 

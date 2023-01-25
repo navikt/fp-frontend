@@ -10,11 +10,11 @@ import {
   FlexColumn, FlexContainer, FlexRow, Image,
 } from '@navikt/ft-ui-komponenter';
 
-import { ArbeidsgiverOpplysningerPerId, FamilieHendelseSamling } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, FamilieHendelseSamling } from '@navikt/fp-types';
 import { calcDays } from '@navikt/ft-utils';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import overlapp from '@fpsak-frontend/assets/images/overlapp.svg';
-import tomPeriode from '@fpsak-frontend/assets/images/tom_periode.svg';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import overlapp from '@navikt/fp-assets/images/overlapp.svg';
+import tomPeriode from '@navikt/fp-assets/images/tom_periode.svg';
 import UttakPeriodeType from './UttakPeriodeType';
 import UttakPeriodeInnhold from './UttakPeriodeInnhold';
 

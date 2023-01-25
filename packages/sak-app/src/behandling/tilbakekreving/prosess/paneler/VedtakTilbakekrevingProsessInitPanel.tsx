@@ -9,9 +9,9 @@ import {
 } from '@navikt/ft-types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { Behandling } from '@fpsak-frontend/types';
-import { ProsessStegCode } from '@fpsak-frontend/konstanter';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { Behandling } from '@navikt/fp-types';
+import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
   VedtakAksjonspunktCode, ForeslaVedtakTilbakekrevingAp, ForhandsvisData,
 } from '@navikt/ft-prosess-tilbakekreving-vedtak';

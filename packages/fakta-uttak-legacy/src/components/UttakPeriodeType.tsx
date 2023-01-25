@@ -3,16 +3,16 @@ import { Label, BodyShort, Detail } from '@navikt/ds-react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Image } from '@navikt/ft-ui-komponenter';
 
-import overforingArsakCodes from '@fpsak-frontend/kodeverk/src/overforingArsakCodes';
-import utsettelseArsakCodes from '@fpsak-frontend/kodeverk/src/utsettelseArsakCodes';
-import oppholdArsakType from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
+import overforingArsakCodes from '@navikt/fp-kodeverk/src/overforingArsakCodes';
+import utsettelseArsakCodes from '@navikt/fp-kodeverk/src/utsettelseArsakCodes';
+import oppholdArsakType from '@navikt/fp-kodeverk/src/oppholdArsakType';
 import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
-import editPeriodeIcon from '@fpsak-frontend/assets/images/endre.svg';
-import editPeriodeDisabledIcon from '@fpsak-frontend/assets/images/endre_disablet.svg';
-import removePeriod from '@fpsak-frontend/assets/images/remove.svg';
-import removePeriodDisabled from '@fpsak-frontend/assets/images/remove_disabled.svg';
-import { ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import editPeriodeIcon from '@navikt/fp-assets/images/endre.svg';
+import editPeriodeDisabledIcon from '@navikt/fp-assets/images/endre_disablet.svg';
+import removePeriod from '@navikt/fp-assets/images/remove.svg';
+import removePeriodDisabled from '@navikt/fp-assets/images/remove_disabled.svg';
+import { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 
 import lagVisningsNavn from './utils/lagVisningsNavn';
 

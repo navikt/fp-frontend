@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect } from 'react';
 
-import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 
 import {
   requestApi, restApiHooks, RestApiGlobalStatePathsKeys, RestApiPathsKeys,

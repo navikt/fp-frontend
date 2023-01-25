@@ -5,11 +5,11 @@ import { useIntl } from 'react-intl';
 import { Fagsak, FamilieHendelseSamling } from '@navikt/ft-types';
 import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import AdopsjonFaktaIndex from '@fpsak-frontend/fakta-adopsjon';
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import { adopsjonsvilkarene } from '@fpsak-frontend/kodeverk/src/vilkarType';
-import { Soknad } from '@fpsak-frontend/types';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import AdopsjonFaktaIndex from '@navikt/fp-fakta-adopsjon';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import { adopsjonsvilkarene } from '@navikt/fp-kodeverk/src/vilkarType';
+import { Soknad } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';

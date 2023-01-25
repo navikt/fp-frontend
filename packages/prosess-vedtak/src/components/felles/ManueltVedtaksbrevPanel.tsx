@@ -7,7 +7,7 @@ import {
   Image, FlexContainer, FlexRow, FlexColumn, EditedIcon, AvsnittSkiller, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
-import popOutPilSvg from '@fpsak-frontend/assets/images/pop-out-pil.svg';
+import popOutPilSvg from '@navikt/fp-assets/images/pop-out-pil.svg';
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import {
   hasValidText, maxLength, minLength, required,

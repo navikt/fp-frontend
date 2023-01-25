@@ -2,7 +2,7 @@ import {
   useState, useEffect, DependencyList, useRef,
 } from 'react';
 
-import { RequestApi, RestKey } from '@fpsak-frontend/rest-api';
+import { RequestApi, RestKey } from '@navikt/fp-rest-api';
 
 import RestApiState from '../RestApiState';
 

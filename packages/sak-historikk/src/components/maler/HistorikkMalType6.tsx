@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { Label, BodyShort } from '@navikt/ds-react';
 
-import { HistorikkInnslagOpplysning } from '@fpsak-frontend/types';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { HistorikkInnslagOpplysning } from '@navikt/fp-types';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 
 import { findHendelseText } from './felles/historikkUtils';
 import HistorikkMal from '../HistorikkMalTsType';

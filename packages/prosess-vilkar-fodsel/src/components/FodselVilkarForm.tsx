@@ -4,19 +4,19 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
+import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 import {
   ProsessStegBegrunnelseTextFieldNew, VilkarResultPicker, ProsessPanelTemplate, validerApKodeOgHentApEnum,
-} from '@fpsak-frontend/prosess-felles';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+} from '@navikt/fp-prosess-felles';
+import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
+import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import {
   Aksjonspunkt, AlleKodeverk, Behandling, KodeverkMedNavn, Vilkar,
-} from '@fpsak-frontend/types';
-import { VurdereYtelseSammeBarnAnnenForelderAp, VurdereYtelseSammeBarnSokerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+} from '@navikt/fp-types';
+import { VurdereYtelseSammeBarnAnnenForelderAp, VurdereYtelseSammeBarnSokerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 const avslagsarsakerES = ['1002', '1003', '1032'];
 

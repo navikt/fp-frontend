@@ -13,11 +13,11 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { Form, SelectField } from '@navikt/ft-form-hooks';
 
-import { AlleKodeverk } from '@fpsak-frontend/types';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { getKodeverknavnFraKode } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
-import gruppeHoverUrl from '@fpsak-frontend/assets/images/gruppe_hover.svg';
-import gruppeUrl from '@fpsak-frontend/assets/images/gruppe.svg';
+import { AlleKodeverk } from '@navikt/fp-types';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { getKodeverknavnFraKode } from '@navikt/fp-kodeverk/src/kodeverkUtils';
+import gruppeHoverUrl from '@navikt/fp-assets/images/gruppe_hover.svg';
+import gruppeUrl from '@navikt/fp-assets/images/gruppe.svg';
 
 import Saksliste from '../../typer/sakslisteTsType';
 import Saksbehandler from '../../typer/saksbehandlerTsType';

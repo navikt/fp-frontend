@@ -2,10 +2,10 @@ import React, {
   ReactElement, useMemo,
 } from 'react';
 
-import { RestApiHooks, RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import StandardFaktaPanelProps from '@fpsak-frontend/types/src/standardFaktaPanelPropsTsType';
-import { RequestApi, RestKey } from '@fpsak-frontend/rest-api';
-import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
+import { RestApiHooks, RestApiState } from '@navikt/fp-rest-api-hooks';
+import StandardFaktaPanelProps from '@navikt/fp-types/src/standardFaktaPanelPropsTsType';
+import { RequestApi, RestKey } from '@navikt/fp-rest-api';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
 import FaktaPanelInitProps from '../typer/faktaPanelInitProps';
 import useStandardFaktaPanelProps from './useStandardFaktaPanelProps';

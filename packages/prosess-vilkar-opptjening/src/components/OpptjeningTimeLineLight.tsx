@@ -3,7 +3,7 @@ import moment from 'moment';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Timeline, TimeLineNavigation } from '@navikt/ft-tidslinje';
-import { FastsattOpptjeningAktivitet } from '@fpsak-frontend/types';
+import { FastsattOpptjeningAktivitet } from '@navikt/fp-types';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import opptjeningAktivitetKlassifisering from '../kodeverk/opptjeningAktivitetKlassifisering';

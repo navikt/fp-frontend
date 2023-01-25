@@ -5,19 +5,19 @@ import {
   Label, BodyShort, Heading,
 } from '@navikt/ds-react';
 
-import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
-import { ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
+import kommunikasjonsretning from '@navikt/fp-kodeverk/src/kommunikasjonsretning';
+import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { decodeHtmlEntity, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
-import InnsynResultatType from '@fpsak-frontend/kodeverk/src/innsynResultatType';
-import { Aksjonspunkt, Dokument, InnsynDokument } from '@fpsak-frontend/types';
-import { ForeslaVedtakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
+import InnsynResultatType from '@navikt/fp-kodeverk/src/innsynResultatType';
+import { Aksjonspunkt, Dokument, InnsynDokument } from '@navikt/fp-types';
+import { ForeslaVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import dokumentMalType from '@navikt/fp-kodeverk/src/dokumentMalType';
 
 import DocumentListVedtakInnsyn from './DocumentListVedtakInnsyn';
 

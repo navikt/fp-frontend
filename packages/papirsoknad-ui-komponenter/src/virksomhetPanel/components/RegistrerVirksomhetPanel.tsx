@@ -11,8 +11,8 @@ import {
 import { AlleKodeverk } from '@navikt/ft-types';
 import { formHooks } from '@navikt/ft-form-hooks';
 
-import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
-import removeIcon from '@fpsak-frontend/assets/images/remove.svg';
+import addCircleIcon from '@navikt/fp-assets/images/add-circle.svg';
+import removeIcon from '@navikt/fp-assets/images/remove.svg';
 
 import RegistrerVirksomhetModalForm, { FormValues as ModalFormValues } from './RegistrerVirksomhetModalForm';
 

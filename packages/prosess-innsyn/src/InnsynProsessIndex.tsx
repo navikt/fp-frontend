@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { Dokument, Innsyn, StandardProsessPanelProps } from '@fpsak-frontend/types';
+import { Dokument, Innsyn, StandardProsessPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import InnsynForm from './components/InnsynForm';

@@ -2,8 +2,8 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { RawIntlProvider } from 'react-intl';
 import moment from 'moment';
 
-import { StandardFaktaPanelProps, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { StandardFaktaPanelProps, UttakKontrollerAktivitetskrav } from '@navikt/fp-types';
+import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
 import { createIntl } from '@navikt/ft-utils';
 
 import AktivitetskravFaktaForm from './components/AktivitetskravFaktaForm';

@@ -5,12 +5,12 @@ import { FormattedMessage } from 'react-intl';
 import dayjs from 'dayjs';
 import { Label, BodyShort, Link } from '@navikt/ds-react';
 
-import pilOppIkonUrl from '@fpsak-frontend/assets/images/pil_opp.svg';
-import pilNedIkonUrl from '@fpsak-frontend/assets/images/pil_ned.svg';
+import pilOppIkonUrl from '@navikt/fp-assets/images/pil_opp.svg';
+import pilNedIkonUrl from '@navikt/fp-assets/images/pil_ned.svg';
 import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import {
   AlleKodeverk, AoIArbeidsforhold, Inntektsmelding, Inntektspost,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 import {
   Image, FlexColumn, FlexContainer, FlexRow, VerticalSpacer, FloatRight,
 } from '@navikt/ft-ui-komponenter';

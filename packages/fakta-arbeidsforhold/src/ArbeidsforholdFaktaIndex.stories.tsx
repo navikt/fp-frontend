@@ -1,9 +1,9 @@
 import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import { AksjonspunktÅrsak, ArbeidOgInntektsmelding, Behandling } from '@fpsak-frontend/types';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
+import { AksjonspunktÅrsak, ArbeidOgInntektsmelding, Behandling } from '@navikt/fp-types';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import ArbeidsforholdKomplettVurderingType from '@navikt/fp-kodeverk/src/arbeidsforholdKomplettVurderingType';
 
 import ArbeidsforholdFaktaIndex from './ArbeidsforholdFaktaIndex';
 import BekreftetPermisjonStatus from './kodeverk/bekreftetPermisjonStatus';

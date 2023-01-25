@@ -10,7 +10,7 @@ import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
 import { Landkode, KodeverkType } from '@navikt/ft-kodeverk';
 
-import kanIkkeOppgiAnnenForelderArsaker from '@fpsak-frontend/kodeverk/src/kanIkkeOppgiAnnenForelderArsak';
+import kanIkkeOppgiAnnenForelderArsaker from '@navikt/fp-kodeverk/src/kanIkkeOppgiAnnenForelderArsak';
 import {
   hasValidFodselsnummer, hasValidFodselsnummerFormat, required, sammeFodselsnummerSomSokerMessage,
 } from '@navikt/ft-form-validators';

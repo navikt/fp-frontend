@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 import RisikoklassifiseringSakIndex, { AvklartRisikoklassifiseringAp } from '@navikt/ft-sak-risikoklassifisering';
 
-import { NavAnsatt, AksessRettigheter } from '@fpsak-frontend/types';
+import { NavAnsatt, AksessRettigheter } from '@navikt/fp-types';
 
 import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
 import useTrackRouteParam from '../../app/useTrackRouteParam';

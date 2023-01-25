@@ -8,9 +8,9 @@ import {
   BehandlingStatus, BehandlingType, FagsakYtelseType, FagsakStatus,
 } from '@navikt/ft-kodeverk';
 
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import { Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { Fagsak, BehandlingAppKontekst } from '@navikt/fp-types';
+import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
 
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 import FagsakProfileIndex from './FagsakProfileIndex';

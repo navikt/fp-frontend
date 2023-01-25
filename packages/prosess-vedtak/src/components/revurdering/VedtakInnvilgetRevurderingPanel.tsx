@@ -3,10 +3,10 @@ import { FormattedMessage } from 'react-intl';
 import { Label, BodyShort, Detail } from '@navikt/ds-react';
 
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
 import {
   Behandlingsresultat, BeregningsresultatFp, BeregningsresultatEs,
-} from '@fpsak-frontend/types';
+} from '@navikt/fp-types';
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';

@@ -3,8 +3,8 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 
-import { FagsakEnkel, KjønnkodeEnum } from '@fpsak-frontend/types';
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
+import { FagsakEnkel, KjønnkodeEnum } from '@navikt/fp-types';
+import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
 
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 import FagsakSearchIndex from './FagsakSearchIndex';

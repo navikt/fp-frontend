@@ -3,13 +3,13 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import { BodyShort, Label } from '@navikt/ds-react';
 
 import { Datepicker } from '@navikt/ft-form-hooks';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import {
   FaktaGruppe, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
-import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
-import { FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
+import { FamilieHendelse, Soknad } from '@navikt/fp-types';
+import { FieldEditedInfo } from '@navikt/fp-fakta-felles';
 
 import styles from './omsorgsovertakelseFaktaPanel.less';
 

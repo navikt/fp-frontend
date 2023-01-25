@@ -5,19 +5,19 @@ import {
 } from 'react-intl';
 import { Detail, Heading } from '@navikt/ds-react';
 
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 import {
   ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew,
-} from '@fpsak-frontend/prosess-felles';
+} from '@navikt/fp-prosess-felles';
 import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import {
   AksjonspunktHelpTextTemp, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { DATE_TIME_FORMAT } from '@navikt/ft-utils';
 import { required } from '@navikt/ft-form-validators';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { AlleKodeverk, KlageVurdering } from '@fpsak-frontend/types';
-import { getKodeverknavnFn } from '@fpsak-frontend/kodeverk/src/kodeverkUtils';
+import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AlleKodeverk, KlageVurdering } from '@navikt/fp-types';
+import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
 
 import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
 import styles from './formkravKlageForm.less';

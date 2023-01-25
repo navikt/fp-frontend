@@ -2,8 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 
-import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
-import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
+import klageVurderingType from '@navikt/fp-kodeverk/src/klageVurdering';
+import dokumentMalType from '@navikt/fp-kodeverk/src/dokumentMalType';
 
 import styles from './previewKlageLink.less';
 

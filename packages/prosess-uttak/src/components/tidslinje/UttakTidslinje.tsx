@@ -12,7 +12,7 @@ import {
   TimeLineControl, TimeLineSoker, TimeLineSokerEnsamSoker, Timeline,
 } from '@navikt/ft-tidslinje';
 
-import { PeriodeSoker } from '@fpsak-frontend/types';
+import { PeriodeSoker } from '@navikt/fp-types';
 
 import styles from './uttakTidslinje.less';
 

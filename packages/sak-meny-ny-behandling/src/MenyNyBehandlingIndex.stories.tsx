@@ -2,10 +2,10 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import behandlingArsakType from '@navikt/fp-kodeverk/src/behandlingArsakType';
+import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 import MenyNyBehandlingIndex from './MenyNyBehandlingIndex';
 
 export default {
