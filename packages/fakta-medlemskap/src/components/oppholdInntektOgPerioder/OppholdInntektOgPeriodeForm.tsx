@@ -101,6 +101,8 @@ const OppholdInntektOgPeriodeForm: FunctionComponent<OwnProps> = ({
     setValgtPeriode();
   }, []);
 
+  const harAksjonspunkt = aksjonspunkter.length > 0;
+
   return (
     <Form
       formMethods={formMethods}
@@ -151,15 +153,15 @@ const OppholdInntektOgPeriodeForm: FunctionComponent<OwnProps> = ({
         />
         )}
         <VerticalSpacer twentyPx />
-        {valgtPeriode.aksjonspunkter && valgtPeriode.aksjonspunkter.length > 0 && (
-        <FaktaBegrunnelseTextFieldNew
-          isReadOnly={readOnly}
-          isSubmittable={submittable}
-          hasBegrunnelse={!!initialValues.begrunnelse}
-        />
+        {harAksjonspunkt && valgtPeriode.aksjonspunkter && valgtPeriode.aksjonspunkter.length > 0 && (
+          <FaktaBegrunnelseTextFieldNew
+            isReadOnly={readOnly}
+            isSubmittable={submittable}
+            hasBegrunnelse={!!initialValues.begrunnelse}
+          />
         )}
         <VerticalSpacer twentyPx />
-        {!readOnly && (
+        {!readOnly && harAksjonspunkt && (
           <FlexContainer>
             <FlexRow>
               <FlexColumn>

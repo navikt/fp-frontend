@@ -12,7 +12,7 @@ import {
 } from '@fpsak-frontend/types';
 import {
   AvklarFortsattMedlemskapAp, BekreftBosattVurderingAp, BekreftErMedlemVurderingAp, BekreftLovligOppholdVurderingAp,
-  BekreftOppholdsrettVurderingAp, OverstyringAvklarStartdatoForPeriodenAp,
+  BekreftOppholdsrettVurderingAp,
 } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import AksjonspunktCode, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
@@ -81,7 +81,7 @@ interface OwnProps {
   submittable: boolean;
   readOnly: boolean;
   aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (data: OverstyringAvklarStartdatoForPeriodenAp | AksjonspunktData) => Promise<void>;
+  submitCallback: (data: AksjonspunktData) => Promise<void>;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   soknad: Soknad;
   alleKodeverk: AlleKodeverk;
@@ -118,7 +118,7 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps> = ({
     setFormData(perioder);
   }, [perioder]);
 
-  const finnFørstePeriodeMedUløstAp = (perioderr: MedlemPeriode[]) => perioderr.find((p) => p.aksjonspunkter.length > 0 && !p.begrunnelse);
+  const finnFørstePeriodeMedUløstAp = (medlemPerioder: MedlemPeriode[]) => medlemPerioder.find((p) => p.aksjonspunkter.length > 0 && !p.begrunnelse);
 
   const [valgtPeriode, setValgtPeriode] = useState<MedlemPeriode | undefined>(perioder.length > 1 ? finnFørstePeriodeMedUløstAp(perioder) : perioder[0]);
 
