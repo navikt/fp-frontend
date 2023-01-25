@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from 'react'
+import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import dayjs from 'dayjs';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
@@ -13,7 +13,7 @@ type OwnProps = Readonly<{
 }>;
 
 const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgave }) => {
-  const setOppgave = useCallback((oppgave: OppgaveOversikt) => {
+  const setOppgave = useCallback(() => {
     setValgtOppgave(oppgave);
   }, []);
   return (
@@ -39,7 +39,7 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
               size="small"
               variant="tertiary"
               disabled={false}
-              onClick={() => setOppgave(oppgave)}
+              onClick={setOppgave}
               type="button"
             >
               <FormattedMessage id="Oppgavetabell.Velg" />
@@ -47,7 +47,7 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
           </TableColumn>
         )}
     </TableRow>
-  )
-}
+  );
+};
 
-export default OppgaveTabellRad
+export default OppgaveTabellRad;
