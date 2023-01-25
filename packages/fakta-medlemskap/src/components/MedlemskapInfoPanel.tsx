@@ -155,7 +155,7 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps> = ({
       }
     }
 
-    return readOnly;
+    return false;
   };
 
   const lagre = () => {
@@ -206,7 +206,7 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps> = ({
         />
       )}
       <VerticalSpacer twentyPx />
-      {perioder.length > 1 && (
+      {!readOnly && perioder.length > 1 && (
         <Button
           size="small"
           variant="primary"
