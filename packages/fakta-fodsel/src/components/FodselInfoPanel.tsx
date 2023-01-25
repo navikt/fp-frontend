@@ -125,6 +125,7 @@ const FodselInfoPanel: FunctionComponent<OwnProps> = ({
   return (
     <>
       <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>{getHelpTexts(aksjonspunkter)}</AksjonspunktHelpTextTemp>
+      <VerticalSpacer sixteenPx />
       <Form
         formMethods={formMethods}
         onSubmit={(values) => submitCallback(transformValues(values, sykdomAp, terminbekreftelseAp, manglendeFødselAp, familiehendelse))}

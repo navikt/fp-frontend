@@ -81,15 +81,19 @@ const Template: Story<{
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  readOnly: boolean;
+  harApneAksjonspunkter: boolean;
 }> = ({
   aksjonspunkter,
   submitCallback,
   alleMerknaderFraBeslutter,
+  readOnly = false,
+  harApneAksjonspunkter = true,
 }) => (
   <FodselFaktaIndex
     submitCallback={submitCallback}
-    readOnly={false}
-    harApneAksjonspunkter
+    readOnly={readOnly}
+    harApneAksjonspunkter={harApneAksjonspunkter}
     submittable
     alleKodeverk={alleKodeverk as any}
     setFormData={() => undefined}
@@ -117,6 +121,22 @@ AksjonspunktSjekkManglendeFødsel.args = {
   aksjonspunkter: defaultAksjonspunkter.map((a) => ({
     ...a,
     definisjon: aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL,
+  })),
+  alleMerknaderFraBeslutter: {
+    [aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL]: merknaderFraBeslutter,
+  },
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+};
+
+export const ReadonlyPanel = Template.bind({});
+ReadonlyPanel.args = {
+  readOnly: true,
+  harApneAksjonspunkter: false,
+  aksjonspunkter: defaultAksjonspunkter.map((a) => ({
+    ...a,
+    status: aksjonspunktStatus.UTFORT,
+    definisjon: aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL,
+    begrunnelse: 'Dette er en begrunnelse',
   })),
   alleMerknaderFraBeslutter: {
     [aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL]: merknaderFraBeslutter,
