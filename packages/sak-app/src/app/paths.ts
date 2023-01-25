@@ -18,6 +18,8 @@ type QueryParams = {
 
 const DEV_LOGIN_URL = 'http://localhost:8080/fpsak/resource/login';
 
+export const journalføringRoutePath = `/${JOURNALFØRING_PATH}`;
+export const avdelingslederRoutePath = `/${AVDELINGSLEDER_PATH}`;
 export const fagsakRoutePath = '/fagsak/:saksnummer//*';
 export const aktoerRoutePath = '/aktoer/:aktoerId';
 export const behandlingerRoutePath = '/behandling//*';
