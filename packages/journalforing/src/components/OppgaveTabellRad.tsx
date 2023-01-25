@@ -1,7 +1,5 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
-import dayjs from 'dayjs';
-import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { Button } from '@navikt/ds-react';
 import { TableRow, TableColumn, DateLabel } from '@navikt/ft-ui-komponenter';
 import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
