@@ -119,6 +119,7 @@ const AnnenForelderPanel: FunctionComponent<OwnProps> = ({
                 name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.land`}
                 label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Land' })}
                 selectValues={filtrerLandOgLagOptions(sorterteLand)}
+                validate={[required]}
                 className={styles.inputBredde}
                 readOnly={readOnly}
               />
@@ -126,6 +127,7 @@ const AnnenForelderPanel: FunctionComponent<OwnProps> = ({
               <InputField
                 name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.utenlandskFoedselsnummer`}
                 label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.UtenlandsFodselsnummer' })}
+                validate={[required]}
                 className={styles.inputBredde}
                 readOnly={readOnly}
               />
