@@ -14,7 +14,9 @@ import AvdelingslederIndex from '@fpsak-frontend/los-avdelingsleder';
 import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import { NavAnsatt } from '@fpsak-frontend/types';
 
-import { aktoerRoutePath, fagsakRoutePath, getFagsakHref, journalføringRoutePath, avdelingslederRoutePath } from '../paths';
+import { 
+  aktoerRoutePath, fagsakRoutePath, getFagsakHref, journalføringRoutePath, avdelingslederRoutePath 
+} from '../paths';
 import FagsakIndex from '../../fagsak/FagsakIndex';
 import AktoerIndex from '../../aktoer/AktoerIndex';
 import FagsakSearchIndex from '../../fagsakSearch/FagsakSearchIndex';
