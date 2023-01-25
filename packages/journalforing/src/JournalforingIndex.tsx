@@ -14,9 +14,7 @@ import { RestApiPathsKeys, restApiHooks } from './data/fpfordelRestApi';
 const intl = createIntl(messages);
 
 interface OwnProps {
-  valgtAvdelingEnhet?: string;
   navAnsatt: NavAnsatt;
-  behandlendeEnheter?: any;
 }
 
 /**
@@ -30,10 +28,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({
 
   useEffect(() => {
     if (alleJournalføringsoppgaverKall.state === RestApiState.SUCCESS) {
-      const { data } = alleJournalføringsoppgaverKall;
-      if (Array.isArray(data)) {
-        setOppgaveListe(alleJournalføringsoppgaverKall.data);
-      }
+      setOppgaveListe(alleJournalføringsoppgaverKall.data);
     }
   }, [alleJournalføringsoppgaverKall]);
 

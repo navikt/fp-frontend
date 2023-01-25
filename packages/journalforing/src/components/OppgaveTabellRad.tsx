@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import dayjs from 'dayjs';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { Button } from '@navikt/ds-react';
-import { TableRow, TableColumn } from '@navikt/ft-ui-komponenter';
+import { TableRow, TableColumn, DateLabel } from '@navikt/ft-ui-komponenter';
 import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
 import styles from './journalforingPanel.less';
 
@@ -18,11 +18,11 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
   }, []);
   return (
     <TableRow key={oppgave.id}>
-      <TableColumn>{dayjs(oppgave.opprettetDato).format(DDMMYYYY_DATE_FORMAT)}</TableColumn>
+      <TableColumn><DateLabel dateString={oppgave.opprettetDato} /></TableColumn>
       <TableColumn>{oppgave.ytelseType}</TableColumn>
       <TableColumn>{oppgave.beskrivelse}</TableColumn>
       <TableColumn>{oppgave.fødselsnummer}</TableColumn>
-      <TableColumn>{dayjs(oppgave.frist).format(DDMMYYYY_DATE_FORMAT)}</TableColumn>
+      <TableColumn><DateLabel dateString={oppgave.frist} /></TableColumn>
       <TableColumn>{oppgave.prioritet}</TableColumn>
       {oppgave.journalpostHarMangler
         && (
