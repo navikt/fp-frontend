@@ -14,6 +14,7 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   navAnsatt: NavAnsatt;
+  åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
 }
 
 /**
@@ -21,6 +22,7 @@ interface OwnProps {
  */
 const JournalforingIndex: FunctionComponent<OwnProps> = ({
   navAnsatt,
+  åpneFagsak,
 }) => {
   const alleJournalføringsoppgaverKall = restApiHooks.useRestApi(RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER, { avdelingEnhet: undefined });
   const { addErrorMessage } = useRestApiErrorDispatcher();
@@ -39,7 +41,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({
         <Heading size="medium">
           <FormattedMessage id="Journalforing.Tittel" />
         </Heading>
-        <OppgaveIndex oppgaver={alleJournalføringsoppgaverKall.data} />
+        <OppgaveIndex oppgaver={alleJournalføringsoppgaverKall.data} åpneFagsak={åpneFagsak} />
       </JournalforingPanel>
     </RawIntlProvider>
   );
