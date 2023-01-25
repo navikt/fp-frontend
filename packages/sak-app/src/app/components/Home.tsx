@@ -9,11 +9,14 @@ import { Heading } from '@navikt/ds-react';
 import { NotFoundPage } from '@navikt/ft-sak-infosider';
 
 import SaksbehandlerIndex from '@fpsak-frontend/los-saksbehandler';
+import JournalforingIndex from '@fpsak-frontend/journalforing';
 import AvdelingslederIndex from '@fpsak-frontend/los-avdelingsleder';
 import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import { NavAnsatt } from '@fpsak-frontend/types';
 
-import { aktoerRoutePath, fagsakRoutePath, getFagsakHref } from '../paths';
+import {
+  aktoerRoutePath, fagsakRoutePath, getFagsakHref, journalføringRoutePath, avdelingslederRoutePath,
+} from '../paths';
 import FagsakIndex from '../../fagsak/FagsakIndex';
 import AktoerIndex from '../../aktoer/AktoerIndex';
 import FagsakSearchIndex from '../../fagsakSearch/FagsakSearchIndex';
@@ -61,10 +64,14 @@ const Home: FunctionComponent<OwnProps> = ({
             : <FagsakSearchIndex />}
         />
         <Route
-          path="/avdelingsleder"
+          path={avdelingslederRoutePath}
           element={erLosTilgjengelig
             ? <AvdelingslederIndex setLosErIkkeTilgjengelig={setLosErIkkeTilgjengelig} navAnsatt={navAnsatt} />
             : <Heading size="small"><FormattedMessage id="Los.IkkeTilgjengelig" /></Heading>}
+        />
+        <Route
+          path={journalføringRoutePath}
+          element={<JournalforingIndex navAnsatt={navAnsatt} />}
         />
         <Route path={fagsakRoutePath} element={<FagsakIndex />} />
         <Route path={aktoerRoutePath} element={<AktoerIndex />} />
