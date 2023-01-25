@@ -1,15 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import { Button, BodyShort, Heading } from '@navikt/ds-react';
-import dayjs from 'dayjs';
+import { BodyShort, Heading } from '@navikt/ds-react';
 
-import {
-  VerticalSpacer,
-  Table, TableRow, TableColumn,
-} from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer, Table } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
-import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
-import styles from './journalforingPanel.less';
+import OppgaveTabellRad from './OppgaveTabellRad';
 
 type OwnProps = Readonly<{
     oppgaver: OppgaveOversikt[];
@@ -46,37 +41,7 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({
       <Heading size="small"><FormattedMessage id="Journalforing.Oppgaver.Tittel" /></Heading>
       <Table headerTextCodes={headerTextCodes}>
         {oppgaver.map((oppgave) => (
-          <TableRow key={oppgave.id}>
-            <TableColumn>{dayjs(oppgave.opprettetDato).format(DDMMYYYY_DATE_FORMAT)}</TableColumn>
-            <TableColumn>{oppgave.ytelseType}</TableColumn>
-            <TableColumn>{oppgave.beskrivelse}</TableColumn>
-            <TableColumn>{oppgave.fødselsnummer}</TableColumn>
-            <TableColumn>{dayjs(oppgave.frist).format(DDMMYYYY_DATE_FORMAT)}</TableColumn>
-            <TableColumn>{oppgave.prioritet}</TableColumn>
-            {oppgave.journalpostHarMangler
-                            && (
-                            <TableColumn>
-                              <a className={styles.gosysLink} href="https://gosys-q1.dev.intern.nav.no/gosys" target="_blank" rel="noreferrer">
-                                <FormattedMessage id="Oppgave.Gosys.Link" />
-                              </a>
-                            </TableColumn>
-                            )}
-            {!oppgave.journalpostHarMangler
-                            && (
-                            <TableColumn>
-                              <Button
-                                size="small"
-                                variant="tertiary"
-                                loading={false}
-                                disabled={false}
-                                onClick={() => setValgtOppgave(oppgave)}
-                                type="button"
-                              >
-                                <FormattedMessage id="Oppgavetabell.Velg" />
-                              </Button>
-                            </TableColumn>
-                            )}
-          </TableRow>
+          <OppgaveTabellRad oppgave={oppgave} setValgtOppgave={setValgtOppgave} key={oppgave.id} />
         ))}
 
       </Table>
