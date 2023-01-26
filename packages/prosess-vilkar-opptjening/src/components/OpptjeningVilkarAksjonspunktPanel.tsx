@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { useCallback, FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
@@ -82,10 +82,19 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
   const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status));
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
 
+  const onSubmit = useCallback((values: FormValues) => submitCallback(transformValues(values)), [submitCallback]);
+
+  const validerAtEnKunKanVelgeOppfyltNårEnHarPerioder = useCallback((verdi) => {
+    if (fastsattOpptjening.fastsattOpptjeningAktivitetList.length === 0 && verdi === true) {
+      return intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.KanIkkeVelgeOppfylt' });
+    }
+    return null;
+  }, []);
+
   return (
     <Form
       formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
+      onSubmit={onSubmit}
       setDataOnUnmount={setFormData}
     >
       <ProsessPanelTemplate
@@ -118,6 +127,7 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
           customVilkarIkkeOppfyltText={
             <FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt" values={{ b: (chunks: any) => <b>{chunks}</b> }} />
           }
+          validatorsForRadioOptions={[validerAtEnKunKanVelgeOppfyltNårEnHarPerioder]}
         />
         <VerticalSpacer sixteenPx />
         <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />

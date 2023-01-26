@@ -18,9 +18,9 @@ interface OwnProps {
 /**
  * OpptjeningVilkarView
  *
- * Presentasjonskomponent. Viser resultatet av opptjeningsvilkåret.
+ * Viser resultatet av opptjeningsvilkåret.
  */
-export const OpptjeningVilkarViewImpl: FunctionComponent<OwnProps> = ({
+const OpptjeningVilkarViewImpl: FunctionComponent<OwnProps> = ({
   months,
   days,
   fastsattOpptjeningActivities = [],

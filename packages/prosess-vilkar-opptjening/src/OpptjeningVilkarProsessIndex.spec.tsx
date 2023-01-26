@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 import * as stories from './OpptjeningVilkarProsessIndex.stories';
 
 const {
-  ÅpentAksjonspunkt, HarIkkeAksjonspunkt,
+  ÅpentAksjonspunkt, HarIkkeAksjonspunkt, ÅpentAksjonspunktMenUtenAktiviteter,
 } = composeStories(stories);
 
 Object.defineProperty(global.self, 'crypto', {
@@ -39,6 +39,37 @@ describe('<OpptjeningVilkarProsessIndex>', () => {
       begrunnelse: 'Dette er en vurdering',
       erVilkarOk: true,
       kode: '5089',
+    });
+  });
+
+  it('skal validere at en ikke kan oppfylle vilkår når det ikke finnes aktiviteter', async () => {
+    const lagre = jest.fn();
+
+    const utils = render(<ÅpentAksjonspunktMenUtenAktiviteter submitCallback={lagre} />);
+
+    expect(await screen.findByText('Opptjening')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Søker har oppfylt krav om 6 mnd opptjening, vilkåret er oppfylt.'));
+
+    const vurderingInput = utils.getByLabelText('Vurdering');
+    await userEvent.type(vurderingInput, 'Dette er en vurdering');
+
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    expect(await screen.findByText('Du kan ikke velge at opptjeningsvilkåret er oppfylt, fordi det ikke finnes noen aktiviteter '
+      + 'å beregne inntekten fra. Kontakt bruker for å avklare om bruker har noen opptjening.')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText(/Søker har ikke oppfylt krav om 6 mnd opptjening/));
+
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+    expect(lagre).toHaveBeenNthCalledWith(1, {
+      begrunnelse: 'Dette er en vurdering',
+      erVilkarOk: false,
+      kode: '5089',
+      avslagDato: undefined,
+      avslagskode: undefined,
     });
   });
 

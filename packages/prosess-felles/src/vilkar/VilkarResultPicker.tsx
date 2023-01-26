@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { BodyShort } from '@navikt/ds-react';
 import {
   FlexContainer, FlexRow, FlexColumn, Image, VerticalSpacer,
@@ -36,6 +36,7 @@ interface OwnProps {
   readOnly: boolean;
   erMedlemskapsPanel?: boolean;
   skalKunneInnvilge?: boolean;
+  validatorsForRadioOptions?: ((value: string | number) => any)[];
 }
 
 interface StaticFunctions {
@@ -61,9 +62,12 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   erMedlemskapsPanel = false,
   skalKunneInnvilge = true,
+  validatorsForRadioOptions,
 }) => {
   const { getValues, watch } = formHooks.useFormContext();
   const erVilkarOk = watch('erVilkarOk');
+
+  const radioValidators = useMemo(() => (validatorsForRadioOptions ? validatorsForRadioOptions.concat(required) : [required]), [validatorsForRadioOptions]);
 
   return (
     <div className={styles.container}>
@@ -85,7 +89,7 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
       {(!readOnly || erVilkarOk === undefined) && (
         <RadioGroupPanel
           name="erVilkarOk"
-          validate={[required]}
+          validate={radioValidators}
           isReadOnly={readOnly}
           isTrueOrFalseSelection
           radios={[{

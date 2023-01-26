@@ -18,7 +18,7 @@ const behandling = {
   behandlingsresultat: {},
 } as Behandling;
 
-const opptjening = {
+const defaultOpptjening = {
   fastsattOpptjening: {
     opptjeningperiode: {
       måneder: 2,
@@ -46,9 +46,11 @@ export default {
 const Template: Story<{
   submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
   aksjonspunkter: Aksjonspunkt[],
+  opptjening: Opptjening;
 }> = ({
   submitCallback,
   aksjonspunkter,
+  opptjening,
 }) => (
   <OpptjeningVilkarProsessIndex
     behandling={behandling}
@@ -70,6 +72,24 @@ const Template: Story<{
 export const ÅpentAksjonspunkt = Template.bind({});
 ÅpentAksjonspunkt.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
+  opptjening: defaultOpptjening,
+  aksjonspunkter: [{
+    definisjon: aksjonspunktCodes.SVANGERSKAPSVILKARET,
+    status: aksjonspunktStatus.OPPRETTET,
+    begrunnelse: undefined,
+  }] as Aksjonspunkt[],
+};
+
+export const ÅpentAksjonspunktMenUtenAktiviteter = Template.bind({});
+ÅpentAksjonspunktMenUtenAktiviteter.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  opptjening: {
+    ...defaultOpptjening,
+    fastsattOpptjening: {
+      ...defaultOpptjening.fastsattOpptjening,
+      fastsattOpptjeningAktivitetList: [],
+    },
+  },
   aksjonspunkter: [{
     definisjon: aksjonspunktCodes.SVANGERSKAPSVILKARET,
     status: aksjonspunktStatus.OPPRETTET,
@@ -80,5 +100,6 @@ export const ÅpentAksjonspunkt = Template.bind({});
 export const HarIkkeAksjonspunkt = Template.bind({});
 HarIkkeAksjonspunkt.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
+  opptjening: defaultOpptjening,
   aksjonspunkter: [] as Aksjonspunkt[],
 };
