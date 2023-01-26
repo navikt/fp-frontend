@@ -34,11 +34,16 @@ const getBekreftAksjonspunktFaktaCallback = (
     behandlingVersjon: behandling.versjon,
   };
 
-  if (model && lagreOverstyrteAksjonspunkter && overstyringApCodes && overstyringApCodes.includes(model[0].kode)) {
-    return lagreOverstyrteAksjonspunkter({
-      ...params,
-      overstyrteAksjonspunktDtoer: model,
-    }, true).then(() => oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE));
+  if (model && lagreOverstyrteAksjonspunkter && overstyringApCodes) {
+    if (model.length === 0) {
+      throw Error('Det har oppstått en teknisk feil ved lagring av aksjonspunkter. Meld feilen i Porten.');
+    }
+    if (overstyringApCodes.includes(model[0].kode)) {
+      return lagreOverstyrteAksjonspunkter({
+        ...params,
+        overstyrteAksjonspunktDtoer: model,
+      }, true).then(() => oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE));
+    }
   }
 
   return lagreAksjonspunkter({
