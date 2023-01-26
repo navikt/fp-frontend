@@ -73,7 +73,7 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
     expect(screen.getByText('Søker har oppgitt å ha aleneomsorg for barnet')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Søker har IKKE aleneomsorg for barnet'));
 
-    expect(screen.getByText('Har annen forelder rett?')).toBeInTheDocument();
+    expect(screen.getByText('Har annen forelder rett til foreldrepenger i Norge?')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Ja'));
 
     await userEvent.type(utils.getByLabelText('Begrunn vurderingen'), 'Dette er en begrunnelse');
@@ -110,7 +110,7 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
     expect(await screen.findByText('Fakta om omsorg og rett')).toBeInTheDocument();
     expect(screen.getByText('Vurder om den andre forelderen har rett til foreldrepenger.')).toBeInTheDocument();
 
-    expect(screen.getByText('Har annen forelder rett?')).toBeInTheDocument();
+    expect(screen.getByText('Har annen forelder rett til foreldrepenger i Norge?')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Ja'));
 
     await userEvent.type(utils.getByLabelText('Begrunn vurderingen'), 'Dette er en begrunnelse');
@@ -134,7 +134,7 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
     expect(await screen.findByText('Fakta om omsorg og rett')).toBeInTheDocument();
     expect(screen.getByText('Vurder om den andre forelderen har rett til foreldrepenger.')).toBeInTheDocument();
 
-    expect(screen.getByText('Har annen forelder rett?')).toBeInTheDocument();
+    expect(screen.getByText('Har annen forelder rett til foreldrepenger i Norge?')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Nei'));
 
     expect(screen.getByText('Har annen forelder tilstrekkelig opptjening fra land i EØS?')).toBeInTheDocument();
