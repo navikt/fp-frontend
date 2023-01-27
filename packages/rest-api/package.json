@@ -6,7 +6,7 @@
   "private": true,
   "dependencies": {
     "@sentry/browser": "7.30.0",
-    "axios": "1.2.2"
+    "axios": "1.2.5"
   },
   "devDependencies": {
     "axios-mock-adapter": "1.21.2",
