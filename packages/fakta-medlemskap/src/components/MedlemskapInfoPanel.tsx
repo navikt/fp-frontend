@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { Heading, Button } from '@navikt/ds-react';
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { AksjonspunktStatus , isAksjonspunktOpen } from '@navikt/ft-kodeverk';
+import { AksjonspunktStatus, isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 
 import {
   AlleKodeverk, Medlemskap, Soknad, MedlemPeriode,
