@@ -259,7 +259,7 @@ describe('<MedlemskapFaktaIndex>', () => {
         vurderingsdato: '2019-11-07',
         årsaker: ['SKJÆRINGSTIDSPUNKT'],
       }],
-      kode: AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT,
+      kode: AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP,
     }, {
       begrunnelse: '',
       bekreftedePerioder: [{
@@ -284,7 +284,7 @@ describe('<MedlemskapFaktaIndex>', () => {
         vurderingsdato: '2017-10-05',
         årsaker: ['SKJÆRINGSTIDSPUNKT'],
       }],
-      kode: AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD,
+      kode: AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP,
     }, {
       begrunnelse: '',
       bekreftedePerioder: [{
