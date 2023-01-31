@@ -48,8 +48,8 @@ const transformValues = (
   const aktivtFortsattMedlemskapAksjonspunkt = aksjonspunkter
     .filter((ap) => ap.definisjon === AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP);
   // Submit inngangsaksjonspunkt dersom åpent eller det ikke finnes aksjonspunkt fortsatt medlemskap
-  const sendInnAksjonspunkter = harÅpneInngangsAksjonspunkter || aktivtFortsattMedlemskapAksjonspunkt.length === 0 ?
-    aktiveInngangsAksjonspunkter : aktivtFortsattMedlemskapAksjonspunkt;
+  const sendInnAksjonspunkter = harÅpneInngangsAksjonspunkter || aktivtFortsattMedlemskapAksjonspunkt.length === 0
+    ? aktiveInngangsAksjonspunkter : aktivtFortsattMedlemskapAksjonspunkt;
 
   // @ts-ignore Fiks
   return sendInnAksjonspunkter.map((ap) => ({
