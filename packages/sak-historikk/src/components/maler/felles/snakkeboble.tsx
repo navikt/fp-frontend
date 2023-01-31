@@ -2,14 +2,13 @@ import React, { FunctionComponent } from 'react';
 import { Chat } from '@navikt/ds-react';
 import { Image } from '@navikt/ft-ui-komponenter';
 
-import HistorikkAktor from '@navikt/fp-kodeverk/src/historikkAktor';
-import navAnsattHistorikkImg from '@navikt/fp-assets/images/nav_ansatt_historikk.svg';
-import kvinneImg from '@navikt/fp-assets/images/kvinne.svg';
-import maskinImg from '@navikt/fp-assets/images/maskin.svg';
-import arbeidsgiverImg from '@navikt/fp-assets/images/arbeidsgiver.svg';
-import mannImg from '@navikt/fp-assets/images/mann.svg';
-import beslutterImg from '@navikt/fp-assets/images/beslutter.svg';
-import navBrukerKjonn from '@navikt/fp-kodeverk/src/navBrukerKjonn';
+import { historikkAktor as HistorikkAktor, navBrukerKjonn } from '@navikt/fp-kodeverk';
+import kvinneImg from '../../../images/kvinne.svg';
+import maskinImg from '../../../images/maskin.svg';
+import arbeidsgiverImg from '../../../images/arbeidsgiver.svg';
+import mannImg from '../../../images/mann.svg';
+import beslutterImg from '../../../images/beslutter.svg';
+import navAnsattHistorikkImg from '../../../images/nav_ansatt_historikk.svg';
 
 import styles from './snakkeboble.less';
 

@@ -2,9 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import ugunstAarsakTyper from '@navikt/fp-kodeverk/src/ugunstAarsakTyper';
-import dokumentMalType from '@navikt/fp-kodeverk/src/dokumentMalType';
-import FagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import { dokumentMalType, fagsakYtelseType as FagsakYtelseType, ugunstAarsakTyper } from '@navikt/fp-kodeverk';
 
 import MeldingerSakIndex from './MeldingerSakIndex';
 

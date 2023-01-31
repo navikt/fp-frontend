@@ -1,4 +1,4 @@
-export { default as AksjonspunktCode, hasAksjonspunkt, isVilkarForSykdomOppfylt } from './src/aksjonspunktCodes';
+export { default as AksjonspunktCode, hasAksjonspunkt, isUttakAksjonspunkt, isVilkarForSykdomOppfylt } from './src/aksjonspunktCodes';
 export { default as AksjonspunktCodeTilbakekreving } from './src/aksjonspunktCodesTilbakekreving';
 export { default as aksjonspunktStatus } from './src/aksjonspunktStatus';
 export { default as aksjonspunktType } from './src/aksjonspunktType';
@@ -70,3 +70,4 @@ export { default as VilkarType } from './src/vilkarType';
 export { default as vilkarUtfallType } from './src/vilkarUtfallType';
 export { default as vurderPaNyttArsakType } from './src/vurderPaNyttArsakType';
 export { default as uttakPeriodeVurdering } from './src/uttakPeriodeVurdering';
+export { default as tilbakekrevingVidereBehandling } from './src/tilbakekrevingVidereBehandling';

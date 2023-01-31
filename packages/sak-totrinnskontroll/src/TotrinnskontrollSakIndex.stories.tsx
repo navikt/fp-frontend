@@ -2,15 +2,14 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
-import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
-import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import {
+  behandlingResultatType, behandlingType, behandlingStatus, fagsakYtelseType,
+} from '@navikt/fp-kodeverk';
 import TotrinnskontrollSakIndex from '@navikt/fp-sak-totrinnskontroll';
 import {
   BehandlingAppKontekst, BehandlingÅrsak, TotrinnskontrollSkjermlenkeContext,
 } from '@navikt/fp-types';
 import { withRouter, alleKodeverk } from '@navikt/fp-storybook-utils';
-import behandlingResultatType from '@navikt/fp-kodeverk/src/behandlingResultatType';
 
 const location = {
   key: '1', pathname: '', search: '', state: {}, hash: '',

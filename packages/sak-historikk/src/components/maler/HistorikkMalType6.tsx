@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { BodyShort } from '@navikt/ds-react';
 
 import { HistorikkInnslagOpplysning } from '@navikt/fp-types';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import { findHendelseText } from './felles/historikkUtils';
 import HistorikkMal from '../HistorikkMalTsType';

@@ -4,16 +4,14 @@ import { useIntl } from 'react-intl';
 import classNames from 'classnames';
 import { Button } from '@navikt/ds-react';
 
-import dokumentMalType from '@navikt/fp-kodeverk/src/dokumentMalType';
+import { dokumentMalType, ugunstAarsakTyper, fagsakYtelseType as FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 import {
   ariaCheck, hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-form-validators';
 import { getLanguageFromSprakkode } from '@navikt/ft-utils';
-import ugunstAarsakTyper from '@navikt/fp-kodeverk/src/ugunstAarsakTyper';
 import { SelectField, TextAreaField, Form } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import FagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
 import UkjentAdresseMeldingIndex from '@navikt/fp-sak-ukjent-adresse';
 
 import styles from './messages.less';

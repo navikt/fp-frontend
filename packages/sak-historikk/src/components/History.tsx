@@ -9,9 +9,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 
 import { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
-import HistorikkAktor from '@navikt/fp-kodeverk/src/historikkAktor';
+import { KodeverkType, getKodeverknavnFn, historikkAktor as HistorikkAktor } from '@navikt/fp-kodeverk';
 
 import historikkinnslagType from '../kodeverk/historikkinnslagType';
 import Snakkeboble from './maler/felles/snakkeboble';

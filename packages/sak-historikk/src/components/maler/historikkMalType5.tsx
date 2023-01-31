@@ -1,12 +1,10 @@
 import React, { FunctionComponent, ReactNode } from 'react';
-import {
-  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
-} from 'react-intl';
-import { BodyShort } from '@navikt/ds-react';
+import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
+import { Label, BodyShort } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { HistorikkinnslagDel, HistorikkinnslagEndretFelt } from '@navikt/fp-types';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import historikkEndretFeltTypeCodes from '../../kodeverk/historikkEndretFeltTypeCodes';
 import historikkEndretFeltTypeHeadingCodes from '../../kodeverk/historikkEndretFeltTypeHeadingCodes';
@@ -151,13 +149,13 @@ const lagSoeknadsperiode = (soeknadsperiode?: HistorikkinnslagDel['soeknadsperio
     />
   ));
 
-const HistorikkMalType5: FunctionComponent<HistorikkMal & WrappedComponentProps> = ({
-  intl,
+const HistorikkMalType5: FunctionComponent<HistorikkMal> = ({
   historikkinnslag,
   behandlingLocation,
   getKodeverknavn,
   createLocationForSkjermlenke,
   saksnummer,
+<<<<<<< HEAD
 }) => (
   <>
     {historikkinnslag.historikkinnslagDeler.map((historikkinnslagDel, historikkinnslagDelIndex) => (
@@ -205,13 +203,65 @@ const HistorikkMalType5: FunctionComponent<HistorikkMal & WrappedComponentProps>
             key={`${dokumentLenke.tag}@${dokumentLenke.url}`}
             dokumentLenke={dokumentLenke}
             saksnummer={saksnummer}
+=======
+}) => {
+  const intl = useIntl();
+  return (
+    <>
+      {historikkinnslag.historikkinnslagDeler.map((historikkinnslagDel, historikkinnslagDelIndex) => (
+        <div key={
+          `historikkinnslagDel${historikkinnslagDelIndex}` // eslint-disable-line react/no-array-index-key
+        }
+        >
+          <Skjermlenke
+            skjermlenke={historikkinnslagDel.skjermlenke}
+            behandlingLocation={behandlingLocation}
+            getKodeverknavn={getKodeverknavn}
+            scrollUpOnClick
+            createLocationForSkjermlenke={createLocationForSkjermlenke}
+>>>>>>> a57f62a6c (div)
           />
-        ))}
 
-        {historikkinnslagDelIndex < historikkinnslag.historikkinnslagDeler.length - 1 && <VerticalSpacer sixteenPx />}
-      </div>
-    ))}
-  </>
-);
+          {lageElementInnhold(historikkinnslagDel, intl, getKodeverknavn).map((tekst) => (
+            <div key={tekst}><Label size="small">{tekst}</Label></div>
+          ))}
 
-export default injectIntl(HistorikkMalType5);
+          {lagGjeldendeFraInnslag(historikkinnslagDel)}
+
+          {historikkinnslagDel.soeknadsperiode && lagSoeknadsperiode(historikkinnslagDel.soeknadsperiode)}
+
+          {lagTemaHeadingId(historikkinnslagDel)}
+
+          {historikkinnslagDel.endredeFelter && historikkinnslagDel.endredeFelter.map((endretFelt, i) => (
+            <div key={`endredeFelter${i + 1}`}>
+              {formatChangedField(endretFelt, intl)}
+            </div>
+          ))}
+
+          {historikkinnslagDel.opplysninger && historikkinnslagDel.opplysninger.map((opplysning) => (
+            <FormattedMessage
+              id={findIdForOpplysningCode(opplysning)}
+              values={{ antallBarn: opplysning.tilVerdi, b: (chunks: any) => <b>{chunks}</b>, br: <br /> }}
+              key={`${getKodeverknavn(opplysning.opplysningType, KodeverkType.HISTORIKK_OPPLYSNING_TYPE)}@${opplysning.tilVerdi}`}
+            />
+          ))}
+
+          {historikkinnslagDel.årsaktekst && <BodyShort size="small">{historikkinnslagDel.årsaktekst}</BodyShort>}
+          {historikkinnslagDel.begrunnelsetekst && <BubbleText bodyText={historikkinnslagDel.begrunnelsetekst} />}
+          {historikkinnslagDel.begrunnelseFritekst && <BubbleText bodyText={historikkinnslagDel.begrunnelseFritekst} />}
+          {historikkinnslag.dokumentLinks && historikkinnslag.dokumentLinks.map((dokumentLenke) => (
+            <HistorikkDokumentLenke
+              key={`${dokumentLenke.tag}@${dokumentLenke.url}`}
+              dokumentLenke={dokumentLenke}
+              saksnummer={saksnummer}
+            />
+          ))}
+
+          {historikkinnslagDelIndex < historikkinnslag.historikkinnslagDeler.length - 1 && <VerticalSpacer sixteenPx />}
+        </div>
+      ))}
+    </>
+  );
+};
+
+export default HistorikkMalType5;

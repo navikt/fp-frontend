@@ -1,18 +1,18 @@
 import React, { FunctionComponent } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
+import { useIntl } from 'react-intl';
 
 import { findHendelseText, findResultatText } from './felles/historikkUtils';
 import Skjermlenke from './felles/Skjermlenke';
 import HistorikkMal from '../HistorikkMalTsType';
 
-const HistorikkMalType2: FunctionComponent<HistorikkMal & WrappedComponentProps> = ({
-  intl,
+const HistorikkMalType2: FunctionComponent<HistorikkMal> = ({
   historikkinnslag,
   behandlingLocation,
   getKodeverknavn,
   createLocationForSkjermlenke,
 }) => {
+  const intl = useIntl();
   const { historikkinnslagDeler } = historikkinnslag;
   return (
     <>
@@ -35,4 +35,4 @@ const HistorikkMalType2: FunctionComponent<HistorikkMal & WrappedComponentProps>
   );
 };
 
-export default injectIntl(HistorikkMalType2);
+export default HistorikkMalType2;
