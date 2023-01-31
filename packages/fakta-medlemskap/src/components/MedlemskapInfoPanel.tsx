@@ -25,12 +25,11 @@ type AksjonspunktData = Array<BekreftBosattVurderingAp
   | BekreftLovligOppholdVurderingAp
   | AvklarFortsattMedlemskapAp>;
 
-const medlemAksjonspunkter = [
+const inngangsAksjonspunkter = [
   AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT,
   AksjonspunktCode.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
   AksjonspunktCode.AVKLAR_OPPHOLDSRETT,
   AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD,
-  AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP,
 ];
 
 const mapOgFiltrerPerioder = (
@@ -43,13 +42,17 @@ const transformValues = (
   perioder: MedlemPeriode[],
   aksjonspunkter: Aksjonspunkt[],
 ): AksjonspunktData => {
-  const aktiveMedlemAksjonspunkter = aksjonspunkter
-    .filter((ap) => medlemAksjonspunkter.some((kode) => kode === ap.definisjon))
-    .filter((ap) => isAksjonspunktOpen(ap.status))
-    .filter((ap) => ap.erAktivt);
+  const aktiveInngangsAksjonspunkter = aksjonspunkter
+    .filter((ap) => inngangsAksjonspunkter.some((kode) => kode === ap.definisjon));
+  const harÅpneInngangsAksjonspunkter = aktiveInngangsAksjonspunkter.filter((ap) => isAksjonspunktOpen(ap.status)).length > 0;
+  const aktivtFortsattMedlemskapAksjonspunkt = aksjonspunkter
+    .filter((ap) => ap.definisjon === AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP);
+  // Submit inngangsaksjonspunkt dersom åpent eller det ikke finnes aksjonspunkt fortsatt medlemskap
+  const sendInnAksjonspunkter = harÅpneInngangsAksjonspunkter || aktivtFortsattMedlemskapAksjonspunkt.length === 0 ?
+    aktiveInngangsAksjonspunkter : aktivtFortsattMedlemskapAksjonspunkt;
 
   // @ts-ignore Fiks
-  return aktiveMedlemAksjonspunkter.map((ap) => ({
+  return sendInnAksjonspunkter.map((ap) => ({
     kode: ap.definisjon,
     begrunnelse: '',
     bekreftedePerioder: mapOgFiltrerPerioder(ap, perioder),
