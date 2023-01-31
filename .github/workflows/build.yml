@@ -22,6 +22,8 @@ jobs:
       push-image: ${{ github.ref_name == 'master' }} # default: false
     secrets: inherit
 
+
+
   create-issue:
     name: Issues
     if: github.ref_name == 'master'
