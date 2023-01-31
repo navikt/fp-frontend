@@ -241,53 +241,6 @@ describe('<MedlemskapFaktaIndex>', () => {
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, [{
       begrunnelse: '',
       bekreftedePerioder: [{
-        aksjonspunkter: [AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT],
-        begrunnelse: 'Dette er en begrunnelse',
-        bosattVurdering: true,
-        medlemskapManuellVurderingType: undefined,
-        personopplysningBruker: {
-          adresser: [{
-            adresseType: 'BOSTEDSADRESSE',
-            adresselinje1: 'Skogvegen 3',
-            land: 'NOR',
-            postNummer: '4353',
-            poststed: 'Klepp Stasjon',
-          }],
-          personstatus: 'BOSA',
-          region: 'NORDEN',
-        },
-        vurderingsdato: '2019-11-07',
-        årsaker: ['SKJÆRINGSTIDSPUNKT'],
-      }],
-      kode: AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP,
-    }, {
-      begrunnelse: '',
-      bekreftedePerioder: [{
-        aksjonspunkter: [AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD],
-        begrunnelse: 'Dette er en begrunnelse',
-        bosattVurdering: undefined,
-        erEosBorger: false,
-        lovligOppholdVurdering: true,
-        medlemskapManuellVurderingType: undefined,
-        oppholdsrettVurdering: undefined,
-        personopplysningBruker: {
-          adresser: [{
-            adresseType: 'BOSTEDSADRESSE',
-            adresselinje1: 'Skogvegen 3',
-            land: 'NOR',
-            postNummer: '4353',
-            poststed: 'Klepp Stasjon',
-          }],
-          personstatus: 'BOSA',
-          region: 'NORDEN',
-        },
-        vurderingsdato: '2017-10-05',
-        årsaker: ['SKJÆRINGSTIDSPUNKT'],
-      }],
-      kode: AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP,
-    }, {
-      begrunnelse: '',
-      bekreftedePerioder: [{
         aksjonspunkter: [AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD],
         begrunnelse: 'Dette er en begrunnelse',
         bosattVurdering: undefined,
