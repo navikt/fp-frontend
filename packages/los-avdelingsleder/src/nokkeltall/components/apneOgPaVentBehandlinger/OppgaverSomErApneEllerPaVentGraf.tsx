@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
+import { useIntl, IntlShape } from 'react-intl';
 import dayjs from 'dayjs';
 import { Panel } from '@navikt/ds-react';
 import { ReactECharts } from '@navikt/fp-los-felles';
@@ -83,7 +83,6 @@ const fyllInnManglendeDatoerOgSorterEtterDato = (
 };
 
 interface OwnProps {
-  intl: any;
   height: number;
   oppgaverApneEllerPaVent: OppgaverSomErApneEllerPaVent[];
 }
@@ -91,11 +90,11 @@ interface OwnProps {
 /**
  * OppgaverSomErApneEllerPaVentGraf.
  */
-const OppgaverSomErApneEllerPaVentGraf: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const OppgaverSomErApneEllerPaVentGraf: FunctionComponent<OwnProps> = ({
   height,
   oppgaverApneEllerPaVent,
 }) => {
+  const intl = useIntl();
   const paVentTekst = intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.PaVent' });
   const ikkePaVentTekst = intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.IkkePaVent' });
   const ukjentTekst = intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.Ukjent' });
@@ -204,4 +203,4 @@ const OppgaverSomErApneEllerPaVentGraf: FunctionComponent<OwnProps & WrappedComp
   );
 };
 
-export default injectIntl(OppgaverSomErApneEllerPaVentGraf);
+export default OppgaverSomErApneEllerPaVentGraf;

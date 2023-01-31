@@ -1,10 +1,10 @@
-import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
 type AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp = {
   omsorgsovertakelseDato: string;
   vilkarType: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.OMSORGSOVERTAKELSE>;
+} & AksjonspunktTilBekreftelse<AksjonspunktCode.OMSORGSOVERTAKELSE>;
 
 export default AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp;

@@ -10,11 +10,10 @@ import { getDateAndTime } from '@navikt/ft-utils';
 
 import { AlleKodeverk } from '@navikt/fp-types';
 import { OppgaveReservasjonEndringDatoModal, FlyttReservasjonModal } from '@navikt/fp-los-felles';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import { getKodeverknavnFraKode } from '@navikt/fp-kodeverk/src/kodeverkUtils';
-import removeIcon from '@navikt/fp-assets/images/remove.svg';
-import gruppeHoverUrl from '@navikt/fp-assets/images/gruppe_hover.svg';
-import gruppeUrl from '@navikt/fp-assets/images/gruppe.svg';
+import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
+import removeIcon from '../../images/remove.svg';
+import gruppeHoverUrl from '../../images/gruppe_hover.svg';
+import gruppeUrl from '../../images/gruppe.svg';
 
 import { restApiHooks, RestApiPathsKeys } from '../../data/fplosRestApi';
 import Reservasjon from '../../typer/reservasjonTsType';

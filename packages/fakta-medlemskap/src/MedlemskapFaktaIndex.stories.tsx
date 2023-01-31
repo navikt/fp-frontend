@@ -15,6 +15,10 @@ import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import MedlemskapFaktaIndex from './MedlemskapFaktaIndex';
 
+import '@navikt/ds-css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
+import '@navikt/ft-form-hooks/dist/style.css';
+
 const behandling = {
   uuid: '1',
   versjon: 1,

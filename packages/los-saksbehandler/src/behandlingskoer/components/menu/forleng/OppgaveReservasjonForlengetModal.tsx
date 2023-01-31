@@ -7,7 +7,8 @@ import {
 } from '@navikt/ft-ui-komponenter';
 
 import { Modal, Oppgave } from '@navikt/fp-los-felles';
-import innvilgetImageUrl from '@navikt/fp-assets/images/innvilget_valgt.svg';
+
+import innvilgetImageUrl from '../../../../images/innvilget_valgt.svg';
 
 import styles from './oppgaveReservasjonForlengetModal.less';
 

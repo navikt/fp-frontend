@@ -3,9 +3,7 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 import { Aksjonspunkt } from '@navikt/ft-types';
 
-import tilretteleggingType from '@navikt/fp-kodeverk/src/tilretteleggingType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import { aksjonspunktStatus, AksjonspunktCode, tilretteleggingType } from '@navikt/fp-kodeverk';
 import {
   ArbeidsforholdFodselOgTilrettelegging,
   Behandling,
@@ -18,6 +16,10 @@ import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import tilretteleggingPermisjon from '../testdata/tilretteleggningMedPermisjon';
 
 import FodselOgTilretteleggingFaktaIndex from './FodselOgTilretteleggingFaktaIndex';
+
+import '@navikt/ds-css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
+import '@navikt/ft-form-hooks/dist/style.css';
 
 const behandling = {
   uuid: '1',
@@ -151,7 +153,7 @@ export const TilretteleggingMedVelferdspermisjon = Template.bind({});
 TilretteleggingMedVelferdspermisjon.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.FODSELTILRETTELEGGING,
+    definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
@@ -164,7 +166,7 @@ export const AksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigNær
 AksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigNæringsdrivende.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.FODSELTILRETTELEGGING,
+    definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
@@ -177,7 +179,7 @@ export const ErOverstyrer = Template.bind({});
 ErOverstyrer.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.FODSELTILRETTELEGGING,
+    definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,

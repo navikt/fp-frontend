@@ -10,7 +10,7 @@ import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
 import { Landkode, KodeverkType } from '@navikt/ft-kodeverk';
 
-import kanIkkeOppgiAnnenForelderArsaker from '@navikt/fp-kodeverk/src/kanIkkeOppgiAnnenForelderArsak';
+import { kanIkkeOppgiAnnenForelderArsak } from '@navikt/fp-kodeverk';
 import {
   hasValidFodselsnummer, hasValidFodselsnummerFormat, required, sammeFodselsnummerSomSokerMessage,
 } from '@navikt/ft-form-validators';
@@ -106,13 +106,13 @@ const AnnenForelderPanel: FunctionComponent<OwnProps> = ({
               isReadOnly={readOnly}
               radios={[{
                 label: formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.1' }),
-                value: kanIkkeOppgiAnnenForelderArsaker.UKJENT_FORELDER,
+                value: kanIkkeOppgiAnnenForelderArsak.UKJENT_FORELDER,
               }, {
                 label: formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.2' }),
-                value: kanIkkeOppgiAnnenForelderArsaker.IKKE_NORSK_FNR,
+                value: kanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR,
               }]}
             />
-            {kanIkkeOppgiBegrunnelse?.arsak === kanIkkeOppgiAnnenForelderArsaker.IKKE_NORSK_FNR && (
+            {kanIkkeOppgiBegrunnelse?.arsak === kanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR && (
             <>
               <VerticalSpacer sixteenPx />
               <SelectField

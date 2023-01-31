@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useCallback } from 'react';
-import { injectIntl, WrappedComponentProps, FormattedMessage } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 import { Button, Label } from '@navikt/ds-react';
 import { getDateAndTime } from '@navikt/ft-utils';
 import {
@@ -7,7 +7,8 @@ import {
 } from '@navikt/ft-ui-komponenter';
 
 import { Modal, Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
-import advarselImageUrl from '@navikt/fp-assets/images/advarsel.svg';
+
+import advarselImageUrl from '../images/advarsel.svg';
 
 import styles from './oppgaveErReservertAvAnnenModal.less';
 
@@ -22,12 +23,12 @@ type OwnProps = Readonly<{
  *
  * Modal som vises når en åpner oppgave som er reservert av en annen saksbehandler
  */
-const OppgaveErReservertAvAnnenModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const OppgaveErReservertAvAnnenModal: FunctionComponent<OwnProps> = ({
   lukkErReservertModalOgOpneOppgave,
   oppgave,
   oppgaveStatus,
 }) => {
+  const intl = useIntl();
   const lukk = useCallback(() => lukkErReservertModalOgOpneOppgave(oppgave), [oppgave.id]);
   return (
     <Modal
@@ -76,4 +77,4 @@ const OppgaveErReservertAvAnnenModal: FunctionComponent<OwnProps & WrappedCompon
   );
 };
 
-export default injectIntl(OppgaveErReservertAvAnnenModal);
+export default OppgaveErReservertAvAnnenModal;

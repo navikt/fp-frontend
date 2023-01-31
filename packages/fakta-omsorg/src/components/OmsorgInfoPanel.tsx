@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 import { Heading } from '@navikt/ds-react';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import {
@@ -18,7 +18,7 @@ import AlleBarnPanel from './personer/AlleBarnPanel';
 import ForelderPanel from './personer/ForelderPanel';
 import Boks from './Boks';
 
-const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = aksjonspunktCodes;
+const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = AksjonspunktCode;
 
 const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   const helpTexts = [];
@@ -33,7 +33,7 @@ const buildInitialValues = (
   ytelsefordeling: Ytelsefordeling,
   aksjonspunkter: Aksjonspunkt[],
 ): FormValues => {
-  const omsorgAp = aksjonspunkter.filter((ap) => ap.definisjon === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG);
+  const omsorgAp = aksjonspunkter.filter((ap) => ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG);
   return {
     ...OmsorgFaktaForm.buildInitialValues(ytelsefordeling, omsorgAp),
     ...FaktaBegrunnelseTextFieldNew.buildInitialValues(omsorgAp),

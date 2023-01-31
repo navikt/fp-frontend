@@ -1,13 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, BodyShort } from '@navikt/ds-react';
-
-import advarselImageUrl from '@navikt/fp-assets/images/advarsel.svg';
 import { Modal } from '@navikt/fp-los-felles';
-
 import {
   FlexColumn, FlexContainer, FlexRow, Image,
 } from '@navikt/ft-ui-komponenter';
+
+import advarselImageUrl from '../../images/advarsel.svg';
 import Saksliste from '../../typer/sakslisteAvdelingTsType';
 
 import styles from './sletteSakslisteModal.less';

@@ -6,7 +6,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Label, BodyShort } from '@navikt/ds-react';
 import { PersonopplysningerBasis } from '@navikt/fp-types';
-import barnIkonUrl from '@navikt/fp-assets/images/child.svg';
+import barnIkonUrl from '../../images/child.svg';
 import Boks from '../Boks';
 
 import styles from './alleBarnPanel.less';

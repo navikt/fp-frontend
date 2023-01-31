@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import classnames from 'classnames/bind';
-import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
+import { IntlShape, useIntl } from 'react-intl';
 import { Undertekst, TypografiProps } from 'nav-frontend-typografi';
 
 import LabelType from './LabelType';
@@ -22,12 +22,12 @@ interface LabelProps {
   readOnly?: boolean;
 }
 
-export const Label: FunctionComponent<LabelProps & WrappedComponentProps> = ({
-  intl,
+export const Label: FunctionComponent<LabelProps> = ({
   input,
   readOnly,
   typographyElement: TypoElem,
 }) => {
+  const intl = useIntl();
   if (!input) {
     return null;
   }
@@ -46,4 +46,4 @@ Label.defaultProps = {
   readOnly: false,
 };
 
-export default injectIntl(Label);
+export default Label;

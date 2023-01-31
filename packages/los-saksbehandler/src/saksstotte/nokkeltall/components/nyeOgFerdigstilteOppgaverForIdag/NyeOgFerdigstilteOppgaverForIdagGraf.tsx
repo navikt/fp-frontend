@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { Panel } from '@navikt/ds-react';
 import { KodeverkMedNavn } from '@navikt/ft-types';
 import { BehandlingType } from '@navikt/ft-kodeverk';
@@ -24,12 +24,12 @@ interface OwnProps {
 /**
  * NyeOgFerdigstilteOppgaverForIdagGraf
  */
-export const NyeOgFerdigstilteOppgaverForIdagGraf: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const NyeOgFerdigstilteOppgaverForIdagGraf: FunctionComponent<OwnProps> = ({
   height,
   nyeOgFerdigstilteOppgaver,
   behandlingTyper,
 }) => {
+  const intl = useIntl();
   const behandlingTypeNavnForYAkse = useMemo(() => behandlingstypeOrder.map((bType) => {
     if (bType === BehandlingType.FORSTEGANGSSOKNAD) {
       return intl.formatMessage({ id: 'NyeOgFerdigstilteOppgaverForIdagGraf.Førstegangsbehandling' });
@@ -104,4 +104,4 @@ export const NyeOgFerdigstilteOppgaverForIdagGraf: FunctionComponent<OwnProps & 
   );
 };
 
-export default injectIntl(NyeOgFerdigstilteOppgaverForIdagGraf);
+export default NyeOgFerdigstilteOppgaverForIdagGraf;

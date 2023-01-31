@@ -11,7 +11,7 @@ import { FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { Ytelsefordeling } from '@navikt/fp-types';
 import { AvklarAnnenforelderHarRettAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import Boks from '../Boks';
 import HarAnnenForelderRettFelter from './HarAnnenForelderRettFelter';

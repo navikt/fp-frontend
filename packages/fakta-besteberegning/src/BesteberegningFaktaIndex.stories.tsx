@@ -3,18 +3,20 @@ import React from 'react';
 import { Story } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
-import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import {
+  aksjonspunktStatus, behandlingType, behandlingStatus, AksjonspunktCode, venteArsakType,
+} from '@navikt/fp-kodeverk';
 import {
   Behandling, Aksjonspunkt, Beregningsgrunnlag,
 } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import venteArsakType from '@navikt/fp-kodeverk/src/venteArsakType';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import BesteberegningFaktaIndex from './BesteberegningFaktaIndex';
 import { beregningsgrunnlag as scenarioBG } from './scenario/BesteberegningScenario';
+
+import '@navikt/ds-css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
+import '@navikt/ft-form-hooks/dist/style.css';
 
 const arbeidsgiverOpplysninger = {
   974652269: {
@@ -90,7 +92,7 @@ export const BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt = Template.bin
 BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt.args = {
   behandling: behandlingMal as Behandling,
   beregningsgrunnlag: scenarioBG,
-  aksjonspunkter: [lagAksjonspunkt(aksjonspunktCodes.KONTROLLER_AUTOMATISK_BESTEBEREGNING, aksjonspunktStatus.OPPRETTET)],
+  aksjonspunkter: [lagAksjonspunkt(AksjonspunktCode.KONTROLLER_AUTOMATISK_BESTEBEREGNING, aksjonspunktStatus.OPPRETTET)],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
@@ -101,7 +103,7 @@ BesteberegningMedDagpengerOgArbeidLukketAksjonspunktPåVent.args = {
     venteArsakKode: venteArsakType.VENT_PÅ_KORRIGERT_BESTEBEREGNING,
   } as Behandling,
   beregningsgrunnlag: scenarioBG,
-  aksjonspunkter: [lagAksjonspunkt(aksjonspunktCodes.KONTROLLER_AUTOMATISK_BESTEBEREGNING, aksjonspunktStatus.UTFORT,
+  aksjonspunkter: [lagAksjonspunkt(AksjonspunktCode.KONTROLLER_AUTOMATISK_BESTEBEREGNING, aksjonspunktStatus.UTFORT,
     'Min begrunnelse for at besteberegningen er feil')],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
@@ -110,6 +112,6 @@ export const BesteberegningMedAvvik = Template.bind({});
 BesteberegningMedAvvik.args = {
   behandling: behandlingMal as Behandling,
   beregningsgrunnlag: scenarioBG,
-  aksjonspunkter: [lagAksjonspunkt(aksjonspunktCodes.MANUELL_KONTROLL_AV_BESTEBEREGNING, aksjonspunktStatus.OPPRETTET)],
+  aksjonspunkter: [lagAksjonspunkt(AksjonspunktCode.MANUELL_KONTROLL_AV_BESTEBEREGNING, aksjonspunktStatus.OPPRETTET)],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };

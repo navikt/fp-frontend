@@ -5,7 +5,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 
 import { AlleKodeverk, Oppholdstillatelse } from '@navikt/fp-types';
-import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 
 const headerTextCodes = [
   'OppholdstillatelseTabell.Periode',
@@ -40,7 +40,7 @@ const OppholdstillatelseTabell: FunctionComponent<OwnProps> = ({
             )}
           </TableColumn>
           <TableColumn>
-            {alleKodeverk[kodeverkTyper.OPPHOLDSTILLATELSE_TYPE].find((k) => k.kode === opphold.oppholdstillatelseType)?.navn}
+            {alleKodeverk[KodeverkType.OPPHOLDSTILLATELSE_TYPE].find((k) => k.kode === opphold.oppholdstillatelseType)?.navn}
           </TableColumn>
         </TableRow>
       ))}

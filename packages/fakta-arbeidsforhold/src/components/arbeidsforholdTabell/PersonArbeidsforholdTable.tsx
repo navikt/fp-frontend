@@ -6,10 +6,10 @@ import {
   DateLabel, PeriodLabel, Table, TableColumn, TableRow, Image,
 } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity, TIDENES_ENDE } from '@navikt/ft-utils';
-import erIBrukImageUrl from '@navikt/fp-assets/images/stjerne.svg';
 import { ArbeidsgiverOpplysningerPerId, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
 import ArbeidsforholdKomplettVurderingType from '@navikt/fp-kodeverk/src/arbeidsforholdKomplettVurderingType';
 
+import erIBrukImageUrl from '../../images/stjerne.svg';
 import IngenArbeidsforholdRegistrert from './IngenArbeidsforholdRegistrert';
 
 import styles from './personArbeidsforholdTable.less';

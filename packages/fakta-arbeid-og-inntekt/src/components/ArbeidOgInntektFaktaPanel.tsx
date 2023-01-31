@@ -11,11 +11,9 @@ import {
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import SettPaVentModalIndex from '@navikt/fp-modal-sett-pa-vent';
 import { VerticalSpacer, Table } from '@navikt/ft-ui-komponenter';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import ArbeidsforholdKomplettVurderingType from '@navikt/fp-kodeverk/src/arbeidsforholdKomplettVurderingType';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import venteArsakType from '@navikt/fp-kodeverk/src/venteArsakType';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import {
+  AksjonspunktCode, KodeverkType, venteArsakType, aksjonspunktStatus, ArbeidsforholdKomplettVurderingType,
+} from '@navikt/fp-kodeverk';
 
 import ArbeidsforholdRad from './ArbeidsforholdRad';
 import ArbeidsforholdOgInntektRadData, { Avklaring } from '../types/arbeidsforholdOgInntekt';

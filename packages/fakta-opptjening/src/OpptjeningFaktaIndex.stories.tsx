@@ -2,12 +2,14 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import opptjeningAktivitetType from '@navikt/fp-kodeverk/src/opptjeningAktivitetType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import { AksjonspunktCode, aksjonspunktStatus, opptjeningAktivitetType } from '@navikt/fp-kodeverk';
 import OpptjeningFaktaIndex from '@navikt/fp-fakta-opptjening';
 import { Behandling, Aksjonspunkt, Opptjening } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
+
+import '@navikt/ds-css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
+import '@navikt/ft-form-hooks/dist/style.css';
 
 const behandling = {
   uuid: '1',
@@ -47,7 +49,7 @@ const Template: Story<{
     aksjonspunkter={aksjonspunkter}
     alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING]: merknaderFraBeslutter,
+      [AksjonspunktCode.VURDER_PERIODER_MED_OPPTJENING]: merknaderFraBeslutter,
     }}
     submitCallback={submitCallback}
     readOnly={false}
@@ -61,7 +63,7 @@ export const MedAksjonspunkt = Template.bind({});
 MedAksjonspunkt.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING,
+    definisjon: AksjonspunktCode.VURDER_PERIODER_MED_OPPTJENING,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
@@ -149,7 +151,7 @@ export const MedToLikePerioderForSammeAktivitetstype = Template.bind({});
 MedToLikePerioderForSammeAktivitetstype.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING,
+    definisjon: AksjonspunktCode.VURDER_PERIODER_MED_OPPTJENING,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
@@ -191,7 +193,7 @@ export const MedAlleOpptjeningsaktiviteterFiltrertBort = Template.bind({});
 MedAlleOpptjeningsaktiviteterFiltrertBort.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING,
+    definisjon: AksjonspunktCode.VURDER_PERIODER_MED_OPPTJENING,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,

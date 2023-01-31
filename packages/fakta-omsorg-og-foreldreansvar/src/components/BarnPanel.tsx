@@ -5,7 +5,7 @@ import { Label, BodyShort } from '@navikt/ds-react';
 
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Soknad } from '@navikt/fp-types';
 
 interface OwnProps {
@@ -28,7 +28,7 @@ const BarnPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   return (
     <FaktaGruppe
       title={intl.formatMessage({ id: 'BarnPanel.BarnDetSøkesOm' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OMSORGSOVERTAKELSE]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.OMSORGSOVERTAKELSE]}
     >
       {Object.keys(adopsjonFodelsedatoer).map((key) => (
         <React.Fragment key={`${key}`}>

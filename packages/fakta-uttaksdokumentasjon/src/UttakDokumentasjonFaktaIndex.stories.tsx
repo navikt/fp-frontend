@@ -2,8 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 import {
   Behandling, Aksjonspunkt, DokumentasjonVurderingBehov, UttakType, UttakÅrsak, UttakVurdering,
 } from '@navikt/fp-types';
@@ -11,6 +10,10 @@ import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import UttakDokumentasjonFaktaIndex from './UttakDokumentasjonFaktaIndex';
+
+import '@navikt/ds-css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
+import '@navikt/ft-form-hooks/dist/style.css';
 
 const behandling = {
   uuid: '1',
@@ -76,7 +79,7 @@ const Template: Story<{
 export const AksjonspunktMedUavklartePerioder = Template.bind({});
 AksjonspunktMedUavklartePerioder.args = {
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
+    definisjon: AksjonspunktCode.KONTROLLER_AKTIVITETSKRAV,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
@@ -90,7 +93,7 @@ AksjonspunktMedUavklartePerioder.args = {
 export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet = Template.bind({});
 AksjonspunktSomErBekreftetOgBehandlingAvsluttet.args = {
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
+    definisjon: AksjonspunktCode.KONTROLLER_AKTIVITETSKRAV,
     status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette er en begrunnelse',
     kanLoses: false,
@@ -110,7 +113,7 @@ AksjonspunktSomErBekreftetOgBehandlingAvsluttet.args = {
 export const AksjonspunktErBekreftetMenBehandlingErÅpen = Template.bind({});
 AksjonspunktErBekreftetMenBehandlingErÅpen.args = {
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
+    definisjon: AksjonspunktCode.KONTROLLER_AKTIVITETSKRAV,
     status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette er en begrunnelse',
     kanLoses: true,

@@ -3,11 +3,9 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 import { formHooks } from '@navikt/ft-form-hooks';
 
-import relatertYtelseTilstand from '@navikt/fp-kodeverk/src/relatertYtelseTilstand';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, relatertYtelseTilstand, KodeverkType } from '@navikt/fp-kodeverk';
 import { DateLabel, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { KodeverkMedNavn, RelatertTilgrensedYtelse, Soknad } from '@navikt/fp-types';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 
 import styles from './rettighetFaktaPanel.less';
 
@@ -45,7 +43,7 @@ const RettighetFaktaPanel: FunctionComponent<PureOwnProps> & StaticFunctions = (
   return (
     <FaktaGruppe
       title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.Rettighet' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OMSORGSOVERTAKELSE]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.OMSORGSOVERTAKELSE]}
     >
       <BodyShort size="small">{farSokerType || '-'}</BodyShort>
       <VerticalSpacer sixteenPx />

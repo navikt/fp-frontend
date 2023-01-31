@@ -3,9 +3,8 @@ import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag,
 } from '@navikt/fp-types';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
 import Behandling from '@navikt/fp-types/src/behandlingTsType';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 import BesteberegningAP
   from '@navikt/fp-types-avklar-aksjonspunkter/src/fakta/KontrollerBesteberegningAP';
 import BesteMånederVisningPanel from './BesteManederVisningPanel';
@@ -48,8 +47,8 @@ const BesteberegningPanel: FunctionComponent<OwnProps> = ({
     return null;
   }
   const førstePeriode = beregningsgrunnlagPeriode[0];
-  const besteberegningAP = aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.KONTROLLER_AUTOMATISK_BESTEBEREGNING
-    || ap.definisjon === aksjonspunktCodes.MANUELL_KONTROLL_AV_BESTEBEREGNING);
+  const besteberegningAP = aksjonspunkter.find((ap) => ap.definisjon === AksjonspunktCode.KONTROLLER_AUTOMATISK_BESTEBEREGNING
+    || ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_BESTEBEREGNING);
   return (
     <div>
       {!!besteberegningAP

@@ -11,7 +11,7 @@ import {
   hasValidDate, hasValidInteger, maxValue, minValue, required,
 } from '@navikt/ft-form-validators';
 import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@navikt/fp-fakta-felles';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { BekreftTerminbekreftelseAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -76,7 +76,7 @@ export const TermindatoFaktaForm: FunctionComponent<OwnProps> & StaticFunctions 
     <>
       <FaktaGruppe
         title={intl.formatMessage({ id: 'TermindatoFaktaForm.ApplicationInformation' })}
-        merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.TERMINBEKREFTELSE]}
+        merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.TERMINBEKREFTELSE]}
       >
         <FlexContainer>
           <FlexRow>
@@ -160,7 +160,7 @@ TermindatoFaktaForm.buildInitialValues = (soknad, familiehendelse, aksjonspunkt)
 };
 
 TermindatoFaktaForm.transformValues = (values: FormValues): BekreftTerminbekreftelseAp => ({
-  kode: aksjonspunktCodes.TERMINBEKREFTELSE,
+  kode: AksjonspunktCode.TERMINBEKREFTELSE,
   utstedtdato: values.utstedtdato,
   termindato: values.termindato,
   antallBarn: values.antallBarn,

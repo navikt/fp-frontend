@@ -4,8 +4,7 @@ import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Heading } from '@navikt/ds-react';
 
-import foreldreType from '@navikt/fp-kodeverk/src/foreldreType';
-import familieHendelseType from '@navikt/fp-kodeverk/src/familieHendelseType';
+import { familieHendelseType, foreldreType } from '@navikt/fp-kodeverk';
 
 import SoknadData from '../../felles/SoknadData';
 

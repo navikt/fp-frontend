@@ -1,4 +1,4 @@
-import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
@@ -6,6 +6,6 @@ type ForeslaVedtakManueltAp = {
   overskrift?: string;
   fritekstBrev?: string;
   skalBrukeOverstyrendeFritekstBrev?: boolean;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.FORESLA_VEDTAK_MANUELT>;
+} & AksjonspunktTilBekreftelse<AksjonspunktCode.FORESLA_VEDTAK_MANUELT>;
 
 export default ForeslaVedtakManueltAp;

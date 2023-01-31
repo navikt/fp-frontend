@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import dayjs from 'dayjs';
-import { injectIntl, WrappedComponentProps, FormattedMessage } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Label } from '@navikt/ds-react';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
@@ -80,12 +80,12 @@ const formDefaultValues = { ytelseType: ALLE_YTELSETYPER_VALGT, ukevalg: UKE_2 }
 /**
  * TilBehandlingPanel.
  */
-export const TilBehandlingPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const TilBehandlingPanel: FunctionComponent<OwnProps> = ({
   height,
   oppgaverPerDato,
   getValueFromLocalStorage,
 }) => {
+  const intl = useIntl();
   const behandlingTyper = useLosKodeverk(KodeverkType.BEHANDLING_TYPE);
   const fagsakYtelseTyper = useLosKodeverk(KodeverkType.FAGSAK_YTELSE);
   const stringFromStorage = getValueFromLocalStorage(formName);
@@ -147,4 +147,4 @@ export const TilBehandlingPanel: FunctionComponent<OwnProps & WrappedComponentPr
   );
 };
 
-export default injectIntl(TilBehandlingPanel);
+export default TilBehandlingPanel;

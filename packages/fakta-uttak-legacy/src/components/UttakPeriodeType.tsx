@@ -1,18 +1,17 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { Label, BodyShort, Detail } from '@navikt/ds-react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Image } from '@navikt/ft-ui-komponenter';
 
-import overforingArsakCodes from '@navikt/fp-kodeverk/src/overforingArsakCodes';
-import utsettelseArsakCodes from '@navikt/fp-kodeverk/src/utsettelseArsakCodes';
-import oppholdArsakType from '@navikt/fp-kodeverk/src/oppholdArsakType';
+import {
+  KodeverkType, overforingArsakCodes, oppholdArsakType, utsettelseArsakCodes,
+} from '@navikt/fp-kodeverk';
 import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
-import editPeriodeIcon from '@navikt/fp-assets/images/endre.svg';
-import editPeriodeDisabledIcon from '@navikt/fp-assets/images/endre_disablet.svg';
-import removePeriod from '@navikt/fp-assets/images/remove.svg';
-import removePeriodDisabled from '@navikt/fp-assets/images/remove_disabled.svg';
 import { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import editPeriodeIcon from '../images/endre.svg';
+import editPeriodeDisabledIcon from '../images/endre_disablet.svg';
+import removePeriod from '../images/remove.svg';
+import removePeriodDisabled from '../images/remove_disabled.svg';
 
 import lagVisningsNavn from './utils/lagVisningsNavn';
 
@@ -113,7 +112,7 @@ interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-export const UttakPeriodeType: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+export const UttakPeriodeType: FunctionComponent<OwnProps> = ({
   arbeidsgiverReferanse,
   arbeidstidprosent,
   editPeriode,
@@ -123,7 +122,6 @@ export const UttakPeriodeType: FunctionComponent<OwnProps & WrappedComponentProp
   fraDato,
   getKodeverknavn,
   id,
-  intl,
   isAnyFormOpen,
   isFromSøknad,
   isNyPeriodeFormOpen,
@@ -138,6 +136,7 @@ export const UttakPeriodeType: FunctionComponent<OwnProps & WrappedComponentProp
   uttakPeriodeType,
   arbeidsgiverOpplysningerPerId,
 }) => {
+  const intl = useIntl();
   const isAnyFormOrNyPeriodeOpen = isAnyFormOpen() || isNyPeriodeFormOpen;
   const numberOfDaysAndWeeks = calcDaysAndWeeks(fraDato, tilDato);
   return (
@@ -225,4 +224,4 @@ UttakPeriodeType.defaultProps = {
   erSelvstendig: false,
 };
 
-export default injectIntl(UttakPeriodeType);
+export default UttakPeriodeType;

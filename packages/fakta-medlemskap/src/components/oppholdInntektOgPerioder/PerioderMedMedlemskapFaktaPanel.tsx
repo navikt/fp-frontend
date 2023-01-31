@@ -10,13 +10,13 @@ import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { required } from '@navikt/ft-form-validators';
 import { Aksjonspunkt } from '@navikt/ft-types';
 
-import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
-import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import {
+  AksjonspunktCode, KodeverkType, getKodeverknavnFn,
+} from '@navikt/fp-kodeverk';
 import {
   MedlemPeriode, Medlemskap, Soknad, AlleKodeverk,
 } from '@navikt/fp-types';
+import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 const headerTextCodes = [
   'PerioderMedMedlemskapFaktaPanel.Period',
@@ -75,10 +75,10 @@ const PerioderMedMedlemskapFaktaPanel: FunctionComponent<OwnProps> & StaticFunct
     );
   }
 
-  const aksjonspunktKode = valgtPeriode.aksjonspunkter.find((apKode) => apKode === aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE);
+  const aksjonspunktKode = valgtPeriode.aksjonspunkter.find((apKode) => apKode === AksjonspunktCode.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE);
   const aksjonspunkt = aksjonspunkter.find((ap) => aksjonspunktKode === ap.definisjon);
 
-  const erAksjonspunktLukket = aksjonspunkt ? !isAksjonspunktOpen(aksjonspunkt.status) : false;
+  const erAksjonspunktLukket = aksjonspunkt ? aksjonspunkt.status !== AksjonspunktStatus.OPPRETTET : false;
 
   const getKodeverk = getKodeverknavnFn(alleKodeverk);
 
@@ -88,7 +88,7 @@ const PerioderMedMedlemskapFaktaPanel: FunctionComponent<OwnProps> & StaticFunct
   return (
     <FaktaGruppe
       title={intl.formatMessage({ id: 'PerioderMedMedlemskapFaktaPanel.ApplicationInformation' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE]}
     >
       <Table headerTextCodes={headerTextCodes} noHover>
         {sortertePerioder.map((periode) => {

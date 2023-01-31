@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { AlleKodeverk } from '@navikt/ft-types';
 
-import foreldreType from '@navikt/fp-kodeverk/src/foreldreType';
+import { familieHendelseType, foreldreType } from '@navikt/fp-kodeverk';
 import {
   SprakPapirsoknadIndex,
   RettigheterPapirsoknadIndex,
@@ -16,7 +16,6 @@ import {
   SoknadData,
   OmsorgOgAdopsjonTransformedFormValues,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
-import familieHendelseType from '@navikt/fp-kodeverk/src/familieHendelseType';
 
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import styles from './registreringFodselGrid.less';

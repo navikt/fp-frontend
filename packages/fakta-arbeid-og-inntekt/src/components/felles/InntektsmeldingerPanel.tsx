@@ -7,16 +7,15 @@ import {
   Image, FlexColumn, FlexRow, Tooltip, VerticalSpacer, FloatRight, PeriodLabel, AvsnittSkiller, DateLabel, FlexContainer,
 } from '@navikt/ft-ui-komponenter';
 
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import pilOppIkonUrl from '@navikt/fp-assets/images/pil_opp.svg';
-import pilNedIkonUrl from '@navikt/fp-assets/images/pil_ned.svg';
-import advarselIkonUrl from '@navikt/fp-assets/images/advarsel2.svg';
+import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
-import { getKodeverknavnFraKode } from '@navikt/fp-kodeverk/src/kodeverkUtils';
 import { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
+import pilOppIkonUrl from '../../images/pil_opp.svg';
+import pilNedIkonUrl from '../../images/pil_ned.svg';
+import advarselIkonUrl from '../../images/advarsel2.svg';
+import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 
 import styles from './inntektsmeldingerPanel.less';
-import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 
 const erMatch = (
   arbeidsforhold: AoIArbeidsforhold,

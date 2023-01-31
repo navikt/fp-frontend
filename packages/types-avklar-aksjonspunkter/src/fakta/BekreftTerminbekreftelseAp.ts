@@ -1,4 +1,4 @@
-import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
@@ -6,6 +6,6 @@ type BekreftTerminbekreftelseAp = {
   utstedtdato: string;
   termindato: string;
   antallBarn: number;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.TERMINBEKREFTELSE>
+} & AksjonspunktTilBekreftelse<AksjonspunktCode.TERMINBEKREFTELSE>
 
 export default BekreftTerminbekreftelseAp;

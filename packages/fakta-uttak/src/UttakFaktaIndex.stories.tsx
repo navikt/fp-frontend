@@ -9,14 +9,16 @@ import {
 } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import uttakPeriodeType from '@navikt/fp-kodeverk/src/uttakPeriodeType';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 import { RelasjonsRolleType } from '@navikt/ft-kodeverk';
+import { aksjonspunktStatus, uttakPeriodeType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import UttakFaktaIndex from './UttakFaktaIndex';
 import UtsettelseÅrsak from './kodeverk/utsettelseÅrsak';
 import OverføringÅrsak from './kodeverk/overføringÅrsak';
+
+import '@navikt/ds-css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
+import '@navikt/ft-form-hooks/dist/style.css';
 
 const arbeidsgiverOpplysningerPerId = {
   910909088: {

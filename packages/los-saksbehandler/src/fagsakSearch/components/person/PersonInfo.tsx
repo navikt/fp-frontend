@@ -1,14 +1,15 @@
 import React, { FunctionComponent } from 'react';
 import dayjs from 'dayjs';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { Heading, Detail } from '@navikt/ds-react';
 import {
   FlexContainer, FlexRow, FlexColumn, Image,
 } from '@navikt/ft-ui-komponenter';
 
-import urlKvinne from '@navikt/fp-assets/images/kvinne.svg';
-import urlMann from '@navikt/fp-assets/images/mann.svg';
 import { KjønnkodeEnum, Person } from '@navikt/fp-types';
+
+import urlKvinne from '../../../images/kvinne.svg';
+import urlMann from '../../../images/mann.svg';
 
 import AlderVisning from './Aldervisning';
 import MerkePanel from './Merkepanel';
@@ -30,10 +31,10 @@ interface OwnProps {
  * erDod:false diskresjonskode:"6" dødsdato:"1990.03.03"} medPanel />
  * ```
  */
-const PersonInfo: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+const PersonInfo: FunctionComponent<OwnProps> = ({
   person,
-  intl,
 }) => {
+  const intl = useIntl();
   const {
     kjønn, dødsdato, diskresjonskode, fødselsdato, navn, fødselsnummer,
   } = person;
@@ -68,4 +69,4 @@ const PersonInfo: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   );
 };
 
-export default injectIntl(PersonInfo);
+export default PersonInfo;

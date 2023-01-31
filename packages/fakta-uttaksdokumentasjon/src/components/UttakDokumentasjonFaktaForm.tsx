@@ -7,11 +7,10 @@ import { Form } from '@navikt/ft-form-hooks';
 import { Button, Heading } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, DokumentasjonVurderingBehov } from '@navikt/fp-types';
 import { FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
 import { VurderDokumentasjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 
 import UttakDokumentasjonFaktaTable from './UttakDokumentasjonFaktaTable';
 
@@ -42,7 +41,7 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
   const bekreft = useCallback((begrunnelse: string) => {
     settBekreftKnappTrykket(true);
     submitCallback({
-      kode: aksjonspunktCodes.VURDER_UTTAK_DOKUMENTASJON,
+      kode: AksjonspunktCode.VURDER_UTTAK_DOKUMENTASJON,
       vurderingBehov: dokBehov,
       begrunnelse,
     });

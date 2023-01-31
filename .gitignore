@@ -5,7 +5,7 @@
 /coverage/
 *.iml
 *.log*
-/node_modules
+node_modules
 dist
 lerna-debug.log
 .vscode

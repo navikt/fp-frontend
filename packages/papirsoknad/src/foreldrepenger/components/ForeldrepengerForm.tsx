@@ -5,9 +5,7 @@ import { KodeverkMedNavn } from '@navikt/ft-types';
 import { omitOne } from '@navikt/ft-utils';
 
 import { AlleKodeverk } from '@navikt/fp-types';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import familieHendelseType from '@navikt/fp-kodeverk/src/familieHendelseType';
-import foreldreType from '@navikt/fp-kodeverk/src/foreldreType';
+import { foreldreType, KodeverkType, familieHendelseType } from '@navikt/fp-kodeverk';
 import {
   SoknadData,
   MottattDatoPapirsoknadIndex,

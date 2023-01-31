@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import { InntektArbeidYtelse, AlleKodeverk } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -22,10 +22,10 @@ const YtelserFaktaIndex: FunctionComponent<OwnProps> = ({
   <RawIntlProvider value={intl}>
     <YtelserFaktaPanel
       inntektArbeidYtelse={inntektArbeidYtelse}
-      relatertYtelseTyper={alleKodeverk[kodeverkTyper.RELATERT_YTELSE_TYPE]}
+      relatertYtelseTyper={alleKodeverk[KodeverkType.RELATERT_YTELSE_TYPE]}
       relatertYtelseStatus={[
-        ...alleKodeverk[kodeverkTyper.FAGSAK_STATUS],
-        ...alleKodeverk[kodeverkTyper.RELATERT_YTELSE_TILSTAND],
+        ...alleKodeverk[KodeverkType.FAGSAK_STATUS],
+        ...alleKodeverk[KodeverkType.RELATERT_YTELSE_TILSTAND],
       ]}
     />
   </RawIntlProvider>

@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt, AlleKodeverk, Behandling, FamilieHendelseSamling, Personoversikt, Ytelsefordeling,
 } from '@navikt/fp-types';
@@ -21,7 +21,7 @@ describe('<UttakFaktaIndex>', () => {
   };
 
   const aksjonspunkter = [{
-    definisjon: aksjonspunktCodes.VURDER_FEILUTBETALING,
+    definisjon: AksjonspunktCode.VURDER_FEILUTBETALING,
     status: '1',
     kanLoses: true,
   }];

@@ -59,6 +59,9 @@ const detaljertJournalpostMal = {
   ],
 } as Journalpost;
 
+import '@navikt/ds-css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
+
 export default {
   title: 'journalføring/journalføring/JournalforingIndex',
   component: JournalforingIndex,

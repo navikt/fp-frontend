@@ -2,7 +2,7 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
+import { behandlingStatus } from '@navikt/fp-kodeverk';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FamilieHendelseSamling } from '@navikt/fp-types';
 import { getIntlMock } from '@navikt/fp-utils-test/src/intl-enzyme-test-helper';

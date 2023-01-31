@@ -26,7 +26,7 @@ import {
   MottattDatoFormValues,
   ANDRE_YTELSER_FORM_NAME_PREFIX,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
-import familieHendelseType from '@navikt/fp-kodeverk/src/familieHendelseType';
+import { familieHendelseType } from '@navikt/fp-kodeverk';
 
 const FRILANS_NAME_PREFIX = 'frilans';
 

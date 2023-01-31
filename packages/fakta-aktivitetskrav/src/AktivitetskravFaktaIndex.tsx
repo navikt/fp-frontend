@@ -3,11 +3,13 @@ import { RawIntlProvider } from 'react-intl';
 import moment from 'moment';
 
 import { StandardFaktaPanelProps, UttakKontrollerAktivitetskrav } from '@navikt/fp-types';
-import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import { createIntl } from '@navikt/ft-utils';
 
 import AktivitetskravFaktaForm from './components/AktivitetskravFaktaForm';
 import messages from '../i18n/nb_NO.json';
+
+import '@navikt/fp-fakta-felles/dist/style.css';
 
 const intl = createIntl(messages);
 
@@ -36,8 +38,8 @@ const AktivitetskravFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelP
         harApneAksjonspunkter={harApneAksjonspunkter}
         sorterteAktivitetskrav={sorterteAktivitetskrav}
         submitCallback={submitCallback}
-        aktivitetskravAvklaringer={alleKodeverk[kodeverkTyper.AKTIVITETSKRAV_AVKLARING]}
-        morsAktiviteter={alleKodeverk[kodeverkTyper.MORS_AKTIVITET]}
+        aktivitetskravAvklaringer={alleKodeverk[KodeverkType.AKTIVITETSKRAV_AVKLARING]}
+        morsAktiviteter={alleKodeverk[KodeverkType.MORS_AKTIVITET]}
         alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
         readOnly={readOnly || aksjonspunkter.length === 0}
         submittable={submittable}

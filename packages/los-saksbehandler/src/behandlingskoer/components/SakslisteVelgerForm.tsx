@@ -14,11 +14,10 @@ import {
 import { Form, SelectField } from '@navikt/ft-form-hooks';
 
 import { AlleKodeverk } from '@navikt/fp-types';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import { getKodeverknavnFraKode } from '@navikt/fp-kodeverk/src/kodeverkUtils';
-import gruppeHoverUrl from '@navikt/fp-assets/images/gruppe_hover.svg';
-import gruppeUrl from '@navikt/fp-assets/images/gruppe.svg';
+import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
 
+import gruppeHoverUrl from '../../images/gruppe_hover.svg';
+import gruppeUrl from '../../images/gruppe.svg';
 import Saksliste from '../../typer/sakslisteTsType';
 import Saksbehandler from '../../typer/saksbehandlerTsType';
 import { RestApiPathsKeys, RestApiGlobalStatePathsKeys, restApiHooks } from '../../data/fplosSaksbehandlerRestApi';

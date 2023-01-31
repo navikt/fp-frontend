@@ -2,14 +2,17 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 import VergeFaktaIndex from '@navikt/fp-fakta-verge';
 import { Behandling } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
+import '@navikt/ds-css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
+import '@navikt/ft-form-hooks/dist/style.css';
+
 const aksjonspunkter = [{
-  definisjon: aksjonspunktCodes.AVKLAR_VERGE,
+  definisjon: AksjonspunktCode.AVKLAR_VERGE,
   status: aksjonspunktStatus.OPPRETTET,
   begrunnelse: undefined,
   kanLoses: true,
@@ -44,7 +47,7 @@ const Template: Story<{
     aksjonspunkter={aksjonspunkter}
     alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.AVKLAR_VERGE]: merknaderFraBeslutter,
+      [AksjonspunktCode.AVKLAR_VERGE]: merknaderFraBeslutter,
     }}
   />
 );

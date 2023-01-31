@@ -8,6 +8,10 @@ import ArbeidsforholdKomplettVurderingType from '@navikt/fp-kodeverk/src/arbeids
 import ArbeidsforholdFaktaIndex from './ArbeidsforholdFaktaIndex';
 import BekreftetPermisjonStatus from './kodeverk/bekreftetPermisjonStatus';
 
+import '@navikt/ds-css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
+import '@navikt/ft-form-hooks/dist/style.css';
+
 const behandling = {
   uuid: '1',
   versjon: 1,

@@ -24,7 +24,7 @@ interface OwnProps {
 /**
  * OppgaverSomErApneEllerPaVentPanel.
  */
-export const OppgaverSomErApneEllerPaVentPanel: FunctionComponent<OwnProps> = ({
+const OppgaverSomErApneEllerPaVentPanel: FunctionComponent<OwnProps> = ({
   height,
   oppgaverApneEllerPaVent,
   getValueFromLocalStorage,

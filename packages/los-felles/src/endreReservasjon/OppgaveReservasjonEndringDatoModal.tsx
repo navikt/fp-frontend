@@ -1,5 +1,5 @@
 import React, { MouseEvent, FunctionComponent, useCallback } from 'react';
-import { injectIntl, WrappedComponentProps, FormattedMessage } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Panel, Button } from '@navikt/ds-react';
 import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate } from '@navikt/ft-form-validators';
@@ -34,8 +34,7 @@ interface OwnProps {
 /**
  * OppgaveReservasjonEndringDatoModal.
  */
-const OppgaveReservasjonEndringDatoModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const OppgaveReservasjonEndringDatoModal: FunctionComponent<OwnProps> = ({
   showModal,
   closeModal,
   reserverTilDefault,
@@ -44,6 +43,8 @@ const OppgaveReservasjonEndringDatoModal: FunctionComponent<OwnProps & WrappedCo
   endreReserverasjonState,
   endreOppgavereservasjon,
 }) => {
+  const intl = useIntl();
+
   const endreOppgaveReservasjonFn = useCallback((reserverTil: string) => endreOppgavereservasjon({ oppgaveId, reserverTil })
     .then(() => {
       endreReserverasjonState();
@@ -111,4 +112,4 @@ const OppgaveReservasjonEndringDatoModal: FunctionComponent<OwnProps & WrappedCo
   );
 };
 
-export default injectIntl(OppgaveReservasjonEndringDatoModal);
+export default OppgaveReservasjonEndringDatoModal;

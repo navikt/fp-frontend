@@ -3,5 +3,26 @@
   "version": "1.0.0",
   "module": "index.ts",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "index.js",
+    "package.json"
+  ],
+  "scripts": {
+    "tsc": "tsc --pretty",
+    "eslint": "eslint \"src/**/*.ts*\"",
+    "eslint:fix": "eslint --fix \"src/**/*.ts*\"",
+    "dev": "cross-env node dev/webpack.dev.js",
+    "build-webpack": "cross-env webpack --config webpack.config.js",
+    "build-ts-declarations": "tsc index.ts ../../@types/externals.d.ts --declaration --emitDeclarationOnly --downlevelIteration --resolveJsonModule --jsx react --outDir dist --declarationMap --esModuleInterop --skipLibCheck",
+    "build": "yarn build-webpack && yarn build-ts-declarations",
+    "clean": "rm -rf ./dist ./node_modules"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./dist/style.css": "./dist/style.css"
+  }
 }

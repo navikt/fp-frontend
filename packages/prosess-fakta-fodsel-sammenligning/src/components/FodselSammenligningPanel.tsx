@@ -10,7 +10,7 @@ import {
   Table, TableColumn, TableRow,
 } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import { behandlingType } from '@navikt/fp-kodeverk';
 import { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 import FodselSammenligningOtherPanel from './FodselSammenligningOtherPanel';

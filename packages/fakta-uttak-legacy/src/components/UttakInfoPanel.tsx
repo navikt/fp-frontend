@@ -1,16 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 
-import { isVilkarForSykdomOppfylt } from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import behandlingTyper from '@navikt/fp-kodeverk/src/behandlingType';
-import behandlingStatuser from '@navikt/fp-kodeverk/src/behandlingStatus';
+import { isVilkarForSykdomOppfylt, behandlingType as BehandlingType, behandlingStatus as BehandlingStatus } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, FaktaArbeidsforhold, FamilieHendelseSamling, AlleKodeverk,
   Personoversikt,
   UttakKontrollerFaktaPerioderLegacy, Ytelsefordeling,
 } from '@navikt/fp-types';
 import { FaktaUttakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 import UttakFaktaForm from './UttakFaktaForm';
 
@@ -69,14 +67,14 @@ const UttakInfoPanel: FunctionComponent<OwnProps> = ({
   submittable,
 }) => {
   const vilkarForSykdomExists = aksjonspunkter.filter((ap) => isVilkarForSykdomOppfylt(ap.definisjon)).length > 0;
-  const uttakApOpen = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status));
+  const uttakApOpen = aksjonspunkter.some((ap) => ap.status === AksjonspunktStatus.OPPRETTET);
   const overrideReadOnly = readOnly || (!aksjonspunkter.length && !aksjonspunkter.some((ap: Aksjonspunkt) => ap.kanLoses));
   const behandlingArsakTyper = getBehandlingArsakTyper(behandlingArsaker);
-  const behandlingIsRevurdering = behandlingType === behandlingTyper.REVURDERING;
+  const behandlingIsRevurdering = behandlingType === BehandlingType.REVURDERING;
   const erManueltOpprettet = getErManueltOpprettet(behandlingArsaker);
   const erArsakTypeHendelseFodsel = getErArsakTypeHendelseFodsel(behandlingArsakTyper);
   const isRevurdering = behandlingIsRevurdering && (erManueltOpprettet || erArsakTypeHendelseFodsel);
-  const behandlingUtredes = behandlingStatus === behandlingStatuser.BEHANDLING_UTREDES;
+  const behandlingUtredes = behandlingStatus === BehandlingStatus.BEHANDLING_UTREDES;
   const sortedUttakPerioder = [...uttakPerioder].sort(sortUttaksperioder);
 
   return (

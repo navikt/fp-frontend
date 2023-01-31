@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 import { Button } from '@navikt/ds-react';
 
-import uttakPeriodeVurdering from '@navikt/fp-kodeverk/src/uttakPeriodeVurdering';
+import { uttakPeriodeVurdering } from '@navikt/fp-kodeverk';
 import { shallowWithIntl } from '@navikt/fp-utils-test/src/intl-enzyme-test-helper';
 
 import { PerioderKnapper } from './PerioderKnapper';

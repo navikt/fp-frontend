@@ -4,9 +4,28 @@
   "module": "index.ts",
   "license": "MIT",
   "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "index.js",
+    "package.json"
+  ],
+  "scripts": {
+    "test": "jest",
+    "test:coverage": "jest --coverage --colors",
+    "tsc": "tsc --pretty",
+    "eslint": "eslint \"src/**/*.ts*\"",
+    "eslint:fix": "eslint --fix \"src/**/*.ts*\"",
+    "less:lint": "stylelint \"src/**/*.less\"",
+    "dev": "cross-env node dev/webpack.dev.js",
+    "build-webpack": "cross-env webpack --config webpack.config.js",
+    "build-ts-declarations": "tsc index.ts ../../@types/externals.d.ts --declaration --emitDeclarationOnly --downlevelIteration --resolveJsonModule --jsx react --outDir dist --declarationMap --esModuleInterop --skipLibCheck",
+    "build": "yarn build-webpack && yarn build-ts-declarations",
+    "clean": "rm -rf ./dist ./node_modules",
+    "storybook": "cross-env NODE_ENV=test start-storybook -p 7022"
+  },
   "dependencies": {
-    "@navikt/fp-assets": "1.0.0",
-    "@navikt/fp-kodeverk": "1.0.0",
     "@navikt/fp-rest-api": "1.0.0",
     "@navikt/fp-rest-api-hooks": "1.0.0",
     "@navikt/fp-types": "1.0.0",
@@ -34,5 +53,9 @@
     "@testing-library/react": "13.4.0",
     "@testing-library/user-event": "14.4.3",
     "@types/lodash.debounce": "4.0.7"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./dist/style.css": "./dist/style.css"
   }
 }

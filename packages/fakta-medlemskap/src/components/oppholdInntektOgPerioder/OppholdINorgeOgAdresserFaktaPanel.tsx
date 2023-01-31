@@ -7,19 +7,18 @@ import {
   PeriodLabel, VerticalSpacer, FaktaGruppe, Image, FlexContainer, FlexRow, FlexColumn,
 } from '@navikt/ft-ui-komponenter';
 import { Aksjonspunkt, AlleKodeverk } from '@navikt/ft-types';
-import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { KodeverkType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import {
   MedlemPeriode, Soknad, UtlandsoppholdPeriode,
 } from '@navikt/fp-types';
-import checkImage from '@navikt/fp-assets/images/check.svg';
-import avslaattImage from '@navikt/fp-assets/images/avslaatt.svg';
 
+import checkImage from '../../images/check.svg';
+import avslaattImage from '../../images/avslaatt.svg';
 import MedlemskapBostedSokerView from './MedlemskapBostedSokerView';
 
 import styles from './oppholdINorgeOgAdresserFaktaPanel.less';
+import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 const capitalizeFirstLetter = (landNavn: string): string => {
   const string = landNavn.toLowerCase();
@@ -104,16 +103,16 @@ const OppholdINorgeOgAdresserFaktaPanel: FunctionComponent<OwnProps> & StaticFun
 }) => {
   const intl = useIntl();
 
-  const aksjonspunktKode = valgtPeriode.aksjonspunkter.find((apKode) => apKode === aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT);
+  const aksjonspunktKode = valgtPeriode.aksjonspunkter.find((apKode) => apKode === AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT);
   const aksjonspunkt = aksjonspunkter.find((ap) => aksjonspunktKode === ap.definisjon);
 
-  const isBosattAksjonspunktClosed = aksjonspunktKode && aksjonspunkt ? !isAksjonspunktOpen(aksjonspunkt.status) : false;
+  const isBosattAksjonspunktClosed = aksjonspunktKode && aksjonspunkt ? aksjonspunkt.status !== AksjonspunktStatus.OPPRETTET : false;
 
   const { personopplysningBruker, personopplysningAnnenPart } = valgtPeriode;
 
   return (
     <FaktaGruppe
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT]}
     >
       <FlexContainer>
         <FlexRow>
@@ -147,15 +146,15 @@ const OppholdINorgeOgAdresserFaktaPanel: FunctionComponent<OwnProps> & StaticFun
               <MedlemskapBostedSokerView
                 sokerTypeText={intl.formatMessage({ id: 'BostedSokerFaktaIndex.Soker' })}
                 personopplysninger={personopplysningBruker}
-                regionTypes={alleKodeverk[kodeverkTyper.REGION]}
-                personstatusTypes={alleKodeverk[kodeverkTyper.PERSONSTATUS_TYPE]}
+                regionTypes={alleKodeverk[KodeverkType.REGION]}
+                personstatusTypes={alleKodeverk[KodeverkType.PERSONSTATUS_TYPE]}
               />
               {personopplysningAnnenPart && (
                 <MedlemskapBostedSokerView
                   sokerTypeText={intl.formatMessage({ id: 'OppholdINorgeOgAdresserFaktaPanel.Parent' })}
                   personopplysninger={personopplysningAnnenPart}
-                  regionTypes={alleKodeverk[kodeverkTyper.REGION]}
-                  personstatusTypes={alleKodeverk[kodeverkTyper.PERSONSTATUS_TYPE]}
+                  regionTypes={alleKodeverk[KodeverkType.REGION]}
+                  personstatusTypes={alleKodeverk[KodeverkType.PERSONSTATUS_TYPE]}
                 />
               )}
             </FaktaGruppe>

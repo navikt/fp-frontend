@@ -1,4 +1,4 @@
-import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
@@ -47,11 +47,11 @@ type FaktaUttakAp = {
     uttakPeriodeType: string;
     begrunnelse?: string;
   }[];
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_UTTAK
-  | AksjonspunktKode.AVKLAR_FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET
-  | AksjonspunktKode.AVKLAR_FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG
-  | AksjonspunktKode.AVKLAR_FØRSTE_UTTAKSDATO
-  | AksjonspunktKode.OVERSTYR_AVKLAR_FAKTA_UTTAK
-  | AksjonspunktKode.MANUELL_AVKLAR_FAKTA_UTTAK>
+} & AksjonspunktTilBekreftelse<AksjonspunktCode.AVKLAR_UTTAK
+  | AksjonspunktCode.AVKLAR_FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET
+  | AksjonspunktCode.AVKLAR_FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG
+  | AksjonspunktCode.AVKLAR_FØRSTE_UTTAKSDATO
+  | AksjonspunktCode.OVERSTYR_AVKLAR_FAKTA_UTTAK
+  | AksjonspunktCode.MANUELL_AVKLAR_FAKTA_UTTAK>
 
 export default FaktaUttakAp;

@@ -4,4 +4,5 @@ export { default as FaktaSubmitButtonNew } from './src/components/FaktaSubmitBut
 
 export { default as isFieldEdited } from './src/utils/isFieldEdited';
 export type { FieldEditedInfo } from './src/utils/isFieldEdited';
+export { default as validerApKodeOgHentApEnum } from './src/utils/validerApKodeOgHentApEnum';
 export type { FormValues as FaktaBegrunnelseFormValues } from './src/components/FaktaBegrunnelseTextFieldNew';

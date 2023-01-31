@@ -4,6 +4,23 @@
   "module": "index.jsx",
   "license": "MIT",
   "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "index.js",
+    "package.json"
+  ],
+  "scripts": {
+    "tsc": "tsc --pretty",
+    "eslint": "eslint \"src/**/*.ts*\"",
+    "eslint:fix": "eslint --fix \"src/**/*.ts*\"",
+    "dev": "cross-env node dev/webpack.dev.js",
+    "build-webpack": "cross-env webpack --config webpack.config.js",
+    "build-ts-declarations": "tsc index.ts ../../@types/externals.d.ts --declaration --emitDeclarationOnly --downlevelIteration --resolveJsonModule --jsx react --outDir dist --declarationMap --esModuleInterop --skipLibCheck",
+    "build": "yarn build-webpack && yarn build-ts-declarations",
+    "clean": "rm -rf ./dist ./node_modules"
+  },
   "dependencies": {
     "@navikt/ft-form-hooks": "3.3.2",
     "history": "5.3.0",
@@ -11,5 +28,8 @@
     "react-hook-form": "7.43.1",
     "react-intl": "6.2.8",
     "react-router-dom": "6.8.1"
+  },
+  "exports": {
+    ".": "./dist/index.js"
   }
 }

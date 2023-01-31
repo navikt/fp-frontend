@@ -9,7 +9,7 @@ import {
 } from '@navikt/ft-form-validators';
 import { FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 
 import Boks from '../Boks';

@@ -13,7 +13,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import {
   AlleKodeverk, MedlemPeriode, Medlemskap, Soknad,
 } from '@navikt/fp-types';
@@ -27,7 +27,7 @@ import styles from './oppholdInntektOgPeriodeForm.less';
 
 const {
   AVKLAR_OPPHOLDSRETT, AVKLAR_LOVLIG_OPPHOLD,
-} = aksjonspunktCodes;
+} = AksjonspunktCode;
 
 const hasAksjonspunkt = (
   aksjonspunktCode: string,
@@ -45,7 +45,7 @@ const buildInitialValues = (
 ): FormValues => {
   const aksjonspunkter = alleAksjonspunkter
     .filter((ap) => valgtPeriode.aksjonspunkter
-      .includes(ap.definisjon) || ap.definisjon === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP);
+      .includes(ap.definisjon) || ap.definisjon === AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP);
 
   let statusForBorgerInitialValues = {};
   if (hasAksjonspunkt(AVKLAR_OPPHOLDSRETT, valgtPeriode.aksjonspunkter) || hasAksjonspunkt(AVKLAR_LOVLIG_OPPHOLD, valgtPeriode.aksjonspunkter)) {

@@ -2,11 +2,10 @@ import React from 'react';
 
 import { reduxFormPropsMock } from '@navikt/fp-utils-test/src/redux-form-test-helper';
 import { shallowWithIntl } from '@navikt/fp-utils-test/src/intl-enzyme-test-helper';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, behandlingStatus } from '@navikt/fp-kodeverk';
 import {
   AlleKodeverk, FamilieHendelseSamling, Personoversikt, UttakKontrollerFaktaPerioderLegacy, Ytelsefordeling,
 } from '@navikt/fp-types';
-import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
 
 import { transformValues, UttakFaktaForm } from './UttakFaktaForm';
 import messages from '../../i18n/nb_NO.json';
@@ -103,7 +102,7 @@ describe('<UttakFaktaForm>', () => {
     };
 
     const transformedValues = transformValues(values, {}, [ap6070, ap5070]);
-    expect(transformedValues.filter((ap) => ap.kode === aksjonspunktCodes.AVKLAR_UTTAK)).toHaveLength(1);
+    expect(transformedValues.filter((ap) => ap.kode === AksjonspunktCode.AVKLAR_UTTAK)).toHaveLength(1);
   });
 
   it('skal sende 6013 hvis ingen andre aksjonspunkter og manuelloverstyrt', () => {
@@ -113,7 +112,7 @@ describe('<UttakFaktaForm>', () => {
     };
 
     const transformedValues = transformValues(values, {}, []);
-    expect(transformedValues.filter((ap) => ap.kode === aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK)).toHaveLength(1);
+    expect(transformedValues.filter((ap) => ap.kode === AksjonspunktCode.OVERSTYR_AVKLAR_FAKTA_UTTAK)).toHaveLength(1);
   });
 
   it('skal sende 6013 hvis 6013 er OPPR og ikke 5070', () => {
@@ -123,6 +122,6 @@ describe('<UttakFaktaForm>', () => {
     };
 
     const transformedValues = transformValues(values, {}, [ap6013]);
-    expect(transformedValues.filter((ap) => ap.kode === aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK)).toHaveLength(1);
+    expect(transformedValues.filter((ap) => ap.kode === AksjonspunktCode.OVERSTYR_AVKLAR_FAKTA_UTTAK)).toHaveLength(1);
   });
 });

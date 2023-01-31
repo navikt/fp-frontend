@@ -7,8 +7,7 @@ import {
   Alert, Button, BodyShort, Detail,
 } from '@navikt/ds-react';
 
-import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
 import { ISO_DATE_FORMAT, addDaysToDate } from '@navikt/ft-utils';
 import { AksjonspunktHelpTextTemp, DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { TimeLineNavigation } from '@navikt/ft-tidslinje';
@@ -92,7 +91,7 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
   formData,
   setFormData,
 }) => {
-  const opptjeningAktivitetTypes = alleKodeverk[kodeverkTyper.OPPTJENING_AKTIVITET_TYPE];
+  const opptjeningAktivitetTypes = alleKodeverk[KodeverkType.OPPTJENING_AKTIVITET_TYPE];
 
   const filtrerteOgSorterteOpptjeningsaktiviteter = useMemo(() => {
     if (!!opptjeningAktiviteter && !!fastsattOpptjening) {
@@ -136,7 +135,7 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
 
     submitCallback({
       opptjeningsaktiviteter: opptjeningsaktiviteterSomSkallagres,
-      kode: aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING,
+      kode: AksjonspunktCode.VURDER_PERIODER_MED_OPPTJENING,
     }).then(() => setIsSubmitting(false));
   }, [filtrerteOgSorterteOpptjeningsaktiviteter, formVerdierForAlleAktiviteter]);
 

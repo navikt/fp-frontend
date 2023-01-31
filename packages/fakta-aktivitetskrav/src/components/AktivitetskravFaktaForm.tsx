@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { AksjonspunktHelpTextHTML, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { KodeverkMedNavn, UttakKontrollerAktivitetskrav } from '@navikt/fp-types';
 import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
@@ -71,7 +71,7 @@ export const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
   const bekreft = useCallback(() => {
     setIsSubmitting(true);
     submitCallback({
-      kode: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
+      kode: AksjonspunktCode.KONTROLLER_AKTIVITETSKRAV,
       avklartePerioder: aktivitetskrav as Required<UttakKontrollerAktivitetskrav>[],
     }).then(() => setIsSubmitting(false));
   }, [aktivitetskrav]);
@@ -94,7 +94,7 @@ export const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
       )}
       <FaktaGruppe
         title={intl.formatMessage({ id: 'AktivitetskravFaktaForm.Aktivitetskravperioder' })}
-        merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV]}
+        merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.KONTROLLER_AKTIVITETSKRAV]}
       >
         {aktivitetskrav && (
           <AktivitetskravFaktaTabell

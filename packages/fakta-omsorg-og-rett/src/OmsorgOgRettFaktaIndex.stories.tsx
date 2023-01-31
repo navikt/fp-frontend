@@ -5,14 +5,16 @@ import { action } from '@storybook/addon-actions';
 import {
   Behandling, KjønnkodeEnum, Personoversikt, Ytelsefordeling,
 } from '@navikt/fp-types';
-import sivilstandType from '@navikt/fp-kodeverk/src/sivilstandType';
+import { sivilstandType, OpplysningAdresseType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { OpplysningAdresseType } from '@navikt/ft-kodeverk';
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import OmsorgOgRettFaktaIndex from './OmsorgOgRettFaktaIndex';
+
+import '@navikt/ds-css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
+import '@navikt/ft-form-hooks/dist/style.css';
 
 export default {
   title: 'fakta/fakta-omsorg-og-rett',

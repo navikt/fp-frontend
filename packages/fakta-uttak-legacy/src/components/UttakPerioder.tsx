@@ -12,13 +12,11 @@ import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelse,
   FamilieHendelseSamling, KodeverkMedNavn, Personoversikt, AlleKodeverk,
 } from '@navikt/fp-types';
-import uttakPeriodeVurdering from '@navikt/fp-kodeverk/src/uttakPeriodeVurdering';
+import { uttakPeriodeVurdering, aksjonspunktStatus, KodeverkType } from '@navikt/fp-kodeverk';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow, AksjonspunktHelpTextHTML,
 } from '@navikt/ft-ui-komponenter';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 
 import CheckboxField from '../form/CheckboxField';
 import UttakPeriode from './UttakPeriode';

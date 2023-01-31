@@ -19,10 +19,10 @@ import {
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image,
 } from '@navikt/ft-ui-komponenter';
-import ArbeidsforholdKomplettVurderingType from '@navikt/fp-kodeverk/src/arbeidsforholdKomplettVurderingType';
-import questionNormalUrl from '@navikt/fp-assets/images/question_normal.svg';
-import questionHoverUrl from '@navikt/fp-assets/images/question_hover.svg';
+import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 
+import questionNormalUrl from '../../images/question_normal.svg';
+import questionHoverUrl from '../../images/question_hover.svg';
 import InntektsmeldingOpplysningerPanel from '../felles/InntektsmeldingOpplysningerPanel';
 import ArbeidsforholdOgInntekt from '../../types/arbeidsforholdOgInntekt';
 
