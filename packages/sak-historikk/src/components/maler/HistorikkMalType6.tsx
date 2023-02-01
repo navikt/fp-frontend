@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Label, BodyShort } from '@navikt/ds-react';
+import { BodyShort } from '@navikt/ds-react';
 
 import { HistorikkInnslagOpplysning } from '@navikt/fp-types';
 import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
@@ -20,7 +20,7 @@ const formaterOpplysning = (
       :
     </BodyShort>
     &ensp;
-    <Label size="small" className={styles.keyValuePair}>{opplysning.tilVerdi}</Label>
+    <BodyShort size="small" className={styles.keyValuePair}>{opplysning.tilVerdi}</BodyShort>
   </div>
 );
 
@@ -31,7 +31,7 @@ const HistorikkMalType6: FunctionComponent<HistorikkMal> = ({
   <>
     {historikkinnslag.historikkinnslagDeler.map((del) => (
       <div key={del.hendelse?.navn}>
-        <Label size="small" className="snakkeboble-panel__tekst">{findHendelseText(del.hendelse, getKodeverknavn)}</Label>
+        <BodyShort size="small" className="snakkeboble-panel__tekst">{findHendelseText(del.hendelse, getKodeverknavn)}</BodyShort>
         {del.opplysninger.map((opplysning, index) => formaterOpplysning(opplysning, index, getKodeverknavn))}
       </div>
     ))}

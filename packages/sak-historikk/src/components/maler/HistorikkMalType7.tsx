@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import {
   FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
 } from 'react-intl';
-import { Label, BodyShort } from '@navikt/ds-react';
+import { BodyShort } from '@navikt/ds-react';
 
 import { HistorikkinnslagEndretFelt } from '@navikt/fp-types';
 
@@ -64,9 +64,9 @@ const HistorikkMalType7: FunctionComponent<HistorikkMal & WrappedComponentProps>
               createLocationForSkjermlenke={createLocationForSkjermlenke}
             />
 
-            {historikkinnslagDel.hendelse && <Label size="small">{findHendelseText(historikkinnslagDel.hendelse, getKodeverknavn)}</Label>}
+            {historikkinnslagDel.hendelse && <BodyShort size="small">{findHendelseText(historikkinnslagDel.hendelse, getKodeverknavn)}</BodyShort>}
 
-            {historikkinnslagDel.resultat && <Label size="small">{findResultatText(historikkinnslagDel.resultat, intl)}</Label>}
+            {historikkinnslagDel.resultat && <BodyShort size="small">{findResultatText(historikkinnslagDel.resultat, intl)}</BodyShort>}
 
             {historikkinnslagDel.endredeFelter && historikkinnslagDel.endredeFelter
               .map((endretFelt, i) => <div key={`endredeFelter${i + 1}`}>{formatChangedField(endretFelt, intl)}</div>)}
