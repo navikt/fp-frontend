@@ -2,16 +2,14 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import kommunikasjonsretning from '@navikt/fp-kodeverk/src/kommunikasjonsretning';
-import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import {
+  AksjonspunktCode, aksjonspunktStatus, behandlingType, kommunikasjonsretning, innsynResultatType,
+} from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt, Behandling, Innsyn, InnsynDokument,
 } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
-import innsynResultatType from '@navikt/fp-kodeverk/src/innsynResultatType';
 
 import InnsynProsessIndex from './InnsynProsessIndex';
 
@@ -22,7 +20,7 @@ const defaultBehandling = {
 } as Behandling;
 
 const defaultAksjonspunkter = [{
-  definisjon: aksjonspunktCodes.VURDER_INNSYN,
+  definisjon: AksjonspunktCode.VURDER_INNSYN,
   status: aksjonspunktStatus.OPPRETTET,
   begrunnelse: undefined,
 }] as Aksjonspunkt[];

@@ -6,8 +6,7 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 
-import ankeVurderingOmgjoer from '@navikt/fp-kodeverk/src/ankeVurderingOmgjoer';
-import ankeVurderingKodeverk from '@navikt/fp-kodeverk/src/ankeVurdering';
+import { ankeVurdering as ankeVurderingKodeverk, ankeVurderingOmgjoer } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, AnkeVurdering } from '@navikt/fp-types';
 
 export type BehandlingInfo = {

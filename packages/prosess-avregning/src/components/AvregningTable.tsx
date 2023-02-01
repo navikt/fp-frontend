@@ -6,7 +6,7 @@ import { BodyShort } from '@navikt/ds-react';
 
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyNoKr, getRangeOfMonths } from '@navikt/ft-utils';
-import mottakerTyper from '@navikt/fp-kodeverk/src/mottakerTyper';
+import { mottakerTyper } from '@navikt/fp-kodeverk';
 import {
   DetaljertSimuleringResultat, Mottaker, SimuleringResultatPerFagområde, SimuleringResultatRad,
 } from '@navikt/fp-types';

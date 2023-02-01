@@ -4,8 +4,9 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import moment from 'moment';
 import { Heading } from '@navikt/ds-react';
 
-import kommunikasjonsretning from '@navikt/fp-kodeverk/src/kommunikasjonsretning';
-import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import {
+  kommunikasjonsretning, AksjonspunktCode, KodeverkType, innsynResultatType as innsynResultatTyperKV, aksjonspunktStatus,
+} from '@navikt/fp-kodeverk';
 import { Form, Datepicker, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
   AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
@@ -13,9 +14,6 @@ import {
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import innsynResultatTyperKV from '@navikt/fp-kodeverk/src/innsynResultatType';
 import {
   Aksjonspunkt, Dokument, InnsynDokument, InnsynVedtaksdokument, AlleKodeverk,
 } from '@navikt/fp-types';
@@ -54,7 +52,7 @@ const buildInitialValues = (
   mottattDato: innsynMottattDato,
   innsynResultatType: innsynResultatType || undefined,
   fristDato: fristBehandlingPåVent || moment().add(3, 'days').format(ISO_DATE_FORMAT),
-  sattPaVent: isAksjonspunktOpen(aksjonspunkter[0].status) ? undefined : !!fristBehandlingPåVent,
+  sattPaVent: aksjonspunkter[0].status === aksjonspunktStatus.OPPRETTET ? undefined : !!fristBehandlingPåVent,
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
   ...hentDokumenterMedNavnOgFikkInnsyn(dokumenter || []),
 });
@@ -79,7 +77,7 @@ const transformValues = (
   values: FormValues,
   documents: Dokument[],
 ): VurderInnsynAp => ({
-  kode: aksjonspunktCodes.VURDER_INNSYN,
+  kode: AksjonspunktCode.VURDER_INNSYN,
   innsynDokumenter: getDocumentsStatus(values, documents),
   ...getFilteredValues(values) as FormValues,
 });
@@ -145,12 +143,12 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
 
   const documents = useMemo(() => getFilteredReceivedDocuments(alleDokumenter), [alleDokumenter]);
 
-  const innsynResultatTyper = useMemo(() => alleKodeverk[kodeverkTyper.INNSYN_RESULTAT_TYPE]
+  const innsynResultatTyper = useMemo(() => alleKodeverk[KodeverkType.INNSYN_RESULTAT_TYPE]
     .filter((irt) => irt.kode !== '-')
     .sort((t1, t2) => t1.navn.localeCompare(t2.navn))
     .reverse(), [alleKodeverk]);
 
-  const isApOpen = isAksjonspunktOpen(aksjonspunkter[0].status);
+  const isApOpen = aksjonspunkter[0].status === aksjonspunktStatus.OPPRETTET;
 
   const innsynResultatTypeKode = formMethods.watch('innsynResultatType');
   const sattPaVent = formMethods.watch('sattPaVent');
@@ -175,7 +173,7 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
         validate={[required, hasValidDate]}
       />
       <VerticalSpacer sixteenPx />
-      <VedtakDocuments vedtaksdokumenter={vedtaksdokumentasjon || EMPTY_ARRAY} behandlingTypes={alleKodeverk[kodeverkTyper.BEHANDLING_TYPE]} />
+      <VedtakDocuments vedtaksdokumenter={vedtaksdokumentasjon || EMPTY_ARRAY} behandlingTypes={alleKodeverk[KodeverkType.BEHANDLING_TYPE]} />
       <VerticalSpacer twentyPx />
       <DocumentListInnsyn saksNr={saksNr} documents={documents} readOnly={readOnly} />
       <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />

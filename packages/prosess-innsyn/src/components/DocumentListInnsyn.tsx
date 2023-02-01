@@ -6,7 +6,7 @@ import { CheckboxField } from '@navikt/ft-form-hooks';
 import {
   DateTimeLabel, Table, TableColumn, TableRow, Image,
 } from '@navikt/ft-ui-komponenter';
-import kommunikasjonsretning from '@navikt/fp-kodeverk/src/kommunikasjonsretning';
+import { kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { Dokument } from '@navikt/fp-types';
 import sendDokumentImageUrl from '@navikt/fp-assets/images/send_dokument.svg';
 import mottaDokumentImageUrl from '@navikt/fp-assets/images/motta_dokument.svg';

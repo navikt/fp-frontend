@@ -17,16 +17,14 @@ import { getLanguageFromSprakkode } from '@navikt/ft-utils';
 import {
   hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-form-validators';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import tilbakekrevingVidereBehandling from '@navikt/fp-kodeverk/src/tilbakekrevingVidereBehandling';
-import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
-import questionNormalUrl from '@navikt/fp-assets/images/question_normal.svg';
-import questionHoverUrl from '@navikt/fp-assets/images/question_hover.svg';
+import { fagsakYtelseType, AksjonspunktCode, tilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt, Fagsak, SimuleringResultat, TilbakekrevingValg,
 } from '@navikt/fp-types';
 import { VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
+import questionNormalUrl from '../images/question_normal.svg';
+import questionHoverUrl from '../images/question_hover.svg';
 import AvregningSummary from './AvregningSummary';
 import AvregningTable from './AvregningTable';
 

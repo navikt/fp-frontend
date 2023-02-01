@@ -5,10 +5,8 @@ import {
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import ankeVurderingOmgjoer from '@navikt/fp-kodeverk/src/ankeVurderingOmgjoer';
-import ankeVurderingType from '@navikt/fp-kodeverk/src/ankeVurdering';
+import { ankeVurderingOmgjoer, ankeVurdering as ankeVurderingType, KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, AnkeVurdering } from '@navikt/fp-types';
-import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
 
 interface OwnProps {
   ankeVurdering?: AnkeVurdering;
@@ -24,7 +22,7 @@ const TrygderettsbehandlingForm: FunctionComponent<OwnProps> = ({
   const behandlesKabalTrygderett = ankeVurdering?.underBehandlingKabalTrygderett || false;
   const behandletKabal = ankeVurdering?.behandletAvKabal || false;
 
-  const ankeOmgorArsaker = alleKodeverk[kodeverkTyper.ANKE_OMGJOER_AARSAK];
+  const ankeOmgorArsaker = alleKodeverk[KodeverkType.ANKE_OMGJOER_AARSAK];
 
   return (
     <>
