@@ -7,15 +7,15 @@
   "dependencies": {
     "@navikt/fp-kodeverk": "1.0.0",
     "@navikt/fp-types": "1.0.0",
-    "@navikt/ds-react": "2.0.12",
-    "@navikt/ft-form-hooks": "3.2.10",
-    "@navikt/ft-form-validators": "1.0.45",
-    "@navikt/ft-kodeverk": "^1.0.24",
-    "@navikt/ft-types": "^1.0.38",
-    "@navikt/ft-ui-komponenter": "1.3.8",
-    "@navikt/ft-utils": "1.1.13",
+    "@navikt/ds-react": "2.1.5",
+    "@navikt/ft-form-hooks": "3.2.12",
+    "@navikt/ft-form-validators": "1.0.47",
+    "@navikt/ft-kodeverk": "^1.0.25",
+    "@navikt/ft-types": "^1.0.39",
+    "@navikt/ft-ui-komponenter": "1.3.10",
+    "@navikt/ft-utils": "1.1.15",
     "react": "18.2.0",
-    "react-intl": "6.2.5"
+    "react-intl": "6.2.7"
   },
   "devDependencies": {
     "@navikt/fp-utils-test": "1.0.0"
