@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import {
   FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
 } from 'react-intl';
-import { Label, BodyShort } from '@navikt/ds-react';
+import { BodyShort } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { HistorikkinnslagDel, HistorikkinnslagEndretFelt } from '@navikt/fp-types';
@@ -174,7 +174,7 @@ const HistorikkMalType5: FunctionComponent<HistorikkMal & WrappedComponentProps>
         />
 
         {lageElementInnhold(historikkinnslagDel, intl, getKodeverknavn).map((tekst) => (
-          <div key={tekst}><Label size="small">{tekst}</Label></div>
+          <div key={tekst}><BodyShort size="small">{tekst}</BodyShort></div>
         ))}
 
         {lagGjeldendeFraInnslag(historikkinnslagDel)}
