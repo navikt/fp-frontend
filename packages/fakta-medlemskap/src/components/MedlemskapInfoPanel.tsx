@@ -42,11 +42,10 @@ const transformValues = (
   perioder: MedlemPeriode[],
   aksjonspunkter: Aksjonspunkt[],
 ): AksjonspunktData => {
-  const aktiveInngangsAksjonspunkter = aksjonspunkter
-    .filter((ap) => inngangsAksjonspunkter.some((kode) => kode === ap.definisjon));
-  const harÅpneInngangsAksjonspunkter = aktiveInngangsAksjonspunkter.filter((ap) => isAksjonspunktOpen(ap.status)).length > 0;
-  const aktivtFortsattMedlemskapAksjonspunkt = aksjonspunkter
-    .filter((ap) => ap.definisjon === AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP);
+  const aktiveInngangsAksjonspunkter = aksjonspunkter.filter((ap) => inngangsAksjonspunkter.some((kode) => kode === ap.definisjon));
+  const harÅpneInngangsAksjonspunkter = aktiveInngangsAksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status));
+  const aktivtFortsattMedlemskapAksjonspunkt = aksjonspunkter.filter((ap) => ap.definisjon === AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP);
+
   // Submit inngangsaksjonspunkt dersom åpent eller det ikke finnes aksjonspunkt fortsatt medlemskap
   const sendInnAksjonspunkter = harÅpneInngangsAksjonspunkter || aktivtFortsattMedlemskapAksjonspunkt.length === 0
     ? aktiveInngangsAksjonspunkter : aktivtFortsattMedlemskapAksjonspunkt;
