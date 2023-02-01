@@ -80,7 +80,10 @@ const validerPerioder = (
     const ikkeGyldigeAktiviteter = p.aktiviteter
       .filter((a) => stønadskonto.stonadskontoer[a.stønadskontoType] === undefined && a.trekkdagerDesimaler > 0);
     if (p.periodeResultatType === periodeResultatType.INNVILGET && ikkeGyldigeAktiviteter.length > 0) {
-      feil.push(intl.formatMessage({ id: 'UttakPanel.InvalidStonadskonto' }, { konto: uttakPeriodeNavn[ikkeGyldigeAktiviteter[0].stønadskontoType] }));
+      const feilmelding = intl.formatMessage({ id: 'UttakPanel.InvalidStonadskonto' }, { konto: uttakPeriodeNavn[ikkeGyldigeAktiviteter[0].stønadskontoType] });
+      if (!feil.includes(feilmelding)) {
+        feil.push(feilmelding);
+      }
     }
   });
 
@@ -193,7 +196,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
 
   const [stønadskonto, setStønadskonto] = useState(uttakStonadskontoer);
 
-  useEffect(() => () => setFormData(perioder), []);
+  useEffect(() => () => setFormData(perioder), [perioder]);
 
   const allePerioder = uttaksresultatPeriode.perioderAnnenpart.concat(perioder);
 
