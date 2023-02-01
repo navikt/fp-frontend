@@ -398,13 +398,13 @@ AvklarFortsattMedlemskap.args = {
   },
   aksjonspunkter: [{
     definisjon: aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT,
-    status: aksjonspunktStatus.OPPRETTET,
+    status: aksjonspunktStatus.UTFORT,
     begrunnelse: undefined,
     kanLoses: true,
     erAktivt: true,
   }, {
     definisjon: aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD,
-    status: aksjonspunktStatus.OPPRETTET,
+    status: aksjonspunktStatus.UTFORT,
     begrunnelse: undefined,
     kanLoses: true,
     erAktivt: true,
