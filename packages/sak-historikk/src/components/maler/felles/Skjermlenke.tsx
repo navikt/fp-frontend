@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Location } from 'history';
-import { Label } from '@navikt/ds-react';
+import { Heading } from '@navikt/ds-react';
 
 import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 
@@ -34,14 +34,14 @@ const Skjermlenke: React.FunctionComponent<SkjermlenkeProps> = ({
 
   return (
     <>
-      <Label size="small">
+      <Heading size="xsmall">
         <NavLink
           to={location}
           onClick={scrollUpOnClick ? scrollUp : undefined}
         >
           {getKodeverknavn(skjermlenke, KodeverkType.SKJERMLENKE_TYPE)}
         </NavLink>
-      </Label>
+      </Heading>
       <VerticalSpacer fourPx />
     </>
   );

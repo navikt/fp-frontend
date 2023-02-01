@@ -69,6 +69,7 @@ const Snakkeboble: FunctionComponent<OwnProps> = ({
       avatar={<Image className={styles.image} src={utledIkon(aktoer, kjoenn)} />}
       timestamp={`${formatDate(dato)} // ${rolleNavn} ${opprettetAv || ''}`}
       position={utledPlassering(aktoer)}
+      toptextPosition="left"
       backgroundColor={BAKGRUNNSFARGER[aktoer]}
       className={styles.width}
     >

@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
-import { Label, BodyShort } from '@navikt/ds-react';
+import { BodyShort } from '@navikt/ds-react';
 
 import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -98,10 +98,10 @@ const formaterAksjonspunkt = (aksjonspunkt: HistorikkInnslagAksjonspunkt, intl: 
   }
   return (
     <span>
-      <Label size="small">
+      <BodyShort size="small">
         {aksjonspktText && `${formatMessage({ id: aksjonspktText })} ${formatMessage({ id: 'Historikk.ikkeGodkjent' })}`}
         {!aksjonspktText && formatMessage({ id: 'Historikk.ikkeGodkjentKomplett' })}
-      </Label>
+      </BodyShort>
       <BodyShort size="small">{decodeHtmlEntity(aksjonspunkt.aksjonspunktBegrunnelse)}</BodyShort>
     </span>
   );
@@ -121,7 +121,7 @@ const HistorikkMalType3: FunctionComponent<HistorikkMal & WrappedComponentProps>
       <div key={`totrinnsvurdering${index + 1}`}>
         {historikkinnslagDel.hendelse && (
           <>
-            <Label size="small">{findHendelseText(historikkinnslagDel.hendelse, getKodeverknavn)}</Label>
+            <BodyShort size="small">{findHendelseText(historikkinnslagDel.hendelse, getKodeverknavn)}</BodyShort>
             <VerticalSpacer fourPx />
           </>
         )}
