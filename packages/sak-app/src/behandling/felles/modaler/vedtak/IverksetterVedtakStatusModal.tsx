@@ -8,7 +8,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { BehandlingResultatType } from '@navikt/ft-kodeverk';
 
-import innvilgetImageUrl from '../../../../innvilget_valgt.svg';
+import innvilgetImageUrl from '../../../../images/innvilget_valgt.svg';
 
 import styles from './iverksetterVedtakStatusModal.less';
 

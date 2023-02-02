@@ -9,7 +9,7 @@ import { createIntl, parseQueryString } from '@navikt/ft-utils';
 import { ForbiddenPage, UnauthorizedPage } from '@navikt/ft-sak-infosider';
 
 import { useRestApiError } from '@navikt/fp-rest-api-hooks';
-import EventType from '@navikt/fp-rest-api/src/requestApi/eventType';
+import { EventType } from '@navikt/fp-rest-api';
 
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 import ErrorBoundary from './ErrorBoundary';

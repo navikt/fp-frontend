@@ -11,9 +11,8 @@ const VERSION = PACKAGE.version;
 
 const ROOT_DIR = path.resolve(__dirname, '../public/client');
 const CORE_DIR = path.resolve(__dirname, '../node_modules');
+const APP_DIR = path.resolve(__dirname, '../packages/sak-app');
 const PACKAGES_DIR = path.resolve(__dirname, '../packages');
-const CSS_DIR = path.join(PACKAGES_DIR, 'assets/styles');
-const IMAGE_DIR = path.join(PACKAGES_DIR, 'assets/images');
 
 const isDevelopment = JSON.stringify(process.env.NODE_ENV) === '"development"';
 
@@ -39,7 +38,7 @@ const config = {
             },
           },
         ],
-        include: PACKAGES_DIR,
+        include: APP_DIR,
       }, {
         test: /\.(less|css)?$/,
         use: [
@@ -70,7 +69,6 @@ const config = {
             },
           }],
         include: [PACKAGES_DIR],
-        exclude: [CSS_DIR],
       }, {
         test: /\.(less|css)?$/,
         use: [
@@ -92,7 +90,7 @@ const config = {
               },
             },
           }],
-        include: [CSS_DIR, CORE_DIR],
+        include: [CORE_DIR],
       }, {
         test: /\.(svg)$/,
         issuer: /\.less?$/,
@@ -100,7 +98,7 @@ const config = {
         generator: {
           filename: '[name]_[contenthash].[ext]',
         },
-        include: [IMAGE_DIR],
+        include: [APP_DIR],
       }, {
         test: /\.(svg)$/,
         issuer: /\.(tsx)?$/,
@@ -113,7 +111,7 @@ const config = {
             name: isDevelopment ? '[name]_[contenthash].[ext]' : '/[name]_[contenthash].[ext]',
           },
         }],
-        include: [IMAGE_DIR],
+        include: [APP_DIR],
         type: 'javascript/auto',
       },{
         test: /\.(svg)$/,
@@ -148,7 +146,7 @@ const config = {
 
   plugins: [
     new ESLintPlugin({
-      context: PACKAGES_DIR,
+      context: APP_DIR,
       extensions: ['tsx', 'ts'],
       failOnWarning: false,
       failOnError: !isDevelopment,
