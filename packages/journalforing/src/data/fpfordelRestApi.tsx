@@ -9,7 +9,7 @@ export const RestApiPathsKeys = {
 };
 
 export const endpoints = new RestApiConfigBuilder()
-  .withGet('/fpfordel/api/oppgaver', RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER)
+  .withGet('/fpfordel/api/journalfoering/oppgaver', RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER)
   .build();
 
 export const requestApi = createRequestApi(endpoints);
