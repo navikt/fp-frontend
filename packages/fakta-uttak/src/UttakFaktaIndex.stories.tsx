@@ -72,6 +72,7 @@ VisUttaksperiodeUtenAksjonspunkt.args = {
   aksjonspunkter: [],
   ytelsefordeling: {
     ikkeOmsorgPerioder: null,
+    overstyrtOmsorg: null,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
       skalAvklareAnnenForelderRettEØS: false,
@@ -97,6 +98,7 @@ VisUttaksperiodeUtenAksjonspunktKanOverstyre.args = {
   aksjonspunkter: [],
   ytelsefordeling: {
     ikkeOmsorgPerioder: null,
+    overstyrtOmsorg: null,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
       skalAvklareAnnenForelderRettEØS: false,
@@ -128,6 +130,7 @@ VisUttaksperiodeMedAksjonspunkt.args = {
   }],
   ytelsefordeling: {
     ikkeOmsorgPerioder: null,
+    overstyrtOmsorg: null,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
       skalAvklareAnnenForelderRettEØS: false,
@@ -186,6 +189,7 @@ VisUtsettelseperiodeMedAksjonspunkt.args = {
   }],
   ytelsefordeling: {
     ikkeOmsorgPerioder: null,
+    overstyrtOmsorg: null,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
       skalAvklareAnnenForelderRettEØS: false,
@@ -215,6 +219,7 @@ VisOverføringsperiodeMedAksjonspunkt.args = {
   }],
   ytelsefordeling: {
     ikkeOmsorgPerioder: null,
+    overstyrtOmsorg: null,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
       skalAvklareAnnenForelderRettEØS: false,
@@ -245,6 +250,7 @@ VisAksjonspunktDerIngenPerioderFinnes.args = {
   }],
   ytelsefordeling: {
     ikkeOmsorgPerioder: null,
+    overstyrtOmsorg: null,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
       skalAvklareAnnenForelderRettEØS: false,
@@ -269,6 +275,7 @@ VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering.args = {
   }],
   ytelsefordeling: {
     ikkeOmsorgPerioder: null,
+    overstyrtOmsorg: null,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
       skalAvklareAnnenForelderRettEØS: false,
@@ -304,6 +311,7 @@ VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering.args = {
   }],
   ytelsefordeling: {
     ikkeOmsorgPerioder: null,
+    overstyrtOmsorg: null,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
       skalAvklareAnnenForelderRettEØS: false,
@@ -339,6 +347,7 @@ VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet.args = {
   }],
   ytelsefordeling: {
     ikkeOmsorgPerioder: null,
+    overstyrtOmsorg: null,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
       skalAvklareAnnenForelderRettEØS: false,
@@ -377,6 +386,7 @@ VisBegrunnelseFraTidligereUtgaveAvPanel.args = {
   }],
   ytelsefordeling: {
     ikkeOmsorgPerioder: null,
+    overstyrtOmsorg: null,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
       skalAvklareAnnenForelderRettEØS: false,
@@ -416,6 +426,7 @@ SN.args = {
   }],
   ytelsefordeling: {
     ikkeOmsorgPerioder: null,
+    overstyrtOmsorg: null,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
       skalAvklareAnnenForelderRettEØS: false,

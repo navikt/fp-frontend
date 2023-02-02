@@ -99,7 +99,7 @@ OmsorgFaktaForm.buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonsp
   let omsorg = null;
 
   if (omsorgAp.length > 0 && !isAksjonspunktOpen(omsorgAp[0].status)) {
-    omsorg = !(ytelsefordeling.ikkeOmsorgPerioder && ytelsefordeling.ikkeOmsorgPerioder.length > 0);
+    omsorg = ytelsefordeling.overstyrtOmsorg;
   }
 
   return {

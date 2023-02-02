@@ -60,6 +60,7 @@ describe('<OmsorgFaktaIndex>', () => {
         periodeFom: undefined,
         periodeTom: undefined,
       }],
+      overstyrtOmsorg: true,
       omsorg: true,
     });
   });
@@ -102,6 +103,7 @@ describe('<OmsorgFaktaIndex>', () => {
         periodeFom: '2020-02-01',
         periodeTom: '2020-03-01',
       }],
+      overstyrtOmsorg: false,
       omsorg: false,
     });
   });

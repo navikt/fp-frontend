@@ -3,6 +3,7 @@ type Ytelsefordeling = Readonly<{
     periodeFom: string;
     periodeTom: string;
   }[];
+  overstyrtOmsorg?: boolean;
   bekreftetAleneomsorg?: boolean;
   rettigheterAnnenforelder: {
     bekreftetAnnenforelderRett?: boolean;
