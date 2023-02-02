@@ -11,9 +11,8 @@ import {
   FlexColumn, FlexContainer, FlexRow, Table, TableColumn, TableRow,
 } from '@navikt/ft-ui-komponenter';
 
-import UttakArbeidType from '@navikt/fp-kodeverk/src/uttakArbeidType';
+import { uttakPeriodeType, uttakArbeidType as UttakArbeidType} from '@navikt/fp-kodeverk';
 import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, PeriodeSokerAktivitet } from '@navikt/fp-types';
-import uttakPeriodeType from '@navikt/fp-kodeverk/src/uttakPeriodeType';
 
 import { UseFormGetValues } from 'react-hook-form';
 import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';

@@ -12,7 +12,7 @@ import { VedtakAksjonspunktCode } from '@navikt/ft-prosess-tilbakekreving-vedtak
 import { ForeldelseAksjonspunktCodes as TilbakekrevingCodes } from '@navikt/ft-prosess-tilbakekreving';
 import { Aksjonspunkt, AlleKodeverkTilbakekreving } from '@navikt/ft-types';
 import { Behandling, AksessRettigheter, Behandlingsresultat } from '@navikt/fp-types';
-import VedtakResultatType from '@navikt/fp-kodeverk/src/vedtakResultatType';
+import { vedtakResultatType as VedtakResultatType } from '@navikt/fp-kodeverk';
 
 import { erReadOnlyCurried } from '../felles/util/readOnlyPanelUtils';
 import ProsessMeny, { ProsessPanelMenyData } from './ProsessMeny';

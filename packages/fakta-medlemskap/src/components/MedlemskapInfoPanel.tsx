@@ -14,7 +14,7 @@ import {
   AvklarFortsattMedlemskapAp, BekreftBosattVurderingAp, BekreftErMedlemVurderingAp, BekreftLovligOppholdVurderingAp,
   BekreftOppholdsrettVurderingAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import AksjonspunktCode, { hasAksjonspunkt } from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 
 import MedlemskapEndringerTabell from './oppholdInntektOgPerioder/MedlemskapEndringerTabell';
 import OppholdInntektOgPeriodeForm, { FormValues as OppholdFormValues } from './oppholdInntektOgPerioder/OppholdInntektOgPeriodeForm';

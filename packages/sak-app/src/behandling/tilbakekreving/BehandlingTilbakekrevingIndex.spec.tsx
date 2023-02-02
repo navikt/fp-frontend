@@ -6,11 +6,10 @@ import { render, screen } from '@testing-library/react';
 import { createIntl } from '@navikt/ft-utils';
 
 import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
-import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
-import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
-import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import {
+  behandlingStatus, navBrukerKjonn, behandlingType, fagsakYtelseType,
+} from '@navikt/fp-kodeverk';
 import { AksessRettigheter, AlleKodeverk, Fagsak } from '@navikt/fp-types';
-import navBrukerKjonn from '@navikt/fp-kodeverk/src/navBrukerKjonn';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import BehandlingTilbakekrevingIndex from './BehandlingTilbakekrevingIndex';

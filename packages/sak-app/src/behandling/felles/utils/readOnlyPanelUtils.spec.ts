@@ -3,7 +3,7 @@ import {
 } from '@navikt/ft-kodeverk';
 import { Behandling } from '@navikt/ft-types';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import { erReadOnly, harBehandlingReadOnlyStatus } from './readOnlyPanelUtils';
 
@@ -19,7 +19,7 @@ describe('<readOnlyUtils>', () => {
 
   const aksjonspunkter = [{
     status: AksjonspunktStatus.OPPRETTET,
-    definisjon: aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+    definisjon: AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
     kanLoses: true,
     toTrinnsBehandling: true,
     toTrinnsBehandlingGodkjent: false,

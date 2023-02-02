@@ -8,9 +8,8 @@ import { Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/ft-types';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } from '@navikt/fp-types';
-import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
+import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import DynamicLoader from '../../../felles/DynamicLoader';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
@@ -58,7 +57,7 @@ const lagBGVilkar = (vilkar: FpVilkar[], beregningsgrunnlag: Beregningsgrunnlag)
   if (!vilkar) {
     return null;
   }
-  const bgVilkar = vilkar.find((v) => v.vilkarType && v.vilkarType === vilkarType.BEREGNINGSGRUNNLAGVILKARET);
+  const bgVilkar = vilkar.find((v) => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkar || !beregningsgrunnlag) {
     return null;
   }

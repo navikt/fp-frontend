@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
 import { KodeverkMedNavn } from '@navikt/ft-types';
 
-import dokumentMalType from '@navikt/fp-kodeverk/src/dokumentMalType';
-import venteArsakType from '@navikt/fp-kodeverk/src/venteArsakType';
+import { venteArsakType, dokumentMalType } from '@navikt/fp-kodeverk';
 import MeldingerSakIndex, { MessagesModalSakIndex, FormValues } from '@navikt/fp-sak-meldinger';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import SettPaVentModalIndex from '@navikt/fp-modal-sett-pa-vent';

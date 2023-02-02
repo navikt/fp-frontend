@@ -11,10 +11,8 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { CheckboxField, NumberField, SelectField } from '@navikt/ft-form-hooks';
 
-import periodeResultatType from '@navikt/fp-kodeverk/src/periodeResultatType';
-import uttakArbeidTypeKodeverk from '@navikt/fp-kodeverk/src/uttakArbeidType';
-import oppholdArsakType, { oppholdArsakKontoNavn } from '@navikt/fp-kodeverk/src/oppholdArsakType';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import {
+  KodeverkType, oppholdArsakType, oppholdArsakKontoNavn, uttakArbeidType as uttakArbeidTypeKodeverk, periodeResultatType } from '@navikt/fp-kodeverk';
 import {
   ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, AlleKodeverk, PeriodeSoker,
 } from '@navikt/fp-types';

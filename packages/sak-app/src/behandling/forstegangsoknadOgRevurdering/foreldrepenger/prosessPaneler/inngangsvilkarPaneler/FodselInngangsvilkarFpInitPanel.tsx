@@ -4,24 +4,22 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import FodselVilkarProsessIndex from '@navikt/fp-prosess-vilkar-fodsel';
 import { AksessRettigheter } from '@navikt/fp-types';
-import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import { VilkarType, AksjonspunktCode, fagsakYtelseType } from '@navikt/fp-kodeverk';
 
 import InngangsvilkarPanelInitProps from '../../../../felles/typer/inngangsvilkarPanelInitProps';
 import InngangsvilkarDefaultInitPanel from '../../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import OverstyringPanelDef from '../../../../felles/prosess/OverstyringPanelDef';
 
 const AKSJONSPUNKT_KODER = [
-  aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-  aksjonspunktCodes.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
+  AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+  AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
 ];
 
 const VILKAR_KODER = [
-  vilkarType.FODSELSVILKARET_MOR,
-  vilkarType.FODSELSVILKARET_FAR,
+  VilkarType.FODSELSVILKARET_MOR,
+  VilkarType.FODSELSVILKARET_FAR,
 ];
 
 interface OwnProps {

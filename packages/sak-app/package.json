@@ -7,7 +7,6 @@
   "dependencies": {
     "@formatjs/intl-datetimeformat": "6.4.3",
     "@formatjs/intl-numberformat": "8.3.3",
-    "@navikt/fp-assets": "1.0.0",
     "@navikt/fp-fakta-adopsjon": "1.0.0",
     "@navikt/fp-fakta-aktivitetskrav": "1.0.0",
     "@navikt/fp-fakta-arbeidsforhold": "1.0.0",

@@ -16,7 +16,7 @@ import {
 import { Behandling, AksessRettigheter, AlleKodeverk } from '@navikt/fp-types';
 import { FeilutbetalingAksjonspunktCode } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import FeilutbetalingFaktaInitPanel from './paneler/FeilutbetalingFaktaInitPanel';

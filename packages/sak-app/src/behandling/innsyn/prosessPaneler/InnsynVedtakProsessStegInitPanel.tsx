@@ -6,13 +6,12 @@ import { AksjonspunktStatus, VilkarUtfallType } from '@navikt/ft-kodeverk';
 import { Dokument } from '@navikt/ft-types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, behandlingResultatType } from '@navikt/fp-kodeverk';
 import VedtakInnsynProsessIndex, { InnsynBrevData } from '@navikt/fp-prosess-vedtak-innsyn';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
   Fagsak, Behandling, ForhåndsvisMeldingParams, Innsyn,
 } from '@navikt/fp-types';
-import behandlingResultatType from '@navikt/fp-kodeverk/src/behandlingResultatType';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import IverksetterVedtakStatusModal from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
@@ -57,7 +56,7 @@ const getLagringSideeffekter = (
   };
 };
 
-const AKSJONSPUNKT_KODER = [aksjonspunktCodes.FORESLA_VEDTAK];
+const AKSJONSPUNKT_KODER = [AksjonspunktCode.FORESLA_VEDTAK];
 
 const getEndepunkterPanelData = (saksnummer: string) => [
   { key: InnsynBehandlingApiKeys.INNSYN },

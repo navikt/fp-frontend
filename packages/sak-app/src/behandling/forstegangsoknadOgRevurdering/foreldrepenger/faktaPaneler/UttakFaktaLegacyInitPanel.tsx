@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import UttakFaktaLegacyIndex from '@navikt/fp-fakta-uttak-legacy';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
@@ -17,15 +17,15 @@ import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 import { FpBehandlingApiKeys } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
-  aksjonspunktCodes.AVKLAR_UTTAK,
-  aksjonspunktCodes.AVKLAR_FØRSTE_UTTAKSDATO,
-  aksjonspunktCodes.MANUELL_AVKLAR_FAKTA_UTTAK,
-  aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK,
-  aksjonspunktCodes.AVKLAR_FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET,
-  aksjonspunktCodes.AVKLAR_FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG,
+  AksjonspunktCode.AVKLAR_UTTAK,
+  AksjonspunktCode.AVKLAR_FØRSTE_UTTAKSDATO,
+  AksjonspunktCode.MANUELL_AVKLAR_FAKTA_UTTAK,
+  AksjonspunktCode.OVERSTYR_AVKLAR_FAKTA_UTTAK,
+  AksjonspunktCode.AVKLAR_FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET,
+  AksjonspunktCode.AVKLAR_FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG,
 ];
 
-const OVERSTYRING_AP_CODES = [aksjonspunktCodes.MANUELL_AVKLAR_FAKTA_UTTAK, aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK];
+const OVERSTYRING_AP_CODES = [AksjonspunktCode.MANUELL_AVKLAR_FAKTA_UTTAK, AksjonspunktCode.OVERSTYR_AVKLAR_FAKTA_UTTAK];
 
 const ENDEPUNKTER_PANEL_DATA = [
   FpBehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER,

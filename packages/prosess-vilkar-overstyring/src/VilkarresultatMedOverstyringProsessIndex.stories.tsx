@@ -2,12 +2,11 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import aksjonspunktCode, { OverstyringAksjonspunkter } from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
+import {
+  vilkarUtfallType, AksjonspunktCode, aksjonspunktStatus, OverstyringAksjonspunkter, behandlingType,
+} from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Medlemskap } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import VilkarresultatMedOverstyringProsessIndex from './VilkarresultatMedOverstyringProsessIndex';

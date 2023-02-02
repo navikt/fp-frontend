@@ -6,7 +6,7 @@ import { BehandlingStatus, VilkarUtfallType } from '@navikt/ft-kodeverk';
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@navikt/fp-rest-api';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { Behandling } from '@navikt/fp-types';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import * as Felles from './useStandardProsessPanelProps';
@@ -31,7 +31,7 @@ const defaultProps = {
   isReadOnly: false,
   readOnlySubmitButton: false,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.VURDER_FEILUTBETALING,
+    definisjon: AksjonspunktCode.VURDER_FEILUTBETALING,
     kanLoses: true,
   }] as Aksjonspunkt[],
   vilkar: [],

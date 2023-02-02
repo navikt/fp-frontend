@@ -3,14 +3,14 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { Fagsak } from '@navikt/fp-types';
 
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import VurderingFellesProsessStegInitPanel from './VurderingFellesProsessStegInitPanel';
 
-const AKSJONSPUNKT_KODER = [aksjonspunktCodes.BEHANDLE_KLAGE_NFP];
+const AKSJONSPUNKT_KODER = [AksjonspunktCode.BEHANDLE_KLAGE_NFP];
 
 interface OwnProps {
   fagsak: Fagsak;

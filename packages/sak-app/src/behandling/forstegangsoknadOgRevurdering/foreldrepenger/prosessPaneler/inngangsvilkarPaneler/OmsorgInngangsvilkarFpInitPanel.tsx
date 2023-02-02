@@ -4,20 +4,19 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import OmsorgVilkarProsessIndex from '@navikt/fp-prosess-vilkar-omsorg';
 
 import InngangsvilkarPanelInitProps from '../../../../felles/typer/inngangsvilkarPanelInitProps';
 import InngangsvilkarDefaultInitPanel from '../../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 
 const AKSJONSPUNKT_KODER = [
-  aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-  aksjonspunktCodes.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
+  AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+  AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
 ];
 
 const VILKAR_KODER = [
-  vilkarType.OMSORGSVILKARET,
+  VilkarType.OMSORGSVILKARET,
 ];
 
 interface OwnProps {

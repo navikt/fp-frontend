@@ -4,8 +4,7 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import SvangerskapVilkarProsessIndex from '@navikt/fp-prosess-vilkar-svangerskap';
 import { FodselOgTilrettelegging } from '@navikt/fp-types';
 
@@ -14,9 +13,9 @@ import InngangsvilkarDefaultInitPanel from '../../../../felles/prosess/Inngangsv
 
 import { SvpBehandlingApiKeys } from '../../data/svpBehandlingApi';
 
-const AKSJONSPUNKT_KODER = [aksjonspunktCodes.SVANGERSKAPSVILKARET];
+const AKSJONSPUNKT_KODER = [AksjonspunktCode.SVANGERSKAPSVILKARET];
 
-const VILKAR_KODER = [vilkarType.SVANGERSKAPVILKARET];
+const VILKAR_KODER = [VilkarType.SVANGERSKAPVILKARET];
 
 const ENDEPUNKTER_PANEL_DATA = [SvpBehandlingApiKeys.SVANGERSKAPSPENGER_TILRETTELEGGING];
 

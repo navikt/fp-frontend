@@ -6,7 +6,7 @@ import {
 } from '@navikt/ft-kodeverk';
 
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@navikt/fp-rest-api';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { Behandling } from '@navikt/fp-types';
 
@@ -32,7 +32,7 @@ const defaultProps = {
   isReadOnly: false,
   readOnlySubmitButton: false,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
+    definisjon: AksjonspunktCode.BEHANDLE_KLAGE_NFP,
     kanLoses: true,
   }] as Aksjonspunkt[],
   vilkar: [],
@@ -90,7 +90,7 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
         behandlingVersjon={1}
         registrerInngangsvilkarPanel={() => {}}
         requestApi={requestMock}
-        aksjonspunktKoder={[aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR]}
+        aksjonspunktKoder={[AksjonspunktCode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR]}
         renderPanel={() => <div>Dette er komponenten</div>}
         inngangsvilkarPanelKode="test"
         hentInngangsvilkarPanelTekst={() => 'test'}

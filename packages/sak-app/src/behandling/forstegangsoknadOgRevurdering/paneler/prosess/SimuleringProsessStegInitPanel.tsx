@@ -3,14 +3,13 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, vilkarUtfallType } from '@navikt/fp-kodeverk';
 import AvregningProsessIndex from '@navikt/fp-prosess-avregning';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import {
   Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg,
 } from '@navikt/fp-types';
-import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import useStandardProsessPanelProps from '../../../felles/prosess/useStandardProsessPanelProps';
@@ -34,7 +33,7 @@ const getForhandsvisFptilbakeCallback = (
   return forhandsvisTilbakekrevingMelding(data).then((response) => forhandsvisDokument(response));
 };
 
-const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_FEILUTBETALING];
+const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_FEILUTBETALING];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.TILBAKEKREVINGVALG, BehandlingFellesApiKeys.SIMULERING_RESULTAT];
 type EndepunktPanelData = {

@@ -5,19 +5,21 @@ import { action } from '@storybook/addon-actions';
 import {
   Behandling, BeregningsresultatEs, Beregningsgrunnlag, BeregningsresultatFp, Medlemskap, Vilkar, Aksjonspunkt,
 } from '@navikt/fp-types';
-import behandlingArsakType from '@navikt/fp-kodeverk/src/behandlingArsakType';
-import konsekvensForYtelsen from '@navikt/fp-kodeverk/src/konsekvensForYtelsen';
-import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
-import behandlingResultatType from '@navikt/fp-kodeverk/src/behandlingResultatType';
-import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
-import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
-import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
-import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import VedtakProsessIndex from '@navikt/fp-prosess-vedtak';
+import {
+  behandlingArsakType,
+  vilkarUtfallType,
+  konsekvensForYtelsen,
+  behandlingResultatType,
+  VilkarType,
+  behandlingType,
+  behandlingStatus,
+  fagsakYtelseType,
+  aksjonspunktStatus,
+  AksjonspunktCode,
+} from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import VedtakProsessIndex from './VedtakProsessIndex';
 
 const defaultBehandling = {
   uuid: '1',
@@ -37,13 +39,13 @@ const defaultBehandling = {
 
 const defaultVilkar = [{
   lovReferanse: '§§Dette er en lovreferanse',
-  vilkarType: vilkarType.FODSELSVILKARET_MOR,
+  vilkarType: VilkarType.FODSELSVILKARET_MOR,
   vilkarStatus: vilkarUtfallType.OPPFYLT,
   overstyrbar: true,
 }] as Vilkar[];
 
 const defaultAksjonspunkter = [{
-  definisjon: aksjonspunktCodes.FORESLA_VEDTAK,
+  definisjon: AksjonspunktCode.FORESLA_VEDTAK,
   kanLoses: true,
 }] as Aksjonspunkt[];
 
@@ -232,18 +234,18 @@ TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil.args = {
     }],
   } as Beregningsgrunnlag,
   aksjonspunkter: [...defaultAksjonspunkter, {
-    definisjon: aksjonspunktCodes.VURDERE_ANNEN_YTELSE,
+    definisjon: AksjonspunktCode.VURDERE_ANNEN_YTELSE,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: false,
     toTrinnsBehandling: true,
   }, {
-    definisjon: aksjonspunktCodes.VURDERE_DOKUMENT,
+    definisjon: AksjonspunktCode.VURDERE_DOKUMENT,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: false,
   }, {
-    definisjon: aksjonspunktCodes.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
+    definisjon: AksjonspunktCode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: false,

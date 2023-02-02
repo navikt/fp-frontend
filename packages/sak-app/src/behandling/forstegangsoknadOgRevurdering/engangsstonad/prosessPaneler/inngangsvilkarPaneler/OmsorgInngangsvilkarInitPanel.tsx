@@ -4,17 +4,16 @@ import React, {
 import { IntlShape, useIntl } from 'react-intl';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import OmsorgVilkarProsessIndex from '@navikt/fp-prosess-vilkar-omsorg';
 import { Aksjonspunkt } from '@navikt/fp-types';
 import InngangsvilkarPanelInitProps from '../../../../felles/typer/inngangsvilkarPanelInitProps';
 import InngangsvilkarDefaultInitPanel from '../../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 
 const AKSJONSPUNKT_TEKST_PER_KODE = {
-  [aksjonspunktCodes.MANUELL_VURDERING_AV_OMSORGSVILKARET]: 'ErOmsorgVilkaarOppfyltForm.Paragraf',
-  [aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'ErOmsorgVilkaarOppfyltForm.Vurder',
-  [aksjonspunktCodes.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN]: 'ErOmsorgVilkaarOppfyltForm.Vurder',
+  [AksjonspunktCode.MANUELL_VURDERING_AV_OMSORGSVILKARET]: 'ErOmsorgVilkaarOppfyltForm.Paragraf',
+  [AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'ErOmsorgVilkaarOppfyltForm.Vurder',
+  [AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN]: 'ErOmsorgVilkaarOppfyltForm.Vurder',
 } as Record<string, string>;
 
 const hentAksjonspunktTekst = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[] = []): string => (aksjonspunkter.length > 0
@@ -22,13 +21,13 @@ const hentAksjonspunktTekst = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[] =
   : '');
 
 const AKSJONSPUNKT_KODER = [
-  aksjonspunktCodes.MANUELL_VURDERING_AV_OMSORGSVILKARET,
-  aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-  aksjonspunktCodes.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
+  AksjonspunktCode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
+  AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+  AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
 ];
 
 const VILKAR_KODER = [
-  vilkarType.OMSORGSVILKARET,
+  VilkarType.OMSORGSVILKARET,
 ];
 
 interface OwnProps {

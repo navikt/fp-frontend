@@ -12,8 +12,7 @@ import {
   Vilkar, Vilkarperiode, Beregningsgrunnlag,
 } from '@navikt/ft-types';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
-import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
 import { FaktaBeregningAvklaringsbehovCode } from '@navikt/ft-fakta-beregning';
 import DynamicLoader from '../../../felles/DynamicLoader';
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
@@ -70,7 +69,7 @@ const lagBGVilkar = (vilkar: FpVilkar[], beregningsgrunnlag: Beregningsgrunnlag)
   if (!vilkar) {
     return null;
   }
-  const bgVilkar = vilkar.find((v) => v.vilkarType && v.vilkarType === vilkarType.BEREGNINGSGRUNNLAGVILKARET);
+  const bgVilkar = vilkar.find((v) => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkar || !beregningsgrunnlag) {
     return null;
   }

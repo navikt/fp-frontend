@@ -4,8 +4,8 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import SoknadsfristVilkarProsessIndex from '@navikt/fp-prosess-vilkar-soknadsfrist';
-import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
   AksessRettigheter, FamilieHendelseSamling, Soknad,
@@ -18,11 +18,11 @@ import skalViseProsessPanel from '../../../felles/prosess/skalViseProsessPanel';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 
 const AKSJONSPUNKT_KODER = [
-  aksjonspunktCodes.SOKNADSFRISTVILKARET,
-  aksjonspunktCodes.OVERSTYR_SOKNADSFRISTVILKAR,
+  AksjonspunktCode.SOKNADSFRISTVILKARET,
+  AksjonspunktCode.OVERSTYR_SOKNADSFRISTVILKAR,
 ];
 
-const VILKAR_KODER = [vilkarType.SOKNADFRISTVILKARET];
+const VILKAR_KODER = [VilkarType.SOKNADFRISTVILKARET];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.SOKNAD, BehandlingFellesApiKeys.FAMILIEHENDELSE];
 type EndepunktPanelData = {
@@ -53,13 +53,13 @@ const SoknadsfristEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
       skalPanelVisesIMeny={(data) => skalViseProsessPanel(data?.aksjonspunkter, VILKAR_KODER, data?.vilkar)}
       erOverstyrt={erOverstyrt}
       renderPanel={(data) => {
-        const harSoknadsfristAp = data.aksjonspunkter.some((ap) => ap.definisjon === aksjonspunktCodes.SOKNADSFRISTVILKARET);
+        const harSoknadsfristAp = data.aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.SOKNADSFRISTVILKARET);
         return (
           <>
             {!harSoknadsfristAp && (
               <OverstyringPanelDef
                 aksjonspunkter={data?.aksjonspunkter}
-                aksjonspunktKode={aksjonspunktCodes.OVERSTYR_SOKNADSFRISTVILKAR}
+                aksjonspunktKode={AksjonspunktCode.OVERSTYR_SOKNADSFRISTVILKAR}
                 vilkar={data.vilkar}
                 vilkarKoder={VILKAR_KODER}
                 panelTekstKode="Behandlingspunkt.Soknadsfristvilkaret"

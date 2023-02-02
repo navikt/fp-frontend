@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { SideMenu } from '@navikt/ft-plattform-komponenter';
 
-import advarselIkonUrl from '@navikt/fp-assets/images/advarsel_ny.svg';
+import advarselIkonUrl from '../../../images/advarsel_ny.svg';
 import FaktaPanelMenyData from '../typer/faktaPanelMenyData';
 
 interface OwnProps {
@@ -10,21 +10,23 @@ interface OwnProps {
   oppdaterFaktaPanelIUrl: (index: number) => void;
 }
 
-const FaktaMeny: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const FaktaMeny: FunctionComponent<OwnProps> = ({
   menyData,
   oppdaterFaktaPanelIUrl,
-}) => (
-  <SideMenu
-    heading={intl.formatMessage({ id: 'FaktaPanel.FaktaOm' })}
-    links={menyData.map((data) => ({
-      label: data.tekst,
-      active: data.erAktiv,
-      iconSrc: data.harApneAksjonspunkter ? advarselIkonUrl : undefined,
-      iconAltText: data.harApneAksjonspunkter ? intl.formatMessage({ id: 'HelpText.Aksjonspunkt' }) : undefined,
-    }))}
-    onClick={oppdaterFaktaPanelIUrl}
-  />
-);
+}) => {
+  const intl = useIntl();
+  return (
+    <SideMenu
+      heading={intl.formatMessage({ id: 'FaktaPanel.FaktaOm' })}
+      links={menyData.map((data) => ({
+        label: data.tekst,
+        active: data.erAktiv,
+        iconSrc: data.harApneAksjonspunkter ? advarselIkonUrl : undefined,
+        iconAltText: data.harApneAksjonspunkter ? intl.formatMessage({ id: 'HelpText.Aksjonspunkt' }) : undefined,
+      }))}
+      onClick={oppdaterFaktaPanelIUrl}
+    />
+  );
+};
 
-export default injectIntl(FaktaMeny);
+export default FaktaMeny;

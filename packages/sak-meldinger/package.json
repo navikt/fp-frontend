@@ -26,7 +26,6 @@
     "storybook": "cross-env NODE_ENV=test start-storybook -p 7023"
   },
   "dependencies": {
-    "@navikt/fp-assets": "1.0.0",
     "@navikt/fp-kodeverk": "1.0.0",
     "@navikt/fp-types": "1.0.0",
     "@navikt/fp-sak-ukjent-adresse": "1.0.0",

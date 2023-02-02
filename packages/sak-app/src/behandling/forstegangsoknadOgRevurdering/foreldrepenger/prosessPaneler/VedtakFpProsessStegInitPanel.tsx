@@ -3,17 +3,15 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import { isAvslag } from '@navikt/fp-kodeverk/src/behandlingResultatType';
-import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import {
+  vilkarUtfallType, isAvslag, fagsakYtelseType, AksjonspunktCode, aksjonspunktStatus,
+} from '@navikt/fp-kodeverk';
 import VedtakProsessIndex, { ForhandsvisData } from '@navikt/fp-prosess-vedtak';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
   Aksjonspunkt, Behandling, Behandlingsresultat, Beregningsgrunnlag, BeregningsresultatFp, Fagsak,
   ForhåndsvisMeldingParams, Medlemskap, SimuleringResultat, TilbakekrevingValg, Vilkar,
 } from '@navikt/fp-types';
-import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
@@ -27,14 +25,14 @@ import { restApiFpHooks } from '../data/fpBehandlingApi';
 
 const hasOnlyClosedAps = (aksjonspunkter: Aksjonspunkt[], vedtakAksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
   .filter((ap) => !vedtakAksjonspunkter.some((vap) => vap.definisjon === ap.definisjon))
-  .every((ap) => !isAksjonspunktOpen(ap.status));
+  .every((ap) => ap.status !== aksjonspunktStatus.OPPRETTET);
 
-const hasAksjonspunkt = (ap: Aksjonspunkt): boolean => (ap.definisjon === aksjonspunktCodes.OVERSTYR_BEREGNING
-  || ap.definisjon === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG
-  || ap.definisjon === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG
-  || ap.definisjon === aksjonspunktCodes.VURDER_SOKNADSFRIST_FORELDREPENGER);
+const hasAksjonspunkt = (ap: Aksjonspunkt): boolean => (ap.definisjon === AksjonspunktCode.OVERSTYR_BEREGNING
+  || ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG
+  || ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG
+  || ap.definisjon === AksjonspunktCode.VURDER_SOKNADSFRIST_FORELDREPENGER);
 
-const isAksjonspunktOpenAndOfType = (ap: Aksjonspunkt): boolean => hasAksjonspunkt(ap) && isAksjonspunktOpen(ap.status);
+const isAksjonspunktOpenAndOfType = (ap: Aksjonspunkt): boolean => hasAksjonspunkt(ap) && ap.status === aksjonspunktStatus.OPPRETTET;
 
 const findStatusForVedtak = (
   vilkar: Vilkar[],
@@ -79,13 +77,13 @@ const getForhandsvisCallback = (
 };
 
 const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
-  aksjonspunktCodes.FATTER_VEDTAK,
-  aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL,
-  aksjonspunktCodes.VURDERE_ANNEN_YTELSE,
-  aksjonspunktCodes.VURDERE_DOKUMENT,
-  aksjonspunktCodes.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
-  aksjonspunktCodes.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING,
-  aksjonspunktCodes.FORESLA_VEDTAK_MANUELT,
+  AksjonspunktCode.FATTER_VEDTAK,
+  AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL,
+  AksjonspunktCode.VURDERE_ANNEN_YTELSE,
+  AksjonspunktCode.VURDERE_DOKUMENT,
+  AksjonspunktCode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
+  AksjonspunktCode.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING,
+  AksjonspunktCode.FORESLA_VEDTAK_MANUELT,
 ];
 
 const getLagringSideeffekter = (
@@ -97,7 +95,7 @@ const getLagringSideeffekter = (
 
   // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
   return () => {
-    if (aksjonspunktModels.some((ap) => ap.kode === aksjonspunktCodes.FORESLA_VEDTAK)) {
+    if (aksjonspunktModels.some((ap) => ap.kode === AksjonspunktCode.FORESLA_VEDTAK)) {
       toggleFatterVedtakModal(true);
     } else {
       toggleIverksetterVedtakModal(true);
@@ -107,7 +105,7 @@ const getLagringSideeffekter = (
 
 const AKSJONSPUNKT_KODER = [
   ...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER,
-  ...[aksjonspunktCodes.FORESLA_VEDTAK],
+  ...[AksjonspunktCode.FORESLA_VEDTAK],
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [

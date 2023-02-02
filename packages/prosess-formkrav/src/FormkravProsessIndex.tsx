@@ -10,6 +10,8 @@ import FormkravKlageFormNfp from './components/FormkravKlageFormNfp';
 import FormkravKlageKa from './components/FormkravKlageKa';
 import AvsluttetBehandling from './types/avsluttetBehandlingTsType';
 
+import '@navikt/fp-prosess-felles/dist/style.css';
+
 const intl = createIntl(messages);
 
 interface OwnProps {

@@ -2,11 +2,9 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import avslagsarsakCodes from '@navikt/fp-kodeverk/src/avslagsarsakCodes';
-import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
-import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import {
+  AksjonspunktCode, aksjonspunktStatus, vilkarUtfallType, avslagsarsakCodes, fagsakYtelseType,
+} from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { Aksjonspunkt, Behandling, Vilkar } from '@navikt/fp-types';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -62,7 +60,7 @@ export const ÅpentAksjonspunkt = Template.bind({});
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   behandling: defaultBehandling,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+    definisjon: AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
   }] as Aksjonspunkt[],
@@ -76,7 +74,7 @@ OppfyltVilkår.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   behandling: defaultBehandling,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+    definisjon: AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
     status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette vilkåret er godkjent',
   }] as Aksjonspunkt[],
@@ -96,7 +94,7 @@ AvslåttVilkår.args = {
     },
   } as Behandling,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+    definisjon: AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
     status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette vilkåret er avslått',
   }] as Aksjonspunkt[],

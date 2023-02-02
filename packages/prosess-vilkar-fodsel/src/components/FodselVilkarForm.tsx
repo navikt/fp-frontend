@@ -4,19 +4,17 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
-import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
-import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import {
+  VilkarType, AksjonspunktCode, fagsakYtelseType, vilkarUtfallType, KodeverkType,
+} from '@navikt/fp-kodeverk';
 import {
   ProsessStegBegrunnelseTextFieldNew, VilkarResultPicker, ProsessPanelTemplate, validerApKodeOgHentApEnum,
 } from '@navikt/fp-prosess-felles';
-import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
-import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import {
   Aksjonspunkt, AlleKodeverk, Behandling, KodeverkMedNavn, Vilkar,
 } from '@navikt/fp-types';
 import { VurdereYtelseSammeBarnAnnenForelderAp, VurdereYtelseSammeBarnSokerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 const avslagsarsakerES = ['1002', '1003', '1032'];
 
@@ -97,10 +95,10 @@ const FodselVilkarForm: FunctionComponent<OwnProps> = ({
     defaultValues: formData || initialValues,
   });
 
-  const alleAvslagsarsaker = alleKodeverk[kodeverkTyper.AVSLAGSARSAK][vilkarType.FODSELSVILKARET_MOR];
+  const alleAvslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.FODSELSVILKARET_MOR];
   const avslagsarsaker = getFodselVilkarAvslagsarsaker(ytelseTypeKode === fagsakYtelseType.FORELDREPENGER, alleAvslagsarsaker);
 
-  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status));
+  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => ap.status === AksjonspunktStatus.OPPRETTET);
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
   const { lovReferanse } = vilkar[0];
 

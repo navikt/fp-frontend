@@ -2,8 +2,7 @@ import React, {
   FunctionComponent,
 } from 'react';
 
-import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { AksessRettigheter } from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
@@ -11,9 +10,9 @@ import InngangsvilkarPanelInitProps from '../../../../felles/typer/inngangsvilka
 import InngangsvilkarDefaultInitPanel from '../../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import OverstyringPanelDef from '../../../../felles/prosess/OverstyringPanelDef';
 
-const AKSJONSPUNKT_KODER = [aksjonspunktCodes.OVERSTYRING_AV_OPPTJENINGSVILKARET];
+const AKSJONSPUNKT_KODER = [AksjonspunktCode.OVERSTYRING_AV_OPPTJENINGSVILKARET];
 
-const VILKAR_KODER = [vilkarType.OPPTJENINGSPERIODE, vilkarType.OPPTJENINGSVILKARET];
+const VILKAR_KODER = [VilkarType.OPPTJENINGSPERIODE, VilkarType.OPPTJENINGSVILKARET];
 
 interface OwnProps {
   behandlingVersjon: number;
@@ -36,7 +35,7 @@ const OpptjeningInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvi
       <>
         <OverstyringPanelDef
           aksjonspunkter={data.aksjonspunkter}
-          aksjonspunktKode={aksjonspunktCodes.OVERSTYRING_AV_OPPTJENINGSVILKARET}
+          aksjonspunktKode={AksjonspunktCode.OVERSTYRING_AV_OPPTJENINGSVILKARET}
           vilkar={data.vilkar}
           vilkarKoder={VILKAR_KODER}
           panelTekstKode="Inngangsvilkar.Opptjeningsvilkaret"

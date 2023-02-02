@@ -4,8 +4,7 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
 import AdopsjonVilkarProsessIndex from '@navikt/fp-prosess-vilkar-adopsjon';
 import { AksessRettigheter } from '@navikt/fp-types';
 
@@ -14,12 +13,12 @@ import InngangsvilkarDefaultInitPanel from '../../../../felles/prosess/Inngangsv
 import OverstyringPanelDef from '../../../../felles/prosess/OverstyringPanelDef';
 
 const AKSJONSPUNKT_KODER = [
-  aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-  aksjonspunktCodes.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
+  AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+  AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
 ];
 
 const VILKAR_KODER = [
-  vilkarType.ADOPSJONSVILKARET_FORELDREPENGER,
+  VilkarType.ADOPSJONSVILKARET_FORELDREPENGER,
 ];
 
 interface OwnProps {
@@ -46,7 +45,7 @@ const AdopsjonInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangsvi
           {data.aksjonspunkter.length === 0 && (
             <OverstyringPanelDef
               aksjonspunkter={data.aksjonspunkter}
-              aksjonspunktKode={aksjonspunktCodes.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP}
+              aksjonspunktKode={AksjonspunktCode.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP}
               vilkar={data.vilkar}
               vilkarKoder={VILKAR_KODER}
               panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"

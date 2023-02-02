@@ -4,10 +4,9 @@ import React, {
 import { useIntl } from 'react-intl';
 import { FamilieHendelse, FamilieHendelseSamling } from '@navikt/ft-types';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, fodselsvilkarene } from '@navikt/fp-kodeverk';
 import FodselFaktaIndex from '@navikt/fp-fakta-fodsel';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { fodselsvilkarene } from '@navikt/fp-kodeverk/src/vilkarType';
 import { Soknad } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
@@ -15,9 +14,9 @@ import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesAp
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
 const AKSJONSPUNKT_KODER = [
-  aksjonspunktCodes.TERMINBEKREFTELSE,
-  aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL,
-  aksjonspunktCodes.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
+  AksjonspunktCode.TERMINBEKREFTELSE,
+  AksjonspunktCode.SJEKK_MANGLENDE_FODSEL,
+  AksjonspunktCode.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [

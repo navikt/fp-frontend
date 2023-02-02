@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 
 import SettPaVentModalIndex from '@navikt/fp-modal-sett-pa-vent';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { isAksjonspunktOpen, KodeverkType } from '@navikt/ft-kodeverk';
 import { Behandling } from '@navikt/fp-types';
 import { AlleKodeverk, AlleKodeverkTilbakekreving } from '@navikt/ft-types';

@@ -8,14 +8,13 @@ import FormkravProsessIndex from '@navikt/fp-prosess-formkrav';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { KlageVurdering } from '@navikt/fp-types';
 
-import { isKlageAvvist } from '@navikt/fp-kodeverk/src/behandlingResultatType';
-import AksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, isKlageAvvist } from '@navikt/fp-kodeverk';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import { KlageBehandlingApiKeys, requestKlageApi } from '../data/klageBehandlingApi';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktCodes.VURDER_FORMKRAV_NK];
+const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_FORMKRAV_NK];
 
 const ENDEPUNKTER_PANEL_DATA = [KlageBehandlingApiKeys.KLAGE_VURDERING];
 type EndepunktPanelData = {

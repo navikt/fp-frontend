@@ -4,7 +4,7 @@ import React, {
 import { useIntl } from 'react-intl';
 import { FamilieHendelseSamling } from '@navikt/ft-types';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import OmsorgOgForeldreansvarFaktaIndex from '@navikt/fp-fakta-omsorg-og-foreldreansvar';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { InntektArbeidYtelse, Personoversikt, Soknad } from '@navikt/fp-types';
@@ -13,7 +13,7 @@ import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
-const AKSJONSPUNKT_KODER = [aksjonspunktCodes.OMSORGSOVERTAKELSE];
+const AKSJONSPUNKT_KODER = [AksjonspunktCode.OMSORGSOVERTAKELSE];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.SOKNAD, BehandlingFellesApiKeys.FAMILIEHENDELSE, BehandlingFellesApiKeys.INNTEKT_ARBEID_YTELSE];
 type EndepunktPanelData = {

@@ -3,7 +3,7 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 
 import { AksjonspunktÅrsak, ArbeidOgInntektsmelding, Behandling } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import ArbeidsforholdKomplettVurderingType from '@navikt/fp-kodeverk/src/arbeidsforholdKomplettVurderingType';
+import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 
 import ArbeidsforholdFaktaIndex from './ArbeidsforholdFaktaIndex';
 import BekreftetPermisjonStatus from './kodeverk/bekreftetPermisjonStatus';

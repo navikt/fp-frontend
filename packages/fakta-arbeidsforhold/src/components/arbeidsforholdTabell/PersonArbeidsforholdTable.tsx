@@ -7,7 +7,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity, TIDENES_ENDE } from '@navikt/ft-utils';
 import { ArbeidsgiverOpplysningerPerId, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
-import ArbeidsforholdKomplettVurderingType from '@navikt/fp-kodeverk/src/arbeidsforholdKomplettVurderingType';
+import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 
 import erIBrukImageUrl from '../../images/stjerne.svg';
 import IngenArbeidsforholdRegistrert from './IngenArbeidsforholdRegistrert';

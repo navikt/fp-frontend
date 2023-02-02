@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import VurderSoknadsfristForeldrepengerIndex from '@navikt/fp-prosess-soknadsfrist';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { Soknad } from '@navikt/fp-types';
@@ -13,7 +13,7 @@ import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitP
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 
-const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_SOKNADSFRIST_FORELDREPENGER];
+const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_SOKNADSFRIST_FORELDREPENGER];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.SOKNAD];
 type EndepunktPanelData = {

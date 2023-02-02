@@ -3,8 +3,7 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AksessRettigheter } from '@navikt/fp-types';
 
@@ -13,9 +12,9 @@ import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitP
 import OverstyringPanelDef from '../../../felles/prosess/OverstyringPanelDef';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 
-const AKSJONSPUNKT_KODE = aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR;
+const AKSJONSPUNKT_KODE = AksjonspunktCode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR;
 
-const VILKAR_KODER = [vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE];
+const VILKAR_KODER = [VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE];
 
 interface OwnProps {
   rettigheter: AksessRettigheter;

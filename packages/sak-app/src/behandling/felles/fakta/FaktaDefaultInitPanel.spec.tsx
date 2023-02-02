@@ -4,7 +4,7 @@ import { Aksjonspunkt } from '@navikt/ft-types';
 import { BehandlingStatus } from '@navikt/ft-kodeverk';
 
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@navikt/fp-rest-api';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Behandling } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -30,7 +30,7 @@ describe('<FaktaDefaultInitPanel>', () => {
     alleKodeverk: kodeverk,
     readOnly: false,
     aksjonspunkter: [{
-      definisjon: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
+      definisjon: AksjonspunktCode.BEHANDLE_KLAGE_NFP,
       kanLoses: true,
     }] as Aksjonspunkt[],
     harApneAksjonspunkter: true,

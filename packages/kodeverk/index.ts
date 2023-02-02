@@ -1,4 +1,6 @@
-export { default as AksjonspunktCode, hasAksjonspunkt, isUttakAksjonspunkt, isVilkarForSykdomOppfylt } from './src/aksjonspunktCodes';
+export {
+  default as AksjonspunktCode, hasAksjonspunkt, isUttakAksjonspunkt, isVilkarForSykdomOppfylt, OverstyringAksjonspunkter,
+} from './src/aksjonspunktCodes';
 export { default as AksjonspunktCodeTilbakekreving } from './src/aksjonspunktCodesTilbakekreving';
 export { default as aksjonspunktStatus } from './src/aksjonspunktStatus';
 export { default as aksjonspunktType } from './src/aksjonspunktType';
@@ -12,7 +14,9 @@ export { default as arbeidskategori } from './src/arbeidskategori';
 export { default as arbeidType } from './src/arbeidType';
 export { default as avslagsarsakCodes } from './src/avslagsarsakCodes';
 export { default as behandlingArsakType } from './src/behandlingArsakType';
-export { default as behandlingResultatType } from './src/behandlingResultatType';
+export {
+  default as behandlingResultatType, isAvslag, isInnvilget, isOpphor, isKlageOmgjort, isKlageAvvist,
+} from './src/behandlingResultatType';
 export { default as behandlingStatus } from './src/behandlingStatus';
 export { default as behandlingType } from './src/behandlingType';
 export { default as beregningsgrunnlagAndeltyper } from './src/beregningsgrunnlagAndeltyper';
@@ -40,7 +44,7 @@ export { default as landkoder } from './src/landkoder';
 export { default as mottakerTyper } from './src/mottakerTyper';
 export { default as naringsvirksomhetType } from './src/naringsvirksomhetType';
 export { default as navBrukerKjonn } from './src/navBrukerKjonn';
-export { default as oppholdArsakType, oppholdArsakKontoNavn } from './src/oppholdArsakType';
+export { default as oppholdArsakType, oppholdArsakKontoNavn, oppholdArsakMapper } from './src/oppholdArsakType';
 export { default as opplysningAdresseType } from './src/opplysningAdresseType';
 export { default as opplysningsKilde } from './src/opplysningsKilde';
 export { default as opptjeningAktivitetType } from './src/opptjeningAktivitetType';
@@ -66,8 +70,10 @@ export { default as uttakArbeidType } from './src/uttakArbeidType';
 export { default as uttakPeriodeType, uttakPeriodeNavn } from './src/uttakPeriodeType';
 export { default as vedtakResultatType } from './src/vedtakResultatType';
 export { default as venteArsakType } from './src/venteArsakType';
-export { default as VilkarType } from './src/vilkarType';
+export { default as VilkarType, adopsjonsvilkarene, fodselsvilkarene } from './src/vilkarType';
 export { default as vilkarUtfallType } from './src/vilkarUtfallType';
 export { default as vurderPaNyttArsakType } from './src/vurderPaNyttArsakType';
 export { default as uttakPeriodeVurdering } from './src/uttakPeriodeVurdering';
+export { default as dokumentTypeId } from './src/dokumentTypeId';
+export { default as VergeType } from './src/vergeType';
 export { default as tilbakekrevingVidereBehandling } from './src/tilbakekrevingVidereBehandling';

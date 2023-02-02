@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import ArbeidsforholdFaktaIndex from '@navikt/fp-fakta-arbeidsforhold';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
@@ -14,7 +14,7 @@ import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
-const AKSJONSPUNKT_KODER = [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD];
+const AKSJONSPUNKT_KODER = [AksjonspunktCode.AVKLAR_ARBEIDSFORHOLD];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.ARBEID_OG_INNTEKT];
 type EndepunktPanelData = {

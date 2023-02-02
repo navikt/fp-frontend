@@ -2,14 +2,9 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import arbeidsforholdHandlingType from '@navikt/fp-kodeverk/src/arbeidsforholdHandlingType';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import aktivitetStatus from '@navikt/fp-kodeverk/src/aktivitetStatus';
-import stonadskontoType from '@navikt/fp-kodeverk/src/stonadskontoType';
-import navBrukerKjonn from '@navikt/fp-kodeverk/src/navBrukerKjonn';
-import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
-import soknadType from '@navikt/fp-kodeverk/src/soknadType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import {
+  aktivitetStatus, aksjonspunktStatus, arbeidsforholdHandlingType, StonadskontoType, navBrukerKjonn, fagsakYtelseType, soknadType, AksjonspunktCode,
+} from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import {
   Aksjonspunkt,
@@ -49,7 +44,7 @@ const beregningresultat = {
   perioder: [{
     andeler: [{
       uttak: {
-        stonadskontoType: stonadskontoType.FELLESPERIODE,
+        stonadskontoType: StonadskontoType.FELLESPERIODE,
       },
       aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
       arbeidsforholdType: arbeidsforholdHandlingType.NYTT_ARBEIDSFORHOLD,
@@ -127,7 +122,7 @@ export const ÅpentAksjonspunkt = Template.bind({});
 ÅpentAksjonspunkt.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.VURDER_TILBAKETREKK,
+    definisjon: AksjonspunktCode.VURDER_TILBAKETREKK,
     status: aksjonspunktStatus.OPPRETTET,
   }] as Aksjonspunkt[],
 };
@@ -136,7 +131,7 @@ export const MedFeriepengegrunnlag = Template.bind({});
 MedFeriepengegrunnlag.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.VURDER_TILBAKETREKK,
+    definisjon: AksjonspunktCode.VURDER_TILBAKETREKK,
     status: aksjonspunktStatus.OPPRETTET,
   }] as Aksjonspunkt[],
   feriepengegrunnlag: {

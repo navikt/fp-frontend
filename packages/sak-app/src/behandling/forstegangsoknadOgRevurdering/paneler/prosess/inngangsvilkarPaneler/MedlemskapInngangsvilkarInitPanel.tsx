@@ -3,8 +3,7 @@ import React, {
 } from 'react';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
 import { AksessRettigheter, Medlemskap } from '@navikt/fp-types';
 
 import InngangsvilkarPanelInitProps from '../../../../felles/typer/inngangsvilkarPanelInitProps';
@@ -12,9 +11,9 @@ import { BehandlingFellesApiKeys } from '../../../../felles/data/behandlingFelle
 import InngangsvilkarDefaultInitPanel from '../../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import OverstyringPanelDef from '../../../../felles/prosess/OverstyringPanelDef';
 
-const AKSJONSPUNKT_KODE = aksjonspunktCodes.OVERSTYR_MEDLEMSKAPSVILKAR;
+const AKSJONSPUNKT_KODE = AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR;
 
-const VILKAR_KODER = [vilkarType.MEDLEMSKAPSVILKARET];
+const VILKAR_KODER = [VilkarType.MEDLEMSKAPSVILKARET];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.MEDLEMSKAP];
 type EndepunktPanelData = {

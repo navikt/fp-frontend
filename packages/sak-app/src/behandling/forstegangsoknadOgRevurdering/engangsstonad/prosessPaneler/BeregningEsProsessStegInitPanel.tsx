@@ -3,8 +3,7 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { vilkarUtfallType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import BeregningsresultatProsessIndex from '@navikt/fp-prosess-beregningsresultat';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AksessRettigheter, BeregningsresultatEs } from '@navikt/fp-types';
@@ -14,7 +13,7 @@ import { EsBehandlingApiKeys } from '../data/esBehandlingApi';
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 
-const AKSJONSPUNKT_KODER = [aksjonspunktCodes.OVERSTYR_BEREGNING];
+const AKSJONSPUNKT_KODER = [AksjonspunktCode.OVERSTYR_BEREGNING];
 
 const ENDEPUNKTER_PANEL_DATA = [EsBehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD];
 type EndepunktPanelData = {

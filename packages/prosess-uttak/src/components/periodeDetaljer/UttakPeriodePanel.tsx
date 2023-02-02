@@ -11,12 +11,12 @@ import { Label } from '@navikt/ds-react';
 import { BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
 import { calcDays } from '@navikt/ft-utils';
 
-import splitPeriodImageHoverUrl from '@navikt/fp-assets/images/splitt_hover.svg';
-import splitPeriodImageUrl from '@navikt/fp-assets/images/splitt.svg';
 import {
   AlleKodeverk, ArbeidsgiverOpplysningerPerId, PeriodeSoker, UttaksresultatPeriode, UttakStonadskontoer, PeriodeSokerAktivitet, Behandling, Ytelsefordeling,
 } from '@navikt/fp-types';
 
+import splitPeriodImageHoverUrl from '../../images/splitt_hover.svg';
+import splitPeriodImageUrl from '../../images/splitt.svg';
 import SplittPeriodeModal from './splitt/SplittPeriodeModal';
 import UttakPeriodeForm from './UttakPeriodeForm';
 

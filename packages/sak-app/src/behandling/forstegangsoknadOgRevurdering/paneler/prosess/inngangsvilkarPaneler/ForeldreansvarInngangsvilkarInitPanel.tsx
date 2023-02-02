@@ -4,8 +4,8 @@ import React, {
 import { IntlShape, useIntl } from 'react-intl';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import ForeldreansvarVilkarProsessIndex from '@navikt/fp-prosess-vilkar-foreldreansvar';
 import { Aksjonspunkt } from '@navikt/fp-types';
 
@@ -13,17 +13,17 @@ import InngangsvilkarPanelInitProps from '../../../../felles/typer/inngangsvilka
 import InngangsvilkarDefaultInitPanel from '../../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 
 const AKSJONSPUNKT_KODER = [
-  aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
-  aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
-  aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-  aksjonspunktCodes.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
+  AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+  AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
+  AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+  AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
 ];
 
 const AKSJONSPUNKT_TEKST_PER_KODE = {
-  [aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD]: 'ErForeldreansvarVilkaarOppfyltForm.2LeddParagrafEngangsStonad',
-  [aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD]: 'ErForeldreansvarVilkaarOppfyltForm.4LeddParagraf',
-  [aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'ErForeldreansvarVilkaarOppfyltForm.Vurder',
-  [aksjonspunktCodes.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN]: 'ErForeldreansvarVilkaarOppfyltForm.Vurder',
+  [AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD]: 'ErForeldreansvarVilkaarOppfyltForm.2LeddParagrafEngangsStonad',
+  [AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD]: 'ErForeldreansvarVilkaarOppfyltForm.4LeddParagraf',
+  [AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'ErForeldreansvarVilkaarOppfyltForm.Vurder',
+  [AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN]: 'ErForeldreansvarVilkaarOppfyltForm.Vurder',
 } as Record<string, string>;
 
 const hentAksjonspunktTekst = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[] = []): string => (aksjonspunkter.length > 0
@@ -31,8 +31,8 @@ const hentAksjonspunktTekst = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[] =
   : '');
 
 const VILKAR_KODER = [
-  vilkarType.FORELDREANSVARSVILKARET_2_LEDD,
-  vilkarType.FORELDREANSVARSVILKARET_4_LEDD,
+  VilkarType.FORELDREANSVARSVILKARET_2_LEDD,
+  VilkarType.FORELDREANSVARSVILKARET_4_LEDD,
 ];
 
 interface OwnProps {
@@ -56,7 +56,7 @@ const ForeldreansvarInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngan
         <>
           <ForeldreansvarVilkarProsessIndex
             isEngangsstonad
-            isForeldreansvar2Ledd={data.vilkar.some((v) => v.vilkarType === vilkarType.FORELDREANSVARSVILKARET_2_LEDD)}
+            isForeldreansvar2Ledd={data.vilkar.some((v) => v.vilkarType === VilkarType.FORELDREANSVARSVILKARET_2_LEDD)}
             // @ts-ignore Eg trur denne feilar grunna feil i typescript-pakka. Sjekk på eit seinare tidspunkt om denne er retta
             {...data}
           />

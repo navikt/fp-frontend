@@ -3,19 +3,18 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, vilkarUtfallType } from '@navikt/fp-kodeverk';
 import TilkjentYtelseProsessIndex from '@navikt/fp-prosess-tilkjent-ytelse';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
   ArbeidsgiverOpplysningerPerId, BeregningsresultatFp, Fagsak, FamilieHendelseSamling, Feriepengegrunnlag, Personoversikt, Soknad,
 } from '@navikt/fp-types';
-import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
 
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 
-const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_TILBAKETREKK];
+const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_TILBAKETREKK];
 
 const ENDEPUNKTER_PANEL_DATA = [
   BehandlingFellesApiKeys.BEREGNINGRESULTAT_FORELDREPENGER,

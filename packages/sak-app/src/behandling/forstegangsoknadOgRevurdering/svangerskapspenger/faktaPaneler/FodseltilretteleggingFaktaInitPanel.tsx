@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import FodselOgTilretteleggingFaktaIndex from '@navikt/fp-fakta-fodsel-og-tilrettelegging';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
@@ -18,9 +18,9 @@ import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesAp
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 import { SvpBehandlingApiKeys } from '../data/svpBehandlingApi';
 
-const AKSJONSPUNKT_KODER = [aksjonspunktCodes.FODSELTILRETTELEGGING];
+const AKSJONSPUNKT_KODER = [AksjonspunktCode.FODSELTILRETTELEGGING];
 
-const OVERSTYRING_AP_CODES = [aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO];
+const OVERSTYRING_AP_CODES = [AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.ARBEID_OG_INNTEKT, SvpBehandlingApiKeys.SVANGERSKAPSPENGER_TILRETTELEGGING];
 type EndepunktPanelData = {

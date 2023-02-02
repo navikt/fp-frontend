@@ -8,7 +8,7 @@ import { RequestApi } from '@navikt/fp-rest-api';
 import { Behandling } from '@navikt/fp-types';
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import SettPaVentModalIndex from '@navikt/fp-modal-sett-pa-vent';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { BehandlingFellesApiKeys } from '../../data/behandlingFellesApi';
 
 export type SettPaVentParams = {
@@ -53,7 +53,7 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
   }).then(() => hentBehandling(false)), [behandling.versjon]);
 
   const erManueltSattPaVent = useMemo(() => behandling.aksjonspunkt.filter((ap) => isAksjonspunktOpen(ap.status))
-    .some((ap) => ap.definisjon === aksjonspunktCodes.AUTO_MANUELT_SATT_PÅ_VENT), [behandling.aksjonspunkt]);
+    .some((ap) => ap.definisjon === AksjonspunktCode.AUTO_MANUELT_SATT_PÅ_VENT), [behandling.aksjonspunkt]);
 
   return (
     <SettPaVentModalIndex

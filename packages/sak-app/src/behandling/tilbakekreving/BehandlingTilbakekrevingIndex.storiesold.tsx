@@ -19,10 +19,9 @@ import {
 import { FeilutbetalingAksjonspunktCode } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import { ForeldelseAksjonspunktCodes } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
 import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock'; // eslint-disable-line import/no-extraneous-dependencies
-import VergeType from '@navikt/fp-fakta-verge/src/kodeverk/vergeType';
 import { Fagsak, Verge, Behandling } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils'; // eslint-disable-line import/no-extraneous-dependencies
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, VergeType } from '@navikt/fp-kodeverk';
 
 import BehandlingEventHandler from './felles/util/BehandlingEventHandler';
 import BehandlingTilbakekrevingIndex from './BehandlingTilbakekrevingIndex';

@@ -8,10 +8,10 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { Dokument } from '@navikt/fp-types';
-import sendDokumentImageUrl from '@navikt/fp-assets/images/send_dokument.svg';
-import mottaDokumentImageUrl from '@navikt/fp-assets/images/motta_dokument.svg';
-import internDokumentImageUrl from '@navikt/fp-assets/images/intern_dokument.svg';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
+import sendDokumentImageUrl from '../images/send_dokument.svg';
+import mottaDokumentImageUrl from '../images/motta_dokument.svg';
+import internDokumentImageUrl from '../images/intern_dokument.svg';
 
 import styles from './documentListInnsyn.less';
 

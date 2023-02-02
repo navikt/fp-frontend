@@ -7,7 +7,7 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import VilkarresultatMedOverstyringProsessIndex from '@navikt/fp-prosess-vilkar-overstyring';
 import { Medlemskap, Vilkar } from '@navikt/fp-types';
-import { OverstyringAksjonspunkter } from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { OverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 
 import skalViseProsessPanel from './skalViseProsessPanel';
 import useStandardProsessPanelProps from './useStandardProsessPanelProps';

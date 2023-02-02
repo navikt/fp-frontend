@@ -12,10 +12,10 @@ import {
 import {
   Form, RadioGroupPanel, TextAreaField,
 } from '@navikt/ft-form-hooks';
-import BehandlingType from '@navikt/fp-kodeverk/src/behandlingType';
-import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import {
+  behandlingType as BehandlingType, dokumentMalType, AksjonspunktCode, KodeverkType,
+} from '@navikt/fp-kodeverk';
 import { AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 import {
   hasValidText, minLength, maxLength, required,
 } from '@navikt/ft-form-validators';
@@ -23,15 +23,14 @@ import { ISO_DATE_FORMAT, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import FodselSammenligningIndex from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import SettPaVentModalIndex, { FormValues as ModalFormValues } from '@navikt/fp-modal-sett-pa-vent';
 import Behandling from '@navikt/fp-types/src/behandlingTsType';
-import dokumentMalType from '@navikt/fp-kodeverk/src/dokumentMalType';
 import {
   Aksjonspunkt, FamilieHendelseSamling, Soknad, FamilieHendelse, AlleKodeverk,
 } from '@navikt/fp-types';
 import { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 
 import styles from './varselOmRevurderingForm.less';
+import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 const minLength3 = minLength(3);
 const maxLength6000 = maxLength(6000);
@@ -137,7 +136,7 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
   const { vedtaksDatoSomSvangerskapsuke } = nullSafe(familiehendelse.gjeldende);
 
   const erAutomatiskRevurdering = behandlingArsaker.reduce((result, current) => (result || current.erAutomatiskRevurdering), false);
-  const ventearsaker = alleKodeverk[kodeverkTyper.VENT_AARSAK] || EMPTY_ARRAY;
+  const ventearsaker = alleKodeverk[KodeverkType.VENT_AARSAK] || EMPTY_ARRAY;
   const language = getLanguageFromSprakkode(sprakkode);
 
   return (
@@ -149,7 +148,7 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
       >
         <Heading size="small"><FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurdering" /></Heading>
         <VerticalSpacer eightPx />
-        {(!readOnly && isAksjonspunktOpen(aksjonspunkter[0].status)) && (
+        {(!readOnly && aksjonspunkter[0].status === AksjonspunktStatus.OPPRETTET) && (
         <>
           <AksjonspunktHelpTextTemp isAksjonspunktOpen>
             {[<FormattedMessage key="1" id="VarselOmRevurderingForm.VarselOmRevurderingVurder" />]}
@@ -225,7 +224,7 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
           </Button>
         </>
         )}
-        {(readOnly || !isAksjonspunktOpen(aksjonspunkter[0].status)) && (
+        {(readOnly || aksjonspunkter[0].status !== AksjonspunktStatus.OPPRETTET) && (
         <>
           <Detail size="small"><FormattedMessage id="VarselOmRevurderingForm.Begrunnelse" /></Detail>
           <BodyShort size="small">{formVerdier.begrunnelse}</BodyShort>

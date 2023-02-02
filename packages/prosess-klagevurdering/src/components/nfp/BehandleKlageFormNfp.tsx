@@ -5,9 +5,7 @@ import { Heading } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import klageVurderingType from '@navikt/fp-kodeverk/src/klageVurdering';
+import { AksjonspunktCode, KodeverkType, klageVurdering as klageVurderingType } from '@navikt/fp-kodeverk';
 import {
   AksjonspunktHelpTextTemp, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -30,7 +28,7 @@ const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
   klageVurdering: values.klageVurdering,
   fritekstTilBrev: values.fritekstTilBrev,
   begrunnelse: values.begrunnelse,
-  kode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
+  kode: AksjonspunktCode.BEHANDLE_KLAGE_NFP,
 });
 
 const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): KlageFormType => ({
@@ -91,13 +89,13 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
       <Heading size="small">{intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}</Heading>
       <VerticalSpacer fourPx />
       <AksjonspunktHelpTextTemp isAksjonspunktOpen={!readOnlySubmitButton}>
-        {[<FormattedMessage id="Klage.ResolveKlage.HelpText" key={aksjonspunktCodes.BEHANDLE_KLAGE_NFP} />]}
+        {[<FormattedMessage id="Klage.ResolveKlage.HelpText" key={AksjonspunktCode.BEHANDLE_KLAGE_NFP} />]}
       </AksjonspunktHelpTextTemp>
       <KlageVurderingRadioOptionsNfp
         readOnly={readOnly}
         klageVurdering={formValues.klageVurdering}
-        medholdReasons={alleKodeverk[kodeverkTyper.KLAGE_MEDHOLD_ARSAK]}
-        alleHjemler={alleKodeverk[kodeverkTyper.KLAGE_HJEMMEL]}
+        medholdReasons={alleKodeverk[KodeverkType.KLAGE_MEDHOLD_ARSAK]}
+        alleHjemler={alleKodeverk[KodeverkType.KLAGE_HJEMMEL]}
         alleAktuelleHjemler={alleAktuelleHjemler}
       />
       <div className={styles.confirmVilkarForm}>
@@ -133,7 +131,7 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
                 saveKlage={saveKlage}
                 handleSubmit={formMethods.handleSubmit}
                 readOnly={readOnly}
-                aksjonspunktCode={aksjonspunktCodes.BEHANDLE_KLAGE_NFP}
+                aksjonspunktCode={AksjonspunktCode.BEHANDLE_KLAGE_NFP}
               />
             </FlexColumn>
           </FlexRow>

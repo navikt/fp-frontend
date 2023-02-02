@@ -4,7 +4,7 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import VarselOmRevurderingProsessIndex from '@navikt/fp-prosess-varsel-om-revurdering';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
@@ -49,8 +49,8 @@ const getLagringSideeffekter = (
 };
 
 const AKSJONSPUNKT_KODER = [
-  aksjonspunktCodes.VARSEL_REVURDERING_MANUELL,
-  aksjonspunktCodes.VARSEL_REVURDERING_ETTERKONTROLL,
+  AksjonspunktCode.VARSEL_REVURDERING_MANUELL,
+  AksjonspunktCode.VARSEL_REVURDERING_ETTERKONTROLL,
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [

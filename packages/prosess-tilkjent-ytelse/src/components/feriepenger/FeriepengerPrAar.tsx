@@ -5,8 +5,7 @@ import { Label, BodyShort } from '@navikt/ds-react';
 
 import { ArbeidsgiverOpplysningerPerId, FeriepengegrunnlagAndel, AlleKodeverk } from '@navikt/fp-types';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
+import { KodeverkType, getKodeverknavnFn } from '@navikt/fp-kodeverk';
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 
 const finnAlleAndelerForOpptjeningsår = (andeler: FeriepengegrunnlagAndel[],

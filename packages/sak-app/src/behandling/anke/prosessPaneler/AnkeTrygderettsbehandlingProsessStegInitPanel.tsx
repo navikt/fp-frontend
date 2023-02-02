@@ -5,14 +5,14 @@ import { useIntl } from 'react-intl';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AnkeVurdering } from '@navikt/fp-types';
-import AksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import AnkeTrygderettsbehandlingProsessIndex from '@navikt/fp-prosess-anke-trygderettsbehandling';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import { requestAnkeApi, AnkeBehandlingApiKeys } from '../data/ankeBehandlingApi';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktCodes.AUTO_VENT_ANKE_OVERSENDT_TIL_TRYGDERETTEN];
+const AKSJONSPUNKT_KODER = [AksjonspunktCode.AUTO_VENT_ANKE_OVERSENDT_TIL_TRYGDERETTEN];
 
 const ENDEPUNKTER_PANEL_DATA = [AnkeBehandlingApiKeys.ANKE_VURDERING];
 type EndepunktPanelData = {

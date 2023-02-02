@@ -22,13 +22,13 @@ import messages from '../../i18n/nb_NO.json';
 
 import '@navikt/ds-css';
 
-import '@navikt/fp-assets/styles/global.less';
-
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-plattform-komponenter/dist/style.css';
 import '@navikt/ft-tidslinje/dist/style.css';
 import '@navikt/ft-sak-infosider/dist/style.css';
+
+import './global.less';
 
 const EMPTY_ARRAY = [] as any[];
 

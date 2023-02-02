@@ -10,7 +10,7 @@ import {
   Fagsak, BehandlingAppKontekst, TotrinnskontrollAksjonspunkt, BehandlingÅrsak,
 } from '@navikt/fp-types';
 import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import FagsakData from '../../fagsak/FagsakData';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
@@ -29,22 +29,22 @@ describe('<TotrinnskontrollIndex>', () => {
 
   const getTotrinnsaksjonspunkterFoedsel = () => ({
     skjermlenkeType: 'FAKTA_OM_FOEDSEL',
-    totrinnskontrollAksjonspunkter: [createAksjonspunkt(aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL),
-      createAksjonspunkt(aksjonspunktCodes.TERMINBEKREFTELSE),
-      createAksjonspunkt(aksjonspunktCodes.AUTO_VENT_PÅ_FODSELREGISTRERING)],
+    totrinnskontrollAksjonspunkter: [createAksjonspunkt(AksjonspunktCode.SJEKK_MANGLENDE_FODSEL),
+      createAksjonspunkt(AksjonspunktCode.TERMINBEKREFTELSE),
+      createAksjonspunkt(AksjonspunktCode.AUTO_VENT_PÅ_FODSELREGISTRERING)],
   });
 
   const getTotrinnsaksjonspunkterOmsorg = () => ({
     skjermlenkeType: 'FAKTA_FOR_OMSORG',
-    totrinnskontrollAksjonspunkter: [createAksjonspunkt(aksjonspunktCodes.OMSORGSOVERTAKELSE),
-      createAksjonspunkt(aksjonspunktCodes.MANUELL_VURDERING_AV_OMSORGSVILKARET)],
+    totrinnskontrollAksjonspunkter: [createAksjonspunkt(AksjonspunktCode.OMSORGSOVERTAKELSE),
+      createAksjonspunkt(AksjonspunktCode.MANUELL_VURDERING_AV_OMSORGSVILKARET)],
   });
 
   const getTotrinnsaksjonspunkterForeldreansvar = () => ({
     skjermlenkeType: 'PUNKT_FOR_FORELDREANSVAR',
     totrinnskontrollAksjonspunkter: [
-      createAksjonspunkt(aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD),
-      createAksjonspunkt(aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD),
+      createAksjonspunkt(AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD),
+      createAksjonspunkt(AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD),
     ],
   });
 

@@ -3,8 +3,7 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, vilkarUtfallType } from '@navikt/fp-kodeverk';
 import UttakProsessIndex from '@navikt/fp-prosess-uttak';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { RequestApi } from '@navikt/fp-rest-api';
@@ -28,17 +27,17 @@ const getStatusFromUttakresultat = (behandling: Behandling, requestApi: RequestA
 };
 
 const AKSJONSPUNKT_KODER = [
-  aksjonspunktCodes.FASTSETT_UTTAKPERIODER,
-  aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER,
-  aksjonspunktCodes.TILKNYTTET_STORTINGET,
-  aksjonspunktCodes.ANNENPART_EØS,
-  aksjonspunktCodes.TETTE_SAKER,
-  aksjonspunktCodes.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE,
-  aksjonspunktCodes.KONTROLLER_OPPLYSNINGER_OM_FORDELING_AV_STØNADSPERIODEN,
-  aksjonspunktCodes.KONTROLLER_OPPLYSNINGER_OM_DØD,
-  aksjonspunktCodes.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST,
-  aksjonspunktCodes.KONTROLLER_TILSTØTENDE_YTELSER_INNVILGET,
-  aksjonspunktCodes.KONTROLLER_TILSTØTENDE_YTELSER_OPPHØRT,
+  AksjonspunktCode.FASTSETT_UTTAKPERIODER,
+  AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER,
+  AksjonspunktCode.TILKNYTTET_STORTINGET,
+  AksjonspunktCode.ANNENPART_EØS,
+  AksjonspunktCode.TETTE_SAKER,
+  AksjonspunktCode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE,
+  AksjonspunktCode.KONTROLLER_OPPLYSNINGER_OM_FORDELING_AV_STØNADSPERIODEN,
+  AksjonspunktCode.KONTROLLER_OPPLYSNINGER_OM_DØD,
+  AksjonspunktCode.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST,
+  AksjonspunktCode.KONTROLLER_TILSTØTENDE_YTELSER_INNVILGET,
+  AksjonspunktCode.KONTROLLER_TILSTØTENDE_YTELSER_OPPHØRT,
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [

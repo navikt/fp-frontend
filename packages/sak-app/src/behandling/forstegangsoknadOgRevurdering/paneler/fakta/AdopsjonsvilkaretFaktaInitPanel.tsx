@@ -5,10 +5,9 @@ import { useIntl } from 'react-intl';
 import { Fagsak, FamilieHendelseSamling } from '@navikt/ft-types';
 import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, adopsjonsvilkarene } from '@navikt/fp-kodeverk';
 import AdopsjonFaktaIndex from '@navikt/fp-fakta-adopsjon';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { adopsjonsvilkarene } from '@navikt/fp-kodeverk/src/vilkarType';
 import { Soknad } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
@@ -16,9 +15,9 @@ import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesAp
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
 const AKSJONSPUNKT_KODER = [
-  aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
-  aksjonspunktCodes.ADOPSJONSDOKUMENTAJON,
-  aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+  AksjonspunktCode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
+  AksjonspunktCode.ADOPSJONSDOKUMENTAJON,
+  AksjonspunktCode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [

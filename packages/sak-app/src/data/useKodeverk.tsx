@@ -2,7 +2,7 @@ import { KodeverkMedNavn, AlleKodeverkTilbakekreving } from '@navikt/ft-types';
 import { BehandlingType } from '@navikt/ft-kodeverk';
 
 import { AlleKodeverk } from '@navikt/fp-types';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import { FpsakApiKeys, restApiHooks } from './fpsakApi';
 

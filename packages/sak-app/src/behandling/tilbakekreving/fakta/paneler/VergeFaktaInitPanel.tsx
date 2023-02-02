@@ -1,13 +1,12 @@
 import React, { FunctionComponent, useMemo, useCallback } from 'react';
 
 import { Aksjonspunkt } from '@navikt/ft-types';
-import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import VergeFaktaIndex from '@navikt/fp-fakta-verge';
 import { AlleKodeverk, Behandling } from '@navikt/fp-types';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 
 import { restApiTilbakekrevingHooks } from '../../data/tilbakekrevingBehandlingApi';
 import getAlleMerknaderFraBeslutter from '../../felles/util/getAlleMerknaderFraBeslutter';
@@ -60,8 +59,8 @@ const VergeFaktaInitPanel: FunctionComponent<OwnProps> = ({
       alleKodeverk={fpsakKodeverk}
       submitCallback={submitCallback}
       readOnly={readOnly}
-      harApneAksjonspunkter={aksjonspunkterForVergeFakta.some((ap) => isAksjonspunktOpen(ap.status) && ap.kanLoses)}
-      submittable={!aksjonspunkterForVergeFakta.some((ap) => isAksjonspunktOpen(ap.status)) || aksjonspunkter.some((ap) => ap.kanLoses)}
+      harApneAksjonspunkter={aksjonspunkterForVergeFakta.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET && ap.kanLoses)}
+      submittable={!aksjonspunkterForVergeFakta.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET) || aksjonspunkter.some((ap) => ap.kanLoses)}
       formData={formData[FaktaPanelCode.VERGE]}
       setFormData={setFormDataVerge}
     />

@@ -7,7 +7,7 @@ import {
 } from '@navikt/ft-types';
 import { VilkarUtfallType, AksjonspunktStatus, BehandlingResultatType } from '@navikt/ft-kodeverk';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import VedtakKlageProsessIndex, { VedtakKlageBrevData } from '@navikt/fp-prosess-vedtak-klage';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { ForhåndsvisMeldingParams, KlageVurdering } from '@navikt/fp-types';
@@ -67,10 +67,10 @@ const getLagringSideeffekter = (
 };
 
 const AKSJONSPUNKT_KODER = [
-  aksjonspunktCodes.FORESLA_VEDTAK,
-  aksjonspunktCodes.FATTER_VEDTAK,
-  aksjonspunktCodes.FORESLA_VEDTAK_MANUELT,
-  aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL,
+  AksjonspunktCode.FORESLA_VEDTAK,
+  AksjonspunktCode.FATTER_VEDTAK,
+  AksjonspunktCode.FORESLA_VEDTAK_MANUELT,
+  AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL,
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [KlageBehandlingApiKeys.KLAGE_VURDERING];

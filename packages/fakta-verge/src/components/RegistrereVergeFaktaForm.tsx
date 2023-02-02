@@ -10,10 +10,8 @@ import {
 import {
   Datepicker, InputField, SelectField,
 } from '@navikt/ft-form-hooks';
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, VergeType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn, Verge } from '@navikt/fp-types';
-
-import VergeType from '../kodeverk/vergeType';
 
 import styles from './registrereVergeFaktaForm.less';
 

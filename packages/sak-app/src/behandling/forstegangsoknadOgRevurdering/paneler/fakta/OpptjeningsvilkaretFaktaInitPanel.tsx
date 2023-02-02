@@ -3,9 +3,7 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
-import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { vilkarUtfallType, VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import OpptjeningFaktaIndex from '@navikt/fp-fakta-opptjening';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { ArbeidsgiverOpplysningerPerId, Opptjening } from '@navikt/fp-types';
@@ -14,7 +12,7 @@ import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
-const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING];
+const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_PERIODER_MED_OPPTJENING];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.OPPTJENING, BehandlingFellesApiKeys.UTLAND_DOK_STATUS];
 type EndepunktPanelData = {
@@ -42,8 +40,8 @@ const OpptjeningsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanel
     faktaPanelKode={FaktaPanelCode.OPPTJENINGSVILKARET}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'OpptjeningInfoPanel.KontrollerFaktaForOpptjening' })}
     skalPanelVisesIMeny={() => !!props.behandling.vilkår
-      && props.behandling.vilkår.some((v) => v.vilkarType === vilkarType.OPPTJENINGSVILKARET)
-      && props.behandling.vilkår.some((v) => v.vilkarType === vilkarType.MEDLEMSKAPSVILKARET && v.vilkarStatus === vilkarUtfallType.OPPFYLT)}
+      && props.behandling.vilkår.some((v) => v.vilkarType === VilkarType.OPPTJENINGSVILKARET)
+      && props.behandling.vilkår.some((v) => v.vilkarType === VilkarType.MEDLEMSKAPSVILKARET && v.vilkarStatus === vilkarUtfallType.OPPFYLT)}
     renderPanel={(data) => <OpptjeningFaktaIndex arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} {...data} />}
   />
 );

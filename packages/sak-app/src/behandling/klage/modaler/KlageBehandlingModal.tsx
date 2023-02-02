@@ -5,7 +5,7 @@ import {
   FlexColumn, FlexContainer, FlexRow, Image,
 } from '@navikt/ft-ui-komponenter';
 
-import innvilgetImageUrl from '@navikt/fp-assets/images/innvilget_valgt.svg';
+import innvilgetImageUrl from '../../../images/innvilget_valgt.svg';
 
 import styles from './klageBehandlingModal.less';
 

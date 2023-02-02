@@ -4,17 +4,15 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
-import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
-import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import {
+  AksjonspunktCode, VilkarType, vilkarUtfallType, KodeverkType, aksjonspunktStatus,
+} from '@navikt/fp-kodeverk';
 import {
   ProsessStegBegrunnelseTextFieldNew, VilkarResultPicker, ProsessPanelTemplate, validerApKodeOgHentApEnum,
 } from '@navikt/fp-prosess-felles';
-import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
 import {
   Aksjonspunkt, AlleKodeverk, Behandling,
 } from '@navikt/fp-types';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import {
   Foreldreansvarsvilkar1Ap, Foreldreansvarsvilkar2Ap, VurdereYtelseSammeBarnAnnenForelderAp, VurdereYtelseSammeBarnSokerAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -94,10 +92,10 @@ const ErForeldreansvarVilkaarOppfyltForm: FunctionComponent<OwnProps> = ({
     defaultValues: formData || initialValues,
   });
 
-  const vilkarTypeKode = isForeldreansvar2Ledd ? vilkarType.FORELDREANSVARSVILKARET_2_LEDD : vilkarType.FORELDREANSVARSVILKARET_4_LEDD;
-  const avslagsarsaker = alleKodeverk[kodeverkTyper.AVSLAGSARSAK][vilkarTypeKode];
+  const vilkarTypeKode = isForeldreansvar2Ledd ? VilkarType.FORELDREANSVARSVILKARET_2_LEDD : VilkarType.FORELDREANSVARSVILKARET_4_LEDD;
+  const avslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][vilkarTypeKode];
 
-  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status));
+  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET);
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
 
   return (

@@ -7,7 +7,7 @@ import { Modal } from '@navikt/ds-react';
 import { FagsakYtelseType, BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
 
 import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
-import dokumentMalType from '@navikt/fp-kodeverk/src/dokumentMalType';
+import { dokumentMalType } from '@navikt/fp-kodeverk';
 import { Fagsak, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';

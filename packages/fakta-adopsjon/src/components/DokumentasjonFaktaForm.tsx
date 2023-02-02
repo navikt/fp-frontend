@@ -12,7 +12,7 @@ import {
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { BekreftDokumentertDatoAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import advarselImageUrl from '@navikt/fp-assets/images/advarsel.svg';
+import advarselImageUrl from '../images/advarsel.svg';
 
 import styles from './dokumentasjonFaktaForm.less';
 

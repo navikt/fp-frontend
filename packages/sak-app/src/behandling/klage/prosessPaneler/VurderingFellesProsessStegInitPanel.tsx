@@ -2,12 +2,11 @@ import React, {
   FunctionComponent, useCallback, useState,
 } from 'react';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { klageVurdering as klageVurderingKodeverk, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import KlagevurderingProsessIndex, { AksjonspunktVerdier, KlageVurderingBrevData } from '@navikt/fp-prosess-klagevurdering';
 import {
   Behandling, Fagsak, ForhåndsvisMeldingParams, KlageVurdering,
 } from '@navikt/fp-types';
-import klageVurderingKodeverk from '@navikt/fp-kodeverk/src/klageVurdering';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
@@ -51,7 +50,7 @@ const getLagringSideeffekter = (
   oppdaterProsessStegOgFaktaPanelIUrl?: (punktnavn?: string, faktanavn?: string) => void,
 ) => (aksjonspunktModels: { kode: string, klageVurdering?: string }[]) => {
   const skalByttTilKlageinstans = aksjonspunktModels
-    .some((apValue) => apValue.kode === aksjonspunktCodes.BEHANDLE_KLAGE_NFP
+    .some((apValue) => apValue.kode === AksjonspunktCode.BEHANDLE_KLAGE_NFP
     && apValue.klageVurdering === klageVurderingKodeverk.STADFESTE_YTELSESVEDTAK);
 
   if (skalByttTilKlageinstans) {

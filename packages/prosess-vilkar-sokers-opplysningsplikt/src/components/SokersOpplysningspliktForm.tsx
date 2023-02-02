@@ -8,18 +8,14 @@ import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
   ProsessStegBegrunnelseTextFieldNew, ProsessPanelTemplate,
 } from '@navikt/fp-prosess-felles';
-import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import {
+  vilkarUtfallType, KodeverkType, VilkarType, getKodeverknavnFn, dokumentTypeId, AksjonspunktCode, aksjonspunktStatus,
+} from '@navikt/fp-kodeverk';
 import {
   Table, TableColumn, TableRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, isObject } from '@navikt/ft-utils';
-import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
 import { required } from '@navikt/ft-form-validators';
-import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import dokumentTypeId from '@navikt/fp-kodeverk/src/dokumentTypeId';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, ManglendeVedleggSoknad, Soknad, ArbeidsgiverOpplysninger, AlleKodeverk,
 } from '@navikt/fp-types';
@@ -91,7 +87,7 @@ const buildInitialValues = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): FormValues => {
   const aksjonspunkt = aksjonspunkter.length > 0 ? aksjonspunkter[0] : undefined;
-  const isOpenAksjonspunkt = aksjonspunkt && isAksjonspunktOpen(aksjonspunkt.status);
+  const isOpenAksjonspunkt = aksjonspunkt && aksjonspunkt.status === aksjonspunktStatus.OPPRETTET;
   const isVilkarGodkjent = soknadExists && vilkarUtfallType.OPPFYLT === status;
 
   // TODO Mogleg inntektsmeldingerSomIkkeKommer kan fjernast, men trur fjerning av bruken av denne i render er ein midlertidig
@@ -122,9 +118,9 @@ const transformValues = (
     .map((mv) => mv.arbeidsgiverReferanse);
 
   const aksjonspunkt = aksjonspunkter.length > 0 ? aksjonspunkter[0] : undefined;
-  const kode = aksjonspunkt && aksjonspunkt.definisjon === aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU
-    ? aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU
-    : aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_OVST;
+  const kode = aksjonspunkt && aksjonspunkt.definisjon === AksjonspunktCode.SOKERS_OPPLYSNINGSPLIKT_MANU
+    ? AksjonspunktCode.SOKERS_OPPLYSNINGSPLIKT_MANU
+    : AksjonspunktCode.SOKERS_OPPLYSNINGSPLIKT_OVST;
 
   return {
     kode,
@@ -199,7 +195,7 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
   const hasAksjonspunkt = formMethods.watch('hasAksjonspunkt');
   const erVilkarOk = formMethods.watch('erVilkarOk');
 
-  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status));
+  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET);
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
 
   const dokumentTypeIds = alleKodeverk[KodeverkType.DOKUMENT_TYPE_ID];
@@ -270,7 +266,7 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
               <>
                 <VerticalSpacer sixteenPx />
                 <BodyShort size="small">
-                  {getKodeverknavn(behandlingsresultat.avslagsarsak, KodeverkType.AVSLAGSARSAK, vilkarType.SOKERSOPPLYSNINGSPLIKT)}
+                  {getKodeverknavn(behandlingsresultat.avslagsarsak, KodeverkType.AVSLAGSARSAK, VilkarType.SOKERSOPPLYSNINGSPLIKT)}
                 </BodyShort>
               </>
             )}

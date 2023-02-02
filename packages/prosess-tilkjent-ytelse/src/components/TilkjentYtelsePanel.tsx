@@ -1,12 +1,10 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import moment from 'moment/moment';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 
-import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
-import soknadType from '@navikt/fp-kodeverk/src/soknadType';
+import { fagsakYtelseType, soknadType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
@@ -50,7 +48,7 @@ const getFamilieHendelseDato = (familieHendelseSamling: FamilieHendelseSamling):
 };
 
 const finnTilbaketrekkAksjonspunkt = (alleAksjonspunkter: Aksjonspunkt[]): Aksjonspunkt | undefined => (alleAksjonspunkter
-  ? alleAksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.VURDER_TILBAKETREKK)
+  ? alleAksjonspunkter.find((ap) => ap.definisjon === AksjonspunktCode.VURDER_TILBAKETREKK)
   : undefined);
 
 interface PureOwnProps {
@@ -86,6 +84,7 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
   formData,
   setFormData,
 }) => {
+  const intl = useIntl();
   const familiehendelseDato = useMemo(() => getFamilieHendelseDato(familieHendelseSamling), [familieHendelseSamling]);
   const vurderTilbaketrekkAP = useMemo(() => finnTilbaketrekkAksjonspunkt(aksjonspunkter), [aksjonspunkter]);
   const soknadMottattDato = soknad.søknadsfrist?.mottattDato ? soknad.søknadsfrist?.mottattDato : soknad.mottattDato;
@@ -97,6 +96,7 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
       <VerticalSpacer thirtyTwoPx />
       {beregningresultat && (
         <TilkjentYtelse
+          intl={intl}
           items={formatPerioder(beregningresultat.perioder)}
           groups={groups}
           soknadDate={soknadMottattDato}

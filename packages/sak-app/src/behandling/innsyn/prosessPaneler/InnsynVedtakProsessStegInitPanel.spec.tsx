@@ -10,9 +10,8 @@ import { Aksjonspunkt } from '@navikt/ft-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, dokumentMalType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import dokumentMalType from '@navikt/fp-kodeverk/src/dokumentMalType';
 import { RequestApi } from '@navikt/fp-rest-api';
 import { Behandling, Fagsak } from '@navikt/fp-types';
 
@@ -40,11 +39,11 @@ const behandling = {
 const kodeverk = alleKodeverk as AlleKodeverk;
 
 const aksjonspunkter = [{
-  definisjon: aksjonspunktCodes.FORESLA_VEDTAK,
+  definisjon: AksjonspunktCode.FORESLA_VEDTAK,
   kanLoses: true,
   status: AksjonspunktStatus.OPPRETTET,
 }, {
-  definisjon: aksjonspunktCodes.VURDER_INNSYN,
+  definisjon: AksjonspunktCode.VURDER_INNSYN,
   kanLoses: false,
   status: AksjonspunktStatus.UTFORT,
   begrunnelse: 'Dette er en begrunnelse',

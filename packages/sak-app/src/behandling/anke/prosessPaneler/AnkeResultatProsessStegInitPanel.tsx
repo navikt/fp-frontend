@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import AnkeResultatProsessIndex from '@navikt/fp-prosess-anke-resultat';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AnkeVurdering } from '@navikt/fp-types';
@@ -13,10 +13,10 @@ import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import { requestAnkeApi, AnkeBehandlingApiKeys } from '../data/ankeBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [
-  aksjonspunktCodes.FORESLA_VEDTAK,
-  aksjonspunktCodes.FATTER_VEDTAK,
-  aksjonspunktCodes.FORESLA_VEDTAK_MANUELT,
-  aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL,
+  AksjonspunktCode.FORESLA_VEDTAK,
+  AksjonspunktCode.FATTER_VEDTAK,
+  AksjonspunktCode.FORESLA_VEDTAK_MANUELT,
+  AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL,
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [AnkeBehandlingApiKeys.ANKE_VURDERING];

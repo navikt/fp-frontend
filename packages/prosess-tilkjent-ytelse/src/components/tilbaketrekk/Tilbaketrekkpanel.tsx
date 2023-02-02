@@ -6,18 +6,17 @@ import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image,
 } from '@navikt/ft-ui-komponenter';
 
-import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import behandleImageURL from '@navikt/fp-assets/images/advarsel.svg';
+import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 import {
   hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-form-validators';
 import {
   Form, RadioGroupPanel, TextAreaField,
 } from '@navikt/ft-form-hooks';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, BeregningsresultatFp } from '@navikt/fp-types';
 import { VurderTilbaketrekkAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import behandleImageURL from '../../images/advarsel.svg';
 
 import styles from './tilbaketrekkpanel.less';
 
@@ -47,7 +46,7 @@ const transformValues = (values: FormValues): VurderTilbaketrekkAp => {
   const hindreTilbaketrekk = values[radioFieldName];
   const begrunnelse = values[begrunnelseFieldName];
   return {
-    kode: aksjonspunktCodes.VURDER_TILBAKETREKK,
+    kode: AksjonspunktCode.VURDER_TILBAKETREKK,
     begrunnelse,
     hindreTilbaketrekk,
   };
@@ -113,7 +112,7 @@ const Tilbaketrekkpanel: FunctionComponent<OwnProps> = ({
         name={radioFieldName}
         validate={[required]}
         isReadOnly={readOnly}
-        isEdited={!isAksjonspunktOpen(vurderTilbaketrekkAP.status)}
+        isEdited={vurderTilbaketrekkAP.status !== aksjonspunktStatus.OPPRETTET}
         isHorizontal
         radios={[{
           value: 'false',

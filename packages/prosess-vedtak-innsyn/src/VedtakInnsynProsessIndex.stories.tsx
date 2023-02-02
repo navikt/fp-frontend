@@ -2,11 +2,9 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import innsynResultatType from '@navikt/fp-kodeverk/src/innsynResultatType';
-import kommunikasjonsretning from '@navikt/fp-kodeverk/src/kommunikasjonsretning';
-import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import {
+  aksjonspunktStatus, behandlingType, innsynResultatType, kommunikasjonsretning, AksjonspunktCode,
+} from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Innsyn } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -20,11 +18,11 @@ const behandling = {
 } as Behandling;
 
 const defaultAksjonspunkter = [{
-  definisjon: aksjonspunktCodes.VURDER_INNSYN,
+  definisjon: AksjonspunktCode.VURDER_INNSYN,
   status: aksjonspunktStatus.UTFORT,
   begrunnelse: 'Dette er utført',
 }, {
-  definisjon: aksjonspunktCodes.FORESLA_VEDTAK,
+  definisjon: AksjonspunktCode.FORESLA_VEDTAK,
   status: aksjonspunktStatus.OPPRETTET,
   begrunnelse: undefined,
 }] as Aksjonspunkt[];

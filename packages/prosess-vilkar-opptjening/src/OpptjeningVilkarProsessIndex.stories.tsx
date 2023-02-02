@@ -2,9 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { vilkarUtfallType, aksjonspunktStatus, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import opptjeningAktivitetKlassifisering from '@navikt/fp-prosess-vilkar-opptjening/src/kodeverk/opptjeningAktivitetKlassifisering';
 import { Aksjonspunkt, Behandling, Opptjening } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -74,7 +72,7 @@ export const ÅpentAksjonspunkt = Template.bind({});
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   opptjening: defaultOpptjening,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.SVANGERSKAPSVILKARET,
+    definisjon: AksjonspunktCode.SVANGERSKAPSVILKARET,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
   }] as Aksjonspunkt[],
@@ -91,7 +89,7 @@ export const ÅpentAksjonspunktMenUtenAktiviteter = Template.bind({});
     },
   },
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.SVANGERSKAPSVILKARET,
+    definisjon: AksjonspunktCode.SVANGERSKAPSVILKARET,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
   }] as Aksjonspunkt[],

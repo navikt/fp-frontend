@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import MedlemskapFaktaIndex from '@navikt/fp-fakta-medlemskap';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Medlemskap, Soknad } from '@navikt/fp-types';
@@ -13,11 +13,11 @@ import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesAp
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
 const AKSJONSPUNKT_KODER = [
-  aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT,
-  aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
-  aksjonspunktCodes.AVKLAR_OPPHOLDSRETT,
-  aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD,
-  aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP,
+  AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT,
+  AksjonspunktCode.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
+  AksjonspunktCode.AVKLAR_OPPHOLDSRETT,
+  AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD,
+  AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP,
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [

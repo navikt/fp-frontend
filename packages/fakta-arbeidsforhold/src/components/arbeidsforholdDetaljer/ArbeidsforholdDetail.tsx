@@ -3,7 +3,7 @@ import { Label, BodyShort, Heading } from '@navikt/ds-react';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { AoIArbeidsforhold } from '@navikt/fp-types';
-import ArbeidsforholdKomplettVurderingType from '@navikt/fp-kodeverk/src/arbeidsforholdKomplettVurderingType';
+import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 
 import PermisjonPeriode from './PermisjonPeriode';
 import BekreftetPermisjonStatus from '../../kodeverk/bekreftetPermisjonStatus';

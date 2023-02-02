@@ -14,11 +14,9 @@ import {
   ArbeidsgiverOpplysningerPerId, FamilieHendelseSamling, Personoversikt,
   Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling, Behandling, Aksjonspunkt, AlleKodeverk, PeriodeSoker,
 } from '@navikt/fp-types';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import periodeResultatType from '@navikt/fp-kodeverk/src/periodeResultatType';
-import { uttakPeriodeNavn } from '@navikt/fp-kodeverk/src/uttakPeriodeType';
-import StonadskontoType from '@navikt/fp-kodeverk/src/stonadskontoType';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import {
+  StonadskontoType, AksjonspunktCode, uttakPeriodeNavn, periodeResultatType, aksjonspunktStatus,
+} from '@navikt/fp-kodeverk';
 
 import DisponibleStonadskontoerPanel from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';
 import UttakTidslinjeIndex from './tidslinje/UttakTidslinjeIndex';
