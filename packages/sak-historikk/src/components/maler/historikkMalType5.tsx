@@ -1,6 +1,8 @@
 import React, { FunctionComponent, ReactNode } from 'react';
-import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
-import { Label, BodyShort } from '@navikt/ds-react';
+import {
+  FormattedMessage, useIntl, IntlShape,
+} from 'react-intl';
+import { BodyShort } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { HistorikkinnslagDel, HistorikkinnslagEndretFelt } from '@navikt/fp-types';
@@ -155,55 +157,6 @@ const HistorikkMalType5: FunctionComponent<HistorikkMal> = ({
   getKodeverknavn,
   createLocationForSkjermlenke,
   saksnummer,
-<<<<<<< HEAD
-}) => (
-  <>
-    {historikkinnslag.historikkinnslagDeler.map((historikkinnslagDel, historikkinnslagDelIndex) => (
-      <div key={
-        `historikkinnslagDel${historikkinnslagDelIndex}` // eslint-disable-line react/no-array-index-key
-      }
-      >
-        <Skjermlenke
-          skjermlenke={historikkinnslagDel.skjermlenke}
-          behandlingLocation={behandlingLocation}
-          getKodeverknavn={getKodeverknavn}
-          scrollUpOnClick
-          createLocationForSkjermlenke={createLocationForSkjermlenke}
-        />
-
-        {lageElementInnhold(historikkinnslagDel, intl, getKodeverknavn).map((tekst) => (
-          <div key={tekst}><BodyShort size="small">{tekst}</BodyShort></div>
-        ))}
-
-        {lagGjeldendeFraInnslag(historikkinnslagDel)}
-
-        {historikkinnslagDel.soeknadsperiode && lagSoeknadsperiode(historikkinnslagDel.soeknadsperiode)}
-
-        {lagTemaHeadingId(historikkinnslagDel)}
-
-        {historikkinnslagDel.endredeFelter && historikkinnslagDel.endredeFelter.map((endretFelt, i) => (
-          <div key={`endredeFelter${i + 1}`}>
-            {formatChangedField(endretFelt, intl)}
-          </div>
-        ))}
-
-        {historikkinnslagDel.opplysninger && historikkinnslagDel.opplysninger.map((opplysning) => (
-          <FormattedMessage
-            id={findIdForOpplysningCode(opplysning)}
-            values={{ antallBarn: opplysning.tilVerdi, b: (chunks: any) => <b>{chunks}</b>, br: <br /> }}
-            key={`${getKodeverknavn(opplysning.opplysningType, KodeverkType.HISTORIKK_OPPLYSNING_TYPE)}@${opplysning.tilVerdi}`}
-          />
-        ))}
-
-        {historikkinnslagDel.årsaktekst && <BodyShort size="small">{historikkinnslagDel.årsaktekst}</BodyShort>}
-        {historikkinnslagDel.begrunnelsetekst && <BubbleText bodyText={historikkinnslagDel.begrunnelsetekst} />}
-        {historikkinnslagDel.begrunnelseFritekst && <BubbleText bodyText={historikkinnslagDel.begrunnelseFritekst} />}
-        {historikkinnslag.dokumentLinks && historikkinnslag.dokumentLinks.map((dokumentLenke) => (
-          <HistorikkDokumentLenke
-            key={`${dokumentLenke.tag}@${dokumentLenke.url}`}
-            dokumentLenke={dokumentLenke}
-            saksnummer={saksnummer}
-=======
 }) => {
   const intl = useIntl();
   return (
@@ -219,11 +172,10 @@ const HistorikkMalType5: FunctionComponent<HistorikkMal> = ({
             getKodeverknavn={getKodeverknavn}
             scrollUpOnClick
             createLocationForSkjermlenke={createLocationForSkjermlenke}
->>>>>>> a57f62a6c (div)
           />
 
           {lageElementInnhold(historikkinnslagDel, intl, getKodeverknavn).map((tekst) => (
-            <div key={tekst}><Label size="small">{tekst}</Label></div>
+            <div key={tekst}><BodyShort size="small">{tekst}</BodyShort></div>
           ))}
 
           {lagGjeldendeFraInnslag(historikkinnslagDel)}
