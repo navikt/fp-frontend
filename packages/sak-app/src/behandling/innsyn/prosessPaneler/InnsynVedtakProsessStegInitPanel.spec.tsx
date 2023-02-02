@@ -41,12 +41,10 @@ const kodeverk = alleKodeverk as AlleKodeverk;
 
 const aksjonspunkter = [{
   definisjon: aksjonspunktCodes.FORESLA_VEDTAK,
-  erAktivt: true,
   kanLoses: true,
   status: AksjonspunktStatus.OPPRETTET,
 }, {
   definisjon: aksjonspunktCodes.VURDER_INNSYN,
-  erAktivt: false,
   kanLoses: false,
   status: AksjonspunktStatus.UTFORT,
   begrunnelse: 'Dette er en begrunnelse',

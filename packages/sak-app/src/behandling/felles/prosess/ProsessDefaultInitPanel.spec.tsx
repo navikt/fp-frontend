@@ -32,7 +32,6 @@ const defaultProps = {
   readOnlySubmitButton: false,
   aksjonspunkter: [{
     definisjon: aksjonspunktCodes.VURDER_FEILUTBETALING,
-    erAktivt: true,
     kanLoses: true,
   }] as Aksjonspunkt[],
   vilkar: [],

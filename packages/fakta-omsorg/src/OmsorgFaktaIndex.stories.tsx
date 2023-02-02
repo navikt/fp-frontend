@@ -100,7 +100,6 @@ export const ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg = Template.bind({}
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
-    erAktivt: true,
   }],
   alleMerknaderFraBeslutter: {
     [aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]: merknaderFraBeslutter,

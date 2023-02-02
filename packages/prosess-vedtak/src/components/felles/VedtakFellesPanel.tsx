@@ -41,7 +41,7 @@ const kanSendesTilGodkjenning = (
 const finnKnappetekstkode = (
   aksjonspunkter: Aksjonspunkt[],
 ): string => {
-  if (aksjonspunkter && aksjonspunkter.some((ap) => ap.erAktivt && ap.toTrinnsBehandling)) {
+  if (aksjonspunkter && aksjonspunkter.some((ap) => ap.toTrinnsBehandling)) {
     return 'VedtakForm.TilGodkjenning';
   }
 

@@ -73,14 +73,12 @@ const faktaAksjonspunkter = [{
   status: AksjonspunktStatus.UTFORT,
   begrunnelse: 'Dette er en begrunnelse',
   kanLoses: true,
-  erAktivt: false,
 }] as Aksjonspunkt[];
 
 const prosessAksjonspunkter = [{
   definisjon: ForeldelseAksjonspunktCodes.VURDER_FORELDELSE,
   status: AksjonspunktStatus.OPPRETTET,
   kanLoses: true,
-  erAktivt: true,
 }] as Aksjonspunkt[];
 
 const feilutbetalingFakta = {

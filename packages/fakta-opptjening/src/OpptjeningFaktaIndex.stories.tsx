@@ -65,7 +65,6 @@ MedAksjonspunkt.args = {
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
-    erAktivt: true,
   }],
   opptjening: {
     fastsattOpptjening: {
@@ -154,7 +153,6 @@ MedToLikePerioderForSammeAktivitetstype.args = {
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
-    erAktivt: true,
   }],
   opptjening: {
     fastsattOpptjening: {
@@ -197,7 +195,6 @@ MedAlleOpptjeningsaktiviteterFiltrertBort.args = {
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
-    erAktivt: true,
   }],
   opptjening: {
     fastsattOpptjening: {

@@ -24,7 +24,6 @@ describe('<UttakFaktaIndex>', () => {
     definisjon: aksjonspunktCodes.VURDER_FEILUTBETALING,
     status: '1',
     kanLoses: true,
-    erAktivt: true,
   }];
 
   const standardFaktaProps = {

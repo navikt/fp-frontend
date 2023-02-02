@@ -33,7 +33,6 @@ const defaultProps = {
   readOnlySubmitButton: false,
   aksjonspunkter: [{
     definisjon: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
-    erAktivt: true,
     kanLoses: true,
   }] as Aksjonspunkt[],
   vilkar: [],
