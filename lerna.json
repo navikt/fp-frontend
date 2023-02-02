@@ -5,6 +5,11 @@
   "packages": [
     "packages/*"
   ],
+  "command": {
+    "run": {
+      "npmClient": "yarn"
+    }
+  },
   "useNx": true,
   "concurrency": 1
 }
