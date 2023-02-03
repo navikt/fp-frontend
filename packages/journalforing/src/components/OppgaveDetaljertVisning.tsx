@@ -61,47 +61,51 @@ const OppgaveDetaljertVisning: FunctionComponent<OwnProps> = ({
           <Label size="medium"><FormattedMessage id="ValgtOppgave.Bruker" /></Label>
         </FlexColumn>
       </FlexRow>
-      <FlexRow>
-        <FlexColumn>
-          <Image
-            alt={intl.formatMessage({ id: 'ValgtOppgave.Bruker' })}
-            tooltip={intl.formatMessage({ id: 'ValgtOppgave.Bruker' })}
-            src={kjønnBilde}
-            className={styles.brukerBilde}
-          />
-        </FlexColumn>
-        <FlexColumn>
-          <BodyShort>
-            {journalpost.bruker.navn}
-          </BodyShort>
-          <BodyShort>
-            {journalpost.bruker.fnr}
-          </BodyShort>
-        </FlexColumn>
-      </FlexRow>
+      {journalpost.bruker && (
+        <FlexRow>
+          <FlexColumn>
+            <Image
+              alt={intl.formatMessage({ id: 'ValgtOppgave.Bruker' })}
+              tooltip={intl.formatMessage({ id: 'ValgtOppgave.Bruker' })}
+              src={kjønnBilde}
+              className={styles.brukerBilde}
+            />
+          </FlexColumn>
+          <FlexColumn>
+            <BodyShort>
+              {journalpost.bruker.navn}
+            </BodyShort>
+            <BodyShort>
+              {journalpost.bruker.fnr}
+            </BodyShort>
+          </FlexColumn>
+        </FlexRow>
+      )}
       <VerticalSpacer sixteenPx />
       <FlexRow>
         <FlexColumn>
           <Label size="medium"><FormattedMessage id="ValgtOppgave.Avsender" /></Label>
         </FlexColumn>
       </FlexRow>
-      <FlexRow>
-        <FlexColumn>
-          <BodyShort>
-            {journalpost.avsender.navn}
-          </BodyShort>
-          <BodyShort>
-            {journalpost.avsender.id}
-          </BodyShort>
-        </FlexColumn>
-      </FlexRow>
+      {journalpost.avsender && (
+        <FlexRow>
+          <FlexColumn>
+            <BodyShort>
+              {journalpost.avsender.navn}
+            </BodyShort>
+            <BodyShort>
+              {journalpost.avsender.id}
+            </BodyShort>
+          </FlexColumn>
+        </FlexRow>
+      )}
       <VerticalSpacer sixteenPx />
       {journalpost.dokumenter
         && (
-        <div className={styles.dokumentValg}>
-          <VelgDokumentForm dokumenter={journalpost.dokumenter} setValgtDokument={setValgtDokument} valgtDokument={valgtDokument} />
-          <VerticalSpacer sixteenPx />
-        </div>
+          <div className={styles.dokumentValg}>
+            <VelgDokumentForm dokumenter={journalpost.dokumenter} setValgtDokument={setValgtDokument} valgtDokument={valgtDokument} />
+            <VerticalSpacer sixteenPx />
+          </div>
         )}
       {saker.length > 0
         && (
