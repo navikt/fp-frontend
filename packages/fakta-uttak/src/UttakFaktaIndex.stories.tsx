@@ -126,7 +126,6 @@ VisUttaksperiodeMedAksjonspunkt.args = {
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
-    erAktivt: true,
   }],
   ytelsefordeling: {
     ikkeOmsorgPerioder: null,
@@ -185,7 +184,6 @@ VisUtsettelseperiodeMedAksjonspunkt.args = {
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
-    erAktivt: true,
   }],
   ytelsefordeling: {
     ikkeOmsorgPerioder: null,
@@ -215,7 +213,6 @@ VisOverføringsperiodeMedAksjonspunkt.args = {
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
-    erAktivt: true,
   }],
   ytelsefordeling: {
     ikkeOmsorgPerioder: null,
@@ -246,7 +243,6 @@ VisAksjonspunktDerIngenPerioderFinnes.args = {
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
-    erAktivt: true,
   }],
   ytelsefordeling: {
     ikkeOmsorgPerioder: null,
@@ -271,7 +267,6 @@ VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering.args = {
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
-    erAktivt: true,
   }],
   ytelsefordeling: {
     ikkeOmsorgPerioder: null,
@@ -307,7 +302,6 @@ VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering.args = {
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
-    erAktivt: true,
   }],
   ytelsefordeling: {
     ikkeOmsorgPerioder: null,
@@ -343,7 +337,6 @@ VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet.args = {
     status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette er en begrunnelse',
     kanLoses: false,
-    erAktivt: false,
   }],
   ytelsefordeling: {
     ikkeOmsorgPerioder: null,
@@ -382,7 +375,6 @@ VisBegrunnelseFraTidligereUtgaveAvPanel.args = {
     status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette er en begrunnelse',
     kanLoses: false,
-    erAktivt: false,
   }],
   ytelsefordeling: {
     ikkeOmsorgPerioder: null,
@@ -422,7 +414,6 @@ SN.args = {
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
-    erAktivt: true,
   }],
   ytelsefordeling: {
     ikkeOmsorgPerioder: null,

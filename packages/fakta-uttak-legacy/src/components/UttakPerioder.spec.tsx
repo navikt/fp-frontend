@@ -280,7 +280,6 @@ describe('<UttakPerioder>', () => {
             begrunnelse: null,
             besluttersBegrunnelse: null,
             definisjon: '5071',
-            erAktivt: true,
             kanLoses: true,
             status: 'OPPR',
             toTrinnsBehandling: true,

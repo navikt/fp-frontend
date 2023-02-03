@@ -14,10 +14,10 @@ import AleneomsorgForm, { FormValues as AleneOmsorgValues } from './forms/Aleneo
 import HarAnnenForelderRettForm, { FormValues as RettFormValues } from './forms/HarAnnenForelderRettForm';
 
 const finnAksjonspunktTekst = (aksjonspunkter: Aksjonspunkt[]): string => {
-  if (aksjonspunkter.some((ap) => ap.erAktivt && ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG)) {
+  if (aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG)) {
     return 'OmsorgOgRettFaktaForm.VurderOmAleneomsorg';
   }
-  if (aksjonspunkter.some((ap) => ap.erAktivt && ap.definisjon === AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT)) {
+  if (aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT)) {
     return 'OmsorgOgRettFaktaForm.VurderAndreForelderRett';
   }
   return '';

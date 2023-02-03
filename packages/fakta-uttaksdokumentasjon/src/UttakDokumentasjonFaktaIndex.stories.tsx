@@ -80,7 +80,6 @@ AksjonspunktMedUavklartePerioder.args = {
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
-    erAktivt: true,
   }],
   dokumentasjonVurderingBehov: dokumentasjonVurderingBehovListe,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -95,7 +94,6 @@ AksjonspunktSomErBekreftetOgBehandlingAvsluttet.args = {
     status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette er en begrunnelse',
     kanLoses: false,
-    erAktivt: false,
   }],
   dokumentasjonVurderingBehov: [{
     fom: '2022-12-08',
@@ -116,7 +114,6 @@ AksjonspunktErBekreftetMenBehandlingErÅpen.args = {
     status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette er en begrunnelse',
     kanLoses: true,
-    erAktivt: true,
   }],
   dokumentasjonVurderingBehov: [{
     fom: '2022-12-08',

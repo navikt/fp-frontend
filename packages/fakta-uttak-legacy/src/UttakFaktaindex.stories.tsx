@@ -111,7 +111,6 @@ export const MedUtsettelse = () => {
           besluttersBegrunnelse: null,
           aksjonspunktType: 'MANU',
           kanLoses: true,
-          erAktivt: true,
           endretTidspunkt: null,
           endretAv: null,
         },

@@ -12,9 +12,8 @@ export const erReadOnly = (
 ): boolean => {
   const { behandlingPaaVent } = behandling;
   const isBehandlingReadOnly = hasFetchError || harBehandlingReadOnlyStatus(behandling);
-  const hasNonActivOrNonOverstyrbar = aksjonspunkterForPunkt.some((ap) => !ap.erAktivt);
 
-  return !rettigheter.writeAccess.isEnabled || behandlingPaaVent || isBehandlingReadOnly || hasNonActivOrNonOverstyrbar;
+  return !rettigheter.writeAccess.isEnabled || behandlingPaaVent || isBehandlingReadOnly;
 };
 
 export const erReadOnlyCurried = (

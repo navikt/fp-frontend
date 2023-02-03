@@ -15,7 +15,7 @@ import BehandlingPaVent from '../felles/modaler/paVent/BehandlingPaVent';
 import { requestPapirsoknadApi } from './data/papirsoknadApi';
 
 const getAktivtPapirsoknadApKode = (aksjonspunkter: Aksjonspunkt[]): string => aksjonspunkter
-  .filter((a) => a.erAktivt).map((ap) => ap.definisjon)
+  .map((ap) => ap.definisjon)
   .filter((kode) => kode === aksjonspunktCodes.REGISTRER_PAPIRSOKNAD_ENGANGSSTONAD
       || kode === aksjonspunktCodes.REGISTRER_PAPIRSOKNAD_FORELDREPENGER
       || kode === aksjonspunktCodes.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER

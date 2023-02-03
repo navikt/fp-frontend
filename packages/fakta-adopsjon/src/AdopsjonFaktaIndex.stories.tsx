@@ -82,7 +82,6 @@ AksjonspunktForAdopsjonsvilkåret.args = {
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
-    erAktivt: true,
   }],
   alleMerknaderFraBeslutter: {
     [aksjonspunktCodes.ADOPSJONSDOKUMENTAJON]: merknaderFraBeslutter,
@@ -97,7 +96,6 @@ AksjonspunktForOmSøkerErMannSomAdoptererAlene.args = {
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
-    erAktivt: true,
   }],
   alleMerknaderFraBeslutter: {
     [aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]: merknaderFraBeslutter,
@@ -112,7 +110,6 @@ AksjonspunktForOmAdopsjonGjelderEktefellesBarn.args = {
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
-    erAktivt: true,
   }],
   alleMerknaderFraBeslutter: {
     [aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: merknaderFraBeslutter,
@@ -127,7 +124,6 @@ IkkeVisBarnetsAnkomstDatoForEngangsstønad.args = {
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
-    erAktivt: true,
   }],
   alleMerknaderFraBeslutter: {
     [aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: merknaderFraBeslutter,

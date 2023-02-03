@@ -22,7 +22,6 @@ describe('<getAlleMerknaderFraBeslutter>', () => {
     status: AksjonspunktStatus.OPPRETTET,
     definisjon: AksjonspunktCode.AVKLAR_VERGE,
     kanLoses: true,
-    erAktivt: true,
     toTrinnsBehandling: true,
     toTrinnsBehandlingGodkjent: false,
   }];

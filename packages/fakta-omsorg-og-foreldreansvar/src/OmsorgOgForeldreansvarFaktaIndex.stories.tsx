@@ -122,7 +122,6 @@ export const ÅpentAksjonspunktForOmsorgovertakelse = Template.bind({});
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
-    erAktivt: true,
   }],
   alleMerknaderFraBeslutter: {
     [aksjonspunktCodes.OMSORGSOVERTAKELSE]: merknaderFraBeslutter,
@@ -137,7 +136,6 @@ export const ÅpentAksjonspunktForAvklareVilkårForForeldreansvar = Template.bin
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
-    erAktivt: true,
   }],
   alleMerknaderFraBeslutter: {
     [aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR]: merknaderFraBeslutter,

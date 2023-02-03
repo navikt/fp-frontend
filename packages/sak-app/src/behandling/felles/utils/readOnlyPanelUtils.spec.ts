@@ -21,7 +21,6 @@ describe('<readOnlyUtils>', () => {
     status: AksjonspunktStatus.OPPRETTET,
     definisjon: aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
     kanLoses: true,
-    erAktivt: true,
     toTrinnsBehandling: true,
     toTrinnsBehandlingGodkjent: false,
   }];
@@ -103,17 +102,6 @@ describe('<readOnlyUtils>', () => {
     };
     const hasFetchError = false;
     const readOnly = erReadOnly(behandlingMedReadOnly as Behandling, aksjonspunkter, vilkar, rettigheter, hasFetchError);
-
-    expect(readOnly).toBe(true);
-  });
-
-  it('skal være readonly når en har minst ett ikke aktivt aksjonspunkt', () => {
-    const nyeAksjonspunkter = [{
-      ...aksjonspunkter[0],
-      erAktivt: false,
-    }];
-    const hasFetchError = false;
-    const readOnly = erReadOnly(behandling as Behandling, nyeAksjonspunkter, vilkar, rettigheter, hasFetchError);
 
     expect(readOnly).toBe(true);
   });

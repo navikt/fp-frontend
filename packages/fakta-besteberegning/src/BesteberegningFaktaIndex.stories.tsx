@@ -34,7 +34,6 @@ const lagAksjonspunkt = (apKode: string, status: string, begrunnelse?: string) =
   definisjon: apKode,
   status,
   kanLoses: true,
-  erAktivt: true,
   begrunnelse,
 });
 

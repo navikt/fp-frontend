@@ -13,7 +13,6 @@ const aksjonspunkter = [{
   status: aksjonspunktStatus.OPPRETTET,
   begrunnelse: undefined,
   kanLoses: true,
-  erAktivt: true,
 }];
 
 const verge = {};
