@@ -71,7 +71,7 @@ const Home: FunctionComponent<OwnProps> = ({
         />
         <Route
           path={journalføringRoutePath}
-          element={<JournalforingIndex navAnsatt={navAnsatt} />}
+          element={<JournalforingIndex navAnsatt={navAnsatt} åpneFagsak={åpneFagsak} />}
         />
         <Route path={fagsakRoutePath} element={<FagsakIndex />} />
         <Route path={aktoerRoutePath} element={<AktoerIndex />} />
