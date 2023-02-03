@@ -12,6 +12,7 @@ const VERSION = PACKAGE.version;
 const ROOT_DIR = path.resolve(__dirname, '../public/client');
 const CORE_DIR = path.resolve(__dirname, '../node_modules');
 const APP_DIR = path.resolve(__dirname, '../packages/sak-app');
+const TYPES_DIR = path.resolve(__dirname, '../packages/types');
 const PACKAGES_DIR = path.resolve(__dirname, '../packages');
 
 const isDevelopment = JSON.stringify(process.env.NODE_ENV) === '"development"';
@@ -38,7 +39,7 @@ const config = {
             },
           },
         ],
-        include: APP_DIR,
+        include: [APP_DIR, TYPES_DIR]
       }, {
         test: /\.(less|css)?$/,
         use: [
@@ -132,6 +133,7 @@ const config = {
 
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.less'],
+    symlinks: true,
   },
 
   externals: {

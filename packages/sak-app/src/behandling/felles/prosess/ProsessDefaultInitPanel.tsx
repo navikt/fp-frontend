@@ -4,7 +4,7 @@ import React, {
 
 import { RestApiHooks, RestApiState } from '@navikt/fp-rest-api-hooks';
 import { RequestApi, RestKey } from '@navikt/fp-rest-api';
-import StandardProsessPanelProps from '@navikt/fp-types/src/standardProsessPanelPropsTsType';
+import { StandardProsessPanelProps } from '@navikt/fp-types';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 
 import ProsessPanelInitProps from '../typer/prosessPanelInitProps';

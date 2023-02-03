@@ -28,6 +28,10 @@ import '@navikt/ft-plattform-komponenter/dist/style.css';
 import '@navikt/ft-tidslinje/dist/style.css';
 import '@navikt/ft-sak-infosider/dist/style.css';
 
+import '@navikt/fp-prosess-felles/dist/style.css';
+import '@navikt/fp-los-saksbehandler/dist/style.css';
+import '@navikt/fp-los-felles/dist/style.css';
+
 import './global.less';
 
 const EMPTY_ARRAY = [] as any[];

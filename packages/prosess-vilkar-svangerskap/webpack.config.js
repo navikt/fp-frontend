@@ -1,10 +1,6 @@
 const path = require('path');
 const { merge } = require('webpack-merge');
 const prodConfig = require('../../webpack/webpack.prod.template');
-const styleModulesRule = require('../../webpack/rules/style-modules-rule');
-const styleRule = require('../../webpack/rules/style-rule');
-
-const SRC_DIR = path.resolve(__dirname, './src');
 
 const config = {
   output: {
@@ -13,9 +9,6 @@ const config = {
       name: '@navikt/fp-prosess-vilkar-svangerskap',
       type: 'umd',
     },
-  },
-  module: {
-    rules: prodConfig.module.rules.concat([styleModulesRule(SRC_DIR), styleRule(SRC_DIR)]),
   },
 };
 

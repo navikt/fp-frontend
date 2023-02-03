@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 
 import { RestApiHooks, RestApiState } from '@navikt/fp-rest-api-hooks';
-import StandardFaktaPanelProps from '@navikt/fp-types/src/standardFaktaPanelPropsTsType';
+import { StandardFaktaPanelProps } from '@navikt/fp-types';
 import { RequestApi, RestKey } from '@navikt/fp-rest-api';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 

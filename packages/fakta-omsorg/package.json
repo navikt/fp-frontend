@@ -1,5 +1,5 @@
 {
-  "name": "@navikt/fakta-omsorg",
+  "name": "@navikt/fp-fakta-omsorg",
   "version": "1.0.0",
   "module": "index.ts",
   "license": "MIT",

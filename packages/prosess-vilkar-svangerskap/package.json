@@ -16,7 +16,6 @@
     "tsc": "tsc --pretty",
     "eslint": "eslint \"src/**/*.ts*\"",
     "eslint:fix": "eslint --fix \"src/**/*.ts*\"",
-    "less:lint": "stylelint \"src/**/*.less\"",
     "dev": "cross-env node dev/webpack.dev.js",
     "build-webpack": "cross-env webpack --config webpack.config.js",
     "build-ts-declarations": "tsc index.ts ../../@types/externals.d.ts --declaration --emitDeclarationOnly --downlevelIteration --resolveJsonModule --jsx react --outDir dist --declarationMap --esModuleInterop --skipLibCheck",
@@ -48,7 +47,6 @@
     "@testing-library/user-event": "14.4.3"
   },
   "exports": {
-    ".": "./dist/index.js",
-    "./dist/style.css": "./dist/style.css"
+    ".": "./dist/index.js"
   }
 }
