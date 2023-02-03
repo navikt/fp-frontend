@@ -52,7 +52,7 @@ const VelgDokumentForm: FunctionComponent<OwnProps> = ({
         >
           <option key="Velg dokument" value="">Velg dokument</option>
           {dokumenter.map((dok) => (
-            <option key={dok.dokumentId} value={dok.dokumentId}>{dok.tittel}</option>
+            <option key={dok.dokumentId} value={dok.dokumentId}>{dok.tittel || dok.dokumentId}</option>
           ))}
         </Select>
       </FlexColumn>
