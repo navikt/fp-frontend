@@ -118,6 +118,7 @@ export const MedUtsettelse = () => {
       ]}
       ytelsefordeling={{
         ikkeOmsorgPerioder: null,
+        overstyrtOmsorg: null,
         rettigheterAnnenforelder: {
           skalAvklareAnnenforelderUføretrygd: false,
           skalAvklareAnnenForelderRettEØS: false,
