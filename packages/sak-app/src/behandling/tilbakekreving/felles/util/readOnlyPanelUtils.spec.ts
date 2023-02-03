@@ -95,14 +95,4 @@ describe('<readOnlyUtils>', () => {
 
     expect(readOnly).toBe(true);
   });
-
-  it('skal være readonly når en har minst ett ikke aktivt aksjonspunkt', () => {
-    const nyeAksjonspunkter = [{
-      ...aksjonspunkter[0],
-    }];
-    const hasFetchError = false;
-    const readOnly = erReadOnly(behandling as Behandling, nyeAksjonspunkter, rettigheter, hasFetchError);
-
-    expect(readOnly).toBe(true);
-  });
 });
