@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { Button } from '@navikt/ds-react';
 import {
   Table, TableRow, TableColumn,
-  FlexColumn, FlexRow, DateLabel,
+  FlexColumn, FlexRow, DateLabel, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
 
@@ -48,37 +48,43 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
   avbrytCallback,
   åpneFagsak,
 }) => {
-  if (saksliste.length < 1) {
-    return null;
-  }
+  const finnesSaker = saksliste && saksliste.length > 0;
   return (
     <>
-      <div className={styles.saksliste}>
-        <Table headerTextCodes={headerTextCodes}>
-          {saksliste.map((sak) => (
-            <TableRow key={sak.saksnummer}>
-              <TableColumn><VelgSakLenke saksnummer={sak.saksnummer} åpneFagsak={åpneFagsak} /></TableColumn>
-              <TableColumn>{sak.ytelseType}</TableColumn>
-              <TableColumn><DateLabel dateString={sak.datoOpprettet} /></TableColumn>
-              <TableColumn>{sak.sistEndret ? <DateLabel dateString={sak.sistEndret} /> : <FormattedMessage id="Saksliste.IngenSøknad" />}</TableColumn>
-              <TableColumn><FormattedMessage id={finnStatusTekst(sak.status)} /></TableColumn>
-            </TableRow>
-          ))}
-        </Table>
-      </div>
-      <FlexRow>
-        <FlexColumn>
-          <Button
-            size="small"
-            variant="secondary"
-            onClick={avbrytCallback}
-            disabled={false}
-            type="button"
-          >
-            <FormattedMessage id="ValgtOppgave.Avbryt" />
-          </Button>
-        </FlexColumn>
-      </FlexRow>
+      {!finnesSaker && (
+        <FormattedMessage id="Journal.Sak.Ingen" />
+      )}
+      {finnesSaker && (
+        <div className={styles.saksliste}>
+          <Table headerTextCodes={headerTextCodes}>
+            {saksliste.map((sak) => (
+              <TableRow key={sak.saksnummer}>
+                <TableColumn><VelgSakLenke saksnummer={sak.saksnummer} åpneFagsak={åpneFagsak} /></TableColumn>
+                <TableColumn>{sak.ytelseType}</TableColumn>
+                <TableColumn><DateLabel dateString={sak.datoOpprettet} /></TableColumn>
+                <TableColumn>{sak.sistEndret ? <DateLabel dateString={sak.sistEndret} /> : <FormattedMessage id="Saksliste.IngenSøknad" />}</TableColumn>
+                <TableColumn><FormattedMessage id={finnStatusTekst(sak.status)} /></TableColumn>
+              </TableRow>
+            ))}
+          </Table>
+        </div>
+      )}
+      <>
+        <VerticalSpacer eightPx />
+        <FlexRow>
+          <FlexColumn>
+            <Button
+              size="small"
+              variant="secondary"
+              onClick={avbrytCallback}
+              disabled={false}
+              type="button"
+            >
+              <FormattedMessage id="ValgtOppgave.Avbryt" />
+            </Button>
+          </FlexColumn>
+        </FlexRow>
+      </>
     </>
   );
 };

@@ -107,19 +107,16 @@ const OppgaveDetaljertVisning: FunctionComponent<OwnProps> = ({
             <VerticalSpacer sixteenPx />
           </div>
         )}
-      {saker.length > 0
-        && (
-          <>
-            <FlexRow>
-              <FlexColumn>
-                <Label size="medium">
-                  <FormattedMessage id="ValgtOppgave.RelaterteSaker" />
-                </Label>
-              </FlexColumn>
-            </FlexRow>
-            <VelgSakForm saksliste={saker} avbrytCallback={avbrytCallback} åpneFagsak={åpneFagsak} />
-          </>
-        )}
+      <>
+        <FlexRow>
+          <FlexColumn>
+            <Label size="medium">
+              <FormattedMessage id="ValgtOppgave.RelaterteSaker" />
+            </Label>
+          </FlexColumn>
+        </FlexRow>
+        <VelgSakForm saksliste={saker} avbrytCallback={avbrytCallback} åpneFagsak={åpneFagsak} />
+      </>
     </>
   );
 };
