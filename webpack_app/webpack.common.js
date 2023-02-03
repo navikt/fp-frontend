@@ -69,7 +69,7 @@ const config = {
               },
             },
           }],
-        include: [PACKAGES_DIR],
+        include: [APP_DIR],
       }, {
         test: /\.(less|css)?$/,
         use: [
@@ -91,7 +91,8 @@ const config = {
               },
             },
           }],
-        include: [CORE_DIR],
+        include: [CORE_DIR, PACKAGES_DIR],
+        exclude: [APP_DIR],
       }, {
         test: /\.(svg)$/,
         issuer: /\.less?$/,

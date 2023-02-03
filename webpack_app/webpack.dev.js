@@ -57,7 +57,6 @@ const config = {
     port: 9100,
     open: true,
     static: {
-      directory: 'packages',
       watch: true,
     },
     setupMiddlewares: (middlewares, devServer) => {

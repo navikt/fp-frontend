@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack serve --config ../../webpack_app/webpack.dev.js",
-    "buildtest": "cross-env NODE_ENV=production SENTRY_RELEASE=$(git rev-parse --short HEAD) webpack --config ../../webpack_app/webpack.prod.js"
+    "build": "cross-env NODE_ENV=production SENTRY_RELEASE=$(git rev-parse --short HEAD) webpack --config ../../webpack_app/webpack.prod.js"
   },
   "dependencies": {
     "@formatjs/intl-datetimeformat": "6.4.3",
