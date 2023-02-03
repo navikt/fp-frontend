@@ -20,7 +20,6 @@ const åpentAksjonspunkt = [{
   toTrinnsBehandling: true,
   aksjonspunktType: aksjonspunktType.MANUELL,
   kanLoses: true,
-  erAktivt: true,
 }];
 
 const familiehendelse = {

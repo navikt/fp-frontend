@@ -18,7 +18,6 @@ describe('<getAlleMerknaderFraBeslutter>', () => {
     status: AksjonspunktStatus.OPPRETTET,
     definisjon: aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
     kanLoses: true,
-    erAktivt: true,
     toTrinnsBehandling: true,
     toTrinnsBehandlingGodkjent: false,
   }];

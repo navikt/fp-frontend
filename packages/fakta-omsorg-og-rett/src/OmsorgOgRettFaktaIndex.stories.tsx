@@ -86,7 +86,6 @@ HarAksjonspunktForAvklarAleneomsorg.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
     definisjon: AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-    erAktivt: true,
     kanLoses: true,
   }] as Aksjonspunkt[],
   personoversikt: defaultPersonoversikt,
@@ -97,7 +96,6 @@ HarAksjonspunktForAvklarAleneomsorgMedFlereBarn.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
     definisjon: AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-    erAktivt: true,
     kanLoses: true,
   }] as Aksjonspunkt[],
   personoversikt: {
@@ -119,7 +117,6 @@ HarAksjonspunktForAvklarAnnenForelderRett.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
     definisjon: AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT,
-    erAktivt: true,
     kanLoses: true,
   }] as Aksjonspunkt[],
   personoversikt: defaultPersonoversikt,

@@ -5,7 +5,6 @@
         "toTrinnsBehandling": false,
         "aksjonspunktType": "AUTO",
         "kanLoses": false,
-        "erAktivt": true,
         "fristTid": "2019-12-11T00:00:00"
     },
     {
@@ -13,7 +12,6 @@
         "status": "OPPR",
         "toTrinnsBehandling": false,
         "aksjonspunktType": "MANU",
-        "kanLoses": true,
-        "erAktivt": true
+        "kanLoses": true
     }
 ]

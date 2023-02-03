@@ -31,7 +31,6 @@ describe('<FaktaDefaultInitPanel>', () => {
     readOnly: false,
     aksjonspunkter: [{
       definisjon: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
-      erAktivt: true,
       kanLoses: true,
     }] as Aksjonspunkt[],
     harApneAksjonspunkter: true,

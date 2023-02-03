@@ -65,7 +65,6 @@ const defaultAksjonspunkter = [{
   status: aksjonspunktStatus.OPPRETTET,
   begrunnelse: undefined,
   kanLoses: true,
-  erAktivt: true,
 }];
 
 const merknaderFraBeslutter = {

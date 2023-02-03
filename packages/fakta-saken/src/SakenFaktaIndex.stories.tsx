@@ -67,7 +67,6 @@ ApentAksjonspunktForInnhentingAvDokumentasjon.args = {
     definisjon: aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
     status: aksjonspunktStatus.OPPRETTET,
     kanLoses: true,
-    erAktivt: true,
   }],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
@@ -78,7 +77,6 @@ ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp.args = {
     definisjon: aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
     status: aksjonspunktStatus.OPPRETTET,
     kanLoses: true,
-    erAktivt: true,
   }],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   erSvangerskapspenger: true,
@@ -90,7 +88,6 @@ AksjonspunktErIkkeGodkjentAvBeslutter.args = {
     definisjon: aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
     status: aksjonspunktStatus.OPPRETTET,
     kanLoses: true,
-    erAktivt: true,
   }],
   alleMerknaderFraBeslutter: {
     [aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK]: {

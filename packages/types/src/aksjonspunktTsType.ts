@@ -9,7 +9,6 @@ type Aksjonspunkt = Readonly<{
   besluttersBegrunnelse?: string;
   aksjonspunktType?: string;
   kanLoses: boolean;
-  erAktivt: boolean;
   endretAv?: string;
   endretTidspunkt?: string;
 }>
