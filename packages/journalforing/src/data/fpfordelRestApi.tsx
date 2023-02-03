@@ -12,10 +12,7 @@ export const RestApiPathsKeys = {
 
 export const endpoints = new RestApiConfigBuilder()
   .withGet('/fpfordel/api/journalfoering/oppgaver', RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER)
-<<<<<<< HEAD
-=======
   .withGet('/fpfordel/api/journalfoering/oppgave/detaljer', RestApiPathsKeys.HENT_JOURNALPOST_DETALJER)
->>>>>>> 850ae30e3 (Detaljert visning av sak)
   .build();
 
 export const requestApi = createRequestApi(endpoints);
