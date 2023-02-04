@@ -49,7 +49,7 @@ async function startApp() {
             'img-src': ["'self'", 'data:'],
             'style-src': ["'self'", "'unsafe-inline'"],
             'frame-src': ["'none'"],
-            'child-src': ["'none'"],
+            'child-src': ["'self'"],
             'media-src': ["'none'"],
             'object-src': ["'none'"],
           },
