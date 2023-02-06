@@ -3,12 +3,13 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 
 import { aksjonspunktStatus, soknadType, AksjonspunktCode } from '@navikt/fp-kodeverk';
-import AdopsjonFaktaIndex from '@navikt/fp-fakta-adopsjon';
 import {
   Behandling, FamilieHendelseSamling, Soknad, Aksjonspunkt,
 } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+
+import AdopsjonFaktaIndex from './AdopsjonFaktaIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';

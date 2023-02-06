@@ -26,6 +26,7 @@
     "storybook": "cross-env start-storybook -p 7001"
   },
   "dependencies": {
+    "@navikt/ds-css": "2.1.5",
     "@navikt/fp-fakta-felles": "1.0.0",
     "@navikt/fp-kodeverk": "1.0.0",
     "@navikt/fp-types": "1.0.0",

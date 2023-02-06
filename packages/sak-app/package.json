@@ -5,7 +5,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack serve --config ../../webpack_app/webpack.dev.js",
+    "dev": "cross-env NODE_ENV=development webpack serve --config webpack_app/webpack.dev.js",
     "builds": "cross-env NODE_ENV=production SENTRY_RELEASE=$(git rev-parse --short HEAD) webpack --config ../../webpack_app/webpack.prod.js"
   },
   "dependencies": {

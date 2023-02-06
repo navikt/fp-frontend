@@ -60,4 +60,8 @@ polyfill().then(() => {
       </RestApiProvider>
     </BrowserRouter>,
   );
+
+  if (isDevelopment && module.hot) {
+    module.hot.accept();
+  }
 });
