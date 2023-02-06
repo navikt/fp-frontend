@@ -20,7 +20,7 @@ describe('<JournalforingIndex>', () => {
     // Rad 1
     expect(screen.getAllByText('Inntektsmelding')).toHaveLength(2);
     expect(screen.getAllByText('01.01.2022')).toHaveLength(4);
-    expect(screen.getAllByText('FP')).toHaveLength(2);
+    expect(screen.getAllByText('Foreldrepenger')).toHaveLength(2);
     expect(screen.getByText('11119047182')).toBeInTheDocument();
     expect(screen.getByText('01.02.2022')).toBeInTheDocument();
     expect(screen.getAllByText('NORM')).toHaveLength(2);
