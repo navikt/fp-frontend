@@ -34,7 +34,7 @@ const detaljertJournalpostMal = {
       dokumentId: '999999999',
       tittel: 'Inntektsmelding',
       varianter: [],
-      lenke: 'https://www.bowerswilkins.com/-/media/files/documentmaster/bowerswilkins/pdp-documentation/headphones/pi7_manual.pdf',
+      lenke: '',
     },
     {
       dokumentId: '999999998',
@@ -83,7 +83,7 @@ const Template: Story<{ alleOppgaver?: OppgaveOversikt[], navAnsatt: NavAnsatt, 
 
   return (
     <RestApiMock data={data} requestApi={requestApi}>
-      <JournalforingIndex navAnsatt={navAnsatt} åpneFagsak={action('button-click') as (data: any) => Promise<any>} />
+      <JournalforingIndex navAnsatt={navAnsatt} />
     </RestApiMock>
   );
 };
