@@ -71,7 +71,6 @@ export const VisUttaksperiodeUtenAksjonspunkt = Template.bind({});
 VisUttaksperiodeUtenAksjonspunkt.args = {
   aksjonspunkter: [],
   ytelsefordeling: {
-    ikkeOmsorgPerioder: null,
     overstyrtOmsorg: null,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
@@ -97,7 +96,6 @@ export const VisUttaksperiodeUtenAksjonspunktKanOverstyre = Template.bind({});
 VisUttaksperiodeUtenAksjonspunktKanOverstyre.args = {
   aksjonspunkter: [],
   ytelsefordeling: {
-    ikkeOmsorgPerioder: null,
     overstyrtOmsorg: null,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
@@ -128,7 +126,6 @@ VisUttaksperiodeMedAksjonspunkt.args = {
     kanLoses: true,
   }],
   ytelsefordeling: {
-    ikkeOmsorgPerioder: null,
     overstyrtOmsorg: null,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
@@ -186,7 +183,6 @@ VisUtsettelseperiodeMedAksjonspunkt.args = {
     kanLoses: true,
   }],
   ytelsefordeling: {
-    ikkeOmsorgPerioder: null,
     overstyrtOmsorg: null,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
@@ -215,7 +211,6 @@ VisOverføringsperiodeMedAksjonspunkt.args = {
     kanLoses: true,
   }],
   ytelsefordeling: {
-    ikkeOmsorgPerioder: null,
     overstyrtOmsorg: null,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
@@ -245,7 +240,6 @@ VisAksjonspunktDerIngenPerioderFinnes.args = {
     kanLoses: true,
   }],
   ytelsefordeling: {
-    ikkeOmsorgPerioder: null,
     overstyrtOmsorg: null,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
@@ -269,7 +263,6 @@ VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering.args = {
     kanLoses: true,
   }],
   ytelsefordeling: {
-    ikkeOmsorgPerioder: null,
     overstyrtOmsorg: null,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
@@ -304,7 +297,6 @@ VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering.args = {
     kanLoses: true,
   }],
   ytelsefordeling: {
-    ikkeOmsorgPerioder: null,
     overstyrtOmsorg: null,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
@@ -339,7 +331,6 @@ VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet.args = {
     kanLoses: false,
   }],
   ytelsefordeling: {
-    ikkeOmsorgPerioder: null,
     overstyrtOmsorg: null,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
@@ -377,7 +368,6 @@ VisBegrunnelseFraTidligereUtgaveAvPanel.args = {
     kanLoses: false,
   }],
   ytelsefordeling: {
-    ikkeOmsorgPerioder: null,
     overstyrtOmsorg: null,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
@@ -416,7 +406,6 @@ SN.args = {
     kanLoses: true,
   }],
   ytelsefordeling: {
-    ikkeOmsorgPerioder: null,
     overstyrtOmsorg: null,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
