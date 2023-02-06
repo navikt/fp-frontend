@@ -1,24 +1,21 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Link } from '@navikt/ds-react';
 
 type OwnProps = Readonly<{
   saksnummer: string;
-  åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
 }>;
+
+const velgSakLenke = (saksnummer: string): string => (`/fagsak/${saksnummer}/`);
 
 /**
  * VelgSakLenke - Inneholder en lenke som åpner en sak i fpsak.
  */
 const VelgSakLenke: FunctionComponent<OwnProps> = ({
   saksnummer,
-  åpneFagsak,
 }) => {
-  const åpneSak = useCallback((evt) => {
-    åpneFagsak(saksnummer);
-    evt.preventDefault();
-  }, [saksnummer]);
+  const lenke = velgSakLenke(saksnummer);
   return (
-    <Link href="#" onClick={åpneSak} target="_blank">
+    <Link href={lenke} target="_blank">
       {saksnummer}
     </Link>
   );

@@ -26,7 +26,7 @@ const detaljertJournalpostMal = {
   },
   avsender: {
     navn: 'Svingen sag og høvleri',
-    id: '999999999',
+    id: '910909088',
   },
   ytelseType: fagsakYtelseType.FORELDREPENGER,
   dokumenter: [
@@ -34,7 +34,7 @@ const detaljertJournalpostMal = {
       dokumentId: '999999999',
       tittel: 'Inntektsmelding',
       varianter: [],
-      lenke: '',
+      lenke: 'https://www.bowerswilkins.com/-/media/files/documentmaster/bowerswilkins/pdp-documentation/headphones/pi7_manual.pdf',
     },
     {
       dokumentId: '999999998',

@@ -1,19 +1,20 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
-import { Document, Page } from 'react-pdf';
+import { Document, Page, pdfjs } from 'react-pdf';
 import { Loader, Pagination } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
-import * as pdfjsLib from 'pdfjs-dist';
 import styles from './pdfvisning.less';
 import JournalDokument from '../typer/journalDokumentTsType';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+// eslint-disable-next-line
+const pdfjsWorker = require('pdfjs-dist/build/pdf.worker.entry');
+pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 type OwnProps = Readonly<{
   dokument: JournalDokument;
 }>;
 
 /**
- * JournalforingPanel
+ * PDFVisning - Panel for å vise valgt dokument
  */
 const PDFVisning: FunctionComponent<OwnProps> = ({
   dokument,

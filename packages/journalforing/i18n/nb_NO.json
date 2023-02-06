@@ -18,6 +18,8 @@
     "ValgtOppgave.RelaterteSaker": "Knytt til tidligere behandling(er)",
     "ValgtOppgave.Dokument.Velg": "Dokumenter på oppgave",
     "ValgtOppgave.Dokument.ÅpneFane": "Åpne i ny fane",
+    "ValgtOppgave.Dokument.Tittel": "Dokumenter",
+    "ValgtOppgave.Dokument.Ingen": "Det finnes ingen dokumenter tilknyttet journalposten",
     "Saksliste.Saksnummer": "Saksnummer",
     "Saksliste.Ytelsetype": "Ytelse",
     "Saksliste.OpprettetDato": "Opprettet",

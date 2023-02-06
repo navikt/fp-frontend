@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Button } from '@navikt/ds-react';
+import { BodyShort, Button } from '@navikt/ds-react';
 import {
   Table, TableRow, TableColumn,
   FlexColumn, FlexRow, DateLabel, VerticalSpacer,
@@ -29,7 +29,6 @@ const finnStatusTekst = (statusKode: string): string => {
 type OwnProps = Readonly<{
   saksliste: JournalFagsak[];
   avbrytCallback: () => void;
-  åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
 }>;
 
 const headerTextCodes = [
@@ -46,20 +45,19 @@ const headerTextCodes = [
 const VelgSakForm: FunctionComponent<OwnProps> = ({
   saksliste,
   avbrytCallback,
-  åpneFagsak,
 }) => {
   const finnesSaker = saksliste && saksliste.length > 0;
   return (
     <>
       {!finnesSaker && (
-        <FormattedMessage id="Journal.Sak.Ingen" />
+        <BodyShort><FormattedMessage id="Journal.Sak.Ingen" /></BodyShort>
       )}
       {finnesSaker && (
         <div className={styles.saksliste}>
           <Table headerTextCodes={headerTextCodes}>
             {saksliste.map((sak) => (
               <TableRow key={sak.saksnummer}>
-                <TableColumn><VelgSakLenke saksnummer={sak.saksnummer} åpneFagsak={åpneFagsak} /></TableColumn>
+                <TableColumn><VelgSakLenke saksnummer={sak.saksnummer} /></TableColumn>
                 <TableColumn>{sak.ytelseType}</TableColumn>
                 <TableColumn><DateLabel dateString={sak.datoOpprettet} /></TableColumn>
                 <TableColumn>{sak.sistEndret ? <DateLabel dateString={sak.sistEndret} /> : <FormattedMessage id="Saksliste.IngenSøknad" />}</TableColumn>
