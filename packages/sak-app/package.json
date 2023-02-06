@@ -84,7 +84,7 @@
     "@navikt/ft-prosess-tilbakekreving-foreldelse": "^1.3.14",
     "@navikt/ft-prosess-tilbakekreving-vedtak": "^1.3.13",
     "@navikt/ft-sak-aktor": "1.3.12",
-    "@navikt/ft-sak-behandling-velger": "1.3.12",
+    "@navikt/ft-sak-behandling-velger": "1.3.13",
     "@navikt/ft-sak-dekorator": "1.3.12",
     "@navikt/ft-sak-dokumenter": "1.3.11",
     "@navikt/ft-sak-fagsak-profil": "1.3.11",
