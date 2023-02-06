@@ -29,7 +29,7 @@ const OppgaveIndex: FunctionComponent<OwnProps> = ({
       {valgtOppgave
         && (
           <FlexContainer>
-            <OppgaveDetaljertIndex avbrytCallback={avbryt} oppgave={valgtOppgave} åpneFagsak={åpneFagsak} />
+            <OppgaveDetaljertIndex avbrytCallback={avbryt} oppgave={valgtOppgave} />
           </FlexContainer>
         )}
     </FlexContainer>

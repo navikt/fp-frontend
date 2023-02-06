@@ -4,6 +4,7 @@ import { Button } from '@navikt/ds-react';
 import { TableRow, TableColumn, DateLabel } from '@navikt/ft-ui-komponenter';
 import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
 import styles from './journalforingPanel.less';
+import { finnYtelseTekst } from './VelgSakForm';
 
 type OwnProps = Readonly<{
   oppgave: OppgaveOversikt;
@@ -17,7 +18,7 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
   return (
     <TableRow key={oppgave.id}>
       <TableColumn><DateLabel dateString={oppgave.opprettetDato} /></TableColumn>
-      <TableColumn>{oppgave.ytelseType}</TableColumn>
+      <TableColumn><FormattedMessage id={finnYtelseTekst(oppgave.ytelseType)} /></TableColumn>
       <TableColumn>{oppgave.beskrivelse}</TableColumn>
       <TableColumn>{oppgave.fødselsnummer}</TableColumn>
       <TableColumn><DateLabel dateString={oppgave.frist} /></TableColumn>
