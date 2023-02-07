@@ -25,7 +25,7 @@ const detaljertJournalpostMal = {
   },
   avsender: {
     navn: 'Svingen sag og høvleri',
-    id: '910909088',
+    id: '999999999',
   },
   ytelseType: fagsakYtelseType.FORELDREPENGER,
   dokumenter: [
