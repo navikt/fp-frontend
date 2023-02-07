@@ -29,9 +29,11 @@ const OppgaveDetaljertIndex: FunctionComponent<OwnProps> = ({
   const { addErrorMessage } = useRestApiErrorDispatcher();
   requestApi.setAddErrorMessageHandler(addErrorMessage);
 
+  // Åpner første dokument som standard valg når vi er ferdig med å laste
   useEffect(() => {
     if (journalpostKall.state === RestApiState.SUCCESS) {
-      const dok = journalpostKall.data.dokumenter ? journalpostKall.data.dokumenter[0] : undefined;
+      const doks = journalpostKall.data?.dokumenter;
+      const dok = doks && doks.length > 0 ? doks[0] : undefined;
       setValgtDokument(dok);
     }
   }, [journalpostKall]);
