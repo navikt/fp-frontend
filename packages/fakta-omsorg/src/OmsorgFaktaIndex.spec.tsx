@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  fireEvent, render, screen, waitFor,
-} from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './OmsorgFaktaIndex.stories';
@@ -56,10 +54,6 @@ describe('<OmsorgFaktaIndex>', () => {
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
       kode: '5061',
       begrunnelse: 'Dette er en begrunnelse',
-      ikkeOmsorgPerioder: [{
-        periodeFom: undefined,
-        periodeTom: undefined,
-      }],
       omsorg: true,
     });
   });
@@ -82,26 +76,10 @@ describe('<OmsorgFaktaIndex>', () => {
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
-    expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
-
-    const periodeFra = screen.getByText('Fra og med dato');
-    await userEvent.type(periodeFra, '01.02.2020');
-    fireEvent.blur(periodeFra);
-
-    const periodeTil = screen.getByText('Til og med dato');
-    await userEvent.type(periodeTil, '01.03.2020');
-    fireEvent.blur(periodeTil);
-
-    await userEvent.click(screen.getByText('Bekreft og fortsett'));
-
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
       kode: '5061',
       begrunnelse: 'Dette er en begrunnelse',
-      ikkeOmsorgPerioder: [{
-        periodeFom: '2020-02-01',
-        periodeTom: '2020-03-01',
-      }],
       omsorg: false,
     });
   });
