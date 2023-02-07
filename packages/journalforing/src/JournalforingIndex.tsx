@@ -34,7 +34,8 @@ interface OwnProps {
 const JournalforingIndex: FunctionComponent<OwnProps> = ({
   navAnsatt,
 }) => {
-  const alleJournalføringsoppgaverKall = restApiHooks.useRestApi(RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER, { avdelingEnhet: undefined }, { suspendRequest: !harTilgangTilÅBrukeJournalføring(navAnsatt) });
+  const alleJournalføringsoppgaverKall = restApiHooks.useRestApi(RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER,
+    { avdelingEnhet: undefined }, { suspendRequest: !harTilgangTilÅBrukeJournalføring(navAnsatt) });
   const { addErrorMessage } = useRestApiErrorDispatcher();
   requestApi.setAddErrorMessageHandler(addErrorMessage);
   if (alleJournalføringsoppgaverKall.state === RestApiState.NOT_STARTED || alleJournalføringsoppgaverKall.state === RestApiState.LOADING) {
