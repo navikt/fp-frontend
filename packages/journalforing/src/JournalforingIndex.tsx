@@ -12,6 +12,18 @@ import { RestApiPathsKeys, restApiHooks, requestApi } from './data/fpfordelRestA
 
 const intl = createIntl(messages);
 
+const tilatteBrukere = ['H137440', 'A138225', 'J116396', 'W119202'];
+
+// Mildertidig intill tilganger er avklart og testing er ferdig
+const harTilgangTilÅBrukeJournalføring = (navAnsatt: NavAnsatt): boolean => {
+  const url = window.location.href;
+  const erProd = url.includes('fpsak.intern.nav.no');
+  if (!erProd) {
+    return true;
+  }
+  return tilatteBrukere.includes(navAnsatt.brukernavn);
+};
+
 interface OwnProps {
   navAnsatt: NavAnsatt;
 }
@@ -28,8 +40,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({
   if (alleJournalføringsoppgaverKall.state === RestApiState.NOT_STARTED || alleJournalføringsoppgaverKall.state === RestApiState.LOADING) {
     return <LoadingPanel />;
   }
-
-  if (!navAnsatt || alleJournalføringsoppgaverKall.state !== RestApiState.SUCCESS) {
+  if (!navAnsatt || alleJournalføringsoppgaverKall.state !== RestApiState.SUCCESS || !harTilgangTilÅBrukeJournalføring(navAnsatt)) {
     return null;
   }
   return (
