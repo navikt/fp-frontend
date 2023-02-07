@@ -6,6 +6,7 @@
     "private": true,
     "dependencies": {
       "dayjs": "1.11.7",
+      "@navikt/ds-icons": "2.1.5",
       "@navikt/ds-react": "2.1.5",
       "@navikt/fp-assets": "1.0.0",
       "@navikt/fp-kodeverk": "1.0.0",

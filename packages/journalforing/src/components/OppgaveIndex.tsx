@@ -9,7 +9,6 @@ import OppgaveDetaljertIndex from './OppgaveDetaljertIndex';
 
 type OwnProps = Readonly<{
   oppgaver: OppgaveOversikt[];
-  åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
 }>;
 
 /**
@@ -17,7 +16,6 @@ type OwnProps = Readonly<{
  */
 const OppgaveIndex: FunctionComponent<OwnProps> = ({
   oppgaver,
-  åpneFagsak,
 }) => {
   const [valgtOppgave, setValgtOppgave] = useState<OppgaveOversikt>(null);
   const avbryt = useCallback(() => {
@@ -31,7 +29,7 @@ const OppgaveIndex: FunctionComponent<OwnProps> = ({
       {valgtOppgave
         && (
           <FlexContainer>
-            <OppgaveDetaljertIndex avbrytCallback={avbryt} oppgave={valgtOppgave} åpneFagsak={åpneFagsak} />
+            <OppgaveDetaljertIndex avbrytCallback={avbryt} oppgave={valgtOppgave} />
           </FlexContainer>
         )}
     </FlexContainer>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
-import { action } from '@storybook/addon-actions';
 
 import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
 import { withRouter } from '@navikt/fp-storybook-utils';
@@ -83,7 +82,7 @@ const Template: Story<{ alleOppgaver?: OppgaveOversikt[], navAnsatt: NavAnsatt, 
 
   return (
     <RestApiMock data={data} requestApi={requestApi}>
-      <JournalforingIndex navAnsatt={navAnsatt} åpneFagsak={action('button-click') as (data: any) => Promise<any>} />
+      <JournalforingIndex navAnsatt={navAnsatt} />
     </RestApiMock>
   );
 };

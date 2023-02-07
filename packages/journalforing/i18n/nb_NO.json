@@ -18,6 +18,8 @@
     "ValgtOppgave.RelaterteSaker": "Knytt til tidligere behandling(er)",
     "ValgtOppgave.Dokument.Velg": "Dokumenter på oppgave",
     "ValgtOppgave.Dokument.ÅpneFane": "Åpne i ny fane",
+    "ValgtOppgave.Dokument.Tittel": "Dokumenter",
+    "ValgtOppgave.Dokument.Ingen": "Det finnes ingen dokumenter tilknyttet journalposten",
     "Saksliste.Saksnummer": "Saksnummer",
     "Saksliste.Ytelsetype": "Ytelse",
     "Saksliste.OpprettetDato": "Opprettet",
@@ -30,5 +32,9 @@
     "Journal.Sak.Løpende": "Løpende",
     "Journal.Sak.Opprettet": "Opprettet",
     "Journal.Sak.Ingen": "Finnes ingen saker på journalpost",
-    "Journal.Sak.UnderBehandling": "Under behandling"  
+    "Journal.Sak.UnderBehandling": "Under behandling",
+    "Journal.Sak.Ytelse.Engangsstønad": "Engangsstønad",
+    "Journal.Sak.Ytelse.Foreldrepenger": "Foreldrepenger",
+    "Journal.Sak.Ytelse.Svangerskapspenger": "Svangerskapspenger",
+    "Journal.Sak.Ytelse.Ukjent": "Ukjent"
   }

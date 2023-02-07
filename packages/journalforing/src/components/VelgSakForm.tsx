@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
-import { Button } from '@navikt/ds-react';
+import { BodyShort, Button } from '@navikt/ds-react';
 import {
   Table, TableRow, TableColumn,
   FlexColumn, FlexRow, DateLabel, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
-
 import fagsakStatus from '@navikt/fp-kodeverk/src/fagsakStatus';
+import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
 import styles from './journalforingPanel.less';
 import JournalFagsak from '../typer/journalFagsakTsType';
 import VelgSakLenke from './VelgSakLenke';
@@ -26,10 +26,22 @@ const finnStatusTekst = (statusKode: string): string => {
   }
 };
 
+export const finnYtelseTekst = (ytelseKode: string): string => {
+  switch (ytelseKode) {
+    case fagsakYtelseType.ENGANGSSTONAD:
+      return 'Journal.Sak.Ytelse.Engangsstønad';
+    case fagsakYtelseType.FORELDREPENGER:
+      return 'Journal.Sak.Ytelse.Foreldrepenger';
+    case fagsakYtelseType.SVANGERSKAPSPENGER:
+      return 'Journal.Sak.Ytelse.Svangerskapspenger';
+    default:
+      return 'Journal.Sak.Ytelse.Ukjent';
+  }
+};
+
 type OwnProps = Readonly<{
   saksliste: JournalFagsak[];
   avbrytCallback: () => void;
-  åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
 }>;
 
 const headerTextCodes = [
@@ -41,26 +53,25 @@ const headerTextCodes = [
 ];
 
 /**
- * VelgSakForm - Inneholder formen som lar saksbehandler velge en sak og journalfære dokumentet på, evt opprette ny sak.
+ * VelgSakForm - Inneholder formen som lar saksbehandler velge en sak og journalføre dokumentet på, evt opprette ny sak.
  */
 const VelgSakForm: FunctionComponent<OwnProps> = ({
   saksliste,
   avbrytCallback,
-  åpneFagsak,
 }) => {
   const finnesSaker = saksliste && saksliste.length > 0;
   return (
     <>
       {!finnesSaker && (
-        <FormattedMessage id="Journal.Sak.Ingen" />
+        <BodyShort><FormattedMessage id="Journal.Sak.Ingen" /></BodyShort>
       )}
       {finnesSaker && (
         <div className={styles.saksliste}>
           <Table headerTextCodes={headerTextCodes}>
             {saksliste.map((sak) => (
               <TableRow key={sak.saksnummer}>
-                <TableColumn><VelgSakLenke saksnummer={sak.saksnummer} åpneFagsak={åpneFagsak} /></TableColumn>
-                <TableColumn>{sak.ytelseType}</TableColumn>
+                <TableColumn><VelgSakLenke saksnummer={sak.saksnummer} /></TableColumn>
+                <TableColumn><FormattedMessage id={finnYtelseTekst(sak.ytelseType)} /></TableColumn>
                 <TableColumn><DateLabel dateString={sak.datoOpprettet} /></TableColumn>
                 <TableColumn>{sak.sistEndret ? <DateLabel dateString={sak.sistEndret} /> : <FormattedMessage id="Saksliste.IngenSøknad" />}</TableColumn>
                 <TableColumn><FormattedMessage id={finnStatusTekst(sak.status)} /></TableColumn>

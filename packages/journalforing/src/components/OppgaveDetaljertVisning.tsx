@@ -3,6 +3,7 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import {
   Label, Heading, BodyShort,
 } from '@navikt/ds-react';
+import Office1 from '@navikt/ds-icons/svg/Office1.svg';
 
 import kvinneIkonUrl from '@navikt/fp-assets/images/kvinne.svg';
 import mannIkonUrl from '@navikt/fp-assets/images/mann.svg';
@@ -25,6 +26,21 @@ const finnKjønnBilde = (journalpost: Journalpost): string => {
   return tall % 2 === 0 ? kvinneIkonUrl : mannIkonUrl;
 };
 
+const finnAvsenderBilde = (journalpost: Journalpost): string => {
+  const avsenderId = journalpost.avsender?.id;
+  if (!avsenderId) {
+    return ukjentIkonUrl;
+  }
+  if (avsenderId.length === 9) {
+    return Office1;
+  }
+  if (avsenderId.length === 11) {
+    const tall = parseInt(avsenderId.charAt(8), 10);
+    return tall % 2 === 0 ? kvinneIkonUrl : mannIkonUrl;
+  }
+  return ukjentIkonUrl;
+};
+
 const TOM_ARRAY = [];
 
 type OwnProps = Readonly<{
@@ -32,7 +48,6 @@ type OwnProps = Readonly<{
   valgtDokument?: JournalDokument;
   avbrytCallback: () => void;
   setValgtDokument: (dokument: JournalDokument) => void;
-  åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
 }>;
 
 /**
@@ -43,11 +58,11 @@ const OppgaveDetaljertVisning: FunctionComponent<OwnProps> = ({
   valgtDokument,
   avbrytCallback,
   setValgtDokument,
-  åpneFagsak,
 }) => {
   const intl = useIntl();
   const saker = journalpost?.fagsaker || TOM_ARRAY;
   const kjønnBilde = useMemo(() => finnKjønnBilde(journalpost), [journalpost]);
+  const avsenderBilde = useMemo(() => finnAvsenderBilde(journalpost), [journalpost]);
   return (
     <>
       <FlexRow>
@@ -90,6 +105,14 @@ const OppgaveDetaljertVisning: FunctionComponent<OwnProps> = ({
       {journalpost.avsender && (
         <FlexRow>
           <FlexColumn>
+            <Image
+              alt={intl.formatMessage({ id: 'ValgtOppgave.Bruker' })}
+              tooltip={intl.formatMessage({ id: 'ValgtOppgave.Bruker' })}
+              src={avsenderBilde}
+              className={styles.avsenderBilde}
+            />
+          </FlexColumn>
+          <FlexColumn>
             <BodyShort>
               {journalpost.avsender.navn}
             </BodyShort>
@@ -115,7 +138,7 @@ const OppgaveDetaljertVisning: FunctionComponent<OwnProps> = ({
             </Label>
           </FlexColumn>
         </FlexRow>
-        <VelgSakForm saksliste={saker} avbrytCallback={avbrytCallback} åpneFagsak={åpneFagsak} />
+        <VelgSakForm saksliste={saker} avbrytCallback={avbrytCallback} />
       </>
     </>
   );
