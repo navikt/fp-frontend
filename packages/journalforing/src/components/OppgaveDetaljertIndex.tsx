@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useState, useEffect } from 'react';
 
 import {
   FlexColumn, FlexContainer, FlexRow, LoadingPanel,
@@ -15,7 +15,6 @@ import JournalDokument from '../typer/journalDokumentTsType';
 type OwnProps = Readonly<{
   oppgave: OppgaveOversikt;
   avbrytCallback: () => void;
-  åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
 }>;
 
 /**
@@ -24,12 +23,21 @@ type OwnProps = Readonly<{
 const OppgaveDetaljertIndex: FunctionComponent<OwnProps> = ({
   oppgave,
   avbrytCallback,
-  åpneFagsak,
 }) => {
   const [valgtDokument, setValgtDokument] = useState<JournalDokument>(undefined);
   const journalpostKall = restApiHooks.useRestApi(RestApiPathsKeys.HENT_JOURNALPOST_DETALJER, { journalpostId: oppgave.journalpostId });
   const { addErrorMessage } = useRestApiErrorDispatcher();
   requestApi.setAddErrorMessageHandler(addErrorMessage);
+
+  // Åpner første dokument som standard valg når vi er ferdig med å laste
+  useEffect(() => {
+    if (journalpostKall.state === RestApiState.SUCCESS) {
+      const doks = journalpostKall.data?.dokumenter;
+      const dok = doks && doks.length > 0 ? doks[0] : undefined;
+      setValgtDokument(dok);
+    }
+  }, [journalpostKall]);
+
   if (journalpostKall.state === RestApiState.NOT_STARTED || journalpostKall.state === RestApiState.LOADING) {
     return <LoadingPanel />;
   }
@@ -46,7 +54,6 @@ const OppgaveDetaljertIndex: FunctionComponent<OwnProps> = ({
             journalpost={journalpost}
             setValgtDokument={setValgtDokument}
             valgtDokument={valgtDokument}
-            åpneFagsak={åpneFagsak}
           />
         </FlexColumn>
         {valgtDokument

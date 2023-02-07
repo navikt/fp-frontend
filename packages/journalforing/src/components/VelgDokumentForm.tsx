@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useCallback } from 'react';
-import { Select } from '@navikt/ds-react';
+import { BodyShort, Label, Select } from '@navikt/ds-react';
 
 import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -28,7 +28,6 @@ const VelgDokumentForm: FunctionComponent<OwnProps> = ({
   valgtDokument,
   setValgtDokument,
 }) => {
-  const intl = useIntl();
   const settDokument = (dokumentId: string) => {
     if (!dokumentId) {
       setValgtDokument(undefined);
@@ -37,12 +36,27 @@ const VelgDokumentForm: FunctionComponent<OwnProps> = ({
       setValgtDokument(nyttValgtDokument);
     }
   };
-
   const endreValg = useCallback((e: React.ChangeEvent) => {
     const tg = e.target as HTMLSelectElement;
     settDokument(tg.value);
   }, []);
-
+  const intl = useIntl();
+  if (!dokumenter || dokumenter.length < 1) {
+    return (
+      <>
+        <FlexRow>
+          <FlexColumn>
+            <Label><FormattedMessage id="ValgtOppgave.Dokument.Tittel" /></Label>
+          </FlexColumn>
+        </FlexRow>
+        <FlexRow>
+          <FlexColumn>
+            <BodyShort><FormattedMessage id="ValgtOppgave.Dokument.Ingen" /></BodyShort>
+          </FlexColumn>
+        </FlexRow>
+      </>
+    );
+  }
   return (
     <FlexRow>
       <FlexColumn>
@@ -50,7 +64,6 @@ const VelgDokumentForm: FunctionComponent<OwnProps> = ({
           label={intl.formatMessage({ id: 'ValgtOppgave.Dokument.Velg' })}
           onChange={endreValg}
         >
-          <option key="Velg dokument" value="">Velg dokument</option>
           {dokumenter.map((dok) => (
             <option key={dok.dokumentId} value={dok.dokumentId}>{dok.tittel || dok.dokumentId}</option>
           ))}
