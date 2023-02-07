@@ -6,11 +6,6 @@
   "OmsorgFaktaForm.HarIkkeOmsorg": "Søker har <b>ikke</b> omsorg for barnet",
   "OmsorgFaktaForm.OppgittOmsorg": "Søker har oppgitt å ha omsorg for barnet",
 
-  "IkkeOmsorgPeriodeField.Periode": "Periode",
-  "IkkeOmsorgPeriodeField.PeriodeFom": "Fra og med dato",
-  "IkkeOmsorgPeriodeField.PeriodeTom": "Til og med dato",
-  "IkkeOmsorgPeriodeField.Add": "Legg til",
-
   "Personstatus.Hjelpetekst": "Personstatus",
   "Personstatus.Ukjent": "Ukjent",
   "Sivilstand.Hjelpetekst": "Sivilstand",

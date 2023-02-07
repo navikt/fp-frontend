@@ -1,15 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { required } from '@navikt/ft-form-validators';
-import { formHooks, RadioGroupPanel } from '@navikt/ft-form-hooks';
-import { ArrowBox, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-
-import IkkeOmsorgPeriodeField from './IkkeOmsorgPeriodeField';
 
 import styles from './omsorgFaktaForm.less';
 
@@ -22,11 +20,9 @@ const getAksjonspunkt = (
 
 export type FormValues = {
   omsorg?: boolean;
-  ikkeOmsorgPerioder?: Ytelsefordeling['ikkeOmsorgPerioder'];
 }
 
 interface OwnProps {
-  ytelsefordeling: Ytelsefordeling;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
   className?: string;
@@ -43,15 +39,9 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
   aksjonspunkter,
   readOnly,
   className,
-  ytelsefordeling,
   alleMerknaderFraBeslutter,
 }) => {
   const intl = useIntl();
-
-  const { watch } = formHooks.useFormContext<FormValues>();
-  const omsorg = watch('omsorg');
-
-  const omsorgIsEdited = !!ytelsefordeling.ikkeOmsorgPerioder;
 
   return (
     <div className={className || styles.defaultAleneOmsorgFakta}>
@@ -64,7 +54,6 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
             name="omsorg"
             label={<FormattedMessage id="OmsorgFaktaForm.OppgittOmsorg" />}
             validate={[required]}
-            isEdited={omsorgIsEdited}
             isReadOnly={readOnly}
             isTrueOrFalseSelection
             radios={[{
@@ -80,14 +69,6 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
               value: 'false',
             }]}
           />
-          {omsorg === false && (
-            <div className={styles.arrowBoxWidth}>
-              <VerticalSpacer eightPx />
-              <ArrowBox>
-                <IkkeOmsorgPeriodeField readOnly={readOnly} />
-              </ArrowBox>
-            </div>
-          )}
         </FaktaGruppe>
       )}
     </div>
@@ -104,18 +85,12 @@ OmsorgFaktaForm.buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonsp
 
   return {
     omsorg,
-    ikkeOmsorgPerioder: ytelsefordeling.ikkeOmsorgPerioder && ytelsefordeling.ikkeOmsorgPerioder.length > 0
-      ? ytelsefordeling.ikkeOmsorgPerioder : [{
-        periodeFom: undefined,
-        periodeTom: undefined,
-      }],
   };
 };
 
 OmsorgFaktaForm.transformOmsorgValues = (values: FormValues): BekreftOmsorgVurderingAp => ({
   kode: MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
   omsorg: values.omsorg,
-  ikkeOmsorgPerioder: values.ikkeOmsorgPerioder && values.ikkeOmsorgPerioder.length > 0 ? values.ikkeOmsorgPerioder : null,
 });
 
 export default OmsorgFaktaForm;
