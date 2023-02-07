@@ -53,7 +53,7 @@ const headerTextCodes = [
 ];
 
 /**
- * VelgSakForm - Inneholder formen som lar saksbehandler velge en sak og journalfære dokumentet på, evt opprette ny sak.
+ * VelgSakForm - Inneholder formen som lar saksbehandler velge en sak og journalføre dokumentet på, evt opprette ny sak.
  */
 const VelgSakForm: FunctionComponent<OwnProps> = ({
   saksliste,
