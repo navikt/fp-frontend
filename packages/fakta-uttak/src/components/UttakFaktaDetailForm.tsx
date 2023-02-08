@@ -1,37 +1,36 @@
 import React, {
-  FunctionComponent, useCallback, useState, useMemo, ReactElement, useEffect,
+  FunctionComponent, useCallback, useState, useMemo, useEffect,
 } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import { useForm, UseFormGetValues } from 'react-hook-form';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import {
-  Datepicker, RadioGroupPanel, Form, SelectField, CheckboxField, NumberField,
+  Datepicker, RadioGroupPanel, Form, SelectField, CheckboxField,
 } from '@navikt/ft-form-hooks';
 import {
   FlexColumn, FlexContainer, FlexRow, OkAvbrytModal, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { Delete } from '@navikt/ds-icons';
-import {
-  Alert, BodyShort, Button, Label,
-} from '@navikt/ds-react';
-import { DDMMYYYY_DATE_FORMAT, guid, omitMany } from '@navikt/ft-utils';
+import { BodyShort, Button, Label } from '@navikt/ds-react';
+import { omitMany } from '@navikt/ft-utils';
 
 import {
-  AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, ArbeidsgiverOpplysninger,
+  AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold,
 } from '@navikt/fp-types';
 import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import uttakArbeidType from '@navikt/fp-kodeverk/src/uttakArbeidType';
 import uttakPeriodeType from '@navikt/fp-kodeverk/src/uttakPeriodeType';
+import StonadskontoType from '@navikt/fp-kodeverk/src/stonadskontoType';
 
+import { RelasjonsRolleType } from '@navikt/ft-kodeverk';
 import FordelingPeriodeKilde from '../kodeverk/fordelingPeriodeKilde';
 
 import styles from './uttakFaktaDetailForm.less';
 import KontrollerFaktaPeriodeMedApMarkering from '../typer/kontrollerFaktaPeriodeMedApMarkering';
+import GraderingOgSamtidigUttakPanel, { FormValues as FormValuesGraderingOgSamtidigUttak } from './GraderingOgSamtidigUttakPanel';
 
-type FormValues = KontrollerFaktaPeriodeMedApMarkering & {
+type FormValues = FormValuesGraderingOgSamtidigUttak & {
   arsakstype: string;
-  arbeidsgiverId: string;
 };
 
 export enum Årsakstype {
@@ -47,49 +46,6 @@ const ÅRSAKSTYPE_TEKST_KODER = {
   [Årsakstype.UTSETTELSE]: 'UttakFaktaDetailForm.Utsettelse',
   [Årsakstype.OPPHOLD]: 'UttakFaktaDetailForm.Opphold',
 };
-
-// vanlig arbeidsgivernavn (orgnr)...arbeidsforholdid
-// privatperson - KLANG...(18.08.1980)
-const formatDate = (dato: string): string => dayjs(dato).format(DDMMYYYY_DATE_FORMAT);
-const getEndCharFromId = (id: any): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
-
-const lagVisningsNavn = (arbeidsgiverOpplysning: ArbeidsgiverOpplysninger, eksternArbeidsforholdId?: any) => {
-  const {
-    navn, fødselsdato, erPrivatPerson, identifikator,
-  } = arbeidsgiverOpplysning;
-
-  let visningsNavn = `${navn}`;
-  if (!erPrivatPerson) {
-    visningsNavn = identifikator ? `${visningsNavn} (${identifikator})` : visningsNavn;
-    visningsNavn = `${visningsNavn}${getEndCharFromId(eksternArbeidsforholdId)}`;
-  } else {
-    visningsNavn = `${navn.substr(0, 5)}...(${formatDate(fødselsdato)})`;
-  }
-  return visningsNavn;
-};
-
-const mapArbeidsforhold = (
-  faktaArbeidsforhold: FaktaArbeidsforhold[],
-  alleKodeverk: AlleKodeverk,
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-): ReactElement[] => faktaArbeidsforhold.map((andel) => {
-  const { arbeidType, arbeidsgiverReferanse } = andel;
-
-  const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
-
-  let periodeArbeidsforhold = '';
-  if (arbeidType && arbeidType !== uttakArbeidType.ORDINÆRT_ARBEID) {
-    periodeArbeidsforhold = alleKodeverk[KodeverkType.UTTAK_ARBEID_TYPE].find((k) => k.kode === arbeidType)?.navn;
-  } else {
-    periodeArbeidsforhold = lagVisningsNavn(arbeidsgiverOpplysninger);
-  }
-
-  return (
-    <option value={`${arbeidsgiverReferanse}-${arbeidType}`} key={guid()}>
-      {periodeArbeidsforhold}
-    </option>
-  );
-});
 
 export const utledÅrsakstype = (valgtPeriode: KontrollerFaktaPeriodeMedApMarkering): Årsakstype => {
   if (valgtPeriode.utsettelseÅrsak) {
@@ -127,13 +83,15 @@ const lagDefaultVerdier = (
     ...valgtPeriode,
     arsakstype,
     arbeidsgiverId,
+    harGradering: !!valgtPeriode.arbeidstidsprosent,
+    harSamtidigUttaksprosent: !!valgtPeriode.samtidigUttaksprosent,
   };
 };
 
 const transformValues = (
   values: FormValues,
 ): KontrollerFaktaPeriodeMedApMarkering => ({
-  ...omitMany(values, ['arsakstype', 'arbeidsgiverId']),
+  ...omitMany(values, ['arsakstype', 'arbeidsgiverId', 'harGradering', 'harSamtidigUttaksprosent']),
   arbeidsforhold: values.arbeidsgiverId ? {
     arbeidsgiverReferanse: values.arbeidsgiverId.split('-')[0],
     arbeidType: values.arbeidsgiverId.split('-')[1],
@@ -144,16 +102,13 @@ const transformValues = (
   samtidigUttaksprosent: values.samtidigUttaksprosent,
 });
 
-const requiredNårGraderingErOppgitt = (
-  getValues: UseFormGetValues<FormValues>,
-) => (arbeidsgiverId?: string) => (getValues('arbeidstidsprosent') ? required(arbeidsgiverId) : null);
-
 const validerTomEtterFom = (
   intl: IntlShape,
   getValues: UseFormGetValues<FormValues>,
 ) => (tom?: string) => (dayjs(tom).isBefore(getValues('fom')) ? intl.formatMessage({ id: 'UttakFaktaDetailForm.TomForFom' }) : null);
 
 interface OwnProps {
+  fagsak: Fagsak;
   valgtPeriode?: KontrollerFaktaPeriodeMedApMarkering;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
@@ -166,6 +121,7 @@ interface OwnProps {
 }
 
 const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
+  fagsak,
   valgtPeriode,
   arbeidsgiverOpplysningerPerId,
   faktaArbeidsforhold,
@@ -199,6 +155,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
 
   const årsakstype = formMethods.watch('arsakstype');
   const flerbarnsdager = formMethods.watch('flerbarnsdager');
+  const stønadskonto = formMethods.watch('uttakPeriodeType');
   const begrunnelse = formMethods.watch('begrunnelse');
 
   useEffect(() => {
@@ -214,10 +171,10 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
     formMethods.unregister('flerbarnsdager');
   }, [årsakstype]);
 
-  const aRef = valgtPeriode?.arbeidsforhold?.arbeidsgiverReferanse;
-  const arbeidsgiverFinnesIkke = (aRef && aRef !== 'null' && !arbeidsgiverOpplysningerPerId[aRef]);
-
   const onSubmit = useCallback((values) => oppdaterPeriode(transformValues(values)), [oppdaterPeriode]);
+
+  const visMorsAktivitet = årsakstype !== Årsakstype.OPPHOLD && fagsak.relasjonsRolleType === RelasjonsRolleType.MOR
+    && (stønadskonto === StonadskontoType.FELLESPERIODE || stønadskonto === StonadskontoType.FORELDREPENGER);
 
   return (
     <>
@@ -347,47 +304,15 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
             </>
           )}
           {årsakstype === Årsakstype.UTTAK && (
-            <>
-              <VerticalSpacer sixteenPx />
-              {!readOnly && arbeidsgiverFinnesIkke && (
-                <div className={styles.alert}>
-                  <Alert variant="info">
-                    <FormattedMessage id="UttakFaktaDetailForm.UkjentArbeidsgiver" values={{ aRef }} />
-                  </Alert>
-                  <VerticalSpacer twentyPx />
-                </div>
-              )}
-              <FlexRow>
-                <FlexColumn>
-                  <NumberField
-                    name="arbeidstidsprosent"
-                    label={<FormattedMessage id="UttakFaktaDetailForm.GraderingProsent" />}
-                    forceTwoDecimalDigits
-                    className={styles.gradering}
-                    readOnly={readOnly}
-                  />
-                </FlexColumn>
-                <FlexColumn className={styles.marginGradering}>
-                  <SelectField
-                    name="arbeidsgiverId"
-                    label={<FormattedMessage id="UttakFaktaDetailForm.Arbeidsgiver" />}
-                    validate={[requiredNårGraderingErOppgitt(formMethods.getValues)]}
-                    selectValues={mapArbeidsforhold(faktaArbeidsforhold, alleKodeverk, arbeidsgiverOpplysningerPerId)}
-                    readOnly={readOnly}
-                  />
-                </FlexColumn>
-                <FlexColumn className={styles.marginGradering}>
-                  <NumberField
-                    name="samtidigUttaksprosent"
-                    label={<FormattedMessage id="UttakFaktaDetailForm.SamtidigUttaksprosent" />}
-                    forceTwoDecimalDigits
-                    readOnly={readOnly}
-                  />
-                </FlexColumn>
-              </FlexRow>
-            </>
+            <GraderingOgSamtidigUttakPanel
+              valgtPeriode={valgtPeriode}
+              arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+              faktaArbeidsforhold={faktaArbeidsforhold}
+              readOnly={readOnly}
+              alleKodeverk={alleKodeverk}
+            />
           )}
-          {årsakstype !== Årsakstype.OPPHOLD && (
+          {visMorsAktivitet && (
             <>
               <VerticalSpacer sixteenPx />
               <FlexRow>

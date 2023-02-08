@@ -15,7 +15,7 @@ import { AksjonspunktStatus, isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import { FaktaSubmitButtonNew, FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
 import {
-  Aksjonspunkt, KontrollerFaktaPeriode, Ytelsefordeling, AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold,
+  Aksjonspunkt, KontrollerFaktaPeriode, Ytelsefordeling, AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, Fagsak,
 } from '@navikt/fp-types';
 import { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
@@ -89,6 +89,7 @@ const validerPerioder = (
 };
 
 interface OwnProps {
+  fagsak: Fagsak;
   ytelsefordeling: Ytelsefordeling;
   uttakKontrollerFaktaPerioder: KontrollerFaktaPeriode[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -104,6 +105,7 @@ interface OwnProps {
 }
 
 const UttakFaktaForm: FunctionComponent<OwnProps> = ({
+  fagsak,
   uttakKontrollerFaktaPerioder,
   arbeidsgiverOpplysningerPerId,
   faktaArbeidsforhold,
@@ -223,6 +225,7 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
         </>
       )}
       <UttakFaktaTable
+        fagsak={fagsak}
         valgteFomDatoer={valgteFomDatoer}
         setValgteFomDatoer={setValgteFomDatoer}
         uttakKontrollerFaktaPerioder={uttakPerioder}
