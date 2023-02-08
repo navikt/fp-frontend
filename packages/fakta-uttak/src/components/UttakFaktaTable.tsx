@@ -1,5 +1,5 @@
 import React, {
-  useCallback, FunctionComponent, useState,
+  useCallback, FunctionComponent,
 } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
@@ -81,6 +81,8 @@ interface OwnProps {
   readOnly: boolean;
   setDirty: (isDirty: boolean) => void;
   erRedigerbart: boolean;
+  visNyPeriode: boolean;
+  settVisNyPeriode: (vis: boolean) => void;
 }
 
 const UttakFaktaTable: FunctionComponent<OwnProps> = ({
@@ -95,6 +97,8 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
   readOnly,
   setDirty,
   erRedigerbart,
+  visNyPeriode,
+  settVisNyPeriode,
 }) => {
   const intl = useIntl();
 
@@ -123,8 +127,6 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
     oppdaterUttakPerioder(oppdatertePerioder);
     setDirty(true);
   }, [uttakKontrollerFaktaPerioder]);
-
-  const [visNyPeriode, settVisNyPeriode] = useState(false);
 
   const sisteMåned = uttakKontrollerFaktaPerioder.length > 0
     ? new Date(uttakKontrollerFaktaPerioder[uttakKontrollerFaktaPerioder.length - 1].tom)

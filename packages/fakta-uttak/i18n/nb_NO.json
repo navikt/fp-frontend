@@ -46,6 +46,7 @@
   "UttakFaktaDetailForm.Opphold": "Opphold",
   "UttakFaktaDetailForm.ErTidligereEnnForsteUttaksdato": "Dato kan ikke være før første uttaksdato",
   "UttakFaktaDetailForm.ErIkkeLikForsteUttaksdato": "En av periodene må ha dato lik første uttaksdato ({dato})",
+  "UttakFaktaDetailForm.ErFørFørsteUttaktsdato": "En periode kan ikke starte før første uttaksdato ({dato})",
   "UttakFaktaDetailForm.TomForFom": "Dato kan ikke være før fra",
   "UttakFaktaDetailForm.HarFlerbarnsdager": "Har flerbarnsdager",
   "UttakFaktaDetailForm.Begrunnelse": "Begrunnelse",

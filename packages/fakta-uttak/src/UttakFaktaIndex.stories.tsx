@@ -66,7 +66,7 @@ const Template: Story<{
     }, {
       arbeidType: 'SELVSTENDIG_NÆRINGSDRIVENDE',
       arbeidsgiverReferanse: 'null',
-    }]}
+    }, { arbeidsgiverReferanse: '947064649', arbeidType: 'ORDINÆRT_ARBEID' }]}
   />
 );
 
@@ -398,39 +398,4 @@ VisBegrunnelseFraTidligereUtgaveAvPanel.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   kanOverstyre: false,
   readOnly: true,
-};
-
-export const SN = Template.bind({});
-SN.args = {
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
-    status: aksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-    kanLoses: true,
-  }],
-  ytelsefordeling: {
-    overstyrtOmsorg: null,
-    rettigheterAnnenforelder: {
-      skalAvklareAnnenforelderUføretrygd: false,
-      skalAvklareAnnenForelderRettEØS: false,
-    },
-    endringsdato: '2022-01-31',
-    gjeldendeDekningsgrad: 100,
-    førsteUttaksdato: '2022-01-31',
-  },
-  uttakKontrollerFaktaPerioder: [{
-    fom: '2022-11-12',
-    tom: '2022-12-01',
-    uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
-    arbeidstidsprosent: 10,
-    arbeidsforhold: {
-      arbeidType: 'SELVSTENDIG_NÆRINGSDRIVENDE',
-      arbeidsgiverReferanse: 'null',
-    },
-    samtidigUttaksprosent: 80,
-    flerbarnsdager: true,
-    periodeKilde: 'SØKNAD',
-  }],
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  kanOverstyre: false,
 };
