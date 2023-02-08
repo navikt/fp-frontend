@@ -66,7 +66,7 @@ const Template: Story<{
     }, {
       arbeidType: 'SELVSTENDIG_NÆRINGSDRIVENDE',
       arbeidsgiverReferanse: 'null',
-    }, { arbeidsgiverReferanse: '947064649', arbeidType: 'ORDINÆRT_ARBEID' }]}
+    }]}
   />
 );
 

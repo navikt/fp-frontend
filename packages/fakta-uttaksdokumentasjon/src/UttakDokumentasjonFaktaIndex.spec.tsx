@@ -48,7 +48,7 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
     await userEvent.click(screen.getByText('Mangler dokumentasjon'));
     await userEvent.click(screen.getByText('Oppdater'));
 
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
