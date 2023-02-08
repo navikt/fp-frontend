@@ -97,8 +97,8 @@ const GraderingOgSamtidigUttakPanel: FunctionComponent<OwnProps> = ({
   const aRef = valgtPeriode?.arbeidsforhold?.arbeidsgiverReferanse;
   const arbeidsgiverFinnesIkke = (aRef && aRef !== 'null' && !arbeidsgiverOpplysningerPerId[aRef]);
 
-  const [visGradering, setGradering] = useState(!!valgtPeriode.arbeidstidsprosent);
-  const [visSamtidigUttaksgradering, setSamtidigUttaksgradering] = useState(!!valgtPeriode.samtidigUttaksprosent);
+  const [visGradering, setGradering] = useState(!!valgtPeriode?.arbeidstidsprosent);
+  const [visSamtidigUttaksgradering, setSamtidigUttaksgradering] = useState(!!valgtPeriode?.samtidigUttaksprosent);
   const toggleGradering = useCallback(() => setGradering((old) => !old), []);
   const toggleSamtidigUttaksprosent = useCallback(() => setSamtidigUttaksgradering((old) => !old), []);
 
@@ -137,51 +137,55 @@ const GraderingOgSamtidigUttakPanel: FunctionComponent<OwnProps> = ({
           />
         </FlexColumn>
       </FlexRow>
-      <VerticalSpacer sixteenPx />
       {!readOnly && arbeidsgiverFinnesIkke && (
         <div className={styles.alert}>
+          <VerticalSpacer sixteenPx />
           <Alert variant="info">
             <FormattedMessage id="UttakFaktaDetailForm.UkjentArbeidsgiver" values={{ aRef }} />
           </Alert>
-          <VerticalSpacer twentyPx />
         </div>
       )}
-      <FlexRow>
-        {visGradering && (
-          <>
-            <FlexColumn>
-              <NumberField
-                name="arbeidstidsprosent"
-                label={<FormattedMessage id="UttakFaktaDetailForm.GraderingProsent" />}
-                forceTwoDecimalDigits
-                validate={[required]}
-                className={styles.gradering}
-                readOnly={readOnly}
-              />
-            </FlexColumn>
-            <FlexColumn className={styles.marginGradering}>
-              <SelectField
-                name="arbeidsgiverId"
-                label={<FormattedMessage id="UttakFaktaDetailForm.Arbeidsgiver" />}
-                validate={[required]}
-                selectValues={mapArbeidsforhold(faktaArbeidsforhold, alleKodeverk, arbeidsgiverOpplysningerPerId)}
-                readOnly={readOnly}
-              />
-            </FlexColumn>
-          </>
-        )}
-        {visSamtidigUttaksgradering && (
-          <FlexColumn>
-            <NumberField
-              name="samtidigUttaksprosent"
-              label={<FormattedMessage id="UttakFaktaDetailForm.SamtidigUttaksprosent" />}
-              validate={[required]}
-              forceTwoDecimalDigits
-              readOnly={readOnly}
-            />
-          </FlexColumn>
-        )}
-      </FlexRow>
+      {(visGradering || visSamtidigUttaksgradering) && (
+        <>
+          <VerticalSpacer sixteenPx />
+          <FlexRow>
+            {visGradering && (
+              <>
+                <FlexColumn>
+                  <NumberField
+                    name="arbeidstidsprosent"
+                    label={<FormattedMessage id="UttakFaktaDetailForm.GraderingProsent" />}
+                    forceTwoDecimalDigits
+                    validate={[required]}
+                    className={styles.gradering}
+                    readOnly={readOnly}
+                  />
+                </FlexColumn>
+                <FlexColumn className={styles.marginGradering}>
+                  <SelectField
+                    name="arbeidsgiverId"
+                    label={<FormattedMessage id="UttakFaktaDetailForm.Arbeidsgiver" />}
+                    validate={[required]}
+                    selectValues={mapArbeidsforhold(faktaArbeidsforhold, alleKodeverk, arbeidsgiverOpplysningerPerId)}
+                    readOnly={readOnly}
+                  />
+                </FlexColumn>
+              </>
+            )}
+            {visSamtidigUttaksgradering && (
+              <FlexColumn>
+                <NumberField
+                  name="samtidigUttaksprosent"
+                  label={<FormattedMessage id="UttakFaktaDetailForm.SamtidigUttaksprosent" />}
+                  validate={[required]}
+                  forceTwoDecimalDigits
+                  readOnly={readOnly}
+                />
+              </FlexColumn>
+            )}
+          </FlexRow>
+        </>
+      )}
     </>
   );
 };

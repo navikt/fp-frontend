@@ -89,6 +89,7 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
       <Form formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
         <FaktaBegrunnelseTextFieldNew
           name="begrunnelse"
+          label={intl.formatMessage({ id: 'UttakDokumentasjonFaktaForm.Begrunnelse' })}
           isSubmittable
           isReadOnly={readOnly}
           hasBegrunnelse
