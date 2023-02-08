@@ -14,9 +14,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 
 import splitPeriodImageUrl from '@navikt/fp-assets/images/splitt.svg';
-import {
-  DokumentasjonVurderingBehov, UttakType, UttakVurdering,
-} from '@navikt/fp-types';
+import { DokumentasjonVurderingBehov, UttakVurdering } from '@navikt/fp-types';
 
 import DelOppPeriodeModal from './DelOppPeriodeModal';
 
@@ -105,7 +103,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
     label: intl.formatMessage({ id: 'UttakDokumentasjonFaktaDetailForm.IkkeGodkjent' }),
   }];
 
-  if (valgtDokBehov.type === UttakType.UTTAK && valgtDokBehov.årsak.includes('AKTIVITETSKRAV')) {
+  if (valgtDokBehov.årsak.includes('AKTIVITETSKRAV')) {
     vurderingsalternativer.push({
       value: UttakVurdering.IKKE_DOKUMENTERT,
       label: intl.formatMessage({ id: 'UttakDokumentasjonFaktaDetailForm.IkkeDokumentert' }),

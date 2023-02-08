@@ -4,6 +4,7 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 
 import { Aksjonspunkt } from '@navikt/ft-types';
 import {
+  Fagsak,
   KontrollerFaktaPeriode, Ytelsefordeling,
 } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -11,6 +12,7 @@ import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import uttakPeriodeType from '@navikt/fp-kodeverk/src/uttakPeriodeType';
 import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import { RelasjonsRolleType } from '@navikt/ft-kodeverk';
 
 import UttakFaktaIndex from './UttakFaktaIndex';
 import UtsettelseÅrsak from './kodeverk/utsettelseÅrsak';
@@ -47,6 +49,7 @@ const Template: Story<{
   kanOverstyre = false,
 }) => (
   <UttakFaktaIndex
+    fagsak={{ relasjonsRolleType: RelasjonsRolleType.MOR } as Fagsak}
     aksjonspunkter={aksjonspunkter}
     ytelsefordeling={ytelsefordeling}
     uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioder}

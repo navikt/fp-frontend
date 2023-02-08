@@ -51,5 +51,7 @@
   "UttakFaktaDetailForm.Begrunnelse": "Begrunnelse",
   "UttakFaktaDetailForm.Ja": "Ja",
   "UttakFaktaDetailForm.Nei": "Nei",
-  "UttakFaktaDetailForm.UkjentArbeidsgiver": "Arbeidsgiver oppgitt for perioden er ukjent. Referanse: {aRef}"
+  "UttakFaktaDetailForm.UkjentArbeidsgiver": "Arbeidsgiver oppgitt for perioden er ukjent. Referanse: {aRef}",
+  "UttakFaktaDetailForm.HarGradering": "Gradering",
+  "UttakFaktaDetailForm.HarSamtidigUttaksprosent": "Samtidig uttaksprosent"
 }

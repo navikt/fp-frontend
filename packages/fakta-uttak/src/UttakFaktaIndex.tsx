@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 
 import {
-  KontrollerFaktaPeriode, Ytelsefordeling, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, Aksjonspunkt, AlleKodeverk,
+  KontrollerFaktaPeriode, Ytelsefordeling, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, Aksjonspunkt, AlleKodeverk, Fagsak,
 } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -14,6 +14,7 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface OwnProps {
+  fagsak: Fagsak;
   ytelsefordeling: Ytelsefordeling;
   uttakKontrollerFaktaPerioder: KontrollerFaktaPeriode[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -29,6 +30,7 @@ interface OwnProps {
 }
 
 const UttakFaktaIndex: FunctionComponent<OwnProps> = ({
+  fagsak,
   aksjonspunkter,
   submitCallback,
   ytelsefordeling,
@@ -44,6 +46,7 @@ const UttakFaktaIndex: FunctionComponent<OwnProps> = ({
 }) => (
   <RawIntlProvider value={intl}>
     <UttakFaktaForm
+      fagsak={fagsak}
       ytelsefordeling={ytelsefordeling}
       uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioder}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
