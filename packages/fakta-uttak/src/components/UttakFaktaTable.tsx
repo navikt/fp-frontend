@@ -10,7 +10,9 @@ import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
 import { Button, Heading } from '@navikt/ds-react';
 import { AddCircle } from '@navikt/ds-icons';
 
-import { AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold } from '@navikt/fp-types';
+import {
+  AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold,
+} from '@navikt/fp-types';
 import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 
 import UttakFaktaDetailForm, { utledÅrsakstype, Årsakstype } from './UttakFaktaDetailForm';
@@ -68,6 +70,7 @@ const getTypeTekst = (
 };
 
 interface OwnProps {
+  fagsak: Fagsak;
   valgteFomDatoer: string[];
   setValgteFomDatoer: React.Dispatch<React.SetStateAction<string[]>>;
   uttakKontrollerFaktaPerioder: KontrollerFaktaPeriodeMedApMarkering[];
@@ -81,6 +84,7 @@ interface OwnProps {
 }
 
 const UttakFaktaTable: FunctionComponent<OwnProps> = ({
+  fagsak,
   valgteFomDatoer,
   setValgteFomDatoer,
   uttakKontrollerFaktaPerioder,
@@ -143,6 +147,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
               toggleContent={() => velgPeriodeFomDato(periode.fom)}
               content={valgteFomDatoer.includes(periode.fom) && (
                 <UttakFaktaDetailForm
+                  fagsak={fagsak}
                   valgtPeriode={periode}
                   readOnly={readOnly || !erRedigerbart}
                   oppdaterPeriode={oppdaterPeriode}
@@ -195,6 +200,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
               </Heading>
               <VerticalSpacer sixteenPx />
               <UttakFaktaDetailForm
+                fagsak={fagsak}
                 avbrytEditering={() => settVisNyPeriode(false)}
                 readOnly={false}
                 alleKodeverk={alleKodeverk}

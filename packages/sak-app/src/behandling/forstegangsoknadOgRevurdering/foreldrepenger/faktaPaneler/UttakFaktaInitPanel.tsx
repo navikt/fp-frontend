@@ -7,7 +7,7 @@ import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import UttakFaktaIndex from '@navikt/fp-fakta-uttak';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
-  AksessRettigheter, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, KontrollerFaktaPeriode, Ytelsefordeling,
+  AksessRettigheter, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, KontrollerFaktaPeriode, Ytelsefordeling, Fagsak,
 } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
@@ -39,6 +39,7 @@ type EndepunktPanelData = {
 interface OwnProps {
   rettigheter: AksessRettigheter;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  fagsak: Fagsak;
 }
 
 /**
@@ -47,6 +48,7 @@ interface OwnProps {
 const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
   rettigheter,
   arbeidsgiverOpplysningerPerId,
+  fagsak,
   ...props
 }) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
@@ -59,6 +61,7 @@ const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = (
     skalPanelVisesIMeny={() => props.behandling.harSattEndringsdato && props.requestApi.hasPath(FpBehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER_V2.name)}
     renderPanel={(data) => (
       <UttakFaktaIndex
+        fagsak={fagsak}
         kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...data}
