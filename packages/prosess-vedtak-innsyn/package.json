@@ -18,7 +18,7 @@
     "@navikt/ft-ui-komponenter": "1.3.11",
     "@navikt/ft-utils": "1.1.16",
     "react": "18.2.0",
-    "react-intl": "6.2.7",
+    "react-intl": "6.2.8",
     "react-hook-form": "7.43.0"
   },
   "devDependencies": {
