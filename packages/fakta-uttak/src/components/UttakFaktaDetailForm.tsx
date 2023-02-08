@@ -173,7 +173,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
 
   const onSubmit = useCallback((values) => oppdaterPeriode(transformValues(values)), [oppdaterPeriode]);
 
-  const visMorsAktivitet = årsakstype !== Årsakstype.OPPHOLD && fagsak.relasjonsRolleType === RelasjonsRolleType.MOR
+  const visMorsAktivitet = årsakstype !== Årsakstype.OPPHOLD && fagsak.relasjonsRolleType !== RelasjonsRolleType.MOR
     && (stønadskonto === StonadskontoType.FELLESPERIODE || stønadskonto === StonadskontoType.FORELDREPENGER);
 
   return (
