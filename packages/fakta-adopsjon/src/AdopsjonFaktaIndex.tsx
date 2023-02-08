@@ -34,7 +34,6 @@ const AdopsjonFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> 
   setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    sdsdasddafsd
     <AdopsjonInfoPanel
       soknad={soknad}
       gjeldendeFamiliehendelse={familiehendelse.gjeldende}

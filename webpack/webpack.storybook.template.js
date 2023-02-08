@@ -1,6 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const styleModulesRule = require('./rules/style-modules-rule');
 const styleRule = require('./rules/style-rule');
 
@@ -19,6 +20,7 @@ module.exports = (config, srcDir, additionalStyleRule = {}) => {
       loader: 'babel-loader',
       options: {
         rootMode: "upward",
+        plugins: [require.resolve('react-refresh/babel')],
       },
     }, {
       test: /\.(svg)$/,
@@ -34,6 +36,7 @@ module.exports = (config, srcDir, additionalStyleRule = {}) => {
       filename: 'style[name].css',
       ignoreOrder: true,
     }));
+    config.plugins.push(new ReactRefreshWebpackPlugin());
     config.plugins.push(new ESLintPlugin({
       context: srcDir,
       extensions: ['tsx', 'ts'],

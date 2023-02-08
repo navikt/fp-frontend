@@ -1,17 +1,18 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
-const styleModulesRule = require('./rules/style-modules-rule');
-const styleRule = require('./rules/style-rule');
+const nodeExternals = require('webpack-node-externals');
 
-module.exports = (dirname) => ({
+module.exports = {
   mode: 'development',
   devtool: 'eval-cheap-module-source-map',
   output: {
     publicPath: 'auto',
+    filename: 'index.js',
   },
   module: {
     rules: [
@@ -20,8 +21,8 @@ module.exports = (dirname) => ({
         loader: 'babel-loader',
         options: {
           rootMode: 'upward',
+          plugins: [require.resolve('react-refresh/babel')],
         },
-        include: [path.join(dirname, '../src'), dirname],
       }, {
         test: /\.(svg)$/,
         type: 'asset/resource',
@@ -29,17 +30,19 @@ module.exports = (dirname) => ({
           filename: '[name]_[contenthash].[ext]',
         },
       },
-      styleModulesRule(path.join(dirname, '../src')),
-      styleRule(path.join(dirname, '../src'), true, true)
     ],
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.less'],
   },
+  externalsPresets: { node: true },
+  externals: [nodeExternals({
+    modulesDir: path.resolve(__dirname, '../node_modules'),
+  })],
+
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new ESLintPlugin({
-      context: path.join(dirname, '../src'),
+      context: './src',
       extensions: ['tsx', 'ts'],
       failOnWarning: false,
       failOnError: false,
@@ -47,6 +50,7 @@ module.exports = (dirname) => ({
       overrideConfigFile: path.resolve(__dirname, '../eslint/eslintrc.dev.js'),
       lintDirtyModulesOnly: true,
     }),
+    new ReactRefreshWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './index.html'),
     }),
@@ -59,4 +63,4 @@ module.exports = (dirname) => ({
       failOnError: true,
     }),
   ],
-});
+};
