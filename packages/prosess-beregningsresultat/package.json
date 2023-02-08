@@ -10,7 +10,7 @@
     "@navikt/fp-types": "1.0.0",
     "@navikt/fp-types-avklar-aksjonspunkter": "1.0.0",
     "@navikt/ds-react": "2.1.5",
-    "@navikt/ft-form-hooks": "3.2.13",
+    "@navikt/ft-form-hooks": "3.3.0",
     "@navikt/ft-form-validators": "1.0.48",
     "@navikt/ft-kodeverk": "^1.0.25",
     "@navikt/ft-types": "^1.1.0",
