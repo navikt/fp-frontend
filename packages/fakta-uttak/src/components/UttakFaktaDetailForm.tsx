@@ -134,8 +134,11 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
+  const defaultValues = useMemo(() => (valgtPeriode ? lagDefaultVerdier(valgtPeriode, arbeidsgiverOpplysningerPerId) : undefined),
+    [valgtPeriode, arbeidsgiverOpplysningerPerId]);
+
   const formMethods = useForm<FormValues>({
-    defaultValues: valgtPeriode ? lagDefaultVerdier(valgtPeriode, arbeidsgiverOpplysningerPerId) : undefined,
+    defaultValues,
   });
 
   const [visSletteDialog, settVisSletteDialog] = useState(false);
@@ -159,22 +162,26 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
   const begrunnelse = formMethods.watch('begrunnelse');
 
   useEffect(() => {
-    formMethods.unregister('uttakPeriodeType');
-    formMethods.unregister('overføringÅrsak');
-    formMethods.unregister('oppholdÅrsak');
-    formMethods.unregister('utsettelseÅrsak');
-    formMethods.unregister('arbeidstidsprosent');
-    formMethods.unregister('utsettelseÅrsak');
-    formMethods.unregister('arbeidsgiverId');
-    formMethods.unregister('samtidigUttaksprosent');
-    formMethods.unregister('morsAktivitet');
-    formMethods.unregister('flerbarnsdager');
+    if (defaultValues?.arsakstype !== årsakstype) {
+      formMethods.unregister('uttakPeriodeType');
+      formMethods.unregister('overføringÅrsak');
+      formMethods.unregister('oppholdÅrsak');
+      formMethods.unregister('utsettelseÅrsak');
+      formMethods.unregister('arbeidstidsprosent');
+      formMethods.unregister('utsettelseÅrsak');
+      formMethods.unregister('arbeidsgiverId');
+      formMethods.unregister('samtidigUttaksprosent');
+      formMethods.unregister('morsAktivitet');
+      formMethods.unregister('flerbarnsdager');
+    }
   }, [årsakstype]);
 
   const onSubmit = useCallback((values) => oppdaterPeriode(transformValues(values)), [oppdaterPeriode]);
 
-  const visMorsAktivitet = årsakstype !== Årsakstype.OPPHOLD && fagsak.relasjonsRolleType === RelasjonsRolleType.MOR
+  const erUttakOgFellesperiodeEllerForeldrepenger = årsakstype === Årsakstype.UTTAK
     && (stønadskonto === StonadskontoType.FELLESPERIODE || stønadskonto === StonadskontoType.FORELDREPENGER);
+  const visMorsAktivitet = fagsak.relasjonsRolleType !== RelasjonsRolleType.MOR
+    && (erUttakOgFellesperiodeEllerForeldrepenger || årsakstype === Årsakstype.UTSETTELSE);
 
   return (
     <>

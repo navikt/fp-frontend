@@ -39,6 +39,7 @@ const Template: Story<{
   readOnly?: boolean;
   submittable?: boolean;
   kanOverstyre?: boolean;
+  fagsak: Fagsak;
 }> = ({
   aksjonspunkter,
   uttakKontrollerFaktaPerioder,
@@ -47,9 +48,10 @@ const Template: Story<{
   readOnly = false,
   submittable = true,
   kanOverstyre = false,
+  fagsak = { relasjonsRolleType: RelasjonsRolleType.MOR } as Fagsak,
 }) => (
   <UttakFaktaIndex
-    fagsak={{ relasjonsRolleType: RelasjonsRolleType.MOR } as Fagsak}
+    fagsak={fagsak}
     aksjonspunkter={aksjonspunkter}
     ytelsefordeling={ytelsefordeling}
     uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioder}
@@ -400,8 +402,8 @@ VisBegrunnelseFraTidligereUtgaveAvPanel.args = {
   readOnly: true,
 };
 
-export const SN = Template.bind({});
-SN.args = {
+export const VisUttaksperiodeMedAksjonspunktForFar = Template.bind({});
+VisUttaksperiodeMedAksjonspunktForFar.args = {
   aksjonspunkter: [{
     definisjon: AksjonspunktCode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
     status: aksjonspunktStatus.OPPRETTET,
@@ -421,16 +423,39 @@ SN.args = {
   uttakKontrollerFaktaPerioder: [{
     fom: '2022-11-12',
     tom: '2022-12-01',
-    uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+    uttakPeriodeType: uttakPeriodeType.FELLESPERIODE,
     arbeidstidsprosent: 10,
     arbeidsforhold: {
-      arbeidType: 'SELVSTENDIG_NÆRINGSDRIVENDE',
-      arbeidsgiverReferanse: 'null',
+      arbeidsgiverReferanse: '910909088',
+      arbeidType: 'ORDINÆRT_ARBEID',
     },
     samtidigUttaksprosent: 80,
     flerbarnsdager: true,
     periodeKilde: 'SØKNAD',
+  }, {
+    fom: '2022-12-02',
+    tom: '2022-12-10',
+    uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+    arbeidstidsprosent: 50,
+    arbeidsforhold: {
+      arbeidsgiverReferanse: '910909088',
+      arbeidType: 'ORDINÆRT_ARBEID',
+    },
+    flerbarnsdager: false,
+    periodeKilde: 'SØKNAD',
+  }, {
+    fom: '2022-12-11',
+    tom: '2022-12-20',
+    uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
+    arbeidstidsprosent: 50,
+    arbeidsforhold: {
+      arbeidsgiverReferanse: '910909088',
+      arbeidType: 'ORDINÆRT_ARBEID',
+    },
+    flerbarnsdager: false,
+    periodeKilde: 'SØKNAD',
   }],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   kanOverstyre: false,
+  fagsak: { relasjonsRolleType: RelasjonsRolleType.FAR } as Fagsak,
 };
