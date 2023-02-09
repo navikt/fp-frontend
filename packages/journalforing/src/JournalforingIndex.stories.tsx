@@ -33,7 +33,7 @@ const detaljertJournalpostMal = {
       dokumentId: '999999999',
       tittel: 'Inntektsmelding',
       varianter: [],
-      lenke: '',
+      lenke: 'https://www.nav.no/_/attachment/download/908d2237-ad83-4c48-9a72-fa514df43cb4:17f5d05361a62d5f86bdd14d116aa7de94543cd6/01-22-Komplett-Arbeid_og_velferd.pdf',
     },
     {
       dokumentId: '999999998',
@@ -94,7 +94,7 @@ ViseOppgaverIListe.args = {
       id: 600,
       journalpostId: '12345125',
       aktørId: '9996923456799',
-      fødselsnummer: '11119047182',
+      fødselsnummer: '12048714373',
       opprettetDato: '2022-01-01',
       frist: '2022-02-01',
       ytelseType: 'FP',
