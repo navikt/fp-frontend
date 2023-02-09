@@ -10,7 +10,7 @@ const xTimestamp = 'x-Timestamp';
 const stripTrailingSlash = (str) => (str.endsWith('/') ? str.slice(0, -1) : str);
 
 const proxyOptions = (api) => ({
-  timeout: 10000,
+  timeout: 60000,
   proxyReqOptDecorator: (options, req) => {
     const requestTime = Date.now();
     options.headers[xTimestamp] = requestTime;
