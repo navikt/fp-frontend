@@ -82,6 +82,10 @@ const validerPerioder = (
     return intl.formatMessage({ id: 'UttakFaktaDetailForm.ErIkkeLikForsteUttaksdato' }, { dato: dayjs(førsteUttaksdato).format(DDMMYYYY_DATE_FORMAT) });
   }
 
+  if (uttakPerioder.some((up) => dayjs(up.fom).isBefore(førsteUttaksdato))) {
+    return intl.formatMessage({ id: 'UttakFaktaDetailForm.ErFørFørsteUttaktsdato' }, { dato: dayjs(førsteUttaksdato).format(DDMMYYYY_DATE_FORMAT) });
+  }
+
   const harApIngenPerioder = aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE);
 
   return uttakPerioder.every((a) => a.aksjonspunktType === undefined)
@@ -173,9 +177,12 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
     return null;
   }, [uttakPerioder, isDirty, formMethods.formState.isDirty]);
 
+  const [visNyPeriode, settVisNyPeriode] = useState(false);
+
   const isSubmittable = submittable
     && feilmelding === null
     && !!begrunnelse
+    && !visNyPeriode
     && valgteFomDatoer.length === 0;
 
   const [erOverstyrt, setOverstyrt] = useState(false);
@@ -236,6 +243,8 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
         erRedigerbart={erRedigerbart}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         faktaArbeidsforhold={faktaArbeidsforhold}
+        visNyPeriode={visNyPeriode}
+        settVisNyPeriode={settVisNyPeriode}
       />
       <VerticalSpacer sixteenPx />
       <VerticalSpacer sixteenPx />

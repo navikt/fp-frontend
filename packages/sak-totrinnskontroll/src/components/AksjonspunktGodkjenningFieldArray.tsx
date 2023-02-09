@@ -91,21 +91,19 @@ const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
                 {skjermlenkeTypeKodeverk.navn}
               </NavLink>
             )}
+            {aksjonspunktText.map((formattedMessage, i) => (
+              <div key={aksjonspunktKode.concat('_'.concat(i.toString()))} className={styles.aksjonspunktTextContainer}>
+                <BodyShort size="small">
+                  {formattedMessage}
+                </BodyShort>
+              </div>
+            ))}
             <GodkjenningPanel
               index={index}
               totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
               readOnly={readOnly}
             />
-            <div className={styles.approvalItemContainer}>
-              {aksjonspunktText.map((formattedMessage, i) => (
-                <div key={aksjonspunktKode.concat('_'.concat(i.toString()))} className={styles.aksjonspunktTextContainer}>
-                  <BodyShort size="small">
-                    {formattedMessage}
-                  </BodyShort>
-                </div>
-              ))}
-              <VerticalSpacer sixteenPx />
-            </div>
+            <VerticalSpacer twentyPx />
           </div>
         );
       })}
