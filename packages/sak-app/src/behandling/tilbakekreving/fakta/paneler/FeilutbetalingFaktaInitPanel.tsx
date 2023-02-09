@@ -20,8 +20,8 @@ import '@navikt/ft-fakta-tilbakekreving-feilutbetaling/dist/style.css';
 const ProsessFeilutbetaling = React.lazy(() => import('@navikt/ft-fakta-tilbakekreving-feilutbetaling'));
 // eslint-disable-next-line import/no-unresolved
 const ProsessFeilutbetalingMF = process.env.NODE_ENV !== 'development' ? undefined
-  // eslint-disable-next-line import/no-unresolved
-  : () => import('ft_fakta_tilbakekreving_feilutbetaling/FeilutbetalingFaktaIndex');
+  // @ts-ignore
+  : () => import('ft_fakta_tilbakekreving_feilutbetaling/FeilutbetalingFaktaIndex'); // eslint-disable-line import/no-unresolved
 
 const ENDEPUNKTER_INIT_DATA = [
   TilbakekrevingBehandlingApiKeys.FEILUTBETALING_FAKTA,

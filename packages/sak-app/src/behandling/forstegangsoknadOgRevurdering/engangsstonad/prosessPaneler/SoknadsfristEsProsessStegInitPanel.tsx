@@ -4,8 +4,7 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import SoknadsfristVilkarProsessIndex from '@navikt/fp-prosess-vilkar-soknadsfrist';
-import { VilkarType } from '@navikt/fp-kodeverk';
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
   AksessRettigheter, FamilieHendelseSamling, Soknad,

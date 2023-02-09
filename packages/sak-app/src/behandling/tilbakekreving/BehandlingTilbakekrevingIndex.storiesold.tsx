@@ -255,8 +255,8 @@ const Template: Story<{
         behandlingEventHandler={BehandlingEventHandler}
         opneSokeside={() => undefined}
         setRequestPendingMessage={() => undefined}
-        // @ts-ignore
         kodeverk={alleKodeverk}
+        // @ts-ignore
         fagsakKjønn="K"
         harApenRevurdering={false}
       />

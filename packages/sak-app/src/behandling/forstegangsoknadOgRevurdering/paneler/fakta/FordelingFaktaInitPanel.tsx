@@ -80,8 +80,8 @@ const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): Beregningsgrunn
 };
 
 const ProsessFordelingMF = process.env.NODE_ENV !== 'development' ? undefined
-  // eslint-disable-next-line import/no-unresolved
-  : () => import('ft_fakta_fordel_beregningsgrunnlag/FaktaFordelBeregningsgrunnlag');
+  // @ts-ignore
+  : () => import('ft_fakta_fordel_beregningsgrunnlag/FaktaFordelBeregningsgrunnlag'); // eslint-disable-line import/no-unresolved
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.FORDEL_BEREGNINGSGRUNNLAG, AksjonspunktCode.VURDER_REFUSJON_BERGRUNN];
 

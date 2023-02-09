@@ -26,8 +26,8 @@ import '@navikt/ft-prosess-tilbakekreving-vedtak/dist/style.css';
 const ProsessVedtak = React.lazy(() => import('@navikt/ft-prosess-tilbakekreving-vedtak'));
 // eslint-disable-next-line import/no-unresolved
 const ProsessVedtakMF = process.env.NODE_ENV !== 'development' ? undefined
-  // eslint-disable-next-line import/no-unresolved
-  : () => import('ft_prosess_tilbakekreving_vedtak/VedtakProsessIndex');
+  // @ts-ignore
+  : () => import('ft_prosess_tilbakekreving_vedtak/VedtakProsessIndex'); // eslint-disable-line import/no-unresolved
 
 const tilbakekrevingÅrsakTyperKlage = [
   BehandlingArsakType.RE_KLAGE_KA,

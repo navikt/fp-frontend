@@ -4,8 +4,7 @@ import React, {
 import { IntlShape, useIntl } from 'react-intl';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { VilkarType } from '@navikt/fp-kodeverk';
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import ForeldreansvarVilkarProsessIndex from '@navikt/fp-prosess-vilkar-foreldreansvar';
 import { Aksjonspunkt } from '@navikt/fp-types';
 

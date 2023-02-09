@@ -92,7 +92,29 @@ const config = {
               },
             },
           }],
-        include: [CORE_DIR, PACKAGES_DIR],
+        include: [CORE_DIR],
+      }, {
+        test: /\.(css)?$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: isDevelopment ? './' : '',
+            },
+          }, {
+            loader: 'css-loader',
+          }, {
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                modifyVars: {
+                  nodeModulesPath: '~',
+                  coreModulePath: '~',
+                },
+              },
+            },
+          }],
+        include: [PACKAGES_DIR],
         exclude: [APP_DIR],
       }, {
         test: /\.(svg)$/,
@@ -107,7 +129,7 @@ const config = {
         issuer: /\.(tsx)?$/,
         use: [{
           loader: '@svgr/webpack',
-        },{
+        }, {
           loader: 'file-loader',
           options: {
             esModule: false,
@@ -116,7 +138,7 @@ const config = {
         }],
         include: [APP_DIR],
         type: 'javascript/auto',
-      },{
+      }, {
         test: /\.(svg)$/,
         type: 'asset/resource',
         generator: {

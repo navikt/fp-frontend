@@ -21,8 +21,8 @@ import '@navikt/ft-prosess-beregningsgrunnlag/dist/style.css';
 const ProsessBeregningsgrunnlag = React.lazy(() => import('@navikt/ft-prosess-beregningsgrunnlag'));
 // eslint-disable-next-line import/no-unresolved
 const ProsessBeregningsgrunnlagMF = process.env.NODE_ENV !== 'development' ? undefined
-  // eslint-disable-next-line import/no-unresolved
-  : () => import('ft_prosess_beregningsgrunnlag/ProsessBeregningsgrunnlag');
+  // @ts-ignore
+  : () => import('ft_prosess_beregningsgrunnlag/ProsessBeregningsgrunnlag'); // eslint-disable-line import/no-unresolved
 
 const mapBGKodeTilFpsakKode = (bgKode: string): string => {
   switch (bgKode) {

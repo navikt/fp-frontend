@@ -11,13 +11,6 @@ import SettPaVentModalIndex from '@navikt/fp-modal-sett-pa-vent';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { BehandlingFellesApiKeys } from '../../data/behandlingFellesApi';
 
-export type SettPaVentParams = {
-  ventearsak: string;
-  frist?: string;
-  behandlingUuid: string;
-  behandlingVersjon: number;
-}
-
 interface BehandlingPaVentProps {
   behandling: Behandling;
   kodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;

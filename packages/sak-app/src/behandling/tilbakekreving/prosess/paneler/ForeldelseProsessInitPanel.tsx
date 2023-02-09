@@ -19,8 +19,8 @@ import '@navikt/ft-prosess-tilbakekreving-foreldelse/dist/style.css';
 const ProsessForeldelse = React.lazy(() => import('@navikt/ft-prosess-tilbakekreving-foreldelse'));
 // eslint-disable-next-line import/no-unresolved
 const ProsessForeldelseMF = process.env.NODE_ENV !== 'development' ? undefined
-  // eslint-disable-next-line import/no-unresolved
-  : () => import('ft_prosess_tilbakekreving_foreldelse/ForeldelseProsessIndex');
+  // @ts-ignore
+  : () => import('ft_prosess_tilbakekreving_foreldelse/ForeldelseProsessIndex'); // eslint-disable-line import/no-unresolved
 
 interface OwnProps {
   behandling: Behandling;

@@ -4,8 +4,7 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { VilkarType, fagsakYtelseType } from '@navikt/fp-kodeverk';
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, VilkarType, fagsakYtelseType } from '@navikt/fp-kodeverk';
 import FodselVilkarProsessIndex from '@navikt/fp-prosess-vilkar-fodsel';
 import { AksessRettigheter } from '@navikt/fp-types';
 
@@ -46,7 +45,7 @@ const FodselInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvilkar
           {data.aksjonspunkter.length === 0 && (
             <OverstyringPanelDef
               aksjonspunkter={data.aksjonspunkter}
-              aksjonspunktKode={aksjonspunktCodes.OVERSTYR_FODSELSVILKAR}
+              aksjonspunktKode={AksjonspunktCode.OVERSTYR_FODSELSVILKAR}
               vilkar={data.vilkar}
               vilkarKoder={VILKAR_KODER}
               panelTekstKode="Inngangsvilkar.Fodselsvilkaret"

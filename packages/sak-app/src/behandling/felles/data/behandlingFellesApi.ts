@@ -9,7 +9,7 @@ import {
   Medlemskap, Opptjening, Personoversikt, SimuleringResultat, Soknad, TilbakekrevingValg, Verge, Ytelsefordeling,
 } from '@navikt/fp-types';
 
-import { SettPaVentParams } from '../modaler/paVent/BehandlingPaVent';
+import SettPaVentParams from '../typer/settPaVentParams';
 
 type NyBehandlendeEnhet = {
   behandlingUuid: string,

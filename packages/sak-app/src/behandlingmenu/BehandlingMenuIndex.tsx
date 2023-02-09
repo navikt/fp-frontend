@@ -29,9 +29,9 @@ import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 import useGetEnabledApplikasjonContext from '../app/useGetEnabledApplikasjonContext';
 import ApplicationContextPath from '../app/ApplicationContextPath';
 import MenyKodeverk from './MenyKodeverk';
+import FagsakData from '../fagsak/FagsakData';
 
 import '@navikt/ft-sak-meny/dist/style.css';
-import FagsakData from '../fagsak/FagsakData';
 
 const BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES = [
   BehandlingType.FORSTEGANGSSOKNAD,

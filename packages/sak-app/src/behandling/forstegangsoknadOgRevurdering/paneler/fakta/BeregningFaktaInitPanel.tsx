@@ -25,8 +25,8 @@ import '@navikt/ft-fakta-beregning/dist/style.css';
 const ProsessFaktaBeregning = React.lazy(() => import('@navikt/ft-fakta-beregning'));
 
 const ProsessFaktaBeregningMF = process.env.NODE_ENV !== 'development' ? undefined
-  // eslint-disable-next-line import/no-unresolved
-  : () => import('ft_fakta_beregning/FaktaBeregning');
+  // @ts-ignore
+  : () => import('ft_fakta_beregning/FaktaBeregning'); // eslint-disable-line import/no-unresolved
 
 const mapBGKodeTilFpsakKode = (bgKode: string): string => {
   switch (bgKode) {

@@ -45,7 +45,6 @@
     "@testing-library/user-event": "14.4.3"
   },
   "exports": {
-    ".": "./dist/index.js",
-    "./dist/style.css": "./dist/style.css"
+    ".": "./dist/index.js"
   }
 }

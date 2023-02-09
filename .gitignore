@@ -2,7 +2,7 @@
 /.nyc_output/
 /jest_cache/
 .env
-/coverage/
+coverage/
 *.iml
 *.log*
 node_modules

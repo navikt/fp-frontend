@@ -20,6 +20,8 @@ import Dekorator from './components/Dekorator';
 
 import messages from '../../i18n/nb_NO.json';
 
+import './global.less';
+
 import '@navikt/ds-css';
 
 import '@navikt/ft-ui-komponenter/dist/style.css';
@@ -28,11 +30,58 @@ import '@navikt/ft-plattform-komponenter/dist/style.css';
 import '@navikt/ft-tidslinje/dist/style.css';
 import '@navikt/ft-sak-infosider/dist/style.css';
 
-import '@navikt/fp-prosess-felles/dist/style.css';
-import '@navikt/fp-los-saksbehandler/dist/style.css';
-import '@navikt/fp-los-felles/dist/style.css';
+import '@navikt/fp-fakta-adopsjon/dist/style.css';
+import '@navikt/fp-fakta-aktivitetskrav/dist/style.css';
+import '@navikt/fp-fakta-arbeid-og-inntekt/dist/style.css';
+import '@navikt/fp-fakta-arbeidsforhold/dist/style.css';
+import '@navikt/fp-fakta-besteberegning/dist/style.css';
+import '@navikt/fp-fakta-felles/dist/style.css';
+import '@navikt/fp-fakta-fodsel/dist/style.css';
+import '@navikt/fp-fakta-fodsel-og-tilrettelegging/dist/style.css';
+import '@navikt/fp-fakta-medlemskap/dist/style.css';
+import '@navikt/fp-fakta-omsorg/dist/style.css';
+import '@navikt/fp-fakta-omsorg-og-foreldreansvar/dist/style.css';
+import '@navikt/fp-fakta-omsorg-og-rett/dist/style.css';
+import '@navikt/fp-fakta-opptjening/dist/style.css';
+import '@navikt/fp-fakta-saken/dist/style.css';
+import '@navikt/fp-fakta-uttak/dist/style.css';
+import '@navikt/fp-fakta-uttaksdokumentasjon/dist/style.css';
+import '@navikt/fp-fakta-verge/dist/style.css';
+import '@navikt/fp-fakta-ytelser/dist/style.css';
 
-import './global.less';
+import '@navikt/fp-journalforing/dist/style.css';
+import '@navikt/fp-los-avdelingsleder/dist/style.css';
+import '@navikt/fp-los-felles/dist/style.css';
+import '@navikt/fp-los-saksbehandler/dist/style.css';
+import '@navikt/fp-modal-sett-pa-vent/dist/style.css';
+import '@navikt/fp-papirsoknad/dist/style.css';
+import '@navikt/fp-papirsoknad-ui-komponenter/dist/style.css';
+
+import '@navikt/fp-prosess-avregning/dist/style.css';
+import '@navikt/fp-prosess-beregningsresultat/dist/style.css';
+import '@navikt/fp-prosess-fakta-fodsel-sammenligning/dist/style.css';
+import '@navikt/fp-prosess-felles/dist/style.css';
+import '@navikt/fp-prosess-formkrav/dist/style.css';
+import '@navikt/fp-prosess-innsyn/dist/style.css';
+import '@navikt/fp-prosess-klagevurdering/dist/style.css';
+import '@navikt/fp-prosess-soknadsfrist/dist/style.css';
+import '@navikt/fp-prosess-tilkjent-ytelse/dist/style.css';
+import '@navikt/fp-prosess-uttak/dist/style.css';
+import '@navikt/fp-prosess-varsel-om-revurdering/dist/style.css';
+import '@navikt/fp-prosess-vedtak/dist/style.css';
+import '@navikt/fp-prosess-vedtak-innsyn/dist/style.css';
+import '@navikt/fp-prosess-vedtak-klage/dist/style.css';
+import '@navikt/fp-prosess-vilkar-opptjening/dist/style.css';
+import '@navikt/fp-prosess-vilkar-overstyring/dist/style.css';
+import '@navikt/fp-prosess-vilkar-soknadsfrist/dist/style.css';
+
+import '@navikt/fp-sak-historikk/dist/style.css';
+import '@navikt/fp-sak-meldinger/dist/style.css';
+import '@navikt/fp-sak-meny-henlegg/dist/style.css';
+import '@navikt/fp-sak-meny-ny-behandling/dist/style.css';
+import '@navikt/fp-sak-sok/dist/style.css';
+import '@navikt/fp-sak-totrinnskontroll/dist/style.css';
+import '@navikt/fp-sak-ukjent-adresse/dist/style.css';
 
 const EMPTY_ARRAY = [] as any[];
 

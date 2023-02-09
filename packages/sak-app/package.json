@@ -5,8 +5,15 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "test": "jest --colors",
+    "test:coverage": "jest --coverage --colors",
+    "tsc": "tsc --pretty",
+    "eslint": "eslint \"src/**/*.ts*\"",
+    "eslint:fix": "eslint --fix \"src/**/*.ts*\"",
+    "less:lint": "stylelint \"src/**/*.less\"",
     "dev": "cross-env NODE_ENV=development webpack serve --config webpack_app/webpack.dev.js",
-    "builds": "cross-env NODE_ENV=production SENTRY_RELEASE=$(git rev-parse --short HEAD) webpack --config ../../webpack_app/webpack.prod.js"
+    "build": "cross-env NODE_ENV=production webpack --config webpack_app/webpack.prod.js",
+    "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
     "@formatjs/intl-datetimeformat": "6.4.3",
@@ -16,6 +23,7 @@
     "@navikt/fp-fakta-arbeidsforhold": "1.0.0",
     "@navikt/fp-fakta-arbeid-og-inntekt": "1.0.0",
     "@navikt/fp-fakta-besteberegning": "1.0.0",
+    "@navikt/fp-fakta-felles": "1.0.0",
     "@navikt/fp-fakta-fodsel": "1.0.0",
     "@navikt/fp-fakta-fodsel-og-tilrettelegging": "1.0.0",
     "@navikt/fp-fakta-medlemskap": "1.0.0",
@@ -38,11 +46,13 @@
     "@navikt/fp-los-saksbehandler": "1.0.0",
     "@navikt/fp-modal-sett-pa-vent": "1.0.0",
     "@navikt/fp-papirsoknad": "1.0.0",
+    "@navikt/fp-papirsoknad-ui-komponenter": "1.0.0",
     "@navikt/fp-prosess-anke": "1.0.0",
     "@navikt/fp-prosess-anke-resultat": "1.0.0",
     "@navikt/fp-prosess-anke-trygderettsbehandling": "1.0.0",
     "@navikt/fp-prosess-avregning": "1.0.0",
     "@navikt/fp-prosess-beregningsresultat": "1.0.0",
+    "@navikt/fp-prosess-fakta-fodsel-sammenligning": "1.0.0",
     "@navikt/fp-prosess-felles": "1.0.0",
     "@navikt/fp-prosess-formkrav": "1.0.0",
     "@navikt/fp-prosess-innsyn": "1.0.0",

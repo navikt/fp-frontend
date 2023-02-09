@@ -25,8 +25,8 @@ import '@navikt/ft-prosess-tilbakekreving/dist/style.css';
 const ProsessTilbakekreving = React.lazy(() => import('@navikt/ft-prosess-tilbakekreving'));
 // eslint-disable-next-line import/no-unresolved
 const ProsessTilbakekrveingMF = process.env.NODE_ENV !== 'development' ? undefined
-  // eslint-disable-next-line import/no-unresolved
-  : () => import('ft_prosess_tilbakekreving/TilbakekrevingProsessIndex');
+  // @ts-ignore
+  : () => import('ft_prosess_tilbakekreving/TilbakekrevingProsessIndex'); // eslint-disable-line import/no-unresolved
 
 const ENDEPUNKTER_PANEL_DATA = [
   TilbakekrevingBehandlingApiKeys.VILKARVURDERINGSPERIODER,

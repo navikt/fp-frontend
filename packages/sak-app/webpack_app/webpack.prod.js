@@ -9,7 +9,7 @@ const config = {
   devtool: 'source-map',
   performance: { hints: false },
   entry: [
-    path.resolve(path.resolve(__dirname, '../packages'), 'sak-app/src') + '/index.ts',
+    path.resolve(path.join(__dirname, '../src/index.ts')),
   ],
   output: {
     filename: '[name]-[contenthash].js',

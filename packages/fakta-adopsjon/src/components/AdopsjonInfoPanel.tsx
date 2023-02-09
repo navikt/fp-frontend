@@ -146,7 +146,6 @@ const AdopsjonInfoPanel: FunctionComponent<OwnProps> = ({
         setDataOnUnmount={setFormData}
       >
         <VerticalSpacer eightPx />
-        te
         <FlexContainer>
           <FlexRow wrap>
             <FlexColumn className={styles.leftCol}>

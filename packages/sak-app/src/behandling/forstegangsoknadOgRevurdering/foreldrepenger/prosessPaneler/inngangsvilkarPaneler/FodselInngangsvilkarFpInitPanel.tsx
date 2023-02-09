@@ -46,8 +46,8 @@ const FodselInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangsvilk
           {data.aksjonspunkter.length === 0 && (
             <OverstyringPanelDef
               aksjonspunkter={data.aksjonspunkter}
-              aksjonspunktKode={data.vilkar.some((v) => v.vilkarType === vilkarType.FODSELSVILKARET_MOR)
-                ? aksjonspunktCodes.OVERSTYR_FODSELSVILKAR : aksjonspunktCodes.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR}
+              aksjonspunktKode={data.vilkar.some((v) => v.vilkarType === VilkarType.FODSELSVILKARET_MOR)
+                ? AksjonspunktCode.OVERSTYR_FODSELSVILKAR : AksjonspunktCode.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR}
               vilkar={data.vilkar}
               vilkarKoder={VILKAR_KODER}
               panelTekstKode="Inngangsvilkar.Fodselsvilkaret"
