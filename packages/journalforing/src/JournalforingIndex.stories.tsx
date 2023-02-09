@@ -33,7 +33,7 @@ const detaljertJournalpostMal = {
       dokumentId: '999999999',
       tittel: 'Inntektsmelding',
       varianter: [],
-      lenke: 'https://www.nav.no/_/attachment/download/908d2237-ad83-4c48-9a72-fa514df43cb4:17f5d05361a62d5f86bdd14d116aa7de94543cd6/01-22-Komplett-Arbeid_og_velferd.pdf',
+      lenke: '',
     },
     {
       dokumentId: '999999998',
