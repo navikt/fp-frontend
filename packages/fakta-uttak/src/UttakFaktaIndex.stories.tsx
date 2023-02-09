@@ -457,5 +457,5 @@ VisUttaksperiodeMedAksjonspunktForFar.args = {
   }],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   kanOverstyre: false,
-  fagsak: { relasjonsRolleType: RelasjonsRolleType.FAR } as Fagsak,
+  fagsak: { relasjonsRolleType: 'FAR' } as Fagsak,
 };
