@@ -277,13 +277,20 @@ describe('<UttakFaktaIndex>', () => {
 
     await userEvent.click(screen.getByText('Uttak'));
 
-    /* expect(await utils.findByLabelText('Arbeidsgiver')).toBeInTheDocument();
-    expect(utils.getByLabelText('Stønadskonto')).toBeInTheDocument();
-    expect(utils.getByLabelText('Gradering %')).toBeInTheDocument();
+    expect(await utils.findByLabelText('Gradering')).toBeInTheDocument();
     expect(utils.getByLabelText('Samtidig uttaksprosent')).toBeInTheDocument();
-    expect(utils.getByLabelText('Mors aktivitet')).toBeInTheDocument();
+    expect(utils.getByLabelText('Stønadskonto')).toBeInTheDocument();
+    expect(utils.queryByLabelText('Gradering %')).not.toBeInTheDocument();
+    expect(utils.queryByLabelText('Mors aktivitet')).not.toBeInTheDocument();
     expect(utils.getByLabelText('Flerbarnsdager')).toBeInTheDocument();
     expect(utils.queryByLabelText('Årsak')).not.toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Gradering'));
+    expect(await utils.findByLabelText('Gradering %')).toBeInTheDocument();
+    expect(utils.getByLabelText('Arbeidsgiver')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Samtidig uttaksprosent'));
+    expect(await utils.findAllByLabelText('Samtidig uttaksprosent')).toHaveLength(2);
 
     await userEvent.click(screen.getByText('Opphold'));
 
@@ -294,11 +301,9 @@ describe('<UttakFaktaIndex>', () => {
     expect(utils.queryByLabelText('Arbeidsgiver')).not.toBeInTheDocument();
     expect(utils.queryByLabelText('Samtidig uttaksprosent')).not.toBeInTheDocument();
     expect(utils.queryByLabelText('Flerbarnsdager')).not.toBeInTheDocument();
-    */
   });
 
-  // TODO Mogleg denne kan slettast
-  it.skip('skal vise periode der aksjonspunkt er løst og behandlingen er avsluttet', async () => {
+  it('skal vise periode der aksjonspunkt er løst og behandlingen er avsluttet', async () => {
     render(<VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet />);
 
     expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
