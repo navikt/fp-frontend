@@ -50,7 +50,7 @@ const detaljertJournalpostMal = {
   ],
   fagsaker: [
     {
-      saksnummer: '18961347',
+      saksnummer: '2981467164',
       ytelseType: fagsakYtelseType.FORELDREPENGER,
       datoOpprettet: '2022-01-02',
       sistEndret: '2022-06-03',
