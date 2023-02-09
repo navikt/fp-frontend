@@ -94,7 +94,7 @@ ViseOppgaverIListe.args = {
       id: 600,
       journalpostId: '12345125',
       aktørId: '9996923456799',
-      fødselsnummer: '11119047182',
+      fødselsnummer: '12048714373',
       opprettetDato: '2022-01-01',
       frist: '2022-02-01',
       ytelseType: 'FP',
