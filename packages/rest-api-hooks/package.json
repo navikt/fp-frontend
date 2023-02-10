@@ -12,12 +12,11 @@
     "package.json"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "jest --colors",
     "test:coverage": "jest --coverage --colors",
     "tsc": "tsc --pretty",
     "eslint": "eslint \"src/**/*.ts*\"",
     "eslint:fix": "eslint --fix \"src/**/*.ts*\"",
-    "less:lint": "stylelint \"src/**/*.less\"",
     "dev": "cross-env node dev/webpack.dev.js",
     "build-webpack": "cross-env webpack --config webpack.config.js",
     "build-ts-declarations": "tsc index.ts ../../@types/externals.d.ts --declaration --emitDeclarationOnly --downlevelIteration --resolveJsonModule --jsx react --outDir dist --declarationMap --esModuleInterop --skipLibCheck",

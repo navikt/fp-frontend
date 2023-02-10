@@ -10,9 +10,14 @@ const nodeExternals = require('webpack-node-externals');
 module.exports = {
   mode: 'development',
   devtool: 'eval-cheap-module-source-map',
+  entry: './index.ts',
   output: {
     publicPath: 'auto',
     filename: 'index.js',
+  },
+  watch: true,
+  watchOptions: {
+    poll: 1000, // Check for changes every second
   },
   module: {
     rules: [

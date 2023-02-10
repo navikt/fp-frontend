@@ -5,8 +5,7 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { BehandlingType } from '@navikt/ft-kodeverk';
 
 import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
-import { alleKodeverkLos } from '@navikt/fp-storybook-utils';
-import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
+import { getIntlDecorator, alleKodeverkLos } from '@navikt/fp-storybook-utils';
 
 import OppgaverSomErApneEllerPaVentPanel from './OppgaverSomErApneEllerPaVentPanel';
 import OppgaverSomErApneEllerPaVent from '../../../typer/oppgaverSomErApneEllerPaVentTsType';

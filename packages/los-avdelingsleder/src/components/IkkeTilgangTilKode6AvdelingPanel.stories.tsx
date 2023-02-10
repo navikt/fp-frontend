@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
+import { getIntlDecorator }from '@navikt/fp-storybook-utils';
 
 import IkkeTilgangTilKode6AvdelingPanel from './IkkeTilgangTilKode6AvdelingPanel';
 

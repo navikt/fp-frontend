@@ -1,4 +1,10 @@
 module.exports = {
+  coverageDirectory: '<rootDir>/coverage/',
+  coverageReporters: [
+    'text',
+    'lcov',
+    'html',
+  ],
   transform: {
     '^.+\\.(ts|tsx|js)?$': 'babel-jest',
   },

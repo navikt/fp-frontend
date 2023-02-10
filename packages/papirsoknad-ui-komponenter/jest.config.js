@@ -6,6 +6,10 @@ module.exports = {
   moduleNameMapper: {
     '\\.(svg)$': '<rootDir>/../../jest-config/fileMock.js',
   },
+  setupFiles: [
+    '<rootDir>/../../jest-config/setup.js',
+    'jest-canvas-mock',
+  ],
   setupFilesAfterEnv: [
     '<rootDir>/../../jest-config/setup-test.js',
   ],

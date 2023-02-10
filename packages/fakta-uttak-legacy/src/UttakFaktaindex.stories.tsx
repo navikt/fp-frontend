@@ -26,7 +26,6 @@ import UttakFaktaIndex from './UttakFaktaIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
-import '@navikt/ft-form-hooks/dist/style.css';
 
 const arbeidsgiverOpplysningerPerId = {
   910909088: {

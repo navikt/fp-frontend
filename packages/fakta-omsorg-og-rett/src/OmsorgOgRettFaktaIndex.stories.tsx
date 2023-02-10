@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import {
   Behandling, KjønnkodeEnum, Personoversikt, Ytelsefordeling,
 } from '@navikt/fp-types';
-import { sivilstandType, OpplysningAdresseType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { sivilstandType, opplysningAdresseType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { Aksjonspunkt } from '@navikt/ft-types';
@@ -22,7 +22,7 @@ export default {
 };
 
 const adresser = [{
-  adresseType: OpplysningAdresseType.BOSTEDSADRESSE,
+  adresseType: opplysningAdresseType.BOSTEDSADRESSE,
   adresselinje1: 'Veigata 1',
   adresselinje2: 'Oddelandet',
   adresselinje3: 'Leilighet 2',

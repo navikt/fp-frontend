@@ -12,7 +12,7 @@
     "package.json"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "jest --colors",
     "test:coverage": "jest --coverage --colors",
     "tsc": "tsc --pretty",
     "eslint": "eslint \"src/**/*.ts*\"",

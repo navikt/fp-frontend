@@ -3,7 +3,7 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 
 import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
-import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
+import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import LeggTilSaksbehandlerForm from './LeggTilSaksbehandlerForm';
 import { RestApiPathsKeys, requestApi } from '../../data/fplosRestApi';

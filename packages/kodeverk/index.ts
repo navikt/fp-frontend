@@ -1,6 +1,7 @@
 export {
-  default as AksjonspunktCode, hasAksjonspunkt, isUttakAksjonspunkt, isVilkarForSykdomOppfylt, OverstyringAksjonspunkter,
+  default as AksjonspunktCode, hasAksjonspunkt, isUttakAksjonspunkt, isVilkarForSykdomOppfylt,
 } from './src/aksjonspunktCodes';
+export type { OverstyringAksjonspunkter } from './src/aksjonspunktCodes';
 export { default as AksjonspunktCodeTilbakekreving } from './src/aksjonspunktCodesTilbakekreving';
 export { default as aksjonspunktStatus } from './src/aksjonspunktStatus';
 export { default as aksjonspunktType } from './src/aksjonspunktType';

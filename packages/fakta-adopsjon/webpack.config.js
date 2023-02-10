@@ -10,7 +10,6 @@ const SRC_DIR = path.resolve(__dirname, './src');
 const config = (env) => {
   const prodOrDevConfig = env.watch === 'true' ? devConfig : prodConfig;
   return {
-    entry: './index.ts',
     output: {
       path: path.resolve(__dirname, 'dist'),
       library: {

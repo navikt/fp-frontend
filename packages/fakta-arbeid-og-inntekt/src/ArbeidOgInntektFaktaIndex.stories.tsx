@@ -6,7 +6,7 @@ import {
   Aksjonspunkt, AksjonspunktÅrsak, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, Behandling,
 } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { AksjonspunktCode, aksjonspunktStatus, arbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, aksjonspunktStatus, ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import ArbeidOgInntektFaktaIndex from './ArbeidOgInntektFaktaIndex';
 

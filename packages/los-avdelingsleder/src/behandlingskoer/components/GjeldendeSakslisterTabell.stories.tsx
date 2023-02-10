@@ -3,8 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
-import { alleKodeverkLos } from '@navikt/fp-storybook-utils';
-import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
+import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, requestApi } from '../../data/fplosRestApi';
 import Saksliste from '../../typer/sakslisteAvdelingTsType';

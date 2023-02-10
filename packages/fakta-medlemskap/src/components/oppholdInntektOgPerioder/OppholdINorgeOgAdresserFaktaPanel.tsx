@@ -7,6 +7,7 @@ import {
   PeriodLabel, VerticalSpacer, FaktaGruppe, Image, FlexContainer, FlexRow, FlexColumn,
 } from '@navikt/ft-ui-komponenter';
 import { Aksjonspunkt, AlleKodeverk } from '@navikt/ft-types';
+import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 import { KodeverkType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import {
@@ -18,7 +19,6 @@ import avslaattImage from '../../images/avslaatt.svg';
 import MedlemskapBostedSokerView from './MedlemskapBostedSokerView';
 
 import styles from './oppholdINorgeOgAdresserFaktaPanel.less';
-import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 const capitalizeFirstLetter = (landNavn: string): string => {
   const string = landNavn.toLowerCase();
