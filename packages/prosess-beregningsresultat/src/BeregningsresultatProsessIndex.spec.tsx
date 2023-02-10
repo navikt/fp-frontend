@@ -12,7 +12,7 @@ describe('<BeregningsresultatProsessIndex>', () => {
 
     expect(await screen.findByText('Beregning')).toBeInTheDocument();
     expect(screen.getByText('Sats')).toBeInTheDocument();
-    expect(screen.getAllByText('100 kr')).toHaveLength(2);
+    expect(screen.getAllByText('92 000 kr')).toHaveLength(2);
     expect(screen.getByText('Antall barn')).toBeInTheDocument();
     expect(screen.getByText('1')).toBeInTheDocument();
     expect(screen.getByText('Beregnet engangsstønad')).toBeInTheDocument();
@@ -52,7 +52,7 @@ describe('<BeregningsresultatProsessIndex>', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
-      beregnetTilkjentYtelse: 100,
+      beregnetTilkjentYtelse: 92000,
       kode: '6007',
     });
   });

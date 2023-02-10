@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
+import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import FlyttReservasjonModal from './FlyttReservasjonModal';

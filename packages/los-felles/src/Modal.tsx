@@ -18,7 +18,7 @@ interface OwnProps {
  */
 const Modal: FunctionComponent<OwnProps> = ({ children, ...otherProps }) => {
   if (NavModal.setAppElement) {
-    NavModal.setAppElement(process.env.NODE_ENV !== 'test' ? 'div#app' : 'div');
+    NavModal.setAppElement(process.env.NODE_ENV === 'production' ? 'div#app' : 'div');
   }
 
   return (

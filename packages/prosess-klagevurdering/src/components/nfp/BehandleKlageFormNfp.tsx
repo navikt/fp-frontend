@@ -12,8 +12,8 @@ import {
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { KlageVurdering, AlleKodeverk, KlageVurderingResultat } from '@navikt/fp-types';
 import { KlageVurderingResultatAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import KlageFormType from '@navikt/fp-prosess-klagevurdering/src/types/klageFormType';
 
+import KlageFormType from '../../types/klageFormType';
 import KlageVurderingRadioOptionsNfp from './KlageVurderingRadioOptionsNfp';
 import FritekstBrevTextField from './FritekstKlageBrevTextField';
 import PreviewKlageLink, { BrevData } from './PreviewKlageLink';

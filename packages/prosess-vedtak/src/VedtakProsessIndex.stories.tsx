@@ -537,7 +537,7 @@ AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeErOppfylt.args 
   } as Beregningsgrunnlag,
   vilkar: [{
     lovReferanse: '§§Dette er en lovreferanse',
-    vilkarType: vilkarType.SOKNADFRISTVILKARET,
+    vilkarType: VilkarType.SOKNADFRISTVILKARET,
     vilkarStatus: vilkarUtfallType.IKKE_OPPFYLT,
     overstyrbar: true,
   }],

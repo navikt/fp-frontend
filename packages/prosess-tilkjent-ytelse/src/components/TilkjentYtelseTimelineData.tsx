@@ -11,11 +11,13 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { TimeLineButton, TimeLineDataContainer } from '@navikt/ft-tidslinje';
-import { ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriodeAndel, AlleKodeverk } from '@navikt/fp-types';
-
-import { PeriodeMedId } from './TilkjentYtelse';
+import {
+  ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriodeAndel, AlleKodeverk, BeregningsresultatPeriode,
+} from '@navikt/fp-types';
 
 import styles from './tilkjentYtelse.less';
+
+export type PeriodeMedId = BeregningsresultatPeriode & { id: number };
 
 const getEndCharFromId = (id: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 

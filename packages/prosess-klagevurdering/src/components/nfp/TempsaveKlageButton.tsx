@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Button } from '@navikt/ds-react';
 
 import { klageVurdering as klageVurderingType } from '@navikt/fp-kodeverk';
-import KlageFormType from '@navikt/fp-prosess-klagevurdering/src/types/klageFormType';
+import KlageFormType from '../../types/klageFormType';
 
 type FormValues = {
   klageVurdering?: string;

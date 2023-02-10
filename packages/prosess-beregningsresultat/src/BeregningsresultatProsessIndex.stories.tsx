@@ -15,9 +15,9 @@ const behandling = {
 } as Behandling;
 
 const beregningsresultat = {
-  beregnetTilkjentYtelse: 100,
+  beregnetTilkjentYtelse: 92000,
   antallBarn: 1,
-  satsVerdi: 100,
+  satsVerdi: 92000,
 };
 
 const defaultAksjonspunkter = [{

@@ -7,16 +7,12 @@ import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { uttakPeriodeNavn, StonadskontoType } from '@navikt/fp-kodeverk';
-import {
-  ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriode, AlleKodeverk, Kjønnkode,
-} from '@navikt/fp-types';
+import { ArbeidsgiverOpplysningerPerId, AlleKodeverk, Kjønnkode } from '@navikt/fp-types';
 import { Timeline, TimeLineControl, TimeLineSokerEnsamSoker } from '@navikt/ft-tidslinje';
 
-import TilkjentYtelseTimelineData from './TilkjentYtelseTimelineData';
+import TilkjentYtelseTimelineData, { PeriodeMedId } from './TilkjentYtelseTimelineData';
 
 import styles from './tilkjentYtelse.less';
-
-export type PeriodeMedId = BeregningsresultatPeriode & { id: number };
 
 type NyPeriode = {
   className: string;

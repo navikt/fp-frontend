@@ -5,7 +5,7 @@ import { Label } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
 import {
-  VilkarType, AksjonspunktCode, KodeverkType, vilkarUtfallType, aksjonspunktStatus ,
+  VilkarType, AksjonspunktCode, KodeverkType, vilkarUtfallType, aksjonspunktStatus,
 } from '@navikt/fp-kodeverk';
 import {
   VilkarResultPicker, ProsessStegBegrunnelseTextFieldNew, ProsessPanelTemplate, validerApKodeOgHentApEnum,

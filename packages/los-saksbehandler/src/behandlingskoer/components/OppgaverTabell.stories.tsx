@@ -4,8 +4,7 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
-import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
-import { alleKodeverkLos } from '@navikt/fp-storybook-utils';
+import { getIntlDecorator, alleKodeverkLos } from '@navikt/fp-storybook-utils';
 import { Oppgave } from '@navikt/fp-los-felles';
 
 import OppgaverTabell from './OppgaverTabell';

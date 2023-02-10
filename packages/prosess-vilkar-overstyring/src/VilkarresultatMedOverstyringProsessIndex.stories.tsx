@@ -85,7 +85,7 @@ export const OverstyringspanelForFødsel = Template.bind({});
 OverstyringspanelForFødsel.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   panelTittelKode: 'Inngangsvilkar.Fodselsvilkaret',
-  overstyringApKode: aksjonspunktCode.OVERSTYR_FODSELSVILKAR,
+  overstyringApKode: AksjonspunktCode.OVERSTYR_FODSELSVILKAR,
   erMedlemskapsPanel: false,
 };
 
@@ -93,7 +93,7 @@ export const OverstyringspanelForMedlemskap = Template.bind({});
 OverstyringspanelForMedlemskap.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   panelTittelKode: 'Inngangsvilkar.Medlemskapsvilkaret',
-  overstyringApKode: aksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR,
+  overstyringApKode: AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR,
   erMedlemskapsPanel: true,
 };
 
@@ -106,7 +106,7 @@ OverstyrtAksjonspunktSomErBekreftet.args = {
     },
   } as Behandling,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCode.OVERSTYR_FODSELSVILKAR,
+    definisjon: AksjonspunktCode.OVERSTYR_FODSELSVILKAR,
     status: aksjonspunktStatus.UTFORT,
     kanLoses: false,
     begrunnelse: 'Dette er en begrunnelse',
@@ -114,6 +114,6 @@ OverstyrtAksjonspunktSomErBekreftet.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   status: vilkarUtfallType.IKKE_OPPFYLT,
   panelTittelKode: 'Inngangsvilkar.Fodselsvilkaret',
-  overstyringApKode: aksjonspunktCode.OVERSTYR_FODSELSVILKAR,
+  overstyringApKode: AksjonspunktCode.OVERSTYR_FODSELSVILKAR,
   erMedlemskapsPanel: false,
 };

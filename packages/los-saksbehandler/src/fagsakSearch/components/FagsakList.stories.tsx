@@ -6,8 +6,7 @@ import {
 } from '@navikt/ft-kodeverk';
 
 import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
-import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
-import { alleKodeverkLos } from '@navikt/fp-storybook-utils';
+import { getIntlDecorator, alleKodeverkLos } from '@navikt/fp-storybook-utils';
 import { FagsakEnkel, KjønnkodeEnum } from '@navikt/fp-types';
 import { Oppgave } from '@navikt/fp-los-felles';
 

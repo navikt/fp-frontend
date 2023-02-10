@@ -9,6 +9,7 @@ import {
   Heading, Detail, BodyShort, Button,
 } from '@navikt/ds-react';
 
+import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 import {
   Form, RadioGroupPanel, TextAreaField,
 } from '@navikt/ft-form-hooks';
@@ -30,7 +31,6 @@ import { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 
 import styles from './varselOmRevurderingForm.less';
-import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 const minLength3 = minLength(3);
 const maxLength6000 = maxLength(6000);

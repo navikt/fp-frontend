@@ -3,11 +3,11 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 
 import { vilkarUtfallType, aksjonspunktStatus, AksjonspunktCode } from '@navikt/fp-kodeverk';
-import opptjeningAktivitetKlassifisering from '@navikt/fp-prosess-vilkar-opptjening/src/kodeverk/opptjeningAktivitetKlassifisering';
 import { Aksjonspunkt, Behandling, Opptjening } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
+import opptjeningAktivitetKlassifisering from './kodeverk/opptjeningAktivitetKlassifisering';
 import OpptjeningVilkarProsessIndex from './OpptjeningVilkarProsessIndex';
 
 const behandling = {

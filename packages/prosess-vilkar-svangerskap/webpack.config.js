@@ -1,6 +1,7 @@
 const path = require('path');
 const { merge } = require('webpack-merge');
 const prodConfig = require('../../webpack/webpack.prod.template');
+const devConfig = require('../../webpack/webpack.dev.template');
 
 const config = {
   output: {
@@ -12,4 +13,4 @@ const config = {
   },
 };
 
-module.exports = merge(prodConfig, config);
+module.exports = (env) => merge(env.watch === 'true' ? devConfig : prodConfig, config);

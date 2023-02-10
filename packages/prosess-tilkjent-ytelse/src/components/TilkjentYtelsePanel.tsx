@@ -22,7 +22,8 @@ import { VurderTilbaketrekkAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import Tilbaketrekkpanel, { FormValues } from './tilbaketrekk/Tilbaketrekkpanel';
 import FeriepengerIndex from './feriepenger/FeriepengerIndex';
-import TilkjentYtelse, { PeriodeMedId } from './TilkjentYtelse';
+import TilkjentYtelse from './TilkjentYtelse';
+import { PeriodeMedId } from './TilkjentYtelseTimelineData';
 
 const formatPerioder = (perioder: BeregningsresultatPeriode[]): PeriodeMedId[] => perioder
   .filter((periode) => periode.andeler[0] && periode.dagsats)

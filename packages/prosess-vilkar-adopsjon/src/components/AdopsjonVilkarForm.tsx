@@ -3,7 +3,9 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 
-import { AksjonspunktCode, VilkarType, vilkarUtfallType, KodeverkType, aksjonspunktStatus } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktCode, VilkarType, vilkarUtfallType, KodeverkType, aksjonspunktStatus,
+} from '@navikt/fp-kodeverk';
 import { Form } from '@navikt/ft-form-hooks';
 import {
   Aksjonspunkt, AlleKodeverk, Behandling, Vilkar,
