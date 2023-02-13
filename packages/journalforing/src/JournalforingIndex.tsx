@@ -38,10 +38,18 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({
     { avdelingEnhet: undefined }, { suspendRequest: !harTilgangTilÅBrukeJournalføring(navAnsatt) });
   const { addErrorMessage } = useRestApiErrorDispatcher();
   requestApi.setAddErrorMessageHandler(addErrorMessage);
+
   if (alleJournalføringsoppgaverKall.state === RestApiState.NOT_STARTED || alleJournalføringsoppgaverKall.state === RestApiState.LOADING) {
     return <LoadingPanel />;
   }
-  if (!navAnsatt || alleJournalføringsoppgaverKall.state !== RestApiState.SUCCESS || !harTilgangTilÅBrukeJournalføring(navAnsatt)) {
+  if (!navAnsatt || !harTilgangTilÅBrukeJournalføring(navAnsatt)) {
+    return (
+      <Heading size="medium">
+        <FormattedMessage id="Journalforing.Tilgang" />
+      </Heading>
+    );
+  }
+  if (alleJournalføringsoppgaverKall.state !== RestApiState.SUCCESS) {
     return null;
   }
   return (
