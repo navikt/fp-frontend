@@ -17,8 +17,6 @@ const finnDokument = (dokumentId: string, dokumenter: JournalDokument[]): Journa
 
 type OwnProps = Readonly<{
   dokumenter: JournalDokument[];
-  valgtDokument?: JournalDokument;
-  setValgtDokument: (dok: JournalDokument) => void;
 }>;
 
 /**
@@ -26,22 +24,7 @@ type OwnProps = Readonly<{
  */
 const VelgDokumentForm: FunctionComponent<OwnProps> = ({
   dokumenter,
-  valgtDokument,
-  setValgtDokument,
 }) => {
-  const settDokument = (dokumentId: string) => {
-    if (!dokumentId) {
-      setValgtDokument(undefined);
-    } else {
-      const nyttValgtDokument = finnDokument(dokumentId, dokumenter);
-      setValgtDokument(nyttValgtDokument);
-    }
-  };
-  const endreValg = useCallback((e: React.ChangeEvent) => {
-    const tg = e.target as HTMLSelectElement;
-    settDokument(tg.value);
-  }, []);
-  const intl = useIntl();
   if (!dokumenter || dokumenter.length < 1) {
     return (
       <>

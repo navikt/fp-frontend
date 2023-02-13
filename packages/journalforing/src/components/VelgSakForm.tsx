@@ -26,7 +26,7 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
       {finnesSaker && (
         <>
           {saksliste.map((sak) => (
-            <FlexRow>
+            <FlexRow key={sak.saksnummer}>
               <FlexColumn>
                 <VelgSakLenke sak={sak} />
               </FlexColumn>

@@ -50,9 +50,7 @@ const TOM_ARRAY = [];
 type OwnProps = Readonly<{
   journalpost: Journalpost;
   oppgave: OppgaveOversikt;
-  valgtDokument?: JournalDokument;
   avbrytCallback: () => void;
-  setValgtDokument: (dokument: JournalDokument) => void;
 }>;
 
 /**
@@ -60,10 +58,8 @@ type OwnProps = Readonly<{
  */
 const OppgaveDetaljertVisning: FunctionComponent<OwnProps> = ({
   journalpost,
-  valgtDokument,
   oppgave,
   avbrytCallback,
-  setValgtDokument,
 }) => {
   const intl = useIntl();
   const saker = journalpost?.fagsaker || TOM_ARRAY;
@@ -154,7 +150,7 @@ const OppgaveDetaljertVisning: FunctionComponent<OwnProps> = ({
       {journalpost.dokumenter
         && (
           <>
-            <VelgDokumentForm dokumenter={journalpost.dokumenter} setValgtDokument={setValgtDokument} valgtDokument={valgtDokument} />
+            <VelgDokumentForm dokumenter={journalpost.dokumenter} />
             <VerticalSpacer sixteenPx />
           </>
         )}

@@ -12,15 +12,6 @@ type OwnProps = Readonly<{
   setValgtOppgave: (oppgave: OppgaveOversikt) => void;
 }>;
 
-const headerTextCodes = [
-  'Oppgavetabell.Opprettet',
-  'Oppgavetabell.YtelseType',
-  'Oppgavetabell.Beskrivelse',
-  'Oppgavetabell.Bruker',
-  'Oppgavetabell.Frist',
-  'Oppgavetabell.Prioritet',
-];
-
 /**
  * OppgaveTabell - Presenterer liste over oppgaver og tar inn callback for å sette valgt oppgave
  */
@@ -37,30 +28,27 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({
       </>
     );
   }
-  if (true) {
-    return (
-      <div className={styles.oppgaverTabell}>
-        <Table>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell><FormattedMessage id="Oppgavetabell.Opprettet" /></Table.HeaderCell>
-              <Table.HeaderCell><FormattedMessage id="Oppgavetabell.YtelseType" /></Table.HeaderCell>
-              <Table.HeaderCell><FormattedMessage id="Oppgavetabell.Beskrivelse" /></Table.HeaderCell>
-              <Table.HeaderCell><FormattedMessage id="Oppgavetabell.Bruker" /></Table.HeaderCell>
-              <Table.HeaderCell><FormattedMessage id="Oppgavetabell.Frist" /></Table.HeaderCell>
-              <Table.HeaderCell><FormattedMessage id="Oppgavetabell.Prioritet" /></Table.HeaderCell>
-              <Table.HeaderCell />
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {oppgaver.map((oppgave) => (
-              <OppgaveTabellRad oppgave={oppgave} setValgtOppgave={setValgtOppgave} key={oppgave.id} />
-            ))}
-          </Table.Body>
-        </Table>
-
-      </div>
-    );
-  }
+  return (
+    <div className={styles.oppgaverTabell}>
+      <Table>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell><FormattedMessage id="Oppgavetabell.Opprettet" /></Table.HeaderCell>
+            <Table.HeaderCell><FormattedMessage id="Oppgavetabell.YtelseType" /></Table.HeaderCell>
+            <Table.HeaderCell><FormattedMessage id="Oppgavetabell.Beskrivelse" /></Table.HeaderCell>
+            <Table.HeaderCell><FormattedMessage id="Oppgavetabell.Bruker" /></Table.HeaderCell>
+            <Table.HeaderCell><FormattedMessage id="Oppgavetabell.Frist" /></Table.HeaderCell>
+            <Table.HeaderCell><FormattedMessage id="Oppgavetabell.Prioritet" /></Table.HeaderCell>
+            <Table.HeaderCell />
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {oppgaver.map((oppgave) => (
+            <OppgaveTabellRad oppgave={oppgave} setValgtOppgave={setValgtOppgave} key={oppgave.id} />
+          ))}
+        </Table.Body>
+      </Table>
+    </div>
+  );
 };
 export default OppgaveTabell;
