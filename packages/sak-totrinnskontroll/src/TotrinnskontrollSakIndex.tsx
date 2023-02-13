@@ -5,7 +5,7 @@ import { createIntl } from '@navikt/ft-utils';
 
 import {
   KodeverkType, behandlingStatus as BehandlingStatus, AksjonspunktCode, AksjonspunktCodeTilbakekreving,
-  fagsakYtelseType as FagsakYtelseType, behandlingType as BehandlingType, behandlingArsakType, vurderPaNyttArsakType,
+  fagsakYtelseType as FagsakYtelseType, behandlingType as BehandlingType, behandlingArsakType as BehandlingÅrsakType, vurderPaNyttArsakType,
 } from '@navikt/fp-kodeverk';
 import { skjermlenkeCodes } from '@navikt/fp-konstanter';
 import {
@@ -108,8 +108,8 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
 
   const erBehandlingEtterKlage = useMemo(() => (behandling ? behandling.behandlingÅrsaker
     .map(({ behandlingArsakType }) => behandlingArsakType)
-    .some((bt) => bt === behandlingArsakType.ETTER_KLAGE || bt === behandlingArsakType.KLAGE_U_INNTK
-    || bt === behandlingArsakType.KLAGE_M_INNTK) : false),
+    .some((bt) => bt === BehandlingÅrsakType.ETTER_KLAGE || bt === BehandlingÅrsakType.KLAGE_U_INNTK
+    || bt === BehandlingÅrsakType.KLAGE_M_INNTK) : false),
   [behandling]);
 
   const sorterteTotrinnskontrollSkjermlenkeContext = useMemo(() => (erTilbakekreving
