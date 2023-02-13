@@ -17,6 +17,31 @@ const PACKAGES_DIR = path.resolve(__dirname, '../..');
 
 const isDevelopment = JSON.stringify(process.env.NODE_ENV) === '"development"';
 
+const plugins = [
+  new MiniCssExtractPlugin({
+    filename: isDevelopment ? 'style[name].css' : 'style[name]_[contenthash].css',
+    ignoreOrder: true,
+  }),
+  new HtmlWebpackPlugin({
+    filename: isDevelopment ? 'index.html' : '../index.html',
+    favicon: path.join(ROOT_DIR, 'favicon.ico'),
+    template: path.join(ROOT_DIR, 'index.html'),
+  }),
+  new webpack.DefinePlugin({
+    VERSION: JSON.stringify(VERSION),
+  }),
+  new webpack.ContextReplacementPlugin(
+    /moment[\/\\]locale$/,
+    /nb/,
+  ),
+  new CircularDependencyPlugin({
+    exclude: /node_modules/,
+    failOnError: true,
+  }),
+  new ExternalTemplateRemotesPlugin(),
+  new webpack.EnvironmentPlugin({ SENTRY_RELEASE: null }),
+];
+
 const config = {
   module: {
     rules: [
@@ -160,8 +185,8 @@ const config = {
     'utf-8-validate': 'utf-8-validate',
   },
 
-  plugins: [
-    isDevelopment && new ESLintPlugin({
+  plugins: isDevelopment ? [
+    new ESLintPlugin({
       context: APP_DIR,
       extensions: ['tsx', 'ts'],
       failOnWarning: false,
@@ -170,29 +195,7 @@ const config = {
       overrideConfigFile: path.resolve(__dirname, '../../../eslint/eslintrc.dev.js'),
       lintDirtyModulesOnly: true,
     }),
-    new MiniCssExtractPlugin({
-      filename: isDevelopment ? 'style[name].css' : 'style[name]_[contenthash].css',
-      ignoreOrder: true,
-    }),
-    new HtmlWebpackPlugin({
-      filename: isDevelopment ? 'index.html' : '../index.html',
-      favicon: path.join(ROOT_DIR, 'favicon.ico'),
-      template: path.join(ROOT_DIR, 'index.html'),
-    }),
-    new webpack.DefinePlugin({
-      VERSION: JSON.stringify(VERSION),
-    }),
-    new webpack.ContextReplacementPlugin(
-      /moment[\/\\]locale$/,
-      /nb/,
-    ),
-    new CircularDependencyPlugin({
-      exclude: /node_modules/,
-      failOnError: true,
-    }),
-    new ExternalTemplateRemotesPlugin(),
-    new webpack.EnvironmentPlugin({ SENTRY_RELEASE: null }),
-  ],
+  ].concat(plugins) : plugins,
 };
 
 module.exports = config;
