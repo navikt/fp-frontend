@@ -52,11 +52,25 @@ const detaljertJournalpostMal = {
   ],
   fagsaker: [
     {
-      saksnummer: '125416531',
+      saksnummer: '125416597',
       ytelseType: fagsakYtelseType.FORELDREPENGER,
       datoOpprettet: '2022-01-02',
       sistEndret: '2022-06-03',
       status: fagsakStatus.LOPENDE,
+    },
+    {
+      saksnummer: '155462542',
+      ytelseType: fagsakYtelseType.SVANGERSKAPSPENGER,
+      datoOpprettet: '2022-01-02',
+      sistEndret: '2022-06-03',
+      status: fagsakStatus.AVSLUTTET,
+    },
+    {
+      saksnummer: '175419131',
+      ytelseType: fagsakYtelseType.FORELDREPENGER,
+      datoOpprettet: '2022-01-02',
+      sistEndret: '2022-06-03',
+      status: fagsakStatus.AVSLUTTET,
     },
   ],
 } as Journalpost;
@@ -80,6 +94,7 @@ const Template: Story<{ alleOppgaver?: OppgaveOversikt[], navAnsatt: NavAnsatt, 
   const data = [
     { key: RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER.name, data: alleOppgaver || undefined },
     { key: RestApiPathsKeys.HENT_JOURNALPOST_DETALJER.name, data: detaljertJournalpost || undefined },
+    { key: RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING.name, data: {} },
   ];
 
   return (

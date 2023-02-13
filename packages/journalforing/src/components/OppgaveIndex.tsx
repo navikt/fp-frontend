@@ -3,12 +3,16 @@ import React, { FunctionComponent, useState, useCallback } from 'react';
 import {
   FlexContainer, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
+import { NavAnsatt } from '@navikt/fp-types';
+
 import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
 import OppgaveTabell from './OppgaveTabell';
 import OppgaveDetaljertIndex from './OppgaveDetaljertIndex';
 
 type OwnProps = Readonly<{
   oppgaver: OppgaveOversikt[];
+  innhentAlleOppgaver: (param: { ident: string }) => Promise<OppgaveOversikt[]>;
+  navAnsatt: NavAnsatt;
 }>;
 
 /**
@@ -16,6 +20,8 @@ type OwnProps = Readonly<{
  */
 const OppgaveIndex: FunctionComponent<OwnProps> = ({
   oppgaver,
+  innhentAlleOppgaver,
+  navAnsatt,
 }) => {
   const [valgtOppgave, setValgtOppgave] = useState<OppgaveOversikt>(null);
   const avbryt = useCallback(() => {
@@ -28,9 +34,12 @@ const OppgaveIndex: FunctionComponent<OwnProps> = ({
         && <OppgaveTabell oppgaver={oppgaver} setValgtOppgave={setValgtOppgave} />}
       {valgtOppgave
         && (
-          <FlexContainer>
-            <OppgaveDetaljertIndex avbrytCallback={avbryt} oppgave={valgtOppgave} />
-          </FlexContainer>
+          <OppgaveDetaljertIndex
+            avbrytVisningAvJournalpost={avbryt}
+            oppgave={valgtOppgave}
+            innhentAlleOppgaver={innhentAlleOppgaver}
+            navAnsatt={navAnsatt}
+          />
         )}
     </FlexContainer>
   );
