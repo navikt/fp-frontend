@@ -8,10 +8,10 @@ const { ViseOppgaverIListe, IngenOppgaver } = composeStories(stories);
 describe('<JournalforingIndex>', () => {
   it('skal vise en liste med oppgaver', async () => {
     render(<ViseOppgaverIListe />);
-    expect(await screen.findByText('Journalføringsoppgaver')).toBeInTheDocument();
+    expect(await screen.findByText('Journalføring')).toBeInTheDocument();
 
     // Tabell overskrift
-    expect(screen.getByText('Opprettet dato')).toBeInTheDocument();
+    expect(screen.getByText('Opprettet')).toBeInTheDocument();
     expect(screen.getByText('Ytelse')).toBeInTheDocument();
     expect(screen.getByText('Beskrivelse')).toBeInTheDocument();
     expect(screen.getByText('Bruker')).toBeInTheDocument();
