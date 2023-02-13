@@ -22,7 +22,7 @@
     "up": "docker-compose up -d --remove-orphans --build",
     "down": "docker-compose down",
     "remove-node-modules": "find . -name \"node_modules\" -exec rm -rf '{}' +",
-    "deploy-storybook": "cross-env REFRESH_OFF=true storybook-to-ghpages -o .storybook-static-build --packages packages",
+    "deploy-storybook": "storybook-to-ghpages -o .storybook-static-build --packages packages",
     "sentry-release": "(export SENTRY_RELEASE=$(git rev-parse --short HEAD); node ./scripts/sentry-release)"
   },
   "workspaces": [

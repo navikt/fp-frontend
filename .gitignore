@@ -8,6 +8,7 @@ coverage/
 node_modules
 dist
 lerna-debug.log
+.storybook-static-build
 .vscode
 .yarnrc
 ssh.exe.stackdump
