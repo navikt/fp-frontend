@@ -1,7 +1,8 @@
 import React, { FunctionComponent, useCallback } from 'react';
-import { BodyShort, Label, Select } from '@navikt/ds-react';
+import { BodyShort, Label } from '@navikt/ds-react';
+import { NewTab } from '@navikt/ds-icons';
 
-import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage, useIntl } from 'react-intl';
 import JournalDokument from '../typer/journalDokumentTsType';
 import styles from './journalforingPanel.less';
@@ -58,24 +59,17 @@ const VelgDokumentForm: FunctionComponent<OwnProps> = ({
     );
   }
   return (
-    <FlexRow>
-      <FlexColumn>
-        <Select
-          label={intl.formatMessage({ id: 'ValgtOppgave.Dokument.Velg' })}
-          onChange={endreValg}
-        >
-          {dokumenter.map((dok) => (
-            <option key={dok.dokumentId} value={dok.dokumentId}>{dok.tittel || dok.dokumentId}</option>
-          ))}
-        </Select>
-      </FlexColumn>
-      {valgtDokument && (
-        <FlexColumn className={styles.linkTekst}>
-          <a href={valgtDokument.lenke} target="_blank" rel="noreferrer"><FormattedMessage id="ValgtOppgave.Dokument.ÅpneFane" /></a>
-        </FlexColumn>
-      )}
-
-    </FlexRow>
+    <>
+      {dokumenter.map((dok) => (
+        <>
+          <FlexRow className={styles.dokumentRad}>
+            <FlexColumn className={styles.dokumentTittel}><Label>{dok.tittel}</Label></FlexColumn>
+            <FlexColumn><a href={dok.lenke} target="_blank" rel="noreferrer"><NewTab className={styles.newTabIcon} /></a></FlexColumn>
+          </FlexRow>
+          <VerticalSpacer eightPx />
+        </>
+      ))}
+    </>
   );
 };
 export default VelgDokumentForm;

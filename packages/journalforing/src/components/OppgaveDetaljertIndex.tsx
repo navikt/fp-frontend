@@ -52,6 +52,7 @@ const OppgaveDetaljertIndex: FunctionComponent<OwnProps> = ({
           <OppgaveDetaljertVisning
             avbrytCallback={avbrytCallback}
             journalpost={journalpost}
+            oppgave={oppgave}
             setValgtDokument={setValgtDokument}
             valgtDokument={valgtDokument}
           />
