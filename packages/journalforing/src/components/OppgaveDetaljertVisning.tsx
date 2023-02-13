@@ -17,7 +17,6 @@ import {
 import VelgSakForm from './VelgSakForm';
 import Journalpost from '../typer/journalpostTsType';
 import styles from './journalforingPanel.less';
-import JournalDokument from '../typer/journalDokumentTsType';
 import VelgDokumentForm from './VelgDokumentForm';
 import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
 

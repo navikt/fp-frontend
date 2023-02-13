@@ -1,19 +1,11 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { FunctionComponent } from 'react';
 import { BodyShort, Label } from '@navikt/ds-react';
 import { NewTab } from '@navikt/ds-icons';
 
 import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import JournalDokument from '../typer/journalDokumentTsType';
 import styles from './journalforingPanel.less';
-
-const finnDokument = (dokumentId: string, dokumenter: JournalDokument[]): JournalDokument => {
-  const res = dokumenter.find((dok) => dok.dokumentId === dokumentId);
-  if (!res) {
-    throw new Error(`Finner ikke dokument med id ${dokumentId}`);
-  }
-  return res;
-};
 
 type OwnProps = Readonly<{
   dokumenter: JournalDokument[];
