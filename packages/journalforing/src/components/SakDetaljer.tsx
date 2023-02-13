@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Link } from '@navikt/ds-react';
 import fagsakStatus from '@navikt/fp-kodeverk/src/fagsakStatus';
@@ -47,6 +47,7 @@ type OwnProps = Readonly<{
 const SakDetaljer: FunctionComponent<OwnProps> = ({
   sak,
 }) => {
+  const fetTekst = useCallback((chunks: any) => (<b>{chunks}</b>), [sak]);
   const intl = useIntl();
   const lenke = velgSakLenke(sak.saksnummer);
   return (
@@ -57,7 +58,7 @@ const SakDetaljer: FunctionComponent<OwnProps> = ({
       <FormattedMessage
         id="Journal.Sak.Beskrivelse"
         values={{
-          b: (chunks: any) => <b>{chunks}</b>,
+          b: fetTekst,
           ytelse: intl.formatMessage({ id: finnYtelseTekst(sak.ytelseType) }),
           endret: dayjs(sak.sistEndret).format(DDMMYYYY_DATE_FORMAT),
           opprettet: dayjs(sak.datoOpprettet).format(DDMMYYYY_DATE_FORMAT),
