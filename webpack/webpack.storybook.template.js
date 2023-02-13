@@ -5,6 +5,8 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const styleModulesRule = require('./rules/style-modules-rule');
 const styleRule = require('./rules/style-rule');
 
+const isDevelopment = JSON.stringify(process.env.NODE_ENV) === '"development"';
+
 module.exports = (config, srcDir, additionalStyleRule = {}) => {
   //Fjern default svg-loader
   config.module.rules = config.module.rules.map( data => {
@@ -20,7 +22,7 @@ module.exports = (config, srcDir, additionalStyleRule = {}) => {
       loader: 'babel-loader',
       options: {
         rootMode: "upward",
-        plugins: [require.resolve('react-refresh/babel')],
+        plugins: isDevelopment ? [require.resolve('react-refresh/babel')]  : [],
       },
     }, {
       test: /\.(svg)$/,
@@ -36,7 +38,7 @@ module.exports = (config, srcDir, additionalStyleRule = {}) => {
       filename: 'style[name].css',
       ignoreOrder: true,
     }));
-    config.plugins.push(new ReactRefreshWebpackPlugin());
+    isDevelopment && config.plugins.push(new ReactRefreshWebpackPlugin());
     config.plugins.push(new ESLintPlugin({
       context: srcDir,
       extensions: ['tsx', 'ts'],

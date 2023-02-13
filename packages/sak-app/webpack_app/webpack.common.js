@@ -42,7 +42,7 @@ const config = {
         ],
         include: [APP_DIR, TYPES_DIR],
       }, {
-        test: /\.(less|css)?$/,
+        test: /\.(less)?$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -103,16 +103,6 @@ const config = {
             },
           }, {
             loader: 'css-loader',
-          }, {
-            loader: 'less-loader',
-            options: {
-              lessOptions: {
-                modifyVars: {
-                  nodeModulesPath: '~',
-                  coreModulePath: '~',
-                },
-              },
-            },
           }],
         include: [PACKAGES_DIR],
         exclude: [APP_DIR],
@@ -171,6 +161,15 @@ const config = {
   },
 
   plugins: [
+    isDevelopment && new ESLintPlugin({
+      context: APP_DIR,
+      extensions: ['tsx', 'ts'],
+      failOnWarning: false,
+      failOnError: false,
+      fix: true,
+      overrideConfigFile: path.resolve(__dirname, '../../../eslint/eslintrc.dev.js'),
+      lintDirtyModulesOnly: true,
+    }),
     new MiniCssExtractPlugin({
       filename: isDevelopment ? 'style[name].css' : 'style[name]_[contenthash].css',
       ignoreOrder: true,

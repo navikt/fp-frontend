@@ -12,8 +12,8 @@ module.exports = {
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
   stories: ['./DummyStory.stories.jsx'],
   refs: {
-      'ft-fakta-beregning': {
-          title: 'ft-fakta-beregning',
+      'fp-fakta-adopsjon': {
+          title: 'ft-fakta-adopsjon',
           url: 'http://localhost:7001',
       },
   },
