@@ -1,5 +1,4 @@
 export { default as ReactECharts } from './src/ReactECharts';
-export { default as Modal } from './src/Modal';
 export { default as OppgaveReservasjonEndringDatoModal } from './src/endreReservasjon/OppgaveReservasjonEndringDatoModal';
 export { default as FlyttReservasjonModal } from './src/flyttReservasjon/FlyttReservasjonModal';
 

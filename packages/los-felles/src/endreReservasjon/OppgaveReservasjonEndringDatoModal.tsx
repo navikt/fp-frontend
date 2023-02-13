@@ -1,12 +1,11 @@
 import React, { MouseEvent, FunctionComponent, useCallback } from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Panel, Button } from '@navikt/ds-react';
+import { Panel, Button, Modal as NavModal } from '@navikt/ds-react';
 import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate } from '@navikt/ft-form-validators';
 import { Form, Datepicker } from '@navikt/ft-form-hooks';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
-import Modal from '../Modal';
 import Oppgave from '../typer/oppgaveTsType';
 
 import styles from './oppgaveReservasjonEndringDatoModal.less';
@@ -61,54 +60,56 @@ const OppgaveReservasjonEndringDatoModal: FunctionComponent<OwnProps> = ({
   });
 
   return (
-    <Modal
+    <NavModal
       className={styles.modal}
       open={showModal}
       closeButton={false}
       aria-label={intl.formatMessage({ id: 'OppgaveReservasjonEndringDatoModal.Header' })}
       onClose={closeModal as () => void}
     >
-      <Form<FormValues> formMethods={søkFormMethods} onSubmit={(values) => endreOppgaveReservasjonFn(values.reserverTil)}>
-        <Panel className={styles.panel}>
-          <h3>
-            <FormattedMessage id="OppgaveReservasjonEndringDatoModal.Header" />
-          </h3>
-          <Datepicker
-            label=""
-            name="reserverTil"
-            validate={[hasValidDate, dateAfterOrEqual(new Date()), dateBeforeOrEqual(thirtyDaysFromNow())]}
-            disabledDays={{ fromDate: new Date(), toDate: thirtyDaysFromNow() }}
-          />
-          <div className={styles.buttonBox}>
-            <FlexContainer>
-              <FlexRow className={styles.buttonRow}>
-                <FlexColumn>
-                  <Button
-                    size="small"
-                    variant="secondary"
-                    className={styles.button}
-                    autoFocus
-                  >
-                    <FormattedMessage id="OppgaveReservasjonEndringDatoModal.Ok" />
-                  </Button>
-                </FlexColumn>
-                <FlexColumn>
-                  <Button
-                    size="small"
-                    variant="secondary"
-                    className={styles.button}
-                    onClick={closeModal}
-                    type="button"
-                  >
-                    <FormattedMessage id="OppgaveReservasjonEndringDatoModal.Avbryt" />
-                  </Button>
-                </FlexColumn>
-              </FlexRow>
-            </FlexContainer>
-          </div>
-        </Panel>
-      </Form>
-    </Modal>
+      <NavModal.Content>
+        <Form<FormValues> formMethods={søkFormMethods} onSubmit={(values) => endreOppgaveReservasjonFn(values.reserverTil)}>
+          <Panel className={styles.panel}>
+            <h3>
+              <FormattedMessage id="OppgaveReservasjonEndringDatoModal.Header" />
+            </h3>
+            <Datepicker
+              label=""
+              name="reserverTil"
+              validate={[hasValidDate, dateAfterOrEqual(new Date()), dateBeforeOrEqual(thirtyDaysFromNow())]}
+              disabledDays={{ fromDate: new Date(), toDate: thirtyDaysFromNow() }}
+            />
+            <div className={styles.buttonBox}>
+              <FlexContainer>
+                <FlexRow className={styles.buttonRow}>
+                  <FlexColumn>
+                    <Button
+                      size="small"
+                      variant="secondary"
+                      className={styles.button}
+                      autoFocus
+                    >
+                      <FormattedMessage id="OppgaveReservasjonEndringDatoModal.Ok" />
+                    </Button>
+                  </FlexColumn>
+                  <FlexColumn>
+                    <Button
+                      size="small"
+                      variant="secondary"
+                      className={styles.button}
+                      onClick={closeModal}
+                      type="button"
+                    >
+                      <FormattedMessage id="OppgaveReservasjonEndringDatoModal.Avbryt" />
+                    </Button>
+                  </FlexColumn>
+                </FlexRow>
+              </FlexContainer>
+            </div>
+          </Panel>
+        </Form>
+      </NavModal.Content>
+    </NavModal>
   );
 };
 

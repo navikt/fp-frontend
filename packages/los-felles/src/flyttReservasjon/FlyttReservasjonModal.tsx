@@ -1,7 +1,9 @@
 import React, { FunctionComponent, useEffect, useCallback } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Label, Button, BodyShort } from '@navikt/ds-react';
+import {
+  Label, Button, BodyShort, Modal as NavModal,
+} from '@navikt/ds-react';
 import { Form, TextAreaField, InputField } from '@navikt/ft-form-hooks';
 import {
   VerticalSpacer, FlexContainer, FlexRow, FlexColumn,
@@ -12,7 +14,6 @@ import {
 
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
-import Modal from '../Modal';
 import SaksbehandlerForFlytting from '../typer/saksbehandlerForFlyttingTsType';
 
 import styles from './flyttReservasjonModal.less';
@@ -89,90 +90,92 @@ const FlyttReservasjonModal: FunctionComponent<OwnProps> = ({
   const begrunnelseValue = lagreFormMethods.watch('begrunnelse');
 
   return (
-    <Modal
+    <NavModal
       className={styles.modal}
       open={showModal}
       closeButton={false}
       aria-label={intl.formatMessage({ id: 'FlyttReservasjonModal.FlyttReservasjon' })}
       onClose={closeModal}
     >
-      <Form<SøkFormValues> formMethods={søkFormMethods} onSubmit={(values) => finnSaksbehandler(values.brukerIdent)}>
-        <Label size="small">
-          <FormattedMessage id="FlyttReservasjonModal.FlyttReservasjon" />
-        </Label>
-        <VerticalSpacer eightPx />
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <InputField
-                name="brukerIdent"
-                label={intl.formatMessage({ id: 'FlyttReservasjonModal.Brukerident' })}
-                validate={[required, minLength7, maxLength7]}
-                autoFocus
-                autoComplete
-              />
-            </FlexColumn>
-            <FlexColumn className={styles.buttonDiv}>
-              <Button
-                size="small"
-                variant="primary"
-                loading={hentSaksbehandlerState === RestApiState.LOADING}
-                disabled={!brukerIdentValue || hentSaksbehandlerState === RestApiState.LOADING}
-              >
-                <FormattedMessage id="FlyttReservasjonModal.Sok" />
-              </Button>
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
-        {hentSaksbehandlerState === RestApiState.SUCCESS && (
-          <>
-            <BodyShort size="small">{formatText(hentSaksbehandlerState, intl, saksbehandler)}</BodyShort>
-            <VerticalSpacer sixteenPx />
-          </>
-        )}
-      </Form>
-      <VerticalSpacer sixteenPx />
-      <Form<LagreFormValues>
-        formMethods={lagreFormMethods}
-        onSubmit={(values) => {
-          toggleMenu();
-          flyttReservasjon(saksbehandler ? saksbehandler.brukerIdent : '', values.begrunnelse);
-        }}
-      >
-        <TextAreaField
-          name="begrunnelse"
-          label={intl.formatMessage({ id: 'FlyttReservasjonModal.Begrunn' })}
-          validate={[required, maxLength500, minLength3, hasValidText]}
-          maxLength={500}
-        />
+      <NavModal.Content>
+        <Form<SøkFormValues> formMethods={søkFormMethods} onSubmit={(values) => finnSaksbehandler(values.brukerIdent)}>
+          <Label size="small">
+            <FormattedMessage id="FlyttReservasjonModal.FlyttReservasjon" />
+          </Label>
+          <VerticalSpacer eightPx />
+          <FlexContainer>
+            <FlexRow>
+              <FlexColumn>
+                <InputField
+                  name="brukerIdent"
+                  label={intl.formatMessage({ id: 'FlyttReservasjonModal.Brukerident' })}
+                  validate={[required, minLength7, maxLength7]}
+                  autoFocus
+                  autoComplete
+                />
+              </FlexColumn>
+              <FlexColumn className={styles.buttonDiv}>
+                <Button
+                  size="small"
+                  variant="primary"
+                  loading={hentSaksbehandlerState === RestApiState.LOADING}
+                  disabled={!brukerIdentValue || hentSaksbehandlerState === RestApiState.LOADING}
+                >
+                  <FormattedMessage id="FlyttReservasjonModal.Sok" />
+                </Button>
+              </FlexColumn>
+            </FlexRow>
+          </FlexContainer>
+          {hentSaksbehandlerState === RestApiState.SUCCESS && (
+            <>
+              <BodyShort size="small">{formatText(hentSaksbehandlerState, intl, saksbehandler)}</BodyShort>
+              <VerticalSpacer sixteenPx />
+            </>
+          )}
+        </Form>
         <VerticalSpacer sixteenPx />
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <Button
-                className={styles.submitButton}
-                size="small"
-                variant="primary"
-                disabled={!saksbehandler || (!begrunnelseValue || begrunnelseValue.length < 3)}
-              >
-                <FormattedMessage id="FlyttReservasjonModal.Ok" />
-              </Button>
-            </FlexColumn>
-            <FlexColumn>
-              <Button
-                className={styles.cancelButton}
-                size="small"
-                variant="primary"
-                onClick={closeModal}
-                type="button"
-              >
-                <FormattedMessage id="FlyttReservasjonModal.Avbryt" />
-              </Button>
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
-      </Form>
-    </Modal>
+        <Form<LagreFormValues>
+          formMethods={lagreFormMethods}
+          onSubmit={(values) => {
+            toggleMenu();
+            flyttReservasjon(saksbehandler ? saksbehandler.brukerIdent : '', values.begrunnelse);
+          }}
+        >
+          <TextAreaField
+            name="begrunnelse"
+            label={intl.formatMessage({ id: 'FlyttReservasjonModal.Begrunn' })}
+            validate={[required, maxLength500, minLength3, hasValidText]}
+            maxLength={500}
+          />
+          <VerticalSpacer sixteenPx />
+          <FlexContainer>
+            <FlexRow>
+              <FlexColumn>
+                <Button
+                  className={styles.submitButton}
+                  size="small"
+                  variant="primary"
+                  disabled={!saksbehandler || (!begrunnelseValue || begrunnelseValue.length < 3)}
+                >
+                  <FormattedMessage id="FlyttReservasjonModal.Ok" />
+                </Button>
+              </FlexColumn>
+              <FlexColumn>
+                <Button
+                  className={styles.cancelButton}
+                  size="small"
+                  variant="primary"
+                  onClick={closeModal}
+                  type="button"
+                >
+                  <FormattedMessage id="FlyttReservasjonModal.Avbryt" />
+                </Button>
+              </FlexColumn>
+            </FlexRow>
+          </FlexContainer>
+        </Form>
+      </NavModal.Content>
+    </NavModal>
   );
 };
 
