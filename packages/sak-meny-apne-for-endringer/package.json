@@ -1,5 +1,6 @@
 {
   "name": "@navikt/fp-sak-meny-apne-for-endringer",
+  "description": "Komponent som lar saksbehandler åpne opp en igjen en avsluttet behandling",
   "version": "1.0.0",
   "module": "index.jsx",
   "license": "MIT",

@@ -1,5 +1,6 @@
 {
   "name": "@navikt/fp-sak-totrinnskontroll",
+  "description": "Komponent som lar beslutter godkjenne eller avslå vedtak gjort av en saksbehandler. Viser også beslutters valg til saksbehandler (readonly).",
   "version": "1.0.0",
   "module": "index.ts",
   "license": "MIT",

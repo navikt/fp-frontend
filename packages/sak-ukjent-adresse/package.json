@@ -1,5 +1,6 @@
 {
   "name": "@navikt/fp-sak-ukjent-adresse",
+  "description": "Viser en info tekst som informerer saksbehandlere at brukeren i behandlingen har ikke en registrert adresse.",
   "version": "1.0.0",
   "module": "index.jsx",
   "license": "MIT",

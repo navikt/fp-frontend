@@ -1,5 +1,6 @@
 {
   "name": "@navikt/fp-sak-sok",
+  "description": "Komponent som blir brukt for å søke opp fagsak (Blir kun brukt om LOS er nede)",
   "version": "1.0.0",
   "module": "index.jsx",
   "license": "MIT",
