@@ -35,7 +35,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({
   navAnsatt,
 }) => {
   const alleJournalføringsoppgaverKall = restApiHooks.useRestApi(RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER,
-    { avdelingEnhet: undefined }, { suspendRequest: !harTilgangTilÅBrukeJournalføring(navAnsatt) });
+    { ident: navAnsatt?.brukernavn }, { suspendRequest: !harTilgangTilÅBrukeJournalføring(navAnsatt) });
   const { addErrorMessage } = useRestApiErrorDispatcher();
   requestApi.setAddErrorMessageHandler(addErrorMessage);
 
