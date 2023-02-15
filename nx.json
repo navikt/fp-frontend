@@ -18,10 +18,7 @@
   },
   "targetDefaults": {
     "test": {
-      "inputs": ["default", "^prod", "{workspaceRoot}/jest-config/jest.config.ts"],
-      "dependsOn": [
-        "build"
-      ]
+      "inputs": ["default", "^prod", "{workspaceRoot}/jest-config/jest.config.ts"]
     },
     "tsc": {
       "inputs": ["default", "{workspaceRoot}/tsconfig.json"]
@@ -30,7 +27,13 @@
       "inputs": ["default", "{workspaceRoot}/eslint/*.js"]
     },
     "build": {
-      "inputs": ["prod"]
+      "inputs": ["prod"],
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "{projectRoot}/dist"
+      ]
     }
   }
 }
