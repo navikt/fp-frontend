@@ -39,6 +39,7 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({
             <Table.HeaderCell><FormattedMessage id="Oppgavetabell.Bruker" /></Table.HeaderCell>
             <Table.HeaderCell><FormattedMessage id="Oppgavetabell.Frist" /></Table.HeaderCell>
             <Table.HeaderCell><FormattedMessage id="Oppgavetabell.Prioritet" /></Table.HeaderCell>
+            <Table.HeaderCell><FormattedMessage id="Oppgavetabell.Enhet" /></Table.HeaderCell>
             <Table.HeaderCell />
           </Table.Row>
         </Table.Header>

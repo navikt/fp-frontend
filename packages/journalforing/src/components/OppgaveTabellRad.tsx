@@ -24,6 +24,7 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
       <Table.DataCell>{oppgave.fødselsnummer}</Table.DataCell>
       <Table.DataCell><DateLabel dateString={oppgave.frist} /></Table.DataCell>
       <Table.DataCell>{oppgave.prioritet}</Table.DataCell>
+      <Table.DataCell>{oppgave.enhetId}</Table.DataCell>
       {oppgave.journalpostHarMangler
         && (
           <Table.DataCell>
