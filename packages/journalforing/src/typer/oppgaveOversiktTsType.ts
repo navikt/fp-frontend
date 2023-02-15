@@ -11,5 +11,6 @@ type OppgaveOversikt = Readonly<{
   beskrivelse?: string;
   prioritet?: OppgavePrioritet;
   journalpostHarMangler: boolean;
+  enhetId?: string;
 }>
 export default OppgaveOversikt;
