@@ -30,13 +30,7 @@
       "inputs": ["default", "{workspaceRoot}/eslint/*.js"]
     },
     "build": {
-      "inputs": ["prod"],
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        "{projectRoot}/dist"
-      ]
+      "inputs": ["prod"]
     }
   }
 }
