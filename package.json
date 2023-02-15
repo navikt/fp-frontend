@@ -11,9 +11,12 @@
   },
   "scripts": {
     "test": "lerna run test --stream --parallel",
+    "test:changed": "lerna run test --stream --since origin/main",
     "test:coverage": "lerna run test:coverage --stream --parallel",
     "tsc": "lerna run tsc --stream --parallel",
+    "tsc:changed": "lerna run tsc --stream --parallel --since origin/main",
     "eslint": "lerna run eslint --stream --parallel",
+    "eslint:changed": "lerna run eslint --stream --parallel --since origin/main",
     "stylelint": "lerna run stylelint --stream --parallel",
     "clean": "lerna run clean --stream --parallel",
     "dev": "node -e \"console.log('For å få oppdateringer i pakke, skriv: yarn dev --scope=@navikt/fp-{pakkenavn}')\" && yarn lerna run dev --scope=@navikt/fp-sak-app",

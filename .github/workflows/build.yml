@@ -54,12 +54,15 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Bygg
+        run: yarn build
+
       - name: Run linting
-        run: yarn stylelint && yarn eslint && yarn tsc
+        run: yarn stylelint && yarn eslint:changed && yarn tsc:changed
 
       - name: Run all test and coverage when changes to dependencies
         id: run-all-tests
-        run: yarn test
+        run: yarn test:changed
 
       - name: Build
         if: github.ref_name == 'master'
