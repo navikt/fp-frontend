@@ -12,7 +12,7 @@ Modal.setAppElement('body');
 describe('<OpphevReservasjonModal>', () => {
   it('skal vise modal for oppheving av reservasjon', async () => {
     const begrunnelse = 'Dette er en begrunnelse';
-    const hentReserverteOppgaver = jest.fn();
+    const hentReserverteOppgaver = vi.fn();
 
     const utils = render(<Default opphevData={{ oppgaveId: 1, begrunnelse }} hentReserverteOppgaver={hentReserverteOppgaver} />);
 

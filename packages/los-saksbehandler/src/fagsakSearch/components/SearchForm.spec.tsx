@@ -9,7 +9,7 @@ const { Søkeskjema } = composeStories(stories);
 describe('<SearchForm>', () => {
   // TODO Fiks test
   it('skal skrive inn ugyldig fødselsnummer og vise feilmelding', async () => {
-    const onSubmitMock = jest.fn();
+    const onSubmitMock = vi.fn();
     const utils = render(<Søkeskjema onSubmit={onSubmitMock} />);
 
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
@@ -29,7 +29,7 @@ describe('<SearchForm>', () => {
   });
 
   it('skal skrive inn gyldig fødselsnummer og sende inn resultat', async () => {
-    const onSubmitMock = jest.fn();
+    const onSubmitMock = vi.fn();
     const utils = render(<Søkeskjema onSubmit={onSubmitMock} />);
 
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
@@ -53,7 +53,7 @@ describe('<SearchForm>', () => {
   });
 
   it('skal reservere behandling ved søk', async () => {
-    const onSubmitMock = jest.fn();
+    const onSubmitMock = vi.fn();
     const utils = render(<Søkeskjema onSubmit={onSubmitMock} />);
 
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();

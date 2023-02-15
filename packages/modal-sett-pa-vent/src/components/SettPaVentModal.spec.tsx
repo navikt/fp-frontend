@@ -14,8 +14,8 @@ describe('<SettPaVentModal>', () => {
   Modal.setAppElement('body');
 
   it('skal ikke disable knapp for lagring når frist er en gyldig fremtidig dato', async () => {
-    const cancelEventCallback = jest.fn();
-    const submitCallback = jest.fn();
+    const cancelEventCallback = vi.fn();
+    const submitCallback = vi.fn();
 
     const utils = render(
       <RawIntlProvider value={intlMock}>
@@ -37,8 +37,8 @@ describe('<SettPaVentModal>', () => {
   });
 
   it('skal disable knapp for lagring når frist er en historisk dato', async () => {
-    const cancelEventCallback = jest.fn();
-    const submitCallback = jest.fn();
+    const cancelEventCallback = vi.fn();
+    const submitCallback = vi.fn();
 
     const utils = render(
       <RawIntlProvider value={intlMock}>
@@ -59,8 +59,8 @@ describe('<SettPaVentModal>', () => {
   });
 
   it('skal ikke vise frist-input når behandling automatisk er satt på vent uten frist', async () => {
-    const cancelEventCallback = jest.fn();
-    const submitCallback = jest.fn();
+    const cancelEventCallback = vi.fn();
+    const submitCallback = vi.fn();
 
     const utils = render(
       <RawIntlProvider value={intlMock}>
@@ -81,8 +81,8 @@ describe('<SettPaVentModal>', () => {
   });
 
   it('skal vise tekst for tilbakekreving behandling venter på kravgrunnlag og fristen er utløpt', async () => {
-    const cancelEventCallback = jest.fn();
-    const submitCallback = jest.fn();
+    const cancelEventCallback = vi.fn();
+    const submitCallback = vi.fn();
 
     render(
       <RawIntlProvider value={intlMock}>

@@ -77,7 +77,7 @@ describe('BehandlingMenuIndex', () => {
             fagsakData={new FagsakData(fagsak as Fagsak)}
             behandlingUuid="1"
             behandlingVersjon={2}
-            hentFagsakdataPåNytt={jest.fn()}
+            hentFagsakdataPåNytt={vi.fn()}
           />
         </MemoryRouter>
       </RestApiMock>,

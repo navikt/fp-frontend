@@ -20,8 +20,8 @@ describe('<MenySettPaVentIndex>', () => {
   }
 
   it('skal velge årsak for sett på vent og så fortsette', async () => {
-    const settBehandlingPaVent = jest.fn();
-    const lukkModal = jest.fn();
+    const settBehandlingPaVent = vi.fn();
+    const lukkModal = vi.fn();
     const utils = render(<Default settBehandlingPaVent={settBehandlingPaVent} lukkModal={lukkModal} />);
     expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
 

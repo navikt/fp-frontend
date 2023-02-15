@@ -20,7 +20,7 @@ describe('<BeregningsresultatProsessIndex>', () => {
   });
 
   it('skal velge å overstyre, så avbryte redigering og så overstyre og bekrefte', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<SaksbehandlerKanOverstyre submitCallback={lagre} />);
 

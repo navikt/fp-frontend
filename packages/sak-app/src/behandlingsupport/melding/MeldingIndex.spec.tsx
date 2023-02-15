@@ -46,7 +46,7 @@ describe('<MeldingIndex>', () => {
     [KodeverkType.REVURDERING_VARSLING_ÅRSAK]: [],
   };
 
-  const assignMock = jest.fn();
+  const assignMock = vi.fn();
   // @ts-ignore
   delete window.location;
   // @ts-ignore Dette er kun for å unngå warnings med window.location.reload(). (Denne blir brukt som en temp-fiks, så dette skal derfor fjernes)

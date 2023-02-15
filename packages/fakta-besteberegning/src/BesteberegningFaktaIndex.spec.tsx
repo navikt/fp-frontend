@@ -33,7 +33,7 @@ describe('<BesteberegningFaktaIndex>', () => {
   });
 
   it('skal bekrefte aksjonspunkt for vurder besteberegning', async () => {
-    const lagre = jest.fn(() => Promise.resolve());
+    const lagre = vi.fn(() => Promise.resolve());
 
     const utils = render(<BesteberegningMedAvvik submitCallback={lagre} />);
 

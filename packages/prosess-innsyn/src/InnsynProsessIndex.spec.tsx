@@ -14,7 +14,7 @@ const {
 
 describe('<InnsynProsessIndex>', () => {
   it('skal fylle ut og så bekrefte avslått innsyn', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<PanelForVurderingAvInnsyn submitCallback={lagre} />);
 
@@ -68,7 +68,7 @@ describe('<InnsynProsessIndex>', () => {
   });
 
   it('skal fylle ut og så bekrefte innvilget innsyn', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<PanelForVurderingAvInnsyn submitCallback={lagre} />);
 

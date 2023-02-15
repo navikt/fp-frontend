@@ -26,7 +26,7 @@ const kodeverk = alleKodeverk as AlleKodeverk;
 const defaultProps = {
   behandling,
   alleMerknaderFraBeslutter: {},
-  submitCallback: jest.fn(),
+  submitCallback: vi.fn(),
   status: VilkarUtfallType.IKKE_VURDERT,
   alleKodeverk: kodeverk,
   isReadOnly: false,
@@ -40,13 +40,9 @@ const defaultProps = {
   setFormData: () => undefined,
 };
 
-afterAll(() => {
-  jest.clearAllMocks();
-});
-
 describe('<InngangsvilkarDefaultInitPanel>', () => {
   it('skal ikke vise panel når en ikke har åpne aksjonspunkter', async () => {
-    jest.spyOn(Felles, 'default').mockImplementation(() => ({
+    vi.spyOn(Felles, 'default').mockImplementation(() => ({
       ...defaultProps,
       aksjonspunkter: [] as Aksjonspunkt[],
     }));
@@ -75,7 +71,7 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
   });
 
   it('skal vise panel', async () => {
-    jest.spyOn(Felles, 'default').mockImplementation(() => defaultProps);
+    vi.spyOn(Felles, 'default').mockImplementation(() => defaultProps);
     const BEHANDLING_KEY = new RestKey<Behandling, void>('BEHANDLING_KEY');
 
     const endpoints = new RestApiConfigBuilder()

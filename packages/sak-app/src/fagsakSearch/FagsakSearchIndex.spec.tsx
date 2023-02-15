@@ -9,12 +9,15 @@ import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 import FagsakSearchIndex from './FagsakSearchIndex';
 
-const mockHistoryPush = jest.fn();
+const mockHistoryPush = vi.fn();
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom') as any,
-  useNavigate: () => mockHistoryPush,
-}));
+vi.mock('react-router-dom', async () => {
+  const actual = await vi.importActual('react-router-dom');
+  return {
+    ...actual,
+    useNavigate: () => mockHistoryPush,
+  };
+});
 
 describe('<FagsakSearchIndex>', () => {
   const fagsak = {

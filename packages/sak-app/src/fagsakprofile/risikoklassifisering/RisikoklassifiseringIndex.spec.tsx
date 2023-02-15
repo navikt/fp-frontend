@@ -38,7 +38,7 @@ const location = {
 const navAnsatt = { navn: 'Ann S. Att', kanSaksbehandle: true };
 
 describe('<RisikoklassifiseringIndex>', () => {
-  jest.spyOn(useTrackRouteParam, 'default').mockImplementation(() => ({
+  vi.spyOn(useTrackRouteParam, 'default').mockImplementation(() => ({
     selected: true,
     location,
   }));

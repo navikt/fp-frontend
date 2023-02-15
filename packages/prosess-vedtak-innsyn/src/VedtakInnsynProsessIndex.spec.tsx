@@ -11,8 +11,8 @@ const {
 
 describe('<VedtakInnsynProsessIndex>', () => {
   it('skal forhåndsvise og så bekrefte innvilget vedtak', async () => {
-    const lagre = jest.fn();
-    const forhåndsvise = jest.fn();
+    const lagre = vi.fn();
+    const forhåndsvise = vi.fn();
 
     render(<PanelForInnvilgetVedtak submitCallback={lagre} forhandsvisCallback={forhåndsvise} />);
 
@@ -47,8 +47,8 @@ describe('<VedtakInnsynProsessIndex>', () => {
   });
 
   it('skal forhåndsvise og så bekrefte avvist vedtak', async () => {
-    const lagre = jest.fn();
-    const forhåndsvise = jest.fn();
+    const lagre = vi.fn();
+    const forhåndsvise = vi.fn();
 
     const utils = render(<PanelForAvvistVedtak submitCallback={lagre} forhandsvisCallback={forhåndsvise} />);
 
@@ -82,7 +82,7 @@ describe('<VedtakInnsynProsessIndex>', () => {
   });
 
   it('skal vise avslått panel i readonly etter at behandling er avsluttet', async () => {
-    const forhåndsvise = jest.fn();
+    const forhåndsvise = vi.fn();
 
     render(<PanelForAvvistVedtakReadonly forhandsvisCallback={forhåndsvise} />);
 

@@ -10,7 +10,7 @@ const { PanelForSoknadsfrist } = composeStories(stories);
 
 describe('<VurderSoknadsfristForeldrepengerIndex>', () => {
   it('skal velge ingen grunn og så løse aksjonspunkt', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<PanelForSoknadsfrist submitCallback={lagre} />);
 
@@ -38,7 +38,7 @@ describe('<VurderSoknadsfristForeldrepengerIndex>', () => {
   });
 
   it('skal velge gyldig grunn og så løse aksjonspunkt', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<PanelForSoknadsfrist submitCallback={lagre} />);
 

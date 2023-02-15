@@ -15,8 +15,8 @@ describe('<bekreftAksjonspunkter>', () => {
   } as Behandling;
 
   it('skal lagre aksjonspunkter', async () => {
-    const oppdaterProsessStegOgFaktaPanelIUrl = jest.fn(() => Promise.resolve());
-    const lagreAksjonspunkter = jest.fn(() => Promise.resolve());
+    const oppdaterProsessStegOgFaktaPanelIUrl = vi.fn(() => Promise.resolve());
+    const lagreAksjonspunkter = vi.fn(() => Promise.resolve());
     const callback = getBekreftAksjonspunktCallback(saksnummer, behandling, oppdaterProsessStegOgFaktaPanelIUrl, lagreAksjonspunkter);
     const lagreAp = callback();
 

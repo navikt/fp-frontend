@@ -8,7 +8,7 @@ const { ForBeslutter, ForSaksbehandler } = composeStories(stories);
 
 describe('<TotrinnskontrollSakIndex>', () => {
   it('skal godkjenne begge aksjonspunktene', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     render(<ForBeslutter lagre={lagre} />);
 
@@ -53,7 +53,7 @@ describe('<TotrinnskontrollSakIndex>', () => {
   });
 
   it('skal sende tilbake til saksbehandler fordi det er feil i fakta og feil i lovanvendelse', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ForBeslutter lagre={lagre} />);
 
@@ -102,7 +102,7 @@ describe('<TotrinnskontrollSakIndex>', () => {
   });
 
   it('skal vise feilmeldinger når en ikke har fylt ut årsak og begrunnelse', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     render(<ForBeslutter lagre={lagre} />);
 

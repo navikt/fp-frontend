@@ -25,7 +25,7 @@ const kodeverk = alleKodeverk as AlleKodeverk;
 const defaultProps = {
   behandling,
   alleMerknaderFraBeslutter: {},
-  submitCallback: jest.fn(),
+  submitCallback: vi.fn(),
   status: VilkarUtfallType.IKKE_VURDERT,
   alleKodeverk: kodeverk,
   isReadOnly: false,
@@ -40,7 +40,7 @@ const defaultProps = {
 };
 
 describe('<ProsessDefaultInitPanel>', () => {
-  jest.spyOn(Felles, 'default').mockImplementation(() => defaultProps);
+  vi.spyOn(Felles, 'default').mockImplementation(() => defaultProps);
   it('skal rendre panel korrekt', async () => {
     const BEHANDLING_KEY = new RestKey<Behandling, void>('BEHANDLING_KEY');
 

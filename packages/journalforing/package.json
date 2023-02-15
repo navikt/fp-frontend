@@ -12,8 +12,9 @@
     "package.json"
   ],
   "scripts": {
-    "test": "jest --colors",
-    "test:coverage": "jest --coverage --colors",
+    "test": "vitest",
+    "test:watch": "vitest --watch=true",
+    "test:coverage": "vitest --coverage",
     "tsc": "tsc --pretty",
     "eslint": "eslint \"src/**/*.ts*\" --color",
     "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",

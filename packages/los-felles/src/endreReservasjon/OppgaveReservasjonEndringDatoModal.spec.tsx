@@ -11,7 +11,7 @@ const { Default } = composeStories(stories);
 
 describe('<OppgaveReservasjonEndringDatoModal>', () => {
   it('skal vise modal for oppheving av reservasjon og velge dato', async () => {
-    const endreReserverasjonState = jest.fn();
+    const endreReserverasjonState = vi.fn();
 
     render(<Default endreReserverasjonState={endreReserverasjonState} />);
 

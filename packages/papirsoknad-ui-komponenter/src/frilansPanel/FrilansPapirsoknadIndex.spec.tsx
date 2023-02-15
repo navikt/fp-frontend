@@ -11,7 +11,7 @@ const { Default } = composeStories(stories);
 
 describe('<FrilansPapirsoknadIndex>', () => {
   it('skal velge at søker ikke har periode med frilansvirksomhet', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     render(<Default submitCallback={lagre} />);
 
@@ -34,7 +34,7 @@ describe('<FrilansPapirsoknadIndex>', () => {
   });
 
   it('skal velge at søker har periode med frilansvirksomhet', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<Default submitCallback={lagre} />);
 
@@ -81,7 +81,7 @@ describe('<FrilansPapirsoknadIndex>', () => {
   });
 
   it('skal oppgi periode for når en har hatt oppdrag for nær familie', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<Default submitCallback={lagre} />);
 

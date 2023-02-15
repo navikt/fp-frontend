@@ -46,7 +46,7 @@ describe('<BehandlingPaVent>', () => {
         } as Behandling}
         requestApi={requestMock}
         kodeverk={kodeverk}
-        hentBehandling={jest.fn()}
+        hentBehandling={vi.fn()}
       />,
     );
 
@@ -64,7 +64,7 @@ describe('<BehandlingPaVent>', () => {
           } as Behandling}
           requestApi={requestMock}
           kodeverk={kodeverk}
-          hentBehandling={jest.fn()}
+          hentBehandling={vi.fn()}
         />,
       );
     });
@@ -82,7 +82,7 @@ describe('<BehandlingPaVent>', () => {
         } as Behandling}
         requestApi={requestMock}
         kodeverk={kodeverk}
-        hentBehandling={jest.fn()}
+        hentBehandling={vi.fn()}
       />,
     );
 

@@ -23,8 +23,8 @@ const behandling = {
 const kodeverk = alleKodeverk as AlleKodeverk;
 
 describe('<FaktaDefaultInitPanel>', () => {
-  const submitCallback = jest.fn();
-  jest.spyOn(Felles, 'default').mockImplementation(() => ({
+  const submitCallback = vi.fn();
+  vi.spyOn(Felles, 'default').mockImplementation(() => ({
     behandling,
     submitCallback,
     alleKodeverk: kodeverk,

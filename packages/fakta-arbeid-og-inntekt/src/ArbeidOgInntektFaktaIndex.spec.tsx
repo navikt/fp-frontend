@@ -32,15 +32,15 @@ const {
 
 const frist = dayjs().add(28, 'days').format(ISO_DATE_FORMAT);
 
-const scrollIntoViewMock = jest.fn();
+const scrollIntoViewMock = vi.fn();
 window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
 
 describe('<ArbeidOgInntektFaktaIndex>', () => {
   Modal.setAppElement('body');
 
   it('skal avklare arbeidsforhold som mangler inntektsmelding og så sette på vent', async () => {
-    const settPåVent = jest.fn(() => Promise.resolve());
-    const lagreVurdering = jest.fn(() => Promise.resolve());
+    const settPåVent = vi.fn(() => Promise.resolve());
+    const lagreVurdering = vi.fn(() => Promise.resolve());
 
     const utils = render(<InnhentInntektsmelding settBehandlingPåVentCallback={settPåVent} lagreVurdering={lagreVurdering} />);
 
@@ -84,8 +84,8 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
   });
 
   it('skal avklare arbeidsforhold som mangler inntektsmelding og gå videre uten inntektsmelding', async () => {
-    const bekrefteAksjonspunkt = jest.fn(() => Promise.resolve());
-    const lagreVurdering = jest.fn(() => Promise.resolve());
+    const bekrefteAksjonspunkt = vi.fn(() => Promise.resolve());
+    const lagreVurdering = vi.fn(() => Promise.resolve());
 
     const utils = render(<InnhentInntektsmelding submitCallback={bekrefteAksjonspunkt} lagreVurdering={lagreVurdering} />);
 
@@ -135,8 +135,8 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
   });
 
   it('skal avklare manglende arbeidsforhold og så kontakte arbeidsgiver angående inntektsmeldingen', async () => {
-    const settPåVent = jest.fn(() => Promise.resolve());
-    const lagreVurdering = jest.fn(() => Promise.resolve());
+    const settPåVent = vi.fn(() => Promise.resolve());
+    const lagreVurdering = vi.fn(() => Promise.resolve());
 
     const utils = render(<AvklarManglendeArbeidsforhold settBehandlingPåVentCallback={settPåVent} lagreVurdering={lagreVurdering} />);
 
@@ -183,8 +183,8 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
   });
 
   it('skal avklare manglende arbeidsforhold og så se bort fra inntektsmelding', async () => {
-    const bekrefteAksjonspunkt = jest.fn(() => Promise.resolve());
-    const lagreVurdering = jest.fn(() => Promise.resolve());
+    const bekrefteAksjonspunkt = vi.fn(() => Promise.resolve());
+    const lagreVurdering = vi.fn(() => Promise.resolve());
 
     const utils = render(<AvklarManglendeArbeidsforhold submitCallback={bekrefteAksjonspunkt} lagreVurdering={lagreVurdering} />);
 
@@ -214,8 +214,8 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
   });
 
   it('skal avklare manglende arbeidsforhold og så opprette arbeidsforhold', async () => {
-    const bekrefteAksjonspunkt = jest.fn(() => Promise.resolve());
-    const registrerArbeidsforhold = jest.fn(() => Promise.resolve());
+    const bekrefteAksjonspunkt = vi.fn(() => Promise.resolve());
+    const registrerArbeidsforhold = vi.fn(() => Promise.resolve());
 
     const utils = render(<AvklarManglendeArbeidsforhold submitCallback={bekrefteAksjonspunkt} registrerArbeidsforhold={registrerArbeidsforhold} />);
 
@@ -272,7 +272,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
   });
 
   it('skal kunne åpne for ny vurdering når aksjonspunkt er løst men behandling er åpen', async () => {
-    const åpneForNyVurdering = jest.fn(() => Promise.resolve());
+    const åpneForNyVurdering = vi.fn(() => Promise.resolve());
 
     render(
       <AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppMulig
@@ -290,7 +290,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
   });
 
   it('skal kunne åpne for ny revurdering når en ikke har hatt aksjonspunkter men er overstyrer', async () => {
-    const åpneForNyVurdering = jest.fn(() => Promise.resolve());
+    const åpneForNyVurdering = vi.fn(() => Promise.resolve());
 
     render(
       <IngenAksjonspunktMenTilbakehoppMuligForOverstyrer
@@ -313,8 +313,8 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
   });
 
   it('skal legge til nytt arbeidsforhold (Har overstyringsrettighet)', async () => {
-    const bekrefteAksjonspunkt = jest.fn(() => Promise.resolve());
-    const registrerArbeidsforhold = jest.fn(() => Promise.resolve());
+    const bekrefteAksjonspunkt = vi.fn(() => Promise.resolve());
+    const registrerArbeidsforhold = vi.fn(() => Promise.resolve());
 
     const utils = render(
       <SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnHarReåpnetOgEnErOverstyrer
@@ -383,8 +383,8 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
   });
 
   it('skal slette manuelt lagt til arbeidsforhold (Har overstyringsrettighet)', async () => {
-    const bekrefteAksjonspunkt = jest.fn(() => Promise.resolve());
-    const registrerArbeidsforhold = jest.fn(() => Promise.resolve());
+    const bekrefteAksjonspunkt = vi.fn(() => Promise.resolve());
+    const registrerArbeidsforhold = vi.fn(() => Promise.resolve());
 
     render(
       <ArbeidsforholdErManueltLagtTilOgLagretOgReåpnet
@@ -502,8 +502,8 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
   });
 
   it('skal ha aksjonspunkt og vise flere arbeidsforhold i tabell', async () => {
-    const settPåVent = jest.fn(() => Promise.resolve());
-    const lagreVurdering = jest.fn(() => Promise.resolve());
+    const settPåVent = vi.fn(() => Promise.resolve());
+    const lagreVurdering = vi.fn(() => Promise.resolve());
 
     const utils = render(<FlereArbeidsforholdOgInntekstemeldinger settBehandlingPåVentCallback={settPåVent} lagreVurdering={lagreVurdering} />);
 
@@ -550,8 +550,8 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
   });
 
   it('skal vise to arbeidsforhold fra samme virksomhet der kun ett har fått inntektsmelding', async () => {
-    const settPåVent = jest.fn(() => Promise.resolve());
-    const lagreVurdering = jest.fn(() => Promise.resolve());
+    const settPåVent = vi.fn(() => Promise.resolve());
+    const lagreVurdering = vi.fn(() => Promise.resolve());
 
     const utils = render(
       <ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAndre settBehandlingPåVentCallback={settPåVent} lagreVurdering={lagreVurdering} />);

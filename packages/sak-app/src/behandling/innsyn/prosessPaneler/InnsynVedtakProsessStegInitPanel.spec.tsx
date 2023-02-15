@@ -54,8 +54,8 @@ const innsyn = {
 };
 
 describe('<InnsynVedtakProsessStegInitPanel>', () => {
-  const submitCallback = jest.fn();
-  jest.spyOn(Felles, 'default').mockImplementation(() => ({
+  const submitCallback = vi.fn();
+  vi.spyOn(Felles, 'default').mockImplementation(() => ({
     behandling,
     alleMerknaderFraBeslutter: {},
     submitCallback,

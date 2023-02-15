@@ -15,7 +15,7 @@ const {
 
 describe('<AdopsjonFaktaIndex>', () => {
   it('skal kontrollere opplysninger fra adopsjonsdokumentasjonen og så bekrefte', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<AksjonspunktForAdopsjonsvilkåret submitCallback={lagre} />);
 
@@ -49,7 +49,7 @@ describe('<AdopsjonFaktaIndex>', () => {
   });
 
   it('skal kontrollere opplysninger fra adopsjonsdokumentasjonen og mann adopterer og så bekrefte', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<AksjonspunktForOmSøkerErMannSomAdoptererAlene submitCallback={lagre} />);
 
@@ -84,7 +84,7 @@ describe('<AdopsjonFaktaIndex>', () => {
   });
 
   it('skal kontrollere opplysninger fra adopsjonsdokumentasjonen og ektefelles barn og så bekrefte', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<AksjonspunktForOmAdopsjonGjelderEktefellesBarn submitCallback={lagre} />);
 
@@ -119,7 +119,7 @@ describe('<AdopsjonFaktaIndex>', () => {
   });
 
   it('skal ikke vise felt for barnets ankomst når fagsak er engangsstønad', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     render(<IkkeVisBarnetsAnkomstDatoForEngangsstønad submitCallback={lagre} />);
 

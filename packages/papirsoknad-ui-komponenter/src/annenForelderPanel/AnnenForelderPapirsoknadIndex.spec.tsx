@@ -11,7 +11,7 @@ const { Default } = composeStories(stories);
 
 describe('<AnnenForelderPapirsoknadIndex>', () => {
   it('skal validere fødselsnummer', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<Default submitCallback={lagre} />);
 
@@ -56,7 +56,7 @@ describe('<AnnenForelderPapirsoknadIndex>', () => {
   });
 
   it('skal ikke kunne oppgi annen forelder', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<Default submitCallback={lagre} />);
 

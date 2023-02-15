@@ -11,7 +11,7 @@ const { Default, KunMiliterEllerSiviltjeneste } = composeStories(stories);
 
 describe('<AndreYtelserPapirsoknadIndex>', () => {
   it('skal validere at fom-dato er før tom-dato', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<Default submitCallback={lagre} />);
 
@@ -51,7 +51,7 @@ describe('<AndreYtelserPapirsoknadIndex>', () => {
   });
 
   it('skal legge til flere perioder under militær eller siviltjeneste', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<KunMiliterEllerSiviltjeneste submitCallback={lagre} />);
 

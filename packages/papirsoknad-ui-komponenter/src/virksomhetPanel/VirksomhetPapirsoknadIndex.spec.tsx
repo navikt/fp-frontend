@@ -10,14 +10,13 @@ import * as stories from './VirksomhetPapirsoknadIndex.stories';
 
 const { Default } = composeStories(stories);
 
+const TEST_TIMEOUT = 10000;
+
 describe('<VirksomhetPapirsoknadIndex>', () => {
   Modal.setAppElement('body');
 
-  // TODO Testane bør ikkje vera så treige!
-  jest.setTimeout(30000);
-
   it('skal velge at søker ikke har arbeidet i egen næringsvirksomhet', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     render(<Default submitCallback={lagre} />);
 
@@ -40,7 +39,7 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
   });
 
   it('skal velge at søker har arbeidet i egen næringsvirksomhet', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<Default submitCallback={lagre} />);
 
@@ -129,5 +128,5 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
         }],
       },
     });
-  });
+  }, TEST_TIMEOUT);
 });

@@ -20,8 +20,8 @@ describe('BehandlingerIndex', () => {
       <MemoryRouter>
         <BehandlingerIndex
           fagsakData={new FagsakData(fagsak)}
-          setBehandlingUuidOgVersjon={jest.fn()}
-          setRequestPendingMessage={jest.fn()}
+          setBehandlingUuidOgVersjon={vi.fn()}
+          setRequestPendingMessage={vi.fn()}
         />
       </MemoryRouter>,
     );

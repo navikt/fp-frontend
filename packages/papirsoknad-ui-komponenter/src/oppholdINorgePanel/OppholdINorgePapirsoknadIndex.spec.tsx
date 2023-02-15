@@ -14,7 +14,7 @@ const { ForFodsel, ForAdopsjon } = composeStories(stories);
 
 describe('<OppholdINorgePapirsoknadIndex>', () => {
   it('skal svare ja på alle spørsmåla for fødsel', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     render(<ForFodsel submitCallback={lagre} />);
 
@@ -42,7 +42,7 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
   });
 
   it('skal ha annen tekst på første spørsmålet for adopsjon', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     render(<ForAdopsjon submitCallback={lagre} />);
 
@@ -53,7 +53,7 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
   });
 
   it('skal svare nei på at en har bodd i norge de siste 12 månedene', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ForFodsel submitCallback={lagre} />);
 
@@ -116,7 +116,7 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
   });
 
   it('skal svare nei på at en skal bo i norge de neste 12 månedene', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ForFodsel submitCallback={lagre} />);
 

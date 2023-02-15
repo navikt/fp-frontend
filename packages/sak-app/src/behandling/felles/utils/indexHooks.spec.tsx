@@ -47,7 +47,7 @@ describe('indexHooks', () => {
   });
 
   it('skal lagre aksjonspunkt og så oppdatere behandling', async () => {
-    const setBehandling = jest.fn();
+    const setBehandling = vi.fn();
 
     const endpoints = new RestApiConfigBuilder()
       .withRel('Aksjonspunkt', BehandlingFellesApiKeys.SAVE_AKSJONSPUNKT)
@@ -71,7 +71,7 @@ describe('indexHooks', () => {
   });
 
   it('skal lagre overstyrt aksjonspunkt og så oppdatere behandling', async () => {
-    const setBehandling = jest.fn();
+    const setBehandling = vi.fn();
 
     const endpoints = new RestApiConfigBuilder()
       .withRel('Aksjonspunkt', BehandlingFellesApiKeys.SAVE_AKSJONSPUNKT)

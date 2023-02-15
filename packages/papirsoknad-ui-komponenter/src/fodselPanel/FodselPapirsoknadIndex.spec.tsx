@@ -13,7 +13,7 @@ const { Default, ErIkkeForeldrepenger } = composeStories(stories);
 
 describe('<FodselPapirsoknadIndex>', () => {
   it('skal velge at barnet er født for foreldrepengersak', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<Default submitCallback={lagre} />);
 
@@ -73,7 +73,7 @@ describe('<FodselPapirsoknadIndex>', () => {
   });
 
   it('skal velge at barnet ikke er født', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<Default submitCallback={lagre} />);
 

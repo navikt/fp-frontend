@@ -9,7 +9,7 @@ const { Default, FarAdopterer } = composeStories(stories);
 
 describe('<RettigheterPapirsoknadIndex>', () => {
   it('skal velge at andre forelderen er død', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     render(<Default submitCallback={lagre} />);
 
@@ -27,7 +27,7 @@ describe('<RettigheterPapirsoknadIndex>', () => {
   });
 
   it('skal kunne velge at mann adopterer alene når søker er far og det er en adopsjonssøknad', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     render(<FarAdopterer submitCallback={lagre} />);
 

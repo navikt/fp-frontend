@@ -10,7 +10,7 @@ const { AksjonspunktTerminbekreftelse, AksjonspunktSjekkManglendeFødsel, Aksjon
 
 describe('<FodselFaktaIndex>', () => {
   it('skal bekrefte aksjonspunkt for termin', async () => {
-    const lagre = jest.fn(() => Promise.resolve());
+    const lagre = vi.fn(() => Promise.resolve());
 
     const utils = render(<AksjonspunktTerminbekreftelse submitCallback={lagre} />);
 
@@ -44,7 +44,7 @@ describe('<FodselFaktaIndex>', () => {
   });
 
   it('skal bekrefte aksjonspunkt for manglende fødsel ved å velge at dokumentasjon foreligger', async () => {
-    const lagre = jest.fn(() => Promise.resolve());
+    const lagre = vi.fn(() => Promise.resolve());
 
     const utils = render(<AksjonspunktSjekkManglendeFødsel submitCallback={lagre} />);
 
@@ -103,7 +103,7 @@ describe('<FodselFaktaIndex>', () => {
   });
 
   it('skal bekrefte aksjonspunkt for manglende fødsel ved å velge at dokumentasjon ikke foreligger', async () => {
-    const lagre = jest.fn(() => Promise.resolve());
+    const lagre = vi.fn(() => Promise.resolve());
     const utils = render(<AksjonspunktSjekkManglendeFødsel submitCallback={lagre} />);
 
     expect(await screen.findByText('Kontroller mot opplysningene fra fødselsdokumentasjonen')).toBeInTheDocument();
@@ -141,7 +141,7 @@ describe('<FodselFaktaIndex>', () => {
   });
 
   it('skal bekrefte aksjonspunkt for sykdom der det er dokumentert at den andre forelderen er for syk', async () => {
-    const lagre = jest.fn(() => Promise.resolve());
+    const lagre = vi.fn(() => Promise.resolve());
 
     const utils = render(<AksjonspunktVurderOmVilkårForSykdomErOppfylt submitCallback={lagre} />);
 
@@ -165,7 +165,7 @@ describe('<FodselFaktaIndex>', () => {
   });
 
   it('skal bekrefte aksjonspunkt for sykdom der det ikke er dokumentert at den andre forelderen er for syk', async () => {
-    const lagre = jest.fn(() => Promise.resolve());
+    const lagre = vi.fn(() => Promise.resolve());
 
     const utils = render(<AksjonspunktVurderOmVilkårForSykdomErOppfylt submitCallback={lagre} />);
 

@@ -22,7 +22,7 @@ describe('<TilkjentYtelseProsessIndex>', () => {
   });
 
   it('skal bekrefte aksjonspunkt', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ÅpentAksjonspunkt submitCallback={lagre} />);
 

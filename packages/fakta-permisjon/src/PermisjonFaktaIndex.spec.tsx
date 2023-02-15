@@ -11,7 +11,7 @@ const {
 
 describe('<PermisjonFaktaIndex>', () => {
   it('skal velge å ta med arbeidsforholdet og så bekrefte', async () => {
-    const lagreVurdering = jest.fn(() => Promise.resolve());
+    const lagreVurdering = vi.fn(() => Promise.resolve());
 
     const utils = render(<EttArbeidsforholdUtenSluttdatoForPermisjon submitCallback={lagreVurdering} />);
 
@@ -46,7 +46,7 @@ describe('<PermisjonFaktaIndex>', () => {
   });
 
   it('skal ta med ett av to arbeidsforhold og så bekrefte', async () => {
-    const lagreVurdering = jest.fn(() => Promise.resolve());
+    const lagreVurdering = vi.fn(() => Promise.resolve());
 
     const utils = render(<FlereArbeidsforhold submitCallback={lagreVurdering} />);
 

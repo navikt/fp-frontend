@@ -65,7 +65,7 @@ describe('<FagsakProfileIndex>', () => {
             <MemoryRouter>
               <FagsakProfileIndex
                 fagsakData={new FagsakData(fagsak as Fagsak)}
-                hentFagsakdataPåNytt={jest.fn()}
+                hentFagsakdataPåNytt={vi.fn()}
               />
             </MemoryRouter>
           </RestApiMock>
@@ -91,7 +91,7 @@ describe('<FagsakProfileIndex>', () => {
             <MemoryRouter>
               <FagsakProfileIndex
                 fagsakData={new FagsakData(fagsak as Fagsak)}
-                hentFagsakdataPåNytt={jest.fn()}
+                hentFagsakdataPåNytt={vi.fn()}
                 behandlingUuid="1"
               />
             </MemoryRouter>

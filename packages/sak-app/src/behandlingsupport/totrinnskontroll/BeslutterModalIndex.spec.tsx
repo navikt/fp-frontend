@@ -24,7 +24,7 @@ describe('<BeslutterModalIndex>', () => {
     render(
       <BeslutterModalIndex
         behandling={behandling}
-        pushLocation={jest.fn()}
+        pushLocation={vi.fn()}
         allAksjonspunktApproved
       />,
     );

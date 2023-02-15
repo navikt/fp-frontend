@@ -9,7 +9,7 @@ const { Default } = composeStories(stories);
 
 describe('<SprakPapirsoknadIndex>', () => {
   it('skal velge korrekt språk', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     render(<Default submitCallback={lagre} />);
 

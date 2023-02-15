@@ -10,7 +10,7 @@ const {
 
 describe('<SoknadsfristVilkarProsessIndex>', () => {
   it('skal bestemme at vilkåret er oppfylt og så løse aksjonspunkt', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ÅpentAksjonspunkt submitCallback={lagre} />);
 

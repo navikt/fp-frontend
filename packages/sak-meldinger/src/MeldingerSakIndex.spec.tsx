@@ -11,7 +11,7 @@ const brukerenHarIkkeAdresseText = 'Brukeren har ikke en registrert adresse. Uts
 
 describe('<MeldingerSakIndex>', () => {
   it('skal bruke default mal og sende brev', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
     const utils = render(<Default lagre={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
@@ -28,7 +28,7 @@ describe('<MeldingerSakIndex>', () => {
   });
 
   it('skal få feilmelding når en ikke har fylt ut liste over dokumenter', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
     render(<Default lagre={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
@@ -39,7 +39,7 @@ describe('<MeldingerSakIndex>', () => {
   });
 
   it('skal vise feltet årsak men ikke fritekst når en velger mal Revurderingsdokumentasjon og ikke Annet', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
     const utils = render(<Default lagre={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
@@ -57,7 +57,7 @@ describe('<MeldingerSakIndex>', () => {
   });
 
   it('skal vise feltet årsak og fritekst når en velger mal Revurderingsdokumentasjon og Annet', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
     const utils = render(<Default lagre={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
@@ -79,7 +79,7 @@ describe('<MeldingerSakIndex>', () => {
   });
 
   it('skal ikke vise årsaksverdi Barn ikke registrert for Svangerskapspenger', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
     const utils = render(<ForSvangerskapspenger lagre={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
@@ -91,7 +91,7 @@ describe('<MeldingerSakIndex>', () => {
   });
 
   it('skal vise melding til saksbehandler at bruker ikke har en adresse registrert', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
     const utils = render(<BrukerManglerAdresse lagre={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 

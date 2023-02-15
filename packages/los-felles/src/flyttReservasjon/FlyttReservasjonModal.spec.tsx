@@ -34,7 +34,7 @@ describe('<FlyttReservasjonModal>', () => {
   });
 
   it('skal vise finne brukerident og så lagre begrunnelse for flytting', async () => {
-    const hentReserverteOppgaver = jest.fn();
+    const hentReserverteOppgaver = vi.fn();
     const utils = render(<MedTreffPåSøk hentReserverteOppgaver={hentReserverteOppgaver} />);
 
     expect(await screen.findByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();

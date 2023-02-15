@@ -17,7 +17,7 @@ Object.defineProperty(global.self, 'crypto', {
 
 describe('<OpptjeningVilkarProsessIndex>', () => {
   it('skal løse aksjonspunkt', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ÅpentAksjonspunkt submitCallback={lagre} />);
 
@@ -43,7 +43,7 @@ describe('<OpptjeningVilkarProsessIndex>', () => {
   });
 
   it('skal validere at en ikke kan oppfylle vilkår når det ikke finnes aktiviteter', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ÅpentAksjonspunktMenUtenAktiviteter submitCallback={lagre} />);
 

@@ -25,7 +25,7 @@ describe('<LeggTilSaksbehandlerForm>', () => {
   });
 
   it('skal finne brukerident og så legge saksbehandler til listen', async () => {
-    const hentAvdelingensSaksbehandlere = jest.fn();
+    const hentAvdelingensSaksbehandlere = vi.fn();
     const utils = render(<Default hentAvdelingensSaksbehandlere={hentAvdelingensSaksbehandlere} />);
 
     expect(await screen.findByText('Legg til saksbehandler')).toBeInTheDocument();

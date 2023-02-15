@@ -63,7 +63,7 @@ describe('<FagsakIndex>', () => {
     navn: 'Peder Pjokk',
   };
 
-  jest.spyOn(useTrackRouteParam, 'default').mockImplementation(() => ({
+  vi.spyOn(useTrackRouteParam, 'default').mockImplementation(() => ({
     selected: '123456',
     location: {
       key: '1',
