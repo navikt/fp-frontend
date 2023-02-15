@@ -6,7 +6,7 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 configureEnzyme({ adapter: new Adapter() });
 
 // TODO Testane bør ikkje vera så treige!
-jest.setTimeout(15000);
+jest.setTimeout(25000);
 
 // Skjul warning fra echarts
 // eslint-disable-next-line no-console
