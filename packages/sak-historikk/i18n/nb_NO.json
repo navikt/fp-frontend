@@ -205,6 +205,7 @@
   "HistorikkEndretFelt.AnnenPartOverlappendeUttakSamtidigUttak": "Annen part har overlappende uttak, det er ikke søkt/innvilget samtidig uttak",
   "HistorikkEndretFelt.AvslagGraderingForUke7": "Avslag gradering - gradering før uke 7",
   "HistorikkEndretFelt.AvslagGraderingArbeidOver100": "Avslag gradering - arbeid 100% eller mer",
+  "HistorikkEndretFelt.AvslagGraderingAktivitetskravMor": "Avslag gradering - ikke rett til gradert uttak pga. redusert oppfylt aktivitetskrav på mor",
   "HistorikkEndretFelt.AvslagGraderingSøkerErIkkeIArbeid": "Avslag gradering - søker er ikke i arbeid",
   "HistorikkEndretFelt.ArbeiderIUtaksperiodenMerEnn0": "Arbeider i uttaksperioden mer enn 0%",
   "HistorikkEndretFelt.resultatÅrsak": "Årsak resultat",

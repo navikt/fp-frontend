@@ -545,6 +545,14 @@ const historikkEndretFeltVerdiTypeCodes = {
     kode: '4504',
     verdiId: 'HistorikkEndretFelt.AvslagGraderingForUke7',
   },
+  4503: {
+    kode: '4503',
+    verdiId: 'HistorikkEndretFelt.AvslagGraderingAktivitetskravMor',
+  },
+  4523: {
+    kode: '4523',
+    verdiId: 'HistorikkEndretFelt.AvslagGraderingArbeidOver100',
+  },
   4025: {
     kode: '4025',
     verdiId: 'HistorikkEndretFelt.AvslagGraderingArbeidOver100',
