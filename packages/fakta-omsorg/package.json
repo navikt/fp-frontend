@@ -27,7 +27,7 @@
     "storybook": "start-storybook --quiet -p 7009"
   },
   "dependencies": {
-    "@navikt/ds-css": "2.1.5",
+    "@navikt/ds-css": "2.1.7",
     "@navikt/fp-fakta-felles": "1.0.0",
     "@navikt/fp-kodeverk": "1.0.0",
     "@navikt/fp-storybook-utils": "1.0.0",

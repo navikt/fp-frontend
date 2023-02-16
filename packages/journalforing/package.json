@@ -27,10 +27,8 @@
     "storybook": "start-storybook --quiet -p 7019"
   },
   "dependencies": {
-    "dayjs": "1.11.7",
     "@navikt/ds-icons": "2.1.7",
     "@navikt/ds-react": "2.1.7",
-    "@navikt/fp-assets": "1.0.0",
     "@navikt/fp-kodeverk": "1.0.0",
     "@navikt/fp-rest-api": "1.0.0",
     "@navikt/fp-rest-api-hooks": "1.0.0",
@@ -40,13 +38,14 @@
     "@navikt/ft-plattform-komponenter": "1.4.11",
     "@navikt/ft-ui-komponenter": "1.3.13",
     "@navikt/ft-utils": "1.1.18",
+    "dayjs": "1.11.7",
     "pdfjs-dist": "2.12.313",  
     "react": "18.2.0",
     "react-intl": "6.2.8",
     "react-pdf": "5.7.0"
   },
   "devDependencies": {
-    "@navikt/ds-css": "2.1.5",
+    "@navikt/ds-css": "2.1.7",
     "@navikt/fp-storybook-utils": "1.0.0",
     "@navikt/fp-utils-test": "1.0.0",
     "@storybook/addon-actions": "6.5.16",

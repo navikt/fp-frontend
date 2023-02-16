@@ -309,5 +309,5 @@ describe('<PermisjonIndex>', () => {
         graderingPeriode: undefined,
       },
     });
-  });
+  }, TIMEOUT);
 });

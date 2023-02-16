@@ -13,7 +13,7 @@ const config = {
 
   parser: '@typescript-eslint/parser',
 
-  plugins: ['@typescript-eslint'],
+  plugins: ['vitest', '@typescript-eslint'],
 
   extends: [
     'airbnb',

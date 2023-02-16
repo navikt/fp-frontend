@@ -1,8 +1,7 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Link } from '@navikt/ds-react';
-import fagsakStatus from '@navikt/fp-kodeverk/src/fagsakStatus';
-import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import { fagsakStatus, fagsakYtelseType } from '@navikt/fp-kodeverk';
 import dayjs from 'dayjs';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import JournalFagsak from '../typer/journalFagsakTsType';
