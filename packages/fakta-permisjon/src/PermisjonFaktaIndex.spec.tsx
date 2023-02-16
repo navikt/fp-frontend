@@ -58,8 +58,8 @@ describe('<PermisjonFaktaIndex>', () => {
 
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
-    await userEvent.click(screen.getAllByText('Fjern permisjonen og ta med arbeidsforholdet. Vurder om inntektsmelding må innhentes')[0]);
-    await userEvent.click(screen.getAllByText('Ikke ta med arbeidsforholdet')[1]);
+    await userEvent.click(utils.getByLabelText('Fjern permisjonen og ta med arbeidsforholdet. Vurder om inntektsmelding må innhentes'));
+    await userEvent.click(utils.getAllByLabelText('Ikke ta med arbeidsforholdet')[1]);
 
     await userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 

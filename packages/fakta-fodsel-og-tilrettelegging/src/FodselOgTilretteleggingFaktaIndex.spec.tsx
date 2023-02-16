@@ -38,7 +38,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
-    expect(await screen.findByText('Flere like datoer.')).toBeInTheDocument();
+    expect(await screen.findAllByText('Flere like datoer.')).toHaveLength(2);
 
     await userEvent.clear(dato);
     await userEvent.type(dato, '16.10.2020');
