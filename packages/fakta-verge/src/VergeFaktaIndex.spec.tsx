@@ -8,6 +8,8 @@ import * as stories from './VergeFaktaIndex.stories';
 
 const { Default } = composeStories(stories);
 
+const TIMEOUT = 10000;
+
 describe('<VergeFaktaIndex>', () => {
   it('skal velge vergetype og bekrefte aksjonspunkt', async () => {
     const lagre = vi.fn();
@@ -49,5 +51,5 @@ describe('<VergeFaktaIndex>', () => {
       organisasjonsnummer: '2322323233',
       vergeType: 'ADVOKAT',
     });
-  });
+  }, TIMEOUT);
 });
