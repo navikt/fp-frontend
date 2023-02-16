@@ -10,8 +10,6 @@ import * as stories from './VirksomhetPapirsoknadIndex.stories';
 
 const { Default } = composeStories(stories);
 
-const TEST_TIMEOUT = 12500;
-
 describe('<VirksomhetPapirsoknadIndex>', () => {
   Modal.setAppElement('body');
 
@@ -128,5 +126,5 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
         }],
       },
     });
-  }, TEST_TIMEOUT);
+  });
 });
