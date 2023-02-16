@@ -38,11 +38,11 @@ const MenyHenleggIndex: FunctionComponent<OwnProps> = ({
 }) => {
   const [erHenlagt, setHenlagt] = useState(false);
 
-  const submit = useCallback((formValues: Required<FormValues>) => {
+  const submit = useCallback((formValues: FormValues) => {
     const henleggBehandlingDto = {
-      årsakKode: formValues.årsakKode,
-      begrunnelse: formValues.begrunnelse,
-      fritekst: formValues.fritekst,
+      årsakKode: formValues.årsakKode || '',
+      begrunnelse: formValues.begrunnelse || '',
+      fritekst: formValues.fritekst || '',
     };
     henleggBehandling(henleggBehandlingDto).then(() => {
       setHenlagt(true);

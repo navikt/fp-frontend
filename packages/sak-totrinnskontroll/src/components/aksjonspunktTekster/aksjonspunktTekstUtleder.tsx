@@ -105,7 +105,7 @@ const getFaktaOmBeregningText = (
 };
 
 const getTextForKlageHelper = (
-  behandlingsresultat: Behandlingsresultat,
+  behandlingsresultat?: Behandlingsresultat,
 ): ReactElement => {
   let aksjonspunktTextId = '';
   switch (behandlingsresultat?.type) {
@@ -136,7 +136,7 @@ const getTextForKlageHelper = (
   return <FormattedMessage id={aksjonspunktTextId} />;
 };
 
-const getTextForKlage = (behandlingStaus: string, behandlingsresultat: Behandlingsresultat): ReactElement[] => {
+const getTextForKlage = (behandlingStaus: string, behandlingsresultat?: Behandlingsresultat): ReactElement[] => {
   if (behandlingStaus === behandlingStatusCode.FATTER_VEDTAK) {
     return [getTextForKlageHelper(behandlingsresultat)];
   }

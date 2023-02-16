@@ -9,7 +9,7 @@ import { RestApiErrorDispatchContext } from './RestApiErrorContext';
 const useRestApiErrorDispatcher = () => {
   const dispatch = useContext(RestApiErrorDispatchContext);
 
-  const addErrorMessage = useCallback((data) => {
+  const addErrorMessage = useCallback((data: any) => {
     if (dispatch) {
       dispatch({ type: 'add', data });
     }
