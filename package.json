@@ -128,6 +128,7 @@
   },
   "resolutions": {
     "decode-uri-component": "0.2.1",
+    "esquery": "1.4.0",
     "glob-parent": "5.1.2",
     "got": "11.8.5",
     "json5": "2.2.3",
