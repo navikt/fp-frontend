@@ -8,8 +8,6 @@ import userEvent from '@testing-library/user-event';
 
 import * as stories from './PermisjonIndex.stories';
 
-const TIMEOUT = 10000;
-
 const { SokerErMor } = composeStories(stories);
 
 describe('<PermisjonIndex>', () => {
@@ -238,7 +236,7 @@ describe('<PermisjonIndex>', () => {
         utsettelsePeriode: undefined,
       },
     });
-  }, TIMEOUT);
+  });
 
   it('skal velge opphold', async () => {
     const lagre = vi.fn();
@@ -309,5 +307,5 @@ describe('<PermisjonIndex>', () => {
         graderingPeriode: undefined,
       },
     });
-  }, TIMEOUT);
+  });
 });

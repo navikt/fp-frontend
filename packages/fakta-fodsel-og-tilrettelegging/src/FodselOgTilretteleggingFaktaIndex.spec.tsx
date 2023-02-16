@@ -4,8 +4,6 @@ import userEvent from '@testing-library/user-event';
 import { composeStories } from '@storybook/testing-react';
 import * as stories from './FodselOgTilretteleggingFaktaIndex.stories';
 
-const TIMEOUT = 10000;
-
 const {
   TilretteleggingMedVelferdspermisjon,
   ErOverstyrer,
@@ -85,7 +83,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
       kode: '5091',
       termindato: '2020-11-06',
     });
-  }, TIMEOUT);
+  });
 
   it('skal legge til tilretteleggingsbehov', async () => {
     const bekreft = vi.fn(() => Promise.resolve());
