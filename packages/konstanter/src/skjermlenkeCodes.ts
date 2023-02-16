@@ -71,7 +71,7 @@ const skjermlenkeCodes = {
   },
   FAKTA_OM_AKTIVITETSKRAV: {
     kode: 'FAKTA_OM_AKTIVITETSKRAV',
-    faktaNavn: FaktaPanelCode.AKTIVITETSKRAV,
+    faktaNavn: FaktaPanelCode.UTTAK_DOKUMENTASJON,
     punktNavn: '',
   },
   PUNKT_FOR_FORELDREANSVAR: {
