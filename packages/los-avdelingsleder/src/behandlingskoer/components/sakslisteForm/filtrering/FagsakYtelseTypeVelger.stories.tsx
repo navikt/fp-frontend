@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
-import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { RestApiMock } from '@navikt/fp-utils-test';
 import { getIntlDecorator, alleKodeverkLos } from '@navikt/fp-storybook-utils';
 
 import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, requestApi } from '../../../../data/fplosRestApi';

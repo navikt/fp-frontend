@@ -9,7 +9,7 @@ import {
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { createIntl } from '@navikt/ft-utils';
 
-import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { RestApiMock } from '@navikt/fp-utils-test';
 import { AksjonspunktCode, dokumentMalType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { RequestApi } from '@navikt/fp-rest-api';

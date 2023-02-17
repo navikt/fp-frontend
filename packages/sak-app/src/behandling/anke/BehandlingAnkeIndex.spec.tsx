@@ -7,7 +7,7 @@ import { AlleKodeverk } from '@navikt/ft-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import { AksessRettigheter, Fagsak } from '@navikt/fp-types';
-import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { RestApiMock } from '@navikt/fp-utils-test';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import { BehandlingFellesApiKeys } from '../felles/data/behandlingFellesApi';

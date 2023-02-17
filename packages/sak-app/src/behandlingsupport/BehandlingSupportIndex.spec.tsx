@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
 
-import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { RestApiMock } from '@navikt/fp-utils-test';
 import { BehandlingAppKontekst, Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
 
 import BehandlingSupportIndex, { hentSynligePaneler, hentValgbarePaneler } from './BehandlingSupportIndex';

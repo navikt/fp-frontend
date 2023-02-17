@@ -27,7 +27,7 @@ interface OwnProps {
   oppgaveId: number;
   endreReserverasjonState: () => void;
   hentReserverteOppgaver: (params: any, keepData: boolean) => void;
-  endreOppgavereservasjon: (input: { oppgaveId: number, reserverTil: string }) => Promise<Oppgave[]>;
+  endreOppgavereservasjon: (input: { oppgaveId: number, reserverTil: string }) => Promise<Oppgave[] | undefined>;
 }
 
 /**

@@ -14,7 +14,7 @@ export default {
 interface HenleggParams {
   årsakKode: string;
   begrunnelse: string;
-  fritekst: string;
+  fritekst?: string;
 }
 
 const Template: Story<{

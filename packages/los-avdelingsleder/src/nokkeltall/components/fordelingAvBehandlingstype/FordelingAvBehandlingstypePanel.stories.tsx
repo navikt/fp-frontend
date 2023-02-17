@@ -2,7 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
 
-import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { RestApiMock } from '@navikt/fp-utils-test';
 import { getIntlDecorator, alleKodeverkLos } from '@navikt/fp-storybook-utils';
 
 import { RestApiGlobalStatePathsKeys, requestApi } from '../../../data/fplosRestApi';

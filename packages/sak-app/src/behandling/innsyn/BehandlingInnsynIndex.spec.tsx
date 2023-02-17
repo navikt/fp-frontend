@@ -6,7 +6,7 @@ import { FagsakYtelseType, BehandlingType, BehandlingStatus } from '@navikt/ft-k
 import { AlleKodeverk } from '@navikt/ft-types';
 
 import { AksessRettigheter, Fagsak } from '@navikt/fp-types';
-import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { RestApiMock } from '@navikt/fp-utils-test';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { createIntl } from '@navikt/ft-utils';
 

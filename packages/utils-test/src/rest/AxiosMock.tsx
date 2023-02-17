@@ -28,7 +28,7 @@ const AxiosMock: FunctionComponent<Props> = ({
 
     requestApi.setLinks(data.filter((d) => !d.noRelLink).map((d) => ({
       href: d.key,
-      rel: requestApi.endpointConfigList.find((c) => c.name === d.key).rel,
+      rel: requestApi.endpointConfigList.find((c) => c.name === d.key)?.rel || '',
       type: 'GET',
     })));
 

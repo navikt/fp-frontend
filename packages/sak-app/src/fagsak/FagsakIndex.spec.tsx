@@ -8,7 +8,7 @@ import {
 } from '@navikt/ft-kodeverk';
 import { createIntl } from '@navikt/ft-utils';
 
-import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { RestApiMock } from '@navikt/fp-utils-test';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import * as useTrackRouteParam from '../app/useTrackRouteParam';

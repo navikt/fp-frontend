@@ -6,7 +6,7 @@ import MockAdapter from 'axios-mock-adapter';
 import { Modal } from '@navikt/ds-react';
 import { FagsakYtelseType, BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
 
-import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { RestApiMock } from '@navikt/fp-utils-test';
 import { dokumentMalType } from '@navikt/fp-kodeverk';
 import { Fagsak, BehandlingAppKontekst } from '@navikt/fp-types';
 

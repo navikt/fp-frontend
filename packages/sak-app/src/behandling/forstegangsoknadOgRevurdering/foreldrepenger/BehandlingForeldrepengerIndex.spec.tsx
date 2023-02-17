@@ -4,7 +4,7 @@
 // import { act } from 'react-dom/test-utils';
 
 // import { AksessRettigheter, AlleKodeverk, Fagsak } from '@navikt/fp-types';
-// import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+// import { RestApiMock } from '@navikt/fp-utils-test';
 // import { behandlingStatus, fagsakYtelseType, behandlingType } from '@navikt/fp-kodeverk';
 // import { alleKodeverk } from '@navikt/fp-storybook-utils';
 // import { createIntl } from '@navikt/ft-utils';

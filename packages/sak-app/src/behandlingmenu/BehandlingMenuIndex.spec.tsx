@@ -5,7 +5,7 @@ import {
   BehandlingType, FagsakStatus, BehandlingStatus, FagsakYtelseType,
 } from '@navikt/ft-kodeverk';
 
-import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { RestApiMock } from '@navikt/fp-utils-test';
 import { Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
 
 import BehandlingMenuIndex from './BehandlingMenuIndex';

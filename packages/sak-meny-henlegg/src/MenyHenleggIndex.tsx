@@ -18,7 +18,7 @@ interface OwnProps {
   henleggBehandling: (params: {
     årsakKode: string;
     begrunnelse: string;
-    fritekst: string;
+    fritekst?: string;
   }) => Promise<any>;
   forhandsvisHenleggBehandling: (erHenleggelse: boolean, data: any) => void;
   ytelseType: string;
@@ -42,7 +42,7 @@ const MenyHenleggIndex: FunctionComponent<OwnProps> = ({
     const henleggBehandlingDto = {
       årsakKode: formValues.årsakKode || '',
       begrunnelse: formValues.begrunnelse || '',
-      fritekst: formValues.fritekst || '',
+      fritekst: formValues.fritekst,
     };
     henleggBehandling(henleggBehandlingDto).then(() => {
       setHenlagt(true);

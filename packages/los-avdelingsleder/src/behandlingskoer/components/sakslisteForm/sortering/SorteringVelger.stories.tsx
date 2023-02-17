@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 import { BehandlingType } from '@navikt/ft-kodeverk';
 
-import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { RestApiMock } from '@navikt/fp-utils-test';
 import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import SorteringVelger from './SorteringVelger';

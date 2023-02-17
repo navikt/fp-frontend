@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
 import { Modal } from '@navikt/ds-react';
-import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { RestApiMock } from '@navikt/fp-utils-test';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { Oppgave } from '@navikt/fp-los-felles';
 

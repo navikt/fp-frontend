@@ -7,7 +7,7 @@
 
 // import { behandlingStatus, fagsakYtelseType, behandlingType } from '@navikt/fp-kodeverk';
 // import { AksessRettigheter, AlleKodeverk, Fagsak } from '@navikt/fp-types';
-// import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+// import { RestApiMock } from '@navikt/fp-utils-test';
 // import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 // import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';

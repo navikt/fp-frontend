@@ -10,7 +10,7 @@ import {
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { Fagsak, BehandlingAppKontekst } from '@navikt/fp-types';
-import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { RestApiMock } from '@navikt/fp-utils-test';
 
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 import FagsakProfileIndex from './FagsakProfileIndex';

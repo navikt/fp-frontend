@@ -5,7 +5,7 @@ import {
   BehandlingStatus, BehandlingType, FagsakStatus, FagsakYtelseType,
 } from '@navikt/ft-kodeverk';
 
-import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { RestApiMock } from '@navikt/fp-utils-test';
 import { getIntlDecorator, alleKodeverkLos } from '@navikt/fp-storybook-utils';
 import { FagsakEnkel, KjønnkodeEnum } from '@navikt/fp-types';
 import { Oppgave } from '@navikt/fp-los-felles';

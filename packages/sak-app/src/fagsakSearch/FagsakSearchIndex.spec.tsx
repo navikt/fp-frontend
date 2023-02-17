@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 
 import { FagsakEnkel, KjønnkodeEnum } from '@navikt/fp-types';
-import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { RestApiMock } from '@navikt/fp-utils-test';
 
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 import FagsakSearchIndex from './FagsakSearchIndex';

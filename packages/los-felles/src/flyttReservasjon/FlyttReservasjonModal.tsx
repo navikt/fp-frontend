@@ -47,9 +47,9 @@ interface OwnProps {
   toggleMenu: () => void;
   hentReserverteOppgaver: (params: any, keepData: boolean) => void;
   flyttOppgavereservasjon: (params: { oppgaveId: number, brukerIdent: string, begrunnelse: string }) => Promise<void>;
-  hentSaksbehandler: (params: { brukerIdent: string }) => Promise<SaksbehandlerForFlytting>;
+  hentSaksbehandler: (params: { brukerIdent: string }) => Promise<SaksbehandlerForFlytting | undefined>;
   hentSaksbehandlerState: RestApiState;
-  saksbehandler: SaksbehandlerForFlytting;
+  saksbehandler?: SaksbehandlerForFlytting;
   resetHentSaksbehandler: () => void;
 }
 

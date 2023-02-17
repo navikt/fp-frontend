@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
 
-import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { RestApiMock } from '@navikt/fp-utils-test';
 import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import koSortering from '../../kodeverk/KoSortering';

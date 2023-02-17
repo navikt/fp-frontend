@@ -4,7 +4,7 @@ import { createIntl } from '@navikt/ft-utils';
 import { render, screen } from '@testing-library/react';
 
 import { EventType } from '@navikt/fp-rest-api';
-import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { RestApiMock } from '@navikt/fp-utils-test';
 
 import Dekorator from './Dekorator';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';

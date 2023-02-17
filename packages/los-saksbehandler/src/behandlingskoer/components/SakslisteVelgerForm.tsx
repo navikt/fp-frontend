@@ -88,7 +88,14 @@ const getAndreKriterier = (intl: IntlShape, alleKodeverk: AlleKodeverk, sakslist
   return [intl.formatMessage({ id: 'SakslisteVelgerForm.Alle' })];
 };
 
-const getNavn = (values, intl) => {
+type TextValues = {
+  navn: string;
+  fomDato?: string;
+  tomDato?: string;
+  br: JSX.Element;
+}
+
+const getNavn = (values: TextValues, intl: IntlShape) => {
   if (!values.fomDato) {
     return intl.formatMessage({ id: 'SakslisteVelgerForm.SorteringsinfoTom' }, values) as string;
   }
