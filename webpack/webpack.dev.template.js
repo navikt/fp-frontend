@@ -54,6 +54,7 @@ module.exports = {
       fix: true,
       overrideConfigFile: path.resolve(__dirname, '../eslint/eslintrc.dev.js'),
       lintDirtyModulesOnly: true,
+      cache: true,
     }),
     new ReactRefreshWebpackPlugin(),
     new HtmlWebpackPlugin({

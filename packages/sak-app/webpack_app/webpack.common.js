@@ -192,6 +192,7 @@ const config = {
       failOnWarning: false,
       failOnError: false,
       fix: true,
+      cache: true,
       overrideConfigFile: path.resolve(__dirname, '../../../eslint/eslintrc.dev.js'),
       lintDirtyModulesOnly: true,
     }),
