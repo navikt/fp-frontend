@@ -240,6 +240,10 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   const erTilknyttetStortinget = aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.TILKNYTTET_STORTINGET && harÅpneAksjonspunkter);
 
   const erBekreftKnappDisablet = useMemo(() => {
+    if (aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE)) {
+      return false;
+    }
+
     if (perioder.some((p) => p.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING)) {
       return true;
     }
