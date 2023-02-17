@@ -164,7 +164,7 @@ const config = {
         test: /\.(js?)$/,
         enforce: 'pre',
         use: ['source-map-loader'],
-        include: [CORE_DIR],
+        include: [CORE_DIR, PACKAGES_DIR],
       }],
   },
 
