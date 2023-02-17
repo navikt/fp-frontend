@@ -271,16 +271,16 @@ const UttakPeriodeInfo: FunctionComponent<OwnProps> = ({
               />
             )}
             {gradertArbforhold(valgtPeriode, arbeidsgiverOpplysningerPerId)}
-            {visGraderingIkkeInnvilget(valgtPeriode, isReadOnly, graderingInnvilget) && (
-              <>
-                <b>
-                  <FormattedMessage id="UttakActivity.GraderingIkkeOppfylt" />
-                  :
-                </b>
-                {alleKodeverk[KodeverkType.GRADERING_AVSLAG_AARSAK].find((k) => k.kode === valgtPeriode.graderingAvslagÅrsak)?.navn}
-              </>
-            )}
           </FlexColumn>
+          {visGraderingIkkeInnvilget(valgtPeriode, isReadOnly, graderingInnvilget) && (
+            <FlexColumn>
+              <b>
+                <FormattedMessage id="UttakActivity.GraderingIkkeOppfylt" />
+                :
+              </b>
+              {alleKodeverk[KodeverkType.GRADERING_AVSLAG_AARSAK].find((k) => k.kode === valgtPeriode.graderingAvslagÅrsak)?.navn}
+            </FlexColumn>
+          )}
         </FlexRow>
       </FlexContainer>
       {valgtPeriode.oppholdÅrsak !== '-' && (
