@@ -3,7 +3,7 @@ import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import sinon from 'sinon';
 import { Alert } from '@navikt/ds-react';
 
-import { shallowWithIntl, getIntlMock } from '@navikt/fp-utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@navikt/fp-utils-test';
 import { FamilieHendelseSamling } from '@navikt/fp-types';
 
 import UttakPeriode from './UttakPeriode';

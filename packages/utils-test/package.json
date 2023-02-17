@@ -15,7 +15,7 @@
     "eslint": "eslint \"src/**/*.ts*\" --color",
     "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
     "build-webpack": "cross-env webpack --config webpack.config.js",
-    "build-ts-declarations": "tsc index.ts ../../@types/externals.d.ts --declaration --emitDeclarationOnly --downlevelIteration --resolveJsonModule --jsx react --outDir dist --declarationMap --esModuleInterop --skipLibCheck",
+    "build-ts-declarations": "tsc index.ts ../../@types/externals.d.ts --declaration --emitDeclarationOnly -t es5 --downlevelIteration --resolveJsonModule --jsx react --outDir dist --declarationMap --esModuleInterop --skipLibCheck",
     "build": "yarn build-webpack && yarn build-ts-declarations",
     "clean": "rm -rf ./dist ./node_modules"
   },

@@ -19,7 +19,7 @@
     "eslint:changed": "lerna run eslint --stream --since origin/master",
     "stylelint": "lerna run stylelint --stream",
     "clean": "lerna run clean --stream",
-    "dev": "node -e \"console.log('For å få oppdateringer i pakke, skriv: yarn dev --scope=@navikt/fp-{pakkenavn}')\" && yarn lerna run dev --scope=@navikt/fp-sak-app",
+    "dev": "node -e \"console.log('For å få oppdateringer i pakke, skriv: yarn dev --scope=@navikt/fp-{pakkenavn}')\" && yarn lerna run dev --scope=@navikt/fp-frontend-app",
     "build": "lerna run build --stream",
     "doc": "react-asciidoc-generator ./packages/ -o ../../docs/generated/react.adoc --handlebar-template src/docs/asciidoc-template.handlebars",
     "up": "docker-compose up -d --remove-orphans --build",
@@ -29,6 +29,7 @@
     "sentry-release": "(export SENTRY_RELEASE=$(git rev-parse --short HEAD); node ./scripts/sentry-release)"
   },
   "workspaces": [
+    "apps/*",
     "packages/*"
   ],
   "dependencies": {

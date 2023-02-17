@@ -7,7 +7,7 @@ RUN chmod +x /dumb-init
 
 WORKDIR /app
 
-COPY ./packages/sak-app/dist ./dist
+COPY ./apps/fp-frontend-app/dist ./dist
 COPY server ./
 
 USER node

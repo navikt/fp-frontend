@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 import { Image } from '@navikt/ft-ui-komponenter';
 
-import { shallowWithIntl } from '@navikt/fp-utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl } from '@navikt/fp-utils-test';
 
 import { UttakPeriodeType } from './UttakPeriodeType';
 import messages from '../../i18n/nb_NO.json';

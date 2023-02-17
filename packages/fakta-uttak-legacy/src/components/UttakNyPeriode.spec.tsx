@@ -3,8 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import sinon from 'sinon';
 import { Button } from '@navikt/ds-react';
 
-import { reduxFormPropsMock } from '@navikt/fp-utils-test/src/redux-form-test-helper';
-import { shallowWithIntl } from '@navikt/fp-utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, reduxFormPropsMock } from '@navikt/fp-utils-test';
 import { AlleKodeverk, FaktaArbeidsforhold, Personoversikt } from '@navikt/fp-types';
 import { navBrukerKjonn } from '@navikt/fp-kodeverk';
 

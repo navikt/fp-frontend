@@ -2,10 +2,9 @@ import React from 'react';
 import sinon from 'sinon';
 
 import { Detail } from '@navikt/ds-react';
-import { reduxFormPropsMock } from '@navikt/fp-utils-test/src/redux-form-test-helper';
 import { uttakPeriodeVurdering } from '@navikt/fp-kodeverk';
 import { FamilieHendelse } from '@navikt/fp-types';
-import { getIntlMock, shallowWithIntl } from '@navikt/fp-utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl, reduxFormPropsMock } from '@navikt/fp-utils-test';
 
 import RadioGroupField from '../../form/RadioGroupField';
 import { SykdomOgSkadePeriode } from './SykdomOgSkadePeriode';

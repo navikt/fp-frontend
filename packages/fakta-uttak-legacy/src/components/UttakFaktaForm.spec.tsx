@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { reduxFormPropsMock } from '@navikt/fp-utils-test/src/redux-form-test-helper';
-import { shallowWithIntl } from '@navikt/fp-utils-test/src/intl-enzyme-test-helper';
+import { reduxFormPropsMock, shallowWithIntl } from '@navikt/fp-utils-test';
 import { AksjonspunktCode, behandlingStatus } from '@navikt/fp-kodeverk';
 import {
   AlleKodeverk, FamilieHendelseSamling, Personoversikt, UttakKontrollerFaktaPerioderLegacy, Ytelsefordeling,
