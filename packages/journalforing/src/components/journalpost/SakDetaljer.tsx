@@ -4,7 +4,7 @@ import { Link } from '@navikt/ds-react';
 import { fagsakStatus, fagsakYtelseType } from '@navikt/fp-kodeverk';
 import dayjs from 'dayjs';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import JournalFagsak from '../typer/journalFagsakTsType';
+import JournalFagsak from '../../typer/journalFagsakTsType';
 
 const velgSakLenke = (saksnummer: string): string => (`/fagsak/${saksnummer}/`);
 

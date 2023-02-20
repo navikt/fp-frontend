@@ -10,11 +10,11 @@ import { required } from '@navikt/ft-form-validators';
 import { fagsakYtelseType, fagsakStatus } from '@navikt/fp-kodeverk';
 import dayjs from 'dayjs';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import JournalførSubmitValue from '../typer/ferdigstillJournalføringSubmit';
-import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
+import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
+import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import VelgSakLenke from './VelgSakLenke';
-import Journalpost from '../typer/journalpostTsType';
-import JournalFagsak from '../typer/journalFagsakTsType';
+import Journalpost from '../../typer/journalpostTsType';
+import JournalFagsak from '../../typer/journalFagsakTsType';
 
 const TOM_ARRAY = [];
 

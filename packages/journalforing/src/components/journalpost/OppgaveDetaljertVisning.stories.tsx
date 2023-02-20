@@ -5,13 +5,13 @@ import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { fagsakYtelseType, fagsakStatus } from '@navikt/fp-kodeverk';
 import OppgaveDetaljertVisning from './OppgaveDetaljertVisning';
-import JournalførSubmitValue from '../typer/ferdigstillJournalføringSubmit';
-import OppgavePrioritet from '../kodeverk/oppgavePrioritet';
-import JournalKanal from '../kodeverk/journalKanal';
-import Journalpost from '../typer/journalpostTsType';
+import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
+import OppgavePrioritet from '../../kodeverk/oppgavePrioritet';
+import JournalKanal from '../../kodeverk/journalKanal';
+import Journalpost from '../../typer/journalpostTsType';
 
-import messages from '../../i18n/nb_NO.json';
-import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
+import messages from '../../../i18n/nb_NO.json';
+import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 
 const withIntl = getIntlDecorator(messages);
 

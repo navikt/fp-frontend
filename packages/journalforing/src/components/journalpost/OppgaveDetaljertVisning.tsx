@@ -12,14 +12,14 @@ import {
   FlexColumn, FlexRow, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import VelgSakForm from './VelgSakForm';
-import Journalpost from '../typer/journalpostTsType';
-import JournalførSubmitValue from '../typer/ferdigstillJournalføringSubmit';
-import styles from './journalforingPanel.less';
+import Journalpost from '../../typer/journalpostTsType';
+import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
+import styles from '../journalforingPanel.less';
 import VelgDokumentForm from './VelgDokumentForm';
-import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
-import kvinneIkonUrl from '../images/kvinne.svg';
-import mannIkonUrl from '../images/mann.svg';
-import ukjentIkonUrl from '../images/ukjent.svg';
+import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
+import kvinneIkonUrl from '../../images/kvinne.svg';
+import mannIkonUrl from '../../images/mann.svg';
+import ukjentIkonUrl from '../../images/ukjent.svg';
 
 const finnKjønnBilde = (journalpost: Journalpost): string => {
   const fnr = journalpost.bruker?.fnr;

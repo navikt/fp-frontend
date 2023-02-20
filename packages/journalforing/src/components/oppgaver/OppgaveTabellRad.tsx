@@ -3,9 +3,9 @@ import { FormattedMessage } from 'react-intl';
 import { Button, Table, Link } from '@navikt/ds-react';
 import { NextFilled } from '@navikt/ds-icons';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
-import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
-import styles from './journalforingPanel.less';
-import { finnYtelseTekst } from './VelgSakForm';
+import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
+import styles from '../journalforingPanel.less';
+import { finnYtelseTekst } from '../journalpost/VelgSakForm';
 
 type OwnProps = Readonly<{
   oppgave: OppgaveOversikt;

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Link } from '@navikt/ds-react';
 import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
-import styles from './journalforingPanel.less';
+import styles from '../journalforingPanel.less';
 
 const velgSakLenke = (saksnummer: string): string => (`/fagsak/${saksnummer}/`);
 

@@ -7,7 +7,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import messages from '../i18n/nb_NO.json';
 import JournalforingPanel from './components/JournalforingPanel';
-import OppgaveIndex from './components/OppgaveIndex';
+import OppgaveIndex from './components/oppgaver/OppgaveIndex';
 import { RestApiPathsKeys, restApiHooks, requestApi } from './data/fpfordelRestApi';
 
 const intl = createIntl(messages);

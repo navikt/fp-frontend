@@ -5,9 +5,9 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { NavAnsatt } from '@navikt/fp-types';
 
-import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
+import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import OppgaveTabell from './OppgaveTabell';
-import OppgaveDetaljertIndex from './OppgaveDetaljertIndex';
+import OppgaveDetaljertIndex from '../journalpost/OppgaveDetaljertIndex';
 
 type OwnProps = Readonly<{
   oppgaver: OppgaveOversikt[];

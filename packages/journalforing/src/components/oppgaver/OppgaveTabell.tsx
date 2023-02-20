@@ -3,9 +3,9 @@ import { BodyShort, Table } from '@navikt/ds-react';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
-import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
+import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import OppgaveTabellRad from './OppgaveTabellRad';
-import styles from './journalforingPanel.less';
+import styles from '../journalforingPanel.less';
 
 type OwnProps = Readonly<{
   oppgaver: OppgaveOversikt[];
