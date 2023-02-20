@@ -17,7 +17,7 @@
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
-    "@formatjs/intl-datetimeformat": "6.4.3",
+    "@formatjs/intl-datetimeformat": "6.5.0",
     "@formatjs/intl-numberformat": "8.3.3",
     "@navikt/fp-fakta-adopsjon": "1.0.0",
     "@navikt/fp-fakta-aktivitetskrav": "1.0.0",
