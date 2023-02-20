@@ -14,8 +14,29 @@ https://navikt.github.io/fp-frontend
 ## For å komme i gang
 ````
 yarn install
-yarn dev
 yarn build
+````
+For å kjøre opp applikasjonen:
+````
+yarn dev
+````
+
+Ved bruk av yarn dev vil kun endringar i app-pakken bli oppdatert automatisk. Skal du endre kode i andre pakker kjør denne kommandoen:
+````
+yarn dev --scope={pakkenavn} (For eksempel: @navikt/fp-fakta-adopsjon)
+````
+
+For å kjøre opp storybook. Gå inn i aktuell pakke og kjør:
+````
+yarn storybook
+````
+
+En kan kjøre tester og linting både fra rot og fra de ulike pakkene:
+````
+yarn test
+yarn tsc
+yarn eslint
+yarn stylelint
 ````
 
 ## Innlogging og utlogging lokalt mot autotest
@@ -28,9 +49,6 @@ Om man skulle få problemer med at `authserver:8085` ikke finnes så må man leg
 `127.0.0.1 localhost authserver`
 
 #### TODO
-* velge namespace, bruker scoped nå(@fpsak-frontend)
-* Sette opp lerna publish for de pakkene som skal være åpne
-* gjøre form pakken tilgjengelig med final-form og redux-form
 * Legge inn readme for pakkene!
 
 ## Intellj og stubs
@@ -46,11 +64,6 @@ https://medium.com/@jsilvax/a-workflow-guide-for-lerna-with-yarn-workspaces-60f9
 
 ## Mocks i dev-serveren
 Kan konfigureres via å sette opp en `.env`-fil i roten av prosjektet.
-### Feature toggles (webpack/mocks/feature-toggles.js)
-Tar en kommaseparert liste med featuretoggles og skrur disse på
-```
-FEATURE_TOGGLES=my.toggle,my.second.toggle
-```
 
 ### Overstyr enkeltrute (webpack/mocks/fake-error.js)
 Nyttig for å teste feilsituasjoner. Overstyres som følger:
