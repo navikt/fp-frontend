@@ -67,13 +67,38 @@ const config = {
         ],
         include: [APP_DIR, TYPES_DIR],
       }, {
+        test: /\.(less|css)?$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          }, {
+            loader: 'css-loader',
+          }, {
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                modifyVars: {
+                  nodeModulesPath: '~',
+                  coreModulePath: '~',
+                },
+              },
+            },
+          }],
+        include: [CORE_DIR],
+      }, {
+        test: /\.(css)?$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          }, {
+            loader: 'css-loader',
+          }],
+        include: [PACKAGES_DIR],
+      }, {
         test: /\.(less)?$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: isDevelopment ? './' : '',
-            },
           }, {
             loader: 'css-loader',
             options: {
@@ -96,41 +121,6 @@ const config = {
             },
           }],
         include: [APP_DIR],
-      }, {
-        test: /\.(less|css)?$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: isDevelopment ? './' : '',
-            },
-          }, {
-            loader: 'css-loader',
-          }, {
-            loader: 'less-loader',
-            options: {
-              lessOptions: {
-                modifyVars: {
-                  nodeModulesPath: '~',
-                  coreModulePath: '~',
-                },
-              },
-            },
-          }],
-        include: [CORE_DIR],
-      }, {
-        test: /\.(css)?$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: isDevelopment ? './' : '',
-            },
-          }, {
-            loader: 'css-loader',
-          }],
-        include: [PACKAGES_DIR],
-        exclude: [APP_DIR],
       }, {
         test: /\.(svg)$/,
         issuer: /\.less?$/,
