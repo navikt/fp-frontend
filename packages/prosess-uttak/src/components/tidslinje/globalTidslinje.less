@@ -1,27 +1,4 @@
-@import '@{coreModulePath}nav-frontend-core/less/core';
-
 /* TODO Mesteparten i denne fila bør ikkje ligga her */
-
-html {
-  height: 100%;
-}
-
-body {
-  background-color: @white;
-  color: @navMorkGra;
-  height: 100%;
-  line-height: 1.42857143;
-  margin: 0;
-}
-
-:global(#app) {
-  height: 100%;
-}
-
-/*
-CSS-endringer för felleskomponenter og globaler så
-som fra core/og muligen import fra alla andra komponenter
- */
 
 :global(.cal-wrap) {
   width: 300px;
@@ -29,7 +6,7 @@ som fra core/og muligen import fra alla andra komponenter
 
 // Text-area custom styling
 :global(.textarea--medMeta__teller) {
-  color: @navMorkGra;
+  color: #262626;
   font-size: 0.8rem;
   font-style: italic;
 }
@@ -50,6 +27,55 @@ som fra core/og muligen import fra alla andra komponenter
 
 :global(.currentDate) {
   display: none;
+}
+
+// move these to teslineIndex.less?
+:global(.soknad) {
+  background-color: #0056b4;
+  pointer-events: none;
+  top: 6px !important; // stylelint-disable-line declaration-no-important
+
+  &:after {
+    background: transparent url('../../images/soknad.svg') no-repeat;
+    content: '';
+    height: 20px;
+    left: -8px;
+    position: absolute;
+    top: 0;
+    width: 20px;
+  }
+}
+
+:global(.fodsel) {
+  background-color: #a32a17;
+  pointer-events: none;
+  top: 0 !important; // stylelint-disable-line declaration-no-important
+
+  &:after {
+    background: transparent url('../../images/fodsel.svg') no-repeat;
+    content: '';
+    height: 20px;
+    left: -8px;
+    position: absolute;
+    top: 0;
+    width: 20px;
+  }
+}
+
+:global(.revurdering) {
+  background-color: #007c2e;
+  pointer-events: none;
+  top: 12px !important; // stylelint-disable-line declaration-no-important
+
+  &:after {
+    background: transparent url('../../images/endringstidspunkt.svg') no-repeat;
+    content: '';
+    height: 20px;
+    left: -8px;
+    position: absolute;
+    top: 0;
+    width: 20px;
+  }
 }
 
 :global(.lastDateInSoknad) {
@@ -89,8 +115,8 @@ som fra core/og muligen import fra alla andra komponenter
 }
 
 :global(.vis-item) {
-  top: 5px;
-  transition: transform 0.2s;
+  top: 5px !important; // stylelint-disable-line declaration-no-important
+  transition: transform 0.2s !important; // stylelint-disable-line declaration-no-important
 
   &:hover {
     box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
@@ -107,30 +133,30 @@ som fra core/og muligen import fra alla andra komponenter
 }
 
 :global(.grey) {
-  background-color: @navGra20;
-  border-color: @navGra40;
+  background-color: #c9c9c9;
+  border-color: #a0a0a0;
   border-radius: 8px;
   opacity: 0.7;
 }
 
 :global(.grey.vis-item.vis-selected) {
-  background-color: @navGra20;
-  border-color: @navGra40;
+  background-color: #c9c9c9;
+  border-color: #a0a0a0;
   border-radius: 8px;
   opacity: 0.7;
 }
 
 :global(.gradert) {
-  @lClr: @white;
+  @lClr: #fff;
   @brPnt: 20%;
 
-  background: @navGronn repeating-linear-gradient(45deg, @lClr, @lClr @brPnt, transparent @brPnt, transparent 50%, @lClr 50%); // stylelint-disable-line max-line-length
+  background: #06893a repeating-linear-gradient(45deg, @lClr, @lClr @brPnt, transparent @brPnt, transparent 50%, @lClr 50%); // stylelint-disable-line max-line-length
   background-size: 12px 12px;
   opacity: 0.9;
 }
 
 :global(.gradert.vis-item.vis-selected) {
-  background-color: @navGronn;
+  background-color: #06893a;
   opacity: 1;
 
   &:hover {
@@ -140,7 +166,7 @@ som fra core/og muligen import fra alla andra komponenter
 
 :global(.avslatt) {
   background-color: transparent;
-  border-color: rgba(@redError, 0.5);
+  border-color: rgba(#ba3a26, 0.5);
   border-radius: 6px;
 
   &:active {
@@ -149,54 +175,54 @@ som fra core/og muligen import fra alla andra komponenter
 }
 
 :global(.avvistPeriode) {
-  background-color: rgba(@redError, 0.5);
-  border-color: rgba(@navGra20, 0.5);
-  border-radius: 6px;
+  background-color: rgba(#ba3a26, 0.5) !important; // stylelint-disable-line declaration-no-important
+  border-color: rgba(#c9c9c9, 0.5) !important; // stylelint-disable-line declaration-no-important
+  border-radius: 6px !important; // stylelint-disable-line declaration-no-important
 
   &:active {
-    background-color: @redError;
-    border-color: @navGra20;
+    background-color: #ba3a26;
+    border-color: #c9c9c9;
   }
 }
 
 :global(.undefined) {
-  background-color: rgba(@navOransje, 0.8);
-  border-color: rgba(@navOransje, 0.8);
-  border-radius: 8px;
+  background-color: rgba(#ff9100, 0.8) !important; // stylelint-disable-line declaration-no-important
+  border-color: rgba(#ff9100, 0.8) !important; // stylelint-disable-line declaration-no-important
+  border-radius: 8px !important; // stylelint-disable-line declaration-no-important
 
   &:active {
-    background-color: @navOransjeLighten60;
-    border-color: @navOransje;
+    background-color: #ffd799;
+    border-color: #ff9100;
   }
 }
 
 :global(.undefined.vis-item.vis-selected) {
-  background-color: @navOransje;
-  border: 1px solid #4a4a4a;
+  background-color: #ff9100 !important; // stylelint-disable-line declaration-no-important
+  border: 1px solid #4a4a4a !important; // stylelint-disable-line declaration-no-important
 }
 
 :global(.avslatt.vis-item.vis-selected) {
-  background-color: @redError;
+  background-color: #ba3a26 !important; // stylelint-disable-line declaration-no-important
 }
 
 :global(.avvistPeriode.vis-item.vis-selected) {
-  background-color: @redError;
+  background-color: #ba3a26 !important; // stylelint-disable-line declaration-no-important
 }
 
 :global(.innvilget) {
-  background-color: rgba(@navGronn, 0.5);
-  border-color: rgba(@navGronn, 0.5);
-  border-radius: 8px;
+  background-color: rgba(#06893a, 0.5) !important; // stylelint-disable-line declaration-no-important
+  border-color: rgba(#06893a, 0.5) !important; // stylelint-disable-line declaration-no-important
+  border-radius: 8px !important; // stylelint-disable-line declaration-no-important
 }
 
 :global(.godkjentPeriode) {
-  background-color: rgba(@navGronn, 0.5);
-  border-color: rgba(@navGronn, 0.5);
-  border-radius: 8px;
+  background-color: rgba(#06893a, 0.5) !important; // stylelint-disable-line declaration-no-important
+  border-color: rgba(#06893a, 0.5) !important; // stylelint-disable-line declaration-no-important
+  border-radius: 8px !important; // stylelint-disable-line declaration-no-important
 
   &:active {
-    background-color: @navGronn;
-    border-color: @navGronn;
+    background-color: #06893a;
+    border-color: #06893a;
   }
 }
 
@@ -205,36 +231,36 @@ som fra core/og muligen import fra alla andra komponenter
 }
 
 :global(.godkjentPeriode.vis-item.vis-selected) {
-  background-color: @navGronn;
+  background-color: #06893a;
   border-radius: 6px;
 }
 
 :global(.mellomliggendePeriode) {
-  background-color: rgba(@navGronn, 0.5);
-  border-color: rgba(@navGronn, 0.5);
+  background-color: rgba(#06893a, 0.5);
+  border-color: rgba(#06893a, 0.5);
   border-radius: 8px;
   height: 12px;
   top: 12px !important; // stylelint-disable-line declaration-no-important
 
   &:active {
-    background-color: @navGronn;
-    border-color: @navGronn;
+    background-color: #06893a;
+    border-color: #06893a;
   }
 }
 
 :global(.mellomliggendePeriode.vis-item.vis-selected) {
-  background-color: @navGronn;
+  background-color: #06893a;
   border-radius: 6px;
 }
 
 :global(.innvilget.vis-item.vis-selected) {
-  background-color: @navGronn;
+  background-color: #06893a;
   border-radius: 6px;
 }
 
 :global(.innvilgetnullprosent) {
   background-color: transparent;
-  border-color: @navGronn;
+  border-color: #06893a;
   border-radius: 8px;
 }
 
@@ -246,7 +272,7 @@ som fra core/og muligen import fra alla andra komponenter
 
 :global(.opphold-manuell) {
   background-color: transparent;
-  border-color: @navOransje;
+  border-color: #ff9100;
   border-radius: 6px;
 }
 
@@ -256,16 +282,16 @@ som fra core/og muligen import fra alla andra komponenter
 
 :global(.opphold-manuell.vis-item.vis-selected) {
   background-color: transparent;
-  border-color: @navOransje;
+  border-color: #ff9100;
   border-radius: 6px;
   border-style: dashed;
   border-width: 1.5px;
 }
 
 :global(.opphold) {
-  background-color: transparent;
-  border-color: @navGronn;
-  border-radius: 6px;
+  background-color: transparent !important; // stylelint-disable-line declaration-no-important
+  border-color: #06893a !important; // stylelint-disable-line declaration-no-important
+  border-radius: 6px !important; // stylelint-disable-line declaration-no-important
 }
 
 :global(.opphold.vis-item.vis-range) {
@@ -274,7 +300,7 @@ som fra core/og muligen import fra alla andra komponenter
 
 :global(.opphold.vis-item.vis-selected) {
   background-color: transparent;
-  border-color: @navGronn;
+  border-color: #06893a;
   border-radius: 6px;
   border-style: dashed;
   border-width: 1.5px;
@@ -395,11 +421,11 @@ som fra core/og muligen import fra alla andra komponenter
 }
 
 :global(.godkjent) {
-  background-color: @navGronnLighten60;
+  background-color: #06893a;
 }
 
 :global(.avvist) {
-  background-color: @redErrorLighten60;
+  background-color: #ba3a26;
 }
 
 :global(div .vis-tooltip) {
@@ -410,10 +436,10 @@ som fra core/og muligen import fra alla andra komponenter
 }
 
 :global(.tableRowHighlight) {
-  background-color: @navOransjeLighten80;
+  background-color: #ff9100;
 
   &:hover {
-    background-color: @navOransjeLighten80 !important; // stylelint-disable-line declaration-no-important
+    background-color: #ff9100 !important; // stylelint-disable-line declaration-no-important
   }
 }
 

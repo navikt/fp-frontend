@@ -3,10 +3,11 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 
 import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
-import AktivitetskravFaktaIndex from '@navikt/fp-fakta-aktivitetskrav';
 import { Behandling, UttakKontrollerAktivitetskrav, Aksjonspunkt } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+
+import AktivitetskravFaktaIndex from './AktivitetskravFaktaIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';

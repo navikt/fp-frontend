@@ -128,7 +128,7 @@ const config = {
         generator: {
           filename: '[name]_[contenthash].[ext]',
         },
-        include: [APP_DIR],
+        include: [APP_DIR, PACKAGES_DIR],
       }, {
         test: /\.(svg)$/,
         issuer: /\.(tsx)?$/,
@@ -141,7 +141,7 @@ const config = {
             name: isDevelopment ? '[name]_[contenthash].[ext]' : '/[name]_[contenthash].[ext]',
           },
         }],
-        include: [APP_DIR],
+        include: [APP_DIR, PACKAGES_DIR],
         type: 'javascript/auto',
       }, {
         test: /\.(svg)$/,

@@ -3,9 +3,10 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 
 import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
-import VergeFaktaIndex from '@navikt/fp-fakta-verge';
 import { Behandling } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
+
+import VergeFaktaIndex from './VergeFaktaIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';

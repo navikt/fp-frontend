@@ -5,12 +5,12 @@ import { action } from '@storybook/addon-actions';
 import {
   AksjonspunktCode, aksjonspunktStatus, soknadType, behandlingType,
 } from '@navikt/fp-kodeverk';
-import FodselFaktaIndex from '@navikt/fp-fakta-fodsel';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import {
   Behandling, FamilieHendelse, FamilieHendelseSamling, Soknad, Aksjonspunkt,
 } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import FodselFaktaIndex from './FodselFaktaIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';

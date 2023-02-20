@@ -14,6 +14,8 @@ import TilkjentYtelseTimelineData, { PeriodeMedId } from './TilkjentYtelseTimeli
 
 import styles from './tilkjentYtelse.less';
 
+import './globalTidslinje.less';
+
 type NyPeriode = {
   className: string;
   group: number;
