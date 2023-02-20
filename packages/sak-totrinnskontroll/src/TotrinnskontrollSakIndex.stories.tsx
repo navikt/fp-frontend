@@ -5,11 +5,12 @@ import { action } from '@storybook/addon-actions';
 import {
   behandlingResultatType, behandlingType, behandlingStatus, fagsakYtelseType,
 } from '@navikt/fp-kodeverk';
-import TotrinnskontrollSakIndex from '@navikt/fp-sak-totrinnskontroll';
 import {
   BehandlingAppKontekst, BehandlingÅrsak, TotrinnskontrollSkjermlenkeContext,
 } from '@navikt/fp-types';
 import { withRouter, alleKodeverk } from '@navikt/fp-storybook-utils';
+
+import TotrinnskontrollSakIndex from './TotrinnskontrollSakIndex';
 
 const location = {
   key: '1', pathname: '', search: '', state: {}, hash: '',

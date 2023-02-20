@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import { BehandlingAppKontekst } from '@navikt/fp-types';
 import { fagsakYtelseType, behandlingType, behandlingResultatType } from '@navikt/fp-kodeverk';
-import MenyHenleggIndex from '@navikt/fp-sak-meny-henlegg';
+import MenyHenleggIndex from './MenyHenleggIndex';
 
 export default {
   title: 'sak/sak-meny-henlegg',

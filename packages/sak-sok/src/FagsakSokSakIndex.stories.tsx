@@ -3,10 +3,11 @@ import { action } from '@storybook/addon-actions';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import { fagsakYtelseType, fagsakStatus } from '@navikt/fp-kodeverk';
-import FagsakSokSakIndex from '@navikt/fp-sak-sok';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import { FagsakEnkel } from '@navikt/fp-types';
+
+import FagsakSokSakIndex from './FagsakSokSakIndex';
 
 export default {
   title: 'sak/sak-sok',

@@ -11,6 +11,8 @@ import { finnOpptjeningFom, finnOpptjeningTom } from '../../utils/opptjeningDato
 
 import styles from './opptjeningTidslinje.less';
 
+import './globalTidslinje.less';
+
 // Desse må alltid vare med for rett skala av tidslinjen då den alltid skall vare 10 månader fra skjæringstidpunkten
 const standardItems = (opptjeningFomDato: string, opptjeningTomDato: string) => [
   {

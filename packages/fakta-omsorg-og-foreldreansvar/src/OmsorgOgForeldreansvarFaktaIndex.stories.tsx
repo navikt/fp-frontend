@@ -5,12 +5,12 @@ import { action } from '@storybook/addon-actions';
 import {
   opplysningAdresseType, relatertYtelseTilstand, navBrukerKjonn, relatertYtelseType, soknadType, AksjonspunktCode, aksjonspunktStatus,
 } from '@navikt/fp-kodeverk';
-import OmsorgOgForeldreansvarFaktaIndex from '@navikt/fp-fakta-omsorg-og-foreldreansvar';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import {
   Behandling, FamilieHendelseSamling, InntektArbeidYtelse, Soknad, Aksjonspunkt,
 } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import OmsorgOgForeldreansvarFaktaIndex from './OmsorgOgForeldreansvarFaktaIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';

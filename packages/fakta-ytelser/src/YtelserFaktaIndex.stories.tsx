@@ -2,9 +2,10 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import { relatertYtelseType, relatertYtelseTilstand } from '@navikt/fp-kodeverk';
-import YtelserFaktaIndex from '@navikt/fp-fakta-ytelser';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { InntektArbeidYtelse } from '@navikt/fp-types';
+
+import YtelserFaktaIndex from './YtelserFaktaIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';

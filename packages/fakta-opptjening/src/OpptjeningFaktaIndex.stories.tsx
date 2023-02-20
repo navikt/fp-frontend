@@ -3,13 +3,10 @@ import { action } from '@storybook/addon-actions';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import { AksjonspunktCode, aksjonspunktStatus, opptjeningAktivitetType } from '@navikt/fp-kodeverk';
-import OpptjeningFaktaIndex from '@navikt/fp-fakta-opptjening';
 import { Behandling, Aksjonspunkt, Opptjening } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
-import '@navikt/ds-css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
-import '@navikt/ft-form-hooks/dist/style.css';
+import OpptjeningFaktaIndex from './OpptjeningFaktaIndex';
 
 const behandling = {
   uuid: '1',

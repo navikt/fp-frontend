@@ -11,6 +11,8 @@ import DateContainer from './DateContainer';
 import styles from './opptjeningTimeLineLight.less';
 import TimeLineData from './TimeLineData';
 
+import './globalTidslinje.less';
+
 type Item = {
   id?: number;
   start: moment.Moment;

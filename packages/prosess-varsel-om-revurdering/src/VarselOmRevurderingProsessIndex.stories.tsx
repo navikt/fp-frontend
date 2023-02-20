@@ -3,12 +3,13 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 
 import { aksjonspunktStatus, behandlingType, AksjonspunktCode } from '@navikt/fp-kodeverk';
-import VarselOmRevurderingProsessIndex from '@navikt/fp-prosess-varsel-om-revurdering';
 import {
   Aksjonspunkt, Behandling, FamilieHendelse, FamilieHendelseSamling, Soknad,
 } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+
+import VarselOmRevurderingProsessIndex from './VarselOmRevurderingProsessIndex';
 
 const defaultBehandling = {
   uuid: '1',

@@ -11,11 +11,6 @@ import { ForbiddenPage, UnauthorizedPage } from '@navikt/ft-sak-infosider';
 import { useRestApiError } from '@navikt/fp-rest-api-hooks';
 import { EventType } from '@navikt/fp-rest-api';
 
-// @ts-ignore HACK!!! Desse blir importert her for å få importert rett rekkefølge i CSS
-import * as Test from 'vis-data';
-// @ts-ignore HACK!!! Desse blir importert her for å få importert rett rekkefølge i CSS
-import * as Test2 from 'vis-timeline';
-
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 import ErrorBoundary from './ErrorBoundary';
 import { redirectToLogin } from './paths';
