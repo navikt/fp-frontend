@@ -20,8 +20,6 @@ import Dekorator from './components/Dekorator';
 
 import messages from '../../i18n/nb_NO.json';
 
-import '../globalCss/global.less';
-
 import '@navikt/ds-css';
 
 import '@navikt/ft-ui-komponenter/dist/style.css';
@@ -82,6 +80,8 @@ import '@navikt/fp-sak-meny-ny-behandling/dist/style.css';
 import '@navikt/fp-sak-sok/dist/style.css';
 import '@navikt/fp-sak-totrinnskontroll/dist/style.css';
 import '@navikt/fp-sak-ukjent-adresse/dist/style.css';
+
+import '../globalCss/global.less';
 
 const EMPTY_ARRAY = [] as any[];
 
