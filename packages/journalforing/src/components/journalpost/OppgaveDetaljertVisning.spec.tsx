@@ -40,6 +40,7 @@ describe('<JournalforingIndex>', () => {
 
     expect(journalfør).toHaveBeenNthCalledWith(1, {
       enhetId: '4108',
+      oppgaveId: 600,
       journalpostId: '986547336994',
       saksnummer: '125416597',
     });
@@ -84,6 +85,7 @@ describe('<JournalforingIndex>', () => {
 
     expect(journalfør).toHaveBeenNthCalledWith(1, {
       enhetId: '4108',
+      oppgaveId: 600,
       journalpostId: '986547336994',
       opprettSak: {
         aktørId: '98594685464858',

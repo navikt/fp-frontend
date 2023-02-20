@@ -92,6 +92,7 @@ const transformValues = (values: FormValues, journalpost: Journalpost, oppgave: 
     return {
       journalpostId: journalpost.journalpostId,
       enhetId: oppgave.enhetId,
+      oppgaveId: oppgave.id,
       opprettSak: {
         ytelseType: valgtYtelse,
         aktørId: journalpost.bruker.aktørId,
@@ -101,6 +102,7 @@ const transformValues = (values: FormValues, journalpost: Journalpost, oppgave: 
   return {
     journalpostId: journalpost.journalpostId,
     enhetId: oppgave.enhetId,
+    oppgaveId: oppgave.id,
     saksnummer: saksnummerValg,
   };
 };
