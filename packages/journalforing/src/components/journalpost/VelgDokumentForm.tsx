@@ -4,8 +4,8 @@ import { NewTab } from '@navikt/ds-icons';
 
 import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
-import JournalDokument from '../typer/journalDokumentTsType';
-import styles from './journalforingPanel.less';
+import JournalDokument from '../../typer/journalDokumentTsType';
+import styles from '../journalforingPanel.less';
 
 type OwnProps = Readonly<{
   dokumenter: JournalDokument[];

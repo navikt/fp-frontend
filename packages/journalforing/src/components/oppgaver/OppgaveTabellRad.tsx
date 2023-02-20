@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Button, Table } from '@navikt/ds-react';
+import { Button, Table, Link } from '@navikt/ds-react';
 import { NextFilled } from '@navikt/ds-icons';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
-import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
-import styles from './journalforingPanel.less';
-import { finnYtelseTekst } from './SakDetaljer';
+import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
+import styles from '../journalforingPanel.less';
+import { finnYtelseTekst } from '../journalpost/VelgSakForm';
 
 type OwnProps = Readonly<{
   oppgave: OppgaveOversikt;
@@ -28,9 +28,9 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
       {oppgave.journalpostHarMangler
         && (
           <Table.DataCell>
-            <a className={styles.gosysLink} href="https://gosys-q1.dev.intern.nav.no/gosys" target="_blank" rel="noreferrer">
+            <Link href="https://gosys-q1.dev.intern.nav.no/gosys" target="_blank" className={styles.gosysLink}>
               <FormattedMessage id="Oppgave.Gosys.Link" />
-            </a>
+            </Link>
           </Table.DataCell>
         )}
       {!oppgave.journalpostHarMangler

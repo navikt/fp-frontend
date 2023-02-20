@@ -12,13 +12,14 @@ import {
   FlexColumn, FlexRow, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import VelgSakForm from './VelgSakForm';
-import Journalpost from '../typer/journalpostTsType';
-import styles from './journalforingPanel.less';
+import Journalpost from '../../typer/journalpostTsType';
+import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
+import styles from '../journalforingPanel.less';
 import VelgDokumentForm from './VelgDokumentForm';
-import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
-import kvinneIkonUrl from '../images/kvinne.svg';
-import mannIkonUrl from '../images/mann.svg';
-import ukjentIkonUrl from '../images/ukjent.svg';
+import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
+import kvinneIkonUrl from '../../images/kvinne.svg';
+import mannIkonUrl from '../../images/mann.svg';
+import ukjentIkonUrl from '../../images/ukjent.svg';
 
 const finnKjønnBilde = (journalpost: Journalpost): string => {
   const fnr = journalpost.bruker?.fnr;
@@ -44,12 +45,11 @@ const finnAvsenderBilde = (journalpost: Journalpost): string => {
   return ukjentIkonUrl;
 };
 
-const TOM_ARRAY = [];
-
 type OwnProps = Readonly<{
   journalpost: Journalpost;
   oppgave: OppgaveOversikt;
-  avbrytCallback: () => void;
+  avbrytVisningAvJournalpost: () => void;
+  submitJournalføring: (params: JournalførSubmitValue) => void;
 }>;
 
 /**
@@ -58,10 +58,10 @@ type OwnProps = Readonly<{
 const OppgaveDetaljertVisning: FunctionComponent<OwnProps> = ({
   journalpost,
   oppgave,
-  avbrytCallback,
+  avbrytVisningAvJournalpost,
+  submitJournalføring,
 }) => {
   const intl = useIntl();
-  const saker = journalpost?.fagsaker || TOM_ARRAY;
   const kjønnBilde = useMemo(() => finnKjønnBilde(journalpost), [journalpost]);
   const avsenderBilde = useMemo(() => finnAvsenderBilde(journalpost), [journalpost]);
   return (
@@ -161,7 +161,13 @@ const OppgaveDetaljertVisning: FunctionComponent<OwnProps> = ({
             </Label>
           </FlexColumn>
         </FlexRow>
-        <VelgSakForm saksliste={saker} avbrytCallback={avbrytCallback} />
+        <VerticalSpacer twentyPx />
+        <VelgSakForm
+          journalpost={journalpost}
+          avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
+          submitJournalføring={submitJournalføring}
+          oppgave={oppgave}
+        />
       </>
     </>
   );
