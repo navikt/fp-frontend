@@ -3,12 +3,10 @@ import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 import { Image } from '@navikt/ft-ui-komponenter';
 
-import { shallowWithIntl, getIntlMock } from '@navikt/fp-utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl } from '@navikt/fp-utils-test';
 
 import { UttakPeriodeType } from './UttakPeriodeType';
 import messages from '../../i18n/nb_NO.json';
-
-const intlMock = getIntlMock(messages);
 
 describe('<UttakPeriodeType>', () => {
   const tilDato = '2018-01-10';
@@ -32,7 +30,6 @@ describe('<UttakPeriodeType>', () => {
       fraDato={fraDato}
       getKodeverknavn={getKodeverknavn}
       id={id}
-      intl={intlMock}
       isAnyFormOpen={isAnyFormOpen}
       isFromSøknad
       isNyPeriodeFormOpen={false}
@@ -58,7 +55,6 @@ describe('<UttakPeriodeType>', () => {
       fraDato={fraDato}
       getKodeverknavn={getKodeverknavn}
       id={id}
-      intl={intlMock}
       isAnyFormOpen={isAnyFormOpen}
       isFromSøknad
       isNyPeriodeFormOpen={false}
@@ -87,7 +83,6 @@ describe('<UttakPeriodeType>', () => {
       fraDato={fraDato}
       getKodeverknavn={getKodeverknavn}
       id={id}
-      intl={intlMock}
       isAnyFormOpen={isAnyFormOpen}
       isFromSøknad
       isNyPeriodeFormOpen={false}

@@ -1,4 +1,4 @@
-import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
@@ -11,6 +11,6 @@ export type OpptjeningAktivitetAp = {
 
 export type AvklarAktivitetsPerioderAp = {
   opptjeningsaktiviteter?: OpptjeningAktivitetAp[];
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING>;
+} & AksjonspunktTilBekreftelse<AksjonspunktCode.VURDER_PERIODER_MED_OPPTJENING>;
 
 export default AvklarAktivitetsPerioderAp;

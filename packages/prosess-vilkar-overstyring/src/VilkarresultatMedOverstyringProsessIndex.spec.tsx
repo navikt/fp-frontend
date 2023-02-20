@@ -12,7 +12,7 @@ const {
 
 describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
   it('skal overstyre og fylle ut fødselsvilkåret ikke er oppfylt og så lagre', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<OverstyringspanelForFødsel submitCallback={lagre} />);
 
@@ -61,7 +61,7 @@ describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
   });
 
   it('skal overstyre og fylle ut medlemskapsvilkåret ikke er oppfylt og så lagre', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<OverstyringspanelForMedlemskap submitCallback={lagre} />);
 

@@ -9,7 +9,7 @@ const { Default } = composeStories(stories);
 
 describe('<SletteSaksbehandlerModal>', () => {
   it('skal vise modal og slette ved å trykk ja', async () => {
-    const fjernSaksbehandler = jest.fn();
+    const fjernSaksbehandler = vi.fn();
     render(<Default fjernSaksbehandler={fjernSaksbehandler} />);
     expect(await screen.findByText('Ønsker du å slette Espen Utvikler?')).toBeInTheDocument();
 

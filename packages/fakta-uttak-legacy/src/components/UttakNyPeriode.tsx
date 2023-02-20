@@ -16,16 +16,12 @@ import {
   required,
   requiredIfNotPristine,
 } from '@navikt/ft-form-validators';
-import uttakArbeidType from '@navikt/fp-kodeverk/src/uttakArbeidType';
-import uttakPeriodeVurdering from '@navikt/fp-kodeverk/src/uttakPeriodeVurdering';
+import {
+  KodeverkType, uttakPeriodeVurdering, uttakArbeidType, navBrukerKjonn, uttakPeriodeType, overforingArsak, utsettelseArsakCodes,
+} from '@navikt/fp-kodeverk';
 import {
   ArrowBox, VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import navBrukerKjonn from '@navikt/fp-kodeverk/src/navBrukerKjonn';
-import uttakPeriodeType from '@navikt/fp-kodeverk/src/uttakPeriodeType';
-import overforingArsak from '@navikt/fp-kodeverk/src/overforingArsak';
-import utsettelseArsakCodes from '@navikt/fp-kodeverk/src/utsettelseArsakCodes';
 import {
   ArbeidsgiverOpplysningerPerId, AlleKodeverk, FaktaArbeidsforhold, KodeverkMedNavn, Personoversikt,
 } from '@navikt/fp-types';

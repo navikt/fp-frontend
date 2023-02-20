@@ -14,7 +14,7 @@ import {
   ariaCheck, dateAfterOrEqualToToday, hasValidDate, required, dateBeforeToday,
 } from '@navikt/ft-form-validators';
 import { KodeverkMedNavn } from '@navikt/fp-types';
-import venteArsakType from '@navikt/fp-kodeverk/src/venteArsakType';
+import { venteArsakType } from '@navikt/fp-kodeverk';
 
 import styles from './settPaVentModal.less';
 

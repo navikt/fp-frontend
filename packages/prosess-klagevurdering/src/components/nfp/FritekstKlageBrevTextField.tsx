@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 import { getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { hasValidText, required } from '@navikt/ft-form-validators';
@@ -12,15 +12,14 @@ interface OwnProps {
   readOnly?: boolean;
 }
 
-const FritekstKlageBrevTextField: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+const FritekstKlageBrevTextField: FunctionComponent<OwnProps> = ({
   sprakkode,
   readOnly,
-  intl,
 }) => (
   <div className={styles.fritekstTilBrevTextArea}>
     <TextAreaField
       name="fritekstTilBrev"
-      label={intl.formatMessage({ id: 'FritekstKlageBrevTextField.Fritekst' })}
+      label={useIntl().formatMessage({ id: 'FritekstKlageBrevTextField.Fritekst' })}
       validate={[required, hasValidText]}
       readOnly={readOnly}
       maxLength={100000}
@@ -38,4 +37,4 @@ FritekstKlageBrevTextField.defaultProps = {
   readOnly: true,
 };
 
-export default injectIntl(FritekstKlageBrevTextField);
+export default FritekstKlageBrevTextField;

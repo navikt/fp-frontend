@@ -1,18 +1,20 @@
 import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
+import { RestApiMock } from '@navikt/fp-utils-test';
 import { withRouter } from '@navikt/fp-storybook-utils';
 import { NavAnsatt } from '@navikt/fp-types';
 
-import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
-import fagsakStatus from '@navikt/fp-kodeverk/src/fagsakStatus';
+import { fagsakYtelseType, fagsakStatus } from '@navikt/fp-kodeverk';
 import { RestApiPathsKeys, requestApi } from './data/fpfordelRestApi';
 import JournalforingIndex from './JournalforingIndex';
 import OppgaveOversikt from './typer/oppgaveOversiktTsType';
 import OppgavePrioritet from './kodeverk/oppgavePrioritet';
 import Journalpost from './typer/journalpostTsType';
 import JournalKanal from './kodeverk/journalKanal';
+
+import '@navikt/ds-css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const detaljertJournalpostMal = {
   journalpostId: '986547336994',

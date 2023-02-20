@@ -7,24 +7,20 @@ import {
 } from '@navikt/ds-react';
 
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
+import {
+  KodeverkType, soknadType, vilkarUtfallType, getKodeverknavnFn, AksjonspunktCode, aksjonspunktStatus, VilkarType,
+} from '@navikt/fp-kodeverk';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { required } from '@navikt/ft-form-validators';
 import {
   DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
-import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import soknadType from '@navikt/fp-kodeverk/src/soknadType';
-import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
 import {
   ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew,
 } from '@navikt/fp-prosess-felles';
 import {
   Aksjonspunkt, AlleKodeverk, Behandling, FamilieHendelse, Soknad,
 } from '@navikt/fp-types';
-import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import SoknadsfristAp from '@navikt/fp-types-avklar-aksjonspunkter/src/prosess/SoknadsfristAp';
 
 import styles from './erSoknadsfristVilkaretOppfyltForm.less';
@@ -71,13 +67,13 @@ const findDate = (
 };
 
 export const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: string): FormValues => ({
-  erVilkarOk: isAksjonspunktOpen(aksjonspunkter[0].status) ? undefined : vilkarUtfallType.OPPFYLT === status,
+  erVilkarOk: aksjonspunkter[0].status === aksjonspunktStatus.OPPRETTET ? undefined : vilkarUtfallType.OPPFYLT === status,
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
 });
 
 const transformValues = (values: Required<FormValues>): SoknadsfristAp => ({
   erVilkarOk: values.erVilkarOk,
-  kode: AksjonspunktKode.SOKNADSFRISTVILKARET,
+  kode: AksjonspunktCode.SOKNADSFRISTVILKARET,
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
 });
 
@@ -217,7 +213,7 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
         </FlexRow>
       </FlexContainer>
       {readOnly && erVilkarOk === false && !!behandlingsresultat?.avslagsarsak && (
-        <BodyShort size="small">{getKodeverknavn(behandlingsresultat.avslagsarsak, KodeverkType.AVSLAGSARSAK, vilkarType.SOKNADFRISTVILKARET)}</BodyShort>
+        <BodyShort size="small">{getKodeverknavn(behandlingsresultat.avslagsarsak, KodeverkType.AVSLAGSARSAK, VilkarType.SOKNADFRISTVILKARET)}</BodyShort>
       )}
       <VerticalSpacer sixteenPx />
       <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />

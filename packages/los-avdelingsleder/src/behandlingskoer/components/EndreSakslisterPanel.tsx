@@ -4,8 +4,7 @@ import {
   FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
-import pilNedUrl from '@navikt/fp-assets/images/pil_ned2.svg';
-
+import pilNedUrl from '../../images/pil_ned2.svg';
 import { restApiHooks, RestApiPathsKeys } from '../../data/fplosRestApi';
 import Saksliste from '../../typer/sakslisteAvdelingTsType';
 import Saksbehandler from '../../typer/saksbehandlerAvdelingTsType';

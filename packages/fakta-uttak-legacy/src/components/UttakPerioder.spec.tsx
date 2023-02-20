@@ -6,9 +6,9 @@ import {
   AksjonspunktHelpTextHTML, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
 
-import { shallowWithIntl } from '@navikt/fp-utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl } from '@navikt/fp-utils-test';
 import { AlleKodeverk, FamilieHendelseSamling, Personoversikt } from '@navikt/fp-types';
-import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
+import { behandlingStatus } from '@navikt/fp-kodeverk';
 
 import FaktaSubmitButton from '../FaktaSubmitButton';
 import { UttakPerioder } from './UttakPerioder';

@@ -4,9 +4,7 @@ import { Detail, Heading, Label } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 
-import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
-import ankeVurdering from '@navikt/fp-kodeverk/src/ankeVurdering';
-import ankeVurderingOmgjoer from '@navikt/fp-kodeverk/src/ankeVurderingOmgjoer';
+import { getKodeverknavnFn, ankeVurdering, ankeVurderingOmgjoer } from '@navikt/fp-kodeverk';
 import { AnkeVurdering, AlleKodeverk } from '@navikt/fp-types';
 
 interface OwnPropsResultat {

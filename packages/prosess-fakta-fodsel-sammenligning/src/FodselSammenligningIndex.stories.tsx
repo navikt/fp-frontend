@@ -1,10 +1,13 @@
 import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
+import { behandlingType } from '@navikt/fp-kodeverk';
 import { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 import FodselSammenligningIndex from './FodselSammenligningIndex';
+
+import '@navikt/ds-css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const avklartBarn = [{
   fodselsdato: '2019-01-10',

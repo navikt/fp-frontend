@@ -9,7 +9,7 @@ const { Default } = composeStories(stories);
 
 describe('<BekreftelsePanel>', () => {
   it('skal måtte velge dekningsgrad', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     render(<Default submitCallback={lagre} />);
 

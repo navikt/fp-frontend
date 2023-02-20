@@ -7,12 +7,10 @@ import { BodyShort, Label, Detail } from '@navikt/ds-react';
 import {
   AoIArbeidsforhold, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold, AksjonspunktÅrsak, ArbeidOgInntektsmelding, Inntektsmelding, AlleKodeverk,
 } from '@navikt/fp-types';
-import advarselIkonUrl from '@navikt/fp-assets/images/advarsel2.svg';
-import okIkonUrl from '@navikt/fp-assets/images/check.svg';
 import {
   TableColumn, PeriodLabel, DateLabel, ExpandableTableRow, Image,
 } from '@navikt/ft-ui-komponenter';
-import ArbeidsforholdKomplettVurderingType from '@navikt/fp-kodeverk/src/arbeidsforholdKomplettVurderingType';
+import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import ManueltLagtTilArbeidsforholdForm from './manuelt/ManueltLagtTilArbeidsforholdForm';
 import ManglendeArbeidsforholdForm from './manglendeArbeidsforhold/ManglendeArbeidsforholdForm';
@@ -21,6 +19,8 @@ import InntektsmeldingerPanel from './felles/InntektsmeldingerPanel';
 import InntektsmeldingOpplysningerPanel from './felles/InntektsmeldingOpplysningerPanel';
 import ManglendeInntektsmeldingForm from './manglendeInntektsmelding/ManglendeInntektsmeldingForm';
 import ArbeidsforholdOgInntekt, { Avklaring } from '../types/arbeidsforholdOgInntekt';
+import advarselIkonUrl from '../images/advarsel2.svg';
+import okIkonUrl from '../images/check.svg';
 
 import styles from './arbeidsforholdRad.less';
 

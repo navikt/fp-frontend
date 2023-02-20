@@ -4,11 +4,9 @@ import { Label, BodyShort } from '@navikt/ds-react';
 
 import { AlleKodeverk, Vilkar, Behandlingsresultat } from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
-import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
-import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
-import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import {
+  behandlingStatus, fagsakYtelseType, getKodeverknavnFn, vilkarUtfallType, KodeverkType,
+} from '@navikt/fp-kodeverk';
 
 import { hasIkkeOppfyltSoknadsfristvilkar } from '../felles/VedtakHelper';
 import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';

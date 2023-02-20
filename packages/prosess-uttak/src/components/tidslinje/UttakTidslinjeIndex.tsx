@@ -19,14 +19,13 @@ import {
   AlleKodeverk,
   PeriodeSoker,
 } from '@navikt/fp-types';
-import soknadType from '@navikt/fp-kodeverk/src/soknadType';
-import oppholdArsakType, { oppholdArsakMapper } from '@navikt/fp-kodeverk/src/oppholdArsakType';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import { uttakPeriodeNavn } from '@navikt/fp-kodeverk/src/uttakPeriodeType';
-import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
-import periodeResultatType from '@navikt/fp-kodeverk/src/periodeResultatType';
+import {
+  KodeverkType, soknadType, oppholdArsakType, oppholdArsakMapper, uttakPeriodeNavn, behandlingStatus, periodeResultatType,
+} from '@navikt/fp-kodeverk';
 
-import UttakTidslinje, { EventProps, PeriodeSøkerMedTidslinjedata, TidslinjeTimes } from './UttakTidslinje';
+import UttakTidslinje, {
+  EventProps, PeriodeSøkerMedTidslinjedata, TidslinjeTimes,
+} from './UttakTidslinje';
 import UttakTidslinjeHjelpetekster from './UttakTidslinjeHjelpetekster';
 
 const godkjentKlassenavn = 'godkjentPeriode';

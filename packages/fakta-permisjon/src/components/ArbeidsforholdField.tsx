@@ -9,19 +9,18 @@ import {
   FlexColumn, FlexContainer, FlexRow, Image, Tooltip, VerticalSpacer, PeriodLabel, DateLabel,
 } from '@navikt/ft-ui-komponenter';
 
-import advarselIkonUrl from '@navikt/fp-assets/images/advarsel2.svg';
-import okIkonUrl from '@navikt/fp-assets/images/check.svg';
 import { required } from '@navikt/ft-form-validators';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
   ArbeidOgInntektsmelding, AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, Inntektsmelding, AlleKodeverk,
 } from '@navikt/fp-types';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import { getKodeverknavnFraKode } from '@navikt/fp-kodeverk/src/kodeverkUtils';
-import questionNormalUrl from '@navikt/fp-assets/images/question_normal.svg';
-import questionHoverUrl from '@navikt/fp-assets/images/question_hover.svg';
+import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
 
+import okIkonUrl from '../images/check.svg';
+import advarselIkonUrl from '../images/advarsel2.svg';
+import questionNormalUrl from '../images/question_normal.svg';
+import questionHoverUrl from '../images/question_hover.svg';
 import BekreftetPermisjonStatus from '../kodeverk/BekreftetPermisjonStatus';
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 import ArbeidsforholdBoks from './ArbeidsforholdBoks';

@@ -1,10 +1,9 @@
-import { AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn } from '@navikt/fp-types';
 import KodeverkType from './kodeverkTyper';
 
 // TODO Fjern desse metodane. Kan like godt slå opp direkte
 
 export const getKodeverknavnFraKode = (
-  alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving,
+  alleKodeverk: any,
   kodeverkType: string,
   kode: string,
   undertype?: string,
@@ -24,7 +23,7 @@ export const getKodeverknavnFraKode = (
 };
 
 export const getKodeverknavnFn = (
-  alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving,
+  alleKodeverk: any,
 ) => (
   kode: string,
   kodeverkType: KodeverkType,

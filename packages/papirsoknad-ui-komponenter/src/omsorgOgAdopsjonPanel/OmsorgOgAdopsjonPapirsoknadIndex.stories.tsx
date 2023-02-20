@@ -6,7 +6,7 @@ import { Button } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import fht from '@navikt/fp-kodeverk/src/familieHendelseType';
+import { familieHendelseType as fht } from '@navikt/fp-kodeverk';
 
 import OmsorgOgAdopsjonPapirsoknadIndex from './OmsorgOgAdopsjonPapirsoknadIndex';
 

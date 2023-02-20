@@ -5,9 +5,9 @@ import { FormattedMessage } from 'react-intl';
 import { createSelector } from 'reselect';
 import { Detail } from '@navikt/ds-react';
 
-import oppholdArsakType from '@navikt/fp-kodeverk/src/oppholdArsakType';
-import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
-import uttakPeriodeVurdering from '@navikt/fp-kodeverk/src/uttakPeriodeVurdering';
+import {
+  uttakPeriodeVurdering, behandlingStatus, oppholdArsakType,
+} from '@navikt/fp-kodeverk';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';

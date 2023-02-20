@@ -6,10 +6,13 @@ import {
   Aksjonspunkt, AksjonspunktÅrsak, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, Behandling,
 } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import PermisjonFaktaIndex from './PermisjonFaktaIndex';
+
+import '@navikt/ds-css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
+import '@navikt/ft-form-hooks/dist/style.css';
 
 export default {
   title: 'fakta/fakta-permisjon',

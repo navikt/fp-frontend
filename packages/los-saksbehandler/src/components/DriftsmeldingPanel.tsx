@@ -4,8 +4,7 @@ import {
   FlexColumn, FlexContainer, FlexRow, Image,
 } from '@navikt/ft-ui-komponenter';
 
-import advarselImageUrl from '@navikt/fp-assets/images/advarsel-sirkel-fyll.svg';
-
+import advarselImageUrl from '../images/advarsel-sirkel-fyll.svg';
 import Driftsmelding from '../typer/driftsmeldingTsType';
 
 import styles from './driftsmeldingPanel.less';

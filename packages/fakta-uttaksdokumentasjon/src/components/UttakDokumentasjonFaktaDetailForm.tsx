@@ -13,9 +13,11 @@ import {
   AvsnittSkiller, DateLabel, FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
-import splitPeriodImageUrl from '@navikt/fp-assets/images/splitt.svg';
-import { DokumentasjonVurderingBehov, UttakVurdering } from '@navikt/fp-types';
+import {
+  DokumentasjonVurderingBehov, UttakVurdering,
+} from '@navikt/fp-types';
 
+import splitPeriodImageUrl from '../images/splitt.svg';
 import DelOppPeriodeModal from './DelOppPeriodeModal';
 
 import styles from './uttakDokumentasjonFaktaDetailForm.less';

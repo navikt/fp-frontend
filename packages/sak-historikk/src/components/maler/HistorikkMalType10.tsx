@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import {
-  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+  FormattedMessage, useIntl, IntlShape,
 } from 'react-intl';
 
 import { HistorikkinnslagDel, HistorikkinnslagEndretFelt } from '@navikt/fp-types';
@@ -100,14 +100,14 @@ const sortArray = ((endredeFelter: HistorikkinnslagEndretFelt[]): Historikkinnsl
 /**
  * Mal for Historikk
  */
-const HistorikkMalType10: FunctionComponent<HistorikkMal & WrappedComponentProps> = ({
-  intl,
+const HistorikkMalType10: FunctionComponent<HistorikkMal> = ({
   historikkinnslag,
   behandlingLocation,
   getKodeverknavn,
   createLocationForSkjermlenke,
   saksnummer,
 }) => {
+  const intl = useIntl();
   const { historikkinnslagDeler, dokumentLinks, type: originType } = historikkinnslag;
 
   return (
@@ -169,4 +169,4 @@ const HistorikkMalType10: FunctionComponent<HistorikkMal & WrappedComponentProps
   );
 };
 
-export default injectIntl(HistorikkMalType10);
+export default HistorikkMalType10;

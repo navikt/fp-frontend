@@ -5,12 +5,10 @@ import { useForm } from 'react-hook-form';
 import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import { Form } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { AksjonspunktCode, getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt, FamilieHendelse, Personoversikt, RelatertTilgrensedYtelse, Soknad, AlleKodeverk,
 } from '@navikt/fp-types';
-import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
 import { AvklarFaktaForForeldreansvarAksjonspunktAp, AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import OmsorgOgForeldreansvarFaktaForm, { FormValues as OmsorgFormValues } from './OmsorgOgForeldreansvarFaktaForm';
@@ -34,8 +32,8 @@ const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
   alleKodeverk: AlleKodeverk,
 ): FormValues => {
-  const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.OMSORGSOVERTAKELSE
-    || ap.definisjon === aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR);
+  const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon === AksjonspunktCode.OMSORGSOVERTAKELSE
+    || ap.definisjon === AksjonspunktCode.AVKLAR_VILKAR_FOR_FORELDREANSVAR);
   return {
     ...OmsorgOgForeldreansvarFaktaForm.buildInitialValues(soknad, gjeldendeFamiliehendelse,
       innvilgetRelatertTilgrensendeYtelserForAnnenForelder, getKodeverknavnFn(alleKodeverk)),
@@ -87,15 +85,15 @@ export const OmsorgOgForeldreansvarInfoPanel: FunctionComponent<PureOwnProps> = 
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
-  const erAksjonspunktForeldreansvar = aksjonspunkter[0].definisjon === aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR;
+  const erAksjonspunktForeldreansvar = aksjonspunkter[0].definisjon === AksjonspunktCode.AVKLAR_VILKAR_FOR_FORELDREANSVAR;
 
   return (
     <Form formMethods={formMethods} onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkter[0]))}>
       <OmsorgOgForeldreansvarFaktaForm
         erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
         readOnly={readOnly}
-        vilkarTypes={alleKodeverk[kodeverkTyper.OMSORGSOVERTAKELSE_VILKAR_TYPE]}
-        relatertYtelseTypes={alleKodeverk[kodeverkTyper.RELATERT_YTELSE_TYPE]}
+        vilkarTypes={alleKodeverk[KodeverkType.OMSORGSOVERTAKELSE_VILKAR_TYPE]}
+        relatertYtelseTypes={alleKodeverk[KodeverkType.RELATERT_YTELSE_TYPE]}
         hasOpenAksjonspunkter={hasOpenAksjonspunkter}
         alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
         soknad={soknad}

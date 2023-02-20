@@ -7,7 +7,7 @@ import {
 } from '@navikt/fp-types';
 import { AvklarAnnenforelderHarRettAp, BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { Aksjonspunkt } from '@navikt/ft-types';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import AlleBarnPanel from './personer/AlleBarnPanel';
 import ForelderPanel from './personer/ForelderPanel';
 import AleneomsorgForm, { FormValues as AleneOmsorgValues } from './forms/AleneomsorgForm';

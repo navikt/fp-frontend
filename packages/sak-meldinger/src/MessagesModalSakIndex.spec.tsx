@@ -13,7 +13,7 @@ describe('<MessagesModalSakIndex>', () => {
   }
 
   it('skal vise modal når brevet er bestilt og lukke ved trykk på OK-knapp', async () => {
-    const lukk = jest.fn();
+    const lukk = vi.fn();
 
     render(<Default closeEvent={lukk} />);
 

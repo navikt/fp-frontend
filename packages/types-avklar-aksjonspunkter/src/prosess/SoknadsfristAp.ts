@@ -1,9 +1,9 @@
-import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
 type SoknadsfristAp = {
   erVilkarOk: boolean;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.SOKNADSFRISTVILKARET>;
+} & AksjonspunktTilBekreftelse<AksjonspunktCode.SOKNADSFRISTVILKARET>;
 
 export default SoknadsfristAp;

@@ -19,8 +19,7 @@ import {
   VerticalSpacer, AksjonspunktHelpTextHTML, FlexContainer, FlexRow, FlexColumn,
 } from '@navikt/ft-ui-komponenter';
 import { VurderArbeidsforholdPermisjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { aksjonspunktStatus, AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import ArbeidsforholdFieldArray from './ArbeidsforholdFieldArray';
 

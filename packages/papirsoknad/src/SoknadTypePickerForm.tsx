@@ -12,7 +12,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk } from '@navikt/ft-types';
 
-import familieHendelseType from '@navikt/fp-kodeverk/src/familieHendelseType';
+import { familieHendelseType } from '@navikt/fp-kodeverk';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 
 import styles from './soknadTypePickerForm.less';

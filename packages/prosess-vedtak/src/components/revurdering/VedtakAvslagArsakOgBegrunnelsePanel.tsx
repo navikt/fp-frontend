@@ -5,17 +5,15 @@ import { Label, BodyShort, Detail } from '@navikt/ds-react';
 import {
   AlleKodeverk, Vilkar, Behandlingsresultat,
 } from '@navikt/fp-types';
-import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
-import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
+import {
+  vilkarUtfallType, behandlingStatus, getKodeverknavnFn, KodeverkType,
+} from '@navikt/fp-kodeverk';
 import { TextAreaField, formHooks } from '@navikt/ft-form-hooks';
 import {
   hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew,
 } from '@navikt/ft-form-validators';
 import { decodeHtmlEntity, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-
-import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 
 import { hasIkkeOppfyltSoknadsfristvilkar } from '../felles/VedtakHelper';
 

@@ -1,0 +1,39 @@
+{
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx/tasks-runners/default",
+      "options": {
+        "cacheableOperations": [
+          "test",
+          "tsc",
+          "eslint",
+          "build"
+        ]
+      }
+    }
+  },
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*"],
+    "prod": ["!{projectRoot}/**/*.spec.tsx"]
+  },
+  "targetDefaults": {
+    "test": {
+      "inputs": ["default", "^prod", "{workspaceRoot}/jest-config/jest.config.ts"]
+    },
+    "tsc": {
+      "inputs": ["default", "{workspaceRoot}/tsconfig.json"]
+    },
+    "eslint": {
+      "inputs": ["default", "{workspaceRoot}/eslint/*.js"]
+    },
+    "build": {
+      "inputs": ["prod"],
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "{projectRoot}/dist"
+      ]
+    }
+  }
+}

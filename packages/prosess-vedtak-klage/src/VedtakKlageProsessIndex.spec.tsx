@@ -10,8 +10,8 @@ const {
 
 describe('<VedtakKlageProsessIndex>', () => {
   it('skal fylle ut, forhåndsvise og så bekrefte vedtak for NFP', async () => {
-    const lagre = jest.fn(() => Promise.resolve());
-    const forhåndsvis = jest.fn();
+    const lagre = vi.fn(() => Promise.resolve());
+    const forhåndsvis = vi.fn();
 
     render(<VedtakspanelDerKlageErVurdertAvNfp submitCallback={lagre} previewVedtakCallback={forhåndsvis} />);
 

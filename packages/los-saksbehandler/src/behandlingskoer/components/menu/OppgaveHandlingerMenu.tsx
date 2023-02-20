@@ -59,7 +59,7 @@ const OppgaveHandlingerMenu: FunctionComponent<OwnProps> = ({
   const [showFlyttReservasjonModal, setFlyttReservasjonModal] = useState(false);
 
   const menuButtonRef = useRef<HTMLButtonElement>();
-  const divRef = useRef<HTMLDivElement>();
+  const divRef = useRef<HTMLDivElement>(null);
 
   const handleOutsideClick = (event: MouseEvent<HTMLButtonElement>) => {
     // ignore clicks on the component itself

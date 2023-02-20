@@ -10,7 +10,7 @@ const {
 
 describe('<ForeldreansvarVilkarProsessIndex>', () => {
   it('skal bestemme at 2-ledd er oppfylt og så løse aksjonspunkt', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ÅpentAksjonspunkt2Ledd submitCallback={lagre} />);
 
@@ -33,7 +33,7 @@ describe('<ForeldreansvarVilkarProsessIndex>', () => {
   });
 
   it('skal bestemme at 2-ledd ikke er oppfylt og så løse aksjonspunkt', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ÅpentAksjonspunkt2Ledd submitCallback={lagre} />);
 
@@ -63,7 +63,7 @@ describe('<ForeldreansvarVilkarProsessIndex>', () => {
   });
 
   it('skal bestemme at 4-ledd er oppfylt og så løse aksjonspunkt', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ÅpentAksjonspunkt4Ledd submitCallback={lagre} />);
 
@@ -86,7 +86,7 @@ describe('<ForeldreansvarVilkarProsessIndex>', () => {
   });
 
   it('skal bestemme at 4-ledd ikke er oppfylt og så løse aksjonspunkt', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ÅpentAksjonspunkt4Ledd submitCallback={lagre} />);
 

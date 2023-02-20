@@ -1,7 +1,6 @@
 import React from 'react';
 import sinon from 'sinon';
-import { getIntlMock, shallowWithIntl } from '@navikt/fp-utils-test/src/intl-enzyme-test-helper';
-import { reduxFormPropsMock } from '@navikt/fp-utils-test/src/redux-form-test-helper';
+import { getIntlMock, shallowWithIntl, reduxFormPropsMock } from '@navikt/fp-utils-test';
 import { Modal, Button } from '@navikt/ds-react';
 import { UttakSlettPeriodeModalImpl } from './UttakSlettPeriodeModal';
 

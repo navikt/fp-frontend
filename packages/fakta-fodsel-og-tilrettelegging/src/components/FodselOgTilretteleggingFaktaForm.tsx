@@ -13,16 +13,15 @@ import {
   hasValidDate, hasValidText, maxLength, required,
 } from '@navikt/ft-form-validators';
 
-import tilretteleggingType from '@navikt/fp-kodeverk/src/tilretteleggingType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, tilretteleggingType } from '@navikt/fp-kodeverk';
 import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import {
   AoIArbeidsforhold, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, FodselOgTilrettelegging,
   ArbeidsforholdFodselOgTilrettelegging, ArbeidsforholdTilretteleggingDato,
 } from '@navikt/fp-types';
-import advarselIkonUrl from '@navikt/fp-assets/images/advarsel_ny.svg';
 import { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
+import advarselIkonUrl from '../images/advarsel_ny.svg';
 import TilretteleggingArbeidsforholdSection from './tilrettelegging/TilretteleggingArbeidsforholdSection';
 import { finnSkalTaHensynTilPermisjon } from './tilrettelegging/VelferdspermisjonSection';
 import { finnUtbetalingsgradForTilrettelegging } from './tilrettelegging/TilretteleggingFieldArray';
@@ -46,7 +45,7 @@ const getIsBegrunnelseRequired = (
 const getAksjonspunkt = (
   aksjonspunkter: Aksjonspunkt[],
 ): string => aksjonspunkter
-  .filter((ap) => ap.definisjon === aksjonspunktCodes.FODSELTILRETTELEGGING)[0].begrunnelse;
+  .filter((ap) => ap.definisjon === AksjonspunktCode.FODSELTILRETTELEGGING)[0].begrunnelse;
 
 const getAlleArbeidsforhold = (
   tilrettelegging: FodselOgTilrettelegging,
@@ -213,7 +212,7 @@ const transformValues = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   uttakArbeidTyper: KodeverkMedNavn[],
 ): BekreftSvangerskapspengerAp => ({
-  kode: aksjonspunktCodes.FODSELTILRETTELEGGING,
+  kode: AksjonspunktCode.FODSELTILRETTELEGGING,
   termindato: values.termindato,
   fødselsdato: values.fødselsdato,
   begrunnelse: values.begrunnelse,

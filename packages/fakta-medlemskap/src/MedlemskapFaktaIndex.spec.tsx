@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import * as stories from './MedlemskapFaktaIndex.stories';
 
@@ -12,7 +12,7 @@ const {
 
 describe('<MedlemskapFaktaIndex>', () => {
   it('skal velge at søker er bosatt i Norge', async () => {
-    const lagreVurdering = jest.fn(() => Promise.resolve());
+    const lagreVurdering = vi.fn(() => Promise.resolve());
 
     render(<AvklarOmBrukerErBosatt submitCallback={lagreVurdering} />);
 
@@ -54,7 +54,7 @@ describe('<MedlemskapFaktaIndex>', () => {
   });
 
   it('skal velge at søker er har periode med medlemskap', async () => {
-    const lagreVurdering = jest.fn(() => Promise.resolve());
+    const lagreVurdering = vi.fn(() => Promise.resolve());
 
     render(<AvklarOmBrukerHarGyldigPeriode submitCallback={lagreVurdering} />);
 
@@ -116,7 +116,7 @@ describe('<MedlemskapFaktaIndex>', () => {
   });
 
   it('skal velge at søker har oppholdsrett', async () => {
-    const lagreVurdering = jest.fn(() => Promise.resolve());
+    const lagreVurdering = vi.fn(() => Promise.resolve());
 
     render(<AvklarOmBrukerHarOppholdsrett submitCallback={lagreVurdering} />);
 
@@ -156,7 +156,7 @@ describe('<MedlemskapFaktaIndex>', () => {
   });
 
   it('skal velge at søker har lovlig opphold', async () => {
-    const lagreVurdering = jest.fn(() => Promise.resolve());
+    const lagreVurdering = vi.fn(() => Promise.resolve());
 
     render(<AvklarOmBrukerHarLovligOpphold submitCallback={lagreVurdering} />);
 
@@ -196,7 +196,7 @@ describe('<MedlemskapFaktaIndex>', () => {
   });
 
   it('skal løse aksjonspunkt for flere perioder', async () => {
-    const lagreVurdering = jest.fn(() => Promise.resolve());
+    const lagreVurdering = vi.fn(() => Promise.resolve());
 
     render(<AvklarFortsattMedlemskap submitCallback={lagreVurdering} />);
 

@@ -13,7 +13,7 @@ const { Default } = composeStories(stories);
 
 describe('<TerminFodselSvpPanel>', () => {
   it('skal velge termindato og fødselsdato', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<Default submitCallback={lagre} />);
 

@@ -35,7 +35,7 @@ const oppgaveForResevertAvAnnenModal = {
 
 describe('<OppgaveErReservertAvAnnenModal>', () => {
   it('skal modal og lukke den ved trykk på Ok-knappen', async () => {
-    const lukkErReservertModalOgOpneOppgave = jest.fn();
+    const lukkErReservertModalOgOpneOppgave = vi.fn();
     render(<Default lukkErReservertModalOgOpneOppgave={lukkErReservertModalOgOpneOppgave} />);
     expect(await screen.findByText(
       'Espen Utvikler (E232323) arbeider nå med denne behandlingen (reservert fram t.o.m 01.01.2020 - 00:00)',

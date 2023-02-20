@@ -29,7 +29,7 @@ describe('<UttakFaktaIndex>', () => {
   });
 
   it('skal kunne overstyre når det ikke er aksjonspunkter og en er overstyrer', async () => {
-    const lagre = jest.fn(() => Promise.resolve());
+    const lagre = vi.fn(() => Promise.resolve());
 
     const utils = render(<VisUttaksperiodeUtenAksjonspunktKanOverstyre submitCallback={lagre} />);
 
@@ -81,7 +81,7 @@ describe('<UttakFaktaIndex>', () => {
   });
 
   it('skal få aksjonspunkt der en må justere fom dato til avklart startdato', async () => {
-    const lagre = jest.fn(() => Promise.resolve());
+    const lagre = vi.fn(() => Promise.resolve());
 
     const utils = render(<VisUttaksperiodeMedAksjonspunkt submitCallback={lagre} />);
 
@@ -152,7 +152,7 @@ describe('<UttakFaktaIndex>', () => {
   });
 
   it('skal vise aksjonspunkt når det ikke finnes perioder og så legge til en periode', async () => {
-    const lagre = jest.fn(() => Promise.resolve());
+    const lagre = vi.fn(() => Promise.resolve());
 
     const utils = render(<VisAksjonspunktDerIngenPerioderFinnes submitCallback={lagre} />);
 
@@ -199,7 +199,7 @@ describe('<UttakFaktaIndex>', () => {
   });
 
   it('skal få aksjonspunkt der arbeidsforholdet i periode er ukjent', async () => {
-    const lagre = jest.fn(() => Promise.resolve());
+    const lagre = vi.fn(() => Promise.resolve());
 
     const utils = render(<VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering submitCallback={lagre} />);
 

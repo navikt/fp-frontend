@@ -5,15 +5,17 @@ import { Aksjonspunkt } from '@navikt/ft-types';
 import { OpplysningAdresseType } from '@navikt/ft-kodeverk';
 
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import sivilstandType from '@navikt/fp-kodeverk/src/sivilstandType';
+import { AksjonspunktCode, sivilstandType, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 import {
   Behandling, KjønnkodeEnum, Personoversikt, Ytelsefordeling,
 } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import OmsorgFaktaIndex from './OmsorgFaktaIndex';
+
+import '@navikt/ds-css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
+import '@navikt/ft-form-hooks/dist/style.css';
 
 const behandling = {
   uuid: '1',
@@ -96,13 +98,13 @@ const Template: Story<{
 export const ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg = Template.bind({});
 ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg.args = {
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
+    definisjon: AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
   }],
   alleMerknaderFraBeslutter: {
-    [aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]: merknaderFraBeslutter,
+    [AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]: merknaderFraBeslutter,
   },
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };

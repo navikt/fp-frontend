@@ -7,7 +7,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { FagsakStatus, KodeverkType } from '@navikt/ft-kodeverk';
 import { FagsakEnkel } from '@navikt/fp-types';
-import { getKodeverknavnFraKode } from '@navikt/fp-kodeverk/src/kodeverkUtils';
+import { getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
 import { Oppgave } from '@navikt/fp-los-felles';
 
 import useLosKodeverk from '../../data/useLosKodeverk';

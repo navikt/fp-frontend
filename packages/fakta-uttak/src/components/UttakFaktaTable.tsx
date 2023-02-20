@@ -13,7 +13,7 @@ import { AddCircle } from '@navikt/ds-icons';
 import {
   AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold,
 } from '@navikt/fp-types';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import UttakFaktaDetailForm, { utledÅrsakstype, Årsakstype } from './UttakFaktaDetailForm';
 import KontrollerFaktaPeriodeMedApMarkering from '../typer/kontrollerFaktaPeriodeMedApMarkering';

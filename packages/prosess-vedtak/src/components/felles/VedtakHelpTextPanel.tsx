@@ -4,7 +4,7 @@ import {
 } from 'react-intl';
 import { Alert, BodyShort } from '@navikt/ds-react';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt } from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
@@ -13,13 +13,13 @@ const findHelpTexts = (
   aksjonspunkter: Aksjonspunkt[],
 ): string[] => {
   const helpTexts = [];
-  if (aksjonspunkter && aksjonspunkter.some((a) => a.definisjon === aksjonspunktCodes.VURDERE_ANNEN_YTELSE)) {
+  if (aksjonspunkter && aksjonspunkter.some((a) => a.definisjon === AksjonspunktCode.VURDERE_ANNEN_YTELSE)) {
     helpTexts.push(intl.formatMessage({ id: 'VedtakForm.VurderAnnenYtelse' }));
   }
-  if (aksjonspunkter && aksjonspunkter.some((a) => a.definisjon === aksjonspunktCodes.VURDERE_DOKUMENT)) {
+  if (aksjonspunkter && aksjonspunkter.some((a) => a.definisjon === AksjonspunktCode.VURDERE_DOKUMENT)) {
     helpTexts.push(intl.formatMessage({ id: 'VedtakForm.VurderDokument' }));
   }
-  if (aksjonspunkter && aksjonspunkter.some((a) => a.definisjon === aksjonspunktCodes.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST)) {
+  if (aksjonspunkter && aksjonspunkter.some((a) => a.definisjon === AksjonspunktCode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST)) {
     helpTexts.push(intl.formatMessage({ id: 'VedtakForm.KontrollerRevurderingsbehandling' }));
   }
 

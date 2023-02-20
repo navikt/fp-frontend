@@ -4,9 +4,9 @@ import { formHooks, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { ArrowBox, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, MedlemPeriode } from '@navikt/fp-types';
+import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 export type FormValues = {
   oppholdsrettVurdering?: boolean;
@@ -43,9 +43,9 @@ const StatusForBorgerFaktaPanel: FunctionComponent<OwnProps> & StaticFunctions =
   const erEosBorger = watch('erEosBorger');
 
   const oppholdAp = valgtPeriode.aksjonspunkter
-    .filter((periodeAp) => periodeAp === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT || periodeAp === aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD);
+    .filter((periodeAp) => periodeAp === AksjonspunktCode.AVKLAR_OPPHOLDSRETT || periodeAp === AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD);
   const aksjonspunkt = aksjonspunkter.find((ap) => oppholdAp.includes(ap.definisjon));
-  const erAksjonspunktLukket = !isAksjonspunktOpen(aksjonspunkt?.status);
+  const erAksjonspunktLukket = aksjonspunkt?.status !== AksjonspunktStatus.OPPRETTET;
 
   return (
     <FaktaGruppe
@@ -132,7 +132,7 @@ const getEosBorger = (
   aksjonspunkter: Aksjonspunkt[],
 ): boolean => (periode.erEosBorger || periode.erEosBorger === false
   ? periode.erEosBorger
-  : aksjonspunkter.some((ap) => ap.definisjon === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT));
+  : aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.AVKLAR_OPPHOLDSRETT));
 
 const getOppholdsrettVurdering = (
   periode: MedlemPeriode,

@@ -14,7 +14,7 @@ import {
   Månedsgrunnlag,
   ArbeidsgiverOpplysningerPerId,
 } from '@navikt/fp-types';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import styles from './besteManederVisningPanel.less';
 

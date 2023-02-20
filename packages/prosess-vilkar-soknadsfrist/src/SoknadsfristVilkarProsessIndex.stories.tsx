@@ -2,15 +2,11 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
-import soknadType from '@navikt/fp-kodeverk/src/soknadType';
-import avslagsarsakCodes from '@navikt/fp-kodeverk/src/avslagsarsakCodes';
-import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import {
-  Aksjonspunkt,
-  Behandling, FamilieHendelseSamling, Soknad, Vilkar,
+  VilkarType, aksjonspunktStatus, vilkarUtfallType, avslagsarsakCodes, soknadType, AksjonspunktCode,
+} from '@navikt/fp-kodeverk';
+import {
+  Aksjonspunkt, Behandling, FamilieHendelseSamling, Soknad, Vilkar,
 } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -24,7 +20,7 @@ const defaultBehandling = {
 } as Behandling;
 
 const vilkar = [{
-  vilkarType: vilkarType.SOKNADFRISTVILKARET,
+  vilkarType: VilkarType.SOKNADFRISTVILKARET,
 }] as Vilkar[];
 
 const soknad = {
@@ -89,10 +85,10 @@ export const ÅpentAksjonspunkt = Template.bind({});
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   behandling: defaultBehandling,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.SOKNADSFRISTVILKARET,
+    definisjon: AksjonspunktCode.SOKNADSFRISTVILKARET,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
-    vilkarType: vilkarType.SOKNADFRISTVILKARET,
+    vilkarType: VilkarType.SOKNADFRISTVILKARET,
   }] as Aksjonspunkt[],
   isReadOnly: false,
   readOnlySubmitButton: false,
@@ -104,10 +100,10 @@ OppfyltVilkår.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   behandling: defaultBehandling,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.SOKNADSFRISTVILKARET,
+    definisjon: AksjonspunktCode.SOKNADSFRISTVILKARET,
     status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette vilkåret er godkjent',
-    vilkarType: vilkarType.SOKNADFRISTVILKARET,
+    vilkarType: VilkarType.SOKNADFRISTVILKARET,
   }] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
@@ -125,10 +121,10 @@ AvslåttVilkår.args = {
     },
   } as Behandling,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.SOKNADSFRISTVILKARET,
+    definisjon: AksjonspunktCode.SOKNADSFRISTVILKARET,
     status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette vilkåret er avslått',
-    vilkarType: vilkarType.SOKNADFRISTVILKARET,
+    vilkarType: VilkarType.SOKNADFRISTVILKARET,
   }] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,

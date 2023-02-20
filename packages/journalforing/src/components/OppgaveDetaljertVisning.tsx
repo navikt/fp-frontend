@@ -8,9 +8,6 @@ import {
 import Office1 from '@navikt/ds-icons/svg/Office1.svg';
 import { Clipboard } from '@navikt/ft-plattform-komponenter';
 
-import kvinneIkonUrl from '@navikt/fp-assets/images/kvinne.svg';
-import mannIkonUrl from '@navikt/fp-assets/images/mann.svg';
-import ukjentIkonUrl from '@navikt/fp-assets/images/ukjent.svg';
 import {
   FlexColumn, FlexRow, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -19,6 +16,9 @@ import Journalpost from '../typer/journalpostTsType';
 import styles from './journalforingPanel.less';
 import VelgDokumentForm from './VelgDokumentForm';
 import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
+import kvinneIkonUrl from '../images/kvinne.svg';
+import mannIkonUrl from '../images/mann.svg';
+import ukjentIkonUrl from '../images/ukjent.svg';
 
 const finnKjønnBilde = (journalpost: Journalpost): string => {
   const fnr = journalpost.bruker?.fnr;

@@ -3,17 +3,17 @@ import { BodyShort } from '@navikt/ds-react';
 import {
   FlexContainer, FlexRow, FlexColumn, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
-import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
-import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import { vilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
   Datepicker, RadioGroupPanel, SelectField, formHooks,
 } from '@navikt/ft-form-hooks';
 import { createIntl } from '@navikt/ft-utils';
 import { hasValidDate, required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
-import avslattImage from '@navikt/fp-assets/images/avslaatt.svg';
-import innvilgetImage from '@navikt/fp-assets/images/check.svg';
 import { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@navikt/fp-types';
+import avslattImage from '../images/avslaatt.svg';
+import innvilgetImage from '../images/check.svg';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -132,7 +132,7 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
 };
 
 VilkarResultPicker.buildInitialValues = (behandlingsresultat: Behandlingsresultat, aksjonspunkter: Aksjonspunkt[], status: string): FormValues => {
-  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status));
+  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => ap.status === AksjonspunktStatus.OPPRETTET);
   const erVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
   return {
     erVilkarOk,

@@ -1,4 +1,4 @@
-import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
@@ -33,6 +33,6 @@ type BekreftSvangerskapspengerAp = {
   termindato: string;
   fødselsdato: string;
   bekreftetSvpArbeidsforholdList: BekreftetSvpArbeidsforhold[];
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.FODSELTILRETTELEGGING>;
+} & AksjonspunktTilBekreftelse<AksjonspunktCode.FODSELTILRETTELEGGING>;
 
 export default BekreftSvangerskapspengerAp;

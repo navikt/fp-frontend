@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { Panel } from '@navikt/ds-react';
 import { KodeverkMedNavn } from '@navikt/ft-types';
 import { BehandlingType } from '@navikt/ft-kodeverk';
@@ -29,7 +29,6 @@ const slåSammen = (oppgaverForAvdeling: OppgaverForAvdeling[]): number[] => {
 };
 
 interface OwnProps {
-  intl: any;
   height: number;
   behandlingTyper: KodeverkMedNavn[];
   oppgaverForAvdeling: OppgaverForAvdeling[];
@@ -38,12 +37,12 @@ interface OwnProps {
 /**
  * FordelingAvBehandlingstypeGraf.
  */
-const FordelingAvBehandlingstypeGraf: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const FordelingAvBehandlingstypeGraf: FunctionComponent<OwnProps> = ({
   height,
   oppgaverForAvdeling,
   behandlingTyper,
 }) => {
+  const intl = useIntl();
   const tilBehandlingTekst = intl.formatMessage({ id: 'FordelingAvBehandlingstypeGraf.TilBehandling' });
   const tilBeslutterTekst = intl.formatMessage({ id: 'FordelingAvBehandlingstypeGraf.TilBeslutter' });
 
@@ -123,4 +122,4 @@ const FordelingAvBehandlingstypeGraf: FunctionComponent<OwnProps & WrappedCompon
   );
 };
 
-export default injectIntl(FordelingAvBehandlingstypeGraf);
+export default FordelingAvBehandlingstypeGraf;

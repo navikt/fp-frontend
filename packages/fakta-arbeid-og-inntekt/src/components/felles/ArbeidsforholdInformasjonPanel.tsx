@@ -5,8 +5,6 @@ import { FormattedMessage } from 'react-intl';
 import dayjs from 'dayjs';
 import { Label, BodyShort, Link } from '@navikt/ds-react';
 
-import pilOppIkonUrl from '@navikt/fp-assets/images/pil_opp.svg';
-import pilNedIkonUrl from '@navikt/fp-assets/images/pil_ned.svg';
 import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import {
   AlleKodeverk, AoIArbeidsforhold, Inntektsmelding, Inntektspost,
@@ -15,8 +13,11 @@ import {
   Image, FlexColumn, FlexContainer, FlexRow, VerticalSpacer, FloatRight,
 } from '@navikt/ft-ui-komponenter';
 
-import styles from './arbeidsforholdInformasjonPanel.less';
+import pilOppIkonUrl from '../../images/pil_opp.svg';
+import pilNedIkonUrl from '../../images/pil_ned.svg';
 import InntektsmeldingerPanel from './InntektsmeldingerPanel';
+
+import styles from './arbeidsforholdInformasjonPanel.less';
 
 type ForenkletInntektspost = {
   beløp: number;

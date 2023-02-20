@@ -1,8 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import AnkeVurderingKodeverk from '@navikt/fp-kodeverk/src/ankeVurdering';
-import ankeVurderingOmgjoer from '@navikt/fp-kodeverk/src/ankeVurderingOmgjoer';
+import { ankeVurderingOmgjoer, ankeVurdering as AnkeVurderingKodeverk } from '@navikt/fp-kodeverk';
 import { AnkeVurdering } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 

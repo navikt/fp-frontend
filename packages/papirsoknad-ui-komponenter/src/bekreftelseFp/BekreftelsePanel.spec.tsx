@@ -11,7 +11,7 @@ const { Default, MedObligatoriskFeltFordiAnnenForelderErInformert } = composeSto
 
 describe('<BekreftelsePanel>', () => {
   it('skal ikke ha behov for å velge når annen forelder ikke er informert', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     render(<Default submitCallback={lagre} />);
 
@@ -27,7 +27,7 @@ describe('<BekreftelsePanel>', () => {
   });
 
   it('skal måtte velge når annen forelder er informert', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     render(<MedObligatoriskFeltFordiAnnenForelderErInformert submitCallback={lagre} />);
 

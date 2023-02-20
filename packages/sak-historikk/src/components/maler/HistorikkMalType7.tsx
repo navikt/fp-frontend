@@ -1,7 +1,5 @@
 import React, { FunctionComponent, ReactNode } from 'react';
-import {
-  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
-} from 'react-intl';
+import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 
 import { HistorikkinnslagEndretFelt } from '@navikt/fp-types';
@@ -38,14 +36,14 @@ const formatChangedField = (endretFelt: HistorikkinnslagEndretFelt, intl: IntlSh
   return false;
 };
 
-const HistorikkMalType7: FunctionComponent<HistorikkMal & WrappedComponentProps> = ({
-  intl,
+const HistorikkMalType7: FunctionComponent<HistorikkMal> = ({
   historikkinnslag,
   behandlingLocation,
   getKodeverknavn,
   createLocationForSkjermlenke,
   saksnummer,
 }) => {
+  const intl = useIntl();
   const { historikkinnslagDeler, dokumentLinks } = historikkinnslag;
 
   return (
@@ -104,4 +102,4 @@ const HistorikkMalType7: FunctionComponent<HistorikkMal & WrappedComponentProps>
   );
 };
 
-export default injectIntl(HistorikkMalType7);
+export default HistorikkMalType7;

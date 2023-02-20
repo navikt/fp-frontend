@@ -3,15 +3,11 @@ import { RawIntlProvider } from 'react-intl';
 import { Location } from 'history';
 import { createIntl } from '@navikt/ft-utils';
 
-import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import BehandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
+import {
+  KodeverkType, behandlingStatus as BehandlingStatus, AksjonspunktCode, AksjonspunktCodeTilbakekreving,
+  fagsakYtelseType as FagsakYtelseType, behandlingType as BehandlingType, behandlingArsakType as BehandlingÅrsakType, vurderPaNyttArsakType,
+} from '@navikt/fp-kodeverk';
 import { skjermlenkeCodes } from '@navikt/fp-konstanter';
-import FagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
-import BehandlingType from '@navikt/fp-kodeverk/src/behandlingType';
-import klageBehandlingArsakType from '@navikt/fp-kodeverk/src/behandlingArsakType';
-import vurderPaNyttArsakType from '@navikt/fp-kodeverk/src/vurderPaNyttArsakType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import aksjonspunktCodesTilbakekreving from '@navikt/fp-kodeverk/src/aksjonspunktCodesTilbakekreving';
 import {
   BehandlingAppKontekst, AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn,
 } from '@navikt/fp-types';
@@ -50,10 +46,10 @@ const getArsaker = (apData: AksjonspunktGodkjenningData): string[] => {
   return arsaker;
 };
 
-const finnArbeidsforholdHandlingTyper = (alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving) => (kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE in alleKodeverk
-  ? (alleKodeverk as AlleKodeverk)[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE] : TOMT_KODEVERK);
-const finnFaktaOmBeregningTilfeller = (alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving) => (kodeverkTyper.FAKTA_OM_BEREGNING_TILFELLE in alleKodeverk
-  ? (alleKodeverk as AlleKodeverk)[kodeverkTyper.FAKTA_OM_BEREGNING_TILFELLE] : TOMT_KODEVERK);
+const finnArbeidsforholdHandlingTyper = (alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving) => (KodeverkType.ARBEIDSFORHOLD_HANDLING_TYPE in alleKodeverk
+  ? (alleKodeverk as AlleKodeverk)[KodeverkType.ARBEIDSFORHOLD_HANDLING_TYPE] : TOMT_KODEVERK);
+const finnFaktaOmBeregningTilfeller = (alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving) => (KodeverkType.FAKTA_OM_BEREGNING_TILFELLE in alleKodeverk
+  ? (alleKodeverk as AlleKodeverk)[KodeverkType.FAKTA_OM_BEREGNING_TILFELLE] : TOMT_KODEVERK);
 
 interface OwnProps {
   behandling: BehandlingAppKontekst;
@@ -63,7 +59,7 @@ interface OwnProps {
   readOnly: boolean;
   onSubmit: (data: {
     fatterVedtakAksjonspunktDto: {
-      '@type': aksjonspunktCodes.FATTER_VEDTAK | aksjonspunktCodesTilbakekreving.FATTER_VEDTAK;
+      '@type': AksjonspunktCode.FATTER_VEDTAK | AksjonspunktCodeTilbakekreving.FATTER_VEDTAK;
     } & FatterVedtakAp;
     erAlleAksjonspunktGodkjent: boolean;
   }) => Promise<void>;
@@ -96,7 +92,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
         arsaker: getArsaker(apData),
       }));
 
-    const kode = erTilbakekreving ? aksjonspunktCodesTilbakekreving.FATTER_VEDTAK : aksjonspunktCodes.FATTER_VEDTAK;
+    const kode = erTilbakekreving ? AksjonspunktCodeTilbakekreving.FATTER_VEDTAK : AksjonspunktCode.FATTER_VEDTAK;
     const fatterVedtakAksjonspunktDto = {
       '@type': kode,
       begrunnelse: null,
@@ -112,8 +108,8 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
 
   const erBehandlingEtterKlage = useMemo(() => (behandling ? behandling.behandlingÅrsaker
     .map(({ behandlingArsakType }) => behandlingArsakType)
-    .some((bt) => bt === klageBehandlingArsakType.ETTER_KLAGE || bt === klageBehandlingArsakType.KLAGE_U_INNTK
-    || bt === klageBehandlingArsakType.KLAGE_M_INNTK) : false),
+    .some((bt) => bt === BehandlingÅrsakType.ETTER_KLAGE || bt === BehandlingÅrsakType.KLAGE_U_INNTK
+    || bt === BehandlingÅrsakType.KLAGE_M_INNTK) : false),
   [behandling]);
 
   const sorterteTotrinnskontrollSkjermlenkeContext = useMemo(() => (erTilbakekreving
@@ -128,8 +124,8 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   const lagLenke = useCallback((skjermlenkeCode: string): Location | undefined => createLocationForSkjermlenke(location, skjermlenkeCode), [location]);
 
   const erStatusFatterVedtak = behandling.status === BehandlingStatus.FATTER_VEDTAK;
-  const skjemalenkeTyper = alleKodeverk[kodeverkTyper.SKJERMLENKE_TYPE];
-  const vurderArsaker = alleKodeverk[kodeverkTyper.VURDER_AARSAK];
+  const skjemalenkeTyper = alleKodeverk[KodeverkType.SKJERMLENKE_TYPE];
+  const vurderArsaker = alleKodeverk[KodeverkType.VURDER_AARSAK];
   const arbeidsforholdHandlingTyper = finnArbeidsforholdHandlingTyper(alleKodeverk);
   const faktaOmBeregningTilfeller = finnFaktaOmBeregningTilfeller(alleKodeverk);
 

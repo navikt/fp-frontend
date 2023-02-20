@@ -12,7 +12,7 @@ import {
 } from '@navikt/ft-form-validators';
 import { formatCurrencyWithKr, decodeHtmlEntity } from '@navikt/ft-utils';
 import { InputField, Form } from '@navikt/ft-form-hooks';
-import aksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { OverstyringPanel } from '@navikt/fp-prosess-felles';
 import { OverstyringBeregningAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -30,7 +30,7 @@ const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
   behandlingResultatstruktur?: BeregningsresultatEs,
 ): FormValues => {
-  const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCode.OVERSTYR_BEREGNING);
+  const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon === AksjonspunktCode.OVERSTYR_BEREGNING);
   return {
     begrunnelse: decodeHtmlEntity(aksjonspunkt && aksjonspunkt.begrunnelse ? aksjonspunkt.begrunnelse : ''),
     beregnetTilkjentYtelse: behandlingResultatstruktur.beregnetTilkjentYtelse,
@@ -38,7 +38,7 @@ const buildInitialValues = (
 };
 
 const transformValues = (values: FormValues): OverstyringBeregningAp => ({
-  kode: aksjonspunktCode.OVERSTYR_BEREGNING,
+  kode: AksjonspunktCode.OVERSTYR_BEREGNING,
   beregnetTilkjentYtelse: values.beregnetTilkjentYtelse,
   begrunnelse: values.begrunnelse,
 });
@@ -79,14 +79,14 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
   const toggleAv = useCallback(() => {
     toggleOverstyringsmodus(false);
     formMethods.reset();
-    toggleOverstyring((oldArray) => oldArray.filter((code) => code !== aksjonspunktCode.OVERSTYR_BEREGNING));
+    toggleOverstyring((oldArray) => oldArray.filter((code) => code !== AksjonspunktCode.OVERSTYR_BEREGNING));
   }, []);
   const togglePa = useCallback(() => {
     toggleOverstyringsmodus(true);
-    toggleOverstyring((oldArray) => [...oldArray, aksjonspunktCode.OVERSTYR_BEREGNING]);
+    toggleOverstyring((oldArray) => [...oldArray, AksjonspunktCode.OVERSTYR_BEREGNING]);
   }, []);
 
-  const harOverstyringAksjonspunkt = aksjonspunkter.some((ap) => ap.definisjon === aksjonspunktCode.OVERSTYR_BEREGNING) || false;
+  const harOverstyringAksjonspunkt = aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.OVERSTYR_BEREGNING) || false;
 
   return (
     <Form

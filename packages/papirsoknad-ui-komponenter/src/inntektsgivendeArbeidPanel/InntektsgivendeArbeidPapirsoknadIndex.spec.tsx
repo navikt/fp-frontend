@@ -11,7 +11,7 @@ const { Default } = composeStories(stories);
 
 describe('<InntektsgivendeArbeidPapirsoknadIndex>', () => {
   it('skal fylle ut inntektsgivende arbeid i utland', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<Default submitCallback={lagre} />);
 

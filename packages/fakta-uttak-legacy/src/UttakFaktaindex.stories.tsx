@@ -24,6 +24,9 @@ import familiehendelseOverføringAvPerioder from '../testdata/overforing-av-peri
 
 import UttakFaktaIndex from './UttakFaktaIndex';
 
+import '@navikt/ds-css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
+
 const arbeidsgiverOpplysningerPerId = {
   910909088: {
     erPrivatPerson: false,

@@ -14,7 +14,7 @@ const { ForFørstegangsbehandling, ForRevurdering } = composeStories(stories);
 describe('<VarselOmRevurderingProsessIndex>', () => {
   Modal.setAppElement('body');
   it('skal for førstegangsbehandling velge å ikke sende varsel til søker og så bekrefte', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ForFørstegangsbehandling submitCallback={lagre} />);
 
@@ -47,8 +47,8 @@ describe('<VarselOmRevurderingProsessIndex>', () => {
   });
 
   it('skal for førstegangsbehandling velge å sende varsel til søker og så bekrefte', async () => {
-    const lagre = jest.fn();
-    const forhåndsvis = jest.fn();
+    const lagre = vi.fn();
+    const forhåndsvis = vi.fn();
 
     const utils = render(<ForFørstegangsbehandling submitCallback={lagre} previewCallback={forhåndsvis} />);
 
@@ -92,7 +92,7 @@ describe('<VarselOmRevurderingProsessIndex>', () => {
   });
 
   it('skal for revurdering velge å ikke sende varsel til søker og så bekrefte', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ForRevurdering submitCallback={lagre} />);
 

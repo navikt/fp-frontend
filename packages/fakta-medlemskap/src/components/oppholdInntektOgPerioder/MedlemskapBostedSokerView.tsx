@@ -8,9 +8,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { KodeverkMedNavn } from '@navikt/ft-types';
 
-import opplysningAdresseType from '@navikt/fp-kodeverk/src/opplysningAdresseType';
-import personstatusType from '@navikt/fp-kodeverk/src/personstatusType';
-import Region from '@navikt/fp-kodeverk/src/region';
+import { region, personstatusType, opplysningAdresseType } from '@navikt/fp-kodeverk';
 import { Personadresse, PersonopplysningMedlem } from '@navikt/fp-types';
 
 import getAddresses from '../../getAddresses';
@@ -73,7 +71,7 @@ export const MedlemskapBostedSokerView: FunctionComponent<OwnProps> = ({
                 </Tooltip>
               </div>
             )}
-            {(personopplysninger.region && personopplysninger.region !== Region.UDEFINERT) && (
+            {(personopplysninger.region && personopplysninger.region !== region.UDEFINERT) && (
               <div className={styles.etikettMargin}>
                 <Tooltip content={intl.formatMessage({ id: 'BostedSokerView.Region' })} alignBottom>
                   <Tag variant="warning">

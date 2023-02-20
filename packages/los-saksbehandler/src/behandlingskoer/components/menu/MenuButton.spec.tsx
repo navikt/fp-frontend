@@ -6,7 +6,7 @@ import MenuButton from './MenuButton';
 
 describe('<MenuButton>', () => {
   it('skal rendre meny-knapp', async () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
 
     render(
       <MenuButton

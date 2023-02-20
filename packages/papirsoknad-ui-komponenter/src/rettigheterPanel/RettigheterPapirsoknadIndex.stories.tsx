@@ -7,8 +7,7 @@ import { Form } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
-import familieHendelseType from '@navikt/fp-kodeverk/src/familieHendelseType';
-import foreldreType from '@navikt/fp-kodeverk/src/foreldreType';
+import { familieHendelseType, foreldreType } from '@navikt/fp-kodeverk';
 
 import RettigheterPapirsoknadIndex from './RettigheterPapirsoknadIndex';
 import SoknadData from '../felles/SoknadData';

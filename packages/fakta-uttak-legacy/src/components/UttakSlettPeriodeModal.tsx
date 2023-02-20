@@ -8,13 +8,13 @@ import {
   FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import {
   hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-form-validators';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import innvilgetImageUrl from '@navikt/fp-assets/images/innvilget_valgt.svg';
 
+import innvilgetImageUrl from '../images/innvilget_valgt.svg';
 import TextAreaField from '../form/TextAreaField';
 import CustomUttakKontrollerFaktaPerioder from '../CustomUttakKontrollerFaktaPerioderTsType';
 

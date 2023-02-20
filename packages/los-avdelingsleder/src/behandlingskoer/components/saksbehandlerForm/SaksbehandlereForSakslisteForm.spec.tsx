@@ -21,7 +21,7 @@ describe('<SaksbehandlereForSakslisteForm>', () => {
   });
 
   it('skal lagre og hente listen med saksbehandlere på nytt når en velger en av saksbehandlerene', async () => {
-    const hentAvdelingensSakslister = jest.fn();
+    const hentAvdelingensSakslister = vi.fn();
 
     render(<ToSaksbehandlere hentAvdelingensSakslister={hentAvdelingensSakslister} />);
     expect(await screen.findByText('Saksbehandlere')).toBeInTheDocument();

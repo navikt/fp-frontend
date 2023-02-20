@@ -2,9 +2,9 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
-
-import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
-import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
+import { Modal } from '@navikt/ds-react';
+import { RestApiMock } from '@navikt/fp-utils-test';
+import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { Oppgave } from '@navikt/fp-los-felles';
 
 import { RestApiPathsKeys, requestApi } from '../../../data/fplosSaksbehandlerRestApi';
@@ -13,6 +13,8 @@ import OppgaveHandlingerMenu from './OppgaveHandlingerMenu';
 import messages from '../../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
+
+Modal.setAppElement('body');
 
 export default {
   title: 'los/saksbehandler/behandlingskoer/OppgaveHandlingerMenu',

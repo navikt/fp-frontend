@@ -21,7 +21,7 @@ describe('<GjeldendeSakslisterTabell>', () => {
   });
 
   it('skal vise slette kø ved å trykke på ikon for sletting og så velge ja i dialog', async () => {
-    const hentAvdelingensSakslister = jest.fn();
+    const hentAvdelingensSakslister = vi.fn();
     render(<TabellNårDetFinnesEnBehandlingskø hentAvdelingensSakslister={hentAvdelingensSakslister} />);
     expect(await screen.findByText('Navn')).toBeInTheDocument();
 

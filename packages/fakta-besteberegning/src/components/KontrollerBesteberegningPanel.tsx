@@ -9,11 +9,11 @@ import {
   FaktaBegrunnelseTextFieldNew,
   FaktaSubmitButtonNew,
 } from '@navikt/fp-fakta-felles';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus, { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
+import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { Form, CheckboxField } from '@navikt/ft-form-hooks';
 import { ManuellKontrollBesteberegningAP }
-  from '@navikt/fp-types-avklar-aksjonspunkter/src/fakta/KontrollerBesteberegningAP';
+  from '@navikt/fp-types-avklar-aksjonspunkter';
 
 export const buildInitialValues = (venteårsak: string, aksjonspunkt: Aksjonspunkt): FormValues => {
   if (!aksjonspunkt) {
@@ -27,7 +27,7 @@ export const buildInitialValues = (venteårsak: string, aksjonspunkt: Aksjonspun
 };
 
 export const transformValues = (values: FormValues): ManuellKontrollBesteberegningAP => ({
-  kode: aksjonspunktCodes.MANUELL_KONTROLL_AV_BESTEBEREGNING,
+  kode: AksjonspunktCode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
   begrunnelse: values.begrunnelse,
   besteberegningErKorrekt: values.besteberegningErKorrektValg,
 });
@@ -68,7 +68,7 @@ const KontrollerBesteberegningPanel: FunctionComponent<OwnProps> = ({
   const begrunnelse = formMethods.watch('begrunnelse');
   return (
     <>
-      <AksjonspunktHelpTextTemp isAksjonspunktOpen={isAksjonspunktOpen(aksjonspunkt.status)}>
+      <AksjonspunktHelpTextTemp isAksjonspunktOpen={aksjonspunkt.status === AksjonspunktStatus.OPPRETTET}>
         {[<FormattedMessage key="BesteberegningAksjonspunktTekst" id="BesteberegningProsessPanel.Aksjonspunkt.HelpTextKontroll" />]}
       </AksjonspunktHelpTextTemp>
       <VerticalSpacer twentyPx />

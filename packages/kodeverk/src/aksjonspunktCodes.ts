@@ -1,4 +1,4 @@
-import { Aksjonspunkt } from '@navikt/fp-types';
+// TODO Fjern denne fila og heller legg aksjonspunkta på pakkene dei blir brukt i
 
 export type OverstyringAksjonspunkter = AksjonspunktCode.OVERSTYR_SOKNADSFRISTVILKAR
   | AksjonspunktCode.OVERSTYR_ADOPSJONSVILKAR
@@ -146,6 +146,21 @@ const isVilkarForSykdomOppfyltAksjonspunkter = [
 const aksjonspunktIsOfType = (
   validAksjonspunktCodes: string[],
 ) => (aksjonspunktCode: string): boolean => validAksjonspunktCodes.includes(aksjonspunktCode);
+
+type Aksjonspunkt = Readonly<{
+  definisjon: string;
+  status: string;
+  begrunnelse?: string;
+  vilkarType?: string;
+  toTrinnsBehandling?: boolean;
+  toTrinnsBehandlingGodkjent?: boolean;
+  vurderPaNyttArsaker?: string[];
+  besluttersBegrunnelse?: string;
+  aksjonspunktType?: string;
+  kanLoses: boolean;
+  endretAv?: string;
+  endretTidspunkt?: string;
+}>
 
 export const hasAksjonspunkt = (aksjonspunktKode: string, aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
   .some((ap) => ap.definisjon === aksjonspunktKode);

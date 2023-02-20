@@ -13,17 +13,16 @@ import {
 
 import { Form } from '@navikt/ft-form-hooks';
 import { KodeverkMedNavn, Aksjonspunkt, Behandling } from '@navikt/fp-types';
-import BehandlingType from '@navikt/fp-kodeverk/src/behandlingType';
-import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
+import {
+  vilkarUtfallType, aksjonspunktStatus, OverstyringAksjonspunkter, behandlingType as BehandlingType,
+} from '@navikt/fp-kodeverk';
 import { OverstyringPanel, VilkarResultPicker } from '@navikt/fp-prosess-felles';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import { OverstyringAksjonspunkter } from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import { DDMMYYYY_DATE_FORMAT, decodeHtmlEntity } from '@navikt/ft-utils';
-import avslattImage from '@navikt/fp-assets/images/avslaatt_hover.svg';
-import innvilgetImage from '@navikt/fp-assets/images/innvilget_hover.svg';
-import keyImage from '@navikt/fp-assets/images/key-1-rotert.svg';
-import keyUtgraetImage from '@navikt/fp-assets/images/key-1-rotert-utgraet.svg';
 import { OverstyringAp, OverstyringMedlemskapsvilkaretLopendeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import avslattImage from '../images/avslaatt_hover.svg';
+import innvilgetImage from '../images/innvilget_hover.svg';
+import keyImage from '../images/key-1-rotert.svg';
+import keyUtgraetImage from '../images/key-1-rotert-utgraet.svg';
 
 import styles from './vilkarresultatMedOverstyringForm.less';
 

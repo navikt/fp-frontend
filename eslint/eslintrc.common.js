@@ -1,6 +1,5 @@
 const OFF = 0;
 const ERROR = 2;
-const { resolve } = require('path');
 
 const config = {
   env: {
@@ -14,13 +13,11 @@ const config = {
 
   parser: '@typescript-eslint/parser',
 
-  plugins: ['jest', 'jest-dom', '@typescript-eslint'],
+  plugins: ['vitest', '@typescript-eslint'],
 
   extends: [
     'airbnb',
     'plugin:@typescript-eslint/recommended',
-    'plugin:jest/recommended',
-    'plugin:jest-dom/recommended',
   ],
 
   parserOptions: {
@@ -32,9 +29,13 @@ const config = {
     },
   },
   settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
     'import/resolver': {
-      webpack: {
-        config: resolve(__dirname, '../webpack/webpack.common.js'),
+      typescript: {
+        alwaysTryTypes: true,
+        project: 'packages/*/tsconfig.json',
       },
     },
   },
@@ -53,7 +54,6 @@ const config = {
     'react/static-property-placement': OFF,
     'react/state-in-constructor': OFF,
     'react/prop-types': OFF,
-    'jest/valid-expect': OFF,
     'function-paren-newline': OFF,
     'function-call-argument-newline': OFF,
     'no-restricted-exports': OFF,

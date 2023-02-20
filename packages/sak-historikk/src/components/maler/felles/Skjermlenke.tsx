@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { Location } from 'history';
 import { Heading } from '@navikt/ds-react';
 
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { scrollUp } from './historikkUtils';

@@ -14,11 +14,11 @@ import {
   FlexColumn, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { Alert } from '@navikt/ds-react';
+import { uttakArbeidType } from '@navikt/fp-kodeverk';
 
 import {
   AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold,
 } from '@navikt/fp-types';
-import uttakArbeidType from '@navikt/fp-kodeverk/src/uttakArbeidType';
 import KontrollerFaktaPeriodeMedApMarkering from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 
 import styles from './graderingOgSamtidigUttakPanel.less';

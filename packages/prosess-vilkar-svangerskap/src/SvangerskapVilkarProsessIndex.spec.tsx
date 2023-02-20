@@ -10,7 +10,7 @@ const {
 
 describe('<SvangerskapVilkarProsessIndex>', () => {
   it('skal bestemme at vilkåret ikke er oppfylt fordi en ikke har perioder som kan innvilges', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ÅpentAksjonspunktSkalIkkeKunneInnvilge submitCallback={lagre} />);
 
@@ -38,7 +38,7 @@ describe('<SvangerskapVilkarProsessIndex>', () => {
   });
 
   it('skal kunne bestemme at vilkåret er oppfylt når en har perioder som kan innvilges', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     render(<ÅpentAksjonspunktSkalKunneInnvilge submitCallback={lagre} />);
 

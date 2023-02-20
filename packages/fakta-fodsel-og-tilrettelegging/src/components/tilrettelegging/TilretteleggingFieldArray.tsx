@@ -11,7 +11,7 @@ import {
 import {
   hasValidDecimal, maxValue, minValue, required, hasValidDate,
 } from '@navikt/ft-form-validators';
-import tilretteleggingType from '@navikt/fp-kodeverk/src/tilretteleggingType';
+import { tilretteleggingType } from '@navikt/fp-kodeverk';
 import { Permisjon } from '@navikt/fp-types';
 
 import { UseFormGetValues } from 'react-hook-form';

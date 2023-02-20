@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Label, BodyShort, Detail } from '@navikt/ds-react';
 
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
-import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import { fagsakYtelseType } from '@navikt/fp-kodeverk';
 import {
   Behandlingsresultat, BeregningsresultatFp, BeregningsresultatEs,
 } from '@navikt/fp-types';

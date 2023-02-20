@@ -5,11 +5,10 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Label, BodyShort } from '@navikt/ds-react';
 import { AlleKodeverk, KjønnkodeEnum, PersonopplysningerBasis } from '@navikt/fp-types';
-import kvinneIkonUrl from '@navikt/fp-assets/images/female.svg';
-import mannIkonUrl from '@navikt/fp-assets/images/male.svg';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import { getKodeverknavnFraKode } from '@navikt/fp-kodeverk/src/kodeverkUtils';
+import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
 
+import kvinneIkonUrl from '../../images/female.svg';
+import mannIkonUrl from '../../images/male.svg';
 import Boks from '../Boks';
 
 import AdresseVisning from './AdresseVisning';

@@ -7,8 +7,7 @@ import { Label, BodyShort } from '@navikt/ds-react';
 import {
   FlexColumn, FlexContainer, FlexRow, Table, TableColumn, TableRow,
 } from '@navikt/ft-ui-komponenter';
-import uttakArbeidTypeKodeverk from '@navikt/fp-kodeverk/src/uttakArbeidType';
-import stonadskontoType from '@navikt/fp-kodeverk/src/stonadskontoType';
+import { StonadskontoType, uttakArbeidType as uttakArbeidTypeKodeverk } from '@navikt/fp-kodeverk';
 import {
   AktivitetIdentifikator, AktivitetSaldo, ArbeidsgiverOpplysningerPerId, Stonadskonto,
 } from '@navikt/fp-types';
@@ -25,15 +24,15 @@ const HEADER_TEXT_CODES = [
 ];
 
 const STØNADSKONTOER_SORTERINGSREKKEFØLGE = {
-  [stonadskontoType.FORELDREPENGER_FØR_FØDSEL]: 0,
-  [stonadskontoType.FELLESPERIODE]: 1,
-  [stonadskontoType.MØDREKVOTE]: 2,
-  [stonadskontoType.FEDREKVOTE]: 3,
-  [stonadskontoType.FORELDREPENGER]: 4,
-  [stonadskontoType.UTEN_AKTIVITETSKRAV]: 5,
-  [stonadskontoType.MINSTERETT]: 6,
-  [stonadskontoType.MINSTERETT_NESTE_STØNADSPERIODE]: 7,
-  [stonadskontoType.FLERBARNSDAGER]: 8,
+  [StonadskontoType.FORELDREPENGER_FØR_FØDSEL]: 0,
+  [StonadskontoType.FELLESPERIODE]: 1,
+  [StonadskontoType.MØDREKVOTE]: 2,
+  [StonadskontoType.FEDREKVOTE]: 3,
+  [StonadskontoType.FORELDREPENGER]: 4,
+  [StonadskontoType.UTEN_AKTIVITETSKRAV]: 5,
+  [StonadskontoType.MINSTERETT]: 6,
+  [StonadskontoType.MINSTERETT_NESTE_STØNADSPERIODE]: 7,
+  [StonadskontoType.FLERBARNSDAGER]: 8,
 };
 
 const sorterKontoer = (
@@ -61,10 +60,10 @@ const finnTilgjengeligeUker = (
 ): number => {
   const sumDager = stønadskontoer.reduce((sum, konto) => {
     const type = konto.stonadskontotype;
-    if (type !== stonadskontoType.FLERBARNSDAGER
-      && type !== stonadskontoType.UTEN_AKTIVITETSKRAV
-      && type !== stonadskontoType.MINSTERETT
-      && type !== stonadskontoType.MINSTERETT_NESTE_STØNADSPERIODE
+    if (type !== StonadskontoType.FLERBARNSDAGER
+      && type !== StonadskontoType.UTEN_AKTIVITETSKRAV
+      && type !== StonadskontoType.MINSTERETT
+      && type !== StonadskontoType.MINSTERETT_NESTE_STØNADSPERIODE
     ) {
       return sum + (konto.maxDager ? konto.maxDager : 0);
     }

@@ -10,7 +10,7 @@ const { Default } = composeStories(stories);
 
 describe('<VergeFaktaIndex>', () => {
   it('skal velge vergetype og bekrefte aksjonspunkt', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<Default submitCallback={lagre} />);
 

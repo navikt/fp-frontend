@@ -7,6 +7,8 @@ import { createIntl } from '@navikt/ft-utils';
 import SakenFaktaPanel from './components/SakenFaktaPanel';
 import messages from '../i18n/nb_NO.json';
 
+import '@navikt/fp-fakta-felles/dist/style.css';
+
 interface OwnProps {
   soknad?: Soknad;
   erSvangerskapspenger: boolean;

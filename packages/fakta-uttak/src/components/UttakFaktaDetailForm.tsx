@@ -18,9 +18,7 @@ import { omitMany } from '@navikt/ft-utils';
 import {
   AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold,
 } from '@navikt/fp-types';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import uttakPeriodeType from '@navikt/fp-kodeverk/src/uttakPeriodeType';
-import StonadskontoType from '@navikt/fp-kodeverk/src/stonadskontoType';
+import { KodeverkType, StonadskontoType, uttakPeriodeType } from '@navikt/fp-kodeverk';
 
 import { RelasjonsRolleType } from '@navikt/ft-kodeverk';
 import FordelingPeriodeKilde from '../kodeverk/fordelingPeriodeKilde';

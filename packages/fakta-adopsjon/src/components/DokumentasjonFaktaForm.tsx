@@ -9,10 +9,10 @@ import { hasValidDate, required } from '@navikt/ft-form-validators';
 import {
   VerticalSpacer, FaktaGruppe, Image, FlexContainer, FlexRow, FlexColumn,
 } from '@navikt/ft-ui-komponenter';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { BekreftDokumentertDatoAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import advarselImageUrl from '@navikt/fp-assets/images/advarsel.svg';
+import advarselImageUrl from '../images/advarsel.svg';
 
 import styles from './dokumentasjonFaktaForm.less';
 
@@ -77,7 +77,7 @@ const DokumentasjonFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
   return (
     <FaktaGruppe
       title={intl.formatMessage({ id: 'DokumentasjonFaktaForm.ApplicationInformation' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.ADOPSJONSDOKUMENTAJON]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.ADOPSJONSDOKUMENTAJON]}
     >
       <div className={styles.container}>
         <Datepicker
@@ -103,7 +103,7 @@ const DokumentasjonFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
           </>
         )}
         {Object.keys(fodselsdatoer).map((id, i) => (
-          <div key={`div-${aksjonspunktCodes.ADOPSJONSDOKUMENTAJON}-${id}`}>
+          <div key={`div-${AksjonspunktCode.ADOPSJONSDOKUMENTAJON}-${id}`}>
             <VerticalSpacer sixteenPx />
             <FlexContainer>
               <FlexRow>
@@ -149,7 +149,7 @@ DokumentasjonFaktaForm.buildInitialValues = (soknad: Soknad, familiehendelse: Fa
 });
 
 DokumentasjonFaktaForm.transformValues = (values: FormValues): BekreftDokumentertDatoAksjonspunktAp => ({
-  kode: aksjonspunktCodes.ADOPSJONSDOKUMENTAJON,
+  kode: AksjonspunktCode.ADOPSJONSDOKUMENTAJON,
   omsorgsovertakelseDato: values.omsorgsovertakelseDato,
   fodselsdatoer: values.fodselsdatoer,
 });

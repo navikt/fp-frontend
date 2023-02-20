@@ -8,9 +8,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { CheckboxField, SelectField, Form } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
-import bType from '@navikt/fp-kodeverk/src/behandlingType';
-import behandlingArsakType from '@navikt/fp-kodeverk/src/behandlingArsakType';
+import { fagsakYtelseType, behandlingType as bType, behandlingArsakType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './nyBehandlingModal.less';

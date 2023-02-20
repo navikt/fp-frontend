@@ -5,19 +5,18 @@ import {
   Label, BodyShort, Heading,
 } from '@navikt/ds-react';
 
-import kommunikasjonsretning from '@navikt/fp-kodeverk/src/kommunikasjonsretning';
+import {
+  AksjonspunktCode, kommunikasjonsretning, innsynResultatType as InnsynResultatType, dokumentMalType,
+} from '@navikt/fp-kodeverk';
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { decodeHtmlEntity, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
-import InnsynResultatType from '@navikt/fp-kodeverk/src/innsynResultatType';
 import { Aksjonspunkt, Dokument, InnsynDokument } from '@navikt/fp-types';
 import { ForeslaVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import dokumentMalType from '@navikt/fp-kodeverk/src/dokumentMalType';
 
 import DocumentListVedtakInnsyn from './DocumentListVedtakInnsyn';
 
@@ -89,11 +88,11 @@ const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
 ): FormValues => ({
   mottattDato: innsynMottattDato,
-  begrunnelse: aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.FORESLA_VEDTAK).begrunnelse,
+  begrunnelse: aksjonspunkter.find((ap) => ap.definisjon === AksjonspunktCode.FORESLA_VEDTAK).begrunnelse,
 });
 
 const transformValues = (values: FormValues): ForeslaVedtakAp => ({
-  kode: aksjonspunktCodes.FORESLA_VEDTAK,
+  kode: AksjonspunktCode.FORESLA_VEDTAK,
   ...values,
 });
 
@@ -141,7 +140,7 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
   const documents = useMemo(() => getDocumenterMedFikkInnsynVerdi(getFilteredReceivedDocuments(alleDokumenter), innsynDokumenter),
     [alleDokumenter, innsynDokumenter]);
 
-  const apBegrunnelse = aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.VURDER_INNSYN)?.begrunnelse;
+  const apBegrunnelse = aksjonspunkter.find((ap) => ap.definisjon === AksjonspunktCode.VURDER_INNSYN)?.begrunnelse;
 
   const begrunnelse = formMethods.watch('begrunnelse');
 

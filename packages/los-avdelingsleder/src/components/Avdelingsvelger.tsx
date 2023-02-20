@@ -9,7 +9,7 @@ import styles from './avdelingsvelger.less';
 interface OwnProps {
   setValgtAvdelingEnhet: (avdelingEnhet: string) => void;
   valgtAvdelingEnhet?: string;
-  avdelinger: Avdeling[];
+  avdelinger?: Avdeling[];
 }
 
 const Avdelingsvelger: FunctionComponent<OwnProps> = ({
@@ -17,11 +17,15 @@ const Avdelingsvelger: FunctionComponent<OwnProps> = ({
   valgtAvdelingEnhet,
   avdelinger,
 }) => {
-  const velgAvdeling = useCallback((e) => {
+  const velgAvdeling = useCallback((e: any) => {
     const index = e.target.value;
     setValueInLocalStorage('avdelingEnhet', index);
     setValgtAvdelingEnhet(index);
   }, [avdelinger]);
+
+  if (!avdelinger) {
+    return null;
+  }
 
   return (
     <div className={styles.padding}>

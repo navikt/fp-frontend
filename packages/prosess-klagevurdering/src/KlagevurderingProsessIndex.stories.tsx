@@ -2,9 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import klageVurderingOmgjoerType from '@navikt/fp-kodeverk/src/klageVurderingOmgjoer';
-import klageVurderingCodes from '@navikt/fp-kodeverk/src/klageVurdering';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { klageVurderingOmgjoer as klageVurderingOmgjoerType, klageVurdering as klageVurderingCodes, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import KlagevurderingProsessIndex from '@navikt/fp-prosess-klagevurdering';
 import { Aksjonspunkt, Behandling, KlageVurdering } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -142,7 +140,7 @@ KlagevurderingMedAksjonspunktNfp.args = {
   mellomlagre: action('button-click') as (data: any) => Promise<any>,
   forhandsvisCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
+    definisjon: AksjonspunktCode.BEHANDLE_KLAGE_NFP,
   }] as Aksjonspunkt[],
   klageVurdering: {
     klageFormkravResultatKA: {

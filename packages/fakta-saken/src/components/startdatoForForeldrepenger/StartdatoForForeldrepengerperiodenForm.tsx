@@ -14,11 +14,11 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 
-import editUtlandIcon from '@navikt/fp-assets/images/endre.svg';
-import editUtlandDisabledIcon from '@navikt/fp-assets/images/endre_disablet.svg';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import { OverstyringAvklarStartdatoForPeriodenAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import editUtlandIcon from '../../images/endre.svg';
+import editUtlandDisabledIcon from '../../images/endre_disablet.svg';
 
 import styles from './startdatoForForeldrepengerperiodenForm.less';
 
@@ -43,7 +43,7 @@ const buildInitialValues = (
 const transformValues = (
   values: FormValues,
 ): OverstyringAvklarStartdatoForPeriodenAp => ({
-  kode: aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO,
+  kode: AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO,
   opprinneligDato: values.opprinneligDato,
   startdatoFraSoknad: values.startdatoFraSoknad,
   begrunnelse: values.begrunnelse,
@@ -130,7 +130,7 @@ const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps> = ({
         <AksjonspunktBox
           className={styles.aksjonspunktMargin}
           erAksjonspunktApent={false}
-          erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter[aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO]?.notAccepted}
+          erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter[AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO]?.notAccepted}
         >
           <FlexContainer>
             <FlexRow>

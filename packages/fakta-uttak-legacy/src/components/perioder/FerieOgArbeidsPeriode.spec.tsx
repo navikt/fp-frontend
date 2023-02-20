@@ -2,8 +2,7 @@ import React from 'react';
 import sinon from 'sinon';
 import { Detail } from '@navikt/ds-react';
 
-import { reduxFormPropsMock } from '@navikt/fp-utils-test/src/redux-form-test-helper';
-import { shallowWithIntl } from '@navikt/fp-utils-test/src/intl-enzyme-test-helper';
+import { reduxFormPropsMock, shallowWithIntl } from '@navikt/fp-utils-test';
 
 import RadioGroupField from '../../form/RadioGroupField';
 import { FerieOgArbeidsPeriode } from './FerieOgArbeidsPeriode';

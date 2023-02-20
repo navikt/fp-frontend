@@ -1,10 +1,10 @@
-import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
 type OmsorgsvilkarAp = {
   erVilkarOk: boolean;
   avslagskode?: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET>;
+} & AksjonspunktTilBekreftelse<AksjonspunktCode.MANUELL_VURDERING_AV_OMSORGSVILKARET>;
 
 export default OmsorgsvilkarAp;

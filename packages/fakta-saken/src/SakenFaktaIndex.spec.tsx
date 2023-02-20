@@ -12,7 +12,7 @@ const { EndringAvUtland, ApentAksjonspunktForInnhentingAvDokumentasjon } = compo
 describe('<SakenFaktaIndex>', () => {
   Modal.setAppElement('body');
   it('skal endre utland, få opp lagre-modal og så lagre', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     render(<EndringAvUtland submitCallback={lagre} />);
 
@@ -45,7 +45,7 @@ describe('<SakenFaktaIndex>', () => {
   });
 
   it('skal få aksjonspunkt om innehenting av dokumentasjon, svar at vil bli innhentet og bekreft', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ApentAksjonspunktForInnhentingAvDokumentasjon submitCallback={lagre} />);
 
@@ -70,7 +70,7 @@ describe('<SakenFaktaIndex>', () => {
   });
 
   it('skal få feilmelding når en ikke har fylt ut alle feltene under Opptjening utland', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ApentAksjonspunktForInnhentingAvDokumentasjon submitCallback={lagre} />);
 
@@ -89,7 +89,7 @@ describe('<SakenFaktaIndex>', () => {
   });
 
   it('skal lagre ny startdato for foreldrepenger', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     render(<EndringAvUtland submitCallback={lagre} />);
 

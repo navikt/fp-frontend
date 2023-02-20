@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, useMemo } from 'react';
 import {
-  injectIntl, WrappedComponentProps, FormattedMessage,
+  useIntl, FormattedMessage,
 } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { BodyShort, Button, Label } from '@navikt/ds-react';
@@ -35,12 +35,12 @@ type FormValues = {
 /**
  * LeggTilSaksbehandlerForm
  */
-export const LeggTilSaksbehandlerForm: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const LeggTilSaksbehandlerForm: FunctionComponent<OwnProps> = ({
   valgtAvdelingEnhet,
   avdelingensSaksbehandlere,
   hentAvdelingensSaksbehandlere,
 }) => {
+  const intl = useIntl();
   const [leggerTilNySaksbehandler, setLeggetTilNySaksbehandler] = useState(false);
 
   const {
@@ -156,4 +156,4 @@ export const LeggTilSaksbehandlerForm: FunctionComponent<OwnProps & WrappedCompo
   );
 };
 
-export default injectIntl(LeggTilSaksbehandlerForm);
+export default LeggTilSaksbehandlerForm;

@@ -5,7 +5,7 @@ import {
 } from 'react-intl';
 import { Detail, Heading } from '@navikt/ds-react';
 
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { KodeverkType, getKodeverknavnFn, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import {
   ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew,
 } from '@navikt/fp-prosess-felles';
@@ -15,9 +15,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { DATE_TIME_FORMAT } from '@navikt/ft-utils';
 import { required } from '@navikt/ft-form-validators';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import { AlleKodeverk, KlageVurdering } from '@navikt/fp-types';
-import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
 
 import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
 import styles from './formkravKlageForm.less';
@@ -42,7 +40,7 @@ const getKlagBareVedtak = (
     )));
 };
 
-const getLovHjemmeler = (aksjonspunktCode: string): string => (aksjonspunktCode === aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP
+const getLovHjemmeler = (aksjonspunktCode: string): string => (aksjonspunktCode === AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_NFP
   ? 'Klage.LovhjemmelNFP' : 'Klage.LovhjemmelKA');
 
 interface OwnProps {

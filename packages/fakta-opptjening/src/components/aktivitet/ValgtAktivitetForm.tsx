@@ -6,7 +6,7 @@ import {
 } from '@navikt/ds-react';
 import dayjs from 'dayjs';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import {
   VerticalSpacer, FaktaGruppe, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
@@ -113,7 +113,7 @@ export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
     <Form formMethods={formMethods} onSubmit={(values: FormValues) => oppdaterAktivitet(values)}>
       <FaktaGruppe
         className={styles.panel}
-        merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING]}
+        merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.VURDER_PERIODER_MED_OPPTJENING]}
       >
         <FlexContainer>
           <FlexRow spaceBetween>

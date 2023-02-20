@@ -12,7 +12,7 @@ const {
 
 describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   it('skal sjekke valideringer og så bekrefte aksjonspunkt for velferdspermisjon', async () => {
-    const bekreft = jest.fn(() => Promise.resolve());
+    const bekreft = vi.fn(() => Promise.resolve());
 
     const utils = render(<TilretteleggingMedVelferdspermisjon submitCallback={bekreft} />);
 
@@ -38,7 +38,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
-    expect(await screen.findByText('Flere like datoer.')).toBeInTheDocument();
+    expect(await screen.findAllByText('Flere like datoer.')).toHaveLength(2);
 
     await userEvent.clear(dato);
     await userEvent.type(dato, '16.10.2020');
@@ -86,7 +86,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   });
 
   it('skal legge til tilretteleggingsbehov', async () => {
-    const bekreft = jest.fn(() => Promise.resolve());
+    const bekreft = vi.fn(() => Promise.resolve());
 
     const utils = render(<TilretteleggingMedVelferdspermisjon submitCallback={bekreft} />);
 
@@ -176,7 +176,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   });
 
   it('skal overstyre utbetalingsgrad og så lagre', async () => {
-    const bekreft = jest.fn(() => Promise.resolve());
+    const bekreft = vi.fn(() => Promise.resolve());
 
     const utils = render(<ErOverstyrer submitCallback={bekreft} />);
 
@@ -234,7 +234,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   });
 
   it('skal vise arbeidsforhold det søkt tilrettelegging men ikke kan beregnes svangeskapspenger for', async () => {
-    const bekreft = jest.fn(() => Promise.resolve());
+    const bekreft = vi.fn(() => Promise.resolve());
 
     const utils = render(<AksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigNæringsdrivende submitCallback={bekreft} />);
 

@@ -13,7 +13,7 @@ import {
   SoknadData,
   OmsorgOgAdopsjonTransformedFormValues,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
-import familieHendelseType from '@navikt/fp-kodeverk/src/familieHendelseType';
+import { familieHendelseType } from '@navikt/fp-kodeverk';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import styles from './registreringAdopsjonOgOmsorgGrid.less';

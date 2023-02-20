@@ -184,7 +184,7 @@ describe('RequestRunner', () => {
 
     try {
       await process.start(params);
-    } catch (error) {
+    } catch (error: any) {
       errorMessage = error.message;
     }
 

@@ -4,18 +4,15 @@ import React, {
 import { FormattedMessage } from 'react-intl';
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
 
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import {
+  klageVurdering as klageVurderingCodes, behandlingResultatType, isKlageOmgjort, KodeverkType, getKodeverknavnFn, AksjonspunktCode, aksjonspunktStatus,
+} from '@navikt/fp-kodeverk';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import behandlingResultatType, { isKlageOmgjort } from '@navikt/fp-kodeverk/src/behandlingResultatType';
-import klageVurderingCodes from '@navikt/fp-kodeverk/src/klageVurdering';
-import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
 import {
   Aksjonspunkt, Behandling, KlageVurdering, AlleKodeverk,
 } from '@navikt/fp-types';
 import { BekreftVedtakUtenTotrinnskontrollAp, ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 
 import VedtakKlageSubmitPanel from './VedtakKlageSubmitPanel';
 

@@ -15,7 +15,7 @@ const {
 
 describe('<UttakDokumentasjonFaktaIndex>', () => {
   it('skal avklare perioder og så bekrefte aksjonspunkt', async () => {
-    const lagre = jest.fn(() => Promise.resolve());
+    const lagre = vi.fn(() => Promise.resolve());
 
     const utils = render(<AksjonspunktMedUavklartePerioder submitCallback={lagre} />);
 
@@ -95,7 +95,7 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
   });
 
   it('skal vise bekreftet periode i tabell og så endre den', async () => {
-    const lagre = jest.fn(() => Promise.resolve());
+    const lagre = vi.fn(() => Promise.resolve());
     render(<AksjonspunktErBekreftetMenBehandlingErÅpen submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttaksdokumentasjon')).toBeInTheDocument();

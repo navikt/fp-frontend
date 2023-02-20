@@ -2,19 +2,19 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import opplysningAdresseType from '@navikt/fp-kodeverk/src/opplysningAdresseType';
-import relatertYtelseTilstand from '@navikt/fp-kodeverk/src/relatertYtelseTilstand';
-import navBrukerKjonn from '@navikt/fp-kodeverk/src/navBrukerKjonn';
-import relatertYtelseType from '@navikt/fp-kodeverk/src/relatertYtelseType';
-import soknadType from '@navikt/fp-kodeverk/src/soknadType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import {
+  opplysningAdresseType, relatertYtelseTilstand, navBrukerKjonn, relatertYtelseType, soknadType, AksjonspunktCode, aksjonspunktStatus,
+} from '@navikt/fp-kodeverk';
 import OmsorgOgForeldreansvarFaktaIndex from '@navikt/fp-fakta-omsorg-og-foreldreansvar';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import {
   Behandling, FamilieHendelseSamling, InntektArbeidYtelse, Soknad, Aksjonspunkt,
 } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+
+import '@navikt/ds-css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
+import '@navikt/ft-form-hooks/dist/style.css';
 
 const behandling = {
   uuid: '1',
@@ -118,13 +118,13 @@ const Template: Story<{
 export const ÅpentAksjonspunktForOmsorgovertakelse = Template.bind({});
 ÅpentAksjonspunktForOmsorgovertakelse.args = {
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.OMSORGSOVERTAKELSE,
+    definisjon: AksjonspunktCode.OMSORGSOVERTAKELSE,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
   }],
   alleMerknaderFraBeslutter: {
-    [aksjonspunktCodes.OMSORGSOVERTAKELSE]: merknaderFraBeslutter,
+    [AksjonspunktCode.OMSORGSOVERTAKELSE]: merknaderFraBeslutter,
   },
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
@@ -132,13 +132,13 @@ export const ÅpentAksjonspunktForOmsorgovertakelse = Template.bind({});
 export const ÅpentAksjonspunktForAvklareVilkårForForeldreansvar = Template.bind({});
 ÅpentAksjonspunktForAvklareVilkårForForeldreansvar.args = {
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
+    definisjon: AksjonspunktCode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
   }],
   alleMerknaderFraBeslutter: {
-    [aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR]: merknaderFraBeslutter,
+    [AksjonspunktCode.AVKLAR_VILKAR_FOR_FORELDREANSVAR]: merknaderFraBeslutter,
   },
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };

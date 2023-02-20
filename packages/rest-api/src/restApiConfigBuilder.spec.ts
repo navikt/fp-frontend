@@ -1,5 +1,4 @@
-import { RestKey } from '@navikt/fp-rest-api';
-
+import RestKey from './RestKey';
 import RestApiConfigBuilder from './RestApiConfigBuilder';
 
 describe('RestApiConfigBuilder', () => {

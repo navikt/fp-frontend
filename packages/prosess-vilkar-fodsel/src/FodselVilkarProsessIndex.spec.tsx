@@ -10,7 +10,7 @@ const {
 
 describe('<FodselVilkarProsessIndex>', () => {
   it('skal bestemme at vilkåret er oppfylt og så løse aksjonspunkt', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ÅpentAksjonspunkt submitCallback={lagre} />);
 
@@ -34,7 +34,7 @@ describe('<FodselVilkarProsessIndex>', () => {
   });
 
   it('skal bestemme at vilkåret ikke er oppfylt og så løse aksjonspunkt', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ÅpentAksjonspunkt submitCallback={lagre} />);
 

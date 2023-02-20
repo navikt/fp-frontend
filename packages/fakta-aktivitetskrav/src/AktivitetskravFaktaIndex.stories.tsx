@@ -2,12 +2,15 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 import AktivitetskravFaktaIndex from '@navikt/fp-fakta-aktivitetskrav';
 import { Behandling, UttakKontrollerAktivitetskrav, Aksjonspunkt } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+
+import '@navikt/ds-css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
+import '@navikt/ft-form-hooks/dist/style.css';
 
 const behandling = {
   uuid: '1',
@@ -80,7 +83,7 @@ const Template: Story<{
 export const AksjonspunktMedToUavklartePerioder = Template.bind({});
 AksjonspunktMedToUavklartePerioder.args = {
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
+    definisjon: AksjonspunktCode.KONTROLLER_AKTIVITETSKRAV,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
@@ -94,7 +97,7 @@ AksjonspunktMedToUavklartePerioder.args = {
 export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet = Template.bind({});
 AksjonspunktSomErBekreftetOgBehandlingAvsluttet.args = {
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
+    definisjon: AksjonspunktCode.KONTROLLER_AKTIVITETSKRAV,
     status: aksjonspunktStatus.UTFORT,
     begrunnelse: undefined,
     kanLoses: false,
@@ -108,7 +111,7 @@ AksjonspunktSomErBekreftetOgBehandlingAvsluttet.args = {
 export const AksjonspunktSomErReåpnetAvBeslutter = Template.bind({});
 AksjonspunktSomErReåpnetAvBeslutter.args = {
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
+    definisjon: AksjonspunktCode.KONTROLLER_AKTIVITETSKRAV,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
@@ -118,14 +121,14 @@ AksjonspunktSomErReåpnetAvBeslutter.args = {
   readOnly: false,
   submittable: true,
   alleMerknaderFraBeslutter: {
-    [aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV]: merknaderFraBeslutter,
+    [AksjonspunktCode.KONTROLLER_AKTIVITETSKRAV]: merknaderFraBeslutter,
   },
 };
 
 export const AksjonspunktErBekreftetMenBehandlingErÅpen = Template.bind({});
 AksjonspunktErBekreftetMenBehandlingErÅpen.args = {
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
+    definisjon: AksjonspunktCode.KONTROLLER_AKTIVITETSKRAV,
     status: aksjonspunktStatus.UTFORT,
     begrunnelse: undefined,
     kanLoses: true,
