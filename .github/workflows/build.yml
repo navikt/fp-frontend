@@ -1,120 +1,26 @@
-name: Build and deploy
-
+name: Bygg og deploy
 on:
   push:
     branches:
-      - 'feature/lerna'
-      - '!azure_gcp'
+      - '**'
     paths-ignore:
       - '**.md'
       - '**.MD'
       - '.gitignore'
-      - 'LICENSE'
+      - '.editorconfig'
+      - 'LICENCE'
       - 'CODEOWNERS'
-      - 'dokumentasjon/**'
-      - 'lokalutvikling/**'
 
 jobs:
   build-app:
-    name: Build and test
-    runs-on: ubuntu-latest-8-cores
-    timeout-minutes: 15
-    outputs:
-      build-version: ${{ steps.generate-build-version.outputs.build-version }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3.3.0
-        with:
-          fetch-depth: 0
-
-      - name: Set up NODE
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18.8.0
-          registry-url: https://npm.pkg.github.com/
-          scope: '@navikt'
-          cache: 'yarn'
-
-      - name: Generate build version
-        id: generate-build-version
-        run: |
-          echo "build-version=$(date +%Y.%m.%d.%H%M%S)-$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_OUTPUT
-      - name: Print build version
-        run: echo "Generated build-version is ${{ steps.generate-build-version.outputs.build-version }}"
-
-      - name: Installere dependencies
-        if: github.actor != 'dependabot[bot]'
-        run: yarn install --ignore-optional --no-progress --frozen-lockfile
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
-
-      - name: Installere dependencies
-        if: github.actor == 'dependabot[bot]'
-        run: yarn install --ignore-optional --no-progress --frozen-lockfile
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build
-        run: yarn build
-
-      - name: Run linting
-        run: yarn stylelint && yarn eslint:changed && yarn tsc:changed
-
-      - name: Run tests
-        id: run-tests
-        run: yarn test:changed
-
-      - name: Opprett release med Sentry
-        if: github.ref_name == 'master'
-        run: yarn sentry-release
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-
-      - name: Bygg server
-        if: github.actor != 'dependabot[bot]'
-        run: cd ./server && yarn install --ignore-optional --no-progress --frozen-lockfile
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
-
-      - name: Bygg server
-        if: github.actor == 'dependabot[bot]'
-        run: cd ./server && yarn install --ignore-optional --no-progress --frozen-lockfile
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Login to GitHub Packages Docker Registry
-        if: github.ref_name == 'master'
-        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Set up QEMU
-        if: github.ref_name == 'master'
-        uses: docker/setup-qemu-action@v2
-
-      - name: Set up Docker Buildx
-        if: github.ref_name == 'master'
-        uses: docker/setup-buildx-action@v2
-
-      - name: Build and push
-        if: github.ref_name == 'master'
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          platforms: linux/amd64, linux/arm64
-          pull: true
-          push: ${{ github.ref_name == 'master' }}
-          tags: ghcr.io/${{ github.repository }}:${{ steps.generate-build-version.outputs.build-version }}, ghcr.io/${{ github.repository }}:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-
-      - name: Archive code coverage results
-        uses: actions/upload-artifact@v3
-        with:
-          name: code-coverage-report
-          path: coverage
+    name: Build
+    uses: navikt/fp-gha-workflows/.github/workflows/build-app-frontend-yarn.yml@main
+    with:
+      runs-on: 'ubuntu-latest-8-cores'
+      node-version: '18.8.0'
+      build-image: ${{ github.ref_name == 'master' }} # default: true
+      push-image: ${{ github.ref_name == 'master' }} # default: false
+    secrets: inherit
 
   create-issue:
     name: Issues
@@ -126,11 +32,19 @@ jobs:
     secrets: inherit
 
   promote:
-    name: Deploy til dev-gcp
+    name: Deploy til dev
     if: github.ref_name == 'master'
     needs: [ build-app, create-issue ]
     uses: navikt/fp-gha-workflows/.github/workflows/promote.yml@main
     with:
       issue-number: ${{ needs.create-issue.outputs.issue-number }}
       cluster: dev-gcp
+    secrets: inherit
+
+  snyk:
+    name: Snyk
+    needs: build-app
+    uses: navikt/fp-gha-workflows/.github/workflows/snyk-frontend.yml@main
+    with:
+      upload-sarif: ${{ github.ref_name == 'master' }}
     secrets: inherit
