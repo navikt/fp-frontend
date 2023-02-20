@@ -36,7 +36,11 @@ interface OwnProps {
 const JournalforingIndex: FunctionComponent<OwnProps> = ({
   navAnsatt,
 }) => {
-  const { startRequest: innhentAlleOppgaver, data: alleOppgaver = TOM_ARRAY, state: status } = restApiHooks.useRestApiRunner(RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER);
+  const {
+    startRequest: innhentAlleOppgaver,
+    data: alleOppgaver = TOM_ARRAY,
+    state: status,
+  } = restApiHooks.useRestApiRunner(RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER);
   const { addErrorMessage } = useRestApiErrorDispatcher();
   requestApi.setAddErrorMessageHandler(addErrorMessage);
 
