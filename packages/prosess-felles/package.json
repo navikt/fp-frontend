@@ -34,7 +34,7 @@
     "@navikt/ft-utils": "1.1.18",
     "react": "18.2.0",
     "react-hook-form": "7.43.1",
-    "react-intl": "6.2.8"
+    "react-intl": "6.2.9"
   },
   "devDependencies": {
     "@navikt/fp-utils-test": "1.0.0"

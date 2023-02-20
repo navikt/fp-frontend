@@ -40,7 +40,7 @@
     "moment": "2.29.4",
     "react": "18.2.0",
     "react-hook-form": "7.43.1",
-    "react-intl": "6.2.8"
+    "react-intl": "6.2.9"
   },
   "devDependencies": {
     "@navikt/fp-storybook-utils": "1.0.0",
