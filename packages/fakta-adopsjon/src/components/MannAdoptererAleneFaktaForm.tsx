@@ -2,9 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Detail } from '@navikt/ds-react';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
+import { AksjonspunktCode, KodeverkType, getKodeverknavnFn } from '@navikt/fp-kodeverk';
 import { required } from '@navikt/ft-form-validators';
 import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
@@ -46,7 +44,7 @@ const MannAdoptererAleneFaktaForm: FunctionComponent<OwnProps> & StaticFunctions
   return (
     <FaktaGruppe
       title={intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.ApplicationInformation' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]}
     >
       <div className={styles.container}>
         <Detail size="small"><FormattedMessage id="MannAdoptererAleneFaktaForm.Opplysninger" /></Detail>
@@ -81,7 +79,7 @@ MannAdoptererAleneFaktaForm.buildInitialValues = (familiehendelse: FamilieHendel
 });
 
 MannAdoptererAleneFaktaForm.transformValues = (mannAdoptererAlene: boolean): BekreftMannAdoptererAksjonspunktAp => ({
-  kode: aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
+  kode: AksjonspunktCode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
   mannAdoptererAlene,
 });
 

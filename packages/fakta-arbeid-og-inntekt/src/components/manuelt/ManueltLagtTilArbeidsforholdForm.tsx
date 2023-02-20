@@ -8,8 +8,7 @@ import {
   Image, FlexColumn, FlexContainer, FlexRow, VerticalSpacer, OkAvbrytModal,
 } from '@navikt/ft-ui-komponenter';
 
-import ArbeidsforholdKomplettVurderingType from '@navikt/fp-kodeverk/src/arbeidsforholdKomplettVurderingType';
-import binIcon from '@navikt/fp-assets/images/bin.svg';
+import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import { AoIArbeidsforhold, ManueltArbeidsforhold } from '@navikt/fp-types';
 import {
   hasValidText, maxLength, minLength, hasValidDate, hasValidInteger, required, minValue, maxValue, dateAfterOrEqual,
@@ -18,6 +17,7 @@ import {
   TextAreaField, Datepicker, InputField, Form,
 } from '@navikt/ft-form-hooks';
 
+import binIcon from '../../images/bin.svg';
 import ArbeidsforholdOgInntekt from '../../types/arbeidsforholdOgInntekt';
 
 import styles from './manueltLagtTilArbeidsforholdForm.less';

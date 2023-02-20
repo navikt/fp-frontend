@@ -13,8 +13,8 @@ describe('<MenyApneForEndringerIndex>', () => {
   }
 
   it('skal vise modal og velge å åpne behandling for endringer', async () => {
-    const apneBehandlingForEndringer = jest.fn();
-    const lukkModal = jest.fn();
+    const apneBehandlingForEndringer = vi.fn();
+    const lukkModal = vi.fn();
     render(<Default apneBehandlingForEndringer={apneBehandlingForEndringer} lukkModal={lukkModal} />);
 
     expect(await screen.findByText('Åpne behandling for endringer?')).toBeInTheDocument();

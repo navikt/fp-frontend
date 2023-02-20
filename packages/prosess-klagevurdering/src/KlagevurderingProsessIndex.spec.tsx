@@ -10,9 +10,9 @@ const {
 
 describe('<KlagevurderingProsessIndex>', () => {
   it('skal fylle ut, mellomlagre, forhåndsvise og så bekrefte aksjonspunkt for NFP', async () => {
-    const lagre = jest.fn();
-    const mellomlagre = jest.fn();
-    const forhåndsvise = jest.fn();
+    const lagre = vi.fn();
+    const mellomlagre = vi.fn();
+    const forhåndsvise = vi.fn();
 
     const utils = render(<KlagevurderingMedAksjonspunktNfp submitCallback={lagre} mellomlagre={mellomlagre} forhandsvisCallback={forhåndsvise} />);
 

@@ -11,7 +11,7 @@ const {
 
 describe('<OpptjeningFaktaIndex>', () => {
   it('skal åpne aktivitet automatisk når det har åpent aksjonspunkt og så godkjenne det', async () => {
-    const lagre = jest.fn(() => Promise.resolve());
+    const lagre = vi.fn(() => Promise.resolve());
     const utils = render(<MedAksjonspunkt submitCallback={lagre} />);
 
     expect(await screen.findByText('Vurder om aktiviteten kan godkjennes')).toBeInTheDocument();

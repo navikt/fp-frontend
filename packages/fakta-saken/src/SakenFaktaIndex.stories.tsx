@@ -2,14 +2,17 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
-import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import {
+  AksjonspunktCode, behandlingType, behandlingStatus, aksjonspunktStatus,
+} from '@navikt/fp-kodeverk';
 import { Behandling, Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import SakenFaktaIndex from '@navikt/fp-fakta-saken';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+
+import '@navikt/ds-css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
+import '@navikt/ft-form-hooks/dist/style.css';
 
 const behandling = {
   uuid: '1',
@@ -64,7 +67,7 @@ EndringAvUtland.args = {
 export const ApentAksjonspunktForInnhentingAvDokumentasjon = Template.bind({});
 ApentAksjonspunktForInnhentingAvDokumentasjon.args = {
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+    definisjon: AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
     status: aksjonspunktStatus.OPPRETTET,
     kanLoses: true,
   }],
@@ -74,7 +77,7 @@ ApentAksjonspunktForInnhentingAvDokumentasjon.args = {
 export const ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp = Template.bind({});
 ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp.args = {
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+    definisjon: AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
     status: aksjonspunktStatus.OPPRETTET,
     kanLoses: true,
   }],
@@ -85,12 +88,12 @@ ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp.args = {
 export const AksjonspunktErIkkeGodkjentAvBeslutter = Template.bind({});
 AksjonspunktErIkkeGodkjentAvBeslutter.args = {
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+    definisjon: AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
     status: aksjonspunktStatus.OPPRETTET,
     kanLoses: true,
   }],
   alleMerknaderFraBeslutter: {
-    [aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK]: {
+    [AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK]: {
       notAccepted: true,
     },
   },

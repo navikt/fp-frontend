@@ -1,4 +1,4 @@
-import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
@@ -9,6 +9,6 @@ type VurderArbeidsforholdPermisjonAp = {
     permisjonStatus: string;
   }[];
   begrunnelse: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_ARBEIDSFORHOLD_PERMISJON>
+} & AksjonspunktTilBekreftelse<AksjonspunktCode.VURDER_ARBEIDSFORHOLD_PERMISJON>
 
 export default VurderArbeidsforholdPermisjonAp;

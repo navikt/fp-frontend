@@ -8,16 +8,14 @@ import { getDateAndTime } from '@navikt/ft-utils';
 import {
   Image, VerticalSpacer, Table, TableRow, TableColumn, DateLabel,
 } from '@navikt/ft-ui-komponenter';
-
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import { getKodeverknavnFraKode } from '@navikt/fp-kodeverk/src/kodeverkUtils';
+import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
 import { TimeoutError } from '@navikt/fp-rest-api';
-import menuIconBlueUrl from '@navikt/fp-assets/images/ic-menu-18px_blue.svg';
-import menuIconBlackUrl from '@navikt/fp-assets/images/ic-menu-18px_black.svg';
-import bubbletextUrl from '@navikt/fp-assets/images/bubbletext.svg';
-import bubbletextFilledUrl from '@navikt/fp-assets/images/bubbletext_filled.svg';
 import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
 
+import menuIconBlueUrl from '../../images/ic-menu-18px_blue.svg';
+import menuIconBlackUrl from '../../images/ic-menu-18px_black.svg';
+import bubbletextUrl from '../../images/bubbletext.svg';
+import bubbletextFilledUrl from '../../images/bubbletext_filled.svg';
 import BehandlingPollingTimoutModal from './BehandlingPollingTimoutModal';
 import OppgaveHandlingerMenu from './menu/OppgaveHandlingerMenu';
 import {

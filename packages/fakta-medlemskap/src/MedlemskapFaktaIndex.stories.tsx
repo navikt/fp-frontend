@@ -3,10 +3,9 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 import { Aksjonspunkt } from '@navikt/ft-types';
 
-import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
-import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import {
+  aksjonspunktStatus, behandlingType, AksjonspunktCode, behandlingStatus,
+} from '@navikt/fp-kodeverk';
 import {
   Behandling, Medlemskap, Soknad, MedlemPeriode, PersonopplysningMedlem,
 } from '@navikt/fp-types';
@@ -14,6 +13,10 @@ import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import MedlemskapFaktaIndex from './MedlemskapFaktaIndex';
+
+import '@navikt/ds-css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
+import '@navikt/ft-form-hooks/dist/style.css';
 
 const behandling = {
   uuid: '1',
@@ -106,14 +109,14 @@ AvklarOmBrukerErBosatt.args = {
         adresser: [],
         region: 'NORDEN',
       } as PersonopplysningMedlem,
-      aksjonspunkter: [aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT],
+      aksjonspunkter: [AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT],
       årsaker: [
         'SKJÆRINGSTIDSPUNKT',
       ],
     }] as MedlemPeriode[],
   },
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT,
+    definisjon: AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
@@ -135,7 +138,7 @@ AvklarOmBrukerHarGyldigPeriode.args = {
     }],
     perioder: [{
       vurderingsdato: '2022-06-28',
-      aksjonspunkter: [aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE],
+      aksjonspunkter: [AksjonspunktCode.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE],
       årsaker: ['SKJÆRINGSTIDSPUNKT'],
       oppholdsrettVurdering: null,
       erEosBorger: null,
@@ -170,7 +173,7 @@ AvklarOmBrukerHarGyldigPeriode.args = {
     fom: null,
   },
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
+    definisjon: AksjonspunktCode.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
@@ -205,14 +208,14 @@ AvklarOmBrukerHarOppholdsrett.args = {
         adresser: [],
         region: 'NORDEN',
       } as PersonopplysningMedlem,
-      aksjonspunkter: [aksjonspunktCodes.AVKLAR_OPPHOLDSRETT],
+      aksjonspunkter: [AksjonspunktCode.AVKLAR_OPPHOLDSRETT],
       årsaker: [
         'SKJÆRINGSTIDSPUNKT',
       ],
     }] as MedlemPeriode[],
   },
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.AVKLAR_OPPHOLDSRETT,
+    definisjon: AksjonspunktCode.AVKLAR_OPPHOLDSRETT,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
@@ -247,14 +250,14 @@ AvklarOmBrukerHarLovligOpphold.args = {
         adresser: [],
         region: 'NORDEN',
       } as PersonopplysningMedlem,
-      aksjonspunkter: [aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD],
+      aksjonspunkter: [AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD],
       årsaker: [
         'SKJÆRINGSTIDSPUNKT',
       ],
     }] as MedlemPeriode[],
   },
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD,
+    definisjon: AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
@@ -290,7 +293,7 @@ BrukerHarLovligOppholdSomErSendtTilbakeFraBeslutter.args = {
         region: 'NORDEN',
       } as PersonopplysningMedlem,
       lovligOppholdVurdering: true,
-      aksjonspunkter: [aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD],
+      aksjonspunkter: [AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD],
       årsaker: [
         'SKJÆRINGSTIDSPUNKT',
       ],
@@ -298,13 +301,13 @@ BrukerHarLovligOppholdSomErSendtTilbakeFraBeslutter.args = {
     }] as MedlemPeriode[],
   },
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD,
+    definisjon: AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
   }],
   alleMerknaderFraBeslutter: {
-    [aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD]: { notAccepted: true },
+    [AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD]: { notAccepted: true },
   },
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
@@ -341,7 +344,7 @@ AvklarFortsattMedlemskap.args = {
         region: 'NORDEN',
       } as PersonopplysningMedlem,
       aksjonspunkter: [
-        aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT,
+        AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT,
       ],
       årsaker: [
         'SKJÆRINGSTIDSPUNKT',
@@ -384,7 +387,7 @@ AvklarFortsattMedlemskap.args = {
         region: 'NORDEN',
       } as PersonopplysningMedlem,
       aksjonspunkter: [
-        aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD,
+        AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD,
       ],
       årsaker: [
         'SKJÆRINGSTIDSPUNKT',
@@ -392,24 +395,24 @@ AvklarFortsattMedlemskap.args = {
     }] as MedlemPeriode[],
   },
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT,
+    definisjon: AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT,
     status: aksjonspunktStatus.UTFORT,
     begrunnelse: undefined,
     kanLoses: true,
   }, {
-    definisjon: aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD,
+    definisjon: AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD,
     status: aksjonspunktStatus.UTFORT,
     begrunnelse: undefined,
     kanLoses: true,
   }, {
-    definisjon: aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP,
+    definisjon: AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
   }],
   alleMerknaderFraBeslutter: {
-    [aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT]: merknaderFraBeslutter,
-    [aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP]: merknaderFraBeslutter,
+    [AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT]: merknaderFraBeslutter,
+    [AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP]: merknaderFraBeslutter,
   },
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };

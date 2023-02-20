@@ -2,9 +2,8 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Form } from '@navikt/ft-form-hooks';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, behandlingType as BehandlingType } from '@navikt/fp-kodeverk';
 import { KlageVurdering, AlleKodeverk } from '@navikt/fp-types';
-import BehandlingType from '@navikt/fp-kodeverk/src/behandlingType';
 import { KlageFormkravAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import FormkravKlageForm, { getPaKlagdVedtak, IKKE_PA_KLAGD_VEDTAK } from './FormkravKlageForm';
@@ -61,7 +60,7 @@ const transformValues = (values: FormValues, avsluttedeBehandlinger: AvsluttetBe
   erKonkret: values.erKonkret,
   erSignert: values.erSignert,
   begrunnelse: values.begrunnelse,
-  kode: aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP,
+  kode: AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_NFP,
   vedtakBehandlingUuid: values.vedtak === IKKE_PA_KLAGD_VEDTAK ? null : values.vedtak,
   erTilbakekreving: erTilbakekreving(avsluttedeBehandlinger, values.vedtak),
   tilbakekrevingInfo: påklagdTilbakekrevingInfo(avsluttedeBehandlinger, values.vedtak),
@@ -106,7 +105,7 @@ const FormkravKlageFormNfp: FunctionComponent<OwnProps> = ({
       <FormkravKlageForm
         readOnly={readOnly}
         readOnlySubmitButton={readOnlySubmitButton}
-        aksjonspunktCode={aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP}
+        aksjonspunktCode={AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_NFP}
         alleKodeverk={alleKodeverk}
         avsluttedeBehandlinger={avsluttedeBehandlinger}
         isSubmitting={formMethods.formState.isSubmitting}

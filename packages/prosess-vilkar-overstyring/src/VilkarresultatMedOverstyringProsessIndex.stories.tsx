@@ -2,12 +2,11 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import aksjonspunktCode, { OverstyringAksjonspunkter } from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
+import {
+  vilkarUtfallType, AksjonspunktCode, aksjonspunktStatus, OverstyringAksjonspunkter, behandlingType,
+} from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Medlemskap } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import VilkarresultatMedOverstyringProsessIndex from './VilkarresultatMedOverstyringProsessIndex';
@@ -86,7 +85,7 @@ export const OverstyringspanelForFødsel = Template.bind({});
 OverstyringspanelForFødsel.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   panelTittelKode: 'Inngangsvilkar.Fodselsvilkaret',
-  overstyringApKode: aksjonspunktCode.OVERSTYR_FODSELSVILKAR,
+  overstyringApKode: AksjonspunktCode.OVERSTYR_FODSELSVILKAR,
   erMedlemskapsPanel: false,
 };
 
@@ -94,7 +93,7 @@ export const OverstyringspanelForMedlemskap = Template.bind({});
 OverstyringspanelForMedlemskap.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   panelTittelKode: 'Inngangsvilkar.Medlemskapsvilkaret',
-  overstyringApKode: aksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR,
+  overstyringApKode: AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR,
   erMedlemskapsPanel: true,
 };
 
@@ -107,7 +106,7 @@ OverstyrtAksjonspunktSomErBekreftet.args = {
     },
   } as Behandling,
   aksjonspunkter: [{
-    definisjon: aksjonspunktCode.OVERSTYR_FODSELSVILKAR,
+    definisjon: AksjonspunktCode.OVERSTYR_FODSELSVILKAR,
     status: aksjonspunktStatus.UTFORT,
     kanLoses: false,
     begrunnelse: 'Dette er en begrunnelse',
@@ -115,6 +114,6 @@ OverstyrtAksjonspunktSomErBekreftet.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   status: vilkarUtfallType.IKKE_OPPFYLT,
   panelTittelKode: 'Inngangsvilkar.Fodselsvilkaret',
-  overstyringApKode: aksjonspunktCode.OVERSTYR_FODSELSVILKAR,
+  overstyringApKode: AksjonspunktCode.OVERSTYR_FODSELSVILKAR,
   erMedlemskapsPanel: false,
 };

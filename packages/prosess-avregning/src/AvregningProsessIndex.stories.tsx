@@ -2,16 +2,16 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import mottakerTyper from '@navikt/fp-kodeverk/src/mottakerTyper';
-import tilbakekrevingVidereBehandling from '@navikt/fp-kodeverk/src/tilbakekrevingVidereBehandling';
-import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import AvregningProsessIndex from '@navikt/fp-prosess-avregning';
+import {
+  fagsakYtelseType, mottakerTyper, tilbakekrevingVidereBehandling, AksjonspunktCode,
+} from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt, Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg,
 } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+
+import AvregningProsessIndex from './AvregningProsessIndex';
 
 const fagsak = {
   saksnummer: '123',
@@ -132,7 +132,7 @@ const Template: Story<{
 export const AksjonspunktVurderFeilutbetaling = Template.bind({});
 AksjonspunktVurderFeilutbetaling.args = {
   aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.VURDER_FEILUTBETALING,
+    definisjon: AksjonspunktCode.VURDER_FEILUTBETALING,
     begrunnelse: undefined,
   }] as Aksjonspunkt[],
   isAksjonspunktOpen: true,

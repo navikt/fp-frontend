@@ -29,7 +29,7 @@ describe('<SaksbehandlereTabell>', () => {
   });
 
   it('skal fjerne en saksbehandler ved å trykk på fjern-knappen', async () => {
-    const hentAvdelingensSaksbehandlere = jest.fn();
+    const hentAvdelingensSaksbehandlere = vi.fn();
     render(<Default hentAvdelingensSaksbehandlere={hentAvdelingensSaksbehandlere} />);
     expect(await screen.findByText('Tilgjengelige saksbehandlere')).toBeInTheDocument();
 

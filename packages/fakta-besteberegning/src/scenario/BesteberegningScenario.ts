@@ -1,4 +1,4 @@
-import opptjeningAktivitetType from '@navikt/fp-kodeverk/src/opptjeningAktivitetType';
+import { opptjeningAktivitetType } from '@navikt/fp-kodeverk';
 import { Beregningsgrunnlag, BeregningsgrunnlagAndel } from '@navikt/fp-types';
 
 export const besteberegninggrunnlag = {

@@ -2,12 +2,13 @@
 /.nyc_output/
 /jest_cache/
 .env
-/coverage/
+coverage/
 *.iml
 *.log*
-/node_modules
+node_modules
 dist
 lerna-debug.log
+.storybook-static-build
 .vscode
 .yarnrc
 ssh.exe.stackdump

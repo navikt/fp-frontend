@@ -11,7 +11,7 @@ const { Default } = composeStories(stories);
 
 describe('<BehovForTilretteleggingPanel>', () => {
   it('skal velge nei på alle de obligatoriske spørsmålene og da få feilmelding', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     render(<Default submitCallback={lagre} />);
 
@@ -33,7 +33,7 @@ describe('<BehovForTilretteleggingPanel>', () => {
   });
 
   it('skal velge at det søkes om svangerskapspenger som selvstendig næringsdrivende', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<Default submitCallback={lagre} />);
 

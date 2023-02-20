@@ -4,23 +4,20 @@ import { IntlShape, useIntl } from 'react-intl';
 import moment from 'moment';
 
 import { DDMMYYYY_DATE_FORMAT, decodeHtmlEntity } from '@navikt/ft-utils';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import { isAvslag, isInnvilget, isOpphor } from '@navikt/fp-kodeverk/src/behandlingResultatType';
-import BehandlingArsakType from '@navikt/fp-kodeverk/src/behandlingArsakType';
+import {
+  KodeverkType, isAvslag, isInnvilget, isOpphor, behandlingArsakType as BehandlingArsakType,
+  getKodeverknavnFn, fagsakYtelseType, AksjonspunktCode, dokumentMalType,
+} from '@navikt/fp-kodeverk';
 import { Form } from '@navikt/ft-form-hooks';
-import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
 import {
   AlleKodeverk, Behandling, BeregningsresultatFp, BeregningsresultatEs, Vilkar,
   Aksjonspunkt, SimuleringResultat, TilbakekrevingValg,
 } from '@navikt/fp-types';
-import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
 import {
   BekreftVedtakUtenTotrinnskontrollAp, ForeslaVedtakAp, ForeslaVedtakManueltAp, KontrollAvManueltOpprettetRevurderingsbehandlingAp,
   KontrollerRevurderingsBehandlingAp, VurdereAnnenYtelseForVedtakAp, VurdereDokumentForVedtakAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import dokumentMalType from '@navikt/fp-kodeverk/src/dokumentMalType';
 
 import VedtakResultType from '../../kodeverk/vedtakResultType';
 import VedtakInnvilgetRevurderingPanel from './VedtakInnvilgetRevurderingPanel';

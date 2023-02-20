@@ -7,8 +7,8 @@ import {
 } from '@navikt/ft-ui-komponenter';
 
 import { createIntl } from '@navikt/ft-utils';
-import avslattImage from '@navikt/fp-assets/images/avslaatt_hover.svg';
-import innvilgetImage from '@navikt/fp-assets/images/innvilget_hover.svg';
+import avslattImage from '../images/avslaatt_hover.svg';
+import innvilgetImage from '../images/innvilget_hover.svg';
 
 import ProsessStegSubmitButton from '../ProsessStegSubmitButtonNew';
 import messages from '../../i18n/nb_NO.json';

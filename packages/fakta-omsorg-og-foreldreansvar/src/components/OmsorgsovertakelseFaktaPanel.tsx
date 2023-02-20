@@ -3,7 +3,7 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import { BodyShort, Label } from '@navikt/ds-react';
 
 import { Datepicker } from '@navikt/ft-form-hooks';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import {
   FaktaGruppe, FlexColumn, FlexContainer, FlexRow,
@@ -55,7 +55,7 @@ const OmsorgsovertakelseFaktaPanel: FunctionComponent<OwnProps> & StaticFunction
       title={intl.formatMessage({
         id: erAksjonspunktForeldreansvar ? 'OmsorgOgForeldreansvarFaktaForm.ForeldreansvarInfo' : 'OmsorgOgForeldreansvarFaktaForm.OmsorgInfo',
       })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OMSORGSOVERTAKELSE]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.OMSORGSOVERTAKELSE]}
     >
       <FlexContainer>
         <FlexRow>

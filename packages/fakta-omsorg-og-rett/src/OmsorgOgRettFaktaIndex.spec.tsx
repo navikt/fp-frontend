@@ -12,7 +12,7 @@ const {
 
 describe('<OmsorgOgRettFaktaIndex>', () => {
   it('skal velge å ha aleneomsorg for barnet', async () => {
-    const lagreVurdering = jest.fn(() => Promise.resolve());
+    const lagreVurdering = vi.fn(() => Promise.resolve());
 
     const utils = render(<HarAksjonspunktForAvklarAleneomsorg submitCallback={lagreVurdering} />);
 
@@ -63,7 +63,7 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
   });
 
   it('skal velge å ikke ha aleneomsorg for barnet', async () => {
-    const lagreVurdering = jest.fn(() => Promise.resolve());
+    const lagreVurdering = vi.fn(() => Promise.resolve());
 
     const utils = render(<HarAksjonspunktForAvklarAleneomsorg submitCallback={lagreVurdering} />);
 
@@ -103,7 +103,7 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
   });
 
   it('skal vurdere at den andre forelderen har rett til foreldrepenger', async () => {
-    const lagreVurdering = jest.fn(() => Promise.resolve());
+    const lagreVurdering = vi.fn(() => Promise.resolve());
 
     const utils = render(<HarAksjonspunktForAvklarAnnenForelderRett submitCallback={lagreVurdering} />);
 
@@ -127,7 +127,7 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
   });
 
   it('skal vurdere at den andre forelderen ikke har rett til foreldrepenger', async () => {
-    const lagreVurdering = jest.fn(() => Promise.resolve());
+    const lagreVurdering = vi.fn(() => Promise.resolve());
 
     const utils = render(<HarAksjonspunktForAvklarAnnenForelderRett submitCallback={lagreVurdering} />);
 

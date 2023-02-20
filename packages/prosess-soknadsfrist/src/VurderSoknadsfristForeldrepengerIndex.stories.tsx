@@ -2,12 +2,12 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import VurderSoknadsfristForeldrepengerIndex from '@navikt/fp-prosess-soknadsfrist';
+import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Soknad } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+
+import VurderSoknadsfristForeldrepengerIndex from './VurderSoknadsfristForeldrepengerIndex';
 
 const behandling = {
   uuid: '1',
@@ -48,7 +48,7 @@ const Template: Story<{
     setFormData={() => undefined}
     soknad={soknad}
     aksjonspunkter={[{
-      definisjon: aksjonspunktCodes.VURDER_SOKNADSFRIST_FORELDREPENGER,
+      definisjon: AksjonspunktCode.VURDER_SOKNADSFRIST_FORELDREPENGER,
       status: aksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
     }] as Aksjonspunkt[]}

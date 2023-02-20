@@ -4,6 +4,25 @@
   "module": "index.ts",
   "license": "MIT",
   "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "index.js",
+    "package.json"
+  ],
+  "scripts": {
+    "tsc": "tsc --pretty",
+    "eslint": "eslint \"src/**/*.ts*\" --color",
+    "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
+    "stylelint": "stylelint \"src/**/*.less\"",
+    "dev": "webpack --env watch=true --config webpack.config.js",
+    "build-webpack": "cross-env webpack --config webpack.config.js",
+    "build-ts-declarations": "tsc index.ts ../../@types/externals.d.ts --declaration --emitDeclarationOnly --downlevelIteration --resolveJsonModule --jsx react --outDir dist --declarationMap --esModuleInterop --skipLibCheck",
+    "build": "yarn build-webpack && yarn build-ts-declarations",
+    "clean": "rm -rf ./dist ./node_modules",
+    "storybook": "start-storybook --quiet -p 7024"
+  },
   "dependencies": {
     "@navikt/fp-kodeverk": "1.0.0",
     "@navikt/fp-papirsoknad-ui-komponenter": "1.0.0",
@@ -24,5 +43,9 @@
   "devDependencies": {
     "@navikt/fp-utils-test": "1.0.0",
     "@storybook/addon-actions": "6.5.16"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./dist/style.css": "./dist/style.css"
   }
 }

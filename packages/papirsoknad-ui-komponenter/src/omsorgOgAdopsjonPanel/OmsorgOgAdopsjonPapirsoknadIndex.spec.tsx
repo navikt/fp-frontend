@@ -12,7 +12,7 @@ const { ForFodsel, ForAdopsjon } = composeStories(stories);
 
 describe('<OmsorgOgAdopsjonPapirsoknadIndex>', () => {
   it('skal velge ett barn for fødsel', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ForFodsel submitCallback={lagre} />);
 
@@ -48,7 +48,7 @@ describe('<OmsorgOgAdopsjonPapirsoknadIndex>', () => {
   });
 
   it('skal velge to barn for fødsel', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ForFodsel submitCallback={lagre} />);
 
@@ -80,7 +80,7 @@ describe('<OmsorgOgAdopsjonPapirsoknadIndex>', () => {
   });
 
   it('skal velge to barn for adopsjon', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ForAdopsjon submitCallback={lagre} />);
 

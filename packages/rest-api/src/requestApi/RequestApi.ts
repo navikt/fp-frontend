@@ -177,7 +177,7 @@ class RequestApi {
 
   public getAxios = (): AxiosInstance => this.httpClientApi.axiosInstance;
 
-  public getUrl = (endpointName: string): string => {
+  public getUrl = (endpointName: string): string | undefined => {
     const endpointConfig = this.endpointConfigList.find((c) => c.name === endpointName);
     if (!endpointConfig) {
       throw new Error(`Mangler konfig for endepunkt ${endpointName}`);

@@ -8,16 +8,15 @@ import {
   FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
-import editUtlandIcon from '@navikt/fp-assets/images/endre.svg';
-import editUtlandDisabledIcon from '@navikt/fp-assets/images/endre_disablet.svg';
 import { RadioGroupPanel, Form } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
+import { aksjonspunktStatus, AksjonspunktCode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 
-import aksjonspunktCodes, { hasAksjonspunkt } from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt } from '@navikt/fp-types';
 import { OverstyringUtenlandssakMarkeringAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
+import editUtlandIcon from '../../images/endre.svg';
+import editUtlandDisabledIcon from '../../images/endre_disablet.svg';
 import UtlandSakstypeKode from './utlandSakstypeKode';
 import UtlandEndretModal from './UtlandEndretModal';
 
@@ -25,11 +24,11 @@ import styles from './utlandPanel.less';
 
 const {
   AUTOMATISK_MARKERING_AV_UTENLANDSSAK, MANUELL_MARKERING_AV_UTLAND_SAKSTYPE,
-} = aksjonspunktCodes;
+} = AksjonspunktCode;
 
 const getUtlandSakstype = (aksjonspunkter: Aksjonspunkt[]): string => {
   const ap = aksjonspunkter.find((a) => a.definisjon === MANUELL_MARKERING_AV_UTLAND_SAKSTYPE);
-  if (ap?.status === AksjonspunktStatus.UTFORT && ap?.begrunnelse) {
+  if (ap?.status === aksjonspunktStatus.UTFORT && ap?.begrunnelse) {
     return ap.begrunnelse;
   }
   if (hasAksjonspunkt(AUTOMATISK_MARKERING_AV_UTENLANDSSAK, aksjonspunkter)) {

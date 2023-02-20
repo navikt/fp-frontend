@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import tilbakekrevingVidereBehandling from '@navikt/fp-kodeverk/src/tilbakekrevingVidereBehandling';
+import { KodeverkType, tilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
 import { HistorikkinnslagEndretFelt } from '@navikt/fp-types';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
 
 import historikkinnslagType from '../../kodeverk/historikkinnslagType';
 import { findEndretFeltVerdi } from './felles/historikkUtils';
@@ -27,77 +26,79 @@ const getSplitPeriods = (endredeFelter: HistorikkinnslagEndretFelt[]): string =>
   return text;
 };
 
-const HistorikkMalType9: FunctionComponent<HistorikkMal & WrappedComponentProps> = ({
-  intl,
+const HistorikkMalType9: FunctionComponent<HistorikkMal> = ({
   historikkinnslag,
   behandlingLocation,
   getKodeverknavn,
   createLocationForSkjermlenke,
-}) => (
-  <>
-    {historikkinnslag.historikkinnslagDeler.map((historikkinnslagDel, historikkinnslagDelIndex) => (
-      <div key={
-        `historikkinnslagDel${historikkinnslagDelIndex}` // eslint-disable-line react/no-array-index-key
-      }
-      >
-        <div>
-          <Skjermlenke
-            skjermlenke={historikkinnslagDel.skjermlenke}
-            behandlingLocation={behandlingLocation}
-            getKodeverknavn={getKodeverknavn}
-            scrollUpOnClick
-            createLocationForSkjermlenke={createLocationForSkjermlenke}
-          />
-          {historikkinnslagDel.endredeFelter && historikkinnslag.type === historikkinnslagType.OVST_UTTAK_SPLITT && (
-            <FormattedMessage
-              id="Historikk.Template.9"
-              values={{
-                opprinneligPeriode: historikkinnslagDel.endredeFelter[0].fraVerdi,
-                numberOfPeriods: historikkinnslagDel.endredeFelter.length,
-                splitPeriods: getSplitPeriods(historikkinnslagDel.endredeFelter),
-                b: (chunks: any) => <b>{chunks}</b>,
-                br: <br />,
-              }}
+}) => {
+  const intl = useIntl();
+  return (
+    <>
+      {historikkinnslag.historikkinnslagDeler.map((historikkinnslagDel, historikkinnslagDelIndex) => (
+        <div key={
+          `historikkinnslagDel${historikkinnslagDelIndex}` // eslint-disable-line react/no-array-index-key
+        }
+        >
+          <div>
+            <Skjermlenke
+              skjermlenke={historikkinnslagDel.skjermlenke}
+              behandlingLocation={behandlingLocation}
+              getKodeverknavn={getKodeverknavn}
+              scrollUpOnClick
+              createLocationForSkjermlenke={createLocationForSkjermlenke}
             />
-          )}
+            {historikkinnslagDel.endredeFelter && historikkinnslag.type === historikkinnslagType.OVST_UTTAK_SPLITT && (
+              <FormattedMessage
+                id="Historikk.Template.9"
+                values={{
+                  opprinneligPeriode: historikkinnslagDel.endredeFelter[0].fraVerdi,
+                  numberOfPeriods: historikkinnslagDel.endredeFelter.length,
+                  splitPeriods: getSplitPeriods(historikkinnslagDel.endredeFelter),
+                  b: (chunks: any) => <b>{chunks}</b>,
+                  br: <br />,
+                }}
+              />
+            )}
 
-          {historikkinnslagDel.endredeFelter && historikkinnslag.type === historikkinnslagType.FASTSATT_UTTAK_SPLITT && (
-            <FormattedMessage
-              id="Historikk.Template.9.ManuellVurdering"
-              values={{
-                opprinneligPeriode: historikkinnslagDel.endredeFelter[0].fraVerdi,
-                numberOfPeriods: historikkinnslagDel.endredeFelter.length,
-                splitPeriods: getSplitPeriods(historikkinnslagDel.endredeFelter),
-                b: (chunks: any) => <b>{chunks}</b>,
-                br: <br />,
-              }}
-            />
-          )}
+            {historikkinnslagDel.endredeFelter && historikkinnslag.type === historikkinnslagType.FASTSATT_UTTAK_SPLITT && (
+              <FormattedMessage
+                id="Historikk.Template.9.ManuellVurdering"
+                values={{
+                  opprinneligPeriode: historikkinnslagDel.endredeFelter[0].fraVerdi,
+                  numberOfPeriods: historikkinnslagDel.endredeFelter.length,
+                  splitPeriods: getSplitPeriods(historikkinnslagDel.endredeFelter),
+                  b: (chunks: any) => <b>{chunks}</b>,
+                  br: <br />,
+                }}
+              />
+            )}
 
-          {(historikkinnslag.type === historikkinnslagType.TILBAKEKR_VIDEREBEHANDLING && historikkinnslagDel.endredeFelter) && (
-            historikkinnslagDel.endredeFelter
-              .filter((endretFelt) => endretFelt.tilVerdi !== tilbakekrevingVidereBehandling.TILBAKEKR_INNTREKK)
-              .map((endretFelt, index) => (
-                <div className={styles.tilbakekrevingTekst} key={`endretFelt${index + 1}`}>
-                  <FormattedMessage
-                    id="Historikk.Template.9.TilbakekrViderebehandling"
-                    values={{
-                      felt: getKodeverknavn(endretFelt.endretFeltNavn, KodeverkType.HISTORIKK_ENDRET_FELT_TYPE),
-                      verdi: findEndretFeltVerdi(endretFelt, endretFelt.tilVerdi, intl),
-                      b: (chunks: any) => <b>{chunks}</b>,
-                    }}
-                  />
-                </div>
-              ))
-          )}
-          {historikkinnslagDel.begrunnelsetekst && (
-            <BubbleText bodyText={historikkinnslagDel.begrunnelsetekst} />
-          )}
-          {historikkinnslagDel.begrunnelseFritekst && <BubbleText bodyText={historikkinnslagDel.begrunnelseFritekst} />}
+            {(historikkinnslag.type === historikkinnslagType.TILBAKEKR_VIDEREBEHANDLING && historikkinnslagDel.endredeFelter) && (
+              historikkinnslagDel.endredeFelter
+                .filter((endretFelt) => endretFelt.tilVerdi !== tilbakekrevingVidereBehandling.TILBAKEKR_INNTREKK)
+                .map((endretFelt, index) => (
+                  <div className={styles.tilbakekrevingTekst} key={`endretFelt${index + 1}`}>
+                    <FormattedMessage
+                      id="Historikk.Template.9.TilbakekrViderebehandling"
+                      values={{
+                        felt: getKodeverknavn(endretFelt.endretFeltNavn, KodeverkType.HISTORIKK_ENDRET_FELT_TYPE),
+                        verdi: findEndretFeltVerdi(endretFelt, endretFelt.tilVerdi, intl),
+                        b: (chunks: any) => <b>{chunks}</b>,
+                      }}
+                    />
+                  </div>
+                ))
+            )}
+            {historikkinnslagDel.begrunnelsetekst && (
+              <BubbleText bodyText={historikkinnslagDel.begrunnelsetekst} />
+            )}
+            {historikkinnslagDel.begrunnelseFritekst && <BubbleText bodyText={historikkinnslagDel.begrunnelseFritekst} />}
+          </div>
         </div>
-      </div>
-    ))}
-  </>
-);
+      ))}
+    </>
+  );
+};
 
-export default injectIntl(HistorikkMalType9);
+export default HistorikkMalType9;

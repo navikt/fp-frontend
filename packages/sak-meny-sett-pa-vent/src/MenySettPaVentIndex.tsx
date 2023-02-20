@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { KodeverkMedNavn } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
-import SettPaVentModalIndex from '@navikt/fp-modal-sett-pa-vent';
+import SettPaVentModalIndex, { FormValues } from '@navikt/fp-modal-sett-pa-vent';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -13,10 +13,7 @@ export const getMenytekst = (): string => intl.formatMessage({ id: 'MenySettPaVe
 
 interface OwnProps {
   behandlingVersjon?: number;
-  settBehandlingPaVent: (params: {
-    frist: string;
-    ventearsak: string;
-  }) => void;
+  settBehandlingPaVent: (params: FormValues) => void;
   ventearsaker: KodeverkMedNavn[];
   lukkModal: () => void;
   erTilbakekreving: boolean;
@@ -29,7 +26,7 @@ const MenySettPaVentIndex: FunctionComponent<OwnProps> = ({
   lukkModal,
   erTilbakekreving,
 }) => {
-  const submit = useCallback((formValues) => {
+  const submit = useCallback((formValues: FormValues) => {
     const values = {
       frist: formValues.frist,
       ventearsak: formValues.ventearsak,

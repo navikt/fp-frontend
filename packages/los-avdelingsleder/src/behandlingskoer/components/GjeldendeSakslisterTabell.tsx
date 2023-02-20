@@ -11,9 +11,8 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 
-import addCircleIcon from '@navikt/fp-assets/images/add-circle.svg';
-import removeIcon from '@navikt/fp-assets/images/remove.svg';
-
+import addCircleIcon from '../../images/add-circle.svg';
+import removeIcon from '../../images/remove.svg';
 import { restApiHooks, RestApiPathsKeys } from '../../data/fplosRestApi';
 import useLosKodeverk from '../../data/useLosKodeverk';
 import SletteSakslisteModal from './SletteSakslisteModal';

@@ -1,23 +1,18 @@
 import React, { Component, RefObject } from 'react';
 import moment from 'moment';
-import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
+import { IntlShape } from 'react-intl';
 
 import { calcDaysAndWeeks, DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import { uttakPeriodeNavn } from '@navikt/fp-kodeverk/src/uttakPeriodeType';
-import StonadskontoType from '@navikt/fp-kodeverk/src/stonadskontoType';
-import {
-  ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriode, AlleKodeverk, Kjønnkode,
-} from '@navikt/fp-types';
+import { uttakPeriodeNavn, StonadskontoType } from '@navikt/fp-kodeverk';
+import { ArbeidsgiverOpplysningerPerId, AlleKodeverk, Kjønnkode } from '@navikt/fp-types';
 import { Timeline, TimeLineControl, TimeLineSokerEnsamSoker } from '@navikt/ft-tidslinje';
 
-import TilkjentYtelseTimelineData from './TilkjentYtelseTimelineData';
+import TilkjentYtelseTimelineData, { PeriodeMedId } from './TilkjentYtelseTimelineData';
 
 import styles from './tilkjentYtelse.less';
-
-export type PeriodeMedId = BeregningsresultatPeriode & { id: number };
 
 type NyPeriode = {
   className: string;
@@ -126,6 +121,7 @@ const getCustomTimes = (soknadDate: string, familiehendelseDate: Date, lastPerio
 });
 
 interface OwnProps {
+  intl: IntlShape;
   items: PeriodeMedId[];
   groups: {
     id: number;
@@ -148,10 +144,10 @@ interface OwnState {
  *
  * Presentationskomponent. Masserer data og populerer felten samt formatterar tidslinjen for tilkjent ytelse
  */
-export class TilkjentYtelse extends Component<OwnProps & WrappedComponentProps, OwnState> {
+export class TilkjentYtelse extends Component<OwnProps, OwnState> {
   timelineRef: RefObject<any>;
 
-  constructor(props: OwnProps & WrappedComponentProps) {
+  constructor(props: OwnProps) {
     super(props);
 
     this.state = {
@@ -320,5 +316,4 @@ export class TilkjentYtelse extends Component<OwnProps & WrappedComponentProps, 
   }
 }
 
-// @ts-ignore
-export default injectIntl(TilkjentYtelse);
+export default TilkjentYtelse;

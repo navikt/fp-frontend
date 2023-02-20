@@ -12,7 +12,7 @@ const { SokerErMor } = composeStories(stories);
 
 describe('<PermisjonIndex>', () => {
   it('skal velge fullt uttak', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<SokerErMor submitCallback={lagre} />);
 
@@ -70,7 +70,7 @@ describe('<PermisjonIndex>', () => {
   });
 
   it('skal velge overføring av kvote', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<SokerErMor submitCallback={lagre} />);
 
@@ -112,7 +112,7 @@ describe('<PermisjonIndex>', () => {
   });
 
   it('skal velge utsettelse', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<SokerErMor submitCallback={lagre} />);
 
@@ -168,7 +168,7 @@ describe('<PermisjonIndex>', () => {
   });
 
   it('skal velge gradering', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<SokerErMor submitCallback={lagre} />);
 
@@ -239,7 +239,7 @@ describe('<PermisjonIndex>', () => {
   });
 
   it('skal velge opphold', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<SokerErMor submitCallback={lagre} />);
 

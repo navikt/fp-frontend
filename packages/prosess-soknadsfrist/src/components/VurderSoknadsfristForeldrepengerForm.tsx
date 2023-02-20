@@ -5,6 +5,7 @@ import moment from 'moment';
 import {
   Label, BodyShort, Detail, Heading, Panel,
 } from '@navikt/ds-react';
+import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 import { Form, Datepicker, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
@@ -12,11 +13,10 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
-import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt } from '@navikt/fp-types';
 import { VurderSoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import { Søknadsfrist } from '@navikt/fp-types/src/soknadTsType';
 import styles from './vurderSoknadsfristForeldrepengerForm.less';
@@ -36,7 +36,7 @@ const buildInitialValues = (
 ): FormValues => {
   const upgMottattDato = søknadsfrist?.mottattDato;
   return {
-    gyldigSenFremsetting: isAksjonspunktOpen(aksjonspunkter[0].status) ? undefined : upgMottattDato !== mottattDato,
+    gyldigSenFremsetting: aksjonspunkter[0].status === AksjonspunktStatus.OPPRETTET ? undefined : upgMottattDato !== mottattDato,
     ansesMottatt: upgMottattDato,
     ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
   };

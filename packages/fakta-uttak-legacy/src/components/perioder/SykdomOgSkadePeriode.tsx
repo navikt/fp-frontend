@@ -7,9 +7,7 @@ import { createSelector } from 'reselect';
 import { FormattedMessage, IntlShape } from 'react-intl';
 import { Detail } from '@navikt/ds-react';
 
-import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
-import overforingArsakCodes from '@navikt/fp-kodeverk/src/overforingArsakCodes';
-import uttakPeriodeVurdering from '@navikt/fp-kodeverk/src/uttakPeriodeVurdering';
+import { uttakPeriodeVurdering, behandlingStatus, overforingArsakCodes } from '@navikt/fp-kodeverk';
 import {
   ArrowBox, VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';

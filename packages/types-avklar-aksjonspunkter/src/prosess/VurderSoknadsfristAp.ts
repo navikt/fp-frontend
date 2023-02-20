@@ -1,10 +1,10 @@
-import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
 type VurderSoknadsfristAp = {
   ansesMottattDato?: string;
   harGyldigGrunn?: boolean;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER>;
+} & AksjonspunktTilBekreftelse<AksjonspunktCode.VURDER_SOKNADSFRIST_FORELDREPENGER>;
 
 export default VurderSoknadsfristAp;

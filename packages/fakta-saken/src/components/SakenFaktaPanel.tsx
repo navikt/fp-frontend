@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import {
   VerticalSpacer, AksjonspunktHelpTextHTML, FlexContainer, FlexRow, FlexColumn,
@@ -32,7 +32,7 @@ interface OwnProps {
 
 const erMarkertUtenlandssak = (
   aksjonspunkter: Aksjonspunkt[],
-): boolean => aksjonspunkter.some((ap) => ap.definisjon === aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK);
+): boolean => aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK);
 
 const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
   erSvangerskapspenger,
@@ -71,7 +71,7 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
                 dokStatus={dokStatus}
                 readOnly={readOnly}
                 harApneAksjonspunkter={harApneAksjonspunkter}
-                aksjonspunkt={aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK)}
+                aksjonspunkt={aksjonspunkter.find((ap) => ap.definisjon === AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK)}
                 submittable={submittable}
                 submitCallback={submitCallback}
                 alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
@@ -84,7 +84,7 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
         {!erSvangerskapspenger && !!soknad && (
           <FlexColumn className={styles.col}>
             <StartdatoForForeldrepengerperiodenForm
-              aksjonspunkt={aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO)}
+              aksjonspunkt={aksjonspunkter.find((ap) => ap.definisjon === AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO)}
               submitCallback={submitCallback}
               readOnly={readOnly}
               alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}

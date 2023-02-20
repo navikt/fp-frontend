@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Heading, Button } from '@navikt/ds-react';
 import {
@@ -8,7 +8,7 @@ import {
 import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validators';
 import { Form, InputField, CheckboxField } from '@navikt/ft-form-hooks';
 
-import advarselIcon from '@navikt/fp-assets/images/advarsel.svg';
+import advarselIcon from '../../images/advarsel.svg';
 
 import styles from './searchForm.less';
 
@@ -40,14 +40,14 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Definerer søkefelt og tilhørende søkeknapp.
  */
-const SearchForm: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const SearchForm: FunctionComponent<OwnProps> = ({
   onSubmit,
   searchResultAccessDenied,
   searchStarted,
   resetSearch,
   kanSaksbehandle,
 }) => {
+  const intl = useIntl();
   const formMethods = useForm<FormValues>();
 
   const searchStringValue = formMethods.watch('searchString');
@@ -103,4 +103,4 @@ const SearchForm: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   );
 };
 
-export default injectIntl(SearchForm);
+export default SearchForm;

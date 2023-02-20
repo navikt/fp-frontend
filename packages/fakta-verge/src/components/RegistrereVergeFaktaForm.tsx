@@ -10,10 +10,8 @@ import {
 import {
   Datepicker, InputField, SelectField,
 } from '@navikt/ft-form-hooks';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, VergeType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn, Verge } from '@navikt/fp-types';
-
-import VergeType from '../kodeverk/vergeType';
 
 import styles from './registrereVergeFaktaForm.less';
 
@@ -33,7 +31,7 @@ export type TransformedValues = {
   organisasjonsnummer: string,
   gyldigFom: string,
   gyldigTom: string,
-  kode: aksjonspunktCodes.AVKLAR_VERGE,
+  kode: AksjonspunktCode.AVKLAR_VERGE,
 }
 
 interface OwnProps {
@@ -60,7 +58,7 @@ const RegistrereVergeFaktaForm: FunctionComponent<OwnProps & WrappedComponentPro
   alleMerknaderFraBeslutter,
   valgtVergeType,
 }) => (
-  <FaktaGruppe merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.AVKLAR_VERGE]}>
+  <FaktaGruppe merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.AVKLAR_VERGE]}>
     <SelectField
       name="vergeType"
       className={styles.selectWidth}
@@ -146,7 +144,7 @@ RegistrereVergeFaktaForm.transformValues = (values: FormValues): TransformedValu
   organisasjonsnummer: values.organisasjonsnummer,
   gyldigFom: values.gyldigFom,
   gyldigTom: values.gyldigTom,
-  kode: aksjonspunktCodes.AVKLAR_VERGE,
+  kode: AksjonspunktCode.AVKLAR_VERGE,
 });
 
 export default RegistrereVergeFaktaForm;

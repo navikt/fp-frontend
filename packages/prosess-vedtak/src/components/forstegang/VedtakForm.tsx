@@ -6,17 +6,16 @@ import {
   AlleKodeverk, Behandling, BeregningsresultatFp, BeregningsresultatEs, Vilkar,
   Aksjonspunkt, SimuleringResultat, TilbakekrevingValg,
 } from '@navikt/fp-types';
-import klageBehandlingArsakType from '@navikt/fp-kodeverk/src/behandlingArsakType';
-import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import {
+  isAvslag, isInnvilget, isKlageOmgjort, behandlingResultatType,
+  behandlingArsakType as klageBehandlingArsakType, fagsakYtelseType, AksjonspunktCode, dokumentMalType,
+} from '@navikt/fp-kodeverk';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
-import behandlingResultatType, { isAvslag, isInnvilget, isKlageOmgjort } from '@navikt/fp-kodeverk/src/behandlingResultatType';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import { Form } from '@navikt/ft-form-hooks';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
 import {
   BekreftVedtakUtenTotrinnskontrollAp, ForeslaVedtakAp, ForeslaVedtakManueltAp, VurdereAnnenYtelseForVedtakAp, VurdereDokumentForVedtakAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import dokumentMalType from '@navikt/fp-kodeverk/src/dokumentMalType';
 
 import { getTilbakekrevingText } from '../felles/VedtakHelper';
 import VedtakInnvilgetPanel from './VedtakInnvilgetPanel';

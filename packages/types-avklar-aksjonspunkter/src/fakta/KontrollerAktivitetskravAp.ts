@@ -1,4 +1,4 @@
-import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
@@ -8,6 +8,6 @@ type KontrollerAktivitetskravAp = {
     tom: string;
     avklaring: string;
   }[];
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.KONTROLLER_AKTIVITETSKRAV>
+} & AksjonspunktTilBekreftelse<AksjonspunktCode.KONTROLLER_AKTIVITETSKRAV>
 
 export default KontrollerAktivitetskravAp;

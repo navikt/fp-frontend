@@ -22,7 +22,7 @@ import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
-import uttakPeriodeType from '@navikt/fp-kodeverk/src/uttakPeriodeType';
+import { uttakPeriodeType } from '@navikt/fp-kodeverk';
 
 import styles from './renderPermisjonPeriodeFieldArray.less';
 

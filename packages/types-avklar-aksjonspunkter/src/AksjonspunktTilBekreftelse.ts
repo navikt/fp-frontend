@@ -1,7 +1,6 @@
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import AksjonspunktKodeTilbakekreving from '@navikt/fp-kodeverk/src/aksjonspunktCodesTilbakekreving';
+import { AksjonspunktCode, AksjonspunktCodeTilbakekreving } from '@navikt/fp-kodeverk';
 
-export type AksjonspunktTilBekreftelse<T extends AksjonspunktCode | AksjonspunktKodeTilbakekreving> = {
+export type AksjonspunktTilBekreftelse<T extends AksjonspunktCode | AksjonspunktCodeTilbakekreving> = {
   kode: T;
   begrunnelse?: string;
 }

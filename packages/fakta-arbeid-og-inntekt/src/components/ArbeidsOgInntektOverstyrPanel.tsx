@@ -6,7 +6,6 @@ import {
   Alert, Link, BodyShort, Heading,
 } from '@navikt/ds-react';
 
-import addCircleIcon from '@navikt/fp-assets/images/add-circle.svg';
 import { dateFormat } from '@navikt/ft-utils';
 import {
   Aksjonspunkt, ArbeidOgInntektsmelding, Behandling, ManueltArbeidsforhold, AksjonspunktÅrsak,
@@ -14,11 +13,11 @@ import {
 import {
   VerticalSpacer, AksjonspunktHelpTextHTML, FloatRight, OverstyringKnapp, Image, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
-import ArbeidsforholdKomplettVurderingType from '@navikt/fp-kodeverk/src/arbeidsforholdKomplettVurderingType';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import { ArbeidsforholdKomplettVurderingType, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 
 import ManueltLagtTilArbeidsforholdForm, { MANUELT_ORG_NR } from './manuelt/ManueltLagtTilArbeidsforholdForm';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
+import addCircleIcon from '../images/add-circle.svg';
 
 import styles from './arbeidsOgInntektOverstyrPanel.less';
 

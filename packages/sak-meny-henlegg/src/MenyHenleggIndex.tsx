@@ -18,7 +18,7 @@ interface OwnProps {
   henleggBehandling: (params: {
     årsakKode: string;
     begrunnelse: string;
-    fritekst: string;
+    fritekst?: string;
   }) => Promise<any>;
   forhandsvisHenleggBehandling: (erHenleggelse: boolean, data: any) => void;
   ytelseType: string;
@@ -38,10 +38,10 @@ const MenyHenleggIndex: FunctionComponent<OwnProps> = ({
 }) => {
   const [erHenlagt, setHenlagt] = useState(false);
 
-  const submit = useCallback((formValues: Required<FormValues>) => {
+  const submit = useCallback((formValues: FormValues) => {
     const henleggBehandlingDto = {
-      årsakKode: formValues.årsakKode,
-      begrunnelse: formValues.begrunnelse,
+      årsakKode: formValues.årsakKode || '',
+      begrunnelse: formValues.begrunnelse || '',
       fritekst: formValues.fritekst,
     };
     henleggBehandling(henleggBehandlingDto).then(() => {

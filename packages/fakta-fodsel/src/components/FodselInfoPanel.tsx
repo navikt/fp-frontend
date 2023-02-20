@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
-import aksjonspunktCodes, { hasAksjonspunkt } from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import FodselSammenligningIndex from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import {
   Aksjonspunkt, FamilieHendelseSamling, FamilieHendelse, Soknad,
@@ -20,7 +20,7 @@ import SykdomPanel, { FormValues as SykdomFormValues } from './SykdomPanel';
 
 const {
   TERMINBEKREFTELSE, SJEKK_MANGLENDE_FODSEL, VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
-} = aksjonspunktCodes;
+} = AksjonspunktCode;
 
 const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   const helpTexts: ReactElement[] = [];

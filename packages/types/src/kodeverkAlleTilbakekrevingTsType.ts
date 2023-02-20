@@ -1,7 +1,7 @@
-import TilbakekrevingKodeverkType from '@navikt/fp-kodeverk/src/tilbakekrevingKodeverkTyper';
+import { tilbakekrevingKodeverkTyper } from '@navikt/fp-kodeverk';
 
 import KodeverkMedNavn from './kodeverkMedNavnTsType';
 
-type AlleKodeverkTilbakekreving = Record<TilbakekrevingKodeverkType, KodeverkMedNavn[]>
+type AlleKodeverkTilbakekreving = Record<tilbakekrevingKodeverkTyper, KodeverkMedNavn[]>
 
 export default AlleKodeverkTilbakekreving;

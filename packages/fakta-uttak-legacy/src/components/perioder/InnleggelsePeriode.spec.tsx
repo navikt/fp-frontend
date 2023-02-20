@@ -1,9 +1,8 @@
 import React from 'react';
-import { reduxFormPropsMock } from '@navikt/fp-utils-test/src/redux-form-test-helper';
+import { reduxFormPropsMock, shallowWithIntl } from '@navikt/fp-utils-test';
 import sinon from 'sinon';
 import { Detail } from '@navikt/ds-react';
-import uttakPeriodeVurdering from '@navikt/fp-kodeverk/src/uttakPeriodeVurdering';
-import { shallowWithIntl } from '@navikt/fp-utils-test/src/intl-enzyme-test-helper';
+import { uttakPeriodeVurdering } from '@navikt/fp-kodeverk';
 import { InnleggelsePeriode } from './InnleggelsePeriode';
 import RadioGroupField from '../../form/RadioGroupField';
 import messages from '../../../i18n/nb_NO.json';

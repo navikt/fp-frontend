@@ -3,8 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import arbeidskategori from '@navikt/fp-kodeverk/src/arbeidskategori';
+import { KodeverkType, arbeidskategori } from '@navikt/fp-kodeverk';
 import { AlleKodeverk } from '@navikt/fp-types';
 
 import RenderGraderingPeriodeFieldArray, {
@@ -38,8 +37,8 @@ const PermisjonGraderingPanel: FunctionComponent<OwnProps> & StaticFunctions = (
   readOnly,
   alleKodeverk,
 }) => {
-  const graderingKvoter = alleKodeverk[kodeverkTyper.UTSETTELSE_GRADERING_KVOTE];
-  const arbeidskategoriTyper = alleKodeverk[kodeverkTyper.ARBEIDSKATEGORI];
+  const graderingKvoter = alleKodeverk[KodeverkType.UTSETTELSE_GRADERING_KVOTE];
+  const arbeidskategoriTyper = alleKodeverk[KodeverkType.ARBEIDSKATEGORI];
 
   const { watch } = formHooks.useFormContext<{[TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
   const skalGradere = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalGradere`) || false;

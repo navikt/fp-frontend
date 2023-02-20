@@ -14,7 +14,7 @@ const { Default } = composeStories(stories);
 
 describe('<MottattDatoPapirsoknadIndex>', () => {
   it('skal velge mottatt dato', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<Default submitCallback={lagre} />);
 

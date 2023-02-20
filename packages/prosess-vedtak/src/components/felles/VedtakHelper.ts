@@ -1,8 +1,6 @@
-import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
-import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
-import tilbakekrevingVidereBehandling from '@navikt/fp-kodeverk/src/tilbakekrevingVidereBehandling';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
+import {
+  KodeverkType, tilbakekrevingVidereBehandling, vilkarUtfallType, VilkarType, getKodeverknavnFn,
+} from '@navikt/fp-kodeverk';
 import {
   AlleKodeverk, SimuleringResultat, TilbakekrevingValg, Vilkar,
 } from '@navikt/fp-types';
@@ -31,5 +29,5 @@ export const getTilbakekrevingText = (
 
 export const hasIkkeOppfyltSoknadsfristvilkar = (
   vilkar: Vilkar[],
-): boolean => vilkar.some((v) => v.vilkarType === vilkarType.SOKNADFRISTVILKARET
+): boolean => vilkar.some((v) => v.vilkarType === VilkarType.SOKNADFRISTVILKARET
   && v.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT);

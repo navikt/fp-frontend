@@ -5,14 +5,12 @@ import moment from 'moment';
 import { Label } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
-import vilkarUtfallType from '@navikt/fp-kodeverk/src/vilkarUtfallType';
-import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import {
+  VilkarType, vilkarUtfallType, KodeverkType, AksjonspunktCode, tilretteleggingType, aksjonspunktStatus,
+} from '@navikt/fp-kodeverk';
 import {
   ProsessStegBegrunnelseTextFieldNew, VilkarResultPicker, ProsessPanelTemplate,
 } from '@navikt/fp-prosess-felles';
-import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
-import vilkarType from '@navikt/fp-kodeverk/src/vilkarType';
 import {
   Aksjonspunkt,
   AlleKodeverk,
@@ -22,7 +20,6 @@ import {
   Vilkar,
 } from '@navikt/fp-types';
 import { BekreftSvangerskapspengervilkarAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import tilretteleggingType from '@navikt/fp-kodeverk/src/tilretteleggingType';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 const finnesUttakPåArbfor = (arbfor: ArbeidsforholdFodselOgTilrettelegging): boolean => {
@@ -58,7 +55,7 @@ const buildInitialValues = (
 const transformValues = (values: FormValues): BekreftSvangerskapspengervilkarAp => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
-  kode: AksjonspunktKode.SVANGERSKAPSVILKARET,
+  kode: AksjonspunktCode.SVANGERSKAPSVILKARET,
 });
 
 interface OwnProps {
@@ -105,9 +102,9 @@ const SvangerskapVilkarForm: FunctionComponent<OwnProps> = ({
 
   const erVilkarOk = formMethods.watch('erVilkarOk');
 
-  const avslagsarsaker = alleKodeverk[kodeverkTyper.AVSLAGSARSAK][vilkarType.SVANGERSKAPVILKARET];
+  const avslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.SVANGERSKAPVILKARET];
 
-  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status));
+  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET);
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
 
   return (

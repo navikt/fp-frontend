@@ -3,15 +3,15 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { required } from '@navikt/ft-form-validators';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
-import { isAksjonspunktOpen } from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import aksjonspunktCodes, { hasAksjonspunkt } from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './omsorgFaktaForm.less';
 
-const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = aksjonspunktCodes;
+const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = AksjonspunktCode;
 
 const getAksjonspunkt = (
   aksjonspunktCode: string,
@@ -79,7 +79,7 @@ OmsorgFaktaForm.buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonsp
   const omsorgAp = getAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG, aksjonspunkter);
   let omsorg = null;
 
-  if (omsorgAp.length > 0 && !isAksjonspunktOpen(omsorgAp[0].status)) {
+  if (omsorgAp.length > 0 && omsorgAp[0].status !== AksjonspunktStatus.OPPRETTET) {
     omsorg = ytelsefordeling.overstyrtOmsorg;
   }
 

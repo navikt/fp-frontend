@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
+import { Modal } from '@navikt/ds-react';
+import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import FlyttReservasjonModal from './FlyttReservasjonModal';
 import SaksbehandlerAvdeling from '../typer/saksbehandlerAvdelingTsType';
 
 import messages from '../../i18n/nb_NO.json';
+
+Modal.setAppElement('body');
 
 const withIntl = getIntlDecorator(messages);
 

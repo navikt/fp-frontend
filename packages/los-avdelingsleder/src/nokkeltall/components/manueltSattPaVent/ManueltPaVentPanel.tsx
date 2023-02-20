@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { injectIntl, WrappedComponentProps, FormattedMessage } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
 import { Label } from '@navikt/ds-react';
@@ -41,7 +41,6 @@ const erDatoInnenforPeriode = (behandlingFrist: string, ukevalg: string): boolea
 };
 
 interface OwnProps {
-  intl: any;
   height: number;
   oppgaverManueltPaVent: OppgaverManueltPaVent[];
   getValueFromLocalStorage: (key: string) => string | undefined;
@@ -58,12 +57,12 @@ type FormValues = {
 /**
  * ManueltPaVentPanel.
  */
-const ManueltPaVentPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const ManueltPaVentPanel: FunctionComponent<OwnProps> = ({
   height,
   oppgaverManueltPaVent,
   getValueFromLocalStorage,
 }) => {
+  const intl = useIntl();
   const fagsakYtelseTyper = useLosKodeverk(KodeverkType.FAGSAK_YTELSE);
   const stringFromStorage = getValueFromLocalStorage(formName);
   const lagredeVerdier = stringFromStorage ? JSON.parse(stringFromStorage) : undefined;
@@ -123,4 +122,4 @@ const ManueltPaVentPanel: FunctionComponent<OwnProps & WrappedComponentProps> = 
   );
 };
 
-export default injectIntl(ManueltPaVentPanel);
+export default ManueltPaVentPanel;

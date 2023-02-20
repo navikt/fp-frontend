@@ -10,8 +10,8 @@ import {
 } from '@navikt/ft-form-validators';
 import { BodyShort } from '@navikt/ds-react';
 
-import endreImage from '@navikt/fp-assets/images/endre.svg';
-import endreDisabletImage from '@navikt/fp-assets/images/endre_disablet.svg';
+import endreImage from '../../images/endre.svg';
+import endreDisabletImage from '../../images/endre_disablet.svg';
 
 import styles from './tilretteleggingFieldArray.less';
 

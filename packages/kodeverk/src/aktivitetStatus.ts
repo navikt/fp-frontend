@@ -18,7 +18,7 @@ const aktivitetStatus = {
 
 export default aktivitetStatus;
 
-export const aktivitetstatusTilAndeltypeMap = {};
+export const aktivitetstatusTilAndeltypeMap = {} as Record<string, string>;
 aktivitetstatusTilAndeltypeMap[aktivitetStatus.BRUKERS_ANDEL] = beregningsgrunnlagAndeltyper.BRUKERS_ANDEL;
 aktivitetstatusTilAndeltypeMap[aktivitetStatus.FRILANSER] = beregningsgrunnlagAndeltyper.FRILANS;
 aktivitetstatusTilAndeltypeMap[aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE] = beregningsgrunnlagAndeltyper.EGEN_NÆRING;

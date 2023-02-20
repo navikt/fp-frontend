@@ -2,9 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
+import { aksjonspunktStatus, behandlingType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import VarselOmRevurderingProsessIndex from '@navikt/fp-prosess-varsel-om-revurdering';
 import {
   Aksjonspunkt, Behandling, FamilieHendelse, FamilieHendelseSamling, Soknad,
@@ -55,7 +53,7 @@ const familiehendelseOriginalBehandling = {
 } as FamilieHendelse;
 
 const aksjonspunkter = [{
-  definisjon: aksjonspunktCodes.VARSEL_REVURDERING_MANUELL,
+  definisjon: AksjonspunktCode.VARSEL_REVURDERING_MANUELL,
   status: aksjonspunktStatus.OPPRETTET,
   begrunnelse: undefined,
 }] as Aksjonspunkt[];

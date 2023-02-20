@@ -20,7 +20,7 @@ describe('<UttakProsessIndex>', () => {
   Modal.setAppElement('body');
 
   it('skal vise periode med gradering', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     render(<PeriodeMedGraderingUtenAksjonspunkt submitCallback={lagre} />);
 
@@ -71,7 +71,7 @@ describe('<UttakProsessIndex>', () => {
   });
 
   it('skal kunne velge perioder med neste-ikon', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     render(<PeriodeMedGraderingUtenAksjonspunkt submitCallback={lagre} />);
 
@@ -106,9 +106,9 @@ describe('<UttakProsessIndex>', () => {
 
   it('skal validere at stønadskonto ikke er gyldig, endre og så bekrefte', async () => {
     // Vil gi ein warning sidan ein prøver å setta ein ikkje gyldig verdi i dropdown
-    jest.spyOn(console, 'warn').mockImplementation(() => {});
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<AksjonspunktDerValgtStønadskontoIkkeFinnes submitCallback={lagre} />);
 
@@ -225,7 +225,7 @@ describe('<UttakProsessIndex>', () => {
   });
 
   it.skip('skal ha aksjonspunkt og dele opp periode i to og så bekrefte', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<AksjonspunktDerValgtStønadskontoIkkeFinnes submitCallback={lagre} />);
 

@@ -1,4 +1,4 @@
-import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
@@ -9,6 +9,6 @@ type SjekkManglendeFodselAp = {
     fodselsdato: string;
     dodsdato?: string;
   }[];
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.SJEKK_MANGLENDE_FODSEL>
+} & AksjonspunktTilBekreftelse<AksjonspunktCode.SJEKK_MANGLENDE_FODSEL>
 
 export default SjekkManglendeFodselAp;

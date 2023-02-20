@@ -9,7 +9,7 @@ import {
 import FodselSammenligningIndex from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad, AvklartBarn,
 } from '@navikt/fp-types';
@@ -84,7 +84,7 @@ export const SjekkFodselDokForm: FunctionComponent<OwnProps> & StaticFunctions =
       />
       <FaktaGruppe
         title={intl.formatMessage({ id: 'SjekkFodselDokForm.DokumentasjonAvFodsel' })}
-        merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL]}
+        merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.SJEKK_MANGLENDE_FODSEL]}
       >
         <RadioGroupPanel
           name="dokumentasjonForeligger"
@@ -148,7 +148,7 @@ SjekkFodselDokForm.buildInitialValues = (soknad, familiehendelse, aksjonspunkt):
 });
 
 SjekkFodselDokForm.transformValues = (values: FormValues, avklartBarn: AvklartBarn[]): SjekkManglendeFodselAp => ({
-  kode: aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL,
+  kode: AksjonspunktCode.SJEKK_MANGLENDE_FODSEL,
   dokumentasjonForeligger: values.dokumentasjonForeligger,
   uidentifiserteBarn: ryddOppIAvklarteBarn(values.avklartBarn),
   brukAntallBarnITps: avklartBarn && !!avklartBarn.length ? values.brukAntallBarnITps : false,

@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
-import fagsakStatus from '@navikt/fp-kodeverk/src/fagsakStatus';
+import { fagsakYtelseType, fagsakStatus } from '@navikt/fp-kodeverk';
 import FagsakSokSakIndex from '@navikt/fp-sak-sok';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 

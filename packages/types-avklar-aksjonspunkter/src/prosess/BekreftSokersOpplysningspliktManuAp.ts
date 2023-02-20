@@ -1,4 +1,4 @@
-import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
@@ -9,6 +9,6 @@ type BekreftSokersOpplysningspliktManuAp = {
     aktørId?: string;
     brukerHarSagtAtIkkeKommer: boolean;
   }[];
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU>;
+} & AksjonspunktTilBekreftelse<AksjonspunktCode.SOKERS_OPPLYSNINGSPLIKT_MANU>;
 
 export default BekreftSokersOpplysningspliktManuAp;

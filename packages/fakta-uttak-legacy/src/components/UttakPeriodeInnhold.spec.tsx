@@ -2,14 +2,11 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
+import { behandlingStatus } from '@navikt/fp-kodeverk';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FamilieHendelseSamling } from '@navikt/fp-types';
-import { getIntlMock } from '@navikt/fp-utils-test/src/intl-enzyme-test-helper';
 
 import { UttakPeriodeInnhold } from './UttakPeriodeInnhold';
-
-import messages from '../../i18n/nb_NO.json';
 
 const behandlingStatusKode = behandlingStatus.BEHANDLING_UTREDES;
 
@@ -43,7 +40,6 @@ describe('<UttakPeriodeInnhold>', () => {
       familiehendelse={{} as FamilieHendelseSamling}
       vilkarForSykdomExists={false}
       sisteUttakdatoFørsteSeksUker={{} as moment.Moment}
-      intl={getIntlMock(messages)}
     />);
 
     const verticalSpacer = wrapper.find(VerticalSpacer);

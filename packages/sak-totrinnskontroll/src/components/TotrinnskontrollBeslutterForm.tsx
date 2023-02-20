@@ -5,9 +5,7 @@ import { Location } from 'history';
 import { Button } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
-import vurderPaNyttArsakType from '@navikt/fp-kodeverk/src/vurderPaNyttArsakType';
-import BehandlingType from '@navikt/fp-kodeverk/src/behandlingType';
-import konsekvensForYtelsen from '@navikt/fp-kodeverk/src/konsekvensForYtelsen';
+import { konsekvensForYtelsen, vurderPaNyttArsakType, behandlingType as BehandlingType } from '@navikt/fp-kodeverk';
 import { ariaCheck } from '@navikt/ft-form-validators';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { VerticalSpacer, AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';

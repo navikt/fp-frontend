@@ -3,7 +3,7 @@ import { Modal } from '@navikt/ds-react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
-import dokumentMalType from '@navikt/fp-kodeverk/src/dokumentMalType';
+import { dokumentMalType } from '@navikt/fp-kodeverk';
 import * as stories from './VedtakProsessIndex.stories';
 
 const {
@@ -18,8 +18,8 @@ const {
 describe('<VedtakProsessIndex>', () => {
   Modal.setAppElement('body');
   it('skal forhåndsvise innvilget vedtaksbrev og så fatte vedtak', async () => {
-    const lagre = jest.fn();
-    const forhåndsvis = jest.fn();
+    const lagre = vi.fn();
+    const forhåndsvis = vi.fn();
 
     render(<InnvilgetForeldrepengerTilGodkjenningForSaksbehandler submitCallback={lagre} previewCallback={forhåndsvis} />);
 
@@ -51,8 +51,8 @@ describe('<VedtakProsessIndex>', () => {
   });
 
   it('skal redigere innvilget vedtaksbrev, forhåndsvise og så fatte vedtak', async () => {
-    const lagre = jest.fn();
-    const forhåndsvis = jest.fn();
+    const lagre = vi.fn();
+    const forhåndsvis = vi.fn();
 
     const utils = render(<InnvilgetForeldrepengerTilGodkjenningForSaksbehandler submitCallback={lagre} previewCallback={forhåndsvis} />);
 
@@ -98,7 +98,7 @@ describe('<VedtakProsessIndex>', () => {
   });
 
   it('skal redigere innvilget vedtaksbrev, forkaste det via modal og så fatte vedtak', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<InnvilgetForeldrepengerTilGodkjenningForSaksbehandler submitCallback={lagre} />);
 
@@ -141,7 +141,7 @@ describe('<VedtakProsessIndex>', () => {
   });
 
   it('skal forhåndsvise avslått vedtaksbrev og så fatte vedtak uten å skrive inn fritekst', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     render(<AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring submitCallback={lagre} />);
 
@@ -163,7 +163,7 @@ describe('<VedtakProsessIndex>', () => {
   });
 
   it('skal forhåndsvise avslått vedtaksbrev og så fatte vedtak med fritekst', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring submitCallback={lagre} />);
 
@@ -196,7 +196,7 @@ describe('<VedtakProsessIndex>', () => {
   });
 
   it('skal vise info om hva saksbehandler må ta stilling til før godkjenning', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil submitCallback={lagre} />);
 
@@ -226,7 +226,7 @@ describe('<VedtakProsessIndex>', () => {
   });
 
   it('skal vise innvilget vedtaksbrev for engangsstønad og så fatte vedtak', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     render(<InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerUtenOverstyring submitCallback={lagre} />);
 
@@ -253,7 +253,7 @@ describe('<VedtakProsessIndex>', () => {
   });
 
   it('skal vise revurdering av foreldrepenger', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     render(<InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUtenOverstyring submitCallback={lagre} />);
 

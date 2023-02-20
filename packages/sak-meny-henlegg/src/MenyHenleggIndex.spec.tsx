@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import { Modal } from '@navikt/ds-react';
-import dokumentMalType from '@navikt/fp-kodeverk/src/dokumentMalType';
+import { dokumentMalType } from '@navikt/fp-kodeverk';
 import * as stories from './MenyHenleggIndex.stories';
 
 const {
@@ -16,7 +16,7 @@ describe('<MenyHenleggIndex>', () => {
   }
 
   it('skal velge henlegge behandling og så vise modal som viser at behandling er henlagt', async () => {
-    const henleggBehandling = jest.fn(() => Promise.resolve());
+    const henleggBehandling = vi.fn(() => Promise.resolve());
     const utils = render(<ForFørstegangssøknad henleggBehandling={henleggBehandling} />);
     expect(await screen.findAllByText('Henlegg behandling')).toHaveLength(2);
     expect(screen.getAllByText('Henlegg behandling')[1].closest('button')).toBeDisabled();
@@ -47,7 +47,7 @@ describe('<MenyHenleggIndex>', () => {
   });
 
   it('skal lukke modal ved trykk på avbryt-knapp', async () => {
-    const avbryt = jest.fn(() => Promise.resolve());
+    const avbryt = vi.fn(() => Promise.resolve());
     render(<ForFørstegangssøknad lukkModal={avbryt} />);
     expect(await screen.findByText('Avbryt')).toBeInTheDocument();
 
@@ -121,7 +121,7 @@ describe('<MenyHenleggIndex>', () => {
   });
 
   it('skal vise lenke for forhåndsvisning når en har valgt årsak Søknaden er trukket', async () => {
-    const forhandsvisHenleggBehandling = jest.fn(() => Promise.resolve());
+    const forhandsvisHenleggBehandling = vi.fn(() => Promise.resolve());
     const utils = render(<ForFørstegangssøknad forhandsvisHenleggBehandling={forhandsvisHenleggBehandling} />);
     expect(await screen.findAllByText('Henlegg behandling')).toHaveLength(2);
 
@@ -141,7 +141,7 @@ describe('<MenyHenleggIndex>', () => {
   });
 
   it('skal ikke vise lenke for forhåndsvisning når en har valgt årsak Søknaden mangler', async () => {
-    const forhandsvisHenleggBehandling = jest.fn(() => Promise.resolve());
+    const forhandsvisHenleggBehandling = vi.fn(() => Promise.resolve());
     const utils = render(<ForFørstegangssøknad forhandsvisHenleggBehandling={forhandsvisHenleggBehandling} />);
     expect(await screen.findAllByText('Henlegg behandling')).toHaveLength(2);
 

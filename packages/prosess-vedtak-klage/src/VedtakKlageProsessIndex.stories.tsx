@@ -2,10 +2,9 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import behandlingResultatType from '@navikt/fp-kodeverk/src/behandlingResultatType';
-import klageVurderingCodes from '@navikt/fp-kodeverk/src/klageVurdering';
-import aksjonspunktStatus from '@navikt/fp-kodeverk/src/aksjonspunktStatus';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import {
+  aksjonspunktStatus, behandlingResultatType, klageVurdering as klageVurderingCodes, AksjonspunktCode,
+} from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt, Behandling, KlageVurdering, KlageVurderingResultat,
 } from '@navikt/fp-types';
@@ -29,7 +28,7 @@ const behandling = {
 } as Behandling;
 
 const aksjonspunkter = [{
-  definisjon: aksjonspunktCodes.FORESLA_VEDTAK,
+  definisjon: AksjonspunktCode.FORESLA_VEDTAK,
   status: aksjonspunktStatus.OPPRETTET,
   begrunnelse: undefined,
 }] as Aksjonspunkt[];

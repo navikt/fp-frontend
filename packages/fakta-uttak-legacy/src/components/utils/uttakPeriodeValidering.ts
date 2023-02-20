@@ -1,13 +1,13 @@
 import moment from 'moment';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt } from '@navikt/fp-types';
 
 import CustomUttakKontrollerFaktaPerioder from '../../CustomUttakKontrollerFaktaPerioderTsType';
 
 export const sjekkOmfaktaOmUttakAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
-  .some((ap: Aksjonspunkt) => aksjonspunktCodes.AVKLAR_UTTAK === ap.definisjon
-  || aksjonspunktCodes.AVKLAR_FØRSTE_UTTAKSDATO === ap.definisjon);
+  .some((ap: Aksjonspunkt) => AksjonspunktCode.AVKLAR_UTTAK === ap.definisjon
+  || AksjonspunktCode.AVKLAR_FØRSTE_UTTAKSDATO === ap.definisjon);
 
 export const sjekkArbeidsprosentOver100 = (periode: CustomUttakKontrollerFaktaPerioder): boolean => periode.arbeidstidsprosent > 100;
 

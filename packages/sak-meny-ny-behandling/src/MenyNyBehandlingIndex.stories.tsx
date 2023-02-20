@@ -2,9 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import behandlingArsakType from '@navikt/fp-kodeverk/src/behandlingArsakType';
-import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
-import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import { fagsakYtelseType, behandlingType, behandlingArsakType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 import MenyNyBehandlingIndex from './MenyNyBehandlingIndex';
 

@@ -5,8 +5,7 @@ import { shallow } from 'enzyme';
 import {
   AlleKodeverk, FamilieHendelseSamling, Personoversikt, Ytelsefordeling,
 } from '@navikt/fp-types';
-import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
-import behandlingStatus from '@navikt/fp-kodeverk/src/behandlingStatus';
+import { behandlingType, behandlingStatus } from '@navikt/fp-kodeverk';
 
 import UttakFaktaForm from './UttakFaktaForm';
 import UttakInfoPanel from './UttakInfoPanel';

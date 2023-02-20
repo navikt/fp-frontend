@@ -12,13 +12,12 @@ import {
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { AksjonspunktStatus, isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 
-import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
-import { FaktaSubmitButtonNew, FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
+import { FaktaSubmitButtonNew, FaktaBegrunnelseTextFieldNew, validerApKodeOgHentApEnum } from '@navikt/fp-fakta-felles';
 import {
   Aksjonspunkt, KontrollerFaktaPeriode, Ytelsefordeling, AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, Fagsak,
 } from '@navikt/fp-types';
 import { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
 import UttakFaktaTable from './UttakFaktaTable';
@@ -49,8 +48,8 @@ const leggTilAksjonspunktMarkering = (
   aksjonspunkter: Aksjonspunkt[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): KontrollerFaktaPeriodeMedApMarkering[] => perioder.map((periode) => {
-  if (aksjonspunkter.some((ap) => (ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE
-    || ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE)
+  if (aksjonspunkter.some((ap) => (ap.definisjon === AksjonspunktCode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE
+    || ap.definisjon === AksjonspunktCode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE)
       && ap.status === AksjonspunktStatus.OPPRETTET) && periode.arbeidsforhold?.arbeidsgiverReferanse
       && !arbeidsgiverOpplysningerPerId[periode.arbeidsforhold?.arbeidsgiverReferanse]) {
     return {
@@ -86,7 +85,7 @@ const validerPerioder = (
     return intl.formatMessage({ id: 'UttakFaktaDetailForm.ErFørFørsteUttaktsdato' }, { dato: dayjs(førsteUttaksdato).format(DDMMYYYY_DATE_FORMAT) });
   }
 
-  const harApIngenPerioder = aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE);
+  const harApIngenPerioder = aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.FAKTA_UTTAK_INGEN_PERIODER_KODE);
 
   return uttakPerioder.every((a) => a.aksjonspunktType === undefined)
     && (!harApIngenPerioder || (harApIngenPerioder && uttakPerioder.length > 0)) ? null : '';
@@ -144,21 +143,21 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
     setFormData({ uttakPerioder, begrunnelse: formMethods.getValues('begrunnelse') });
   }, [uttakPerioder]);
 
-  const automatiskeAksjonspunkter = aksjonspunkter.filter((a) => a.definisjon !== AksjonspunktKode.OVERSTYR_FAKTA_UTTAK);
+  const automatiskeAksjonspunkter = aksjonspunkter.filter((a) => a.definisjon !== AksjonspunktCode.OVERSTYR_FAKTA_UTTAK);
   const bekreft = useCallback((begrunnelse: string) => {
     const overstyrAp = [{
       // TODO Fiks hack
-      kode: validerApKodeOgHentApEnum(AksjonspunktKode.OVERSTYR_FAKTA_UTTAK, AksjonspunktKode.OVERSTYR_FAKTA_UTTAK),
+      kode: validerApKodeOgHentApEnum(AksjonspunktCode.OVERSTYR_FAKTA_UTTAK, AksjonspunktCode.OVERSTYR_FAKTA_UTTAK),
       perioder: uttakPerioder,
       begrunnelse,
     }];
 
     const aksjonspunkterSomSkalBekreftes = automatiskeAksjonspunkter.map((ap) => ({
       kode: validerApKodeOgHentApEnum(ap.definisjon,
-        AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
-        AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
-        AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
-        AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE),
+        AksjonspunktCode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
+        AksjonspunktCode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
+        AksjonspunktCode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
+        AksjonspunktCode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE),
       perioder: uttakPerioder,
       begrunnelse,
     }));

@@ -13,7 +13,7 @@ import {
 import {
   VerticalSpacer, AksjonspunktHelpTextTemp, FlexContainer, FlexRow, FlexColumn,
 } from '@navikt/ft-ui-komponenter';
-import aksjonspunktCodes, { hasAksjonspunkt } from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { Form } from '@navikt/ft-form-hooks';
 import {
   BekreftDokumentertDatoAksjonspunktAp, BekreftEktefelleAksjonspunktAp, BekreftMannAdoptererAksjonspunktAp,
@@ -25,7 +25,7 @@ import DokumentasjonFaktaForm, { FormValues as DokFormValues } from './Dokumenta
 
 import styles from './adopsjonInfoPanel.less';
 
-const { ADOPSJONSDOKUMENTAJON, OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, OM_ADOPSJON_GJELDER_EKTEFELLES_BARN } = aksjonspunktCodes;
+const { ADOPSJONSDOKUMENTAJON, OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, OM_ADOPSJON_GJELDER_EKTEFELLES_BARN } = AksjonspunktCode;
 const adopsjonAksjonspunkter = [OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, ADOPSJONSDOKUMENTAJON, OM_ADOPSJON_GJELDER_EKTEFELLES_BARN];
 
 const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {

@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { Panel } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
@@ -44,11 +44,11 @@ interface OwnProps {
 /**
  * NyeOgFerdigstilteOppgaverForIdagGraf
  */
-export const NyeOgFerdigstilteOppgaverForIdagGraf: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const NyeOgFerdigstilteOppgaverForIdagGraf: FunctionComponent<OwnProps> = ({
   height,
   nyeOgFerdigstilteOppgaver,
 }) => {
+  const intl = useIntl();
   const ferdigLabel = intl.formatMessage({ id: 'NyeOgFerdigstilteOppgaverForSisteSyvGraf.Ferdigstilte' });
   const nyLabel = intl.formatMessage({ id: 'NyeOgFerdigstilteOppgaverForSisteSyvGraf.Nye' });
 
@@ -124,4 +124,4 @@ export const NyeOgFerdigstilteOppgaverForIdagGraf: FunctionComponent<OwnProps & 
   );
 };
 
-export default injectIntl(NyeOgFerdigstilteOppgaverForIdagGraf);
+export default NyeOgFerdigstilteOppgaverForIdagGraf;

@@ -1,11 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import moment from 'moment';
-import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
+import { IntlShape, useIntl } from 'react-intl';
 
 import { FamilieHendelse, FamilieHendelseSamling } from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import utsettelseArsakCodes from '@navikt/fp-kodeverk/src/utsettelseArsakCodes';
-import overforingArsakCodes from '@navikt/fp-kodeverk/src/overforingArsakCodes';
+import { utsettelseArsakCodes, overforingArsakCodes } from '@navikt/fp-kodeverk';
 import FerieOgArbeidsPeriode from './perioder/FerieOgArbeidsPeriode';
 import SykdomOgSkadePeriode from './perioder/SykdomOgSkadePeriode';
 import InnleggelsePeriode from './perioder/InnleggelsePeriode';
@@ -191,7 +190,7 @@ interface OwnProps {
   sisteUttakdatoFørsteSeksUker: moment.Moment;
 }
 
-export const UttakPeriodeInnhold: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+export const UttakPeriodeInnhold: FunctionComponent<OwnProps> = ({
   fieldId,
   utsettelseArsak,
   overforingArsak,
@@ -210,8 +209,8 @@ export const UttakPeriodeInnhold: FunctionComponent<OwnProps & WrappedComponentP
   familiehendelse,
   vilkarForSykdomExists,
   sisteUttakdatoFørsteSeksUker,
-  intl,
 }) => {
+  const intl = useIntl();
   const editable = !(!readOnly && openForm);
 
   return (
@@ -241,4 +240,4 @@ export const UttakPeriodeInnhold: FunctionComponent<OwnProps & WrappedComponentP
   );
 };
 
-export default injectIntl(UttakPeriodeInnhold);
+export default UttakPeriodeInnhold;

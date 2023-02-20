@@ -12,7 +12,7 @@ const {
 
 describe('<FormkravProsessIndex>', () => {
   it('skal fylle ut og bekrefte skjema for NFP', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<FormkravPanelForAksjonspunktNfp submitCallback={lagre} />);
 

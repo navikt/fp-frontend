@@ -5,7 +5,7 @@ import { BodyShort } from '@navikt/ds-react';
 import { AvsnittSkiller, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { HistorikkinnslagDel } from '@navikt/fp-types';
-import KodeverkType from '@navikt/fp-kodeverk/src/kodeverkTyper';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningTypeCodes';
 import BubbleText from './felles/bubbleText';

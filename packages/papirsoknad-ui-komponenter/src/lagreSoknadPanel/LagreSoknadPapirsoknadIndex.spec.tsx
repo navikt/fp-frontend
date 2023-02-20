@@ -14,7 +14,7 @@ describe('<LagreSoknadPapirsoknadIndex>', () => {
   Modal.setAppElement('body');
 
   it('skal bekrefte opplysninger', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<Default submitCallback={lagre} />);
 
@@ -38,7 +38,7 @@ describe('<LagreSoknadPapirsoknadIndex>', () => {
   });
 
   it('skal velge at søkers opplysningsplikt ikke er overholdt', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<Default submitCallback={lagre} />);
 

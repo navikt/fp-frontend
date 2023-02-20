@@ -1,9 +1,7 @@
 import React, {
   FunctionComponent, useEffect, useCallback, useMemo,
 } from 'react';
-import {
-  injectIntl, WrappedComponentProps, FormattedMessage, IntlShape,
-} from 'react-intl';
+import { useIntl, FormattedMessage, IntlShape } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import {
   Heading, BodyShort, Panel,
@@ -75,13 +73,13 @@ interface OwnProps {
 /**
  * UtvalgskriterierForSakslisteForm
  */
-export const UtvalgskriterierForSakslisteForm: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const UtvalgskriterierForSakslisteForm: FunctionComponent<OwnProps> = ({
   valgtSaksliste,
   valgtAvdelingEnhet,
   hentAvdelingensSakslister,
   hentOppgaverForAvdelingAntall,
 }) => {
+  const intl = useIntl();
   const { data: antallOppgaver, startRequest: hentAntallOppgaverForSaksliste } = restApiHooks
     .useRestApiRunner(RestApiPathsKeys.OPPGAVE_ANTALL);
   useEffect(() => {
@@ -176,4 +174,4 @@ export const UtvalgskriterierForSakslisteForm: FunctionComponent<OwnProps & Wrap
   );
 };
 
-export default injectIntl(UtvalgskriterierForSakslisteForm);
+export default UtvalgskriterierForSakslisteForm;

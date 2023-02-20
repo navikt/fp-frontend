@@ -3,8 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
-import familieHendelseType from '@navikt/fp-kodeverk/src/familieHendelseType';
-import foreldreType from '@navikt/fp-kodeverk/src/foreldreType';
+import { familieHendelseType, foreldreType } from '@navikt/fp-kodeverk';
 import { alleKodeverk, withRouter } from '@navikt/fp-storybook-utils';
 
 import SvangerskapspengerPapirsoknadIndex from './SvangerskapspengerPapirsoknadIndex';

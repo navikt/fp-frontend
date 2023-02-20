@@ -11,7 +11,7 @@ describe('<AvregningProsessIndex>', () => {
   moment.locale('nb');
 
   it('skal velge ingen tilbakebetaling og så bekrefte', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<AksjonspunktVurderFeilutbetaling submitCallback={lagre} />);
 
@@ -41,7 +41,7 @@ describe('<AvregningProsessIndex>', () => {
   });
 
   it('skal velge å opprett tilbakekreving, sende varsel og så bekrefte', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<AksjonspunktVurderFeilutbetaling submitCallback={lagre} />);
 

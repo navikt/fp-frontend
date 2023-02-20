@@ -11,13 +11,13 @@ const { Default } = composeStories(stories);
 
 describe('<OppgaveReservasjonEndringDatoModal>', () => {
   it('skal vise modal for oppheving av reservasjon og velge dato', async () => {
-    const endreReserverasjonState = jest.fn();
+    const endreReserverasjonState = vi.fn();
 
     render(<Default endreReserverasjonState={endreReserverasjonState} />);
 
     expect(await screen.findByText('Velg dato som reservasjonen avsluttes')).toBeInTheDocument();
 
-    const datoInput = screen.getByRole('textbox');
+    const datoInput = screen.getByRole('textbox', { hidden: true });
     await userEvent.type(datoInput, dayjs().format('DD.MM.YYYY'));
     fireEvent.blur(datoInput);
 

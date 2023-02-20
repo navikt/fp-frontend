@@ -6,12 +6,12 @@ import {
   FlexColumn, FlexContainer, FlexRow, Image,
 } from '@navikt/ft-ui-komponenter';
 
-import checkImg from '@navikt/fp-assets/images/check.svg';
-import advarselImg from '@navikt/fp-assets/images/remove.svg';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { TimeLineButton } from '@navikt/ft-tidslinje';
 import { FastsattOpptjeningAktivitet } from '@navikt/fp-types';
 
+import checkImg from '../images/check.svg';
+import advarselImg from '../images/remove.svg';
 import opptjeningAktivitetKlassifisering from '../kodeverk/opptjeningAktivitetKlassifisering';
 
 import styles from './timeLineData.less';

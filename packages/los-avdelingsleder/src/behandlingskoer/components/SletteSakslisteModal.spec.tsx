@@ -8,7 +8,7 @@ const { Default } = composeStories(stories);
 
 describe('<SletteSakslisteModal>', () => {
   it('skal vise modal for sletting av saksliste og så svare ja', async () => {
-    const submit = jest.fn();
+    const submit = vi.fn();
     render(<Default submit={submit} />);
     expect(await screen.findByText('Ønsker du å slette Saksliste 1?')).toBeInTheDocument();
 
@@ -25,7 +25,7 @@ describe('<SletteSakslisteModal>', () => {
   });
 
   it('skal vise modal for sletting av saksliste og så svare nei', async () => {
-    const cancel = jest.fn();
+    const cancel = vi.fn();
     render(<Default cancel={cancel} />);
     expect(await screen.findByText('Ønsker du å slette Saksliste 1?')).toBeInTheDocument();
 

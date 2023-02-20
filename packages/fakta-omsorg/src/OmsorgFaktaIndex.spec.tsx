@@ -10,7 +10,7 @@ const {
 
 describe('<OmsorgFaktaIndex>', () => {
   it('skal velge at søker har omsorg for barnet', async () => {
-    const lagreVurdering = jest.fn(() => Promise.resolve());
+    const lagreVurdering = vi.fn(() => Promise.resolve());
 
     const utils = render(<ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg submitCallback={lagreVurdering} />);
 
@@ -59,7 +59,7 @@ describe('<OmsorgFaktaIndex>', () => {
   });
 
   it('skal velge at søker ikke har omsorg for barnet', async () => {
-    const lagreVurdering = jest.fn(() => Promise.resolve());
+    const lagreVurdering = vi.fn(() => Promise.resolve());
 
     const utils = render(<ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg submitCallback={lagreVurdering} />);
 

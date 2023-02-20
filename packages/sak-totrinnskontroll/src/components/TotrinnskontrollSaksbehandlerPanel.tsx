@@ -4,14 +4,14 @@ import { NavLink } from 'react-router-dom';
 import { BodyShort } from '@navikt/ds-react';
 import { Location } from 'history';
 import { Image } from '@navikt/ft-ui-komponenter';
-
-import checkImg from '@navikt/fp-assets/images/check.svg';
-import avslattImg from '@navikt/fp-assets/images/avslaatt.svg';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
+
 import {
   KodeverkMedNavn, BehandlingAppKontekst, TotrinnskontrollSkjermlenkeContext,
 } from '@navikt/fp-types';
 
+import checkImg from '../images/check.svg';
+import avslattImg from '../images/avslaatt.svg';
 import getAksjonspunkttekst from './aksjonspunktTekster/aksjonspunktTekstUtleder';
 
 import styles from './totrinnskontrollSaksbehandlerPanel.less';

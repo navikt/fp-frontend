@@ -101,7 +101,7 @@ class RequestRunner {
       this.isPollingRequest = true;
       try {
         return await this.execLongPolling(response.headers.location);
-      } catch (error) {
+      } catch (error: any) {
         const responseData = error.response ? error.response.data : undefined;
         if (hasLocationAndStatusDelayedOrHalted(responseData)) {
           response = await this.httpClientApi.get(responseData.location);
@@ -132,7 +132,7 @@ class RequestRunner {
       const responseData = response !== null && 'data' in response ? response.data : undefined;
       this.notify(EventType.REQUEST_FINISHED, responseData, this.isPollingRequest);
       return responseData ? { payload: responseData } : { payload: undefined };
-    } catch (error) {
+    } catch (error: any) {
       const { response } = error;
       if (response && response.status === 401 && response.headers && response.headers.location) {
         const currentPath = encodeURIComponent(window.location.pathname + window.location.search);

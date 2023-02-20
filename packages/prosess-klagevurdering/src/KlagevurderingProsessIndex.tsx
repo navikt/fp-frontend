@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { KlageVurdering, StandardProsessPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -10,6 +10,8 @@ import BehandleKlageFormKa from './components/ka/BehandleKlageFormKa';
 import BehandleKlageFormNfp from './components/nfp/BehandleKlageFormNfp';
 import { BrevData } from './components/nfp/PreviewKlageLink';
 import { TransformedValues } from './components/nfp/TempsaveKlageButton';
+
+import '@navikt/fp-prosess-felles/dist/style.css';
 
 const intl = createIntl(messages);
 
@@ -39,7 +41,7 @@ const KlagevurderingProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
         alleKodeverk={alleKodeverk}
       />
     )}
-    {aksjonspunkter.some((a) => a.definisjon === aksjonspunktCodes.BEHANDLE_KLAGE_NFP) && (
+    {aksjonspunkter.some((a) => a.definisjon === AksjonspunktCode.BEHANDLE_KLAGE_NFP) && (
       <BehandleKlageFormNfp
         sprakkode={behandling.sprakkode}
         klageVurdering={klageVurdering}

@@ -6,16 +6,6 @@ import { Aksjonspunkt } from '@navikt/fp-types';
 import TextAreaField from './form/TextAreaField';
 import ProsessStegBegrunnelseTextField from './ProsessStegBegrunnelseTextField';
 
-jest.mock('react-intl', () => {
-  const reactIntl = jest.requireActual('react-intl');
-  const meldinger = jest.requireActual('../i18n/nb_NO.json');
-  const intlTestHelper = jest.requireActual('@navikt/fp-utils-test/src/intl-enzyme-test-helper');
-  return {
-    ...reactIntl,
-    useIntl: () => intlTestHelper.getIntlMock(meldinger),
-  };
-});
-
 describe('<ProsessStegBegrunnelseTextField>', () => {
   it('skal vise tekstfelt som ikke readOnly', () => {
     const wrapper = shallow(<ProsessStegBegrunnelseTextField

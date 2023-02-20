@@ -14,8 +14,8 @@ describe('<MenyNyBehandlingIndex>', () => {
   }
 
   it('skal opprette ny ankebehandling', async () => {
-    const lagNyBehandling = jest.fn();
-    const lukkModal = jest.fn();
+    const lagNyBehandling = vi.fn();
+    const lukkModal = vi.fn();
     const utils = render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
@@ -36,8 +36,8 @@ describe('<MenyNyBehandlingIndex>', () => {
   });
 
   it('skal opprette ny førstegangssøknad og krysse av for at den er et resultat av klagebehandling', async () => {
-    const lagNyBehandling = jest.fn();
-    const lukkModal = jest.fn();
+    const lagNyBehandling = vi.fn();
+    const lukkModal = vi.fn();
     const utils = render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
@@ -59,8 +59,8 @@ describe('<MenyNyBehandlingIndex>', () => {
   });
 
   it('skal opprette ny førstegangssøknad og ikke krysse av for at den er et resultat av klagebehandling', async () => {
-    const lagNyBehandling = jest.fn();
-    const lukkModal = jest.fn();
+    const lagNyBehandling = vi.fn();
+    const lukkModal = vi.fn();
     const utils = render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
@@ -80,8 +80,8 @@ describe('<MenyNyBehandlingIndex>', () => {
   });
 
   it('skal velge årsak når en har valgt revurderingsbehandling', async () => {
-    const lagNyBehandling = jest.fn();
-    const lukkModal = jest.fn();
+    const lagNyBehandling = vi.fn();
+    const lukkModal = vi.fn();
     const utils = render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
@@ -103,8 +103,8 @@ describe('<MenyNyBehandlingIndex>', () => {
   });
 
   it('skal gi feilmelding når obligatoriske felter ikke er fylt ut', async () => {
-    const lagNyBehandling = jest.fn();
-    const lukkModal = jest.fn();
+    const lagNyBehandling = vi.fn();
+    const lukkModal = vi.fn();
     const utils = render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 

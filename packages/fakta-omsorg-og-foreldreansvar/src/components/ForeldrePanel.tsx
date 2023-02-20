@@ -2,10 +2,8 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage, WrappedComponentProps } from 'react-intl';
 import { Label, BodyShort, Heading } from '@navikt/ds-react';
 
-import navBrukerKjonn from '@navikt/fp-kodeverk/src/navBrukerKjonn';
-import opplysningAdresseType from '@navikt/fp-kodeverk/src/opplysningAdresseType';
 import { DateLabel, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, navBrukerKjonn, opplysningAdresseType } from '@navikt/fp-kodeverk';
 import { PersonopplysningerBasis, Personoversikt } from '@navikt/fp-types';
 
 import getAddresses from '../getAddresses';
@@ -50,7 +48,7 @@ const ForeldrePanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   return (
     <FaktaGruppe
       title={intl.formatMessage({ id: 'ForeldrePanel.Foreldre' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OMSORGSOVERTAKELSE]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.OMSORGSOVERTAKELSE]}
     >
       {beggeForeldre.map((foreldre) => {
         const shouldShowAdress = foreldre.adresse && !foreldre.dodsdato;

@@ -6,7 +6,7 @@ import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 
-import arbeidType from '@navikt/fp-kodeverk/src/arbeidType';
+import { arbeidType } from '@navikt/fp-kodeverk';
 
 import RenderAndreYtelserPerioderFieldArray, {
   FormValues as PerioderFormValues,

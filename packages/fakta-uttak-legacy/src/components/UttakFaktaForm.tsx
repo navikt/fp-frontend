@@ -6,13 +6,12 @@ import moment from 'moment';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import { dateFormat, guid, omitMany } from '@navikt/ft-utils';
-import AksjonspunktCode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, getKodeverknavnFn } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelseSamling,
   AlleKodeverk, Personoversikt, UttakKontrollerFaktaPerioderLegacy, Ytelsefordeling,
 } from '@navikt/fp-types';
 import { FaktaUttakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { getKodeverknavnFn } from '@navikt/fp-kodeverk/src/kodeverkUtils';
 
 import UttakPerioder from './UttakPerioder';
 import {

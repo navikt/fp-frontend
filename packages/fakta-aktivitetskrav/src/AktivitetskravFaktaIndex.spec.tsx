@@ -10,7 +10,7 @@ const { AksjonspunktMedToUavklartePerioder, AksjonspunktSomErBekreftetOgBehandli
 
 describe('<AktivitetskravFaktaIndex>', () => {
   it('skal avklare to perioder og så bekrefte aksjonspunkt', async () => {
-    const lagre = jest.fn(() => Promise.resolve());
+    const lagre = vi.fn(() => Promise.resolve());
 
     const utils = render(<AksjonspunktMedToUavklartePerioder submitCallback={lagre} />);
 

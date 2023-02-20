@@ -4,9 +4,8 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
-import RestApiMock from '@navikt/fp-utils-test/src/rest/RestApiMock';
-import { alleKodeverkLos } from '@navikt/fp-storybook-utils';
-import getIntlDecorator from '@navikt/fp-storybook-utils/decorators/withIntl';
+import { RestApiMock } from '@navikt/fp-utils-test';
+import { getIntlDecorator, alleKodeverkLos } from '@navikt/fp-storybook-utils';
 
 import OppgaverManueltPaVent from '../../../typer/oppgaverManueltPaVentTsType';
 import { RestApiGlobalStatePathsKeys, requestApi } from '../../../data/fplosRestApi';

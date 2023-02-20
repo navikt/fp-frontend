@@ -6,7 +6,7 @@ import { RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import {
   hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-form-validators';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt } from '@navikt/fp-types';
 import { VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -41,7 +41,7 @@ export const SykdomPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   return (
     <FaktaGruppe
       title={intl.formatMessage({ id: 'SykdomPanel.ApplicationInformation' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT]}
     >
       <TextAreaField
         name="begrunnelseSykdom"
@@ -79,7 +79,7 @@ SykdomPanel.buildInitialValues = (aksjonspunkt, morForSykVedFodsel) => ({
 });
 
 SykdomPanel.transformValues = (values) => ({
-  kode: aksjonspunktCodes.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
+  kode: AksjonspunktCode.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
   begrunnelse: values.begrunnelseSykdom,
   erMorForSykVedFodsel: values.erMorForSykVedFodsel,
 });

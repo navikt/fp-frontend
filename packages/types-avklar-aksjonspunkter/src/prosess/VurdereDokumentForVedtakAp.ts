@@ -1,7 +1,7 @@
-import AksjonspunktKode from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
-type VurdereDokumentForVedtakAp = AksjonspunktTilBekreftelse<AksjonspunktKode.VURDERE_DOKUMENT>;
+type VurdereDokumentForVedtakAp = AksjonspunktTilBekreftelse<AksjonspunktCode.VURDERE_DOKUMENT>;
 
 export default VurdereDokumentForVedtakAp;

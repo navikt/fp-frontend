@@ -3,9 +3,7 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 
 import { BehandlingAppKontekst } from '@navikt/fp-types';
-import behandlingResultatType from '@navikt/fp-kodeverk/src/behandlingResultatType';
-import behandlingType from '@navikt/fp-kodeverk/src/behandlingType';
-import fagsakYtelseType from '@navikt/fp-kodeverk/src/fagsakYtelseType';
+import { fagsakYtelseType, behandlingType, behandlingResultatType } from '@navikt/fp-kodeverk';
 import MenyHenleggIndex from '@navikt/fp-sak-meny-henlegg';
 
 export default {
@@ -16,7 +14,7 @@ export default {
 interface HenleggParams {
   årsakKode: string;
   begrunnelse: string;
-  fritekst: string;
+  fritekst?: string;
 }
 
 const Template: Story<{

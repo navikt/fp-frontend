@@ -10,7 +10,7 @@ const { ÅpentAksjonspunktForOmsorgovertakelse, ÅpentAksjonspunktForAvklareVilk
 
 describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
   it('skal løse aksjonspunkt for omsorgsovertakelse', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ÅpentAksjonspunktForOmsorgovertakelse submitCallback={lagre} />);
 
@@ -61,7 +61,7 @@ describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
   });
 
   it('skal løse aksjonspunkt for avklaring av vilkår', async () => {
-    const lagre = jest.fn();
+    const lagre = vi.fn();
 
     const utils = render(<ÅpentAksjonspunktForAvklareVilkårForForeldreansvar submitCallback={lagre} />);
 

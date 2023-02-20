@@ -6,9 +6,8 @@ import { Form } from '@navikt/ft-form-hooks';
 import {
   Aksjonspunkt, Verge, AlleKodeverk, AlleKodeverkTilbakekreving,
 } from '@navikt/fp-types';
-import aksjonspunktCodes from '@navikt/fp-kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
 import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
-import kodeverkTyper from '@navikt/fp-kodeverk/src/kodeverkTyper';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AvklarVergeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -20,7 +19,7 @@ type FormValues = RegistrereFormValues & {
 
 const buildInitialValues = (verge: Verge, aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   begrunnelse: FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter
-    .filter((ap) => ap.definisjon === aksjonspunktCodes.AVKLAR_VERGE)[0]).begrunnelse,
+    .filter((ap) => ap.definisjon === AksjonspunktCode.AVKLAR_VERGE)[0]).begrunnelse,
   ...RegistrereVergeFaktaForm.buildInitialValues(verge || {}),
 });
 
@@ -69,8 +68,8 @@ const RegistrereVergeInfoPanel: FunctionComponent<PureOwnProps> = ({
   const valgtVergeType = formMethods.watch('vergeType');
   const begrunnelse = formMethods.watch('begrunnelse');
 
-  const vergetyper = useMemo(() => alleKodeverk[kodeverkTyper.VERGE_TYPE].sort((k1, k2) => k1.navn.localeCompare(k2.navn)),
-    [alleKodeverk[kodeverkTyper.VERGE_TYPE]]);
+  const vergetyper = useMemo(() => alleKodeverk[KodeverkType.VERGE_TYPE].sort((k1, k2) => k1.navn.localeCompare(k2.navn)),
+    [alleKodeverk[KodeverkType.VERGE_TYPE]]);
 
   if (aksjonspunkter.length === 0) {
     return null;

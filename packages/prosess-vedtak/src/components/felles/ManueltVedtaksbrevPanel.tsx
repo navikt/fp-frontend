@@ -7,12 +7,13 @@ import {
   Image, FlexContainer, FlexRow, FlexColumn, EditedIcon, AvsnittSkiller, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
-import popOutPilSvg from '@navikt/fp-assets/images/pop-out-pil.svg';
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import {
   hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-form-validators';
 import { getLanguageFromSprakkode } from '@navikt/ft-utils';
+
+import popOutPilSvg from '../../images/pop-out-pil.svg';
 
 import styles from './manueltVedtaksbrevPanel.less';
 

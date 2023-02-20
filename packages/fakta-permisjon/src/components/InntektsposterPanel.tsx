@@ -8,10 +8,11 @@ import {
   FlexColumn, FlexContainer, FlexRow, Image, FloatRight,
 } from '@navikt/ft-ui-komponenter';
 
-import pilOppIkonUrl from '@navikt/fp-assets/images/pil_opp.svg';
-import pilNedIkonUrl from '@navikt/fp-assets/images/pil_ned.svg';
 import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Inntektspost } from '@navikt/fp-types';
+
+import pilOppIkonUrl from '../images/pil_opp.svg';
+import pilNedIkonUrl from '../images/pil_ned.svg';
 
 import styles from './inntektsposterPanel.less';
 
