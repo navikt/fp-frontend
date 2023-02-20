@@ -130,7 +130,9 @@
     "react-popper": "2.3.0",
     "react-responsive": "9.0.2",
     "react-router": "6.8.1",
-    "react-router-dom": "6.8.1"
+    "react-router-dom": "6.8.1",
+    "vis-data": "7.1.4",
+    "vis-timeline": "7.7.0"
   },
   "devDependencies": {
     "@navikt/fp-storybook-utils": "1.0.0",
