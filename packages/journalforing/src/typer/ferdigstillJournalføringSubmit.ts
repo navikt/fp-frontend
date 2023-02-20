@@ -1,5 +1,6 @@
 type JournalførSubmitValue = Readonly <{
     journalpostId: string;
+    oppgaveId: number;
     enhetId: string;
     saksnummer?: string;
     opprettSak?: OpprettSakSubmitValue;
