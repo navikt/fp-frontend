@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import { Heading } from '@navikt/ds-react';
@@ -7,7 +7,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import messages from '../i18n/nb_NO.json';
 import JournalforingPanel from './components/JournalforingPanel';
-import OppgaveIndex from './components/OppgaveIndex';
+import OppgaveIndex from './components/oppgaver/OppgaveIndex';
 import { RestApiPathsKeys, restApiHooks, requestApi } from './data/fpfordelRestApi';
 
 const intl = createIntl(messages);
@@ -34,12 +34,17 @@ interface OwnProps {
 const JournalforingIndex: FunctionComponent<OwnProps> = ({
   navAnsatt,
 }) => {
-  const alleJournalføringsoppgaverKall = restApiHooks.useRestApi(RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER,
-    { ident: navAnsatt?.brukernavn }, { suspendRequest: !harTilgangTilÅBrukeJournalføring(navAnsatt) });
+  const { startRequest: innhentAlleOppgaver, data: alleOppgaver, state: status } = restApiHooks.useRestApiRunner(RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER);
   const { addErrorMessage } = useRestApiErrorDispatcher();
   requestApi.setAddErrorMessageHandler(addErrorMessage);
 
-  if (alleJournalføringsoppgaverKall.state === RestApiState.NOT_STARTED || alleJournalføringsoppgaverKall.state === RestApiState.LOADING) {
+  useEffect(() => {
+    if (harTilgangTilÅBrukeJournalføring(navAnsatt)) {
+      innhentAlleOppgaver({ ident: navAnsatt?.brukernavn });
+    }
+  }, []);
+
+  if (status === RestApiState.NOT_STARTED || status === RestApiState.LOADING) {
     return <LoadingPanel />;
   }
   if (!navAnsatt || !harTilgangTilÅBrukeJournalføring(navAnsatt)) {
@@ -49,7 +54,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({
       </Heading>
     );
   }
-  if (alleJournalføringsoppgaverKall.state !== RestApiState.SUCCESS) {
+  if (status !== RestApiState.SUCCESS) {
     return null;
   }
   return (
@@ -58,7 +63,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({
         <Heading size="medium">
           <FormattedMessage id="Journalforing.Tittel" />
         </Heading>
-        <OppgaveIndex oppgaver={alleJournalføringsoppgaverKall.data} />
+        <OppgaveIndex oppgaver={alleOppgaver} innhentAlleOppgaver={innhentAlleOppgaver} navAnsatt={navAnsatt} />
       </JournalforingPanel>
     </RawIntlProvider>
   );

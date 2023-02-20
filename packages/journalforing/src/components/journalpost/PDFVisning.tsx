@@ -3,7 +3,7 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import { Loader, Pagination } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
 import styles from './pdfvisning.less';
-import JournalDokument from '../typer/journalDokumentTsType';
+import JournalDokument from '../../typer/journalDokumentTsType';
 
 // eslint-disable-next-line
 const pdfjsWorker = require('pdfjs-dist/build/pdf.worker.entry');

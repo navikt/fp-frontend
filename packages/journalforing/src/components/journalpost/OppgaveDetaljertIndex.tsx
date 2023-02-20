@@ -1,20 +1,26 @@
-import React, { FunctionComponent, useState, useEffect } from 'react';
+import React, {
+  FunctionComponent, useState, useEffect, useCallback,
+} from 'react';
 
 import {
   FlexColumn, FlexContainer, FlexRow, LoadingPanel,
 } from '@navikt/ft-ui-komponenter';
-import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
-import { requestApi, restApiHooks, RestApiPathsKeys } from '../data/fpfordelRestApi';
-import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { NavAnsatt } from '@navikt/fp-types';
+import { restApiHooks, RestApiPathsKeys } from '../../data/fpfordelRestApi';
+import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import OppgaveDetaljertVisning from './OppgaveDetaljertVisning';
-import styles from './journalforingPanel.less';
-import Journalpost from '../typer/journalpostTsType';
+import styles from '../journalforingPanel.less';
+import Journalpost from '../../typer/journalpostTsType';
 import PDFVisning from './PDFVisning';
-import JournalDokument from '../typer/journalDokumentTsType';
+import JournalDokument from '../../typer/journalDokumentTsType';
+import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
 
 type OwnProps = Readonly<{
   oppgave: OppgaveOversikt;
-  avbrytCallback: () => void;
+  avbrytVisningAvJournalpost: () => void;
+  innhentAlleOppgaver: (param: { ident: string }) => Promise<OppgaveOversikt[]>;
+  navAnsatt: NavAnsatt;
 }>;
 
 /**
@@ -22,12 +28,22 @@ type OwnProps = Readonly<{
  */
 const OppgaveDetaljertIndex: FunctionComponent<OwnProps> = ({
   oppgave,
-  avbrytCallback,
+  avbrytVisningAvJournalpost,
+  innhentAlleOppgaver,
+  navAnsatt,
 }) => {
   const [valgtDokument, setValgtDokument] = useState<JournalDokument>(undefined);
   const journalpostKall = restApiHooks.useRestApi(RestApiPathsKeys.HENT_JOURNALPOST_DETALJER, { journalpostId: oppgave.journalpostId });
-  const { addErrorMessage } = useRestApiErrorDispatcher();
-  requestApi.setAddErrorMessageHandler(addErrorMessage);
+
+  const { startRequest: submitJournalføring } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING);
+
+  const journalførCallback = useCallback((data: JournalførSubmitValue) => {
+    submitJournalføring(data)
+      .then(() => {
+        innhentAlleOppgaver({ ident: navAnsatt.brukernavn });
+        avbrytVisningAvJournalpost();
+      });
+  }, []);
 
   // Åpner første dokument som standard valg når vi er ferdig med å laste
   useEffect(() => {
@@ -50,9 +66,10 @@ const OppgaveDetaljertIndex: FunctionComponent<OwnProps> = ({
       <FlexRow>
         <FlexColumn className={styles.oppgaveKolonne}>
           <OppgaveDetaljertVisning
-            avbrytCallback={avbrytCallback}
+            avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
             journalpost={journalpost}
             oppgave={oppgave}
+            submitJournalføring={journalførCallback}
           />
         </FlexColumn>
         {valgtDokument
