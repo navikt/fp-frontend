@@ -12,6 +12,7 @@ const VERSION = PACKAGE.version;
 const ROOT_DIR = path.resolve(__dirname, '../public/client');
 const CORE_DIR = path.resolve(__dirname, '../../../node_modules');
 const APP_DIR = path.resolve(__dirname, '../src');
+const APP_GLOBAL_DIR = path.resolve(__dirname, '../src/globalCss');
 const TYPES_DIR = path.resolve(__dirname, '../../../packages/types');
 const PACKAGES_DIR = path.resolve(__dirname, '../../../packages');
 
@@ -71,9 +72,6 @@ const config = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: isDevelopment ? './' : '',
-            },
           }, {
             loader: 'css-loader',
             options: {
@@ -101,9 +99,6 @@ const config = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: isDevelopment ? './' : '',
-            },
           }, {
             loader: 'css-loader',
           }, {
@@ -123,14 +118,10 @@ const config = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: isDevelopment ? './' : '',
-            },
           }, {
             loader: 'css-loader',
           }],
         include: [PACKAGES_DIR],
-        exclude: [APP_DIR],
       }, {
         test: /\.(svg)$/,
         issuer: /\.less?$/,

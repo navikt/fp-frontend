@@ -20,7 +20,7 @@ import Dekorator from './components/Dekorator';
 
 import messages from '../../i18n/nb_NO.json';
 
-import './global.less';
+import '../globalCss/global.less';
 
 import '@navikt/ds-css';
 
