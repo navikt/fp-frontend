@@ -19,7 +19,7 @@ import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit'
 type OwnProps = Readonly<{
   oppgave: OppgaveOversikt;
   avbrytVisningAvJournalpost: () => void;
-  innhentAlleOppgaver: (param: { ident: string }) => Promise<OppgaveOversikt[]>;
+  innhentAlleOppgaver: (param: { ident: string }) => Promise<OppgaveOversikt[] | undefined>;
   navAnsatt: NavAnsatt;
 }>;
 
@@ -32,7 +32,7 @@ const OppgaveDetaljertIndex: FunctionComponent<OwnProps> = ({
   innhentAlleOppgaver,
   navAnsatt,
 }) => {
-  const [valgtDokument, setValgtDokument] = useState<JournalDokument>(undefined);
+  const [valgtDokument, setValgtDokument] = useState<JournalDokument | undefined>(undefined);
   const journalpostKall = restApiHooks.useRestApi(RestApiPathsKeys.HENT_JOURNALPOST_DETALJER, { journalpostId: oppgave.journalpostId });
 
   const { startRequest: submitJournalføring } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING);
@@ -54,13 +54,10 @@ const OppgaveDetaljertIndex: FunctionComponent<OwnProps> = ({
     }
   }, [journalpostKall]);
 
-  if (journalpostKall.state === RestApiState.NOT_STARTED || journalpostKall.state === RestApiState.LOADING) {
+  if (journalpostKall.state === RestApiState.NOT_STARTED || journalpostKall.state === RestApiState.LOADING || !journalpostKall.data) {
     return <LoadingPanel />;
   }
   const journalpost: Journalpost = journalpostKall.data;
-  if (!journalpost) {
-    return null;
-  }
   return (
     <FlexContainer>
       <FlexRow>

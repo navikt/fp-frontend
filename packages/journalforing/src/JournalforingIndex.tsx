@@ -9,8 +9,10 @@ import messages from '../i18n/nb_NO.json';
 import JournalforingPanel from './components/JournalforingPanel';
 import OppgaveIndex from './components/oppgaver/OppgaveIndex';
 import { RestApiPathsKeys, restApiHooks, requestApi } from './data/fpfordelRestApi';
+import OppgaveOversikt from './typer/oppgaveOversiktTsType';
 
 const intl = createIntl(messages);
+const TOM_ARRAY: OppgaveOversikt[] = [];
 
 const tilatteBrukere = ['H137440', 'A138225', 'J116396', 'W119202'];
 
@@ -34,7 +36,11 @@ interface OwnProps {
 const JournalforingIndex: FunctionComponent<OwnProps> = ({
   navAnsatt,
 }) => {
-  const { startRequest: innhentAlleOppgaver, data: alleOppgaver, state: status } = restApiHooks.useRestApiRunner(RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER);
+  const {
+    startRequest: innhentAlleOppgaver,
+    data: alleOppgaver = TOM_ARRAY,
+    state: status,
+  } = restApiHooks.useRestApiRunner(RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER);
   const { addErrorMessage } = useRestApiErrorDispatcher();
   requestApi.setAddErrorMessageHandler(addErrorMessage);
 
