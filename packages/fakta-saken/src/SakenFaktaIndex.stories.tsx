@@ -6,9 +6,9 @@ import {
   AksjonspunktCode, behandlingType, behandlingStatus, aksjonspunktStatus,
 } from '@navikt/fp-kodeverk';
 import { Behandling, Aksjonspunkt, Soknad } from '@navikt/fp-types';
-import SakenFaktaIndex from '@navikt/fp-fakta-saken';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import SakenFaktaIndex from './SakenFaktaIndex';
 
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';

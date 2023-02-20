@@ -2,8 +2,9 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import MenySettPaVentIndex from '@navikt/fp-sak-meny-sett-pa-vent';
 import { venteArsakType } from '@navikt/fp-kodeverk';
+
+import MenySettPaVentIndex from './MenySettPaVentIndex';
 
 export default {
   title: 'sak/sak-meny-sett-pa-vent',

@@ -5,9 +5,10 @@ import { action } from '@storybook/addon-actions';
 import { Behandling, Aksjonspunkt } from '@navikt/fp-types';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import BeregningsresultatProsessIndex from '@navikt/fp-prosess-beregningsresultat';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+
+import BeregningsresultatProsessIndex from './BeregningsresultatProsessIndex';
 
 const behandling = {
   uuid: '1',

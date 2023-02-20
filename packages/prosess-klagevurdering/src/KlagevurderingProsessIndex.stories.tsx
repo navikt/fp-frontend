@@ -3,10 +3,11 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 
 import { klageVurderingOmgjoer as klageVurderingOmgjoerType, klageVurdering as klageVurderingCodes, AksjonspunktCode } from '@navikt/fp-kodeverk';
-import KlagevurderingProsessIndex from '@navikt/fp-prosess-klagevurdering';
 import { Aksjonspunkt, Behandling, KlageVurdering } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+
+import KlagevurderingProsessIndex from './KlagevurderingProsessIndex';
 
 const behandling = {
   uuid: '1',
