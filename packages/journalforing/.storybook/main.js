@@ -8,5 +8,7 @@ module.exports = {
         builder: "webpack5",
     },
     stories: ['../src/**/*.stories.@(ts|tsx)'],
+    addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
+    addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
     webpackFinal: async (config) => getWebpackStorybookConfig(config, SRC_DIR),
 };
