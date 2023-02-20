@@ -97,14 +97,14 @@ export default {
 const Template: Story<{
   detaljertJournalpost: Journalpost,
   oppgave: OppgaveOversikt,
-  submitJournalføring?: (data: JournalførSubmitValue) => Promise<void>
+  submitJournalføring: (data: JournalførSubmitValue) => void
 }> = ({
   detaljertJournalpost,
   oppgave,
   submitJournalføring,
 }) => (
   <OppgaveDetaljertVisning
-    avbrytVisningAvJournalpost={undefined}
+    avbrytVisningAvJournalpost={action('button-click') as () => void}
     oppgave={oppgave}
     journalpost={detaljertJournalpost}
     submitJournalføring={submitJournalføring}
@@ -115,5 +115,5 @@ export const VisOppgaveForSubmit = Template.bind({});
 VisOppgaveForSubmit.args = {
   oppgave: defaultOppgave,
   detaljertJournalpost: detaljertJournalpostMal,
-  submitJournalføring: action('button-click') as (data: any) => Promise<any>,
+  submitJournalføring: action('button-click') as (data: JournalførSubmitValue) => void,
 };

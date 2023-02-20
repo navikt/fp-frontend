@@ -11,7 +11,7 @@ import OppgaveDetaljertIndex from '../journalpost/OppgaveDetaljertIndex';
 
 type OwnProps = Readonly<{
   oppgaver: OppgaveOversikt[];
-  innhentAlleOppgaver: (param: { ident: string }) => Promise<OppgaveOversikt[]>;
+  innhentAlleOppgaver: (param: { ident: string }) => Promise<OppgaveOversikt[] | undefined>;
   navAnsatt: NavAnsatt;
 }>;
 
@@ -23,9 +23,9 @@ const OppgaveIndex: FunctionComponent<OwnProps> = ({
   innhentAlleOppgaver,
   navAnsatt,
 }) => {
-  const [valgtOppgave, setValgtOppgave] = useState<OppgaveOversikt>(null);
+  const [valgtOppgave, setValgtOppgave] = useState<OppgaveOversikt | undefined>(undefined);
   const avbryt = useCallback(() => {
-    setValgtOppgave(null);
+    setValgtOppgave(undefined);
   }, [valgtOppgave]);
   return (
     <FlexContainer>
