@@ -16,7 +16,7 @@ import VelgSakLenke from './VelgSakLenke';
 import Journalpost from '../../typer/journalpostTsType';
 import JournalFagsak from '../../typer/journalFagsakTsType';
 
-const TOM_ARRAY = [];
+const TOM_ARRAY:JournalFagsak[] = [];
 
 const LAG_NY_SAK = 'LAG_NY_SAK'; // Value for en av radioknappene som skal lede til ekstra inputfelt
 const radioFieldName = 'saksnummerValg';
@@ -51,7 +51,7 @@ export const finnYtelseTekst = (ytelseKode: string): string => {
 };
 type FormValues = {
   saksnummerValg?: string;
-  ytelseValg?: string;
+  ytelsetypeValg?: string;
 };
 
 type YtelseSelectValg = {
@@ -81,12 +81,19 @@ const ytelseSelectValg: YtelseSelectValg[] = [
 
 const transformValues = (values: FormValues, journalpost: Journalpost, oppgave: OppgaveOversikt): JournalførSubmitValue => {
   const saksnummerValg = values[radioFieldName];
+  if (!oppgave.enhetId || !saksnummerValg) {
+    throw Error('Kan ikke journalføre uten at enhet er satt og det er valgt en sak å knytte journalpost til');
+  }
   if (saksnummerValg === LAG_NY_SAK) {
+    const valgtYtelse = values[selectFieldName];
+    if (!valgtYtelse) {
+      throw Error('Kan ikke journalføre på ny sak uten ytelse');
+    }
     return {
       journalpostId: journalpost.journalpostId,
       enhetId: oppgave.enhetId,
       opprettSak: {
-        ytelseType: values[selectFieldName],
+        ytelseType: valgtYtelse,
         aktørId: journalpost.bruker.aktørId,
       },
     };

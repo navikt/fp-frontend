@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
+// @ts-ignore Fiks når vi vet hva vi gjør med PDF'er...
 import { Document, Page, pdfjs } from 'react-pdf';
 import { Loader, Pagination } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
@@ -22,7 +23,7 @@ const PDFVisning: FunctionComponent<OwnProps> = ({
   const [valgtSide, setValgtSide] = useState(1);
   const [antallSider, setAntallSider] = useState(1);
 
-  const onDocumentLoadSuccess = useCallback(({ numPages }) => {
+  const onDocumentLoadSuccess = useCallback((numPages: number) => {
     if (valgtSide > numPages) {
       setValgtSide(numPages);
     }
