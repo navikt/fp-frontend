@@ -171,7 +171,7 @@ const lagOptionsTilGraderingAvslagsårsakerSelect = (
   alleKodeverk: AlleKodeverk,
 ): ReactElement[] => {
   const årsakKoder = alleKodeverk[KodeverkType.GRADERING_AVSLAG_AARSAK] as ArsakKodeverk[];
-  return årsakKoder.sort(sorterÅrsakKodeverk).map(({
+  return [...årsakKoder].sort(sorterÅrsakKodeverk).map(({
     kode,
     navn,
   }) => <option value={kode} key={kode}>{navn}</option>);

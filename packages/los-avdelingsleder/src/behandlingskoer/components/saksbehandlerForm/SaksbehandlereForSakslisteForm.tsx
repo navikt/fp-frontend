@@ -14,7 +14,7 @@ import Saksliste from '../../../typer/sakslisteAvdelingTsType';
 import styles from './saksbehandlereForSakslisteForm.less';
 
 const sortSaksbehandlere = (saksbehandlere: Saksbehandler[]) => (saksbehandlere && saksbehandlere instanceof Array
-  ? saksbehandlere.sort((saksbehandler1, saksbehandler2) => saksbehandler1.navn.localeCompare(saksbehandler2.navn))
+  ? [...saksbehandlere].sort((saksbehandler1, saksbehandler2) => saksbehandler1.navn.localeCompare(saksbehandler2.navn))
   : saksbehandlere);
 
 type FormValues = {
