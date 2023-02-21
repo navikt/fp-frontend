@@ -4,7 +4,7 @@ import { Heading } from '@navikt/ds-react';
 import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
-import { AlleKodeverk } from '@navikt/ft-types';
+import { AlleKodeverk } from '@navikt/fp-types';
 
 import RegistrerVirksomhetPanel, { EGEN_VIRKSOMHET_NAME_PREFIX, FormValues as VirksomhetFormValues } from './RegistrerVirksomhetPanel';
 

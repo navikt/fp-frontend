@@ -6,12 +6,11 @@ import { required } from '@navikt/ft-form-validators';
 import {
   PeriodLabel, VerticalSpacer, FaktaGruppe, Image, FlexContainer, FlexRow, FlexColumn,
 } from '@navikt/ft-ui-komponenter';
-import { Aksjonspunkt, AlleKodeverk } from '@navikt/ft-types';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 import { KodeverkType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import {
-  MedlemPeriode, Soknad, UtlandsoppholdPeriode,
+  MedlemPeriode, Soknad, UtlandsoppholdPeriode, Aksjonspunkt, AlleKodeverk,
 } from '@navikt/fp-types';
 
 import checkImage from '../../images/check.svg';

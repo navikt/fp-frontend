@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { AlleKodeverk } from '@navikt/ft-types';
-
+import { AlleKodeverk } from '@navikt/fp-types';
 import {
   SprakPapirsoknadIndex,
   RettigheterPapirsoknadIndex,

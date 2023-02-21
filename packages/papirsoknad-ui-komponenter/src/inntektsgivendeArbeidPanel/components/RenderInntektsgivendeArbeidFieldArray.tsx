@@ -7,8 +7,8 @@ import {
 import {
   Datepicker, InputField, SelectField, PeriodFieldArray, formHooks,
 } from '@navikt/ft-form-hooks';
-import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
 import { KodeverkType, Landkode } from '@navikt/ft-kodeverk';
+import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './renderInntektsgivendeArbeidFieldArray.less';
 

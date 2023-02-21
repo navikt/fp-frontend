@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
-import { AlleKodeverk } from '@navikt/ft-types';
+import { AlleKodeverk } from '@navikt/fp-types';
 
 import OppholdINorgePanel, { FormValues } from './components/OppholdINorgePanel';
 

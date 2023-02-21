@@ -8,8 +8,8 @@ import { Location } from 'history';
 import { useIntl } from 'react-intl';
 import BehandlingVelgerSakIndex from '@navikt/ft-sak-behandling-velger';
 import FagsakProfilSakIndex from '@navikt/ft-sak-fagsak-profil';
-import { KodeverkType } from '@navikt/ft-kodeverk';
 
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import { BehandlingAppKontekst } from '@navikt/fp-types';
 import UkjentAdresseMeldingIndex from '@navikt/fp-sak-ukjent-adresse';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
@@ -123,6 +123,7 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
                     {behandlingInfoKomponent}
                   </NavLink>
                 )}
+                // @ts-ignore TODO Ikkje send med ned heile kodeverket
                 getKodeverkMedNavn={getKodeverkFn}
               />
             </ErrorBoundary>

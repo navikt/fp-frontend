@@ -3,12 +3,12 @@ import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 import { FeilutbetalingAksjonspunktCode } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import {
-  FeilutbetalingFakta, AlleKodeverk, Aksjonspunkt, AlleKodeverkTilbakekreving, FeilutbetalingAarsak,
+  FeilutbetalingFakta, Aksjonspunkt, FeilutbetalingAarsak,
 } from '@navikt/ft-types';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { Behandling } from '@navikt/fp-types';
+import { Behandling, AlleKodeverk, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 
 import DynamicLoader from '../../../felles/DynamicLoader';
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
@@ -87,6 +87,7 @@ const FeilutbetalingFaktaInitPanel: FunctionComponent<OwnProps> = ({
       feilutbetalingAarsak={initData.feilutbetalingAarsak}
       fagsakYtelseTypeKode={fagsakYtelseTypeKode}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+      // @ts-ignore TODO Ikkje send med ned heile kodeverket
       alleKodeverk={fpsakKodeverk}
       tilbakekrevingKodeverk={alleKodeverk}
       submitCallback={submitCallback}

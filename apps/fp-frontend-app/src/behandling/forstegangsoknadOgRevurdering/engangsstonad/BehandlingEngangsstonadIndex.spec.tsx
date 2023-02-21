@@ -3,10 +3,9 @@ import { RawIntlProvider } from 'react-intl';
 import { render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import { BehandlingType, FagsakYtelseType, BehandlingStatus } from '@navikt/ft-kodeverk';
-import { AlleKodeverk } from '@navikt/ft-types';
 import { createIntl } from '@navikt/ft-utils';
 
-import { AksessRettigheter, Fagsak } from '@navikt/fp-types';
+import { AksessRettigheter, Fagsak, AlleKodeverk } from '@navikt/fp-types';
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 

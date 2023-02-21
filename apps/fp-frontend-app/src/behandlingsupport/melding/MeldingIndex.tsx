@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
-import { KodeverkMedNavn } from '@navikt/ft-types';
 
+import { KodeverkMedNavn } from '@navikt/fp-types';
 import { venteArsakType, dokumentMalType } from '@navikt/fp-kodeverk';
 import MeldingerSakIndex, { MessagesModalSakIndex, FormValues } from '@navikt/fp-sak-meldinger';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';

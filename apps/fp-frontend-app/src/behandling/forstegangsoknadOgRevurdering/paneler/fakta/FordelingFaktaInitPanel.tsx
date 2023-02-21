@@ -110,6 +110,7 @@ const FordelingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
     skalPanelVisesIMeny={() => !!props.behandling.aksjonspunkt
       && !!props.behandling.aksjonspunkt.some((ap) => AKSJONSPUNKT_KODER.some((kode) => kode === ap.definisjon))}
     renderPanel={(data) => (
+      // @ts-ignore TODO Ikkje send med ned heile kodeverket
       <DynamicLoader<React.ComponentProps<typeof ProsessFordeling>>
         packageCompFn={() => import('@navikt/ft-fakta-fordel-beregningsgrunnlag')}
         federatedCompFn={ProsessFordelingMF}

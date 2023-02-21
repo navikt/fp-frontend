@@ -5,11 +5,10 @@ import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import {
   Datepicker, SelectField, PeriodFieldArray, formHooks,
 } from '@navikt/ft-form-hooks';
-import { KodeverkMedNavn } from '@navikt/ft-types';
 import {
   dateAfterOrEqual, dateBeforeOrEqual, dateRangesNotOverlapping, hasValidDate, required,
 } from '@navikt/ft-form-validators';
-
+import { KodeverkMedNavn } from '@navikt/fp-types';
 import { oppholdArsakType } from '@navikt/fp-kodeverk';
 
 import styles from './renderOppholdPeriodeFieldArray.less';

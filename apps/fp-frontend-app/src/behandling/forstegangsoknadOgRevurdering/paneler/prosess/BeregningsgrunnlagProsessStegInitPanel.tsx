@@ -115,6 +115,7 @@ const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & Prose
     prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Beregning' })}
     skalPanelVisesIMeny={() => true}
     renderPanel={(data) => (
+      // @ts-ignore TODO Ikkje send med ned heile kodeverket
       <DynamicLoader<React.ComponentProps<typeof ProsessBeregningsgrunnlag>>
         packageCompFn={() => import('@navikt/ft-prosess-beregningsgrunnlag')}
         federatedCompFn={ProsessBeregningsgrunnlagMF}

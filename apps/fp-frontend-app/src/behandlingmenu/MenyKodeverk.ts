@@ -1,7 +1,7 @@
+import { BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
 import {
   AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn,
-} from '@navikt/ft-types';
-import { BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
+} from '@navikt/fp-types';
 
 class MenyKodeverk {
   $$behandlingType?: string;

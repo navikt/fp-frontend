@@ -8,8 +8,8 @@ import {
 import {
   FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import { AlleKodeverk } from '@navikt/ft-types';
 import { formHooks } from '@navikt/ft-form-hooks';
+import { AlleKodeverk } from '@navikt/fp-types';
 
 import addCircleIcon from '../../images/add-circle.svg';
 import removeIcon from '../../images/remove.svg';
