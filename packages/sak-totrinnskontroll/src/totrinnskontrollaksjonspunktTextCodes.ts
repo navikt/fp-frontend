@@ -49,7 +49,6 @@ const totrinnskontrollaksjonspunktTextCodes = {
   [AksjonspunktCode.FORESLA_VEDTAK]: 'ToTrinnsForm.Vedtak.Fritekstbrev',
   [AksjonspunktCode.FORESLA_VEDTAK_MANUELT]: 'ToTrinnsForm.Vedtak.Fritekstbrev',
 
-  [AksjonspunktCode.AVKLAR_FØRSTE_UTTAKSDATO]: 'TotrinnsForm.Uttak.AvklarManglendeUttaksperiode',
   [AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]: 'ToTrinnsForm.Omsorg.VurderOmsorg',
   [AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG]: 'ToTrinnsForm.Aleneomsorg.VurderAleneomsorg',
 
@@ -63,7 +62,6 @@ const totrinnskontrollaksjonspunktTextCodes = {
   [AksjonspunktCode.KONTROLLER_TILSTØTENDE_YTELSER_INNVILGET]: 'ToTrinnsForm.Uttak.TilstotendeYtelser.Innvilget',
   [AksjonspunktCode.KONTROLLER_TILSTØTENDE_YTELSER_OPPHØRT]: 'ToTrinnsForm.Uttak.TilstotendeYtelser.Opphort',
   [AksjonspunktCode.TILKNYTTET_STORTINGET]: 'ToTrinnsForm.Uttak.Stortinget',
-  [AksjonspunktCode.OVERSTYR_AVKLAR_FAKTA_UTTAK]: 'ToTrinnsForm.Uttak.Overstyrt',
 
   [AksjonspunktCode.VURDER_TILBAKETREKK]: 'ToTrinnsForm.TilkjentYtelse.Tilbaketrekk',
 

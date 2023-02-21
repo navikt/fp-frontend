@@ -20,7 +20,6 @@ enum FaktaPanelCode {
   UTTAK = 'uttak',
   VERGE = 'verge',
   YTELSER = 'ytelser',
-  AKTIVITETSKRAV = 'aktivitetskrav',
   UTTAK_DOKUMENTASJON = 'uttakdokumentasjon',
 }
 

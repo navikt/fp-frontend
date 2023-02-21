@@ -291,17 +291,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.VilkarOverstyrt');
   });
 
-  it('skal vise korrekt tekst for aksjonspunkt 5081', () => {
-    const aksjonspunkt = {
-      aksjonspunktKode: AksjonspunktCode.AVKLAR_FØRSTE_UTTAKSDATO,
-      besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: false,
-    } as TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
-    // @ts-ignore
-    expect(message[0].props.id).toEqual('TotrinnsForm.Uttak.AvklarManglendeUttaksperiode');
-  });
-
   it('skal vise korrekt tekst for aksjonspunkt 5039 varig endring', () => {
     const aksjonspunkt = {
       aksjonspunktKode: AksjonspunktCode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
@@ -325,27 +314,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.IkkeVarigEndring');
   });
 
-  it('skal vise korrekt tekst for aksjonspunkt 5070 slettet', () => {
-    const uttakPeriode = {
-      fom: '-',
-      tom: '-',
-      erSlettet: true,
-      erAvklart: false,
-      erLagtTil: false,
-      erEndret: false,
-    };
-    const aksjonspunkt = {
-      aksjonspunktKode: AksjonspunktCode.AVKLAR_UTTAK,
-      besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: false,
-      beregningDto: { fastsattVarigEndringNaering: false },
-      uttakPerioder: [uttakPeriode],
-    } as TotrinnskontrollAksjonspunkt;
-
-    const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
-    // @ts-ignore
-    expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeSlettet');
-  });
   it('skal vise korrekt tekst for aksjonspunkt 6008 slettet', () => {
     const uttakPeriode = {
       fom: '-',
@@ -389,27 +357,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeSlettet');
   });
 
-  it('skal vise korrekt tekst for aksjonspunkt 5070 lagt til', () => {
-    const uttakPeriode = {
-      fom: '-',
-      tom: '-',
-      erSlettet: false,
-      erAvklart: false,
-      erLagtTil: true,
-      erEndret: false,
-    };
-    const aksjonspunkt = {
-      aksjonspunktKode: AksjonspunktCode.AVKLAR_UTTAK,
-      besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: false,
-      beregningDto: { fastsattVarigEndringNaering: false },
-      uttakPerioder: [uttakPeriode],
-    } as TotrinnskontrollAksjonspunkt;
-
-    const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
-    // @ts-ignore
-    expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeLagtTil');
-  });
   it('skal vise korrekt tekst for aksjonspunkt 6008 lagt til', () => {
     const uttakPeriode = {
       fom: '-',
@@ -453,27 +400,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeLagtTil');
   });
 
-  it('skal vise korrekt tekst for aksjonspunkt 5070 endret', () => {
-    const uttakPeriode = {
-      fom: '-',
-      tom: '-',
-      erSlettet: false,
-      erAvklart: false,
-      erLagtTil: false,
-      erEndret: true,
-    };
-    const aksjonspunkt = {
-      aksjonspunktKode: AksjonspunktCode.AVKLAR_UTTAK,
-      besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: false,
-      beregningDto: { fastsattVarigEndringNaering: false },
-      uttakPerioder: [uttakPeriode],
-    } as TotrinnskontrollAksjonspunkt;
-
-    const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
-    // @ts-ignore
-    expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeEndret');
-  });
   it('skal vise korrekt tekst for aksjonspunkt 6008 endret', () => {
     const uttakPeriode = {
       fom: '-',
@@ -517,27 +443,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     expect(message[0].props.id).toEqual('ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret');
   });
 
-  it('skal vise korrekt tekst for aksjonspunkt 5070 avklart', () => {
-    const uttakPeriode = {
-      fom: '-',
-      tom: '-',
-      erSlettet: false,
-      erAvklart: true,
-      erLagtTil: false,
-      erEndret: false,
-    };
-    const aksjonspunkt = {
-      aksjonspunktKode: AksjonspunktCode.AVKLAR_UTTAK,
-      besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: false,
-      beregningDto: { fastsattVarigEndringNaering: false },
-      uttakPerioder: [uttakPeriode],
-    } as TotrinnskontrollAksjonspunkt;
-
-    const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
-    // @ts-ignore
-    expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeAvklart');
-  });
   it('skal vise korrekt tekst for aksjonspunkt 6008 avklart', () => {
     const uttakPeriode = {
       fom: '-',

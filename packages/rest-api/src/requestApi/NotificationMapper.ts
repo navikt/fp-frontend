@@ -8,7 +8,6 @@ type EventCallback = (data?: any, type?: string, isAsync?: boolean) => void
  * NotificationMapper
  *
  * Denne klassen brukes for å koble interne rest-api hendelser til eksterne hendelser.
- * For eksempel kan en koble REQUEST_STARTED mot en Redux actionCreator.
  */
 class NotificationMapper {
   eventTypes = {
