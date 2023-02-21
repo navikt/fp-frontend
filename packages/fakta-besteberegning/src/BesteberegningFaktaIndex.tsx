@@ -31,7 +31,6 @@ const BesteberegningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelP
   arbeidsgiverOpplysninger,
   alleKodeverk,
   aksjonspunkter,
-  behandling,
   readOnly,
   submitCallback,
   formData,
@@ -44,7 +43,6 @@ const BesteberegningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelP
       arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
       getKodeverkNavn={getKodeverknavnFn(alleKodeverk)}
       aksjonspunkter={aksjonspunkter}
-      behandling={behandling}
       readOnly={readOnly}
       submitCallback={submitCallback}
       submittable={submittable}

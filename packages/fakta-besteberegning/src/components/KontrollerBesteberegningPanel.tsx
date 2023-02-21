@@ -15,10 +15,7 @@ import { Form, CheckboxField } from '@navikt/ft-form-hooks';
 import { ManuellKontrollBesteberegningAP }
   from '@navikt/fp-types-avklar-aksjonspunkter';
 
-export const buildInitialValues = (venteårsak: string, aksjonspunkt: Aksjonspunkt): FormValues => {
-  if (!aksjonspunkt) {
-    return null;
-  }
+export const buildInitialValues = (aksjonspunkt: Aksjonspunkt): FormValues => {
   const apErLøst = aksjonspunkt.status === aksjonspunktStatus.UTFORT;
   return {
     ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkt),
@@ -29,7 +26,7 @@ export const buildInitialValues = (venteårsak: string, aksjonspunkt: Aksjonspun
 export const transformValues = (values: FormValues): ManuellKontrollBesteberegningAP => ({
   kode: AksjonspunktCode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
   begrunnelse: values.begrunnelse,
-  besteberegningErKorrekt: values.besteberegningErKorrektValg,
+  besteberegningErKorrekt: !!values.besteberegningErKorrektValg,
 });
 
 export type FormValues = {
@@ -40,7 +37,6 @@ export type FormValues = {
 interface OwnProps {
   aksjonspunkt: Aksjonspunkt;
   submitCallback: (data: ManuellKontrollBesteberegningAP) => Promise<void>;
-  venteårsak: string;
   readOnly: boolean;
   submittable: boolean;
   formData?: FormValues;
@@ -54,7 +50,6 @@ interface OwnProps {
  */
 const KontrollerBesteberegningPanel: FunctionComponent<OwnProps> = ({
   aksjonspunkt,
-  venteårsak,
   readOnly,
   submittable,
   submitCallback,
@@ -63,7 +58,7 @@ const KontrollerBesteberegningPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const [erKnappEnabled, toggleKnapp] = useState(false);
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(venteårsak, aksjonspunkt),
+    defaultValues: formData || buildInitialValues(aksjonspunkt),
   });
   const begrunnelse = formMethods.watch('begrunnelse');
   return (
