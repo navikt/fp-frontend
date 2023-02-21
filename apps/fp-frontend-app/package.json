@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-frontend-app",
   "version": "1.0.0",
+  "type": "module",
   "module": "src/index.tsx",
   "license": "MIT",
   "private": true,
@@ -12,8 +13,9 @@
     "eslint": "eslint \"src/**/*.ts*\" --color",
     "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
     "stylelint": "stylelint \"src/**/*.less\"",
-    "dev": "cross-env NODE_ENV=development webpack serve --config webpack_app/webpack.dev.js",
-    "build": "cross-env NODE_ENV=production webpack --config webpack_app/webpack.prod.js",
+    "dev": "vite serve",
+    "build": "vite build",
+    "preview": "vite preview",
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {

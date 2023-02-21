@@ -9,7 +9,7 @@ import { required } from '@navikt/ft-form-validators';
 import { FamilieHendelse } from '@navikt/fp-types';
 import { BekreftEktefelleAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import styles from './ektefelleFaktaForm.less';
+import styles from './ektefelleFaktaForm.module.css';
 
 interface OwnProps {
   readOnly: boolean;
