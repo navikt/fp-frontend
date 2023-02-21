@@ -70,14 +70,13 @@ const lagVisningsNavn = (inntekt: BesteberegningInntekt, arbeidsgiverOpplysninge
 const lagInntektRader = (inntekter: BesteberegningInntekt[], arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId,
   getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType) => string): ReactElement[] => (
   inntekter.map((inntekt: BesteberegningInntekt, index) => (
-    // eslint-disable-next-line react/no-array-index-key
-    <TableRow key={index}>
-      <TableColumn>
+    <TableRow key={index} className={styles.månedRad}>
+      <TableColumn className={styles.månedAktivitet}>
         <BodyShort size="small">
           {lagVisningsNavn(inntekt, arbeidsgiverOpplysninger, getKodeverkNavn)}
         </BodyShort>
       </TableColumn>
-      <TableColumn>
+      <TableColumn className={styles.månedInntekt}>
         <BodyShort size="small">
           {formatCurrencyNoKr(inntekt.inntekt)}
         </BodyShort>
