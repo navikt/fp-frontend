@@ -20,7 +20,7 @@ const headerColumnContent = [
   <FormattedMessage key={3} id="PersonArbeidsforholdTable.Kilde" values={{ br: <br /> }} />,
   <FormattedMessage key={4} id="PersonArbeidsforholdTable.Stillingsprosent" values={{ br: <br /> }} />,
   <FormattedMessage key={5} id="PersonArbeidsforholdTable.MottattDato" values={{ br: <br /> }} />,
-  <div />,
+  <div key={6} />,
 ];
 
 const finnKilde = (arbeidsforhold: AoIArbeidsforhold, intl: IntlShape) => {
