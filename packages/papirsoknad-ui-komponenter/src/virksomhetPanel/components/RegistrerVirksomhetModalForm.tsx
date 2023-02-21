@@ -3,8 +3,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Button, Modal, Heading } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { AlleKodeverk } from '@navikt/ft-types';
 import { Form } from '@navikt/ft-form-hooks';
+import { AlleKodeverk } from '@navikt/fp-types';
 
 import VirksomhetIdentifikasjonPanel, { FormValues as IdFormValues } from './VirksomhetIdentifikasjonPanel';
 import VirksomhetRegnskapPanel, { FormValues as RegnskapFormValues } from './VirksomhetRegnskapPanel';

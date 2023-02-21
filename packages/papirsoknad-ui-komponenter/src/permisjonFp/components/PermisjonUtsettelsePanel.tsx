@@ -2,9 +2,10 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 import { formHooks, CheckboxField } from '@navikt/ft-form-hooks';
-import { AlleKodeverk } from '@navikt/ft-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { KodeverkType } from '@navikt/ft-kodeverk';
+
+import { AlleKodeverk } from '@navikt/fp-types';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import RenderUtsettelsePeriodeFieldArray, {
   UTSETTELSE_PERIODE_FIELD_ARRAY_NAME,

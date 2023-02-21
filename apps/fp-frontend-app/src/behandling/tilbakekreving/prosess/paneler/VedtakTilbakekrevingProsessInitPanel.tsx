@@ -5,12 +5,12 @@ import { useIntl } from 'react-intl';
 import { WarningModal, LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { BehandlingArsakType } from '@navikt/ft-kodeverk';
 import {
-  AlleKodeverkTilbakekreving, Aksjonspunkt, BeregningsresultatTilbakekreving, Vedtaksbrev,
+  Aksjonspunkt, BeregningsresultatTilbakekreving, Vedtaksbrev,
 } from '@navikt/ft-types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
-import { Behandling } from '@navikt/fp-types';
+import { AlleKodeverkTilbakekreving, Behandling } from '@navikt/fp-types';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
   VedtakAksjonspunktCode, ForeslaVedtakTilbakekrevingAp, ForhandsvisData,

@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
-import { AlleKodeverk } from '@navikt/ft-types';
 import { omitOne } from '@navikt/ft-utils';
 
+import { AlleKodeverk } from '@navikt/fp-types';
 import { familieHendelseType } from '@navikt/fp-kodeverk';
 import {
   SoknadData, MottattDatoPapirsoknadIndex, LagreSoknadPapirsoknadIndex, rettighet, MottattDatoFormValues,

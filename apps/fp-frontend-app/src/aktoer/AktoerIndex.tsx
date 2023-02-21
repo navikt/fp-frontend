@@ -33,6 +33,7 @@ const AktoerIndex: FunctionComponent = () => {
     <AktorSakIndex
       valgtAktorId={selectedAktoerId}
       aktorInfo={data}
+      // @ts-ignore TODO Ikkje send med ned heile kodeverket
       alleKodeverk={alleKodeverk}
       renderSomLenke={(className, fagsakKomponent, saksnummer) => (
         <Link to={pathToFagsak(saksnummer)} className={className}>

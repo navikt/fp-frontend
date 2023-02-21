@@ -1,12 +1,10 @@
 import React, { FunctionComponent, useCallback, useMemo } from 'react';
-import {
-  Aksjonspunkt, AlleKodeverkTilbakekreving,
-} from '@navikt/ft-types';
+import { Aksjonspunkt } from '@navikt/ft-types';
 import { ForeldelseAksjonspunktCodes, VurderForeldelseAp } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { Behandling } from '@navikt/fp-types';
+import { Behandling, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';

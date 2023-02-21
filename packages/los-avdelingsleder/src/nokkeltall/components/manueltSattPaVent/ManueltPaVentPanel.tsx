@@ -7,8 +7,8 @@ import { Form, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import { KodeverkMedNavn } from '@navikt/ft-types';
 import { FagsakYtelseType, KodeverkType } from '@navikt/ft-kodeverk';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 
 import OppgaverManueltPaVent from '../../../typer/oppgaverManueltPaVentTsType';
 import ManueltPaVentGraf from './ManueltPaVentGraf';

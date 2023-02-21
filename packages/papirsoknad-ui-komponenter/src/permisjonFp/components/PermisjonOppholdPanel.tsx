@@ -3,8 +3,9 @@ import { FormattedMessage } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { KodeverkType } from '@navikt/ft-kodeverk';
-import { AlleKodeverk } from '@navikt/ft-types';
+
+import { KodeverkType } from '@navikt/fp-kodeverk';
+import { AlleKodeverk } from '@navikt/fp-types';
 
 import RenderOppholdPeriodeFieldArray, {
   OPPHOLD_PERIODE_FIELD_ARRAY_NAME,

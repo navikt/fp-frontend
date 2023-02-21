@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import { Panel } from '@navikt/ds-react';
-import { KodeverkMedNavn } from '@navikt/ft-types';
 import { BehandlingType } from '@navikt/ft-kodeverk';
 import { ReactECharts } from '@navikt/fp-los-felles';
+import { KodeverkMedNavn } from '@navikt/fp-types';
 
 import OppgaverForAvdeling from '../../../typer/oppgaverForAvdelingTsType';
 

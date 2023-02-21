@@ -3,11 +3,10 @@ import { RawIntlProvider } from 'react-intl';
 import { render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import { BehandlingType, BehandlingStatus, FagsakYtelseType } from '@navikt/ft-kodeverk';
-import { AlleKodeverk } from '@navikt/ft-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
-import { AksessRettigheter, Fagsak } from '@navikt/fp-types';
+import { AksessRettigheter, Fagsak, AlleKodeverk } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import { BehandlingFellesApiKeys } from '../felles/data/behandlingFellesApi';

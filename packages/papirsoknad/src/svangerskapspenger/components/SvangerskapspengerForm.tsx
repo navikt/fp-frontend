@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 import { Form } from '@navikt/ft-form-hooks';
-import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
+import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import {
   SoknadData,

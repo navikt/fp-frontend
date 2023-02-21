@@ -1,12 +1,10 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
-import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
 import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { KodeverkType } from '@navikt/ft-kodeverk';
-
-import { arbeidType } from '@navikt/fp-kodeverk';
+import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
+import { arbeidType, KodeverkType } from '@navikt/fp-kodeverk';
 
 import RenderAndreYtelserPerioderFieldArray, {
   FormValues as PerioderFormValues,

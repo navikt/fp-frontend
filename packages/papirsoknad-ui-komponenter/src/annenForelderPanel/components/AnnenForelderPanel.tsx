@@ -7,10 +7,10 @@ import {
   CheckboxField, formHooks, InputField, RadioGroupPanel, SelectField,
 } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
-import { Landkode, KodeverkType } from '@navikt/ft-kodeverk';
+import { Landkode } from '@navikt/ft-kodeverk';
 
-import { kanIkkeOppgiAnnenForelderArsak } from '@navikt/fp-kodeverk';
+import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
+import { kanIkkeOppgiAnnenForelderArsak, KodeverkType } from '@navikt/fp-kodeverk';
 import {
   hasValidFodselsnummer, hasValidFodselsnummerFormat, required, sammeFodselsnummerSomSokerMessage,
 } from '@navikt/ft-form-validators';

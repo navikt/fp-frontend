@@ -1,14 +1,13 @@
 import React, {
   useState, useMemo, useCallback, FunctionComponent, useEffect,
 } from 'react';
-import { KodeverkType, isAksjonspunktOpen } from '@navikt/ft-kodeverk';
-import { AlleKodeverk, AlleKodeverkTilbakekreving } from '@navikt/ft-types';
+import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 
+import { AlleKodeverk, AlleKodeverkTilbakekreving, Behandling } from '@navikt/fp-types';
 import { RequestApi } from '@navikt/fp-rest-api';
-import { Behandling } from '@navikt/fp-types';
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import SettPaVentModalIndex from '@navikt/fp-modal-sett-pa-vent';
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
 import { BehandlingFellesApiKeys } from '../../data/behandlingFellesApi';
 
 interface BehandlingPaVentProps {

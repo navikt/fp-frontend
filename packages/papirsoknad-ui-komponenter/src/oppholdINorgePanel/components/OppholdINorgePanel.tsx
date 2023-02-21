@@ -2,11 +2,10 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { AlleKodeverk } from '@navikt/ft-types';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 import { Heading } from '@navikt/ds-react';
-
 import { required } from '@navikt/ft-form-validators';
+import { AlleKodeverk } from '@navikt/fp-types';
 import UtenlandsOppholdField, { FormValues as FormValuesFieldArray } from './UtenlandsOppholdField';
 
 export type FormValues = {

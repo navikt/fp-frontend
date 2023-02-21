@@ -5,9 +5,8 @@ import { FormattedMessage } from 'react-intl';
 import { Label, ErrorMessage } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
-import { AlleKodeverk } from '@navikt/ft-types';
 import { KodeverkType } from '@navikt/ft-kodeverk';
-
+import { AlleKodeverk } from '@navikt/fp-types';
 import { naringsvirksomhetType } from '@navikt/fp-kodeverk';
 import { isRequiredMessage } from '@navikt/ft-form-validators';
 
