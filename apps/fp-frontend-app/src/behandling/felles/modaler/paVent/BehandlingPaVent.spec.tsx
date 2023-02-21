@@ -2,12 +2,12 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
-import { Aksjonspunkt, AlleKodeverk } from '@navikt/ft-types';
+import { Aksjonspunkt } from '@navikt/ft-types';
 import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
 import { Modal } from '@navikt/ds-react';
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { Behandling } from '@navikt/fp-types';
+import { Behandling, AlleKodeverk } from '@navikt/fp-types';
 import { createRequestApi, RestApiConfigBuilder } from '@navikt/fp-rest-api';
 
 import BehandlingPaVent from './BehandlingPaVent';

@@ -105,6 +105,7 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
       readOnly={readOnly}
       submitAksjonspunkt={submitAksjonspunkt}
       toggleRiskPanel={toggleRiskPanel}
+      // @ts-ignore TODO Ikkje send med ned heile kodeverket
       alleKodeverk={alleKodeverk}
     />
   );

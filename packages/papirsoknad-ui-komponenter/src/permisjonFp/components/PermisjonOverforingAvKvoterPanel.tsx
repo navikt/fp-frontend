@@ -4,9 +4,8 @@ import { Label } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { KodeverkType } from '@navikt/ft-kodeverk';
-import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
-
 import { overforingArsak, foreldreType as ForeldreType } from '@navikt/fp-kodeverk';
+import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import RenderOverforingAvKvoterFieldArray, {
   FormValues as KvoterPerioderFormValues,

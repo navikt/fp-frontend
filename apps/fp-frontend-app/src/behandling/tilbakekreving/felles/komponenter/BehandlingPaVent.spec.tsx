@@ -4,10 +4,9 @@ import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
 import { Modal } from '@navikt/ds-react';
 import { BehandlingType, BehandlingStatus } from '@navikt/ft-kodeverk';
-import { Aksjonspunkt, AlleKodeverk } from '@navikt/ft-types';
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { Behandling } from '@navikt/fp-types';
+import { Behandling, AlleKodeverk, Aksjonspunkt } from '@navikt/fp-types';
 
 import BehandlingPaVent from './BehandlingPaVent';
 

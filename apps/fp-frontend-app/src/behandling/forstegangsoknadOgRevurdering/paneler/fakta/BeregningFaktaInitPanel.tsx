@@ -128,6 +128,7 @@ const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'BeregningInfoPanel.Title' })}
     skalPanelVisesIMeny={() => props.requestApi.hasPath(BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG.name)}
     renderPanel={(data) => (
+      // @ts-ignore TODO Ikkje send med ned heile kodeverket
       <DynamicLoader<React.ComponentProps<typeof ProsessFaktaBeregning>>
         packageCompFn={() => import('@navikt/ft-fakta-beregning')}
         federatedCompFn={ProsessFaktaBeregningMF}

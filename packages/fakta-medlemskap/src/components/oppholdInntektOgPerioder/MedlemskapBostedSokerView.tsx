@@ -6,10 +6,9 @@ import {
 import {
   FlexColumn, FlexContainer, FlexRow, Tooltip,
 } from '@navikt/ft-ui-komponenter';
-import { KodeverkMedNavn } from '@navikt/ft-types';
 
 import { region, personstatusType, opplysningAdresseType } from '@navikt/fp-kodeverk';
-import { Personadresse, PersonopplysningMedlem } from '@navikt/fp-types';
+import { KodeverkMedNavn, Personadresse, PersonopplysningMedlem } from '@navikt/fp-types';
 
 import getAddresses from '../../getAddresses';
 

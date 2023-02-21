@@ -5,13 +5,12 @@ import React, {
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
   Aksjonspunkt,
-  AlleKodeverkTilbakekreving,
   DetaljerteFeilutbetalingsperioder,
   FeilutbetalingPerioderWrapper,
   VilkarsVurdertePerioderWrapper,
 } from '@navikt/ft-types';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
-import { Behandling } from '@navikt/fp-types';
+import { Behandling, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { VilkarsVurderingAp, ForeldelseAksjonspunktCodes } from '@navikt/ft-prosess-tilbakekreving';
 

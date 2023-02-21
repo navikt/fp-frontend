@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react';
 
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
-import { KodeverkType } from '@navikt/ft-kodeverk';
 import { FagsakEnkel, AlleKodeverk } from '@navikt/fp-types';
-import { getKodeverknavnFn } from '@navikt/fp-kodeverk';
+import { getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
 
 import styles from './fagsakList.less';
 

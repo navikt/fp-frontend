@@ -10,8 +10,10 @@ import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { ForeldelseAksjonspunktCodes } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
 import { VedtakAksjonspunktCode } from '@navikt/ft-prosess-tilbakekreving-vedtak';
 import { ForeldelseAksjonspunktCodes as TilbakekrevingCodes } from '@navikt/ft-prosess-tilbakekreving';
-import { Aksjonspunkt, AlleKodeverkTilbakekreving } from '@navikt/ft-types';
-import { Behandling, AksessRettigheter, Behandlingsresultat } from '@navikt/fp-types';
+import { Aksjonspunkt } from '@navikt/ft-types';
+import {
+  Behandling, AksessRettigheter, Behandlingsresultat, AlleKodeverkTilbakekreving,
+} from '@navikt/fp-types';
 import { vedtakResultatType as VedtakResultatType } from '@navikt/fp-kodeverk';
 
 import { erReadOnlyCurried } from '../felles/util/readOnlyPanelUtils';
