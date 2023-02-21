@@ -39,6 +39,25 @@ yarn eslint
 yarn stylelint
 ````
 
+## Utvikling mot lokal kode i ft-frontend-saksbehandling
+For å gå mot lokal kode:
+````
+cd ft-frontend-saksbehandling/packages/fakta-beregning
+yarn link
+
+cd fp-frontend
+yarn link @navikt/ft-fakta-beregning
+
+yarn dev
+````
+
+For å gå tilbake til å bruke publisert pakke:
+````
+cd fp-frontend
+yarn unlink @navikt/ft-fakta-beregning
+yarn install
+````
+
 ## Innlogging og utlogging lokalt mot autotest
 
 Den lokale frontenden kjører på port 9100, for å logge seg inn må man kalle wonderwall på http://localhost:9000/oauth2/login?redirect=http://localhost:9100.
