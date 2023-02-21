@@ -2,7 +2,7 @@ import React, { Component, RefObject } from 'react';
 import moment from 'moment';
 import { IntlShape } from 'react-intl';
 
-import { calcDaysAndWeeks, DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -10,7 +10,7 @@ import { uttakPeriodeNavn, StonadskontoType } from '@navikt/fp-kodeverk';
 import { ArbeidsgiverOpplysningerPerId, AlleKodeverk, Kjønnkode } from '@navikt/fp-types';
 import { Timeline, TimeLineControl, TimeLineSokerEnsamSoker } from '@navikt/ft-tidslinje';
 
-import TilkjentYtelseTimelineData, { PeriodeMedId } from './TilkjentYtelseTimelineData';
+import TilkjentYtelseTimelineData, { PeriodeMedId, calcDaysAndWeeks } from './TilkjentYtelseTimelineData';
 
 import styles from './tilkjentYtelse.less';
 

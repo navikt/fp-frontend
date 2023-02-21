@@ -9,13 +9,98 @@ import {
 import {
   Table, TableColumn, TableRow, VerticalSpacer, FlexContainer, FlexRow, FlexColumn,
 } from '@navikt/ft-ui-komponenter';
-import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { TimeLineButton, TimeLineDataContainer } from '@navikt/ft-tidslinje';
 import {
   ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriodeAndel, AlleKodeverk, BeregningsresultatPeriode,
 } from '@navikt/fp-types';
 
 import styles from './tilkjentYtelse.less';
+
+type WeekAndDay = {
+  id: string;
+  weeks?: number;
+  days?: number;
+};
+
+const initializeDate = (
+  dateString?: string | moment.Moment | Date,
+  dateStringFormat?: string | string[],
+  strict?: boolean,
+) => {
+  const supportedFormats = dateStringFormat || ['YYYY-MM-DD', 'DD.MM.YYYY'];
+  return moment(dateString, supportedFormats, strict).utc(true).startOf('day');
+};
+
+const checkDays = (weeks?: number, days?: number): WeekAndDay => {
+  const weeksDaysObj = {
+    weeks,
+    days,
+  };
+
+  let id = 'UttakInfoPanel.AntallFlereDagerOgFlereUker';
+
+  if (weeks === undefined && days === undefined) {
+    id = 'UttakInfoPanel.TidenesEnde';
+  }
+
+  if (days === 0) {
+    id = weeks === 1 ? 'UttakInfoPanel.AntallNullDagerOgEnUke' : 'UttakInfoPanel.AntallNullDagerOgFlereUker';
+  }
+
+  if (weeks === 0) {
+    id = days === 1 ? 'UttakInfoPanel.AntallEnDagOgNullUker' : 'UttakInfoPanel.AntallFlereDagerOgNullUker';
+  }
+
+  if (days === 1) {
+    id = weeks === 1 ? 'UttakInfoPanel.AntallEnDagOgEnUke' : 'UttakInfoPanel.AntallEnDagOgFlereUker';
+  }
+
+  if (weeks === 1) {
+    id = 'UttakInfoPanel.AntallFlereDagerOgEnUke';
+  }
+
+  return {
+    id,
+    ...weeksDaysObj,
+  };
+};
+
+const calcDays = (fraDatoPeriode: string, tilDatoPeriode: string, notWeekends = true): number => {
+  const fraDato = initializeDate(fraDatoPeriode, ISO_DATE_FORMAT);
+  const tilDato = initializeDate(tilDatoPeriode, ISO_DATE_FORMAT);
+  let numOfDays;
+
+  if (notWeekends) {
+    let count = tilDato.diff(fraDato, 'days');
+    let date = initializeDate(fraDatoPeriode, ISO_DATE_FORMAT);
+    numOfDays = date.isoWeekday() !== 6 && date.isoWeekday() !== 7 ? 1 : 0;
+
+    while (count > 0) {
+      date = date.add(1, 'days');
+
+      if (date.isoWeekday() !== 6 && date.isoWeekday() !== 7) {
+        numOfDays += 1;
+      }
+
+      count -= 1;
+    }
+  } else {
+    // Vi legger til én dag for å få med startdato i perioden
+    numOfDays = tilDato.diff(fraDato, 'days') + 1;
+  }
+
+  return numOfDays;
+};
+
+export const calcDaysAndWeeks = (fraDatoPeriode: string, tilDatoPeriode: string): WeekAndDay => {
+  const numOfDays = calcDays(fraDatoPeriode, tilDatoPeriode);
+
+  const weeks = Math.floor(numOfDays / 5);
+  const days = numOfDays % 5;
+
+  return checkDays(weeks, days);
+};
 
 export type PeriodeMedId = BeregningsresultatPeriode & { id: number };
 
@@ -183,34 +268,34 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
       </FlexContainer>
       <VerticalSpacer sixteenPx />
       {selectedItemData.andeler.length !== 0
-          && (
-            <Table headerTextCodes={tableHeaderTextCodes(isSoknadSvangerskapspenger)}>
-              {selectedItemData.andeler.map((andel, index: number) => (
-                <TableRow key={`index${index + 1}`}>
-                  <TableColumn>{findAndelsnavn(andel, getKodeverknavn, arbeidsgiverOpplysningerPerId)}</TableColumn>
-                  {!isSoknadSvangerskapspenger && (
-                    <TableColumn><BodyShort size="small">{uttakPeriodeNavn[andel.uttak.stonadskontoType]}</BodyShort></TableColumn>
-                  )}
-                  {!isSoknadSvangerskapspenger && (
-                    <TableColumn><BodyShort size="small">{getGradering(andel)}</BodyShort></TableColumn>
-                  )}
-                  <TableColumn><BodyShort size="small">{andel.utbetalingsgrad ? andel.utbetalingsgrad : ''}</BodyShort></TableColumn>
-                  <TableColumn>
-                    <BodyShort size="small">
-                      {andel.aktivitetStatus === aktivitetStatus.ARBEIDSTAKER && andel.refusjon ? andel.refusjon : ''}
-                    </BodyShort>
-                  </TableColumn>
-                  <TableColumn><BodyShort size="small">{andel.tilSoker ? andel.tilSoker : ''}</BodyShort></TableColumn>
-                  <TableColumn>
-                    <BodyShort size="small">
-                      {andel.sisteUtbetalingsdato ? moment(andel.sisteUtbetalingsdato)
-                        .format(DDMMYYYY_DATE_FORMAT) : ''}
-                    </BodyShort>
-                  </TableColumn>
-                </TableRow>
-              ))}
-            </Table>
-          )}
+        && (
+          <Table headerTextCodes={tableHeaderTextCodes(isSoknadSvangerskapspenger)}>
+            {selectedItemData.andeler.map((andel, index: number) => (
+              <TableRow key={`index${index + 1}`}>
+                <TableColumn>{findAndelsnavn(andel, getKodeverknavn, arbeidsgiverOpplysningerPerId)}</TableColumn>
+                {!isSoknadSvangerskapspenger && (
+                  <TableColumn><BodyShort size="small">{uttakPeriodeNavn[andel.uttak.stonadskontoType]}</BodyShort></TableColumn>
+                )}
+                {!isSoknadSvangerskapspenger && (
+                  <TableColumn><BodyShort size="small">{getGradering(andel)}</BodyShort></TableColumn>
+                )}
+                <TableColumn><BodyShort size="small">{andel.utbetalingsgrad ? andel.utbetalingsgrad : ''}</BodyShort></TableColumn>
+                <TableColumn>
+                  <BodyShort size="small">
+                    {andel.aktivitetStatus === aktivitetStatus.ARBEIDSTAKER && andel.refusjon ? andel.refusjon : ''}
+                  </BodyShort>
+                </TableColumn>
+                <TableColumn><BodyShort size="small">{andel.tilSoker ? andel.tilSoker : ''}</BodyShort></TableColumn>
+                <TableColumn>
+                  <BodyShort size="small">
+                    {andel.sisteUtbetalingsdato ? moment(andel.sisteUtbetalingsdato)
+                      .format(DDMMYYYY_DATE_FORMAT) : ''}
+                  </BodyShort>
+                </TableColumn>
+              </TableRow>
+            ))}
+          </Table>
+        )}
     </TimeLineDataContainer>
   );
 };
