@@ -15,14 +15,17 @@ interface OwnProps {
   besteMåneder: Månedsgrunnlag[];
 }
 
-const erBeløpSatt = (beløp: number): boolean => !!beløp || beløp === 0;
+const erBeløpSatt = (beløp?: number): boolean => !!beløp || beløp === 0;
 
-const finnGjeldendeBeløp = (andel: BeregningsgrunnlagAndel): number => (erBeløpSatt(andel.overstyrtPrAar) ? andel.overstyrtPrAar : andel.beregnetPrAar);
+const hentBeløpEller0 = (beløp?: number): number => (beløp || 0);
 
-const finnKap8Beregning = (periode: BeregningsgrunnlagPeriodeProp): number => periode.beregningsgrunnlagPrStatusOgAndel
-  .map((andel) => finnGjeldendeBeløp(andel))
-  .reduce((i1, i2) => i1 + i2, 0);
+const finnGjeldendeBeløp = (andel: BeregningsgrunnlagAndel): number => (erBeløpSatt(andel.overstyrtPrAar) ? hentBeløpEller0(andel.overstyrtPrAar) : hentBeløpEller0(andel.beregnetPrAar));
 
+const finnKap8Beregning = (periode: BeregningsgrunnlagPeriodeProp): number => {
+  const andeler = periode.beregningsgrunnlagPrStatusOgAndel || [];
+  return andeler.map((andel) => finnGjeldendeBeløp(andel))
+    .reduce((i1, i2) => i1 + i2, 0);
+};
 const finnBesteberegnet = (besteMåneder : Månedsgrunnlag[]): number => (
   besteMåneder.flatMap((måned) => måned.inntekter).map(({ inntekt }) => inntekt).reduce((i1, i2) => i1 + i2, 0) * 2
 );
