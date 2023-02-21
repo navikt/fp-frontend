@@ -71,9 +71,7 @@ const lagDefaultVerdier = (
 
   let arbeidsgiverId;
 
-  if (!!aRef && aOpplysninger) {
-    arbeidsgiverId = `${valgtPeriode.arbeidsforhold.arbeidsgiverReferanse}-${valgtPeriode.arbeidsforhold.arbeidType}`;
-  } else if (valgtPeriode.arbeidsforhold && !aRef) {
+  if ((!!aRef && aOpplysninger) || (valgtPeriode.arbeidsforhold && !aRef)) {
     arbeidsgiverId = `${valgtPeriode.arbeidsforhold.arbeidsgiverReferanse}-${valgtPeriode.arbeidsforhold.arbeidType}`;
   }
 

@@ -1,15 +1,15 @@
 const path = require('path');
 const shell = require('shelljs');
 
-const generateRow = (package) => `
+const generateRow = (packageJson) => `
   <div class="box">
-    <a href="${path.join(package.name, 'index.html')}" class="package-row" target="blank">
+    <a href="${path.join(packageJson.name, 'index.html')}" class="package-row" target="blank">
       <div class="title">
-        ${package.name}
+        ${packageJson.name}
       </div>
     </a>
     <div class="description">
-      Beskrivelse: ${package.description || '-- Mangler --'}
+      Beskrivelse: ${packageJson.description || '-- Mangler --'}
     </div>
   </div>
 `;
