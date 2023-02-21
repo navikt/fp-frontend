@@ -56,7 +56,7 @@ describe('<FaktaDefaultInitPanel>', () => {
         requestApi={requestMock}
         skalPanelVisesIMeny={() => true}
         renderPanel={() => <div>Dette er et panel</div>}
-        faktaPanelKode={FaktaPanelCode.AKTIVITETSKRAV}
+        faktaPanelKode={FaktaPanelCode.UTTAK}
         faktaPanelMenyTekst="Dette er en tekst"
       />,
     );

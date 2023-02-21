@@ -79,7 +79,7 @@ const Template: Story<{
 export const AksjonspunktMedUavklartePerioder = Template.bind({});
 AksjonspunktMedUavklartePerioder.args = {
   aksjonspunkter: [{
-    definisjon: AksjonspunktCode.KONTROLLER_AKTIVITETSKRAV,
+    definisjon: AksjonspunktCode.VURDER_UTTAK_DOKUMENTASJON,
     status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
@@ -93,7 +93,7 @@ AksjonspunktMedUavklartePerioder.args = {
 export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet = Template.bind({});
 AksjonspunktSomErBekreftetOgBehandlingAvsluttet.args = {
   aksjonspunkter: [{
-    definisjon: AksjonspunktCode.KONTROLLER_AKTIVITETSKRAV,
+    definisjon: AksjonspunktCode.VURDER_UTTAK_DOKUMENTASJON,
     status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette er en begrunnelse',
     kanLoses: false,
@@ -113,7 +113,7 @@ AksjonspunktSomErBekreftetOgBehandlingAvsluttet.args = {
 export const AksjonspunktErBekreftetMenBehandlingErÅpen = Template.bind({});
 AksjonspunktErBekreftetMenBehandlingErÅpen.args = {
   aksjonspunkter: [{
-    definisjon: AksjonspunktCode.KONTROLLER_AKTIVITETSKRAV,
+    definisjon: AksjonspunktCode.VURDER_UTTAK_DOKUMENTASJON,
     status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette er en begrunnelse',
     kanLoses: true,

@@ -8,7 +8,6 @@ import OverstyringUtenlandssakMarkeringAp from './fakta/OverstyringUtenlandssakM
 import AvklarAktivitetsPerioderAp from './fakta/AvklarAktivitetsPerioderAp';
 import AvklarFaktaForForeldreansvarAksjonspunktAp from './fakta/AvklarFaktaForForeldreansvarAksjonspunktAp';
 import AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp from './fakta/AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp';
-import KontrollerAktivitetskravAp from './fakta/KontrollerAktivitetskravAp';
 import BekreftMannAdoptererAksjonspunktAp from './fakta/BekreftMannAdoptererAksjonspunktAp';
 import BekreftEktefelleAksjonspunktAp from './fakta/BekreftEktefelleAksjonspunktAp';
 import BekreftDokumentertDatoAksjonspunktAp from './fakta/BekreftDokumentertDatoAksjonspunktAp';
@@ -21,7 +20,6 @@ import BekreftLovligOppholdVurderingAp from './fakta/BekreftLovligOppholdVurderi
 import AvklarFortsattMedlemskapAp from './fakta/AvklarFortsattMedlemskapAp';
 import BekreftTerminbekreftelseAp from './fakta/BekreftTerminbekreftelseAp';
 import SjekkManglendeFodselAp from './fakta/SjekkManglendeFodselAp';
-import FaktaUttakAp from './fakta/FaktaUttakAp';
 import BekreftUttaksperioderAp from './fakta/BekreftUttaksperioderAp';
 import AvklarAnnenforelderHarRettAp from './fakta/AvklarAnnenforelderHarRettAp';
 import VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp from './fakta/VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp';
@@ -36,7 +34,6 @@ export type FaktaAksjonspunkt = AvklarVergeAp
   | MerkOpptjeningUtlandAp
   | OverstyringUtenlandssakMarkeringAp
   | AvklarAktivitetsPerioderAp
-  | KontrollerAktivitetskravAp
   | BekreftEktefelleAksjonspunktAp
   | BekreftDokumentertDatoAksjonspunktAp
   | BekreftMannAdoptererAksjonspunktAp
@@ -51,7 +48,6 @@ export type FaktaAksjonspunkt = AvklarVergeAp
   | BekreftTerminbekreftelseAp
   | SjekkManglendeFodselAp
   | AvklarAnnenforelderHarRettAp
-  | FaktaUttakAp
   | BekreftUttaksperioderAp
   | VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp
   | OverstyringAvklarStartdatoForPeriodenAp

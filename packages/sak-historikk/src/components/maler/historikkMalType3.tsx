@@ -48,12 +48,9 @@ const AksjonspunktCodeToTextCode = {
   [AksjonspunktCode.OVERSTYR_SOKNADSFRISTVILKAR]: 'Historikk.soknadsfristvilkar',
   [AksjonspunktCode.OVERSTYR_BEREGNING]: 'Historikk.beregning',
   [AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER]: 'Historikk.uttak',
-  [AksjonspunktCode.MANUELL_AVKLAR_FAKTA_UTTAK]: 'Historikk.FaktaUttak',
-  [AksjonspunktCode.OVERSTYR_AVKLAR_FAKTA_UTTAK]: 'Historikk.FaktaUttak',
   [AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG]:
     'Historikk.Aleneomsorg.ApplicationInformation',
   [AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]: 'Historikk.Omsorg.ApplicationInformation',
-  [AksjonspunktCode.AVKLAR_UTTAK]: 'Historikk.FaktaUttak',
   [AksjonspunktCode.FASTSETT_UTTAKPERIODER]: 'Historikk.Fastsett.Manuelt',
   [AksjonspunktCode.KONTROLLER_OPPLYSNINGER_OM_DØD]: 'Historikk.OpplysningerOmDod',
   [AksjonspunktCode.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST]: 'Historikk.OpplysningerOmSoknadsfrist',
@@ -76,7 +73,6 @@ const AksjonspunktCodeToTextCode = {
     'Historikk.BeregningsgrunnlagManueltSNNYIArbeidslivet',
   [AksjonspunktCode.VURDER_FAKTA_FOR_ATFL_SN]: 'Historikk.VurderFaktaATFLSN',
   [AksjonspunktCode.FORESLA_VEDTAK]: 'Historikk.Vedtak.Fritekstbrev',
-  [AksjonspunktCode.AVKLAR_FØRSTE_UTTAKSDATO]: 'Historikk.FaktaUttak.ForsteUttakDato',
   [AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT]: 'Historikk.FaktaUttak.VurderAnnenForelder',
 } as Record<string, string>;
 
