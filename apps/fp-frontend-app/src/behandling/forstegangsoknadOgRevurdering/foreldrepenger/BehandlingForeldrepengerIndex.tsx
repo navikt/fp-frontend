@@ -27,10 +27,8 @@ import MedlemskapsvilkaretFaktaInitPanel from '../paneler/fakta/Medlemskapsvilka
 import OpptjeningsvilkaretFaktaInitPanel from '../paneler/fakta/OpptjeningsvilkaretFaktaInitPanel';
 import BeregningFaktaInitPanel from '../paneler/fakta/BeregningFaktaInitPanel';
 import OmsorgFaktaInitPanel from './faktaPaneler/OmsorgFaktaInitPanel';
-import UttakFaktaLegacyInitPanel from './faktaPaneler/UttakFaktaLegacyInitPanel';
 import UttakFaktaInitPanel from './faktaPaneler/UttakFaktaInitPanel';
 import PermisjonFaktaInitPanel from '../paneler/fakta/PermisjonFaktaInitPanel';
-import AktivitetskravFaktaInitPanel from './faktaPaneler/AktivitetskravFaktaInitPanel';
 import VarselProsessStegInitPanel from '../paneler/prosess/VarselProsessStegInitPanel';
 import OpplysningspliktProsessStegInitPanel from '../paneler/prosess/OpplysningspliktProsessStegInitPanel';
 import InngangsvilkarFpProsessStegInitPanel from './prosessPaneler/InngangsvilkarFpProsessStegInitPanel';
@@ -140,8 +138,6 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
               <OmsorgOgRettFaktaInitPanel {...props} personoversikt={personoversikt} />
               <OmsorgFaktaInitPanel {...props} personoversikt={personoversikt} />
               <UttakFaktaInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} fagsak={fagsak} />
-              <UttakFaktaLegacyInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} personoversikt={personoversikt} />
-              <AktivitetskravFaktaInitPanel {...props} />
               <UttakDokumentasjonFaktaInitPanel {...props} />
             </>
           )}

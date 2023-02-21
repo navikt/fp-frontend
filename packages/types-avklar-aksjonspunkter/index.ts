@@ -2,7 +2,6 @@ export { default as FaktaAksjonspunkt } from './src/FaktaAksjonspunkt';
 export { default as AvklarVergeAp } from './src/fakta/AvklarVergeAp';
 export { default as MerkOpptjeningUtlandAp } from './src/fakta/MerkOpptjeningUtlandAp';
 export { default as OverstyringUtenlandssakMarkeringAp } from './src/fakta/OverstyringUtenlandssakMarkeringAp';
-export { default as KontrollerAktivitetskravAp } from './src/fakta/KontrollerAktivitetskravAp';
 export { default as BekreftEktefelleAksjonspunktAp } from './src/fakta/BekreftEktefelleAksjonspunktAp';
 export { default as BekreftDokumentertDatoAksjonspunktAp } from './src/fakta/BekreftDokumentertDatoAksjonspunktAp';
 export { default as BekreftSvangerskapspengerAp } from './src/fakta/BekreftSvangerskapspengerAp';
@@ -17,7 +16,6 @@ export { default as AvklarFortsattMedlemskapAp } from './src/fakta/AvklarFortsat
 export { default as BekreftTerminbekreftelseAp } from './src/fakta/BekreftTerminbekreftelseAp';
 export { default as SjekkManglendeFodselAp } from './src/fakta/SjekkManglendeFodselAp';
 export { default as AvklarAnnenforelderHarRettAp } from './src/fakta/AvklarAnnenforelderHarRettAp';
-export { default as FaktaUttakAp } from './src/fakta/FaktaUttakAp';
 export { default as BekreftUttaksperioderAp } from './src/fakta/BekreftUttaksperioderAp';
 export { default as VurderArbeidsforholdPermisjonAp } from './src/fakta/VurderArbeidsforholdPermisjonAp';
 export { default as OverstyringAvklarStartdatoForPeriodenAp } from './src/fakta/OverstyringAvklarStartdatoForPeriodenAp';

@@ -29,7 +29,6 @@ import '@navikt/ft-tidslinje/dist/style.css';
 import '@navikt/ft-sak-infosider/dist/style.css';
 
 import '@navikt/fp-fakta-adopsjon/dist/style.css';
-import '@navikt/fp-fakta-aktivitetskrav/dist/style.css';
 import '@navikt/fp-fakta-arbeid-og-inntekt/dist/style.css';
 import '@navikt/fp-fakta-arbeidsforhold/dist/style.css';
 import '@navikt/fp-fakta-besteberegning/dist/style.css';

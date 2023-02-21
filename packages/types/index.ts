@@ -79,7 +79,6 @@ export type { default as Risikoklassifisering } from './src/risikoklassifisering
 export type { default as AnkeVurdering } from './src/ankeVurderingTsType';
 export type { default as KlageVurdering, KlageVurderingResultat } from './src/klageVurderingTsType';
 export type { default as Innsyn, InnsynDokument, InnsynVedtaksdokument } from './src/innsynTsType';
-export type { default as UttakKontrollerFaktaPerioderWrapper, UttakKontrollerFaktaPerioderLegacy } from './src/uttakKontrollerFaktaPerioderLegacyTsType';
 export type {
   default as Opptjening, OpptjeningAktivitet, FastsattOpptjening, FastsattOpptjeningAktivitet,
 } from './src/opptjeningTsType';
