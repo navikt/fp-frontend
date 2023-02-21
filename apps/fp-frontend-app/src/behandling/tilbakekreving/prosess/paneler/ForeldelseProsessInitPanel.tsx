@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { Aksjonspunkt } from '@navikt/ft-types';
-import { ForeldelseAksjonspunktCodes, VurderForeldelseAp } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
+import ProsessForeldelse, { ForeldelseAksjonspunktCodes, VurderForeldelseAp } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
@@ -9,16 +9,6 @@ import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
 import getAlleMerknaderFraBeslutter from '../../felles/util/getAlleMerknaderFraBeslutter';
-import DynamicLoader from '../../../felles/DynamicLoader';
-
-// TODO Denne burde ligga sånn til at den kun blir importert når denne pakka dynamisk blir importert
-import '@navikt/ft-prosess-tilbakekreving-foreldelse/dist/style.css';
-
-const ProsessForeldelse = React.lazy(() => import('@navikt/ft-prosess-tilbakekreving-foreldelse'));
-// eslint-disable-next-line import/no-unresolved
-const ProsessForeldelseMF = process.env.NODE_ENV !== 'development' ? undefined
-  // @ts-ignore
-  : () => import('ft_prosess_tilbakekreving_foreldelse/ForeldelseProsessIndex'); // eslint-disable-line import/no-unresolved
 
 interface OwnProps {
   behandling: Behandling;
@@ -63,9 +53,7 @@ const ForeldelseProsessInitPanel: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <DynamicLoader<React.ComponentProps<typeof ProsessForeldelse>>
-      packageCompFn={() => import('@navikt/ft-prosess-tilbakekreving-foreldelse')}
-      federatedCompFn={ProsessForeldelseMF}
+    <ProsessForeldelse
       behandling={behandling}
       perioderForeldelse={perioderForeldelse}
       submitCallback={bekreftAksjonspunkter}
