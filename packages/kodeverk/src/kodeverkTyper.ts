@@ -29,7 +29,6 @@ enum KodeverkType {
   UTTAK_PERIODE_TYPE = 'UttakPeriodeType',
   REVURDERING_VARSLING_ÅRSAK = 'RevurderingVarslingÅrsak',
   MANUELL_BEHANDLING_AARSAK = 'ManuellBehandlingÅrsak',
-  UTTAK_PERIODE_VURDERING_TYPE = 'UttakPeriodeVurderingType',
   PERIODE_RESULTAT_AARSAK = 'PeriodeResultatÅrsak',
   INNTEKTSKATEGORI = 'Inntektskategori',
   BEREGNINGSGRUNNLAG_ANDELTYPER = 'BeregningsgrunnlagAndeltype',
