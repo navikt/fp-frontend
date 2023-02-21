@@ -9,20 +9,10 @@ import { ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } from '@navikt/fp-ty
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
-import { ProsessBeregningsgrunnlagAvklaringsbehovCode } from '@navikt/ft-prosess-beregningsgrunnlag';
+import ProsessBeregningsgrunnlag, { ProsessBeregningsgrunnlagAvklaringsbehovCode } from '@navikt/ft-prosess-beregningsgrunnlag';
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
-import DynamicLoader from '../../../felles/DynamicLoader';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
-
-// TODO Denne burde ligga sånn til at den kun blir importert når denne pakka dynamisk blir importert
-import '@navikt/ft-prosess-beregningsgrunnlag/dist/style.css';
-
-const ProsessBeregningsgrunnlag = React.lazy(() => import('@navikt/ft-prosess-beregningsgrunnlag'));
-// eslint-disable-next-line import/no-unresolved
-const ProsessBeregningsgrunnlagMF = process.env.NODE_ENV !== 'development' ? undefined
-  // @ts-ignore
-  : () => import('ft_prosess_beregningsgrunnlag/ProsessBeregningsgrunnlag'); // eslint-disable-line import/no-unresolved
 
 const mapBGKodeTilFpsakKode = (bgKode: string): string => {
   switch (bgKode) {
@@ -116,9 +106,7 @@ const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & Prose
     skalPanelVisesIMeny={() => true}
     renderPanel={(data) => (
       // @ts-ignore TODO Ikkje send med ned heile kodeverket
-      <DynamicLoader<React.ComponentProps<typeof ProsessBeregningsgrunnlag>>
-        packageCompFn={() => import('@navikt/ft-prosess-beregningsgrunnlag')}
-        federatedCompFn={ProsessBeregningsgrunnlagMF}
+      <ProsessBeregningsgrunnlag
         {...data}
         beregningsgrunnlagsvilkar={lagBGVilkar(data.vilkar, data.beregningsgrunnlag)}
         beregningsgrunnlagListe={lagFormatertBG(data.beregningsgrunnlag)}

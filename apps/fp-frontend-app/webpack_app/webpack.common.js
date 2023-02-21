@@ -93,7 +93,7 @@ const config = {
           }, {
             loader: 'css-loader',
           }],
-        include: [PACKAGES_DIR],
+        exclude: [APP_DIR, CORE_DIR],
       }, {
         test: /\.(less)?$/,
         use: [
@@ -154,7 +154,6 @@ const config = {
         test: /\.(js?)$/,
         enforce: 'pre',
         use: ['source-map-loader'],
-        include: [CORE_DIR, PACKAGES_DIR],
       }],
   },
 

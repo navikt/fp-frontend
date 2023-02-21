@@ -12,20 +12,10 @@ import {
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { Behandling, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { VilkarsVurderingAp, ForeldelseAksjonspunktCodes } from '@navikt/ft-prosess-tilbakekreving';
+import ProsessTilbakekreving, { VilkarsVurderingAp, ForeldelseAksjonspunktCodes } from '@navikt/ft-prosess-tilbakekreving';
 
-import DynamicLoader from '../../../felles/DynamicLoader';
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
 import getAlleMerknaderFraBeslutter from '../../felles/util/getAlleMerknaderFraBeslutter';
-
-// TODO Denne burde ligga sånn til at den kun blir importert når denne pakka dynamisk blir importert
-import '@navikt/ft-prosess-tilbakekreving/dist/style.css';
-
-const ProsessTilbakekreving = React.lazy(() => import('@navikt/ft-prosess-tilbakekreving'));
-// eslint-disable-next-line import/no-unresolved
-const ProsessTilbakekrveingMF = process.env.NODE_ENV !== 'development' ? undefined
-  // @ts-ignore
-  : () => import('ft_prosess_tilbakekreving/TilbakekrevingProsessIndex'); // eslint-disable-line import/no-unresolved
 
 const ENDEPUNKTER_PANEL_DATA = [
   TilbakekrevingBehandlingApiKeys.VILKARVURDERINGSPERIODER,
@@ -86,9 +76,7 @@ const TilbakekrevingProsessInitPanel: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <DynamicLoader<React.ComponentProps<typeof ProsessTilbakekreving>>
-      packageCompFn={() => import('@navikt/ft-prosess-tilbakekreving')}
-      federatedCompFn={ProsessTilbakekrveingMF}
+    <ProsessTilbakekreving
       behandling={behandling}
       perioderForeldelse={initData.perioderForeldelse}
       vilkarvurderingsperioder={initData.vilkarvurderingsperioder}
