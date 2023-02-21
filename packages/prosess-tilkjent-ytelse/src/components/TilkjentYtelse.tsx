@@ -1,5 +1,5 @@
 import React, { Component, RefObject } from 'react';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { IntlShape } from 'react-intl';
 
 import { calcDaysAndWeeks, DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -20,11 +20,11 @@ type NyPeriode = {
   className: string;
   group: number;
   start: Date;
-  end: moment.Moment;
+  end: dayjs.Dayjs;
   title: string;
 } & PeriodeMedId;
 
-const parseDateString = (dateString: Date | string): Date => moment(dateString, ISO_DATE_FORMAT)
+const parseDateString = (dateString: Date | string): Date => dayjs(dateString, ISO_DATE_FORMAT)
   .toDate();
 
 const getOptions = (nyePerioder: NyPeriode[]): any => {
@@ -32,14 +32,14 @@ const getOptions = (nyePerioder: NyPeriode[]): any => {
   const lastPeriod = nyePerioder[nyePerioder.length - 1];
 
   return {
-    end: moment(lastPeriod.tom).add(2, 'days').toDate(),
-    locale: moment.locale('nb'),
+    end: dayjs(lastPeriod.tom).add(2, 'days').toDate(),
+    locale: dayjs.locale('nb'),
     margin: { item: 10 },
-    moment,
+    dayjs,
     orientation: { axis: 'top' },
     showCurrentTime: false,
     stack: false,
-    start: moment(firstPeriod.fom).subtract(1, 'days').toDate(),
+    start: dayjs(firstPeriod.fom).subtract(1, 'days').toDate(),
     tooltip: { followMouse: true },
     width: '100%',
     zoomMax: 1000 * 60 * 60 * 24 * 31 * 40,
@@ -60,8 +60,8 @@ const getStatusForPeriode = (periode: PeriodeMedId): string => {
 
 const createTooltipContent = (periodeType: string, intl: IntlShape, item: PeriodeMedId): string => (`
   <p>
-    ${moment(item.fom)
-    .format(DDMMYY_DATE_FORMAT)} - ${moment(item.tom)
+    ${dayjs(item.fom)
+    .format(DDMMYY_DATE_FORMAT)} - ${dayjs(item.tom)
     .format(DDMMYY_DATE_FORMAT)}
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
      ${intl.formatMessage({ id: calcDaysAndWeeks(item.fom, item.tom).id },
@@ -108,7 +108,7 @@ const addClassNameGroupIdToPerioder = (perioder: PeriodeMedId[], intl: IntlShape
       className: status,
       group: 1,
       start: parseDateString(item.fom),
-      end: moment(item.tom).add(1, 'days'),
+      end: dayjs(item.tom).add(1, 'days'),
       title: createTooltipContent(findKorrektLabelForKvote(item.andeler[0].uttak.stonadskontoType), intl, item),
     };
     perioderMedClassName.push(copyOfItem);
@@ -119,7 +119,7 @@ const addClassNameGroupIdToPerioder = (perioder: PeriodeMedId[], intl: IntlShape
 const getCustomTimes = (soknadDate: string, familiehendelseDate: Date, lastPeriod: PeriodeMedId) => ({
   soknad: parseDateString(soknadDate),
   fodsel: parseDateString(familiehendelseDate),
-  lastDateInSoknad: lastPeriod ? parseDateString(lastPeriod.tom) : parseDateString(moment().toDate()),
+  lastDateInSoknad: lastPeriod ? parseDateString(lastPeriod.tom) : parseDateString(dayjs().toDate()),
 });
 
 interface OwnProps {

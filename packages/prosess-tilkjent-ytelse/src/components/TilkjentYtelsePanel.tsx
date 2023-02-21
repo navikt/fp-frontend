@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import moment from 'moment/moment';
 import { FormattedMessage, useIntl } from 'react-intl';
+import dayjs from 'dayjs';
 import { Heading } from '@navikt/ds-react';
 
 import { fagsakYtelseType, soknadType, AksjonspunktCode } from '@navikt/fp-kodeverk';
@@ -34,7 +34,7 @@ const formatPerioder = (perioder: BeregningsresultatPeriode[]): PeriodeMedId[] =
 
 const groups = [{ id: 1, content: '' }, { id: 2, content: '' }];
 
-const parseDateString = (dateString: string): Date => moment(dateString, ISO_DATE_FORMAT).toDate();
+const parseDateString = (dateString: string): Date => dayjs(dateString, ISO_DATE_FORMAT).toDate();
 
 const getFamilieHendelseDato = (familieHendelseSamling: FamilieHendelseSamling): Date => {
   const familieHendelse = familieHendelseSamling.gjeldende || familieHendelseSamling.oppgitt;

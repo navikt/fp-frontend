@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
+import dayjs from 'dayjs';
 import { FormattedMessage } from 'react-intl';
-import moment from 'moment';
 import { Label, BodyShort } from '@navikt/ds-react';
 
 import { ArbeidsgiverOpplysningerPerId, FeriepengegrunnlagAndel, AlleKodeverk } from '@navikt/fp-types';
@@ -20,7 +20,7 @@ const lagVisningsnavn = (ferieAndel: FeriepengegrunnlagAndel,
   if (agOpplysning) {
     if (agOpplysning.erPrivatPerson) {
       return agOpplysning.fødselsdato
-        ? `${agOpplysning.navn} (${moment(agOpplysning.fødselsdato).format(DDMMYYYY_DATE_FORMAT)})`
+        ? `${agOpplysning.navn} (${dayjs(agOpplysning.fødselsdato).format(DDMMYYYY_DATE_FORMAT)})`
         : agOpplysning.navn;
     }
     return agOpplysning.identifikator

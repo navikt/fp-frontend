@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { Label, BodyShort } from '@navikt/ds-react';
 
 import {
@@ -148,10 +148,10 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
                 <FormattedMessage
                   id="TilkjentYtelse.PeriodeData.Periode"
                   values={{
-                    fomVerdi: moment(selectedItemStartDate)
+                    fomVerdi: dayjs(selectedItemStartDate)
                       .format(DDMMYYYY_DATE_FORMAT)
                       .toString(),
-                    tomVerdi: moment(selectedItemEndDate)
+                    tomVerdi: dayjs(selectedItemEndDate)
                       .format(DDMMYYYY_DATE_FORMAT)
                       .toString(),
                   }}
@@ -203,7 +203,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
                   <TableColumn><BodyShort size="small">{andel.tilSoker ? andel.tilSoker : ''}</BodyShort></TableColumn>
                   <TableColumn>
                     <BodyShort size="small">
-                      {andel.sisteUtbetalingsdato ? moment(andel.sisteUtbetalingsdato)
+                      {andel.sisteUtbetalingsdato ? dayjs(andel.sisteUtbetalingsdato)
                         .format(DDMMYYYY_DATE_FORMAT) : ''}
                     </BodyShort>
                   </TableColumn>
