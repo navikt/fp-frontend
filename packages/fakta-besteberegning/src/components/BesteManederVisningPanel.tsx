@@ -1,6 +1,7 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
-import moment from 'moment';
+import dayjs from 'dayjs';
+import norskFormat from 'dayjs/locale/nb';
 import { Label, BodyShort } from '@navikt/ds-react';
 import {
   FlexColumn,
@@ -18,28 +19,14 @@ import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import styles from './besteManederVisningPanel.less';
 
-const månedsnavn = {
-  0: 'Januar',
-  1: 'Februar',
-  2: 'Mars',
-  3: 'April',
-  4: 'Mai',
-  5: 'Juni',
-  6: 'Juli',
-  7: 'August',
-  8: 'September',
-  9: 'Oktober',
-  10: 'November',
-  11: 'Desember',
-};
-
-const lagMånedVisning = (dato: moment.Moment): string => {
+const lagMånedVisning = (dato: dayjs.Dayjs): string => {
   const år = dato.year();
-  const måned = dato.month();
-  return `${månedsnavn[måned]} - ${år}`;
+  const maanedNavn = dato.locale(norskFormat).format('MMMM');
+  const formattedMaaned = maanedNavn.charAt(0).toUpperCase() + maanedNavn.slice(1);
+  return `${formattedMaaned} - ${år}`;
 };
 
-const formatDate = (date: string): string => (date ? lagMånedVisning(moment(date, ISO_DATE_FORMAT)) : '-');
+const formatDate = (date: string): string => (date ? lagMånedVisning(dayjs(date, ISO_DATE_FORMAT)) : '-');
 
 interface BesteMånederProps {
   besteMåneder: Månedsgrunnlag[];
@@ -68,13 +55,13 @@ interface InntekttabellProps {
 
 const lagVisningsNavn = (inntekt: BesteberegningInntekt, arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId,
   getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType) => string): string => {
-  const agOpplysning = arbeidsgiverOpplysninger[inntekt.arbeidsgiverId];
+  const agOpplysning = inntekt.arbeidsgiverId ? arbeidsgiverOpplysninger[inntekt.arbeidsgiverId] : undefined;
   if (!agOpplysning) {
     return getKodeverkNavn(inntekt.opptjeningAktivitetType, KodeverkType.OPPTJENING_AKTIVITET_TYPE);
   }
   if (agOpplysning.erPrivatPerson) {
     return agOpplysning.fødselsdato
-      ? `${agOpplysning.navn} (${moment(agOpplysning.fødselsdato).format(DDMMYYYY_DATE_FORMAT)})`
+      ? `${agOpplysning.navn} (${dayjs(agOpplysning.fødselsdato).format(DDMMYYYY_DATE_FORMAT)})`
       : agOpplysning.navn;
   }
   return `${agOpplysning.navn} (${agOpplysning.identifikator})`;
@@ -119,8 +106,8 @@ const Inntekttabell: FunctionComponent<InntekttabellProps> = ({
   arbeidsgiverOpplysninger,
   getKodeverkNavn,
 }) => {
-  const rows = [];
-  rows.push(lagInntektRader(inntekter, arbeidsgiverOpplysninger, getKodeverkNavn));
+  const rows: ReactElement[] = [];
+  lagInntektRader(inntekter, arbeidsgiverOpplysninger, getKodeverkNavn).forEach((rad) => rows.push(rad));
   rows.push(lagSummeringsRad(inntekter, 'Inntekttabell.Sum'));
   return (
     <div>
@@ -160,7 +147,7 @@ const finnÅrsinntekt = (besteMåneder : Månedsgrunnlag[]): number => {
   return snittPrMnd * 12;
 };
 
-const sorterEtterMåned = (besteMåneder : Månedsgrunnlag[]) => [...besteMåneder].sort((a, b) => moment(a.fom).diff(moment(b.fom)));
+const sorterEtterMåned = (besteMåneder : Månedsgrunnlag[]) => [...besteMåneder].sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom)));
 
 /**
  * BesteManederVisningPanel

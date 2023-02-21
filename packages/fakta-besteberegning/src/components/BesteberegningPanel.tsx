@@ -4,7 +4,6 @@ import {
 } from '@navikt/fp-types';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
-import Behandling from '@navikt/fp-types/src/behandlingTsType';
 import BesteberegningAP
   from '@navikt/fp-types-avklar-aksjonspunkter/src/fakta/KontrollerBesteberegningAP';
 import BesteMånederVisningPanel from './BesteManederVisningPanel';
@@ -17,7 +16,6 @@ interface OwnProps {
   getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType) => string;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
-  behandling: Behandling;
   submitCallback: (aksjonspunktData: BesteberegningAP) => Promise<void>;
   submittable: boolean;
   formData?: FormValues,
@@ -35,7 +33,6 @@ const BesteberegningPanel: FunctionComponent<OwnProps> = ({
   getKodeverkNavn,
   aksjonspunkter,
   readOnly,
-  behandling,
   submitCallback,
   submittable,
   formData,
@@ -58,7 +55,6 @@ const BesteberegningPanel: FunctionComponent<OwnProps> = ({
           submitCallback={submitCallback}
           submittable={submittable}
           readOnly={readOnly}
-          venteårsak={behandling.venteArsakKode}
           formData={formData}
           setFormData={setFormData}
         />
