@@ -2353,28 +2353,6 @@
       "navn": "Frilanser, samlet aktivitet"
     }
   ],
-  "UttakPeriodeVurderingType": [
-    {
-      "kode": "PERIODE_OK_ENDRET",
-      "kodeverk": "UTTAK_PERIODE_VURDERING_TYPE",
-      "navn": "Periode er OK med endringer"
-    },
-    {
-      "kode": "PERIODE_KAN_IKKE_AVKLARES",
-      "kodeverk": "UTTAK_PERIODE_VURDERING_TYPE",
-      "navn": "Perioden kan ikke avklares"
-    },
-    {
-      "kode": "PERIODE_IKKE_VURDERT",
-      "kodeverk": "UTTAK_PERIODE_VURDERING_TYPE",
-      "navn": "Perioden er ikke vurdert"
-    },
-    {
-      "kode": "PERIODE_OK",
-      "kodeverk": "UTTAK_PERIODE_VURDERING_TYPE",
-      "navn": "Periode er OK"
-    }
-  ],
   "KlageMedholdÅrsak": [
     {
       "kode": "ULIK_VURDERING",
