@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo, useCallback } from 'react';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
-import { FeilutbetalingAksjonspunktCode } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
+import ProsessFeilutbetaling, { FeilutbetalingAksjonspunktCode } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import {
   FeilutbetalingFakta, Aksjonspunkt, FeilutbetalingAarsak,
 } from '@navikt/ft-types';
@@ -10,18 +10,8 @@ import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Behandling, AlleKodeverk, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 
-import DynamicLoader from '../../../felles/DynamicLoader';
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
 import getAlleMerknaderFraBeslutter from '../../felles/util/getAlleMerknaderFraBeslutter';
-
-// TODO Denne burde ligga sånn til at den kun blir importert når denne pakka dynamisk blir importert
-import '@navikt/ft-fakta-tilbakekreving-feilutbetaling/dist/style.css';
-
-const ProsessFeilutbetaling = React.lazy(() => import('@navikt/ft-fakta-tilbakekreving-feilutbetaling'));
-// eslint-disable-next-line import/no-unresolved
-const ProsessFeilutbetalingMF = process.env.NODE_ENV !== 'development' ? undefined
-  // @ts-ignore
-  : () => import('ft_fakta_tilbakekreving_feilutbetaling/FeilutbetalingFaktaIndex'); // eslint-disable-line import/no-unresolved
 
 const ENDEPUNKTER_INIT_DATA = [
   TilbakekrevingBehandlingApiKeys.FEILUTBETALING_FAKTA,
@@ -80,9 +70,7 @@ const FeilutbetalingFaktaInitPanel: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <DynamicLoader<React.ComponentProps<typeof ProsessFeilutbetaling>>
-      packageCompFn={() => import('@navikt/ft-fakta-tilbakekreving-feilutbetaling')}
-      federatedCompFn={ProsessFeilutbetalingMF}
+    <ProsessFeilutbetaling
       feilutbetalingFakta={initData.feilutbetalingFakta}
       feilutbetalingAarsak={initData.feilutbetalingAarsak}
       fagsakYtelseTypeKode={fagsakYtelseTypeKode}

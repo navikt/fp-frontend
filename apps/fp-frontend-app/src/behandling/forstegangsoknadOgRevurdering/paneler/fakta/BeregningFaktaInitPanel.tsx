@@ -13,20 +13,12 @@ import {
 } from '@navikt/ft-types';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
-import { FaktaBeregningAvklaringsbehovCode } from '@navikt/ft-fakta-beregning';
-import DynamicLoader from '../../../felles/DynamicLoader';
+import ProsessFaktaBeregning, { FaktaBeregningAvklaringsbehovCode } from '@navikt/ft-fakta-beregning';
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
-// TODO Denne burde ligga sånn til at den kun blir importert når denne pakka dynamisk blir importert
 import '@navikt/ft-fakta-beregning/dist/style.css';
-
-const ProsessFaktaBeregning = React.lazy(() => import('@navikt/ft-fakta-beregning'));
-
-const ProsessFaktaBeregningMF = process.env.NODE_ENV !== 'development' ? undefined
-  // @ts-ignore
-  : () => import('ft_fakta_beregning/FaktaBeregning'); // eslint-disable-line import/no-unresolved
 
 const mapBGKodeTilFpsakKode = (bgKode: string): string => {
   switch (bgKode) {
@@ -129,10 +121,7 @@ const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
     skalPanelVisesIMeny={() => props.requestApi.hasPath(BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG.name)}
     renderPanel={(data) => (
       // @ts-ignore TODO Ikkje send med ned heile kodeverket
-      <DynamicLoader<React.ComponentProps<typeof ProsessFaktaBeregning>>
-        packageCompFn={() => import('@navikt/ft-fakta-beregning')}
-        federatedCompFn={ProsessFaktaBeregningMF}
-        // @ts-ignore
+      <ProsessFaktaBeregning
         {...data}
         vilkar={lagBGVilkar(props.behandling.vilkår, data.beregningsgrunnlag)}
         beregningsgrunnlag={lagFormatertBG(data.beregningsgrunnlag)}
