@@ -89,7 +89,7 @@ const transformValues = (
 ): KontrollerFaktaPeriodeMedApMarkering => ({
   ...omitMany(values, ['arsakstype', 'arbeidsgiverId', 'harGradering', 'harSamtidigUttaksprosent']),
   arbeidsforhold: values.arbeidsgiverId ? {
-    arbeidsgiverReferanse: values.arbeidsgiverId.split('-')[0],
+    arbeidsgiverReferanse: values.arbeidsgiverId.split('-')[0] === 'null' ? null : values.arbeidsgiverId.split('-')[0],
     arbeidType: values.arbeidsgiverId.split('-')[1],
   } : undefined,
   periodeKilde: FordelingPeriodeKilde.SAKSBEHANDLER,
