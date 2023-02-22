@@ -1,9 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const webpack = require('webpack');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 
@@ -26,7 +23,6 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           rootMode: 'upward',
-          plugins: [require.resolve('react-refresh/babel')],
         },
       }, {
         test: /\.(svg)$/,
@@ -55,10 +51,6 @@ module.exports = {
       overrideConfigFile: path.resolve(__dirname, '../eslint/eslintrc.dev.js'),
       lintDirtyModulesOnly: true,
       cache: true,
-    }),
-    new ReactRefreshWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './index.html'),
     }),
     new MiniCssExtractPlugin({
       filename: 'style[name].css',
