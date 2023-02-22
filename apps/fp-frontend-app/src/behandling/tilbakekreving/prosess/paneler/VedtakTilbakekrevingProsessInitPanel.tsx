@@ -19,6 +19,8 @@ import ProsessVedtak, {
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
 import FatterVedtakStatusModal from '../../felles/komponenter/FatterVedtakStatusModal';
 
+import '@navikt/ft-prosess-tilbakekreving-vedtak/dist/style.css';
+
 const tilbakekrevingÅrsakTyperKlage = [
   BehandlingArsakType.RE_KLAGE_KA,
   BehandlingArsakType.RE_KLAGE_NFP,

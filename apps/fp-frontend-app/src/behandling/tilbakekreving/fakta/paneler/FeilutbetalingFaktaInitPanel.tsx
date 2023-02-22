@@ -13,6 +13,8 @@ import { Behandling, AlleKodeverk, AlleKodeverkTilbakekreving } from '@navikt/fp
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
 import getAlleMerknaderFraBeslutter from '../../felles/util/getAlleMerknaderFraBeslutter';
 
+import '@navikt/ft-fakta-tilbakekreving-feilutbetaling/dist/style.css';
+
 const ENDEPUNKTER_INIT_DATA = [
   TilbakekrevingBehandlingApiKeys.FEILUTBETALING_FAKTA,
   TilbakekrevingBehandlingApiKeys.FEILUTBETALING_AARSAK,
