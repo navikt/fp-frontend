@@ -3,6 +3,7 @@ const CircularDependencyPlugin = require('circular-dependency-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const ExternalTemplateRemotesPlugin = require('external-remotes-plugin');
 const webpack = require('webpack');
 const path = require('path');
@@ -62,6 +63,7 @@ const config = {
             options: {
               rootMode: 'upward',
               cacheDirectory: true,
+              plugins: isDevelopment ? [require.resolve('react-refresh/babel')] : [],
             },
           },
         ],
@@ -185,6 +187,7 @@ const config = {
       overrideConfigFile: path.resolve(__dirname, '../../../eslint/eslintrc.dev.js'),
       lintDirtyModulesOnly: true,
     }),
+    new ReactRefreshWebpackPlugin(),
   ].concat(plugins) : plugins,
 };
 
