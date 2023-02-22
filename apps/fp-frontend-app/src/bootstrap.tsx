@@ -16,11 +16,11 @@ if (app === null) {
 }
 
 const environment = window.location.hostname;
-const isDevelopment = process.env.NODE_ENV === 'development';
+const isDevelopment = import.meta.env.NODE_ENV === 'development';
 
 init({
   dsn: isDevelopment ? 'http://dev@localhost:9100/1' : 'https://d1b7de8cc42949569da03849b47d3ea1@sentry.gc.nav.no/17',
-  release: process.env.SENTRY_RELEASE || 'unknown',
+  release: import.meta.env.SENTRY_RELEASE || 'unknown',
   environment,
   integrations: [new Integrations.Breadcrumbs({ console: false })],
   beforeSend: (event: Event, hint: EventHint) => {

@@ -17,7 +17,7 @@ import useTrackRouteParam from '../app/useTrackRouteParam';
 import FagsakData from '../fagsak/FagsakData';
 import ErrorBoundary from '../app/ErrorBoundary';
 
-import styles from './behandlingSupportIndex.less';
+import styles from './behandlingSupportIndex.module.css';
 
 export const hentSynligePaneler = (behandlingTillatteOperasjoner?: BehandlingTillatteOperasjoner): string[] => Object.values(SupportTabs)
   .filter((supportPanel) => {

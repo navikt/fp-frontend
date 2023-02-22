@@ -26,7 +26,7 @@ import { useFpSakKodeverkMedNavn, useGetKodeverkFn } from '../data/useKodeverk';
 import FagsakData from '../fagsak/FagsakData';
 import ErrorBoundary from '../app/ErrorBoundary';
 
-import styles from './fagsakProfileIndex.less';
+import styles from './fagsakProfileIndex.module.css';
 
 import '@navikt/ft-sak-behandling-velger/dist/style.css';
 

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import MediaQuery from 'react-responsive';
 
-import styles from './fagsakGrid.less';
+import styles from './fagsakGrid.module.css';
 
 interface OwnProps {
   behandlingContent: ReactNode;

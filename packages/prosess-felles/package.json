@@ -1,25 +1,21 @@
 {
   "name": "@navikt/fp-prosess-felles",
+  "type": "module",
   "version": "1.0.0",
-  "module": "index.ts",
   "license": "MIT",
   "private": true,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
-    "dist",
-    "index.js",
-    "package.json"
+    "dist"
   ],
   "scripts": {
     "tsc": "tsc --pretty",
     "eslint": "eslint \"src/**/*.ts*\" --color",
     "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
     "stylelint": "stylelint \"src/**/*.less\"",
-    "dev": "webpack --env watch=true --config webpack.config.js",
-    "build-webpack": "cross-env webpack --config webpack.config.js",
-    "build-ts-declarations": "tsc index.ts ../../@types/externals.d.ts --declaration --emitDeclarationOnly --downlevelIteration --resolveJsonModule --jsx react --outDir dist --declarationMap --esModuleInterop --skipLibCheck",
-    "build": "yarn build-webpack && yarn build-ts-declarations",
+    "dev": "vite build --watch",
+    "build": "vite build",
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {

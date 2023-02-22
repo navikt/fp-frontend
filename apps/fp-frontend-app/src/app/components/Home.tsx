@@ -21,7 +21,7 @@ import FagsakIndex from '../../fagsak/FagsakIndex';
 import AktoerIndex from '../../aktoer/AktoerIndex';
 import FagsakSearchIndex from '../../fagsakSearch/FagsakSearchIndex';
 
-import styles from './home.less';
+import styles from './home.module.css';
 
 interface OwnProps {
   headerHeight: number;
