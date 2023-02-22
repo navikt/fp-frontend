@@ -10,6 +10,8 @@ import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
 import getAlleMerknaderFraBeslutter from '../../felles/util/getAlleMerknaderFraBeslutter';
 
+import '@navikt/ft-prosess-tilbakekreving-foreldelse/dist/style.css';
+
 interface OwnProps {
   behandling: Behandling;
   navBrukerKjonn: string;

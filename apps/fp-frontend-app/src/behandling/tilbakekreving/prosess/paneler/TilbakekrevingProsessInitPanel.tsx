@@ -17,6 +17,8 @@ import ProsessTilbakekreving, { VilkarsVurderingAp, ForeldelseAksjonspunktCodes 
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
 import getAlleMerknaderFraBeslutter from '../../felles/util/getAlleMerknaderFraBeslutter';
 
+import '@navikt/ft-prosess-tilbakekreving/dist/style.css';
+
 const ENDEPUNKTER_PANEL_DATA = [
   TilbakekrevingBehandlingApiKeys.VILKARVURDERINGSPERIODER,
   TilbakekrevingBehandlingApiKeys.VILKARVURDERING,

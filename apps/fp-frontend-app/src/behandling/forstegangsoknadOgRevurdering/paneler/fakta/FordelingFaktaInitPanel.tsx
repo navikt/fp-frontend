@@ -14,6 +14,8 @@ import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
+import '@navikt/ft-fakta-fordel-beregningsgrunnlag/dist/style.css';
+
 const mapBGKodeTilFpsakKode = (bgKode: string): string => {
   switch (bgKode) {
     case FaktaFordelBeregningAvklaringsbehovCode.FORDEL_BEREGNINGSGRUNNLAG:

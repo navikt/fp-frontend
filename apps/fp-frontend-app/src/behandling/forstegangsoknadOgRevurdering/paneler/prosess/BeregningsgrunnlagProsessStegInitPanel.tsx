@@ -10,9 +10,12 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
 import ProsessBeregningsgrunnlag, { ProsessBeregningsgrunnlagAvklaringsbehovCode } from '@navikt/ft-prosess-beregningsgrunnlag';
+
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
+
+import '@navikt/ft-prosess-beregningsgrunnlag/dist/style.css';
 
 const mapBGKodeTilFpsakKode = (bgKode: string): string => {
   switch (bgKode) {
