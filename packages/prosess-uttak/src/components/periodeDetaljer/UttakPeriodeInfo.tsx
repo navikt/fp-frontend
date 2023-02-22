@@ -147,9 +147,9 @@ const visGraderingIkkeInnvilget = (
   graderingInnvilget?: boolean,
 ): boolean => (
   valgtPeriode.periodeResultatType === periodeResultatType.INNVILGET
-    && valgtPeriode.gradertAktivitet
-    && graderingInnvilget === false
-    && readOnly
+  && valgtPeriode.gradertAktivitet
+  && graderingInnvilget === false
+  && readOnly
 );
 
 interface OwnProps {
@@ -244,13 +244,7 @@ const UttakPeriodeInfo: FunctionComponent<OwnProps> = ({
             </Label>
             {valgtPeriode.oppholdÅrsak === '-' && (
               <BodyShort>
-                <FormattedMessage
-                  id={calcDaysAndWeeks(valgtPeriode.fom, valgtPeriode.tom).id}
-                  values={{
-                    weeks: calcDaysAndWeeks(valgtPeriode.fom, valgtPeriode.tom).weeks,
-                    days: calcDaysAndWeeks(valgtPeriode.fom, valgtPeriode.tom).days,
-                  }}
-                />
+                {calcDaysAndWeeks(valgtPeriode.fom, valgtPeriode.tom).formattedString}
               </BodyShort>
             )}
           </FlexColumn>
@@ -261,13 +255,9 @@ const UttakPeriodeInfo: FunctionComponent<OwnProps> = ({
               </Detail>
             )}
             {valgtPeriode.oppholdÅrsak !== '-' && (
-              <FormattedMessage
-                id={calcDaysAndWeeks(valgtPeriode.fom, valgtPeriode.tom).id}
-                values={{
-                  weeks: calcDaysAndWeeks(valgtPeriode.fom, valgtPeriode.tom).weeks,
-                  days: calcDaysAndWeeks(valgtPeriode.fom, valgtPeriode.tom).days,
-                }}
-              />
+              <>
+                {calcDaysAndWeeks(valgtPeriode.fom, valgtPeriode.tom).formattedString}
+              </>
             )}
             {gradertArbforhold(valgtPeriode, arbeidsgiverOpplysningerPerId)}
           </FlexColumn>
