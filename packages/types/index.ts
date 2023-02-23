@@ -59,7 +59,9 @@ export type { default as NavAnsatt } from './src/navAnsattTsType';
 export type {
   default as SimuleringResultat, DetaljertSimuleringResultat, Mottaker, SimuleringResultatRad, SimuleringResultatPerFagområde,
 } from './src/simuleringResultatTsType';
-export type { default as Soknad, ManglendeVedleggSoknad, UtlandsoppholdPeriode } from './src/soknadTsType';
+export type {
+  default as Soknad, ManglendeVedleggSoknad, UtlandsoppholdPeriode, Søknadsfrist,
+} from './src/soknadTsType';
 export type {
   default as UttaksresultatPeriode, PeriodeSoker, PeriodeSokerAktivitet, AarsakFilter,
 } from './src/uttaksresultatPeriodeTsType';

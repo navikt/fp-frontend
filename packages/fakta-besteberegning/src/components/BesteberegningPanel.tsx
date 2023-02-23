@@ -4,8 +4,7 @@ import {
 } from '@navikt/fp-types';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
-import BesteberegningAP
-  from '@navikt/fp-types-avklar-aksjonspunkter/src/fakta/KontrollerBesteberegningAP';
+import { BesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 import BesteMånederVisningPanel from './BesteManederVisningPanel';
 import BesteberegningResultatGrunnlagPanel from './BesteberegningResultatGrunnlagPanel';
 import KontrollerBesteberegningPanel, { FormValues } from './KontrollerBesteberegningPanel';

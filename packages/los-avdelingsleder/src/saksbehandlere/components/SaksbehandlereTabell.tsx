@@ -21,8 +21,6 @@ const headerTextCodes = [
   'SaksbehandlereTabell.Avdeling',
 ];
 
-// TODO (TOR) Denne komponenten blir brukt av avdelingsledar sjølv om den ligg under saksbehandler
-
 interface OwnProps {
   saksbehandlere: Saksbehandler[];
   valgtAvdelingEnhet: string;
