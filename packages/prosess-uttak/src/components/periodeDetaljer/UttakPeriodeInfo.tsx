@@ -255,9 +255,9 @@ const UttakPeriodeInfo: FunctionComponent<OwnProps> = ({
               </Detail>
             )}
             {valgtPeriode.oppholdÅrsak !== '-' && (
-              <>
+              <div>
                 {calcDaysAndWeeks(valgtPeriode.fom, valgtPeriode.tom).formattedString}
-              </>
+              </div>
             )}
             {gradertArbforhold(valgtPeriode, arbeidsgiverOpplysningerPerId)}
           </FlexColumn>
