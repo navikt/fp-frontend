@@ -105,13 +105,7 @@ const SplittPeriodeModal: FunctionComponent<OwnProps> = ({
               </FlexColumn>
               {dato && (
                 <FlexColumn className={styles.dager}>
-                  <FormattedMessage
-                    id={numberOfDaysAndWeeks.id.toString()}
-                    values={{
-                      weeks: numberOfDaysAndWeeks.weeks.toString(),
-                      days: numberOfDaysAndWeeks.days.toString(),
-                    }}
-                  />
+                  {numberOfDaysAndWeeks.formattedString}
                 </FlexColumn>
               )}
             </FlexRow>

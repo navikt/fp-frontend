@@ -130,11 +130,7 @@ const lagTooltipTekst = (
     <p>
       ${dayjs(periode.fom).format(DDMMYY_DATE_FORMAT)} - ${dayjs(periode.tom).format(DDMMYY_DATE_FORMAT)}
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-       ${intl.formatMessage({ id: calcDaysAndWeeks(periode.fom, periode.tom).id },
-      {
-        weeks: calcDaysAndWeeks(periode.fom, periode.tom).weeks,
-        days: calcDaysAndWeeks(periode.fom, periode.tom).days,
-      })}
+       ${calcDaysAndWeeks(periode.fom, periode.tom).formattedString}
         </br>
         ${periode.utsettelseType && periode.utsettelseType !== '-'
       ? intl.formatMessage({ id: 'Timeline.tooltip.utsettelsePeriode' }) : stønadskontoNavn}

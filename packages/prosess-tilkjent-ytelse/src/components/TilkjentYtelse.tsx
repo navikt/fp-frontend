@@ -58,26 +58,25 @@ const getStatusForPeriode = (periode: PeriodeMedId): string => {
   return gradertKlassenavn;
 };
 
-const createTooltipContent = (periodeType: string, intl: IntlShape, item: PeriodeMedId): string => (`
+const createTooltipContent = (periodeType: string, intl: IntlShape, item: PeriodeMedId): string => {
+  const daysAndWeeks = calcDaysAndWeeks(item.fom, item.tom);
+  return (`
   <p>
     ${moment(item.fom)
-    .format(DDMMYY_DATE_FORMAT)} - ${moment(item.tom)
-    .format(DDMMYY_DATE_FORMAT)}
+      .format(DDMMYY_DATE_FORMAT)} - ${moment(item.tom)
+      .format(DDMMYY_DATE_FORMAT)}
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-     ${intl.formatMessage({ id: calcDaysAndWeeks(item.fom, item.tom).id },
-    {
-      weeks: calcDaysAndWeeks(item.fom, item.tom).weeks,
-      days: calcDaysAndWeeks(item.fom, item.tom).days,
-    })}
+     ${daysAndWeeks.formattedString}
     </br>
     ${periodeType}
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     ${intl.formatMessage({ id: 'Timeline.tooltip.dagsats' },
-    {
-      dagsats: item.dagsats,
-    })}
+      {
+        dagsats: item.dagsats,
+      })}
    </p>
 `);
+};
 
 const findKorrektLabelForKvote = (stonadtype: string): string => {
   switch (stonadtype) {

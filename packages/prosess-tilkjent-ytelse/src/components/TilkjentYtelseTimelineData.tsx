@@ -160,13 +160,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
             </FlexColumn>
             <FlexColumn>
               <BodyShort size="small">
-                <FormattedMessage
-                  id={numberOfDaysAndWeeks.id}
-                  values={{
-                    weeks: numberOfDaysAndWeeks.weeks.toString(),
-                    days: numberOfDaysAndWeeks.days.toString(),
-                  }}
-                />
+                {numberOfDaysAndWeeks.formattedString}
               </BodyShort>
             </FlexColumn>
           </FlexRow>
