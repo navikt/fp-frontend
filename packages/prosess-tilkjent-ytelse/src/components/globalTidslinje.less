@@ -31,8 +31,8 @@
 
 // move these to teslineIndex.less?
 :global(.soknad) {
-  background-color: #0056b4;
-  pointer-events: none;
+  background-color: #0056b4 !important; // stylelint-disable-line declaration-no-important
+  pointer-events: none !important; // stylelint-disable-line declaration-no-important
   top: 6px !important; // stylelint-disable-line declaration-no-important
 
   &:after {
@@ -47,8 +47,8 @@
 }
 
 :global(.fodsel) {
-  background-color: #a32a17;
-  pointer-events: none;
+  background-color: #a32a17 !important; // stylelint-disable-line declaration-no-important
+  pointer-events: none !important; // stylelint-disable-line declaration-no-important
   top: 0 !important; // stylelint-disable-line declaration-no-important
 
   &:after {
@@ -63,8 +63,8 @@
 }
 
 :global(.revurdering) {
-  background-color: #007c2e;
-  pointer-events: none;
+  background-color: #007c2e !important; // stylelint-disable-line declaration-no-important
+  pointer-events: none !important; // stylelint-disable-line declaration-no-important
   top: 12px !important; // stylelint-disable-line declaration-no-important
 
   &:after {
@@ -147,17 +147,17 @@
 }
 
 :global(.gradert) {
-  @lClr: #fff;
-  @brPnt: 20%;
+  @lClr: #fff !important; // stylelint-disable-line declaration-no-important
+  @brPnt: 20% !important; // stylelint-disable-line declaration-no-important
 
-  background: #06893a repeating-linear-gradient(45deg, @lClr, @lClr @brPnt, transparent @brPnt, transparent 50%, @lClr 50%); // stylelint-disable-line max-line-length
-  background-size: 12px 12px;
-  opacity: 0.9;
+  background: #06893a repeating-linear-gradient(45deg, @lClr, @lClr @brPnt, transparent @brPnt, transparent 50%, @lClr 50%) !important; // stylelint-disable-line declaration-no-important
+  background-size: 12px 12px !important; // stylelint-disable-line declaration-no-important
+  opacity: 0.9 !important; // stylelint-disable-line declaration-no-important
 }
 
 :global(.gradert.vis-item.vis-selected) {
-  background-color: #06893a;
-  opacity: 1;
+  background-color: #06893a !important; // stylelint-disable-line declaration-no-important
+  opacity: 1 !important; // stylelint-disable-line declaration-no-important
 
   &:hover {
     transform: translateY(-1px);
@@ -231,8 +231,8 @@
 }
 
 :global(.godkjentPeriode.vis-item.vis-selected) {
-  background-color: #06893a;
-  border-radius: 6px;
+  background-color: #06893a !important; // stylelint-disable-line declaration-no-important
+  border-radius: 6px !important; // stylelint-disable-line declaration-no-important
 }
 
 :global(.mellomliggendePeriode) {
@@ -249,13 +249,13 @@
 }
 
 :global(.mellomliggendePeriode.vis-item.vis-selected) {
-  background-color: #06893a;
-  border-radius: 6px;
+  background-color: #06893a !important; // stylelint-disable-line declaration-no-important
+  border-radius: 6px !important; // stylelint-disable-line declaration-no-important
 }
 
 :global(.innvilget.vis-item.vis-selected) {
-  background-color: #06893a;
-  border-radius: 6px;
+  background-color: #06893a !important; // stylelint-disable-line declaration-no-important
+  border-radius: 6px !important; // stylelint-disable-line declaration-no-important
 }
 
 :global(.innvilgetnullprosent) {
@@ -310,6 +310,7 @@
   border-top-color: #ff9100; // hex pga den skal ha samme farge som den orange mannen.
   border-top-width: 5px;
 }
+
 
 :global(.opptjening .vis-center) {
   border-bottom: 1px solid grey !important; // stylelint-disable-line declaration-no-important
@@ -366,6 +367,7 @@
 :global(.opptjening .vis-itemset > .vis-background) {
   border-top: 1px solid darkgray !important; // stylelint-disable-line declaration-no-important
 }
+
 
 :global(.vis-timeline.vis-bottom) {
   animation-duration: 2s;
