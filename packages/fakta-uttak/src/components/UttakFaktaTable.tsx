@@ -28,26 +28,6 @@ const HEADER_TEXT_CODES = [
   'EMPTY',
 ];
 
-const getTextId = (weeks?: number, days?: number): string => {
-  let id = 'UttakFaktaTable.AntallFlereDagerOgFlereUker';
-  if (weeks === undefined && days === undefined) {
-    id = 'UttakFaktaTable.TidenesEnde';
-  }
-  if (days === 0) {
-    id = weeks === 1 ? 'UttakFaktaTable.AntallNullDagerOgEnUke' : 'UttakFaktaTable.AntallNullDagerOgFlereUker';
-  }
-  if (weeks === 0) {
-    id = days === 1 ? 'UttakFaktaTable.AntallEnDagOgNullUker' : 'UttakFaktaTable.AntallFlereDagerOgNullUker';
-  }
-  if (days === 1) {
-    id = weeks === 1 ? 'UttakFaktaTable.AntallEnDagOgEnUke' : 'UttakFaktaTable.AntallEnDagOgFlereUker';
-  }
-  if (weeks === 1) {
-    id = 'UttakFaktaTable.AntallFlereDagerOgEnUke';
-  }
-  return id;
-};
-
 const getTypeTekst = (
   alleKodeverk: AlleKodeverk,
   periode: KontrollerFaktaPeriodeMedApMarkering,
@@ -163,13 +143,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
             >
               <TableColumn>{`${dateFormat(periode.fom)} - ${dateFormat(periode.tom)}`}</TableColumn>
               <TableColumn>
-                <FormattedMessage
-                  id={getTextId(numberOfDaysAndWeeks.weeks, numberOfDaysAndWeeks.days)}
-                  values={{
-                    weeks: numberOfDaysAndWeeks.weeks,
-                    days: numberOfDaysAndWeeks.days,
-                  }}
-                />
+                {numberOfDaysAndWeeks.formattedString}
               </TableColumn>
               <TableColumn>{getTypeTekst(alleKodeverk, periode, intl)}</TableColumn>
               <TableColumn>
