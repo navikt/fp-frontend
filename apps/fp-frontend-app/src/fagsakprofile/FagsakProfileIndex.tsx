@@ -8,6 +8,7 @@ import { Location } from 'history';
 import { useIntl } from 'react-intl';
 import BehandlingVelgerSakIndex from '@navikt/ft-sak-behandling-velger';
 import FagsakProfilSakIndex from '@navikt/ft-sak-fagsak-profil';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { BehandlingAppKontekst } from '@navikt/fp-types';
@@ -130,6 +131,7 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
           )}
         />
       )}
+      <VerticalSpacer sixteenPx />
       <ErrorBoundary
         errorMessageCallback={addErrorMessage}
         errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Risikoklassifisering' })}
