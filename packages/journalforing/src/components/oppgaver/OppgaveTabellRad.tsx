@@ -4,8 +4,9 @@ import { Button, Table, Link } from '@navikt/ds-react';
 import { NextFilled } from '@navikt/ds-icons';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
-import styles from './oppgaveTabellRad.less';
 import { finnYtelseTekst } from '../journalpost/form/VelgSakForm';
+
+import styles from '../journalforingPanel.module.css';
 
 type OwnProps = Readonly<{
   oppgave: OppgaveOversikt;

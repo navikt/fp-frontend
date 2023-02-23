@@ -11,7 +11,7 @@ import { Form, InputField } from '@navikt/ft-form-hooks';
 import { FagsakEnkel } from '@navikt/fp-types';
 import advarselIcon from '../images/advarsel.svg';
 
-import styles from './searchForm.less';
+import styles from './searchForm.module.css';
 
 const isButtonDisabled = (searchStarted: boolean, searchString?: string): boolean => !!(searchStarted
   || (searchString === undefined || searchString.length < 1));

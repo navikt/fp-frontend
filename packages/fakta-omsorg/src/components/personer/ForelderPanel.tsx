@@ -12,7 +12,7 @@ import kvinneIkonUrl from '../../images/female.svg';
 import mannIkonUrl from '../../images/male.svg';
 import AdresseVisning from './AdresseVisning';
 
-import styles from './forelderPanel.less';
+import styles from './forelderPanel.module.css';
 
 interface OwnProps {
   forelder: PersonopplysningerBasis;

@@ -13,7 +13,7 @@ import { Oppgave } from '@navikt/fp-los-felles';
 
 import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosSaksbehandlerRestApi';
 
-import styles from './opphevReservasjonModal.less';
+import styles from './opphevReservasjonModal.module.css';
 
 const minLength3 = minLength(3);
 const maxLength500 = maxLength(500);

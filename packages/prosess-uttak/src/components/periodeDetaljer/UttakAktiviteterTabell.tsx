@@ -19,7 +19,7 @@ import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';
 import lagVisningsNavn from '../../utils/lagVisningsNavn';
 import { UttakAktivitetType } from './UttakAktivitetType';
 
-import styles from './uttakAktiviteterTabell.less';
+import styles from './uttakAktiviteterTabell.module.css';
 
 const maxLength3 = maxLength(3);
 const minValue0 = minValue(0);

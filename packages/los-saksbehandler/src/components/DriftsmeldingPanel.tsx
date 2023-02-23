@@ -7,7 +7,7 @@ import {
 import advarselImageUrl from '../images/advarsel-sirkel-fyll.svg';
 import Driftsmelding from '../typer/driftsmeldingTsType';
 
-import styles from './driftsmeldingPanel.less';
+import styles from './driftsmeldingPanel.module.css';
 
 interface OwnProps {
   driftsmeldinger: Driftsmelding[];

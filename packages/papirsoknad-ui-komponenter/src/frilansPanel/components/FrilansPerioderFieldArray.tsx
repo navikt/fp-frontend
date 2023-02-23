@@ -9,7 +9,7 @@ import {
   required, hasValidDate, dateBeforeOrEqual, dateAfterOrEqual,
 } from '@navikt/ft-form-validators';
 
-import styles from './frilansPerioderFieldArray.less';
+import styles from './frilansPerioderFieldArray.module.css';
 
 const FRILANS_NAME_PREFIX = 'frilans';
 

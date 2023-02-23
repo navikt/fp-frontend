@@ -9,7 +9,7 @@ import { InputField, formHooks } from '@navikt/ft-form-hooks';
 
 import useDebounce from '../useDebounce';
 
-import styles from './sorteringVelger.less';
+import styles from './sorteringVelger.module.css';
 
 interface OwnProps {
   valgtSakslisteId: number;

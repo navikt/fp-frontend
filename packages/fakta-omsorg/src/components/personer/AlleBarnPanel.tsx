@@ -9,7 +9,7 @@ import { PersonopplysningerBasis } from '@navikt/fp-types';
 import barnIkonUrl from '../../images/child.svg';
 import Boks from '../Boks';
 
-import styles from './alleBarnPanel.less';
+import styles from './alleBarnPanel.module.css';
 import AdresseVisning from './AdresseVisning';
 
 interface OwnProps {

@@ -18,7 +18,7 @@ import useLosKodeverk from '../../data/useLosKodeverk';
 import SletteSakslisteModal from './SletteSakslisteModal';
 import Saksliste from '../../typer/sakslisteAvdelingTsType';
 
-import styles from './gjeldendeSakslisterTabell.less';
+import styles from './gjeldendeSakslisterTabell.module.css';
 
 const headerTextCodes = [
   'GjeldendeSakslisterTabell.Listenavn',

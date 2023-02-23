@@ -8,7 +8,7 @@ import {
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import { Aksjonspunkt } from '@navikt/fp-types';
 
-import styles from './faktaBegrunnelseTextField.less';
+import styles from './faktaBegrunnelseTextField.module.css';
 
 import messages from '../../i18n/nb_NO.json';
 

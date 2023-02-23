@@ -14,7 +14,7 @@ import checkImg from '../images/check.svg';
 import advarselImg from '../images/remove.svg';
 import opptjeningAktivitetKlassifisering from '../kodeverk/opptjeningAktivitetKlassifisering';
 
-import styles from './timeLineData.less';
+import styles from './timeLineData.module.css';
 
 const MELLOMLIGGENDE_PERIODE = 'MELLOMLIGGENDE_PERIODE';
 

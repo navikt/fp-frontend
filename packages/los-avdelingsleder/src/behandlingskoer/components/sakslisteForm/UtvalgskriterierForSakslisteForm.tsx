@@ -22,7 +22,7 @@ import SorteringVelger from './sortering/SorteringVelger';
 import useDebounce from './useDebounce';
 import Saksliste from '../../../typer/sakslisteAvdelingTsType';
 
-import styles from './utvalgskriterierForSakslisteForm.less';
+import styles from './utvalgskriterierForSakslisteForm.module.css';
 
 const minLength3 = minLength(3);
 const maxLength100 = maxLength(100);

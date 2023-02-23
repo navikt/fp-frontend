@@ -9,7 +9,7 @@ import { Aksjonspunkt } from '@navikt/fp-types';
 
 import messages from '../i18n/nb_NO.json';
 
-import styles from './prosessStegBegrunnelseTextField.less';
+import styles from './prosessStegBegrunnelseTextField.module.css';
 
 const intl = createIntl(messages);
 

@@ -8,10 +8,10 @@ import { FastsattOpptjeningAktivitet } from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import opptjeningAktivitetKlassifisering from '../kodeverk/opptjeningAktivitetKlassifisering';
 import DateContainer from './DateContainer';
-import styles from './opptjeningTimeLineLight.less';
+import styles from './opptjeningTimeLineLight.module.css';
 import TimeLineData from './TimeLineData';
 
-import './globalTidslinje.less';
+import './globalTidslinje.module.css';
 
 type Item = {
   id?: number;

@@ -8,7 +8,7 @@ import { AlleKodeverk, FagsakEnkel } from '@navikt/fp-types';
 import SearchForm from './SearchForm';
 import FagsakList from './FagsakList';
 
-import styles from './fagsakSearch.less';
+import styles from './fagsakSearch.module.css';
 
 interface OwnProps {
   fagsaker: FagsakEnkel[];

@@ -10,7 +10,7 @@ import { Form, InputField, CheckboxField } from '@navikt/ft-form-hooks';
 
 import advarselIcon from '../../images/advarsel.svg';
 
-import styles from './searchForm.less';
+import styles from './searchForm.module.css';
 
 const isButtonDisabled = (
   searchString: string,

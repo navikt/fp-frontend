@@ -16,7 +16,7 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import {
   AvsnittSkiller, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import styles from './utenlandsOppholdField.less';
+import styles from './utenlandsOppholdField.module.css';
 
 const classNames = classnames.bind(styles);
 

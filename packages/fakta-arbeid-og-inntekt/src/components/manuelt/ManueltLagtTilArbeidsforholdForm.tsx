@@ -20,7 +20,7 @@ import {
 import binIcon from '../../images/bin.svg';
 import ArbeidsforholdOgInntekt from '../../types/arbeidsforholdOgInntekt';
 
-import styles from './manueltLagtTilArbeidsforholdForm.less';
+import styles from './manueltLagtTilArbeidsforholdForm.module.css';
 import { useSetDirtyForm } from '../../DirtyFormProvider';
 
 export const MANUELT_ORG_NR = '342352362';

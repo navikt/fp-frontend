@@ -18,7 +18,7 @@ import {
 } from '@navikt/fp-papirsoknad-ui-komponenter';
 
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
-import styles from './registreringFodselGrid.less';
+import styles from './registreringFodselGrid.module.css';
 
 /*
  * RegistreringFodselForm

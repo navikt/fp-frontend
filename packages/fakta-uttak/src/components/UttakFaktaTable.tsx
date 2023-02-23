@@ -18,7 +18,7 @@ import { KodeverkType } from '@navikt/fp-kodeverk';
 import UttakFaktaDetailForm, { utledÅrsakstype, Årsakstype } from './UttakFaktaDetailForm';
 import KontrollerFaktaPeriodeMedApMarkering from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 
-import styles from './uttakFaktaTable.less';
+import styles from './uttakFaktaTable.module.css';
 
 const HEADER_TEXT_CODES = [
   'UttakFaktaTable.Periode',

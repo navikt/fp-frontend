@@ -16,7 +16,7 @@ import {
 } from '@navikt/ft-form-validators';
 import { gyldigeUttakperioder } from './RenderPermisjonPeriodeFieldArray';
 
-import styles from './renderUtsettelsePeriodeFieldArray.less';
+import styles from './renderUtsettelsePeriodeFieldArray.module.css';
 
 export const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
 export const UTSETTELSE_PERIODE_FIELD_ARRAY_NAME = 'utsettelsePeriode';

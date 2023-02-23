@@ -9,7 +9,7 @@ import { AksjonspunktCode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import styles from './omsorgFaktaForm.less';
+import styles from './omsorgFaktaForm.module.css';
 
 const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = AksjonspunktCode;
 

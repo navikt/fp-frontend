@@ -14,7 +14,7 @@ import { Behandling } from '@navikt/ft-types';
 
 import innvilgetImageUrl from '../../images/innvilget_valgt.svg';
 
-import styles from './fatterVedtakApprovalModal.less';
+import styles from './fatterVedtakApprovalModal.module.css';
 
 const getInfoTextCode = (
   behandlingtypeKode: string,

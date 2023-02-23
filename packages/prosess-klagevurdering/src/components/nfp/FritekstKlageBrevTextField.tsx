@@ -5,7 +5,7 @@ import { getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { hasValidText, required } from '@navikt/ft-form-validators';
 import { TextAreaField } from '@navikt/ft-form-hooks';
 
-import styles from './fritekstKlageBrevTextField.less';
+import styles from './fritekstKlageBrevTextField.module.css';
 
 interface OwnProps {
   sprakkode: string;

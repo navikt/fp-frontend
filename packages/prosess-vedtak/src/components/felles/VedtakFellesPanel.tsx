@@ -32,7 +32,7 @@ import innvilgetImage from '../../images/innvilget_hover.svg';
 import ManueltVedtaksbrevPanel from './ManueltVedtaksbrevPanel';
 import VedtakHelpTextPanel from './VedtakHelpTextPanel';
 
-import styles from './vedtakFellesPanel.less';
+import styles from './vedtakFellesPanel.module.css';
 
 export const finnTekstkodeFraBehandlingstatus = (
   behandlingStatus: string,

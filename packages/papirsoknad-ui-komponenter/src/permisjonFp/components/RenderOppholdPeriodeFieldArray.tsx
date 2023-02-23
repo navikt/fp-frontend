@@ -11,7 +11,7 @@ import {
 import { KodeverkMedNavn } from '@navikt/fp-types';
 import { oppholdArsakType } from '@navikt/fp-kodeverk';
 
-import styles from './renderOppholdPeriodeFieldArray.less';
+import styles from './renderOppholdPeriodeFieldArray.module.css';
 
 export const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
 export const OPPHOLD_PERIODE_FIELD_ARRAY_NAME = 'oppholdPerioder';

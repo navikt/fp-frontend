@@ -16,7 +16,7 @@ import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { OverstyringPanel } from '@navikt/fp-prosess-felles';
 import { OverstyringBeregningAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import styles from './beregningsresultatEngangsstonadForm.less';
+import styles from './beregningsresultatEngangsstonadForm.module.css';
 
 const minValue1 = minValue(1);
 const maxValue500000 = maxValue(500000);

@@ -4,7 +4,7 @@ import { Select } from '@navikt/ds-react';
 import { setValueInLocalStorage } from '../data/localStorageHelper';
 import Avdeling from '../typer/avdelingTsType';
 
-import styles from './avdelingsvelger.less';
+import styles from './avdelingsvelger.module.css';
 
 interface OwnProps {
   setValgtAvdelingEnhet: (avdelingEnhet: string) => void;

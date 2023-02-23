@@ -15,7 +15,7 @@ import {
   hasValidFodselsnummer, hasValidFodselsnummerFormat, required, sammeFodselsnummerSomSokerMessage,
 } from '@navikt/ft-form-validators';
 
-import styles from './annenForelderPanel.less';
+import styles from './annenForelderPanel.module.css';
 
 const ANNEN_FORELDER_NAME_PREFIX = 'annenForelder';
 const KAN_IKKE_OPPGI_NAME_PREFIX = 'kanIkkeOppgiBegrunnelse';

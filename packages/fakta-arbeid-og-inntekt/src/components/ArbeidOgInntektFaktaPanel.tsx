@@ -20,7 +20,7 @@ import ArbeidsforholdOgInntektRadData, { Avklaring } from '../types/arbeidsforho
 import ArbeidsOgInntektOverstyrPanel from './ArbeidsOgInntektOverstyrPanel';
 import { useIsFormDirty } from '../DirtyFormProvider';
 
-import styles from './arbeidOgInntektFaktaPanel.less';
+import styles from './arbeidOgInntektFaktaPanel.module.css';
 
 const HEADER_TEXT_IDS = [
   'EMPTY1',

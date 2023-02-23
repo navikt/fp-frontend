@@ -9,7 +9,7 @@ import {
   required, hasValidDate, dateAfterOrEqual, dateBeforeOrEqual,
 } from '@navikt/ft-form-validators';
 
-import styles from './renderAndreYtelserPerioderFieldArray.less';
+import styles from './renderAndreYtelserPerioderFieldArray.module.css';
 
 export const ANDRE_YTELSER_NAME_PREFIX = 'andreYtelser';
 

@@ -11,7 +11,7 @@ import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosRestApi';
 import Saksbehandler from '../../../typer/saksbehandlerAvdelingTsType';
 import Saksliste from '../../../typer/sakslisteAvdelingTsType';
 
-import styles from './saksbehandlereForSakslisteForm.less';
+import styles from './saksbehandlereForSakslisteForm.module.css';
 
 const sortSaksbehandlere = (saksbehandlere: Saksbehandler[]) => (saksbehandlere && saksbehandlere instanceof Array
   ? [...saksbehandlere].sort((saksbehandler1, saksbehandler2) => saksbehandler1.navn.localeCompare(saksbehandler2.navn))

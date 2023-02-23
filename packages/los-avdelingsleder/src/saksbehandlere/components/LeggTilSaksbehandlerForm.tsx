@@ -14,7 +14,7 @@ import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import Saksbehandler from '../../typer/saksbehandlerAvdelingTsType';
 import { RestApiPathsKeys, restApiHooks } from '../../data/fplosRestApi';
 
-import styles from './leggTilSaksbehandlerForm.less';
+import styles from './leggTilSaksbehandlerForm.module.css';
 
 const erSaksbehandlerLagtTilAllerede = (
   saksbehandler?: Saksbehandler,

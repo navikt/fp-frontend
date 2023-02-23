@@ -12,7 +12,7 @@ import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import erIBrukImageUrl from '../../images/stjerne.svg';
 import IngenArbeidsforholdRegistrert from './IngenArbeidsforholdRegistrert';
 
-import styles from './personArbeidsforholdTable.less';
+import styles from './personArbeidsforholdTable.module.css';
 
 const headerColumnContent = [
   <FormattedMessage key={1} id="PersonArbeidsforholdTable.Arbeidsforhold" values={{ br: <br /> }} />,

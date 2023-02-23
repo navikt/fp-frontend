@@ -15,7 +15,7 @@ import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { BekreftTerminbekreftelseAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import styles from './termindatoFaktaForm.less';
+import styles from './termindatoFaktaForm.module.css';
 
 const minValue1 = minValue(1);
 const maxValue9 = maxValue(9);

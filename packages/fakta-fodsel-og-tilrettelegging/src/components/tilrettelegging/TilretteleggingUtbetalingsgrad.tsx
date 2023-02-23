@@ -13,7 +13,7 @@ import { BodyShort } from '@navikt/ds-react';
 import endreImage from '../../images/endre.svg';
 import endreDisabletImage from '../../images/endre_disablet.svg';
 
-import styles from './tilretteleggingFieldArray.less';
+import styles from './tilretteleggingFieldArray.module.css';
 
 const maxValue100 = maxValue(100);
 const minValue1 = minValue(1);

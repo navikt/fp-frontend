@@ -19,7 +19,6 @@
   width: 155px;
 }
 
-// IE11 specific css
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
   .prosentHeader {
     margin-top: -18px;

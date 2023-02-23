@@ -8,7 +8,7 @@ import {
 import advarselImageUrl from '../../images/advarsel.svg';
 import Saksbehandler from '../../typer/saksbehandlerAvdelingTsType';
 
-import styles from './sletteSaksbehandlerModal.less';
+import styles from './sletteSaksbehandlerModal.module.css';
 
 type OwnProps = Readonly<{
   valgtSaksbehandler: Saksbehandler;

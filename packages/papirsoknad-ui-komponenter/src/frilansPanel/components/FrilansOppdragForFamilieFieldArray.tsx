@@ -15,7 +15,7 @@ import {
 } from '@navikt/ft-form-validators';
 
 import { UseFormGetValues } from 'react-hook-form';
-import styles from './frilansOppdragForFamilieFieldArray.less';
+import styles from './frilansOppdragForFamilieFieldArray.module.css';
 
 export const FRILANS_NAME_PREFIX = 'frilans';
 

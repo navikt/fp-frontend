@@ -17,7 +17,7 @@ import pilOppIkonUrl from '../../images/pil_opp.svg';
 import pilNedIkonUrl from '../../images/pil_ned.svg';
 import InntektsmeldingerPanel from './InntektsmeldingerPanel';
 
-import styles from './arbeidsforholdInformasjonPanel.less';
+import styles from './arbeidsforholdInformasjonPanel.module.css';
 
 type ForenkletInntektspost = {
   beløp: number;

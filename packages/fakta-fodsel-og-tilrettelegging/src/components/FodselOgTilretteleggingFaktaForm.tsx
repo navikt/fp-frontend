@@ -26,7 +26,7 @@ import TilretteleggingArbeidsforholdSection from './tilrettelegging/Tilrettelegg
 import { finnSkalTaHensynTilPermisjon } from './tilrettelegging/VelferdspermisjonSection';
 import { finnUtbetalingsgradForTilrettelegging } from './tilrettelegging/TilretteleggingFieldArray';
 
-import styles from './fodselOgTilretteleggingFaktaForm.less';
+import styles from './fodselOgTilretteleggingFaktaForm.module.css';
 import UtilgjengeligeArbeidsforhold from './tilrettelegging/UtilgjengeligeArbeidsforhold';
 
 const maxLength1500 = maxLength(1500);

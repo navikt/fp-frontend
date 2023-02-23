@@ -29,7 +29,7 @@ import {
 import { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 
-import styles from './varselOmRevurderingForm.less';
+import styles from './varselOmRevurderingForm.module.css';
 
 const minLength3 = minLength(3);
 const maxLength6000 = maxLength(6000);

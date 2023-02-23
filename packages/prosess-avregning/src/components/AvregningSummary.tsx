@@ -8,7 +8,7 @@ import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
-import styles from './avregningSummary.less';
+import styles from './avregningSummary.module.css';
 
 interface OwnProps {
   fom: string;

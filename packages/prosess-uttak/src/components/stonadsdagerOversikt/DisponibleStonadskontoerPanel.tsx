@@ -16,7 +16,7 @@ import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';
 import lagVisningsNavn from '../../utils/lagVisningsNavn';
 import StonadsdagerTab, { finnAntallUkerOgDager } from './StonadsdagerTab';
 
-import styles from './disponibleStonadskontoerPanel.less';
+import styles from './disponibleStonadskontoerPanel.module.css';
 
 const HEADER_TEXT_CODES = [
   'TimeLineInfo.Aktivitet',

@@ -5,7 +5,7 @@
 }
 
 .modal {
-  overflow: visible !important; // stylelint-disable-line declaration-no-important
+  overflow: visible !important;
   width: 600px;
 }
 

@@ -10,7 +10,7 @@ import { KodeverkMedNavn, TotrinnskontrollSkjermlenkeContext, BehandlingAppKonte
 import getAksjonspunkttekst from './aksjonspunktTekster/aksjonspunktTekstUtleder';
 import GodkjenningPanel from './GodkjenningPanel';
 
-import styles from './aksjonspunktGodkjenningFieldArray.less';
+import styles from './aksjonspunktGodkjenningFieldArray.module.css';
 
 const FIELD_ARRAY_NAME = 'aksjonspunktGodkjenning';
 

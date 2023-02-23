@@ -13,7 +13,7 @@ import MenuButton from './MenuButton';
 import OpphevReservasjonModal from './OpphevReservasjonModal';
 import OppgaveReservasjonForlengetModal from './forleng/OppgaveReservasjonForlengetModal';
 
-import styles from './oppgaveHandlingerMenu.less';
+import styles from './oppgaveHandlingerMenu.module.css';
 
 type Offset = {
   top: number;

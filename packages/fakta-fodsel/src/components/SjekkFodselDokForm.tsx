@@ -17,7 +17,7 @@ import { SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import AvklartBarnFieldArray from './AvklartBarnFieldArray';
 
-import styles from './SjekkFodselDokForm.less';
+import styles from './SjekkFodselDokForm.module.css';
 
 export type FormValues = {
   fodselsdato?: string;

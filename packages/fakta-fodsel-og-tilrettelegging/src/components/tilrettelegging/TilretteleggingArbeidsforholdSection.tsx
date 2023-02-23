@@ -14,7 +14,7 @@ import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, ArbeidsforholdFodselOgT
 import TilretteleggingFieldArray from './TilretteleggingFieldArray';
 import VelferdspermisjonSection from './VelferdspermisjonSection';
 
-import styles from './tilretteleggingArbeidsforholdSection.less';
+import styles from './tilretteleggingArbeidsforholdSection.module.css';
 
 const validerTidligereEnn = (
   intl: IntlShape,

@@ -19,7 +19,7 @@ import ManueltLagtTilArbeidsforholdForm, { MANUELT_ORG_NR } from './manuelt/Manu
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 import addCircleIcon from '../images/add-circle.svg';
 
-import styles from './arbeidsOgInntektOverstyrPanel.less';
+import styles from './arbeidsOgInntektOverstyrPanel.module.css';
 
 const finnAksjonspunktTekstKoder = (
   tabellData: ArbeidsforholdOgInntekt[],

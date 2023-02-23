@@ -22,7 +22,7 @@ import Saksliste from '../../typer/sakslisteTsType';
 import Saksbehandler from '../../typer/saksbehandlerTsType';
 import { RestApiPathsKeys, RestApiGlobalStatePathsKeys, restApiHooks } from '../../data/fplosSaksbehandlerRestApi';
 
-import styles from './sakslisteVelgerForm.less';
+import styles from './sakslisteVelgerForm.module.css';
 
 interface OwnProps {
   sakslister: Saksliste[];

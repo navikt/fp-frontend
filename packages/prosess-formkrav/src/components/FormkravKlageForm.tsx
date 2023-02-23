@@ -18,7 +18,7 @@ import { required } from '@navikt/ft-form-validators';
 import { AlleKodeverk, KlageVurdering } from '@navikt/fp-types';
 
 import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
-import styles from './formkravKlageForm.less';
+import styles from './formkravKlageForm.module.css';
 
 export const IKKE_PA_KLAGD_VEDTAK = 'ikkePaklagdVedtak';
 

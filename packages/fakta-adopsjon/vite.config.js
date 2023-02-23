@@ -26,6 +26,7 @@ export default defineConfig({
     sourcemap: 'hidden',
   },
   test: {
+    deps: { interopDefault: true },
     environment: 'jsdom',
     css: false,
     globals: true,

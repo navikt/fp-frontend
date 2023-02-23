@@ -21,7 +21,7 @@ import {
 } from '@navikt/fp-types';
 import KontrollerFaktaPeriodeMedApMarkering from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 
-import styles from './graderingOgSamtidigUttakPanel.less';
+import styles from './graderingOgSamtidigUttakPanel.module.css';
 
 export enum Årsakstype {
   UTTAK = 'UTTAK',

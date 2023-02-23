@@ -3,7 +3,7 @@ import React, { FunctionComponent, useState, useCallback } from 'react';
 import { Document, Page } from 'react-pdf';
 import { Loader, Pagination } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
-import styles from './pdfvisning.less';
+import styles from './pdfvisning.module.css';
 import JournalDokument from '../../typer/journalDokumentTsType';
 
 type OwnProps = Readonly<{

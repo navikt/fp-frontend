@@ -12,7 +12,7 @@ import GjeldendeSakslisterTabell from './GjeldendeSakslisterTabell';
 import SaksbehandlereForSakslisteForm from './saksbehandlerForm/SaksbehandlereForSakslisteForm';
 import UtvalgskriterierForSakslisteForm from './sakslisteForm/UtvalgskriterierForSakslisteForm';
 
-import styles from './endreSakslisterPanel.less';
+import styles from './endreSakslisterPanel.module.css';
 
 const EMPTY_ARRAY: Saksliste[] = [];
 

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
-import styles from './datoPanel.less';
+import styles from './datoPanel.module.css';
 
 interface OwnProps {
   opptjeningFomDato: string;
