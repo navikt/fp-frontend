@@ -48,7 +48,7 @@ async function startApp() {
             ],
             'img-src': ["'self'", 'data:'],
             'style-src': ["'self'", "'unsafe-inline'"],
-            'frame-src': ["'none'"],
+            'frame-src': ["'self'"],
             'child-src': ["'self'"],
             'media-src': ["'none'"],
             'object-src': ["'none'"],
