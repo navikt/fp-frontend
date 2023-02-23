@@ -14,7 +14,7 @@ const PDFVisningIF: FunctionComponent<OwnProps> = ({
   dokument,
 }) => (
   <div className={styles.pdfContainer}>
-    <iframe id="iframepdf" src={dokument.lenke} width="1300" height="1200" />
+    <iframe id="iframepdf" src={dokument.lenke} width="1300" height="1200" title={dokument.tittel} />
   </div>
 );
 
