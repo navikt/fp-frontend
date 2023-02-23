@@ -5,7 +5,6 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import {
   Label, Heading, BodyShort, BodyLong,
 } from '@navikt/ds-react';
-import Office1 from '@navikt/ds-icons/svg/Office1.svg';
 import { Clipboard } from '@navikt/ft-plattform-komponenter';
 
 import {
@@ -19,6 +18,7 @@ import VelgDokumentForm from './VelgDokumentForm';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import kvinneIkonUrl from '../../images/kvinne.svg';
 import mannIkonUrl from '../../images/mann.svg';
+import office from '../../images/office.svg';
 import ukjentIkonUrl from '../../images/ukjent.svg';
 
 const finnKjønnBilde = (journalpost: Journalpost): string => {
@@ -36,7 +36,7 @@ const finnAvsenderBilde = (journalpost: Journalpost): string => {
     return ukjentIkonUrl;
   }
   if (avsenderId.length === 9) {
-    return Office1;
+    return office;
   }
   if (avsenderId.length === 11) {
     const tall = parseInt(avsenderId.charAt(8), 10);
