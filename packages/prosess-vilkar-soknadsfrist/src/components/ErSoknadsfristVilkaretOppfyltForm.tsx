@@ -21,7 +21,7 @@ import {
 import {
   Aksjonspunkt, AlleKodeverk, Behandling, FamilieHendelse, Soknad,
 } from '@navikt/fp-types';
-import SoknadsfristAp from '@navikt/fp-types-avklar-aksjonspunkter/src/prosess/SoknadsfristAp';
+import { SoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './erSoknadsfristVilkaretOppfyltForm.less';
 

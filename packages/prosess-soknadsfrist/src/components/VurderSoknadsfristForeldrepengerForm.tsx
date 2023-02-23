@@ -14,11 +14,10 @@ import {
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import { Aksjonspunkt } from '@navikt/fp-types';
+import { Aksjonspunkt, Søknadsfrist } from '@navikt/fp-types';
 import { VurderSoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
-import { Søknadsfrist } from '@navikt/fp-types/src/soknadTsType';
 import styles from './vurderSoknadsfristForeldrepengerForm.less';
 
 const isEdited = (hasAksjonspunkt: boolean, gyldigSenFremsetting?: boolean): boolean => hasAksjonspunkt && gyldigSenFremsetting !== undefined;

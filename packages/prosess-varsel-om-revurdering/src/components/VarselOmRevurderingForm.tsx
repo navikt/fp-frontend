@@ -23,9 +23,8 @@ import {
 import { ISO_DATE_FORMAT, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import FodselSammenligningIndex from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import SettPaVentModalIndex, { FormValues as ModalFormValues } from '@navikt/fp-modal-sett-pa-vent';
-import Behandling from '@navikt/fp-types/src/behandlingTsType';
 import {
-  Aksjonspunkt, FamilieHendelseSamling, Soknad, FamilieHendelse, AlleKodeverk,
+  Aksjonspunkt, FamilieHendelseSamling, Soknad, FamilieHendelse, AlleKodeverk, Behandling,
 } from '@navikt/fp-types';
 import { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
