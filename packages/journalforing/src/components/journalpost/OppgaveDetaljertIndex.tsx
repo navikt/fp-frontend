@@ -12,7 +12,7 @@ import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import OppgaveDetaljertVisning from './OppgaveDetaljertVisning';
 import styles from '../journalforingPanel.less';
 import Journalpost from '../../typer/journalpostTsType';
-import PDFVisning from './PDFVisning';
+import PDFVisningIF from './PDFVisningIF';
 import JournalDokument from '../../typer/journalDokumentTsType';
 import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
 
@@ -72,7 +72,7 @@ const OppgaveDetaljertIndex: FunctionComponent<OwnProps> = ({
         {valgtDokument
           && (
             <FlexColumn className={styles.pdfKolonne}>
-              <PDFVisning dokument={valgtDokument} />
+              <PDFVisningIF dokument={valgtDokument} />
             </FlexColumn>
           )}
       </FlexRow>
