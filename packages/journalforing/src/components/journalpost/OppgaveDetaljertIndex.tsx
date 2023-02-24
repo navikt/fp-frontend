@@ -10,9 +10,9 @@ import { NavAnsatt } from '@navikt/fp-types';
 import { restApiHooks, RestApiPathsKeys } from '../../data/fpfordelRestApi';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import OppgaveDetaljertVisning from './OppgaveDetaljertVisning';
-import styles from '../journalforingPanel.less';
+import styles from './oppgaveDetaljertIndex.less';
 import Journalpost from '../../typer/journalpostTsType';
-import PDFVisningIF from './PDFVisningIF';
+import PDFVisning from './PDFVisning';
 import JournalDokument from '../../typer/journalDokumentTsType';
 import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
 
@@ -72,7 +72,7 @@ const OppgaveDetaljertIndex: FunctionComponent<OwnProps> = ({
         {valgtDokument
           && (
             <FlexColumn className={styles.pdfKolonne}>
-              <PDFVisningIF dokument={valgtDokument} />
+              <PDFVisning dokument={valgtDokument} />
             </FlexColumn>
           )}
       </FlexRow>

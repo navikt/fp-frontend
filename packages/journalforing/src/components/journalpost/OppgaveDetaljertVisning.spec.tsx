@@ -18,9 +18,9 @@ describe('<JournalforingIndex>', () => {
     expect(screen.getByText('999999999')).toBeInTheDocument();
     expect(screen.getAllByText('Inntektsmelding')).toHaveLength(3);
 
-    expect(screen.getByLabelText('125416597 Foreldrepenger, opprettet 02.01.2022, endret 03.06.2022, Løpende')).toBeInTheDocument();
-    expect(screen.getByLabelText('155462542 Svangerskapspenger, opprettet 02.01.2022, endret 03.06.2022, Avsluttet')).toBeInTheDocument();
-    expect(screen.getByLabelText('175419131 Foreldrepenger, opprettet 03.01.2022, endret 03.07.2022, Avsluttet')).toBeInTheDocument();
+    expect(screen.getByLabelText('125416597 Foreldrepenger')).toBeInTheDocument();
+    expect(screen.getByLabelText('155462542 Svangerskapspenger')).toBeInTheDocument();
+    expect(screen.getByLabelText('175419131 Foreldrepenger')).toBeInTheDocument();
     expect(screen.getByLabelText('Opprett ny sak')).toBeInTheDocument();
 
     expect(screen.getByText('Journalfør').closest('button')).toBeDisabled();
@@ -57,9 +57,9 @@ describe('<JournalforingIndex>', () => {
     expect(screen.getByText('999999999')).toBeInTheDocument();
     expect(screen.getAllByText('Inntektsmelding')).toHaveLength(3);
 
-    expect(screen.getByLabelText('125416597 Foreldrepenger, opprettet 02.01.2022, endret 03.06.2022, Løpende')).toBeInTheDocument();
-    expect(screen.getByLabelText('155462542 Svangerskapspenger, opprettet 02.01.2022, endret 03.06.2022, Avsluttet')).toBeInTheDocument();
-    expect(screen.getByLabelText('175419131 Foreldrepenger, opprettet 03.01.2022, endret 03.07.2022, Avsluttet')).toBeInTheDocument();
+    expect(screen.getByLabelText('125416597 Foreldrepenger')).toBeInTheDocument();
+    expect(screen.getByLabelText('155462542 Svangerskapspenger')).toBeInTheDocument();
+    expect(screen.getByLabelText('175419131 Foreldrepenger')).toBeInTheDocument();
     expect(screen.getByLabelText('Opprett ny sak')).toBeInTheDocument();
 
     expect(screen.getByText('Journalfør').closest('button')).toBeDisabled();

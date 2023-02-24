@@ -5,7 +5,7 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import OppgaveTabellRad from './OppgaveTabellRad';
-import styles from '../journalforingPanel.less';
+import styles from './oppgaveTabell.less';
 
 type OwnProps = Readonly<{
   oppgaver: OppgaveOversikt[];

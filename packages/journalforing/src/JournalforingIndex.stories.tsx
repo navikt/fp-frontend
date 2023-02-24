@@ -33,21 +33,21 @@ const detaljertJournalpostMal = {
   dokumenter: [
     {
       dokumentId: '999999999',
-      tittel: 'Inntektsmelding',
+      tittel: 'Reference by Description',
       varianter: [],
-      lenke: '',
+      lenke: 'https://research.google.com/pubs/archive/44679.pdf',
     },
     {
       dokumentId: '999999998',
-      tittel: 'Søknad',
+      tittel: 'Reference by Description',
       varianter: [],
-      lenke: '',
+      lenke: 'https://research.google.com/pubs/archive/44679.pdf',
     },
     {
       dokumentId: '999999997',
-      tittel: 'Terminbekreftelse',
+      tittel: 'Bayesian Dark Knowledge',
       varianter: [],
-      lenke: '',
+      lenke: 'https://research.google.com/pubs/archive/44678.pdf',
     },
   ],
   fagsaker: [

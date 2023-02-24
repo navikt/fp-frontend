@@ -4,7 +4,7 @@ import { Button, Table, Link } from '@navikt/ds-react';
 import { NextFilled } from '@navikt/ds-icons';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
-import styles from '../journalforingPanel.less';
+import styles from './oppgaveTabellRad.less';
 import { finnYtelseTekst } from '../journalpost/VelgSakForm';
 
 type OwnProps = Readonly<{
@@ -17,7 +17,7 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
     setValgtOppgave(oppgave);
   }, []);
   return (
-    <Table.Row>
+    <Table.Row onClick={setOppgave} shadeOnHover className={styles.tabellRad}>
       <Table.DataCell><DateLabel dateString={oppgave.opprettetDato} /></Table.DataCell>
       <Table.DataCell><FormattedMessage id={finnYtelseTekst(oppgave.ytelseType)} /></Table.DataCell>
       <Table.DataCell>{oppgave.beskrivelse}</Table.DataCell>
@@ -25,14 +25,6 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
       <Table.DataCell><DateLabel dateString={oppgave.frist} /></Table.DataCell>
       <Table.DataCell>{oppgave.prioritet}</Table.DataCell>
       <Table.DataCell>{oppgave.enhetId}</Table.DataCell>
-      {oppgave.journalpostHarMangler
-        && (
-          <Table.DataCell>
-            <Link href="https://gosys-q1.dev.intern.nav.no/gosys" target="_blank" className={styles.gosysLink}>
-              <FormattedMessage id="Oppgave.Gosys.Link" />
-            </Link>
-          </Table.DataCell>
-        )}
       {!oppgave.journalpostHarMangler
         && (
           <Table.DataCell>
@@ -45,6 +37,14 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
             >
               <NextFilled className={styles.nesteIkon} />
             </Button>
+          </Table.DataCell>
+        )}
+      {oppgave.journalpostHarMangler
+        && (
+          <Table.DataCell>
+            <Link href="https://gosys-q1.dev.intern.nav.no/gosys" target="_blank" className={styles.gosysLink}>
+              <FormattedMessage id="Oppgave.Gosys.Link" />
+            </Link>
           </Table.DataCell>
         )}
     </Table.Row>
