@@ -2,9 +2,7 @@ import React, {
   FunctionComponent, useMemo,
 } from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
-import {
-  Label, Heading, BodyShort, BodyLong,
-} from '@navikt/ds-react';
+import { Heading, BodyShort, BodyLong } from '@navikt/ds-react';
 import { Clipboard } from '@navikt/ft-plattform-komponenter';
 
 import {
@@ -13,13 +11,14 @@ import {
 import VelgSakForm from './VelgSakForm';
 import Journalpost from '../../typer/journalpostTsType';
 import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
-import styles from '../journalforingPanel.less';
+import styles from './oppgaveDetaljertVisning.less';
 import VelgDokumentForm from './VelgDokumentForm';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import kvinneIkonUrl from '../../images/kvinne.svg';
 import mannIkonUrl from '../../images/mann.svg';
 import office from '../../images/office.svg';
 import ukjentIkonUrl from '../../images/ukjent.svg';
+import SakDetaljer from './SakDetaljer';
 
 const finnKjønnBilde = (journalpost: Journalpost): string => {
   const fnr = journalpost.bruker?.fnr;
@@ -64,6 +63,7 @@ const OppgaveDetaljertVisning: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
   const kjønnBilde = useMemo(() => finnKjønnBilde(journalpost), [journalpost]);
   const avsenderBilde = useMemo(() => finnAvsenderBilde(journalpost), [journalpost]);
+  const saker = journalpost.fagsaker || [];
   return (
     <>
       <FlexRow>
@@ -149,26 +149,42 @@ const OppgaveDetaljertVisning: FunctionComponent<OwnProps> = ({
       {journalpost.dokumenter
         && (
           <>
+            <FlexRow>
+              <FlexColumn>
+                <Heading size="small"><FormattedMessage id="ValgtOppgave.Dokumenter" /></Heading>
+              </FlexColumn>
+            </FlexRow>
+            <VerticalSpacer eightPx />
             <VelgDokumentForm dokumenter={journalpost.dokumenter} />
-            <VerticalSpacer sixteenPx />
+            <VerticalSpacer thirtyTwoPx />
           </>
         )}
-      <>
-        <FlexRow>
-          <FlexColumn>
-            <Label size="medium">
-              <FormattedMessage id="ValgtOppgave.RelaterteSaker" />
-            </Label>
-          </FlexColumn>
-        </FlexRow>
-        <VerticalSpacer twentyPx />
-        <VelgSakForm
-          journalpost={journalpost}
-          avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
-          submitJournalføring={submitJournalføring}
-          oppgave={oppgave}
-        />
-      </>
+      <FlexRow>
+        <FlexColumn>
+          <Heading size="small">
+            <FormattedMessage id="ValgtOppgave.RelaterteSaker" />
+          </Heading>
+        </FlexColumn>
+      </FlexRow>
+      <VerticalSpacer eightPx />
+      {saker.map((sak) => (
+        <SakDetaljer sak={sak} key={sak.saksnummer} />
+      ))}
+      <VerticalSpacer thirtyTwoPx />
+      <FlexRow>
+        <FlexColumn>
+          <Heading size="small">
+            <FormattedMessage id="ValgtOppgave.KnyttTilSak" />
+          </Heading>
+        </FlexColumn>
+      </FlexRow>
+      <VerticalSpacer eightPx />
+      <VelgSakForm
+        journalpost={journalpost}
+        avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
+        submitJournalføring={submitJournalføring}
+        oppgave={oppgave}
+      />
     </>
   );
 };

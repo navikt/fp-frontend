@@ -7,12 +7,9 @@ import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Form, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { fagsakYtelseType, fagsakStatus } from '@navikt/fp-kodeverk';
-import dayjs from 'dayjs';
-import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import { fagsakYtelseType } from '@navikt/fp-kodeverk';
 import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
-import VelgSakLenke from './VelgSakLenke';
 import Journalpost from '../../typer/journalpostTsType';
 import JournalFagsak from '../../typer/journalFagsakTsType';
 
@@ -21,21 +18,6 @@ const TOM_ARRAY:JournalFagsak[] = [];
 const LAG_NY_SAK = 'LAG_NY_SAK'; // Value for en av radioknappene som skal lede til ekstra inputfelt
 const radioFieldName = 'saksnummerValg';
 const selectFieldName = 'ytelsetypeValg';
-
-const finnStatusTekst = (statusKode: string): string => {
-  switch (statusKode) {
-    case fagsakStatus.AVSLUTTET:
-      return 'Journal.Sak.Avsluttet';
-    case fagsakStatus.LOPENDE:
-      return 'Journal.Sak.Løpende';
-    case fagsakStatus.OPPRETTET:
-      return 'Journal.Sak.Opprettet';
-    case fagsakStatus.UNDER_BEHANDLING:
-      return 'Journal.Sak.UnderBehandling';
-    default:
-      return '';
-  }
-};
 
 export const finnYtelseTekst = (ytelseKode: string): string => {
   switch (ytelseKode) {
@@ -115,9 +97,6 @@ const lagRadioOptions = (saksliste: JournalFagsak[], intl: IntlShape, fetTekst: 
         b: fetTekst,
         saksnummer: sak.saksnummer,
         ytelse: intl.formatMessage({ id: finnYtelseTekst(sak.ytelseType) }),
-        endret: dayjs(sak.sistEndret).format(DDMMYYYY_DATE_FORMAT),
-        opprettet: dayjs(sak.datoOpprettet).format(DDMMYYYY_DATE_FORMAT),
-        status: intl.formatMessage({ id: finnStatusTekst(sak.status) }),
       }}
     />,
     value: sak.saksnummer,
@@ -171,11 +150,6 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
               validate={[required]}
               radios={radioOptions}
             />
-          </FlexColumn>
-          <FlexColumn>
-            {saksliste.map((sak) => (
-              <VelgSakLenke saksnummer={sak.saksnummer} key={sak.saksnummer} />
-            ))}
           </FlexColumn>
         </FlexRow>
         {skalOppretteSak
