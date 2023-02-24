@@ -1,14 +1,6 @@
-import React, { FunctionComponent, useState, useCallback } from 'react';
-// @ts-ignore Fiks når vi vet hva vi gjør med PDF'er...
-import { Document, Page, pdfjs } from 'react-pdf';
-import { Loader, Pagination } from '@navikt/ds-react';
-import { FormattedMessage } from 'react-intl';
+import React, { FunctionComponent } from 'react';
 import styles from './pdfvisning.less';
 import JournalDokument from '../../typer/journalDokumentTsType';
-
-// eslint-disable-next-line
-const pdfjsWorker = require('pdfjs-dist/build/pdf.worker.entry');
-pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 type OwnProps = Readonly<{
   dokument: JournalDokument;
@@ -19,36 +11,10 @@ type OwnProps = Readonly<{
  */
 const PDFVisning: FunctionComponent<OwnProps> = ({
   dokument,
-}) => {
-  const [valgtSide, setValgtSide] = useState(1);
-  const [antallSider, setAntallSider] = useState(1);
-
-  const onDocumentLoadSuccess = useCallback((numPages: number) => {
-    if (valgtSide > numPages) {
-      setValgtSide(numPages);
-    }
-    setAntallSider(numPages);
-  }, [dokument]);
-
-  return (
-    <div className={styles.pdfContainer}>
-      <Pagination
-        page={valgtSide}
-        count={antallSider}
-        onPageChange={setValgtSide}
-      />
-      <Document
-        file={dokument.lenke}
-        onLoadSuccess={onDocumentLoadSuccess}
-        error={<FormattedMessage id="ValgtOppgave.PDF.Feil" />}
-        loading={
-          <Loader size="xlarge" variant="interaction" transparent />
-      }
-      >
-        <Page pageNumber={valgtSide} />
-      </Document>
-    </div>
-  );
-};
+}) => (
+  <div className={styles.pdfContainer}>
+    <iframe id="iframepdf" src={dokument.lenke} width="1300" height="1000" title={dokument.tittel} />
+  </div>
+);
 
 export default PDFVisning;
