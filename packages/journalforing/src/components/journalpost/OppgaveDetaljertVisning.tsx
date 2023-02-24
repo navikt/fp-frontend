@@ -156,7 +156,7 @@ const OppgaveDetaljertVisning: FunctionComponent<OwnProps> = ({
             </FlexRow>
             <VerticalSpacer eightPx />
             <VelgDokumentForm dokumenter={journalpost.dokumenter} />
-            <VerticalSpacer sixteenPx />
+            <VerticalSpacer thirtyTwoPx />
           </>
         )}
       <FlexRow>
@@ -170,6 +170,7 @@ const OppgaveDetaljertVisning: FunctionComponent<OwnProps> = ({
       {saker.map((sak) => (
         <SakDetaljer sak={sak} key={sak.saksnummer} />
       ))}
+      <VerticalSpacer thirtyTwoPx />
       <FlexRow>
         <FlexColumn>
           <Heading size="small">
