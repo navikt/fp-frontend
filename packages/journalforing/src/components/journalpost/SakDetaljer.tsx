@@ -4,7 +4,6 @@ import {
 } from '@navikt/ds-react';
 import { NewTab } from '@navikt/ds-icons';
 import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
-import JournalFagsak from 'journalforing/src/typer/journalFagsakTsType';
 import { FormattedMessage } from 'react-intl';
 import { FagsakStatus } from '@navikt/ft-kodeverk';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
@@ -12,6 +11,7 @@ import dayjs from 'dayjs';
 import { Clipboard } from '@navikt/ft-plattform-komponenter';
 import styles from './sakDetaljer.less';
 import { finnYtelseTekst } from './VelgSakForm';
+import JournalFagsak from '../../typer/journalFagsakTsType';
 
 const velgSakLenke = (saksnummer: string): string => (`/fagsak/${saksnummer}/`);
 
