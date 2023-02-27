@@ -8,10 +8,10 @@ import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Form, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { fagsakYtelseType } from '@navikt/fp-kodeverk';
-import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
-import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
-import Journalpost from '../../typer/journalpostTsType';
-import JournalFagsak from '../../typer/journalFagsakTsType';
+import JournalførSubmitValue from '../../../typer/ferdigstillJournalføringSubmit';
+import OppgaveOversikt from '../../../typer/oppgaveOversiktTsType';
+import Journalpost from '../../../typer/journalpostTsType';
+import JournalFagsak from '../../../typer/journalFagsakTsType';
 
 const TOM_ARRAY:JournalFagsak[] = [];
 

@@ -1,1 +1,1 @@
-export { default } from './src/JournalforingIndex';
+export { default } from './src/OppgaveJournalføringIndex';
