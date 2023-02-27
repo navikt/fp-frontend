@@ -19,8 +19,6 @@ import ErrorBoundary from '../app/ErrorBoundary';
 
 import styles from './behandlingSupportIndex.less';
 
-import '@navikt/ft-sak-support-meny/dist/style.css';
-
 export const hentSynligePaneler = (behandlingTillatteOperasjoner?: BehandlingTillatteOperasjoner): string[] => Object.values(SupportTabs)
   .filter((supportPanel) => {
     switch (supportPanel) {
