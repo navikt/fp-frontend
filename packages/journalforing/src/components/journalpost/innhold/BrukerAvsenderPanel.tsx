@@ -6,11 +6,11 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { Office1 } from '@navikt/ds-icons';
 import { useIntl, FormattedMessage, IntlShape } from 'react-intl';
-import kvinneIkonUrl from '../../images/kvinne.svg';
-import mannIkonUrl from '../../images/mann.svg';
-import ukjentIkonUrl from '../../images/ukjent.svg';
+import kvinneIkonUrl from '../../../images/kvinne.svg';
+import mannIkonUrl from '../../../images/mann.svg';
+import ukjentIkonUrl from '../../../images/ukjent.svg';
 import styles from './brukerAvsenderPanel.less';
-import Journalpost from '../../typer/journalpostTsType';
+import Journalpost from '../../../typer/journalpostTsType';
 
 const finnKjønnBilde = (journalpost: Journalpost): string => {
   const fnr = journalpost.bruker?.fnr;

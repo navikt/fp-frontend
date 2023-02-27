@@ -5,13 +5,13 @@ import { Heading, BodyLong } from '@navikt/ds-react';
 import {
   FlexColumn, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import VelgSakForm from './VelgSakForm';
+import VelgSakForm from './form/VelgSakForm';
 import Journalpost from '../../typer/journalpostTsType';
 import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
-import SakDetaljer from './SakDetaljer';
-import DokumentDetaljer from './DokumentDetaljer';
-import BrukerAvsenderPanel from './BrukerAvsenderPanel';
+import SakDetaljer from './innhold/SakDetaljer';
+import DokumentDetaljer from './innhold/DokumentDetaljer';
+import BrukerAvsenderPanel from './innhold/BrukerAvsenderPanel';
 
 type OwnProps = Readonly<{
   journalpost: Journalpost;
@@ -21,9 +21,9 @@ type OwnProps = Readonly<{
 }>;
 
 /**
- * OppgaveDetaljertVisning - Viser detaljer om valgt oppgave
+ * JournalpostDetaljer - Viser detaljer om valgt journalpost
  */
-const OppgaveDetaljertVisning: FunctionComponent<OwnProps> = ({
+const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
   journalpost,
   oppgave,
   avbrytVisningAvJournalpost,
@@ -100,4 +100,4 @@ const OppgaveDetaljertVisning: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-export default OppgaveDetaljertVisning;
+export default JournalpostDetaljer;
