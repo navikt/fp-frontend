@@ -18,7 +18,7 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({
 }) => (
   <>
     {dokumenter.map((dok) => (
-      <div className={styles.dokContainer}>
+      <div className={styles.dokContainer} key={dok.dokumentId}>
         <FlexRow>
           <FlexColumn className={styles.dokumentTittel}><Label>{dok.tittel}</Label></FlexColumn>
           <FlexColumn><a href={dok.lenke} target="_blank" rel="noreferrer"><NewTab className={styles.newTabIcon} /></a></FlexColumn>

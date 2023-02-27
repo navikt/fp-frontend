@@ -23,6 +23,7 @@
     "ValgtOppgave.RelaterteSaker": "Saker som kan være knyttet til innholdet",
     "ValgtOppgave.KnyttTilSak": "Knytt til sak",
     "ValgtOppgave.Dokumenter": "Innhold",
+    "ValgtOppgave.Dokumenter.Tom": "Journalposten har ingen dokumenter",
     "ValgtOppgave.Dokument.Velg": "Dokumenter på oppgave",
     "ValgtOppgave.Dokument.ÅpneFane": "Åpne i ny fane",
     "ValgtOppgave.Dokument.Tittel": "Dokumenter",

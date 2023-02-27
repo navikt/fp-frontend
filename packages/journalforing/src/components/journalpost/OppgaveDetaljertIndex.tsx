@@ -12,9 +12,9 @@ import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import OppgaveDetaljertVisning from './OppgaveDetaljertVisning';
 import styles from './oppgaveDetaljertIndex.less';
 import Journalpost from '../../typer/journalpostTsType';
-import PDFVisning from './PDFVisning';
 import JournalDokument from '../../typer/journalDokumentTsType';
 import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
+import DokumentIndex from './pdf/DokumentIndex';
 
 type OwnProps = Readonly<{
   oppgave: OppgaveOversikt;
@@ -72,7 +72,7 @@ const OppgaveDetaljertIndex: FunctionComponent<OwnProps> = ({
         {valgtDokument
           && (
             <FlexColumn className={styles.pdfKolonne}>
-              <PDFVisning dokument={valgtDokument} />
+              <DokumentIndex dokumenter={journalpost.dokumenter} />
             </FlexColumn>
           )}
       </FlexRow>
