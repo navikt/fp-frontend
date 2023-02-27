@@ -11,7 +11,7 @@ type OwnProps = Readonly<{
 }>;
 
 /**
- * SakDetaljer - Inneholder detaljer om en sak som kan knyttes til journalposten
+ * DokumentDetaljer - Inneholder detaljer om et dokument på journalposten
  */
 const DokumentDetaljer: FunctionComponent<OwnProps> = ({
   dokumenter,
