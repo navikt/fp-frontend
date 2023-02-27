@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { fagsakYtelseType, fagsakStatus } from '@navikt/fp-kodeverk';
-import OppgaveDetaljertVisning from './OppgaveDetaljertVisning';
+import JournalpostDetaljer from './JournalpostDetaljer';
 import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
 import OppgavePrioritet from '../../kodeverk/oppgavePrioritet';
 import JournalKanal from '../../kodeverk/journalKanal';
@@ -90,7 +90,7 @@ const detaljertJournalpostMal = {
 
 export default {
   title: 'journalføring/journalføring/Journalpost',
-  component: OppgaveDetaljertVisning,
+  component: JournalpostDetaljer,
   decorators: [withIntl],
 };
 
@@ -103,7 +103,7 @@ const Template: Story<{
   oppgave,
   submitJournalføring,
 }) => (
-  <OppgaveDetaljertVisning
+  <JournalpostDetaljer
     avbrytVisningAvJournalpost={action('button-click') as () => void}
     oppgave={oppgave}
     journalpost={detaljertJournalpost}

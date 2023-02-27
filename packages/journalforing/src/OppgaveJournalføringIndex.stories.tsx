@@ -7,7 +7,7 @@ import { NavAnsatt } from '@navikt/fp-types';
 
 import { fagsakYtelseType, fagsakStatus } from '@navikt/fp-kodeverk';
 import { RestApiPathsKeys, requestApi } from './data/fpfordelRestApi';
-import JournalforingIndex from './JournalforingIndex';
+import JournalforingIndex from './OppgaveJournalføringIndex';
 import OppgaveOversikt from './typer/oppgaveOversiktTsType';
 import OppgavePrioritet from './kodeverk/oppgavePrioritet';
 import Journalpost from './typer/journalpostTsType';

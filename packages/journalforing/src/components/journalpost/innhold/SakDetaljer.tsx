@@ -10,8 +10,8 @@ import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 import { Clipboard } from '@navikt/ft-plattform-komponenter';
 import styles from './sakDetaljer.less';
-import { finnYtelseTekst } from './VelgSakForm';
-import JournalFagsak from '../../typer/journalFagsakTsType';
+import { finnYtelseTekst } from '../form/VelgSakForm';
+import JournalFagsak from '../../../typer/journalFagsakTsType';
 
 const velgSakLenke = (saksnummer: string): string => (`/fagsak/${saksnummer}/`);
 

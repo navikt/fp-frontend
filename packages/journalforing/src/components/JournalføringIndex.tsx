@@ -5,9 +5,9 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { NavAnsatt } from '@navikt/fp-types';
 
-import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
-import OppgaveTabell from './OppgaveTabell';
-import OppgaveDetaljertIndex from '../journalpost/OppgaveDetaljertIndex';
+import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
+import OppgaveTabell from './oppgaver/OppgaveTabell';
+import OppgaveDetaljertIndex from './journalpost/JournalpostIndex';
 
 type OwnProps = Readonly<{
   oppgaver: OppgaveOversikt[];
@@ -16,9 +16,9 @@ type OwnProps = Readonly<{
 }>;
 
 /**
- * OppgaveIndex - Styrer logikk rundt valg av oppgave i listen med oppgaver
+ * JournalføringIndex - Styrer logikk rundt valg av oppgave i listen med oppgaver
  */
-const OppgaveIndex: FunctionComponent<OwnProps> = ({
+const JournalføringIndex: FunctionComponent<OwnProps> = ({
   oppgaver,
   innhentAlleOppgaver,
   navAnsatt,
@@ -45,4 +45,4 @@ const OppgaveIndex: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default OppgaveIndex;
+export default JournalføringIndex;

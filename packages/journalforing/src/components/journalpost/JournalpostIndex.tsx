@@ -9,8 +9,8 @@ import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { NavAnsatt } from '@navikt/fp-types';
 import { restApiHooks, RestApiPathsKeys } from '../../data/fpfordelRestApi';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
-import OppgaveDetaljertVisning from './OppgaveDetaljertVisning';
-import styles from './oppgaveDetaljertIndex.less';
+import OppgaveDetaljertVisning from './JournalpostDetaljer';
+import styles from './journalpostIndex.less';
 import Journalpost from '../../typer/journalpostTsType';
 import JournalDokument from '../../typer/journalDokumentTsType';
 import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
@@ -24,9 +24,9 @@ type OwnProps = Readonly<{
 }>;
 
 /**
- * OppgaveDetaljertIndex - Komponent som holder på og styrer logikk rundt detaljert visning av oppgave
+ * JournalpostIndex - Komponent som holder på og styrer logikk rundt detaljert visning av journalpost
  */
-const OppgaveDetaljertIndex: FunctionComponent<OwnProps> = ({
+const JournalpostIndex: FunctionComponent<OwnProps> = ({
   oppgave,
   avbrytVisningAvJournalpost,
   innhentAlleOppgaver,
@@ -80,4 +80,4 @@ const OppgaveDetaljertIndex: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default OppgaveDetaljertIndex;
+export default JournalpostIndex;
