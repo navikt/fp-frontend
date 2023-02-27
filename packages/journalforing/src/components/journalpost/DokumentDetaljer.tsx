@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import { BodyShort, Label } from '@navikt/ds-react';
+import { Label } from '@navikt/ds-react';
 import { NewTab } from '@navikt/ds-icons';
 
-import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { FormattedMessage } from 'react-intl';
+import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 import JournalDokument from '../../typer/journalDokumentTsType';
 import styles from './dokumentDetaljer.less';
 
