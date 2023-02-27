@@ -12,8 +12,8 @@ import { forhandsvisDokument } from '@navikt/ft-utils';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { AlleKodeverkTilbakekreving, Behandling } from '@navikt/fp-types';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import ProsessVedtak, {
-  VedtakAksjonspunktCode, ForeslaVedtakTilbakekrevingAp, ForhandsvisData,
+import {
+  VedtakTilbakekrevingProsessIndex, VedtakAksjonspunktCode, ForeslaVedtakTilbakekrevingAp, ForhandsvisData,
 } from '@navikt/ft-prosess-tilbakekreving-vedtak';
 
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
@@ -128,7 +128,7 @@ const VedtakTilbakekrevingProsessInitPanel: FunctionComponent<OwnProps> = ({
           submit={lukkApenRevurderingModal}
         />
       )}
-      <ProsessVedtak
+      <VedtakTilbakekrevingProsessIndex
         behandling={behandling}
         beregningsresultat={panelData.beregningsresultat}
         isReadOnly={isReadOnly}

@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import DokumenterSakIndex from '@navikt/ft-sak-dokumenter';
+import { DokumenterSakIndex } from '@navikt/ft-sak-dokumenter';
 import { LoadingPanel, usePrevious } from '@navikt/ft-ui-komponenter';
 import { Dokument } from '@navikt/ft-types';
 

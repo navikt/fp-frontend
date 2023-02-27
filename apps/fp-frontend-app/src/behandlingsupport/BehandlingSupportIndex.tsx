@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIntl } from 'react-intl';
-import SupportMenySakIndex, { SupportTabs } from '@navikt/ft-sak-support-meny';
+import { SupportMenySakIndex, SupportTabs } from '@navikt/ft-sak-support-meny';
 
 import { BehandlingTillatteOperasjoner } from '@navikt/fp-types';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';

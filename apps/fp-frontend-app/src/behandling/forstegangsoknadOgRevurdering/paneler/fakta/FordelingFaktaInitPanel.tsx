@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
-import ProsessFordeling, { FaktaFordelBeregningAvklaringsbehovCode } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
+import { FordelBeregningsgrunnlagFaktaIndex, FaktaFordelBeregningAvklaringsbehovCode } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
 import { Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/ft-types';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
@@ -103,7 +103,7 @@ const FordelingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
       && !!props.behandling.aksjonspunkt.some((ap) => AKSJONSPUNKT_KODER.some((kode) => kode === ap.definisjon))}
     renderPanel={(data) => (
       // @ts-ignore TODO Ikkje send med ned heile kodeverket
-      <ProsessFordeling
+      <FordelBeregningsgrunnlagFaktaIndex
         {...data}
         beregningsgrunnlagVilkår={lagBGVilkar(data.behandling.vilkår, data.beregningsgrunnlag)}
         beregningsgrunnlagListe={lagFormatertBG(data.beregningsgrunnlag)}

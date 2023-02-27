@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo, useCallback } from 'react';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
-import ProsessFeilutbetaling, { FeilutbetalingAksjonspunktCode } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
+import { FeilutbetalingFaktaIndex, FeilutbetalingAksjonspunktCode } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import {
   FeilutbetalingFakta, Aksjonspunkt, FeilutbetalingAarsak,
 } from '@navikt/ft-types';
@@ -72,7 +72,7 @@ const FeilutbetalingFaktaInitPanel: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <ProsessFeilutbetaling
+    <FeilutbetalingFaktaIndex
       feilutbetalingFakta={initData.feilutbetalingFakta}
       feilutbetalingAarsak={initData.feilutbetalingAarsak}
       fagsakYtelseTypeKode={fagsakYtelseTypeKode}

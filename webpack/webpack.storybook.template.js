@@ -16,6 +16,15 @@ module.exports = (config, srcDir, additionalStyleRule = {}) => {
     return data;
   });
 
+  config.resolve = {
+    ...config.resolve,
+    alias: {
+      ...config.resolve.alias,
+      'react-hook-form': require.resolve('react-hook-form'),
+    },
+    extensions: config.resolve.extensions.concat(['.ts', '.tsx', '.less']),
+  };
+
   config.module.rules = config.module.rules.concat({
       test: /\.(tsx?|ts?)$/,
       include: srcDir,
@@ -31,8 +40,6 @@ module.exports = (config, srcDir, additionalStyleRule = {}) => {
     styleModulesRule(srcDir),
     styleRule(srcDir),
     additionalStyleRule);
-
-    config.resolve.extensions.push('.ts', '.tsx', '.less');
 
     config.plugins.push(new MiniCssExtractPlugin({
       filename: 'style[name].css',
