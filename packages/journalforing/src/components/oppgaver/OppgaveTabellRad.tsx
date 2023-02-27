@@ -17,7 +17,7 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
     setValgtOppgave(oppgave);
   }, []);
   return (
-    <Table.Row onClick={setOppgave} shadeOnHover className={styles.tabellRad}>
+    <Table.Row onClick={oppgave.journalpostHarMangler ? undefined : setOppgave} shadeOnHover className={oppgave.journalpostHarMangler ? undefined : styles.tabellRad}>
       <Table.DataCell><DateLabel dateString={oppgave.opprettetDato} /></Table.DataCell>
       <Table.DataCell><FormattedMessage id={finnYtelseTekst(oppgave.ytelseType)} /></Table.DataCell>
       <Table.DataCell>{oppgave.beskrivelse}</Table.DataCell>
