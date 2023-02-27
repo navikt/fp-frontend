@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Heading, BodyLong } from '@navikt/ds-react';
 
 import {
-  FlexColumn, FlexRow, Image, VerticalSpacer,
+  FlexColumn, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import VelgSakForm from './VelgSakForm';
 import Journalpost from '../../typer/journalpostTsType';
