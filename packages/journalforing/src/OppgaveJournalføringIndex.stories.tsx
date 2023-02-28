@@ -15,6 +15,8 @@ import JournalKanal from './kodeverk/journalKanal';
 
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
+import '@navikt/ft-form-hooks/dist/style.css';
+import '@navikt/ft-plattform-komponenter/dist/style.css';
 
 const detaljertJournalpostMal = {
   journalpostId: '986547336994',
@@ -57,6 +59,7 @@ const detaljertJournalpostMal = {
       datoOpprettet: '2022-01-02',
       sistEndret: '2022-06-03',
       status: fagsakStatus.LOPENDE,
+      gjeldendeFamiliehendelseDato: '2022-02-02',
     },
     {
       saksnummer: '155462542',
@@ -64,6 +67,7 @@ const detaljertJournalpostMal = {
       datoOpprettet: '2022-01-02',
       sistEndret: '2022-06-03',
       status: fagsakStatus.AVSLUTTET,
+      gjeldendeFamiliehendelseDato: '2022-03-02',
     },
     {
       saksnummer: '175419131',

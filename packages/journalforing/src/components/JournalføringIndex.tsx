@@ -13,6 +13,9 @@ type OwnProps = Readonly<{
   oppgaver: OppgaveOversikt[];
   innhentAlleOppgaver: (param: { ident: string }) => Promise<OppgaveOversikt[] | undefined>;
   navAnsatt: NavAnsatt;
+  setValgtOppgave: (oppgave: OppgaveOversikt) => void;
+  avbrytVisningAvJournalpost: () => void;
+  valgtOppgave?: OppgaveOversikt;
 }>;
 
 /**
@@ -22,27 +25,24 @@ const JournalføringIndex: FunctionComponent<OwnProps> = ({
   oppgaver,
   innhentAlleOppgaver,
   navAnsatt,
-}) => {
-  const [valgtOppgave, setValgtOppgave] = useState<OppgaveOversikt | undefined>(undefined);
-  const avbryt = useCallback(() => {
-    setValgtOppgave(undefined);
-  }, [valgtOppgave]);
-  return (
-    <FlexContainer>
-      <VerticalSpacer sixteenPx />
-      {!valgtOppgave
+  valgtOppgave,
+  setValgtOppgave,
+  avbrytVisningAvJournalpost,
+}) => (
+  <FlexContainer>
+    <VerticalSpacer sixteenPx />
+    {!valgtOppgave
         && <OppgaveTabell oppgaver={oppgaver} setValgtOppgave={setValgtOppgave} />}
-      {valgtOppgave
+    {valgtOppgave
         && (
           <OppgaveDetaljertIndex
-            avbrytVisningAvJournalpost={avbryt}
+            avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
             oppgave={valgtOppgave}
             innhentAlleOppgaver={innhentAlleOppgaver}
             navAnsatt={navAnsatt}
           />
         )}
-    </FlexContainer>
-  );
-};
+  </FlexContainer>
+);
 
 export default JournalføringIndex;

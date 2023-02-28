@@ -1,15 +1,19 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, {
+  FunctionComponent, useEffect, useState, useCallback,
+} from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
-import { Heading } from '@navikt/ds-react';
+import { Heading, Link } from '@navikt/ds-react';
+import { Back } from '@navikt/ds-icons';
 import { NavAnsatt } from '@navikt/fp-types';
-import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { LoadingPanel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import messages from '../i18n/nb_NO.json';
 import JournalforingPanel from './components/JournalforingPanel';
 import JournalføringIndex from './components/JournalføringIndex';
 import { RestApiPathsKeys, restApiHooks, requestApi } from './data/fpfordelRestApi';
 import OppgaveOversikt from './typer/oppgaveOversiktTsType';
+import styles from './oppgaveJournalføringIndex.less';
 
 const intl = createIntl(messages);
 const TOM_ARRAY: OppgaveOversikt[] = [];
@@ -36,6 +40,10 @@ interface OwnProps {
 const JournalforingIndex: FunctionComponent<OwnProps> = ({
   navAnsatt,
 }) => {
+  const [valgtOppgave, setValgtOppgave] = useState<OppgaveOversikt | undefined>(undefined);
+  const avbryt = useCallback(() => {
+    setValgtOppgave(undefined);
+  }, [valgtOppgave]);
   const {
     startRequest: innhentAlleOppgaver,
     data: alleOppgaver = TOM_ARRAY,
@@ -66,10 +74,27 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({
   return (
     <RawIntlProvider value={intl}>
       <JournalforingPanel>
-        <Heading size="medium">
-          <FormattedMessage id="Journalforing.Tittel" />
-        </Heading>
-        <JournalføringIndex oppgaver={alleOppgaver} innhentAlleOppgaver={innhentAlleOppgaver} navAnsatt={navAnsatt} />
+        <div className={styles.header}>
+          {valgtOppgave
+            && (
+            <Link onClick={avbryt} className={styles.link}>
+              <Back />
+              <FormattedMessage id="Journalforing.Oversikt" />
+            </Link>
+            )}
+          <VerticalSpacer eightPx />
+          <Heading size="medium">
+            <FormattedMessage id="Journalforing.Tittel" />
+          </Heading>
+        </div>
+        <JournalføringIndex
+          valgtOppgave={valgtOppgave}
+          oppgaver={alleOppgaver}
+          innhentAlleOppgaver={innhentAlleOppgaver}
+          navAnsatt={navAnsatt}
+          setValgtOppgave={setValgtOppgave}
+          avbrytVisningAvJournalpost={avbryt}
+        />
       </JournalforingPanel>
     </RawIntlProvider>
   );

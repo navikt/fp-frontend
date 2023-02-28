@@ -1,6 +1,7 @@
 {
     "Journalforing.Tittel": "Journalføring",
     "Journalforing.Tilgang": "Du har ikke tilgang til journalføring",
+    "Journalforing.Oversikt": "Oversikt",
     "Journalforing.Oppgaver.Tittel": "Journalføringsoppgaver",
     "Journalforing.Oppgaver.IngenOppgaver": "Fant ingen journalføringsoppgaver",
     "Oppgavetabell.Opprettet": "Opprettet",
@@ -33,6 +34,7 @@
     "Saksliste.Form.Journalfor": "Journalfør",
     "Journal.Sak.Avsluttet": "Avsluttet",
     "Journal.Sak.Løpende": "Løpende",
+    "Journal.Sak.FamilieHendelseDato": "BARNET {famDato}",
     "Journal.Sak.Ny": "Opprett ny sak",
     "Journal.Sak.VelgYtelse": "Ytelse",
     "Journal.Sak.Opprettet": "Opprettet",
