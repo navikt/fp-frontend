@@ -12,7 +12,7 @@ import {
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { Behandling, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import ProsessTilbakekreving, { VilkarsVurderingAp, ForeldelseAksjonspunktCodes } from '@navikt/ft-prosess-tilbakekreving';
+import { TilbakekrevingProsessIndex, VilkarsVurderingAp, ForeldelseAksjonspunktCodes } from '@navikt/ft-prosess-tilbakekreving';
 
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
 import getAlleMerknaderFraBeslutter from '../../felles/util/getAlleMerknaderFraBeslutter';
@@ -78,7 +78,7 @@ const TilbakekrevingProsessInitPanel: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <ProsessTilbakekreving
+    <TilbakekrevingProsessIndex
       behandling={behandling}
       perioderForeldelse={initData.perioderForeldelse}
       vilkarvurderingsperioder={initData.vilkarvurderingsperioder}

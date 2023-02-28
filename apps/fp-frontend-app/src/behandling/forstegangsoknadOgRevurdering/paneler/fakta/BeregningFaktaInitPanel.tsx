@@ -13,7 +13,7 @@ import {
 } from '@navikt/ft-types';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
-import ProsessFaktaBeregning, { FaktaBeregningAvklaringsbehovCode } from '@navikt/ft-fakta-beregning';
+import { BeregningFaktaIndex, FaktaBeregningAvklaringsbehovCode } from '@navikt/ft-fakta-beregning';
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
@@ -121,7 +121,7 @@ const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
     skalPanelVisesIMeny={() => props.requestApi.hasPath(BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG.name)}
     renderPanel={(data) => (
       // @ts-ignore TODO Ikkje send med ned heile kodeverket
-      <ProsessFaktaBeregning
+      <BeregningFaktaIndex
         {...data}
         vilkar={lagBGVilkar(props.behandling.vilkår, data.beregningsgrunnlag)}
         beregningsgrunnlag={lagFormatertBG(data.beregningsgrunnlag)}

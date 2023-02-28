@@ -9,7 +9,7 @@ import { ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } from '@navikt/fp-ty
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
-import ProsessBeregningsgrunnlag, { ProsessBeregningsgrunnlagAvklaringsbehovCode } from '@navikt/ft-prosess-beregningsgrunnlag';
+import { BeregningsgrunnlagProsessIndex, ProsessBeregningsgrunnlagAvklaringsbehovCode } from '@navikt/ft-prosess-beregningsgrunnlag';
 
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
@@ -109,7 +109,7 @@ const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & Prose
     skalPanelVisesIMeny={() => true}
     renderPanel={(data) => (
       // @ts-ignore TODO Ikkje send med ned heile kodeverket
-      <ProsessBeregningsgrunnlag
+      <BeregningsgrunnlagProsessIndex
         {...data}
         beregningsgrunnlagsvilkar={lagBGVilkar(data.vilkar, data.beregningsgrunnlag)}
         beregningsgrunnlagListe={lagFormatertBG(data.beregningsgrunnlag)}

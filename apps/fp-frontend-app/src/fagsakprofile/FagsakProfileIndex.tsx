@@ -6,8 +6,8 @@ import {
 } from 'react-router-dom';
 import { Location } from 'history';
 import { useIntl } from 'react-intl';
-import BehandlingVelgerSakIndex from '@navikt/ft-sak-behandling-velger';
-import FagsakProfilSakIndex from '@navikt/ft-sak-fagsak-profil';
+import { BehandlingVelgerSakIndex } from '@navikt/ft-sak-behandling-velger';
+import { FagsakProfilSakIndex } from '@navikt/ft-sak-fagsak-profil';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';

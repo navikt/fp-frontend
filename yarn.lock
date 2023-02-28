@@ -1960,40 +1960,41 @@
   resolved "https://npm.pkg.github.com/download/@navikt/fnrvalidator/1.3.3/8414963a30e59e3056c9befea7bb022498a2a742#8414963a30e59e3056c9befea7bb022498a2a742"
   integrity sha512-GsLa9ioYPGsDMBHcgKUNoYbZor09KyFIqSaWy8jy1I7f06q6DgUhdpZuRTHLVRCPjWqF2aLzKtvAfrw5dSeakg==
 
-"@navikt/ft-fakta-beregning@3.0.20":
-  version "3.0.20"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-fakta-beregning/3.0.20/776f2be30d78d7d83e2fe55d8b6f9f941b774797#776f2be30d78d7d83e2fe55d8b6f9f941b774797"
-  integrity sha512-UnJvh9I30r35jf56jmwdJjWLVPFyJCGv/kgLbMBeBsLgf5V6gfXOZhw1WAY/5qeyRVA798bO12g14Y6pdpG/CA==
+"@navikt/ft-fakta-beregning@4.0.0":
+  version "4.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-fakta-beregning/4.0.0/d05489ad3cf7407fff7749727ab52fc05202a3db#d05489ad3cf7407fff7749727ab52fc05202a3db"
+  integrity sha512-Zh+LPrVaALWUSQ90XSv3NPRfEiSGF+uKefGe58EwWNhBgCk6RtEjiUj3dT3SWGFNJe+GKLJ/YytSOTy6Ovgrgw==
   dependencies:
     "@navikt/ds-css" "2.1.7"
     "@navikt/ds-react" "2.1.7"
-    "@navikt/ft-form-hooks" "^3.3.5"
-    "@navikt/ft-form-validators" "^1.0.52"
-    "@navikt/ft-kodeverk" "^1.0.26"
-    "@navikt/ft-konstanter" "^1.0.19-alpha.0"
-    "@navikt/ft-types" "^1.1.2"
-    "@navikt/ft-ui-komponenter" "^1.3.15"
-    "@navikt/ft-utils" "^1.1.20"
+    "@navikt/ft-form-hooks" "^4.0.0"
+    "@navikt/ft-form-validators" "^2.0.0"
+    "@navikt/ft-kodeverk" "^2.0.0"
+    "@navikt/ft-konstanter" "^2.0.0"
+    "@navikt/ft-types" "^2.0.0"
+    "@navikt/ft-ui-komponenter" "^2.0.0"
+    "@navikt/ft-utils" "^2.0.0"
     core-js "3.28.0"
     dayjs "1.11.7"
+    dayjs-plugin-utc "0.1.2"
     react "18.2.0"
     react-dom "18.2.0"
     react-hook-form "7.43.1"
     react-intl "6.2.8"
 
-"@navikt/ft-fakta-fordel-beregningsgrunnlag@6.0.10":
-  version "6.0.10"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-fakta-fordel-beregningsgrunnlag/6.0.10/e244d88867db5e0baefcfedbf6c12052a012a869#e244d88867db5e0baefcfedbf6c12052a012a869"
-  integrity sha512-109ga8wJsYhzGB7PE2dkviyKecB7vKWh+FsO5oQgrbcnTfigOP3zGZLnCuyzlYBFzEEryjzpyfYISlIlgRKoLA==
+"@navikt/ft-fakta-fordel-beregningsgrunnlag@7.0.0":
+  version "7.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-fakta-fordel-beregningsgrunnlag/7.0.0/2e9cb960d50856a08022390b2753fa00de5b4ecf#2e9cb960d50856a08022390b2753fa00de5b4ecf"
+  integrity sha512-E9Nu04cHXfNGvL4BIVerwWOsL9KjbmoSCPg6fIkY9y0G950hMTFxdhTzrKpC7vsbX2wc/RHJEmV4kGYO7YOF/w==
   dependencies:
     "@navikt/ds-css" "2.1.7"
     "@navikt/ds-react" "2.1.7"
-    "@navikt/ft-form-hooks" "^3.3.5"
-    "@navikt/ft-form-validators" "^1.0.52"
-    "@navikt/ft-kodeverk" "^1.0.26"
-    "@navikt/ft-types" "^1.1.2"
-    "@navikt/ft-ui-komponenter" "^1.3.15"
-    "@navikt/ft-utils" "^1.1.20"
+    "@navikt/ft-form-hooks" "^4.0.0"
+    "@navikt/ft-form-validators" "^2.0.0"
+    "@navikt/ft-kodeverk" "^2.0.0"
+    "@navikt/ft-types" "^2.0.0"
+    "@navikt/ft-ui-komponenter" "^2.0.0"
+    "@navikt/ft-utils" "^2.0.0"
     classnames "2.3.2"
     core-js "3.28.0"
     dayjs "1.11.7"
@@ -2001,83 +2002,83 @@
     react-hook-form "7.43.1"
     react-intl "6.2.8"
 
-"@navikt/ft-fakta-tilbakekreving-feilutbetaling@1.3.19":
-  version "1.3.19"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-fakta-tilbakekreving-feilutbetaling/1.3.19/8dc2ef1d919224723bb0f8b11e78fa64a8612421#8dc2ef1d919224723bb0f8b11e78fa64a8612421"
-  integrity sha512-GWqP7N/zKHp9s95eh+NKkVeqkWb0lK9mMRHBRUNgfEf6QPEZGdRRfVLd1Icm2EVrly7ps79r8yAHcg3SeSdMdg==
+"@navikt/ft-fakta-tilbakekreving-feilutbetaling@2.0.0":
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-fakta-tilbakekreving-feilutbetaling/2.0.0/6c5470a2e3a7d6075d3505257d2c7bd3d0fb6d1f#6c5470a2e3a7d6075d3505257d2c7bd3d0fb6d1f"
+  integrity sha512-UJggTOxBO+R8v9y3KUgxQ6Loy7EVniMNT30l4yDe2ywI43qvPfbuj8TsgbvcD0YqWTCjRjm2yEbDLVh2hrTXNQ==
   dependencies:
     "@navikt/ds-css" "2.1.7"
     "@navikt/ds-react" "2.1.7"
-    "@navikt/ft-form-hooks" "^3.3.5"
-    "@navikt/ft-form-validators" "^1.0.52"
-    "@navikt/ft-kodeverk" "^1.0.26"
-    "@navikt/ft-types" "^1.1.2"
-    "@navikt/ft-ui-komponenter" "^1.3.15"
-    "@navikt/ft-utils" "^1.1.20"
+    "@navikt/ft-form-hooks" "^4.0.0"
+    "@navikt/ft-form-validators" "^2.0.0"
+    "@navikt/ft-kodeverk" "^2.0.0"
+    "@navikt/ft-types" "^2.0.0"
+    "@navikt/ft-ui-komponenter" "^2.0.0"
+    "@navikt/ft-utils" "^2.0.0"
     moment "2.29.4"
     react "18.2.0"
     react-hook-form "7.43.1"
     react-intl "6.2.8"
 
-"@navikt/ft-form-hooks@3.3.5", "@navikt/ft-form-hooks@^3.3.5":
-  version "3.3.5"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-form-hooks/3.3.5/4bbbaff83afb300dce58aff4d96e9baa4416a3f0#4bbbaff83afb300dce58aff4d96e9baa4416a3f0"
-  integrity sha512-/KgILCF33LWpL5tTANFKJiJsSRC4JkdUD1vMkhe9HnZVe1zgfH4DLrI8KMztpQqeLQIdz92552bpnOzUxbfFQA==
+"@navikt/ft-form-hooks@4.0.0", "@navikt/ft-form-hooks@^4.0.0":
+  version "4.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-form-hooks/4.0.0/7708c77642f65d3ce656a312b81a8c31ebae9f0a#7708c77642f65d3ce656a312b81a8c31ebae9f0a"
+  integrity sha512-3At1cGyr5oux7dFzQrPXYdk1a2nr3622I8n6VjZ98xF0qbZ2NDUa7rAmkDSAtKfXjtCQ2QqKIKbqB6J89IiXNA==
   dependencies:
     "@navikt/ds-css" "2.1.7"
     "@navikt/ds-react" "2.1.7"
-    "@navikt/ft-form-validators" "^1.0.52"
-    "@navikt/ft-types" "^1.1.2"
-    "@navikt/ft-ui-komponenter" "^1.3.15"
-    "@navikt/ft-utils" "^1.1.20"
+    "@navikt/ft-form-validators" "^2.0.0"
+    "@navikt/ft-types" "^2.0.0"
+    "@navikt/ft-ui-komponenter" "^2.0.0"
+    "@navikt/ft-utils" "^2.0.0"
     classnames "2.3.2"
     dayjs "1.11.7"
     lodash.throttle "4.1.1"
     react "18.2.0"
     react-hook-form "7.43.1"
 
-"@navikt/ft-form-validators@1.0.52", "@navikt/ft-form-validators@^1.0.52":
-  version "1.0.52"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-form-validators/1.0.52/c227d21289c51035ff30c295b293103a2d16b6d6#c227d21289c51035ff30c295b293103a2d16b6d6"
-  integrity sha512-uOE5i0+5iWqOeeriMXT6eguTbuAPUqCZDs1bCEjHyHm5y03z1hx+W7NO7P1/rBjU8/iEAj7ih80oS8EcZdsxeQ==
+"@navikt/ft-form-validators@2.0.0", "@navikt/ft-form-validators@^2.0.0":
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-form-validators/2.0.0/b94899e715338385ada7283b3552db365c361bf4#b94899e715338385ada7283b3552db365c361bf4"
+  integrity sha512-1QajyR5TJ8P/9hVfiAUDcY80dMp1YJBt3PA0pW2a8KyjrqKPkVNvimpVrIe6Kz7XCVVLmEDK0kP9cWXY+vSXSw==
   dependencies:
-    "@navikt/ft-utils" "^1.1.20"
+    "@navikt/ft-utils" "^2.0.0"
     moment "2.29.4"
 
-"@navikt/ft-kodeverk@1.0.26", "@navikt/ft-kodeverk@^1.0.26":
-  version "1.0.26"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-kodeverk/1.0.26/2ccf1e5f79f9f3b9327767d4b9ee59149f9b3b55#2ccf1e5f79f9f3b9327767d4b9ee59149f9b3b55"
-  integrity sha512-5801ivpvpitiGfZgEnOLFXVIirLzl+xcurjuvZX/nwEtP+bo1mKUNRXtDvIDsEstkL8fTCTZ1mJOdJw+vepZTg==
+"@navikt/ft-kodeverk@2.0.0", "@navikt/ft-kodeverk@^2.0.0":
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-kodeverk/2.0.0/5682171a2b1eea02f48d879a80044790e442c778#5682171a2b1eea02f48d879a80044790e442c778"
+  integrity sha512-vXDFmTuBX6Fr/WLGz0T44+G1CUlcmHiCssw3xPCJiCGH5MkJZh+KhCG/IZqB6d9zkZImp+OsSZLYtSoGavABnQ==
 
-"@navikt/ft-konstanter@^1.0.19-alpha.0":
-  version "1.0.19-alpha.0"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-konstanter/1.0.19-alpha.0/c4900ee3fa47bc7177bfdfe8fb2803047ee2f624#c4900ee3fa47bc7177bfdfe8fb2803047ee2f624"
-  integrity sha512-ygj2KA/3iprRGfEiwiqf/WqEprD5ADSgyEXsdoeHCO2w/3Gz0tTaZAeNsqcPmehfV6WZr8I82kHbC1RA8lBGXA==
+"@navikt/ft-konstanter@^2.0.0":
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-konstanter/2.0.0/d0ac0c663c4c2aba3f3bea676819523c792262ee#d0ac0c663c4c2aba3f3bea676819523c792262ee"
+  integrity sha512-UNFEjXCT8Q16BjECL49Zo7RMlT0wXYDmpPb6BtmyeQHBWZMOK+fRMLSdt3CR3J6s0gi5fhS0785MeE82QJfF0g==
 
-"@navikt/ft-plattform-komponenter@1.4.13", "@navikt/ft-plattform-komponenter@^1.4.13":
-  version "1.4.13"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-plattform-komponenter/1.4.13/0be3d2452cfbb1725dabaa3459e46d18a20ec3ae#0be3d2452cfbb1725dabaa3459e46d18a20ec3ae"
-  integrity sha512-vjwOoKVrQ67bdzE7aeKoBmZl7YdLMzboME7ez5d5/SWh1W2NUqSQ/Qa8YyjJkLB1Wbdjith4/yX735YhZjJRig==
+"@navikt/ft-plattform-komponenter@2.0.0", "@navikt/ft-plattform-komponenter@^2.0.0":
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-plattform-komponenter/2.0.0/65eaa55128729a03d686cfcda005225dd5d31bf0#65eaa55128729a03d686cfcda005225dd5d31bf0"
+  integrity sha512-V2Ni7s7Wap4K+47bUibtLgjBX4nfY+zAzehgm8ytMmcI7g+Ia/wTFlFweor/7E6VbKGUXs/yOwizHu2NeFpGjA==
   dependencies:
     "@navikt/ds-css" "2.1.7"
     "@navikt/ds-icons" "2.1.7"
     "@navikt/ds-react" "2.1.7"
-    "@navikt/ft-utils" "^1.1.20"
+    "@navikt/ft-utils" "^2.0.0"
 
-"@navikt/ft-prosess-beregningsgrunnlag@5.0.1":
-  version "5.0.1"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-beregningsgrunnlag/5.0.1/f84704d11753d14624d48d9d5ddb50c714e4c135#f84704d11753d14624d48d9d5ddb50c714e4c135"
-  integrity sha512-4Kz6TSnwIoQv8lDPg4HaZr0w4Mov0KvM+5M39u1SdvQBAZ4w3kmbHvHTc8uOKtBhcx0GN/w2fDAcBypt61ziiA==
+"@navikt/ft-prosess-beregningsgrunnlag@6.0.0":
+  version "6.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-beregningsgrunnlag/6.0.0/d2ed0a89471f5d7fe9883c09c0d31b0c077af053#d2ed0a89471f5d7fe9883c09c0d31b0c077af053"
+  integrity sha512-CVtiE5dmHqu31BL7SdBZyTOlSROXSe5rgEErPTV8pgRU/lAnFw9T3FNzu7c+QLavajtcr22m8tP4EA8Fw0JdkQ==
   dependencies:
     "@navikt/ds-css" "2.1.7"
     "@navikt/ds-react" "2.1.7"
-    "@navikt/ft-form-hooks" "^3.3.5"
-    "@navikt/ft-form-validators" "^1.0.52"
-    "@navikt/ft-kodeverk" "^1.0.26"
-    "@navikt/ft-plattform-komponenter" "^1.4.13"
-    "@navikt/ft-types" "^1.1.2"
-    "@navikt/ft-ui-komponenter" "^1.3.15"
-    "@navikt/ft-utils" "^1.1.20"
+    "@navikt/ft-form-hooks" "^4.0.0"
+    "@navikt/ft-form-validators" "^2.0.0"
+    "@navikt/ft-kodeverk" "^2.0.0"
+    "@navikt/ft-plattform-komponenter" "^2.0.0"
+    "@navikt/ft-types" "^2.0.0"
+    "@navikt/ft-ui-komponenter" "^2.0.0"
+    "@navikt/ft-utils" "^2.0.0"
     classnames "2.3.2"
     dayjs "1.11.7"
     echarts "5.4.1"
@@ -2086,265 +2087,265 @@
     react-hook-form "7.43.1"
     react-intl "6.2.8"
 
-"@navikt/ft-prosess-tilbakekreving-foreldelse@1.3.20":
-  version "1.3.20"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-tilbakekreving-foreldelse/1.3.20/4ae95a43bbb93ecadba6b04bab5930608d86da21#4ae95a43bbb93ecadba6b04bab5930608d86da21"
-  integrity sha512-IK6FC1zo+ZBqGZRXHX6MHe5FheZp1eid2h22redYVoPipficTfdP0QhuTp5THGY/SY51j1GuSJJX0EAFFhCDyw==
+"@navikt/ft-prosess-tilbakekreving-foreldelse@2.0.0":
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-tilbakekreving-foreldelse/2.0.0/ed49514e3ad5311753a0a34bb8bf4b315566f80a#ed49514e3ad5311753a0a34bb8bf4b315566f80a"
+  integrity sha512-12AAb69RoZq9bwE33nsH0DyseJxAWMgYbLuWL16zqt+cawGPkMXbXgDbsjFEIQXfLNz5t9aQExKCrTmgfp+JaA==
   dependencies:
     "@navikt/ds-css" "2.1.7"
     "@navikt/ds-react" "2.1.7"
-    "@navikt/ft-form-hooks" "^3.3.5"
-    "@navikt/ft-form-validators" "^1.0.52"
-    "@navikt/ft-kodeverk" "^1.0.26"
-    "@navikt/ft-tidslinje" "^1.3.16"
-    "@navikt/ft-types" "^1.1.2"
-    "@navikt/ft-ui-komponenter" "^1.3.15"
-    "@navikt/ft-utils" "^1.1.20"
+    "@navikt/ft-form-hooks" "^4.0.0"
+    "@navikt/ft-form-validators" "^2.0.0"
+    "@navikt/ft-kodeverk" "^2.0.0"
+    "@navikt/ft-tidslinje" "^2.0.0"
+    "@navikt/ft-types" "^2.0.0"
+    "@navikt/ft-ui-komponenter" "^2.0.0"
+    "@navikt/ft-utils" "^2.0.0"
     moment "2.29.4"
     react "18.2.0"
     react-hook-form "7.43.1"
     react-intl "6.2.8"
 
-"@navikt/ft-prosess-tilbakekreving-vedtak@1.3.19":
-  version "1.3.19"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-tilbakekreving-vedtak/1.3.19/fd00c2b74b1e59d45c6c26fe8d54e855ab44d900#fd00c2b74b1e59d45c6c26fe8d54e855ab44d900"
-  integrity sha512-3hCQPG28ndr9U5CfTLbXMnd3LTmThstThxEDXRz5txe7WTUlXFO1beHyRSOq2LOv84uKZ6ekbzKh18SOqL9uGA==
+"@navikt/ft-prosess-tilbakekreving-vedtak@2.0.0":
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-tilbakekreving-vedtak/2.0.0/448d991069c35f36a956d1bfae568a668ff65c6e#448d991069c35f36a956d1bfae568a668ff65c6e"
+  integrity sha512-qBAu/Rn3IByDtY/esRAR5nUC4yCt0lzxaxjAU0leLqFtFKWYDgwDcu6vSGH7SsXaSmnQsqFgXw5Q9O2ty8OQIg==
   dependencies:
     "@navikt/ds-css" "2.1.7"
     "@navikt/ds-react" "2.1.7"
-    "@navikt/ft-form-hooks" "^3.3.5"
-    "@navikt/ft-form-validators" "^1.0.52"
-    "@navikt/ft-kodeverk" "^1.0.26"
-    "@navikt/ft-types" "^1.1.2"
-    "@navikt/ft-ui-komponenter" "^1.3.15"
-    "@navikt/ft-utils" "^1.1.20"
+    "@navikt/ft-form-hooks" "^4.0.0"
+    "@navikt/ft-form-validators" "^2.0.0"
+    "@navikt/ft-kodeverk" "^2.0.0"
+    "@navikt/ft-types" "^2.0.0"
+    "@navikt/ft-ui-komponenter" "^2.0.0"
+    "@navikt/ft-utils" "^2.0.0"
     classnames "2.3.2"
     react "18.2.0"
     react-hook-form "7.43.1"
     react-intl "6.2.8"
 
-"@navikt/ft-prosess-tilbakekreving@1.3.21":
-  version "1.3.21"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-tilbakekreving/1.3.21/d6ba18f66d5b3ebc9c542e2f71209227eb4384ba#d6ba18f66d5b3ebc9c542e2f71209227eb4384ba"
-  integrity sha512-7HzgtPPPiKh+fTegUhvbHysoKN+wBV9qVXvbSIa9n4R7jHb8Qp6MF7aPqkQkYLOjTsIzO1YsLeAKojYZ9m//ag==
+"@navikt/ft-prosess-tilbakekreving@2.0.0":
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-tilbakekreving/2.0.0/14f87ec2681a884e4c8eb8426601be9fdffd134d#14f87ec2681a884e4c8eb8426601be9fdffd134d"
+  integrity sha512-jxKIP+N7PfL1pFmF1Q3S5IlaKvMF7vHWkj+3FpdXST2IIC1l8O0+cEj+mccSeORMWJ87uMlxdZzVVW/XtSRX9g==
   dependencies:
     "@navikt/ds-css" "2.1.7"
     "@navikt/ds-react" "2.1.7"
-    "@navikt/ft-form-hooks" "^3.3.5"
-    "@navikt/ft-form-validators" "^1.0.52"
-    "@navikt/ft-kodeverk" "^1.0.26"
-    "@navikt/ft-tidslinje" "^1.3.16"
-    "@navikt/ft-types" "^1.1.2"
-    "@navikt/ft-ui-komponenter" "^1.3.15"
-    "@navikt/ft-utils" "^1.1.20"
+    "@navikt/ft-form-hooks" "^4.0.0"
+    "@navikt/ft-form-validators" "^2.0.0"
+    "@navikt/ft-kodeverk" "^2.0.0"
+    "@navikt/ft-tidslinje" "^2.0.0"
+    "@navikt/ft-types" "^2.0.0"
+    "@navikt/ft-ui-komponenter" "^2.0.0"
+    "@navikt/ft-utils" "^2.0.0"
     moment "2.29.4"
     react "18.2.0"
     react-hook-form "7.43.1"
     react-intl "6.2.8"
 
-"@navikt/ft-sak-aktor@1.3.16":
-  version "1.3.16"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-aktor/1.3.16/9d2b41e4bb1fdd5e9f2976b608b575b133deb7f3#9d2b41e4bb1fdd5e9f2976b608b575b133deb7f3"
-  integrity sha512-7x8eIX8tv8WCbJ6UVqNrff1AgmH06VDncM1cgnRJuIRwZHV0YQoBhyjXdsu0BmnujrjfPXZNF+CmN3TwzoFZ1g==
+"@navikt/ft-sak-aktor@2.0.0":
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-aktor/2.0.0/f2998dd9736d47a16d3849f5de9e6311430ceb9a#f2998dd9736d47a16d3849f5de9e6311430ceb9a"
+  integrity sha512-aUDPInvBJkhvMCGlX7k9tKb/6uI/+GlH5pCL+ydU9n/62x55rF1d3hRFvS2tijsgz89TqGjKcEoyLbzHryASMw==
   dependencies:
     "@navikt/ds-css" "2.1.7"
     "@navikt/ds-react" "2.1.7"
-    "@navikt/ft-kodeverk" "^1.0.26"
-    "@navikt/ft-plattform-komponenter" "^1.4.13"
-    "@navikt/ft-sak-visittkort" "^1.3.16"
-    "@navikt/ft-types" "^1.1.2"
-    "@navikt/ft-ui-komponenter" "^1.3.15"
-    "@navikt/ft-utils" "^1.1.20"
+    "@navikt/ft-kodeverk" "^2.0.0"
+    "@navikt/ft-plattform-komponenter" "^2.0.0"
+    "@navikt/ft-sak-visittkort" "^2.0.0"
+    "@navikt/ft-types" "^2.0.0"
+    "@navikt/ft-ui-komponenter" "^2.0.0"
+    "@navikt/ft-utils" "^2.0.0"
     react "18.2.0"
     react-intl "6.2.8"
 
-"@navikt/ft-sak-behandling-velger@1.3.17":
-  version "1.3.17"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-behandling-velger/1.3.17/ba5478c876671abefcbf864ac8095df39745e0a5#ba5478c876671abefcbf864ac8095df39745e0a5"
-  integrity sha512-Gy6CG6KuO7b0hiX3alIZJyz77MdCGFGZZk7fMVlcD43GS7h4L6Y1cpBqKGcWsI+udNm0itl3rf9PJNbp9Xcstw==
+"@navikt/ft-sak-behandling-velger@2.0.0":
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-behandling-velger/2.0.0/a6f311e918cdf8299092ed13271ccc290baaa016#a6f311e918cdf8299092ed13271ccc290baaa016"
+  integrity sha512-dE5YlCwj9eGTAOC1H+1wUMFH7yFVUfzUo/O7WPrPzwBY3VtDjlnU7pJr6cZvN24gO3m1Ha3BcxM8aw47oatzzg==
   dependencies:
     "@navikt/ds-css" "2.1.7"
     "@navikt/ds-react" "2.1.7"
-    "@navikt/ft-kodeverk" "^1.0.26"
-    "@navikt/ft-plattform-komponenter" "^1.4.13"
-    "@navikt/ft-types" "^1.1.2"
-    "@navikt/ft-ui-komponenter" "^1.3.15"
-    "@navikt/ft-utils" "^1.1.20"
+    "@navikt/ft-kodeverk" "^2.0.0"
+    "@navikt/ft-plattform-komponenter" "^2.0.0"
+    "@navikt/ft-types" "^2.0.0"
+    "@navikt/ft-ui-komponenter" "^2.0.0"
+    "@navikt/ft-utils" "^2.0.0"
     classnames "2.3.2"
     history "5.3.0"
     moment "2.29.4"
     react "18.2.0"
     react-intl "6.2.8"
 
-"@navikt/ft-sak-dekorator@1.3.16":
-  version "1.3.16"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-dekorator/1.3.16/cd6716bd6ef58d412793b19ab75551db9a9ceb43#cd6716bd6ef58d412793b19ab75551db9a9ceb43"
-  integrity sha512-OALKuWH8zqeOkAgLoEZqSvJ6rgUhLj3byBNIMUQUR8b7/R65i4Rz0VYX3w4TdR88Ngk1HaGkV9zyFklNRPmjRg==
+"@navikt/ft-sak-dekorator@2.0.0":
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-dekorator/2.0.0/e646648b61dcad2f4d03683c176309942c5ed762#e646648b61dcad2f4d03683c176309942c5ed762"
+  integrity sha512-au6iufLBuwjkmlQUymubz6uupKNAvCKyI/SHsxnAZeXzvRcnQ9BIdW3wpkWglsKCiP/u7F/B8ufkmyMaxFj/SA==
   dependencies:
     "@navikt/ds-css" "2.1.7"
     "@navikt/ds-icons" "2.1.7"
     "@navikt/ds-react" "2.1.7"
-    "@navikt/ft-kodeverk" "^1.0.26"
-    "@navikt/ft-konstanter" "^1.0.19-alpha.0"
-    "@navikt/ft-plattform-komponenter" "^1.4.13"
-    "@navikt/ft-types" "^1.1.2"
-    "@navikt/ft-ui-komponenter" "^1.3.15"
-    "@navikt/ft-utils" "^1.1.20"
+    "@navikt/ft-kodeverk" "^2.0.0"
+    "@navikt/ft-konstanter" "^2.0.0"
+    "@navikt/ft-plattform-komponenter" "^2.0.0"
+    "@navikt/ft-types" "^2.0.0"
+    "@navikt/ft-ui-komponenter" "^2.0.0"
+    "@navikt/ft-utils" "^2.0.0"
     classnames "2.3.2"
     react "18.2.0"
     react-intl "6.2.8"
 
-"@navikt/ft-sak-dokumenter@1.3.15":
-  version "1.3.15"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-dokumenter/1.3.15/cb09df7695980d6cf65b782fe9c5de488ee72ee8#cb09df7695980d6cf65b782fe9c5de488ee72ee8"
-  integrity sha512-aUat7Y2WhlJuDga/mbMGprjKjZ7Os0Swgj640j4RiZtJiNLYhsJ/FNNn2Ec5tHLqIaY7STxCxL2YotqtRfYE3w==
+"@navikt/ft-sak-dokumenter@2.0.0":
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-dokumenter/2.0.0/01ae0b57610ce69199178eafbc1b4b3d3e3e3415#01ae0b57610ce69199178eafbc1b4b3d3e3e3415"
+  integrity sha512-r4V2RAyth7CKO/i5AjD+5pTIdRRdd8yiU6xkRcVoKg20ZkacUSDL3MmWKVLZMtfWO1ULoIHn57J1ZVuImhMg6g==
   dependencies:
     "@navikt/ds-css" "2.1.7"
     "@navikt/ds-react" "2.1.7"
-    "@navikt/ft-kodeverk" "^1.0.26"
-    "@navikt/ft-types" "^1.1.2"
-    "@navikt/ft-ui-komponenter" "^1.3.15"
-    "@navikt/ft-utils" "^1.1.20"
+    "@navikt/ft-kodeverk" "^2.0.0"
+    "@navikt/ft-types" "^2.0.0"
+    "@navikt/ft-ui-komponenter" "^2.0.0"
+    "@navikt/ft-utils" "^2.0.0"
     react "18.2.0"
     react-intl "6.2.8"
 
-"@navikt/ft-sak-fagsak-profil@1.3.15":
-  version "1.3.15"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-fagsak-profil/1.3.15/dedc605bddbf292fdde4969f46302331da7783e7#dedc605bddbf292fdde4969f46302331da7783e7"
-  integrity sha512-ZK+l+hROhPsyyMI2t5vryvk2ndlua1HGVqF0q9rUG/N2rKpM5lJrdrNCn4kxAQpc9tx4O1qLXzIfGnpDNW/wdA==
+"@navikt/ft-sak-fagsak-profil@2.0.0":
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-fagsak-profil/2.0.0/9fcde99b070318dc5d39fa5d7f1c97e36fa4b5e1#9fcde99b070318dc5d39fa5d7f1c97e36fa4b5e1"
+  integrity sha512-UVfNejGUzpcPq7x6TRFukULjFCG28qWSnuzQx/Zwl3VW5NyqRdApW4QW0YWPH/qiDBQwFKvsZa6EHl4vb7AFuA==
   dependencies:
     "@navikt/ds-css" "2.1.7"
     "@navikt/ds-react" "2.1.7"
-    "@navikt/ft-kodeverk" "^1.0.26"
-    "@navikt/ft-types" "^1.1.2"
-    "@navikt/ft-ui-komponenter" "^1.3.15"
-    "@navikt/ft-utils" "^1.1.20"
+    "@navikt/ft-kodeverk" "^2.0.0"
+    "@navikt/ft-types" "^2.0.0"
+    "@navikt/ft-ui-komponenter" "^2.0.0"
+    "@navikt/ft-utils" "^2.0.0"
     react "18.2.0"
     react-intl "6.2.8"
 
-"@navikt/ft-sak-infosider@1.3.12":
-  version "1.3.12"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-infosider/1.3.12/dc2e5ab6a17b11829d3a2fcd5a96425b7bd994f5#dc2e5ab6a17b11829d3a2fcd5a96425b7bd994f5"
-  integrity sha512-cKPdJo43pkOVum08G387Sd+8omHWbgI5caunwcmDhwe7QfkPNauiDx7e2WkSgtfloV3cQ9BRsnB9JzMN7qTWXQ==
+"@navikt/ft-sak-infosider@2.0.0":
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-infosider/2.0.0/f4d87381222416f343cc7ab1861673bc25948a75#f4d87381222416f343cc7ab1861673bc25948a75"
+  integrity sha512-8onKGsIpY1HSUkIeRyGGStS2sGGbQ0i8rURGT+0SJ9VQatfwYYDxl6ffyP0pF3yLQjwgTx4ybv811jBeXBtzgg==
   dependencies:
     "@navikt/ds-css" "2.1.7"
     "@navikt/ds-react" "2.1.7"
-    "@navikt/ft-utils" "^1.1.20"
+    "@navikt/ft-utils" "^2.0.0"
     react "18.2.0"
     react-intl "6.2.8"
 
-"@navikt/ft-sak-meny@1.3.20":
-  version "1.3.20"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-meny/1.3.20/669bf1c6694196f6431be70f1e03c13093cb3fea#669bf1c6694196f6431be70f1e03c13093cb3fea"
-  integrity sha512-0iDWw7nSNxcIZ6fFN3HW+97ZOwN1LNJlF8YPKfQerpNg94paV813hV9/6IWzmGWEBZJ3xKQCRNGPB8DhQoeqVA==
+"@navikt/ft-sak-meny@2.0.0":
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-meny/2.0.0/074eb786cec0191855be97ed82ad1bd1000662ba#074eb786cec0191855be97ed82ad1bd1000662ba"
+  integrity sha512-Z6JkH6vyOD03BvP5GY5GLqAlCzirvVlJV63rfx8JfFhLC9n5nkqLRQi8CXqyackTFZ3MIoOOHYHzpj+jOq3ZIA==
   dependencies:
     "@navikt/ds-css" "2.1.7"
     "@navikt/ds-react" "2.1.7"
-    "@navikt/ft-form-hooks" "^3.3.5"
-    "@navikt/ft-form-validators" "^1.0.52"
-    "@navikt/ft-plattform-komponenter" "^1.4.13"
-    "@navikt/ft-ui-komponenter" "^1.3.15"
-    "@navikt/ft-utils" "^1.1.20"
+    "@navikt/ft-form-hooks" "^4.0.0"
+    "@navikt/ft-form-validators" "^2.0.0"
+    "@navikt/ft-plattform-komponenter" "^2.0.0"
+    "@navikt/ft-ui-komponenter" "^2.0.0"
+    "@navikt/ft-utils" "^2.0.0"
     react "18.2.0"
     react-hook-form "7.43.1"
     react-intl "6.2.8"
 
-"@navikt/ft-sak-risikoklassifisering@1.3.19":
-  version "1.3.19"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-risikoklassifisering/1.3.19/4efa970435e8544804cfb3725d008e2482967f1e#4efa970435e8544804cfb3725d008e2482967f1e"
-  integrity sha512-RzsnlZLZfmM57G1TuG7NmQ8vot2gV753jelandmAGmwYp9NvsP8RWBqsZV/SnFpXicQbgqWArTNmHmuf6x7vPA==
+"@navikt/ft-sak-risikoklassifisering@2.0.0":
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-risikoklassifisering/2.0.0/f11fdebf8d54257a5de6ff1444335d94dd128e60#f11fdebf8d54257a5de6ff1444335d94dd128e60"
+  integrity sha512-VCDr3c/uGVE2eYY4lpFYc8OWHOiPPCiAq2Aj9FXSxHldYTkJ5bU7q4w5+blNga26rtcW5XZmYzbEvCJWHy9VqA==
   dependencies:
     "@navikt/ds-css" "2.1.7"
     "@navikt/ds-react" "2.1.7"
-    "@navikt/ft-form-hooks" "^3.3.5"
-    "@navikt/ft-form-validators" "^1.0.52"
-    "@navikt/ft-kodeverk" "^1.0.26"
-    "@navikt/ft-types" "^1.1.2"
-    "@navikt/ft-ui-komponenter" "^1.3.15"
-    "@navikt/ft-utils" "^1.1.20"
+    "@navikt/ft-form-hooks" "^4.0.0"
+    "@navikt/ft-form-validators" "^2.0.0"
+    "@navikt/ft-kodeverk" "^2.0.0"
+    "@navikt/ft-types" "^2.0.0"
+    "@navikt/ft-ui-komponenter" "^2.0.0"
+    "@navikt/ft-utils" "^2.0.0"
     react "18.2.0"
     react-collapse "5.1.1"
     react-dom "18.2.0"
     react-hook-form "7.43.1"
     react-intl "6.2.8"
 
-"@navikt/ft-sak-support-meny@1.3.15":
-  version "1.3.15"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-support-meny/1.3.15/ab8a48f7f296d80f5992ec79d61716d677c2424e#ab8a48f7f296d80f5992ec79d61716d677c2424e"
-  integrity sha512-mu+NtEy0i1uhDr2gtDc17QRNJjZXAEd2V7aS4NT1G/cfnFdgtwlWhvylOctnq9GKmwyRAUKWq6jLpIeT+hRZEQ==
+"@navikt/ft-sak-support-meny@2.0.0":
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-support-meny/2.0.0/bc1420be8921a71d9ba8f4cbf6ded62ee8a3a572#bc1420be8921a71d9ba8f4cbf6ded62ee8a3a572"
+  integrity sha512-Dod18v/TTA3cmSV67N5d8fCU8sUB2bzcZoFS370djz2xGhaHS/xopE6yCpukDJe4+X8y6dDOLz2PmyqQcH5mDA==
   dependencies:
     "@navikt/ds-css" "2.1.7"
-    "@navikt/ft-kodeverk" "^1.0.26"
-    "@navikt/ft-types" "^1.1.2"
-    "@navikt/ft-ui-komponenter" "^1.3.15"
-    "@navikt/ft-utils" "^1.1.20"
+    "@navikt/ft-kodeverk" "^2.0.0"
+    "@navikt/ft-types" "^2.0.0"
+    "@navikt/ft-ui-komponenter" "^2.0.0"
+    "@navikt/ft-utils" "^2.0.0"
     classnames "2.3.2"
     react "18.2.0"
     react-intl "6.2.8"
 
-"@navikt/ft-sak-visittkort@1.3.16", "@navikt/ft-sak-visittkort@^1.3.16":
-  version "1.3.16"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-visittkort/1.3.16/d12b0e1e72085689c9994bf120ab27de2ff0515c#d12b0e1e72085689c9994bf120ab27de2ff0515c"
-  integrity sha512-iLxjhzyG+y/vbVvMh/0LGh5uPi04+CVYf9vJrM7IcbcCFq+ib8vfkpw2cAsYm7oydQ+Q/rB+2+eR4e50+DcMrA==
+"@navikt/ft-sak-visittkort@2.0.0", "@navikt/ft-sak-visittkort@^2.0.0":
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-sak-visittkort/2.0.0/d94381190908f23564a9fe3e81715843c9ec9787#d94381190908f23564a9fe3e81715843c9ec9787"
+  integrity sha512-rcgt5GpW1nOd+tGgjraXWdkBqqxMeKNooIhlRPm/cDRYVHKckMc0e/dRfNHYyCaKMZG+/7Ag27/mKaesktkj2w==
   dependencies:
     "@navikt/ds-css" "2.1.7"
     "@navikt/ds-react" "2.1.7"
-    "@navikt/ft-kodeverk" "^1.0.26"
-    "@navikt/ft-plattform-komponenter" "^1.4.13"
-    "@navikt/ft-types" "^1.1.2"
-    "@navikt/ft-ui-komponenter" "^1.3.15"
-    "@navikt/ft-utils" "^1.1.20"
+    "@navikt/ft-kodeverk" "^2.0.0"
+    "@navikt/ft-plattform-komponenter" "^2.0.0"
+    "@navikt/ft-types" "^2.0.0"
+    "@navikt/ft-ui-komponenter" "^2.0.0"
+    "@navikt/ft-utils" "^2.0.0"
     moment "2.29.4"
     react "18.2.0"
     react-intl "6.2.8"
 
-"@navikt/ft-tidslinje@1.3.16", "@navikt/ft-tidslinje@^1.3.16":
-  version "1.3.16"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-tidslinje/1.3.16/5ab7300ac42a47e149a22bb260b995d28547916a#5ab7300ac42a47e149a22bb260b995d28547916a"
-  integrity sha512-6CnSCC+ZjTMk701r32/7UxtMHtf7bXGBklgA+RuUX5fCmglAIcf0Q/2mdKULDrIzkGz1cmyK61soJuCc7qclYg==
+"@navikt/ft-tidslinje@2.0.0", "@navikt/ft-tidslinje@^2.0.0":
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-tidslinje/2.0.0/375945bd5f91f92fd04319f727a1765003ccc183#375945bd5f91f92fd04319f727a1765003ccc183"
+  integrity sha512-06rzkIu0vIwerHJUHr21U2bBWtcZ0sMU+mEcNTQV3tPZFlotwapZx/Ns3c+4JPV2kow+CaqLUvfCWstBZOeESA==
   dependencies:
     "@navikt/ds-css" "2.1.7"
-    "@navikt/ft-kodeverk" "^1.0.26"
-    "@navikt/ft-types" "^1.1.2"
-    "@navikt/ft-ui-komponenter" "^1.3.15"
-    "@navikt/ft-utils" "^1.1.20"
+    "@navikt/ft-kodeverk" "^2.0.0"
+    "@navikt/ft-types" "^2.0.0"
+    "@navikt/ft-ui-komponenter" "^2.0.0"
+    "@navikt/ft-utils" "^2.0.0"
     moment "2.29.4"
     react "18.2.0"
     react-intl "6.2.8"
     vis-data "7.1.4"
     vis-timeline "7.7.0"
 
-"@navikt/ft-types@1.1.2", "@navikt/ft-types@^1.1.2":
-  version "1.1.2"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-types/1.1.2/8845ce87f35e2d23d1fa595f00584bebeee0178b#8845ce87f35e2d23d1fa595f00584bebeee0178b"
-  integrity sha512-PwsTCYmWcNfKoscsKG0Mj1VT2oWrsu3iERqDFX/myIc1PTpyMe9WGQU8ze6xpZrWSAlqNgK9omqD1o5xIoK/yg==
+"@navikt/ft-types@2.0.0", "@navikt/ft-types@^2.0.0":
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-types/2.0.0/3ee545125aba29e320ff762723d66b592208bf9e#3ee545125aba29e320ff762723d66b592208bf9e"
+  integrity sha512-8OM24e9BKpedXbnYDZPFFdhp2RH1wuU3p4kJexjRRu06McDmAlwdhMoMor5GbF+zFUQuxBcbguxD/wGsxVaZ1g==
   dependencies:
-    "@navikt/ft-kodeverk" "^1.0.26"
+    "@navikt/ft-kodeverk" "^2.0.0"
 
-"@navikt/ft-ui-komponenter@1.3.15", "@navikt/ft-ui-komponenter@^1.3.15":
-  version "1.3.15"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-ui-komponenter/1.3.15/938847c123b3fd025a08b9adf638f777646bdcd7#938847c123b3fd025a08b9adf638f777646bdcd7"
-  integrity sha512-9D6P/jGKCkIDV+yac8HxcAr2XakhfNOZEdb+fILgv8BH3UQQ6ZlDYvq30DgbtBrSpRua8YnbjvVGtXRDTFpqcQ==
+"@navikt/ft-ui-komponenter@2.0.0", "@navikt/ft-ui-komponenter@^2.0.0":
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-ui-komponenter/2.0.0/1715d8957b6b73479b50f6caa0700aa3e8ce637a#1715d8957b6b73479b50f6caa0700aa3e8ce637a"
+  integrity sha512-rMe4GP9sB4UtIs1Z3ScnWboHUntaVZpeDe5fNRNuy5E7YAr4KGPyqIAyG6gbdBAb3LFSGmGECEWKUer/npHdCg==
   dependencies:
     "@navikt/ds-css" "2.1.7"
     "@navikt/ds-react" "2.1.7"
     "@navikt/fnrvalidator" "1.3.3"
-    "@navikt/ft-utils" "^1.1.20"
+    "@navikt/ft-utils" "^2.0.0"
     classnames "2.3.2"
-    date-fns "^2.29.3"
+    date-fns "2.29.3"
     moment "2.29.4"
     react "18.2.0"
     react-day-picker "8.5.1"
     react-intl "6.2.8"
     react-modal "3.16.1"
 
-"@navikt/ft-utils@1.1.20", "@navikt/ft-utils@^1.1.20":
-  version "1.1.20"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-utils/1.1.20/a25e6ef834473b4efd5ca8cb0ccaeacf6fbec188#a25e6ef834473b4efd5ca8cb0ccaeacf6fbec188"
-  integrity sha512-URGlpzqs1P40O6TugmeLY16QlkhAabyLnXDiTr/4K90m2kfoI6B0jp5UZLFnU75FxPp8jJr5IidVCCykp31sTQ==
+"@navikt/ft-utils@2.0.0", "@navikt/ft-utils@^2.0.0":
+  version "2.0.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-utils/2.0.0/03c2cc779d8b31b350be7874c118d812a87960ce#03c2cc779d8b31b350be7874c118d812a87960ce"
+  integrity sha512-D4xqJH8wIxa7eWWL8eGsXrA1sN8uBgf9f3HZ984IIUqvtZsRZoZRx3zxFSCxuU2f/smQjkuBktkgmGMzXUSs+A==
   dependencies:
-    "@navikt/ft-kodeverk" "^1.0.26"
-    "@navikt/ft-types" "^1.1.2"
+    "@navikt/ft-kodeverk" "^2.0.0"
+    "@navikt/ft-types" "^2.0.0"
     dayjs "1.11.7"
     react-intl "6.2.8"
 
@@ -7668,7 +7669,7 @@ data-urls@^3.0.2:
     whatwg-mimetype "^3.0.0"
     whatwg-url "^11.0.0"
 
-date-fns@2.29.3, date-fns@^2.29.3:
+date-fns@2.29.3:
   version "2.29.3"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.29.3.tgz#27402d2fc67eb442b511b70bbdf98e6411cd68a8"
   integrity sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==
@@ -7677,6 +7678,11 @@ dateformat@^3.0.0:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-3.0.3.tgz#a6e37499a4d9a9cf85ef5872044d62901c9889ae"
   integrity sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==
+
+dayjs-plugin-utc@0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/dayjs-plugin-utc/-/dayjs-plugin-utc-0.1.2.tgz#48e552407024143922d6499a40f6c765f8c93d03"
+  integrity sha512-ExERH5o3oo6jFOdkvMP3gytTCQ9Ksi5PtylclJWghr7k7m3o2U5QrwtdiJkOxLOH4ghr0EKhpqGefzGz1VvVJg==
 
 dayjs@1.11.7:
   version "1.11.7"

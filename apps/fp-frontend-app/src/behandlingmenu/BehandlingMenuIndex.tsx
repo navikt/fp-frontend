@@ -6,7 +6,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import {
   BehandlingType, BehandlingStatus, KodeverkType,
 } from '@navikt/ft-kodeverk';
-import MenySakIndex, {
+import {
+  MenySakIndex,
   MenyData,
   MenyEndreBehandlendeEnhetIndex,
   getEndreEnhetMenytekst,

@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { Aksjonspunkt } from '@navikt/ft-types';
-import ProsessForeldelse, { ForeldelseAksjonspunktCodes, VurderForeldelseAp } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
+import { ForeldelseProsessIndex, ForeldelseAksjonspunktCodes, VurderForeldelseAp } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
@@ -55,7 +55,7 @@ const ForeldelseProsessInitPanel: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <ProsessForeldelse
+    <ForeldelseProsessIndex
       behandling={behandling}
       perioderForeldelse={perioderForeldelse}
       submitCallback={bekreftAksjonspunkter}

@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
-import RisikoklassifiseringSakIndex, { AvklartRisikoklassifiseringAp } from '@navikt/ft-sak-risikoklassifisering';
+import { RisikoklassifiseringSakIndex, AvklartRisikoklassifiseringAp } from '@navikt/ft-sak-risikoklassifisering';
 
 import { NavAnsatt, AksessRettigheter } from '@navikt/fp-types';
 
