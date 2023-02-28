@@ -78,11 +78,13 @@ const SakDetaljer: FunctionComponent<OwnProps> = ({
               <FormattedMessage id="Journal.Sak.OpprettetDato" values={{ opprettetDato: dayjs(sak.datoOpprettet).format(DDMMYYYY_DATE_FORMAT) }} />
             </Detail>
           </FlexColumn>
-          <FlexColumn>
-            <Detail>
-              <FormattedMessage id="Journal.Sak.EndretDato" values={{ endretDato: dayjs(sak.sistEndret).format(DDMMYYYY_DATE_FORMAT) }} />
-            </Detail>
-          </FlexColumn>
+          {sak.sistEndret && (
+            <FlexColumn>
+              <Detail>
+                <FormattedMessage id="Journal.Sak.EndretDato" values={{ endretDato: dayjs(sak.sistEndret).format(DDMMYYYY_DATE_FORMAT) }} />
+              </Detail>
+            </FlexColumn>
+          )}
         </FlexRow>
       </div>
       <div className={styles.etikettFelt}>
