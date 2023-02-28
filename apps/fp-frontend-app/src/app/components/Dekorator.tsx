@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo, useCallback } from 'react';
 import { useIntl, IntlShape } from 'react-intl';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { useNavigate } from 'react-router-dom';
-import DekoratorMedFeilviserSakIndex, { Feilmelding } from '@navikt/ft-sak-dekorator';
+import { DekoratorMedFeilviserSakIndex, Feilmelding } from '@navikt/ft-sak-dekorator';
 
 import { useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { SYSTEMRUTINE_URL } from '@navikt/fp-konstanter';

@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import { Location } from 'history';
-import VisittkortSakIndex from '@navikt/ft-sak-visittkort';
+import { VisittkortSakIndex } from '@navikt/ft-sak-visittkort';
 import { LoadingPanel, DataFetchPendingModal } from '@navikt/ft-ui-komponenter';
 import { BehandlingType } from '@navikt/ft-kodeverk';
 

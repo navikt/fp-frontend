@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIntl } from 'react-intl';
-import SupportMenySakIndex, { SupportTabs } from '@navikt/ft-sak-support-meny';
+import { SupportMenySakIndex, SupportTabs } from '@navikt/ft-sak-support-meny';
 
 import { BehandlingTillatteOperasjoner } from '@navikt/fp-types';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
@@ -18,8 +18,6 @@ import FagsakData from '../fagsak/FagsakData';
 import ErrorBoundary from '../app/ErrorBoundary';
 
 import styles from './behandlingSupportIndex.less';
-
-import '@navikt/ft-sak-support-meny/dist/style.css';
 
 export const hentSynligePaneler = (behandlingTillatteOperasjoner?: BehandlingTillatteOperasjoner): string[] => Object.values(SupportTabs)
   .filter((supportPanel) => {
