@@ -88,7 +88,10 @@ const SakDetaljer: FunctionComponent<OwnProps> = ({
           {sak.gjeldendeFamiliehendelseDato && (
             <FlexColumn>
               <Detail>
-                <FormattedMessage id="Journal.Sak.FamilieHendelseDato" values={{ famDato: dayjs(sak.gjeldendeFamiliehendelseDato).format(DDMMYYYY_DATE_FORMAT) }} />
+                <FormattedMessage
+                  id="Journal.Sak.FamilieHendelseDato"
+                  values={{ famDato: dayjs(sak.gjeldendeFamiliehendelseDato).format(DDMMYYYY_DATE_FORMAT) }}
+                />
               </Detail>
             </FlexColumn>
           )}

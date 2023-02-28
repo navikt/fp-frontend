@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useCallback } from 'react';
+import React, { FunctionComponent } from 'react';
 
 import {
   FlexContainer, VerticalSpacer,
