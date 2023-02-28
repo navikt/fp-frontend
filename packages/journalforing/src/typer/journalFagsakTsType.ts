@@ -6,7 +6,6 @@ type JournalFagsak = Readonly<{
     datoOpprettet: string;
     sistEndret?: string;
     status: FagsakStatus;
-    gjeldendeFamiliehendelseDato?: string
 }>
 
 export default JournalFagsak;

@@ -59,7 +59,6 @@ const detaljertJournalpostMal = {
       datoOpprettet: '2022-01-02',
       sistEndret: '2022-06-03',
       status: fagsakStatus.LOPENDE,
-      gjeldendeFamiliehendelseDato: '2022-02-02',
     },
     {
       saksnummer: '155462542',
@@ -67,7 +66,6 @@ const detaljertJournalpostMal = {
       datoOpprettet: '2022-01-02',
       sistEndret: '2022-06-03',
       status: fagsakStatus.AVSLUTTET,
-      gjeldendeFamiliehendelseDato: '2022-03-02',
     },
     {
       saksnummer: '175419131',
