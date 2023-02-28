@@ -11,7 +11,7 @@
     "tsc": "tsc --pretty",
     "eslint": "eslint \"src/**/*.ts*\" --color",
     "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
-    "stylelint": "stylelint \"src/**/*.less\"",
+    "stylelint": "stylelint \"src/**/*.module.css\"",
     "dev": "vite serve",
     "build": "vite build",
     "preview": "vite preview",

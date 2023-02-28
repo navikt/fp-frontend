@@ -293,6 +293,7 @@
   animation-duration: 2s;
   animation-name: fadeIn;
 }
+
 @media all and (-ms-high-contrast: none) {
   :global(.vis-timeline.vis-bottom) {
     animation-duration: 0s;

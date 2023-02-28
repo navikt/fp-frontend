@@ -1,36 +1,21 @@
-import { defineConfig } from 'vitest/config'
-import dts from 'vite-plugin-dts';
-import { externalizeDeps } from 'vite-plugin-externalize-deps'
-import react from '@vitejs/plugin-react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { defineConfig } from 'vitest/config';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { mergeConfig } from 'vite';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { dependencies } from './package.json';
+// eslint-disable-next-line import/no-relative-packages
+import commonConfig from '../../vite.config';
 
-export default defineConfig({
-  plugins: [
-    react(),
-    dts({
-      insertTypesEntry: true,
-    }),
-    externalizeDeps(),
-  ],
-  css: {
-    modules: {
-      localsConvention: 'camelCase',
-    },
-  },
+const config = defineConfig({
   build: {
     lib: {
-      entry: 'index.ts',
       name: '@navikt/fp-sak-meny-ny-behandling',
-      formats: ['es'],
-      fileName: 'index',
     },
-    sourcemap: 'hidden',
-  },
-  test: {
-    environment: 'jsdom',
-    css: false,
-    globals: true,
-    setupFiles: '../../vitest-setup.ts',
-    watch: false,
-    testTimeout: 15000,
+    rollupOptions: {
+      external: Object.keys(dependencies),
+    },
   },
 });
+
+export default mergeConfig(commonConfig, config);

@@ -1,9 +1,10 @@
 {
   "name": "@navikt/fp-prosess-vedtak-klage",
-  
   "version": "1.0.0",
   "license": "MIT",
   "private": true,
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
@@ -15,8 +16,8 @@
     "tsc": "tsc --pretty",
     "eslint": "eslint \"src/**/*.ts*\" --color",
     "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
-    "stylelint": "stylelint \"src/**/*.less\"",
-    "dev": "vite build --watch",
+    "stylelint": "stylelint \"src/**/*.module.css\"",
+    "dev": "vite build --mode development --watch",
     "build": "vite build",
     "clean": "rm -rf ./dist ./node_modules",
     "storybook": "start-storybook --quiet -p 7045"
@@ -43,7 +44,10 @@
     "@testing-library/user-event": "14.4.3"
   },
   "exports": {
-    ".": "./dist/index.js",
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    },
     "./dist/style.css": "./dist/style.css"
   }
 }

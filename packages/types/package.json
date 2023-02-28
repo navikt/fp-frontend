@@ -1,17 +1,17 @@
 {
   "name": "@navikt/fp-types",
-  
   "version": "1.0.0",
   "license": "MIT",
   "private": true,
-  "main": "./dist/index.js",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
     "tsc": "tsc --pretty",
-    "dev": "vite build --watch",
+    "dev": "vite build --mode development --watch",
     "build": "vite build",
     "clean": "rm -rf ./dist ./node_modules"
   },
@@ -19,6 +19,9 @@
     "@navikt/fp-kodeverk": "1.0.0"
   },
   "exports": {
-    ".": "./dist/index.js"
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    }
   }
 }
