@@ -6,7 +6,7 @@ import {
 } from '@navikt/fp-rest-api';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { FagsakEnkel } from '@navikt/fp-types';
-import FagsakSokSakIndex from '@navikt/fp-sak-sok';
+import { FagsakSokSakIndex } from '@navikt/fp-sak-sok';
 
 import { pathToFagsak } from '../app/paths';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';

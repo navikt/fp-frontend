@@ -6,13 +6,9 @@
   margin-top: 2px;
   width: 45px;
 }
-
 .margin {
   margin-bottom: 15px;
 }
-
-.width {
-  :global(.navds-chat__bubble) {
-    width: 300px;
-  }
+.width :global(.navds-chat__bubble) {
+  width: 300px;
 }

@@ -1,1 +1,2 @@
-export { default } from './src/OppgaveJournalføringIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as OppgaveJournalføringIndex } from './src/OppgaveJournalføringIndex';

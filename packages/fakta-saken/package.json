@@ -1,6 +1,6 @@
 {
   "name": "@navikt/fp-fakta-saken",
-  "type": "module",
+  
   "version": "1.0.0",
   "license": "MIT",
   "private": true,

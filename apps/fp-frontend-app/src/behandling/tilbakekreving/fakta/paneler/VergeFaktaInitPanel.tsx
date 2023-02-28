@@ -4,7 +4,7 @@ import { Aksjonspunkt } from '@navikt/ft-types';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import VergeFaktaIndex from '@navikt/fp-fakta-verge';
+import { VergeFaktaIndex } from '@navikt/fp-fakta-verge';
 import { AlleKodeverk, Behandling } from '@navikt/fp-types';
 import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 

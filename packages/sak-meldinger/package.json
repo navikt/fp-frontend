@@ -1,6 +1,6 @@
 {
   "name": "@navikt/fp-sak-meldinger",
-  "type": "module",
+  
   "description": "Komponent som lar saksbehandler sende meldinger til søker",
   "version": "1.0.0",
   "license": "MIT",

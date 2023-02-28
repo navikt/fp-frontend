@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 import { FamilieHendelseSamling } from '@navikt/ft-types';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import OmsorgOgForeldreansvarFaktaIndex from '@navikt/fp-fakta-omsorg-og-foreldreansvar';
+import { OmsorgOgForeldreansvarFaktaIndex } from '@navikt/fp-fakta-omsorg-og-foreldreansvar';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { InntektArbeidYtelse, Personoversikt, Soknad } from '@navikt/fp-types';
 

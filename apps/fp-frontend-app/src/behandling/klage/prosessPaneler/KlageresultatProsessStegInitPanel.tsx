@@ -8,7 +8,7 @@ import {
 import { VilkarUtfallType, AksjonspunktStatus, BehandlingResultatType } from '@navikt/ft-kodeverk';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import VedtakKlageProsessIndex, { VedtakKlageBrevData } from '@navikt/fp-prosess-vedtak-klage';
+import { VedtakKlageProsessIndex, VedtakKlageBrevData } from '@navikt/fp-prosess-vedtak-klage';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { ForhåndsvisMeldingParams, KlageVurdering } from '@navikt/fp-types';
 import { forhandsvisDokument } from '@navikt/ft-utils';

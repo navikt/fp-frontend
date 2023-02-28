@@ -1,1 +1,2 @@
-export { default } from './src/FodselVilkarProsessIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as FodselVilkarProsessIndex } from './src/FodselVilkarProsessIndex';

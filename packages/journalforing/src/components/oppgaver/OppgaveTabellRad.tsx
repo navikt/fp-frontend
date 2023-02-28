@@ -6,7 +6,7 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import { finnYtelseTekst } from '../journalpost/form/VelgSakForm';
 
-import styles from '../journalforingPanel.module.css';
+import styles from './oppgaveTabellRad.module.css';
 
 type OwnProps = Readonly<{
   oppgave: OppgaveOversikt;

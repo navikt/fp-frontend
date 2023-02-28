@@ -1,6 +1,6 @@
 {
   "name": "@navikt/fp-sak-meny-henlegg",
-  "type": "module",
+  
   "description": "Komponent som lar saksbehandler henlegge behandling via en modal",
   "version": "1.0.0",
   "license": "MIT",

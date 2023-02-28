@@ -1,6 +1,6 @@
 {
   "name": "@navikt/fp-fakta-omsorg-og-rett",
-  "type": "module",
+  
   "version": "1.0.0",
   "license": "MIT",
   "private": true,

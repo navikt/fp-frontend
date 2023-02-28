@@ -1,1 +1,2 @@
-export { default } from './src/UttakProsessIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as UttakProsessIndex } from './src/UttakProsessIndex';

@@ -1,6 +1,6 @@
 {
   "name": "@navikt/fp-sak-historikk",
-  "type": "module",
+  
   "description": "Komponent som viser historikken til en fagsak",
   "version": "1.0.0",
   "license": "MIT",

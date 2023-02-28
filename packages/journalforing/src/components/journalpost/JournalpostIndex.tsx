@@ -9,13 +9,12 @@ import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { NavAnsatt } from '@navikt/fp-types';
 import { restApiHooks, RestApiPathsKeys } from '../../data/fpfordelRestApi';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
-import OppgaveDetaljertVisning from './OppgaveDetaljertVisning';
+import OppgaveDetaljertVisning from './JournalpostDetaljer';
+import styles from './journalpostIndex.module.css';
 import Journalpost from '../../typer/journalpostTsType';
 import JournalDokument from '../../typer/journalDokumentTsType';
 import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
 import DokumentIndex from './pdf/DokumentIndex';
-
-import styles from '../journalforingPanel.module.css';
 
 type OwnProps = Readonly<{
   oppgave: OppgaveOversikt;

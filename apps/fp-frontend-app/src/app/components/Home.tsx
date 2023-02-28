@@ -8,9 +8,9 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 import { NotFoundPage } from '@navikt/ft-sak-infosider';
 
-import SaksbehandlerIndex from '@navikt/fp-los-saksbehandler';
-import JournalforingIndex from '@navikt/fp-journalforing';
-import AvdelingslederIndex from '@navikt/fp-los-avdelingsleder';
+import { SaksbehandlerIndex } from '@navikt/fp-los-saksbehandler';
+import { OppgaveJournalføringIndex } from '@navikt/fp-journalforing';
+import { AvdelingslederIndex } from '@navikt/fp-los-avdelingsleder';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { NavAnsatt } from '@navikt/fp-types';
 
@@ -71,7 +71,7 @@ const Home: FunctionComponent<OwnProps> = ({
         />
         <Route
           path={journalføringRoutePath}
-          element={<JournalforingIndex navAnsatt={navAnsatt} />}
+          element={<OppgaveJournalføringIndex navAnsatt={navAnsatt} />}
         />
         <Route path={fagsakRoutePath} element={<FagsakIndex />} />
         <Route path={aktoerRoutePath} element={<AktoerIndex />} />

@@ -1,1 +1,2 @@
-export { default } from './src/SvangerskapVilkarProsessIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as SvangerskapVilkarProsessIndex } from './src/SvangerskapVilkarProsessIndex';

@@ -6,7 +6,7 @@ import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 import { AlleKodeverk, AlleKodeverkTilbakekreving, Behandling } from '@navikt/fp-types';
 import { RequestApi } from '@navikt/fp-rest-api';
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
-import SettPaVentModalIndex from '@navikt/fp-modal-sett-pa-vent';
+import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
 import { BehandlingFellesApiKeys } from '../../data/behandlingFellesApi';
 

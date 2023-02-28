@@ -1,1 +1,2 @@
-export { default } from './src/YtelserFaktaIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as YtelserFaktaIndex } from './src/YtelserFaktaIndex';

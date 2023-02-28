@@ -1,11 +1,9 @@
 .buttonRow {
   margin-top: 16px;
-
-  > :not(:first-child) {
-    margin-left: 15px;
-  }
 }
-
+.buttonRow > :not(:first-child) {
+  margin-left: 15px;
+}
 .buttonLink {
   background: none;
   border: 0;

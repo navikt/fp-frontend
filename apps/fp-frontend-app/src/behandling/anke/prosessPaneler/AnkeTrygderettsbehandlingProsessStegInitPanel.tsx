@@ -6,7 +6,7 @@ import { useIntl } from 'react-intl';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AnkeVurdering } from '@navikt/fp-types';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import AnkeTrygderettsbehandlingProsessIndex from '@navikt/fp-prosess-anke-trygderettsbehandling';
+import { AnkeTrygderettsbehandlingProsessIndex } from '@navikt/fp-prosess-anke-trygderettsbehandling';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';

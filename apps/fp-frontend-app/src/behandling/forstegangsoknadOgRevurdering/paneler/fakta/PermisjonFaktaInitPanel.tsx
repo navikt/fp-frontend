@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import PermisjonFaktaIndex from '@navikt/fp-fakta-permisjon';
+import { PermisjonFaktaIndex } from '@navikt/fp-fakta-permisjon';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   ArbeidsgiverOpplysningerPerId, ArbeidOgInntektsmelding,

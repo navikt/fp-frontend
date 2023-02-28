@@ -1,1 +1,2 @@
-export { default } from './src/UttakDokumentasjonFaktaIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as UttakDokumentasjonFaktaIndex } from './src/UttakDokumentasjonFaktaIndex';

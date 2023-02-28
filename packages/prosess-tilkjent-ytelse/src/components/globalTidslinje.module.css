@@ -19,8 +19,8 @@
   display: none;
 }
 :global(.soknad) {
-  background-color: #0056b4;
-  pointer-events: none;
+  background-color: #0056b4 !important;
+  pointer-events: none !important;
   top: 6px !important;
 }
 :global(.soknad):after {
@@ -33,8 +33,8 @@
   width: 20px;
 }
 :global(.fodsel) {
-  background-color: #a32a17;
-  pointer-events: none;
+  background-color: #a32a17 !important;
+  pointer-events: none !important;
   top: 0 !important;
 }
 :global(.fodsel):after {
@@ -47,8 +47,8 @@
   width: 20px;
 }
 :global(.revurdering) {
-  background-color: #007c2e;
-  pointer-events: none;
+  background-color: #007c2e !important;
+  pointer-events: none !important;
   top: 12px !important;
 }
 :global(.revurdering):after {
@@ -115,13 +115,13 @@
   opacity: 0.7;
 }
 :global(.gradert) {
-  background: #06893a repeating-linear-gradient(45deg,#fff,#fff 20%,transparent 20%,transparent 50%,#fff 50%);
-  background-size: 12px 12px;
-  opacity: 0.9;
+  background: #06893a repeating-linear-gradient(45deg,#fff !important,#fff !important 20% !important,transparent 20% !important,transparent 50%,#fff !important 50%) !important;
+  background-size: 12px 12px !important;
+  opacity: 0.9 !important;
 }
 :global(.gradert.vis-item.vis-selected) {
-  background-color: #06893a;
-  opacity: 1;
+  background-color: #06893a !important;
+  opacity: 1 !important;
 }
 :global(.gradert.vis-item.vis-selected):hover {
   transform: translateY(-1px);
@@ -180,8 +180,8 @@
   width: 0;
 }
 :global(.godkjentPeriode.vis-item.vis-selected) {
-  background-color: #06893a;
-  border-radius: 6px;
+  background-color: #06893a !important;
+  border-radius: 6px !important;
 }
 :global(.mellomliggendePeriode) {
   background-color: #000100;
@@ -195,12 +195,12 @@
   border-color: #06893a;
 }
 :global(.mellomliggendePeriode.vis-item.vis-selected) {
-  background-color: #06893a;
-  border-radius: 6px;
+  background-color: #06893a !important;
+  border-radius: 6px !important;
 }
 :global(.innvilget.vis-item.vis-selected) {
-  background-color: #06893a;
-  border-radius: 6px;
+  background-color: #06893a !important;
+  border-radius: 6px !important;
 }
 :global(.innvilgetnullprosent) {
   background-color: transparent;

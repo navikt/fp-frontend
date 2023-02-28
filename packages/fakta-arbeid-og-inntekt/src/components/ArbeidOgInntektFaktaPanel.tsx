@@ -9,7 +9,7 @@ import {
   Behandling, Inntektsmelding, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold,
 } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
-import SettPaVentModalIndex from '@navikt/fp-modal-sett-pa-vent';
+import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { VerticalSpacer, Table } from '@navikt/ft-ui-komponenter';
 import {
   AksjonspunktCode, KodeverkType, venteArsakType, aksjonspunktStatus, ArbeidsforholdKomplettVurderingType,

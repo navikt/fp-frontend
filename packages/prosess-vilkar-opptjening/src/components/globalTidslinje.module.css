@@ -19,23 +19,8 @@
   display: none;
 }
 :global(.soknad) {
-<<<<<<< HEAD:packages/prosess-vilkar-opptjening/src/components/globalTidslinje.less
-  background-color: #0056b4 !important; // stylelint-disable-line declaration-no-important
-  pointer-events: none !important; // stylelint-disable-line declaration-no-important
-  top: 6px !important; // stylelint-disable-line declaration-no-important
-
-  &:after {
-    background: transparent url('../images/soknad.svg') no-repeat;
-    content: '';
-    height: 20px;
-    left: -8px;
-    position: absolute;
-    top: 0;
-    width: 20px;
-  }
-=======
-  background-color: #0056b4;
-  pointer-events: none;
+  background-color: #0056b4 !important;
+  pointer-events: none !important;
   top: 6px !important;
 }
 :global(.soknad):after {
@@ -46,26 +31,10 @@
   position: absolute;
   top: 0;
   width: 20px;
->>>>>>> 59bc27af0 (div):packages/prosess-vilkar-opptjening/src/components/globalTidslinje.module.css
 }
 :global(.fodsel) {
-<<<<<<< HEAD:packages/prosess-vilkar-opptjening/src/components/globalTidslinje.less
-  background-color: #a32a17 !important; // stylelint-disable-line declaration-no-important
-  pointer-events: none !important; // stylelint-disable-line declaration-no-important
-  top: 0 !important; // stylelint-disable-line declaration-no-important
-
-  &:after {
-    background: transparent url('../images/fodsel.svg') no-repeat;
-    content: '';
-    height: 20px;
-    left: -8px;
-    position: absolute;
-    top: 0;
-    width: 20px;
-  }
-=======
-  background-color: #a32a17;
-  pointer-events: none;
+  background-color: #a32a17 !important;
+  pointer-events: none !important;
   top: 0 !important;
 }
 :global(.fodsel):after {
@@ -76,26 +45,10 @@
   position: absolute;
   top: 0;
   width: 20px;
->>>>>>> 59bc27af0 (div):packages/prosess-vilkar-opptjening/src/components/globalTidslinje.module.css
 }
 :global(.revurdering) {
-<<<<<<< HEAD:packages/prosess-vilkar-opptjening/src/components/globalTidslinje.less
-  background-color: #007c2e !important; // stylelint-disable-line declaration-no-important
-  pointer-events: none !important; // stylelint-disable-line declaration-no-important
-  top: 12px !important; // stylelint-disable-line declaration-no-important
-
-  &:after {
-    background: transparent url('../images/endringstidspunkt.svg') no-repeat;
-    content: '';
-    height: 20px;
-    left: -8px;
-    position: absolute;
-    top: 0;
-    width: 20px;
-  }
-=======
-  background-color: #007c2e;
-  pointer-events: none;
+  background-color: #007c2e !important;
+  pointer-events: none !important;
   top: 12px !important;
 }
 :global(.revurdering):after {
@@ -106,7 +59,6 @@
   position: absolute;
   top: 0;
   width: 20px;
->>>>>>> 59bc27af0 (div):packages/prosess-vilkar-opptjening/src/components/globalTidslinje.module.css
 }
 :global(.lastDateInSoknad) {
   display: none;
@@ -228,8 +180,8 @@
   width: 0;
 }
 :global(.godkjentPeriode.vis-item.vis-selected) {
-  background-color: #06893a !important; // stylelint-disable-line declaration-no-important
-  border-radius: 6px !important; // stylelint-disable-line declaration-no-important
+  background-color: #06893a !important;
+  border-radius: 6px !important;
 }
 :global(.mellomliggendePeriode) {
   background-color: #000100;
@@ -243,12 +195,12 @@
   border-color: #06893a;
 }
 :global(.mellomliggendePeriode.vis-item.vis-selected) {
-  background-color: #06893a !important; // stylelint-disable-line declaration-no-important
-  border-radius: 6px !important; // stylelint-disable-line declaration-no-important
+  background-color: #06893a !important;
+  border-radius: 6px !important;
 }
 :global(.innvilget.vis-item.vis-selected) {
-  background-color: #06893a !important; // stylelint-disable-line declaration-no-important
-  border-radius: 6px !important; // stylelint-disable-line declaration-no-important
+  background-color: #06893a !important;
+  border-radius: 6px !important;
 }
 :global(.innvilgetnullprosent) {
   background-color: transparent;

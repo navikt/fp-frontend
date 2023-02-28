@@ -1,1 +1,2 @@
-export { default } from './src/BeregningsresultatProsessIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as BeregningsresultatProsessIndex } from './src/BeregningsresultatProsessIndex';

@@ -9,7 +9,7 @@ import { useIntl, FormattedMessage, IntlShape } from 'react-intl';
 import kvinneIkonUrl from '../../../images/kvinne.svg';
 import mannIkonUrl from '../../../images/mann.svg';
 import ukjentIkonUrl from '../../../images/ukjent.svg';
-import styles from './brukerAvsenderPanel.less';
+import styles from './brukerAvsenderPanel.module.css';
 import Journalpost from '../../../typer/journalpostTsType';
 
 const finnKjønnBilde = (journalpost: Journalpost): string => {

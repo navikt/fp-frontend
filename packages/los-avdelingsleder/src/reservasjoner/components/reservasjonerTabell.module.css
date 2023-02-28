@@ -1,9 +1,7 @@
-
 .removeImage {
   cursor: pointer;
   padding: 5px;
 }
-
 .calendarToggleButton {
   background: transparent;
   border: 1px solid transparent;
@@ -15,29 +13,23 @@
   margin: 0;
   top: 0;
   width: 22px;
-
-  &:after {
-    content: url('../../images/kalender.svg');
-  }
-
-  &:hover,
-  &:focus {
-    border-color: transparent;
-    box-shadow: none;
-    outline: none;
-
-    &:after {
-      content: url('../../images/kalender_hover.svg');
-    }
-  }
-
-  &:disabled {
-    background: transparent;
-    border-color: transparent;
-    cursor: initial;
-
-    &:after {
-      content: url('../../images/kalender_disabled.svg');
-    }
-  }
+}
+.calendarToggleButton:after {
+  content: url('../../images/kalender.svg');
+}
+.calendarToggleButton:hover, .calendarToggleButton:focus {
+  border-color: transparent;
+  box-shadow: none;
+  outline: none;
+}
+.calendarToggleButton:hover:after, .calendarToggleButton:focus:after {
+  content: url('../../images/kalender_hover.svg');
+}
+.calendarToggleButton:disabled {
+  background: transparent;
+  border-color: transparent;
+  cursor: initial;
+}
+.calendarToggleButton:disabled:after {
+  content: url('../../images/kalender_disabled.svg');
 }

@@ -4,7 +4,7 @@ import { NewTab } from '@navikt/ds-icons';
 
 import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 import JournalDokument from '../../../typer/journalDokumentTsType';
-import styles from './dokumentDetaljer.less';
+import styles from './dokumentDetaljer.module.css';
 
 type OwnProps = Readonly<{
   dokumenter: JournalDokument[];

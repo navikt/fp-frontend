@@ -12,7 +12,7 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { BehandlingAppKontekst } from '@navikt/fp-types';
-import UkjentAdresseMeldingIndex from '@navikt/fp-sak-ukjent-adresse';
+import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 
 import {

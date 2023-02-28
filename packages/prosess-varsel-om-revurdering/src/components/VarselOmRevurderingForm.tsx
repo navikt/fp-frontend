@@ -21,8 +21,8 @@ import {
   hasValidText, minLength, maxLength, required,
 } from '@navikt/ft-form-validators';
 import { ISO_DATE_FORMAT, getLanguageFromSprakkode } from '@navikt/ft-utils';
-import FodselSammenligningIndex from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
-import SettPaVentModalIndex, { FormValues as ModalFormValues } from '@navikt/fp-modal-sett-pa-vent';
+import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
+import { SettPaVentModalIndex, FormValues as ModalFormValues } from '@navikt/fp-modal-sett-pa-vent';
 import {
   Aksjonspunkt, FamilieHendelseSamling, Soknad, FamilieHendelse, AlleKodeverk, Behandling,
 } from '@navikt/fp-types';

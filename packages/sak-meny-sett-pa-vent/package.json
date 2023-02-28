@@ -1,6 +1,6 @@
 {
   "name": "@navikt/fp-sak-meny-sett-pa-vent",
-  "type": "module",
+  
   "description": "Komponent som lar saksbehandler sette en behandling på vent",
   "version": "1.0.0",
   "license": "MIT",
