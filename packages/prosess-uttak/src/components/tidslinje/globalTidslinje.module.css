@@ -1,3 +1,4 @@
+/* TODO Mesteparten i denne fila bør ikkje ligga her */
 :global(.cal-wrap) {
   width: 300px;
 }
@@ -92,13 +93,13 @@
   transition: transform 0.2s !important;
 }
 :global(.vis-item):hover {
-  box-shadow: 2px 2px 1px rgba(0,0,0,0.3);
+  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
   filter: brightness(80%);
   opacity: 1;
   transform: translateY(-3px);
 }
 :global(.vis-item):active {
-  box-shadow: 0 4px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
   filter: brightness(95%);
   transform: translateY(-2px);
 }
@@ -115,7 +116,7 @@
   opacity: 0.7;
 }
 :global(.gradert) {
-  background: #06893a repeating-linear-gradient(45deg,#fff,#fff 20%,transparent 20%,transparent 50%,#fff 50%);
+  background: #06893a repeating-linear-gradient(45deg, #fff, #fff 20%, transparent 20%, transparent 50%, #fff 50%);
   background-size: 12px 12px;
   opacity: 0.9;
 }
@@ -128,15 +129,15 @@
 }
 :global(.avslatt) {
   background-color: transparent;
-  border-color: #000100;
+  border-color: rgba(186, 58, 38, 0.5);
   border-radius: 6px;
 }
 :global(.avslatt):active {
   background-color: transparent;
 }
 :global(.avvistPeriode) {
-  background-color: #000100 !important;
-  border-color: #000100 !important;
+  background-color: rgba(186, 58, 38, 0.5) !important;
+  border-color: rgba(201, 201, 201, 0.5) !important;
   border-radius: 6px !important;
 }
 :global(.avvistPeriode):active {
@@ -144,8 +145,8 @@
   border-color: #c9c9c9;
 }
 :global(.undefined) {
-  background-color: #000100 !important;
-  border-color: #000100 !important;
+  background-color: rgba(255, 145, 0, 0.8) !important;
+  border-color: rgba(255, 145, 0, 0.8) !important;
   border-radius: 8px !important;
 }
 :global(.undefined):active {
@@ -163,13 +164,13 @@
   background-color: #ba3a26 !important;
 }
 :global(.innvilget) {
-  background-color: #000100 !important;
-  border-color: #000100 !important;
+  background-color: rgba(6, 137, 58, 0.5) !important;
+  border-color: rgba(6, 137, 58, 0.5) !important;
   border-radius: 8px !important;
 }
 :global(.godkjentPeriode) {
-  background-color: #000100 !important;
-  border-color: #000100 !important;
+  background-color: rgba(6, 137, 58, 0.5) !important;
+  border-color: rgba(6, 137, 58, 0.5) !important;
   border-radius: 8px !important;
 }
 :global(.godkjentPeriode):active {
@@ -184,8 +185,8 @@
   border-radius: 6px !important;
 }
 :global(.mellomliggendePeriode) {
-  background-color: #000100;
-  border-color: #000100;
+  background-color: rgba(6, 137, 58, 0.5);
+  border-color: rgba(6, 137, 58, 0.5);
   border-radius: 8px;
   height: 12px;
   top: 12px !important;
@@ -293,18 +294,25 @@
   animation-duration: 2s;
   animation-name: fadeIn;
 }
-
 @media all and (-ms-high-contrast: none) {
   :global(.vis-timeline.vis-bottom) {
     animation-duration: 0s;
     animation-name: none;
- }
+  }
   :global(.opptjening .vis-labelset .vis-label .vis-inner) {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     width: 150px;
- }
+  }
+}
+@supports (-ms-ime-align: auto) {
+  :global(.opptjening .vis-labelset .vis-label .vis-inner) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 150px;
+  }
 }
 :global(.opptjening .vis-foreground .vis-group:last-child) {
   border-bottom: 1px solid darkgray;
@@ -346,7 +354,8 @@
 input[type='number'] {
   -moz-appearance: textfield;
 }
-input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 div[class^='SjekkFodselDokForm'] [class^='periodFieldArray_buttonRemove'] {
