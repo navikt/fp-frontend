@@ -1,5 +1,4 @@
 import { defineConfig } from 'vitest/config'
-import { externalizeDeps } from 'vite-plugin-externalize-deps'
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
@@ -8,7 +7,6 @@ export default defineConfig({
       // Use React plugin in all *.jsx and *.tsx files
       include: '**/*.{ts,tsx}',
     }),
-    externalizeDeps(),
   ],
   css: {
     modules: {
