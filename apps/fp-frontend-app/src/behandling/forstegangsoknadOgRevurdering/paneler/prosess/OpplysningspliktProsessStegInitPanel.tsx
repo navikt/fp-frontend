@@ -4,7 +4,7 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import { VilkarType, behandlingType, AksjonspunktCode } from '@navikt/fp-kodeverk';
-import SokersOpplysningspliktVilkarProsessIndex from '@navikt/fp-prosess-vilkar-sokers-opplysningsplikt';
+import { SokersOpplysningspliktVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-sokers-opplysningsplikt';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { ArbeidsgiverOpplysningerPerId, Soknad } from '@navikt/fp-types';
 

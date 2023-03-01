@@ -4,7 +4,7 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import VergeFaktaIndex from '@navikt/fp-fakta-verge';
+import { VergeFaktaIndex } from '@navikt/fp-fakta-verge';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Verge } from '@navikt/fp-types';
 

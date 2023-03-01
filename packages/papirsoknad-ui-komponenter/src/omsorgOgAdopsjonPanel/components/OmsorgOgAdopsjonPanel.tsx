@@ -13,7 +13,7 @@ import {
 
 import { familieHendelseType as fht } from '@navikt/fp-kodeverk';
 
-import styles from './omsorgOgAdopsjonPanel.less';
+import styles from './omsorgOgAdopsjonPanel.module.css';
 
 const MAX_ANTALL_BARN = 10;
 

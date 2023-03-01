@@ -1,1 +1,2 @@
-export { default } from './src/AnkeTrygderettsbehandlingProsessIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as AnkeTrygderettsbehandlingProsessIndex } from './src/AnkeTrygderettsbehandlingProsessIndex';

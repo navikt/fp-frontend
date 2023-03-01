@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
 
 import { AksjonspunktCode, isKlageAvvist } from '@navikt/fp-kodeverk';
-import FormkravProsessIndex from '@navikt/fp-prosess-formkrav';
+import { FormkravProsessIndex } from '@navikt/fp-prosess-formkrav';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { KlageVurdering } from '@navikt/fp-types';
 

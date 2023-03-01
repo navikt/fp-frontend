@@ -12,9 +12,9 @@ import {
 import { getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { SelectField, TextAreaField, Form } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import UkjentAdresseMeldingIndex from '@navikt/fp-sak-ukjent-adresse';
+import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 
-import styles from './messages.less';
+import styles from './messages.module.css';
 
 const maxLength4000 = maxLength(4000);
 const maxLength6000 = maxLength(6000);

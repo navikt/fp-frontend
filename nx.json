@@ -18,19 +18,20 @@
   },
   "targetDefaults": {
     "test": {
-      "inputs": ["default", "^prod", "{workspaceRoot}/jest-config/jest.config.ts"]
+      "inputs": ["default", "^prod", "{workspaceRoot}/jest-config/jest.config.ts"],
+      "dependsOn": ["build"]
     },
     "tsc": {
-      "inputs": ["default", "{workspaceRoot}/tsconfig.json"]
+      "inputs": ["default", "{workspaceRoot}/tsconfig.json"],
+      "dependsOn": ["build"]
     },
     "eslint": {
-      "inputs": ["default", "{workspaceRoot}/eslint/*.js"]
+      "inputs": ["default", "{workspaceRoot}/eslint/*.js"],
+      "dependsOn": ["build"]
     },
     "build": {
       "inputs": ["prod"],
-      "dependsOn": [
-        "^build"
-      ],
+      "dependsOn": ["^build"],
       "outputs": [
         "{projectRoot}/dist"
       ]

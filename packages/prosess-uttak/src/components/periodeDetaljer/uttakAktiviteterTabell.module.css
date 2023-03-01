@@ -1,0 +1,35 @@
+.verticalCharPlacementInTable {
+  padding-top: 12px;
+  position: absolute;
+}
+.weekPosition {
+  float: right;
+}
+.centerUttaksElement {
+  text-align: center;
+}
+.tableOverflow {
+  overflow-x: auto;
+}
+.forsteKolWidth {
+  max-width: 310px;
+  word-wrap: break-word;
+}
+.align {
+  float: left;
+}
+.utbetalingsgrad {
+  width: 100px;
+}
+.ukeOgDag {
+  width: 100px;
+}
+.selectStonad {
+  width: 85%;
+}
+.selectStonad select {
+  padding-bottom: 8px;
+}
+table {
+  border-bottom: 1px solid #f1f1f1;
+}

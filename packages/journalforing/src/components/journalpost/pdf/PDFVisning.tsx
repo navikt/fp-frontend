@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import styles from './pdfvisning.less';
+import styles from './pdfvisning.module.css';
 import JournalDokument from '../../../typer/journalDokumentTsType';
 
 type OwnProps = Readonly<{

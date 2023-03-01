@@ -20,7 +20,7 @@ import { arbeidskategori } from '@navikt/fp-kodeverk';
 
 import { gyldigeUttakperioder } from './RenderPermisjonPeriodeFieldArray';
 
-import styles from './renderGraderingPeriodeFieldArray.less';
+import styles from './renderGraderingPeriodeFieldArray.module.css';
 
 export const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
 export const GRADERING_PERIODE_FIELD_ARRAY_NAME = 'graderingPeriode';

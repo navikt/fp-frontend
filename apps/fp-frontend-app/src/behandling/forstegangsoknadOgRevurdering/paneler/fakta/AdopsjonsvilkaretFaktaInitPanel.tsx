@@ -6,7 +6,7 @@ import { Fagsak, FamilieHendelseSamling } from '@navikt/ft-types';
 import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import { AksjonspunktCode, adopsjonsvilkarene } from '@navikt/fp-kodeverk';
-import AdopsjonFaktaIndex from '@navikt/fp-fakta-adopsjon';
+import { AdopsjonFaktaIndex } from '@navikt/fp-fakta-adopsjon';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Soknad } from '@navikt/fp-types';
 

@@ -7,7 +7,7 @@ import {
 
 import innvilgetImageUrl from '../images/innvilget_valgt.svg';
 
-import styles from './MessagesModal.less';
+import styles from './MessagesModal.module.css';
 
 interface OwnProps {
   showModal: boolean;

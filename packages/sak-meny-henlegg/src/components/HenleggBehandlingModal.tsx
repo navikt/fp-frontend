@@ -15,7 +15,7 @@ import { SelectField, TextAreaField, Form } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 
-import styles from './henleggBehandlingModal.less';
+import styles from './henleggBehandlingModal.module.css';
 
 const maxLength1500 = maxLength(1500);
 

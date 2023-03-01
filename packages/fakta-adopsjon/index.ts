@@ -1,1 +1,2 @@
-export { default } from './src/AdopsjonFaktaIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as AdopsjonFaktaIndex } from './src/AdopsjonFaktaIndex';

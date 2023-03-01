@@ -28,7 +28,7 @@ import Avdeling from './typer/avdelingTsType';
 import { getValueFromLocalStorage, removeValueFromLocalStorage } from './data/localStorageHelper';
 import Avdelingsvelger from './components/Avdelingsvelger';
 
-import styles from './avdelingslederIndex.less';
+import styles from './avdelingslederIndex.module.css';
 
 import messages from '../i18n/nb_NO.json';
 

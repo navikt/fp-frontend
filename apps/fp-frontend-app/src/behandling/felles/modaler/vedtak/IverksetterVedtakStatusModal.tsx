@@ -10,7 +10,7 @@ import { BehandlingResultatType } from '@navikt/ft-kodeverk';
 
 import innvilgetImageUrl from '../../../../images/innvilget_valgt.svg';
 
-import styles from './iverksetterVedtakStatusModal.less';
+import styles from './iverksetterVedtakStatusModal.module.css';
 
 interface OwnProps {
   lukkModal: () => void;

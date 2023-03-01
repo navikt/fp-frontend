@@ -15,7 +15,7 @@ import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { DokumentasjonVurderingBehov } from '@navikt/fp-types';
 import advarselImageUrl from '../images/advarsel.svg';
 
-import styles from './delOppPeriodeModal.less';
+import styles from './delOppPeriodeModal.module.css';
 
 const validerInnenforIntervall = (
   fom: string,

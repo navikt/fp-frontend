@@ -6,7 +6,7 @@ import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { Dokument } from '@navikt/fp-types';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
 
-import styles from './documentListVedtakInnsyn.less';
+import styles from './documentListVedtakInnsyn.module.css';
 
 const headerTextCodes = [
   'DocumentListVedtakInnsyn.Dokument',

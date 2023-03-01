@@ -14,7 +14,7 @@ import UtlandPanel from './utland/UtlandPanel';
 import InnhentDokOpptjeningUtlandPanel from './innhentDok/InnhentDokOpptjeningUtlandPanel';
 import StartdatoForForeldrepengerperiodenForm from './startdatoForForeldrepenger/StartdatoForForeldrepengerperiodenForm';
 
-import styles from './sakenFaktaPanel.less';
+import styles from './sakenFaktaPanel.module.css';
 
 interface OwnProps {
   erSvangerskapspenger: boolean;

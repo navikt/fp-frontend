@@ -26,7 +26,7 @@ import questionHoverUrl from '../../images/question_hover.svg';
 import InntektsmeldingOpplysningerPanel from '../felles/InntektsmeldingOpplysningerPanel';
 import ArbeidsforholdOgInntekt from '../../types/arbeidsforholdOgInntekt';
 
-import styles from './manglendeArbeidsforholdForm.less';
+import styles from './manglendeArbeidsforholdForm.module.css';
 import { useSetDirtyForm } from '../../DirtyFormProvider';
 
 const minLength3 = minLength(3);

@@ -14,7 +14,7 @@ import {
 
 import { TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
-import styles from './godkjenningPanel.less';
+import styles from './godkjenningPanel.module.css';
 
 const minLength3 = minLength(3);
 const maxLength2000 = maxLength(2000);

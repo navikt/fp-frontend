@@ -27,7 +27,7 @@ import ArbeidsforholdOgInntekt from '../../types/arbeidsforholdOgInntekt';
 import ArbeidsforholdInformasjonPanel from '../felles/ArbeidsforholdInformasjonPanel';
 import { useSetDirtyForm } from '../../DirtyFormProvider';
 
-import styles from './manglendeInntektsmeldingForm.less';
+import styles from './manglendeInntektsmeldingForm.module.css';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);

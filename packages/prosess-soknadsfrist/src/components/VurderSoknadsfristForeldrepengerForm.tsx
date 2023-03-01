@@ -18,7 +18,7 @@ import { Aksjonspunkt, Søknadsfrist } from '@navikt/fp-types';
 import { VurderSoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
-import styles from './vurderSoknadsfristForeldrepengerForm.less';
+import styles from './vurderSoknadsfristForeldrepengerForm.module.css';
 
 const isEdited = (hasAksjonspunkt: boolean, gyldigSenFremsetting?: boolean): boolean => hasAksjonspunkt && gyldigSenFremsetting !== undefined;
 

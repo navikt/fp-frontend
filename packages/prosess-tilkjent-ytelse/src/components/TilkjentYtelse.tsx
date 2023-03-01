@@ -12,9 +12,9 @@ import { Timeline, TimeLineControl, TimeLineSokerEnsamSoker } from '@navikt/ft-t
 
 import TilkjentYtelseTimelineData, { PeriodeMedId } from './TilkjentYtelseTimelineData';
 
-import styles from './tilkjentYtelse.less';
+import styles from './tilkjentYtelse.module.css';
 
-import './globalTidslinje.less';
+import './globalTidslinje.module.css';
 
 type NyPeriode = {
   className: string;

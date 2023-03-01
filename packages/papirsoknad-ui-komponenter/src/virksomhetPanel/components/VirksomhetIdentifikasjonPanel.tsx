@@ -12,7 +12,7 @@ import {
 import { KodeverkType } from '@navikt/ft-kodeverk';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
-import styles from './virksomhetIdentifikasjonPanel.less';
+import styles from './virksomhetIdentifikasjonPanel.module.css';
 
 const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] => countryCodes
   .map(({

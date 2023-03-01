@@ -13,7 +13,7 @@ import {
 
 import CollapseButton from './CollapseButton';
 
-import styles from './avregningTable.less';
+import styles from './avregningTable.module.css';
 
 const classNames = classnames.bind(styles);
 

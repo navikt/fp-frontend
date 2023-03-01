@@ -14,7 +14,7 @@ import {
 
 import UttakDokumentasjonFaktaDetailForm from './UttakDokumentasjonFaktaDetailForm';
 
-import styles from './uttakDokumentasjonFaktaTable.less';
+import styles from './uttakDokumentasjonFaktaTable.module.css';
 
 const UTTAK_ÅRSAK_TEKSTER = {
   [UttakÅrsak.INNLEGGELSE_SØKER]: 'UttakDokumentasjonFaktaTable.InnleggelseSoker',

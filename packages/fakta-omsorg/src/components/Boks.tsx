@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import classnames from 'classnames/bind';
 
-import styles from './boks.less';
+import styles from './boks.module.css';
 
 const classNames = classnames.bind(styles);
 

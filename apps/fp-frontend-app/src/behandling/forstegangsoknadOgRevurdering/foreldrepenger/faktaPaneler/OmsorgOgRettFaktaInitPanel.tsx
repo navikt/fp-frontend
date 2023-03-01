@@ -4,7 +4,7 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import OmsorgOgRettFaktaIndex from '@navikt/fp-fakta-omsorg-og-rett';
+import { OmsorgOgRettFaktaIndex } from '@navikt/fp-fakta-omsorg-og-rett';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
 

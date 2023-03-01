@@ -22,7 +22,7 @@ import {
   requestApi, RestApiPathsKeys, RestApiGlobalStatePathsKeys, restApiHooks,
 } from '../../data/fplosSaksbehandlerRestApi';
 
-import styles from './oppgaverTabell.less';
+import styles from './oppgaverTabell.module.css';
 
 const headerTextCodes = [
   'OppgaverTabell.Soker',

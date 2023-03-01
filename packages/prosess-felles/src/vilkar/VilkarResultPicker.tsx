@@ -17,7 +17,7 @@ import innvilgetImage from '../images/check.svg';
 
 import messages from '../../i18n/nb_NO.json';
 
-import styles from './vilkarResultPicker.less';
+import styles from './vilkarResultPicker.module.css';
 
 const intl = createIntl(messages);
 

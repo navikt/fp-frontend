@@ -16,7 +16,7 @@ import { restApiHooks, RestApiPathsKeys } from '../../../../data/fplosRestApi';
 
 import useDebounce from '../useDebounce';
 
-import styles from './sorteringVelger.less';
+import styles from './sorteringVelger.module.css';
 
 dayjs.extend(customParseFormat);
 

@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 
 import { klageVurdering as klageVurderingKodeverk, AksjonspunktCode } from '@navikt/fp-kodeverk';
-import KlagevurderingProsessIndex, { AksjonspunktVerdier, KlageVurderingBrevData } from '@navikt/fp-prosess-klagevurdering';
+import { KlagevurderingProsessIndex, AksjonspunktVerdier, KlageVurderingBrevData } from '@navikt/fp-prosess-klagevurdering';
 import {
   Behandling, Fagsak, ForhåndsvisMeldingParams, KlageVurdering,
 } from '@navikt/fp-types';

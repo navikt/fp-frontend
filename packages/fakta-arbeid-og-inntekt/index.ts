@@ -1,1 +1,2 @@
-export { default } from './src/ArbeidOgInntektFaktaIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as ArbeidOgInntektFaktaIndex } from './src/ArbeidOgInntektFaktaIndex';

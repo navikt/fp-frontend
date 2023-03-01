@@ -1,0 +1,37 @@
+.image {
+  height: 25px;
+  margin-top: 10px;
+  width: 25px;
+}
+
+.modal {
+  overflow: visible !important;
+  width: 600px;
+}
+
+.select {
+  width: 400px;
+}
+
+.label {
+  margin-top: 11px;
+}
+
+.button {
+  padding-left: 36px;
+  padding-right: 36px;
+}
+
+.cancelButton {
+  margin: 0 10px 0 10px;
+}
+
+.marginTop {
+  margin-top: 20px;
+}
+
+.datePicker {
+  display: inline-block;
+  margin-left: -25px;
+  position: absolute;
+}

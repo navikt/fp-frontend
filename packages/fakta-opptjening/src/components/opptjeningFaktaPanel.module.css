@@ -1,0 +1,13 @@
+.container {
+  width: 100%;
+}
+.info {
+  padding: 10px;
+}
+.info .alertstripe__tekst {
+  max-width: 100%;
+}
+.pushRight {
+  margin-right: 30px;
+  text-align: right;
+}

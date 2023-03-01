@@ -10,7 +10,7 @@ import Skjermlenke from './felles/Skjermlenke';
 import BubbleText from './felles/bubbleText';
 import HistorikkMal from '../HistorikkMalTsType';
 
-import styles from './historikkMalType.less';
+import styles from './historikkMalType9.module.css';
 
 const getSplitPeriods = (endredeFelter: HistorikkinnslagEndretFelt[]): string => {
   let text = '';

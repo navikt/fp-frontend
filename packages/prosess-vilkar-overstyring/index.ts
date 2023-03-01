@@ -1,1 +1,2 @@
-export { default } from './src/VilkarresultatMedOverstyringProsessIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as VilkarresultatMedOverstyringProsessIndex } from './src/VilkarresultatMedOverstyringProsessIndex';

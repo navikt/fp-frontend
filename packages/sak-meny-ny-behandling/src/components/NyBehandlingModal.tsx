@@ -11,7 +11,7 @@ import { required } from '@navikt/ft-form-validators';
 import { fagsakYtelseType, behandlingType as bType, behandlingArsakType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 
-import styles from './nyBehandlingModal.less';
+import styles from './nyBehandlingModal.module.css';
 
 const createOptions = (bt: KodeverkMedNavn, enabledBehandlingstyper: KodeverkMedNavn[], intl: IntlShape): ReactElement => {
   // TODO Burde retta opp navn for behandlingstype i DB

@@ -20,7 +20,7 @@ import splitPeriodImageUrl from '../../images/splitt.svg';
 import SplittPeriodeModal from './splitt/SplittPeriodeModal';
 import UttakPeriodeForm from './UttakPeriodeForm';
 
-import styles from './uttakPeriodePanel.less';
+import styles from './uttakPeriodePanel.module.css';
 
 const getCorrectEmptyArbeidsForhold = (
   alleKodeverk: AlleKodeverk,

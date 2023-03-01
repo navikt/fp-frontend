@@ -20,7 +20,7 @@ import {
 import splitPeriodImageUrl from '../images/splitt.svg';
 import DelOppPeriodeModal from './DelOppPeriodeModal';
 
-import styles from './uttakDokumentasjonFaktaDetailForm.less';
+import styles from './uttakDokumentasjonFaktaDetailForm.module.css';
 
 type FormValues = {
   perioder: DokumentasjonVurderingBehov[];

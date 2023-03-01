@@ -14,7 +14,7 @@ import advarselIkonUrl from '../images/advarsel_ny.svg';
 
 import messages from '../../i18n/nb_NO.json';
 
-import styles from './overstyringPanel.less';
+import styles from './overstyringPanel.module.css';
 
 const intl = createIntl(messages);
 

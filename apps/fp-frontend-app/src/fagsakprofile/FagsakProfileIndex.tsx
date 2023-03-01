@@ -12,7 +12,7 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { BehandlingAppKontekst } from '@navikt/fp-types';
-import UkjentAdresseMeldingIndex from '@navikt/fp-sak-ukjent-adresse';
+import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 
 import {
@@ -26,7 +26,7 @@ import { useFpSakKodeverkMedNavn, useGetKodeverkFn } from '../data/useKodeverk';
 import FagsakData from '../fagsak/FagsakData';
 import ErrorBoundary from '../app/ErrorBoundary';
 
-import styles from './fagsakProfileIndex.less';
+import styles from './fagsakProfileIndex.module.css';
 
 import '@navikt/ft-sak-behandling-velger/dist/style.css';
 

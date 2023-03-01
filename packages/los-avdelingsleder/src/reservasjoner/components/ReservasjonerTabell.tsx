@@ -19,7 +19,7 @@ import { restApiHooks, RestApiPathsKeys } from '../../data/fplosRestApi';
 import Reservasjon from '../../typer/reservasjonTsType';
 import CalendarToggleButton from './CalendarToggleButton';
 
-import styles from './reservasjonerTabell.less';
+import styles from './reservasjonerTabell.module.css';
 
 const headerTextCodes = [
   'ReservasjonerTabell.Navn',

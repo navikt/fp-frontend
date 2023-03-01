@@ -9,7 +9,7 @@ import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { FamilieHendelse, AlleKodeverk } from '@navikt/fp-types';
 import { BekreftMannAdoptererAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import styles from './mannAdoptererAleneFaktaForm.less';
+import styles from './mannAdoptererAleneFaktaForm.module.css';
 
 interface OwnProps {
   readOnly: boolean;

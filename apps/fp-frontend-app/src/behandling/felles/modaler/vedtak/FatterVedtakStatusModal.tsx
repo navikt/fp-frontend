@@ -9,7 +9,7 @@ import {
 
 import innvilgetImageUrl from '../../../../images/innvilget_valgt.svg';
 
-import styles from './fatterVedtakStatusModal.less';
+import styles from './fatterVedtakStatusModal.module.css';
 
 interface OwnProps {
   visModal?: boolean;

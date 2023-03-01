@@ -23,7 +23,7 @@ import OppholdINorgeOgAdresserFaktaPanel, { FormValues as OppholdFormValues } fr
 import PerioderMedMedlemskapFaktaPanel, { FormValues as PerioderFormValues } from './PerioderMedMedlemskapFaktaPanel';
 import StatusForBorgerFaktaPanel, { FormValues as StatusFormValues } from './StatusForBorgerFaktaPanel';
 
-import styles from './oppholdInntektOgPeriodeForm.less';
+import styles from './oppholdInntektOgPeriodeForm.module.css';
 
 const {
   AVKLAR_OPPHOLDSRETT, AVKLAR_LOVLIG_OPPHOLD,

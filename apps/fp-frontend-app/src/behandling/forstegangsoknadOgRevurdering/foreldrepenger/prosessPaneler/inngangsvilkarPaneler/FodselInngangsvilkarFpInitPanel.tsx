@@ -4,7 +4,7 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import FodselVilkarProsessIndex from '@navikt/fp-prosess-vilkar-fodsel';
+import { FodselVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-fodsel';
 import { AksessRettigheter } from '@navikt/fp-types';
 import { VilkarType, AksjonspunktCode, fagsakYtelseType } from '@navikt/fp-kodeverk';
 

@@ -4,7 +4,7 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import MedlemskapFaktaIndex from '@navikt/fp-fakta-medlemskap';
+import { MedlemskapFaktaIndex } from '@navikt/fp-fakta-medlemskap';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Medlemskap, Soknad } from '@navikt/fp-types';
 

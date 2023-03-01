@@ -13,7 +13,7 @@ const config = {
 
   parser: '@typescript-eslint/parser',
 
-  plugins: ['vitest', '@typescript-eslint'],
+  plugins: ['import', 'vitest', '@typescript-eslint'],
 
   extends: [
     'airbnb',
@@ -35,7 +35,7 @@ const config = {
     'import/resolver': {
       typescript: {
         alwaysTryTypes: true,
-        project: 'packages/*/tsconfig.json',
+        project: ['packages/*/tsconfig.json', 'apps/*/tsconfig.json'],
       },
     },
   },
@@ -72,6 +72,7 @@ const config = {
     '@typescript-eslint/no-unused-vars': [ERROR],
 
     // TODO (TOR) Ignorert inntil videre grunnet kost/nytte
+    'import/named': OFF,
     'react/no-unstable-nested-components': OFF,
     'prefer-regex-literals': OFF,
     'max-classes-per-file': OFF,

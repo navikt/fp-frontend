@@ -11,7 +11,7 @@ import { RadioGroupPanel, Form } from '@navikt/ft-form-hooks';
 import { Aksjonspunkt } from '@navikt/fp-types';
 import { MerkOpptjeningUtlandAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import styles from './innhentDokOpptjeningUtlandPanel.less';
+import styles from './innhentDokOpptjeningUtlandPanel.module.css';
 
 const OpptjeningIUtlandDokStatus = {
   DOKUMENTASJON_VIL_BLI_INNHENTET: 'DOKUMENTASJON_VIL_BLI_INNHENTET',

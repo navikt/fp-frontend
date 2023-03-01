@@ -1,0 +1,25 @@
+.previewLink {
+  bottom: 16px;
+  display: block;
+  left: 208px;
+  position: absolute;
+}
+.select {
+  width: 300px;
+}
+.selectReadOnly {
+  color: #f00;
+  width: 300px;
+}
+.confirmVilkarForm textarea {
+  min-width: 380px;
+}
+.panel {
+  margin-top: 16px;
+}
+.fritekstTilBrevTextArea {
+  width: 80%;
+}
+.explanationTextarea {
+  min-height: 300px;
+}

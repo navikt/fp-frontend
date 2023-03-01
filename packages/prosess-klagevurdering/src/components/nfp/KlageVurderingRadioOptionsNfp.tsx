@@ -7,7 +7,7 @@ import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 
-import styles from './klageVurderingRadioOptionsNfp.less';
+import styles from './klageVurderingRadioOptionsNfp.module.css';
 
 interface OwnProps {
   readOnly?: boolean;

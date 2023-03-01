@@ -20,7 +20,7 @@ import {
 
 import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';
 
-import styles from './uttakPeriodeInfo.less';
+import styles from './uttakPeriodeInfo.module.css';
 
 const maxValue100 = maxValue(100);
 

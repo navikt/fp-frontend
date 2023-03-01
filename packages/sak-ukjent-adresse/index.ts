@@ -1,1 +1,2 @@
-export { default } from './src/UkjentAdresseMeldingIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as UkjentAdresseMeldingIndex } from './src/UkjentAdresseMeldingIndex';

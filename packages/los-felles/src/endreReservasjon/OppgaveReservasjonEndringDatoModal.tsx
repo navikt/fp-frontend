@@ -8,7 +8,7 @@ import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import Oppgave from '../typer/oppgaveTsType';
 
-import styles from './oppgaveReservasjonEndringDatoModal.less';
+import styles from './oppgaveReservasjonEndringDatoModal.module.css';
 
 const thirtyDaysFromNow = () => {
   const result = new Date();

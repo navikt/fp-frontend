@@ -7,7 +7,7 @@ import { Dokument } from '@navikt/ft-types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import { AksjonspunktCode, behandlingResultatType } from '@navikt/fp-kodeverk';
-import VedtakInnsynProsessIndex, { InnsynBrevData } from '@navikt/fp-prosess-vedtak-innsyn';
+import { VedtakInnsynProsessIndex, InnsynBrevData } from '@navikt/fp-prosess-vedtak-innsyn';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
   Fagsak, Behandling, ForhåndsvisMeldingParams, Innsyn,

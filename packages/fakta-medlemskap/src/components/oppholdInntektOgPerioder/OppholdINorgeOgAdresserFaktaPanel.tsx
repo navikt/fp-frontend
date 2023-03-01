@@ -17,7 +17,7 @@ import checkImage from '../../images/check.svg';
 import avslaattImage from '../../images/avslaatt.svg';
 import MedlemskapBostedSokerView from './MedlemskapBostedSokerView';
 
-import styles from './oppholdINorgeOgAdresserFaktaPanel.less';
+import styles from './oppholdINorgeOgAdresserFaktaPanel.module.css';
 
 const capitalizeFirstLetter = (landNavn: string): string => {
   const string = landNavn.toLowerCase();

@@ -21,15 +21,15 @@ import {
   hasValidText, minLength, maxLength, required,
 } from '@navikt/ft-form-validators';
 import { ISO_DATE_FORMAT, getLanguageFromSprakkode } from '@navikt/ft-utils';
-import FodselSammenligningIndex from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
-import SettPaVentModalIndex, { FormValues as ModalFormValues } from '@navikt/fp-modal-sett-pa-vent';
+import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
+import { SettPaVentModalIndex, FormValues as ModalFormValues } from '@navikt/fp-modal-sett-pa-vent';
 import {
   Aksjonspunkt, FamilieHendelseSamling, Soknad, FamilieHendelse, AlleKodeverk, Behandling,
 } from '@navikt/fp-types';
 import { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 
-import styles from './varselOmRevurderingForm.less';
+import styles from './varselOmRevurderingForm.module.css';
 
 const minLength3 = minLength(3);
 const maxLength6000 = maxLength(6000);

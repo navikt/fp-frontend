@@ -15,7 +15,7 @@ import {
 import { familieHendelseType } from '@navikt/fp-kodeverk';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
-import styles from './registreringAdopsjonOgOmsorgGrid.less';
+import styles from './registreringAdopsjonOgOmsorgGrid.module.css';
 
 const ANNEN_FORELDER_FORM_NAME_PREFIX = 'annenForelder';
 const OMSORG_FORM_NAME_PREFIX = 'omsorg';

@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 import { FamilieHendelse, FamilieHendelseSamling } from '@navikt/ft-types';
 
 import { AksjonspunktCode, fodselsvilkarene } from '@navikt/fp-kodeverk';
-import FodselFaktaIndex from '@navikt/fp-fakta-fodsel';
+import { FodselFaktaIndex } from '@navikt/fp-fakta-fodsel';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Soknad } from '@navikt/fp-types';
 

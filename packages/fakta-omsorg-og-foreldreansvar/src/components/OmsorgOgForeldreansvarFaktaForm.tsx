@@ -19,7 +19,7 @@ import RettighetFaktaPanel, { FormValues as RettighetFormValues } from './Rettig
 import BarnPanel from './BarnPanel';
 import ForeldrePanel from './ForeldrePanel';
 
-import styles from './omsorgOgForeldreansvarFaktaForm.less';
+import styles from './omsorgOgForeldreansvarFaktaForm.module.css';
 
 const getDescriptionText = (vilkarCode: string): ReactElement => {
   if (vilkarCode === VilkarType.OMSORGSVILKARET) {

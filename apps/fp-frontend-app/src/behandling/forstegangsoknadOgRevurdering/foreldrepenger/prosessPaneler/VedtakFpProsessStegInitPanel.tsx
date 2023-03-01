@@ -6,7 +6,7 @@ import { useIntl } from 'react-intl';
 import {
   vilkarUtfallType, isAvslag, fagsakYtelseType, AksjonspunktCode, aksjonspunktStatus,
 } from '@navikt/fp-kodeverk';
-import VedtakProsessIndex, { ForhandsvisData } from '@navikt/fp-prosess-vedtak';
+import { VedtakProsessIndex, ForhandsvisData } from '@navikt/fp-prosess-vedtak';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
   Aksjonspunkt, Behandling, Behandlingsresultat, Beregningsgrunnlag, BeregningsresultatFp, Fagsak,

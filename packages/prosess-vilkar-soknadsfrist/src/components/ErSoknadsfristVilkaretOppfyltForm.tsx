@@ -23,7 +23,7 @@ import {
 } from '@navikt/fp-types';
 import { SoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import styles from './erSoknadsfristVilkaretOppfyltForm.less';
+import styles from './erSoknadsfristVilkaretOppfyltForm.module.css';
 
 const findRadioButtonTextCode = (erVilkarOk?: boolean): string => (erVilkarOk
   ? 'ErSoknadsfristVilkaretOppfyltForm.VilkarOppfylt' : 'ErSoknadsfristVilkaretOppfyltForm.VilkarIkkeOppfylt');

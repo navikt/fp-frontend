@@ -24,7 +24,7 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 import { uttakPeriodeType } from '@navikt/fp-kodeverk';
 
-import styles from './renderPermisjonPeriodeFieldArray.less';
+import styles from './renderPermisjonPeriodeFieldArray.module.css';
 
 const maxValue100 = maxValue(100);
 

@@ -7,7 +7,7 @@ import { BodyShort } from '@navikt/ds-react';
 import { FadingPanel } from '@navikt/ft-ui-komponenter';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 
-import styles from './prosessPanelWrapper.less';
+import styles from './prosessPanelWrapper.module.css';
 
 interface PanelContainerOwnProps {
   children: any;

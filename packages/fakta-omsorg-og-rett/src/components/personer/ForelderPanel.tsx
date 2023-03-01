@@ -13,7 +13,7 @@ import Boks from '../Boks';
 
 import AdresseVisning from './AdresseVisning';
 
-import styles from './forelderPanel.less';
+import styles from './forelderPanel.module.css';
 
 interface OwnProps {
   forelder: PersonopplysningerBasis;

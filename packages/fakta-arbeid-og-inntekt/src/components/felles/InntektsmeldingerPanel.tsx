@@ -15,7 +15,7 @@ import pilNedIkonUrl from '../../images/pil_ned.svg';
 import advarselIkonUrl from '../../images/advarsel2.svg';
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 
-import styles from './inntektsmeldingerPanel.less';
+import styles from './inntektsmeldingerPanel.module.css';
 
 const erMatch = (
   arbeidsforhold: AoIArbeidsforhold,

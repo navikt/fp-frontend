@@ -7,7 +7,7 @@ import { KodeverkType } from '@navikt/fp-kodeverk';
 import { findHendelseText } from './felles/historikkUtils';
 import HistorikkMal from '../HistorikkMalTsType';
 
-import styles from './historikkMalType.less';
+import styles from './historikkMalType6.module.css';
 
 const formaterOpplysning = (
   opplysning: HistorikkInnslagOpplysning,

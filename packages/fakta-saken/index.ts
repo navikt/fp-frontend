@@ -1,1 +1,2 @@
-export { default } from './src/SakenFaktaIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as SakenFaktaIndex } from './src/SakenFaktaIndex';

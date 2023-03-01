@@ -7,7 +7,7 @@ import {
 
 import innvilgetImageUrl from '../../images/innvilget_valgt.svg';
 
-import styles from './utlandEndretModal.less';
+import styles from './utlandEndretModal.module.css';
 
 interface OwnProps {
   visModal: boolean;

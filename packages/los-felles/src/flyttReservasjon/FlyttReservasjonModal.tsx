@@ -16,7 +16,7 @@ import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import SaksbehandlerForFlytting from '../typer/saksbehandlerForFlyttingTsType';
 
-import styles from './flyttReservasjonModal.less';
+import styles from './flyttReservasjonModal.module.css';
 
 const minLength3 = minLength(3);
 const maxLength500 = maxLength(500);

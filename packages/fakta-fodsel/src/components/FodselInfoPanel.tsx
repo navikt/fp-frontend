@@ -6,7 +6,7 @@ import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import { AksjonspunktCode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
-import FodselSammenligningIndex from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
+import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import {
   Aksjonspunkt, FamilieHendelseSamling, FamilieHendelse, Soknad,
 } from '@navikt/fp-types';

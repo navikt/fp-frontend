@@ -1,1 +1,2 @@
-export { default } from './src/AdopsjonVilkarProsessIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as AdopsjonVilkarProsessIndex } from './src/AdopsjonVilkarProsessIndex';

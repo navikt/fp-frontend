@@ -13,7 +13,7 @@ import sendDokumentImageUrl from '../images/send_dokument.svg';
 import mottaDokumentImageUrl from '../images/motta_dokument.svg';
 import internDokumentImageUrl from '../images/intern_dokument.svg';
 
-import styles from './documentListInnsyn.less';
+import styles from './documentListInnsyn.module.css';
 
 const getDirectionImage = (document: Dokument, intl: IntlShape): ReactElement => {
   if (document.kommunikasjonsretning === kommunikasjonsretning.INN) {

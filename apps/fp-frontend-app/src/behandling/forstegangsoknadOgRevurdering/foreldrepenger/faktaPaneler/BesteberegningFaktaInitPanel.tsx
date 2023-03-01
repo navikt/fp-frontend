@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import BesteberegningFaktaIndex from '@navikt/fp-fakta-besteberegning';
+import { BesteberegningFaktaIndex } from '@navikt/fp-fakta-besteberegning';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@navikt/fp-types';
 

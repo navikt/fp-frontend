@@ -2,7 +2,7 @@ import React, {
   useState, useMemo, useCallback, FunctionComponent, useEffect,
 } from 'react';
 
-import SettPaVentModalIndex from '@navikt/fp-modal-sett-pa-vent';
+import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
 import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 import { Behandling, AlleKodeverk, AlleKodeverkTilbakekreving } from '@navikt/fp-types';

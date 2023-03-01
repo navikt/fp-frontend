@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 
-import styles from './journalforingPanel.less';
+import styles from './journalforingPanel.module.css';
 
 type OwnProps = Readonly<{
   children: any;

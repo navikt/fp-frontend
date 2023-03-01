@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { ProcessMenuStepType, ProcessMenu } from '@navikt/ft-plattform-komponenter';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 
-import '../../arrowForProcessMenu.less';
+import '../../arrowForProcessMenu.module.css';
 
 import ProsessPanelMenyData from '../typer/prosessPanelMenyData';
 

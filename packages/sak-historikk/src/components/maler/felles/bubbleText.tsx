@@ -2,7 +2,7 @@ import React, { FunctionComponent, useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Expand, Collapse } from '@navikt/ds-icons';
 
-import styles from './bubbleText.less';
+import styles from './bubbleText.module.css';
 
 const truncateText = (tekst: string, cutOffLength: number): string => (tekst.length > cutOffLength
   ? (`${tekst.substring(0, cutOffLength - 3)}...`)

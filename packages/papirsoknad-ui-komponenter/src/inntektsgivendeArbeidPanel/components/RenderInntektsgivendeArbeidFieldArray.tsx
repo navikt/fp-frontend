@@ -10,7 +10,7 @@ import {
 import { KodeverkType, Landkode } from '@navikt/ft-kodeverk';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
-import styles from './renderInntektsgivendeArbeidFieldArray.less';
+import styles from './renderInntektsgivendeArbeidFieldArray.module.css';
 
 const maxLength50 = maxLength(50);
 

@@ -1,1 +1,2 @@
-export { default } from './src/SaksbehandlerIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as SaksbehandlerIndex } from './src/SaksbehandlerIndex';

@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 import { Dokument, Fagsak } from '@navikt/ft-types';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import InnsynProsessIndex from '@navikt/fp-prosess-innsyn';
+import { InnsynProsessIndex } from '@navikt/fp-prosess-innsyn';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { Innsyn } from '@navikt/fp-types';
 

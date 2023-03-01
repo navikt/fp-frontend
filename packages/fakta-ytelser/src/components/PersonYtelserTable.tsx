@@ -8,7 +8,7 @@ import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { KodeverkMedNavn, RelatertTilgrensedYtelse } from '@navikt/fp-types';
 import { relatertYtelseType } from '@navikt/fp-kodeverk';
 
-import styles from './personYtelserTable.less';
+import styles from './personYtelserTable.module.css';
 
 interface OwnProps {
   ytelser?: RelatertTilgrensedYtelse[];

@@ -13,7 +13,7 @@ import Saksbehandler from '../../typer/saksbehandlerAvdelingTsType';
 import SletteSaksbehandlerModal from './SletteSaksbehandlerModal';
 import { RestApiPathsKeys, restApiHooks } from '../../data/fplosRestApi';
 
-import styles from './saksbehandlereTabell.less';
+import styles from './saksbehandlereTabell.module.css';
 
 const headerTextCodes = [
   'SaksbehandlereTabell.Navn',

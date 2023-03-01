@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Expand, Collapse } from '@navikt/ds-icons';
 
-import styles from './collapseButton.less';
+import styles from './collapseButton.module.css';
 
 const buttonText = (showDetails: boolean): string => (showDetails ? 'Avregning.headerText.VisFærreDetaljer' : 'Avregning.headerText.VisFlereDetaljer');
 

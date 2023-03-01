@@ -29,7 +29,7 @@ import HistorikkMalTypeForeldelse from './maler/HistorikkMalTypeForeldelse';
 import PlaceholderHistorikkMal from './maler/placeholderHistorikkMal';
 import HistorikkMalTypeAktivitetskrav from './maler/HistorikkMalTypeAktivitetskrav';
 
-import styles from './history.less';
+import styles from './history.module.css';
 
 /*
  https://confluence.adeo.no/display/MODNAV/OMR-13+SF4+Sakshistorikk+-+UX+og+grafisk+design

@@ -8,7 +8,7 @@ import { TextAreaField } from '@navikt/ft-form-hooks';
 import { decodeHtmlEntity, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
 
-import styles from './vedtakFritekstPanel.less';
+import styles from './vedtakFritekstPanel.module.css';
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
