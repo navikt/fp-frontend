@@ -2,6 +2,8 @@
 import { defineConfig } from 'vitest/config';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mergeConfig } from 'vite';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { dependencies } from './package.json';
 // eslint-disable-next-line import/no-relative-packages
 import commonConfig from '../../vite.config';
 
@@ -10,8 +12,10 @@ const config = defineConfig({
     lib: {
       name: '@navikt/fp-prosess-tilkjent-ytelse',
     },
+    rollupOptions: {
+      external: Object.keys(dependencies),
+    },
   },
 });
 
 export default mergeConfig(commonConfig, config);
-

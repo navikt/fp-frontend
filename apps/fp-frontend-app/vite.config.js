@@ -15,6 +15,11 @@ export default defineConfig({
       localsConvention: 'camelCase',
     },
   },
+  resolve: {
+    alias: {
+      'react-hook-form': require.resolve('react-hook-form'),
+    },
+  },
   server: {
     port: 9100,
     proxy: {

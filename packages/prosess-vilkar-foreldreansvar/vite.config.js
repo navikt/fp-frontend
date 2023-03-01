@@ -19,4 +19,3 @@ const config = defineConfig({
 });
 
 export default mergeConfig(commonConfig, config);
-
