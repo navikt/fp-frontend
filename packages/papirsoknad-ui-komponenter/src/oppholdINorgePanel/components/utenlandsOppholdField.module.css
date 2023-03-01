@@ -1,13 +1,9 @@
-@removeBtnSize: 17px;
-@marginRight: 8px;
-
 .datesRowWithRemoveButton {
   box-sizing: border-box;
   display: inline-block;
-  margin-right: @marginRight;
-  width: ~'calc(100% - '@removeBtnSize~' - '@marginRight~')';
+  margin-right: 8px;
+  width: calc(100% -  17px  -  8px );
 }
-
 .selectBredde {
   width: 300px;
 }
