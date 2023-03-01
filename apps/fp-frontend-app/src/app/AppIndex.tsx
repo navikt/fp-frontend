@@ -125,7 +125,7 @@ const AppIndex: FunctionComponent = () => {
     setCrashMessage(error);
   };
 
-  if (import.meta.env.NODE_ENV !== 'test') {
+  if (import.meta.env.MODE === 'development' || import.meta.env.MODE === 'production') {
     // For å unngå feilmelding ved åpning av modaler
     Modal.setAppElement('div#app');
   }
