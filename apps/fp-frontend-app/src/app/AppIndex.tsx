@@ -81,7 +81,7 @@ import '@navikt/fp-sak-totrinnskontroll/dist/style.css';
 import '@navikt/fp-sak-ukjent-adresse/dist/style.css';
 import '@navikt/ft-sak-support-meny/dist/style.css';
 
-import '../globalCss/global.less';
+import '../globalCss/global.module.css';
 
 const EMPTY_ARRAY = [] as any[];
 
@@ -125,7 +125,7 @@ const AppIndex: FunctionComponent = () => {
     setCrashMessage(error);
   };
 
-  if (process.env.NODE_ENV !== 'test') {
+  if (import.meta.env.MODE === 'development' || import.meta.env.MODE === 'production') {
     // For å unngå feilmelding ved åpning av modaler
     Modal.setAppElement('div#app');
   }

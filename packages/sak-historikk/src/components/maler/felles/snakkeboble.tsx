@@ -10,7 +10,7 @@ import mannImg from '../../../images/mann.svg';
 import beslutterImg from '../../../images/beslutter.svg';
 import navAnsattHistorikkImg from '../../../images/nav_ansatt_historikk.svg';
 
-import styles from './snakkeboble.less';
+import styles from './snakkeboble.module.css';
 
 const formatDate = (date: string): string => (`${date.substring(8, 10)}.${date.substring(5, 7)}.${date.substring(0, 4)} - ${date.substring(11, 16)}`);
 

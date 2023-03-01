@@ -9,7 +9,7 @@ import FagsakSearchIndex from '../fagsakSearch/FagsakSearchIndex';
 import BehandlingskoerIndex from '../behandlingskoer/BehandlingskoerIndex';
 import SaksstotteIndex from '../saksstotte/SaksstotteIndex';
 
-import styles from './saksbehandlerDashboard.less';
+import styles from './saksbehandlerDashboard.module.css';
 import DriftsmeldingPanel from './DriftsmeldingPanel';
 
 interface OwnProps {

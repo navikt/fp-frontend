@@ -4,7 +4,7 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import { vilkarUtfallType, VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
-import OpptjeningFaktaIndex from '@navikt/fp-fakta-opptjening';
+import { OpptjeningFaktaIndex } from '@navikt/fp-fakta-opptjening';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { ArbeidsgiverOpplysningerPerId, Opptjening } from '@navikt/fp-types';
 

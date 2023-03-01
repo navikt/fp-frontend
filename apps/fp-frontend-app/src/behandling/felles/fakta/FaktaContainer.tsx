@@ -9,7 +9,7 @@ import FaktaMeny from './FaktaMeny';
 import FaktaPanelMenyData from '../typer/faktaPanelMenyData';
 import FaktaPanelInitProps from '../typer/faktaPanelInitProps';
 
-import styles from './faktaContainer.less';
+import styles from './faktaContainer.module.css';
 
 export const DEFAULT_FAKTA_KODE = 'default';
 

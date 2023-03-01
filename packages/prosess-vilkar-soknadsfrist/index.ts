@@ -1,1 +1,2 @@
-export { default } from './src/SoknadsfristVilkarProsessIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as SoknadsfristVilkarProsessIndex } from './src/SoknadsfristVilkarProsessIndex';

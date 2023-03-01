@@ -4,7 +4,7 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import UttakDokumentasjonFaktaIndex from '@navikt/fp-fakta-uttaksdokumentasjon';
+import { UttakDokumentasjonFaktaIndex } from '@navikt/fp-fakta-uttaksdokumentasjon';
 import { DokumentasjonVurderingBehov } from '@navikt/fp-types';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';

@@ -26,7 +26,7 @@ import {
 import ValgtAktivitetSubForm from './ValgtAktivitetSubForm';
 import { finnOpptjeningFom, finnOpptjeningTom } from '../../utils/opptjeningDatoUtil';
 
-import styles from './valgtAktivitetForm.less';
+import styles from './valgtAktivitetForm.module.css';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);

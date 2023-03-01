@@ -7,7 +7,7 @@ import {
 
 import advarselImageUrl from '../../images/advarsel.svg';
 
-import styles from './behandlingPollingTimoutModal.less';
+import styles from './behandlingPollingTimoutModal.module.css';
 
 /**
  * BehandlingPollingTimoutModal

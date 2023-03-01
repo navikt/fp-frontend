@@ -20,7 +20,7 @@ import editUtlandDisabledIcon from '../../images/endre_disablet.svg';
 import UtlandSakstypeKode from './utlandSakstypeKode';
 import UtlandEndretModal from './UtlandEndretModal';
 
-import styles from './utlandPanel.less';
+import styles from './utlandPanel.module.css';
 
 const {
   AUTOMATISK_MARKERING_AV_UTENLANDSSAK, MANUELL_MARKERING_AV_UTLAND_SAKSTYPE,

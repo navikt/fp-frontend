@@ -12,7 +12,7 @@ import VirksomhetStartetEndretPanel, { FormValues as StartedEndretFormValues } f
 import VirksomhetRelasjonPanel, { FormValues as RelasjonFormValues } from './VirksomhetRelasjonPanel';
 import VirksomhetTypeNaringPanel, { FormValues as TypeNaringFormValues } from './VirksomhetTypeNaringPanel';
 
-import styles from './registrerVirksomhetModalForm.less';
+import styles from './registrerVirksomhetModalForm.module.css';
 
 export type FormValues = IdFormValues
   & RelasjonFormValues

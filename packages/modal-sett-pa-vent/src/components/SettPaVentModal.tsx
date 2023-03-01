@@ -16,7 +16,7 @@ import {
 import { KodeverkMedNavn } from '@navikt/fp-types';
 import { venteArsakType } from '@navikt/fp-kodeverk';
 
-import styles from './settPaVentModal.less';
+import styles from './settPaVentModal.module.css';
 
 const initFrist = (): string => {
   const date = moment().toDate();

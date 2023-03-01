@@ -1,1 +1,2 @@
-export { default } from './src/PermisjonFaktaIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as PermisjonFaktaIndex } from './src/PermisjonFaktaIndex';

@@ -11,7 +11,7 @@ import {
 import { FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { FieldEditedInfo } from '@navikt/fp-fakta-felles';
 
-import styles from './omsorgsovertakelseFaktaPanel.less';
+import styles from './omsorgsovertakelseFaktaPanel.module.css';
 
 const getAntallBarn = (soknad: Soknad, familiehendelse: FamilieHendelse): number => {
   const antallBarn = soknad.antallBarn ? soknad.antallBarn : NaN;

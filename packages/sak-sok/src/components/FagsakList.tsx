@@ -4,7 +4,7 @@ import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { FagsakEnkel, AlleKodeverk } from '@navikt/fp-types';
 import { getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
 
-import styles from './fagsakList.less';
+import styles from './fagsakList.module.css';
 
 const headerTextCodes = [
   'FagsakList.Saksnummer',

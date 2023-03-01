@@ -9,7 +9,7 @@ import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
-import styles from './fodselSammenligningOtherPanel.less';
+import styles from './fodselSammenligningOtherPanel.module.css';
 
 const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 

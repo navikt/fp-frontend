@@ -1,1 +1,2 @@
-export { default } from './src/MedlemskapFaktaIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as MedlemskapFaktaIndex } from './src/MedlemskapFaktaIndex';

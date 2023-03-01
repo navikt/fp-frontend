@@ -4,7 +4,7 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import VurderSoknadsfristForeldrepengerIndex from '@navikt/fp-prosess-soknadsfrist';
+import { VurderSoknadsfristForeldrepengerIndex } from '@navikt/fp-prosess-soknadsfrist';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { Soknad } from '@navikt/fp-types';
 

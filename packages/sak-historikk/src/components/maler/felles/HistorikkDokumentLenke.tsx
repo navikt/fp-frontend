@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { HistorikkInnslagDokumentLink } from '@navikt/fp-types';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import styles from '../historikkMalType.less';
+import styles from './historikkDokumentLenke.module.css';
 
 const DOCUMENT_SERVER_URL = '/fpsak/api/dokument/hent-dokument';
 

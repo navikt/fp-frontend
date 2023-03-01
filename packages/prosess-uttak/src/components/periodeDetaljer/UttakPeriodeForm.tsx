@@ -25,7 +25,7 @@ import UttakAktiviteterTabell, { finnArbeidsforholdNavnOgProsentArbeid } from '.
 import UttakPeriodeInfo from './UttakPeriodeInfo';
 import { UttakAktivitet, UttakAktivitetType } from './UttakAktivitetType';
 
-import styles from './uttakPeriodeForm.less';
+import styles from './uttakPeriodeForm.module.css';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);

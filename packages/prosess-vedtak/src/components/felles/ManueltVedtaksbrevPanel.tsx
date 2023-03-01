@@ -15,7 +15,7 @@ import { getLanguageFromSprakkode } from '@navikt/ft-utils';
 
 import popOutPilSvg from '../../images/pop-out-pil.svg';
 
-import styles from './manueltVedtaksbrevPanel.less';
+import styles from './manueltVedtaksbrevPanel.module.css';
 
 const maxLength200 = maxLength(200);
 const maxLength5000 = maxLength(5000);

@@ -9,7 +9,7 @@ import {
   CheckboxField, Datepicker, InputField, RadioGroupPanel, TextAreaField, formHooks,
 } from '@navikt/ft-form-hooks';
 
-import styles from './virksomhetStartetEndretPanel.less';
+import styles from './virksomhetStartetEndretPanel.module.css';
 
 type VirtuellFeilType = {
   ingenArsakValgt?: boolean;

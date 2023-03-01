@@ -1,1 +1,2 @@
-export { default } from './src/FodselSammenligningIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as FodselSammenligningIndex } from './src/FodselSammenligningIndex';

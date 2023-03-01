@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { Button } from '@navikt/ds-react';
 
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
-import styles from './vedtakKlageSubmitPanel.less';
+import styles from './vedtakKlageSubmitPanel.module.css';
 
 interface OwnProps {
   previewVedtakCallback: () => Promise<any>;

@@ -19,7 +19,7 @@ import FritekstBrevTextField from './FritekstKlageBrevTextField';
 import PreviewKlageLink, { BrevData } from './PreviewKlageLink';
 import TempsaveKlageButton, { TransformedValues } from './TempsaveKlageButton';
 
-import styles from './behandleKlageFormNfp.less';
+import styles from './behandleKlageFormNfp.module.css';
 
 const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
   klageMedholdArsak: values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageMedholdArsak : null,

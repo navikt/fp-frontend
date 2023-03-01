@@ -7,7 +7,7 @@ import { AksjonspunktCode, relatertYtelseTilstand, KodeverkType } from '@navikt/
 import { DateLabel, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { KodeverkMedNavn, RelatertTilgrensedYtelse, Soknad } from '@navikt/fp-types';
 
-import styles from './rettighetFaktaPanel.less';
+import styles from './rettighetFaktaPanel.module.css';
 
 const getLopendeOrAvsluttetYtelser = (ytelse: RelatertTilgrensedYtelse): RelatertTilgrensedYtelse['tilgrensendeYtelserListe'] => ytelse.tilgrensendeYtelserListe
   .filter((y) => y.status !== relatertYtelseTilstand.APEN);

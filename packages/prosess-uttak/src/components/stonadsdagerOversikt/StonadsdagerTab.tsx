@@ -7,7 +7,7 @@ import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import { StonadskontoType } from '@navikt/fp-kodeverk';
 import { Stonadskonto } from '@navikt/fp-types';
 
-import styles from './stonadsdagerTab.less';
+import styles from './stonadsdagerTab.module.css';
 
 const classNames = classnames.bind(styles);
 

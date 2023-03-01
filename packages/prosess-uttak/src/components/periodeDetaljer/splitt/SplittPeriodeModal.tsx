@@ -15,7 +15,7 @@ import {
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 
-import styles from './splittPeriodeModal.less';
+import styles from './splittPeriodeModal.module.css';
 
 export type DeltPeriodeData = {
   periodeId: number;

@@ -1,0 +1,17 @@
+.arbeidsforholdTittel {
+  display: inline;
+  font-weight: bold;
+  margin-right: 10px;
+}
+.fullBredde {
+  width: 100%;
+}
+.halvBredde {
+  width: 50%;
+}
+.info {
+  padding: 10px;
+}
+.info .alertstripe__tekst {
+  max-width: 100%;
+}

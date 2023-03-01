@@ -23,7 +23,7 @@ import ForeldelseProsessInitPanel from './paneler/ForeldelseProsessInitPanel';
 import TilbakekrevingProsessInitPanel from './paneler/TilbakekrevingProsessInitPanel';
 import VedtakTilbakekrevingProsessInitPanel from './paneler/VedtakTilbakekrevingProsessInitPanel';
 
-import styles from './prosessIndex.less';
+import styles from './prosessIndex.module.css';
 import { requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys } from '../data/tilbakekrevingBehandlingApi';
 
 const DEFAULT_PANEL_VALGT = 'default';

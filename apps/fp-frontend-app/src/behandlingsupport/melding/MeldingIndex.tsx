@@ -4,9 +4,9 @@ import { BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
 
 import { KodeverkMedNavn } from '@navikt/fp-types';
 import { venteArsakType, dokumentMalType } from '@navikt/fp-kodeverk';
-import MeldingerSakIndex, { MessagesModalSakIndex, FormValues } from '@navikt/fp-sak-meldinger';
+import { MeldingerSakIndex, MessagesModalSakIndex, FormValues } from '@navikt/fp-sak-meldinger';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
-import SettPaVentModalIndex from '@navikt/fp-modal-sett-pa-vent';
+import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 
 import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
 import { useFpSakKodeverk } from '../../data/useKodeverk';

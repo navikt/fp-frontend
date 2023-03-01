@@ -14,7 +14,7 @@ import { Inntektspost } from '@navikt/fp-types';
 import pilOppIkonUrl from '../images/pil_opp.svg';
 import pilNedIkonUrl from '../images/pil_ned.svg';
 
-import styles from './inntektsposterPanel.less';
+import styles from './inntektsposterPanel.module.css';
 
 type ForenkletInntektspost = {
   beløp: number;

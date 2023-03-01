@@ -6,7 +6,7 @@ import { ArbeidsgiverOpplysningerPerId } from '@navikt/ft-types';
 
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import ArbeidOgInntektFaktaIndex from '@navikt/fp-fakta-arbeid-og-inntekt';
+import { ArbeidOgInntektFaktaIndex } from '@navikt/fp-fakta-arbeid-og-inntekt';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { ArbeidOgInntektsmelding, AksessRettigheter } from '@navikt/fp-types';
 

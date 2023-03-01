@@ -1,7 +1,7 @@
 import React, { ReactNode, FunctionComponent } from 'react';
 import { Detail } from '@navikt/ds-react';
 
-import styles from './menuButton.less';
+import styles from './menuButton.module.css';
 
 interface OwnProps {
   onClick: () => void;

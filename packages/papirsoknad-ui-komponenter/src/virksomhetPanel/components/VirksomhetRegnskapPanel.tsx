@@ -6,7 +6,7 @@ import {
 } from '@navikt/ft-form-hooks';
 import { required, hasValidInteger, hasValidText } from '@navikt/ft-form-validators';
 
-import styles from './virksomhetRegnskapPanel.less';
+import styles from './virksomhetRegnskapPanel.module.css';
 
 export type FormValues = {
   harRegnskapsforer?: boolean;

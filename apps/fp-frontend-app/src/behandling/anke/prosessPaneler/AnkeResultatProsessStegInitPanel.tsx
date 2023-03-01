@@ -4,7 +4,7 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import AnkeResultatProsessIndex from '@navikt/fp-prosess-anke-resultat';
+import { AnkeResultatProsessIndex } from '@navikt/fp-prosess-anke-resultat';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AnkeVurdering } from '@navikt/fp-types';
 

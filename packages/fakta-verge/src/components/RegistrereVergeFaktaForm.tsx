@@ -13,7 +13,7 @@ import {
 import { AksjonspunktCode, VergeType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn, Verge } from '@navikt/fp-types';
 
-import styles from './registrereVergeFaktaForm.less';
+import styles from './registrereVergeFaktaForm.module.css';
 
 export type FormValues = {
   navn?: string;

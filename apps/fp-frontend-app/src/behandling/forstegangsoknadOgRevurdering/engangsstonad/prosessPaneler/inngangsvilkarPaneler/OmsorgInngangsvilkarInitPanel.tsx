@@ -5,7 +5,7 @@ import { IntlShape, useIntl } from 'react-intl';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
-import OmsorgVilkarProsessIndex from '@navikt/fp-prosess-vilkar-omsorg';
+import { OmsorgVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-omsorg';
 import { Aksjonspunkt } from '@navikt/fp-types';
 import InngangsvilkarPanelInitProps from '../../../../felles/typer/inngangsvilkarPanelInitProps';
 import InngangsvilkarDefaultInitPanel from '../../../../felles/prosess/InngangsvilkarDefaultInitPanel';

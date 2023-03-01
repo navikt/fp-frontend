@@ -15,7 +15,7 @@ import {
   ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriodeAndel, AlleKodeverk, BeregningsresultatPeriode,
 } from '@navikt/fp-types';
 
-import styles from './tilkjentYtelse.less';
+import styles from './tilkjentYtelse.module.css';
 
 export type PeriodeMedId = BeregningsresultatPeriode & { id: number };
 

@@ -13,7 +13,7 @@ import { hentDokumentLenke } from '@navikt/fp-konstanter';
 import dokumentSvg from '../images/dokument_filled.svg';
 import telefonImageUrl from '../images/phone-3.svg';
 
-import styles from './inntektsmeldingOpplysningerPanel.less';
+import styles from './inntektsmeldingOpplysningerPanel.module.css';
 
 interface OwnProps {
   saksnummer: string;

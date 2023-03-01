@@ -9,7 +9,7 @@ import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
-import styles from './prosessPanelWrapper.less';
+import styles from './prosessPanelWrapper.module.css';
 
 const classNames = classnames.bind(styles);
 

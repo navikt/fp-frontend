@@ -1,1 +1,2 @@
-export { default } from './src/TilkjentYtelseProsessIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as TilkjentYtelseProsessIndex } from './src/TilkjentYtelseProsessIndex';

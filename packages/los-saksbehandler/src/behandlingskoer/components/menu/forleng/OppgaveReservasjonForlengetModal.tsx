@@ -12,7 +12,7 @@ import { Oppgave } from '@navikt/fp-los-felles';
 
 import innvilgetImageUrl from '../../../../images/innvilget_valgt.svg';
 
-import styles from './oppgaveReservasjonForlengetModal.less';
+import styles from './oppgaveReservasjonForlengetModal.module.css';
 
 interface OwnProps {
   oppgave: Oppgave;

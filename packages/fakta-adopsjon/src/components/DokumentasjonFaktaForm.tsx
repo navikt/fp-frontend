@@ -14,7 +14,7 @@ import { FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { BekreftDokumentertDatoAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import advarselImageUrl from '../images/advarsel.svg';
 
-import styles from './dokumentasjonFaktaForm.less';
+import styles from './dokumentasjonFaktaForm.module.css';
 
 const findAntallBarnUnder15 = (fodselsdatoer: Record<number, string>, omsorgsovertakelseDato: string): number | string => {
   const nrOfNotNullFodselsdatoer = Object.keys(fodselsdatoer)

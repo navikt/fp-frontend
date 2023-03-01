@@ -20,7 +20,7 @@ import { OverstyringAvklarStartdatoForPeriodenAp } from '@navikt/fp-types-avklar
 import editUtlandIcon from '../../images/endre.svg';
 import editUtlandDisabledIcon from '../../images/endre_disablet.svg';
 
-import styles from './startdatoForForeldrepengerperiodenForm.less';
+import styles from './startdatoForForeldrepengerperiodenForm.module.css';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);

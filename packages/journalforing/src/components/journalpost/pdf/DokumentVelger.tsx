@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { ToggleGroup } from '@navikt/ds-react';
 import JournalDokument from '../../../typer/journalDokumentTsType';
-import styles from './dokumentVelger.less';
+import styles from './dokumentVelger.module.css';
 
 type OwnProps = {
     setValgtDokument: (dok: JournalDokument) => void;

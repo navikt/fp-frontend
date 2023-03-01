@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import classnames from 'classnames/bind';
 
-import styles from './arbeidsforholdBoks.less';
+import styles from './arbeidsforholdBoks.module.css';
 
 const classNames = classnames.bind(styles);
 

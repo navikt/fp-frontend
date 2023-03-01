@@ -9,7 +9,7 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { Permisjon } from '@navikt/fp-types';
 
-import styles from './tilretteleggingArbeidsforholdSection.less';
+import styles from './tilretteleggingArbeidsforholdSection.module.css';
 
 export const finnSkalTaHensynTilPermisjon = (
   tilretteleggingBehovFom: string,

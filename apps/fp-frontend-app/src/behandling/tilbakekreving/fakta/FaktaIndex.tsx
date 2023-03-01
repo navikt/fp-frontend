@@ -24,8 +24,9 @@ import VergeFaktaInitPanel from './paneler/VergeFaktaInitPanel';
 import { TilbakekrevingBehandlingApiKeys, requestTilbakekrevingApi } from '../data/tilbakekrevingBehandlingApi';
 import FaktaMeny, { MenyData } from './FaktaMeny';
 
-import styles from './faktaIndex.less';
 import { erReadOnlyCurried } from '../felles/util/readOnlyPanelUtils';
+
+import styles from './faktaIndex.module.css';
 
 const DEFAULT_PANEL_VALGT = 'default';
 const EMPTY_FORM_DATA = {};

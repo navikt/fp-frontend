@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 
-import YtelserFaktaIndex from '@navikt/fp-fakta-ytelser';
+import { YtelserFaktaIndex } from '@navikt/fp-fakta-ytelser';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { InntektArbeidYtelse } from '@navikt/fp-types';
 

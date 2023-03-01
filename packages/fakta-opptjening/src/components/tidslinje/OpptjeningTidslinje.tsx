@@ -9,9 +9,9 @@ import { FormValues } from '../aktivitet/ValgtAktivitetForm';
 import DatoPanel from './DatoPanel';
 import { finnOpptjeningFom, finnOpptjeningTom } from '../../utils/opptjeningDatoUtil';
 
-import styles from './opptjeningTidslinje.less';
+import styles from './opptjeningTidslinje.module.css';
 
-import './globalTidslinje.less';
+import './globalTidslinje.module.css';
 
 // Desse må alltid vare med for rett skala av tidslinjen då den alltid skall vare 10 månader fra skjæringstidpunkten
 const standardItems = (opptjeningFomDato: string, opptjeningTomDato: string) => [

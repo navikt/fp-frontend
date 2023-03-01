@@ -8,7 +8,7 @@ import {
 import advarselImageUrl from '../../images/advarsel.svg';
 import Saksliste from '../../typer/sakslisteAvdelingTsType';
 
-import styles from './sletteSakslisteModal.less';
+import styles from './sletteSakslisteModal.module.css';
 
 interface OwnProps {
   valgtSaksliste: Saksliste;

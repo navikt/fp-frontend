@@ -18,7 +18,7 @@ import InngangsvilkarPanelData from '../typer/inngangsvilkarPanelData';
 import ProsessPanelInitProps from '../typer/prosessPanelInitProps';
 import InngangsvilkarPanelInitProps from '../typer/inngangsvilkarPanelInitProps';
 
-import styles from './inngangsvilkarDefaultInitWrapper.less';
+import styles from './inngangsvilkarDefaultInitWrapper.module.css';
 
 const harMinstEttDelPanelStatus = (paneler: InngangsvilkarPanelData[], vuType: string): boolean => paneler.some((p) => p.status === vuType);
 

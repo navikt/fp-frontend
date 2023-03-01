@@ -25,7 +25,7 @@ import BekreftetPermisjonStatus from '../kodeverk/BekreftetPermisjonStatus';
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 import ArbeidsforholdBoks from './ArbeidsforholdBoks';
 
-import styles from './arbeidsforholdField.less';
+import styles from './arbeidsforholdField.module.css';
 import InntektsposterPanel from './InntektsposterPanel';
 
 const FIELD_ARRAY_NAME = 'arbeidsforhold';

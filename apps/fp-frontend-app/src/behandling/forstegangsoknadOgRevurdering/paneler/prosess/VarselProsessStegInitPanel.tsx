@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import VarselOmRevurderingProsessIndex from '@navikt/fp-prosess-varsel-om-revurdering';
+import { VarselOmRevurderingProsessIndex } from '@navikt/fp-prosess-varsel-om-revurdering';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
   Behandling, Fagsak, FamilieHendelse, FamilieHendelseSamling, ForhåndsvisMeldingParams, Soknad,

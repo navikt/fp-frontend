@@ -22,7 +22,7 @@ import ArbeidsforholdOgInntekt, { Avklaring } from '../types/arbeidsforholdOgInn
 import advarselIkonUrl from '../images/advarsel2.svg';
 import okIkonUrl from '../images/check.svg';
 
-import styles from './arbeidsforholdRad.less';
+import styles from './arbeidsforholdRad.module.css';
 
 const classNames = classnames.bind(styles);
 

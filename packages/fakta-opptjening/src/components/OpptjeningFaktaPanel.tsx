@@ -19,7 +19,7 @@ import { AvklarAktivitetsPerioderAp } from '@navikt/fp-types-avklar-aksjonspunkt
 import OpptjeningTidslinje from './tidslinje/OpptjeningTidslinje';
 import ValgtAktivitetForm, { FormValues } from './aktivitet/ValgtAktivitetForm';
 
-import styles from './opptjeningFaktaPanel.less';
+import styles from './opptjeningFaktaPanel.module.css';
 
 const getAksjonspunktHelpTexts = (opptjeningAktiviteter: OpptjeningAktivitet[]): string[] => {
   const texts = [];

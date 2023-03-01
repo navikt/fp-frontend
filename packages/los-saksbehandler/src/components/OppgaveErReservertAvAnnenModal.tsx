@@ -10,7 +10,7 @@ import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
 
 import advarselImageUrl from '../images/advarsel.svg';
 
-import styles from './oppgaveErReservertAvAnnenModal.less';
+import styles from './oppgaveErReservertAvAnnenModal.module.css';
 
 type OwnProps = Readonly<{
   lukkErReservertModalOgOpneOppgave: (oppgave: Oppgave) => void;

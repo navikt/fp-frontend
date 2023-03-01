@@ -10,7 +10,7 @@ import {
 
 import { tilretteleggingType } from '@navikt/fp-kodeverk';
 
-import styles from './behovForTilretteleggingFieldArray.less';
+import styles from './behovForTilretteleggingFieldArray.module.css';
 
 const maxValue3 = maxValue(100);
 

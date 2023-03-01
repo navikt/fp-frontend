@@ -9,7 +9,7 @@ import {
 
 import LukkPapirsoknadModal from './LukkPapirsoknadModal';
 
-import styles from './lagreSoknadPanel.less';
+import styles from './lagreSoknadPanel.module.css';
 
 const maxLength1500 = maxLength(1500);
 

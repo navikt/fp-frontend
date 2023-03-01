@@ -23,7 +23,7 @@ import { KodeverkType, StonadskontoType, uttakPeriodeType } from '@navikt/fp-kod
 import { RelasjonsRolleType } from '@navikt/ft-kodeverk';
 import FordelingPeriodeKilde from '../kodeverk/fordelingPeriodeKilde';
 
-import styles from './uttakFaktaDetailForm.less';
+import styles from './uttakFaktaDetailForm.module.css';
 import KontrollerFaktaPeriodeMedApMarkering from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 import GraderingOgSamtidigUttakPanel, { FormValues as FormValuesGraderingOgSamtidigUttak } from './GraderingOgSamtidigUttakPanel';
 

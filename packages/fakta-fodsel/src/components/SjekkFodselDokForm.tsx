@@ -6,7 +6,7 @@ import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@navikt/fp-fakta-fe
 import {
   ArrowBox, VerticalSpacer, FaktaGruppe,
 } from '@navikt/ft-ui-komponenter';
-import FodselSammenligningIndex from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
+import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
@@ -17,7 +17,7 @@ import { SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import AvklartBarnFieldArray from './AvklartBarnFieldArray';
 
-import styles from './SjekkFodselDokForm.less';
+import styles from './SjekkFodselDokForm.module.css';
 
 export type FormValues = {
   fodselsdato?: string;

@@ -10,7 +10,7 @@ import {
 
 import advarselImageUrl from '../../images/advarsel.svg';
 
-import styles from './lukkPapirsoknadModal.less';
+import styles from './lukkPapirsoknadModal.module.css';
 
 interface OwnProps {
   showModal: boolean;

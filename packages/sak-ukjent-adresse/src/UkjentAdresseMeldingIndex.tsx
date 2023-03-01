@@ -5,7 +5,7 @@ import { createIntl } from '@navikt/ft-utils';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import messages from '../i18n/nb_NO.json';
-import styles from './ukjentAdresseMeldingIndex.less';
+import styles from './ukjentAdresseMeldingIndex.module.css';
 
 const intl = createIntl(messages);
 

@@ -1,6 +1,5 @@
 module.exports = {
   plugins: ['stylelint-order'],
-  customSyntax: 'postcss-less',
   rules: {
     'at-rule-empty-line-before': [
       'always',
@@ -30,7 +29,6 @@ module.exports = {
         ignore: ['after-comment', 'inside-single-line-block'],
       },
     ],
-    'declaration-no-important': true,
     'declaration-block-no-duplicate-properties': true,
     'declaration-block-single-line-max-declarations': 1,
     'declaration-empty-line-before': [
@@ -41,13 +39,6 @@ module.exports = {
       },
     ],
     'length-zero-no-unit': true,
-    'rule-empty-line-before': [
-      'always-multi-line',
-      {
-        except: ['first-nested'],
-        ignore: ['after-comment'],
-      },
-    ],
     'selector-pseudo-element-colon-notation': 'single',
     'selector-type-case': 'lower',
     'unit-allowed-list': [

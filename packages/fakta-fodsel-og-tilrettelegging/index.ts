@@ -1,1 +1,2 @@
-export { default } from './src/FodselOgTilretteleggingFaktaIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as FodselOgTilretteleggingFaktaIndex } from './src/FodselOgTilretteleggingFaktaIndex';

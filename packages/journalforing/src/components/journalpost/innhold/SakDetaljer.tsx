@@ -9,7 +9,7 @@ import { FagsakStatus } from '@navikt/ft-kodeverk';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 import { Clipboard } from '@navikt/ft-plattform-komponenter';
-import styles from './sakDetaljer.less';
+import styles from './sakDetaljer.module.css';
 import { finnYtelseTekst } from '../form/VelgSakForm';
 import JournalFagsak from '../../../typer/journalFagsakTsType';
 

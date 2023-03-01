@@ -14,7 +14,7 @@ import SvangerskapspengerPapirsoknadIndex from './svangerskapspenger/Svangerskap
 import SoknadTypePickerForm from './SoknadTypePickerForm';
 import messages from '../i18n/nb_NO.json';
 
-import styles from './registrerPapirsoknadPanel.less';
+import styles from './registrerPapirsoknadPanel.module.css';
 
 const intl = createIntl(messages);
 

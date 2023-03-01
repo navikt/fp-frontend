@@ -18,7 +18,7 @@ import { UseFormGetValues } from 'react-hook-form';
 import TilretteleggingUtbetalingsgrad, { OVERSTYRT_UTBETALINGSGRAD_FIELDNAME } from './TilretteleggingUtbetalingsgrad';
 import { finnSkalTaHensynTilPermisjon } from './VelferdspermisjonSection';
 
-import styles from './tilretteleggingFieldArray.less';
+import styles from './tilretteleggingFieldArray.module.css';
 
 const maxValue100 = maxValue(100);
 const minValue0 = minValue(0);

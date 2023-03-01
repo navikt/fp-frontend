@@ -10,7 +10,7 @@ import { NavAnsatt } from '@navikt/fp-types';
 import { restApiHooks, RestApiPathsKeys } from '../../data/fpfordelRestApi';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import OppgaveDetaljertVisning from './JournalpostDetaljer';
-import styles from './journalpostIndex.less';
+import styles from './journalpostIndex.module.css';
 import Journalpost from '../../typer/journalpostTsType';
 import JournalDokument from '../../typer/journalDokumentTsType';
 import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';

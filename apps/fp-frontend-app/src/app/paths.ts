@@ -82,7 +82,7 @@ export const erUrlUnderBehandling = (location: Location): boolean => !location.p
 export const erBehandlingValgt = (location: Location): boolean => location.pathname.includes('behandling') && !location.pathname.endsWith('behandling/');
 
 export const redirectToLogin = () => {
-  if (process.env.NODE_ENV === 'development') {
+  if (import.meta.env.MODE === 'development') {
     window.location.assign(DEV_LOGIN_URL);
   }
   return undefined;

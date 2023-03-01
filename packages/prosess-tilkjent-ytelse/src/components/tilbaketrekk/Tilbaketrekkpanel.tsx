@@ -18,7 +18,7 @@ import { Aksjonspunkt, BeregningsresultatFp } from '@navikt/fp-types';
 import { VurderTilbaketrekkAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import behandleImageURL from '../../images/advarsel.svg';
 
-import styles from './tilbaketrekkpanel.less';
+import styles from './tilbaketrekkpanel.module.css';
 
 const radioFieldName = 'radioVurderTilbaketrekk';
 const begrunnelseFieldName = 'begrunnelseVurderTilbaketrekk';

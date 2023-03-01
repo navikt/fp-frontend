@@ -7,7 +7,7 @@ import { CheckboxField, RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks
 import { restApiHooks, RestApiPathsKeys } from '../../../../data/fplosRestApi';
 import useLosKodeverk from '../../../../data/useLosKodeverk';
 
-import styles from './andreKriterierVelger.less';
+import styles from './andreKriterierVelger.module.css';
 
 interface OwnProps {
   valgtSakslisteId: number;

@@ -1,19 +1,18 @@
 {
   "name": "@navikt/fp-types-avklar-aksjonspunkter",
   "version": "1.0.0",
-  "module": "index.jsx",
   "license": "MIT",
   "private": true,
-  "main": "./dist/index.js",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
     "tsc": "tsc --pretty",
-    "build-webpack": "cross-env webpack --config webpack.config.js",
-    "build-ts-declarations": "tsc index.ts ../../@types/externals.d.ts --declaration --emitDeclarationOnly --downlevelIteration --resolveJsonModule --jsx react --outDir dist --declarationMap --esModuleInterop --skipLibCheck",
-    "build": "yarn build-webpack && yarn build-ts-declarations",
+    "dev": "vite build --mode development --watch",
+    "build": "vite build",
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
@@ -24,6 +23,9 @@
     "@navikt/ft-prosess-beregningsgrunnlag": "6.0.0"
   },
   "exports": {
-    ".": "./dist/index.js"
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    }
   }
 }

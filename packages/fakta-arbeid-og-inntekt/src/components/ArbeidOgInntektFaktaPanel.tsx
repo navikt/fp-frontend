@@ -9,7 +9,7 @@ import {
   Behandling, Inntektsmelding, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold,
 } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
-import SettPaVentModalIndex from '@navikt/fp-modal-sett-pa-vent';
+import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { VerticalSpacer, Table } from '@navikt/ft-ui-komponenter';
 import {
   AksjonspunktCode, KodeverkType, venteArsakType, aksjonspunktStatus, ArbeidsforholdKomplettVurderingType,
@@ -20,7 +20,7 @@ import ArbeidsforholdOgInntektRadData, { Avklaring } from '../types/arbeidsforho
 import ArbeidsOgInntektOverstyrPanel from './ArbeidsOgInntektOverstyrPanel';
 import { useIsFormDirty } from '../DirtyFormProvider';
 
-import styles from './arbeidOgInntektFaktaPanel.less';
+import styles from './arbeidOgInntektFaktaPanel.module.css';
 
 const HEADER_TEXT_IDS = [
   'EMPTY1',

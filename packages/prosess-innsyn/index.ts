@@ -1,1 +1,2 @@
-export { default } from './src/InnsynProsessIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as InnsynProsessIndex } from './src/InnsynProsessIndex';

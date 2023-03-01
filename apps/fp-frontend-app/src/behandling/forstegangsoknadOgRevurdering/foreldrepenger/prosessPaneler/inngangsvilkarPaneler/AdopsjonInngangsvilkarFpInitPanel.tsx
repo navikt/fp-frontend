@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
-import AdopsjonVilkarProsessIndex from '@navikt/fp-prosess-vilkar-adopsjon';
+import { AdopsjonVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-adopsjon';
 import { AksessRettigheter } from '@navikt/fp-types';
 
 import InngangsvilkarPanelInitProps from '../../../../felles/typer/inngangsvilkarPanelInitProps';

@@ -10,7 +10,7 @@ import {
 import { opptjeningAktivitetType as OAType } from '@navikt/fp-kodeverk';
 import { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
-import styles from './valgtAktivitetSubForm.less';
+import styles from './valgtAktivitetSubForm.module.css';
 
 const YTELSE_TYPER = [OAType.SYKEPENGER, OAType.FORELDREPENGER, OAType.PLEIEPENGER, OAType.SVANGERSKAPSPENGER, OAType.UTENLANDSK_ARBEIDSFORHOLD];
 

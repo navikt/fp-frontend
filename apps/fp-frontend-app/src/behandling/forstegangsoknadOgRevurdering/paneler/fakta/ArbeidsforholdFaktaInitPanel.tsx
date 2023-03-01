@@ -4,7 +4,7 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import ArbeidsforholdFaktaIndex from '@navikt/fp-fakta-arbeidsforhold';
+import { ArbeidsforholdFaktaIndex } from '@navikt/fp-fakta-arbeidsforhold';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId,

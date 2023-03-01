@@ -4,7 +4,7 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import UttakFaktaIndex from '@navikt/fp-fakta-uttak';
+import { UttakFaktaIndex } from '@navikt/fp-fakta-uttak';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   AksessRettigheter, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, KontrollerFaktaPeriode, Ytelsefordeling, Fagsak,

@@ -12,7 +12,7 @@ import { KodeverkMedNavn, Personadresse, PersonopplysningMedlem } from '@navikt/
 
 import getAddresses from '../../getAddresses';
 
-import styles from './medlemskapBostedSokerView.less';
+import styles from './medlemskapBostedSokerView.module.css';
 
 const getAdresse = (adresser: Personadresse[]): string => {
   const adresseListe = getAddresses(adresser);

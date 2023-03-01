@@ -13,7 +13,7 @@ import { Oppgave } from '@navikt/fp-los-felles';
 import useLosKodeverk from '../../data/useLosKodeverk';
 import { restApiHooks, RestApiGlobalStatePathsKeys } from '../../data/fplosSaksbehandlerRestApi';
 
-import styles from './fagsakList.less';
+import styles from './fagsakList.module.css';
 
 const headerTextCodes = [
   'FagsakList.Saksnummer',

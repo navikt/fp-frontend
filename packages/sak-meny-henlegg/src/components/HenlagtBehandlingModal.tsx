@@ -9,7 +9,7 @@ import {
 
 import innvilgetImageUrl from '../images/innvilget_valgt.svg';
 
-import styles from './henlagtBehandlingModal.less';
+import styles from './henlagtBehandlingModal.module.css';
 
 interface OwnProps {
   showModal: boolean;

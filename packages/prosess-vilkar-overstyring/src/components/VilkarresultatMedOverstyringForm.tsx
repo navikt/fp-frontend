@@ -24,7 +24,7 @@ import innvilgetImage from '../images/innvilget_hover.svg';
 import keyImage from '../images/key-1-rotert.svg';
 import keyUtgraetImage from '../images/key-1-rotert-utgraet.svg';
 
-import styles from './vilkarresultatMedOverstyringForm.less';
+import styles from './vilkarresultatMedOverstyringForm.module.css';
 
 type TextValues = {
   id: string;

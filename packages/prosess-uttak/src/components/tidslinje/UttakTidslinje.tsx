@@ -14,9 +14,9 @@ import {
 
 import { PeriodeSoker } from '@navikt/fp-types';
 
-import styles from './uttakTidslinje.less';
+import styles from './uttakTidslinje.module.css';
 
-import './globalTidslinje.less';
+import './globalTidslinje.module.css';
 
 export interface EventProps {
   items: number[];

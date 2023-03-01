@@ -11,7 +11,7 @@ import ProsessMeny from './ProsessMeny';
 import ProsessPanelMenyData from '../typer/prosessPanelMenyData';
 import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from '../typer/prosessPanelInitProps';
 
-import styles from './prosessContainer.less';
+import styles from './prosessContainer.module.css';
 
 interface OwnProps {
   behandling: Behandling;

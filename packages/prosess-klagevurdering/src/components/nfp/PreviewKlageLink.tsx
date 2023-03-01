@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { dokumentMalType, klageVurdering as klageVurderingType } from '@navikt/fp-kodeverk';
 
-import styles from './previewKlageLink.less';
+import styles from './previewKlageLink.module.css';
 
 const getBrevKode = (klageVurdering: string, klageVurdertAvKa: boolean): string | null => {
   switch (klageVurdering) {

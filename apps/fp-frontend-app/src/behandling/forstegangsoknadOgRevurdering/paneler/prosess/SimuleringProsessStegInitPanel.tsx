@@ -4,7 +4,7 @@ import React, {
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktCode, vilkarUtfallType } from '@navikt/fp-kodeverk';
-import AvregningProsessIndex from '@navikt/fp-prosess-avregning';
+import { AvregningProsessIndex } from '@navikt/fp-prosess-avregning';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import {

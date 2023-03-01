@@ -14,7 +14,7 @@ import { AlleKodeverk } from '@navikt/fp-types';
 import { familieHendelseType } from '@navikt/fp-kodeverk';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 
-import styles from './soknadTypePickerForm.less';
+import styles from './soknadTypePickerForm.module.css';
 
 export const SøknadTyper = [
   familieHendelseType.ADOPSJON,

@@ -16,7 +16,7 @@ import removeIcon from '../../images/remove.svg';
 
 import RegistrerVirksomhetModalForm, { FormValues as ModalFormValues } from './RegistrerVirksomhetModalForm';
 
-import styles from './registrerVirksomhetPanel.less';
+import styles from './registrerVirksomhetPanel.module.css';
 
 export const EGEN_VIRKSOMHET_NAME_PREFIX = 'egenVirksomhet';
 

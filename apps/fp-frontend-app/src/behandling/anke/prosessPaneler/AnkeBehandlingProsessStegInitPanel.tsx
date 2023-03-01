@@ -4,7 +4,7 @@ import React, {
 import { useIntl } from 'react-intl';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 
-import AnkeProsessIndex from '@navikt/fp-prosess-anke';
+import { AnkeProsessIndex } from '@navikt/fp-prosess-anke';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AnkeVurdering } from '@navikt/fp-types';
 

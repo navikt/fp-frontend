@@ -1,1 +1,2 @@
-export { default } from './src/OmsorgOgRettFaktaIndex';
+// eslint-disable-next-line import/prefer-default-export
+export { default as OmsorgOgRettFaktaIndex } from './src/OmsorgOgRettFaktaIndex';

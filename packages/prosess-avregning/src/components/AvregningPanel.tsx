@@ -28,7 +28,7 @@ import questionHoverUrl from '../images/question_hover.svg';
 import AvregningSummary from './AvregningSummary';
 import AvregningTable from './AvregningTable';
 
-import styles from './avregningPanel.less';
+import styles from './avregningPanel.module.css';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);

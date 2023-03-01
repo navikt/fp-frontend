@@ -14,7 +14,7 @@ import checkImg from '../images/check.svg';
 import avslattImg from '../images/avslaatt.svg';
 import getAksjonspunkttekst from './aksjonspunktTekster/aksjonspunktTekstUtleder';
 
-import styles from './totrinnskontrollSaksbehandlerPanel.less';
+import styles from './totrinnskontrollSaksbehandlerPanel.module.css';
 
 interface OwnProps {
   behandling: BehandlingAppKontekst;

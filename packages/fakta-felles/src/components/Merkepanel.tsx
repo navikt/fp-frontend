@@ -6,7 +6,7 @@ import { Tooltip } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 import { diskresjonskodeType } from '@navikt/fp-kodeverk';
 
-import styles from './merkepanel.less';
+import styles from './merkepanel.module.css';
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);

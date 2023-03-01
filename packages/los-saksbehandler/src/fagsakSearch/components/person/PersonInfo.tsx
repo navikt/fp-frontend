@@ -14,7 +14,7 @@ import urlMann from '../../../images/mann.svg';
 import AlderVisning from './Aldervisning';
 import MerkePanel from './Merkepanel';
 
-import styles from './personInfo.less';
+import styles from './personInfo.module.css';
 
 interface OwnProps {
   person: Person;

@@ -7,7 +7,7 @@ import {
 
 import innvilgetImageUrl from '../../../images/innvilget_valgt.svg';
 
-import styles from './klageBehandlingModal.less';
+import styles from './klageBehandlingModal.module.css';
 
 interface OwnProps {
   visModal?: boolean;

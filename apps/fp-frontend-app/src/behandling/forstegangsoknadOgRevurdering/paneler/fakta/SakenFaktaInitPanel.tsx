@@ -6,7 +6,7 @@ import { Fagsak } from '@navikt/ft-types';
 import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import SakenFaktaIndex from '@navikt/fp-fakta-saken';
+import { SakenFaktaIndex } from '@navikt/fp-fakta-saken';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Soknad } from '@navikt/fp-types';
 

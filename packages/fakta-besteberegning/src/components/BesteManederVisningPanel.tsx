@@ -17,7 +17,7 @@ import {
 } from '@navikt/fp-types';
 import { KodeverkType } from '@navikt/fp-kodeverk';
 
-import styles from './besteManederVisningPanel.less';
+import styles from './besteManederVisningPanel.module.css';
 
 const lagMånedVisning = (dato: dayjs.Dayjs): string => {
   const år = dato.year();

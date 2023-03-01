@@ -17,7 +17,7 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { hasIkkeOppfyltSoknadsfristvilkar } from '../felles/VedtakHelper';
 
-import styles from './vedtakAvslagArsakOgBegrunnelsePanel.less';
+import styles from './vedtakAvslagArsakOgBegrunnelsePanel.module.css';
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);

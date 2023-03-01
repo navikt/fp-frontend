@@ -1,7 +1,7 @@
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import React, { FunctionComponent } from 'react';
 
-import styles from './dateContainer.less';
+import styles from './dateContainer.module.css';
 
 interface OwnProps {
   opptjeningFomDate: string;

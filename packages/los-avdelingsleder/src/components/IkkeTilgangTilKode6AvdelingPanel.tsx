@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Panel, Heading } from '@navikt/ds-react';
 
-import styles from './ikkeTilgangTilKode6AvdelingPanel.less';
+import styles from './ikkeTilgangTilKode6AvdelingPanel.module.css';
 
 /**
  * IkkeTilgangTilKode6AvdelingPanel

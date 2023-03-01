@@ -13,7 +13,7 @@ import innvilgetImage from '../images/innvilget_hover.svg';
 import ProsessStegSubmitButton from '../ProsessStegSubmitButtonNew';
 import messages from '../../i18n/nb_NO.json';
 
-import styles from './prosessPanelTemplate.less';
+import styles from './prosessPanelTemplate.module.css';
 
 const intl = createIntl(messages);
 

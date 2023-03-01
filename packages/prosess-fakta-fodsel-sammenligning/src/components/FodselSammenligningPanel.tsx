@@ -16,7 +16,7 @@ import { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import FodselSammenligningOtherPanel from './FodselSammenligningOtherPanel';
 import FodselSammenligningRevurderingPanel from './FodselSammenligningRevurderingPanel';
 
-import styles from './fodselSammenligningPanel.less';
+import styles from './fodselSammenligningPanel.module.css';
 
 const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
