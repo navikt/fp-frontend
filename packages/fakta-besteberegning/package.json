@@ -20,7 +20,7 @@
     "dev": "vite build --mode development --watch",
     "build": "vite build",
     "clean": "rm -rf ./dist ./node_modules",
-    "storybook": "start-storybook --quiet -p 7005"
+    "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider start-storybook --quiet -p 7005"
   },
   "dependencies": {
     "@navikt/fp-fakta-felles": "1.0.0",

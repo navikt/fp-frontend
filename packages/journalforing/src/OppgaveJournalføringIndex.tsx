@@ -13,7 +13,7 @@ import JournalforingPanel from './components/JournalforingPanel';
 import JournalføringIndex from './components/JournalføringIndex';
 import { RestApiPathsKeys, restApiHooks, requestApi } from './data/fpfordelRestApi';
 import OppgaveOversikt from './typer/oppgaveOversiktTsType';
-import styles from './oppgaveJournalføringIndex.less';
+import styles from './oppgaveJournalføringIndex.module.css';
 
 const intl = createIntl(messages);
 const TOM_ARRAY: OppgaveOversikt[] = [];

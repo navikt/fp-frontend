@@ -21,7 +21,7 @@
     "dev": "vite build --mode development --watch",
     "build": "vite build",
     "clean": "rm -rf ./dist ./node_modules",
-    "storybook": "start-storybook --quiet -p 7067"
+    "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider start-storybook --quiet -p 7067"
   },
   "dependencies": {
     "@navikt/ft-ui-komponenter": "2.0.0",
