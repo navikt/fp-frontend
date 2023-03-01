@@ -10,7 +10,10 @@ type OwnProps = {
 }
 
 const DokumentVelger: FunctionComponent<OwnProps> = ({ setValgtDokument, valgtDokument, dokumenter }) => {
-  const shiz = (valgtDokumentId: string) => {
+  if (dokumenter.length < 2) {
+    return null;
+  }
+  const endreValg = (valgtDokumentId: string) => {
     const nyttValg = dokumenter.find((dok) => dok.dokumentId === valgtDokumentId);
     if (nyttValg) {
       setValgtDokument(nyttValg);
@@ -19,7 +22,7 @@ const DokumentVelger: FunctionComponent<OwnProps> = ({ setValgtDokument, valgtDo
   return (
     <div className={styles.panel}>
       <div className={styles.toggleGroup}>
-        <ToggleGroup defaultValue={valgtDokument.dokumentId} onChange={shiz}>
+        <ToggleGroup defaultValue={valgtDokument.dokumentId} onChange={endreValg}>
           {dokumenter.map((dok) => (
             <ToggleGroup.Item value={dok.dokumentId} key={dok.dokumentId}>
               {dok.tittel}
