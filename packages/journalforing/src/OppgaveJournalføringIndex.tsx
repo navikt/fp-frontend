@@ -73,20 +73,20 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({
   }
   return (
     <RawIntlProvider value={intl}>
-      <JournalforingPanel>
-        <div className={styles.header}>
-          {valgtOppgave
-            && (
+      <div className={styles.header}>
+        {valgtOppgave
+          && (
             <Link onClick={avbryt} className={styles.link}>
               <Back />
               <FormattedMessage id="Journalforing.Oversikt" />
             </Link>
-            )}
-          <VerticalSpacer eightPx />
-          <Heading size="medium">
-            <FormattedMessage id="Journalforing.Tittel" />
-          </Heading>
-        </div>
+          )}
+        <VerticalSpacer eightPx />
+        <Heading size="medium">
+          <FormattedMessage id="Journalforing.Tittel" />
+        </Heading>
+      </div>
+      <JournalforingPanel>
         <JournalføringIndex
           valgtOppgave={valgtOppgave}
           oppgaver={alleOppgaver}
