@@ -24,9 +24,9 @@
     "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider start-storybook --quiet -p 7063"
   },
   "dependencies": {
+    "@navikt/ds-react": "2.1.7",
     "@navikt/fp-kodeverk": "1.0.0",
     "@navikt/fp-types": "1.0.0",
-    "@navikt/ds-react": "2.1.7",
     "@navikt/ft-form-hooks": "4.0.0",
     "@navikt/ft-form-validators": "2.0.0",
     "@navikt/ft-kodeverk": "2.0.0",

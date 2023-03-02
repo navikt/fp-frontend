@@ -24,13 +24,13 @@
     "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider start-storybook --quiet -p 7067"
   },
   "dependencies": {
+    "@navikt/ds-react": "2.1.7",
     "@navikt/fp-kodeverk": "1.0.0",
     "@navikt/fp-konstanter": "1.0.0",
     "@navikt/fp-types": "1.0.0",
     "@navikt/fp-types-avklar-aksjonspunkter": "1.0.0",
-    "@navikt/ds-react": "2.1.7",
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "7.0.0",
     "@navikt/ft-fakta-beregning": "4.0.0",
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "7.0.0",
     "@navikt/ft-form-hooks": "4.0.0",
     "@navikt/ft-form-validators": "2.0.0",
     "@navikt/ft-kodeverk": "2.0.0",

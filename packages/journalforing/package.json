@@ -23,7 +23,6 @@
     "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider start-storybook --quiet -p 7019"
   },
   "dependencies": {
-    "dayjs": "1.11.7",
     "@navikt/ds-icons": "2.1.7",
     "@navikt/ds-react": "2.1.7",
     "@navikt/fp-kodeverk": "1.0.0",
@@ -36,9 +35,10 @@
     "@navikt/ft-plattform-komponenter": "2.0.0",
     "@navikt/ft-ui-komponenter": "2.0.0",
     "@navikt/ft-utils": "2.0.0",
+    "dayjs": "1.11.7",
     "react": "18.2.0",
-    "react-intl": "6.2.8",
     "react-hook-form": "7.43.1",
+    "react-intl": "6.2.8",
     "react-pdf": "5.7.0"
   },
   "devDependencies": {
