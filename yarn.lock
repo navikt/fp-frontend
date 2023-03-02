@@ -9277,7 +9277,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:^5.43.0, @typescript-eslint/utils@npm:^5.48.1":
+"@typescript-eslint/utils@npm:^5.43.0, @typescript-eslint/utils@npm:^5.53.0":
   version: 5.54.0
   resolution: "@typescript-eslint/utils@npm:5.54.0"
   dependencies:
@@ -13961,14 +13961,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-vitest@npm:0.0.34":
-  version: 0.0.34
-  resolution: "eslint-plugin-vitest@npm:0.0.34"
+"eslint-plugin-vitest@npm:0.0.53":
+  version: 0.0.53
+  resolution: "eslint-plugin-vitest@npm:0.0.53"
   dependencies:
-    "@typescript-eslint/utils": ^5.48.1
+    "@typescript-eslint/utils": ^5.53.0
   peerDependencies:
     eslint: ">=8.0.0"
-  checksum: 19f056d387e30ba49c35bea739cfd22d2fb50fdacbc29be09842d667473226b02ef9274e73e58157502e29f2b29b8164c4fd82bfb84115c92f053dc9c7d7b30c
+  checksum: 46accf35b78d3ef69174e6bb5809dd666ae14d53c700f4e6b24072906d5396d558f82c267a057618fd729f62c96e4f4854788b91e51cbe4830fb0d3600330551
   languageName: node
   linkType: hard
 
@@ -14962,7 +14962,7 @@ __metadata:
     eslint-plugin-jsx-a11y: 6.7.1
     eslint-plugin-react: 7.32.2
     eslint-plugin-testing-library: 5.10.2
-    eslint-plugin-vitest: 0.0.34
+    eslint-plugin-vitest: 0.0.53
     jsdom: 21.1.0
     lerna: 6.5.1
     raf: 3.4.1
