@@ -18,6 +18,10 @@
   "dependencies": {
     "@navikt/fp-kodeverk": "1.0.0"
   },
+  "devDependencies": {
+    "typescript": "4.9.5",
+    "vite": "4.1.4"
+  },
   "exports": {
     ".": {
       "import": "./dist/index.es.js",
