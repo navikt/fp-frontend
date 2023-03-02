@@ -2054,14 +2054,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/intl-numberformat@npm:8.3.3":
-  version: 8.3.3
-  resolution: "@formatjs/intl-numberformat@npm:8.3.3"
+"@formatjs/intl-numberformat@npm:8.3.5":
+  version: 8.3.5
+  resolution: "@formatjs/intl-numberformat@npm:8.3.5"
   dependencies:
     "@formatjs/ecma402-abstract": 1.14.3
     "@formatjs/intl-localematcher": 0.2.32
     tslib: ^2.4.0
-  checksum: 56fc8e25c445944f43295ee28a8f2dd059770e28e4a368b977787591157f3da357528ee8bcab5e00a54c9f850a879b1fedb92cc1934b93400a30699a3834c119
+  checksum: 6eb305b20ae5a639e5e721ed425387bfd58b427e17ba9c15e23e56e45e65fa4c6065f5237577c3b763c000aad2f6d3f1140fd89ab89ce21ac0fc25f84e68032e
   languageName: node
   linkType: hard
 
@@ -3492,7 +3492,7 @@ __metadata:
   resolution: "@navikt/fp-frontend-app@workspace:apps/fp-frontend-app"
   dependencies:
     "@formatjs/intl-datetimeformat": 6.4.3
-    "@formatjs/intl-numberformat": 8.3.3
+    "@formatjs/intl-numberformat": 8.3.5
     "@navikt/ds-css": 2.1.7
     "@navikt/ds-react": 2.1.7
     "@navikt/fp-fakta-adopsjon": 1.0.0
