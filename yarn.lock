@@ -3626,6 +3626,7 @@ __metadata:
     "@navikt/fp-rest-api-hooks": 1.0.0
     "@navikt/fp-storybook-utils": 1.0.0
     "@navikt/fp-types": 1.0.0
+    "@navikt/fp-utils-test": 1.0.0
     "@navikt/ft-form-hooks": 4.0.0
     "@navikt/ft-form-validators": 2.0.0
     "@navikt/ft-kodeverk": 2.0.0
@@ -3690,6 +3691,7 @@ __metadata:
     "@navikt/fp-rest-api-hooks": 1.0.0
     "@navikt/fp-storybook-utils": 1.0.0
     "@navikt/fp-types": 1.0.0
+    "@navikt/fp-utils-test": 1.0.0
     "@navikt/ft-form-hooks": 4.0.0
     "@navikt/ft-form-validators": 2.0.0
     "@navikt/ft-kodeverk": 2.0.0
@@ -3708,6 +3710,7 @@ __metadata:
     "@storybook/theming": 6.5.16
     "@testing-library/react": 13.4.0
     "@testing-library/user-event": 14.4.3
+    "@types/lodash.debounce": 4.0.7
     cross-env: 7.0.3
     dayjs: 1.11.7
     echarts: 5.4.1
@@ -3783,6 +3786,7 @@ __metadata:
     "@navikt/fp-rest-api-hooks": 1.0.0
     "@navikt/fp-storybook-utils": 1.0.0
     "@navikt/fp-types": 1.0.0
+    "@navikt/fp-utils-test": 1.0.0
     "@navikt/ft-form-hooks": 4.0.0
     "@navikt/ft-form-validators": 2.0.0
     "@navikt/ft-kodeverk": 2.0.0
@@ -3828,6 +3832,7 @@ __metadata:
     "@navikt/fp-kodeverk": 1.0.0
     "@navikt/fp-storybook-utils": 1.0.0
     "@navikt/fp-types": 1.0.0
+    "@navikt/fp-utils-test": 1.0.0
     "@navikt/ft-form-hooks": 4.0.0
     "@navikt/ft-form-validators": 2.0.0
     "@navikt/ft-kodeverk": 2.0.0
@@ -5025,6 +5030,7 @@ __metadata:
   resolution: "@navikt/fp-rest-api-hooks@workspace:packages/rest-api-hooks"
   dependencies:
     "@navikt/fp-rest-api": 1.0.0
+    "@testing-library/react": 13.4.0
     cross-env: 7.0.3
     eslint: 8.34.0
     react: 18.2.0
@@ -5061,6 +5067,7 @@ __metadata:
     "@navikt/fp-konstanter": 1.0.0
     "@navikt/fp-storybook-utils": 1.0.0
     "@navikt/fp-types": 1.0.0
+    "@navikt/fp-utils-test": 1.0.0
     "@navikt/ft-fakta-beregning": 4.0.0
     "@navikt/ft-kodeverk": 2.0.0
     "@navikt/ft-prosess-beregningsgrunnlag": 6.0.0
@@ -5335,6 +5342,7 @@ __metadata:
     "@navikt/fp-storybook-utils": 1.0.0
     "@navikt/fp-types": 1.0.0
     "@navikt/fp-types-avklar-aksjonspunkter": 1.0.0
+    "@navikt/fp-utils-test": 1.0.0
     "@navikt/ft-fakta-beregning": 4.0.0
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.0.0
     "@navikt/ft-form-hooks": 4.0.0
@@ -8789,7 +8797,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4.14.167":
+"@types/lodash.debounce@npm:4.0.7":
+  version: 4.0.7
+  resolution: "@types/lodash.debounce@npm:4.0.7"
+  dependencies:
+    "@types/lodash": "*"
+  checksum: e873b2d77f89010876baba3437ef826b17221b98948e00b5590828334a481dea1c8f9d28543210e564adc53199584f42c3cb171f8b6c3614fefc0b4e0888679c
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:*, @types/lodash@npm:^4.14.167":
   version: 4.14.191
   resolution: "@types/lodash@npm:4.14.191"
   checksum: ba0d5434e10690869f32d5ea49095250157cae502f10d57de0a723fd72229ce6c6a4979576f0f13e0aa9fbe3ce2457bfb9fa7d4ec3d6daba56730a51906d1491
