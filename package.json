@@ -33,7 +33,7 @@
     "packages/**/*"
   ],
   "dependencies": {
-    "@babel/runtime": "7.20.13",
+    "@babel/runtime": "7.21.0",
     "dotenv": "16.0.3"
   },
   "devDependencies": {
