@@ -4,6 +4,7 @@
   "license": "MIT",
   "private": true,
   "type": "module",
+  "packageManager": "yarn@3.4.1",
   "scripts": {
     "start-express": "node ./server.js"
   },
