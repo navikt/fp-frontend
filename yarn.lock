@@ -2696,12 +2696,12 @@ __metadata:
   linkType: hard
 
 "@navikt/ds-icons@npm:^2.1.7":
-  version: 2.5.0
-  resolution: "@navikt/ds-icons@npm:2.5.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-icons%2F2.5.0%2Ff2531111ee6e96ecf471ad2a40e6d0c98e62a885"
+  version: 2.5.1
+  resolution: "@navikt/ds-icons@npm:2.5.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-icons%2F2.5.1%2F31cb03a09ae4fd62464a926e0c4ffd620642d1c7"
   peerDependencies:
     "@types/react": ^17.0.30 || ^18.0.0
     react: ^17.0.0 || ^18.0.0
-  checksum: 685cbb521809a315d73c5154cf55fec3440f3996d5ac6463c59c13867362bd1f4500d51eef32fba4fc5a14b5362e2bc4463e621af5abde23956c8098f87e7ab3
+  checksum: dd3409efa328602dba011e225e5f729ae01841bbbfac01e96cd9f28df7153a24f40f04a11046dfd89e5cb95f59ec858b546e1feb4e1447d34e7a7bd2e7ba7ad8
   languageName: node
   linkType: hard
 
@@ -8861,9 +8861,9 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*":
-  version: 18.14.3
-  resolution: "@types/node@npm:18.14.3"
-  checksum: 341bd0d7afec96e78e89821a4f922c33feec5fed71396171bb78f7b9fca63ab491c35c390083381ddbaf7f5ec4170dfe527bb950b468824e0a276d04cc519b64
+  version: 18.14.4
+  resolution: "@types/node@npm:18.14.4"
+  checksum: 3f2f625777747b9f87e793eea5a8bbf1ac2c828846bda5811d07a457d55cfe6762239779759de61e7b7e917632b9ceee3f7ffd2a024117e7ec364dc1b4eb8d55
   languageName: node
   linkType: hard
 
