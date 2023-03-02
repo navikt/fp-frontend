@@ -13,7 +13,7 @@ https://navikt.github.io/fp-frontend
 
 ## For å komme i gang
 
-Lag en yarnrc.yml-fil i hjemmefolderen din: (Bytt ut <token> med ditt genererte token)
+Lag en .yarnrc.yml-fil i hjemmefolderen din: (Bytt ut <token> med ditt genererte token)
 ````
 npmRegistries:
   https://npm.pkg.github.com:
