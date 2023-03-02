@@ -1397,7 +1397,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-typescript@npm:^7.18.6, @babel/plugin-transform-typescript@npm:^7.21.0":
+"@babel/plugin-transform-typescript@npm:^7.21.0":
   version: 7.21.0
   resolution: "@babel/plugin-transform-typescript@npm:7.21.0"
   dependencies:
@@ -1562,20 +1562,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-typescript@npm:7.18.6":
-  version: 7.18.6
-  resolution: "@babel/preset-typescript@npm:7.18.6"
-  dependencies:
-    "@babel/helper-plugin-utils": ^7.18.6
-    "@babel/helper-validator-option": ^7.18.6
-    "@babel/plugin-transform-typescript": ^7.18.6
-  peerDependencies:
-    "@babel/core": ^7.0.0-0
-  checksum: 7fe0da5103eb72d3cf39cf3e138a794c8cdd19c0b38e3e101507eef519c46a87a0d6d0e8bc9e28a13ea2364001ebe7430b9d75758aab4c3c3a8db9a487b9dc7c
-  languageName: node
-  linkType: hard
-
-"@babel/preset-typescript@npm:^7.12.7, @babel/preset-typescript@npm:^7.13.0":
+"@babel/preset-typescript@npm:7.21.0, @babel/preset-typescript@npm:^7.12.7, @babel/preset-typescript@npm:^7.13.0":
   version: 7.21.0
   resolution: "@babel/preset-typescript@npm:7.21.0"
   dependencies:
@@ -14921,7 +14908,7 @@ __metadata:
     "@babel/helper-regex": 7.10.5
     "@babel/preset-env": 7.20.2
     "@babel/preset-react": 7.18.6
-    "@babel/preset-typescript": 7.18.6
+    "@babel/preset-typescript": 7.21.0
     "@babel/register": 7.18.9
     "@babel/runtime": 7.20.13
     "@navikt/ds-codemod": 2.1.7
