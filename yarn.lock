@@ -7067,9 +7067,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/cli@npm:2.12.0":
-  version: 2.12.0
-  resolution: "@sentry/cli@npm:2.12.0"
+"@sentry/cli@npm:2.14.3":
+  version: 2.14.3
+  resolution: "@sentry/cli@npm:2.14.3"
   dependencies:
     https-proxy-agent: ^5.0.0
     node-fetch: ^2.6.7
@@ -7078,7 +7078,7 @@ __metadata:
     which: ^2.0.2
   bin:
     sentry-cli: bin/sentry-cli
-  checksum: 83d4d62932d90a1d9b171a8dcd8a49a34357c0326c994b9d078bcfd084ac1555eb6e268e64ebdbf00e9572a20b89885924731a6a497438463a0bb7ca74c39b69
+  checksum: 82655c300ec2a01ff43c1b7a5402411ba35cd584a201fedce72e9184cf3fcba038b8cbcf0d4e78c495aa82c2a3e87616e954506db7c19d2dba74fcedb70272d0
   languageName: node
   linkType: hard
 
@@ -14925,7 +14925,7 @@ __metadata:
     "@babel/register": 7.18.9
     "@babel/runtime": 7.20.13
     "@navikt/ds-codemod": 2.1.7
-    "@sentry/cli": 2.12.0
+    "@sentry/cli": 2.14.3
     "@storybook/addon-essentials": 6.5.16
     "@storybook/addon-links": 6.5.16
     "@storybook/addons": 6.5.16
