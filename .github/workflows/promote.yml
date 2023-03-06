@@ -11,7 +11,7 @@ jobs:
     with:
       issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
       environment: dev
-      platform: fss
+      platform: gcp
     secrets: inherit
 
   promote-prod:
@@ -25,5 +25,5 @@ jobs:
     with:
       issue-number: ${{ github.event.client_payload.github.payload.issue.number }}
       environment: prod
-      platform: fss
+      platform: gcp
     secrets: inherit
