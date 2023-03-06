@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Button, Table, Link } from '@navikt/ds-react';
+import { Button, Table } from '@navikt/ds-react';
 import { NextFilled } from '@navikt/ds-icons';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
@@ -47,9 +47,7 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
       {oppgave.journalpostHarMangler
         && (
           <Table.DataCell>
-            <Link href="https://gosys-q1.dev.intern.nav.no/gosys" target="_blank" className={styles.gosysLink}>
-              <FormattedMessage id="Oppgave.Gosys.Link" />
-            </Link>
+            <FormattedMessage id="Oppgave.Gosys" />
           </Table.DataCell>
         )}
     </Table.Row>
