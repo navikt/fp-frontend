@@ -62,7 +62,7 @@ const detaljertJournalpostMal = {
       familieHendelseJf: {
         familiehHendelseDato: '2022-04-15',
         familihendelseType: familieHendelseType.FODSEL,
-      }
+      },
     },
     {
       saksnummer: '125416597',
@@ -73,7 +73,7 @@ const detaljertJournalpostMal = {
       familieHendelseJf: {
         familiehHendelseDato: '2022-04-15',
         familihendelseType: familieHendelseType.ADOPSJON,
-      }
+      },
     },
     {
       saksnummer: '155462542',
@@ -83,7 +83,7 @@ const detaljertJournalpostMal = {
       familieHendelseJf: {
         familiehHendelseDato: '2022-02-01',
         familihendelseType: familieHendelseType.TERMIN,
-      }
+      },
     },
     {
       saksnummer: '175419131',

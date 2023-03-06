@@ -47,7 +47,7 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
       {oppgave.journalpostHarMangler
         && (
           <Table.DataCell>
-              <FormattedMessage id="Oppgave.Gosys" />
+            <FormattedMessage id="Oppgave.Gosys" />
           </Table.DataCell>
         )}
     </Table.Row>

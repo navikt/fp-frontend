@@ -7,12 +7,12 @@ import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
 import { FagsakStatus } from '@navikt/ft-kodeverk';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import { familieHendelseType } from '@navikt/fp-kodeverk';
 import dayjs from 'dayjs';
 import { Clipboard } from '@navikt/ft-plattform-komponenter';
 import styles from './sakDetaljer.module.css';
 import { finnYtelseTekst } from '../form/VelgSakForm';
 import JournalFagsak, { FamilieHendelse } from '../../../typer/journalFagsakTsType';
-import { familieHendelseType } from '@navikt/fp-kodeverk';
 
 const velgSakLenke = (saksnummer: string): string => (`/fagsak/${saksnummer}/`);
 
@@ -34,28 +34,31 @@ const finnStatusTekst = (statusKode: string): string => {
 const finnFamilieHendelseTekstKode = (hendelseType: string): string => {
   switch (hendelseType) {
     case familieHendelseType.ADOPSJON:
-      return "Journal.Sak.FamAdopsjon";
+      return 'Journal.Sak.FamAdopsjon';
     case familieHendelseType.FODSEL:
-      return "Journal.Sak.FamFødsel";
+      return 'Journal.Sak.FamFødsel';
     case familieHendelseType.TERMIN:
-      return "Journal.Sak.FamTermin";
+      return 'Journal.Sak.FamTermin';
     case familieHendelseType.OMSORG:
-      return "Journal.Sak.FamOmsorg";
+      return 'Journal.Sak.FamOmsorg';
     default:
       throw new Error(`Ukjent familiehendelse ${hendelseType}`);
   }
-}
+};
 
 const utledFamileihendelsetekst = (familieHendelseJf?: FamilieHendelse): ReactElement | null => {
   if (!familieHendelseJf?.familihendelseType || !familieHendelseJf?.familiehHendelseDato) {
     return null;
   }
   const tekstKode = finnFamilieHendelseTekstKode(familieHendelseJf.familihendelseType);
-  return (<FormattedMessage
-        id={tekstKode}
-        values={{ famDato: dayjs(familieHendelseJf.familiehHendelseDato).format(DDMMYYYY_DATE_FORMAT) }}
-      />)
-}
+  return (
+    <FormattedMessage
+      id={tekstKode}
+      values={{ famDato: dayjs(familieHendelseJf.familiehHendelseDato).format(DDMMYYYY_DATE_FORMAT) }}
+    />
+  );
+};
+
 const lagEtikett = (fagsakStatus: string): ReactElement => {
   switch (fagsakStatus) {
     case FagsakStatus.AVSLUTTET:

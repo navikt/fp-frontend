@@ -11,7 +11,7 @@ type JournalFagsak = Readonly<{
     opprettetDato: string;
     førsteUttaksdato?: string;
     status: FagsakStatus;
-    familieHendelseJf?: FamilieHendelse; 
+    familieHendelseJf?: FamilieHendelse;
 }>
 
 export default JournalFagsak;
