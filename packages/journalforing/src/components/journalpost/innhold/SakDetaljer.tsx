@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import {
   Label, Detail, Tag,
 } from '@navikt/ds-react';
@@ -11,7 +11,8 @@ import dayjs from 'dayjs';
 import { Clipboard } from '@navikt/ft-plattform-komponenter';
 import styles from './sakDetaljer.module.css';
 import { finnYtelseTekst } from '../form/VelgSakForm';
-import JournalFagsak from '../../../typer/journalFagsakTsType';
+import JournalFagsak, { FamilieHendelse } from '../../../typer/journalFagsakTsType';
+import { familieHendelseType } from '@navikt/fp-kodeverk';
 
 const velgSakLenke = (saksnummer: string): string => (`/fagsak/${saksnummer}/`);
 
@@ -30,6 +31,31 @@ const finnStatusTekst = (statusKode: string): string => {
   }
 };
 
+const finnFamilieHendelseTekstKode = (hendelseType: string): string => {
+  switch (hendelseType) {
+    case familieHendelseType.ADOPSJON:
+      return "Journal.Sak.FamAdopsjon";
+    case familieHendelseType.FODSEL:
+      return "Journal.Sak.FamFødsel";
+    case familieHendelseType.TERMIN:
+      return "Journal.Sak.FamTermin";
+    case familieHendelseType.OMSORG:
+      return "Journal.Sak.FamOmsorg";
+    default:
+      throw new Error(`Ukjent familiehendelse ${hendelseType}`);
+  }
+}
+
+const utledFamileihendelsetekst = (familieHendelseJf?: FamilieHendelse): ReactElement | null => {
+  if (!familieHendelseJf?.familihendelseType || !familieHendelseJf?.familiehHendelseDato) {
+    return null;
+  }
+  const tekstKode = finnFamilieHendelseTekstKode(familieHendelseJf.familihendelseType);
+  return (<FormattedMessage
+        id={tekstKode}
+        values={{ famDato: dayjs(familieHendelseJf.familiehHendelseDato).format(DDMMYYYY_DATE_FORMAT) }}
+      />)
+}
 const lagEtikett = (fagsakStatus: string): ReactElement => {
   switch (fagsakStatus) {
     case FagsakStatus.AVSLUTTET:
@@ -54,6 +80,7 @@ type OwnProps = Readonly<{
 const SakDetaljer: FunctionComponent<OwnProps> = ({
   sak,
 }) => {
+  const famTekst = useMemo(() => utledFamileihendelsetekst(sak.familieHendelseJf), [sak]);
   const lenke = velgSakLenke(sak.saksnummer);
   return (
     <div className={styles.sakContainer}>
@@ -75,13 +102,20 @@ const SakDetaljer: FunctionComponent<OwnProps> = ({
         <FlexRow>
           <FlexColumn>
             <Detail>
-              <FormattedMessage id="Journal.Sak.OpprettetDato" values={{ opprettetDato: dayjs(sak.datoOpprettet).format(DDMMYYYY_DATE_FORMAT) }} />
+              <FormattedMessage id="Journal.Sak.OpprettetDato" values={{ opprettetDato: dayjs(sak.opprettetDato).format(DDMMYYYY_DATE_FORMAT) }} />
             </Detail>
           </FlexColumn>
-          {sak.sistEndret && (
+          {sak.førsteUttaksdato && (
             <FlexColumn>
               <Detail>
-                <FormattedMessage id="Journal.Sak.EndretDato" values={{ endretDato: dayjs(sak.sistEndret).format(DDMMYYYY_DATE_FORMAT) }} />
+                <FormattedMessage id="Journal.Sak.FørsteUttak" values={{ førsteUttak: dayjs(sak.førsteUttaksdato).format(DDMMYYYY_DATE_FORMAT) }} />
+              </Detail>
+            </FlexColumn>
+          )}
+          {famTekst && (
+            <FlexColumn>
+              <Detail>
+                {famTekst}
               </Detail>
             </FlexColumn>
           )}

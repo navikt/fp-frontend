@@ -5,7 +5,7 @@ import { RestApiMock } from '@navikt/fp-utils-test';
 import { withRouter } from '@navikt/fp-storybook-utils';
 import { NavAnsatt } from '@navikt/fp-types';
 
-import { fagsakYtelseType, fagsakStatus } from '@navikt/fp-kodeverk';
+import { fagsakYtelseType, fagsakStatus, familieHendelseType } from '@navikt/fp-kodeverk';
 import { RestApiPathsKeys, requestApi } from './data/fpfordelRestApi';
 import JournalforingIndex from './OppgaveJournalføringIndex';
 import OppgaveOversikt from './typer/oppgaveOversiktTsType';
@@ -54,25 +54,47 @@ const detaljertJournalpostMal = {
   ],
   fagsaker: [
     {
+      saksnummer: '125416592',
+      ytelseType: fagsakYtelseType.FORELDREPENGER,
+      opprettetDato: '2022-01-02',
+      førsteUttaksdato: '2022-05-02',
+      status: fagsakStatus.LOPENDE,
+      familieHendelseJf: {
+        familiehHendelseDato: '2022-04-15',
+        familihendelseType: familieHendelseType.FODSEL,
+      }
+    },
+    {
       saksnummer: '125416597',
       ytelseType: fagsakYtelseType.FORELDREPENGER,
-      datoOpprettet: '2022-01-02',
-      sistEndret: '2022-06-03',
-      status: fagsakStatus.LOPENDE,
+      opprettetDato: '2022-01-02',
+      førsteUttaksdato: '2022-05-02',
+      status: fagsakStatus.UNDER_BEHANDLING,
+      familieHendelseJf: {
+        familiehHendelseDato: '2022-04-15',
+        familihendelseType: familieHendelseType.ADOPSJON,
+      }
     },
     {
       saksnummer: '155462542',
       ytelseType: fagsakYtelseType.SVANGERSKAPSPENGER,
-      datoOpprettet: '2022-01-02',
-      sistEndret: '2022-06-03',
+      datoOpprettet: '2022-03-02',
       status: fagsakStatus.AVSLUTTET,
+      familieHendelseJf: {
+        familiehHendelseDato: '2022-02-01',
+        familihendelseType: familieHendelseType.TERMIN,
+      }
     },
     {
       saksnummer: '175419131',
       ytelseType: fagsakYtelseType.FORELDREPENGER,
       datoOpprettet: '2022-01-02',
-      sistEndret: '2022-06-03',
-      status: fagsakStatus.AVSLUTTET,
+      førsteUttaksdato: '2022-02-02',
+      status: fagsakStatus.OPPRETTET,
+      familieHendelseJf: {
+        familiehHendelseDato: '2022-03-01',
+        familihendelseType: familieHendelseType.OMSORG,
+      },
     },
   ],
 } as Journalpost;
