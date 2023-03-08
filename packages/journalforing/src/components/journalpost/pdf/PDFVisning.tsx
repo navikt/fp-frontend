@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import styles from './pdfvisning.module.css';
 import JournalDokument from '../../../typer/journalDokumentTsType';
 
 type OwnProps = Readonly<{
@@ -12,8 +11,8 @@ type OwnProps = Readonly<{
 const PDFVisning: FunctionComponent<OwnProps> = ({
   dokument,
 }) => (
-  <div className={styles.pdfContainer}>
-    <iframe id="iframepdf" src={dokument.lenke} width="1300" height="1000" title={dokument.tittel} />
+  <div>
+    <iframe id="iframepdf" src={dokument.lenke} width="1300" height="1000" title={dokument.tittel}/>
   </div>
 );
 

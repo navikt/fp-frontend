@@ -19,6 +19,7 @@
     "ValgtOppgave.RelaterteSaker": "Saker som kan være knyttet til innholdet",
     "ValgtOppgave.KnyttTilSak": "Knytt til sak",
     "ValgtOppgave.Dokumenter": "Innhold",
+    "ValgtOppgave.Dokument.Knapp": "Dokument {dok}/{antall}",
     "ValgtOppgave.Dokumenter.Tom": "Journalposten har ingen dokumenter",
     "Journal.Sak.Avsluttet": "Avsluttet",
     "Journal.Sak.Løpende": "Løpende",

@@ -3,5 +3,6 @@
 }
 
 .pdfKolonne {
-  width: 65%;
+  display: inline-block;
+  max-width: 65%;
 }
