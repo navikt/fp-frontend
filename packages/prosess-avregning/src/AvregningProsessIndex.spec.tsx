@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
@@ -8,8 +7,6 @@ import * as stories from './AvregningProsessIndex.stories';
 const { AksjonspunktVurderFeilutbetaling, SimuleringspanelUtenAksjonspunkt } = composeStories(stories);
 
 describe('<AvregningProsessIndex>', () => {
-  moment.locale('nb');
-
   it('skal velge ingen tilbakebetaling og så bekrefte', async () => {
     const lagre = vi.fn();
 
