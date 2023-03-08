@@ -12,7 +12,7 @@ const PDFVisning: FunctionComponent<OwnProps> = ({
   dokument,
 }) => (
   <div>
-    <iframe id="iframepdf" src={dokument.lenke} width="1300" height="1000" title={dokument.tittel}/>
+    <iframe id="iframepdf" src={dokument.lenke} width="1300" height="1000" title={dokument.tittel} />
   </div>
 );
 
