@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classnames from 'classnames/bind';
-import moment from 'moment/moment';
+import dayjs from 'dayjs';
 import { BodyShort } from '@navikt/ds-react';
 
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
@@ -30,7 +30,7 @@ const isNextPeriod = (
   monthAndYear: { month: string, year: string },
   nextPeriod: string,
 ): boolean => `${monthAndYear.month}${monthAndYear.year}` === (nextPeriod
-  ? moment(nextPeriod).format('MMMMYY') : false);
+  ? dayjs(nextPeriod).format('MMMMYY') : false);
 
 const getHeaderCodes = (
   showCollapseButton: boolean,
@@ -77,10 +77,14 @@ const createColumns = (
   rangeOfMonths: { month: string, year: string}[],
   nextPeriod: string,
 ): ReactElement[] => {
-  const nextPeriodFormatted = `${moment(nextPeriod).format('MMMMYY')}`;
+  const nextPeriodFormatted = `${dayjs(nextPeriod).format('MMMMYY')}`;
 
   const perioderData = rangeOfMonths.map((monthAndYear) => {
-    const periodeExists = perioder.find((periode) => moment(periode.periode.tom).format('MMMMYY') === `${monthAndYear.month}${monthAndYear.year}`);
+    const periodeExists = perioder.find((periode) => {
+      const test = dayjs(periode.periode.tom).format('MMMMYY');
+      debugger;
+      return test.toLowerCase() === `${monthAndYear.month}${monthAndYear.year}`;
+    });
     return periodeExists || { måned: `${monthAndYear.month}${monthAndYear.year}`, beløp: null };
   });
 
@@ -89,7 +93,7 @@ const createColumns = (
       key={`columnIndex${månedIndex + 1}`}
       className={classNames({
         rodTekst: måned.beløp < 0,
-        lastColumn: måned.måned ? måned.måned === nextPeriodFormatted : moment(måned.periode.tom).format('MMMMYY') === nextPeriodFormatted,
+        lastColumn: måned.måned ? måned.måned === nextPeriodFormatted : dayjs(måned.periode.tom).format('MMMMYY') === nextPeriodFormatted,
       })}
     >
       {formatCurrencyNoKr(måned.beløp)}
@@ -120,7 +124,7 @@ const getPeriodeFom = (periodeFom: string, nesteUtbPeriodeFom: string): string =
 
 const getPeriod = (ingenPerioderMedAvvik: boolean, periodeFom: string, mottaker: Mottaker): { month: string, year: string}[] => {
   const fomDato = avvikBruker(ingenPerioderMedAvvik, mottaker.mottakerType)
-    ? moment(mottaker.nestUtbPeriodeTom).subtract(1, 'months').format()
+    ? dayjs(mottaker.nestUtbPeriodeTom).subtract(1, 'months').format()
     : getPeriodeFom(periodeFom, mottaker.nesteUtbPeriodeFom);
   return getRangeOfMonths(fomDato, mottaker.nestUtbPeriodeTom);
 };

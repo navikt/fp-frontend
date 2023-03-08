@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { FormattedMessage } from 'react-intl';
 import { Label, BodyShort } from '@navikt/ds-react';
 
@@ -42,7 +42,7 @@ const AvregningSummary: FunctionComponent<OwnProps> = ({
       {!ingenPerioderMedAvvik && (
         <>
           <Label size="small">
-            { `${moment(fom).format(DDMMYYYY_DATE_FORMAT)} - ${moment(tom).format(DDMMYYYY_DATE_FORMAT)}`}
+            { `${dayjs(fom).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(tom).format(DDMMYYYY_DATE_FORMAT)}`}
           </Label>
           <VerticalSpacer sixteenPx />
           <FlexContainer>
