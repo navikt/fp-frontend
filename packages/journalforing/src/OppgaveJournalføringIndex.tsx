@@ -3,10 +3,14 @@ import React, {
 } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
-import { Heading, Link } from '@navikt/ds-react';
+import {
+  Heading, Link, Checkbox, CheckboxGroup,
+} from '@navikt/ds-react';
 import { Back } from '@navikt/ds-icons';
 import { NavAnsatt } from '@navikt/fp-types';
-import { LoadingPanel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, LoadingPanel, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import messages from '../i18n/nb_NO.json';
 import JournalforingPanel from './components/JournalforingPanel';
@@ -41,6 +45,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({
   navAnsatt,
 }) => {
   const [valgtOppgave, setValgtOppgave] = useState<OppgaveOversikt | undefined>(undefined);
+  const [filtrerVekkOppgaver, setFiltrerVekkOppgaver] = useState<boolean>(false);
   const avbryt = useCallback(() => {
     setValgtOppgave(undefined);
   }, [valgtOppgave]);
@@ -71,6 +76,15 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({
   if (status !== RestApiState.SUCCESS) {
     return null;
   }
+
+  const filtrerOppgaveliste = (valg: boolean[]) => {
+    if (valg.length < 1) {
+      setFiltrerVekkOppgaver(false);
+    } else {
+      setFiltrerVekkOppgaver(valg[0]);
+    }
+  };
+
   return (
     <RawIntlProvider value={intl}>
       <div className={styles.header}>
@@ -82,14 +96,31 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({
             </Link>
           )}
         <VerticalSpacer eightPx />
-        <Heading size="medium">
-          <FormattedMessage id="Journalforing.Tittel" />
-        </Heading>
+        <FlexContainer>
+          <FlexRow>
+            <FlexColumn className={styles.tittelKol}>
+              <Heading size="medium">
+                <FormattedMessage id="Journalforing.Tittel" />
+              </Heading>
+            </FlexColumn>
+            <FlexColumn className={styles.avhukingKol}>
+              <CheckboxGroup
+                hideLegend
+                defaultChecked={false}
+                legend={<FormattedMessage id="Oppgavetabell.Filtrer" />}
+                onChange={filtrerOppgaveliste}
+              >
+                <Checkbox value><FormattedMessage id="Oppgavetabell.Filtrer" /></Checkbox>
+              </CheckboxGroup>
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
       </div>
       <JournalforingPanel>
         <JournalføringIndex
           valgtOppgave={valgtOppgave}
           oppgaver={alleOppgaver}
+          skjulUløseligeOppgaver={filtrerVekkOppgaver}
           innhentAlleOppgaver={innhentAlleOppgaver}
           navAnsatt={navAnsatt}
           setValgtOppgave={setValgtOppgave}
