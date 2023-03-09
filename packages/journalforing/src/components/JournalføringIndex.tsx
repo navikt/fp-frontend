@@ -16,6 +16,7 @@ type OwnProps = Readonly<{
   setValgtOppgave: (oppgave: OppgaveOversikt) => void;
   avbrytVisningAvJournalpost: () => void;
   valgtOppgave?: OppgaveOversikt;
+  skjulUløseligeOppgaver: boolean;
 }>;
 
 /**
@@ -28,11 +29,12 @@ const JournalføringIndex: FunctionComponent<OwnProps> = ({
   valgtOppgave,
   setValgtOppgave,
   avbrytVisningAvJournalpost,
+  skjulUløseligeOppgaver,
 }) => (
   <FlexContainer>
     <VerticalSpacer sixteenPx />
     {!valgtOppgave
-        && <OppgaveTabell oppgaver={oppgaver} setValgtOppgave={setValgtOppgave} />}
+        && <OppgaveTabell oppgaver={oppgaver} setValgtOppgave={setValgtOppgave} skjulUløseligeOppgaver={skjulUløseligeOppgaver} />}
     {valgtOppgave
         && (
           <OppgaveDetaljertIndex

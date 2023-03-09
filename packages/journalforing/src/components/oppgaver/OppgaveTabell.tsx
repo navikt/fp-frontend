@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import { BodyShort, Table } from '@navikt/ds-react';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -7,8 +7,16 @@ import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import OppgaveTabellRad from './OppgaveTabellRad';
 import styles from './oppgaveTabell.module.css';
 
+const finnRelevanteOppgaver = (oppgaver: OppgaveOversikt[], skjulUløseligeOppgaver: boolean): OppgaveOversikt[] => {
+  if (skjulUløseligeOppgaver) {
+    return oppgaver.filter((opp) => !opp.journalpostHarMangler);
+  }
+  return oppgaver;
+};
+
 type OwnProps = Readonly<{
   oppgaver: OppgaveOversikt[];
+  skjulUløseligeOppgaver: boolean;
   setValgtOppgave: (oppgave: OppgaveOversikt) => void;
 }>;
 
@@ -17,6 +25,7 @@ type OwnProps = Readonly<{
  */
 const OppgaveTabell: FunctionComponent<OwnProps> = ({
   oppgaver,
+  skjulUløseligeOppgaver,
   setValgtOppgave,
 }) => {
   if (oppgaver.length < 1) {
@@ -28,6 +37,7 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({
       </>
     );
   }
+  const gjeldendeOppgaver = useMemo(() => finnRelevanteOppgaver(oppgaver, skjulUløseligeOppgaver), [oppgaver, skjulUløseligeOppgaver]);
   return (
     <div className={styles.oppgaverTabell}>
       <Table>
@@ -44,7 +54,7 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {oppgaver.map((oppgave) => (
+          {gjeldendeOppgaver.map((oppgave) => (
             <OppgaveTabellRad oppgave={oppgave} setValgtOppgave={setValgtOppgave} key={oppgave.id} />
           ))}
         </Table.Body>
