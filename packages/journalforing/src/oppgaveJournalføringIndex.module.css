@@ -18,3 +18,13 @@
 .avhukingKol {
   width: 10%;
 }
+
+@media all and (max-width: 1600px) {
+  .tittelKol {
+    width: 70%;
+  }
+
+  .avhukingKol {
+    width: 30%;
+  }
+}
