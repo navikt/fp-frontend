@@ -1,3 +1,4 @@
+// @ts-ignore
 import { BeregningAksjonspunktSubmitType } from '@navikt/ft-prosess-beregningsgrunnlag';
 import BekreftSvangerskapspengervilkarAp from './prosess/BekreftSvangerskapspengervilkarAp';
 import SoknadsfristAp from './prosess/SoknadsfristAp';
