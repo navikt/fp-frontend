@@ -3,10 +3,14 @@ import React, {
 } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
-import { Heading, Link, Checkbox, CheckboxGroup } from '@navikt/ds-react';
+import {
+  Heading, Link, Checkbox, CheckboxGroup,
+} from '@navikt/ds-react';
 import { Back } from '@navikt/ds-icons';
 import { NavAnsatt } from '@navikt/fp-types';
-import { FlexColumn, FlexContainer, FlexRow, LoadingPanel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, LoadingPanel, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import messages from '../i18n/nb_NO.json';
 import JournalforingPanel from './components/JournalforingPanel';
