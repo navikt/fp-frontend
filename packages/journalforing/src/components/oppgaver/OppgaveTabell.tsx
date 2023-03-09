@@ -8,10 +8,10 @@ import OppgaveTabellRad from './OppgaveTabellRad';
 import styles from './oppgaveTabell.module.css';
 
 const finnRelevanteOppgaver = (oppgaver: OppgaveOversikt[], skjulUløseligeOppgaver: boolean): OppgaveOversikt[] => {
-  if (skjulUløseligeOppgaver) {
-    return oppgaver.filter((opp) => !opp.journalpostHarMangler);
+  if (oppgaver.length < 1 || !skjulUløseligeOppgaver) {
+    return oppgaver;
   }
-  return oppgaver;
+  return oppgaver.filter((opp) => !opp.journalpostHarMangler);
 };
 
 type OwnProps = Readonly<{
@@ -28,7 +28,8 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({
   skjulUløseligeOppgaver,
   setValgtOppgave,
 }) => {
-  if (oppgaver.length < 1) {
+  const gjeldendeOppgaver = useMemo(() => finnRelevanteOppgaver(oppgaver, skjulUløseligeOppgaver), [oppgaver, skjulUløseligeOppgaver]);
+  if (gjeldendeOppgaver.length < 1) {
     return (
       <>
         <VerticalSpacer eightPx />
@@ -37,7 +38,6 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({
       </>
     );
   }
-  const gjeldendeOppgaver = useMemo(() => finnRelevanteOppgaver(oppgaver, skjulUløseligeOppgaver), [oppgaver, skjulUløseligeOppgaver]);
   return (
     <div className={styles.oppgaverTabell}>
       <Table>
