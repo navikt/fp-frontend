@@ -39,8 +39,6 @@ const findSkjaringstidspunkt = (dato: string): string => moment(dato).add(1, 'da
 const sorterEtterOpptjeningFom = (opptjeningPerioder: OpptjeningAktivitet[]): OpptjeningAktivitet[] => [...opptjeningPerioder]
   .sort((o1, o2) => moment(o1.opptjeningFom).diff(moment(o2.opptjeningFom)));
 
-const DOKUMENTASJON_VIL_BLI_INNHENTET = 'DOKUMENTASJON_VIL_BLI_INNHENTET';
-
 const addDay = (dato: string): string => addDaysToDate(dato, 1);
 
 const filtrerOpptjeningAktiviteter = (
