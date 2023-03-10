@@ -3,9 +3,7 @@ import React, {
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
-import {
-  Alert, Button, BodyShort, Detail,
-} from '@navikt/ds-react';
+import { Button, BodyShort, Detail } from '@navikt/ds-react';
 
 import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
 import { ISO_DATE_FORMAT, addDaysToDate } from '@navikt/ft-utils';
@@ -57,7 +55,6 @@ interface OwnProps {
   hasOpenAksjonspunkter: boolean;
   opptjeningFomDato: string;
   opptjeningTomDato: string;
-  dokStatus?: string;
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
@@ -79,7 +76,6 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
   hasAksjonspunkt,
   hasOpenAksjonspunkter,
   opptjeningAktiviteter,
-  dokStatus,
   opptjeningFomDato,
   opptjeningTomDato,
   readOnly,
@@ -173,19 +169,6 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
           <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
             {getAksjonspunktHelpTexts(filtrerteOgSorterteOpptjeningsaktiviteter)}
           </AksjonspunktHelpTextTemp>
-          <VerticalSpacer twentyPx />
-        </>
-      )}
-      {dokStatus && (
-        <>
-          <Alert size="small" variant="info" className={styles.info}>
-            <FormattedMessage
-              id={dokStatus === DOKUMENTASJON_VIL_BLI_INNHENTET ? 'OpptjeningFaktaForm.DetErInnhentetDok' : 'OpptjeningFaktaForm.DetErIkkeInnhentetDok'}
-              values={{
-                b: (chunks: any) => <b>{chunks}</b>,
-              }}
-            />
-          </Alert>
           <VerticalSpacer twentyPx />
         </>
       )}

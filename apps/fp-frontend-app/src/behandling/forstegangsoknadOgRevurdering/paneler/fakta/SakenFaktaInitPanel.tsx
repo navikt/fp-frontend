@@ -25,7 +25,8 @@ const OVERSTYRING_AP_CODES = [AksjonspunktCode.MANUELL_MARKERING_AV_UTLAND_SAKST
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.UTLAND_DOK_STATUS, BehandlingFellesApiKeys.SOKNAD];
 type EndepunktPanelData = {
   utlandDokStatus?: {
-    dokStatus: string;
+    dokStatus?: string;
+    utlandMarkering?: string
   };
   soknad: Soknad;
 }

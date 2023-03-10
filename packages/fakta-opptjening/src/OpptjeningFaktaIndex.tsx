@@ -13,16 +13,12 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   opptjening?: Opptjening;
-  utlandDokStatus?: {
-    dokStatus: string;
-  };
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 const OpptjeningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
   opptjening,
   aksjonspunkter,
-  utlandDokStatus,
   alleMerknaderFraBeslutter,
   alleKodeverk,
   harApneAksjonspunkter,
@@ -33,14 +29,12 @@ const OpptjeningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps
   setFormData,
 }) => {
   const fastsattOpptjening = opptjening ? opptjening.fastsattOpptjening : undefined;
-  const dokStatus = utlandDokStatus ? utlandDokStatus.dokStatus : undefined;
   const opptjeningAktiviteter = opptjening ? opptjening.opptjeningAktivitetList : undefined;
   return (
     <RawIntlProvider value={intl}>
       <OpptjeningFaktaPanel
         opptjeningFomDato={fastsattOpptjening ? fastsattOpptjening.opptjeningFom : undefined}
         opptjeningTomDato={fastsattOpptjening ? fastsattOpptjening.opptjeningTom : undefined}
-        dokStatus={dokStatus}
         readOnly={readOnly}
         hasOpenAksjonspunkter={harApneAksjonspunkter}
         hasAksjonspunkt={aksjonspunkter[0] !== undefined}

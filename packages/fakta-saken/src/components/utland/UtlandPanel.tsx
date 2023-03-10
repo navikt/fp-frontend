@@ -26,7 +26,10 @@ const {
   AUTOMATISK_MARKERING_AV_UTENLANDSSAK, MANUELL_MARKERING_AV_UTLAND_SAKSTYPE,
 } = AksjonspunktCode;
 
-const getUtlandSakstype = (aksjonspunkter: Aksjonspunkt[]): string => {
+const getUtlandSakstype = (aksjonspunkter: Aksjonspunkt[], utlandMarkering?: string): string => {
+  if (utlandMarkering && utlandMarkering !== 'NASJONAL') {
+    return utlandMarkering;
+  }
   const ap = aksjonspunkter.find((a) => a.definisjon === MANUELL_MARKERING_AV_UTLAND_SAKSTYPE);
   if (ap?.status === aksjonspunktStatus.UTFORT && ap?.begrunnelse) {
     return ap.begrunnelse;
@@ -55,6 +58,7 @@ type FormValues = {
 
 interface OwnProps {
   aksjonspunkter: Aksjonspunkt[];
+  utlandMarkering: string;
   readOnly: boolean;
   submitCallback: (data: OverstyringUtenlandssakMarkeringAp) => Promise<void>;
 }
@@ -62,14 +66,15 @@ interface OwnProps {
 const UtlandPanel: FunctionComponent<OwnProps> = ({
   readOnly,
   aksjonspunkter,
+  utlandMarkering,
   submitCallback,
 }) => {
   const intl = useIntl();
 
   const formMethods = useForm<FormValues>({
     defaultValues: {
-      utlandSakstype: getUtlandSakstype(aksjonspunkter),
-      gammelVerdi: getUtlandSakstype(aksjonspunkter),
+      utlandSakstype: getUtlandSakstype(aksjonspunkter, utlandMarkering),
+      gammelVerdi: getUtlandSakstype(aksjonspunkter, utlandMarkering),
     },
   });
 

@@ -14,12 +14,9 @@ import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_PERIODER_MED_OPPTJENING];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.OPPTJENING, BehandlingFellesApiKeys.UTLAND_DOK_STATUS];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.OPPTJENING];
 type EndepunktPanelData = {
   opptjening?: Opptjening;
-  utlandDokStatus?: {
-    dokStatus: string;
-  };
 }
 
 interface OwnProps {
