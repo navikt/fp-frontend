@@ -3,9 +3,7 @@ import React, {
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
-import {
-  Alert, Button, BodyShort, Detail,
-} from '@navikt/ds-react';
+import { Button, BodyShort, Detail } from '@navikt/ds-react';
 
 import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
 import { ISO_DATE_FORMAT, addDaysToDate } from '@navikt/ft-utils';
@@ -41,8 +39,6 @@ const findSkjaringstidspunkt = (dato: string): string => moment(dato).add(1, 'da
 const sorterEtterOpptjeningFom = (opptjeningPerioder: OpptjeningAktivitet[]): OpptjeningAktivitet[] => [...opptjeningPerioder]
   .sort((o1, o2) => moment(o1.opptjeningFom).diff(moment(o2.opptjeningFom)));
 
-const DOKUMENTASJON_VIL_BLI_INNHENTET = 'DOKUMENTASJON_VIL_BLI_INNHENTET';
-
 const addDay = (dato: string): string => addDaysToDate(dato, 1);
 
 const filtrerOpptjeningAktiviteter = (
@@ -57,7 +53,6 @@ interface OwnProps {
   hasOpenAksjonspunkter: boolean;
   opptjeningFomDato: string;
   opptjeningTomDato: string;
-  dokStatus?: string;
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
@@ -79,7 +74,6 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
   hasAksjonspunkt,
   hasOpenAksjonspunkter,
   opptjeningAktiviteter,
-  dokStatus,
   opptjeningFomDato,
   opptjeningTomDato,
   readOnly,
@@ -173,19 +167,6 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
           <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
             {getAksjonspunktHelpTexts(filtrerteOgSorterteOpptjeningsaktiviteter)}
           </AksjonspunktHelpTextTemp>
-          <VerticalSpacer twentyPx />
-        </>
-      )}
-      {dokStatus && (
-        <>
-          <Alert size="small" variant="info" className={styles.info}>
-            <FormattedMessage
-              id={dokStatus === DOKUMENTASJON_VIL_BLI_INNHENTET ? 'OpptjeningFaktaForm.DetErInnhentetDok' : 'OpptjeningFaktaForm.DetErIkkeInnhentetDok'}
-              values={{
-                b: (chunks: any) => <b>{chunks}</b>,
-              }}
-            />
-          </Alert>
           <VerticalSpacer twentyPx />
         </>
       )}

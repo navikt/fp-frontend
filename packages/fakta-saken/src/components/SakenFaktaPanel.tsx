@@ -21,6 +21,7 @@ interface OwnProps {
   soknad?: Soknad;
   aksjonspunkter: Aksjonspunkt[];
   dokStatus?: string;
+  utlandMarkering?: string;
   harApneAksjonspunkter: boolean;
   submitCallback: (data: OverstyringUtenlandssakMarkeringAp | MerkOpptjeningUtlandAp | OverstyringAvklarStartdatoForPeriodenAp) => Promise<void>;
   readOnly: boolean;
@@ -39,6 +40,7 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
   soknad,
   aksjonspunkter,
   dokStatus,
+  utlandMarkering,
   harApneAksjonspunkter,
   alleMerknaderFraBeslutter,
   submitCallback,
@@ -61,6 +63,7 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
         <FlexColumn className={styles.col}>
           <UtlandPanel
             aksjonspunkter={aksjonspunkter}
+            utlandMarkering={utlandMarkering}
             submitCallback={submitCallback}
             readOnly={readOnly}
           />

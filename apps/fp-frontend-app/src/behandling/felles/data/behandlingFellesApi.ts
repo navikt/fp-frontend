@@ -49,7 +49,7 @@ export const BehandlingFellesApiKeys = {
   PREVIEW_TILBAKEKREVING_MESSAGE: new RestKey<Behandling, any>('PREVIEW_TILBAKEKREVING_MESSAGE'),
   VERGE_OPPRETT: new RestKey<Behandling, any>('VERGE_OPPRETT'),
   VERGE_FJERN: new RestKey<Behandling, any>('VERGE_FJERN'),
-  UTLAND_DOK_STATUS: new RestKey<{ dokStatus: string }, void>('UTLAND_DOK_STATUS'),
+  UTLAND_DOK_STATUS: new RestKey<{ dokStatus?: string, utlandMarkering?: string }, void>('UTLAND_DOK_STATUS'),
   ARBEIDSGIVERE_OVERSIKT: new RestKey<ArbeidsgiverOpplysningerWrapper, void>('ARBEIDSGIVERE_OVERSIKT'),
   BEHANDLING_PERSONOVERSIKT: new RestKey<Personoversikt, void>('BEHANDLING_PERSONOVERSIKT'),
   ARBEID_OG_INNTEKT: new RestKey<ArbeidOgInntektsmelding, void>('ARBEID_OG_INNTEKT'),
