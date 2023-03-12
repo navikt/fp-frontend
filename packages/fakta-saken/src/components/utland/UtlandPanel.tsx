@@ -10,14 +10,15 @@ import {
 
 import { RadioGroupPanel, Form } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { aksjonspunktStatus, AksjonspunktCode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
+import {
+  aksjonspunktStatus, AksjonspunktCode, hasAksjonspunkt, UtlandMarkeringKode,
+} from '@navikt/fp-kodeverk';
 
 import { Aksjonspunkt } from '@navikt/fp-types';
 import { OverstyringUtenlandssakMarkeringAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import editUtlandIcon from '../../images/endre.svg';
 import editUtlandDisabledIcon from '../../images/endre_disablet.svg';
-import UtlandSakstypeKode from './utlandSakstypeKode';
 import UtlandEndretModal from './UtlandEndretModal';
 
 import styles from './utlandPanel.module.css';
@@ -26,22 +27,25 @@ const {
   AUTOMATISK_MARKERING_AV_UTENLANDSSAK, MANUELL_MARKERING_AV_UTLAND_SAKSTYPE,
 } = AksjonspunktCode;
 
-const getUtlandSakstype = (aksjonspunkter: Aksjonspunkt[]): string => {
+const getUtlandSakstype = (aksjonspunkter: Aksjonspunkt[], utlandMarkering?: string): string => {
+  if (utlandMarkering && utlandMarkering !== UtlandMarkeringKode.NASJONAL) {
+    return utlandMarkering;
+  }
   const ap = aksjonspunkter.find((a) => a.definisjon === MANUELL_MARKERING_AV_UTLAND_SAKSTYPE);
   if (ap?.status === aksjonspunktStatus.UTFORT && ap?.begrunnelse) {
     return ap.begrunnelse;
   }
   if (hasAksjonspunkt(AUTOMATISK_MARKERING_AV_UTENLANDSSAK, aksjonspunkter)) {
-    return UtlandSakstypeKode.EØS_BOSATT_NORGE;
+    return UtlandMarkeringKode.EØS_BOSATT_NORGE;
   }
-  return UtlandSakstypeKode.NASJONAL;
+  return UtlandMarkeringKode.NASJONAL;
 };
 
 const getSakstypeId = (vurdering: string): string => {
   switch (vurdering) {
-    case UtlandSakstypeKode.EØS_BOSATT_NORGE:
+    case UtlandMarkeringKode.EØS_BOSATT_NORGE:
       return 'UtlandPanel.EøsBosattNorge';
-    case UtlandSakstypeKode.BOSATT_UTLAND:
+    case UtlandMarkeringKode.BOSATT_UTLAND:
       return 'UtlandPanel.BosattUtland';
     default:
       return 'UtlandPanel.Nasjonal';
@@ -55,6 +59,7 @@ type FormValues = {
 
 interface OwnProps {
   aksjonspunkter: Aksjonspunkt[];
+  utlandMarkering: string;
   readOnly: boolean;
   submitCallback: (data: OverstyringUtenlandssakMarkeringAp) => Promise<void>;
 }
@@ -62,14 +67,15 @@ interface OwnProps {
 const UtlandPanel: FunctionComponent<OwnProps> = ({
   readOnly,
   aksjonspunkter,
+  utlandMarkering,
   submitCallback,
 }) => {
   const intl = useIntl();
 
   const formMethods = useForm<FormValues>({
     defaultValues: {
-      utlandSakstype: getUtlandSakstype(aksjonspunkter),
-      gammelVerdi: getUtlandSakstype(aksjonspunkter),
+      utlandSakstype: getUtlandSakstype(aksjonspunkter, utlandMarkering),
+      gammelVerdi: getUtlandSakstype(aksjonspunkter, utlandMarkering),
     },
   });
 
@@ -79,7 +85,7 @@ const UtlandPanel: FunctionComponent<OwnProps> = ({
   const slaPaEditeringAvUtland = useCallback(() => toggleEditUtland(true), []);
   const slaAvEditeringAvUtland = useCallback(() => { formMethods.reset(); toggleEditUtland(false); }, []);
 
-  const utlandSakstype = formMethods.watch('utlandSakstype') || UtlandSakstypeKode.NASJONAL;
+  const utlandSakstype = formMethods.watch('utlandSakstype') || UtlandMarkeringKode.NASJONAL;
 
   const handleSubmit = formMethods.handleSubmit((values) => submitCallback({
     kode: MANUELL_MARKERING_AV_UTLAND_SAKSTYPE,
@@ -132,13 +138,13 @@ const UtlandPanel: FunctionComponent<OwnProps> = ({
                 validate={[required]}
                 radios={[{
                   label: intl.formatMessage({ id: 'UtlandPanel.Nasjonal' }),
-                  value: UtlandSakstypeKode.NASJONAL,
+                  value: UtlandMarkeringKode.NASJONAL,
                 }, {
                   label: intl.formatMessage({ id: 'UtlandPanel.EøsBosattNorge' }),
-                  value: UtlandSakstypeKode.EØS_BOSATT_NORGE,
+                  value: UtlandMarkeringKode.EØS_BOSATT_NORGE,
                 }, {
                   label: intl.formatMessage({ id: 'UtlandPanel.BosattUtland' }),
-                  value: UtlandSakstypeKode.BOSATT_UTLAND,
+                  value: UtlandMarkeringKode.BOSATT_UTLAND,
                 }]}
               />
             </FlexColumn>
