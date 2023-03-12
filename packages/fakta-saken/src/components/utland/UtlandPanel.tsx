@@ -11,7 +11,7 @@ import {
 import { RadioGroupPanel, Form } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import {
-  aksjonspunktStatus, AksjonspunktCode, hasAksjonspunkt, UtlandMarkeringKode
+  aksjonspunktStatus, AksjonspunktCode, hasAksjonspunkt, UtlandMarkeringKode,
 } from '@navikt/fp-kodeverk';
 
 import { Aksjonspunkt } from '@navikt/fp-types';
