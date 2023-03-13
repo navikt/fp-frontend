@@ -22,7 +22,7 @@ import styles from './oppgaveJournalføringIndex.module.css';
 const intl = createIntl(messages);
 const TOM_ARRAY: OppgaveOversikt[] = [];
 
-const tilatteBrukere = ['H137440', 'A138225', 'J116396', 'W119202', 'S148979'];
+const tilatteBrukere = ['H137440', 'A138225', 'J116396', 'W119202', 'S148979', 'R107802'];
 
 // Mildertidig intill tilganger er avklart og testing er ferdig
 const harTilgangTilÅBrukeJournalføring = (navAnsatt: NavAnsatt): boolean => {
