@@ -40,7 +40,7 @@ const findPathToBehandling = (saksnummer: string, location: Location, alleBehand
   return pathToBehandlinger(saksnummer);
 };
 
-const finnUtlandMarkeringTekst = (fagsak: Fagsak): string => {
+const finnUtlandMarkeringTekst = (fagsak: Fagsak): string | undefined => {
   if (fagsak.utlandMarkering === UtlandMarkeringKode.EØS_BOSATT_NORGE) {
     return 'EØS';
   } else if (fagsak.utlandMarkering === UtlandMarkeringKode.BOSATT_UTLAND) {
