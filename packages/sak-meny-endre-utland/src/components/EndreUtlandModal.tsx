@@ -20,7 +20,7 @@ const getUtlandSakstype = (utlandMarkering?: string): string => {
 };
 
 export type FormValues = {
-  utlandSakstype?: string;
+  utlandSakstype: string;
 }
 
 interface OwnProps {

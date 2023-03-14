@@ -245,7 +245,7 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
             <MenyEndreUtlandIndex
               saksnummer={fagsak.saksnummer}
               utlandMarkering={fagsak.utlandMarkering}
-              lagNyBehandling={endreUtlandMarkering}
+              endreUtlandMarkering={endreUtlandMarkering}
               lukkModal={lukkModal}
             />
           )),
