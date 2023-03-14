@@ -24,6 +24,7 @@ export type FormValues = {
 }
 
 interface OwnProps {
+  saksnummer: string;
   utlandMarkering? :string;
   cancelEvent: () => void;
   submitCallback: (data: {
@@ -51,13 +52,6 @@ const EndreUtlandModal: FunctionComponent<OwnProps> = ({
     },
   });
 
-  const utlandSakstype = formMethods.watch('utlandSakstype');
-
-  const onSubmit = (values: FormValues) => submitCallback({
-    ...values,
-    utlandMarkering: utlandSakstype,
-  });
-
   return (
     <Modal
       className={styles.modal}
@@ -68,7 +62,7 @@ const EndreUtlandModal: FunctionComponent<OwnProps> = ({
       shouldCloseOnOverlayClick={false}
     >
       <Modal.Content>
-        <Form formMethods={formMethods} onSubmit={onSubmit}>
+        <Form formMethods={formMethods} onSubmit={submitCallback}>
           <Heading size="small">
             <FormattedMessage id="MenyEndreUtlandIndex.UtlandTittel" />
           </Heading>
