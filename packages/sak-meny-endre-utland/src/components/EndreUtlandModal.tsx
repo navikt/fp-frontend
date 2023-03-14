@@ -12,7 +12,12 @@ import { UtlandMarkeringKode } from '@navikt/fp-kodeverk';
 
 import styles from './endreUtlandModal.module.css';
 
-const getUtlandSakstype = (utlandMarkering?: string): string => utlandMarkering !== undefined ? utlandMarkering : UtlandMarkeringKode.NASJONAL;
+const getUtlandSakstype = (utlandMarkering?: string): string => {
+  if (utlandMarkering === null || utlandMarkering === undefined) {
+    return UtlandMarkeringKode.NASJONAL;
+  }
+  return utlandMarkering;
+};
 
 export type FormValues = {
   utlandSakstype?: string;
