@@ -122,9 +122,7 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   }, []);
 
   const { startRequest: endreUtlandsmerking } = restApiHooks.useRestApiRunner(FpsakApiKeys.ENDRE_UTLAND);
-  const endreUtlandMarkering = useCallback((params) => {
-    endreUtlandsmerking(params).then(() => fagsak.utlandMarkering = params.utlandMarkering);
-  }, []);
+  const endreUtlandMarkering = useCallback((params) => endreUtlandsmerking(params).then(() => fagsak.utlandMarkering = params.utlandMarkering), []);
 
   const uuidForSistLukkede = useMemo(() => getUuidForSisteLukkedeForsteEllerRevurd(alleBehandlinger), [alleBehandlinger]);
   const previewHenleggBehandling = useVisForhandsvisningAvMelding(behandling?.type);

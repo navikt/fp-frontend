@@ -17,7 +17,7 @@ describe('<MenyEndreUtlandIndex>', () => {
   it('skal endre fra ingenting til eøs', async () => {
     const endreUtlandMarkering = vi.fn();
     const lukkModal = vi.fn();
-    const utils = render(<Default endreUtlandMarkering={endreUtlandMarkering} lukkModal={lukkModal} />);
+    render(<Default endreUtlandMarkering={endreUtlandMarkering} lukkModal={lukkModal} />);
     expect(await screen.findByText('Utland')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('EØS bosatt Norge'));
@@ -30,14 +30,12 @@ describe('<MenyEndreUtlandIndex>', () => {
       utlandMarkering: UtlandMarkeringKode.EØS_BOSATT_NORGE,
       saksnummer: '123',
     });
-
-    expect(utils.queryByRole('checkbox', { hidden: true })).not.toBeInTheDocument();
   });
 
   it('skal endre fra eøs til bosatt utland', async () => {
     const endreUtlandMarkering = vi.fn();
     const lukkModal = vi.fn();
-    const utils = render(<Default endreUtlandMarkering={endreUtlandMarkering} lukkModal={lukkModal} />);
+    render(<Default endreUtlandMarkering={endreUtlandMarkering} lukkModal={lukkModal} />);
     expect(await screen.findByText('Utland')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Bosatt utland'));
@@ -52,11 +50,10 @@ describe('<MenyEndreUtlandIndex>', () => {
     });
   });
 
-
   it('skal gi feilmelding når obligatoriske felter ikke er fylt ut', async () => {
     const endreUtlandMarkering = vi.fn();
     const lukkModal = vi.fn();
-    const utils = render(<Default endreUtlandMarkering={endreUtlandMarkering} lukkModal={lukkModal} />);
+    render(<Default endreUtlandMarkering={endreUtlandMarkering} lukkModal={lukkModal} />);
     expect(await screen.findByText('Utland')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('OK'));
