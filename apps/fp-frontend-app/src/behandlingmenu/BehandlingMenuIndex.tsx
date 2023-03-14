@@ -21,7 +21,7 @@ import { MenySettPaVentIndex, getMenytekst as getSettPaVentMenytekst } from '@na
 import { MenyHenleggIndex, getMenytekst as getHenleggMenytekst } from '@navikt/fp-sak-meny-henlegg';
 import { MenyApneForEndringerIndex, getMenytekst as getApneForEndringerMenytekst } from '@navikt/fp-sak-meny-apne-for-endringer';
 import { MenyNyBehandlingIndex, getMenytekst as getNyBehandlingMenytekst } from '@navikt/fp-sak-meny-ny-behandling';
-import { MenyEndreUtland, getMenytekst as getEndreUtlandMenytekst } from '@navikt/fp-sak-meny-endre-utland';
+import { MenyEndreUtlandIndex, getMenytekst as getEndreUtlandMenytekst } from '@navikt/fp-sak-meny-endre-utland';
 import { VergeBehandlingmenyValg, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import behandlingEventHandler from '../behandling/BehandlingEventHandler';
@@ -244,7 +244,7 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
           )),
         new MenyData(!fagsak.sakSkalTilInfotrygd, getEndreUtlandMenytekst())
           .medModal((lukkModal) => (
-            <MenyEndreUtland
+            <MenyEndreUtlandIndex
               saksnummer={fagsak.saksnummer}
               utlandMarkering={fagsak.utlandMarkering}
               lagNyBehandling={endreUtlandMarkering}
