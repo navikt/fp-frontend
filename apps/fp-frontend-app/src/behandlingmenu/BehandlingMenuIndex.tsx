@@ -21,6 +21,7 @@ import { MenySettPaVentIndex, getMenytekst as getSettPaVentMenytekst } from '@na
 import { MenyHenleggIndex, getMenytekst as getHenleggMenytekst } from '@navikt/fp-sak-meny-henlegg';
 import { MenyApneForEndringerIndex, getMenytekst as getApneForEndringerMenytekst } from '@navikt/fp-sak-meny-apne-for-endringer';
 import { MenyNyBehandlingIndex, getMenytekst as getNyBehandlingMenytekst } from '@navikt/fp-sak-meny-ny-behandling';
+import { MenyEndreUtland, getMenytekst as getEndreUtlandMenytekst } from '@navikt/fp-sak-meny-endre-utland';
 import { VergeBehandlingmenyValg, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import behandlingEventHandler from '../behandling/BehandlingEventHandler';
@@ -118,6 +119,11 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   const lagNyBehandling = useCallback((isTilbakekreving, params) => {
     const lagNy = isTilbakekreving ? lagNyBehandlingFpTilbake : lagNyBehandlingFpSak;
     lagNy(params).then(() => hentFagsakdataPåNytt());
+  }, []);
+
+  const { startRequest: endreUtlandsmerking } = restApiHooks.useRestApiRunner(FpsakApiKeys.ENDRE_UTLAND);
+  const endreUtlandMarkering = useCallback((params) => {
+    endreUtlandsmerking(params).then(() => fagsak.utlandMarkering = params.utlandMarkering);
   }, []);
 
   const uuidForSistLukkede = useMemo(() => getUuidForSisteLukkedeForsteEllerRevurd(alleBehandlinger), [alleBehandlinger]);
@@ -233,6 +239,15 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
               revurderingArsaker={menyKodeverk.getKodeverkForBehandlingstype(KodeverkType.BEHANDLING_AARSAK, BehandlingType.REVURDERING)}
               ytelseType={fagsak.fagsakYtelseType}
               lagNyBehandling={lagNyBehandling}
+              lukkModal={lukkModal}
+            />
+          )),
+        new MenyData(!fagsak.sakSkalTilInfotrygd, getEndreUtlandMenytekst())
+          .medModal((lukkModal) => (
+            <MenyEndreUtland
+              saksnummer={fagsak.saksnummer}
+              utlandMarkering={fagsak.utlandMarkering}
+              lagNyBehandling={endreUtlandMarkering}
               lukkModal={lukkModal}
             />
           )),

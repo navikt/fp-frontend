@@ -59,6 +59,7 @@ export const FpsakApiKeys = {
   PREVIEW_MESSAGE_TILBAKEKREVING: new RestKey<any, any>('PREVIEW_MESSAGE_TILBAKEKREVING'),
   PREVIEW_MESSAGE_FORMIDLING: new RestKey<any, ForhåndsvisMeldingParams>('PREVIEW_MESSAGE_FORMIDLING'),
   PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE: new RestKey<any, any>('PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE'),
+  ENDRE_UTLAND: new RestKey<void, { saksnummer: string, utlandMarkering: string }>('ENDRE_UTLAND'),
 };
 
 const endpoints = new RestApiConfigBuilder()
@@ -73,6 +74,7 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('fagsak-full', FpsakApiKeys.FETCH_FAGSAK)
   .withRel('tilbake-fagsak-full', FpsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE)
   .withRel('sak-dokumentliste', FpsakApiKeys.ALL_DOCUMENTS)
+  .withRel('endre-utland-markering', FpsakApiKeys.ENDRE_UTLAND)
   .withRel('tilbake-kan-opprette-behandling', FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES)
   .withRel('tilbake-kan-opprette-revurdering', FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES)
 
