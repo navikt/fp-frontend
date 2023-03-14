@@ -27,7 +27,7 @@ const MenyEndreUtlandIndex: FunctionComponent<OwnProps> = ({
   const submit = useCallback((formValues: FormValues) => {
     const params = {
       saksnummer: formValues.saksnummer,
-      utlandMarkering: formValues.utlandSakstype,
+      utlandMarkering: formValues.utlandMarkering,
     };
 
     endreUtlandMarkering(params);

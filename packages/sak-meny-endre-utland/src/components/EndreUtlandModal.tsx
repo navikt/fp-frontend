@@ -21,10 +21,12 @@ const getUtlandSakstype = (utlandMarkering?: string): string => {
 
 export type FormValues = {
   saksnummer: string;
-  utlandSakstype: string;
+  utlandMarkering: string;
 }
 
 interface OwnProps {
+  saksnummer: string;
+  utlandMarkering: string;
   cancelEvent: () => void;
   submitCallback: (formData: FormValues) => void;
 }
@@ -45,8 +47,8 @@ const EndreUtlandModal: FunctionComponent<OwnProps> = ({
 
   const formMethods = useForm<FormValues>({
     defaultValues: {
-      saksnummer: saksnummer,
-      utlandSakstype: getUtlandSakstype(utlandMarkering),
+      saksnummer,
+      utlandMarkering: getUtlandSakstype(utlandMarkering),
     },
   });
 
@@ -66,7 +68,7 @@ const EndreUtlandModal: FunctionComponent<OwnProps> = ({
           </Heading>
           <VerticalSpacer sixteenPx />
           <RadioGroupPanel
-            name="utlandSakstype"
+            name="utlandMarkering"
             hideLegend
             validate={[required]}
             radios={[{
