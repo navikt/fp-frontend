@@ -26,7 +26,7 @@ describe('<MenyEndreUtlandIndex>', () => {
 
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(endreUtlandMarkering).toHaveBeenCalledTimes(1));
-    expect(endreUtlandMarkering).toHaveBeenNthCalledWith({
+    expect(endreUtlandMarkering).toHaveBeenNthCalledWith(1, {
       utlandMarkering: UtlandMarkeringKode.EØS_BOSATT_NORGE,
       saksnummer: '123',
     });
@@ -44,7 +44,7 @@ describe('<MenyEndreUtlandIndex>', () => {
 
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(endreUtlandMarkering).toHaveBeenCalledTimes(1));
-    expect(endreUtlandMarkering).toHaveBeenNthCalledWith({
+    expect(endreUtlandMarkering).toHaveBeenNthCalledWith(1, {
       utlandMarkering: UtlandMarkeringKode.BOSATT_UTLAND,
       saksnummer: '123',
     });
