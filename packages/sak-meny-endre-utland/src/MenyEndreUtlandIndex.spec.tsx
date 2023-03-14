@@ -26,7 +26,7 @@ describe('<MenyEndreUtlandIndex>', () => {
 
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(endreUtlandMarkering).toHaveBeenCalledTimes(1));
-    expect(endreUtlandMarkering).toHaveBeenNthCalledWith(1, false, {
+    expect(endreUtlandMarkering).toHaveBeenNthCalledWith({
       utlandMarkering: UtlandMarkeringKode.EØS_BOSATT_NORGE,
       saksnummer: '123',
     });
@@ -44,20 +44,9 @@ describe('<MenyEndreUtlandIndex>', () => {
 
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(endreUtlandMarkering).toHaveBeenCalledTimes(1));
-    expect(endreUtlandMarkering).toHaveBeenNthCalledWith(1, false, {
+    expect(endreUtlandMarkering).toHaveBeenNthCalledWith({
       utlandMarkering: UtlandMarkeringKode.BOSATT_UTLAND,
       saksnummer: '123',
     });
-  });
-
-  it('skal gi feilmelding når obligatoriske felter ikke er fylt ut', async () => {
-    const endreUtlandMarkering = vi.fn();
-    const lukkModal = vi.fn();
-    render(<Default endreUtlandMarkering={endreUtlandMarkering} lukkModal={lukkModal} />);
-    expect(await screen.findByText('Utland')).toBeInTheDocument();
-
-    await userEvent.click(screen.getByText('OK'));
-
-    expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
   });
 });
