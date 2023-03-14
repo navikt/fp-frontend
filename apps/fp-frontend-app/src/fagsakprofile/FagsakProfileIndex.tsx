@@ -41,12 +41,10 @@ const findPathToBehandling = (saksnummer: string, location: Location, alleBehand
 };
 
 const finnUtlandMarkeringTekst = (fagsak: Fagsak): string | undefined => {
-  if (fagsak.utlandMarkering === UtlandMarkeringKode.EØS_BOSATT_NORGE) {
-    return 'EØS';
-  } else if (fagsak.utlandMarkering === UtlandMarkeringKode.BOSATT_UTLAND) {
-    return 'Utland';
+  if (!fagsak.utlandMarkering || fagsak.utlandMarkering === UtlandMarkeringKode.NASJONAL) {
+    return undefined;
   }
-  return undefined;
+  return fagsak.utlandMarkering === UtlandMarkeringKode.EØS_BOSATT_NORGE ? 'EØS' : 'Utland';
 };
 
 interface OwnProps {
