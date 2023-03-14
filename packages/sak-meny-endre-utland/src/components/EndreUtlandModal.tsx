@@ -20,17 +20,13 @@ const getUtlandSakstype = (utlandMarkering?: string): string => {
 };
 
 export type FormValues = {
+  saksnummer: string;
   utlandSakstype: string;
 }
 
 interface OwnProps {
-  saksnummer: string;
-  utlandMarkering? :string;
   cancelEvent: () => void;
-  submitCallback: (data: {
-    saksnummer: string,
-    utlandMarkering: string,
-  } & FormValues) => void;
+  submitCallback: (formData: FormValues) => void;
 }
 
 /**
@@ -42,12 +38,14 @@ interface OwnProps {
 const EndreUtlandModal: FunctionComponent<OwnProps> = ({
   submitCallback,
   cancelEvent,
+  saksnummer,
   utlandMarkering,
 }) => {
   const intl = useIntl();
 
   const formMethods = useForm<FormValues>({
     defaultValues: {
+      saksnummer: saksnummer,
       utlandSakstype: getUtlandSakstype(utlandMarkering),
     },
   });
