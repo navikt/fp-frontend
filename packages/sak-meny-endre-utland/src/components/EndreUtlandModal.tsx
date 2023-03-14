@@ -12,13 +12,6 @@ import { UtlandMarkeringKode } from '@navikt/fp-kodeverk';
 
 import styles from './endreUtlandModal.module.css';
 
-const getUtlandSakstype = (utlandMarkering?: string): string => {
-  if (utlandMarkering === null || utlandMarkering === undefined) {
-    return UtlandMarkeringKode.NASJONAL;
-  }
-  return utlandMarkering;
-};
-
 export type FormValues = {
   saksnummer: string;
   utlandMarkering: string;
@@ -26,7 +19,7 @@ export type FormValues = {
 
 interface OwnProps {
   saksnummer: string;
-  utlandMarkering: string;
+  utlandMarkering?: string;
   cancelEvent: () => void;
   submitCallback: (formData: FormValues) => void;
 }
@@ -48,7 +41,7 @@ const EndreUtlandModal: FunctionComponent<OwnProps> = ({
   const formMethods = useForm<FormValues>({
     defaultValues: {
       saksnummer,
-      utlandMarkering: getUtlandSakstype(utlandMarkering),
+      utlandMarkering: utlandMarkering || UtlandMarkeringKode.NASJONAL,
     },
   });
 
