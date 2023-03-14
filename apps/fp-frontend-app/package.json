@@ -80,6 +80,7 @@
     "@navikt/fp-sak-historikk": "1.0.0",
     "@navikt/fp-sak-meldinger": "1.0.0",
     "@navikt/fp-sak-meny-apne-for-endringer": "1.0.0",
+    "@navikt/fp-sak-meny-endre-utland": "1.0.0",
     "@navikt/fp-sak-meny-henlegg": "1.0.0",
     "@navikt/fp-sak-meny-ny-behandling": "1.0.0",
     "@navikt/fp-sak-meny-sett-pa-vent": "1.0.0",
