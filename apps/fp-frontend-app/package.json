@@ -103,7 +103,7 @@
     "@navikt/ft-sak-behandling-velger": "2.0.4",
     "@navikt/ft-sak-dekorator": "2.0.4",
     "@navikt/ft-sak-dokumenter": "2.0.4",
-    "@navikt/ft-sak-fagsak-profil": "2.0.4",
+    "@navikt/ft-sak-fagsak-profil": "2.0.6",
     "@navikt/ft-sak-infosider": "2.0.4",
     "@navikt/ft-sak-meny": "2.0.4",
     "@navikt/ft-sak-risikoklassifisering": "2.0.4",
