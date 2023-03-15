@@ -25,7 +25,6 @@ const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.UTLAND_DOK_STATUS, Behan
 type EndepunktPanelData = {
   utlandDokStatus?: {
     dokStatus?: string;
-    utlandMarkering?: string
   };
   soknad: Soknad;
 }
