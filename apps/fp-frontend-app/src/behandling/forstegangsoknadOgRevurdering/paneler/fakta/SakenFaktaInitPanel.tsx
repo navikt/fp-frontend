@@ -16,11 +16,10 @@ import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-  AksjonspunktCode.MANUELL_MARKERING_AV_UTLAND_SAKSTYPE,
   AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO,
 ];
 
-const OVERSTYRING_AP_CODES = [AksjonspunktCode.MANUELL_MARKERING_AV_UTLAND_SAKSTYPE, AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO];
+const OVERSTYRING_AP_CODES = [AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.UTLAND_DOK_STATUS, BehandlingFellesApiKeys.SOKNAD];
 type EndepunktPanelData = {
