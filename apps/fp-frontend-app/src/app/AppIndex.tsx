@@ -74,6 +74,7 @@ import '@navikt/fp-prosess-vilkar-soknadsfrist/dist/style.css';
 
 import '@navikt/fp-sak-historikk/dist/style.css';
 import '@navikt/fp-sak-meldinger/dist/style.css';
+import '@navikt/fp-sak-meny-endre-utland/dist/style.css';
 import '@navikt/fp-sak-meny-henlegg/dist/style.css';
 import '@navikt/fp-sak-meny-ny-behandling/dist/style.css';
 import '@navikt/fp-sak-sok/dist/style.css';
