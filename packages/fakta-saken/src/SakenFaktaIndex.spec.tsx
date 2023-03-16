@@ -11,38 +11,6 @@ const { EndringAvUtland, ApentAksjonspunktForInnhentingAvDokumentasjon } = compo
 
 describe('<SakenFaktaIndex>', () => {
   Modal.setAppElement('body');
-  it('skal endre utland, få opp lagre-modal og så lagre', async () => {
-    const lagre = vi.fn();
-
-    render(<EndringAvUtland submitCallback={lagre} />);
-
-    expect(await screen.findByText('Utland')).toBeInTheDocument();
-    expect(screen.getByText('Saken er satt til')).toBeInTheDocument();
-    expect(screen.getByText('Nasjonal')).toBeInTheDocument();
-
-    expect(screen.queryByText('Innhentelse av dokumentasjon')).not.toBeInTheDocument();
-
-    await userEvent.click(screen.getByAltText('Endre perioden'));
-
-    expect(screen.getByText('Lagre').closest('button')).toBeDisabled();
-
-    await userEvent.click(screen.getByText('Bosatt utland'));
-
-    expect(await screen.findByText('Lagre')).toBeEnabled();
-
-    await userEvent.click(screen.getByText('Lagre'));
-
-    expect(await screen.findByText('Utland endres, ved behov flytt saken til riktig enhet.')).toBeInTheDocument();
-
-    await userEvent.click(screen.getByText('OK'));
-
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
-      begrunnelse: 'BOSATT_UTLAND',
-      gammelVerdi: 'NASJONAL',
-      kode: '6068',
-    });
-  });
 
   it('skal få aksjonspunkt om innehenting av dokumentasjon, svar at vil bli innhentet og bekreft', async () => {
     const lagre = vi.fn();

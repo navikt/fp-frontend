@@ -14,7 +14,6 @@ interface OwnProps {
   erSvangerskapspenger: boolean;
   utlandDokStatus?: {
     dokStatus?: string;
-    utlandMarkering?: string
   };
 }
 
@@ -39,7 +38,6 @@ const SakenFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = (
       soknad={soknad}
       aksjonspunkter={aksjonspunkter}
       dokStatus={utlandDokStatus?.dokStatus}
-      utlandMarkering={utlandDokStatus?.utlandMarkering}
       harApneAksjonspunkter={harApneAksjonspunkter}
       submitCallback={submitCallback}
       readOnly={readOnly}

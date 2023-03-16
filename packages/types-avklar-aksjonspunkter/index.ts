@@ -1,7 +1,6 @@
 export type { default as FaktaAksjonspunkt } from './src/FaktaAksjonspunkt';
 export type { default as AvklarVergeAp } from './src/fakta/AvklarVergeAp';
 export type { default as MerkOpptjeningUtlandAp } from './src/fakta/MerkOpptjeningUtlandAp';
-export type { default as OverstyringUtenlandssakMarkeringAp } from './src/fakta/OverstyringUtenlandssakMarkeringAp';
 export type { default as BekreftEktefelleAksjonspunktAp } from './src/fakta/BekreftEktefelleAksjonspunktAp';
 export type { default as BekreftDokumentertDatoAksjonspunktAp } from './src/fakta/BekreftDokumentertDatoAksjonspunktAp';
 export type { default as BekreftSvangerskapspengerAp } from './src/fakta/BekreftSvangerskapspengerAp';

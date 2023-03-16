@@ -4,7 +4,6 @@ import {
 } from '@navikt/ft-fakta-beregning';
 import AvklarVergeAp from './fakta/AvklarVergeAp';
 import MerkOpptjeningUtlandAp from './fakta/MerkOpptjeningUtlandAp';
-import OverstyringUtenlandssakMarkeringAp from './fakta/OverstyringUtenlandssakMarkeringAp';
 import AvklarAktivitetsPerioderAp from './fakta/AvklarAktivitetsPerioderAp';
 import AvklarFaktaForForeldreansvarAksjonspunktAp from './fakta/AvklarFaktaForForeldreansvarAksjonspunktAp';
 import AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp from './fakta/AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp';
@@ -32,7 +31,6 @@ import VurderArbeidsforholdPermisjonAp from './fakta/VurderArbeidsforholdPermisj
 
 export type FaktaAksjonspunkt = AvklarVergeAp
   | MerkOpptjeningUtlandAp
-  | OverstyringUtenlandssakMarkeringAp
   | AvklarAktivitetsPerioderAp
   | BekreftEktefelleAksjonspunktAp
   | BekreftDokumentertDatoAksjonspunktAp
