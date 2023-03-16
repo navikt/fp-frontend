@@ -45,7 +45,7 @@
     "@babel/preset-typescript": "7.21.0",
     "@babel/register": "7.21.0",
     "@navikt/ds-codemod": "2.6.0",
-    "@sentry/cli": "2.14.4",
+    "@sentry/cli": "2.15.1",
     "@storybook/addon-essentials": "6.5.16",
     "@storybook/addon-links": "6.5.16",
     "@storybook/addons": "6.5.16",
