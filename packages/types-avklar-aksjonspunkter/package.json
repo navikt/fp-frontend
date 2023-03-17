@@ -23,7 +23,7 @@
     "@navikt/ft-prosess-beregningsgrunnlag": "6.0.5"
   },
   "devDependencies": {
-    "typescript": "4.9.5",
+    "typescript": "5.0.2",
     "vite": "4.1.4"
   },
   "exports": {
