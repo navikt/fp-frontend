@@ -1,5 +1,8 @@
 {
-  "ingress": "https://fpsak.dev.intern.nav.no",
+  "ingresses": [
+    "https://fpsak.dev.intern.nav.no",
+    "https://fpsak.intern.dev.nav.no"
+  ],
   "minReplicas": "1",
   "maxReplicas": "2",
   "env": "development",
