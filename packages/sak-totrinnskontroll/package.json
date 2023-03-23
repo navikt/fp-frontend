@@ -29,7 +29,7 @@
     "@navikt/fp-konstanter": "1.0.0",
     "@navikt/fp-types": "1.0.0",
     "@navikt/fp-types-avklar-aksjonspunkter": "1.0.0",
-    "@navikt/ft-fakta-beregning": "4.1.4",
+    "@navikt/ft-fakta-beregning": "4.1.6",
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": "7.0.10",
     "@navikt/ft-form-hooks": "4.0.10",
     "@navikt/ft-form-validators": "2.0.9",

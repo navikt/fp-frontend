@@ -3771,7 +3771,7 @@ __metadata:
     "@navikt/fp-types": 1.0.0
     "@navikt/fp-types-avklar-aksjonspunkter": 1.0.0
     "@navikt/fp-utils-test": 1.0.0
-    "@navikt/ft-fakta-beregning": 4.1.4
+    "@navikt/ft-fakta-beregning": 4.1.6
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.0.10
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": 2.0.10
     "@navikt/ft-form-hooks": 4.0.10
@@ -5276,7 +5276,7 @@ __metadata:
     "@navikt/fp-storybook-utils": 1.0.0
     "@navikt/fp-types": 1.0.0
     "@navikt/fp-utils-test": 1.0.0
-    "@navikt/ft-fakta-beregning": 4.1.4
+    "@navikt/ft-fakta-beregning": 4.1.6
     "@navikt/ft-kodeverk": 2.0.8
     "@navikt/ft-prosess-beregningsgrunnlag": 6.0.12
     "@navikt/ft-types": 2.0.8
@@ -5590,7 +5590,7 @@ __metadata:
     "@navikt/fp-types": 1.0.0
     "@navikt/fp-types-avklar-aksjonspunkter": 1.0.0
     "@navikt/fp-utils-test": 1.0.0
-    "@navikt/ft-fakta-beregning": 4.1.4
+    "@navikt/ft-fakta-beregning": 4.1.6
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.0.10
     "@navikt/ft-form-hooks": 4.0.10
     "@navikt/ft-form-validators": 2.0.9
@@ -5680,7 +5680,7 @@ __metadata:
   dependencies:
     "@navikt/fp-kodeverk": 1.0.0
     "@navikt/fp-types": 1.0.0
-    "@navikt/ft-fakta-beregning": 4.1.4
+    "@navikt/ft-fakta-beregning": 4.1.6
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.0.10
     "@navikt/ft-prosess-beregningsgrunnlag": 6.0.12
     typescript: 5.0.2
@@ -5715,9 +5715,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ft-fakta-beregning@npm:4.1.4":
-  version: 4.1.4
-  resolution: "@navikt/ft-fakta-beregning@npm:4.1.4::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-beregning%2F4.1.4%2F8ba84002e73918a5cf4a73a3c36ad63012c6de46"
+"@navikt/ft-fakta-beregning@npm:4.1.6":
+  version: 4.1.6
+  resolution: "@navikt/ft-fakta-beregning@npm:4.1.6::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-beregning%2F4.1.6%2Ffd199dec4fff4b032e5bc9777a5cf1911d1e63f1"
   dependencies:
     "@navikt/ds-css": 2.8.1
     "@navikt/ds-icons": 2.8.1
@@ -5752,7 +5752,7 @@ __metadata:
     react-dom: 18.2.0
     react-hook-form: 7.43.5
     react-intl: 6.2.10
-  checksum: d039163d80080e30a48e016e56def9b10dcf08f0645b9860aa3cf9378582723b343022b3fb635e42acdbe8e184eadc2ce010247383697361d4df7054b74c239e
+  checksum: 37d661338621862111fdd707c63957f049a9f13217c03b8767cc15fd6b5dc6651bc45e0030f3f0db93264ac86ed12afabe1bee1a82dbe24743f5ad69189c8883
   languageName: node
   linkType: hard
 
