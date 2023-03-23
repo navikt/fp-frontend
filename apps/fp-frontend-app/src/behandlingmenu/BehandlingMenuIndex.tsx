@@ -121,8 +121,8 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
     lagNy(params).then(() => hentFagsakdataPåNytt());
   }, []);
 
-  const { startRequest: endreUtlandsmerking } = restApiHooks.useRestApiRunner(FpsakApiKeys.ENDRE_UTLAND);
-  const endreUtlandMarkering = useCallback((params) => endreUtlandsmerking(params).then(() => hentFagsakdataPåNytt()), []);
+  const { startRequest: endreSaksmerking } = restApiHooks.useRestApiRunner(FpsakApiKeys.ENDRE_SAK_MARKERING);
+  const endreFagsakMarkering = useCallback((params) => endreSaksmerking(params).then(() => hentFagsakdataPåNytt()), []);
 
   const uuidForSistLukkede = useMemo(() => getUuidForSisteLukkedeForsteEllerRevurd(alleBehandlinger), [alleBehandlinger]);
   const previewHenleggBehandling = useVisForhandsvisningAvMelding(behandling?.type);
@@ -244,8 +244,8 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
           .medModal((lukkModal) => (
             <MenyEndreUtlandIndex
               saksnummer={fagsak.saksnummer}
-              utlandMarkering={fagsak.utlandMarkering}
-              endreUtlandMarkering={endreUtlandMarkering}
+              fagsakMarkering={fagsak.fagsakMarkering}
+              endreFagsakMarkering={endreFagsakMarkering}
               lukkModal={lukkModal}
             />
           )),

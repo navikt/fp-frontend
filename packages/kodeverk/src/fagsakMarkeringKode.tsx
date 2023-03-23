@@ -1,0 +1,8 @@
+enum FagsakMarkeringKode {
+  NASJONAL = 'NASJONAL',
+  EØS_BOSATT_NORGE = 'EØS_BOSATT_NORGE',
+  BOSATT_UTLAND = 'BOSATT_UTLAND',
+  SAMMENSATT_KONTROLL = 'SAMMENSATT_KONTROLL',
+}
+
+export default FagsakMarkeringKode;
