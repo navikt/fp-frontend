@@ -817,6 +817,10 @@ const historikkEndretFeltVerdiTypeCodes = {
     kode: 'BOSATT_UTLAND',
     verdiId: 'HistorikkEndretFeltVerdiType.BosattUtland',
   },
+  SAMMENSATT_KONTROLL: {
+    kode: 'SAMMENSATT_KONTROLL',
+    verdiId: 'HistorikkEndretFeltVerdiType.SammensattKontroll',
+  },
   SØKER_ER_I_PERMISJON: {
     kode: 'SØKER_ER_I_PERMISJON',
     verdiId: 'HistorikkEndretFeltVerdiType.SøkerErIPermisjon',
