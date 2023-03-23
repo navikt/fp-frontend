@@ -3921,7 +3921,7 @@ __metadata:
     "@types/lodash.debounce": 4.0.7
     cross-env: 7.0.3
     dayjs: 1.11.7
-    echarts: 5.4.1
+    echarts: 5.4.2
     eslint: 8.36.0
     history: 5.3.0
     lodash.debounce: 4.0.8
@@ -3966,7 +3966,7 @@ __metadata:
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
     dayjs: 1.11.7
-    echarts: 5.4.1
+    echarts: 5.4.2
     eslint: 8.36.0
     history: 5.3.0
     lodash.debounce: 4.0.8
@@ -4015,7 +4015,7 @@ __metadata:
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
     dayjs: 1.11.7
-    echarts: 5.4.1
+    echarts: 5.4.2
     eslint: 8.36.0
     history: 5.3.0
     lodash.debounce: 4.0.8
@@ -13581,6 +13581,16 @@ __metadata:
     tslib: 2.3.0
     zrender: 5.4.1
   checksum: 2868541087045d27691e99950a96896da48be2c758cb9cd6ab57244bfa40967edecc5a215e02f63a48fa9d56aa1dc91c8339982fdb8d2b1323b19852e91d9fa8
+  languageName: node
+  linkType: hard
+
+"echarts@npm:5.4.2":
+  version: 5.4.2
+  resolution: "echarts@npm:5.4.2"
+  dependencies:
+    tslib: 2.3.0
+    zrender: 5.4.3
+  checksum: 933c28dada362314f7c7a5fd4243b44b24f75adb233f7c87541ac9a81734cb380a9683c3f56c8e559dacfddd363879e95a96f0047e33820123cd8f5b95b60f8f
   languageName: node
   linkType: hard
 
@@ -26742,6 +26752,15 @@ __metadata:
   dependencies:
     tslib: 2.3.0
   checksum: 9a50cc2cc42ef44a436cfca5a29d6378b92790f50755b4d54f513a55dc7dab9698cecbc5640d731b380ad282aab1c33ae8cc1d14b61c0d51f0e951085a1bf17c
+  languageName: node
+  linkType: hard
+
+"zrender@npm:5.4.3":
+  version: 5.4.3
+  resolution: "zrender@npm:5.4.3"
+  dependencies:
+    tslib: 2.3.0
+  checksum: ae89584fbe4256217e500a74183fd5870a2bed7e7b3234cd78fcbc0a1a82da8449596b2019105927069531b567ecf94425fb171abd6cedcbf517e52fdf438722
   languageName: node
   linkType: hard
 
