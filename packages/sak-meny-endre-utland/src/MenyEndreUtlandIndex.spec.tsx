@@ -18,7 +18,7 @@ describe('<MenyEndreUtlandIndex>', () => {
     const endreFagsakMarkering = vi.fn();
     const lukkModal = vi.fn();
     render(<Default endreFagsakMarkering={endreFagsakMarkering} lukkModal={lukkModal} />);
-    expect(await screen.findByText('Utland')).toBeInTheDocument();
+    expect(await screen.findByText('Saksmarkering')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('EØS bosatt Norge'));
 
@@ -36,7 +36,7 @@ describe('<MenyEndreUtlandIndex>', () => {
     const endreFagsakMarkering = vi.fn();
     const lukkModal = vi.fn();
     render(<Default endreFagsakMarkering={endreFagsakMarkering} lukkModal={lukkModal} />);
-    expect(await screen.findByText('Utland')).toBeInTheDocument();
+    expect(await screen.findByText('Saksmarkering')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Bosatt utland'));
 
