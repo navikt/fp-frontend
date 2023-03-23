@@ -39,7 +39,7 @@ type Fagsak = Readonly<{
   sakSkalTilInfotrygd: boolean;
   behandlingTypeKanOpprettes: BehandlingOppretting[];
   bruker: FagsakPerson;
-  utlandMarkering?: string;
+  fagsakMarkering?: string;
   annenPart?: FagsakPerson;
   familiehendelse?: FagsakHendelse;
   annenpartBehandling: AnnenPartBehandling;

@@ -13,24 +13,24 @@ export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyEndreUtl
 
 interface OwnProps {
   saksnummer: string;
-  utlandMarkering?: string;
-  endreUtlandMarkering: (formData: FormValues) => void;
+  fagsakMarkering?: string;
+  endreFagsakMarkering: (formData: FormValues) => void;
   lukkModal: () => void;
 }
 
 const MenyEndreUtlandIndex: FunctionComponent<OwnProps> = ({
   saksnummer,
-  utlandMarkering,
-  endreUtlandMarkering,
+  fagsakMarkering,
+  endreFagsakMarkering,
   lukkModal,
 }) => {
   const submit = useCallback((formValues: FormValues) => {
     const params = {
       saksnummer: formValues.saksnummer,
-      utlandMarkering: formValues.utlandMarkering,
+      fagsakMarkering: formValues.fagsakMarkering,
     };
 
-    endreUtlandMarkering(params);
+    endreFagsakMarkering(params);
 
     lukkModal();
   }, []);
@@ -38,7 +38,7 @@ const MenyEndreUtlandIndex: FunctionComponent<OwnProps> = ({
     <RawIntlProvider value={intl}>
       <EndreUtlandModal
         saksnummer={saksnummer}
-        utlandMarkering={utlandMarkering}
+        fagsakMarkering={fagsakMarkering}
         cancelEvent={lukkModal}
         submitCallback={submit}
       />

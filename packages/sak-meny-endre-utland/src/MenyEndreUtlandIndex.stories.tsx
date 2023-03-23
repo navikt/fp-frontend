@@ -10,21 +10,21 @@ export default {
 };
 
 const Template: Story<{
-  endreUtlandMarkering: () => void;
+  endreFagsakMarkering: () => void;
   lukkModal: () => void;
 }> = ({
-  endreUtlandMarkering,
+  endreFagsakMarkering,
   lukkModal,
 }) => (
   <MenyEndreUtlandIndex
     saksnummer="123"
-    endreUtlandMarkering={endreUtlandMarkering}
+    endreFagsakMarkering={endreFagsakMarkering}
     lukkModal={lukkModal}
   />
 );
 
 export const Default = Template.bind({});
 Default.args = {
-  endreUtlandMarkering: action('button-click'),
+  endreFagsakMarkering: action('button-click'),
   lukkModal: action('button-click'),
 };

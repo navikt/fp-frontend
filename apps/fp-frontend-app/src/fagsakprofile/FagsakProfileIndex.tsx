@@ -10,7 +10,7 @@ import { BehandlingVelgerSakIndex } from '@navikt/ft-sak-behandling-velger';
 import { FagsakProfilSakIndex } from '@navikt/ft-sak-fagsak-profil';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { KodeverkType, UtlandMarkeringKode } from '@navikt/fp-kodeverk';
+import { KodeverkType, FagsakMarkeringKode } from '@navikt/fp-kodeverk';
 import { BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
@@ -40,11 +40,20 @@ const findPathToBehandling = (saksnummer: string, location: Location, alleBehand
   return pathToBehandlinger(saksnummer);
 };
 
-const finnUtlandMarkeringTekst = (fagsak: Fagsak): string | undefined => {
-  if (!fagsak.utlandMarkering || fagsak.utlandMarkering === UtlandMarkeringKode.NASJONAL) {
+const finnFagsakMarkeringTekst = (fagsak: Fagsak): string | undefined => {
+  if (!fagsak.fagsakMarkering || fagsak.fagsakMarkering === FagsakMarkeringKode.NASJONAL) {
     return undefined;
   }
-  return fagsak.utlandMarkering === UtlandMarkeringKode.EØS_BOSATT_NORGE ? 'EØS' : 'Utland';
+  switch (fagsak.fagsakMarkering) {
+    case FagsakMarkeringKode.EØS_BOSATT_NORGE:
+      return 'EØS';
+    case FagsakMarkeringKode.BOSATT_UTLAND:
+      return 'Utland';
+    case FagsakMarkeringKode.SAMMENSATT_KONTROLL:
+      return 'Kontroll';
+    default:
+      return undefined;
+  }
 };
 
 interface OwnProps {
@@ -99,7 +108,7 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
           fagsakYtelseType={fagsakYtelseTypeMedNavn}
           fagsakStatus={fagsakStatusMedNavn}
           dekningsgrad={fagsak.dekningsgrad}
-          utlandMarkeringTekst={finnUtlandMarkeringTekst(fagsak)}
+          utlandMarkeringTekst={finnFagsakMarkeringTekst(fagsak)}
           renderBehandlingMeny={() => (
             <ErrorBoundary
               errorMessageCallback={addErrorMessage}

@@ -1,10 +1,11 @@
 {
   "MenyEndreUtlandIndex.MenyTittel": "Endre utlandsmerking",
-  "MenyEndreUtlandIndex.UtlandTittel": "Utland",
+  "MenyEndreUtlandIndex.UtlandTittel": "Saksmarkering",
 
   "MenyEndreUtlandIndex.Nasjonal": "Nasjonal",
   "MenyEndreUtlandIndex.EøsBosattNorge": "EØS bosatt Norge",
   "MenyEndreUtlandIndex.BosattUtland": "Bosatt utland",
+  "MenyEndreUtlandIndex.SammensattKontroll": "Sammensatt kontroll",
 
   "MenyEndreUtlandIndex.Ok": "OK",
   "MenyEndreUtlandIndex.Avbryt": "Avbryt"

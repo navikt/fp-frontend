@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import { Modal } from '@navikt/ds-react';
-import { UtlandMarkeringKode } from '@navikt/fp-kodeverk';
+import { FagsakMarkeringKode } from '@navikt/fp-kodeverk';
 
 import * as stories from './MenyEndreUtlandIndex.stories';
 
@@ -15,9 +15,9 @@ describe('<MenyEndreUtlandIndex>', () => {
   }
 
   it('skal endre fra ingenting til eøs', async () => {
-    const endreUtlandMarkering = vi.fn();
+    const endreFagsakMarkering = vi.fn();
     const lukkModal = vi.fn();
-    render(<Default endreUtlandMarkering={endreUtlandMarkering} lukkModal={lukkModal} />);
+    render(<Default endreFagsakMarkering={endreFagsakMarkering} lukkModal={lukkModal} />);
     expect(await screen.findByText('Utland')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('EØS bosatt Norge'));
@@ -25,17 +25,17 @@ describe('<MenyEndreUtlandIndex>', () => {
     await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
-    await waitFor(() => expect(endreUtlandMarkering).toHaveBeenCalledTimes(1));
-    expect(endreUtlandMarkering).toHaveBeenNthCalledWith(1, {
-      utlandMarkering: UtlandMarkeringKode.EØS_BOSATT_NORGE,
+    await waitFor(() => expect(endreFagsakMarkering).toHaveBeenCalledTimes(1));
+    expect(endreFagsakMarkering).toHaveBeenNthCalledWith(1, {
+      fagsakMarkering: FagsakMarkeringKode.EØS_BOSATT_NORGE,
       saksnummer: '123',
     });
   });
 
   it('skal endre fra eøs til bosatt utland', async () => {
-    const endreUtlandMarkering = vi.fn();
+    const endreFagsakMarkering = vi.fn();
     const lukkModal = vi.fn();
-    render(<Default endreUtlandMarkering={endreUtlandMarkering} lukkModal={lukkModal} />);
+    render(<Default endreFagsakMarkering={endreFagsakMarkering} lukkModal={lukkModal} />);
     expect(await screen.findByText('Utland')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Bosatt utland'));
@@ -43,9 +43,9 @@ describe('<MenyEndreUtlandIndex>', () => {
     await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
-    await waitFor(() => expect(endreUtlandMarkering).toHaveBeenCalledTimes(1));
-    expect(endreUtlandMarkering).toHaveBeenNthCalledWith(1, {
-      utlandMarkering: UtlandMarkeringKode.BOSATT_UTLAND,
+    await waitFor(() => expect(endreFagsakMarkering).toHaveBeenCalledTimes(1));
+    expect(endreFagsakMarkering).toHaveBeenNthCalledWith(1, {
+      fagsakMarkering: FagsakMarkeringKode.BOSATT_UTLAND,
       saksnummer: '123',
     });
   });

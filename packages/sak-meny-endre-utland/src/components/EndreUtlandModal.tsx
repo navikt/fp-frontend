@@ -8,18 +8,18 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { RadioGroupPanel, Form } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { UtlandMarkeringKode } from '@navikt/fp-kodeverk';
+import { FagsakMarkeringKode } from '@navikt/fp-kodeverk';
 
 import styles from './endreUtlandModal.module.css';
 
 export type FormValues = {
   saksnummer: string;
-  utlandMarkering: string;
+  fagsakMarkering: string;
 }
 
 interface OwnProps {
   saksnummer: string;
-  utlandMarkering?: string;
+  fagsakMarkering?: string;
   cancelEvent: () => void;
   submitCallback: (formData: FormValues) => void;
 }
@@ -34,14 +34,14 @@ const EndreUtlandModal: FunctionComponent<OwnProps> = ({
   submitCallback,
   cancelEvent,
   saksnummer,
-  utlandMarkering,
+  fagsakMarkering,
 }) => {
   const intl = useIntl();
 
   const formMethods = useForm<FormValues>({
     defaultValues: {
       saksnummer,
-      utlandMarkering: utlandMarkering || UtlandMarkeringKode.NASJONAL,
+      fagsakMarkering: fagsakMarkering || FagsakMarkeringKode.NASJONAL,
     },
   });
 
@@ -61,18 +61,21 @@ const EndreUtlandModal: FunctionComponent<OwnProps> = ({
           </Heading>
           <VerticalSpacer sixteenPx />
           <RadioGroupPanel
-            name="utlandMarkering"
+            name="fagsakMarkering"
             hideLegend
             validate={[required]}
             radios={[{
               label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.Nasjonal' }),
-              value: UtlandMarkeringKode.NASJONAL,
+              value: FagsakMarkeringKode.NASJONAL,
             }, {
               label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.EøsBosattNorge' }),
-              value: UtlandMarkeringKode.EØS_BOSATT_NORGE,
+              value: FagsakMarkeringKode.EØS_BOSATT_NORGE,
             }, {
               label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.BosattUtland' }),
-              value: UtlandMarkeringKode.BOSATT_UTLAND,
+              value: FagsakMarkeringKode.BOSATT_UTLAND,
+            }, {
+              label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.SammensattKontroll' }),
+              value: FagsakMarkeringKode.SAMMENSATT_KONTROLL,
             }]}
           />
           <VerticalSpacer sixteenPx />

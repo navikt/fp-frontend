@@ -66,7 +66,7 @@ export { default as StonadskontoType } from './src/stonadskontoType';
 export { default as tilbakekrevingKodeverkTyper } from './src/tilbakekrevingKodeverkTyper';
 export { default as tilretteleggingType } from './src/tilretteleggingType';
 export { default as ugunstAarsakTyper } from './src/ugunstAarsakTyper';
-export { default as UtlandMarkeringKode } from './src/utlandMarkeringKode';
+export { default as FagsakMarkeringKode } from './src/fagsakMarkeringKode';
 export { default as utsettelseArsakCodes } from './src/utsettelseArsakCodes';
 export { default as uttakArbeidType } from './src/uttakArbeidType';
 export { default as uttakPeriodeType, uttakPeriodeNavn } from './src/uttakPeriodeType';
