@@ -3786,7 +3786,7 @@ __metadata:
     "@navikt/ft-sak-behandling-velger": 2.0.10
     "@navikt/ft-sak-dekorator": 2.0.8
     "@navikt/ft-sak-dokumenter": 2.0.8
-    "@navikt/ft-sak-fagsak-profil": 2.0.8
+    "@navikt/ft-sak-fagsak-profil": 2.0.9
     "@navikt/ft-sak-infosider": 2.0.8
     "@navikt/ft-sak-meny": 2.0.10
     "@navikt/ft-sak-risikoklassifisering": 2.0.10
@@ -6170,8 +6170,8 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ft-sak-fagsak-profil@npm:2.0.8":
-  version: 2.0.8
+"@navikt/ft-sak-fagsak-profil@npm:2.0.9":
+  version: 2.0.9
   resolution: "@navikt/ft-sak-fagsak-profil@npm:2.0.8::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-sak-fagsak-profil%2F2.0.8%2F2c9ab88d34a3931abd8bace57f40ab00c5dddd07"
   dependencies:
     "@navikt/ds-css": 2.8.1
