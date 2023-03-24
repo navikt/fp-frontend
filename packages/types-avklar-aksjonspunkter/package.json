@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "typescript": "5.0.2",
-    "vite": "4.2.0"
+    "vite": "4.2.1"
   },
   "exports": {
     ".": {

@@ -2975,7 +2975,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -3019,7 +3019,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -3059,7 +3059,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -3101,7 +3101,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -3140,7 +3140,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -3183,7 +3183,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -3226,7 +3226,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -3268,7 +3268,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -3310,7 +3310,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -3354,7 +3354,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -3398,7 +3398,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -3442,7 +3442,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -3485,7 +3485,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -3527,7 +3527,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -3571,7 +3571,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -3612,7 +3612,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -3652,7 +3652,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -3689,7 +3689,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -3862,7 +3862,7 @@ __metadata:
     react-pdf: 6.2.2
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -3873,7 +3873,7 @@ __metadata:
   dependencies:
     eslint: 8.36.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
   languageName: unknown
   linkType: soft
 
@@ -3883,7 +3883,7 @@ __metadata:
   dependencies:
     eslint: 8.36.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
   languageName: unknown
   linkType: soft
 
@@ -3931,7 +3931,7 @@ __metadata:
     react-router-dom: 6.9.0
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -3976,7 +3976,7 @@ __metadata:
     react-router-dom: 6.9.0
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4026,7 +4026,7 @@ __metadata:
     react-router-dom: 6.9.0
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4067,7 +4067,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4112,7 +4112,7 @@ __metadata:
     react-router-dom: 6.9.0
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4153,7 +4153,7 @@ __metadata:
     react-router-dom: 6.9.0
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4190,7 +4190,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4227,7 +4227,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4265,7 +4265,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4308,7 +4308,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4349,7 +4349,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4387,7 +4387,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4426,7 +4426,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4469,7 +4469,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4514,7 +4514,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4556,7 +4556,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4598,7 +4598,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4644,7 +4644,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4689,7 +4689,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4734,7 +4734,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4776,7 +4776,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4815,7 +4815,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4859,7 +4859,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4899,7 +4899,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4939,7 +4939,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -4979,7 +4979,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -5019,7 +5019,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -5062,7 +5062,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -5103,7 +5103,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -5145,7 +5145,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -5187,7 +5187,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -5228,7 +5228,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -5243,7 +5243,7 @@ __metadata:
     eslint: 8.36.0
     react: 18.2.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -5259,7 +5259,7 @@ __metadata:
     eslint: 8.36.0
     sinon: 15.0.2
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -5304,7 +5304,7 @@ __metadata:
     react-router-dom: 6.9.0
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -5345,7 +5345,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -5379,7 +5379,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -5418,7 +5418,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -5457,7 +5457,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -5496,7 +5496,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -5534,7 +5534,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -5573,7 +5573,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -5621,7 +5621,7 @@ __metadata:
     react-router-dom: 6.9.0
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -5653,7 +5653,7 @@ __metadata:
     react-intl: 6.3.1
     stylelint: 15.3.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vitest: 0.29.3
   languageName: unknown
   linkType: soft
@@ -5670,7 +5670,7 @@ __metadata:
     react-intl: 6.3.1
     react-router-dom: 6.9.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
   languageName: unknown
   linkType: soft
 
@@ -5684,7 +5684,7 @@ __metadata:
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.0.10
     "@navikt/ft-prosess-beregningsgrunnlag": 6.0.12
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
   languageName: unknown
   linkType: soft
 
@@ -5694,7 +5694,7 @@ __metadata:
   dependencies:
     "@navikt/fp-kodeverk": 1.0.0
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
   languageName: unknown
   linkType: soft
 
@@ -5711,7 +5711,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.3.1
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
   languageName: unknown
   linkType: soft
 
@@ -15338,7 +15338,7 @@ __metadata:
     stylelint: 15.3.0
     stylelint-order: 6.0.3
     typescript: 5.0.2
-    vite: 4.2.0
+    vite: 4.2.1
     vite-plugin-dts: 2.0.0-beta.1
     vite-plugin-externalize-deps: 0.5.0
     vite-plugin-html: 3.2.0
@@ -25945,9 +25945,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:4.2.0":
-  version: 4.2.0
-  resolution: "vite@npm:4.2.0"
+"vite@npm:4.2.1":
+  version: 4.2.1
+  resolution: "vite@npm:4.2.1"
   dependencies:
     esbuild: ^0.17.5
     fsevents: ~2.3.2
@@ -25979,7 +25979,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 1088cdc0c89ab835aab07a0a114397b749e8dfb20f4b94241ba179d9c371b72d31e13782b22893860c3d65da596e43b24fce5e023f79cfde427f42549f2e1844
+  checksum: 70eb162ffc299017a3c310e3adc95e9661def6b17aafd1f8e5e02e516766060435590dbe3df1e4e95acc3583c728a76e91f07c546221d1e701f1b2b021293f45
   languageName: node
   linkType: hard
 
