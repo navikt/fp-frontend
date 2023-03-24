@@ -108,7 +108,7 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
           fagsakYtelseType={fagsakYtelseTypeMedNavn}
           fagsakStatus={fagsakStatusMedNavn}
           dekningsgrad={fagsak.dekningsgrad}
-          utlandMarkeringTekst={finnFagsakMarkeringTekst(fagsak)}
+          fagsakMarkeringTekst={finnFagsakMarkeringTekst(fagsak)}
           renderBehandlingMeny={() => (
             <ErrorBoundary
               errorMessageCallback={addErrorMessage}
