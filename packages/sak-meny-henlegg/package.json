@@ -21,6 +21,7 @@
     "dev": "vite build --mode development --watch",
     "build": "vite build",
     "clean": "rm -rf ./dist ./node_modules",
+    "build-storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider build-storybook -o .storybook-static-build",
     "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider start-storybook --quiet -p 7063"
   },
   "dependencies": {

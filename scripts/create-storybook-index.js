@@ -1,5 +1,7 @@
 const path = require('path');
 const shell = require('shelljs');
+const glob = require('glob');
+const fs = require('fs');
 
 const generateRow = (packageJson) => `
   <div class="box">
@@ -60,10 +62,49 @@ const generateHTML = (packages) => `
   </html>
 `;
 
-module.exports = function creatHtml(allPackageJson, outputDir) {
+const DEPLOY_FOLDER = '../.storybook-static-build';
+
+const creatIndexHtml = () => {
+  // Lag folder-struktur for innholdet som skal deployes
+  shell.mkdir(path.join(__dirname, DEPLOY_FOLDER));
+  shell.mkdir(path.join(__dirname, DEPLOY_FOLDER, '@navikt'));
+
+  // Kopier css fil til folder som skal deployes
   shell.cp(
     path.join(__dirname, 'storybook-monorepo-index.css'),
-    path.join(outputDir, 'monorepo-index.css'),
+    path.join(__dirname, DEPLOY_FOLDER, 'monorepo-index.css'),
   );
-  return generateHTML(allPackageJson);
+
+  // Kopier storybook fra pakkene og inn i folder som skal deployes
+  const origDir = process.cwd();
+  const packages = glob
+    .sync(path.join(origDir, 'packages', '**/package.json'), {
+      ignore: '**/node_modules/**',
+    })
+    .map(path.dirname)
+    .map((subPackage) => {
+      shell.cd(subPackage);
+      if (!fs.existsSync('package.json') || !fs.existsSync('.storybook-static-build')) {
+        return null;
+      }
+
+      const packagesJson = JSON.parse(
+        fs.readFileSync(path.resolve('package.json'), 'utf8'),
+      );
+
+      const packageDestFolder = path.join(__dirname, DEPLOY_FOLDER, packagesJson.name);
+      shell.mkdir(packageDestFolder);
+      shell.cp('-r', path.join(subPackage, '.storybook-static-build', '*'), packageDestFolder);
+
+      return packagesJson;
+    })
+    .filter((subPackage) => subPackage);
+
+  // Lag index-fil
+  const index = generateHTML(packages);
+  fs.writeFileSync(path.join(__dirname, DEPLOY_FOLDER, 'index.html'), index);
+
+  console.log('Done copying files');
 };
+
+creatIndexHtml();
