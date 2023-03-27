@@ -18,13 +18,13 @@
   "dependencies": {
     "@navikt/fp-kodeverk": "1.0.0",
     "@navikt/fp-types": "1.0.0",
-    "@navikt/ft-fakta-beregning": "4.1.6",
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "7.0.10",
-    "@navikt/ft-prosess-beregningsgrunnlag": "6.0.12"
+    "@navikt/ft-fakta-beregning": "4.1.8",
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "7.0.11",
+    "@navikt/ft-prosess-beregningsgrunnlag": "6.0.13"
   },
   "devDependencies": {
     "typescript": "5.0.2",
-    "vite": "4.2.0"
+    "vite": "4.2.1"
   },
   "exports": {
     ".": {
