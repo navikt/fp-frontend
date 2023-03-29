@@ -22,7 +22,7 @@ import styles from './oppgaveJournalføringIndex.module.css';
 const intl = createIntl(messages);
 const TOM_ARRAY: OppgaveOversikt[] = [];
 
-const tilatteBrukere = ['H137440', 'A138225', 'J116396', 'W119202', 'S148979', 'R107802'];
+const tilatteBrukere = ['H137440', 'A138225', 'J116396', 'W119202', 'S148979', 'R107802', 'V149165', 'D151669'];
 
 // Mildertidig intill tilganger er avklart og testing er ferdig
 const harTilgangTilÅBrukeJournalføring = (navAnsatt: NavAnsatt): boolean => {
@@ -103,16 +103,19 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({
                 <FormattedMessage id="Journalforing.Tittel" />
               </Heading>
             </FlexColumn>
-            <FlexColumn className={styles.avhukingKol}>
-              <CheckboxGroup
-                hideLegend
-                defaultChecked={false}
-                legend={<FormattedMessage id="Oppgavetabell.Filtrer" />}
-                onChange={filtrerOppgaveliste}
-              >
-                <Checkbox value><FormattedMessage id="Oppgavetabell.Filtrer" /></Checkbox>
-              </CheckboxGroup>
-            </FlexColumn>
+            {!valgtOppgave
+            && (
+              <FlexColumn className={styles.avhukingKol}>
+                <CheckboxGroup
+                  hideLegend
+                  defaultChecked={false}
+                  legend={<FormattedMessage id="Oppgavetabell.Filtrer" />}
+                  onChange={filtrerOppgaveliste}
+                >
+                  <Checkbox value><FormattedMessage id="Oppgavetabell.Filtrer" /></Checkbox>
+                </CheckboxGroup>
+              </FlexColumn>
+            )}
           </FlexRow>
         </FlexContainer>
       </div>
