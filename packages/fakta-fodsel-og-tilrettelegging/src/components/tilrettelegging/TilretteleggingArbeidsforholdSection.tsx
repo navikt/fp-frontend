@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { FunctionComponent, useEffect, useMemo } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import moment from 'moment';
 import { Label } from '@navikt/ds-react';
@@ -12,7 +12,7 @@ import {
 import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, ArbeidsforholdFodselOgTilrettelegging } from '@navikt/fp-types';
 
 import TilretteleggingFieldArray from './TilretteleggingFieldArray';
-import VelferdspermisjonSection from './VelferdspermisjonSection';
+import VelferdspermisjonSection, { finnSkalTaHensynTilPermisjon } from './VelferdspermisjonSection';
 
 import styles from './tilretteleggingArbeidsforholdSection.module.css';
 
@@ -90,13 +90,28 @@ const TilretteleggingArbeidsforholdSection: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
 
   const {
-    watch, getValues,
+    watch, getValues, setValue,
   } = formHooks.useFormContext<Record<string, FormValues>>();
 
   const visTilrettelegginger = watch(`${formSectionName}.skalBrukes`);
 
   const tittel = useMemo(() => utledArbeidsforholdTittel(arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper),
     [arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper]);
+
+  const tilretteleggingBehovFom = watch(`${formSectionName}.tilretteleggingBehovFom`);
+
+  const permisjonerSomSkalBrukes = arbeidsforhold.velferdspermisjoner.filter((permisjon) => finnSkalTaHensynTilPermisjon(tilretteleggingBehovFom, permisjon));
+
+  let erPermisjonGyldig = false;
+  if (permisjonerSomSkalBrukes.length === 1 && permisjonerSomSkalBrukes[0].permisjonsprosent === 100) {
+    erPermisjonGyldig = watch(`${formSectionName}.permisjon${permisjonerSomSkalBrukes[0].permisjonFom}`);
+  }
+
+  useEffect(() => {
+    if (erPermisjonGyldig && visTilrettelegginger) {
+      setValue(`${formSectionName}.skalBrukes`, false);
+    }
+  }, [erPermisjonGyldig]);
 
   return (
     <>
@@ -106,6 +121,7 @@ const TilretteleggingArbeidsforholdSection: FunctionComponent<OwnProps> = ({
       <VerticalSpacer sixteenPx />
       <CheckboxField
         readOnly={readOnly}
+        disabled={erPermisjonGyldig}
         name={`${formSectionName}.skalBrukes`}
         label={intl.formatMessage({ id: 'TilretteleggingArbeidsforholdSection.Checkbox.SoekerSkalhaTilrettelegging' })}
       />
