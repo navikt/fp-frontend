@@ -43,7 +43,7 @@ const tilretteleggingPermisjon = {
     velferdspermisjoner: [{
       permisjonFom: '2020-02-17',
       permisjonTom: '2020-07-12',
-      permisjonsprosent: 100.00,
+      permisjonsprosent: 50.00,
       type: 'VELFERDSPERMISJON',
       erGyldig: true,
     }, {
