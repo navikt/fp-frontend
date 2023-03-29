@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { UseFormGetValues } from 'react-hook-form';
-import { ErrorMessage, Label } from '@navikt/ds-react';
+import { ErrorMessage, Label, BodyShort } from '@navikt/ds-react';
 import {
   ArrowBox, FlexColumn, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -22,7 +22,8 @@ const maxLength2000 = maxLength(2000);
 const FIELD_ARRAY_NAME = 'aksjonspunktGodkjenning';
 
 const harIkkeValgtMinstEnFakta = (getValues: UseFormGetValues<any>, fieldIndex: string) => !getValues(`${fieldIndex}.feilFakta`)
-  && !getValues(`${fieldIndex}.feilLov`) && !getValues(`${fieldIndex}.feilRegel`) && !getValues(`${fieldIndex}.annet`);
+  && !getValues(`${fieldIndex}.feilLov`) && !getValues(`${fieldIndex}.feilSkjønn`)
+  && !getValues(`${fieldIndex}.feilUtredning`) && !getValues(`${fieldIndex}.annet`);
 
 type OwnProps = {
   index: number;
@@ -78,23 +79,29 @@ const GodkjenningPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
           <ArrowBox alignOffset={totrinnskontrollGodkjent ? 1 : 110}>
             <Label size="small"><FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Arsak" /></Label>
+            <BodyShort size="small"><FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Forklaring" /></BodyShort>
             <FlexRow>
               <FlexColumn className={styles.halfColumn}>
                 <CheckboxField
                   name={`${fieldIndex}.feilFakta`}
-                  label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.FeilFakta" />}
+                  label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Fakta" />}
                   readOnly={readOnly}
                 />
                 <CheckboxField
-                  name={`${fieldIndex}.feilRegel`}
-                  label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.FeilRegelForstaelse" />}
+                  name={`${fieldIndex}.feilSkjønn`}
+                  label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Skjønn" />}
+                  readOnly={readOnly}
+                />
+                <CheckboxField
+                  name={`${fieldIndex}.feilLov`}
+                  label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Lovanvendelse" />}
                   readOnly={readOnly}
                 />
               </FlexColumn>
               <FlexColumn className={styles.halfColumn}>
                 <CheckboxField
-                  name={`${fieldIndex}.feilLov`}
-                  label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.FeilLovanvendelse" />}
+                  name={`${fieldIndex}.feilUtredning`}
+                  label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Utredning" />}
                   readOnly={readOnly}
                 />
                 <CheckboxField
