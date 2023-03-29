@@ -34,33 +34,32 @@ interface OwnProps {
 }
 
 const getDefaultSaksliste = (
-  sakslister: Saksliste[],
+  sorterteSakslister: Saksliste[],
   getValueFromLocalStorage: (key: string) => string | undefined,
   removeValueFromLocalStorage: (key: string) => void,
 ) => {
   const lagretSakslisteId = getValueFromLocalStorage('sakslisteId');
   if (lagretSakslisteId) {
-    if (sakslister.some((s) => `${s.sakslisteId}` === lagretSakslisteId)) {
+    if (sorterteSakslister.some((s) => `${s.sakslisteId}` === lagretSakslisteId)) {
       return parseInt(lagretSakslisteId, 10);
     }
     removeValueFromLocalStorage('sakslisteId');
   }
 
-  const sortertSakslister = sakslister.sort((saksliste1, saksliste2) => saksliste1.navn.localeCompare(saksliste2.navn));
-  return sortertSakslister.length > 0 ? sortertSakslister[0].sakslisteId : undefined;
+  return sorterteSakslister.length > 0 ? sorterteSakslister[0].sakslisteId : undefined;
 };
 
 const getInitialValues = (
-  sakslister: Saksliste[],
+  sorterteSakslister: Saksliste[],
   getValueFromLocalStorage: (key: string) => string | undefined,
   removeValueFromLocalStorage: (key: string) => void,
 ) => {
-  if (sakslister.length === 0) {
+  if (sorterteSakslister.length === 0) {
     return {
       sakslisteId: undefined,
     };
   }
-  const defaultSaksliste = getDefaultSaksliste(sakslister, getValueFromLocalStorage, removeValueFromLocalStorage);
+  const defaultSaksliste = getDefaultSaksliste(sorterteSakslister, getValueFromLocalStorage, removeValueFromLocalStorage);
   return {
     sakslisteId: defaultSaksliste ? `${defaultSaksliste}` : undefined,
   };
@@ -189,13 +188,15 @@ const SakslisteVelgerForm: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
+  const sorterteSakslister = [...sakslister].sort((saksliste1, saksliste2) => saksliste1.navn.localeCompare(saksliste2.navn));
+
   const { data: saksbehandlere, startRequest: fetchSaksbehandlere } = restApiHooks.useRestApiRunner(RestApiPathsKeys.SAKSLISTE_SAKSBEHANDLERE);
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK_LOS);
 
   const tooltip = useMemo(() => createTooltip(saksbehandlere), [saksbehandlere]);
 
   const formMethods = useForm<FormValues>({
-    defaultValues: getInitialValues(sakslister, getValueFromLocalStorage, removeValueFromLocalStorage),
+    defaultValues: getInitialValues(sorterteSakslister, getValueFromLocalStorage, removeValueFromLocalStorage),
   });
 
   const sakslisteId = formMethods.watch('sakslisteId');
@@ -220,7 +221,7 @@ const SakslisteVelgerForm: FunctionComponent<OwnProps> = ({
             <SelectField
               name="sakslisteId"
               label={intl.formatMessage({ id: 'SakslisteVelgerForm.Saksliste' })}
-              selectValues={sakslister
+              selectValues={sorterteSakslister
                 .map((saksliste) => (<option key={saksliste.sakslisteId} value={`${saksliste.sakslisteId}`}>{saksliste.navn}</option>))}
             />
           </FlexColumn>
@@ -238,25 +239,25 @@ const SakslisteVelgerForm: FunctionComponent<OwnProps> = ({
               <FlexColumn className={styles.marginFilters}>
                 <LabelWithHeader
                   header={intl.formatMessage({ id: 'SakslisteVelgerForm.Stonadstype' })}
-                  texts={getStonadstyper(intl, alleKodeverk, getValgtSaksliste(sakslister, sakslisteId))}
+                  texts={getStonadstyper(intl, alleKodeverk, getValgtSaksliste(sorterteSakslister, sakslisteId))}
                 />
               </FlexColumn>
               <FlexColumn className={styles.marginFilters}>
                 <LabelWithHeader
                   header={intl.formatMessage({ id: 'SakslisteVelgerForm.Behandlingstype' })}
-                  texts={getBehandlingstyper(intl, alleKodeverk, getValgtSaksliste(sakslister, sakslisteId))}
+                  texts={getBehandlingstyper(intl, alleKodeverk, getValgtSaksliste(sorterteSakslister, sakslisteId))}
                 />
               </FlexColumn>
               <FlexColumn className={styles.marginFilters}>
                 <LabelWithHeader
                   header={intl.formatMessage({ id: 'SakslisteVelgerForm.AndreKriterier' })}
-                  texts={getAndreKriterier(intl, alleKodeverk, getValgtSaksliste(sakslister, sakslisteId))}
+                  texts={getAndreKriterier(intl, alleKodeverk, getValgtSaksliste(sorterteSakslister, sakslisteId))}
                 />
               </FlexColumn>
               <FlexColumn className={styles.marginFilters}>
                 <LabelWithHeader
                   header={intl.formatMessage({ id: 'SakslisteVelgerForm.Sortering' })}
-                  texts={[getSorteringsnavn(intl, alleKodeverk, getValgtSaksliste(sakslister, sakslisteId))]}
+                  texts={[getSorteringsnavn(intl, alleKodeverk, getValgtSaksliste(sorterteSakslister, sakslisteId))]}
                 />
               </FlexColumn>
             </>
