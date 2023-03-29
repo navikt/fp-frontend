@@ -50,7 +50,7 @@
     "@babel/preset-typescript": "7.21.0",
     "@babel/register": "7.21.0",
     "@navikt/ds-codemod": "2.8.4",
-    "@sentry/cli": "2.16.0",
+    "@sentry/cli": "2.16.1",
     "@storybook/addon-essentials": "6.5.16",
     "@storybook/addon-links": "6.5.16",
     "@storybook/addons": "6.5.16",
