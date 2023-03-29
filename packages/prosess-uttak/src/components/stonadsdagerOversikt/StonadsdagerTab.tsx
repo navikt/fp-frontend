@@ -61,7 +61,7 @@ const StonadsdagerTab: FunctionComponent<OwnProps> = ({
   const fordelteDager = useMemo(() => finnAntallUkerOgDager(stønadskonto.saldo), [stønadskonto]);
   const kontonavnTekst = useMemo(() => finnKorrektLabelForKvote(stønadskonto.stonadskontotype), [stønadskonto]);
 
-  const velgKonto = useCallback(() => visDagerForKonto(stønadskonto), []);
+  const velgKonto = useCallback(() => visDagerForKonto(stønadskonto), [stønadskonto]);
 
   return (
     <div className={styles.tabs}>
