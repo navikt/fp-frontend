@@ -102,10 +102,10 @@ const DisponibleStonadskontoerPanel: FunctionComponent<OwnProps> = ({
   arbeidsgiverOpplysningerPerId,
 }) => {
   const intl = useIntl();
-  const [valgtKonto, setValgtKonto] = useState<Stonadskonto>();
+  const [valgtKontoType, setValgtKontoType] = useState<string>();
 
-  const visDagerForKonto = useCallback((konto: Stonadskonto): void => {
-    setValgtKonto((forrigeKonto) => (forrigeKonto?.stonadskontotype === konto.stonadskontotype ? undefined : konto));
+  const visDagerForKonto = useCallback((stonadskontotype: string): void => {
+    setValgtKontoType((forrigeKontoType) => (forrigeKontoType === stonadskontotype ? undefined : stonadskontotype));
   }, []);
 
   const stønadskontoerMedNavn = useMemo(() => Object.values(stønadskontoer).sort(sorterKontoer), [stønadskontoer]);
@@ -113,16 +113,16 @@ const DisponibleStonadskontoerPanel: FunctionComponent<OwnProps> = ({
   const tilgjengeligeUker = useMemo(() => finnTilgjengeligeUker(stønadskontoer), [stønadskontoer]);
 
   const sorterteAktiviteter = useMemo(() => {
-    if (!valgtKonto) {
+    if (!valgtKontoType) {
       return undefined;
     }
-    const aktiviteterMedNavn = valgtKonto.aktivitetSaldoDtoList
+    const aktiviteterMedNavn = stønadskontoerMedNavn.find((s) => s.stonadskontotype === valgtKontoType).aktivitetSaldoDtoList
       .map((aktivitet) => ({
         ...aktivitet,
         navn: utledNavn(aktivitet.aktivitetIdentifikator, arbeidsgiverOpplysningerPerId, intl),
       }));
     return aktiviteterMedNavn.sort((akt1, akt2) => akt1.navn.localeCompare(akt2.navn));
-  }, [valgtKonto?.aktivitetSaldoDtoList]);
+  }, [valgtKontoType, stønadskontoerMedNavn]);
 
   return (
     <div className={styles.disponibeltUttak}>
@@ -148,14 +148,14 @@ const DisponibleStonadskontoerPanel: FunctionComponent<OwnProps> = ({
           {stønadskontoerMedNavn.map((konto) => (
             <StonadsdagerTab
               key={konto.stonadskontotype}
-              aktiv={konto.stonadskontotype === valgtKonto?.stonadskontotype}
+              aktiv={konto.stonadskontotype === valgtKontoType}
               stønadskonto={konto}
               visDagerForKonto={visDagerForKonto}
             />
           ))}
         </ul>
       </div>
-      {valgtKonto && sorterteAktiviteter.length > 0 && (
+      {valgtKontoType && sorterteAktiviteter.length > 0 && (
         <div className={styles.visKonto}>
           <Table headerTextCodes={HEADER_TEXT_CODES}>
             {sorterteAktiviteter.map((arbforhold) => {

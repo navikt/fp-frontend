@@ -49,7 +49,7 @@ export const finnAntallUkerOgDager = (
 
 interface OwnProps {
   stønadskonto: Stonadskonto;
-  visDagerForKonto: (stønadskonto: Stonadskonto) => void;
+  visDagerForKonto: (stønadskontotype: string) => void;
   aktiv?: boolean;
 }
 
@@ -61,7 +61,7 @@ const StonadsdagerTab: FunctionComponent<OwnProps> = ({
   const fordelteDager = useMemo(() => finnAntallUkerOgDager(stønadskonto.saldo), [stønadskonto]);
   const kontonavnTekst = useMemo(() => finnKorrektLabelForKvote(stønadskonto.stonadskontotype), [stønadskonto]);
 
-  const velgKonto = useCallback(() => visDagerForKonto(stønadskonto), [stønadskonto]);
+  const velgKonto = useCallback(() => visDagerForKonto(stønadskonto.stonadskontotype), [stønadskonto]);
 
   return (
     <div className={styles.tabs}>
