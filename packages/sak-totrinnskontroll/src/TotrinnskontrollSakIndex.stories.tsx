@@ -114,7 +114,7 @@ ForSaksbehandler.args = {
         },
         besluttersBegrunnelse: 'Denne er ikke godkjent fordi...',
         totrinnskontrollGodkjent: false,
-        vurderPaNyttArsaker: ['FEIL_REGEL', 'FEIL_FAKTA'],
+        vurderPaNyttArsaker: ['FEIL_LOV', 'FEIL_FAKTA'],
         uttakPerioder: [],
         arbeidforholdDtos: [],
       }],

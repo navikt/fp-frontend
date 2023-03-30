@@ -64,10 +64,10 @@ describe('<TotrinnskontrollSakIndex>', () => {
     await userEvent.click(screen.getAllByText('Godkjent')[0]);
     await userEvent.click(screen.getAllByText('Vurder på nytt')[1]);
 
-    expect(await screen.findByText('Årsak')).toBeInTheDocument();
+    expect(await screen.findByText('Årsak til retur')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Feil fakta'));
-    await userEvent.click(screen.getByText('Feil lovanvendelse'));
+    await userEvent.click(screen.getByText('Fakta'));
+    await userEvent.click(screen.getByText('Regel-/lovanvendelse'));
 
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');
     await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
@@ -113,7 +113,7 @@ describe('<TotrinnskontrollSakIndex>', () => {
     await userEvent.click(screen.getAllByText('Godkjent')[0]);
     await userEvent.click(screen.getAllByText('Vurder på nytt')[1]);
 
-    expect(await screen.findByText('Årsak')).toBeInTheDocument();
+    expect(await screen.findByText('Årsak til retur')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Send til saksbehandler'));
 
@@ -129,8 +129,8 @@ describe('<TotrinnskontrollSakIndex>', () => {
     expect(screen.getByText('Kontroller endrede opplysninger og faglige vurderinger')).toBeInTheDocument();
 
     expect(screen.getByText('Formkrav klage NFP')).toBeInTheDocument();
-    expect(screen.getByText('Feil regelforståelse')).toBeInTheDocument();
-    expect(screen.getByText('Feil fakta')).toBeInTheDocument();
+    expect(screen.getByText('Regel-/lovanvendelse')).toBeInTheDocument();
+    expect(screen.getByText('Fakta')).toBeInTheDocument();
     expect(screen.getByText('Denne er ikke godkjent fordi...')).toBeInTheDocument();
 
     expect(screen.getByText('Klageresultat Vedtaksinstans')).toBeInTheDocument();
