@@ -42,7 +42,13 @@ const finnArsaker = (vurderPaNyttArsaker: string[]) => vurderPaNyttArsaker.reduc
     return { ...acc, feilLov: true };
   }
   if (arsak === vurderPaNyttArsakType.FEIL_REGEL) {
-    return { ...acc, feilRegel: true };
+    return { ...acc, feilSkjønn: true };
+  }
+  if (arsak === vurderPaNyttArsakType.SKJØNN) {
+    return { ...acc, feilSkjønn: true };
+  }
+  if (arsak === vurderPaNyttArsakType.UTREDNING) {
+    return { ...acc, feilUtredning: true };
   }
   if (arsak === vurderPaNyttArsakType.ANNET) {
     return { ...acc, annet: true };

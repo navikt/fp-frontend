@@ -19,8 +19,9 @@ export type AksjonspunktGodkjenningData = {
   totrinnskontrollGodkjent?: boolean;
   besluttersBegrunnelse?: string;
   feilFakta?: boolean;
-  feilRegel?: boolean;
   feilLov?: boolean;
+  feilSkjønn?: boolean;
+  feilUtredning?: boolean;
   annet?: boolean;
 }
 

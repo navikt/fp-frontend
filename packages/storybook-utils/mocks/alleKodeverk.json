@@ -2655,7 +2655,7 @@
     {
       "kode": "FEIL_LOV",
       "kodeverk": "VURDER_AARSAK",
-      "navn": "Feil lovanvendelse"
+      "navn": "Regel-/lovanvendelse"
     },
     {
       "kode": "FEIL_REGEL",
@@ -2670,7 +2670,17 @@
     {
       "kode": "FEIL_FAKTA",
       "kodeverk": "VURDER_AARSAK",
-      "navn": "Feil fakta"
+      "navn": "Fakta"
+    },
+    {
+      "kode": "SKJØNN",
+      "kodeverk": "VURDER_AARSAK",
+      "navn": "Skjønn"
+    },
+    {
+      "kode": "UTREDNING",
+      "kodeverk": "VURDER_AARSAK",
+      "navn": "Utredning"
     }
   ],
   "Landkoder": [

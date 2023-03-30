@@ -4,12 +4,14 @@
   "ApprovalField.Godkjent": "Godkjent",
   "ApprovalField.Vurder": "Vurder på nytt",
 
-  "AksjonspunktGodkjenningArsakPanel.FeilFakta": "Feil fakta",
   "AksjonspunktGodkjenningArsakPanel.Begrunnelse": "Begrunnelse",
-  "AksjonspunktGodkjenningArsakPanel.Arsak": "Årsak",
-  "AksjonspunktGodkjenningArsakPanel.FeilRegelForstaelse": "Feil regelforståelse",
+  "AksjonspunktGodkjenningArsakPanel.Arsak": "Årsak til retur",
+  "AksjonspunktGodkjenningArsakPanel.Forklaring": "Feil, mangler og/eller behov for ytterligere begrunnelse knyttet til:",
   "AksjonspunktGodkjenningArsakPanel.Annet": "Annet",
-  "AksjonspunktGodkjenningArsakPanel.FeilLovanvendelse": "Feil lovanvendelse",
+  "AksjonspunktGodkjenningArsakPanel.Fakta": "Fakta",
+  "AksjonspunktGodkjenningArsakPanel.Lovanvendelse": "Regel-/lovanvendelse",
+  "AksjonspunktGodkjenningArsakPanel.Skjønn": "Skjønn",
+  "AksjonspunktGodkjenningArsakPanel.Utredning": "Utredning",
 
   "ToTrinnsForm.Godkjent": "Godkjent",
   "ToTrinnsForm.LøstAksjonspunkt": "<b>Løst aksjonspunkt:</b> Kontroller endrede opplysninger og faglige vurderinger",
