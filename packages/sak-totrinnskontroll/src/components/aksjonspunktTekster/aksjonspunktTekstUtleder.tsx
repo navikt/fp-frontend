@@ -51,6 +51,7 @@ const buildUttakText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactElemen
 
     return (
       <FormattedMessage
+        key={id}
         id={id}
         values={{ a: fom, b: tom }}
       />
@@ -60,6 +61,7 @@ const buildUttakText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactElemen
 const buildOpptjeningText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactElement[] => (aksjonspunkt.opptjeningAktiviteter
   ? aksjonspunkt.opptjeningAktiviteter.map((aktivitet) => (
     <OpptjeningTotrinnText
+      key={aktivitet.aktivitetType}
       aktivitet={aktivitet}
     />
   ))
@@ -69,6 +71,7 @@ const getTextFromAksjonspunktkode = (aksjonspunkt: TotrinnskontrollAksjonspunkt)
   const aksjonspunktTextId = totrinnskontrollaksjonspunktTextCodes[aksjonspunkt.aksjonspunktKode];
   return aksjonspunktTextId ? (
     [<FormattedMessage
+      key={aksjonspunktTextId}
       id={aksjonspunktTextId}
     />]
   ) : [];
@@ -78,6 +81,7 @@ const getTextFromTilbakekrevingAksjonspunktkode = (aksjonspunkt: Totrinnskontrol
   const aksjonspunktTextId = totrinnsTilbakekrevingkontrollaksjonspunktTextCodes[aksjonspunkt.aksjonspunktKode];
   return aksjonspunktTextId ? (
     [<FormattedMessage
+      key={aksjonspunktTextId}
       id={aksjonspunktTextId}
     />]
   ) : [];
@@ -87,7 +91,7 @@ const getTextForForeldreansvarsvilkåretAndreLedd = (isForeldrepenger: boolean):
   const aksjonspunktTextId = isForeldrepenger
     ? 'ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarAndreLeddFP'
     : 'ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarAndreLeddES';
-  return [<FormattedMessage id={aksjonspunktTextId} />];
+  return [<FormattedMessage key={aksjonspunktTextId} id={aksjonspunktTextId} />];
 };
 
 const getFaktaOmBeregningText = (
@@ -100,7 +104,7 @@ const getFaktaOmBeregningText = (
 
   return beregningDto.faktaOmBeregningTilfeller.flatMap((kode) => {
     const t = faktaOmBeregningTilfeller.find((tilfelle) => tilfelle.kode === kode);
-    return t ? [<div>{t.navn}</div>] : [];
+    return t ? [<div key={t.navn}>{t.navn}</div>] : [];
   });
 };
 

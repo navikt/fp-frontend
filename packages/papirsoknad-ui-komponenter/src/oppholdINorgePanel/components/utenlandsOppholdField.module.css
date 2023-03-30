@@ -2,7 +2,7 @@
   box-sizing: border-box;
   display: inline-block;
   margin-right: 8px;
-  width: calc(100% -  17px  -  8px );
+  width: calc(100% - 17px - 8px);
 }
 .selectBredde {
   width: 300px;

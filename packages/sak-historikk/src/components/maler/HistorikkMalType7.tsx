@@ -72,6 +72,7 @@ const HistorikkMalType7: FunctionComponent<HistorikkMal> = ({
             {historikkinnslagDel.opplysninger && historikkinnslagDel.opplysninger
               .map((opplysning) => (
                 <FormattedMessage
+                  key={findIdForOpplysningCode(opplysning)}
                   id={findIdForOpplysningCode(opplysning)}
                   values={{
                     antallBarn: opplysning.tilVerdi,
