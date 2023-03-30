@@ -22,17 +22,17 @@ export default defineConfig({
     port: 9100,
     proxy: {
       '/fpsak/api': {
-        target: 'http://localhost:9000',
+        target: 'http://127.0.0.1:9000',
         changeOrigin: false,
         secure: false,
       },
       '/fptilbake/api': {
-        target: 'http://localhost:9000',
+        target: 'http://127.0.0.1:9000',
         changeOrigin: false,
         secure: false,
       },
       '/fplos/api': {
-        target: 'http://localhost:9000',
+        target: 'http://127.0.0.1:9000',
         changeOrigin: false,
         secure: false,
       },

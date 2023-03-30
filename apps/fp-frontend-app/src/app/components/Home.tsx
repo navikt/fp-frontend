@@ -2,7 +2,7 @@ import React, {
   useCallback, FunctionComponent, useState, useEffect,
 } from 'react';
 import {
-  Link, Route, Routes, useNavigate,
+  Link, Route, Routes, useLocation, useNavigate,
 } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
@@ -38,7 +38,7 @@ const Home: FunctionComponent<OwnProps> = ({
   navAnsatt,
 }) => {
   const intl = useIntl();
-  const { addErrorMessage } = useRestApiErrorDispatcher();
+  const { addErrorMessage, removeErrorMessages } = useRestApiErrorDispatcher();
 
   const [erLosTilgjengelig, setLosErTilgjengelig] = useState(true);
   const setLosErIkkeTilgjengelig = useCallback(() => { setLosErTilgjengelig(false); }, []);
@@ -53,6 +53,14 @@ const Home: FunctionComponent<OwnProps> = ({
   const åpneFagsak = useCallback((saksnummer: string, behandlingUuid?: string) => {
     navigate(getFagsakHref(saksnummer, behandlingUuid));
   }, [navigate]);
+
+  const location = useLocation();
+  useEffect(() => {
+    // Fjern visning av feilmeldinger når en går tilbake til LOS-visning
+    if (location.pathname === '/') {
+      removeErrorMessages();
+    }
+  }, [location]);
 
   return (
     <div className={styles.content} style={{ margin: `${headerHeight}px auto 0` }}>
