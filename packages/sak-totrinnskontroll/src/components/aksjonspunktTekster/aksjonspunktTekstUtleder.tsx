@@ -104,7 +104,7 @@ const getFaktaOmBeregningText = (
 
   return beregningDto.faktaOmBeregningTilfeller.flatMap((kode) => {
     const t = faktaOmBeregningTilfeller.find((tilfelle) => tilfelle.kode === kode);
-    return t ? [<div key={t.navn}>{t.navn}</div>] : [];
+    return t ? [<div>{t.navn}</div>] : [];
   });
 };
 
