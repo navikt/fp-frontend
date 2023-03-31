@@ -3044,7 +3044,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -3088,7 +3088,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -3128,7 +3128,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -3170,7 +3170,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -3209,7 +3209,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -3252,7 +3252,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -3295,7 +3295,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -3337,7 +3337,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -3379,7 +3379,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -3423,7 +3423,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -3467,7 +3467,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -3511,7 +3511,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -3554,7 +3554,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -3596,7 +3596,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -3640,7 +3640,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -3681,7 +3681,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -3721,7 +3721,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -3758,7 +3758,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -3931,7 +3931,7 @@ __metadata:
     react-intl: 6.3.2
     react-pdf: 6.2.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -3942,7 +3942,7 @@ __metadata:
   resolution: "@navikt/fp-kodeverk@workspace:packages/kodeverk"
   dependencies:
     eslint: 8.36.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
   languageName: unknown
   linkType: soft
@@ -3952,7 +3952,7 @@ __metadata:
   resolution: "@navikt/fp-konstanter@workspace:packages/konstanter"
   dependencies:
     eslint: 8.36.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
   languageName: unknown
   linkType: soft
@@ -4000,7 +4000,7 @@ __metadata:
     react-intl: 6.3.2
     react-router-dom: 6.9.0
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4045,7 +4045,7 @@ __metadata:
     react-intl: 6.3.2
     react-router-dom: 6.9.0
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4095,7 +4095,7 @@ __metadata:
     react-intl: 6.3.2
     react-router-dom: 6.9.0
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4136,7 +4136,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4181,7 +4181,7 @@ __metadata:
     react-intl: 6.3.2
     react-router-dom: 6.9.0
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4222,7 +4222,7 @@ __metadata:
     react-intl: 6.3.2
     react-router-dom: 6.9.0
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4259,7 +4259,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4296,7 +4296,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4334,7 +4334,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4377,7 +4377,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4418,7 +4418,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4456,7 +4456,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4495,7 +4495,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4538,7 +4538,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4583,7 +4583,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4625,7 +4625,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4667,7 +4667,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4713,7 +4713,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4758,7 +4758,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4803,7 +4803,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4845,7 +4845,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4884,7 +4884,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4928,7 +4928,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -4968,7 +4968,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -5008,7 +5008,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -5048,7 +5048,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -5088,7 +5088,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -5131,7 +5131,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -5172,7 +5172,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -5214,7 +5214,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -5256,7 +5256,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -5297,7 +5297,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -5312,7 +5312,7 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.36.0
     react: 18.2.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -5328,7 +5328,7 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.36.0
     sinon: 15.0.3
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -5373,7 +5373,7 @@ __metadata:
     react-intl: 6.3.2
     react-router-dom: 6.9.0
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -5414,7 +5414,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -5448,7 +5448,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -5487,7 +5487,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -5526,7 +5526,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -5565,7 +5565,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -5603,7 +5603,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -5642,7 +5642,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -5690,7 +5690,7 @@ __metadata:
     react-intl: 6.3.2
     react-router-dom: 6.9.0
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -5722,7 +5722,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     stylelint: 15.3.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vitest: 0.29.7
   languageName: unknown
@@ -5739,7 +5739,7 @@ __metadata:
     react-hook-form: 7.43.8
     react-intl: 6.3.2
     react-router-dom: 6.9.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
   languageName: unknown
   linkType: soft
@@ -5753,7 +5753,7 @@ __metadata:
     "@navikt/ft-fakta-beregning": 4.1.8
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.0.11
     "@navikt/ft-prosess-beregningsgrunnlag": 6.0.13
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
   languageName: unknown
   linkType: soft
@@ -5763,7 +5763,7 @@ __metadata:
   resolution: "@navikt/fp-types@workspace:packages/types"
   dependencies:
     "@navikt/fp-kodeverk": 1.0.0
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
   languageName: unknown
   linkType: soft
@@ -5780,7 +5780,7 @@ __metadata:
     eslint: 8.36.0
     react: 18.2.0
     react-intl: 6.3.2
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
   languageName: unknown
   linkType: soft
@@ -15589,7 +15589,7 @@ __metadata:
     source-map-loader: 4.0.1
     stylelint: 15.3.0
     stylelint-order: 6.0.3
-    typescript: 5.0.2
+    typescript: 5.0.3
     vite: 4.2.1
     vite-plugin-dts: 2.1.0
     vite-plugin-externalize-deps: 0.5.0
@@ -25847,13 +25847,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:5.0.2":
-  version: 5.0.2
-  resolution: "typescript@npm:5.0.2"
+"typescript@npm:5.0.3":
+  version: 5.0.3
+  resolution: "typescript@npm:5.0.3"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: bef1dcd166acfc6934b2ec4d72f93edb8961a5fab36b8dd2aaf6f4f4cd5c0210f2e0850aef4724f3b4913d5aef203a94a28ded731b370880c8bcff7e4ff91fc1
+  checksum: 3cce0576d218cb4277ff8b6adfef1a706e9114a98b4261a38ad658a7642f1b274a8396394f6cbff8c0ba852996d7ed2e233e9b8431d5d55ac7c2f6fea645af02
   languageName: node
   linkType: hard
 
@@ -25877,13 +25877,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@5.0.2#~builtin<compat/typescript>":
-  version: 5.0.2
-  resolution: "typescript@patch:typescript@npm%3A5.0.2#~builtin<compat/typescript>::version=5.0.2&hash=1f5320"
+"typescript@patch:typescript@5.0.3#~builtin<compat/typescript>":
+  version: 5.0.3
+  resolution: "typescript@patch:typescript@npm%3A5.0.3#~builtin<compat/typescript>::version=5.0.3&hash=1f5320"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: bdbf3d0aac0d6cf010fbe0536753dc19f278eb4aba88140dcd25487dfe1c56ca8b33abc0dcd42078790a939b08ebc4046f3e9bb961d77d3d2c3cfa9829da4d53
+  checksum: 9ec0a8eed38d46cc2c8794555b7674e413604c56c159f71b8ff21ce7f17334a44127a68724cb2ef8221ff3b19369f8f05654e8a5266621d7d962aeed889bd630
   languageName: node
   linkType: hard
 
