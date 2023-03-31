@@ -124,6 +124,8 @@ const DisponibleStonadskontoerPanel: FunctionComponent<OwnProps> = ({
     return aktiviteterMedNavn.sort((akt1, akt2) => akt1.navn.localeCompare(akt2.navn));
   }, [valgtKontoType, stønadskontoerMedNavn]);
 
+  const bTag = useCallback((chunks: any) => <b>{chunks}</b>, []);
+
   return (
     <div className={styles.disponibeltUttak}>
       <FlexContainer>
@@ -137,7 +139,7 @@ const DisponibleStonadskontoerPanel: FunctionComponent<OwnProps> = ({
             <BodyShort size="small">
               <FormattedMessage
                 id="TimeLineInfo.Stonadinfo.Total"
-                values={{ ukerVerdi: tilgjengeligeUker, b: (chunks: any) => <b>{chunks}</b> }}
+                values={{ ukerVerdi: tilgjengeligeUker, b: bTag }}
               />
             </BodyShort>
           </FlexColumn>
@@ -173,7 +175,7 @@ const DisponibleStonadskontoerPanel: FunctionComponent<OwnProps> = ({
                           values={{
                             ukerVerdi: ukerOgDager.uker,
                             dagerVerdi: ukerOgDager.dager,
-                            b: (chunks: any) => <b>{chunks}</b>,
+                            b: bTag,
                           }}
                         />
                       )}
