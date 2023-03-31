@@ -8,7 +8,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { TimeLineButton } from '@navikt/ft-tidslinje';
 import { Label } from '@navikt/ds-react';
-import { BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
+import { behandlingType as BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
 import { calcDays } from '@navikt/ft-utils';
 
 import {

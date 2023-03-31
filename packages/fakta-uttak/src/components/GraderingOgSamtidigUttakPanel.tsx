@@ -6,7 +6,6 @@ import dayjs from 'dayjs';
 import { required } from '@navikt/ft-form-validators';
 import { DDMMYYYY_DATE_FORMAT, guid } from '@navikt/ft-utils';
 import { ArbeidsgiverOpplysninger } from '@navikt/ft-types';
-import { KodeverkType } from '@navikt/ft-kodeverk';
 import {
   SelectField, NumberField, formHooks, CheckboxField,
 } from '@navikt/ft-form-hooks';
@@ -14,7 +13,7 @@ import {
   FlexColumn, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { Alert } from '@navikt/ds-react';
-import { uttakArbeidType } from '@navikt/fp-kodeverk';
+import { uttakArbeidType, KodeverkType } from '@navikt/fp-kodeverk';
 
 import {
   AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold,

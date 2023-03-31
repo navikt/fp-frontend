@@ -1,9 +1,10 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
 
 import { KodeverkMedNavn } from '@navikt/fp-types';
-import { venteArsakType, dokumentMalType } from '@navikt/fp-kodeverk';
+import {
+  behandlingType as BehandlingType, KodeverkType, venteArsakType, dokumentMalType,
+} from '@navikt/fp-kodeverk';
 import { MeldingerSakIndex, MessagesModalSakIndex, FormValues } from '@navikt/fp-sak-meldinger';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';

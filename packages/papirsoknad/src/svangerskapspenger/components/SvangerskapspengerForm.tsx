@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { KodeverkType } from '@navikt/ft-kodeverk';
 import { Form } from '@navikt/ft-form-hooks';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
@@ -26,7 +25,7 @@ import {
   MottattDatoFormValues,
   ANDRE_YTELSER_FORM_NAME_PREFIX,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
-import { familieHendelseType } from '@navikt/fp-kodeverk';
+import { familieHendelseType, KodeverkType } from '@navikt/fp-kodeverk';
 
 const FRILANS_NAME_PREFIX = 'frilans';
 

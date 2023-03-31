@@ -14,9 +14,10 @@ import {
   ArrowBox,
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import { KodeverkType } from '@navikt/ft-kodeverk';
 
-import { oppholdArsakType, utsettelseArsakCodes, periodeResultatType } from '@navikt/fp-kodeverk';
+import {
+  KodeverkType, oppholdArsakType, utsettelseArsakCodes, periodeResultatType,
+} from '@navikt/fp-kodeverk';
 import {
   AarsakFilter, AlleKodeverk, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, PeriodeSoker, PeriodeSokerAktivitet,
 } from '@navikt/fp-types';

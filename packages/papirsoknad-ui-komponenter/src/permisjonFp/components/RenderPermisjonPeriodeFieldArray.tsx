@@ -19,10 +19,9 @@ import {
   required,
 } from '@navikt/ft-form-validators';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
-import { KodeverkType } from '@navikt/ft-kodeverk';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
-import { uttakPeriodeType } from '@navikt/fp-kodeverk';
+import { KodeverkType, uttakPeriodeType } from '@navikt/fp-kodeverk';
 
 import styles from './renderPermisjonPeriodeFieldArray.module.css';
 

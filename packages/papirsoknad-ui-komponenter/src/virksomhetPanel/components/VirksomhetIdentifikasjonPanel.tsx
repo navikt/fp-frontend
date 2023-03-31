@@ -9,7 +9,7 @@ import {
 import {
   dateBeforeOrEqualToToday, hasValidDate, hasValidInteger, hasValidOrgNumber, required, validPeriodeFomTom,
 } from '@navikt/ft-form-validators';
-import { KodeverkType } from '@navikt/ft-kodeverk';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './virksomhetIdentifikasjonPanel.module.css';
