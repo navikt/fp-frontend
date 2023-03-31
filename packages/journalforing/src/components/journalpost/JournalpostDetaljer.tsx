@@ -1,17 +1,20 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { useForm } from 'react-hook-form';
 import { Heading, BodyLong } from '@navikt/ds-react';
 
 import {
   FlexColumn, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import VelgSakForm from './form/VelgSakForm';
+import { Form } from '@navikt/ft-form-hooks';
+import VelgSakForm, { transformValues as transformValuesSak } from './innhold/VelgSakForm';
 import Journalpost from '../../typer/journalpostTsType';
 import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import SakDetaljer from './innhold/SakDetaljer';
 import DokumentDetaljer from './innhold/DokumentDetaljer';
 import BrukerAvsenderPanel from './innhold/BrukerAvsenderPanel';
+import JournalføringFormValues from '../../typer/journalføringFormValues';
 
 type OwnProps = Readonly<{
   journalpost: Journalpost;
@@ -19,6 +22,18 @@ type OwnProps = Readonly<{
   avbrytVisningAvJournalpost: () => void;
   submitJournalføring: (params: JournalførSubmitValue) => void;
 }>;
+
+export const transformValues = (values: JournalføringFormValues, journalpost: Journalpost, oppgave: OppgaveOversikt): JournalførSubmitValue => {
+  if (!oppgave.enhetId) {
+    throw Error('Kan ikke journalføre uten at enhet er satt');
+  }
+  return {
+    journalpostId: journalpost.journalpostId,
+    enhetId: oppgave.enhetId,
+    oppgaveId: oppgave.id,
+    ...transformValuesSak(values, journalpost),
+  };
+};
 
 /**
  * JournalpostDetaljer - Viser detaljer om valgt journalpost
@@ -30,8 +45,14 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
   submitJournalføring,
 }) => {
   const saker = journalpost.fagsaker || [];
+  const formMethods = useForm<JournalføringFormValues>();
+  const submitJournal = useCallback((values: JournalføringFormValues) => {
+    submitJournalføring(transformValues(values, journalpost, oppgave));
+  }, []);
+  const isSubmittable = formMethods.formState.isDirty;
+
   return (
-    <>
+    <Form<JournalføringFormValues> formMethods={formMethods} onSubmit={submitJournal}>
       <FlexRow>
         <FlexColumn>
           <Heading size="large">{journalpost.tittel}</Heading>
@@ -92,12 +113,11 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
       </FlexRow>
       <VerticalSpacer eightPx />
       <VelgSakForm
+        isSubmittable={isSubmittable}
         journalpost={journalpost}
         avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
-        submitJournalføring={submitJournalføring}
-        oppgave={oppgave}
       />
-    </>
+    </Form>
   );
 };
 export default JournalpostDetaljer;

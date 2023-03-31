@@ -1,17 +1,16 @@
 import React, {
   FunctionComponent, ReactElement, useCallback, useMemo,
 } from 'react';
-import { useForm } from 'react-hook-form';
 import { BodyShort, Button } from '@navikt/ds-react';
 import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { Form, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel, SelectField, formHooks } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { fagsakYtelseType } from '@navikt/fp-kodeverk';
-import JournalførSubmitValue from '../../../typer/ferdigstillJournalføringSubmit';
-import OppgaveOversikt from '../../../typer/oppgaveOversiktTsType';
+import { JournalførSakSubmitValue } from '../../../typer/ferdigstillJournalføringSubmit';
 import Journalpost from '../../../typer/journalpostTsType';
 import JournalFagsak from '../../../typer/journalFagsakTsType';
+import JournalføringFormValues from '../../../typer/journalføringFormValues';
 
 const TOM_ARRAY:JournalFagsak[] = [];
 
@@ -30,10 +29,6 @@ export const finnYtelseTekst = (ytelseKode: string): string => {
     default:
       return 'Journal.Sak.Ytelse.Ukjent';
   }
-};
-type FormValues = {
-  saksnummerValg?: string;
-  ytelsetypeValg?: string;
 };
 
 type YtelseSelectValg = {
@@ -61,20 +56,14 @@ const ytelseSelectValg: YtelseSelectValg[] = [
   },
 ];
 
-const transformValues = (values: FormValues, journalpost: Journalpost, oppgave: OppgaveOversikt): JournalførSubmitValue => {
+export const transformValues = (values: JournalføringFormValues, journalpost: Journalpost): JournalførSakSubmitValue => {
   const saksnummerValg = values[radioFieldName];
-  if (!oppgave.enhetId || !saksnummerValg) {
-    throw Error('Kan ikke journalføre uten at enhet er satt og det er valgt en sak å knytte journalpost til');
-  }
   if (saksnummerValg === LAG_NY_SAK) {
     const valgtYtelse = values[selectFieldName];
     if (!valgtYtelse) {
       throw Error('Kan ikke journalføre på ny sak uten ytelse');
     }
     return {
-      journalpostId: journalpost.journalpostId,
-      enhetId: oppgave.enhetId,
-      oppgaveId: oppgave.id,
       opprettSak: {
         ytelseType: valgtYtelse,
         aktørId: journalpost.bruker.aktørId,
@@ -82,9 +71,6 @@ const transformValues = (values: FormValues, journalpost: Journalpost, oppgave: 
     };
   }
   return {
-    journalpostId: journalpost.journalpostId,
-    enhetId: oppgave.enhetId,
-    oppgaveId: oppgave.id,
     saksnummer: saksnummerValg,
   };
 };
@@ -107,9 +93,8 @@ const lagRadioOptions = (saksliste: JournalFagsak[], intl: IntlShape, fetTekst: 
 
 type OwnProps = Readonly<{
   journalpost: Journalpost;
-  oppgave: OppgaveOversikt;
+  isSubmittable: boolean;
   avbrytVisningAvJournalpost: () => void;
-  submitJournalføring: (params: JournalførSubmitValue) => void;
 }>;
 
 /**
@@ -117,26 +102,20 @@ type OwnProps = Readonly<{
  */
 const VelgSakForm: FunctionComponent<OwnProps> = ({
   journalpost,
-  oppgave,
+  isSubmittable,
   avbrytVisningAvJournalpost,
-  submitJournalføring,
 }) => {
   const intl = useIntl();
   const saksliste = journalpost?.fagsaker || TOM_ARRAY;
   const finnesSaker = saksliste && saksliste.length > 0;
-  const formMethods = useForm<FormValues>();
+  const formMethods = formHooks.useFormContext<JournalføringFormValues>();
   const sakValg = formMethods.watch(radioFieldName);
   const skalOppretteSak = sakValg === LAG_NY_SAK;
   const fetTekst = useCallback((chunks: any) => (<b>{chunks}</b>), []);
-
-  const submitJournal = useCallback((values: FormValues) => {
-    submitJournalføring(transformValues(values, journalpost, oppgave));
-  }, []);
-
   const radioOptions = useMemo(() => lagRadioOptions(saksliste, intl, fetTekst), [saksliste]);
 
   return (
-    <Form<FormValues> formMethods={formMethods} onSubmit={submitJournal}>
+    <>
       {!finnesSaker && (
         <BodyShort><FormattedMessage id="Journal.Sak.Ingen" /></BodyShort>
       )}
@@ -182,7 +161,7 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
             <Button
               size="small"
               variant="primary"
-              disabled={!formMethods.formState.isDirty}
+              disabled={!isSubmittable}
               type="submit"
             >
               <FormattedMessage id="ValgtOppgave.Journalfør" />
@@ -201,7 +180,7 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
           </FlexColumn>
         </FlexRow>
       </>
-    </Form>
+    </>
   );
 };
 export default VelgSakForm;

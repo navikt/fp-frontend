@@ -11,7 +11,7 @@ import { familieHendelseType } from '@navikt/fp-kodeverk';
 import dayjs from 'dayjs';
 import { Clipboard } from '@navikt/ft-plattform-komponenter';
 import styles from './sakDetaljer.module.css';
-import { finnYtelseTekst } from '../form/VelgSakForm';
+import { finnYtelseTekst } from './VelgSakForm';
 import JournalFagsak, { FamilieHendelse } from '../../../typer/journalFagsakTsType';
 
 const velgSakLenke = (saksnummer: string): string => (`/fagsak/${saksnummer}/`);
