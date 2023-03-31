@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
@@ -81,6 +81,8 @@ const ErOmsorgVilkaarOppfyltForm: FunctionComponent<OwnProps> = ({
   const isOpenAksjonspunkt = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET);
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
 
+  const bTag = useCallback((chunks: any) => <b>{chunks}</b>, []);
+
   return (
     <Form
       formMethods={formMethods}
@@ -102,7 +104,7 @@ const ErOmsorgVilkaarOppfyltForm: FunctionComponent<OwnProps> = ({
           avslagsarsaker={avslagsarsaker}
           readOnly={readOnly}
           customVilkarOppfyltText={<FormattedMessage id="ErOmsorgVilkaarOppfyltForm.Oppfylt" />}
-          customVilkarIkkeOppfyltText={<FormattedMessage id="ErOmsorgVilkaarOppfyltForm.IkkeOppfylt" values={{ b: (chunks: any) => <b>{chunks}</b> }} />}
+          customVilkarIkkeOppfyltText={<FormattedMessage id="ErOmsorgVilkaarOppfyltForm.IkkeOppfylt" values={{ b: bTag }} />}
         />
         <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />
       </ProsessPanelTemplate>

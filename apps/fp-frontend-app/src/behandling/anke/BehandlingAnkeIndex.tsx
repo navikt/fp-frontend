@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
@@ -49,6 +49,18 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & StandardBehandlingProps>
 
   useInitBehandlingHandlinger(requestAnkeApi, behandlingEventHandler, hentBehandling, setBehandling, behandling);
 
+  const faktaPaneler = useCallback((props) => (
+    <VergeFaktaInitPanel {...props} />
+  ), []);
+
+  const prosessPaneler = useCallback((props) => (
+    <>
+      <AnkeBehandlingProsessStegInitPanel {...props} alleBehandlinger={alleBehandlinger} />
+      <AnkeResultatProsessStegInitPanel {...props} />
+      <AnkeTrygderettsbehandlingProsessStegInitPanel {...props} />
+    </>
+  ), []);
+
   if (!behandling) {
     return <LoadingPanel />;
   }
@@ -76,16 +88,8 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & StandardBehandlingProps>
           valgtFaktaSteg={valgtFaktaSteg}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
           requestApi={requestAnkeApi}
-          hentFaktaPaneler={(props) => (
-            <VergeFaktaInitPanel {...props} />
-          )}
-          hentProsessPaneler={(props) => (
-            <>
-              <AnkeBehandlingProsessStegInitPanel {...props} alleBehandlinger={alleBehandlinger} />
-              <AnkeResultatProsessStegInitPanel {...props} />
-              <AnkeTrygderettsbehandlingProsessStegInitPanel {...props} />
-            </>
-          )}
+          hentFaktaPaneler={faktaPaneler}
+          hentProsessPaneler={prosessPaneler}
         />
       </StandardPropsProvider>
     </>

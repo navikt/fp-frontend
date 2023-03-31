@@ -4,7 +4,7 @@ import { createOidcUnknownError } from '../utils/oidcUtils.js';
 import { getAuthClient } from './client.js';
 
 // eslint-disable-next-line no-async-promise-executor
-export const grantAzureOboToken = (userToken, scope) => new Promise((async (resolve, reject) => {
+export const grantAzureOboToken = (userToken, scope) => new Promise((async (resolve, reject) => { // NOSONAR
   logger.info(`Henter grant ${scope}.`);
 
   const token = userToken.replace('Bearer ', '');
