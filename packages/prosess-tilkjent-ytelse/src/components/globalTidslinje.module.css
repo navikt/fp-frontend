@@ -7,9 +7,6 @@
   font-size: 0.8rem;
   font-style: italic;
 }
-:global(.skjemaelement > .skjemaelement)__feilmelding {
-  margin-top: 1rem;
-}
 :global(.skjemaelement > .skjemaelement__input) {
   padding: 9px;
 }
