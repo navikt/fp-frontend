@@ -22,12 +22,12 @@
     "@navikt/ds-react": "2.8.4",
     "@navikt/fp-kodeverk": "1.0.0",
     "@navikt/fp-types": "1.0.0",
-    "@navikt/ft-form-hooks": "4.0.11",
-    "@navikt/ft-form-validators": "2.0.10",
-    "@navikt/ft-kodeverk": "2.0.8",
-    "@navikt/ft-types": "2.0.8",
-    "@navikt/ft-ui-komponenter": "2.0.9",
-    "@navikt/ft-utils": "2.0.9",
+    "@navikt/ft-form-hooks": "4.0.13",
+    "@navikt/ft-form-validators": "2.0.11",
+    "@navikt/ft-kodeverk": "2.0.9",
+    "@navikt/ft-types": "2.0.9",
+    "@navikt/ft-ui-komponenter": "2.0.11",
+    "@navikt/ft-utils": "2.0.10",
     "react": "18.2.0",
     "react-hook-form": "7.43.8",
     "react-intl": "6.3.2"
@@ -48,11 +48,11 @@
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.4.3",
     "cross-env": "7.0.3",
-    "eslint": "8.36.0",
+    "eslint": "8.37.0",
     "stylelint": "15.3.0",
-    "typescript": "5.0.2",
+    "typescript": "5.0.3",
     "vite": "4.2.1",
-    "vitest": "0.29.7"
+    "vitest": "0.29.8"
   },
   "exports": {
     ".": {
