@@ -143,6 +143,8 @@ const OppgaveHandlingerMenu: FunctionComponent<OwnProps> = ({
     startRequest: hentSaksbehandler, state: hentSaksbehandlerState, data: saksbehandler, resetRequestData: resetHentSaksbehandler,
   } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK);
 
+  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+
   return (
     <>
       <div className={styles.containerMenu} style={getOffsetPositionStyle(offset)} ref={divRef}>
@@ -151,7 +153,7 @@ const OppgaveHandlingerMenu: FunctionComponent<OwnProps> = ({
             id="OppgaveHandlingerMenu.ReservertTil"
             values={{
               ...getDateAndTime(oppgave.status.reservertTilTidspunkt),
-              b: (...chunks: any) => <b>{chunks}</b>,
+              b: bTag,
             }}
           />
         )}

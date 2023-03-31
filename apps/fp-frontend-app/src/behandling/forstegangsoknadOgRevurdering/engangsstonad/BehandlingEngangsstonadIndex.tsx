@@ -5,7 +5,6 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
-import BehandlingContainer from '../../felles/BehandlingContainer';
 import StandardBehandlingProps from '../../felles/typer/standardBehandlingProps';
 import BehandlingPaVent from '../../felles/modaler/paVent/BehandlingPaVent';
 import StandardPropsProvider from '../../felles/utils/standardPropsStateContext';
@@ -13,20 +12,7 @@ import {
   useBehandling, useInitBehandlingHandlinger, useInitRequestApi, useLagreAksjonspunkt,
 } from '../../felles/utils/indexHooks';
 import { restApiEsHooks, requestEsApi } from './data/esBehandlingApi';
-import SakenFaktaInitPanel from '../paneler/fakta/SakenFaktaInitPanel';
-import YtelserFaktaInitPanel from '../paneler/fakta/YtelserFaktaInitPanel';
-import VergeFaktaInitPanel from '../paneler/fakta/VergeFaktaInitPanel';
-import OmsorgvilkaretFaktaInitPanel from '../paneler/fakta/OmsorgvilkaretFaktaInitPanel';
-import AdopsjonsvilkaretFaktaInitPanel from '../paneler/fakta/AdopsjonsvilkaretFaktaInitPanel';
-import FodselvilkaretFaktaInitPanel from '../paneler/fakta/FodselvilkaretFaktaInitPanel';
-import MedlemskapsvilkaretFaktaInitPanel from '../paneler/fakta/MedlemskapsvilkaretFaktaInitPanel';
-import VarselProsessStegInitPanel from '../paneler/prosess/VarselProsessStegInitPanel';
-import InngangsvilkarProsessStegInitPanel from './prosessPaneler/InngangsvilkarEsProsessStegInitPanel';
-import OpplysningspliktProsessStegInitPanel from '../paneler/prosess/OpplysningspliktProsessStegInitPanel';
-import BeregningEsProsessStegInitPanel from './prosessPaneler/BeregningEsProsessStegInitPanel';
-import SimuleringProsessStegInitPanel from '../paneler/prosess/SimuleringProsessStegInitPanel';
-import VedtakEsProsessStegInitPanel from './prosessPaneler/VedtakEsProsessStegInitPanel';
-import SoknadsfristEsProsessStegInitPanel from './prosessPaneler/SoknadsfristEsProsessStegInitPanel';
+import BehandlingContainerWrapperEngangsstonad from './BehandlingContainerWrapperEngangsstonad';
 
 const endepunkterSomSkalHentesEnGang = [
   { key: BehandlingFellesApiKeys.ARBEIDSGIVERE_OVERSIKT },
@@ -92,49 +78,17 @@ const BehandlingEngangsstonadIndex: FunctionComponent<StandardBehandlingProps> =
         lagreOverstyrteAksjonspunkter={lagreOverstyrteAksjonspunkter}
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
       >
-        <BehandlingContainer
+        <BehandlingContainerWrapperEngangsstonad
           behandling={behandling}
+          fagsak={fagsak}
           valgtProsessSteg={valgtProsessSteg}
           valgtFaktaSteg={valgtFaktaSteg}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-          requestApi={requestEsApi}
-          hentFaktaPaneler={(props) => (
-            <>
-              <SakenFaktaInitPanel {...props} fagsak={fagsak} />
-              <YtelserFaktaInitPanel {...props} />
-              <VergeFaktaInitPanel {...props} />
-              <OmsorgvilkaretFaktaInitPanel {...props} personoversikt={personoversikt} />
-              <AdopsjonsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
-              <FodselvilkaretFaktaInitPanel {...props} />
-              <MedlemskapsvilkaretFaktaInitPanel {...props} />
-            </>
-          )}
-          hentProsessPaneler={(props, ekstraProps) => (
-            <>
-              <VarselProsessStegInitPanel
-                {...props}
-                fagsak={fagsak}
-                opneSokeside={opneSokeside}
-                toggleSkalOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
-              />
-              <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-              <InngangsvilkarProsessStegInitPanel
-                {...props}
-                rettigheter={rettigheter}
-                oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-                apentFaktaPanelInfo={ekstraProps.apentFaktaPanelInfo}
-              />
-              <SoknadsfristEsProsessStegInitPanel {...props} rettigheter={rettigheter} />
-              <BeregningEsProsessStegInitPanel {...props} rettigheter={rettigheter} />
-              <SimuleringProsessStegInitPanel {...props} fagsak={fagsak} menyData={ekstraProps.allMenyData} />
-              <VedtakEsProsessStegInitPanel
-                {...props}
-                fagsak={fagsak}
-                opneSokeside={opneSokeside}
-                toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
-              />
-            </>
-          )}
+          opneSokeside={opneSokeside}
+          toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
+          arbeidsgivere={arbeidsgivere}
+          personoversikt={personoversikt}
+          rettigheter={rettigheter}
         />
       </StandardPropsProvider>
     </>

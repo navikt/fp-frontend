@@ -1,4 +1,6 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, {
+  FunctionComponent, useCallback, useEffect, useState,
+} from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 import { createIntl } from '@navikt/ft-utils';
@@ -122,6 +124,12 @@ export default {
 
 export const VisKunFaktaPaneler = () => {
   const [valgtFaktaPanel, setValgtFaktaPanel] = useState<string | undefined>('default');
+  const faktaPaneler = useCallback((props) => (
+    <>
+      <FaktaPanelTest1 {...props} />
+      <FaktaPanelTest2 {...props} />
+    </>
+  ), []);
   return (
     <RawIntlProvider value={intl}>
       <BehandlingContainer
@@ -129,12 +137,7 @@ export const VisKunFaktaPaneler = () => {
         valgtFaktaSteg={valgtFaktaPanel}
         oppdaterProsessStegOgFaktaPanelIUrl={(_prosessPanel?: string, faktaPanel?: string) => setValgtFaktaPanel(faktaPanel)}
         requestApi={{} as RequestApi}
-        hentFaktaPaneler={(props) => (
-          <>
-            <FaktaPanelTest1 {...props} />
-            <FaktaPanelTest2 {...props} />
-          </>
-        )}
+        hentFaktaPaneler={faktaPaneler}
       />
     </RawIntlProvider>
   );
@@ -142,18 +145,19 @@ export const VisKunFaktaPaneler = () => {
 
 export const VisKunProsessPaneler = () => {
   const [valgtProsessPanel, setValgtProsessPanel] = useState<string | undefined>('default');
+  const prosessPaneler = useCallback((props) => (
+    <>
+      <ProsessPanelTest1 {...props} />
+      <ProsessPanelTest2 {...props} />
+    </>
+  ), []);
   return (
     <BehandlingContainer
       behandling={{} as Behandling}
       valgtProsessSteg={valgtProsessPanel}
       oppdaterProsessStegOgFaktaPanelIUrl={(prosessPanel?: string) => setValgtProsessPanel(prosessPanel)}
       requestApi={{} as RequestApi}
-      hentProsessPaneler={(props) => (
-        <>
-          <ProsessPanelTest1 {...props} />
-          <ProsessPanelTest2 {...props} />
-        </>
-      )}
+      hentProsessPaneler={prosessPaneler}
     />
   );
 };
