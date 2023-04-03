@@ -22,7 +22,7 @@
     "@navikt/fp-rest-api-hooks": "1.0.0",
     "@navikt/ft-ui-komponenter": "2.0.9",
     "@testing-library/jest-dom": "5.16.5",
-    "axios-mock-adapter": "1.21.3",
+    "axios-mock-adapter": "1.21.4",
     "react": "18.2.0",
     "react-intl": "6.3.2"
   },
