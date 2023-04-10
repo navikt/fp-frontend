@@ -27,7 +27,7 @@
   "devDependencies": {
     "axios-mock-adapter": "1.21.3",
     "cross-env": "7.0.3",
-    "eslint": "8.36.0",
+    "eslint": "8.38.0",
     "sinon": "15.0.3",
     "typescript": "5.0.2",
     "vite": "4.2.1",
