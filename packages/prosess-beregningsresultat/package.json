@@ -57,7 +57,7 @@
     "cross-env": "7.0.3",
     "eslint": "8.36.0",
     "stylelint": "15.3.0",
-    "typescript": "5.0.2",
+    "typescript": "5.0.4",
     "vite": "4.2.1",
     "vitest": "0.29.7"
   },
