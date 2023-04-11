@@ -38,12 +38,13 @@ const transformValues = (values: JournalføringFormValues, journalpost: Journalp
   if (!oppgave.enhetId) {
     throw Error('Kan ikke journalføre uten at enhet er satt');
   }
+  const erTittelEndret = journalpost.tittel !== values.journalpostTittel;
   return {
     journalpostId: journalpost.journalpostId,
     enhetId: oppgave.enhetId,
     oppgaveId: oppgave.id,
-    journalpostTittel: values.journalpostTittel,
-    dokumenter: transformValuesDokumenter(values),
+    journalpostTittel: erTittelEndret ? values.journalpostTittel : undefined,
+    dokumenter: transformValuesDokumenter(values, journalpost.dokumenter || []),
     ...transformValuesSak(values, journalpost),
   };
 };

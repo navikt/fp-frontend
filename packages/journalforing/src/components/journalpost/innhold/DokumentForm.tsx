@@ -11,6 +11,14 @@ export const buildInitialValues = (dokumenter: JournalDokument[]): DokumentTitte
   tittel: dok.tittel,
 })));
 
+const finnMatchendeDokumentForId = (dokId: string, dokumenter: JournalDokument[]): JournalDokument => {
+  const match = dokumenter.find((doc) => doc.dokumentId === dokId);
+  if (!match) {
+    throw new Error(`Finner ikke dokument med id ${dokId}`);
+  }
+  return match;
+};
+
 const finnTittelEllerFeil = (dokVal: DokumentTittelFormValues): string => {
   if (!dokVal.tittel) {
     throw new Error(`Mangler dokumenttittel for dokument med id  ${dokVal.dokumentId}`);
@@ -18,19 +26,17 @@ const finnTittelEllerFeil = (dokVal: DokumentTittelFormValues): string => {
   return dokVal.tittel;
 };
 
-export const transformValues = (values: JournalføringFormValues): DokumentTittelSubmitValue[] | undefined => {
+const erTittelEndret = (dokVal: DokumentTittelFormValues, dokumenter: JournalDokument[]): boolean => {
+  const match = finnMatchendeDokumentForId(dokVal.dokumentId, dokumenter);
+  return match.tittel !== dokVal.tittel;
+};
+
+export const transformValues = (values: JournalføringFormValues, dokumenter: JournalDokument[]): DokumentTittelSubmitValue[] | undefined => {
   if (!values.journalpostDokumenter) {
     return undefined;
   }
-  return values.journalpostDokumenter.map((dokVal) => ({ dokumentId: dokVal.dokumentId, tittel: finnTittelEllerFeil(dokVal) }));
-};
-
-const finnMatchendeDokumentForField = (field: DokumentTittelFormValues, dokumenter: JournalDokument[]): JournalDokument => {
-  const match = dokumenter.find((doc) => doc.dokumentId === field.dokumentId);
-  if (!match) {
-    throw new Error(`Finner ikke dokument med id ${field.dokumentId}`);
-  }
-  return match;
+  return values.journalpostDokumenter.filter((dokVal) => erTittelEndret(dokVal, dokumenter))
+    .map((dokVal) => ({ dokumentId: dokVal.dokumentId, tittel: finnTittelEllerFeil(dokVal) }));
 };
 
 type OwnProps = Readonly<{
@@ -51,7 +57,7 @@ const DokumentForm: FunctionComponent<OwnProps> = ({
   return (
     <>
       {fields.map((field, index) => (
-        <DokumentDetaljer dokument={finnMatchendeDokumentForField(field, dokumenter)} key={field.id} docFieldIndex={index} />
+        <DokumentDetaljer dokument={finnMatchendeDokumentForId(field.dokumentId, dokumenter)} key={field.id} docFieldIndex={index} />
       ))}
     </>
   );
