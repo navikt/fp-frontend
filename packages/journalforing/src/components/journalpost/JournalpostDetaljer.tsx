@@ -12,9 +12,10 @@ import Journalpost from '../../typer/journalpostTsType';
 import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import SakDetaljer from './innhold/SakDetaljer';
-import DokumentDetaljer from './innhold/DokumentDetaljer';
+import DokumentForm, { transformValues as transformValuesDokumenter, buildInitialValues as buildInitialValuesDokumenter } from './innhold/DokumentForm';
 import BrukerAvsenderPanel from './innhold/BrukerAvsenderPanel';
 import JournalføringFormValues from '../../typer/journalføringFormValues';
+import JournalpostTittelForm from './innhold/JournalpostTittelForm';
 
 type OwnProps = Readonly<{
   journalpost: Journalpost;
@@ -23,7 +24,17 @@ type OwnProps = Readonly<{
   submitJournalføring: (params: JournalførSubmitValue) => void;
 }>;
 
-export const transformValues = (values: JournalføringFormValues, journalpost: Journalpost, oppgave: OppgaveOversikt): JournalførSubmitValue => {
+const buildInitialValues = (journalpost: Journalpost): JournalføringFormValues => {
+  const docs = journalpost.dokumenter || [];
+  return {
+    saksnummerValg: undefined,
+    ytelsetypeValg: undefined,
+    journalpostTittel: journalpost.tittel,
+    journalpostDokumenter: buildInitialValuesDokumenter(docs),
+  };
+};
+
+const transformValues = (values: JournalføringFormValues, journalpost: Journalpost, oppgave: OppgaveOversikt): JournalførSubmitValue => {
   if (!oppgave.enhetId) {
     throw Error('Kan ikke journalføre uten at enhet er satt');
   }
@@ -31,6 +42,8 @@ export const transformValues = (values: JournalføringFormValues, journalpost: J
     journalpostId: journalpost.journalpostId,
     enhetId: oppgave.enhetId,
     oppgaveId: oppgave.id,
+    journalpostTittel: values.journalpostTittel,
+    dokumenter: transformValuesDokumenter(values),
     ...transformValuesSak(values, journalpost),
   };
 };
@@ -45,7 +58,10 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
   submitJournalføring,
 }) => {
   const saker = journalpost.fagsaker || [];
-  const formMethods = useForm<JournalføringFormValues>();
+  const formMethods = useForm<JournalføringFormValues>({
+    defaultValues: buildInitialValues(journalpost),
+  });
+
   const submitJournal = useCallback((values: JournalføringFormValues) => {
     submitJournalføring(transformValues(values, journalpost, oppgave));
   }, []);
@@ -53,11 +69,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
 
   return (
     <Form<JournalføringFormValues> formMethods={formMethods} onSubmit={submitJournal}>
-      <FlexRow>
-        <FlexColumn>
-          <Heading size="large">{journalpost.tittel}</Heading>
-        </FlexColumn>
-      </FlexRow>
+      <JournalpostTittelForm journalpost={journalpost} />
       <VerticalSpacer sixteenPx />
       <BrukerAvsenderPanel journalpost={journalpost} />
       <VerticalSpacer twentyPx />
@@ -88,7 +100,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
         && (
           <>
             <VerticalSpacer eightPx />
-            <DokumentDetaljer dokumenter={journalpost.dokumenter} />
+            <DokumentForm dokumenter={journalpost.dokumenter} />
             <VerticalSpacer thirtyTwoPx />
           </>
         )}

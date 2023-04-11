@@ -1,0 +1,15 @@
+.tittelRad {
+  display: flex;
+}
+
+.editIcon {
+  color: var(--a-blue-600);
+  height: 20px;
+  margin-top: 8px;
+  width: 20px;
+}
+
+.selectField {
+  padding-bottom: 8px;
+  width: 100%;
+}

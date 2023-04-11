@@ -8,6 +8,7 @@
 }
 
 .dokumentTittel {
+  display: flex;
   padding-top: 10px;
   width: 90%;
 }
@@ -16,4 +17,22 @@
   color: var(--a-blue-600);
   height: 32px;
   width: 32px;
+}
+
+.editIcon {
+  color: var(--a-blue-600);
+  height: 20px;
+  margin-left: 22px;
+  width: 20px;
+}
+
+.selectField {
+  padding-bottom: 8px;
+  width: 20%;
+}
+
+@media all and (max-width: 1350px) {
+  .selectField {
+    width: 50%;
+  }
 }

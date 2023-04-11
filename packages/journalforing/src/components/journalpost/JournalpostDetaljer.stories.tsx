@@ -12,6 +12,7 @@ import Journalpost from '../../typer/journalpostTsType';
 
 import messages from '../../../i18n/nb_NO.json';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
+import DokumentTittel from '../../kodeverk/dokumentTittel';
 
 const withIntl = getIntlDecorator(messages);
 
@@ -31,7 +32,7 @@ const defaultOppgave = {
 
 const detaljertJournalpostMal = {
   journalpostId: '986547336994',
-  tittel: 'Inntektsmelding',
+  tittel: DokumentTittel.INNTEKTSMELDING,
   kanal: JournalKanal.ALLTIN,
   bruker: {
     navn: 'Søker Søkersen',
@@ -46,19 +47,19 @@ const detaljertJournalpostMal = {
   dokumenter: [
     {
       dokumentId: '999999999',
-      tittel: 'Inntektsmelding',
+      tittel: DokumentTittel.INNTEKTSMELDING,
       varianter: [],
       lenke: '',
     },
     {
       dokumentId: '999999998',
-      tittel: 'Søknad',
+      tittel: DokumentTittel.SØKNAD_FORELDREPENGER,
       varianter: [],
       lenke: '',
     },
     {
       dokumentId: '999999997',
-      tittel: 'Terminbekreftelse',
+      tittel: DokumentTittel.ANNET,
       varianter: [],
       lenke: '',
     },

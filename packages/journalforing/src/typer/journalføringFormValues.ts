@@ -7,7 +7,7 @@ type JournalføringFormValues = Readonly <{
     saksnummerValg?: string;
     ytelsetypeValg?: string;
     journalpostTittel?: string;
-    journalpostDokumenter: DokumentTittelFormValues[];
+    journalpostDokumenter?: DokumentTittelFormValues[];
   }>
 
 export default JournalføringFormValues;
