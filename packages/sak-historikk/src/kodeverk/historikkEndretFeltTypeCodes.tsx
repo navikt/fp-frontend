@@ -441,6 +441,10 @@ const historikkEndretFeltTypeCodes = {
     kode: 'UTLAND',
     feltId: 'HistorikkEndretFelt.Utland',
   },
+  INNHENT_SED: {
+    kode: 'INNHENT_SED',
+    feltId: 'HistorikkEndretFelt.InnhentSED',
+  },
   HEL_TILRETTELEGGING_FOM: {
     kode: 'HEL_TILRETTELEGGING_FOM',
     feltId: 'HistorikkEndretFelt.HelTilretteleggingFom',
