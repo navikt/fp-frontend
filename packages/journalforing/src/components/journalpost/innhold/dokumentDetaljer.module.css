@@ -11,6 +11,7 @@
   display: flex;
   padding-top: 10px;
   width: 90%;
+  margin-right: 50px;
 }
 
 .newTabIcon {
@@ -19,11 +20,14 @@
   width: 32px;
 }
 
-.editIcon {
+.editButton {
   color: var(--a-blue-600);
   height: 20px;
-  margin-left: 22px;
   width: 20px;
+}
+
+.editButton:last-child {
+  margin-left: 16px ;
 }
 
 .selectField {

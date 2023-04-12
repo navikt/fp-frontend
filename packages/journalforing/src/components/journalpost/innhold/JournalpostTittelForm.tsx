@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
-import { Heading } from '@navikt/ds-react';
+import { Heading, Button } from '@navikt/ds-react';
 import { Edit } from '@navikt/ds-icons';
 import { SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
@@ -42,14 +42,10 @@ const JournalpostTittelForm: FunctionComponent<OwnProps> = ({
         </FlexColumn>
       )}
       {!kanRedigereTittel && (
-        <>
-          <FlexColumn className={styles.tittelRad}>
-            <Heading size="large">{journalpost.tittel}</Heading>
-          </FlexColumn>
-          <FlexColumn className={styles.ikonCol}>
-            <Edit className={styles.editIcon} onClick={toggleRedigering} />
-          </FlexColumn>
-        </>
+        <FlexColumn className={styles.tittelRad}>
+          <Heading size="large">{journalpost.tittel}</Heading>
+          <Button icon={<Edit />} className={styles.editButton} onClick={toggleRedigering} type="button" variant="tertiary" />
+        </FlexColumn>
       )}
     </FlexRow>
   );

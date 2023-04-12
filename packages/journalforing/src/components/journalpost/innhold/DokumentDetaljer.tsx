@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
-import { Label } from '@navikt/ds-react';
+import { Label, Button } from '@navikt/ds-react';
 import { required } from '@navikt/ft-form-validators';
 import { NewTab, Edit } from '@navikt/ds-icons';
 import { SelectField } from '@navikt/ft-form-hooks';
@@ -48,8 +48,8 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({
         )}
         {!kanRedigeres && (
           <FlexColumn className={styles.dokumentTittel}>
-            <Label>{dokument.tittel}</Label>
-            <Edit className={styles.editIcon} onClick={toggleRedigering} />
+            <Label className={styles.dokLab}>{dokument.tittel}</Label>
+            <Button icon={<Edit aria-hidden />} className={styles.editButton} onClick={toggleRedigering} type="button" variant="tertiary" />
           </FlexColumn>
         )}
         <FlexColumn><a href={dokument.lenke} target="_blank" rel="noreferrer"><NewTab className={styles.newTabIcon} /></a></FlexColumn>
