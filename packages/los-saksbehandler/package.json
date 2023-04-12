@@ -24,31 +24,31 @@
     "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider start-storybook --quiet -p 7023"
   },
   "dependencies": {
-    "@navikt/ds-icons": "2.8.4",
-    "@navikt/ds-react": "2.8.4",
+    "@navikt/ds-icons": "2.8.11",
+    "@navikt/ds-react": "2.8.11",
     "@navikt/fp-kodeverk": "1.0.0",
     "@navikt/fp-los-felles": "1.0.0",
     "@navikt/fp-rest-api": "1.0.0",
     "@navikt/fp-rest-api-hooks": "1.0.0",
     "@navikt/fp-types": "1.0.0",
-    "@navikt/ft-form-hooks": "4.0.13",
-    "@navikt/ft-form-validators": "2.0.11",
-    "@navikt/ft-kodeverk": "2.0.9",
-    "@navikt/ft-types": "2.0.9",
-    "@navikt/ft-ui-komponenter": "2.0.11",
-    "@navikt/ft-utils": "2.0.10",
+    "@navikt/ft-form-hooks": "4.0.14",
+    "@navikt/ft-form-validators": "2.0.12",
+    "@navikt/ft-kodeverk": "2.0.10",
+    "@navikt/ft-types": "2.0.10",
+    "@navikt/ft-ui-komponenter": "2.0.12",
+    "@navikt/ft-utils": "2.0.11",
     "dayjs": "1.11.7",
     "echarts": "5.4.2",
     "history": "5.3.0",
     "lodash.debounce": "4.0.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "7.43.8",
+    "react-hook-form": "7.43.9",
     "react-intl": "6.3.2",
-    "react-router-dom": "6.9.0"
+    "react-router-dom": "6.10.0"
   },
   "devDependencies": {
-    "@navikt/ds-css": "2.8.4",
+    "@navikt/ds-css": "2.8.11",
     "@navikt/fp-storybook-utils": "1.0.0",
     "@navikt/fp-utils-test": "1.0.0",
     "@storybook/addon-actions": "6.5.16",
@@ -64,11 +64,11 @@
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.4.3",
     "cross-env": "7.0.3",
-    "eslint": "8.37.0",
-    "stylelint": "15.3.0",
-    "typescript": "5.0.3",
+    "eslint": "8.38.0",
+    "stylelint": "15.4.0",
+    "typescript": "5.0.4",
     "vite": "4.2.1",
-    "vitest": "0.29.8"
+    "vitest": "0.30.1"
   },
   "exports": {
     ".": {

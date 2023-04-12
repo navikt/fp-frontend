@@ -20,15 +20,15 @@
   "dependencies": {
     "@navikt/fp-rest-api": "1.0.0",
     "@navikt/fp-rest-api-hooks": "1.0.0",
-    "@navikt/ft-ui-komponenter": "2.0.11",
+    "@navikt/ft-ui-komponenter": "2.0.12",
     "@testing-library/jest-dom": "5.16.5",
-    "axios-mock-adapter": "1.21.3",
+    "axios-mock-adapter": "1.21.4",
     "react": "18.2.0",
     "react-intl": "6.3.2"
   },
   "devDependencies": {
-    "eslint": "8.37.0",
-    "typescript": "5.0.3",
+    "eslint": "8.38.0",
+    "typescript": "5.0.4",
     "vite": "4.2.1"
   },
   "exports": {
