@@ -1,12 +1,12 @@
 enum DokumentTittel {
-    INNTEKTSMELDING = 'INNTEKTSMELDING',
-    SØKNAD_FORELDREPENGER = 'SØKNAD_FORELDREPENGER',
-    SØKNAD_SVANGERSKAPSPENGER = 'SØKNAD_SVANGERSKAPSPENGER',
-    SØKNAD_ENGANGSSTØNAD = 'SØKNAD_ENGANGSSTØNAD',
-    KLAGE = 'KLAGE',
-    ANNET = 'ANNET',
+    INNTEKTSMELDING = 'Inntektsmelding',
+    SØKNAD_FORELDREPENGER = 'Søknad om foreldrepenger',
+    SØKNAD_SVANGERSKAPSPENGER = 'Søknad om svangerskapspenger',
+    SØKNAD_ENGANGSSTØNAD = 'Søknad om engangsstønad',
+    KLAGE = 'Klage',
+    ANNET = 'Annet',
 }
 
-export const listeMedTittler = Object.keys(DokumentTittel).filter((tittel) => Number.isNaN(Number(tittel)));
+export const listeMedTittler = Object.values(DokumentTittel).filter((tittel) => Number.isNaN(Number(tittel)));
 
 export default DokumentTittel;
