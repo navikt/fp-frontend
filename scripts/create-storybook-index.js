@@ -75,6 +75,12 @@ const creatIndexHtml = () => {
     path.join(__dirname, DEPLOY_FOLDER, 'monorepo-index.css'),
   );
 
+  // For å støtte filer med '_' (Skip Jekyll-prosessering)
+  shell.cp(
+    path.join(__dirname, '.nojekyll'),
+    path.join(__dirname, DEPLOY_FOLDER, '.nojekyll'),
+  );
+
   // Kopier storybook fra pakkene og inn i folder som skal deployes
   const origDir = process.cwd();
   const packages = glob

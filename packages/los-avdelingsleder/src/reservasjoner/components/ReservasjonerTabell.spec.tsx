@@ -3,11 +3,11 @@ import { render, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import * as stories from './ReservasjonerTabell.stories';
 
-// @ts-ignore Ta vekk når fiksa
 const { ViseAtIngenReservasjonerBleFunnet, VisTabellMedReservasjoner } = composeStories(stories);
 
 describe('<ReservasjonerTabell>', () => {
   it('skal vise tekst som viser at ingen reservasjoner er lagt til', async () => {
+    // @ts-ignore Fiks
     render(<ViseAtIngenReservasjonerBleFunnet />);
 
     expect(await screen.findByText('Reservasjoner for avdelingen')).toBeInTheDocument();
@@ -15,6 +15,7 @@ describe('<ReservasjonerTabell>', () => {
   });
 
   it('skal vise to reservasjoner i tabell', async () => {
+    // @ts-ignore Fiks
     render(<VisTabellMedReservasjoner />);
 
     expect(await screen.findByText('Reservasjoner for avdelingen')).toBeInTheDocument();
