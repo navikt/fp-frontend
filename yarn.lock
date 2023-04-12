@@ -11499,13 +11499,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"es6-promisify@npm:^6.1.1":
-  version: 6.1.1
-  resolution: "es6-promisify@npm:6.1.1"
-  checksum: e57dfa8b6533387e6cae115bdc1591e4e6e7648443741360c4f4f8f1d2c17d1f0fb293ccd3f86193f016c236ed15f336e075784eab7ec9a67af0aed2b949dd7c
-  languageName: node
-  linkType: hard
-
 "esbuild-plugin-alias@npm:^0.2.1":
   version: 0.2.1
   resolution: "esbuild-plugin-alias@npm:0.2.1"
@@ -12636,7 +12629,6 @@ __metadata:
     lerna: 6.6.1
     raf: 3.4.1
     react-test-renderer: 18.2.0
-    replace-in-files: 3.0.0
     source-map-loader: 4.0.1
     stylelint: 15.4.0
     stylelint-order: 6.0.3
@@ -13968,13 +13960,6 @@ __metadata:
   dependencies:
     binary-extensions: ^2.0.0
   checksum: 84192eb88cff70d320426f35ecd63c3d6d495da9d805b19bc65b518984b7c0760280e57dbf119b7e9be6b161784a5a673ab2c6abe83abb5198a432232ad5b35c
-  languageName: node
-  linkType: hard
-
-"is-binary@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "is-binary@npm:0.1.0"
-  checksum: 38a128d25309dbd89e5aa73c9373108d38ffa700b8ea29b0db47808da75ffe84a06e294ecba5bcc6d743062ef1189b458e07189afef1bac5cdf604af74eff640
   languageName: node
   linkType: hard
 
@@ -15671,7 +15656,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:4.17.21, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:~4.17.15":
+"lodash@npm:4.17.21, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.21, lodash@npm:~4.17.15":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -19021,19 +19006,6 @@ __metadata:
   version: 1.6.1
   resolution: "repeat-string@npm:1.6.1"
   checksum: 1b809fc6db97decdc68f5b12c4d1a671c8e3f65ec4a40c238bc5200e44e85bcc52a54f78268ab9c29fcf5fe4f1343e805420056d1f30fa9a9ee4c2d93e3cc6c0
-  languageName: node
-  linkType: hard
-
-"replace-in-files@npm:3.0.0":
-  version: 3.0.0
-  resolution: "replace-in-files@npm:3.0.0"
-  dependencies:
-    co: ^4.6.0
-    es6-promisify: ^6.1.1
-    globby: ^11.0.1
-    is-binary: ^0.1.0
-    lodash: ^4.17.20
-  checksum: b18c1c1bda08b263ac6d1ef018ad91e953f811883d1487975019fa31c42ab8481937d9bdcfb65345d1018a7b90860b90a6f792b6b87a38deee0f10b13405fff2
   languageName: node
   linkType: hard
 
