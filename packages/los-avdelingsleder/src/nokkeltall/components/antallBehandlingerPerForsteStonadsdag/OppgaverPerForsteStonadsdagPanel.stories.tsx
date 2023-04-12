@@ -16,7 +16,7 @@ export default {
   decorators: [withIntl],
 };
 
-export const Default = () => (
+const Template = () => (
   <OppgaverPerForsteStonadsdagPanel
     height={300}
     oppgaverPerForsteStonadsdag={[{
@@ -43,3 +43,5 @@ export const Default = () => (
     }]}
   />
 );
+
+export const Default = Template.bind({});
