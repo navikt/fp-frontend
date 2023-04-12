@@ -4,8 +4,8 @@ import React, {
 import moment from 'moment';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
-  BehandlingType, BehandlingStatus, KodeverkType,
-} from '@navikt/ft-kodeverk';
+  behandlingType as BehandlingType, behandlingStatus as BehandlingStatus, KodeverkType,
+} from '@navikt/fp-kodeverk';
 import {
   MenySakIndex,
   MenyData,

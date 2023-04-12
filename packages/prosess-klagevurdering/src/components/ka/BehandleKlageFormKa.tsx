@@ -2,10 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
 
-import { klageVurdering as klageVurderingType, klageVurderingOmgjoer as klageVurderingOmgjoerType } from '@navikt/fp-kodeverk';
+import { KodeverkType, klageVurdering as klageVurderingType, klageVurderingOmgjoer as klageVurderingOmgjoerType } from '@navikt/fp-kodeverk';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { KlageVurdering, AlleKodeverk } from '@navikt/fp-types';
-import { KodeverkType } from '@navikt/ft-kodeverk';
 
 interface OwnProps {
   alleKodeverk: AlleKodeverk;

@@ -3,7 +3,7 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
-import { KodeverkType } from '@navikt/ft-kodeverk';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import { Button } from '@navikt/ds-react';
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';

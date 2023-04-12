@@ -4,10 +4,11 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import MockAdapter from 'axios-mock-adapter';
 import { Modal } from '@navikt/ds-react';
-import { FagsakYtelseType, BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
-import { dokumentMalType } from '@navikt/fp-kodeverk';
+import {
+  fagsakYtelseType as FagsakYtelseType, behandlingType as BehandlingType, KodeverkType, dokumentMalType,
+} from '@navikt/fp-kodeverk';
 import { Fagsak, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';

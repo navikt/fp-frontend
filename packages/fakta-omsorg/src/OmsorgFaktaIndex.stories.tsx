@@ -2,10 +2,11 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 import { Aksjonspunkt } from '@navikt/ft-types';
-import { OpplysningAdresseType } from '@navikt/ft-kodeverk';
 
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { AksjonspunktCode, sivilstandType, aksjonspunktStatus } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktCode, sivilstandType, aksjonspunktStatus, opplysningAdresseType as OpplysningAdresseType,
+} from '@navikt/fp-kodeverk';
 import {
   Behandling, KjønnkodeEnum, Personoversikt, Ytelsefordeling,
 } from '@navikt/fp-types';
