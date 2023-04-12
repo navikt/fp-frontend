@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Label, BodyShort } from '@navikt/ds-react';
 import { PersonopplysningerBasis } from '@navikt/fp-types';
-import { OpplysningAdresseType } from '@navikt/ft-kodeverk';
+import { opplysningAdresseType } from '@navikt/fp-kodeverk';
 
 interface OwnProps {
   personopplysninger: PersonopplysningerBasis;
@@ -12,8 +12,8 @@ interface OwnProps {
 const AdresseVisning: FunctionComponent<OwnProps> = ({
   personopplysninger,
 }) => {
-  const postadr = personopplysninger.adresser.find((adresse) => adresse.adresseType === OpplysningAdresseType.POSTADRESSE);
-  const bostedsadr = personopplysninger.adresser.find((adresse) => adresse.adresseType === OpplysningAdresseType.BOSTEDSADRESSE);
+  const postadr = personopplysninger.adresser.find((adresse) => adresse.adresseType === opplysningAdresseType.POSTADRESSE);
+  const bostedsadr = personopplysninger.adresser.find((adresse) => adresse.adresseType === opplysningAdresseType.BOSTEDSADRESSE);
   if (!postadr && !bostedsadr) {
     return null;
   }

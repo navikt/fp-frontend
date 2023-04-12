@@ -1,4 +1,4 @@
-import { OpplysningAdresseType } from '@navikt/ft-kodeverk';
+import { opplysningAdresseType as OpplysningAdresseType } from '@navikt/fp-kodeverk';
 
 import getAddresses from './getAddresses';
 

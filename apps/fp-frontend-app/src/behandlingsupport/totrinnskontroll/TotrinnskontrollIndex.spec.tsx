@@ -4,13 +4,14 @@ import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import MockAdapter from 'axios-mock-adapter';
 import { Modal } from '@navikt/ds-react';
-import { FagsakYtelseType, BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
 
 import {
   Fagsak, BehandlingAppKontekst, TotrinnskontrollAksjonspunkt, BehandlingÅrsak,
 } from '@navikt/fp-types';
 import { RestApiMock } from '@navikt/fp-utils-test';
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import {
+  fagsakYtelseType as FagsakYtelseType, behandlingType as BehandlingType, KodeverkType, AksjonspunktCode,
+} from '@navikt/fp-kodeverk';
 
 import FagsakData from '../../fagsak/FagsakData';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';

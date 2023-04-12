@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
-import { KodeverkType } from '@navikt/ft-kodeverk';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import { createIntl } from '@navikt/ft-utils';
 
 import {

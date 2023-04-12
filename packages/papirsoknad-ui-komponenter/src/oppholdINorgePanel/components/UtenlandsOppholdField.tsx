@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 import {
   formHooks, Datepicker, SelectField, PeriodFieldArray,
 } from '@navikt/ft-form-hooks';
-import { Landkode } from '@navikt/ft-kodeverk';
+import { landkoder as Landkode } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/ft-types';
 
 import {

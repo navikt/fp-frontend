@@ -4,9 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { KodeverkType } from '@navikt/ft-kodeverk';
 
-import { ankeVurdering as ankeVurderingKodeverk, ankeVurderingOmgjoer } from '@navikt/fp-kodeverk';
+import { ankeVurdering as ankeVurderingKodeverk, ankeVurderingOmgjoer, KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, AnkeVurdering } from '@navikt/fp-types';
 
 export type BehandlingInfo = {
