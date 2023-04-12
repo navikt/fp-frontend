@@ -9,9 +9,9 @@
 
 .dokumentTittel {
   display: flex;
+  margin-right: 50px;
   padding-top: 10px;
   width: 90%;
-  margin-right: 50px;
 }
 
 .newTabIcon {
