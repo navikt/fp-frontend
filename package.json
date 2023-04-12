@@ -53,7 +53,7 @@
     "@storybook/addon-essentials": "7.0.2",
     "@storybook/addon-links": "7.0.2",
     "@storybook/addons": "7.0.2",
-    "@storybook/builder-vite": "7.0.2",
+    "@storybook/builder-vite": "7.0.3",
     "@storybook/cli": "7.0.2",
     "@storybook/react": "7.0.2",
     "@storybook/testing-react": "2.0.0",
