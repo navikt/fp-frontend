@@ -19,7 +19,7 @@ type OwnProps = Readonly<{
 const JournalpostTittelForm: FunctionComponent<OwnProps> = ({
   journalpost,
 }) => {
-  const [kanRedigereTittel, setKanRedigereTittel] = useState<boolean>(false);
+  const [kanRedigereTittel, setKanRedigereTittel] = useState<boolean>(!journalpost.tittel);
   const toggleRedigering = useCallback(() => {
     setKanRedigereTittel(!kanRedigereTittel);
   }, [kanRedigereTittel]);

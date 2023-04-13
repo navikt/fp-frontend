@@ -24,7 +24,7 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({
   docFieldIndex,
   journalpost,
 }) => {
-  const [kanRedigeres, setSkalRedigeres] = useState<boolean>(false);
+  const [kanRedigeres, setSkalRedigeres] = useState<boolean>(!dokument.tittel);
   const tittler = listeMedTittler.map((tittel) => (
     <option value={tittel} key={tittel}>
       {tittel}
