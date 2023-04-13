@@ -10,4 +10,3 @@ window.ResizeObserver =
     observe: vi.fn(),
     unobserve: vi.fn(),
   }));
-  
