@@ -101,7 +101,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
         && (
           <>
             <VerticalSpacer eightPx />
-            <DokumentForm dokumenter={journalpost.dokumenter} />
+            <DokumentForm journalpost={journalpost} />
             <VerticalSpacer thirtyTwoPx />
           </>
         )}

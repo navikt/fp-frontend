@@ -32,8 +32,8 @@ const defaultOppgave = {
 
 const detaljertJournalpostMal = {
   journalpostId: '986547336994',
-  tittel: DokumentTittel.INNTEKTSMELDING,
-  kanal: JournalKanal.ALLTIN,
+  tittel: DokumentTittel.BEKREFTELSE_ARBEIDSGIVER,
+  kanal: JournalKanal.EESSI,
   bruker: {
     navn: 'Søker Søkersen',
     fnr: '12048714373',
@@ -47,13 +47,13 @@ const detaljertJournalpostMal = {
   dokumenter: [
     {
       dokumentId: '999999999',
-      tittel: DokumentTittel.INNTEKTSMELDING,
+      tittel: DokumentTittel.BEKREFTELSE_ARBEIDSGIVER,
       varianter: [],
       lenke: '',
     },
     {
       dokumentId: '999999998',
-      tittel: DokumentTittel.SØKNAD_FORELDREPENGER,
+      tittel: DokumentTittel.SØKNAD_FORELDREPENGER_FØDSEL,
       varianter: [],
       lenke: '',
     },

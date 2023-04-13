@@ -7,6 +7,7 @@ import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 import Journalpost from '../../../typer/journalpostTsType';
 import styles from './journalpostTittelForm.module.css';
 import { listeMedTittler } from '../../../kodeverk/dokumentTittel';
+import { erKanalSomErÅpenForEndring } from '../../../kodeverk/journalKanal';
 
 type OwnProps = Readonly<{
   journalpost: Journalpost;
@@ -44,7 +45,9 @@ const JournalpostTittelForm: FunctionComponent<OwnProps> = ({
       {!kanRedigereTittel && (
         <FlexColumn className={styles.tittelRad}>
           <Heading size="large">{journalpost.tittel}</Heading>
-          <Button icon={<Edit />} className={styles.editButton} onClick={toggleRedigering} type="button" variant="tertiary" />
+          {erKanalSomErÅpenForEndring(journalpost.kanal) && (
+            <Button icon={<Edit />} className={styles.editButton} onClick={toggleRedigering} type="button" variant="tertiary" />
+          )}
         </FlexColumn>
       )}
     </FlexRow>

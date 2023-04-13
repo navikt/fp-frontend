@@ -5,6 +5,9 @@ import { DokumentTittelSubmitValue } from '../../../typer/ferdigstillJournalfør
 import JournalDokument from '../../../typer/journalDokumentTsType';
 import JournalføringFormValues, { DokumentTittelFormValues } from '../../../typer/journalføringFormValues';
 import DokumentDetaljer from './DokumentDetaljer';
+import Journalpost from '../../../typer/journalpostTsType';
+
+const TOM_DOK_LISTE: JournalDokument[] = [];
 
 export const buildInitialValues = (dokumenter: JournalDokument[]): DokumentTittelFormValues[] => (dokumenter.map((dok) => ({
   dokumentId: dok.dokumentId,
@@ -40,14 +43,14 @@ export const transformValues = (values: JournalføringFormValues, dokumenter: Jo
 };
 
 type OwnProps = Readonly<{
-  dokumenter: JournalDokument[];
+  journalpost: Journalpost;
 }>;
 
 /**
  * DokumentForm - Inneholder form behandling av dokumenter og setter opp visning av hvert dokument
  */
 const DokumentForm: FunctionComponent<OwnProps> = ({
-  dokumenter,
+  journalpost,
 }) => {
   const { control } = formHooks.useFormContext<JournalføringFormValues>();
   const { fields } = formHooks.useFieldArray({
@@ -57,7 +60,12 @@ const DokumentForm: FunctionComponent<OwnProps> = ({
   return (
     <>
       {fields.map((field, index) => (
-        <DokumentDetaljer dokument={finnMatchendeDokumentForId(field.dokumentId, dokumenter)} key={field.id} docFieldIndex={index} />
+        <DokumentDetaljer
+          dokument={finnMatchendeDokumentForId(field.dokumentId, journalpost.dokumenter || TOM_DOK_LISTE)}
+          key={field.id}
+          docFieldIndex={index}
+          journalpost={journalpost}
+        />
       ))}
     </>
   );

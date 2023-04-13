@@ -7,10 +7,13 @@ import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 import JournalDokument from '../../../typer/journalDokumentTsType';
 import styles from './dokumentDetaljer.module.css';
 import { listeMedTittler } from '../../../kodeverk/dokumentTittel';
+import { erKanalSomErÅpenForEndring } from '../../../kodeverk/journalKanal';
+import Journalpost from '../../../typer/journalpostTsType';
 
 type OwnProps = Readonly<{
   dokument: JournalDokument;
   docFieldIndex: number,
+  journalpost: Journalpost,
 }>
 
 /**
@@ -19,6 +22,7 @@ type OwnProps = Readonly<{
 const DokumentDetaljer: FunctionComponent<OwnProps> = ({
   dokument,
   docFieldIndex,
+  journalpost,
 }) => {
   const [kanRedigeres, setSkalRedigeres] = useState<boolean>(false);
   const tittler = listeMedTittler.map((tittel) => (
@@ -49,7 +53,9 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({
         {!kanRedigeres && (
           <FlexColumn className={styles.dokumentTittel}>
             <Label className={styles.dokLab}>{dokument.tittel}</Label>
-            <Button icon={<Edit aria-hidden />} className={styles.editButton} onClick={toggleRedigering} type="button" variant="tertiary" />
+            {erKanalSomErÅpenForEndring(journalpost.kanal) && (
+              <Button icon={<Edit />} className={styles.editButton} onClick={toggleRedigering} type="button" variant="tertiary" />
+            )}
           </FlexColumn>
         )}
         <FlexColumn><a href={dokument.lenke} target="_blank" rel="noreferrer"><NewTab className={styles.newTabIcon} /></a></FlexColumn>
