@@ -4,7 +4,7 @@ import { Button, Table } from '@navikt/ds-react';
 import { NextFilled } from '@navikt/ds-icons';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
-import { finnYtelseTekst } from '../journalpost/form/VelgSakForm';
+import { finnYtelseTekst } from '../journalpost/innhold/VelgSakForm';
 
 import styles from './oppgaveTabellRad.module.css';
 

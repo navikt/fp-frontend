@@ -7,7 +7,7 @@ import JournalFagsak from './journalFagsakTsType';
 
 type Journalpost = Readonly<{
     journalpostId: string;
-    tittel: string;
+    tittel?: string;
     kanal?: JournalKanal;
     bruker: JournalBruker;
     avsender: JournalAvsender;
