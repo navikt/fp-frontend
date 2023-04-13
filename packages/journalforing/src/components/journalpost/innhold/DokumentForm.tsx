@@ -34,9 +34,9 @@ const erTittelEndret = (dokVal: DokumentTittelFormValues, dokumenter: JournalDok
   return match.tittel !== dokVal.tittel;
 };
 
-export const transformValues = (values: JournalføringFormValues, dokumenter: JournalDokument[]): DokumentTittelSubmitValue[] | undefined => {
+export const transformValues = (values: JournalføringFormValues, dokumenter: JournalDokument[]): DokumentTittelSubmitValue[] => {
   if (!values.journalpostDokumenter) {
-    return undefined;
+    return [];
   }
   return values.journalpostDokumenter.filter((dokVal) => erTittelEndret(dokVal, dokumenter))
     .map((dokVal) => ({ dokumentId: dokVal.dokumentId, tittel: finnTittelEllerFeil(dokVal) }));

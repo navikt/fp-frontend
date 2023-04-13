@@ -13,12 +13,16 @@ export type JournalførSakSubmitValue = Readonly <{
     opprettSak?: OpprettSakSubmitValue;
 }>
 
+export type OppdaterJournalførTittlerSubmitValue = Readonly <{
+    journalpostTittel?: string;
+    dokumenter?: DokumentTittelSubmitValue[];
+}>
+
 export type JournalførSubmitValue = JournalførSakSubmitValue & Readonly <{
     journalpostId: string;
     oppgaveId: number;
     enhetId: string;
-    dokumenter?: DokumentTittelSubmitValue[];
-    journalpostTittel?: string;
+    oppdaterTitlerDto?: OppdaterJournalførTittlerSubmitValue;
 }>
 
 export default JournalførSubmitValue;

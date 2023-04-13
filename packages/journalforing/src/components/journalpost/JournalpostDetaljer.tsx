@@ -9,7 +9,7 @@ import {
 import { Form } from '@navikt/ft-form-hooks';
 import VelgSakForm, { transformValues as transformValuesSak } from './innhold/VelgSakForm';
 import Journalpost from '../../typer/journalpostTsType';
-import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
+import JournalførSubmitValue, { OppdaterJournalførTittlerSubmitValue } from '../../typer/ferdigstillJournalføringSubmit';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import SakDetaljer from './innhold/SakDetaljer';
 import DokumentForm, { transformValues as transformValuesDokumenter, buildInitialValues as buildInitialValuesDokumenter } from './innhold/DokumentForm';
@@ -34,17 +34,27 @@ const buildInitialValues = (journalpost: Journalpost): JournalføringFormValues 
   };
 };
 
+const transformTittelValues = (values: JournalføringFormValues, journalpost: Journalpost): OppdaterJournalførTittlerSubmitValue | undefined => {
+  const nyTittel = journalpost.tittel !== values.journalpostTittel ? values.journalpostTittel : undefined;
+  const endredeDokumenter = transformValuesDokumenter(values, journalpost.dokumenter || []);
+  if (nyTittel || endredeDokumenter.length > 0) {
+    return {
+      journalpostTittel: nyTittel,
+      dokumenter: endredeDokumenter,
+    };
+  }
+  return undefined;
+};
+
 const transformValues = (values: JournalføringFormValues, journalpost: Journalpost, oppgave: OppgaveOversikt): JournalførSubmitValue => {
   if (!oppgave.enhetId) {
     throw Error('Kan ikke journalføre uten at enhet er satt');
   }
-  const erTittelEndret = journalpost.tittel !== values.journalpostTittel;
   return {
     journalpostId: journalpost.journalpostId,
     enhetId: oppgave.enhetId,
     oppgaveId: oppgave.id,
-    journalpostTittel: erTittelEndret ? values.journalpostTittel : undefined,
-    dokumenter: transformValuesDokumenter(values, journalpost.dokumenter || []),
+    oppdaterTitlerDto: transformTittelValues(values, journalpost),
     ...transformValuesSak(values, journalpost),
   };
 };
