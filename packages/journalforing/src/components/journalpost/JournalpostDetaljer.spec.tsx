@@ -16,7 +16,9 @@ describe('<JournalforingIndex>', () => {
     expect(screen.getByText('12048714373')).toBeInTheDocument();
     expect(screen.getByText('Svingen sag og høvleri')).toBeInTheDocument();
     expect(screen.getByText('999999999')).toBeInTheDocument();
-    expect(screen.getAllByText('Inntektsmelding')).toHaveLength(3);
+    expect(screen.getAllByText('Bekreftelse fra arbeidsgiver')).toHaveLength(2);
+    expect(screen.getByText('Søknad om foreldrepenger ved fødsel')).toBeInTheDocument();
+    expect(screen.getByText('Annet')).toBeInTheDocument();
 
     expect(screen.getByLabelText('125416597 Foreldrepenger')).toBeInTheDocument();
     expect(screen.getByLabelText('155462542 Svangerskapspenger')).toBeInTheDocument();
@@ -41,6 +43,7 @@ describe('<JournalforingIndex>', () => {
     expect(journalfør).toHaveBeenNthCalledWith(1, {
       enhetId: '4108',
       oppgaveId: 600,
+      oppdaterTitlerDto: undefined,
       journalpostId: '986547336994',
       saksnummer: '125416597',
     });
@@ -55,7 +58,9 @@ describe('<JournalforingIndex>', () => {
     expect(screen.getByText('12048714373')).toBeInTheDocument();
     expect(screen.getByText('Svingen sag og høvleri')).toBeInTheDocument();
     expect(screen.getByText('999999999')).toBeInTheDocument();
-    expect(screen.getAllByText('Inntektsmelding')).toHaveLength(3);
+    expect(screen.getAllByText('Bekreftelse fra arbeidsgiver')).toHaveLength(2);
+    expect(screen.getByText('Søknad om foreldrepenger ved fødsel')).toBeInTheDocument();
+    expect(screen.getByText('Annet')).toBeInTheDocument();
 
     expect(screen.getByLabelText('125416597 Foreldrepenger')).toBeInTheDocument();
     expect(screen.getByLabelText('155462542 Svangerskapspenger')).toBeInTheDocument();
@@ -86,6 +91,7 @@ describe('<JournalforingIndex>', () => {
     expect(journalfør).toHaveBeenNthCalledWith(1, {
       enhetId: '4108',
       oppgaveId: 600,
+      oppdaterTitlerDto: undefined,
       journalpostId: '986547336994',
       opprettSak: {
         aktørId: '98594685464858',
