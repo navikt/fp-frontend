@@ -23,19 +23,19 @@ export type AksjonspunktGodkjenningData = {
   feilSkjønn?: boolean;
   feilUtredning?: boolean;
   annet?: boolean;
-}
+};
 
 type OwnProps = {
   behandling: BehandlingAppKontekst;
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   readOnly: boolean;
   erForeldrepengerFagsak: boolean;
-  arbeidsforholdHandlingTyper: KodeverkMedNavn[],
-  erTilbakekreving: boolean,
+  arbeidsforholdHandlingTyper: KodeverkMedNavn[];
+  erTilbakekreving: boolean;
   skjemalenkeTyper: KodeverkMedNavn[];
   faktaOmBeregningTilfeller: KodeverkMedNavn[];
   lagLenke: (skjermlenkeCode: string) => Location | undefined;
-}
+};
 
 const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
   behandling,
@@ -48,9 +48,7 @@ const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
   faktaOmBeregningTilfeller,
   lagLenke,
 }) => {
-  const {
-    control, watch,
-  } = formHooks.useFormContext();
+  const { control, watch } = formHooks.useFormContext();
   const { fields } = formHooks.useFieldArray({
     control,
     name: FIELD_ARRAY_NAME,
@@ -62,10 +60,12 @@ const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
     <>
       {fields.map((field, index) => {
         const { aksjonspunktKode } = aksjonspunktGodkjenning[index];
-        const context = totrinnskontrollSkjermlenkeContext.find((c) => c.totrinnskontrollAksjonspunkter
-          .some((ta) => ta.aksjonspunktKode === aksjonspunktKode));
-        const totrinnskontrollAksjonspunkt = context?.totrinnskontrollAksjonspunkter
-          .find((c) => c.aksjonspunktKode === aksjonspunktKode);
+        const context = totrinnskontrollSkjermlenkeContext.find(c =>
+          c.totrinnskontrollAksjonspunkter.some(ta => ta.aksjonspunktKode === aksjonspunktKode),
+        );
+        const totrinnskontrollAksjonspunkt = context?.totrinnskontrollAksjonspunkter.find(
+          c => c.aksjonspunktKode === aksjonspunktKode,
+        );
 
         if (!context || !totrinnskontrollAksjonspunkt) {
           return null;
@@ -81,7 +81,9 @@ const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
           behandling.behandlingsresultat,
         );
 
-        const skjermlenkeTypeKodeverk = skjemalenkeTyper.find((skjemalenkeType) => skjemalenkeType.kode === context.skjermlenkeType);
+        const skjermlenkeTypeKodeverk = skjemalenkeTyper.find(
+          skjemalenkeType => skjemalenkeType.kode === context.skjermlenkeType,
+        );
 
         const lenke = lagLenke(context.skjermlenkeType);
 
@@ -94,9 +96,7 @@ const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
             )}
             {aksjonspunktText.map((formattedMessage, i) => (
               <div key={aksjonspunktKode.concat('_'.concat(i.toString()))} className={styles.aksjonspunktTextContainer}>
-                <BodyShort size="small">
-                  {formattedMessage}
-                </BodyShort>
+                <BodyShort size="small">{formattedMessage}</BodyShort>
               </div>
             ))}
             <GodkjenningPanel

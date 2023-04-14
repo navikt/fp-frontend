@@ -21,17 +21,11 @@ export default {
 };
 
 const Template: Story<{
-  oppgave: Oppgave,
-  opphevData: any,
-  hentReserverteOppgaver: (params: any, keepData: boolean) => void,
-}> = ({
-  oppgave,
-  opphevData,
-  hentReserverteOppgaver,
-}) => {
-  const data = [
-    { key: RestApiPathsKeys.OPPHEV_OPPGAVERESERVASJON.name, data: opphevData },
-  ];
+  oppgave: Oppgave;
+  opphevData: any;
+  hentReserverteOppgaver: (params: any, keepData: boolean) => void;
+}> = ({ oppgave, opphevData, hentReserverteOppgaver }) => {
+  const data = [{ key: RestApiPathsKeys.OPPHEV_OPPGAVERESERVASJON.name, data: opphevData }];
 
   return (
     <RestApiMock data={data} requestApi={requestApi}>

@@ -1,16 +1,8 @@
-import React, {
-  FunctionComponent, useMemo, useState, useCallback, ReactNode, MouseEvent,
-} from 'react';
+import React, { FunctionComponent, useMemo, useState, useCallback, ReactNode, MouseEvent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import {
-  Label, Button, Link, BodyShort, Heading,
-} from '@navikt/ds-react';
-import {
-  FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer, OkAvbrytModal,
-} from '@navikt/ft-ui-komponenter';
-import {
-  formHooks,
-} from '@navikt/ft-form-hooks';
+import { Label, Button, Link, BodyShort, Heading } from '@navikt/ds-react';
+import { FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer, OkAvbrytModal } from '@navikt/ft-ui-komponenter';
+import { formHooks } from '@navikt/ft-form-hooks';
 
 import {
   avslagsarsakCodes,
@@ -34,29 +26,25 @@ import VedtakHelpTextPanel from './VedtakHelpTextPanel';
 
 import styles from './vedtakFellesPanel.module.css';
 
-export const finnTekstkodeFraBehandlingstatus = (
-  behandlingStatus: string,
-): string => (behandlingStatus === behandlingStatusCode.AVSLUTTET
-  || behandlingStatus === behandlingStatusCode.IVERKSETTER_VEDTAK ? 'VedtakForm.vedtak' : 'VedtakForm.ForslagTilVedtak');
+export const finnTekstkodeFraBehandlingstatus = (behandlingStatus: string): string =>
+  behandlingStatus === behandlingStatusCode.AVSLUTTET || behandlingStatus === behandlingStatusCode.IVERKSETTER_VEDTAK
+    ? 'VedtakForm.vedtak'
+    : 'VedtakForm.ForslagTilVedtak';
 
-const kanSendesTilGodkjenning = (
-  behandlingStatusKode: string,
-): boolean => behandlingStatusKode === behandlingStatusCode.BEHANDLING_UTREDES;
+const kanSendesTilGodkjenning = (behandlingStatusKode: string): boolean =>
+  behandlingStatusKode === behandlingStatusCode.BEHANDLING_UTREDES;
 
-const finnKnappetekstkode = (
-  aksjonspunkter: Aksjonspunkt[],
-): string => {
-  if (aksjonspunkter && aksjonspunkter.some((ap) => ap.toTrinnsBehandling)) {
+const finnKnappetekstkode = (aksjonspunkter: Aksjonspunkt[]): string => {
+  if (aksjonspunkter && aksjonspunkter.some(ap => ap.toTrinnsBehandling)) {
     return 'VedtakForm.TilGodkjenning';
   }
 
   return 'VedtakForm.FattVedtak';
 };
 
-const finnSkalViseLink = (
-  behandlingsresultat: Behandlingsresultat,
-): boolean => !behandlingsresultat.avslagsarsak
-  || (behandlingsresultat.avslagsarsak && behandlingsresultat.avslagsarsak !== avslagsarsakCodes.INGEN_BEREGNINGSREGLER);
+const finnSkalViseLink = (behandlingsresultat: Behandlingsresultat): boolean =>
+  !behandlingsresultat.avslagsarsak ||
+  (behandlingsresultat.avslagsarsak && behandlingsresultat.avslagsarsak !== avslagsarsakCodes.INGEN_BEREGNINGSREGLER);
 
 const harIkkeKonsekvenserForYtelsen = (
   konsekvenserForYtelsenKoder: string[],
@@ -69,7 +57,7 @@ const harIkkeKonsekvenserForYtelsen = (
   if (!Array.isArray(konsekvenserForYtelsen) || konsekvenserForYtelsen.length !== 1) {
     return true;
   }
-  return !konsekvenserForYtelsenKoder.some((kode) => kode === konsekvenserForYtelsen[0]);
+  return !konsekvenserForYtelsenKoder.some(kode => kode === konsekvenserForYtelsen[0]);
 };
 
 interface OwnProps {
@@ -77,7 +65,12 @@ interface OwnProps {
   readOnly: boolean;
   erBehandlingEtterKlage: boolean;
   aksjonspunkter: Aksjonspunkt[];
-  renderPanel: (skalBrukeManueltBrev: boolean, erInnvilget: boolean, erAvslatt: boolean, erOpphor?: boolean) => ReactNode;
+  renderPanel: (
+    skalBrukeManueltBrev: boolean,
+    erInnvilget: boolean,
+    erAvslatt: boolean,
+    erOpphor?: boolean,
+  ) => ReactNode;
   previewAutomatiskBrev: (e: MouseEvent) => void;
   previewOverstyrtBrev: (e: MouseEvent) => void;
   tilbakekrevingtekst?: string;
@@ -97,15 +90,18 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const { setValue, formState: { isSubmitting } } = formHooks.useFormContext();
-
   const {
-    behandlingsresultat, behandlingPaaVent, sprakkode, status, behandlingHenlagt, taskStatus,
-  } = behandling;
+    setValue,
+    formState: { isSubmitting },
+  } = formHooks.useFormContext();
 
-  const [skalBrukeManueltBrev, toggleSkalBrukeManueltBrev] = useState(behandlingsresultat.vedtaksbrev && behandlingsresultat.vedtaksbrev === 'FRITEKST');
+  const { behandlingsresultat, behandlingPaaVent, sprakkode, status, behandlingHenlagt, taskStatus } = behandling;
+
+  const [skalBrukeManueltBrev, toggleSkalBrukeManueltBrev] = useState(
+    behandlingsresultat.vedtaksbrev && behandlingsresultat.vedtaksbrev === 'FRITEKST',
+  );
   const [skalViseModal, toggleVisModal] = useState(false);
-  const onToggleOverstyring = useCallback((e) => {
+  const onToggleOverstyring = useCallback(e => {
     toggleSkalBrukeManueltBrev(true);
     e.preventDefault();
   }, []);
@@ -121,11 +117,19 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
   const erOpphor = isOpphor(behandlingsresultat.type);
 
   const skalViseLink = finnSkalViseLink(behandlingsresultat);
-  const kanBehandles = !behandlingHenlagt && taskStatus?.status !== AsyncPollingStatus.HALTED && taskStatus?.status !== AsyncPollingStatus.DELAYED;
+  const kanBehandles =
+    !behandlingHenlagt &&
+    taskStatus?.status !== AsyncPollingStatus.HALTED &&
+    taskStatus?.status !== AsyncPollingStatus.DELAYED;
 
-  const harIkkeKonsekvensForYtelse = useMemo(() => harIkkeKonsekvenserForYtelsen([
-    konsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, konsekvensForYtelsen.INGEN_ENDRING,
-  ], behandlingsresultat), [behandlingsresultat]);
+  const harIkkeKonsekvensForYtelse = useMemo(
+    () =>
+      harIkkeKonsekvenserForYtelsen(
+        [konsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, konsekvensForYtelsen.INGEN_ENDRING],
+        behandlingsresultat,
+      ),
+    [behandlingsresultat],
+  );
 
   return (
     <>
@@ -138,13 +142,15 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
       />
       <FlexContainer>
         <FlexRow>
-          {(status === behandlingStatusCode.AVSLUTTET) && (
+          {status === behandlingStatusCode.AVSLUTTET && (
             <FlexColumn>
               <Image className={styles.status} src={erInnvilget ? innvilgetImage : avslattImage} />
             </FlexColumn>
           )}
           <FlexColumn>
-            <Heading size="small"><FormattedMessage id={finnTekstkodeFraBehandlingstatus(status)} /></Heading>
+            <Heading size="small">
+              <FormattedMessage id={finnTekstkodeFraBehandlingstatus(status)} />
+            </Heading>
           </FlexColumn>
         </FlexRow>
       </FlexContainer>
@@ -154,23 +160,33 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
           <FlexColumn className={styles.space}>
             <Label size="small">
               {vedtakstatusTekst}
-              {tilbakekrevingtekst && (
-                `. ${intl.formatMessage({ id: tilbakekrevingtekst })}`
-              )}
+              {tilbakekrevingtekst && `. ${intl.formatMessage({ id: tilbakekrevingtekst })}`}
             </Label>
           </FlexColumn>
           <FlexColumn className={styles.space}>
             {skalViseLink && harIkkeKonsekvensForYtelse && kanBehandles && (
               <Link href="#" onClick={previewAutomatiskBrev}>
                 <span>
-                  <FormattedMessage id={erBehandlingEtterKlage ? 'VedtakFellesPanel.UtkastVedtaksbrev' : 'VedtakFellesPanel.AutomatiskVedtaksbrev'} />
+                  <FormattedMessage
+                    id={
+                      erBehandlingEtterKlage
+                        ? 'VedtakFellesPanel.UtkastVedtaksbrev'
+                        : 'VedtakFellesPanel.AutomatiskVedtaksbrev'
+                    }
+                  />
                 </span>
                 <Image src={popOutPilSvg} className={styles.pil} />
               </Link>
             )}
-            {(skalViseLink && harIkkeKonsekvensForYtelse && !kanBehandles) && (
+            {skalViseLink && harIkkeKonsekvensForYtelse && !kanBehandles && (
               <BodyShort size="small" className={styles.disabletLink}>
-                <FormattedMessage id={erBehandlingEtterKlage ? 'VedtakFellesPanel.UtkastVedtaksbrev' : 'VedtakFellesPanel.AutomatiskVedtaksbrev'} />
+                <FormattedMessage
+                  id={
+                    erBehandlingEtterKlage
+                      ? 'VedtakFellesPanel.UtkastVedtaksbrev'
+                      : 'VedtakFellesPanel.AutomatiskVedtaksbrev'
+                  }
+                />
               </BodyShort>
             )}
           </FlexColumn>
@@ -224,12 +240,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
               </FlexColumn>
               {skalBrukeManueltBrev && (
                 <FlexColumn>
-                  <Button
-                    size="small"
-                    variant="secondary"
-                    onClick={() => toggleVisModal(true)}
-                    type="button"
-                  >
+                  <Button size="small" variant="secondary" onClick={() => toggleVisModal(true)} type="button">
                     <FormattedMessage id="VedtakFellesPanel.ForkastManueltBrev" />
                   </Button>
                 </FlexColumn>

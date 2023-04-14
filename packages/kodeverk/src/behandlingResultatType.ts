@@ -45,22 +45,29 @@ const klageOmgjortResultatTyper = [
   behandlingResultatType.KLAGE_OMGJORT_UGUNST,
 ];
 
-const innvilgetRevurderingFPResultatTyper = [behandlingResultatType.FORELDREPENGER_ENDRET,
+const innvilgetRevurderingFPResultatTyper = [
+  behandlingResultatType.FORELDREPENGER_ENDRET,
   behandlingResultatType.FORELDREPENGER_SENERE,
-  behandlingResultatType.INGEN_ENDRING];
+  behandlingResultatType.INGEN_ENDRING,
+];
 
-export const isInnvilget = (behandlingResultatTypeKode: string): boolean => innvilgetKlageResultatTyper.includes(behandlingResultatTypeKode)
-  || innvilgetRevurderingFPResultatTyper.includes(behandlingResultatTypeKode)
-  || behandlingResultatTypeKode === behandlingResultatType.INNVILGET;
+export const isInnvilget = (behandlingResultatTypeKode: string): boolean =>
+  innvilgetKlageResultatTyper.includes(behandlingResultatTypeKode) ||
+  innvilgetRevurderingFPResultatTyper.includes(behandlingResultatTypeKode) ||
+  behandlingResultatTypeKode === behandlingResultatType.INNVILGET;
 
-export const isAvslag = (behandlingResultatTypeKode: string): boolean => behandlingResultatTypeKode === behandlingResultatType.AVSLATT
-  || behandlingResultatTypeKode === behandlingResultatType.KLAGE_AVVIST
-  || behandlingResultatTypeKode === behandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET;
+export const isAvslag = (behandlingResultatTypeKode: string): boolean =>
+  behandlingResultatTypeKode === behandlingResultatType.AVSLATT ||
+  behandlingResultatTypeKode === behandlingResultatType.KLAGE_AVVIST ||
+  behandlingResultatTypeKode === behandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET;
 
-export const isOpphor = (behandlingResultatTypeKode: string): boolean => behandlingResultatTypeKode === behandlingResultatType.OPPHOR;
+export const isOpphor = (behandlingResultatTypeKode: string): boolean =>
+  behandlingResultatTypeKode === behandlingResultatType.OPPHOR;
 
-export const isKlageOmgjort = (behandlingResultatTypeKode: string): boolean => klageOmgjortResultatTyper.includes(behandlingResultatTypeKode);
+export const isKlageOmgjort = (behandlingResultatTypeKode: string): boolean =>
+  klageOmgjortResultatTyper.includes(behandlingResultatTypeKode);
 
-export const isKlageAvvist = (behandlingResultatTypeKode: string): boolean => behandlingResultatTypeKode === behandlingResultatType.KLAGE_AVVIST;
+export const isKlageAvvist = (behandlingResultatTypeKode: string): boolean =>
+  behandlingResultatTypeKode === behandlingResultatType.KLAGE_AVVIST;
 
 export default behandlingResultatType;

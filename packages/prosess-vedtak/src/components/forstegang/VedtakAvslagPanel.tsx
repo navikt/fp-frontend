@@ -5,7 +5,11 @@ import { Label, BodyShort } from '@navikt/ds-react';
 import { AlleKodeverk, Vilkar, Behandlingsresultat } from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
-  behandlingStatus, fagsakYtelseType, getKodeverknavnFn, vilkarUtfallType, KodeverkType,
+  behandlingStatus,
+  fagsakYtelseType,
+  getKodeverknavnFn,
+  vilkarUtfallType,
+  KodeverkType,
 } from '@navikt/fp-kodeverk';
 
 import { hasIkkeOppfyltSoknadsfristvilkar } from '../felles/VedtakHelper';
@@ -16,13 +20,17 @@ export const getAvslagArsak = (
   behandlingsresultat: Behandlingsresultat,
   getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType, undertype?: string) => string,
 ): ReactElement | string => {
-  const avslatteVilkar = vilkar.filter((v) => v.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT);
+  const avslatteVilkar = vilkar.filter(v => v.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT);
   if (avslatteVilkar.length === 0) {
     return <FormattedMessage id="VedtakForm.UttaksperioderIkkeGyldig" />;
   }
 
   const vilkarType = getKodeverkNavn(avslatteVilkar[0].vilkarType, KodeverkType.VILKAR_TYPE);
-  return `${vilkarType}: ${getKodeverkNavn(behandlingsresultat.avslagsarsak, KodeverkType.AVSLAGSARSAK, avslatteVilkar[0].vilkarType)}`;
+  return `${vilkarType}: ${getKodeverkNavn(
+    behandlingsresultat.avslagsarsak,
+    KodeverkType.AVSLAGSARSAK,
+    avslatteVilkar[0].vilkarType,
+  )}`;
 };
 
 interface OwnProps {
@@ -50,29 +58,29 @@ const VedtakAvslagPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
-  const fritekstfeltForSoknadsfrist = behandlingStatusKode === behandlingStatus.BEHANDLING_UTREDES
-    && hasIkkeOppfyltSoknadsfristvilkar(vilkar) && ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD;
+  const fritekstfeltForSoknadsfrist =
+    behandlingStatusKode === behandlingStatus.BEHANDLING_UTREDES &&
+    hasIkkeOppfyltSoknadsfristvilkar(vilkar) &&
+    ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD;
   const textCode = beregningErManueltFastsatt ? 'VedtakForm.Fritekst.Beregningsgrunnlag' : 'VedtakForm.Fritekst';
   return (
     <>
       {getAvslagArsak(vilkar, behandlingsresultat, getKodeverknavn) && (
         <div>
           <Label size="small">{intl.formatMessage({ id: 'VedtakForm.ArsakTilAvslag' })}</Label>
-          <BodyShort size="small">
-            {getAvslagArsak(vilkar, behandlingsresultat, getKodeverknavn)}
-          </BodyShort>
+          <BodyShort size="small">{getAvslagArsak(vilkar, behandlingsresultat, getKodeverknavn)}</BodyShort>
           <VerticalSpacer sixteenPx />
         </div>
       )}
-      {(!skalBrukeOverstyrendeFritekstBrev
-        && (fritekstfeltForSoknadsfrist || behandlingsresultat.avslagsarsakFritekst || beregningErManueltFastsatt)) && (
-        <VedtakFritekstPanel
-          isReadOnly={isReadOnly}
-          språkKode={språkKode}
-          behandlingsresultat={behandlingsresultat}
-          labelTextCode={textCode}
-        />
-      )}
+      {!skalBrukeOverstyrendeFritekstBrev &&
+        (fritekstfeltForSoknadsfrist || behandlingsresultat.avslagsarsakFritekst || beregningErManueltFastsatt) && (
+          <VedtakFritekstPanel
+            isReadOnly={isReadOnly}
+            språkKode={språkKode}
+            behandlingsresultat={behandlingsresultat}
+            labelTextCode={textCode}
+          />
+        )}
     </>
   );
 };

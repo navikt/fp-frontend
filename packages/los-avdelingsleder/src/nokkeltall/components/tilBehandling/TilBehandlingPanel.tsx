@@ -6,9 +6,7 @@ import { Label } from '@navikt/ds-react';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import { KodeverkMedNavn } from '@navikt/ft-types';
-import {
-  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FagsakYtelseType, KodeverkType } from '@navikt/ft-kodeverk';
 import { Form, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 
@@ -23,13 +21,16 @@ dayjs.extend(isSameOrBefore);
 export const ALLE_YTELSETYPER_VALGT = 'ALLE';
 export const UKE_2 = '2';
 
-const uker = [{
-  kode: UKE_2,
-  tekstKode: 'TilBehandlingPanel.ToSisteUker',
-}, {
-  kode: '4',
-  tekstKode: 'TilBehandlingPanel.FireSisteUker',
-}];
+const uker = [
+  {
+    kode: UKE_2,
+    tekstKode: 'TilBehandlingPanel.ToSisteUker',
+  },
+  {
+    kode: '4',
+    tekstKode: 'TilBehandlingPanel.FireSisteUker',
+  },
+];
 
 const erDatoInnenforPeriode = (oppgaveForAvdeling: OppgaveForDato, ukevalg: string): boolean => {
   if (ukevalg === uker[1].kode) {
@@ -40,15 +41,17 @@ const erDatoInnenforPeriode = (oppgaveForAvdeling: OppgaveForDato, ukevalg: stri
 };
 
 const finnFagsakYtelseTypeNavn = (fagsakYtelseTyper: KodeverkMedNavn[], valgtFagsakYtelseType: string): string => {
-  const type = fagsakYtelseTyper.find((fyt) => fyt.kode === valgtFagsakYtelseType);
+  const type = fagsakYtelseTyper.find(fyt => fyt.kode === valgtFagsakYtelseType);
   return type ? type.navn : '';
 };
 
 const slaSammenLikeBehandlingstyperOgDatoer = (oppgaverForAvdeling: OppgaveForDato[]): OppgaveForDatoGraf[] => {
   const sammenslatte: OppgaveForDatoGraf[] = [];
 
-  oppgaverForAvdeling.forEach((o) => {
-    const index = sammenslatte.findIndex((s) => s.behandlingType === o.behandlingType && s.opprettetDato === o.opprettetDato);
+  oppgaverForAvdeling.forEach(o => {
+    const index = sammenslatte.findIndex(
+      s => s.behandlingType === o.behandlingType && s.opprettetDato === o.opprettetDato,
+    );
     if (index === -1) {
       sammenslatte.push(o);
     } else {
@@ -72,7 +75,7 @@ interface OwnProps {
 type FormValues = {
   ukevalg: string;
   ytelseType: string;
-}
+};
 
 const formName = 'tilBehandlingForm';
 const formDefaultValues = { ytelseType: ALLE_YTELSETYPER_VALGT, ukevalg: UKE_2 };
@@ -80,11 +83,7 @@ const formDefaultValues = { ytelseType: ALLE_YTELSETYPER_VALGT, ukevalg: UKE_2 }
 /**
  * TilBehandlingPanel.
  */
-const TilBehandlingPanel: FunctionComponent<OwnProps> = ({
-  height,
-  oppgaverPerDato,
-  getValueFromLocalStorage,
-}) => {
+const TilBehandlingPanel: FunctionComponent<OwnProps> = ({ height, oppgaverPerDato, getValueFromLocalStorage }) => {
   const intl = useIntl();
   const behandlingTyper = useLosKodeverk(KodeverkType.BEHANDLING_TYPE);
   const fagsakYtelseTyper = useLosKodeverk(KodeverkType.FAGSAK_YTELSE);
@@ -110,26 +109,35 @@ const TilBehandlingPanel: FunctionComponent<OwnProps> = ({
             <SelectField
               name="ukevalg"
               label=""
-              selectValues={uker.map((u) => <option key={u.kode} value={u.kode}>{intl.formatMessage({ id: u.tekstKode })}</option>)}
+              selectValues={uker.map(u => (
+                <option key={u.kode} value={u.kode}>
+                  {intl.formatMessage({ id: u.tekstKode })}
+                </option>
+              ))}
             />
           </FlexColumn>
           <FlexColumn>
             <RadioGroupPanel
               name="ytelseType"
               isHorizontal
-              radios={[{
-                value: FagsakYtelseType.FORELDREPENGER,
-                label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.FORELDREPENGER),
-              }, {
-                value: FagsakYtelseType.ENGANGSSTONAD,
-                label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.ENGANGSSTONAD),
-              }, {
-                value: FagsakYtelseType.SVANGERSKAPSPENGER,
-                label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.SVANGERSKAPSPENGER),
-              }, {
-                value: ALLE_YTELSETYPER_VALGT,
-                label: <FormattedMessage id="TilBehandlingPanel.Alle" />,
-              }]}
+              radios={[
+                {
+                  value: FagsakYtelseType.FORELDREPENGER,
+                  label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.FORELDREPENGER),
+                },
+                {
+                  value: FagsakYtelseType.ENGANGSSTONAD,
+                  label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.ENGANGSSTONAD),
+                },
+                {
+                  value: FagsakYtelseType.SVANGERSKAPSPENGER,
+                  label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.SVANGERSKAPSPENGER),
+                },
+                {
+                  value: ALLE_YTELSETYPER_VALGT,
+                  label: <FormattedMessage id="TilBehandlingPanel.Alle" />,
+                },
+              ]}
             />
           </FlexColumn>
         </FlexRow>
@@ -139,9 +147,17 @@ const TilBehandlingPanel: FunctionComponent<OwnProps> = ({
         height={height}
         isToUkerValgt={values.ukevalg === UKE_2}
         behandlingTyper={behandlingTyper}
-        oppgaverPerDato={oppgaverPerDato ? slaSammenLikeBehandlingstyperOgDatoer(oppgaverPerDato
-          .filter((ofa) => (values.ytelseType === ALLE_YTELSETYPER_VALGT ? true : values.ytelseType === ofa.fagsakYtelseType))
-          .filter((ofa) => erDatoInnenforPeriode(ofa, values.ukevalg))) : []}
+        oppgaverPerDato={
+          oppgaverPerDato
+            ? slaSammenLikeBehandlingstyperOgDatoer(
+                oppgaverPerDato
+                  .filter(ofa =>
+                    values.ytelseType === ALLE_YTELSETYPER_VALGT ? true : values.ytelseType === ofa.fagsakYtelseType,
+                  )
+                  .filter(ofa => erDatoInnenforPeriode(ofa, values.ukevalg)),
+              )
+            : []
+        }
       />
     </Form>
   );

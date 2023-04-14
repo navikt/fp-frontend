@@ -12,16 +12,15 @@ interface OwnProps {
   avdelinger?: Avdeling[];
 }
 
-const Avdelingsvelger: FunctionComponent<OwnProps> = ({
-  setValgtAvdelingEnhet,
-  valgtAvdelingEnhet,
-  avdelinger,
-}) => {
-  const velgAvdeling = useCallback((e: any) => {
-    const index = e.target.value;
-    setValueInLocalStorage('avdelingEnhet', index);
-    setValgtAvdelingEnhet(index);
-  }, [avdelinger]);
+const Avdelingsvelger: FunctionComponent<OwnProps> = ({ setValgtAvdelingEnhet, valgtAvdelingEnhet, avdelinger }) => {
+  const velgAvdeling = useCallback(
+    (e: any) => {
+      const index = e.target.value;
+      setValueInLocalStorage('avdelingEnhet', index);
+      setValgtAvdelingEnhet(index);
+    },
+    [avdelinger],
+  );
 
   if (!avdelinger) {
     return null;
@@ -29,8 +28,15 @@ const Avdelingsvelger: FunctionComponent<OwnProps> = ({
 
   return (
     <div className={styles.padding}>
-      <Select size="small" hideLabel label="" onChange={velgAvdeling} value={valgtAvdelingEnhet} className={styles.padding}>
-        {avdelinger.map((avdeling) => (
+      <Select
+        size="small"
+        hideLabel
+        label=""
+        onChange={velgAvdeling}
+        value={valgtAvdelingEnhet}
+        className={styles.padding}
+      >
+        {avdelinger.map(avdeling => (
           <option key={avdeling.avdelingEnhet} value={avdeling.avdelingEnhet}>
             {`${avdeling.avdelingEnhet} ${avdeling.navn}`}
           </option>

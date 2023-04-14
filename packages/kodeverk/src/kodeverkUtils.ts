@@ -18,14 +18,11 @@ export const getKodeverknavnFraKode = (
     kodeverkForType = kodeverkForType[undertype];
   }
 
-  const kodeverk = kodeverkForType.find((k) => k.kode === kode);
+  const kodeverk = kodeverkForType.find(k => k.kode === kode);
   return kodeverk ? kodeverk.navn : '';
 };
 
-export const getKodeverknavnFn = (
-  alleKodeverk: any,
-) => (
-  kode: string,
-  kodeverkType: KodeverkType,
-  undertype?: string,
-): string => getKodeverknavnFraKode(alleKodeverk, kodeverkType, kode, undertype);
+export const getKodeverknavnFn =
+  (alleKodeverk: any) =>
+  (kode: string, kodeverkType: KodeverkType, undertype?: string): string =>
+    getKodeverknavnFraKode(alleKodeverk, kodeverkType, kode, undertype);

@@ -9,7 +9,10 @@ import StandardBehandlingProps from '../../felles/typer/standardBehandlingProps'
 import BehandlingPaVent from '../../felles/modaler/paVent/BehandlingPaVent';
 import StandardPropsProvider from '../../felles/utils/standardPropsStateContext';
 import {
-  useBehandling, useInitBehandlingHandlinger, useInitRequestApi, useLagreAksjonspunkt,
+  useBehandling,
+  useInitBehandlingHandlinger,
+  useInitRequestApi,
+  useLagreAksjonspunkt,
 } from '../../felles/utils/indexHooks';
 import { restApiFpHooks, requestFpApi } from './data/fpBehandlingApi';
 import BehandlingContainerWrapperForeldrepenger from './BehandlingContainerWrapperForeldrepenger';
@@ -34,20 +37,26 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
 }) => {
   useInitRequestApi(requestFpApi, setRequestPendingMessage);
 
-  const {
-    behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling,
-  } = useBehandling(
-    requestFpApi, behandlingUuid, oppdaterBehandlingVersjon,
-  );
+  const { behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling } =
+    useBehandling(requestFpApi, behandlingUuid, oppdaterBehandlingVersjon);
 
   const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter } = useLagreAksjonspunkt(requestFpApi, setBehandling);
 
-  const skalIkkeViseModal = useInitBehandlingHandlinger(requestFpApi, behandlingEventHandler, hentBehandling, setBehandling, behandling);
+  const skalIkkeViseModal = useInitBehandlingHandlinger(
+    requestFpApi,
+    behandlingEventHandler,
+    hentBehandling,
+    setBehandling,
+    behandling,
+  );
 
-  const { data: opplysningsdata, state: opplysningsdataState } = restApiFpHooks.useMultipleRestApi<{
-    arbeidsgivereOversikt: ArbeidsgiverOpplysningerWrapper,
-    behandlingPersonoversikt: Personoversikt,
-  }, void>(endepunkterSomSkalHentesEnGang, {
+  const { data: opplysningsdata, state: opplysningsdataState } = restApiFpHooks.useMultipleRestApi<
+    {
+      arbeidsgivereOversikt: ArbeidsgiverOpplysningerWrapper;
+      behandlingPersonoversikt: Personoversikt;
+    },
+    void
+  >(endepunkterSomSkalHentesEnGang, {
     updateTriggers: [behandling?.versjon],
     suspendRequest: !behandling,
   });
@@ -56,7 +65,10 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
     return <LoadingPanel />;
   }
 
-  const { arbeidsgivereOversikt: { arbeidsgivere }, behandlingPersonoversikt: personoversikt } = opplysningsdata;
+  const {
+    arbeidsgivereOversikt: { arbeidsgivere },
+    behandlingPersonoversikt: personoversikt,
+  } = opplysningsdata;
 
   return (
     <>

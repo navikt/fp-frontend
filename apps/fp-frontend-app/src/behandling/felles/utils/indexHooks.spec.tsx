@@ -16,24 +16,26 @@ describe('indexHooks', () => {
     uuid: '1',
   } as Behandling;
 
-  const LINKS = [{
-    href: 'behandling-url',
-    rel: 'Behandling',
-    type: 'GET',
-  }, {
-    href: 'ap-url',
-    rel: 'Aksjonspunkt',
-    type: 'GET',
-  }, {
-    href: 'oap-url',
-    rel: 'OverstyrtAksjonspunkt',
-    type: 'GET',
-  }];
+  const LINKS = [
+    {
+      href: 'behandling-url',
+      rel: 'Behandling',
+      type: 'GET',
+    },
+    {
+      href: 'ap-url',
+      rel: 'Aksjonspunkt',
+      type: 'GET',
+    },
+    {
+      href: 'oap-url',
+      rel: 'OverstyrtAksjonspunkt',
+      type: 'GET',
+    },
+  ];
 
   it('skal hente behandling fra server og returnere behandling m.m.', async () => {
-    const endpoints = new RestApiConfigBuilder()
-      .withRel('Behandling', BehandlingFellesApiKeys.BEHANDLING)
-      .build();
+    const endpoints = new RestApiConfigBuilder().withRel('Behandling', BehandlingFellesApiKeys.BEHANDLING).build();
 
     const requestApi = createRequestApi(endpoints);
     requestApi.setLinks(LINKS);

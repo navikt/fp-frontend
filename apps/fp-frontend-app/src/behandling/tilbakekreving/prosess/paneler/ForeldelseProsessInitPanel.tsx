@@ -1,6 +1,10 @@
 import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { Aksjonspunkt } from '@navikt/ft-types';
-import { ForeldelseProsessIndex, ForeldelseAksjonspunktCodes, VurderForeldelseAp } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
+import {
+  ForeldelseProsessIndex,
+  ForeldelseAksjonspunktCodes,
+  VurderForeldelseAp,
+} from '@navikt/ft-prosess-tilbakekreving-foreldelse';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
@@ -31,24 +35,35 @@ const ForeldelseProsessInitPanel: FunctionComponent<OwnProps> = ({
   formData,
   setFormData,
 }) => {
-  const { startRequest: beregnBelop } = restApiTilbakekrevingHooks.useRestApiRunner(TilbakekrevingBehandlingApiKeys.BEREGNE_BELØP);
+  const { startRequest: beregnBelop } = restApiTilbakekrevingHooks.useRestApiRunner(
+    TilbakekrevingBehandlingApiKeys.BEREGNE_BELØP,
+  );
 
-  const { data: perioderForeldelse, state } = restApiTilbakekrevingHooks.useRestApi(TilbakekrevingBehandlingApiKeys.PERIODER_FORELDELSE);
+  const { data: perioderForeldelse, state } = restApiTilbakekrevingHooks.useRestApi(
+    TilbakekrevingBehandlingApiKeys.PERIODER_FORELDELSE,
+  );
 
   const aksjonspunkter = behandling.aksjonspunkt || [];
 
-  const aksjonspunkterForForeldelse = useMemo(() => (
-    aksjonspunkter.filter((ap) => ForeldelseAksjonspunktCodes.VURDER_FORELDELSE === ap.definisjon)),
-  [aksjonspunkter]);
+  const aksjonspunkterForForeldelse = useMemo(
+    () => aksjonspunkter.filter(ap => ForeldelseAksjonspunktCodes.VURDER_FORELDELSE === ap.definisjon),
+    [aksjonspunkter],
+  );
 
-  const alleMerknaderFraBeslutter = useMemo(() => getAlleMerknaderFraBeslutter(behandling, aksjonspunkterForForeldelse),
-    [behandling, aksjonspunkterForForeldelse]);
+  const alleMerknaderFraBeslutter = useMemo(
+    () => getAlleMerknaderFraBeslutter(behandling, aksjonspunkterForForeldelse),
+    [behandling, aksjonspunkterForForeldelse],
+  );
   const isReadOnly = useMemo(() => erReadOnlyFn(aksjonspunkterForForeldelse), [aksjonspunkterForForeldelse]);
 
-  const setFormDataForeldelse = useCallback((data: any) => setFormData((oldData) => ({
-    ...oldData,
-    [ProsessStegCode.FORELDELSE]: data,
-  })), [setFormData]);
+  const setFormDataForeldelse = useCallback(
+    (data: any) =>
+      setFormData(oldData => ({
+        ...oldData,
+        [ProsessStegCode.FORELDELSE]: data,
+      })),
+    [setFormData],
+  );
 
   if (state !== RestApiState.SUCCESS) {
     return <LoadingPanel />;

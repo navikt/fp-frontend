@@ -1,10 +1,11 @@
 import React, { FunctionComponent, useMemo, useCallback } from 'react';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
-import { FeilutbetalingFaktaIndex, FeilutbetalingAksjonspunktCode } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import {
-  FeilutbetalingFakta, Aksjonspunkt, FeilutbetalingAarsak,
-} from '@navikt/ft-types';
+  FeilutbetalingFaktaIndex,
+  FeilutbetalingAksjonspunktCode,
+} from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
+import { FeilutbetalingFakta, Aksjonspunkt, FeilutbetalingAarsak } from '@navikt/ft-types';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
@@ -22,7 +23,7 @@ const ENDEPUNKTER_INIT_DATA = [
 type EndepunktInitData = {
   feilutbetalingFakta: FeilutbetalingFakta;
   feilutbetalingAarsak: FeilutbetalingAarsak[];
-}
+};
 
 interface OwnProps {
   behandling: Behandling;
@@ -31,8 +32,8 @@ interface OwnProps {
   alleKodeverk: AlleKodeverkTilbakekreving;
   fpsakKodeverk: AlleKodeverk;
   submitCallback: (aksjonspunktData: any) => Promise<void>;
-  formData: any,
-  setFormData: (data: any) => void
+  formData: any;
+  setFormData: (data: any) => void;
 }
 
 const FeilutbetalingFaktaInitPanel: FunctionComponent<OwnProps> = ({
@@ -47,25 +48,37 @@ const FeilutbetalingFaktaInitPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const aksjonspunkter = behandling.aksjonspunkt || [];
 
-  const aksjonspunkterForFeilutbetalingFakta = useMemo(() => (
-    aksjonspunkter.filter((ap) => FeilutbetalingAksjonspunktCode.AVKLAR_FAKTA_FOR_FEILUTBETALING === ap.definisjon)),
-  [aksjonspunkter]);
+  const aksjonspunkterForFeilutbetalingFakta = useMemo(
+    () => aksjonspunkter.filter(ap => FeilutbetalingAksjonspunktCode.AVKLAR_FAKTA_FOR_FEILUTBETALING === ap.definisjon),
+    [aksjonspunkter],
+  );
 
-  const alleMerknaderFraBeslutter = useMemo(() => getAlleMerknaderFraBeslutter(behandling, aksjonspunkterForFeilutbetalingFakta),
-    [behandling, aksjonspunkterForFeilutbetalingFakta]);
-  const readOnly = useMemo(() => erReadOnlyFn(aksjonspunkterForFeilutbetalingFakta), [aksjonspunkterForFeilutbetalingFakta]);
+  const alleMerknaderFraBeslutter = useMemo(
+    () => getAlleMerknaderFraBeslutter(behandling, aksjonspunkterForFeilutbetalingFakta),
+    [behandling, aksjonspunkterForFeilutbetalingFakta],
+  );
+  const readOnly = useMemo(
+    () => erReadOnlyFn(aksjonspunkterForFeilutbetalingFakta),
+    [aksjonspunkterForFeilutbetalingFakta],
+  );
 
-  const setFormDataFeilutbetaling = useCallback((data: any) => setFormData((oldData) => ({
-    ...oldData,
-    [FaktaPanelCode.FEILUTBETALING]: data,
-  })), [setFormData]);
+  const setFormDataFeilutbetaling = useCallback(
+    (data: any) =>
+      setFormData(oldData => ({
+        ...oldData,
+        [FaktaPanelCode.FEILUTBETALING]: data,
+      })),
+    [setFormData],
+  );
 
-  const formaterteEndepunkter = ENDEPUNKTER_INIT_DATA.map((e) => ({ key: e }));
-  const { data: initData, state } = restApiTilbakekrevingHooks
-    .useMultipleRestApi<EndepunktInitData, any>(formaterteEndepunkter, {
+  const formaterteEndepunkter = ENDEPUNKTER_INIT_DATA.map(e => ({ key: e }));
+  const { data: initData, state } = restApiTilbakekrevingHooks.useMultipleRestApi<EndepunktInitData, any>(
+    formaterteEndepunkter,
+    {
       updateTriggers: [behandling.versjon],
       isCachingOn: true,
-    });
+    },
+  );
 
   if (state !== RestApiState.SUCCESS) {
     return <LoadingPanel />;
@@ -84,7 +97,7 @@ const FeilutbetalingFaktaInitPanel: FunctionComponent<OwnProps> = ({
       isReadOnly={readOnly}
       formData={formData[FaktaPanelCode.FEILUTBETALING]}
       setFormData={setFormDataFeilutbetaling}
-      isAksjonspunktOpen={aksjonspunkterForFeilutbetalingFakta.some((a) => a.status === AksjonspunktStatus.OPPRETTET)}
+      isAksjonspunktOpen={aksjonspunkterForFeilutbetalingFakta.some(a => a.status === AksjonspunktStatus.OPPRETTET)}
     />
   );
 };

@@ -2,9 +2,7 @@ import React, { FunctionComponent, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { KodeverkMedNavn } from '@navikt/fp-types';
-import {
-  behandlingType as BehandlingType, KodeverkType, venteArsakType, dokumentMalType,
-} from '@navikt/fp-kodeverk';
+import { behandlingType as BehandlingType, KodeverkType, venteArsakType, dokumentMalType } from '@navikt/fp-kodeverk';
 import { MeldingerSakIndex, MessagesModalSakIndex, FormValues } from '@navikt/fp-sak-meldinger';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
@@ -15,71 +13,77 @@ import useVisForhandsvisningAvMelding, { ForhandsvisFunksjon } from '../../data/
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 import FagsakData from '../../fagsak/FagsakData';
 
-const getSubmitCallback = (
-  setShowMessageModal: (showModal: boolean) => void,
-  behandlingTypeKode: string,
-  behandlingUuid: string,
-  submitMessage: (params?: { behandlingUuid?: string, brevmalkode: string; fritekst: string; arsakskode?: string; },
-    keepData?: boolean) => Promise<void>,
-  resetMessage: () => void,
-  setShowSettPaVentModal: (erInnhentetEllerForlenget: boolean) => void,
-  setMeldingForData: (data?: any) => void,
-) => (values: FormValues) => {
-  const isInnhentEllerForlenget = values.brevmalkode === dokumentMalType.INNHENTE_OPPLYSNINGER
-    || values.brevmalkode === dokumentMalType.FORLENGET_SAKSBEHANDLINGSTID
-    || values.brevmalkode === dokumentMalType.FORLENGET_SAKSBEHANDLINGSTID_MEDL;
-  const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandlingTypeKode || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingTypeKode;
+const getSubmitCallback =
+  (
+    setShowMessageModal: (showModal: boolean) => void,
+    behandlingTypeKode: string,
+    behandlingUuid: string,
+    submitMessage: (
+      params?: { behandlingUuid?: string; brevmalkode: string; fritekst: string; arsakskode?: string },
+      keepData?: boolean,
+    ) => Promise<void>,
+    resetMessage: () => void,
+    setShowSettPaVentModal: (erInnhentetEllerForlenget: boolean) => void,
+    setMeldingForData: (data?: any) => void,
+  ) =>
+  (values: FormValues) => {
+    const isInnhentEllerForlenget =
+      values.brevmalkode === dokumentMalType.INNHENTE_OPPLYSNINGER ||
+      values.brevmalkode === dokumentMalType.FORLENGET_SAKSBEHANDLINGSTID ||
+      values.brevmalkode === dokumentMalType.FORLENGET_SAKSBEHANDLINGSTID_MEDL;
+    const erTilbakekreving =
+      BehandlingType.TILBAKEKREVING === behandlingTypeKode ||
+      BehandlingType.TILBAKEKREVING_REVURDERING === behandlingTypeKode;
 
-  setShowMessageModal(!isInnhentEllerForlenget);
+    setShowMessageModal(!isInnhentEllerForlenget);
 
-  const data = erTilbakekreving ? {
-    behandlingUuid,
-    fritekst: values.fritekst,
-    brevmalkode: values.brevmalkode,
-  } : {
-    behandlingUuid,
-    brevmalkode: values.brevmalkode,
-    fritekst: values.fritekst,
-    arsakskode: values.arsakskode,
+    const data = erTilbakekreving
+      ? {
+          behandlingUuid,
+          fritekst: values.fritekst,
+          brevmalkode: values.brevmalkode,
+        }
+      : {
+          behandlingUuid,
+          brevmalkode: values.brevmalkode,
+          fritekst: values.fritekst,
+          arsakskode: values.arsakskode,
+        };
+    return submitMessage(data)
+      .then(() => resetMessage())
+      .then(() => {
+        setMeldingForData();
+        setShowSettPaVentModal(isInnhentEllerForlenget);
+      });
   };
-  return submitMessage(data)
-    .then(() => resetMessage())
-    .then(() => {
-      setMeldingForData();
-      setShowSettPaVentModal(isInnhentEllerForlenget);
-    });
-};
 
-const getPreviewCallback = (
-  behandlingTypeKode: string,
-  behandlingUuid: string,
-  fagsakYtelseType: string,
-  fetchPreview: ForhandsvisFunksjon,
-) => (
-  dokumentMal?: string,
-  fritekst?: string,
-  aarsakskode?: string,
-) => {
-  const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandlingTypeKode || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingTypeKode;
-  const data = erTilbakekreving ? {
-    behandlingUuid,
-    fritekst: fritekst || ' ',
-    brevmalkode: dokumentMal,
-  } : {
-    behandlingUuid,
-    fagsakYtelseType,
-    fritekst: fritekst || ' ',
-    arsakskode: aarsakskode || null,
-    dokumentMal,
+const getPreviewCallback =
+  (behandlingTypeKode: string, behandlingUuid: string, fagsakYtelseType: string, fetchPreview: ForhandsvisFunksjon) =>
+  (dokumentMal?: string, fritekst?: string, aarsakskode?: string) => {
+    const erTilbakekreving =
+      BehandlingType.TILBAKEKREVING === behandlingTypeKode ||
+      BehandlingType.TILBAKEKREVING_REVURDERING === behandlingTypeKode;
+    const data = erTilbakekreving
+      ? {
+          behandlingUuid,
+          fritekst: fritekst || ' ',
+          brevmalkode: dokumentMal,
+        }
+      : {
+          behandlingUuid,
+          fagsakYtelseType,
+          fritekst: fritekst || ' ',
+          arsakskode: aarsakskode || null,
+          dokumentMal,
+        };
+    fetchPreview(false, data);
   };
-  fetchPreview(false, data);
-};
 
 interface OwnProps {
   fagsakData: FagsakData;
   valgtBehandlingUuid: string;
-  meldingFormData?: any,
-  setMeldingForData: (data?: any) => void,
+  meldingFormData?: any;
+  setMeldingForData: (data?: any) => void;
 }
 
 const EMPTY_ARRAY = [] as KodeverkMedNavn[];
@@ -108,7 +112,9 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   const ventearsaker = useFpSakKodeverk(KodeverkType.VENT_AARSAK) || EMPTY_ARRAY;
   const revurderingVarslingArsak = useFpSakKodeverk(KodeverkType.REVURDERING_VARSLING_ÅRSAK);
 
-  const { startRequest: submitMessage, state: submitState } = restApiHooks.useRestApiRunner(FpsakApiKeys.SUBMIT_MESSAGE);
+  const { startRequest: submitMessage, state: submitState } = restApiHooks.useRestApiRunner(
+    FpsakApiKeys.SUBMIT_MESSAGE,
+  );
 
   const { uuid, versjon, type } = valgtBehandling;
 
@@ -117,15 +123,24 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
     window.location.reload();
   };
 
-  const submitCallback = useCallback(getSubmitCallback(setShowMessageModal, type, valgtBehandling.uuid, submitMessage,
-    resetMessage, setShowSettPaVentModal, setMeldingForData),
-  [uuid, versjon]);
+  const submitCallback = useCallback(
+    getSubmitCallback(
+      setShowMessageModal,
+      type,
+      valgtBehandling.uuid,
+      submitMessage,
+      resetMessage,
+      setShowSettPaVentModal,
+      setMeldingForData,
+    ),
+    [uuid, versjon],
+  );
 
   const hideSettPaVentModal = useCallback(() => {
     setShowSettPaVentModal(false);
   }, []);
 
-  const handleSubmitFromModal = useCallback((formValues) => {
+  const handleSubmitFromModal = useCallback(formValues => {
     const values = {
       frist: formValues.frist,
       ventearsak: formValues.ventearsak,
@@ -137,8 +152,10 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
 
   const fetchPreview = useVisForhandsvisningAvMelding(type);
 
-  const previewCallback = useCallback(getPreviewCallback(type, valgtBehandling.uuid, fagsak.fagsakYtelseType, fetchPreview),
-    [uuid, versjon]);
+  const previewCallback = useCallback(
+    getPreviewCallback(type, valgtBehandling.uuid, fagsak.fagsakYtelseType, fetchPreview),
+    [uuid, versjon],
+  );
 
   const afterSubmit = useCallback(() => {
     setShowMessageModal(false);
@@ -174,7 +191,9 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
           ventearsak={venteArsakType.AVV_DOK}
           ventearsaker={ventearsaker}
           hasManualPaVent={false}
-          erTilbakekreving={type === BehandlingType.TILBAKEKREVING || type === BehandlingType.TILBAKEKREVING_REVURDERING}
+          erTilbakekreving={
+            type === BehandlingType.TILBAKEKREVING || type === BehandlingType.TILBAKEKREVING_REVURDERING
+          }
         />
       )}
     </>

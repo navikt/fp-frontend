@@ -9,11 +9,13 @@ interface OwnProps {
   personopplysninger: PersonopplysningerBasis;
 }
 
-const AdresseVisning: FunctionComponent<OwnProps> = ({
-  personopplysninger,
-}) => {
-  const postadr = personopplysninger.adresser.find((adresse) => adresse.adresseType === opplysningAdresseType.POSTADRESSE);
-  const bostedsadr = personopplysninger.adresser.find((adresse) => adresse.adresseType === opplysningAdresseType.BOSTEDSADRESSE);
+const AdresseVisning: FunctionComponent<OwnProps> = ({ personopplysninger }) => {
+  const postadr = personopplysninger.adresser.find(
+    adresse => adresse.adresseType === opplysningAdresseType.POSTADRESSE,
+  );
+  const bostedsadr = personopplysninger.adresser.find(
+    adresse => adresse.adresseType === opplysningAdresseType.BOSTEDSADRESSE,
+  );
   if (!postadr && !bostedsadr) {
     return null;
   }
@@ -26,29 +28,21 @@ const AdresseVisning: FunctionComponent<OwnProps> = ({
         <FormattedMessage id="PersonInfoPanel.Adresse" />
       </Label>
       <VerticalSpacer fourPx />
-      <BodyShort size="small">
-        {adr.adresselinje1}
-      </BodyShort>
+      <BodyShort size="small">{adr.adresselinje1}</BodyShort>
       <VerticalSpacer fourPx />
       {adr.adresselinje2 && (
         <>
-          <BodyShort size="small">
-            {adr.adresselinje2}
-          </BodyShort>
+          <BodyShort size="small">{adr.adresselinje2}</BodyShort>
           <VerticalSpacer fourPx />
         </>
       )}
       {adr.adresselinje3 && (
         <>
-          <BodyShort size="small">
-            {adr.adresselinje3}
-          </BodyShort>
+          <BodyShort size="small">{adr.adresselinje3}</BodyShort>
           <VerticalSpacer fourPx />
         </>
       )}
-      <BodyShort size="small">
-        {`${adr.postNummer} ${adr.poststed}, ${adr.land}`}
-      </BodyShort>
+      <BodyShort size="small">{`${adr.postNummer} ${adr.poststed}, ${adr.land}`}</BodyShort>
     </>
   );
 };

@@ -14,6 +14,6 @@ type KontrollerFaktaPeriode = Readonly<{
   morsAktivitet?: string;
   periodeKilde: string;
   begrunnelse?: string;
-}>
+}>;
 
 export default KontrollerFaktaPeriode;

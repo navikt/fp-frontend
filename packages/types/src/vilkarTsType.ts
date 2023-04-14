@@ -4,6 +4,6 @@ type Vilkar = Readonly<{
   avslagKode?: string;
   lovReferanse?: string;
   overstyrbar: boolean;
-}>
+}>;
 
 export default Vilkar;

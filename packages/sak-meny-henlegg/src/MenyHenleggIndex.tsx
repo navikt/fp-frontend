@@ -15,11 +15,7 @@ export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyHenleggI
 
 interface OwnProps {
   valgtBehandling: BehandlingAppKontekst;
-  henleggBehandling: (params: {
-    årsakKode: string;
-    begrunnelse: string;
-    fritekst?: string;
-  }) => Promise<any>;
+  henleggBehandling: (params: { årsakKode: string; begrunnelse: string; fritekst?: string }) => Promise<any>;
   forhandsvisHenleggBehandling: (erHenleggelse: boolean, data: any) => void;
   ytelseType: string;
   behandlingResultatTyper: KodeverkMedNavn[];
@@ -38,16 +34,19 @@ const MenyHenleggIndex: FunctionComponent<OwnProps> = ({
 }) => {
   const [erHenlagt, setHenlagt] = useState(false);
 
-  const submit = useCallback((formValues: FormValues) => {
-    const henleggBehandlingDto = {
-      årsakKode: formValues.årsakKode || '',
-      begrunnelse: formValues.begrunnelse || '',
-      fritekst: formValues.fritekst,
-    };
-    henleggBehandling(henleggBehandlingDto).then(() => {
-      setHenlagt(true);
-    });
-  }, [valgtBehandling]);
+  const submit = useCallback(
+    (formValues: FormValues) => {
+      const henleggBehandlingDto = {
+        årsakKode: formValues.årsakKode || '',
+        begrunnelse: formValues.begrunnelse || '',
+        fritekst: formValues.fritekst,
+      };
+      henleggBehandling(henleggBehandlingDto).then(() => {
+        setHenlagt(true);
+      });
+    },
+    [valgtBehandling],
+  );
 
   return (
     <RawIntlProvider value={intl}>
@@ -62,12 +61,7 @@ const MenyHenleggIndex: FunctionComponent<OwnProps> = ({
           behandlingResultatTyper={behandlingResultatTyper}
         />
       )}
-      {erHenlagt && (
-        <HenlagtBehandlingModal
-          showModal
-          closeEvent={gaaTilSokeside}
-        />
-      )}
+      {erHenlagt && <HenlagtBehandlingModal showModal closeEvent={gaaTilSokeside} />}
     </RawIntlProvider>
   );
 };

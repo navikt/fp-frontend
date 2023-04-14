@@ -1,7 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
-import { klageVurdering as klageVurderingType, klageVurderingOmgjoer as klageVurderingOmgjoerType } from '@navikt/fp-kodeverk';
+import {
+  klageVurdering as klageVurderingType,
+  klageVurderingOmgjoer as klageVurderingOmgjoerType,
+} from '@navikt/fp-kodeverk';
 import { required } from '@navikt/ft-form-validators';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
@@ -17,10 +20,9 @@ interface OwnProps {
   klageVurdering?: string;
 }
 
-const lagHjemler = (kodeverkNavn: KodeverkMedNavn[], kodeverkVerdier: string[]): KodeverkMedNavn[] => kodeverkNavn
-  .filter(({ kode }) => kodeverkVerdier.includes(kode))
-  .sort((a, b) => a.kode.localeCompare(b.kode));
-const lagHjemmelsKoder = (kodeverkVerdier: string[]): string[] => kodeverkVerdier.map((kode) => kode);
+const lagHjemler = (kodeverkNavn: KodeverkMedNavn[], kodeverkVerdier: string[]): KodeverkMedNavn[] =>
+  kodeverkNavn.filter(({ kode }) => kodeverkVerdier.includes(kode)).sort((a, b) => a.kode.localeCompare(b.kode));
+const lagHjemmelsKoder = (kodeverkVerdier: string[]): string[] => kodeverkVerdier.map(kode => kode);
 
 export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps> = ({
   readOnly,
@@ -30,9 +32,16 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps> = ({
   klageVurdering,
 }) => {
   const intl = useIntl();
-  const medholdOptions = medholdReasons.map((mo: KodeverkMedNavn) => <option key={mo.kode} value={mo.kode}>{mo.navn}</option>);
-  const hjemmelOptions = lagHjemler(alleHjemler, lagHjemmelsKoder(alleAktuelleHjemler))
-    .map((mo: KodeverkMedNavn) => <option key={mo.kode} value={mo.kode}>{mo.navn}</option>);
+  const medholdOptions = medholdReasons.map((mo: KodeverkMedNavn) => (
+    <option key={mo.kode} value={mo.kode}>
+      {mo.navn}
+    </option>
+  ));
+  const hjemmelOptions = lagHjemler(alleHjemler, lagHjemmelsKoder(alleAktuelleHjemler)).map((mo: KodeverkMedNavn) => (
+    <option key={mo.kode} value={mo.kode}>
+      {mo.navn}
+    </option>
+  ));
   return (
     <>
       <RadioGroupPanel
@@ -40,13 +49,15 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps> = ({
         validate={[required]}
         isReadOnly={readOnly}
         isHorizontal
-        radios={[{
-          value: klageVurderingType.MEDHOLD_I_KLAGE,
-          label: intl.formatMessage({ id: 'Klage.ResolveKlage.ChangeVedtak' }),
-        }, {
-          value: klageVurderingType.STADFESTE_YTELSESVEDTAK,
-          label: intl.formatMessage({ id: 'Klage.ResolveKlage.KeepVedtakNfp' }),
-        },
+        radios={[
+          {
+            value: klageVurderingType.MEDHOLD_I_KLAGE,
+            label: intl.formatMessage({ id: 'Klage.ResolveKlage.ChangeVedtak' }),
+          },
+          {
+            value: klageVurderingType.STADFESTE_YTELSESVEDTAK,
+            label: intl.formatMessage({ id: 'Klage.ResolveKlage.KeepVedtakNfp' }),
+          },
         ]}
       />
       {klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE && (
@@ -66,16 +77,20 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps> = ({
               name="klageVurderingOmgjoer"
               validate={[required]}
               isReadOnly={readOnly}
-              radios={[{
-                value: klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE,
-                label: intl.formatMessage({ id: 'Klage.Behandle.Omgjort' }),
-              }, {
-                value: klageVurderingOmgjoerType.UGUNST_MEDHOLD_I_KLAGE,
-                label: intl.formatMessage({ id: 'Klage.Behandle.Ugunst' }),
-              }, {
-                value: klageVurderingOmgjoerType.DELVIS_MEDHOLD_I_KLAGE,
-                label: intl.formatMessage({ id: 'Klage.Behandle.DelvisOmgjort' }),
-              }]}
+              radios={[
+                {
+                  value: klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE,
+                  label: intl.formatMessage({ id: 'Klage.Behandle.Omgjort' }),
+                },
+                {
+                  value: klageVurderingOmgjoerType.UGUNST_MEDHOLD_I_KLAGE,
+                  label: intl.formatMessage({ id: 'Klage.Behandle.Ugunst' }),
+                },
+                {
+                  value: klageVurderingOmgjoerType.DELVIS_MEDHOLD_I_KLAGE,
+                  label: intl.formatMessage({ id: 'Klage.Behandle.DelvisOmgjort' }),
+                },
+              ]}
             />
           </ArrowBox>
         </>

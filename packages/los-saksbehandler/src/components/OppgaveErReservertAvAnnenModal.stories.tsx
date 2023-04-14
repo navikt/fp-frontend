@@ -45,7 +45,7 @@ const oppgaveForResevertAvAnnenModal = {
   href: '',
 };
 
-const Template: Story<{ lukkErReservertModalOgOpneOppgave: (oppgave: Oppgave) => void; }> = ({
+const Template: Story<{ lukkErReservertModalOgOpneOppgave: (oppgave: Oppgave) => void }> = ({
   lukkErReservertModalOgOpneOppgave,
 }) => (
   <OppgaveErReservertAvAnnenModal

@@ -4,9 +4,8 @@ import { Expand, Collapse } from '@navikt/ds-icons';
 
 import styles from './bubbleText.module.css';
 
-const truncateText = (tekst: string, cutOffLength: number): string => (tekst.length > cutOffLength
-  ? (`${tekst.substring(0, cutOffLength - 3)}...`)
-  : tekst);
+const truncateText = (tekst: string, cutOffLength: number): string =>
+  tekst.length > cutOffLength ? `${tekst.substring(0, cutOffLength - 3)}...` : tekst;
 
 interface OwnProps {
   bodyText?: string;
@@ -22,17 +21,14 @@ interface OwnProps {
  * <BubbleText bodyText={tekst} cutOffLength={70} />
  * ```
  */
-const BubbleText: FunctionComponent<OwnProps> = ({
-  cutOffLength = 83,
-  bodyText = '',
-}) => {
+const BubbleText: FunctionComponent<OwnProps> = ({ cutOffLength = 83, bodyText = '' }) => {
   const intl = useIntl();
   const [expanded, setExpanded] = useState(false);
 
-  const handleOnClick = useCallback(() => setExpanded((prevState) => !prevState), []);
-  const handleKeyDown = useCallback((event) => {
+  const handleOnClick = useCallback(() => setExpanded(prevState => !prevState), []);
+  const handleKeyDown = useCallback(event => {
     if (event && event.keyCode === 32) {
-      setExpanded((prevState) => !prevState);
+      setExpanded(prevState => !prevState);
     }
   }, []);
 
@@ -42,14 +38,8 @@ const BubbleText: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      {expanded && (
-        <div>{bodyText}</div>
-      )}
-      {!expanded && (
-        <div className={styles.breakWord}>
-          {truncateText(bodyText, cutOffLength)}
-        </div>
-      )}
+      {expanded && <div>{bodyText}</div>}
+      {!expanded && <div className={styles.breakWord}>{truncateText(bodyText, cutOffLength)}</div>}
       <a
         href="#"
         onClick={handleOnClick}

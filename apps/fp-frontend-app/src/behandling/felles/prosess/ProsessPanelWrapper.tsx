@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, ReactElement,
-} from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import classnames from 'classnames/bind';
 import { FormattedMessage } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
@@ -18,14 +16,9 @@ interface PanelContainerOwnProps {
   children: any;
 }
 
-const PanelContainer: FunctionComponent<PanelContainerOwnProps> = ({
-  skalSkjulePanel = false,
-  children,
-}) => (
+const PanelContainer: FunctionComponent<PanelContainerOwnProps> = ({ skalSkjulePanel = false, children }) => (
   <div className={classNames('steg', { skalSkjulePanel })}>
-    <FadingPanel>
-      {children}
-    </FadingPanel>
+    <FadingPanel>{children}</FadingPanel>
   </div>
 );
 
@@ -62,9 +55,7 @@ const ProsessPanelWrapper: FunctionComponent<OwnProps> = ({
 
   return (
     <PanelContainer skalSkjulePanel={skalSkjulePanel}>
-      {dataState !== RestApiState.SUCCESS && (
-        <LoadingPanel />
-      )}
+      {dataState !== RestApiState.SUCCESS && <LoadingPanel />}
       {dataState === RestApiState.SUCCESS && children}
     </PanelContainer>
   );

@@ -3,7 +3,10 @@ import React, { FunctionComponent, useEffect } from 'react';
 import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 
 import {
-  requestApi, restApiHooks, RestApiGlobalStatePathsKeys, RestApiPathsKeys,
+  requestApi,
+  restApiHooks,
+  RestApiGlobalStatePathsKeys,
+  RestApiPathsKeys,
 } from '../data/fplosSaksbehandlerRestApi';
 import FagsakSearchIndex from '../fagsakSearch/FagsakSearchIndex';
 import BehandlingskoerIndex from '../behandlingskoer/BehandlingskoerIndex';
@@ -34,7 +37,9 @@ const SaksbehandlerDashboard: FunctionComponent<OwnProps> = ({
   requestApi.setAddErrorMessageHandler(addErrorMessage);
 
   const kodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK_LOS);
-  const kodeverkData = restApiHooks.useGlobalStateRestApi(RestApiGlobalStatePathsKeys.KODEVERK_LOS, undefined, { suspendRequest: !!kodeverk });
+  const kodeverkData = restApiHooks.useGlobalStateRestApi(RestApiGlobalStatePathsKeys.KODEVERK_LOS, undefined, {
+    suspendRequest: !!kodeverk,
+  });
 
   const driftsmeldingerData = restApiHooks.useRestApi(RestApiPathsKeys.DRIFTSMELDINGER);
 
@@ -44,17 +49,16 @@ const SaksbehandlerDashboard: FunctionComponent<OwnProps> = ({
     }
   }, [driftsmeldingerData.state, kodeverkData.state]);
 
-  if (driftsmeldingerData.state !== RestApiState.SUCCESS || (kodeverkData.state !== RestApiState.SUCCESS && !kodeverk)) {
+  if (
+    driftsmeldingerData.state !== RestApiState.SUCCESS ||
+    (kodeverkData.state !== RestApiState.SUCCESS && !kodeverk)
+  ) {
     return null;
   }
 
   return (
     <>
-      {driftsmeldingerData.data && (
-        <DriftsmeldingPanel
-          driftsmeldinger={driftsmeldingerData.data}
-        />
-      )}
+      {driftsmeldingerData.data && <DriftsmeldingPanel driftsmeldinger={driftsmeldingerData.data} />}
       <div className={styles.gridContainer}>
         <div className={styles.leftColumn}>
           <div className={styles.koerContainer}>

@@ -16,17 +16,11 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Definerer visning av personens alder. (Søker)
  */
-const AlderVisning: FunctionComponent<OwnProps> = ({
-  erDod,
-  alder,
-  dodsdato,
-}) => {
+const AlderVisning: FunctionComponent<OwnProps> = ({ erDod, alder, dodsdato }) => {
   if (erDod) {
     return (
       <BodyShort size="small" className={styles.displayInline}>
-        { dodsdato
-          ? <DateLabel dateString={dodsdato} />
-          : <FormattedMessage id="Person.ManglerDodsdato" />}
+        {dodsdato ? <DateLabel dateString={dodsdato} /> : <FormattedMessage id="Person.ManglerDodsdato" />}
       </BodyShort>
     );
   }

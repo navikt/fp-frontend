@@ -8,6 +8,6 @@ type ManueltArbeidsforhold = Readonly<{
   tom: string;
   stillingsprosent: number;
   vurdering: string;
-}>
+}>;
 
 export default ManueltArbeidsforhold;

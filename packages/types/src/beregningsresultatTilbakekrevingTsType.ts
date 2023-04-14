@@ -15,7 +15,7 @@ export type BeregningResultatPeriode = {
   tilbakekrevingBeløpEtterSkatt: number;
   utbetaltYtelseBeløp: number;
   riktigYtelseBeløp: number;
-}
+};
 
 type BeregningsresultatTilbakekreving = {
   beregningResultatPerioder: BeregningResultatPeriode[];

@@ -5,12 +5,13 @@ import userEvent from '@testing-library/user-event';
 import MockAdapter from 'axios-mock-adapter';
 import { Modal } from '@navikt/ds-react';
 
-import {
-  Fagsak, BehandlingAppKontekst, TotrinnskontrollAksjonspunkt, BehandlingÅrsak,
-} from '@navikt/fp-types';
+import { Fagsak, BehandlingAppKontekst, TotrinnskontrollAksjonspunkt, BehandlingÅrsak } from '@navikt/fp-types';
 import { RestApiMock } from '@navikt/fp-utils-test';
 import {
-  fagsakYtelseType as FagsakYtelseType, behandlingType as BehandlingType, KodeverkType, AksjonspunktCode,
+  fagsakYtelseType as FagsakYtelseType,
+  behandlingType as BehandlingType,
+  KodeverkType,
+  AksjonspunktCode,
 } from '@navikt/fp-kodeverk';
 
 import FagsakData from '../../fagsak/FagsakData';
@@ -20,25 +21,28 @@ import TotrinnskontrollIndex from './TotrinnskontrollIndex';
 describe('<TotrinnskontrollIndex>', () => {
   Modal.setAppElement('body');
 
-  const createAksjonspunkt = (aksjonspunktKode: string) => (
-    {
+  const createAksjonspunkt = (aksjonspunktKode: string) =>
+    ({
       aksjonspunktKode,
       opptjeningAktiviteter: [],
       vurderPaNyttArsaker: [],
-    } as TotrinnskontrollAksjonspunkt
-  );
+    } as TotrinnskontrollAksjonspunkt);
 
   const getTotrinnsaksjonspunkterFoedsel = () => ({
     skjermlenkeType: 'FAKTA_OM_FOEDSEL',
-    totrinnskontrollAksjonspunkter: [createAksjonspunkt(AksjonspunktCode.SJEKK_MANGLENDE_FODSEL),
+    totrinnskontrollAksjonspunkter: [
+      createAksjonspunkt(AksjonspunktCode.SJEKK_MANGLENDE_FODSEL),
       createAksjonspunkt(AksjonspunktCode.TERMINBEKREFTELSE),
-      createAksjonspunkt(AksjonspunktCode.AUTO_VENT_PÅ_FODSELREGISTRERING)],
+      createAksjonspunkt(AksjonspunktCode.AUTO_VENT_PÅ_FODSELREGISTRERING),
+    ],
   });
 
   const getTotrinnsaksjonspunkterOmsorg = () => ({
     skjermlenkeType: 'FAKTA_FOR_OMSORG',
-    totrinnskontrollAksjonspunkter: [createAksjonspunkt(AksjonspunktCode.OMSORGSOVERTAKELSE),
-      createAksjonspunkt(AksjonspunktCode.MANUELL_VURDERING_AV_OMSORGSVILKARET)],
+    totrinnskontrollAksjonspunkter: [
+      createAksjonspunkt(AksjonspunktCode.OMSORGSOVERTAKELSE),
+      createAksjonspunkt(AksjonspunktCode.MANUELL_VURDERING_AV_OMSORGSVILKARET),
+    ],
   });
 
   const getTotrinnsaksjonspunkterForeldreansvar = () => ({
@@ -98,7 +102,9 @@ describe('<TotrinnskontrollIndex>', () => {
     ];
 
     let axiosMock: MockAdapter;
-    const setApiMock = (mockAdapter: MockAdapter) => { axiosMock = mockAdapter; };
+    const setApiMock = (mockAdapter: MockAdapter) => {
+      axiosMock = mockAdapter;
+    };
 
     render(
       <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
@@ -126,59 +132,64 @@ describe('<TotrinnskontrollIndex>', () => {
 
     await userEvent.click(screen.getByText('Godkjenn vedtaket'));
 
-    await waitFor(() => expect(axiosMock.history.get
-      .find((a) => a.url === FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT.name)?.params).toStrictEqual({
-      behandlingUuid: '1234',
-      saksnummer: '1',
-      behandlingVersjon: 123,
-      bekreftedeAksjonspunktDtoer: [{
-        '@type': '5016',
-        aksjonspunktGodkjenningDtos: [
+    await waitFor(() =>
+      expect(
+        axiosMock.history.get.find(a => a.url === FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT.name)?.params,
+      ).toStrictEqual({
+        behandlingUuid: '1234',
+        saksnummer: '1',
+        behandlingVersjon: 123,
+        bekreftedeAksjonspunktDtoer: [
           {
-            aksjonspunktKode: '5027',
-            arsaker: [],
-            begrunnelse: undefined,
-            godkjent: true,
-          },
-          {
-            aksjonspunktKode: '5001',
-            arsaker: [],
-            begrunnelse: undefined,
-            godkjent: true,
-          },
-          {
-            aksjonspunktKode: '7002',
-            arsaker: [],
-            begrunnelse: undefined,
-            godkjent: true,
-          },
-          {
-            aksjonspunktKode: '5008',
-            arsaker: [],
-            begrunnelse: undefined,
-            godkjent: true,
-          },
-          {
-            aksjonspunktKode: '5011',
-            arsaker: [],
-            begrunnelse: undefined,
-            godkjent: true,
-          },
-          {
-            aksjonspunktKode: '5014',
-            arsaker: [],
-            begrunnelse: undefined,
-            godkjent: true,
-          },
-          {
-            aksjonspunktKode: '5013',
-            arsaker: [],
-            begrunnelse: undefined,
-            godkjent: true,
+            '@type': '5016',
+            aksjonspunktGodkjenningDtos: [
+              {
+                aksjonspunktKode: '5027',
+                arsaker: [],
+                begrunnelse: undefined,
+                godkjent: true,
+              },
+              {
+                aksjonspunktKode: '5001',
+                arsaker: [],
+                begrunnelse: undefined,
+                godkjent: true,
+              },
+              {
+                aksjonspunktKode: '7002',
+                arsaker: [],
+                begrunnelse: undefined,
+                godkjent: true,
+              },
+              {
+                aksjonspunktKode: '5008',
+                arsaker: [],
+                begrunnelse: undefined,
+                godkjent: true,
+              },
+              {
+                aksjonspunktKode: '5011',
+                arsaker: [],
+                begrunnelse: undefined,
+                godkjent: true,
+              },
+              {
+                aksjonspunktKode: '5014',
+                arsaker: [],
+                begrunnelse: undefined,
+                godkjent: true,
+              },
+              {
+                aksjonspunktKode: '5013',
+                arsaker: [],
+                begrunnelse: undefined,
+                godkjent: true,
+              },
+            ],
+            begrunnelse: null,
           },
         ],
-        begrunnelse: null,
-      }],
-    }));
+      }),
+    );
   });
 });

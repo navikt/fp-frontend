@@ -2,9 +2,7 @@ import React, { FunctionComponent } from 'react';
 import dayjs from 'dayjs';
 import { useIntl } from 'react-intl';
 import { Heading, Detail } from '@navikt/ds-react';
-import {
-  FlexContainer, FlexRow, FlexColumn, Image,
-} from '@navikt/ft-ui-komponenter';
+import { FlexContainer, FlexRow, FlexColumn, Image } from '@navikt/ft-ui-komponenter';
 
 import { KjønnkodeEnum, Person } from '@navikt/fp-types';
 
@@ -31,13 +29,9 @@ interface OwnProps {
  * erDod:false diskresjonskode:"6" dødsdato:"1990.03.03"} medPanel />
  * ```
  */
-const PersonInfo: FunctionComponent<OwnProps> = ({
-  person,
-}) => {
+const PersonInfo: FunctionComponent<OwnProps> = ({ person }) => {
   const intl = useIntl();
-  const {
-    kjønn, dødsdato, diskresjonskode, fødselsdato, navn, fødselsnummer,
-  } = person;
+  const { kjønn, dødsdato, diskresjonskode, fødselsdato, navn, fødselsnummer } = person;
 
   const alder = dayjs().diff(fødselsdato, 'years');
 
@@ -53,13 +47,9 @@ const PersonInfo: FunctionComponent<OwnProps> = ({
         </FlexColumn>
         <FlexColumn>
           <Heading size="small">
-            {navn}
-            {' '}
-            <AlderVisning erDod={!!dødsdato} alder={alder} dodsdato={dødsdato} />
+            {navn} <AlderVisning erDod={!!dødsdato} alder={alder} dodsdato={dødsdato} />
           </Heading>
-          <Detail size="small">
-            {fødselsnummer}
-          </Detail>
+          <Detail size="small">{fødselsnummer}</Detail>
         </FlexColumn>
         <FlexColumn>
           <MerkePanel erDod={!!dødsdato} diskresjonskode={diskresjonskode} />

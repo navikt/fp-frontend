@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  render, screen, waitFor, fireEvent,
-} from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 
@@ -43,11 +41,13 @@ describe('<AndreYtelserPapirsoknadIndex>', () => {
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      periodeFom: '2022-09-14',
-      periodeTom: '2022-09-15',
-      ytelseType: 'VENTELØNN_VARTPENGER',
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        periodeFom: '2022-09-14',
+        periodeTom: '2022-09-15',
+        ytelseType: 'VENTELØNN_VARTPENGER',
+      },
+    ]);
   });
 
   it('skal legge til flere perioder under militær eller siviltjeneste', async () => {
@@ -83,14 +83,17 @@ describe('<AndreYtelserPapirsoknadIndex>', () => {
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      periodeFom: '2022-09-14',
-      periodeTom: '2022-09-15',
-      ytelseType: 'MILITÆR_ELLER_SIVILTJENESTE',
-    }, {
-      periodeFom: '2022-10-10',
-      periodeTom: '2022-10-11',
-      ytelseType: 'MILITÆR_ELLER_SIVILTJENESTE',
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        periodeFom: '2022-09-14',
+        periodeTom: '2022-09-15',
+        ytelseType: 'MILITÆR_ELLER_SIVILTJENESTE',
+      },
+      {
+        periodeFom: '2022-10-10',
+        periodeTom: '2022-10-11',
+        ytelseType: 'MILITÆR_ELLER_SIVILTJENESTE',
+      },
+    ]);
   });
 });

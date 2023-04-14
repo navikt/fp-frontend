@@ -1,18 +1,16 @@
-import React, {
-  FunctionComponent, ReactElement, useEffect, useCallback,
-} from 'react';
+import React, { FunctionComponent, ReactElement, useEffect, useCallback } from 'react';
 import { useIntl } from 'react-intl';
 import { UseFormGetValues } from 'react-hook-form';
-import {
-  AvsnittSkiller, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
-import {
-  Datepicker, SelectField, PeriodFieldArray, formHooks,
-} from '@navikt/ft-form-hooks';
+import { AvsnittSkiller, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Datepicker, SelectField, PeriodFieldArray, formHooks } from '@navikt/ft-form-hooks';
 import { KodeverkMedNavn } from '@navikt/ft-types';
 
 import {
-  dateAfterOrEqual, dateBeforeOrEqual, dateRangesNotOverlapping, hasValidDate, required,
+  dateAfterOrEqual,
+  dateBeforeOrEqual,
+  dateRangesNotOverlapping,
+  hasValidDate,
+  required,
 } from '@navikt/ft-form-validators';
 import { gyldigeUttakperioder } from './RenderPermisjonPeriodeFieldArray';
 
@@ -37,43 +35,56 @@ const defaultUtsettelsePeriode: PeriodeData = {
   arsakForUtsettelse: '',
 };
 
-const getOverlappingValidator = (
-  getValues: UseFormGetValues<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {[UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: FormValues }}>,
-) => () => {
-  const perioder = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}`);
-  const periodeMap = perioder
-    .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
-    .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
-  return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
-};
+const getOverlappingValidator =
+  (
+    getValues: UseFormGetValues<{
+      [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: { [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: FormValues };
+    }>,
+  ) =>
+  () => {
+    const perioder = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}`);
+    const periodeMap = perioder
+      .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
+      .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
+    return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
+  };
 
-const getValiderFomTomRekkefølge = (
-  getValues: UseFormGetValues<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {[UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: FormValues }}>,
-  index: number,
-  erFør: boolean,
-) => () => {
-  const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
-  const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
-  if (!tomVerdi && !fomVerdi) {
-    return null;
-  }
-  return erFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
-};
+const getValiderFomTomRekkefølge =
+  (
+    getValues: UseFormGetValues<{
+      [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: { [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: FormValues };
+    }>,
+    index: number,
+    erFør: boolean,
+  ) =>
+  () => {
+    const fomVerdi = getValues(
+      `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`,
+    );
+    const tomVerdi = getValues(
+      `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`,
+    );
+    if (!tomVerdi && !fomVerdi) {
+      return null;
+    }
+    return erFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
+  };
 
-const mapTyper = (typer: KodeverkMedNavn[]): ReactElement[] => typer
-  .map(({
-    kode,
-    navn,
-  }) => <option value={kode} key={kode}>{navn}</option>);
+const mapTyper = (typer: KodeverkMedNavn[]): ReactElement[] =>
+  typer.map(({ kode, navn }) => (
+    <option value={kode} key={kode}>
+      {navn}
+    </option>
+  ));
 
-const mapKvoter = (typer: KodeverkMedNavn[]): ReactElement[] => typer
-  .filter(({
-    kode,
-  }) => gyldigeUttakperioder.includes(kode))
-  .map(({
-    kode,
-    navn,
-  }) => <option value={kode} key={kode}>{navn}</option>);
+const mapKvoter = (typer: KodeverkMedNavn[]): ReactElement[] =>
+  typer
+    .filter(({ kode }) => gyldigeUttakperioder.includes(kode))
+    .map(({ kode, navn }) => (
+      <option value={kode} key={kode}>
+        {navn}
+      </option>
+    ));
 
 interface OwnProps {
   utsettelseReasons: KodeverkMedNavn[];
@@ -94,10 +105,15 @@ const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
 
   const {
-    control, getValues, trigger, formState: { isSubmitted },
-  } = formHooks.useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
-    [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: FormValues
-  }}>();
+    control,
+    getValues,
+    trigger,
+    formState: { isSubmitted },
+  } = formHooks.useFormContext<{
+    [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
+      [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: FormValues;
+    };
+  }>();
 
   const { fields, remove, append } = formHooks.useFieldArray({
     control,
@@ -123,7 +139,7 @@ const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps> = ({
       remove={remove}
     >
       {(field, index, getRemoveButton) => (
-        <div key={field.id} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+        <div key={field.id} className={index !== fields.length - 1 ? styles.notLastRow : ''}>
           {index > 0 && (
             <>
               <AvsnittSkiller />
@@ -183,22 +199,25 @@ const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps> = ({
                   label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.ArbeidskategoriLabel' }) : ''}
                   name={`${fieldArrayName}.${index}.erArbeidstaker`}
                   selectValues={[
-                    <option value="true" key="true">{intl.formatMessage({ id: 'Registrering.Permisjon.ErArbeidstaker' })}</option>,
-                    <option value="false" key="false">{intl.formatMessage({ id: 'Registrering.Permisjon.ErIkkeArbeidstaker' })}</option>,
+                    <option value="true" key="true">
+                      {intl.formatMessage({ id: 'Registrering.Permisjon.ErArbeidstaker' })}
+                    </option>,
+                    <option value="false" key="false">
+                      {intl.formatMessage({ id: 'Registrering.Permisjon.ErIkkeArbeidstaker' })}
+                    </option>,
                   ]}
-                  validate={[(erArbeidstaker) => {
-                    const typeArbeidRequired = getValues(
-                      `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.arsakForUtsettelse`,
-                    ) === 'ARBEID';
-                    return typeArbeidRequired ? required(erArbeidstaker) : undefined;
-                  }]}
+                  validate={[
+                    erArbeidstaker => {
+                      const typeArbeidRequired =
+                        getValues(
+                          `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}.${index}.arsakForUtsettelse`,
+                        ) === 'ARBEID';
+                      return typeArbeidRequired ? required(erArbeidstaker) : undefined;
+                    },
+                  ]}
                 />
               </FlexColumn>
-              {getRemoveButton && (
-                <FlexColumn>
-                  {getRemoveButton()}
-                </FlexColumn>
-              )}
+              {getRemoveButton && <FlexColumn>{getRemoveButton()}</FlexColumn>}
             </FlexRow>
           </FlexContainer>
         </div>

@@ -2,9 +2,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
-import {
-  Event, EventHint, init, Integrations,
-} from '@sentry/browser';
+import { Event, EventHint, init, Integrations } from '@sentry/browser';
 
 import { RestApiErrorProvider, RestApiProvider } from '@navikt/fp-rest-api-hooks';
 

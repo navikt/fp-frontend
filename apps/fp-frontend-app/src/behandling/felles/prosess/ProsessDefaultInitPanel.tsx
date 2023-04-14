@@ -1,6 +1,4 @@
-import React, {
-  ReactElement, useMemo,
-} from 'react';
+import React, { ReactElement, useMemo } from 'react';
 
 import { RestApiHooks, RestApiState } from '@navikt/fp-rest-api-hooks';
 import { RequestApi, RestKey } from '@navikt/fp-rest-api';
@@ -14,7 +12,7 @@ import ProsessPanelWrapper from './ProsessPanelWrapper';
 
 export type OwnProps<PANEL_DATA> = {
   requestApi: RequestApi;
-  panelEndepunkter?: RestKey<any, any>[] | { key: RestKey<any, any>, params?: any }[];
+  panelEndepunkter?: RestKey<any, any>[] | { key: RestKey<any, any>; params?: any }[];
   aksjonspunktKoder?: string[];
   vilkarKoder?: string[];
   skalPanelVisesIMeny: (data: StandardProsessPanelProps) => boolean;
@@ -22,12 +20,12 @@ export type OwnProps<PANEL_DATA> = {
   renderPanel: (data: PANEL_DATA & StandardProsessPanelProps) => ReactElement;
   prosessPanelKode: ProsessStegCode;
   prosessPanelMenyTekst: string;
-  lagringSideEffekter?: (aksjonspunktModeller: any) => () => void,
+  lagringSideEffekter?: (aksjonspunktModeller: any) => () => void;
   erOverstyrt?: boolean;
   hentSkalMarkeresSomAktiv?: (standardData: StandardProsessPanelProps) => boolean;
-}
+};
 
-const ProsessDefaultInitPanel = <PANEL_DATA = void, >({
+const ProsessDefaultInitPanel = <PANEL_DATA = void,>({
   valgtProsessSteg,
   behandling,
   registrerProsessPanel,
@@ -65,12 +63,15 @@ const ProsessDefaultInitPanel = <PANEL_DATA = void, >({
     skalMarkeresSomAktiv || harApentAksjonspunkt,
   );
 
-  const formatertePanelEndepunkter = panelEndepunkter.map((e: any) => (e instanceof RestKey ? ({ key: e }) : e));
-  const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi<PANEL_DATA, any>(formatertePanelEndepunkter, {
-    updateTriggers: [erPanelValgt, behandling.versjon],
-    suspendRequest: !erPanelValgt || formatertePanelEndepunkter.length === 0,
-    isCachingOn: true,
-  });
+  const formatertePanelEndepunkter = panelEndepunkter.map((e: any) => (e instanceof RestKey ? { key: e } : e));
+  const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi<PANEL_DATA, any>(
+    formatertePanelEndepunkter,
+    {
+      updateTriggers: [erPanelValgt, behandling.versjon],
+      suspendRequest: !erPanelValgt || formatertePanelEndepunkter.length === 0,
+      isCachingOn: true,
+    },
+  );
 
   return (
     <ProsessPanelWrapper

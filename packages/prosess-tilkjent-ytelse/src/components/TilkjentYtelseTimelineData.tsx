@@ -3,16 +3,23 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import moment from 'moment';
 import { Label, BodyShort } from '@navikt/ds-react';
 
+import { KodeverkType, aktivitetStatus, uttakPeriodeNavn, getKodeverknavnFn } from '@navikt/fp-kodeverk';
 import {
-  KodeverkType, aktivitetStatus, uttakPeriodeNavn, getKodeverknavnFn,
-} from '@navikt/fp-kodeverk';
-import {
-  Table, TableColumn, TableRow, VerticalSpacer, FlexContainer, FlexRow, FlexColumn,
+  Table,
+  TableColumn,
+  TableRow,
+  VerticalSpacer,
+  FlexContainer,
+  FlexRow,
+  FlexColumn,
 } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { TimeLineButton, TimeLineDataContainer } from '@navikt/ft-tidslinje';
 import {
-  ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriodeAndel, AlleKodeverk, BeregningsresultatPeriode,
+  ArbeidsgiverOpplysningerPerId,
+  BeregningsresultatPeriodeAndel,
+  AlleKodeverk,
+  BeregningsresultatPeriode,
 } from '@navikt/fp-types';
 
 import styles from './tilkjentYtelse.module.css';
@@ -28,24 +35,28 @@ const createVisningNavnForUttakArbeidstaker = (
 ): ReactElement | string => {
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[andel.arbeidsgiverReferanse];
   if (!arbeidsgiverOpplysninger || !arbeidsgiverOpplysninger.navn) {
-    return andel.arbeidsforholdType ? getKodeverknavn(andel.arbeidsforholdType, KodeverkType.OPPTJENING_AKTIVITET_TYPE) : '';
+    return andel.arbeidsforholdType
+      ? getKodeverknavn(andel.arbeidsforholdType, KodeverkType.OPPTJENING_AKTIVITET_TYPE)
+      : '';
   }
   return arbeidsgiverOpplysninger.erPrivatPerson
     ? `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.fødselsdato})`
-    : `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.identifikator})${getEndCharFromId(andel.eksternArbeidsforholdId)}`;
+    : `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.identifikator})${getEndCharFromId(
+        andel.eksternArbeidsforholdId,
+      )}`;
 };
 
 const tableHeaderTextCodes = (isFagsakSVP = false): string[] => {
   if (isFagsakSVP) {
-    return ([
+    return [
       'TilkjentYtelse.PeriodeData.Andel',
       'TilkjentYtelse.PeriodeData.Utbetalingsgrad',
       'TilkjentYtelse.PeriodeData.Refusjon',
       'TilkjentYtelse.PeriodeData.TilSoker',
       'TilkjentYtelse.PeriodeData.SisteUtbDato',
-    ]);
+    ];
   }
-  return ([
+  return [
     'TilkjentYtelse.PeriodeData.Andel',
     'TilkjentYtelse.PeriodeData.KontoType',
     'TilkjentYtelse.PeriodeData.Gradering',
@@ -53,7 +64,7 @@ const tableHeaderTextCodes = (isFagsakSVP = false): string[] => {
     'TilkjentYtelse.PeriodeData.Refusjon',
     'TilkjentYtelse.PeriodeData.TilSoker',
     'TilkjentYtelse.PeriodeData.SisteUtbDato',
-  ]);
+  ];
 };
 
 const findAndelsnavn = (
@@ -86,14 +97,9 @@ const getGradering = (andel?: BeregningsresultatPeriodeAndel): ReactElement | nu
   if (andel === undefined) {
     return null;
   }
-  const stringId = andel.uttak && andel.uttak.gradering === true
-    ? 'TilkjentYtelse.PeriodeData.Ja'
-    : 'TilkjentYtelse.PeriodeData.Nei';
-  return (
-    <FormattedMessage
-      id={stringId}
-    />
-  );
+  const stringId =
+    andel.uttak && andel.uttak.gradering === true ? 'TilkjentYtelse.PeriodeData.Ja' : 'TilkjentYtelse.PeriodeData.Nei';
+  return <FormattedMessage id={stringId} />;
 };
 
 interface OwnProps {
@@ -136,8 +142,16 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
             </Label>
           </FlexColumn>
           <FlexColumn className={styles.ctrlCol}>
-            <TimeLineButton text={intl.formatMessage({ id: 'Timeline.prevPeriod' })} type="prev" callback={callbackBackward} />
-            <TimeLineButton text={intl.formatMessage({ id: 'Timeline.nextPeriod' })} type="next" callback={callbackForward} />
+            <TimeLineButton
+              text={intl.formatMessage({ id: 'Timeline.prevPeriod' })}
+              type="prev"
+              callback={callbackBackward}
+            />
+            <TimeLineButton
+              text={intl.formatMessage({ id: 'Timeline.nextPeriod' })}
+              type="next"
+              callback={callbackForward}
+            />
           </FlexColumn>
         </FlexRow>
         <VerticalSpacer sixteenPx />
@@ -148,20 +162,14 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
                 <FormattedMessage
                   id="TilkjentYtelse.PeriodeData.Periode"
                   values={{
-                    fomVerdi: moment(selectedItemStartDate)
-                      .format(DDMMYYYY_DATE_FORMAT)
-                      .toString(),
-                    tomVerdi: moment(selectedItemEndDate)
-                      .format(DDMMYYYY_DATE_FORMAT)
-                      .toString(),
+                    fomVerdi: moment(selectedItemStartDate).format(DDMMYYYY_DATE_FORMAT).toString(),
+                    tomVerdi: moment(selectedItemEndDate).format(DDMMYYYY_DATE_FORMAT).toString(),
                   }}
                 />
               </Label>
             </FlexColumn>
             <FlexColumn>
-              <BodyShort size="small">
-                {numberOfDaysAndWeeks.formattedString}
-              </BodyShort>
+              <BodyShort size="small">{numberOfDaysAndWeeks.formattedString}</BodyShort>
             </FlexColumn>
           </FlexRow>
           <VerticalSpacer eightPx />
@@ -176,35 +184,41 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
         </div>
       </FlexContainer>
       <VerticalSpacer sixteenPx />
-      {selectedItemData.andeler.length !== 0
-          && (
-            <Table headerTextCodes={tableHeaderTextCodes(isSoknadSvangerskapspenger)}>
-              {selectedItemData.andeler.map((andel, index: number) => (
-                <TableRow key={`index${index + 1}`}>
-                  <TableColumn>{findAndelsnavn(andel, getKodeverknavn, arbeidsgiverOpplysningerPerId)}</TableColumn>
-                  {!isSoknadSvangerskapspenger && (
-                    <TableColumn><BodyShort size="small">{uttakPeriodeNavn[andel.uttak.stonadskontoType]}</BodyShort></TableColumn>
-                  )}
-                  {!isSoknadSvangerskapspenger && (
-                    <TableColumn><BodyShort size="small">{getGradering(andel)}</BodyShort></TableColumn>
-                  )}
-                  <TableColumn><BodyShort size="small">{andel.utbetalingsgrad ? andel.utbetalingsgrad : ''}</BodyShort></TableColumn>
-                  <TableColumn>
-                    <BodyShort size="small">
-                      {andel.aktivitetStatus === aktivitetStatus.ARBEIDSTAKER && andel.refusjon ? andel.refusjon : ''}
-                    </BodyShort>
-                  </TableColumn>
-                  <TableColumn><BodyShort size="small">{andel.tilSoker ? andel.tilSoker : ''}</BodyShort></TableColumn>
-                  <TableColumn>
-                    <BodyShort size="small">
-                      {andel.sisteUtbetalingsdato ? moment(andel.sisteUtbetalingsdato)
-                        .format(DDMMYYYY_DATE_FORMAT) : ''}
-                    </BodyShort>
-                  </TableColumn>
-                </TableRow>
-              ))}
-            </Table>
-          )}
+      {selectedItemData.andeler.length !== 0 && (
+        <Table headerTextCodes={tableHeaderTextCodes(isSoknadSvangerskapspenger)}>
+          {selectedItemData.andeler.map((andel, index: number) => (
+            <TableRow key={`index${index + 1}`}>
+              <TableColumn>{findAndelsnavn(andel, getKodeverknavn, arbeidsgiverOpplysningerPerId)}</TableColumn>
+              {!isSoknadSvangerskapspenger && (
+                <TableColumn>
+                  <BodyShort size="small">{uttakPeriodeNavn[andel.uttak.stonadskontoType]}</BodyShort>
+                </TableColumn>
+              )}
+              {!isSoknadSvangerskapspenger && (
+                <TableColumn>
+                  <BodyShort size="small">{getGradering(andel)}</BodyShort>
+                </TableColumn>
+              )}
+              <TableColumn>
+                <BodyShort size="small">{andel.utbetalingsgrad ? andel.utbetalingsgrad : ''}</BodyShort>
+              </TableColumn>
+              <TableColumn>
+                <BodyShort size="small">
+                  {andel.aktivitetStatus === aktivitetStatus.ARBEIDSTAKER && andel.refusjon ? andel.refusjon : ''}
+                </BodyShort>
+              </TableColumn>
+              <TableColumn>
+                <BodyShort size="small">{andel.tilSoker ? andel.tilSoker : ''}</BodyShort>
+              </TableColumn>
+              <TableColumn>
+                <BodyShort size="small">
+                  {andel.sisteUtbetalingsdato ? moment(andel.sisteUtbetalingsdato).format(DDMMYYYY_DATE_FORMAT) : ''}
+                </BodyShort>
+              </TableColumn>
+            </TableRow>
+          ))}
+        </Table>
+      )}
     </TimeLineDataContainer>
   );
 };

@@ -4,6 +4,6 @@ type ManglendeInntektsmeldingVurdering = Readonly<{
   begrunnelse: string;
   arbeidsgiverIdent: string;
   internArbeidsforholdRef: string;
-}>
+}>;
 
 export default ManglendeInntektsmeldingVurdering;

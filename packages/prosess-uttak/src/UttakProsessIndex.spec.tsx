@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  fireEvent, render, screen, waitFor,
-} from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import { Modal } from '@navikt/ds-react';
@@ -112,9 +110,14 @@ describe('<UttakProsessIndex>', () => {
 
     const utils = render(<AksjonspunktDerValgtStønadskontoIkkeFinnes submitCallback={lagre} />);
 
-    expect(await screen.findByText('Alle aksjonspunkter skal vurderes manuelt. Kontakt søker ved behov.')).toBeInTheDocument();
     expect(
-      screen.getByText('Ikke gyldig grunn for uttak av denne stønadskontoen. Vurder bruk av annen stønadskonto eller avslå perioden.')).toBeInTheDocument();
+      await screen.findByText('Alle aksjonspunkter skal vurderes manuelt. Kontakt søker ved behov.'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Ikke gyldig grunn for uttak av denne stønadskontoen. Vurder bruk av annen stønadskonto eller avslå perioden.',
+      ),
+    ).toBeInTheDocument();
 
     const inputFelter = utils.getAllByRole('textbox');
     expect(inputFelter).toHaveLength(7);
@@ -152,76 +155,86 @@ describe('<UttakProsessIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      kode: '5071',
-      perioder: [{
-        aktiviteter: [{
-          arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c1',
-          arbeidsgiverReferanse: '910909088',
-          eksternArbeidsforholdId: 'ARB001-001',
-          gradering: false,
-          prosentArbeid: 0,
-          stønadskontoType: 'MØDREKVOTE',
-          trekkdagerDesimaler: 14,
-          utbetalingsgrad: 0,
-          uttakArbeidType: 'ORDINÆRT_ARBEID',
-        }, {
-          arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c2',
-          arbeidsgiverReferanse: '994884174',
-          eksternArbeidsforholdId: 'ARB001-002',
-          gradering: false,
-          prosentArbeid: 0,
-          stønadskontoType: 'FELLESPERIODE',
-          trekkdagerDesimaler: 15,
-          utbetalingsgrad: 10,
-          uttakArbeidType: 'ORDINÆRT_ARBEID',
-        }],
-        begrunnelse: 'Dette er en vurdering',
-        flerbarnsdager: false,
-        fom: '2022-10-20',
-        graderingAvslagÅrsak: '-',
-        graderingInnvilget: false,
-        gradertAktivitet: null,
-        manuellBehandlingÅrsak: '5002',
-        mottattDato: '2023-01-05',
-        oppholdÅrsak: '-',
-        periodeResultatType: 'INNVILGET',
-        periodeResultatÅrsak: '2002',
-        periodeType: 'FORELDREPENGER',
-        samtidigUttak: false,
-        samtidigUttaksprosent: undefined,
-        tom: '2022-11-09',
-        utsettelseType: '-',
-      }, {
-        aktiviteter: [{
-          arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c2',
-          arbeidsgiverReferanse: '994884174',
-          eksternArbeidsforholdId: 'ARB001-002',
-          gradering: false,
-          prosentArbeid: 0,
-          stønadskontoType: 'MØDREKVOTE',
-          trekkdagerDesimaler: 30,
-          utbetalingsgrad: 0,
-          uttakArbeidType: 'ORDINÆRT_ARBEID',
-        }],
-        begrunnelse: null,
-        flerbarnsdager: false,
-        fom: '2022-11-10',
-        graderingAvslagÅrsak: '-',
-        graderingInnvilget: false,
-        gradertAktivitet: null,
-        manuellBehandlingÅrsak: '-',
-        mottattDato: null,
-        oppholdÅrsak: '-',
-        periodeResultatType: 'AVSLÅTT',
-        periodeResultatÅrsak: '4103',
-        periodeType: null,
-        samtidigUttak: false,
-        samtidigUttaksprosent: null,
-        tom: '2022-12-21',
-        utsettelseType: '-',
-      }],
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        kode: '5071',
+        perioder: [
+          {
+            aktiviteter: [
+              {
+                arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c1',
+                arbeidsgiverReferanse: '910909088',
+                eksternArbeidsforholdId: 'ARB001-001',
+                gradering: false,
+                prosentArbeid: 0,
+                stønadskontoType: 'MØDREKVOTE',
+                trekkdagerDesimaler: 14,
+                utbetalingsgrad: 0,
+                uttakArbeidType: 'ORDINÆRT_ARBEID',
+              },
+              {
+                arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c2',
+                arbeidsgiverReferanse: '994884174',
+                eksternArbeidsforholdId: 'ARB001-002',
+                gradering: false,
+                prosentArbeid: 0,
+                stønadskontoType: 'FELLESPERIODE',
+                trekkdagerDesimaler: 15,
+                utbetalingsgrad: 10,
+                uttakArbeidType: 'ORDINÆRT_ARBEID',
+              },
+            ],
+            begrunnelse: 'Dette er en vurdering',
+            flerbarnsdager: false,
+            fom: '2022-10-20',
+            graderingAvslagÅrsak: '-',
+            graderingInnvilget: false,
+            gradertAktivitet: null,
+            manuellBehandlingÅrsak: '5002',
+            mottattDato: '2023-01-05',
+            oppholdÅrsak: '-',
+            periodeResultatType: 'INNVILGET',
+            periodeResultatÅrsak: '2002',
+            periodeType: 'FORELDREPENGER',
+            samtidigUttak: false,
+            samtidigUttaksprosent: undefined,
+            tom: '2022-11-09',
+            utsettelseType: '-',
+          },
+          {
+            aktiviteter: [
+              {
+                arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c2',
+                arbeidsgiverReferanse: '994884174',
+                eksternArbeidsforholdId: 'ARB001-002',
+                gradering: false,
+                prosentArbeid: 0,
+                stønadskontoType: 'MØDREKVOTE',
+                trekkdagerDesimaler: 30,
+                utbetalingsgrad: 0,
+                uttakArbeidType: 'ORDINÆRT_ARBEID',
+              },
+            ],
+            begrunnelse: null,
+            flerbarnsdager: false,
+            fom: '2022-11-10',
+            graderingAvslagÅrsak: '-',
+            graderingInnvilget: false,
+            gradertAktivitet: null,
+            manuellBehandlingÅrsak: '-',
+            mottattDato: null,
+            oppholdÅrsak: '-',
+            periodeResultatType: 'AVSLÅTT',
+            periodeResultatÅrsak: '4103',
+            periodeType: null,
+            samtidigUttak: false,
+            samtidigUttaksprosent: null,
+            tom: '2022-12-21',
+            utsettelseType: '-',
+          },
+        ],
+      },
+    ]);
   });
 
   it.skip('skal ha aksjonspunkt og dele opp periode i to og så bekrefte', async () => {
@@ -229,9 +242,14 @@ describe('<UttakProsessIndex>', () => {
 
     const utils = render(<AksjonspunktDerValgtStønadskontoIkkeFinnes submitCallback={lagre} />);
 
-    expect(await screen.findByText('Alle aksjonspunkter skal vurderes manuelt. Kontakt søker ved behov.')).toBeInTheDocument();
     expect(
-      screen.getByText('Ikke gyldig grunn for uttak av denne stønadskontoen. Vurder bruk av annen stønadskonto eller avslå perioden.')).toBeInTheDocument();
+      await screen.findByText('Alle aksjonspunkter skal vurderes manuelt. Kontakt søker ved behov.'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Ikke gyldig grunn for uttak av denne stønadskontoen. Vurder bruk av annen stønadskonto eller avslå perioden.',
+      ),
+    ).toBeInTheDocument();
 
     await userEvent.click(screen.getByAltText('Del opp perioden'));
 
@@ -268,102 +286,119 @@ describe('<UttakProsessIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      kode: '5071',
-      perioder: [{
-        aktiviteter: [{
-          arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c2',
-          arbeidsgiverReferanse: '994884174',
-          eksternArbeidsforholdId: 'ARB001-002',
-          gradering: false,
-          prosentArbeid: 0,
-          stønadskontoType: 'FORELDREPENGER',
-          trekkdagerDesimaler: 15,
-          utbetalingsgrad: 0,
-          uttakArbeidType: 'ORDINÆRT_ARBEID',
-        }],
-        begrunnelse: 'Dette er en vurdering',
-        flerbarnsdager: false,
-        fom: '2022-10-20',
-        graderingAvslagÅrsak: '-',
-        graderingInnvilget: false,
-        gradertAktivitet: null,
-        manuellBehandlingÅrsak: '5002',
-        mottattDato: '2023-01-05',
-        oppholdÅrsak: '-',
-        periodeResultatType: 'AVSLÅTT',
-        periodeResultatÅrsak: '4002',
-        periodeType: 'FORELDREPENGER',
-        samtidigUttak: false,
-        samtidigUttaksprosent: undefined,
-        tom: '2022-10-28',
-        utsettelseType: '-',
-      }, {
-        aktiviteter: [{
-          arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c2',
-          arbeidsgiverReferanse: '994884174',
-          eksternArbeidsforholdId: 'ARB001-002',
-          gradering: false,
-          prosentArbeid: 0,
-          stønadskontoType: 'FORELDREPENGER',
-          trekkdagerDesimaler: 8,
-          utbetalingsgrad: 0,
-          uttakArbeidType: 'ORDINÆRT_ARBEID',
-        }],
-        begrunnelse: ' Dette er en vurdering på periode 2',
-        flerbarnsdager: false,
-        fom: '2022-10-29',
-        graderingAvslagÅrsak: '-',
-        graderingInnvilget: false,
-        gradertAktivitet: null,
-        manuellBehandlingÅrsak: '5002',
-        mottattDato: '2023-01-05',
-        oppholdÅrsak: '-',
-        periodeResultatType: 'AVSLÅTT',
-        periodeResultatÅrsak: '4002',
-        periodeType: 'FORELDREPENGER',
-        samtidigUttak: false,
-        samtidigUttaksprosent: undefined,
-        tom: '2022-11-09',
-        utsettelseType: '-',
-      }, {
-        aktiviteter: [{
-          arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c2',
-          arbeidsgiverReferanse: '994884174',
-          eksternArbeidsforholdId: 'ARB001-002',
-          gradering: false,
-          prosentArbeid: 0,
-          stønadskontoType: 'MØDREKVOTE',
-          trekkdagerDesimaler: 30,
-          utbetalingsgrad: 0,
-          uttakArbeidType: 'ORDINÆRT_ARBEID',
-        }],
-        begrunnelse: null,
-        flerbarnsdager: false,
-        fom: '2022-11-10',
-        graderingAvslagÅrsak: '-',
-        graderingInnvilget: false,
-        gradertAktivitet: null,
-        manuellBehandlingÅrsak: '-',
-        mottattDato: null,
-        oppholdÅrsak: '-',
-        periodeResultatType: 'AVSLÅTT',
-        periodeResultatÅrsak: '4103',
-        periodeType: null,
-        samtidigUttak: false,
-        samtidigUttaksprosent: null,
-        tom: '2022-12-21',
-        utsettelseType: '-',
-      }],
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        kode: '5071',
+        perioder: [
+          {
+            aktiviteter: [
+              {
+                arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c2',
+                arbeidsgiverReferanse: '994884174',
+                eksternArbeidsforholdId: 'ARB001-002',
+                gradering: false,
+                prosentArbeid: 0,
+                stønadskontoType: 'FORELDREPENGER',
+                trekkdagerDesimaler: 15,
+                utbetalingsgrad: 0,
+                uttakArbeidType: 'ORDINÆRT_ARBEID',
+              },
+            ],
+            begrunnelse: 'Dette er en vurdering',
+            flerbarnsdager: false,
+            fom: '2022-10-20',
+            graderingAvslagÅrsak: '-',
+            graderingInnvilget: false,
+            gradertAktivitet: null,
+            manuellBehandlingÅrsak: '5002',
+            mottattDato: '2023-01-05',
+            oppholdÅrsak: '-',
+            periodeResultatType: 'AVSLÅTT',
+            periodeResultatÅrsak: '4002',
+            periodeType: 'FORELDREPENGER',
+            samtidigUttak: false,
+            samtidigUttaksprosent: undefined,
+            tom: '2022-10-28',
+            utsettelseType: '-',
+          },
+          {
+            aktiviteter: [
+              {
+                arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c2',
+                arbeidsgiverReferanse: '994884174',
+                eksternArbeidsforholdId: 'ARB001-002',
+                gradering: false,
+                prosentArbeid: 0,
+                stønadskontoType: 'FORELDREPENGER',
+                trekkdagerDesimaler: 8,
+                utbetalingsgrad: 0,
+                uttakArbeidType: 'ORDINÆRT_ARBEID',
+              },
+            ],
+            begrunnelse: ' Dette er en vurdering på periode 2',
+            flerbarnsdager: false,
+            fom: '2022-10-29',
+            graderingAvslagÅrsak: '-',
+            graderingInnvilget: false,
+            gradertAktivitet: null,
+            manuellBehandlingÅrsak: '5002',
+            mottattDato: '2023-01-05',
+            oppholdÅrsak: '-',
+            periodeResultatType: 'AVSLÅTT',
+            periodeResultatÅrsak: '4002',
+            periodeType: 'FORELDREPENGER',
+            samtidigUttak: false,
+            samtidigUttaksprosent: undefined,
+            tom: '2022-11-09',
+            utsettelseType: '-',
+          },
+          {
+            aktiviteter: [
+              {
+                arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c2',
+                arbeidsgiverReferanse: '994884174',
+                eksternArbeidsforholdId: 'ARB001-002',
+                gradering: false,
+                prosentArbeid: 0,
+                stønadskontoType: 'MØDREKVOTE',
+                trekkdagerDesimaler: 30,
+                utbetalingsgrad: 0,
+                uttakArbeidType: 'ORDINÆRT_ARBEID',
+              },
+            ],
+            begrunnelse: null,
+            flerbarnsdager: false,
+            fom: '2022-11-10',
+            graderingAvslagÅrsak: '-',
+            graderingInnvilget: false,
+            gradertAktivitet: null,
+            manuellBehandlingÅrsak: '-',
+            mottattDato: null,
+            oppholdÅrsak: '-',
+            periodeResultatType: 'AVSLÅTT',
+            periodeResultatÅrsak: '4103',
+            periodeType: null,
+            samtidigUttak: false,
+            samtidigUttaksprosent: null,
+            tom: '2022-12-21',
+            utsettelseType: '-',
+          },
+        ],
+      },
+    ]);
   });
 
   it('skal vise feilmelding når det ikke er valgt et gyldig antall dager for mødrekvoten', async () => {
     const utils = render(<StønadskontoMedUgyldigForbruk />);
 
-    expect(await screen.findByText('Alle aksjonspunkter skal vurderes manuelt. Kontakt søker ved behov.')).toBeInTheDocument();
     expect(
-      screen.getByText('Ikke gyldig grunn for uttak av denne stønadskontoen. Vurder bruk av annen stønadskonto eller avslå perioden.')).toBeInTheDocument();
+      await screen.findByText('Alle aksjonspunkter skal vurderes manuelt. Kontakt søker ved behov.'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Ikke gyldig grunn for uttak av denne stønadskontoen. Vurder bruk av annen stønadskonto eller avslå perioden.',
+      ),
+    ).toBeInTheDocument();
 
     const inputFelter = utils.getAllByRole('textbox');
     expect(inputFelter).toHaveLength(4);
@@ -382,9 +417,14 @@ describe('<UttakProsessIndex>', () => {
   it('skal vise varsel når samlet utbetalingsgrad og andel i arbeid overskrider 100%', async () => {
     const utils = render(<VisAdvarselNårProsentIArbeidTotaltErMindreEnn100Prosent />);
 
-    expect(await screen.findByText('Alle aksjonspunkter skal vurderes manuelt. Kontakt søker ved behov.')).toBeInTheDocument();
     expect(
-      screen.getByText('Ikke gyldig grunn for uttak av denne stønadskontoen. Vurder bruk av annen stønadskonto eller avslå perioden.')).toBeInTheDocument();
+      await screen.findByText('Alle aksjonspunkter skal vurderes manuelt. Kontakt søker ved behov.'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Ikke gyldig grunn for uttak av denne stønadskontoen. Vurder bruk av annen stønadskonto eller avslå perioden.',
+      ),
+    ).toBeInTheDocument();
 
     const inputFelter = utils.getAllByRole('textbox');
     expect(inputFelter).toHaveLength(4);
@@ -395,14 +435,20 @@ describe('<UttakProsessIndex>', () => {
 
     await userEvent.click(screen.getByText('Oppfylt'));
 
-    expect(await screen.findByText('Samlet utbetalingsgrad og andel i arbeid bør ikke overskride 100%. '
-      + 'Søker har ikke 100% stilling, vurder om perioden kan utsettes.')).toBeInTheDocument();
+    expect(
+      await screen.findByText(
+        'Samlet utbetalingsgrad og andel i arbeid bør ikke overskride 100%. ' +
+          'Søker har ikke 100% stilling, vurder om perioden kan utsettes.',
+      ),
+    ).toBeInTheDocument();
   });
 
   it('skal vise varsel når utbetalingsgrad og andel i arbeid overskrider 100%', async () => {
     const utils = render(<VisAdvarselNårUtbetalingsgradOgProsentArbeidOverstiger100Prosent />);
 
-    expect(await screen.findByText('Alle aksjonspunkter skal vurderes manuelt. Kontakt søker ved behov.')).toBeInTheDocument();
+    expect(
+      await screen.findByText('Alle aksjonspunkter skal vurderes manuelt. Kontakt søker ved behov.'),
+    ).toBeInTheDocument();
 
     expect(screen.getByText('Samlet utbetalingsgrad og andel i arbeid bør ikke overskride 100%.')).toBeInTheDocument();
 
@@ -412,6 +458,8 @@ describe('<UttakProsessIndex>', () => {
     await userEvent.clear(inputFelter[2]);
     await userEvent.type(inputFelter[2], '45');
 
-    expect(screen.queryByText('Samlet utbetalingsgrad og andel i arbeid bør ikke overskride 100%.')).not.toBeInTheDocument();
+    expect(
+      screen.queryByText('Samlet utbetalingsgrad og andel i arbeid bør ikke overskride 100%.'),
+    ).not.toBeInTheDocument();
   });
 });

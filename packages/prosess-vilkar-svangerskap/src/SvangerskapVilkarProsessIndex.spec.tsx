@@ -4,9 +4,8 @@ import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './SvangerskapVilkarProsessIndex.stories';
 
-const {
-  ÅpentAksjonspunktSkalKunneInnvilge, ÅpentAksjonspunktSkalIkkeKunneInnvilge, OppfyltVilkår, AvslåttVilkår,
-} = composeStories(stories);
+const { ÅpentAksjonspunktSkalKunneInnvilge, ÅpentAksjonspunktSkalIkkeKunneInnvilge, OppfyltVilkår, AvslåttVilkår } =
+  composeStories(stories);
 
 describe('<SvangerskapVilkarProsessIndex>', () => {
   it('skal bestemme at vilkåret ikke er oppfylt fordi en ikke har perioder som kan innvilges', async () => {
@@ -44,7 +43,9 @@ describe('<SvangerskapVilkarProsessIndex>', () => {
 
     expect(await screen.findByText('Svangerskap')).toBeInTheDocument();
     expect(screen.getByText('Rett til svangerskapspenger')).toBeInTheDocument();
-    expect(screen.queryByText('Det finnes ingen perioder med svangerskapspenger som kan innvilges')).not.toBeInTheDocument();
+    expect(
+      screen.queryByText('Det finnes ingen perioder med svangerskapspenger som kan innvilges'),
+    ).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Mor har rett til svangerskapspenger, vilkåret er oppfylt'));
 

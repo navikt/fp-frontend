@@ -22,9 +22,7 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{ sakslisteNavn: string }> = ({
-  sakslisteNavn,
-}) => {
+const Template: Story<{ sakslisteNavn: string }> = ({ sakslisteNavn }) => {
   const data = [
     { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
     { key: RestApiPathsKeys.OPPGAVE_ANTALL.name, data: 1 },
@@ -55,13 +53,16 @@ const Template: Story<{ sakslisteNavn: string }> = ({
           },
           behandlingTyper: [BehandlingType.FORSTEGANGSSOKNAD],
           fagsakYtelseTyper: [FagsakYtelseType.FORELDREPENGER],
-          andreKriterier: [{
-            andreKriterierType: andreKriterierType.TIL_BESLUTTER,
-            inkluder: true,
-          }, {
-            andreKriterierType: andreKriterierType.REGISTRER_PAPIRSOKNAD,
-            inkluder: false,
-          }],
+          andreKriterier: [
+            {
+              andreKriterierType: andreKriterierType.TIL_BESLUTTER,
+              inkluder: true,
+            },
+            {
+              andreKriterierType: andreKriterierType.REGISTRER_PAPIRSOKNAD,
+              inkluder: false,
+            },
+          ],
         }}
         valgtAvdelingEnhet=""
         hentAvdelingensSakslister={action('button-click')}

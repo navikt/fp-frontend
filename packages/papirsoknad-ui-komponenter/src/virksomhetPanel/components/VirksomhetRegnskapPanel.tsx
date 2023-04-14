@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import {
-  formHooks, InputField, RadioGroupPanel,
-} from '@navikt/ft-form-hooks';
+import { formHooks, InputField, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required, hasValidInteger, hasValidText } from '@navikt/ft-form-validators';
 
 import styles from './virksomhetRegnskapPanel.module.css';
@@ -12,7 +10,7 @@ export type FormValues = {
   harRegnskapsforer?: boolean;
   navnRegnskapsforer?: string;
   tlfRegnskapsforer?: string;
-}
+};
 
 interface OwnProps {
   readOnly?: boolean;
@@ -24,9 +22,7 @@ interface OwnProps {
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom
  * søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
-const VirksomhetRegnskapPanel: FunctionComponent<OwnProps> = ({
-  readOnly = true,
-}) => {
+const VirksomhetRegnskapPanel: FunctionComponent<OwnProps> = ({ readOnly = true }) => {
   const { watch } = formHooks.useFormContext<FormValues>();
   const harRegnskapsforer = watch('harRegnskapsforer') || false;
 
@@ -38,13 +34,16 @@ const VirksomhetRegnskapPanel: FunctionComponent<OwnProps> = ({
         isReadOnly={readOnly}
         isTrueOrFalseSelection
         isHorizontal
-        radios={[{
-          label: <FormattedMessage id="Registrering.VirksomhetRegnskapPanel.Yes" />,
-          value: 'true',
-        }, {
-          label: <FormattedMessage id="Registrering.VirksomhetRegnskapPanel.No" />,
-          value: 'false',
-        }]}
+        radios={[
+          {
+            label: <FormattedMessage id="Registrering.VirksomhetRegnskapPanel.Yes" />,
+            value: 'true',
+          },
+          {
+            label: <FormattedMessage id="Registrering.VirksomhetRegnskapPanel.No" />,
+            value: 'false',
+          },
+        ]}
       />
       {harRegnskapsforer && (
         <>

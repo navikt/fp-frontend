@@ -2,16 +2,10 @@ import React, { FunctionComponent, useCallback, useState } from 'react';
 import dayjs from 'dayjs';
 import { useForm, UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import {
-  Label, BodyShort, Heading, Button,
-} from '@navikt/ds-react';
-import {
-  hasValidDate, hasValidText, maxLength, minLength, required,
-} from '@navikt/ft-form-validators';
+import { Label, BodyShort, Heading, Button } from '@navikt/ds-react';
+import { hasValidDate, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { Datepicker, TextAreaField, Form } from '@navikt/ft-form-hooks';
-import {
-  FlexColumn, FlexContainer, FlexRow, AksjonspunktBox, VerticalSpacer, Image,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, AksjonspunktBox, VerticalSpacer, Image } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
@@ -29,30 +23,22 @@ type FormValues = {
   startdatoFraSoknad?: string;
   opprinneligDato?: string;
   begrunnelse?: string;
-}
+};
 
-const buildInitialValues = (
-  aksjonspunkt: Aksjonspunkt,
-  soknad: Soknad,
-): FormValues => ({
+const buildInitialValues = (aksjonspunkt: Aksjonspunkt, soknad: Soknad): FormValues => ({
   opprinneligDato: soknad.oppgittFordeling?.startDatoForPermisjon,
   startdatoFraSoknad: soknad.oppgittFordeling?.startDatoForPermisjon,
   begrunnelse: (aksjonspunkt && aksjonspunkt.begrunnelse) || '',
 });
 
-const transformValues = (
-  values: FormValues,
-): OverstyringAvklarStartdatoForPeriodenAp => ({
+const transformValues = (values: FormValues): OverstyringAvklarStartdatoForPeriodenAp => ({
   kode: AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO,
   opprinneligDato: values.opprinneligDato,
   startdatoFraSoknad: values.startdatoFraSoknad,
   begrunnelse: values.begrunnelse,
 });
 
-const getValidateIsBefore2019 = (
-  getValues: UseFormGetValues<FormValues>,
-  intl: IntlShape,
-) => () => {
+const getValidateIsBefore2019 = (getValues: UseFormGetValues<FormValues>, intl: IntlShape) => () => {
   const startdatoFraSoknad = getValues('startdatoFraSoknad');
   return dayjs(startdatoFraSoknad).isBefore('2019-01-01')
     ? intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.StartdatoFør2019' })
@@ -64,9 +50,9 @@ interface OwnProps {
   soknad: Soknad;
   submitCallback: (data: OverstyringAvklarStartdatoForPeriodenAp) => Promise<void>;
   readOnly: boolean;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  formData?: FormValues,
-  setFormData: (data: FormValues) => void,
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
+  formData?: FormValues;
+  setFormData: (data: FormValues) => void;
 }
 
 /**
@@ -90,7 +76,10 @@ const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps> = ({
 
   const [visEditeringsmodus, toggleEdit] = useState(false);
   const slåPåEditering = useCallback(() => toggleEdit(true), []);
-  const slaAvEditeringAvUtland = useCallback(() => { formMethods.reset(); toggleEdit(false); }, []);
+  const slaAvEditeringAvUtland = useCallback(() => {
+    formMethods.reset();
+    toggleEdit(false);
+  }, []);
 
   return (
     <Form
@@ -112,7 +101,9 @@ const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps> = ({
             </FlexColumn>
             <FlexColumn>
               <Label size="small">
-                {soknad.oppgittFordeling ? dayjs(soknad.oppgittFordeling.startDatoForPermisjon).format(DDMMYYYY_DATE_FORMAT) : '-'}
+                {soknad.oppgittFordeling
+                  ? dayjs(soknad.oppgittFordeling.startDatoForPermisjon).format(DDMMYYYY_DATE_FORMAT)
+                  : '-'}
               </Label>
             </FlexColumn>
             <FlexColumn>
@@ -130,7 +121,9 @@ const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps> = ({
         <AksjonspunktBox
           className={styles.aksjonspunktMargin}
           erAksjonspunktApent={false}
-          erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter[AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO]?.notAccepted}
+          erIkkeGodkjentAvBeslutter={
+            !!alleMerknaderFraBeslutter[AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO]?.notAccepted
+          }
         >
           <FlexContainer>
             <FlexRow>
@@ -167,12 +160,7 @@ const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps> = ({
                   <FormattedMessage id="UtlandPanel.lagre" />
                 </Button>
               </FlexColumn>
-              <Button
-                variant="secondary"
-                size="small"
-                onClick={slaAvEditeringAvUtland}
-                type="button"
-              >
+              <Button variant="secondary" size="small" onClick={slaAvEditeringAvUtland} type="button">
                 <FormattedMessage id="UtlandPanel.avbryt" />
               </Button>
               <FlexColumn />

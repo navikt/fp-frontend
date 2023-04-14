@@ -4,9 +4,7 @@ import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './VedtakKlageProsessIndex.stories';
 
-const {
-  VedtakspanelDerKlageErVurdertAvNfp, VedtakspanelDerKlageErVurdertAvNk,
-} = composeStories(stories);
+const { VedtakspanelDerKlageErVurdertAvNfp, VedtakspanelDerKlageErVurdertAvNk } = composeStories(stories);
 
 describe('<VedtakKlageProsessIndex>', () => {
   it('skal fylle ut, forhåndsvise og så bekrefte vedtak for NFP', async () => {
@@ -32,9 +30,11 @@ describe('<VedtakKlageProsessIndex>', () => {
     await userEvent.click(screen.getByText('Til godkjenning'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      kode: '5015',
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        kode: '5015',
+      },
+    ]);
   });
 
   it('skal vise readonly-informasjon for NK', async () => {

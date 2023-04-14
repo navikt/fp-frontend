@@ -6,7 +6,7 @@ import AlleKodeverk from './kodeverkAlleTsType';
 interface StandardProsessPanelProps {
   behandling: Behandling;
   alleKodeverk: AlleKodeverk;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   submitCallback: (aksjonspunktData: any) => Promise<void>;
   status: string;
   isReadOnly: boolean;

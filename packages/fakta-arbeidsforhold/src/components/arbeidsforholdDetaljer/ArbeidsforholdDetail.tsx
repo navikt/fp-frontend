@@ -12,7 +12,8 @@ const finnOverstyrtTom = (arbeidsforhold: AoIArbeidsforhold): string | undefined
   if (arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK_MED_OVERSTYRT_PERIODE) {
     return arbeidsforhold.tom;
   }
-  const skalBrukeMedJustertPeriode = arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK_MED_OVERSTYRT_PERIODE;
+  const skalBrukeMedJustertPeriode =
+    arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK_MED_OVERSTYRT_PERIODE;
   return skalBrukeMedJustertPeriode ? arbeidsforhold.tom : undefined;
 };
 
@@ -20,7 +21,9 @@ const utledAktivtArbeidsforholdLabel = (arbeidsforhold: AoIArbeidsforhold): stri
   if (arbeidsforhold.permisjonOgMangel) {
     return 'ArbeidsforholdDetail.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon';
   }
-  if (arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER) {
+  if (
+    arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER
+  ) {
     return 'ArbeidsforholdDetail.OppdaterArbeidsforhold';
   }
   return 'ArbeidsforholdDetail.ArbeidsforholdErAktivt';
@@ -30,25 +33,35 @@ interface PureOwnProps {
   valgtArbeidsforhold: AoIArbeidsforhold;
 }
 
-const ArbeidsforholdDetail: FunctionComponent<PureOwnProps> = ({
-  valgtArbeidsforhold,
-}) => {
-  const skalBrukeArbeidsforholdet = valgtArbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK;
-  const skalFortsetteUtenInntektsmelding = valgtArbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING;
-  const skalBrukeMedOverstyrtPeriode = valgtArbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK_MED_OVERSTYRT_PERIODE;
-  const skalFjerneArbeidsforhold = valgtArbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING;
-  const skalOppretteBasertPåIM = valgtArbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING;
-  const erManueltOpprettetAvSaksbehandler = valgtArbeidsforhold.saksbehandlersVurdering
-    === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER;
+const ArbeidsforholdDetail: FunctionComponent<PureOwnProps> = ({ valgtArbeidsforhold }) => {
+  const skalBrukeArbeidsforholdet =
+    valgtArbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK;
+  const skalFortsetteUtenInntektsmelding =
+    valgtArbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING;
+  const skalBrukeMedOverstyrtPeriode =
+    valgtArbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK_MED_OVERSTYRT_PERIODE;
+  const skalFjerneArbeidsforhold =
+    valgtArbeidsforhold.saksbehandlersVurdering ===
+    ArbeidsforholdKomplettVurderingType.IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING;
+  const skalOppretteBasertPåIM =
+    valgtArbeidsforhold.saksbehandlersVurdering ===
+    ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING;
+  const erManueltOpprettetAvSaksbehandler =
+    valgtArbeidsforhold.saksbehandlersVurdering ===
+    ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER;
 
-  const skalBrukePermisjon = valgtArbeidsforhold.permisjonOgMangel?.permisjonStatus === BekreftetPermisjonStatus.BRUK_PERMISJON;
-  const skalIkkeBrukePermisjon = valgtArbeidsforhold.permisjonOgMangel?.permisjonStatus === BekreftetPermisjonStatus.IKKE_BRUK_PERMISJON;
+  const skalBrukePermisjon =
+    valgtArbeidsforhold.permisjonOgMangel?.permisjonStatus === BekreftetPermisjonStatus.BRUK_PERMISJON;
+  const skalIkkeBrukePermisjon =
+    valgtArbeidsforhold.permisjonOgMangel?.permisjonStatus === BekreftetPermisjonStatus.IKKE_BRUK_PERMISJON;
 
   return (
     <>
       <VerticalSpacer thirtyTwoPx />
       <FaktaGruppe>
-        <Heading size="small"><FormattedMessage id="ArbeidsforholdDetail.Header" /></Heading>
+        <Heading size="small">
+          <FormattedMessage id="ArbeidsforholdDetail.Header" />
+        </Heading>
         <PermisjonPeriode arbeidsforhold={valgtArbeidsforhold} />
         {skalBrukeMedOverstyrtPeriode && (
           <>
@@ -73,8 +86,9 @@ const ArbeidsforholdDetail: FunctionComponent<PureOwnProps> = ({
             <FormattedMessage id="ArbeidsforholdDetail.OppdatertGittIm" />
           </BodyShort>
         )}
-        {(erManueltOpprettetAvSaksbehandler
-          || ((skalBrukeArbeidsforholdet || skalFortsetteUtenInntektsmelding) && (!valgtArbeidsforhold.permisjonOgMangel || skalIkkeBrukePermisjon))) && (
+        {(erManueltOpprettetAvSaksbehandler ||
+          ((skalBrukeArbeidsforholdet || skalFortsetteUtenInntektsmelding) &&
+            (!valgtArbeidsforhold.permisjonOgMangel || skalIkkeBrukePermisjon))) && (
           <>
             <BodyShort size="small">
               <FormattedMessage id={utledAktivtArbeidsforholdLabel(valgtArbeidsforhold)} />
@@ -94,11 +108,19 @@ const ArbeidsforholdDetail: FunctionComponent<PureOwnProps> = ({
         )}
         {skalFjerneArbeidsforhold && (
           <BodyShort size="small">
-            <FormattedMessage id={skalFjerneArbeidsforhold ? 'ArbeidsforholdDetail.FjernArbeidsforholdet' : 'ArbeidsforholdDetail.IMIkkeRelevant'} />
+            <FormattedMessage
+              id={
+                skalFjerneArbeidsforhold
+                  ? 'ArbeidsforholdDetail.FjernArbeidsforholdet'
+                  : 'ArbeidsforholdDetail.IMIkkeRelevant'
+              }
+            />
           </BodyShort>
         )}
         <VerticalSpacer sixteenPx />
-        <Label size="small"><FormattedMessage id="ArbeidsforholdDetail.Begrunnelse" /></Label>
+        <Label size="small">
+          <FormattedMessage id="ArbeidsforholdDetail.Begrunnelse" />
+        </Label>
         <BodyShort size="small">{valgtArbeidsforhold.begrunnelse}</BodyShort>
       </FaktaGruppe>
     </>

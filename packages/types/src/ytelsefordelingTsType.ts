@@ -7,10 +7,10 @@ type Ytelsefordeling = Readonly<{
     skalAvklareAnnenforelderUføretrygd: boolean;
     bekreftetAnnenForelderRettEØS?: boolean;
     skalAvklareAnnenForelderRettEØS: boolean;
-  }
+  };
   endringsdato?: string;
   gjeldendeDekningsgrad: number;
   førsteUttaksdato: string;
-}>
+}>;
 
 export default Ytelsefordeling;

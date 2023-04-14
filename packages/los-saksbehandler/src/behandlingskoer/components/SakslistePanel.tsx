@@ -5,7 +5,11 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { Oppgave } from '@navikt/fp-los-felles';
 
-import { getValueFromLocalStorage, setValueInLocalStorage, removeValueFromLocalStorage } from '../../data/localStorageHelper';
+import {
+  getValueFromLocalStorage,
+  setValueInLocalStorage,
+  removeValueFromLocalStorage,
+} from '../../data/localStorageHelper';
 import Saksliste from '../../typer/sakslisteTsType';
 import { RestApiPathsKeys, restApiHooks } from '../../data/fplosSaksbehandlerRestApi';
 import SakslisteVelgerForm from './SakslisteVelgerForm';
@@ -27,11 +31,15 @@ const SakslistePanel: FunctionComponent<OwnProps> = ({
   setValgtSakslisteId,
   valgtSakslisteId,
 }) => {
-  const { startRequest: fetchAntallOppgaver, data: antallOppgaver } = restApiHooks.useRestApiRunner(RestApiPathsKeys.BEHANDLINGSKO_OPPGAVE_ANTALL);
+  const { startRequest: fetchAntallOppgaver, data: antallOppgaver } = restApiHooks.useRestApiRunner(
+    RestApiPathsKeys.BEHANDLINGSKO_OPPGAVE_ANTALL,
+  );
 
   return (
     <>
-      <Heading size="small"><FormattedMessage id="SakslistePanel.StartBehandling" /></Heading>
+      <Heading size="small">
+        <FormattedMessage id="SakslistePanel.StartBehandling" />
+      </Heading>
       <SakslisteVelgerForm
         sakslister={sakslister}
         setValgtSakslisteId={setValgtSakslisteId}

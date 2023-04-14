@@ -22,7 +22,7 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{ valgteBehandlingtyper: string[], erDynamiskPeriode: boolean }> = ({
+const Template: Story<{ valgteBehandlingtyper: string[]; erDynamiskPeriode: boolean }> = ({
   valgteBehandlingtyper,
   erDynamiskPeriode,
 }) => {

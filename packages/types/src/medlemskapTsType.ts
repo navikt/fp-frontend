@@ -7,14 +7,14 @@ export type MedlemskapPeriode = Readonly<{
   dekningType: string;
   kildeType: string;
   beslutningsdato?: string;
-}>
+}>;
 
 export type PersonopplysningMedlem = Readonly<{
   navn: string;
   personstatus: string;
   region: string;
   adresser: Personadresse[];
-}>
+}>;
 
 export type MedlemPeriode = Readonly<{
   vurderingsdato: string;
@@ -28,19 +28,19 @@ export type MedlemPeriode = Readonly<{
   bosattVurdering: boolean;
   medlemskapManuellVurderingType: string;
   begrunnelse: string;
-}>
+}>;
 
 export type Oppholdstillatelse = Readonly<{
   fom?: string;
   tom: string;
   oppholdstillatelseType: string;
-}>
+}>;
 
 type Medlemskap = Readonly<{
   fom?: string;
   medlemskapPerioder: MedlemskapPeriode[];
   perioder: MedlemPeriode[];
   opphold: Oppholdstillatelse[];
-}>
+}>;
 
 export default Medlemskap;

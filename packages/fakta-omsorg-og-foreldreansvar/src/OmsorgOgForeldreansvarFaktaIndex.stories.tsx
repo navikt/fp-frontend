@@ -3,12 +3,16 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 
 import {
-  opplysningAdresseType, relatertYtelseTilstand, navBrukerKjonn, relatertYtelseType, soknadType, AksjonspunktCode, aksjonspunktStatus,
+  opplysningAdresseType,
+  relatertYtelseTilstand,
+  navBrukerKjonn,
+  relatertYtelseType,
+  soknadType,
+  AksjonspunktCode,
+  aksjonspunktStatus,
 } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import {
-  Behandling, FamilieHendelseSamling, InntektArbeidYtelse, Soknad, Aksjonspunkt,
-} from '@navikt/fp-types';
+import { Behandling, FamilieHendelseSamling, InntektArbeidYtelse, Soknad, Aksjonspunkt } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import OmsorgOgForeldreansvarFaktaIndex from './OmsorgOgForeldreansvarFaktaIndex';
 
@@ -47,13 +51,15 @@ const personoversikt = {
     kjønn: navBrukerKjonn.KVINNE,
     sivilstand: '',
     fødselsdato: '1979-01-01',
-    adresser: [{
-      adresseType: opplysningAdresseType.POSTADRESSE,
-      adresselinje1: 'Gateadresse 1',
-      postNummer: '1000',
-      poststed: 'Oslo',
-      land: 'Norge',
-    }],
+    adresser: [
+      {
+        adresseType: opplysningAdresseType.POSTADRESSE,
+        adresselinje1: 'Gateadresse 1',
+        postNummer: '1000',
+        poststed: 'Oslo',
+        land: 'Norge',
+      },
+    ],
   },
   annenPart: {
     fnr: '',
@@ -70,14 +76,18 @@ const personoversikt = {
 };
 
 const inntektArbeidYtelse = {
-  innvilgetRelatertTilgrensendeYtelserForAnnenForelder: [{
-    tilgrensendeYtelserListe: [{
-      status: relatertYtelseTilstand.LOPENDE,
-      periodeFraDato: '2019-01-01',
-      saksNummer: '2323',
-    }],
-    relatertYtelseType: relatertYtelseType.FORELDREPENGER,
-  }],
+  innvilgetRelatertTilgrensendeYtelserForAnnenForelder: [
+    {
+      tilgrensendeYtelserListe: [
+        {
+          status: relatertYtelseTilstand.LOPENDE,
+          periodeFraDato: '2019-01-01',
+          saksNummer: '2323',
+        },
+      ],
+      relatertYtelseType: relatertYtelseType.FORELDREPENGER,
+    },
+  ],
 } as InntektArbeidYtelse;
 
 const merknaderFraBeslutter = {
@@ -92,12 +102,8 @@ export default {
 const Template: Story<{
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-}> = ({
-  aksjonspunkter,
-  submitCallback,
-  alleMerknaderFraBeslutter,
-}) => (
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
+}> = ({ aksjonspunkter, submitCallback, alleMerknaderFraBeslutter }) => (
   <OmsorgOgForeldreansvarFaktaIndex
     submitCallback={submitCallback}
     readOnly={false}
@@ -117,12 +123,14 @@ const Template: Story<{
 
 export const ÅpentAksjonspunktForOmsorgovertakelse = Template.bind({});
 ÅpentAksjonspunktForOmsorgovertakelse.args = {
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.OMSORGSOVERTAKELSE,
-    status: aksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-    kanLoses: true,
-  }],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.OMSORGSOVERTAKELSE,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+      kanLoses: true,
+    },
+  ],
   alleMerknaderFraBeslutter: {
     [AksjonspunktCode.OMSORGSOVERTAKELSE]: merknaderFraBeslutter,
   },
@@ -131,12 +139,14 @@ export const ÅpentAksjonspunktForOmsorgovertakelse = Template.bind({});
 
 export const ÅpentAksjonspunktForAvklareVilkårForForeldreansvar = Template.bind({});
 ÅpentAksjonspunktForAvklareVilkårForForeldreansvar.args = {
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
-    status: aksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-    kanLoses: true,
-  }],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+      kanLoses: true,
+    },
+  ],
   alleMerknaderFraBeslutter: {
     [AksjonspunktCode.AVKLAR_VILKAR_FOR_FORELDREANSVAR]: merknaderFraBeslutter,
   },

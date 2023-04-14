@@ -29,10 +29,14 @@ const HistorikkMalTypeForeldelse: FunctionComponent<HistorikkMal> = ({
         scrollUpOnClick
         createLocationForSkjermlenke={createLocationForSkjermlenke}
       />
-      {historikkinnslagDeler.map((historikkinnslagDel) => {
+      {historikkinnslagDeler.map(historikkinnslagDel => {
         const { begrunnelseFritekst, opplysninger, endredeFelter } = historikkinnslagDel;
-        const periodeFom = opplysninger.find((o) => o.opplysningType === historikkOpplysningTypeCodes.PERIODE_FOM.kode)?.tilVerdi;
-        const periodeTom = opplysninger.find((o) => o.opplysningType === historikkOpplysningTypeCodes.PERIODE_TOM.kode)?.tilVerdi;
+        const periodeFom = opplysninger.find(
+          o => o.opplysningType === historikkOpplysningTypeCodes.PERIODE_FOM.kode,
+        )?.tilVerdi;
+        const periodeTom = opplysninger.find(
+          o => o.opplysningType === historikkOpplysningTypeCodes.PERIODE_TOM.kode,
+        )?.tilVerdi;
 
         return (
           <div key={periodeFom + periodeTom}>
@@ -46,32 +50,33 @@ const HistorikkMalTypeForeldelse: FunctionComponent<HistorikkMal> = ({
                 }}
               />
             </BodyShort>
-            {endredeFelter && endredeFelter.map((felt) => {
-              const { endretFeltNavn, fraVerdi, tilVerdi } = felt;
+            {endredeFelter &&
+              endredeFelter.map(felt => {
+                const { endretFeltNavn, fraVerdi, tilVerdi } = felt;
 
-              return (
-                <React.Fragment key={endretFeltNavn}>
-                  <BodyShort size="small">
-                    <FormattedMessage
-                      id={felt.fraVerdi ? 'Historikk.Template.Tilbakekreving.ChangedFromTo' : 'Historikk.Template.Tilbakekreving.FieldSetTo'}
-                      values={{
-                        navn: getKodeverknavn(endretFeltNavn, KodeverkType.HISTORIKK_ENDRET_FELT_TYPE),
-                        fraVerdi,
-                        tilVerdi,
-                        b: (chunks: any) => <b>{chunks}</b>,
-                      }}
-                    />
-                  </BodyShort>
-                  <VerticalSpacer eightPx />
-                </React.Fragment>
-              );
-            })}
+                return (
+                  <React.Fragment key={endretFeltNavn}>
+                    <BodyShort size="small">
+                      <FormattedMessage
+                        id={
+                          felt.fraVerdi
+                            ? 'Historikk.Template.Tilbakekreving.ChangedFromTo'
+                            : 'Historikk.Template.Tilbakekreving.FieldSetTo'
+                        }
+                        values={{
+                          navn: getKodeverknavn(endretFeltNavn, KodeverkType.HISTORIKK_ENDRET_FELT_TYPE),
+                          fraVerdi,
+                          tilVerdi,
+                          b: (chunks: any) => <b>{chunks}</b>,
+                        }}
+                      />
+                    </BodyShort>
+                    <VerticalSpacer eightPx />
+                  </React.Fragment>
+                );
+              })}
             <VerticalSpacer eightPx />
-            {begrunnelseFritekst && (
-              <BodyShort size="small">
-                {decodeHtmlEntity(begrunnelseFritekst)}
-              </BodyShort>
-            )}
+            {begrunnelseFritekst && <BodyShort size="small">{decodeHtmlEntity(begrunnelseFritekst)}</BodyShort>}
             <VerticalSpacer eightPx />
           </div>
         );

@@ -2,9 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Heading, Button } from '@navikt/ds-react';
-import {
-  FlexColumn, FlexContainer, FlexRow, VerticalSpacer, Image,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer, Image } from '@navikt/ft-ui-komponenter';
 import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validators';
 import { Form, InputField, CheckboxField } from '@navikt/ft-form-hooks';
 
@@ -26,7 +24,7 @@ type FormValues = {
 };
 
 interface OwnProps {
-  onSubmit: (values: { searchString: string, skalReservere: boolean }) => void;
+  onSubmit: (values: { searchString: string; skalReservere: boolean }) => void;
   searchStarted: boolean;
   searchResultAccessDenied?: {
     feilmelding?: string;
@@ -57,10 +55,14 @@ const SearchForm: FunctionComponent<OwnProps> = ({
       <div className={styles.container}>
         <Heading size="small">{intl.formatMessage({ id: 'Search.SearchFagsakOrPerson' })}</Heading>
         {kanSaksbehandle && (
-        <>
-          <VerticalSpacer sixteenPx />
-          <CheckboxField name="skalReservere" label={intl.formatMessage({ id: 'Search.ReserverBehandling' })} onClick={resetSearch} />
-        </>
+          <>
+            <VerticalSpacer sixteenPx />
+            <CheckboxField
+              name="skalReservere"
+              label={intl.formatMessage({ id: 'Search.ReserverBehandling' })}
+              onClick={resetSearch}
+            />
+          </>
         )}
         <VerticalSpacer eightPx />
         <FlexContainer>

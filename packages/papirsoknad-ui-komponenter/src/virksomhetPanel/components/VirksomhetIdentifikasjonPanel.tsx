@@ -1,24 +1,26 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { formHooks, Datepicker, InputField, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
+import { ArrowBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
-  formHooks, Datepicker, InputField, RadioGroupPanel, SelectField,
-} from '@navikt/ft-form-hooks';
-import {
-  ArrowBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
-import {
-  dateBeforeOrEqualToToday, hasValidDate, hasValidInteger, hasValidOrgNumber, required, validPeriodeFomTom,
+  dateBeforeOrEqualToToday,
+  hasValidDate,
+  hasValidInteger,
+  hasValidOrgNumber,
+  required,
+  validPeriodeFomTom,
 } from '@navikt/ft-form-validators';
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './virksomhetIdentifikasjonPanel.module.css';
 
-const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] => countryCodes
-  .map(({
-    kode,
-    navn,
-  }) => <option value={kode} key={kode}>{navn}</option>);
+const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] =>
+  countryCodes.map(({ kode, navn }) => (
+    <option value={kode} key={kode}>
+      {navn}
+    </option>
+  ));
 
 interface OwnProps {
   readOnly?: boolean;
@@ -32,7 +34,7 @@ export type FormValues = {
   virksomhetRegistrertINorge?: boolean;
   organisasjonsnummer?: string;
   landJobberFra?: string;
-}
+};
 
 /**
  * VirksomhetIdentifikasjonPanel
@@ -40,12 +42,11 @@ export type FormValues = {
  * Komponenten vises som del av skjermbildet for registrering av
  * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
-const VirksomhetIdentifikasjonPanel: FunctionComponent<OwnProps> = ({
-  readOnly = true,
-  alleKodeverk,
-}) => {
+const VirksomhetIdentifikasjonPanel: FunctionComponent<OwnProps> = ({ readOnly = true, alleKodeverk }) => {
   const intl = useIntl();
-  const sortedCountriesByName = alleKodeverk[KodeverkType.LANDKODER].slice().sort((a, b) => a.navn.localeCompare(b.navn));
+  const sortedCountriesByName = alleKodeverk[KodeverkType.LANDKODER]
+    .slice()
+    .sort((a, b) => a.navn.localeCompare(b.navn));
 
   const { watch, getValues } = formHooks.useFormContext<FormValues>();
 
@@ -68,13 +69,16 @@ const VirksomhetIdentifikasjonPanel: FunctionComponent<OwnProps> = ({
         isReadOnly={readOnly}
         isTrueOrFalseSelection
         isHorizontal
-        radios={[{
-          label: intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.Yes' }),
-          value: 'true',
-        }, {
-          label: intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.No' }),
-          value: 'false',
-        }]}
+        radios={[
+          {
+            label: intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.Yes' }),
+            value: 'true',
+          },
+          {
+            label: intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.No' }),
+            value: 'false',
+          },
+        ]}
       />
       {virksomhetRegistrertINorge && (
         <>
@@ -117,7 +121,7 @@ const VirksomhetIdentifikasjonPanel: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <Datepicker
                     isReadOnly={readOnly}
-                    validate={[hasValidDate, (fomDato) => validPeriodeFomTom(getValues('fom'), fomDato)]}
+                    validate={[hasValidDate, fomDato => validPeriodeFomTom(getValues('fom'), fomDato)]}
                     name="tom"
                     label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeTom' })}
                   />

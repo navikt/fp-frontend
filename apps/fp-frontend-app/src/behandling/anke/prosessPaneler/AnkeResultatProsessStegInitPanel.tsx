@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
@@ -22,11 +20,9 @@ const AKSJONSPUNKT_KODER = [
 const ENDEPUNKTER_PANEL_DATA = [AnkeBehandlingApiKeys.ANKE_VURDERING];
 type EndepunktPanelData = {
   ankeVurdering: AnkeVurdering;
-}
+};
 
-const AnkeResultatProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps> = ({
-  ...props
-}) => {
+const AnkeResultatProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps> = ({ ...props }) => {
   const intl = useIntl();
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>
@@ -37,11 +33,8 @@ const AnkeResultatProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps>
       prosessPanelKode={ProsessStegCode.ANKE_RESULTAT}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.AnkeResultat' })}
       skalPanelVisesIMeny={() => true}
-      renderPanel={(data) => (
-        <AnkeResultatProsessIndex
-          ankeVurdering={data.ankeVurdering}
-          alleKodeverk={data.alleKodeverk}
-        />
+      renderPanel={data => (
+        <AnkeResultatProsessIndex ankeVurdering={data.ankeVurdering} alleKodeverk={data.alleKodeverk} />
       )}
     />
   );

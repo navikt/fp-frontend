@@ -8,7 +8,8 @@ import { PersonopplysningerBasis, Personoversikt } from '@navikt/fp-types';
 
 import getAddresses from '../getAddresses';
 
-const getParentHeader = (erMor: boolean): string => (erMor ? 'ForeldrePanel.MotherDeathDate' : 'ForeldrePanel.FatherDeathDate');
+const getParentHeader = (erMor: boolean): string =>
+  erMor ? 'ForeldrePanel.MotherDeathDate' : 'ForeldrePanel.FatherDeathDate';
 
 const lagSøkerdata = (personopplysninger: PersonopplysningerBasis) => {
   const addresses = getAddresses(personopplysninger.adresser);
@@ -24,7 +25,7 @@ const lagSøkerdata = (personopplysninger: PersonopplysningerBasis) => {
 
 interface OwnProps {
   personoversikt: Personoversikt;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
 /**
@@ -50,24 +51,28 @@ const ForeldrePanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
       title={intl.formatMessage({ id: 'ForeldrePanel.Foreldre' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.OMSORGSOVERTAKELSE]}
     >
-      {beggeForeldre.map((foreldre) => {
+      {beggeForeldre.map(foreldre => {
         const shouldShowAdress = foreldre.adresse && !foreldre.dodsdato;
         const parentHeader = getParentHeader(foreldre.erMor);
         return (
           <div key={`${foreldre.aktorId}`}>
             <Heading size="small">{foreldre.navn}</Heading>
             <VerticalSpacer eightPx />
-            <BodyShort size="small"><FormattedMessage id="ForeldrePanel.Address" /></BodyShort>
-            {shouldShowAdress
-              && <Label size="small">{foreldre.adresse}</Label>}
-            {!shouldShowAdress
-              && <BodyShort size="small"> - </BodyShort>}
+            <BodyShort size="small">
+              <FormattedMessage id="ForeldrePanel.Address" />
+            </BodyShort>
+            {shouldShowAdress && <Label size="small">{foreldre.adresse}</Label>}
+            {!shouldShowAdress && <BodyShort size="small"> - </BodyShort>}
             <VerticalSpacer eightPx />
-            <BodyShort size="small"><FormattedMessage id={parentHeader} /></BodyShort>
-            {foreldre.dodsdato
-              && <Label size="small"><DateLabel dateString={foreldre.dodsdato} /></Label>}
-            {!foreldre.dodsdato
-              && <BodyShort size="small"> - </BodyShort>}
+            <BodyShort size="small">
+              <FormattedMessage id={parentHeader} />
+            </BodyShort>
+            {foreldre.dodsdato && (
+              <Label size="small">
+                <DateLabel dateString={foreldre.dodsdato} />
+              </Label>
+            )}
+            {!foreldre.dodsdato && <BodyShort size="small"> - </BodyShort>}
             <VerticalSpacer sixteenPx />
           </div>
         );

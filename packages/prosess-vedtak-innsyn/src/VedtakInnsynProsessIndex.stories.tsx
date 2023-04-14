@@ -3,7 +3,11 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 
 import {
-  aksjonspunktStatus, behandlingType, innsynResultatType, kommunikasjonsretning, AksjonspunktCode,
+  aksjonspunktStatus,
+  behandlingType,
+  innsynResultatType,
+  kommunikasjonsretning,
+  AksjonspunktCode,
 } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Innsyn } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -17,15 +21,18 @@ const behandling = {
   sprakkode: 'NO',
 } as Behandling;
 
-const defaultAksjonspunkter = [{
-  definisjon: AksjonspunktCode.VURDER_INNSYN,
-  status: aksjonspunktStatus.UTFORT,
-  begrunnelse: 'Dette er utført',
-}, {
-  definisjon: AksjonspunktCode.FORESLA_VEDTAK,
-  status: aksjonspunktStatus.OPPRETTET,
-  begrunnelse: undefined,
-}] as Aksjonspunkt[];
+const defaultAksjonspunkter = [
+  {
+    definisjon: AksjonspunktCode.VURDER_INNSYN,
+    status: aksjonspunktStatus.UTFORT,
+    begrunnelse: 'Dette er utført',
+  },
+  {
+    definisjon: AksjonspunktCode.FORESLA_VEDTAK,
+    status: aksjonspunktStatus.OPPRETTET,
+    begrunnelse: undefined,
+  },
+] as Aksjonspunkt[];
 
 export default {
   title: 'prosess/innsyn/prosess-vedtak-innsyn',
@@ -38,13 +45,7 @@ const Template: Story<{
   forhandsvisCallback: (data: any) => Promise<any>;
   readOnly?: boolean;
   aksjonspunkter?: Aksjonspunkt[];
-}> = ({
-  submitCallback,
-  innsyn,
-  forhandsvisCallback,
-  readOnly = false,
-  aksjonspunkter = defaultAksjonspunkter,
-}) => (
+}> = ({ submitCallback, innsyn, forhandsvisCallback, readOnly = false, aksjonspunkter = defaultAksjonspunkter }) => (
   <VedtakInnsynProsessIndex
     behandling={behandling}
     alleKodeverk={alleKodeverk as any}
@@ -59,13 +60,15 @@ const Template: Story<{
     setFormData={() => undefined}
     innsyn={innsyn}
     saksnummer="123434"
-    alleDokumenter={[{
-      journalpostId: '2',
-      dokumentId: '3',
-      tittel: 'Dette er et dokument',
-      tidspunkt: '2017-08-02T00:54:25.455',
-      kommunikasjonsretning: kommunikasjonsretning.INN,
-    }]}
+    alleDokumenter={[
+      {
+        journalpostId: '2',
+        dokumentId: '3',
+        tittel: 'Dette er et dokument',
+        tidspunkt: '2017-08-02T00:54:25.455',
+        kommunikasjonsretning: kommunikasjonsretning.INN,
+      },
+    ]}
     previewCallback={forhandsvisCallback}
   />
 );
@@ -75,16 +78,20 @@ PanelForInnvilgetVedtak.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   forhandsvisCallback: action('button-click') as any,
   innsyn: {
-    dokumenter: [{
-      journalpostId: '2',
-      dokumentId: '3',
-      fikkInnsyn: true,
-    }],
-    vedtaksdokumentasjon: [{
-      behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
-      tittel: behandlingType.FORSTEGANGSSOKNAD,
-      opprettetDato: '2019-01-01',
-    }],
+    dokumenter: [
+      {
+        journalpostId: '2',
+        dokumentId: '3',
+        fikkInnsyn: true,
+      },
+    ],
+    vedtaksdokumentasjon: [
+      {
+        behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
+        tittel: behandlingType.FORSTEGANGSSOKNAD,
+        opprettetDato: '2019-01-01',
+      },
+    ],
     innsynResultatType: innsynResultatType.INNVILGET,
     innsynMottattDato: '2019-01-01',
   },
@@ -95,16 +102,20 @@ PanelForAvvistVedtak.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   forhandsvisCallback: action('button-click') as any,
   innsyn: {
-    dokumenter: [{
-      journalpostId: '2',
-      dokumentId: '3',
-      fikkInnsyn: true,
-    }],
-    vedtaksdokumentasjon: [{
-      behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
-      tittel: behandlingType.FORSTEGANGSSOKNAD,
-      opprettetDato: '2019-01-01',
-    }],
+    dokumenter: [
+      {
+        journalpostId: '2',
+        dokumentId: '3',
+        fikkInnsyn: true,
+      },
+    ],
+    vedtaksdokumentasjon: [
+      {
+        behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
+        tittel: behandlingType.FORSTEGANGSSOKNAD,
+        opprettetDato: '2019-01-01',
+      },
+    ],
     innsynResultatType: innsynResultatType.AVVIST,
     innsynMottattDato: '2019-01-01',
   },
@@ -115,22 +126,29 @@ PanelForAvvistVedtakReadonly.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   forhandsvisCallback: action('button-click') as any,
   readOnly: true,
-  aksjonspunkter: [defaultAksjonspunkter[0], {
-    ...defaultAksjonspunkter[1],
-    status: aksjonspunktStatus.UTFORT,
-    begrunnelse: 'Dette er en vurdering',
-  }],
+  aksjonspunkter: [
+    defaultAksjonspunkter[0],
+    {
+      ...defaultAksjonspunkter[1],
+      status: aksjonspunktStatus.UTFORT,
+      begrunnelse: 'Dette er en vurdering',
+    },
+  ],
   innsyn: {
-    dokumenter: [{
-      journalpostId: '2',
-      dokumentId: '3',
-      fikkInnsyn: true,
-    }],
-    vedtaksdokumentasjon: [{
-      behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
-      tittel: behandlingType.FORSTEGANGSSOKNAD,
-      opprettetDato: '2019-01-01',
-    }],
+    dokumenter: [
+      {
+        journalpostId: '2',
+        dokumentId: '3',
+        fikkInnsyn: true,
+      },
+    ],
+    vedtaksdokumentasjon: [
+      {
+        behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
+        tittel: behandlingType.FORSTEGANGSSOKNAD,
+        opprettetDato: '2019-01-01',
+      },
+    ],
     innsynResultatType: innsynResultatType.AVVIST,
     innsynMottattDato: '2019-01-01',
   },

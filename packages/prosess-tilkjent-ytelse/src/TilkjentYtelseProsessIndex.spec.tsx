@@ -27,9 +27,13 @@ describe('<TilkjentYtelseProsessIndex>', () => {
     const utils = render(<ÅpentAksjonspunkt submitCallback={lagre} />);
 
     expect(await screen.findByText('Tilkjent ytelse')).toBeInTheDocument();
-    expect(screen.getByText('Pengene er utbetalt til søker, arbeidsgiver krever nå refusjon fra startdato. '
-      + 'Vurder om beløpet som er feilutbetalt skal tilbakekreves fra søker eller om dette er en sak mellom '
-      + 'arbeidstaker og arbeidsgiver.')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Pengene er utbetalt til søker, arbeidsgiver krever nå refusjon fra startdato. ' +
+          'Vurder om beløpet som er feilutbetalt skal tilbakekreves fra søker eller om dette er en sak mellom ' +
+          'arbeidstaker og arbeidsgiver.',
+      ),
+    ).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Tilbakekrev fra søker'));
 

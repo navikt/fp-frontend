@@ -11,7 +11,7 @@ type Behandlingsresultat = Readonly<{
   erRevurderingMedUendretUtfall?: boolean;
   skjæringstidspunkt?: {
     dato: string;
-  }
-}>
+  };
+}>;
 
 export default Behandlingsresultat;

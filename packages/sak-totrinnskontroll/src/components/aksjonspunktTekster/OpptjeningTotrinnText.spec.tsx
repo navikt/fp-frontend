@@ -42,9 +42,7 @@ describe('<OpptjeningTotrinnnText>', () => {
   it('skal vise korrekt tekst for opptjening med endring av arbeid med navn', async () => {
     render(
       <RawIntlProvider value={intlMock}>
-        <OpptjeningTotrinnText
-          aktivitet={lagOpptjeningAktivitetArbeidMedNavn('ENDRING')}
-        />
+        <OpptjeningTotrinnText aktivitet={lagOpptjeningAktivitetArbeidMedNavn('ENDRING')} />
       </RawIntlProvider>,
     );
 
@@ -56,21 +54,19 @@ describe('<OpptjeningTotrinnnText>', () => {
   it('skal vise korrekt tekst for opptjening med endring av arbeid uten navn', async () => {
     render(
       <RawIntlProvider value={intlMock}>
-        <OpptjeningTotrinnText
-          aktivitet={lagOpptjeningAktivitetArbeidUtenNavn('ENDRING')}
-        />
+        <OpptjeningTotrinnText aktivitet={lagOpptjeningAktivitetArbeidUtenNavn('ENDRING')} />
       </RawIntlProvider>,
     );
 
-    expect(await screen.findByText('Perioden arbeid for organisasjonen med orgnr. 1234567890 er endret.')).toBeInTheDocument();
+    expect(
+      await screen.findByText('Perioden arbeid for organisasjonen med orgnr. 1234567890 er endret.'),
+    ).toBeInTheDocument();
   });
 
   it('skal vise korrekt tekst for opptjening med endring av aktivitet', async () => {
     render(
       <RawIntlProvider value={intlMock}>
-        <OpptjeningTotrinnText
-          aktivitet={lagOpptjeningAktivitet('ENDRING')}
-        />
+        <OpptjeningTotrinnText aktivitet={lagOpptjeningAktivitet('ENDRING')} />
       </RawIntlProvider>,
     );
 
@@ -80,33 +76,31 @@ describe('<OpptjeningTotrinnnText>', () => {
   it('skal vise korrekt tekst for opptjening med godkjenning av arbeid med navn', async () => {
     render(
       <RawIntlProvider value={intlMock}>
-        <OpptjeningTotrinnText
-          aktivitet={lagOpptjeningAktivitetArbeidMedNavn('GODKJENT')}
-        />
+        <OpptjeningTotrinnText aktivitet={lagOpptjeningAktivitetArbeidMedNavn('GODKJENT')} />
       </RawIntlProvider>,
     );
 
-    expect(await screen.findByText('Aktivitet arbeid for Andersen Transport AS (1234567890) er godkjent.')).toBeInTheDocument();
+    expect(
+      await screen.findByText('Aktivitet arbeid for Andersen Transport AS (1234567890) er godkjent.'),
+    ).toBeInTheDocument();
   });
 
   it('skal vise korrekt tekst for opptjening med godkjenning av arbeid uten navn', async () => {
     render(
       <RawIntlProvider value={intlMock}>
-        <OpptjeningTotrinnText
-          aktivitet={lagOpptjeningAktivitetArbeidUtenNavn('GODKJENT')}
-        />
+        <OpptjeningTotrinnText aktivitet={lagOpptjeningAktivitetArbeidUtenNavn('GODKJENT')} />
       </RawIntlProvider>,
     );
 
-    expect(await screen.findByText('Aktivitet arbeid for organisasjonen med orgnr. 1234567890 er godkjent.')).toBeInTheDocument();
+    expect(
+      await screen.findByText('Aktivitet arbeid for organisasjonen med orgnr. 1234567890 er godkjent.'),
+    ).toBeInTheDocument();
   });
 
   it('skal vise korrekt tekst for opptjening med godkjenning av aktivitet', async () => {
     render(
       <RawIntlProvider value={intlMock}>
-        <OpptjeningTotrinnText
-          aktivitet={lagOpptjeningAktivitet('GODKJENT')}
-        />
+        <OpptjeningTotrinnText aktivitet={lagOpptjeningAktivitet('GODKJENT')} />
       </RawIntlProvider>,
     );
 
@@ -116,9 +110,7 @@ describe('<OpptjeningTotrinnnText>', () => {
   it('skal vise korrekt tekst for opptjening med underkjenning av arbeid med navn', async () => {
     render(
       <RawIntlProvider value={intlMock}>
-        <OpptjeningTotrinnText
-          aktivitet={lagOpptjeningAktivitetArbeidMedNavn('UNDERKJENNING')}
-        />
+        <OpptjeningTotrinnText aktivitet={lagOpptjeningAktivitetArbeidMedNavn('UNDERKJENNING')} />
       </RawIntlProvider>,
     );
 
@@ -130,9 +122,7 @@ describe('<OpptjeningTotrinnnText>', () => {
   it('skal vise korrekt tekst for opptjening med underkjenning av arbeid uten navn', async () => {
     render(
       <RawIntlProvider value={intlMock}>
-        <OpptjeningTotrinnText
-          aktivitet={lagOpptjeningAktivitetArbeidUtenNavn('UNDERKJENNING')}
-        />
+        <OpptjeningTotrinnText aktivitet={lagOpptjeningAktivitetArbeidUtenNavn('UNDERKJENNING')} />
       </RawIntlProvider>,
     );
 
@@ -144,9 +134,7 @@ describe('<OpptjeningTotrinnnText>', () => {
   it('skal vise korrekt tekst for opptjening med underkjenning av aktivitet', async () => {
     render(
       <RawIntlProvider value={intlMock}>
-        <OpptjeningTotrinnText
-          aktivitet={lagOpptjeningAktivitet('UNDERKJENNING')}
-        />
+        <OpptjeningTotrinnText aktivitet={lagOpptjeningAktivitet('UNDERKJENNING')} />
       </RawIntlProvider>,
     );
 

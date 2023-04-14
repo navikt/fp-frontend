@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  render, screen, waitFor,
-} from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import { Modal } from '@navikt/ds-react';
@@ -53,9 +51,11 @@ describe('<LagreSoknadPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Bekreft og avslutt behandling'));
 
-    expect(await screen.findByText(
-      'Avslutter registrering av søknaden. Det er ikke mulig å innhente ytterligere opplysninger.',
-    )).toBeInTheDocument();
+    expect(
+      await screen.findByText(
+        'Avslutter registrering av søknaden. Det er ikke mulig å innhente ytterligere opplysninger.',
+      ),
+    ).toBeInTheDocument();
     expect(screen.getByText('Bekreft at søknaden skal avslås')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('OK'));

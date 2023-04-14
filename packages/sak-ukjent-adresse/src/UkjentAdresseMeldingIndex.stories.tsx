@@ -3,11 +3,7 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 
 import UkjentAdresseMelding from './UkjentAdresseMeldingIndex';
 
-const withWidthProvider = (story: any) => (
-  <div style={{ width: '600px' }}>
-    { story() }
-  </div>
-);
+const withWidthProvider = (story: any) => <div style={{ width: '600px' }}>{story()}</div>;
 
 export default {
   title: 'sak/sak-ukjent-adresse',
@@ -15,9 +11,7 @@ export default {
   decorators: [withWidthProvider],
 };
 
-const Template: Story = () => (
-  <UkjentAdresseMelding />
-);
+const Template: Story = () => <UkjentAdresseMelding />;
 
 export const IngenAdresse = Template.bind({});
 IngenAdresse.args = {};

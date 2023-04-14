@@ -6,4 +6,4 @@ export const KjønnkodeEnum = stringEnum({
   UDEFINERT: '-',
 });
 
-export type Kjønnkode = typeof KjønnkodeEnum[keyof typeof KjønnkodeEnum];
+export type Kjønnkode = (typeof KjønnkodeEnum)[keyof typeof KjønnkodeEnum];

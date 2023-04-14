@@ -14,7 +14,7 @@ import StoreValuesInLocalStorage from '../../../data/StoreValuesInLocalStorage';
 import useLosKodeverk from '../../../data/useLosKodeverk';
 
 const finnFagsakYtelseTypeNavn = (fagsakYtelseTyper: KodeverkMedNavn[], valgtFagsakYtelseType: string) => {
-  const type = fagsakYtelseTyper.find((fyt) => fyt.kode === valgtFagsakYtelseType);
+  const type = fagsakYtelseTyper.find(fyt => fyt.kode === valgtFagsakYtelseType);
   return type ? type.navn : '';
 };
 
@@ -26,12 +26,12 @@ interface InitialValues {
 
 type FormValues = {
   valgtYtelseType: string;
-}
+};
 
 interface OwnProps {
   height: number;
   oppgaverForAvdeling: OppgaverForAvdeling[];
-  getValueFromLocalStorage: (key: string) => string| undefined;
+  getValueFromLocalStorage: (key: string) => string | undefined;
 }
 
 const formName = 'fordelingAvBehandlingstype';
@@ -66,26 +66,38 @@ export const FordelingAvBehandlingstypePanel: FunctionComponent<OwnProps> = ({
       <RadioGroupPanel
         name="valgtYtelseType"
         isHorizontal
-        radios={[{
-          value: FagsakYtelseType.FORELDREPENGER,
-          label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.FORELDREPENGER),
-        }, {
-          value: FagsakYtelseType.ENGANGSSTONAD,
-          label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.ENGANGSSTONAD),
-        }, {
-          value: FagsakYtelseType.SVANGERSKAPSPENGER,
-          label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.SVANGERSKAPSPENGER),
-        }, {
-          value: ALLE_YTELSETYPER_VALGT,
-          label: <FormattedMessage id="FordelingAvBehandlingstypePanel.Alle" />,
-        }]}
+        radios={[
+          {
+            value: FagsakYtelseType.FORELDREPENGER,
+            label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.FORELDREPENGER),
+          },
+          {
+            value: FagsakYtelseType.ENGANGSSTONAD,
+            label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.ENGANGSSTONAD),
+          },
+          {
+            value: FagsakYtelseType.SVANGERSKAPSPENGER,
+            label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.SVANGERSKAPSPENGER),
+          },
+          {
+            value: ALLE_YTELSETYPER_VALGT,
+            label: <FormattedMessage id="FordelingAvBehandlingstypePanel.Alle" />,
+          },
+        ]}
       />
       <VerticalSpacer sixteenPx />
       <FordelingAvBehandlingstypeGraf
         height={height}
         behandlingTyper={behandlingTyper}
-        oppgaverForAvdeling={oppgaverForAvdeling ? oppgaverForAvdeling
-          .filter((ofa) => (values.valgtYtelseType === ALLE_YTELSETYPER_VALGT ? true : values.valgtYtelseType === ofa.fagsakYtelseType)) : []}
+        oppgaverForAvdeling={
+          oppgaverForAvdeling
+            ? oppgaverForAvdeling.filter(ofa =>
+                values.valgtYtelseType === ALLE_YTELSETYPER_VALGT
+                  ? true
+                  : values.valgtYtelseType === ofa.fagsakYtelseType,
+              )
+            : []
+        }
       />
     </Form>
   );

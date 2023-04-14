@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, useMemo,
-} from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
 
@@ -18,7 +16,7 @@ const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_NFP];
 const ENDEPUNKTER_PANEL_DATA = [KlageBehandlingApiKeys.KLAGE_VURDERING];
 type EndepunktPanelData = {
   klageVurdering?: KlageVurdering;
-}
+};
 
 interface OwnProps {
   alleBehandlinger: {
@@ -37,9 +35,15 @@ const FormKravFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & Pro
 }) => {
   const intl = useIntl();
 
-  const avsluttedeBehandlinger = useMemo(() => alleBehandlinger
-    .filter((b) => b.status === BehandlingStatus.AVSLUTTET)
-    .filter((b) => (b.type !== BehandlingType.KLAGE || isKlageAvvist(b.resultatType)) && b.type !== BehandlingType.ANKE), [alleBehandlinger]);
+  const avsluttedeBehandlinger = useMemo(
+    () =>
+      alleBehandlinger
+        .filter(b => b.status === BehandlingStatus.AVSLUTTET)
+        .filter(
+          b => (b.type !== BehandlingType.KLAGE || isKlageAvvist(b.resultatType)) && b.type !== BehandlingType.ANKE,
+        ),
+    [alleBehandlinger],
+  );
 
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>
@@ -50,12 +54,7 @@ const FormKravFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & Pro
       prosessPanelKode={ProsessStegCode.FORMKRAV_KLAGE_NAV_FAMILIE_OG_PENSJON}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.FormkravKlageNFP' })}
       skalPanelVisesIMeny={() => true}
-      renderPanel={(data) => (
-        <FormkravProsessIndex
-          avsluttedeBehandlinger={avsluttedeBehandlinger}
-          {...data}
-        />
-      )}
+      renderPanel={data => <FormkravProsessIndex avsluttedeBehandlinger={avsluttedeBehandlinger} {...data} />}
     />
   );
 };

@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { YtelserFaktaIndex } from '@navikt/fp-fakta-ytelser';
@@ -14,23 +12,19 @@ import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.INNTEKT_ARBEID_YTELSE];
 type EndepunktPanelData = {
   inntektArbeidYtelse: InntektArbeidYtelse;
-}
+};
 
 /**
  * YtelserFaktaInitPanel
  */
-const YtelserFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => (
+const YtelserFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = props => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     faktaPanelKode={FaktaPanelCode.YTELSER}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'YtelserFaktaIndex.Ytelser' })}
     skalPanelVisesIMeny={() => true}
-    renderPanel={(data) => (
-      <YtelserFaktaIndex
-        {...data}
-      />
-    )}
+    renderPanel={data => <YtelserFaktaIndex {...data} />}
   />
 );
 

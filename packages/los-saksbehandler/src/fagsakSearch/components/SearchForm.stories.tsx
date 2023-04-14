@@ -17,14 +17,10 @@ export default {
 };
 
 const Template: Story<{
-  kanSaksbehandle: boolean,
-  searchStarted: boolean,
-  onSubmit: (values: { searchString: string, skalReservere: boolean }) => void,
-}> = ({
-  kanSaksbehandle,
-  searchStarted,
-  onSubmit,
-}) => (
+  kanSaksbehandle: boolean;
+  searchStarted: boolean;
+  onSubmit: (values: { searchString: string; skalReservere: boolean }) => void;
+}> = ({ kanSaksbehandle, searchStarted, onSubmit }) => (
   <SearchForm
     onSubmit={onSubmit}
     searchStarted={searchStarted}

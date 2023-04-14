@@ -8,21 +8,30 @@ import { arbeidType, KodeverkType } from '@navikt/fp-kodeverk';
 
 import RenderAndreYtelserPerioderFieldArray, {
   FormValues as PerioderFormValues,
-  ANDRE_YTELSER_PERIODE_SUFFIX, ANDRE_YTELSER_NAME_PREFIX,
+  ANDRE_YTELSER_PERIODE_SUFFIX,
+  ANDRE_YTELSER_NAME_PREFIX,
 } from './RenderAndreYtelserPerioderFieldArray';
 
-const removeArbeidstyper = (andreYtelser: KodeverkMedNavn[], kunMiliterEllerSiviltjeneste?: boolean): KodeverkMedNavn[] => {
+const removeArbeidstyper = (
+  andreYtelser: KodeverkMedNavn[],
+  kunMiliterEllerSiviltjeneste?: boolean,
+): KodeverkMedNavn[] => {
   if (kunMiliterEllerSiviltjeneste) {
-    return andreYtelser.filter((ay) => ay.kode === arbeidType.MILITÆR_ELLER_SIVILTJENESTE);
+    return andreYtelser.filter(ay => ay.kode === arbeidType.MILITÆR_ELLER_SIVILTJENESTE);
   }
-  return andreYtelser.filter((ay) => ay.kode !== arbeidType.UTENLANDSK_ARBEIDSFORHOLD
-  && ay.kode !== arbeidType.FRILANSER && ay.kode !== arbeidType.LONN_UNDER_UTDANNING);
+  return andreYtelser.filter(
+    ay =>
+      ay.kode !== arbeidType.UTENLANDSK_ARBEIDSFORHOLD &&
+      ay.kode !== arbeidType.FRILANSER &&
+      ay.kode !== arbeidType.LONN_UNDER_UTDANNING,
+  );
 };
 
 export type FormValues = {
   [ANDRE_YTELSER_NAME_PREFIX]?: {
-    [key: string ]: PerioderFormValues[]};
-}
+    [key: string]: PerioderFormValues[];
+  };
+};
 
 interface OwnProps {
   readOnly: boolean;
@@ -45,18 +54,23 @@ const AndreYtelserPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   kunMiliterEllerSiviltjeneste = false,
   alleKodeverk,
 }) => {
-  const { watch } = formHooks.useFormContext<{ [ANDRE_YTELSER_NAME_PREFIX]: FormValues}>();
+  const { watch } = formHooks.useFormContext<{ [ANDRE_YTELSER_NAME_PREFIX]: FormValues }>();
   const selectedYtelser = watch(ANDRE_YTELSER_NAME_PREFIX);
 
   const andreYtelser = alleKodeverk[KodeverkType.ARBEID_TYPE];
 
-  const filtrerteArbeidstyper = useMemo(() => removeArbeidstyper(andreYtelser, kunMiliterEllerSiviltjeneste), [kunMiliterEllerSiviltjeneste]);
+  const filtrerteArbeidstyper = useMemo(
+    () => removeArbeidstyper(andreYtelser, kunMiliterEllerSiviltjeneste),
+    [kunMiliterEllerSiviltjeneste],
+  );
 
   return (
     <BorderBox>
-      <Heading size="small"><FormattedMessage id="Registrering.AndreYtelser.Title" /></Heading>
+      <Heading size="small">
+        <FormattedMessage id="Registrering.AndreYtelser.Title" />
+      </Heading>
       <VerticalSpacer sixteenPx />
-      {filtrerteArbeidstyper.map((ay) => {
+      {filtrerteArbeidstyper.map(ay => {
         const ytelseFieldName = `${ay.kode}_${ANDRE_YTELSER_PERIODE_SUFFIX}`;
         return (
           <React.Fragment key={ay.kode}>
@@ -70,10 +84,7 @@ const AndreYtelserPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
               <>
                 <VerticalSpacer eightPx />
                 <ArrowBox>
-                  <RenderAndreYtelserPerioderFieldArray
-                    name={ytelseFieldName}
-                    readOnly={readOnly}
-                  />
+                  <RenderAndreYtelserPerioderFieldArray name={ytelseFieldName} readOnly={readOnly} />
                 </ArrowBox>
               </>
             )}
@@ -86,7 +97,7 @@ const AndreYtelserPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
 
 AndreYtelserPanel.buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => {
   const ytelseInitialValues = {};
-  removeArbeidstyper(andreYtelser).forEach((ay) => {
+  removeArbeidstyper(andreYtelser).forEach(ay => {
     const ytelsePeriodeFieldName = `${ay.kode}_${ANDRE_YTELSER_PERIODE_SUFFIX}`;
     ytelseInitialValues[ytelsePeriodeFieldName] = [{}];
   });
@@ -97,13 +108,15 @@ AndreYtelserPanel.transformValues = (values: FormValues, andreYtelser: KodeverkM
   const ytelseValues = values[ANDRE_YTELSER_NAME_PREFIX];
   const newValues = [];
 
-  andreYtelser.filter((ay) => ytelseValues && ytelseValues[ay.kode]).forEach((ay) => {
-    const ytelsePerioderFieldName = `${ay.kode}_${ANDRE_YTELSER_PERIODE_SUFFIX}`;
-    const ytelsePerioder = ytelseValues[ytelsePerioderFieldName];
-    if (ytelsePerioder) {
-      RenderAndreYtelserPerioderFieldArray.transformValues(ytelsePerioder, ay.kode).forEach((tv) => newValues.push(tv));
-    }
-  });
+  andreYtelser
+    .filter(ay => ytelseValues && ytelseValues[ay.kode])
+    .forEach(ay => {
+      const ytelsePerioderFieldName = `${ay.kode}_${ANDRE_YTELSER_PERIODE_SUFFIX}`;
+      const ytelsePerioder = ytelseValues[ytelsePerioderFieldName];
+      if (ytelsePerioder) {
+        RenderAndreYtelserPerioderFieldArray.transformValues(ytelsePerioder, ay.kode).forEach(tv => newValues.push(tv));
+      }
+    });
 
   return newValues;
 };

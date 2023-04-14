@@ -12,7 +12,8 @@ export function useKodeverk(behandlingType: string): AlleKodeverk | AlleKodeverk
   const alleKodeverkFpSak = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
   const alleKodeverkFpTilbake = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
 
-  const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandlingType || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType;
+  const erTilbakekreving =
+    BehandlingType.TILBAKEKREVING === behandlingType || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType;
   return erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak;
 }
 
@@ -45,7 +46,7 @@ export function useFpSakKodeverkMedNavn(kode: string, kodeverk: KodeverkType): K
     throw Error(`Det finnes ingen kodeverk for type ${kodeverk} med kode ${kode}`);
   }
 
-  return kodeverkForType.find((k) => k.kode === kode);
+  return kodeverkForType.find(k => k.kode === kode);
 }
 
 /**
@@ -57,11 +58,13 @@ export function useGetKodeverkFn() {
   const alleFpTilbakeKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
 
   return (kode: string, kodeverk: KodeverkType, behandlingType: string = BehandlingType.FORSTEGANGSSOKNAD) => {
-    const kodeverkForType = behandlingType === BehandlingType.TILBAKEKREVING || behandlingType === BehandlingType.TILBAKEKREVING_REVURDERING
-      ? alleFpTilbakeKodeverk[kodeverk] : alleFpSakKodeverk[kodeverk];
+    const kodeverkForType =
+      behandlingType === BehandlingType.TILBAKEKREVING || behandlingType === BehandlingType.TILBAKEKREVING_REVURDERING
+        ? alleFpTilbakeKodeverk[kodeverk]
+        : alleFpSakKodeverk[kodeverk];
     if (!kodeverkForType || kodeverkForType.length === 0) {
       throw Error(`Det finnes ingen kodeverk for type ${kodeverk} med kode ${kode}`);
     }
-    return kodeverkForType.find((k) => k.kode === kode);
+    return kodeverkForType.find(k => k.kode === kode);
   };
 }

@@ -1,8 +1,6 @@
 import React from 'react';
 import { Modal } from '@navikt/ds-react';
-import {
-  fireEvent, render, screen, waitFor,
-} from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './SakenFaktaIndex.stories';
@@ -17,9 +15,11 @@ describe('<SakenFaktaIndex>', () => {
 
     const utils = render(<ApentAksjonspunktForInnhentingAvDokumentasjon submitCallback={lagre} />);
 
-    expect(await screen.findByText(
-      'Se søknad for informasjon om oppgitt rettighet fra EØS. Innhent dokumentasjon fra utenlandsk trygdemyndighet ved behov',
-    )).toBeInTheDocument();
+    expect(
+      await screen.findByText(
+        'Se søknad for informasjon om oppgitt rettighet fra EØS. Innhent dokumentasjon fra utenlandsk trygdemyndighet ved behov',
+      ),
+    ).toBeInTheDocument();
     expect(screen.getByText('Innhentelse av dokumentasjon')).toBeInTheDocument();
 
     await userEvent.click(screen.getAllByText('Dokumentasjon vil bli innhentet')[0]);
@@ -42,9 +42,11 @@ describe('<SakenFaktaIndex>', () => {
 
     const utils = render(<ApentAksjonspunktForInnhentingAvDokumentasjon submitCallback={lagre} />);
 
-    expect(await screen.findByText(
-      'Se søknad for informasjon om oppgitt rettighet fra EØS. Innhent dokumentasjon fra utenlandsk trygdemyndighet ved behov',
-    )).toBeInTheDocument();
+    expect(
+      await screen.findByText(
+        'Se søknad for informasjon om oppgitt rettighet fra EØS. Innhent dokumentasjon fra utenlandsk trygdemyndighet ved behov',
+      ),
+    ).toBeInTheDocument();
 
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');
     await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');

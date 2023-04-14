@@ -2,9 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import {
-  aksjonspunktStatus, avslagsarsakCodes, vilkarUtfallType, AksjonspunktCode,
-} from '@navikt/fp-kodeverk';
+import { aksjonspunktStatus, avslagsarsakCodes, vilkarUtfallType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -24,19 +22,12 @@ export default {
 
 const Template: Story<{
   submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
-  behandling: Behandling,
-  aksjonspunkter: Aksjonspunkt[],
-  isReadOnly: boolean,
-  readOnlySubmitButton: boolean,
+  behandling: Behandling;
+  aksjonspunkter: Aksjonspunkt[];
+  isReadOnly: boolean;
+  readOnlySubmitButton: boolean;
   status: string;
-}> = ({
-  submitCallback,
-  behandling,
-  aksjonspunkter,
-  isReadOnly,
-  readOnlySubmitButton,
-  status,
-}) => (
+}> = ({ submitCallback, behandling, aksjonspunkter, isReadOnly, readOnlySubmitButton, status }) => (
   <OmsorgVilkarProsessIndex
     alleKodeverk={alleKodeverk as any}
     submitCallback={submitCallback}
@@ -56,11 +47,13 @@ export const ÅpentAksjonspunkt = Template.bind({});
 ÅpentAksjonspunkt.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   behandling: defaultBehandling,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
-    status: aksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+    },
+  ] as Aksjonspunkt[],
   isReadOnly: false,
   readOnlySubmitButton: false,
   status: vilkarUtfallType.IKKE_VURDERT,
@@ -70,11 +63,13 @@ export const OppfyltVilkår = Template.bind({});
 OppfyltVilkår.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   behandling: defaultBehandling,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
-    status: aksjonspunktStatus.UTFORT,
-    begrunnelse: 'Dette vilkåret er godkjent',
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
+      status: aksjonspunktStatus.UTFORT,
+      begrunnelse: 'Dette vilkåret er godkjent',
+    },
+  ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
   status: vilkarUtfallType.OPPFYLT,
@@ -90,11 +85,13 @@ AvslåttVilkår.args = {
       avslagsarsak: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
     },
   } as Behandling,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
-    status: aksjonspunktStatus.UTFORT,
-    begrunnelse: 'Dette vilkåret er avslått',
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
+      status: aksjonspunktStatus.UTFORT,
+      begrunnelse: 'Dette vilkåret er avslått',
+    },
+  ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
   status: vilkarUtfallType.IKKE_OPPFYLT,

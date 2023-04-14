@@ -2,9 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import {
-  AksjonspunktCode, behandlingType, behandlingStatus, aksjonspunktStatus,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, behandlingType, behandlingStatus, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { Behandling, Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -30,15 +28,10 @@ export default {
 
 const Template: Story<{
   aksjonspunkter: Aksjonspunkt[];
-  alleMerknaderFraBeslutter?: { [key: string] : { notAccepted?: boolean }};
+  alleMerknaderFraBeslutter?: { [key: string]: { notAccepted?: boolean } };
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
   erSvangerskapspenger?: boolean;
-}> = ({
-  aksjonspunkter,
-  alleMerknaderFraBeslutter = {},
-  submitCallback,
-  erSvangerskapspenger = false,
-}) => (
+}> = ({ aksjonspunkter, alleMerknaderFraBeslutter = {}, submitCallback, erSvangerskapspenger = false }) => (
   <SakenFaktaIndex
     aksjonspunkter={aksjonspunkter}
     erSvangerskapspenger={erSvangerskapspenger}
@@ -49,12 +42,14 @@ const Template: Story<{
     alleKodeverk={alleKodeverk as any}
     setFormData={() => undefined}
     behandling={behandling as Behandling}
-    harApneAksjonspunkter={aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET)}
-    soknad={{
-      oppgittFordeling: {
-        startDatoForPermisjon: '2019-01-01',
-      },
-    } as Soknad}
+    harApneAksjonspunkter={aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET)}
+    soknad={
+      {
+        oppgittFordeling: {
+          startDatoForPermisjon: '2019-01-01',
+        },
+      } as Soknad
+    }
   />
 );
 
@@ -66,32 +61,38 @@ EndringAvUtland.args = {
 
 export const ApentAksjonspunktForInnhentingAvDokumentasjon = Template.bind({});
 ApentAksjonspunktForInnhentingAvDokumentasjon.args = {
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-    status: aksjonspunktStatus.OPPRETTET,
-    kanLoses: true,
-  }],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+      status: aksjonspunktStatus.OPPRETTET,
+      kanLoses: true,
+    },
+  ],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
 export const ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp = Template.bind({});
 ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp.args = {
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-    status: aksjonspunktStatus.OPPRETTET,
-    kanLoses: true,
-  }],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+      status: aksjonspunktStatus.OPPRETTET,
+      kanLoses: true,
+    },
+  ],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   erSvangerskapspenger: true,
 };
 
 export const AksjonspunktErIkkeGodkjentAvBeslutter = Template.bind({});
 AksjonspunktErIkkeGodkjentAvBeslutter.args = {
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-    status: aksjonspunktStatus.OPPRETTET,
-    kanLoses: true,
-  }],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+      status: aksjonspunktStatus.OPPRETTET,
+      kanLoses: true,
+    },
+  ],
   alleMerknaderFraBeslutter: {
     [AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK]: {
       notAccepted: true,

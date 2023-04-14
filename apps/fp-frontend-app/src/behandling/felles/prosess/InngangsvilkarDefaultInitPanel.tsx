@@ -1,6 +1,4 @@
-import React, {
-  ReactElement, useMemo,
-} from 'react';
+import React, { ReactElement, useMemo } from 'react';
 
 import { RestApiHooks, RestApiState } from '@navikt/fp-rest-api-hooks';
 import { RequestApi, RestKey } from '@navikt/fp-rest-api';
@@ -18,12 +16,16 @@ export type OwnProps<PANEL_DATA> = {
   panelEndepunkter?: RestKey<any, any>[];
   aksjonspunktKoder?: string[];
   vilkarKoder?: string[];
-  renderPanel: (data: PANEL_DATA & StandardProsessPanelProps, erOverstyrt: boolean, toggleOverstyring: () => void) => ReactElement;
+  renderPanel: (
+    data: PANEL_DATA & StandardProsessPanelProps,
+    erOverstyrt: boolean,
+    toggleOverstyring: () => void,
+  ) => ReactElement;
   inngangsvilkarPanelKode: string;
   hentInngangsvilkarPanelTekst: (data: StandardProsessPanelProps) => string;
-}
+};
 
-const InngangsvilkarDefaultInitPanel = <PANEL_DATA = void, >({
+const InngangsvilkarDefaultInitPanel = <PANEL_DATA = void,>({
   erPanelValgt,
   behandlingVersjon,
   registrerInngangsvilkarPanel,
@@ -51,12 +53,15 @@ const InngangsvilkarDefaultInitPanel = <PANEL_DATA = void, >({
     standardPanelProps.status,
   );
 
-  const formatertePanelEndepunkter = panelEndepunkter.map((e) => ({ key: e }));
-  const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi<PANEL_DATA, any>(formatertePanelEndepunkter, {
-    updateTriggers: [erPanelValgt, behandlingVersjon],
-    suspendRequest: !erPanelValgt || formatertePanelEndepunkter.length === 0,
-    isCachingOn: true,
-  });
+  const formatertePanelEndepunkter = panelEndepunkter.map(e => ({ key: e }));
+  const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi<PANEL_DATA, any>(
+    formatertePanelEndepunkter,
+    {
+      updateTriggers: [erPanelValgt, behandlingVersjon],
+      suspendRequest: !erPanelValgt || formatertePanelEndepunkter.length === 0,
+      isCachingOn: true,
+    },
+  );
 
   if (!erPanelValgt || !skalVises) {
     return null;
@@ -66,10 +71,14 @@ const InngangsvilkarDefaultInitPanel = <PANEL_DATA = void, >({
     return <LoadingPanel />;
   }
 
-  return renderPanel({
-    ...panelData,
-    ...standardPanelProps,
-  }, erOverstyrt, toggleOverstyring);
+  return renderPanel(
+    {
+      ...panelData,
+      ...standardPanelProps,
+    },
+    erOverstyrt,
+    toggleOverstyring,
+  );
 };
 
 export default InngangsvilkarDefaultInitPanel;

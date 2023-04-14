@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import {
-  AlleKodeverk, AlleKodeverkTilbakekreving, StandardFaktaPanelProps, Verge,
-} from '@navikt/fp-types';
+import { AlleKodeverk, AlleKodeverkTilbakekreving, StandardFaktaPanelProps, Verge } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import RegistrereVergeInfoPanel from './components/RegistrereVergeInfoPanel';

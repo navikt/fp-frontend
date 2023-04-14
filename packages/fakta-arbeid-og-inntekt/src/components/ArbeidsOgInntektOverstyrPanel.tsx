@@ -1,17 +1,24 @@
-import React, {
-  FunctionComponent, useState, useCallback, useMemo,
-} from 'react';
+import React, { FunctionComponent, useState, useCallback, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import {
-  Alert, Link, BodyShort, Heading,
-} from '@navikt/ds-react';
+import { Alert, Link, BodyShort, Heading } from '@navikt/ds-react';
 
 import { dateFormat } from '@navikt/ft-utils';
 import {
-  Aksjonspunkt, ArbeidOgInntektsmelding, Behandling, ManueltArbeidsforhold, AksjonspunktÅrsak,
+  Aksjonspunkt,
+  ArbeidOgInntektsmelding,
+  Behandling,
+  ManueltArbeidsforhold,
+  AksjonspunktÅrsak,
 } from '@navikt/fp-types';
 import {
-  VerticalSpacer, AksjonspunktHelpTextHTML, FloatRight, OverstyringKnapp, Image, FlexColumn, FlexContainer, FlexRow,
+  VerticalSpacer,
+  AksjonspunktHelpTextHTML,
+  FloatRight,
+  OverstyringKnapp,
+  Image,
+  FlexColumn,
+  FlexContainer,
+  FlexRow,
 } from '@navikt/ft-ui-komponenter';
 import { ArbeidsforholdKomplettVurderingType, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 
@@ -21,12 +28,11 @@ import addCircleIcon from '../images/add-circle.svg';
 
 import styles from './arbeidsOgInntektOverstyrPanel.module.css';
 
-const finnAksjonspunktTekstKoder = (
-  tabellData: ArbeidsforholdOgInntekt[],
-  aksjonspunkt?: Aksjonspunkt,
-): string[] => {
-  const harManglendeInntektsmeldinger = tabellData.some((d) => d.årsak === AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING);
-  const harManglandeOpplysninger = tabellData.some((d) => d.årsak === AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD);
+const finnAksjonspunktTekstKoder = (tabellData: ArbeidsforholdOgInntekt[], aksjonspunkt?: Aksjonspunkt): string[] => {
+  const harManglendeInntektsmeldinger = tabellData.some(d => d.årsak === AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING);
+  const harManglandeOpplysninger = tabellData.some(
+    d => d.årsak === AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
+  );
   const erApÅpent = aksjonspunkt?.status === aksjonspunktStatus.OPPRETTET;
 
   const koder = [];
@@ -47,9 +53,9 @@ interface OwnProps {
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   erOverstyrer: boolean;
   tabellData: ArbeidsforholdOgInntekt[];
-  settÅpneRadIndexer: React.Dispatch<React.SetStateAction<number[]>>
-  setErOverstyrt: React.Dispatch<React.SetStateAction<boolean>>
-  oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
+  settÅpneRadIndexer: React.Dispatch<React.SetStateAction<number[]>>;
+  setErOverstyrt: React.Dispatch<React.SetStateAction<boolean>>;
+  oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>;
 }
 
 const ArbeidsOgInntektOverstyrPanel: FunctionComponent<OwnProps> = ({
@@ -74,16 +80,21 @@ const ArbeidsOgInntektOverstyrPanel: FunctionComponent<OwnProps> = ({
     setErOverstyrt(true);
     setLokalErOverstyrt(true);
 
-    const indexForManueltLagtTil = tabellData
-      .findIndex((t) => t.avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER);
+    const indexForManueltLagtTil = tabellData.findIndex(
+      t =>
+        t.avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
+    );
     if (indexForManueltLagtTil !== -1) {
       settÅpneRadIndexer([indexForManueltLagtTil]);
     }
   }, [tabellData, settÅpneRadIndexer]);
 
-  const aksjonspunktTekstKoder = useMemo(() => finnAksjonspunktTekstKoder(tabellData, aksjonspunkt), [behandling.versjon]);
+  const aksjonspunktTekstKoder = useMemo(
+    () => finnAksjonspunktTekstKoder(tabellData, aksjonspunkt),
+    [behandling.versjon],
+  );
 
-  const harIngenArbeidsforholdSomErManueltLagtTil = tabellData.every((data) => data.arbeidsgiverIdent !== MANUELT_ORG_NR);
+  const harIngenArbeidsforholdSomErManueltLagtTil = tabellData.every(data => data.arbeidsgiverIdent !== MANUELT_ORG_NR);
 
   const erAksjonspunktÅpent = aksjonspunkt?.status === aksjonspunktStatus.OPPRETTET;
 
@@ -95,7 +106,9 @@ const ArbeidsOgInntektOverstyrPanel: FunctionComponent<OwnProps> = ({
             <FlexContainer>
               <FlexRow>
                 <FlexColumn>
-                  <Heading size="small"><FormattedMessage id="ArbeidOgInntektFaktaPanel.Overskrift" /></Heading>
+                  <Heading size="small">
+                    <FormattedMessage id="ArbeidOgInntektFaktaPanel.Overskrift" />
+                  </Heading>
                 </FlexColumn>
                 {erOverstyrer && erAksjonspunktÅpent && !readOnly && (
                   <FlexColumn>
@@ -120,7 +133,7 @@ const ArbeidsOgInntektOverstyrPanel: FunctionComponent<OwnProps> = ({
       <VerticalSpacer thirtyTwoPx />
       {aksjonspunktTekstKoder.length > 0 && (
         <AksjonspunktHelpTextHTML>
-          {aksjonspunktTekstKoder.map((kode) => intl.formatMessage({ id: kode })).join(' ')}
+          {aksjonspunktTekstKoder.map(kode => intl.formatMessage({ id: kode })).join(' ')}
         </AksjonspunktHelpTextHTML>
       )}
       {arbeidsforhold.length === 0 && inntektsmeldinger.length === 0 && erOverstyrer && (
@@ -135,7 +148,7 @@ const ArbeidsOgInntektOverstyrPanel: FunctionComponent<OwnProps> = ({
         <>
           <VerticalSpacer thirtyTwoPx />
           <Link
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               toggleVisningAvLeggTilArbeidsforhold(true);
             }}

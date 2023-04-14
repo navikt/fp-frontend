@@ -14,7 +14,7 @@ import styles from './fagsakSearch.module.css';
 interface OwnProps {
   fagsaker: FagsakEnkel[];
   fagsakOppgaver: Oppgave[];
-  searchFagsakCallback: (values: { searchString: string, skalReservere: boolean }) => void;
+  searchFagsakCallback: (values: { searchString: string; skalReservere: boolean }) => void;
   searchResultReceived: boolean;
   åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
   selectOppgaveCallback: (oppgave: Oppgave) => void;
@@ -30,8 +30,11 @@ const skalViseListe = (fagsaker: FagsakEnkel[], fagsakOppgaver: Oppgave[]): bool
   if (!fagsaker) {
     return false;
   }
-  return fagsaker.length > 1
-    || (fagsaker.length === 1 && fagsakOppgaver.filter((oppgave) => oppgave.saksnummer.toString() === fagsaker[0].saksnummer).length > 1);
+  return (
+    fagsaker.length > 1 ||
+    (fagsaker.length === 1 &&
+      fagsakOppgaver.filter(oppgave => oppgave.saksnummer.toString() === fagsaker[0].saksnummer).length > 1)
+  );
 };
 
 /**
@@ -61,8 +64,11 @@ const FagsakSearch: FunctionComponent<OwnProps> = ({
       kanSaksbehandle={kanSaksbehandle}
     />
 
-    {searchResultReceived && fagsaker && fagsaker.length === 0
-      && <BodyShort size="small" className={styles.label}><FormattedMessage id="FagsakSearch.ZeroSearchResults" /></BodyShort>}
+    {searchResultReceived && fagsaker && fagsaker.length === 0 && (
+      <BodyShort size="small" className={styles.label}>
+        <FormattedMessage id="FagsakSearch.ZeroSearchResults" />
+      </BodyShort>
+    )}
 
     {searchResultReceived && skalViseListe(fagsaker, fagsakOppgaver) && (
       <>

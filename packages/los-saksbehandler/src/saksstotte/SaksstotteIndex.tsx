@@ -10,10 +10,7 @@ interface OwnProps {
 /**
  * SaksstotteIndex
  */
-const SaksstotteIndex: FunctionComponent<OwnProps> = ({
-  valgtSakslisteId,
-  åpneFagsak,
-}) => (
+const SaksstotteIndex: FunctionComponent<OwnProps> = ({ valgtSakslisteId, åpneFagsak }) => (
   <SaksstottePaneler valgtSakslisteId={valgtSakslisteId} åpneFagsak={åpneFagsak} />
 );
 

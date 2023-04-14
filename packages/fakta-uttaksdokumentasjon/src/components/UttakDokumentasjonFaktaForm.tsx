@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, useCallback, useEffect, useMemo, useState,
-} from 'react';
+import React, { FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Form } from '@navikt/ft-form-hooks';
@@ -20,8 +18,8 @@ interface OwnProps {
   submitCallback: (aksjonspunkter: VurderDokumentasjonAp) => Promise<void>;
   readOnly: boolean;
   submittable: boolean;
-  formData: { dokBehov: DokumentasjonVurderingBehov[], begrunnelse: string },
-  setFormData: (data: { dokBehov: DokumentasjonVurderingBehov[], begrunnelse: string }) => void,
+  formData: { dokBehov: DokumentasjonVurderingBehov[]; begrunnelse: string };
+  setFormData: (data: { dokBehov: DokumentasjonVurderingBehov[]; begrunnelse: string }) => void;
 }
 
 const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
@@ -36,16 +34,21 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
 
   const [erBekreftKnappTrykket, settBekreftKnappTrykket] = useState(false);
-  const [dokBehov, oppdaterDokBehov] = useState<DokumentasjonVurderingBehov[]>(formData?.dokBehov || dokumentasjonVurderingBehov);
+  const [dokBehov, oppdaterDokBehov] = useState<DokumentasjonVurderingBehov[]>(
+    formData?.dokBehov || dokumentasjonVurderingBehov,
+  );
 
-  const bekreft = useCallback((begrunnelse: string) => {
-    settBekreftKnappTrykket(true);
-    submitCallback({
-      kode: AksjonspunktCode.VURDER_UTTAK_DOKUMENTASJON,
-      vurderingBehov: dokBehov,
-      begrunnelse,
-    });
-  }, [dokBehov]);
+  const bekreft = useCallback(
+    (begrunnelse: string) => {
+      settBekreftKnappTrykket(true);
+      submitCallback({
+        kode: AksjonspunktCode.VURDER_UTTAK_DOKUMENTASJON,
+        vurderingBehov: dokBehov,
+        begrunnelse,
+      });
+    },
+    [dokBehov],
+  );
 
   const lagretBegrunnelse = aksjonspunkter.length > 0 ? aksjonspunkter[0].begrunnelse : undefined;
   const formMethods = useForm<{ begrunnelse: string }>({
@@ -54,22 +57,29 @@ const UttakDokumentasjonFaktaForm: FunctionComponent<OwnProps> = ({
     },
   });
 
-  useEffect(() => () => {
-    setFormData({ dokBehov, begrunnelse: formMethods.getValues('begrunnelse') });
-  }, []);
+  useEffect(
+    () => () => {
+      setFormData({ dokBehov, begrunnelse: formMethods.getValues('begrunnelse') });
+    },
+    [],
+  );
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
-  const isSubmittable = useMemo(() => submittable && dokBehov?.every((a) => a.vurdering) && !!begrunnelse,
-    [dokBehov, begrunnelse]);
+  const isSubmittable = useMemo(
+    () => submittable && dokBehov?.every(a => a.vurdering) && !!begrunnelse,
+    [dokBehov, begrunnelse],
+  );
 
   const [isDirty, setDirty] = useState<boolean>(false);
 
   return (
     <>
-      <Heading size="small"><FormattedMessage id="UttakDokumentasjonFaktaForm.Overskrift" /></Heading>
+      <Heading size="small">
+        <FormattedMessage id="UttakDokumentasjonFaktaForm.Overskrift" />
+      </Heading>
       <VerticalSpacer thirtyTwoPx />
-      {aksjonspunkter.some((a) => a.status === aksjonspunktStatus.OPPRETTET) && (
+      {aksjonspunkter.some(a => a.status === aksjonspunktStatus.OPPRETTET) && (
         <>
           <AksjonspunktHelpTextHTML>
             {[intl.formatMessage({ id: 'UttakDokumentasjonFaktaForm.AksjonspunktHjelpetekst' })]}

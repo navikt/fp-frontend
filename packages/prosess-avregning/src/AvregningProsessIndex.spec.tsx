@@ -92,8 +92,10 @@ describe('<AvregningProsessIndex>', () => {
     expect(utils.queryByLabelText('Begrunn hvordan feilutbetalingen skal behandles videre')).not.toBeInTheDocument();
     expect(screen.queryByText('Opprett tilbakekreving, send varsel')).not.toBeInTheDocument();
 
-    expect(screen.getByText(
-      'Det foreligger en åpen tilbakekrevingsbehandling, endringer i vedtaket vil automatisk oppdatere eksisterende feilutbetalte perioder og beløp.',
-    )).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Det foreligger en åpen tilbakekrevingsbehandling, endringer i vedtaket vil automatisk oppdatere eksisterende feilutbetalte perioder og beløp.',
+      ),
+    ).toBeInTheDocument();
   });
 });

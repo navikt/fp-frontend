@@ -10,9 +10,11 @@ import NyeOgFerdigstilteOppgaver from '../../../../typer/nyeOgFerdigstilteOppgav
 import useLosKodeverk from '../../../../data/useLosKodeverk';
 import NyeOgFerdigstilteOppgaverForIdagGraf from './NyeOgFerdigstilteOppgaverForIdagGraf';
 
-export const getNyeOgFerdigstilteForIDag = (nyeOgFerdigstilte: NyeOgFerdigstilteOppgaver[] = []): NyeOgFerdigstilteOppgaver[] => {
+export const getNyeOgFerdigstilteForIDag = (
+  nyeOgFerdigstilte: NyeOgFerdigstilteOppgaver[] = [],
+): NyeOgFerdigstilteOppgaver[] => {
   const iDag = dayjs();
-  return nyeOgFerdigstilte.filter((oppgave) => iDag.isSame(dayjs(oppgave.dato, ISO_DATE_FORMAT), 'day'));
+  return nyeOgFerdigstilte.filter(oppgave => iDag.isSame(dayjs(oppgave.dato, ISO_DATE_FORMAT), 'day'));
 };
 
 interface OwnProps {
@@ -23,13 +25,13 @@ interface OwnProps {
 /**
  * NyeOgFerdigstilteOppgaverForIdagPanel.
  */
-const NyeOgFerdigstilteOppgaverForIdagPanel: FunctionComponent<OwnProps> = ({
-  height,
-  nyeOgFerdigstilteOppgaver,
-}) => {
+const NyeOgFerdigstilteOppgaverForIdagPanel: FunctionComponent<OwnProps> = ({ height, nyeOgFerdigstilteOppgaver }) => {
   const behandlingTyper = useLosKodeverk(KodeverkType.BEHANDLING_TYPE);
 
-  const filtrerteNyeOgFerdigstilteOppgaver = useMemo(() => getNyeOgFerdigstilteForIDag(nyeOgFerdigstilteOppgaver), [nyeOgFerdigstilteOppgaver]);
+  const filtrerteNyeOgFerdigstilteOppgaver = useMemo(
+    () => getNyeOgFerdigstilteForIDag(nyeOgFerdigstilteOppgaver),
+    [nyeOgFerdigstilteOppgaver],
+  );
 
   return (
     <>

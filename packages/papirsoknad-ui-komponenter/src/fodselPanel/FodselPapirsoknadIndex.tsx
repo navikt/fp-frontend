@@ -12,15 +12,9 @@ interface OwnProps {
   erForeldrepenger?: boolean;
 }
 
-const FodselPapirsoknadIndex: FunctionComponent<OwnProps> = ({
-  readOnly,
-  erForeldrepenger,
-}) => (
+const FodselPapirsoknadIndex: FunctionComponent<OwnProps> = ({ readOnly, erForeldrepenger }) => (
   <RawIntlProvider value={intl}>
-    <TerminFodselDatoPanel
-      readOnly={readOnly}
-      erForeldrepenger={erForeldrepenger}
-    />
+    <TerminFodselDatoPanel readOnly={readOnly} erForeldrepenger={erForeldrepenger} />
   </RawIntlProvider>
 );
 

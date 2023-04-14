@@ -10,7 +10,7 @@ type PermisjonOgMangel = Readonly<{
   type: string;
   årsak?: AksjonspunktÅrsak;
   permisjonStatus?: string;
-}>
+}>;
 
 export type Inntektsmelding = Readonly<{
   inntektPrMnd: number;
@@ -26,7 +26,7 @@ export type Inntektsmelding = Readonly<{
   årsak?: AksjonspunktÅrsak;
   saksbehandlersVurdering?: string;
   begrunnelse?: string;
-}>
+}>;
 
 export type Arbeidsforhold = Readonly<{
   arbeidsgiverIdent: string;
@@ -39,25 +39,25 @@ export type Arbeidsforhold = Readonly<{
   permisjonOgMangel?: PermisjonOgMangel;
   saksbehandlersVurdering?: string;
   begrunnelse?: string;
-}>
+}>;
 
 export type Inntektspost = Readonly<{
   beløp: number;
   fom: string;
   tom: string;
   type: string;
-}>
+}>;
 
 export type Inntekt = Readonly<{
   arbeidsgiverIdent: string;
   inntekter: Inntektspost[];
-}>
+}>;
 
 type ArbeidOgInntektsmelding = Readonly<{
   inntektsmeldinger: Inntektsmelding[];
   arbeidsforhold: Arbeidsforhold[];
   inntekter: Inntekt[];
   skjæringstidspunkt: string;
-}>
+}>;
 
 export default ArbeidOgInntektsmelding;

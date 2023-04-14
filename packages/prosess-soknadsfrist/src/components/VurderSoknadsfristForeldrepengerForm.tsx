@@ -2,14 +2,17 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import moment from 'moment';
-import {
-  Label, BodyShort, Detail, Heading, Panel,
-} from '@navikt/ds-react';
+import { Label, BodyShort, Detail, Heading, Panel } from '@navikt/ds-react';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 import { Form, Datepicker, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
-  AksjonspunktHelpTextTemp, ArrowBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+  AksjonspunktHelpTextTemp,
+  ArrowBox,
+  FlexColumn,
+  FlexContainer,
+  FlexRow,
+  VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
@@ -20,13 +23,14 @@ import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import styles from './vurderSoknadsfristForeldrepengerForm.module.css';
 
-const isEdited = (hasAksjonspunkt: boolean, gyldigSenFremsetting?: boolean): boolean => hasAksjonspunkt && gyldigSenFremsetting !== undefined;
+const isEdited = (hasAksjonspunkt: boolean, gyldigSenFremsetting?: boolean): boolean =>
+  hasAksjonspunkt && gyldigSenFremsetting !== undefined;
 
 type FormValues = {
   gyldigSenFremsetting?: boolean;
   ansesMottatt?: string;
   begrunnelse?: string;
-}
+};
 
 const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
@@ -35,7 +39,8 @@ const buildInitialValues = (
 ): FormValues => {
   const upgMottattDato = søknadsfrist?.mottattDato;
   return {
-    gyldigSenFremsetting: aksjonspunkter[0].status === AksjonspunktStatus.OPPRETTET ? undefined : upgMottattDato !== mottattDato,
+    gyldigSenFremsetting:
+      aksjonspunkter[0].status === AksjonspunktStatus.OPPRETTET ? undefined : upgMottattDato !== mottattDato,
     ansesMottatt: upgMottattDato,
     ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
   };
@@ -50,7 +55,7 @@ const transformValues = (values: FormValues): VurderSoknadsfristAp => ({
 
 interface OwnProps {
   mottattDato: string;
-  søknadsfrist?: Søknadsfrist
+  søknadsfrist?: Søknadsfrist;
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (data: VurderSoknadsfristAp) => Promise<void>;
   readOnly: boolean;
@@ -76,7 +81,10 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
   formData,
   setFormData,
 }) => {
-  const initialValues = useMemo(() => buildInitialValues(aksjonspunkter, mottattDato, søknadsfrist), [aksjonspunkter, mottattDato, søknadsfrist]);
+  const initialValues = useMemo(
+    () => buildInitialValues(aksjonspunkter, mottattDato, søknadsfrist),
+    [aksjonspunkter, mottattDato, søknadsfrist],
+  );
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });
@@ -93,28 +101,40 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
       onSubmit={(formValues: FormValues) => submitCallback(transformValues(formValues))}
       setDataOnUnmount={setFormData}
     >
-      <Heading size="small"><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Soknadsfrist" /></Heading>
+      <Heading size="small">
+        <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Soknadsfrist" />
+      </Heading>
       <VerticalSpacer twentyPx />
       <AksjonspunktHelpTextTemp isAksjonspunktOpen={isApOpen}>
-        {[<FormattedMessage
-          key="VurderSoknadsfristForeldrepengerForm"
-          id="VurderSoknadsfristForeldrepengerForm.AksjonspunktHelpText"
-          values={{
-            numberOfDays: søknadsfrist?.dagerOversittetFrist,
-            soknadsfristdato: soknadsfristdato ? moment(soknadsfristdato).format(DDMMYYYY_DATE_FORMAT) : '',
-          }}
-        />]}
+        {[
+          <FormattedMessage
+            key="VurderSoknadsfristForeldrepengerForm"
+            id="VurderSoknadsfristForeldrepengerForm.AksjonspunktHelpText"
+            values={{
+              numberOfDays: søknadsfrist?.dagerOversittetFrist,
+              soknadsfristdato: soknadsfristdato ? moment(soknadsfristdato).format(DDMMYYYY_DATE_FORMAT) : '',
+            }}
+          />,
+        ]}
       </AksjonspunktHelpTextTemp>
       <VerticalSpacer twentyPx />
       <FlexContainer>
         <FlexRow>
           <FlexColumn className={styles.colWidth}>
             <Panel className={styles.panel}>
-              <Label size="small"><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Vurder" /></Label>
+              <Label size="small">
+                <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Vurder" />
+              </Label>
               <ul className={styles.hyphen}>
-                <li><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Punkt1" /></li>
-                <li><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Punkt2" /></li>
-                <li><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Punkt3" /></li>
+                <li>
+                  <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Punkt1" />
+                </li>
+                <li>
+                  <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Punkt2" />
+                </li>
+                <li>
+                  <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Punkt3" />
+                </li>
               </ul>
             </Panel>
           </FlexColumn>
@@ -122,15 +142,22 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
             <FlexContainer>
               <FlexRow className={styles.marginBottom}>
                 <FlexColumn className={styles.colWidth}>
-                  <Detail size="small"><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.SoknadMottatt" /></Detail>
-                  {mottattDato
-                    && <BodyShort size="small">{moment(mottattDato).format(DDMMYYYY_DATE_FORMAT)}</BodyShort>}
+                  <Detail size="small">
+                    <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.SoknadMottatt" />
+                  </Detail>
+                  {mottattDato && (
+                    <BodyShort size="small">{moment(mottattDato).format(DDMMYYYY_DATE_FORMAT)}</BodyShort>
+                  )}
                 </FlexColumn>
                 {soknadsperiodeStart && soknadsperiodeSlutt && (
                   <FlexColumn className={styles.colWidth}>
-                    <Detail size="small"><FormattedMessage id="VurderSoknadsfristForeldrepengerForm.SoknadPeriode" /></Detail>
+                    <Detail size="small">
+                      <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.SoknadPeriode" />
+                    </Detail>
                     <BodyShort size="small">
-                      {`${moment(soknadsperiodeStart).format(DDMMYYYY_DATE_FORMAT)} - ${moment(soknadsperiodeSlutt).format(DDMMYYYY_DATE_FORMAT)}`}
+                      {`${moment(soknadsperiodeStart).format(DDMMYYYY_DATE_FORMAT)} - ${moment(
+                        soknadsperiodeSlutt,
+                      ).format(DDMMYYYY_DATE_FORMAT)}`}
                     </BodyShort>
                   </FlexColumn>
                 )}
@@ -149,13 +176,15 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
           isHorizontal
           isEdited={isEdited(aksjonspunkter.length > 0, gyldigSenFremsetting)}
           isTrueOrFalseSelection
-          radios={[{
-            value: 'true',
-            label: <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.GyldigGrunn" />,
-          }, {
-            value: 'false',
-            label: <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.IkkeGyldigGrunn" />,
-          },
+          radios={[
+            {
+              value: 'true',
+              label: <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.GyldigGrunn" />,
+            },
+            {
+              value: 'false',
+              label: <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.IkkeGyldigGrunn" />,
+            },
           ]}
         />
         {gyldigSenFremsetting && (

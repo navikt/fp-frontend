@@ -4,7 +4,7 @@ import { isHandledError } from './ErrorTypes';
 import TimeoutError from './TimeoutError';
 import { ErrorResponse } from '../ResponseTsType';
 
-type NotificationEmitter = (eventType: keyof typeof EventType, data?: any, isPollingRequest?: boolean) => void
+type NotificationEmitter = (eventType: keyof typeof EventType, data?: any, isPollingRequest?: boolean) => void;
 
 const isString = (value?: any): boolean => typeof value === 'string';
 
@@ -70,7 +70,11 @@ class RequestErrorEventHandler {
     }
 
     if (formattedError.isGatewayTimeoutOrNotFound) {
-      this.notify(EventType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND, { location: formattedError.location }, this.isPollingRequest);
+      this.notify(
+        EventType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND,
+        { location: formattedError.location },
+        this.isPollingRequest,
+      );
     } else if (formattedError.isUnauthorized) {
       this.notify(EventType.REQUEST_UNAUTHORIZED, { message: error.message }, this.isPollingRequest);
     } else if (formattedError.isForbidden) {
@@ -85,13 +89,12 @@ class RequestErrorEventHandler {
   };
 
   // eslint-disable-next-line class-methods-use-this
-  getFormattedData = (
-    data?: string | Record<string, any>,
-  ): string | Record<string, any> | undefined => (isString(data) ? { message: data } : data);
+  getFormattedData = (data?: string | Record<string, any>): string | Record<string, any> | undefined =>
+    isString(data) ? { message: data } : data;
 
   // eslint-disable-next-line class-methods-use-this
-  findErrorData = (response: {data?: any; status?: number; statusText?: string}): string | ErrorResponse => (response.data
-    ? response.data : response.statusText);
+  findErrorData = (response: { data?: any; status?: number; statusText?: string }): string | ErrorResponse =>
+    response.data ? response.data : response.statusText;
 
   formatError = (error: ErrorType): FormatedError => {
     const response = error && error.response ? error.response : undefined;

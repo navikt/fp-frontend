@@ -20,21 +20,12 @@ export default {
 const Template: Story<{
   submitCallback: (data: any) => Promise<void>;
   soknadData: SoknadData;
-}> = ({
-  submitCallback,
-  soknadData,
-}) => {
+}> = ({ submitCallback, soknadData }) => {
   const formMethods = useForm();
 
   return (
-    <Form
-      formMethods={formMethods}
-      onSubmit={submitCallback}
-    >
-      <RettigheterPapirsoknadIndex
-        readOnly={false}
-        soknadData={soknadData}
-      />
+    <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <RettigheterPapirsoknadIndex readOnly={false} soknadData={soknadData} />
       <VerticalSpacer fourtyPx />
       <Button size="small" variant="primary">
         Lagreknapp (Kun for test)

@@ -1,24 +1,17 @@
-import React, {
-  useCallback, FunctionComponent, useMemo,
-} from 'react';
+import React, { useCallback, FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import { Detail, Heading, Button } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { familieHendelseType, fagsakYtelseType as FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
 import { ariaCheck, required } from '@navikt/ft-form-validators';
-import {
-  BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk } from '@navikt/fp-types';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 
 import styles from './soknadTypePickerForm.module.css';
 
-export const SøknadTyper = [
-  familieHendelseType.ADOPSJON,
-  familieHendelseType.FODSEL,
-];
+export const SøknadTyper = [familieHendelseType.ADOPSJON, familieHendelseType.FODSEL];
 
 interface FormValues {
   fagsakYtelseType?: string;
@@ -37,16 +30,15 @@ interface OwnProps {
  *
  * Toppkomponent for registrering av papirsøknad der søknadstype, tema og søker/foreldretype blir valgt.
  */
-const SoknadTypePickerForm: FunctionComponent<OwnProps> = ({
-  setSoknadData,
-  fagsakYtelseType,
-  alleKodeverk,
-}) => {
-  const defaultValues = useMemo<FormValues>(() => ({
-    fagsakYtelseType,
-    familieHendelseType: undefined,
-    foreldreType: undefined,
-  }), [fagsakYtelseType]);
+const SoknadTypePickerForm: FunctionComponent<OwnProps> = ({ setSoknadData, fagsakYtelseType, alleKodeverk }) => {
+  const defaultValues = useMemo<FormValues>(
+    () => ({
+      fagsakYtelseType,
+      familieHendelseType: undefined,
+      foreldreType: undefined,
+    }),
+    [fagsakYtelseType],
+  );
 
   const formMethods = useForm<FormValues>({
     defaultValues,
@@ -54,9 +46,11 @@ const SoknadTypePickerForm: FunctionComponent<OwnProps> = ({
 
   const selectedFagsakYtelseType = formMethods.watch('fagsakYtelseType');
 
-  const onSubmit = useCallback((
-    values: Required<FormValues>,
-  ) => setSoknadData(new SoknadData(values.fagsakYtelseType, values.familieHendelseType, values.foreldreType)), [setSoknadData]);
+  const onSubmit = useCallback(
+    (values: Required<FormValues>) =>
+      setSoknadData(new SoknadData(values.fagsakYtelseType, values.familieHendelseType, values.foreldreType)),
+    [setSoknadData],
+  );
 
   const fagsakYtelseTyper = alleKodeverk[KodeverkType.FAGSAK_YTELSE];
   const familieHendelseTyper = alleKodeverk[KodeverkType.FAMILIE_HENDELSE_TYPE];
@@ -72,12 +66,14 @@ const SoknadTypePickerForm: FunctionComponent<OwnProps> = ({
         <FlexContainer>
           <FlexRow>
             <FlexColumn className={styles.colWidth}>
-              <Detail size="small"><FormattedMessage id="Registrering.Omsoknaden.soknadstype" /></Detail>
+              <Detail size="small">
+                <FormattedMessage id="Registrering.Omsoknaden.soknadstype" />
+              </Detail>
               <VerticalSpacer fourPx />
               <RadioGroupPanel
                 name="fagsakYtelseType"
                 validate={[required]}
-                radios={fagsakYtelseTyper.map((fyt) => ({
+                radios={fagsakYtelseTyper.map(fyt => ({
                   label: fyt.navn,
                   value: fyt.kode,
                   disabled: !!fagsakYtelseType,
@@ -85,16 +81,20 @@ const SoknadTypePickerForm: FunctionComponent<OwnProps> = ({
               />
             </FlexColumn>
             <FlexColumn className={styles.colWidth}>
-              <Detail size="small"><FormattedMessage id="Registrering.Omsoknaden.Tema" /></Detail>
+              <Detail size="small">
+                <FormattedMessage id="Registrering.Omsoknaden.Tema" />
+              </Detail>
               <VerticalSpacer fourPx />
               <RadioGroupPanel
                 name="familieHendelseType"
                 validate={selectedFagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER ? [] : [required]}
-                radios={familieHendelseTyper.filter(({ kode }) => SøknadTyper.includes(kode)).map((bmt) => ({
-                  label: bmt.navn,
-                  value: bmt.kode,
-                  disabled: selectedFagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER,
-                }))}
+                radios={familieHendelseTyper
+                  .filter(({ kode }) => SøknadTyper.includes(kode))
+                  .map(bmt => ({
+                    label: bmt.navn,
+                    value: bmt.kode,
+                    disabled: selectedFagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER,
+                  }))}
               />
             </FlexColumn>
             <FlexColumn className={styles.colWidth}>
@@ -105,7 +105,7 @@ const SoknadTypePickerForm: FunctionComponent<OwnProps> = ({
               <RadioGroupPanel
                 name="foreldreType"
                 validate={[required]}
-                radios={foreldreTyper.map((ft) => ({
+                radios={foreldreTyper.map(ft => ({
                   label: ft.navn,
                   value: ft.kode,
                 }))}

@@ -13,15 +13,9 @@ interface OwnProps {
   closeEvent: () => void;
 }
 
-const MessagesModalSakIndex: FunctionComponent<OwnProps> = ({
-  showModal,
-  closeEvent,
-}) => (
+const MessagesModalSakIndex: FunctionComponent<OwnProps> = ({ showModal, closeEvent }) => (
   <RawIntlProvider value={intl}>
-    <MessagesModal
-      showModal={showModal}
-      closeEvent={closeEvent}
-    />
+    <MessagesModal showModal={showModal} closeEvent={closeEvent} />
   </RawIntlProvider>
 );
 

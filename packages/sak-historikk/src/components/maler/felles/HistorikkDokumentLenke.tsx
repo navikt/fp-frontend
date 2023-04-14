@@ -13,13 +13,8 @@ interface OwnProps {
   saksnummer: string;
 }
 
-const HistorikkDokumentLenke: FunctionComponent<OwnProps> = ({
-  dokumentLenke,
-  saksnummer,
-}) => {
-  const {
-    tag, journalpostId, dokumentId, utgått,
-  } = dokumentLenke;
+const HistorikkDokumentLenke: FunctionComponent<OwnProps> = ({ dokumentLenke, saksnummer }) => {
+  const { tag, journalpostId, dokumentId, utgått } = dokumentLenke;
 
   if (utgått) {
     return (

@@ -12,7 +12,8 @@ import navAnsattHistorikkImg from '../../../images/nav_ansatt_historikk.svg';
 
 import styles from './snakkeboble.module.css';
 
-const formatDate = (date: string): string => (`${date.substring(8, 10)}.${date.substring(5, 7)}.${date.substring(0, 4)} - ${date.substring(11, 16)}`);
+const formatDate = (date: string): string =>
+  `${date.substring(8, 10)}.${date.substring(5, 7)}.${date.substring(0, 4)} - ${date.substring(11, 16)}`;
 
 const utledIkon = (aktoer: string, kjoenn?: string) => {
   if (aktoer === HistorikkAktor.SAKSBEHANDLER) {
@@ -33,10 +34,12 @@ const utledIkon = (aktoer: string, kjoenn?: string) => {
   return arbeidsgiverImg;
 };
 
-const utledPlassering = (
-  aktoer: string,
-): 'right' | 'left' => (aktoer === HistorikkAktor.SAKSBEHANDLER
-  || aktoer === HistorikkAktor.VEDTAKSLOSNINGEN || aktoer === HistorikkAktor.BESLUTTER ? 'right' : 'left');
+const utledPlassering = (aktoer: string): 'right' | 'left' =>
+  aktoer === HistorikkAktor.SAKSBEHANDLER ||
+  aktoer === HistorikkAktor.VEDTAKSLOSNINGEN ||
+  aktoer === HistorikkAktor.BESLUTTER
+    ? 'right'
+    : 'left';
 
 const BAKGRUNNSFARGER = {
   [HistorikkAktor.SAKSBEHANDLER]: 'var(--a-purple-100)',
@@ -55,14 +58,7 @@ interface OwnProps {
   children: React.ReactElement;
 }
 
-const Snakkeboble: FunctionComponent<OwnProps> = ({
-  dato,
-  aktoer,
-  kjoenn,
-  rolleNavn = '',
-  opprettetAv,
-  children,
-}) => (
+const Snakkeboble: FunctionComponent<OwnProps> = ({ dato, aktoer, kjoenn, rolleNavn = '', opprettetAv, children }) => (
   <div className={styles.margin} data-testid={`snakkeboble-${dato}`}>
     <Chat
       avatar={<Image className={styles.image} src={utledIkon(aktoer, kjoenn)} />}
@@ -72,9 +68,7 @@ const Snakkeboble: FunctionComponent<OwnProps> = ({
       backgroundColor={BAKGRUNNSFARGER[aktoer]}
       className={styles.width}
     >
-      <Chat.Bubble>
-        {children}
-      </Chat.Bubble>
+      <Chat.Bubble>{children}</Chat.Bubble>
     </Chat>
   </div>
 );

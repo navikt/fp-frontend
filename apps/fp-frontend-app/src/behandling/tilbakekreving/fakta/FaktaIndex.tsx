@@ -1,18 +1,9 @@
-import React, {
-  FunctionComponent, useEffect, useState, useMemo, useCallback,
-} from 'react';
+import React, { FunctionComponent, useEffect, useState, useMemo, useCallback } from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import {
-  FlexContainer,
-  FlexColumn,
-  FlexRow,
-} from '@navikt/ft-ui-komponenter';
-import {
-  Aksjonspunkt,
-  AlleKodeverkTilbakekreving,
-} from '@navikt/ft-types';
+import { FlexContainer, FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
+import { Aksjonspunkt, AlleKodeverkTilbakekreving } from '@navikt/ft-types';
 import { Behandling, AksessRettigheter, AlleKodeverk } from '@navikt/fp-types';
 import { FeilutbetalingAksjonspunktCode } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
@@ -31,10 +22,8 @@ import styles from './faktaIndex.module.css';
 const DEFAULT_PANEL_VALGT = 'default';
 const EMPTY_FORM_DATA = {};
 
-const hentAksjonspunkterFor = (
-  aksjonspunktKode: string,
-  aksjonspunkter?: Aksjonspunkt[],
-): Aksjonspunkt[] => (aksjonspunkter ? aksjonspunkter.filter((ap) => aksjonspunktKode === ap.definisjon) : []);
+const hentAksjonspunkterFor = (aksjonspunktKode: string, aksjonspunkter?: Aksjonspunkt[]): Aksjonspunkt[] =>
+  aksjonspunkter ? aksjonspunkter.filter(ap => aksjonspunktKode === ap.definisjon) : [];
 
 const leggTilFaktaPanel = (
   faktaPanelKode: string,
@@ -42,8 +31,9 @@ const leggTilFaktaPanel = (
   aksjonspunkter: Aksjonspunkt[],
   valgtFaktaSteg?: string,
 ): MenyData => {
-  const harApneAksjonspunkter = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status) && ap.kanLoses);
-  const erAktiv = valgtFaktaSteg === faktaPanelKode || (harApneAksjonspunkter && valgtFaktaSteg === DEFAULT_PANEL_VALGT);
+  const harApneAksjonspunkter = aksjonspunkter.some(ap => isAksjonspunktOpen(ap.status) && ap.kanLoses);
+  const erAktiv =
+    valgtFaktaSteg === faktaPanelKode || (harApneAksjonspunkter && valgtFaktaSteg === DEFAULT_PANEL_VALGT);
   return {
     id: faktaPanelKode,
     label,
@@ -52,33 +42,33 @@ const leggTilFaktaPanel = (
   };
 };
 
-const utledFaktaPaneler = (
-  intl: IntlShape,
-  behandling: Behandling,
-  valgtFaktaSteg?: string,
-): MenyData[] => {
+const utledFaktaPaneler = (intl: IntlShape, behandling: Behandling, valgtFaktaSteg?: string): MenyData[] => {
   const faktaPanelData = [] as MenyData[];
   if (requestTilbakekrevingApi.hasPath(TilbakekrevingBehandlingApiKeys.FEILUTBETALING_FAKTA.name)) {
-    faktaPanelData.push(leggTilFaktaPanel(
-      FaktaPanelCode.FEILUTBETALING,
-      intl.formatMessage({ id: 'TilbakekrevingFakta.FaktaFeilutbetaling' }),
-      hentAksjonspunkterFor(FeilutbetalingAksjonspunktCode.AVKLAR_FAKTA_FOR_FEILUTBETALING, behandling.aksjonspunkt),
-      valgtFaktaSteg));
+    faktaPanelData.push(
+      leggTilFaktaPanel(
+        FaktaPanelCode.FEILUTBETALING,
+        intl.formatMessage({ id: 'TilbakekrevingFakta.FaktaFeilutbetaling' }),
+        hentAksjonspunkterFor(FeilutbetalingAksjonspunktCode.AVKLAR_FAKTA_FOR_FEILUTBETALING, behandling.aksjonspunkt),
+        valgtFaktaSteg,
+      ),
+    );
   }
-  if (behandling.aksjonspunkt?.some((ap) => ap.definisjon === AksjonspunktCode.AVKLAR_VERGE)) {
-    faktaPanelData.push(leggTilFaktaPanel(
-      FaktaPanelCode.VERGE,
-      intl.formatMessage({ id: 'RegistrereVergeInfoPanel.Info' }),
-      hentAksjonspunkterFor(AksjonspunktCode.AVKLAR_VERGE, behandling.aksjonspunkt),
-      valgtFaktaSteg));
+  if (behandling.aksjonspunkt?.some(ap => ap.definisjon === AksjonspunktCode.AVKLAR_VERGE)) {
+    faktaPanelData.push(
+      leggTilFaktaPanel(
+        FaktaPanelCode.VERGE,
+        intl.formatMessage({ id: 'RegistrereVergeInfoPanel.Info' }),
+        hentAksjonspunkterFor(AksjonspunktCode.AVKLAR_VERGE, behandling.aksjonspunkt),
+        valgtFaktaSteg,
+      ),
+    );
   }
   return faktaPanelData;
 };
 
-const erFaktaPanelAktivt = (
-  faktaPanelerData: MenyData[],
-  faktaPanelKode: string,
-): boolean => (faktaPanelerData.some((d) => d.id === faktaPanelKode && d.erAktiv));
+const erFaktaPanelAktivt = (faktaPanelerData: MenyData[], faktaPanelKode: string): boolean =>
+  faktaPanelerData.some(d => d.id === faktaPanelKode && d.erAktiv);
 
 interface OwnProps {
   behandling: Behandling;
@@ -114,14 +104,23 @@ const FaktaIndex: FunctionComponent<OwnProps> = ({
     }
   }, [behandling.versjon]);
 
-  const faktaPanelerData = useMemo(() => utledFaktaPaneler(intl, behandling, valgtFaktaSteg), [behandling, valgtFaktaSteg]);
+  const faktaPanelerData = useMemo(
+    () => utledFaktaPaneler(intl, behandling, valgtFaktaSteg),
+    [behandling, valgtFaktaSteg],
+  );
 
-  const oppdaterFaktaPanel = useCallback((index: number) => {
-    oppdaterFaktaPanelIUrl(faktaPanelerData[index].id);
-  }, [faktaPanelerData, oppdaterFaktaPanelIUrl]);
+  const oppdaterFaktaPanel = useCallback(
+    (index: number) => {
+      oppdaterFaktaPanelIUrl(faktaPanelerData[index].id);
+    },
+    [faktaPanelerData, oppdaterFaktaPanelIUrl],
+  );
 
-  const erReadOnlyFn = useCallback(erReadOnlyCurried(behandling, rettigheter, hasFetchError),
-    [behandling, rettigheter, hasFetchError]);
+  const erReadOnlyFn = useCallback(erReadOnlyCurried(behandling, rettigheter, hasFetchError), [
+    behandling,
+    rettigheter,
+    hasFetchError,
+  ]);
 
   const bekreftAksjonspunkter = useCallback(bekreftAksjonspunkterMedSideeffekter(), [behandling.versjon]);
 
@@ -130,10 +129,7 @@ const FaktaIndex: FunctionComponent<OwnProps> = ({
       <FlexContainer fullHeight>
         <FlexRow>
           <FlexColumn className={styles.sideMenu}>
-            <FaktaMeny
-              menyData={faktaPanelerData}
-              oppdaterFaktaPanelIUrl={oppdaterFaktaPanel}
-            />
+            <FaktaMeny menyData={faktaPanelerData} oppdaterFaktaPanelIUrl={oppdaterFaktaPanel} />
           </FlexColumn>
           <FlexColumn className={styles.content}>
             {erFaktaPanelAktivt(faktaPanelerData, FaktaPanelCode.FEILUTBETALING) && (

@@ -1,12 +1,11 @@
 import React from 'react';
-import {
-  render, screen, waitFor, fireEvent,
-} from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './OmsorgOgForeldreansvarFaktaIndex.stories';
 
-const { ÅpentAksjonspunktForOmsorgovertakelse, ÅpentAksjonspunktForAvklareVilkårForForeldreansvar } = composeStories(stories);
+const { ÅpentAksjonspunktForOmsorgovertakelse, ÅpentAksjonspunktForAvklareVilkårForForeldreansvar } =
+  composeStories(stories);
 
 describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
   it('skal løse aksjonspunkt for omsorgsovertakelse', async () => {
@@ -41,10 +40,12 @@ describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
     expect(screen.getAllByText('Velg vilkår som skal anvendes')[1]).toBeInTheDocument();
     await userEvent.selectOptions(screen.getByRole('combobox', { hidden: true }), 'FP_VK_5');
 
-    expect(await screen.findByText(
-      'Dersom mor dør i forbindelse med fødselen eller omsorgsovertakelsen, har faren rett til '
-      + 'engangsstønad. Det er et vilkår at han har omsorgen for barnet og at stønaden ikke allerede er utbetalt til moren',
-    )).toBeInTheDocument();
+    expect(
+      await screen.findByText(
+        'Dersom mor dør i forbindelse med fødselen eller omsorgsovertakelsen, har faren rett til ' +
+          'engangsstønad. Det er et vilkår at han har omsorgen for barnet og at stønaden ikke allerede er utbetalt til moren',
+      ),
+    ).toBeInTheDocument();
 
     const begrunnValgInput = utils.getByLabelText('Begrunn valg av vilkår');
     await userEvent.type(begrunnValgInput, 'Dette er en begrunnelse');

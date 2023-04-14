@@ -1,6 +1,12 @@
-import { FordelBeregningsgrunnlagAP, VurderRefusjonBeregningsgrunnlagAP } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
 import {
-  BeregningFaktaAP, BeregningOverstyringAP, AvklarBeregningsaktiviteterAP, OverstyrBeregningsaktiviteterAP,
+  FordelBeregningsgrunnlagAP,
+  VurderRefusjonBeregningsgrunnlagAP,
+} from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
+import {
+  BeregningFaktaAP,
+  BeregningOverstyringAP,
+  AvklarBeregningsaktiviteterAP,
+  OverstyrBeregningsaktiviteterAP,
 } from '@navikt/ft-fakta-beregning';
 import AvklarVergeAp from './fakta/AvklarVergeAp';
 import MerkOpptjeningUtlandAp from './fakta/MerkOpptjeningUtlandAp';
@@ -28,7 +34,8 @@ import VurderDokumentasjonAp from './fakta/VurderDokumentasjonAp';
 import VurderArbeidsforholdInntektsmeldingAp from './fakta/VurderArbeidsforholdInntektsmeldingAp';
 import VurderArbeidsforholdPermisjonAp from './fakta/VurderArbeidsforholdPermisjonAp';
 
-export type FaktaAksjonspunkt = AvklarVergeAp
+export type FaktaAksjonspunkt =
+  | AvklarVergeAp
   | MerkOpptjeningUtlandAp
   | AvklarAktivitetsPerioderAp
   | BekreftEktefelleAksjonspunktAp

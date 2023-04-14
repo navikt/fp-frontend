@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, useState, useEffect, useCallback, useMemo,
-} from 'react';
+import React, { FunctionComponent, useState, useEffect, useCallback, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { Button, BodyShort, Detail } from '@navikt/ds-react';
@@ -9,9 +7,7 @@ import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
 import { ISO_DATE_FORMAT, addDaysToDate } from '@navikt/ft-utils';
 import { AksjonspunktHelpTextTemp, DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { TimeLineNavigation } from '@navikt/ft-tidslinje';
-import {
-  ArbeidsgiverOpplysningerPerId, AlleKodeverk, OpptjeningAktivitet, Opptjening,
-} from '@navikt/fp-types';
+import { ArbeidsgiverOpplysningerPerId, AlleKodeverk, OpptjeningAktivitet, Opptjening } from '@navikt/fp-types';
 import { AvklarAktivitetsPerioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import OpptjeningTidslinje from './tidslinje/OpptjeningTidslinje';
@@ -21,11 +17,15 @@ import styles from './opptjeningFaktaPanel.module.css';
 
 const getAksjonspunktHelpTexts = (opptjeningAktiviteter: OpptjeningAktivitet[]): string[] => {
   const texts = [];
-  if (opptjeningAktiviteter.some((a) => a.stillingsandel === 0)) {
-    texts.push(<FormattedMessage id="OpptjeningFaktaForm.AktivitetenErTimeAvslonnet" key="AktivitetenErTimeAvslonnet" />);
+  if (opptjeningAktiviteter.some(a => a.stillingsandel === 0)) {
+    texts.push(
+      <FormattedMessage id="OpptjeningFaktaForm.AktivitetenErTimeAvslonnet" key="AktivitetenErTimeAvslonnet" />,
+    );
   }
 
-  const aktivitetTypes = opptjeningAktiviteter.filter((a) => (a.erGodkjent === undefined || a.erGodkjent === null || a.begrunnelse) && a.stillingsandel !== 0);
+  const aktivitetTypes = opptjeningAktiviteter.filter(
+    a => (a.erGodkjent === undefined || a.erGodkjent === null || a.begrunnelse) && a.stillingsandel !== 0,
+  );
   if (aktivitetTypes.length === 1) {
     texts.push(<FormattedMessage id="OpptjeningFaktaForm.EttArbeidKanGodkjennes" key="EttArbeidKanGodkjennes" />);
   } else if (aktivitetTypes.length > 1) {
@@ -36,17 +36,18 @@ const getAksjonspunktHelpTexts = (opptjeningAktiviteter: OpptjeningAktivitet[]):
 
 const findSkjaringstidspunkt = (dato: string): string => moment(dato).add(1, 'days').format(ISO_DATE_FORMAT);
 
-const sorterEtterOpptjeningFom = (opptjeningPerioder: OpptjeningAktivitet[]): OpptjeningAktivitet[] => [...opptjeningPerioder]
-  .sort((o1, o2) => moment(o1.opptjeningFom).diff(moment(o2.opptjeningFom)));
+const sorterEtterOpptjeningFom = (opptjeningPerioder: OpptjeningAktivitet[]): OpptjeningAktivitet[] =>
+  [...opptjeningPerioder].sort((o1, o2) => moment(o1.opptjeningFom).diff(moment(o2.opptjeningFom)));
 
 const addDay = (dato: string): string => addDaysToDate(dato, 1);
 
 const filtrerOpptjeningAktiviteter = (
   opptjeningAktiviteter: OpptjeningAktivitet[],
   fastsattOpptjening?: Opptjening['fastsattOpptjening'],
-) => opptjeningAktiviteter
-  .filter((oa) => moment(fastsattOpptjening.opptjeningFom).isBefore(addDay(oa.opptjeningTom)))
-  .filter((oa) => moment(oa.opptjeningFom).isBefore(addDay(fastsattOpptjening.opptjeningTom)));
+) =>
+  opptjeningAktiviteter
+    .filter(oa => moment(fastsattOpptjening.opptjeningFom).isBefore(addDay(oa.opptjeningTom)))
+    .filter(oa => moment(oa.opptjeningFom).isBefore(addDay(fastsattOpptjening.opptjeningTom)));
 
 interface OwnProps {
   hasAksjonspunkt: boolean;
@@ -55,7 +56,7 @@ interface OwnProps {
   opptjeningTomDato: string;
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   opptjeningAktiviteter?: OpptjeningAktivitet[];
   fastsattOpptjening?: Opptjening['fastsattOpptjening'];
@@ -94,23 +95,29 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
     return [];
   }, [opptjeningAktiviteter, fastsattOpptjening]);
 
-  const formValuesAktiviteter = filtrerteOgSorterteOpptjeningsaktiviteter.map((a) => ({
+  const formValuesAktiviteter = filtrerteOgSorterteOpptjeningsaktiviteter.map(a => ({
     erGodkjent: a.erGodkjent,
     begrunnelse: a.begrunnelse,
   }));
 
-  const førsteAktivitetSomIkkeErGodkjent = filtrerteOgSorterteOpptjeningsaktiviteter.findIndex((a) => !a.erGodkjent);
+  const førsteAktivitetSomIkkeErGodkjent = filtrerteOgSorterteOpptjeningsaktiviteter.findIndex(a => !a.erGodkjent);
 
-  const [formVerdierForAlleAktiviteter, oppdaterFormVerdier] = useState<FormValues[]>(formData || formValuesAktiviteter);
+  const [formVerdierForAlleAktiviteter, oppdaterFormVerdier] = useState<FormValues[]>(
+    formData || formValuesAktiviteter,
+  );
   const defaultAktivitetIndex = filtrerteOgSorterteOpptjeningsaktiviteter.length > 0 ? 0 : undefined;
   const [valgtAktivitetIndex, setValgtAktivitetIndex] = useState<number>(
-    førsteAktivitetSomIkkeErGodkjent !== -1 ? førsteAktivitetSomIkkeErGodkjent : defaultAktivitetIndex);
+    førsteAktivitetSomIkkeErGodkjent !== -1 ? førsteAktivitetSomIkkeErGodkjent : defaultAktivitetIndex,
+  );
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  useEffect(() => () => {
-    setFormData(formVerdierForAlleAktiviteter);
-  }, [formVerdierForAlleAktiviteter]);
+  useEffect(
+    () => () => {
+      setFormData(formVerdierForAlleAktiviteter);
+    },
+    [formVerdierForAlleAktiviteter],
+  );
 
   const bekreft = useCallback(() => {
     setIsSubmitting(true);
@@ -125,7 +132,7 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
         erGodkjent: formVerdierForAlleAktiviteter[index].erGodkjent,
         begrunnelse: formVerdierForAlleAktiviteter[index].begrunnelse,
       }))
-      .filter((b) => b.begrunnelse);
+      .filter(b => b.begrunnelse);
 
     submitCallback({
       opptjeningsaktiviteter: opptjeningsaktiviteterSomSkallagres,
@@ -144,10 +151,15 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
     }
   }, [valgtAktivitetIndex]);
 
-  const oppdaterAktivitet = useCallback((formValues: FormValues) => {
-    oppdaterFormVerdier((oldValues: FormValues[]) => Object.assign([], oldValues, { [valgtAktivitetIndex]: formValues }));
-    setValgtAktivitetIndex(undefined);
-  }, [oppdaterFormVerdier, valgtAktivitetIndex]);
+  const oppdaterAktivitet = useCallback(
+    (formValues: FormValues) => {
+      oppdaterFormVerdier((oldValues: FormValues[]) =>
+        Object.assign([], oldValues, { [valgtAktivitetIndex]: formValues }),
+      );
+      setValgtAktivitetIndex(undefined);
+    },
+    [oppdaterFormVerdier, valgtAktivitetIndex],
+  );
 
   const avbrytAktivitet = useCallback(() => setValgtAktivitetIndex(undefined), []);
   const opneInfo = useCallback(() => {
@@ -158,7 +170,9 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
     }
   }, [valgtAktivitetIndex, setValgtAktivitetIndex, førsteAktivitetSomIkkeErGodkjent]);
 
-  const harIkkeBehandletAlle = formVerdierForAlleAktiviteter.some((a) => a.erGodkjent === null || a.erGodkjent === undefined);
+  const harIkkeBehandletAlle = formVerdierForAlleAktiviteter.some(
+    a => a.erGodkjent === null || a.erGodkjent === undefined,
+  );
 
   return (
     <div className={styles.container}>
@@ -170,8 +184,12 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer twentyPx />
         </>
       )}
-      <Detail size="small"><FormattedMessage id="OpptjeningFaktaForm.Skjaringstidspunkt" /></Detail>
-      <BodyShort size="small"><DateLabel dateString={findSkjaringstidspunkt(opptjeningTomDato)} /></BodyShort>
+      <Detail size="small">
+        <FormattedMessage id="OpptjeningFaktaForm.Skjaringstidspunkt" />
+      </Detail>
+      <BodyShort size="small">
+        <DateLabel dateString={findSkjaringstidspunkt(opptjeningTomDato)} />
+      </BodyShort>
       <VerticalSpacer twentyPx />
       <OpptjeningTidslinje
         opptjeningPerioder={filtrerteOgSorterteOpptjeningsaktiviteter}
@@ -186,9 +204,7 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
         <>
           <VerticalSpacer eightPx />
           <div className={styles.pushRight}>
-            <TimeLineNavigation
-              openPeriodInfo={opneInfo}
-            />
+            <TimeLineNavigation openPeriodInfo={opneInfo} />
           </div>
         </>
       )}

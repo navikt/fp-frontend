@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { Fagsak, FamilieHendelseSamling } from '@navikt/ft-types';
 import { FagsakYtelseType } from '@navikt/ft-kodeverk';
@@ -20,14 +18,11 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktCode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
 ];
 
-const ENDEPUNKTER_PANEL_DATA = [
-  BehandlingFellesApiKeys.FAMILIEHENDELSE,
-  BehandlingFellesApiKeys.SOKNAD,
-];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.FAMILIEHENDELSE, BehandlingFellesApiKeys.SOKNAD];
 type EndepunktPanelData = {
   familiehendelse: FamilieHendelseSamling;
   soknad: Soknad;
-}
+};
 
 interface OwnProps {
   fagsak: Fagsak;
@@ -36,18 +31,17 @@ interface OwnProps {
 /**
  * AdopsjonsvilkaretFaktaInitPanel
  */
-const AdopsjonsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
-  fagsak,
-  ...props
-}) => (
+const AdopsjonsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({ fagsak, ...props }) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.ADOPSJONSVILKARET}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'AdopsjonInfoPanel.Adopsjon' })}
-    skalPanelVisesIMeny={() => !!props.behandling.vilkår && props.behandling.vilkår.some((v) => adopsjonsvilkarene.some((av) => av === v.vilkarType))}
-    renderPanel={(data) => (
+    skalPanelVisesIMeny={() =>
+      !!props.behandling.vilkår && props.behandling.vilkår.some(v => adopsjonsvilkarene.some(av => av === v.vilkarType))
+    }
+    renderPanel={data => (
       <AdopsjonFaktaIndex
         isForeldrepengerFagsak={fagsak.fagsakYtelseType === FagsakYtelseType.FORELDREPENGER}
         {...data}

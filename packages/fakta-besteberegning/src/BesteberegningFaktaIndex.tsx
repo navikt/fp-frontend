@@ -3,7 +3,10 @@ import { RawIntlProvider } from 'react-intl';
 
 import {
   Aksjonspunkt,
-  ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, AlleKodeverk, StandardFaktaPanelProps,
+  ArbeidsgiverOpplysningerPerId,
+  Beregningsgrunnlag,
+  AlleKodeverk,
+  StandardFaktaPanelProps,
 } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 

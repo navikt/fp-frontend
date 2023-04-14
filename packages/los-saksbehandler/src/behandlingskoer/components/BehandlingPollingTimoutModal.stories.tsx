@@ -17,6 +17,4 @@ export default {
   decorators: [withIntl],
 };
 
-export const Default = () => (
-  <BehandlingPollingTimoutModal />
-);
+export const Default = () => <BehandlingPollingTimoutModal />;

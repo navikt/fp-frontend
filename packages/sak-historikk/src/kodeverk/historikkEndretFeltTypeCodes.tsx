@@ -1,6 +1,5 @@
 // kodeverk_i_frontend - Fiks når ein refaktorerar historikk
 const historikkEndretFeltTypeCodes = {
-
   ADOPSJONSVILKARET: {
     kode: 'ADOPSJONSVILKARET',
     feltId: 'HistorikkEndretFelt.Adopsjonsvilkaret',
@@ -497,6 +496,6 @@ const historikkEndretFeltTypeCodes = {
     kode: 'KONTROLL_AV_BESTEBEREGNING',
     feltId: 'HistorikkEndretFelt.Kontroll.Besteberegning',
   },
-} as Record<string, { kode: string, feltId?: string, verdiId?: string }>;
+} as Record<string, { kode: string; feltId?: string; verdiId?: string }>;
 
 export default historikkEndretFeltTypeCodes;

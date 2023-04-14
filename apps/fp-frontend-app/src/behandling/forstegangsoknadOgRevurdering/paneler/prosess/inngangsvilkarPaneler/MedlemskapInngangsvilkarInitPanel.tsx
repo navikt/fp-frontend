@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
@@ -18,7 +16,7 @@ const VILKAR_KODER = [VilkarType.MEDLEMSKAPSVILKARET];
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.MEDLEMSKAP];
 type EndepunktPanelData = {
   medlemskap: Medlemskap;
-}
+};
 
 interface OwnProps {
   behandlingVersjon: number;
@@ -50,7 +48,9 @@ const MedlemskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvi
           medlemskap={data.medlemskap}
           toggleOverstyring={toggleOverstyring}
           erOverstyrt={erOverstyrt}
-          overrideReadOnly={data.isReadOnly || (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))}
+          overrideReadOnly={
+            data.isReadOnly || (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))
+          }
           kanOverstyreAccess={rettigheter.kanOverstyreAccess}
         />
         <VerticalSpacer thirtyTwoPx />

@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { Button, Label, Modal as NavModal } from '@navikt/ds-react';
-import {
-  FlexColumn, FlexContainer, FlexRow, FloatRight, Image, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, FloatRight, Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import advarselImageUrl from '../../images/advarsel.svg';
 
@@ -35,7 +33,9 @@ const BehandlingPollingTimoutModal: FunctionComponent = () => {
               />
             </FlexColumn>
             <FlexColumn className={styles.text}>
-              <Label size="small"><FormattedMessage id="BehandlingPollingTimoutModal.TimeoutMelding" /></Label>
+              <Label size="small">
+                <FormattedMessage id="BehandlingPollingTimoutModal.TimeoutMelding" />
+              </Label>
             </FlexColumn>
           </FlexRow>
         </FlexContainer>

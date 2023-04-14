@@ -13,6 +13,7 @@
     "tsc": "tsc --pretty",
     "eslint": "eslint \"decorators/**/*.ts*\" --color",
     "eslint:fix": "eslint --fix \"decorators/**/*.ts*\" --color",
+    "prettier": "prettier --write decorators",
     "dev": "vite build --mode development --watch",
     "build": "vite build",
     "clean": "rm -rf ./dist ./node_modules"

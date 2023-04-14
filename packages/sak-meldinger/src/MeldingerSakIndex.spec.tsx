@@ -7,7 +7,8 @@ import * as stories from './MeldingerSakIndex.stories';
 
 const { Default, ForSvangerskapspenger, BrukerManglerAdresse } = composeStories(stories);
 
-const brukerenHarIkkeAdresseText = 'Brukeren har ikke en registrert adresse. Utsendelse av brev kan feile om brukeren ikke er digital.';
+const brukerenHarIkkeAdresseText =
+  'Brukeren har ikke en registrert adresse. Utsendelse av brev kan feile om brukeren ikke er digital.';
 
 describe('<MeldingerSakIndex>', () => {
   it('skal bruke default mal og sende brev', async () => {

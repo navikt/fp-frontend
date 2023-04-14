@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -19,20 +17,21 @@ const AKSJONSPUNKT_KODER = [
 ];
 
 const AKSJONSPUNKT_TEKST_PER_KODE = {
-  [AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD]: 'ErForeldreansvarVilkaarOppfyltForm.2LeddParagrafEngangsStonad',
-  [AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD]: 'ErForeldreansvarVilkaarOppfyltForm.4LeddParagraf',
+  [AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD]:
+    'ErForeldreansvarVilkaarOppfyltForm.2LeddParagrafEngangsStonad',
+  [AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD]:
+    'ErForeldreansvarVilkaarOppfyltForm.4LeddParagraf',
   [AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'ErForeldreansvarVilkaarOppfyltForm.Vurder',
-  [AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN]: 'ErForeldreansvarVilkaarOppfyltForm.Vurder',
+  [AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN]:
+    'ErForeldreansvarVilkaarOppfyltForm.Vurder',
 } as Record<string, string>;
 
-const hentAksjonspunktTekst = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[] = []): string => (aksjonspunkter.length > 0
-  ? intl.formatMessage({ id: AKSJONSPUNKT_TEKST_PER_KODE[aksjonspunkter[0].definisjon] })
-  : '');
+const hentAksjonspunktTekst = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[] = []): string =>
+  aksjonspunkter.length > 0
+    ? intl.formatMessage({ id: AKSJONSPUNKT_TEKST_PER_KODE[aksjonspunkter[0].definisjon] })
+    : '';
 
-const VILKAR_KODER = [
-  VilkarType.FORELDREANSVARSVILKARET_2_LEDD,
-  VilkarType.FORELDREANSVARSVILKARET_4_LEDD,
-];
+const VILKAR_KODER = [VilkarType.FORELDREANSVARSVILKARET_2_LEDD, VilkarType.FORELDREANSVARSVILKARET_4_LEDD];
 
 interface OwnProps {
   behandlingVersjon: number;
@@ -50,12 +49,12 @@ const ForeldreansvarInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngan
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="FORELDREANSVARSVILKARET"
-      hentInngangsvilkarPanelTekst={(data) => hentAksjonspunktTekst(intl, data?.aksjonspunkter)}
-      renderPanel={(data) => (
+      hentInngangsvilkarPanelTekst={data => hentAksjonspunktTekst(intl, data?.aksjonspunkter)}
+      renderPanel={data => (
         <>
           <ForeldreansvarVilkarProsessIndex
             isEngangsstonad
-            isForeldreansvar2Ledd={data.vilkar.some((v) => v.vilkarType === VilkarType.FORELDREANSVARSVILKARET_2_LEDD)}
+            isForeldreansvar2Ledd={data.vilkar.some(v => v.vilkarType === VilkarType.FORELDREANSVARSVILKARET_2_LEDD)}
             // @ts-ignore Eg trur denne feilar grunna feil i typescript-pakka. Sjekk på eit seinare tidspunkt om denne er retta
             {...data}
           />

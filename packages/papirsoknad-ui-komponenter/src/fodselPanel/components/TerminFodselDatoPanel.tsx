@@ -4,12 +4,8 @@ import { UseFormGetValues } from 'react-hook-form';
 import moment from 'moment';
 import { Alert, Label, Heading } from '@navikt/ds-react';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import {
-  Datepicker, InputField, RadioGroupPanel, formHooks,
-} from '@navikt/ft-form-hooks';
-import {
-  ArrowBox, BorderBox, VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
-} from '@navikt/ft-ui-komponenter';
+import { Datepicker, InputField, RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
+import { ArrowBox, BorderBox, VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import {
   dateBeforeOrEqual,
   dateBeforeOrEqualToToday,
@@ -30,7 +26,7 @@ export type FormValues = {
   foedselsDato?: string;
   antallBarn?: number;
   erBarnetFodt?: boolean;
-}
+};
 
 const getToday = (): moment.Moment => moment().startOf('day');
 const getEarliestTerminDato = (): moment.Moment => getToday().subtract(3, 'weeks');
@@ -44,11 +40,8 @@ const getLatestTerminbekreftelseDato = (termindato: string): moment.Moment => {
   return today;
 };
 
-const validateTermin = (
-  getValues: UseFormGetValues<FormValues>,
-) => (
-  terminbekreftelseDato: string,
-) => dateBeforeOrEqual(getLatestTerminbekreftelseDato(getValues('termindato')))(terminbekreftelseDato);
+const validateTermin = (getValues: UseFormGetValues<FormValues>) => (terminbekreftelseDato: string) =>
+  dateBeforeOrEqual(getLatestTerminbekreftelseDato(getValues('termindato')))(terminbekreftelseDato);
 
 interface OwnProps {
   readOnly: boolean;
@@ -60,14 +53,14 @@ interface OwnProps {
  *
  * Form som brukes for registrere termin i papir soknad.
  */
-const TerminFodselDatoPanel: FunctionComponent<OwnProps> = ({
-  readOnly,
-  erForeldrepenger = false,
-}) => {
+const TerminFodselDatoPanel: FunctionComponent<OwnProps> = ({ readOnly, erForeldrepenger = false }) => {
   const intl = useIntl();
 
   const {
-    watch, getValues, trigger, formState: { isSubmitted },
+    watch,
+    getValues,
+    trigger,
+    formState: { isSubmitted },
   } = formHooks.useFormContext<FormValues>();
 
   const erBarnetFodt = watch('erBarnetFodt');
@@ -83,13 +76,16 @@ const TerminFodselDatoPanel: FunctionComponent<OwnProps> = ({
         isReadOnly={readOnly}
         isHorizontal
         isTrueOrFalseSelection
-        radios={[{
-          label: <FormattedMessage id="Registrering.Fodsel.ErFodt" />,
-          value: 'true',
-        }, {
-          label: <FormattedMessage id="Registrering.Fodsel.ErIkkeFodt" />,
-          value: 'false',
-        }]}
+        radios={[
+          {
+            label: <FormattedMessage id="Registrering.Fodsel.ErFodt" />,
+            value: 'true',
+          },
+          {
+            label: <FormattedMessage id="Registrering.Fodsel.ErIkkeFodt" />,
+            value: 'false',
+          },
+        ]}
       />
       {erBarnetFodt === false && (
         <>
@@ -154,33 +150,33 @@ const TerminFodselDatoPanel: FunctionComponent<OwnProps> = ({
                 </FlexColumn>
               </FlexRow>
               {erForeldrepenger && (
-              <>
-                <VerticalSpacer sixteenPx />
-                <Alert size="small" variant="info">
-                  <Label size="small">
-                    <FormattedMessage id="Registrering.RettTilPrematuruker" />
-                  </Label>
-                </Alert>
-                <VerticalSpacer sixteenPx />
-                <FlexRow>
-                  <FlexColumn>
-                    <Datepicker
-                      name="termindato"
-                      label={intl.formatMessage({ id: 'Registrering.Termindato' })}
-                      isReadOnly={readOnly}
-                      validate={[hasValidDate]}
-                    />
-                  </FlexColumn>
-                  <FlexColumn>
-                    <Datepicker
-                      name="terminbekreftelseDato"
-                      label={intl.formatMessage({ id: 'Registrering.UtstedtDato' })}
-                      isReadOnly={readOnly}
-                      validate={[hasValidDate]}
-                    />
-                  </FlexColumn>
-                </FlexRow>
-              </>
+                <>
+                  <VerticalSpacer sixteenPx />
+                  <Alert size="small" variant="info">
+                    <Label size="small">
+                      <FormattedMessage id="Registrering.RettTilPrematuruker" />
+                    </Label>
+                  </Alert>
+                  <VerticalSpacer sixteenPx />
+                  <FlexRow>
+                    <FlexColumn>
+                      <Datepicker
+                        name="termindato"
+                        label={intl.formatMessage({ id: 'Registrering.Termindato' })}
+                        isReadOnly={readOnly}
+                        validate={[hasValidDate]}
+                      />
+                    </FlexColumn>
+                    <FlexColumn>
+                      <Datepicker
+                        name="terminbekreftelseDato"
+                        label={intl.formatMessage({ id: 'Registrering.UtstedtDato' })}
+                        isReadOnly={readOnly}
+                        validate={[hasValidDate]}
+                      />
+                    </FlexColumn>
+                  </FlexRow>
+                </>
               )}
             </FlexContainer>
           </ArrowBox>

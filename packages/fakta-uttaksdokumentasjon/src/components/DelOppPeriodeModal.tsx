@@ -2,14 +2,10 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import { useForm } from 'react-hook-form';
-import {
-  Button, BodyShort, Modal, Heading, Label,
-} from '@navikt/ds-react';
+import { Button, BodyShort, Modal, Heading, Label } from '@navikt/ds-react';
 import { Datepicker, Form } from '@navikt/ft-form-hooks';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import {
-  FlexColumn, FlexContainer, FlexRow, Image, PeriodLabel, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, Image, PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 
 import { DokumentasjonVurderingBehov } from '@navikt/fp-types';
@@ -17,11 +13,7 @@ import advarselImageUrl from '../images/advarsel.svg';
 
 import styles from './delOppPeriodeModal.module.css';
 
-const validerInnenforIntervall = (
-  fom: string,
-  tom: string,
-  intl: IntlShape,
-) => (dato: string) => {
+const validerInnenforIntervall = (fom: string, tom: string, intl: IntlShape) => (dato: string) => {
   if (!dayjs(dato).isBefore(fom) && dayjs(dato).isBefore(tom)) {
     return null;
   }
@@ -93,7 +85,7 @@ const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({
           <FormattedMessage id="DelOppPeriodeModal.Splitt" />
         </BodyShort>
         <VerticalSpacer sixteenPx />
-        <Form formMethods={formMethods} onSubmit={(values) => submit(values.dato)}>
+        <Form formMethods={formMethods} onSubmit={values => submit(values.dato)}>
           <Datepicker
             name="dato"
             label={<FormattedMessage id="DelOppPeriodeModal.Dato" />}
@@ -108,20 +100,12 @@ const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({
           <FlexContainer>
             <FlexRow>
               <FlexColumn>
-                <Button
-                  size="small"
-                  variant="primary"
-                >
+                <Button size="small" variant="primary">
                   <FormattedMessage id="DelOppPeriodeModal.Oppdater" />
                 </Button>
               </FlexColumn>
               <FlexColumn>
-                <Button
-                  size="small"
-                  variant="secondary"
-                  onClick={cancel}
-                  type="button"
-                >
+                <Button size="small" variant="secondary" onClick={cancel} type="button">
                   <FormattedMessage id="DelOppPeriodeModal.Avbryt" />
                 </Button>
               </FlexColumn>

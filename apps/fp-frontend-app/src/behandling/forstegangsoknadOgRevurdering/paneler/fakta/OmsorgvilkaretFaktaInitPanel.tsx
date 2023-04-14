@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { FamilieHendelseSamling } from '@navikt/ft-types';
 
@@ -15,12 +13,16 @@ import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.OMSORGSOVERTAKELSE];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.SOKNAD, BehandlingFellesApiKeys.FAMILIEHENDELSE, BehandlingFellesApiKeys.INNTEKT_ARBEID_YTELSE];
+const ENDEPUNKTER_PANEL_DATA = [
+  BehandlingFellesApiKeys.SOKNAD,
+  BehandlingFellesApiKeys.FAMILIEHENDELSE,
+  BehandlingFellesApiKeys.INNTEKT_ARBEID_YTELSE,
+];
 type EndepunktPanelData = {
   soknad: Soknad;
   familiehendelse: FamilieHendelseSamling;
   inntektArbeidYtelse: InntektArbeidYtelse;
-}
+};
 
 interface OwnProps {
   personoversikt: Personoversikt;
@@ -39,8 +41,8 @@ const OmsorgvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.OMSORGSVILKARET}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'OmsorgOgForeldreansvarInfoPanel.Omsorg' })}
-    skalPanelVisesIMeny={() => !!props.behandling.aksjonspunkt.some((ap) => ap.definisjon === AKSJONSPUNKT_KODER[0])}
-    renderPanel={(data) => <OmsorgOgForeldreansvarFaktaIndex personoversikt={personoversikt} {...data} />}
+    skalPanelVisesIMeny={() => !!props.behandling.aksjonspunkt.some(ap => ap.definisjon === AKSJONSPUNKT_KODER[0])}
+    renderPanel={data => <OmsorgOgForeldreansvarFaktaIndex personoversikt={personoversikt} {...data} />}
   />
 );
 

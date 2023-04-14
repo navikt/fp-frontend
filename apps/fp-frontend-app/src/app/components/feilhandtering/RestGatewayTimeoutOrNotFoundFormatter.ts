@@ -10,7 +10,7 @@ export type ErrorData = {
   type: string;
   message: string;
   location: string;
-}
+};
 
 class RestGatewayTimeoutOrNotFoundFormatter implements Formatter<ErrorData> {
   type = ErrorEventType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND;
@@ -18,10 +18,11 @@ class RestGatewayTimeoutOrNotFoundFormatter implements Formatter<ErrorData> {
   isOfType = (type: string) => type === this.type;
 
   // eslint-disable-next-line class-methods-use-this
-  format = (errorData: ErrorData) => ErrorMessage.withMessageCode(TIMEOUT_MESSAGE_CODE, {
-    contextPath: errorData.location ? findContextPath(errorData.location) : '',
-    location: errorData.location,
-  });
+  format = (errorData: ErrorData) =>
+    ErrorMessage.withMessageCode(TIMEOUT_MESSAGE_CODE, {
+      contextPath: errorData.location ? findContextPath(errorData.location) : '',
+      location: errorData.location,
+    });
 }
 
 export default RestGatewayTimeoutOrNotFoundFormatter;

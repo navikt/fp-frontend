@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
@@ -17,11 +15,9 @@ const AKSJONSPUNKT_KODER = [AksjonspunktCode.AUTO_VENT_ANKE_OVERSENDT_TIL_TRYGDE
 const ENDEPUNKTER_PANEL_DATA = [AnkeBehandlingApiKeys.ANKE_VURDERING];
 type EndepunktPanelData = {
   ankeVurdering: AnkeVurdering;
-}
+};
 
-const AnkeTrygderettsbehandlingProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps> = ({
-  ...props
-}) => {
+const AnkeTrygderettsbehandlingProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps> = ({ ...props }) => {
   const intl = useIntl();
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>
@@ -32,11 +28,7 @@ const AnkeTrygderettsbehandlingProsessStegInitPanel: FunctionComponent<ProsessPa
       prosessPanelKode={ProsessStegCode.ANKE_MERKNADER}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.AnkeMerknader' })}
       skalPanelVisesIMeny={() => true}
-      renderPanel={(data) => (
-        <AnkeTrygderettsbehandlingProsessIndex
-          {...data}
-        />
-      )}
+      renderPanel={data => <AnkeTrygderettsbehandlingProsessIndex {...data} />}
     />
   );
 };

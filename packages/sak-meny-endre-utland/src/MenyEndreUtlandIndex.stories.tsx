@@ -12,15 +12,8 @@ export default {
 const Template: Story<{
   endreFagsakMarkering: () => void;
   lukkModal: () => void;
-}> = ({
-  endreFagsakMarkering,
-  lukkModal,
-}) => (
-  <MenyEndreUtlandIndex
-    saksnummer="123"
-    endreFagsakMarkering={endreFagsakMarkering}
-    lukkModal={lukkModal}
-  />
+}> = ({ endreFagsakMarkering, lukkModal }) => (
+  <MenyEndreUtlandIndex saksnummer="123" endreFagsakMarkering={endreFagsakMarkering} lukkModal={lukkModal} />
 );
 
 export const Default = Template.bind({});

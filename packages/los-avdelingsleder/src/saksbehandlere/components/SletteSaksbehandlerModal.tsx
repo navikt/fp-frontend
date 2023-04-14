@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { Button, BodyShort, Modal as NavModal } from '@navikt/ds-react';
-import {
-  FlexColumn, FlexContainer, FlexRow, Image,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, Image } from '@navikt/ft-ui-komponenter';
 
 import advarselImageUrl from '../../images/advarsel.svg';
 import Saksbehandler from '../../typer/saksbehandlerAvdelingTsType';
@@ -48,7 +46,10 @@ const SletteSaksbehandlerModal: FunctionComponent<OwnProps> = ({
             </FlexColumn>
             <FlexColumn className={styles.text}>
               <BodyShort size="small">
-                <FormattedMessage id="SletteSaksbehandlerModal.SletteSaksbehandler" values={{ saksbehandlerNavn: valgtSaksbehandler.navn }} />
+                <FormattedMessage
+                  id="SletteSaksbehandlerModal.SletteSaksbehandler"
+                  values={{ saksbehandlerNavn: valgtSaksbehandler.navn }}
+                />
               </BodyShort>
             </FlexColumn>
             <FlexColumn>

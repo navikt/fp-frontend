@@ -6,11 +6,7 @@ import { getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
 
 import styles from './fagsakList.module.css';
 
-const headerTextCodes = [
-  'FagsakList.Saksnummer',
-  'FagsakList.Sakstype',
-  'FagsakList.Status',
-];
+const headerTextCodes = ['FagsakList.Saksnummer', 'FagsakList.Sakstype', 'FagsakList.Status'];
 
 interface OwnProps {
   fagsaker: FagsakEnkel[];
@@ -23,16 +19,12 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Formaterer fagsak-søkeresultatet for visning i tabell. Sortering av fagsakene blir håndtert her.
  */
-const FagsakList: FunctionComponent<OwnProps> = ({
-  fagsaker,
-  selectFagsakCallback,
-  alleKodeverk,
-}) => {
+const FagsakList: FunctionComponent<OwnProps> = ({ fagsaker, selectFagsakCallback, alleKodeverk }) => {
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
   return (
     <Table headerTextCodes={headerTextCodes} classNameTable={styles.table}>
-      {fagsaker.map((fagsak) => (
+      {fagsaker.map(fagsak => (
         <TableRow<string>
           key={fagsak.saksnummer}
           id={fagsak.saksnummer}

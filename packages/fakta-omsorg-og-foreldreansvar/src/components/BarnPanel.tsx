@@ -9,7 +9,7 @@ import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Soknad } from '@navikt/fp-types';
 
 interface OwnProps {
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   soknad: Soknad;
 }
 
@@ -30,9 +30,11 @@ const BarnPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
       title={intl.formatMessage({ id: 'BarnPanel.BarnDetSøkesOm' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.OMSORGSOVERTAKELSE]}
     >
-      {Object.keys(adopsjonFodelsedatoer).map((key) => (
+      {Object.keys(adopsjonFodelsedatoer).map(key => (
         <React.Fragment key={`${key}`}>
-          <Label size="small"><FormattedMessage id="BarnPanel.ChildNumberBornData" values={{ childNumber: key }} /></Label>
+          <Label size="small">
+            <FormattedMessage id="BarnPanel.ChildNumberBornData" values={{ childNumber: key }} />
+          </Label>
           <BodyShort size="small">{moment(adopsjonFodelsedatoer[key]).format(DDMMYYYY_DATE_FORMAT)}</BodyShort>
           <VerticalSpacer eightPx />
         </React.Fragment>

@@ -4,9 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Label, BodyShort } from '@navikt/ds-react';
 
 import { DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr } from '@navikt/ft-utils';
-import {
-  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import styles from './avregningSummary.module.css';
 
@@ -31,7 +29,9 @@ const AvregningSummary: FunctionComponent<OwnProps> = ({
   ingenPerioderMedAvvik,
 }) => (
   <>
-    <BodyShort size="small" className={styles.summaryTitle}><FormattedMessage id="Avregning.bruker" /></BodyShort>
+    <BodyShort size="small" className={styles.summaryTitle}>
+      <FormattedMessage id="Avregning.bruker" />
+    </BodyShort>
     <VerticalSpacer eightPx />
     <div className={styles.infoSummary}>
       {ingenPerioderMedAvvik && (
@@ -42,41 +42,40 @@ const AvregningSummary: FunctionComponent<OwnProps> = ({
       {!ingenPerioderMedAvvik && (
         <>
           <Label size="small">
-            { `${dayjs(fom).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(tom).format(DDMMYYYY_DATE_FORMAT)}`}
+            {`${dayjs(fom).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(tom).format(DDMMYYYY_DATE_FORMAT)}`}
           </Label>
           <VerticalSpacer sixteenPx />
           <FlexContainer>
             <FlexRow>
               <FlexColumn className={styles.resultName}>
                 <BodyShort size="small">
-                  <FormattedMessage id="Avregning.etterbetaling" />
-                  :
+                  <FormattedMessage id="Avregning.etterbetaling" />:
                 </BodyShort>
               </FlexColumn>
               <FlexColumn>
-                <BodyShort size="small">
-                  { formatCurrencyNoKr(etterbetaling) }
-                </BodyShort>
+                <BodyShort size="small">{formatCurrencyNoKr(etterbetaling)}</BodyShort>
               </FlexColumn>
             </FlexRow>
             <FlexRow>
               <FlexColumn className={styles.resultName}>
                 <BodyShort size="small">
-                  <FormattedMessage id="Avregning.tilbakekreving" />
-                  :
+                  <FormattedMessage id="Avregning.tilbakekreving" />:
                 </BodyShort>
               </FlexColumn>
               <FlexColumn>
                 <BodyShort size="small">
-                  <span className={feilutbetaling ? styles.redNumber : styles.positivNumber}>{ formatCurrencyNoKr(feilutbetaling) }</span>
+                  <span className={feilutbetaling ? styles.redNumber : styles.positivNumber}>
+                    {formatCurrencyNoKr(feilutbetaling)}
+                  </span>
                 </BodyShort>
               </FlexColumn>
               {inntrekk !== null && (
                 <FlexColumn>
                   <BodyShort size="small">
-                    <FormattedMessage id="Avregning.inntrekk" />
-                    :
-                    <span className={inntrekk ? styles.redNumber : styles.positivNumber}>{ formatCurrencyNoKr(inntrekk) }</span>
+                    <FormattedMessage id="Avregning.inntrekk" />:
+                    <span className={inntrekk ? styles.redNumber : styles.positivNumber}>
+                      {formatCurrencyNoKr(inntrekk)}
+                    </span>
                   </BodyShort>
                 </FlexColumn>
               )}

@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  fireEvent, render, screen, waitFor,
-} from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 
@@ -16,9 +14,11 @@ describe('<InntektsgivendeArbeidPapirsoknadIndex>', () => {
     const utils = render(<Default submitCallback={lagre} />);
 
     expect(await screen.findByText('Inntektsgivende arbeid i Norge')).toBeInTheDocument();
-    expect(screen.getByText(
-      'Vedtaksløsningen foretar oppslag av norske arbeidsforhold fra Aa-registeret så dette skal ikke registreres her',
-    )).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Vedtaksløsningen foretar oppslag av norske arbeidsforhold fra Aa-registeret så dette skal ikke registreres her',
+      ),
+    ).toBeInTheDocument();
     expect(screen.getByText('Inntektsgivende arbeid i utlandet')).toBeInTheDocument();
 
     const arbeidsgiverInput = utils.getByLabelText('Arbeidsgiver');
@@ -38,12 +38,14 @@ describe('<InntektsgivendeArbeidPapirsoknadIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      arbeidsforhold: [{
-        periodeFom: '2022-06-15',
-        periodeTom: '2022-06-18',
-        arbeidsgiver: 'test-arbeidsgiver',
-        land: 'AND',
-      }],
+      arbeidsforhold: [
+        {
+          periodeFom: '2022-06-15',
+          periodeTom: '2022-06-18',
+          arbeidsgiver: 'test-arbeidsgiver',
+          land: 'AND',
+        },
+      ],
     });
   });
 });

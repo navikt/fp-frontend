@@ -3,9 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, Detail } from '@navikt/ds-react';
 import { CheckboxField, formHooks, TextAreaField } from '@navikt/ft-form-hooks';
 import { ariaCheck, hasValidText, maxLength } from '@navikt/ft-form-validators';
-import {
-  BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import LukkPapirsoknadModal from './LukkPapirsoknadModal';
 
@@ -17,7 +15,7 @@ type FormValues = {
   kommentarEndring: string;
   registrerVerge: boolean;
   ufullstendigSoeknad: boolean;
-}
+};
 
 interface OwnProps {
   onSubmitUfullstendigsoknad: () => void;
@@ -25,11 +23,7 @@ interface OwnProps {
   submitting: boolean;
 }
 
-const LagreSoknadPanel: FunctionComponent<OwnProps> = ({
-  submitting,
-  onSubmitUfullstendigsoknad,
-  readOnly = true,
-}) => {
+const LagreSoknadPanel: FunctionComponent<OwnProps> = ({ submitting, onSubmitUfullstendigsoknad, readOnly = true }) => {
   const intl = useIntl();
 
   const [showLukkSoknadModal, setShowLukkSoknadModal] = useState(false);
@@ -46,9 +40,7 @@ const LagreSoknadPanel: FunctionComponent<OwnProps> = ({
       <FlexContainer>
         <FlexRow>
           <FlexColumn className={styles.fullWidth}>
-            <Detail size="small">
-              {intl.formatMessage({ id: 'Registrering.SaveApplication.Title' })}
-            </Detail>
+            <Detail size="small">{intl.formatMessage({ id: 'Registrering.SaveApplication.Title' })}</Detail>
             <VerticalSpacer sixteenPx />
             <FlexRow>
               <FlexColumn className={styles.halfWidth}>

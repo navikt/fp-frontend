@@ -2,17 +2,13 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 
-import {
-  Table, TableRow, TableColumn,
-} from '@navikt/ft-ui-komponenter';
+import { Table, TableRow, TableColumn } from '@navikt/ft-ui-komponenter';
 
 interface OwnProps {
   headerColumnContent: React.ReactElement[];
 }
 
-const IngenArbeidsforholdRegistrert: FunctionComponent<OwnProps> = ({
-  headerColumnContent,
-}) => (
+const IngenArbeidsforholdRegistrert: FunctionComponent<OwnProps> = ({ headerColumnContent }) => (
   <Table headerColumnContent={headerColumnContent} noHover>
     <TableRow>
       <TableColumn>

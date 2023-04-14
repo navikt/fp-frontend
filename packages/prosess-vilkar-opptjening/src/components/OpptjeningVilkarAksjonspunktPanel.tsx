@@ -7,7 +7,9 @@ import { Form } from '@navikt/ft-form-hooks';
 import { vilkarUtfallType, AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
-  VilkarResultPicker, ProsessStegBegrunnelseTextFieldNew, ProsessPanelTemplate,
+  VilkarResultPicker,
+  ProsessStegBegrunnelseTextFieldNew,
+  ProsessPanelTemplate,
 } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, Behandling, FastsattOpptjening } from '@navikt/fp-types';
 import { AvklarOpptjeningsvilkaretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -19,7 +21,7 @@ export type FormValues = {
   avslagCode?: string;
   avslagDato?: string;
   begrunnelse?: string;
-}
+};
 
 export const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
@@ -72,17 +74,20 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const initialValues = useMemo(() => buildInitialValues(aksjonspunkter, status, behandlingsresultat), [behandlingsresultat, aksjonspunkter, status]);
+  const initialValues = useMemo(
+    () => buildInitialValues(aksjonspunkter, status, behandlingsresultat),
+    [behandlingsresultat, aksjonspunkter, status],
+  );
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });
 
-  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET);
+  const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET);
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
 
   const onSubmit = useCallback((values: FormValues) => submitCallback(transformValues(values)), [submitCallback]);
 
-  const validerAtEnKunKanVelgeOppfyltNårEnHarPerioder = useCallback((verdi) => {
+  const validerAtEnKunKanVelgeOppfyltNårEnHarPerioder = useCallback(verdi => {
     if (fastsattOpptjening.fastsattOpptjeningAktivitetList.length === 0 && verdi === true) {
       return intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.KanIkkeVelgeOppfylt' });
     }
@@ -90,11 +95,7 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
   }, []);
 
   return (
-    <Form
-      formMethods={formMethods}
-      onSubmit={onSubmit}
-      setDataOnUnmount={setFormData}
-    >
+    <Form formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setFormData}>
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.Opptjeningsvilkaret' })}
         isAksjonspunktOpen={isApOpen}
@@ -118,12 +119,17 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
           </>
         )}
       >
-        <Label size="small"><FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.SokerHarVurdertOpptjentRettTilForeldrepenger" /></Label>
+        <Label size="small">
+          <FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.SokerHarVurdertOpptjentRettTilForeldrepenger" />
+        </Label>
         <VilkarResultPicker
           readOnly={readOnly}
           customVilkarOppfyltText={<FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.ErOppfylt" />}
           customVilkarIkkeOppfyltText={
-            <FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt" values={{ b: (chunks: any) => <b>{chunks}</b> }} />
+            <FormattedMessage
+              id="OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt"
+              values={{ b: (chunks: any) => <b>{chunks}</b> }}
+            />
           }
           validatorsForRadioOptions={[validerAtEnKunKanVelgeOppfyltNårEnHarPerioder]}
         />

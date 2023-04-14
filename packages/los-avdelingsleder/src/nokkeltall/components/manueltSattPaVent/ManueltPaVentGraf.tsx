@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, useMemo,
-} from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import dayjs from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import { Panel } from '@navikt/ds-react';
@@ -16,18 +14,21 @@ interface Koordinat {
   y: number;
 }
 
-const lagKoordinater = (oppgaverManueltPaVent: OppgaverManueltPaVent[]): Koordinat[] => oppgaverManueltPaVent.map((o) => ({
-  x: dayjs(o.behandlingFrist).startOf('day').toDate().getTime(),
-  y: o.antall,
-}));
+const lagKoordinater = (oppgaverManueltPaVent: OppgaverManueltPaVent[]): Koordinat[] =>
+  oppgaverManueltPaVent.map(o => ({
+    x: dayjs(o.behandlingFrist).startOf('day').toDate().getTime(),
+    y: o.antall,
+  }));
 
 const lagDatastruktur = (koordinater: Koordinat[], isFireUkerValgt: boolean): (number | Date)[][] => {
   const nyeKoordinater = [];
   const periodeStart = dayjs().startOf('day').toDate();
-  const periodeSlutt = dayjs().add(isFireUkerValgt ? 4 : 8, 'w').toDate();
+  const periodeSlutt = dayjs()
+    .add(isFireUkerValgt ? 4 : 8, 'w')
+    .toDate();
 
   for (let dato = dayjs(periodeStart); dato.isSameOrBefore(periodeSlutt); dato = dato.add(1, 'days')) {
-    const funnetKoordinat = koordinater.find((k) => dayjs(k.x).isSame(dato));
+    const funnetKoordinat = koordinater.find(k => dayjs(k.x).isSame(dato));
     nyeKoordinater.push([dato.toDate(), funnetKoordinat ? funnetKoordinat.y : 0]);
   }
 
@@ -43,11 +44,7 @@ interface OwnProps {
 /**
  * ManueltPaVentGraf.
  */
-const ManueltPaVentGraf: FunctionComponent<OwnProps> = ({
-  height,
-  isFireUkerValgt,
-  oppgaverManueltPaVent,
-}) => {
+const ManueltPaVentGraf: FunctionComponent<OwnProps> = ({ height, isFireUkerValgt, oppgaverManueltPaVent }) => {
   const koordinater = useMemo(() => lagKoordinater(oppgaverManueltPaVent), [oppgaverManueltPaVent]);
   const data = useMemo(() => lagDatastruktur(koordinater, isFireUkerValgt), [koordinater, isFireUkerValgt]);
   return (
@@ -60,7 +57,7 @@ const ManueltPaVentGraf: FunctionComponent<OwnProps> = ({
             axisPointer: {
               snap: true,
               label: {
-                formatter: (params) => {
+                formatter: params => {
                   if (params.axisDimension === 'y') {
                     return parseInt(params.value as string, 10).toString();
                   }
@@ -86,11 +83,13 @@ const ManueltPaVentGraf: FunctionComponent<OwnProps> = ({
           yAxis: {
             type: 'value',
           },
-          series: [{
-            data,
-            type: 'line',
-            areaStyle: {},
-          }],
+          series: [
+            {
+              data,
+              type: 'line',
+              areaStyle: {},
+            },
+          ],
           color: ['#337c9b'],
         }}
       />

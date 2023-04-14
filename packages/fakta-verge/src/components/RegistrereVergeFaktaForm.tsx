@@ -1,15 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { WrappedComponentProps } from 'react-intl';
 
-import {
-  hasValidDate, hasValidFodselsnummer, hasValidName, required,
-} from '@navikt/ft-form-validators';
-import {
-  VerticalSpacer, FaktaGruppe, FlexColumn, FlexContainer, FlexRow,
-} from '@navikt/ft-ui-komponenter';
-import {
-  Datepicker, InputField, SelectField,
-} from '@navikt/ft-form-hooks';
+import { hasValidDate, hasValidFodselsnummer, hasValidName, required } from '@navikt/ft-form-validators';
+import { VerticalSpacer, FaktaGruppe, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import { Datepicker, InputField, SelectField } from '@navikt/ft-form-hooks';
 import { AksjonspunktCode, VergeType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn, Verge } from '@navikt/fp-types';
 
@@ -22,22 +16,22 @@ export type FormValues = {
   fnr?: string;
   organisasjonsnummer?: string;
   vergeType?: string;
-}
+};
 
 export type TransformedValues = {
-  vergeType: string,
-  navn: string,
-  fnr: string,
-  organisasjonsnummer: string,
-  gyldigFom: string,
-  gyldigTom: string,
-  kode: AksjonspunktCode.AVKLAR_VERGE,
-}
+  vergeType: string;
+  navn: string;
+  fnr: string;
+  organisasjonsnummer: string;
+  gyldigFom: string;
+  gyldigTom: string;
+  kode: AksjonspunktCode.AVKLAR_VERGE;
+};
 
 interface OwnProps {
   readOnly: boolean;
   vergetyper?: KodeverkMedNavn[];
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   valgtVergeType?: string;
 }
 
@@ -64,7 +58,11 @@ const RegistrereVergeFaktaForm: FunctionComponent<OwnProps & WrappedComponentPro
       className={styles.selectWidth}
       label={intl.formatMessage({ id: 'Verge.TypeVerge' })}
       validate={[required]}
-      selectValues={vergetyper.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
+      selectValues={vergetyper.map(vt => (
+        <option key={vt.kode} value={vt.kode}>
+          {vt.navn}
+        </option>
+      ))}
       readOnly={readOnly}
     />
     <FlexContainer>

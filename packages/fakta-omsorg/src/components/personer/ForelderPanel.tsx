@@ -1,6 +1,4 @@
-import {
-  FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Label, BodyShort } from '@navikt/ds-react';
@@ -21,12 +19,7 @@ interface OwnProps {
   kjønn: string;
 }
 
-const ForelderPanel: FunctionComponent<OwnProps> = ({
-  forelder,
-  erSøker,
-  alleKodeverk,
-  kjønn,
-}) => {
+const ForelderPanel: FunctionComponent<OwnProps> = ({ forelder, erSøker, alleKodeverk, kjønn }) => {
   const intl = useIntl();
 
   const erKvinne = kjønn === KjønnkodeEnum.KVINNE;
@@ -39,7 +32,10 @@ const ForelderPanel: FunctionComponent<OwnProps> = ({
             <FlexContainer>
               <FlexRow>
                 <FlexColumn>
-                  <Image alt={intl.formatMessage({ id: 'ForelderPanel.Soker' })} src={erKvinne ? kvinneIkonUrl : mannIkonUrl} />
+                  <Image
+                    alt={intl.formatMessage({ id: 'ForelderPanel.Soker' })}
+                    src={erKvinne ? kvinneIkonUrl : mannIkonUrl}
+                  />
                 </FlexColumn>
                 <FlexColumn>
                   <FlexContainer>
@@ -48,9 +44,7 @@ const ForelderPanel: FunctionComponent<OwnProps> = ({
                         <Label size="small">
                           <FormattedMessage id={erSøker ? 'ForelderPanel.Soker' : 'ForelderPanel.AnnenForelder'} />
                         </Label>
-                        <BodyShort size="small">
-                          {forelder.navn}
-                        </BodyShort>
+                        <BodyShort size="small">{forelder.navn}</BodyShort>
                         <BodyShort size="small">
                           {getKodeverknavnFraKode(alleKodeverk, KodeverkType.SIVILSTAND_TYPE, forelder.sivilstand)}
                         </BodyShort>

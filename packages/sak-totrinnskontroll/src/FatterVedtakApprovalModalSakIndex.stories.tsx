@@ -12,14 +12,10 @@ export default {
 };
 
 const Template: Story<{
-  closeEvent: () => void,
-  behandling: BehandlingAppKontekst,
-  allAksjonspunktApproved: boolean,
-}> = ({
-  closeEvent,
-  behandling,
-  allAksjonspunktApproved,
-}) => (
+  closeEvent: () => void;
+  behandling: BehandlingAppKontekst;
+  allAksjonspunktApproved: boolean;
+}> = ({ closeEvent, behandling, allAksjonspunktApproved }) => (
   <FatterVedtakTotrinnskontrollModalSakIndex
     behandling={behandling}
     closeEvent={closeEvent}

@@ -6,9 +6,7 @@ import { Location } from 'history';
 import { Image } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 
-import {
-  KodeverkMedNavn, BehandlingAppKontekst, TotrinnskontrollSkjermlenkeContext,
-} from '@navikt/fp-types';
+import { KodeverkMedNavn, BehandlingAppKontekst, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
 import checkImg from '../images/check.svg';
 import avslattImg from '../images/avslaatt.svg';
@@ -20,8 +18,8 @@ interface OwnProps {
   behandling: BehandlingAppKontekst;
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   erForeldrepengerFagsak: boolean;
-  erTilbakekreving: boolean,
-  arbeidsforholdHandlingTyper: KodeverkMedNavn[],
+  erTilbakekreving: boolean;
+  arbeidsforholdHandlingTyper: KodeverkMedNavn[];
   skjemalenkeTyper: KodeverkMedNavn[];
   vurderArsaker: KodeverkMedNavn[];
   faktaOmBeregningTilfeller: KodeverkMedNavn[];
@@ -48,9 +46,11 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
         }}
       />
     </div>
-    {totrinnskontrollSkjermlenkeContext.map((context) => {
+    {totrinnskontrollSkjermlenkeContext.map(context => {
       const aksjonspunkter = context.totrinnskontrollAksjonspunkter;
-      const skjermlenkeTypeKodeverk = skjemalenkeTyper.find((skjemalenkeType) => skjemalenkeType.kode === context.skjermlenkeType);
+      const skjermlenkeTypeKodeverk = skjemalenkeTyper.find(
+        skjemalenkeType => skjemalenkeType.kode === context.skjermlenkeType,
+      );
 
       if (aksjonspunkter.length > 0) {
         const lenke = lagLenke(context.skjermlenkeType);
@@ -61,7 +61,7 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
                 {skjermlenkeTypeKodeverk.navn}
               </NavLink>
             )}
-            {aksjonspunkter.map((aksjonspunkt) => {
+            {aksjonspunkter.map(aksjonspunkt => {
               const aksjonspunktTexts = getAksjonspunkttekst(
                 erForeldrepengerFagsak,
                 behandling.status,
@@ -75,20 +75,18 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
               return (
                 <div key={aksjonspunkt.aksjonspunktKode} className={styles.approvalItemContainer}>
                   {aksjonspunktTexts.map((formattedMessage: ReactNode, index: number) => (
-                    <div key={aksjonspunkt.aksjonspunktKode.concat('_'.concat(index.toString()))} className={styles.aksjonspunktTextContainer}>
-                      <BodyShort size="small">
-                        {formattedMessage}
-                      </BodyShort>
+                    <div
+                      key={aksjonspunkt.aksjonspunktKode.concat('_'.concat(index.toString()))}
+                      className={styles.aksjonspunktTextContainer}
+                    >
+                      <BodyShort size="small">{formattedMessage}</BodyShort>
                     </div>
                   ))}
                   <div className={styles.approvalItem}>
                     {aksjonspunkt.totrinnskontrollGodkjent ? (
                       <div>
                         <span>
-                          <Image
-                            src={checkImg}
-                            className={styles.image}
-                          />
+                          <Image src={checkImg} className={styles.image} />
                         </span>
                         <span>
                           <FormattedMessage id="ToTrinnsForm.Godkjent" />
@@ -96,23 +94,19 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
                       </div>
                     ) : (
                       <div className={styles.approvalItem}>
-                        {aksjonspunkt.vurderPaNyttArsaker && aksjonspunkt.vurderPaNyttArsaker.map((item) => (
-                          <div key={`${item}${aksjonspunkt.aksjonspunktKode}`}>
-                            <span>
-                              <Image
-                                src={avslattImg}
-                                className={styles.image}
-                              />
-                            </span>
-                            <span>{vurderArsaker.find((arsak) => item === arsak.kode)?.navn}</span>
-                          </div>
-                        ))}
+                        {aksjonspunkt.vurderPaNyttArsaker &&
+                          aksjonspunkt.vurderPaNyttArsaker.map(item => (
+                            <div key={`${item}${aksjonspunkt.aksjonspunktKode}`}>
+                              <span>
+                                <Image src={avslattImg} className={styles.image} />
+                              </span>
+                              <span>{vurderArsaker.find(arsak => item === arsak.kode)?.navn}</span>
+                            </div>
+                          ))}
                       </div>
                     )}
                   </div>
-                  <pre className={styles.approvalItem}>
-                    {decodeHtmlEntity(aksjonspunkt.besluttersBegrunnelse)}
-                  </pre>
+                  <pre className={styles.approvalItem}>{decodeHtmlEntity(aksjonspunkt.besluttersBegrunnelse)}</pre>
                 </div>
               );
             })}

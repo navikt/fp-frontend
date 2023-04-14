@@ -12,21 +12,19 @@ export default {
 };
 
 const Template: Story<{
-  templates: { kode: string, navn: string, tilgjengelig: boolean }[],
-  sprakKode: string,
-  fagsakYtelseType: string,
-  lagre: () => Promise<any>,
-  brukerManglerAdresse: boolean
-}> = ({
-  templates,
-  sprakKode,
-  fagsakYtelseType,
-  lagre,
-  brukerManglerAdresse,
-}) => (
-  <div style={{
-    width: '600px', margin: '50px', padding: '20px', backgroundColor: 'white',
-  }}
+  templates: { kode: string; navn: string; tilgjengelig: boolean }[];
+  sprakKode: string;
+  fagsakYtelseType: string;
+  lagre: () => Promise<any>;
+  brukerManglerAdresse: boolean;
+}> = ({ templates, sprakKode, fagsakYtelseType, lagre, brukerManglerAdresse }) => (
+  <div
+    style={{
+      width: '600px',
+      margin: '50px',
+      padding: '20px',
+      backgroundColor: 'white',
+    }}
   >
     <MeldingerSakIndex
       submitCallback={lagre}
@@ -36,15 +34,18 @@ const Template: Story<{
       isKontrollerRevurderingApOpen={false}
       kanVeilede={false}
       fagsakYtelseType={fagsakYtelseType}
-      revurderingVarslingArsak={[{
-        kode: ugunstAarsakTyper.BARN_IKKE_REGISTRERT_FOLKEREGISTER,
-        navn: 'Barn ikke registrert i folkeregisteret',
-        kodeverk: 'UGUNST',
-      }, {
-        kode: ugunstAarsakTyper.ANNET,
-        navn: 'Annet',
-        kodeverk: 'UGUNST',
-      }]}
+      revurderingVarslingArsak={[
+        {
+          kode: ugunstAarsakTyper.BARN_IKKE_REGISTRERT_FOLKEREGISTER,
+          navn: 'Barn ikke registrert i folkeregisteret',
+          kodeverk: 'UGUNST',
+        },
+        {
+          kode: ugunstAarsakTyper.ANNET,
+          navn: 'Annet',
+          kodeverk: 'UGUNST',
+        },
+      ]}
       setMeldingForData={() => undefined}
       brukerManglerAdresse={brukerManglerAdresse}
     />
@@ -56,15 +57,18 @@ const revurderingsdokumentasjon = 'Revurderingsdokumentasjon';
 
 export const Default = Template.bind({});
 Default.args = {
-  templates: [{
-    kode: dokumentMalType.INNHENTE_OPPLYSNINGER,
-    navn: innhentDokumentasjon,
-    tilgjengelig: true,
-  }, {
-    kode: dokumentMalType.VARSEL_OM_REVURDERING,
-    navn: revurderingsdokumentasjon,
-    tilgjengelig: true,
-  }],
+  templates: [
+    {
+      kode: dokumentMalType.INNHENTE_OPPLYSNINGER,
+      navn: innhentDokumentasjon,
+      tilgjengelig: true,
+    },
+    {
+      kode: dokumentMalType.VARSEL_OM_REVURDERING,
+      navn: revurderingsdokumentasjon,
+      tilgjengelig: true,
+    },
+  ],
   sprakKode: 'NO',
   fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
   lagre: action('button-click') as () => Promise<any>,
@@ -73,15 +77,18 @@ Default.args = {
 
 export const ForSvangerskapspenger = Template.bind({});
 ForSvangerskapspenger.args = {
-  templates: [{
-    kode: dokumentMalType.INNHENTE_OPPLYSNINGER,
-    navn: innhentDokumentasjon,
-    tilgjengelig: true,
-  }, {
-    kode: dokumentMalType.VARSEL_OM_REVURDERING,
-    navn: revurderingsdokumentasjon,
-    tilgjengelig: true,
-  }],
+  templates: [
+    {
+      kode: dokumentMalType.INNHENTE_OPPLYSNINGER,
+      navn: innhentDokumentasjon,
+      tilgjengelig: true,
+    },
+    {
+      kode: dokumentMalType.VARSEL_OM_REVURDERING,
+      navn: revurderingsdokumentasjon,
+      tilgjengelig: true,
+    },
+  ],
   sprakKode: 'NO',
   fagsakYtelseType: FagsakYtelseType.SVANGERSKAPSPENGER,
   lagre: action('button-click') as () => Promise<any>,
@@ -90,15 +97,18 @@ ForSvangerskapspenger.args = {
 
 export const BrukerManglerAdresse = Template.bind({});
 BrukerManglerAdresse.args = {
-  templates: [{
-    kode: dokumentMalType.INNHENTE_OPPLYSNINGER,
-    navn: innhentDokumentasjon,
-    tilgjengelig: true,
-  }, {
-    kode: dokumentMalType.VARSEL_OM_REVURDERING,
-    navn: revurderingsdokumentasjon,
-    tilgjengelig: true,
-  }],
+  templates: [
+    {
+      kode: dokumentMalType.INNHENTE_OPPLYSNINGER,
+      navn: innhentDokumentasjon,
+      tilgjengelig: true,
+    },
+    {
+      kode: dokumentMalType.VARSEL_OM_REVURDERING,
+      navn: revurderingsdokumentasjon,
+      tilgjengelig: true,
+    },
+  ],
   sprakKode: 'NO',
   fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
   lagre: action('button-click') as () => Promise<any>,

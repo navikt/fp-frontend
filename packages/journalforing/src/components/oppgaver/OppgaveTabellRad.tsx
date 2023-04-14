@@ -23,33 +23,31 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
       shadeOnHover
       className={oppgave.journalpostHarMangler ? undefined : styles.tabellRad}
     >
-      <Table.DataCell><DateLabel dateString={oppgave.opprettetDato} /></Table.DataCell>
-      <Table.DataCell><FormattedMessage id={finnYtelseTekst(oppgave.ytelseType)} /></Table.DataCell>
+      <Table.DataCell>
+        <DateLabel dateString={oppgave.opprettetDato} />
+      </Table.DataCell>
+      <Table.DataCell>
+        <FormattedMessage id={finnYtelseTekst(oppgave.ytelseType)} />
+      </Table.DataCell>
       <Table.DataCell>{oppgave.beskrivelse}</Table.DataCell>
       <Table.DataCell>{oppgave.fødselsnummer}</Table.DataCell>
-      <Table.DataCell><DateLabel dateString={oppgave.frist} /></Table.DataCell>
+      <Table.DataCell>
+        <DateLabel dateString={oppgave.frist} />
+      </Table.DataCell>
       <Table.DataCell>{oppgave.prioritet}</Table.DataCell>
       <Table.DataCell>{oppgave.enhetId}</Table.DataCell>
-      {!oppgave.journalpostHarMangler
-        && (
-          <Table.DataCell>
-            <Button
-              size="small"
-              variant="tertiary"
-              disabled={false}
-              onClick={setOppgave}
-              type="button"
-            >
-              <NextFilled className={styles.nesteIkon} />
-            </Button>
-          </Table.DataCell>
-        )}
-      {oppgave.journalpostHarMangler
-        && (
-          <Table.DataCell>
-            <FormattedMessage id="Oppgave.Gosys" />
-          </Table.DataCell>
-        )}
+      {!oppgave.journalpostHarMangler && (
+        <Table.DataCell>
+          <Button size="small" variant="tertiary" disabled={false} onClick={setOppgave} type="button">
+            <NextFilled className={styles.nesteIkon} />
+          </Button>
+        </Table.DataCell>
+      )}
+      {oppgave.journalpostHarMangler && (
+        <Table.DataCell>
+          <FormattedMessage id="Oppgave.Gosys" />
+        </Table.DataCell>
+      )}
     </Table.Row>
   );
 };

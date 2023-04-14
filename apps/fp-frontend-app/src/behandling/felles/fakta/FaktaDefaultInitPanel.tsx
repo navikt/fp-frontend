@@ -1,6 +1,4 @@
-import React, {
-  ReactElement, useMemo,
-} from 'react';
+import React, { ReactElement, useMemo } from 'react';
 
 import { RestApiHooks, RestApiState } from '@navikt/fp-rest-api-hooks';
 import { StandardFaktaPanelProps } from '@navikt/fp-types';
@@ -21,9 +19,9 @@ export type OwnProps<PANEL_DATA> = {
   renderPanel: (data: PANEL_DATA & StandardFaktaPanelProps) => ReactElement;
   faktaPanelKode: FaktaPanelCode;
   faktaPanelMenyTekst: string;
-}
+};
 
-const FaktaDefaultInitPanel = <PANEL_DATA = void, >({
+const FaktaDefaultInitPanel = <PANEL_DATA = void,>({
   valgtFaktaSteg,
   behandling,
   registrerFaktaPanel,
@@ -50,15 +48,21 @@ const FaktaDefaultInitPanel = <PANEL_DATA = void, >({
     standardPanelProps.harApneAksjonspunkter,
   );
 
-  const formatertePanelEndepunkter = panelEndepunkter.map((e) => ({ key: e }));
-  const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi<PANEL_DATA, any>(formatertePanelEndepunkter, {
-    updateTriggers: [erPanelValgt, behandling.versjon],
-    suspendRequest: !erPanelValgt || formatertePanelEndepunkter.length === 0,
-    isCachingOn: true,
-  });
+  const formatertePanelEndepunkter = panelEndepunkter.map(e => ({ key: e }));
+  const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi<PANEL_DATA, any>(
+    formatertePanelEndepunkter,
+    {
+      updateTriggers: [erPanelValgt, behandling.versjon],
+      suspendRequest: !erPanelValgt || formatertePanelEndepunkter.length === 0,
+      isCachingOn: true,
+    },
+  );
 
   return (
-    <FaktaPanelWrapper erPanelValgt={erPanelValgt} dataState={formatertePanelEndepunkter.length > 0 ? panelDataState : RestApiState.SUCCESS}>
+    <FaktaPanelWrapper
+      erPanelValgt={erPanelValgt}
+      dataState={formatertePanelEndepunkter.length > 0 ? panelDataState : RestApiState.SUCCESS}
+    >
       {renderPanel({
         ...panelData,
         ...standardPanelProps,

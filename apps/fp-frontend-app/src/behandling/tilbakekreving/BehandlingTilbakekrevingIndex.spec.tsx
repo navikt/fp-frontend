@@ -6,9 +6,7 @@ import { render, screen } from '@testing-library/react';
 import { createIntl } from '@navikt/ft-utils';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
-import {
-  behandlingStatus, navBrukerKjonn, behandlingType, fagsakYtelseType,
-} from '@navikt/fp-kodeverk';
+import { behandlingStatus, navBrukerKjonn, behandlingType, fagsakYtelseType } from '@navikt/fp-kodeverk';
 import { AksessRettigheter, AlleKodeverk, Fagsak } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
@@ -32,11 +30,13 @@ describe('<BehandlingTilbakekrevingIndex>', () => {
           status: behandlingStatus.OPPRETTET,
           type: behandlingType.TILBAKEKREVING,
           aksjonspunkt: [],
-          links: [{
-            href: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name,
-            rel: 'update',
-            type: 'POST',
-          }],
+          links: [
+            {
+              href: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name,
+              rel: 'update',
+              type: 'POST',
+            },
+          ],
         },
       },
       { key: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name, data: undefined },
@@ -57,20 +57,24 @@ describe('<BehandlingTilbakekrevingIndex>', () => {
               oppdaterBehandlingVersjon={() => {}}
               // @ts-ignore
               kodeverk={alleKodeverk as AlleKodeverk}
-              fagsak={{
-                fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
-                bruker: {
-                  kjønn: navBrukerKjonn.KVINNE,
-                },
-              } as Fagsak}
-              rettigheter={{
-                writeAccess: {
-                  isEnabled: true,
-                },
-                kanOverstyreAccess: {
-                  isEnabled: true,
-                },
-              } as AksessRettigheter}
+              fagsak={
+                {
+                  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+                  bruker: {
+                    kjønn: navBrukerKjonn.KVINNE,
+                  },
+                } as Fagsak
+              }
+              rettigheter={
+                {
+                  writeAccess: {
+                    isEnabled: true,
+                  },
+                  kanOverstyreAccess: {
+                    isEnabled: true,
+                  },
+                } as AksessRettigheter
+              }
               oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
               valgtProsessSteg="default"
               valgtFaktaSteg="default"

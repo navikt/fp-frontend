@@ -1,6 +1,4 @@
-import React, {
-  Fragment, FunctionComponent, useEffect, useMemo,
-} from 'react';
+import React, { Fragment, FunctionComponent, useEffect, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Label, ErrorMessage } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -27,11 +25,11 @@ const compare = (arg1: number, arg2: number): number => {
 
 type VirtualErrorField = {
   notRegisteredInput?: string;
-}
+};
 
 export type FormValues = {
   [TYPE_VIRKSOMHET_PREFIX]: Record<string, boolean>;
-}
+};
 
 interface OwnProps {
   readOnly: boolean;
@@ -44,23 +42,21 @@ interface OwnProps {
  * Presentasjonskomponent. Komponenten vises som del av skjermbildet for registrering av
  * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
-const VirksomhetTypeNaringPanel: FunctionComponent<OwnProps> = ({
-  readOnly,
-  alleKodeverk,
-}) => {
+const VirksomhetTypeNaringPanel: FunctionComponent<OwnProps> = ({ readOnly, alleKodeverk }) => {
   const virksomhetTyper = alleKodeverk[KodeverkType.VIRKSOMHET_TYPE];
-  const naringvirksomhetTyper = useMemo(() => virksomhetTyper
-    .filter((t) => t.kode !== naringsvirksomhetType.FRILANSER)
-    .sort((a, b) => compare(naringsvirksomhetTypeOrder[a.kode], naringsvirksomhetTypeOrder[b.kode])),
-  []);
+  const naringvirksomhetTyper = useMemo(
+    () =>
+      virksomhetTyper
+        .filter(t => t.kode !== naringsvirksomhetType.FRILANSER)
+        .sort((a, b) => compare(naringsvirksomhetTypeOrder[a.kode], naringsvirksomhetTypeOrder[b.kode])),
+    [],
+  );
 
-  const {
-    watch, setError, formState, clearErrors,
-  } = formHooks.useFormContext<FormValues & VirtualErrorField>();
+  const { watch, setError, formState, clearErrors } = formHooks.useFormContext<FormValues & VirtualErrorField>();
 
   const checkboxVerdier = watch(TYPE_VIRKSOMHET_PREFIX);
 
-  const isError = !checkboxVerdier || !Object.values(checkboxVerdier).some((v) => v === true);
+  const isError = !checkboxVerdier || !Object.values(checkboxVerdier).some(v => v === true);
 
   useEffect(() => {
     if (isError) {
@@ -77,12 +73,19 @@ const VirksomhetTypeNaringPanel: FunctionComponent<OwnProps> = ({
   return (
     <>
       <VerticalSpacer eightPx />
-      <Label size="small"><FormattedMessage id="Registrering.VirksomhetNaeringTypePanel.Title" /></Label>
+      <Label size="small">
+        <FormattedMessage id="Registrering.VirksomhetNaeringTypePanel.Title" />
+      </Label>
       <VerticalSpacer fourPx />
-      {naringvirksomhetTyper.map((nv) => (
+      {naringvirksomhetTyper.map(nv => (
         <Fragment key={nv.kode}>
           <VerticalSpacer fourPx />
-          <CheckboxField name={`${TYPE_VIRKSOMHET_PREFIX}.${nv.kode}`} key={nv.kode} label={nv.navn} readOnly={readOnly} />
+          <CheckboxField
+            name={`${TYPE_VIRKSOMHET_PREFIX}.${nv.kode}`}
+            key={nv.kode}
+            label={nv.navn}
+            readOnly={readOnly}
+          />
         </Fragment>
       ))}
       {formState.isSubmitted && formState.errors.notRegisteredInput?.message && (

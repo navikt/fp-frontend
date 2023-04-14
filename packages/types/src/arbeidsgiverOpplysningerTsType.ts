@@ -4,7 +4,7 @@ export type ArbeidsgiverOpplysninger = Readonly<{
   identifikator: string;
   navn: string;
   fødselsdato?: string;
-}>
+}>;
 
 type ArbeidsgiverOpplysningerPerId = Record<string, ArbeidsgiverOpplysninger>;
 

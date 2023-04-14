@@ -5,9 +5,15 @@ import userEvent from '@testing-library/user-event';
 import * as stories from './ArbeidsforholdFaktaIndex.stories';
 
 const {
-  ArbeidsforholdetErIkkeAktivt, FjernArbeidsforholdet, FlereArbeidsforholdITabell, IngenArbeidsforholdRegistrert,
-  OppdaterArbeidsforholdOgAvslaGrunnetManglendeOpplysninger, ManueltOpprettetArbeidsforhold,
-  SokerErIPermisjon, SokerErIkkeIPermisjon, ArbeidsforholdetSkalBenyttesUtenInntektsmelding,
+  ArbeidsforholdetErIkkeAktivt,
+  FjernArbeidsforholdet,
+  FlereArbeidsforholdITabell,
+  IngenArbeidsforholdRegistrert,
+  OppdaterArbeidsforholdOgAvslaGrunnetManglendeOpplysninger,
+  ManueltOpprettetArbeidsforhold,
+  SokerErIPermisjon,
+  SokerErIkkeIPermisjon,
+  ArbeidsforholdetSkalBenyttesUtenInntektsmelding,
 } = composeStories(stories);
 
 describe('<ArbeidsforholdFaktaIndex>', () => {
@@ -24,8 +30,16 @@ describe('<ArbeidsforholdFaktaIndex>', () => {
     await userEvent.click(screen.getByText('AA-Registeret')); // Klikk på rad
 
     expect(await screen.findByText('Detaljer')).toBeInTheDocument();
-    expect(screen.getByText('Arbeidsforholdet er aktivt og skal benyttes i behandlingen. Nødvendig inntektsmelding er ikke mottatt.')).toBeInTheDocument();
-    expect(screen.getByText('Fortsett behandling uten inntektsmelding, inntekt fra A-inntekt benyttes i beregningsgrunnlaget.')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Arbeidsforholdet er aktivt og skal benyttes i behandlingen. Nødvendig inntektsmelding er ikke mottatt.',
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Fortsett behandling uten inntektsmelding, inntekt fra A-inntekt benyttes i beregningsgrunnlaget.',
+      ),
+    ).toBeInTheDocument();
 
     expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
     expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
@@ -112,7 +126,11 @@ describe('<ArbeidsforholdFaktaIndex>', () => {
     await userEvent.click(screen.getAllByText('AA-Registeret')[1]); // Klikk på rad 2
 
     expect(await screen.findByText('Detaljer')).toBeInTheDocument();
-    expect(screen.getByText('Arbeidsforholdet er aktivt og skal benyttes i behandlingen. Nødvendig inntektsmelding er ikke mottatt.')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Arbeidsforholdet er aktivt og skal benyttes i behandlingen. Nødvendig inntektsmelding er ikke mottatt.',
+      ),
+    ).toBeInTheDocument();
     expect(screen.getByText('Ytelsen kan avslås på grunn av manglende opplysninger.')).toBeInTheDocument();
 
     expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
@@ -147,7 +165,11 @@ describe('<ArbeidsforholdFaktaIndex>', () => {
     await userEvent.click(screen.getByText('AA-Registeret')); // Klikk på rad
 
     expect(await screen.findByText('Detaljer')).toBeInTheDocument();
-    expect(screen.getByText('Arbeidsforholdet er aktivt og skal benyttes i behandlingen. Nødvendig inntektsmelding er ikke mottatt.')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Arbeidsforholdet er aktivt og skal benyttes i behandlingen. Nødvendig inntektsmelding er ikke mottatt.',
+      ),
+    ).toBeInTheDocument();
     expect(screen.getByText('Ytelsen kan avslås på grunn av manglende opplysninger.')).toBeInTheDocument();
 
     expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
@@ -183,8 +205,14 @@ describe('<ArbeidsforholdFaktaIndex>', () => {
     expect(screen.getByText('Permisjon')).toBeInTheDocument();
     expect(screen.getByText(/01.01.2020/)).toBeInTheDocument();
     expect(screen.getByText(/01.01.2021/)).toBeInTheDocument();
-    expect(screen.getByText('Søker er ikke i permisjon. Arbeidsforholdet er aktivt og skal benyttes i behandlingen.')).toBeInTheDocument();
-    expect(screen.getByText('Fortsett behandling uten inntektsmelding, inntekt fra A-inntekt benyttes i beregningsgrunnlaget.')).toBeInTheDocument();
+    expect(
+      screen.getByText('Søker er ikke i permisjon. Arbeidsforholdet er aktivt og skal benyttes i behandlingen.'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Fortsett behandling uten inntektsmelding, inntekt fra A-inntekt benyttes i beregningsgrunnlaget.',
+      ),
+    ).toBeInTheDocument();
 
     expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
     expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();

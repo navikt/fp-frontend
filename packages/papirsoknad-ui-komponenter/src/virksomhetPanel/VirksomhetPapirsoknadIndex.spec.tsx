@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  fireEvent, render, screen, waitFor,
-} from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import { Modal } from '@navikt/ds-react';
@@ -24,7 +22,9 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
 
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Nei, søker har ikke arbeidet i egen næringsvirksomhet i løpet av de 10 siste månedene'));
+    await userEvent.click(
+      screen.getByText('Nei, søker har ikke arbeidet i egen næringsvirksomhet i løpet av de 10 siste månedene'),
+    );
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
@@ -43,7 +43,9 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
 
     expect(await screen.findByText('Egen næringsvirksomhet')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Ja, søker har arbeidet i egen næringsvirksomhet i løpet av de 10 siste månedene'));
+    await userEvent.click(
+      screen.getByText('Ja, søker har arbeidet i egen næringsvirksomhet i løpet av de 10 siste månedene'),
+    );
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
@@ -100,30 +102,32 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       egenVirksomhet: {
         harArbeidetIEgenVirksomhet: true,
-        virksomheter: [{
-          beskrivelseAvEndring: 'Dette er en endring',
-          erNyIArbeidslivet: undefined,
-          erNyoppstartet: undefined,
-          familieEllerVennerTilknyttetNaringen: true,
-          fom: '2022-06-01',
-          tom: '2022-06-03',
-          harRegnskapsforer: true,
-          harVarigEndring: true,
-          inntekt: 500000,
-          landJobberFra: 'AND',
-          navn: 'Bedrift1',
-          navnRegnskapsforer: 'Espen Utvikler',
-          tlfRegnskapsforer: '555454534',
-          typeVirksomhet: {
-            ANNEN: undefined,
-            DAGMAMMA: undefined,
-            FISKE: true,
-            JORDBRUK_SKOGBRUK: undefined,
+        virksomheter: [
+          {
+            beskrivelseAvEndring: 'Dette er en endring',
+            erNyIArbeidslivet: undefined,
+            erNyoppstartet: undefined,
+            familieEllerVennerTilknyttetNaringen: true,
+            fom: '2022-06-01',
+            tom: '2022-06-03',
+            harRegnskapsforer: true,
+            harVarigEndring: true,
+            inntekt: 500000,
+            landJobberFra: 'AND',
+            navn: 'Bedrift1',
+            navnRegnskapsforer: 'Espen Utvikler',
+            tlfRegnskapsforer: '555454534',
+            typeVirksomhet: {
+              ANNEN: undefined,
+              DAGMAMMA: undefined,
+              FISKE: true,
+              JORDBRUK_SKOGBRUK: undefined,
+            },
+            varigEndretEllerStartetSisteFireAr: true,
+            varigEndringGjeldendeFom: '2022-05-03',
+            virksomhetRegistrertINorge: false,
           },
-          varigEndretEllerStartetSisteFireAr: true,
-          varigEndringGjeldendeFom: '2022-05-03',
-          virksomhetRegistrertINorge: false,
-        }],
+        ],
       },
     });
   });

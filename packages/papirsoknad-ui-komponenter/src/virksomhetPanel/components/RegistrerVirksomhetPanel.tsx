@@ -1,13 +1,7 @@
-import React, {
-  FunctionComponent, useCallback, useEffect, useState,
-} from 'react';
+import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import {
-  Label, BodyShort, Detail, ErrorMessage,
-} from '@navikt/ds-react';
-import {
-  FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { Label, BodyShort, Detail, ErrorMessage } from '@navikt/ds-react';
+import { FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { formHooks } from '@navikt/ft-form-hooks';
 import { AlleKodeverk } from '@navikt/fp-types';
 
@@ -22,11 +16,11 @@ export const EGEN_VIRKSOMHET_NAME_PREFIX = 'egenVirksomhet';
 
 type VirtueltValideringsfeilFelt = {
   notRegisteredInput?: string;
-}
+};
 
 export type FormValues = {
   virksomheter: ModalFormValues[];
-}
+};
 
 interface OwnProps {
   readOnly?: boolean;
@@ -40,46 +34,47 @@ interface OwnProps {
  * foreldrepenger og søker har arbeidet i egen virksomhet.
  * Viser registrerte virksomheter samt knapp for å legge til nye virksomheter.
  */
-const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({
-  readOnly = false,
-  alleKodeverk,
-}) => {
+const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({ readOnly = false, alleKodeverk }) => {
   const intl = useIntl();
   const [virksomhetIndex, setVirksomhetIndex] = useState<number>();
 
-  const {
-    control, setError, formState, clearErrors,
-  } = formHooks.useFormContext<{ [EGEN_VIRKSOMHET_NAME_PREFIX]: FormValues & VirtueltValideringsfeilFelt}>();
-  const {
-    fields, remove, append, update,
-  } = formHooks.useFieldArray({
+  const { control, setError, formState, clearErrors } = formHooks.useFormContext<{
+    [EGEN_VIRKSOMHET_NAME_PREFIX]: FormValues & VirtueltValideringsfeilFelt;
+  }>();
+  const { fields, remove, append, update } = formHooks.useFieldArray({
     control,
     name: `${EGEN_VIRKSOMHET_NAME_PREFIX}.virksomheter`,
   });
 
-  const visModal = useCallback((index?: number): void => {
-    setVirksomhetIndex(index !== undefined ? index : -1);
-  }, [setVirksomhetIndex]);
+  const visModal = useCallback(
+    (index?: number): void => {
+      setVirksomhetIndex(index !== undefined ? index : -1);
+    },
+    [setVirksomhetIndex],
+  );
 
   const lukkModal = useCallback((): void => {
     setVirksomhetIndex(undefined);
   }, [setVirksomhetIndex]);
 
-  const leggTilVirksomhet = useCallback((virksomhet: ModalFormValues) => {
-    const justertVirksomhet = {
-      ...virksomhet,
-      landJobberFra: virksomhet.virksomhetRegistrertINorge ? 'NOR' : virksomhet.landJobberFra,
-      varigEndringGjeldendeFom: virksomhet.nyIArbeidslivetFom || virksomhet.varigEndringGjeldendeFom,
-    };
+  const leggTilVirksomhet = useCallback(
+    (virksomhet: ModalFormValues) => {
+      const justertVirksomhet = {
+        ...virksomhet,
+        landJobberFra: virksomhet.virksomhetRegistrertINorge ? 'NOR' : virksomhet.landJobberFra,
+        varigEndringGjeldendeFom: virksomhet.nyIArbeidslivetFom || virksomhet.varigEndringGjeldendeFom,
+      };
 
-    if (virksomhetIndex === -1) {
-      append(justertVirksomhet);
-    } else {
-      update(virksomhetIndex, justertVirksomhet);
-    }
+      if (virksomhetIndex === -1) {
+        append(justertVirksomhet);
+      } else {
+        update(virksomhetIndex, justertVirksomhet);
+      }
 
-    lukkModal();
-  }, [append, update, lukkModal, virksomhetIndex]);
+      lukkModal();
+    },
+    [append, update, lukkModal, virksomhetIndex],
+  );
 
   useEffect(() => {
     if (fields.length === 0) {
@@ -97,13 +92,16 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({
     <div className={styles.fieldsList}>
       {fields.length > 0 && (
         <React.Fragment key={1}>
-          <Label size="small"><FormattedMessage id="Registrering.RegistrerVirksomhetPanel.Name" /></Label>
+          <Label size="small">
+            <FormattedMessage id="Registrering.RegistrerVirksomhetPanel.Name" />
+          </Label>
           <hr className={styles.divider} />
           {fields.map((field, index) => (
             <FlexContainer key={field.id}>
               <FlexRow>
                 <FlexColumn>
-                  {// eslint-disable-next-line jsx-a11y/click-events-have-key-events
+                  {
+                    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
                   }
                   <a
                     onClick={() => visModal(index)}
@@ -112,13 +110,12 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({
                     role="link"
                     tabIndex={0}
                   >
-                    <BodyShort size="small">
-                      {field.navn}
-                    </BodyShort>
+                    <BodyShort size="small">{field.navn}</BodyShort>
                   </a>
                 </FlexColumn>
                 <FlexColumn>
-                  {// eslint-disable-next-line jsx-a11y/click-events-have-key-events
+                  {
+                    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
                   }
                   <div
                     className={styles.removeButton}
@@ -138,21 +135,21 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({
           ))}
         </React.Fragment>
       )}
-      {// eslint-disable-next-line jsx-a11y/click-events-have-key-events
+      {
+        // eslint-disable-next-line jsx-a11y/click-events-have-key-events
       }
       <div
         id="addbutton"
         className={styles.addVirksomhet}
         onClick={() => visModal()}
-        onKeyDown={(e) => (e.nativeEvent.code === 'Space' ? visModal() : false)}
+        onKeyDown={e => (e.nativeEvent.code === 'Space' ? visModal() : false)}
         role="button"
         tabIndex={0}
       >
-        <Image
-          className={styles.addCircleIcon}
-          src={addCircleIcon}
-        />
-        <Detail size="small" className={styles.imageText}><FormattedMessage id="Registrering.RegistrerVirksomhetPanel.Add" /></Detail>
+        <Image className={styles.addCircleIcon} src={addCircleIcon} />
+        <Detail size="small" className={styles.imageText}>
+          <FormattedMessage id="Registrering.RegistrerVirksomhetPanel.Add" />
+        </Detail>
       </div>
       {formState.isSubmitted && formState.errors[EGEN_VIRKSOMHET_NAME_PREFIX]?.notRegisteredInput?.message && (
         <ErrorMessage>{formState.errors[EGEN_VIRKSOMHET_NAME_PREFIX]?.notRegisteredInput?.message}</ErrorMessage>

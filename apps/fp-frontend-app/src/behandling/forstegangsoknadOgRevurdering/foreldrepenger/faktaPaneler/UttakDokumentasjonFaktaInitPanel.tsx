@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
@@ -18,12 +16,12 @@ const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_UTTAK_DOKUMENTASJON];
 const ENDEPUNKTER_PANEL_DATA = [FpBehandlingApiKeys.DOKUMENTASJON_VURDERING_BEHOV];
 type EndepunktPanelData = {
   dokumentasjonVurderingBehov: DokumentasjonVurderingBehov[];
-}
+};
 
 /**
  * UttakDokumentasjonFaktaInitPanel
  */
-const UttakDokumentasjonFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => (
+const UttakDokumentasjonFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = props => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -31,11 +29,7 @@ const UttakDokumentasjonFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> =
     faktaPanelKode={FaktaPanelCode.UTTAK_DOKUMENTASJON}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'UttakDokumentasjonFaktaInitPanel.FaktaUttakDokumentasjon' })}
     skalPanelVisesIMeny={() => requestFpApi.hasPath(FpBehandlingApiKeys.DOKUMENTASJON_VURDERING_BEHOV.name)}
-    renderPanel={(data) => (
-      <UttakDokumentasjonFaktaIndex
-        {...data}
-      />
-    )}
+    renderPanel={data => <UttakDokumentasjonFaktaIndex {...data} />}
   />
 );
 

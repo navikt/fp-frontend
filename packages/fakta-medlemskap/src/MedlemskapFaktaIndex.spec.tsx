@@ -7,7 +7,11 @@ import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import * as stories from './MedlemskapFaktaIndex.stories';
 
 const {
-  AvklarOmBrukerErBosatt, AvklarOmBrukerHarGyldigPeriode, AvklarOmBrukerHarOppholdsrett, AvklarOmBrukerHarLovligOpphold, AvklarFortsattMedlemskap,
+  AvklarOmBrukerErBosatt,
+  AvklarOmBrukerHarGyldigPeriode,
+  AvklarOmBrukerHarOppholdsrett,
+  AvklarOmBrukerHarLovligOpphold,
+  AvklarFortsattMedlemskap,
 } = composeStories(stories);
 
 describe('<MedlemskapFaktaIndex>', () => {
@@ -33,24 +37,28 @@ describe('<MedlemskapFaktaIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
-    expect(lagreVurdering).toHaveBeenNthCalledWith(1, [{
-      begrunnelse: '',
-      bekreftedePerioder: [{
-        aksjonspunkter: [AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT],
-        begrunnelse: 'Dette er en begrunnelse',
-        bosattVurdering: true,
-        medlemskapManuellVurderingType: undefined,
-        personopplysningBruker: {
-          adresser: [],
-          navn: 'Mygg Robust',
-          personstatus: 'BOSA',
-          region: 'NORDEN',
-        },
-        vurderingsdato: '2018-11-07',
-        årsaker: ['SKJÆRINGSTIDSPUNKT'],
-      }],
-      kode: AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT,
-    }]);
+    expect(lagreVurdering).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: '',
+        bekreftedePerioder: [
+          {
+            aksjonspunkter: [AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT],
+            begrunnelse: 'Dette er en begrunnelse',
+            bosattVurdering: true,
+            medlemskapManuellVurderingType: undefined,
+            personopplysningBruker: {
+              adresser: [],
+              navn: 'Mygg Robust',
+              personstatus: 'BOSA',
+              region: 'NORDEN',
+            },
+            vurderingsdato: '2018-11-07',
+            årsaker: ['SKJÆRINGSTIDSPUNKT'],
+          },
+        ],
+        kode: AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT,
+      },
+    ]);
   });
 
   it('skal velge at søker er har periode med medlemskap', async () => {
@@ -74,45 +82,51 @@ describe('<MedlemskapFaktaIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
-    expect(lagreVurdering).toHaveBeenNthCalledWith(1, [{
-      begrunnelse: '',
-      kode: AksjonspunktCode.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
-      bekreftedePerioder: [{
-        aksjonspunkter: [AksjonspunktCode.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE],
-        begrunnelse: 'Dette er en begrunnelse',
-        bosattVurdering: undefined,
-        erEosBorger: null,
-        lovligOppholdVurdering: null,
-        medlemskapManuellVurderingType: 'MEDLEM',
-        oppholdsrettVurdering: null,
-        personopplysningAnnenPart: {
-          adresser: [{
-            adresseType: 'BOSTEDSADRESSE',
-            land: 'NOR',
-            postNummer: '2500',
-            poststed: 'Ukjent',
-          }],
-          navn: 'Papegøye Runar',
-          personstatus: 'BOSA',
-          region: 'NORDEN',
-        },
-        personopplysningBruker: {
-          adresser: [{
-            adresseType: 'BOSTEDSADRESSE',
-            land: 'NOR',
-            postNummer: '2500',
-            poststed: 'Ukjent',
-          }],
-          navn: 'Papegøye Margaret',
-          personstatus: 'BOSA',
-          region: 'NORDEN',
-        },
-        vurderingsdato: '2022-06-28',
-        årsaker: [
-          'SKJÆRINGSTIDSPUNKT',
+    expect(lagreVurdering).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: '',
+        kode: AksjonspunktCode.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
+        bekreftedePerioder: [
+          {
+            aksjonspunkter: [AksjonspunktCode.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE],
+            begrunnelse: 'Dette er en begrunnelse',
+            bosattVurdering: undefined,
+            erEosBorger: null,
+            lovligOppholdVurdering: null,
+            medlemskapManuellVurderingType: 'MEDLEM',
+            oppholdsrettVurdering: null,
+            personopplysningAnnenPart: {
+              adresser: [
+                {
+                  adresseType: 'BOSTEDSADRESSE',
+                  land: 'NOR',
+                  postNummer: '2500',
+                  poststed: 'Ukjent',
+                },
+              ],
+              navn: 'Papegøye Runar',
+              personstatus: 'BOSA',
+              region: 'NORDEN',
+            },
+            personopplysningBruker: {
+              adresser: [
+                {
+                  adresseType: 'BOSTEDSADRESSE',
+                  land: 'NOR',
+                  postNummer: '2500',
+                  poststed: 'Ukjent',
+                },
+              ],
+              navn: 'Papegøye Margaret',
+              personstatus: 'BOSA',
+              region: 'NORDEN',
+            },
+            vurderingsdato: '2022-06-28',
+            årsaker: ['SKJÆRINGSTIDSPUNKT'],
+          },
         ],
-      }],
-    }]);
+      },
+    ]);
   });
 
   it('skal velge at søker har oppholdsrett', async () => {
@@ -132,27 +146,31 @@ describe('<MedlemskapFaktaIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
-    expect(lagreVurdering).toHaveBeenNthCalledWith(1, [{
-      begrunnelse: '',
-      bekreftedePerioder: [{
-        aksjonspunkter: [AksjonspunktCode.AVKLAR_OPPHOLDSRETT],
-        begrunnelse: 'Dette er en begrunnelse',
-        bosattVurdering: undefined,
-        erEosBorger: true,
-        lovligOppholdVurdering: undefined,
-        oppholdsrettVurdering: true,
-        medlemskapManuellVurderingType: undefined,
-        personopplysningBruker: {
-          adresser: [],
-          navn: 'Mygg Robust',
-          personstatus: 'BOSA',
-          region: 'NORDEN',
-        },
-        vurderingsdato: '2018-11-07',
-        årsaker: ['SKJÆRINGSTIDSPUNKT'],
-      }],
-      kode: AksjonspunktCode.AVKLAR_OPPHOLDSRETT,
-    }]);
+    expect(lagreVurdering).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: '',
+        bekreftedePerioder: [
+          {
+            aksjonspunkter: [AksjonspunktCode.AVKLAR_OPPHOLDSRETT],
+            begrunnelse: 'Dette er en begrunnelse',
+            bosattVurdering: undefined,
+            erEosBorger: true,
+            lovligOppholdVurdering: undefined,
+            oppholdsrettVurdering: true,
+            medlemskapManuellVurderingType: undefined,
+            personopplysningBruker: {
+              adresser: [],
+              navn: 'Mygg Robust',
+              personstatus: 'BOSA',
+              region: 'NORDEN',
+            },
+            vurderingsdato: '2018-11-07',
+            årsaker: ['SKJÆRINGSTIDSPUNKT'],
+          },
+        ],
+        kode: AksjonspunktCode.AVKLAR_OPPHOLDSRETT,
+      },
+    ]);
   });
 
   it('skal velge at søker har lovlig opphold', async () => {
@@ -172,27 +190,31 @@ describe('<MedlemskapFaktaIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
-    expect(lagreVurdering).toHaveBeenNthCalledWith(1, [{
-      begrunnelse: '',
-      bekreftedePerioder: [{
-        aksjonspunkter: [AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD],
-        begrunnelse: 'Dette er en begrunnelse',
-        bosattVurdering: undefined,
-        erEosBorger: false,
-        lovligOppholdVurdering: true,
-        oppholdsrettVurdering: undefined,
-        medlemskapManuellVurderingType: undefined,
-        personopplysningBruker: {
-          adresser: [],
-          navn: 'Mygg Robust',
-          personstatus: 'BOSA',
-          region: 'NORDEN',
-        },
-        vurderingsdato: '2018-11-07',
-        årsaker: ['SKJÆRINGSTIDSPUNKT'],
-      }],
-      kode: AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD,
-    }]);
+    expect(lagreVurdering).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: '',
+        bekreftedePerioder: [
+          {
+            aksjonspunkter: [AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD],
+            begrunnelse: 'Dette er en begrunnelse',
+            bosattVurdering: undefined,
+            erEosBorger: false,
+            lovligOppholdVurdering: true,
+            oppholdsrettVurdering: undefined,
+            medlemskapManuellVurderingType: undefined,
+            personopplysningBruker: {
+              adresser: [],
+              navn: 'Mygg Robust',
+              personstatus: 'BOSA',
+              region: 'NORDEN',
+            },
+            vurderingsdato: '2018-11-07',
+            årsaker: ['SKJÆRINGSTIDSPUNKT'],
+          },
+        ],
+        kode: AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD,
+      },
+    ]);
   });
 
   it('skal løse aksjonspunkt for flere perioder', async () => {
@@ -238,49 +260,58 @@ describe('<MedlemskapFaktaIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
-    expect(lagreVurdering).toHaveBeenNthCalledWith(1, [{
-      begrunnelse: '',
-      bekreftedePerioder: [{
-        aksjonspunkter: [AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD],
-        begrunnelse: 'Dette er en begrunnelse',
-        bosattVurdering: undefined,
-        erEosBorger: false,
-        lovligOppholdVurdering: true,
-        medlemskapManuellVurderingType: undefined,
-        oppholdsrettVurdering: undefined,
-        personopplysningBruker: {
-          adresser: [{
-            adresseType: 'BOSTEDSADRESSE',
-            adresselinje1: 'Skogvegen 3',
-            land: 'NOR',
-            postNummer: '4353',
-            poststed: 'Klepp Stasjon',
-          }],
-          personstatus: 'BOSA',
-          region: 'NORDEN',
-        },
-        vurderingsdato: '2017-10-05',
-        årsaker: ['SKJÆRINGSTIDSPUNKT'],
-      }, {
-        aksjonspunkter: [AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT],
-        begrunnelse: 'Dette er en begrunnelse',
-        bosattVurdering: true,
-        medlemskapManuellVurderingType: undefined,
-        personopplysningBruker: {
-          adresser: [{
-            adresseType: 'BOSTEDSADRESSE',
-            adresselinje1: 'Skogvegen 3',
-            land: 'NOR',
-            postNummer: '4353',
-            poststed: 'Klepp Stasjon',
-          }],
-          personstatus: 'BOSA',
-          region: 'NORDEN',
-        },
-        vurderingsdato: '2019-11-07',
-        årsaker: ['SKJÆRINGSTIDSPUNKT'],
-      }],
-      kode: AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP,
-    }]);
+    expect(lagreVurdering).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: '',
+        bekreftedePerioder: [
+          {
+            aksjonspunkter: [AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD],
+            begrunnelse: 'Dette er en begrunnelse',
+            bosattVurdering: undefined,
+            erEosBorger: false,
+            lovligOppholdVurdering: true,
+            medlemskapManuellVurderingType: undefined,
+            oppholdsrettVurdering: undefined,
+            personopplysningBruker: {
+              adresser: [
+                {
+                  adresseType: 'BOSTEDSADRESSE',
+                  adresselinje1: 'Skogvegen 3',
+                  land: 'NOR',
+                  postNummer: '4353',
+                  poststed: 'Klepp Stasjon',
+                },
+              ],
+              personstatus: 'BOSA',
+              region: 'NORDEN',
+            },
+            vurderingsdato: '2017-10-05',
+            årsaker: ['SKJÆRINGSTIDSPUNKT'],
+          },
+          {
+            aksjonspunkter: [AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT],
+            begrunnelse: 'Dette er en begrunnelse',
+            bosattVurdering: true,
+            medlemskapManuellVurderingType: undefined,
+            personopplysningBruker: {
+              adresser: [
+                {
+                  adresseType: 'BOSTEDSADRESSE',
+                  adresselinje1: 'Skogvegen 3',
+                  land: 'NOR',
+                  postNummer: '4353',
+                  poststed: 'Klepp Stasjon',
+                },
+              ],
+              personstatus: 'BOSA',
+              region: 'NORDEN',
+            },
+            vurderingsdato: '2019-11-07',
+            årsaker: ['SKJÆRINGSTIDSPUNKT'],
+          },
+        ],
+        kode: AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP,
+      },
+    ]);
   });
 });

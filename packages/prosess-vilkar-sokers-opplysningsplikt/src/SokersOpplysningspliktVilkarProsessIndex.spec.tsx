@@ -4,9 +4,7 @@ import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './SokersOpplysningspliktVilkarProsessIndex.stories';
 
-const {
-  ÅpentAksjonspunkt, OppfyltVilkår, AvslåttVilkår,
-} = composeStories(stories);
+const { ÅpentAksjonspunkt, OppfyltVilkår, AvslåttVilkår } = composeStories(stories);
 
 describe('<SokersOpplysningspliktVilkarProsessIndex>', () => {
   it('skal bestemme at vilkåret er oppfylt og så løse aksjonspunkt', async () => {
@@ -31,11 +29,13 @@ describe('<SokersOpplysningspliktVilkarProsessIndex>', () => {
       begrunnelse: 'Dette er en vurdering',
       erVilkarOk: true,
       kode: '5017',
-      inntektsmeldingerSomIkkeKommer: [{
-        aktørId: undefined,
-        brukerHarSagtAtIkkeKommer: undefined,
-        organisasjonsnummer: '1234',
-      }],
+      inntektsmeldingerSomIkkeKommer: [
+        {
+          aktørId: undefined,
+          brukerHarSagtAtIkkeKommer: undefined,
+          organisasjonsnummer: '1234',
+        },
+      ],
     });
   });
 

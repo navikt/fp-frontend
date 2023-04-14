@@ -4,8 +4,13 @@ import { composeStories } from '@storybook/testing-react';
 import * as stories from './AnkeProsessIndex.stories';
 
 const {
-  OmjørResultatTilUgunst, OpphevResultat, ErBehandletIKabal, UnderBehandlingIKabal, HjemsendResultat,
-  AvvisResultat, StadfestResultat,
+  OmjørResultatTilUgunst,
+  OpphevResultat,
+  ErBehandletIKabal,
+  UnderBehandlingIKabal,
+  HjemsendResultat,
+  AvvisResultat,
+  StadfestResultat,
 } = composeStories(stories);
 
 describe('<AnkeProsessIndex>', () => {

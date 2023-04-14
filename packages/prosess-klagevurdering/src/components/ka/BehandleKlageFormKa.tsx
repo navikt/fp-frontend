@@ -2,7 +2,11 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Heading, Label } from '@navikt/ds-react';
 
-import { KodeverkType, klageVurdering as klageVurderingType, klageVurderingOmgjoer as klageVurderingOmgjoerType } from '@navikt/fp-kodeverk';
+import {
+  KodeverkType,
+  klageVurdering as klageVurderingType,
+  klageVurderingOmgjoer as klageVurderingOmgjoerType,
+} from '@navikt/fp-kodeverk';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { KlageVurdering, AlleKodeverk } from '@navikt/fp-types';
 
@@ -16,15 +20,16 @@ interface OwnProps {
  *
  * Setter opp readonly-panel for behandling av klage (KA).
  */
-const BehandleKlageFormKa: FunctionComponent<OwnProps> = ({
-  klageVurdering,
-  alleKodeverk,
-}) => {
+const BehandleKlageFormKa: FunctionComponent<OwnProps> = ({ klageVurdering, alleKodeverk }) => {
   const intl = useIntl();
 
   const {
     klageVurderingResultatNK: {
-      begrunnelse, fritekstTilBrev, klageVurdering: vurdering, klageMedholdArsak, klageVurderingOmgjoer,
+      begrunnelse,
+      fritekstTilBrev,
+      klageVurdering: vurdering,
+      klageMedholdArsak,
+      klageVurderingOmgjoer,
     },
   } = klageVurdering;
 
@@ -38,10 +43,16 @@ const BehandleKlageFormKa: FunctionComponent<OwnProps> = ({
         <FormattedMessage id="KlageVurderingRadioOptionsKa.VurderingForKlage" />
       </Label>
       <BodyShort size="small">
-        {vurdering === klageVurderingType.STADFESTE_YTELSESVEDTAK && <FormattedMessage id="Klage.ResolveKlage.KeepVedtakNk" />}
+        {vurdering === klageVurderingType.STADFESTE_YTELSESVEDTAK && (
+          <FormattedMessage id="Klage.ResolveKlage.KeepVedtakNk" />
+        )}
         {vurdering === klageVurderingType.MEDHOLD_I_KLAGE && <FormattedMessage id="Klage.ResolveKlage.ChangeVedtak" />}
-        {vurdering === klageVurderingType.HJEMSENDE_UTEN_Å_OPPHEVE && <FormattedMessage id="Klage.Behandle.Hjemsendt" />}
-        {vurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK && <FormattedMessage id="Klage.ResolveKlage.NullifyVedtak" />}
+        {vurdering === klageVurderingType.HJEMSENDE_UTEN_Å_OPPHEVE && (
+          <FormattedMessage id="Klage.Behandle.Hjemsendt" />
+        )}
+        {vurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK && (
+          <FormattedMessage id="Klage.ResolveKlage.NullifyVedtak" />
+        )}
       </BodyShort>
       <VerticalSpacer sixteenPx />
       {vurdering === klageVurderingType.MEDHOLD_I_KLAGE && (
@@ -49,42 +60,41 @@ const BehandleKlageFormKa: FunctionComponent<OwnProps> = ({
           <Label size="small">
             <FormattedMessage id="Klage.ResolveKlage.Cause" />
           </Label>
-          <BodyShort size="small">
-            {medholdReasons.find((mo) => mo.kode === klageMedholdArsak)?.navn}
-          </BodyShort>
+          <BodyShort size="small">{medholdReasons.find(mo => mo.kode === klageMedholdArsak)?.navn}</BodyShort>
           <VerticalSpacer sixteenPx />
           <BodyShort size="small">
-            {klageVurderingOmgjoer === klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE && <FormattedMessage id="Klage.Behandle.Omgjort" />}
-            {klageVurderingOmgjoer === klageVurderingOmgjoerType.UGUNST_MEDHOLD_I_KLAGE && <FormattedMessage id="Klage.Behandle.Ugunst" />}
-            {klageVurderingOmgjoer === klageVurderingOmgjoerType.DELVIS_MEDHOLD_I_KLAGE && <FormattedMessage id="Klage.Behandle.DelvisOmgjort" />}
+            {klageVurderingOmgjoer === klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE && (
+              <FormattedMessage id="Klage.Behandle.Omgjort" />
+            )}
+            {klageVurderingOmgjoer === klageVurderingOmgjoerType.UGUNST_MEDHOLD_I_KLAGE && (
+              <FormattedMessage id="Klage.Behandle.Ugunst" />
+            )}
+            {klageVurderingOmgjoer === klageVurderingOmgjoerType.DELVIS_MEDHOLD_I_KLAGE && (
+              <FormattedMessage id="Klage.Behandle.DelvisOmgjort" />
+            )}
           </BodyShort>
           <VerticalSpacer sixteenPx />
         </>
       )}
-      {(vurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK || vurdering === klageVurderingType.HJEMSENDE_UTEN_Å_OPPHEVE) && (
+      {(vurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK ||
+        vurdering === klageVurderingType.HJEMSENDE_UTEN_Å_OPPHEVE) && (
         <>
           <Label size="small">
             <FormattedMessage id="Klage.ResolveKlage.Cause" />
           </Label>
-          <BodyShort size="small">
-            {medholdReasons.find((mo) => mo.kode === klageMedholdArsak)?.navn}
-          </BodyShort>
+          <BodyShort size="small">{medholdReasons.find(mo => mo.kode === klageMedholdArsak)?.navn}</BodyShort>
           <VerticalSpacer sixteenPx />
         </>
       )}
       <Label size="small">
         <FormattedMessage id="FritekstKlageBrevTextField.Fritekst" />
       </Label>
-      <BodyShort size="small">
-        {fritekstTilBrev}
-      </BodyShort>
+      <BodyShort size="small">{fritekstTilBrev}</BodyShort>
       <VerticalSpacer sixteenPx />
       <Label size="small">
         <FormattedMessage id="KlageVurderingRadioOptionsKa.Begrunnelse" />
       </Label>
-      <BodyShort size="small">
-        {begrunnelse}
-      </BodyShort>
+      <BodyShort size="small">{begrunnelse}</BodyShort>
       <VerticalSpacer sixteenPx />
     </>
   );

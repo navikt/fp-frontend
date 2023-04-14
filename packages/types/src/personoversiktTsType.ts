@@ -8,12 +8,12 @@ export type PersonopplysningerBasis = Readonly<{
   dødsdato?: string;
   fødselsdato: string;
   adresser: Personadresse[];
-}>
+}>;
 
 export type Personoversikt = Readonly<{
   bruker: PersonopplysningerBasis;
   annenPart?: PersonopplysningerBasis;
   barn: PersonopplysningerBasis[];
-}>
+}>;
 
 export default Personoversikt;

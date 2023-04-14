@@ -20,12 +20,8 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{ oppgaverForAvdeling: OppgaverForAvdeling[] }> = ({
-  oppgaverForAvdeling,
-}) => {
-  const data = [
-    { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
-  ];
+const Template: Story<{ oppgaverForAvdeling: OppgaverForAvdeling[] }> = ({ oppgaverForAvdeling }) => {
+  const data = [{ key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true }];
 
   return (
     <RestApiMock data={data} requestApi={requestApi}>
@@ -40,30 +36,36 @@ const Template: Story<{ oppgaverForAvdeling: OppgaverForAvdeling[] }> = ({
 
 export const Default = Template.bind({});
 Default.args = {
-  oppgaverForAvdeling: [{
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-    behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
-    tilBehandling: true,
-    antall: 10,
-  }, {
-    fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
-    behandlingType: BehandlingType.KLAGE,
-    tilBehandling: true,
-    antall: 4,
-  }, {
-    fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
-    behandlingType: BehandlingType.REVURDERING,
-    tilBehandling: true,
-    antall: 14,
-  }, {
-    fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
-    behandlingType: BehandlingType.REVURDERING,
-    tilBehandling: false,
-    antall: 4,
-  }, {
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-    behandlingType: BehandlingType.TILBAKEKREVING,
-    tilBehandling: false,
-    antall: 6,
-  }],
+  oppgaverForAvdeling: [
+    {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
+      tilBehandling: true,
+      antall: 10,
+    },
+    {
+      fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+      behandlingType: BehandlingType.KLAGE,
+      tilBehandling: true,
+      antall: 4,
+    },
+    {
+      fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+      behandlingType: BehandlingType.REVURDERING,
+      tilBehandling: true,
+      antall: 14,
+    },
+    {
+      fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+      behandlingType: BehandlingType.REVURDERING,
+      tilBehandling: false,
+      antall: 4,
+    },
+    {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      behandlingType: BehandlingType.TILBAKEKREVING,
+      tilBehandling: false,
+      antall: 6,
+    },
+  ],
 };

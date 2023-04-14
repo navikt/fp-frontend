@@ -5,22 +5,20 @@ import { Label } from '@navikt/ds-react';
 import { Datepicker, CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import {
-  VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
-} from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
-import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, ArbeidsforholdFodselOgTilrettelegging } from '@navikt/fp-types';
+import {
+  ArbeidsgiverOpplysningerPerId,
+  KodeverkMedNavn,
+  ArbeidsforholdFodselOgTilrettelegging,
+} from '@navikt/fp-types';
 
 import TilretteleggingFieldArray from './TilretteleggingFieldArray';
 import VelferdspermisjonSection, { finnSkalTaHensynTilPermisjon } from './VelferdspermisjonSection';
 
 import styles from './tilretteleggingArbeidsforholdSection.module.css';
 
-const validerTidligereEnn = (
-  intl: IntlShape,
-  getValues,
-  formSectionName: string,
-) => (): string | null => {
+const validerTidligereEnn = (intl: IntlShape, getValues, formSectionName: string) => (): string | null => {
   const tilretteleggingBehovFom = getValues(`${formSectionName}.tilretteleggingBehovFom`);
   const termindato = getValues('termindato');
   const fødselsdato = getValues('fødselsdato');
@@ -30,11 +28,14 @@ const validerTidligereEnn = (
   const tidligsteTidspunkt = fødselsdato ? moment.min(treUkerFørTermindato, moment(fødselsdato)) : treUkerFørTermindato;
 
   if (tilretteleggingFomDato.isValid() && !tilretteleggingFomDato.isBefore(tidligsteTidspunkt)) {
-    return intl.formatMessage({
-      id: 'FodselOgTilretteleggingFaktaForm.TilretteleggingTidligereEnn',
-    }, {
-      dato: tidligsteTidspunkt.format(DDMMYYYY_DATE_FORMAT),
-    });
+    return intl.formatMessage(
+      {
+        id: 'FodselOgTilretteleggingFaktaForm.TilretteleggingTidligereEnn',
+      },
+      {
+        dato: tidligsteTidspunkt.format(DDMMYYYY_DATE_FORMAT),
+      },
+    );
   }
   return null;
 };
@@ -49,7 +50,7 @@ const utledArbeidsforholdTittel = (
   if (arbeidsforhold.arbeidsgiverReferanse && arbeidsgiverOpplysninger) {
     tittel = `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.identifikator})`;
   } else {
-    const arbeidType = uttakArbeidTyper.find((type) => type.kode === arbeidsforhold.uttakArbeidType);
+    const arbeidType = uttakArbeidTyper.find(type => type.kode === arbeidsforhold.uttakArbeidType);
     tittel = arbeidType?.navn;
   }
   if (arbeidsforhold.eksternArbeidsforholdReferanse) {
@@ -64,7 +65,7 @@ const utledArbeidsforholdTittel = (
 
 type FormValues = {
   skalBrukes: boolean;
-}
+};
 
 interface OwnProps {
   readOnly: boolean;
@@ -74,7 +75,7 @@ interface OwnProps {
   stillingsprosentArbeidsforhold?: number;
   setOverstyrtUtbetalingsgrad: (erOverstyrt: boolean) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  uttakArbeidTyper: KodeverkMedNavn[],
+  uttakArbeidTyper: KodeverkMedNavn[];
 }
 
 const TilretteleggingArbeidsforholdSection: FunctionComponent<OwnProps> = ({
@@ -89,18 +90,20 @@ const TilretteleggingArbeidsforholdSection: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const {
-    watch, getValues, setValue,
-  } = formHooks.useFormContext<Record<string, FormValues>>();
+  const { watch, getValues, setValue } = formHooks.useFormContext<Record<string, FormValues>>();
 
   const visTilrettelegginger = watch(`${formSectionName}.skalBrukes`);
 
-  const tittel = useMemo(() => utledArbeidsforholdTittel(arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper),
-    [arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper]);
+  const tittel = useMemo(
+    () => utledArbeidsforholdTittel(arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper),
+    [arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper],
+  );
 
   const tilretteleggingBehovFom = watch(`${formSectionName}.tilretteleggingBehovFom`);
 
-  const permisjonerSomSkalBrukes = arbeidsforhold.velferdspermisjoner.filter((permisjon) => finnSkalTaHensynTilPermisjon(tilretteleggingBehovFom, permisjon));
+  const permisjonerSomSkalBrukes = arbeidsforhold.velferdspermisjoner.filter(permisjon =>
+    finnSkalTaHensynTilPermisjon(tilretteleggingBehovFom, permisjon),
+  );
 
   let erPermisjonGyldig = false;
   if (permisjonerSomSkalBrukes.length === 1 && permisjonerSomSkalBrukes[0].permisjonsprosent === 100) {
@@ -132,7 +135,9 @@ const TilretteleggingArbeidsforholdSection: FunctionComponent<OwnProps> = ({
             <FlexColumn>
               <Datepicker
                 name={`${formSectionName}.tilretteleggingBehovFom`}
-                label={intl.formatMessage({ id: 'TilretteleggingArbeidsforholdSection.DatepickerField.TilretteleggingFra' })}
+                label={intl.formatMessage({
+                  id: 'TilretteleggingArbeidsforholdSection.DatepickerField.TilretteleggingFra',
+                })}
                 validate={[required, hasValidDate, validerTidligereEnn(intl, getValues, formSectionName)]}
                 isReadOnly={readOnly}
               />
@@ -162,7 +167,7 @@ const TilretteleggingArbeidsforholdSection: FunctionComponent<OwnProps> = ({
           </FlexRow>
         </FlexContainer>
       )}
-      {arbeidsforhold.velferdspermisjoner.map((permisjon) => (
+      {arbeidsforhold.velferdspermisjoner.map(permisjon => (
         <VelferdspermisjonSection
           key={`${permisjon.permisjonFom}.${permisjon.permisjonTom}`}
           permisjon={permisjon}

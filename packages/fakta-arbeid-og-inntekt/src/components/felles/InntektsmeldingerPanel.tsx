@@ -1,10 +1,17 @@
-import React, {
-  FunctionComponent, useState,
-} from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Link, Label, BodyShort } from '@navikt/ds-react';
 import {
-  Image, FlexColumn, FlexRow, Tooltip, VerticalSpacer, FloatRight, PeriodLabel, AvsnittSkiller, DateLabel, FlexContainer,
+  Image,
+  FlexColumn,
+  FlexRow,
+  Tooltip,
+  VerticalSpacer,
+  FloatRight,
+  PeriodLabel,
+  AvsnittSkiller,
+  DateLabel,
+  FlexContainer,
 } from '@navikt/ft-ui-komponenter';
 
 import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
@@ -17,28 +24,24 @@ import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel
 
 import styles from './inntektsmeldingerPanel.module.css';
 
-const erMatch = (
-  arbeidsforhold: AoIArbeidsforhold,
-  inntektsmelding: Inntektsmelding,
-): boolean => inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent
-  && (!inntektsmelding.internArbeidsforholdId || inntektsmelding.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId);
+const erMatch = (arbeidsforhold: AoIArbeidsforhold, inntektsmelding: Inntektsmelding): boolean =>
+  inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent &&
+  (!inntektsmelding.internArbeidsforholdId ||
+    inntektsmelding.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId);
 
-const finnInntektsmelding = (
-  inntektsmeldinger: Inntektsmelding[],
-  internArbeidsforholdId?: string,
-) => {
-  const harImMedId = inntektsmeldinger.some((i) => i.internArbeidsforholdId);
-  const harImUtenId = inntektsmeldinger.some((i) => !i.internArbeidsforholdId);
+const finnInntektsmelding = (inntektsmeldinger: Inntektsmelding[], internArbeidsforholdId?: string) => {
+  const harImMedId = inntektsmeldinger.some(i => i.internArbeidsforholdId);
+  const harImUtenId = inntektsmeldinger.some(i => !i.internArbeidsforholdId);
   if (harImMedId && harImUtenId) {
     throw Error('Har inntektsmelding både med og uten id');
   }
 
-  return inntektsmeldinger.find((i) => !i.internArbeidsforholdId || i.internArbeidsforholdId === internArbeidsforholdId);
+  return inntektsmeldinger.find(i => !i.internArbeidsforholdId || i.internArbeidsforholdId === internArbeidsforholdId);
 };
 
 const delOppAId = (eksternArbeidsforholdId: string) => {
   const lengde = Math.ceil(eksternArbeidsforholdId.length / 25);
-  const oppdeltId = Array.from({ length: lengde }, (_x, i) => eksternArbeidsforholdId.slice(i * 25, (i * 25) + 25));
+  const oppdeltId = Array.from({ length: lengde }, (_x, i) => eksternArbeidsforholdId.slice(i * 25, i * 25 + 25));
   return <p>{oppdeltId.join('-')}</p>;
 };
 
@@ -61,7 +64,8 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
   const harEttArbeidsforhold = arbeidsforholdForRad.length === 1;
 
   const inntektsmeldingForArbeidsforhold = harEttArbeidsforhold
-    ? finnInntektsmelding(inntektsmeldingerForRad, arbeidsforholdForRad[0].internArbeidsforholdId) : undefined;
+    ? finnInntektsmelding(inntektsmeldingerForRad, arbeidsforholdForRad[0].internArbeidsforholdId)
+    : undefined;
 
   return (
     <>
@@ -70,8 +74,8 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer eightPx />
           <AvsnittSkiller dividerParagraf className={styles.skiller} />
           <VerticalSpacer sixteenPx />
-          {arbeidsforholdForRad.map((a) => {
-            const inntektsmelding = inntektsmeldingerForRad.find((i) => erMatch(a, i));
+          {arbeidsforholdForRad.map(a => {
+            const inntektsmelding = inntektsmeldingerForRad.find(i => erMatch(a, i));
             return (
               <React.Fragment key={`${a.arbeidsgiverIdent}${a.internArbeidsforholdId}`}>
                 <FlexContainer>
@@ -80,7 +84,9 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                       <FlexContainer>
                         <FlexRow>
                           <FlexColumn>
-                            <Label size="small"><FormattedMessage id="ArbeidsforholdInformasjonPanel.ArbeidsforholdId" /></Label>
+                            <Label size="small">
+                              <FormattedMessage id="ArbeidsforholdInformasjonPanel.ArbeidsforholdId" />
+                            </Label>
                           </FlexColumn>
                           <FlexColumn>
                             {a.eksternArbeidsforholdId && a.eksternArbeidsforholdId.length < 50 && (
@@ -89,33 +95,35 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                               </div>
                             )}
                             {a.eksternArbeidsforholdId && a.eksternArbeidsforholdId.length >= 50 && (
-                              <Tooltip
-                                content={delOppAId(a.eksternArbeidsforholdId)}
-                                alignBottom
-                              >
+                              <Tooltip content={delOppAId(a.eksternArbeidsforholdId)} alignBottom>
                                 <BodyShort size="small">{`${a.eksternArbeidsforholdId.substring(0, 50)}...`}</BodyShort>
                               </Tooltip>
                             )}
-                            {!a.eksternArbeidsforholdId && (
-                              <BodyShort size="small">-</BodyShort>
-                            )}
+                            {!a.eksternArbeidsforholdId && <BodyShort size="small">-</BodyShort>}
                           </FlexColumn>
                         </FlexRow>
                         <VerticalSpacer fourPx />
                         <FlexRow>
                           <FlexColumn>
-                            <Label size="small"><FormattedMessage id="ArbeidsforholdInformasjonPanel.Periode" /></Label>
+                            <Label size="small">
+                              <FormattedMessage id="ArbeidsforholdInformasjonPanel.Periode" />
+                            </Label>
                           </FlexColumn>
                           <FlexColumn className={styles.textMargin}>
                             <BodyShort size="small">
-                              <PeriodLabel dateStringFom={a.fom} dateStringTom={a.tom !== TIDENES_ENDE ? a.tom : undefined} />
+                              <PeriodLabel
+                                dateStringFom={a.fom}
+                                dateStringTom={a.tom !== TIDENES_ENDE ? a.tom : undefined}
+                              />
                             </BodyShort>
                           </FlexColumn>
                         </FlexRow>
                         <VerticalSpacer fourPx />
                         <FlexRow>
                           <FlexColumn>
-                            <Label size="small"><FormattedMessage id="ArbeidsforholdInformasjonPanel.Stillingsprosent" /></Label>
+                            <Label size="small">
+                              <FormattedMessage id="ArbeidsforholdInformasjonPanel.Stillingsprosent" />
+                            </Label>
                           </FlexColumn>
                           <FlexColumn className={styles.textMargin}>
                             <BodyShort size="small">{`${a.stillingsprosent}%`}</BodyShort>
@@ -127,12 +135,19 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                             <FlexRow>
                               <FlexColumn>
                                 <Label size="small">
-                                  {getKodeverknavnFraKode(alleKodeverk, KodeverkType.PERMISJONSBESKRIVELSE_TYPE, a.permisjonOgMangel.type)}
+                                  {getKodeverknavnFraKode(
+                                    alleKodeverk,
+                                    KodeverkType.PERMISJONSBESKRIVELSE_TYPE,
+                                    a.permisjonOgMangel.type,
+                                  )}
                                 </Label>
                               </FlexColumn>
                               <FlexColumn className={styles.textMargin}>
                                 <BodyShort size="small">
-                                  <PeriodLabel dateStringFom={a.permisjonOgMangel.permisjonFom} dateStringTom={a.permisjonOgMangel.permisjonTom} />
+                                  <PeriodLabel
+                                    dateStringFom={a.permisjonOgMangel.permisjonFom}
+                                    dateStringTom={a.permisjonOgMangel.permisjonTom}
+                                  />
                                 </BodyShort>
                               </FlexColumn>
                             </FlexRow>
@@ -149,9 +164,9 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                             )}
                             <VerticalSpacer fourPx />
                             <Link
-                              onClick={(e) => {
+                              onClick={e => {
                                 e.preventDefault();
-                                toggleInfoOmIm((info) => {
+                                toggleInfoOmIm(info => {
                                   const status = info[a.internArbeidsforholdId];
                                   return {
                                     ...info,
@@ -164,12 +179,18 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                               <span>
                                 <BodyShort size="small" className={styles.inline}>
                                   <FormattedMessage
-                                    id={!visInfoOmIm[a.internArbeidsforholdId]
-                                      ? 'ArbeidsforholdInformasjonPanel.ApneImInfo' : 'ArbeidsforholdInformasjonPanel.LukkeImInfo'}
+                                    id={
+                                      !visInfoOmIm[a.internArbeidsforholdId]
+                                        ? 'ArbeidsforholdInformasjonPanel.ApneImInfo'
+                                        : 'ArbeidsforholdInformasjonPanel.LukkeImInfo'
+                                    }
                                   />
                                 </BodyShort>
                               </span>
-                              <Image className={styles.arrow} src={visInfoOmIm[a.internArbeidsforholdId] ? pilOppIkonUrl : pilNedIkonUrl} />
+                              <Image
+                                className={styles.arrow}
+                                src={visInfoOmIm[a.internArbeidsforholdId] ? pilOppIkonUrl : pilNedIkonUrl}
+                              />
                             </Link>
                           </>
                         )}
@@ -178,10 +199,14 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                     {inntektsmelding && (
                       <FlexColumn className={styles.sisteKolonne}>
                         <FloatRight>
-                          <Label size="small"><FormattedMessage id="ArbeidsforholdInformasjonPanel.ImMottatt" /></Label>
+                          <Label size="small">
+                            <FormattedMessage id="ArbeidsforholdInformasjonPanel.ImMottatt" />
+                          </Label>
                           <VerticalSpacer fourPx />
                           <FloatRight>
-                            <BodyShort size="small"><DateLabel dateString={inntektsmelding.motattDato} /></BodyShort>
+                            <BodyShort size="small">
+                              <DateLabel dateString={inntektsmelding.motattDato} />
+                            </BodyShort>
                           </FloatRight>
                         </FloatRight>
                       </FlexColumn>
@@ -189,9 +214,15 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                     {!inntektsmelding && (
                       <FlexColumn className={styles.sisteKolonne}>
                         <FloatRight>
-                          <Image className={styles.aksjonpunktImage} alt={intl.formatMessage({ id: 'ArbeidsforholdRad.Aksjonspunkt' })} src={advarselIkonUrl} />
+                          <Image
+                            className={styles.aksjonpunktImage}
+                            alt={intl.formatMessage({ id: 'ArbeidsforholdRad.Aksjonspunkt' })}
+                            src={advarselIkonUrl}
+                          />
                           <div className={styles.ikkeMottatt}>
-                            <Label size="small"><FormattedMessage id="ArbeidsforholdInformasjonPanel.ImIkkeMottatt" /></Label>
+                            <Label size="small">
+                              <FormattedMessage id="ArbeidsforholdInformasjonPanel.ImIkkeMottatt" />
+                            </Label>
                           </div>
                         </FloatRight>
                       </FlexColumn>
@@ -220,7 +251,9 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
         <>
           <FlexRow>
             <FlexColumn>
-              <Label size="small"><FormattedMessage id="ArbeidsforholdInformasjonPanel.Stillingsprosent" /></Label>
+              <Label size="small">
+                <FormattedMessage id="ArbeidsforholdInformasjonPanel.Stillingsprosent" />
+              </Label>
             </FlexColumn>
             <FlexColumn className={styles.textMargin}>
               <BodyShort size="small">{`${arbeidsforholdForRad[0].stillingsprosent}%`}</BodyShort>
@@ -232,8 +265,11 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
               <FlexRow>
                 <FlexColumn>
                   <Label size="small">
-                    {getKodeverknavnFraKode(alleKodeverk,
-                      KodeverkType.PERMISJONSBESKRIVELSE_TYPE, arbeidsforholdForRad[0].permisjonOgMangel.type)}
+                    {getKodeverknavnFraKode(
+                      alleKodeverk,
+                      KodeverkType.PERMISJONSBESKRIVELSE_TYPE,
+                      arbeidsforholdForRad[0].permisjonOgMangel.type,
+                    )}
                   </Label>
                 </FlexColumn>
                 <FlexColumn>

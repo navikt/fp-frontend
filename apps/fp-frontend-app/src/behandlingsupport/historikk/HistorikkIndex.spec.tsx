@@ -18,11 +18,7 @@ describe('<HistorikkIndex>', () => {
     render(
       <RestApiMock data={data} requestApi={requestApi}>
         <MemoryRouter>
-          <HistorikkIndex
-            saksnummer="12345"
-            behandlingUuid="1"
-            behandlingVersjon={2}
-          />
+          <HistorikkIndex saksnummer="12345" behandlingUuid="1" behandlingVersjon={2} />
         </MemoryRouter>
       </RestApiMock>,
     );

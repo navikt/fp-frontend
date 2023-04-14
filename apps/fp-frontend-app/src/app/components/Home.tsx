@@ -1,9 +1,5 @@
-import React, {
-  useCallback, FunctionComponent, useState, useEffect,
-} from 'react';
-import {
-  Link, Route, Routes, useLocation, useNavigate,
-} from 'react-router-dom';
+import React, { useCallback, FunctionComponent, useState, useEffect } from 'react';
+import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 import { NotFoundPage } from '@navikt/ft-sak-infosider';
@@ -15,7 +11,11 @@ import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { NavAnsatt } from '@navikt/fp-types';
 
 import {
-  aktoerRoutePath, fagsakRoutePath, getFagsakHref, journalføringRoutePath, avdelingslederRoutePath,
+  aktoerRoutePath,
+  fagsakRoutePath,
+  getFagsakHref,
+  journalføringRoutePath,
+  avdelingslederRoutePath,
 } from '../paths';
 import FagsakIndex from '../../fagsak/FagsakIndex';
 import AktoerIndex from '../../aktoer/AktoerIndex';
@@ -33,15 +33,14 @@ interface OwnProps {
  *
  * Wrapper for sideinnholdet som vises under header.
  */
-const Home: FunctionComponent<OwnProps> = ({
-  headerHeight,
-  navAnsatt,
-}) => {
+const Home: FunctionComponent<OwnProps> = ({ headerHeight, navAnsatt }) => {
   const intl = useIntl();
   const { addErrorMessage, removeErrorMessages } = useRestApiErrorDispatcher();
 
   const [erLosTilgjengelig, setLosErTilgjengelig] = useState(true);
-  const setLosErIkkeTilgjengelig = useCallback(() => { setLosErTilgjengelig(false); }, []);
+  const setLosErIkkeTilgjengelig = useCallback(() => {
+    setLosErTilgjengelig(false);
+  }, []);
 
   useEffect(() => {
     if (!erLosTilgjengelig) {
@@ -50,9 +49,12 @@ const Home: FunctionComponent<OwnProps> = ({
   }, [erLosTilgjengelig]);
 
   const navigate = useNavigate();
-  const åpneFagsak = useCallback((saksnummer: string, behandlingUuid?: string) => {
-    navigate(getFagsakHref(saksnummer, behandlingUuid));
-  }, [navigate]);
+  const åpneFagsak = useCallback(
+    (saksnummer: string, behandlingUuid?: string) => {
+      navigate(getFagsakHref(saksnummer, behandlingUuid));
+    },
+    [navigate],
+  );
 
   const location = useLocation();
   useEffect(() => {
@@ -67,23 +69,34 @@ const Home: FunctionComponent<OwnProps> = ({
       <Routes>
         <Route
           path="/"
-          element={erLosTilgjengelig
-            ? <SaksbehandlerIndex setLosErIkkeTilgjengelig={setLosErIkkeTilgjengelig} åpneFagsak={åpneFagsak} kanSaksbehandle={navAnsatt?.kanSaksbehandle} />
-            : <FagsakSearchIndex />}
+          element={
+            erLosTilgjengelig ? (
+              <SaksbehandlerIndex
+                setLosErIkkeTilgjengelig={setLosErIkkeTilgjengelig}
+                åpneFagsak={åpneFagsak}
+                kanSaksbehandle={navAnsatt?.kanSaksbehandle}
+              />
+            ) : (
+              <FagsakSearchIndex />
+            )
+          }
         />
         <Route
           path={avdelingslederRoutePath}
-          element={erLosTilgjengelig
-            ? <AvdelingslederIndex setLosErIkkeTilgjengelig={setLosErIkkeTilgjengelig} navAnsatt={navAnsatt} />
-            : <Heading size="small"><FormattedMessage id="Los.IkkeTilgjengelig" /></Heading>}
+          element={
+            erLosTilgjengelig ? (
+              <AvdelingslederIndex setLosErIkkeTilgjengelig={setLosErIkkeTilgjengelig} navAnsatt={navAnsatt} />
+            ) : (
+              <Heading size="small">
+                <FormattedMessage id="Los.IkkeTilgjengelig" />
+              </Heading>
+            )
+          }
         />
-        <Route
-          path={journalføringRoutePath}
-          element={<OppgaveJournalføringIndex navAnsatt={navAnsatt} />}
-        />
+        <Route path={journalføringRoutePath} element={<OppgaveJournalføringIndex navAnsatt={navAnsatt} />} />
         <Route path={fagsakRoutePath} element={<FagsakIndex />} />
         <Route path={aktoerRoutePath} element={<AktoerIndex />} />
-        <Route path="*" element={<NotFoundPage renderSomLenke={(tekst) => <Link to="/">{tekst}</Link>} />} />
+        <Route path="*" element={<NotFoundPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />} />
       </Routes>
     </div>
   );

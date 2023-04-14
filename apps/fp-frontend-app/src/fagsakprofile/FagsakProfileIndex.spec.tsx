@@ -4,9 +4,7 @@ import { act } from 'react-dom/test-utils';
 import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import { MemoryRouter } from 'react-router-dom';
-import {
-  BehandlingStatus, BehandlingType, FagsakYtelseType, FagsakStatus,
-} from '@navikt/ft-kodeverk';
+import { BehandlingStatus, BehandlingType, FagsakYtelseType, FagsakStatus } from '@navikt/ft-kodeverk';
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { Fagsak, BehandlingAppKontekst } from '@navikt/fp-types';
@@ -63,10 +61,7 @@ describe('<FagsakProfileIndex>', () => {
         <RawIntlProvider value={intl}>
           <RestApiMock data={data} requestApi={requestApi}>
             <MemoryRouter>
-              <FagsakProfileIndex
-                fagsakData={new FagsakData(fagsak as Fagsak)}
-                hentFagsakdataPåNytt={vi.fn()}
-              />
+              <FagsakProfileIndex fagsakData={new FagsakData(fagsak as Fagsak)} hentFagsakdataPåNytt={vi.fn()} />
             </MemoryRouter>
           </RestApiMock>
         </RawIntlProvider>,

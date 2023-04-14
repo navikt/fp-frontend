@@ -6,7 +6,7 @@ import AlleKodeverkTilbakekreving from './kodeverkAlleTilbakekrevingTsType';
 interface StandardProsessPanelPropsTilbakekreving {
   behandling: Behandling;
   alleKodeverk: AlleKodeverkTilbakekreving;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   submitCallback: (aksjonspunktData: any) => Promise<void>;
   status: string;
   isReadOnly: boolean;

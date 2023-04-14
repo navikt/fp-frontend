@@ -7,7 +7,10 @@ import { Modal } from '@navikt/ds-react';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
 import {
-  fagsakYtelseType as FagsakYtelseType, behandlingType as BehandlingType, KodeverkType, dokumentMalType,
+  fagsakYtelseType as FagsakYtelseType,
+  behandlingType as BehandlingType,
+  KodeverkType,
+  dokumentMalType,
 } from '@navikt/fp-kodeverk';
 import { Fagsak, BehandlingAppKontekst } from '@navikt/fp-types';
 
@@ -88,7 +91,9 @@ describe('<MeldingIndex>', () => {
     ];
 
     let axiosMock: MockAdapter;
-    const setApiMock = (mockAdapter: MockAdapter) => { axiosMock = mockAdapter; };
+    const setApiMock = (mockAdapter: MockAdapter) => {
+      axiosMock = mockAdapter;
+    };
 
     const utils = render(
       <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
@@ -111,14 +116,17 @@ describe('<MeldingIndex>', () => {
     await userEvent.click(screen.getByText('Forhåndsvis'));
 
     await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
-    await waitFor(() => expect(axiosMock.history.post
-      .find((a) => a.url === '/fpformidling/api/brev/forhaandsvis').data).toBe(JSON.stringify({
-      behandlingUuid: '1',
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-      fritekst: ' ',
-      arsakskode: null,
-      dokumentMal: 'Mal1',
-    })));
+    await waitFor(() =>
+      expect(axiosMock.history.post.find(a => a.url === '/fpformidling/api/brev/forhaandsvis').data).toBe(
+        JSON.stringify({
+          behandlingUuid: '1',
+          fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+          fritekst: ' ',
+          arsakskode: null,
+          dokumentMal: 'Mal1',
+        }),
+      ),
+    );
   });
 
   it('skal sende melding og så lukke modal', async () => {
@@ -129,7 +137,9 @@ describe('<MeldingIndex>', () => {
     ];
 
     let axiosMock: MockAdapter;
-    const setApiMock = (mockAdapter: MockAdapter) => { axiosMock = mockAdapter; };
+    const setApiMock = (mockAdapter: MockAdapter) => {
+      axiosMock = mockAdapter;
+    };
 
     const utils = render(
       <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
@@ -157,13 +167,14 @@ describe('<MeldingIndex>', () => {
 
     await waitFor(() => expect(axiosMock.history.get.length).toBe(1));
 
-    await waitFor(() => expect(axiosMock.history.get
-      .find((a) => a.url === FpsakApiKeys.SUBMIT_MESSAGE.name).params).toStrictEqual({
-      behandlingUuid: '1',
-      arsakskode: undefined,
-      fritekst: '',
-      brevmalkode: 'Mal1',
-    }));
+    await waitFor(() =>
+      expect(axiosMock.history.get.find(a => a.url === FpsakApiKeys.SUBMIT_MESSAGE.name).params).toStrictEqual({
+        behandlingUuid: '1',
+        arsakskode: undefined,
+        fritekst: '',
+        brevmalkode: 'Mal1',
+      }),
+    );
   });
 
   it('skal sende melding og sette saken på vent hvis INNHENT_DOK', async () => {
@@ -174,7 +185,9 @@ describe('<MeldingIndex>', () => {
     ];
 
     let axiosMock: MockAdapter;
-    const setApiMock = (mockAdapter: MockAdapter) => { axiosMock = mockAdapter; };
+    const setApiMock = (mockAdapter: MockAdapter) => {
+      axiosMock = mockAdapter;
+    };
 
     const utils = render(
       <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
@@ -205,12 +218,13 @@ describe('<MeldingIndex>', () => {
 
     await waitFor(() => expect(axiosMock.history.get.length).toBe(1));
 
-    await waitFor(() => expect(axiosMock.history.get
-      .find((a) => a.url === FpsakApiKeys.SUBMIT_MESSAGE.name).params).toStrictEqual({
-      behandlingUuid: '1',
-      arsakskode: undefined,
-      brevmalkode: dokumentMalType.INNHENTE_OPPLYSNINGER,
-      fritekst: 'Dette er en begrunnelse',
-    }));
+    await waitFor(() =>
+      expect(axiosMock.history.get.find(a => a.url === FpsakApiKeys.SUBMIT_MESSAGE.name).params).toStrictEqual({
+        behandlingUuid: '1',
+        arsakskode: undefined,
+        brevmalkode: dokumentMalType.INNHENTE_OPPLYSNINGER,
+        fritekst: 'Dette er en begrunnelse',
+      }),
+    );
   });
 });

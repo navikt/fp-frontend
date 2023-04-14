@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  fireEvent, render, screen, waitFor,
-} from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import dayjs from 'dayjs';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
@@ -67,7 +65,9 @@ describe('<FodselPapirsoknadIndex>', () => {
 
     expect(await screen.findByText('Når ble barnet født?')).toBeInTheDocument();
 
-    expect(screen.queryByText('Rett til prematuruker vil kun sjekkes når du også oppgir termindato')).not.toBeInTheDocument();
+    expect(
+      screen.queryByText('Rett til prematuruker vil kun sjekkes når du også oppgir termindato'),
+    ).not.toBeInTheDocument();
     expect(screen.queryByText('Termindato')).not.toBeInTheDocument();
     expect(screen.queryByText('Utstedt dato fra terminbekreftelsen')).not.toBeInTheDocument();
   });

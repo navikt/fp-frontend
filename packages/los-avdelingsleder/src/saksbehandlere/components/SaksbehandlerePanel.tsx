@@ -9,7 +9,7 @@ interface OwnProps {
   saksbehandlere: Saksbehandler[];
   valgtAvdelingEnhet: string;
   avdelingensSaksbehandlere: Saksbehandler[];
-  hentAvdelingensSaksbehandlere: (params: {avdelingEnhet: string}) => void;
+  hentAvdelingensSaksbehandlere: (params: { avdelingEnhet: string }) => void;
 }
 
 /**

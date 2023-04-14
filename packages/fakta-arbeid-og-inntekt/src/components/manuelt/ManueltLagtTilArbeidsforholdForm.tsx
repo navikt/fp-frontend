@@ -1,21 +1,23 @@
-import React, {
-  FunctionComponent, useCallback, useMemo, useState,
-} from 'react';
+import React, { FunctionComponent, useCallback, useMemo, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm, UseFormGetValues } from 'react-hook-form';
 import { Heading, Button } from '@navikt/ds-react';
-import {
-  Image, FlexColumn, FlexContainer, FlexRow, VerticalSpacer, OkAvbrytModal,
-} from '@navikt/ft-ui-komponenter';
+import { Image, FlexColumn, FlexContainer, FlexRow, VerticalSpacer, OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import { AoIArbeidsforhold, ManueltArbeidsforhold } from '@navikt/fp-types';
 import {
-  hasValidText, maxLength, minLength, hasValidDate, hasValidInteger, required, minValue, maxValue, dateAfterOrEqual,
+  hasValidText,
+  maxLength,
+  minLength,
+  hasValidDate,
+  hasValidInteger,
+  required,
+  minValue,
+  maxValue,
+  dateAfterOrEqual,
 } from '@navikt/ft-form-validators';
-import {
-  TextAreaField, Datepicker, InputField, Form,
-} from '@navikt/ft-form-hooks';
+import { TextAreaField, Datepicker, InputField, Form } from '@navikt/ft-form-hooks';
 
 import binIcon from '../../images/bin.svg';
 import ArbeidsforholdOgInntekt from '../../types/arbeidsforholdOgInntekt';
@@ -36,11 +38,10 @@ export type FormValues = {
   tom: string;
   stillingsprosent: number;
   begrunnelse: string;
-}
+};
 
-const validerPeriodeRekkefølge = (
-  getValues: UseFormGetValues<FormValues>,
-) => (tom?: string) => (tom ? dateAfterOrEqual(getValues('fom'))(tom) : null);
+const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (tom?: string) =>
+  tom ? dateAfterOrEqual(getValues('fom'))(tom) : null;
 
 interface OwnProps {
   behandlingUuid: string;
@@ -50,7 +51,7 @@ interface OwnProps {
   arbeidsforhold?: AoIArbeidsforhold;
   lukkArbeidsforholdRad: () => void;
   erOverstyrt: boolean;
-  oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
+  oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>;
   erNyttArbeidsforhold?: boolean;
 }
 
@@ -67,13 +68,16 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
   const [visSletteDialog, settVisSletteDialog] = useState(false);
 
-  const defaultValues = useMemo<FormValues>(() => ({
-    fom: radData?.avklaring?.fom,
-    tom: radData?.avklaring?.tom,
-    stillingsprosent: radData?.avklaring?.stillingsprosent,
-    begrunnelse: radData?.avklaring?.begrunnelse,
-    arbeidsgiverNavn: radData?.avklaring?.arbeidsgiverNavn,
-  }), [radData]);
+  const defaultValues = useMemo<FormValues>(
+    () => ({
+      fom: radData?.avklaring?.fom,
+      tom: radData?.avklaring?.tom,
+      stillingsprosent: radData?.avklaring?.stillingsprosent,
+      begrunnelse: radData?.avklaring?.begrunnelse,
+      arbeidsgiverNavn: radData?.avklaring?.arbeidsgiverNavn,
+    }),
+    [radData],
+  );
 
   const formMethods = useForm<FormValues>({
     defaultValues,
@@ -86,41 +90,44 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
     formMethods.reset(defaultValues);
   }, [lukkArbeidsforholdRad]);
 
-  const lagreArbeidsforhold = useCallback((formValues: FormValues) => {
-    const params = {
-      behandlingUuid,
-      arbeidsgiverIdent: MANUELT_ORG_NR,
-      vurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
-      ...formValues,
-    };
-    registrerArbeidsforhold(params).then(() => {
-      oppdaterTabell((gammelData) => {
-        const rad = {
-          arbeidsgiverIdent: MANUELT_ORG_NR,
-          arbeidsgiverNavn: formValues.arbeidsgiverNavn,
-          avklaring: {
-            fom: formValues.fom,
-            tom: formValues.tom,
-            stillingsprosent: formValues.stillingsprosent,
+  const lagreArbeidsforhold = useCallback(
+    (formValues: FormValues) => {
+      const params = {
+        behandlingUuid,
+        arbeidsgiverIdent: MANUELT_ORG_NR,
+        vurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
+        ...formValues,
+      };
+      registrerArbeidsforhold(params).then(() => {
+        oppdaterTabell(gammelData => {
+          const rad = {
+            arbeidsgiverIdent: MANUELT_ORG_NR,
             arbeidsgiverNavn: formValues.arbeidsgiverNavn,
-            begrunnelse: formValues.begrunnelse,
-            saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
-          },
-        };
+            avklaring: {
+              fom: formValues.fom,
+              tom: formValues.tom,
+              stillingsprosent: formValues.stillingsprosent,
+              arbeidsgiverNavn: formValues.arbeidsgiverNavn,
+              begrunnelse: formValues.begrunnelse,
+              saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
+            },
+          };
 
-        const gammelIndex = gammelData.findIndex((data) => data.arbeidsgiverIdent === MANUELT_ORG_NR);
-        if (gammelIndex === -1) {
-          return gammelData.concat(rad);
+          const gammelIndex = gammelData.findIndex(data => data.arbeidsgiverIdent === MANUELT_ORG_NR);
+          if (gammelIndex === -1) {
+            return gammelData.concat(rad);
+          }
+          return gammelData.map((data, i) => (i === gammelIndex ? rad : data));
+        });
+
+        formMethods.reset(formValues);
+        if (erNyttArbeidsforhold) {
+          lukkArbeidsforholdRad();
         }
-        return gammelData.map((data, i) => (i === gammelIndex ? rad : data));
       });
-
-      formMethods.reset(formValues);
-      if (erNyttArbeidsforhold) {
-        lukkArbeidsforholdRad();
-      }
-    });
-  }, [behandlingUuid, oppdaterTabell]);
+    },
+    [behandlingUuid, oppdaterTabell],
+  );
 
   const slettArbeidsforhold = useCallback(() => {
     const formValues = formMethods.getValues();
@@ -131,7 +138,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
       ...formValues,
     };
     registrerArbeidsforhold(params).then(() => {
-      oppdaterTabell((oldData) => oldData.filter((data) => data.arbeidsgiverIdent !== MANUELT_ORG_NR));
+      oppdaterTabell(oldData => oldData.filter(data => data.arbeidsgiverIdent !== MANUELT_ORG_NR));
       if (erNyttArbeidsforhold) {
         lukkArbeidsforholdRad();
       }
@@ -142,7 +149,9 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
     <>
       {!radData && (
         <>
-          <Heading size="small"><FormattedMessage id="LeggTilArbeidsforholdForm.LeggTilArbeidsforhold" /></Heading>
+          <Heading size="small">
+            <FormattedMessage id="LeggTilArbeidsforholdForm.LeggTilArbeidsforhold" />
+          </Heading>
           <VerticalSpacer sixteenPx />
         </>
       )}
@@ -244,7 +253,9 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                     type="button"
                   >
                     <Image src={binIcon} className={styles.buttonImage} />
-                    <span><FormattedMessage id="LeggTilArbeidsforholdForm.Slett" /></span>
+                    <span>
+                      <FormattedMessage id="LeggTilArbeidsforholdForm.Slett" />
+                    </span>
                   </Button>
                 </FlexColumn>
               )}

@@ -8,7 +8,10 @@ import StandardBehandlingProps from '../felles/typer/standardBehandlingProps';
 import BehandlingPaVent from '../felles/modaler/paVent/BehandlingPaVent';
 import StandardPropsProvider from '../felles/utils/standardPropsStateContext';
 import {
-  useBehandling, useInitBehandlingHandlinger, useInitRequestApi, useLagreAksjonspunkt,
+  useBehandling,
+  useInitBehandlingHandlinger,
+  useInitRequestApi,
+  useLagreAksjonspunkt,
 } from '../felles/utils/indexHooks';
 import { requestKlageApi } from './data/klageBehandlingApi';
 import FormKravFamOgPensjonProsessStegInitPanel from './prosessPaneler/FormKravFamOgPensjonProsessStegInitPanel';
@@ -44,11 +47,8 @@ const BehandlingKlageIndex: FunctionComponent<OwnProps & StandardBehandlingProps
 }) => {
   useInitRequestApi(requestKlageApi, setRequestPendingMessage);
 
-  const {
-    behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling,
-  } = useBehandling(
-    requestKlageApi, behandlingUuid, oppdaterBehandlingVersjon,
-  );
+  const { behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling } =
+    useBehandling(requestKlageApi, behandlingUuid, oppdaterBehandlingVersjon);
 
   const { lagreAksjonspunkter } = useLagreAksjonspunkt(requestKlageApi, setBehandling);
 
@@ -81,10 +81,8 @@ const BehandlingKlageIndex: FunctionComponent<OwnProps & StandardBehandlingProps
           valgtFaktaSteg={valgtFaktaSteg}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
           requestApi={requestKlageApi}
-          hentFaktaPaneler={(props) => (
-            <VergeFaktaInitPanel {...props} />
-          )}
-          hentProsessPaneler={(props) => (
+          hentFaktaPaneler={props => <VergeFaktaInitPanel {...props} />}
+          hentProsessPaneler={props => (
             <>
               <FormKravFamOgPensjonProsessStegInitPanel {...props} alleBehandlinger={alleBehandlinger} />
               <VurderingFamOgPensjonProsessStegInitPanel

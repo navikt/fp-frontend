@@ -22,15 +22,18 @@ const defaultOpptjening = {
       måneder: 2,
       dager: 3,
     },
-    fastsattOpptjeningAktivitetList: [{
-      fom: '2018-01-01',
-      tom: '2018-04-04',
-      klasse: opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT,
-    }, {
-      fom: '2018-04-05',
-      tom: '2018-04-10',
-      klasse: opptjeningAktivitetKlassifisering.ANTATT_AVVIST,
-    }],
+    fastsattOpptjeningAktivitetList: [
+      {
+        fom: '2018-01-01',
+        tom: '2018-04-04',
+        klasse: opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT,
+      },
+      {
+        fom: '2018-04-05',
+        tom: '2018-04-10',
+        klasse: opptjeningAktivitetKlassifisering.ANTATT_AVVIST,
+      },
+    ],
     opptjeningFom: '2018-01-01',
     opptjeningTom: '2018-10-01',
   },
@@ -43,13 +46,9 @@ export default {
 
 const Template: Story<{
   submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
-  aksjonspunkter: Aksjonspunkt[],
+  aksjonspunkter: Aksjonspunkt[];
   opptjening: Opptjening;
-}> = ({
-  submitCallback,
-  aksjonspunkter,
-  opptjening,
-}) => (
+}> = ({ submitCallback, aksjonspunkter, opptjening }) => (
   <OpptjeningVilkarProsessIndex
     behandling={behandling}
     alleKodeverk={alleKodeverk as any}
@@ -71,11 +70,13 @@ export const ÅpentAksjonspunkt = Template.bind({});
 ÅpentAksjonspunkt.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   opptjening: defaultOpptjening,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.SVANGERSKAPSVILKARET,
-    status: aksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.SVANGERSKAPSVILKARET,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+    },
+  ] as Aksjonspunkt[],
 };
 
 export const ÅpentAksjonspunktMenUtenAktiviteter = Template.bind({});
@@ -88,11 +89,13 @@ export const ÅpentAksjonspunktMenUtenAktiviteter = Template.bind({});
       fastsattOpptjeningAktivitetList: [],
     },
   },
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.SVANGERSKAPSVILKARET,
-    status: aksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.SVANGERSKAPSVILKARET,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+    },
+  ] as Aksjonspunkt[],
 };
 
 export const HarIkkeAksjonspunkt = Template.bind({});

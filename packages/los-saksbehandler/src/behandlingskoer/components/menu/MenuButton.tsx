@@ -14,10 +14,7 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Lager lenker i behandlingsmeny
  */
-const MenuButton: FunctionComponent<OwnProps> = React.forwardRef(({
-  onClick,
-  children,
-}, ref: any) => (
+const MenuButton: FunctionComponent<OwnProps> = React.forwardRef(({ onClick, children }, ref: any) => (
   <button ref={ref} className={styles.button} onClick={onClick} type="button">
     <Detail size="small">{children}</Detail>
   </button>

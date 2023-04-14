@@ -2,13 +2,13 @@ export type ManglendeVedleggSoknad = Readonly<{
   dokumentType: string;
   arbeidsgiverReferanse: string;
   brukerHarSagtAtIkkeKommer: boolean;
-}>
+}>;
 
 export type UtlandsoppholdPeriode = Readonly<{
   landNavn: string;
   fom: string;
   tom: string;
-}>
+}>;
 
 export type Søknadsfrist = Readonly<{
   mottattDato?: string;
@@ -16,7 +16,7 @@ export type Søknadsfrist = Readonly<{
   søknadsperiodeStart?: string;
   søknadsperiodeSlutt?: string;
   dagerOversittetFrist?: number;
-}>
+}>;
 
 type Soknad = Readonly<{
   soknadType: string;
@@ -29,7 +29,7 @@ type Soknad = Readonly<{
     oppholdNestePeriode: boolean;
     utlandsoppholdFor: UtlandsoppholdPeriode[];
     utlandsoppholdEtter: UtlandsoppholdPeriode[];
-  }
+  };
   manglendeVedlegg: ManglendeVedleggSoknad[];
   oppgittFordeling: {
     startDatoForPermisjon?: string;
@@ -42,6 +42,6 @@ type Soknad = Readonly<{
   barnetsAnkomstTilNorgeDato?: string;
   adopsjonFodelsedatoer?: Record<number, string>;
   farSokerType?: string;
-}>
+}>;
 
 export default Soknad;

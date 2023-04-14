@@ -63,7 +63,7 @@ const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & Sta
       overstyringApKode={overstyringApKode}
       lovReferanse={lovReferanse}
       erMedlemskapsPanel={erMedlemskapsPanel}
-      erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted)}
+      erIkkeGodkjentAvBeslutter={aksjonspunkter.some(a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted)}
       formData={formData}
       setFormData={setFormData}
     />

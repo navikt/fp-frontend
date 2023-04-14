@@ -5,6 +5,6 @@ type ProsessPanelMenyData = {
   harApentAksjonspunkt?: boolean;
   status?: string;
   harHentetInitData: boolean;
-}
+};
 
 export default ProsessPanelMenyData;

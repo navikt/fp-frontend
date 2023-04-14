@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, useState, useCallback,
-} from 'react';
+import React, { FunctionComponent, useState, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import { TotrinnskontrollSakIndex } from '@navikt/fp-sak-totrinnskontroll';
@@ -20,26 +18,26 @@ type Values = {
   erAlleAksjonspunktGodkjent: boolean;
 };
 
-const getLagreFunksjon = (
-  saksnummer: string,
-  behandlingUuid: string,
-  behandlingVersjon: number,
-  setAlleAksjonspunktTilGodkjent: (erGodkjent: boolean) => void,
-  setVisBeslutterModal: (visModal: boolean) => void,
-  godkjennTotrinnsaksjonspunkter: (params: any) => Promise<any>,
-) => (
-  totrinnskontrollData: Values,
-) => {
-  const params = {
-    saksnummer,
-    behandlingUuid,
-    behandlingVersjon,
-    bekreftedeAksjonspunktDtoer: [totrinnskontrollData.fatterVedtakAksjonspunktDto],
+const getLagreFunksjon =
+  (
+    saksnummer: string,
+    behandlingUuid: string,
+    behandlingVersjon: number,
+    setAlleAksjonspunktTilGodkjent: (erGodkjent: boolean) => void,
+    setVisBeslutterModal: (visModal: boolean) => void,
+    godkjennTotrinnsaksjonspunkter: (params: any) => Promise<any>,
+  ) =>
+  (totrinnskontrollData: Values) => {
+    const params = {
+      saksnummer,
+      behandlingUuid,
+      behandlingVersjon,
+      bekreftedeAksjonspunktDtoer: [totrinnskontrollData.fatterVedtakAksjonspunktDto],
+    };
+    setAlleAksjonspunktTilGodkjent(totrinnskontrollData.erAlleAksjonspunktGodkjent);
+    setVisBeslutterModal(true);
+    return godkjennTotrinnsaksjonspunkter(params);
   };
-  setAlleAksjonspunktTilGodkjent(totrinnskontrollData.erAlleAksjonspunktGodkjent);
-  setVisBeslutterModal(true);
-  return godkjennTotrinnsaksjonspunkter(params);
-};
 
 interface OwnProps {
   fagsakData: FagsakData;
@@ -73,11 +71,11 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
 
   const alleKodeverk = useKodeverk(valgtBehandling.type);
 
-  const {
-    uuid, versjon, type, totrinnskontrollÅrsaker,
-  } = valgtBehandling;
+  const { uuid, versjon, type, totrinnskontrollÅrsaker } = valgtBehandling;
 
-  const { startRequest: godkjennTotrinnsaksjonspunkter } = restApiHooks.useRestApiRunner(FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT);
+  const { startRequest: godkjennTotrinnsaksjonspunkter } = restApiHooks.useRestApiRunner(
+    FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT,
+  );
 
   const forhandsvisMelding = useVisForhandsvisningAvMelding(type);
 
@@ -88,9 +86,17 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
       gjelderVedtak: true,
     });
   }, []);
-  const onSubmit = useCallback(getLagreFunksjon(fagsak.saksnummer, uuid, versjon,
-    setAlleAksjonspunktTilGodkjent, setVisBeslutterModal, godkjennTotrinnsaksjonspunkter),
-  [uuid, versjon]);
+  const onSubmit = useCallback(
+    getLagreFunksjon(
+      fagsak.saksnummer,
+      uuid,
+      versjon,
+      setAlleAksjonspunktTilGodkjent,
+      setVisBeslutterModal,
+      godkjennTotrinnsaksjonspunkter,
+    ),
+    [uuid, versjon],
+  );
 
   if (!totrinnskontrollÅrsaker) {
     return null;

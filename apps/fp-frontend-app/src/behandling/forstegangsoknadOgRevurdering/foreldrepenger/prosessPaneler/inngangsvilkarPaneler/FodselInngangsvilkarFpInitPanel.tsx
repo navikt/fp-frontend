@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -17,10 +15,7 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
 ];
 
-const VILKAR_KODER = [
-  VilkarType.FODSELSVILKARET_MOR,
-  VilkarType.FODSELSVILKARET_FAR,
-];
+const VILKAR_KODER = [VilkarType.FODSELSVILKARET_MOR, VilkarType.FODSELSVILKARET_FAR];
 
 interface OwnProps {
   behandlingVersjon: number;
@@ -46,15 +41,21 @@ const FodselInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangsvilk
           {data.aksjonspunkter.length === 0 && (
             <OverstyringPanelDef
               aksjonspunkter={data.aksjonspunkter}
-              aksjonspunktKode={data.vilkar.some((v) => v.vilkarType === VilkarType.FODSELSVILKARET_MOR)
-                ? AksjonspunktCode.OVERSTYR_FODSELSVILKAR : AksjonspunktCode.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR}
+              aksjonspunktKode={
+                data.vilkar.some(v => v.vilkarType === VilkarType.FODSELSVILKARET_MOR)
+                  ? AksjonspunktCode.OVERSTYR_FODSELSVILKAR
+                  : AksjonspunktCode.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR
+              }
               vilkar={data.vilkar}
               vilkarKoder={VILKAR_KODER}
               panelTekstKode="Inngangsvilkar.Fodselsvilkaret"
               erMedlemskapsPanel={false}
               toggleOverstyring={toggleOverstyring}
               erOverstyrt={erOverstyrt}
-              overrideReadOnly={data.isReadOnly || (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))}
+              overrideReadOnly={
+                data.isReadOnly ||
+                (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))
+              }
               kanOverstyreAccess={rettigheter.kanOverstyreAccess}
             />
           )}

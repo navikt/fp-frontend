@@ -3,9 +3,7 @@ import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { BodyShort, Heading } from '@navikt/ds-react';
 
 import { CheckboxField } from '@navikt/ft-form-hooks';
-import {
-  DateTimeLabel, Table, TableColumn, TableRow, Image,
-} from '@navikt/ft-ui-komponenter';
+import { DateTimeLabel, Table, TableColumn, TableRow, Image } from '@navikt/ft-ui-komponenter';
 import { kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { Dokument } from '@navikt/fp-types';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
@@ -61,29 +59,31 @@ interface OwnProps {
  * trigget når saksbehandler velger et dokument. Finnes ingen dokumenter blir det kun vist en label
  * som viser at ingen dokumenter finnes på fagsak.
  */
-const DocumentListInnsyn: FunctionComponent<OwnProps> = ({
-  documents,
-  saksNr,
-  readOnly,
-}) => {
+const DocumentListInnsyn: FunctionComponent<OwnProps> = ({ documents, saksNr, readOnly }) => {
   const intl = useIntl();
   if (documents.length === 0) {
-    return <BodyShort size="small" className={styles.noDocuments}><FormattedMessage id="DocumentListInnsyn.NoDocuments" /></BodyShort>;
+    return (
+      <BodyShort size="small" className={styles.noDocuments}>
+        <FormattedMessage id="DocumentListInnsyn.NoDocuments" />
+      </BodyShort>
+    );
   }
   const headerTextCodes = readOnly
     ? ['DocumentListInnsyn.DocumentType']
     : [
-      'DocumentListInnsyn.CheckBox',
-      'DocumentListInnsyn.Direction',
-      'DocumentListInnsyn.DocumentType',
-      'DocumentListInnsyn.DateTime',
-    ];
+        'DocumentListInnsyn.CheckBox',
+        'DocumentListInnsyn.Direction',
+        'DocumentListInnsyn.DocumentType',
+        'DocumentListInnsyn.DateTime',
+      ];
 
   return (
     <>
-      <Heading size="small" className={styles.noDocuments}><FormattedMessage id="DocumentListInnsyn.VelgInnsynsDok" /></Heading>
+      <Heading size="small" className={styles.noDocuments}>
+        <FormattedMessage id="DocumentListInnsyn.VelgInnsynsDok" />
+      </Heading>
       <Table headerTextCodes={headerTextCodes}>
-        {documents.map((document) => {
+        {documents.map(document => {
           const img = getDirectionImage(document, intl);
           const dokId = parseInt(document.dokumentId, 10);
           return (
@@ -91,9 +91,7 @@ const DocumentListInnsyn: FunctionComponent<OwnProps> = ({
               <TableColumn className={styles.checkboxCol}>
                 <CheckboxField label={noLabelHack()} name={`dokument_${dokId}`} disabled={readOnly} />
               </TableColumn>
-              <TableColumn hidden={readOnly}>
-                {img}
-              </TableColumn>
+              <TableColumn hidden={readOnly}>{img}</TableColumn>
               <TableColumn className={styles.linkCol}>
                 <a
                   href={hentDokumentLenke(saksNr, document.journalpostId, document.dokumentId)}
@@ -105,9 +103,13 @@ const DocumentListInnsyn: FunctionComponent<OwnProps> = ({
                 </a>
               </TableColumn>
               <TableColumn hidden={readOnly}>
-                {document.tidspunkt
-                  ? <DateTimeLabel dateTimeString={document.tidspunkt} />
-                  : <BodyShort size="small"><FormattedMessage id="DocumentListInnsyn.IProduksjon" /></BodyShort>}
+                {document.tidspunkt ? (
+                  <DateTimeLabel dateTimeString={document.tidspunkt} />
+                ) : (
+                  <BodyShort size="small">
+                    <FormattedMessage id="DocumentListInnsyn.IProduksjon" />
+                  </BodyShort>
+                )}
               </TableColumn>
             </TableRow>
           );

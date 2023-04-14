@@ -15,10 +15,6 @@ export default {
 
 export const visFatterVedtakModal = () => (
   <RawIntlProvider value={intl}>
-    <FatterVedtakStatusModal
-      visModal
-      lukkModal={() => undefined}
-      tekst="Forslag til vedtak er sendt til beslutter"
-    />
+    <FatterVedtakStatusModal visModal lukkModal={() => undefined} tekst="Forslag til vedtak er sendt til beslutter" />
   </RawIntlProvider>
 );

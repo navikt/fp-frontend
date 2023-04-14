@@ -1,10 +1,12 @@
-import React, {
-  FunctionComponent, ReactElement, useCallback, useState,
-} from 'react';
+import React, { FunctionComponent, ReactElement, useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 import {
-  VerticalSpacer, AksjonspunktHelpTextHTML, FlexContainer, FlexRow, FlexColumn,
+  VerticalSpacer,
+  AksjonspunktHelpTextHTML,
+  FlexContainer,
+  FlexRow,
+  FlexColumn,
 } from '@navikt/ft-ui-komponenter';
 import { Behandling } from '@navikt/ft-types';
 
@@ -20,12 +22,14 @@ import InngangsvilkarPanelInitProps from '../typer/inngangsvilkarPanelInitProps'
 
 import styles from './inngangsvilkarDefaultInitWrapper.module.css';
 
-const harMinstEttDelPanelStatus = (paneler: InngangsvilkarPanelData[], vuType: string): boolean => paneler.some((p) => p.status === vuType);
+const harMinstEttDelPanelStatus = (paneler: InngangsvilkarPanelData[], vuType: string): boolean =>
+  paneler.some(p => p.status === vuType);
 
 const getStatus = (paneler: InngangsvilkarPanelData[]): string => {
   const harStatusIkkeVurdert = harMinstEttDelPanelStatus(paneler, VilkarUtfallType.IKKE_VURDERT);
   const harStatusOppfylt = harMinstEttDelPanelStatus(paneler, VilkarUtfallType.OPPFYLT);
-  const tempStatus = harStatusOppfylt && !harStatusIkkeVurdert ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT;
+  const tempStatus =
+    harStatusOppfylt && !harStatusIkkeVurdert ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT;
   return harMinstEttDelPanelStatus(paneler, VilkarUtfallType.IKKE_OPPFYLT) ? VilkarUtfallType.IKKE_OPPFYLT : tempStatus;
 };
 
@@ -33,19 +37,21 @@ const getErAksjonspunktOpen = (paneler: InngangsvilkarPanelData[], behandling: B
   if (behandling.behandlingHenlagt) {
     return false;
   }
-  if (paneler.some((p) => p.harApentAksjonspunkt)) {
+  if (paneler.some(p => p.harApentAksjonspunkt)) {
     return true;
   }
-  if (paneler.some((p) => p.status === VilkarUtfallType.IKKE_OPPFYLT)) {
+  if (paneler.some(p => p.status === VilkarUtfallType.IKKE_OPPFYLT)) {
     return false;
   }
 
-  return !(paneler.every((p) => p.status === VilkarUtfallType.IKKE_VURDERT)
-    || paneler.every((p) => p.status === VilkarUtfallType.OPPFYLT));
+  return !(
+    paneler.every(p => p.status === VilkarUtfallType.IKKE_VURDERT) ||
+    paneler.every(p => p.status === VilkarUtfallType.OPPFYLT)
+  );
 };
 
 interface OwnProps {
-  apentFaktaPanelInfo?: {urlCode: string, text: string };
+  apentFaktaPanelInfo?: { urlCode: string; text: string };
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   leftPanels: (props: InngangsvilkarPanelInitProps) => ReactElement;
   rightPanels?: (props: InngangsvilkarPanelInitProps) => ReactElement;
@@ -66,9 +72,9 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
 
   const [panelInfo, setPanelInfo] = useState<InngangsvilkarPanelData[]>([]);
   const registrerInngangsvilkarPanel = useCallback((nyData: InngangsvilkarPanelData) => {
-    setPanelInfo((oldData) => {
+    setPanelInfo(oldData => {
       const newData = [...oldData];
-      const index = newData.findIndex((d) => d.id === nyData.id);
+      const index = newData.findIndex(d => d.id === nyData.id);
       if (index >= 0) {
         newData.splice(index, 1, nyData);
       } else {
@@ -78,12 +84,15 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
     });
   }, []);
 
-  const erIkkeFerdigbehandlet = panelInfo.some((p) => p.status === VilkarUtfallType.IKKE_VURDERT);
+  const erIkkeFerdigbehandlet = panelInfo.some(p => p.status === VilkarUtfallType.IKKE_VURDERT);
 
-  const oppdaterUrl = useCallback((evt) => {
-    oppdaterProsessStegOgFaktaPanelIUrl(undefined, apentFaktaPanelInfo.urlCode);
-    evt.preventDefault();
-  }, [apentFaktaPanelInfo]);
+  const oppdaterUrl = useCallback(
+    evt => {
+      oppdaterProsessStegOgFaktaPanelIUrl(undefined, apentFaktaPanelInfo.urlCode);
+      evt.preventDefault();
+    },
+    [apentFaktaPanelInfo],
+  );
 
   const harApentAksjonspunkt = getErAksjonspunktOpen(panelInfo, behandling);
   const status = getStatus(panelInfo);
@@ -102,7 +111,7 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
     !apentFaktaPanelInfo && harApentAksjonspunkt,
   );
 
-  const aksjonspunktTekster = panelInfo.map((p) => p.aksjonspunktTekst).filter((tekst) => !!tekst);
+  const aksjonspunktTekster = panelInfo.map(p => p.aksjonspunktTekst).filter(tekst => !!tekst);
 
   return (
     <ProsessPanelWrapper
@@ -112,17 +121,19 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
       dataState={RestApiState.SUCCESS}
       skalSkjulePanel={!erPanelValgt}
     >
-      {(erPanelValgt && ((apentFaktaPanelInfo && erIkkeFerdigbehandlet) || aksjonspunktTekster.length > 0)) && (
+      {erPanelValgt && ((apentFaktaPanelInfo && erIkkeFerdigbehandlet) || aksjonspunktTekster.length > 0) && (
         <>
           <AksjonspunktHelpTextHTML>
             {apentFaktaPanelInfo && erIkkeFerdigbehandlet
               ? [
-                <React.Fragment key="1">
-                  {intl.formatMessage({ id: 'InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv' })}
-                  <a href="" onClick={oppdaterUrl}>{apentFaktaPanelInfo.text}</a>
-                </React.Fragment>,
-              ]
-              : aksjonspunktTekster.map((tekst) => tekst)}
+                  <React.Fragment key="1">
+                    {intl.formatMessage({ id: 'InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv' })}
+                    <a href="" onClick={oppdaterUrl}>
+                      {apentFaktaPanelInfo.text}
+                    </a>
+                  </React.Fragment>,
+                ]
+              : aksjonspunktTekster.map(tekst => tekst)}
           </AksjonspunktHelpTextHTML>
           <VerticalSpacer thirtyTwoPx />
         </>

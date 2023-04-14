@@ -9,9 +9,7 @@ const formatDate = (dato: string) => moment(dato).format(DDMMYYYY_DATE_FORMAT);
 const getEndCharFromId = (id: any) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
 const lagVisningsNavn = (arbeidsgiverOpplysninger: ArbeidsgiverOpplysninger, eksternArbeidsforholdId?: any): string => {
-  const {
-    navn, fødselsdato, erPrivatPerson, identifikator,
-  } = arbeidsgiverOpplysninger;
+  const { navn, fødselsdato, erPrivatPerson, identifikator } = arbeidsgiverOpplysninger;
 
   let visningsNavn = `${navn}`;
   if (!erPrivatPerson) {

@@ -12,16 +12,11 @@ interface OwnProps {
 /**
  * SaksstottePaneler
  */
-const SaksstottePaneler: FunctionComponent<OwnProps> = ({
-  valgtSakslisteId,
-  åpneFagsak,
-}) => (
+const SaksstottePaneler: FunctionComponent<OwnProps> = ({ valgtSakslisteId, åpneFagsak }) => (
   <>
     <SistBehandledeSaker åpneFagsak={åpneFagsak} />
     <VerticalSpacer twentyPx />
-    {valgtSakslisteId && (
-      <SaksbehandlerNokkeltallIndex valgtSakslisteId={valgtSakslisteId} />
-    )}
+    {valgtSakslisteId && <SaksbehandlerNokkeltallIndex valgtSakslisteId={valgtSakslisteId} />}
   </>
 );
 

@@ -12,13 +12,13 @@ export type FormValues = {
   oppholdsrettVurdering?: boolean;
   lovligOppholdVurdering?: boolean;
   erEosBorger?: boolean;
-}
+};
 
 interface OwnProps {
   valgtPeriode: MedlemPeriode;
-  aksjonspunkter: Aksjonspunkt[]
+  aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
 interface StaticFunctions {
@@ -42,9 +42,11 @@ const StatusForBorgerFaktaPanel: FunctionComponent<OwnProps> & StaticFunctions =
 
   const erEosBorger = watch('erEosBorger');
 
-  const oppholdAp = valgtPeriode.aksjonspunkter
-    .filter((periodeAp) => periodeAp === AksjonspunktCode.AVKLAR_OPPHOLDSRETT || periodeAp === AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD);
-  const aksjonspunkt = aksjonspunkter.find((ap) => oppholdAp.includes(ap.definisjon));
+  const oppholdAp = valgtPeriode.aksjonspunkter.filter(
+    periodeAp =>
+      periodeAp === AksjonspunktCode.AVKLAR_OPPHOLDSRETT || periodeAp === AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD,
+  );
+  const aksjonspunkt = aksjonspunkter.find(ap => oppholdAp.includes(ap.definisjon));
   const erAksjonspunktLukket = aksjonspunkt?.status !== AksjonspunktStatus.OPPRETTET;
 
   return (
@@ -59,13 +61,16 @@ const StatusForBorgerFaktaPanel: FunctionComponent<OwnProps> & StaticFunctions =
         isReadOnly={readOnly}
         isHorizontal
         isTrueOrFalseSelection
-        radios={[{
-          label: intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.CitizenEEA' }),
-          value: 'true',
-        }, {
-          label: intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.CitizenOutsideEEA' }),
-          value: 'false',
-        }]}
+        radios={[
+          {
+            label: intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.CitizenEEA' }),
+            value: 'true',
+          },
+          {
+            label: intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.CitizenOutsideEEA' }),
+            value: 'false',
+          },
+        ]}
       />
       {erEosBorger && (
         <>
@@ -79,18 +84,23 @@ const StatusForBorgerFaktaPanel: FunctionComponent<OwnProps> & StaticFunctions =
               isReadOnly={readOnly}
               isHorizontal
               isTrueOrFalseSelection
-              radios={[{
-                label: intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.HarOppholdsrett' }),
-                value: 'true',
-              }, {
-                label: <FormattedMessage
-                  id="StatusForBorgerFaktaPanel.HarIkkeOppholdsrett"
-                  values={{
-                    b: (chunks: any) => <b>{chunks}</b>,
-                  }}
-                />,
-                value: 'false',
-              }]}
+              radios={[
+                {
+                  label: intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.HarOppholdsrett' }),
+                  value: 'true',
+                },
+                {
+                  label: (
+                    <FormattedMessage
+                      id="StatusForBorgerFaktaPanel.HarIkkeOppholdsrett"
+                      values={{
+                        b: (chunks: any) => <b>{chunks}</b>,
+                      }}
+                    />
+                  ),
+                  value: 'false',
+                },
+              ]}
             />
           </ArrowBox>
         </>
@@ -107,18 +117,23 @@ const StatusForBorgerFaktaPanel: FunctionComponent<OwnProps> & StaticFunctions =
               isEdited={erAksjonspunktLukket}
               isHorizontal
               isTrueOrFalseSelection
-              radios={[{
-                label: intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.HarLovligOpphold' }),
-                value: 'true',
-              }, {
-                label: <FormattedMessage
-                  id="StatusForBorgerFaktaPanel.HarIkkeLovligOpphold"
-                  values={{
-                    b: (chunks: any) => <b>{chunks}</b>,
-                  }}
-                />,
-                value: 'false',
-              }]}
+              radios={[
+                {
+                  label: intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.HarLovligOpphold' }),
+                  value: 'true',
+                },
+                {
+                  label: (
+                    <FormattedMessage
+                      id="StatusForBorgerFaktaPanel.HarIkkeLovligOpphold"
+                      values={{
+                        b: (chunks: any) => <b>{chunks}</b>,
+                      }}
+                    />
+                  ),
+                  value: 'false',
+                },
+              ]}
             />
           </ArrowBox>
         </>
@@ -127,22 +142,18 @@ const StatusForBorgerFaktaPanel: FunctionComponent<OwnProps> & StaticFunctions =
   );
 };
 
-const getEosBorger = (
-  periode: MedlemPeriode,
-  aksjonspunkter: Aksjonspunkt[],
-): boolean => (periode.erEosBorger || periode.erEosBorger === false
-  ? periode.erEosBorger
-  : aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.AVKLAR_OPPHOLDSRETT));
+const getEosBorger = (periode: MedlemPeriode, aksjonspunkter: Aksjonspunkt[]): boolean =>
+  periode.erEosBorger || periode.erEosBorger === false
+    ? periode.erEosBorger
+    : aksjonspunkter.some(ap => ap.definisjon === AksjonspunktCode.AVKLAR_OPPHOLDSRETT);
 
-const getOppholdsrettVurdering = (
-  periode: MedlemPeriode,
-): boolean | undefined => (periode.oppholdsrettVurdering
-|| periode.oppholdsrettVurdering === false ? periode.oppholdsrettVurdering : undefined);
+const getOppholdsrettVurdering = (periode: MedlemPeriode): boolean | undefined =>
+  periode.oppholdsrettVurdering || periode.oppholdsrettVurdering === false ? periode.oppholdsrettVurdering : undefined;
 
-const getLovligOppholdVurdering = (
-  periode: MedlemPeriode,
-): boolean | undefined => (periode.lovligOppholdVurdering || periode.lovligOppholdVurdering === false
-  ? periode.lovligOppholdVurdering : undefined);
+const getLovligOppholdVurdering = (periode: MedlemPeriode): boolean | undefined =>
+  periode.lovligOppholdVurdering || periode.lovligOppholdVurdering === false
+    ? periode.lovligOppholdVurdering
+    : undefined;
 
 StatusForBorgerFaktaPanel.buildInitialValues = (periode, aksjonspunkter) => {
   const erEosBorger = getEosBorger(periode, aksjonspunkter);

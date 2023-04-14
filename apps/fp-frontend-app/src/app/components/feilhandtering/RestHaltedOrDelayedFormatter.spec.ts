@@ -33,7 +33,11 @@ describe('RestHaltedOrDelayedFormatter', () => {
       type: ErrorEventType.POLLING_HALTED_OR_DELAYED,
     };
     expect(new RestHaltedOrDelayedFormatter().format(errorData)).toEqual(
-      ErrorMessage.withMessageCode('Rest.ErrorMessage.DownTime', { date: '02.08.2018', time: '00:54', message: errorData.message }),
+      ErrorMessage.withMessageCode('Rest.ErrorMessage.DownTime', {
+        date: '02.08.2018',
+        time: '00:54',
+        message: errorData.message,
+      }),
     );
   });
 });

@@ -5,9 +5,7 @@ import { BodyShort, Label } from '@navikt/ds-react';
 import { Datepicker } from '@navikt/ft-form-hooks';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
-import {
-  FaktaGruppe, FlexColumn, FlexContainer, FlexRow,
-} from '@navikt/ft-ui-komponenter';
+import { FaktaGruppe, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import { FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { FieldEditedInfo } from '@navikt/fp-fakta-felles';
 
@@ -21,13 +19,13 @@ const getAntallBarn = (soknad: Soknad, familiehendelse: FamilieHendelse): number
 export type FormValues = {
   omsorgsovertakelseDato?: string;
   foreldreansvarDato?: string;
-}
+};
 
 interface OwnProps {
   readOnly: boolean;
   erAksjonspunktForeldreansvar: boolean;
   editedStatus: FieldEditedInfo;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   soknad: Soknad;
   familiehendelse: FamilieHendelse;
 }
@@ -53,7 +51,9 @@ const OmsorgsovertakelseFaktaPanel: FunctionComponent<OwnProps> & StaticFunction
   return (
     <FaktaGruppe
       title={intl.formatMessage({
-        id: erAksjonspunktForeldreansvar ? 'OmsorgOgForeldreansvarFaktaForm.ForeldreansvarInfo' : 'OmsorgOgForeldreansvarFaktaForm.OmsorgInfo',
+        id: erAksjonspunktForeldreansvar
+          ? 'OmsorgOgForeldreansvarFaktaForm.ForeldreansvarInfo'
+          : 'OmsorgOgForeldreansvarFaktaForm.OmsorgInfo',
       })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.OMSORGSOVERTAKELSE]}
     >
@@ -79,7 +79,9 @@ const OmsorgsovertakelseFaktaPanel: FunctionComponent<OwnProps> & StaticFunction
             </FlexColumn>
           )}
           <FlexColumn>
-            <Label size="small"><FormattedMessage id="OmsorgOgForeldreansvarFaktaForm.NrOfChildren" /></Label>
+            <Label size="small">
+              <FormattedMessage id="OmsorgOgForeldreansvarFaktaForm.NrOfChildren" />
+            </Label>
             <BodyShort size="small">{antallBarn}</BodyShort>
           </FlexColumn>
         </FlexRow>
@@ -89,7 +91,10 @@ const OmsorgsovertakelseFaktaPanel: FunctionComponent<OwnProps> & StaticFunction
 };
 
 OmsorgsovertakelseFaktaPanel.buildInitialValues = (soknad: Soknad, familiehendelse: FamilieHendelse): FormValues => ({
-  omsorgsovertakelseDato: familiehendelse && familiehendelse.omsorgsovertakelseDato ? familiehendelse.omsorgsovertakelseDato : soknad.omsorgsovertakelseDato,
+  omsorgsovertakelseDato:
+    familiehendelse && familiehendelse.omsorgsovertakelseDato
+      ? familiehendelse.omsorgsovertakelseDato
+      : soknad.omsorgsovertakelseDato,
   foreldreansvarDato: familiehendelse.foreldreansvarDato,
 });
 

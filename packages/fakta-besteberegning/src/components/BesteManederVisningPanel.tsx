@@ -7,14 +7,13 @@ import {
   FlexColumn,
   FlexContainer,
   FlexRow,
-  Table, TableColumn, TableRow, VerticalSpacer,
+  Table,
+  TableColumn,
+  TableRow,
+  VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT, formatCurrencyNoKr } from '@navikt/ft-utils';
-import {
-  BesteberegningInntekt,
-  Månedsgrunnlag,
-  ArbeidsgiverOpplysningerPerId,
-} from '@navikt/fp-types';
+import { BesteberegningInntekt, Månedsgrunnlag, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import styles from './besteManederVisningPanel.module.css';
@@ -37,24 +36,25 @@ interface BesteMånederProps {
 const headerColumnContent = [
   <Label size="small" key="AktivitetNøkkel">
     {' '}
-    <FormattedMessage id="BesteberegningProsessPanel.Måned.Inntekt.Aktivitet" />
-    {' '}
+    <FormattedMessage id="BesteberegningProsessPanel.Måned.Inntekt.Aktivitet" />{' '}
   </Label>,
   <Label size="small" key="InntektNøkkel">
     {' '}
-    <FormattedMessage id="BesteberegningProsessPanel.Måned.Inntekt.Inntekt" />
-    {' '}
+    <FormattedMessage id="BesteberegningProsessPanel.Måned.Inntekt.Inntekt" />{' '}
   </Label>,
 ];
 
 interface InntekttabellProps {
-    inntekter: BesteberegningInntekt[];
-    arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId;
-    getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType) => string;
+  inntekter: BesteberegningInntekt[];
+  arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId;
+  getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType) => string;
 }
 
-const lagVisningsNavn = (inntekt: BesteberegningInntekt, arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId,
-  getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType) => string): string => {
+const lagVisningsNavn = (
+  inntekt: BesteberegningInntekt,
+  arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId,
+  getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType) => string,
+): string => {
   const agOpplysning = inntekt.arbeidsgiverId ? arbeidsgiverOpplysninger[inntekt.arbeidsgiverId] : undefined;
   if (!agOpplysning) {
     return getKodeverkNavn(inntekt.opptjeningAktivitetType, KodeverkType.OPPTJENING_AKTIVITET_TYPE);
@@ -67,39 +67,40 @@ const lagVisningsNavn = (inntekt: BesteberegningInntekt, arbeidsgiverOpplysninge
   return `${agOpplysning.navn} (${agOpplysning.identifikator})`;
 };
 
-const lagInntektRader = (inntekter: BesteberegningInntekt[], arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId,
-  getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType) => string): ReactElement[] => (
+const lagInntektRader = (
+  inntekter: BesteberegningInntekt[],
+  arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId,
+  getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType) => string,
+): ReactElement[] =>
   inntekter.map((inntekt: BesteberegningInntekt, index) => (
     // eslint-disable-next-line react/no-array-index-key
     <TableRow key={index} className={styles.månedRad}>
       <TableColumn className={styles.månedAktivitet}>
-        <BodyShort size="small">
-          {lagVisningsNavn(inntekt, arbeidsgiverOpplysninger, getKodeverkNavn)}
-        </BodyShort>
+        <BodyShort size="small">{lagVisningsNavn(inntekt, arbeidsgiverOpplysninger, getKodeverkNavn)}</BodyShort>
       </TableColumn>
       <TableColumn className={styles.månedInntekt}>
-        <BodyShort size="small">
-          {formatCurrencyNoKr(inntekt.inntekt)}
-        </BodyShort>
+        <BodyShort size="small">{formatCurrencyNoKr(inntekt.inntekt)}</BodyShort>
       </TableColumn>
     </TableRow>
-  ))
-);
+  ));
 
-const lagSummeringsRad = (inntekter: BesteberegningInntekt[], labelId: string): ReactElement => (inntekter.length === 0 ? <div /> : (
-  <TableRow key="sum">
-    <TableColumn>
-      <Label size="small">
-        <FormattedMessage id={labelId} />
-      </Label>
-    </TableColumn>
-    <TableColumn>
-      <Label size="small">
-        {formatCurrencyNoKr(inntekter.map(({ inntekt }) => inntekt).reduce((i1, i2) => i1 + i2, 0)) }
-      </Label>
-    </TableColumn>
-  </TableRow>
-));
+const lagSummeringsRad = (inntekter: BesteberegningInntekt[], labelId: string): ReactElement =>
+  inntekter.length === 0 ? (
+    <div />
+  ) : (
+    <TableRow key="sum">
+      <TableColumn>
+        <Label size="small">
+          <FormattedMessage id={labelId} />
+        </Label>
+      </TableColumn>
+      <TableColumn>
+        <Label size="small">
+          {formatCurrencyNoKr(inntekter.map(({ inntekt }) => inntekt).reduce((i1, i2) => i1 + i2, 0))}
+        </Label>
+      </TableColumn>
+    </TableRow>
+  );
 
 const Inntekttabell: FunctionComponent<InntekttabellProps> = ({
   inntekter,
@@ -107,7 +108,7 @@ const Inntekttabell: FunctionComponent<InntekttabellProps> = ({
   getKodeverkNavn,
 }) => {
   const rows: ReactElement[] = [];
-  lagInntektRader(inntekter, arbeidsgiverOpplysninger, getKodeverkNavn).forEach((rad) => rows.push(rad));
+  lagInntektRader(inntekter, arbeidsgiverOpplysninger, getKodeverkNavn).forEach(rad => rows.push(rad));
   rows.push(lagSummeringsRad(inntekter, 'Inntekttabell.Sum'));
   return (
     <div>
@@ -118,36 +119,41 @@ const Inntekttabell: FunctionComponent<InntekttabellProps> = ({
   );
 };
 
-const lagRadMedMåneder = (måneder: Månedsgrunnlag[],
+const lagRadMedMåneder = (
+  måneder: Månedsgrunnlag[],
   arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId,
-  getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType) => string): ReactElement => (
-    <FlexContainer>
-      <FlexRow>
-        {måneder.map((månedsgrunnlag: Månedsgrunnlag) => {
-          const key = månedsgrunnlag.fom;
-          return (
-            <FlexColumn className={styles.colWidth} key={key}>
-              <BodyShort size="small">
-                {formatDate(månedsgrunnlag.fom)}
-              </BodyShort>
-              <Inntekttabell
-                inntekter={månedsgrunnlag.inntekter}
-                arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
-                getKodeverkNavn={getKodeverkNavn}
-              />
-            </FlexColumn>
-          );
-        })}
-      </FlexRow>
-    </FlexContainer>
+  getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType) => string,
+): ReactElement => (
+  <FlexContainer>
+    <FlexRow>
+      {måneder.map((månedsgrunnlag: Månedsgrunnlag) => {
+        const key = månedsgrunnlag.fom;
+        return (
+          <FlexColumn className={styles.colWidth} key={key}>
+            <BodyShort size="small">{formatDate(månedsgrunnlag.fom)}</BodyShort>
+            <Inntekttabell
+              inntekter={månedsgrunnlag.inntekter}
+              arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
+              getKodeverkNavn={getKodeverkNavn}
+            />
+          </FlexColumn>
+        );
+      })}
+    </FlexRow>
+  </FlexContainer>
 );
 
-const finnÅrsinntekt = (besteMåneder : Månedsgrunnlag[]): number => {
-  const snittPrMnd = besteMåneder.flatMap((måned) => måned.inntekter).map(({ inntekt }) => inntekt).reduce((i1, i2) => i1 + i2, 0) / 6;
+const finnÅrsinntekt = (besteMåneder: Månedsgrunnlag[]): number => {
+  const snittPrMnd =
+    besteMåneder
+      .flatMap(måned => måned.inntekter)
+      .map(({ inntekt }) => inntekt)
+      .reduce((i1, i2) => i1 + i2, 0) / 6;
   return snittPrMnd * 12;
 };
 
-const sorterEtterMåned = (besteMåneder : Månedsgrunnlag[]) => [...besteMåneder].sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom)));
+const sorterEtterMåned = (besteMåneder: Månedsgrunnlag[]) =>
+  [...besteMåneder].sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom)));
 
 /**
  * BesteManederVisningPanel
@@ -164,8 +170,7 @@ const BesteManederVisningPanel: FunctionComponent<BesteMånederProps> = ({
     <>
       <Label size="small">
         {' '}
-        <FormattedMessage id="Inntekttabell.Tittel" />
-        {' '}
+        <FormattedMessage id="Inntekttabell.Tittel" />{' '}
       </Label>
       <VerticalSpacer twentyPx />
       {lagRadMedMåneder(sorterteMåneder.slice(0, 2), arbeidsgiverOpplysninger, getKodeverkNavn)}
@@ -182,9 +187,7 @@ const BesteManederVisningPanel: FunctionComponent<BesteMånederProps> = ({
             </BodyShort>
           </TableColumn>
           <TableColumn>
-            <BodyShort size="small">
-              {formatCurrencyNoKr(finnÅrsinntekt(besteMåneder))}
-            </BodyShort>
+            <BodyShort size="small">{formatCurrencyNoKr(finnÅrsinntekt(besteMåneder))}</BodyShort>
           </TableColumn>
         </TableRow>
       </Table>

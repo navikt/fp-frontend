@@ -1,6 +1,4 @@
-import React, {
-  useState, FunctionComponent, useEffect,
-} from 'react';
+import React, { useState, FunctionComponent, useEffect } from 'react';
 
 import { errorOfType, ErrorTypes, getErrorResponseData } from '@navikt/fp-rest-api';
 import { FagsakEnkel } from '@navikt/fp-types';
@@ -24,10 +22,7 @@ const EMPTY_ARRAY_OPPGAVER: Oppgave[] = [];
  * Container komponent. Har ansvar for å vise søkeskjermbildet og å håndtere fagsaksøket
  * mot server og lagringen av resultatet i klientens state.
  */
-const FagsakSearchIndex: FunctionComponent<OwnProps> = ({
-  åpneFagsak,
-  kanSaksbehandle,
-}) => {
+const FagsakSearchIndex: FunctionComponent<OwnProps> = ({ åpneFagsak, kanSaksbehandle }) => {
   const [skalReservere, setSkalReservere] = useState(false);
   const [reservertAvAnnenSaksbehandler, setReservertAvAnnenSaksbehandler] = useState(false);
   const [reservertOppgave, setReservertOppgave] = useState<Oppgave>();
@@ -36,13 +31,21 @@ const FagsakSearchIndex: FunctionComponent<OwnProps> = ({
 
   const { startRequest: reserverOppgave } = restApiHooks.useRestApiRunner(RestApiPathsKeys.RESERVER_OPPGAVE);
   const {
-    startRequest: sokFagsak, resetRequestData: resetFagsakSok, data: fagsaker = EMPTY_ARRAY_FAGSAK, error: fagsakError,
+    startRequest: sokFagsak,
+    resetRequestData: resetFagsakSok,
+    data: fagsaker = EMPTY_ARRAY_FAGSAK,
+    error: fagsakError,
   } = restApiHooks.useRestApiRunner(RestApiPathsKeys.SEARCH_FAGSAK);
-  const { startRequest: hentOppgaverForFagsaker, data: fagsakOppgaver = EMPTY_ARRAY_OPPGAVER } = restApiHooks
-    .useRestApiRunner(RestApiPathsKeys.OPPGAVER_FOR_FAGSAKER);
-  const { startRequest: hentReservasjonsstatus } = restApiHooks.useRestApiRunner(RestApiPathsKeys.HENT_RESERVASJONSSTATUS);
+  const { startRequest: hentOppgaverForFagsaker, data: fagsakOppgaver = EMPTY_ARRAY_OPPGAVER } =
+    restApiHooks.useRestApiRunner(RestApiPathsKeys.OPPGAVER_FOR_FAGSAKER);
+  const { startRequest: hentReservasjonsstatus } = restApiHooks.useRestApiRunner(
+    RestApiPathsKeys.HENT_RESERVASJONSSTATUS,
+  );
 
-  const searchResultAccessDenied = fagsakError && errorOfType(ErrorTypes.MANGLER_TILGANG_FEIL, fagsakError) ? getErrorResponseData(fagsakError) : undefined;
+  const searchResultAccessDenied =
+    fagsakError && errorOfType(ErrorTypes.MANGLER_TILGANG_FEIL, fagsakError)
+      ? getErrorResponseData(fagsakError)
+      : undefined;
 
   useEffect(() => {
     if (sokFerdig && fagsaker.length === 1) {
@@ -55,12 +58,18 @@ const FagsakSearchIndex: FunctionComponent<OwnProps> = ({
     }
   }, [sokFerdig, fagsaker, fagsakOppgaver]);
 
-  useEffect(() => () => {
-    resetFagsakSok();
-  }, []);
+  useEffect(
+    () => () => {
+      resetFagsakSok();
+    },
+    [],
+  );
 
   const goToFagsakEllerApneModal = (oppgave: Oppgave, oppgaveStatus?: OppgaveStatus) => {
-    if (oppgaveStatus && (!oppgaveStatus.erReservert || (oppgaveStatus.erReservert && oppgaveStatus.erReservertAvInnloggetBruker))) {
+    if (
+      oppgaveStatus &&
+      (!oppgaveStatus.erReservert || (oppgaveStatus.erReservert && oppgaveStatus.erReservertAvInnloggetBruker))
+    ) {
       åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
     } else if (oppgaveStatus && oppgaveStatus.erReservert && !oppgaveStatus.erReservertAvInnloggetBruker) {
       setReservertOppgave(oppgave);
@@ -74,14 +83,14 @@ const FagsakSearchIndex: FunctionComponent<OwnProps> = ({
       setReservertAvAnnenSaksbehandler(true);
     } else if (!skalReservere) {
       if (skalSjekkeOmReservert) {
-        hentReservasjonsstatus({ oppgaveId: oppgave.id }).then((status) => {
+        hentReservasjonsstatus({ oppgaveId: oppgave.id }).then(status => {
           goToFagsakEllerApneModal(oppgave, status);
         });
       } else {
         åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
       }
     } else {
-      reserverOppgave({ oppgaveId: oppgave.id }).then((data) => {
+      reserverOppgave({ oppgaveId: oppgave.id }).then(data => {
         goToFagsakEllerApneModal(oppgave, data);
       });
     }
@@ -91,18 +100,19 @@ const FagsakSearchIndex: FunctionComponent<OwnProps> = ({
     velgFagsakOperasjoner(oppgave, true);
   };
 
-  const sokFagsakFn = (values: {searchString: string; skalReservere: boolean}) => {
+  const sokFagsakFn = (values: { searchString: string; skalReservere: boolean }) => {
     setSkalReservere(values.skalReservere);
     setSokStartet(true);
     setSokFerdig(false);
 
-    return sokFagsak(values).then((fagsakerResultat) => {
+    return sokFagsak(values).then(fagsakerResultat => {
       if (fagsakerResultat && fagsakerResultat.length > 0) {
-        hentOppgaverForFagsaker({ saksnummerListe: fagsakerResultat.map((fagsak) => `${fagsak.saksnummer}`).join(',') })
-          .then(() => {
-            setSokStartet(false);
-            setSokFerdig(true);
-          });
+        hentOppgaverForFagsaker({
+          saksnummerListe: fagsakerResultat.map(fagsak => `${fagsak.saksnummer}`).join(','),
+        }).then(() => {
+          setSokStartet(false);
+          setSokFerdig(true);
+        });
       } else {
         setSokStartet(false);
         setSokFerdig(true);
@@ -137,11 +147,11 @@ const FagsakSearchIndex: FunctionComponent<OwnProps> = ({
         kanSaksbehandle={kanSaksbehandle}
       />
       {reservertAvAnnenSaksbehandler && reservertOppgave && (
-      <OppgaveErReservertAvAnnenModal
-        lukkErReservertModalOgOpneOppgave={lukkErReservertModalOgOpneOppgave}
-        oppgave={reservertOppgave}
-        oppgaveStatus={reservertOppgave.status}
-      />
+        <OppgaveErReservertAvAnnenModal
+          lukkErReservertModalOgOpneOppgave={lukkErReservertModalOgOpneOppgave}
+          oppgave={reservertOppgave}
+          oppgaveStatus={reservertOppgave.status}
+        />
       )}
     </>
   );

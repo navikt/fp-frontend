@@ -1,6 +1,4 @@
-import React, {
-  useState, useMemo, useCallback, FunctionComponent, useEffect,
-} from 'react';
+import React, { useState, useMemo, useCallback, FunctionComponent, useEffect } from 'react';
 
 import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
@@ -15,7 +13,7 @@ export type SettPaVentParams = {
   frist?: string;
   behandlingUuid: string;
   behandlingVersjon: number;
-}
+};
 
 interface BehandlingPaVentProps {
   behandling: Behandling;
@@ -33,18 +31,31 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
   const [skalViseModal, setVisModal] = useState(behandling.behandlingPaaVent);
   const skjulModal = useCallback(() => setVisModal(false), []);
 
-  const { startRequest: settPaVent } = restApiTilbakekrevingHooks.useRestApiRunner(BehandlingFellesApiKeys.UPDATE_ON_HOLD);
+  const { startRequest: settPaVent } = restApiTilbakekrevingHooks.useRestApiRunner(
+    BehandlingFellesApiKeys.UPDATE_ON_HOLD,
+  );
 
   useEffect(() => {
     setVisModal(behandling.behandlingPaaVent);
   }, [behandling.versjon]);
 
-  const oppdaterPaVentData = useCallback((formData: { ventearsak: string; frist?: string; }) => settPaVent({
-    ...formData, behandlingUuid: behandling.uuid, behandlingVersjon: behandling.versjon,
-  }).then(() => hentBehandling(false)), [behandling.versjon]);
+  const oppdaterPaVentData = useCallback(
+    (formData: { ventearsak: string; frist?: string }) =>
+      settPaVent({
+        ...formData,
+        behandlingUuid: behandling.uuid,
+        behandlingVersjon: behandling.versjon,
+      }).then(() => hentBehandling(false)),
+    [behandling.versjon],
+  );
 
-  const erManueltSattPaVent = useMemo(() => behandling.aksjonspunkt.filter((ap) => isAksjonspunktOpen(ap.status))
-    .some((ap) => ap.definisjon === AksjonspunktCode.AUTO_MANUELT_SATT_PÅ_VENT), [behandling.aksjonspunkt]);
+  const erManueltSattPaVent = useMemo(
+    () =>
+      behandling.aksjonspunkt
+        .filter(ap => isAksjonspunktOpen(ap.status))
+        .some(ap => ap.definisjon === AksjonspunktCode.AUTO_MANUELT_SATT_PÅ_VENT),
+    [behandling.aksjonspunkt],
+  );
 
   return (
     <SettPaVentModalIndex

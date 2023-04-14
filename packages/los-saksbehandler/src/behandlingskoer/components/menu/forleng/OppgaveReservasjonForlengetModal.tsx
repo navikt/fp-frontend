@@ -1,12 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import {
-  Modal as NavModal, Button, BodyShort, Label,
-} from '@navikt/ds-react';
+import { Modal as NavModal, Button, BodyShort, Label } from '@navikt/ds-react';
 import { getDateAndTime } from '@navikt/ft-utils';
-import {
-  FlexColumn, FlexContainer, FlexRow, Image,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, Image } from '@navikt/ft-ui-komponenter';
 
 import { Oppgave } from '@navikt/fp-los-felles';
 
@@ -23,11 +19,7 @@ interface OwnProps {
 /**
  * OppgaveReservasjonForlengetModal.
  */
-const OppgaveReservasjonForlengetModal: FunctionComponent<OwnProps> = ({
-  oppgave,
-  showModal,
-  closeModal,
-}) => {
+const OppgaveReservasjonForlengetModal: FunctionComponent<OwnProps> = ({ oppgave, showModal, closeModal }) => {
   const intl = useIntl();
   return (
     <NavModal
@@ -52,17 +44,14 @@ const OppgaveReservasjonForlengetModal: FunctionComponent<OwnProps> = ({
                 <FormattedMessage id="OppgaveReservasjonForlengetModal.Reservert" />
               </Label>
               <BodyShort size="small">
-                <FormattedMessage id="OppgaveReservasjonForlengetModal.Til" values={getDateAndTime(oppgave.status.reservertTilTidspunkt)} />
+                <FormattedMessage
+                  id="OppgaveReservasjonForlengetModal.Til"
+                  values={getDateAndTime(oppgave.status.reservertTilTidspunkt)}
+                />
               </BodyShort>
             </FlexColumn>
             <FlexColumn className={styles.button}>
-              <Button
-                size="small"
-                variant="secondary"
-                onClick={closeModal}
-                autoFocus
-                type="button"
-              >
+              <Button size="small" variant="secondary" onClick={closeModal} autoFocus type="button">
                 {intl.formatMessage({ id: 'OppgaveReservasjonForlengetModal.Ok' })}
               </Button>
             </FlexColumn>

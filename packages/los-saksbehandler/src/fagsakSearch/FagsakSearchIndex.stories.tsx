@@ -27,10 +27,7 @@ const Template: Story = () => {
 
   return (
     <RestApiMock data={data} requestApi={requestApi}>
-      <FagsakSearchIndex
-        åpneFagsak={() => undefined}
-        kanSaksbehandle
-      />
+      <FagsakSearchIndex åpneFagsak={() => undefined} kanSaksbehandle />
     </RestApiMock>
   );
 };

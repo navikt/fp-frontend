@@ -90,31 +90,35 @@ describe('RequestRunner', () => {
       },
     };
 
-    const allGetResults = [{
-      ...response,
-      data: {
-        status: AsyncPollingStatus.PENDING,
-        message: 'Polling continues',
-        pollIntervalMillis: 0,
+    const allGetResults = [
+      {
+        ...response,
+        data: {
+          status: AsyncPollingStatus.PENDING,
+          message: 'Polling continues',
+          pollIntervalMillis: 0,
+        },
       },
-    }, {
-      ...response,
-      data: {
-        status: AsyncPollingStatus.PENDING,
-        message: 'Polling continues',
-        pollIntervalMillis: 0,
+      {
+        ...response,
+        data: {
+          status: AsyncPollingStatus.PENDING,
+          message: 'Polling continues',
+          pollIntervalMillis: 0,
+        },
       },
-    }];
+    ];
 
     const httpClientMock = {
       ...httpClientGeneralMock(response),
-      getAsync: () => Promise.resolve({
-        ...response,
-        status: HTTP_ACCEPTED,
-        headers: {
-          location: 'http://polling.url',
-        },
-      }),
+      getAsync: () =>
+        Promise.resolve({
+          ...response,
+          status: HTTP_ACCEPTED,
+          headers: {
+            location: 'http://polling.url',
+          },
+        }),
       get: () => Promise.resolve(allGetResults.shift()),
     } as HttpClientApi;
 
@@ -153,21 +157,23 @@ describe('RequestRunner', () => {
 
     const httpClientMock = {
       ...httpClientGeneralMock(response),
-      getAsync: () => Promise.resolve({
-        ...response,
-        status: HTTP_ACCEPTED,
-        headers: {
-          location: 'test',
-        },
-      }),
-      get: () => Promise.resolve({
-        ...response,
-        data: {
-          status: AsyncPollingStatus.PENDING,
-          message: 'Polling continues',
-          pollIntervalMillis: 0,
-        },
-      }),
+      getAsync: () =>
+        Promise.resolve({
+          ...response,
+          status: HTTP_ACCEPTED,
+          headers: {
+            location: 'test',
+          },
+        }),
+      get: () =>
+        Promise.resolve({
+          ...response,
+          data: {
+            status: AsyncPollingStatus.PENDING,
+            message: 'Polling continues',
+            pollIntervalMillis: 0,
+          },
+        }),
     } as HttpClientApi;
 
     const params = {
@@ -177,7 +183,10 @@ describe('RequestRunner', () => {
     const process = new RequestRunner(httpClientMock, httpClientMock.getAsync, 'behandling', defaultConfig);
     const mapper = new NotificationMapper();
     // Etter en runde med polling vil en stoppe prosessen via event
-    mapper.addUpdatePollingMessageEventHandler(() => { process.cancel(); return Promise.resolve(''); });
+    mapper.addUpdatePollingMessageEventHandler(() => {
+      process.cancel();
+      return Promise.resolve('');
+    });
     process.setNotificationEmitter(mapper.getNotificationEmitter());
 
     let errorMessage = '';

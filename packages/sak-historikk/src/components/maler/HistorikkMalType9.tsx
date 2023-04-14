@@ -36,9 +36,10 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal> = ({
   return (
     <>
       {historikkinnslag.historikkinnslagDeler.map((historikkinnslagDel, historikkinnslagDelIndex) => (
-        <div key={
-          `historikkinnslagDel${historikkinnslagDelIndex}` // eslint-disable-line react/no-array-index-key
-        }
+        <div
+          key={
+            `historikkinnslagDel${historikkinnslagDelIndex}` // eslint-disable-line react/no-array-index-key
+          }
         >
           <div>
             <Skjermlenke
@@ -61,22 +62,24 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal> = ({
               />
             )}
 
-            {historikkinnslagDel.endredeFelter && historikkinnslag.type === historikkinnslagType.FASTSATT_UTTAK_SPLITT && (
-              <FormattedMessage
-                id="Historikk.Template.9.ManuellVurdering"
-                values={{
-                  opprinneligPeriode: historikkinnslagDel.endredeFelter[0].fraVerdi,
-                  numberOfPeriods: historikkinnslagDel.endredeFelter.length,
-                  splitPeriods: getSplitPeriods(historikkinnslagDel.endredeFelter),
-                  b: (chunks: any) => <b>{chunks}</b>,
-                  br: <br />,
-                }}
-              />
-            )}
+            {historikkinnslagDel.endredeFelter &&
+              historikkinnslag.type === historikkinnslagType.FASTSATT_UTTAK_SPLITT && (
+                <FormattedMessage
+                  id="Historikk.Template.9.ManuellVurdering"
+                  values={{
+                    opprinneligPeriode: historikkinnslagDel.endredeFelter[0].fraVerdi,
+                    numberOfPeriods: historikkinnslagDel.endredeFelter.length,
+                    splitPeriods: getSplitPeriods(historikkinnslagDel.endredeFelter),
+                    b: (chunks: any) => <b>{chunks}</b>,
+                    br: <br />,
+                  }}
+                />
+              )}
 
-            {(historikkinnslag.type === historikkinnslagType.TILBAKEKR_VIDEREBEHANDLING && historikkinnslagDel.endredeFelter) && (
+            {historikkinnslag.type === historikkinnslagType.TILBAKEKR_VIDEREBEHANDLING &&
+              historikkinnslagDel.endredeFelter &&
               historikkinnslagDel.endredeFelter
-                .filter((endretFelt) => endretFelt.tilVerdi !== tilbakekrevingVidereBehandling.TILBAKEKR_INNTREKK)
+                .filter(endretFelt => endretFelt.tilVerdi !== tilbakekrevingVidereBehandling.TILBAKEKR_INNTREKK)
                 .map((endretFelt, index) => (
                   <div className={styles.tilbakekrevingTekst} key={`endretFelt${index + 1}`}>
                     <FormattedMessage
@@ -88,12 +91,11 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal> = ({
                       }}
                     />
                   </div>
-                ))
+                ))}
+            {historikkinnslagDel.begrunnelsetekst && <BubbleText bodyText={historikkinnslagDel.begrunnelsetekst} />}
+            {historikkinnslagDel.begrunnelseFritekst && (
+              <BubbleText bodyText={historikkinnslagDel.begrunnelseFritekst} />
             )}
-            {historikkinnslagDel.begrunnelsetekst && (
-              <BubbleText bodyText={historikkinnslagDel.begrunnelsetekst} />
-            )}
-            {historikkinnslagDel.begrunnelseFritekst && <BubbleText bodyText={historikkinnslagDel.begrunnelseFritekst} />}
           </div>
         </div>
       ))}

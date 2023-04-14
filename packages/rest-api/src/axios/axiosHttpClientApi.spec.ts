@@ -21,25 +21,21 @@ describe('axiosHttpClientApi', () => {
 
   it('skal hente resultat ved get-kall', async () => {
     const url = 'www.test.no';
-    mockAxios
-      .onGet(url)
-      .reply(200, {
-        resource: true,
-      });
+    mockAxios.onGet(url).reply(200, {
+      resource: true,
+    });
 
     const data = {
       id: 1,
     };
-    const result = await httpClientApi.get(url, data) as SuccessResponse;
+    const result = (await httpClientApi.get(url, data)) as SuccessResponse;
 
     expect(result.data).toStrictEqual({ resource: true });
   });
 
   it('skal kaste feil når url ikke finnes', async () => {
     const url = 'www.test.no';
-    mockAxios
-      .onGet(url)
-      .reply(404);
+    mockAxios.onGet(url).reply(404);
 
     const data = {
       id: 1,
@@ -54,112 +50,98 @@ describe('axiosHttpClientApi', () => {
 
   it('skal hente resultat ved post-kall', async () => {
     const url = 'www.test.no';
-    mockAxios
-      .onPost(url)
-      .reply(200, {
-        resource: true,
-      });
+    mockAxios.onPost(url).reply(200, {
+      resource: true,
+    });
 
     const data = {
       id: 1,
     };
-    const result = await httpClientApi.post(url, data) as SuccessResponse;
+    const result = (await httpClientApi.post(url, data)) as SuccessResponse;
 
     expect(result.data).toStrictEqual({ resource: true });
   });
 
   it('skal hente resultat ved put-kall', async () => {
     const url = 'www.test.no';
-    mockAxios
-      .onPut(url)
-      .reply(200, {
-        resource: true,
-      });
+    mockAxios.onPut(url).reply(200, {
+      resource: true,
+    });
 
     const data = {
       id: 1,
     };
-    const result = await httpClientApi.put(url, data) as SuccessResponse;
+    const result = (await httpClientApi.put(url, data)) as SuccessResponse;
 
     expect(result.data).toStrictEqual({ resource: true });
   });
 
   it('skal hente resultat ved getBlob-kall', async () => {
     const url = 'www.test.no';
-    mockAxios
-      .onGet(url)
-      .reply(200, {
-        resource: true,
-      });
+    mockAxios.onGet(url).reply(200, {
+      resource: true,
+    });
 
     const data = {
       id: 1,
     };
-    const result = await httpClientApi.getBlob(url, data) as SuccessResponse;
+    const result = (await httpClientApi.getBlob(url, data)) as SuccessResponse;
 
     expect(result.data).toStrictEqual({ resource: true });
   });
 
   it('skal hente resultat ved postBlob-kall', async () => {
     const url = 'www.test.no';
-    mockAxios
-      .onPost(url)
-      .reply(200, {
-        resource: true,
-      });
+    mockAxios.onPost(url).reply(200, {
+      resource: true,
+    });
 
     const data = {
       id: 1,
     };
-    const result = await httpClientApi.postBlob(url, data) as SuccessResponse;
+    const result = (await httpClientApi.postBlob(url, data)) as SuccessResponse;
 
     expect(result.data).toStrictEqual({ resource: true });
   });
 
   it('skal hente resultat ved getAsync-kall', async () => {
     const url = 'www.test.no';
-    mockAxios
-      .onGet(url)
-      .reply(200, {
-        resource: true,
-      });
+    mockAxios.onGet(url).reply(200, {
+      resource: true,
+    });
 
     const data = {
       id: 1,
     };
-    const result = await httpClientApi.getAsync(url, data) as SuccessResponse;
+    const result = (await httpClientApi.getAsync(url, data)) as SuccessResponse;
 
     expect(result.data).toStrictEqual({ resource: true });
   });
 
   it('skal hente resultat ved postAsync-kall', async () => {
     const url = 'www.test.no';
-    mockAxios
-      .onPost(url)
-      .reply(200, {
-        resource: true,
-      });
+    mockAxios.onPost(url).reply(200, {
+      resource: true,
+    });
 
     const data = {
       id: 1,
     };
-    const result = await httpClientApi.postAsync(url, data) as SuccessResponse;
+    const result = (await httpClientApi.postAsync(url, data)) as SuccessResponse;
 
     expect(result.data).toStrictEqual({ resource: true });
   });
 
   it('skal hente resultat ved putAsync-kall', async () => {
     const url = 'www.test.no';
-    mockAxios
-      .onPut(url)
-      .reply(200, {
-        resource: true,
-      });
+    mockAxios.onPut(url).reply(200, {
+      resource: true,
+    });
 
     const data = {
       id: 1,
     };
-    const result = await httpClientApi.putAsync(url, data) as SuccessResponse;
+    const result = (await httpClientApi.putAsync(url, data)) as SuccessResponse;
 
     expect(result.data).toStrictEqual({ resource: true });
   });

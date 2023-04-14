@@ -6,6 +6,6 @@ type BekreftTerminbekreftelseAp = {
   utstedtdato: string;
   termindato: string;
   antallBarn: number;
-} & AksjonspunktTilBekreftelse<AksjonspunktCode.TERMINBEKREFTELSE>
+} & AksjonspunktTilBekreftelse<AksjonspunktCode.TERMINBEKREFTELSE>;
 
 export default BekreftTerminbekreftelseAp;

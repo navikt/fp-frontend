@@ -1,11 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import {
-  Label, BodyShort, Detail, Link,
-} from '@navikt/ds-react';
-import {
-  FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { Label, BodyShort, Detail, Link } from '@navikt/ds-react';
+import { FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { Inntektsmelding } from '@navikt/fp-types';
 import { formatCurrencyNoKr } from '@navikt/ft-utils';
@@ -20,16 +16,15 @@ interface OwnProps {
   inntektsmelding: Inntektsmelding;
 }
 
-const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
-  saksnummer,
-  inntektsmelding,
-}) => (
+const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({ saksnummer, inntektsmelding }) => (
   <>
     <VerticalSpacer eightPx />
     <FlexContainer>
       <FlexRow>
         <FlexColumn>
-          <Label size="small"><FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" /></Label>
+          <Label size="small">
+            <FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" />
+          </Label>
         </FlexColumn>
         <FlexColumn className={styles.topPadding}>
           <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</BodyShort>
@@ -38,11 +33,19 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
       <VerticalSpacer eightPx />
       <FlexRow>
         <FlexColumn>
-          <Label size="small"><FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjon" /></Label>
+          <Label size="small">
+            <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjon" />
+          </Label>
         </FlexColumn>
         <FlexColumn className={styles.topPadding}>
           <BodyShort size="small">
-            <FormattedMessage id={inntektsmelding.refusjonPrMnd ? 'InntektsmeldingOpplysningerPanel.Ja' : 'InntektsmeldingOpplysningerPanel.Nei'} />
+            <FormattedMessage
+              id={
+                inntektsmelding.refusjonPrMnd
+                  ? 'InntektsmeldingOpplysningerPanel.Ja'
+                  : 'InntektsmeldingOpplysningerPanel.Nei'
+              }
+            />
           </BodyShort>
         </FlexColumn>
       </FlexRow>
@@ -51,7 +54,9 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
         <>
           <FlexRow>
             <FlexColumn>
-              <Label size="small"><FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" /></Label>
+              <Label size="small">
+                <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" />
+              </Label>
             </FlexColumn>
             <FlexColumn className={styles.topPadding}>
               <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd)}</BodyShort>
@@ -60,7 +65,10 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer eightPx />
         </>
       )}
-      <Link href={hentDokumentLenke(saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId)} target="_blank">
+      <Link
+        href={hentDokumentLenke(saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId)}
+        target="_blank"
+      >
         <span>
           <BodyShort size="small" className={styles.inline}>
             <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
@@ -76,7 +84,9 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
         <FlexColumn>
           <FlexRow>
             <FlexColumn>
-              <Label size="small"><FormattedMessage id="InntektsmeldingOpplysningerPanel.Kontaktinfo" /></Label>
+              <Label size="small">
+                <FormattedMessage id="InntektsmeldingOpplysningerPanel.Kontaktinfo" />
+              </Label>
             </FlexColumn>
           </FlexRow>
           <FlexRow>
@@ -87,7 +97,10 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
           <FlexRow>
             <FlexColumn>
               <Detail size="small">
-                <FormattedMessage id="InntektsmeldingOpplysningerPanel.Tlf" values={{ nr: inntektsmelding.kontaktpersonNummer }} />
+                <FormattedMessage
+                  id="InntektsmeldingOpplysningerPanel.Tlf"
+                  values={{ nr: inntektsmelding.kontaktpersonNummer }}
+                />
               </Detail>
             </FlexColumn>
           </FlexRow>

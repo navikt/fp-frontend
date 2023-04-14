@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import {
-  StandardFaktaPanelProps, Personoversikt, Ytelsefordeling,
-} from '@navikt/fp-types';
+import { StandardFaktaPanelProps, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import OmsorgOgRettFaktaForm from './components/OmsorgOgRettFaktaForm';

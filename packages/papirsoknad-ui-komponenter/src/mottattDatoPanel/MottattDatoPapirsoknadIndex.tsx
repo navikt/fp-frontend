@@ -12,9 +12,7 @@ interface OwnProps {
   readOnly: boolean;
 }
 
-const MottattDatoPapirsoknadIndex: FunctionComponent<OwnProps> = ({
-  readOnly,
-}) => (
+const MottattDatoPapirsoknadIndex: FunctionComponent<OwnProps> = ({ readOnly }) => (
   <RawIntlProvider value={intl}>
     <MottattDatoPanel readOnly={readOnly} />
   </RawIntlProvider>

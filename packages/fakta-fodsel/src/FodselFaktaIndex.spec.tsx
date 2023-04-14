@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  render, screen, waitFor, fireEvent,
-} from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './FodselFaktaIndex.stories';
@@ -34,13 +32,15 @@ describe('<FodselFaktaIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      antallBarn: 1,
-      begrunnelse: 'Dette er en begrunnelse',
-      kode: '5001',
-      termindato: '2019-01-01',
-      utstedtdato: '2019-01-01',
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        antallBarn: 1,
+        begrunnelse: 'Dette er en begrunnelse',
+        kode: '5001',
+        termindato: '2019-01-01',
+        utstedtdato: '2019-01-01',
+      },
+    ]);
   });
 
   it('skal bekrefte aksjonspunkt for manglende fødsel ved å velge at dokumentasjon foreligger', async () => {
@@ -87,19 +87,24 @@ describe('<FodselFaktaIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      brukAntallBarnITps: true,
-      dokumentasjonForeligger: true,
-      kode: '5027',
-      uidentifiserteBarn: [{
-        dodsdato: undefined,
-        fodselsdato: '2010-01-01',
-      }, {
-        dodsdato: '2021-09-23',
-        fodselsdato: '2021-09-23',
-      }],
-      begrunnelse: 'Dette er en begrunnelse',
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        brukAntallBarnITps: true,
+        dokumentasjonForeligger: true,
+        kode: '5027',
+        uidentifiserteBarn: [
+          {
+            dodsdato: undefined,
+            fodselsdato: '2010-01-01',
+          },
+          {
+            dodsdato: '2021-09-23',
+            fodselsdato: '2021-09-23',
+          },
+        ],
+        begrunnelse: 'Dette er en begrunnelse',
+      },
+    ]);
   });
 
   it('skal bekrefte aksjonspunkt for manglende fødsel ved å velge at dokumentasjon ikke foreligger', async () => {
@@ -128,15 +133,19 @@ describe('<FodselFaktaIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      brukAntallBarnITps: true,
-      dokumentasjonForeligger: false,
-      kode: '5027',
-      uidentifiserteBarn: [{
-        dodsdato: undefined,
-        fodselsdato: '2019-01-01',
-      }],
-      begrunnelse: 'Dette er en begrunnelse',
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        brukAntallBarnITps: true,
+        dokumentasjonForeligger: false,
+        kode: '5027',
+        uidentifiserteBarn: [
+          {
+            dodsdato: undefined,
+            fodselsdato: '2019-01-01',
+          },
+        ],
+        begrunnelse: 'Dette er en begrunnelse',
+      },
+    ]);
   });
 });

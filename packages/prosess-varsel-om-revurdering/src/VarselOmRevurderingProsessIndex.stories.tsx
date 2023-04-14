@@ -3,9 +3,7 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 
 import { aksjonspunktStatus, behandlingType, AksjonspunktCode } from '@navikt/fp-kodeverk';
-import {
-  Aksjonspunkt, Behandling, FamilieHendelse, FamilieHendelseSamling, Soknad,
-} from '@navikt/fp-types';
+import { Aksjonspunkt, Behandling, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -14,19 +12,23 @@ import VarselOmRevurderingProsessIndex from './VarselOmRevurderingProsessIndex';
 const defaultBehandling = {
   uuid: '1',
   versjon: 1,
-  behandlingÅrsaker: [{
-    erAutomatiskRevurdering: true,
-  }],
+  behandlingÅrsaker: [
+    {
+      erAutomatiskRevurdering: true,
+    },
+  ],
   sprakkode: 'NN',
   type: behandlingType.FORSTEGANGSSOKNAD,
 } as Behandling;
 
 const familieHendelse = {
   register: {
-    avklartBarn: [{
-      fodselsdato: '2019-01-10',
-      dodsdato: undefined,
-    }],
+    avklartBarn: [
+      {
+        fodselsdato: '2019-01-10',
+        dodsdato: undefined,
+      },
+    ],
   },
   gjeldende: {
     termindato: '2019-01-01',
@@ -35,7 +37,7 @@ const familieHendelse = {
 } as FamilieHendelseSamling;
 
 const soknad = {
-  fodselsdatoer: { 1: '2019-01-10' } as {[key: number]: string },
+  fodselsdatoer: { 1: '2019-01-10' } as { [key: number]: string },
   termindato: '2019-01-01',
   utstedtdato: '2019-01-02',
   antallBarn: 1,
@@ -46,18 +48,22 @@ const soknadOriginalBehandling = {
 } as Soknad;
 
 const familiehendelseOriginalBehandling = {
-  avklartBarn: [{
-    fodselsdato: '2019-01-10',
-  }],
+  avklartBarn: [
+    {
+      fodselsdato: '2019-01-10',
+    },
+  ],
   termindato: '2019-01-01',
   antallBarnTermin: 1,
 } as FamilieHendelse;
 
-const aksjonspunkter = [{
-  definisjon: AksjonspunktCode.VARSEL_REVURDERING_MANUELL,
-  status: aksjonspunktStatus.OPPRETTET,
-  begrunnelse: undefined,
-}] as Aksjonspunkt[];
+const aksjonspunkter = [
+  {
+    definisjon: AksjonspunktCode.VARSEL_REVURDERING_MANUELL,
+    status: aksjonspunktStatus.OPPRETTET,
+    begrunnelse: undefined,
+  },
+] as Aksjonspunkt[];
 
 export default {
   title: 'prosess/prosess-varsel-om-revurdering',
@@ -67,12 +73,8 @@ export default {
 const Template: Story<{
   submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
   previewCallback: (data: any) => Promise<any>;
-  behandling: Behandling,
-}> = ({
-  submitCallback,
-  previewCallback,
-  behandling,
-}) => (
+  behandling: Behandling;
+}> = ({ submitCallback, previewCallback, behandling }) => (
   <VarselOmRevurderingProsessIndex
     behandling={behandling}
     alleKodeverk={alleKodeverk as any}

@@ -3,20 +3,18 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import { Label, Detail, BodyShort } from '@navikt/ds-react';
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import {
-  hasValidDecimal, maxValue, notDash, required,
-} from '@navikt/ft-form-validators';
-import {
-  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { hasValidDecimal, maxValue, notDash, required } from '@navikt/ft-form-validators';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { CheckboxField, NumberField, SelectField } from '@navikt/ft-form-hooks';
 
 import {
-  KodeverkType, oppholdArsakType, oppholdArsakKontoNavn, uttakArbeidType as uttakArbeidTypeKodeverk, periodeResultatType,
+  KodeverkType,
+  oppholdArsakType,
+  oppholdArsakKontoNavn,
+  uttakArbeidType as uttakArbeidTypeKodeverk,
+  periodeResultatType,
 } from '@navikt/fp-kodeverk';
-import {
-  ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, AlleKodeverk, PeriodeSoker,
-} from '@navikt/fp-types';
+import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, AlleKodeverk, PeriodeSoker } from '@navikt/fp-types';
 
 import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';
 
@@ -24,10 +22,7 @@ import styles from './uttakPeriodeInfo.module.css';
 
 const maxValue100 = maxValue(100);
 
-const periodeStatusClassName = (
-  valgtPeriode: PeriodeSoker,
-  erTilknyttetStortinget: boolean,
-): string => {
+const periodeStatusClassName = (valgtPeriode: PeriodeSoker, erTilknyttetStortinget: boolean): string => {
   if (valgtPeriode.periodeResultatType === periodeResultatType.INNVILGET && !erTilknyttetStortinget) {
     return styles.greenDetailsPeriod;
   }
@@ -37,9 +32,8 @@ const periodeStatusClassName = (
   return styles.redDetailsPeriod;
 };
 
-const periodeIsInnvilget = (
-  valgtPeriode: PeriodeSoker,
-): boolean => valgtPeriode.periodeResultatType === periodeResultatType.INNVILGET;
+const periodeIsInnvilget = (valgtPeriode: PeriodeSoker): boolean =>
+  valgtPeriode.periodeResultatType === periodeResultatType.INNVILGET;
 
 const gradertArbforhold = (
   valgtPeriode: PeriodeSoker,
@@ -47,17 +41,13 @@ const gradertArbforhold = (
 ): string | ReactElement => {
   let arbeidsforhold = '';
   if (valgtPeriode.gradertAktivitet) {
-    const {
-      arbeidsgiverReferanse, uttakArbeidType,
-    } = valgtPeriode.gradertAktivitet;
+    const { arbeidsgiverReferanse, uttakArbeidType } = valgtPeriode.gradertAktivitet;
 
     if (uttakArbeidType && uttakArbeidType !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
       return <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType]} />;
     }
     if (arbeidsgiverReferanse && arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse]) {
-      const {
-        navn, identifikator,
-      } = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
+      const { navn, identifikator } = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
       arbeidsforhold = navn ? `${navn}` : arbeidsforhold;
       arbeidsforhold = identifikator ? `${arbeidsforhold} (${identifikator})` : arbeidsforhold;
     }
@@ -77,7 +67,11 @@ const typePeriode = (
     return (
       <FormattedMessage
         id="UttakActivity.Utsettelse"
-        values={{ utsettelseType: alleKodeverk[KodeverkType.UTTAK_UTSETTELSE_TYPE].find((k) => k.kode === valgtPeriode.utsettelseType)?.navn }}
+        values={{
+          utsettelseType: alleKodeverk[KodeverkType.UTTAK_UTSETTELSE_TYPE].find(
+            k => k.kode === valgtPeriode.utsettelseType,
+          )?.navn,
+        }}
       />
     );
   }
@@ -87,16 +81,15 @@ const typePeriode = (
   return '';
 };
 
-const isInnvilgetText = (
-  valgtPeriode: PeriodeSoker,
-  alleKodeverk: AlleKodeverk,
-): ReactElement => {
+const isInnvilgetText = (valgtPeriode: PeriodeSoker, alleKodeverk: AlleKodeverk): ReactElement => {
   if (periodeIsInnvilget(valgtPeriode)) {
     return (
       <FormattedMessage
         id="UttakActivity.InnvilgelseAarsak"
         values={{
-          innvilgelseAarsak: alleKodeverk[KodeverkType.PERIODE_RESULTAT_AARSAK].find((k) => k.kode === valgtPeriode.periodeResultatÅrsak)?.navn,
+          innvilgelseAarsak: alleKodeverk[KodeverkType.PERIODE_RESULTAT_AARSAK].find(
+            k => k.kode === valgtPeriode.periodeResultatÅrsak,
+          )?.navn,
           b: (chunks: any) => <b>{chunks}</b>,
         }}
       />
@@ -106,21 +99,21 @@ const isInnvilgetText = (
     <FormattedMessage
       id="UttakActivity.IkkeOppfyltAarsak"
       values={{
-        avslagAarsak: alleKodeverk[KodeverkType.PERIODE_RESULTAT_AARSAK].find((k) => k.kode === valgtPeriode.periodeResultatÅrsak)?.navn,
+        avslagAarsak: alleKodeverk[KodeverkType.PERIODE_RESULTAT_AARSAK].find(
+          k => k.kode === valgtPeriode.periodeResultatÅrsak,
+        )?.navn,
         b: (chunks: any) => <b>{chunks}</b>,
       }}
     />
   );
 };
 
-const stonadskonto = (
-  valgtPeriode: PeriodeSoker,
-  alleKodeverk: AlleKodeverk,
-  kontoIkkeSatt?: boolean,
-): string => {
+const stonadskonto = (valgtPeriode: PeriodeSoker, alleKodeverk: AlleKodeverk, kontoIkkeSatt?: boolean): string => {
   let returnText = '';
   if (!kontoIkkeSatt) {
-    returnText = alleKodeverk[KodeverkType.STOENADSKONTOTYPE].find((k) => k.kode === valgtPeriode.aktiviteter[0]?.stønadskontoType)?.navn;
+    returnText = alleKodeverk[KodeverkType.STOENADSKONTOTYPE].find(
+      k => k.kode === valgtPeriode.aktiviteter[0]?.stønadskontoType,
+    )?.navn;
   }
   return returnText;
 };
@@ -129,28 +122,27 @@ const gyldigeÅrsaker = [
   oppholdArsakType.UTTAK_MØDREKVOTE_ANNEN_FORELDER,
   oppholdArsakType.UTTAK_FEDREKVOTE_ANNEN_FORELDER,
   oppholdArsakType.UTTAK_FELLESP_ANNEN_FORELDER,
-  oppholdArsakType.UTTAK_FORELDREPENGER_ANNEN_FORELDER];
+  oppholdArsakType.UTTAK_FORELDREPENGER_ANNEN_FORELDER,
+];
 
-const mapPeriodeTyper = (
-  typer: KodeverkMedNavn[],
-): ReactElement[] => typer
-  .filter(({
-    kode,
-  }) => gyldigeÅrsaker.includes(kode))
-  .map(({
-    kode,
-  }) => <option value={kode} key={kode}>{oppholdArsakKontoNavn[kode]}</option>);
+const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] =>
+  typer
+    .filter(({ kode }) => gyldigeÅrsaker.includes(kode))
+    .map(({ kode }) => (
+      <option value={kode} key={kode}>
+        {oppholdArsakKontoNavn[kode]}
+      </option>
+    ));
 
 const visGraderingIkkeInnvilget = (
   valgtPeriode: PeriodeSoker,
   readOnly: boolean,
   graderingInnvilget?: boolean,
-): boolean => (
-  valgtPeriode.periodeResultatType === periodeResultatType.INNVILGET
-  && valgtPeriode.gradertAktivitet
-  && graderingInnvilget === false
-  && readOnly
-);
+): boolean =>
+  valgtPeriode.periodeResultatType === periodeResultatType.INNVILGET &&
+  valgtPeriode.gradertAktivitet &&
+  graderingInnvilget === false &&
+  readOnly;
 
 interface OwnProps {
   valgtPeriode: PeriodeSoker;
@@ -177,7 +169,7 @@ const UttakPeriodeInfo: FunctionComponent<OwnProps> = ({
 
   const oppholdArsakTyper = alleKodeverk[KodeverkType.OPPHOLD_ARSAK];
 
-  const kontoIkkeSatt = !valgtPeriode.periodeType && (valgtPeriode.aktiviteter[0].stønadskontoType === '-');
+  const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0].stønadskontoType === '-';
 
   return (
     <div className={periodeStatusClassName(valgtPeriode, erTilknyttetStortinget)}>
@@ -185,18 +177,12 @@ const UttakPeriodeInfo: FunctionComponent<OwnProps> = ({
         {valgtPeriode.oppholdÅrsak === '-' && (
           <FlexRow spaceBetween>
             <FlexColumn>
-              <Label size="small">
-                {typePeriode(valgtPeriode, alleKodeverk, kontoIkkeSatt)}
-              </Label>
-              <BodyShort>
-                {stonadskonto(valgtPeriode, alleKodeverk, kontoIkkeSatt)}
-              </BodyShort>
+              <Label size="small">{typePeriode(valgtPeriode, alleKodeverk, kontoIkkeSatt)}</Label>
+              <BodyShort>{stonadskonto(valgtPeriode, alleKodeverk, kontoIkkeSatt)}</BodyShort>
             </FlexColumn>
+            <FlexColumn>{isReadOnly && isInnvilgetText(valgtPeriode, alleKodeverk)}</FlexColumn>
             <FlexColumn>
-              {isReadOnly && isInnvilgetText(valgtPeriode, alleKodeverk)}
-            </FlexColumn>
-            <FlexColumn>
-              {(harSoktOmFlerbarnsdager) && (
+              {harSoktOmFlerbarnsdager && (
                 <CheckboxField
                   name="flerbarnsdager"
                   label={intl.formatMessage({ id: 'UttakActivity.Flerbarnsdager' })}
@@ -235,17 +221,13 @@ const UttakPeriodeInfo: FunctionComponent<OwnProps> = ({
               <FormattedMessage
                 id="UttakActivity.PeriodeData.Periode"
                 values={{
-                  fomVerdi: dayjs(valgtPeriode.fom.toString())
-                    .format(DDMMYYYY_DATE_FORMAT),
-                  tomVerdi: dayjs(valgtPeriode.tom.toString())
-                    .format(DDMMYYYY_DATE_FORMAT),
+                  fomVerdi: dayjs(valgtPeriode.fom.toString()).format(DDMMYYYY_DATE_FORMAT),
+                  tomVerdi: dayjs(valgtPeriode.tom.toString()).format(DDMMYYYY_DATE_FORMAT),
                 }}
               />
             </Label>
             {valgtPeriode.oppholdÅrsak === '-' && (
-              <BodyShort>
-                {calcDaysAndWeeks(valgtPeriode.fom, valgtPeriode.tom).formattedString}
-              </BodyShort>
+              <BodyShort>{calcDaysAndWeeks(valgtPeriode.fom, valgtPeriode.tom).formattedString}</BodyShort>
             )}
           </FlexColumn>
           <FlexColumn>
@@ -255,19 +237,20 @@ const UttakPeriodeInfo: FunctionComponent<OwnProps> = ({
               </Detail>
             )}
             {valgtPeriode.oppholdÅrsak !== '-' && (
-              <div>
-                {calcDaysAndWeeks(valgtPeriode.fom, valgtPeriode.tom).formattedString}
-              </div>
+              <div>{calcDaysAndWeeks(valgtPeriode.fom, valgtPeriode.tom).formattedString}</div>
             )}
             {gradertArbforhold(valgtPeriode, arbeidsgiverOpplysningerPerId)}
           </FlexColumn>
           {visGraderingIkkeInnvilget(valgtPeriode, isReadOnly, graderingInnvilget) && (
             <FlexColumn>
               <b>
-                <FormattedMessage id="UttakActivity.GraderingIkkeOppfylt" />
-                :
+                <FormattedMessage id="UttakActivity.GraderingIkkeOppfylt" />:
               </b>
-              {alleKodeverk[KodeverkType.GRADERING_AVSLAG_AARSAK].find((k) => k.kode === valgtPeriode.graderingAvslagÅrsak)?.navn}
+              {
+                alleKodeverk[KodeverkType.GRADERING_AVSLAG_AARSAK].find(
+                  k => k.kode === valgtPeriode.graderingAvslagÅrsak,
+                )?.navn
+              }
             </FlexColumn>
           )}
         </FlexRow>
@@ -291,7 +274,10 @@ const UttakPeriodeInfo: FunctionComponent<OwnProps> = ({
       <VerticalSpacer eightPx />
       {valgtPeriode.mottattDato && (
         <BodyShort>
-          <FormattedMessage id="UttakInfo.MottattDato" values={{ dato: dayjs(valgtPeriode.mottattDato).format(DDMMYYYY_DATE_FORMAT) }} />
+          <FormattedMessage
+            id="UttakInfo.MottattDato"
+            values={{ dato: dayjs(valgtPeriode.mottattDato).format(DDMMYYYY_DATE_FORMAT) }}
+          />
         </BodyShort>
       )}
     </div>

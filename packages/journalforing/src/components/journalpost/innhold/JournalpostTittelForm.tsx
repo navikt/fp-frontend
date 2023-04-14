@@ -16,14 +16,12 @@ type OwnProps = Readonly<{
 /**
  * JournalpostTittelForm - Inneholder tittel på journalpost og formkomponent for å endre denne
  */
-const JournalpostTittelForm: FunctionComponent<OwnProps> = ({
-  journalpost,
-}) => {
+const JournalpostTittelForm: FunctionComponent<OwnProps> = ({ journalpost }) => {
   const [kanRedigereTittel, setKanRedigereTittel] = useState<boolean>(!journalpost.tittel);
   const toggleRedigering = useCallback(() => {
     setKanRedigereTittel(!kanRedigereTittel);
   }, [kanRedigereTittel]);
-  const tittler = listeMedTittler.map((tittel) => (
+  const tittler = listeMedTittler.map(tittel => (
     <option value={tittel} key={tittel}>
       {tittel}
     </option>
@@ -46,7 +44,13 @@ const JournalpostTittelForm: FunctionComponent<OwnProps> = ({
         <FlexColumn className={styles.tittelRad}>
           <Heading size="large">{journalpost.tittel}</Heading>
           {erKanalSomErÅpenForEndring(journalpost.kanal) && (
-            <Button icon={<Edit />} className={styles.editButton} onClick={toggleRedigering} type="button" variant="tertiary" />
+            <Button
+              icon={<Edit />}
+              className={styles.editButton}
+              onClick={toggleRedigering}
+              type="button"
+              variant="tertiary"
+            />
           )}
         </FlexColumn>
       )}

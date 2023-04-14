@@ -376,13 +376,13 @@ div[class^='SjekkFodselDokForm'] [class^='periodFieldArray_buttonRemove'] {
   top: 0;
   width: 80px;
 }
-:global([class^="vis-custom-time barndod"]) {
+:global([class^='vis-custom-time barndod']) {
   background-color: black;
   color: white;
   pointer-events: none;
   z-index: 0;
 }
-:global([class^="vis-custom-time barndod"]):after {
+:global([class^='vis-custom-time barndod']):after {
   background-color: black;
   color: white;
   content: 'Barn død';

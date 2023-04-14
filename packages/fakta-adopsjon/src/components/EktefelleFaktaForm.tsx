@@ -14,12 +14,12 @@ import styles from './ektefelleFaktaForm.module.css';
 interface OwnProps {
   readOnly: boolean;
   ektefellesBarnIsEdited?: boolean;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
 export type FormValues = {
   ektefellesBarn?: boolean;
-}
+};
 
 interface StaticFunctions {
   buildInitialValues: (familiehendelse: FamilieHendelse) => FormValues;
@@ -43,7 +43,9 @@ const EktefelleFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]}
     >
       <div className={styles.container}>
-        <BodyShort size="small"><FormattedMessage id="EktefelleFaktaForm.EktefellesBarn" /></BodyShort>
+        <BodyShort size="small">
+          <FormattedMessage id="EktefelleFaktaForm.EktefellesBarn" />
+        </BodyShort>
         <VerticalSpacer twentyPx />
         <hr className={styles.hr} />
         <RadioGroupPanel
@@ -54,13 +56,16 @@ const EktefelleFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
           isEdited={ektefellesBarnIsEdited}
           isHorizontal
           isTrueOrFalseSelection
-          radios={[{
-            label: intl.formatMessage({ id: 'EktefelleFaktaForm.ErIkkeValg' }),
-            value: 'false',
-          }, {
-            label: intl.formatMessage({ id: 'EktefelleFaktaForm.ErValg' }),
-            value: 'true',
-          }]}
+          radios={[
+            {
+              label: intl.formatMessage({ id: 'EktefelleFaktaForm.ErIkkeValg' }),
+              value: 'false',
+            },
+            {
+              label: intl.formatMessage({ id: 'EktefelleFaktaForm.ErValg' }),
+              value: 'true',
+            },
+          ]}
         />
       </div>
     </FaktaGruppe>
@@ -72,9 +77,8 @@ EktefelleFaktaForm.defaultProps = {
 };
 
 EktefelleFaktaForm.buildInitialValues = (familiehendelse: FamilieHendelse): FormValues => ({
-  ektefellesBarn: familiehendelse && familiehendelse.ektefellesBarn !== null
-    ? familiehendelse.ektefellesBarn
-    : undefined,
+  ektefellesBarn:
+    familiehendelse && familiehendelse.ektefellesBarn !== null ? familiehendelse.ektefellesBarn : undefined,
 });
 
 EktefelleFaktaForm.transformValues = (ektefellesBarn: boolean): BekreftEktefelleAksjonspunktAp => ({

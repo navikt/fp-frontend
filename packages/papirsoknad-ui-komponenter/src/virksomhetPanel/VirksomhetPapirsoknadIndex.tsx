@@ -13,15 +13,9 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
 }
 
-const VirksomhetPapirsoknadIndex: FunctionComponent<OwnProps> = ({
-  readOnly,
-  alleKodeverk,
-}) => (
+const VirksomhetPapirsoknadIndex: FunctionComponent<OwnProps> = ({ readOnly, alleKodeverk }) => (
   <RawIntlProvider value={intl}>
-    <EgenVirksomhetPanel
-      readOnly={readOnly}
-      alleKodeverk={alleKodeverk}
-    />
+    <EgenVirksomhetPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
   </RawIntlProvider>
 );
 

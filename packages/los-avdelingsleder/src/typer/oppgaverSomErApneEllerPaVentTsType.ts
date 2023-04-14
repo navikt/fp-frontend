@@ -3,6 +3,6 @@ type OppgaverSomErApneEllerPaVent = Readonly<{
   behandlingType: string;
   behandlingVenteStatus: string;
   førsteUttakMåned?: string;
-}>
+}>;
 
 export default OppgaverSomErApneEllerPaVent;

@@ -17,6 +17,7 @@
     "tsc": "tsc --pretty",
     "eslint": "eslint \"src/**/*.ts*\" --color",
     "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
+    "prettier": "prettier --write src",
     "dev": "vite build --mode development --watch",
     "build": "vite build",
     "clean": "rm -rf ./dist ./node_modules ./.storybook-static-build",

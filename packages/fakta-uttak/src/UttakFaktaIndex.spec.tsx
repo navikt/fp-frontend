@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  fireEvent,
-  render, screen, waitFor,
-} from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 
@@ -61,23 +58,27 @@ describe('<UttakFaktaIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      kode: '6065',
-      begrunnelse: 'Dette er en begrunnelse',
-      perioder: [{
-        fom: '2022-01-31',
-        tom: '2022-12-01',
-        originalFom: '2022-11-12',
-        periodeKilde: 'SAKSBEHANDLER',
-        samtidigUttaksprosent: '10',
-        uttakPeriodeType: 'MØDREKVOTE',
-        aksjonspunktType: undefined,
-        arbeidsforhold: undefined,
-        arbeidstidsprosent: undefined,
-        flerbarnsdager: false,
-        morsAktivitet: undefined,
-      }],
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        kode: '6065',
+        begrunnelse: 'Dette er en begrunnelse',
+        perioder: [
+          {
+            fom: '2022-01-31',
+            tom: '2022-12-01',
+            originalFom: '2022-11-12',
+            periodeKilde: 'SAKSBEHANDLER',
+            samtidigUttaksprosent: '10',
+            uttakPeriodeType: 'MØDREKVOTE',
+            aksjonspunktType: undefined,
+            arbeidsforhold: undefined,
+            arbeidstidsprosent: undefined,
+            flerbarnsdager: false,
+            morsAktivitet: undefined,
+          },
+        ],
+      },
+    ]);
   });
 
   it('skal få aksjonspunkt der en må justere fom dato til avklart startdato', async () => {
@@ -87,7 +88,9 @@ describe('<UttakFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
 
-    expect(screen.getByText('Første periode starter ikke på avklart startdato 31.01.2022. Legg inn periode fra startdato')).toBeInTheDocument();
+    expect(
+      screen.getByText('Første periode starter ikke på avklart startdato 31.01.2022. Legg inn periode fra startdato'),
+    ).toBeInTheDocument();
 
     await userEvent.click(screen.getAllByAltText('Åpne rad')[0]);
 
@@ -105,50 +108,56 @@ describe('<UttakFaktaIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      kode: '5065',
-      begrunnelse: 'Dette er en begrunnelse',
-      perioder: [{
-        fom: '2022-01-31',
-        tom: '2022-12-01',
-        originalFom: '2022-11-12',
-        periodeKilde: 'SAKSBEHANDLER',
-        samtidigUttaksprosent: 80,
-        uttakPeriodeType: 'MØDREKVOTE',
-        arbeidsforhold: {
-          arbeidType: 'ORDINÆRT_ARBEID',
-          arbeidsgiverReferanse: '910909088',
-        },
-        arbeidstidsprosent: 10,
-        flerbarnsdager: true,
-        aksjonspunktType: undefined,
-        morsAktivitet: undefined,
-      }, {
-        fom: '2022-12-02',
-        tom: '2022-12-10',
-        originalFom: '2022-12-02',
-        periodeKilde: 'SØKNAD',
-        uttakPeriodeType: 'MØDREKVOTE',
-        arbeidsforhold: {
-          arbeidType: 'ORDINÆRT_ARBEID',
-          arbeidsgiverReferanse: '910909088',
-        },
-        arbeidstidsprosent: 50,
-        flerbarnsdager: false,
-      }, {
-        fom: '2022-12-11',
-        tom: '2022-12-20',
-        originalFom: '2022-12-11',
-        periodeKilde: 'SØKNAD',
-        uttakPeriodeType: 'MØDREKVOTE',
-        arbeidsforhold: {
-          arbeidType: 'ORDINÆRT_ARBEID',
-          arbeidsgiverReferanse: '910909088',
-        },
-        arbeidstidsprosent: 50,
-        flerbarnsdager: false,
-      }],
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        kode: '5065',
+        begrunnelse: 'Dette er en begrunnelse',
+        perioder: [
+          {
+            fom: '2022-01-31',
+            tom: '2022-12-01',
+            originalFom: '2022-11-12',
+            periodeKilde: 'SAKSBEHANDLER',
+            samtidigUttaksprosent: 80,
+            uttakPeriodeType: 'MØDREKVOTE',
+            arbeidsforhold: {
+              arbeidType: 'ORDINÆRT_ARBEID',
+              arbeidsgiverReferanse: '910909088',
+            },
+            arbeidstidsprosent: 10,
+            flerbarnsdager: true,
+            aksjonspunktType: undefined,
+            morsAktivitet: undefined,
+          },
+          {
+            fom: '2022-12-02',
+            tom: '2022-12-10',
+            originalFom: '2022-12-02',
+            periodeKilde: 'SØKNAD',
+            uttakPeriodeType: 'MØDREKVOTE',
+            arbeidsforhold: {
+              arbeidType: 'ORDINÆRT_ARBEID',
+              arbeidsgiverReferanse: '910909088',
+            },
+            arbeidstidsprosent: 50,
+            flerbarnsdager: false,
+          },
+          {
+            fom: '2022-12-11',
+            tom: '2022-12-20',
+            originalFom: '2022-12-11',
+            periodeKilde: 'SØKNAD',
+            uttakPeriodeType: 'MØDREKVOTE',
+            arbeidsforhold: {
+              arbeidType: 'ORDINÆRT_ARBEID',
+              arbeidsgiverReferanse: '910909088',
+            },
+            arbeidstidsprosent: 50,
+            flerbarnsdager: false,
+          },
+        ],
+      },
+    ]);
   });
 
   it('skal vise aksjonspunkt når det ikke finnes perioder og så legge til en periode', async () => {
@@ -158,7 +167,9 @@ describe('<UttakFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
 
-    expect(screen.getByText('Ingen perioder å vurdere. Vurder om behandlingen er feilopprettet og kan henlegges')).toBeInTheDocument();
+    expect(
+      screen.getByText('Ingen perioder å vurdere. Vurder om behandlingen er feilopprettet og kan henlegges'),
+    ).toBeInTheDocument();
 
     expect(screen.queryByAltText('Åpne rad')).not.toBeInTheDocument();
 
@@ -183,19 +194,23 @@ describe('<UttakFaktaIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      kode: '5064',
-      begrunnelse: 'Dette er en begrunnelse',
-      perioder: [{
-        fom: '2022-01-31',
-        tom: '2022-12-14',
-        periodeKilde: 'SAKSBEHANDLER',
-        aksjonspunktType: undefined,
-        arbeidsforhold: undefined,
-        morsAktivitet: undefined,
-        oppholdÅrsak: 'UTTAK_FEDREKVOTE_ANNEN_FORELDER',
-      }],
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        kode: '5064',
+        begrunnelse: 'Dette er en begrunnelse',
+        perioder: [
+          {
+            fom: '2022-01-31',
+            tom: '2022-12-14',
+            periodeKilde: 'SAKSBEHANDLER',
+            aksjonspunktType: undefined,
+            arbeidsforhold: undefined,
+            morsAktivitet: undefined,
+            oppholdÅrsak: 'UTTAK_FEDREKVOTE_ANNEN_FORELDER',
+          },
+        ],
+      },
+    ]);
   });
 
   it('skal få aksjonspunkt der arbeidsforholdet i periode er ukjent', async () => {
@@ -209,7 +224,9 @@ describe('<UttakFaktaIndex>', () => {
 
     await userEvent.click(screen.getByAltText('Åpne rad'));
 
-    expect(await screen.findByText('Arbeidsgiver oppgitt for perioden er ukjent. Referanse: 91090823')).toBeInTheDocument();
+    expect(
+      await screen.findByText('Arbeidsgiver oppgitt for perioden er ukjent. Referanse: 91090823'),
+    ).toBeInTheDocument();
 
     const periodeFra = utils.getByLabelText('Periode fra');
     await userEvent.clear(periodeFra);
@@ -225,26 +242,30 @@ describe('<UttakFaktaIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      kode: '5063',
-      begrunnelse: 'Dette er en begrunnelse',
-      perioder: [{
-        fom: '2022-01-31',
-        tom: '2022-12-01',
-        originalFom: '2022-11-12',
-        periodeKilde: 'SAKSBEHANDLER',
-        samtidigUttaksprosent: undefined,
-        uttakPeriodeType: 'MØDREKVOTE',
-        arbeidsforhold: {
-          arbeidType: 'ORDINÆRT_ARBEID',
-          arbeidsgiverReferanse: '910909088',
-        },
-        arbeidstidsprosent: 50,
-        flerbarnsdager: false,
-        aksjonspunktType: undefined,
-        morsAktivitet: undefined,
-      }],
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        kode: '5063',
+        begrunnelse: 'Dette er en begrunnelse',
+        perioder: [
+          {
+            fom: '2022-01-31',
+            tom: '2022-12-01',
+            originalFom: '2022-11-12',
+            periodeKilde: 'SAKSBEHANDLER',
+            samtidigUttaksprosent: undefined,
+            uttakPeriodeType: 'MØDREKVOTE',
+            arbeidsforhold: {
+              arbeidType: 'ORDINÆRT_ARBEID',
+              arbeidsgiverReferanse: '910909088',
+            },
+            arbeidstidsprosent: 50,
+            flerbarnsdager: false,
+            aksjonspunktType: undefined,
+            morsAktivitet: undefined,
+          },
+        ],
+      },
+    ]);
   });
 
   it('skal vise ulike felter for ulike periodetyper', async () => {

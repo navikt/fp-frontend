@@ -8,7 +8,7 @@ export type PeriodeSokerAktivitet = Readonly<{
   uttakArbeidType?: string;
   gradering?: boolean;
   trekkdagerDesimaler?: number;
-}>
+}>;
 
 export type PeriodeSoker = Readonly<{
   fom: string;
@@ -28,13 +28,13 @@ export type PeriodeSoker = Readonly<{
   periodeType: string;
   utsettelseType: string;
   oppholdÅrsak: string;
-}>
+}>;
 
 export type AarsakFilter = Readonly<{
   kreverSammenhengendeUttak: boolean;
   utenMinsterett: boolean;
   søkerErMor: boolean;
-}>
+}>;
 
 type UttaksresultatPeriode = Readonly<{
   perioderSøker: PeriodeSoker[];
@@ -42,6 +42,6 @@ type UttaksresultatPeriode = Readonly<{
   annenForelderHarRett: boolean;
   aleneomsorg: boolean;
   årsakFilter: AarsakFilter;
-}>
+}>;
 
 export default UttaksresultatPeriode;

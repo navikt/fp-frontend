@@ -2,9 +2,7 @@ import React, { FunctionComponent } from 'react';
 
 import { TextAreaField, formHooks } from '@navikt/ft-form-hooks';
 import { decodeHtmlEntity, createIntl } from '@navikt/ft-utils';
-import {
-  hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew,
-} from '@navikt/ft-form-validators';
+import { hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { Aksjonspunkt } from '@navikt/fp-types';
 
 import messages from '../i18n/nb_NO.json';
@@ -16,13 +14,14 @@ const intl = createIntl(messages);
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
-const getBegrunnelseTextCode = (readOnly: boolean): string => (readOnly
-  ? 'ProsessStegBegrunnelseTextField.ExplanationRequiredReadOnly'
-  : 'ProsessStegBegrunnelseTextField.ExplanationRequired');
+const getBegrunnelseTextCode = (readOnly: boolean): string =>
+  readOnly
+    ? 'ProsessStegBegrunnelseTextField.ExplanationRequiredReadOnly'
+    : 'ProsessStegBegrunnelseTextField.ExplanationRequired';
 
 type FormValues = {
   begrunnelse?: string;
-}
+};
 
 const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) => value !== undefined || isDirty;
 
@@ -36,7 +35,7 @@ interface StaticFunctions {
   buildInitialValues?: (aksjonspunkter: Aksjonspunkt[]) => FormValues;
   transformValues?: (values: FormValues) => {
     begrunnelse?: string;
-  },
+  };
 }
 
 /**
@@ -49,7 +48,9 @@ const ProsessStegBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunct
   text,
   useAllWidth = false,
 }) => {
-  const { formState: { isDirty } } = formHooks.useFormContext();
+  const {
+    formState: { isDirty },
+  } = formHooks.useFormContext();
   const isRequiredFn = getIsBegrunnelseRequired(isDirty);
   return (
     <div className={!useAllWidth ? styles.begrunnelseTextField : ''}>
@@ -64,9 +65,8 @@ const ProsessStegBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunct
   );
 };
 
-const getBegrunnelse = (aksjonspunkter: Aksjonspunkt[]): string => (aksjonspunkter.length > 0 && aksjonspunkter[0].begrunnelse
-  ? aksjonspunkter[0].begrunnelse
-  : '');
+const getBegrunnelse = (aksjonspunkter: Aksjonspunkt[]): string =>
+  aksjonspunkter.length > 0 && aksjonspunkter[0].begrunnelse ? aksjonspunkter[0].begrunnelse : '';
 
 ProsessStegBegrunnelseTextField.buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   begrunnelse: decodeHtmlEntity(getBegrunnelse(aksjonspunkter)),

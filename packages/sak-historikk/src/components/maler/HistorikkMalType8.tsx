@@ -5,7 +5,11 @@ import { BodyShort } from '@navikt/ds-react';
 import { HistorikkinnslagEndretFelt } from '@navikt/fp-types';
 
 import {
-  findEndretFeltNavn, findEndretFeltVerdi, findHendelseText, findIdForOpplysningCode, findResultatText,
+  findEndretFeltNavn,
+  findEndretFeltVerdi,
+  findHendelseText,
+  findIdForOpplysningCode,
+  findResultatText,
 } from './felles/historikkUtils';
 import HistorikkDokumentLenke from './felles/HistorikkDokumentLenke';
 import Skjermlenke from './felles/Skjermlenke';
@@ -54,12 +58,11 @@ const HistorikkMalType8: FunctionComponent<HistorikkMal> = ({
 
   return (
     <>
-      {historikkinnslagDeler.map((
-        historikkinnslagDel, historikkinnslagDelIndex,
-      ) => (
-        <div key={
-          `historikkinnslagDel${historikkinnslagDelIndex}` // eslint-disable-line react/no-array-index-key
-        }
+      {historikkinnslagDeler.map((historikkinnslagDel, historikkinnslagDelIndex) => (
+        <div
+          key={
+            `historikkinnslagDel${historikkinnslagDelIndex}` // eslint-disable-line react/no-array-index-key
+          }
         >
           <Skjermlenke
             skjermlenke={historikkinnslagDel.skjermlenke}
@@ -69,30 +72,38 @@ const HistorikkMalType8: FunctionComponent<HistorikkMal> = ({
             createLocationForSkjermlenke={createLocationForSkjermlenke}
           />
 
-          {historikkinnslagDel.hendelse && <BodyShort size="small">{findHendelseText(historikkinnslagDel.hendelse, getKodeverknavn)}</BodyShort>}
+          {historikkinnslagDel.hendelse && (
+            <BodyShort size="small">{findHendelseText(historikkinnslagDel.hendelse, getKodeverknavn)}</BodyShort>
+          )}
 
-          {historikkinnslagDel.resultat && <BodyShort size="small">{findResultatText(historikkinnslagDel.resultat, intl)}</BodyShort>}
+          {historikkinnslagDel.resultat && (
+            <BodyShort size="small">{findResultatText(historikkinnslagDel.resultat, intl)}</BodyShort>
+          )}
 
-          {historikkinnslagDel.endredeFelter && historikkinnslagDel.endredeFelter
-            .map((endretFelt, i) => <div key={`endredeFelter${i + 1}`}>{formatChangedField(endretFelt, intl)}</div>)}
+          {historikkinnslagDel.endredeFelter &&
+            historikkinnslagDel.endredeFelter.map((endretFelt, i) => (
+              <div key={`endredeFelter${i + 1}`}>{formatChangedField(endretFelt, intl)}</div>
+            ))}
 
-          {historikkinnslagDel.opplysninger && historikkinnslagDel.opplysninger.map((opplysning) => (
-            <FormattedMessage
-              id={findIdForOpplysningCode(opplysning)}
-              values={{ antallBarn: opplysning.tilVerdi, b: (chunks: any) => <b>{chunks}</b> }}
-            />
-          ))}
+          {historikkinnslagDel.opplysninger &&
+            historikkinnslagDel.opplysninger.map(opplysning => (
+              <FormattedMessage
+                id={findIdForOpplysningCode(opplysning)}
+                values={{ antallBarn: opplysning.tilVerdi, b: (chunks: any) => <b>{chunks}</b> }}
+              />
+            ))}
 
           {historikkinnslagDel.årsaktekst && <BodyShort size="small">{historikkinnslagDel.årsaktekst}</BodyShort>}
           {historikkinnslagDel.begrunnelsetekst && <BubbleText bodyText={historikkinnslagDel.begrunnelsetekst} />}
           {historikkinnslagDel.begrunnelseFritekst && <BubbleText bodyText={historikkinnslagDel.begrunnelseFritekst} />}
-          {dokumentLinks && dokumentLinks.map((dokumentLenke) => (
-            <HistorikkDokumentLenke
-              key={`${dokumentLenke.tag}@${dokumentLenke.url}`}
-              dokumentLenke={dokumentLenke}
-              saksnummer={saksnummer}
-            />
-          ))}
+          {dokumentLinks &&
+            dokumentLinks.map(dokumentLenke => (
+              <HistorikkDokumentLenke
+                key={`${dokumentLenke.tag}@${dokumentLenke.url}`}
+                dokumentLenke={dokumentLenke}
+                saksnummer={saksnummer}
+              />
+            ))}
         </div>
       ))}
     </>

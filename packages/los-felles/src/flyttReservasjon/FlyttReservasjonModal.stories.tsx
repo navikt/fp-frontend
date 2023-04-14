@@ -22,12 +22,9 @@ export default {
 };
 
 const Template: Story<{
-  saksbehandler: SaksbehandlerAvdeling,
-  hentReserverteOppgaver: (params: any, keepData: boolean) => void
-}> = ({
-  saksbehandler,
-  hentReserverteOppgaver,
-}) => {
+  saksbehandler: SaksbehandlerAvdeling;
+  hentReserverteOppgaver: (params: any, keepData: boolean) => void;
+}> = ({ saksbehandler, hentReserverteOppgaver }) => {
   const [harHentet, setHentet] = useState(false);
   const hentSaksbehandler = () => {
     setHentet(true);

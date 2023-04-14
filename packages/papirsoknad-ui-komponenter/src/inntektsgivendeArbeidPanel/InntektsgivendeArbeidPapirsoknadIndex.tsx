@@ -22,10 +22,7 @@ const InntektsgivendeArbeidPapirsoknadIndex: FunctionComponent<OwnProps> & Stati
   alleKodeverk,
 }) => (
   <RawIntlProvider value={intl}>
-    <InntektsgivendeArbeidPanel
-      readOnly={readOnly}
-      alleKodeverk={alleKodeverk}
-    />
+    <InntektsgivendeArbeidPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
   </RawIntlProvider>
 );
 

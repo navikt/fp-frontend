@@ -32,9 +32,7 @@ export default {
 
 const Template: Story<{
   submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
-}> = ({
-  submitCallback,
-}) => (
+}> = ({ submitCallback }) => (
   <VurderSoknadsfristForeldrepengerIndex
     behandling={behandling}
     alleKodeverk={alleKodeverk as any}
@@ -47,11 +45,15 @@ const Template: Story<{
     alleMerknaderFraBeslutter={{}}
     setFormData={() => undefined}
     soknad={soknad}
-    aksjonspunkter={[{
-      definisjon: AksjonspunktCode.VURDER_SOKNADSFRIST_FORELDREPENGER,
-      status: aksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-    }] as Aksjonspunkt[]}
+    aksjonspunkter={
+      [
+        {
+          definisjon: AksjonspunktCode.VURDER_SOKNADSFRIST_FORELDREPENGER,
+          status: aksjonspunktStatus.OPPRETTET,
+          begrunnelse: undefined,
+        },
+      ] as Aksjonspunkt[]
+    }
   />
 );
 

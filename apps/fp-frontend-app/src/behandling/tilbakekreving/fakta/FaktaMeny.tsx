@@ -9,23 +9,20 @@ export type MenyData = {
   label: string;
   erAktiv: boolean;
   harApneAksjonspunkter: boolean;
-}
+};
 
 interface OwnProps {
   menyData: MenyData[];
   oppdaterFaktaPanelIUrl: (index: number) => void;
 }
 
-const FaktaMeny: FunctionComponent<OwnProps> = ({
-  menyData,
-  oppdaterFaktaPanelIUrl,
-}) => {
+const FaktaMeny: FunctionComponent<OwnProps> = ({ menyData, oppdaterFaktaPanelIUrl }) => {
   const intl = useIntl();
 
   return (
     <SideMenu
       heading={intl.formatMessage({ id: 'FaktaPanel.FaktaOm' })}
-      links={menyData.map((data) => ({
+      links={menyData.map(data => ({
         label: data.label,
         active: data.erAktiv,
         iconSrc: data.harApneAksjonspunkter ? advarselIkonUrl : undefined,

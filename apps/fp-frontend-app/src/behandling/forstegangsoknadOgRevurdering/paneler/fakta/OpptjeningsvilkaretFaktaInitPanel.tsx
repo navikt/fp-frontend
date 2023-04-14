@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { vilkarUtfallType, VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
@@ -17,7 +15,7 @@ const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_PERIODER_MED_OPPTJENING];
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.OPPTJENING];
 type EndepunktPanelData = {
   opptjening?: Opptjening;
-}
+};
 
 interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -36,10 +34,16 @@ const OpptjeningsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanel
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.OPPTJENINGSVILKARET}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'OpptjeningInfoPanel.KontrollerFaktaForOpptjening' })}
-    skalPanelVisesIMeny={() => !!props.behandling.vilkår
-      && props.behandling.vilkår.some((v) => v.vilkarType === VilkarType.OPPTJENINGSVILKARET)
-      && props.behandling.vilkår.some((v) => v.vilkarType === VilkarType.MEDLEMSKAPSVILKARET && v.vilkarStatus === vilkarUtfallType.OPPFYLT)}
-    renderPanel={(data) => <OpptjeningFaktaIndex arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} {...data} />}
+    skalPanelVisesIMeny={() =>
+      !!props.behandling.vilkår &&
+      props.behandling.vilkår.some(v => v.vilkarType === VilkarType.OPPTJENINGSVILKARET) &&
+      props.behandling.vilkår.some(
+        v => v.vilkarType === VilkarType.MEDLEMSKAPSVILKARET && v.vilkarStatus === vilkarUtfallType.OPPFYLT,
+      )
+    }
+    renderPanel={data => (
+      <OpptjeningFaktaIndex arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} {...data} />
+    )}
   />
 );
 

@@ -1,7 +1,4 @@
-import {
-  DateLabel,
-  FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { DateLabel, FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Label, BodyShort } from '@navikt/ds-react';
@@ -16,9 +13,7 @@ interface OwnProps {
   alleBarn: PersonopplysningerBasis[];
 }
 
-const AlleBarnPanel: FunctionComponent<OwnProps> = ({
-  alleBarn,
-}) => {
+const AlleBarnPanel: FunctionComponent<OwnProps> = ({ alleBarn }) => {
   const intl = useIntl();
   return (
     <>
@@ -39,9 +34,7 @@ const AlleBarnPanel: FunctionComponent<OwnProps> = ({
                             <Label size="small">
                               <FormattedMessage id="PersonInfoPanel.BarnNr" values={{ nummer: index + 1 }} />
                             </Label>
-                            <BodyShort size="small">
-                              {barn.navn ? barn.navn : '-'}
-                            </BodyShort>
+                            <BodyShort size="small">{barn.navn ? barn.navn : '-'}</BodyShort>
                           </FlexColumn>
                         </FlexRow>
                         <VerticalSpacer sixteenPx />

@@ -1,15 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import {
-  BodyShort, Modal, Button, Label,
-} from '@navikt/ds-react';
-import {
-  FlexColumn, FlexContainer, FlexRow, Image,
-} from '@navikt/ft-ui-komponenter';
+import { BodyShort, Modal, Button, Label } from '@navikt/ds-react';
+import { FlexColumn, FlexContainer, FlexRow, Image } from '@navikt/ft-ui-komponenter';
 
-import {
-  behandlingType as BehandlingType, behandlingResultatType, behandlingStatus,
-} from '@navikt/fp-kodeverk';
+import { behandlingType as BehandlingType, behandlingResultatType, behandlingStatus } from '@navikt/fp-kodeverk';
 import { Behandling } from '@navikt/ft-types';
 
 import innvilgetImageUrl from '../../images/innvilget_valgt.svg';
@@ -46,10 +40,7 @@ const getInfoTextCode = (
   return 'FatterVedtakApprovalModal.InnvilgetVedtak';
 };
 
-const getModalDescriptionTextCode = (
-  isOpphor: boolean,
-  behandlingTypeKode: string,
-) => {
+const getModalDescriptionTextCode = (isOpphor: boolean, behandlingTypeKode: string) => {
   if (behandlingTypeKode === BehandlingType.KLAGE) {
     return 'FatterVedtakApprovalModal.ModalDescriptionKlage';
   }
@@ -75,27 +66,27 @@ const utledInfoTextCode = (
   if (allAksjonspunktApproved) {
     return isStatusFatterVedtak(behandlingStatusKode)
       ? getInfoTextCode(
-        behandlingTypeKode,
-        behandlingsresultat,
-        isBehandlingsresultatOpphor,
-        harSammeResultatSomOriginalBehandling,
-      )
+          behandlingTypeKode,
+          behandlingsresultat,
+          isBehandlingsresultatOpphor,
+          harSammeResultatSomOriginalBehandling,
+        )
       : '';
   }
   return 'FatterVedtakApprovalModal.VedtakReturneresTilSaksbehandler';
 };
 
-const utledAltImgTextCode = (
-  behandlingStatusKode: string,
-) => (isStatusFatterVedtak(behandlingStatusKode) ? 'FatterVedtakApprovalModal.Innvilget' : '');
+const utledAltImgTextCode = (behandlingStatusKode: string) =>
+  isStatusFatterVedtak(behandlingStatusKode) ? 'FatterVedtakApprovalModal.Innvilget' : '';
 
 const utledModalDescriptionTextCode = (
   behandlingStatusKode: string,
   behandlingTypeKode: string,
   isBehandlingsresultatOpphor: boolean,
-) => (isStatusFatterVedtak(behandlingStatusKode)
-  ? getModalDescriptionTextCode(isBehandlingsresultatOpphor, behandlingTypeKode)
-  : 'FatterVedtakApprovalModal.ModalDescription');
+) =>
+  isStatusFatterVedtak(behandlingStatusKode)
+    ? getModalDescriptionTextCode(isBehandlingsresultatOpphor, behandlingTypeKode)
+    : 'FatterVedtakApprovalModal.ModalDescription';
 
 interface OwnProps {
   closeEvent: () => void;
@@ -121,7 +112,8 @@ const FatterVedtakApprovalModal: FunctionComponent<OwnProps> = ({
   harSammeResultatSomOriginalBehandling,
 }) => {
   const intl = useIntl();
-  const isBehandlingsresultatOpphor = !!behandlingsresultat && behandlingsresultat.type === behandlingResultatType.OPPHOR;
+  const isBehandlingsresultatOpphor =
+    !!behandlingsresultat && behandlingsresultat.type === behandlingResultatType.OPPHOR;
   const infoTextCode = utledInfoTextCode(
     allAksjonspunktApproved,
     behandlingStatusKode,
@@ -133,7 +125,11 @@ const FatterVedtakApprovalModal: FunctionComponent<OwnProps> = ({
 
   const altImgTextCode = utledAltImgTextCode(behandlingStatusKode);
 
-  const modalDescriptionTextCode = utledModalDescriptionTextCode(behandlingStatusKode, behandlingTypeKode, isBehandlingsresultatOpphor);
+  const modalDescriptionTextCode = utledModalDescriptionTextCode(
+    behandlingStatusKode,
+    behandlingTypeKode,
+    isBehandlingsresultatOpphor,
+  );
 
   return (
     <Modal
@@ -148,22 +144,22 @@ const FatterVedtakApprovalModal: FunctionComponent<OwnProps> = ({
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Image className={styles.image} alt={intl.formatMessage({ id: altImgTextCode })} src={innvilgetImageUrl} />
+              <Image
+                className={styles.image}
+                alt={intl.formatMessage({ id: altImgTextCode })}
+                src={innvilgetImageUrl}
+              />
             </FlexColumn>
             <FlexColumn>
               <Label size="small">
                 <FormattedMessage id={infoTextCode} />
               </Label>
-              <BodyShort size="small"><FormattedMessage id="FatterVedtakApprovalModal.GoToSearchPage" /></BodyShort>
+              <BodyShort size="small">
+                <FormattedMessage id="FatterVedtakApprovalModal.GoToSearchPage" />
+              </BodyShort>
             </FlexColumn>
             <FlexColumn className={styles.button}>
-              <Button
-                size="small"
-                variant="primary"
-                onClick={closeEvent}
-                autoFocus
-                type="button"
-              >
+              <Button size="small" variant="primary" onClick={closeEvent} autoFocus type="button">
                 <FormattedMessage id="FatterVedtakApprovalModal.Ok" />
               </Button>
             </FlexColumn>

@@ -12,15 +12,17 @@ const HTTP_ACCEPTED = 202;
 const MAX_POLLING_ATTEMPTS = 50;
 export const REQUEST_POLLING_CANCELLED = 'INTERNAL_CANCELLATION';
 
-const wait = (ms: number) => new Promise((resolve) => {
-  setTimeout(resolve, ms);
-});
+const wait = (ms: number) =>
+  new Promise(resolve => {
+    setTimeout(resolve, ms);
+  });
 
-const hasLocationAndStatusDelayedOrHalted = (responseData: any): boolean => !!responseData?.location
-  && (responseData.status === AsyncPollingStatus.DELAYED || responseData.status === AsyncPollingStatus.HALTED);
+const hasLocationAndStatusDelayedOrHalted = (responseData: any): boolean =>
+  !!responseData?.location &&
+  (responseData.status === AsyncPollingStatus.DELAYED || responseData.status === AsyncPollingStatus.HALTED);
 
-type Notify = (eventType: keyof typeof EventType, data?: any, isPolling?: boolean) => void
-type NotificationEmitter = (eventType: keyof typeof EventType, data?: any) => void
+type Notify = (eventType: keyof typeof EventType, data?: any, isPolling?: boolean) => void;
+type NotificationEmitter = (eventType: keyof typeof EventType, data?: any) => void;
 
 /**
  * RequestRunner
@@ -47,8 +49,12 @@ class RequestRunner {
 
   isPollingRequest = false;
 
-  constructor(httpClientApi: HttpClientApi, restMethod: (url: string, params: any, responseType?: ResponseType) => Promise<Response>,
-    path: string, config: RequestAdditionalConfig) {
+  constructor(
+    httpClientApi: HttpClientApi,
+    restMethod: (url: string, params: any, responseType?: ResponseType) => Promise<Response>,
+    path: string,
+    config: RequestAdditionalConfig,
+  ) {
     this.httpClientApi = httpClientApi;
     this.restMethod = restMethod;
     this.path = path;
@@ -67,7 +73,7 @@ class RequestRunner {
       throw new TimeoutError(location || 'No location');
     }
 
-    const interval = pollingCounter < 30 ? pollingInterval : pollingInterval + ((pollingCounter - 30) * pollingInterval);
+    const interval = pollingCounter < 30 ? pollingInterval : pollingInterval + (pollingCounter - 30) * pollingInterval;
     await wait(interval);
 
     if (!location || this.isCancelled) {
@@ -91,7 +97,7 @@ class RequestRunner {
     return statusOrResultResponse;
   };
 
-  execute = async <P, >(
+  execute = async <P>(
     path: string,
     restMethod: (pathArg: string, params?: P) => Promise<Response>,
     params: P,
@@ -120,7 +126,7 @@ class RequestRunner {
     this.isCancelled = true;
   };
 
-  start = async <T, P>(params: P): Promise<{payload: T}> => {
+  start = async <T, P>(params: P): Promise<{ payload: T }> => {
     this.notify(EventType.REQUEST_STARTED);
 
     try {

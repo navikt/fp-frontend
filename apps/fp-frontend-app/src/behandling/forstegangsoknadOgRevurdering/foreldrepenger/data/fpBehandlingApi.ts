@@ -15,15 +15,19 @@ import { behandlingFellesEndepunkter } from '../../../felles/data/behandlingFell
 type StonadskontoGittUttaksPerioderParams = {
   behandlingUuid: string;
   perioder: PeriodeSoker[];
-}
+};
 
 export const FpBehandlingApiKeys = {
-  STONADSKONTOER_GITT_UTTAKSPERIODER: new RestKey<void, StonadskontoGittUttaksPerioderParams>('STONADSKONTOER_GITT_UTTAKSPERIODER'),
+  STONADSKONTOER_GITT_UTTAKSPERIODER: new RestKey<void, StonadskontoGittUttaksPerioderParams>(
+    'STONADSKONTOER_GITT_UTTAKSPERIODER',
+  ),
   FAKTA_ARBEIDSFORHOLD: new RestKey<FaktaArbeidsforhold[], void>('FAKTA_ARBEIDSFORHOLD'),
   UTTAKSRESULTAT_PERIODER: new RestKey<UttaksresultatPeriode, void>('UTTAKSRESULTAT_PERIODER'),
   UTTAK_STONADSKONTOER: new RestKey<UttakStonadskontoer, void>('UTTAK_STONADSKONTOER'),
   UTTAK_KONTROLLER_FAKTA_PERIODER_V2: new RestKey<KontrollerFaktaPeriode[], void>('UTTAK_KONTROLLER_FAKTA_PERIODER_V2'),
-  BEREGNINGSGRUNNLAG_BESTEBEREGNING: new RestKey<UttakKontrollerAktivitetskrav[], void>('BEREGNINGSGRUNNLAG_BESTEBEREGNING'),
+  BEREGNINGSGRUNNLAG_BESTEBEREGNING: new RestKey<UttakKontrollerAktivitetskrav[], void>(
+    'BEREGNINGSGRUNNLAG_BESTEBEREGNING',
+  ),
   DOKUMENTASJON_VURDERING_BEHOV: new RestKey<DokumentasjonVurderingBehov[], void>('DOKUMENTASJON_VURDERING_BEHOV'),
 };
 

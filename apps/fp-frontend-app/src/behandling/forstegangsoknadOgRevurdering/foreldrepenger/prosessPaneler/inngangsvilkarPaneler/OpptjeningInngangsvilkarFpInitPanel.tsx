@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -20,7 +18,7 @@ const VILKAR_KODER = [VilkarType.OPPTJENINGSPERIODE, VilkarType.OPPTJENINGSVILKA
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.OPPTJENING];
 type EndepunktPanelData = {
   opptjening: Opptjening;
-}
+};
 
 interface OwnProps {
   behandlingVersjon: number;
@@ -54,7 +52,10 @@ const OpptjeningInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangs
               erMedlemskapsPanel={false}
               toggleOverstyring={toggleOverstyring}
               erOverstyrt={erOverstyrt}
-              overrideReadOnly={data.isReadOnly || (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))}
+              overrideReadOnly={
+                data.isReadOnly ||
+                (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))
+              }
               kanOverstyreAccess={rettigheter.kanOverstyreAccess}
             />
           )}

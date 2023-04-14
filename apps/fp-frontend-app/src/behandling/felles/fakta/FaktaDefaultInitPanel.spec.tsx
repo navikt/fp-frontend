@@ -29,10 +29,12 @@ describe('<FaktaDefaultInitPanel>', () => {
     submitCallback,
     alleKodeverk: kodeverk,
     readOnly: false,
-    aksjonspunkter: [{
-      definisjon: AksjonspunktCode.BEHANDLE_KLAGE_NFP,
-      kanLoses: true,
-    }] as Aksjonspunkt[],
+    aksjonspunkter: [
+      {
+        definisjon: AksjonspunktCode.BEHANDLE_KLAGE_NFP,
+        kanLoses: true,
+      },
+    ] as Aksjonspunkt[],
     harApneAksjonspunkter: true,
     alleMerknaderFraBeslutter: {},
     setFormData: () => undefined,
@@ -42,9 +44,7 @@ describe('<FaktaDefaultInitPanel>', () => {
   it('skal rendre panel korrekt', async () => {
     const BEHANDLING_KEY = new RestKey<Behandling, void>('BEHANDLING_KEY');
 
-    const endpoints = new RestApiConfigBuilder()
-      .withRel('behandling', BEHANDLING_KEY)
-      .build();
+    const endpoints = new RestApiConfigBuilder().withRel('behandling', BEHANDLING_KEY).build();
 
     const requestMock = createRequestApi(endpoints);
 

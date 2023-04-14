@@ -1,8 +1,6 @@
 import React, { FunctionComponent, useCallback } from 'react';
 
-import {
-  AksessRettigheter, ArbeidsgiverOpplysningerPerId, Behandling, Fagsak, Personoversikt,
-} from '@navikt/fp-types';
+import { AksessRettigheter, ArbeidsgiverOpplysningerPerId, Behandling, Fagsak, Personoversikt } from '@navikt/fp-types';
 
 import BehandlingContainer from '../../felles/BehandlingContainer';
 import { requestFpApi } from './data/fpBehandlingApi';
@@ -43,11 +41,11 @@ interface OwnProps {
   valgtFaktaSteg?: string;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   opneSokeside: () => void;
-  toggleOppdateringAvFagsakOgBehandling: (skalHenteFagsak: boolean) => void,
+  toggleOppdateringAvFagsakOgBehandling: (skalHenteFagsak: boolean) => void;
   arbeidsgivere: ArbeidsgiverOpplysningerPerId;
   personoversikt: Personoversikt;
   rettigheter: AksessRettigheter;
-  hentBehandling: (keepData: boolean) => Promise<Behandling>
+  hentBehandling: (keepData: boolean) => Promise<Behandling>;
   behandlingEventHandler: BehandlingEventHandler;
 }
 
@@ -65,76 +63,99 @@ const BehandlingContainerWrapperForeldrepenger: FunctionComponent<OwnProps> = ({
   hentBehandling,
   behandlingEventHandler,
 }) => {
-  const faktaPaneler = useCallback((props) => (
-    <>
-      <SakenFaktaInitPanel {...props} fagsak={fagsak} />
-      <ArbeidOgInntektFaktaInitPanel
-        {...props}
-        saksnummer={fagsak.saksnummer}
-        behandlingUuid={behandling.uuid}
-        rettigheter={rettigheter}
-        arbeidsgiverOpplysningerPerId={arbeidsgivere}
-        settBehandlingPåVentCallback={behandlingEventHandler.settBehandlingPaVent}
-        hentBehandling={hentBehandling}
-      />
-      <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <YtelserFaktaInitPanel {...props} />
-      <VergeFaktaInitPanel {...props} />
-      <OmsorgvilkaretFaktaInitPanel {...props} personoversikt={personoversikt} />
-      <AdopsjonsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
-      <FodselvilkaretFaktaInitPanel {...props} />
-      <MedlemskapsvilkaretFaktaInitPanel {...props} />
-      <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <PermisjonFaktaInitPanel {...props} saksnummer={fagsak.saksnummer} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <BeregningFaktaInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <BesteberegningFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <FordelingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <OmsorgOgRettFaktaInitPanel {...props} personoversikt={personoversikt} />
-      <OmsorgFaktaInitPanel {...props} personoversikt={personoversikt} />
-      <UttakFaktaInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} fagsak={fagsak} />
-      <UttakDokumentasjonFaktaInitPanel {...props} />
-    </>
-  ), [personoversikt, fagsak, behandling, rettigheter, arbeidsgivere, behandlingEventHandler, hentBehandling]);
+  const faktaPaneler = useCallback(
+    props => (
+      <>
+        <SakenFaktaInitPanel {...props} fagsak={fagsak} />
+        <ArbeidOgInntektFaktaInitPanel
+          {...props}
+          saksnummer={fagsak.saksnummer}
+          behandlingUuid={behandling.uuid}
+          rettigheter={rettigheter}
+          arbeidsgiverOpplysningerPerId={arbeidsgivere}
+          settBehandlingPåVentCallback={behandlingEventHandler.settBehandlingPaVent}
+          hentBehandling={hentBehandling}
+        />
+        <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <YtelserFaktaInitPanel {...props} />
+        <VergeFaktaInitPanel {...props} />
+        <OmsorgvilkaretFaktaInitPanel {...props} personoversikt={personoversikt} />
+        <AdopsjonsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
+        <FodselvilkaretFaktaInitPanel {...props} />
+        <MedlemskapsvilkaretFaktaInitPanel {...props} />
+        <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <PermisjonFaktaInitPanel
+          {...props}
+          saksnummer={fagsak.saksnummer}
+          arbeidsgiverOpplysningerPerId={arbeidsgivere}
+        />
+        <BeregningFaktaInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <BesteberegningFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <FordelingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <OmsorgOgRettFaktaInitPanel {...props} personoversikt={personoversikt} />
+        <OmsorgFaktaInitPanel {...props} personoversikt={personoversikt} />
+        <UttakFaktaInitPanel
+          {...props}
+          rettigheter={rettigheter}
+          arbeidsgiverOpplysningerPerId={arbeidsgivere}
+          fagsak={fagsak}
+        />
+        <UttakDokumentasjonFaktaInitPanel {...props} />
+      </>
+    ),
+    [personoversikt, fagsak, behandling, rettigheter, arbeidsgivere, behandlingEventHandler, hentBehandling],
+  );
 
-  const prosessPaneler = useCallback((props, ekstraProps) => (
-    <>
-      <VarselProsessStegInitPanel
-        {...props}
-        fagsak={fagsak}
-        opneSokeside={opneSokeside}
-        toggleSkalOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
-      />
-      <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <InngangsvilkarFpProsessStegInitPanel
-        {...props}
-        rettigheter={rettigheter}
-        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-        apentFaktaPanelInfo={ekstraProps.apentFaktaPanelInfo}
-      />
-      <BeregningsgrunnlagProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-      <SoknadsfristProsessStegInitPanel {...props} />
-      <FortsattMedlemskapProsessStegInitPanel {...props} rettigheter={rettigheter} />
-      <UttakProsessStegInitPanel
-        {...props}
-        arbeidsgiverOpplysningerPerId={arbeidsgivere}
-        personoversikt={personoversikt}
-        rettigheter={rettigheter}
-      />
-      <TilkjentYtelseFpProsessStegInitPanel
-        {...props}
-        fagsak={fagsak}
-        arbeidsgiverOpplysningerPerId={arbeidsgivere}
-        personoversikt={personoversikt}
-      />
-      <SimuleringProsessStegInitPanel {...props} fagsak={fagsak} menyData={ekstraProps.allMenyData} />
-      <VedtakFpProsessStegInitPanel
-        {...props}
-        fagsak={fagsak}
-        opneSokeside={opneSokeside}
-        toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
-      />
-    </>
-  ), [fagsak, opneSokeside, toggleOppdateringAvFagsakOgBehandling, arbeidsgivere, rettigheter, personoversikt, oppdaterProsessStegOgFaktaPanelIUrl]);
+  const prosessPaneler = useCallback(
+    (props, ekstraProps) => (
+      <>
+        <VarselProsessStegInitPanel
+          {...props}
+          fagsak={fagsak}
+          opneSokeside={opneSokeside}
+          toggleSkalOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
+        />
+        <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <InngangsvilkarFpProsessStegInitPanel
+          {...props}
+          rettigheter={rettigheter}
+          oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+          apentFaktaPanelInfo={ekstraProps.apentFaktaPanelInfo}
+        />
+        <BeregningsgrunnlagProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <SoknadsfristProsessStegInitPanel {...props} />
+        <FortsattMedlemskapProsessStegInitPanel {...props} rettigheter={rettigheter} />
+        <UttakProsessStegInitPanel
+          {...props}
+          arbeidsgiverOpplysningerPerId={arbeidsgivere}
+          personoversikt={personoversikt}
+          rettigheter={rettigheter}
+        />
+        <TilkjentYtelseFpProsessStegInitPanel
+          {...props}
+          fagsak={fagsak}
+          arbeidsgiverOpplysningerPerId={arbeidsgivere}
+          personoversikt={personoversikt}
+        />
+        <SimuleringProsessStegInitPanel {...props} fagsak={fagsak} menyData={ekstraProps.allMenyData} />
+        <VedtakFpProsessStegInitPanel
+          {...props}
+          fagsak={fagsak}
+          opneSokeside={opneSokeside}
+          toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
+        />
+      </>
+    ),
+    [
+      fagsak,
+      opneSokeside,
+      toggleOppdateringAvFagsakOgBehandling,
+      arbeidsgivere,
+      rettigheter,
+      personoversikt,
+      oppdaterProsessStegOgFaktaPanelIUrl,
+    ],
+  );
 
   return (
     <BehandlingContainer

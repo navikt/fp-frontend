@@ -22,11 +22,7 @@ interface OwnProps {
   fagsak: Fagsak;
   kodeverk: AlleKodeverk;
   readOnly: boolean;
-  lagreUfullstendig: (
-    fagsakYtelseType: string,
-    familieHendelseType: string,
-    foreldreType: string,
-  ) => Promise<any>;
+  lagreUfullstendig: (fagsakYtelseType: string, familieHendelseType: string, foreldreType: string) => Promise<any>;
   lagreFullstendig: (
     formValues: any,
     fagsakYtelseType: string,
@@ -46,16 +42,27 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const [soknadData, setSoknadData] = useState<SoknadData>();
 
-  const lagre = useCallback((
-    formValues: any) => lagreFullstendig(formValues, soknadData.fagsakYtelseType, soknadData.familieHendelseType, soknadData.foreldreType),
-  [soknadData]);
-  const lagreOgAvslutt = useCallback(() => lagreUfullstendig(soknadData.fagsakYtelseType, soknadData.familieHendelseType, soknadData.foreldreType),
-    [soknadData]);
+  const lagre = useCallback(
+    (formValues: any) =>
+      lagreFullstendig(
+        formValues,
+        soknadData.fagsakYtelseType,
+        soknadData.familieHendelseType,
+        soknadData.foreldreType,
+      ),
+    [soknadData],
+  );
+  const lagreOgAvslutt = useCallback(
+    () => lagreUfullstendig(soknadData.fagsakYtelseType, soknadData.familieHendelseType, soknadData.foreldreType),
+    [soknadData],
+  );
 
   return (
     <RawIntlProvider value={intl}>
       <Panel className={styles.panel}>
-        <Heading size="small"><FormattedMessage id="Registrering.RegistrereSoknad" /></Heading>
+        <Heading size="small">
+          <FormattedMessage id="Registrering.RegistrereSoknad" />
+        </Heading>
         <VerticalSpacer sixteenPx />
         {!readOnly && (
           <AksjonspunktHelpTextHTML>

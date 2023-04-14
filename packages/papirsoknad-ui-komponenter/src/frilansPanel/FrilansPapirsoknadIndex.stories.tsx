@@ -17,9 +17,7 @@ export default {
 
 const Template: Story<{
   submitCallback: (data: any) => Promise<void>;
-}> = ({
-  submitCallback,
-}) => {
+}> = ({ submitCallback }) => {
   const formMethods = useForm({
     defaultValues: { [FRILANS_NAME_PREFIX]: FrilansPapirsoknadIndex.buildInitialValues() },
   });
@@ -27,13 +25,11 @@ const Template: Story<{
   return (
     <Form
       formMethods={formMethods}
-      onSubmit={(
-        values: { [FRILANS_NAME_PREFIX]: FormValues,
-      }) => submitCallback({ [FRILANS_NAME_PREFIX]: FrilansPapirsoknadIndex.transformValues(values.frilans) })}
+      onSubmit={(values: { [FRILANS_NAME_PREFIX]: FormValues }) =>
+        submitCallback({ [FRILANS_NAME_PREFIX]: FrilansPapirsoknadIndex.transformValues(values.frilans) })
+      }
     >
-      <FrilansPapirsoknadIndex
-        readOnly={false}
-      />
+      <FrilansPapirsoknadIndex readOnly={false} />
       <VerticalSpacer fourtyPx />
       <Button size="small" variant="primary">
         Lagreknapp (Kun for test)

@@ -31,19 +31,19 @@ describe('<BehandlingPaVent>', () => {
 
   const PA_VENT_KEY = BehandlingFellesApiKeys.UPDATE_ON_HOLD;
 
-  const endpoints = new RestApiConfigBuilder()
-    .withRel('test_pa', PA_VENT_KEY)
-    .build();
+  const endpoints = new RestApiConfigBuilder().withRel('test_pa', PA_VENT_KEY).build();
 
   const requestMock = createRequestApi(endpoints);
 
   it('skal ikke vise modal når behandling ikke er på vent', async () => {
     render(
       <BehandlingPaVent
-        behandling={{
-          ...behandling,
-          aksjonspunkt: aksjonspunkter,
-        } as Behandling}
+        behandling={
+          {
+            ...behandling,
+            aksjonspunkt: aksjonspunkter,
+          } as Behandling
+        }
         requestApi={requestMock}
         kodeverk={kodeverk}
         hentBehandling={vi.fn()}
@@ -57,11 +57,13 @@ describe('<BehandlingPaVent>', () => {
     await act(async () => {
       render(
         <BehandlingPaVent
-          behandling={{
-            ...behandling,
-            aksjonspunkt: aksjonspunkter,
-            behandlingPaaVent: true,
-          } as Behandling}
+          behandling={
+            {
+              ...behandling,
+              aksjonspunkt: aksjonspunkter,
+              behandlingPaaVent: true,
+            } as Behandling
+          }
           requestApi={requestMock}
           kodeverk={kodeverk}
           hentBehandling={vi.fn()}
@@ -75,11 +77,13 @@ describe('<BehandlingPaVent>', () => {
   it('skal vise modal og så skjule den ved trykk på knapp', async () => {
     render(
       <BehandlingPaVent
-        behandling={{
-          ...behandling,
-          aksjonspunkt: aksjonspunkter,
-          behandlingPaaVent: true,
-        } as Behandling}
+        behandling={
+          {
+            ...behandling,
+            aksjonspunkt: aksjonspunkter,
+            behandlingPaaVent: true,
+          } as Behandling
+        }
         requestApi={requestMock}
         kodeverk={kodeverk}
         hentBehandling={vi.fn()}

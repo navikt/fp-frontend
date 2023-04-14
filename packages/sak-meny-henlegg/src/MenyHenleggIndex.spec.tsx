@@ -6,9 +6,8 @@ import { Modal } from '@navikt/ds-react';
 import { dokumentMalType } from '@navikt/fp-kodeverk';
 import * as stories from './MenyHenleggIndex.stories';
 
-const {
-  ForFørstegangssøknad, ForKlage, ForInnsyn, ForTilbakekreving, ForTilbakekrevingRevurdering, ForRevurdering,
-} = composeStories(stories);
+const { ForFørstegangssøknad, ForKlage, ForInnsyn, ForTilbakekreving, ForTilbakekrevingRevurdering, ForRevurdering } =
+  composeStories(stories);
 
 describe('<MenyHenleggIndex>', () => {
   if (Modal.setAppElement) {

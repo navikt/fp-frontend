@@ -9,7 +9,10 @@ import StandardBehandlingProps from '../../felles/typer/standardBehandlingProps'
 import BehandlingPaVent from '../../felles/modaler/paVent/BehandlingPaVent';
 import StandardPropsProvider from '../../felles/utils/standardPropsStateContext';
 import {
-  useBehandling, useInitBehandlingHandlinger, useInitRequestApi, useLagreAksjonspunkt,
+  useBehandling,
+  useInitBehandlingHandlinger,
+  useInitRequestApi,
+  useLagreAksjonspunkt,
 } from '../../felles/utils/indexHooks';
 import { restApiSvpHooks, requestSvpApi } from './data/svpBehandlingApi';
 import BehandlingContainerWrapperSvangerskapspenger from './BehandlingContainerWrapperSvangerskapspenger';
@@ -34,31 +37,41 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<StandardBehandlingPro
 }) => {
   useInitRequestApi(requestSvpApi, setRequestPendingMessage);
 
-  const {
-    behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling,
-  } = useBehandling(
-    requestSvpApi, behandlingUuid, oppdaterBehandlingVersjon,
-  );
+  const { behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling } =
+    useBehandling(requestSvpApi, behandlingUuid, oppdaterBehandlingVersjon);
 
   const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter } = useLagreAksjonspunkt(requestSvpApi, setBehandling);
 
-  const skalIkkeViseModal = useInitBehandlingHandlinger(requestSvpApi, behandlingEventHandler, hentBehandling, setBehandling, behandling);
+  const skalIkkeViseModal = useInitBehandlingHandlinger(
+    requestSvpApi,
+    behandlingEventHandler,
+    hentBehandling,
+    setBehandling,
+    behandling,
+  );
 
-  const { data: opplysningsdata, state: opplysningsdataState } = restApiSvpHooks.useMultipleRestApi<{
-    arbeidsgivereOversikt: ArbeidsgiverOpplysningerWrapper,
-    behandlingPersonoversikt: Personoversikt,
-  }, void>(endepunkterSomSkalHentesEnGang, {
+  const { data: opplysningsdata, state: opplysningsdataState } = restApiSvpHooks.useMultipleRestApi<
+    {
+      arbeidsgivereOversikt: ArbeidsgiverOpplysningerWrapper;
+      behandlingPersonoversikt: Personoversikt;
+    },
+    void
+  >(endepunkterSomSkalHentesEnGang, {
     updateTriggers: [behandling?.versjon],
     suspendRequest: !behandling,
   });
 
-  const harIkkeHentetArbeidsgiverOpplysninger = opplysningsdataState === RestApiState.LOADING || opplysningsdataState === RestApiState.NOT_STARTED;
+  const harIkkeHentetArbeidsgiverOpplysninger =
+    opplysningsdataState === RestApiState.LOADING || opplysningsdataState === RestApiState.NOT_STARTED;
 
   if (!behandling || harIkkeHentetArbeidsgiverOpplysninger || !opplysningsdata) {
     return <LoadingPanel />;
   }
 
-  const { arbeidsgivereOversikt: { arbeidsgivere }, behandlingPersonoversikt: personoversikt } = opplysningsdata;
+  const {
+    arbeidsgivereOversikt: { arbeidsgivere },
+    behandlingPersonoversikt: personoversikt,
+  } = opplysningsdata;
 
   return (
     <>

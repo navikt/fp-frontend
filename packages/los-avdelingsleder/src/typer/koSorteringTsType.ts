@@ -3,6 +3,6 @@ type KoSorteringType = Readonly<{
   navn: string;
   felttype: string;
   feltkategori: string;
-}>
+}>;
 
 export default KoSorteringType;

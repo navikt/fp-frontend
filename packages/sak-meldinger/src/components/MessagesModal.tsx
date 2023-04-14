@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, Modal, Label } from '@navikt/ds-react';
-import {
-  FlexColumn, FlexContainer, FlexRow, Image,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, Image } from '@navikt/ft-ui-komponenter';
 
 import innvilgetImageUrl from '../images/innvilget_valgt.svg';
 
@@ -20,10 +18,7 @@ interface OwnProps {
  * Denne modalen vises etter at et brev har blitt bestilt.
  * Ved å trykke på knapp blir fritekst-feltet tømt.
  */
-const MessagesModal: FunctionComponent<OwnProps> = ({
-  showModal,
-  closeEvent,
-}) => {
+const MessagesModal: FunctionComponent<OwnProps> = ({ showModal, closeEvent }) => {
   const intl = useIntl();
   return (
     <Modal
@@ -50,13 +45,7 @@ const MessagesModal: FunctionComponent<OwnProps> = ({
               </Label>
             </FlexColumn>
             <FlexColumn className={styles.button}>
-              <Button
-                size="small"
-                variant="primary"
-                onClick={closeEvent}
-                autoFocus
-                type="button"
-              >
+              <Button size="small" variant="primary" onClick={closeEvent} autoFocus type="button">
                 {intl.formatMessage({ id: 'MessagesModal.OK' })}
               </Button>
             </FlexColumn>

@@ -8,7 +8,10 @@ import StandardBehandlingProps from '../felles/typer/standardBehandlingProps';
 import BehandlingPaVent from '../felles/modaler/paVent/BehandlingPaVent';
 import StandardPropsProvider from '../felles/utils/standardPropsStateContext';
 import {
-  useBehandling, useInitBehandlingHandlinger, useInitRequestApi, useLagreAksjonspunkt,
+  useBehandling,
+  useInitBehandlingHandlinger,
+  useInitRequestApi,
+  useLagreAksjonspunkt,
 } from '../felles/utils/indexHooks';
 import { requestAnkeApi } from './data/ankeBehandlingApi';
 import AnkeBehandlingProsessStegInitPanel from './prosessPaneler/AnkeBehandlingProsessStegInitPanel';
@@ -39,27 +42,28 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & StandardBehandlingProps>
 }) => {
   useInitRequestApi(requestAnkeApi, setRequestPendingMessage);
 
-  const {
-    behandling, behandlingState, hentBehandling, setBehandling,
-  } = useBehandling(
-    requestAnkeApi, behandlingUuid, oppdaterBehandlingVersjon,
+  const { behandling, behandlingState, hentBehandling, setBehandling } = useBehandling(
+    requestAnkeApi,
+    behandlingUuid,
+    oppdaterBehandlingVersjon,
   );
 
   const { lagreAksjonspunkter } = useLagreAksjonspunkt(requestAnkeApi, setBehandling);
 
   useInitBehandlingHandlinger(requestAnkeApi, behandlingEventHandler, hentBehandling, setBehandling, behandling);
 
-  const faktaPaneler = useCallback((props) => (
-    <VergeFaktaInitPanel {...props} />
-  ), []);
+  const faktaPaneler = useCallback(props => <VergeFaktaInitPanel {...props} />, []);
 
-  const prosessPaneler = useCallback((props) => (
-    <>
-      <AnkeBehandlingProsessStegInitPanel {...props} alleBehandlinger={alleBehandlinger} />
-      <AnkeResultatProsessStegInitPanel {...props} />
-      <AnkeTrygderettsbehandlingProsessStegInitPanel {...props} />
-    </>
-  ), []);
+  const prosessPaneler = useCallback(
+    props => (
+      <>
+        <AnkeBehandlingProsessStegInitPanel {...props} alleBehandlinger={alleBehandlinger} />
+        <AnkeResultatProsessStegInitPanel {...props} />
+        <AnkeTrygderettsbehandlingProsessStegInitPanel {...props} />
+      </>
+    ),
+    [],
+  );
 
   if (!behandling) {
     return <LoadingPanel />;

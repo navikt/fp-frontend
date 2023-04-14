@@ -42,11 +42,12 @@ export type FormValues = {
   foedselsData?: string;
   [OMSORG_FORM_NAME_PREFIX]?: OmsorgOgAdopsjonFormValues;
   [ANNEN_FORELDER_FORM_NAME_PREFIX]?: AnnenForelderFormValues;
-} & OppholdINorgeFormValues & FodselFormValues;
+} & OppholdINorgeFormValues &
+  FodselFormValues;
 
 export type TransformedFormValues = Omit<FormValues, 'omsorg'> & {
   [OMSORG_FORM_NAME_PREFIX]?: OmsorgOgAdopsjonTransformedFormValues;
-}
+};
 
 interface StaticFunctions {
   buildInitialValues: () => FormValues;
@@ -95,7 +96,7 @@ const RegistreringFodselGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
   </FlexContainer>
 );
 
-RegistreringFodselGrid.transformValues = (values) => ({
+RegistreringFodselGrid.transformValues = values => ({
   ...OppholdINorgePapirsoknadIndex.transformValues(values),
   [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values[OMSORG_FORM_NAME_PREFIX]),
 });

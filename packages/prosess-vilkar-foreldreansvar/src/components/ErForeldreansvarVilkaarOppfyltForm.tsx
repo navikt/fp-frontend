@@ -4,17 +4,19 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
+import { AksjonspunktCode, VilkarType, vilkarUtfallType, KodeverkType, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 import {
-  AksjonspunktCode, VilkarType, vilkarUtfallType, KodeverkType, aksjonspunktStatus,
-} from '@navikt/fp-kodeverk';
-import {
-  ProsessStegBegrunnelseTextFieldNew, VilkarResultPicker, ProsessPanelTemplate, validerApKodeOgHentApEnum,
+  ProsessStegBegrunnelseTextFieldNew,
+  VilkarResultPicker,
+  ProsessPanelTemplate,
+  validerApKodeOgHentApEnum,
 } from '@navikt/fp-prosess-felles';
+import { Aksjonspunkt, AlleKodeverk, Behandling } from '@navikt/fp-types';
 import {
-  Aksjonspunkt, AlleKodeverk, Behandling,
-} from '@navikt/fp-types';
-import {
-  Foreldreansvarsvilkar1Ap, Foreldreansvarsvilkar2Ap, VurdereYtelseSammeBarnAnnenForelderAp, VurdereYtelseSammeBarnSokerAp,
+  Foreldreansvarsvilkar1Ap,
+  Foreldreansvarsvilkar2Ap,
+  VurdereYtelseSammeBarnAnnenForelderAp,
+  VurdereYtelseSammeBarnSokerAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 type FormValues = {
@@ -22,12 +24,14 @@ type FormValues = {
   avslagCode?: string;
   avslagDato?: string;
   begrunnelse?: string;
-}
+};
 
-type AksjonspunktData = Array<Foreldreansvarsvilkar1Ap
+type AksjonspunktData = Array<
+  | Foreldreansvarsvilkar1Ap
   | Foreldreansvarsvilkar2Ap
   | VurdereYtelseSammeBarnSokerAp
-  | VurdereYtelseSammeBarnAnnenForelderAp>;
+  | VurdereYtelseSammeBarnAnnenForelderAp
+>;
 
 interface OwnProps {
   behandlingsresultat?: Behandling['behandlingsresultat'];
@@ -53,18 +57,18 @@ const buildInitialValues = (
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
 });
 
-const transformValues = (
-  values: FormValues,
-  aksjonspunkter: Aksjonspunkt[],
-): AksjonspunktData => aksjonspunkter.map((ap) => ({
-  ...VilkarResultPicker.transformValues(values),
-  ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
-  kode: validerApKodeOgHentApEnum(ap.definisjon,
-    AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
-    AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
-    AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-    AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN),
-}));
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): AksjonspunktData =>
+  aksjonspunkter.map(ap => ({
+    ...VilkarResultPicker.transformValues(values),
+    ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
+    kode: validerApKodeOgHentApEnum(
+      ap.definisjon,
+      AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+      AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
+      AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+      AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
+    ),
+  }));
 
 /**
  * ErForeldreansvarVilkaarOppfyltForm
@@ -87,15 +91,20 @@ const ErForeldreansvarVilkaarOppfyltForm: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const initialValues = useMemo(() => buildInitialValues(aksjonspunkter, status, behandlingsresultat), [behandlingsresultat, aksjonspunkter, status]);
+  const initialValues = useMemo(
+    () => buildInitialValues(aksjonspunkter, status, behandlingsresultat),
+    [behandlingsresultat, aksjonspunkter, status],
+  );
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });
 
-  const vilkarTypeKode = isForeldreansvar2Ledd ? VilkarType.FORELDREANSVARSVILKARET_2_LEDD : VilkarType.FORELDREANSVARSVILKARET_4_LEDD;
+  const vilkarTypeKode = isForeldreansvar2Ledd
+    ? VilkarType.FORELDREANSVARSVILKARET_2_LEDD
+    : VilkarType.FORELDREANSVARSVILKARET_4_LEDD;
   const avslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][vilkarTypeKode];
 
-  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET);
+  const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET);
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
 
   return (
@@ -114,18 +123,21 @@ const ErForeldreansvarVilkaarOppfyltForm: FunctionComponent<OwnProps> = ({
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
       >
-        <Label size="small"><FormattedMessage id="ErForeldreansvarVilkaarOppfyltForm.RettTilStonad" /></Label>
+        <Label size="small">
+          <FormattedMessage id="ErForeldreansvarVilkaarOppfyltForm.RettTilStonad" />
+        </Label>
         <VilkarResultPicker
           avslagsarsaker={avslagsarsaker}
           readOnly={readOnly}
-          customVilkarOppfyltText={<FormattedMessage id={isEngangsstonad ? 'FodselVilkarForm.OppfyltEs' : 'FodselVilkarForm.OppfyltFp'} />}
-          customVilkarIkkeOppfyltText={(
+          customVilkarOppfyltText={
+            <FormattedMessage id={isEngangsstonad ? 'FodselVilkarForm.OppfyltEs' : 'FodselVilkarForm.OppfyltFp'} />
+          }
+          customVilkarIkkeOppfyltText={
             <FormattedMessage
-              id={isEngangsstonad
-                ? 'FodselVilkarForm.IkkeOppfyltEs' : 'FodselVilkarForm.IkkeOppfyltFp'}
+              id={isEngangsstonad ? 'FodselVilkarForm.IkkeOppfyltEs' : 'FodselVilkarForm.IkkeOppfyltFp'}
               values={{ b: (chunks: any) => <b>{chunks}</b> }}
             />
-          )}
+          }
         />
         <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />
       </ProsessPanelTemplate>

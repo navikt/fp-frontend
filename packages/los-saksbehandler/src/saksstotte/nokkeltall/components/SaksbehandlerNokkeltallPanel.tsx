@@ -1,6 +1,4 @@
-import React, {
-  useRef, FunctionComponent,
-} from 'react';
+import React, { useRef, FunctionComponent } from 'react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import NyeOgFerdigstilteOppgaver from '../../../typer/nyeOgFerdigstilteOppgaverTsType';
@@ -14,19 +12,14 @@ interface OwnProps {
 /**
  * SaksbehandlerNokkeltallPanel.
  */
-const SaksbehandlerNokkeltallPanel: FunctionComponent<OwnProps> = ({
-  nyeOgFerdigstilteOppgaver,
-}) => {
+const SaksbehandlerNokkeltallPanel: FunctionComponent<OwnProps> = ({ nyeOgFerdigstilteOppgaver }) => {
   const HEIGHT = 200;
 
   const ref = useRef<HTMLDivElement>(null);
 
   return (
     <div ref={ref}>
-      <NyeOgFerdigstilteOppgaverForIdagPanel
-        height={HEIGHT}
-        nyeOgFerdigstilteOppgaver={nyeOgFerdigstilteOppgaver}
-      />
+      <NyeOgFerdigstilteOppgaverForIdagPanel height={HEIGHT} nyeOgFerdigstilteOppgaver={nyeOgFerdigstilteOppgaver} />
       <VerticalSpacer sixteenPx />
       <NyeOgFerdigstilteOppgaverForSisteSyvPanel
         height={HEIGHT}

@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { VilkarType, behandlingType, AksjonspunktCode } from '@navikt/fp-kodeverk';
@@ -23,7 +21,7 @@ const VILKAR_KODER = [VilkarType.SOKERSOPPLYSNINGSPLIKT];
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.SOKNAD];
 type EndepunktPanelData = {
   soknad: Soknad;
-}
+};
 
 interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -40,13 +38,13 @@ const OpplysningspliktProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
     vilkarKoder={VILKAR_KODER}
     prosessPanelKode={ProsessStegCode.OPPLYSNINGSPLIKT}
     prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' })}
-    skalPanelVisesIMeny={(data) => {
+    skalPanelVisesIMeny={data => {
       const defaultSkalVises = skalViseProsessPanel(data.aksjonspunkter, VILKAR_KODER, data.vilkar);
       const isRevurdering = behandlingType.REVURDERING === data.behandling.type;
-      const hasAp = data.aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.SOKERS_OPPLYSNINGSPLIKT_MANU);
+      const hasAp = data.aksjonspunkter.some(ap => ap.definisjon === AksjonspunktCode.SOKERS_OPPLYSNINGSPLIKT_MANU);
       return !(isRevurdering && !hasAp) || defaultSkalVises;
     }}
-    renderPanel={(data) => (
+    renderPanel={data => (
       <SokersOpplysningspliktVilkarProsessIndex
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...data}

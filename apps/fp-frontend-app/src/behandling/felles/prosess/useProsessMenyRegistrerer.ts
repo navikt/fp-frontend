@@ -1,6 +1,4 @@
-import {
-  useEffect, useState,
-} from 'react';
+import { useEffect, useState } from 'react';
 
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { usePrevious } from '@navikt/ft-ui-komponenter';
@@ -27,7 +25,8 @@ const useProsessMenyRegistrerer = (
     });
   }, [dataState]);
 
-  const erAktiv = skalVisesImeny && (valgtProsessSteg === id || (skalMarkeresSomAktiv && valgtProsessSteg === DEFAULT_PANEL_VALGT));
+  const erAktiv =
+    skalVisesImeny && (valgtProsessSteg === id || (skalMarkeresSomAktiv && valgtProsessSteg === DEFAULT_PANEL_VALGT));
 
   const forrigeSkalVisesIMeny = usePrevious(skalVisesImeny);
 

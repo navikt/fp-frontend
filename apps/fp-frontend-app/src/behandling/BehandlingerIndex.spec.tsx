@@ -11,9 +11,11 @@ describe('BehandlingerIndex', () => {
   it('skal rendre komponent korrekt', async () => {
     const fagsak = {
       saksnummer: '123',
-      behandlinger: [{
-        uuid: '1',
-      }] as BehandlingAppKontekst[],
+      behandlinger: [
+        {
+          uuid: '1',
+        },
+      ] as BehandlingAppKontekst[],
     } as Fagsak;
 
     render(

@@ -14,13 +14,15 @@ describe('<getAlleMerknaderFraBeslutter>', () => {
     behandlingHenlagt: false,
   };
 
-  const aksjonspunkter = [{
-    status: AksjonspunktStatus.OPPRETTET,
-    definisjon: AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-    kanLoses: true,
-    toTrinnsBehandling: true,
-    toTrinnsBehandlingGodkjent: false,
-  }];
+  const aksjonspunkter = [
+    {
+      status: AksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+      kanLoses: true,
+      toTrinnsBehandling: true,
+      toTrinnsBehandlingGodkjent: false,
+    },
+  ];
 
   it('skal hente alle merknader fra beslutter når behandlingstatus er BEHANDLING_UTREDER', () => {
     const merknader = getAlleMerknaderFraBeslutter(behandling as Behandling, aksjonspunkter);

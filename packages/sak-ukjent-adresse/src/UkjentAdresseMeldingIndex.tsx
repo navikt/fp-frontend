@@ -19,7 +19,9 @@ const UkjentAdresseMeldingIndex: FunctionComponent = () => (
   <RawIntlProvider value={intl}>
     <div className={styles.ukjentAdresseMargins}>
       <AksjonspunktHelpTextHTML>
-        <b><FormattedMessage id="UkjentAdresse.Text" /></b>
+        <b>
+          <FormattedMessage id="UkjentAdresse.Text" />
+        </b>
       </AksjonspunktHelpTextHTML>
     </div>
   </RawIntlProvider>

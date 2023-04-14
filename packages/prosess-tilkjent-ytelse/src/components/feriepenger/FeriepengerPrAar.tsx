@@ -8,14 +8,18 @@ import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { KodeverkType, getKodeverknavnFn } from '@navikt/fp-kodeverk';
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 
-const finnAlleAndelerForOpptjeningsår = (andeler: FeriepengegrunnlagAndel[],
-  opptjeningsår: number): FeriepengegrunnlagAndel[] => andeler.filter((andel) => andel.opptjeningsår === opptjeningsår);
+const finnAlleAndelerForOpptjeningsår = (
+  andeler: FeriepengegrunnlagAndel[],
+  opptjeningsår: number,
+): FeriepengegrunnlagAndel[] => andeler.filter(andel => andel.opptjeningsår === opptjeningsår);
 
-const lagIdentifikator = (andel: FeriepengegrunnlagAndel) : string => andel.aktivitetStatus + andel.arbeidsgiverId;
+const lagIdentifikator = (andel: FeriepengegrunnlagAndel): string => andel.aktivitetStatus + andel.arbeidsgiverId;
 
-const lagVisningsnavn = (ferieAndel: FeriepengegrunnlagAndel,
+const lagVisningsnavn = (
+  ferieAndel: FeriepengegrunnlagAndel,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  alleKodeverk: AlleKodeverk) => {
+  alleKodeverk: AlleKodeverk,
+) => {
   const agOpplysning = arbeidsgiverOpplysningerPerId[ferieAndel.arbeidsgiverId];
   if (agOpplysning) {
     if (agOpplysning.erPrivatPerson) {
@@ -23,11 +27,11 @@ const lagVisningsnavn = (ferieAndel: FeriepengegrunnlagAndel,
         ? `${agOpplysning.navn} (${moment(agOpplysning.fødselsdato).format(DDMMYYYY_DATE_FORMAT)})`
         : agOpplysning.navn;
     }
-    return agOpplysning.identifikator
-      ? `${agOpplysning.navn} (${agOpplysning.identifikator})`
-      : agOpplysning.navn;
+    return agOpplysning.identifikator ? `${agOpplysning.navn} (${agOpplysning.identifikator})` : agOpplysning.navn;
   }
-  return ferieAndel.aktivitetStatus ? getKodeverknavnFn(alleKodeverk)(ferieAndel.aktivitetStatus, KodeverkType.AKTIVITET_STATUS) : '';
+  return ferieAndel.aktivitetStatus
+    ? getKodeverknavnFn(alleKodeverk)(ferieAndel.aktivitetStatus, KodeverkType.AKTIVITET_STATUS)
+    : '';
 };
 
 type AndelerPrId = {
@@ -35,26 +39,30 @@ type AndelerPrId = {
   visningsnavn: string;
   utbetaltTilSøker: number;
   utbetaltIRefusjon: number;
-}
+};
 
-const lagAndelPrId = (ferieAndel: FeriepengegrunnlagAndel,
+const lagAndelPrId = (
+  ferieAndel: FeriepengegrunnlagAndel,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  alleKodeverk: AlleKodeverk): AndelerPrId => ({
+  alleKodeverk: AlleKodeverk,
+): AndelerPrId => ({
   identifikator: lagIdentifikator(ferieAndel),
   visningsnavn: lagVisningsnavn(ferieAndel, arbeidsgiverOpplysningerPerId, alleKodeverk),
   utbetaltTilSøker: ferieAndel.erBrukerMottaker ? ferieAndel.årsbeløp : 0,
   utbetaltIRefusjon: !ferieAndel.erBrukerMottaker ? ferieAndel.årsbeløp : 0,
 });
 
-const lagAndelerPrIdMap = (andeler: FeriepengegrunnlagAndel[],
+const lagAndelerPrIdMap = (
+  andeler: FeriepengegrunnlagAndel[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  alleKodeverk: AlleKodeverk): AndelerPrId[] => {
+  alleKodeverk: AlleKodeverk,
+): AndelerPrId[] => {
   const listeMedAndelerPrId = [];
-  andeler.forEach((ferieAndel) => {
+  andeler.forEach(ferieAndel => {
     const andelTilSøker = ferieAndel.erBrukerMottaker ? ferieAndel.årsbeløp : 0;
     const andelTilRefusjon = !ferieAndel.erBrukerMottaker ? ferieAndel.årsbeløp : 0;
     const id = lagIdentifikator(ferieAndel);
-    const eksisterendeAndelPrId = listeMedAndelerPrId.find((andel) => andel.identifikator === id) as AndelerPrId;
+    const eksisterendeAndelPrId = listeMedAndelerPrId.find(andel => andel.identifikator === id) as AndelerPrId;
     if (eksisterendeAndelPrId) {
       eksisterendeAndelPrId.utbetaltTilSøker += andelTilSøker;
       eksisterendeAndelPrId.utbetaltIRefusjon += andelTilRefusjon;
@@ -86,10 +94,17 @@ const FeriepengerPrAar: FunctionComponent<OwnProps> = ({
 }) => {
   const harIngenAndeler = !alleAndeler || alleAndeler.length < 1;
 
-  const alleAndelerForÅret = useMemo(() => (harIngenAndeler ? undefined : finnAlleAndelerForOpptjeningsår(alleAndeler, opptjeningsår)),
-    [alleAndeler, opptjeningsår]);
-  const andelerPrId = useMemo(() => (alleAndelerForÅret ? lagAndelerPrIdMap(alleAndelerForÅret, arbeidsgiverOpplysningerPerId, alleKodeverk) : undefined),
-    [alleAndelerForÅret]);
+  const alleAndelerForÅret = useMemo(
+    () => (harIngenAndeler ? undefined : finnAlleAndelerForOpptjeningsår(alleAndeler, opptjeningsår)),
+    [alleAndeler, opptjeningsår],
+  );
+  const andelerPrId = useMemo(
+    () =>
+      alleAndelerForÅret
+        ? lagAndelerPrIdMap(alleAndelerForÅret, arbeidsgiverOpplysningerPerId, alleKodeverk)
+        : undefined,
+    [alleAndelerForÅret],
+  );
 
   if (harIngenAndeler) {
     return null;
@@ -101,11 +116,17 @@ const FeriepengerPrAar: FunctionComponent<OwnProps> = ({
         <FormattedMessage id="TilkjentYtelse.Feriepenger.Opptjeningsår" values={{ år: opptjeningsår }} />
       </Label>
       <Table headerTextCodes={HEADER_TEXT_CODES}>
-        {andelerPrId.map((andel) => (
+        {andelerPrId.map(andel => (
           <TableRow key={andel.identifikator}>
-            <TableColumn><BodyShort size="small">{andel.visningsnavn}</BodyShort></TableColumn>
-            <TableColumn><BodyShort size="small">{andel.utbetaltIRefusjon}</BodyShort></TableColumn>
-            <TableColumn><BodyShort size="small">{andel.utbetaltTilSøker}</BodyShort></TableColumn>
+            <TableColumn>
+              <BodyShort size="small">{andel.visningsnavn}</BodyShort>
+            </TableColumn>
+            <TableColumn>
+              <BodyShort size="small">{andel.utbetaltIRefusjon}</BodyShort>
+            </TableColumn>
+            <TableColumn>
+              <BodyShort size="small">{andel.utbetaltTilSøker}</BodyShort>
+            </TableColumn>
           </TableRow>
         ))}
       </Table>

@@ -17,9 +17,7 @@ interface OwnProps {
  *
  * Informasjonsmodal som vises til saksbehandler når en papirsøknad har blitt registrert.
  */
-const SoknadRegistrertModal: FunctionComponent<OwnProps> = ({
-  isOpen = false,
-}) => (
+const SoknadRegistrertModal: FunctionComponent<OwnProps> = ({ isOpen = false }) => (
   <Modal
     className={styles.modalStyle}
     open={isOpen}
@@ -36,7 +34,9 @@ const SoknadRegistrertModal: FunctionComponent<OwnProps> = ({
         </div>
         <div className={styles.right}>
           <Link to="/">
-            <Button size="small" variant="primary">{intl.formatMessage({ id: 'SoknadRegistrertModal.OkButtonText' })}</Button>
+            <Button size="small" variant="primary">
+              {intl.formatMessage({ id: 'SoknadRegistrertModal.OkButtonText' })}
+            </Button>
           </Link>
         </div>
       </Alert>

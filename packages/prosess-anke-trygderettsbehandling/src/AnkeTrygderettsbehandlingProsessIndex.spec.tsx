@@ -4,8 +4,13 @@ import { composeStories } from '@storybook/testing-react';
 import * as stories from './AnkeTrygderettsbehandlingProsessIndex.stories';
 
 const {
-  ResultatVedOmgjortResultat, ResultatVedOpphevetResultat, ResultatVedHjemsendtResultat, ResultatVedAvvistResultat,
-  ResultatVedStadfestetResultat, ErBehandletIKabel, ErUnderBehandlingIKabel,
+  ResultatVedOmgjortResultat,
+  ResultatVedOpphevetResultat,
+  ResultatVedHjemsendtResultat,
+  ResultatVedAvvistResultat,
+  ResultatVedStadfestetResultat,
+  ErBehandletIKabel,
+  ErUnderBehandlingIKabel,
 } = composeStories(stories);
 
 describe('<AnkeTrygderettsbehandlingProsessIndex>', () => {

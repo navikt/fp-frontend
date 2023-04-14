@@ -7,7 +7,7 @@ import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-for
 
 export type FormValues = {
   mottattDato?: string;
-}
+};
 
 interface OwnProps {
   readOnly: boolean;
@@ -19,11 +19,11 @@ interface OwnProps {
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad.
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
-const MottattDatoPanel: FunctionComponent<OwnProps> = ({
-  readOnly,
-}) => (
+const MottattDatoPanel: FunctionComponent<OwnProps> = ({ readOnly }) => (
   <BorderBox>
-    <Heading size="small"><FormattedMessage key="regDatoTittel" id="Registrering.Omsoknaden.MottattDato" /></Heading>
+    <Heading size="small">
+      <FormattedMessage key="regDatoTittel" id="Registrering.Omsoknaden.MottattDato" />
+    </Heading>
     <VerticalSpacer sixteenPx />
     <Datepicker
       name="mottattDato"

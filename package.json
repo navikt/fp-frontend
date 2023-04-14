@@ -18,6 +18,7 @@
     "eslint": "lerna run eslint --stream",
     "eslint:changed": "lerna run eslint --stream --since origin/master",
     "stylelint": "lerna run stylelint --stream",
+    "prettier": "lerna run prettier --stream",
     "clean": "lerna run clean --stream",
     "dev": "node -e \"console.log('For å få oppdateringer i pakke, skriv: yarn dev --scope=@navikt/fp-{pakkenavn}')\" && yarn lerna run dev --scope=@navikt/fp-frontend-app",
     "build": "lerna run build --stream",
@@ -30,7 +31,8 @@
     "storybook-create-deploy-folder": "node scripts/create-storybook-index.js",
     "storybook-deploy-to-github": "gh-pages -d .storybook-static-build -t true",
     "deploy-storybook": "yarn storybook-clean-deploy-folder && yarn storybook-build-all && yarn storybook-create-deploy-folder && yarn storybook-deploy-to-github",
-    "sentry-release": "(SENTRY_RELEASE=$(git rev-parse --short HEAD); node ./scripts/sentry-release)"
+    "sentry-release": "(SENTRY_RELEASE=$(git rev-parse --short HEAD); node ./scripts/sentry-release)",
+    "prepare": "husky install"
   },
   "workspaces": [
     "apps/**/*",
@@ -66,6 +68,7 @@
     "cross-env": "7.0.3",
     "eslint": "8.38.0",
     "eslint-config-airbnb": "19.0.4",
+    "eslint-config-prettier": "8.8.0",
     "eslint-import-resolver-lerna": "2.0.0",
     "eslint-import-resolver-typescript": "3.5.5",
     "eslint-plugin-import": "2.27.5",
@@ -74,8 +77,10 @@
     "eslint-plugin-testing-library": "5.10.3",
     "eslint-plugin-vitest": "0.1.4",
     "gh-pages": "5.0.0",
+    "husky": "8.0.3",
     "jsdom": "21.1.1",
     "lerna": "6.6.1",
+    "lint-staged": "13.2.1",
     "react-test-renderer": "18.2.0",
     "stylelint": "15.4.0",
     "stylelint-order": "6.0.3",
@@ -98,6 +103,10 @@
     "react-test-renderer": "18.2.0",
     "trim": "0.0.3",
     "trim-newlines": "3.0.1"
+  },
+  "lint-staged": {
+    "apps/**/*.{ts,tsx,js,jsx, css}": "prettier --write",
+    "packages/**/*.{ts,tsx,js,jsx, css}": "prettier --write"
   },
   "version": "0.0.0",
   "packageManager": "yarn@3.4.1"

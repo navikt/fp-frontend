@@ -7,7 +7,9 @@ describe('DefaultFormatter', () => {
       feilmelding: 'Dette er feil',
       type: 'test',
     };
-    expect(new DefaultFormatter().format(errorData)).toEqual(ErrorMessage.withMessage(errorData.feilmelding, errorData.type));
+    expect(new DefaultFormatter().format(errorData)).toEqual(
+      ErrorMessage.withMessage(errorData.feilmelding, errorData.type),
+    );
   });
 
   it('skal formatere feil der en har message i et objekt', () => {
@@ -15,7 +17,9 @@ describe('DefaultFormatter', () => {
       message: 'Dette er feil',
       type: 'test',
     };
-    expect(new DefaultFormatter().format(errorData)).toEqual(ErrorMessage.withMessage(errorData.message, errorData.type));
+    expect(new DefaultFormatter().format(errorData)).toEqual(
+      ErrorMessage.withMessage(errorData.message, errorData.type),
+    );
   });
 
   it('skal formatere feil der data er en streng', () => {

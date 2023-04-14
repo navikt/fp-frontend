@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, useState, useEffect, useCallback,
-} from 'react';
+import React, { FunctionComponent, useState, useEffect, useCallback } from 'react';
 import { RawIntlProvider, FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { Location } from 'history';
@@ -12,9 +10,7 @@ import { NavAnsatt } from '@navikt/fp-types';
 import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 
 import useTrackRouteParam from './useTrackRouteParam';
-import {
-  requestApi, RestApiPathsKeys, RestApiGlobalStatePathsKeys, restApiHooks,
-} from './data/fplosRestApi';
+import { requestApi, RestApiPathsKeys, RestApiGlobalStatePathsKeys, restApiHooks } from './data/fplosRestApi';
 import AvdelingslederDashboard from './components/AvdelingslederDashboard';
 import IkkeTilgangTilAvdelingslederPanel from './components/IkkeTilgangTilAvdelingslederPanel';
 import Saksbehandler from './typer/saksbehandlerAvdelingTsType';
@@ -44,7 +40,7 @@ const setAvdeling = (
     let valgtEnhet = avdelinger[0].avdelingEnhet;
     const lagretAvdelingEnhet = getValueFromLocalStorage('avdelingEnhet');
     if (lagretAvdelingEnhet) {
-      if (avdelinger.some((a) => a.avdelingEnhet === lagretAvdelingEnhet)) {
+      if (avdelinger.some(a => a.avdelingEnhet === lagretAvdelingEnhet)) {
         valgtEnhet = lagretAvdelingEnhet;
       } else {
         removeValueFromLocalStorage('avdelingEnhet');
@@ -69,14 +65,13 @@ const getLocationWithQueryParams = (location: Location, queryParams: Record<stri
   search: updateQueryParams(location.search, queryParams),
 });
 
-const getAvdelingslederPanelLocationCreator = (location: Location) => (avdelingslederPanel: string) => getLocationWithQueryParams(
-  location, { fane: avdelingslederPanel },
-);
+const getAvdelingslederPanelLocationCreator = (location: Location) => (avdelingslederPanel: string) =>
+  getLocationWithQueryParams(location, { fane: avdelingslederPanel });
 
 const renderAvdelingslederPanel = (
   avdelingslederPanel: string,
   valgtAvdelingEnhet: string,
-  hentAvdelingensSaksbehandlere: (params: {avdelingEnhet: string}) => void,
+  hentAvdelingensSaksbehandlere: (params: { avdelingEnhet: string }) => void,
   avdelingensSaksbehandlere: Saksbehandler[],
 ) => {
   switch (avdelingslederPanel) {
@@ -124,9 +119,7 @@ const getPanelFromUrlOrDefault = (location: Location) => {
 /**
  * AvdelingslederIndex
  */
-const AvdelingslederIndex: FunctionComponent<OwnProps> = ({
-  navAnsatt,
-}) => {
+const AvdelingslederIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
   const [valgtAvdelingEnhet, setValgtAvdelingEnhet] = useState<string>();
 
   const { selected: activeAvdelingslederPanelTemp, location } = useTrackRouteParam<string>({
@@ -142,7 +135,7 @@ const AvdelingslederIndex: FunctionComponent<OwnProps> = ({
   });
 
   const avdelinger = avdelingerData?.data;
-  const filtrerteAvdelinger = avdelinger ? avdelinger.filter((a) => kanBehandleKode6 || !a.kreverKode6) : [];
+  const filtrerteAvdelinger = avdelinger ? avdelinger.filter(a => kanBehandleKode6 || !a.kreverKode6) : [];
 
   useEffect(() => {
     if (avdelingerData.state === RestApiState.SUCCESS) {
@@ -150,10 +143,12 @@ const AvdelingslederIndex: FunctionComponent<OwnProps> = ({
     }
   }, [avdelingerData]);
 
-  const {
-    startRequest: hentAvdelingensSb, data: avdelingensSaksbehandlere = EMPTY_ARRAY,
-  } = restApiHooks.useRestApiRunner(RestApiPathsKeys.SAKSBEHANDLERE_FOR_AVDELING);
-  const hentAvdelingensSaksbehandlere = useCallback((params: { avdelingEnhet: string }) => hentAvdelingensSb(params, true), []);
+  const { startRequest: hentAvdelingensSb, data: avdelingensSaksbehandlere = EMPTY_ARRAY } =
+    restApiHooks.useRestApiRunner(RestApiPathsKeys.SAKSBEHANDLERE_FOR_AVDELING);
+  const hentAvdelingensSaksbehandlere = useCallback(
+    (params: { avdelingEnhet: string }) => hentAvdelingensSb(params, true),
+    [],
+  );
 
   useEffect(() => {
     if (valgtAvdelingEnhet) {
@@ -184,30 +179,53 @@ const AvdelingslederIndex: FunctionComponent<OwnProps> = ({
         <Tabs
           size="small"
           value={activeAvdelingslederPanel}
-          onChange={(avdelingslederPanel: string) => { navigate(getAvdelingslederPanelLocation(avdelingslederPanel)); }}
+          onChange={(avdelingslederPanel: string) => {
+            navigate(getAvdelingslederPanelLocation(avdelingslederPanel));
+          }}
           className={styles.paddingHeader}
         >
           <Tabs.List>
             <Tabs.Tab
               value={AvdelingslederPanels.BEHANDLINGSKOER}
-              label={<Heading size="small"><FormattedMessage id={messageId[AvdelingslederPanels.BEHANDLINGSKOER]} /></Heading>}
+              label={
+                <Heading size="small">
+                  <FormattedMessage id={messageId[AvdelingslederPanels.BEHANDLINGSKOER]} />
+                </Heading>
+              }
             />
             <Tabs.Tab
               value={AvdelingslederPanels.NOKKELTALL}
-              label={<Heading size="small"><FormattedMessage id={messageId[AvdelingslederPanels.NOKKELTALL]} /></Heading>}
+              label={
+                <Heading size="small">
+                  <FormattedMessage id={messageId[AvdelingslederPanels.NOKKELTALL]} />
+                </Heading>
+              }
             />
             <Tabs.Tab
               value={AvdelingslederPanels.SAKSBEHANDLERE}
-              label={<Heading size="small"><FormattedMessage id={messageId[AvdelingslederPanels.SAKSBEHANDLERE]} /></Heading>}
+              label={
+                <Heading size="small">
+                  <FormattedMessage id={messageId[AvdelingslederPanels.SAKSBEHANDLERE]} />
+                </Heading>
+              }
             />
             <Tabs.Tab
               value={AvdelingslederPanels.RESERVASJONER}
-              label={<Heading size="small"><FormattedMessage id={messageId[AvdelingslederPanels.RESERVASJONER]} /></Heading>}
+              label={
+                <Heading size="small">
+                  <FormattedMessage id={messageId[AvdelingslederPanels.RESERVASJONER]} />
+                </Heading>
+              }
             />
           </Tabs.List>
         </Tabs>
         <Panel className={styles.padding}>
-          {renderAvdelingslederPanel(activeAvdelingslederPanel, valgtAvdelingEnhet, hentAvdelingensSaksbehandlere, avdelingensSaksbehandlere)}
+          {renderAvdelingslederPanel(
+            activeAvdelingslederPanel,
+            valgtAvdelingEnhet,
+            hentAvdelingensSaksbehandlere,
+            avdelingensSaksbehandlere,
+          )}
         </Panel>
       </AvdelingslederDashboard>
     );
@@ -229,7 +247,9 @@ const AvdelingslederIndexIntlWrapper: FunctionComponent<OwnPropsWrapper> = ({
 
   const kodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK_LOS);
 
-  const kodeverkData = restApiHooks.useGlobalStateRestApi(RestApiGlobalStatePathsKeys.KODEVERK_LOS, undefined, { suspendRequest: !!kodeverk });
+  const kodeverkData = restApiHooks.useGlobalStateRestApi(RestApiGlobalStatePathsKeys.KODEVERK_LOS, undefined, {
+    suspendRequest: !!kodeverk,
+  });
 
   useEffect(() => {
     if (!kodeverk && kodeverkData.state === RestApiState.ERROR) {

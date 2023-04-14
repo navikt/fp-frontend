@@ -19,10 +19,7 @@ export default {
 const Template: Story<{
   erAdopsjon: boolean;
   submitCallback: (data: any) => Promise<void>;
-}> = ({
-  erAdopsjon,
-  submitCallback,
-}) => {
+}> = ({ erAdopsjon, submitCallback }) => {
   const formMethods = useForm({
     defaultValues: OppholdINorgePapirsoknadIndex.buildInitialValues(),
   });

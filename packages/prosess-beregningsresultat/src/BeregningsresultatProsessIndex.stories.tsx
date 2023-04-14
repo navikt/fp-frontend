@@ -21,10 +21,12 @@ const beregningsresultat = {
   satsVerdi: 92000,
 };
 
-const defaultAksjonspunkter = [{
-  definisjon: AksjonspunktCode.VURDER_FEILUTBETALING,
-  begrunnelse: 'test',
-}] as Aksjonspunkt[];
+const defaultAksjonspunkter = [
+  {
+    definisjon: AksjonspunktCode.VURDER_FEILUTBETALING,
+    begrunnelse: 'test',
+  },
+] as Aksjonspunkt[];
 
 export default {
   title: 'prosess/prosess-beregningsresultat',
@@ -36,17 +38,12 @@ const Template: Story<{
   kanOverstyreAccess: { isEnabled: boolean };
   submitCallback?: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
   isReadOnly?: boolean;
-}> = ({
-  aksjonspunkter,
-  kanOverstyreAccess,
-  submitCallback,
-  isReadOnly = false,
-}) => (
+}> = ({ aksjonspunkter, kanOverstyreAccess, submitCallback, isReadOnly = false }) => (
   <BeregningsresultatProsessIndex
     behandling={behandling}
     alleKodeverk={alleKodeverk as any}
     aksjonspunkter={aksjonspunkter}
-    submitCallback={submitCallback || action('button-click') as (data: any) => Promise<any>}
+    submitCallback={submitCallback || (action('button-click') as (data: any) => Promise<any>)}
     isReadOnly={isReadOnly}
     isAksjonspunktOpen
     readOnlySubmitButton={false}
@@ -75,10 +72,12 @@ SaksbehandlerKanOverstyre.args = {
 
 export const OverstyrtReadonlyPanel = Template.bind({});
 OverstyrtReadonlyPanel.args = {
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.OVERSTYR_BEREGNING,
-    begrunnelse: 'Dette er en begrunnelse',
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.OVERSTYR_BEREGNING,
+      begrunnelse: 'Dette er en begrunnelse',
+    },
+  ] as Aksjonspunkt[],
   kanOverstyreAccess: { isEnabled: true },
   isReadOnly: true,
 };

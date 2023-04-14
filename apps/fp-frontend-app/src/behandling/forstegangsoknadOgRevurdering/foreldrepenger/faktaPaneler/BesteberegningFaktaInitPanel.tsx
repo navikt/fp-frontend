@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { BesteberegningFaktaIndex } from '@navikt/fp-fakta-besteberegning';
@@ -17,7 +15,7 @@ import { FpBehandlingApiKeys } from '../data/fpBehandlingApi';
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG];
 type EndepunktPanelData = {
   beregningsgrunnlag: Beregningsgrunnlag;
-}
+};
 
 interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -32,16 +30,16 @@ const BesteberegningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
 }) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
-    aksjonspunktKoder={[AksjonspunktCode.KONTROLLER_AUTOMATISK_BESTEBEREGNING, AksjonspunktCode.MANUELL_KONTROLL_AV_BESTEBEREGNING]}
+    aksjonspunktKoder={[
+      AksjonspunktCode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
+      AksjonspunktCode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
+    ]}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     faktaPanelKode={FaktaPanelCode.BESTEBEREGNING}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'BesteberegningInfoPanel.Title' })}
     skalPanelVisesIMeny={() => props.requestApi.hasPath(FpBehandlingApiKeys.BEREGNINGSGRUNNLAG_BESTEBEREGNING.name)}
-    renderPanel={(data) => (
-      <BesteberegningFaktaIndex
-        arbeidsgiverOpplysninger={arbeidsgiverOpplysningerPerId}
-        {...data}
-      />
+    renderPanel={data => (
+      <BesteberegningFaktaIndex arbeidsgiverOpplysninger={arbeidsgiverOpplysningerPerId} {...data} />
     )}
   />
 );

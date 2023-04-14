@@ -29,10 +29,12 @@ describe('<BehandlingPaVent>', () => {
   it('skal ikke vise modal når behandling ikke er på vent', async () => {
     render(
       <BehandlingPaVent
-        behandling={{
-          ...behandling,
-          aksjonspunkt: aksjonspunkter,
-        } as Behandling}
+        behandling={
+          {
+            ...behandling,
+            aksjonspunkt: aksjonspunkter,
+          } as Behandling
+        }
         kodeverk={kodeverk}
         hentBehandling={vi.fn()}
       />,
@@ -45,11 +47,13 @@ describe('<BehandlingPaVent>', () => {
     await act(async () => {
       render(
         <BehandlingPaVent
-          behandling={{
-            ...behandling,
-            behandlingPaaVent: true,
-            aksjonspunkt: aksjonspunkter,
-          } as Behandling}
+          behandling={
+            {
+              ...behandling,
+              behandlingPaaVent: true,
+              aksjonspunkt: aksjonspunkter,
+            } as Behandling
+          }
           kodeverk={kodeverk}
           hentBehandling={vi.fn()}
         />,
@@ -62,11 +66,13 @@ describe('<BehandlingPaVent>', () => {
   it('skal vise modal og så skjule den ved trykk på knapp', async () => {
     render(
       <BehandlingPaVent
-        behandling={{
-          ...behandling,
-          aksjonspunkt: aksjonspunkter,
-          behandlingPaaVent: true,
-        } as Behandling}
+        behandling={
+          {
+            ...behandling,
+            aksjonspunkt: aksjonspunkter,
+            behandlingPaaVent: true,
+          } as Behandling
+        }
         kodeverk={kodeverk}
         hentBehandling={vi.fn()}
       />,

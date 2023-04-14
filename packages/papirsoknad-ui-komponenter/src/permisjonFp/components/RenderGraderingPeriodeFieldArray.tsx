@@ -3,16 +3,20 @@ import moment from 'moment/moment';
 import { UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Alert, Label } from '@navikt/ds-react';
+import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow, AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 import {
-  VerticalSpacer, FlexColumn, FlexContainer, FlexRow, AvsnittSkiller,
-} from '@navikt/ft-ui-komponenter';
-import {
-  dateAfterOrEqual, dateBeforeOrEqual, dateRangesNotOverlapping, hasValidDate,
-  hasValidDecimal, hasValidFodselsnummer, hasValidInteger, maxLengthOrFodselsnr, maxValue, required,
+  dateAfterOrEqual,
+  dateBeforeOrEqual,
+  dateRangesNotOverlapping,
+  hasValidDate,
+  hasValidDecimal,
+  hasValidFodselsnummer,
+  hasValidInteger,
+  maxLengthOrFodselsnr,
+  maxValue,
+  required,
 } from '@navikt/ft-form-validators';
-import {
-  CheckboxField, Datepicker, InputField, SelectField, PeriodFieldArray, formHooks,
-} from '@navikt/ft-form-hooks';
+import { CheckboxField, Datepicker, InputField, SelectField, PeriodFieldArray, formHooks } from '@navikt/ft-form-hooks';
 import { KodeverkMedNavn } from '@navikt/ft-types';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
@@ -38,55 +42,65 @@ type GraderingPeriode = {
   flerbarnsdager?: boolean;
   harSamtidigUttak?: boolean;
   samtidigUttaksprosent?: string;
-}
+};
 
 export type FormValues = GraderingPeriode[];
 
-const getOverlappingValidator = (
-  getValues: UseFormGetValues<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: { [GRADERING_PERIODE_FIELD_ARRAY_NAME]: FormValues }}>,
-) => () => {
-  const perioder = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}`);
-  const periodeMap = perioder
-    .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
-    .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
-  return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
-};
+const getOverlappingValidator =
+  (
+    getValues: UseFormGetValues<{
+      [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: { [GRADERING_PERIODE_FIELD_ARRAY_NAME]: FormValues };
+    }>,
+  ) =>
+  () => {
+    const perioder = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}`);
+    const periodeMap = perioder
+      .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
+      .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
+    return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
+  };
 
-const getValiderFørEllerEtter = (
-  getValues: UseFormGetValues<{ tidsromPermisjon: { [GRADERING_PERIODE_FIELD_ARRAY_NAME]: FormValues }}>,
-  index: number,
-  sjekkFør: boolean,
-) => () => {
-  const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
-  const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
+const getValiderFørEllerEtter =
+  (
+    getValues: UseFormGetValues<{ tidsromPermisjon: { [GRADERING_PERIODE_FIELD_ARRAY_NAME]: FormValues } }>,
+    index: number,
+    sjekkFør: boolean,
+  ) =>
+  () => {
+    const fomVerdi = getValues(
+      `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`,
+    );
+    const tomVerdi = getValues(
+      `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`,
+    );
 
-  if (!tomVerdi || !fomVerdi) {
-    return null;
-  }
+    if (!tomVerdi || !fomVerdi) {
+      return null;
+    }
 
-  return sjekkFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
-};
+    return sjekkFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
+  };
 
-const getValiderArbeidsgiverIdNårRequired = (
-  getValues: UseFormGetValues<{ tidsromPermisjon: { [GRADERING_PERIODE_FIELD_ARRAY_NAME]: FormValues }}>,
-  index: number,
-) => (
-  arbeidsgiverIdentifikator,
-) => {
-  const arbeidsgiverIdentifikatorRequired = getValues(
-    `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.arbeidskategoriType`,
-  ) === arbeidskategori.ARBEIDSTAKER;
-  return arbeidsgiverIdentifikatorRequired ? required(arbeidsgiverIdentifikator) : undefined;
-};
+const getValiderArbeidsgiverIdNårRequired =
+  (
+    getValues: UseFormGetValues<{ tidsromPermisjon: { [GRADERING_PERIODE_FIELD_ARRAY_NAME]: FormValues } }>,
+    index: number,
+  ) =>
+  arbeidsgiverIdentifikator => {
+    const arbeidsgiverIdentifikatorRequired =
+      getValues(
+        `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.arbeidskategoriType`,
+      ) === arbeidskategori.ARBEIDSTAKER;
+    return arbeidsgiverIdentifikatorRequired ? required(arbeidsgiverIdentifikator) : undefined;
+  };
 
-const validerAtArbeidsgiverIdErGyldig = (
-  arbeidsgiverIdentifikator,
-) => {
+const validerAtArbeidsgiverIdErGyldig = arbeidsgiverIdentifikator => {
   if (!arbeidsgiverIdentifikator) {
     return undefined;
   }
   return arbeidsgiverIdentifikator.length === 11
-    ? hasValidFodselsnummer(arbeidsgiverIdentifikator) : maxLength9OrFodselsnr(arbeidsgiverIdentifikator);
+    ? hasValidFodselsnummer(arbeidsgiverIdentifikator)
+    : maxLength9OrFodselsnr(arbeidsgiverIdentifikator);
 };
 
 const defaultGraderingPeriode: GraderingPeriode = {
@@ -105,23 +119,23 @@ export const gyldigArbeidskategori = [
 
 const maxValue100 = maxValue(100);
 
-const mapKvoter = (typer: KodeverkMedNavn[]): ReactElement[] => typer
-  .filter(({
-    kode,
-  }) => gyldigeUttakperioder.includes(kode))
-  .map(({
-    kode,
-    navn,
-  }) => <option value={kode} key={kode}>{navn}</option>);
+const mapKvoter = (typer: KodeverkMedNavn[]): ReactElement[] =>
+  typer
+    .filter(({ kode }) => gyldigeUttakperioder.includes(kode))
+    .map(({ kode, navn }) => (
+      <option value={kode} key={kode}>
+        {navn}
+      </option>
+    ));
 
-const mapArbeidskategori = (typer: KodeverkMedNavn[]): ReactElement[] => typer
-  .filter(({
-    kode,
-  }) => gyldigArbeidskategori.includes(kode))
-  .map(({
-    kode,
-    navn,
-  }) => <option value={kode} key={kode}>{navn}</option>);
+const mapArbeidskategori = (typer: KodeverkMedNavn[]): ReactElement[] =>
+  typer
+    .filter(({ kode }) => gyldigArbeidskategori.includes(kode))
+    .map(({ kode, navn }) => (
+      <option value={kode} key={kode}>
+        {navn}
+      </option>
+    ));
 
 interface OwnProps {
   graderingKvoter: KodeverkMedNavn[];
@@ -142,10 +156,16 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
 
   const {
-    watch, control, getValues, trigger, formState: { isSubmitted },
-  } = formHooks.useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
-    [GRADERING_PERIODE_FIELD_ARRAY_NAME]: FormValues
-  }}>();
+    watch,
+    control,
+    getValues,
+    trigger,
+    formState: { isSubmitted },
+  } = formHooks.useFormContext<{
+    [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
+      [GRADERING_PERIODE_FIELD_ARRAY_NAME]: FormValues;
+    };
+  }>();
 
   const { fields, remove, append } = formHooks.useFieldArray({
     control,
@@ -174,7 +194,7 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
         const periodeFomForTidlig = periodeFom && moment(periodeFom, ISO_DATE_FORMAT).isBefore(moment('2019-01-01'));
         const namePart1 = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}`;
         return (
-          <div key={field.id} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+          <div key={field.id} className={index !== fields.length - 1 ? styles.notLastRow : ''}>
             {index > 0 && (
               <>
                 <AvsnittSkiller />
@@ -254,21 +274,14 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                       <FormattedMessage id="Registrering.Permisjon.Gradering.SkalGraderes" />
                     </Label>
                   </div>
-                  <CheckboxField
-                    name={`${namePart1}.skalGraderes`}
-                    label=" "
-                  />
+                  <CheckboxField name={`${namePart1}.skalGraderes`} label=" " />
                 </FlexColumn>
                 <FlexColumn>
                   <div className={styles.smalHeader}>
                     <Label size="small">
                       <FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />
                     </Label>
-                    <CheckboxField
-                      readOnly={readOnly}
-                      name={`${namePart1}.flerbarnsdager`}
-                      label=" "
-                    />
+                    <CheckboxField readOnly={readOnly} name={`${namePart1}.flerbarnsdager`} label=" " />
                   </div>
                 </FlexColumn>
                 <FlexColumn>
@@ -277,29 +290,18 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                       <FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />
                     </Label>
                   </div>
-                  <CheckboxField
-                    name={`${namePart1}.harSamtidigUttak`}
-                    label=""
-                  />
+                  <CheckboxField name={`${namePart1}.harSamtidigUttak`} label="" />
                 </FlexColumn>
                 <FlexColumn>
                   {harSamtidigUttak && (
                     <InputField
                       name={`${namePart1}.samtidigUttaksprosent`}
-                      validate={[
-                        required,
-                        hasValidDecimal,
-                        maxValue100,
-                      ]}
+                      validate={[required, hasValidDecimal, maxValue100]}
                       label={intl.formatMessage({ id: 'Registrering.Permisjon.SamtidigUttaksprosent' })}
                     />
                   )}
                 </FlexColumn>
-                {getRemoveButton && (
-                  <FlexColumn className={styles.placeRemoveButton}>
-                    {getRemoveButton()}
-                  </FlexColumn>
-                )}
+                {getRemoveButton && <FlexColumn className={styles.placeRemoveButton}>{getRemoveButton()}</FlexColumn>}
               </FlexRow>
               {periodeFomForTidlig && (
                 <div>

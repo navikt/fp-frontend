@@ -4,23 +4,27 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, Label } from '@navikt/ds-react';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import {
-  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { opptjeningAktivitetType as OAType } from '@navikt/fp-kodeverk';
 import { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import styles from './valgtAktivitetSubForm.module.css';
 
-const YTELSE_TYPER = [OAType.SYKEPENGER, OAType.FORELDREPENGER, OAType.PLEIEPENGER, OAType.SVANGERSKAPSPENGER, OAType.UTENLANDSK_ARBEIDSFORHOLD];
+const YTELSE_TYPER = [
+  OAType.SYKEPENGER,
+  OAType.FORELDREPENGER,
+  OAType.PLEIEPENGER,
+  OAType.SVANGERSKAPSPENGER,
+  OAType.UTENLANDSK_ARBEIDSFORHOLD,
+];
 
-const erAvType = (valgtAktivitetstype?: string, ...opptjeningAktivitetType: string[]): boolean => valgtAktivitetstype
-  && opptjeningAktivitetType.includes(valgtAktivitetstype);
+const erAvType = (valgtAktivitetstype?: string, ...opptjeningAktivitetType: string[]): boolean =>
+  valgtAktivitetstype && opptjeningAktivitetType.includes(valgtAktivitetstype);
 
 const formatDato = (dato: string): string => (dato ? dayjs(dato, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
-const getOppdragsgiverIntlId = (valgtAktivitetstype?: string): string => (erAvType(valgtAktivitetstype, OAType.FRILANS)
-  ? 'ActivityPanel.Oppdragsgiver' : 'ActivityPanel.Arbeidsgiver');
+const getOppdragsgiverIntlId = (valgtAktivitetstype?: string): string =>
+  erAvType(valgtAktivitetstype, OAType.FRILANS) ? 'ActivityPanel.Oppdragsgiver' : 'ActivityPanel.Arbeidsgiver';
 
 const finnArbeidsgivertekst = (
   arbeidsgiverReferanse: string,
@@ -70,7 +74,9 @@ const ValgtAktivitetSubForm: FunctionComponent<OwnProps> = ({
           <Label size="small">
             <FormattedMessage id={getOppdragsgiverIntlId(valgtAktivitetstype)} />
           </Label>
-          <BodyShort size="small">{finnArbeidsgivertekst(arbeidsgiverReferanse, arbeidsgiverOpplysningerPerId)}</BodyShort>
+          <BodyShort size="small">
+            {finnArbeidsgivertekst(arbeidsgiverReferanse, arbeidsgiverOpplysningerPerId)}
+          </BodyShort>
         </FlexColumn>
         {erAvType(valgtAktivitetstype, OAType.ARBEID) && (
           <FlexColumn>

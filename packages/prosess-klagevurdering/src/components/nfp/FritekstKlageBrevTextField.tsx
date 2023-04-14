@@ -12,10 +12,7 @@ interface OwnProps {
   readOnly?: boolean;
 }
 
-const FritekstKlageBrevTextField: FunctionComponent<OwnProps> = ({
-  sprakkode,
-  readOnly,
-}) => (
+const FritekstKlageBrevTextField: FunctionComponent<OwnProps> = ({ sprakkode, readOnly }) => (
   <div className={styles.fritekstTilBrevTextArea}>
     <TextAreaField
       name="fritekstTilBrev"
@@ -23,10 +20,12 @@ const FritekstKlageBrevTextField: FunctionComponent<OwnProps> = ({
       validate={[required, hasValidText]}
       readOnly={readOnly}
       maxLength={100000}
-      badges={[{
-        type: 'info',
-        titleText: getLanguageFromSprakkode(sprakkode),
-      }]}
+      badges={[
+        {
+          type: 'info',
+          titleText: getLanguageFromSprakkode(sprakkode),
+        },
+      ]}
       // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
       parse={(value: string) => value.replaceAll('‑', '-').replaceAll('\t', ' ')}
     />

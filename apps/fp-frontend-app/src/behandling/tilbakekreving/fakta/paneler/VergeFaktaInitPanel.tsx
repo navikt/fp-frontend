@@ -17,8 +17,8 @@ interface OwnProps {
   erReadOnlyFn: (aksjonspunkter: Aksjonspunkt[]) => boolean;
   fpsakKodeverk: AlleKodeverk;
   submitCallback: (aksjonspunktData: any) => Promise<void>;
-  formData: any,
-  setFormData: (data: any) => void
+  formData: any;
+  setFormData: (data: any) => void;
 }
 
 const VergeFaktaInitPanel: FunctionComponent<OwnProps> = ({
@@ -31,18 +31,25 @@ const VergeFaktaInitPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const aksjonspunkter = behandling.aksjonspunkt || [];
 
-  const aksjonspunkterForVergeFakta = useMemo(() => (
-    aksjonspunkter.filter((ap) => AksjonspunktCode.AVKLAR_VERGE === ap.definisjon)),
-  [aksjonspunkter]);
+  const aksjonspunkterForVergeFakta = useMemo(
+    () => aksjonspunkter.filter(ap => AksjonspunktCode.AVKLAR_VERGE === ap.definisjon),
+    [aksjonspunkter],
+  );
 
-  const alleMerknaderFraBeslutter = useMemo(() => getAlleMerknaderFraBeslutter(behandling, aksjonspunkterForVergeFakta),
-    [behandling, aksjonspunkterForVergeFakta]);
+  const alleMerknaderFraBeslutter = useMemo(
+    () => getAlleMerknaderFraBeslutter(behandling, aksjonspunkterForVergeFakta),
+    [behandling, aksjonspunkterForVergeFakta],
+  );
   const readOnly = useMemo(() => erReadOnlyFn(aksjonspunkterForVergeFakta), [aksjonspunkterForVergeFakta]);
 
-  const setFormDataVerge = useCallback((data: any) => setFormData((oldData) => ({
-    ...oldData,
-    [FaktaPanelCode.VERGE]: data,
-  })), [setFormData]);
+  const setFormDataVerge = useCallback(
+    (data: any) =>
+      setFormData(oldData => ({
+        ...oldData,
+        [FaktaPanelCode.VERGE]: data,
+      })),
+    [setFormData],
+  );
 
   const { data: verge, state } = restApiTilbakekrevingHooks.useRestApi(BehandlingFellesApiKeys.VERGE);
 
@@ -59,8 +66,13 @@ const VergeFaktaInitPanel: FunctionComponent<OwnProps> = ({
       alleKodeverk={fpsakKodeverk}
       submitCallback={submitCallback}
       readOnly={readOnly}
-      harApneAksjonspunkter={aksjonspunkterForVergeFakta.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET && ap.kanLoses)}
-      submittable={!aksjonspunkterForVergeFakta.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET) || aksjonspunkter.some((ap) => ap.kanLoses)}
+      harApneAksjonspunkter={aksjonspunkterForVergeFakta.some(
+        ap => ap.status === aksjonspunktStatus.OPPRETTET && ap.kanLoses,
+      )}
+      submittable={
+        !aksjonspunkterForVergeFakta.some(ap => ap.status === aksjonspunktStatus.OPPRETTET) ||
+        aksjonspunkter.some(ap => ap.kanLoses)
+      }
       formData={formData[FaktaPanelCode.VERGE]}
       setFormData={setFormDataVerge}
     />

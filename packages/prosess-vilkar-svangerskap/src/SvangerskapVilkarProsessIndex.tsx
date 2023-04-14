@@ -1,10 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import {
-  FodselOgTilrettelegging,
-  StandardProsessPanelProps,
-} from '@navikt/fp-types';
+import { FodselOgTilrettelegging, StandardProsessPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import SvangerskapVilkarForm from './components/SvangerskapVilkarForm';
@@ -45,7 +42,7 @@ const SvangerskapVilkarProsessIndex: FunctionComponent<StandardProsessPanelProps
       isApOpen={isAksjonspunktOpen}
       alleKodeverk={alleKodeverk}
       svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
-      erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted)}
+      erIkkeGodkjentAvBeslutter={aksjonspunkter.some(a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted)}
       formData={formData}
       setFormData={setFormData}
     />

@@ -4,16 +4,18 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
+import { VilkarType, AksjonspunktCode, fagsakYtelseType, vilkarUtfallType, KodeverkType } from '@navikt/fp-kodeverk';
 import {
-  VilkarType, AksjonspunktCode, fagsakYtelseType, vilkarUtfallType, KodeverkType,
-} from '@navikt/fp-kodeverk';
-import {
-  ProsessStegBegrunnelseTextFieldNew, VilkarResultPicker, ProsessPanelTemplate, validerApKodeOgHentApEnum,
+  ProsessStegBegrunnelseTextFieldNew,
+  VilkarResultPicker,
+  ProsessPanelTemplate,
+  validerApKodeOgHentApEnum,
 } from '@navikt/fp-prosess-felles';
+import { Aksjonspunkt, AlleKodeverk, Behandling, KodeverkMedNavn, Vilkar } from '@navikt/fp-types';
 import {
-  Aksjonspunkt, AlleKodeverk, Behandling, KodeverkMedNavn, Vilkar,
-} from '@navikt/fp-types';
-import { VurdereYtelseSammeBarnAnnenForelderAp, VurdereYtelseSammeBarnSokerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+  VurdereYtelseSammeBarnAnnenForelderAp,
+  VurdereYtelseSammeBarnSokerAp,
+} from '@navikt/fp-types-avklar-aksjonspunkter';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 const avslagsarsakerES = ['1002', '1003', '1032'];
@@ -23,15 +25,17 @@ type FormValues = {
   avslagCode?: string;
   avslagDato?: string;
   begrunnelse?: string;
-}
+};
 
 interface OwnProps {
   behandlingsresultat?: Behandling['behandlingsresultat'];
   aksjonspunkter: Aksjonspunkt[];
   status: string;
   vilkar: Vilkar[];
-  ytelseTypeKode: string
-  submitCallback: (aksjonspunktData: VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp) => Promise<void>;
+  ytelseTypeKode: string;
+  submitCallback: (
+    aksjonspunktData: VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp,
+  ) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
   isApOpen: boolean;
@@ -56,17 +60,20 @@ const transformValues = (
 ): VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
-  kode: validerApKodeOgHentApEnum(aksjonspunkter[0].definisjon,
+  kode: validerApKodeOgHentApEnum(
+    aksjonspunkter[0].definisjon,
     AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-    AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN),
+    AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
+  ),
 });
 
 const getFodselVilkarAvslagsarsaker = (
   isFpFagsak: boolean,
   fodselsvilkarAvslagskoder: KodeverkMedNavn[],
-): KodeverkMedNavn[] => (isFpFagsak
-  ? fodselsvilkarAvslagskoder.filter((arsak) => !avslagsarsakerES.includes(arsak.kode))
-  : fodselsvilkarAvslagskoder);
+): KodeverkMedNavn[] =>
+  isFpFagsak
+    ? fodselsvilkarAvslagskoder.filter(arsak => !avslagsarsakerES.includes(arsak.kode))
+    : fodselsvilkarAvslagskoder;
 
 /**
  * FodselVilkarForm
@@ -90,15 +97,21 @@ const FodselVilkarForm: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const initialValues = useMemo(() => buildInitialValues(aksjonspunkter, status, behandlingsresultat), [behandlingsresultat, aksjonspunkter, status]);
+  const initialValues = useMemo(
+    () => buildInitialValues(aksjonspunkter, status, behandlingsresultat),
+    [behandlingsresultat, aksjonspunkter, status],
+  );
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });
 
   const alleAvslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.FODSELSVILKARET_MOR];
-  const avslagsarsaker = getFodselVilkarAvslagsarsaker(ytelseTypeKode === fagsakYtelseType.FORELDREPENGER, alleAvslagsarsaker);
+  const avslagsarsaker = getFodselVilkarAvslagsarsaker(
+    ytelseTypeKode === fagsakYtelseType.FORELDREPENGER,
+    alleAvslagsarsaker,
+  );
 
-  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => ap.status === AksjonspunktStatus.OPPRETTET);
+  const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
   const { lovReferanse } = vilkar[0];
 
@@ -119,12 +132,16 @@ const FodselVilkarForm: FunctionComponent<OwnProps> = ({
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
       >
-        <Label size="small"><FormattedMessage id="FodselVilkarForm.TidligereUtbetaltStonad" /></Label>
+        <Label size="small">
+          <FormattedMessage id="FodselVilkarForm.TidligereUtbetaltStonad" />
+        </Label>
         <VilkarResultPicker
           avslagsarsaker={avslagsarsaker}
           readOnly={readOnly}
           customVilkarOppfyltText={<FormattedMessage id="FodselVilkarForm.Oppfylt" />}
-          customVilkarIkkeOppfyltText={<FormattedMessage id="FodselVilkarForm.IkkeOppfylt" values={{ b: (chunks: any) => <b>{chunks}</b> }} />}
+          customVilkarIkkeOppfyltText={
+            <FormattedMessage id="FodselVilkarForm.IkkeOppfylt" values={{ b: (chunks: any) => <b>{chunks}</b> }} />
+          }
         />
         <ProsessStegBegrunnelseTextFieldNew useAllWidth readOnly={readOnly} />
       </ProsessPanelTemplate>

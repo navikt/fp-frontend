@@ -4,7 +4,8 @@ import { Expand, Collapse } from '@navikt/ds-icons';
 
 import styles from './collapseButton.module.css';
 
-const buttonText = (showDetails: boolean): string => (showDetails ? 'Avregning.headerText.VisFærreDetaljer' : 'Avregning.headerText.VisFlereDetaljer');
+const buttonText = (showDetails: boolean): string =>
+  showDetails ? 'Avregning.headerText.VisFærreDetaljer' : 'Avregning.headerText.VisFlereDetaljer';
 
 interface OwnProps {
   toggleDetails: (id: number) => void;
@@ -12,11 +13,7 @@ interface OwnProps {
   mottakerIndex: number;
 }
 
-const CollapseButton: FunctionComponent<OwnProps> = ({
-  toggleDetails,
-  showDetails,
-  mottakerIndex,
-}) => (
+const CollapseButton: FunctionComponent<OwnProps> = ({ toggleDetails, showDetails, mottakerIndex }) => (
   <button type="button" className={styles.invisibleButton} onClick={() => toggleDetails(mottakerIndex)}>
     <FormattedMessage id={buttonText(showDetails)} />
     {showDetails ? <Collapse /> : <Expand />}

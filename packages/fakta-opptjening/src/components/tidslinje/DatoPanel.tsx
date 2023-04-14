@@ -8,25 +8,18 @@ interface OwnProps {
   opptjeningTomDato: string;
 }
 
-const DatoPanel: FunctionComponent<OwnProps> = ({
-  opptjeningFomDato,
-  opptjeningTomDato,
-}) => (
+const DatoPanel: FunctionComponent<OwnProps> = ({ opptjeningFomDato, opptjeningTomDato }) => (
   <FlexContainer>
     <FlexRow spaceBetween>
       <FlexColumn>
         <FlexContainer>
           <FlexRow>
             <FlexColumn className={styles.firstCol} />
-            <FlexColumn>
-              {opptjeningFomDato}
-            </FlexColumn>
+            <FlexColumn>{opptjeningFomDato}</FlexColumn>
           </FlexRow>
         </FlexContainer>
       </FlexColumn>
-      <FlexColumn className={styles.lastCol}>
-        {opptjeningTomDato}
-      </FlexColumn>
+      <FlexColumn className={styles.lastCol}>{opptjeningTomDato}</FlexColumn>
     </FlexRow>
   </FlexContainer>
 );

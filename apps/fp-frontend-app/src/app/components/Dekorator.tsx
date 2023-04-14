@@ -40,9 +40,9 @@ const lagFeilmeldinger = (
   if (queryStrings.errormessage) {
     resolvedErrorMessages.push({ melding: queryStrings.errormessage });
   }
-  errorMessages.forEach((message) => {
+  errorMessages.forEach(message => {
     let msg = {
-      melding: (message.code ? intl.formatMessage({ id: message.code }, message.params) : message.text),
+      melding: message.code ? intl.formatMessage({ id: message.code }, message.params) : message.text,
       tilleggsInfo: undefined,
     };
     if (message.params && message.params.errorDetails) {
@@ -78,25 +78,37 @@ const Dekorator: FunctionComponent<OwnProps> = ({
   const navAnsatt = initFetch?.innloggetBruker;
 
   const navigate = useNavigate();
-  const visSaksbehandlerside = useCallback((e: React.SyntheticEvent) => {
-    if (e.type === 'click') {
-      navigate('/');
-    }
-    if (e.type === 'contextmenu') {
-      window.open('/', '_newtab');
-    }
-    e.preventDefault();
-  }, [navigate]);
-  const visAvdelingslederside = useCallback((e: React.SyntheticEvent) => {
-    navigate(AVDELINGSLEDER_PATH);
-    e.preventDefault();
-  }, [navigate]);
+  const visSaksbehandlerside = useCallback(
+    (e: React.SyntheticEvent) => {
+      if (e.type === 'click') {
+        navigate('/');
+      }
+      if (e.type === 'contextmenu') {
+        window.open('/', '_newtab');
+      }
+      e.preventDefault();
+    },
+    [navigate],
+  );
+  const visAvdelingslederside = useCallback(
+    (e: React.SyntheticEvent) => {
+      navigate(AVDELINGSLEDER_PATH);
+      e.preventDefault();
+    },
+    [navigate],
+  );
 
   const errorMessages = useRestApiError();
   const { removeErrorMessages } = useRestApiErrorDispatcher();
 
-  const formaterteFeilmeldinger = useMemo(() => new ErrorFormatter().format(errorMessages, crashMessage), [errorMessages]);
-  const resolvedErrorMessages = useMemo(() => lagFeilmeldinger(formaterteFeilmeldinger, queryStrings, intl), [formaterteFeilmeldinger, queryStrings]);
+  const formaterteFeilmeldinger = useMemo(
+    () => new ErrorFormatter().format(errorMessages, crashMessage),
+    [errorMessages],
+  );
+  const resolvedErrorMessages = useMemo(
+    () => lagFeilmeldinger(formaterteFeilmeldinger, queryStrings, intl),
+    [formaterteFeilmeldinger, queryStrings],
+  );
 
   const kanOppgavestyre = navAnsatt?.kanOppgavestyre;
 

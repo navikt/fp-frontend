@@ -19,10 +19,7 @@ export default {
 const Template: Story<{
   kunMiliterEllerSiviltjeneste: boolean;
   submitCallback: (data: any) => Promise<void>;
-}> = ({
-  kunMiliterEllerSiviltjeneste,
-  submitCallback,
-}) => {
+}> = ({ kunMiliterEllerSiviltjeneste, submitCallback }) => {
   const formMethods = useForm({
     defaultValues: AndreYtelserPapirsoknadIndex.buildInitialValues(alleKodeverk[KodeverkType.ARBEID_TYPE]),
   });
@@ -30,7 +27,9 @@ const Template: Story<{
   return (
     <Form
       formMethods={formMethods}
-      onSubmit={(values: any) => submitCallback(AndreYtelserPapirsoknadIndex.transformValues(values, alleKodeverk[KodeverkType.ARBEID_TYPE]))}
+      onSubmit={(values: any) =>
+        submitCallback(AndreYtelserPapirsoknadIndex.transformValues(values, alleKodeverk[KodeverkType.ARBEID_TYPE]))
+      }
     >
       <AndreYtelserPapirsoknadIndex
         readOnly={false}

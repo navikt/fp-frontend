@@ -1,24 +1,22 @@
-import React, {
-  useCallback, FunctionComponent, useMemo, useState, useRef,
-} from 'react';
+import React, { useCallback, FunctionComponent, useMemo, useState, useRef } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm, UseFormGetValues } from 'react-hook-form';
-import {
-  Alert, BodyShort, Button, Popover,
-} from '@navikt/ds-react';
+import { Alert, BodyShort, Button, Popover } from '@navikt/ds-react';
 
 import {
-  hasValidText, maxLength, minLength, hasValidDate, hasValidInteger, required, minValue, maxValue, dateAfterOrEqual,
+  hasValidText,
+  maxLength,
+  minLength,
+  hasValidDate,
+  hasValidInteger,
+  required,
+  minValue,
+  maxValue,
+  dateAfterOrEqual,
 } from '@navikt/ft-form-validators';
-import {
-  TextAreaField, RadioGroupPanel, Datepicker, InputField, Form,
-} from '@navikt/ft-form-hooks';
-import {
-  Inntektsmelding, ManueltArbeidsforhold, ManglendeInntektsmeldingVurdering,
-} from '@navikt/fp-types';
-import {
-  VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image,
-} from '@navikt/ft-ui-komponenter';
+import { TextAreaField, RadioGroupPanel, Datepicker, InputField, Form } from '@navikt/ft-form-hooks';
+import { Inntektsmelding, ManueltArbeidsforhold, ManglendeInntektsmeldingVurdering } from '@navikt/fp-types';
+import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image } from '@navikt/ft-ui-komponenter';
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 
 import questionNormalUrl from '../../images/question_normal.svg';
@@ -40,11 +38,10 @@ type FormValues = {
   tom?: string;
   stillingsprosent?: number;
   begrunnelse?: string;
-}
+};
 
-const validerPeriodeRekkefølge = (
-  getValues: UseFormGetValues<FormValues>,
-) => (tom?: string) => (tom ? dateAfterOrEqual(getValues('fom'))(tom) : null);
+const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (tom?: string) =>
+  tom ? dateAfterOrEqual(getValues('fom'))(tom) : null;
 
 interface OwnProps {
   saksnummer: string;
@@ -56,7 +53,7 @@ interface OwnProps {
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   lukkArbeidsforholdRad: () => void;
-  oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
+  oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>;
   skalViseArbeidsforholdId: boolean;
 }
 
@@ -75,13 +72,16 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const defaultValues = useMemo<FormValues>(() => ({
-    saksbehandlersVurdering: radData.avklaring?.saksbehandlersVurdering,
-    begrunnelse: radData.avklaring?.begrunnelse,
-    fom: radData.avklaring?.fom,
-    tom: radData.avklaring?.tom,
-    stillingsprosent: radData.avklaring?.stillingsprosent,
-  }), [radData]);
+  const defaultValues = useMemo<FormValues>(
+    () => ({
+      saksbehandlersVurdering: radData.avklaring?.saksbehandlersVurdering,
+      begrunnelse: radData.avklaring?.begrunnelse,
+      fom: radData.avklaring?.fom,
+      tom: radData.avklaring?.tom,
+      stillingsprosent: radData.avklaring?.stillingsprosent,
+    }),
+    [radData],
+  );
 
   const formMethods = useForm<FormValues>({
     defaultValues,
@@ -96,57 +96,72 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
     formMethods.reset(defaultValues);
   }, [defaultValues, lukkArbeidsforholdRad]);
 
-  const lagre = useCallback((formValues: FormValues) => {
-    const oppdater = (() => {
-      oppdaterTabell((oldData) => oldData.map((data) => {
-        if (inntektsmelding.arbeidsgiverIdent === data.arbeidsgiverIdent) {
-          const opprettArbeidsforhold = formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING;
-          const avklaringOpprett = opprettArbeidsforhold ? {
-            arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
-            fom: formValues.fom,
-            tom: formValues.tom,
-            stillingsprosent: formValues.stillingsprosent,
-            begrunnelse: formValues.begrunnelse,
-            saksbehandlersVurdering: formValues.saksbehandlersVurdering,
-          } : undefined;
-          return {
-            ...radData,
-            avklaring: avklaringOpprett || {
-              begrunnelse: formValues.begrunnelse,
-              saksbehandlersVurdering: formValues.saksbehandlersVurdering,
-            },
-          };
-        }
-        return data;
-      }));
-    });
+  const lagre = useCallback(
+    (formValues: FormValues) => {
+      const oppdater = () => {
+        oppdaterTabell(oldData =>
+          oldData.map(data => {
+            if (inntektsmelding.arbeidsgiverIdent === data.arbeidsgiverIdent) {
+              const opprettArbeidsforhold =
+                formValues.saksbehandlersVurdering ===
+                ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING;
+              const avklaringOpprett = opprettArbeidsforhold
+                ? {
+                    arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
+                    fom: formValues.fom,
+                    tom: formValues.tom,
+                    stillingsprosent: formValues.stillingsprosent,
+                    begrunnelse: formValues.begrunnelse,
+                    saksbehandlersVurdering: formValues.saksbehandlersVurdering,
+                  }
+                : undefined;
+              return {
+                ...radData,
+                avklaring: avklaringOpprett || {
+                  begrunnelse: formValues.begrunnelse,
+                  saksbehandlersVurdering: formValues.saksbehandlersVurdering,
+                },
+              };
+            }
+            return data;
+          }),
+        );
+      };
 
-    if (formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING) {
-      registrerArbeidsforhold({
-        behandlingUuid,
-        internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
-        arbeidsgiverNavn,
-        arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
-        vurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
-        begrunnelse: formValues.begrunnelse,
-        fom: formValues.fom,
-        tom: formValues.tom,
-        stillingsprosent: formValues.stillingsprosent,
-      }).then(oppdater).finally(() => formMethods.reset(formValues));
-    } else {
-      lagreVurdering({
-        behandlingUuid,
-        vurdering: formValues.saksbehandlersVurdering,
-        begrunnelse: formValues.begrunnelse,
-        arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
-        internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
-      }).then(oppdater).finally(() => formMethods.reset(formValues));
-    }
-  }, [inntektsmelding, oppdaterTabell]);
+      if (
+        formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING
+      ) {
+        registrerArbeidsforhold({
+          behandlingUuid,
+          internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
+          arbeidsgiverNavn,
+          arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
+          vurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
+          begrunnelse: formValues.begrunnelse,
+          fom: formValues.fom,
+          tom: formValues.tom,
+          stillingsprosent: formValues.stillingsprosent,
+        })
+          .then(oppdater)
+          .finally(() => formMethods.reset(formValues));
+      } else {
+        lagreVurdering({
+          behandlingUuid,
+          vurdering: formValues.saksbehandlersVurdering,
+          begrunnelse: formValues.begrunnelse,
+          arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
+          internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
+        })
+          .then(oppdater)
+          .finally(() => formMethods.reset(formValues));
+      }
+    },
+    [inntektsmelding, oppdaterTabell],
+  );
 
   const imageRef = useRef<HTMLImageElement>(null);
   const [openState, setOpenState] = useState(false);
-  const toggleHjelpetekst = useCallback(() => setOpenState((gammelVerdi) => !gammelVerdi), []);
+  const toggleHjelpetekst = useCallback(() => setOpenState(gammelVerdi => !gammelVerdi), []);
 
   return (
     <>
@@ -157,13 +172,15 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
       />
       <VerticalSpacer fourtyPx />
       <div className={styles.alertStripe}>
-        <Alert variant="info"><FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" /></Alert>
+        <Alert variant="info">
+          <FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" />
+        </Alert>
       </div>
       <VerticalSpacer thirtyTwoPx />
       <Form formMethods={formMethods} onSubmit={lagre}>
         <RadioGroupPanel
           name="saksbehandlersVurdering"
-          label={(
+          label={
             <FlexContainer>
               <FlexRow>
                 <FlexColumn>
@@ -195,19 +212,23 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                 </FlexColumn>
               </FlexRow>
             </FlexContainer>
-          )}
+          }
           validate={[required]}
           isReadOnly={isReadOnly}
-          radios={[{
-            label: intl.formatMessage({ id: 'ManglendeOpplysningerForm.TarKontakt' }),
-            value: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD,
-          }, {
-            label: intl.formatMessage({ id: 'ManglendeOpplysningerForm.GåVidere' }),
-            value: ArbeidsforholdKomplettVurderingType.IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
-          }, {
-            label: intl.formatMessage({ id: 'ManglendeOpplysningerForm.OpprettArbeidsforhold' }),
-            value: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
-          }]}
+          radios={[
+            {
+              label: intl.formatMessage({ id: 'ManglendeOpplysningerForm.TarKontakt' }),
+              value: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD,
+            },
+            {
+              label: intl.formatMessage({ id: 'ManglendeOpplysningerForm.GåVidere' }),
+              value: ArbeidsforholdKomplettVurderingType.IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
+            },
+            {
+              label: intl.formatMessage({ id: 'ManglendeOpplysningerForm.OpprettArbeidsforhold' }),
+              value: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
+            },
+          ]}
         />
         {saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING && (
           <>

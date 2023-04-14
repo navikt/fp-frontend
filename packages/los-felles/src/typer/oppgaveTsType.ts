@@ -10,7 +10,7 @@ export type OppgaveStatus = Readonly<{
     navn: string;
     begrunnelse: string;
   };
-}>
+}>;
 
 type Oppgave = Readonly<{
   id: number;
@@ -26,6 +26,6 @@ type Oppgave = Readonly<{
   fagsakYtelseType: string;
   erTilSaksbehandling: boolean;
   behandlingId: string;
-}>
+}>;
 
 export default Oppgave;

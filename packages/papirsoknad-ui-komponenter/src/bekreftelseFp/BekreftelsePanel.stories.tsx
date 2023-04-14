@@ -16,21 +16,12 @@ export default {
 const Template: Story<{
   submitCallback: (data: any) => Promise<void>;
   annenForelderInformertRequired: boolean;
-}> = ({
-  submitCallback,
-  annenForelderInformertRequired,
-}) => {
+}> = ({ submitCallback, annenForelderInformertRequired }) => {
   const formMethods = useForm();
 
   return (
-    <Form
-      formMethods={formMethods}
-      onSubmit={submitCallback}
-    >
-      <BekreftelsePanel
-        readOnly={false}
-        annenForelderInformertRequired={annenForelderInformertRequired}
-      />
+    <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <BekreftelsePanel readOnly={false} annenForelderInformertRequired={annenForelderInformertRequired} />
       <VerticalSpacer fourtyPx />
       <Button size="small" variant="primary">
         Lagreknapp (Kun for test)

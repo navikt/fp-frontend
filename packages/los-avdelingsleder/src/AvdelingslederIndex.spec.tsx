@@ -3,9 +3,8 @@ import { render, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import * as stories from './AvdelingslederIndex.stories';
 
-const {
-  Default, HarIkkeTilgang, LasteIkonFørValgtAvdelingErSatt, SkalFiltrereBortAvdelingerSomKreverKode6,
-} = composeStories(stories);
+const { Default, HarIkkeTilgang, LasteIkonFørValgtAvdelingErSatt, SkalFiltrereBortAvdelingerSomKreverKode6 } =
+  composeStories(stories);
 
 describe('<AvdelingslederIndex>', () => {
   it.skip('skal vise lasteikon før valgt avdeling er satt', async () => {

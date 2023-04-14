@@ -1,7 +1,5 @@
 import React, { FunctionComponent, ReactNode } from 'react';
-import {
-  FormattedMessage, useIntl, IntlShape,
-} from 'react-intl';
+import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 
 import { HistorikkinnslagDel, HistorikkinnslagEndretFelt } from '@navikt/fp-types';
 
@@ -14,26 +12,37 @@ import Skjermlenke from './felles/Skjermlenke';
 import BubbleText from './felles/bubbleText';
 import HistorikkMal from '../HistorikkMalTsType';
 
-const historikkFromToValues = (endretFelt: HistorikkinnslagEndretFelt, fieldName: string, intl: IntlShape): ReactNode => {
+const historikkFromToValues = (
+  endretFelt: HistorikkinnslagEndretFelt,
+  fieldName: string,
+  intl: IntlShape,
+): ReactNode => {
   const fromValue = findEndretFeltVerdi(endretFelt, endretFelt.fraVerdi, intl);
   const toValue = findEndretFeltVerdi(endretFelt, endretFelt.tilVerdi, intl);
   let messageId = fromValue ? 'Historikk.Template.10.ChangedFromTo' : 'Historikk.Template.10.FieldSetTo';
-  if ((endretFelt.endretFeltNavn === historikkEndretFeltTypeCodes.UTTAK_PROSENT_UTBETALING.kode) && fromValue) {
+  if (endretFelt.endretFeltNavn === historikkEndretFeltTypeCodes.UTTAK_PROSENT_UTBETALING.kode && fromValue) {
     messageId = 'Historikk.Template.10.ChangedFromToProsentUtbetaling';
   } else if (endretFelt.endretFeltNavn === historikkEndretFeltTypeCodes.UTTAK_PROSENT_UTBETALING.kode) {
     messageId = 'Historikk.Template.10.ChangedFromToProsentUtbetalingFromNothing';
-  } else if ((endretFelt.endretFeltNavn === historikkEndretFeltTypeCodes.UTTAK_PERIODE_RESULTAT_TYPE.kode)
-    && endretFelt.fraVerdi === 'MANUELL_BEHANDLING') {
+  } else if (
+    endretFelt.endretFeltNavn === historikkEndretFeltTypeCodes.UTTAK_PERIODE_RESULTAT_TYPE.kode &&
+    endretFelt.fraVerdi === 'MANUELL_BEHANDLING'
+  ) {
     messageId = 'Historikk.Template.10.FieldSetTo';
-  } else if (endretFelt.endretFeltNavn === historikkEndretFeltTypeCodes.UTTAK_PERIODE_RESULTAT_ÅRSAK.kode
-    || endretFelt.endretFeltNavn === historikkEndretFeltTypeCodes.UTTAK_GRADERING_AVSLAG_ÅRSAK.kode) {
+  } else if (
+    endretFelt.endretFeltNavn === historikkEndretFeltTypeCodes.UTTAK_PERIODE_RESULTAT_ÅRSAK.kode ||
+    endretFelt.endretFeltNavn === historikkEndretFeltTypeCodes.UTTAK_GRADERING_AVSLAG_ÅRSAK.kode
+  ) {
     if (endretFelt.tilVerdi === '-') {
       return '';
     }
     if (endretFelt.fraVerdi === '-') {
       messageId = 'Historikk.Template.10.FieldSetTo';
     }
-  } else if (endretFelt.endretFeltNavn === historikkEndretFeltTypeCodes.UTTAK_STØNADSKONTOTYPE.kode && endretFelt.fraVerdi === '-') {
+  } else if (
+    endretFelt.endretFeltNavn === historikkEndretFeltTypeCodes.UTTAK_STØNADSKONTOTYPE.kode &&
+    endretFelt.fraVerdi === '-'
+  ) {
     messageId = 'Historikk.Template.10.FieldSetTo';
   }
   return (
@@ -52,12 +61,16 @@ const historikkFromToValues = (endretFelt: HistorikkinnslagEndretFelt, fieldName
 
 const formatChangedField = (endretFelt: HistorikkinnslagEndretFelt, intl: IntlShape): ReactNode => {
   const fieldName = findEndretFeltNavn(endretFelt, intl);
-  if (endretFelt.endretFeltNavn === historikkEndretFeltTypeCodes.UTTAK_TREKKDAGER.kode
-    && typeof (endretFelt.fraVerdi) === 'number' && typeof (endretFelt.tilVerdi) === 'number') {
+  if (
+    endretFelt.endretFeltNavn === historikkEndretFeltTypeCodes.UTTAK_TREKKDAGER.kode &&
+    typeof endretFelt.fraVerdi === 'number' &&
+    typeof endretFelt.tilVerdi === 'number'
+  ) {
     const fromValueWeeks = Math.floor(endretFelt.fraVerdi / 5);
-    const fromValueDays = (endretFelt.fraVerdi % 1 === 0) ? endretFelt.fraVerdi % 5 : (endretFelt.fraVerdi % 5).toFixed(1);
+    const fromValueDays =
+      endretFelt.fraVerdi % 1 === 0 ? endretFelt.fraVerdi % 5 : (endretFelt.fraVerdi % 5).toFixed(1);
     const toValueWeeks = Math.floor(endretFelt.tilVerdi / 5);
-    const toValueDays = (endretFelt.tilVerdi % 1 === 0) ? endretFelt.tilVerdi % 5 : (endretFelt.tilVerdi % 5).toFixed(1);
+    const toValueDays = endretFelt.tilVerdi % 1 === 0 ? endretFelt.tilVerdi % 5 : (endretFelt.tilVerdi % 5).toFixed(1);
 
     return (
       <FormattedMessage
@@ -77,25 +90,25 @@ const formatChangedField = (endretFelt: HistorikkinnslagEndretFelt, intl: IntlSh
 };
 
 const finnFomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']): string => {
-  const [found] = opplysninger.filter((o) => o.opplysningType === historikkOpplysningTypeCodes.UTTAK_PERIODE_FOM.kode);
+  const [found] = opplysninger.filter(o => o.opplysningType === historikkOpplysningTypeCodes.UTTAK_PERIODE_FOM.kode);
   return found.tilVerdi || '';
 };
 
 const finnTomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']): string => {
-  const [found] = opplysninger.filter((o) => o.opplysningType === historikkOpplysningTypeCodes.UTTAK_PERIODE_TOM.kode);
+  const [found] = opplysninger.filter(o => o.opplysningType === historikkOpplysningTypeCodes.UTTAK_PERIODE_TOM.kode);
   return found.tilVerdi || '';
 };
 
-const sortArray = ((endredeFelter: HistorikkinnslagEndretFelt[]): HistorikkinnslagEndretFelt[] => {
+const sortArray = (endredeFelter: HistorikkinnslagEndretFelt[]): HistorikkinnslagEndretFelt[] => {
   if (endredeFelter.length > 1) {
-    const resultatFelt = endredeFelter.filter((e) => e.endretFeltNavn === 'UTTAK_PERIODE_RESULTAT_TYPE');
+    const resultatFelt = endredeFelter.filter(e => e.endretFeltNavn === 'UTTAK_PERIODE_RESULTAT_TYPE');
     if (resultatFelt.length > 0) {
-      const andreFelt = endredeFelter.filter((e) => e.endretFeltNavn !== 'UTTAK_PERIODE_RESULTAT_TYPE');
+      const andreFelt = endredeFelter.filter(e => e.endretFeltNavn !== 'UTTAK_PERIODE_RESULTAT_TYPE');
       return andreFelt.concat(resultatFelt);
     }
   }
   return endredeFelter;
-});
+};
 
 /**
  * Mal for Historikk
@@ -113,9 +126,10 @@ const HistorikkMalType10: FunctionComponent<HistorikkMal> = ({
   return (
     <>
       {historikkinnslagDeler.map((historikkinnslagDel, historikkinnslagDelIndex) => (
-        <div key={
-          `historikkinnslagDel${historikkinnslagDelIndex}` // eslint-disable-line react/no-array-index-key
-        }
+        <div
+          key={
+            `historikkinnslagDel${historikkinnslagDelIndex}` // eslint-disable-line react/no-array-index-key
+          }
         >
           <Skjermlenke
             skjermlenke={historikkinnslagDel.skjermlenke}
@@ -147,21 +161,22 @@ const HistorikkMalType10: FunctionComponent<HistorikkMal> = ({
             />
           )}
 
-          {historikkinnslagDel.endredeFelter && sortArray(historikkinnslagDel.endredeFelter)
-            .map((endretFelt, i) => <div key={`endredeFelter${i + 1}`}>{formatChangedField(endretFelt, intl)}</div>)}
+          {historikkinnslagDel.endredeFelter &&
+            sortArray(historikkinnslagDel.endredeFelter).map((endretFelt, i) => (
+              <div key={`endredeFelter${i + 1}`}>{formatChangedField(endretFelt, intl)}</div>
+            ))}
 
-          {historikkinnslagDel.begrunnelseFritekst && (
-            <BubbleText bodyText={historikkinnslagDel.begrunnelseFritekst} />
-          )}
+          {historikkinnslagDel.begrunnelseFritekst && <BubbleText bodyText={historikkinnslagDel.begrunnelseFritekst} />}
 
           <div>
-            {dokumentLinks && dokumentLinks.map((dokumentLenke) => (
-              <HistorikkDokumentLenke
-                key={`${dokumentLenke.tag}@${dokumentLenke.url}`}
-                dokumentLenke={dokumentLenke}
-                saksnummer={saksnummer}
-              />
-            ))}
+            {dokumentLinks &&
+              dokumentLinks.map(dokumentLenke => (
+                <HistorikkDokumentLenke
+                  key={`${dokumentLenke.tag}@${dokumentLenke.url}`}
+                  dokumentLenke={dokumentLenke}
+                  saksnummer={saksnummer}
+                />
+              ))}
           </div>
         </div>
       ))}

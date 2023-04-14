@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  render, screen, waitFor,
-} from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './UttakDokumentasjonFaktaIndex.stories';
@@ -56,31 +54,36 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       kode: '5074',
       begrunnelse: 'Dette er en begrunnelse',
-      vurderingBehov: [{
-        fom: '2022-11-01',
-        tom: '2022-11-07',
-        type: 'UTSETTELSE',
-        vurdering: 'GODKJENT',
-        årsak: 'INNLEGGELSE_SØKER',
-      }, {
-        fom: '2022-11-08',
-        tom: '2022-11-13',
-        type: 'OVERFØRING',
-        vurdering: 'IKKE_GODKJENT',
-        årsak: 'SYKDOM_ANNEN_FORELDER',
-      }, {
-        fom: '2022-11-15',
-        tom: '2022-11-20',
-        type: 'UTTAK',
-        vurdering: 'GODKJENT',
-        årsak: 'TIDLIG_OPPSTART_FAR',
-      }, {
-        fom: '2022-12-08',
-        tom: '2022-12-13',
-        type: 'UTTAK',
-        vurdering: 'IKKE_DOKUMENTERT',
-        årsak: 'AKTIVITETSKRAV_ARBEID',
-      }],
+      vurderingBehov: [
+        {
+          fom: '2022-11-01',
+          tom: '2022-11-07',
+          type: 'UTSETTELSE',
+          vurdering: 'GODKJENT',
+          årsak: 'INNLEGGELSE_SØKER',
+        },
+        {
+          fom: '2022-11-08',
+          tom: '2022-11-13',
+          type: 'OVERFØRING',
+          vurdering: 'IKKE_GODKJENT',
+          årsak: 'SYKDOM_ANNEN_FORELDER',
+        },
+        {
+          fom: '2022-11-15',
+          tom: '2022-11-20',
+          type: 'UTTAK',
+          vurdering: 'GODKJENT',
+          årsak: 'TIDLIG_OPPSTART_FAR',
+        },
+        {
+          fom: '2022-12-08',
+          tom: '2022-12-13',
+          type: 'UTTAK',
+          vurdering: 'IKKE_DOKUMENTERT',
+          årsak: 'AKTIVITETSKRAV_ARBEID',
+        },
+      ],
     });
   });
 
@@ -116,13 +119,15 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
       kode: '5074',
-      vurderingBehov: [{
-        fom: '2022-12-08',
-        tom: '2022-12-13',
-        type: 'UTTAK',
-        vurdering: 'IKKE_GODKJENT',
-        årsak: 'HV_ØVELSE',
-      }],
+      vurderingBehov: [
+        {
+          fom: '2022-12-08',
+          tom: '2022-12-13',
+          type: 'UTTAK',
+          vurdering: 'IKKE_GODKJENT',
+          årsak: 'HV_ØVELSE',
+        },
+      ],
     });
   });
 

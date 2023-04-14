@@ -16,6 +16,7 @@ type KlageFormkravBasic = {
   vedtakBehandlingUuid?: string;
 };
 
-type KlageFormkravAp = KlageFormkravBasic & AksjonspunktTilBekreftelse<AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_NFP>;
+type KlageFormkravAp = KlageFormkravBasic &
+  AksjonspunktTilBekreftelse<AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_NFP>;
 
 export default KlageFormkravAp;

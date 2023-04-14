@@ -37,6 +37,6 @@ type DokumentasjonVurderingBehov = Readonly<{
   type: UttakType;
   årsak: UttakÅrsak;
   vurdering?: UttakVurdering;
-}>
+}>;
 
 export default DokumentasjonVurderingBehov;

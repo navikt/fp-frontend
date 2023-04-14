@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
@@ -18,21 +16,17 @@ const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_SOKNADSFRIST_FORELDREPENGER]
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.SOKNAD];
 type EndepunktPanelData = {
   soknad: Soknad;
-}
+};
 
-const SoknadsfristProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps> = (props) => (
+const SoknadsfristProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps> = props => (
   <ProsessDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     prosessPanelKode={ProsessStegCode.SOEKNADSFRIST}
     prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Soknadsfristvilkaret' })}
-    skalPanelVisesIMeny={(data) => skalViseProsessPanel(data.aksjonspunkter)}
-    renderPanel={(data) => (
-      <VurderSoknadsfristForeldrepengerIndex
-        {...data}
-      />
-    )}
+    skalPanelVisesIMeny={data => skalViseProsessPanel(data.aksjonspunkter)}
+    renderPanel={data => <VurderSoknadsfristForeldrepengerIndex {...data} />}
   />
 );
 

@@ -13,18 +13,10 @@ const mapAktivitetTextEndring = (aktivitetType?: string, arbeidsgiverNavn?: stri
   }
   if (orgnr) {
     return (
-      <FormattedMessage
-        id="ToTrinnsForm.Opptjening.EndringArbeidUtenNavn"
-        values={{ a: aktivitetType, b: orgnr }}
-      />
+      <FormattedMessage id="ToTrinnsForm.Opptjening.EndringArbeidUtenNavn" values={{ a: aktivitetType, b: orgnr }} />
     );
   }
-  return (
-    <FormattedMessage
-      id="ToTrinnsForm.Opptjening.EndringAktivitet"
-      values={{ a: aktivitetType }}
-    />
-  );
+  return <FormattedMessage id="ToTrinnsForm.Opptjening.EndringAktivitet" values={{ a: aktivitetType }} />;
 };
 
 const mapAktivitetTextUnderkjenning = (aktivitetType?: string, arbeidsgiverNavn?: string, orgnr?: string) => {
@@ -33,7 +25,10 @@ const mapAktivitetTextUnderkjenning = (aktivitetType?: string, arbeidsgiverNavn?
       <FormattedMessage
         id="ToTrinnsForm.Opptjening.UnderkjenningArbeidMedNavn"
         values={{
-          a: aktivitetType, bb: arbeidsgiverNavn, c: orgnr, b: (chunks: any) => <b>{chunks}</b>,
+          a: aktivitetType,
+          bb: arbeidsgiverNavn,
+          c: orgnr,
+          b: (chunks: any) => <b>{chunks}</b>,
         }}
       />
     );
@@ -71,12 +66,7 @@ const mapAktivitetTextGodkjenning = (aktivitetType?: string, arbeidsgiverNavn?: 
       />
     );
   }
-  return (
-    <FormattedMessage
-      id="ToTrinnsForm.Opptjening.GodkjenningAktivitet"
-      values={{ a: aktivitetType }}
-    />
-  );
+  return <FormattedMessage id="ToTrinnsForm.Opptjening.GodkjenningAktivitet" values={{ a: aktivitetType }} />;
 };
 
 interface OwnProps {
@@ -88,19 +78,26 @@ interface OwnProps {
  *
 
  */
-export const OpptjeningTotrinnText: FunctionComponent<OwnProps> = ({
-  aktivitet,
-}) => {
+export const OpptjeningTotrinnText: FunctionComponent<OwnProps> = ({ aktivitet }) => {
   if (aktivitet.erEndring) {
-    return mapAktivitetTextEndring(aktivitet.aktivitetType
-      ? aktivitet.aktivitetType.toLowerCase() : undefined, aktivitet.arbeidsgiverNavn, aktivitet.orgnr);
+    return mapAktivitetTextEndring(
+      aktivitet.aktivitetType ? aktivitet.aktivitetType.toLowerCase() : undefined,
+      aktivitet.arbeidsgiverNavn,
+      aktivitet.orgnr,
+    );
   }
   if (aktivitet.godkjent) {
-    return mapAktivitetTextGodkjenning(aktivitet.aktivitetType
-      ? aktivitet.aktivitetType.toLowerCase() : undefined, aktivitet.arbeidsgiverNavn, aktivitet.orgnr);
+    return mapAktivitetTextGodkjenning(
+      aktivitet.aktivitetType ? aktivitet.aktivitetType.toLowerCase() : undefined,
+      aktivitet.arbeidsgiverNavn,
+      aktivitet.orgnr,
+    );
   }
-  return mapAktivitetTextUnderkjenning(aktivitet.aktivitetType
-    ? aktivitet.aktivitetType.toLowerCase() : undefined, aktivitet.arbeidsgiverNavn, aktivitet.orgnr);
+  return mapAktivitetTextUnderkjenning(
+    aktivitet.aktivitetType ? aktivitet.aktivitetType.toLowerCase() : undefined,
+    aktivitet.arbeidsgiverNavn,
+    aktivitet.orgnr,
+  );
 };
 
 export default OpptjeningTotrinnText;

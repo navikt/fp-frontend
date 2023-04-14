@@ -10,8 +10,8 @@ interface Props {
   data: {
     key: string;
     global?: boolean;
-    data: any,
-    noRelLink?: boolean,
+    data: any;
+    noRelLink?: boolean;
   }[];
   requestApi: RequestApi;
   errors?: {
@@ -21,16 +21,10 @@ interface Props {
   setApiMock?: (mockAdapter: MockAdapter) => void;
 }
 
-const RestApiMock: FunctionComponent<Props> = ({
-  children,
-  data,
-  requestApi,
-  errors,
-  setApiMock,
-}) => (
+const RestApiMock: FunctionComponent<Props> = ({ children, data, requestApi, errors, setApiMock }) => (
   <RestApiProvider>
     <RestApiErrorProvider initialState={errors ? { errors } : undefined}>
-      <RestApiGlobalStateMock data={data.filter((d) => d.global)}>
+      <RestApiGlobalStateMock data={data.filter(d => d.global)}>
         <AxiosMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
           {children}
         </AxiosMock>

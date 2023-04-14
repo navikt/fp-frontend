@@ -26,27 +26,31 @@ interface OwnProps {
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder engangsstønad og søker er far.
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
-const RettigheterPanel: FunctionComponent<OwnProps> = ({
-  readOnly = true,
-  soknadData,
-}) => {
+const RettigheterPanel: FunctionComponent<OwnProps> = ({ readOnly = true, soknadData }) => {
   const intl = useIntl();
 
-  const options = [{
-    label: intl.formatMessage({ id: 'Registrering.Rettigheter.AnnenForelderDoed' }),
-    value: rettighet.ANNEN_FORELDER_DOED,
-  }, {
-    label: intl.formatMessage({ id: 'Registrering.Rettigheter.OvertaForeldreansvaretAlene' }),
-    value: rettighet.OVERTA_FORELDREANSVARET_ALENE,
-  }, {
-    label: intl.formatMessage({ id: 'Registrering.Rettigheter.MannAdoptererAlene' }),
-    value: rettighet.MANN_ADOPTERER_ALENE,
-  }, {
-    label: intl.formatMessage({ id: 'Registrering.Rettigheter.IkkeRelevant' }),
-    value: rettighet.IKKE_RELEVANT,
-  }];
+  const options = [
+    {
+      label: intl.formatMessage({ id: 'Registrering.Rettigheter.AnnenForelderDoed' }),
+      value: rettighet.ANNEN_FORELDER_DOED,
+    },
+    {
+      label: intl.formatMessage({ id: 'Registrering.Rettigheter.OvertaForeldreansvaretAlene' }),
+      value: rettighet.OVERTA_FORELDREANSVARET_ALENE,
+    },
+    {
+      label: intl.formatMessage({ id: 'Registrering.Rettigheter.MannAdoptererAlene' }),
+      value: rettighet.MANN_ADOPTERER_ALENE,
+    },
+    {
+      label: intl.formatMessage({ id: 'Registrering.Rettigheter.IkkeRelevant' }),
+      value: rettighet.IKKE_RELEVANT,
+    },
+  ];
 
-  const visMannAdoptererAlene = soknadData.getFamilieHendelseType() !== familieHendelseType.FODSEL && soknadData.getForeldreType() === foreldreType.FAR;
+  const visMannAdoptererAlene =
+    soknadData.getFamilieHendelseType() !== familieHendelseType.FODSEL &&
+    soknadData.getForeldreType() === foreldreType.FAR;
   if (!visMannAdoptererAlene) {
     options.splice(2, 1);
   }
@@ -55,11 +59,7 @@ const RettigheterPanel: FunctionComponent<OwnProps> = ({
     <BorderBox>
       <Heading size="small">{intl.formatMessage({ id: 'Registrering.Rettigheter.Title' })}</Heading>
       <VerticalSpacer sixteenPx />
-      <RadioGroupPanel
-        name="rettigheter"
-        isReadOnly={readOnly}
-        radios={options}
-      />
+      <RadioGroupPanel name="rettigheter" isReadOnly={readOnly} radios={options} />
     </BorderBox>
   );
 };
