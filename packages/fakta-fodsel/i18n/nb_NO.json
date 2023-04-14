@@ -1,5 +1,4 @@
 {
-  "FodselInfoPanel.VurderVilkarForSykdom": "Vurder om vilkår for sykdom er oppfylt",
   "FodselInfoPanel.KontrollerMotTerminbekreftelsen": "Kontroller terminbekreftelse",
   "FodselInfoPanel.KontrollerMotFodselsdokumentasjon": "Kontroller mot opplysningene fra fødselsdokumentasjonen",
 
@@ -13,11 +12,6 @@
   "TermindatoFaktaForm.FodselsdatoTps": "Fødselsdato",
   "TermindatoFaktaForm.AntallBarnTps": "Antall barn",
   "TermindatoFaktaForm.AdvarselForTidligUtstedtdato": "Terminbekreftelsen utstedt før 22. svangerskapsuke. Kontakt søker for en nyere terminbekreftelse og sett saken på vent. Fortsett dersom ny bekreftelse ikke skal hentes inn. Behandlingen vil avslås på grunn av manglende dokumentasjon",
-
-  "SykdomPanel.ApplicationInformation": "Sykdom",
-  "SykdomPanel.Begrunnelse": "Vurdering",
-  "SykdomPanel.AnnenForelderForSyk": "Det er dokumentert at den andre forelderen er for syk til å ta seg av barnet",
-  "SykdomPanel.AnnenForelderIkkeForSyk": "Det er <b>ikke</b> dokumentert at den andre forelderen er for syk til å ta seg av barnet",
 
   "AvklartBarnFieldArray.Title": "Fødselsdato",
   "AvklartBarnFieldArray.Dodsdato": "Dødsdato",

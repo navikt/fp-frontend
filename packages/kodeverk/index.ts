@@ -1,5 +1,5 @@
 export {
-  default as AksjonspunktCode, hasAksjonspunkt, isUttakAksjonspunkt, isVilkarForSykdomOppfylt,
+  default as AksjonspunktCode, hasAksjonspunkt, isUttakAksjonspunkt,
 } from './src/aksjonspunktCodes';
 export type { OverstyringAksjonspunkter } from './src/aksjonspunktCodes';
 export { default as AksjonspunktCodeTilbakekreving } from './src/aksjonspunktCodesTilbakekreving';

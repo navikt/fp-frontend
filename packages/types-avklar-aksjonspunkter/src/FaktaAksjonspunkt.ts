@@ -21,7 +21,6 @@ import BekreftTerminbekreftelseAp from './fakta/BekreftTerminbekreftelseAp';
 import SjekkManglendeFodselAp from './fakta/SjekkManglendeFodselAp';
 import BekreftUttaksperioderAp from './fakta/BekreftUttaksperioderAp';
 import AvklarAnnenforelderHarRettAp from './fakta/AvklarAnnenforelderHarRettAp';
-import VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp from './fakta/VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp';
 import BekreftOppholdsrettVurderingAp from './fakta/BekreftOppholdsrettVurderingAp';
 import OverstyringAvklarStartdatoForPeriodenAp from './fakta/OverstyringAvklarStartdatoForPeriodenAp';
 import KontrollerBesteberegningAP from './fakta/KontrollerBesteberegningAP';
@@ -47,7 +46,6 @@ export type FaktaAksjonspunkt = AvklarVergeAp
   | SjekkManglendeFodselAp
   | AvklarAnnenforelderHarRettAp
   | BekreftUttaksperioderAp
-  | VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp
   | OverstyringAvklarStartdatoForPeriodenAp
   | AvklarFaktaForForeldreansvarAksjonspunktAp
   | KontrollerBesteberegningAP

@@ -11,22 +11,18 @@ import {
   Aksjonspunkt, FamilieHendelseSamling, FamilieHendelse, Soknad,
 } from '@navikt/fp-types';
 import {
-  BekreftTerminbekreftelseAp, SjekkManglendeFodselAp, VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp,
+  BekreftTerminbekreftelseAp, SjekkManglendeFodselAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import TermindatoFaktaForm, { FormValues as TermindatoFormValues } from './TermindatoFaktaForm';
 import SjekkFodselDokForm, { FormValues as SjekkFodselDokFormValues } from './SjekkFodselDokForm';
-import SykdomPanel, { FormValues as SykdomFormValues } from './SykdomPanel';
 
 const {
-  TERMINBEKREFTELSE, SJEKK_MANGLENDE_FODSEL, VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
+  TERMINBEKREFTELSE, SJEKK_MANGLENDE_FODSEL,
 } = AksjonspunktCode;
 
 const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   const helpTexts: ReactElement[] = [];
-  if (hasAksjonspunkt(VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT, aksjonspunkter)) {
-    helpTexts.push(<FormattedMessage key="VurderVilkarForSykdom" id="FodselInfoPanel.VurderVilkarForSykdom" />);
-  }
   if (hasAksjonspunkt(TERMINBEKREFTELSE, aksjonspunkter)) {
     helpTexts.push(<FormattedMessage key="KontrollerMotTerminbekreftelsen" id="FodselInfoPanel.KontrollerMotTerminbekreftelsen" />);
   }
@@ -36,33 +32,27 @@ const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   return helpTexts;
 };
 
-type FormValues = SykdomFormValues & TermindatoFormValues & SjekkFodselDokFormValues;
+type FormValues = TermindatoFormValues & SjekkFodselDokFormValues;
 
 const buildInitialValues = (
-  sykdomAp: Aksjonspunkt,
   terminbekreftelseAp: Aksjonspunkt,
   manglendeFødselAp: Aksjonspunkt,
   soknad: Soknad,
   familieHendelse: FamilieHendelseSamling,
 ) => ({
-  ...sykdomAp ? SykdomPanel.buildInitialValues(sykdomAp, familieHendelse.gjeldende.morForSykVedFodsel) : {},
   ...terminbekreftelseAp ? TermindatoFaktaForm.buildInitialValues(soknad, familieHendelse.gjeldende, terminbekreftelseAp) : {},
   ...manglendeFødselAp ? SjekkFodselDokForm.buildInitialValues(soknad, familieHendelse.gjeldende, manglendeFødselAp) : {},
 });
 
-type AksjonspunktData = Array<BekreftTerminbekreftelseAp | VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp | SjekkManglendeFodselAp>;
+type AksjonspunktData = Array<BekreftTerminbekreftelseAp | SjekkManglendeFodselAp>;
 
 const transformValues = (
   values: FormValues,
-  sykdomAp: Aksjonspunkt,
   terminbekreftelseAp: Aksjonspunkt,
   manglendeFødselAp: Aksjonspunkt,
   familieHendelse: FamilieHendelseSamling,
 ): AksjonspunktData => {
   const aksjonspunkterSomSkalBekreftes = [];
-  if (sykdomAp) {
-    aksjonspunkterSomSkalBekreftes.push(SykdomPanel.transformValues(values));
-  }
   if (terminbekreftelseAp) {
     aksjonspunkterSomSkalBekreftes.push(TermindatoFaktaForm.transformValues(values));
   }
@@ -114,12 +104,11 @@ const FodselInfoPanel: FunctionComponent<OwnProps> = ({
   const termindato = familiehendelse?.gjeldende?.termindato;
   const vedtaksDatoSomSvangerskapsuke = familiehendelse?.gjeldende?.vedtaksDatoSomSvangerskapsuke;
 
-  const sykdomAp = aksjonspunkter.find((ap) => ap.definisjon === VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT);
   const terminbekreftelseAp = aksjonspunkter.find((ap) => ap.definisjon === TERMINBEKREFTELSE);
   const manglendeFødselAp = aksjonspunkter.find((ap) => ap.definisjon === SJEKK_MANGLENDE_FODSEL);
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(sykdomAp, terminbekreftelseAp, manglendeFødselAp, soknad, familiehendelse),
+    defaultValues: formData || buildInitialValues(terminbekreftelseAp, manglendeFødselAp, soknad, familiehendelse),
   });
 
   return (
@@ -128,17 +117,9 @@ const FodselInfoPanel: FunctionComponent<OwnProps> = ({
       <VerticalSpacer sixteenPx />
       <Form
         formMethods={formMethods}
-        onSubmit={(values) => submitCallback(transformValues(values, sykdomAp, terminbekreftelseAp, manglendeFødselAp, familiehendelse))}
+        onSubmit={(values) => submitCallback(transformValues(values, terminbekreftelseAp, manglendeFødselAp, familiehendelse))}
         setDataOnUnmount={setFormData}
       >
-        {sykdomAp && (
-          <SykdomPanel
-            readOnly={readOnly}
-            aksjonspunkt={sykdomAp}
-            morForSykVedFodsel={familiehendelse.gjeldende.morForSykVedFodsel}
-            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-          />
-        )}
         {hasAksjonspunkt(TERMINBEKREFTELSE, aksjonspunkter) && (
           <TermindatoFaktaForm
             aksjonspunkt={aksjonspunkter.find((ap: any) => ap.definisjon === TERMINBEKREFTELSE)}
