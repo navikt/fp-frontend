@@ -16,7 +16,6 @@ import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 const AKSJONSPUNKT_KODER = [
   AksjonspunktCode.TERMINBEKREFTELSE,
   AksjonspunktCode.SJEKK_MANGLENDE_FODSEL,
-  AksjonspunktCode.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [

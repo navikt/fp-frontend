@@ -146,18 +146,6 @@ ReadonlyPanel.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
-export const AksjonspunktVurderOmVilkårForSykdomErOppfylt = Template.bind({});
-AksjonspunktVurderOmVilkårForSykdomErOppfylt.args = {
-  aksjonspunkter: defaultAksjonspunkter.map((a) => ({
-    ...a,
-    definisjon: AksjonspunktCode.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
-  })),
-  alleMerknaderFraBeslutter: {
-    [AksjonspunktCode.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT]: merknaderFraBeslutter,
-  },
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
-
 export const PanelForFødselssammenligningNårDetIkkeFinnesAksjonspunkter = Template.bind({});
 PanelForFødselssammenligningNårDetIkkeFinnesAksjonspunkter.args = {
   aksjonspunkter: [],

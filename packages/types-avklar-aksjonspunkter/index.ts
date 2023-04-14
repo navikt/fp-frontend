@@ -18,9 +18,6 @@ export type { default as AvklarAnnenforelderHarRettAp } from './src/fakta/Avklar
 export type { default as BekreftUttaksperioderAp } from './src/fakta/BekreftUttaksperioderAp';
 export type { default as VurderArbeidsforholdPermisjonAp } from './src/fakta/VurderArbeidsforholdPermisjonAp';
 export type { default as OverstyringAvklarStartdatoForPeriodenAp } from './src/fakta/OverstyringAvklarStartdatoForPeriodenAp';
-export type {
-  default as VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp,
-} from './src/fakta/VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp';
 export type { default as AvklarFaktaForForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForForeldreansvarAksjonspunktAp';
 export type { default as AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp';
 export type { default as AvklarAktivitetsPerioderAp, OpptjeningAktivitetAp } from './src/fakta/AvklarAktivitetsPerioderAp';
