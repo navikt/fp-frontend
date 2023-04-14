@@ -22,15 +22,10 @@ export default {
 };
 
 const Template: Story<{
-  saksbehandlere?: Saksbehandler[],
-  hentAvdelingensSaksbehandlere: (params: {avdelingEnhet: string}) => void
-}> = ({
-  saksbehandlere,
-  hentAvdelingensSaksbehandlere,
-}) => {
-  const data = [
-    { key: RestApiPathsKeys.SLETT_SAKSBEHANDLER.name, data: undefined },
-  ];
+  saksbehandlere?: Saksbehandler[];
+  hentAvdelingensSaksbehandlere: (params: { avdelingEnhet: string }) => void;
+}> = ({ saksbehandlere, hentAvdelingensSaksbehandlere }) => {
+  const data = [{ key: RestApiPathsKeys.SLETT_SAKSBEHANDLER.name, data: undefined }];
 
   return (
     <RestApiMock data={data} requestApi={requestApi}>
@@ -45,15 +40,18 @@ const Template: Story<{
 
 export const Default = Template.bind({});
 Default.args = {
-  saksbehandlere: [{
-    brukerIdent: 'R12122',
-    navn: 'Espen Utvikler',
-    avdelingsnavn: ['NAV Viken'],
-  }, {
-    brukerIdent: 'S53343',
-    navn: 'Steffen',
-    avdelingsnavn: ['NAV Oslo'],
-  }],
+  saksbehandlere: [
+    {
+      brukerIdent: 'R12122',
+      navn: 'Espen Utvikler',
+      avdelingsnavn: ['NAV Viken'],
+    },
+    {
+      brukerIdent: 'S53343',
+      navn: 'Steffen',
+      avdelingsnavn: ['NAV Oslo'],
+    },
+  ],
   hentAvdelingensSaksbehandlere: () => undefined,
 };
 

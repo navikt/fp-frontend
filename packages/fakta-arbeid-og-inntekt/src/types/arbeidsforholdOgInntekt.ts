@@ -5,7 +5,7 @@ export type Avklaring = {
   fom?: string;
   tom?: string;
   stillingsprosent?: number;
-}
+};
 
 type ArbeidsforholdOgInntektRadData = {
   arbeidsgiverIdent: string;
@@ -13,6 +13,6 @@ type ArbeidsforholdOgInntektRadData = {
   arbeidsgiverFødselsdato?: string;
   årsak?: string;
   avklaring?: Avklaring;
-}
+};
 
 export default ArbeidsforholdOgInntektRadData;

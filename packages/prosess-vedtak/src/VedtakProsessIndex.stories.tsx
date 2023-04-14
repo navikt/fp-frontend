@@ -3,7 +3,13 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 
 import {
-  Behandling, BeregningsresultatEs, Beregningsgrunnlag, BeregningsresultatFp, Medlemskap, Vilkar, Aksjonspunkt,
+  Behandling,
+  BeregningsresultatEs,
+  Beregningsgrunnlag,
+  BeregningsresultatFp,
+  Medlemskap,
+  Vilkar,
+  Aksjonspunkt,
 } from '@navikt/fp-types';
 import {
   behandlingArsakType,
@@ -32,22 +38,28 @@ const defaultBehandling = {
   },
   behandlingPaaVent: false,
   behandlingHenlagt: false,
-  behandlingÅrsaker: [{
-    behandlingArsakType: behandlingArsakType.ANNET,
-  }],
+  behandlingÅrsaker: [
+    {
+      behandlingArsakType: behandlingArsakType.ANNET,
+    },
+  ],
 } as Behandling;
 
-const defaultVilkar = [{
-  lovReferanse: '§§Dette er en lovreferanse',
-  vilkarType: VilkarType.FODSELSVILKARET_MOR,
-  vilkarStatus: vilkarUtfallType.OPPFYLT,
-  overstyrbar: true,
-}] as Vilkar[];
+const defaultVilkar = [
+  {
+    lovReferanse: '§§Dette er en lovreferanse',
+    vilkarType: VilkarType.FODSELSVILKARET_MOR,
+    vilkarStatus: vilkarUtfallType.OPPFYLT,
+    overstyrbar: true,
+  },
+] as Vilkar[];
 
-const defaultAksjonspunkter = [{
-  definisjon: AksjonspunktCode.FORESLA_VEDTAK,
-  kanLoses: true,
-}] as Aksjonspunkt[];
+const defaultAksjonspunkter = [
+  {
+    definisjon: AksjonspunktCode.FORESLA_VEDTAK,
+    kanLoses: true,
+  },
+] as Aksjonspunkt[];
 
 const defaultBeregningresultatForeldrepenger = {
   antallBarn: 1,
@@ -74,7 +86,7 @@ const Template: Story<{
     'beregningsresultat-foreldrepenger'?: BeregningsresultatFp;
   };
   vilkar?: Vilkar[];
-  previewCallback?: (data: any) => Promise<any>,
+  previewCallback?: (data: any) => Promise<any>;
 }> = ({
   behandling,
   beregningresultatForeldrepenger,
@@ -102,7 +114,7 @@ const Template: Story<{
     beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     beregningresultatEngangsstonad={beregningresultatEngangsstonad}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    previewCallback={previewCallback || action('button-click') as any}
+    previewCallback={previewCallback || (action('button-click') as any)}
     ytelseTypeKode={ytelseTypeKode}
     alleKodeverk={alleKodeverk as any}
     beregningsgrunnlag={beregningsgrunnlag}
@@ -189,11 +201,15 @@ InnvilgetForeldrepengerDerBeregningErManueltFastsatt.args = {
   beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   beregningsgrunnlag: {
-    beregningsgrunnlagPeriode: [{
-      beregningsgrunnlagPrStatusOgAndel: [{
-        overstyrtPrAar: 0,
-      }],
-    }],
+    beregningsgrunnlagPeriode: [
+      {
+        beregningsgrunnlagPrStatusOgAndel: [
+          {
+            overstyrtPrAar: 0,
+          },
+        ],
+      },
+    ],
   } as Beregningsgrunnlag,
   isReadOnly: false,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -211,11 +227,15 @@ AvslåttForeldrepengerDerBeregningErManueltFastsatt.args = {
   beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   beregningsgrunnlag: {
-    beregningsgrunnlagPeriode: [{
-      beregningsgrunnlagPrStatusOgAndel: [{
-        overstyrtPrAar: 0,
-      }],
-    }],
+    beregningsgrunnlagPeriode: [
+      {
+        beregningsgrunnlagPrStatusOgAndel: [
+          {
+            overstyrtPrAar: 0,
+          },
+        ],
+      },
+    ],
   } as Beregningsgrunnlag,
   isReadOnly: false,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -227,30 +247,39 @@ TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil.args = {
   beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   beregningsgrunnlag: {
-    beregningsgrunnlagPeriode: [{
-      beregningsgrunnlagPrStatusOgAndel: [{
-        overstyrtPrAar: 0,
-      }],
-    }],
+    beregningsgrunnlagPeriode: [
+      {
+        beregningsgrunnlagPrStatusOgAndel: [
+          {
+            overstyrtPrAar: 0,
+          },
+        ],
+      },
+    ],
   } as Beregningsgrunnlag,
-  aksjonspunkter: [...defaultAksjonspunkter, {
-    definisjon: AksjonspunktCode.VURDERE_ANNEN_YTELSE,
-    status: aksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-    kanLoses: false,
-    toTrinnsBehandling: true,
-  }, {
-    definisjon: AksjonspunktCode.VURDERE_DOKUMENT,
-    status: aksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-    kanLoses: false,
-  }, {
-    definisjon: AksjonspunktCode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
-    status: aksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-    kanLoses: false,
-    toTrinnsBehandling: true,
-  }],
+  aksjonspunkter: [
+    ...defaultAksjonspunkter,
+    {
+      definisjon: AksjonspunktCode.VURDERE_ANNEN_YTELSE,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+      kanLoses: false,
+      toTrinnsBehandling: true,
+    },
+    {
+      definisjon: AksjonspunktCode.VURDERE_DOKUMENT,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+      kanLoses: false,
+    },
+    {
+      definisjon: AksjonspunktCode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+      kanLoses: false,
+      toTrinnsBehandling: true,
+    },
+  ],
   isReadOnly: false,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
@@ -307,11 +336,15 @@ InnvilgetEngangsstønadDerBeregningErManueltFastsatt.args = {
   } as BeregningsresultatEs,
   ytelseTypeKode: fagsakYtelseType.ENGANGSSTONAD,
   beregningsgrunnlag: {
-    beregningsgrunnlagPeriode: [{
-      beregningsgrunnlagPrStatusOgAndel: [{
-        overstyrtPrAar: 0,
-      }],
-    }],
+    beregningsgrunnlagPeriode: [
+      {
+        beregningsgrunnlagPrStatusOgAndel: [
+          {
+            overstyrtPrAar: 0,
+          },
+        ],
+      },
+    ],
   } as Beregningsgrunnlag,
   isReadOnly: false,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -358,7 +391,10 @@ InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUtenOverstyring.
     type: behandlingType.REVURDERING,
     behandlingsresultat: {
       type: behandlingResultatType.INNVILGET,
-      konsekvenserForYtelsen: [konsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK, konsekvensForYtelsen.FORELDREPENGER_OPPHORER],
+      konsekvenserForYtelsen: [
+        konsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK,
+        konsekvensForYtelsen.FORELDREPENGER_OPPHORER,
+      ],
     },
   } as Behandling,
   beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
@@ -375,7 +411,10 @@ GodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring.args = {
     status: behandlingStatus.AVSLUTTET,
     behandlingsresultat: {
       type: behandlingResultatType.INNVILGET,
-      konsekvenserForYtelsen: [konsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK, konsekvensForYtelsen.FORELDREPENGER_OPPHORER],
+      konsekvenserForYtelsen: [
+        konsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK,
+        konsekvensForYtelsen.FORELDREPENGER_OPPHORER,
+      ],
     },
   } as Behandling,
   beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
@@ -391,7 +430,10 @@ InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring.a
     type: behandlingType.REVURDERING,
     behandlingsresultat: {
       type: behandlingResultatType.INNVILGET,
-      konsekvenserForYtelsen: [konsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK, konsekvensForYtelsen.FORELDREPENGER_OPPHORER],
+      konsekvenserForYtelsen: [
+        konsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK,
+        konsekvensForYtelsen.FORELDREPENGER_OPPHORER,
+      ],
     },
   } as Behandling,
   beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
@@ -408,7 +450,10 @@ GodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring.args = {
     status: behandlingStatus.AVSLUTTET,
     behandlingsresultat: {
       type: behandlingResultatType.INNVILGET,
-      konsekvenserForYtelsen: [konsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK, konsekvensForYtelsen.FORELDREPENGER_OPPHORER],
+      konsekvenserForYtelsen: [
+        konsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK,
+        konsekvensForYtelsen.FORELDREPENGER_OPPHORER,
+      ],
     },
   } as Behandling,
   beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
@@ -505,11 +550,15 @@ InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt.args = {
   beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   beregningsgrunnlag: {
-    beregningsgrunnlagPeriode: [{
-      beregningsgrunnlagPrStatusOgAndel: [{
-        overstyrtPrAar: 0,
-      }],
-    }],
+    beregningsgrunnlagPeriode: [
+      {
+        beregningsgrunnlagPrStatusOgAndel: [
+          {
+            overstyrtPrAar: 0,
+          },
+        ],
+      },
+    ],
   } as Beregningsgrunnlag,
   isReadOnly: false,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -529,18 +578,24 @@ AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeErOppfylt.args 
   beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   beregningsgrunnlag: {
-    beregningsgrunnlagPeriode: [{
-      beregningsgrunnlagPrStatusOgAndel: [{
-        overstyrtPrAar: 0,
-      }],
-    }],
+    beregningsgrunnlagPeriode: [
+      {
+        beregningsgrunnlagPrStatusOgAndel: [
+          {
+            overstyrtPrAar: 0,
+          },
+        ],
+      },
+    ],
   } as Beregningsgrunnlag,
-  vilkar: [{
-    lovReferanse: '§§Dette er en lovreferanse',
-    vilkarType: VilkarType.SOKNADFRISTVILKARET,
-    vilkarStatus: vilkarUtfallType.IKKE_OPPFYLT,
-    overstyrbar: true,
-  }],
+  vilkar: [
+    {
+      lovReferanse: '§§Dette er en lovreferanse',
+      vilkarType: VilkarType.SOKNADFRISTVILKARET,
+      vilkarStatus: vilkarUtfallType.IKKE_OPPFYLT,
+      overstyrbar: true,
+    },
+  ],
   isReadOnly: false,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
@@ -557,11 +612,15 @@ OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt.args = {
   beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   beregningsgrunnlag: {
-    beregningsgrunnlagPeriode: [{
-      beregningsgrunnlagPrStatusOgAndel: [{
-        overstyrtPrAar: 0,
-      }],
-    }],
+    beregningsgrunnlagPeriode: [
+      {
+        beregningsgrunnlagPrStatusOgAndel: [
+          {
+            overstyrtPrAar: 0,
+          },
+        ],
+      },
+    ],
   } as Beregningsgrunnlag,
   isReadOnly: false,
   submitCallback: action('button-click') as (data: any) => Promise<any>,

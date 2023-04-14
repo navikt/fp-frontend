@@ -8,7 +8,10 @@ import StandardBehandlingProps from '../felles/typer/standardBehandlingProps';
 import BehandlingPaVent from '../felles/modaler/paVent/BehandlingPaVent';
 import StandardPropsProvider from '../felles/utils/standardPropsStateContext';
 import {
-  useBehandling, useInitBehandlingHandlinger, useInitRequestApi, useLagreAksjonspunkt,
+  useBehandling,
+  useInitBehandlingHandlinger,
+  useInitRequestApi,
+  useLagreAksjonspunkt,
 } from '../felles/utils/indexHooks';
 import { requestInnsynApi } from './data/innsynBehandlingApi';
 import BehandleInnsynProsessStegInitPanel from './prosessPaneler/BehandleInnsynProsessStegInitPanel';
@@ -29,11 +32,8 @@ const BehandlingInnsynIndex: FunctionComponent<StandardBehandlingProps> = ({
 }) => {
   useInitRequestApi(requestInnsynApi, setRequestPendingMessage);
 
-  const {
-    behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling,
-  } = useBehandling(
-    requestInnsynApi, behandlingUuid, oppdaterBehandlingVersjon,
-  );
+  const { behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling } =
+    useBehandling(requestInnsynApi, behandlingUuid, oppdaterBehandlingVersjon);
 
   const { lagreAksjonspunkter } = useLagreAksjonspunkt(requestInnsynApi, setBehandling);
 
@@ -66,7 +66,7 @@ const BehandlingInnsynIndex: FunctionComponent<StandardBehandlingProps> = ({
           valgtFaktaSteg={valgtFaktaSteg}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
           requestApi={requestInnsynApi}
-          hentProsessPaneler={(props) => (
+          hentProsessPaneler={props => (
             <>
               <BehandleInnsynProsessStegInitPanel {...props} fagsak={fagsak} />
               <InnsynVedtakProsessStegInitPanel

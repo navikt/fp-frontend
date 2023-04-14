@@ -5,6 +5,6 @@ type Aktivitetskrav = Readonly<{
   behovÅrsak: string;
   vurdering?: string;
   endret: boolean;
-}>
+}>;
 
 export default Aktivitetskrav;

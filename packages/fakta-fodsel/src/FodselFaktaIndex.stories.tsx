@@ -2,13 +2,9 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import {
-  AksjonspunktCode, aksjonspunktStatus, soknadType, behandlingType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, aksjonspunktStatus, soknadType, behandlingType } from '@navikt/fp-kodeverk';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
-import {
-  Behandling, FamilieHendelse, FamilieHendelseSamling, Soknad, Aksjonspunkt,
-} from '@navikt/fp-types';
+import { Behandling, FamilieHendelse, FamilieHendelseSamling, Soknad, Aksjonspunkt } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import FodselFaktaIndex from './FodselFaktaIndex';
 
@@ -24,14 +20,18 @@ const behandling = {
 
 const familieHendelse = {
   register: {
-    avklartBarn: [{
-      fodselsdato: '2019-01-10',
-    }],
+    avklartBarn: [
+      {
+        fodselsdato: '2019-01-10',
+      },
+    ],
   },
   gjeldende: {
-    avklartBarn: [{
-      fodselsdato: '2019-01-01',
-    }],
+    avklartBarn: [
+      {
+        fodselsdato: '2019-01-01',
+      },
+    ],
     termindato: '2019-01-01',
     utstedtdato: '2019-01-01',
     antallBarnTermin: 1,
@@ -56,19 +56,23 @@ const soknadOriginalBehandling = {
 };
 
 const familiehendelseOriginalBehandling = {
-  avklartBarn: [{
-    fodselsdato: '2019-01-10',
-  }],
+  avklartBarn: [
+    {
+      fodselsdato: '2019-01-10',
+    },
+  ],
   termindato: '2019-01-01',
   antallBarnTermin: 1,
 } as FamilieHendelse;
 
-const defaultAksjonspunkter = [{
-  definisjon: AksjonspunktCode.TERMINBEKREFTELSE,
-  status: aksjonspunktStatus.OPPRETTET,
-  begrunnelse: undefined,
-  kanLoses: true,
-}];
+const defaultAksjonspunkter = [
+  {
+    definisjon: AksjonspunktCode.TERMINBEKREFTELSE,
+    status: aksjonspunktStatus.OPPRETTET,
+    begrunnelse: undefined,
+    kanLoses: true,
+  },
+];
 
 const merknaderFraBeslutter = {
   notAccepted: false,
@@ -82,7 +86,7 @@ export default {
 const Template: Story<{
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   readOnly: boolean;
   harApneAksjonspunkter: boolean;
 }> = ({
@@ -120,7 +124,7 @@ AksjonspunktTerminbekreftelse.args = {
 
 export const AksjonspunktSjekkManglendeFødsel = Template.bind({});
 AksjonspunktSjekkManglendeFødsel.args = {
-  aksjonspunkter: defaultAksjonspunkter.map((a) => ({
+  aksjonspunkter: defaultAksjonspunkter.map(a => ({
     ...a,
     definisjon: AksjonspunktCode.SJEKK_MANGLENDE_FODSEL,
   })),
@@ -134,7 +138,7 @@ export const ReadonlyPanel = Template.bind({});
 ReadonlyPanel.args = {
   readOnly: true,
   harApneAksjonspunkter: false,
-  aksjonspunkter: defaultAksjonspunkter.map((a) => ({
+  aksjonspunkter: defaultAksjonspunkter.map(a => ({
     ...a,
     status: aksjonspunktStatus.UTFORT,
     definisjon: AksjonspunktCode.SJEKK_MANGLENDE_FODSEL,

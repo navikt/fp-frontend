@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  fireEvent,
-  render, screen, waitFor,
-} from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 
@@ -119,12 +116,8 @@ describe('<OmsorgOgAdopsjonPapirsoknadIndex>', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       ankomstdato: '2022-05-22',
       antallBarn: 2,
-      foedselsDato: [
-        '2022-05-27',
-        '2022-05-26',
-      ],
+      foedselsDato: ['2022-05-27', '2022-05-26'],
       omsorgsovertakelsesdato: '2022-05-30',
-
     });
   });
 });

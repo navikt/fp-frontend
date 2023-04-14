@@ -1,13 +1,9 @@
 import React, { useState, useEffect, FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import {
-  FlexColumn, FlexContainer, FlexRow, Image,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, Image } from '@navikt/ft-ui-komponenter';
 import { formHooks, NumberField } from '@navikt/ft-form-hooks';
 import { ErrorMessage } from '@hookform/error-message';
-import {
-  hasValidDecimal, maxValue, minValue, required,
-} from '@navikt/ft-form-validators';
+import { hasValidDecimal, maxValue, minValue, required } from '@navikt/ft-form-validators';
 import { BodyShort } from '@navikt/ds-react';
 
 import endreImage from '../../images/endre.svg';
@@ -62,8 +58,14 @@ const TilretteleggingUtbetalingsgrad: FunctionComponent<OwnProps> = ({
         {erOverstyrer && (
           <FlexColumn>
             <Image
-              onClick={() => { setEditeres(true); setOverstyrtUtbetalingsgrad(true); }}
-              onKeyDown={() => { setEditeres(true); setOverstyrtUtbetalingsgrad(true); }}
+              onClick={() => {
+                setEditeres(true);
+                setOverstyrtUtbetalingsgrad(true);
+              }}
+              onKeyDown={() => {
+                setEditeres(true);
+                setOverstyrtUtbetalingsgrad(true);
+              }}
               className={erIEditeringsmodus ? styles.buttonMargin : styles.enabletImage}
               src={erIEditeringsmodus ? endreDisabletImage : endreImage}
               tabIndex={0}
@@ -79,7 +81,11 @@ const TilretteleggingUtbetalingsgrad: FunctionComponent<OwnProps> = ({
             <ErrorMessage
               errors={formState.errors}
               name={`${fieldPrefix}.${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`}
-              render={({ message }) => <BodyShort size="small" className={styles.error}>{message}</BodyShort>}
+              render={({ message }) => (
+                <BodyShort size="small" className={styles.error}>
+                  {message}
+                </BodyShort>
+              )}
             />
           </FlexColumn>
         </FlexRow>

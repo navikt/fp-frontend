@@ -18,6 +18,7 @@ const config = {
   extends: [
     'airbnb',
     'plugin:@typescript-eslint/recommended',
+    'prettier',
   ],
 
   parserOptions: {

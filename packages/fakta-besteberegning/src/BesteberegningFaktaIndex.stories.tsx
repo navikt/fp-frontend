@@ -4,9 +4,7 @@ import { Story } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { aksjonspunktStatus, AksjonspunktCode } from '@navikt/fp-kodeverk';
-import {
-  Behandling, Aksjonspunkt, Beregningsgrunnlag,
-} from '@navikt/fp-types';
+import { Behandling, Aksjonspunkt, Beregningsgrunnlag } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import BesteberegningFaktaIndex from './BesteberegningFaktaIndex';
@@ -45,14 +43,9 @@ export default {
 const Template: Story<{
   aksjonspunkter: Aksjonspunkt[];
   beregningsgrunnlag: Beregningsgrunnlag;
-  behandling: Behandling,
+  behandling: Behandling;
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
-}> = ({
-  aksjonspunkter,
-  beregningsgrunnlag,
-  behandling,
-  submitCallback,
-}) => (
+}> = ({ aksjonspunkter, beregningsgrunnlag, behandling, submitCallback }) => (
   <BesteberegningFaktaIndex
     aksjonspunkter={aksjonspunkter}
     submitCallback={submitCallback}
@@ -64,7 +57,7 @@ const Template: Story<{
     behandling={behandling}
     beregningsgrunnlag={beregningsgrunnlag}
     arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
-    harApneAksjonspunkter={aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET)}
+    harApneAksjonspunkter={aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET)}
   />
 );
 
@@ -78,15 +71,22 @@ BesteberegningMedDagpengerOgArbeid.args = {
 export const BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt = Template.bind({});
 BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt.args = {
   beregningsgrunnlag: scenarioBG,
-  aksjonspunkter: [lagAksjonspunkt(AksjonspunktCode.KONTROLLER_AUTOMATISK_BESTEBEREGNING, aksjonspunktStatus.OPPRETTET)],
+  aksjonspunkter: [
+    lagAksjonspunkt(AksjonspunktCode.KONTROLLER_AUTOMATISK_BESTEBEREGNING, aksjonspunktStatus.OPPRETTET),
+  ],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
 export const BesteberegningMedDagpengerOgArbeidLukketAksjonspunktPåVent = Template.bind({});
 BesteberegningMedDagpengerOgArbeidLukketAksjonspunktPåVent.args = {
   beregningsgrunnlag: scenarioBG,
-  aksjonspunkter: [lagAksjonspunkt(AksjonspunktCode.KONTROLLER_AUTOMATISK_BESTEBEREGNING, aksjonspunktStatus.UTFORT,
-    'Min begrunnelse for at besteberegningen er feil')],
+  aksjonspunkter: [
+    lagAksjonspunkt(
+      AksjonspunktCode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
+      aksjonspunktStatus.UTFORT,
+      'Min begrunnelse for at besteberegningen er feil',
+    ),
+  ],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 

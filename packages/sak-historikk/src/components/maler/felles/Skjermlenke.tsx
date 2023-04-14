@@ -35,10 +35,7 @@ const Skjermlenke: React.FunctionComponent<SkjermlenkeProps> = ({
   return (
     <>
       <Heading size="xsmall">
-        <NavLink
-          to={location}
-          onClick={scrollUpOnClick ? scrollUp : undefined}
-        >
+        <NavLink to={location} onClick={scrollUpOnClick ? scrollUp : undefined}>
           {getKodeverknavn(skjermlenke, KodeverkType.SKJERMLENKE_TYPE)}
         </NavLink>
       </Heading>

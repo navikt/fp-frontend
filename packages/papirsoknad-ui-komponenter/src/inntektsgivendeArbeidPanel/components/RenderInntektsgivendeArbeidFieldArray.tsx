@@ -1,12 +1,8 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { useIntl } from 'react-intl';
 import { maxLength, hasValidDate } from '@navikt/ft-form-validators';
-import {
-  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
-import {
-  Datepicker, InputField, SelectField, PeriodFieldArray, formHooks,
-} from '@navikt/ft-form-hooks';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Datepicker, InputField, SelectField, PeriodFieldArray, formHooks } from '@navikt/ft-form-hooks';
 import { KodeverkType, landkoder as Landkode } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
@@ -21,7 +17,7 @@ type FormValues = {
   periodeFom: string;
   periodeTom: string;
   land: string;
-}
+};
 
 const defaultInntektsgivendeArbeid: FormValues = {
   arbeidsgiver: '',
@@ -30,14 +26,14 @@ const defaultInntektsgivendeArbeid: FormValues = {
   land: '',
 };
 
-const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] => countryCodes
-  .filter(({
-    kode,
-  }) => kode !== Landkode.NORGE)
-  .map(({
-    kode,
-    navn,
-  }) => <option value={kode} key={kode}>{navn}</option>);
+const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] =>
+  countryCodes
+    .filter(({ kode }) => kode !== Landkode.NORGE)
+    .map(({ kode, navn }) => (
+      <option value={kode} key={kode}>
+        {navn}
+      </option>
+    ));
 
 interface OwnProps {
   readOnly: boolean;
@@ -49,10 +45,7 @@ interface OwnProps {
  *
  * Viser inputfelter for arbeidsgiver og organisasjonsnummer for registrering av arbeidsforhold.
  */
-const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps> = ({
-  alleKodeverk,
-  readOnly,
-}) => {
+const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps> = ({ alleKodeverk, readOnly }) => {
   const intl = useIntl();
 
   const { control } = formHooks.useFormContext<{ [INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME]: FormValues[] }>();
@@ -61,7 +54,9 @@ const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps> = ({
     name: INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME,
   });
 
-  const sortedCountriesByName = alleKodeverk[KodeverkType.LANDKODER].slice().sort((a, b) => a.navn.localeCompare(b.navn));
+  const sortedCountriesByName = alleKodeverk[KodeverkType.LANDKODER]
+    .slice()
+    .sort((a, b) => a.navn.localeCompare(b.navn));
 
   return (
     <PeriodFieldArray<FormValues>
@@ -73,14 +68,16 @@ const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps> = ({
       append={append}
     >
       {(field, index, getRemoveButton) => (
-        <div key={field.id} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+        <div key={field.id} className={index !== fields.length - 1 ? styles.notLastRow : ''}>
           <FlexContainer>
             <FlexRow>
               <FlexColumn>
                 <InputField
                   readOnly={readOnly}
                   name={`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}.arbeidsgiver`}
-                  label={index === 0 ? intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.Arbeidsgiver' }) : ''}
+                  label={
+                    index === 0 ? intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.Arbeidsgiver' }) : ''
+                  }
                   validate={[maxLength50]}
                   maxLength={99}
                 />
@@ -109,11 +106,7 @@ const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps> = ({
                   selectValues={countrySelectValues(sortedCountriesByName)}
                 />
               </FlexColumn>
-              {getRemoveButton && (
-                <FlexColumn>
-                  {getRemoveButton()}
-                </FlexColumn>
-              )}
+              {getRemoveButton && <FlexColumn>{getRemoveButton()}</FlexColumn>}
             </FlexRow>
           </FlexContainer>
           <VerticalSpacer twentyPx />

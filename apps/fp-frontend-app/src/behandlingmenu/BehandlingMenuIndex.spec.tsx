@@ -1,9 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
-import {
-  BehandlingType, FagsakStatus, BehandlingStatus, FagsakYtelseType,
-} from '@navikt/ft-kodeverk';
+import { BehandlingType, FagsakStatus, BehandlingStatus, FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
@@ -36,19 +34,21 @@ const behandlingTillatteOperasjoner = {
   vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
 };
 
-const alleBehandlinger = [{
-  versjon: 2,
-  uuid: '1',
-  behandlingKoet: false,
-  behandlingPaaVent: false,
-  kanHenleggeBehandling: true,
-  type: BehandlingType.REVURDERING,
-  status: BehandlingStatus.BEHANDLING_UTREDES,
-  behandlendeEnhetId: '2323',
-  behandlendeEnhetNavn: 'NAV Viken',
-  erAktivPapirsoknad: false,
-  behandlingTillatteOperasjoner,
-}];
+const alleBehandlinger = [
+  {
+    versjon: 2,
+    uuid: '1',
+    behandlingKoet: false,
+    behandlingPaaVent: false,
+    kanHenleggeBehandling: true,
+    type: BehandlingType.REVURDERING,
+    status: BehandlingStatus.BEHANDLING_UTREDES,
+    behandlendeEnhetId: '2323',
+    behandlendeEnhetNavn: 'NAV Viken',
+    erAktivPapirsoknad: false,
+    behandlingTillatteOperasjoner,
+  },
+];
 
 const fagsak = {
   saksnummer: '123',

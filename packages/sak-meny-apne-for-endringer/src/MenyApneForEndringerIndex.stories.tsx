@@ -12,14 +12,8 @@ export default {
 const Template: Story<{
   apneBehandlingForEndringer: () => void;
   lukkModal: () => void;
-}> = ({
-  apneBehandlingForEndringer,
-  lukkModal,
-}) => (
-  <MenyApneForEndringerIndex
-    apneBehandlingForEndringer={apneBehandlingForEndringer}
-    lukkModal={lukkModal}
-  />
+}> = ({ apneBehandlingForEndringer, lukkModal }) => (
+  <MenyApneForEndringerIndex apneBehandlingForEndringer={apneBehandlingForEndringer} lukkModal={lukkModal} />
 );
 
 export const Default = Template.bind({});

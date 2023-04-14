@@ -16,7 +16,7 @@ import RenderUtsettelsePeriodeFieldArray, {
 export type FormValues = {
   skalUtsette?: boolean;
   [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: UtsettelsePeriodeFormValues;
-}
+};
 
 interface OwnProps {
   readOnly: boolean;
@@ -33,19 +33,18 @@ interface StaticFunctions {
  * Viser panel for utsettelse
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form komponent.
  */
-const PermisjonUtsettelsePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
-  readOnly,
-  alleKodeverk,
-}) => {
+const PermisjonUtsettelsePanel: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly, alleKodeverk }) => {
   const utsettelseReasons = alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE];
   const utsettelseKvoter = alleKodeverk[KodeverkType.UTSETTELSE_GRADERING_KVOTE];
 
-  const { watch } = formHooks.useFormContext<{[TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
+  const { watch } = formHooks.useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
   const skalUtsette = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalUtsette`) || false;
 
   return (
     <>
-      <Label size="small"><FormattedMessage id="Registrering.Permisjon.Utsettelse.Title" /></Label>
+      <Label size="small">
+        <FormattedMessage id="Registrering.Permisjon.Utsettelse.Title" />
+      </Label>
       <VerticalSpacer sixteenPx />
       <CheckboxField
         readOnly={readOnly}

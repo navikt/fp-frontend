@@ -3,9 +3,7 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 
 import { aksjonspunktStatus, soknadType, AksjonspunktCode } from '@navikt/fp-kodeverk';
-import {
-  Behandling, FamilieHendelseSamling, Soknad, Aksjonspunkt,
-} from '@navikt/fp-types';
+import { Behandling, FamilieHendelseSamling, Soknad, Aksjonspunkt } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -54,14 +52,9 @@ export default {
 const Template: Story<{
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   isForeldrepengerFagsak?: boolean;
-}> = ({
-  aksjonspunkter,
-  submitCallback,
-  alleMerknaderFraBeslutter,
-  isForeldrepengerFagsak = true,
-}) => (
+}> = ({ aksjonspunkter, submitCallback, alleMerknaderFraBeslutter, isForeldrepengerFagsak = true }) => (
   <AdopsjonFaktaIndex
     soknad={soknad}
     familiehendelse={familieHendelse}
@@ -80,12 +73,14 @@ const Template: Story<{
 
 export const AksjonspunktForAdopsjonsvilkåret = Template.bind({});
 AksjonspunktForAdopsjonsvilkåret.args = {
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.ADOPSJONSDOKUMENTAJON,
-    status: aksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-    kanLoses: true,
-  }],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.ADOPSJONSDOKUMENTAJON,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+      kanLoses: true,
+    },
+  ],
   alleMerknaderFraBeslutter: {
     [AksjonspunktCode.ADOPSJONSDOKUMENTAJON]: merknaderFraBeslutter,
   },
@@ -94,12 +89,14 @@ AksjonspunktForAdopsjonsvilkåret.args = {
 
 export const AksjonspunktForOmSøkerErMannSomAdoptererAlene = Template.bind({});
 AksjonspunktForOmSøkerErMannSomAdoptererAlene.args = {
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
-    status: aksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-    kanLoses: true,
-  }],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+      kanLoses: true,
+    },
+  ],
   alleMerknaderFraBeslutter: {
     [AksjonspunktCode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]: merknaderFraBeslutter,
   },
@@ -108,12 +105,14 @@ AksjonspunktForOmSøkerErMannSomAdoptererAlene.args = {
 
 export const AksjonspunktForOmAdopsjonGjelderEktefellesBarn = Template.bind({});
 AksjonspunktForOmAdopsjonGjelderEktefellesBarn.args = {
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
-    status: aksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-    kanLoses: true,
-  }],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+      kanLoses: true,
+    },
+  ],
   alleMerknaderFraBeslutter: {
     [AksjonspunktCode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: merknaderFraBeslutter,
   },
@@ -122,12 +121,14 @@ AksjonspunktForOmAdopsjonGjelderEktefellesBarn.args = {
 
 export const IkkeVisBarnetsAnkomstDatoForEngangsstønad = Template.bind({});
 IkkeVisBarnetsAnkomstDatoForEngangsstønad.args = {
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
-    status: aksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-    kanLoses: true,
-  }],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+      kanLoses: true,
+    },
+  ],
   alleMerknaderFraBeslutter: {
     [AksjonspunktCode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: merknaderFraBeslutter,
   },

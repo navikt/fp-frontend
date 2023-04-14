@@ -1,25 +1,23 @@
 import React, { FunctionComponent } from 'react';
-import {
-  FormattedMessage, IntlShape, useIntl,
-} from 'react-intl';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Alert, BodyShort } from '@navikt/ds-react';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt } from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-const findHelpTexts = (
-  intl: IntlShape,
-  aksjonspunkter: Aksjonspunkt[],
-): string[] => {
+const findHelpTexts = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[]): string[] => {
   const helpTexts = [];
-  if (aksjonspunkter && aksjonspunkter.some((a) => a.definisjon === AksjonspunktCode.VURDERE_ANNEN_YTELSE)) {
+  if (aksjonspunkter && aksjonspunkter.some(a => a.definisjon === AksjonspunktCode.VURDERE_ANNEN_YTELSE)) {
     helpTexts.push(intl.formatMessage({ id: 'VedtakForm.VurderAnnenYtelse' }));
   }
-  if (aksjonspunkter && aksjonspunkter.some((a) => a.definisjon === AksjonspunktCode.VURDERE_DOKUMENT)) {
+  if (aksjonspunkter && aksjonspunkter.some(a => a.definisjon === AksjonspunktCode.VURDERE_DOKUMENT)) {
     helpTexts.push(intl.formatMessage({ id: 'VedtakForm.VurderDokument' }));
   }
-  if (aksjonspunkter && aksjonspunkter.some((a) => a.definisjon === AksjonspunktCode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST)) {
+  if (
+    aksjonspunkter &&
+    aksjonspunkter.some(a => a.definisjon === AksjonspunktCode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST)
+  ) {
     helpTexts.push(intl.formatMessage({ id: 'VedtakForm.KontrollerRevurderingsbehandling' }));
   }
 
@@ -31,10 +29,7 @@ interface OwnProps {
   aksjonspunkter: Aksjonspunkt[];
 }
 
-const VedtakHelpTextPanel: FunctionComponent<OwnProps> = ({
-  isReadOnly,
-  aksjonspunkter,
-}) => {
+const VedtakHelpTextPanel: FunctionComponent<OwnProps> = ({ isReadOnly, aksjonspunkter }) => {
   const intl = useIntl();
   const helpTexts = findHelpTexts(intl, aksjonspunkter);
   if (!isReadOnly && helpTexts.length > 0) {
@@ -42,9 +37,15 @@ const VedtakHelpTextPanel: FunctionComponent<OwnProps> = ({
       <>
         <VerticalSpacer sixteenPx />
         <Alert variant="info" size="small">
-          <BodyShort size="small"><FormattedMessage id="VedtakHelpTextPanel.Vurder" /></BodyShort>
+          <BodyShort size="small">
+            <FormattedMessage id="VedtakHelpTextPanel.Vurder" />
+          </BodyShort>
           <ul>
-            {helpTexts.map((text) => <li key={text}><BodyShort size="small">{text}</BodyShort></li>)}
+            {helpTexts.map(text => (
+              <li key={text}>
+                <BodyShort size="small">{text}</BodyShort>
+              </li>
+            ))}
           </ul>
         </Alert>
       </>

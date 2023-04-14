@@ -42,8 +42,10 @@ const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   erAdopsjon,
 }) => {
   const { formatMessage } = useIntl();
-  const sortedCountriesByName = useMemo(() => alleKodeverk[KodeverkType.LANDKODER]
-    .slice().sort((a, b) => a.navn.localeCompare(b.navn)), [alleKodeverk]);
+  const sortedCountriesByName = useMemo(
+    () => alleKodeverk[KodeverkType.LANDKODER].slice().sort((a, b) => a.navn.localeCompare(b.navn)),
+    [alleKodeverk],
+  );
 
   const { watch } = formHooks.useFormContext<any>();
   const harTidligereOppholdUtenlands = watch('harTidligereOppholdUtenlands') || false;
@@ -51,22 +53,29 @@ const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
 
   return (
     <BorderBox>
-      <Heading size="small"><FormattedMessage id="Registrering.Opphold" /></Heading>
+      <Heading size="small">
+        <FormattedMessage id="Registrering.Opphold" />
+      </Heading>
       <VerticalSpacer sixteenPx />
       <RadioGroupPanel
         name="oppholdINorge"
-        label={<FormattedMessage id={erAdopsjon ? 'Registrering.OppholdVedAdopsjon' : 'Registrering.OppholdVedFodsel'} />}
+        label={
+          <FormattedMessage id={erAdopsjon ? 'Registrering.OppholdVedAdopsjon' : 'Registrering.OppholdVedFodsel'} />
+        }
         validate={[required]}
         isReadOnly={readOnly}
         isTrueOrFalseSelection
         isHorizontal
-        radios={[{
-          label: formatMessage({ id: 'Registrering.Opphold.Yes' }),
-          value: 'true',
-        }, {
-          label: formatMessage({ id: 'Registrering.Opphold.No' }),
-          value: 'false',
-        }]}
+        radios={[
+          {
+            label: formatMessage({ id: 'Registrering.Opphold.Yes' }),
+            value: 'true',
+          },
+          {
+            label: formatMessage({ id: 'Registrering.Opphold.No' }),
+            value: 'false',
+          },
+        ]}
       />
       <VerticalSpacer sixteenPx />
       <RadioGroupPanel
@@ -76,13 +85,16 @@ const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
         isReadOnly={readOnly}
         isTrueOrFalseSelection
         isHorizontal
-        radios={[{
-          label: formatMessage({ id: 'Registrering.Opphold.Yes' }),
-          value: 'false',
-        }, {
-          label: formatMessage({ id: 'Registrering.Opphold.No' }),
-          value: 'true',
-        }]}
+        radios={[
+          {
+            label: formatMessage({ id: 'Registrering.Opphold.Yes' }),
+            value: 'false',
+          },
+          {
+            label: formatMessage({ id: 'Registrering.Opphold.No' }),
+            value: 'true',
+          },
+        ]}
       />
       {harTidligereOppholdUtenlands ? (
         <>
@@ -105,13 +117,16 @@ const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
         isReadOnly={readOnly}
         isTrueOrFalseSelection
         isHorizontal
-        radios={[{
-          label: formatMessage({ id: 'Registrering.Opphold.Yes' }),
-          value: 'false',
-        }, {
-          label: formatMessage({ id: 'Registrering.Opphold.No' }),
-          value: 'true',
-        }]}
+        radios={[
+          {
+            label: formatMessage({ id: 'Registrering.Opphold.Yes' }),
+            value: 'false',
+          },
+          {
+            label: formatMessage({ id: 'Registrering.Opphold.No' }),
+            value: 'true',
+          },
+        ]}
       />
       {harFremtidigeOppholdUtenlands ? (
         <>
@@ -137,7 +152,9 @@ OppholdINorgePanel.buildInitialValues = (): FormValues => ({
 
 OppholdINorgePanel.transformValues = (formValues: FormValues): FormValues => ({
   ...formValues,
-  fremtidigeOppholdUtenlands: formValues.harFremtidigeOppholdUtenlands ? formValues.fremtidigeOppholdUtenlands : undefined,
+  fremtidigeOppholdUtenlands: formValues.harFremtidigeOppholdUtenlands
+    ? formValues.fremtidigeOppholdUtenlands
+    : undefined,
   tidligereOppholdUtenlands: formValues.harTidligereOppholdUtenlands ? formValues.tidligereOppholdUtenlands : undefined,
 });
 

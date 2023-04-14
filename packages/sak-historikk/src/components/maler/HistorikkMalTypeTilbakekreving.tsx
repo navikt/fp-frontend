@@ -38,7 +38,11 @@ const lagBegrunnelseKomponent = (
       {visAktsomhetBegrunnelse && <VerticalSpacer eightPx />}
       <BodyShort size="small">
         <FormattedMessage
-          id={felt.fraVerdi ? 'Historikk.Template.Tilbakekreving.ChangedFromTo' : 'Historikk.Template.Tilbakekreving.FieldSetTo'}
+          id={
+            felt.fraVerdi
+              ? 'Historikk.Template.Tilbakekreving.ChangedFromTo'
+              : 'Historikk.Template.Tilbakekreving.FieldSetTo'
+          }
           values={{
             navn: getKodeverknavn(endretFeltNavn, KodeverkType.HISTORIKK_ENDRET_FELT_TYPE),
             fraVerdi: formatertFraVerdi,
@@ -73,16 +77,26 @@ const HistorikkMalTypeTilbakekreving: FunctionComponent<HistorikkMal> = ({
         scrollUpOnClick
         createLocationForSkjermlenke={createLocationForSkjermlenke}
       />
-      {historikkinnslagDeler.map((historikkinnslagDel) => {
+      {historikkinnslagDeler.map(historikkinnslagDel => {
         const { opplysninger, endredeFelter, begrunnelseFritekst } = historikkinnslagDel;
-        const periodeFom = opplysninger.find((o) => o.opplysningType === historikkOpplysningTypeCodes.PERIODE_FOM.kode)?.tilVerdi;
-        const periodeTom = opplysninger.find((o) => o.opplysningType === historikkOpplysningTypeCodes.PERIODE_TOM.kode)?.tilVerdi;
-        const begrunnelse = decodeHtmlEntity(opplysninger
-          .find((o) => o.opplysningType === historikkOpplysningTypeCodes.TILBAKEKREVING_OPPFYLT_BEGRUNNELSE.kode)?.tilVerdi);
-        const sarligGrunnerBegrunnelseFelt = opplysninger
-          .find((o) => o.opplysningType === historikkOpplysningTypeCodes.SÆRLIG_GRUNNER_BEGRUNNELSE.kode);
-        const sarligGrunnerBegrunnelse = sarligGrunnerBegrunnelseFelt !== undefined
-          ? decodeHtmlEntity(sarligGrunnerBegrunnelseFelt.tilVerdi) : undefined;
+        const periodeFom = opplysninger.find(
+          o => o.opplysningType === historikkOpplysningTypeCodes.PERIODE_FOM.kode,
+        )?.tilVerdi;
+        const periodeTom = opplysninger.find(
+          o => o.opplysningType === historikkOpplysningTypeCodes.PERIODE_TOM.kode,
+        )?.tilVerdi;
+        const begrunnelse = decodeHtmlEntity(
+          opplysninger.find(
+            o => o.opplysningType === historikkOpplysningTypeCodes.TILBAKEKREVING_OPPFYLT_BEGRUNNELSE.kode,
+          )?.tilVerdi,
+        );
+        const sarligGrunnerBegrunnelseFelt = opplysninger.find(
+          o => o.opplysningType === historikkOpplysningTypeCodes.SÆRLIG_GRUNNER_BEGRUNNELSE.kode,
+        );
+        const sarligGrunnerBegrunnelse =
+          sarligGrunnerBegrunnelseFelt !== undefined
+            ? decodeHtmlEntity(sarligGrunnerBegrunnelseFelt.tilVerdi)
+            : undefined;
 
         return (
           <div key={periodeFom + periodeTom}>
@@ -97,21 +111,28 @@ const HistorikkMalTypeTilbakekreving: FunctionComponent<HistorikkMal> = ({
               />
             </BodyShort>
             <VerticalSpacer eightPx />
-            {endredeFelter && endredeFelter.map((felt, index) => {
-              const { endretFeltNavn, tilVerdi } = felt;
+            {endredeFelter &&
+              endredeFelter.map((felt, index) => {
+                const { endretFeltNavn, tilVerdi } = felt;
 
-              const visBelopTilbakekreves = historikkEndretFeltType.BELOEP_TILBAKEKREVES === endretFeltNavn;
-              const visProsentverdi = historikkEndretFeltType.ANDEL_TILBAKEKREVES === endretFeltNavn;
-              const visIleggRenter = historikkEndretFeltType.ILEGG_RENTER === endretFeltNavn;
-              if ((visBelopTilbakekreves || visProsentverdi || visIleggRenter) && !tilVerdi) {
-                return null;
-              }
+                const visBelopTilbakekreves = historikkEndretFeltType.BELOEP_TILBAKEKREVES === endretFeltNavn;
+                const visProsentverdi = historikkEndretFeltType.ANDEL_TILBAKEKREVES === endretFeltNavn;
+                const visIleggRenter = historikkEndretFeltType.ILEGG_RENTER === endretFeltNavn;
+                if ((visBelopTilbakekreves || visProsentverdi || visIleggRenter) && !tilVerdi) {
+                  return null;
+                }
 
-              return lagBegrunnelseKomponent(felt, index, endredeFelter, getKodeverknavn, begrunnelse, sarligGrunnerBegrunnelse, begrunnelseFritekst);
-            })}
-            <BodyShort size="small">
-              {(!endredeFelter && begrunnelseFritekst) && begrunnelseFritekst}
-            </BodyShort>
+                return lagBegrunnelseKomponent(
+                  felt,
+                  index,
+                  endredeFelter,
+                  getKodeverknavn,
+                  begrunnelse,
+                  sarligGrunnerBegrunnelse,
+                  begrunnelseFritekst,
+                );
+              })}
+            <BodyShort size="small">{!endredeFelter && begrunnelseFritekst && begrunnelseFritekst}</BodyShort>
             <VerticalSpacer eightPx />
           </div>
         );

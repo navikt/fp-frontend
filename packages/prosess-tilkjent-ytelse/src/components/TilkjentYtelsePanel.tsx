@@ -25,14 +25,18 @@ import FeriepengerIndex from './feriepenger/FeriepengerIndex';
 import TilkjentYtelse from './TilkjentYtelse';
 import { PeriodeMedId } from './TilkjentYtelseTimelineData';
 
-const formatPerioder = (perioder: BeregningsresultatPeriode[]): PeriodeMedId[] => perioder
-  .filter((periode) => periode.andeler[0] && periode.dagsats)
-  .map((periode, index: number) => ({
-    ...periode,
-    id: index,
-  }));
+const formatPerioder = (perioder: BeregningsresultatPeriode[]): PeriodeMedId[] =>
+  perioder
+    .filter(periode => periode.andeler[0] && periode.dagsats)
+    .map((periode, index: number) => ({
+      ...periode,
+      id: index,
+    }));
 
-const groups = [{ id: 1, content: '' }, { id: 2, content: '' }];
+const groups = [
+  { id: 1, content: '' },
+  { id: 2, content: '' },
+];
 
 const parseDateString = (dateString: string): Date => moment(dateString, ISO_DATE_FORMAT).toDate();
 
@@ -48,9 +52,10 @@ const getFamilieHendelseDato = (familieHendelseSamling: FamilieHendelseSamling):
   return parseDateString(familieHendelse.omsorgsovertakelseDato || familieHendelse.adopsjonFodelsedatoer[0]);
 };
 
-const finnTilbaketrekkAksjonspunkt = (alleAksjonspunkter: Aksjonspunkt[]): Aksjonspunkt | undefined => (alleAksjonspunkter
-  ? alleAksjonspunkter.find((ap) => ap.definisjon === AksjonspunktCode.VURDER_TILBAKETREKK)
-  : undefined);
+const finnTilbaketrekkAksjonspunkt = (alleAksjonspunkter: Aksjonspunkt[]): Aksjonspunkt | undefined =>
+  alleAksjonspunkter
+    ? alleAksjonspunkter.find(ap => ap.definisjon === AksjonspunktCode.VURDER_TILBAKETREKK)
+    : undefined;
 
 interface PureOwnProps {
   beregningresultat: BeregningsresultatFp;
@@ -102,7 +107,7 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
           groups={groups}
           soknadDate={soknadMottattDato}
           familiehendelseDate={familiehendelseDato}
-          hovedsokerKjonnKode={personoversikt?.bruker ? personoversikt.bruker.kjønn as Kjønnkode : undefined}
+          hovedsokerKjonnKode={personoversikt?.bruker ? (personoversikt.bruker.kjønn as Kjønnkode) : undefined}
           isSoknadSvangerskapspenger={fagsakYtelseTypeKode === fagsakYtelseType.SVANGERSKAPSPENGER}
           alleKodeverk={alleKodeverk}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

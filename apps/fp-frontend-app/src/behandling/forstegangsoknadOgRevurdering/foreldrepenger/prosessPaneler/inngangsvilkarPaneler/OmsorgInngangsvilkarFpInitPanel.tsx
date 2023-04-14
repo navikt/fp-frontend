@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -15,9 +13,7 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
 ];
 
-const VILKAR_KODER = [
-  VilkarType.OMSORGSVILKARET,
-];
+const VILKAR_KODER = [VilkarType.OMSORGSVILKARET];
 
 interface OwnProps {
   behandlingVersjon: number;
@@ -36,7 +32,7 @@ const OmsorgInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangsvilk
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="OMSORG"
       hentInngangsvilkarPanelTekst={() => intl.formatMessage({ id: 'ErOmsorgVilkaarOppfyltForm.Vurder' })}
-      renderPanel={(data) => (
+      renderPanel={data => (
         <>
           <OmsorgVilkarProsessIndex
             // @ts-ignore Eg trur denne feilar grunna feil i typescript-pakka. Sjekk på eit seinare tidspunkt om denne er retta

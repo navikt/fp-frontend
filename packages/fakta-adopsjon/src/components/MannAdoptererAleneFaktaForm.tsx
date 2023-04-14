@@ -15,13 +15,13 @@ interface OwnProps {
   readOnly: boolean;
   farSokerType?: string;
   alleKodeverk: AlleKodeverk;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   mannAdoptererAlene: boolean;
 }
 
 export type FormValues = {
-  mannAdoptererAlene?: boolean,
-}
+  mannAdoptererAlene?: boolean;
+};
 
 interface StaticFunctions {
   buildInitialValues: (familiehendelse: FamilieHendelse) => FormValues;
@@ -47,10 +47,15 @@ const MannAdoptererAleneFaktaForm: FunctionComponent<OwnProps> & StaticFunctions
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]}
     >
       <div className={styles.container}>
-        <Detail size="small"><FormattedMessage id="MannAdoptererAleneFaktaForm.Opplysninger" /></Detail>
+        <Detail size="small">
+          <FormattedMessage id="MannAdoptererAleneFaktaForm.Opplysninger" />
+        </Detail>
         <VerticalSpacer fourPx />
-        {farSokerType
-          && <BodyShort size="small">{getKodeverknavnFn(alleKodeverk)(farSokerType, KodeverkType.FAR_SOEKER_TYPE)}</BodyShort>}
+        {farSokerType && (
+          <BodyShort size="small">
+            {getKodeverknavnFn(alleKodeverk)(farSokerType, KodeverkType.FAR_SOEKER_TYPE)}
+          </BodyShort>
+        )}
         <VerticalSpacer sixteenPx />
         <hr className={styles.hr} />
         <RadioGroupPanel
@@ -61,13 +66,16 @@ const MannAdoptererAleneFaktaForm: FunctionComponent<OwnProps> & StaticFunctions
           isReadOnly={readOnly}
           isHorizontal
           isTrueOrFalseSelection
-          radios={[{
-            label: intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.AdoptererAlene' }),
-            value: 'true',
-          }, {
-            label: intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.AdoptererIkkeAlene' }),
-            value: 'false',
-          }]}
+          radios={[
+            {
+              label: intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.AdoptererAlene' }),
+              value: 'true',
+            },
+            {
+              label: intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.AdoptererIkkeAlene' }),
+              value: 'false',
+            },
+          ]}
         />
       </div>
     </FaktaGruppe>

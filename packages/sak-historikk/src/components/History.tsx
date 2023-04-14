@@ -4,9 +4,7 @@ import moment from 'moment';
 import { WrappedComponentProps } from 'react-intl';
 import { Checkbox } from '@navikt/ds-react';
 
-import {
-  VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
-} from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
 import { KodeverkType, getKodeverknavnFn, historikkAktor as HistorikkAktor } from '@navikt/fp-kodeverk';
@@ -119,8 +117,11 @@ import styles from './history.module.css';
 
  */
 
-const velgHistorikkMal = (histType: string) => { // NOSONAR
-  switch (histType) { // NOSONAR
+const velgHistorikkMal = (histType: string) => {
+  // NOSONAR
+  switch (
+    histType // NOSONAR
+  ) {
     case historikkinnslagType.BEH_GJEN:
     case historikkinnslagType.KOET_BEH_GJEN:
     case historikkinnslagType.BEH_MAN_GJEN:
@@ -199,17 +200,19 @@ const velgHistorikkMal = (histType: string) => { // NOSONAR
 
 type HistorikkMedTilbakekrevingIndikator = Historikkinnslag & {
   erTilbakekreving?: boolean;
-}
+};
 
 const sortAndTagTilbakekreving = (
   historikkFpsak: Historikkinnslag[] = [],
   historikkFptilbake: Historikkinnslag[] = [],
 ): HistorikkMedTilbakekrevingIndikator[] => {
-  const historikkFraTilbakekrevingMedMarkor = historikkFptilbake.map((ht) => ({
+  const historikkFraTilbakekrevingMedMarkor = historikkFptilbake.map(ht => ({
     ...ht,
     erTilbakekreving: true,
   }));
-  return historikkFpsak.concat(historikkFraTilbakekrevingMedMarkor).sort((a, b) => moment(b.opprettetTidspunkt).diff(moment(a.opprettetTidspunkt)));
+  return historikkFpsak
+    .concat(historikkFraTilbakekrevingMedMarkor)
+    .sort((a, b) => moment(b.opprettetTidspunkt).diff(moment(a.opprettetTidspunkt)));
 };
 
 interface OwnProps {
@@ -241,17 +244,28 @@ const History: FunctionComponent<OwnProps & WrappedComponentProps> = ({
 }) => {
   const [skalSortertePaValgtBehandling, setSkalSortertePaBehandling] = useState(false);
 
-  const alleHistorikkInnslag = useMemo(() => sortAndTagTilbakekreving(historikkFpSak, historikkFpTilbake), [historikkFpSak, historikkFpTilbake]);
+  const alleHistorikkInnslag = useMemo(
+    () => sortAndTagTilbakekreving(historikkFpSak, historikkFpTilbake),
+    [historikkFpSak, historikkFpTilbake],
+  );
 
-  const filtrerteInnslag = useMemo(() => (valgtBehandlingUuid && skalSortertePaValgtBehandling
-    ? alleHistorikkInnslag.filter((i) => i.behandlingUuid === valgtBehandlingUuid) : alleHistorikkInnslag),
-  [alleHistorikkInnslag, valgtBehandlingUuid, skalSortertePaValgtBehandling]);
+  const filtrerteInnslag = useMemo(
+    () =>
+      valgtBehandlingUuid && skalSortertePaValgtBehandling
+        ? alleHistorikkInnslag.filter(i => i.behandlingUuid === valgtBehandlingUuid)
+        : alleHistorikkInnslag,
+    [alleHistorikkInnslag, valgtBehandlingUuid, skalSortertePaValgtBehandling],
+  );
 
   const getKodeverknavnFpSak = useMemo(() => getKodeverknavnFn(alleKodeverkFpSak), [alleKodeverkFpSak]);
-  const getKodeverknavnFpTilbake = useMemo(() => (alleKodeverkFpTilbake
-    // @ts-ignore Fiks
-    ? getKodeverknavnFn(alleKodeverkFpTilbake)
-    : undefined), [alleKodeverkFpTilbake]);
+  const getKodeverknavnFpTilbake = useMemo(
+    () =>
+      alleKodeverkFpTilbake
+        ? // @ts-ignore Fiks
+          getKodeverknavnFn(alleKodeverkFpTilbake)
+        : undefined,
+    [alleKodeverkFpTilbake],
+  );
 
   return (
     <>
@@ -259,10 +273,7 @@ const History: FunctionComponent<OwnProps & WrappedComponentProps> = ({
         <FlexContainer>
           <FlexRow>
             <FlexColumn className={styles.pushRight}>
-              <Checkbox
-                size="small"
-                onChange={() => setSkalSortertePaBehandling(!skalSortertePaValgtBehandling)}
-              >
+              <Checkbox size="small" onChange={() => setSkalSortertePaBehandling(!skalSortertePaValgtBehandling)}>
                 {intl.formatMessage({ id: 'History.FiltrerPaBehandling' })}
               </Checkbox>
             </FlexColumn>
@@ -270,7 +281,7 @@ const History: FunctionComponent<OwnProps & WrappedComponentProps> = ({
         </FlexContainer>
       )}
       <VerticalSpacer sixteenPx />
-      {filtrerteInnslag.map((historikkinnslag) => {
+      {filtrerteInnslag.map(historikkinnslag => {
         const HistorikkMal = velgHistorikkMal(historikkinnslag.type);
         const aktorIsVL = historikkinnslag.aktoer === HistorikkAktor.VEDTAKSLOSNINGEN;
         const aktorIsSOKER = historikkinnslag.aktoer === HistorikkAktor.SOKER;
@@ -289,7 +300,7 @@ const History: FunctionComponent<OwnProps & WrappedComponentProps> = ({
             rolleNavn={getKodeverknavn(historikkinnslag.aktoer, KodeverkType.HISTORIKK_AKTOER)}
             dato={historikkinnslag.opprettetTidspunkt}
             kjoenn={historikkinnslag.kjoenn}
-            opprettetAv={(aktorIsSOKER || aktorIsArbeidsgiver || aktorIsVL) ? '' : historikkinnslag.opprettetAv}
+            opprettetAv={aktorIsSOKER || aktorIsArbeidsgiver || aktorIsVL ? '' : historikkinnslag.opprettetAv}
           >
             <HistorikkMal
               historikkinnslag={historikkinnslag}

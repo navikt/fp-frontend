@@ -5,7 +5,12 @@ import userEvent from '@testing-library/user-event';
 import * as stories from './ForeldreansvarVilkarProsessIndex.stories';
 
 const {
-  ÅpentAksjonspunkt2Ledd, ÅpentAksjonspunkt4Ledd, OppfyltVilkår2Ledd, OppfyltVilkår4Ledd, AvslåttVilkår2Ledd, AvslåttVilkår4Ledd,
+  ÅpentAksjonspunkt2Ledd,
+  ÅpentAksjonspunkt4Ledd,
+  OppfyltVilkår2Ledd,
+  OppfyltVilkår4Ledd,
+  AvslåttVilkår2Ledd,
+  AvslåttVilkår4Ledd,
 } = composeStories(stories);
 
 describe('<ForeldreansvarVilkarProsessIndex>', () => {
@@ -25,11 +30,13 @@ describe('<ForeldreansvarVilkarProsessIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      begrunnelse: 'Dette er en vurdering',
-      erVilkarOk: true,
-      kode: '5013',
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: 'Dette er en vurdering',
+        erVilkarOk: true,
+        kode: '5013',
+      },
+    ]);
   });
 
   it('skal bestemme at 2-ledd ikke er oppfylt og så løse aksjonspunkt', async () => {
@@ -53,13 +60,15 @@ describe('<ForeldreansvarVilkarProsessIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      avslagDato: undefined,
-      avslagskode: '1015',
-      begrunnelse: 'Dette er en vurdering',
-      erVilkarOk: false,
-      kode: '5013',
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        avslagDato: undefined,
+        avslagskode: '1015',
+        begrunnelse: 'Dette er en vurdering',
+        erVilkarOk: false,
+        kode: '5013',
+      },
+    ]);
   });
 
   it('skal bestemme at 4-ledd er oppfylt og så løse aksjonspunkt', async () => {
@@ -78,11 +87,13 @@ describe('<ForeldreansvarVilkarProsessIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      begrunnelse: 'Dette er en vurdering',
-      erVilkarOk: true,
-      kode: '5014',
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: 'Dette er en vurdering',
+        erVilkarOk: true,
+        kode: '5014',
+      },
+    ]);
   });
 
   it('skal bestemme at 4-ledd ikke er oppfylt og så løse aksjonspunkt', async () => {
@@ -106,13 +117,15 @@ describe('<ForeldreansvarVilkarProsessIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      avslagDato: undefined,
-      avslagskode: '1034',
-      begrunnelse: 'Dette er en vurdering',
-      erVilkarOk: false,
-      kode: '5014',
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        avslagDato: undefined,
+        avslagskode: '1034',
+        begrunnelse: 'Dette er en vurdering',
+        erVilkarOk: false,
+        kode: '5014',
+      },
+    ]);
   });
 
   it('skal vise at 2-ledd vilkår er oppfylt', async () => {

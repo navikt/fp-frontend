@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, useCallback, KeyboardEvent, MouseEvent,
-} from 'react';
+import React, { FunctionComponent, useCallback, KeyboardEvent, MouseEvent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { Button } from '@navikt/ds-react';
@@ -50,7 +48,7 @@ const VedtakKlageSubmitPanel: FunctionComponent<OwnProps> = ({
           <a
             href=""
             onClick={forhåndsvis}
-            onKeyDown={(e) => (e.key === 'Enter' ? forhåndsvis(e) : null)}
+            onKeyDown={e => (e.key === 'Enter' ? forhåndsvis(e) : null)}
             className={classNames('lenke lenke--frittstaende')}
           >
             <FormattedMessage id="VedtakKlageForm.ForhandvisBrev" />

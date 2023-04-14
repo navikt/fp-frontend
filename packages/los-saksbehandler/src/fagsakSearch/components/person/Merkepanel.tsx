@@ -19,10 +19,7 @@ interface OwnProps {
  *  <MerkePanel erDod={false} diskresjonskode="SPSF"  />
  * ```
  */
-const MerkePanel: FunctionComponent<OwnProps> = ({
-  erDod,
-  diskresjonskode,
-}) => {
+const MerkePanel: FunctionComponent<OwnProps> = ({ erDod, diskresjonskode }) => {
   const intl = useIntl();
   return (
     <>

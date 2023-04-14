@@ -1,16 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import {
-  DateLabel, Table, TableColumn, TableRow,
-} from '@navikt/ft-ui-komponenter';
+import { DateLabel, Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 
 import { MedlemPeriode } from '@navikt/fp-types';
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
-const headerTextCodes = [
-  'MedlemskapEndringerTabell.GjeldeneFom',
-  'MedlemskapEndringerTabell.Opplysning',
-];
+const headerTextCodes = ['MedlemskapEndringerTabell.GjeldeneFom', 'MedlemskapEndringerTabell.Opplysning'];
 
 interface OwnProps {
   perioder: MedlemPeriode[];
@@ -26,7 +21,7 @@ const MedlemskapEndringerTabell: FunctionComponent<OwnProps> = ({
   aksjonspunkter,
 }) => (
   <Table headerTextCodes={headerTextCodes}>
-    {perioder.map((periode) => (
+    {perioder.map(periode => (
       <TableRow<string, MedlemPeriode>
         key={periode.vurderingsdato}
         id={periode.vurderingsdato}
@@ -34,16 +29,16 @@ const MedlemskapEndringerTabell: FunctionComponent<OwnProps> = ({
         onKeyDown={velgPeriodeCallback}
         isSelected={periode.vurderingsdato === valgtPeriodeVurderingsdato}
         model={periode}
-        isApLeftBorder={periode.aksjonspunkter
-          .some((periodeAp) => aksjonspunkter.some((ap) => ap.definisjon === periodeAp && ap.status === AksjonspunktStatus.OPPRETTET))
-        && periode.begrunnelse === undefined}
+        isApLeftBorder={
+          periode.aksjonspunkter.some(periodeAp =>
+            aksjonspunkter.some(ap => ap.definisjon === periodeAp && ap.status === AksjonspunktStatus.OPPRETTET),
+          ) && periode.begrunnelse === undefined
+        }
       >
         <TableColumn>
           <DateLabel dateString={periode.vurderingsdato} />
         </TableColumn>
-        <TableColumn>
-          {periode.årsaker.join()}
-        </TableColumn>
+        <TableColumn>{periode.årsaker.join()}</TableColumn>
       </TableRow>
     ))}
   </Table>

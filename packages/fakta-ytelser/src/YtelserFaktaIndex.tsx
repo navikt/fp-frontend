@@ -15,10 +15,7 @@ interface OwnProps {
 
 const intl = createIntl(messages);
 
-const YtelserFaktaIndex: FunctionComponent<OwnProps> = ({
-  inntektArbeidYtelse,
-  alleKodeverk,
-}) => (
+const YtelserFaktaIndex: FunctionComponent<OwnProps> = ({ inntektArbeidYtelse, alleKodeverk }) => (
   <RawIntlProvider value={intl}>
     <YtelserFaktaPanel
       inntektArbeidYtelse={inntektArbeidYtelse}

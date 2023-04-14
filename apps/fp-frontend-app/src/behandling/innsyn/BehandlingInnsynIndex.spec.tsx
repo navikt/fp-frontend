@@ -29,11 +29,13 @@ describe('<BehandlingInnsynIndex>', () => {
           status: BehandlingStatus.OPPRETTET,
           type: BehandlingType.DOKUMENTINNSYN,
           aksjonspunkt: [],
-          links: [{
-            href: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name,
-            rel: 'update',
-            type: 'POST',
-          }],
+          links: [
+            {
+              href: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name,
+              rel: 'update',
+              type: 'POST',
+            },
+          ],
         },
       },
       { key: BehandlingFellesApiKeys.PREVIEW_MESSAGE.name, noRelLink: true, data: undefined },
@@ -54,17 +56,21 @@ describe('<BehandlingInnsynIndex>', () => {
               oppdaterBehandlingVersjon={() => {}}
               // @ts-ignore
               kodeverk={alleKodeverk as AlleKodeverk}
-              fagsak={{
-                fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-              } as Fagsak}
-              rettigheter={{
-                writeAccess: {
-                  isEnabled: true,
-                },
-                kanOverstyreAccess: {
-                  isEnabled: true,
-                },
-              } as AksessRettigheter}
+              fagsak={
+                {
+                  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+                } as Fagsak
+              }
+              rettigheter={
+                {
+                  writeAccess: {
+                    isEnabled: true,
+                  },
+                  kanOverstyreAccess: {
+                    isEnabled: true,
+                  },
+                } as AksessRettigheter
+              }
               oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
               valgtProsessSteg="default"
               valgtFaktaSteg="default"

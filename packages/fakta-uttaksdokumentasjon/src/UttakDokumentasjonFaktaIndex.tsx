@@ -26,8 +26,10 @@ const UttakDokumentasjonFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPa
   formData,
   setFormData,
 }) => {
-  const sorterteBehov = useMemo(() => [...dokumentasjonVurderingBehov]
-    .sort((krav1, krav2) => dayjs(krav1.fom).diff(dayjs(krav2.fom))), [dokumentasjonVurderingBehov]);
+  const sorterteBehov = useMemo(
+    () => [...dokumentasjonVurderingBehov].sort((krav1, krav2) => dayjs(krav1.fom).diff(dayjs(krav2.fom))),
+    [dokumentasjonVurderingBehov],
+  );
   return (
     <RawIntlProvider value={intl}>
       <UttakDokumentasjonFaktaForm

@@ -1,16 +1,10 @@
-import React, {
-  FunctionComponent, useMemo, useState, useCallback,
-} from 'react';
+import React, { FunctionComponent, useMemo, useState, useCallback } from 'react';
 import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 import { Label, BodyShort } from '@navikt/ds-react';
 
-import {
-  FlexColumn, FlexContainer, FlexRow, Table, TableColumn, TableRow,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { StonadskontoType, uttakArbeidType as uttakArbeidTypeKodeverk } from '@navikt/fp-kodeverk';
-import {
-  AktivitetIdentifikator, AktivitetSaldo, ArbeidsgiverOpplysningerPerId, Stonadskonto,
-} from '@navikt/fp-types';
+import { AktivitetIdentifikator, AktivitetSaldo, ArbeidsgiverOpplysningerPerId, Stonadskonto } from '@navikt/fp-types';
 
 import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';
 import lagVisningsNavn from '../../utils/lagVisningsNavn';
@@ -18,10 +12,7 @@ import StonadsdagerTab, { finnAntallUkerOgDager } from './StonadsdagerTab';
 
 import styles from './disponibleStonadskontoerPanel.module.css';
 
-const HEADER_TEXT_CODES = [
-  'TimeLineInfo.Aktivitet',
-  'TimeLineInfo.Disponibelt',
-];
+const HEADER_TEXT_CODES = ['TimeLineInfo.Aktivitet', 'TimeLineInfo.Disponibelt'];
 
 const STØNADSKONTOER_SORTERINGSREKKEFØLGE = {
   [StonadskontoType.FORELDREPENGER_FØR_FØDSEL]: 0,
@@ -35,17 +26,17 @@ const STØNADSKONTOER_SORTERINGSREKKEFØLGE = {
   [StonadskontoType.FLERBARNSDAGER]: 8,
 };
 
-const sorterKontoer = (
-  s1: Stonadskonto,
-  s2: Stonadskonto,
-): number => STØNADSKONTOER_SORTERINGSREKKEFØLGE[s1.stonadskontotype] - STØNADSKONTOER_SORTERINGSREKKEFØLGE[s2.stonadskontotype];
+const sorterKontoer = (s1: Stonadskonto, s2: Stonadskonto): number =>
+  STØNADSKONTOER_SORTERINGSREKKEFØLGE[s1.stonadskontotype] - STØNADSKONTOER_SORTERINGSREKKEFØLGE[s2.stonadskontotype];
 
 const lagTabellRadKey = (
   arbeidsforhold: AktivitetSaldo,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ) => {
   const { uttakArbeidType, arbeidsgiverReferanse, arbeidsforholdId } = arbeidsforhold.aktivitetIdentifikator;
-  const arbeidsgiverOpplysninger = arbeidsgiverReferanse ? arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse] : undefined;
+  const arbeidsgiverOpplysninger = arbeidsgiverReferanse
+    ? arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse]
+    : undefined;
 
   let arbKey = uttakArbeidType;
   arbKey = arbeidsgiverOpplysninger ? `${arbKey} ${arbeidsgiverOpplysninger.navn}` : arbKey;
@@ -55,15 +46,14 @@ const lagTabellRadKey = (
   return `${arbKey} ${arbeidsforhold.saldo}`;
 };
 
-const finnTilgjengeligeUker = (
-  stønadskontoer: Stonadskonto[],
-): number => {
+const finnTilgjengeligeUker = (stønadskontoer: Stonadskonto[]): number => {
   const sumDager = stønadskontoer.reduce((sum, konto) => {
     const type = konto.stonadskontotype;
-    if (type !== StonadskontoType.FLERBARNSDAGER
-      && type !== StonadskontoType.UTEN_AKTIVITETSKRAV
-      && type !== StonadskontoType.MINSTERETT
-      && type !== StonadskontoType.MINSTERETT_NESTE_STØNADSPERIODE
+    if (
+      type !== StonadskontoType.FLERBARNSDAGER &&
+      type !== StonadskontoType.UTEN_AKTIVITETSKRAV &&
+      type !== StonadskontoType.MINSTERETT &&
+      type !== StonadskontoType.MINSTERETT_NESTE_STØNADSPERIODE
     ) {
       return sum + (konto.maxDager ? konto.maxDager : 0);
     }
@@ -77,9 +67,7 @@ const utledNavn = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   intl: IntlShape,
 ): string => {
-  const {
-    arbeidsgiverReferanse, uttakArbeidType,
-  } = arbforhold;
+  const { arbeidsgiverReferanse, uttakArbeidType } = arbforhold;
 
   if (uttakArbeidType && uttakArbeidType !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
     return intl.formatMessage({ id: uttakArbeidTypeTekstCodes[uttakArbeidType] });
@@ -105,7 +93,7 @@ const DisponibleStonadskontoerPanel: FunctionComponent<OwnProps> = ({
   const [valgtKontoType, setValgtKontoType] = useState<string>();
 
   const visDagerForKonto = useCallback((stonadskontotype: string): void => {
-    setValgtKontoType((forrigeKontoType) => (forrigeKontoType === stonadskontotype ? undefined : stonadskontotype));
+    setValgtKontoType(forrigeKontoType => (forrigeKontoType === stonadskontotype ? undefined : stonadskontotype));
   }, []);
 
   const stønadskontoerMedNavn = useMemo(() => Object.values(stønadskontoer).sort(sorterKontoer), [stønadskontoer]);
@@ -116,8 +104,9 @@ const DisponibleStonadskontoerPanel: FunctionComponent<OwnProps> = ({
     if (!valgtKontoType) {
       return undefined;
     }
-    const aktiviteterMedNavn = stønadskontoerMedNavn.find((s) => s.stonadskontotype === valgtKontoType).aktivitetSaldoDtoList
-      .map((aktivitet) => ({
+    const aktiviteterMedNavn = stønadskontoerMedNavn
+      .find(s => s.stonadskontotype === valgtKontoType)
+      .aktivitetSaldoDtoList.map(aktivitet => ({
         ...aktivitet,
         navn: utledNavn(aktivitet.aktivitetIdentifikator, arbeidsgiverOpplysningerPerId, intl),
       }));
@@ -137,17 +126,14 @@ const DisponibleStonadskontoerPanel: FunctionComponent<OwnProps> = ({
           </FlexColumn>
           <FlexColumn>
             <BodyShort size="small">
-              <FormattedMessage
-                id="TimeLineInfo.Stonadinfo.Total"
-                values={{ ukerVerdi: tilgjengeligeUker, b: bTag }}
-              />
+              <FormattedMessage id="TimeLineInfo.Stonadinfo.Total" values={{ ukerVerdi: tilgjengeligeUker, b: bTag }} />
             </BodyShort>
           </FlexColumn>
         </FlexRow>
       </FlexContainer>
       <div className={styles.tabs}>
         <ul role="tablist">
-          {stønadskontoerMedNavn.map((konto) => (
+          {stønadskontoerMedNavn.map(konto => (
             <StonadsdagerTab
               key={konto.stonadskontotype}
               aktiv={konto.stonadskontotype === valgtKontoType}
@@ -160,7 +146,7 @@ const DisponibleStonadskontoerPanel: FunctionComponent<OwnProps> = ({
       {valgtKontoType && sorterteAktiviteter.length > 0 && (
         <div className={styles.visKonto}>
           <Table headerTextCodes={HEADER_TEXT_CODES}>
-            {sorterteAktiviteter.map((arbforhold) => {
+            {sorterteAktiviteter.map(arbforhold => {
               const ukerOgDager = finnAntallUkerOgDager(arbforhold.saldo);
               return (
                 <TableRow key={lagTabellRadKey(arbforhold, arbeidsgiverOpplysningerPerId)}>

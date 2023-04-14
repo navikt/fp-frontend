@@ -1,7 +1,7 @@
 export type AvklartBarn = Readonly<{
   fodselsdato: string;
   dodsdato?: string;
-}>
+}>;
 
 export type FamilieHendelse = Readonly<{
   skjaringstidspunkt: string;
@@ -23,10 +23,10 @@ export type FamilieHendelse = Readonly<{
   ankomstNorge?: string;
   erOverstyrt?: boolean;
   foreldreansvarDato?: string;
-}>
+}>;
 
 export type FamilieHendelseSamling = Readonly<{
   oppgitt: FamilieHendelse;
   gjeldende: FamilieHendelse;
   register: FamilieHendelse;
-}>
+}>;

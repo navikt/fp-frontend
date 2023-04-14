@@ -88,10 +88,7 @@ describe('<TotrinnskontrollSakIndex>', () => {
           },
           {
             aksjonspunktKode: '5035',
-            arsaker: [
-              'FEIL_FAKTA',
-              'FEIL_LOV',
-            ],
+            arsaker: ['FEIL_FAKTA', 'FEIL_LOV'],
             begrunnelse: 'Dette er en begrunnelse',
             godkjent: false,
           },

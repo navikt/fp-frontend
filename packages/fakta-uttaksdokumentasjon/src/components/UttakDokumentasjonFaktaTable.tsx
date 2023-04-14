@@ -1,16 +1,10 @@
-import React, {
-  FunctionComponent, useCallback, useEffect, useState,
-} from 'react';
+import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { dateFormat } from '@navikt/ft-utils';
 import { SuccessStroke, Error, FileError } from '@navikt/ds-icons';
-import {
-  ExpandableTableRow, Table, TableColumn, TableRow,
-} from '@navikt/ft-ui-komponenter';
+import { ExpandableTableRow, Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 
-import {
-  DokumentasjonVurderingBehov, UttakVurdering, UttakÅrsak, UttakType,
-} from '@navikt/fp-types';
+import { DokumentasjonVurderingBehov, UttakVurdering, UttakÅrsak, UttakType } from '@navikt/fp-types';
 
 import UttakDokumentasjonFaktaDetailForm from './UttakDokumentasjonFaktaDetailForm';
 
@@ -37,7 +31,7 @@ const UTTAK_ÅRSAK_TEKSTER = {
   [UttakÅrsak.TIDLIG_OPPSTART_FAR]: 'UttakDokumentasjonFaktaTable.TidligOppstartFar',
 };
 
-const finnType = (type) => {
+const finnType = type => {
   if (type === UttakType.UTSETTELSE) {
     return <FormattedMessage id="UttakDokumentasjonFaktaTable.Utsettelse" />;
   }
@@ -72,58 +66,74 @@ const UttakDokumentasjonFaktaTable: FunctionComponent<OwnProps> = ({
 }) => {
   const [valgtDokBehovFomDatoer, setDokBehovFomDatoer] = useState<string[]>([]);
 
-  const velgDokBehovFomDato = useCallback((fom?: string) => {
-    if (valgtDokBehovFomDatoer.includes(fom)) {
-      setDokBehovFomDatoer((foms) => foms.filter((f) => f !== fom));
-    } else {
-      setDokBehovFomDatoer((foms) => foms.concat(fom));
-    }
-  }, [valgtDokBehovFomDatoer, setDokBehovFomDatoer]);
+  const velgDokBehovFomDato = useCallback(
+    (fom?: string) => {
+      if (valgtDokBehovFomDatoer.includes(fom)) {
+        setDokBehovFomDatoer(foms => foms.filter(f => f !== fom));
+      } else {
+        setDokBehovFomDatoer(foms => foms.concat(fom));
+      }
+    },
+    [valgtDokBehovFomDatoer, setDokBehovFomDatoer],
+  );
 
-  useEffect(() => velgDokBehovFomDato(dokumentasjonVurderingBehov?.find((oa) => !oa.vurdering)?.fom), []);
+  useEffect(() => velgDokBehovFomDato(dokumentasjonVurderingBehov?.find(oa => !oa.vurdering)?.fom), []);
 
-  const oppdaterPeriode = useCallback((oppdatertKrav: { perioder: DokumentasjonVurderingBehov[] }) => {
-    const { perioder } = oppdatertKrav;
-    const oppdaterteDokBehov = dokumentasjonVurderingBehov
-      .filter((aKrav) => aKrav.fom !== perioder[0].fom)
-      .concat(perioder)
-      .sort((a1, a2) => a1.fom.localeCompare(a2.fom));
+  const oppdaterPeriode = useCallback(
+    (oppdatertKrav: { perioder: DokumentasjonVurderingBehov[] }) => {
+      const { perioder } = oppdatertKrav;
+      const oppdaterteDokBehov = dokumentasjonVurderingBehov
+        .filter(aKrav => aKrav.fom !== perioder[0].fom)
+        .concat(perioder)
+        .sort((a1, a2) => a1.fom.localeCompare(a2.fom));
 
-    oppdaterDokBehov(oppdaterteDokBehov);
+      oppdaterDokBehov(oppdaterteDokBehov);
 
-    setDokBehovFomDatoer((fomDatoer) => {
-      const åpneRaderMinusDenSomErOppdatert = fomDatoer.filter((fom) => fom !== perioder[0].fom);
-      const nySomSkalÅpnes = oppdaterteDokBehov.find((oa) => !oa.vurdering)?.fom;
-      return nySomSkalÅpnes ? åpneRaderMinusDenSomErOppdatert.concat(nySomSkalÅpnes) : åpneRaderMinusDenSomErOppdatert;
-    });
-    setDirty(true);
-  }, [dokumentasjonVurderingBehov]);
+      setDokBehovFomDatoer(fomDatoer => {
+        const åpneRaderMinusDenSomErOppdatert = fomDatoer.filter(fom => fom !== perioder[0].fom);
+        const nySomSkalÅpnes = oppdaterteDokBehov.find(oa => !oa.vurdering)?.fom;
+        return nySomSkalÅpnes
+          ? åpneRaderMinusDenSomErOppdatert.concat(nySomSkalÅpnes)
+          : åpneRaderMinusDenSomErOppdatert;
+      });
+      setDirty(true);
+    },
+    [dokumentasjonVurderingBehov],
+  );
 
   return (
     <Table headerTextCodes={HEADER_TEXT_CODES} noHover hasGrayHeader>
-      {dokumentasjonVurderingBehov.map((behov) => {
+      {dokumentasjonVurderingBehov.map(behov => {
         const kolonner = (
           <>
             <TableColumn>{`${dateFormat(behov.fom)} - ${dateFormat(behov.tom)}`}</TableColumn>
             <TableColumn>{finnType(behov.type)}</TableColumn>
-            <TableColumn>{UTTAK_ÅRSAK_TEKSTER[behov.årsak] ? <FormattedMessage id={UTTAK_ÅRSAK_TEKSTER[behov.årsak]} /> : ''}</TableColumn>
+            <TableColumn>
+              {UTTAK_ÅRSAK_TEKSTER[behov.årsak] ? <FormattedMessage id={UTTAK_ÅRSAK_TEKSTER[behov.årsak]} /> : ''}
+            </TableColumn>
             <TableColumn>
               {behov.vurdering === UttakVurdering.GODKJENT && (
                 <>
                   <SuccessStroke />
-                  <div className={styles.ikon}><FormattedMessage id="UttakDokumentasjonFaktaTable.Godkjent" /></div>
+                  <div className={styles.ikon}>
+                    <FormattedMessage id="UttakDokumentasjonFaktaTable.Godkjent" />
+                  </div>
                 </>
               )}
               {behov.vurdering === UttakVurdering.IKKE_GODKJENT && (
                 <>
                   <Error />
-                  <div className={styles.ikon}><FormattedMessage id="UttakDokumentasjonFaktaTable.IkkeGodkjent" /></div>
+                  <div className={styles.ikon}>
+                    <FormattedMessage id="UttakDokumentasjonFaktaTable.IkkeGodkjent" />
+                  </div>
                 </>
               )}
               {behov.vurdering === UttakVurdering.IKKE_DOKUMENTERT && (
                 <>
                   <FileError />
-                  <div className={styles.ikon}><FormattedMessage id="UttakDokumentasjonFaktaTable.ManglerDok" /></div>
+                  <div className={styles.ikon}>
+                    <FormattedMessage id="UttakDokumentasjonFaktaTable.ManglerDok" />
+                  </div>
                 </>
               )}
             </TableColumn>
@@ -137,8 +147,8 @@ const UttakDokumentasjonFaktaTable: FunctionComponent<OwnProps> = ({
               isApLeftBorder={!behov.vurdering}
               showContent={valgtDokBehovFomDatoer.includes(behov.fom)}
               toggleContent={() => velgDokBehovFomDato(behov.fom)}
-              content={((valgtDokBehovFomDatoer.includes(behov.fom)
-                && (
+              content={
+                valgtDokBehovFomDatoer.includes(behov.fom) && (
                   <UttakDokumentasjonFaktaDetailForm
                     key={behov.fom}
                     valgtDokBehov={behov}
@@ -147,17 +157,13 @@ const UttakDokumentasjonFaktaTable: FunctionComponent<OwnProps> = ({
                     avbrytEditeringAvAktivitetskrav={() => velgDokBehovFomDato(behov.fom)}
                   />
                 )
-              ))}
+              }
             >
               {kolonner}
             </ExpandableTableRow>
           );
         }
-        return (
-          <TableRow key={behov.fom + behov.tom}>
-            {kolonner}
-          </TableRow>
-        );
+        return <TableRow key={behov.fom + behov.tom}>{kolonner}</TableRow>;
       })}
     </Table>
   );

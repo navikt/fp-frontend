@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  fireEvent,
-  render, screen, waitFor,
-} from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 
@@ -20,9 +17,11 @@ describe('<PermisjonIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(await screen.findByText(
-      'Minst en av følgende perioder må være utfylt: fullt uttak, overføring av kvote, utsettelse eller gradering',
-    )).toBeInTheDocument();
+    expect(
+      await screen.findByText(
+        'Minst en av følgende perioder må være utfylt: fullt uttak, overføring av kvote, utsettelse eller gradering',
+      ),
+    ).toBeInTheDocument();
 
     await userEvent.click(screen.getAllByText('Fullt uttak')[1]);
 
@@ -49,14 +48,16 @@ describe('<PermisjonIndex>', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       tidsromPermisjon: {
         fulltUttak: true,
-        permisjonsPerioder: [{
-          flerbarnsdager: false,
-          harSamtidigUttak: true,
-          samtidigUttaksprosent: '100.00',
-          periodeFom: '2022-05-20',
-          periodeTom: '2022-06-20',
-          periodeType: 'MØDREKVOTE',
-        }],
+        permisjonsPerioder: [
+          {
+            flerbarnsdager: false,
+            harSamtidigUttak: true,
+            samtidigUttaksprosent: '100.00',
+            periodeFom: '2022-05-20',
+            periodeTom: '2022-06-20',
+            periodeType: 'MØDREKVOTE',
+          },
+        ],
         skalGradere: false,
         skalHaOpphold: false,
         skalOvertaKvote: false,
@@ -94,11 +95,13 @@ describe('<PermisjonIndex>', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       tidsromPermisjon: {
         fulltUttak: false,
-        overforingsperioder: [{
-          overforingArsak: 'SYKDOM_ANNEN_FORELDER',
-          periodeFom: '2022-05-20',
-          periodeTom: '2022-06-20',
-        }],
+        overforingsperioder: [
+          {
+            overforingArsak: 'SYKDOM_ANNEN_FORELDER',
+            periodeFom: '2022-05-20',
+            periodeTom: '2022-06-20',
+          },
+        ],
         skalGradere: false,
         skalHaOpphold: false,
         skalOvertaKvote: true,
@@ -148,13 +151,15 @@ describe('<PermisjonIndex>', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       tidsromPermisjon: {
         fulltUttak: false,
-        utsettelsePeriode: [{
-          arsakForUtsettelse: 'ARBEID',
-          erArbeidstaker: 'true',
-          periodeForUtsettelse: 'MØDREKVOTE',
-          periodeFom: '2022-05-20',
-          periodeTom: '2022-06-20',
-        }],
+        utsettelsePeriode: [
+          {
+            arsakForUtsettelse: 'ARBEID',
+            erArbeidstaker: 'true',
+            periodeForUtsettelse: 'MØDREKVOTE',
+            periodeFom: '2022-05-20',
+            periodeTom: '2022-06-20',
+          },
+        ],
         graderingPeriode: undefined,
         oppholdPerioder: undefined,
         overforingsperioder: undefined,
@@ -211,21 +216,23 @@ describe('<PermisjonIndex>', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       tidsromPermisjon: {
         fulltUttak: false,
-        graderingPeriode: [{
-          arbeidsgiverIdentifikator: '802323232',
-          arbeidskategoriType: 'ARBEIDSTAKER',
-          erArbeidstaker: true,
-          erFrilanser: false,
-          erSelvstNæringsdrivende: false,
-          flerbarnsdager: undefined,
-          harSamtidigUttak: true,
-          periodeFom: '2022-05-20',
-          periodeForGradering: 'MØDREKVOTE',
-          periodeTom: '2022-06-20',
-          prosentandelArbeid: '100.00',
-          samtidigUttaksprosent: '100',
-          skalGraderes: undefined,
-        }],
+        graderingPeriode: [
+          {
+            arbeidsgiverIdentifikator: '802323232',
+            arbeidskategoriType: 'ARBEIDSTAKER',
+            erArbeidstaker: true,
+            erFrilanser: false,
+            erSelvstNæringsdrivende: false,
+            flerbarnsdager: undefined,
+            harSamtidigUttak: true,
+            periodeFom: '2022-05-20',
+            periodeForGradering: 'MØDREKVOTE',
+            periodeTom: '2022-06-20',
+            prosentandelArbeid: '100.00',
+            samtidigUttaksprosent: '100',
+            skalGraderes: undefined,
+          },
+        ],
         oppholdPerioder: undefined,
         overforingsperioder: undefined,
         permisjonsPerioder: undefined,
@@ -263,9 +270,11 @@ describe('<PermisjonIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(await screen.findByText(
-      'Minst en av følgende perioder må være utfylt: fullt uttak, overføring av kvote, utsettelse eller gradering',
-    )).toBeInTheDocument();
+    expect(
+      await screen.findByText(
+        'Minst en av følgende perioder må være utfylt: fullt uttak, overføring av kvote, utsettelse eller gradering',
+      ),
+    ).toBeInTheDocument();
 
     await userEvent.click(screen.getAllByText('Fullt uttak')[1]);
 
@@ -285,23 +294,26 @@ describe('<PermisjonIndex>', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       tidsromPermisjon: {
         fulltUttak: true,
-        oppholdPerioder: [{
-          periodeFom: '2022-05-20',
-          periodeTom: '2022-06-20',
-          årsak: 'UTTAK_FORELDREPENGER_ANNEN_FORELDER',
-
-        }],
+        oppholdPerioder: [
+          {
+            periodeFom: '2022-05-20',
+            periodeTom: '2022-06-20',
+            årsak: 'UTTAK_FORELDREPENGER_ANNEN_FORELDER',
+          },
+        ],
         skalGradere: false,
         skalHaOpphold: true,
         skalOvertaKvote: false,
         skalUtsette: false,
-        permisjonsPerioder: [{
-          flerbarnsdager: false,
-          harSamtidigUttak: false,
-          periodeFom: '2022-05-20',
-          periodeTom: '2022-06-20',
-          periodeType: 'MØDREKVOTE',
-        }],
+        permisjonsPerioder: [
+          {
+            flerbarnsdager: false,
+            harSamtidigUttak: false,
+            periodeFom: '2022-05-20',
+            periodeTom: '2022-06-20',
+            periodeType: 'MØDREKVOTE',
+          },
+        ],
         utsettelsePeriode: undefined,
         overforingsperioder: undefined,
         graderingPeriode: undefined,

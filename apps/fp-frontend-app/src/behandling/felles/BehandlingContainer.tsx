@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, ReactElement, useState,
-} from 'react';
+import React, { FunctionComponent, ReactElement, useState } from 'react';
 
 import { Behandling } from '@navikt/fp-types';
 import { RequestApi } from '@navikt/fp-rest-api';
@@ -18,8 +16,8 @@ interface FaktaPanelInfo {
 
 interface OwnProps {
   behandling: Behandling;
-  hentFaktaPaneler?: ((props: FaktaPanelInitProps) => ReactElement);
-  hentProsessPaneler?: ((props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => ReactElement);
+  hentFaktaPaneler?: (props: FaktaPanelInitProps) => ReactElement;
+  hentProsessPaneler?: (props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => ReactElement;
   valgtProsessSteg?: string;
   valgtFaktaSteg?: string;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;

@@ -9,12 +9,8 @@ type OwnProps = Readonly<{
 /**
  * AvdelingslederDashboard
  */
-const AvdelingslederDashboard: FunctionComponent<OwnProps> = ({
-  children,
-}) => (
-  <div className={styles.container}>
-    {children}
-  </div>
+const AvdelingslederDashboard: FunctionComponent<OwnProps> = ({ children }) => (
+  <div className={styles.container}>{children}</div>
 );
 
 export default AvdelingslederDashboard;

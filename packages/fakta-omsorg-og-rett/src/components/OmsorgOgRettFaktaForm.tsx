@@ -2,9 +2,7 @@ import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponen
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
-import {
-  AlleKodeverk, KjønnkodeEnum, Personoversikt, Ytelsefordeling,
-} from '@navikt/fp-types';
+import { AlleKodeverk, KjønnkodeEnum, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
 import { AvklarAnnenforelderHarRettAp, BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
@@ -14,16 +12,17 @@ import AleneomsorgForm, { FormValues as AleneOmsorgValues } from './forms/Aleneo
 import HarAnnenForelderRettForm, { FormValues as RettFormValues } from './forms/HarAnnenForelderRettForm';
 
 const finnAksjonspunktTekst = (aksjonspunkter: Aksjonspunkt[]): string => {
-  if (aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG)) {
+  if (aksjonspunkter.some(ap => ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG)) {
     return 'OmsorgOgRettFaktaForm.VurderOmAleneomsorg';
   }
-  if (aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT)) {
+  if (aksjonspunkter.some(ap => ap.definisjon === AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT)) {
     return 'OmsorgOgRettFaktaForm.VurderAndreForelderRett';
   }
   return '';
 };
 
-const finnMotsattKjønn = (kjønn: string) => (kjønn === KjønnkodeEnum.KVINNE ? KjønnkodeEnum.MANN : KjønnkodeEnum.KVINNE);
+const finnMotsattKjønn = (kjønn: string) =>
+  kjønn === KjønnkodeEnum.KVINNE ? KjønnkodeEnum.MANN : KjønnkodeEnum.KVINNE;
 
 interface OwnProps {
   readOnly: boolean;
@@ -32,9 +31,9 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
   aksjonspunkter: Aksjonspunkt[];
   lagreCallback: (aksjonspunktData: BekreftAleneomsorgVurderingAp | AvklarAnnenforelderHarRettAp) => Promise<void>;
-  formData?: RettFormValues | AleneOmsorgValues,
-  setFormData: (data: RettFormValues | AleneOmsorgValues) => void,
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  formData?: RettFormValues | AleneOmsorgValues;
+  setFormData: (data: RettFormValues | AleneOmsorgValues) => void;
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
 const OmsorgOgRettFaktaIndex: FunctionComponent<OwnProps> = ({
@@ -49,10 +48,14 @@ const OmsorgOgRettFaktaIndex: FunctionComponent<OwnProps> = ({
   alleMerknaderFraBeslutter,
 }) => {
   const aksjonspunktTekst = finnAksjonspunktTekst(aksjonspunkter);
-  const harAleneomsorgAksjonspunkt = aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG);
+  const harAleneomsorgAksjonspunkt = aksjonspunkter.some(
+    ap => ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+  );
   return (
     <>
-      <Heading size="small"><FormattedMessage id="OmsorgOgRettFaktaForm.Overskrift" /></Heading>
+      <Heading size="small">
+        <FormattedMessage id="OmsorgOgRettFaktaForm.Overskrift" />
+      </Heading>
       <VerticalSpacer thirtyTwoPx />
       {aksjonspunktTekst && (
         <AksjonspunktHelpTextHTML>
@@ -61,7 +64,12 @@ const OmsorgOgRettFaktaIndex: FunctionComponent<OwnProps> = ({
       )}
       <VerticalSpacer thirtyTwoPx />
       <AlleBarnPanel alleBarn={personoversikt.barn} />
-      <ForelderPanel forelder={personoversikt.bruker} kjønn={personoversikt.bruker.kjønn} erSøker alleKodeverk={alleKodeverk} />
+      <ForelderPanel
+        forelder={personoversikt.bruker}
+        kjønn={personoversikt.bruker.kjønn}
+        erSøker
+        alleKodeverk={alleKodeverk}
+      />
       {personoversikt.annenPart && (
         <ForelderPanel
           forelder={personoversikt.annenPart}

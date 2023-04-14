@@ -16,9 +16,7 @@ interface StaticFunctions {
   transformValues: (formValues: FormValues) => FormValues;
 }
 
-const FrilansPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = ({
-  readOnly,
-}) => (
+const FrilansPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly }) => (
   <RawIntlProvider value={intl}>
     <FrilansPanel readOnly={readOnly} />
   </RawIntlProvider>
@@ -26,6 +24,6 @@ const FrilansPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = (
 
 FrilansPapirsoknadIndex.buildInitialValues = () => FrilansPanel.buildInitialValues();
 
-FrilansPapirsoknadIndex.transformValues = (formValues) => FrilansPanel.transformValues(formValues);
+FrilansPapirsoknadIndex.transformValues = formValues => FrilansPanel.transformValues(formValues);
 
 export default FrilansPapirsoknadIndex;

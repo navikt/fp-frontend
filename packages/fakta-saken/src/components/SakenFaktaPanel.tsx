@@ -4,9 +4,16 @@ import { FormattedMessage } from 'react-intl';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import {
-  VerticalSpacer, AksjonspunktHelpTextHTML, FlexContainer, FlexRow, FlexColumn,
+  VerticalSpacer,
+  AksjonspunktHelpTextHTML,
+  FlexContainer,
+  FlexRow,
+  FlexColumn,
 } from '@navikt/ft-ui-komponenter';
-import { MerkOpptjeningUtlandAp, OverstyringAvklarStartdatoForPeriodenAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import {
+  MerkOpptjeningUtlandAp,
+  OverstyringAvklarStartdatoForPeriodenAp,
+} from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import InnhentDokOpptjeningUtlandPanel from './innhentDok/InnhentDokOpptjeningUtlandPanel';
 import StartdatoForForeldrepengerperiodenForm from './startdatoForForeldrepenger/StartdatoForForeldrepengerperiodenForm';
@@ -22,14 +29,13 @@ interface OwnProps {
   submitCallback: (data: MerkOpptjeningUtlandAp | OverstyringAvklarStartdatoForPeriodenAp) => Promise<void>;
   readOnly: boolean;
   submittable: boolean;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  formData?: any,
-  setFormData: (data: any) => void,
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
+  formData?: any;
+  setFormData: (data: any) => void;
 }
 
-const erMarkertUtenlandssak = (
-  aksjonspunkter: Aksjonspunkt[],
-): boolean => aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK);
+const erMarkertUtenlandssak = (aksjonspunkter: Aksjonspunkt[]): boolean =>
+  aksjonspunkter.some(ap => ap.definisjon === AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK);
 
 const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
   erSvangerskapspenger,
@@ -61,7 +67,9 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
               dokStatus={dokStatus}
               readOnly={readOnly}
               harApneAksjonspunkter={harApneAksjonspunkter}
-              aksjonspunkt={aksjonspunkter.find((ap) => ap.definisjon === AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK)}
+              aksjonspunkt={aksjonspunkter.find(
+                ap => ap.definisjon === AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+              )}
               submittable={submittable}
               submitCallback={submitCallback}
               alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
@@ -73,7 +81,7 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
         {!erSvangerskapspenger && !!soknad && (
           <FlexColumn className={styles.col}>
             <StartdatoForForeldrepengerperiodenForm
-              aksjonspunkt={aksjonspunkter.find((ap) => ap.definisjon === AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO)}
+              aksjonspunkt={aksjonspunkter.find(ap => ap.definisjon === AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO)}
               submitCallback={submitCallback}
               readOnly={readOnly}
               alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}

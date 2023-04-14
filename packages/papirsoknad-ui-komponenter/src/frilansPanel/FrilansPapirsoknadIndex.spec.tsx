@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  fireEvent, render, screen, waitFor,
-} from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 
@@ -67,15 +65,19 @@ describe('<FrilansPapirsoknadIndex>', () => {
         harHattOppdragForFamilie: false,
         harInntektFraFosterhjem: true,
         harSokerPeriodeMedFrilans: true,
-        oppdragPerioder: [{
-          fomDato: '',
-          oppdragsgiver: '',
-          tomDato: '',
-        }],
-        perioder: [{
-          periodeFom: '2022-05-27',
-          periodeTom: '2022-06-15',
-        }],
+        oppdragPerioder: [
+          {
+            fomDato: '',
+            oppdragsgiver: '',
+            tomDato: '',
+          },
+        ],
+        perioder: [
+          {
+            periodeFom: '2022-05-27',
+            periodeTom: '2022-06-15',
+          },
+        ],
       },
     });
   });
@@ -116,7 +118,9 @@ describe('<FrilansPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(await screen.findByText('F.o.m må være lik eller etter dato for første periode med frilansvirksomhet')).toBeInTheDocument();
+    expect(
+      await screen.findByText('F.o.m må være lik eller etter dato for første periode med frilansvirksomhet'),
+    ).toBeInTheDocument();
 
     await userEvent.clear(oppdragFomInput);
     await userEvent.type(oppdragFomInput, '28.05.2022');
@@ -131,15 +135,19 @@ describe('<FrilansPapirsoknadIndex>', () => {
         harHattOppdragForFamilie: true,
         harInntektFraFosterhjem: true,
         harSokerPeriodeMedFrilans: true,
-        oppdragPerioder: [{
-          fomDato: '2022-05-28',
-          oppdragsgiver: 'test-oppdragsgiver',
-          tomDato: '2022-06-15',
-        }],
-        perioder: [{
-          periodeFom: '2022-05-27',
-          periodeTom: '2022-06-15',
-        }],
+        oppdragPerioder: [
+          {
+            fomDato: '2022-05-28',
+            oppdragsgiver: 'test-oppdragsgiver',
+            tomDato: '2022-06-15',
+          },
+        ],
+        perioder: [
+          {
+            periodeFom: '2022-05-27',
+            periodeTom: '2022-06-15',
+          },
+        ],
       },
     });
   });

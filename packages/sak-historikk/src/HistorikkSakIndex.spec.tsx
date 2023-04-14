@@ -5,7 +5,11 @@ import userEvent from '@testing-library/user-event';
 import * as stories from './HistorikkSakIndex.stories';
 
 const {
-  BehandlingIkkeErValgt, BehandlingErValgt, HistorikkinnslagAktivitetskrav, HistorikkinnslagForeldelse, HistorikkinnslagTilbakekreving,
+  BehandlingIkkeErValgt,
+  BehandlingErValgt,
+  HistorikkinnslagAktivitetskrav,
+  HistorikkinnslagForeldelse,
+  HistorikkinnslagTilbakekreving,
 } = composeStories(stories);
 
 describe('<HistorikkSakIndex>', () => {

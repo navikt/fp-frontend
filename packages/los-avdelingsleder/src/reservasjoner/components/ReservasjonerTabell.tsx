@@ -1,11 +1,7 @@
-import React, {
-  FunctionComponent, useState, useCallback, useMemo,
-} from 'react';
+import React, { FunctionComponent, useState, useCallback, useMemo } from 'react';
 import { Label, BodyShort } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
-import {
-  Table, TableRow, TableColumn, Image, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { Table, TableRow, TableColumn, Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { getDateAndTime } from '@navikt/ft-utils';
 
 import { AlleKodeverk } from '@navikt/fp-types';
@@ -66,35 +62,50 @@ const ReservasjonerTabell: FunctionComponent<OwnProps> = ({
     setShowFlyttReservasjonModal(false);
   }, []);
 
-  const sorterteReservasjoner = useMemo(() => reservasjoner
-    .sort((reservasjon1, reservasjon2) => reservasjon1.reservertAvNavn.localeCompare(reservasjon2.reservertAvNavn)),
-  [reservasjoner]);
+  const sorterteReservasjoner = useMemo(
+    () =>
+      reservasjoner.sort((reservasjon1, reservasjon2) =>
+        reservasjon1.reservertAvNavn.localeCompare(reservasjon2.reservertAvNavn),
+      ),
+    [reservasjoner],
+  );
 
-  const { startRequest: endreOppgavereservasjon } = restApiHooks.useRestApiRunner(RestApiPathsKeys.ENDRE_OPPGAVERESERVASJON);
+  const { startRequest: endreOppgavereservasjon } = restApiHooks.useRestApiRunner(
+    RestApiPathsKeys.ENDRE_OPPGAVERESERVASJON,
+  );
 
   const { startRequest: flyttOppgavereservasjon } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FLYTT_RESERVASJON);
 
   const {
-    startRequest: hentSaksbehandler, state: hentSaksbehandlerState, data: saksbehandler, resetRequestData: resetHentSaksbehandler,
+    startRequest: hentSaksbehandler,
+    state: hentSaksbehandlerState,
+    data: saksbehandler,
+    resetRequestData: resetHentSaksbehandler,
   } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK);
 
   return (
     <>
-      <Label size="small"><FormattedMessage id="ReservasjonerTabell.Reservasjoner" /></Label>
+      <Label size="small">
+        <FormattedMessage id="ReservasjonerTabell.Reservasjoner" />
+      </Label>
       {sorterteReservasjoner.length === 0 && (
         <>
           <VerticalSpacer eightPx />
-          <BodyShort size="small"><FormattedMessage id="ReservasjonerTabell.IngenReservasjoner" /></BodyShort>
+          <BodyShort size="small">
+            <FormattedMessage id="ReservasjonerTabell.IngenReservasjoner" />
+          </BodyShort>
           <VerticalSpacer eightPx />
         </>
       )}
       {sorterteReservasjoner.length > 0 && (
         <Table headerTextCodes={headerTextCodes} noHover>
-          {sorterteReservasjoner.map((reservasjon) => (
+          {sorterteReservasjoner.map(reservasjon => (
             <TableRow key={reservasjon.oppgaveId}>
               <TableColumn>{reservasjon.reservertAvNavn}</TableColumn>
               <TableColumn>{reservasjon.oppgaveSaksNr}</TableColumn>
-              <TableColumn>{getKodeverknavnFraKode(alleKodeverk, KodeverkType.BEHANDLING_TYPE, reservasjon.behandlingType)}</TableColumn>
+              <TableColumn>
+                {getKodeverknavnFraKode(alleKodeverk, KodeverkType.BEHANDLING_TYPE, reservasjon.behandlingType)}
+              </TableColumn>
               <TableColumn>
                 <FormattedMessage
                   id="ReservasjonerTabell.ReservertTilFormat"
@@ -108,11 +119,7 @@ const ReservasjonerTabell: FunctionComponent<OwnProps> = ({
                 />
               </TableColumn>
               <TableColumn>
-                <Image
-                  src={gruppeUrl}
-                  srcHover={gruppeHoverUrl}
-                  onMouseDown={() => showFlytteModal(reservasjon)}
-                />
+                <Image src={gruppeUrl} srcHover={gruppeHoverUrl} onMouseDown={() => showFlytteModal(reservasjon)} />
               </TableColumn>
               <TableColumn>
                 <Image

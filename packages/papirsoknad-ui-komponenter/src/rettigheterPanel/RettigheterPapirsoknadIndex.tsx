@@ -13,15 +13,9 @@ interface OwnProps {
   soknadData: SoknadData;
 }
 
-const RettigheterPapirsoknadIndex: FunctionComponent<OwnProps> = ({
-  readOnly,
-  soknadData,
-}) => (
+const RettigheterPapirsoknadIndex: FunctionComponent<OwnProps> = ({ readOnly, soknadData }) => (
   <RawIntlProvider value={intl}>
-    <RettigheterPanel
-      readOnly={readOnly}
-      soknadData={soknadData}
-    />
+    <RettigheterPanel readOnly={readOnly} soknadData={soknadData} />
   </RawIntlProvider>
 );
 

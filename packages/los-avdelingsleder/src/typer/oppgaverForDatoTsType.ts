@@ -3,6 +3,6 @@ type OppgaveForDato = Readonly<{
   behandlingType: string;
   opprettetDato: string;
   antall: number;
-}>
+}>;
 
 export default OppgaveForDato;

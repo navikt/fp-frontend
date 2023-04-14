@@ -5,9 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { dokumentMalType } from '@navikt/fp-kodeverk';
 import * as stories from './VedtakInnsynProsessIndex.stories';
 
-const {
-  PanelForInnvilgetVedtak, PanelForAvvistVedtak, PanelForAvvistVedtakReadonly,
-} = composeStories(stories);
+const { PanelForInnvilgetVedtak, PanelForAvvistVedtak, PanelForAvvistVedtakReadonly } = composeStories(stories);
 
 describe('<VedtakInnsynProsessIndex>', () => {
   it('skal forhåndsvise og så bekrefte innvilget vedtak', async () => {

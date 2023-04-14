@@ -18,12 +18,8 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{ behandledeOppgaver?: Oppgave[] }> = ({
-  behandledeOppgaver,
-}) => {
-  const data = [
-    { key: RestApiPathsKeys.BEHANDLEDE_OPPGAVER.name, data: behandledeOppgaver },
-  ];
+const Template: Story<{ behandledeOppgaver?: Oppgave[] }> = ({ behandledeOppgaver }) => {
+  const data = [{ key: RestApiPathsKeys.BEHANDLEDE_OPPGAVER.name, data: behandledeOppgaver }];
 
   return (
     <RestApiMock data={data} requestApi={requestApi}>
@@ -34,11 +30,13 @@ const Template: Story<{ behandledeOppgaver?: Oppgave[] }> = ({
 
 export const Default = Template.bind({});
 Default.args = {
-  behandledeOppgaver: [{
-    id: 1,
-    personnummer: '334342323',
-    navn: 'Espen Utvikler',
-  } as Oppgave],
+  behandledeOppgaver: [
+    {
+      id: 1,
+      personnummer: '334342323',
+      navn: 'Espen Utvikler',
+    } as Oppgave,
+  ],
 };
 
 export const IngenBehandlinger = Template.bind({});

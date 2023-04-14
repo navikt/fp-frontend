@@ -15,12 +15,9 @@ export default {
 };
 
 const Template: Story<{
-  fagsaker: FagsakEnkel[],
-  searchResultAccessDenied?: { feilmelding: string },
-}> = ({
-  fagsaker,
-  searchResultAccessDenied,
-}) => {
+  fagsaker: FagsakEnkel[];
+  searchResultAccessDenied?: { feilmelding: string };
+}> = ({ fagsaker, searchResultAccessDenied }) => {
   const [visResultat, toggleResultat] = useState(false);
   return (
     <FagsakSokSakIndex
@@ -37,16 +34,19 @@ const Template: Story<{
 
 export const Default = Template.bind({});
 Default.args = {
-  fagsaker: [{
-    saksnummer: '1',
-    fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
-    relasjonsRolleType: '',
-    status: fagsakStatus.OPPRETTET,
-  }, {
-    saksnummer: '2',
-    fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
-    status: fagsakStatus.OPPRETTET,
-  }] as FagsakEnkel[],
+  fagsaker: [
+    {
+      saksnummer: '1',
+      fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+      relasjonsRolleType: '',
+      status: fagsakStatus.OPPRETTET,
+    },
+    {
+      saksnummer: '2',
+      fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
+      status: fagsakStatus.OPPRETTET,
+    },
+  ] as FagsakEnkel[],
 };
 
 export const IkkeAdgang = Template.bind({});

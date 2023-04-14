@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  fireEvent,
-  render, screen, waitFor,
-} from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import dayjs from 'dayjs';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
@@ -84,7 +81,9 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(await screen.findByText(`Dato må være før eller lik ${dayjs().format(DDMMYYYY_DATE_FORMAT)}`)).toBeInTheDocument();
+    expect(
+      await screen.findByText(`Dato må være før eller lik ${dayjs().format(DDMMYYYY_DATE_FORMAT)}`),
+    ).toBeInTheDocument();
 
     await userEvent.clear(tomDatoInput);
     await userEvent.type(tomDatoInput, dayjs().subtract(11, 'day').format(DDMMYYYY_DATE_FORMAT));
@@ -92,8 +91,12 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(await screen.findByText(`Dato må være før eller lik ${dayjs().subtract(11, 'day').format(DDMMYYYY_DATE_FORMAT)}`)).toBeInTheDocument();
-    expect(screen.getByText(`Dato må være etter eller lik ${dayjs().subtract(10, 'day').format(DDMMYYYY_DATE_FORMAT)}`)).toBeInTheDocument();
+    expect(
+      await screen.findByText(`Dato må være før eller lik ${dayjs().subtract(11, 'day').format(DDMMYYYY_DATE_FORMAT)}`),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(`Dato må være etter eller lik ${dayjs().subtract(10, 'day').format(DDMMYYYY_DATE_FORMAT)}`),
+    ).toBeInTheDocument();
 
     await userEvent.clear(tomDatoInput);
     await userEvent.type(tomDatoInput, dayjs().subtract(6, 'day').format(DDMMYYYY_DATE_FORMAT));
@@ -107,11 +110,13 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
       harFremtidigeOppholdUtenlands: false,
       harTidligereOppholdUtenlands: true,
       oppholdINorge: true,
-      tidligereOppholdUtenlands: [{
-        land: 'AND',
-        periodeFom: dayjs().subtract(10, 'day').format(ISO_DATE_FORMAT),
-        periodeTom: dayjs().subtract(6, 'day').format(ISO_DATE_FORMAT),
-      }],
+      tidligereOppholdUtenlands: [
+        {
+          land: 'AND',
+          periodeFom: dayjs().subtract(10, 'day').format(ISO_DATE_FORMAT),
+          periodeTom: dayjs().subtract(6, 'day').format(ISO_DATE_FORMAT),
+        },
+      ],
     });
   });
 
@@ -155,8 +160,12 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(await screen.findByText(`Dato må være før eller lik ${dayjs().add(10, 'day').format(DDMMYYYY_DATE_FORMAT)}`)).toBeInTheDocument();
-    expect(screen.getByText(`Dato må være etter eller lik ${dayjs().add(11, 'day').format(DDMMYYYY_DATE_FORMAT)}`)).toBeInTheDocument();
+    expect(
+      await screen.findByText(`Dato må være før eller lik ${dayjs().add(10, 'day').format(DDMMYYYY_DATE_FORMAT)}`),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(`Dato må være etter eller lik ${dayjs().add(11, 'day').format(DDMMYYYY_DATE_FORMAT)}`),
+    ).toBeInTheDocument();
 
     await userEvent.clear(fomDatoInput);
     await userEvent.type(fomDatoInput, dayjs().add(6, 'day').format(DDMMYYYY_DATE_FORMAT));
@@ -166,11 +175,13 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      fremtidigeOppholdUtenlands: [{
-        land: 'AND',
-        periodeFom: dayjs().add(6, 'day').format(ISO_DATE_FORMAT),
-        periodeTom: dayjs().add(10, 'day').format(ISO_DATE_FORMAT),
-      }],
+      fremtidigeOppholdUtenlands: [
+        {
+          land: 'AND',
+          periodeFom: dayjs().add(6, 'day').format(ISO_DATE_FORMAT),
+          periodeTom: dayjs().add(10, 'day').format(ISO_DATE_FORMAT),
+        },
+      ],
       harFremtidigeOppholdUtenlands: true,
       harTidligereOppholdUtenlands: false,
       oppholdINorge: true,

@@ -21,13 +21,7 @@ describe('<BeslutterModalIndex>', () => {
   } as BehandlingAppKontekst;
 
   it('skal vise modal når beslutter sender tilbake til ny vurdering', async () => {
-    render(
-      <BeslutterModalIndex
-        behandling={behandling}
-        pushLocation={vi.fn()}
-        allAksjonspunktApproved
-      />,
-    );
+    render(<BeslutterModalIndex behandling={behandling} pushLocation={vi.fn()} allAksjonspunktApproved />);
 
     expect(await screen.findByText('Resultat: Ingen endring, behandlingen avsluttes')).toBeInTheDocument();
   });

@@ -1,23 +1,30 @@
-import React, {
-  useMemo, useState, FunctionComponent,
-} from 'react';
+import React, { useMemo, useState, FunctionComponent } from 'react';
 import { useForm } from 'react-hook-form';
 import moment from 'moment';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Alert, Label, Heading } from '@navikt/ds-react';
 import {
-  Image, FlexColumn, FlexContainer, FlexRow, VerticalSpacer, AvsnittSkiller, AksjonspunktHelpTextTemp,
+  Image,
+  FlexColumn,
+  FlexContainer,
+  FlexRow,
+  VerticalSpacer,
+  AvsnittSkiller,
+  AksjonspunktHelpTextTemp,
 } from '@navikt/ft-ui-komponenter';
 import { Form, Datepicker, TextAreaField } from '@navikt/ft-form-hooks';
-import {
-  hasValidDate, hasValidText, maxLength, required,
-} from '@navikt/ft-form-validators';
+import { hasValidDate, hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 
 import { AksjonspunktCode, tilretteleggingType } from '@navikt/fp-kodeverk';
 import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import {
-  AoIArbeidsforhold, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, FodselOgTilrettelegging,
-  ArbeidsforholdFodselOgTilrettelegging, ArbeidsforholdTilretteleggingDato,
+  AoIArbeidsforhold,
+  Aksjonspunkt,
+  ArbeidsgiverOpplysningerPerId,
+  KodeverkMedNavn,
+  FodselOgTilrettelegging,
+  ArbeidsforholdFodselOgTilrettelegging,
+  ArbeidsforholdTilretteleggingDato,
 } from '@navikt/fp-types';
 import { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -38,14 +45,10 @@ type FormValues = {
   begrunnelse: string;
 };
 
-const getIsBegrunnelseRequired = (
-  isDirty: boolean,
-) => (value?: string) => value !== undefined || isDirty;
+const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) => value !== undefined || isDirty;
 
-const getAksjonspunkt = (
-  aksjonspunkter: Aksjonspunkt[],
-): string => aksjonspunkter
-  .filter((ap) => ap.definisjon === AksjonspunktCode.FODSELTILRETTELEGGING)[0].begrunnelse;
+const getAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]): string =>
+  aksjonspunkter.filter(ap => ap.definisjon === AksjonspunktCode.FODSELTILRETTELEGGING)[0].begrunnelse;
 
 const getAlleArbeidsforhold = (
   tilrettelegging: FodselOgTilrettelegging,
@@ -71,11 +74,11 @@ const utledFormSectionName = (
   if (arbeidsforhold.arbeidsgiverReferanse) {
     const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse];
     if (arbeidsgiverOpplysninger) {
-      navn += arbeidsgiverOpplysninger.navn.replaceAll(/[-.,']/ig, '_');
+      navn += arbeidsgiverOpplysninger.navn.replaceAll(/[-.,']/gi, '_');
     }
     navn += arbeidsforhold.arbeidsgiverReferanse;
   } else {
-    const arbeidType = uttakArbeidTyper.find((type) => type.kode === arbeidsforhold.uttakArbeidType);
+    const arbeidType = uttakArbeidTyper.find(type => type.kode === arbeidsforhold.uttakArbeidType);
     navn = arbeidType?.navn;
   }
   if (arbeidsforhold.internArbeidsforholdReferanse) {
@@ -84,11 +87,7 @@ const utledFormSectionName = (
   return navn;
 };
 
-const erInnenforIntervall = (
-  tilretteleggingBehovFom: string,
-  fomDato?: string,
-  tomDato?: string,
-): boolean => {
+const erInnenforIntervall = (tilretteleggingBehovFom: string, fomDato?: string, tomDato?: string): boolean => {
   const dato = moment(tilretteleggingBehovFom);
   return !(dato.isBefore(moment(fomDato)) || dato.isAfter(moment(tomDato)));
 };
@@ -96,17 +95,23 @@ const erInnenforIntervall = (
 const skalViseInfoAlert = (
   iayArbeidsforhold: AoIArbeidsforhold[],
   tilretteleggingArbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[],
-): boolean => !tilretteleggingArbeidsforhold
-  .filter((ta) => ta.arbeidsgiverReferanse)
-  .every((ta) => iayArbeidsforhold.some((ia) => ta.arbeidsgiverReferanse === ia.arbeidsgiverIdent
-    && erInnenforIntervall(ta.tilretteleggingBehovFom, ia.fom, ia.tom)));
+): boolean =>
+  !tilretteleggingArbeidsforhold
+    .filter(ta => ta.arbeidsgiverReferanse)
+    .every(ta =>
+      iayArbeidsforhold.some(
+        ia =>
+          ta.arbeidsgiverReferanse === ia.arbeidsgiverIdent &&
+          erInnenforIntervall(ta.tilretteleggingBehovFom, ia.fom, ia.tom),
+      ),
+    );
 
 const finnArbeidsforhold = (
   alleIafAf: AoIArbeidsforhold[],
   internArbeidsforholdReferanse: string,
 ): AoIArbeidsforhold | undefined => {
   if (alleIafAf.length > 1) {
-    return alleIafAf.find((iafAf) => iafAf.internArbeidsforholdId === internArbeidsforholdReferanse);
+    return alleIafAf.find(iafAf => iafAf.internArbeidsforholdId === internArbeidsforholdReferanse);
   }
   return alleIafAf.length === 1 ? alleIafAf[0] : undefined;
 };
@@ -122,8 +127,13 @@ const utledUtbetalingsgrad = (
   if (tilretteleggingsdato.overstyrtUtbetalingsgrad) {
     return tilretteleggingsdato.overstyrtUtbetalingsgrad;
   }
-  return tilretteleggingsdato.type === tilretteleggingType.INGEN_TILRETTELEGGING ? 100
-    : finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsforhold, velferdspermisjonprosent, tilretteleggingsdato.stillingsprosent);
+  return tilretteleggingsdato.type === tilretteleggingType.INGEN_TILRETTELEGGING
+    ? 100
+    : finnUtbetalingsgradForTilrettelegging(
+        stillingsprosentArbeidsforhold,
+        velferdspermisjonprosent,
+        tilretteleggingsdato.stillingsprosent,
+      );
 };
 
 const getInitialArbeidsforholdValues = (
@@ -137,29 +147,35 @@ const getInitialArbeidsforholdValues = (
     return EMPTY_LIST;
   }
   return arbeidsforhold.reduce((res, a) => {
-    const alleIafAf = iayArbeidsforhold.filter((iaya) => iaya.arbeidsgiverIdent === a.arbeidsgiverReferanse);
+    const alleIafAf = iayArbeidsforhold.filter(iaya => iaya.arbeidsgiverIdent === a.arbeidsgiverReferanse);
     const af = finnArbeidsforhold(alleIafAf, a.internArbeidsforholdReferanse);
     const stillingsprosentArbeidsforhold = af ? af.stillingsprosent : 100;
-    const velferdspermisjonprosent = a.velferdspermisjoner.filter((p) => p.erGyldig)
-      .map((p) => p.permisjonsprosent)
+    const velferdspermisjonprosent = a.velferdspermisjoner
+      .filter(p => p.erGyldig)
+      .map(p => p.permisjonsprosent)
       .reduce((sum, prosent) => sum + prosent, 0);
 
-    const permisjoner = a.velferdspermisjoner.reduce((acc, permisjon) => ({
-      ...acc,
-      [`permisjon${permisjon.permisjonFom}`]: permisjon.erGyldig,
-    }), {});
+    const permisjoner = a.velferdspermisjoner.reduce(
+      (acc, permisjon) => ({
+        ...acc,
+        [`permisjon${permisjon.permisjonFom}`]: permisjon.erGyldig,
+      }),
+      {},
+    );
 
     return {
       ...res,
       [utledFormSectionName(a, arbeidsgiverOpplysningerPerId, uttakArbeidTyper)]: {
         ...a,
-        tilretteleggingDatoer: a.tilretteleggingDatoer.map((tilretteleggingsdato) => ({
+        tilretteleggingDatoer: a.tilretteleggingDatoer.map(tilretteleggingsdato => ({
           ...tilretteleggingsdato,
           stillingsprosent: tilretteleggingsdato.stillingsprosent,
           oldOverstyrtUtbetalingsgrad: tilretteleggingsdato.overstyrtUtbetalingsgrad,
-          overstyrtUtbetalingsgrad: tilretteleggingsdato.overstyrtUtbetalingsgrad !== undefined
-            && tilretteleggingsdato.overstyrtUtbetalingsgrad !== null ? tilretteleggingsdato.overstyrtUtbetalingsgrad
-            : utledUtbetalingsgrad(tilretteleggingsdato, stillingsprosentArbeidsforhold, velferdspermisjonprosent),
+          overstyrtUtbetalingsgrad:
+            tilretteleggingsdato.overstyrtUtbetalingsgrad !== undefined &&
+            tilretteleggingsdato.overstyrtUtbetalingsgrad !== null
+              ? tilretteleggingsdato.overstyrtUtbetalingsgrad
+              : utledUtbetalingsgrad(tilretteleggingsdato, stillingsprosentArbeidsforhold, velferdspermisjonprosent),
         })),
         ...permisjoner,
       },
@@ -177,7 +193,12 @@ const getInitialValues = (
   termindato: svangerskapspengerTilrettelegging ? svangerskapspengerTilrettelegging.termindato : '',
   fødselsdato: svangerskapspengerTilrettelegging ? svangerskapspengerTilrettelegging.fødselsdato : '',
   begrunnelse: getAksjonspunkt(aksjonspunkter),
-  ...getInitialArbeidsforholdValues(svangerskapspengerTilrettelegging, iayArbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper),
+  ...getInitialArbeidsforholdValues(
+    svangerskapspengerTilrettelegging,
+    iayArbeidsforhold,
+    arbeidsgiverOpplysningerPerId,
+    uttakArbeidTyper,
+  ),
 });
 
 const finnOverstyrtUtbetalingsgrad = (
@@ -192,11 +213,18 @@ const finnOverstyrtUtbetalingsgrad = (
     return overstyrtUtbetalingsgrad;
   }
 
-  let erLikOverstyrtVerdi = type === tilretteleggingType.INGEN_TILRETTELEGGING && parseFloat(overstyrtUtbetalingsgrad) === 100;
+  let erLikOverstyrtVerdi =
+    type === tilretteleggingType.INGEN_TILRETTELEGGING && parseFloat(overstyrtUtbetalingsgrad) === 100;
   if (type === tilretteleggingType.DELVIS_TILRETTELEGGING) {
-    erLikOverstyrtVerdi = parseFloat(overstyrtUtbetalingsgrad) === parseFloat(finnUtbetalingsgradForTilrettelegging(
-      stillingsprosentArbeidsforhold, velferdspermisjonprosent, stillingsprosent,
-    ));
+    erLikOverstyrtVerdi =
+      parseFloat(overstyrtUtbetalingsgrad) ===
+      parseFloat(
+        finnUtbetalingsgradForTilrettelegging(
+          stillingsprosentArbeidsforhold,
+          velferdspermisjonprosent,
+          stillingsprosent,
+        ),
+      );
   }
 
   if (erLikOverstyrtVerdi) {
@@ -216,29 +244,38 @@ const transformValues = (
   termindato: values.termindato,
   fødselsdato: values.fødselsdato,
   begrunnelse: values.begrunnelse,
-  bekreftetSvpArbeidsforholdList: arbeidsforhold.map((a) => {
+  bekreftetSvpArbeidsforholdList: arbeidsforhold.map(a => {
     const value = values[utledFormSectionName(a, arbeidsgiverOpplysningerPerId, uttakArbeidTyper)];
-    const alleIafAf = iayArbeidsforhold.filter((iaya) => iaya.arbeidsgiverIdent === a.arbeidsgiverReferanse);
+    const alleIafAf = iayArbeidsforhold.filter(iaya => iaya.arbeidsgiverIdent === a.arbeidsgiverReferanse);
     const af = finnArbeidsforhold(alleIafAf, a.internArbeidsforholdReferanse);
     const stillingsprosentArbeidsforhold = af ? af.stillingsprosent : 100;
-    const velferdspermisjonprosent = a.velferdspermisjoner.filter((p) => finnSkalTaHensynTilPermisjon(value.tilretteleggingBehovFom, p))
-      .filter((p) => value[`permisjon${p.permisjonFom}`])
-      .map((p) => p.permisjonsprosent)
+    const velferdspermisjonprosent = a.velferdspermisjoner
+      .filter(p => finnSkalTaHensynTilPermisjon(value.tilretteleggingBehovFom, p))
+      .filter(p => value[`permisjon${p.permisjonFom}`])
+      .map(p => p.permisjonsprosent)
       .reduce((sum, prosent) => sum + prosent, 0);
     return {
       ...value,
       skalBrukes: value.skalBrukes && value.kanTilrettelegges,
-      tilretteleggingDatoer: value.tilretteleggingDatoer.map((t) => ({
+      tilretteleggingDatoer: value.tilretteleggingDatoer.map(t => ({
         fom: t.fom,
         type: t.type,
         stillingsprosent: t.stillingsprosent,
-        overstyrtUtbetalingsgrad: finnOverstyrtUtbetalingsgrad(t.type, t.stillingsprosent, stillingsprosentArbeidsforhold,
-          t.overstyrtUtbetalingsgrad, t.oldOverstyrtUtbetalingsgrad, velferdspermisjonprosent),
+        overstyrtUtbetalingsgrad: finnOverstyrtUtbetalingsgrad(
+          t.type,
+          t.stillingsprosent,
+          stillingsprosentArbeidsforhold,
+          t.overstyrtUtbetalingsgrad,
+          t.oldOverstyrtUtbetalingsgrad,
+          velferdspermisjonprosent,
+        ),
       })),
-      velferdspermisjoner: a.velferdspermisjoner.filter((p) => finnSkalTaHensynTilPermisjon(value.tilretteleggingBehovFom, p)).map((p) => ({
-        ...p,
-        erGyldig: value[`permisjon${p.permisjonFom}`],
-      })),
+      velferdspermisjoner: a.velferdspermisjoner
+        .filter(p => finnSkalTaHensynTilPermisjon(value.tilretteleggingBehovFom, p))
+        .map(p => ({
+          ...p,
+          erGyldig: value[`permisjon${p.permisjonFom}`],
+        })),
     };
   }),
 });
@@ -253,7 +290,7 @@ interface OwnProps {
   arbeidsforhold: AoIArbeidsforhold[];
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (data: BekreftSvangerskapspengerAp) => Promise<void>;
-  uttakArbeidTyper: KodeverkMedNavn[],
+  uttakArbeidTyper: KodeverkMedNavn[];
   submittable: boolean;
   formData: FormValues;
   setFormData: (data: FormValues) => void;
@@ -281,17 +318,27 @@ const FodselOgTilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const alleArbeidsforhold = useMemo(() => getAlleArbeidsforhold(
-    svangerskapspengerTilrettelegging, arbeidsgiverOpplysningerPerId), [behandlingVersjon]);
+  const alleArbeidsforhold = useMemo(
+    () => getAlleArbeidsforhold(svangerskapspengerTilrettelegging, arbeidsgiverOpplysningerPerId),
+    [behandlingVersjon],
+  );
 
   const visInfoAlert = useMemo(() => skalViseInfoAlert(arbeidsforhold, alleArbeidsforhold), [behandlingVersjon]);
 
   const [harOverstyrtUtbetalingsgrad, setOverstyrtUtbetalingsgrad] = useState(false);
-  const arbeidsforholdSomIkkeKanTilrettelegges = alleArbeidsforhold.filter((a) => !a.kanTilrettelegges);
+  const arbeidsforholdSomIkkeKanTilrettelegges = alleArbeidsforhold.filter(a => !a.kanTilrettelegges);
 
-  const initialValues = useMemo(() => getInitialValues(
-    aksjonspunkter, svangerskapspengerTilrettelegging, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper,
-  ), [behandlingVersjon]);
+  const initialValues = useMemo(
+    () =>
+      getInitialValues(
+        aksjonspunkter,
+        svangerskapspengerTilrettelegging,
+        arbeidsforhold,
+        arbeidsgiverOpplysningerPerId,
+        uttakArbeidTyper,
+      ),
+    [behandlingVersjon],
+  );
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
@@ -303,19 +350,22 @@ const FodselOgTilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
 
   const formValues = formMethods.watch();
 
-  const formSectionNames = useMemo(() => alleArbeidsforhold.map((a) => utledFormSectionName(a, arbeidsgiverOpplysningerPerId, uttakArbeidTyper)),
-    [alleArbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper]);
+  const formSectionNames = useMemo(
+    () => alleArbeidsforhold.map(a => utledFormSectionName(a, arbeidsgiverOpplysningerPerId, uttakArbeidTyper)),
+    [alleArbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper],
+  );
 
-  const erIngenTilretteleggingValgt = formSectionNames
-    .map((name) => formValues[name])
-    .every((a) => (a.skalBrukes === false));
+  const erIngenTilretteleggingValgt = formSectionNames.map(name => formValues[name]).every(a => a.skalBrukes === false);
 
   return (
     <Form
       formMethods={formMethods}
       setDataOnUnmount={setFormData}
-      onSubmit={(values: FormValues) => submitCallback(
-        transformValues(values, arbeidsforhold, alleArbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper))}
+      onSubmit={(values: FormValues) =>
+        submitCallback(
+          transformValues(values, arbeidsforhold, alleArbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper),
+        )
+      }
     >
       <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
         {[<FormattedMessage id="FodselOgTilretteleggingInfoPanel.Aksjonspunkt" key="svangerskapspengerAp" />]}
@@ -331,15 +381,15 @@ const FodselOgTilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
               isReadOnly={readOnly}
             />
           </FlexColumn>
-          { fødselsdato && (
-          <FlexColumn>
-            <Datepicker
-              name="fødselsdato"
-              label={intl.formatMessage({ id: 'FodselOgTilretteleggingFaktaForm.Fodselsdato' })}
-              validate={[required, hasValidDate]}
-              isReadOnly={readOnly}
-            />
-          </FlexColumn>
+          {fødselsdato && (
+            <FlexColumn>
+              <Datepicker
+                name="fødselsdato"
+                label={intl.formatMessage({ id: 'FodselOgTilretteleggingFaktaForm.Fodselsdato' })}
+                validate={[required, hasValidDate]}
+                isReadOnly={readOnly}
+              />
+            </FlexColumn>
           )}
         </FlexRow>
         <VerticalSpacer sixteenPx />
@@ -373,32 +423,32 @@ const FodselOgTilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
         )}
         <FlexRow>
           <FlexColumn>
-            {alleArbeidsforhold.filter((a) => a.kanTilrettelegges).map((a, index) => {
-              const alleIafAf = arbeidsforhold.filter((iaya) => iaya.arbeidsgiverIdent === a.arbeidsgiverReferanse);
-              const af = finnArbeidsforhold(alleIafAf, a.internArbeidsforholdReferanse);
-              const formSectionName = utledFormSectionName(a, arbeidsgiverOpplysningerPerId, uttakArbeidTyper);
-              return (
-                <React.Fragment key={formSectionName}>
-                  <VerticalSpacer sixteenPx />
-                  <AvsnittSkiller />
-                  <VerticalSpacer twentyPx />
-                  <TilretteleggingArbeidsforholdSection
-                    key={formSectionName}
-                    readOnly={readOnly}
-                    arbeidsforhold={a}
-                    formSectionName={formSectionName}
-                    erOverstyrer={erOverstyrer}
-                    stillingsprosentArbeidsforhold={af ? af.stillingsprosent : 100}
-                    setOverstyrtUtbetalingsgrad={setOverstyrtUtbetalingsgrad}
-                    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-                    uttakArbeidTyper={uttakArbeidTyper}
-                  />
-                  {index === alleArbeidsforhold.length - 1 && (
+            {alleArbeidsforhold
+              .filter(a => a.kanTilrettelegges)
+              .map((a, index) => {
+                const alleIafAf = arbeidsforhold.filter(iaya => iaya.arbeidsgiverIdent === a.arbeidsgiverReferanse);
+                const af = finnArbeidsforhold(alleIafAf, a.internArbeidsforholdReferanse);
+                const formSectionName = utledFormSectionName(a, arbeidsgiverOpplysningerPerId, uttakArbeidTyper);
+                return (
+                  <React.Fragment key={formSectionName}>
+                    <VerticalSpacer sixteenPx />
                     <AvsnittSkiller />
-                  )}
-                </React.Fragment>
-              );
-            })}
+                    <VerticalSpacer twentyPx />
+                    <TilretteleggingArbeidsforholdSection
+                      key={formSectionName}
+                      readOnly={readOnly}
+                      arbeidsforhold={a}
+                      formSectionName={formSectionName}
+                      erOverstyrer={erOverstyrer}
+                      stillingsprosentArbeidsforhold={af ? af.stillingsprosent : 100}
+                      setOverstyrtUtbetalingsgrad={setOverstyrtUtbetalingsgrad}
+                      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+                      uttakArbeidTyper={uttakArbeidTyper}
+                    />
+                    {index === alleArbeidsforhold.length - 1 && <AvsnittSkiller />}
+                  </React.Fragment>
+                );
+              })}
           </FlexColumn>
         </FlexRow>
         <VerticalSpacer sixteenPx />
@@ -425,7 +475,9 @@ const FodselOgTilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
               <Image src={advarselIkonUrl} />
             </FlexColumn>
             <FlexColumn>
-              <Label size="small"><FormattedMessage id="FodselOgTilretteleggingFaktaForm.BegrunnOverstyring" /></Label>
+              <Label size="small">
+                <FormattedMessage id="FodselOgTilretteleggingFaktaForm.BegrunnOverstyring" />
+              </Label>
             </FlexColumn>
           </FlexRow>
         )}

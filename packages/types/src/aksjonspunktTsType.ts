@@ -11,6 +11,6 @@ type Aksjonspunkt = Readonly<{
   kanLoses: boolean;
   endretAv?: string;
   endretTidspunkt?: string;
-}>
+}>;
 
 export default Aksjonspunkt;

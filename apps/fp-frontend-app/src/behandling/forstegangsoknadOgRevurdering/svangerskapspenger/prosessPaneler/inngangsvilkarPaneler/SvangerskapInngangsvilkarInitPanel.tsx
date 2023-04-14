@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -21,7 +19,7 @@ const ENDEPUNKTER_PANEL_DATA = [SvpBehandlingApiKeys.SVANGERSKAPSPENGER_TILRETTE
 
 type EndepunktPanelData = {
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
-}
+};
 
 interface OwnProps {
   behandlingVersjon?: number;
@@ -41,11 +39,9 @@ const SvangerskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsv
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="SVANGERSKAP"
       hentInngangsvilkarPanelTekst={() => intl.formatMessage({ id: 'SvangerskapVilkarForm.FyllerVilkår' })}
-      renderPanel={(data) => (
+      renderPanel={data => (
         <>
-          <SvangerskapVilkarProsessIndex
-            {...data}
-          />
+          <SvangerskapVilkarProsessIndex {...data} />
           <VerticalSpacer thirtyTwoPx />
         </>
       )}

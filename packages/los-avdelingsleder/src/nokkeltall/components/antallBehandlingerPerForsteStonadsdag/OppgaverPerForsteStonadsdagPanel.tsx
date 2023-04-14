@@ -23,10 +23,7 @@ export const OppgaverPerForsteStonadsdagPanel: FunctionComponent<OwnProps> = ({
       <FormattedMessage id="OppgaverPerForsteStonadsdagPanel.FordeltPaForsteStonadsdag" />
     </Label>
     <VerticalSpacer sixteenPx />
-    <OppgaverPerForsteStonadsdagGraf
-      height={height}
-      oppgaverPerForsteStonadsdag={oppgaverPerForsteStonadsdag}
-    />
+    <OppgaverPerForsteStonadsdagGraf height={height} oppgaverPerForsteStonadsdag={oppgaverPerForsteStonadsdag} />
   </>
 );
 

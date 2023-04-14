@@ -1,19 +1,26 @@
-import React, {
-  FunctionComponent, useCallback, useState, useRef,
-} from 'react';
+import React, { FunctionComponent, useCallback, useState, useRef } from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
+import { Label, BodyShort, Detail, Popover } from '@navikt/ds-react';
 import {
-  Label, BodyShort, Detail, Popover,
-} from '@navikt/ds-react';
-import {
-  FlexColumn, FlexContainer, FlexRow, Image, Tooltip, VerticalSpacer, PeriodLabel, DateLabel,
+  FlexColumn,
+  FlexContainer,
+  FlexRow,
+  Image,
+  Tooltip,
+  VerticalSpacer,
+  PeriodLabel,
+  DateLabel,
 } from '@navikt/ft-ui-komponenter';
 
 import { required } from '@navikt/ft-form-validators';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
-  ArbeidOgInntektsmelding, AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, Inntektsmelding, AlleKodeverk,
+  ArbeidOgInntektsmelding,
+  AoIArbeidsforhold,
+  ArbeidsgiverOpplysningerPerId,
+  Inntektsmelding,
+  AlleKodeverk,
 } from '@navikt/fp-types';
 import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
 
@@ -30,15 +37,14 @@ import InntektsposterPanel from './InntektsposterPanel';
 
 const FIELD_ARRAY_NAME = 'arbeidsforhold';
 
-const erMatch = (
-  arbeidsforhold: AoIArbeidsforhold,
-  inntektsmelding: Inntektsmelding,
-): boolean => inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent
-  && (!inntektsmelding.internArbeidsforholdId || inntektsmelding.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId);
+const erMatch = (arbeidsforhold: AoIArbeidsforhold, inntektsmelding: Inntektsmelding): boolean =>
+  inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent &&
+  (!inntektsmelding.internArbeidsforholdId ||
+    inntektsmelding.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId);
 
 const delOppAId = (eksternArbeidsforholdId: string) => {
   const lengde = Math.ceil(eksternArbeidsforholdId.length / 25);
-  const oppdeltId = Array.from({ length: lengde }, (_x, i) => eksternArbeidsforholdId.slice(i * 25, (i * 25) + 25));
+  const oppdeltId = Array.from({ length: lengde }, (_x, i) => eksternArbeidsforholdId.slice(i * 25, i * 25 + 25));
   return <p>{oppdeltId.join('-')}</p>;
 };
 
@@ -72,14 +78,17 @@ const ArbeidsforholdField: FunctionComponent<OwnProps> = ({
   const { inntektsmeldinger, inntekter } = arbeidOgInntekt;
 
   const arbeidsforhold = sorterteArbeidsforhold[index];
-  const inntektsmelding = inntektsmeldinger.find((i) => erMatch(arbeidsforhold, i));
-  const inntektsposter = inntekter.find((inntekt) => inntekt.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent)?.inntekter;
-  const visArbeidsforholdId = sorterteArbeidsforhold.filter((a) => a.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent).length > 1;
+  const inntektsmelding = inntektsmeldinger.find(i => erMatch(arbeidsforhold, i));
+  const inntektsposter = inntekter.find(
+    inntekt => inntekt.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent,
+  )?.inntekter;
+  const visArbeidsforholdId =
+    sorterteArbeidsforhold.filter(a => a.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent).length > 1;
   const arbeidsgiverOpplysinger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
 
   const imageRef = useRef<HTMLImageElement>(null);
   const [openState, setOpenState] = useState(false);
-  const toggleHjelpetekst = useCallback(() => setOpenState((gammelVerdi) => !gammelVerdi), []);
+  const toggleHjelpetekst = useCallback(() => setOpenState(gammelVerdi => !gammelVerdi), []);
 
   return (
     <ArbeidsforholdBoks key={fieldId} harÅpentAksjonspunkt={harÅpentAksjonspunkt} harBorderTop={index === 0}>
@@ -97,16 +106,17 @@ const ArbeidsforholdField: FunctionComponent<OwnProps> = ({
             <FlexContainer>
               <FlexRow>
                 <FlexColumn className={styles.firstCol}>
-                  <Label size="small">
-                    {arbeidsgiverOpplysinger.navn}
-                  </Label>
+                  <Label size="small">{arbeidsgiverOpplysinger.navn}</Label>
                   {arbeidsforhold.arbeidsgiverIdent && (
-                  <Detail size="small">
-                    (
-                    {arbeidsgiverOpplysinger.erPrivatPerson
-                      ? <DateLabel dateString={arbeidsgiverOpplysinger.fødselsdato} /> : arbeidsforhold.arbeidsgiverIdent}
-                    )
-                  </Detail>
+                    <Detail size="small">
+                      (
+                      {arbeidsgiverOpplysinger.erPrivatPerson ? (
+                        <DateLabel dateString={arbeidsgiverOpplysinger.fødselsdato} />
+                      ) : (
+                        arbeidsforhold.arbeidsgiverIdent
+                      )}
+                      )
+                    </Detail>
                   )}
                 </FlexColumn>
                 <FlexColumn className={styles.secCol}>
@@ -128,7 +138,13 @@ const ArbeidsforholdField: FunctionComponent<OwnProps> = ({
                     <FormattedMessage id="ArbeidsforholdFieldArray.Kilde" />
                   </Label>
                   <BodyShort size="small">
-                    <FormattedMessage id={arbeidsforhold ? 'ArbeidsforholdFieldArray.AaRegisteret' : 'ArbeidsforholdFieldArray.Inntektsmelding'} />
+                    <FormattedMessage
+                      id={
+                        arbeidsforhold
+                          ? 'ArbeidsforholdFieldArray.AaRegisteret'
+                          : 'ArbeidsforholdFieldArray.Inntektsmelding'
+                      }
+                    />
                   </BodyShort>
                 </FlexColumn>
                 <FlexColumn className={styles.fourthCol}>
@@ -136,9 +152,7 @@ const ArbeidsforholdField: FunctionComponent<OwnProps> = ({
                     <FormattedMessage id="ArbeidsforholdFieldArray.InntektsmeldingMottatt" />
                   </Label>
                   <BodyShort size="small">
-                    {inntektsmelding?.motattDato && (
-                      <DateLabel dateString={inntektsmelding.motattDato} />
-                    )}
+                    {inntektsmelding?.motattDato && <DateLabel dateString={inntektsmelding.motattDato} />}
                     {!inntektsmelding?.motattDato && <FormattedMessage id="ArbeidsforholdFieldArray.IkkeMottatt" />}
                   </BodyShort>
                 </FlexColumn>
@@ -150,18 +164,20 @@ const ArbeidsforholdField: FunctionComponent<OwnProps> = ({
                     <>
                       <FlexRow>
                         <FlexColumn>
-                          <Label size="small"><FormattedMessage id="ArbeidsforholdFieldArray.Id" /></Label>
+                          <Label size="small">
+                            <FormattedMessage id="ArbeidsforholdFieldArray.Id" />
+                          </Label>
                         </FlexColumn>
                         <FlexColumn className={styles.topPadding}>
                           {arbeidsforhold.eksternArbeidsforholdId.length < 50 && (
                             <BodyShort size="small">{arbeidsforhold.eksternArbeidsforholdId}</BodyShort>
                           )}
                           {arbeidsforhold.eksternArbeidsforholdId.length >= 50 && (
-                            <Tooltip
-                              content={delOppAId(arbeidsforhold.eksternArbeidsforholdId)}
-                              alignBottom
-                            >
-                              <BodyShort size="small">{`${arbeidsforhold.eksternArbeidsforholdId.substring(0, 50)}...`}</BodyShort>
+                            <Tooltip content={delOppAId(arbeidsforhold.eksternArbeidsforholdId)} alignBottom>
+                              <BodyShort size="small">{`${arbeidsforhold.eksternArbeidsforholdId.substring(
+                                0,
+                                50,
+                              )}...`}</BodyShort>
                             </Tooltip>
                           )}
                         </FlexColumn>
@@ -173,7 +189,9 @@ const ArbeidsforholdField: FunctionComponent<OwnProps> = ({
                     <>
                       <FlexRow>
                         <FlexColumn>
-                          <Label size="small"><FormattedMessage id="ArbeidsforholdFieldArray.Stillingsprosent" /></Label>
+                          <Label size="small">
+                            <FormattedMessage id="ArbeidsforholdFieldArray.Stillingsprosent" />
+                          </Label>
                         </FlexColumn>
                         <FlexColumn className={styles.topPadding}>
                           <BodyShort size="small">{`${arbeidsforhold.stillingsprosent}%`}</BodyShort>
@@ -183,35 +201,36 @@ const ArbeidsforholdField: FunctionComponent<OwnProps> = ({
                     </>
                   )}
                   {inntektsmelding && (
-                    <InntektsmeldingOpplysningerPanel
-                      saksnummer={saksnummer}
-                      inntektsmelding={inntektsmelding}
-                    />
+                    <InntektsmeldingOpplysningerPanel saksnummer={saksnummer} inntektsmelding={inntektsmelding} />
                   )}
                   {!inntektsmelding && inntektsposter && (
                     <>
                       <VerticalSpacer thirtyTwoPx />
-                      <InntektsposterPanel
-                        inntektsposter={inntektsposter}
-                        skjæringstidspunkt={skjæringstidspunkt}
-                      />
+                      <InntektsposterPanel inntektsposter={inntektsposter} skjæringstidspunkt={skjæringstidspunkt} />
                       <VerticalSpacer thirtyTwoPx />
                     </>
                   )}
                 </FlexColumn>
                 <FlexColumn>
                   <Label size="small">
-                    {`${getKodeverknavnFraKode(alleKodeverk, KodeverkType.PERMISJONSBESKRIVELSE_TYPE, arbeidsforhold.permisjonOgMangel.type)} 100%`}
+                    {`${getKodeverknavnFraKode(
+                      alleKodeverk,
+                      KodeverkType.PERMISJONSBESKRIVELSE_TYPE,
+                      arbeidsforhold.permisjonOgMangel.type,
+                    )} 100%`}
                   </Label>
                   <BodyShort size="small">
-                    <PeriodLabel dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom} dateStringTom={undefined} />
+                    <PeriodLabel
+                      dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom}
+                      dateStringTom={undefined}
+                    />
                   </BodyShort>
                 </FlexColumn>
               </FlexRow>
             </FlexContainer>
             <RadioGroupPanel
               name={`${FIELD_ARRAY_NAME}.${index}.permisjonStatus`}
-              label={(
+              label={
                 <FlexContainer>
                   <FlexRow>
                     <FlexColumn>
@@ -255,19 +274,23 @@ const ArbeidsforholdField: FunctionComponent<OwnProps> = ({
                     </FlexColumn>
                   </FlexRow>
                 </FlexContainer>
-              )}
+              }
               validate={[required]}
               isReadOnly={isReadOnly}
-              radios={[{
-                label: intl.formatMessage({
-                  id: inntektsmelding
-                    ? 'ArbeidsforholdFieldArray.TaMedArbeidsforhold' : 'ArbeidsforholdFieldArray.TaMedArbeidsforholdIkkeInntektsmelding',
-                }),
-                value: BekreftetPermisjonStatus.IKKE_BRUK_PERMISJON,
-              }, {
-                label: intl.formatMessage({ id: 'ArbeidsforholdFieldArray.IkkeTaMedArbeidsforhold' }),
-                value: BekreftetPermisjonStatus.BRUK_PERMISJON,
-              }]}
+              radios={[
+                {
+                  label: intl.formatMessage({
+                    id: inntektsmelding
+                      ? 'ArbeidsforholdFieldArray.TaMedArbeidsforhold'
+                      : 'ArbeidsforholdFieldArray.TaMedArbeidsforholdIkkeInntektsmelding',
+                  }),
+                  value: BekreftetPermisjonStatus.IKKE_BRUK_PERMISJON,
+                },
+                {
+                  label: intl.formatMessage({ id: 'ArbeidsforholdFieldArray.IkkeTaMedArbeidsforhold' }),
+                  value: BekreftetPermisjonStatus.BRUK_PERMISJON,
+                },
+              ]}
             />
             <VerticalSpacer fourPx />
           </FlexColumn>

@@ -1,7 +1,5 @@
 import { behandlingType as BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
-import {
-  AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn,
-} from '@navikt/fp-types';
+import { AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn } from '@navikt/fp-types';
 
 class MenyKodeverk {
   $$behandlingType?: string;
@@ -25,7 +23,10 @@ class MenyKodeverk {
   }
 
   getKodeverkForBehandlingstype(kodeverkType: KodeverkType, behandlingTypeKode?: string): KodeverkMedNavn[] {
-    if (behandlingTypeKode === BehandlingType.TILBAKEKREVING || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING) {
+    if (
+      behandlingTypeKode === BehandlingType.TILBAKEKREVING ||
+      behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING
+    ) {
       return this.$$fpTilbakeKodeverk ? this.$$fpTilbakeKodeverk[kodeverkType] : undefined;
     }
     if (kodeverkType !== KodeverkType.AVSLAGSARSAK) {
@@ -42,7 +43,7 @@ class MenyKodeverk {
     return behandlingTypeKoder.reduce<KodeverkMedNavn[]>((acc, btk) => {
       const alleKodeverkForKodeverkType = this.getKodeverkForBehandlingstype(kodeverkType, btk);
       if (alleKodeverkForKodeverkType) {
-        const kodeverk = alleKodeverkForKodeverkType.find((k) => k.kode === btk);
+        const kodeverk = alleKodeverkForKodeverkType.find(k => k.kode === btk);
         return kodeverk ? acc.concat([kodeverk]) : acc;
       }
       return acc;

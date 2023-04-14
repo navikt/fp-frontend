@@ -3,9 +3,8 @@ import { render, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import * as stories from './AnkeResultatProsessIndex.stories';
 
-const {
-  ResultatVedStadfestYtelsesvedtak, ResultatVedOppheveOgHjemsende, ResultatVedOmgjør, ResultatVedAvvis,
-} = composeStories(stories);
+const { ResultatVedStadfestYtelsesvedtak, ResultatVedOppheveOgHjemsende, ResultatVedOmgjør, ResultatVedAvvis } =
+  composeStories(stories);
 
 describe('<AnkeResultatProsessIndex>', () => {
   it('skal vise resultat ved stadfestet vedtak', async () => {

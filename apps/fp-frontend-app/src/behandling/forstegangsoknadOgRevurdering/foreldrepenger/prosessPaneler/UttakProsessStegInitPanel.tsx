@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktCode, vilkarUtfallType } from '@navikt/fp-kodeverk';
@@ -8,8 +6,15 @@ import { UttakProsessIndex } from '@navikt/fp-prosess-uttak';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { RequestApi } from '@navikt/fp-rest-api';
 import {
-  AksessRettigheter, ArbeidsgiverOpplysningerPerId, Behandling, FamilieHendelseSamling,
-  Personoversikt, Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
+  AksessRettigheter,
+  ArbeidsgiverOpplysningerPerId,
+  Behandling,
+  FamilieHendelseSamling,
+  Personoversikt,
+  Soknad,
+  UttaksresultatPeriode,
+  UttakStonadskontoer,
+  Ytelsefordeling,
 } from '@navikt/fp-types';
 
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
@@ -53,7 +58,7 @@ type EndepunktPanelData = {
   soknad: Soknad;
   ytelsefordeling: Ytelsefordeling;
   uttaksresultatPerioder: UttaksresultatPeriode;
-}
+};
 
 interface OwnProps {
   rettigheter: AksessRettigheter;
@@ -68,7 +73,9 @@ const UttakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitPr
   ...props
 }) => {
   const intl = useIntl();
-  const { startRequest: oppdaterStønadskontoer } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER);
+  const { startRequest: oppdaterStønadskontoer } = restApiFpHooks.useRestApiRunner(
+    FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER,
+  );
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>
       {...props}
@@ -78,7 +85,7 @@ const UttakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitPr
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Uttak' })}
       skalPanelVisesIMeny={() => true}
       hentOverstyrtStatus={() => getStatusFromUttakresultat(props.behandling, props.requestApi)}
-      renderPanel={(data) => (
+      renderPanel={data => (
         <UttakProsessIndex
           kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

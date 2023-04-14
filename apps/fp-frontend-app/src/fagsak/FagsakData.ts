@@ -1,5 +1,9 @@
 import {
-  BehandlingAppKontekst, BehandlingOppretting, Fagsak, FagsakDataFpTilbake, Historikkinnslag,
+  BehandlingAppKontekst,
+  BehandlingOppretting,
+  Fagsak,
+  FagsakDataFpTilbake,
+  Historikkinnslag,
 } from '@navikt/fp-types';
 
 class FagsakData {
@@ -20,11 +24,11 @@ class FagsakData {
 
   private slåSammenData(): void {
     if (this.$$fpTilbakeFagsakData) {
-      this.$$behandlingOppretting = this.$$fagsak.behandlingTypeKanOpprettes
-        .concat(this.$$fpTilbakeFagsakData.behandlingTypeKanOpprettes);
+      this.$$behandlingOppretting = this.$$fagsak.behandlingTypeKanOpprettes.concat(
+        this.$$fpTilbakeFagsakData.behandlingTypeKanOpprettes,
+      );
 
-      this.$$alleBehandlinger = this.$$fagsak.behandlinger
-        .concat(this.$$fpTilbakeFagsakData.behandlinger);
+      this.$$alleBehandlinger = this.$$fagsak.behandlinger.concat(this.$$fpTilbakeFagsakData.behandlinger);
     } else {
       this.$$behandlingOppretting = this.$$fagsak.behandlingTypeKanOpprettes;
       this.$$alleBehandlinger = this.$$fagsak.behandlinger;
@@ -44,7 +48,7 @@ class FagsakData {
   }
 
   getBehandling(uuid: string): BehandlingAppKontekst | undefined {
-    return this.$$alleBehandlinger.find((b) => b.uuid === uuid);
+    return this.$$alleBehandlinger.find(b => b.uuid === uuid);
   }
 
   getHistorikkFpSak(): Historikkinnslag[] {

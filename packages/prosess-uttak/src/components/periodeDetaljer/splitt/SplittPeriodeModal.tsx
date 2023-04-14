@@ -1,16 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import {
-  FormattedMessage, IntlShape, useIntl,
-} from 'react-intl';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
-import {
-  Detail, Label, BodyShort, Modal, Button,
-} from '@navikt/ds-react';
+import { Detail, Label, BodyShort, Modal, Button } from '@navikt/ds-react';
 import { Datepicker, Form } from '@navikt/ft-form-hooks';
-import {
-  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
@@ -30,13 +24,9 @@ export type DeltPeriodeData = {
     fom: string;
     tom: string;
   };
-}
+};
 
-const validerInnenforIntervall = (
-  fom: string,
-  tom: string,
-  intl: IntlShape,
-) => (dato: string) => {
+const validerInnenforIntervall = (fom: string, tom: string, intl: IntlShape) => (dato: string) => {
   if (!dayjs(dato).isBefore(fom) && dayjs(dato).isBefore(tom)) {
     return null;
   }
@@ -50,12 +40,7 @@ interface OwnProps {
   submit: (dato: string) => void;
 }
 
-const SplittPeriodeModal: FunctionComponent<OwnProps> = ({
-  fomDato,
-  tomDato,
-  submit,
-  cancel,
-}) => {
+const SplittPeriodeModal: FunctionComponent<OwnProps> = ({ fomDato, tomDato, submit, cancel }) => {
   const intl = useIntl();
 
   const formMethods = useForm<{ dato: string }>();
@@ -84,13 +69,17 @@ const SplittPeriodeModal: FunctionComponent<OwnProps> = ({
           </FlexRow>
           <FlexRow wrap className={styles.marginTop}>
             <FlexColumn>
-              <Detail><FormattedMessage id="DelOppPeriodeModalImpl.Periode" /></Detail>
+              <Detail>
+                <FormattedMessage id="DelOppPeriodeModalImpl.Periode" />
+              </Detail>
               <BodyShort size="small">
-                {`${dayjs(fomDato.toString()).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(tomDato.toString()).format(DDMMYYYY_DATE_FORMAT)}`}
+                {`${dayjs(fomDato.toString()).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(tomDato.toString()).format(
+                  DDMMYYYY_DATE_FORMAT,
+                )}`}
               </BodyShort>
             </FlexColumn>
           </FlexRow>
-          <Form formMethods={formMethods} onSubmit={(values) => submit(values.dato)}>
+          <Form formMethods={formMethods} onSubmit={values => submit(values.dato)}>
             <FlexRow wrap className={styles.marginTop}>
               <FlexColumn>
                 <Datepicker
@@ -101,31 +90,18 @@ const SplittPeriodeModal: FunctionComponent<OwnProps> = ({
                   disabledDays={{ fromDate: dayjs(fomDato).toDate(), toDate: dayjs(tomDato).toDate() }}
                   strategy="fixed"
                 />
-
               </FlexColumn>
-              {dato && (
-                <FlexColumn className={styles.dager}>
-                  {numberOfDaysAndWeeks.formattedString}
-                </FlexColumn>
-              )}
+              {dato && <FlexColumn className={styles.dager}>{numberOfDaysAndWeeks.formattedString}</FlexColumn>}
             </FlexRow>
             <VerticalSpacer sixteenPx />
             <FlexRow wrap>
               <FlexColumn>
-                <Button
-                  size="small"
-                  variant="primary"
-                >
+                <Button size="small" variant="primary">
                   <FormattedMessage id="DelOppPeriodeModalImpl.Ok" />
                 </Button>
               </FlexColumn>
               <FlexColumn>
-                <Button
-                  size="small"
-                  variant="secondary"
-                  onClick={cancel}
-                  type="button"
-                >
+                <Button size="small" variant="secondary" onClick={cancel} type="button">
                   <FormattedMessage id="DelOppPeriodeModalImpl.Avbryt" />
                 </Button>
               </FlexColumn>

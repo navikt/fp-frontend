@@ -12,9 +12,7 @@ interface OwnProps {
   readOnly: boolean;
 }
 
-const SprakPapirsoknadIndex: FunctionComponent<OwnProps> = ({
-  readOnly,
-}) => (
+const SprakPapirsoknadIndex: FunctionComponent<OwnProps> = ({ readOnly }) => (
   <RawIntlProvider value={intl}>
     <SprakPanel readOnly={readOnly} />
   </RawIntlProvider>

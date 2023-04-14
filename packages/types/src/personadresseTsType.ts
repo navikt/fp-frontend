@@ -6,6 +6,6 @@ export type Personadresse = Readonly<{
   postNummer?: string;
   poststed?: string;
   land?: string;
-}>
+}>;
 
 export default Personadresse;

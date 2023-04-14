@@ -26,18 +26,18 @@ const transformValues = (values: FormValues): MerkOpptjeningUtlandAp => ({
 export type FormValues = {
   begrunnelse?: string;
   dokStatus?: string;
-}
+};
 
 interface OwnProps {
   readOnly: boolean;
   harApneAksjonspunkter: boolean;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   submittable: boolean;
   submitCallback: (data: MerkOpptjeningUtlandAp) => Promise<void>;
   aksjonspunkt: Aksjonspunkt;
   dokStatus?: string;
-  formData: FormValues,
-  setFormData: (data: FormValues) => void,
+  formData: FormValues;
+  setFormData: (data: FormValues) => void;
 }
 
 const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps> = ({
@@ -82,18 +82,23 @@ const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps> = ({
           label={<FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentelseDok" />}
           validate={[required]}
           isReadOnly={readOnly}
-          radios={[{
-            label: <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.Innhentes" />,
-            value: OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_BLI_INNHENTET,
-          }, {
-            label: <FormattedMessage
-              id="InnhentDokOpptjeningUtlandPanel.InnhentesIkke"
-              values={{
-                b: (chunks: any) => <b>{chunks}</b>,
-              }}
-            />,
-            value: OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET,
-          }]}
+          radios={[
+            {
+              label: <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.Innhentes" />,
+              value: OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_BLI_INNHENTET,
+            },
+            {
+              label: (
+                <FormattedMessage
+                  id="InnhentDokOpptjeningUtlandPanel.InnhentesIkke"
+                  values={{
+                    b: (chunks: any) => <b>{chunks}</b>,
+                  }}
+                />
+              ),
+              value: OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET,
+            },
+          ]}
         />
         <VerticalSpacer sixteenPx />
         <FaktaBegrunnelseTextFieldNew

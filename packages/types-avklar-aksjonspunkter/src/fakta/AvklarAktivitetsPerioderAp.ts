@@ -7,7 +7,7 @@ export type OpptjeningAktivitetAp = {
   arbeidsforholdRef: string;
   erGodkjent: boolean;
   begrunnelse: string;
-}
+};
 
 export type AvklarAktivitetsPerioderAp = {
   opptjeningsaktiviteter?: OpptjeningAktivitetAp[];

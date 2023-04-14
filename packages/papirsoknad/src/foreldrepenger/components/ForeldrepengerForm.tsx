@@ -49,16 +49,16 @@ type FormValues = {
   rettigheter?: string;
   [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonFormValues;
   [ANNEN_FORELDER_FORM_NAME_PREFIX]?: AnnenForelderFormValues;
-  [FRILANS_NAME_PREFIX]: FrilansFormValues,
-} & AndreYtelserFormValue
-  & FodselFormValues
-  & IArbeidFormValues
-  & OppholdINorgeFormValues
-  & FormValuesPermisjon
-  & PermRettigheterFormValues
-  & MottattDatoFormValues
-  & VirksomhetFormValues
-  & DekningsgradFormValues;
+  [FRILANS_NAME_PREFIX]: FrilansFormValues;
+} & AndreYtelserFormValue &
+  FodselFormValues &
+  IArbeidFormValues &
+  OppholdINorgeFormValues &
+  FormValuesPermisjon &
+  PermRettigheterFormValues &
+  MottattDatoFormValues &
+  VirksomhetFormValues &
+  DekningsgradFormValues;
 
 const buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => ({
   [FRILANS_NAME_PREFIX]: FrilansPapirsoknadIndex.buildInitialValues(),
@@ -121,7 +121,10 @@ const ForeldrepengerForm: FunctionComponent<OwnProps> = ({
   const mottattDato = formMethods.watch('mottattDato');
 
   return (
-    <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values, andreYtelserKodeverk))}>
+    <Form
+      formMethods={formMethods}
+      onSubmit={(values: FormValues) => onSubmit(transformValues(values, andreYtelserKodeverk))}
+    >
       <MottattDatoPapirsoknadIndex readOnly={readOnly} />
       <OppholdINorgePapirsoknadIndex
         readOnly={readOnly}
@@ -146,13 +149,13 @@ const ForeldrepengerForm: FunctionComponent<OwnProps> = ({
       />
       <AnnenForelderPapirsoknadIndex
         readOnly={readOnly}
-        permisjonRettigheterPanel={(
+        permisjonRettigheterPanel={
           <PermisjonRettigheterPanel
             readOnly={readOnly}
             denAndreForelderenHarRettPaForeldrepenger={denAndreForelderenHarRettPaForeldrepenger}
             sokerErMor={soknadData.getForeldreType() === foreldreType.MOR}
           />
-        )}
+        }
         alleKodeverk={alleKodeverk}
         fagsakPersonnummer={fagsakPersonnummer}
       />

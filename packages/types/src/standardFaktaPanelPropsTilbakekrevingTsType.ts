@@ -8,11 +8,11 @@ type StandardFaktaPanelPropsTilbakekreving = Readonly<{
   readOnly: boolean;
   submittable: boolean;
   harApneAksjonspunkter: boolean;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   submitCallback: (aksjonspunktData: any) => Promise<void>;
   alleKodeverk: AlleKodeverkTilbakekreving;
-  formData?: any,
-  setFormData: (data: any) => void,
-}>
+  formData?: any;
+  setFormData: (data: any) => void;
+}>;
 
 export default StandardFaktaPanelPropsTilbakekreving;

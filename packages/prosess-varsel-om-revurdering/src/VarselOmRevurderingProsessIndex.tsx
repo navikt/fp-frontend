@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import {
-  FamilieHendelse, FamilieHendelseSamling, Soknad, StandardProsessPanelProps,
-} from '@navikt/fp-types';
+import { FamilieHendelse, FamilieHendelseSamling, Soknad, StandardProsessPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import VarselOmRevurderingForm, { ForhandsvisData } from './components/VarselOmRevurderingForm';

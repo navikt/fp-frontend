@@ -1,10 +1,14 @@
-import React, {
-  ReactElement, FunctionComponent, useCallback, useState,
-} from 'react';
+import React, { ReactElement, FunctionComponent, useCallback, useState } from 'react';
 import dayjs from 'dayjs';
 import { FormattedMessage, useIntl } from 'react-intl';
 import {
-  AksjonspunktHelpTextHTML, EditedIcon, FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
+  AksjonspunktHelpTextHTML,
+  EditedIcon,
+  FlexColumn,
+  FlexContainer,
+  FlexRow,
+  Image,
+  VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { TimeLineButton } from '@navikt/ft-tidslinje';
 import { Label } from '@navikt/ds-react';
@@ -12,7 +16,14 @@ import { behandlingType as BehandlingType, KodeverkType } from '@navikt/fp-kodev
 import { calcDays } from '@navikt/ft-utils';
 
 import {
-  AlleKodeverk, ArbeidsgiverOpplysningerPerId, PeriodeSoker, UttaksresultatPeriode, UttakStonadskontoer, PeriodeSokerAktivitet, Behandling, Ytelsefordeling,
+  AlleKodeverk,
+  ArbeidsgiverOpplysningerPerId,
+  PeriodeSoker,
+  UttaksresultatPeriode,
+  UttakStonadskontoer,
+  PeriodeSokerAktivitet,
+  Behandling,
+  Ytelsefordeling,
 } from '@navikt/fp-types';
 
 import splitPeriodImageHoverUrl from '../../images/splitt_hover.svg';
@@ -33,13 +44,16 @@ const getCorrectEmptyArbeidsForhold = (
   let arbeidsforholdMedPositivSaldoFinnes = false;
 
   if (stonadskonto?.stonadskontoer[periodeTypeKode]?.aktivitetSaldoDtoList) {
-    stonadskonto.stonadskontoer[periodeTypeKode].aktivitetSaldoDtoList.forEach((item) => {
+    stonadskonto.stonadskontoer[periodeTypeKode].aktivitetSaldoDtoList.forEach(item => {
       if (item.saldo === 0) {
         if (item.aktivitetIdentifikator.arbeidsgiverReferanse) {
-          const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[item.aktivitetIdentifikator.arbeidsgiverReferanse];
+          const arbeidsgiverOpplysninger =
+            arbeidsgiverOpplysningerPerId[item.aktivitetIdentifikator.arbeidsgiverReferanse];
           arbeidsForholdMedNullDagerIgjenArray.push(arbeidsgiverOpplysninger.navn);
         } else {
-          const navn = alleKodeverk[KodeverkType.UTTAK_ARBEID_TYPE].find((k) => k.kode === item.aktivitetIdentifikator.uttakArbeidType)?.navn;
+          const navn = alleKodeverk[KodeverkType.UTTAK_ARBEID_TYPE].find(
+            k => k.kode === item.aktivitetIdentifikator.uttakArbeidType,
+          )?.navn;
           arbeidsForholdMedNullDagerIgjenArray.push(navn);
         }
       } else {
@@ -62,7 +76,12 @@ const hentApTekst = (
 
   // Fix - ta bort 5001 med verdi fra kodeverk
   if (manuellBehandlingÅrsak === '5001') {
-    const arbeidsForhold = getCorrectEmptyArbeidsForhold(alleKodeverk, arbeidsgiverOpplysningerPerId, periodeTypeKode, stonadskonto);
+    const arbeidsForhold = getCorrectEmptyArbeidsForhold(
+      alleKodeverk,
+      arbeidsgiverOpplysningerPerId,
+      periodeTypeKode,
+      stonadskonto,
+    );
     const arbeidsForholdMedNullDagerIgjen = arbeidsForhold.join();
     if (arbeidsForhold.length > 1) {
       aksjonspunktTekster.push(
@@ -83,15 +102,16 @@ const hentApTekst = (
     } else {
       aksjonspunktTekster.push(
         <React.Fragment key={`kode-${manuellBehandlingÅrsak}`}>
-          {alleKodeverk[KodeverkType.MANUELL_BEHANDLING_AARSAK].find((k) => k.kode === manuellBehandlingÅrsak)?.navn}
+          {alleKodeverk[KodeverkType.MANUELL_BEHANDLING_AARSAK].find(k => k.kode === manuellBehandlingÅrsak)?.navn}
         </React.Fragment>,
       );
     }
   } else {
     aksjonspunktTekster.push(
       <React.Fragment key={`kode-${manuellBehandlingÅrsak}`}>
-        {alleKodeverk[KodeverkType.MANUELL_BEHANDLING_AARSAK].find((k) => k.kode === manuellBehandlingÅrsak)?.navn}
-      </React.Fragment>);
+        {alleKodeverk[KodeverkType.MANUELL_BEHANDLING_AARSAK].find(k => k.kode === manuellBehandlingÅrsak)?.navn}
+      </React.Fragment>,
+    );
   }
 
   return aksjonspunktTekster;
@@ -109,19 +129,18 @@ const kalkulerTrekkdager = (
   return parseFloat(trekkdager.toFixed(1));
 };
 
-const lagPeriode = (
-  valgtPeriode: PeriodeSoker,
-  fom: string,
-  tom: string,
-): PeriodeSoker => {
+const lagPeriode = (valgtPeriode: PeriodeSoker, fom: string, tom: string): PeriodeSoker => {
   const { aktiviteter, samtidigUttak, samtidigUttaksprosent } = valgtPeriode;
 
   const virkedager = calcDays(fom, tom);
-  const oppdaterteAktiviteter = aktiviteter
-    .map((aktivitet) => (aktivitet.trekkdagerDesimaler > 0 ? {
-      ...aktivitet,
-      trekkdagerDesimaler: kalkulerTrekkdager(aktivitet, virkedager, samtidigUttak, samtidigUttaksprosent),
-    } : aktivitet));
+  const oppdaterteAktiviteter = aktiviteter.map(aktivitet =>
+    aktivitet.trekkdagerDesimaler > 0
+      ? {
+          ...aktivitet,
+          trekkdagerDesimaler: kalkulerTrekkdager(aktivitet, virkedager, samtidigUttak, samtidigUttaksprosent),
+        }
+      : aktivitet,
+  );
 
   return {
     ...valgtPeriode,
@@ -166,7 +185,7 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
 
   const [visModal, setVisModal] = useState(false);
-  const toggleVisningAvModal = useCallback(() => setVisModal((verdi) => !verdi), []);
+  const toggleVisningAvModal = useCallback(() => setVisModal(verdi => !verdi), []);
 
   const { perioderAnnenpart } = uttaksresultatPeriode;
 
@@ -175,28 +194,32 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
 
   const erHovedsøkersPeriode = valgtPeriodeIndex + 1 > perioderAnnenpart.length;
 
-  const splittPeriode = useCallback((dato: string) => {
-    const periode1 = lagPeriode(valgtPeriode, valgtPeriode.fom, dato);
-    const periode2 = lagPeriode(valgtPeriode, dayjs(dato).add(1, 'days').format('YYYY-MM-DD'), valgtPeriode.tom);
-    oppdaterPeriode([periode1, periode2]);
-    toggleVisningAvModal();
-  }, [valgtPeriodeIndex]);
+  const splittPeriode = useCallback(
+    (dato: string) => {
+      const periode1 = lagPeriode(valgtPeriode, valgtPeriode.fom, dato);
+      const periode2 = lagPeriode(valgtPeriode, dayjs(dato).add(1, 'days').format('YYYY-MM-DD'), valgtPeriode.tom);
+      oppdaterPeriode([periode1, periode2]);
+      toggleVisningAvModal();
+    },
+    [valgtPeriodeIndex],
+  );
 
   const lukkPeriode = useCallback(() => setValgtPeriodeIndex(undefined), []);
 
   const harSoktOmFlerbarnsdager = erHovedsøkersPeriode
-    ? perioderSøker.some((p) => p.flerbarnsdager === true)
-    : perioderAnnenpart.some((p) => p.flerbarnsdager === true);
+    ? perioderSøker.some(p => p.flerbarnsdager === true)
+    : perioderAnnenpart.some(p => p.flerbarnsdager === true);
 
-  const erRevurderingFørEndringsdato = ytelsefordeling.endringsdato
-    && behandling.type === BehandlingType.REVURDERING
-    && valgtPeriode.tom < ytelsefordeling.endringsdato;
+  const erRevurderingFørEndringsdato =
+    ytelsefordeling.endringsdato &&
+    behandling.type === BehandlingType.REVURDERING &&
+    valgtPeriode.tom < ytelsefordeling.endringsdato;
 
   const visForrigePeriode = useCallback(() => {
-    setValgtPeriodeIndex((index) => (index === 0 ? index : index - 1));
+    setValgtPeriodeIndex(index => (index === 0 ? index : index - 1));
   }, []);
   const visNestePeriode = useCallback(() => {
-    setValgtPeriodeIndex((index) => (index === allePerioder.length - 1 ? index : index + 1));
+    setValgtPeriodeIndex(index => (index === allePerioder.length - 1 ? index : index + 1));
   }, [allePerioder.length]);
 
   return (
@@ -219,7 +242,7 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
                   srcHover={splitPeriodImageHoverUrl}
                   alt={intl.formatMessage({ id: 'UttakTimeLineData.PeriodeData.DelOppPerioden' })}
                   onMouseDown={toggleVisningAvModal}
-                  onKeyDown={(e) => (e.key === 'Enter' ? toggleVisningAvModal() : null)}
+                  onKeyDown={e => (e.key === 'Enter' ? toggleVisningAvModal() : null)}
                 />
                 <FormattedMessage id="UttakTimeLineData.PeriodeData.DelOppPerioden" />
               </span>
@@ -234,8 +257,16 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
             </FlexColumn>
           )}
           <FlexColumn>
-            <TimeLineButton text={intl.formatMessage({ id: 'Timeline.prevPeriod' })} type="prev" callback={visForrigePeriode} />
-            <TimeLineButton text={intl.formatMessage({ id: 'Timeline.nextPeriod' })} type="next" callback={visNestePeriode} />
+            <TimeLineButton
+              text={intl.formatMessage({ id: 'Timeline.prevPeriod' })}
+              type="prev"
+              callback={visForrigePeriode}
+            />
+            <TimeLineButton
+              text={intl.formatMessage({ id: 'Timeline.nextPeriod' })}
+              type="next"
+              callback={visNestePeriode}
+            />
           </FlexColumn>
         </FlexRow>
       </FlexContainer>
@@ -248,7 +279,8 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
               alleKodeverk,
               arbeidsgiverOpplysningerPerId,
               uttakStonadskontoer,
-              valgtPeriode.periodeType)}
+              valgtPeriode.periodeType,
+            )}
           </AksjonspunktHelpTextHTML>
           <VerticalSpacer twentyPx />
         </>

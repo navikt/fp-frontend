@@ -25,7 +25,7 @@ export type BrevData = {
   fritekst: string;
   dokumentMal?: string;
   erOpphevetKlage: boolean;
-}
+};
 
 const getBrevData = (klageVurdering: string, fritekstTilBrev?: string): BrevData => ({
   fritekst: fritekstTilBrev || '',
@@ -39,11 +39,7 @@ interface OwnProps {
   klageVurdering?: string;
 }
 
-const PreviewKlageLink: FunctionComponent<OwnProps> = ({
-  previewCallback,
-  fritekstTilBrev,
-  klageVurdering,
-}) => {
+const PreviewKlageLink: FunctionComponent<OwnProps> = ({ previewCallback, fritekstTilBrev, klageVurdering }) => {
   const previewMessage = (e: React.MouseEvent | React.KeyboardEvent): void => {
     previewCallback(getBrevData(klageVurdering, fritekstTilBrev));
     e.preventDefault();
@@ -51,8 +47,10 @@ const PreviewKlageLink: FunctionComponent<OwnProps> = ({
   return (
     <a
       href=""
-      onClick={(e) => { previewMessage(e); }}
-      onKeyDown={(e) => (e.key === 'Enter' ? previewMessage(e) : null)}
+      onClick={e => {
+        previewMessage(e);
+      }}
+      onKeyDown={e => (e.key === 'Enter' ? previewMessage(e) : null)}
       className={classNames(styles.previewLink, 'lenke lenke--frittstaende')}
     >
       <FormattedMessage id="PreviewKlageLink.ForhandvisBrev" />

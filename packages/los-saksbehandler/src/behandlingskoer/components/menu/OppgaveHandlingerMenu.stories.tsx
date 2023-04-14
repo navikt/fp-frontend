@@ -22,9 +22,7 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{ oppgave: Oppgave }> = ({
-  oppgave,
-}) => {
+const Template: Story<{ oppgave: Oppgave }> = ({ oppgave }) => {
   const data = [
     { key: RestApiPathsKeys.OPPHEV_OPPGAVERESERVASJON.name, data: {} },
     {

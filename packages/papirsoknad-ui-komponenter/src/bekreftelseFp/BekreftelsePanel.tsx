@@ -17,14 +17,9 @@ interface OwnProps {
 /**
  * Presentasjonskomponent. Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
  */
-const BekreftelsePanel: FunctionComponent<OwnProps> = ({
-  readOnly,
-  annenForelderInformertRequired = false,
-}) => (
+const BekreftelsePanel: FunctionComponent<OwnProps> = ({ readOnly, annenForelderInformertRequired = false }) => (
   <BorderBox>
-    <Heading size="small">
-      {intl.formatMessage({ id: 'Registrering.TheOtherParent.Confirmation' })}
-    </Heading>
+    <Heading size="small">{intl.formatMessage({ id: 'Registrering.TheOtherParent.Confirmation' })}</Heading>
     <VerticalSpacer sixteenPx />
     <Detail size="small">{intl.formatMessage({ id: 'Registrering.TheOtherParent.OtherParentKnowPeriods' })}</Detail>
     <VerticalSpacer eightPx />
@@ -34,13 +29,16 @@ const BekreftelsePanel: FunctionComponent<OwnProps> = ({
       isReadOnly={readOnly}
       isHorizontal
       isTrueOrFalseSelection
-      radios={[{
-        label: intl.formatMessage({ id: 'Registrering.TheOtherParent.Yes' }),
-        value: 'true',
-      }, {
-        label: intl.formatMessage({ id: 'Registrering.TheOtherParent.No' }),
-        value: 'false',
-      }]}
+      radios={[
+        {
+          label: intl.formatMessage({ id: 'Registrering.TheOtherParent.Yes' }),
+          value: 'true',
+        },
+        {
+          label: intl.formatMessage({ id: 'Registrering.TheOtherParent.No' }),
+          value: 'false',
+        },
+      ]}
     />
   </BorderBox>
 );

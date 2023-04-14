@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { FamilieHendelse, FamilieHendelseSamling } from '@navikt/ft-types';
 
@@ -13,10 +11,7 @@ import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktCode.TERMINBEKREFTELSE,
-  AksjonspunktCode.SJEKK_MANGLENDE_FODSEL,
-];
+const AKSJONSPUNKT_KODER = [AksjonspunktCode.TERMINBEKREFTELSE, AksjonspunktCode.SJEKK_MANGLENDE_FODSEL];
 
 const ENDEPUNKTER_PANEL_DATA = [
   BehandlingFellesApiKeys.FAMILIEHENDELSE,
@@ -29,13 +24,15 @@ type EndepunktPanelData = {
   familiehendelseOriginalBehandling?: FamilieHendelse;
   soknad: Soknad;
   soknadOriginalBehandling?: Soknad;
-}
+};
 
 /**
  * FodselvilkaretFaktaInitPanel
  */
-const FodselvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => {
-  const { behandling: { vilkår } } = props;
+const FodselvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = props => {
+  const {
+    behandling: { vilkår },
+  } = props;
   return (
     <FaktaDefaultInitPanel<EndepunktPanelData>
       {...props}
@@ -43,8 +40,8 @@ const FodselvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (pr
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       faktaPanelKode={FaktaPanelCode.FODSELSVILKARET}
       faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FodselInfoPanel.Fodsel' })}
-      skalPanelVisesIMeny={() => !!vilkår && vilkår.some((v) => fodselsvilkarene.some((fv) => fv === v.vilkarType))}
-      renderPanel={(data) => <FodselFaktaIndex {...data} />}
+      skalPanelVisesIMeny={() => !!vilkår && vilkår.some(v => fodselsvilkarene.some(fv => fv === v.vilkarType))}
+      renderPanel={data => <FodselFaktaIndex {...data} />}
     />
   );
 };

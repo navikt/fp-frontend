@@ -1,8 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import {
-  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { hasValidDate, required, dateBeforeOrEqualToToday } from '@navikt/ft-form-validators';
 import { AvklartBarn } from '@navikt/fp-types';
@@ -19,9 +17,7 @@ interface OwnProps {
   readOnly: boolean;
 }
 
-export const AvklartBarnFieldArray: FunctionComponent<OwnProps> = ({
-  readOnly,
-}) => {
+export const AvklartBarnFieldArray: FunctionComponent<OwnProps> = ({ readOnly }) => {
   const intl = useIntl();
 
   const { control, watch } = formHooks.useFormContext<{ avklartBarn: AvklartBarn[] }>();
@@ -63,11 +59,7 @@ export const AvklartBarnFieldArray: FunctionComponent<OwnProps> = ({
                   isReadOnly={readOnly}
                 />
               </FlexColumn>
-              {!readOnly && (
-                <FlexColumn>
-                  {getRemoveButton()}
-                </FlexColumn>
-              )}
+              {!readOnly && <FlexColumn>{getRemoveButton()}</FlexColumn>}
             </FlexRow>
           </FlexContainer>
         </React.Fragment>

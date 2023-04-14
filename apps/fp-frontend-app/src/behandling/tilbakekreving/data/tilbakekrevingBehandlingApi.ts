@@ -44,7 +44,9 @@ const endepunkter = new RestApiConfigBuilder()
   // operasjoner
   .withRel('beregne-feilutbetalt-belop', TilbakekrevingBehandlingApiKeys.BEREGNE_BELØP)
 
-  .withPost('/fptilbake/api/dokument/forhandsvis-vedtaksbrev', TilbakekrevingBehandlingApiKeys.PREVIEW_VEDTAKSBREV, { isResponseBlob: true })
+  .withPost('/fptilbake/api/dokument/forhandsvis-vedtaksbrev', TilbakekrevingBehandlingApiKeys.PREVIEW_VEDTAKSBREV, {
+    isResponseBlob: true,
+  })
 
   .build();
 

@@ -26,15 +26,18 @@ const MenySettPaVentIndex: FunctionComponent<OwnProps> = ({
   lukkModal,
   erTilbakekreving,
 }) => {
-  const submit = useCallback((formValues: FormValues) => {
-    const values = {
-      frist: formValues.frist,
-      ventearsak: formValues.ventearsak,
-    };
-    settBehandlingPaVent(values);
+  const submit = useCallback(
+    (formValues: FormValues) => {
+      const values = {
+        frist: formValues.frist,
+        ventearsak: formValues.ventearsak,
+      };
+      settBehandlingPaVent(values);
 
-    lukkModal();
-  }, [behandlingVersjon]);
+      lukkModal();
+    },
+    [behandlingVersjon],
+  );
 
   return (
     <RawIntlProvider value={intl}>

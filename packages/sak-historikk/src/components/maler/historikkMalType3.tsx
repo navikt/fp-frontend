@@ -15,17 +15,18 @@ const AksjonspunktCodeToTextCode = {
   [AksjonspunktCode.TERMINBEKREFTELSE]: 'Historikk.TermindatoFaktaForm.ApplicationInformation',
   [AksjonspunktCode.ADOPSJONSDOKUMENTAJON]: 'Historikk.DokumentasjonFaktaForm.ApplicationInformation',
   [AksjonspunktCode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: 'Historikk.EktefelleFaktaForm.ApplicationInformation',
-  [AksjonspunktCode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]: 'HistorikkEndretFelt.MannAdoptererAleneFaktaForm.ApplicationInformation',
-  [AksjonspunktCode.SOKNADSFRISTVILKARET]: 'HistorikkEndretFelt.ErSoknadsfristVilkaretOppfyltForm.ApplicationInformation',
-  [AksjonspunktCode.VURDER_SOKNADSFRIST_FORELDREPENGER]: 'HistorikkEndretFelt.ErSoknadsfristVilkaretOppfyltForm.ApplicationInformation',
+  [AksjonspunktCode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]:
+    'HistorikkEndretFelt.MannAdoptererAleneFaktaForm.ApplicationInformation',
+  [AksjonspunktCode.SOKNADSFRISTVILKARET]:
+    'HistorikkEndretFelt.ErSoknadsfristVilkaretOppfyltForm.ApplicationInformation',
+  [AksjonspunktCode.VURDER_SOKNADSFRIST_FORELDREPENGER]:
+    'HistorikkEndretFelt.ErSoknadsfristVilkaretOppfyltForm.ApplicationInformation',
   [AksjonspunktCode.OMSORGSOVERTAKELSE]: 'Historikk.OmsorgOgForeldreansvarInfoPanel.Omsorg',
   [AksjonspunktCode.VURDER_PERIODER_MED_OPPTJENING]: 'Historikk.Behandlingspunkt.Opptjeningsvilkaret',
   [AksjonspunktCode.MANUELL_VURDERING_AV_OMSORGSVILKARET]: 'HistorikkEndretFeltVerdiType.ApplicationInformation',
   [AksjonspunktCode.REGISTRER_PAPIRSOKNAD_ENGANGSSTONAD]: 'Historikk.RegistrerePapirSoknadAksPkt',
-  [AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD]:
-    'Historikk.Foreldreansvar',
-  [AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD]:
-    'Historikk.Foreldreansvar',
+  [AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD]: 'Historikk.Foreldreansvar',
+  [AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD]: 'Historikk.Foreldreansvar',
   [AksjonspunktCode.VARSEL_REVURDERING_ETTERKONTROLL]: 'VarselOmRevurderingInfoPanel.Etterkontroll',
   [AksjonspunktCode.VARSEL_REVURDERING_MANUELL]: 'VarselOmRevurderingInfoPanel.Manuell',
   [AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'HistorikkAksjonpunktMapping.SokersStonadGjelderSammeBarn',
@@ -48,8 +49,7 @@ const AksjonspunktCodeToTextCode = {
   [AksjonspunktCode.OVERSTYR_SOKNADSFRISTVILKAR]: 'Historikk.soknadsfristvilkar',
   [AksjonspunktCode.OVERSTYR_BEREGNING]: 'Historikk.beregning',
   [AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER]: 'Historikk.uttak',
-  [AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG]:
-    'Historikk.Aleneomsorg.ApplicationInformation',
+  [AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG]: 'Historikk.Aleneomsorg.ApplicationInformation',
   [AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]: 'Historikk.Omsorg.ApplicationInformation',
   [AksjonspunktCode.FASTSETT_UTTAKPERIODER]: 'Historikk.Fastsett.Manuelt',
   [AksjonspunktCode.KONTROLLER_OPPLYSNINGER_OM_DØD]: 'Historikk.OpplysningerOmDod',
@@ -78,7 +78,11 @@ const AksjonspunktCodeToTextCode = {
 
 const tilbakekrevingsAksjonspunktCodeToTextCode = {} as Record<string, string>;
 
-const formaterAksjonspunkt = (aksjonspunkt: HistorikkInnslagAksjonspunkt, intl: IntlShape, erTilbakekreving: boolean): ReactNode => {
+const formaterAksjonspunkt = (
+  aksjonspunkt: HistorikkInnslagAksjonspunkt,
+  intl: IntlShape,
+  erTilbakekreving: boolean,
+): ReactNode => {
   const aksjonspktText = erTilbakekreving
     ? tilbakekrevingsAksjonspunktCodeToTextCode[aksjonspunkt.aksjonspunktKode]
     : AksjonspunktCodeToTextCode[aksjonspunkt.aksjonspunktKode];
@@ -95,7 +99,8 @@ const formaterAksjonspunkt = (aksjonspunkt: HistorikkInnslagAksjonspunkt, intl: 
   return (
     <span>
       <BodyShort size="small">
-        {aksjonspktText && `${formatMessage({ id: aksjonspktText })} ${formatMessage({ id: 'Historikk.ikkeGodkjent' })}`}
+        {aksjonspktText &&
+          `${formatMessage({ id: aksjonspktText })} ${formatMessage({ id: 'Historikk.ikkeGodkjent' })}`}
         {!aksjonspktText && formatMessage({ id: 'Historikk.ikkeGodkjentKomplett' })}
       </BodyShort>
       <BodyShort size="small">{decodeHtmlEntity(aksjonspunkt.aksjonspunktBegrunnelse)}</BodyShort>
@@ -128,12 +133,13 @@ const HistorikkMalType3: FunctionComponent<HistorikkMal> = ({
           scrollUpOnClick
           createLocationForSkjermlenke={createLocationForSkjermlenke}
         />
-        {historikkinnslagDel.aksjonspunkter && historikkinnslagDel.aksjonspunkter.map((aksjonspunkt) => (
-          <div key={aksjonspunkt.aksjonspunktKode}>
-            {formaterAksjonspunkt(aksjonspunkt, intl, erTilbakekreving)}
-            <VerticalSpacer fourPx />
-          </div>
-        ))}
+        {historikkinnslagDel.aksjonspunkter &&
+          historikkinnslagDel.aksjonspunkter.map(aksjonspunkt => (
+            <div key={aksjonspunkt.aksjonspunktKode}>
+              {formaterAksjonspunkt(aksjonspunkt, intl, erTilbakekreving)}
+              <VerticalSpacer fourPx />
+            </div>
+          ))}
       </div>
     ));
   }

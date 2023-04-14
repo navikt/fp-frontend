@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button } from '@navikt/ds-react';
-import {
-  VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
-} from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import { Datepicker, formHooks, InputField } from '@navikt/ft-form-hooks';
 import { required, hasValidOrgNumberOrFodselsnr, hasNoWhiteSpace } from '@navikt/ft-form-validators';
 
-import BehovForTilretteleggingFieldArray, { behovForTilretteleggingFieldArrayName } from './BehovForTilretteleggingFieldArray';
+import BehovForTilretteleggingFieldArray, {
+  behovForTilretteleggingFieldArrayName,
+} from './BehovForTilretteleggingFieldArray';
 
 const TILRETTELEGGING_NAME_PREFIX = 'tilretteleggingArbeidsforhold';
 
@@ -16,7 +16,7 @@ const tilretteleggingForArbeidsgiverFieldArrayName = 'tilretteleggingForArbeidsg
 type FormValues = {
   organisasjonsnummer: string;
   behovsdato: string;
-}
+};
 
 const defaultTilrettelegging: FormValues = {
   organisasjonsnummer: '',
@@ -32,12 +32,12 @@ interface OwnProps {
  *
  * Form som brukes for registrere om det er behov for tilrettelegging for arbeidsgiver.
  */
-const TilretteleggingForArbeidsgiverFieldArray: FunctionComponent<OwnProps> = ({
-  readOnly,
-}) => {
+const TilretteleggingForArbeidsgiverFieldArray: FunctionComponent<OwnProps> = ({ readOnly }) => {
   const intl = useIntl();
 
-  const { control } = formHooks.useFormContext<{ [TILRETTELEGGING_NAME_PREFIX]: {[tilretteleggingForArbeidsgiverFieldArrayName]: FormValues[] }}>();
+  const { control } = formHooks.useFormContext<{
+    [TILRETTELEGGING_NAME_PREFIX]: { [tilretteleggingForArbeidsgiverFieldArrayName]: FormValues[] };
+  }>();
   const { fields, append } = formHooks.useFieldArray({
     control,
     name: `${TILRETTELEGGING_NAME_PREFIX}.${tilretteleggingForArbeidsgiverFieldArrayName}`,

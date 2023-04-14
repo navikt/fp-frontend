@@ -1,13 +1,17 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktCode, vilkarUtfallType } from '@navikt/fp-kodeverk';
 import { TilkjentYtelseProsessIndex } from '@navikt/fp-prosess-tilkjent-ytelse';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
-  ArbeidsgiverOpplysningerPerId, BeregningsresultatFp, Fagsak, FamilieHendelseSamling, Feriepengegrunnlag, Personoversikt, Soknad,
+  ArbeidsgiverOpplysningerPerId,
+  BeregningsresultatFp,
+  Fagsak,
+  FamilieHendelseSamling,
+  Feriepengegrunnlag,
+  Personoversikt,
+  Soknad,
 } from '@navikt/fp-types';
 
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
@@ -27,7 +31,7 @@ type EndepunktPanelData = {
   soknad: Soknad;
   feriepengegrunnlag: Feriepengegrunnlag;
   beregningresultatForeldrepenger: BeregningsresultatFp;
-}
+};
 
 interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -48,10 +52,12 @@ const TilkjentYtelseProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
     prosessPanelKode={ProsessStegCode.TILKJENT_YTELSE}
     prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}
     skalPanelVisesIMeny={() => true}
-    hentOverstyrtStatus={() => (
-      props.requestApi.hasPath(BehandlingFellesApiKeys.BEREGNINGRESULTAT_FORELDREPENGER.name) ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT
-    )}
-    renderPanel={(data) => (
+    hentOverstyrtStatus={() =>
+      props.requestApi.hasPath(BehandlingFellesApiKeys.BEREGNINGRESULTAT_FORELDREPENGER.name)
+        ? vilkarUtfallType.OPPFYLT
+        : vilkarUtfallType.IKKE_VURDERT
+    }
+    renderPanel={data => (
       <TilkjentYtelseProsessIndex
         fagsak={fagsak}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

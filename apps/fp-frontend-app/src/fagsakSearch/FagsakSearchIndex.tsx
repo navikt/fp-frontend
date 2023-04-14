@@ -1,9 +1,7 @@
 import React, { FunctionComponent, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  errorOfType, ErrorTypes, getErrorResponseData,
-} from '@navikt/fp-rest-api';
+import { errorOfType, ErrorTypes, getErrorResponseData } from '@navikt/fp-rest-api';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { FagsakEnkel } from '@navikt/fp-types';
 import { FagsakSokSakIndex } from '@navikt/fp-sak-sok';
@@ -28,12 +26,16 @@ const FagsakSearchIndex: FunctionComponent = () => {
   };
 
   const {
-    startRequest: searchFagsaker, data: fagsaker = EMPTY_ARRAY, state: sokeStatus, error,
+    startRequest: searchFagsaker,
+    data: fagsaker = EMPTY_ARRAY,
+    state: sokeStatus,
+    error,
   } = restApiHooks.useRestApiRunner(FpsakApiKeys.SEARCH_FAGSAK);
 
-  const searchResultAccessDenied = useMemo(() => (errorOfType(ErrorTypes.MANGLER_TILGANG_FEIL, error)
-    ? getErrorResponseData(error)
-    : undefined), [error]);
+  const searchResultAccessDenied = useMemo(
+    () => (errorOfType(ErrorTypes.MANGLER_TILGANG_FEIL, error) ? getErrorResponseData(error) : undefined),
+    [error],
+  );
 
   const sokFerdig = sokeStatus === RestApiState.SUCCESS;
 

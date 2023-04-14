@@ -14,7 +14,9 @@ describe('<OpphevReservasjonModal>', () => {
     const begrunnelse = 'Dette er en begrunnelse';
     const hentReserverteOppgaver = vi.fn();
 
-    const utils = render(<Default opphevData={{ oppgaveId: 1, begrunnelse }} hentReserverteOppgaver={hentReserverteOppgaver} />);
+    const utils = render(
+      <Default opphevData={{ oppgaveId: 1, begrunnelse }} hentReserverteOppgaver={hentReserverteOppgaver} />,
+    );
 
     expect(await screen.findByText('Når en reservert sak frigjøres er begrunnelse obligatorisk')).toBeInTheDocument();
 

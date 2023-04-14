@@ -9,13 +9,14 @@ import Journalpost from '../../../typer/journalpostTsType';
 
 const TOM_DOK_LISTE: JournalDokument[] = [];
 
-export const buildInitialValues = (dokumenter: JournalDokument[]): DokumentTittelFormValues[] => (dokumenter.map((dok) => ({
-  dokumentId: dok.dokumentId,
-  tittel: dok.tittel,
-})));
+export const buildInitialValues = (dokumenter: JournalDokument[]): DokumentTittelFormValues[] =>
+  dokumenter.map(dok => ({
+    dokumentId: dok.dokumentId,
+    tittel: dok.tittel,
+  }));
 
 const finnMatchendeDokumentForId = (dokId: string, dokumenter: JournalDokument[]): JournalDokument => {
-  const match = dokumenter.find((doc) => doc.dokumentId === dokId);
+  const match = dokumenter.find(doc => doc.dokumentId === dokId);
   if (!match) {
     throw new Error(`Finner ikke dokument med id ${dokId}`);
   }
@@ -34,12 +35,16 @@ const erTittelEndret = (dokVal: DokumentTittelFormValues, dokumenter: JournalDok
   return match.tittel !== dokVal.tittel;
 };
 
-export const transformValues = (values: JournalføringFormValues, dokumenter: JournalDokument[]): DokumentTittelSubmitValue[] => {
+export const transformValues = (
+  values: JournalføringFormValues,
+  dokumenter: JournalDokument[],
+): DokumentTittelSubmitValue[] => {
   if (!values.journalpostDokumenter) {
     return [];
   }
-  return values.journalpostDokumenter.filter((dokVal) => erTittelEndret(dokVal, dokumenter))
-    .map((dokVal) => ({ dokumentId: dokVal.dokumentId, tittel: finnTittelEllerFeil(dokVal) }));
+  return values.journalpostDokumenter
+    .filter(dokVal => erTittelEndret(dokVal, dokumenter))
+    .map(dokVal => ({ dokumentId: dokVal.dokumentId, tittel: finnTittelEllerFeil(dokVal) }));
 };
 
 type OwnProps = Readonly<{
@@ -49,9 +54,7 @@ type OwnProps = Readonly<{
 /**
  * DokumentForm - Inneholder form behandling av dokumenter og setter opp visning av hvert dokument
  */
-const DokumentForm: FunctionComponent<OwnProps> = ({
-  journalpost,
-}) => {
+const DokumentForm: FunctionComponent<OwnProps> = ({ journalpost }) => {
   const { control } = formHooks.useFormContext<JournalføringFormValues>();
   const { fields } = formHooks.useFieldArray({
     control,

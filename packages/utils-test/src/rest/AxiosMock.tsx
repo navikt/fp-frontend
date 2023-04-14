@@ -8,31 +8,30 @@ interface Props {
   children: any;
   data: {
     key: string;
-    data: any,
-    noRelLink?: boolean,
+    data: any;
+    noRelLink?: boolean;
   }[];
   setApiMock?: (mockAdapter: MockAdapter) => void;
 }
 
-const AxiosMock: FunctionComponent<Props> = ({
-  children,
-  data,
-  requestApi,
-  setApiMock = () => undefined,
-}) => {
+const AxiosMock: FunctionComponent<Props> = ({ children, data, requestApi, setApiMock = () => undefined }) => {
   const [showChildren, setShowChildren] = useState(false);
 
   useEffect(() => {
     const apiMock = new MockAdapter(requestApi.getAxios());
     setApiMock(apiMock);
 
-    requestApi.setLinks(data.filter((d) => !d.noRelLink).map((d) => ({
-      href: d.key,
-      rel: requestApi.endpointConfigList.find((c) => c.name === d.key)?.rel || '',
-      type: 'GET',
-    })));
+    requestApi.setLinks(
+      data
+        .filter(d => !d.noRelLink)
+        .map(d => ({
+          href: d.key,
+          rel: requestApi.endpointConfigList.find(c => c.name === d.key)?.rel || '',
+          type: 'GET',
+        })),
+    );
 
-    data.forEach((d) => {
+    data.forEach(d => {
       if (requestApi.getRestType(d.key) === 'GET') {
         apiMock.onGet(requestApi.getUrl(d.key)).reply(200, d.data);
       } else if (requestApi.getRestType(d.key) === 'GET_ASYNC') {

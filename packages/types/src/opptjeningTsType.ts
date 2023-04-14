@@ -28,11 +28,11 @@ export type FastsattOpptjening = {
     dager: number;
   };
   fastsattOpptjeningAktivitetList?: FastsattOpptjeningAktivitet[];
-}
+};
 
 type Opptjening = {
   fastsattOpptjening: FastsattOpptjening;
   opptjeningAktivitetList?: OpptjeningAktivitet[];
-}
+};
 
 export default Opptjening;

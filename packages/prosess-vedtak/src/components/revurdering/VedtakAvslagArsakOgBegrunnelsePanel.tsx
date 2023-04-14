@@ -2,16 +2,10 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Label, BodyShort, Detail } from '@navikt/ds-react';
 
-import {
-  AlleKodeverk, Vilkar, Behandlingsresultat,
-} from '@navikt/fp-types';
-import {
-  vilkarUtfallType, behandlingStatus, getKodeverknavnFn, KodeverkType,
-} from '@navikt/fp-kodeverk';
+import { AlleKodeverk, Vilkar, Behandlingsresultat } from '@navikt/fp-types';
+import { vilkarUtfallType, behandlingStatus, getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
 import { TextAreaField, formHooks } from '@navikt/ft-form-hooks';
-import {
-  hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew,
-} from '@navikt/ft-form-validators';
+import { hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { decodeHtmlEntity, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
@@ -27,13 +21,17 @@ const getAvslagArsak = (
   behandlingsresultat: Behandlingsresultat,
   getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType, undertype?: string) => string,
 ): string | ReactElement => {
-  const avslatteVilkar = vilkar.filter((v) => v.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT);
+  const avslatteVilkar = vilkar.filter(v => v.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT);
   if (avslatteVilkar.length === 0) {
     return <FormattedMessage id="VedtakForm.UttaksperioderIkkeGyldig" />;
   }
 
   const vilkarType = getKodeverkNavn(avslatteVilkar[0].vilkarType, KodeverkType.VILKAR_TYPE);
-  return `${vilkarType}: ${getKodeverkNavn(behandlingsresultat.avslagsarsak, KodeverkType.AVSLAGSARSAK, avslatteVilkar[0].vilkarType)}`;
+  return `${vilkarType}: ${getKodeverkNavn(
+    behandlingsresultat.avslagsarsak,
+    KodeverkType.AVSLAGSARSAK,
+    avslatteVilkar[0].vilkarType,
+  )}`;
 };
 
 const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) => value !== undefined || isDirty;
@@ -57,7 +55,9 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   skalBrukeOverstyrendeFritekstBrev,
 }) => {
-  const { formState: { isDirty } } = formHooks.useFormContext();
+  const {
+    formState: { isDirty },
+  } = formHooks.useFormContext();
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
   const isRequiredFn = getIsBegrunnelseRequired(isDirty);
@@ -67,15 +67,16 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
     <>
       {avslagsårsak && (
         <>
-          <Label size="small"><FormattedMessage id="VedtakForm.ArsakTilAvslag" /></Label>
-          <BodyShort size="small">
-            {avslagsårsak}
-          </BodyShort>
+          <Label size="small">
+            <FormattedMessage id="VedtakForm.ArsakTilAvslag" />
+          </Label>
+          <BodyShort size="small">{avslagsårsak}</BodyShort>
           <VerticalSpacer sixteenPx />
         </>
       )}
-      {!skalBrukeOverstyrendeFritekstBrev
-          && behandlingStatusKode === behandlingStatus.BEHANDLING_UTREDES && hasIkkeOppfyltSoknadsfristvilkar(vilkar) && (
+      {!skalBrukeOverstyrendeFritekstBrev &&
+        behandlingStatusKode === behandlingStatus.BEHANDLING_UTREDES &&
+        hasIkkeOppfyltSoknadsfristvilkar(vilkar) && (
           <>
             <VerticalSpacer sixteenPx />
             <TextAreaField
@@ -84,17 +85,21 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
               validate={[requiredIfCustomFunctionIsTrueNew(isRequiredFn), minLength3, maxLength1500, hasValidText]}
               maxLength={1500}
               readOnly={erReadOnly}
-              badges={[{
-                type: 'info',
-                titleText: getLanguageFromSprakkode(språkKode),
-              }]}
+              badges={[
+                {
+                  type: 'info',
+                  titleText: getLanguageFromSprakkode(språkKode),
+                },
+              ]}
             />
           </>
-      )}
+        )}
       {erReadOnly && behandlingsresultat.avslagsarsakFritekst && (
         <span>
           <VerticalSpacer twentyPx />
-          <Detail size="small"><FormattedMessage id="VedtakForm.Fritekst" /></Detail>
+          <Detail size="small">
+            <FormattedMessage id="VedtakForm.Fritekst" />
+          </Detail>
           <VerticalSpacer eightPx />
           <div className={styles.fritekstItem}>{decodeHtmlEntity(behandlingsresultat.avslagsarsakFritekst)}</div>
         </span>

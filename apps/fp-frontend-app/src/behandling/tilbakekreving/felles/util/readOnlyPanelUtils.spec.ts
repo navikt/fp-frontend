@@ -14,13 +14,15 @@ describe('<readOnlyUtils>', () => {
     behandlingHenlagt: false,
   };
 
-  const aksjonspunkter = [{
-    status: AksjonspunktStatus.OPPRETTET,
-    definisjon: AksjonspunktCode.FORESLA_VEDTAK,
-    kanLoses: true,
-    toTrinnsBehandling: true,
-    toTrinnsBehandlingGodkjent: false,
-  }];
+  const aksjonspunkter = [
+    {
+      status: AksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktCode.FORESLA_VEDTAK,
+      kanLoses: true,
+      toTrinnsBehandling: true,
+      toTrinnsBehandlingGodkjent: false,
+    },
+  ];
 
   const rettigheter = {
     writeAccess: {

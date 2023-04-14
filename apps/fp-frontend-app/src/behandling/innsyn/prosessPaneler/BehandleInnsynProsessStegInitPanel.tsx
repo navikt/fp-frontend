@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { Dokument, Fagsak } from '@navikt/ft-types';
 
@@ -17,11 +15,12 @@ const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_INNSYN];
 
 const getEndepunkterPanelData = (saksnummer: string) => [
   { key: InnsynBehandlingApiKeys.INNSYN_DOKUMENTER, params: { saksnummer } },
-  { key: InnsynBehandlingApiKeys.INNSYN }];
+  { key: InnsynBehandlingApiKeys.INNSYN },
+];
 type EndepunktPanelData = {
   innsynDokumenter?: Dokument[];
   innsyn: Innsyn;
-}
+};
 
 interface OwnProps {
   fagsak: Fagsak;
@@ -39,12 +38,8 @@ const BehandleInnsynProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
     prosessPanelKode={ProsessStegCode.BEHANDLE_INNSYN}
     prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Innsyn' })}
     skalPanelVisesIMeny={() => true}
-    renderPanel={(data) => (
-      <InnsynProsessIndex
-        saksnummer={fagsak.saksnummer}
-        alleDokumenter={data.innsynDokumenter}
-        {...data}
-      />
+    renderPanel={data => (
+      <InnsynProsessIndex saksnummer={fagsak.saksnummer} alleDokumenter={data.innsynDokumenter} {...data} />
     )}
   />
 );

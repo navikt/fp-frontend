@@ -2,17 +2,11 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
-import {
-  VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image,
-} from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
-import {
-  hasValidText, maxLength, minLength, required,
-} from '@navikt/ft-form-validators';
-import {
-  Form, RadioGroupPanel, TextAreaField,
-} from '@navikt/ft-form-hooks';
+import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, BeregningsresultatFp } from '@navikt/fp-types';
 import { VurderTilbaketrekkAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -29,7 +23,7 @@ const minLength3 = minLength(3);
 export type FormValues = {
   radioVurderTilbaketrekk: boolean;
   begrunnelseVurderTilbaketrekk?: string;
-}
+};
 
 const buildInitialValues = (ap?: Aksjonspunkt, beregningsresultat?: BeregningsresultatFp): FormValues => {
   const tidligereValgt = beregningsresultat?.skalHindreTilbaketrekk;
@@ -73,7 +67,10 @@ const Tilbaketrekkpanel: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const initialValues = useMemo(() => buildInitialValues(vurderTilbaketrekkAP, beregningsresultat), [vurderTilbaketrekkAP, beregningsresultat]);
+  const initialValues = useMemo(
+    () => buildInitialValues(vurderTilbaketrekkAP, beregningsresultat),
+    [vurderTilbaketrekkAP, beregningsresultat],
+  );
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });
@@ -114,13 +111,15 @@ const Tilbaketrekkpanel: FunctionComponent<OwnProps> = ({
         isReadOnly={readOnly}
         isEdited={vurderTilbaketrekkAP.status !== aksjonspunktStatus.OPPRETTET}
         isHorizontal
-        radios={[{
-          value: 'false',
-          label: <FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Utfør" />,
-        }, {
-          value: 'true',
-          label: <FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Hindre" />,
-        },
+        radios={[
+          {
+            value: 'false',
+            label: <FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Utfør" />,
+          },
+          {
+            value: 'true',
+            label: <FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Hindre" />,
+          },
         ]}
       />
       <VerticalSpacer sixteenPx />

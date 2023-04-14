@@ -30,15 +30,18 @@ describe('<BehandlingSvangerskapspengerIndex>', () => {
           status: behandlingStatus.OPPRETTET,
           type: behandlingType.FORSTEGANGSSOKNAD,
           aksjonspunkt: [],
-          links: [{
-            href: BehandlingFellesApiKeys.ARBEIDSGIVERE_OVERSIKT.name,
-            rel: 'arbeidsgivere-oversikt',
-            type: 'GET',
-          }, {
-            href: BehandlingFellesApiKeys.BEHANDLING_PERSONOVERSIKT.name,
-            rel: 'behandling-personoversikt',
-            type: 'GET',
-          }],
+          links: [
+            {
+              href: BehandlingFellesApiKeys.ARBEIDSGIVERE_OVERSIKT.name,
+              rel: 'arbeidsgivere-oversikt',
+              type: 'GET',
+            },
+            {
+              href: BehandlingFellesApiKeys.BEHANDLING_PERSONOVERSIKT.name,
+              rel: 'behandling-personoversikt',
+              type: 'GET',
+            },
+          ],
         },
       },
       { key: BehandlingFellesApiKeys.ARBEIDSGIVERE_OVERSIKT.name, data: {} },
@@ -60,17 +63,21 @@ describe('<BehandlingSvangerskapspengerIndex>', () => {
               oppdaterBehandlingVersjon={() => {}}
               // @ts-ignore
               kodeverk={alleKodeverk as AlleKodeverk}
-              fagsak={{
-                fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
-              } as Fagsak}
-              rettigheter={{
-                writeAccess: {
-                  isEnabled: true,
-                },
-                kanOverstyreAccess: {
-                  isEnabled: true,
-                },
-              } as AksessRettigheter}
+              fagsak={
+                {
+                  fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
+                } as Fagsak
+              }
+              rettigheter={
+                {
+                  writeAccess: {
+                    isEnabled: true,
+                  },
+                  kanOverstyreAccess: {
+                    isEnabled: true,
+                  },
+                } as AksessRettigheter
+              }
               oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
               valgtProsessSteg="default"
               valgtFaktaSteg="default"

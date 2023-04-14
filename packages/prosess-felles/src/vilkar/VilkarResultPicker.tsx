@@ -1,14 +1,10 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { BodyShort } from '@navikt/ds-react';
-import {
-  FlexContainer, FlexRow, FlexColumn, Image, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { FlexContainer, FlexRow, FlexColumn, Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 import { vilkarUtfallType } from '@navikt/fp-kodeverk';
-import {
-  Datepicker, RadioGroupPanel, SelectField, formHooks,
-} from '@navikt/ft-form-hooks';
+import { Datepicker, RadioGroupPanel, SelectField, formHooks } from '@navikt/ft-form-hooks';
 import { createIntl } from '@navikt/ft-utils';
 import { hasValidDate, required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@navikt/fp-types';
@@ -27,7 +23,7 @@ type FormValues = {
   erVilkarOk?: boolean;
   avslagCode?: string;
   avslagDato?: string;
-}
+};
 
 interface OwnProps {
   avslagsarsaker?: KodeverkMedNavn[];
@@ -40,14 +36,20 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues: (behandlingsresultat: Behandlingsresultat, aksjonspunkter: Aksjonspunkt[], status: string) => FormValues;
-  transformValues: (values: FormValues) => {
-    erVilkarOk: boolean;
-  } | {
-    erVilkarOk: boolean;
-    avslagskode: string;
-    avslagDato: string;
-  };
+  buildInitialValues: (
+    behandlingsresultat: Behandlingsresultat,
+    aksjonspunkter: Aksjonspunkt[],
+    status: string,
+  ) => FormValues;
+  transformValues: (values: FormValues) =>
+    | {
+        erVilkarOk: boolean;
+      }
+    | {
+        erVilkarOk: boolean;
+        avslagskode: string;
+        avslagDato: string;
+      };
 }
 
 /**
@@ -67,12 +69,15 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
   const { getValues, watch } = formHooks.useFormContext();
   const erVilkarOk = watch('erVilkarOk');
 
-  const radioValidators = useMemo(() => (validatorsForRadioOptions ? validatorsForRadioOptions.concat(required) : [required]), [validatorsForRadioOptions]);
+  const radioValidators = useMemo(
+    () => (validatorsForRadioOptions ? validatorsForRadioOptions.concat(required) : [required]),
+    [validatorsForRadioOptions],
+  );
 
   return (
     <div className={styles.container}>
       <VerticalSpacer sixteenPx />
-      {(readOnly && erVilkarOk !== undefined) && (
+      {readOnly && erVilkarOk !== undefined && (
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
@@ -92,14 +97,17 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
           validate={radioValidators}
           isReadOnly={readOnly}
           isTrueOrFalseSelection
-          radios={[{
-            value: 'true',
-            label: customVilkarOppfyltText,
-            disabled: !skalKunneInnvilge,
-          }, {
-            value: 'false',
-            label: customVilkarIkkeOppfyltText,
-          }]}
+          radios={[
+            {
+              value: 'true',
+              label: customVilkarOppfyltText,
+              disabled: !skalKunneInnvilge,
+            },
+            {
+              value: 'false',
+              label: customVilkarIkkeOppfyltText,
+            },
+          ]}
         />
       )}
       {erVilkarOk !== undefined && !erVilkarOk && avslagsarsaker && (
@@ -108,7 +116,11 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
           <SelectField
             name="avslagCode"
             label={intl.formatMessage({ id: 'VilkarResultPicker.Arsak' })}
-            selectValues={avslagsarsaker.map((aa) => <option key={aa.kode} value={aa.kode}>{aa.navn}</option>)}
+            selectValues={avslagsarsaker.map(aa => (
+              <option key={aa.kode} value={aa.kode}>
+                {aa.navn}
+              </option>
+            ))}
             readOnly={readOnly}
             className={styles.selectBredde}
             validate={[requiredIfCustomFunctionIsTrueNew(getIsAvslagCodeRequired(erVilkarOk, getValues('avslagCode')))]}
@@ -131,25 +143,29 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
   );
 };
 
-VilkarResultPicker.buildInitialValues = (behandlingsresultat: Behandlingsresultat, aksjonspunkter: Aksjonspunkt[], status: string): FormValues => {
-  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => ap.status === AksjonspunktStatus.OPPRETTET);
+VilkarResultPicker.buildInitialValues = (
+  behandlingsresultat: Behandlingsresultat,
+  aksjonspunkter: Aksjonspunkt[],
+  status: string,
+): FormValues => {
+  const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
   const erVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
   return {
     erVilkarOk,
-    avslagCode: erVilkarOk === false && behandlingsresultat && behandlingsresultat.avslagsarsak
-      ? behandlingsresultat.avslagsarsak
-      : undefined,
+    avslagCode:
+      erVilkarOk === false && behandlingsresultat && behandlingsresultat.avslagsarsak
+        ? behandlingsresultat.avslagsarsak
+        : undefined,
   };
 };
 
-VilkarResultPicker.transformValues = (values: Required<FormValues>) => (
+VilkarResultPicker.transformValues = (values: Required<FormValues>) =>
   values.erVilkarOk
     ? { erVilkarOk: values.erVilkarOk }
     : {
-      erVilkarOk: values.erVilkarOk,
-      avslagskode: values.avslagCode,
-      avslagDato: values.avslagDato,
-    }
-);
+        erVilkarOk: values.erVilkarOk,
+        avslagskode: values.avslagCode,
+        avslagDato: values.avslagDato,
+      };
 
 export default VilkarResultPicker;

@@ -16,13 +16,13 @@ type FormValues = {
   erSignert?: boolean;
   begrunnelse?: string;
   vedtak?: string;
-}
+};
 
 type TilbakekrevingInfo = {
   tilbakekrevingUuid?: string;
   tilbakekrevingVedtakDato?: string;
   tilbakekrevingBehandlingType?: string;
-}
+};
 
 const buildInitialValues = (klageVurdering: KlageVurdering): FormValues => {
   const klageFormkavResultatNfp = klageVurdering ? klageVurdering.klageFormkravResultatNFP : null;
@@ -36,22 +36,33 @@ const buildInitialValues = (klageVurdering: KlageVurdering): FormValues => {
   };
 };
 
-const getPåklagdBehandling = (avsluttedeBehandlinger: AvsluttetBehandling[], påklagdVedtak: string): AvsluttetBehandling => avsluttedeBehandlinger
-  .find((behandling: AvsluttetBehandling) => behandling.uuid === påklagdVedtak);
+const getPåklagdBehandling = (
+  avsluttedeBehandlinger: AvsluttetBehandling[],
+  påklagdVedtak: string,
+): AvsluttetBehandling =>
+  avsluttedeBehandlinger.find((behandling: AvsluttetBehandling) => behandling.uuid === påklagdVedtak);
 
 export const erTilbakekreving = (avsluttedeBehandlinger: AvsluttetBehandling[], påklagdVedtak: string): boolean => {
   const behandling = getPåklagdBehandling(avsluttedeBehandlinger, påklagdVedtak);
-  return behandling && (behandling.type === BehandlingType.TILBAKEKREVING || behandling.type === BehandlingType.TILBAKEKREVING_REVURDERING);
+  return (
+    behandling &&
+    (behandling.type === BehandlingType.TILBAKEKREVING || behandling.type === BehandlingType.TILBAKEKREVING_REVURDERING)
+  );
 };
 
-export const påklagdTilbakekrevingInfo = (avsluttedeBehandlinger: AvsluttetBehandling[], påklagdVedtak: string): TilbakekrevingInfo | null => {
+export const påklagdTilbakekrevingInfo = (
+  avsluttedeBehandlinger: AvsluttetBehandling[],
+  påklagdVedtak: string,
+): TilbakekrevingInfo | null => {
   const erTilbakekrevingVedtak = erTilbakekreving(avsluttedeBehandlinger, påklagdVedtak);
   const behandling = getPåklagdBehandling(avsluttedeBehandlinger, påklagdVedtak);
-  return erTilbakekrevingVedtak ? {
-    tilbakekrevingUuid: behandling.uuid,
-    tilbakekrevingVedtakDato: behandling.avsluttet,
-    tilbakekrevingBehandlingType: behandling.type,
-  } : null;
+  return erTilbakekrevingVedtak
+    ? {
+        tilbakekrevingUuid: behandling.uuid,
+        tilbakekrevingVedtakDato: behandling.avsluttet,
+        tilbakekrevingBehandlingType: behandling.type,
+      }
+    : null;
 };
 
 const transformValues = (values: FormValues, avsluttedeBehandlinger: AvsluttetBehandling[]): KlageFormkravAp => ({

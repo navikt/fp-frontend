@@ -17,9 +17,6 @@ export default {
 
 export const visBehandlingErHenlagtProsessPanel = () => (
   <RawIntlProvider value={intl}>
-    <BehandlingHenlagtPanel
-      valgtProsessSteg="henlagt"
-      registrerProsessPanel={() => undefined}
-    />
+    <BehandlingHenlagtPanel valgtProsessSteg="henlagt" registrerProsessPanel={() => undefined} />
   </RawIntlProvider>
 );

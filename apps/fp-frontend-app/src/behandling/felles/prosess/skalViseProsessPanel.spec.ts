@@ -7,9 +7,11 @@ import skalViseProsessPanel from './skalViseProsessPanel';
 
 describe('skalViseProsessPanel', () => {
   it('skal vise prosesspanel når en har aksjonspunkt men ikke har tilknyttet noen vilkår', () => {
-    const aksjonspunkter = [{
-      definisjon: AksjonspunktCode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-    }] as Aksjonspunkt[];
+    const aksjonspunkter = [
+      {
+        definisjon: AksjonspunktCode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
+      },
+    ] as Aksjonspunkt[];
 
     const skalVise = skalViseProsessPanel(aksjonspunkter);
 
@@ -22,9 +24,11 @@ describe('skalViseProsessPanel', () => {
   });
 
   it('skal vise prosesspanel når en har vilkar men ikke aksjonspunkt', () => {
-    const vilkar = [{
-      vilkarType: VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
-    } as Vilkar];
+    const vilkar = [
+      {
+        vilkarType: VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
+      } as Vilkar,
+    ];
     const aksjonspunkter = [] as Aksjonspunkt[];
 
     const skalVise = skalViseProsessPanel(aksjonspunkter, [VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE], vilkar);
@@ -33,12 +37,16 @@ describe('skalViseProsessPanel', () => {
   });
 
   it('skal vise prosesspanel når en har både vilkar og aksjonspunkt', () => {
-    const aksjonspunkter = [{
-      definisjon: AksjonspunktCode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-    }] as Aksjonspunkt[];
-    const vilkar = [{
-      vilkarType: VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
-    } as Vilkar];
+    const aksjonspunkter = [
+      {
+        definisjon: AksjonspunktCode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
+      },
+    ] as Aksjonspunkt[];
+    const vilkar = [
+      {
+        vilkarType: VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
+      } as Vilkar,
+    ];
 
     const skalVise = skalViseProsessPanel(aksjonspunkter, [VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE], vilkar);
 
@@ -46,9 +54,11 @@ describe('skalViseProsessPanel', () => {
   });
 
   it('skal ikke vise prosesspanel når en har tilknyttet et vilkår men ingen aktive vilkår', () => {
-    const aksjonspunkter = [{
-      definisjon: AksjonspunktCode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-    }] as Aksjonspunkt[];
+    const aksjonspunkter = [
+      {
+        definisjon: AksjonspunktCode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
+      },
+    ] as Aksjonspunkt[];
     const vilkar = [] as Vilkar[];
 
     const skalVise = skalViseProsessPanel(aksjonspunkter, [VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE], vilkar);

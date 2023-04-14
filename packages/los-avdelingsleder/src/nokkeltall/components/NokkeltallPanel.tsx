@@ -1,6 +1,4 @@
-import React, {
-  useRef, FunctionComponent,
-} from 'react';
+import React, { useRef, FunctionComponent } from 'react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { getValueFromLocalStorage } from '../../data/localStorageHelper';
@@ -57,10 +55,7 @@ const NokkeltallPanel: FunctionComponent<OwnProps> = ({
         getValueFromLocalStorage={getValueFromLocalStorage}
       />
       <VerticalSpacer twentyPx />
-      <OppgaverPerForsteStonadsdagPanel
-        height={height}
-        oppgaverPerForsteStonadsdag={oppgaverPerForsteStonadsdag}
-      />
+      <OppgaverPerForsteStonadsdagPanel height={height} oppgaverPerForsteStonadsdag={oppgaverPerForsteStonadsdag} />
       <VerticalSpacer twentyPx />
       <OppgaverSomErApneEllerPaVentPanel
         height={height}

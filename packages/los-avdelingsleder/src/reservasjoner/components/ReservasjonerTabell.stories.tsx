@@ -26,24 +26,27 @@ export const ViseAtIngenReservasjonerBleFunnet = () => (
 );
 
 export const VisTabellMedReservasjoner = () => {
-  const [reservasjoner, fjernReservasjon] = useState([{
-    reservertAvUid: 'wsfwer-sdsfd',
-    reservertAvNavn: 'Espen Utvikler',
-    reservertTilTidspunkt: '2020-01-10',
-    oppgaveId: 1,
-    oppgaveSaksNr: 122234,
-    behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
-  }, {
-    reservertAvUid: 'gtfbrt-tbrtb',
-    reservertAvNavn: 'Eirik Utvikler',
-    reservertTilTidspunkt: '2020-01-01',
-    oppgaveId: 2,
-    oppgaveSaksNr: 23454,
-    behandlingType: BehandlingType.KLAGE,
-  }]);
+  const [reservasjoner, fjernReservasjon] = useState([
+    {
+      reservertAvUid: 'wsfwer-sdsfd',
+      reservertAvNavn: 'Espen Utvikler',
+      reservertTilTidspunkt: '2020-01-10',
+      oppgaveId: 1,
+      oppgaveSaksNr: 122234,
+      behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
+    },
+    {
+      reservertAvUid: 'gtfbrt-tbrtb',
+      reservertAvNavn: 'Eirik Utvikler',
+      reservertTilTidspunkt: '2020-01-01',
+      oppgaveId: 2,
+      oppgaveSaksNr: 23454,
+      behandlingType: BehandlingType.KLAGE,
+    },
+  ]);
 
   const opphevReservasjon = useCallback((oppgaveId: number) => {
-    fjernReservasjon((oldState) => oldState.filter((s) => s.oppgaveId !== oppgaveId));
+    fjernReservasjon(oldState => oldState.filter(s => s.oppgaveId !== oppgaveId));
   }, []);
 
   return (

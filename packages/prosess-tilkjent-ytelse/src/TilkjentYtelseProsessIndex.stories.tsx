@@ -3,12 +3,26 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 
 import {
-  aktivitetStatus, aksjonspunktStatus, arbeidsforholdHandlingType, StonadskontoType, navBrukerKjonn, fagsakYtelseType, soknadType, AksjonspunktCode,
+  aktivitetStatus,
+  aksjonspunktStatus,
+  arbeidsforholdHandlingType,
+  StonadskontoType,
+  navBrukerKjonn,
+  fagsakYtelseType,
+  soknadType,
+  AksjonspunktCode,
 } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import {
   Aksjonspunkt,
-  Behandling, BeregningsresultatFp, Fagsak, FamilieHendelse, FamilieHendelseSamling, Feriepengegrunnlag, Personoversikt, Soknad,
+  Behandling,
+  BeregningsresultatFp,
+  Fagsak,
+  FamilieHendelse,
+  FamilieHendelseSamling,
+  Feriepengegrunnlag,
+  Personoversikt,
+  Soknad,
 } from '@navikt/fp-types';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -25,9 +39,11 @@ const behandling = {
 
 const familiehendelse = {
   gjeldende: {
-    avklartBarn: [{
-      fodselsdato: '2019-01-01',
-    }],
+    avklartBarn: [
+      {
+        fodselsdato: '2019-01-01',
+      },
+    ],
     omsorgsovertakelseDato: '2019-01-01',
     soknadType: soknadType.FODSEL,
   } as FamilieHendelse,
@@ -41,18 +57,22 @@ const personoversikt = {
 
 const beregningresultat = {
   sokerErMor: true,
-  perioder: [{
-    andeler: [{
-      uttak: {
-        stonadskontoType: StonadskontoType.FELLESPERIODE,
-      },
-      aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
-      arbeidsforholdType: arbeidsforholdHandlingType.NYTT_ARBEIDSFORHOLD,
-    }],
-    fom: '2019-01-01',
-    tom: '2019-01-10',
-    dagsats: 1000,
-  }],
+  perioder: [
+    {
+      andeler: [
+        {
+          uttak: {
+            stonadskontoType: StonadskontoType.FELLESPERIODE,
+          },
+          aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
+          arbeidsforholdType: arbeidsforholdHandlingType.NYTT_ARBEIDSFORHOLD,
+        },
+      ],
+      fom: '2019-01-01',
+      tom: '2019-01-10',
+      dagsats: 1000,
+    },
+  ],
 } as BeregningsresultatFp;
 
 const soknad = {
@@ -61,10 +81,10 @@ const soknad = {
   omsorgsovertakelseDato: '2019-01-10',
   fodselsdatoer: {
     1: '2019-01-01',
-  } as {[key: number]: string},
+  } as { [key: number]: string },
   adopsjonFodelsedatoer: {
     1: '2019-01-01',
-  } as {[key: number]: string},
+  } as { [key: number]: string },
   termindato: '2019-02-01',
 } as Soknad;
 
@@ -85,11 +105,7 @@ const Template: Story<{
   submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
   aksjonspunkter: Aksjonspunkt[];
   feriepengegrunnlag?: Feriepengegrunnlag;
-}> = ({
-  submitCallback,
-  aksjonspunkter,
-  feriepengegrunnlag,
-}) => (
+}> = ({ submitCallback, aksjonspunkter, feriepengegrunnlag }) => (
   <TilkjentYtelseProsessIndex
     behandling={behandling}
     alleKodeverk={alleKodeverk as any}
@@ -121,29 +137,35 @@ UtenAksjonspunkt.args = {
 export const ÅpentAksjonspunkt = Template.bind({});
 ÅpentAksjonspunkt.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.VURDER_TILBAKETREKK,
-    status: aksjonspunktStatus.OPPRETTET,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.VURDER_TILBAKETREKK,
+      status: aksjonspunktStatus.OPPRETTET,
+    },
+  ] as Aksjonspunkt[],
 };
 
 export const MedFeriepengegrunnlag = Template.bind({});
 MedFeriepengegrunnlag.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.VURDER_TILBAKETREKK,
-    status: aksjonspunktStatus.OPPRETTET,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.VURDER_TILBAKETREKK,
+      status: aksjonspunktStatus.OPPRETTET,
+    },
+  ] as Aksjonspunkt[],
   feriepengegrunnlag: {
     feriepengeperiodeFom: '2020-01-01',
     feriepengeperiodeTom: '2022-10-10',
-    andeler: [{
-      aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
-      opptjeningsår: 2,
-      årsbeløp: 500000,
-      erBrukerMottaker: true,
-      ytelseperiodeFom: '2020-01-01',
-      ytelseperiodeTom: '2022-01-01',
-    }],
+    andeler: [
+      {
+        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
+        opptjeningsår: 2,
+        årsbeløp: 500000,
+        erBrukerMottaker: true,
+        ytelseperiodeFom: '2020-01-01',
+        ytelseperiodeTom: '2022-01-01',
+      },
+    ],
   },
 };

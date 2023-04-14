@@ -1,8 +1,8 @@
 import { Behandling, Aksjonspunkt } from '@navikt/ft-types';
 import { AksessRettigheter } from '@navikt/fp-types';
 
-export const harBehandlingReadOnlyStatus = (behandling: Behandling): boolean => (behandling.taskStatus && behandling.taskStatus.readOnly
-  ? behandling.taskStatus.readOnly : false);
+export const harBehandlingReadOnlyStatus = (behandling: Behandling): boolean =>
+  behandling.taskStatus && behandling.taskStatus.readOnly ? behandling.taskStatus.readOnly : false;
 
 export const erReadOnly = (
   behandling: Behandling,
@@ -16,10 +16,7 @@ export const erReadOnly = (
   return !rettigheter.writeAccess.isEnabled || behandlingPaaVent || isBehandlingReadOnly;
 };
 
-export const erReadOnlyCurried = (
-  behandling: Behandling,
-  rettigheter: AksessRettigheter,
-  hasFetchError: boolean,
-) => (
-  aksjonspunkterForPunkt: Aksjonspunkt[],
-) => erReadOnly(behandling, aksjonspunkterForPunkt, rettigheter, hasFetchError);
+export const erReadOnlyCurried =
+  (behandling: Behandling, rettigheter: AksessRettigheter, hasFetchError: boolean) =>
+  (aksjonspunkterForPunkt: Aksjonspunkt[]) =>
+    erReadOnly(behandling, aksjonspunkterForPunkt, rettigheter, hasFetchError);

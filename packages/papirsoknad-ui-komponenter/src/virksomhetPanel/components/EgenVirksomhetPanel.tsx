@@ -6,7 +6,10 @@ import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
 import { AlleKodeverk } from '@navikt/fp-types';
 
-import RegistrerVirksomhetPanel, { EGEN_VIRKSOMHET_NAME_PREFIX, FormValues as VirksomhetFormValues } from './RegistrerVirksomhetPanel';
+import RegistrerVirksomhetPanel, {
+  EGEN_VIRKSOMHET_NAME_PREFIX,
+  FormValues as VirksomhetFormValues,
+} from './RegistrerVirksomhetPanel';
 
 export type FormValues = {
   harArbeidetIEgenVirksomhet: boolean;
@@ -23,10 +26,7 @@ interface OwnProps {
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
  * Søker må oppgi om hen har arbdeidet i egen virksomhet.
  */
-const EgenVirksomhetPanel: FunctionComponent<OwnProps> = ({
-  readOnly = true,
-  alleKodeverk,
-}) => {
+const EgenVirksomhetPanel: FunctionComponent<OwnProps> = ({ readOnly = true, alleKodeverk }) => {
   const intl = useIntl();
 
   const { watch } = formHooks.useFormContext<{ [EGEN_VIRKSOMHET_NAME_PREFIX]: FormValues }>();
@@ -34,7 +34,9 @@ const EgenVirksomhetPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <BorderBox>
-      <Heading size="small"><FormattedMessage id="Registrering.EgenVirksomhet.Title" /></Heading>
+      <Heading size="small">
+        <FormattedMessage id="Registrering.EgenVirksomhet.Title" />
+      </Heading>
       <VerticalSpacer sixteenPx />
       <RadioGroupPanel
         name={`${EGEN_VIRKSOMHET_NAME_PREFIX}.harArbeidetIEgenVirksomhet`}
@@ -42,20 +44,18 @@ const EgenVirksomhetPanel: FunctionComponent<OwnProps> = ({
         isReadOnly={readOnly}
         hideLegend
         isTrueOrFalseSelection
-        radios={[{
-          label: intl.formatMessage({ id: 'Registrering.EgenVirksomhet.No' }),
-          value: 'false',
-        }, {
-          label: intl.formatMessage({ id: 'Registrering.EgenVirksomhet.Yes' }),
-          value: 'true',
-        }]}
+        radios={[
+          {
+            label: intl.formatMessage({ id: 'Registrering.EgenVirksomhet.No' }),
+            value: 'false',
+          },
+          {
+            label: intl.formatMessage({ id: 'Registrering.EgenVirksomhet.Yes' }),
+            value: 'true',
+          },
+        ]}
       />
-      {harArbeidetIEgenVirksomhet && (
-      <RegistrerVirksomhetPanel
-        readOnly={readOnly}
-        alleKodeverk={alleKodeverk}
-      />
-      )}
+      {harArbeidetIEgenVirksomhet && <RegistrerVirksomhetPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />}
     </BorderBox>
   );
 };

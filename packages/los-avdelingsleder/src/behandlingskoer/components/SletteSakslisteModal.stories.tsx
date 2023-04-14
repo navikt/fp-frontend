@@ -23,10 +23,7 @@ export default {
 const Template: Story<{
   cancel: () => void;
   submit: (saksliste: Saksliste) => void;
-}> = ({
-  cancel,
-  submit,
-}) => (
+}> = ({ cancel, submit }) => (
   <SletteSakslisteModal
     valgtSaksliste={{
       sakslisteId: 1,

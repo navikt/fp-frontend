@@ -1,14 +1,11 @@
 import React from 'react';
-import {
-  render, screen, waitFor, fireEvent,
-} from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './VilkarresultatMedOverstyringProsessIndex.stories';
 
-const {
-  OverstyringspanelForFødsel, OverstyringspanelForMedlemskap, OverstyrtAksjonspunktSomErBekreftet,
-} = composeStories(stories);
+const { OverstyringspanelForFødsel, OverstyringspanelForMedlemskap, OverstyrtAksjonspunktSomErBekreftet } =
+  composeStories(stories);
 
 describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
   it('skal overstyre og fylle ut fødselsvilkåret ikke er oppfylt og så lagre', async () => {

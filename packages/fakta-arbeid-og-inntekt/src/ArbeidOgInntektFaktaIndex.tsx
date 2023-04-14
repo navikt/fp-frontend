@@ -2,7 +2,11 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import {
-  ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold, StandardFaktaPanelProps,
+  ArbeidOgInntektsmelding,
+  ArbeidsgiverOpplysningerPerId,
+  ManglendeInntektsmeldingVurdering,
+  ManueltArbeidsforhold,
+  StandardFaktaPanelProps,
 } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -17,10 +21,7 @@ interface OwnProps {
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   erOverstyrer: boolean;
-  settBehandlingPåVentCallback: (params: {
-    frist: string;
-    ventearsak: string;
-  }) => Promise<any>
+  settBehandlingPåVentCallback: (params: { frist: string; ventearsak: string }) => Promise<any>;
   åpneForNyVurdering: () => void;
 }
 

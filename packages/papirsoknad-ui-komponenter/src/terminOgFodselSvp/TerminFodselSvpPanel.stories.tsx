@@ -15,19 +15,12 @@ export default {
 
 const Template: Story<{
   submitCallback: (data: any) => Promise<void>;
-}> = ({
-  submitCallback,
-}) => {
+}> = ({ submitCallback }) => {
   const formMethods = useForm();
 
   return (
-    <Form
-      formMethods={formMethods}
-      onSubmit={submitCallback}
-    >
-      <TerminFodselSvpPanel
-        readOnly={false}
-      />
+    <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <TerminFodselSvpPanel readOnly={false} />
       <VerticalSpacer fourtyPx />
       <Button size="small" variant="primary">
         Lagreknapp (Kun for test)

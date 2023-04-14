@@ -5,6 +5,6 @@ type ArbeidsforholdOgInntekt = {
   arbeidsgiverNavn: string;
   inntektsmelding: Inntektsmelding | undefined;
   inntektsposter: Inntektspost[] | undefined;
-}
+};
 
 export default ArbeidsforholdOgInntekt;

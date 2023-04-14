@@ -1,9 +1,7 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { Aksjonspunkt } from '@navikt/ft-types';
-import {
-  VilkarUtfallType, BehandlingStatus,
-} from '@navikt/ft-kodeverk';
+import { VilkarUtfallType, BehandlingStatus } from '@navikt/ft-kodeverk';
 
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@navikt/fp-rest-api';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
@@ -31,10 +29,12 @@ const defaultProps = {
   alleKodeverk: kodeverk,
   isReadOnly: false,
   readOnlySubmitButton: false,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.BEHANDLE_KLAGE_NFP,
-    kanLoses: true,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.BEHANDLE_KLAGE_NFP,
+      kanLoses: true,
+    },
+  ] as Aksjonspunkt[],
   vilkar: [],
   isAksjonspunktOpen: true,
   setFormData: () => undefined,
@@ -48,9 +48,7 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
     }));
     const BEHANDLING_KEY = new RestKey<Behandling, void>('BEHANDLING_KEY');
 
-    const endpoints = new RestApiConfigBuilder()
-      .withRel('behandling', BEHANDLING_KEY)
-      .build();
+    const endpoints = new RestApiConfigBuilder().withRel('behandling', BEHANDLING_KEY).build();
 
     const requestMock = createRequestApi(endpoints);
 
@@ -74,9 +72,7 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
     vi.spyOn(Felles, 'default').mockImplementation(() => defaultProps);
     const BEHANDLING_KEY = new RestKey<Behandling, void>('BEHANDLING_KEY');
 
-    const endpoints = new RestApiConfigBuilder()
-      .withRel('behandling', BEHANDLING_KEY)
-      .build();
+    const endpoints = new RestApiConfigBuilder().withRel('behandling', BEHANDLING_KEY).build();
 
     const requestMock = createRequestApi(endpoints);
 

@@ -3,12 +3,8 @@ import moment from 'moment';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { UseFormGetValues } from 'react-hook-form';
 import { Label, Alert } from '@navikt/ds-react';
-import {
-  VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
-} from '@navikt/ft-ui-komponenter';
-import {
-  CheckboxField, Datepicker, SelectField, PeriodFieldArray, InputField, formHooks,
-} from '@navikt/ft-form-hooks';
+import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import { CheckboxField, Datepicker, SelectField, PeriodFieldArray, InputField, formHooks } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -38,29 +34,32 @@ export const gyldigeUttakperioder = [
   uttakPeriodeType.MODREKVOTE,
 ];
 
-const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] => typer
-  .filter(({
-    kode,
-  }) => gyldigeUttakperioder.includes(kode))
-  .map(({
-    kode,
-    navn,
-  }) => <option value={kode} key={kode}>{navn}</option>);
+const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] =>
+  typer
+    .filter(({ kode }) => gyldigeUttakperioder.includes(kode))
+    .map(({ kode, navn }) => (
+      <option value={kode} key={kode}>
+        {navn}
+      </option>
+    ));
 
-const mapAktiviteter = (aktiviteter: KodeverkMedNavn[]): ReactElement[] => aktiviteter
-  .map(({
-    kode,
-    navn,
-  }) => <option value={kode} key={kode}>{navn}</option>);
+const mapAktiviteter = (aktiviteter: KodeverkMedNavn[]): ReactElement[] =>
+  aktiviteter.map(({ kode, navn }) => (
+    <option value={kode} key={kode}>
+      {navn}
+    </option>
+  ));
 
 export const PERIODS_WITH_NO_MORS_AKTIVITET = [
   uttakPeriodeType.FEDREKVOTE,
   uttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
-  uttakPeriodeType.MODREKVOTE];
+  uttakPeriodeType.MODREKVOTE,
+];
 
 const getLabel = (erForsteRad: boolean, text: string): string => (erForsteRad ? text : '');
 
-const erPeriodeFormFør01012019 = (periodeFom: string | undefined): boolean => periodeFom && moment(periodeFom, ISO_DATE_FORMAT).isBefore(moment('2019-01-01'));
+const erPeriodeFormFør01012019 = (periodeFom: string | undefined): boolean =>
+  periodeFom && moment(periodeFom, ISO_DATE_FORMAT).isBefore(moment('2019-01-01'));
 
 export type FormValues = {
   periodeType: string;
@@ -70,31 +69,43 @@ export type FormValues = {
   morsAktivitet?: string;
   harSamtidigUttak?: boolean;
   samtidigUttaksprosent?: number;
-}
-
-const getOverlappingValidator = (
-  getValues: UseFormGetValues<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: { [PERMISJON_PERIODE_FIELD_ARRAY_NAME]: FormValues[] }}>,
-) => () => {
-  const perioder = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}`);
-  const periodeMap = perioder
-    .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
-    .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
-  return dateRangesNotOverlapping(periodeMap);
 };
 
-const getValiderFomOgTomVerdi = (
-  getValues: UseFormGetValues<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: { [PERMISJON_PERIODE_FIELD_ARRAY_NAME]: FormValues[] }}>,
-  index: number,
-  erFør: boolean,
-) => () => {
-  const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
-  const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
-  if (!tomVerdi || !fomVerdi) {
-    return null;
-  }
+const getOverlappingValidator =
+  (
+    getValues: UseFormGetValues<{
+      [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: { [PERMISJON_PERIODE_FIELD_ARRAY_NAME]: FormValues[] };
+    }>,
+  ) =>
+  () => {
+    const perioder = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}`);
+    const periodeMap = perioder
+      .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
+      .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
+    return dateRangesNotOverlapping(periodeMap);
+  };
 
-  return erFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
-};
+const getValiderFomOgTomVerdi =
+  (
+    getValues: UseFormGetValues<{
+      [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: { [PERMISJON_PERIODE_FIELD_ARRAY_NAME]: FormValues[] };
+    }>,
+    index: number,
+    erFør: boolean,
+  ) =>
+  () => {
+    const fomVerdi = getValues(
+      `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`,
+    );
+    const tomVerdi = getValues(
+      `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`,
+    );
+    if (!tomVerdi || !fomVerdi) {
+      return null;
+    }
+
+    return erFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
+  };
 
 interface OwnProps {
   readOnly: boolean;
@@ -121,15 +132,21 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
   const periodeTyper = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE];
   const morsAktivitetTyper = alleKodeverk[KodeverkType.MORS_AKTIVITET];
 
-  if (morsAktivitetTyper.filter(({
-    kode,
-  }) => kode === '-').length === 0) { morsAktivitetTyper.unshift({ kode: '-', navn: '', kodeverk: '' }); }
+  if (morsAktivitetTyper.filter(({ kode }) => kode === '-').length === 0) {
+    morsAktivitetTyper.unshift({ kode: '-', navn: '', kodeverk: '' });
+  }
 
   const {
-    control, getValues, trigger, watch, formState: { isSubmitted },
-  } = formHooks.useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
-    [PERMISJON_PERIODE_FIELD_ARRAY_NAME]: FormValues[]
-  }}>();
+    control,
+    getValues,
+    trigger,
+    watch,
+    formState: { isSubmitted },
+  } = formHooks.useFormContext<{
+    [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
+      [PERMISJON_PERIODE_FIELD_ARRAY_NAME]: FormValues[];
+    };
+  }>();
 
   const { fields, remove, append } = formHooks.useFieldArray({
     control,
@@ -153,14 +170,15 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
       remove={remove}
     >
       {(field, index) => {
-        const erForsteRad = (index === 0);
+        const erForsteRad = index === 0;
 
         const periode = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}`);
 
         const periodeFomForTidlig = erPeriodeFormFør01012019(periode.periodeFom);
         const visEllerSkulOverskriftStyle = erForsteRad ? styles.visOverskrift : styles.skjulOverskrift;
 
-        const skalDisableMorsAktivitet = PERIODS_WITH_NO_MORS_AKTIVITET.includes(periode.periodeType) || periode.periodeType === '';
+        const skalDisableMorsAktivitet =
+          PERIODS_WITH_NO_MORS_AKTIVITET.includes(periode.periodeType) || periode.periodeType === '';
 
         const namePart1 = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}`;
         return (
@@ -210,7 +228,10 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                       readOnly={readOnly}
                       disabled={skalDisableMorsAktivitet}
                       name={`${namePart1}.morsAktivitet`}
-                      label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.Fellesperiode.morsAktivitet' }))}
+                      label={getLabel(
+                        erForsteRad,
+                        intl.formatMessage({ id: 'Registrering.Permisjon.Fellesperiode.morsAktivitet' }),
+                      )}
                       selectValues={mapAktiviteter(morsAktivitetTyper)}
                       hideValueOnDisable
                     />
@@ -220,21 +241,13 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                   <Label size="small" className={visEllerSkulOverskriftStyle}>
                     <FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />
                   </Label>
-                  <CheckboxField
-                    readOnly={readOnly}
-                    name={`${namePart1}.flerbarnsdager`}
-                    label=" "
-                  />
+                  <CheckboxField readOnly={readOnly} name={`${namePart1}.flerbarnsdager`} label=" " />
                 </FlexColumn>
                 <FlexColumn className={styles.smalHeader}>
                   <Label size="small" className={visEllerSkulOverskriftStyle}>
                     <FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />
                   </Label>
-                  <CheckboxField
-                    readOnly={readOnly}
-                    name={`${namePart1}.harSamtidigUttak`}
-                    label=" "
-                  />
+                  <CheckboxField readOnly={readOnly} name={`${namePart1}.harSamtidigUttak`} label=" " />
                 </FlexColumn>
                 {periode.harSamtidigUttak && (
                   <FlexColumn className={erForsteRad ? '' : styles.alignSamtidigUttak}>
@@ -277,26 +290,27 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
   );
 };
 
-RenderPermisjonPeriodeFieldArray.transformValues = (values: FormValues[]) => values.map((value) => {
-  if (PERIODS_WITH_NO_MORS_AKTIVITET.includes(value.periodeType)) {
+RenderPermisjonPeriodeFieldArray.transformValues = (values: FormValues[]) =>
+  values.map(value => {
+    if (PERIODS_WITH_NO_MORS_AKTIVITET.includes(value.periodeType)) {
+      return {
+        periodeType: value.periodeType,
+        periodeFom: value.periodeFom,
+        periodeTom: value.periodeTom,
+        flerbarnsdager: value.flerbarnsdager ? value.flerbarnsdager : false,
+        harSamtidigUttak: value.harSamtidigUttak ? value.harSamtidigUttak : false,
+        samtidigUttaksprosent: value.samtidigUttaksprosent,
+      };
+    }
     return {
       periodeType: value.periodeType,
       periodeFom: value.periodeFom,
       periodeTom: value.periodeTom,
+      morsAktivitet: value.morsAktivitet,
       flerbarnsdager: value.flerbarnsdager ? value.flerbarnsdager : false,
       harSamtidigUttak: value.harSamtidigUttak ? value.harSamtidigUttak : false,
       samtidigUttaksprosent: value.samtidigUttaksprosent,
     };
-  }
-  return {
-    periodeType: value.periodeType,
-    periodeFom: value.periodeFom,
-    periodeTom: value.periodeTom,
-    morsAktivitet: value.morsAktivitet,
-    flerbarnsdager: value.flerbarnsdager ? value.flerbarnsdager : false,
-    harSamtidigUttak: value.harSamtidigUttak ? value.harSamtidigUttak : false,
-    samtidigUttaksprosent: value.samtidigUttaksprosent,
-  };
-});
+  });
 
 export default RenderPermisjonPeriodeFieldArray;

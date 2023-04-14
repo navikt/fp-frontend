@@ -29,6 +29,6 @@ type BeregningsresultatFp = Readonly<{
   perioder?: BeregningsresultatPeriode[];
   utbetPerioder?: BeregningsresultatPeriode[];
   skalHindreTilbaketrekk?: boolean;
-}>
+}>;
 
 export default BeregningsresultatFp;

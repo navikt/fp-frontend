@@ -1,12 +1,17 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
+import { AksjonspunktCode, behandlingType, aksjonspunktStatus, fagsakYtelseType } from '@navikt/fp-kodeverk';
 import {
-  AksjonspunktCode, behandlingType, aksjonspunktStatus, fagsakYtelseType,
-} from '@navikt/fp-kodeverk';
-import {
-  BeregningsresultatFp, BeregningsresultatEs, Vilkar, TilbakekrevingValg,
-  SimuleringResultat, Beregningsgrunnlag, Medlemskap, Aksjonspunkt, StandardProsessPanelProps,
+  BeregningsresultatFp,
+  BeregningsresultatEs,
+  Vilkar,
+  TilbakekrevingValg,
+  SimuleringResultat,
+  Beregningsgrunnlag,
+  Medlemskap,
+  Aksjonspunkt,
+  StandardProsessPanelProps,
 } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -31,12 +36,16 @@ const skalSkriveFritekstGrunnetFastsettingAvBeregning = (
   if (!beregningsgrunnlag || !aksjonspunkter) {
     return false;
   }
-  const behandlingHarLøstBGAP = aksjonspunkter
-    .find((ap) => BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT.some((k) => k === ap.definisjon)
-    && ap.status === aksjonspunktStatus.UTFORT);
+  const behandlingHarLøstBGAP = aksjonspunkter.find(
+    ap =>
+      BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT.some(k => k === ap.definisjon) &&
+      ap.status === aksjonspunktStatus.UTFORT,
+  );
   const førstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode[0];
-  const andelSomErManueltFastsatt = førstePeriode.beregningsgrunnlagPrStatusOgAndel.find((andel) => andel.overstyrtPrAar || andel.overstyrtPrAar === 0);
-  return (!!behandlingHarLøstBGAP || !!andelSomErManueltFastsatt);
+  const andelSomErManueltFastsatt = førstePeriode.beregningsgrunnlagPrStatusOgAndel.find(
+    andel => andel.overstyrtPrAar || andel.overstyrtPrAar === 0,
+  );
+  return !!behandlingHarLøstBGAP || !!andelSomErManueltFastsatt;
 };
 
 interface OwnProps {
@@ -51,7 +60,7 @@ interface OwnProps {
   };
   medlemskap: Medlemskap;
   vilkar: Vilkar[];
-  previewCallback: (data: ForhandsvisData) => Promise<any>,
+  previewCallback: (data: ForhandsvisData) => Promise<any>;
   ytelseTypeKode: string;
 }
 
@@ -74,14 +83,21 @@ const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
   formData,
   setFormData,
 }) => {
-  const beregningErManueltFastsatt = skalSkriveFritekstGrunnetFastsettingAvBeregning(aksjonspunkter, beregningsgrunnlag);
-  const resultatstruktur = ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD
-    ? beregningresultatEngangsstonad : beregningresultatForeldrepenger;
+  const beregningErManueltFastsatt = skalSkriveFritekstGrunnetFastsettingAvBeregning(
+    aksjonspunkter,
+    beregningsgrunnlag,
+  );
+  const resultatstruktur =
+    ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD
+      ? beregningresultatEngangsstonad
+      : beregningresultatForeldrepenger;
 
   let originaltBeregningsresultat;
   if (beregningsresultatOriginalBehandling) {
-    originaltBeregningsresultat = ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD
-      ? beregningsresultatOriginalBehandling['beregningsresultat-engangsstonad'] : beregningsresultatOriginalBehandling['beregningsresultat-foreldrepenger'];
+    originaltBeregningsresultat =
+      ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD
+        ? beregningsresultatOriginalBehandling['beregningsresultat-engangsstonad']
+        : beregningsresultatOriginalBehandling['beregningsresultat-foreldrepenger'];
   }
 
   return (

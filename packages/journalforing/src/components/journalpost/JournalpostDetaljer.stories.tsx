@@ -93,14 +93,10 @@ export default {
 };
 
 const Template: Story<{
-  detaljertJournalpost: Journalpost,
-  oppgave: OppgaveOversikt,
-  submitJournalføring: (data: JournalførSubmitValue) => void
-}> = ({
-  detaljertJournalpost,
-  oppgave,
-  submitJournalføring,
-}) => (
+  detaljertJournalpost: Journalpost;
+  oppgave: OppgaveOversikt;
+  submitJournalføring: (data: JournalførSubmitValue) => void;
+}> = ({ detaljertJournalpost, oppgave, submitJournalføring }) => (
   <JournalpostDetaljer
     avbrytVisningAvJournalpost={action('button-click') as () => void}
     oppgave={oppgave}

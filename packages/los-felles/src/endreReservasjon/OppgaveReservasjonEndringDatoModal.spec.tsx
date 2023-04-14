@@ -1,8 +1,6 @@
 import React from 'react';
 import dayjs from 'dayjs';
-import {
-  fireEvent, render, screen, waitFor,
-} from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './OppgaveReservasjonEndringDatoModal.stories';

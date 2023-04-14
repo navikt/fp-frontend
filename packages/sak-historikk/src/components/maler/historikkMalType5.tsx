@@ -1,7 +1,5 @@
 import React, { FunctionComponent, ReactNode } from 'react';
-import {
-  FormattedMessage, useIntl, IntlShape,
-} from 'react-intl';
+import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
@@ -24,7 +22,7 @@ import Skjermlenke from './felles/Skjermlenke';
 import HistorikkMal from '../HistorikkMalTsType';
 
 function isGjeldendeFraUtenEndredeFelter(historikkinnslagDel: HistorikkinnslagDel): boolean {
-  return (!!historikkinnslagDel.gjeldendeFra && !historikkinnslagDel.endredeFelter);
+  return !!historikkinnslagDel.gjeldendeFra && !historikkinnslagDel.endredeFelter;
 }
 
 const lagGjeldendeFraInnslag = (historikkinnslagDel: HistorikkinnslagDel): ReactNode => {
@@ -45,9 +43,7 @@ const lagGjeldendeFraInnslag = (historikkinnslagDel: HistorikkinnslagDel): React
           />
         )}
         {isGjeldendeFraUtenEndredeFelter(historikkinnslagDel) && (
-          <FormattedMessage
-            id="Historikk.Template.5.IngenEndring"
-          />
+          <FormattedMessage id="Historikk.Template.5.IngenEndring" />
         )}
       </>
     );
@@ -60,9 +56,7 @@ const lagGjeldendeFraInnslag = (historikkinnslagDel: HistorikkinnslagDel): React
           values={{ dato: historikkinnslagDel.gjeldendeFra.fra, b: (chunks: any) => <b>{chunks}</b> }}
         />
         {isGjeldendeFraUtenEndredeFelter(historikkinnslagDel) && (
-          <FormattedMessage
-            id="Historikk.Template.5.IngenEndring"
-          />
+          <FormattedMessage id="Historikk.Template.5.IngenEndring" />
         )}
       </>
     );
@@ -96,7 +90,10 @@ const formatChangedField = (endretFelt: HistorikkinnslagEndretFelt, intl: IntlSh
   const fromValue = findEndretFeltVerdi(endretFelt, endretFelt.fraVerdi, intl);
   const toValue = findEndretFeltVerdi(endretFelt, endretFelt.tilVerdi, intl);
 
-  if (endretFelt.fraVerdi !== null && endretFelt.endretFeltNavn !== historikkEndretFeltTypeCodes.FORDELING_FOR_NY_ANDEL.kode) {
+  if (
+    endretFelt.fraVerdi !== null &&
+    endretFelt.endretFeltNavn !== historikkEndretFeltTypeCodes.FORDELING_FOR_NY_ANDEL.kode
+  ) {
     return (
       <FormattedMessage
         id="Historikk.Template.5.ChangedFromTo"
@@ -126,14 +123,19 @@ const lagTemaHeadingId = (historikkinnslagDel: HistorikkinnslagDel): ReactNode =
   if (tema) {
     const heading = historikkEndretFeltTypeHeadingCodes[tema.endretFeltNavn];
     if (heading && tema.navnVerdi) {
-      return <FormattedMessage id={heading.feltId} values={{ value: tema.navnVerdi, b: (chunks: any) => <b>{chunks}</b>, br: <br /> }} />;
+      return (
+        <FormattedMessage
+          id={heading.feltId}
+          values={{ value: tema.navnVerdi, b: (chunks: any) => <b>{chunks}</b>, br: <br /> }}
+        />
+      );
     }
   }
   return undefined;
 };
 
-const lagSoeknadsperiode = (soeknadsperiode?: HistorikkinnslagDel['soeknadsperiode']): ReactNode => (soeknadsperiode?.navnVerdi
-  ? (
+const lagSoeknadsperiode = (soeknadsperiode?: HistorikkinnslagDel['soeknadsperiode']): ReactNode =>
+  soeknadsperiode?.navnVerdi ? (
     <FormattedMessage
       id={findIdForSoeknadsperiodeCode(soeknadsperiode)}
       values={{
@@ -143,13 +145,16 @@ const lagSoeknadsperiode = (soeknadsperiode?: HistorikkinnslagDel['soeknadsperio
         br: <br />,
       }}
     />
-  )
-  : (
+  ) : (
     <FormattedMessage
       id={findIdForSoeknadsperiodeCode(soeknadsperiode)}
-      values={{ value: soeknadsperiode ? soeknadsperiode.tilVerdi : '', b: (chunks: any) => <b>{chunks}</b>, br: <br /> }}
+      values={{
+        value: soeknadsperiode ? soeknadsperiode.tilVerdi : '',
+        b: (chunks: any) => <b>{chunks}</b>,
+        br: <br />,
+      }}
     />
-  ));
+  );
 
 const HistorikkMalType5: FunctionComponent<HistorikkMal> = ({
   historikkinnslag,
@@ -162,9 +167,10 @@ const HistorikkMalType5: FunctionComponent<HistorikkMal> = ({
   return (
     <>
       {historikkinnslag.historikkinnslagDeler.map((historikkinnslagDel, historikkinnslagDelIndex) => (
-        <div key={
-          `historikkinnslagDel${historikkinnslagDelIndex}` // eslint-disable-line react/no-array-index-key
-        }
+        <div
+          key={
+            `historikkinnslagDel${historikkinnslagDelIndex}` // eslint-disable-line react/no-array-index-key
+          }
         >
           <Skjermlenke
             skjermlenke={historikkinnslagDel.skjermlenke}
@@ -174,8 +180,10 @@ const HistorikkMalType5: FunctionComponent<HistorikkMal> = ({
             createLocationForSkjermlenke={createLocationForSkjermlenke}
           />
 
-          {lageElementInnhold(historikkinnslagDel, intl, getKodeverknavn).map((tekst) => (
-            <div key={tekst}><BodyShort size="small">{tekst}</BodyShort></div>
+          {lageElementInnhold(historikkinnslagDel, intl, getKodeverknavn).map(tekst => (
+            <div key={tekst}>
+              <BodyShort size="small">{tekst}</BodyShort>
+            </div>
           ))}
 
           {lagGjeldendeFraInnslag(historikkinnslagDel)}
@@ -184,30 +192,33 @@ const HistorikkMalType5: FunctionComponent<HistorikkMal> = ({
 
           {lagTemaHeadingId(historikkinnslagDel)}
 
-          {historikkinnslagDel.endredeFelter && historikkinnslagDel.endredeFelter.map((endretFelt, i) => (
-            <div key={`endredeFelter${i + 1}`}>
-              {formatChangedField(endretFelt, intl)}
-            </div>
-          ))}
+          {historikkinnslagDel.endredeFelter &&
+            historikkinnslagDel.endredeFelter.map((endretFelt, i) => (
+              <div key={`endredeFelter${i + 1}`}>{formatChangedField(endretFelt, intl)}</div>
+            ))}
 
-          {historikkinnslagDel.opplysninger && historikkinnslagDel.opplysninger.map((opplysning) => (
-            <FormattedMessage
-              id={findIdForOpplysningCode(opplysning)}
-              values={{ antallBarn: opplysning.tilVerdi, b: (chunks: any) => <b>{chunks}</b>, br: <br /> }}
-              key={`${getKodeverknavn(opplysning.opplysningType, KodeverkType.HISTORIKK_OPPLYSNING_TYPE)}@${opplysning.tilVerdi}`}
-            />
-          ))}
+          {historikkinnslagDel.opplysninger &&
+            historikkinnslagDel.opplysninger.map(opplysning => (
+              <FormattedMessage
+                id={findIdForOpplysningCode(opplysning)}
+                values={{ antallBarn: opplysning.tilVerdi, b: (chunks: any) => <b>{chunks}</b>, br: <br /> }}
+                key={`${getKodeverknavn(opplysning.opplysningType, KodeverkType.HISTORIKK_OPPLYSNING_TYPE)}@${
+                  opplysning.tilVerdi
+                }`}
+              />
+            ))}
 
           {historikkinnslagDel.årsaktekst && <BodyShort size="small">{historikkinnslagDel.årsaktekst}</BodyShort>}
           {historikkinnslagDel.begrunnelsetekst && <BubbleText bodyText={historikkinnslagDel.begrunnelsetekst} />}
           {historikkinnslagDel.begrunnelseFritekst && <BubbleText bodyText={historikkinnslagDel.begrunnelseFritekst} />}
-          {historikkinnslag.dokumentLinks && historikkinnslag.dokumentLinks.map((dokumentLenke) => (
-            <HistorikkDokumentLenke
-              key={`${dokumentLenke.tag}@${dokumentLenke.url}`}
-              dokumentLenke={dokumentLenke}
-              saksnummer={saksnummer}
-            />
-          ))}
+          {historikkinnslag.dokumentLinks &&
+            historikkinnslag.dokumentLinks.map(dokumentLenke => (
+              <HistorikkDokumentLenke
+                key={`${dokumentLenke.tag}@${dokumentLenke.url}`}
+                dokumentLenke={dokumentLenke}
+                saksnummer={saksnummer}
+              />
+            ))}
 
           {historikkinnslagDelIndex < historikkinnslag.historikkinnslagDeler.length - 1 && <VerticalSpacer sixteenPx />}
         </div>

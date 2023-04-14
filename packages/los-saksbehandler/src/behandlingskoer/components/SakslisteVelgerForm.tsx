@@ -1,16 +1,10 @@
-import React, {
-  FunctionComponent, useEffect, useMemo,
-} from 'react';
+import React, { FunctionComponent, useEffect, useMemo } from 'react';
 import dayjs from 'dayjs';
 import { useForm } from 'react-hook-form';
-import {
-  useIntl, FormattedMessage, IntlShape,
-} from 'react-intl';
+import { useIntl, FormattedMessage, IntlShape } from 'react-intl';
 import { Label, BodyShort } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import {
-  Image, FlexContainer, FlexRow, FlexColumn, VerticalSpacer, LabelWithHeader,
-} from '@navikt/ft-ui-komponenter';
+import { Image, FlexContainer, FlexRow, FlexColumn, VerticalSpacer, LabelWithHeader } from '@navikt/ft-ui-komponenter';
 import { Form, SelectField } from '@navikt/ft-form-hooks';
 
 import { AlleKodeverk } from '@navikt/fp-types';
@@ -27,7 +21,7 @@ import styles from './sakslisteVelgerForm.module.css';
 interface OwnProps {
   sakslister: Saksliste[];
   setValgtSakslisteId: (sakslisteId: number) => void;
-  fetchAntallOppgaver: (data: {sakslisteId: number}) => void;
+  fetchAntallOppgaver: (data: { sakslisteId: number }) => void;
   getValueFromLocalStorage: (key: string) => string | undefined;
   setValueInLocalStorage: (key: string, value: string) => void;
   removeValueFromLocalStorage: (key: string) => void;
@@ -40,7 +34,7 @@ const getDefaultSaksliste = (
 ) => {
   const lagretSakslisteId = getValueFromLocalStorage('sakslisteId');
   if (lagretSakslisteId) {
-    if (sorterteSakslister.some((s) => `${s.sakslisteId}` === lagretSakslisteId)) {
+    if (sorterteSakslister.some(s => `${s.sakslisteId}` === lagretSakslisteId)) {
       return parseInt(lagretSakslisteId, 10);
     }
     removeValueFromLocalStorage('sakslisteId');
@@ -59,30 +53,41 @@ const getInitialValues = (
       sakslisteId: undefined,
     };
   }
-  const defaultSaksliste = getDefaultSaksliste(sorterteSakslister, getValueFromLocalStorage, removeValueFromLocalStorage);
+  const defaultSaksliste = getDefaultSaksliste(
+    sorterteSakslister,
+    getValueFromLocalStorage,
+    removeValueFromLocalStorage,
+  );
   return {
     sakslisteId: defaultSaksliste ? `${defaultSaksliste}` : undefined,
   };
 };
 
-const getValgtSaksliste = (sakslister: Saksliste[], sakslisteId: string) => sakslister.find((s) => sakslisteId === `${s.sakslisteId}`);
+const getValgtSaksliste = (sakslister: Saksliste[], sakslisteId: string) =>
+  sakslister.find(s => sakslisteId === `${s.sakslisteId}`);
 
-const getStonadstyper = (intl: IntlShape, alleKodeverk: AlleKodeverk, saksliste?: Saksliste) => (saksliste && saksliste.fagsakYtelseTyper.length > 0
-  ? saksliste.fagsakYtelseTyper.map((type) => getKodeverknavnFraKode(alleKodeverk, KodeverkType.FAGSAK_YTELSE, type))
-  : [intl.formatMessage({ id: 'SakslisteVelgerForm.Alle' })]);
+const getStonadstyper = (intl: IntlShape, alleKodeverk: AlleKodeverk, saksliste?: Saksliste) =>
+  saksliste && saksliste.fagsakYtelseTyper.length > 0
+    ? saksliste.fagsakYtelseTyper.map(type => getKodeverknavnFraKode(alleKodeverk, KodeverkType.FAGSAK_YTELSE, type))
+    : [intl.formatMessage({ id: 'SakslisteVelgerForm.Alle' })];
 
-const getBehandlingstyper = (intl: IntlShape, alleKodeverk: AlleKodeverk, saksliste?: Saksliste) => (saksliste && saksliste.behandlingTyper.length > 0
-  ? saksliste.behandlingTyper.map((type) => getKodeverknavnFraKode(alleKodeverk, KodeverkType.BEHANDLING_TYPE, type))
-  : [intl.formatMessage({ id: 'SakslisteVelgerForm.Alle' })]);
+const getBehandlingstyper = (intl: IntlShape, alleKodeverk: AlleKodeverk, saksliste?: Saksliste) =>
+  saksliste && saksliste.behandlingTyper.length > 0
+    ? saksliste.behandlingTyper.map(type => getKodeverknavnFraKode(alleKodeverk, KodeverkType.BEHANDLING_TYPE, type))
+    : [intl.formatMessage({ id: 'SakslisteVelgerForm.Alle' })];
 
 const getAndreKriterier = (intl: IntlShape, alleKodeverk: AlleKodeverk, saksliste?: Saksliste) => {
   if (saksliste && saksliste.andreKriterier.length > 0) {
-    return saksliste.andreKriterier.map((ak) => (ak.inkluder
-      ? getKodeverknavnFraKode(alleKodeverk, 'AndreKriterierType', ak.andreKriterierType)
-      : intl.formatMessage({ id: 'SakslisteVelgerForm.Uten' }, {
-        kriterie: getKodeverknavnFraKode(
-          alleKodeverk, 'AndreKriterierType', ak.andreKriterierType),
-      })));
+    return saksliste.andreKriterier.map(ak =>
+      ak.inkluder
+        ? getKodeverknavnFraKode(alleKodeverk, 'AndreKriterierType', ak.andreKriterierType)
+        : intl.formatMessage(
+            { id: 'SakslisteVelgerForm.Uten' },
+            {
+              kriterie: getKodeverknavnFraKode(alleKodeverk, 'AndreKriterierType', ak.andreKriterierType),
+            },
+          ),
+    );
   }
   return [intl.formatMessage({ id: 'SakslisteVelgerForm.Alle' })];
 };
@@ -92,7 +97,7 @@ type TextValues = {
   fomDato?: string;
   tomDato?: string;
   br: JSX.Element;
-}
+};
 
 const getNavn = (values: TextValues, intl: IntlShape) => {
   if (!values.fomDato) {
@@ -148,9 +153,7 @@ const getSorteringsnavn = (intl: IntlShape, alleKodeverk: AlleKodeverk, sakslist
     return '';
   }
 
-  const {
-    erDynamiskPeriode, sorteringType, fra, til, fomDato, tomDato,
-  } = saksliste.sortering;
+  const { erDynamiskPeriode, sorteringType, fra, til, fomDato, tomDato } = saksliste.sortering;
 
   return erDynamiskPeriode
     ? getSorteringsnavnForDynamiskPeriode(intl, alleKodeverk, sorteringType, fra, til)
@@ -164,8 +167,17 @@ const createTooltip = (saksbehandlere?: Saksbehandler[]) => {
 
   return (
     <div>
-      <Label size="small"><FormattedMessage id="SakslisteVelgerForm.SaksbehandlerToolip" /></Label>
-      {saksbehandlere.map((s) => s.navn).sort((n1, n2) => n1.localeCompare(n2)).map((navn) => (<BodyShort size="small" key={navn}>{navn}</BodyShort>))}
+      <Label size="small">
+        <FormattedMessage id="SakslisteVelgerForm.SaksbehandlerToolip" />
+      </Label>
+      {saksbehandlere
+        .map(s => s.navn)
+        .sort((n1, n2) => n1.localeCompare(n2))
+        .map(navn => (
+          <BodyShort size="small" key={navn}>
+            {navn}
+          </BodyShort>
+        ))}
     </div>
   );
 };
@@ -188,9 +200,13 @@ const SakslisteVelgerForm: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const sorterteSakslister = [...sakslister].sort((saksliste1, saksliste2) => saksliste1.navn.localeCompare(saksliste2.navn));
+  const sorterteSakslister = [...sakslister].sort((saksliste1, saksliste2) =>
+    saksliste1.navn.localeCompare(saksliste2.navn),
+  );
 
-  const { data: saksbehandlere, startRequest: fetchSaksbehandlere } = restApiHooks.useRestApiRunner(RestApiPathsKeys.SAKSLISTE_SAKSBEHANDLERE);
+  const { data: saksbehandlere, startRequest: fetchSaksbehandlere } = restApiHooks.useRestApiRunner(
+    RestApiPathsKeys.SAKSLISTE_SAKSBEHANDLERE,
+  );
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData(RestApiGlobalStatePathsKeys.KODEVERK_LOS);
 
   const tooltip = useMemo(() => createTooltip(saksbehandlere), [saksbehandlere]);
@@ -213,7 +229,9 @@ const SakslisteVelgerForm: FunctionComponent<OwnProps> = ({
 
   return (
     <Form<FormValues> formMethods={formMethods}>
-      <Label size="small"><FormattedMessage id="SakslisteVelgerForm.Utvalgskriterier" /></Label>
+      <Label size="small">
+        <FormattedMessage id="SakslisteVelgerForm.Utvalgskriterier" />
+      </Label>
       <VerticalSpacer eightPx />
       <FlexContainer>
         <FlexRow>
@@ -221,8 +239,11 @@ const SakslisteVelgerForm: FunctionComponent<OwnProps> = ({
             <SelectField
               name="sakslisteId"
               label={intl.formatMessage({ id: 'SakslisteVelgerForm.Saksliste' })}
-              selectValues={sorterteSakslister
-                .map((saksliste) => (<option key={saksliste.sakslisteId} value={`${saksliste.sakslisteId}`}>{saksliste.navn}</option>))}
+              selectValues={sorterteSakslister.map(saksliste => (
+                <option key={saksliste.sakslisteId} value={`${saksliste.sakslisteId}`}>
+                  {saksliste.navn}
+                </option>
+              ))}
             />
           </FlexColumn>
           {sakslisteId && (

@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, useCallback, useMemo,
-} from 'react';
+import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import { ArbeidsgiverOpplysningerPerId } from '@navikt/ft-types';
 
@@ -19,17 +17,14 @@ const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDI
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.ARBEID_OG_INNTEKT];
 type EndepunktPanelData = {
   arbeidOgInntekt: ArbeidOgInntektsmelding;
-}
+};
 
 interface OwnProps {
   saksnummer: string;
   behandlingUuid: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   rettigheter: AksessRettigheter;
-  settBehandlingPåVentCallback: (params: {
-    frist: string;
-    ventearsak: string;
-  }) => Promise<any>
+  settBehandlingPåVentCallback: (params: { frist: string; ventearsak: string }) => Promise<any>;
   hentBehandling: (keepData: boolean) => Promise<any>;
 }
 
@@ -47,9 +42,13 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
   const { requestApi } = props;
   const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
 
-  const { startRequest: registrerArbeidsforhold } = useRestApiRunner(BehandlingFellesApiKeys.ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD);
+  const { startRequest: registrerArbeidsforhold } = useRestApiRunner(
+    BehandlingFellesApiKeys.ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD,
+  );
   const { startRequest: lagreVurdering } = useRestApiRunner(BehandlingFellesApiKeys.ARBEID_OG_INNTEKT_LAGRE_VURDERING);
-  const { startRequest: åpneForNyVurdering } = useRestApiRunner(BehandlingFellesApiKeys.ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING);
+  const { startRequest: åpneForNyVurdering } = useRestApiRunner(
+    BehandlingFellesApiKeys.ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING,
+  );
   const åpneForNyVurderingOgOppfriskBehandling = useCallback(() => {
     åpneForNyVurdering({
       behandlingUuid,
@@ -64,9 +63,11 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       faktaPanelKode={FaktaPanelCode.ARBEID_OG_INNTEKT}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'ArbeidOgInntektInfoPanel.Title' })}
-      skalPanelVisesIMeny={() => requestApi.hasPath(BehandlingFellesApiKeys.ARBEID_OG_INNTEKT.name)
-        && !props.behandling.aksjonspunkt.some((ap) => AksjonspunktCode.AVKLAR_ARBEIDSFORHOLD === ap.definisjon)}
-      renderPanel={(data) => (
+      skalPanelVisesIMeny={() =>
+        requestApi.hasPath(BehandlingFellesApiKeys.ARBEID_OG_INNTEKT.name) &&
+        !props.behandling.aksjonspunkt.some(ap => AksjonspunktCode.AVKLAR_ARBEIDSFORHOLD === ap.definisjon)
+      }
+      renderPanel={data => (
         <ArbeidOgInntektFaktaIndex
           saksnummer={saksnummer}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

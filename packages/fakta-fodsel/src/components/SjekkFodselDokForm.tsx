@@ -3,16 +3,12 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 
 import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@navikt/fp-fakta-felles';
-import {
-  ArrowBox, VerticalSpacer, FaktaGruppe,
-} from '@navikt/ft-ui-komponenter';
+import { ArrowBox, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import {
-  Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad, AvklartBarn,
-} from '@navikt/fp-types';
+import { Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad, AvklartBarn } from '@navikt/fp-types';
 import { SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import AvklartBarnFieldArray from './AvklartBarnFieldArray';
@@ -26,7 +22,7 @@ export type FormValues = {
   avklartBarn?: AvklartBarn[];
   begrunnelse?: string;
   antallBarnFodt?: number;
-}
+};
 
 interface OwnProps {
   familiehendelse: FamilieHendelseSamling;
@@ -35,7 +31,7 @@ interface OwnProps {
   avklartBarn: AvklartBarn[];
   readOnly: boolean;
   submittable: boolean;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   behandlingType: string;
   soknadOriginalBehandling?: Soknad;
   familiehendelseOriginalBehandling?: FamilieHendelse;
@@ -94,19 +90,24 @@ export const SjekkFodselDokForm: FunctionComponent<OwnProps> & StaticFunctions =
           isReadOnly={readOnly}
           isHorizontal
           isTrueOrFalseSelection
-          radios={[{
-            label: <FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeligger" />,
-            value: 'true',
-          }, {
-            label: <FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeliggerIkke" />,
-            value: 'false',
-          }]}
+          radios={[
+            {
+              label: <FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeligger" />,
+              value: 'true',
+            },
+            {
+              label: <FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeliggerIkke" />,
+              value: 'false',
+            },
+          ]}
         />
         {dokumentasjonForeligger && (
           <div className={styles.clearfix}>
             <VerticalSpacer eightPx />
             <ArrowBox>
-              <Label size="small"><FormattedMessage id="SjekkFodselDokForm.FyllInnDokumenterteOpplysninger" /></Label>
+              <Label size="small">
+                <FormattedMessage id="SjekkFodselDokForm.FyllInnDokumenterteOpplysninger" />
+              </Label>
               <VerticalSpacer eightPx />
               <AvklartBarnFieldArray readOnly={readOnly} />
             </ArrowBox>
@@ -132,18 +133,20 @@ const lagBarn = (antallBarnFraSoknad: number): AvklartBarn[] => {
   return childrenArray;
 };
 
-const ryddOppIAvklarteBarn = (avklartBarn: AvklartBarn[]): AvklartBarn[] => avklartBarn.map((ab) => ({
-  fodselsdato: ab.fodselsdato,
-  dodsdato: ab.dodsdato === '' ? undefined : ab.dodsdato,
-}));
+const ryddOppIAvklarteBarn = (avklartBarn: AvklartBarn[]): AvklartBarn[] =>
+  avklartBarn.map(ab => ({
+    fodselsdato: ab.fodselsdato,
+    dodsdato: ab.dodsdato === '' ? undefined : ab.dodsdato,
+  }));
 
 SjekkFodselDokForm.buildInitialValues = (soknad, familiehendelse, aksjonspunkt): FormValues => ({
-  dokumentasjonForeligger: familiehendelse.dokumentasjonForeligger !== null
-    ? familiehendelse.dokumentasjonForeligger : undefined,
-  brukAntallBarnITps: familiehendelse.brukAntallBarnFraTps !== null
-    ? familiehendelse.brukAntallBarnFraTps : undefined,
-  avklartBarn: (familiehendelse.avklartBarn && familiehendelse.avklartBarn.length > 0)
-    ? familiehendelse.avklartBarn : lagBarn(soknad.antallBarn || 0),
+  dokumentasjonForeligger:
+    familiehendelse.dokumentasjonForeligger !== null ? familiehendelse.dokumentasjonForeligger : undefined,
+  brukAntallBarnITps: familiehendelse.brukAntallBarnFraTps !== null ? familiehendelse.brukAntallBarnFraTps : undefined,
+  avklartBarn:
+    familiehendelse.avklartBarn && familiehendelse.avklartBarn.length > 0
+      ? familiehendelse.avklartBarn
+      : lagBarn(soknad.antallBarn || 0),
   ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkt),
 });
 

@@ -1,12 +1,8 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { useIntl } from 'react-intl';
-import {
-  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required, maxValue } from '@navikt/ft-form-validators';
-import {
-  Datepicker, InputField, SelectField, PeriodFieldArray, formHooks,
-} from '@navikt/ft-form-hooks';
+import { Datepicker, InputField, SelectField, PeriodFieldArray, formHooks } from '@navikt/ft-form-hooks';
 
 import { tilretteleggingType } from '@navikt/fp-kodeverk';
 
@@ -22,7 +18,7 @@ type FormValues = {
   tilretteleggingType: string;
   dato: string;
   stillingsprosent: string;
-}
+};
 
 const defaultTilrettelegging: FormValues = {
   tilretteleggingType: '',
@@ -40,10 +36,7 @@ interface OwnProps {
  *
  * Viser inputfelter for tilrettelegging av arbeidsforhold for selvstendig næringsdrivende eller frilans.
  */
-const BehovForTilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
-  readOnly,
-  name,
-}) => {
+const BehovForTilretteleggingFieldArray: FunctionComponent<OwnProps> = ({ readOnly, name }) => {
   const intl = useIntl();
 
   const { control } = formHooks.useFormContext();
@@ -68,7 +61,7 @@ const BehovForTilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
       remove={remove}
     >
       {(field, index, getRemoveButton) => (
-        <div key={field.id} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+        <div key={field.id} className={index !== fields.length - 1 ? styles.notLastRow : ''}>
           <VerticalSpacer sixteenPx />
           <FlexContainer>
             <FlexRow>
@@ -76,16 +69,29 @@ const BehovForTilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
                 <SelectField
                   readOnly={readOnly}
                   name={`${name}.${index}.tilretteleggingType`}
-                  label={index === 0 ? intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.BehovForTilrettelegging' }) : ''}
+                  label={
+                    index === 0
+                      ? intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.BehovForTilrettelegging' })
+                      : ''
+                  }
                   validate={[required]}
                   selectValues={[
-                    <option value={tilretteleggingType.HEL_TILRETTELEGGING} key={tilretteleggingType.HEL_TILRETTELEGGING}>
+                    <option
+                      value={tilretteleggingType.HEL_TILRETTELEGGING}
+                      key={tilretteleggingType.HEL_TILRETTELEGGING}
+                    >
                       {intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.KanGjennomfores' })}
                     </option>,
-                    <option value={tilretteleggingType.DELVIS_TILRETTELEGGING} key={tilretteleggingType.DELVIS_TILRETTELEGGING}>
+                    <option
+                      value={tilretteleggingType.DELVIS_TILRETTELEGGING}
+                      key={tilretteleggingType.DELVIS_TILRETTELEGGING}
+                    >
                       {intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.RedusertArbeid' })}
                     </option>,
-                    <option value={tilretteleggingType.INGEN_TILRETTELEGGING} key={tilretteleggingType.INGEN_TILRETTELEGGING}>
+                    <option
+                      value={tilretteleggingType.INGEN_TILRETTELEGGING}
+                      key={tilretteleggingType.INGEN_TILRETTELEGGING}
+                    >
                       {intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.KanIkkeGjennomfores' })}
                     </option>,
                   ]}
@@ -103,16 +109,14 @@ const BehovForTilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
                 <InputField
                   readOnly={readOnly}
                   name={`${name}.${index}.stillingsprosent`}
-                  label={index === 0 ? intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.Stillingsprosent' }) : ''}
+                  label={
+                    index === 0 ? intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.Stillingsprosent' }) : ''
+                  }
                   validate={[required, maxValue3]}
                   maxLength={99}
                 />
               </FlexColumn>
-              {getRemoveButton && (
-                <FlexColumn>
-                  {getRemoveButton()}
-                </FlexColumn>
-              )}
+              {getRemoveButton && <FlexColumn>{getRemoveButton()}</FlexColumn>}
             </FlexRow>
           </FlexContainer>
         </div>

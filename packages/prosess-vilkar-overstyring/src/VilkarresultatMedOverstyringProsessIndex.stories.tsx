@@ -3,7 +3,11 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 
 import {
-  vilkarUtfallType, AksjonspunktCode, aksjonspunktStatus, OverstyringAksjonspunkter, behandlingType,
+  vilkarUtfallType,
+  AksjonspunktCode,
+  aksjonspunktStatus,
+  OverstyringAksjonspunkter,
+  behandlingType,
 } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, Medlemskap } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -17,15 +21,18 @@ const defaultBehandling = {
   type: behandlingType.FORSTEGANGSSOKNAD,
 } as Behandling;
 
-const avslagsarsaker = [{
-  kode: 'AVSLAG_TEST_1',
-  navn: 'Dette er en avslagsårsak',
-  kodeverk: '',
-}, {
-  kode: 'AVSLAG_TEST_2',
-  navn: 'Dette er en annen avslagsårsak',
-  kodeverk: '',
-}];
+const avslagsarsaker = [
+  {
+    kode: 'AVSLAG_TEST_1',
+    navn: 'Dette er en avslagsårsak',
+    kodeverk: '',
+  },
+  {
+    kode: 'AVSLAG_TEST_2',
+    navn: 'Dette er en annen avslagsårsak',
+    kodeverk: '',
+  },
+];
 
 export default {
   title: 'prosess/prosess-vilkar-overstyring',
@@ -62,9 +69,11 @@ const Template: Story<{
       alleMerknaderFraBeslutter={{}}
       setFormData={() => undefined}
       behandling={behandling}
-      medlemskap={{
-        fom: '2019-01-01',
-      } as Medlemskap}
+      medlemskap={
+        {
+          fom: '2019-01-01',
+        } as Medlemskap
+      }
       overrideReadOnly={false}
       kanOverstyreAccess={{
         isEnabled: true,
@@ -105,12 +114,14 @@ OverstyrtAksjonspunktSomErBekreftet.args = {
       avslagsarsak: 'AVSLAG_TEST_1',
     },
   } as Behandling,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.OVERSTYR_FODSELSVILKAR,
-    status: aksjonspunktStatus.UTFORT,
-    kanLoses: false,
-    begrunnelse: 'Dette er en begrunnelse',
-  } as Aksjonspunkt],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.OVERSTYR_FODSELSVILKAR,
+      status: aksjonspunktStatus.UTFORT,
+      kanLoses: false,
+      begrunnelse: 'Dette er en begrunnelse',
+    } as Aksjonspunkt,
+  ],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   status: vilkarUtfallType.IKKE_OPPFYLT,
   panelTittelKode: 'Inngangsvilkar.Fodselsvilkaret',

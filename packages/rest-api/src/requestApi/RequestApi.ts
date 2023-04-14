@@ -30,11 +30,13 @@ const getMethod = (httpClientApi: HttpClientApi, restMethod: string, isResponseB
   return httpClientApi.postBlob;
 };
 
-const isGetRequest = (restMethod: string): boolean => restMethod === RequestType.GET || restMethod === RequestType.GET_ASYNC;
+const isGetRequest = (restMethod: string): boolean =>
+  restMethod === RequestType.GET || restMethod === RequestType.GET_ASYNC;
 
-const wait = (ms: number) => new Promise((resolve) => {
-  setTimeout(resolve, ms);
-});
+const wait = (ms: number) =>
+  new Promise(resolve => {
+    setTimeout(resolve, ms);
+  });
 const waitUntilFinished = async (cache: ResponseCache, endpointName: string): Promise<undefined> => {
   if (cache.isFetching(endpointName)) {
     await wait(50);
@@ -54,7 +56,7 @@ class RequestApi {
 
   endpointConfigList: RequestConfig[];
 
-  links: {[key: string]: Link[]} = {};
+  links: { [key: string]: Link[] } = {};
 
   notificationMapper: NotificationMapper = new NotificationMapper();
 
@@ -79,9 +81,12 @@ class RequestApi {
     return undefined;
   };
 
-  private findLinks = (rel?: string): Link | undefined => (rel
-    ? Object.values(this.links).flat().find((link) => link.rel === rel)
-    : undefined);
+  private findLinks = (rel?: string): Link | undefined =>
+    rel
+      ? Object.values(this.links)
+          .flat()
+          .find(link => link.rel === rel)
+      : undefined;
 
   public cancelRequest = (endpointName: string): void => {
     if (this.activeRunners[endpointName]) {
@@ -89,8 +94,12 @@ class RequestApi {
     }
   };
 
-  public startRequest = async <T, P>(endpointName: string, params?: P, isCachingOn = false): Promise<{ payload: T }> => {
-    const endpointConfig = this.endpointConfigList.find((c) => c.name === endpointName);
+  public startRequest = async <T, P>(
+    endpointName: string,
+    params?: P,
+    isCachingOn = false,
+  ): Promise<{ payload: T }> => {
+    const endpointConfig = this.endpointConfigList.find(c => c.name === endpointName);
     if (!endpointConfig) {
       throw new Error(`Mangler konfig for endepunkt ${endpointName}`);
     }
@@ -134,7 +143,7 @@ class RequestApi {
   };
 
   public hasPath = (endpointName: string): boolean => {
-    const endpointConfig = this.endpointConfigList.find((c) => c.name === endpointName);
+    const endpointConfig = this.endpointConfigList.find(c => c.name === endpointName);
     if (!endpointConfig) {
       throw new Error(`Mangler konfig for endepunkt ${endpointName}`);
     }
@@ -154,7 +163,7 @@ class RequestApi {
   };
 
   public setRequestPendingHandler = (requestPendingHandler: (message?: string) => void): void => {
-    this.notificationMapper.addUpdatePollingMessageEventHandler((data) => {
+    this.notificationMapper.addUpdatePollingMessageEventHandler(data => {
       requestPendingHandler(data);
     });
     this.notificationMapper.addRequestFinishedEventHandler(() => {
@@ -178,7 +187,7 @@ class RequestApi {
   public getAxios = (): AxiosInstance => this.httpClientApi.axiosInstance;
 
   public getUrl = (endpointName: string): string | undefined => {
-    const endpointConfig = this.endpointConfigList.find((c) => c.name === endpointName);
+    const endpointConfig = this.endpointConfigList.find(c => c.name === endpointName);
     if (!endpointConfig) {
       throw new Error(`Mangler konfig for endepunkt ${endpointName}`);
     }
@@ -187,7 +196,7 @@ class RequestApi {
   };
 
   public getRestType = (endpointName: string): string => {
-    const endpointConfig = this.endpointConfigList.find((c) => c.name === endpointName);
+    const endpointConfig = this.endpointConfigList.find(c => c.name === endpointName);
     if (!endpointConfig) {
       throw new Error(`Mangler konfig for endepunkt ${endpointName}`);
     }

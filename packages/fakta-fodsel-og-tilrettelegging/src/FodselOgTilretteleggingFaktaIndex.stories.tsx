@@ -26,89 +26,113 @@ const behandling = {
 
 const tilretteleggingPermisjon = {
   termindato: '2020-11-06',
-  arbeidsforholdListe: [{
-    tilretteleggingId: 1116961,
-    tilretteleggingBehovFom: '2020-03-17',
-    tilretteleggingDatoer: [{
-      fom: '2020-03-17', type: 'INGEN_TILRETTELEGGING',
-    }, {
-      fom: '2020-10-15', type: 'HEL_TILRETTELEGGING',
-    }],
-    arbeidsgiverReferanse: '999999999',
-    uttakArbeidType: 'FRILANS',
-    kopiertFraTidligereBehandling: true,
-    mottattTidspunkt: '2020-03-11T16:21:48.532298',
-    skalBrukes: true,
-    kanTilrettelegges: true,
-    velferdspermisjoner: [{
-      permisjonFom: '2020-02-17',
-      permisjonTom: '2020-07-12',
-      permisjonsprosent: 50.00,
-      type: 'VELFERDSPERMISJON',
-      erGyldig: true,
-    }, {
-      permisjonFom: '2019-08-06',
-      permisjonTom: '2019-08-06',
-      permisjonsprosent: 50.00,
-      type: 'VELFERDSPERMISJON',
-      erGyldig: true,
-    }, {
-      permisjonFom: '2019-10-03',
-      permisjonTom: '2019-10-03',
-      permisjonsprosent: 50.00,
-      type: 'VELFERDSPERMISJON',
-      erGyldig: true,
-    }],
-  }],
+  arbeidsforholdListe: [
+    {
+      tilretteleggingId: 1116961,
+      tilretteleggingBehovFom: '2020-03-17',
+      tilretteleggingDatoer: [
+        {
+          fom: '2020-03-17',
+          type: 'INGEN_TILRETTELEGGING',
+        },
+        {
+          fom: '2020-10-15',
+          type: 'HEL_TILRETTELEGGING',
+        },
+      ],
+      arbeidsgiverReferanse: '999999999',
+      uttakArbeidType: 'FRILANS',
+      kopiertFraTidligereBehandling: true,
+      mottattTidspunkt: '2020-03-11T16:21:48.532298',
+      skalBrukes: true,
+      kanTilrettelegges: true,
+      velferdspermisjoner: [
+        {
+          permisjonFom: '2020-02-17',
+          permisjonTom: '2020-07-12',
+          permisjonsprosent: 50.0,
+          type: 'VELFERDSPERMISJON',
+          erGyldig: true,
+        },
+        {
+          permisjonFom: '2019-08-06',
+          permisjonTom: '2019-08-06',
+          permisjonsprosent: 50.0,
+          type: 'VELFERDSPERMISJON',
+          erGyldig: true,
+        },
+        {
+          permisjonFom: '2019-10-03',
+          permisjonTom: '2019-10-03',
+          permisjonsprosent: 50.0,
+          type: 'VELFERDSPERMISJON',
+          erGyldig: true,
+        },
+      ],
+    },
+  ],
   saksbehandlet: true,
 };
 
 const svangerskapspengerTilretteleggingForFrilanser = {
   termindato: '2020-02-27',
   saksbehandlet: false,
-  arbeidsforholdListe: [{
-    tilretteleggingId: 1008653,
-    tilretteleggingBehovFom: '2019-10-01',
-    tilretteleggingDatoer: [{
-      fom: '2019-10-01',
-      type: tilretteleggingType.INGEN_TILRETTELEGGING,
-    }],
-    arbeidsgiverReferanse: '1',
-    skalBrukes: true,
-    velferdspermisjoner: [],
-  }, {
-    tilretteleggingId: 1008654,
-    tilretteleggingBehovFom: '2019-10-01',
-    tilretteleggingDatoer: [{
-      fom: '2019-10-01',
-      type: tilretteleggingType.INGEN_TILRETTELEGGING,
-    }],
-    arbeidsgiverReferanse: '2',
-    uttakArbeidType: 'ORDINÆRT_ARBEID',
-    skalBrukes: true,
-    velferdspermisjoner: [],
-  }] as ArbeidsforholdFodselOgTilrettelegging[],
+  arbeidsforholdListe: [
+    {
+      tilretteleggingId: 1008653,
+      tilretteleggingBehovFom: '2019-10-01',
+      tilretteleggingDatoer: [
+        {
+          fom: '2019-10-01',
+          type: tilretteleggingType.INGEN_TILRETTELEGGING,
+        },
+      ],
+      arbeidsgiverReferanse: '1',
+      skalBrukes: true,
+      velferdspermisjoner: [],
+    },
+    {
+      tilretteleggingId: 1008654,
+      tilretteleggingBehovFom: '2019-10-01',
+      tilretteleggingDatoer: [
+        {
+          fom: '2019-10-01',
+          type: tilretteleggingType.INGEN_TILRETTELEGGING,
+        },
+      ],
+      arbeidsgiverReferanse: '2',
+      uttakArbeidType: 'ORDINÆRT_ARBEID',
+      skalBrukes: true,
+      velferdspermisjoner: [],
+    },
+  ] as ArbeidsforholdFodselOgTilrettelegging[],
 };
 
 const defaultArbeidOgInntekt = {
-  arbeidsforhold: [{
-    arbeidsgiverIdent: '555864629',
-    internArbeidsforholdId: '555864629-null',
-  }],
+  arbeidsforhold: [
+    {
+      arbeidsgiverIdent: '555864629',
+      internArbeidsforholdId: '555864629-null',
+    },
+  ],
 } as ArbeidOgInntektsmelding;
 
 const spesiellArbeidOgInntekt = {
-  inntektsmeldinger: [{
-    arbeidsgiverIdent: '999999999',
-    motattDato: '2020-03-20',
-    refusjonPrMnd: 5170.00,
-  }],
-  arbeidsforhold: [{
-    internArbeidsforholdId: '999999999-null',
-    arbeidsgiverIdent: '999999999',
-    fom: '2019-04-01',
-    stillingsprosent: 100.00,
-  }],
+  inntektsmeldinger: [
+    {
+      arbeidsgiverIdent: '999999999',
+      motattDato: '2020-03-20',
+      refusjonPrMnd: 5170.0,
+    },
+  ],
+  arbeidsforhold: [
+    {
+      internArbeidsforholdId: '999999999-null',
+      arbeidsgiverIdent: '999999999',
+      fom: '2019-04-01',
+      stillingsprosent: 100.0,
+    },
+  ],
 } as ArbeidOgInntektsmelding;
 
 const arbeidsgiverOpplysningerPerId = {
@@ -162,13 +186,7 @@ const Template: Story<{
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   erOverstyrer?: boolean;
-}> = ({
-  aksjonspunkter,
-  submitCallback,
-  svangerskapspengerTilrettelegging,
-  arbeidOgInntekt,
-  erOverstyrer = false,
-}) => (
+}> = ({ aksjonspunkter, submitCallback, svangerskapspengerTilrettelegging, arbeidOgInntekt, erOverstyrer = false }) => (
   <FodselOgTilretteleggingFaktaIndex
     submitCallback={submitCallback}
     readOnly={false}
@@ -189,12 +207,14 @@ const Template: Story<{
 export const TilretteleggingMedVelferdspermisjon = Template.bind({});
 TilretteleggingMedVelferdspermisjon.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
-    status: aksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-    kanLoses: true,
-  }],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+      kanLoses: true,
+    },
+  ],
   svangerskapspengerTilrettelegging: tilretteleggingPermisjon,
   arbeidOgInntekt: spesiellArbeidOgInntekt,
 };
@@ -202,12 +222,14 @@ TilretteleggingMedVelferdspermisjon.args = {
 export const AksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigNæringsdrivende = Template.bind({});
 AksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigNæringsdrivende.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
-    status: aksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-    kanLoses: true,
-  }],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+      kanLoses: true,
+    },
+  ],
   svangerskapspengerTilrettelegging: svangerskapspengerTilretteleggingForFrilanser,
   arbeidOgInntekt: defaultArbeidOgInntekt,
 };
@@ -215,12 +237,14 @@ AksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigNæringsdrivende.
 export const ErOverstyrer = Template.bind({});
 ErOverstyrer.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
-    status: aksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-    kanLoses: true,
-  }],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+      kanLoses: true,
+    },
+  ],
   svangerskapspengerTilrettelegging: tilretteleggingPermisjon,
   arbeidOgInntekt: spesiellArbeidOgInntekt,
   erOverstyrer: true,

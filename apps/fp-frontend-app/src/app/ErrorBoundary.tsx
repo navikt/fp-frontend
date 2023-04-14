@@ -32,21 +32,23 @@ export class ErrorBoundary extends Component<OwnProps, State> {
   componentDidCatch(error: Error, info: ErrorInfo): void {
     const { errorMessageCallback } = this.props;
 
-    withScope((scope) => {
-      Object.keys(info).forEach((key) => {
+    withScope(scope => {
+      Object.keys(info).forEach(key => {
         // @ts-ignore Fiks
         scope.setExtra(key, info[key]);
         captureException(error);
       });
     });
 
-    errorMessageCallback([
-      error.toString(),
-      info.componentStack
-        .split('\n')
-        .map((line) => line.trim())
-        .find((line) => !!line),
-    ].join(' '));
+    errorMessageCallback(
+      [
+        error.toString(),
+        info.componentStack
+          .split('\n')
+          .map(line => line.trim())
+          .find(line => !!line),
+      ].join(' '),
+    );
 
     // eslint-disable-next-line no-console
     console.error(error);
@@ -66,11 +68,7 @@ export class ErrorBoundary extends Component<OwnProps, State> {
       }
       return (
         <>
-          {showChild && (
-            <div style={{ marginTop: '150px' }}>
-              {children}
-            </div>
-          )}
+          {showChild && <div style={{ marginTop: '150px' }}>{children}</div>}
           <ErrorPage />
         </>
       );

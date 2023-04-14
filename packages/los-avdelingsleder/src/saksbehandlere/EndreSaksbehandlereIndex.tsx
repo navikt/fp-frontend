@@ -6,7 +6,7 @@ import SaksbehandlerePanel from './components/SaksbehandlerePanel';
 interface OwnProps {
   avdelingensSaksbehandlere: Saksbehandler[];
   valgtAvdelingEnhet: string;
-  hentAvdelingensSaksbehandlere: (params: {avdelingEnhet: string}) => void;
+  hentAvdelingensSaksbehandlere: (params: { avdelingEnhet: string }) => void;
 }
 
 /**

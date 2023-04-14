@@ -3,7 +3,7 @@ export type UttakAktivitet = {
   weeks: string;
   days: string;
   utbetalingsgrad: string;
-}
+};
 
 export type UttakAktivitetType = {
   begrunnelse: string;

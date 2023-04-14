@@ -3,10 +3,18 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 
 import {
-  AksjonspunktCode, avslagsarsakCodes, aksjonspunktStatus, vilkarUtfallType, tilretteleggingType,
+  AksjonspunktCode,
+  avslagsarsakCodes,
+  aksjonspunktStatus,
+  vilkarUtfallType,
+  tilretteleggingType,
 } from '@navikt/fp-kodeverk';
 import {
-  Aksjonspunkt, ArbeidsforholdFodselOgTilrettelegging, Behandling, FodselOgTilrettelegging, Vilkar,
+  Aksjonspunkt,
+  ArbeidsforholdFodselOgTilrettelegging,
+  Behandling,
+  FodselOgTilrettelegging,
+  Vilkar,
 } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -26,10 +34,10 @@ export default {
 
 const Template: Story<{
   submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
-  behandling: Behandling,
-  aksjonspunkter: Aksjonspunkt[],
-  isReadOnly: boolean,
-  readOnlySubmitButton: boolean,
+  behandling: Behandling;
+  aksjonspunkter: Aksjonspunkt[];
+  isReadOnly: boolean;
+  readOnlySubmitButton: boolean;
   status: string;
   svangerskapspengerTilrettelegging?: FodselOgTilrettelegging;
 }> = ({
@@ -53,9 +61,13 @@ const Template: Story<{
     aksjonspunkter={aksjonspunkter}
     status={status}
     svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
-    vilkar={[{
-      lovReferanse: '§§Dette er en lovreferanse',
-    }] as Vilkar[]}
+    vilkar={
+      [
+        {
+          lovReferanse: '§§Dette er en lovreferanse',
+        },
+      ] as Vilkar[]
+    }
   />
 );
 
@@ -63,11 +75,13 @@ export const ÅpentAksjonspunktSkalIkkeKunneInnvilge = Template.bind({});
 ÅpentAksjonspunktSkalIkkeKunneInnvilge.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   behandling: defaultBehandling,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.SVANGERSKAPSVILKARET,
-    status: aksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.SVANGERSKAPSVILKARET,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+    },
+  ] as Aksjonspunkt[],
   isReadOnly: false,
   readOnlySubmitButton: false,
   status: vilkarUtfallType.IKKE_VURDERT,
@@ -77,20 +91,26 @@ export const ÅpentAksjonspunktSkalKunneInnvilge = Template.bind({});
 ÅpentAksjonspunktSkalKunneInnvilge.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   behandling: defaultBehandling,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.SVANGERSKAPSVILKARET,
-    status: aksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.SVANGERSKAPSVILKARET,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+    },
+  ] as Aksjonspunkt[],
   isReadOnly: false,
   readOnlySubmitButton: false,
   status: vilkarUtfallType.IKKE_VURDERT,
   svangerskapspengerTilrettelegging: {
-    arbeidsforholdListe: [{
-      tilretteleggingDatoer: [{
-        type: tilretteleggingType.DELVIS_TILRETTELEGGING,
-      }],
-    } as ArbeidsforholdFodselOgTilrettelegging],
+    arbeidsforholdListe: [
+      {
+        tilretteleggingDatoer: [
+          {
+            type: tilretteleggingType.DELVIS_TILRETTELEGGING,
+          },
+        ],
+      } as ArbeidsforholdFodselOgTilrettelegging,
+    ],
   } as FodselOgTilrettelegging,
 };
 
@@ -98,11 +118,13 @@ export const OppfyltVilkår = Template.bind({});
 OppfyltVilkår.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   behandling: defaultBehandling,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.SVANGERSKAPSVILKARET,
-    status: aksjonspunktStatus.UTFORT,
-    begrunnelse: 'Dette vilkåret er godkjent',
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.SVANGERSKAPSVILKARET,
+      status: aksjonspunktStatus.UTFORT,
+      begrunnelse: 'Dette vilkåret er godkjent',
+    },
+  ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
   status: vilkarUtfallType.OPPFYLT,
@@ -118,11 +140,13 @@ AvslåttVilkår.args = {
       avslagsarsak: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
     },
   } as Behandling,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.SVANGERSKAPSVILKARET,
-    status: aksjonspunktStatus.UTFORT,
-    begrunnelse: 'Dette vilkåret er avslått',
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.SVANGERSKAPSVILKARET,
+      status: aksjonspunktStatus.UTFORT,
+      begrunnelse: 'Dette vilkåret er avslått',
+    },
+  ] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
   status: vilkarUtfallType.IKKE_OPPFYLT,

@@ -4,26 +4,22 @@ import { BodyShort, Label, Heading } from '@navikt/ds-react';
 import moment from 'moment';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 
-import {
-  AvsnittSkiller, VerticalSpacer, FlexColumn, FlexRow,
-} from '@navikt/ft-ui-komponenter';
+import { AvsnittSkiller, VerticalSpacer, FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 import { ArbeidsforholdFodselOgTilrettelegging, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
-const getEndCharFromId = (
-  id?: string,
-) : string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
+const getEndCharFromId = (id?: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
 const lagArbeidsforholdNavn = (
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging,
   arbeidsgiverOpplysningerPrId: ArbeidsgiverOpplysningerPerId,
 ): string => {
   const agOpplysninger = arbeidsgiverOpplysningerPrId[arbeidsforhold.arbeidsgiverReferanse];
-  const {
-    navn, fødselsdato, erPrivatPerson, identifikator,
-  } = agOpplysninger;
+  const { navn, fødselsdato, erPrivatPerson, identifikator } = agOpplysninger;
   if (erPrivatPerson) {
     return fødselsdato
-      ? `${navn} (${moment(fødselsdato).format(DDMMYYYY_DATE_FORMAT)})${getEndCharFromId(arbeidsforhold.eksternArbeidsforholdReferanse)}`
+      ? `${navn} (${moment(fødselsdato).format(DDMMYYYY_DATE_FORMAT)})${getEndCharFromId(
+          arbeidsforhold.eksternArbeidsforholdReferanse,
+        )}`
       : navn;
   }
   return identifikator
@@ -32,8 +28,8 @@ const lagArbeidsforholdNavn = (
 };
 
 interface OwnProps {
-  arbeidsgiverOpplysningerPrId: ArbeidsgiverOpplysningerPerId,
-  arbeidsforholdSomIkkeKanTilrettelegges: ArbeidsforholdFodselOgTilrettelegging[],
+  arbeidsgiverOpplysningerPrId: ArbeidsgiverOpplysningerPerId;
+  arbeidsforholdSomIkkeKanTilrettelegges: ArbeidsforholdFodselOgTilrettelegging[];
 }
 
 const UtilgjengeligeArbeidsforhold: FunctionComponent<OwnProps> = ({
@@ -57,7 +53,7 @@ const UtilgjengeligeArbeidsforhold: FunctionComponent<OwnProps> = ({
       </FlexRow>
       <FlexRow>
         <FlexColumn>
-          {arbeidsforholdSomIkkeKanTilrettelegges.map((arbeidsforhold) => (
+          {arbeidsforholdSomIkkeKanTilrettelegges.map(arbeidsforhold => (
             <React.Fragment key={`${arbeidsforhold.arbeidsgiverReferanse}.arbeidsforhold_som_ikke_kan_brukes`}>
               <FlexRow>
                 <FlexColumn>

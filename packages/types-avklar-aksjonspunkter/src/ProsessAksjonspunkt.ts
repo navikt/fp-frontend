@@ -28,7 +28,8 @@ import KontrollAvManueltOpprettetRevurderingsbehandlingAp from './prosess/Kontro
 import VarselRevurderingAp from './prosess/VarselRevurderingAp';
 import UttakAp from './prosess/UttakAp';
 
-export type ProsessAksjonspunkt = BekreftSvangerskapspengervilkarAp
+export type ProsessAksjonspunkt =
+  | BekreftSvangerskapspengervilkarAp
   | SoknadsfristAp
   | BekreftSokersOpplysningspliktManuAp
   | OverstyringSokersOpplysingspliktAp

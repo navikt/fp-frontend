@@ -1,7 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag,
-} from '@navikt/fp-types';
+import { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@navikt/fp-types';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
 import { BesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -17,8 +15,8 @@ interface OwnProps {
   readOnly: boolean;
   submitCallback: (aksjonspunktData: BesteberegningAP) => Promise<void>;
   submittable: boolean;
-  formData?: FormValues,
-  setFormData: (data: any) => void,
+  formData?: FormValues;
+  setFormData: (data: any) => void;
 }
 
 /**
@@ -43,12 +41,14 @@ const BesteberegningPanel: FunctionComponent<OwnProps> = ({
     return null;
   }
   const førstePeriode = beregningsgrunnlagPeriode[0];
-  const besteberegningAP = aksjonspunkter.find((ap) => ap.definisjon === AksjonspunktCode.KONTROLLER_AUTOMATISK_BESTEBEREGNING
-    || ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_BESTEBEREGNING);
+  const besteberegningAP = aksjonspunkter.find(
+    ap =>
+      ap.definisjon === AksjonspunktCode.KONTROLLER_AUTOMATISK_BESTEBEREGNING ||
+      ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
+  );
   return (
     <div>
-      {!!besteberegningAP
-        && (
+      {!!besteberegningAP && (
         <KontrollerBesteberegningPanel
           aksjonspunkt={besteberegningAP}
           submitCallback={submitCallback}
@@ -57,7 +57,7 @@ const BesteberegningPanel: FunctionComponent<OwnProps> = ({
           formData={formData}
           setFormData={setFormData}
         />
-        )}
+      )}
       <BorderBox>
         <BesteberegningResultatGrunnlagPanel
           periode={førstePeriode}

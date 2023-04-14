@@ -6,8 +6,8 @@ import PDFVisning from './PDFVisning';
 import DokumentVelger from './DokumentVelger';
 
 type OwnProps = {
-    dokumenter?: JournalDokument[];
-}
+  dokumenter?: JournalDokument[];
+};
 
 const DokumentIndex: FunctionComponent<OwnProps> = ({ dokumenter }) => {
   const [valgDokument, setValgtDokument] = useState<JournalDokument | undefined>();

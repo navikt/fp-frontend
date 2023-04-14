@@ -3,6 +3,6 @@ type InngangsvilkarPanelData = {
   aksjonspunktTekst?: string;
   harApentAksjonspunkt: boolean;
   status: string;
-}
+};
 
 export default InngangsvilkarPanelData;

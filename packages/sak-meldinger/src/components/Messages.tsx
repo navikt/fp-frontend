@@ -6,9 +6,7 @@ import { Button } from '@navikt/ds-react';
 
 import { dokumentMalType, ugunstAarsakTyper, fagsakYtelseType as FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/fp-types';
-import {
-  ariaCheck, hasValidText, maxLength, minLength, required,
-} from '@navikt/ft-form-validators';
+import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { SelectField, TextAreaField, Form } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -24,33 +22,44 @@ export type FormValues = {
   brevmalkode?: string;
   fritekst?: string;
   arsakskode?: string;
-}
+};
 
 export type Template = {
   kode: string;
   navn: string;
   tilgjengelig: boolean;
-}
+};
 
-const getFritekstMessage = (brevmalkode?: string): string => ((brevmalkode === dokumentMalType.INNHENTE_OPPLYSNINGER
-  || brevmalkode === dokumentMalType.TBK_INNHENTE_OPPLYSNINGER) ? 'Messages.DocumentList' : 'Messages.Fritekst');
+const getFritekstMessage = (brevmalkode?: string): string =>
+  brevmalkode === dokumentMalType.INNHENTE_OPPLYSNINGER || brevmalkode === dokumentMalType.TBK_INNHENTE_OPPLYSNINGER
+    ? 'Messages.DocumentList'
+    : 'Messages.Fritekst';
 
 // TODO (TOR) Bør erstattast av ein markør fra backend
-const showFritekst = (brevmalkode?: string, arsakskode?: string): boolean => (brevmalkode === dokumentMalType.INNHENTE_OPPLYSNINGER
-  || brevmalkode === dokumentMalType.FRITEKST
-  || brevmalkode === dokumentMalType.KORRIGERT_VARSEL_OM_TILBAKEKREVING
-  || brevmalkode === dokumentMalType.VARSEL_OM_TILBAKEKREVING
-  || brevmalkode === dokumentMalType.TBK_INNHENTE_OPPLYSNINGER
-  || (brevmalkode === dokumentMalType.VARSEL_OM_REVURDERING && arsakskode === ugunstAarsakTyper.ANNET));
+const showFritekst = (brevmalkode?: string, arsakskode?: string): boolean =>
+  brevmalkode === dokumentMalType.INNHENTE_OPPLYSNINGER ||
+  brevmalkode === dokumentMalType.FRITEKST ||
+  brevmalkode === dokumentMalType.KORRIGERT_VARSEL_OM_TILBAKEKREVING ||
+  brevmalkode === dokumentMalType.VARSEL_OM_TILBAKEKREVING ||
+  brevmalkode === dokumentMalType.TBK_INNHENTE_OPPLYSNINGER ||
+  (brevmalkode === dokumentMalType.VARSEL_OM_REVURDERING && arsakskode === ugunstAarsakTyper.ANNET);
 
-const getfiltrerteRevurderingVarslingArsaker = (revurderingVarslingArsaker: KodeverkMedNavn[], fagsakYtelseType: string): KodeverkMedNavn[] => {
+const getfiltrerteRevurderingVarslingArsaker = (
+  revurderingVarslingArsaker: KodeverkMedNavn[],
+  fagsakYtelseType: string,
+): KodeverkMedNavn[] => {
   if (fagsakYtelseType === FagsakYtelseType.ENGANGSSTONAD) {
-    return revurderingVarslingArsaker.filter((arsak) => arsak.kode === ugunstAarsakTyper.BARN_IKKE_REGISTRERT_FOLKEREGISTER
-      || arsak.kode === ugunstAarsakTyper.ANNET);
+    return revurderingVarslingArsaker.filter(
+      arsak =>
+        arsak.kode === ugunstAarsakTyper.BARN_IKKE_REGISTRERT_FOLKEREGISTER || arsak.kode === ugunstAarsakTyper.ANNET,
+    );
   }
   if (fagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER) {
-    return revurderingVarslingArsaker.filter((arsak) => arsak.kode !== ugunstAarsakTyper.BARN_IKKE_REGISTRERT_FOLKEREGISTER
-      && arsak.kode !== ugunstAarsakTyper.MORS_AKTIVITETSKRAV_ER_IKKE_OPPFYLT);
+    return revurderingVarslingArsaker.filter(
+      arsak =>
+        arsak.kode !== ugunstAarsakTyper.BARN_IKKE_REGISTRERT_FOLKEREGISTER &&
+        arsak.kode !== ugunstAarsakTyper.MORS_AKTIVITETSKRAV_ER_IKKE_OPPFYLT,
+    );
   }
   return revurderingVarslingArsaker;
 };
@@ -69,7 +78,10 @@ const buildInitalValues = (templates: Template[], isKontrollerRevurderingApOpen?
 
 const transformValues = (values: FormValues) => {
   const newValues = values;
-  if (values.brevmalkode === dokumentMalType.VARSEL_OM_REVURDERING && newValues.arsakskode !== ugunstAarsakTyper.ANNET) {
+  if (
+    values.brevmalkode === dokumentMalType.VARSEL_OM_REVURDERING &&
+    newValues.arsakskode !== ugunstAarsakTyper.ANNET
+  ) {
     newValues.fritekst = ' ';
   }
   return newValues;
@@ -84,9 +96,9 @@ interface OwnProps {
   isKontrollerRevurderingApOpen?: boolean;
   fagsakYtelseType: string;
   kanVeilede: boolean;
-  meldingFormData?: any,
-  setMeldingForData: (data?: any) => void,
-  brukerManglerAdresse: boolean,
+  meldingFormData?: any;
+  setMeldingForData: (data?: any) => void;
+  brukerManglerAdresse: boolean;
 }
 
 /**
@@ -117,7 +129,10 @@ const Messages: FunctionComponent<OwnProps> = ({
   const fritekst = formMethods.watch('fritekst');
   const arsakskode = formMethods.watch('arsakskode');
 
-  const filtrerteRevurderingVarslingArsaker = useMemo(() => getfiltrerteRevurderingVarslingArsaker(revurderingVarslingArsak, fagsakYtelseType), []);
+  const filtrerteRevurderingVarslingArsaker = useMemo(
+    () => getfiltrerteRevurderingVarslingArsaker(revurderingVarslingArsak, fagsakYtelseType),
+    [],
+  );
 
   if (!sprakKode) {
     return null;
@@ -146,7 +161,11 @@ const Messages: FunctionComponent<OwnProps> = ({
         name="brevmalkode"
         label={intl.formatMessage({ id: 'Messages.Template' })}
         validate={[required]}
-        selectValues={templates.map((template) => <option key={template.kode} value={template.kode} disabled={!template.tilgjengelig}>{template.navn}</option>)}
+        selectValues={templates.map(template => (
+          <option key={template.kode} value={template.kode} disabled={!template.tilgjengelig}>
+            {template.navn}
+          </option>
+        ))}
         className={styles.bredde}
       />
       {erVarselOmRevurdering && (
@@ -156,7 +175,11 @@ const Messages: FunctionComponent<OwnProps> = ({
             name="arsakskode"
             label={intl.formatMessage({ id: 'Messages.Årsak' })}
             validate={[required]}
-            selectValues={filtrerteRevurderingVarslingArsaker.map((cause) => <option key={cause.kode} value={cause.kode}>{cause.navn}</option>)}
+            selectValues={filtrerteRevurderingVarslingArsaker.map(cause => (
+              <option key={cause.kode} value={cause.kode}>
+                {cause.navn}
+              </option>
+            ))}
             className={styles.bredde}
           />
         </>
@@ -173,11 +196,7 @@ const Messages: FunctionComponent<OwnProps> = ({
           />
         </>
       )}
-      <div className={styles.buttonRow}>
-        {brukerManglerAdresse && (
-          <UkjentAdresseMeldingIndex />
-        )}
-      </div>
+      <div className={styles.buttonRow}>{brukerManglerAdresse && <UkjentAdresseMeldingIndex />}</div>
       <div className={styles.buttonRow}>
         <Button
           size="small"
@@ -191,7 +210,7 @@ const Messages: FunctionComponent<OwnProps> = ({
         <a
           href=""
           onClick={previewMessage}
-          onKeyDown={(e) => (e.key === 'Enter' ? previewMessage(e) : null)}
+          onKeyDown={e => (e.key === 'Enter' ? previewMessage(e) : null)}
           className={classNames(styles.previewLink, 'lenke lenke--frittstaende')}
         >
           {intl.formatMessage({ id: 'Messages.Preview' })}

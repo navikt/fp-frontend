@@ -2,9 +2,7 @@ import React, { FunctionComponent, useCallback } from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { Button, Label, Modal as NavModal } from '@navikt/ds-react';
 import { getDateAndTime } from '@navikt/ft-utils';
-import {
-  FlexColumn, FlexContainer, FlexRow, Image,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, Image } from '@navikt/ft-ui-komponenter';
 
 import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
 
@@ -16,7 +14,7 @@ type OwnProps = Readonly<{
   lukkErReservertModalOgOpneOppgave: (oppgave: Oppgave) => void;
   oppgave: Oppgave;
   oppgaveStatus: OppgaveStatus;
-}>
+}>;
 
 /**
  * OppgaveErReservertAvAnnenModal
@@ -61,14 +59,7 @@ const OppgaveErReservertAvAnnenModal: FunctionComponent<OwnProps> = ({
               </Label>
             </FlexColumn>
             <FlexColumn>
-              <Button
-                className={styles.okButton}
-                size="small"
-                variant="primary"
-                onClick={lukk}
-                autoFocus
-                type="button"
-              >
+              <Button className={styles.okButton} size="small" variant="primary" onClick={lukk} autoFocus type="button">
                 {intl.formatMessage({ id: 'OppgaveErReservertAvAnnenModal.Ok' })}
               </Button>
             </FlexColumn>

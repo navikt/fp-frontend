@@ -25,11 +25,16 @@ const HistorikkMalType2: FunctionComponent<HistorikkMal> = ({
       />
       {historikkinnslagDeler[0].resultat && historikkinnslagDeler[0].hendelse && (
         <BodyShort size="small" className="snakkeboble-panel__tekst">
-          {`${findHendelseText(historikkinnslagDeler[0].hendelse, getKodeverknavn)}: ${findResultatText(historikkinnslagDeler[0].resultat, intl)}`}
+          {`${findHendelseText(historikkinnslagDeler[0].hendelse, getKodeverknavn)}: ${findResultatText(
+            historikkinnslagDeler[0].resultat,
+            intl,
+          )}`}
         </BodyShort>
       )}
       {!historikkinnslagDeler[0].resultat && historikkinnslagDeler[0].hendelse && (
-        <BodyShort size="small" className="snakkeboble-panel__tekst">{findHendelseText(historikkinnslagDeler[0].hendelse, getKodeverknavn)}</BodyShort>
+        <BodyShort size="small" className="snakkeboble-panel__tekst">
+          {findHendelseText(historikkinnslagDeler[0].hendelse, getKodeverknavn)}
+        </BodyShort>
       )}
     </>
   );

@@ -1,9 +1,10 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
-import { FordelBeregningsgrunnlagFaktaIndex, FaktaFordelBeregningAvklaringsbehovCode } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
+import {
+  FordelBeregningsgrunnlagFaktaIndex,
+  FaktaFordelBeregningAvklaringsbehovCode,
+} from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
 import { Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/ft-types';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
@@ -27,16 +28,17 @@ const mapBGKodeTilFpsakKode = (bgKode: string): string => {
   }
 };
 
-const lagModifisertCallback = (
-  submitCallback: (params: any, keepData?: boolean) => Promise<any>,
-) => (aksjonspunkterSomSkalLagres: any | any[]) => {
-  const apListe = Array.isArray(aksjonspunkterSomSkalLagres) ? aksjonspunkterSomSkalLagres : [aksjonspunkterSomSkalLagres];
-  const transformerteData = apListe.map((apData) => ({
-    kode: mapBGKodeTilFpsakKode(apData.kode),
-    ...apData.grunnlag[0],
-  }));
-  return submitCallback(transformerteData);
-};
+const lagModifisertCallback =
+  (submitCallback: (params: any, keepData?: boolean) => Promise<any>) => (aksjonspunkterSomSkalLagres: any | any[]) => {
+    const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
+      ? aksjonspunkterSomSkalLagres
+      : [aksjonspunkterSomSkalLagres];
+    const transformerteData = apListe.map(apData => ({
+      kode: mapBGKodeTilFpsakKode(apData.kode),
+      ...apData.grunnlag[0],
+    }));
+    return submitCallback(transformerteData);
+  };
 
 const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: FpVilkar): Vilkarperiode => ({
   avslagKode: bgVilkar.avslagKode,
@@ -53,7 +55,7 @@ const lagBGVilkar = (vilkar: FpVilkar[], beregningsgrunnlag: Beregningsgrunnlag)
   if (!vilkar) {
     return null;
   }
-  const bgVilkar = vilkar.find((v) => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
+  const bgVilkar = vilkar.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkar || !beregningsgrunnlag) {
     return null;
   }
@@ -80,7 +82,7 @@ const AKSJONSPUNKT_KODER = [AksjonspunktCode.FORDEL_BEREGNINGSGRUNNLAG, Aksjonsp
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG];
 type EndepunktPanelData = {
   beregningsgrunnlag: Beregningsgrunnlag;
-}
+};
 
 interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -99,9 +101,11 @@ const FordelingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.FORDELING}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FordelBeregningsgrunnlag.Title' })}
-    skalPanelVisesIMeny={() => !!props.behandling.aksjonspunkt
-      && !!props.behandling.aksjonspunkt.some((ap) => AKSJONSPUNKT_KODER.some((kode) => kode === ap.definisjon))}
-    renderPanel={(data) => (
+    skalPanelVisesIMeny={() =>
+      !!props.behandling.aksjonspunkt &&
+      !!props.behandling.aksjonspunkt.some(ap => AKSJONSPUNKT_KODER.some(kode => kode === ap.definisjon))
+    }
+    renderPanel={data => (
       // @ts-ignore TODO Ikkje send med ned heile kodeverket
       <FordelBeregningsgrunnlagFaktaIndex
         {...data}

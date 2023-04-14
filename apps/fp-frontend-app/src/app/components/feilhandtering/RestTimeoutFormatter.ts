@@ -8,7 +8,7 @@ export type ErrorData = {
   type: string;
   message: string;
   location: string;
-}
+};
 
 class RestTimeoutFormatter implements Formatter<ErrorData> {
   type = ErrorEventType.POLLING_TIMEOUT;

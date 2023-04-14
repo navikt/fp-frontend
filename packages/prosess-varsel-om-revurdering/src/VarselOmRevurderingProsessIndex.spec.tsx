@@ -87,7 +87,6 @@ describe('<VarselOmRevurderingProsessIndex>', () => {
       kode: '5026',
       sendVarsel: true,
       ventearsak: 'AVV_DOK',
-
     });
   });
 

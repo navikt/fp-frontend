@@ -22,10 +22,7 @@ export default {
 
 export const visIverksetterVedtakInnvilget = () => (
   <RawIntlProvider value={intl}>
-    <IverksetterVedtakStatusModal
-      visModal
-      lukkModal={() => undefined}
-    />
+    <IverksetterVedtakStatusModal visModal lukkModal={() => undefined} />
   </RawIntlProvider>
 );
 

@@ -6,6 +6,6 @@ type InngangsvilkarPanelInitProps = {
   erPanelValgt: boolean;
   harInngangsvilkarApentAksjonspunkt: boolean;
   requestApi: RequestApi;
-}
+};
 
 export default InngangsvilkarPanelInitProps;

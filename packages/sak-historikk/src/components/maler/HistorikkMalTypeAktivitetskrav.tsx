@@ -15,12 +15,12 @@ import HistorikkMal from '../HistorikkMalTsType';
 const finnKodeverkType = (kodeverk: string): KodeverkType => KodeverkType[kodeverk];
 
 const finnFomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']): string => {
-  const found = opplysninger.find((o) => o.opplysningType === historikkOpplysningTypeCodes.UTTAK_PERIODE_FOM.kode);
+  const found = opplysninger.find(o => o.opplysningType === historikkOpplysningTypeCodes.UTTAK_PERIODE_FOM.kode);
   return found?.tilVerdi ? found.tilVerdi : '';
 };
 
 const finnTomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']): string => {
-  const found = opplysninger.find((o) => o.opplysningType === historikkOpplysningTypeCodes.UTTAK_PERIODE_TOM.kode);
+  const found = opplysninger.find(o => o.opplysningType === historikkOpplysningTypeCodes.UTTAK_PERIODE_TOM.kode);
   return found?.tilVerdi ? found.tilVerdi : '';
 };
 
@@ -32,9 +32,11 @@ const buildEndretFeltText = (
   const felt = endredeFelter[0];
   const erEndret = felt.fraVerdi !== null && felt.fraVerdi !== undefined;
 
-  const tilVerdiNavn = felt.klTilVerdi ? getKodeverknavn(felt.tilVerdi as string, finnKodeverkType(felt.klTilVerdi)) : '';
+  const tilVerdiNavn = felt.klTilVerdi
+    ? getKodeverknavn(felt.tilVerdi as string, finnKodeverkType(felt.klTilVerdi))
+    : '';
   if (erEndret) {
-    const årsakVerdi = felt.fraVerdi ? felt.fraVerdi as string : felt.tilVerdi as string;
+    const årsakVerdi = felt.fraVerdi ? (felt.fraVerdi as string) : (felt.tilVerdi as string);
     const fraVerdi = felt.klFraVerdi ? `${getKodeverknavn(årsakVerdi, finnKodeverkType(felt.klFraVerdi))}` : '';
     return (
       <FormattedMessage
@@ -78,24 +80,22 @@ const HistorikkMalTypeAktivitetskrav: FunctionComponent<HistorikkMal> = ({
         scrollUpOnClick
         createLocationForSkjermlenke={createLocationForSkjermlenke}
       />
-      {historikkinnslagDeler.map((historikkinnslagDel, index) => (historikkinnslagDel.endredeFelter ? (
-        <div key={`historikkinnslagDel${index + 1}`}>
-          <VerticalSpacer fourPx />
-          <BodyShort size="small">
-            { buildEndretFeltText(historikkinnslagDel, getKodeverknavn) }
-          </BodyShort>
-          <VerticalSpacer fourPx />
-          <BubbleText
-            bodyText={decodeHtmlEntity(historikkinnslagDel.begrunnelseFritekst)}
-          />
-          {index < historikkinnslagDeler.length - 1 && (
-            <>
-              <VerticalSpacer fourPx />
-              <AvsnittSkiller />
-            </>
-          )}
-        </div>
-      ) : null))}
+      {historikkinnslagDeler.map((historikkinnslagDel, index) =>
+        historikkinnslagDel.endredeFelter ? (
+          <div key={`historikkinnslagDel${index + 1}`}>
+            <VerticalSpacer fourPx />
+            <BodyShort size="small">{buildEndretFeltText(historikkinnslagDel, getKodeverknavn)}</BodyShort>
+            <VerticalSpacer fourPx />
+            <BubbleText bodyText={decodeHtmlEntity(historikkinnslagDel.begrunnelseFritekst)} />
+            {index < historikkinnslagDeler.length - 1 && (
+              <>
+                <VerticalSpacer fourPx />
+                <AvsnittSkiller />
+              </>
+            )}
+          </div>
+        ) : null,
+      )}
     </>
   );
 };

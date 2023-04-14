@@ -15,8 +15,6 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story = () => (
-  <IkkeTilgangTilAvdelingslederPanel />
-);
+const Template: Story = () => <IkkeTilgangTilAvdelingslederPanel />;
 
 export const IkkeTilgangTilAvdelingsleder = Template.bind({});

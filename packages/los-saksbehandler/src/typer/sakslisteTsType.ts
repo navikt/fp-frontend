@@ -17,6 +17,6 @@ type Saksliste = Readonly<{
     tomDato?: string;
     erDynamiskPeriode: boolean;
   };
-}>
+}>;
 
 export default Saksliste;

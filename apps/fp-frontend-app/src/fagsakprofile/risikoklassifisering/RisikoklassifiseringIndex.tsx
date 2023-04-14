@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, useEffect, useCallback, useMemo,
-} from 'react';
+import React, { FunctionComponent, useEffect, useCallback, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 import { RisikoklassifiseringSakIndex, AvklartRisikoklassifiseringAp } from '@navikt/ft-sak-risikoklassifisering';
@@ -37,11 +35,7 @@ interface OwnProps {
  * Viser en av tre komponenter avhengig av: Om ingen klassifisering er utført,
  * om klassifisering er utført og ingen faresignaler er funnet og om klassifisering er utført og faresignaler er funnet
  */
-const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
-  fagsakData,
-  behandlingVersjon,
-  behandlingUuid,
-}) => {
+const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({ fagsakData, behandlingVersjon, behandlingUuid }) => {
   const fagsak = fagsakData.getFagsak();
   const behandling = fagsakData.getBehandling(behandlingUuid);
   const erPaaVent = behandling ? behandling.behandlingPaaVent : false;
@@ -52,7 +46,7 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
 
   const { selected: isRiskPanelOpen = false } = useTrackRouteParam<boolean>({
     paramName: 'risiko',
-    parse: (isOpen) => isOpen === 'true',
+    parse: isOpen => isOpen === 'true',
     isQueryParam: true,
   });
 
@@ -62,10 +56,11 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
   const initFetchData = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.INIT_FETCH);
   const navAnsatt = initFetchData.innloggetBruker;
-  const rettigheter = useMemo(() => getAccessRights(navAnsatt, fagsak.status, behandlingStatus, behandlingType),
-    [fagsak.status, behandlingStatus, behandlingType]);
-  const readOnly = useMemo(() => getReadOnly(navAnsatt, rettigheter, erPaaVent),
-    [rettigheter, erPaaVent]);
+  const rettigheter = useMemo(
+    () => getAccessRights(navAnsatt, fagsak.status, behandlingStatus, behandlingType),
+    [fagsak.status, behandlingStatus, behandlingType],
+  );
+  const readOnly = useMemo(() => getReadOnly(navAnsatt, rettigheter, erPaaVent), [rettigheter, erPaaVent]);
 
   const toggleRiskPanel = useCallback(() => {
     navigate(getRiskPanelLocationCreator(location)(!isRiskPanelOpen));
@@ -80,22 +75,27 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
     }
   }, [!!risikoAksjonspunkt, behandlingUuid, behandlingVersjon]);
 
-  const submitAksjonspunkt = useCallback((aksjonspunkt: AvklartRisikoklassifiseringAp) => {
-    if (!behandlingUuid || !behandlingVersjon) {
-      return Promise.reject();
-    }
-    const params = {
-      behandlingUuid,
-      saksnummer: fagsak.saksnummer,
-      behandlingVersjon,
-      bekreftedeAksjonspunktDtoer: [{
-        '@type': aksjonspunkt.kode,
-        ...aksjonspunkt,
-      }],
-    };
+  const submitAksjonspunkt = useCallback(
+    (aksjonspunkt: AvklartRisikoklassifiseringAp) => {
+      if (!behandlingUuid || !behandlingVersjon) {
+        return Promise.reject();
+      }
+      const params = {
+        behandlingUuid,
+        saksnummer: fagsak.saksnummer,
+        behandlingVersjon,
+        bekreftedeAksjonspunktDtoer: [
+          {
+            '@type': aksjonspunkt.kode,
+            ...aksjonspunkt,
+          },
+        ],
+      };
 
-    return behandlingEventHandler.lagreRisikoklassifiseringAksjonspunkt(params);
-  }, [behandlingUuid, behandlingVersjon]);
+      return behandlingEventHandler.lagreRisikoklassifiseringAksjonspunkt(params);
+    },
+    [behandlingUuid, behandlingVersjon],
+  );
 
   return (
     <RisikoklassifiseringSakIndex

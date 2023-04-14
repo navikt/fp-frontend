@@ -1,7 +1,7 @@
 import FaktaPanelCode from './faktaPanelCodes';
 import ProsessStegCode from './prosessStegCodes';
 
-type SkjermlenkeData = Record<string, { kode: string, faktaNavn: string, punktNavn: string }>;
+type SkjermlenkeData = Record<string, { kode: string; faktaNavn: string; punktNavn: string }>;
 
 const skjermlenkeCodes = {
   BEREGNING_ENGANGSSTOENAD: {

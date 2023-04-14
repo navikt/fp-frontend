@@ -1,16 +1,19 @@
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
-import {
-  FpsakApiKeys, restApiHooks, requestApi, LinkCategory,
-} from '../data/fpsakApi';
+import { FpsakApiKeys, restApiHooks, requestApi, LinkCategory } from '../data/fpsakApi';
 
 const useHentInitLenker = (): boolean[] => {
-  const { data: initFetchLinksFpSak, state: initFetchStateFpSak } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.INIT_FETCH);
-  const { data: initFetchLinksFpTilbake, state: initFetchStateFpTilbake } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.INIT_FETCH_FPTILBAKE);
+  const { data: initFetchLinksFpSak, state: initFetchStateFpSak } = restApiHooks.useGlobalStateRestApi(
+    FpsakApiKeys.INIT_FETCH,
+  );
+  const { data: initFetchLinksFpTilbake, state: initFetchStateFpTilbake } = restApiHooks.useGlobalStateRestApi(
+    FpsakApiKeys.INIT_FETCH_FPTILBAKE,
+  );
 
   const harFpsakInitKallFeilet = initFetchStateFpSak === RestApiState.ERROR;
-  const harHentetFerdigInitLenker = initFetchStateFpSak === RestApiState.SUCCESS
-    && (initFetchStateFpTilbake === RestApiState.SUCCESS || initFetchStateFpTilbake === RestApiState.ERROR);
+  const harHentetFerdigInitLenker =
+    initFetchStateFpSak === RestApiState.SUCCESS &&
+    (initFetchStateFpTilbake === RestApiState.SUCCESS || initFetchStateFpTilbake === RestApiState.ERROR);
 
   if (harHentetFerdigInitLenker && initFetchLinksFpSak) {
     if (initFetchLinksFpTilbake) {

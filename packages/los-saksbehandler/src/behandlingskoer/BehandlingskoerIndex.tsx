@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, useState, useCallback,
-} from 'react';
+import React, { FunctionComponent, useState, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 
@@ -22,11 +20,7 @@ interface OwnProps {
 /**
  * BehandlingskoerIndex
  */
-const BehandlingskoerIndex: FunctionComponent<OwnProps> = ({
-  valgtSakslisteId,
-  setValgtSakslisteId,
-  åpneFagsak,
-}) => {
+const BehandlingskoerIndex: FunctionComponent<OwnProps> = ({ valgtSakslisteId, setValgtSakslisteId, åpneFagsak }) => {
   const [reservertAvAnnenSaksbehandler, setReservertAvAnnenSaksbehandler] = useState<boolean>(false);
   const [reservertOppgave, setReservertOppgave] = useState<Oppgave>();
   const [reservertOppgaveStatus, setReservertOppgaveStatus] = useState<OppgaveStatus>();
@@ -35,12 +29,12 @@ const BehandlingskoerIndex: FunctionComponent<OwnProps> = ({
 
   const { startRequest: reserverOppgave } = restApiHooks.useRestApiRunner(RestApiPathsKeys.RESERVER_OPPGAVE);
 
-  const reserverOppgaveOgApne = useCallback((oppgave: Oppgave) => {
-    if (oppgave.status.erReservert) {
-      åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
-    } else {
-      reserverOppgave({ oppgaveId: oppgave.id })
-        .then((nyOppgaveStatus) => {
+  const reserverOppgaveOgApne = useCallback(
+    (oppgave: Oppgave) => {
+      if (oppgave.status.erReservert) {
+        åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
+      } else {
+        reserverOppgave({ oppgaveId: oppgave.id }).then(nyOppgaveStatus => {
           if (nyOppgaveStatus && nyOppgaveStatus.erReservert && nyOppgaveStatus.erReservertAvInnloggetBruker) {
             åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
           } else if (nyOppgaveStatus && nyOppgaveStatus.erReservert && !nyOppgaveStatus.erReservertAvInnloggetBruker) {
@@ -49,19 +43,28 @@ const BehandlingskoerIndex: FunctionComponent<OwnProps> = ({
             setReservertOppgaveStatus(nyOppgaveStatus);
           }
         });
-    }
-  }, [åpneFagsak]);
+      }
+    },
+    [åpneFagsak],
+  );
 
-  const lukkErReservertModalOgOpneOppgave = useCallback((oppgave: Oppgave) => {
-    setReservertAvAnnenSaksbehandler(false);
-    setReservertOppgave(undefined);
-    setReservertOppgaveStatus(undefined);
+  const lukkErReservertModalOgOpneOppgave = useCallback(
+    (oppgave: Oppgave) => {
+      setReservertAvAnnenSaksbehandler(false);
+      setReservertOppgave(undefined);
+      setReservertOppgaveStatus(undefined);
 
-    åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
-  }, [åpneFagsak]);
+      åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
+    },
+    [åpneFagsak],
+  );
 
   if (sakslister.length === 0) {
-    return <Heading size="small"><FormattedMessage id="BehandlingskoerIndex.IngenKø" /></Heading>;
+    return (
+      <Heading size="small">
+        <FormattedMessage id="BehandlingskoerIndex.IngenKø" />
+      </Heading>
+    );
   }
   return (
     <>

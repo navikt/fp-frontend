@@ -14,11 +14,7 @@ describe('<FatterVedtakStatusModal>', () => {
   it('skal ikke vise modal når behandling ikke er på vent', async () => {
     render(
       <RawIntlProvider value={intl}>
-        <FatterVedtakStatusModal
-          visModal
-          lukkModal={() => undefined}
-          tekst="Dette er en tekst"
-        />
+        <FatterVedtakStatusModal visModal lukkModal={() => undefined} tekst="Dette er en tekst" />
       </RawIntlProvider>,
     );
 

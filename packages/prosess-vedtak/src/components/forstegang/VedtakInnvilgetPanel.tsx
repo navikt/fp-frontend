@@ -2,14 +2,10 @@ import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { Label, Detail } from '@navikt/ds-react';
 
-import {
-  Behandlingsresultat, BeregningsresultatFp, BeregningsresultatEs,
-} from '@navikt/fp-types';
+import { Behandlingsresultat, BeregningsresultatFp, BeregningsresultatEs } from '@navikt/fp-types';
 import { fagsakYtelseType } from '@navikt/fp-kodeverk';
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
-import {
-  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
 
@@ -40,7 +36,9 @@ const VedtakInnvilgetPanel: FunctionComponent<OwnProps> = ({
           <FlexRow>
             <FlexColumn>
               <Detail size="small">{intl.formatMessage({ id: 'VedtakForm.beregnetTilkjentYtelse' })}</Detail>
-              <Label size="small">{formatCurrencyWithKr((resultatstruktur as BeregningsresultatEs).beregnetTilkjentYtelse)}</Label>
+              <Label size="small">
+                {formatCurrencyWithKr((resultatstruktur as BeregningsresultatEs).beregnetTilkjentYtelse)}
+              </Label>
             </FlexColumn>
             <FlexColumn>
               <Detail size="small">{intl.formatMessage({ id: 'VedtakForm.AntallBarn' })}</Detail>

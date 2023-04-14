@@ -18,7 +18,7 @@ const thirtyDaysFromNow = () => {
 
 type FormValues = {
   reserverTil: string;
-}
+};
 
 interface OwnProps {
   showModal: boolean;
@@ -27,7 +27,7 @@ interface OwnProps {
   oppgaveId: number;
   endreReserverasjonState: () => void;
   hentReserverteOppgaver: (params: any, keepData: boolean) => void;
-  endreOppgavereservasjon: (input: { oppgaveId: number, reserverTil: string }) => Promise<Oppgave[] | undefined>;
+  endreOppgavereservasjon: (input: { oppgaveId: number; reserverTil: string }) => Promise<Oppgave[] | undefined>;
 }
 
 /**
@@ -44,16 +44,21 @@ const OppgaveReservasjonEndringDatoModal: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const endreOppgaveReservasjonFn = useCallback((reserverTil: string) => endreOppgavereservasjon({ oppgaveId, reserverTil })
-    .then(() => {
-      endreReserverasjonState();
-      hentReserverteOppgaver({}, true);
-    }),
-  []);
+  const endreOppgaveReservasjonFn = useCallback(
+    (reserverTil: string) =>
+      endreOppgavereservasjon({ oppgaveId, reserverTil }).then(() => {
+        endreReserverasjonState();
+        hentReserverteOppgaver({}, true);
+      }),
+    [],
+  );
 
-  const lagDefaultValues = useCallback((reserverTil?: string) => ({
-    reserverTil: (reserverTil && reserverTil.length >= 10) ? reserverTil.substr(0, 10) : '',
-  }), []);
+  const lagDefaultValues = useCallback(
+    (reserverTil?: string) => ({
+      reserverTil: reserverTil && reserverTil.length >= 10 ? reserverTil.substr(0, 10) : '',
+    }),
+    [],
+  );
 
   const søkFormMethods = useForm<FormValues>({
     defaultValues: lagDefaultValues(reserverTilDefault),
@@ -68,7 +73,10 @@ const OppgaveReservasjonEndringDatoModal: FunctionComponent<OwnProps> = ({
       onClose={closeModal as () => void}
     >
       <NavModal.Content>
-        <Form<FormValues> formMethods={søkFormMethods} onSubmit={(values) => endreOppgaveReservasjonFn(values.reserverTil)}>
+        <Form<FormValues>
+          formMethods={søkFormMethods}
+          onSubmit={values => endreOppgaveReservasjonFn(values.reserverTil)}
+        >
           <Panel className={styles.panel}>
             <h3>
               <FormattedMessage id="OppgaveReservasjonEndringDatoModal.Header" />
@@ -83,12 +91,7 @@ const OppgaveReservasjonEndringDatoModal: FunctionComponent<OwnProps> = ({
               <FlexContainer>
                 <FlexRow className={styles.buttonRow}>
                   <FlexColumn>
-                    <Button
-                      size="small"
-                      variant="secondary"
-                      className={styles.button}
-                      autoFocus
-                    >
+                    <Button size="small" variant="secondary" className={styles.button} autoFocus>
                       <FormattedMessage id="OppgaveReservasjonEndringDatoModal.Ok" />
                     </Button>
                   </FlexColumn>

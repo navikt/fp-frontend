@@ -13,7 +13,7 @@ interface OwnProps {
   valgtSakslisteId: number;
   valgtAvdelingEnhet: string;
   values: any;
-  hentAvdelingensSakslister: (params: {avdelingEnhet: string}) => void;
+  hentAvdelingensSakslister: (params: { avdelingEnhet: string }) => void;
   hentAntallOppgaver: (sakslisteId: number, avdelingEnhet: string) => void;
 }
 
@@ -30,7 +30,9 @@ const AndreKriterierVelger: FunctionComponent<OwnProps> = ({
   const { setValue } = formHooks.useFormContext();
 
   const andreKriterierTyper = useLosKodeverk('AndreKriterierType');
-  const { startRequest: lagreSakslisteAndreKriterier } = restApiHooks.useRestApiRunner(RestApiPathsKeys.LAGRE_SAKSLISTE_ANDRE_KRITERIER);
+  const { startRequest: lagreSakslisteAndreKriterier } = restApiHooks.useRestApiRunner(
+    RestApiPathsKeys.LAGRE_SAKSLISTE_ANDRE_KRITERIER,
+  );
 
   return (
     <>
@@ -38,14 +40,14 @@ const AndreKriterierVelger: FunctionComponent<OwnProps> = ({
         <FormattedMessage id="AndreKriterierVelger.AndreKriterier" />
       </Label>
       <VerticalSpacer eightPx />
-      {andreKriterierTyper.map((akt) => (
+      {andreKriterierTyper.map(akt => (
         <Fragment key={akt.kode}>
           <VerticalSpacer fourPx />
           <CheckboxField
             key={akt.kode}
             name={akt.kode}
             label={akt.navn}
-            onChange={(isChecked) => {
+            onChange={isChecked => {
               setValue(`${akt.kode}_inkluder`, true);
               return lagreSakslisteAndreKriterier({
                 sakslisteId: valgtSakslisteId,
@@ -68,23 +70,28 @@ const AndreKriterierVelger: FunctionComponent<OwnProps> = ({
                     name={`${akt.kode}_inkluder`}
                     isHorizontal
                     isTrueOrFalseSelection
-                    onChange={(skalInkludere) => lagreSakslisteAndreKriterier({
-                      sakslisteId: valgtSakslisteId,
-                      avdelingEnhet: valgtAvdelingEnhet,
-                      andreKriterierType: akt.kode,
-                      checked: true,
-                      inkluder: skalInkludere,
-                    }).then(() => {
-                      hentAntallOppgaver(valgtSakslisteId, valgtAvdelingEnhet);
-                      hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet });
-                    })}
-                    radios={[{
-                      value: 'true',
-                      label: <FormattedMessage id="AndreKriterierVelger.TaMed" />,
-                    }, {
-                      value: 'false',
-                      label: <FormattedMessage id="AndreKriterierVelger.Fjern" />,
-                    }]}
+                    onChange={skalInkludere =>
+                      lagreSakslisteAndreKriterier({
+                        sakslisteId: valgtSakslisteId,
+                        avdelingEnhet: valgtAvdelingEnhet,
+                        andreKriterierType: akt.kode,
+                        checked: true,
+                        inkluder: skalInkludere,
+                      }).then(() => {
+                        hentAntallOppgaver(valgtSakslisteId, valgtAvdelingEnhet);
+                        hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet });
+                      })
+                    }
+                    radios={[
+                      {
+                        value: 'true',
+                        label: <FormattedMessage id="AndreKriterierVelger.TaMed" />,
+                      },
+                      {
+                        value: 'false',
+                        label: <FormattedMessage id="AndreKriterierVelger.Fjern" />,
+                      },
+                    ]}
                   />
                 </ArrowBox>
               </div>

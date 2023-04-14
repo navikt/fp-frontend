@@ -2,7 +2,11 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import { klageVurderingOmgjoer as klageVurderingOmgjoerType, klageVurdering as klageVurderingCodes, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import {
+  klageVurderingOmgjoer as klageVurderingOmgjoerType,
+  klageVurdering as klageVurderingCodes,
+  AksjonspunktCode,
+} from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Behandling, KlageVurdering } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -26,13 +30,7 @@ const Template: Story<{
   mellomlagre: (aksjonspunktData: any) => Promise<void>;
   forhandsvisCallback: (aksjonspunktData: any) => Promise<void>;
   aksjonspunkter: Aksjonspunkt[];
-}> = ({
-  klageVurdering,
-  submitCallback,
-  mellomlagre,
-  forhandsvisCallback,
-  aksjonspunkter,
-}) => (
+}> = ({ klageVurdering, submitCallback, mellomlagre, forhandsvisCallback, aksjonspunkter }) => (
   <KlagevurderingProsessIndex
     behandling={behandling}
     alleKodeverk={alleKodeverk as any}
@@ -140,9 +138,11 @@ KlagevurderingMedAksjonspunktNfp.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   mellomlagre: action('button-click') as (data: any) => Promise<any>,
   forhandsvisCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.BEHANDLE_KLAGE_NFP,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.BEHANDLE_KLAGE_NFP,
+    },
+  ] as Aksjonspunkt[],
   klageVurdering: {
     klageFormkravResultatKA: {
       avvistArsaker: ['IKKE_KONKRET'],

@@ -30,10 +30,12 @@ const defaultProps = {
   alleKodeverk: kodeverk,
   isReadOnly: false,
   readOnlySubmitButton: false,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.VURDER_FEILUTBETALING,
-    kanLoses: true,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.VURDER_FEILUTBETALING,
+      kanLoses: true,
+    },
+  ] as Aksjonspunkt[],
   vilkar: [],
   isAksjonspunktOpen: true,
   setFormData: () => undefined,
@@ -44,9 +46,7 @@ describe('<ProsessDefaultInitPanel>', () => {
   it('skal rendre panel korrekt', async () => {
     const BEHANDLING_KEY = new RestKey<Behandling, void>('BEHANDLING_KEY');
 
-    const endpoints = new RestApiConfigBuilder()
-      .withRel('behandling', BEHANDLING_KEY)
-      .build();
+    const endpoints = new RestApiConfigBuilder().withRel('behandling', BEHANDLING_KEY).build();
 
     const requestMock = createRequestApi(endpoints);
 

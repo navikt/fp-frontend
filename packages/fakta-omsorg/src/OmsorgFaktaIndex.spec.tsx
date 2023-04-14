@@ -4,9 +4,7 @@ import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './OmsorgFaktaIndex.stories';
 
-const {
-  ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg,
-} = composeStories(stories);
+const { ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg } = composeStories(stories);
 
 describe('<OmsorgFaktaIndex>', () => {
   it('skal velge at søker har omsorg for barnet', async () => {

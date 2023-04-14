@@ -3,9 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Button, BodyShort } from '@navikt/ds-react';
 
-import {
-  VerticalSpacer, Image, FlexContainer, FlexRow, FlexColumn,
-} from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer, Image, FlexContainer, FlexRow, FlexColumn } from '@navikt/ft-ui-komponenter';
 import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validators';
 import { Form, InputField } from '@navikt/ft-form-hooks';
 import { FagsakEnkel } from '@navikt/fp-types';
@@ -13,8 +11,8 @@ import advarselIcon from '../images/advarsel.svg';
 
 import styles from './searchForm.module.css';
 
-const isButtonDisabled = (searchStarted: boolean, searchString?: string): boolean => !!(searchStarted
-  || (searchString === undefined || searchString.length < 1));
+const isButtonDisabled = (searchStarted: boolean, searchString?: string): boolean =>
+  !!(searchStarted || searchString === undefined || searchString.length < 1);
 
 interface OwnProps {
   searchStarted: boolean;
@@ -29,11 +27,7 @@ interface OwnProps {
  *
  * Definerer søkefelt og tilhørende søkeknapp.
  */
-const SearchForm: FunctionComponent<OwnProps> = ({
-  searchStarted,
-  searchResultAccessDenied,
-  searchFagsakCallback,
-}) => {
+const SearchForm: FunctionComponent<OwnProps> = ({ searchStarted, searchResultAccessDenied, searchFagsakCallback }) => {
   const intl = useIntl();
   const formMethods = useForm({
     defaultValues: {

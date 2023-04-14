@@ -1,7 +1,11 @@
 import React, { FunctionComponent, useEffect, useCallback } from 'react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
-import { restApiTilbakekrevingHooks, requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys } from './data/tilbakekrevingBehandlingApi';
+import {
+  restApiTilbakekrevingHooks,
+  requestTilbakekrevingApi,
+  TilbakekrevingBehandlingApiKeys,
+} from './data/tilbakekrevingBehandlingApi';
 import FaktaIndex from './fakta/FaktaIndex';
 import ProsessIndex from './prosess/ProsessIndex';
 import BehandlingPaVent from './felles/komponenter/BehandlingPaVent';
@@ -32,26 +36,39 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & StandardBehand
     requestTilbakekrevingApi.setAddErrorMessageHandler(setRequestPendingMessage);
   }, []);
 
-  const {
-    behandling, hentingHarFeilet, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling,
-  } = useBehandling(behandlingUuid, oppdaterBehandlingVersjon);
+  const { behandling, hentingHarFeilet, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling } =
+    useBehandling(behandlingUuid, oppdaterBehandlingVersjon);
 
   const lagreAksjonspunkter = useLagreAksjonspunkt(setBehandling);
 
   useInitBehandlingHandlinger(behandlingEventHandler, hentBehandling, setBehandling, behandling);
 
-  const oppdaterFaktaPanelIUrl = useCallback((nyttFaktaSteg: string): void => {
-    oppdaterProsessStegOgFaktaPanelIUrl(valgtProsessSteg, nyttFaktaSteg);
-  }, [valgtProsessSteg, oppdaterProsessStegOgFaktaPanelIUrl]);
-  const oppdaterProsessPanelIUrl = useCallback((nyttProsessSteg: string): void => {
-    oppdaterProsessStegOgFaktaPanelIUrl(nyttProsessSteg, valgtFaktaSteg);
-  }, [valgtFaktaSteg]);
+  const oppdaterFaktaPanelIUrl = useCallback(
+    (nyttFaktaSteg: string): void => {
+      oppdaterProsessStegOgFaktaPanelIUrl(valgtProsessSteg, nyttFaktaSteg);
+    },
+    [valgtProsessSteg, oppdaterProsessStegOgFaktaPanelIUrl],
+  );
+  const oppdaterProsessPanelIUrl = useCallback(
+    (nyttProsessSteg: string): void => {
+      oppdaterProsessStegOgFaktaPanelIUrl(nyttProsessSteg, valgtFaktaSteg);
+    },
+    [valgtFaktaSteg],
+  );
 
-  const bekreftAksjonspunkterMedSideeffekter = useCallback(getBekreftAksjonspunktCallback(
-    fagsak.saksnummer, behandling, oppdaterProsessStegOgFaktaPanelIUrl, lagreAksjonspunkter,
-  ), [fagsak.saksnummer, behandling, oppdaterProsessStegOgFaktaPanelIUrl]);
+  const bekreftAksjonspunkterMedSideeffekter = useCallback(
+    getBekreftAksjonspunktCallback(
+      fagsak.saksnummer,
+      behandling,
+      oppdaterProsessStegOgFaktaPanelIUrl,
+      lagreAksjonspunkter,
+    ),
+    [fagsak.saksnummer, behandling, oppdaterProsessStegOgFaktaPanelIUrl],
+  );
 
-  const { data: tilbakekrevingKodeverk } = restApiTilbakekrevingHooks.useRestApi(TilbakekrevingBehandlingApiKeys.TILBAKE_KODEVERK);
+  const { data: tilbakekrevingKodeverk } = restApiTilbakekrevingHooks.useRestApi(
+    TilbakekrevingBehandlingApiKeys.TILBAKE_KODEVERK,
+  );
 
   if (!behandling || !tilbakekrevingKodeverk) {
     return <LoadingPanel />;
@@ -59,11 +76,7 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & StandardBehand
 
   return (
     <>
-      <BehandlingPaVent
-        behandling={behandling}
-        hentBehandling={hentBehandling}
-        kodeverk={tilbakekrevingKodeverk}
-      />
+      <BehandlingPaVent behandling={behandling} hentBehandling={hentBehandling} kodeverk={tilbakekrevingKodeverk} />
       <ProsessIndex
         behandling={behandling}
         fagsakKjønn={fagsak.bruker.kjønn}

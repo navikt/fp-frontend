@@ -9,23 +9,27 @@ import FodselSammenligningIndex from './FodselSammenligningIndex';
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 
-const avklartBarn = [{
-  fodselsdato: '2019-01-10',
-  dodsdato: '2019-01-10',
-  fnr: '1213200001',
-}];
+const avklartBarn = [
+  {
+    fodselsdato: '2019-01-10',
+    dodsdato: '2019-01-10',
+    fnr: '1213200001',
+  },
+];
 
 const soknad = {
-  fodselsdatoer: { 1: '2019-01-10' } as {[key: number]: string},
+  fodselsdatoer: { 1: '2019-01-10' } as { [key: number]: string },
   termindato: '2019-01-01',
   utstedtdato: '2019-01-02',
   antallBarn: 1,
 } as Soknad;
 
 const familiehendelse = {
-  avklartBarn: [{
-    fodselsdato: '2019-01-10',
-  }],
+  avklartBarn: [
+    {
+      fodselsdato: '2019-01-10',
+    },
+  ],
   termindato: '2019-01-01',
   antallBarnTermin: 1,
 } as FamilieHendelse;
@@ -39,11 +43,7 @@ const Template: Story<{
   behandlingsTypeKode: string;
   vedtaksDatoSomSvangerskapsuke?: number;
   familiehendelseOriginalBehandling?: FamilieHendelse;
-}> = ({
-  behandlingsTypeKode,
-  vedtaksDatoSomSvangerskapsuke,
-  familiehendelseOriginalBehandling,
-}) => (
+}> = ({ behandlingsTypeKode, vedtaksDatoSomSvangerskapsuke, familiehendelseOriginalBehandling }) => (
   <FodselSammenligningIndex
     behandlingsTypeKode={behandlingsTypeKode}
     avklartBarn={avklartBarn}

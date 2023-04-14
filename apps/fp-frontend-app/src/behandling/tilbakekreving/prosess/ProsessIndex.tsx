@@ -1,19 +1,13 @@
-import React, {
-  FunctionComponent, useEffect, useState, useMemo, useCallback,
-} from 'react';
+import React, { FunctionComponent, useEffect, useState, useMemo, useCallback } from 'react';
 import { useIntl, IntlShape } from 'react-intl';
 
-import {
-  BehandlingStatus, VilkarUtfallType, isAksjonspunktOpen,
-} from '@navikt/ft-kodeverk';
+import { BehandlingStatus, VilkarUtfallType, isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { ForeldelseAksjonspunktCodes } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
 import { VedtakAksjonspunktCode } from '@navikt/ft-prosess-tilbakekreving-vedtak';
 import { ForeldelseAksjonspunktCodes as TilbakekrevingCodes } from '@navikt/ft-prosess-tilbakekreving';
 import { Aksjonspunkt } from '@navikt/ft-types';
-import {
-  Behandling, AksessRettigheter, Behandlingsresultat, AlleKodeverkTilbakekreving,
-} from '@navikt/fp-types';
+import { Behandling, AksessRettigheter, Behandlingsresultat, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 import { vedtakResultatType as VedtakResultatType } from '@navikt/fp-kodeverk';
 
 import { erReadOnlyCurried } from '../felles/util/readOnlyPanelUtils';
@@ -30,7 +24,9 @@ const DEFAULT_PANEL_VALGT = 'default';
 
 const finnTilbakekrevingStatus = (aksjonspunkter: Aksjonspunkt[]): string => {
   if (aksjonspunkter.length > 0) {
-    return aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status)) ? VilkarUtfallType.IKKE_VURDERT : VilkarUtfallType.OPPFYLT;
+    return aksjonspunkter.some(ap => isAksjonspunktOpen(ap.status))
+      ? VilkarUtfallType.IKKE_VURDERT
+      : VilkarUtfallType.OPPFYLT;
   }
   return VilkarUtfallType.IKKE_VURDERT;
 };
@@ -46,13 +42,12 @@ const getVedtakStatus = (beregningsresultat?: Behandlingsresultat): string => {
   }
 
   return type === VedtakResultatType.DELVIS_TILBAKEBETALING || type === VedtakResultatType.FULL_TILBAKEBETALING
-    ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT;
+    ? VilkarUtfallType.OPPFYLT
+    : VilkarUtfallType.IKKE_VURDERT;
 };
 
-const hentAksjonspunkterFor = (
-  aksjonspunktKode: string,
-  aksjonspunkter?: Aksjonspunkt[],
-): Aksjonspunkt[] => (aksjonspunkter ? aksjonspunkter.filter((ap) => aksjonspunktKode === ap.definisjon) : []);
+const hentAksjonspunkterFor = (aksjonspunktKode: string, aksjonspunkter?: Aksjonspunkt[]): Aksjonspunkt[] =>
+  aksjonspunkter ? aksjonspunkter.filter(ap => aksjonspunktKode === ap.definisjon) : [];
 
 const leggTilProsessPanel = (
   prosessStegKode: string,
@@ -62,8 +57,11 @@ const leggTilProsessPanel = (
   valgtProsessSteg?: string,
   ekstraAktivSjekk?: boolean,
 ): ProsessPanelMenyData => {
-  const harApentAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status) && ap.kanLoses);
-  const erAktiv = valgtProsessSteg === prosessStegKode || (harApentAksjonspunkt && valgtProsessSteg === DEFAULT_PANEL_VALGT) || ekstraAktivSjekk;
+  const harApentAksjonspunkt = aksjonspunkter.some(ap => isAksjonspunktOpen(ap.status) && ap.kanLoses);
+  const erAktiv =
+    valgtProsessSteg === prosessStegKode ||
+    (harApentAksjonspunkt && valgtProsessSteg === DEFAULT_PANEL_VALGT) ||
+    ekstraAktivSjekk;
   return {
     id: prosessStegKode,
     tekst,
@@ -85,7 +83,9 @@ const utledProsessPaneler = (
       ProsessStegCode.FORELDELSE,
       intl.formatMessage({ id: 'Behandlingspunkt.Foreldelse' }),
       hentAksjonspunkterFor(ForeldelseAksjonspunktCodes.VURDER_FORELDELSE, behandling.aksjonspunkt),
-      requestTilbakekrevingApi.hasPath(TilbakekrevingBehandlingApiKeys.PERIODER_FORELDELSE.name) ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT,
+      requestTilbakekrevingApi.hasPath(TilbakekrevingBehandlingApiKeys.PERIODER_FORELDELSE.name)
+        ? VilkarUtfallType.OPPFYLT
+        : VilkarUtfallType.IKKE_VURDERT,
       valgtProsessSteg,
     ),
     leggTilProsessPanel(
@@ -144,18 +144,26 @@ const ProsessIndex: FunctionComponent<OwnProps> = ({
     }
   }, [behandling.versjon]);
 
-  const prosessPanelerData = useMemo(() => utledProsessPaneler(intl, behandling, valgtProsessSteg),
-    [behandling, valgtProsessSteg]);
+  const prosessPanelerData = useMemo(
+    () => utledProsessPaneler(intl, behandling, valgtProsessSteg),
+    [behandling, valgtProsessSteg],
+  );
 
-  const oppdaterProsessPanel = useCallback((index: number) => {
-    const panel = prosessPanelerData[index];
-    oppdaterProsessPanelIUrl(panel.erAktiv ? undefined : panel.id);
-  }, [prosessPanelerData, oppdaterProsessPanelIUrl]);
+  const oppdaterProsessPanel = useCallback(
+    (index: number) => {
+      const panel = prosessPanelerData[index];
+      oppdaterProsessPanelIUrl(panel.erAktiv ? undefined : panel.id);
+    },
+    [prosessPanelerData, oppdaterProsessPanelIUrl],
+  );
 
-  const aktivtProsessPanel = prosessPanelerData.find((d) => d.erAktiv);
+  const aktivtProsessPanel = prosessPanelerData.find(d => d.erAktiv);
 
-  const erReadOnlyFn = useCallback(erReadOnlyCurried(behandling, rettigheter, hasFetchError),
-    [behandling, rettigheter, hasFetchError]);
+  const erReadOnlyFn = useCallback(erReadOnlyCurried(behandling, rettigheter, hasFetchError), [
+    behandling,
+    rettigheter,
+    hasFetchError,
+  ]);
 
   const bekreftAksjonspunkter = useCallback(bekreftAksjonspunkterMedSideeffekter(), [behandling.versjon]);
 

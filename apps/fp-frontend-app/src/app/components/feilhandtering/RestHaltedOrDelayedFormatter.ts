@@ -8,11 +8,11 @@ const HALTED_PROCESS_TASK_MESSAGE_CODE = 'Rest.ErrorMessage.General';
 const DELAYED_PROCESS_TASK_MESSAGE_CODE = 'Rest.ErrorMessage.DownTime';
 
 export type ErrorData = {
-   message: string;
-   status: string;
-   eta: string;
-   type: string;
-}
+  message: string;
+  status: string;
+  eta: string;
+  type: string;
+};
 
 class RestHaltedOrDelayedFormatter implements Formatter<ErrorData> {
   type = ErrorEventType.POLLING_HALTED_OR_DELAYED;
@@ -26,7 +26,11 @@ class RestHaltedOrDelayedFormatter implements Formatter<ErrorData> {
       return ErrorMessage.withMessageCode(HALTED_PROCESS_TASK_MESSAGE_CODE, { errorDetails: message });
     }
     if (status === 'DELAYED') {
-      return ErrorMessage.withMessageCode(DELAYED_PROCESS_TASK_MESSAGE_CODE, { date: dateFormat(eta), time: timeFormat(eta), message });
+      return ErrorMessage.withMessageCode(DELAYED_PROCESS_TASK_MESSAGE_CODE, {
+        date: dateFormat(eta),
+        time: timeFormat(eta),
+        message,
+      });
     }
     return undefined;
   };

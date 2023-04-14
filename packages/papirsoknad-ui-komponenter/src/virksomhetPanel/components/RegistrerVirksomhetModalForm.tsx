@@ -14,11 +14,11 @@ import VirksomhetTypeNaringPanel, { FormValues as TypeNaringFormValues } from '.
 
 import styles from './registrerVirksomhetModalForm.module.css';
 
-export type FormValues = IdFormValues
-  & RelasjonFormValues
-  & RegnskapFormValues
-  & StartedEndretFormValues
-  & TypeNaringFormValues;
+export type FormValues = IdFormValues &
+  RelasjonFormValues &
+  RegnskapFormValues &
+  StartedEndretFormValues &
+  TypeNaringFormValues;
 
 interface OwnProps {
   showModal?: boolean;
@@ -60,19 +60,13 @@ const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps> = ({
     >
       <Modal.Content>
         <div className={styles.form}>
-          <Form
-            formMethods={formMethods}
-          >
-            <Heading size="small"><FormattedMessage id="Registrering.RegistrerVirksomhetModalForm.Title" /></Heading>
+          <Form formMethods={formMethods}>
+            <Heading size="small">
+              <FormattedMessage id="Registrering.RegistrerVirksomhetModalForm.Title" />
+            </Heading>
             <VerticalSpacer twentyPx />
-            <VirksomhetIdentifikasjonPanel
-              readOnly={readOnly}
-              alleKodeverk={alleKodeverk}
-            />
-            <VirksomhetTypeNaringPanel
-              readOnly={readOnly}
-              alleKodeverk={alleKodeverk}
-            />
+            <VirksomhetIdentifikasjonPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
+            <VirksomhetTypeNaringPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
             <VirksomhetStartetEndretPanel readOnly={readOnly} />
             <VirksomhetRegnskapPanel readOnly={readOnly} />
             <VerticalSpacer sixteenPx />

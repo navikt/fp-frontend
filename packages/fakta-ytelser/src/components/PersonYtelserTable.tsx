@@ -33,61 +33,75 @@ const formatDateToDDMMYYYY = (date: string): string => {
  *
  * Viser tilgrensede ytelser.
  */
-const PersonYtelserTable: FunctionComponent<OwnProps> = ({
-  ytelser,
-  relatertYtelseTyper,
-  relatertYtelseStatus,
-}) => {
+const PersonYtelserTable: FunctionComponent<OwnProps> = ({ ytelser, relatertYtelseTyper, relatertYtelseStatus }) => {
   const intl = useIntl();
 
-  const ytelseRows = ytelser && ytelser.map((ytelse) => {
-    const ytelseNavn = relatertYtelseTyper.filter((type) => type.kode === ytelse.relatertYtelseType)[0].navn;
+  const ytelseRows =
+    ytelser &&
+    ytelser
+      .map(ytelse => {
+        const ytelseNavn = relatertYtelseTyper.filter(type => type.kode === ytelse.relatertYtelseType)[0].navn;
 
-    const skalViseLenke = ytelse.relatertYtelseType === relatertYtelseType.ENGANGSSTONAD
-      || ytelse.relatertYtelseType === relatertYtelseType.FORELDREPENGER
-      || ytelse.relatertYtelseType === relatertYtelseType.SVANGERSKAPSPENGER;
+        const skalViseLenke =
+          ytelse.relatertYtelseType === relatertYtelseType.ENGANGSSTONAD ||
+          ytelse.relatertYtelseType === relatertYtelseType.FORELDREPENGER ||
+          ytelse.relatertYtelseType === relatertYtelseType.SVANGERSKAPSPENGER;
 
-    if (ytelse.tilgrensendeYtelserListe.length === 0) {
-      return [{
-        navn: ytelseNavn,
-        periode: intl.formatMessage({ id: 'PersonYtelserTable.Ingen' }),
-        status: '',
-        saksnummer: '',
-        skalViseLenke,
-      }];
-    }
+        if (ytelse.tilgrensendeYtelserListe.length === 0) {
+          return [
+            {
+              navn: ytelseNavn,
+              periode: intl.formatMessage({ id: 'PersonYtelserTable.Ingen' }),
+              status: '',
+              saksnummer: '',
+              skalViseLenke,
+            },
+          ];
+        }
 
-    return ytelse.tilgrensendeYtelserListe.map((ytelseInfo, innerIndex) => {
-      const tilDato = formatDateToDDMMYYYY(ytelseInfo.periodeTilDato) || '';
-      const fraDato = formatDateToDDMMYYYY(ytelseInfo.periodeFraDato) || '';
+        return ytelse.tilgrensendeYtelserListe.map((ytelseInfo, innerIndex) => {
+          const tilDato = formatDateToDDMMYYYY(ytelseInfo.periodeTilDato) || '';
+          const fraDato = formatDateToDDMMYYYY(ytelseInfo.periodeFraDato) || '';
 
-      const statusNavn = relatertYtelseStatus.filter((status) => status.kode === ytelseInfo.status)[0].navn;
+          const statusNavn = relatertYtelseStatus.filter(status => status.kode === ytelseInfo.status)[0].navn;
 
-      return {
-        navn: innerIndex === 0 ? ytelseNavn : '',
-        periode: `${fraDato} - ${tilDato}`,
-        status: statusNavn,
-        saksnummer: ytelseInfo.saksNummer,
-        skalViseLenke,
-      };
-    });
-  }).reduce((allRows, rows) => allRows.concat(rows), []);
+          return {
+            navn: innerIndex === 0 ? ytelseNavn : '',
+            periode: `${fraDato} - ${tilDato}`,
+            status: statusNavn,
+            saksnummer: ytelseInfo.saksNummer,
+            skalViseLenke,
+          };
+        });
+      })
+      .reduce((allRows, rows) => allRows.concat(rows), []);
 
   return (
     <Table headerTextCodes={HEADER_TEXT_CODES} classNameTable={styles.tableStyle} noHover>
-      {ytelseRows && ytelseRows.map((ytelse, index) => (
-        <TableRow key={`index${index + 1}`}>
-          <TableColumn>{ytelse.navn ? <BodyShort size="small">{ytelse.navn}</BodyShort> : ''}</TableColumn>
-          <TableColumn><BodyShort size="small">{ytelse.periode}</BodyShort></TableColumn>
-          <TableColumn>{ytelse.status ? <BodyShort size="small">{ytelse.status}</BodyShort> : ''}</TableColumn>
-          <TableColumn>
-            {ytelse.saksnummer && ytelse.skalViseLenke
-              && <BodyShort size="small"><Link href={`/fagsak/${ytelse.saksnummer}`} target="_blank">{ytelse.saksnummer}</Link></BodyShort>}
-            {ytelse.saksnummer && !ytelse.skalViseLenke
-              ? <BodyShort size="small">{ytelse.saksnummer}</BodyShort> : ''}
-          </TableColumn>
-        </TableRow>
-      ))}
+      {ytelseRows &&
+        ytelseRows.map((ytelse, index) => (
+          <TableRow key={`index${index + 1}`}>
+            <TableColumn>{ytelse.navn ? <BodyShort size="small">{ytelse.navn}</BodyShort> : ''}</TableColumn>
+            <TableColumn>
+              <BodyShort size="small">{ytelse.periode}</BodyShort>
+            </TableColumn>
+            <TableColumn>{ytelse.status ? <BodyShort size="small">{ytelse.status}</BodyShort> : ''}</TableColumn>
+            <TableColumn>
+              {ytelse.saksnummer && ytelse.skalViseLenke && (
+                <BodyShort size="small">
+                  <Link href={`/fagsak/${ytelse.saksnummer}`} target="_blank">
+                    {ytelse.saksnummer}
+                  </Link>
+                </BodyShort>
+              )}
+              {ytelse.saksnummer && !ytelse.skalViseLenke ? (
+                <BodyShort size="small">{ytelse.saksnummer}</BodyShort>
+              ) : (
+                ''
+              )}
+            </TableColumn>
+          </TableRow>
+        ))}
     </Table>
   );
 };

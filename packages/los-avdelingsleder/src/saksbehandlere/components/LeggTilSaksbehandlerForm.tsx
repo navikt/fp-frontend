@@ -1,14 +1,10 @@
 import React, { FunctionComponent, useState, useMemo } from 'react';
-import {
-  useIntl, FormattedMessage,
-} from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { BodyShort, Button, Label } from '@navikt/ds-react';
 import { Form, InputField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import {
-  FlexContainer, FlexRow, FlexColumn, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { FlexContainer, FlexRow, FlexColumn, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import Saksbehandler from '../../typer/saksbehandlerAvdelingTsType';
@@ -19,18 +15,21 @@ import styles from './leggTilSaksbehandlerForm.module.css';
 const erSaksbehandlerLagtTilAllerede = (
   saksbehandler?: Saksbehandler,
   avdelingensSaksbehandlere: Saksbehandler[] = [],
-) => avdelingensSaksbehandlere instanceof Array
-    && avdelingensSaksbehandlere.some((s) => saksbehandler && s.brukerIdent.toLowerCase() === saksbehandler.brukerIdent.toLowerCase());
+) =>
+  avdelingensSaksbehandlere instanceof Array &&
+  avdelingensSaksbehandlere.some(
+    s => saksbehandler && s.brukerIdent.toLowerCase() === saksbehandler.brukerIdent.toLowerCase(),
+  );
 
 interface OwnProps {
   valgtAvdelingEnhet: string;
   avdelingensSaksbehandlere: Saksbehandler[];
-  hentAvdelingensSaksbehandlere: (params: {avdelingEnhet: string}) => void;
+  hentAvdelingensSaksbehandlere: (params: { avdelingEnhet: string }) => void;
 }
 
 type FormValues = {
   brukerIdent: string;
-}
+};
 
 /**
  * LeggTilSaksbehandlerForm
@@ -44,10 +43,15 @@ const LeggTilSaksbehandlerForm: FunctionComponent<OwnProps> = ({
   const [leggerTilNySaksbehandler, setLeggetTilNySaksbehandler] = useState(false);
 
   const {
-    data: saksbehandler, startRequest: finnSaksbehandler, state, resetRequestData: resetSaksbehandlerSok,
+    data: saksbehandler,
+    startRequest: finnSaksbehandler,
+    state,
+    resetRequestData: resetSaksbehandlerSok,
   } = restApiHooks.useRestApiRunner(RestApiPathsKeys.SAKSBEHANDLER_SOK);
 
-  const { startRequest: leggTilSaksbehandler } = restApiHooks.useRestApiRunner(RestApiPathsKeys.OPPRETT_NY_SAKSBEHANDLER);
+  const { startRequest: leggTilSaksbehandler } = restApiHooks.useRestApiRunner(
+    RestApiPathsKeys.OPPRETT_NY_SAKSBEHANDLER,
+  );
 
   const erLagtTilAllerede = erSaksbehandlerLagtTilAllerede(saksbehandler, avdelingensSaksbehandlere);
 
@@ -88,7 +92,10 @@ const LeggTilSaksbehandlerForm: FunctionComponent<OwnProps> = ({
   const formMethods = useForm<FormValues>();
 
   return (
-    <Form<FormValues> formMethods={formMethods} onSubmit={(values: { brukerIdent: string}) => finnSaksbehandler({ brukerIdent: values.brukerIdent })}>
+    <Form<FormValues>
+      formMethods={formMethods}
+      onSubmit={(values: { brukerIdent: string }) => finnSaksbehandler({ brukerIdent: values.brukerIdent })}
+    >
       <Label size="small">
         <FormattedMessage id="LeggTilSaksbehandlerForm.LeggTil" />
       </Label>
@@ -116,41 +123,39 @@ const LeggTilSaksbehandlerForm: FunctionComponent<OwnProps> = ({
         </FlexRow>
       </FlexContainer>
       {state === RestApiState.SUCCESS && (
-      <>
-        <BodyShort size="small">
-          {formattedText}
-        </BodyShort>
-        <VerticalSpacer sixteenPx />
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <Button
-                size="small"
-                variant="primary"
-                autoFocus
-                onClick={() => leggTilSaksbehandlerFn(formMethods.reset)}
-                loading={leggerTilNySaksbehandler}
-                disabled={leggerTilNySaksbehandler || erLagtTilAllerede || !saksbehandler}
-                type="button"
-              >
-                <FormattedMessage id="LeggTilSaksbehandlerForm.LeggTilIListen" />
-              </Button>
-            </FlexColumn>
-            <FlexColumn>
-              <Button
-                size="small"
-                variant="secondary"
-                tabIndex={0}
-                disabled={leggerTilNySaksbehandler}
-                onClick={() => resetSaksbehandlerSokFn(formMethods.reset)}
-                type="button"
-              >
-                <FormattedMessage id="LeggTilSaksbehandlerForm.Nullstill" />
-              </Button>
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
-      </>
+        <>
+          <BodyShort size="small">{formattedText}</BodyShort>
+          <VerticalSpacer sixteenPx />
+          <FlexContainer>
+            <FlexRow>
+              <FlexColumn>
+                <Button
+                  size="small"
+                  variant="primary"
+                  autoFocus
+                  onClick={() => leggTilSaksbehandlerFn(formMethods.reset)}
+                  loading={leggerTilNySaksbehandler}
+                  disabled={leggerTilNySaksbehandler || erLagtTilAllerede || !saksbehandler}
+                  type="button"
+                >
+                  <FormattedMessage id="LeggTilSaksbehandlerForm.LeggTilIListen" />
+                </Button>
+              </FlexColumn>
+              <FlexColumn>
+                <Button
+                  size="small"
+                  variant="secondary"
+                  tabIndex={0}
+                  disabled={leggerTilNySaksbehandler}
+                  onClick={() => resetSaksbehandlerSokFn(formMethods.reset)}
+                  type="button"
+                >
+                  <FormattedMessage id="LeggTilSaksbehandlerForm.Nullstill" />
+                </Button>
+              </FlexColumn>
+            </FlexRow>
+          </FlexContainer>
+        </>
       )}
     </Form>
   );

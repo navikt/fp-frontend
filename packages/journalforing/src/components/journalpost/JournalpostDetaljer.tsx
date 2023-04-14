@@ -3,16 +3,19 @@ import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Heading, BodyLong } from '@navikt/ds-react';
 
-import {
-  FlexColumn, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form } from '@navikt/ft-form-hooks';
 import VelgSakForm, { transformValues as transformValuesSak } from './innhold/VelgSakForm';
 import Journalpost from '../../typer/journalpostTsType';
-import JournalførSubmitValue, { OppdaterJournalførTittlerSubmitValue } from '../../typer/ferdigstillJournalføringSubmit';
+import JournalførSubmitValue, {
+  OppdaterJournalførTittlerSubmitValue,
+} from '../../typer/ferdigstillJournalføringSubmit';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import SakDetaljer from './innhold/SakDetaljer';
-import DokumentForm, { transformValues as transformValuesDokumenter, buildInitialValues as buildInitialValuesDokumenter } from './innhold/DokumentForm';
+import DokumentForm, {
+  transformValues as transformValuesDokumenter,
+  buildInitialValues as buildInitialValuesDokumenter,
+} from './innhold/DokumentForm';
 import BrukerAvsenderPanel from './innhold/BrukerAvsenderPanel';
 import JournalføringFormValues from '../../typer/journalføringFormValues';
 import JournalpostTittelForm from './innhold/JournalpostTittelForm';
@@ -34,7 +37,10 @@ const buildInitialValues = (journalpost: Journalpost): JournalføringFormValues 
   };
 };
 
-const transformTittelValues = (values: JournalføringFormValues, journalpost: Journalpost): OppdaterJournalførTittlerSubmitValue | undefined => {
+const transformTittelValues = (
+  values: JournalføringFormValues,
+  journalpost: Journalpost,
+): OppdaterJournalførTittlerSubmitValue | undefined => {
   const nyTittel = journalpost.tittel !== values.journalpostTittel ? values.journalpostTittel : undefined;
   const endredeDokumenter = transformValuesDokumenter(values, journalpost.dokumenter || []);
   if (nyTittel || endredeDokumenter.length > 0) {
@@ -46,7 +52,11 @@ const transformTittelValues = (values: JournalføringFormValues, journalpost: Jo
   return undefined;
 };
 
-const transformValues = (values: JournalføringFormValues, journalpost: Journalpost, oppgave: OppgaveOversikt): JournalførSubmitValue => {
+const transformValues = (
+  values: JournalføringFormValues,
+  journalpost: Journalpost,
+  oppgave: OppgaveOversikt,
+): JournalførSubmitValue => {
   if (!oppgave.enhetId) {
     throw Error('Kan ikke journalføre uten at enhet er satt');
   }
@@ -88,7 +98,9 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
         <>
           <FlexRow>
             <FlexColumn>
-              <Heading size="small"><FormattedMessage id="ValgtOppgave.Notat" /></Heading>
+              <Heading size="small">
+                <FormattedMessage id="ValgtOppgave.Notat" />
+              </Heading>
             </FlexColumn>
           </FlexRow>
           <FlexRow>
@@ -107,14 +119,13 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
           </Heading>
         </FlexColumn>
       </FlexRow>
-      {journalpost.dokumenter
-        && (
-          <>
-            <VerticalSpacer eightPx />
-            <DokumentForm journalpost={journalpost} />
-            <VerticalSpacer thirtyTwoPx />
-          </>
-        )}
+      {journalpost.dokumenter && (
+        <>
+          <VerticalSpacer eightPx />
+          <DokumentForm journalpost={journalpost} />
+          <VerticalSpacer thirtyTwoPx />
+        </>
+      )}
       <FlexRow>
         <FlexColumn>
           <Heading size="small">
@@ -123,7 +134,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
         </FlexColumn>
       </FlexRow>
       <VerticalSpacer eightPx />
-      {saker.map((sak) => (
+      {saker.map(sak => (
         <SakDetaljer sak={sak} key={sak.saksnummer} />
       ))}
       <VerticalSpacer thirtyTwoPx />

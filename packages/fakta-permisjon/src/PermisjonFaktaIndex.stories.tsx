@@ -3,7 +3,11 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 
 import {
-  Aksjonspunkt, AksjonspunktÅrsak, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, Behandling,
+  Aksjonspunkt,
+  AksjonspunktÅrsak,
+  ArbeidOgInntektsmelding,
+  ArbeidsgiverOpplysningerPerId,
+  Behandling,
 } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
@@ -25,18 +29,14 @@ const Template: Story<{
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
   readOnly?: boolean;
-}> = ({
-  aksjonspunkter = [],
-  arbeidOgInntekt,
-  arbeidsgiverOpplysningerPerId,
-  submitCallback,
-  readOnly = false,
-}) => (
+}> = ({ aksjonspunkter = [], arbeidOgInntekt, arbeidsgiverOpplysningerPerId, submitCallback, readOnly = false }) => (
   <PermisjonFaktaIndex
     saksnummer="1234567"
-    behandling={{
-      uuid: '1223-2323-2323-22332',
-    } as Behandling}
+    behandling={
+      {
+        uuid: '1223-2323-2323-22332',
+      } as Behandling
+    }
     aksjonspunkter={aksjonspunkter}
     submittable
     harApneAksjonspunkter
@@ -53,10 +53,12 @@ const Template: Story<{
 export const EttArbeidsforholdUtenSluttdatoForPermisjon = Template.bind({});
 EttArbeidsforholdUtenSluttdatoForPermisjon.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_PERMISJON,
-    status: aksjonspunktStatus.OPPRETTET,
-  } as Aksjonspunkt],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_PERMISJON,
+      status: aksjonspunktStatus.OPPRETTET,
+    } as Aksjonspunkt,
+  ],
   arbeidsgiverOpplysningerPerId: {
     910909088: {
       erPrivatPerson: false,
@@ -67,61 +69,72 @@ EttArbeidsforholdUtenSluttdatoForPermisjon.args = {
     },
   },
   arbeidOgInntekt: {
-    arbeidsforhold: [{
-      arbeidsgiverIdent: '910909088',
-      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
-      eksternArbeidsforholdId: 'ARB001-001',
-      fom: '2019-12-06',
-      tom: '9999-12-31',
-      stillingsprosent: 100,
-      permisjonOgMangel: {
-        permisjonFom: '2022-10-01',
-        type: 'PERMITTERING',
-        årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
+    arbeidsforhold: [
+      {
+        arbeidsgiverIdent: '910909088',
+        internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
+        eksternArbeidsforholdId: 'ARB001-001',
+        fom: '2019-12-06',
+        tom: '9999-12-31',
+        stillingsprosent: 100,
+        permisjonOgMangel: {
+          permisjonFom: '2022-10-01',
+          type: 'PERMITTERING',
+          årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
+        },
       },
-    }, {
-      arbeidsgiverIdent: '91090909+',
-      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5',
-      eksternArbeidsforholdId: 'ARB001-002',
-      fom: '2019-12-06',
-      tom: '9999-12-31',
-      stillingsprosent: 100,
-      permisjonOgMangel: {
-        permisjonFom: '2022-10-01',
-        permisjonTom: '2022-12-01',
-        type: 'PERMITTERING',
+      {
+        arbeidsgiverIdent: '91090909+',
+        internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5',
+        eksternArbeidsforholdId: 'ARB001-002',
+        fom: '2019-12-06',
+        tom: '9999-12-31',
+        stillingsprosent: 100,
+        permisjonOgMangel: {
+          permisjonFom: '2022-10-01',
+          permisjonTom: '2022-12-01',
+          type: 'PERMITTERING',
+        },
       },
-    }],
+    ],
     inntektsmeldinger: [],
-    inntekter: [{
-      arbeidsgiverIdent: '910909088',
-      inntekter: [{
-        beløp: 40000,
-        fom: '2020-06-01',
-        tom: '2020-06-30',
-        type: 'LØNN',
-      }, {
-        beløp: 41000,
-        fom: '2021-07-01',
-        tom: '2021-07-31',
-        type: 'LØNN',
-      }, {
-        beløp: 40000,
-        fom: '2020-08-01',
-        tom: '2020-08-31',
-        type: 'LØNN',
-      }, {
-        beløp: 40000,
-        fom: '2020-09-01',
-        tom: '2020-09-30',
-        type: 'LØNN',
-      }, {
-        beløp: 40000,
-        fom: '2021-11-01',
-        tom: '2021-11-30',
-        type: 'LØNN',
-      }],
-    }],
+    inntekter: [
+      {
+        arbeidsgiverIdent: '910909088',
+        inntekter: [
+          {
+            beløp: 40000,
+            fom: '2020-06-01',
+            tom: '2020-06-30',
+            type: 'LØNN',
+          },
+          {
+            beløp: 41000,
+            fom: '2021-07-01',
+            tom: '2021-07-31',
+            type: 'LØNN',
+          },
+          {
+            beløp: 40000,
+            fom: '2020-08-01',
+            tom: '2020-08-31',
+            type: 'LØNN',
+          },
+          {
+            beløp: 40000,
+            fom: '2020-09-01',
+            tom: '2020-09-30',
+            type: 'LØNN',
+          },
+          {
+            beløp: 40000,
+            fom: '2021-11-01',
+            tom: '2021-11-30',
+            type: 'LØNN',
+          },
+        ],
+      },
+    ],
     skjæringstidspunkt: '2021-11-10',
   },
 };
@@ -129,10 +142,12 @@ EttArbeidsforholdUtenSluttdatoForPermisjon.args = {
 export const FlereArbeidsforhold = Template.bind({});
 FlereArbeidsforhold.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-    status: aksjonspunktStatus.OPPRETTET,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+      status: aksjonspunktStatus.OPPRETTET,
+    },
+  ] as Aksjonspunkt[],
   arbeidsgiverOpplysningerPerId: {
     910909088: {
       erPrivatPerson: false,
@@ -157,101 +172,121 @@ FlereArbeidsforhold.args = {
     },
   },
   arbeidOgInntekt: {
-    arbeidsforhold: [{
-      arbeidsgiverIdent: '910909088',
-      eksternArbeidsforholdId: 'ARB001-001',
-      fom: '2019-12-06',
-      internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
-      stillingsprosent: 100,
-      tom: '9999-12-31',
-      permisjonOgMangel: {
-        permisjonFom: '2022-10-02',
-        type: 'PERMITTERING',
-        årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
+    arbeidsforhold: [
+      {
+        arbeidsgiverIdent: '910909088',
+        eksternArbeidsforholdId: 'ARB001-001',
+        fom: '2019-12-06',
+        internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
+        stillingsprosent: 100,
+        tom: '9999-12-31',
+        permisjonOgMangel: {
+          permisjonFom: '2022-10-02',
+          type: 'PERMITTERING',
+          årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
+        },
       },
-    }, {
-      arbeidsgiverIdent: '910909090',
-      eksternArbeidsforholdId: 'ARB001-002',
-      fom: '2019-06-06',
-      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d',
-      stillingsprosent: 80,
-      tom: '2021-12-31',
-      årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
-      permisjonOgMangel: {
-        permisjonFom: '2021-11-07',
-        type: 'PERMITTERING',
-        årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
+      {
+        arbeidsgiverIdent: '910909090',
+        eksternArbeidsforholdId: 'ARB001-002',
+        fom: '2019-06-06',
+        internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d',
+        stillingsprosent: 80,
+        tom: '2021-12-31',
+        årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
+        permisjonOgMangel: {
+          permisjonFom: '2021-11-07',
+          type: 'PERMITTERING',
+          årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
+        },
       },
-    }],
-    inntektsmeldinger: [{
-      arbeidsgiverIdent: '910909088',
-      eksternArbeidsforholdId: 'ARB001-001',
-      inntektPrMnd: 30000,
-      internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
-      kontaktpersonNavn: 'Corpolarsen',
-      kontaktpersonNummer: '41925090',
-      motattDato: '2021-12-06',
-      refusjonPrMnd: 20000,
-      journalpostId: '1',
-      dokumentId: '2',
-    }],
-    inntekter: [{
-      arbeidsgiverIdent: '910909088',
-      inntekter: [{
-        beløp: 40000,
-        fom: '2020-06-01',
-        tom: '2020-06-30',
-        type: 'LØNN',
-      }, {
-        beløp: 40000,
-        fom: '2020-07-01',
-        tom: '2020-07-31',
-        type: 'LØNN',
-      }, {
-        beløp: 40000,
-        fom: '2020-08-01',
-        tom: '2020-08-31',
-        type: 'LØNN',
-      }, {
-        beløp: 40000,
-        fom: '2020-09-01',
-        tom: '2020-09-30',
-        type: 'LØNN',
-      }, {
-        beløp: 40000,
-        fom: '2021-11-01',
-        tom: '2021-11-30',
-        type: 'LØNN',
-      }],
-    }, {
-      arbeidsgiverIdent: '910909090',
-      inntekter: [{
-        beløp: 30000,
-        fom: '2020-06-01',
-        tom: '2020-06-30',
-        type: 'LØNN',
-      }, {
-        beløp: 31000,
-        fom: '2021-07-01',
-        tom: '2021-07-31',
-        type: 'LØNN',
-      }, {
-        beløp: 30000,
-        fom: '2020-08-01',
-        tom: '2020-08-31',
-        type: 'LØNN',
-      }, {
-        beløp: 30000,
-        fom: '2020-09-01',
-        tom: '2020-09-30',
-        type: 'LØNN',
-      }, {
-        beløp: 30000,
-        fom: '2021-11-01',
-        tom: '2021-11-30',
-        type: 'LØNN',
-      }],
-    }],
+    ],
+    inntektsmeldinger: [
+      {
+        arbeidsgiverIdent: '910909088',
+        eksternArbeidsforholdId: 'ARB001-001',
+        inntektPrMnd: 30000,
+        internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
+        kontaktpersonNavn: 'Corpolarsen',
+        kontaktpersonNummer: '41925090',
+        motattDato: '2021-12-06',
+        refusjonPrMnd: 20000,
+        journalpostId: '1',
+        dokumentId: '2',
+      },
+    ],
+    inntekter: [
+      {
+        arbeidsgiverIdent: '910909088',
+        inntekter: [
+          {
+            beløp: 40000,
+            fom: '2020-06-01',
+            tom: '2020-06-30',
+            type: 'LØNN',
+          },
+          {
+            beløp: 40000,
+            fom: '2020-07-01',
+            tom: '2020-07-31',
+            type: 'LØNN',
+          },
+          {
+            beløp: 40000,
+            fom: '2020-08-01',
+            tom: '2020-08-31',
+            type: 'LØNN',
+          },
+          {
+            beløp: 40000,
+            fom: '2020-09-01',
+            tom: '2020-09-30',
+            type: 'LØNN',
+          },
+          {
+            beløp: 40000,
+            fom: '2021-11-01',
+            tom: '2021-11-30',
+            type: 'LØNN',
+          },
+        ],
+      },
+      {
+        arbeidsgiverIdent: '910909090',
+        inntekter: [
+          {
+            beløp: 30000,
+            fom: '2020-06-01',
+            tom: '2020-06-30',
+            type: 'LØNN',
+          },
+          {
+            beløp: 31000,
+            fom: '2021-07-01',
+            tom: '2021-07-31',
+            type: 'LØNN',
+          },
+          {
+            beløp: 30000,
+            fom: '2020-08-01',
+            tom: '2020-08-31',
+            type: 'LØNN',
+          },
+          {
+            beløp: 30000,
+            fom: '2020-09-01',
+            tom: '2020-09-30',
+            type: 'LØNN',
+          },
+          {
+            beløp: 30000,
+            fom: '2021-11-01',
+            tom: '2021-11-30',
+            type: 'LØNN',
+          },
+        ],
+      },
+    ],
     skjæringstidspunkt: '2021-11-10',
   },
 };
@@ -259,10 +294,12 @@ FlereArbeidsforhold.args = {
 export const FlereArbeidsforholdFraSammeArbeidsgiver = Template.bind({});
 FlereArbeidsforholdFraSammeArbeidsgiver.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-    status: aksjonspunktStatus.OPPRETTET,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+      status: aksjonspunktStatus.OPPRETTET,
+    },
+  ] as Aksjonspunkt[],
   arbeidsgiverOpplysningerPerId: {
     910909088: {
       erPrivatPerson: false,
@@ -273,70 +310,83 @@ FlereArbeidsforholdFraSammeArbeidsgiver.args = {
     },
   },
   arbeidOgInntekt: {
-    arbeidsforhold: [{
-      arbeidsgiverIdent: '910909088',
-      eksternArbeidsforholdId: 'ARB001-001-asdfasdfasdf-asdfadsfertbrtynet65y454hrthfdsgfbdsfgb',
-      fom: '2019-12-06',
-      internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
-      stillingsprosent: 100,
-      tom: '9999-12-31',
-      permisjonOgMangel: {
-        permisjonFom: '2022-10-02',
-        type: 'VELFERDSPERMISJON',
-        årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
+    arbeidsforhold: [
+      {
+        arbeidsgiverIdent: '910909088',
+        eksternArbeidsforholdId: 'ARB001-001-asdfasdfasdf-asdfadsfertbrtynet65y454hrthfdsgfbdsfgb',
+        fom: '2019-12-06',
+        internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
+        stillingsprosent: 100,
+        tom: '9999-12-31',
+        permisjonOgMangel: {
+          permisjonFom: '2022-10-02',
+          type: 'VELFERDSPERMISJON',
+          årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
+        },
       },
-    }, {
-      arbeidsgiverIdent: '910909088',
-      eksternArbeidsforholdId: 'ARB001-002',
-      fom: '2019-06-06',
-      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d',
-      stillingsprosent: 80,
-      tom: '2021-12-31',
-      permisjonOgMangel: {
-        permisjonFom: '2021-11-07',
-        type: 'PERMITTERING',
-        årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
+      {
+        arbeidsgiverIdent: '910909088',
+        eksternArbeidsforholdId: 'ARB001-002',
+        fom: '2019-06-06',
+        internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d',
+        stillingsprosent: 80,
+        tom: '2021-12-31',
+        permisjonOgMangel: {
+          permisjonFom: '2021-11-07',
+          type: 'PERMITTERING',
+          årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
+        },
       },
-    }],
-    inntektsmeldinger: [{
-      arbeidsgiverIdent: '910909088',
-      eksternArbeidsforholdId: 'ARB001-001-asdfasdfasdf-asdfadsfertbrtynet65y454hrthfdsgfbdsfgb',
-      inntektPrMnd: 30000,
-      internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
-      kontaktpersonNavn: 'Corpolarsen',
-      kontaktpersonNummer: '41925090',
-      motattDato: '2021-12-06',
-      refusjonPrMnd: 20000,
-      journalpostId: '1',
-      dokumentId: '2',
-    }, {
-      arbeidsgiverIdent: '910909088',
-      eksternArbeidsforholdId: 'ARB001-002',
-      inntektPrMnd: 10000,
-      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d',
-      kontaktpersonNavn: 'Corpolarsen',
-      kontaktpersonNummer: '41925090',
-      motattDato: '2021-12-06',
-      journalpostId: '1',
-      dokumentId: '2',
-    }],
-    inntekter: [{
-      arbeidsgiverIdent: '910909088',
-      inntekter: [{
-        beløp: 40000,
-        fom: '2020-06-01',
-        tom: '2020-06-30',
-        type: 'LØNN',
-      }],
-    }, {
-      arbeidsgiverIdent: '910909090',
-      inntekter: [{
-        beløp: 30000,
-        fom: '2020-06-01',
-        tom: '2020-06-30',
-        type: 'LØNN',
-      }],
-    }],
+    ],
+    inntektsmeldinger: [
+      {
+        arbeidsgiverIdent: '910909088',
+        eksternArbeidsforholdId: 'ARB001-001-asdfasdfasdf-asdfadsfertbrtynet65y454hrthfdsgfbdsfgb',
+        inntektPrMnd: 30000,
+        internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
+        kontaktpersonNavn: 'Corpolarsen',
+        kontaktpersonNummer: '41925090',
+        motattDato: '2021-12-06',
+        refusjonPrMnd: 20000,
+        journalpostId: '1',
+        dokumentId: '2',
+      },
+      {
+        arbeidsgiverIdent: '910909088',
+        eksternArbeidsforholdId: 'ARB001-002',
+        inntektPrMnd: 10000,
+        internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d',
+        kontaktpersonNavn: 'Corpolarsen',
+        kontaktpersonNummer: '41925090',
+        motattDato: '2021-12-06',
+        journalpostId: '1',
+        dokumentId: '2',
+      },
+    ],
+    inntekter: [
+      {
+        arbeidsgiverIdent: '910909088',
+        inntekter: [
+          {
+            beløp: 40000,
+            fom: '2020-06-01',
+            tom: '2020-06-30',
+            type: 'LØNN',
+          },
+        ],
+      },
+      {
+        arbeidsgiverIdent: '910909090',
+        inntekter: [
+          {
+            beløp: 30000,
+            fom: '2020-06-01',
+            tom: '2020-06-30',
+            type: 'LØNN',
+          },
+        ],
+      },
+    ],
     skjæringstidspunkt: '2021-11-10',
   },
 };
@@ -344,10 +394,12 @@ FlereArbeidsforholdFraSammeArbeidsgiver.args = {
 export const VisFødselsdatoNårPrivatperson = Template.bind({});
 VisFødselsdatoNårPrivatperson.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_PERMISJON,
-    status: aksjonspunktStatus.OPPRETTET,
-  } as Aksjonspunkt],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_PERMISJON,
+      status: aksjonspunktStatus.OPPRETTET,
+    } as Aksjonspunkt,
+  ],
   arbeidsgiverOpplysningerPerId: {
     910909088: {
       erPrivatPerson: true,
@@ -358,19 +410,21 @@ VisFødselsdatoNårPrivatperson.args = {
     },
   },
   arbeidOgInntekt: {
-    arbeidsforhold: [{
-      arbeidsgiverIdent: '910909088',
-      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
-      eksternArbeidsforholdId: 'ARB001-001',
-      fom: '2019-12-06',
-      tom: '9999-12-31',
-      stillingsprosent: 100,
-      permisjonOgMangel: {
-        permisjonFom: '2022-10-01',
-        type: 'PERMITTERING',
-        årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
+    arbeidsforhold: [
+      {
+        arbeidsgiverIdent: '910909088',
+        internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
+        eksternArbeidsforholdId: 'ARB001-001',
+        fom: '2019-12-06',
+        tom: '9999-12-31',
+        stillingsprosent: 100,
+        permisjonOgMangel: {
+          permisjonFom: '2022-10-01',
+          type: 'PERMITTERING',
+          årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
+        },
       },
-    }],
+    ],
     inntektsmeldinger: [],
     inntekter: [],
     skjæringstidspunkt: '2021-11-10',

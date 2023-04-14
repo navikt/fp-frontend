@@ -1,9 +1,5 @@
 import { Behandling } from '@navikt/ft-types';
-import {
-  BehandlingStatus,
-  BehandlingType,
-  AksjonspunktStatus,
-} from '@navikt/ft-kodeverk';
+import { BehandlingStatus, BehandlingType, AksjonspunktStatus } from '@navikt/ft-kodeverk';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import getAlleMerknaderFraBeslutter from './getAlleMerknaderFraBeslutter';
@@ -18,13 +14,15 @@ describe('<getAlleMerknaderFraBeslutter>', () => {
     behandlingHenlagt: false,
   };
 
-  const aksjonspunkter = [{
-    status: AksjonspunktStatus.OPPRETTET,
-    definisjon: AksjonspunktCode.AVKLAR_VERGE,
-    kanLoses: true,
-    toTrinnsBehandling: true,
-    toTrinnsBehandlingGodkjent: false,
-  }];
+  const aksjonspunkter = [
+    {
+      status: AksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktCode.AVKLAR_VERGE,
+      kanLoses: true,
+      toTrinnsBehandling: true,
+      toTrinnsBehandlingGodkjent: false,
+    },
+  ];
 
   it('skal hente alle merknader fra beslutter når behandlingstatus er BEHANDLING_UTREDER', () => {
     const merknader = getAlleMerknaderFraBeslutter(behandling as Behandling, aksjonspunkter);

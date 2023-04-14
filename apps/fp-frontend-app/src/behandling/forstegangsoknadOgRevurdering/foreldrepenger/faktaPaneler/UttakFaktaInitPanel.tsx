@@ -1,13 +1,16 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { UttakFaktaIndex } from '@navikt/fp-fakta-uttak';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
-  AksessRettigheter, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, KontrollerFaktaPeriode, Ytelsefordeling, Fagsak,
+  AksessRettigheter,
+  ArbeidsgiverOpplysningerPerId,
+  FaktaArbeidsforhold,
+  KontrollerFaktaPeriode,
+  Ytelsefordeling,
+  Fagsak,
 } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
@@ -34,7 +37,7 @@ type EndepunktPanelData = {
   uttakKontrollerFaktaPerioderV2: KontrollerFaktaPeriode[];
   faktaArbeidsforhold: FaktaArbeidsforhold[];
   ytelsefordeling: Ytelsefordeling;
-}
+};
 
 interface OwnProps {
   rettigheter: AksessRettigheter;
@@ -58,8 +61,11 @@ const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = (
     overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={FaktaPanelCode.UTTAK}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'UttakInfoPanel.FaktaUttak' })}
-    skalPanelVisesIMeny={() => props.behandling.harSattEndringsdato && props.requestApi.hasPath(FpBehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER_V2.name)}
-    renderPanel={(data) => (
+    skalPanelVisesIMeny={() =>
+      props.behandling.harSattEndringsdato &&
+      props.requestApi.hasPath(FpBehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER_V2.name)
+    }
+    renderPanel={data => (
       <UttakFaktaIndex
         fagsak={fagsak}
         kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}

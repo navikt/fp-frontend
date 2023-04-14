@@ -6,15 +6,23 @@ import { Label } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
 import {
-  VilkarType, vilkarUtfallType, KodeverkType, AksjonspunktCode, tilretteleggingType, aksjonspunktStatus,
+  VilkarType,
+  vilkarUtfallType,
+  KodeverkType,
+  AksjonspunktCode,
+  tilretteleggingType,
+  aksjonspunktStatus,
 } from '@navikt/fp-kodeverk';
 import {
-  ProsessStegBegrunnelseTextFieldNew, VilkarResultPicker, ProsessPanelTemplate,
+  ProsessStegBegrunnelseTextFieldNew,
+  VilkarResultPicker,
+  ProsessPanelTemplate,
 } from '@navikt/fp-prosess-felles';
 import {
   Aksjonspunkt,
   AlleKodeverk,
-  ArbeidsforholdFodselOgTilrettelegging, ArbeidsforholdTilretteleggingDato,
+  ArbeidsforholdFodselOgTilrettelegging,
+  ArbeidsforholdTilretteleggingDato,
   Behandling,
   FodselOgTilrettelegging,
   Vilkar,
@@ -23,25 +31,28 @@ import { BekreftSvangerskapspengervilkarAp } from '@navikt/fp-types-avklar-aksjo
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 const finnesUttakPåArbfor = (arbfor: ArbeidsforholdFodselOgTilrettelegging): boolean => {
-  const finnesAnnenTilretteleggingEnnHel = arbfor.tilretteleggingDatoer
-    .some((dato: ArbeidsforholdTilretteleggingDato) => dato.type !== tilretteleggingType.HEL_TILRETTELEGGING);
-  const finnesHelTilretteleggingEtterBehovOppstår = arbfor.tilretteleggingDatoer
-    .some((dato: ArbeidsforholdTilretteleggingDato) => dato.type === tilretteleggingType.HEL_TILRETTELEGGING
-    && moment(dato.fom).isAfter(moment(arbfor.tilretteleggingBehovFom)));
+  const finnesAnnenTilretteleggingEnnHel = arbfor.tilretteleggingDatoer.some(
+    (dato: ArbeidsforholdTilretteleggingDato) => dato.type !== tilretteleggingType.HEL_TILRETTELEGGING,
+  );
+  const finnesHelTilretteleggingEtterBehovOppstår = arbfor.tilretteleggingDatoer.some(
+    (dato: ArbeidsforholdTilretteleggingDato) =>
+      dato.type === tilretteleggingType.HEL_TILRETTELEGGING &&
+      moment(dato.fom).isAfter(moment(arbfor.tilretteleggingBehovFom)),
+  );
   return finnesAnnenTilretteleggingEnnHel || finnesHelTilretteleggingEtterBehovOppstår;
 };
 
-const finnesInnvilgetUttak = (svangerskapspengerTilrettelegging: FodselOgTilrettelegging): boolean => (svangerskapspengerTilrettelegging
-  && svangerskapspengerTilrettelegging.arbeidsforholdListe
-  ? svangerskapspengerTilrettelegging.arbeidsforholdListe.some((arbfor) => finnesUttakPåArbfor(arbfor))
-  : false);
+const finnesInnvilgetUttak = (svangerskapspengerTilrettelegging: FodselOgTilrettelegging): boolean =>
+  svangerskapspengerTilrettelegging && svangerskapspengerTilrettelegging.arbeidsforholdListe
+    ? svangerskapspengerTilrettelegging.arbeidsforholdListe.some(arbfor => finnesUttakPåArbfor(arbfor))
+    : false;
 
 type FormValues = {
   erVilkarOk?: boolean;
   avslagCode?: string;
   avslagDato?: string;
   begrunnelse?: string;
-}
+};
 
 const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
@@ -91,11 +102,17 @@ const SvangerskapVilkarForm: FunctionComponent<OwnProps> = ({
   formData,
   setFormData,
 }) => {
-  const finnesUttak = useMemo(() => finnesInnvilgetUttak(svangerskapspengerTilrettelegging), [svangerskapspengerTilrettelegging]);
+  const finnesUttak = useMemo(
+    () => finnesInnvilgetUttak(svangerskapspengerTilrettelegging),
+    [svangerskapspengerTilrettelegging],
+  );
 
   const intl = useIntl();
 
-  const initialValues = useMemo(() => buildInitialValues(aksjonspunkter, status, behandlingsresultat), [behandlingsresultat, aksjonspunkter, status]);
+  const initialValues = useMemo(
+    () => buildInitialValues(aksjonspunkter, status, behandlingsresultat),
+    [behandlingsresultat, aksjonspunkter, status],
+  );
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });
@@ -104,7 +121,7 @@ const SvangerskapVilkarForm: FunctionComponent<OwnProps> = ({
 
   const avslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.SVANGERSKAPVILKARET];
 
-  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET);
+  const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET);
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
 
   const bTag = useCallback((chunks: any) => <b>{chunks}</b>, []);
@@ -125,11 +142,15 @@ const SvangerskapVilkarForm: FunctionComponent<OwnProps> = ({
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
       >
-        <Label size="small"><FormattedMessage id="SvangerskapVilkarForm.RettTilSvp" /></Label>
+        <Label size="small">
+          <FormattedMessage id="SvangerskapVilkarForm.RettTilSvp" />
+        </Label>
         {!finnesUttak && (
           <>
             <VerticalSpacer sixteenPx />
-            <Label size="small"><FormattedMessage id="SvangerskapVilkarForm.IkkeInnvilgetUttak" /></Label>
+            <Label size="small">
+              <FormattedMessage id="SvangerskapVilkarForm.IkkeInnvilgetUttak" />
+            </Label>
           </>
         )}
         <VilkarResultPicker

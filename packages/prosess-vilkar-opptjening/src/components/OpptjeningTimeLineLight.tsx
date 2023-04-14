@@ -21,25 +21,22 @@ type Item = {
   content: string;
   data?: FastsattOpptjeningAktivitet;
   group?: number;
-}
+};
 
 // Desse må alltid vare med for rett skala av tidslinjen
 const standardItems = (opptjeningFomDate: string, opptjeningTomDate: string): Item[] => [
   {
     id: 1000,
-    start: moment(opptjeningFomDate)
-      .startOf('month'),
-    end: moment(opptjeningFomDate)
-      .startOf('month'),
+    start: moment(opptjeningFomDate).startOf('month'),
+    end: moment(opptjeningFomDate).startOf('month'),
     content: '',
     group: 1,
     className: styles.hiddenpast,
-  }, {
+  },
+  {
     id: 1001,
-    start: moment(opptjeningTomDate)
-      .endOf('month'),
-    end: moment(opptjeningTomDate)
-      .endOf('month'),
+    start: moment(opptjeningTomDate).endOf('month'),
+    end: moment(opptjeningTomDate).endOf('month'),
     content: '',
     group: 1,
     className: styles.hiddenpast,
@@ -47,24 +44,36 @@ const standardItems = (opptjeningFomDate: string, opptjeningTomDate: string): It
 ];
 
 const classNameGenerator = (klasseKode: string): string => {
-  if (klasseKode === opptjeningAktivitetKlassifisering.BEKREFTET_AVVIST || klasseKode === opptjeningAktivitetKlassifisering.ANTATT_AVVIST) {
+  if (
+    klasseKode === opptjeningAktivitetKlassifisering.BEKREFTET_AVVIST ||
+    klasseKode === opptjeningAktivitetKlassifisering.ANTATT_AVVIST
+  ) {
     return 'avvistPeriode';
   }
-  if (klasseKode === opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT || klasseKode === opptjeningAktivitetKlassifisering.ANTATT_GODKJENT) {
+  if (
+    klasseKode === opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT ||
+    klasseKode === opptjeningAktivitetKlassifisering.ANTATT_GODKJENT
+  ) {
     return 'godkjentPeriode';
   }
   return 'mellomliggendePeriode';
 };
 
-const createItems = (opptjeningPeriods: FastsattOpptjeningAktivitet[], opptjeningFomDate: string, opptjeningTomDate: string): Item[] => {
-  const items = opptjeningPeriods.map((ap): Item => ({
-    start: moment(ap.fom),
-    end: moment(ap.tom),
-    className: classNameGenerator(ap.klasse),
-    content: '',
-    data: ap,
-    group: 1,
-  }));
+const createItems = (
+  opptjeningPeriods: FastsattOpptjeningAktivitet[],
+  opptjeningFomDate: string,
+  opptjeningTomDate: string,
+): Item[] => {
+  const items = opptjeningPeriods.map(
+    (ap): Item => ({
+      start: moment(ap.fom),
+      end: moment(ap.tom),
+      className: classNameGenerator(ap.klasse),
+      content: '',
+      data: ap,
+      group: 1,
+    }),
+  );
   return items.concat(standardItems(opptjeningFomDate, opptjeningTomDate));
 };
 
@@ -127,7 +136,7 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
 
   selectHandler(eventProps: { items: number[] }): void {
     const { items } = this.state;
-    const selectedItem = items.find((item) => item.id === eventProps.items[0]);
+    const selectedItem = items.find(item => item.id === eventProps.items[0]);
     if (selectedItem) {
       this.setState({
         selectedPeriod: selectedItem,
@@ -155,9 +164,9 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
     const { selectedPeriod, items } = this.state;
     event.preventDefault();
     if (items) {
-      const newIndex = items.findIndex((oa) => oa.id === selectedPeriod?.id) + 1;
+      const newIndex = items.findIndex(oa => oa.id === selectedPeriod?.id) + 1;
       if (newIndex < items.length - 2) {
-        this.setState((state) => ({
+        this.setState(state => ({
           ...state,
           selectedPeriod: items[newIndex],
         }));
@@ -169,9 +178,9 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
     const { selectedPeriod, items } = this.state;
     event.preventDefault();
     if (items) {
-      const newIndex = items.findIndex((oa) => oa.id === selectedPeriod?.id) - 1;
+      const newIndex = items.findIndex(oa => oa.id === selectedPeriod?.id) - 1;
       if (newIndex >= 0) {
-        this.setState((state) => ({
+        this.setState(state => ({
           ...state,
           selectedPeriod: items[newIndex],
         }));
@@ -187,10 +196,8 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
         <div className="timeLineLight">
           <VerticalSpacer sixteenPx />
           <DateContainer
-            opptjeningFomDate={moment(opptjeningFomDate, ISO_DATE_FORMAT)
-              .format(DDMMYYYY_DATE_FORMAT)}
-            opptjeningTomDate={moment(opptjeningTomDate, ISO_DATE_FORMAT)
-              .format(DDMMYYYY_DATE_FORMAT)}
+            opptjeningFomDate={moment(opptjeningFomDate, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT)}
+            opptjeningTomDate={moment(opptjeningTomDate, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT)}
           />
           <div className={styles.timelineContainer}>
             <div className={styles.timeLineWrapper}>
@@ -207,9 +214,7 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
                 />
               </div>
               <div className={styles.floatRight}>
-                <TimeLineNavigation
-                  openPeriodInfo={this.openPeriodInfo}
-                />
+                <TimeLineNavigation openPeriodInfo={this.openPeriodInfo} />
               </div>
               {selectedPeriod?.data && (
                 <TimeLineData

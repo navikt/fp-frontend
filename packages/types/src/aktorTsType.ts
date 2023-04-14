@@ -8,7 +8,7 @@ type FagsakPerson = Readonly<{
   fødselsdato: string;
   dodsdato?: string;
   aktørId?: string;
-}>
+}>;
 
 type Aktor = Readonly<{
   fagsaker: FagsakEnkel[];

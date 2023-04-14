@@ -31,13 +31,13 @@ export interface OppgaveForDatoGraf {
 }
 
 type Koordinat = {
-  x: Date,
-  y: number,
-}
+  x: Date;
+  y: number;
+};
 
 const sorterBehandlingtyper = (b1: string, b2: string): number => {
-  const index1 = behandlingstypeOrder.findIndex((bo) => bo === b1);
-  const index2 = behandlingstypeOrder.findIndex((bo) => bo === b2);
+  const index1 = behandlingstypeOrder.findIndex(bo => bo === b1);
+  const index2 = behandlingstypeOrder.findIndex(bo => bo === b2);
   if (index1 === index2) {
     return 0;
   }
@@ -45,12 +45,14 @@ const sorterBehandlingtyper = (b1: string, b2: string): number => {
 };
 
 const finnBehandlingTypeNavn = (behandlingTyper: KodeverkMedNavn[], behandlingTypeKode: string): string => {
-  const type = behandlingTyper.find((bt) => bt.kode === behandlingTypeKode);
+  const type = behandlingTyper.find(bt => bt.kode === behandlingTypeKode);
   return type ? type.navn : '';
 };
 
-const konverterTilKoordinaterGruppertPaBehandlingstype = (oppgaverForAvdeling: OppgaveForDatoGraf[]): Record<string, Koordinat[]> => oppgaverForAvdeling
-  .reduce((acc, o) => {
+const konverterTilKoordinaterGruppertPaBehandlingstype = (
+  oppgaverForAvdeling: OppgaveForDatoGraf[],
+): Record<string, Koordinat[]> =>
+  oppgaverForAvdeling.reduce((acc, o) => {
     const nyKoordinat = {
       x: dayjs(o.opprettetDato).startOf('day').toDate(),
       y: o.antall,
@@ -59,7 +61,7 @@ const konverterTilKoordinaterGruppertPaBehandlingstype = (oppgaverForAvdeling: O
     const eksisterendeKoordinater = acc[o.behandlingType];
     return {
       ...acc,
-      [o.behandlingType]: (eksisterendeKoordinater ? eksisterendeKoordinater.concat(nyKoordinat) : [nyKoordinat]),
+      [o.behandlingType]: eksisterendeKoordinater ? eksisterendeKoordinater.concat(nyKoordinat) : [nyKoordinat],
     };
   }, {} as Record<string, Koordinat[]>);
 
@@ -67,20 +69,23 @@ const fyllInnManglendeDatoerOgSorterEtterDato = (
   data: Record<string, Koordinat[]>,
   periodeStart: dayjs.Dayjs,
   periodeSlutt: dayjs.Dayjs,
-): Record<string, Date[][]> => Object.keys(data).reduce((acc, behandlingstype) => {
-  const behandlingstypeData = data[behandlingstype];
-  const koordinater = [];
+): Record<string, Date[][]> =>
+  Object.keys(data).reduce((acc, behandlingstype) => {
+    const behandlingstypeData = data[behandlingstype];
+    const koordinater = [];
 
-  for (let dato = dayjs(periodeStart); dato.isSameOrBefore(periodeSlutt); dato = dato.add(1, 'days')) {
-    const funnetDato = behandlingstypeData.find((d) => dayjs(d.x).startOf('day').isSame(dato.startOf('day')));
-    koordinater.push(funnetDato ? [dayjs(funnetDato.x).format(ISO_DATE_FORMAT), funnetDato.y] : [dato.format(ISO_DATE_FORMAT), 0]);
-  }
+    for (let dato = dayjs(periodeStart); dato.isSameOrBefore(periodeSlutt); dato = dato.add(1, 'days')) {
+      const funnetDato = behandlingstypeData.find(d => dayjs(d.x).startOf('day').isSame(dato.startOf('day')));
+      koordinater.push(
+        funnetDato ? [dayjs(funnetDato.x).format(ISO_DATE_FORMAT), funnetDato.y] : [dato.format(ISO_DATE_FORMAT), 0],
+      );
+    }
 
-  return {
-    ...acc,
-    [behandlingstype]: koordinater,
-  };
-}, {});
+    return {
+      ...acc,
+      [behandlingstype]: koordinater,
+    };
+  }, {});
 
 interface OwnProps {
   height: number;
@@ -98,17 +103,25 @@ export const TilBehandlingGraf: FunctionComponent<OwnProps> = ({
   isToUkerValgt,
   behandlingTyper,
 }) => {
-  const periodeStart = dayjs().subtract(isToUkerValgt ? 2 : 4, 'w').add(1, 'd');
+  const periodeStart = dayjs()
+    .subtract(isToUkerValgt ? 2 : 4, 'w')
+    .add(1, 'd');
   const periodeSlutt = dayjs();
 
-  const koordinater = useMemo(() => konverterTilKoordinaterGruppertPaBehandlingstype(oppgaverPerDato), [oppgaverPerDato]);
-  const data = useMemo(() => fyllInnManglendeDatoerOgSorterEtterDato(koordinater, periodeStart, periodeSlutt), [koordinater, periodeStart, periodeSlutt]);
+  const koordinater = useMemo(
+    () => konverterTilKoordinaterGruppertPaBehandlingstype(oppgaverPerDato),
+    [oppgaverPerDato],
+  );
+  const data = useMemo(
+    () => fyllInnManglendeDatoerOgSorterEtterDato(koordinater, periodeStart, periodeSlutt),
+    [koordinater, periodeStart, periodeSlutt],
+  );
 
-  const alleBehandlingstyperSortert = behandlingTyper.map((bt) => bt.kode).sort(sorterBehandlingtyper);
+  const alleBehandlingstyperSortert = behandlingTyper.map(bt => bt.kode).sort(sorterBehandlingtyper);
   const sorterteBehandlingstyper = Object.keys(data).sort(sorterBehandlingtyper);
   const reversertSorterteBehandlingstyper = sorterteBehandlingstyper.slice().reverse();
   // @ts-ignore Fiks
-  const farger = alleBehandlingstyperSortert.map((bt) => behandlingstypeFarger[bt]);
+  const farger = alleBehandlingstyperSortert.map(bt => behandlingstypeFarger[bt]);
 
   return (
     <Panel>
@@ -120,7 +133,7 @@ export const TilBehandlingGraf: FunctionComponent<OwnProps> = ({
             axisPointer: {
               type: 'cross',
               label: {
-                formatter: (params) => {
+                formatter: params => {
                   if (params.axisDimension === 'y') {
                     return parseInt(params.value as string, 10).toString();
                   }
@@ -138,7 +151,7 @@ export const TilBehandlingGraf: FunctionComponent<OwnProps> = ({
             },
           },
           legend: {
-            data: reversertSorterteBehandlingstyper.map((type) => finnBehandlingTypeNavn(behandlingTyper, type)),
+            data: reversertSorterteBehandlingstyper.map(type => finnBehandlingTypeNavn(behandlingTyper, type)),
           },
           grid: {
             left: '3%',
@@ -159,17 +172,16 @@ export const TilBehandlingGraf: FunctionComponent<OwnProps> = ({
               type: 'value',
             },
           ],
-          series: alleBehandlingstyperSortert
-            .map((type) => ({
-              name: finnBehandlingTypeNavn(behandlingTyper, type),
-              type: 'line',
-              stack: 'stackname',
-              areaStyle: {},
-              emphasis: {
-                focus: 'series',
-              },
-              data: data[type],
-            })),
+          series: alleBehandlingstyperSortert.map(type => ({
+            name: finnBehandlingTypeNavn(behandlingTyper, type),
+            type: 'line',
+            stack: 'stackname',
+            areaStyle: {},
+            emphasis: {
+              focus: 'series',
+            },
+            data: data[type],
+          })),
           color: farger,
         }}
       />

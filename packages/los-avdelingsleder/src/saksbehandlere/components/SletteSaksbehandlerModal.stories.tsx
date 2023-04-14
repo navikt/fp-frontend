@@ -22,9 +22,7 @@ export default {
 
 const Template: Story<{
   fjernSaksbehandler: (saksbehandler: Saksbehandler) => void;
-}> = ({
-  fjernSaksbehandler,
-}) => (
+}> = ({ fjernSaksbehandler }) => (
   <SletteSaksbehandlerModal
     valgtSaksbehandler={{
       brukerIdent: 'R12122',

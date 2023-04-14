@@ -2,18 +2,21 @@ import React, { FunctionComponent, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { ErrorMessage, Label } from '@navikt/ds-react';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { hasValidDate, hasValidInteger, required, hasValidText } from '@navikt/ft-form-validators';
 import {
-  hasValidDate, hasValidInteger, required, hasValidText,
-} from '@navikt/ft-form-validators';
-import {
-  CheckboxField, Datepicker, InputField, RadioGroupPanel, TextAreaField, formHooks,
+  CheckboxField,
+  Datepicker,
+  InputField,
+  RadioGroupPanel,
+  TextAreaField,
+  formHooks,
 } from '@navikt/ft-form-hooks';
 
 import styles from './virksomhetStartetEndretPanel.module.css';
 
 type VirtuellFeilType = {
   ingenArsakValgt?: boolean;
-}
+};
 
 export type FormValues = {
   varigEndretEllerStartetSisteFireAr?: boolean;
@@ -24,7 +27,7 @@ export type FormValues = {
   nyIArbeidslivetFom?: string;
   beskrivelseAvEndring?: string;
   inntekt?: number;
-}
+};
 
 interface OwnProps {
   readOnly: boolean;
@@ -36,13 +39,9 @@ interface OwnProps {
  * Komponenten vises som del av skjermbildet for registrering av
  * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
-export const VirksomhetStartetEndretPanel: FunctionComponent<OwnProps> = ({
-  readOnly,
-}) => {
+export const VirksomhetStartetEndretPanel: FunctionComponent<OwnProps> = ({ readOnly }) => {
   const intl = useIntl();
-  const {
-    watch, setError, clearErrors, formState,
-  } = formHooks.useFormContext<FormValues & VirtuellFeilType>();
+  const { watch, setError, clearErrors, formState } = formHooks.useFormContext<FormValues & VirtuellFeilType>();
   const varigEndretEllerStartetSisteFireAr = watch('varigEndretEllerStartetSisteFireAr') || false;
   const harVarigEndring = watch('harVarigEndring') || false;
   const erNyoppstartet = watch('erNyoppstartet') || false;
@@ -71,21 +70,29 @@ export const VirksomhetStartetEndretPanel: FunctionComponent<OwnProps> = ({
         isReadOnly={readOnly}
         isTrueOrFalseSelection
         isHorizontal
-        radios={[{
-          label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.Yes" />,
-          value: 'true',
-        }, {
-          label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.No" />,
-          value: 'false',
-        }]}
+        radios={[
+          {
+            label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.Yes" />,
+            value: 'true',
+          },
+          {
+            label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.No" />,
+            value: 'false',
+          },
+        ]}
       />
       {varigEndretEllerStartetSisteFireAr && (
         <div>
           <VerticalSpacer eightPx />
           <ArrowBox>
-            <Label size="small"><FormattedMessage id="Registrering.VirksomhetStartetPanel.Reason" /></Label>
+            <Label size="small">
+              <FormattedMessage id="Registrering.VirksomhetStartetPanel.Reason" />
+            </Label>
             <VerticalSpacer fourPx />
-            <CheckboxField name="harVarigEndring" label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.HarVarigEndring" />} />
+            <CheckboxField
+              name="harVarigEndring"
+              label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.HarVarigEndring" />}
+            />
             <VerticalSpacer fourPx />
             {harVarigEndring && (
               <>
@@ -100,9 +107,15 @@ export const VirksomhetStartetEndretPanel: FunctionComponent<OwnProps> = ({
                 </ArrowBox>
               </>
             )}
-            <CheckboxField name="erNyoppstartet" label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.ErNyoppstartet" />} />
+            <CheckboxField
+              name="erNyoppstartet"
+              label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.ErNyoppstartet" />}
+            />
             <VerticalSpacer fourPx />
-            <CheckboxField name="erNyIArbeidslivet" label={<FormattedMessage id="Registrering.VirksomhetNyIArbeidslivetPanel.ErNyIArbeidslivet" />} />
+            <CheckboxField
+              name="erNyIArbeidslivet"
+              label={<FormattedMessage id="Registrering.VirksomhetNyIArbeidslivetPanel.ErNyIArbeidslivet" />}
+            />
             <VerticalSpacer fourPx />
             {erNyIArbeidslivet && (
               <>

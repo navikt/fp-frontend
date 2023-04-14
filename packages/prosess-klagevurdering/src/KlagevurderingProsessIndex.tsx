@@ -36,12 +36,9 @@ const KlagevurderingProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
 }) => (
   <RawIntlProvider value={intl}>
     {klageVurdering.klageVurderingResultatNK && (
-      <BehandleKlageFormKa
-        klageVurdering={klageVurdering}
-        alleKodeverk={alleKodeverk}
-      />
+      <BehandleKlageFormKa klageVurdering={klageVurdering} alleKodeverk={alleKodeverk} />
     )}
-    {aksjonspunkter.some((a) => a.definisjon === AksjonspunktCode.BEHANDLE_KLAGE_NFP) && (
+    {aksjonspunkter.some(a => a.definisjon === AksjonspunktCode.BEHANDLE_KLAGE_NFP) && (
       <BehandleKlageFormNfp
         sprakkode={behandling.sprakkode}
         klageVurdering={klageVurdering}

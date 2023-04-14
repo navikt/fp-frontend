@@ -14,14 +14,20 @@ const useHentKodeverk = (skalHenteKodeverk: boolean): boolean => {
     suspendRequest: !skalHenteKodeverk,
     updateTriggers: [skalHenteKodeverk],
   });
-  const { state: kodeverkFpTilbakeStatus } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.KODEVERK_FPTILBAKE, NO_PARAMS, {
-    suspendRequest: !skalHenteFraFpTilbake || !skalHenteKodeverk,
-    updateTriggers: [skalHenteKodeverk],
-  });
+  const { state: kodeverkFpTilbakeStatus } = restApiHooks.useGlobalStateRestApi(
+    FpsakApiKeys.KODEVERK_FPTILBAKE,
+    NO_PARAMS,
+    {
+      suspendRequest: !skalHenteFraFpTilbake || !skalHenteKodeverk,
+      updateTriggers: [skalHenteKodeverk],
+    },
+  );
 
-  const harHentetFpSak = kodeverkFpSakStatus !== RestApiState.NOT_STARTED && kodeverkFpSakStatus !== RestApiState.LOADING;
-  const harHentetFpTilbake = !skalHenteFraFpTilbake
-    || (kodeverkFpTilbakeStatus !== RestApiState.NOT_STARTED && kodeverkFpTilbakeStatus !== RestApiState.LOADING);
+  const harHentetFpSak =
+    kodeverkFpSakStatus !== RestApiState.NOT_STARTED && kodeverkFpSakStatus !== RestApiState.LOADING;
+  const harHentetFpTilbake =
+    !skalHenteFraFpTilbake ||
+    (kodeverkFpTilbakeStatus !== RestApiState.NOT_STARTED && kodeverkFpTilbakeStatus !== RestApiState.LOADING);
 
   return harHentetFpSak && harHentetFpTilbake;
 };

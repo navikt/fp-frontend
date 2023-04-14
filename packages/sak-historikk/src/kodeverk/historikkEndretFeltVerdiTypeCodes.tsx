@@ -897,6 +897,6 @@ const historikkEndretFeltVerdiTypeCodes = {
     kode: 'FJERN_FRA_BEHANDLINGEN',
     verdiId: 'HistorikkEndretFelt.FjernFraBehandlingen',
   },
-} as Record<string, { kode: string, verdiId: string }>;
+} as Record<string, { kode: string; verdiId: string }>;
 
 export default historikkEndretFeltVerdiTypeCodes;

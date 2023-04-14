@@ -4,14 +4,14 @@ export type Permisjon = Readonly<{
   permisjonsprosent: number;
   erGyldig: boolean;
   type: string;
-}>
+}>;
 
 export type ArbeidsforholdTilretteleggingDato = Readonly<{
   fom: string;
   type: string;
   stillingsprosent?: number;
   overstyrtUtbetalingsgrad?: number;
-}>
+}>;
 
 export type ArbeidsforholdFodselOgTilrettelegging = Readonly<{
   tilretteleggingId: number;
@@ -27,13 +27,13 @@ export type ArbeidsforholdFodselOgTilrettelegging = Readonly<{
   kanTilrettelegges: boolean;
   begrunnelse?: string;
   velferdspermisjoner: Permisjon[];
-}>
+}>;
 
 type FodselOgTilrettelegging = Readonly<{
   termindato?: string;
   fødselsdato?: string;
   arbeidsforholdListe: ArbeidsforholdFodselOgTilrettelegging[];
   saksbehandlet: boolean;
-}>
+}>;
 
 export default FodselOgTilrettelegging;

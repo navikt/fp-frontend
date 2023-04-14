@@ -14,14 +14,18 @@ interface OwnProps {
   valgteBehandlingtyper?: string[];
   valgtAvdelingEnhet: string;
   erDynamiskPeriode: boolean;
-  hentAvdelingensSakslister: (params: {avdelingEnhet: string}) => void;
+  hentAvdelingensSakslister: (params: { avdelingEnhet: string }) => void;
   hentAntallOppgaver: (sakslisteId: number, avdelingEnhet: string) => void;
 }
 
-const bareTilbakekrevingValgt = (valgteBehandlingtyper?: string[]) => valgteBehandlingtyper
-  && valgteBehandlingtyper.some((type) => type === BehandlingType.TILBAKEKREVING
-    || type === BehandlingType.TILBAKEKREVING_REVURDERING)
-  && !valgteBehandlingtyper.some((type) => (type !== BehandlingType.TILBAKEKREVING && type !== BehandlingType.TILBAKEKREVING_REVURDERING));
+const bareTilbakekrevingValgt = (valgteBehandlingtyper?: string[]) =>
+  valgteBehandlingtyper &&
+  valgteBehandlingtyper.some(
+    type => type === BehandlingType.TILBAKEKREVING || type === BehandlingType.TILBAKEKREVING_REVURDERING,
+  ) &&
+  !valgteBehandlingtyper.some(
+    type => type !== BehandlingType.TILBAKEKREVING && type !== BehandlingType.TILBAKEKREVING_REVURDERING,
+  );
 
 /**
  * SorteringVelger
@@ -36,15 +40,19 @@ const SorteringVelger: FunctionComponent<OwnProps> = ({
 }) => {
   const { resetField } = formHooks.useFormContext();
 
-  const { startRequest: lagreSakslisteSortering } = restApiHooks.useRestApiRunner(RestApiPathsKeys.LAGRE_SAKSLISTE_SORTERING);
-  const { startRequest: lagreSakslisteSorteringNumeriskIntervall } = restApiHooks.useRestApiRunner(RestApiPathsKeys.LAGRE_SAKSLISTE_SORTERING_INTERVALL);
+  const { startRequest: lagreSakslisteSortering } = restApiHooks.useRestApiRunner(
+    RestApiPathsKeys.LAGRE_SAKSLISTE_SORTERING,
+  );
+  const { startRequest: lagreSakslisteSorteringNumeriskIntervall } = restApiHooks.useRestApiRunner(
+    RestApiPathsKeys.LAGRE_SAKSLISTE_SORTERING_INTERVALL,
+  );
   const koSorteringer = useLosKodeverk<KoSorteringType>('KøSortering');
 
   return (
     <RadioGroupPanel
       name="sortering"
       label={<FormattedMessage id="SorteringVelger.Sortering" />}
-      onChange={(sorteringType) => {
+      onChange={sorteringType => {
         resetField('fra', { defaultValue: '' });
         resetField('til', { defaultValue: '' });
         resetField('fomDato', { defaultValue: '' });
@@ -61,13 +69,16 @@ const SorteringVelger: FunctionComponent<OwnProps> = ({
         });
       }}
       radios={koSorteringer
-        .filter((koSortering) => koSortering.feltkategori !== 'TILBAKEKREVING' || bareTilbakekrevingValgt(valgteBehandlingtyper))
-        .map((koSortering) => ({
+        .filter(
+          koSortering =>
+            koSortering.feltkategori !== 'TILBAKEKREVING' || bareTilbakekrevingValgt(valgteBehandlingtyper),
+        )
+        .map(koSortering => ({
           value: koSortering.kode,
           label: koSortering.navn,
           element: (
             <>
-              {(koSortering.felttype === 'DATO') && (
+              {koSortering.felttype === 'DATO' && (
                 <DatoSorteringValg
                   valgtSakslisteId={valgtSakslisteId}
                   lagreSakslisteSorteringTidsintervallDager={lagreSakslisteSorteringNumeriskIntervall}
@@ -77,7 +88,7 @@ const SorteringVelger: FunctionComponent<OwnProps> = ({
                   hentAntallOppgaver={hentAntallOppgaver}
                 />
               )}
-              {(koSortering.felttype === 'HELTALL') && (
+              {koSortering.felttype === 'HELTALL' && (
                 <BelopSorteringValg
                   valgtSakslisteId={valgtSakslisteId}
                   lagreSakslisteSorteringNumerisk={lagreSakslisteSorteringNumeriskIntervall}

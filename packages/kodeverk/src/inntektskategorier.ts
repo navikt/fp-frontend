@@ -12,9 +12,14 @@ const inntektskategorier = {
   UDEFINERT: '-',
 };
 
-const SELVSTENDIG_NÆRINGSDRIVENDE_INNTEKTSKATEGORIER = [inntektskategorier.SELVSTENDIG_NÆRINGSDRIVENDE,
-  inntektskategorier.JORDBRUKER, inntektskategorier.DAGMAMMA, inntektskategorier.FISKER];
+const SELVSTENDIG_NÆRINGSDRIVENDE_INNTEKTSKATEGORIER = [
+  inntektskategorier.SELVSTENDIG_NÆRINGSDRIVENDE,
+  inntektskategorier.JORDBRUKER,
+  inntektskategorier.DAGMAMMA,
+  inntektskategorier.FISKER,
+];
 
-export const isSelvstendigNæringsdrivende = (inntektskategori: string): boolean => (SELVSTENDIG_NÆRINGSDRIVENDE_INNTEKTSKATEGORIER.includes(inntektskategori));
+export const isSelvstendigNæringsdrivende = (inntektskategori: string): boolean =>
+  SELVSTENDIG_NÆRINGSDRIVENDE_INNTEKTSKATEGORIER.includes(inntektskategori);
 
 export default inntektskategorier;

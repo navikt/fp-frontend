@@ -5,9 +5,7 @@ import { Label, BodyShort, Heading } from '@navikt/ds-react';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Soknad } from '@navikt/fp-types';
-import {
-  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import styles from './fodselSammenligningOtherPanel.module.css';
 
@@ -20,7 +18,7 @@ interface OwnProps {
 
 export const getTerminEllerFodselsdato = (
   hasSoknad: boolean,
-  fødselsdatoerSoknad: {[key: number]: string},
+  fødselsdatoerSoknad: { [key: number]: string },
   termindatoSoknad?: string,
   termindato?: string,
 ): string | null => {
@@ -41,18 +39,22 @@ export const getTerminEllerFodselsdato = (
  *
  * Viser sammenligning av fødsel ved ytelsesvedtak/søknad og oppdatert informasjon fra TPS.
  */
-const FodselSammenligningOtherPanel: FunctionComponent<OwnProps> = ({
-  soknad,
-  termindato,
-}) => {
+const FodselSammenligningOtherPanel: FunctionComponent<OwnProps> = ({ soknad, termindato }) => {
   const soknadFodselsdatoer = soknad.fodselsdatoer ? soknad.fodselsdatoer : {};
 
-  const terminOrFodselLabel = Object.keys(soknadFodselsdatoer).length > 0 ? 'FodselsammenligningPanel.Fodselsdato' : 'FodselsammenligningPanel.Termindato';
-  const terminFodselHeader = Object.keys(soknadFodselsdatoer).length > 0 ? 'FodselSammenligningOtherPanel.OpplysningerISoknad'
-    : 'FodselSammenligningOtherPanel.TerminISoknad';
+  const terminOrFodselLabel =
+    Object.keys(soknadFodselsdatoer).length > 0
+      ? 'FodselsammenligningPanel.Fodselsdato'
+      : 'FodselsammenligningPanel.Termindato';
+  const terminFodselHeader =
+    Object.keys(soknadFodselsdatoer).length > 0
+      ? 'FodselSammenligningOtherPanel.OpplysningerISoknad'
+      : 'FodselSammenligningOtherPanel.TerminISoknad';
 
-  const terminOrFodselDate = useMemo(() => getTerminEllerFodselsdato(!!soknad, soknadFodselsdatoer, soknad.termindato, termindato),
-    [soknad, soknadFodselsdatoer, termindato]);
+  const terminOrFodselDate = useMemo(
+    () => getTerminEllerFodselsdato(!!soknad, soknadFodselsdatoer, soknad.termindato, termindato),
+    [soknad, soknadFodselsdatoer, termindato],
+  );
 
   return (
     <>
@@ -64,16 +66,22 @@ const FodselSammenligningOtherPanel: FunctionComponent<OwnProps> = ({
         <FlexRow>
           {soknad.utstedtdato && (
             <FlexColumn className={styles.colMargin}>
-              <Label size="small"><FormattedMessage id="FodselsammenligningPanel.UstedtDato" /></Label>
+              <Label size="small">
+                <FormattedMessage id="FodselsammenligningPanel.UstedtDato" />
+              </Label>
               <BodyShort size="small">{formatDate(soknad.utstedtdato)}</BodyShort>
             </FlexColumn>
           )}
           <FlexColumn className={styles.colMargin}>
-            <Label size="small"><FormattedMessage id={terminOrFodselLabel} /></Label>
+            <Label size="small">
+              <FormattedMessage id={terminOrFodselLabel} />
+            </Label>
             <BodyShort size="small">{terminOrFodselDate}</BodyShort>
           </FlexColumn>
           <FlexColumn>
-            <Label size="small"><FormattedMessage id="FodselsammenligningPanel.AntallBarn" /></Label>
+            <Label size="small">
+              <FormattedMessage id="FodselsammenligningPanel.AntallBarn" />
+            </Label>
             <BodyShort size="small">{soknad.antallBarn}</BodyShort>
           </FlexColumn>
         </FlexRow>

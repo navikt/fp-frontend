@@ -28,10 +28,7 @@ const OpptjeningVilkarViewImpl: FunctionComponent<OwnProps> = ({
   opptjeningTomDate,
 }) => (
   <>
-    <FormattedMessage
-      id="OpptjeningVilkarView.MonthsAndDays"
-      values={{ months, days }}
-    />
+    <FormattedMessage id="OpptjeningVilkarView.MonthsAndDays" values={{ months, days }} />
     <BodyShort size="small">
       <PeriodLabel dateStringFom={opptjeningFomDate} dateStringTom={opptjeningTomDate} />
     </BodyShort>

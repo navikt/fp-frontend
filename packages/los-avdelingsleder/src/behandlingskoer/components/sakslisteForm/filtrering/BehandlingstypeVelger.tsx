@@ -13,7 +13,7 @@ const behandlingstypeOrder = Object.values(BehandlingType);
 interface OwnProps {
   valgtSakslisteId: number;
   valgtAvdelingEnhet: string;
-  hentAvdelingensSakslister: (params: {avdelingEnhet: string}) => void;
+  hentAvdelingensSakslister: (params: { avdelingEnhet: string }) => void;
   hentAntallOppgaver: (sakslisteId: number, avdelingEnhet: string) => void;
 }
 
@@ -26,39 +26,47 @@ const BehandlingstypeVelger: FunctionComponent<OwnProps> = ({
   hentAvdelingensSakslister,
   hentAntallOppgaver,
 }) => {
-  const { startRequest: lagreSakslisteBehandlingstype } = restApiHooks.useRestApiRunner(RestApiPathsKeys.LAGRE_SAKSLISTE_BEHANDLINGSTYPE);
+  const { startRequest: lagreSakslisteBehandlingstype } = restApiHooks.useRestApiRunner(
+    RestApiPathsKeys.LAGRE_SAKSLISTE_BEHANDLINGSTYPE,
+  );
   const alleBehandlingTyper = useLosKodeverk(KodeverkType.BEHANDLING_TYPE);
-  const behandlingTyper = useMemo(() => behandlingstypeOrder.map((kode) => alleBehandlingTyper.find((bt) => bt.kode === kode)),
-    []);
+  const behandlingTyper = useMemo(
+    () => behandlingstypeOrder.map(kode => alleBehandlingTyper.find(bt => bt.kode === kode)),
+    [],
+  );
   return (
     <>
       <Label size="small">
         <FormattedMessage id="BehandlingstypeVelger.Behandlingstype" />
       </Label>
       <VerticalSpacer eightPx />
-      {behandlingTyper.map((bt) => {
-        if (!bt) {
-          return null;
-        }
-        return (
-          <React.Fragment key={bt.kode}>
-            <VerticalSpacer fourPx />
-            <CheckboxField
-              name={bt.kode}
-              label={bt.navn}
-              onChange={(isChecked) => lagreSakslisteBehandlingstype({
-                sakslisteId: valgtSakslisteId,
-                avdelingEnhet: valgtAvdelingEnhet,
-                behandlingType: bt.kode,
-                checked: isChecked,
-              }).then(() => {
-                hentAntallOppgaver(valgtSakslisteId, valgtAvdelingEnhet);
-                hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet });
-              })}
-            />
-          </React.Fragment>
-        );
-      }).filter((bt) => !!bt)}
+      {behandlingTyper
+        .map(bt => {
+          if (!bt) {
+            return null;
+          }
+          return (
+            <React.Fragment key={bt.kode}>
+              <VerticalSpacer fourPx />
+              <CheckboxField
+                name={bt.kode}
+                label={bt.navn}
+                onChange={isChecked =>
+                  lagreSakslisteBehandlingstype({
+                    sakslisteId: valgtSakslisteId,
+                    avdelingEnhet: valgtAvdelingEnhet,
+                    behandlingType: bt.kode,
+                    checked: isChecked,
+                  }).then(() => {
+                    hentAntallOppgaver(valgtSakslisteId, valgtAvdelingEnhet);
+                    hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet });
+                  })
+                }
+              />
+            </React.Fragment>
+          );
+        })
+        .filter(bt => !!bt)}
     </>
   );
 };

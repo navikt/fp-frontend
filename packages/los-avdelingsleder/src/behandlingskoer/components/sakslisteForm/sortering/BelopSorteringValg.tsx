@@ -1,8 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import {
-  FlexColumn, FlexContainer, FlexRow, ArrowBox, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { hasValidPosOrNegInteger } from '@navikt/ft-form-validators';
 import { Detail } from '@navikt/ds-react';
 import { InputField, formHooks } from '@navikt/ft-form-hooks';
@@ -13,9 +11,14 @@ import styles from './sorteringVelger.module.css';
 
 interface OwnProps {
   valgtSakslisteId: number;
-  lagreSakslisteSorteringNumerisk: (params: {sakslisteId: number, fra: number, til: number, avdelingEnhet: string}) => Promise<any>;
+  lagreSakslisteSorteringNumerisk: (params: {
+    sakslisteId: number;
+    fra: number;
+    til: number;
+    avdelingEnhet: string;
+  }) => Promise<any>;
   valgtAvdelingEnhet: string;
-  hentAvdelingensSakslister: (params: {avdelingEnhet: string}) => void;
+  hentAvdelingensSakslister: (params: { avdelingEnhet: string }) => void;
   hentAntallOppgaver: (sakslisteId: number, avdelingEnhet: string) => void;
 }
 
@@ -30,18 +33,26 @@ const BelopSorteringValg: FunctionComponent<OwnProps> = ({
   const fraVerdi = watch('fra');
   const tilVerdi = watch('til');
 
-  const lagreFra = (nyFraVerdi: number) => lagreSakslisteSorteringNumerisk({
-    sakslisteId: valgtSakslisteId, fra: nyFraVerdi, til: tilVerdi, avdelingEnhet: valgtAvdelingEnhet,
-  }).then(() => {
-    hentAntallOppgaver(valgtSakslisteId, valgtAvdelingEnhet);
-    hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet });
-  });
-  const lagreTil = (nyTilVerdi: number) => lagreSakslisteSorteringNumerisk({
-    sakslisteId: valgtSakslisteId, fra: fraVerdi, til: nyTilVerdi, avdelingEnhet: valgtAvdelingEnhet,
-  }).then(() => {
-    hentAntallOppgaver(valgtSakslisteId, valgtAvdelingEnhet);
-    hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet });
-  });
+  const lagreFra = (nyFraVerdi: number) =>
+    lagreSakslisteSorteringNumerisk({
+      sakslisteId: valgtSakslisteId,
+      fra: nyFraVerdi,
+      til: tilVerdi,
+      avdelingEnhet: valgtAvdelingEnhet,
+    }).then(() => {
+      hentAntallOppgaver(valgtSakslisteId, valgtAvdelingEnhet);
+      hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet });
+    });
+  const lagreTil = (nyTilVerdi: number) =>
+    lagreSakslisteSorteringNumerisk({
+      sakslisteId: valgtSakslisteId,
+      fra: fraVerdi,
+      til: nyTilVerdi,
+      avdelingEnhet: valgtAvdelingEnhet,
+    }).then(() => {
+      hentAntallOppgaver(valgtSakslisteId, valgtAvdelingEnhet);
+      hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet });
+    });
 
   const lagreFraDebounce = useDebounce<number>('fra', lagreFra);
   const lagreTilDebounce = useDebounce<number>('til', lagreTil);

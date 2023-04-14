@@ -15,17 +15,17 @@ export type RefusjonTilVurderingAndel = Readonly<{
   arbeidsgiver?: {
     arbeidsgiverOrgnr?: string;
     arbeidsgiverAktørId?: string;
-  }
+  };
   internArbeidsforholdRef?: string;
   eksternArbeidsforholdRef?: string;
   skalKunneFastsetteDelvisRefusjon: boolean;
   fastsattDelvisRefusjonPrMnd?: number;
   maksTillattDelvisRefusjonPrMnd?: number;
-}>
+}>;
 
 type RefusjonTilVurdering = Readonly<{
   andeler: RefusjonTilVurderingAndel[];
-}>
+}>;
 
 export type PerioderMedGraderingEllerRefusjon = Readonly<{
   erRefusjon?: boolean;
@@ -33,7 +33,7 @@ export type PerioderMedGraderingEllerRefusjon = Readonly<{
   erSøktYtelse?: boolean;
   fom?: string;
   tom?: string;
-}>
+}>;
 
 export type ArbeidsforholdTilFordeling = Readonly<{
   aktørId?: number;
@@ -55,7 +55,7 @@ export type ArbeidsforholdTilFordeling = Readonly<{
   };
   refusjonPrAar?: number;
   startdato?: string;
-}>
+}>;
 
 export type FordelBeregningsgrunnlagAndel = Readonly<{
   aktivitetStatus?: string;
@@ -72,7 +72,7 @@ export type FordelBeregningsgrunnlagAndel = Readonly<{
   refusjonskravFraInntektsmeldingPrAar?: number;
   refusjonskravPrAar?: number;
   kilde?: string;
-}>
+}>;
 
 export type FordelBeregningsgrunnlagPeriode = Readonly<{
   fom?: string;
@@ -81,15 +81,15 @@ export type FordelBeregningsgrunnlagPeriode = Readonly<{
   skalPreutfyllesMedBeregningsgrunnlag?: boolean;
   skalKunneEndreRefusjon?: boolean;
   tom?: string;
-}>
+}>;
 
 type FordelBeregningsgrunnlag = Readonly<{
   arbeidsforholdTilFordeling?: ArbeidsforholdTilFordeling[];
   fordelBeregningsgrunnlagPerioder?: FordelBeregningsgrunnlagPeriode[];
-}>
+}>;
 
 export type FaktaOmFordeling = Readonly<{
   fordelBeregningsgrunnlag?: FordelBeregningsgrunnlag;
-}>
+}>;
 
 export default RefusjonTilVurdering;

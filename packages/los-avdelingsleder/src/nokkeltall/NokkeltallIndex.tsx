@@ -21,24 +21,27 @@ interface OwnProps {
 /**
  * NokkeltallIndex
  */
-const NokkeltallIndex: FunctionComponent<OwnProps> = ({
-  valgtAvdelingEnhet,
-}) => {
-  const {
-    data: oppgaverForAvdeling = EMPTY_ARRAY_AVDELING,
-  } = restApiHooks.useRestApi(RestApiPathsKeys.HENT_OPPGAVER_FOR_AVDELING, { avdelingEnhet: valgtAvdelingEnhet });
-  const {
-    data: oppgaverPerDato = EMPTY_ARRAY_DATO,
-  } = restApiHooks.useRestApi(RestApiPathsKeys.HENT_OPPGAVER_PER_DATO, { avdelingEnhet: valgtAvdelingEnhet });
-  const {
-    data: oppgaverManueltPaVent = EMPTY_ARRAY_PA_VENT,
-  } = restApiHooks.useRestApi(RestApiPathsKeys.HENT_OPPGAVER_MANUELT_PA_VENT, { avdelingEnhet: valgtAvdelingEnhet });
-  const {
-    data: oppgaverPerForsteStonadsdag = EMPTY_ARRAY_STONADSDAG,
-  } = restApiHooks.useRestApi(RestApiPathsKeys.HENT_OPPGAVER_PER_FORSTE_STONADSDAG, { avdelingEnhet: valgtAvdelingEnhet });
-  const {
-    data: oppgaverApneEllerPaVent = EMPTY_ARRAY_APNE_ELLER_PA_VENT,
-  } = restApiHooks.useRestApi(RestApiPathsKeys.HENT_OPPGAVER_APNE_ELLER_PA_VENT, { avdelingEnhet: valgtAvdelingEnhet });
+const NokkeltallIndex: FunctionComponent<OwnProps> = ({ valgtAvdelingEnhet }) => {
+  const { data: oppgaverForAvdeling = EMPTY_ARRAY_AVDELING } = restApiHooks.useRestApi(
+    RestApiPathsKeys.HENT_OPPGAVER_FOR_AVDELING,
+    { avdelingEnhet: valgtAvdelingEnhet },
+  );
+  const { data: oppgaverPerDato = EMPTY_ARRAY_DATO } = restApiHooks.useRestApi(
+    RestApiPathsKeys.HENT_OPPGAVER_PER_DATO,
+    { avdelingEnhet: valgtAvdelingEnhet },
+  );
+  const { data: oppgaverManueltPaVent = EMPTY_ARRAY_PA_VENT } = restApiHooks.useRestApi(
+    RestApiPathsKeys.HENT_OPPGAVER_MANUELT_PA_VENT,
+    { avdelingEnhet: valgtAvdelingEnhet },
+  );
+  const { data: oppgaverPerForsteStonadsdag = EMPTY_ARRAY_STONADSDAG } = restApiHooks.useRestApi(
+    RestApiPathsKeys.HENT_OPPGAVER_PER_FORSTE_STONADSDAG,
+    { avdelingEnhet: valgtAvdelingEnhet },
+  );
+  const { data: oppgaverApneEllerPaVent = EMPTY_ARRAY_APNE_ELLER_PA_VENT } = restApiHooks.useRestApi(
+    RestApiPathsKeys.HENT_OPPGAVER_APNE_ELLER_PA_VENT,
+    { avdelingEnhet: valgtAvdelingEnhet },
+  );
 
   return (
     <NokkeltallPanel

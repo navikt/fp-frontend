@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
@@ -20,7 +18,7 @@ const AKSJONSPUNKT_KODER = [
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.YTELSEFORDELING];
 type EndepunktPanelData = {
   ytelsefordeling: Ytelsefordeling;
-}
+};
 
 interface OwnProps {
   personoversikt: Personoversikt;
@@ -39,8 +37,10 @@ const OmsorgOgRettFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitPro
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.OMSORG_OG_RETT}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'OmsorgInfoPanel.OmsorgOgRett' })}
-    skalPanelVisesIMeny={() => !!props.behandling.aksjonspunkt?.some((ap) => AKSJONSPUNKT_KODER.some((kode) => kode === ap.definisjon))}
-    renderPanel={(data) => <OmsorgOgRettFaktaIndex personoversikt={personoversikt} {...data} />}
+    skalPanelVisesIMeny={() =>
+      !!props.behandling.aksjonspunkt?.some(ap => AKSJONSPUNKT_KODER.some(kode => kode === ap.definisjon))
+    }
+    renderPanel={data => <OmsorgOgRettFaktaIndex personoversikt={personoversikt} {...data} />}
   />
 );
 

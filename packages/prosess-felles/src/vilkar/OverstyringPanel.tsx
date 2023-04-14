@@ -2,14 +2,18 @@ import React, { ReactNode, FunctionComponent } from 'react';
 import { BodyShort, Label, Button } from '@navikt/ds-react';
 
 import {
-  FlexContainer, FlexRow, FlexColumn, Image, EditedIcon, VerticalSpacer, AksjonspunktBox,
+  FlexContainer,
+  FlexRow,
+  FlexColumn,
+  Image,
+  EditedIcon,
+  VerticalSpacer,
+  AksjonspunktBox,
 } from '@navikt/ft-ui-komponenter';
 
 import { TextAreaField, formHooks } from '@navikt/ft-form-hooks';
 import { createIntl } from '@navikt/ft-utils';
-import {
-  hasValidText, maxLength, minLength,
-} from '@navikt/ft-form-validators';
+import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
 import advarselIkonUrl from '../images/advarsel_ny.svg';
 
 import messages from '../../i18n/nb_NO.json';
@@ -48,10 +52,16 @@ const OverstyringPanel: FunctionComponent<OwnProps> = ({
   erIkkeGodkjentAvBeslutter,
   children,
 }) => {
-  const { formState: { isDirty } } = formHooks.useFormContext();
+  const {
+    formState: { isDirty },
+  } = formHooks.useFormContext();
   const isRequiredFn = getIsBegrunnelseRequired(isDirty);
   return (
-    <AksjonspunktBox className={styles.aksjonspunktMargin} erAksjonspunktApent={erOverstyrt} erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}>
+    <AksjonspunktBox
+      className={styles.aksjonspunktMargin}
+      erAksjonspunktApent={erOverstyrt}
+      erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
+    >
       <Label size="small">{intl.formatMessage({ id: 'OverstyringPanel.AutomatiskVurdering' })}</Label>
       <VerticalSpacer eightPx />
       {children}
@@ -68,7 +78,7 @@ const OverstyringPanel: FunctionComponent<OwnProps> = ({
         </>
       )}
       <VerticalSpacer sixteenPx />
-      {!erOverstyrt && (erVilkarOk !== undefined) && (
+      {!erOverstyrt && erVilkarOk !== undefined && (
         <>
           <VerticalSpacer fourPx />
           <FlexRow>

@@ -3,9 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Modal, Button, Heading } from '@navikt/ds-react';
 
-import {
-  VerticalSpacer, FlexContainer, FlexColumn, FlexRow,
-} from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer, FlexContainer, FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 import { RadioGroupPanel, Form } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { FagsakMarkeringKode } from '@navikt/fp-kodeverk';
@@ -15,7 +13,7 @@ import styles from './endreUtlandModal.module.css';
 export type FormValues = {
   saksnummer: string;
   fagsakMarkering: string;
-}
+};
 
 interface OwnProps {
   saksnummer: string;
@@ -64,38 +62,35 @@ const EndreUtlandModal: FunctionComponent<OwnProps> = ({
             name="fagsakMarkering"
             hideLegend
             validate={[required]}
-            radios={[{
-              label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.Nasjonal' }),
-              value: FagsakMarkeringKode.NASJONAL,
-            }, {
-              label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.EøsBosattNorge' }),
-              value: FagsakMarkeringKode.EØS_BOSATT_NORGE,
-            }, {
-              label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.BosattUtland' }),
-              value: FagsakMarkeringKode.BOSATT_UTLAND,
-            }, {
-              label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.SammensattKontroll' }),
-              value: FagsakMarkeringKode.SAMMENSATT_KONTROLL,
-            }]}
+            radios={[
+              {
+                label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.Nasjonal' }),
+                value: FagsakMarkeringKode.NASJONAL,
+              },
+              {
+                label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.EøsBosattNorge' }),
+                value: FagsakMarkeringKode.EØS_BOSATT_NORGE,
+              },
+              {
+                label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.BosattUtland' }),
+                value: FagsakMarkeringKode.BOSATT_UTLAND,
+              },
+              {
+                label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.SammensattKontroll' }),
+                value: FagsakMarkeringKode.SAMMENSATT_KONTROLL,
+              },
+            ]}
           />
           <VerticalSpacer sixteenPx />
           <FlexContainer>
             <FlexRow>
               <FlexColumn>
-                <Button
-                  size="small"
-                  variant="primary"
-                >
+                <Button size="small" variant="primary">
                   <FormattedMessage id="MenyEndreUtlandIndex.Ok" />
                 </Button>
               </FlexColumn>
               <FlexColumn>
-                <Button
-                  size="small"
-                  variant="secondary"
-                  onClick={cancelEvent}
-                  type="button"
-                >
+                <Button size="small" variant="secondary" onClick={cancelEvent} type="button">
                   <FormattedMessage id="MenyEndreUtlandIndex.Avbryt" />
                 </Button>
               </FlexColumn>

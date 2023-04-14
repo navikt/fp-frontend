@@ -23,7 +23,7 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{ saksbehandlere: Saksbehandler[], sakslister: Saksliste[] }> = ({
+const Template: Story<{ saksbehandlere: Saksbehandler[]; sakslister: Saksliste[] }> = ({
   saksbehandlere,
   sakslister,
 }) => {
@@ -48,85 +48,102 @@ const Template: Story<{ saksbehandlere: Saksbehandler[], sakslister: Saksliste[]
 
 export const Default = Template.bind({});
 Default.args = {
-  saksbehandlere: [{
-    brukerIdent: {
-      brukerIdent: '32434',
-      verdi: '32434',
+  saksbehandlere: [
+    {
+      brukerIdent: {
+        brukerIdent: '32434',
+        verdi: '32434',
+      },
+      navn: 'Espen Utvikler',
+      avdelingsnavn: [],
     },
-    navn: 'Espen Utvikler',
-    avdelingsnavn: [],
-  }, {
-    brukerIdent: {
-      brukerIdent: '31111',
-      verdi: '32111',
+    {
+      brukerIdent: {
+        brukerIdent: '31111',
+        verdi: '32111',
+      },
+      navn: 'Auto Joakim',
+      avdelingsnavn: [],
     },
-    navn: 'Auto Joakim',
-    avdelingsnavn: [],
-  }],
-  sakslister: [{
-    sakslisteId: 1,
-    navn: 'Saksliste 1',
-    behandlingTyper: [BehandlingType.FORSTEGANGSSOKNAD, BehandlingType.REVURDERING],
-    fagsakYtelseTyper: [FagsakYtelseType.FORELDREPENGER],
-    andreKriterier: [{
-      andreKriterierType: andreKriterierType.TIL_BESLUTTER,
-      inkluder: true,
-    }],
-    sortering: {
-      sorteringType: koSortering.BEHANDLINGSFRIST,
-      fra: 2,
-      til: 4,
-      erDynamiskPeriode: true,
+  ],
+  sakslister: [
+    {
+      sakslisteId: 1,
+      navn: 'Saksliste 1',
+      behandlingTyper: [BehandlingType.FORSTEGANGSSOKNAD, BehandlingType.REVURDERING],
+      fagsakYtelseTyper: [FagsakYtelseType.FORELDREPENGER],
+      andreKriterier: [
+        {
+          andreKriterierType: andreKriterierType.TIL_BESLUTTER,
+          inkluder: true,
+        },
+      ],
+      sortering: {
+        sorteringType: koSortering.BEHANDLINGSFRIST,
+        fra: 2,
+        til: 4,
+        erDynamiskPeriode: true,
+      },
     },
-  }],
+  ],
 };
 
 export const MedToSakslister = Template.bind({});
 MedToSakslister.args = {
-  saksbehandlere: [{
-    brukerIdent: {
-      brukerIdent: '32434',
-      verdi: '32434',
+  saksbehandlere: [
+    {
+      brukerIdent: {
+        brukerIdent: '32434',
+        verdi: '32434',
+      },
+      navn: 'Espen Utvikler',
+      avdelingsnavn: [],
     },
-    navn: 'Espen Utvikler',
-    avdelingsnavn: [],
-  }, {
-    brukerIdent: {
-      brukerIdent: '31111',
-      verdi: '32111',
+    {
+      brukerIdent: {
+        brukerIdent: '31111',
+        verdi: '32111',
+      },
+      navn: 'Auto Joakim',
+      avdelingsnavn: [],
     },
-    navn: 'Auto Joakim',
-    avdelingsnavn: [],
-  }],
-  sakslister: [{
-    sakslisteId: 1,
-    navn: 'Saksliste 1',
-    behandlingTyper: [BehandlingType.FORSTEGANGSSOKNAD, BehandlingType.REVURDERING],
-    fagsakYtelseTyper: [FagsakYtelseType.FORELDREPENGER],
-    andreKriterier: [{
-      andreKriterierType: andreKriterierType.TIL_BESLUTTER,
-      inkluder: true,
-    }],
-    sortering: {
-      sorteringType: koSortering.BEHANDLINGSFRIST,
-      fra: 2,
-      til: 4,
-      erDynamiskPeriode: true,
+  ],
+  sakslister: [
+    {
+      sakslisteId: 1,
+      navn: 'Saksliste 1',
+      behandlingTyper: [BehandlingType.FORSTEGANGSSOKNAD, BehandlingType.REVURDERING],
+      fagsakYtelseTyper: [FagsakYtelseType.FORELDREPENGER],
+      andreKriterier: [
+        {
+          andreKriterierType: andreKriterierType.TIL_BESLUTTER,
+          inkluder: true,
+        },
+      ],
+      sortering: {
+        sorteringType: koSortering.BEHANDLINGSFRIST,
+        fra: 2,
+        til: 4,
+        erDynamiskPeriode: true,
+      },
     },
-  }, {
-    sakslisteId: 2,
-    navn: 'Saksliste 2',
-    behandlingTyper: [BehandlingType.FORSTEGANGSSOKNAD, BehandlingType.KLAGE],
-    fagsakYtelseTyper: [FagsakYtelseType.SVANGERSKAPSPENGER],
-    andreKriterier: [{
-      andreKriterierType: andreKriterierType.UTBETALING_TIL_BRUKER,
-      inkluder: true,
-    }],
-    sortering: {
-      sorteringType: koSortering.BEHANDLINGSFRIST,
-      fra: 2,
-      til: 4,
-      erDynamiskPeriode: true,
+    {
+      sakslisteId: 2,
+      navn: 'Saksliste 2',
+      behandlingTyper: [BehandlingType.FORSTEGANGSSOKNAD, BehandlingType.KLAGE],
+      fagsakYtelseTyper: [FagsakYtelseType.SVANGERSKAPSPENGER],
+      andreKriterier: [
+        {
+          andreKriterierType: andreKriterierType.UTBETALING_TIL_BRUKER,
+          inkluder: true,
+        },
+      ],
+      sortering: {
+        sorteringType: koSortering.BEHANDLINGSFRIST,
+        fra: 2,
+        til: 4,
+        erDynamiskPeriode: true,
+      },
     },
-  }],
+  ],
 };

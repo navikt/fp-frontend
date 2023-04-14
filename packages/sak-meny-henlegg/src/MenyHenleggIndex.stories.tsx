@@ -18,50 +18,53 @@ interface HenleggParams {
 }
 
 const Template: Story<{
-  henleggBehandling: (params: HenleggParams) => Promise<any>,
+  henleggBehandling: (params: HenleggParams) => Promise<any>;
   lukkModal: () => void;
   forhandsvisHenleggBehandling: () => void;
-  behandling: BehandlingAppKontekst,
-}> = ({
-  henleggBehandling,
-  lukkModal,
-  forhandsvisHenleggBehandling,
-  behandling,
-}) => (
+  behandling: BehandlingAppKontekst;
+}> = ({ henleggBehandling, lukkModal, forhandsvisHenleggBehandling, behandling }) => (
   <MenyHenleggIndex
     valgtBehandling={behandling}
     henleggBehandling={henleggBehandling}
     forhandsvisHenleggBehandling={forhandsvisHenleggBehandling}
     ytelseType={fagsakYtelseType.FORELDREPENGER}
-    behandlingResultatTyper={[{
-      kode: behandlingResultatType.HENLAGT_KLAGE_TRUKKET,
-      kodeverk: 'BEHANDLING_RESULT_TYPE',
-      navn: 'Henlagt klage',
-    }, {
-      kode: behandlingResultatType.HENLAGT_SOKNAD_TRUKKET,
-      kodeverk: 'RESULTAT_TYPE',
-      navn: 'Henlagt soknad trukket',
-    }, {
-      kode: behandlingResultatType.HENLAGT_FEILOPPRETTET_UTEN_BREV,
-      kodeverk: 'BEHANDLING_RESULT_TYPE',
-      navn: 'Henlagt feilopprettet uten brev',
-    }, {
-      kode: behandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV,
-      kodeverk: 'BEHANDLING_RESULT_TYPE',
-      navn: 'Henlagt feilopprettet med brev',
-    }, {
-      kode: behandlingResultatType.HENLAGT_INNSYN_TRUKKET,
-      kodeverk: 'BEHANDLING_RESULT_TYPE',
-      navn: 'Henlagt innsyn',
-    }, {
-      kode: behandlingResultatType.HENLAGT_FEILOPPRETTET,
-      kodeverk: 'RESULTAT_TYPE',
-      navn: 'Henlagt feilopprettet',
-    }, {
-      kode: behandlingResultatType.HENLAGT_SOKNAD_MANGLER,
-      kodeverk: 'RESULTAT_TYPE',
-      navn: 'Henlagt soknad mangler',
-    }]}
+    behandlingResultatTyper={[
+      {
+        kode: behandlingResultatType.HENLAGT_KLAGE_TRUKKET,
+        kodeverk: 'BEHANDLING_RESULT_TYPE',
+        navn: 'Henlagt klage',
+      },
+      {
+        kode: behandlingResultatType.HENLAGT_SOKNAD_TRUKKET,
+        kodeverk: 'RESULTAT_TYPE',
+        navn: 'Henlagt soknad trukket',
+      },
+      {
+        kode: behandlingResultatType.HENLAGT_FEILOPPRETTET_UTEN_BREV,
+        kodeverk: 'BEHANDLING_RESULT_TYPE',
+        navn: 'Henlagt feilopprettet uten brev',
+      },
+      {
+        kode: behandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV,
+        kodeverk: 'BEHANDLING_RESULT_TYPE',
+        navn: 'Henlagt feilopprettet med brev',
+      },
+      {
+        kode: behandlingResultatType.HENLAGT_INNSYN_TRUKKET,
+        kodeverk: 'BEHANDLING_RESULT_TYPE',
+        navn: 'Henlagt innsyn',
+      },
+      {
+        kode: behandlingResultatType.HENLAGT_FEILOPPRETTET,
+        kodeverk: 'RESULTAT_TYPE',
+        navn: 'Henlagt feilopprettet',
+      },
+      {
+        kode: behandlingResultatType.HENLAGT_SOKNAD_MANGLER,
+        kodeverk: 'RESULTAT_TYPE',
+        navn: 'Henlagt soknad mangler',
+      },
+    ]}
     gaaTilSokeside={action('button-click')}
     lukkModal={lukkModal}
   />

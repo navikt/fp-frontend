@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, useCallback, useMemo,
-} from 'react';
+import React, { FunctionComponent, useCallback, useMemo } from 'react';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
@@ -12,7 +10,11 @@ import {
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { Behandling, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { TilbakekrevingProsessIndex, VilkarsVurderingAp, ForeldelseAksjonspunktCodes } from '@navikt/ft-prosess-tilbakekreving';
+import {
+  TilbakekrevingProsessIndex,
+  VilkarsVurderingAp,
+  ForeldelseAksjonspunktCodes,
+} from '@navikt/ft-prosess-tilbakekreving';
 
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
 import getAlleMerknaderFraBeslutter from '../../felles/util/getAlleMerknaderFraBeslutter';
@@ -28,7 +30,7 @@ type EndepunktPanelData = {
   vilkarvurderingsperioder: DetaljerteFeilutbetalingsperioder;
   vilkarvurdering: VilkarsVurdertePerioderWrapper;
   perioderForeldelse: FeilutbetalingPerioderWrapper;
-}
+};
 
 interface OwnProps {
   behandling: Behandling;
@@ -49,28 +51,42 @@ const TilbakekrevingProsessInitPanel: FunctionComponent<OwnProps> = ({
   formData,
   setFormData,
 }) => {
-  const { startRequest: beregnBelop } = restApiTilbakekrevingHooks.useRestApiRunner(TilbakekrevingBehandlingApiKeys.BEREGNE_BELØP);
+  const { startRequest: beregnBelop } = restApiTilbakekrevingHooks.useRestApiRunner(
+    TilbakekrevingBehandlingApiKeys.BEREGNE_BELØP,
+  );
 
-  const formaterteEndepunkter = ENDEPUNKTER_PANEL_DATA.map((e) => ({ key: e }));
-  const { data: initData, state } = restApiTilbakekrevingHooks
-    .useMultipleRestApi<EndepunktPanelData, any>(formaterteEndepunkter, {
+  const formaterteEndepunkter = ENDEPUNKTER_PANEL_DATA.map(e => ({ key: e }));
+  const { data: initData, state } = restApiTilbakekrevingHooks.useMultipleRestApi<EndepunktPanelData, any>(
+    formaterteEndepunkter,
+    {
       updateTriggers: [behandling.versjon],
       isCachingOn: true,
-    });
+    },
+  );
 
-  const setFormDataTilbakekreving = useCallback((data: any) => setFormData((oldData) => ({
-    ...oldData,
-    [ProsessStegCode.TILBAKEKREVING]: data,
-  })), [setFormData]);
+  const setFormDataTilbakekreving = useCallback(
+    (data: any) =>
+      setFormData(oldData => ({
+        ...oldData,
+        [ProsessStegCode.TILBAKEKREVING]: data,
+      })),
+    [setFormData],
+  );
 
   const aksjonspunkter = behandling.aksjonspunkt || [];
 
-  const aksjonspunkterForTilbakekreving = useMemo(() => (aksjonspunkter
-    ? aksjonspunkter.filter((ap) => ForeldelseAksjonspunktCodes.VURDER_TILBAKEKREVING === ap.definisjon) : []),
-  [aksjonspunkter]);
+  const aksjonspunkterForTilbakekreving = useMemo(
+    () =>
+      aksjonspunkter
+        ? aksjonspunkter.filter(ap => ForeldelseAksjonspunktCodes.VURDER_TILBAKEKREVING === ap.definisjon)
+        : [],
+    [aksjonspunkter],
+  );
 
-  const alleMerknaderFraBeslutter = useMemo(() => getAlleMerknaderFraBeslutter(behandling, aksjonspunkterForTilbakekreving),
-    [behandling, aksjonspunkterForTilbakekreving]);
+  const alleMerknaderFraBeslutter = useMemo(
+    () => getAlleMerknaderFraBeslutter(behandling, aksjonspunkterForTilbakekreving),
+    [behandling, aksjonspunkterForTilbakekreving],
+  );
   const isReadOnly = useMemo(() => erReadOnlyFn(aksjonspunkterForTilbakekreving), [aksjonspunkterForTilbakekreving]);
 
   if (state !== RestApiState.SUCCESS) {

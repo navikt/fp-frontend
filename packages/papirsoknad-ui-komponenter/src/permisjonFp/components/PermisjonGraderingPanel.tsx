@@ -14,8 +14,8 @@ import RenderGraderingPeriodeFieldArray, {
 
 export type FormValues = {
   skalGradere?: boolean;
-  [GRADERING_PERIODE_FIELD_ARRAY_NAME]?: GraderingPeriodeFormValues
-}
+  [GRADERING_PERIODE_FIELD_ARRAY_NAME]?: GraderingPeriodeFormValues;
+};
 
 interface OwnProps {
   readOnly: boolean;
@@ -33,19 +33,18 @@ interface StaticFunctions {
  * Viser panel for gradering
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent
  */
-const PermisjonGraderingPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
-  readOnly,
-  alleKodeverk,
-}) => {
+const PermisjonGraderingPanel: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly, alleKodeverk }) => {
   const graderingKvoter = alleKodeverk[KodeverkType.UTSETTELSE_GRADERING_KVOTE];
   const arbeidskategoriTyper = alleKodeverk[KodeverkType.ARBEIDSKATEGORI];
 
-  const { watch } = formHooks.useFormContext<{[TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
+  const { watch } = formHooks.useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
   const skalGradere = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalGradere`) || false;
 
   return (
     <div>
-      <Label size="small"><FormattedMessage id="Registrering.Permisjon.Gradering.Title" /></Label>
+      <Label size="small">
+        <FormattedMessage id="Registrering.Permisjon.Gradering.Title" />
+      </Label>
       <VerticalSpacer sixteenPx />
       <CheckboxField
         readOnly={readOnly}
@@ -65,7 +64,7 @@ const PermisjonGraderingPanel: FunctionComponent<OwnProps> & StaticFunctions = (
 
 PermisjonGraderingPanel.transformValues = (formValues: FormValues) => {
   const perioder = formValues[GRADERING_PERIODE_FIELD_ARRAY_NAME];
-  return perioder.map((periode) => {
+  return perioder.map(periode => {
     if (periode.arbeidskategoriType) {
       return {
         ...periode,

@@ -1,8 +1,8 @@
 import { Behandling, Aksjonspunkt } from '@navikt/ft-types';
 import { Vilkar, AksessRettigheter } from '@navikt/fp-types';
 
-export const harBehandlingReadOnlyStatus = (behandling: Behandling) => (behandling.taskStatus && behandling.taskStatus.readOnly
-  ? behandling.taskStatus.readOnly : false);
+export const harBehandlingReadOnlyStatus = (behandling: Behandling) =>
+  behandling.taskStatus && behandling.taskStatus.readOnly ? behandling.taskStatus.readOnly : false;
 
 export const erReadOnly = (
   behandling: Behandling,
@@ -13,7 +13,7 @@ export const erReadOnly = (
 ) => {
   const { behandlingPaaVent } = behandling;
   const isBehandlingReadOnly = hasFetchError || harBehandlingReadOnlyStatus(behandling);
-  const hasNonOverstyrbar = vilkarlisteForPunkt.some((v) => !v.overstyrbar);
+  const hasNonOverstyrbar = vilkarlisteForPunkt.some(v => !v.overstyrbar);
 
   return !rettigheter.writeAccess.isEnabled || behandlingPaaVent || isBehandlingReadOnly || hasNonOverstyrbar;
 };

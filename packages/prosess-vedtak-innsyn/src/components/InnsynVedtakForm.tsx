@@ -1,17 +1,16 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import {
-  Label, BodyShort, Heading,
-} from '@navikt/ds-react';
+import { Label, BodyShort, Heading } from '@navikt/ds-react';
 
 import {
-  AksjonspunktCode, kommunikasjonsretning, innsynResultatType as InnsynResultatType, dokumentMalType,
+  AksjonspunktCode,
+  kommunikasjonsretning,
+  innsynResultatType as InnsynResultatType,
+  dokumentMalType,
 } from '@navikt/fp-kodeverk';
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import {
-  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { decodeHtmlEntity, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
@@ -30,39 +29,41 @@ export type ForhandsvisData = {
   mottaker: string;
   dokumentMal: string;
   gjelderVedtak: boolean;
-}
-
-const getPreviewCallback = (
-  begrunnelse: string,
-  previewCallback: (data: ForhandsvisData) => Promise<any>,
-) => (e: React.KeyboardEvent | React.MouseEvent): void => {
-  e.preventDefault();
-
-  const data = {
-    fritekst: begrunnelse || ' ',
-    mottaker: '',
-    dokumentMal: dokumentMalType.INNSYN_SVAR,
-    gjelderVedtak: true,
-  };
-  previewCallback(data);
 };
+
+const getPreviewCallback =
+  (begrunnelse: string, previewCallback: (data: ForhandsvisData) => Promise<any>) =>
+  (e: React.KeyboardEvent | React.MouseEvent): void => {
+    e.preventDefault();
+
+    const data = {
+      fritekst: begrunnelse || ' ',
+      mottaker: '',
+      dokumentMal: dokumentMalType.INNSYN_SVAR,
+      gjelderVedtak: true,
+    };
+    previewCallback(data);
+  };
 
 // Samme dokument kan ligge på flere behandlinger under samme fagsak.
 const getFilteredReceivedDocuments = (allDocuments: Dokument[]): Dokument[] => {
-  const filteredDocuments = allDocuments.filter((doc) => doc.kommunikasjonsretning === kommunikasjonsretning.INN);
-  allDocuments.forEach((doc) => !filteredDocuments.some((fd) => fd.dokumentId === doc.dokumentId) && filteredDocuments.push(doc));
+  const filteredDocuments = allDocuments.filter(doc => doc.kommunikasjonsretning === kommunikasjonsretning.INN);
+  allDocuments.forEach(
+    doc => !filteredDocuments.some(fd => fd.dokumentId === doc.dokumentId) && filteredDocuments.push(doc),
+  );
   return filteredDocuments;
 };
 
 const getDocumenterMedFikkInnsynVerdi = (
   alleDokumenter: Dokument[],
   valgteDokumenter: InnsynDokument[],
-): DokumentMedInnsynMarkor[] => alleDokumenter
-  .filter((dokAlle) => valgteDokumenter.find((dokValgte) => dokValgte.dokumentId === dokAlle.dokumentId))
-  .map((dokAlle) => ({
-    ...dokAlle,
-    fikkInnsyn: valgteDokumenter.find((dokValgte) => dokValgte.dokumentId === dokAlle.dokumentId).fikkInnsyn,
-  }));
+): DokumentMedInnsynMarkor[] =>
+  alleDokumenter
+    .filter(dokAlle => valgteDokumenter.find(dokValgte => dokValgte.dokumentId === dokAlle.dokumentId))
+    .map(dokAlle => ({
+      ...dokAlle,
+      fikkInnsyn: valgteDokumenter.find(dokValgte => dokValgte.dokumentId === dokAlle.dokumentId).fikkInnsyn,
+    }));
 
 const findResultTypeMessage = (resultat: string): string => {
   if (resultat === InnsynResultatType.AVVIST) {
@@ -81,14 +82,11 @@ type DokumentMedInnsynMarkor = {
 type FormValues = {
   mottattDato?: string;
   begrunnelse?: string;
-}
+};
 
-const buildInitialValues = (
-  innsynMottattDato: string,
-  aksjonspunkter: Aksjonspunkt[],
-): FormValues => ({
+const buildInitialValues = (innsynMottattDato: string, aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   mottattDato: innsynMottattDato,
-  begrunnelse: aksjonspunkter.find((ap) => ap.definisjon === AksjonspunktCode.FORESLA_VEDTAK).begrunnelse,
+  begrunnelse: aksjonspunkter.find(ap => ap.definisjon === AksjonspunktCode.FORESLA_VEDTAK).begrunnelse,
 });
 
 const transformValues = (values: FormValues): ForeslaVedtakAp => ({
@@ -132,15 +130,20 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const initialValues = useMemo(() => buildInitialValues(innsynMottattDato, aksjonspunkter), [innsynMottattDato, aksjonspunkter]);
+  const initialValues = useMemo(
+    () => buildInitialValues(innsynMottattDato, aksjonspunkter),
+    [innsynMottattDato, aksjonspunkter],
+  );
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });
 
-  const documents = useMemo(() => getDocumenterMedFikkInnsynVerdi(getFilteredReceivedDocuments(alleDokumenter), innsynDokumenter),
-    [alleDokumenter, innsynDokumenter]);
+  const documents = useMemo(
+    () => getDocumenterMedFikkInnsynVerdi(getFilteredReceivedDocuments(alleDokumenter), innsynDokumenter),
+    [alleDokumenter, innsynDokumenter],
+  );
 
-  const apBegrunnelse = aksjonspunkter.find((ap) => ap.definisjon === AksjonspunktCode.VURDER_INNSYN)?.begrunnelse;
+  const apBegrunnelse = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktCode.VURDER_INNSYN)?.begrunnelse;
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
@@ -152,30 +155,45 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setFormData}
     >
-      <Heading size="small"><FormattedMessage id={readOnly ? 'InnsynVedtakForm.Vedtak' : 'InnsynVedtakForm.ForslagVedtak'} /></Heading>
+      <Heading size="small">
+        <FormattedMessage id={readOnly ? 'InnsynVedtakForm.Vedtak' : 'InnsynVedtakForm.ForslagVedtak'} />
+      </Heading>
       <VerticalSpacer eightPx />
-      <Label size="small"><FormattedMessage id="InnsynVedtakForm.Resultat" /></Label>
-      <BodyShort size="small"><FormattedMessage id={findResultTypeMessage(innsynResultatType)} /></BodyShort>
+      <Label size="small">
+        <FormattedMessage id="InnsynVedtakForm.Resultat" />
+      </Label>
+      <BodyShort size="small">
+        <FormattedMessage id={findResultTypeMessage(innsynResultatType)} />
+      </BodyShort>
       <VerticalSpacer eightPx />
-      <Label size="small"><FormattedMessage id="InnsynVedtakForm.Vurdering" /></Label>
-      <BodyShort size="small" className={styles.wordwrap}>{decodeHtmlEntity(apBegrunnelse)}</BodyShort>
+      <Label size="small">
+        <FormattedMessage id="InnsynVedtakForm.Vurdering" />
+      </Label>
+      <BodyShort size="small" className={styles.wordwrap}>
+        {decodeHtmlEntity(apBegrunnelse)}
+      </BodyShort>
       <VerticalSpacer twentyPx />
-      {(innsynResultatType !== InnsynResultatType.INNVILGET) && (
+      {innsynResultatType !== InnsynResultatType.INNVILGET && (
         <TextAreaField
           name="begrunnelse"
           label={intl.formatMessage({ id: 'InnsynVedtakForm.Fritekst' })}
           validate={[minLength3, maxLength1500, hasValidText]}
           maxLength={1500}
           readOnly={readOnly}
-          badges={[{
-            type: 'info',
-            titleText: getLanguageFromSprakkode(sprakkode),
-          }]}
+          badges={[
+            {
+              type: 'info',
+              titleText: getLanguageFromSprakkode(sprakkode),
+            },
+          ]}
         />
       )}
       <VerticalSpacer twentyPx />
       {innsynResultatType !== InnsynResultatType.AVVIST && (
-        <DocumentListVedtakInnsyn saksNr={saksNr} documents={documents.filter((document) => document.fikkInnsyn === true)} />
+        <DocumentListVedtakInnsyn
+          saksNr={saksNr}
+          documents={documents.filter(document => document.fikkInnsyn === true)}
+        />
       )}
       <VerticalSpacer twentyPx />
       <FlexContainer>
@@ -194,14 +212,16 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
           <FlexColumn>
             <a
               onClick={previewBrev}
-              onKeyDown={(e) => (e.key === 'Enter' ? previewBrev(e) : null)}
+              onKeyDown={e => (e.key === 'Enter' ? previewBrev(e) : null)}
               className="lenke lenke--frittstaende"
               target="_blank"
               rel="noopener noreferrer"
               role="link"
               tabIndex={0}
             >
-              <FormattedMessage id={readOnly ? 'InnsynVedtakForm.VisVedtaksbrev' : 'InnsynVedtakForm.ForhåndsvisBrev'} />
+              <FormattedMessage
+                id={readOnly ? 'InnsynVedtakForm.VisVedtaksbrev' : 'InnsynVedtakForm.ForhåndsvisBrev'}
+              />
             </a>
           </FlexColumn>
         </FlexRow>

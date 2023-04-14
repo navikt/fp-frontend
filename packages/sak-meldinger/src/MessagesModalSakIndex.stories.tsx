@@ -9,13 +9,8 @@ export default {
   component: MessagesModalSakIndex,
 };
 
-const Template: Story<{ closeEvent: () => void }> = ({
-  closeEvent,
-}) => (
-  <MessagesModalSakIndex
-    showModal
-    closeEvent={closeEvent}
-  />
+const Template: Story<{ closeEvent: () => void }> = ({ closeEvent }) => (
+  <MessagesModalSakIndex showModal closeEvent={closeEvent} />
 );
 
 export const Default = Template.bind({});

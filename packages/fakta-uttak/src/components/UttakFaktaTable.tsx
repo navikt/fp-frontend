@@ -1,18 +1,12 @@
-import React, {
-  useCallback, FunctionComponent,
-} from 'react';
+import React, { useCallback, FunctionComponent } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
-import {
-  Table, ExpandableTableRow, TableColumn, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { Table, ExpandableTableRow, TableColumn, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
 import { Button, Heading } from '@navikt/ds-react';
 import { AddCircle } from '@navikt/ds-icons';
 
-import {
-  AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold,
-} from '@navikt/fp-types';
+import { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
 import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import UttakFaktaDetailForm, { utledÅrsakstype, Årsakstype } from './UttakFaktaDetailForm';
@@ -35,15 +29,15 @@ const getTypeTekst = (
 ): string => {
   const årsaktype = utledÅrsakstype(periode);
   if (årsaktype === Årsakstype.UTTAK || årsaktype === Årsakstype.OVERFØRING) {
-    const tekst = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE].find((k) => k.kode === periode.uttakPeriodeType)?.navn;
+    const tekst = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE].find(k => k.kode === periode.uttakPeriodeType)?.navn;
     return periode.arbeidstidsprosent > 0 ? `${tekst} - Gradert ${periode.arbeidstidsprosent}%` : tekst;
   }
   if (årsaktype === Årsakstype.OPPHOLD) {
-    const navn = alleKodeverk[KodeverkType.OPPHOLD_ARSAK].find((k) => k.kode === periode.oppholdÅrsak)?.navn;
+    const navn = alleKodeverk[KodeverkType.OPPHOLD_ARSAK].find(k => k.kode === periode.oppholdÅrsak)?.navn;
     return intl.formatMessage({ id: 'UttakFaktaTabel.Opphold' }, { arsak: navn.replace('har uttak av', '') });
   }
   if (årsaktype === Årsakstype.UTSETTELSE) {
-    const navn = alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE].find((k) => k.kode === periode.utsettelseÅrsak)?.navn;
+    const navn = alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE].find(k => k.kode === periode.utsettelseÅrsak)?.navn;
     return intl.formatMessage({ id: 'UttakFaktaTabel.Utsettelse' }, { arsak: navn });
   }
   return '';
@@ -82,44 +76,50 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const velgPeriodeFomDato = useCallback((fom?: string, lukkAlleAndre = false) => {
-    if (valgteFomDatoer.includes(fom)) {
-      setValgteFomDatoer((foms) => foms.filter((f) => f !== fom));
-    } else {
-      const nye = fom ? [fom] : [];
-      setValgteFomDatoer((foms) => (lukkAlleAndre ? nye : foms.concat(fom)));
-    }
-  }, [valgteFomDatoer, setValgteFomDatoer]);
+  const velgPeriodeFomDato = useCallback(
+    (fom?: string, lukkAlleAndre = false) => {
+      if (valgteFomDatoer.includes(fom)) {
+        setValgteFomDatoer(foms => foms.filter(f => f !== fom));
+      } else {
+        const nye = fom ? [fom] : [];
+        setValgteFomDatoer(foms => (lukkAlleAndre ? nye : foms.concat(fom)));
+      }
+    },
+    [valgteFomDatoer, setValgteFomDatoer],
+  );
 
-  const oppdaterPeriode = useCallback((uPeriode: KontrollerFaktaPeriodeMedApMarkering) => {
-    const oppdatertePerioder = uttakKontrollerFaktaPerioder
-      .filter((p) => p.originalFom !== uPeriode.originalFom)
-      .concat(uPeriode)
-      .sort((a1, a2) => dayjs(a1.fom).diff(dayjs(a2.fom)));
+  const oppdaterPeriode = useCallback(
+    (uPeriode: KontrollerFaktaPeriodeMedApMarkering) => {
+      const oppdatertePerioder = uttakKontrollerFaktaPerioder
+        .filter(p => p.originalFom !== uPeriode.originalFom)
+        .concat(uPeriode)
+        .sort((a1, a2) => dayjs(a1.fom).diff(dayjs(a2.fom)));
 
-    setDirty(true);
-    oppdaterUttakPerioder(oppdatertePerioder);
-    velgPeriodeFomDato(undefined, true);
-  }, [uttakKontrollerFaktaPerioder]);
+      setDirty(true);
+      oppdaterUttakPerioder(oppdatertePerioder);
+      velgPeriodeFomDato(undefined, true);
+    },
+    [uttakKontrollerFaktaPerioder],
+  );
 
-  const slettPeriode = useCallback((fom: string) => {
-    const oppdatertePerioder = uttakKontrollerFaktaPerioder.filter((p) => p.originalFom !== fom);
-    oppdaterUttakPerioder(oppdatertePerioder);
-    setDirty(true);
-  }, [uttakKontrollerFaktaPerioder]);
+  const slettPeriode = useCallback(
+    (fom: string) => {
+      const oppdatertePerioder = uttakKontrollerFaktaPerioder.filter(p => p.originalFom !== fom);
+      oppdaterUttakPerioder(oppdatertePerioder);
+      setDirty(true);
+    },
+    [uttakKontrollerFaktaPerioder],
+  );
 
-  const sisteMåned = uttakKontrollerFaktaPerioder.length > 0
-    ? new Date(uttakKontrollerFaktaPerioder[uttakKontrollerFaktaPerioder.length - 1].tom)
-    : undefined;
+  const sisteMåned =
+    uttakKontrollerFaktaPerioder.length > 0
+      ? new Date(uttakKontrollerFaktaPerioder[uttakKontrollerFaktaPerioder.length - 1].tom)
+      : undefined;
 
   return (
     <>
-      <Table
-        headerTextCodes={HEADER_TEXT_CODES}
-        noHover
-        hasGrayHeader
-      >
-        {uttakKontrollerFaktaPerioder.map((periode) => {
+      <Table headerTextCodes={HEADER_TEXT_CODES} noHover hasGrayHeader>
+        {uttakKontrollerFaktaPerioder.map(periode => {
           const numberOfDaysAndWeeks = calcDaysAndWeeks(periode.fom, periode.tom);
           return (
             <ExpandableTableRow
@@ -127,27 +127,27 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
               isApLeftBorder={!!periode.aksjonspunktType}
               showContent={valgteFomDatoer.includes(periode.fom)}
               toggleContent={() => velgPeriodeFomDato(periode.fom)}
-              content={valgteFomDatoer.includes(periode.fom) && (
-                <UttakFaktaDetailForm
-                  fagsak={fagsak}
-                  valgtPeriode={periode}
-                  readOnly={readOnly || !erRedigerbart}
-                  oppdaterPeriode={oppdaterPeriode}
-                  slettPeriode={() => slettPeriode(periode.originalFom)}
-                  avbrytEditering={() => velgPeriodeFomDato(periode.fom)}
-                  alleKodeverk={alleKodeverk}
-                  arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-                  faktaArbeidsforhold={faktaArbeidsforhold}
-                />
-              )}
+              content={
+                valgteFomDatoer.includes(periode.fom) && (
+                  <UttakFaktaDetailForm
+                    fagsak={fagsak}
+                    valgtPeriode={periode}
+                    readOnly={readOnly || !erRedigerbart}
+                    oppdaterPeriode={oppdaterPeriode}
+                    slettPeriode={() => slettPeriode(periode.originalFom)}
+                    avbrytEditering={() => velgPeriodeFomDato(periode.fom)}
+                    alleKodeverk={alleKodeverk}
+                    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+                    faktaArbeidsforhold={faktaArbeidsforhold}
+                  />
+                )
+              }
             >
               <TableColumn>{`${dateFormat(periode.fom)} - ${dateFormat(periode.tom)}`}</TableColumn>
-              <TableColumn>
-                {numberOfDaysAndWeeks.formattedString}
-              </TableColumn>
+              <TableColumn>{numberOfDaysAndWeeks.formattedString}</TableColumn>
               <TableColumn>{getTypeTekst(alleKodeverk, periode, intl)}</TableColumn>
               <TableColumn>
-                {alleKodeverk[KodeverkType.FORDELING_PERIODE_KILDE].find((k) => k.kode === periode.periodeKilde)?.navn}
+                {alleKodeverk[KodeverkType.FORDELING_PERIODE_KILDE].find(k => k.kode === periode.periodeKilde)?.navn}
               </TableColumn>
             </ExpandableTableRow>
           );
@@ -181,7 +181,9 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
                 readOnly={false}
                 alleKodeverk={alleKodeverk}
                 oppdaterPeriode={(uttaksperiode: KontrollerFaktaPeriodeMedApMarkering) => {
-                  const nyeSortertePerioder = uttakKontrollerFaktaPerioder.concat(uttaksperiode).sort((a1, a2) => dayjs(a1.fom).diff(dayjs(a2.fom)));
+                  const nyeSortertePerioder = uttakKontrollerFaktaPerioder
+                    .concat(uttaksperiode)
+                    .sort((a1, a2) => dayjs(a1.fom).diff(dayjs(a2.fom)));
                   setDirty(true);
                   oppdaterUttakPerioder(nyeSortertePerioder);
                   settVisNyPeriode(false);

@@ -17,24 +17,17 @@ import './globalTidslinje.module.css';
 const standardItems = (opptjeningFomDato: string, opptjeningTomDato: string) => [
   {
     id: 1000,
-    start: moment(opptjeningFomDato)
-      .subtract(1, 'months')
-      .startOf('month'),
-    end: moment(opptjeningFomDato)
-      .subtract(1, 'months')
-      .startOf('month'),
+    start: moment(opptjeningFomDato).subtract(1, 'months').startOf('month'),
+    end: moment(opptjeningFomDato).subtract(1, 'months').startOf('month'),
     group: 1,
     className: styles.hiddenpast,
     content: '',
     data: undefined,
-  }, {
+  },
+  {
     id: 1001,
-    start: moment(opptjeningTomDato)
-      .add(1, 'months')
-      .endOf('month'),
-    end: moment(opptjeningTomDato)
-      .add(1, 'months')
-      .endOf('month'),
+    start: moment(opptjeningTomDato).add(1, 'months').endOf('month'),
+    end: moment(opptjeningTomDato).add(1, 'months').endOf('month'),
     group: 1,
     className: styles.hiddenpast,
     content: '',
@@ -71,8 +64,12 @@ const createItems = (
     id: index,
     start: moment(finnOpptjeningFom(ap.opptjeningFom, opptjeningFomDato, opptjeningTomDato)),
     end: moment(finnOpptjeningTom(ap.opptjeningTom, opptjeningFomDato, opptjeningTomDato)),
-    group: groups.find((g) => g.aktivitetTypeKode === ap.aktivitetType
-      && g.arbeidsforholdRef === ap.arbeidsforholdRef && g.arbeidsgiverReferanse === ap.arbeidsgiverReferanse).id,
+    group: groups.find(
+      g =>
+        g.aktivitetTypeKode === ap.aktivitetType &&
+        g.arbeidsforholdRef === ap.arbeidsforholdRef &&
+        g.arbeidsgiverReferanse === ap.arbeidsgiverReferanse,
+    ).id,
     className: classNameGenerator(formVerdierForAlleAktiviteter[index].erGodkjent),
     content: '',
     data: ap,
@@ -82,14 +79,18 @@ const createItems = (
 
 const createGroups = (opptjeningPeriods: OpptjeningAktivitet[], opptjeningAktivitetTypes: KodeverkMedNavn[]) => {
   const duplicatesRemoved = opptjeningPeriods.reduce((accPeriods, period): Group[] => {
-    const hasPeriod = accPeriods.some((p) => p.aktivitetType === period.aktivitetType
-      && p.arbeidsforholdRef === period.arbeidsforholdRef && p.oppdragsgiverOrg === period.arbeidsgiverReferanse);
+    const hasPeriod = accPeriods.some(
+      p =>
+        p.aktivitetType === period.aktivitetType &&
+        p.arbeidsforholdRef === period.arbeidsforholdRef &&
+        p.oppdragsgiverOrg === period.arbeidsgiverReferanse,
+    );
     if (!hasPeriod) accPeriods.push(period);
     return accPeriods;
   }, []);
   return duplicatesRemoved.map((activity: OpptjeningAktivitet, index: number) => ({
     id: index + 1,
-    content: opptjeningAktivitetTypes.find((oat) => oat.kode === activity.aktivitetType).navn,
+    content: opptjeningAktivitetTypes.find(oat => oat.kode === activity.aktivitetType).navn,
     aktivitetTypeKode: activity.aktivitetType,
     arbeidsforholdRef: activity.arbeidsforholdRef,
     arbeidsgiverReferanse: activity.arbeidsgiverReferanse,
@@ -138,13 +139,15 @@ const OpptjeningTimeLine: FunctionComponent<OwnProps> = ({
   setValgtAktivitetIndex,
 }) => {
   const groups = useMemo(() => createGroups(opptjeningPerioder, opptjeningAktivitetTypes), [opptjeningPerioder]);
-  const items = useMemo(() => createItems(opptjeningPerioder, formVerdierForAlleAktiviteter, groups, opptjeningFomDato, opptjeningTomDato),
-    [formVerdierForAlleAktiviteter]);
+  const items = useMemo(
+    () => createItems(opptjeningPerioder, formVerdierForAlleAktiviteter, groups, opptjeningFomDato, opptjeningTomDato),
+    [formVerdierForAlleAktiviteter],
+  );
 
   const timelineRef = React.createRef();
 
   const selectHandler = (eventProps: any): void => {
-    const selectedItem = items.find((item) => item.id === eventProps.items[0]);
+    const selectedItem = items.find(item => item.id === eventProps.items[0]);
     if (selectedItem) {
       setValgtAktivitetIndex(selectedItem.id);
     }
@@ -153,10 +156,8 @@ const OpptjeningTimeLine: FunctionComponent<OwnProps> = ({
   return (
     <div className="opptjening">
       <DatoPanel
-        opptjeningFomDato={moment(opptjeningFomDato)
-          .format(DDMMYYYY_DATE_FORMAT)}
-        opptjeningTomDato={moment(opptjeningTomDato)
-          .format(DDMMYYYY_DATE_FORMAT)}
+        opptjeningFomDato={moment(opptjeningFomDato).format(DDMMYYYY_DATE_FORMAT)}
+        opptjeningTomDato={moment(opptjeningTomDato).format(DDMMYYYY_DATE_FORMAT)}
       />
       <div className={styles.timelineContainer}>
         <div className={styles.timeLineWrapper}>

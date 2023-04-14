@@ -10,14 +10,14 @@ import { restApiHooks, RestApiPathsKeys } from '../../../../data/fplosRestApi';
 import useLosKodeverk from '../../../../data/useLosKodeverk';
 
 const finnFagsakYtelseTypeNavn = (fagsakYtelseTyper: KodeverkMedNavn[], valgtFagsakYtelseType: string) => {
-  const type = fagsakYtelseTyper.find((fyt) => fyt.kode === valgtFagsakYtelseType);
+  const type = fagsakYtelseTyper.find(fyt => fyt.kode === valgtFagsakYtelseType);
   return type ? type.navn : '';
 };
 
 interface OwnProps {
   valgtSakslisteId: number;
   valgtAvdelingEnhet: string;
-  hentAvdelingensSakslister: (params: {avdelingEnhet: string}) => void;
+  hentAvdelingensSakslister: (params: { avdelingEnhet: string }) => void;
   hentAntallOppgaver: (sakslisteId: number, avdelingEnhet: string) => void;
 }
 
@@ -30,7 +30,9 @@ const FagsakYtelseTypeVelger: FunctionComponent<OwnProps> = ({
   hentAvdelingensSakslister,
   hentAntallOppgaver,
 }) => {
-  const { startRequest: lagreSakslisteFagsakYtelseType } = restApiHooks.useRestApiRunner(RestApiPathsKeys.LAGRE_SAKSLISTE_FAGSAK_YTELSE_TYPE);
+  const { startRequest: lagreSakslisteFagsakYtelseType } = restApiHooks.useRestApiRunner(
+    RestApiPathsKeys.LAGRE_SAKSLISTE_FAGSAK_YTELSE_TYPE,
+  );
   const alleFagsakYtelseTyper = useLosKodeverk(KodeverkType.FAGSAK_YTELSE);
   return (
     <>
@@ -38,21 +40,23 @@ const FagsakYtelseTypeVelger: FunctionComponent<OwnProps> = ({
         <FormattedMessage id="FagsakYtelseTypeVelger.Stonadstype" />
       </Label>
       <VerticalSpacer eightPx />
-      {alleFagsakYtelseTyper.map((fyt) => (
+      {alleFagsakYtelseTyper.map(fyt => (
         <React.Fragment key={fyt.kode}>
           <VerticalSpacer fourPx />
           <CheckboxField
             name={fyt.kode}
             label={finnFagsakYtelseTypeNavn(alleFagsakYtelseTyper, fyt.kode)}
-            onChange={(isChecked) => lagreSakslisteFagsakYtelseType({
-              sakslisteId: valgtSakslisteId,
-              avdelingEnhet: valgtAvdelingEnhet,
-              fagsakYtelseType: fyt.kode,
-              checked: isChecked,
-            }).then(() => {
-              hentAntallOppgaver(valgtSakslisteId, valgtAvdelingEnhet);
-              hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet });
-            })}
+            onChange={isChecked =>
+              lagreSakslisteFagsakYtelseType({
+                sakslisteId: valgtSakslisteId,
+                avdelingEnhet: valgtAvdelingEnhet,
+                fagsakYtelseType: fyt.kode,
+                checked: isChecked,
+              }).then(() => {
+                hentAntallOppgaver(valgtSakslisteId, valgtAvdelingEnhet);
+                hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet });
+              })
+            }
           />
         </React.Fragment>
       ))}

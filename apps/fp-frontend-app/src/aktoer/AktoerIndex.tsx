@@ -17,13 +17,16 @@ import '@navikt/ft-sak-aktor/dist/style.css';
 const AktoerIndex: FunctionComponent = () => {
   const { selected: selectedAktoerId } = useTrackRouteParam<string>({
     paramName: 'aktoerId',
-    parse: (aktoerIdFromUrl) => Number.parseInt(aktoerIdFromUrl, 10),
+    parse: aktoerIdFromUrl => Number.parseInt(aktoerIdFromUrl, 10),
   });
 
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
 
-  const { data, state } = restApiHooks.useRestApi(FpsakApiKeys.AKTOER_INFO, { aktoerId: selectedAktoerId },
-    { keepData: true, suspendRequest: !selectedAktoerId, updateTriggers: [selectedAktoerId] });
+  const { data, state } = restApiHooks.useRestApi(
+    FpsakApiKeys.AKTOER_INFO,
+    { aktoerId: selectedAktoerId },
+    { keepData: true, suspendRequest: !selectedAktoerId, updateTriggers: [selectedAktoerId] },
+  );
 
   if (state === RestApiState.NOT_STARTED || state === RestApiState.LOADING) {
     return <LoadingPanel />;

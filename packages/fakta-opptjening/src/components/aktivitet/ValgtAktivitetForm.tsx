@@ -1,27 +1,16 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import {
-  Button, Label, Heading, BodyShort,
-} from '@navikt/ds-react';
+import { Button, Label, Heading, BodyShort } from '@navikt/ds-react';
 import dayjs from 'dayjs';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import {
-  VerticalSpacer, FaktaGruppe, FlexColumn, FlexContainer, FlexRow,
-} from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer, FaktaGruppe, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import { findDifferenceInMonthsAndDays, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import {
-  hasValidText,
-  maxLength,
-  minLength,
-  required,
-} from '@navikt/ft-form-validators';
+import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { RadioGroupPanel, TextAreaField, Form } from '@navikt/ft-form-hooks';
 import { TimeLineButton } from '@navikt/ft-tidslinje';
-import {
-  ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, AlleKodeverk, OpptjeningAktivitet,
-} from '@navikt/fp-types';
+import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, AlleKodeverk, OpptjeningAktivitet } from '@navikt/fp-types';
 
 import ValgtAktivitetSubForm from './ValgtAktivitetSubForm';
 import { finnOpptjeningFom, finnOpptjeningTom } from '../../utils/opptjeningDatoUtil';
@@ -43,33 +32,39 @@ const finnMånederOgDager = (opptjeningFom: string, opptjeningTom: string): Reac
   if (!differanse) {
     return <span />;
   }
-  return differanse.months >= 1
-    ? <FormattedMessage id="ActivityPanel.MonthsAndDays" values={{ months: differanse.months, days: differanse.days }} />
-    : <FormattedMessage id="ActivityPanel.Days" values={{ days: differanse.days }} />;
+  return differanse.months >= 1 ? (
+    <FormattedMessage id="ActivityPanel.MonthsAndDays" values={{ months: differanse.months, days: differanse.days }} />
+  ) : (
+    <FormattedMessage id="ActivityPanel.Days" values={{ days: differanse.days }} />
+  );
 };
 
-const finnBegrunnelseLabel = (erGodkjent: boolean, erEndret: boolean, readOnly: boolean, hasAksjonspunkt: boolean): string => (
+const finnBegrunnelseLabel = (
+  erGodkjent: boolean,
+  erEndret: boolean,
+  readOnly: boolean,
+  hasAksjonspunkt: boolean,
+): string =>
   readOnly || skalIkkeKunneEditere(hasAksjonspunkt, erGodkjent, erEndret)
     ? 'ActivityPanel.Begrunnelse'
-    : 'ActivityPanel.BegrunnEndringene'
-);
+    : 'ActivityPanel.BegrunnEndringene';
 
 export type FormValues = {
   erGodkjent: boolean;
   begrunnelse: string;
-}
+};
 
 interface OwnProps {
   alleKodeverk: AlleKodeverk;
   valgtOpptjeningAktivitet: OpptjeningAktivitet;
   valgteFormValues: FormValues;
   readOnly: boolean;
-  oppdaterAktivitet: (values: FormValues) => void
+  oppdaterAktivitet: (values: FormValues) => void;
   avbrytAktivitet: () => void;
   velgNesteAktivitet: () => void;
   velgForrigeAktivitet: () => void;
   harAksjonspunkt: boolean;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   opptjeningAktivitetTyper: KodeverkMedNavn[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   opptjeningFomDato: string;
@@ -102,9 +97,8 @@ export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
     defaultValues: valgteFormValues,
   });
 
-  const {
-    arbeidsgiverReferanse, erGodkjent, erEndret, aktivitetType, stillingsandel, naringRegistreringsdato,
-  } = valgtOpptjeningAktivitet;
+  const { arbeidsgiverReferanse, erGodkjent, erEndret, aktivitetType, stillingsandel, naringRegistreringsdato } =
+    valgtOpptjeningAktivitet;
 
   const opptjeningFom = finnOpptjeningFom(valgtOpptjeningAktivitet.opptjeningFom, opptjeningFomDato, opptjeningTomDato);
   const opptjeningTom = finnOpptjeningTom(valgtOpptjeningAktivitet.opptjeningTom, opptjeningFomDato, opptjeningTomDato);
@@ -118,11 +112,21 @@ export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
         <FlexContainer>
           <FlexRow spaceBetween>
             <FlexColumn>
-              <Heading size="small"><FormattedMessage id="ActivityPanel.Details" /></Heading>
+              <Heading size="small">
+                <FormattedMessage id="ActivityPanel.Details" />
+              </Heading>
             </FlexColumn>
             <FlexColumn>
-              <TimeLineButton text={intl.formatMessage({ id: 'Timeline.prevPeriod' })} type="prev" callback={velgForrigeAktivitet} />
-              <TimeLineButton text={intl.formatMessage({ id: 'Timeline.nextPeriod' })} type="next" callback={velgNesteAktivitet} />
+              <TimeLineButton
+                text={intl.formatMessage({ id: 'Timeline.prevPeriod' })}
+                type="prev"
+                callback={velgForrigeAktivitet}
+              />
+              <TimeLineButton
+                text={intl.formatMessage({ id: 'Timeline.nextPeriod' })}
+                type="next"
+                callback={velgNesteAktivitet}
+              />
             </FlexColumn>
           </FlexRow>
           <VerticalSpacer sixteenPx />
@@ -135,13 +139,13 @@ export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
                 <FlexRow>
                   <FlexColumn>
                     <BodyShort size="small">
-                      {`${dayjs(opptjeningFom).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(opptjeningTom).format(DDMMYYYY_DATE_FORMAT)}`}
+                      {`${dayjs(opptjeningFom).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(opptjeningTom).format(
+                        DDMMYYYY_DATE_FORMAT,
+                      )}`}
                     </BodyShort>
                   </FlexColumn>
                   <FlexColumn>
-                    <BodyShort size="small">
-                      {finnMånederOgDager(opptjeningFom, opptjeningTom)}
-                    </BodyShort>
+                    <BodyShort size="small">{finnMånederOgDager(opptjeningFom, opptjeningTom)}</BodyShort>
                   </FlexColumn>
                 </FlexRow>
               </FlexContainer>
@@ -151,7 +155,7 @@ export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
                 <FormattedMessage id="ActivityPanel.Activity" />
               </Label>
               <BodyShort size="small">
-                {opptjeningAktivitetTyper.find((oat) => oat.kode === aktivitetType)?.navn}
+                {opptjeningAktivitetTyper.find(oat => oat.kode === aktivitetType)?.navn}
               </BodyShort>
             </FlexColumn>
           </FlexRow>
@@ -174,18 +178,23 @@ export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
               isEdited={erEndret}
               isHorizontal
               isTrueOrFalseSelection
-              radios={[{
-                label: intl.formatMessage({ id: 'ActivityPanel.Godkjent' }),
-                value: 'true',
-              }, {
-                label: <FormattedMessage
-                  id="ActivityPanel.IkkeGodkjent"
-                  values={{
-                    b: (chunks: any) => <b>{chunks}</b>,
-                  }}
-                />,
-                value: 'false',
-              }]}
+              radios={[
+                {
+                  label: intl.formatMessage({ id: 'ActivityPanel.Godkjent' }),
+                  value: 'true',
+                },
+                {
+                  label: (
+                    <FormattedMessage
+                      id="ActivityPanel.IkkeGodkjent"
+                      values={{
+                        b: (chunks: any) => <b>{chunks}</b>,
+                      }}
+                    />
+                  ),
+                  value: 'false',
+                },
+              ]}
             />
           </>
         )}

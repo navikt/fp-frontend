@@ -13,9 +13,7 @@ import {
   AksjonspunktStatus,
   FagsakYtelseType,
 } from '@navikt/ft-kodeverk';
-import {
-  Aksjonspunkt, AlleKodeverkTilbakekreving, FeilutbetalingPerioderWrapper,
-} from '@navikt/ft-types';
+import { Aksjonspunkt, AlleKodeverkTilbakekreving, FeilutbetalingPerioderWrapper } from '@navikt/ft-types';
 import { FeilutbetalingAksjonspunktCode } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import { ForeldelseAksjonspunktCodes } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
 import { RestApiMock } from '@navikt/fp-utils-test'; // eslint-disable-line import/no-extraneous-dependencies
@@ -39,84 +37,104 @@ const defaultBehandling = {
   status: BehandlingStatus.OPPRETTET,
   type: BehandlingType.TILBAKEKREVING,
   behandlingPaaVent: false,
-  links: [{
-    href: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name,
-    rel: 'update',
-    type: 'POST',
-  }, {
-    href: BehandlingFellesApiKeys.VERGE.name,
-    rel: 'soeker-verge',
-    type: 'GET',
-  }, {
-  }, {
-    href: TilbakekrevingBehandlingApiKeys.FEILUTBETALING_FAKTA.name,
-    rel: 'feilutbetalingFakta',
-    type: 'GET',
-  }, {
-    href: TilbakekrevingBehandlingApiKeys.PERIODER_FORELDELSE.name,
-    rel: 'perioderForeldelse',
-    type: 'GET',
-  }, {
-    href: TilbakekrevingBehandlingApiKeys.FEILUTBETALING_AARSAK.name,
-    rel: 'feilutbetalingAarsak',
-    type: 'GET',
-  }],
+  links: [
+    {
+      href: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name,
+      rel: 'update',
+      type: 'POST',
+    },
+    {
+      href: BehandlingFellesApiKeys.VERGE.name,
+      rel: 'soeker-verge',
+      type: 'GET',
+    },
+    {},
+    {
+      href: TilbakekrevingBehandlingApiKeys.FEILUTBETALING_FAKTA.name,
+      rel: 'feilutbetalingFakta',
+      type: 'GET',
+    },
+    {
+      href: TilbakekrevingBehandlingApiKeys.PERIODER_FORELDELSE.name,
+      rel: 'perioderForeldelse',
+      type: 'GET',
+    },
+    {
+      href: TilbakekrevingBehandlingApiKeys.FEILUTBETALING_AARSAK.name,
+      rel: 'feilutbetalingAarsak',
+      type: 'GET',
+    },
+  ],
 } as Behandling;
 
-const faktaAksjonspunkter = [{
-  definisjon: FeilutbetalingAksjonspunktCode.AVKLAR_FAKTA_FOR_FEILUTBETALING,
-  status: AksjonspunktStatus.OPPRETTET,
-  kanLoses: true,
-}, {
-  definisjon: AksjonspunktCode.AVKLAR_VERGE,
-  status: AksjonspunktStatus.UTFORT,
-  begrunnelse: 'Dette er en begrunnelse',
-  kanLoses: true,
-}] as Aksjonspunkt[];
+const faktaAksjonspunkter = [
+  {
+    definisjon: FeilutbetalingAksjonspunktCode.AVKLAR_FAKTA_FOR_FEILUTBETALING,
+    status: AksjonspunktStatus.OPPRETTET,
+    kanLoses: true,
+  },
+  {
+    definisjon: AksjonspunktCode.AVKLAR_VERGE,
+    status: AksjonspunktStatus.UTFORT,
+    begrunnelse: 'Dette er en begrunnelse',
+    kanLoses: true,
+  },
+] as Aksjonspunkt[];
 
-const prosessAksjonspunkter = [{
-  definisjon: ForeldelseAksjonspunktCodes.VURDER_FORELDELSE,
-  status: AksjonspunktStatus.OPPRETTET,
-  kanLoses: true,
-}] as Aksjonspunkt[];
+const prosessAksjonspunkter = [
+  {
+    definisjon: ForeldelseAksjonspunktCodes.VURDER_FORELDELSE,
+    status: AksjonspunktStatus.OPPRETTET,
+    kanLoses: true,
+  },
+] as Aksjonspunkt[];
 
 const feilutbetalingFakta = {
   behandlingFakta: {
-    perioder: [{
-      fom: '2018-01-01',
-      tom: '2018-01-31',
-      belop: 1000,
-    }, {
-      fom: '2018-02-01',
-      tom: '2018-02-28',
-      belop: 5000,
-    }, {
-      fom: '2018-03-01',
-      tom: '2018-03-15',
-      belop: 100,
-    }],
+    perioder: [
+      {
+        fom: '2018-01-01',
+        tom: '2018-01-31',
+        belop: 1000,
+      },
+      {
+        fom: '2018-02-01',
+        tom: '2018-02-28',
+        belop: 5000,
+      },
+      {
+        fom: '2018-03-01',
+        tom: '2018-03-15',
+        belop: 100,
+      },
+    ],
     totalPeriodeFom: '2019-01-01',
     totalPeriodeTom: '2019-01-02',
     aktuellFeilUtbetaltBeløp: 10000,
     tidligereVarseltBeløp: 5000,
-    behandlingÅrsaker: [{
-      behandlingArsakType: {
-        kode: BehandlingArsakType.FEIL_I_LOVANDVENDELSE,
-        kodeverk: BEHANDLING_AARSAK_KODEVERK,
+    behandlingÅrsaker: [
+      {
+        behandlingArsakType: {
+          kode: BehandlingArsakType.FEIL_I_LOVANDVENDELSE,
+          kodeverk: BEHANDLING_AARSAK_KODEVERK,
+        },
       },
-    }],
+    ],
     behandlingsresultat: {
       type: {
         kode: BehandlingResultatType.INNVILGET,
         kodeverk: BEHANDLING_RESULTAT_TYPE_KODEVERK,
       },
-      konsekvenserForYtelsen: [{
-        kode: KonsekvensForYtelsen.FORELDREPENGER_OPPHØRER,
-        kodeverk: KONSEKVENS_FOR_YTELSEN_KODEVERK,
-      }, {
-        kode: KonsekvensForYtelsen.ENDRING_I_BEREGNING,
-        kodeverk: KONSEKVENS_FOR_YTELSEN_KODEVERK,
-      }],
+      konsekvenserForYtelsen: [
+        {
+          kode: KonsekvensForYtelsen.FORELDREPENGER_OPPHØRER,
+          kodeverk: KONSEKVENS_FOR_YTELSEN_KODEVERK,
+        },
+        {
+          kode: KonsekvensForYtelsen.ENDRING_I_BEREGNING,
+          kodeverk: KONSEKVENS_FOR_YTELSEN_KODEVERK,
+        },
+      ],
     },
     tilbakekrevingValg: {
       videreBehandling: {
@@ -128,47 +146,58 @@ const feilutbetalingFakta = {
   },
 };
 
-const feilutbetalingAarsak = [{
-  ytelseType: FagsakYtelseType.FORELDREPENGER,
-  hendelseTyper: [{
-    hendelseType: 'OPPTJENING',
-    hendelseUndertyper: [],
-  }, {
-    hendelseType: 'ANNET',
-    hendelseUndertyper: ['TEST1', 'TEST2'],
-  }, {
-    hendelseType: 'MEDLEM',
-    hendelseUndertyper: ['IKKE_EØS', 'IKKE_BOSATT'],
-  }],
-}];
+const feilutbetalingAarsak = [
+  {
+    ytelseType: FagsakYtelseType.FORELDREPENGER,
+    hendelseTyper: [
+      {
+        hendelseType: 'OPPTJENING',
+        hendelseUndertyper: [],
+      },
+      {
+        hendelseType: 'ANNET',
+        hendelseUndertyper: ['TEST1', 'TEST2'],
+      },
+      {
+        hendelseType: 'MEDLEM',
+        hendelseUndertyper: ['IKKE_EØS', 'IKKE_BOSATT'],
+      },
+    ],
+  },
+];
 
 const perioderForeldelse = {
-  perioder: [{
-    fom: '2019-01-01',
-    tom: '2019-01-31',
-    belop: 1000,
-    begrunnelse: 'Foreldet',
-    foreldelseVurderingType: ForeldelseVurderingType.FORELDET,
-    foreldelsesfrist: '2020-04-01',
-  }, {
-    fom: '2019-03-01',
-    tom: '2019-03-31',
-    belop: 3000,
-    foreldelseVurderingType: ForeldelseVurderingType.UDEFINERT,
-  }, {
-    fom: '2019-02-01',
-    tom: '2019-02-28',
-    belop: 3000,
-    begrunnelse: 'Over foreldelsesfrist, med tillegsfrist brukes',
-    foreldelseVurderingType: ForeldelseVurderingType.TILLEGGSFRIST,
-    foreldelsesfrist: '2020-04-01',
-    oppdagelsesDato: '2019-11-01',
-  }, {
-    fom: '2019-04-01',
-    tom: '2019-04-30',
-    belop: 4000,
-    foreldelseVurderingType: ForeldelseVurderingType.UDEFINERT,
-  }],
+  perioder: [
+    {
+      fom: '2019-01-01',
+      tom: '2019-01-31',
+      belop: 1000,
+      begrunnelse: 'Foreldet',
+      foreldelseVurderingType: ForeldelseVurderingType.FORELDET,
+      foreldelsesfrist: '2020-04-01',
+    },
+    {
+      fom: '2019-03-01',
+      tom: '2019-03-31',
+      belop: 3000,
+      foreldelseVurderingType: ForeldelseVurderingType.UDEFINERT,
+    },
+    {
+      fom: '2019-02-01',
+      tom: '2019-02-28',
+      belop: 3000,
+      begrunnelse: 'Over foreldelsesfrist, med tillegsfrist brukes',
+      foreldelseVurderingType: ForeldelseVurderingType.TILLEGGSFRIST,
+      foreldelsesfrist: '2020-04-01',
+      oppdagelsesDato: '2019-11-01',
+    },
+    {
+      fom: '2019-04-01',
+      tom: '2019-04-30',
+      belop: 4000,
+      foreldelseVurderingType: ForeldelseVurderingType.UDEFINERT,
+    },
+  ],
 } as FeilutbetalingPerioderWrapper;
 
 const verge = {
@@ -206,9 +235,7 @@ export default {
 
 const Template: Story<{
   behandling: Behandling;
-}> = ({
-  behandling,
-}) => {
+}> = ({ behandling }) => {
   const [valgtProsessSteg, setProsessSteg] = useState('default');
   const [valgtFaktaSteg, setFaktaSteg] = useState('default');
 
@@ -231,13 +258,15 @@ const Template: Story<{
     <RestApiMock data={data} requestApi={requestTilbakekrevingApi}>
       <BehandlingTilbakekrevingIndex
         behandlingUuid="12"
-        fagsak={{
-          dekningsgrad: 100,
-          fagsakYtelseType: 'FP',
-          relasjonsRolleType: 'MORA',
-          saksnummer: '152001002',
-          status: 'LOP',
-        } as Fagsak}
+        fagsak={
+          {
+            dekningsgrad: 100,
+            fagsakYtelseType: 'FP',
+            relasjonsRolleType: 'MORA',
+            saksnummer: '152001002',
+            status: 'LOP',
+          } as Fagsak
+        }
         rettigheter={{
           kanOverstyreAccess: {
             employeeHasAccess: true,
@@ -286,9 +315,11 @@ HenlagtBehandling.args = {
     ...defaultBehandling,
     behandlingHenlagt: true,
     status: BehandlingStatus.AVSLUTTET,
-    aksjonspunkt: [{
-      ...prosessAksjonspunkter[0],
-      status: AksjonspunktStatus.UTFORT,
-    }],
+    aksjonspunkt: [
+      {
+        ...prosessAksjonspunkter[0],
+        status: AksjonspunktStatus.UTFORT,
+      },
+    ],
   },
 };

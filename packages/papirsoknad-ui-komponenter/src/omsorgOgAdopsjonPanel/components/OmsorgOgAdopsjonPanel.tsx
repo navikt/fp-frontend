@@ -1,15 +1,17 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
+import { BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
-  BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
-import {
-  dateBeforeOrEqualToToday, hasValidDate, hasValidInteger, isDatesEqual, maxValue, minValue, required,
+  dateBeforeOrEqualToToday,
+  hasValidDate,
+  hasValidInteger,
+  isDatesEqual,
+  maxValue,
+  minValue,
+  required,
 } from '@navikt/ft-form-validators';
-import {
-  Datepicker, formHooks, InputField, RadioGroupPanel,
-} from '@navikt/ft-form-hooks';
+import { Datepicker, formHooks, InputField, RadioGroupPanel } from '@navikt/ft-form-hooks';
 
 import { familieHendelseType as fht } from '@navikt/fp-kodeverk';
 
@@ -25,21 +27,16 @@ const OMSORG_NAME_PREFIX = 'omsorg';
 export type FormValues = {
   omsorgsovertakelsesdato?: string;
   antallBarn?: string;
-  foedselsDato?: { id: number, dato?: string }[];
-}
+  foedselsDato?: { id: number; dato?: string }[];
+};
 
 export type TransformedFormValues = {
   omsorgsovertakelsesdato?: string;
   antallBarn?: string;
   foedselsDato?: string[];
-}
+};
 
-const getValideringMotAnnenFødselsdato = (
-  index: number,
-  fodselsdato?: string | string[],
-) => (
-  fDato?: string,
-) => {
+const getValideringMotAnnenFødselsdato = (index: number, fodselsdato?: string | string[]) => (fDato?: string) => {
   if (index === 0 && fodselsdato && fDato) {
     return isDatesEqual(fDato, Array.isArray(fodselsdato) ? fodselsdato[0] : fodselsdato);
   }
@@ -95,7 +92,11 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   return (
     <BorderBox>
       <Heading size="small">
-        <FormattedMessage id={familieHendelseType === fht.ADOPSJON ? 'Registrering.Adopsjon.Title' : 'Registrering.Adopsjon.OmsorgTitle'} />
+        <FormattedMessage
+          id={
+            familieHendelseType === fht.ADOPSJON ? 'Registrering.Adopsjon.Title' : 'Registrering.Adopsjon.OmsorgTitle'
+          }
+        />
       </Heading>
       <VerticalSpacer sixteenPx />
       <FlexContainer>
@@ -110,13 +111,16 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
                   isReadOnly={readOnly}
                   isTrueOrFalseSelection
                   isHorizontal
-                  radios={[{
-                    label: formatMessage({ id: 'Registrering.Adopsjon.Ja' }),
-                    value: 'true',
-                  }, {
-                    label: formatMessage({ id: 'Registrering.Adopsjon.Nei' }),
-                    value: 'false',
-                  }]}
+                  radios={[
+                    {
+                      label: formatMessage({ id: 'Registrering.Adopsjon.Ja' }),
+                      value: 'true',
+                    },
+                    {
+                      label: formatMessage({ id: 'Registrering.Adopsjon.Nei' }),
+                      value: 'false',
+                    },
+                  ]}
                 />
               </FlexColumn>
             </FlexRow>
@@ -128,8 +132,10 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
             <Datepicker
               name={`${OMSORG_NAME_PREFIX}.omsorgsovertakelsesdato`}
               label={formatMessage({
-                id: familieHendelseType === fht.ADOPSJON
-                  ? 'Registrering.Adopsjon.DatoForOvertakelsenStebarn' : 'Registrering.Adopsjon.DatoForOvertakelsen',
+                id:
+                  familieHendelseType === fht.ADOPSJON
+                    ? 'Registrering.Adopsjon.DatoForOvertakelsenStebarn'
+                    : 'Registrering.Adopsjon.DatoForOvertakelsen',
               })}
               isReadOnly={readOnly}
               validate={familieHendelseType === fht.ADOPSJON ? [required, hasValidDate] : [hasValidDate]}
@@ -153,14 +159,20 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
               name={`${OMSORG_NAME_PREFIX}.antallBarn`}
               label={formatMessage({ id: 'Registrering.Adopsjon.AntallBarn' })}
               readOnly={readOnly}
-              parse={(value) => {
+              parse={value => {
                 const parsedValue = parseInt(value.toString(), 10);
                 return Number.isNaN(parsedValue) ? value : parsedValue;
               }}
               className={styles.barnInput}
-              validate={familieHendelseType === fht.ADOPSJON
-                ? [required, hasValidInteger, minAntall, maxAntall]
-                : [hasValidInteger, (value) => (value ? minAntall(value) : undefined), (value) => (value ? maxAntall(value) : undefined)]}
+              validate={
+                familieHendelseType === fht.ADOPSJON
+                  ? [required, hasValidInteger, minAntall, maxAntall]
+                  : [
+                      hasValidInteger,
+                      value => (value ? minAntall(value) : undefined),
+                      value => (value ? maxAntall(value) : undefined),
+                    ]
+              }
             />
           </FlexColumn>
         </FlexRow>
@@ -172,9 +184,16 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
                 <Datepicker
                   name={`${OMSORG_NAME_PREFIX}.foedselsDato.${index}.dato`}
                   isReadOnly={readOnly}
-                  validate={familieHendelseType === fht.ADOPSJON
-                    ? [required, hasValidDate, dateBeforeOrEqualToToday, getValideringMotAnnenFødselsdato(index, fodselsdatoer)]
-                    : [hasValidDate, dateBeforeOrEqualToToday, getValideringMotAnnenFødselsdato(index, fodselsdatoer)]}
+                  validate={
+                    familieHendelseType === fht.ADOPSJON
+                      ? [
+                          required,
+                          hasValidDate,
+                          dateBeforeOrEqualToToday,
+                          getValideringMotAnnenFødselsdato(index, fodselsdatoer),
+                        ]
+                      : [hasValidDate, dateBeforeOrEqualToToday, getValideringMotAnnenFødselsdato(index, fodselsdatoer)]
+                  }
                   label={formatMessage({ id: 'Registrering.Adopsjon.FodselsdatoBarnN' }, { n: index + 1 })}
                 />
               </React.Fragment>
@@ -186,9 +205,10 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   );
 };
 
-OmsorgOgAdopsjonPanel.transformValues = (values) => ({
+OmsorgOgAdopsjonPanel.transformValues = values => ({
   ...values,
-  foedselsDato: values.foedselsDato && values.foedselsDato.length > 0 ? values.foedselsDato.map((f) => f.dato) : undefined,
+  foedselsDato:
+    values.foedselsDato && values.foedselsDato.length > 0 ? values.foedselsDato.map(f => f.dato) : undefined,
 });
 
 export default OmsorgOgAdopsjonPanel;

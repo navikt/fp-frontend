@@ -10,15 +10,12 @@ interface OwnProps {
   oppdaterFaktaPanelIUrl: (index: number) => void;
 }
 
-const FaktaMeny: FunctionComponent<OwnProps> = ({
-  menyData,
-  oppdaterFaktaPanelIUrl,
-}) => {
+const FaktaMeny: FunctionComponent<OwnProps> = ({ menyData, oppdaterFaktaPanelIUrl }) => {
   const intl = useIntl();
   return (
     <SideMenu
       heading={intl.formatMessage({ id: 'FaktaPanel.FaktaOm' })}
-      links={menyData.map((data) => ({
+      links={menyData.map(data => ({
         label: data.tekst,
         active: data.erAktiv,
         iconSrc: data.harApneAksjonspunkter ? advarselIkonUrl : undefined,

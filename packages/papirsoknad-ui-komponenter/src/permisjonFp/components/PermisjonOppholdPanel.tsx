@@ -15,8 +15,8 @@ import RenderOppholdPeriodeFieldArray, {
 
 export type FormValues = {
   skalHaOpphold?: boolean;
-  [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]: PeriodeFormValues
-}
+  [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]: PeriodeFormValues;
+};
 
 interface OwnProps {
   readOnly: boolean;
@@ -33,30 +33,24 @@ interface StaticFunctions {
  * Viser panel for utsettelse
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
-const PermisjonOppholdPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
-  readOnly,
-  alleKodeverk,
-}) => {
+const PermisjonOppholdPanel: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly, alleKodeverk }) => {
   const oppholdsReasons = alleKodeverk[KodeverkType.OPPHOLD_ARSAK];
 
-  const { watch } = formHooks.useFormContext<{[TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
+  const { watch } = formHooks.useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
   const skalHaOpphold = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalHaOpphold`) || false;
 
   return (
     <div>
-      <Label size="small"><FormattedMessage id="Registrering.Permisjon.Opphold.Title" /></Label>
+      <Label size="small">
+        <FormattedMessage id="Registrering.Permisjon.Opphold.Title" />
+      </Label>
       <VerticalSpacer sixteenPx />
       <CheckboxField
         readOnly={readOnly}
         name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalHaOpphold`}
         label={<FormattedMessage id="Registrering.Permisjon.Opphold.OppholdUttaket" />}
       />
-      {skalHaOpphold && (
-        <RenderOppholdPeriodeFieldArray
-          oppholdsReasons={oppholdsReasons}
-          readOnly={readOnly}
-        />
-      )}
+      {skalHaOpphold && <RenderOppholdPeriodeFieldArray oppholdsReasons={oppholdsReasons} readOnly={readOnly} />}
     </div>
   );
 };

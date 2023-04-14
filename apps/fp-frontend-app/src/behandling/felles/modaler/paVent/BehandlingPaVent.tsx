@@ -1,6 +1,4 @@
-import React, {
-  useState, useMemo, useCallback, FunctionComponent, useEffect,
-} from 'react';
+import React, { useState, useMemo, useCallback, FunctionComponent, useEffect } from 'react';
 import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 
 import { AlleKodeverk, AlleKodeverkTilbakekreving, Behandling } from '@navikt/fp-types';
@@ -40,12 +38,23 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
     }
   }, [behandling.versjon, skalIkkeViseModal]);
 
-  const oppdaterPaVentData = useCallback((formData: { ventearsak: string; frist?: string; }) => settPaVent({
-    ...formData, behandlingUuid: behandling.uuid, behandlingVersjon: behandling.versjon,
-  }).then(() => hentBehandling(false)), [behandling.versjon]);
+  const oppdaterPaVentData = useCallback(
+    (formData: { ventearsak: string; frist?: string }) =>
+      settPaVent({
+        ...formData,
+        behandlingUuid: behandling.uuid,
+        behandlingVersjon: behandling.versjon,
+      }).then(() => hentBehandling(false)),
+    [behandling.versjon],
+  );
 
-  const erManueltSattPaVent = useMemo(() => behandling.aksjonspunkt.filter((ap) => isAksjonspunktOpen(ap.status))
-    .some((ap) => ap.definisjon === AksjonspunktCode.AUTO_MANUELT_SATT_PÅ_VENT), [behandling.aksjonspunkt]);
+  const erManueltSattPaVent = useMemo(
+    () =>
+      behandling.aksjonspunkt
+        .filter(ap => isAksjonspunktOpen(ap.status))
+        .some(ap => ap.definisjon === AksjonspunktCode.AUTO_MANUELT_SATT_PÅ_VENT),
+    [behandling.aksjonspunkt],
+  );
 
   return (
     <SettPaVentModalIndex

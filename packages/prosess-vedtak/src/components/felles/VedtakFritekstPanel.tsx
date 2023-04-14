@@ -36,17 +36,15 @@ const VedtakFritekstPanel: FunctionComponent<OwnProps> = ({
           <TextAreaField
             name="begrunnelse"
             label={intl.formatMessage({ id: labelTextCode })}
-            validate={[
-              minLength3,
-              maxLength1500,
-              hasValidText,
-            ]}
+            validate={[minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
             readOnly={isReadOnly}
-            badges={[{
-              type: 'info',
-              titleText: getLanguageFromSprakkode(språkKode),
-            }]}
+            badges={[
+              {
+                type: 'info',
+                titleText: getLanguageFromSprakkode(språkKode),
+              },
+            ]}
           />
         </>
       )}

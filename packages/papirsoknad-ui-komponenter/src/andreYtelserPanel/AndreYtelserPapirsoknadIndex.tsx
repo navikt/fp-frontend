@@ -11,7 +11,7 @@ const intl = createIntl(messages);
 interface OwnProps {
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
-  kunMiliterEllerSiviltjeneste?: boolean,
+  kunMiliterEllerSiviltjeneste?: boolean;
 }
 
 interface StaticFunctions {
@@ -33,8 +33,9 @@ const AndreYtelserPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunction
   </RawIntlProvider>
 );
 
-AndreYtelserPapirsoknadIndex.buildInitialValues = (andreYtelser) => AndreYtelserPanel.buildInitialValues(andreYtelser);
+AndreYtelserPapirsoknadIndex.buildInitialValues = andreYtelser => AndreYtelserPanel.buildInitialValues(andreYtelser);
 
-AndreYtelserPapirsoknadIndex.transformValues = (values, andreYtelser) => AndreYtelserPanel.transformValues(values, andreYtelser);
+AndreYtelserPapirsoknadIndex.transformValues = (values, andreYtelser) =>
+  AndreYtelserPanel.transformValues(values, andreYtelser);
 
 export default AndreYtelserPapirsoknadIndex;

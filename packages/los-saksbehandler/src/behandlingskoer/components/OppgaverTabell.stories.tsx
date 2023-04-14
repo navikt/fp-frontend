@@ -21,7 +21,7 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{ oppgaverTilBehandling?: Oppgave[], reserverteOppgaver?: Oppgave[] }> = ({
+const Template: Story<{ oppgaverTilBehandling?: Oppgave[]; reserverteOppgaver?: Oppgave[] }> = ({
   oppgaverTilBehandling,
   reserverteOppgaver,
 }) => {
@@ -33,57 +33,57 @@ const Template: Story<{ oppgaverTilBehandling?: Oppgave[], reserverteOppgaver?: 
   ];
   return (
     <RestApiMock data={data} requestApi={requestApi}>
-      <OppgaverTabell
-        reserverOppgave={action('button-click')}
-        valgtSakslisteId={1}
-        doPolling={false}
-      />
+      <OppgaverTabell reserverOppgave={action('button-click')} valgtSakslisteId={1} doPolling={false} />
     </RestApiMock>
   );
 };
 
 export const Default = Template.bind({});
 Default.args = {
-  oppgaverTilBehandling: [{
-    id: 1,
-    status: {
-      erReservert: false,
-      flyttetReservasjon: {
-        tidspunkt: '2019-02-02',
-        uid: '23423',
-        navn: 'Espen Utvikler',
-        begrunnelse: 'Flyttet',
+  oppgaverTilBehandling: [
+    {
+      id: 1,
+      status: {
+        erReservert: false,
+        flyttetReservasjon: {
+          tidspunkt: '2019-02-02',
+          uid: '23423',
+          navn: 'Espen Utvikler',
+          begrunnelse: 'Flyttet',
+        },
       },
+      saksnummer: 1234,
+      personnummer: '1212',
+      navn: 'Espen Utvikler',
+      system: 'SAK',
+      behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
+      behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
+      opprettetTidspunkt: '2019-01-01',
+      behandlingsfrist: '2019-01-01',
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      erTilSaksbehandling: true,
+      behandlingId: '1',
     },
-    saksnummer: 1234,
-    personnummer: '1212',
-    navn: 'Espen Utvikler',
-    system: 'SAK',
-    behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
-    opprettetTidspunkt: '2019-01-01',
-    behandlingsfrist: '2019-01-01',
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-    erTilSaksbehandling: true,
-    behandlingId: '1',
-  }],
-  reserverteOppgaver: [{
-    id: 2,
-    status: {
-      erReservert: true,
+  ],
+  reserverteOppgaver: [
+    {
+      id: 2,
+      status: {
+        erReservert: true,
+      },
+      saksnummer: 1234,
+      personnummer: '233',
+      navn: 'Helge Utvikler',
+      system: 'SAK',
+      behandlingstype: BehandlingType.KLAGE,
+      behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
+      opprettetTidspunkt: '2019-01-01',
+      behandlingsfrist: '2019-01-01',
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      erTilSaksbehandling: true,
+      behandlingId: '2',
     },
-    saksnummer: 1234,
-    personnummer: '233',
-    navn: 'Helge Utvikler',
-    system: 'SAK',
-    behandlingstype: BehandlingType.KLAGE,
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
-    opprettetTidspunkt: '2019-01-01',
-    behandlingsfrist: '2019-01-01',
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-    erTilSaksbehandling: true,
-    behandlingId: '2',
-  }],
+  ],
 };
 
 export const TomOppgaveTabell = Template.bind({});

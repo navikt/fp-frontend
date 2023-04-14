@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, BodyShort, Modal as NavModal } from '@navikt/ds-react';
-import {
-  FlexColumn, FlexContainer, FlexRow, Image,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, Image } from '@navikt/ft-ui-komponenter';
 
 import advarselImageUrl from '../../images/advarsel.svg';
 import Saksliste from '../../typer/sakslisteAvdelingTsType';
@@ -21,11 +19,7 @@ interface OwnProps {
  *
  * Modal som lar en avdelingsleder fjerne sakslister.
  */
-const SletteSakslisteModal: FunctionComponent<OwnProps> = ({
-  valgtSaksliste,
-  cancel,
-  submit,
-}) => {
+const SletteSakslisteModal: FunctionComponent<OwnProps> = ({ valgtSaksliste, cancel, submit }) => {
   const intl = useIntl();
   return (
     <NavModal
@@ -48,7 +42,10 @@ const SletteSakslisteModal: FunctionComponent<OwnProps> = ({
             </FlexColumn>
             <FlexColumn className={styles.text}>
               <BodyShort size="small">
-                <FormattedMessage id="SletteSakslisteModal.SletteSaksliste" values={{ sakslisteNavn: valgtSaksliste.navn }} />
+                <FormattedMessage
+                  id="SletteSakslisteModal.SletteSaksliste"
+                  values={{ sakslisteNavn: valgtSaksliste.navn }}
+                />
               </BodyShort>
             </FlexColumn>
             <FlexColumn>
@@ -64,13 +61,7 @@ const SletteSakslisteModal: FunctionComponent<OwnProps> = ({
               </Button>
             </FlexColumn>
             <FlexColumn>
-              <Button
-                className={styles.cancelButton}
-                size="small"
-                variant="secondary"
-                onClick={cancel}
-                type="button"
-              >
+              <Button className={styles.cancelButton} size="small" variant="secondary" onClick={cancel} type="button">
                 {intl.formatMessage({ id: 'SletteSakslisteModal.Nei' })}
               </Button>
             </FlexColumn>

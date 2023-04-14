@@ -3,9 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import { RawIntlProvider } from 'react-intl';
 import { render, screen } from '@testing-library/react';
-import {
-  BehandlingType, BehandlingStatus, FagsakStatus, FagsakYtelseType,
-} from '@navikt/ft-kodeverk';
+import { BehandlingType, BehandlingStatus, FagsakStatus, FagsakYtelseType } from '@navikt/ft-kodeverk';
 import { createIntl } from '@navikt/ft-utils';
 
 import { RestApiMock } from '@navikt/fp-utils-test';

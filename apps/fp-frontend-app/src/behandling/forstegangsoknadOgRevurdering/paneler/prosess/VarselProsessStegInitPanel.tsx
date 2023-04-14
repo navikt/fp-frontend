@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, useCallback, useMemo,
-} from 'react';
+import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
@@ -8,7 +6,12 @@ import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { VarselOmRevurderingProsessIndex } from '@navikt/fp-prosess-varsel-om-revurdering';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
-  Behandling, Fagsak, FamilieHendelse, FamilieHendelseSamling, ForhåndsvisMeldingParams, Soknad,
+  Behandling,
+  Fagsak,
+  FamilieHendelse,
+  FamilieHendelseSamling,
+  ForhåndsvisMeldingParams,
+  Soknad,
 } from '@navikt/fp-types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
@@ -18,35 +21,31 @@ import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 import useStandardProsessPanelProps from '../../../felles/prosess/useStandardProsessPanelProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 
-const getForhandsvisCallback = (
-  forhandsvisMelding: (params: ForhåndsvisMeldingParams, keepData?: boolean) => Promise<unknown>,
-  fagsak: Fagsak,
-  behandling: Behandling,
-) => (data: {
-  mottaker: string;
-  dokumentMal: string;
-  fritekst: string;
-}) => {
-  const brevData = {
-    ...data,
-    behandlingUuid: behandling.uuid,
-    fagsakYtelseType: fagsak.fagsakYtelseType,
+const getForhandsvisCallback =
+  (
+    forhandsvisMelding: (params: ForhåndsvisMeldingParams, keepData?: boolean) => Promise<unknown>,
+    fagsak: Fagsak,
+    behandling: Behandling,
+  ) =>
+  (data: { mottaker: string; dokumentMal: string; fritekst: string }) => {
+    const brevData = {
+      ...data,
+      behandlingUuid: behandling.uuid,
+      fagsakYtelseType: fagsak.fagsakYtelseType,
+    };
+
+    return forhandsvisMelding(brevData).then(response => forhandsvisDokument(response));
   };
 
-  return forhandsvisMelding(brevData).then((response) => forhandsvisDokument(response));
-};
+const getLagringSideeffekter =
+  (toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void, opneSokeside: () => void) => () => {
+    toggleOppdatereFagsakContext(false);
 
-const getLagringSideeffekter = (
-  toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
-  opneSokeside: () => void,
-) => () => {
-  toggleOppdatereFagsakContext(false);
-
-  // Returner funksjon som blir kjørt etter lagring av aksjonspunkt
-  return () => {
-    opneSokeside();
+    // Returner funksjon som blir kjørt etter lagring av aksjonspunkt
+    return () => {
+      opneSokeside();
+    };
   };
-};
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktCode.VARSEL_REVURDERING_MANUELL,
@@ -64,10 +63,10 @@ type EndepunktPanelData = {
   familiehendelseOriginalBehandling: FamilieHendelse;
   soknad: Soknad;
   soknadOriginalBehandling: Soknad;
-}
+};
 
 interface OwnProps {
-  toggleSkalOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
+  toggleSkalOppdatereFagsakContext: (skalHenteFagsak: boolean) => void;
   fagsak: Fagsak;
   opneSokeside: () => void;
 }
@@ -86,8 +85,10 @@ const VarselProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
 
   const standardPanelProps = useStandardProsessPanelProps();
 
-  const previewCallback = useCallback(getForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
-    [standardPanelProps.behandling.versjon]);
+  const previewCallback = useCallback(
+    getForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
+    [standardPanelProps.behandling.versjon],
+  );
 
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>
@@ -96,14 +97,9 @@ const VarselProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.VARSEL}
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.CheckVarselRevurdering' })}
-      skalPanelVisesIMeny={(data) => skalViseProsessPanel(data.aksjonspunkter)}
+      skalPanelVisesIMeny={data => skalViseProsessPanel(data.aksjonspunkter)}
       lagringSideEffekter={lagringSideEffekter}
-      renderPanel={(data) => (
-        <VarselOmRevurderingProsessIndex
-          previewCallback={previewCallback}
-          {...data}
-        />
-      )}
+      renderPanel={data => <VarselOmRevurderingProsessIndex previewCallback={previewCallback} {...data} />}
     />
   );
 };

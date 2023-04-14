@@ -1,9 +1,7 @@
 import React, { FunctionComponent, useMemo, ReactElement } from 'react';
 import { BodyShort, Heading } from '@navikt/ds-react';
 import { Clipboard } from '@navikt/ft-plattform-komponenter';
-import {
-  FlexColumn, FlexRow, Image,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexRow, Image } from '@navikt/ft-ui-komponenter';
 import { Office1 } from '@navikt/ds-icons';
 import { useIntl, FormattedMessage, IntlShape } from 'react-intl';
 import kvinneIkonUrl from '../../../images/kvinne.svg';
@@ -59,15 +57,13 @@ const finnAvsenderBilde = (journalpost: Journalpost, intl: IntlShape): ReactElem
 };
 
 type OwnProps = Readonly<{
-  journalpost: Journalpost
+  journalpost: Journalpost;
 }>;
 
 /**
  * BrukerAvsenderPanel - Inneholder detaljer om bruker og avsender
  */
-const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({
-  journalpost,
-}) => {
+const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({ journalpost }) => {
   const intl = useIntl();
   const kjønnBilde = useMemo(() => finnKjønnBilde(journalpost), [journalpost]);
   const avsenderBilde = useMemo(() => finnAvsenderBilde(journalpost, intl), [journalpost]);
@@ -75,10 +71,14 @@ const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({
     <>
       <FlexRow>
         <FlexColumn className={styles.brukerAvsenderTittel}>
-          <Heading size="small"><FormattedMessage id="ValgtOppgave.Bruker" /></Heading>
+          <Heading size="small">
+            <FormattedMessage id="ValgtOppgave.Bruker" />
+          </Heading>
         </FlexColumn>
         <FlexColumn>
-          <Heading size="small"><FormattedMessage id="ValgtOppgave.Avsender" /></Heading>
+          <Heading size="small">
+            <FormattedMessage id="ValgtOppgave.Avsender" />
+          </Heading>
         </FlexColumn>
       </FlexRow>
       {journalpost.bruker && (
@@ -94,35 +94,24 @@ const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({
           <FlexColumn className={styles.brukerAvsenderInnhold}>
             <FlexRow>
               <FlexColumn>
-                <BodyShort>
-                  {journalpost.bruker.navn}
-                </BodyShort>
+                <BodyShort>{journalpost.bruker.navn}</BodyShort>
               </FlexColumn>
             </FlexRow>
             <FlexRow>
               <FlexColumn>
                 <Clipboard>
-                  <BodyShort>
-                    {journalpost.bruker.fnr}
-                  </BodyShort>
+                  <BodyShort>{journalpost.bruker.fnr}</BodyShort>
                 </Clipboard>
               </FlexColumn>
             </FlexRow>
           </FlexColumn>
-          <FlexColumn className={styles.brukerAvsenderIkon}>
-            {avsenderBilde}
-          </FlexColumn>
+          <FlexColumn className={styles.brukerAvsenderIkon}>{avsenderBilde}</FlexColumn>
           <FlexColumn className={styles.brukerAvsenderInnhold}>
-            <BodyShort>
-              {journalpost.avsender.navn}
-            </BodyShort>
+            <BodyShort>{journalpost.avsender.navn}</BodyShort>
             <Clipboard>
-              <BodyShort>
-                {journalpost.avsender.id}
-              </BodyShort>
+              <BodyShort>{journalpost.avsender.id}</BodyShort>
             </Clipboard>
           </FlexColumn>
-
         </FlexRow>
       )}
     </>

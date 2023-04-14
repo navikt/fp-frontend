@@ -41,7 +41,7 @@ const ForeldreansvarVilkarProsessIndex: FunctionComponent<OwnProps & StandardPro
       readOnly={isReadOnly}
       readOnlySubmitButton={readOnlySubmitButton}
       alleKodeverk={alleKodeverk}
-      erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted)}
+      erIkkeGodkjentAvBeslutter={aksjonspunkter.some(a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted)}
       formData={formData}
       setFormData={setFormData}
     />
