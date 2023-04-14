@@ -60,7 +60,7 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({ dokument, docFieldIndex
             )}
           </FlexColumn>
         )}
-        <FlexColumn>
+        <FlexColumn className={styles.dokLenke}>
           <a href={dokument.lenke} target="_blank" rel="noreferrer">
             <NewTab className={styles.newTabIcon} />
           </a>

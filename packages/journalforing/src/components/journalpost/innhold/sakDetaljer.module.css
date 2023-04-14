@@ -26,3 +26,7 @@
   height: 32px;
   width: 32px;
 }
+
+.clipBoard > div > button {
+  padding: 0px;
+}
