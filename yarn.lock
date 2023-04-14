@@ -3373,7 +3373,6 @@ __metadata:
     "@navikt/ft-form-hooks": 4.0.14
     "@navikt/ft-form-validators": 2.0.12
     "@navikt/ft-kodeverk": 2.0.10
-    "@navikt/ft-plattform-komponenter": 2.0.13
     "@navikt/ft-ui-komponenter": 2.0.12
     "@navikt/ft-utils": 2.0.11
     "@storybook/addon-actions": 7.0.4
