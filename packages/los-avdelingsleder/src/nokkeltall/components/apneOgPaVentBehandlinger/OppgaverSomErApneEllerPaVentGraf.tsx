@@ -9,7 +9,8 @@ import BehandlingVenteStatus from '../../../kodeverk/behandlingVenteStatus';
 
 const UKJENT_DATO = 'UKJENT_DATO';
 
-const getYearText = (month: number, intl: IntlShape): string => intl.formatMessage({ id: `OppgaverSomErApneEllerPaVentGraf.${month}` });
+const getYearText = (month: number, intl: IntlShape): string =>
+  intl.formatMessage({ id: `OppgaverSomErApneEllerPaVentGraf.${month}` });
 
 interface KoordinatDatoEllerUkjent {
   x: string;
@@ -21,8 +22,8 @@ const finnGrafPeriode = (oppgaverSomErApneEllerPaVent: OppgaverSomErApneEllerPaV
   let periodeSlutt = dayjs().add(1, 'M');
 
   oppgaverSomErApneEllerPaVent
-    .filter((oppgave) => !!oppgave.førsteUttakMåned)
-    .forEach((oppgave) => {
+    .filter(oppgave => !!oppgave.førsteUttakMåned)
+    .forEach(oppgave => {
       const dato = dayjs(oppgave.førsteUttakMåned);
       if (dato.isBefore(periodeStart)) {
         periodeStart = dato;
@@ -33,27 +34,33 @@ const finnGrafPeriode = (oppgaverSomErApneEllerPaVent: OppgaverSomErApneEllerPaV
     });
 
   // Eksta kolonne mellom y-akse og første stolpe + Ekstra kolonne for data med ukjent dato
-  return [dayjs(periodeStart.subtract(1, 'months').startOf('month')), dayjs(periodeSlutt.add(1, 'months').startOf('month'))];
+  return [
+    dayjs(periodeStart.subtract(1, 'months').startOf('month')),
+    dayjs(periodeSlutt.add(1, 'months').startOf('month')),
+  ];
 };
 
-const finnAntallPerDato = (oppgaverSomErApneEllerPaVent: OppgaverSomErApneEllerPaVent[]): KoordinatDatoEllerUkjent[] => {
-  const antallPerDatoOgUkjent = oppgaverSomErApneEllerPaVent
-    .reduce((acc, oppgave) => {
-      const { førsteUttakMåned, antall } = oppgave;
-      const key = førsteUttakMåned || UKJENT_DATO;
-      return {
-        ...acc,
-        [key]: (acc[key] ? acc[key] + antall : antall),
-      };
-    }, {} as Record<string, number>);
+const finnAntallPerDato = (
+  oppgaverSomErApneEllerPaVent: OppgaverSomErApneEllerPaVent[],
+): KoordinatDatoEllerUkjent[] => {
+  const antallPerDatoOgUkjent = oppgaverSomErApneEllerPaVent.reduce((acc, oppgave) => {
+    const { førsteUttakMåned, antall } = oppgave;
+    const key = førsteUttakMåned || UKJENT_DATO;
+    return {
+      ...acc,
+      [key]: acc[key] ? acc[key] + antall : antall,
+    };
+  }, {} as Record<string, number>);
 
-  return Object.keys(antallPerDatoOgUkjent)
-    .map((k) => ({ x: k, y: antallPerDatoOgUkjent[k] }));
+  return Object.keys(antallPerDatoOgUkjent).map(k => ({ x: k, y: antallPerDatoOgUkjent[k] }));
 };
 
 const lagKoordinatForDato = (dato: dayjs.Dayjs, oppgaver: KoordinatDatoEllerUkjent[]): (number | Date)[] => {
-  const eksisterendeDato = oppgaver.filter((o) => o.x !== UKJENT_DATO).find((o) => dayjs(o.x).isSame(dato));
-  return [eksisterendeDato ? dayjs(eksisterendeDato.x).toDate() : dato.toDate(), eksisterendeDato ? eksisterendeDato.y : 0];
+  const eksisterendeDato = oppgaver.filter(o => o.x !== UKJENT_DATO).find(o => dayjs(o.x).isSame(dato));
+  return [
+    eksisterendeDato ? dayjs(eksisterendeDato.x).toDate() : dato.toDate(),
+    eksisterendeDato ? eksisterendeDato.y : 0,
+  ];
 };
 
 const fyllInnManglendeDatoerOgSorterEtterDato = (
@@ -61,8 +68,7 @@ const fyllInnManglendeDatoerOgSorterEtterDato = (
   oppgaverIkkePaVent: KoordinatDatoEllerUkjent[],
   periodeStart: dayjs.Dayjs,
   periodeSlutt: dayjs.Dayjs,
-): { koordinaterPaVent: (number | Date)[][], koordinaterIkkePaVent: (number | Date
-)[][] } => {
+): { koordinaterPaVent: (number | Date)[][]; koordinaterIkkePaVent: (number | Date)[][] } => {
   const koordinaterPaVent: (number | Date)[][] = [];
   const koordinaterIkkePaVent: (number | Date)[][] = [];
 
@@ -73,8 +79,8 @@ const fyllInnManglendeDatoerOgSorterEtterDato = (
     dato = dayjs(dato.add(1, 'month'));
   } while (dato.isBefore(periodeSlutt));
 
-  koordinaterPaVent.push([periodeSlutt.toDate(), oppgaverPaVent.find((d) => d.x === UKJENT_DATO)?.y || 0]);
-  koordinaterIkkePaVent.push([periodeSlutt.toDate(), oppgaverIkkePaVent.find((d) => d.x === UKJENT_DATO)?.y || 0]);
+  koordinaterPaVent.push([periodeSlutt.toDate(), oppgaverPaVent.find(d => d.x === UKJENT_DATO)?.y || 0]);
+  koordinaterIkkePaVent.push([periodeSlutt.toDate(), oppgaverIkkePaVent.find(d => d.x === UKJENT_DATO)?.y || 0]);
 
   return {
     koordinaterPaVent,
@@ -90,26 +96,41 @@ interface OwnProps {
 /**
  * OppgaverSomErApneEllerPaVentGraf.
  */
-const OppgaverSomErApneEllerPaVentGraf: FunctionComponent<OwnProps> = ({
-  height,
-  oppgaverApneEllerPaVent,
-}) => {
+const OppgaverSomErApneEllerPaVentGraf: FunctionComponent<OwnProps> = ({ height, oppgaverApneEllerPaVent }) => {
   const intl = useIntl();
   const paVentTekst = intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.PaVent' });
   const ikkePaVentTekst = intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.IkkePaVent' });
   const ukjentTekst = intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.Ukjent' });
   const datoTekst = intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.Dato' });
 
-  const oppgaverPaVentPerDato = useMemo(() => finnAntallPerDato(oppgaverApneEllerPaVent
-    .filter((o) => o.behandlingVenteStatus === BehandlingVenteStatus.PA_VENT)), [oppgaverApneEllerPaVent]);
-  const oppgaverIkkePaVentPerDato = useMemo(() => finnAntallPerDato(oppgaverApneEllerPaVent
-    .filter((o) => o.behandlingVenteStatus === BehandlingVenteStatus.IKKE_PA_VENT)), [oppgaverApneEllerPaVent]);
+  const oppgaverPaVentPerDato = useMemo(
+    () =>
+      finnAntallPerDato(oppgaverApneEllerPaVent.filter(o => o.behandlingVenteStatus === BehandlingVenteStatus.PA_VENT)),
+    [oppgaverApneEllerPaVent],
+  );
+  const oppgaverIkkePaVentPerDato = useMemo(
+    () =>
+      finnAntallPerDato(
+        oppgaverApneEllerPaVent.filter(o => o.behandlingVenteStatus === BehandlingVenteStatus.IKKE_PA_VENT),
+      ),
+    [oppgaverApneEllerPaVent],
+  );
 
-  const [periodeStart, periodeSlutt] = useMemo(() => finnGrafPeriode(oppgaverApneEllerPaVent), [oppgaverApneEllerPaVent]);
+  const [periodeStart, periodeSlutt] = useMemo(
+    () => finnGrafPeriode(oppgaverApneEllerPaVent),
+    [oppgaverApneEllerPaVent],
+  );
 
-  const { koordinaterPaVent, koordinaterIkkePaVent } = useMemo(() => fyllInnManglendeDatoerOgSorterEtterDato(
-    oppgaverPaVentPerDato, oppgaverIkkePaVentPerDato, periodeStart, periodeSlutt,
-  ), [oppgaverPaVentPerDato, oppgaverIkkePaVentPerDato, periodeStart, periodeSlutt]);
+  const { koordinaterPaVent, koordinaterIkkePaVent } = useMemo(
+    () =>
+      fyllInnManglendeDatoerOgSorterEtterDato(
+        oppgaverPaVentPerDato,
+        oppgaverIkkePaVentPerDato,
+        periodeStart,
+        periodeSlutt,
+      ),
+    [oppgaverPaVentPerDato, oppgaverIkkePaVentPerDato, periodeStart, periodeSlutt],
+  );
 
   return (
     <Panel>
@@ -121,7 +142,7 @@ const OppgaverSomErApneEllerPaVentGraf: FunctionComponent<OwnProps> = ({
             axisPointer: {
               type: 'shadow',
               label: {
-                formatter: (params) => {
+                formatter: params => {
                   const dato = dayjs(params.value);
                   if (dato.isSame(periodeSlutt)) {
                     return `${ukjentTekst} ${datoTekst}`;

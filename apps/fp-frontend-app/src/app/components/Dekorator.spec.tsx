@@ -38,17 +38,12 @@ const intl = createIntl(messages);
 
 describe('<Dekorator>', () => {
   it('skal vise dekorator', async () => {
-    const data = [
-      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
-    ];
+    const data = [{ key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } }];
 
     render(
       <RawIntlProvider value={intl}>
         <RestApiMock data={data} requestApi={requestApi}>
-          <Dekorator
-            queryStrings={{}}
-            setSiteHeight={vi.fn()}
-          />
+          <Dekorator queryStrings={{}} setSiteHeight={vi.fn()} />
         </RestApiMock>
       </RawIntlProvider>,
     );
@@ -57,22 +52,19 @@ describe('<Dekorator>', () => {
   });
 
   it('skal vise feilmeldinger', async () => {
-    const data = [
-      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
-    ];
+    const data = [{ key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } }];
 
-    const errors = [{
-      type: EventType.REQUEST_ERROR,
-      feilmelding: 'Dette er en feilmelding',
-    }];
+    const errors = [
+      {
+        type: EventType.REQUEST_ERROR,
+        feilmelding: 'Dette er en feilmelding',
+      },
+    ];
 
     render(
       <RawIntlProvider value={intl}>
         <RestApiMock data={data} requestApi={requestApi} errors={errors}>
-          <Dekorator
-            queryStrings={{}}
-            setSiteHeight={vi.fn()}
-          />
+          <Dekorator queryStrings={{}} setSiteHeight={vi.fn()} />
         </RestApiMock>
       </RawIntlProvider>,
     );

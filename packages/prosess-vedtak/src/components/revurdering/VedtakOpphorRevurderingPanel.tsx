@@ -27,11 +27,7 @@ const VedtakOpphorRevurderingPanel: FunctionComponent<OwnProps> = ({
     <Label size="small">
       <FormattedMessage id="VedtakForm.RevurderingFP.Aarsak" />
     </Label>
-    {revurderingsÅrsakString && (
-      <BodyShort size="small">
-        {revurderingsÅrsakString}
-      </BodyShort>
-    )}
+    {revurderingsÅrsakString && <BodyShort size="small">{revurderingsÅrsakString}</BodyShort>}
     {!skalBrukeOverstyrendeFritekstBrev && beregningErManueltFastsatt && (
       <VedtakFritekstPanel
         isReadOnly={isReadOnly}

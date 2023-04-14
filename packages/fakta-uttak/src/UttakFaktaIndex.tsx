@@ -3,7 +3,13 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 
 import {
-  KontrollerFaktaPeriode, Ytelsefordeling, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, Aksjonspunkt, AlleKodeverk, Fagsak,
+  KontrollerFaktaPeriode,
+  Ytelsefordeling,
+  ArbeidsgiverOpplysningerPerId,
+  FaktaArbeidsforhold,
+  Aksjonspunkt,
+  AlleKodeverk,
+  Fagsak,
 } from '@navikt/fp-types';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -27,8 +33,8 @@ interface OwnProps {
   submittable: boolean;
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
   alleKodeverk: AlleKodeverk;
-  formData?: any,
-  setFormData: (data: any) => void,
+  formData?: any;
+  setFormData: (data: any) => void;
 }
 
 const UttakFaktaIndex: FunctionComponent<OwnProps> = ({

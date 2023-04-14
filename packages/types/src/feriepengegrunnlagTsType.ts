@@ -7,13 +7,12 @@ export type FeriepengegrunnlagAndel = Readonly<{
   ytelseperiodeTom?: string;
   arbeidsgiverId?: string;
   arbeidsforholdId?: string;
-
-}>
+}>;
 
 type Feriepengegrunnlag = Readonly<{
   feriepengeperiodeFom: string;
   feriepengeperiodeTom: string;
   andeler: FeriepengegrunnlagAndel[];
-}>
+}>;
 
 export default Feriepengegrunnlag;

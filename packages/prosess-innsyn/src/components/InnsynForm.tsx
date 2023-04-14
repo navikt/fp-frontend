@@ -5,18 +5,18 @@ import moment from 'moment';
 import { Heading } from '@navikt/ds-react';
 
 import {
-  kommunikasjonsretning, AksjonspunktCode, KodeverkType, innsynResultatType as innsynResultatTyperKV, aksjonspunktStatus,
+  kommunikasjonsretning,
+  AksjonspunktCode,
+  KodeverkType,
+  innsynResultatType as innsynResultatTyperKV,
+  aksjonspunktStatus,
 } from '@navikt/fp-kodeverk';
 import { Form, Datepicker, RadioGroupPanel } from '@navikt/ft-form-hooks';
-import {
-  AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import {
-  Aksjonspunkt, Dokument, InnsynDokument, InnsynVedtaksdokument, AlleKodeverk,
-} from '@navikt/fp-types';
+import { Aksjonspunkt, Dokument, InnsynDokument, InnsynVedtaksdokument, AlleKodeverk } from '@navikt/fp-types';
 import { VurderInnsynAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import DocumentListInnsyn from './DocumentListInnsyn';
@@ -29,12 +29,10 @@ type FormValues = {
   innsynResultatType: string;
   fristDato?: string;
   sattPaVent?: boolean;
-}
+};
 
-const hentDokumenterMedNavnOgFikkInnsyn = (
-  dokumenter: InnsynDokument[],
-): Record<string, boolean> => dokumenter
-  .reduce((acc: Record<string, boolean>, d: InnsynDokument) => {
+const hentDokumenterMedNavnOgFikkInnsyn = (dokumenter: InnsynDokument[]): Record<string, boolean> =>
+  dokumenter.reduce((acc: Record<string, boolean>, d: InnsynDokument) => {
     const dokumentNavn = `dokument_${d.dokumentId}`;
     return {
       [dokumentNavn]: d.fikkInnsyn,
@@ -57,35 +55,36 @@ const buildInitialValues = (
   ...hentDokumenterMedNavnOgFikkInnsyn(dokumenter || []),
 });
 
-const getDocumentsStatus = (
-  values: FormValues,
-  documents: Dokument[],
-) => documents.map((document) => ({
-  dokumentId: document.dokumentId,
-  journalpostId: document.journalpostId,
-  fikkInnsyn: !!values[`dokument_${document.dokumentId}`],
-}));
+const getDocumentsStatus = (values: FormValues, documents: Dokument[]) =>
+  documents.map(document => ({
+    dokumentId: document.dokumentId,
+    journalpostId: document.journalpostId,
+    fikkInnsyn: !!values[`dokument_${document.dokumentId}`],
+  }));
 
-const getFilteredValues = (values: FormValues) => Object.keys(values)
-  .filter((valueKey) => !valueKey.startsWith('dokument_'))
-  .reduce((acc, valueKey) => ({
-    ...acc,
-    [valueKey]: values[valueKey],
-  }), {});
+const getFilteredValues = (values: FormValues) =>
+  Object.keys(values)
+    .filter(valueKey => !valueKey.startsWith('dokument_'))
+    .reduce(
+      (acc, valueKey) => ({
+        ...acc,
+        [valueKey]: values[valueKey],
+      }),
+      {},
+    );
 
-const transformValues = (
-  values: FormValues,
-  documents: Dokument[],
-): VurderInnsynAp => ({
+const transformValues = (values: FormValues, documents: Dokument[]): VurderInnsynAp => ({
   kode: AksjonspunktCode.VURDER_INNSYN,
   innsynDokumenter: getDocumentsStatus(values, documents),
-  ...getFilteredValues(values) as FormValues,
+  ...(getFilteredValues(values) as FormValues),
 });
 
 // Samme dokument kan ligge på flere behandlinger under samme fagsak.
 const getFilteredReceivedDocuments = (allDocuments: Dokument[]): Dokument[] => {
-  const filteredDocuments = allDocuments.filter((doc) => doc.kommunikasjonsretning === kommunikasjonsretning.INN);
-  allDocuments.forEach((doc) => !filteredDocuments.some((fd) => fd.dokumentId === doc.dokumentId) && filteredDocuments.push(doc));
+  const filteredDocuments = allDocuments.filter(doc => doc.kommunikasjonsretning === kommunikasjonsretning.INN);
+  allDocuments.forEach(
+    doc => !filteredDocuments.some(fd => fd.dokumentId === doc.dokumentId) && filteredDocuments.push(doc),
+  );
   return filteredDocuments;
 };
 
@@ -129,13 +128,17 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const initialValues = useMemo(() => buildInitialValues(
-    innsynMottattDato,
-    innsynResultatType,
-    innsynDokumenter,
-    aksjonspunkter,
-    fristBehandlingPåVent),
-  [innsynMottattDato, innsynResultatType, fristBehandlingPåVent, innsynDokumenter, aksjonspunkter]);
+  const initialValues = useMemo(
+    () =>
+      buildInitialValues(
+        innsynMottattDato,
+        innsynResultatType,
+        innsynDokumenter,
+        aksjonspunkter,
+        fristBehandlingPåVent,
+      ),
+    [innsynMottattDato, innsynResultatType, fristBehandlingPåVent, innsynDokumenter, aksjonspunkter],
+  );
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
@@ -143,10 +146,14 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
 
   const documents = useMemo(() => getFilteredReceivedDocuments(alleDokumenter), [alleDokumenter]);
 
-  const innsynResultatTyper = useMemo(() => alleKodeverk[KodeverkType.INNSYN_RESULTAT_TYPE]
-    .filter((irt) => irt.kode !== '-')
-    .sort((t1, t2) => t1.navn.localeCompare(t2.navn))
-    .reverse(), [alleKodeverk]);
+  const innsynResultatTyper = useMemo(
+    () =>
+      alleKodeverk[KodeverkType.INNSYN_RESULTAT_TYPE]
+        .filter(irt => irt.kode !== '-')
+        .sort((t1, t2) => t1.navn.localeCompare(t2.navn))
+        .reverse(),
+    [alleKodeverk],
+  );
 
   const isApOpen = aksjonspunkter[0].status === aksjonspunktStatus.OPPRETTET;
 
@@ -159,7 +166,9 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, alleDokumenter))}
       setDataOnUnmount={setFormData}
     >
-      <Heading size="small"><FormattedMessage id="InnsynForm.Innsynsbehandling" /></Heading>
+      <Heading size="small">
+        <FormattedMessage id="InnsynForm.Innsynsbehandling" />
+      </Heading>
       <VerticalSpacer twentyPx />
       <AksjonspunktHelpTextTemp isAksjonspunktOpen={isApOpen}>
         {[<FormattedMessage id="InnsynForm.VurderKravetOmInnsyn" key="1" />]}
@@ -173,7 +182,10 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
         validate={[required, hasValidDate]}
       />
       <VerticalSpacer sixteenPx />
-      <VedtakDocuments vedtaksdokumenter={vedtaksdokumentasjon || EMPTY_ARRAY} behandlingTypes={alleKodeverk[KodeverkType.BEHANDLING_TYPE]} />
+      <VedtakDocuments
+        vedtaksdokumenter={vedtaksdokumentasjon || EMPTY_ARRAY}
+        behandlingTypes={alleKodeverk[KodeverkType.BEHANDLING_TYPE]}
+      />
       <VerticalSpacer twentyPx />
       <DocumentListInnsyn saksNr={saksNr} documents={documents} readOnly={readOnly} />
       <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />
@@ -185,15 +197,16 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
         isReadOnly={readOnly}
         isHorizontal
         isEdited={!isApOpen}
-        radios={innsynResultatTyper.map((irt) => ({
+        radios={innsynResultatTyper.map(irt => ({
           value: irt.kode,
           label: irt.navn,
         }))}
       />
-      {(innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET || innsynResultatTypeKode === innsynResultatTyperKV.DELVISTINNVILGET) && (
+      {(innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET ||
+        innsynResultatTypeKode === innsynResultatTyperKV.DELVISTINNVILGET) && (
         <>
           <VerticalSpacer eightPx />
-          <ArrowBox alignOffset={(innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET) ? 28 : 176}>
+          <ArrowBox alignOffset={innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET ? 28 : 176}>
             <RadioGroupPanel
               name="sattPaVent"
               label={<FormattedMessage id="InnsynForm.VelgVidereAksjon" />}
@@ -202,13 +215,16 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
               isEdited={!isApOpen}
               isHorizontal
               isTrueOrFalseSelection
-              radios={[{
-                value: 'true',
-                label: intl.formatMessage({ id: 'InnsynForm.SettBehandlingPåVent' }),
-              }, {
-                value: 'false',
-                label: intl.formatMessage({ id: 'InnsynForm.ForeslåOgFatteVedtak' }),
-              }]}
+              radios={[
+                {
+                  value: 'true',
+                  label: intl.formatMessage({ id: 'InnsynForm.SettBehandlingPåVent' }),
+                },
+                {
+                  value: 'false',
+                  label: intl.formatMessage({ id: 'InnsynForm.ForeslåOgFatteVedtak' }),
+                },
+              ]}
             />
             {sattPaVent && (
               <>

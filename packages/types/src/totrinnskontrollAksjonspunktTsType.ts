@@ -12,7 +12,7 @@ export type OpptjeningAktiviteter = Readonly<{
   orgnr?: string;
   godkjent: boolean;
   privatpersonFødselsdato?: string;
-}>
+}>;
 
 type TotrinnskontrollAksjonspunkt = Readonly<{
   aksjonspunktKode: string;
@@ -33,6 +33,6 @@ type TotrinnskontrollAksjonspunkt = Readonly<{
     erLagtTil: boolean;
     erEndret: boolean;
   }[];
-}>
+}>;
 
 export default TotrinnskontrollAksjonspunkt;

@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, ReactElement, useCallback, useMemo,
-} from 'react';
+import React, { FunctionComponent, ReactElement, useCallback, useMemo } from 'react';
 import { BodyShort, Button } from '@navikt/ds-react';
 import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
@@ -12,7 +10,7 @@ import Journalpost from '../../../typer/journalpostTsType';
 import JournalFagsak from '../../../typer/journalFagsakTsType';
 import JournalføringFormValues from '../../../typer/journalføringFormValues';
 
-const TOM_ARRAY:JournalFagsak[] = [];
+const TOM_ARRAY: JournalFagsak[] = [];
 
 const LAG_NY_SAK = 'LAG_NY_SAK'; // Value for en av radioknappene som skal lede til ekstra inputfelt
 const radioFieldName = 'saksnummerValg';
@@ -34,12 +32,12 @@ export const finnYtelseTekst = (ytelseKode: string): string => {
 type YtelseSelectValg = {
   ytelse: string;
   beskrivelsekode: string;
-}
+};
 
 type RadioOption = {
   label: ReactElement;
   value: string;
-}
+};
 
 const ytelseSelectValg: YtelseSelectValg[] = [
   {
@@ -56,7 +54,10 @@ const ytelseSelectValg: YtelseSelectValg[] = [
   },
 ];
 
-export const transformValues = (values: JournalføringFormValues, journalpost: Journalpost): JournalførSakSubmitValue => {
+export const transformValues = (
+  values: JournalføringFormValues,
+  journalpost: Journalpost,
+): JournalførSakSubmitValue => {
   const saksnummerValg = values[radioFieldName];
   if (saksnummerValg === LAG_NY_SAK) {
     const valgtYtelse = values[selectFieldName];
@@ -76,15 +77,17 @@ export const transformValues = (values: JournalføringFormValues, journalpost: J
 };
 
 const lagRadioOptions = (saksliste: JournalFagsak[], intl: IntlShape, fetTekst: any): RadioOption[] => {
-  const radioOptions = saksliste.map((sak) => ({
-    label: <FormattedMessage
-      id="Journal.Sak.Beskrivelse"
-      values={{
-        b: fetTekst,
-        saksnummer: sak.saksnummer,
-        ytelse: intl.formatMessage({ id: finnYtelseTekst(sak.ytelseType) }),
-      }}
-    />,
+  const radioOptions = saksliste.map(sak => ({
+    label: (
+      <FormattedMessage
+        id="Journal.Sak.Beskrivelse"
+        values={{
+          b: fetTekst,
+          saksnummer: sak.saksnummer,
+          ytelse: intl.formatMessage({ id: finnYtelseTekst(sak.ytelseType) }),
+        }}
+      />
+    ),
     value: sak.saksnummer,
   }));
   radioOptions.push({ label: <FormattedMessage id="Journal.Sak.Ny" />, value: LAG_NY_SAK });
@@ -100,24 +103,22 @@ type OwnProps = Readonly<{
 /**
  * VelgSakForm - Inneholder formen som lar saksbehandler velge en sak og journalføre dokumentet på, evt opprette ny sak.
  */
-const VelgSakForm: FunctionComponent<OwnProps> = ({
-  journalpost,
-  isSubmittable,
-  avbrytVisningAvJournalpost,
-}) => {
+const VelgSakForm: FunctionComponent<OwnProps> = ({ journalpost, isSubmittable, avbrytVisningAvJournalpost }) => {
   const intl = useIntl();
   const saksliste = journalpost?.fagsaker || TOM_ARRAY;
   const finnesSaker = saksliste && saksliste.length > 0;
   const formMethods = formHooks.useFormContext<JournalføringFormValues>();
   const sakValg = formMethods.watch(radioFieldName);
   const skalOppretteSak = sakValg === LAG_NY_SAK;
-  const fetTekst = useCallback((chunks: any) => (<b>{chunks}</b>), []);
+  const fetTekst = useCallback((chunks: any) => <b>{chunks}</b>, []);
   const radioOptions = useMemo(() => lagRadioOptions(saksliste, intl, fetTekst), [saksliste]);
 
   return (
     <>
       {!finnesSaker && (
-        <BodyShort><FormattedMessage id="Journal.Sak.Ingen" /></BodyShort>
+        <BodyShort>
+          <FormattedMessage id="Journal.Sak.Ingen" />
+        </BodyShort>
       )}
       <>
         <FlexRow>
@@ -131,39 +132,30 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
             />
           </FlexColumn>
         </FlexRow>
-        {skalOppretteSak
-          && (
-            <>
-              <VerticalSpacer eightPx />
-              <FlexRow>
-                <FlexColumn>
-                  <SelectField
-                    name={selectFieldName}
-                    validate={[required]}
-                    label={intl.formatMessage({ id: 'Journal.Sak.VelgYtelse' })}
-                    selectValues={ytelseSelectValg.map((valg) => (
-                      <option
-                        key={valg.ytelse}
-                        value={valg.ytelse}
-                      >
-                        <FormattedMessage id={valg.beskrivelsekode} />
-                      </option>
-                    ))}
-                  />
-                </FlexColumn>
-              </FlexRow>
-              <VerticalSpacer twentyPx />
-            </>
-          )}
+        {skalOppretteSak && (
+          <>
+            <VerticalSpacer eightPx />
+            <FlexRow>
+              <FlexColumn>
+                <SelectField
+                  name={selectFieldName}
+                  validate={[required]}
+                  label={intl.formatMessage({ id: 'Journal.Sak.VelgYtelse' })}
+                  selectValues={ytelseSelectValg.map(valg => (
+                    <option key={valg.ytelse} value={valg.ytelse}>
+                      <FormattedMessage id={valg.beskrivelsekode} />
+                    </option>
+                  ))}
+                />
+              </FlexColumn>
+            </FlexRow>
+            <VerticalSpacer twentyPx />
+          </>
+        )}
         <VerticalSpacer eightPx />
         <FlexRow>
           <FlexColumn>
-            <Button
-              size="small"
-              variant="primary"
-              disabled={!isSubmittable}
-              type="submit"
-            >
+            <Button size="small" variant="primary" disabled={!isSubmittable} type="submit">
               <FormattedMessage id="ValgtOppgave.Journalfør" />
             </Button>
           </FlexColumn>

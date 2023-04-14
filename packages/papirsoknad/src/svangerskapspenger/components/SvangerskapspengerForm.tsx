@@ -31,13 +31,13 @@ const FRILANS_NAME_PREFIX = 'frilans';
 
 type FormValues = {
   rettigheter?: string;
-  [FRILANS_NAME_PREFIX]: FrilansFormValues,
-} & AndreYtelserFormValue
-  & IArbeidFormValues
-  & OppholdINorgeFormValues
-  & BehovForTilretteleggingFormValues
-  & TerminFodselSvpFormValues
-  & MottattDatoFormValues;
+  [FRILANS_NAME_PREFIX]: FrilansFormValues;
+} & AndreYtelserFormValue &
+  IArbeidFormValues &
+  OppholdINorgeFormValues &
+  BehovForTilretteleggingFormValues &
+  TerminFodselSvpFormValues &
+  MottattDatoFormValues;
 
 const buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => ({
   ...AndreYtelserPapirsoknadIndex.buildInitialValues(andreYtelser),
@@ -52,22 +52,25 @@ type TilretteleggingArbeidsforhold = {
   behovsdato?: string;
   organisasjonsnummer?: string;
   tilrettelegginger?: Tilrettelegging[];
-}
+};
 
-const transformTilretteleggingsArbeidsforhold = (
-  formValues: FormValues,
-): TilretteleggingArbeidsforhold[] => {
+const transformTilretteleggingsArbeidsforhold = (formValues: FormValues): TilretteleggingArbeidsforhold[] => {
   let transformerteVerdier = [] as TilretteleggingArbeidsforhold[];
 
   const { tilretteleggingArbeidsforhold } = formValues;
 
-  if (tilretteleggingArbeidsforhold?.sokForArbeidsgiver && tilretteleggingArbeidsforhold?.tilretteleggingForArbeidsgiver) {
-    transformerteVerdier = transformerteVerdier.concat(tilretteleggingArbeidsforhold.tilretteleggingForArbeidsgiver.map((ta) => ({
-      '@type': 'VI',
-      behovsdato: ta.behovsdato,
-      organisasjonsnummer: ta.organisasjonsnummer,
-      tilrettelegginger: ta.tilretteleggingArbeidsgiver,
-    })));
+  if (
+    tilretteleggingArbeidsforhold?.sokForArbeidsgiver &&
+    tilretteleggingArbeidsforhold?.tilretteleggingForArbeidsgiver
+  ) {
+    transformerteVerdier = transformerteVerdier.concat(
+      tilretteleggingArbeidsforhold.tilretteleggingForArbeidsgiver.map(ta => ({
+        '@type': 'VI',
+        behovsdato: ta.behovsdato,
+        organisasjonsnummer: ta.organisasjonsnummer,
+        tilrettelegginger: ta.tilretteleggingArbeidsgiver,
+      })),
+    );
   }
   if (tilretteleggingArbeidsforhold?.sokForFrilans) {
     transformerteVerdier.push({
@@ -124,7 +127,10 @@ const SvangerskapspengerForm: FunctionComponent<OwnProps> = ({
   const mottattDato = formMethods.watch('mottattDato');
 
   return (
-    <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values, andreYtelserKodeverk))}>
+    <Form
+      formMethods={formMethods}
+      onSubmit={(values: FormValues) => onSubmit(transformValues(values, andreYtelserKodeverk))}
+    >
       <MottattDatoPapirsoknadIndex readOnly={readOnly} />
       <OppholdINorgePapirsoknadIndex
         readOnly={readOnly}

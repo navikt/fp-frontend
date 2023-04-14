@@ -1,13 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { UseFormGetValues } from 'react-hook-form';
-import {
-  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Datepicker, formHooks, PeriodFieldArray } from '@navikt/ft-form-hooks';
-import {
-  required, hasValidDate, dateAfterOrEqual, dateBeforeOrEqual,
-} from '@navikt/ft-form-validators';
+import { required, hasValidDate, dateAfterOrEqual, dateBeforeOrEqual } from '@navikt/ft-form-validators';
 
 import styles from './renderAndreYtelserPerioderFieldArray.module.css';
 
@@ -18,12 +14,12 @@ export const ANDRE_YTELSER_PERIODE_SUFFIX = 'PERIODER';
 export type FormValues = {
   periodeFom: string;
   periodeTom: string;
-}
+};
 
 const getValue = (
-  getValues: UseFormGetValues<{ [ANDRE_YTELSER_NAME_PREFIX]: FormValues}>,
+  getValues: UseFormGetValues<{ [ANDRE_YTELSER_NAME_PREFIX]: FormValues }>,
   fieldName: string,
-// @ts-ignore
+  // @ts-ignore
 ): string => getValues(fieldName);
 
 interface OwnProps {
@@ -32,7 +28,10 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  transformValues: (values: FormValues[], ytelseType: string) => {
+  transformValues: (
+    values: FormValues[],
+    ytelseType: string,
+  ) => {
     ytelseType: string;
     periodeFom: string;
     periodeTom: string;
@@ -44,15 +43,15 @@ interface StaticFunctions {
  *
  * Viser inputfelter for fra og til dato for perioder for andre ytelser
  */
-const RenderAndreYtelserPerioderFieldArray: FunctionComponent<OwnProps> & StaticFunctions = ({
-  readOnly,
-  name,
-}) => {
+const RenderAndreYtelserPerioderFieldArray: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly, name }) => {
   const intl = useIntl();
 
   const {
-    getValues, control, trigger, formState: { isSubmitted },
-  } = formHooks.useFormContext<{ [ANDRE_YTELSER_NAME_PREFIX]: FormValues}>();
+    getValues,
+    control,
+    trigger,
+    formState: { isSubmitted },
+  } = formHooks.useFormContext<{ [ANDRE_YTELSER_NAME_PREFIX]: FormValues }>();
   const { fields, remove, append } = formHooks.useFieldArray({
     control,
     // @ts-ignore Usikker på korleis ein fiksar denne (Dynamisk name basert på verdiar fra backend)
@@ -71,7 +70,7 @@ const RenderAndreYtelserPerioderFieldArray: FunctionComponent<OwnProps> & Static
         const namePart1 = `${ANDRE_YTELSER_NAME_PREFIX}.${name}.${index}`;
         return (
           <div key={field.id}>
-            <div className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+            <div className={index !== fields.length - 1 ? styles.notLastRow : ''}>
               <FlexContainer>
                 <FlexRow>
                   <FlexColumn>
@@ -106,9 +105,7 @@ const RenderAndreYtelserPerioderFieldArray: FunctionComponent<OwnProps> & Static
                       onChange={() => (isSubmitted ? trigger() : undefined)}
                     />
                   </FlexColumn>
-                  <FlexColumn>
-                    {getRemoveButton()}
-                  </FlexColumn>
+                  <FlexColumn>{getRemoveButton()}</FlexColumn>
                 </FlexRow>
               </FlexContainer>
             </div>
@@ -120,10 +117,11 @@ const RenderAndreYtelserPerioderFieldArray: FunctionComponent<OwnProps> & Static
   );
 };
 
-RenderAndreYtelserPerioderFieldArray.transformValues = (values: FormValues[], ytelseType: string): any => values.map((ytelsePeriode) => ({
-  ytelseType,
-  periodeFom: ytelsePeriode.periodeFom,
-  periodeTom: ytelsePeriode.periodeTom,
-}));
+RenderAndreYtelserPerioderFieldArray.transformValues = (values: FormValues[], ytelseType: string): any =>
+  values.map(ytelsePeriode => ({
+    ytelseType,
+    periodeFom: ytelsePeriode.periodeFom,
+    periodeTom: ytelsePeriode.periodeTom,
+  }));
 
 export default RenderAndreYtelserPerioderFieldArray;

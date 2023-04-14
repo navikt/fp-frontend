@@ -45,7 +45,9 @@ const FagsakSearch: FunctionComponent<OwnProps> = ({
     />
 
     {searchResultReceived && fagsaker.length === 0 && (
-      <BodyShort size="small" className={styles.label}><FormattedMessage id="FagsakSearch.ZeroSearchResults" /></BodyShort>
+      <BodyShort size="small" className={styles.label}>
+        <FormattedMessage id="FagsakSearch.ZeroSearchResults" />
+      </BodyShort>
     )}
 
     <VerticalSpacer eightPx />

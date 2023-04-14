@@ -4,7 +4,7 @@ export type SimuleringResultatRad = Readonly<{
     periode: {
       fom: string;
       tom: string;
-    }
+    };
     beløp: number;
   }[];
 }>;
@@ -39,6 +39,6 @@ type SimuleringResultat = Readonly<{
   simuleringResultat: DetaljertSimuleringResultat;
   simuleringResultatUtenInntrekk: DetaljertSimuleringResultat;
   slåttAvInntrekk: boolean;
-}>
+}>;
 
 export default SimuleringResultat;

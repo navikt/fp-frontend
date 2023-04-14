@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 
@@ -15,7 +13,7 @@ import { requestAnkeApi, AnkeBehandlingApiKeys } from '../data/ankeBehandlingApi
 const ENDEPUNKTER_PANEL_DATA = [AnkeBehandlingApiKeys.ANKE_VURDERING];
 type EndepunktPanelData = {
   ankeVurdering: AnkeVurdering;
-}
+};
 
 interface OwnProps {
   alleBehandlinger: {
@@ -39,13 +37,10 @@ const AnkeBehandlingProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
       prosessPanelKode={ProsessStegCode.ANKEBEHANDLING}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Ankebehandling' })}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={() => (behandling.behandlingsresultat?.type ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT)}
-      renderPanel={(data) => (
-        <AnkeProsessIndex
-          behandlinger={alleBehandlinger}
-          {...data}
-        />
-      )}
+      hentOverstyrtStatus={() =>
+        behandling.behandlingsresultat?.type ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT
+      }
+      renderPanel={data => <AnkeProsessIndex behandlinger={alleBehandlinger} {...data} />}
     />
   );
 };

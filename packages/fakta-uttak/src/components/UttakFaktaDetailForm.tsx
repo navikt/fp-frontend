@@ -1,23 +1,15 @@
-import React, {
-  FunctionComponent, useCallback, useState, useMemo, useEffect,
-} from 'react';
+import React, { FunctionComponent, useCallback, useState, useMemo, useEffect } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import { useForm, UseFormGetValues } from 'react-hook-form';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
-import {
-  Datepicker, RadioGroupPanel, Form, SelectField, CheckboxField,
-} from '@navikt/ft-form-hooks';
-import {
-  FlexColumn, FlexContainer, FlexRow, OkAvbrytModal, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { Datepicker, RadioGroupPanel, Form, SelectField, CheckboxField } from '@navikt/ft-form-hooks';
+import { FlexColumn, FlexContainer, FlexRow, OkAvbrytModal, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Delete } from '@navikt/ds-icons';
 import { BodyShort, Button, Label } from '@navikt/ds-react';
 import { omitMany } from '@navikt/ft-utils';
 
-import {
-  AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold,
-} from '@navikt/fp-types';
+import { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
 import { KodeverkType, StonadskontoType, uttakPeriodeType } from '@navikt/fp-kodeverk';
 
 import { RelasjonsRolleType } from '@navikt/ft-kodeverk';
@@ -25,7 +17,9 @@ import FordelingPeriodeKilde from '../kodeverk/fordelingPeriodeKilde';
 
 import styles from './uttakFaktaDetailForm.module.css';
 import KontrollerFaktaPeriodeMedApMarkering from '../typer/kontrollerFaktaPeriodeMedApMarkering';
-import GraderingOgSamtidigUttakPanel, { FormValues as FormValuesGraderingOgSamtidigUttak } from './GraderingOgSamtidigUttakPanel';
+import GraderingOgSamtidigUttakPanel, {
+  FormValues as FormValuesGraderingOgSamtidigUttak,
+} from './GraderingOgSamtidigUttakPanel';
 
 type FormValues = FormValuesGraderingOgSamtidigUttak & {
   arsakstype: string;
@@ -64,9 +58,10 @@ const lagDefaultVerdier = (
 ): FormValues => {
   const arsakstype = utledÅrsakstype(valgtPeriode);
 
-  const aRef = valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse !== 'null'
-    ? valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse
-    : undefined;
+  const aRef =
+    valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse !== 'null'
+      ? valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse
+      : undefined;
   const aOpplysninger = arbeidsgiverOpplysningerPerId[aRef];
 
   let arbeidsgiverId;
@@ -84,24 +79,23 @@ const lagDefaultVerdier = (
   };
 };
 
-const transformValues = (
-  values: FormValues,
-): KontrollerFaktaPeriodeMedApMarkering => ({
+const transformValues = (values: FormValues): KontrollerFaktaPeriodeMedApMarkering => ({
   ...omitMany(values, ['arsakstype', 'arbeidsgiverId', 'harGradering', 'harSamtidigUttaksprosent']),
-  arbeidsforhold: values.arbeidsgiverId ? {
-    arbeidsgiverReferanse: values.arbeidsgiverId.split('-')[0] === 'null' ? null : values.arbeidsgiverId.split('-')[0],
-    arbeidType: values.arbeidsgiverId.split('-')[1],
-  } : undefined,
+  arbeidsforhold: values.arbeidsgiverId
+    ? {
+        arbeidsgiverReferanse:
+          values.arbeidsgiverId.split('-')[0] === 'null' ? null : values.arbeidsgiverId.split('-')[0],
+        arbeidType: values.arbeidsgiverId.split('-')[1],
+      }
+    : undefined,
   periodeKilde: FordelingPeriodeKilde.SAKSBEHANDLER,
   aksjonspunktType: undefined,
   arbeidstidsprosent: values.arbeidstidsprosent,
   samtidigUttaksprosent: values.samtidigUttaksprosent,
 });
 
-const validerTomEtterFom = (
-  intl: IntlShape,
-  getValues: UseFormGetValues<FormValues>,
-) => (tom?: string) => (dayjs(tom).isBefore(getValues('fom')) ? intl.formatMessage({ id: 'UttakFaktaDetailForm.TomForFom' }) : null);
+const validerTomEtterFom = (intl: IntlShape, getValues: UseFormGetValues<FormValues>) => (tom?: string) =>
+  dayjs(tom).isBefore(getValues('fom')) ? intl.formatMessage({ id: 'UttakFaktaDetailForm.TomForFom' }) : null;
 
 interface OwnProps {
   fagsak: Fagsak;
@@ -130,8 +124,10 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const defaultValues = useMemo(() => (valgtPeriode ? lagDefaultVerdier(valgtPeriode, arbeidsgiverOpplysningerPerId) : undefined),
-    [valgtPeriode, arbeidsgiverOpplysningerPerId]);
+  const defaultValues = useMemo(
+    () => (valgtPeriode ? lagDefaultVerdier(valgtPeriode, arbeidsgiverOpplysningerPerId) : undefined),
+    [valgtPeriode, arbeidsgiverOpplysningerPerId],
+  );
 
   const formMethods = useForm<FormValues>({
     defaultValues,
@@ -143,14 +139,29 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
     slettPeriode();
   }, []);
 
-  const sorterteUttakPeriodeTyper = useMemo(() => [...alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE]]
-    .sort((k1, k2) => k1.navn.localeCompare(k2.navn))
-    .filter((k) => k.kode !== uttakPeriodeType.ANNET),
-  []);
-  const sorterteOverføringÅrsaker = useMemo(() => [...alleKodeverk[KodeverkType.OVERFOERING_AARSAK_TYPE]].sort((k1, k2) => k1.navn.localeCompare(k2.navn)), []);
-  const sorterteUtsettelseÅrsaker = useMemo(() => [...alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE]].sort((k1, k2) => k1.navn.localeCompare(k2.navn)), []);
-  const sorterteOppholdÅrsaker = useMemo(() => [...alleKodeverk[KodeverkType.OPPHOLD_ARSAK]].sort((k1, k2) => k1.navn.localeCompare(k2.navn)), []);
-  const sorterteMorsAktiviteter = useMemo(() => [...alleKodeverk[KodeverkType.MORS_AKTIVITET]].sort((k1, k2) => k1.navn.localeCompare(k2.navn)), []);
+  const sorterteUttakPeriodeTyper = useMemo(
+    () =>
+      [...alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE]]
+        .sort((k1, k2) => k1.navn.localeCompare(k2.navn))
+        .filter(k => k.kode !== uttakPeriodeType.ANNET),
+    [],
+  );
+  const sorterteOverføringÅrsaker = useMemo(
+    () => [...alleKodeverk[KodeverkType.OVERFOERING_AARSAK_TYPE]].sort((k1, k2) => k1.navn.localeCompare(k2.navn)),
+    [],
+  );
+  const sorterteUtsettelseÅrsaker = useMemo(
+    () => [...alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE]].sort((k1, k2) => k1.navn.localeCompare(k2.navn)),
+    [],
+  );
+  const sorterteOppholdÅrsaker = useMemo(
+    () => [...alleKodeverk[KodeverkType.OPPHOLD_ARSAK]].sort((k1, k2) => k1.navn.localeCompare(k2.navn)),
+    [],
+  );
+  const sorterteMorsAktiviteter = useMemo(
+    () => [...alleKodeverk[KodeverkType.MORS_AKTIVITET]].sort((k1, k2) => k1.navn.localeCompare(k2.navn)),
+    [],
+  );
 
   const årsakstype = formMethods.watch('arsakstype');
   const flerbarnsdager = formMethods.watch('flerbarnsdager');
@@ -172,12 +183,14 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
     }
   }, [årsakstype]);
 
-  const onSubmit = useCallback((values) => oppdaterPeriode(transformValues(values)), [oppdaterPeriode]);
+  const onSubmit = useCallback(values => oppdaterPeriode(transformValues(values)), [oppdaterPeriode]);
 
-  const erUttakOgFellesperiodeEllerForeldrepenger = årsakstype === Årsakstype.UTTAK
-    && (stønadskonto === StonadskontoType.FELLESPERIODE || stønadskonto === StonadskontoType.FORELDREPENGER);
-  const visMorsAktivitet = fagsak.relasjonsRolleType !== RelasjonsRolleType.MOR
-    && (erUttakOgFellesperiodeEllerForeldrepenger || årsakstype === Årsakstype.UTSETTELSE);
+  const erUttakOgFellesperiodeEllerForeldrepenger =
+    årsakstype === Årsakstype.UTTAK &&
+    (stønadskonto === StonadskontoType.FELLESPERIODE || stønadskonto === StonadskontoType.FORELDREPENGER);
+  const visMorsAktivitet =
+    fagsak.relasjonsRolleType !== RelasjonsRolleType.MOR &&
+    (erUttakOgFellesperiodeEllerForeldrepenger || årsakstype === Årsakstype.UTSETTELSE);
 
   return (
     <>
@@ -189,10 +202,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
           showModal
         />
       )}
-      <Form
-        formMethods={formMethods}
-        onSubmit={onSubmit}
-      >
+      <Form formMethods={formMethods} onSubmit={onSubmit}>
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
@@ -232,8 +242,12 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
             <FlexColumn>
               {readOnly && (
                 <>
-                  <Label size="small"><FormattedMessage id="UttakFaktaDetailForm.Periodetype" /></Label>
-                  <BodyShort size="small"><FormattedMessage id={ÅRSAKSTYPE_TEKST_KODER[årsakstype]} /></BodyShort>
+                  <Label size="small">
+                    <FormattedMessage id="UttakFaktaDetailForm.Periodetype" />
+                  </Label>
+                  <BodyShort size="small">
+                    <FormattedMessage id={ÅRSAKSTYPE_TEKST_KODER[årsakstype]} />
+                  </BodyShort>
                 </>
               )}
               {!readOnly && (
@@ -243,7 +257,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                   validate={[required]}
                   isReadOnly={readOnly}
                   isHorizontal
-                  radios={Object.keys(Årsakstype).map((type) => ({
+                  radios={Object.keys(Årsakstype).map(type => ({
                     value: type,
                     label: intl.formatMessage({ id: ÅRSAKSTYPE_TEKST_KODER[type] }),
                   }))}
@@ -260,7 +274,11 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                     name="uttakPeriodeType"
                     label={<FormattedMessage id="UttakFaktaDetailForm.Stonadskonto" />}
                     validate={[required]}
-                    selectValues={sorterteUttakPeriodeTyper.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
+                    selectValues={sorterteUttakPeriodeTyper.map(vt => (
+                      <option key={vt.kode} value={vt.kode}>
+                        {vt.navn}
+                      </option>
+                    ))}
                     readOnly={readOnly}
                   />
                 </FlexColumn>
@@ -278,7 +296,11 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                       label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
                       validate={[required]}
                       className={styles.selectArsak}
-                      selectValues={sorterteUtsettelseÅrsaker.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
+                      selectValues={sorterteUtsettelseÅrsaker.map(vt => (
+                        <option key={vt.kode} value={vt.kode}>
+                          {vt.navn}
+                        </option>
+                      ))}
                       readOnly={readOnly}
                     />
                   )}
@@ -288,7 +310,11 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                       label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
                       validate={[required]}
                       className={styles.selectArsak}
-                      selectValues={sorterteOverføringÅrsaker.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
+                      selectValues={sorterteOverføringÅrsaker.map(vt => (
+                        <option key={vt.kode} value={vt.kode}>
+                          {vt.navn}
+                        </option>
+                      ))}
                       readOnly={readOnly}
                     />
                   )}
@@ -298,7 +324,11 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                       label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
                       validate={[required]}
                       className={styles.selectArsak}
-                      selectValues={sorterteOppholdÅrsaker.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
+                      selectValues={sorterteOppholdÅrsaker.map(vt => (
+                        <option key={vt.kode} value={vt.kode}>
+                          {vt.navn}
+                        </option>
+                      ))}
                       readOnly={readOnly}
                     />
                   )}
@@ -324,7 +354,11 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                     name="morsAktivitet"
                     label={<FormattedMessage id="UttakFaktaDetailForm.MorsAktivitet" />}
                     className={styles.select}
-                    selectValues={sorterteMorsAktiviteter.map((vt) => <option key={vt.kode} value={vt.kode}>{vt.navn}</option>)}
+                    selectValues={sorterteMorsAktiviteter.map(vt => (
+                      <option key={vt.kode} value={vt.kode}>
+                        {vt.navn}
+                      </option>
+                    ))}
                     readOnly={readOnly}
                   />
                 </FlexColumn>
@@ -338,9 +372,13 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   {readOnly && (
                     <>
-                      <Label size="small"><FormattedMessage id="UttakFaktaDetailForm.HarFlerbarnsdager" /></Label>
+                      <Label size="small">
+                        <FormattedMessage id="UttakFaktaDetailForm.HarFlerbarnsdager" />
+                      </Label>
                       <BodyShort size="small">
-                        <FormattedMessage id={flerbarnsdager === true ? 'UttakFaktaDetailForm.Ja' : 'UttakFaktaDetailForm.Nei'} />
+                        <FormattedMessage
+                          id={flerbarnsdager === true ? 'UttakFaktaDetailForm.Ja' : 'UttakFaktaDetailForm.Nei'}
+                        />
                       </BodyShort>
                     </>
                   )}
@@ -354,13 +392,15 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
               </FlexRow>
             </>
           )}
-          {(begrunnelse && (
+          {begrunnelse && (
             <>
               <VerticalSpacer sixteenPx />
-              <Label size="small"><FormattedMessage id="UttakFaktaDetailForm.Begrunnelse" /></Label>
+              <Label size="small">
+                <FormattedMessage id="UttakFaktaDetailForm.Begrunnelse" />
+              </Label>
               <BodyShort size="small">{begrunnelse}</BodyShort>
             </>
-          ))}
+          )}
           {!readOnly && (
             <>
               <VerticalSpacer thirtyTwoPx />
@@ -376,13 +416,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                   </Button>
                 </FlexColumn>
                 <FlexColumn>
-                  <Button
-                    size="small"
-                    variant="tertiary"
-                    onClick={avbrytEditering}
-                    disabled={readOnly}
-                    type="button"
-                  >
+                  <Button size="small" variant="tertiary" onClick={avbrytEditering} disabled={readOnly} type="button">
                     <FormattedMessage id="UttakFaktaDetailForm.Avbryt" />
                   </Button>
                 </FlexColumn>

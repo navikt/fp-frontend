@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, useEffect, useState,
-} from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
@@ -15,12 +13,9 @@ const ID = 'henlagt';
 type OwnProps = {
   valgtProsessSteg: string;
   registrerProsessPanel: (data: ProsessPanelMenyData) => void;
-}
+};
 
-const BehandlingHenlagtPanel: FunctionComponent<OwnProps> = ({
-  valgtProsessSteg,
-  registrerProsessPanel,
-}) => {
+const BehandlingHenlagtPanel: FunctionComponent<OwnProps> = ({ valgtProsessSteg, registrerProsessPanel }) => {
   const intl = useIntl();
 
   const [erPanelValgt, setPanelValgt] = useState(false);

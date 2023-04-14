@@ -3,13 +3,9 @@ import moment from 'moment';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Alert, Label, BodyShort } from '@navikt/ds-react';
 
-import {
-  DateLabel, VerticalSpacer, FaktaGruppe, FlexContainer, FlexRow, FlexColumn,
-} from '@navikt/ft-ui-komponenter';
+import { DateLabel, VerticalSpacer, FaktaGruppe, FlexContainer, FlexRow, FlexColumn } from '@navikt/ft-ui-komponenter';
 import { Datepicker, InputField, formHooks } from '@navikt/ft-form-hooks';
-import {
-  hasValidDate, hasValidInteger, maxValue, minValue, required,
-} from '@navikt/ft-form-validators';
+import { hasValidDate, hasValidInteger, maxValue, minValue, required } from '@navikt/ft-form-validators';
 import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@navikt/fp-fakta-felles';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
@@ -20,9 +16,10 @@ import styles from './termindatoFaktaForm.module.css';
 const minValue1 = minValue(1);
 const maxValue9 = maxValue(9);
 
-const erTerminbekreftelseUtstedtForTidlig = (utstedtdato?: string, termindato?: string): boolean => utstedtdato !== undefined
-  && termindato !== undefined
-  && !moment(utstedtdato).isAfter(moment(termindato).subtract(18, 'weeks').subtract(4, 'days'));
+const erTerminbekreftelseUtstedtForTidlig = (utstedtdato?: string, termindato?: string): boolean =>
+  utstedtdato !== undefined &&
+  termindato !== undefined &&
+  !moment(utstedtdato).isAfter(moment(termindato).subtract(18, 'weeks').subtract(4, 'days'));
 
 export type FormValues = {
   utstedtdato?: string;
@@ -37,7 +34,7 @@ interface OwnProps {
   aksjonspunkt: Aksjonspunkt;
   readOnly: boolean;
   submittable: boolean;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
 interface StaticFunctions {
@@ -120,12 +117,18 @@ export const TermindatoFaktaForm: FunctionComponent<OwnProps> & StaticFunctions 
           <FlexContainer>
             <FlexRow>
               <FlexColumn className={styles.leftCol}>
-                <Label size="small"><FormattedMessage id="TermindatoFaktaForm.FodselsdatoTps" /></Label>
+                <Label size="small">
+                  <FormattedMessage id="TermindatoFaktaForm.FodselsdatoTps" />
+                </Label>
                 <VerticalSpacer fourPx />
-                <BodyShort size="small"><DateLabel dateString={fodselsdatoTps} /></BodyShort>
+                <BodyShort size="small">
+                  <DateLabel dateString={fodselsdatoTps} />
+                </BodyShort>
               </FlexColumn>
               <FlexColumn>
-                <Label size="small"><FormattedMessage id="TermindatoFaktaForm.AntallBarnTps" /></Label>
+                <Label size="small">
+                  <FormattedMessage id="TermindatoFaktaForm.AntallBarnTps" />
+                </Label>
                 <VerticalSpacer fourPx />
                 <BodyShort size="small">{antallBarnTps}</BodyShort>
               </FlexColumn>
@@ -139,9 +142,7 @@ export const TermindatoFaktaForm: FunctionComponent<OwnProps> & StaticFunctions 
         <>
           <VerticalSpacer sixteenPx />
           <Alert variant="warning" className={styles.marginBottom}>
-            <FormattedMessage
-              id="TermindatoFaktaForm.AdvarselForTidligUtstedtdato"
-            />
+            <FormattedMessage id="TermindatoFaktaForm.AdvarselForTidligUtstedtdato" />
           </Alert>
         </>
       )}

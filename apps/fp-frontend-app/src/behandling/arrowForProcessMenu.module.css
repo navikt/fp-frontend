@@ -12,7 +12,7 @@
 .step__arrow-container .step__arrow:before {
   border: solid transparent;
   bottom: 100%;
-  content: " ";
+  content: ' ';
   height: 0;
   left: 50%;
   pointer-events: none;

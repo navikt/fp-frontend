@@ -20,13 +20,13 @@ export const BehandlingerIndex: FunctionComponent<OwnProps> = ({
   <Routes>
     <Route
       path={behandlingRoutePath}
-      element={(
+      element={
         <BehandlingIndex
           fagsakData={fagsakData}
           setBehandlingUuidOgVersjon={setBehandlingUuidOgVersjon}
           setRequestPendingMessage={setRequestPendingMessage}
         />
-      )}
+      }
     />
     <Route path="/" element={<IngenBehandlingValgtPanel numBehandlinger={fagsakData.getAlleBehandlinger().length} />} />
   </Routes>

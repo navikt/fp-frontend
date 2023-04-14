@@ -2,12 +2,8 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import {
-  fagsakYtelseType, mottakerTyper, tilbakekrevingVidereBehandling, AksjonspunktCode,
-} from '@navikt/fp-kodeverk';
-import {
-  Aksjonspunkt, Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg,
-} from '@navikt/fp-types';
+import { fagsakYtelseType, mottakerTyper, tilbakekrevingVidereBehandling, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { Aksjonspunkt, Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -32,64 +28,85 @@ const simuleringResultat = {
     sumFeilutbetaling: -49863,
     sumInntrekk: -10899,
     ingenPerioderMedAvvik: false,
-    perioderPerMottaker: [{
-      mottakerType: mottakerTyper.ARBG,
-      mottakerIdentifikator: '123',
-      mottakerNummer: 'test',
-      mottakerNavn: 'test',
-      resultatPerFagområde: [{
-        fagOmrådeKode: 'FP',
-        rader: [{
-          feltnavn: 'nyttBeløp',
-          resultaterPerMåned: [{
-            periode: {
-              fom: '2019-01-01',
-              tom: '2019-01-31',
-            },
-            beløp: 52619,
-          }],
-        }, {
-          feltnavn: 'tidligereUtbetalt',
-          resultaterPerMåned: [{
-            periode: {
-              fom: '2019-01-01',
-              tom: '2019-01-31',
-            },
-            beløp: 61795,
-          }],
-        }, {
-          feltnavn: 'differanse',
-          resultaterPerMåned: [{
-            periode: {
-              fom: '2019-01-01',
-              tom: '2019-01-31',
-            },
-            beløp: -9176,
-          }],
-        }],
-      }],
-      resultatOgMotregningRader: [{
-        feltnavn: 'inntrekkNesteMåned',
-        resultaterPerMåned: [{
-          periode: {
-            fom: '2019-01-01',
-            tom: '2019-01-31',
+    perioderPerMottaker: [
+      {
+        mottakerType: mottakerTyper.ARBG,
+        mottakerIdentifikator: '123',
+        mottakerNummer: 'test',
+        mottakerNavn: 'test',
+        resultatPerFagområde: [
+          {
+            fagOmrådeKode: 'FP',
+            rader: [
+              {
+                feltnavn: 'nyttBeløp',
+                resultaterPerMåned: [
+                  {
+                    periode: {
+                      fom: '2019-01-01',
+                      tom: '2019-01-31',
+                    },
+                    beløp: 52619,
+                  },
+                ],
+              },
+              {
+                feltnavn: 'tidligereUtbetalt',
+                resultaterPerMåned: [
+                  {
+                    periode: {
+                      fom: '2019-01-01',
+                      tom: '2019-01-31',
+                    },
+                    beløp: 61795,
+                  },
+                ],
+              },
+              {
+                feltnavn: 'differanse',
+                resultaterPerMåned: [
+                  {
+                    periode: {
+                      fom: '2019-01-01',
+                      tom: '2019-01-31',
+                    },
+                    beløp: -9176,
+                  },
+                ],
+              },
+            ],
           },
-          beløp: 0,
-        }],
-      }, {
-        feltnavn: 'resultat',
-        resultaterPerMåned: [{
-          periode: {
-            fom: '2019-01-01',
-            tom: '2019-01-31',
+        ],
+        resultatOgMotregningRader: [
+          {
+            feltnavn: 'inntrekkNesteMåned',
+            resultaterPerMåned: [
+              {
+                periode: {
+                  fom: '2019-01-01',
+                  tom: '2019-01-31',
+                },
+                beløp: 0,
+              },
+            ],
           },
-          beløp: -26486,
-        }],
-      }],
-      nesteUtbPeriodeFom: '2019-10-01',
-      nestUtbPeriodeTom: '2019-10-31',
-    }],
+          {
+            feltnavn: 'resultat',
+            resultaterPerMåned: [
+              {
+                periode: {
+                  fom: '2019-01-01',
+                  tom: '2019-01-31',
+                },
+                beløp: -26486,
+              },
+            ],
+          },
+        ],
+        nesteUtbPeriodeFom: '2019-10-01',
+        nestUtbPeriodeTom: '2019-10-31',
+      },
+    ],
   },
   slåttAvInntrekk: false,
 } as SimuleringResultat;
@@ -104,12 +121,7 @@ const Template: Story<{
   submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
   tilbakekrevingvalg?: TilbakekrevingValg;
   isAksjonspunktOpen: boolean;
-}> = ({
-  aksjonspunkter,
-  submitCallback,
-  tilbakekrevingvalg,
-  isAksjonspunktOpen,
-}) => (
+}> = ({ aksjonspunkter, submitCallback, tilbakekrevingvalg, isAksjonspunktOpen }) => (
   <AvregningProsessIndex
     behandling={behandling}
     alleKodeverk={alleKodeverk as any}
@@ -131,10 +143,12 @@ const Template: Story<{
 
 export const AksjonspunktVurderFeilutbetaling = Template.bind({});
 AksjonspunktVurderFeilutbetaling.args = {
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.VURDER_FEILUTBETALING,
-    begrunnelse: undefined,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.VURDER_FEILUTBETALING,
+      begrunnelse: undefined,
+    },
+  ] as Aksjonspunkt[],
   isAksjonspunktOpen: true,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };

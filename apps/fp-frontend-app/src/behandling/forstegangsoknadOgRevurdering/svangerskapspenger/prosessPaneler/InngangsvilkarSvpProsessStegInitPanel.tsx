@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 
 import { AksessRettigheter } from '@navikt/fp-types';
 
@@ -11,7 +9,7 @@ import MedlemskapInngangsvilkarInitPanel from '../../paneler/prosess/inngangsvil
 import OpptjeningInngangsvilkarInitPanel from './inngangsvilkarPaneler/OpptjeningInngangsvilkarInitPanel';
 
 interface OwnProps {
-  apentFaktaPanelInfo?: {urlCode: string, text: string };
+  apentFaktaPanelInfo?: { urlCode: string; text: string };
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   rettigheter: AksessRettigheter;
 }
@@ -32,13 +30,17 @@ const InngangsvilkarSvpProsessStegInitPanel: FunctionComponent<OwnProps & Proses
     apentFaktaPanelInfo={apentFaktaPanelInfo}
     oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
     requestApi={requestApi}
-    leftPanels={(props) => (
+    leftPanels={props => (
       <>
         <SvangerskapInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} {...props} />
-        <MedlemskapInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} rettigheter={rettigheter} {...props} />
+        <MedlemskapInngangsvilkarInitPanel
+          behandlingVersjon={behandling.versjon}
+          rettigheter={rettigheter}
+          {...props}
+        />
       </>
     )}
-    rightPanels={(props) => (
+    rightPanels={props => (
       <OpptjeningInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} rettigheter={rettigheter} {...props} />
     )}
   />

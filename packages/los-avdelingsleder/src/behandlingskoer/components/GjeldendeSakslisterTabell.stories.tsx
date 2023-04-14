@@ -50,7 +50,7 @@ const Template: Story<Props> = ({
         sakslister={sakslister}
         valgtAvdelingEnhet="1"
         setValgtSakslisteId={action('button-click')}
-        lagNySaksliste={() => setSaksliste((oldState) => oldState.concat(nyeSakslister))}
+        lagNySaksliste={() => setSaksliste(oldState => oldState.concat(nyeSakslister))}
         resetValgtSakslisteId={action('button-click')}
         hentAvdelingensSakslister={hentAvdelingensSakslister}
         valgtSakslisteId={valgtSakslisteId}
@@ -62,33 +62,39 @@ const Template: Story<Props> = ({
 
 export const TabellNårDetIkkeFinnesBehandlingskøer = Template.bind({});
 TabellNårDetIkkeFinnesBehandlingskøer.args = {
-  nyeSakslister: [{
-    sakslisteId: 1,
-    navn: 'Ny liste',
-    sistEndret: '2020-01-01',
-    saksbehandlerIdenter: [],
-    antallBehandlinger: 1,
-  }],
+  nyeSakslister: [
+    {
+      sakslisteId: 1,
+      navn: 'Ny liste',
+      sistEndret: '2020-01-01',
+      saksbehandlerIdenter: [],
+      antallBehandlinger: 1,
+    },
+  ],
   hentAvdelingensSakslister: action('button-click') as () => Saksliste[],
 };
 
 export const TabellNårDetFinnesEnBehandlingskø = Template.bind({});
 TabellNårDetFinnesEnBehandlingskø.args = {
-  saksliste: [{
-    sakslisteId: 1,
-    navn: 'Saksliste 1',
-    sistEndret: '2020-01-01',
-    saksbehandlerIdenter: ['R23233'],
-    antallBehandlinger: 1,
-  }],
+  saksliste: [
+    {
+      sakslisteId: 1,
+      navn: 'Saksliste 1',
+      sistEndret: '2020-01-01',
+      saksbehandlerIdenter: ['R23233'],
+      antallBehandlinger: 1,
+    },
+  ],
   valgtSakslisteId: 1,
-  nyeSakslister: [{
-    sakslisteId: 2,
-    navn: 'Ny liste',
-    sistEndret: '2020-01-01',
-    saksbehandlerIdenter: [],
-    antallBehandlinger: 1,
-  }],
+  nyeSakslister: [
+    {
+      sakslisteId: 2,
+      navn: 'Ny liste',
+      sistEndret: '2020-01-01',
+      saksbehandlerIdenter: [],
+      antallBehandlinger: 1,
+    },
+  ],
   oppgaverForAvdelingAntall: 1,
   hentAvdelingensSakslister: action('button-click') as () => Saksliste[],
 };

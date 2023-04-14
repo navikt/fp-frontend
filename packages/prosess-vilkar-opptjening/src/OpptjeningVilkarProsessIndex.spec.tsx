@@ -5,13 +5,11 @@ import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './OpptjeningVilkarProsessIndex.stories';
 
-const {
-  ÅpentAksjonspunkt, HarIkkeAksjonspunkt, ÅpentAksjonspunktMenUtenAktiviteter,
-} = composeStories(stories);
+const { ÅpentAksjonspunkt, HarIkkeAksjonspunkt, ÅpentAksjonspunktMenUtenAktiviteter } = composeStories(stories);
 
 Object.defineProperty(global.self, 'crypto', {
   value: {
-    getRandomValues: (arr) => crypto.randomBytes(arr.length),
+    getRandomValues: arr => crypto.randomBytes(arr.length),
   },
 });
 
@@ -56,8 +54,12 @@ describe('<OpptjeningVilkarProsessIndex>', () => {
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
-    expect(await screen.findByText('Du kan ikke velge at opptjeningsvilkåret er oppfylt, fordi det ikke finnes noen aktiviteter '
-      + 'å beregne inntekten fra. Kontakt bruker for å avklare om bruker har noen opptjening.')).toBeInTheDocument();
+    expect(
+      await screen.findByText(
+        'Du kan ikke velge at opptjeningsvilkåret er oppfylt, fordi det ikke finnes noen aktiviteter ' +
+          'å beregne inntekten fra. Kontakt bruker for å avklare om bruker har noen opptjening.',
+      ),
+    ).toBeInTheDocument();
 
     await userEvent.click(screen.getByText(/Søker har ikke oppfylt krav om 6 mnd opptjening/));
 
@@ -80,7 +82,9 @@ describe('<OpptjeningVilkarProsessIndex>', () => {
     expect(screen.getByText('01.01.2018 - 01.10.2018')).toBeInTheDocument();
 
     expect(screen.queryByText('Opptjent rett til foreldrepenger')).not.toBeInTheDocument();
-    expect(screen.queryByText('Søker har oppfylt krav om 6 mnd opptjening, vilkåret er oppfylt.')).not.toBeInTheDocument();
+    expect(
+      screen.queryByText('Søker har oppfylt krav om 6 mnd opptjening, vilkåret er oppfylt.'),
+    ).not.toBeInTheDocument();
     expect(screen.queryByText('Vurdering')).not.toBeInTheDocument();
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
   });

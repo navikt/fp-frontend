@@ -8,13 +8,7 @@ describe('<MenuButton>', () => {
   it('skal rendre meny-knapp', async () => {
     const onClick = vi.fn();
 
-    render(
-      <MenuButton
-        onClick={onClick}
-      >
-        test
-      </MenuButton>,
-    );
+    render(<MenuButton onClick={onClick}>test</MenuButton>);
 
     expect(await screen.findByText('test')).toBeInTheDocument();
 

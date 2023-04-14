@@ -19,9 +19,7 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{ endreReserverasjonState: () => void }> = ({
-  endreReserverasjonState,
-}) => (
+const Template: Story<{ endreReserverasjonState: () => void }> = ({ endreReserverasjonState }) => (
   <OppgaveReservasjonEndringDatoModal
     showModal
     closeModal={action('button-click')}

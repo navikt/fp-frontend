@@ -21,17 +21,11 @@ export default {
 };
 
 const Template: Story<{
-  saksliste: Saksliste,
-  avdelingensSaksbehandlere: SaksbehandlerAvdeling[],
-  hentAvdelingensSakslister: (params: {avdelingEnhet: string}) => void;
-}> = ({
-  saksliste,
-  avdelingensSaksbehandlere,
-  hentAvdelingensSakslister,
-}) => {
-  const data = [
-    { key: RestApiPathsKeys.LAGRE_SAKSLISTE_SAKSBEHANDLER.name, data: {} },
-  ];
+  saksliste: Saksliste;
+  avdelingensSaksbehandlere: SaksbehandlerAvdeling[];
+  hentAvdelingensSakslister: (params: { avdelingEnhet: string }) => void;
+}> = ({ saksliste, avdelingensSaksbehandlere, hentAvdelingensSakslister }) => {
+  const data = [{ key: RestApiPathsKeys.LAGRE_SAKSLISTE_SAKSBEHANDLER.name, data: {} }];
 
   return (
     <RestApiMock data={data} requestApi={requestApi}>
@@ -67,15 +61,18 @@ ToSaksbehandlere.args = {
     saksbehandlerIdenter: ['S34354'],
     antallBehandlinger: 1,
   },
-  avdelingensSaksbehandlere: [{
-    brukerIdent: 'E23232',
-    navn: 'Espen Utvikler',
-    avdelingsnavn: ['NAV Viken'],
-  }, {
-    brukerIdent: 'S34354',
-    navn: 'Steffen',
-    avdelingsnavn: ['NAV Viken'],
-  }],
+  avdelingensSaksbehandlere: [
+    {
+      brukerIdent: 'E23232',
+      navn: 'Espen Utvikler',
+      avdelingsnavn: ['NAV Viken'],
+    },
+    {
+      brukerIdent: 'S34354',
+      navn: 'Steffen',
+      avdelingsnavn: ['NAV Viken'],
+    },
+  ],
   hentAvdelingensSakslister: action('button-click'),
 };
 
@@ -88,18 +85,22 @@ TreSaksbehandlere.args = {
     saksbehandlerIdenter: ['S34354'],
     antallBehandlinger: 1,
   },
-  avdelingensSaksbehandlere: [{
-    brukerIdent: 'E23232',
-    navn: 'Espen Utvikler',
-    avdelingsnavn: ['NAV Viken'],
-  }, {
-    brukerIdent: 'S34354',
-    navn: 'Steffen',
-    avdelingsnavn: ['NAV Viken'],
-  }, {
-    brukerIdent: 'E24353',
-    navn: 'Eirik',
-    avdelingsnavn: ['NAV Viken'],
-  }],
+  avdelingensSaksbehandlere: [
+    {
+      brukerIdent: 'E23232',
+      navn: 'Espen Utvikler',
+      avdelingsnavn: ['NAV Viken'],
+    },
+    {
+      brukerIdent: 'S34354',
+      navn: 'Steffen',
+      avdelingsnavn: ['NAV Viken'],
+    },
+    {
+      brukerIdent: 'E24353',
+      navn: 'Eirik',
+      avdelingsnavn: ['NAV Viken'],
+    },
+  ],
   hentAvdelingensSakslister: action('button-click'),
 };

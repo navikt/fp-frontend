@@ -2,11 +2,13 @@ import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 import { UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import { Datepicker, SelectField, PeriodFieldArray, formHooks } from '@navikt/ft-form-hooks';
 import {
-  Datepicker, SelectField, PeriodFieldArray, formHooks,
-} from '@navikt/ft-form-hooks';
-import {
-  dateAfterOrEqual, dateBeforeOrEqual, dateRangesNotOverlapping, hasValidDate, required,
+  dateAfterOrEqual,
+  dateBeforeOrEqual,
+  dateRangesNotOverlapping,
+  hasValidDate,
+  required,
 } from '@navikt/ft-form-validators';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 import { oppholdArsakType } from '@navikt/fp-kodeverk';
@@ -20,19 +22,23 @@ type Periode = {
   periodeFom: string;
   periodeTom: string;
   årsak: string;
-}
+};
 
 export type FormValues = Periode[];
 
-const getOverlappingValidator = (
-  getValues: UseFormGetValues<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {[OPPHOLD_PERIODE_FIELD_ARRAY_NAME]: FormValues }}>,
-) => () => {
-  const perioder = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}`);
-  const periodeMap = perioder
-    .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
-    .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
-  return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
-};
+const getOverlappingValidator =
+  (
+    getValues: UseFormGetValues<{
+      [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: { [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]: FormValues };
+    }>,
+  ) =>
+  () => {
+    const perioder = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}`);
+    const periodeMap = perioder
+      .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
+      .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
+    return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
+  };
 
 const defaultOppholdPeriode: Periode = {
   periodeFom: '',
@@ -44,16 +50,17 @@ const gyldigeÅrsaker = [
   oppholdArsakType.UTTAK_MØDREKVOTE_ANNEN_FORELDER,
   oppholdArsakType.UTTAK_FEDREKVOTE_ANNEN_FORELDER,
   oppholdArsakType.UTTAK_FELLESP_ANNEN_FORELDER,
-  oppholdArsakType.UTTAK_FORELDREPENGER_ANNEN_FORELDER];
+  oppholdArsakType.UTTAK_FORELDREPENGER_ANNEN_FORELDER,
+];
 
-const mapTyper = (typer: KodeverkMedNavn[]): ReactElement[] => typer
-  .filter(({
-    kode,
-  }) => gyldigeÅrsaker.includes(kode))
-  .map(({
-    kode,
-    navn,
-  }) => <option value={kode} key={kode}>{navn}</option>);
+const mapTyper = (typer: KodeverkMedNavn[]): ReactElement[] =>
+  typer
+    .filter(({ kode }) => gyldigeÅrsaker.includes(kode))
+    .map(({ kode, navn }) => (
+      <option value={kode} key={kode}>
+        {navn}
+      </option>
+    ));
 
 interface OwnProps {
   oppholdsReasons: KodeverkMedNavn[];
@@ -65,17 +72,19 @@ interface OwnProps {
  *
  * Viser inputfelter for dato for bestemmelse av oppholdsperiode.
  */
-const RenderOppholdPeriodeFieldArray: FunctionComponent<OwnProps> = ({
-  oppholdsReasons,
-  readOnly,
-}) => {
+const RenderOppholdPeriodeFieldArray: FunctionComponent<OwnProps> = ({ oppholdsReasons, readOnly }) => {
   const intl = useIntl();
 
   const {
-    control, getValues, trigger, formState: { isSubmitted },
-  } = formHooks.useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
-    [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]: FormValues
-  }}>();
+    control,
+    getValues,
+    trigger,
+    formState: { isSubmitted },
+  } = formHooks.useFormContext<{
+    [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
+      [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]: FormValues;
+    };
+  }>();
 
   const { fields, remove, append } = formHooks.useFieldArray({
     control,
@@ -98,7 +107,7 @@ const RenderOppholdPeriodeFieldArray: FunctionComponent<OwnProps> = ({
       remove={remove}
     >
       {(field, index, getRemoveButton) => (
-        <div key={field.id} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+        <div key={field.id} className={index !== fields.length - 1 ? styles.notLastRow : ''}>
           <FlexContainer wrap>
             <FlexRow>
               <FlexColumn>
@@ -109,8 +118,12 @@ const RenderOppholdPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                     required,
                     hasValidDate,
                     () => {
-                      const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
-                      const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
+                      const fomVerdi = getValues(
+                        `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`,
+                      );
+                      const tomVerdi = getValues(
+                        `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`,
+                      );
                       return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
                     },
                     getOverlappingValidator(getValues),
@@ -126,8 +139,12 @@ const RenderOppholdPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                     required,
                     hasValidDate,
                     () => {
-                      const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
-                      const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
+                      const fomVerdi = getValues(
+                        `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`,
+                      );
+                      const tomVerdi = getValues(
+                        `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`,
+                      );
                       return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
                     },
                     getOverlappingValidator(getValues),
@@ -143,11 +160,7 @@ const RenderOppholdPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                   validate={[required]}
                 />
               </FlexColumn>
-              {getRemoveButton && (
-                <FlexColumn>
-                  {getRemoveButton()}
-                </FlexColumn>
-              )}
+              {getRemoveButton && <FlexColumn>{getRemoveButton()}</FlexColumn>}
             </FlexRow>
           </FlexContainer>
         </div>

@@ -17,7 +17,7 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{ navn: string, kjønn: Kjønnkode, diskresjonskode?: string, dødsdato?: string }> = ({
+const Template: Story<{ navn: string; kjønn: Kjønnkode; diskresjonskode?: string; dødsdato?: string }> = ({
   navn,
   kjønn,
   diskresjonskode,

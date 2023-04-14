@@ -1,9 +1,5 @@
-import React, {
-  FunctionComponent, useState, useEffect, useCallback,
-} from 'react';
-import {
-  Navigate, NavLink, useLocation, useMatch,
-} from 'react-router-dom';
+import React, { FunctionComponent, useState, useEffect, useCallback } from 'react';
+import { Navigate, NavLink, useLocation, useMatch } from 'react-router-dom';
 import { Location } from 'history';
 import { useIntl } from 'react-intl';
 import { BehandlingVelgerSakIndex } from '@navikt/ft-sak-behandling-velger';
@@ -15,11 +11,7 @@ import { BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 
-import {
-  getLocationWithDefaultProsessStegAndFakta,
-  pathToBehandling,
-  pathToBehandlinger,
-} from '../app/paths';
+import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling, pathToBehandlinger } from '../app/paths';
 import BehandlingMenuIndex from '../behandlingmenu/BehandlingMenuIndex';
 import RisikoklassifiseringIndex from './risikoklassifisering/RisikoklassifiseringIndex';
 import { useFpSakKodeverkMedNavn, useGetKodeverkFn } from '../data/useKodeverk';
@@ -89,16 +81,18 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   const shouldRedirectToBehandlinger = !!match;
 
   const location = useLocation();
-  const getBehandlingLocation = useCallback((valgtBehandlingUuid) => getLocationWithDefaultProsessStegAndFakta({
-    ...location,
-    pathname: pathToBehandling(fagsak.saksnummer, valgtBehandlingUuid),
-  }), [fagsak.saksnummer]);
+  const getBehandlingLocation = useCallback(
+    valgtBehandlingUuid =>
+      getLocationWithDefaultProsessStegAndFakta({
+        ...location,
+        pathname: pathToBehandling(fagsak.saksnummer, valgtBehandlingUuid),
+      }),
+    [fagsak.saksnummer],
+  );
 
   return (
     <div className={styles.panelPadding}>
-      {fagsak.brukerManglerAdresse && (
-        <UkjentAdresseMeldingIndex />
-      )}
+      {fagsak.brukerManglerAdresse && <UkjentAdresseMeldingIndex />}
       {shouldRedirectToBehandlinger && (
         <Navigate to={findPathToBehandling(fagsak.saksnummer, location, fagsakData.getAlleBehandlinger())} />
       )}
@@ -133,11 +127,7 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
                 skalViseAlleBehandlinger={showAll}
                 toggleVisAlleBehandlinger={toggleShowAll}
                 renderRadSomLenke={(className, behandlingInfoKomponent, uuid) => (
-                  <NavLink
-                    className={className}
-                    to={getBehandlingLocation(uuid)}
-                    onClick={toggleShowAll}
-                  >
+                  <NavLink className={className} to={getBehandlingLocation(uuid)} onClick={toggleShowAll}>
                     {behandlingInfoKomponent}
                   </NavLink>
                 )}

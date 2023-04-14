@@ -6,6 +6,6 @@ type Dokument = Readonly<{
   tidspunkt?: string;
   kommunikasjonsretning: string;
   gjelderFor?: string;
-}>
+}>;
 
 export default Dokument;

@@ -30,11 +30,13 @@ describe('<BehandlingKlageIndex>', () => {
           type: BehandlingType.KLAGE,
           aksjonspunkt: [],
           vilkår: [],
-          links: [{
-            href: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name,
-            rel: 'update',
-            type: 'POST',
-          }],
+          links: [
+            {
+              href: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name,
+              rel: 'update',
+              type: 'POST',
+            },
+          ],
         },
       },
       { key: BehandlingFellesApiKeys.PREVIEW_MESSAGE.name, noRelLink: true, data: undefined },
@@ -55,17 +57,21 @@ describe('<BehandlingKlageIndex>', () => {
               oppdaterBehandlingVersjon={() => {}}
               // @ts-ignore
               kodeverk={alleKodeverk as AlleKodeverk}
-              fagsak={{
-                fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-              } as Fagsak}
-              rettigheter={{
-                writeAccess: {
-                  isEnabled: true,
-                },
-                kanOverstyreAccess: {
-                  isEnabled: true,
-                },
-              } as AksessRettigheter}
+              fagsak={
+                {
+                  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+                } as Fagsak
+              }
+              rettigheter={
+                {
+                  writeAccess: {
+                    isEnabled: true,
+                  },
+                  kanOverstyreAccess: {
+                    isEnabled: true,
+                  },
+                } as AksessRettigheter
+              }
               oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
               valgtProsessSteg="default"
               valgtFaktaSteg="default"

@@ -23,16 +23,17 @@ export type TransformedValues = {
   fritekstTilBrev: string;
   begrunnelse: string;
   klageVurdering: string;
-}
+};
 
-const transformValues = (
-  values: FormValues,
-  aksjonspunktCode: string,
-): TransformedValues => ({
+const transformValues = (values: FormValues, aksjonspunktCode: string): TransformedValues => ({
   kode: aksjonspunktCode,
-  klageMedholdArsak: (values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE
-    || values.klageVurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? values.klageMedholdArsak : null,
-  klageVurderingOmgjoer: values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
+  klageMedholdArsak:
+    values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ||
+    values.klageVurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK
+      ? values.klageMedholdArsak
+      : null,
+  klageVurderingOmgjoer:
+    values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
   klageHjemmel: values.klageHjemmel,
   fritekstTilBrev: values.fritekstTilBrev,
   begrunnelse: values.begrunnelse,
@@ -60,10 +61,7 @@ const TempsaveKlageButton: FunctionComponent<OwnProps> = ({
         size="small"
         variant="primary"
         loading={spinner}
-        onClick={handleSubmit((values: FormValues) => saveKlage(transformValues(
-          values,
-          aksjonspunktCode,
-        )))}
+        onClick={handleSubmit((values: FormValues) => saveKlage(transformValues(values, aksjonspunktCode)))}
         type="button"
       >
         <FormattedMessage id="Klage.ResolveKlage.TempSaveButton" />

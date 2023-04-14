@@ -15,17 +15,9 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
 }
 
-const AnkeProsessIndex: FunctionComponent<OwnProps> = ({
-  ankeVurdering,
-  behandlinger,
-  alleKodeverk,
-}) => (
+const AnkeProsessIndex: FunctionComponent<OwnProps> = ({ ankeVurdering, behandlinger, alleKodeverk }) => (
   <RawIntlProvider value={intl}>
-    <BehandleAnkeForm
-      ankeVurdering={ankeVurdering}
-      behandlinger={behandlinger}
-      alleKodeverk={alleKodeverk}
-    />
+    <BehandleAnkeForm ankeVurdering={ankeVurdering} behandlinger={behandlinger} alleKodeverk={alleKodeverk} />
   </RawIntlProvider>
 );
 

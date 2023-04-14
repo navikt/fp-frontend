@@ -8,9 +8,11 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import NyeOgFerdigstilteOppgaver from '../../../../typer/nyeOgFerdigstilteOppgaverTsType';
 import NyeOgFerdigstilteOppgaverForSisteSyvGraf from './NyeOgFerdigstilteOppgaverForSisteSyvGraf';
 
-export const getNyeOgFerdigstilteForSisteSyvDager = (nyeOgFerdigstilte: NyeOgFerdigstilteOppgaver[] = []): NyeOgFerdigstilteOppgaver[] => {
+export const getNyeOgFerdigstilteForSisteSyvDager = (
+  nyeOgFerdigstilte: NyeOgFerdigstilteOppgaver[] = [],
+): NyeOgFerdigstilteOppgaver[] => {
   const iDag = dayjs().startOf('day');
-  return nyeOgFerdigstilte.filter((oppgave) => iDag.isAfter(dayjs(oppgave.dato, ISO_DATE_FORMAT)));
+  return nyeOgFerdigstilte.filter(oppgave => iDag.isAfter(dayjs(oppgave.dato, ISO_DATE_FORMAT)));
 };
 
 interface OwnProps {
@@ -25,7 +27,10 @@ const NyeOgFerdigstilteOppgaverForSisteSyvPanel: FunctionComponent<OwnProps> = (
   height,
   nyeOgFerdigstilteOppgaver,
 }) => {
-  const filtrertenyeOgFerdigstilteOppgaver = useMemo(() => getNyeOgFerdigstilteForSisteSyvDager(nyeOgFerdigstilteOppgaver), [nyeOgFerdigstilteOppgaver]);
+  const filtrertenyeOgFerdigstilteOppgaver = useMemo(
+    () => getNyeOgFerdigstilteForSisteSyvDager(nyeOgFerdigstilteOppgaver),
+    [nyeOgFerdigstilteOppgaver],
+  );
   return (
     <>
       <VerticalSpacer eightPx />

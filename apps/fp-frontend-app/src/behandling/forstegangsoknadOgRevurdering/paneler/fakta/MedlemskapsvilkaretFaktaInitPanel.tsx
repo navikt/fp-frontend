@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
@@ -20,21 +18,16 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP,
 ];
 
-const ENDEPUNKTER_PANEL_DATA = [
-  BehandlingFellesApiKeys.MEDLEMSKAP,
-  BehandlingFellesApiKeys.SOKNAD,
-];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.MEDLEMSKAP, BehandlingFellesApiKeys.SOKNAD];
 type EndepunktPanelData = {
   medlemskap: Medlemskap;
   soknad: Soknad;
-}
+};
 
 /**
  * MedlemskapsvilkaretFaktaInitPanel
  */
-const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({
-  ...props
-}) => (
+const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({ ...props }) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     {...props}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
@@ -42,9 +35,7 @@ const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> 
     faktaPanelKode={FaktaPanelCode.MEDLEMSKAPSVILKARET}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'MedlemskapInfoPanel.Medlemskap' })}
     skalPanelVisesIMeny={() => props.behandling.harSøknad}
-    renderPanel={(data) => (
-      <MedlemskapFaktaIndex {...data} />
-    )}
+    renderPanel={data => <MedlemskapFaktaIndex {...data} />}
   />
 );
 

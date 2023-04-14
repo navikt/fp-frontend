@@ -29,7 +29,7 @@ export type FormValues = {
 
 export type TransformedFormValues = Omit<FormValues, 'omsorg'> & {
   [OMSORG_FORM_NAME_PREFIX]?: OmsorgOgAdopsjonTransformedFormValues;
-}
+};
 
 interface OwnProps {
   readOnly: boolean;

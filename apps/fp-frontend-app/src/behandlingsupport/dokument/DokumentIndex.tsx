@@ -12,11 +12,13 @@ import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 import '@navikt/ft-sak-dokumenter/dist/style.css';
 
 // TODO (hb) lag linker, ikke callback
-const selectDocument = (saksNr: string) => (_e: React.SyntheticEvent, _id: number, document: Dokument): void => {
-  window.open(hentDokumentLenke(saksNr, document.journalpostId, document.dokumentId), '_blank');
-};
+const selectDocument =
+  (saksNr: string) =>
+  (_e: React.SyntheticEvent, _id: number, document: Dokument): void => {
+    window.open(hentDokumentLenke(saksNr, document.journalpostId, document.dokumentId), '_blank');
+  };
 
-const sorterDokumenter = ((dok1: Dokument, dok2: Dokument): number => {
+const sorterDokumenter = (dok1: Dokument, dok2: Dokument): number => {
   if (!dok1.tidspunkt) {
     return +1;
   }
@@ -25,7 +27,7 @@ const sorterDokumenter = ((dok1: Dokument, dok2: Dokument): number => {
     return -1;
   }
   return dok2.tidspunkt.localeCompare(dok1.tidspunkt);
-});
+};
 
 interface OwnProps {
   saksnummer: string;
@@ -40,19 +42,19 @@ const EMPTY_ARRAY = [] as Dokument[];
  *
  * Container komponent. Har ansvar for å hente sakens dokumenter fra state og rendre det i en liste.
  */
-export const DokumentIndex: FunctionComponent<OwnProps> = ({
-  behandlingUuid,
-  behandlingVersjon,
-  saksnummer,
-}) => {
+export const DokumentIndex: FunctionComponent<OwnProps> = ({ behandlingUuid, behandlingVersjon, saksnummer }) => {
   const forrigeSaksnummer = usePrevious(saksnummer);
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingUuid, behandlingVersjon);
 
-  const { data: alleDokumenter = EMPTY_ARRAY, state } = restApiHooks.useRestApi(FpsakApiKeys.ALL_DOCUMENTS, { saksnummer }, {
-    updateTriggers: [behandlingUuid, behandlingVersjon],
-    suspendRequest: !!forrigeSaksnummer && erBehandlingEndretFraUndefined,
-    keepData: true,
-  });
+  const { data: alleDokumenter = EMPTY_ARRAY, state } = restApiHooks.useRestApi(
+    FpsakApiKeys.ALL_DOCUMENTS,
+    { saksnummer },
+    {
+      updateTriggers: [behandlingUuid, behandlingVersjon],
+      suspendRequest: !!forrigeSaksnummer && erBehandlingEndretFraUndefined,
+      keepData: true,
+    },
+  );
 
   const sorterteDokumenter = useMemo(() => [...alleDokumenter].sort(sorterDokumenter), [alleDokumenter]);
 

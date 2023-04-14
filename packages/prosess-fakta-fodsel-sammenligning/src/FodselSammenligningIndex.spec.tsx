@@ -4,7 +4,9 @@ import { composeStories } from '@storybook/testing-react';
 import * as stories from './FodselSammenligningIndex.stories';
 
 const {
-  PanelForNårBehandlingstypeErRevurdering, PanelForNårBehandlingstypeErFørstegangssoknad, PanelForMedVisningAvSvangerskapsuke,
+  PanelForNårBehandlingstypeErRevurdering,
+  PanelForNårBehandlingstypeErFørstegangssoknad,
+  PanelForMedVisningAvSvangerskapsuke,
 } = composeStories(stories);
 
 describe('<FodselSammenligningIndex>', () => {

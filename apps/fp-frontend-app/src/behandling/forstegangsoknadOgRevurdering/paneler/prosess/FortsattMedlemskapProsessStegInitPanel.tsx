@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, useCallback, useEffect, useState,
-} from 'react';
+import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
@@ -38,9 +36,9 @@ const FortsattMedlemskapProsessStegInitPanel: FunctionComponent<OwnProps & Prose
       vilkarKoder={VILKAR_KODER}
       prosessPanelKode={ProsessStegCode.FORTSATTMEDLEMSKAP}
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.FortsattMedlemskap' })}
-      skalPanelVisesIMeny={(initData) => skalViseProsessPanel(initData.aksjonspunkter, VILKAR_KODER, initData.vilkar)}
+      skalPanelVisesIMeny={initData => skalViseProsessPanel(initData.aksjonspunkter, VILKAR_KODER, initData.vilkar)}
       erOverstyrt={erOverstyrt}
-      renderPanel={(data) => (
+      renderPanel={data => (
         <OverstyringPanelDef
           aksjonspunkter={data?.aksjonspunkter}
           aksjonspunktKode={AKSJONSPUNKT_KODE}

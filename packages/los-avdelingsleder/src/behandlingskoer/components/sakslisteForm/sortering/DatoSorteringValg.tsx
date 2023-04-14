@@ -3,14 +3,10 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { Detail } from '@navikt/ds-react';
-import {
-  DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer, ArrowBox,
-} from '@navikt/ft-ui-komponenter';
+import { DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { hasValidDate, hasValidPosOrNegInteger } from '@navikt/ft-form-validators';
-import {
-  InputField, CheckboxField, Datepicker, formHooks,
-} from '@navikt/ft-form-hooks';
+import { InputField, CheckboxField, Datepicker, formHooks } from '@navikt/ft-form-hooks';
 
 import { restApiHooks, RestApiPathsKeys } from '../../../../data/fplosRestApi';
 
@@ -22,48 +18,56 @@ dayjs.extend(customParseFormat);
 
 const finnDato = (antallDager: number) => dayjs().add(antallDager, 'd').format();
 
-const getLagreDatoFn = (
-  lagreSakslisteSorteringTidsintervallDato: (params?: any, keepData?: boolean | undefined) => Promise<unknown>,
-  hentAntallOppgaver: (sakslisteId: number, avdelingEnhet: string) => void,
-  hentAvdelingensSakslister: (params: {avdelingEnhet: string}) => void,
-  valgtSakslisteId: number,
-  valgtAvdelingEnhet: string,
-  erFomDato: boolean,
-  annenDato?: string,
-) => (inputdato: string) => {
-  let dato;
-  if (inputdato) {
-    dato = dayjs(inputdato);
-  }
-  if (!dato || dato.isValid()) {
-    const d = dato ? dato.format(ISO_DATE_FORMAT) : dato;
+const getLagreDatoFn =
+  (
+    lagreSakslisteSorteringTidsintervallDato: (params?: any, keepData?: boolean | undefined) => Promise<unknown>,
+    hentAntallOppgaver: (sakslisteId: number, avdelingEnhet: string) => void,
+    hentAvdelingensSakslister: (params: { avdelingEnhet: string }) => void,
+    valgtSakslisteId: number,
+    valgtAvdelingEnhet: string,
+    erFomDato: boolean,
+    annenDato?: string,
+  ) =>
+  (inputdato: string) => {
+    let dato;
+    if (inputdato) {
+      dato = dayjs(inputdato);
+    }
+    if (!dato || dato.isValid()) {
+      const d = dato ? dato.format(ISO_DATE_FORMAT) : dato;
 
-    const params = erFomDato ? {
-      sakslisteId: valgtSakslisteId,
-      avdelingEnhet: valgtAvdelingEnhet,
-      fomDato: d,
-      tomDato: annenDato,
-    } : {
-      sakslisteId: valgtSakslisteId,
-      avdelingEnhet: valgtAvdelingEnhet,
-      fomDato: annenDato,
-      tomDato: d,
-    };
+      const params = erFomDato
+        ? {
+            sakslisteId: valgtSakslisteId,
+            avdelingEnhet: valgtAvdelingEnhet,
+            fomDato: d,
+            tomDato: annenDato,
+          }
+        : {
+            sakslisteId: valgtSakslisteId,
+            avdelingEnhet: valgtAvdelingEnhet,
+            fomDato: annenDato,
+            tomDato: d,
+          };
 
-    return lagreSakslisteSorteringTidsintervallDato(params)
-      .then(() => {
+      return lagreSakslisteSorteringTidsintervallDato(params).then(() => {
         hentAntallOppgaver(valgtSakslisteId, valgtAvdelingEnhet);
         hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet });
       });
-  }
-  return undefined;
-};
+    }
+    return undefined;
+  };
 interface OwnProps {
   valgtSakslisteId: number;
-  lagreSakslisteSorteringTidsintervallDager: (params: {sakslisteId: number, fra: number, til: number, avdelingEnhet: string}) => Promise<any>;
+  lagreSakslisteSorteringTidsintervallDager: (params: {
+    sakslisteId: number;
+    fra: number;
+    til: number;
+    avdelingEnhet: string;
+  }) => Promise<any>;
   valgtAvdelingEnhet: string;
   erDynamiskPeriode: boolean;
-  hentAvdelingensSakslister: (params: {avdelingEnhet: string}) => void;
+  hentAvdelingensSakslister: (params: { avdelingEnhet: string }) => void;
   hentAntallOppgaver: (sakslisteId: number, avdelingEnhet: string) => void;
 }
 
@@ -77,10 +81,12 @@ const DatoSorteringValg: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const { startRequest: lagreSakslisteSorteringErDynamiskPeriode } = restApiHooks
-    .useRestApiRunner(RestApiPathsKeys.LAGRE_SAKSLISTE_SORTERING_DYNAMISK_PERIDE);
-  const { startRequest: lagreSakslisteSorteringTidsintervallDato } = restApiHooks
-    .useRestApiRunner(RestApiPathsKeys.LAGRE_SAKSLISTE_SORTERING_TIDSINTERVALL_DATO);
+  const { startRequest: lagreSakslisteSorteringErDynamiskPeriode } = restApiHooks.useRestApiRunner(
+    RestApiPathsKeys.LAGRE_SAKSLISTE_SORTERING_DYNAMISK_PERIDE,
+  );
+  const { startRequest: lagreSakslisteSorteringTidsintervallDato } = restApiHooks.useRestApiRunner(
+    RestApiPathsKeys.LAGRE_SAKSLISTE_SORTERING_TIDSINTERVALL_DATO,
+  );
 
   const { watch } = formHooks.useFormContext();
   const fraVerdi = watch('fra');
@@ -88,25 +94,45 @@ const DatoSorteringValg: FunctionComponent<OwnProps> = ({
   const fomDatoVerdi = watch('fomDato');
   const tomDatoVerdi = watch('tomDato');
 
-  const lagreFra = (nyFraVerdi: number) => lagreSakslisteSorteringTidsintervallDager({
-    sakslisteId: valgtSakslisteId, fra: nyFraVerdi, til: tilVerdi, avdelingEnhet: valgtAvdelingEnhet,
-  })
-    .then(() => {
+  const lagreFra = (nyFraVerdi: number) =>
+    lagreSakslisteSorteringTidsintervallDager({
+      sakslisteId: valgtSakslisteId,
+      fra: nyFraVerdi,
+      til: tilVerdi,
+      avdelingEnhet: valgtAvdelingEnhet,
+    }).then(() => {
       hentAntallOppgaver(valgtSakslisteId, valgtAvdelingEnhet);
       hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet });
     });
-  const lagreTil = (nyTilVerdi: number) => lagreSakslisteSorteringTidsintervallDager({
-    sakslisteId: valgtSakslisteId, fra: fraVerdi, til: nyTilVerdi, avdelingEnhet: valgtAvdelingEnhet,
-  })
-    .then(() => {
+  const lagreTil = (nyTilVerdi: number) =>
+    lagreSakslisteSorteringTidsintervallDager({
+      sakslisteId: valgtSakslisteId,
+      fra: fraVerdi,
+      til: nyTilVerdi,
+      avdelingEnhet: valgtAvdelingEnhet,
+    }).then(() => {
       hentAntallOppgaver(valgtSakslisteId, valgtAvdelingEnhet);
       hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet });
     });
 
-  const lagreFomDato = getLagreDatoFn(lagreSakslisteSorteringTidsintervallDato, hentAntallOppgaver, hentAvdelingensSakslister,
-    valgtSakslisteId, valgtAvdelingEnhet, true, tomDatoVerdi);
-  const lagreTomDato = getLagreDatoFn(lagreSakslisteSorteringTidsintervallDato, hentAntallOppgaver, hentAvdelingensSakslister,
-    valgtSakslisteId, valgtAvdelingEnhet, false, fomDatoVerdi);
+  const lagreFomDato = getLagreDatoFn(
+    lagreSakslisteSorteringTidsintervallDato,
+    hentAntallOppgaver,
+    hentAvdelingensSakslister,
+    valgtSakslisteId,
+    valgtAvdelingEnhet,
+    true,
+    tomDatoVerdi,
+  );
+  const lagreTomDato = getLagreDatoFn(
+    lagreSakslisteSorteringTidsintervallDato,
+    hentAntallOppgaver,
+    hentAvdelingensSakslister,
+    valgtSakslisteId,
+    valgtAvdelingEnhet,
+    false,
+    fomDatoVerdi,
+  );
 
   const lagreFraDebounce = useDebounce<number>('fra', lagreFra);
   const lagreTilDebounce = useDebounce<number>('til', lagreTil);
@@ -134,9 +160,9 @@ const DatoSorteringValg: FunctionComponent<OwnProps> = ({
                     onChange={lagreFraDebounce}
                   />
                   {(fraVerdi || fraVerdi === 0) && (
-                  <Detail size="small">
-                    <DateLabel dateString={finnDato(fraVerdi)} />
-                  </Detail>
+                    <Detail size="small">
+                      <DateLabel dateString={finnDato(fraVerdi)} />
+                    </Detail>
                   )}
                 </FlexColumn>
                 <FlexColumn>
@@ -153,9 +179,9 @@ const DatoSorteringValg: FunctionComponent<OwnProps> = ({
                     onChange={lagreTilDebounce}
                   />
                   {(tilVerdi || tilVerdi === 0) && (
-                  <Detail size="small">
-                    <DateLabel dateString={finnDato(tilVerdi)} />
-                  </Detail>
+                    <Detail size="small">
+                      <DateLabel dateString={finnDato(tilVerdi)} />
+                    </Detail>
                   )}
                 </FlexColumn>
                 <FlexColumn>
@@ -197,11 +223,15 @@ const DatoSorteringValg: FunctionComponent<OwnProps> = ({
           <CheckboxField
             name="erDynamiskPeriode"
             label={intl.formatMessage({ id: 'SorteringVelger.DynamiskPeriode' })}
-            onChange={() => lagreSakslisteSorteringErDynamiskPeriode({ sakslisteId: valgtSakslisteId, avdelingEnhet: valgtAvdelingEnhet })
-              .then(() => {
+            onChange={() =>
+              lagreSakslisteSorteringErDynamiskPeriode({
+                sakslisteId: valgtSakslisteId,
+                avdelingEnhet: valgtAvdelingEnhet,
+              }).then(() => {
                 hentAntallOppgaver(valgtSakslisteId, valgtAvdelingEnhet);
                 hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet });
-              })}
+              })
+            }
           />
           <VerticalSpacer eightPx />
         </ArrowBox>

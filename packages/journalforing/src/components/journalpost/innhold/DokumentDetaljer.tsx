@@ -12,20 +12,16 @@ import Journalpost from '../../../typer/journalpostTsType';
 
 type OwnProps = Readonly<{
   dokument: JournalDokument;
-  docFieldIndex: number,
-  journalpost: Journalpost,
-}>
+  docFieldIndex: number;
+  journalpost: Journalpost;
+}>;
 
 /**
  * DokumentDetaljer - Inneholder detaljer om et dokument på journalposten
  */
-const DokumentDetaljer: FunctionComponent<OwnProps> = ({
-  dokument,
-  docFieldIndex,
-  journalpost,
-}) => {
+const DokumentDetaljer: FunctionComponent<OwnProps> = ({ dokument, docFieldIndex, journalpost }) => {
   const [kanRedigeres, setSkalRedigeres] = useState<boolean>(!dokument.tittel);
-  const tittler = listeMedTittler.map((tittel) => (
+  const tittler = listeMedTittler.map(tittel => (
     <option value={tittel} key={tittel}>
       {tittel}
     </option>
@@ -54,11 +50,21 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({
           <FlexColumn className={styles.dokumentTittel}>
             <Label className={styles.dokLab}>{dokument.tittel}</Label>
             {erKanalSomErÅpenForEndring(journalpost.kanal) && (
-              <Button icon={<Edit />} className={styles.editButton} onClick={toggleRedigering} type="button" variant="tertiary" />
+              <Button
+                icon={<Edit />}
+                className={styles.editButton}
+                onClick={toggleRedigering}
+                type="button"
+                variant="tertiary"
+              />
             )}
           </FlexColumn>
         )}
-        <FlexColumn><a href={dokument.lenke} target="_blank" rel="noreferrer"><NewTab className={styles.newTabIcon} /></a></FlexColumn>
+        <FlexColumn>
+          <a href={dokument.lenke} target="_blank" rel="noreferrer">
+            <NewTab className={styles.newTabIcon} />
+          </a>
+        </FlexColumn>
       </FlexRow>
     </div>
   );

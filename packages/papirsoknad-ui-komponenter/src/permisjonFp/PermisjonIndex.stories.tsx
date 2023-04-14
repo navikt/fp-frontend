@@ -21,11 +21,7 @@ const Template: Story<{
   submitCallback: (data: any) => Promise<void>;
   foreldreType: string;
   erEndringssøknad: boolean;
-}> = ({
-  submitCallback,
-  foreldreType,
-  erEndringssøknad = false,
-}) => {
+}> = ({ submitCallback, foreldreType, erEndringssøknad = false }) => {
   const formMethods = useForm({
     defaultValues: PermisjonIndex.buildInitialValues(),
   });
@@ -33,7 +29,9 @@ const Template: Story<{
   return (
     <Form
       formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback({ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: PermisjonIndex.transformValues(values) })}
+      onSubmit={(values: FormValues) =>
+        submitCallback({ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: PermisjonIndex.transformValues(values) })
+      }
     >
       <PermisjonIndex
         readOnly={false}

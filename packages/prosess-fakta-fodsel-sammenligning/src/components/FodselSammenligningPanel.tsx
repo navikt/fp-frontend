@@ -3,12 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { Tag, BodyShort, Heading } from '@navikt/ds-react';
 
-import {
-  FlexColumn,
-  FlexContainer,
-  FlexRow,
-  Table, TableColumn, TableRow,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { behandlingType } from '@navikt/fp-kodeverk';
 import { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
@@ -49,8 +44,9 @@ const FodselSammenligningPanel: FunctionComponent<OwnProps> = ({
   <FlexContainer>
     <FlexRow>
       <FlexColumn className={styles.colWidthLeft}>
-        {behandlingsTypeKode !== behandlingType.REVURDERING
-          && <FodselSammenligningOtherPanel soknad={soknad} termindato={termindato} />}
+        {behandlingsTypeKode !== behandlingType.REVURDERING && (
+          <FodselSammenligningOtherPanel soknad={soknad} termindato={termindato} />
+        )}
         {behandlingsTypeKode === behandlingType.REVURDERING && (
           <FodselSammenligningRevurderingPanel
             soknadOriginalBehandling={soknadOriginalBehandling}
@@ -68,48 +64,45 @@ const FodselSammenligningPanel: FunctionComponent<OwnProps> = ({
               </Heading>
             </FlexColumn>
             {nrOfDodfodteBarn > 0 && (
-            <FlexColumn>
-              <Tag variant="info">
-                <FormattedMessage id="FodselsammenligningPanel.Dodfodt" />
-              </Tag>
-            </FlexColumn>
+              <FlexColumn>
+                <Tag variant="info">
+                  <FormattedMessage id="FodselsammenligningPanel.Dodfodt" />
+                </Tag>
+              </FlexColumn>
             )}
           </FlexRow>
         </FlexContainer>
         {avklartBarn.length > 0 && (
-        <Table noHover headerTextCodes={['FodselsammenligningPanel.Fodselsdato', 'FodselsammenligningPanel.Dodsdato']}>
-          {avklartBarn.map((barn: AvklartBarn) => {
-            const key = barn.fodselsdato + barn.dodsdato;
-            return (
-              <TableRow key={key} id={key}>
-                <TableColumn>
-                  <BodyShort size="small">
-                    {formatDate(barn.fodselsdato)}
-                  </BodyShort>
-                </TableColumn>
-                <TableColumn>
-                  <BodyShort size="small">
-                    {formatDate(barn.dodsdato)}
-                  </BodyShort>
-                </TableColumn>
-                <TableColumn>
-                  {barn.dodsdato && (
-                  <Tag variant="info">
-                    <FormattedMessage id="FodselsammenligningPanel.Dod" />
-                  </Tag>
-                  )}
-                </TableColumn>
-              </TableRow>
-            );
-          })}
-        </Table>
+          <Table
+            noHover
+            headerTextCodes={['FodselsammenligningPanel.Fodselsdato', 'FodselsammenligningPanel.Dodsdato']}
+          >
+            {avklartBarn.map((barn: AvklartBarn) => {
+              const key = barn.fodselsdato + barn.dodsdato;
+              return (
+                <TableRow key={key} id={key}>
+                  <TableColumn>
+                    <BodyShort size="small">{formatDate(barn.fodselsdato)}</BodyShort>
+                  </TableColumn>
+                  <TableColumn>
+                    <BodyShort size="small">{formatDate(barn.dodsdato)}</BodyShort>
+                  </TableColumn>
+                  <TableColumn>
+                    {barn.dodsdato && (
+                      <Tag variant="info">
+                        <FormattedMessage id="FodselsammenligningPanel.Dod" />
+                      </Tag>
+                    )}
+                  </TableColumn>
+                </TableRow>
+              );
+            })}
+          </Table>
         )}
         {avklartBarn.length === 0 && (
-        <div className={styles.noChildrenInTps}>
-          <BodyShort size="small">
-            -
-          </BodyShort>
-        </div>
+          <div className={styles.noChildrenInTps}>
+            <BodyShort size="small">-</BodyShort>
+          </div>
         )}
       </FlexColumn>
     </FlexRow>

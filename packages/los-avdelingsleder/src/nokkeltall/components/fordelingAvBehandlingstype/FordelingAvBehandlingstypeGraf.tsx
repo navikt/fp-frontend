@@ -13,17 +13,17 @@ const behandlingstypeOrder = [
   BehandlingType.DOKUMENTINNSYN,
   BehandlingType.KLAGE,
   BehandlingType.REVURDERING,
-  BehandlingType.FORSTEGANGSSOKNAD];
+  BehandlingType.FORSTEGANGSSOKNAD,
+];
 
 const slåSammen = (oppgaverForAvdeling: OppgaverForAvdeling[]): number[] => {
-  const test = oppgaverForAvdeling
-    .reduce((acc, o) => {
-      const index = behandlingstypeOrder.findIndex((bo) => bo === o.behandlingType) + 1;
-      return {
-        ...acc,
-        [index]: (acc[index] ? acc[index] + o.antall : o.antall),
-      };
-    }, {} as Record<string, number>);
+  const test = oppgaverForAvdeling.reduce((acc, o) => {
+    const index = behandlingstypeOrder.findIndex(bo => bo === o.behandlingType) + 1;
+    return {
+      ...acc,
+      [index]: acc[index] ? acc[index] + o.antall : o.antall,
+    };
+  }, {} as Record<string, number>);
 
   return behandlingstypeOrder.map((b, index) => test[index + 1]);
 };
@@ -46,13 +46,23 @@ const FordelingAvBehandlingstypeGraf: FunctionComponent<OwnProps> = ({
   const tilBehandlingTekst = intl.formatMessage({ id: 'FordelingAvBehandlingstypeGraf.TilBehandling' });
   const tilBeslutterTekst = intl.formatMessage({ id: 'FordelingAvBehandlingstypeGraf.TilBeslutter' });
 
-  const finnBehandlingTypeNavn = useMemo(() => behandlingstypeOrder.map((t) => {
-    const type = behandlingTyper.find((bt) => bt.kode === t);
-    return type ? type.navn : '';
-  }), [behandlingTyper]);
+  const finnBehandlingTypeNavn = useMemo(
+    () =>
+      behandlingstypeOrder.map(t => {
+        const type = behandlingTyper.find(bt => bt.kode === t);
+        return type ? type.navn : '';
+      }),
+    [behandlingTyper],
+  );
 
-  const tilBehandlingData = useMemo(() => slåSammen(oppgaverForAvdeling.filter((o) => o.tilBehandling)), [oppgaverForAvdeling]);
-  const tilBeslutterData = useMemo(() => slåSammen(oppgaverForAvdeling.filter((o) => !o.tilBehandling)), [oppgaverForAvdeling]);
+  const tilBehandlingData = useMemo(
+    () => slåSammen(oppgaverForAvdeling.filter(o => o.tilBehandling)),
+    [oppgaverForAvdeling],
+  );
+  const tilBeslutterData = useMemo(
+    () => slåSammen(oppgaverForAvdeling.filter(o => !o.tilBehandling)),
+    [oppgaverForAvdeling],
+  );
 
   return (
     <Panel>

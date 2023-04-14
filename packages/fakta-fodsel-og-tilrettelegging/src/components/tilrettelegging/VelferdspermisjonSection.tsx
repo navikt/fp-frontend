@@ -11,11 +11,9 @@ import { Permisjon } from '@navikt/fp-types';
 
 import styles from './tilretteleggingArbeidsforholdSection.module.css';
 
-export const finnSkalTaHensynTilPermisjon = (
-  tilretteleggingBehovFom: string,
-  permisjon: Permisjon,
-): boolean => !moment(permisjon.permisjonFom)
-  .isAfter(tilretteleggingBehovFom) && (permisjon.permisjonTom == null || !moment(permisjon.permisjonTom).isBefore(tilretteleggingBehovFom));
+export const finnSkalTaHensynTilPermisjon = (tilretteleggingBehovFom: string, permisjon: Permisjon): boolean =>
+  !moment(permisjon.permisjonFom).isAfter(tilretteleggingBehovFom) &&
+  (permisjon.permisjonTom == null || !moment(permisjon.permisjonTom).isBefore(tilretteleggingBehovFom));
 
 interface OwnProps {
   readOnly: boolean;
@@ -23,16 +21,10 @@ interface OwnProps {
   formSectionName: string;
 }
 
-const VelferdspermisjonSection: FunctionComponent<OwnProps> = ({
-  readOnly,
-  permisjon,
-  formSectionName,
-}) => {
+const VelferdspermisjonSection: FunctionComponent<OwnProps> = ({ readOnly, permisjon, formSectionName }) => {
   const intl = useIntl();
 
-  const {
-    watch,
-  } = formHooks.useFormContext();
+  const { watch } = formHooks.useFormContext();
 
   const tilretteleggingBehovFom = watch(`${formSectionName}.tilretteleggingBehovFom`);
   const skalTaHensynTilPermisjon = finnSkalTaHensynTilPermisjon(tilretteleggingBehovFom, permisjon);
@@ -71,13 +63,16 @@ const VelferdspermisjonSection: FunctionComponent<OwnProps> = ({
         isReadOnly={readOnly}
         isHorizontal
         isTrueOrFalseSelection
-        radios={[{
-          label: intl.formatMessage({ id: 'VelferdspermisjonSection.ErGyldig' }),
-          value: 'true',
-        }, {
-          label: intl.formatMessage({ id: 'VelferdspermisjonSection.ErIkkeGyldig' }),
-          value: 'false',
-        }]}
+        radios={[
+          {
+            label: intl.formatMessage({ id: 'VelferdspermisjonSection.ErGyldig' }),
+            value: 'true',
+          },
+          {
+            label: intl.formatMessage({ id: 'VelferdspermisjonSection.ErIkkeGyldig' }),
+            value: 'false',
+          },
+        ]}
       />
     </>
   );

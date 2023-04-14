@@ -28,14 +28,10 @@ const saksbehandler = {
 interface Props {
   avdelingensSaksbehandlere?: SaksbehandlerAvdeling[];
   funnetSaksbehandler?: SaksbehandlerAvdeling;
-  hentAvdelingensSaksbehandlere: (params: {avdelingEnhet: string}) => void;
+  hentAvdelingensSaksbehandlere: (params: { avdelingEnhet: string }) => void;
 }
 
-const Template: Story<Props> = ({
-  avdelingensSaksbehandlere,
-  funnetSaksbehandler,
-  hentAvdelingensSaksbehandlere,
-}) => {
+const Template: Story<Props> = ({ avdelingensSaksbehandlere, funnetSaksbehandler, hentAvdelingensSaksbehandlere }) => {
   const data = [
     { key: RestApiPathsKeys.SAKSBEHANDLER_SOK.name, data: funnetSaksbehandler },
     { key: RestApiPathsKeys.OPPRETT_NY_SAKSBEHANDLER.name, data: undefined },

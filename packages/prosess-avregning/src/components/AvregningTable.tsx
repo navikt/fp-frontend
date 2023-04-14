@@ -8,7 +8,10 @@ import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyNoKr, getRangeOfMonths } from '@navikt/ft-utils';
 import { mottakerTyper } from '@navikt/fp-kodeverk';
 import {
-  DetaljertSimuleringResultat, Mottaker, SimuleringResultatPerFagområde, SimuleringResultatRad,
+  DetaljertSimuleringResultat,
+  Mottaker,
+  SimuleringResultatPerFagområde,
+  SimuleringResultatRad,
 } from '@navikt/fp-types';
 
 import CollapseButton from './CollapseButton';
@@ -26,22 +29,23 @@ export const avregningCodes = {
   REDUKSJON: 'reduksjon',
 };
 
-const isNextPeriod = (
-  monthAndYear: { month: string, year: string },
-  nextPeriod: string,
-): boolean => `${monthAndYear.month}${monthAndYear.year}` === (nextPeriod
-  ? dayjs(nextPeriod).format('MMMMYY') : false);
+const isNextPeriod = (monthAndYear: { month: string; year: string }, nextPeriod: string): boolean =>
+  `${monthAndYear.month}${monthAndYear.year}` === (nextPeriod ? dayjs(nextPeriod).format('MMMMYY') : false);
 
 const getHeaderCodes = (
   showCollapseButton: boolean,
-  collapseProps: { toggleDetails: (id: number) => void, showDetails: boolean, mottakerIndex: number },
-  rangeOfMonths: { month: string, year: string}[],
+  collapseProps: { toggleDetails: (id: number) => void; showDetails: boolean; mottakerIndex: number },
+  rangeOfMonths: { month: string; year: string }[],
   nextPeriod: string,
 ): ReactElement[] => {
-  const firstElement = showCollapseButton ? <CollapseButton {...collapseProps} key={`collapseButton-${rangeOfMonths.length}`} /> : <div />;
+  const firstElement = showCollapseButton ? (
+    <CollapseButton {...collapseProps} key={`collapseButton-${rangeOfMonths.length}`} />
+  ) : (
+    <div />
+  );
   return [
     firstElement,
-    ...rangeOfMonths.map((monthAndYear) => (
+    ...rangeOfMonths.map(monthAndYear => (
       <span
         className={classNames({
           nextPeriod: isNextPeriod(monthAndYear, nextPeriod),
@@ -55,32 +59,25 @@ const getHeaderCodes = (
   ];
 };
 
-const skalViseCollapseButton = (
-  mottakerResultatPerFag: SimuleringResultatPerFagområde[],
-): boolean => mottakerResultatPerFag.some((fag) => fag.rader.length > 1);
+const skalViseCollapseButton = (mottakerResultatPerFag: SimuleringResultatPerFagområde[]): boolean =>
+  mottakerResultatPerFag.some(fag => fag.rader.length > 1);
 
-const rowToggable = (
-  fagOmråde: SimuleringResultatPerFagområde,
-  rowIsFeilUtbetalt: boolean,
-): boolean => {
-  const fagFeilUtbetalt = fagOmråde.rader.find((rad) => rad.feltnavn === avregningCodes.DIFFERANSE);
+const rowToggable = (fagOmråde: SimuleringResultatPerFagområde, rowIsFeilUtbetalt: boolean): boolean => {
+  const fagFeilUtbetalt = fagOmråde.rader.find(rad => rad.feltnavn === avregningCodes.DIFFERANSE);
   return fagFeilUtbetalt && !rowIsFeilUtbetalt;
 };
 
-const rowIsHidden = (
-  isRowToggable: boolean,
-  showDetails: boolean,
-): boolean => isRowToggable && !showDetails;
+const rowIsHidden = (isRowToggable: boolean, showDetails: boolean): boolean => isRowToggable && !showDetails;
 
 const createColumns = (
   perioder: SimuleringResultatRad['resultaterPerMåned'],
-  rangeOfMonths: { month: string, year: string}[],
+  rangeOfMonths: { month: string; year: string }[],
   nextPeriod: string,
 ): ReactElement[] => {
   const nextPeriodFormatted = `${dayjs(nextPeriod).format('MMMMYY')}`;
 
-  const perioderData = rangeOfMonths.map((monthAndYear) => {
-    const periodeExists = perioder.find((periode) => {
+  const perioderData = rangeOfMonths.map(monthAndYear => {
+    const periodeExists = perioder.find(periode => {
       const test = dayjs(periode.periode.tom).format('MMMMYY');
       debugger;
       return test.toLowerCase() === `${monthAndYear.month}${monthAndYear.year}`;
@@ -88,41 +85,53 @@ const createColumns = (
     return periodeExists || { måned: `${monthAndYear.month}${monthAndYear.year}`, beløp: null };
   });
 
-  return perioderData.map((måned: { måned?: string, beløp?: number, periode?: { tom: string } }, månedIndex: number) => (
-    <TableColumn
-      key={`columnIndex${månedIndex + 1}`}
-      className={classNames({
-        rodTekst: måned.beløp < 0,
-        lastColumn: måned.måned ? måned.måned === nextPeriodFormatted : dayjs(måned.periode.tom).format('MMMMYY') === nextPeriodFormatted,
-      })}
-    >
-      {formatCurrencyNoKr(måned.beløp)}
-    </TableColumn>
-  ));
+  return perioderData.map(
+    (måned: { måned?: string; beløp?: number; periode?: { tom: string } }, månedIndex: number) => (
+      <TableColumn
+        key={`columnIndex${månedIndex + 1}`}
+        className={classNames({
+          rodTekst: måned.beløp < 0,
+          lastColumn: måned.måned
+            ? måned.måned === nextPeriodFormatted
+            : dayjs(måned.periode.tom).format('MMMMYY') === nextPeriodFormatted,
+        })}
+      >
+        {formatCurrencyNoKr(måned.beløp)}
+      </TableColumn>
+    ),
+  );
 };
 
-const tableTitle = (mottaker: Mottaker): ReactElement | null => (mottaker.mottakerType === mottakerTyper.ARBG
-  ? (
+const tableTitle = (mottaker: Mottaker): ReactElement | null =>
+  mottaker.mottakerType === mottakerTyper.ARBG ? (
     <BodyShort size="small" className={styles.tableTitle}>
       {`${mottaker.mottakerNavn} (${mottaker.mottakerNummer})`}
     </BodyShort>
-  )
-  : null);
+  ) : null;
 
-const getResultatRadene = (ingenPerioderMedAvvik: boolean, resultatPerFagområde: SimuleringResultatPerFagområde[],
-  resultatOgMotregningRader: Mottaker['resultatOgMotregningRader']): Mottaker['resultatOgMotregningRader'] => {
+const getResultatRadene = (
+  ingenPerioderMedAvvik: boolean,
+  resultatPerFagområde: SimuleringResultatPerFagområde[],
+  resultatOgMotregningRader: Mottaker['resultatOgMotregningRader'],
+): Mottaker['resultatOgMotregningRader'] => {
   if (!ingenPerioderMedAvvik) {
     return resultatOgMotregningRader;
   }
-  return resultatPerFagområde.length > 1 ? resultatOgMotregningRader.filter((resultat) => resultat.feltnavn !== avregningCodes.INNTREKKNESTEMÅNED) : [];
+  return resultatPerFagområde.length > 1
+    ? resultatOgMotregningRader.filter(resultat => resultat.feltnavn !== avregningCodes.INNTREKKNESTEMÅNED)
+    : [];
 };
 
-const avvikBruker = (ingenPerioderMedAvvik: boolean, mottakerTypeKode: string): boolean => (!!(ingenPerioderMedAvvik
-  && mottakerTypeKode === mottakerTyper.BRUKER));
+const avvikBruker = (ingenPerioderMedAvvik: boolean, mottakerTypeKode: string): boolean =>
+  !!(ingenPerioderMedAvvik && mottakerTypeKode === mottakerTyper.BRUKER);
 
-const getPeriodeFom = (periodeFom: string, nesteUtbPeriodeFom: string): string => (periodeFom || nesteUtbPeriodeFom);
+const getPeriodeFom = (periodeFom: string, nesteUtbPeriodeFom: string): string => periodeFom || nesteUtbPeriodeFom;
 
-const getPeriod = (ingenPerioderMedAvvik: boolean, periodeFom: string, mottaker: Mottaker): { month: string, year: string}[] => {
+const getPeriod = (
+  ingenPerioderMedAvvik: boolean,
+  periodeFom: string,
+  mottaker: Mottaker,
+): { month: string; year: string }[] => {
   const fomDato = avvikBruker(ingenPerioderMedAvvik, mottaker.mottakerType)
     ? dayjs(mottaker.nestUtbPeriodeTom).subtract(1, 'months').format()
     : getPeriodeFom(periodeFom, mottaker.nesteUtbPeriodeFom);
@@ -132,7 +141,7 @@ const getPeriod = (ingenPerioderMedAvvik: boolean, periodeFom: string, mottaker:
 type Details = {
   id: number;
   show: boolean;
-}
+};
 
 interface OwnProps {
   toggleDetails: (id: number) => void;
@@ -151,47 +160,54 @@ const AvregningTable: FunctionComponent<OwnProps> = ({
     {simuleringResultat.perioderPerMottaker.map((mottaker, mottakerIndex) => {
       const rangeOfMonths = getPeriod(ingenPerioderMedAvvik, simuleringResultat.periodeFom, mottaker);
       const nesteMåned = mottaker.nestUtbPeriodeTom;
-      const visDetaljer = showDetails.find((d) => d.id === mottakerIndex);
+      const visDetaljer = showDetails.find(d => d.id === mottakerIndex);
       return (
         <div className={styles.tableWrapper} key={`tableIndex${mottakerIndex + 1}`}>
-          { tableTitle(mottaker) }
+          {tableTitle(mottaker)}
           <Table
             headerColumnContent={getHeaderCodes(
               skalViseCollapseButton(mottaker.resultatPerFagområde),
-              { toggleDetails, showDetails: (visDetaljer ? visDetaljer.show : false), mottakerIndex },
+              { toggleDetails, showDetails: visDetaljer ? visDetaljer.show : false, mottakerIndex },
               rangeOfMonths,
               nesteMåned,
             )}
             key={`tableIndex${mottakerIndex + 1}`}
             classNameTable={styles.simuleringTable}
           >
-            {[].concat(
-              ...mottaker.resultatPerFagområde.map((fagOmråde, fagIndex) => fagOmråde.rader
-                .filter((rad) => {
-                  const isFeilUtbetalt = rad.feltnavn === avregningCodes.DIFFERANSE;
-                  const isRowToggable = rowToggable(fagOmråde, isFeilUtbetalt);
-                  return !rowIsHidden(isRowToggable, visDetaljer ? visDetaljer.show : false);
-                })
-                .map((rad, rowIndex) => {
-                  const isFeilUtbetalt = rad.feltnavn === avregningCodes.DIFFERANSE;
-                  const isRowToggable = rowToggable(fagOmråde, isFeilUtbetalt);
-                  return (
-                    <TableRow
-                      isBold={isFeilUtbetalt || ingenPerioderMedAvvik}
-                      isDashedBottomBorder={isRowToggable}
-                      isSolidBottomBorder={!isRowToggable}
-                      key={`rowIndex${fagIndex + 1}${rowIndex + 1}`}
-                    >
-                      <TableColumn>
-                        <FormattedMessage id={`Avregning.${fagOmråde.fagOmrådeKode}.${rad.feltnavn}`} />
-                      </TableColumn>
-                      {createColumns(rad.resultaterPerMåned, rangeOfMonths, nesteMåned)}
-                    </TableRow>
-                  );
-                })),
-            )
-              .concat(getResultatRadene(ingenPerioderMedAvvik, mottaker.resultatPerFagområde, mottaker.resultatOgMotregningRader)
-                .map((resultat, resultatIndex) => (
+            {[]
+              .concat(
+                ...mottaker.resultatPerFagområde.map((fagOmråde, fagIndex) =>
+                  fagOmråde.rader
+                    .filter(rad => {
+                      const isFeilUtbetalt = rad.feltnavn === avregningCodes.DIFFERANSE;
+                      const isRowToggable = rowToggable(fagOmråde, isFeilUtbetalt);
+                      return !rowIsHidden(isRowToggable, visDetaljer ? visDetaljer.show : false);
+                    })
+                    .map((rad, rowIndex) => {
+                      const isFeilUtbetalt = rad.feltnavn === avregningCodes.DIFFERANSE;
+                      const isRowToggable = rowToggable(fagOmråde, isFeilUtbetalt);
+                      return (
+                        <TableRow
+                          isBold={isFeilUtbetalt || ingenPerioderMedAvvik}
+                          isDashedBottomBorder={isRowToggable}
+                          isSolidBottomBorder={!isRowToggable}
+                          key={`rowIndex${fagIndex + 1}${rowIndex + 1}`}
+                        >
+                          <TableColumn>
+                            <FormattedMessage id={`Avregning.${fagOmråde.fagOmrådeKode}.${rad.feltnavn}`} />
+                          </TableColumn>
+                          {createColumns(rad.resultaterPerMåned, rangeOfMonths, nesteMåned)}
+                        </TableRow>
+                      );
+                    }),
+                ),
+              )
+              .concat(
+                getResultatRadene(
+                  ingenPerioderMedAvvik,
+                  mottaker.resultatPerFagområde,
+                  mottaker.resultatOgMotregningRader,
+                ).map((resultat, resultatIndex) => (
                   <TableRow
                     isBold={resultat.feltnavn !== avregningCodes.INNTREKKNESTEMÅNED}
                     isSolidBottomBorder
@@ -202,7 +218,8 @@ const AvregningTable: FunctionComponent<OwnProps> = ({
                     </TableColumn>
                     {createColumns(resultat.resultaterPerMåned, rangeOfMonths, nesteMåned)}
                   </TableRow>
-                )))}
+                )),
+              )}
           </Table>
         </div>
       );

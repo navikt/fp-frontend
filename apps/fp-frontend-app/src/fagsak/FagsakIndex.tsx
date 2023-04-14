@@ -1,9 +1,5 @@
-import React, {
-  FunctionComponent, useState, useCallback, useEffect,
-} from 'react';
-import {
-  Route, Navigate, useLocation, Routes,
-} from 'react-router-dom';
+import React, { FunctionComponent, useState, useCallback, useEffect } from 'react';
+import { Route, Navigate, useLocation, Routes } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import { Location } from 'history';
 import { VisittkortSakIndex } from '@navikt/ft-sak-visittkort';
@@ -18,7 +14,11 @@ import useTrackRouteParam from '../app/useTrackRouteParam';
 import BehandlingSupportIndex from '../behandlingsupport/BehandlingSupportIndex';
 import FagsakProfileIndex from '../fagsakprofile/FagsakProfileIndex';
 import {
-  pathToMissingPage, erUrlUnderBehandling, erBehandlingValgt, behandlingerRoutePath, pathToAnnenPart,
+  pathToMissingPage,
+  erUrlUnderBehandling,
+  erBehandlingValgt,
+  behandlingerRoutePath,
+  pathToAnnenPart,
 } from '../app/paths';
 import FagsakGrid from './components/FagsakGrid';
 import { requestApi } from '../data/fpsakApi';
@@ -27,18 +27,15 @@ import ErrorBoundary from '../app/ErrorBoundary';
 
 import '@navikt/ft-sak-visittkort/dist/style.css';
 
-const finnLenkeTilAnnenPart = (annenPartBehandling: AnnenPartBehandling): string => pathToAnnenPart(
-  annenPartBehandling.saksnummer, annenPartBehandling.behandlingUuid,
-);
+const finnLenkeTilAnnenPart = (annenPartBehandling: AnnenPartBehandling): string =>
+  pathToAnnenPart(annenPartBehandling.saksnummer, annenPartBehandling.behandlingUuid);
 
-const erTilbakekreving = (behandlingType?: string): boolean => !!behandlingType
-  && (BehandlingType.TILBAKEKREVING === behandlingType || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType);
+const erTilbakekreving = (behandlingType?: string): boolean =>
+  !!behandlingType &&
+  (BehandlingType.TILBAKEKREVING === behandlingType || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType);
 
-const finnSkalIkkeHenteData = (
-  location: Location,
-  selectedSaksnummer?: string,
-  behandlingUuid?: string,
-) => !selectedSaksnummer || erUrlUnderBehandling(location) || (erBehandlingValgt(location) && !behandlingUuid);
+const finnSkalIkkeHenteData = (location: Location, selectedSaksnummer?: string, behandlingUuid?: string) =>
+  !selectedSaksnummer || erUrlUnderBehandling(location) || (erBehandlingValgt(location) && !behandlingUuid);
 
 /**
  * FagsakIndex
@@ -51,11 +48,18 @@ const FagsakIndex: FunctionComponent = () => {
   const [behandlingerTeller, setBehandlingTeller] = useState(0);
   const [requestPendingMessage, setRequestPendingMessage] = useState<string>();
 
-  const [behandlingUuidOgVersjon, setUuidOgVersjon] = useState({ behandlingUuid: undefined, behandlingVersjon: undefined });
-  const setBehandlingUuidOgVersjon = useCallback((nyBehandlingUuid, nyBehandlingVersjon) => setUuidOgVersjon({
-    behandlingUuid: nyBehandlingUuid,
-    behandlingVersjon: nyBehandlingVersjon,
-  }), []);
+  const [behandlingUuidOgVersjon, setUuidOgVersjon] = useState({
+    behandlingUuid: undefined,
+    behandlingVersjon: undefined,
+  });
+  const setBehandlingUuidOgVersjon = useCallback(
+    (nyBehandlingUuid, nyBehandlingVersjon) =>
+      setUuidOgVersjon({
+        behandlingUuid: nyBehandlingUuid,
+        behandlingVersjon: nyBehandlingVersjon,
+      }),
+    [],
+  );
   const { behandlingUuid, behandlingVersjon } = behandlingUuidOgVersjon;
 
   const { addErrorMessage } = useRestApiErrorDispatcher();
@@ -66,12 +70,20 @@ const FagsakIndex: FunctionComponent = () => {
     paramName: 'saksnummer',
   });
 
-  const [harHentetFagsak, fagsakData] = useHentFagsak(selectedSaksnummer, behandlingUuid, behandlingVersjon, behandlingerTeller);
+  const [harHentetFagsak, fagsakData] = useHentFagsak(
+    selectedSaksnummer,
+    behandlingUuid,
+    behandlingVersjon,
+    behandlingerTeller,
+  );
 
-  useEffect(() => () => {
-    requestApi.resetCache();
-    requestApi.resetLinks();
-  }, []);
+  useEffect(
+    () => () => {
+      requestApi.resetCache();
+      requestApi.resetLinks();
+    },
+    [],
+  );
 
   const location = useLocation();
   const skalIkkeHenteData = finnSkalIkkeHenteData(location, selectedSaksnummer, behandlingUuid);
@@ -93,35 +105,35 @@ const FagsakIndex: FunctionComponent = () => {
   return (
     <>
       <FagsakGrid
-        behandlingContent={(
+        behandlingContent={
           <Routes>
             <Route
               path={behandlingerRoutePath}
-              element={(
+              element={
                 <BehandlingerIndex
                   fagsakData={fagsakData}
                   setBehandlingUuidOgVersjon={setBehandlingUuidOgVersjon}
                   setRequestPendingMessage={setRequestPendingMessage}
                 />
-              )}
+              }
             />
           </Routes>
-        )}
-        profileAndNavigationContent={(
+        }
+        profileAndNavigationContent={
           <FagsakProfileIndex
             fagsakData={fagsakData}
             behandlingUuid={behandlingUuid}
             behandlingVersjon={behandlingVersjon}
             hentFagsakdataPåNytt={hentFagsakdataPåNytt}
           />
-        )}
-        supportContent={(
+        }
+        supportContent={
           <BehandlingSupportIndex
             fagsakData={fagsakData}
             behandlingUuid={behandlingUuid}
             behandlingVersjon={behandlingVersjon}
           />
-        )}
+        }
         visittkortContent={() => {
           if (skalIkkeHenteData) {
             return null;
@@ -133,7 +145,9 @@ const FagsakIndex: FunctionComponent = () => {
               errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Visittkort' })}
             >
               <VisittkortSakIndex
-                lenkeTilAnnenPart={fagsak.annenpartBehandling ? finnLenkeTilAnnenPart(fagsak.annenpartBehandling) : undefined}
+                lenkeTilAnnenPart={
+                  fagsak.annenpartBehandling ? finnLenkeTilAnnenPart(fagsak.annenpartBehandling) : undefined
+                }
                 fagsak={fagsak}
                 fagsakPersoner={{
                   bruker: fagsak.bruker,

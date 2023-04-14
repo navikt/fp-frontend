@@ -8,6 +8,6 @@ type FaktaPanelInitProps = {
   behandling?: Behandling;
   registrerFaktaPanel: (data: FaktaPanelMenyData) => void;
   requestApi: RequestApi;
-}
+};
 
 export default FaktaPanelInitProps;

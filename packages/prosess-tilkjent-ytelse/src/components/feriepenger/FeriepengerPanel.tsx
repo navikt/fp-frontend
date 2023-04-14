@@ -13,7 +13,7 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import FeriepengerPrAar from './FeriepengerPrAar';
 
 const finnListeMedOpptjeningsår = (andeler: FeriepengegrunnlagAndel[]): number[] => {
-  const årsliste = andeler.map((andel) => andel.opptjeningsår).sort((a, b) => a - b);
+  const årsliste = andeler.map(andel => andel.opptjeningsår).sort((a, b) => a - b);
   return [...new Set(årsliste)];
 };
 
@@ -32,7 +32,11 @@ interface OwnProps {
 }
 
 const FeriepengerPanel: FunctionComponent<OwnProps> = ({
-  feriepengegrunnlag, alleKodeverk, arbeidsgiverOpplysningerPerId, erPanelÅpent, togglePanel,
+  feriepengegrunnlag,
+  alleKodeverk,
+  arbeidsgiverOpplysningerPerId,
+  erPanelÅpent,
+  togglePanel,
 }) => {
   const { andeler } = feriepengegrunnlag;
   const harIngenAndeler = !andeler || andeler.length < 1;
@@ -45,11 +49,9 @@ const FeriepengerPanel: FunctionComponent<OwnProps> = ({
   return (
     <Accordion>
       <Accordion.Item open={erPanelÅpent}>
-        <Accordion.Header onClick={togglePanel}>
-          {hentTittel()}
-        </Accordion.Header>
+        <Accordion.Header onClick={togglePanel}>{hentTittel()}</Accordion.Header>
         <Accordion.Content>
-          {opptjeningsår.map((år) => (
+          {opptjeningsår.map(år => (
             <div key={`div_${år}`}>
               <VerticalSpacer sixteenPx key={`spacer_${år}`} />
               <FeriepengerPrAar

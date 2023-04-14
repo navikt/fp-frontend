@@ -28,14 +28,23 @@ const mapArsaker = (
   sokerErMor: boolean,
   erEndringssøknad: boolean,
   intl: IntlShape,
-): ReactElement[] => arsaker
-  .filter(({ kode }) => erEndringssøknad || (kode !== overforingArsak.ALENEOMSORG && kode !== overforingArsak.IKKE_RETT_ANNEN_FORELDER))
-  .map(({
-    kode,
-    navn,
-  }) => (!sokerErMor
-    ? <option value={kode} key={kode}>{getText(intl, kode, navn)}</option>
-    : <option value={kode} key={kode}>{navn}</option>));
+): ReactElement[] =>
+  arsaker
+    .filter(
+      ({ kode }) =>
+        erEndringssøknad || (kode !== overforingArsak.ALENEOMSORG && kode !== overforingArsak.IKKE_RETT_ANNEN_FORELDER),
+    )
+    .map(({ kode, navn }) =>
+      !sokerErMor ? (
+        <option value={kode} key={kode}>
+          {getText(intl, kode, navn)}
+        </option>
+      ) : (
+        <option value={kode} key={kode}>
+          {navn}
+        </option>
+      ),
+    );
 
 export type FormValues = {
   skalOvertaKvote: boolean;
@@ -70,24 +79,21 @@ const PermisjonOverforingAvKvoterPanel: FunctionComponent<OwnProps> & StaticFunc
   const overtaKvoteReasons = alleKodeverk[KodeverkType.OVERFOERING_AARSAK_TYPE];
   const selectValues = mapArsaker(overtaKvoteReasons, foreldreType === ForeldreType.MOR, erEndringssøknad, intl);
 
-  const { watch } = formHooks.useFormContext<{[TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
+  const { watch } = formHooks.useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
   const skalOvertaKvote = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalOvertaKvote`) || false;
 
   return (
     <>
-      <Label size="small"><FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.OvertaKvoten" /></Label>
+      <Label size="small">
+        <FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.OvertaKvoten" />
+      </Label>
       <VerticalSpacer sixteenPx />
       <CheckboxField
         readOnly={readOnly}
         name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalOvertaKvote`}
         label={<FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.OvertaKvote" />}
       />
-      {skalOvertaKvote && (
-        <RenderOverforingAvKvoterFieldArray
-          selectValues={selectValues}
-          readOnly={readOnly}
-        />
-      )}
+      {skalOvertaKvote && <RenderOverforingAvKvoterFieldArray selectValues={selectValues} readOnly={readOnly} />}
     </>
   );
 };

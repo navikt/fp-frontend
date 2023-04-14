@@ -1,7 +1,7 @@
 type AnnetKriterie = Readonly<{
   andreKriterierType: string;
   inkluder: boolean;
-}>
+}>;
 
 type SakslisteAvdeling = Readonly<{
   sakslisteId: number;

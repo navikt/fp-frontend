@@ -110,11 +110,11 @@ const navAnsattDefault = {
   kanBehandleKode6: true,
 } as NavAnsatt;
 
-const Template: Story<{ alleOppgaver?: OppgaveOversikt[], navAnsatt: NavAnsatt, detaljertJournalpost: Journalpost }> = ({
-  alleOppgaver,
-  detaljertJournalpost,
-  navAnsatt,
-}) => {
+const Template: Story<{
+  alleOppgaver?: OppgaveOversikt[];
+  navAnsatt: NavAnsatt;
+  detaljertJournalpost: Journalpost;
+}> = ({ alleOppgaver, detaljertJournalpost, navAnsatt }) => {
   const data = [
     { key: RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER.name, data: alleOppgaver || undefined },
     { key: RestApiPathsKeys.HENT_JOURNALPOST_DETALJER.name, data: detaljertJournalpost || undefined },

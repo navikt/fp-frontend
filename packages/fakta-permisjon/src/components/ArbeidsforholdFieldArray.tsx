@@ -2,7 +2,10 @@ import React, { FunctionComponent } from 'react';
 
 import { formHooks } from '@navikt/ft-form-hooks';
 import {
-  ArbeidOgInntektsmelding, AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, AlleKodeverk,
+  ArbeidOgInntektsmelding,
+  AoIArbeidsforhold,
+  ArbeidsgiverOpplysningerPerId,
+  AlleKodeverk,
 } from '@navikt/fp-types';
 
 import ArbeidsforholdField from './ArbeidsforholdField';
@@ -12,8 +15,8 @@ const FIELD_ARRAY_NAME = 'arbeidsforhold';
 type FormValues = {
   arbeidsforhold: {
     permisjonStatus: string;
-  }[],
-}
+  }[];
+};
 
 interface OwnProps {
   saksnummer: string;

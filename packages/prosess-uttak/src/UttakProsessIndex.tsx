@@ -2,8 +2,15 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import {
-  ArbeidsgiverOpplysningerPerId, StandardProsessPanelProps, FamilieHendelseSamling, Personoversikt,
-  Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling, PeriodeSoker,
+  ArbeidsgiverOpplysningerPerId,
+  StandardProsessPanelProps,
+  FamilieHendelseSamling,
+  Personoversikt,
+  Soknad,
+  UttaksresultatPeriode,
+  UttakStonadskontoer,
+  Ytelsefordeling,
+  PeriodeSoker,
 } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -23,10 +30,7 @@ interface OwnProps {
   personoversikt: Personoversikt;
   ytelsefordeling: Ytelsefordeling;
   kanOverstyre: boolean;
-  oppdaterStønadskontoer: (params: {
-    behandlingUuid: string;
-    perioder: PeriodeSoker[];
-  }) => Promise<any>;
+  oppdaterStønadskontoer: (params: { behandlingUuid: string; perioder: PeriodeSoker[] }) => Promise<any>;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 

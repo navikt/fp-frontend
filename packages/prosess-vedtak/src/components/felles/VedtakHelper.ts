@@ -1,16 +1,15 @@
 import {
-  KodeverkType, tilbakekrevingVidereBehandling, vilkarUtfallType, VilkarType, getKodeverknavnFn,
+  KodeverkType,
+  tilbakekrevingVidereBehandling,
+  vilkarUtfallType,
+  VilkarType,
+  getKodeverknavnFn,
 } from '@navikt/fp-kodeverk';
-import {
-  AlleKodeverk, SimuleringResultat, TilbakekrevingValg, Vilkar,
-} from '@navikt/fp-types';
+import { AlleKodeverk, SimuleringResultat, TilbakekrevingValg, Vilkar } from '@navikt/fp-types';
 
-const tilbakekrevingMedInntrekk = (
-  tilbakekrevingKode: string,
-  simuleringResultat: SimuleringResultat,
-): boolean => tilbakekrevingKode
-  === tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD
-  && (!!simuleringResultat.simuleringResultat.sumInntrekk || !!simuleringResultat.simuleringResultatUtenInntrekk);
+const tilbakekrevingMedInntrekk = (tilbakekrevingKode: string, simuleringResultat: SimuleringResultat): boolean =>
+  tilbakekrevingKode === tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD &&
+  (!!simuleringResultat.simuleringResultat.sumInntrekk || !!simuleringResultat.simuleringResultatUtenInntrekk);
 
 export const getTilbakekrevingText = (
   alleKodeverk: AlleKodeverk,
@@ -27,7 +26,5 @@ export const getTilbakekrevingText = (
   return '';
 };
 
-export const hasIkkeOppfyltSoknadsfristvilkar = (
-  vilkar: Vilkar[],
-): boolean => vilkar.some((v) => v.vilkarType === VilkarType.SOKNADFRISTVILKARET
-  && v.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT);
+export const hasIkkeOppfyltSoknadsfristvilkar = (vilkar: Vilkar[]): boolean =>
+  vilkar.some(v => v.vilkarType === VilkarType.SOKNADFRISTVILKARET && v.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT);

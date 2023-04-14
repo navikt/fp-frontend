@@ -2,9 +2,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Label } from '@navikt/ds-react';
-import {
-  VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
-} from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import { Form, CheckboxField } from '@navikt/ft-form-hooks';
 import { BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
 
@@ -33,14 +31,25 @@ const OppgaverSomErApneEllerPaVentPanel: FunctionComponent<OwnProps> = ({
   const stringFromStorage = getValueFromLocalStorage(formName);
   const lagredeVerdier = stringFromStorage ? JSON.parse(stringFromStorage) : undefined;
 
-  const filtrerteBehandlingstyper = useMemo(() => behandlingTyper
-    .filter((type) => type.kode !== BehandlingType.TILBAKEKREVING
-    && type.kode !== BehandlingType.TILBAKEKREVING_REVURDERING), []);
+  const filtrerteBehandlingstyper = useMemo(
+    () =>
+      behandlingTyper.filter(
+        type => type.kode !== BehandlingType.TILBAKEKREVING && type.kode !== BehandlingType.TILBAKEKREVING_REVURDERING,
+      ),
+    [],
+  );
 
-  const formDefaultValues = useMemo(() => Object.values(filtrerteBehandlingstyper).reduce((app, type) => ({
-    ...app,
-    [type.kode]: true,
-  }), {}), []);
+  const formDefaultValues = useMemo(
+    () =>
+      Object.values(filtrerteBehandlingstyper).reduce(
+        (app, type) => ({
+          ...app,
+          [type.kode]: true,
+        }),
+        {},
+      ),
+    [],
+  );
 
   const formMethods = useForm({
     defaultValues: lagredeVerdier || formDefaultValues,
@@ -57,12 +66,9 @@ const OppgaverSomErApneEllerPaVentPanel: FunctionComponent<OwnProps> = ({
       <VerticalSpacer sixteenPx />
       <FlexContainer>
         <FlexRow>
-          {filtrerteBehandlingstyper.map((type) => (
+          {filtrerteBehandlingstyper.map(type => (
             <FlexColumn key={type.kode}>
-              <CheckboxField
-                name={type.kode}
-                label={type.navn}
-              />
+              <CheckboxField name={type.kode} label={type.navn} />
             </FlexColumn>
           ))}
         </FlexRow>
@@ -70,7 +76,7 @@ const OppgaverSomErApneEllerPaVentPanel: FunctionComponent<OwnProps> = ({
       <VerticalSpacer sixteenPx />
       <OppgaverSomErApneEllerPaVentGraf
         height={height}
-        oppgaverApneEllerPaVent={oppgaverApneEllerPaVent.filter((oav) => values[oav.behandlingType])}
+        oppgaverApneEllerPaVent={oppgaverApneEllerPaVent.filter(oav => values[oav.behandlingType])}
       />
     </Form>
   );

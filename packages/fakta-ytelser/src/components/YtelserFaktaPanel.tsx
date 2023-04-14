@@ -19,25 +19,30 @@ const YtelserFaktaPanel: FunctionComponent<OwnProps> = ({
   relatertYtelseStatus,
 }) => (
   <>
-    <Heading size="small"><FormattedMessage id="YtelserFaktaPanel.SokersYtelser" /></Heading>
+    <Heading size="small">
+      <FormattedMessage id="YtelserFaktaPanel.SokersYtelser" />
+    </Heading>
     <VerticalSpacer eightPx />
     <PersonYtelserTable
       ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForSoker}
       relatertYtelseTyper={relatertYtelseTyper}
       relatertYtelseStatus={relatertYtelseStatus}
     />
-    {(inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder && inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder.length > 0) && (
-      <>
-        <VerticalSpacer fourtyPx />
-        <Heading size="small"><FormattedMessage id="YtelserFaktaPanel.AnnenPartsYtelser" /></Heading>
-        <VerticalSpacer eightPx />
-        <PersonYtelserTable
-          ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder}
-          relatertYtelseTyper={relatertYtelseTyper}
-          relatertYtelseStatus={relatertYtelseStatus}
-        />
-      </>
-    )}
+    {inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder &&
+      inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder.length > 0 && (
+        <>
+          <VerticalSpacer fourtyPx />
+          <Heading size="small">
+            <FormattedMessage id="YtelserFaktaPanel.AnnenPartsYtelser" />
+          </Heading>
+          <VerticalSpacer eightPx />
+          <PersonYtelserTable
+            ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder}
+            relatertYtelseTyper={relatertYtelseTyper}
+            relatertYtelseStatus={relatertYtelseStatus}
+          />
+        </>
+      )}
   </>
 );
 

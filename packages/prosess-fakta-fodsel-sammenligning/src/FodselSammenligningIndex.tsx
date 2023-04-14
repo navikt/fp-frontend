@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import {
-  AvklartBarn, FamilieHendelse, Soknad,
-} from '@navikt/fp-types';
+import { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import FodselSammenligningPanel from './components/FodselSammenligningPanel';

@@ -5,11 +5,12 @@ import { Aksjonspunkt } from '@navikt/ft-types';
 
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import {
-  AksjonspunktCode, sivilstandType, aksjonspunktStatus, opplysningAdresseType as OpplysningAdresseType,
+  AksjonspunktCode,
+  sivilstandType,
+  aksjonspunktStatus,
+  opplysningAdresseType as OpplysningAdresseType,
 } from '@navikt/fp-kodeverk';
-import {
-  Behandling, KjønnkodeEnum, Personoversikt, Ytelsefordeling,
-} from '@navikt/fp-types';
+import { Behandling, KjønnkodeEnum, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import OmsorgFaktaIndex from './OmsorgFaktaIndex';
@@ -23,15 +24,17 @@ const behandling = {
   versjon: 1,
 } as Behandling;
 
-const adresser = [{
-  adresseType: OpplysningAdresseType.BOSTEDSADRESSE,
-  adresselinje1: 'Veigata 1',
-  adresselinje2: 'Oddelandet',
-  adresselinje3: 'Leilighet 2',
-  postNummer: '0123',
-  poststed: 'Bobygda',
-  land: 'Norge',
-}];
+const adresser = [
+  {
+    adresseType: OpplysningAdresseType.BOSTEDSADRESSE,
+    adresselinje1: 'Veigata 1',
+    adresselinje2: 'Oddelandet',
+    adresselinje3: 'Leilighet 2',
+    postNummer: '0123',
+    poststed: 'Bobygda',
+    land: 'Norge',
+  },
+];
 
 const personoversikt = {
   bruker: {
@@ -50,15 +53,17 @@ const personoversikt = {
     fødselsdato: '1989-01-01',
     adresser,
   },
-  barn: [{
-    navn: 'Tutta Utvikler',
-    dødsdato: '2019-01-01',
-    fødselsdato: '2018-01-01',
-    adresser,
-    aktoerId: '3',
-    kjønn: KjønnkodeEnum.KVINNE,
-    sivilstand: sivilstandType.UGIFT,
-  }],
+  barn: [
+    {
+      navn: 'Tutta Utvikler',
+      dødsdato: '2019-01-01',
+      fødselsdato: '2018-01-01',
+      adresser,
+      aktoerId: '3',
+      kjønn: KjønnkodeEnum.KVINNE,
+      sivilstand: sivilstandType.UGIFT,
+    },
+  ],
 } as Personoversikt;
 
 const ytelsefordeling = {} as Ytelsefordeling;
@@ -75,12 +80,8 @@ export default {
 const Template: Story<{
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-}> = ({
-  aksjonspunkter,
-  submitCallback,
-  alleMerknaderFraBeslutter,
-}) => (
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
+}> = ({ aksjonspunkter, submitCallback, alleMerknaderFraBeslutter }) => (
   <OmsorgFaktaIndex
     submitCallback={submitCallback}
     readOnly={false}
@@ -98,12 +99,14 @@ const Template: Story<{
 
 export const ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg = Template.bind({});
 ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg.args = {
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
-    status: aksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-    kanLoses: true,
-  }],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+      kanLoses: true,
+    },
+  ],
   alleMerknaderFraBeslutter: {
     [AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]: merknaderFraBeslutter,
   },

@@ -6,7 +6,9 @@ import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import FrilansOppdragForFamilieFieldArray, {
-  FRILANS_NAME_PREFIX, defaultFrilansPeriode, FormValues as FieldArrayFormValues,
+  FRILANS_NAME_PREFIX,
+  defaultFrilansPeriode,
+  FormValues as FieldArrayFormValues,
 } from './FrilansOppdragForFamilieFieldArray';
 
 export type FormValues = {
@@ -21,10 +23,8 @@ interface OwnProps {
   readOnly: boolean;
 }
 
-const FrilansOppdragForFamiliePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
-  readOnly,
-}) => {
-  const { watch } = formHooks.useFormContext<{ [FRILANS_NAME_PREFIX]: FormValues}>();
+const FrilansOppdragForFamiliePanel: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly }) => {
+  const { watch } = formHooks.useFormContext<{ [FRILANS_NAME_PREFIX]: FormValues }>();
   const harHattOppdragForFamilie = watch(`${FRILANS_NAME_PREFIX}.harHattOppdragForFamilie`);
 
   return (
@@ -36,19 +36,24 @@ const FrilansOppdragForFamiliePanel: FunctionComponent<OwnProps> & StaticFunctio
         isReadOnly={readOnly}
         isHorizontal
         isTrueOrFalseSelection
-        radios={[{
-          label: <FormattedMessage id="Registrering.FrilansOppdrag.Yes" />,
-          value: 'true',
-        }, {
-          label: <FormattedMessage id="Registrering.FrilansOppdrag.No" />,
-          value: 'false',
-        }]}
+        radios={[
+          {
+            label: <FormattedMessage id="Registrering.FrilansOppdrag.Yes" />,
+            value: 'true',
+          },
+          {
+            label: <FormattedMessage id="Registrering.FrilansOppdrag.No" />,
+            value: 'false',
+          },
+        ]}
       />
       {harHattOppdragForFamilie && (
         <>
           <VerticalSpacer eightPx />
           <ArrowBox>
-            <Label size="small"><FormattedMessage id="Registrering.FrilansOppdrag.OppgiPeriode" /></Label>
+            <Label size="small">
+              <FormattedMessage id="Registrering.FrilansOppdrag.OppgiPeriode" />
+            </Label>
             <VerticalSpacer fourPx />
             <FrilansOppdragForFamilieFieldArray readOnly={readOnly} />
           </ArrowBox>

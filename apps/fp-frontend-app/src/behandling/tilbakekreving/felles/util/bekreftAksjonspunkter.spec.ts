@@ -17,7 +17,12 @@ describe('<bekreftAksjonspunkter>', () => {
   it('skal lagre aksjonspunkter', async () => {
     const oppdaterProsessStegOgFaktaPanelIUrl = vi.fn(() => Promise.resolve());
     const lagreAksjonspunkter = vi.fn(() => Promise.resolve());
-    const callback = getBekreftAksjonspunktCallback(saksnummer, behandling, oppdaterProsessStegOgFaktaPanelIUrl, lagreAksjonspunkter);
+    const callback = getBekreftAksjonspunktCallback(
+      saksnummer,
+      behandling,
+      oppdaterProsessStegOgFaktaPanelIUrl,
+      lagreAksjonspunkter,
+    );
     const lagreAp = callback();
 
     const aksjonspunktModell = {
@@ -31,20 +36,26 @@ describe('<bekreftAksjonspunkter>', () => {
     await lagreAp(aksjonspunktModell);
 
     expect(lagreAksjonspunkter).toHaveBeenCalledTimes(1);
-    expect(lagreAksjonspunkter).toHaveBeenNthCalledWith(1, {
-      behandlingUuid: '1',
-      behandlingVersjon: 2,
-      saksnummer: '1234',
-      bekreftedeAksjonspunktDtoer: [{
-        '@type': '5030',
-        fnr: 'test',
-        gyldigFom: '2021-01-01',
-        gyldigTom: '2021-10-10',
-        kode: '5030',
-        navn: 'Espen Utvikler',
-        vergeType: 'test',
-      }],
-    }, true);
+    expect(lagreAksjonspunkter).toHaveBeenNthCalledWith(
+      1,
+      {
+        behandlingUuid: '1',
+        behandlingVersjon: 2,
+        saksnummer: '1234',
+        bekreftedeAksjonspunktDtoer: [
+          {
+            '@type': '5030',
+            fnr: 'test',
+            gyldigFom: '2021-01-01',
+            gyldigTom: '2021-10-10',
+            kode: '5030',
+            navn: 'Espen Utvikler',
+            vergeType: 'test',
+          },
+        ],
+      },
+      true,
+    );
 
     expect(oppdaterProsessStegOgFaktaPanelIUrl).toHaveBeenCalledTimes(1);
   });

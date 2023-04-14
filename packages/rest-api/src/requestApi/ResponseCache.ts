@@ -4,7 +4,7 @@ enum ResponseCacheStatus {
 }
 
 class ResponseCache {
-  cache: {[key: string]:{ status: ResponseCacheStatus, data: any }} = {};
+  cache: { [key: string]: { status: ResponseCacheStatus; data: any } } = {};
 
   public addData = (endpointName: string, data: any): void => {
     this.cache = {
@@ -20,11 +20,14 @@ class ResponseCache {
     };
   };
 
-  public getData = (endpointName: string): any => (this.cache[endpointName] ? this.cache[endpointName].data : undefined);
+  public getData = (endpointName: string): any =>
+    this.cache[endpointName] ? this.cache[endpointName].data : undefined;
 
-  public hasFetched = (endpointName: string): boolean => this.cache[endpointName] && this.cache[endpointName].status === ResponseCacheStatus.FETCHED;
+  public hasFetched = (endpointName: string): boolean =>
+    this.cache[endpointName] && this.cache[endpointName].status === ResponseCacheStatus.FETCHED;
 
-  public isFetching = (endpointName: string): boolean => this.cache[endpointName] && this.cache[endpointName].status === ResponseCacheStatus.FETCHING;
+  public isFetching = (endpointName: string): boolean =>
+    this.cache[endpointName] && this.cache[endpointName].status === ResponseCacheStatus.FETCHING;
 }
 
 export default ResponseCache;

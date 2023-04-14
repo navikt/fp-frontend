@@ -12,24 +12,24 @@ export default {
 };
 
 const Template: Story<{
-  settBehandlingPaVent: () => void,
+  settBehandlingPaVent: () => void;
   lukkModal: () => void;
-}> = ({
-  settBehandlingPaVent,
-  lukkModal,
-}) => (
+}> = ({ settBehandlingPaVent, lukkModal }) => (
   <MenySettPaVentIndex
     behandlingVersjon={2}
     settBehandlingPaVent={settBehandlingPaVent}
-    ventearsaker={[{
-      kode: venteArsakType.AVV_DOK,
-      kodeverk: 'VENT_ARSAK_TYPE',
-      navn: 'Avvent dokumentasjon',
-    }, {
-      kode: venteArsakType.AVV_FODSEL,
-      kodeverk: 'VENT_ARSAK_TYPE',
-      navn: 'Avvent fødsel',
-    }]}
+    ventearsaker={[
+      {
+        kode: venteArsakType.AVV_DOK,
+        kodeverk: 'VENT_ARSAK_TYPE',
+        navn: 'Avvent dokumentasjon',
+      },
+      {
+        kode: venteArsakType.AVV_FODSEL,
+        kodeverk: 'VENT_ARSAK_TYPE',
+        navn: 'Avvent fødsel',
+      },
+    ]}
     lukkModal={lukkModal}
     erTilbakekreving={false}
   />

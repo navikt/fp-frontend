@@ -14,13 +14,8 @@ export default {
 
 const Template: Story<{
   ankeVurdering: AnkeVurdering;
-}> = ({
-  ankeVurdering,
-}) => (
-  <AnkeTrygderettsbehandlingProsessIndex
-    ankeVurdering={ankeVurdering}
-    alleKodeverk={alleKodeverk as any}
-  />
+}> = ({ ankeVurdering }) => (
+  <AnkeTrygderettsbehandlingProsessIndex ankeVurdering={ankeVurdering} alleKodeverk={alleKodeverk as any} />
 );
 
 export const ResultatVedOmgjortResultat = Template.bind({});

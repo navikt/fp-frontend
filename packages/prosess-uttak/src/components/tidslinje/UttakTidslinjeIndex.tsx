@@ -1,13 +1,9 @@
-import React, {
-  useCallback, useMemo, FunctionComponent, ReactElement,
-} from 'react';
+import React, { useCallback, useMemo, FunctionComponent, ReactElement } from 'react';
 import dayjs from 'dayjs';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { BehandlingType, NavBrukerKjonn } from '@navikt/ft-kodeverk';
 import { Kjønnkode } from '@navikt/ft-types';
-import {
-  calcDays, calcDaysAndWeeks, DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT,
-} from '@navikt/ft-utils';
+import { calcDays, calcDaysAndWeeks, DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 import {
   Behandling,
@@ -20,21 +16,23 @@ import {
   PeriodeSoker,
 } from '@navikt/fp-types';
 import {
-  KodeverkType, soknadType, oppholdArsakType, oppholdArsakMapper, uttakPeriodeNavn, behandlingStatus, periodeResultatType,
+  KodeverkType,
+  soknadType,
+  oppholdArsakType,
+  oppholdArsakMapper,
+  uttakPeriodeNavn,
+  behandlingStatus,
+  periodeResultatType,
 } from '@navikt/fp-kodeverk';
 
-import UttakTidslinje, {
-  EventProps, PeriodeSøkerMedTidslinjedata, TidslinjeTimes,
-} from './UttakTidslinje';
+import UttakTidslinje, { EventProps, PeriodeSøkerMedTidslinjedata, TidslinjeTimes } from './UttakTidslinje';
 import UttakTidslinjeHjelpetekster from './UttakTidslinjeHjelpetekster';
 
 const godkjentKlassenavn = 'godkjentPeriode';
 const avvistKlassenavn = 'avvistPeriode';
 const endretClassnavn = 'endretPeriode';
 
-const finnSøknadsdato = (
-  søknad: Soknad,
-): string => {
+const finnSøknadsdato = (søknad: Soknad): string => {
   const { mottattDato } = søknad;
   const søknadsdato = søknad.søknadsfrist?.mottattDato || søknad.mottattDato;
   if (dayjs(mottattDato) < dayjs(søknadsdato)) {
@@ -43,11 +41,12 @@ const finnSøknadsdato = (
   return søknadsdato;
 };
 
-const getFodselTerminDato = (
-  søknad: Soknad,
-  gjeldendeFamiliehendelse: FamilieHendelse,
-): string => {
-  if (gjeldendeFamiliehendelse && gjeldendeFamiliehendelse.avklartBarn && gjeldendeFamiliehendelse.avklartBarn.length > 0) {
+const getFodselTerminDato = (søknad: Soknad, gjeldendeFamiliehendelse: FamilieHendelse): string => {
+  if (
+    gjeldendeFamiliehendelse &&
+    gjeldendeFamiliehendelse.avklartBarn &&
+    gjeldendeFamiliehendelse.avklartBarn.length > 0
+  ) {
     return gjeldendeFamiliehendelse.avklartBarn[0].fodselsdato;
   }
   const { fodselsdatoer, termindato, adopsjonFodelsedatoer } = søknad;
@@ -73,17 +72,22 @@ const finnTidslinjeTider = (
   const gjeldendeFamiliehendelse = familiehendelse?.gjeldende;
   const familiehendelseDate = getFodselTerminDato(søknad, gjeldendeFamiliehendelse);
   const endringsdato = ytelsefordeling.endringsdato ? ytelsefordeling.endringsdato : undefined;
-  const endredFodselsDato = gjeldendeFamiliehendelse && gjeldendeFamiliehendelse.avklartBarn && gjeldendeFamiliehendelse.avklartBarn.length > 0
-    ? gjeldendeFamiliehendelse.avklartBarn[0].fodselsdato : undefined;
-  const fødselsdato = søknad.soknadType === soknadType.FODSEL ? (endredFodselsDato || familiehendelseDate) : søknad.omsorgsovertakelseDato;
+  const endredFodselsDato =
+    gjeldendeFamiliehendelse && gjeldendeFamiliehendelse.avklartBarn && gjeldendeFamiliehendelse.avklartBarn.length > 0
+      ? gjeldendeFamiliehendelse.avklartBarn[0].fodselsdato
+      : undefined;
+  const fødselsdato =
+    søknad.soknadType === soknadType.FODSEL ? endredFodselsDato || familiehendelseDate : søknad.omsorgsovertakelseDato;
   const isRevurdering = behandling.type === BehandlingType.REVURDERING;
 
   const barnFraTps = familiehendelse.register?.avklartBarn ? familiehendelse.register.avklartBarn : [];
-  const dodeBarn = gjeldendeFamiliehendelse
-    && !gjeldendeFamiliehendelse.brukAntallBarnFraTps
-    && gjeldendeFamiliehendelse.avklartBarn
-    && gjeldendeFamiliehendelse.avklartBarn.length > 0
-    ? gjeldendeFamiliehendelse.avklartBarn.filter((barn) => barn.dodsdato) : barnFraTps.filter((barn) => barn.dodsdato);
+  const dodeBarn =
+    gjeldendeFamiliehendelse &&
+    !gjeldendeFamiliehendelse.brukAntallBarnFraTps &&
+    gjeldendeFamiliehendelse.avklartBarn &&
+    gjeldendeFamiliehendelse.avklartBarn.length > 0
+      ? gjeldendeFamiliehendelse.avklartBarn.filter(barn => barn.dodsdato)
+      : barnFraTps.filter(barn => barn.dodsdato);
 
   const customTimesBuilder = {
     soknad: finnSøknadsdato(søknad),
@@ -94,22 +98,22 @@ const finnTidslinjeTider = (
 
   dodeBarn.forEach((barn, index: number) => {
     Object.defineProperty(customTimesBuilder, `barndod${index}`, {
-      value: dayjs(barn.dodsdato, ISO_DATE_FORMAT).toDate(), enumerable: true,
+      value: dayjs(barn.dodsdato, ISO_DATE_FORMAT).toDate(),
+      enumerable: true,
     });
   });
   return customTimesBuilder;
 };
 
-const finnStønadskontoNavn = (
-  periodeSøker: PeriodeSoker,
-  alleKodeverk: AlleKodeverk,
-): ReactElement | string => {
+const finnStønadskontoNavn = (periodeSøker: PeriodeSoker, alleKodeverk: AlleKodeverk): ReactElement | string => {
   if (periodeSøker.utsettelseType && periodeSøker.utsettelseType !== '-') {
-    return (<FormattedMessage id="Timeline.tooltip.slutt" />);
+    return <FormattedMessage id="Timeline.tooltip.slutt" />;
   }
 
   if (periodeSøker.aktiviteter.length > 0 && periodeSøker.aktiviteter[0].stønadskontoType) {
-    return alleKodeverk[KodeverkType.STOENADSKONTOTYPE].find((k) => k.kode === periodeSøker.aktiviteter[0].stønadskontoType)?.navn;
+    return alleKodeverk[KodeverkType.STOENADSKONTOTYPE].find(
+      k => k.kode === periodeSøker.aktiviteter[0].stønadskontoType,
+    )?.navn;
   }
 
   if (periodeSøker.oppholdÅrsak !== oppholdArsakType.UDEFINERT) {
@@ -120,33 +124,31 @@ const finnStønadskontoNavn = (
   return '';
 };
 
-const lagTooltipTekst = (
-  alleKodeverk: AlleKodeverk,
-  intl: IntlShape,
-  periode: PeriodeSoker,
-): string => {
+const lagTooltipTekst = (alleKodeverk: AlleKodeverk, intl: IntlShape, periode: PeriodeSoker): string => {
   const stønadskontoNavn = finnStønadskontoNavn(periode, alleKodeverk);
-  return (`
+  return `
     <p>
       ${dayjs(periode.fom).format(DDMMYY_DATE_FORMAT)} - ${dayjs(periode.tom).format(DDMMYY_DATE_FORMAT)}
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
        ${calcDaysAndWeeks(periode.fom, periode.tom).formattedString}
         </br>
-        ${periode.utsettelseType && periode.utsettelseType !== '-'
-      ? intl.formatMessage({ id: 'Timeline.tooltip.utsettelsePeriode' }) : stønadskontoNavn}
+        ${
+          periode.utsettelseType && periode.utsettelseType !== '-'
+            ? intl.formatMessage({ id: 'Timeline.tooltip.utsettelsePeriode' })
+            : stønadskontoNavn
+        }
      </p>
-  `);
+  `;
 };
 
-const getStatusClassNameForHovedsøker = (
-  periode: PeriodeSoker,
-  tilknyttetStortinget: boolean,
-): string => {
+const getStatusClassNameForHovedsøker = (periode: PeriodeSoker, tilknyttetStortinget: boolean): string => {
   if ('erOppfylt' in periode && periode.erOppfylt === false) {
     return avvistKlassenavn;
   }
-  if (('erOppfylt' in periode && periode.erOppfylt === true) || (periode.periodeResultatType === periodeResultatType.INNVILGET
-    && !tilknyttetStortinget)) {
+  if (
+    ('erOppfylt' in periode && periode.erOppfylt === true) ||
+    (periode.periodeResultatType === periodeResultatType.INNVILGET && !tilknyttetStortinget)
+  ) {
     return godkjentKlassenavn;
   }
   if (periode.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING || tilknyttetStortinget) {
@@ -155,19 +157,15 @@ const getStatusClassNameForHovedsøker = (
   return avvistKlassenavn;
 };
 
-const getStatusClassnameForMedsøker = (
-  periode: PeriodeSoker,
-  tilknyttetStortinget: boolean,
-): string => (periode.periodeResultatType === periodeResultatType.INNVILGET && !tilknyttetStortinget
-  ? godkjentKlassenavn : avvistKlassenavn);
+const getStatusClassnameForMedsøker = (periode: PeriodeSoker, tilknyttetStortinget: boolean): string =>
+  periode.periodeResultatType === periodeResultatType.INNVILGET && !tilknyttetStortinget
+    ? godkjentKlassenavn
+    : avvistKlassenavn;
 
-const getStatusClassname = (
-  erHovedsøker: boolean,
-  periode: PeriodeSoker,
-  tilknyttetStortinget: boolean,
-): string => (erHovedsøker
-  ? getStatusClassNameForHovedsøker(periode, tilknyttetStortinget)
-  : getStatusClassnameForMedsøker(periode, tilknyttetStortinget));
+const getStatusClassname = (erHovedsøker: boolean, periode: PeriodeSoker, tilknyttetStortinget: boolean): string =>
+  erHovedsøker
+    ? getStatusClassNameForHovedsøker(periode, tilknyttetStortinget)
+    : getStatusClassnameForMedsøker(periode, tilknyttetStortinget);
 
 const leggTidslinjedataTilPeriode = (
   erHovedsøker: boolean,
@@ -188,8 +186,8 @@ const leggTidslinjedataTilPeriode = (
     const statusClassName = getStatusClassname(erHovedsøker, periode, tilknyttetStortinget);
     const oppholdStatusClassName = statusClassName === 'undefined' ? 'opphold-manuell' : 'opphold';
 
-    const isEndretClassName = periode.begrunnelse
-      && behandlingStatusKode === behandlingStatus.FATTER_VEDTAK ? endretClassnavn : '';
+    const isEndretClassName =
+      periode.begrunnelse && behandlingStatusKode === behandlingStatus.FATTER_VEDTAK ? endretClassnavn : '';
 
     return {
       periode,
@@ -203,21 +201,20 @@ const leggTidslinjedataTilPeriode = (
   });
 };
 
-const lagUttakMedOpphold = (
-  perioderSøker: PeriodeSoker[],
-): PeriodeSoker[] => perioderSøker.map((uttak) => {
-  const { ...uttakPerioder } = uttak;
+const lagUttakMedOpphold = (perioderSøker: PeriodeSoker[]): PeriodeSoker[] =>
+  perioderSøker.map(uttak => {
+    const { ...uttakPerioder } = uttak;
 
-  if (uttak.oppholdÅrsak !== oppholdArsakType.UDEFINERT) {
-    const stonadskonto = oppholdArsakMapper[uttak.oppholdÅrsak];
-    const oppholdInfo = {
-      stønadskontoType: stonadskonto,
-      trekkdagerDesimaler: calcDays(uttak.fom, uttak.tom),
-    };
-    uttakPerioder.aktiviteter = [oppholdInfo];
-  }
-  return uttakPerioder;
-});
+    if (uttak.oppholdÅrsak !== oppholdArsakType.UDEFINERT) {
+      const stonadskonto = oppholdArsakMapper[uttak.oppholdÅrsak];
+      const oppholdInfo = {
+        stønadskontoType: stonadskonto,
+        trekkdagerDesimaler: calcDays(uttak.fom, uttak.tom),
+      };
+      uttakPerioder.aktiviteter = [oppholdInfo];
+    }
+    return uttakPerioder;
+  });
 
 interface OwnProps {
   behandling: Behandling;
@@ -251,24 +248,48 @@ const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
   const uttakMedOpphold = lagUttakMedOpphold(perioderSøker);
 
   const hovedsøkerPerioder = leggTidslinjedataTilPeriode(
-    true, uttakMedOpphold, perioderAnnenpart, intl, behandling.status, alleKodeverk, tilknyttetStortinget,
+    true,
+    uttakMedOpphold,
+    perioderAnnenpart,
+    intl,
+    behandling.status,
+    alleKodeverk,
+    tilknyttetStortinget,
   );
   const annenForelderPerioder = leggTidslinjedataTilPeriode(
-    false, uttakMedOpphold, perioderAnnenpart, intl, behandling.status, alleKodeverk, tilknyttetStortinget,
+    false,
+    uttakMedOpphold,
+    perioderAnnenpart,
+    intl,
+    behandling.status,
+    alleKodeverk,
+    tilknyttetStortinget,
   );
 
-  const alleUttaksperioderMedId = useMemo(() => (annenForelderPerioder.concat(hovedsøkerPerioder.map((p) => ({
-    ...p,
-    id: p.id + annenForelderPerioder.length,
-  })))), [hovedsøkerPerioder, annenForelderPerioder]);
+  const alleUttaksperioderMedId = useMemo(
+    () =>
+      annenForelderPerioder.concat(
+        hovedsøkerPerioder.map(p => ({
+          ...p,
+          id: p.id + annenForelderPerioder.length,
+        })),
+      ),
+    [hovedsøkerPerioder, annenForelderPerioder],
+  );
 
   const viseUttakMedsoker = perioderAnnenpart.length > 0;
-  const medsøkerKjønnKode = (viseUttakMedsoker && personoversikt && personoversikt.annenPart) ? personoversikt.annenPart.kjønn as Kjønnkode : undefined;
+  const medsøkerKjønnKode =
+    viseUttakMedsoker && personoversikt && personoversikt.annenPart
+      ? (personoversikt.annenPart.kjønn as Kjønnkode)
+      : undefined;
   // hvis ukjent annenpart og annenpart uttak, vis ukjent ikon
-  const medsokerKjonnKode = viseUttakMedsoker && medsøkerKjønnKode === undefined ? NavBrukerKjonn.UDEFINERT : medsøkerKjønnKode;
+  const medsokerKjonnKode =
+    viseUttakMedsoker && medsøkerKjønnKode === undefined ? NavBrukerKjonn.UDEFINERT : medsøkerKjønnKode;
 
-  const tidslinjeTider = useMemo(() => finnTidslinjeTider(behandling, søknad, familiehendelse, ytelsefordeling, personoversikt),
-    [behandling, søknad, familiehendelse, ytelsefordeling, personoversikt]);
+  const tidslinjeTider = useMemo(
+    () => finnTidslinjeTider(behandling, søknad, familiehendelse, ytelsefordeling, personoversikt),
+    [behandling, søknad, familiehendelse, ytelsefordeling, personoversikt],
+  );
 
   const velgPeriode = useCallback((eventPropsValue: EventProps) => {
     setValgtPeriodeIndex(eventPropsValue.items[0]);
@@ -276,13 +297,13 @@ const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
   }, []);
 
   const åpneFørstePeriodeEllerLukk = useCallback(() => {
-    setValgtPeriodeIndex((index) => (index === undefined ? 0 : undefined));
+    setValgtPeriodeIndex(index => (index === undefined ? 0 : undefined));
   }, []);
 
   return (
     <UttakTidslinje
       tidslinjeTider={tidslinjeTider}
-      hovedsokerKjonnKode={personoversikt ? personoversikt.bruker.kjønn as Kjønnkode : undefined}
+      hovedsokerKjonnKode={personoversikt ? (personoversikt.bruker.kjønn as Kjønnkode) : undefined}
       medsokerKjonnKode={medsokerKjonnKode}
       openPeriodInfo={åpneFørstePeriodeEllerLukk}
       selectedPeriod={valgtPeriodeIndex !== undefined ? alleUttaksperioderMedId[valgtPeriodeIndex] : undefined}

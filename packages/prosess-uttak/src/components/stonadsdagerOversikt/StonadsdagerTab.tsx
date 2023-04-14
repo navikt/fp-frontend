@@ -36,13 +36,11 @@ const finnKorrektLabelForKvote = (stonadtype: string): string => {
   }
 };
 
-export const finnAntallUkerOgDager = (
-  saldo: number,
-): { uker: number; dager: number } => {
+export const finnAntallUkerOgDager = (saldo: number): { uker: number; dager: number } => {
   const modifier = saldo < 0 ? -1 : 1;
   const justertSaldo = saldo * modifier;
   return {
-    uker: (Math.floor(justertSaldo / 5)) * modifier,
+    uker: Math.floor(justertSaldo / 5) * modifier,
     dager: (justertSaldo % 5) * modifier,
   };
 };
@@ -53,11 +51,7 @@ interface OwnProps {
   aktiv?: boolean;
 }
 
-const StonadsdagerTab: FunctionComponent<OwnProps> = ({
-  stønadskonto,
-  visDagerForKonto,
-  aktiv = false,
-}) => {
+const StonadsdagerTab: FunctionComponent<OwnProps> = ({ stønadskonto, visDagerForKonto, aktiv = false }) => {
   const fordelteDager = useMemo(() => finnAntallUkerOgDager(stønadskonto.saldo), [stønadskonto]);
   const kontonavnTekst = useMemo(() => finnKorrektLabelForKvote(stønadskonto.stonadskontotype), [stønadskonto]);
 

@@ -1,13 +1,14 @@
-import {
-  Aktor, AlleKodeverkTilbakekreving, Behandling, Dokument,
-} from '@navikt/ft-types';
+import { Aktor, AlleKodeverkTilbakekreving, Behandling, Dokument } from '@navikt/ft-types';
 
-import {
-  RestApiConfigBuilder, createRequestApi, RestKey, Link,
-} from '@navikt/fp-rest-api';
+import { RestApiConfigBuilder, createRequestApi, RestKey, Link } from '@navikt/fp-rest-api';
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import {
-  ForhåndsvisMeldingParams, FagsakEnkel, Fagsak, FagsakDataFpTilbake, NavAnsatt, AlleKodeverk,
+  ForhåndsvisMeldingParams,
+  FagsakEnkel,
+  Fagsak,
+  FagsakDataFpTilbake,
+  NavAnsatt,
+  AlleKodeverk,
 } from '@navikt/fp-types';
 
 type BehandlendeEnheter = {
@@ -16,7 +17,7 @@ type BehandlendeEnheter = {
 }[];
 
 type SubmitMessageParams = {
-  behandlingUuid?: string,
+  behandlingUuid?: string;
   brevmalkode: string;
   fritekst: string;
   arsakskode?: string;
@@ -54,12 +55,16 @@ export const FpsakApiKeys = {
   ALL_DOCUMENTS: new RestKey<Dokument[], { saksnummer: string }>('ALL_DOCUMENTS'),
   SAVE_TOTRINNSAKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_TOTRINNSAKSJONSPUNKT'),
   SUBMIT_MESSAGE: new RestKey<void, SubmitMessageParams>('SUBMIT_MESSAGE'),
-  KAN_TILBAKEKREVING_OPPRETTES: new RestKey<boolean, { saksnummer: string; uuid: string; }>('KAN_TILBAKEKREVING_OPPRETTES'),
-  KAN_TILBAKEKREVING_REVURDERING_OPPRETTES: new RestKey<boolean, { uuid: string; }>('KAN_TILBAKEKREVING_REVURDERING_OPPRETTES'),
+  KAN_TILBAKEKREVING_OPPRETTES: new RestKey<boolean, { saksnummer: string; uuid: string }>(
+    'KAN_TILBAKEKREVING_OPPRETTES',
+  ),
+  KAN_TILBAKEKREVING_REVURDERING_OPPRETTES: new RestKey<boolean, { uuid: string }>(
+    'KAN_TILBAKEKREVING_REVURDERING_OPPRETTES',
+  ),
   PREVIEW_MESSAGE_TILBAKEKREVING: new RestKey<any, any>('PREVIEW_MESSAGE_TILBAKEKREVING'),
   PREVIEW_MESSAGE_FORMIDLING: new RestKey<any, ForhåndsvisMeldingParams>('PREVIEW_MESSAGE_FORMIDLING'),
   PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE: new RestKey<any, any>('PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE'),
-  ENDRE_SAK_MARKERING: new RestKey<void, { saksnummer: string, fagsakMarkering: string }>('ENDRE_SAK_MARKERING'),
+  ENDRE_SAK_MARKERING: new RestKey<void, { saksnummer: string; fagsakMarkering: string }>('ENDRE_SAK_MARKERING'),
 };
 
 const endpoints = new RestApiConfigBuilder()
@@ -83,7 +88,11 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('brev-bestill', FpsakApiKeys.SUBMIT_MESSAGE)
 
   .withPost('/fptilbake/api/brev/forhandsvis', FpsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING, { isResponseBlob: true })
-  .withPost('/fptilbake/api/dokument/forhandsvis-henleggelsesbrev', FpsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE, { isResponseBlob: true })
+  .withPost(
+    '/fptilbake/api/dokument/forhandsvis-henleggelsesbrev',
+    FpsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE,
+    { isResponseBlob: true },
+  )
   .withAsyncPost('/fptilbake/api/behandlinger/opprett', FpsakApiKeys.NEW_BEHANDLING_FPTILBAKE)
   .withAsyncPut('/fpsak/api/behandlinger', FpsakApiKeys.NEW_BEHANDLING_FPSAK)
   .withGet('/fpsak/api/aktoer-info', FpsakApiKeys.AKTOER_INFO)

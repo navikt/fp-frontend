@@ -16,22 +16,22 @@ const formaterOpplysning = (
 ) => (
   <div key={`opplysning${index}`}>
     <BodyShort size="small" className={styles.keyValuePair}>
-      {getKodeverknavn(opplysning.opplysningType, KodeverkType.HISTORIKK_OPPLYSNING_TYPE)}
-      :
+      {getKodeverknavn(opplysning.opplysningType, KodeverkType.HISTORIKK_OPPLYSNING_TYPE)}:
     </BodyShort>
     &ensp;
-    <BodyShort size="small" className={styles.keyValuePair}>{opplysning.tilVerdi}</BodyShort>
+    <BodyShort size="small" className={styles.keyValuePair}>
+      {opplysning.tilVerdi}
+    </BodyShort>
   </div>
 );
 
-const HistorikkMalType6: FunctionComponent<HistorikkMal> = ({
-  historikkinnslag,
-  getKodeverknavn,
-}) => (
+const HistorikkMalType6: FunctionComponent<HistorikkMal> = ({ historikkinnslag, getKodeverknavn }) => (
   <>
-    {historikkinnslag.historikkinnslagDeler.map((del) => (
+    {historikkinnslag.historikkinnslagDeler.map(del => (
       <div key={del.hendelse?.navn}>
-        <BodyShort size="small" className="snakkeboble-panel__tekst">{findHendelseText(del.hendelse, getKodeverknavn)}</BodyShort>
+        <BodyShort size="small" className="snakkeboble-panel__tekst">
+          {findHendelseText(del.hendelse, getKodeverknavn)}
+        </BodyShort>
         {del.opplysninger.map((opplysning, index) => formaterOpplysning(opplysning, index, getKodeverknavn))}
       </div>
     ))}

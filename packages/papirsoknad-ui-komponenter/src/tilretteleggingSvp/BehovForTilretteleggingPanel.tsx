@@ -6,7 +6,10 @@ import { BorderBox, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
-import BehovForTilretteleggingFieldArray, { frilansFieldArrayName, selvstendigNaringsdrivendeFieldArrayName } from './BehovForTilretteleggingFieldArray';
+import BehovForTilretteleggingFieldArray, {
+  frilansFieldArrayName,
+  selvstendigNaringsdrivendeFieldArrayName,
+} from './BehovForTilretteleggingFieldArray';
 import TilretteleggingForArbeidsgiverFieldArray from './TilretteleggingForArbeidsgiverFieldArray';
 import messages from '../../i18n/nb_NO.json';
 
@@ -19,11 +22,11 @@ export type Tilrettelegging = {
   tilretteleggingType: string;
   fomDato: string;
   stillingsprosent?: string;
-}
+};
 
 type VirtuellFeilType = {
   notRegisteredInput?: boolean;
-}
+};
 
 export type FormValues = {
   [TILRETTELEGGING_NAME_PREFIX]: {
@@ -39,7 +42,7 @@ export type FormValues = {
     sokForSelvstendigNaringsdrivende?: boolean;
     behovsdatoSN?: string;
     tilretteleggingSelvstendigNaringsdrivende?: Tilrettelegging[];
-  } & VirtuellFeilType
+  } & VirtuellFeilType;
 };
 
 interface OwnProps {
@@ -55,12 +58,8 @@ interface StaticFunctions {
  *
  * Form som brukes for registrere om det er behov for tilrettelegging.
  */
-const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
-  readOnly,
-}) => {
-  const {
-    watch, setError, clearErrors, formState,
-  } = formHooks.useFormContext<FormValues>();
+const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly }) => {
+  const { watch, setError, clearErrors, formState } = formHooks.useFormContext<FormValues>();
 
   const sokForSelvstendigNaringsdrivende = watch(`${TILRETTELEGGING_NAME_PREFIX}.sokForSelvstendigNaringsdrivende`);
   const sokForFrilans = watch(`${TILRETTELEGGING_NAME_PREFIX}.sokForFrilans`);
@@ -96,13 +95,16 @@ const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunction
           isReadOnly={readOnly}
           isTrueOrFalseSelection
           isHorizontal
-          radios={[{
-            label: intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Ja' }),
-            value: 'true',
-          }, {
-            label: intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Nei' }),
-            value: 'false',
-          }]}
+          radios={[
+            {
+              label: intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Ja' }),
+              value: 'true',
+            },
+            {
+              label: intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Nei' }),
+              value: 'false',
+            },
+          ]}
         />
         <VerticalSpacer sixteenPx />
         {sokForSelvstendigNaringsdrivende && (
@@ -126,13 +128,16 @@ const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunction
           isReadOnly={readOnly}
           isTrueOrFalseSelection
           isHorizontal
-          radios={[{
-            label: intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Ja' }),
-            value: 'true',
-          }, {
-            label: intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Nei' }),
-            value: 'false',
-          }]}
+          radios={[
+            {
+              label: intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Ja' }),
+              value: 'true',
+            },
+            {
+              label: intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Nei' }),
+              value: 'false',
+            },
+          ]}
         />
         <VerticalSpacer sixteenPx />
         {sokForFrilans && (
@@ -156,13 +161,16 @@ const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunction
           isReadOnly={readOnly}
           isTrueOrFalseSelection
           isHorizontal
-          radios={[{
-            label: intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Ja' }),
-            value: 'true',
-          }, {
-            label: intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Nei' }),
-            value: 'false',
-          }]}
+          radios={[
+            {
+              label: intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Ja' }),
+              value: 'true',
+            },
+            {
+              label: intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Nei' }),
+              value: 'false',
+            },
+          ]}
         />
         <VerticalSpacer sixteenPx />
         {sokForArbeidsgiver && (

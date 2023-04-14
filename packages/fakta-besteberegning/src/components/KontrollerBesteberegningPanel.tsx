@@ -1,19 +1,13 @@
 import React, { FunctionComponent, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import {
-  AksjonspunktHelpTextTemp, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Aksjonspunkt } from '@navikt/fp-types';
-import {
-  FaktaBegrunnelseTextFieldNew,
-  FaktaSubmitButtonNew,
-} from '@navikt/fp-fakta-felles';
+import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { Form, CheckboxField } from '@navikt/ft-form-hooks';
-import { ManuellKontrollBesteberegningAP }
-  from '@navikt/fp-types-avklar-aksjonspunkter';
+import { ManuellKontrollBesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 export const buildInitialValues = (aksjonspunkt: Aksjonspunkt): FormValues => {
   const apErLøst = aksjonspunkt.status === aksjonspunktStatus.UTFORT;
@@ -32,7 +26,7 @@ export const transformValues = (values: FormValues): ManuellKontrollBesteberegni
 export type FormValues = {
   begrunnelse?: string;
   besteberegningErKorrektValg?: boolean;
-}
+};
 
 interface OwnProps {
   aksjonspunkt: Aksjonspunkt;
@@ -40,7 +34,7 @@ interface OwnProps {
   readOnly: boolean;
   submittable: boolean;
   formData?: FormValues;
-  setFormData: (data: FormValues) => void,
+  setFormData: (data: FormValues) => void;
 }
 
 /**
@@ -64,12 +58,17 @@ const KontrollerBesteberegningPanel: FunctionComponent<OwnProps> = ({
   return (
     <>
       <AksjonspunktHelpTextTemp isAksjonspunktOpen={aksjonspunkt.status === AksjonspunktStatus.OPPRETTET}>
-        {[<FormattedMessage key="BesteberegningAksjonspunktTekst" id="BesteberegningProsessPanel.Aksjonspunkt.HelpTextKontroll" />]}
+        {[
+          <FormattedMessage
+            key="BesteberegningAksjonspunktTekst"
+            id="BesteberegningProsessPanel.Aksjonspunkt.HelpTextKontroll"
+          />,
+        ]}
       </AksjonspunktHelpTextTemp>
       <VerticalSpacer twentyPx />
       <Form
         formMethods={formMethods}
-        onSubmit={(values) => submitCallback(transformValues(values))}
+        onSubmit={values => submitCallback(transformValues(values))}
         setDataOnUnmount={setFormData}
       >
         <CheckboxField

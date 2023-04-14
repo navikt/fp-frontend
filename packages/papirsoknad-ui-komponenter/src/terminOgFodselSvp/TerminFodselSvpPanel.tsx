@@ -1,15 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { createIntl } from '@navikt/ft-utils';
 import { Heading } from '@navikt/ds-react';
-import {
-  BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Datepicker } from '@navikt/ft-form-hooks';
-import {
-  dateBeforeOrEqualToToday,
-  hasValidDate,
-  required,
-} from '@navikt/ft-form-validators';
+import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -18,7 +12,7 @@ const intl = createIntl(messages);
 export type FormValues = {
   termindato?: string;
   foedselsDato?: string;
-}
+};
 
 interface OwnProps {
   readOnly: boolean;
@@ -29,13 +23,9 @@ interface OwnProps {
  *
  * Form som brukes for registrere termin og fødsel i papirsøknad.
  */
-const TerminFodselSvpPanel: FunctionComponent<OwnProps> = ({
-  readOnly,
-}) => (
+const TerminFodselSvpPanel: FunctionComponent<OwnProps> = ({ readOnly }) => (
   <BorderBox>
-    <Heading size="small">
-      {intl.formatMessage({ id: 'TerminFodselSvpPanel.TerminOgFodsel' })}
-    </Heading>
+    <Heading size="small">{intl.formatMessage({ id: 'TerminFodselSvpPanel.TerminOgFodsel' })}</Heading>
     <VerticalSpacer sixteenPx />
     <FlexContainer>
       <FlexRow>

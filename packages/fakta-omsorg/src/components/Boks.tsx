@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, ReactElement,
-} from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import classnames from 'classnames/bind';
 
 import styles from './boks.module.css';
@@ -12,13 +10,11 @@ interface OwnProps {
   children: ReactElement | ReactElement[];
 }
 
-const Boks: FunctionComponent<OwnProps> = ({
-  harBorderTop,
-  children,
-}) => (
-  <div className={classNames(styles.boks, {
-    harBorderTop,
-  })}
+const Boks: FunctionComponent<OwnProps> = ({ harBorderTop, children }) => (
+  <div
+    className={classNames(styles.boks, {
+      harBorderTop,
+    })}
   >
     {children}
   </div>

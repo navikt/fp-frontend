@@ -5,7 +5,7 @@ export type ErrorData = {
   feilmelding?: string;
   message?: string;
   type: string;
-}
+};
 
 class DefaultFormatter implements Formatter<ErrorData> {
   // eslint-disable-next-line class-methods-use-this

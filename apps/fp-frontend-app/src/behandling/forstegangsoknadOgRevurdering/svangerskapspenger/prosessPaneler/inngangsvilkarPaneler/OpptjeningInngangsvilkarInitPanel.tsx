@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 
 import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { AksessRettigheter } from '@navikt/fp-types';
@@ -42,7 +40,9 @@ const OpptjeningInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvi
           erMedlemskapsPanel={false}
           toggleOverstyring={toggleOverstyring}
           erOverstyrt={erOverstyrt}
-          overrideReadOnly={data.isReadOnly || (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))}
+          overrideReadOnly={
+            data.isReadOnly || (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))
+          }
           kanOverstyreAccess={rettigheter.kanOverstyreAccess}
         />
         <VerticalSpacer thirtyTwoPx />

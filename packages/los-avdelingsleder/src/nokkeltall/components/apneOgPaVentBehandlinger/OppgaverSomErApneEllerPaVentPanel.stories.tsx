@@ -22,12 +22,8 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{ oppgaverApneEllerPaVent: OppgaverSomErApneEllerPaVent[] }> = ({
-  oppgaverApneEllerPaVent,
-}) => {
-  const data = [
-    { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
-  ];
+const Template: Story<{ oppgaverApneEllerPaVent: OppgaverSomErApneEllerPaVent[] }> = ({ oppgaverApneEllerPaVent }) => {
+  const data = [{ key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true }];
 
   return (
     <RestApiMock data={data} requestApi={requestApi}>
@@ -42,43 +38,52 @@ const Template: Story<{ oppgaverApneEllerPaVent: OppgaverSomErApneEllerPaVent[] 
 
 export const Default = Template.bind({});
 Default.args = {
-  oppgaverApneEllerPaVent: [{
-    behandlingVenteStatus: behandlingVenteStatus.PA_VENT,
-    behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
-    førsteUttakMåned: dayjs().startOf('month').format(ISO_DATE_FORMAT),
-    antall: 2,
-  }, {
-    behandlingVenteStatus: behandlingVenteStatus.IKKE_PA_VENT,
-    behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
-    førsteUttakMåned: dayjs().startOf('month').format(ISO_DATE_FORMAT),
-    antall: 5,
-  }, {
-    behandlingVenteStatus: behandlingVenteStatus.IKKE_PA_VENT,
-    behandlingType: BehandlingType.REVURDERING,
-    førsteUttakMåned: dayjs().startOf('month').subtract(4, 'M').format(ISO_DATE_FORMAT),
-    antall: 2,
-  }, {
-    behandlingVenteStatus: behandlingVenteStatus.IKKE_PA_VENT,
-    behandlingType: BehandlingType.KLAGE,
-    antall: 2,
-  }, {
-    behandlingVenteStatus: behandlingVenteStatus.PA_VENT,
-    behandlingType: BehandlingType.KLAGE,
-    antall: 6,
-  }, {
-    behandlingVenteStatus: behandlingVenteStatus.PA_VENT,
-    behandlingType: BehandlingType.REVURDERING,
-    førsteUttakMåned: dayjs().startOf('month').subtract(4, 'M').format(ISO_DATE_FORMAT),
-    antall: 6,
-  }, {
-    behandlingVenteStatus: behandlingVenteStatus.PA_VENT,
-    behandlingType: BehandlingType.DOKUMENTINNSYN,
-    førsteUttakMåned: dayjs().startOf('month').subtract(10, 'M').format(ISO_DATE_FORMAT),
-    antall: 3,
-  }, {
-    behandlingVenteStatus: behandlingVenteStatus.IKKE_PA_VENT,
-    behandlingType: BehandlingType.DOKUMENTINNSYN,
-    førsteUttakMåned: dayjs().startOf('month').subtract(10, 'M').format(ISO_DATE_FORMAT),
-    antall: 5,
-  }],
+  oppgaverApneEllerPaVent: [
+    {
+      behandlingVenteStatus: behandlingVenteStatus.PA_VENT,
+      behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
+      førsteUttakMåned: dayjs().startOf('month').format(ISO_DATE_FORMAT),
+      antall: 2,
+    },
+    {
+      behandlingVenteStatus: behandlingVenteStatus.IKKE_PA_VENT,
+      behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
+      førsteUttakMåned: dayjs().startOf('month').format(ISO_DATE_FORMAT),
+      antall: 5,
+    },
+    {
+      behandlingVenteStatus: behandlingVenteStatus.IKKE_PA_VENT,
+      behandlingType: BehandlingType.REVURDERING,
+      førsteUttakMåned: dayjs().startOf('month').subtract(4, 'M').format(ISO_DATE_FORMAT),
+      antall: 2,
+    },
+    {
+      behandlingVenteStatus: behandlingVenteStatus.IKKE_PA_VENT,
+      behandlingType: BehandlingType.KLAGE,
+      antall: 2,
+    },
+    {
+      behandlingVenteStatus: behandlingVenteStatus.PA_VENT,
+      behandlingType: BehandlingType.KLAGE,
+      antall: 6,
+    },
+    {
+      behandlingVenteStatus: behandlingVenteStatus.PA_VENT,
+      behandlingType: BehandlingType.REVURDERING,
+      førsteUttakMåned: dayjs().startOf('month').subtract(4, 'M').format(ISO_DATE_FORMAT),
+      antall: 6,
+    },
+    {
+      behandlingVenteStatus: behandlingVenteStatus.PA_VENT,
+      behandlingType: BehandlingType.DOKUMENTINNSYN,
+      førsteUttakMåned: dayjs().startOf('month').subtract(10, 'M').format(ISO_DATE_FORMAT),
+      antall: 3,
+    },
+    {
+      behandlingVenteStatus: behandlingVenteStatus.IKKE_PA_VENT,
+      behandlingType: BehandlingType.DOKUMENTINNSYN,
+      førsteUttakMåned: dayjs().startOf('month').subtract(10, 'M').format(ISO_DATE_FORMAT),
+      antall: 5,
+    },
+  ],
 };

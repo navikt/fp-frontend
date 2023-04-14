@@ -7,6 +7,6 @@ type Risikoklassifisering = Readonly<{
   medlFaresignaler?: {
     faresignaler: string[];
   };
-}>
+}>;
 
 export default Risikoklassifisering;

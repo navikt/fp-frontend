@@ -20,7 +20,9 @@ const TestErrorMessage = ({ skalFjerne = false }) => {
   return (
     <>
       Feilmeldinger:
-      {feilmeldinger.map((feil) => <span key={feil}>{feil}</span>)}
+      {feilmeldinger.map(feil => (
+        <span key={feil}>{feil}</span>
+      ))}
     </>
   );
 };

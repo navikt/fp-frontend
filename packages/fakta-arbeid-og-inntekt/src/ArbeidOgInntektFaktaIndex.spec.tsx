@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  fireEvent,
-  render, screen, waitFor,
-} from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import dayjs from 'dayjs';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
@@ -42,7 +39,9 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     const settPåVent = vi.fn(() => Promise.resolve());
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
-    const utils = render(<InnhentInntektsmelding settBehandlingPåVentCallback={settPåVent} lagreVurdering={lagreVurdering} />);
+    const utils = render(
+      <InnhentInntektsmelding settBehandlingPåVentCallback={settPåVent} lagreVurdering={lagreVurdering} />,
+    );
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
     expect(screen.getByText('Skjæringstidspunkt for opptjening: 10.11.2021')).toBeInTheDocument();
@@ -58,7 +57,9 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
     expect(screen.queryByText('Sett på vent')).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding'));
+    await userEvent.click(
+      screen.getByText('Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding'),
+    );
 
     await userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
@@ -87,7 +88,9 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     const bekrefteAksjonspunkt = vi.fn(() => Promise.resolve());
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
-    const utils = render(<InnhentInntektsmelding submitCallback={bekrefteAksjonspunkt} lagreVurdering={lagreVurdering} />);
+    const utils = render(
+      <InnhentInntektsmelding submitCallback={bekrefteAksjonspunkt} lagreVurdering={lagreVurdering} />,
+    );
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
 
@@ -138,7 +141,9 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     const settPåVent = vi.fn(() => Promise.resolve());
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
-    const utils = render(<AvklarManglendeArbeidsforhold settBehandlingPåVentCallback={settPåVent} lagreVurdering={lagreVurdering} />);
+    const utils = render(
+      <AvklarManglendeArbeidsforhold settBehandlingPåVentCallback={settPåVent} lagreVurdering={lagreVurdering} />,
+    );
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
     expect(screen.getByText('Skjæringstidspunkt for opptjening: 10.11.2021')).toBeInTheDocument();
@@ -151,7 +156,9 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(screen.getByText('Kontaktinfo')).toBeInTheDocument();
     expect(screen.getByText('Corpolarsen')).toBeInTheDocument();
     expect(screen.getByText('Tlf. 41925090')).toBeInTheDocument();
-    expect(screen.getByText('Inntektsmelding er mottatt, men arbeidsforholdet er ikke registrert i A-ordningen')).toBeInTheDocument();
+    expect(
+      screen.getByText('Inntektsmelding er mottatt, men arbeidsforholdet er ikke registrert i A-ordningen'),
+    ).toBeInTheDocument();
 
     expect(screen.getByText('Lagre').closest('button')).toBeDisabled();
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
@@ -186,7 +193,9 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     const bekrefteAksjonspunkt = vi.fn(() => Promise.resolve());
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
-    const utils = render(<AvklarManglendeArbeidsforhold submitCallback={bekrefteAksjonspunkt} lagreVurdering={lagreVurdering} />);
+    const utils = render(
+      <AvklarManglendeArbeidsforhold submitCallback={bekrefteAksjonspunkt} lagreVurdering={lagreVurdering} />,
+    );
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
 
@@ -217,7 +226,12 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     const bekrefteAksjonspunkt = vi.fn(() => Promise.resolve());
     const registrerArbeidsforhold = vi.fn(() => Promise.resolve());
 
-    const utils = render(<AvklarManglendeArbeidsforhold submitCallback={bekrefteAksjonspunkt} registrerArbeidsforhold={registrerArbeidsforhold} />);
+    const utils = render(
+      <AvklarManglendeArbeidsforhold
+        submitCallback={bekrefteAksjonspunkt}
+        registrerArbeidsforhold={registrerArbeidsforhold}
+      />,
+    );
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
 
@@ -281,8 +295,12 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     );
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
-    expect(screen.getByText('Ved å bruke "Åpne for ny vurdering" kan du endre valg som er '
-    + 'gjort i dette panelet. Det som er gjort senere i saken, må gjøres på ny.')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Ved å bruke "Åpne for ny vurdering" kan du endre valg som er ' +
+          'gjort i dette panelet. Det som er gjort senere i saken, må gjøres på ny.',
+      ),
+    ).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Åpne for ny vurdering'));
 
@@ -292,15 +310,15 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
   it('skal kunne åpne for ny revurdering når en ikke har hatt aksjonspunkter men er overstyrer', async () => {
     const åpneForNyVurdering = vi.fn(() => Promise.resolve());
 
-    render(
-      <IngenAksjonspunktMenTilbakehoppMuligForOverstyrer
-        åpneForNyVurdering={åpneForNyVurdering}
-      />,
-    );
+    render(<IngenAksjonspunktMenTilbakehoppMuligForOverstyrer åpneForNyVurdering={åpneForNyVurdering} />);
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
-    expect(screen.getByText('Ved å bruke "Åpne for ny vurdering" kan du endre valg som er '
-    + 'gjort i dette panelet. Det som er gjort senere i saken, må gjøres på ny.')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Ved å bruke "Åpne for ny vurdering" kan du endre valg som er ' +
+          'gjort i dette panelet. Det som er gjort senere i saken, må gjøres på ny.',
+      ),
+    ).toBeInTheDocument();
 
     await userEvent.click(screen.getByAltText('Åpne rad'));
     expect(await screen.findByAltText('Lukk rad')).toBeInTheDocument();
@@ -324,11 +342,13 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     );
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
-    expect(screen.getByText(
-      'Ingen arbeidsforhold eller inntektsmeldinger registrert på bruker. Det er kun unntaksvis at det skal '
-      + 'opprettes manuelle arbeidsforhold. Det kan være i saker søker er ambassadepersonell, utenlandske '
-      + 'ansatte eller fisker. Hvis det er andre arbeidsforhold må du kontakte arbeidsgiver eller søker for riktig registrering i AA-reg.',
-    )).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Ingen arbeidsforhold eller inntektsmeldinger registrert på bruker. Det er kun unntaksvis at det skal ' +
+          'opprettes manuelle arbeidsforhold. Det kan være i saker søker er ambassadepersonell, utenlandske ' +
+          'ansatte eller fisker. Hvis det er andre arbeidsforhold må du kontakte arbeidsgiver eller søker for riktig registrering i AA-reg.',
+      ),
+    ).toBeInTheDocument();
     expect(screen.queryByText('Legg til arbeidsforhold')).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByAltText('Overstyr'));
@@ -371,13 +391,17 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
   });
 
   it('skal ikke kunne legge til nytt arbeidsforhold når en ikke har overstyringsrettighet', async () => {
-    render(<SkalIkkeKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnIkkeErOverstyrer />);
+    render(
+      <SkalIkkeKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnIkkeErOverstyrer />,
+    );
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
-    expect(screen.queryByText(
-      'Ingen arbeidsforhold eller inntektsmeldinger registrert på bruker. Vurder om det er dokumentert andre arbeidsforhold. '
-      + 'Arbeidsforholdet må kun opprettes dersom...',
-    )).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(
+        'Ingen arbeidsforhold eller inntektsmeldinger registrert på bruker. Vurder om det er dokumentert andre arbeidsforhold. ' +
+          'Arbeidsforholdet må kun opprettes dersom...',
+      ),
+    ).not.toBeInTheDocument();
     expect(screen.queryByText('Legg til arbeidsforhold')).not.toBeInTheDocument();
     expect(screen.queryByText('Overstyr')).not.toBeInTheDocument();
   });
@@ -394,10 +418,12 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     );
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
-    expect(screen.queryByText(
-      'Ingen arbeidsforhold eller inntektsmeldinger registrert på bruker. Vurder om det er dokumentert andre arbeidsforhold. '
-      + 'Arbeidsforholdet må kun opprettes dersom...',
-    )).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(
+        'Ingen arbeidsforhold eller inntektsmeldinger registrert på bruker. Vurder om det er dokumentert andre arbeidsforhold. ' +
+          'Arbeidsforholdet må kun opprettes dersom...',
+      ),
+    ).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByAltText('Overstyr'));
 
@@ -505,11 +531,18 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     const settPåVent = vi.fn(() => Promise.resolve());
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
-    const utils = render(<FlereArbeidsforholdOgInntekstemeldinger settBehandlingPåVentCallback={settPåVent} lagreVurdering={lagreVurdering} />);
+    const utils = render(
+      <FlereArbeidsforholdOgInntekstemeldinger
+        settBehandlingPåVentCallback={settPåVent}
+        lagreVurdering={lagreVurdering}
+      />,
+    );
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding'));
+    await userEvent.click(
+      screen.getByText('Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding'),
+    );
 
     await userEvent.type(utils.getAllByLabelText('Begrunn valget')[0], 'Dette er en begrunnelse');
 
@@ -554,7 +587,11 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
     const utils = render(
-      <ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAndre settBehandlingPåVentCallback={settPåVent} lagreVurdering={lagreVurdering} />);
+      <ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAndre
+        settBehandlingPåVentCallback={settPåVent}
+        lagreVurdering={lagreVurdering}
+      />,
+    );
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
 
@@ -577,7 +614,9 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(screen.getByText('Inntekter totalt fra virksomheten (fra A-ordningen)')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding'));
+    await userEvent.click(
+      screen.getByText('Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding'),
+    );
 
     await userEvent.type(utils.getByLabelText('Kommentar'), 'Dette er en kommentar');
 

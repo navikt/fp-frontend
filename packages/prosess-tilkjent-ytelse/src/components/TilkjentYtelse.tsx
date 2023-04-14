@@ -3,9 +3,7 @@ import moment from 'moment';
 import { IntlShape } from 'react-intl';
 
 import { calcDaysAndWeeks, DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import {
-  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { uttakPeriodeNavn, StonadskontoType } from '@navikt/fp-kodeverk';
 import { ArbeidsgiverOpplysningerPerId, AlleKodeverk, Kjønnkode } from '@navikt/fp-types';
 import { Timeline, TimeLineControl, TimeLineSokerEnsamSoker } from '@navikt/ft-tidslinje';
@@ -24,8 +22,7 @@ type NyPeriode = {
   title: string;
 } & PeriodeMedId;
 
-const parseDateString = (dateString: Date | string): Date => moment(dateString, ISO_DATE_FORMAT)
-  .toDate();
+const parseDateString = (dateString: Date | string): Date => moment(dateString, ISO_DATE_FORMAT).toDate();
 
 const getOptions = (nyePerioder: NyPeriode[]): any => {
   const firstPeriod = nyePerioder[0];
@@ -51,7 +48,7 @@ const gradertKlassenavn = 'gradert';
 const innvilgetKlassenavn = 'innvilget';
 
 const getStatusForPeriode = (periode: PeriodeMedId): string => {
-  const graderteAndeler = periode.andeler.filter((andel) => andel.uttak && andel.uttak.gradering === true);
+  const graderteAndeler = periode.andeler.filter(andel => andel.uttak && andel.uttak.gradering === true);
   if (graderteAndeler.length === 0) {
     return innvilgetKlassenavn;
   }
@@ -60,22 +57,22 @@ const getStatusForPeriode = (periode: PeriodeMedId): string => {
 
 const createTooltipContent = (periodeType: string, intl: IntlShape, item: PeriodeMedId): string => {
   const daysAndWeeks = calcDaysAndWeeks(item.fom, item.tom);
-  return (`
+  return `
   <p>
-    ${moment(item.fom)
-      .format(DDMMYY_DATE_FORMAT)} - ${moment(item.tom)
-      .format(DDMMYY_DATE_FORMAT)}
+    ${moment(item.fom).format(DDMMYY_DATE_FORMAT)} - ${moment(item.tom).format(DDMMYY_DATE_FORMAT)}
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
      ${daysAndWeeks.formattedString}
     </br>
     ${periodeType}
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    ${intl.formatMessage({ id: 'Timeline.tooltip.dagsats' },
+    ${intl.formatMessage(
+      { id: 'Timeline.tooltip.dagsats' },
       {
         dagsats: item.dagsats,
-      })}
+      },
+    )}
    </p>
-`);
+`;
 };
 
 const findKorrektLabelForKvote = (stonadtype: string): string => {
@@ -100,7 +97,7 @@ const findKorrektLabelForKvote = (stonadtype: string): string => {
 // og grupp kan endres nor vi har en medsøkare
 const addClassNameGroupIdToPerioder = (perioder: PeriodeMedId[], intl: IntlShape): NyPeriode[] => {
   const perioderMedClassName: NyPeriode[] = [];
-  perioder.forEach((item) => {
+  perioder.forEach(item => {
     const status = getStatusForPeriode(item);
     const copyOfItem = {
       ...item,
@@ -168,7 +165,10 @@ export class TilkjentYtelse extends Component<OwnProps, OwnState> {
   }
 
   openPeriodInfo(): void {
-    const { props: { items }, state: { selectedItem } } = this;
+    const {
+      props: { items },
+      state: { selectedItem },
+    } = this;
     if (selectedItem) {
       this.setState({
         selectedItem: null,
@@ -181,8 +181,11 @@ export class TilkjentYtelse extends Component<OwnProps, OwnState> {
   }
 
   nextPeriod(): void {
-    const { props: { items }, state: { selectedItem: currentSelectedItem } } = this;
-    const newIndex = items.findIndex((item) => item.id === currentSelectedItem.id) + 1;
+    const {
+      props: { items },
+      state: { selectedItem: currentSelectedItem },
+    } = this;
+    const newIndex = items.findIndex(item => item.id === currentSelectedItem.id) + 1;
     if (newIndex < items.length) {
       const selectedItem = items[newIndex];
       this.setState({
@@ -192,8 +195,11 @@ export class TilkjentYtelse extends Component<OwnProps, OwnState> {
   }
 
   prevPeriod(): void {
-    const { props: { items }, state: { selectedItem: currentSelectedItem } } = this;
-    const newIndex = items.findIndex((item) => item.id === currentSelectedItem.id) - 1;
+    const {
+      props: { items },
+      state: { selectedItem: currentSelectedItem },
+    } = this;
+    const newIndex = items.findIndex(item => item.id === currentSelectedItem.id) - 1;
     if (newIndex >= 0) {
       const selectedItem = items[newIndex];
       this.setState({
@@ -203,8 +209,10 @@ export class TilkjentYtelse extends Component<OwnProps, OwnState> {
   }
 
   selectHandler(eventProps: { items: number[] }): void {
-    const { props: { items } } = this;
-    const selectedItem = items.find((item) => item.id === eventProps.items[0]);
+    const {
+      props: { items },
+    } = this;
+    const selectedItem = items.find(item => item.id === eventProps.items[0]);
     this.setState({
       selectedItem,
     });
@@ -253,9 +261,7 @@ export class TilkjentYtelse extends Component<OwnProps, OwnState> {
       arbeidsgiverOpplysningerPerId,
     } = this.props;
 
-    const {
-      selectedItem,
-    } = this.state;
+    const { selectedItem } = this.state;
 
     const lastPeriod = items[items.length - 1];
     const customTimes = getCustomTimes(soknadDate, familiehendelseDate, lastPeriod);
@@ -265,9 +271,7 @@ export class TilkjentYtelse extends Component<OwnProps, OwnState> {
         <FlexContainer>
           <FlexRow className={styles.timelineContainer}>
             <FlexColumn className={styles.sokerContainer}>
-              <TimeLineSokerEnsamSoker
-                hovedsokerKjonnKode={hovedsokerKjonnKode}
-              />
+              <TimeLineSokerEnsamSoker hovedsokerKjonnKode={hovedsokerKjonnKode} />
             </FlexColumn>
             <FlexColumn className={styles.timelineWidth}>
               <div className={styles.timeLineWrapper}>

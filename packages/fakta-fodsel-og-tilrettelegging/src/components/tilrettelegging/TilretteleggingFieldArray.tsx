@@ -2,15 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Alert, Label } from '@navikt/ds-react';
 
-import {
-  Datepicker, SelectField, PeriodFieldArray, formHooks, NumberField,
-} from '@navikt/ft-form-hooks';
-import {
-  VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
-} from '@navikt/ft-ui-komponenter';
-import {
-  hasValidDecimal, maxValue, minValue, required, hasValidDate,
-} from '@navikt/ft-form-validators';
+import { Datepicker, SelectField, PeriodFieldArray, formHooks, NumberField } from '@navikt/ft-form-hooks';
+import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import { hasValidDecimal, maxValue, minValue, required, hasValidDate } from '@navikt/ft-form-validators';
 import { tilretteleggingType } from '@navikt/fp-kodeverk';
 import { Permisjon } from '@navikt/fp-types';
 
@@ -28,22 +22,17 @@ type FormValues = {
   stillingsprosent: number;
   overstyrtUtbetalingsgrad?: string;
   fom: string;
-}
-
-const validerAtDatoErUnik = (
-  intl: IntlShape,
-  getValues: UseFormGetValues<Record<string, FormValues[]>>,
-  fieldPrefix: string,
-  index: number,
-) => () => {
-  const tilretteleggingDatoer = getValues(fieldPrefix);
-  const datoer = tilretteleggingDatoer.map((d) => d.fom);
-  const aktuellDato = datoer[index];
-  const harDuplikat = datoer.filter((dato) => dato === aktuellDato).length > 1;
-  return harDuplikat
-    ? intl.formatMessage({ id: 'FodselOgTilretteleggingFaktaForm.DuplikateDatoer' })
-    : null;
 };
+
+const validerAtDatoErUnik =
+  (intl: IntlShape, getValues: UseFormGetValues<Record<string, FormValues[]>>, fieldPrefix: string, index: number) =>
+  () => {
+    const tilretteleggingDatoer = getValues(fieldPrefix);
+    const datoer = tilretteleggingDatoer.map(d => d.fom);
+    const aktuellDato = datoer[index];
+    const harDuplikat = datoer.filter(dato => dato === aktuellDato).length > 1;
+    return harDuplikat ? intl.formatMessage({ id: 'FodselOgTilretteleggingFaktaForm.DuplikateDatoer' }) : null;
+  };
 
 export const finnUtbetalingsgradForTilrettelegging = (
   stillingsprosentArbeidsforhold: number,
@@ -51,7 +40,8 @@ export const finnUtbetalingsgradForTilrettelegging = (
   stillingsprosent?: number,
 ): string => {
   const effektivStillingsprosent = stillingsprosentArbeidsforhold - velferdspermisjonprosent;
-  const defaultUtbetalingsgrad = effektivStillingsprosent <= 0 ? 0 : 100 * (1 - (stillingsprosent / effektivStillingsprosent));
+  const defaultUtbetalingsgrad =
+    effektivStillingsprosent <= 0 ? 0 : 100 * (1 - stillingsprosent / effektivStillingsprosent);
   return defaultUtbetalingsgrad > 0 ? defaultUtbetalingsgrad.toFixed(2) : '0';
 };
 
@@ -87,18 +77,17 @@ const TilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
 
   const fieldPrefix = `${formSectionName}.tilretteleggingDatoer`;
 
-  const {
-    setValue, control, watch, getValues,
-  } = formHooks.useFormContext<Record<string, FormValues[]>>();
+  const { setValue, control, watch, getValues } = formHooks.useFormContext<Record<string, FormValues[]>>();
   const { fields, remove, append } = formHooks.useFieldArray({
     control,
     name: fieldPrefix,
   });
 
   const tilretteleggingBehovFom = watch(`${formSectionName}.tilretteleggingBehovFom`);
-  const velferdspermisjonprosent = velferdspermisjoner.filter((p) => finnSkalTaHensynTilPermisjon(tilretteleggingBehovFom, p))
-    .filter((p) => getValues(`${formSectionName}.permisjon${p.permisjonFom}`))
-    .map((p) => p.permisjonsprosent)
+  const velferdspermisjonprosent = velferdspermisjoner
+    .filter(p => finnSkalTaHensynTilPermisjon(tilretteleggingBehovFom, p))
+    .filter(p => getValues(`${formSectionName}.permisjon${p.permisjonFom}`))
+    .map(p => p.permisjonsprosent)
     .reduce((sum, prosent) => sum + prosent, 0);
 
   const tilretteleggingDatoer = watch(fieldPrefix);
@@ -125,54 +114,70 @@ const TilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
                   label={intl.formatMessage({ id: 'TilretteleggingFieldArray.Tilretteleggingsbehov' })}
                   validate={[required]}
                   selectValues={[
-                    <option value={tilretteleggingType.HEL_TILRETTELEGGING} key={tilretteleggingType.HEL_TILRETTELEGGING}>
+                    <option
+                      value={tilretteleggingType.HEL_TILRETTELEGGING}
+                      key={tilretteleggingType.HEL_TILRETTELEGGING}
+                    >
                       {intl.formatMessage({ id: 'TilretteleggingFieldArray.KanGjennomfores' })}
                     </option>,
-                    <option value={tilretteleggingType.DELVIS_TILRETTELEGGING} key={tilretteleggingType.DELVIS_TILRETTELEGGING}>
+                    <option
+                      value={tilretteleggingType.DELVIS_TILRETTELEGGING}
+                      key={tilretteleggingType.DELVIS_TILRETTELEGGING}
+                    >
                       {intl.formatMessage({ id: 'TilretteleggingFieldArray.RedusertArbeid' })}
                     </option>,
-                    <option value={tilretteleggingType.INGEN_TILRETTELEGGING} key={tilretteleggingType.INGEN_TILRETTELEGGING}>
+                    <option
+                      value={tilretteleggingType.INGEN_TILRETTELEGGING}
+                      key={tilretteleggingType.INGEN_TILRETTELEGGING}
+                    >
                       {intl.formatMessage({ id: 'TilretteleggingFieldArray.KanIkkeGjennomfores' })}
                     </option>,
                   ]}
-                  onChange={(event) => {
+                  onChange={event => {
                     const value = event.target?.value;
                     if (value === tilretteleggingType.INGEN_TILRETTELEGGING) {
-                      const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsforhold, velferdspermisjonprosent, 100);
-                      // @ts-ignore Fiks
-                      setValue(`${formSectionName}.tilretteleggingDatoer[${index}].${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`, utbetalingsgrad);
+                      const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(
+                        stillingsprosentArbeidsforhold,
+                        velferdspermisjonprosent,
+                        100,
+                      );
+                      setValue(
+                        `${formSectionName}.tilretteleggingDatoer[${index}].${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`,
+                        // @ts-ignore Fiks
+                        utbetalingsgrad,
+                      );
                     }
                     if (value === tilretteleggingType.DELVIS_TILRETTELEGGING) {
-                      const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsforhold,
-                        velferdspermisjonprosent, data.stillingsprosent);
+                      const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(
+                        stillingsprosentArbeidsforhold,
+                        velferdspermisjonprosent,
+                        data.stillingsprosent,
+                      );
+                      setValue(
+                        `${formSectionName}.tilretteleggingDatoer[${index}].${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`,
                         // @ts-ignore Fiks
-                      setValue(`${formSectionName}.tilretteleggingDatoer[${index}].${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`, utbetalingsgrad);
+                        utbetalingsgrad,
+                      );
                     }
                   }}
                 />
               </FlexColumn>
-              <FlexColumn className={styles.removeButtonMargin}>
-                {!readOnly && (
-                <>
-                  {getRemoveButton()}
-                </>
-                )}
-              </FlexColumn>
+              <FlexColumn className={styles.removeButtonMargin}>{!readOnly && <>{getRemoveButton()}</>}</FlexColumn>
             </FlexRow>
             {tilretteleggingKode === tilretteleggingType.DELVIS_TILRETTELEGGING && (
-            <>
-              <VerticalSpacer sixteenPx />
-              <FlexRow>
-                <FlexColumn>
-                  <Alert variant="info">
-                    <Label size="small">
-                      <FormattedMessage id="TilretteleggingFieldArray.StillingsprosentUtvidet" />
-                    </Label>
-                  </Alert>
-                  <VerticalSpacer eightPx />
-                </FlexColumn>
-              </FlexRow>
-            </>
+              <>
+                <VerticalSpacer sixteenPx />
+                <FlexRow>
+                  <FlexColumn>
+                    <Alert variant="info">
+                      <Label size="small">
+                        <FormattedMessage id="TilretteleggingFieldArray.StillingsprosentUtvidet" />
+                      </Label>
+                    </Alert>
+                    <VerticalSpacer eightPx />
+                  </FlexColumn>
+                </FlexRow>
+              </>
             )}
             <VerticalSpacer sixteenPx />
             <FlexRow>
@@ -193,25 +198,32 @@ const TilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
                     label={intl.formatMessage({ id: 'TilretteleggingFieldArray.Stillingsprosent' })}
                     validate={[required, minValue0, maxValue100, hasValidDecimal]}
                     forceTwoDecimalDigits
-                    onChange={(value) => {
-                      const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsforhold, velferdspermisjonprosent, value);
-                      // @ts-ignore Fiks
-                      setValue(`${formSectionName}.tilretteleggingDatoer.${index}.${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`, utbetalingsgrad);
+                    onChange={value => {
+                      const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(
+                        stillingsprosentArbeidsforhold,
+                        velferdspermisjonprosent,
+                        value,
+                      );
+                      setValue(
+                        `${formSectionName}.tilretteleggingDatoer.${index}.${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`,
+                        // @ts-ignore Fiks
+                        utbetalingsgrad,
+                      );
                     }}
                   />
                 </FlexColumn>
               )}
-              {((data && data.stillingsprosent && tilretteleggingKode === tilretteleggingType.DELVIS_TILRETTELEGGING)
-                    || tilretteleggingKode === tilretteleggingType.INGEN_TILRETTELEGGING) && (
-                    <FlexColumn className={styles.colMargin}>
-                      <TilretteleggingUtbetalingsgrad
-                        fieldPrefix={`${fieldPrefix}.${index}`}
-                        erOverstyrer={erOverstyrer}
-                        tilretteleggingKode={tilretteleggingKode}
-                        readOnly={readOnly}
-                        setOverstyrtUtbetalingsgrad={setOverstyrtUtbetalingsgrad}
-                      />
-                    </FlexColumn>
+              {((data && data.stillingsprosent && tilretteleggingKode === tilretteleggingType.DELVIS_TILRETTELEGGING) ||
+                tilretteleggingKode === tilretteleggingType.INGEN_TILRETTELEGGING) && (
+                <FlexColumn className={styles.colMargin}>
+                  <TilretteleggingUtbetalingsgrad
+                    fieldPrefix={`${fieldPrefix}.${index}`}
+                    erOverstyrer={erOverstyrer}
+                    tilretteleggingKode={tilretteleggingKode}
+                    readOnly={readOnly}
+                    setOverstyrtUtbetalingsgrad={setOverstyrtUtbetalingsgrad}
+                  />
+                </FlexColumn>
               )}
             </FlexRow>
             <VerticalSpacer sixteenPx />

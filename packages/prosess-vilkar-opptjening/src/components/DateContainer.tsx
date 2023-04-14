@@ -8,18 +8,11 @@ interface OwnProps {
   opptjeningTomDate: string;
 }
 
-const DateContainer: FunctionComponent<OwnProps> = ({
-  opptjeningFomDate,
-  opptjeningTomDate,
-}) => (
+const DateContainer: FunctionComponent<OwnProps> = ({ opptjeningFomDate, opptjeningTomDate }) => (
   <FlexContainer>
     <FlexRow spaceBetween>
-      <FlexColumn className={styles.leftMargin}>
-        {opptjeningFomDate}
-      </FlexColumn>
-      <FlexColumn className={styles.rightMargin}>
-        {opptjeningTomDate}
-      </FlexColumn>
+      <FlexColumn className={styles.leftMargin}>{opptjeningFomDate}</FlexColumn>
+      <FlexColumn className={styles.rightMargin}>{opptjeningTomDate}</FlexColumn>
     </FlexRow>
   </FlexContainer>
 );

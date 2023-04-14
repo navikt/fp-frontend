@@ -11,10 +11,7 @@ interface OwnProps {
 /**
  * EndreBehandlingskoerIndex
  */
-const EndreBehandlingskoerIndex: FunctionComponent<OwnProps> = ({
-  valgtAvdelingEnhet,
-  avdelingensSaksbehandlere,
-}) => {
+const EndreBehandlingskoerIndex: FunctionComponent<OwnProps> = ({ valgtAvdelingEnhet, avdelingensSaksbehandlere }) => {
   const [valgtSakslisteId, setValgtSakslisteId] = useState<number>();
   const resetValgtSakslisteId = useCallback(() => setValgtSakslisteId(undefined), []);
   return (

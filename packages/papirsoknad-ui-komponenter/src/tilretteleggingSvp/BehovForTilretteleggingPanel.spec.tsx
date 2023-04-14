@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  fireEvent, render, screen, waitFor,
-} from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 
@@ -43,7 +41,9 @@ describe('<BehovForTilretteleggingPanel>', () => {
     await userEvent.click(screen.getAllByText('Nei')[1]);
     await userEvent.click(screen.getAllByText('Nei')[2]);
 
-    expect(await screen.findByText('Jordmor/lege oppgir at tilrettelegging er nødvendig fra og med')).toBeInTheDocument();
+    expect(
+      await screen.findByText('Jordmor/lege oppgir at tilrettelegging er nødvendig fra og med'),
+    ).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
@@ -71,11 +71,13 @@ describe('<BehovForTilretteleggingPanel>', () => {
         sokForArbeidsgiver: false,
         sokForFrilans: false,
         sokForSelvstendigNaringsdrivende: true,
-        tilretteleggingSelvstendigNaringsdrivende: [{
-          dato: '2022-05-30',
-          stillingsprosent: '100',
-          tilretteleggingType: 'HEL_TILRETTELEGGING',
-        }],
+        tilretteleggingSelvstendigNaringsdrivende: [
+          {
+            dato: '2022-05-30',
+            stillingsprosent: '100',
+            tilretteleggingType: 'HEL_TILRETTELEGGING',
+          },
+        ],
       },
     });
   });

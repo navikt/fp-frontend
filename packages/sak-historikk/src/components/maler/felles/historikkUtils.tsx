@@ -17,19 +17,21 @@ export const findIdForOpplysningCode = (opplysning: HistorikkInnslagOpplysning):
   const typeKode = opplysning.opplysningType;
   const opplysningCode = historikkOpplysningTypeCodes[typeKode];
   if (!opplysningCode) {
-    return (`OpplysningTypeCode ${typeKode} finnes ikke-LEGG DET INN`);
+    return `OpplysningTypeCode ${typeKode} finnes ikke-LEGG DET INN`;
   }
   return opplysningCode.feltId;
 };
 
-export const findIdForSoeknadsperiodeCode = (soeknadsperiode: HistorikkinnslagDel['soeknadsperiode']): string | undefined => {
+export const findIdForSoeknadsperiodeCode = (
+  soeknadsperiode: HistorikkinnslagDel['soeknadsperiode'],
+): string | undefined => {
   if (!soeknadsperiode) {
     return undefined;
   }
   const typeKode = soeknadsperiode.soeknadsperiodeType || '';
   const soeknadsperiodeCode = historikkSoeknadsperiodeTypeCodes[typeKode];
   if (!soeknadsperiodeCode) {
-    return (`SoeknadsperiodeTypeCode ${typeKode} finnes ikke-LEGG DET INN`);
+    return `SoeknadsperiodeTypeCode ${typeKode} finnes ikke-LEGG DET INN`;
   }
   return soeknadsperiodeCode.feltId;
 };
@@ -40,7 +42,7 @@ export const findResultatText = (resultat: string, intl: IntlShape): string | un
   }
   const resultatCode = historikkResultatTypeCodes[resultat];
   if (!resultatCode) {
-    return (`ResultatTypeCode ${resultat} finnes ikke-LEGG DET INN`);
+    return `ResultatTypeCode ${resultat} finnes ikke-LEGG DET INN`;
   }
   const fieldId = resultatCode.feltId;
   return intl.formatMessage({ id: fieldId }, { b: (chunks: any) => <b>{chunks}</b>, br: <br /> }) as string;
@@ -69,13 +71,13 @@ export const findEndretFeltVerdi = (
   if (verdi === null || verdi === undefined) {
     return null;
   }
-  if (typeof (verdi) === 'boolean') {
+  if (typeof verdi === 'boolean') {
     return convertToBoolean(verdi);
   }
   if (endretFelt.klTilVerdi !== null) {
     const verdiCode = historikkEndretFeltVerdiTypeCodes[verdi];
     if (!verdiCode) {
-      return (`EndretFeltVerdiTypeCode ${verdi} finnes ikke-LEGG DET INN`);
+      return `EndretFeltVerdiTypeCode ${verdi} finnes ikke-LEGG DET INN`;
     }
     return intl.formatMessage({ id: verdiCode.verdiId });
   }
@@ -86,12 +88,17 @@ export const findEndretFeltNavn = (endretFelt: HistorikkinnslagEndretFelt, intl:
   const navnCode = endretFelt.endretFeltNavn;
   const endretFeltNavnType = historikkEndretFeltTypeCodes[navnCode];
   if (!endretFeltNavnType) {
-    return (`EndretFeltTypeCode ${navnCode} finnes ikke-LEGG DET INN`);
+    return `EndretFeltTypeCode ${navnCode} finnes ikke-LEGG DET INN`;
   }
   const fieldId = endretFeltNavnType.feltId;
-  return endretFelt.navnVerdi !== null ? intl.formatMessage({ id: fieldId }, {
-    value: endretFelt.navnVerdi,
-  }) : intl.formatMessage({ id: fieldId });
+  return endretFelt.navnVerdi !== null
+    ? intl.formatMessage(
+        { id: fieldId },
+        {
+          value: endretFelt.navnVerdi,
+        },
+      )
+    : intl.formatMessage({ id: fieldId });
 };
 
 export const scrollUp = (): void => {

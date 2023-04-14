@@ -3,31 +3,35 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 
-import {
-  AksjonspunktCode, VilkarType, vilkarUtfallType, KodeverkType, aksjonspunktStatus,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, VilkarType, vilkarUtfallType, KodeverkType, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { Form } from '@navikt/ft-form-hooks';
+import { Aksjonspunkt, AlleKodeverk, Behandling, Vilkar } from '@navikt/fp-types';
 import {
-  Aksjonspunkt, AlleKodeverk, Behandling, Vilkar,
-} from '@navikt/fp-types';
-import {
-  ProsessStegBegrunnelseTextFieldNew, VilkarResultPicker, ProsessPanelTemplate, validerApKodeOgHentApEnum,
+  ProsessStegBegrunnelseTextFieldNew,
+  VilkarResultPicker,
+  ProsessPanelTemplate,
+  validerApKodeOgHentApEnum,
 } from '@navikt/fp-prosess-felles';
-import { VurdereYtelseSammeBarnAnnenForelderAp, VurdereYtelseSammeBarnSokerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import {
+  VurdereYtelseSammeBarnAnnenForelderAp,
+  VurdereYtelseSammeBarnSokerAp,
+} from '@navikt/fp-types-avklar-aksjonspunkter';
 
 type FormValues = {
   erVilkarOk?: boolean;
   avslagCode?: string;
   avslagDato?: string;
   begrunnelse?: string;
-}
+};
 
 interface OwnProps {
   behandlingsresultat?: Behandling['behandlingsresultat'];
   aksjonspunkter: Aksjonspunkt[];
   status: string;
   vilkar: Vilkar[];
-  submitCallback: (aksjonspunktData: VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp) => Promise<void>;
+  submitCallback: (
+    aksjonspunktData: VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp,
+  ) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
   isApOpen: boolean;
@@ -52,9 +56,11 @@ const transformValues = (
 ): VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
-  kode: validerApKodeOgHentApEnum(aksjonspunkter[0].definisjon,
+  kode: validerApKodeOgHentApEnum(
+    aksjonspunkter[0].definisjon,
     AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-    AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN),
+    AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
+  ),
 });
 
 /**
@@ -78,14 +84,17 @@ const AdopsjonVilkarForm: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const initialValues = useMemo(() => buildInitialValues(aksjonspunkter, status, behandlingsresultat), [behandlingsresultat, aksjonspunkter, status]);
+  const initialValues = useMemo(
+    () => buildInitialValues(aksjonspunkter, status, behandlingsresultat),
+    [behandlingsresultat, aksjonspunkter, status],
+  );
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });
 
   const avslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.ADOPSJONSVILKARET];
 
-  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET);
+  const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET);
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
   const { lovReferanse } = vilkar[0];
 
@@ -106,12 +115,16 @@ const AdopsjonVilkarForm: FunctionComponent<OwnProps> = ({
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
       >
-        <Label size="small"><FormattedMessage id="AdopsjonVilkarForm.TidligereUtbetaltStonad" /></Label>
+        <Label size="small">
+          <FormattedMessage id="AdopsjonVilkarForm.TidligereUtbetaltStonad" />
+        </Label>
         <VilkarResultPicker
           avslagsarsaker={avslagsarsaker}
           readOnly={readOnly}
           customVilkarOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.Oppfylt" />}
-          customVilkarIkkeOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.IkkeOppfylt" values={{ b: (chunks: any) => <b>{chunks}</b> }} />}
+          customVilkarIkkeOppfyltText={
+            <FormattedMessage id="AdopsjonVilkarForm.IkkeOppfylt" values={{ b: (chunks: any) => <b>{chunks}</b> }} />
+          }
         />
         <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />
       </ProsessPanelTemplate>

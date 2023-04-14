@@ -4,9 +4,7 @@ import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './AdopsjonVilkarProsessIndex.stories';
 
-const {
-  ÅpentAksjonspunkt, OppfyltVilkår, AvslåttVilkår,
-} = composeStories(stories);
+const { ÅpentAksjonspunkt, OppfyltVilkår, AvslåttVilkår } = composeStories(stories);
 
 describe('<AdopsjonVilkarProsessIndex>', () => {
   it('skal bestemme at vilkåret er oppfylt og så løse aksjonspunkt', async () => {

@@ -1,16 +1,10 @@
-import React, {
-  FunctionComponent, useEffect, useState, useCallback,
-} from 'react';
+import React, { FunctionComponent, useEffect, useState, useCallback } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
-import {
-  Heading, Link, Checkbox, CheckboxGroup,
-} from '@navikt/ds-react';
+import { Heading, Link, Checkbox, CheckboxGroup } from '@navikt/ds-react';
 import { Back } from '@navikt/ds-icons';
 import { NavAnsatt } from '@navikt/fp-types';
-import {
-  FlexColumn, FlexContainer, FlexRow, LoadingPanel, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, LoadingPanel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import messages from '../i18n/nb_NO.json';
 import JournalforingPanel from './components/JournalforingPanel';
@@ -41,9 +35,7 @@ interface OwnProps {
 /**
  * JournalforingIndex - Toppkomponent, orkestrerer restkall for journalføring
  */
-const JournalforingIndex: FunctionComponent<OwnProps> = ({
-  navAnsatt,
-}) => {
+const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
   const [valgtOppgave, setValgtOppgave] = useState<OppgaveOversikt | undefined>(undefined);
   const [filtrerVekkOppgaver, setFiltrerVekkOppgaver] = useState<boolean>(false);
   const avbryt = useCallback(() => {
@@ -88,13 +80,12 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({
   return (
     <RawIntlProvider value={intl}>
       <div className={styles.header}>
-        {valgtOppgave
-          && (
-            <Link onClick={avbryt} className={styles.link}>
-              <Back />
-              <FormattedMessage id="Journalforing.Oversikt" />
-            </Link>
-          )}
+        {valgtOppgave && (
+          <Link onClick={avbryt} className={styles.link}>
+            <Back />
+            <FormattedMessage id="Journalforing.Oversikt" />
+          </Link>
+        )}
         <VerticalSpacer eightPx />
         <FlexContainer>
           <FlexRow>
@@ -103,8 +94,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({
                 <FormattedMessage id="Journalforing.Tittel" />
               </Heading>
             </FlexColumn>
-            {!valgtOppgave
-            && (
+            {!valgtOppgave && (
               <FlexColumn className={styles.avhukingKol}>
                 <CheckboxGroup
                   hideLegend
@@ -112,7 +102,9 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({
                   legend={<FormattedMessage id="Oppgavetabell.Filtrer" />}
                   onChange={filtrerOppgaveliste}
                 >
-                  <Checkbox value><FormattedMessage id="Oppgavetabell.Filtrer" /></Checkbox>
+                  <Checkbox value>
+                    <FormattedMessage id="Oppgavetabell.Filtrer" />
+                  </Checkbox>
                 </CheckboxGroup>
               </FlexColumn>
             )}

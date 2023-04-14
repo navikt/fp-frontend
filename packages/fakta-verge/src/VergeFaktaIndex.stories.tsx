@@ -12,12 +12,14 @@ import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
 
-const aksjonspunkter = [{
-  definisjon: AksjonspunktCode.AVKLAR_VERGE,
-  status: aksjonspunktStatus.OPPRETTET,
-  begrunnelse: undefined,
-  kanLoses: true,
-}];
+const aksjonspunkter = [
+  {
+    definisjon: AksjonspunktCode.AVKLAR_VERGE,
+    status: aksjonspunktStatus.OPPRETTET,
+    begrunnelse: undefined,
+    kanLoses: true,
+  },
+];
 
 const verge = {};
 
@@ -31,12 +33,9 @@ export default {
 };
 
 const Template: Story<{
-  behandling: Behandling,
+  behandling: Behandling;
   submitCallback: (aksjonspunktData: any) => Promise<void>;
-}> = ({
-  behandling,
-  submitCallback,
-}) => (
+}> = ({ behandling, submitCallback }) => (
   <VergeFaktaIndex
     submitCallback={submitCallback}
     readOnly={false}

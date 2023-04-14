@@ -6,14 +6,14 @@ import JournalDokument from './journalDokumentTsType';
 import JournalFagsak from './journalFagsakTsType';
 
 type Journalpost = Readonly<{
-    journalpostId: string;
-    tittel?: string;
-    kanal?: JournalKanal;
-    bruker: JournalBruker;
-    avsender: JournalAvsender;
-    ytelseType: FagsakYtelseType;
-    dokumenter?: JournalDokument[];
-    fagsaker?: JournalFagsak[];
-}>
+  journalpostId: string;
+  tittel?: string;
+  kanal?: JournalKanal;
+  bruker: JournalBruker;
+  avsender: JournalAvsender;
+  ytelseType: FagsakYtelseType;
+  dokumenter?: JournalDokument[];
+  fagsaker?: JournalFagsak[];
+}>;
 
 export default Journalpost;

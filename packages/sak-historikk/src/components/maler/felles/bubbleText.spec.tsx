@@ -17,10 +17,7 @@ describe('<BubbleText>', () => {
 
     render(
       <RawIntlProvider value={intlMock}>
-        <BubbleText
-          bodyText={bodyText}
-          cutOffLength={cutOffLength}
-        />
+        <BubbleText bodyText={bodyText} cutOffLength={cutOffLength} />
       </RawIntlProvider>,
     );
 
@@ -34,10 +31,7 @@ describe('<BubbleText>', () => {
 
     render(
       <RawIntlProvider value={intlMock}>
-        <BubbleText
-          bodyText={bodyText}
-          cutOffLength={cutOffLength}
-        />
+        <BubbleText bodyText={bodyText} cutOffLength={cutOffLength} />
       </RawIntlProvider>,
     );
 
@@ -50,10 +44,7 @@ describe('<BubbleText>', () => {
 
     render(
       <RawIntlProvider value={intlMock}>
-        <BubbleText
-          bodyText={bodyText}
-          cutOffLength={cutOffLength}
-        />
+        <BubbleText bodyText={bodyText} cutOffLength={cutOffLength} />
       </RawIntlProvider>,
     );
 

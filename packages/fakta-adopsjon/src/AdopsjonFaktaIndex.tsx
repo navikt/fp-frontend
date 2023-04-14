@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import {
-  FamilieHendelseSamling, Soknad, StandardFaktaPanelProps,
-} from '@navikt/fp-types';
+import { FamilieHendelseSamling, Soknad, StandardFaktaPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import AdopsjonInfoPanel from './components/AdopsjonInfoPanel';

@@ -6,6 +6,6 @@ type AvklarAnnenforelderHarRettAp = {
   annenforelderHarRett: boolean;
   annenforelderMottarUføretrygd?: boolean;
   annenForelderHarRettEØS?: boolean;
-} & AksjonspunktTilBekreftelse<AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT>
+} & AksjonspunktTilBekreftelse<AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT>;
 
 export default AvklarAnnenforelderHarRettAp;

@@ -27,7 +27,7 @@ type BekreftetSvpArbeidsforhold = {
     type: string;
     erGyldig: boolean;
   }[];
-}
+};
 
 type BekreftSvangerskapspengerAp = {
   termindato: string;

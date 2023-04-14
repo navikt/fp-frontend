@@ -4,9 +4,8 @@ import { composeStories } from '@storybook/testing-react';
 import { Modal } from '@navikt/ds-react';
 import * as stories from './FatterVedtakApprovalModalSakIndex.stories';
 
-const {
-  EtterGodkjenning, EtterGodkjenningAvKlage, EtterTilbakesendingTilSaksbehandler, EtterFatterVedtakOgGodkjent,
-} = composeStories(stories);
+const { EtterGodkjenning, EtterGodkjenningAvKlage, EtterTilbakesendingTilSaksbehandler, EtterFatterVedtakOgGodkjent } =
+  composeStories(stories);
 
 describe('<FatterVedtakApprovalModalSakIndex>', () => {
   if (Modal.setAppElement) {

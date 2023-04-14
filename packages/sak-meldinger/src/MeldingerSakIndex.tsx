@@ -18,9 +18,9 @@ interface OwnProps {
   revurderingVarslingArsak: KodeverkMedNavn[];
   fagsakYtelseType: string;
   kanVeilede: boolean;
-  meldingFormData?: any,
-  setMeldingForData: (data?: any) => void,
-  brukerManglerAdresse: boolean,
+  meldingFormData?: any;
+  setMeldingForData: (data?: any) => void;
+  brukerManglerAdresse: boolean;
 }
 
 const MeldingerSakIndex: FunctionComponent<OwnProps> = ({

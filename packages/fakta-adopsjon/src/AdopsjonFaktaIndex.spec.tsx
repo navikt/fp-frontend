@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  render, screen, waitFor,
-} from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './AdopsjonFaktaIndex.stories';
@@ -37,15 +35,17 @@ describe('<AdopsjonFaktaIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      begrunnelse: 'Dette er en begrunnelse',
-      fodselsdatoer: {
-        1: '2018-01-01',
-        2: '2000-01-02',
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: 'Dette er en begrunnelse',
+        fodselsdatoer: {
+          1: '2018-01-01',
+          2: '2000-01-02',
+        },
+        kode: '5004',
+        omsorgsovertakelseDato: '2022-09-14',
       },
-      kode: '5004',
-      omsorgsovertakelseDato: '2022-09-14',
-    }]);
+    ]);
   });
 
   it('skal kontrollere opplysninger fra adopsjonsdokumentasjonen og mann adopterer og så bekrefte', async () => {
@@ -68,19 +68,22 @@ describe('<AdopsjonFaktaIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      begrunnelse: 'Dette er en begrunnelse',
-      fodselsdatoer: {
-        1: '2018-01-01',
-        2: '2000-01-02',
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: 'Dette er en begrunnelse',
+        fodselsdatoer: {
+          1: '2018-01-01',
+          2: '2000-01-02',
+        },
+        kode: '5004',
+        omsorgsovertakelseDato: '2022-09-14',
       },
-      kode: '5004',
-      omsorgsovertakelseDato: '2022-09-14',
-    }, {
-      begrunnelse: 'Dette er en begrunnelse',
-      kode: '5006',
-      mannAdoptererAlene: true,
-    }]);
+      {
+        begrunnelse: 'Dette er en begrunnelse',
+        kode: '5006',
+        mannAdoptererAlene: true,
+      },
+    ]);
   });
 
   it('skal kontrollere opplysninger fra adopsjonsdokumentasjonen og ektefelles barn og så bekrefte', async () => {
@@ -103,19 +106,22 @@ describe('<AdopsjonFaktaIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      begrunnelse: 'Dette er en begrunnelse',
-      fodselsdatoer: {
-        1: '2018-01-01',
-        2: '2000-01-02',
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: 'Dette er en begrunnelse',
+        fodselsdatoer: {
+          1: '2018-01-01',
+          2: '2000-01-02',
+        },
+        kode: '5004',
+        omsorgsovertakelseDato: '2022-09-14',
       },
-      kode: '5004',
-      omsorgsovertakelseDato: '2022-09-14',
-    }, {
-      begrunnelse: 'Dette er en begrunnelse',
-      kode: '5005',
-      ektefellesBarn: false,
-    }]);
+      {
+        begrunnelse: 'Dette er en begrunnelse',
+        kode: '5005',
+        ektefellesBarn: false,
+      },
+    ]);
   });
 
   it('skal ikke vise felt for barnets ankomst når fagsak er engangsstønad', async () => {

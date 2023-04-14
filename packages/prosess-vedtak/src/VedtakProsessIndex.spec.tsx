@@ -21,7 +21,9 @@ describe('<VedtakProsessIndex>', () => {
     const lagre = vi.fn();
     const forhåndsvis = vi.fn();
 
-    render(<InnvilgetForeldrepengerTilGodkjenningForSaksbehandler submitCallback={lagre} previewCallback={forhåndsvis} />);
+    render(
+      <InnvilgetForeldrepengerTilGodkjenningForSaksbehandler submitCallback={lagre} previewCallback={forhåndsvis} />,
+    );
 
     expect(await screen.findByText('Vedtak')).toBeInTheDocument();
     expect(screen.getByText('Foreldrepenger er innvilget')).toBeInTheDocument();
@@ -41,27 +43,33 @@ describe('<VedtakProsessIndex>', () => {
     await userEvent.click(screen.getByText('Fatt vedtak'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      begrunnelse: undefined,
-      fritekstBrev: undefined,
-      kode: '5015',
-      overskrift: undefined,
-      skalBrukeOverstyrendeFritekstBrev: false,
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: undefined,
+        fritekstBrev: undefined,
+        kode: '5015',
+        overskrift: undefined,
+        skalBrukeOverstyrendeFritekstBrev: false,
+      },
+    ]);
   });
 
   it('skal redigere innvilget vedtaksbrev, forhåndsvise og så fatte vedtak', async () => {
     const lagre = vi.fn();
     const forhåndsvis = vi.fn();
 
-    const utils = render(<InnvilgetForeldrepengerTilGodkjenningForSaksbehandler submitCallback={lagre} previewCallback={forhåndsvis} />);
+    const utils = render(
+      <InnvilgetForeldrepengerTilGodkjenningForSaksbehandler submitCallback={lagre} previewCallback={forhåndsvis} />,
+    );
 
     expect(await screen.findByText('Vedtak')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Rediger vedtaksbrev'));
 
     expect(await screen.findByText('Manuelt vedtaksbrev')).toBeInTheDocument();
-    expect(screen.getByText('Tekst fra det automatisk genererte brevet kan kopieres og limes inn i det manuelle brevet')).toBeInTheDocument();
+    expect(
+      screen.getByText('Tekst fra det automatisk genererte brevet kan kopieres og limes inn i det manuelle brevet'),
+    ).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Fatt vedtak'));
 
@@ -88,13 +96,15 @@ describe('<VedtakProsessIndex>', () => {
 
     await userEvent.click(screen.getByText('Fatt vedtak'));
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      begrunnelse: undefined,
-      fritekstBrev: 'Dette er innhold',
-      kode: '5015',
-      overskrift: 'Dette er en overskrift',
-      skalBrukeOverstyrendeFritekstBrev: true,
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: undefined,
+        fritekstBrev: 'Dette er innhold',
+        kode: '5015',
+        overskrift: 'Dette er en overskrift',
+        skalBrukeOverstyrendeFritekstBrev: true,
+      },
+    ]);
   });
 
   it('skal redigere innvilget vedtaksbrev, forkaste det via modal og så fatte vedtak', async () => {
@@ -107,7 +117,9 @@ describe('<VedtakProsessIndex>', () => {
     await userEvent.click(screen.getByText('Rediger vedtaksbrev'));
 
     expect(await screen.findByText('Manuelt vedtaksbrev')).toBeInTheDocument();
-    expect(screen.getByText('Tekst fra det automatisk genererte brevet kan kopieres og limes inn i det manuelle brevet')).toBeInTheDocument();
+    expect(
+      screen.getByText('Tekst fra det automatisk genererte brevet kan kopieres og limes inn i det manuelle brevet'),
+    ).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Fatt vedtak'));
 
@@ -123,7 +135,11 @@ describe('<VedtakProsessIndex>', () => {
 
     await userEvent.click(screen.getByText('Forkast manuelt brev'));
 
-    expect(await screen.findByText('Dersom du forkaster det manuelle brevet, vil det erstattes av det automatisk genererte brevet')).toBeInTheDocument();
+    expect(
+      await screen.findByText(
+        'Dersom du forkaster det manuelle brevet, vil det erstattes av det automatisk genererte brevet',
+      ),
+    ).toBeInTheDocument();
 
     await userEvent.click(screen.getAllByText('Forkast manuelt brev')[1]);
 
@@ -131,13 +147,15 @@ describe('<VedtakProsessIndex>', () => {
 
     await userEvent.click(screen.getByText('Fatt vedtak'));
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      begrunnelse: undefined,
-      fritekstBrev: undefined,
-      kode: '5015',
-      overskrift: undefined,
-      skalBrukeOverstyrendeFritekstBrev: false,
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: undefined,
+        fritekstBrev: undefined,
+        kode: '5015',
+        overskrift: undefined,
+        skalBrukeOverstyrendeFritekstBrev: false,
+      },
+    ]);
   });
 
   it('skal forhåndsvise avslått vedtaksbrev og så fatte vedtak uten å skrive inn fritekst', async () => {
@@ -153,13 +171,15 @@ describe('<VedtakProsessIndex>', () => {
     await userEvent.click(screen.getByText('Fatt vedtak'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      begrunnelse: undefined,
-      fritekstBrev: undefined,
-      kode: '5015',
-      overskrift: undefined,
-      skalBrukeOverstyrendeFritekstBrev: false,
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: undefined,
+        fritekstBrev: undefined,
+        kode: '5015',
+        overskrift: undefined,
+        skalBrukeOverstyrendeFritekstBrev: false,
+      },
+    ]);
   });
 
   it('skal forhåndsvise avslått vedtaksbrev og så fatte vedtak med fritekst', async () => {
@@ -186,13 +206,15 @@ describe('<VedtakProsessIndex>', () => {
     await userEvent.click(screen.getByText('Fatt vedtak'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      begrunnelse: 'Dette er en tekst',
-      fritekstBrev: undefined,
-      kode: '5015',
-      overskrift: undefined,
-      skalBrukeOverstyrendeFritekstBrev: false,
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: 'Dette er en tekst',
+        fritekstBrev: undefined,
+        kode: '5015',
+        overskrift: undefined,
+        skalBrukeOverstyrendeFritekstBrev: false,
+      },
+    ]);
   });
 
   it('skal vise info om hva saksbehandler må ta stilling til før godkjenning', async () => {
@@ -206,23 +228,31 @@ describe('<VedtakProsessIndex>', () => {
     expect(screen.getByText('Rediger vedtaksbrev')).toBeInTheDocument();
 
     expect(screen.getByText('Vurder følgende før du sender til godkjenning:')).toBeInTheDocument();
-    expect(screen.getByText('Påvirker den åpne Gosys-oppgaven «Vurder konsekvens for ytelse» behandlingen?')).toBeInTheDocument();
+    expect(
+      screen.getByText('Påvirker den åpne Gosys-oppgaven «Vurder konsekvens for ytelse» behandlingen?'),
+    ).toBeInTheDocument();
     expect(screen.getByText('Påvirker den åpne Gosys-oppgaven «Vurder dokument» behandlingen?')).toBeInTheDocument();
-    expect(screen.getByText('Beregningsgrunnlaget er endret til ugunst for søker. Skal det sendes varsel?')).toBeInTheDocument();
+    expect(
+      screen.getByText('Beregningsgrunnlaget er endret til ugunst for søker. Skal det sendes varsel?'),
+    ).toBeInTheDocument();
 
-    const fritekstInput = utils.getByLabelText('Fritekst i brev til søker som handler om fastsettelse av beregningsgrunnlaget');
+    const fritekstInput = utils.getByLabelText(
+      'Fritekst i brev til søker som handler om fastsettelse av beregningsgrunnlaget',
+    );
     await userEvent.type(fritekstInput, 'Dette er en tekst');
 
     await userEvent.click(screen.getByText('Til godkjenning'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      begrunnelse: 'Dette er en tekst',
-      fritekstBrev: undefined,
-      kode: '5015',
-      overskrift: undefined,
-      skalBrukeOverstyrendeFritekstBrev: false,
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: 'Dette er en tekst',
+        fritekstBrev: undefined,
+        kode: '5015',
+        overskrift: undefined,
+        skalBrukeOverstyrendeFritekstBrev: false,
+      },
+    ]);
   });
 
   it('skal vise innvilget vedtaksbrev for engangsstønad og så fatte vedtak', async () => {
@@ -243,13 +273,15 @@ describe('<VedtakProsessIndex>', () => {
     await userEvent.click(screen.getByText('Fatt vedtak'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      begrunnelse: undefined,
-      fritekstBrev: undefined,
-      kode: '5015',
-      overskrift: undefined,
-      skalBrukeOverstyrendeFritekstBrev: false,
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: undefined,
+        fritekstBrev: undefined,
+        kode: '5015',
+        overskrift: undefined,
+        skalBrukeOverstyrendeFritekstBrev: false,
+      },
+    ]);
   });
 
   it('skal vise revurdering av foreldrepenger', async () => {
@@ -268,13 +300,15 @@ describe('<VedtakProsessIndex>', () => {
     await userEvent.click(screen.getByText('Fatt vedtak'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      begrunnelse: undefined,
-      fritekstBrev: undefined,
-      kode: '5015',
-      overskrift: undefined,
-      skalBrukeOverstyrendeFritekstBrev: false,
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: undefined,
+        fritekstBrev: undefined,
+        kode: '5015',
+        overskrift: undefined,
+        skalBrukeOverstyrendeFritekstBrev: false,
+      },
+    ]);
   });
 
   it('skal vise panel der saksbehandler har overstyrt vedtaksbrev og innvilget sak (readonly)', async () => {

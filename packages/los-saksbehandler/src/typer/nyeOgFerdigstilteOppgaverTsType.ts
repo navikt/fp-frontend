@@ -3,6 +3,6 @@ type NyeOgFerdigstilteOppgaver = Readonly<{
   antallNye: number;
   antallFerdigstilte: number;
   dato: string;
-}>
+}>;
 
 export default NyeOgFerdigstilteOppgaver;

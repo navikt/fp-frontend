@@ -15,10 +15,7 @@ interface OwnProps {
   lukkModal: () => void;
 }
 
-const MenyApneForEndringerIndex: FunctionComponent<OwnProps> = ({
-  apneBehandlingForEndringer,
-  lukkModal,
-}) => {
+const MenyApneForEndringerIndex: FunctionComponent<OwnProps> = ({ apneBehandlingForEndringer, lukkModal }) => {
   const submit = useCallback(() => {
     apneBehandlingForEndringer();
 

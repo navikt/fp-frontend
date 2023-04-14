@@ -11,13 +11,13 @@ export type HistorikkinnslagEndretFelt = {
 export type HistorikkInnslagOpplysning = {
   opplysningType: string;
   tilVerdi?: string;
-}
+};
 
 export type HistorikkInnslagAksjonspunkt = {
   aksjonspunktKode: string;
   godkjent: boolean;
   aksjonspunktBegrunnelse?: string;
-}
+};
 
 export type HistorikkinnslagDel = {
   begrunnelsetekst?: string;
@@ -55,7 +55,7 @@ export type HistorikkInnslagDokumentLink = Readonly<{
   tag: string;
   url?: string;
   utgått: boolean;
-}>
+}>;
 
 type Historikkinnslag = Readonly<{
   opprettetAv?: string;
@@ -66,6 +66,6 @@ type Historikkinnslag = Readonly<{
   aktoer: string;
   dokumentLinks?: HistorikkInnslagDokumentLink[];
   historikkinnslagDeler: HistorikkinnslagDel[];
-}>
+}>;
 
 export default Historikkinnslag;

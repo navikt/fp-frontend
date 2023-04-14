@@ -7,27 +7,28 @@ import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponen
 import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import { AksjonspunktCode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
-import {
-  Aksjonspunkt, FamilieHendelseSamling, FamilieHendelse, Soknad,
-} from '@navikt/fp-types';
-import {
-  BekreftTerminbekreftelseAp, SjekkManglendeFodselAp,
-} from '@navikt/fp-types-avklar-aksjonspunkter';
+import { Aksjonspunkt, FamilieHendelseSamling, FamilieHendelse, Soknad } from '@navikt/fp-types';
+import { BekreftTerminbekreftelseAp, SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import TermindatoFaktaForm, { FormValues as TermindatoFormValues } from './TermindatoFaktaForm';
 import SjekkFodselDokForm, { FormValues as SjekkFodselDokFormValues } from './SjekkFodselDokForm';
 
-const {
-  TERMINBEKREFTELSE, SJEKK_MANGLENDE_FODSEL,
-} = AksjonspunktCode;
+const { TERMINBEKREFTELSE, SJEKK_MANGLENDE_FODSEL } = AksjonspunktCode;
 
 const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   const helpTexts: ReactElement[] = [];
   if (hasAksjonspunkt(TERMINBEKREFTELSE, aksjonspunkter)) {
-    helpTexts.push(<FormattedMessage key="KontrollerMotTerminbekreftelsen" id="FodselInfoPanel.KontrollerMotTerminbekreftelsen" />);
+    helpTexts.push(
+      <FormattedMessage key="KontrollerMotTerminbekreftelsen" id="FodselInfoPanel.KontrollerMotTerminbekreftelsen" />,
+    );
   }
   if (hasAksjonspunkt(SJEKK_MANGLENDE_FODSEL, aksjonspunkter)) {
-    helpTexts.push(<FormattedMessage key="KontrollerMotFodselsdokumentasjon" id="FodselInfoPanel.KontrollerMotFodselsdokumentasjon" />);
+    helpTexts.push(
+      <FormattedMessage
+        key="KontrollerMotFodselsdokumentasjon"
+        id="FodselInfoPanel.KontrollerMotFodselsdokumentasjon"
+      />,
+    );
   }
   return helpTexts;
 };
@@ -40,8 +41,12 @@ const buildInitialValues = (
   soknad: Soknad,
   familieHendelse: FamilieHendelseSamling,
 ) => ({
-  ...terminbekreftelseAp ? TermindatoFaktaForm.buildInitialValues(soknad, familieHendelse.gjeldende, terminbekreftelseAp) : {},
-  ...manglendeFødselAp ? SjekkFodselDokForm.buildInitialValues(soknad, familieHendelse.gjeldende, manglendeFødselAp) : {},
+  ...(terminbekreftelseAp
+    ? TermindatoFaktaForm.buildInitialValues(soknad, familieHendelse.gjeldende, terminbekreftelseAp)
+    : {}),
+  ...(manglendeFødselAp
+    ? SjekkFodselDokForm.buildInitialValues(soknad, familieHendelse.gjeldende, manglendeFødselAp)
+    : {}),
 });
 
 type AksjonspunktData = Array<BekreftTerminbekreftelseAp | SjekkManglendeFodselAp>;
@@ -57,7 +62,9 @@ const transformValues = (
     aksjonspunkterSomSkalBekreftes.push(TermindatoFaktaForm.transformValues(values));
   }
   if (manglendeFødselAp) {
-    aksjonspunkterSomSkalBekreftes.push(SjekkFodselDokForm.transformValues(values, familieHendelse.gjeldende.avklartBarn));
+    aksjonspunkterSomSkalBekreftes.push(
+      SjekkFodselDokForm.transformValues(values, familieHendelse.gjeldende.avklartBarn),
+    );
   }
   return aksjonspunkterSomSkalBekreftes;
 };
@@ -74,10 +81,10 @@ interface OwnProps {
   submitCallback: (data: AksjonspunktData) => Promise<void>;
   soknadOriginalBehandling?: Soknad;
   familiehendelseOriginalBehandling?: FamilieHendelse;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   behandlingType: string;
-  formData?: FormValues,
-  setFormData: (data: FormValues) => void,
+  formData?: FormValues;
+  setFormData: (data: FormValues) => void;
 }
 
 /**
@@ -104,8 +111,8 @@ const FodselInfoPanel: FunctionComponent<OwnProps> = ({
   const termindato = familiehendelse?.gjeldende?.termindato;
   const vedtaksDatoSomSvangerskapsuke = familiehendelse?.gjeldende?.vedtaksDatoSomSvangerskapsuke;
 
-  const terminbekreftelseAp = aksjonspunkter.find((ap) => ap.definisjon === TERMINBEKREFTELSE);
-  const manglendeFødselAp = aksjonspunkter.find((ap) => ap.definisjon === SJEKK_MANGLENDE_FODSEL);
+  const terminbekreftelseAp = aksjonspunkter.find(ap => ap.definisjon === TERMINBEKREFTELSE);
+  const manglendeFødselAp = aksjonspunkter.find(ap => ap.definisjon === SJEKK_MANGLENDE_FODSEL);
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || buildInitialValues(terminbekreftelseAp, manglendeFødselAp, soknad, familiehendelse),
@@ -113,11 +120,15 @@ const FodselInfoPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>{getHelpTexts(aksjonspunkter)}</AksjonspunktHelpTextTemp>
+      <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
+        {getHelpTexts(aksjonspunkter)}
+      </AksjonspunktHelpTextTemp>
       <VerticalSpacer sixteenPx />
       <Form
         formMethods={formMethods}
-        onSubmit={(values) => submitCallback(transformValues(values, terminbekreftelseAp, manglendeFødselAp, familiehendelse))}
+        onSubmit={values =>
+          submitCallback(transformValues(values, terminbekreftelseAp, manglendeFødselAp, familiehendelse))
+        }
         setDataOnUnmount={setFormData}
       >
         {hasAksjonspunkt(TERMINBEKREFTELSE, aksjonspunkter) && (

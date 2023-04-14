@@ -1,5 +1,9 @@
 import {
-  VilkarType, AksjonspunktStatus, BehandlingType, BehandlingStatus, VilkarUtfallType,
+  VilkarType,
+  AksjonspunktStatus,
+  BehandlingType,
+  BehandlingStatus,
+  VilkarUtfallType,
 } from '@navikt/ft-kodeverk';
 import { Behandling } from '@navikt/ft-types';
 
@@ -17,20 +21,24 @@ describe('<readOnlyUtils>', () => {
     behandlingHenlagt: false,
   };
 
-  const aksjonspunkter = [{
-    status: AksjonspunktStatus.OPPRETTET,
-    definisjon: AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-    kanLoses: true,
-    toTrinnsBehandling: true,
-    toTrinnsBehandlingGodkjent: false,
-  }];
+  const aksjonspunkter = [
+    {
+      status: AksjonspunktStatus.OPPRETTET,
+      definisjon: AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+      kanLoses: true,
+      toTrinnsBehandling: true,
+      toTrinnsBehandlingGodkjent: false,
+    },
+  ];
 
-  const vilkar = [{
-    vilkarType: VilkarType.FODSELSVILKARET_MOR,
-    vilkarStatus: VilkarUtfallType.OPPFYLT,
-    overstyrbar: true,
-    merknadParametere: {},
-  }];
+  const vilkar = [
+    {
+      vilkarType: VilkarType.FODSELSVILKARET_MOR,
+      vilkarStatus: VilkarUtfallType.OPPFYLT,
+      overstyrbar: true,
+      merknadParametere: {},
+    },
+  ];
 
   const rettigheter = {
     writeAccess: {
@@ -101,16 +109,24 @@ describe('<readOnlyUtils>', () => {
       },
     };
     const hasFetchError = false;
-    const readOnly = erReadOnly(behandlingMedReadOnly as Behandling, aksjonspunkter, vilkar, rettigheter, hasFetchError);
+    const readOnly = erReadOnly(
+      behandlingMedReadOnly as Behandling,
+      aksjonspunkter,
+      vilkar,
+      rettigheter,
+      hasFetchError,
+    );
 
     expect(readOnly).toBe(true);
   });
 
   it('skal være readonly når en har minst ett ikke overstyrbart vilkar', () => {
-    const nyeVilkar = [{
-      ...vilkar[0],
-      overstyrbar: false,
-    }];
+    const nyeVilkar = [
+      {
+        ...vilkar[0],
+        overstyrbar: false,
+      },
+    ];
     const hasFetchError = false;
     const readOnly = erReadOnly(behandling as Behandling, aksjonspunkter, nyeVilkar, rettigheter, hasFetchError);
 

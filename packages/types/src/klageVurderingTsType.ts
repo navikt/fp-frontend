@@ -6,7 +6,7 @@ export type KlageVurderingResultat = Readonly<{
   klageVurderingOmgjoer?: string;
   klageHjemmel?: string;
   begrunnelse?: string;
-}>
+}>;
 
 type KlageVurdering = Readonly<{
   klageVurderingResultatNK?: KlageVurderingResultat;
@@ -34,6 +34,6 @@ type KlageVurdering = Readonly<{
   aktuelleHjemler?: string[];
   underBehandlingKabal?: boolean;
   behandletAvKabal?: boolean;
-}>
+}>;
 
 export default KlageVurdering;

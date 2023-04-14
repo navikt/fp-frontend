@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, useCallback, useMemo, useState,
-} from 'react';
+import React, { FunctionComponent, useCallback, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import { SupportMenySakIndex, SupportTabs } from '@navikt/ft-sak-support-meny';
@@ -19,8 +17,8 @@ import ErrorBoundary from '../app/ErrorBoundary';
 
 import styles from './behandlingSupportIndex.module.css';
 
-export const hentSynligePaneler = (behandlingTillatteOperasjoner?: BehandlingTillatteOperasjoner): string[] => Object.values(SupportTabs)
-  .filter((supportPanel) => {
+export const hentSynligePaneler = (behandlingTillatteOperasjoner?: BehandlingTillatteOperasjoner): string[] =>
+  Object.values(SupportTabs).filter(supportPanel => {
     switch (supportPanel) {
       case SupportTabs.TIL_BESLUTTER:
         return behandlingTillatteOperasjoner && behandlingTillatteOperasjoner.behandlingTilGodkjenning;
@@ -32,11 +30,15 @@ export const hentSynligePaneler = (behandlingTillatteOperasjoner?: BehandlingTil
   });
 
 export const hentValgbarePaneler = (
-  synligePaneler: string[], sendMeldingErRelevant: boolean, behandlingTillatteOperasjoner?: BehandlingTillatteOperasjoner,
-): string[] => synligePaneler
-  .filter((supportPanel) => {
+  synligePaneler: string[],
+  sendMeldingErRelevant: boolean,
+  behandlingTillatteOperasjoner?: BehandlingTillatteOperasjoner,
+): string[] =>
+  synligePaneler.filter(supportPanel => {
     if (supportPanel === SupportTabs.MELDINGER) {
-      return behandlingTillatteOperasjoner && sendMeldingErRelevant ? behandlingTillatteOperasjoner.behandlingKanSendeMelding : false;
+      return behandlingTillatteOperasjoner && sendMeldingErRelevant
+        ? behandlingTillatteOperasjoner.behandlingKanSendeMelding
+        : false;
     }
     return true;
   });
@@ -53,11 +55,7 @@ interface OwnProps {
  * Har ansvar for å lage navigasjonsrad med korrekte navigasjonsvalg, og route til rett
  * støttepanelkomponent ihht. gitt parameter i URL-en.
  */
-const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
-  fagsakData,
-  behandlingUuid,
-  behandlingVersjon,
-}) => {
+const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({ fagsakData, behandlingUuid, behandlingVersjon }) => {
   const intl = useIntl();
 
   const { selected: valgtSupportPanel, location } = useTrackRouteParam<string>({
@@ -79,19 +77,28 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   const behandlingTillatteOperasjoner = behandling?.behandlingTillatteOperasjoner;
   const erSendMeldingRelevant = fagsakData && !erPaVent;
 
-  const synligeSupportPaneler = useMemo(() => hentSynligePaneler(behandlingTillatteOperasjoner),
-    [behandlingTillatteOperasjoner]);
-  const valgbareSupportPaneler = useMemo(() => hentValgbarePaneler(synligeSupportPaneler, erSendMeldingRelevant, behandlingTillatteOperasjoner),
-    [synligeSupportPaneler, erSendMeldingRelevant, behandlingTillatteOperasjoner]);
+  const synligeSupportPaneler = useMemo(
+    () => hentSynligePaneler(behandlingTillatteOperasjoner),
+    [behandlingTillatteOperasjoner],
+  );
+  const valgbareSupportPaneler = useMemo(
+    () => hentValgbarePaneler(synligeSupportPaneler, erSendMeldingRelevant, behandlingTillatteOperasjoner),
+    [synligeSupportPaneler, erSendMeldingRelevant, behandlingTillatteOperasjoner],
+  );
 
   const defaultSupportPanel = valgbareSupportPaneler.find(() => true) || SupportTabs.HISTORIKK;
-  const aktivtSupportPanel = valgbareSupportPaneler.includes(valgtSupportPanel) ? valgtSupportPanel : defaultSupportPanel;
+  const aktivtSupportPanel = valgbareSupportPaneler.includes(valgtSupportPanel)
+    ? valgtSupportPanel
+    : defaultSupportPanel;
 
-  const changeRouteCallback = useCallback((index) => {
-    const supportPanel = synligeSupportPaneler[index];
-    const getSupportPanelLocation = getSupportPanelLocationCreator(location);
-    navigate(getSupportPanelLocation(supportPanel));
-  }, [location, synligeSupportPaneler]);
+  const changeRouteCallback = useCallback(
+    index => {
+      const supportPanel = synligeSupportPaneler[index];
+      const getSupportPanelLocation = getSupportPanelLocationCreator(location);
+      navigate(getSupportPanelLocation(supportPanel));
+    },
+    [location, synligeSupportPaneler],
+  );
 
   return (
     <>
@@ -99,7 +106,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
         <SupportMenySakIndex
           tilgjengeligeTabs={synligeSupportPaneler}
           valgbareTabs={valgbareSupportPaneler}
-          valgtIndex={synligeSupportPaneler.findIndex((p) => p === aktivtSupportPanel)}
+          valgtIndex={synligeSupportPaneler.findIndex(p => p === aktivtSupportPanel)}
           onClick={changeRouteCallback}
         />
       </div>
@@ -107,15 +114,16 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
         errorMessageCallback={addErrorMessage}
         errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Support' })}
       >
-        <div className={(aktivtSupportPanel === SupportTabs.HISTORIKK ? styles.containerHistorikk : styles.container)}>
-          {behandling && (aktivtSupportPanel === SupportTabs.TIL_BESLUTTER || aktivtSupportPanel === SupportTabs.FRA_BESLUTTER) && (
-            <TotrinnskontrollIndex
-              fagsakData={fagsakData}
-              valgtBehandlingUuid={behandlingUuid}
-              beslutterFormData={beslutterFormData}
-              setBeslutterForData={setBeslutterForData}
-            />
-          )}
+        <div className={aktivtSupportPanel === SupportTabs.HISTORIKK ? styles.containerHistorikk : styles.container}>
+          {behandling &&
+            (aktivtSupportPanel === SupportTabs.TIL_BESLUTTER || aktivtSupportPanel === SupportTabs.FRA_BESLUTTER) && (
+              <TotrinnskontrollIndex
+                fagsakData={fagsakData}
+                valgtBehandlingUuid={behandlingUuid}
+                beslutterFormData={beslutterFormData}
+                setBeslutterForData={setBeslutterForData}
+              />
+            )}
           {aktivtSupportPanel === SupportTabs.HISTORIKK && (
             <HistorikkIndex
               saksnummer={fagsak.saksnummer}

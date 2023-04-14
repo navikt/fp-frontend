@@ -13,7 +13,8 @@ const behandlingstypeOrder = [
   BehandlingType.DOKUMENTINNSYN,
   BehandlingType.KLAGE,
   BehandlingType.REVURDERING,
-  BehandlingType.FORSTEGANGSSOKNAD];
+  BehandlingType.FORSTEGANGSSOKNAD,
+];
 
 interface OwnProps {
   height: number;
@@ -30,32 +31,44 @@ const NyeOgFerdigstilteOppgaverForIdagGraf: FunctionComponent<OwnProps> = ({
   behandlingTyper,
 }) => {
   const intl = useIntl();
-  const behandlingTypeNavnForYAkse = useMemo(() => behandlingstypeOrder.map((bType) => {
-    if (bType === BehandlingType.FORSTEGANGSSOKNAD) {
-      return intl.formatMessage({ id: 'NyeOgFerdigstilteOppgaverForIdagGraf.Førstegangsbehandling' });
-    }
+  const behandlingTypeNavnForYAkse = useMemo(
+    () =>
+      behandlingstypeOrder.map(bType => {
+        if (bType === BehandlingType.FORSTEGANGSSOKNAD) {
+          return intl.formatMessage({ id: 'NyeOgFerdigstilteOppgaverForIdagGraf.Førstegangsbehandling' });
+        }
 
-    const type = behandlingTyper.find((bt) => bt.kode === bType);
-    return type ? type.navn : '';
-  }), [behandlingTyper]);
+        const type = behandlingTyper.find(bt => bt.kode === bType);
+        return type ? type.navn : '';
+      }),
+    [behandlingTyper],
+  );
 
   const ferdigLabel = intl.formatMessage({ id: 'NyeOgFerdigstilteOppgaverForIdagGraf.Ferdigstilte' });
   const nyLabel = intl.formatMessage({ id: 'NyeOgFerdigstilteOppgaverForIdagGraf.Nye' });
 
-  const dataFerdigstilte = useMemo(() => behandlingstypeOrder.map((type) => {
-    const oppgave = nyeOgFerdigstilteOppgaver.find((o) => o.behandlingType === type);
-    if (oppgave) {
-      return oppgave.antallFerdigstilte;
-    }
-    return 0;
-  }), [nyeOgFerdigstilteOppgaver]);
-  const dataNye = useMemo(() => behandlingstypeOrder.map((type) => {
-    const oppgave = nyeOgFerdigstilteOppgaver.find((o) => o.behandlingType === type);
-    if (oppgave) {
-      return oppgave.antallNye;
-    }
-    return 0;
-  }), [nyeOgFerdigstilteOppgaver]);
+  const dataFerdigstilte = useMemo(
+    () =>
+      behandlingstypeOrder.map(type => {
+        const oppgave = nyeOgFerdigstilteOppgaver.find(o => o.behandlingType === type);
+        if (oppgave) {
+          return oppgave.antallFerdigstilte;
+        }
+        return 0;
+      }),
+    [nyeOgFerdigstilteOppgaver],
+  );
+  const dataNye = useMemo(
+    () =>
+      behandlingstypeOrder.map(type => {
+        const oppgave = nyeOgFerdigstilteOppgaver.find(o => o.behandlingType === type);
+        if (oppgave) {
+          return oppgave.antallNye;
+        }
+        return 0;
+      }),
+    [nyeOgFerdigstilteOppgaver],
+  );
 
   return (
     <Panel>

@@ -3,20 +3,23 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 
 import {
-  aksjonspunktStatus, behandlingResultatType, klageVurdering as klageVurderingCodes, AksjonspunktCode,
+  aksjonspunktStatus,
+  behandlingResultatType,
+  klageVurdering as klageVurderingCodes,
+  AksjonspunktCode,
 } from '@navikt/fp-kodeverk';
-import {
-  Aksjonspunkt, Behandling, KlageVurdering, KlageVurderingResultat,
-} from '@navikt/fp-types';
+import { Aksjonspunkt, Behandling, KlageVurdering, KlageVurderingResultat } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import VedtakKlageProsessIndex from './VedtakKlageProsessIndex';
 
-const promiseAction = () => (...args) => {
-  action('button-click')(...args);
-  return Promise.resolve();
-};
+const promiseAction =
+  () =>
+  (...args) => {
+    action('button-click')(...args);
+    return Promise.resolve();
+  };
 
 const behandling = {
   uuid: '1',
@@ -27,11 +30,13 @@ const behandling = {
   behandlingPaaVent: false,
 } as Behandling;
 
-const aksjonspunkter = [{
-  definisjon: AksjonspunktCode.FORESLA_VEDTAK,
-  status: aksjonspunktStatus.OPPRETTET,
-  begrunnelse: undefined,
-}] as Aksjonspunkt[];
+const aksjonspunkter = [
+  {
+    definisjon: AksjonspunktCode.FORESLA_VEDTAK,
+    status: aksjonspunktStatus.OPPRETTET,
+    begrunnelse: undefined,
+  },
+] as Aksjonspunkt[];
 
 export default {
   title: 'prosess/klage/prosess-vedtak-klage',
@@ -41,12 +46,8 @@ export default {
 const Template: Story<{
   submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
   previewVedtakCallback: () => Promise<void>;
-  klageVurdering: KlageVurdering,
-}> = ({
-  submitCallback,
-  previewVedtakCallback,
-  klageVurdering,
-}) => (
+  klageVurdering: KlageVurdering;
+}> = ({ submitCallback, previewVedtakCallback, klageVurdering }) => (
   <VedtakKlageProsessIndex
     behandling={behandling}
     alleKodeverk={alleKodeverk as any}

@@ -1,6 +1,4 @@
-import {
-  RestApiConfigBuilder, createRequestApi, RestKey,
-} from '@navikt/fp-rest-api';
+import { RestApiConfigBuilder, createRequestApi, RestKey } from '@navikt/fp-rest-api';
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import JournalførSubmitValue from '../typer/ferdigstillJournalføringSubmit';
 import Journalpost from '../typer/journalpostTsType';

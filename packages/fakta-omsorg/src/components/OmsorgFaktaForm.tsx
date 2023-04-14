@@ -13,20 +13,18 @@ import styles from './omsorgFaktaForm.module.css';
 
 const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = AksjonspunktCode;
 
-const getAksjonspunkt = (
-  aksjonspunktCode: string,
-  aksjonspunkter: Aksjonspunkt[],
-): Aksjonspunkt[] => aksjonspunkter.filter((ap) => ap.definisjon === aksjonspunktCode);
+const getAksjonspunkt = (aksjonspunktCode: string, aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt[] =>
+  aksjonspunkter.filter(ap => ap.definisjon === aksjonspunktCode);
 
 export type FormValues = {
   omsorg?: boolean;
-}
+};
 
 interface OwnProps {
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
   className?: string;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
 interface StaticFunctions {
@@ -56,18 +54,23 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
             validate={[required]}
             isReadOnly={readOnly}
             isTrueOrFalseSelection
-            radios={[{
-              label: intl.formatMessage({ id: 'OmsorgFaktaForm.HarOmsorg' }),
-              value: 'true',
-            }, {
-              label: <FormattedMessage
-                id="OmsorgFaktaForm.HarIkkeOmsorg"
-                values={{
-                  b: (chunks: any) => <b>{chunks}</b>,
-                }}
-              />,
-              value: 'false',
-            }]}
+            radios={[
+              {
+                label: intl.formatMessage({ id: 'OmsorgFaktaForm.HarOmsorg' }),
+                value: 'true',
+              },
+              {
+                label: (
+                  <FormattedMessage
+                    id="OmsorgFaktaForm.HarIkkeOmsorg"
+                    values={{
+                      b: (chunks: any) => <b>{chunks}</b>,
+                    }}
+                  />
+                ),
+                value: 'false',
+              },
+            ]}
           />
         </FaktaGruppe>
       )}

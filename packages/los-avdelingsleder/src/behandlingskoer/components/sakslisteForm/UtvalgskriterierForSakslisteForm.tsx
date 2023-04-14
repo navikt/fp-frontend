@@ -1,17 +1,9 @@
-import React, {
-  FunctionComponent, useEffect, useCallback, useMemo,
-} from 'react';
+import React, { FunctionComponent, useEffect, useCallback, useMemo } from 'react';
 import { useIntl, FormattedMessage, IntlShape } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import {
-  Heading, BodyShort, Panel,
-} from '@navikt/ds-react';
-import {
-  required, minLength, maxLength, hasValidName,
-} from '@navikt/ft-form-validators';
-import {
-  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { Heading, BodyShort, Panel } from '@navikt/ds-react';
+import { required, minLength, maxLength, hasValidName } from '@navikt/ft-form-validators';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form, InputField } from '@navikt/ft-form-hooks';
 
 import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosRestApi';
@@ -28,7 +20,7 @@ const minLength3 = minLength(3);
 const maxLength100 = maxLength(100);
 
 type FormValues = {
-  sakslisteId: number
+  sakslisteId: number;
   navn: string;
   sortering?: string;
   erDynamiskPeriode?: boolean;
@@ -36,20 +28,31 @@ type FormValues = {
   til?: string;
   fomDato?: string;
   tomDato?: string;
-}
+};
 
 const buildInitialValues = (intl: IntlShape, valgtSaksliste: Saksliste): FormValues => {
-  const behandlingTypes = valgtSaksliste.behandlingTyper ? valgtSaksliste.behandlingTyper.reduce((acc, bt) => ({ ...acc, [bt]: true }), {}) : {};
-  const fagsakYtelseTypes = valgtSaksliste.fagsakYtelseTyper ? valgtSaksliste.fagsakYtelseTyper.reduce((acc, fyt) => ({ ...acc, [fyt]: true }), {}) : {};
+  const behandlingTypes = valgtSaksliste.behandlingTyper
+    ? valgtSaksliste.behandlingTyper.reduce((acc, bt) => ({ ...acc, [bt]: true }), {})
+    : {};
+  const fagsakYtelseTypes = valgtSaksliste.fagsakYtelseTyper
+    ? valgtSaksliste.fagsakYtelseTyper.reduce((acc, fyt) => ({ ...acc, [fyt]: true }), {})
+    : {};
 
   const andreKriterierTyper = valgtSaksliste.andreKriterier
-    ? valgtSaksliste.andreKriterier.reduce((acc, ak) => ({ ...acc, [ak.andreKriterierType]: true }), {}) : {};
+    ? valgtSaksliste.andreKriterier.reduce((acc, ak) => ({ ...acc, [ak.andreKriterierType]: true }), {})
+    : {};
   const andreKriterierInkluder = valgtSaksliste.andreKriterier
-    ? valgtSaksliste.andreKriterier.reduce((acc, ak) => ({ ...acc, [`${ak.andreKriterierType}_inkluder`]: ak.inkluder }), {}) : {};
+    ? valgtSaksliste.andreKriterier.reduce(
+        (acc, ak) => ({ ...acc, [`${ak.andreKriterierType}_inkluder`]: ak.inkluder }),
+        {},
+      )
+    : {};
 
   return {
     sakslisteId: valgtSaksliste.sakslisteId,
-    navn: valgtSaksliste.navn ? valgtSaksliste.navn : intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.NyListe' }),
+    navn: valgtSaksliste.navn
+      ? valgtSaksliste.navn
+      : intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.NyListe' }),
     sortering: valgtSaksliste.sortering ? valgtSaksliste.sortering.sorteringType : undefined,
     fomDato: valgtSaksliste.sortering ? valgtSaksliste.sortering.fomDato : undefined,
     tomDato: valgtSaksliste.sortering ? valgtSaksliste.sortering.tomDato : undefined,
@@ -66,8 +69,8 @@ const buildInitialValues = (intl: IntlShape, valgtSaksliste: Saksliste): FormVal
 interface OwnProps {
   valgtSaksliste: Saksliste;
   valgtAvdelingEnhet: string;
-  hentAvdelingensSakslister: (params: {avdelingEnhet: string}) => void;
-  hentOppgaverForAvdelingAntall: (params: {avdelingEnhet: string}) => void;
+  hentAvdelingensSakslister: (params: { avdelingEnhet: string }) => void;
+  hentOppgaverForAvdelingAntall: (params: { avdelingEnhet: string }) => void;
 }
 
 /**
@@ -80,8 +83,9 @@ const UtvalgskriterierForSakslisteForm: FunctionComponent<OwnProps> = ({
   hentOppgaverForAvdelingAntall,
 }) => {
   const intl = useIntl();
-  const { data: antallOppgaver, startRequest: hentAntallOppgaverForSaksliste } = restApiHooks
-    .useRestApiRunner(RestApiPathsKeys.OPPGAVE_ANTALL);
+  const { data: antallOppgaver, startRequest: hentAntallOppgaverForSaksliste } = restApiHooks.useRestApiRunner(
+    RestApiPathsKeys.OPPGAVE_ANTALL,
+  );
   useEffect(() => {
     hentAntallOppgaverForSaksliste({ sakslisteId: valgtSaksliste.sakslisteId, avdelingEnhet: valgtAvdelingEnhet });
   }, [valgtSaksliste.sakslisteId]);
@@ -93,10 +97,16 @@ const UtvalgskriterierForSakslisteForm: FunctionComponent<OwnProps> = ({
 
   const { startRequest: lagreSakslisteNavn } = restApiHooks.useRestApiRunner(RestApiPathsKeys.LAGRE_SAKSLISTE_NAVN);
 
-  const tranformValues = useCallback((nyttNavn: string): void => {
-    lagreSakslisteNavn({ sakslisteId: valgtSaksliste.sakslisteId, navn: nyttNavn, avdelingEnhet: valgtAvdelingEnhet })
-      .then(() => hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet }));
-  }, [valgtAvdelingEnhet, valgtSaksliste]);
+  const tranformValues = useCallback(
+    (nyttNavn: string): void => {
+      lagreSakslisteNavn({
+        sakslisteId: valgtSaksliste.sakslisteId,
+        navn: nyttNavn,
+        avdelingEnhet: valgtAvdelingEnhet,
+      }).then(() => hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet }));
+    },
+    [valgtAvdelingEnhet, valgtSaksliste],
+  );
 
   const defaultValues = useMemo(() => buildInitialValues(intl, valgtSaksliste), [valgtSaksliste]);
 
@@ -128,7 +138,9 @@ const UtvalgskriterierForSakslisteForm: FunctionComponent<OwnProps> = ({
             </FlexColumn>
             <FlexColumn className={styles.colRight}>
               <div className={styles.grayBox}>
-                <BodyShort size="small"><FormattedMessage id="UtvalgskriterierForSakslisteForm.AntallSaker" /></BodyShort>
+                <BodyShort size="small">
+                  <FormattedMessage id="UtvalgskriterierForSakslisteForm.AntallSaker" />
+                </BodyShort>
                 <Heading size="small">{antallOppgaver ? `${antallOppgaver}` : '0'}</Heading>
               </div>
             </FlexColumn>

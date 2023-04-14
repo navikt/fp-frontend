@@ -8,9 +8,7 @@ interface OwnProps {
   arbeidsforhold: AoIArbeidsforhold;
 }
 
-const PermisjonPeriode: FunctionComponent<OwnProps> = ({
-  arbeidsforhold,
-}) => {
+const PermisjonPeriode: FunctionComponent<OwnProps> = ({ arbeidsforhold }) => {
   if (arbeidsforhold.permisjonOgMangel) {
     return (
       <>
@@ -21,7 +19,9 @@ const PermisjonPeriode: FunctionComponent<OwnProps> = ({
         <BodyShort size="small">
           <PeriodLabel
             dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom}
-            dateStringTom={arbeidsforhold.permisjonOgMangel.permisjonTom ? arbeidsforhold.permisjonOgMangel.permisjonTom : ''}
+            dateStringTom={
+              arbeidsforhold.permisjonOgMangel.permisjonTom ? arbeidsforhold.permisjonOgMangel.permisjonTom : ''
+            }
           />
         </BodyShort>
         <VerticalSpacer sixteenPx />

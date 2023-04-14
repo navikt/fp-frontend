@@ -1,17 +1,16 @@
-import React, {
-  FunctionComponent, ReactElement, ReactNode, useMemo,
-} from 'react';
+import React, { FunctionComponent, ReactElement, ReactNode, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
-import {
-  CheckboxField, formHooks, InputField, RadioGroupPanel, SelectField,
-} from '@navikt/ft-form-hooks';
+import { CheckboxField, formHooks, InputField, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 import { kanIkkeOppgiAnnenForelderArsak, KodeverkType, landkoder as Landkode } from '@navikt/fp-kodeverk';
 import {
-  hasValidFodselsnummer, hasValidFodselsnummerFormat, required, sammeFodselsnummerSomSokerMessage,
+  hasValidFodselsnummer,
+  hasValidFodselsnummerFormat,
+  required,
+  sammeFodselsnummerSomSokerMessage,
 } from '@navikt/ft-form-validators';
 
 import styles from './annenForelderPanel.module.css';
@@ -19,14 +18,14 @@ import styles from './annenForelderPanel.module.css';
 const ANNEN_FORELDER_NAME_PREFIX = 'annenForelder';
 const KAN_IKKE_OPPGI_NAME_PREFIX = 'kanIkkeOppgiBegrunnelse';
 
-const filtrerLandOgLagOptions = (landkoder: KodeverkMedNavn[]): ReactElement[] => landkoder
-  .filter(({
-    kode,
-  }) => kode !== Landkode.NORGE)
-  .map(({
-    kode,
-    navn,
-  }) => <option value={kode} key={kode}>{navn}</option>);
+const filtrerLandOgLagOptions = (landkoder: KodeverkMedNavn[]): ReactElement[] =>
+  landkoder
+    .filter(({ kode }) => kode !== Landkode.NORGE)
+    .map(({ kode, navn }) => (
+      <option value={kode} key={kode}>
+        {navn}
+      </option>
+    ));
 
 interface OwnProps {
   readOnly?: boolean;
@@ -43,7 +42,7 @@ export type FormValues = {
     utenlandskFoedselsnummer: string;
   };
   foedselsnummer?: string;
-}
+};
 
 /*
  * AnnenForelderForm
@@ -58,7 +57,11 @@ const AnnenForelderPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const { formatMessage } = useIntl();
 
-  const { watch, trigger, formState: { isSubmitted } } = formHooks.useFormContext<{ [ANNEN_FORELDER_NAME_PREFIX]: FormValues }>();
+  const {
+    watch,
+    trigger,
+    formState: { isSubmitted },
+  } = formHooks.useFormContext<{ [ANNEN_FORELDER_NAME_PREFIX]: FormValues }>();
 
   const kanIkkeOppgiAnnenForelder = watch(`${ANNEN_FORELDER_NAME_PREFIX}.kanIkkeOppgiAnnenForelder`);
   const kanIkkeOppgiBegrunnelse = watch(`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}`);
@@ -78,12 +81,16 @@ const AnnenForelderPanel: FunctionComponent<OwnProps> = ({
         parse={(value: string) => (value ? value.replace(/\s/g, '') : value)}
         readOnly={readOnly}
         className={styles.inputBredde}
-        validate={kanIkkeOppgiAnnenForelder ? [] : [
-          required,
-          hasValidFodselsnummerFormat,
-          hasValidFodselsnummer,
-          (foedselsnummer) => (foedselsnummer === fagsakPersonnummer ? sammeFodselsnummerSomSokerMessage() : null),
-        ]}
+        validate={
+          kanIkkeOppgiAnnenForelder
+            ? []
+            : [
+                required,
+                hasValidFodselsnummerFormat,
+                hasValidFodselsnummer,
+                foedselsnummer => (foedselsnummer === fagsakPersonnummer ? sammeFodselsnummerSomSokerMessage() : null),
+              ]
+        }
         disabled={kanIkkeOppgiAnnenForelder}
       />
       <VerticalSpacer sixteenPx />
@@ -97,40 +104,47 @@ const AnnenForelderPanel: FunctionComponent<OwnProps> = ({
         <>
           <VerticalSpacer eightPx />
           <ArrowBox>
-            <Heading size="small">{formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.Title' })}</Heading>
+            <Heading size="small">
+              {formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.Title' })}
+            </Heading>
             <RadioGroupPanel
               name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.arsak`}
               hideLegend
               validate={[required]}
               isReadOnly={readOnly}
-              radios={[{
-                label: formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.1' }),
-                value: kanIkkeOppgiAnnenForelderArsak.UKJENT_FORELDER,
-              }, {
-                label: formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.2' }),
-                value: kanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR,
-              }]}
+              radios={[
+                {
+                  label: formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.1' }),
+                  value: kanIkkeOppgiAnnenForelderArsak.UKJENT_FORELDER,
+                },
+                {
+                  label: formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.2' }),
+                  value: kanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR,
+                },
+              ]}
             />
             {kanIkkeOppgiBegrunnelse?.arsak === kanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR && (
-            <>
-              <VerticalSpacer sixteenPx />
-              <SelectField
-                name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.land`}
-                label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Land' })}
-                selectValues={filtrerLandOgLagOptions(sorterteLand)}
-                validate={[required]}
-                className={styles.inputBredde}
-                readOnly={readOnly}
-              />
-              <VerticalSpacer sixteenPx />
-              <InputField
-                name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.utenlandskFoedselsnummer`}
-                label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.UtenlandsFodselsnummer' })}
-                validate={[required]}
-                className={styles.inputBredde}
-                readOnly={readOnly}
-              />
-            </>
+              <>
+                <VerticalSpacer sixteenPx />
+                <SelectField
+                  name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.land`}
+                  label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Land' })}
+                  selectValues={filtrerLandOgLagOptions(sorterteLand)}
+                  validate={[required]}
+                  className={styles.inputBredde}
+                  readOnly={readOnly}
+                />
+                <VerticalSpacer sixteenPx />
+                <InputField
+                  name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.utenlandskFoedselsnummer`}
+                  label={formatMessage({
+                    id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.UtenlandsFodselsnummer',
+                  })}
+                  validate={[required]}
+                  className={styles.inputBredde}
+                  readOnly={readOnly}
+                />
+              </>
             )}
           </ArrowBox>
         </>

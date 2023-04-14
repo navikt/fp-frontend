@@ -41,9 +41,7 @@ describe('<BehandlingSupportIndex>', () => {
   };
 
   it('skal vise historikk-panelet som default', async () => {
-    const data = [
-      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
-    ];
+    const data = [{ key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } }];
 
     render(
       <RawIntlProvider value={intl}>
@@ -77,13 +75,7 @@ describe('<BehandlingSupportIndex>', () => {
 
       const accessiblePanels = hentSynligePaneler(behandlingRettigheter);
 
-      expect(accessiblePanels).toEqual([
-        'TIL_BESLUTTER',
-        'FRA_BESLUTTER',
-        'HISTORIKK',
-        'MELDINGER',
-        'DOKUMENTER',
-      ]);
+      expect(accessiblePanels).toEqual(['TIL_BESLUTTER', 'FRA_BESLUTTER', 'HISTORIKK', 'MELDINGER', 'DOKUMENTER']);
     });
 
     it('skal kunne aksessere kun supportpanelene som alltid vises; historikk og dokumenter', () => {
@@ -101,23 +93,13 @@ describe('<BehandlingSupportIndex>', () => {
 
       const accessiblePanels = hentSynligePaneler(behandlingRettigheter);
 
-      expect(accessiblePanels).toEqual([
-        'HISTORIKK',
-        'MELDINGER',
-        'DOKUMENTER',
-      ]);
+      expect(accessiblePanels).toEqual(['HISTORIKK', 'MELDINGER', 'DOKUMENTER']);
     });
   });
 
   describe('hentValgbarePaneler', () => {
     it('skal vise alle support-panelene som valgbare', () => {
-      const accessibleSupportPanels = [
-        'TIL_BESLUTTER',
-        'FRA_BESLUTTER',
-        'HISTORIKK',
-        'MELDINGER',
-        'DOKUMENTER',
-      ];
+      const accessibleSupportPanels = ['TIL_BESLUTTER', 'FRA_BESLUTTER', 'HISTORIKK', 'MELDINGER', 'DOKUMENTER'];
       const sendMessageIsRelevant = true;
 
       const behandlingRettigheter = {
@@ -134,23 +116,11 @@ describe('<BehandlingSupportIndex>', () => {
 
       const enabledPanels = hentValgbarePaneler(accessibleSupportPanels, sendMessageIsRelevant, behandlingRettigheter);
 
-      expect(enabledPanels).toEqual([
-        'TIL_BESLUTTER',
-        'FRA_BESLUTTER',
-        'HISTORIKK',
-        'MELDINGER',
-        'DOKUMENTER',
-      ]);
+      expect(enabledPanels).toEqual(['TIL_BESLUTTER', 'FRA_BESLUTTER', 'HISTORIKK', 'MELDINGER', 'DOKUMENTER']);
     });
 
     it('skal ikke vise meldingspanel som valgbart', () => {
-      const accessibleSupportPanels = [
-        'TIL_BESLUTTER',
-        'FRA_BESLUTTER',
-        'HISTORIKK',
-        'MELDINGER',
-        'DOKUMENTER',
-      ];
+      const accessibleSupportPanels = ['TIL_BESLUTTER', 'FRA_BESLUTTER', 'HISTORIKK', 'MELDINGER', 'DOKUMENTER'];
       const sendMessageIsRelevant = false;
       const behandlingRettigheter = {
         behandlingFraBeslutter: false,
@@ -166,12 +136,7 @@ describe('<BehandlingSupportIndex>', () => {
 
       const enabledPanels = hentValgbarePaneler(accessibleSupportPanels, sendMessageIsRelevant, behandlingRettigheter);
 
-      expect(enabledPanels).toEqual([
-        'TIL_BESLUTTER',
-        'FRA_BESLUTTER',
-        'HISTORIKK',
-        'DOKUMENTER',
-      ]);
+      expect(enabledPanels).toEqual(['TIL_BESLUTTER', 'FRA_BESLUTTER', 'HISTORIKK', 'DOKUMENTER']);
     });
   });
 });

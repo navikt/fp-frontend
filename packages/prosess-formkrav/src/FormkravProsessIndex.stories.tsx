@@ -15,11 +15,13 @@ const behandling = {
   sprakkode: 'NO',
 } as Behandling;
 
-const avsluttedeBehandlinger = [{
-  uuid: '1',
-  type: behandlingType.FORSTEGANGSSOKNAD,
-  avsluttet: '2017-08-02T00:54:25.455',
-}];
+const avsluttedeBehandlinger = [
+  {
+    uuid: '1',
+    type: behandlingType.FORSTEGANGSSOKNAD,
+    avsluttet: '2017-08-02T00:54:25.455',
+  },
+];
 
 export default {
   title: 'prosess/klage/prosess-formkrav',
@@ -30,11 +32,7 @@ const Template: Story<{
   klageVurdering: KlageVurdering;
   submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
   aksjonspunkter: Aksjonspunkt[];
-}> = ({
-  klageVurdering,
-  submitCallback,
-  aksjonspunkter,
-}) => (
+}> = ({ klageVurdering, submitCallback, aksjonspunkter }) => (
   <FormkravProsessIndex
     behandling={behandling}
     klageVurdering={klageVurdering}
@@ -62,9 +60,11 @@ FormkravPanelForAksjonspunktNfp.args = {
       fritekstTilBrev: 'test',
     },
   } as KlageVurdering,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_NFP,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_NFP,
+    },
+  ] as Aksjonspunkt[],
 };
 
 export const FormkravPanelForAksjonspunktKaIkkePåklagd = Template.bind({});

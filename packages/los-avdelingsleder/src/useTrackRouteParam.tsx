@@ -10,9 +10,9 @@ const defaultConfig = {
 };
 
 interface Config {
-  paramName?: string,
-  parse?: (a: any) => any,
-  isQueryParam?: boolean,
+  paramName?: string;
+  parse?: (a: any) => any;
+  isQueryParam?: boolean;
 }
 
 const mapMatchToParam = (params: Params, location: Location, trackingConfig: Required<Config>) => {

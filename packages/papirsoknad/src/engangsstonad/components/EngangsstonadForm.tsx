@@ -6,7 +6,11 @@ import { omitOne } from '@navikt/ft-utils';
 import { AlleKodeverk } from '@navikt/fp-types';
 import { familieHendelseType } from '@navikt/fp-kodeverk';
 import {
-  SoknadData, MottattDatoPapirsoknadIndex, LagreSoknadPapirsoknadIndex, rettighet, MottattDatoFormValues,
+  SoknadData,
+  MottattDatoPapirsoknadIndex,
+  LagreSoknadPapirsoknadIndex,
+  rettighet,
+  MottattDatoFormValues,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
 
 import RegistreringAdopsjonOgOmsorgGrid, { FormValues as FormValuesAdopsjon } from './RegistreringAdopsjonOgOmsorgGrid';
@@ -66,7 +70,10 @@ const EngangsstonadForm: FunctionComponent<OwnProps> = ({
   const mottattDato = formMethods.watch('mottattDato');
 
   return (
-    <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values, erFødsel, erAdopsjon))}>
+    <Form
+      formMethods={formMethods}
+      onSubmit={(values: FormValues) => onSubmit(transformValues(values, erFødsel, erAdopsjon))}
+    >
       <MottattDatoPapirsoknadIndex readOnly={readOnly} />
       {erFødsel && (
         <RegistreringFodselGrid

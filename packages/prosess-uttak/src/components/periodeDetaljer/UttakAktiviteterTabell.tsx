@@ -1,15 +1,17 @@
-import React, {
-  FunctionComponent, ReactElement, useMemo,
-} from 'react';
+import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 import { formHooks, SelectField, NumberField } from '@navikt/ft-form-hooks';
 import {
-  hasValidDecimal, hasValidInteger, maxLength, maxValue, minValue, notDash, required,
+  hasValidDecimal,
+  hasValidInteger,
+  maxLength,
+  maxValue,
+  minValue,
+  notDash,
+  required,
 } from '@navikt/ft-form-validators';
-import {
-  FlexColumn, FlexContainer, FlexRow, Table, TableColumn, TableRow,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 
 import { uttakPeriodeType, uttakArbeidType as UttakArbeidType } from '@navikt/fp-kodeverk';
 import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, PeriodeSokerAktivitet } from '@navikt/fp-types';
@@ -37,19 +39,19 @@ export const finnArbeidsforholdNavnOgProsentArbeid = (
   aktivitet: PeriodeSokerAktivitet,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   intl: IntlShape,
-): { prosentArbeidText: string, arbeidsforhold: string } => {
-  const {
-    prosentArbeid, arbeidsgiverReferanse, eksternArbeidsforholdId, uttakArbeidType,
-  } = aktivitet;
+): { prosentArbeidText: string; arbeidsforhold: string } => {
+  const { prosentArbeid, arbeidsgiverReferanse, eksternArbeidsforholdId, uttakArbeidType } = aktivitet;
 
-  const prosentArbeidText = (typeof prosentArbeid !== 'undefined') ? `${prosentArbeid}%` : '';
+  const prosentArbeidText = typeof prosentArbeid !== 'undefined' ? `${prosentArbeid}%` : '';
   let arbeidsforhold;
   if (uttakArbeidType && uttakArbeidType !== UttakArbeidType.ORDINÆRT_ARBEID) {
     arbeidsforhold = intl.formatMessage({ id: uttakArbeidTypeTekstCodes[uttakArbeidType] });
   }
   if (arbeidsgiverReferanse) {
     const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
-    arbeidsforhold = arbeidsgiverOpplysninger ? lagVisningsNavn(arbeidsgiverOpplysninger, eksternArbeidsforholdId) : arbeidsgiverReferanse;
+    arbeidsforhold = arbeidsgiverOpplysninger
+      ? lagVisningsNavn(arbeidsgiverOpplysninger, eksternArbeidsforholdId)
+      : arbeidsgiverReferanse;
   }
   return {
     prosentArbeidText,
@@ -57,50 +59,41 @@ export const finnArbeidsforholdNavnOgProsentArbeid = (
   };
 };
 
-const sjekkOmUtbetalingsgradEr0OmAvslått = (
-  intl: IntlShape,
-  erOppfylt: boolean,
-  utsettelseType?: string,
-) => (
-  utbetalingsgrad: string,
-): string | null => {
-  const harUtsettelse = !erOppfylt && (!utsettelseType || utsettelseType === '-');
-  if (harUtsettelse && parseFloat(utbetalingsgrad) > 0) {
-    return intl.formatMessage({ id: 'RenderUttakTable.MerEnNullUtaksprosent' });
-  }
-  return null;
-};
+const sjekkOmUtbetalingsgradEr0OmAvslått =
+  (intl: IntlShape, erOppfylt: boolean, utsettelseType?: string) =>
+  (utbetalingsgrad: string): string | null => {
+    const harUtsettelse = !erOppfylt && (!utsettelseType || utsettelseType === '-');
+    if (harUtsettelse && parseFloat(utbetalingsgrad) > 0) {
+      return intl.formatMessage({ id: 'RenderUttakTable.MerEnNullUtaksprosent' });
+    }
+    return null;
+  };
 
-const sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent = (
-  intl: IntlShape,
-  getValues: UseFormGetValues<UttakAktivitetType>,
-) => (utbetalingsgrad: string): string | null => {
-  const samtidigUttak = getValues('samtidigUttak');
-  const samtidigUttaksprosent = getValues('samtidigUttaksprosent');
-  if (samtidigUttak && samtidigUttaksprosent < utbetalingsgrad) {
-    return intl.formatMessage({
-      id: 'ValidationMessage.utbetalingsgradErMerSamtidigUttaksprosent',
-    });
-  }
-  return null;
-};
+const sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent =
+  (intl: IntlShape, getValues: UseFormGetValues<UttakAktivitetType>) =>
+  (utbetalingsgrad: string): string | null => {
+    const samtidigUttak = getValues('samtidigUttak');
+    const samtidigUttaksprosent = getValues('samtidigUttaksprosent');
+    if (samtidigUttak && samtidigUttaksprosent < utbetalingsgrad) {
+      return intl.formatMessage({
+        id: 'ValidationMessage.utbetalingsgradErMerSamtidigUttaksprosent',
+      });
+    }
+    return null;
+  };
 
-const sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0 = (
-  intl: IntlShape,
-  getValues: UseFormGetValues<UttakAktivitetType>,
-  index: number,
-) => (utbetalingsgrad: string): string | null => {
-  const aktiviteter = getValues('aktiviteter');
-  const aktivitet = aktiviteter[index];
-  if (parseFloat(aktivitet.weeks) === 0
-    && parseFloat(aktivitet.days) === 0
-    && parseFloat(utbetalingsgrad) > 0) {
-    return intl.formatMessage({
-      id: 'ValidationMessage.ukerOgDagerVidNullUtbetalningsgradMessage',
-    });
-  }
-  return null;
-};
+const sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0 =
+  (intl: IntlShape, getValues: UseFormGetValues<UttakAktivitetType>, index: number) =>
+  (utbetalingsgrad: string): string | null => {
+    const aktiviteter = getValues('aktiviteter');
+    const aktivitet = aktiviteter[index];
+    if (parseFloat(aktivitet.weeks) === 0 && parseFloat(aktivitet.days) === 0 && parseFloat(utbetalingsgrad) > 0) {
+      return intl.formatMessage({
+        id: 'ValidationMessage.ukerOgDagerVidNullUtbetalningsgradMessage',
+      });
+    }
+    return null;
+  };
 
 const GYLDIGE_UTTAK_PERIODER = [
   uttakPeriodeType.FELLESPERIODE,
@@ -108,23 +101,19 @@ const GYLDIGE_UTTAK_PERIODER = [
   uttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
   uttakPeriodeType.FORELDREPENGER,
   uttakPeriodeType.MODREKVOTE,
-  uttakPeriodeType.UDEFINERT];
+  uttakPeriodeType.UDEFINERT,
+];
 
-const lagPeriodeTypeOptions = (typer: KodeverkMedNavn[]): ReactElement[] => typer
-  .filter(({
-    kode,
-  }) => GYLDIGE_UTTAK_PERIODER.includes(kode))
-  .map(({
-    kode,
-    navn,
-  }) => <option value={kode} key={kode}>{navn}</option>);
+const lagPeriodeTypeOptions = (typer: KodeverkMedNavn[]): ReactElement[] =>
+  typer
+    .filter(({ kode }) => GYLDIGE_UTTAK_PERIODER.includes(kode))
+    .map(({ kode, navn }) => (
+      <option value={kode} key={kode}>
+        {navn}
+      </option>
+    ));
 
-const validerUkerOgDager = (
-  getValues: UseFormGetValues<UttakAktivitetType>,
-  index: number,
-) => (
-  value: string,
-) => {
+const validerUkerOgDager = (getValues: UseFormGetValues<UttakAktivitetType>, index: number) => (value: string) => {
   const weeks = getValues(`aktiviteter.${index}.weeks`);
   const days = getValues(`aktiviteter.${index}.days`);
   const skalSjekke = parseFloat(weeks) !== 0 || parseFloat(days) !== 0;
@@ -141,17 +130,14 @@ const validerUkerOgDager = (
   return null;
 };
 
-const validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt = (
-  getValues: UseFormGetValues<UttakAktivitetType>,
-  utsettelseType: string,
-  intl: IntlShape,
-) => (
-  ukerEllerDager: string,
-) => {
-  const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
-  return harUtsettelsestype && getValues('erOppfylt') && parseFloat(ukerEllerDager) > 0
-    ? intl.formatMessage({ id: 'ValidationMessage.trekkdagerErMerEnnNullUtsettelse' }) : null;
-};
+const validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt =
+  (getValues: UseFormGetValues<UttakAktivitetType>, utsettelseType: string, intl: IntlShape) =>
+  (ukerEllerDager: string) => {
+    const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
+    return harUtsettelsestype && getValues('erOppfylt') && parseFloat(ukerEllerDager) > 0
+      ? intl.formatMessage({ id: 'ValidationMessage.trekkdagerErMerEnnNullUtsettelse' })
+      : null;
+  };
 
 interface OwnProps {
   periodeTyper: KodeverkMedNavn[];
@@ -185,10 +171,18 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
       {fields.length > 0 && (
         <Table headerTextCodes={HEADER_TEXT_CODES} noHover>
           {fields.map((field, index: number) => {
-            const arbeidsforholdData = finnArbeidsforholdNavnOgProsentArbeid(aktiviteter[index], arbeidsgiverOpplysningerPerId, intl);
+            const arbeidsforholdData = finnArbeidsforholdNavnOgProsentArbeid(
+              aktiviteter[index],
+              arbeidsgiverOpplysningerPerId,
+              intl,
+            );
             return (
               <TableRow key={field.id}>
-                <TableColumn><BodyShort size="small" className={styles.forsteKolWidth}>{arbeidsforholdData.arbeidsforhold}</BodyShort></TableColumn>
+                <TableColumn>
+                  <BodyShort size="small" className={styles.forsteKolWidth}>
+                    {arbeidsforholdData.arbeidsforhold}
+                  </BodyShort>
+                </TableColumn>
                 <TableColumn>
                   <div className={styles.selectStonad}>
                     <SelectField
@@ -213,7 +207,11 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                               required,
                               hasValidInteger,
                               maxLength3,
-                              validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt(getValues, utsettelseType, intl),
+                              validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt(
+                                getValues,
+                                utsettelseType,
+                                intl,
+                              ),
                             ]}
                           />
                         </span>
@@ -237,9 +235,7 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                   </FlexContainer>
                 </TableColumn>
                 <TableColumn>
-                  <BodyShort size="small">
-                    {arbeidsforholdData.prosentArbeidText}
-                  </BodyShort>
+                  <BodyShort size="small">{arbeidsforholdData.prosentArbeidText}</BodyShort>
                 </TableColumn>
                 <TableColumn>
                   <div className={styles.utbetalingsgrad}>
@@ -257,7 +253,8 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                         (utbetalingsgrad: string) => {
                           const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
                           return harUtsettelsestype && getValues('erOppfylt') && parseFloat(utbetalingsgrad) > 0
-                            ? intl.formatMessage({ id: 'ValidationMessage.utbetalingMerEnnNullUtsettelse' }) : null;
+                            ? intl.formatMessage({ id: 'ValidationMessage.utbetalingMerEnnNullUtsettelse' })
+                            : null;
                         },
                       ]}
                       readOnly={isReadOnly}

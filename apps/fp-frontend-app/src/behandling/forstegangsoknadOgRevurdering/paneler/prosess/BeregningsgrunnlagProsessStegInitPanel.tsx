@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
@@ -9,7 +7,10 @@ import { ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } from '@navikt/fp-ty
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
-import { BeregningsgrunnlagProsessIndex, ProsessBeregningsgrunnlagAvklaringsbehovCode } from '@navikt/ft-prosess-beregningsgrunnlag';
+import {
+  BeregningsgrunnlagProsessIndex,
+  ProsessBeregningsgrunnlagAvklaringsbehovCode,
+} from '@navikt/ft-prosess-beregningsgrunnlag';
 
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
@@ -32,16 +33,17 @@ const mapBGKodeTilFpsakKode = (bgKode: string): string => {
   }
 };
 
-const lagModifisertCallback = (
-  submitCallback: (params: any, keepData?: boolean) => Promise<any>,
-) => (aksjonspunkterSomSkalLagres: any | any[]) => {
-  const apListe = Array.isArray(aksjonspunkterSomSkalLagres) ? aksjonspunkterSomSkalLagres : [aksjonspunkterSomSkalLagres];
-  const transformerteData = apListe.map((apData) => ({
-    kode: mapBGKodeTilFpsakKode(apData.kode),
-    ...apData.grunnlag[0],
-  }));
-  return submitCallback(transformerteData);
-};
+const lagModifisertCallback =
+  (submitCallback: (params: any, keepData?: boolean) => Promise<any>) => (aksjonspunkterSomSkalLagres: any | any[]) => {
+    const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
+      ? aksjonspunkterSomSkalLagres
+      : [aksjonspunkterSomSkalLagres];
+    const transformerteData = apListe.map(apData => ({
+      kode: mapBGKodeTilFpsakKode(apData.kode),
+      ...apData.grunnlag[0],
+    }));
+    return submitCallback(transformerteData);
+  };
 
 const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: FpVilkar): Vilkarperiode => ({
   avslagKode: bgVilkar.avslagKode,
@@ -55,7 +57,7 @@ const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: Fp
 });
 
 const lagBGVilkar = (vilkar: FpVilkar[], beregningsgrunnlag: Beregningsgrunnlag): Vilkar | null => {
-  const bgVilkar = vilkar.find((v) => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
+  const bgVilkar = vilkar.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkar || !beregningsgrunnlag) {
     return null;
   }
@@ -89,7 +91,7 @@ const VILKAR_KODER = [VilkarType.BEREGNINGSGRUNNLAGVILKARET];
 const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG];
 type EndepunktPanelData = {
   beregningsgrunnlag?: Beregningsgrunnlag;
-}
+};
 
 interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -107,7 +109,7 @@ const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & Prose
     prosessPanelKode={ProsessStegCode.BEREGNINGSGRUNNLAG}
     prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Beregning' })}
     skalPanelVisesIMeny={() => true}
-    renderPanel={(data) => (
+    renderPanel={data => (
       // @ts-ignore TODO Ikkje send med ned heile kodeverket
       <BeregningsgrunnlagProsessIndex
         {...data}
@@ -115,7 +117,6 @@ const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & Prose
         beregningsgrunnlagListe={lagFormatertBG(data.beregningsgrunnlag)}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         submitCallback={lagModifisertCallback(data.submitCallback)}
-
       />
     )}
   />

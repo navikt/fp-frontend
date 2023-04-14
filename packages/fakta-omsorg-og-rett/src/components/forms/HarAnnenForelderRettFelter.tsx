@@ -8,7 +8,7 @@ type FormValues = {
   harAnnenForelderRett: boolean;
   mottarAnnenForelderUforetrygd: boolean;
   annenForelderRettEØS: boolean;
-}
+};
 
 interface OwnProps {
   readOnly: boolean;
@@ -16,11 +16,7 @@ interface OwnProps {
   avklareRettEØS: boolean;
 }
 
-const HarAnnenForelderRettFelter: FunctionComponent<OwnProps> = ({
-  readOnly,
-  avklareUforetrygd,
-  avklareRettEØS,
-}) => {
+const HarAnnenForelderRettFelter: FunctionComponent<OwnProps> = ({ readOnly, avklareUforetrygd, avklareRettEØS }) => {
   const { watch } = formHooks.useFormContext<FormValues>();
   const harAnnenForelderRett = watch('harAnnenForelderRett');
   const annenForelderRettEØS = watch('annenForelderRettEØS');
@@ -33,13 +29,16 @@ const HarAnnenForelderRettFelter: FunctionComponent<OwnProps> = ({
         validate={[required]}
         isReadOnly={readOnly}
         isTrueOrFalseSelection
-        radios={[{
-          label: <FormattedMessage id="HarAnnenForelderRettFelter.Ja" />,
-          value: 'true',
-        }, {
-          label: <FormattedMessage id="HarAnnenForelderRettFelter.Nei" />,
-          value: 'false',
-        }]}
+        radios={[
+          {
+            label: <FormattedMessage id="HarAnnenForelderRettFelter.Ja" />,
+            value: 'true',
+          },
+          {
+            label: <FormattedMessage id="HarAnnenForelderRettFelter.Nei" />,
+            value: 'false',
+          },
+        ]}
       />
       <VerticalSpacer thirtyTwoPx />
       {harAnnenForelderRett === false && avklareRettEØS && (
@@ -49,13 +48,16 @@ const HarAnnenForelderRettFelter: FunctionComponent<OwnProps> = ({
           validate={[required]}
           isReadOnly={readOnly}
           isTrueOrFalseSelection
-          radios={[{
-            label: <FormattedMessage id="HarAnnenForelderRettFelter.Ja" />,
-            value: 'true',
-          }, {
-            label: <FormattedMessage id="HarAnnenForelderRettFelter.Nei" />,
-            value: 'false',
-          }]}
+          radios={[
+            {
+              label: <FormattedMessage id="HarAnnenForelderRettFelter.Ja" />,
+              value: 'true',
+            },
+            {
+              label: <FormattedMessage id="HarAnnenForelderRettFelter.Nei" />,
+              value: 'false',
+            },
+          ]}
         />
       )}
       {harAnnenForelderRett === false && (!avklareRettEØS || annenForelderRettEØS === false) && avklareUforetrygd && (
@@ -67,13 +69,16 @@ const HarAnnenForelderRettFelter: FunctionComponent<OwnProps> = ({
             validate={[required]}
             isReadOnly={readOnly}
             isTrueOrFalseSelection
-            radios={[{
-              label: <FormattedMessage id="HarAnnenForelderRettFelter.Ja" />,
-              value: 'true',
-            }, {
-              label: <FormattedMessage id="HarAnnenForelderRettFelter.Nei" />,
-              value: 'false',
-            }]}
+            radios={[
+              {
+                label: <FormattedMessage id="HarAnnenForelderRettFelter.Ja" />,
+                value: 'true',
+              },
+              {
+                label: <FormattedMessage id="HarAnnenForelderRettFelter.Nei" />,
+                value: 'false',
+              },
+            ]}
           />
         </>
       )}

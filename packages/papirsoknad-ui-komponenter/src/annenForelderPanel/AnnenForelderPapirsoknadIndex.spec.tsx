@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  render, screen, waitFor,
-} from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 
@@ -39,7 +37,9 @@ describe('<AnnenForelderPapirsoknadIndex>', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(await screen.findByText('Fødselsnummer til den andre forelderen kan ikke være det samme som søker.')).toBeInTheDocument();
+    expect(
+      await screen.findByText('Fødselsnummer til den andre forelderen kan ikke være det samme som søker.'),
+    ).toBeInTheDocument();
 
     await userEvent.clear(fødselsnummer);
     await userEvent.type(fødselsnummer, '30013726678');

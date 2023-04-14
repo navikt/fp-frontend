@@ -16,21 +16,12 @@ export default {
 
 const Template: Story<{
   submitCallback: (data?: any) => Promise<void>;
-}> = ({
-  submitCallback,
-}) => {
+}> = ({ submitCallback }) => {
   const formMethods = useForm();
 
   return (
-    <Form
-      formMethods={formMethods}
-      onSubmit={submitCallback}
-    >
-      <LagreSoknadPapirsoknadIndex
-        readOnly={false}
-        onSubmitUfullstendigsoknad={submitCallback}
-        submitting={false}
-      />
+    <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <LagreSoknadPapirsoknadIndex readOnly={false} onSubmitUfullstendigsoknad={submitCallback} submitting={false} />
     </Form>
   );
 };

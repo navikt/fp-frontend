@@ -3283,6 +3283,7 @@ __metadata:
     axios-mock-adapter: 1.21.4
     classnames: 2.3.2
     core-js: 3.30.0
+    eslint: 8.38.0
     history: 5.3.0
     moment: 2.29.4
     react: 18.2.0
@@ -3294,8 +3295,12 @@ __metadata:
     react-router: 6.10.0
     react-router-dom: 6.10.0
     react-test-renderer: 18.2.0
+    stylelint: 15.4.0
+    typescript: 5.0.4
     vis-data: 7.1.6
     vis-timeline: 7.7.2
+    vite: 4.2.1
+    vitest: 0.29.8
   languageName: unknown
   linkType: soft
 
@@ -11566,6 +11571,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-config-prettier@npm:8.8.0":
+  version: 8.8.0
+  resolution: "eslint-config-prettier@npm:8.8.0"
+  peerDependencies:
+    eslint: ">=7.0.0"
+  bin:
+    eslint-config-prettier: bin/cli.js
+  checksum: 1e94c3882c4d5e41e1dcfa2c368dbccbfe3134f6ac7d40101644d3bfbe3eb2f2ffac757f3145910b5eacf20c0e85e02b91293d3126d770cbf3dc390b3564681c
+  languageName: node
+  linkType: hard
+
 "eslint-import-resolver-lerna@npm:2.0.0":
   version: 2.0.0
   resolution: "eslint-import-resolver-lerna@npm:2.0.0"
@@ -12501,6 +12517,7 @@ __metadata:
     dotenv: 16.0.3
     eslint: 8.38.0
     eslint-config-airbnb: 19.0.4
+    eslint-config-prettier: 8.8.0
     eslint-import-resolver-lerna: 2.0.0
     eslint-import-resolver-typescript: 3.5.5
     eslint-plugin-import: 2.27.5

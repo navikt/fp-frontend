@@ -1,12 +1,8 @@
-import React, {
-  useEffect, FunctionComponent, MouseEvent, useState, useRef, useCallback,
-} from 'react';
+import React, { useEffect, FunctionComponent, MouseEvent, useState, useRef, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { getDateAndTime } from '@navikt/ft-utils';
-import {
-  Oppgave, OppgaveReservasjonEndringDatoModal, FlyttReservasjonModal,
-} from '@navikt/fp-los-felles';
+import { Oppgave, OppgaveReservasjonEndringDatoModal, FlyttReservasjonModal } from '@navikt/fp-los-felles';
 
 import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosSaksbehandlerRestApi';
 import MenuButton from './MenuButton';
@@ -20,9 +16,10 @@ type Offset = {
   left: number;
 };
 
-const getOffsetPositionStyle = (offset: Offset) => (window.innerWidth > (offset.left + 250)
-  ? { left: `${42 + offset.left}px`, top: `${offset.top - 20}px` }
-  : { left: `${offset.left - 200}px`, top: `${offset.top + 38}px` });
+const getOffsetPositionStyle = (offset: Offset) =>
+  window.innerWidth > offset.left + 250
+    ? { left: `${42 + offset.left}px`, top: `${offset.top - 20}px` }
+    : { left: `${offset.left - 200}px`, top: `${offset.top + 38}px` };
 
 const toggleEventListeners = (turnOnEventListeners: boolean, handleOutsideClick: (event: any) => void) => {
   if (turnOnEventListeners) {
@@ -104,10 +101,13 @@ const OppgaveHandlingerMenu: FunctionComponent<OwnProps> = ({
     setFlyttReservasjonModal(false);
   }, [toggleMenu, oppgave, handleOutsideClick]);
 
-  const closeForlengReservasjonModal = useCallback((event: MouseEvent<HTMLButtonElement>) => {
-    toggleMenu(oppgave);
-    handleOutsideClick(event);
-  }, [toggleMenu, oppgave, handleOutsideClick]);
+  const closeForlengReservasjonModal = useCallback(
+    (event: MouseEvent<HTMLButtonElement>) => {
+      toggleMenu(oppgave);
+      handleOutsideClick(event);
+    },
+    [toggleMenu, oppgave, handleOutsideClick],
+  );
 
   const forlengReserverasjon = useCallback(() => {
     forlengOppgaveReservasjon(oppgave.id).then(() => {
@@ -116,10 +116,13 @@ const OppgaveHandlingerMenu: FunctionComponent<OwnProps> = ({
     });
   }, [forlengOppgaveReservasjon, oppgave, handleOutsideClick]);
 
-  const closeReservasjonEndringDatoModal = useCallback((event: MouseEvent<HTMLButtonElement>) => {
-    toggleMenu(oppgave);
-    handleOutsideClick(event);
-  }, [toggleMenu, oppgave, handleOutsideClick]);
+  const closeReservasjonEndringDatoModal = useCallback(
+    (event: MouseEvent<HTMLButtonElement>) => {
+      toggleMenu(oppgave);
+      handleOutsideClick(event);
+    },
+    [toggleMenu, oppgave, handleOutsideClick],
+  );
 
   const showReservasjonEndringDato = useCallback(() => {
     toggleEventListeners(false, handleOutsideClick);
@@ -135,12 +138,17 @@ const OppgaveHandlingerMenu: FunctionComponent<OwnProps> = ({
     toggleMenu(oppgave);
   }, [toggleMenu, oppgave]);
 
-  const { startRequest: endreOppgavereservasjon } = restApiHooks.useRestApiRunner(RestApiPathsKeys.ENDRE_OPPGAVERESERVASJON);
+  const { startRequest: endreOppgavereservasjon } = restApiHooks.useRestApiRunner(
+    RestApiPathsKeys.ENDRE_OPPGAVERESERVASJON,
+  );
 
   const { startRequest: flyttOppgavereservasjon } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FLYTT_RESERVASJON);
 
   const {
-    startRequest: hentSaksbehandler, state: hentSaksbehandlerState, data: saksbehandler, resetRequestData: resetHentSaksbehandler,
+    startRequest: hentSaksbehandler,
+    state: hentSaksbehandlerState,
+    data: saksbehandler,
+    resetRequestData: resetHentSaksbehandler,
   } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK);
 
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);

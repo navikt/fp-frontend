@@ -9,11 +9,7 @@ import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-const isDisabled = (
-  isDirty: boolean,
-  isSubmitting: boolean,
-  isSubmittable: boolean,
-): boolean => {
+const isDisabled = (isDirty: boolean, isSubmitting: boolean, isSubmittable: boolean): boolean => {
   if (!isSubmittable || isSubmitting) {
     return true;
   }

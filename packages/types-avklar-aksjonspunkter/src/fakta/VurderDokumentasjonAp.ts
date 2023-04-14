@@ -5,6 +5,6 @@ import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
 type VurderDokumentasjonAp = {
   vurderingBehov: DokumentasjonVurderingBehov[];
-} & AksjonspunktTilBekreftelse<AksjonspunktCode.VURDER_UTTAK_DOKUMENTASJON>
+} & AksjonspunktTilBekreftelse<AksjonspunktCode.VURDER_UTTAK_DOKUMENTASJON>;
 
 export default VurderDokumentasjonAp;

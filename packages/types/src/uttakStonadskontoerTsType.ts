@@ -4,12 +4,12 @@ export type AktivitetIdentifikator = Readonly<{
   uttakArbeidType: string;
   arbeidsforholdId?: string;
   arbeidsgiverReferanse: string;
-}>
+}>;
 
 export type AktivitetSaldo = Readonly<{
   aktivitetIdentifikator: AktivitetIdentifikator;
   saldo: number;
-}>
+}>;
 
 export type Stonadskonto = Readonly<{
   stonadskontotype: string;
@@ -21,11 +21,11 @@ export type Stonadskonto = Readonly<{
     prematurdager: number;
     flerbarnsdager: number;
   };
-}>
+}>;
 
 type UttakStonadskontoer = Readonly<{
   stonadskontoer: Record<StonadskontoType, Stonadskonto>;
   tapteDagerFpff: number;
-}>
+}>;
 
 export default UttakStonadskontoer;

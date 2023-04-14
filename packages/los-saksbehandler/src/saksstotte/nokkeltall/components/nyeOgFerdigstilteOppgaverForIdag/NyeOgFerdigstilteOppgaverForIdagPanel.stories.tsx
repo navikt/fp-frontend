@@ -24,43 +24,43 @@ export default {
 const Template: Story<{ nyeOgFerdigstilteOppgaver?: NyeOgFerdigstilteOppgaver[] }> = ({
   nyeOgFerdigstilteOppgaver,
 }) => {
-  const data = [
-    { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
-  ];
+  const data = [{ key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true }];
 
   return (
     <RestApiMock data={data} requestApi={requestApi}>
-      <NyeOgFerdigstilteOppgaverForIdagPanel
-        height={300}
-        nyeOgFerdigstilteOppgaver={nyeOgFerdigstilteOppgaver}
-      />
+      <NyeOgFerdigstilteOppgaverForIdagPanel height={300} nyeOgFerdigstilteOppgaver={nyeOgFerdigstilteOppgaver} />
     </RestApiMock>
   );
 };
 
 export const Default = Template.bind({});
 Default.args = {
-  nyeOgFerdigstilteOppgaver: [{
-    behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
-    antallNye: 10,
-    antallFerdigstilte: 20,
-    dato: dayjs().format(ISO_DATE_FORMAT),
-  }, {
-    behandlingType: BehandlingType.KLAGE,
-    antallNye: 23,
-    antallFerdigstilte: 2,
-    dato: dayjs().format(ISO_DATE_FORMAT),
-  }, {
-    behandlingType: BehandlingType.REVURDERING,
-    antallNye: 3,
-    antallFerdigstilte: 24,
-    dato: dayjs().format(ISO_DATE_FORMAT),
-  }, {
-    behandlingType: BehandlingType.DOKUMENTINNSYN,
-    antallNye: 23,
-    antallFerdigstilte: 12,
-    dato: dayjs().format(ISO_DATE_FORMAT),
-  }],
+  nyeOgFerdigstilteOppgaver: [
+    {
+      behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
+      antallNye: 10,
+      antallFerdigstilte: 20,
+      dato: dayjs().format(ISO_DATE_FORMAT),
+    },
+    {
+      behandlingType: BehandlingType.KLAGE,
+      antallNye: 23,
+      antallFerdigstilte: 2,
+      dato: dayjs().format(ISO_DATE_FORMAT),
+    },
+    {
+      behandlingType: BehandlingType.REVURDERING,
+      antallNye: 3,
+      antallFerdigstilte: 24,
+      dato: dayjs().format(ISO_DATE_FORMAT),
+    },
+    {
+      behandlingType: BehandlingType.DOKUMENTINNSYN,
+      antallNye: 23,
+      antallFerdigstilte: 12,
+      dato: dayjs().format(ISO_DATE_FORMAT),
+    },
+  ],
 };
 
 export const IngenBehandlinger = Template.bind({});

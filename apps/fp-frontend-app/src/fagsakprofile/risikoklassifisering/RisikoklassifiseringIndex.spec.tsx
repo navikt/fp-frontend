@@ -52,11 +52,7 @@ describe('<RisikoklassifiseringIndex>', () => {
     render(
       <RestApiMock data={data} requestApi={requestApi}>
         <MemoryRouter>
-          <RisikoklassifiseringIndex
-            fagsakData={new FagsakData(fagsak)}
-            behandlingVersjon={1}
-            behandlingUuid="1"
-          />
+          <RisikoklassifiseringIndex fagsakData={new FagsakData(fagsak)} behandlingVersjon={1} behandlingUuid="1" />
         </MemoryRouter>
       </RestApiMock>,
     );

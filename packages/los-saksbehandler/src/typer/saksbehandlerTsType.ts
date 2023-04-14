@@ -5,6 +5,6 @@ type Saksbehandler = Readonly<{
   };
   navn: string;
   avdelingsnavn: string[];
-}>
+}>;
 
 export default Saksbehandler;

@@ -4,14 +4,18 @@ import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { Detail, BodyShort } from '@navikt/ds-react';
 import { required } from '@navikt/ft-form-validators';
 import {
-  PeriodLabel, VerticalSpacer, FaktaGruppe, Image, FlexContainer, FlexRow, FlexColumn,
+  PeriodLabel,
+  VerticalSpacer,
+  FaktaGruppe,
+  Image,
+  FlexContainer,
+  FlexRow,
+  FlexColumn,
 } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 import { KodeverkType, AksjonspunktCode } from '@navikt/fp-kodeverk';
-import {
-  MedlemPeriode, Soknad, UtlandsoppholdPeriode, Aksjonspunkt, AlleKodeverk,
-} from '@navikt/fp-types';
+import { MedlemPeriode, Soknad, UtlandsoppholdPeriode, Aksjonspunkt, AlleKodeverk } from '@navikt/fp-types';
 
 import checkImage from '../../images/check.svg';
 import avslaattImage from '../../images/avslaatt.svg';
@@ -24,10 +28,7 @@ const capitalizeFirstLetter = (landNavn: string): string => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-const sjekkOpphold = (
-  opphold: boolean,
-  intl: IntlShape,
-): ReactElement | undefined => (
+const sjekkOpphold = (opphold: boolean, intl: IntlShape): ReactElement | undefined =>
   opphold !== undefined && (
     <FlexContainer>
       <FlexRow>
@@ -35,50 +36,54 @@ const sjekkOpphold = (
           <Image
             className={styles.imageWidth}
             src={opphold === true ? checkImage : avslaattImage}
-            alt={intl.formatMessage({ id: opphold === true ? 'OppholdINorgeOgAdresserFaktaPanel.Opphold' : 'OppholdINorgeOgAdresserFaktaPanel.IkkeOpphold' })}
+            alt={intl.formatMessage({
+              id:
+                opphold === true
+                  ? 'OppholdINorgeOgAdresserFaktaPanel.Opphold'
+                  : 'OppholdINorgeOgAdresserFaktaPanel.IkkeOpphold',
+            })}
           />
         </FlexColumn>
         <FlexColumn>
           <BodyShort size="small">
-            <FormattedMessage id={opphold === true ? 'OppholdINorgeOgAdresserFaktaPanel.Yes' : 'OppholdINorgeOgAdresserFaktaPanel.No'} />
+            <FormattedMessage
+              id={opphold === true ? 'OppholdINorgeOgAdresserFaktaPanel.Yes' : 'OppholdINorgeOgAdresserFaktaPanel.No'}
+            />
           </BodyShort>
         </FlexColumn>
       </FlexRow>
     </FlexContainer>
-  )
-);
+  );
 
-const lagOppholdIUtland = (
-  utlandsOpphold: UtlandsoppholdPeriode[],
-): ReactElement[] | undefined => utlandsOpphold && utlandsOpphold.map((u) => (
-  <div key={`${u.landNavn}${u.fom}${u.tom}`}>
-    <FlexContainer>
-      <FlexRow>
-        <FlexColumn>
-          <BodyShort size="small">
-            {capitalizeFirstLetter(u.landNavn)}
-          </BodyShort>
-        </FlexColumn>
-        <FlexColumn>
-          <BodyShort size="small">
-            <PeriodLabel showTodayString dateStringFom={u.fom} dateStringTom={u.tom} />
-          </BodyShort>
-        </FlexColumn>
-      </FlexRow>
-    </FlexContainer>
-  </div>
-));
+const lagOppholdIUtland = (utlandsOpphold: UtlandsoppholdPeriode[]): ReactElement[] | undefined =>
+  utlandsOpphold &&
+  utlandsOpphold.map(u => (
+    <div key={`${u.landNavn}${u.fom}${u.tom}`}>
+      <FlexContainer>
+        <FlexRow>
+          <FlexColumn>
+            <BodyShort size="small">{capitalizeFirstLetter(u.landNavn)}</BodyShort>
+          </FlexColumn>
+          <FlexColumn>
+            <BodyShort size="small">
+              <PeriodLabel showTodayString dateStringFom={u.fom} dateStringTom={u.tom} />
+            </BodyShort>
+          </FlexColumn>
+        </FlexRow>
+      </FlexContainer>
+    </div>
+  ));
 
 export type FormValues = {
   bosattVurdering?: boolean;
-}
+};
 
 interface OwnProps {
-  valgtPeriode: MedlemPeriode
-  soknad: Soknad,
-  aksjonspunkter: Aksjonspunkt[],
+  valgtPeriode: MedlemPeriode;
+  soknad: Soknad;
+  aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   alleKodeverk: AlleKodeverk;
 }
 
@@ -102,21 +107,25 @@ const OppholdINorgeOgAdresserFaktaPanel: FunctionComponent<OwnProps> & StaticFun
 }) => {
   const intl = useIntl();
 
-  const aksjonspunktKode = valgtPeriode.aksjonspunkter.find((apKode) => apKode === AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT);
-  const aksjonspunkt = aksjonspunkter.find((ap) => aksjonspunktKode === ap.definisjon);
+  const aksjonspunktKode = valgtPeriode.aksjonspunkter.find(
+    apKode => apKode === AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT,
+  );
+  const aksjonspunkt = aksjonspunkter.find(ap => aksjonspunktKode === ap.definisjon);
 
-  const isBosattAksjonspunktClosed = aksjonspunktKode && aksjonspunkt ? aksjonspunkt.status !== AksjonspunktStatus.OPPRETTET : false;
+  const isBosattAksjonspunktClosed =
+    aksjonspunktKode && aksjonspunkt ? aksjonspunkt.status !== AksjonspunktStatus.OPPRETTET : false;
 
   const { personopplysningBruker, personopplysningAnnenPart } = valgtPeriode;
 
   return (
-    <FaktaGruppe
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT]}
-    >
+    <FaktaGruppe merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT]}>
       <FlexContainer>
         <FlexRow>
           <FlexColumn className={styles.col}>
-            <FaktaGruppe withoutBorder title={intl.formatMessage({ id: 'OppholdINorgeOgAdresserFaktaPanel.OppholdINorge' })}>
+            <FaktaGruppe
+              withoutBorder
+              title={intl.formatMessage({ id: 'OppholdINorgeOgAdresserFaktaPanel.OppholdINorge' })}
+            >
               <Detail size="small">
                 <FormattedMessage id="OppholdINorgeOgAdresserFaktaPanel.StayingInNorway" />
               </Detail>
@@ -141,7 +150,10 @@ const OppholdINorgeOgAdresserFaktaPanel: FunctionComponent<OwnProps> & StaticFun
             </FaktaGruppe>
           </FlexColumn>
           <FlexColumn className={styles.col}>
-            <FaktaGruppe withoutBorder title={intl.formatMessage({ id: 'OppholdINorgeOgAdresserFaktaPanel.BosattAdresser' })}>
+            <FaktaGruppe
+              withoutBorder
+              title={intl.formatMessage({ id: 'OppholdINorgeOgAdresserFaktaPanel.BosattAdresser' })}
+            >
               <MedlemskapBostedSokerView
                 sokerTypeText={intl.formatMessage({ id: 'BostedSokerFaktaIndex.Soker' })}
                 personopplysninger={personopplysningBruker}
@@ -167,18 +179,23 @@ const OppholdINorgeOgAdresserFaktaPanel: FunctionComponent<OwnProps> & StaticFun
                   isHorizontal
                   isEdited={isBosattAksjonspunktClosed}
                   isTrueOrFalseSelection
-                  radios={[{
-                    label: intl.formatMessage({ id: 'OppholdINorgeOgAdresserFaktaPanel.ResidingInNorway' }),
-                    value: 'true',
-                  }, {
-                    label: <FormattedMessage
-                      id="OppholdINorgeOgAdresserFaktaPanel.NotResidingInNorway"
-                      values={{
-                        b: (chunks: any) => <b>{chunks}</b>,
-                      }}
-                    />,
-                    value: 'false',
-                  }]}
+                  radios={[
+                    {
+                      label: intl.formatMessage({ id: 'OppholdINorgeOgAdresserFaktaPanel.ResidingInNorway' }),
+                      value: 'true',
+                    },
+                    {
+                      label: (
+                        <FormattedMessage
+                          id="OppholdINorgeOgAdresserFaktaPanel.NotResidingInNorway"
+                          values={{
+                            b: (chunks: any) => <b>{chunks}</b>,
+                          }}
+                        />
+                      ),
+                      value: 'false',
+                    },
+                  ]}
                 />
               </div>
             )}
@@ -189,7 +206,7 @@ const OppholdINorgeOgAdresserFaktaPanel: FunctionComponent<OwnProps> & StaticFun
   );
 };
 
-OppholdINorgeOgAdresserFaktaPanel.buildInitialValues = (periode) => ({
+OppholdINorgeOgAdresserFaktaPanel.buildInitialValues = periode => ({
   bosattVurdering: periode.bosattVurdering || periode.bosattVurdering === false ? periode.bosattVurdering : undefined,
 });
 

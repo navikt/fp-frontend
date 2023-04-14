@@ -4,7 +4,7 @@ import Historikkinnslag from './historikkinnslagTsType';
 export type BehandlingOppretting = Readonly<{
   behandlingType: string;
   kanOppretteBehandling: boolean;
-}>
+}>;
 
 export type FagsakPerson = Readonly<{
   navn: string;

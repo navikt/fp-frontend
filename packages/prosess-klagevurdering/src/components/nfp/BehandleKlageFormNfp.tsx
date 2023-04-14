@@ -7,7 +7,11 @@ import { Form } from '@navikt/ft-form-hooks';
 
 import { AksjonspunktCode, KodeverkType, klageVurdering as klageVurderingType } from '@navikt/fp-kodeverk';
 import {
-  AksjonspunktHelpTextTemp, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+  AksjonspunktHelpTextTemp,
+  FlexColumn,
+  FlexContainer,
+  FlexRow,
+  VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { KlageVurdering, AlleKodeverk, KlageVurderingResultat } from '@navikt/fp-types';
@@ -23,7 +27,8 @@ import styles from './behandleKlageFormNfp.module.css';
 
 const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
   klageMedholdArsak: values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageMedholdArsak : null,
-  klageVurderingOmgjoer: values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
+  klageVurderingOmgjoer:
+    values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
   klageHjemmel: values.klageHjemmel,
   klageVurdering: values.klageVurdering,
   fritekstTilBrev: values.fritekstTilBrev,
@@ -104,10 +109,7 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
           text={intl.formatMessage({ id: 'BehandleKlageFormNfp.BegrunnelseForKlage' })}
         />
         <VerticalSpacer sixteenPx />
-        <FritekstBrevTextField
-          sprakkode={sprakkode}
-          readOnly={readOnly}
-        />
+        <FritekstBrevTextField sprakkode={sprakkode} readOnly={readOnly} />
         <VerticalSpacer sixteenPx />
         <FlexContainer>
           <FlexRow spaceBetween>
@@ -118,13 +120,16 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
                 isSubmitting={formMethods.formState.isSubmitting}
                 isDirty={formMethods.formState.isDirty}
               />
-              {!readOnly && formValues.klageVurdering && formValues.fritekstTilBrev && (formValues.fritekstTilBrev.length > 2) && (
-                <PreviewKlageLink
-                  previewCallback={previewCallback}
-                  fritekstTilBrev={formValues.fritekstTilBrev}
-                  klageVurdering={formValues.klageVurdering}
-                />
-              )}
+              {!readOnly &&
+                formValues.klageVurdering &&
+                formValues.fritekstTilBrev &&
+                formValues.fritekstTilBrev.length > 2 && (
+                  <PreviewKlageLink
+                    previewCallback={previewCallback}
+                    fritekstTilBrev={formValues.fritekstTilBrev}
+                    klageVurdering={formValues.klageVurdering}
+                  />
+                )}
             </FlexColumn>
             <FlexColumn>
               <TempsaveKlageButton

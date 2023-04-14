@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -16,9 +14,10 @@ const AKSJONSPUNKT_TEKST_PER_KODE = {
   [AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN]: 'ErOmsorgVilkaarOppfyltForm.Vurder',
 } as Record<string, string>;
 
-const hentAksjonspunktTekst = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[] = []): string => (aksjonspunkter.length > 0
-  ? intl.formatMessage({ id: AKSJONSPUNKT_TEKST_PER_KODE[aksjonspunkter[0].definisjon] })
-  : '');
+const hentAksjonspunktTekst = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[] = []): string =>
+  aksjonspunkter.length > 0
+    ? intl.formatMessage({ id: AKSJONSPUNKT_TEKST_PER_KODE[aksjonspunkter[0].definisjon] })
+    : '';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktCode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
@@ -26,9 +25,7 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
 ];
 
-const VILKAR_KODER = [
-  VilkarType.OMSORGSVILKARET,
-];
+const VILKAR_KODER = [VilkarType.OMSORGSVILKARET];
 
 interface OwnProps {
   behandlingVersjon: number;
@@ -46,8 +43,8 @@ const OmsorgInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvilkar
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="OMSORG"
-      hentInngangsvilkarPanelTekst={(data) => hentAksjonspunktTekst(intl, data.aksjonspunkter)}
-      renderPanel={(data) => (
+      hentInngangsvilkarPanelTekst={data => hentAksjonspunktTekst(intl, data.aksjonspunkter)}
+      renderPanel={data => (
         <>
           <OmsorgVilkarProsessIndex
             // @ts-ignore Eg trur denne feilar grunna feil i typescript-pakka. Sjekk på eit seinare tidspunkt om denne er retta

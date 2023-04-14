@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import {
-  Fagsak, SimuleringResultat, TilbakekrevingValg, StandardProsessPanelProps,
-} from '@navikt/fp-types';
+import { Fagsak, SimuleringResultat, TilbakekrevingValg, StandardProsessPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import AvregningPanel from './components/AvregningPanel';

@@ -4,9 +4,7 @@ import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './OmsorgVilkarProsessIndex.stories';
 
-const {
-  ÅpentAksjonspunkt, OppfyltVilkår, AvslåttVilkår,
-} = composeStories(stories);
+const { ÅpentAksjonspunkt, OppfyltVilkår, AvslåttVilkår } = composeStories(stories);
 
 describe('<OmsorgVilkarProsessIndex>', () => {
   it('skal bestemme at vilkåret er oppfylt og så løse aksjonspunkt', async () => {
@@ -25,11 +23,13 @@ describe('<OmsorgVilkarProsessIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      begrunnelse: 'Dette er en vurdering',
-      erVilkarOk: true,
-      kode: '5011',
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: 'Dette er en vurdering',
+        erVilkarOk: true,
+        kode: '5011',
+      },
+    ]);
   });
 
   it('skal bestemme at vilkåret ikke er oppfylt og så løse aksjonspunkt', async () => {
@@ -53,13 +53,15 @@ describe('<OmsorgVilkarProsessIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      avslagDato: undefined,
-      avslagskode: '1011',
-      begrunnelse: 'Dette er en vurdering',
-      erVilkarOk: false,
-      kode: '5011',
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        avslagDato: undefined,
+        avslagskode: '1011',
+        begrunnelse: 'Dette er en vurdering',
+        erVilkarOk: false,
+        kode: '5011',
+      },
+    ]);
   });
 
   it('skal vise at vilkår er oppfylt', async () => {

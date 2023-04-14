@@ -8,9 +8,7 @@ type OwnProps = Readonly<{
 /**
  * PDFVisning - Panel for å vise valgt dokument
  */
-const PDFVisning: FunctionComponent<OwnProps> = ({
-  dokument,
-}) => (
+const PDFVisning: FunctionComponent<OwnProps> = ({ dokument }) => (
   <div>
     <iframe id="iframepdf" src={dokument.lenke} width="1300" height="1000" title={dokument.tittel} />
   </div>

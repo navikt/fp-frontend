@@ -4,12 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import { Label, Detail, Heading } from '@navikt/ds-react';
 
 import { Aksjonspunkt, BeregningsresultatEs } from '@navikt/fp-types';
-import {
-  VerticalSpacer, OverstyringKnapp, FlexColumn, FlexContainer, FlexRow,
-} from '@navikt/ft-ui-komponenter';
-import {
-  hasValidInteger, maxValue, minValue, required,
-} from '@navikt/ft-form-validators';
+import { VerticalSpacer, OverstyringKnapp, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import { hasValidInteger, maxValue, minValue, required } from '@navikt/ft-form-validators';
 import { formatCurrencyWithKr, decodeHtmlEntity } from '@navikt/ft-utils';
 import { InputField, Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
@@ -24,13 +20,13 @@ const maxValue500000 = maxValue(500000);
 type FormValues = {
   beregnetTilkjentYtelse?: number;
   begrunnelse?: string;
-}
+};
 
 const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
   behandlingResultatstruktur?: BeregningsresultatEs,
 ): FormValues => {
-  const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon === AksjonspunktCode.OVERSTYR_BEREGNING);
+  const aksjonspunkt = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktCode.OVERSTYR_BEREGNING);
   return {
     begrunnelse: decodeHtmlEntity(aksjonspunkt && aksjonspunkt.begrunnelse ? aksjonspunkt.begrunnelse : ''),
     beregnetTilkjentYtelse: behandlingResultatstruktur.beregnetTilkjentYtelse,
@@ -79,14 +75,15 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
   const toggleAv = useCallback(() => {
     toggleOverstyringsmodus(false);
     formMethods.reset();
-    toggleOverstyring((oldArray) => oldArray.filter((code) => code !== AksjonspunktCode.OVERSTYR_BEREGNING));
+    toggleOverstyring(oldArray => oldArray.filter(code => code !== AksjonspunktCode.OVERSTYR_BEREGNING));
   }, []);
   const togglePa = useCallback(() => {
     toggleOverstyringsmodus(true);
-    toggleOverstyring((oldArray) => [...oldArray, AksjonspunktCode.OVERSTYR_BEREGNING]);
+    toggleOverstyring(oldArray => [...oldArray, AksjonspunktCode.OVERSTYR_BEREGNING]);
   }, []);
 
-  const harOverstyringAksjonspunkt = aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.OVERSTYR_BEREGNING) || false;
+  const harOverstyringAksjonspunkt =
+    aksjonspunkter.some(ap => ap.definisjon === AksjonspunktCode.OVERSTYR_BEREGNING) || false;
 
   return (
     <Form
@@ -97,7 +94,9 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
       <FlexContainer>
         <FlexRow>
           <FlexColumn>
-            <Heading size="small"><FormattedMessage id="BeregningEngangsstonadForm.Beregning" /></Heading>
+            <Heading size="small">
+              <FormattedMessage id="BeregningEngangsstonadForm.Beregning" />
+            </Heading>
           </FlexColumn>
           {(kanOverstyre || overrideReadOnly) && (
             <FlexColumn>
@@ -110,7 +109,9 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
       <FlexContainer>
         <FlexRow>
           <FlexColumn className={styles.firstColWidth}>
-            <Detail size="small"><FormattedMessage id="BeregningEngangsstonadForm.Sats" /></Detail>
+            <Detail size="small">
+              <FormattedMessage id="BeregningEngangsstonadForm.Sats" />
+            </Detail>
           </FlexColumn>
           <FlexColumn>
             <Label size="small">{formatCurrencyWithKr(behandlingResultatstruktur.satsVerdi)}</Label>
@@ -118,7 +119,9 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
         </FlexRow>
         <FlexRow>
           <FlexColumn className={styles.firstColWidth}>
-            <Detail size="small"><FormattedMessage id="BeregningEngangsstonadForm.AntallBarn" /></Detail>
+            <Detail size="small">
+              <FormattedMessage id="BeregningEngangsstonadForm.AntallBarn" />
+            </Detail>
           </FlexColumn>
           <FlexColumn>
             <Label size="small">{behandlingResultatstruktur.antallBarn}</Label>
@@ -133,7 +136,9 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
             </FlexRow>
             <FlexRow>
               <FlexColumn className={styles.firstColWidth}>
-                <Detail size="small"><FormattedMessage id="BeregningEngangsstonadForm.BeregnetEngangsstonad" /></Detail>
+                <Detail size="small">
+                  <FormattedMessage id="BeregningEngangsstonadForm.BeregnetEngangsstonad" />
+                </Detail>
               </FlexColumn>
               <FlexColumn>
                 <Label size="small">{formatCurrencyWithKr(behandlingResultatstruktur.beregnetTilkjentYtelse)}</Label>
@@ -166,7 +171,7 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <InputField
                     name="beregnetTilkjentYtelse"
-                    parse={(value) => {
+                    parse={value => {
                       // @ts-ignore Fiks
                       const parsedValue = parseInt(value, 10);
                       return Number.isNaN(parsedValue) ? value : parsedValue;

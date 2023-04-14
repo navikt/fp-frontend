@@ -1,21 +1,21 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import classnames from 'classnames/bind';
 import { useIntl } from 'react-intl';
-import {
-  formHooks, Datepicker, SelectField, PeriodFieldArray,
-} from '@navikt/ft-form-hooks';
+import { formHooks, Datepicker, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
 import { landkoder as Landkode } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/ft-types';
 
 import {
-  dateAfterOrEqual, dateBeforeOrEqual, dateRangesNotOverlapping, hasValidDate, required,
+  dateAfterOrEqual,
+  dateBeforeOrEqual,
+  dateRangesNotOverlapping,
+  hasValidDate,
+  required,
 } from '@navikt/ft-form-validators';
 import { UseFormGetValues } from 'react-hook-form';
 import moment from 'moment';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import {
-  AvsnittSkiller, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { AvsnittSkiller, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import styles from './utenlandsOppholdField.module.css';
 
 const classNames = classnames.bind(styles);
@@ -37,13 +37,10 @@ type Keys = 'tidligereOppholdUtenlands' | 'fremtidigeOppholdUtenlands';
 const getValue = (
   getValues: UseFormGetValues<{ [K in Keys]: FormValues[] }>,
   fieldName: string,
-// @ts-ignore
+  // @ts-ignore
 ): string => getValues(fieldName);
 
-const getOverlappingValidator = (
-  getValues: UseFormGetValues<{ [K in Keys]: FormValues[] }>,
-  name: Keys,
-) => () => {
+const getOverlappingValidator = (getValues: UseFormGetValues<{ [K in Keys]: FormValues[] }>, name: Keys) => () => {
   const perioder = getValues(name);
   const periodeMap = perioder
     .filter(({ periodeFom, periodeTom }) => periodeFom && periodeFom !== '' && periodeTom && periodeTom !== '')
@@ -51,25 +48,29 @@ const getOverlappingValidator = (
   return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
 };
 
-const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] => countryCodes
-  .filter(({ kode }) => kode !== Landkode.NORGE)
-  .map(({ kode, navn }): ReactElement => <option value={kode} key={kode}>{navn}</option>);
+const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] =>
+  countryCodes
+    .filter(({ kode }) => kode !== Landkode.NORGE)
+    .map(
+      ({ kode, navn }): ReactElement => (
+        <option value={kode} key={kode}>
+          {navn}
+        </option>
+      ),
+    );
 
-const getValiderFørEllerEtter = (
-  getValues: UseFormGetValues<{ [K in Keys]: FormValues[] }>,
-  name: string,
-  index: number,
-  sjekkFør: boolean,
-) => () => {
-  const fomVerdi = getValue(getValues, `${name}.${index}.periodeFom`);
-  const tomVerdi = getValue(getValues, `${name}.${index}.periodeTom`);
+const getValiderFørEllerEtter =
+  (getValues: UseFormGetValues<{ [K in Keys]: FormValues[] }>, name: string, index: number, sjekkFør: boolean) =>
+  () => {
+    const fomVerdi = getValue(getValues, `${name}.${index}.periodeFom`);
+    const tomVerdi = getValue(getValues, `${name}.${index}.periodeTom`);
 
-  if (!tomVerdi || !fomVerdi) {
-    return null;
-  }
+    if (!tomVerdi || !fomVerdi) {
+      return null;
+    }
 
-  return sjekkFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
-};
+    return sjekkFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
+  };
 
 interface OwnProps {
   erTidligereOpphold: boolean;
@@ -181,9 +182,7 @@ const UtenlandsOppholdField: FunctionComponent<OwnProps> = ({
                   onChange={() => (isSubmitted ? trigger() : undefined)}
                 />
               </FlexColumn>
-              <FlexColumn>
-                {getRemoveButton()}
-              </FlexColumn>
+              <FlexColumn>{getRemoveButton()}</FlexColumn>
             </FlexRow>
           </FlexContainer>
           <VerticalSpacer sixteenPx />

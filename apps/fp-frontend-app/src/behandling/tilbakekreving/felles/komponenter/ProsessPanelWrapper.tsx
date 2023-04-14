@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, ReactElement,
-} from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 
@@ -13,13 +11,9 @@ interface PanelContainerOwnProps {
   children: any;
 }
 
-const PanelContainer: FunctionComponent<PanelContainerOwnProps> = ({
-  children,
-}) => (
+const PanelContainer: FunctionComponent<PanelContainerOwnProps> = ({ children }) => (
   <div className={styles.steg}>
-    <FadingPanel>
-      {children}
-    </FadingPanel>
+    <FadingPanel>{children}</FadingPanel>
   </div>
 );
 
@@ -30,12 +24,7 @@ interface OwnProps {
   children: ReactElement | ReactElement[];
 }
 
-const ProsessPanelWrapper: FunctionComponent<OwnProps> = ({
-  erAksjonspunktOpent,
-  status,
-  visHenlagt,
-  children,
-}) => {
+const ProsessPanelWrapper: FunctionComponent<OwnProps> = ({ erAksjonspunktOpent, status, visHenlagt, children }) => {
   if (visHenlagt) {
     return (
       <PanelContainer>
@@ -55,11 +44,7 @@ const ProsessPanelWrapper: FunctionComponent<OwnProps> = ({
     );
   }
 
-  return (
-    <PanelContainer>
-      {children}
-    </PanelContainer>
-  );
+  return <PanelContainer>{children}</PanelContainer>;
 };
 
 export default ProsessPanelWrapper;

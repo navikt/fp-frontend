@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { VilkarType } from '@navikt/ft-kodeverk';
@@ -19,9 +17,7 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
 ];
 
-const VILKAR_KODER = [
-  VilkarType.ADOPSJONSVILKARET,
-];
+const VILKAR_KODER = [VilkarType.ADOPSJONSVILKARET];
 
 interface OwnProps {
   behandlingVersjon: number;
@@ -54,7 +50,10 @@ const AdopsjonInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvilk
               erMedlemskapsPanel={false}
               toggleOverstyring={toggleOverstyring}
               erOverstyrt={erOverstyrt}
-              overrideReadOnly={data.isReadOnly || (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))}
+              overrideReadOnly={
+                data.isReadOnly ||
+                (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))
+              }
               kanOverstyreAccess={rettigheter.kanOverstyreAccess}
             />
           )}

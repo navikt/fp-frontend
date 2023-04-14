@@ -1,15 +1,10 @@
 import React from 'react';
-import {
-  render, screen, waitFor,
-} from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './BesteberegningFaktaIndex.stories';
 
-const {
-  BesteberegningMedDagpengerOgArbeid,
-  BesteberegningMedAvvik,
-} = composeStories(stories);
+const { BesteberegningMedDagpengerOgArbeid, BesteberegningMedAvvik } = composeStories(stories);
 
 describe('<BesteberegningFaktaIndex>', () => {
   it('skal se at tabell renderes med korrekt antall måneder og at passende navn vises for aktivitetene', async () => {
@@ -39,8 +34,12 @@ describe('<BesteberegningFaktaIndex>', () => {
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeInTheDocument();
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
-    expect(screen.getByText('Saken er tatt ut til kontroll på grunn av stort avvik mellom 3. og 1. ledd.'
-      + ' Vennligst kontroller beregningen')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Saken er tatt ut til kontroll på grunn av stort avvik mellom 3. og 1. ledd.' +
+          ' Vennligst kontroller beregningen',
+      ),
+    ).toBeInTheDocument();
 
     expect(screen.getByText('Beregningen er riktig, fortsett behandlingen.')).toBeEnabled();
     await userEvent.click(screen.getByRole('checkbox'));

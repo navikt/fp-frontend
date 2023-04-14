@@ -1,10 +1,6 @@
-import React, {
-  FunctionComponent, useState, useEffect, useCallback,
-} from 'react';
+import React, { FunctionComponent, useState, useEffect, useCallback } from 'react';
 
-import {
-  FlexColumn, FlexContainer, FlexRow, LoadingPanel,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { NavAnsatt } from '@navikt/fp-types';
 import { restApiHooks, RestApiPathsKeys } from '../../data/fpfordelRestApi';
@@ -33,16 +29,19 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
   navAnsatt,
 }) => {
   const [valgtDokument, setValgtDokument] = useState<JournalDokument | undefined>(undefined);
-  const journalpostKall = restApiHooks.useRestApi(RestApiPathsKeys.HENT_JOURNALPOST_DETALJER, { journalpostId: oppgave.journalpostId });
+  const journalpostKall = restApiHooks.useRestApi(RestApiPathsKeys.HENT_JOURNALPOST_DETALJER, {
+    journalpostId: oppgave.journalpostId,
+  });
 
-  const { startRequest: submitJournalføring } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING);
+  const { startRequest: submitJournalføring } = restApiHooks.useRestApiRunner(
+    RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING,
+  );
 
   const journalførCallback = useCallback((data: JournalførSubmitValue) => {
-    submitJournalføring(data)
-      .then(() => {
-        innhentAlleOppgaver({ ident: navAnsatt.brukernavn });
-        avbrytVisningAvJournalpost();
-      });
+    submitJournalføring(data).then(() => {
+      innhentAlleOppgaver({ ident: navAnsatt.brukernavn });
+      avbrytVisningAvJournalpost();
+    });
   }, []);
 
   // Åpner første dokument som standard valg når vi er ferdig med å laste
@@ -54,7 +53,11 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
     }
   }, [journalpostKall]);
 
-  if (journalpostKall.state === RestApiState.NOT_STARTED || journalpostKall.state === RestApiState.LOADING || !journalpostKall.data) {
+  if (
+    journalpostKall.state === RestApiState.NOT_STARTED ||
+    journalpostKall.state === RestApiState.LOADING ||
+    !journalpostKall.data
+  ) {
     return <LoadingPanel />;
   }
   const journalpost: Journalpost = journalpostKall.data;
@@ -69,12 +72,11 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
             submitJournalføring={journalførCallback}
           />
         </FlexColumn>
-        {valgtDokument
-          && (
-            <FlexColumn className={styles.pdfKolonne}>
-              <DokumentIndex dokumenter={journalpost.dokumenter} />
-            </FlexColumn>
-          )}
+        {valgtDokument && (
+          <FlexColumn className={styles.pdfKolonne}>
+            <DokumentIndex dokumenter={journalpost.dokumenter} />
+          </FlexColumn>
+        )}
       </FlexRow>
     </FlexContainer>
   );

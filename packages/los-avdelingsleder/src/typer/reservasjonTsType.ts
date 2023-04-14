@@ -5,6 +5,6 @@ type Reservasjon = Readonly<{
   oppgaveId: number;
   oppgaveSaksNr: number;
   behandlingType: string;
-}>
+}>;
 
 export default Reservasjon;

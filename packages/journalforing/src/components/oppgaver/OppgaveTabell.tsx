@@ -11,7 +11,7 @@ const finnRelevanteOppgaver = (oppgaver: OppgaveOversikt[], skjulUløseligeOppga
   if (oppgaver.length < 1 || !skjulUløseligeOppgaver) {
     return oppgaver;
   }
-  return oppgaver.filter((opp) => !opp.journalpostHarMangler);
+  return oppgaver.filter(opp => !opp.journalpostHarMangler);
 };
 
 type OwnProps = Readonly<{
@@ -23,17 +23,18 @@ type OwnProps = Readonly<{
 /**
  * OppgaveTabell - Presenterer liste over oppgaver og tar inn callback for å sette valgt oppgave
  */
-const OppgaveTabell: FunctionComponent<OwnProps> = ({
-  oppgaver,
-  skjulUløseligeOppgaver,
-  setValgtOppgave,
-}) => {
-  const gjeldendeOppgaver = useMemo(() => finnRelevanteOppgaver(oppgaver, skjulUløseligeOppgaver), [oppgaver, skjulUløseligeOppgaver]);
+const OppgaveTabell: FunctionComponent<OwnProps> = ({ oppgaver, skjulUløseligeOppgaver, setValgtOppgave }) => {
+  const gjeldendeOppgaver = useMemo(
+    () => finnRelevanteOppgaver(oppgaver, skjulUløseligeOppgaver),
+    [oppgaver, skjulUløseligeOppgaver],
+  );
   if (gjeldendeOppgaver.length < 1) {
     return (
       <>
         <VerticalSpacer eightPx />
-        <BodyShort size="small"><FormattedMessage id="Journalforing.Oppgaver.IngenOppgaver" /></BodyShort>
+        <BodyShort size="small">
+          <FormattedMessage id="Journalforing.Oppgaver.IngenOppgaver" />
+        </BodyShort>
         <VerticalSpacer eightPx />
       </>
     );
@@ -43,18 +44,32 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({
       <Table>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell><FormattedMessage id="Oppgavetabell.Opprettet" /></Table.HeaderCell>
-            <Table.HeaderCell><FormattedMessage id="Oppgavetabell.YtelseType" /></Table.HeaderCell>
-            <Table.HeaderCell><FormattedMessage id="Oppgavetabell.Beskrivelse" /></Table.HeaderCell>
-            <Table.HeaderCell><FormattedMessage id="Oppgavetabell.Bruker" /></Table.HeaderCell>
-            <Table.HeaderCell><FormattedMessage id="Oppgavetabell.Frist" /></Table.HeaderCell>
-            <Table.HeaderCell><FormattedMessage id="Oppgavetabell.Prioritet" /></Table.HeaderCell>
-            <Table.HeaderCell><FormattedMessage id="Oppgavetabell.Enhet" /></Table.HeaderCell>
+            <Table.HeaderCell>
+              <FormattedMessage id="Oppgavetabell.Opprettet" />
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <FormattedMessage id="Oppgavetabell.YtelseType" />
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <FormattedMessage id="Oppgavetabell.Beskrivelse" />
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <FormattedMessage id="Oppgavetabell.Bruker" />
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <FormattedMessage id="Oppgavetabell.Frist" />
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <FormattedMessage id="Oppgavetabell.Prioritet" />
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <FormattedMessage id="Oppgavetabell.Enhet" />
+            </Table.HeaderCell>
             <Table.HeaderCell />
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {gjeldendeOppgaver.map((oppgave) => (
+          {gjeldendeOppgaver.map(oppgave => (
             <OppgaveTabellRad oppgave={oppgave} setValgtOppgave={setValgtOppgave} key={oppgave.id} />
           ))}
         </Table.Body>

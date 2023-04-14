@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, useCallback, useState,
-} from 'react';
+import React, { FunctionComponent, useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import { vilkarUtfallType, AksjonspunktCode } from '@navikt/fp-kodeverk';
@@ -18,7 +16,7 @@ const AKSJONSPUNKT_KODER = [AksjonspunktCode.OVERSTYR_BEREGNING];
 const ENDEPUNKTER_PANEL_DATA = [EsBehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD];
 type EndepunktPanelData = {
   beregningresultatEngangsstonad: BeregningsresultatEs;
-}
+};
 
 interface OwnProps {
   rettigheter: AksessRettigheter;
@@ -40,11 +38,13 @@ const BeregningEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanel
       prosessPanelKode={ProsessStegCode.BEREGNING}
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Beregning' })}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={() => (
-        props.requestApi.hasPath(EsBehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD.name) ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT
-      )}
+      hentOverstyrtStatus={() =>
+        props.requestApi.hasPath(EsBehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD.name)
+          ? vilkarUtfallType.OPPFYLT
+          : vilkarUtfallType.IKKE_VURDERT
+      }
       erOverstyrt={erOverstyrt}
-      renderPanel={(data) => (
+      renderPanel={data => (
         <BeregningsresultatProsessIndex
           overrideReadOnly={data.isReadOnly}
           kanOverstyreAccess={rettigheter.kanOverstyreAccess}

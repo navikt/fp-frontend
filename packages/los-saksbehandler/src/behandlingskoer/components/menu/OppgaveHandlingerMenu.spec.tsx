@@ -31,7 +31,9 @@ describe('<OppgaveHandlingerMenu>', () => {
 
     await userEvent.click(screen.getByText('Avbryt'));
 
-    await waitFor(() => expect(screen.queryByText('Når en reservert sak frigjøres er begrunnelse obligatorisk')).not.toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.queryByText('Når en reservert sak frigjøres er begrunnelse obligatorisk')).not.toBeInTheDocument(),
+    );
   });
 
   it('skal åpne modal for å forlenge reservasjon', async () => {
@@ -65,6 +67,8 @@ describe('<OppgaveHandlingerMenu>', () => {
 
     await userEvent.click(screen.getByText('Avbryt'));
 
-    await waitFor(() => expect(screen.queryByText('Flytt reservasjonen til annen saksbehandler')).not.toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.queryByText('Flytt reservasjonen til annen saksbehandler')).not.toBeInTheDocument(),
+    );
   });
 });

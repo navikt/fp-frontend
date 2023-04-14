@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, useCallback, useEffect, useState,
-} from 'react';
+import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 import { createIntl } from '@navikt/ft-utils';
@@ -16,10 +14,7 @@ import messages from '../../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-const FaktaPanelTest1: FunctionComponent<FaktaPanelInitProps> = ({
-  registrerFaktaPanel,
-  valgtFaktaSteg,
-}) => {
+const FaktaPanelTest1: FunctionComponent<FaktaPanelInitProps> = ({ registrerFaktaPanel, valgtFaktaSteg }) => {
   useEffect(() => {
     registrerFaktaPanel({
       id: '1',
@@ -34,16 +29,9 @@ const FaktaPanelTest1: FunctionComponent<FaktaPanelInitProps> = ({
     return null;
   }
 
-  return (
-    <div>
-      Dette er et testpanel
-    </div>
-  );
+  return <div>Dette er et testpanel</div>;
 };
-const FaktaPanelTest2: FunctionComponent<FaktaPanelInitProps> = ({
-  registrerFaktaPanel,
-  valgtFaktaSteg,
-}) => {
+const FaktaPanelTest2: FunctionComponent<FaktaPanelInitProps> = ({ registrerFaktaPanel, valgtFaktaSteg }) => {
   useEffect(() => {
     registrerFaktaPanel({
       id: '2',
@@ -58,17 +46,10 @@ const FaktaPanelTest2: FunctionComponent<FaktaPanelInitProps> = ({
     return null;
   }
 
-  return (
-    <div>
-      Dette er et annet panel
-    </div>
-  );
+  return <div>Dette er et annet panel</div>;
 };
 
-const ProsessPanelTest1: FunctionComponent<ProsessPanelInitProps> = ({
-  registrerProsessPanel,
-  valgtProsessSteg,
-}) => {
+const ProsessPanelTest1: FunctionComponent<ProsessPanelInitProps> = ({ registrerProsessPanel, valgtProsessSteg }) => {
   useEffect(() => {
     registrerProsessPanel({
       id: '1',
@@ -84,17 +65,10 @@ const ProsessPanelTest1: FunctionComponent<ProsessPanelInitProps> = ({
     return null;
   }
 
-  return (
-    <div>
-      Dette er et testpanel for adopsjon
-    </div>
-  );
+  return <div>Dette er et testpanel for adopsjon</div>;
 };
 
-const ProsessPanelTest2: FunctionComponent<ProsessPanelInitProps> = ({
-  registrerProsessPanel,
-  valgtProsessSteg,
-}) => {
+const ProsessPanelTest2: FunctionComponent<ProsessPanelInitProps> = ({ registrerProsessPanel, valgtProsessSteg }) => {
   useEffect(() => {
     registrerProsessPanel({
       id: '2',
@@ -110,11 +84,7 @@ const ProsessPanelTest2: FunctionComponent<ProsessPanelInitProps> = ({
     return null;
   }
 
-  return (
-    <div>
-      Dette er et testpanel for fødsel
-    </div>
-  );
+  return <div>Dette er et testpanel for fødsel</div>;
 };
 
 export default {
@@ -124,18 +94,23 @@ export default {
 
 export const VisKunFaktaPaneler = () => {
   const [valgtFaktaPanel, setValgtFaktaPanel] = useState<string | undefined>('default');
-  const faktaPaneler = useCallback((props) => (
-    <>
-      <FaktaPanelTest1 {...props} />
-      <FaktaPanelTest2 {...props} />
-    </>
-  ), []);
+  const faktaPaneler = useCallback(
+    props => (
+      <>
+        <FaktaPanelTest1 {...props} />
+        <FaktaPanelTest2 {...props} />
+      </>
+    ),
+    [],
+  );
   return (
     <RawIntlProvider value={intl}>
       <BehandlingContainer
         behandling={{} as Behandling}
         valgtFaktaSteg={valgtFaktaPanel}
-        oppdaterProsessStegOgFaktaPanelIUrl={(_prosessPanel?: string, faktaPanel?: string) => setValgtFaktaPanel(faktaPanel)}
+        oppdaterProsessStegOgFaktaPanelIUrl={(_prosessPanel?: string, faktaPanel?: string) =>
+          setValgtFaktaPanel(faktaPanel)
+        }
         requestApi={{} as RequestApi}
         hentFaktaPaneler={faktaPaneler}
       />
@@ -145,12 +120,15 @@ export const VisKunFaktaPaneler = () => {
 
 export const VisKunProsessPaneler = () => {
   const [valgtProsessPanel, setValgtProsessPanel] = useState<string | undefined>('default');
-  const prosessPaneler = useCallback((props) => (
-    <>
-      <ProsessPanelTest1 {...props} />
-      <ProsessPanelTest2 {...props} />
-    </>
-  ), []);
+  const prosessPaneler = useCallback(
+    props => (
+      <>
+        <ProsessPanelTest1 {...props} />
+        <ProsessPanelTest2 {...props} />
+      </>
+    ),
+    [],
+  );
   return (
     <BehandlingContainer
       behandling={{} as Behandling}

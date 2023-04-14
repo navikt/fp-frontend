@@ -4,9 +4,8 @@ import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './KlagevurderingProsessIndex.stories';
 
-const {
-  KlagevurderingMedAksjonspunktNfp, MedholdIKlageNk, StadfestKlageNk, HjemsendtIKlageNk, OpphevIKlageNk,
-} = composeStories(stories);
+const { KlagevurderingMedAksjonspunktNfp, MedholdIKlageNk, StadfestKlageNk, HjemsendtIKlageNk, OpphevIKlageNk } =
+  composeStories(stories);
 
 describe('<KlagevurderingProsessIndex>', () => {
   it('skal fylle ut, mellomlagre, forhåndsvise og så bekrefte aksjonspunkt for NFP', async () => {
@@ -14,7 +13,13 @@ describe('<KlagevurderingProsessIndex>', () => {
     const mellomlagre = vi.fn();
     const forhåndsvise = vi.fn();
 
-    const utils = render(<KlagevurderingMedAksjonspunktNfp submitCallback={lagre} mellomlagre={mellomlagre} forhandsvisCallback={forhåndsvise} />);
+    const utils = render(
+      <KlagevurderingMedAksjonspunktNfp
+        submitCallback={lagre}
+        mellomlagre={mellomlagre}
+        forhandsvisCallback={forhåndsvise}
+      />,
+    );
 
     expect(await screen.findByText('Behandle klage')).toBeInTheDocument();
     expect(screen.getByText('Vurder om klagen skal tas til følge')).toBeInTheDocument();

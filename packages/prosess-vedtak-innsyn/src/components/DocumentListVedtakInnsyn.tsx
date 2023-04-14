@@ -8,9 +8,7 @@ import { hentDokumentLenke } from '@navikt/fp-konstanter';
 
 import styles from './documentListVedtakInnsyn.module.css';
 
-const headerTextCodes = [
-  'DocumentListVedtakInnsyn.Dokument',
-];
+const headerTextCodes = ['DocumentListVedtakInnsyn.Dokument'];
 
 interface OwnProps {
   saksNr: string;
@@ -25,19 +23,22 @@ interface OwnProps {
  * Presentasjonskomponent. Viser dokumenter  som er valgt til innsyn i en liste . Finnes ingen dokumenter blir det kun vist en label
  * som viser at ingen dokumenter finnes på fagsak.
  */
-const DocumentListVedtakInnsyn: FunctionComponent<OwnProps> = ({
-  documents,
-  saksNr,
-}) => {
+const DocumentListVedtakInnsyn: FunctionComponent<OwnProps> = ({ documents, saksNr }) => {
   if (documents.length === 0) {
-    return <BodyShort size="small" className={styles.noDocuments}><FormattedMessage id="DocumentListVedtakInnsyn.NoDocuments" /></BodyShort>;
+    return (
+      <BodyShort size="small" className={styles.noDocuments}>
+        <FormattedMessage id="DocumentListVedtakInnsyn.NoDocuments" />
+      </BodyShort>
+    );
   }
 
   return (
     <>
-      <Detail size="small" className={styles.noDocuments}><FormattedMessage id="DocumentListVedtakInnsyn.InnsynsDok" /></Detail>
+      <Detail size="small" className={styles.noDocuments}>
+        <FormattedMessage id="DocumentListVedtakInnsyn.InnsynsDok" />
+      </Detail>
       <Table noHover headerTextCodes={headerTextCodes}>
-        {documents.map((document) => {
+        {documents.map(document => {
           const dokId = parseInt(document.dokumentId, 10);
           return (
             <TableRow key={dokId} id={dokId}>

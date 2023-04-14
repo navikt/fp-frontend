@@ -1,13 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { UseFormGetValues } from 'react-hook-form';
-import {
-  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Datepicker, formHooks, PeriodFieldArray } from '@navikt/ft-form-hooks';
-import {
-  required, hasValidDate, dateBeforeOrEqual, dateAfterOrEqual,
-} from '@navikt/ft-form-validators';
+import { required, hasValidDate, dateBeforeOrEqual, dateAfterOrEqual } from '@navikt/ft-form-validators';
 
 import styles from './frilansPerioderFieldArray.module.css';
 
@@ -17,13 +13,13 @@ export type FormValues = {
   perioder?: {
     periodeFom: string;
     periodeTom?: string;
-  }[],
+  }[];
 };
 
 const getValue = (
-  getValues: UseFormGetValues<{ [FRILANS_NAME_PREFIX]: FormValues}>,
+  getValues: UseFormGetValues<{ [FRILANS_NAME_PREFIX]: FormValues }>,
   fieldName: string,
-// @ts-ignore
+  // @ts-ignore
 ): string => getValues(fieldName);
 
 interface OwnProps {
@@ -35,14 +31,15 @@ interface OwnProps {
  *
  * Viser inputfelter for fra og til dato for frilansperioder
  */
-const FrilansPerioderFieldArray: FunctionComponent<OwnProps> = ({
-  readOnly,
-}) => {
+const FrilansPerioderFieldArray: FunctionComponent<OwnProps> = ({ readOnly }) => {
   const intl = useIntl();
 
   const {
-    control, getValues, formState: { isSubmitted }, trigger,
-  } = formHooks.useFormContext<{ [FRILANS_NAME_PREFIX]: FormValues}>();
+    control,
+    getValues,
+    formState: { isSubmitted },
+    trigger,
+  } = formHooks.useFormContext<{ [FRILANS_NAME_PREFIX]: FormValues }>();
   const { fields, remove, append } = formHooks.useFieldArray({
     control,
     name: `${FRILANS_NAME_PREFIX}.perioder`,
@@ -59,7 +56,7 @@ const FrilansPerioderFieldArray: FunctionComponent<OwnProps> = ({
       {(field, index, getRemoveButton) => {
         const namePart1 = `${FRILANS_NAME_PREFIX}.perioder.${index}`;
         return (
-          <div key={field.id} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+          <div key={field.id} className={index !== fields.length - 1 ? styles.notLastRow : ''}>
             <FlexContainer>
               <FlexRow>
                 <FlexColumn>
@@ -94,11 +91,7 @@ const FrilansPerioderFieldArray: FunctionComponent<OwnProps> = ({
                     onChange={() => (isSubmitted ? trigger() : undefined)}
                   />
                 </FlexColumn>
-                {getRemoveButton && (
-                  <FlexColumn>
-                    {getRemoveButton()}
-                  </FlexColumn>
-                )}
+                {getRemoveButton && <FlexColumn>{getRemoveButton()}</FlexColumn>}
               </FlexRow>
             </FlexContainer>
             <VerticalSpacer sixteenPx />

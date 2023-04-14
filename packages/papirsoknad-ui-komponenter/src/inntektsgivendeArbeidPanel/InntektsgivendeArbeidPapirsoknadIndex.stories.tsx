@@ -17,22 +17,14 @@ export default {
 
 const Template: Story<{
   submitCallback: (data: any) => Promise<void>;
-}> = ({
-  submitCallback,
-}) => {
+}> = ({ submitCallback }) => {
   const formMethods = useForm({
     defaultValues: InntektsgivendeArbeidPapirsoknadIndex.buildInitialValues(),
   });
 
   return (
-    <Form
-      formMethods={formMethods}
-      onSubmit={submitCallback}
-    >
-      <InntektsgivendeArbeidPapirsoknadIndex
-        readOnly={false}
-        alleKodeverk={alleKodeverk as any}
-      />
+    <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <InntektsgivendeArbeidPapirsoknadIndex readOnly={false} alleKodeverk={alleKodeverk as any} />
       <VerticalSpacer fourtyPx />
       <Button size="small" variant="primary">
         Lagreknapp (Kun for test)

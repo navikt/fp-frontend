@@ -17,11 +17,7 @@ interface OwnProps {
 /**
  * SaksbehandlerIndex
  */
-const SaksbehandlerIndex: FunctionComponent<OwnProps> = ({
-  setLosErIkkeTilgjengelig,
-  åpneFagsak,
-  kanSaksbehandle,
-}) => {
+const SaksbehandlerIndex: FunctionComponent<OwnProps> = ({ setLosErIkkeTilgjengelig, åpneFagsak, kanSaksbehandle }) => {
   const [valgtSakslisteId, setValgtSakslisteId] = useState<number>();
   return (
     <RawIntlProvider value={intl}>

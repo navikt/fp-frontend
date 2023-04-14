@@ -5,12 +5,15 @@ const getAlleMerknaderFraBeslutter = (behandling: Behandling, aksjonspunkter: Ak
   if (behandling.status !== BehandlingStatus.BEHANDLING_UTREDES) {
     return {};
   }
-  return aksjonspunkter.reduce((obj, ap) => ({
-    ...obj,
-    [ap.definisjon]: {
-      notAccepted: ap.toTrinnsBehandling && ap.toTrinnsBehandlingGodkjent === false,
-    },
-  }), {});
+  return aksjonspunkter.reduce(
+    (obj, ap) => ({
+      ...obj,
+      [ap.definisjon]: {
+        notAccepted: ap.toTrinnsBehandling && ap.toTrinnsBehandlingGodkjent === false,
+      },
+    }),
+    {},
+  );
 };
 
 export default getAlleMerknaderFraBeslutter;

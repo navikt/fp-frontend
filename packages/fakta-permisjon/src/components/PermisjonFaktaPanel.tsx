@@ -1,22 +1,24 @@
-import React, {
-  FunctionComponent, useEffect, useMemo,
-} from 'react';
+import React, { FunctionComponent, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
-import {
-  Button, Label, BodyShort, Heading,
-} from '@navikt/ds-react';
+import { Button, Label, BodyShort, Heading } from '@navikt/ds-react';
 
 import { dateFormat } from '@navikt/ft-utils';
-import {
-  hasValidText, maxLength, minLength, required,
-} from '@navikt/ft-form-validators';
+import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import {
-  Aksjonspunkt, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, AoIArbeidsforhold, AlleKodeverk,
+  Aksjonspunkt,
+  ArbeidOgInntektsmelding,
+  ArbeidsgiverOpplysningerPerId,
+  AoIArbeidsforhold,
+  AlleKodeverk,
 } from '@navikt/fp-types';
 import {
-  VerticalSpacer, AksjonspunktHelpTextHTML, FlexContainer, FlexRow, FlexColumn,
+  VerticalSpacer,
+  AksjonspunktHelpTextHTML,
+  FlexContainer,
+  FlexRow,
+  FlexColumn,
 } from '@navikt/ft-ui-komponenter';
 import { VurderArbeidsforholdPermisjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { aksjonspunktStatus, AksjonspunktCode } from '@navikt/fp-kodeverk';
@@ -29,23 +31,23 @@ const maxLength1500 = maxLength(1500);
 type FormValues = {
   arbeidsforhold: {
     permisjonStatus: string;
-  }[],
+  }[];
   begrunnelse: string;
-}
+};
 
-const getSorterArbeidsforhold = (
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-) => (
-  a1: AoIArbeidsforhold,
-  a2: AoIArbeidsforhold,
-): number => arbeidsgiverOpplysningerPerId[a1.arbeidsgiverIdent].navn.localeCompare(arbeidsgiverOpplysningerPerId[a2.arbeidsgiverIdent].navn);
+const getSorterArbeidsforhold =
+  (arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) =>
+  (a1: AoIArbeidsforhold, a2: AoIArbeidsforhold): number =>
+    arbeidsgiverOpplysningerPerId[a1.arbeidsgiverIdent].navn.localeCompare(
+      arbeidsgiverOpplysningerPerId[a2.arbeidsgiverIdent].navn,
+    );
 
 interface OwnProps {
   saksnummer: string;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
-  formData?: FormValues,
-  setFormData: (data: FormValues) => void,
+  formData?: FormValues;
+  setFormData: (data: FormValues) => void;
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   lagreCallback: (aksjonspunktData: VurderArbeidsforholdPermisjonAp) => Promise<void>;
@@ -63,41 +65,54 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
   lagreCallback,
   alleKodeverk,
 }) => {
-  const arbeidOgInntektMedPermisjon = useMemo(() => ({
-    inntektsmeldinger: arbeidOgInntekt.inntektsmeldinger,
-    arbeidsforhold: arbeidOgInntekt.arbeidsforhold.filter((a) => a.permisjonOgMangel?.årsak),
-    inntekter: arbeidOgInntekt.inntekter,
-    skjæringstidspunkt: arbeidOgInntekt.skjæringstidspunkt,
-  }), [arbeidOgInntekt]);
+  const arbeidOgInntektMedPermisjon = useMemo(
+    () => ({
+      inntektsmeldinger: arbeidOgInntekt.inntektsmeldinger,
+      arbeidsforhold: arbeidOgInntekt.arbeidsforhold.filter(a => a.permisjonOgMangel?.årsak),
+      inntekter: arbeidOgInntekt.inntekter,
+      skjæringstidspunkt: arbeidOgInntekt.skjæringstidspunkt,
+    }),
+    [arbeidOgInntekt],
+  );
 
   const { arbeidsforhold } = arbeidOgInntektMedPermisjon;
 
-  const sorterteArbeidsforhold = useMemo(() => [...arbeidsforhold].sort(getSorterArbeidsforhold(arbeidsgiverOpplysningerPerId)),
-    [arbeidsforhold, arbeidsgiverOpplysningerPerId]);
+  const sorterteArbeidsforhold = useMemo(
+    () => [...arbeidsforhold].sort(getSorterArbeidsforhold(arbeidsgiverOpplysningerPerId)),
+    [arbeidsforhold, arbeidsgiverOpplysningerPerId],
+  );
 
-  const defaultValues = useMemo(() => ({
-    arbeidsforhold: sorterteArbeidsforhold.map((a) => ({
-      permisjonStatus: a.permisjonOgMangel.permisjonStatus,
-    })),
-    begrunnelse: aksjonspunkter[0].begrunnelse,
-  }), [sorterteArbeidsforhold]);
+  const defaultValues = useMemo(
+    () => ({
+      arbeidsforhold: sorterteArbeidsforhold.map(a => ({
+        permisjonStatus: a.permisjonOgMangel.permisjonStatus,
+      })),
+      begrunnelse: aksjonspunkter[0].begrunnelse,
+    }),
+    [sorterteArbeidsforhold],
+  );
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || defaultValues,
   });
 
-  useEffect(() => () => {
-    setFormData(undefined);
-  }, []);
+  useEffect(
+    () => () => {
+      setFormData(undefined);
+    },
+    [],
+  );
 
-  const harÅpentAksjonspunkt = aksjonspunkter.some((a) => a.status === aksjonspunktStatus.OPPRETTET);
+  const harÅpentAksjonspunkt = aksjonspunkter.some(a => a.status === aksjonspunktStatus.OPPRETTET);
 
   return (
     <>
       <FlexContainer>
         <FlexRow spaceBetween>
           <FlexColumn>
-            <Heading size="small"><FormattedMessage id="PermisjonFaktaPanel.Overskrift" /></Heading>
+            <Heading size="small">
+              <FormattedMessage id="PermisjonFaktaPanel.Overskrift" />
+            </Heading>
           </FlexColumn>
           <FlexColumn>
             <BodyShort size="small">
@@ -118,15 +133,17 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
       <VerticalSpacer thirtyTwoPx />
       <Form
         formMethods={formMethods}
-        onSubmit={(values) => lagreCallback({
-          kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_PERMISJON,
-          arbeidsforhold: values.arbeidsforhold.map((a, index) => ({
-            internArbeidsforholdId: sorterteArbeidsforhold[index].internArbeidsforholdId,
-            arbeidsgiverIdent: sorterteArbeidsforhold[index].arbeidsgiverIdent,
-            permisjonStatus: a.permisjonStatus,
-          })),
-          begrunnelse: values.begrunnelse,
-        })}
+        onSubmit={values =>
+          lagreCallback({
+            kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_PERMISJON,
+            arbeidsforhold: values.arbeidsforhold.map((a, index) => ({
+              internArbeidsforholdId: sorterteArbeidsforhold[index].internArbeidsforholdId,
+              arbeidsgiverIdent: sorterteArbeidsforhold[index].arbeidsgiverIdent,
+              permisjonStatus: a.permisjonStatus,
+            })),
+            begrunnelse: values.begrunnelse,
+          })
+        }
       >
         <ArbeidsforholdFieldArray
           saksnummer={saksnummer}
@@ -140,7 +157,11 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
         />
         <VerticalSpacer thirtyTwoPx />
         <TextAreaField
-          label={<Label size="small"><FormattedMessage id="PermisjonFaktaPanel.Begrunn" /></Label>}
+          label={
+            <Label size="small">
+              <FormattedMessage id="PermisjonFaktaPanel.Begrunn" />
+            </Label>
+          }
           name="begrunnelse"
           validate={[required, minLength3, maxLength1500, hasValidText]}
           maxLength={1500}

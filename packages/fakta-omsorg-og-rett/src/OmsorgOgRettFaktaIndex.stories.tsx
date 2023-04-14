@@ -2,9 +2,7 @@ import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-import {
-  Behandling, KjønnkodeEnum, Personoversikt, Ytelsefordeling,
-} from '@navikt/fp-types';
+import { Behandling, KjønnkodeEnum, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
 import { sivilstandType, opplysningAdresseType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -21,15 +19,17 @@ export default {
   component: OmsorgOgRettFaktaIndex,
 };
 
-const adresser = [{
-  adresseType: opplysningAdresseType.BOSTEDSADRESSE,
-  adresselinje1: 'Veigata 1',
-  adresselinje2: 'Oddelandet',
-  adresselinje3: 'Leilighet 2',
-  postNummer: '0123',
-  poststed: 'Bobygda',
-  land: 'Norge',
-}];
+const adresser = [
+  {
+    adresseType: opplysningAdresseType.BOSTEDSADRESSE,
+    adresselinje1: 'Veigata 1',
+    adresselinje2: 'Oddelandet',
+    adresselinje3: 'Leilighet 2',
+    postNummer: '0123',
+    poststed: 'Bobygda',
+    land: 'Norge',
+  },
+];
 
 const defaultPersonoversikt = {
   bruker: {
@@ -48,26 +48,24 @@ const defaultPersonoversikt = {
     fødselsdato: '1989-01-01',
     adresser,
   },
-  barn: [{
-    navn: 'Tutta Utvikler',
-    dødsdato: '2019-01-01',
-    fødselsdato: '2018-01-01',
-    adresser,
-    aktoerId: '3',
-    kjønn: KjønnkodeEnum.KVINNE.toString(),
-    sivilstand: sivilstandType.UGIFT,
-  }],
+  barn: [
+    {
+      navn: 'Tutta Utvikler',
+      dødsdato: '2019-01-01',
+      fødselsdato: '2018-01-01',
+      adresser,
+      aktoerId: '3',
+      kjønn: KjønnkodeEnum.KVINNE.toString(),
+      sivilstand: sivilstandType.UGIFT,
+    },
+  ],
 };
 
 const Template: Story<{
-  aksjonspunkter: Aksjonspunkt[],
+  aksjonspunkter: Aksjonspunkt[];
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
-  personoversikt: Personoversikt,
-}> = ({
-  aksjonspunkter,
-  submitCallback,
-  personoversikt,
-}) => (
+  personoversikt: Personoversikt;
+}> = ({ aksjonspunkter, submitCallback, personoversikt }) => (
   <OmsorgOgRettFaktaIndex
     behandling={{ uuid: 'test' } as Behandling}
     personoversikt={personoversikt}
@@ -86,20 +84,24 @@ const Template: Story<{
 export const HarAksjonspunktForAvklarAleneomsorg = Template.bind({});
 HarAksjonspunktForAvklarAleneomsorg.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-    kanLoses: true,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+      kanLoses: true,
+    },
+  ] as Aksjonspunkt[],
   personoversikt: defaultPersonoversikt,
 };
 
 export const HarAksjonspunktForAvklarAleneomsorgMedFlereBarn = Template.bind({});
 HarAksjonspunktForAvklarAleneomsorgMedFlereBarn.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-    kanLoses: true,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+      kanLoses: true,
+    },
+  ] as Aksjonspunkt[],
   personoversikt: {
     ...defaultPersonoversikt,
     barn: defaultPersonoversikt.barn.concat({
@@ -117,9 +119,11 @@ HarAksjonspunktForAvklarAleneomsorgMedFlereBarn.args = {
 export const HarAksjonspunktForAvklarAnnenForelderRett = Template.bind({});
 HarAksjonspunktForAvklarAnnenForelderRett.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [{
-    definisjon: AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT,
-    kanLoses: true,
-  }] as Aksjonspunkt[],
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT,
+      kanLoses: true,
+    },
+  ] as Aksjonspunkt[],
   personoversikt: defaultPersonoversikt,
 };

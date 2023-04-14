@@ -3,6 +3,6 @@ type TilbakekrevingValg = Readonly<{
   grunnerTilReduksjon: boolean;
   videreBehandling: string;
   varseltekst: string;
-}>
+}>;
 
 export default TilbakekrevingValg;

@@ -4,18 +4,23 @@ import { BodyShort } from '@navikt/ds-react';
 import moment from 'moment';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
-  DateLabel, PeriodLabel, Table, TableColumn, TableRow, VerticalSpacer, FaktaGruppe, FlexColumn, FlexContainer, FlexRow,
+  DateLabel,
+  PeriodLabel,
+  Table,
+  TableColumn,
+  TableRow,
+  VerticalSpacer,
+  FaktaGruppe,
+  FlexColumn,
+  FlexContainer,
+  FlexRow,
 } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { required } from '@navikt/ft-form-validators';
 import { Aksjonspunkt } from '@navikt/ft-types';
 
-import {
-  AksjonspunktCode, KodeverkType, getKodeverknavnFn,
-} from '@navikt/fp-kodeverk';
-import {
-  MedlemPeriode, Medlemskap, Soknad, AlleKodeverk,
-} from '@navikt/fp-types';
+import { AksjonspunktCode, KodeverkType, getKodeverknavnFn } from '@navikt/fp-kodeverk';
+import { MedlemPeriode, Medlemskap, Soknad, AlleKodeverk } from '@navikt/fp-types';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 const headerTextCodes = [
@@ -27,16 +32,16 @@ const headerTextCodes = [
 
 export type FormValues = {
   medlemskapManuellVurderingType?: string;
-}
+};
 
 interface OwnProps {
   valgtPeriode: MedlemPeriode;
   alleKodeverk: AlleKodeverk;
   readOnly: boolean;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   medlemskap: Medlemskap;
   soknad: Soknad;
-  aksjonspunkter: Aksjonspunkt[]
+  aksjonspunkter: Aksjonspunkt[];
 }
 
 interface StaticFunctions {
@@ -62,8 +67,10 @@ const PerioderMedMedlemskapFaktaPanel: FunctionComponent<OwnProps> & StaticFunct
   const vurderingstyper = alleKodeverk[KodeverkType.MEDLEMSKAP_MANUELL_VURDERING_TYPE];
   const sorterteVurderingstyper = useMemo(() => [...vurderingstyper].sort((a, b) => a.navn.localeCompare(b.navn)), []);
 
-  const sortertePerioder = useMemo(() => [...medlemskap.medlemskapPerioder].sort((p1, p2) => new Date(p1.fom).getTime() - new Date(p2.fom).getTime()),
-    [medlemskap.medlemskapPerioder]);
+  const sortertePerioder = useMemo(
+    () => [...medlemskap.medlemskapPerioder].sort((p1, p2) => new Date(p1.fom).getTime() - new Date(p2.fom).getTime()),
+    [medlemskap.medlemskapPerioder],
+  );
 
   if (!sortertePerioder || sortertePerioder.length === 0) {
     return (
@@ -75,8 +82,10 @@ const PerioderMedMedlemskapFaktaPanel: FunctionComponent<OwnProps> & StaticFunct
     );
   }
 
-  const aksjonspunktKode = valgtPeriode.aksjonspunkter.find((apKode) => apKode === AksjonspunktCode.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE);
-  const aksjonspunkt = aksjonspunkter.find((ap) => aksjonspunktKode === ap.definisjon);
+  const aksjonspunktKode = valgtPeriode.aksjonspunkter.find(
+    apKode => apKode === AksjonspunktCode.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
+  );
+  const aksjonspunkt = aksjonspunkter.find(ap => aksjonspunktKode === ap.definisjon);
 
   const erAksjonspunktLukket = aksjonspunkt ? aksjonspunkt.status !== AksjonspunktStatus.OPPRETTET : false;
 
@@ -91,7 +100,7 @@ const PerioderMedMedlemskapFaktaPanel: FunctionComponent<OwnProps> & StaticFunct
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE]}
     >
       <Table headerTextCodes={headerTextCodes} noHover>
-        {sortertePerioder.map((periode) => {
+        {sortertePerioder.map(periode => {
           const dekning = getKodeverk(periode.dekningType, KodeverkType.MEDLEMSKAP_DEKNING);
           const status = getKodeverk(periode.medlemskapType, KodeverkType.MEDLEMSKAP_TYPE);
           const key = periode.fom + periode.tom + dekning + status + periode.beslutningsdato;
@@ -100,12 +109,8 @@ const PerioderMedMedlemskapFaktaPanel: FunctionComponent<OwnProps> & StaticFunct
               <TableColumn>
                 <PeriodLabel showTodayString dateStringFom={periode.fom} dateStringTom={periode.tom} />
               </TableColumn>
-              <TableColumn>
-                {dekning}
-              </TableColumn>
-              <TableColumn>
-                {status}
-              </TableColumn>
+              <TableColumn>{dekning}</TableColumn>
+              <TableColumn>{status}</TableColumn>
               <TableColumn>
                 {periode.beslutningsdato ? <DateLabel dateString={periode.beslutningsdato} /> : null}
               </TableColumn>
@@ -124,7 +129,7 @@ const PerioderMedMedlemskapFaktaPanel: FunctionComponent<OwnProps> & StaticFunct
                 validate={[required]}
                 isReadOnly={readOnly}
                 isHorizontal
-                radios={sorterteVurderingstyper.map((type) => ({
+                radios={sorterteVurderingstyper.map(type => ({
                   label: type.navn,
                   value: type.kode,
                 }))}
@@ -160,8 +165,11 @@ const PerioderMedMedlemskapFaktaPanel: FunctionComponent<OwnProps> & StaticFunct
   );
 };
 
-PerioderMedMedlemskapFaktaPanel.buildInitialValues = (periode, medlemskapPerioder) => (medlemskapPerioder !== null ? {
-  medlemskapManuellVurderingType: periode.medlemskapManuellVurderingType,
-} : {});
+PerioderMedMedlemskapFaktaPanel.buildInitialValues = (periode, medlemskapPerioder) =>
+  medlemskapPerioder !== null
+    ? {
+        medlemskapManuellVurderingType: periode.medlemskapManuellVurderingType,
+      }
+    : {};
 
 export default PerioderMedMedlemskapFaktaPanel;

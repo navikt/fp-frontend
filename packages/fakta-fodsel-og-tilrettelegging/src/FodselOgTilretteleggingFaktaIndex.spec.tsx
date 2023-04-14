@@ -48,37 +48,44 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
     await waitFor(() => expect(bekreft).toHaveBeenCalledTimes(1));
     expect(bekreft).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
-      bekreftetSvpArbeidsforholdList: [{
-        arbeidsgiverReferanse: '999999999',
-        kanTilrettelegges: true,
-        kopiertFraTidligereBehandling: true,
-        mottattTidspunkt: '2020-03-11T16:21:48.532298',
-        'permisjon2019-08-06': true,
-        'permisjon2019-10-03': true,
-        'permisjon2020-02-17': true,
-        skalBrukes: true,
-        tilretteleggingBehovFom: '2020-03-17',
-        tilretteleggingDatoer: [{
-          fom: '2020-10-16',
-          overstyrtUtbetalingsgrad: undefined,
-          stillingsprosent: undefined,
-          type: 'INGEN_TILRETTELEGGING',
-        }, {
-          fom: '2020-10-15',
-          overstyrtUtbetalingsgrad: null,
-          stillingsprosent: undefined,
-          type: 'HEL_TILRETTELEGGING',
-        }],
-        tilretteleggingId: 1116961,
-        uttakArbeidType: 'FRILANS',
-        velferdspermisjoner: [{
-          erGyldig: true,
-          permisjonFom: '2020-02-17',
-          permisjonTom: '2020-07-12',
-          permisjonsprosent: 50,
-          type: 'VELFERDSPERMISJON',
-        }],
-      }],
+      bekreftetSvpArbeidsforholdList: [
+        {
+          arbeidsgiverReferanse: '999999999',
+          kanTilrettelegges: true,
+          kopiertFraTidligereBehandling: true,
+          mottattTidspunkt: '2020-03-11T16:21:48.532298',
+          'permisjon2019-08-06': true,
+          'permisjon2019-10-03': true,
+          'permisjon2020-02-17': true,
+          skalBrukes: true,
+          tilretteleggingBehovFom: '2020-03-17',
+          tilretteleggingDatoer: [
+            {
+              fom: '2020-10-16',
+              overstyrtUtbetalingsgrad: undefined,
+              stillingsprosent: undefined,
+              type: 'INGEN_TILRETTELEGGING',
+            },
+            {
+              fom: '2020-10-15',
+              overstyrtUtbetalingsgrad: null,
+              stillingsprosent: undefined,
+              type: 'HEL_TILRETTELEGGING',
+            },
+          ],
+          tilretteleggingId: 1116961,
+          uttakArbeidType: 'FRILANS',
+          velferdspermisjoner: [
+            {
+              erGyldig: true,
+              permisjonFom: '2020-02-17',
+              permisjonTom: '2020-07-12',
+              permisjonsprosent: 50,
+              type: 'VELFERDSPERMISJON',
+            },
+          ],
+        },
+      ],
       fødselsdato: undefined,
       kode: '5091',
       termindato: '2020-11-06',
@@ -121,42 +128,50 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
     await waitFor(() => expect(bekreft).toHaveBeenCalledTimes(1));
     expect(bekreft).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
-      bekreftetSvpArbeidsforholdList: [{
-        arbeidsgiverReferanse: '999999999',
-        kanTilrettelegges: true,
-        kopiertFraTidligereBehandling: true,
-        mottattTidspunkt: '2020-03-11T16:21:48.532298',
-        'permisjon2019-08-06': true,
-        'permisjon2019-10-03': true,
-        'permisjon2020-02-17': true,
-        skalBrukes: true,
-        tilretteleggingBehovFom: '2020-03-17',
-        tilretteleggingDatoer: [{
-          fom: '2020-03-17',
-          overstyrtUtbetalingsgrad: undefined,
-          stillingsprosent: undefined,
-          type: 'INGEN_TILRETTELEGGING',
-        }, {
-          fom: '2020-10-15',
-          overstyrtUtbetalingsgrad: null,
-          stillingsprosent: undefined,
-          type: 'HEL_TILRETTELEGGING',
-        }, {
-          fom: '2020-11-06',
-          overstyrtUtbetalingsgrad: undefined,
-          stillingsprosent: '40',
-          type: 'DELVIS_TILRETTELEGGING',
-        }],
-        tilretteleggingId: 1116961,
-        uttakArbeidType: 'FRILANS',
-        velferdspermisjoner: [{
-          erGyldig: true,
-          permisjonFom: '2020-02-17',
-          permisjonTom: '2020-07-12',
-          permisjonsprosent: 50,
-          type: 'VELFERDSPERMISJON',
-        }],
-      }],
+      bekreftetSvpArbeidsforholdList: [
+        {
+          arbeidsgiverReferanse: '999999999',
+          kanTilrettelegges: true,
+          kopiertFraTidligereBehandling: true,
+          mottattTidspunkt: '2020-03-11T16:21:48.532298',
+          'permisjon2019-08-06': true,
+          'permisjon2019-10-03': true,
+          'permisjon2020-02-17': true,
+          skalBrukes: true,
+          tilretteleggingBehovFom: '2020-03-17',
+          tilretteleggingDatoer: [
+            {
+              fom: '2020-03-17',
+              overstyrtUtbetalingsgrad: undefined,
+              stillingsprosent: undefined,
+              type: 'INGEN_TILRETTELEGGING',
+            },
+            {
+              fom: '2020-10-15',
+              overstyrtUtbetalingsgrad: null,
+              stillingsprosent: undefined,
+              type: 'HEL_TILRETTELEGGING',
+            },
+            {
+              fom: '2020-11-06',
+              overstyrtUtbetalingsgrad: undefined,
+              stillingsprosent: '40',
+              type: 'DELVIS_TILRETTELEGGING',
+            },
+          ],
+          tilretteleggingId: 1116961,
+          uttakArbeidType: 'FRILANS',
+          velferdspermisjoner: [
+            {
+              erGyldig: true,
+              permisjonFom: '2020-02-17',
+              permisjonTom: '2020-07-12',
+              permisjonsprosent: 50,
+              type: 'VELFERDSPERMISJON',
+            },
+          ],
+        },
+      ],
       fødselsdato: undefined,
       kode: '5091',
       termindato: '2020-11-06',
@@ -196,37 +211,44 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
     await waitFor(() => expect(bekreft).toHaveBeenCalledTimes(1));
     expect(bekreft).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
-      bekreftetSvpArbeidsforholdList: [{
-        arbeidsgiverReferanse: '999999999',
-        kanTilrettelegges: true,
-        kopiertFraTidligereBehandling: true,
-        mottattTidspunkt: '2020-03-11T16:21:48.532298',
-        'permisjon2019-08-06': true,
-        'permisjon2019-10-03': true,
-        'permisjon2020-02-17': true,
-        skalBrukes: true,
-        tilretteleggingBehovFom: '2020-03-17',
-        tilretteleggingDatoer: [{
-          fom: '2020-03-17',
-          overstyrtUtbetalingsgrad: '70',
-          stillingsprosent: undefined,
-          type: 'INGEN_TILRETTELEGGING',
-        }, {
-          fom: '2020-10-15',
-          overstyrtUtbetalingsgrad: null,
-          stillingsprosent: undefined,
-          type: 'HEL_TILRETTELEGGING',
-        }],
-        tilretteleggingId: 1116961,
-        uttakArbeidType: 'FRILANS',
-        velferdspermisjoner: [{
-          erGyldig: true,
-          permisjonFom: '2020-02-17',
-          permisjonTom: '2020-07-12',
-          permisjonsprosent: 50,
-          type: 'VELFERDSPERMISJON',
-        }],
-      }],
+      bekreftetSvpArbeidsforholdList: [
+        {
+          arbeidsgiverReferanse: '999999999',
+          kanTilrettelegges: true,
+          kopiertFraTidligereBehandling: true,
+          mottattTidspunkt: '2020-03-11T16:21:48.532298',
+          'permisjon2019-08-06': true,
+          'permisjon2019-10-03': true,
+          'permisjon2020-02-17': true,
+          skalBrukes: true,
+          tilretteleggingBehovFom: '2020-03-17',
+          tilretteleggingDatoer: [
+            {
+              fom: '2020-03-17',
+              overstyrtUtbetalingsgrad: '70',
+              stillingsprosent: undefined,
+              type: 'INGEN_TILRETTELEGGING',
+            },
+            {
+              fom: '2020-10-15',
+              overstyrtUtbetalingsgrad: null,
+              stillingsprosent: undefined,
+              type: 'HEL_TILRETTELEGGING',
+            },
+          ],
+          tilretteleggingId: 1116961,
+          uttakArbeidType: 'FRILANS',
+          velferdspermisjoner: [
+            {
+              erGyldig: true,
+              permisjonFom: '2020-02-17',
+              permisjonTom: '2020-07-12',
+              permisjonsprosent: 50,
+              type: 'VELFERDSPERMISJON',
+            },
+          ],
+        },
+      ],
       fødselsdato: undefined,
       kode: '5091',
       termindato: '2020-11-06',
@@ -236,12 +258,17 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   it('skal vise arbeidsforhold det søkt tilrettelegging men ikke kan beregnes svangeskapspenger for', async () => {
     const bekreft = vi.fn(() => Promise.resolve());
 
-    const utils = render(<AksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigNæringsdrivende submitCallback={bekreft} />);
+    const utils = render(
+      <AksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigNæringsdrivende submitCallback={bekreft} />,
+    );
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
-    expect(screen.getByText('Det er søkt for et org.nr. eller fødselsnummer der søker ikke var ansatt da behovet for tilrettelegging oppsto. '
-    + 'Vurder om du skal kontakte arbeidsgiver eller søker for avklaring. Hvis du innvilger behandlingen nå, vil bruker få 0 kroner utbetalt.',
-    )).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Det er søkt for et org.nr. eller fødselsnummer der søker ikke var ansatt da behovet for tilrettelegging oppsto. ' +
+          'Vurder om du skal kontakte arbeidsgiver eller søker for avklaring. Hvis du innvilger behandlingen nå, vil bruker få 0 kroner utbetalt.',
+      ),
+    ).toBeInTheDocument();
 
     expect(screen.getByText('Frilanser, samlet aktivitet (973861778)')).toBeInTheDocument();
     expect(screen.getByText('Selvstendig næringsdrivende')).toBeInTheDocument();
@@ -256,32 +283,39 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
     await waitFor(() => expect(bekreft).toHaveBeenCalledTimes(1));
     expect(bekreft).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
-      bekreftetSvpArbeidsforholdList: [{
-        arbeidsgiverReferanse: '1',
-        skalBrukes: undefined,
-        tilretteleggingBehovFom: '2019-10-01',
-        tilretteleggingDatoer: [{
-          fom: '2019-10-01',
-          overstyrtUtbetalingsgrad: undefined,
-          stillingsprosent: undefined,
-          type: 'INGEN_TILRETTELEGGING',
-        }],
-        tilretteleggingId: 1008653,
-        velferdspermisjoner: [],
-      }, {
-        arbeidsgiverReferanse: '2',
-        skalBrukes: undefined,
-        tilretteleggingBehovFom: '2019-10-01',
-        tilretteleggingDatoer: [{
-          fom: '2019-10-01',
-          overstyrtUtbetalingsgrad: undefined,
-          stillingsprosent: undefined,
-          type: 'INGEN_TILRETTELEGGING',
-        }],
-        tilretteleggingId: 1008654,
-        uttakArbeidType: 'ORDINÆRT_ARBEID',
-        velferdspermisjoner: [],
-      }],
+      bekreftetSvpArbeidsforholdList: [
+        {
+          arbeidsgiverReferanse: '1',
+          skalBrukes: undefined,
+          tilretteleggingBehovFom: '2019-10-01',
+          tilretteleggingDatoer: [
+            {
+              fom: '2019-10-01',
+              overstyrtUtbetalingsgrad: undefined,
+              stillingsprosent: undefined,
+              type: 'INGEN_TILRETTELEGGING',
+            },
+          ],
+          tilretteleggingId: 1008653,
+          velferdspermisjoner: [],
+        },
+        {
+          arbeidsgiverReferanse: '2',
+          skalBrukes: undefined,
+          tilretteleggingBehovFom: '2019-10-01',
+          tilretteleggingDatoer: [
+            {
+              fom: '2019-10-01',
+              overstyrtUtbetalingsgrad: undefined,
+              stillingsprosent: undefined,
+              type: 'INGEN_TILRETTELEGGING',
+            },
+          ],
+          tilretteleggingId: 1008654,
+          uttakArbeidType: 'ORDINÆRT_ARBEID',
+          velferdspermisjoner: [],
+        },
+      ],
       fødselsdato: undefined,
       kode: '5091',
       termindato: '2020-02-27',

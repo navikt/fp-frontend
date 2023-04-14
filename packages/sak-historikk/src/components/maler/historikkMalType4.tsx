@@ -13,11 +13,14 @@ const HistorikkMalType4: FunctionComponent<HistorikkMal & WrappedComponentProps>
 }) => (
   <>
     {historikkinnslag.historikkinnslagDeler.map((del, delIndex) => (
-      <div key={
-        `del${delIndex}` // eslint-disable-line react/no-array-index-key
-      }
+      <div
+        key={
+          `del${delIndex}` // eslint-disable-line react/no-array-index-key
+        }
       >
-        <BodyShort size="small" className="snakkeboble-panel__tekst">{findHendelseText(del.hendelse, getKodeverknavn)}</BodyShort>
+        <BodyShort size="small" className="snakkeboble-panel__tekst">
+          {findHendelseText(del.hendelse, getKodeverknavn)}
+        </BodyShort>
         {del.årsaktekst && <BodyShort size="small">{del.årsaktekst}</BodyShort>}
         {del.begrunnelsetekst && <BubbleText bodyText={del.begrunnelsetekst} />}
         {del.begrunnelseFritekst && <BubbleText bodyText={decodeHtmlEntity(del.begrunnelseFritekst)} />}

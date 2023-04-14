@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, useCallback,
-} from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { HistorikkSakIndex } from '@navikt/fp-sak-historikk';
@@ -27,10 +25,13 @@ const HistorikkIndex: FunctionComponent<OwnProps> = ({
   const alleKodeverkFpTilbake = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
 
   const location = useLocation();
-  const getBehandlingLocation = useCallback((bUuid: string) => ({
-    ...location,
-    pathname: pathToBehandling(saksnummer, bUuid),
-  }), [location]);
+  const getBehandlingLocation = useCallback(
+    (bUuid: string) => ({
+      ...location,
+      pathname: pathToBehandling(saksnummer, bUuid),
+    }),
+    [location],
+  );
 
   return (
     <HistorikkSakIndex

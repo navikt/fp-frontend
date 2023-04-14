@@ -6,9 +6,10 @@ export enum PeriodeApType {
   MANGLENDE_ARBEIDSFORHOLD = 'MANGLENDE_ARBEIDSFORHOLD',
 }
 
-type KontrollerFaktaPeriodeMedApMarkering = KontrollerFaktaPeriode & Readonly<{
-  originalFom: string,
-  aksjonspunktType?: PeriodeApType,
-}>
+type KontrollerFaktaPeriodeMedApMarkering = KontrollerFaktaPeriode &
+  Readonly<{
+    originalFom: string;
+    aksjonspunktType?: PeriodeApType;
+  }>;
 
 export default KontrollerFaktaPeriodeMedApMarkering;

@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, useState, useEffect, useCallback,
-} from 'react';
+import React, { FunctionComponent, useState, useEffect, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { RawIntlProvider } from 'react-intl';
 import moment from 'moment';
@@ -106,12 +104,10 @@ const AppIndex: FunctionComponent = () => {
   useEffect(() => {
     if (navAnsatt?.funksjonellTid) {
       // TODO (TOR) Dette endrar jo berre moment. Kva med kode som brukar Date direkte?
-      const diffInMinutes = moment()
-        .diff(navAnsatt.funksjonellTid, 'minutes');
+      const diffInMinutes = moment().diff(navAnsatt.funksjonellTid, 'minutes');
       // Hvis diffInMinutes har avvik på over 5min: override moment.now (ref. http://momentjs.com/docs/#/customization/now/)
       if (diffInMinutes >= 5 || diffInMinutes <= -5) {
-        const diff = moment()
-          .diff(navAnsatt.funksjonellTid);
+        const diff = moment().diff(navAnsatt.funksjonellTid);
         moment.now = () => Date.now() - diff;
       }
     }
@@ -133,10 +129,10 @@ const AppIndex: FunctionComponent = () => {
 
   const errorMessages = useRestApiError() || EMPTY_ARRAY;
   const queryStrings = parseQueryString(location.search);
-  const forbiddenErrors = errorMessages.filter((o) => o.type === EventType.REQUEST_FORBIDDEN);
-  const unauthorizedErrors = errorMessages.filter((o) => o.type === EventType.REQUEST_UNAUTHORIZED);
+  const forbiddenErrors = errorMessages.filter(o => o.type === EventType.REQUEST_FORBIDDEN);
+  const unauthorizedErrors = errorMessages.filter(o => o.type === EventType.REQUEST_UNAUTHORIZED);
   const hasForbiddenOrUnauthorizedErrors = forbiddenErrors.length > 0 || unauthorizedErrors.length > 0;
-  const shouldRenderHome = (!crashMessage && !hasForbiddenOrUnauthorizedErrors);
+  const shouldRenderHome = !crashMessage && !hasForbiddenOrUnauthorizedErrors;
 
   return (
     <RawIntlProvider value={intl}>
@@ -149,9 +145,10 @@ const AppIndex: FunctionComponent = () => {
               setSiteHeight={setSiteHeight}
               crashMessage={crashMessage}
             />
-            {shouldRenderHome && (<Home headerHeight={headerHeight} navAnsatt={navAnsatt} />)}
-            {forbiddenErrors.length > 0 && (<ForbiddenPage renderSomLenke={(tekst) => <Link to="/">{tekst}</Link>} />)}
-            {unauthorizedErrors.length > 0 && (redirectToLogin() || <UnauthorizedPage renderSomLenke={(tekst) => <Link to="/">{tekst}</Link>} />)}
+            {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
+            {forbiddenErrors.length > 0 && <ForbiddenPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
+            {unauthorizedErrors.length > 0 &&
+              (redirectToLogin() || <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />)}
           </>
         </AppConfigResolver>
       </ErrorBoundary>

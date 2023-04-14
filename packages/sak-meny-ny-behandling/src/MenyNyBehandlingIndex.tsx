@@ -20,10 +20,13 @@ interface OwnProps {
   saksnummer: string;
   behandlingUuid?: string;
   behandlingVersjon?: number;
-  lagNyBehandling: (isTilbakekreving: boolean, data: {
-    saksnummer: string;
-    behandlingUuid?: string;
-  } & FormValues) => void;
+  lagNyBehandling: (
+    isTilbakekreving: boolean,
+    data: {
+      saksnummer: string;
+      behandlingUuid?: string;
+    } & FormValues,
+  ) => void;
   behandlingstyper: KodeverkMedNavn[];
   tilbakekrevingRevurderingArsaker: KodeverkMedNavn[];
   revurderingArsaker: KodeverkMedNavn[];
@@ -50,19 +53,23 @@ const MenyNyBehandlingIndex: FunctionComponent<OwnProps> = ({
   uuidForSistLukkede,
   lukkModal,
 }) => {
-  const submit = useCallback((formValues: FormValues) => {
-    const isTilbakekreving = !!formValues.behandlingType && TILBAKEKREVING_BEHANDLINGSTYPER.includes(formValues.behandlingType);
-    const tilbakekrevingBehandlingUuid = behandlingUuid && isTilbakekreving ? { behandlingUuid } : {};
-    const params = {
-      saksnummer,
-      ...tilbakekrevingBehandlingUuid,
-      ...formValues,
-    };
+  const submit = useCallback(
+    (formValues: FormValues) => {
+      const isTilbakekreving =
+        !!formValues.behandlingType && TILBAKEKREVING_BEHANDLINGSTYPER.includes(formValues.behandlingType);
+      const tilbakekrevingBehandlingUuid = behandlingUuid && isTilbakekreving ? { behandlingUuid } : {};
+      const params = {
+        saksnummer,
+        ...tilbakekrevingBehandlingUuid,
+        ...formValues,
+      };
 
-    lagNyBehandling(isTilbakekreving, params);
+      lagNyBehandling(isTilbakekreving, params);
 
-    lukkModal();
-  }, [behandlingUuid, behandlingVersjon]);
+      lukkModal();
+    },
+    [behandlingUuid, behandlingVersjon],
+  );
   return (
     <RawIntlProvider value={intl}>
       <NyBehandlingModal

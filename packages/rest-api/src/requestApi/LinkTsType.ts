@@ -3,6 +3,6 @@ type Link = Readonly<{
   rel: string;
   requestPayload?: any;
   type: string;
-}>
+}>;
 
 export default Link;

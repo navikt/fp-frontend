@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, useMemo,
-} from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import dayjs from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
@@ -18,8 +16,8 @@ interface Koordinat {
   y: number;
 }
 
-export const lagKoordinater = (oppgaverPerForsteStonadsdag: OppgaverForForsteStonadsdag[]): Koordinat[] => oppgaverPerForsteStonadsdag
-  .map((o) => ({
+export const lagKoordinater = (oppgaverPerForsteStonadsdag: OppgaverForForsteStonadsdag[]): Koordinat[] =>
+  oppgaverPerForsteStonadsdag.map(o => ({
     x: dayjs(o.forsteStonadsdag).startOf('day').toDate().getTime(),
     y: o.antall,
   }));
@@ -27,16 +25,19 @@ export const lagKoordinater = (oppgaverPerForsteStonadsdag: OppgaverForForsteSto
 export const lagDatastruktur = (koordinater: Koordinat[]): number[][] => {
   const nyeKoordinater = [];
   const periodeStart = koordinater
-    .map((koordinat) => dayjs(koordinat.x))
-    .reduce((tidligesteDato, dato) => (tidligesteDato.isSameOrBefore(dato) ? tidligesteDato : dato), dayjs().startOf('day'))
+    .map(koordinat => dayjs(koordinat.x))
+    .reduce(
+      (tidligesteDato, dato) => (tidligesteDato.isSameOrBefore(dato) ? tidligesteDato : dato),
+      dayjs().startOf('day'),
+    )
     .toDate();
   const periodeSlutt = koordinater
-    .map((koordinat) => dayjs(koordinat.x))
+    .map(koordinat => dayjs(koordinat.x))
     .reduce((senesteDato, dato) => (senesteDato.isSameOrAfter(dato) ? senesteDato : dato), dayjs().startOf('day'))
     .toDate();
 
   for (let dato = dayjs(periodeStart); dato.isSameOrBefore(periodeSlutt); dato = dato.add(1, 'days')) {
-    const funnetKoordinat = koordinater.find((k) => dayjs(k.x).isSame(dato));
+    const funnetKoordinat = koordinater.find(k => dayjs(k.x).isSame(dato));
     nyeKoordinater.push([dato.toDate().getTime(), funnetKoordinat ? funnetKoordinat.y : 0]);
   }
   return nyeKoordinater;
@@ -50,10 +51,7 @@ interface OwnProps {
 /**
  * OppgaverPerForsteStonadsdagGraf.
  */
-const OppgaverPerForsteStonadsdagGraf: FunctionComponent<OwnProps> = ({
-  height,
-  oppgaverPerForsteStonadsdag,
-}) => {
+const OppgaverPerForsteStonadsdagGraf: FunctionComponent<OwnProps> = ({ height, oppgaverPerForsteStonadsdag }) => {
   const koordinater = useMemo(() => lagKoordinater(oppgaverPerForsteStonadsdag), [oppgaverPerForsteStonadsdag]);
   const data = useMemo(() => lagDatastruktur(koordinater), [koordinater]);
   return (
@@ -66,7 +64,7 @@ const OppgaverPerForsteStonadsdagGraf: FunctionComponent<OwnProps> = ({
             axisPointer: {
               snap: true,
               label: {
-                formatter: (params) => dayjs(params.value).format(DDMMYYYY_DATE_FORMAT),
+                formatter: params => dayjs(params.value).format(DDMMYYYY_DATE_FORMAT),
               },
             },
           },
@@ -87,11 +85,13 @@ const OppgaverPerForsteStonadsdagGraf: FunctionComponent<OwnProps> = ({
           yAxis: {
             type: 'value',
           },
-          series: [{
-            data,
-            type: 'line',
-            areaStyle: {},
-          }],
+          series: [
+            {
+              data,
+              type: 'line',
+              areaStyle: {},
+            },
+          ],
           color: ['#337c9b'],
         }}
       />

@@ -1,16 +1,12 @@
 import React from 'react';
-import {
-  render, screen, waitFor, fireEvent,
-} from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import moment from 'moment';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import * as stories from './InnsynProsessIndex.stories';
 
-const {
-  PanelForVurderingAvInnsyn,
-} = composeStories(stories);
+const { PanelForVurderingAvInnsyn } = composeStories(stories);
 
 describe('<InnsynProsessIndex>', () => {
   it('skal fylle ut og så bekrefte avslått innsyn', async () => {
@@ -42,11 +38,13 @@ describe('<InnsynProsessIndex>', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en vurdering',
       fristDato: moment().add(3, 'days').format(ISO_DATE_FORMAT),
-      innsynDokumenter: [{
-        dokumentId: '3',
-        fikkInnsyn: false,
-        journalpostId: '2',
-      }],
+      innsynDokumenter: [
+        {
+          dokumentId: '3',
+          fikkInnsyn: false,
+          journalpostId: '2',
+        },
+      ],
       innsynResultatType: 'AVVIST',
       kode: '5037',
       mottattDato: '2021-12-23',
@@ -98,11 +96,13 @@ describe('<InnsynProsessIndex>', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en vurdering',
       fristDato: '2021-12-29',
-      innsynDokumenter: [{
-        dokumentId: '3',
-        fikkInnsyn: true,
-        journalpostId: '2',
-      }],
+      innsynDokumenter: [
+        {
+          dokumentId: '3',
+          fikkInnsyn: true,
+          journalpostId: '2',
+        },
+      ],
       innsynResultatType: 'INNV',
       kode: '5037',
       mottattDato: '2021-12-23',

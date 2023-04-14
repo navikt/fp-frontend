@@ -16,21 +16,12 @@ export default {
 const Template: Story<{
   submitCallback: (data: any) => Promise<void>;
   erForeldrepenger: boolean;
-}> = ({
-  submitCallback,
-  erForeldrepenger,
-}) => {
+}> = ({ submitCallback, erForeldrepenger }) => {
   const formMethods = useForm();
 
   return (
-    <Form
-      formMethods={formMethods}
-      onSubmit={submitCallback}
-    >
-      <FodselPapirsoknadIndex
-        readOnly={false}
-        erForeldrepenger={erForeldrepenger}
-      />
+    <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <FodselPapirsoknadIndex readOnly={false} erForeldrepenger={erForeldrepenger} />
       <VerticalSpacer fourtyPx />
       <Button size="small" variant="primary">
         Lagreknapp (Kun for test)

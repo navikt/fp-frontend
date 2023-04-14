@@ -7,14 +7,19 @@ import { behandlingFellesEndepunkter } from '../../../felles/data/behandlingFell
 
 export const EsBehandlingApiKeys = {
   BEREGNINGRESULTAT_ENGANGSSTONAD: new RestKey<BeregningsresultatEs, void>('BEREGNINGRESULTAT_ENGANGSSTONAD'),
-  BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING: new RestKey<{'beregningsresultat-engangsstonad'?: BeregningsresultatEs; },
-  void>('BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING'),
+  BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING: new RestKey<
+    { 'beregningsresultat-engangsstonad'?: BeregningsresultatEs },
+    void
+  >('BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING'),
 };
 
 const endepunkter = new RestApiConfigBuilder()
   // behandlingsdata
   .withRel('beregningsresultat-engangsstonad', EsBehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD)
-  .withRel('beregningsresultat-engangsstonad-original-behandling', EsBehandlingApiKeys.BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING)
+  .withRel(
+    'beregningsresultat-engangsstonad-original-behandling',
+    EsBehandlingApiKeys.BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING,
+  )
 
   .build();
 

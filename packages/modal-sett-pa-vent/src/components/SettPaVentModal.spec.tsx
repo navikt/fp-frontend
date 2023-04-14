@@ -91,11 +91,13 @@ describe('<SettPaVentModal>', () => {
           cancelEvent={cancelEventCallback}
           frist="2015-10-10"
           hasManualPaVent={false}
-          ventearsaker={[{
-            kode: 'VENT_PÅ_TILBAKEKREVINGSGRUNNLAG',
-            kodeverk: 'VENT_AARSAK',
-            navn: 'Venter på kravgrunnlag',
-          }]}
+          ventearsaker={[
+            {
+              kode: 'VENT_PÅ_TILBAKEKREVINGSGRUNNLAG',
+              kodeverk: 'VENT_AARSAK',
+              navn: 'Venter på kravgrunnlag',
+            },
+          ]}
           ventearsak="VENT_PÅ_TILBAKEKREVINGSGRUNNLAG"
           erTilbakekreving
           showModal

@@ -19,17 +19,13 @@ const Template: Story<{
   isForeldrepengerFagsak: boolean;
   familieHendelseType: string;
   submitCallback: (data: any) => Promise<void>;
-}> = ({
-  isForeldrepengerFagsak,
-  familieHendelseType,
-  submitCallback,
-}) => {
+}> = ({ isForeldrepengerFagsak, familieHendelseType, submitCallback }) => {
   const formMethods = useForm();
 
   return (
     <Form
       formMethods={formMethods}
-      onSubmit={(values) => submitCallback(OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values.omsorg))}
+      onSubmit={values => submitCallback(OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values.omsorg))}
     >
       <OmsorgOgAdopsjonPapirsoknadIndex
         readOnly={false}

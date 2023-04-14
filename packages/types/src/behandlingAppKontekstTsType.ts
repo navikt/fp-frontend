@@ -34,7 +34,7 @@ export type BehandlingFellesData = Readonly<{
   harVerge?: boolean;
   førsteÅrsak?: BehandlingÅrsak;
   fristBehandlingPaaVent?: string;
-}>
+}>;
 
 export type BehandlingÅrsak = {
   behandlingArsakType: string;
@@ -46,12 +46,12 @@ type Brevmal = {
   kode: string;
   navn: string;
   tilgjengelig: boolean;
-}
+};
 
 export type TotrinnskontrollSkjermlenkeContext = Readonly<{
   skjermlenkeType: string;
   totrinnskontrollAksjonspunkter: TotrinnskontrollAksjonspunkt[];
-}>
+}>;
 
 export enum VergeBehandlingmenyValg {
   OPPRETT = 'OPPRETT',
@@ -69,16 +69,17 @@ export type BehandlingTillatteOperasjoner = Readonly<{
   behandlingKanOpnesForEndringer: boolean;
   behandlingKanSettesPaVent: boolean;
   vergeBehandlingsmeny: VergeBehandlingmenyValg;
-}>
+}>;
 
-type BehandlingAppKontekst = BehandlingFellesData & Readonly<{
-  behandlingTillatteOperasjoner: BehandlingTillatteOperasjoner;
-  brevmaler: Brevmal[];
-  totrinnskontrollÅrsaker: TotrinnskontrollSkjermlenkeContext[];
-  totrinnskontrollReadonly: boolean;
-  risikoAksjonspunkt: Aksjonspunkt;
-  kontrollResultat: Risikoklassifisering;
-  ugunstAksjonspunkt: boolean;
-}>
+type BehandlingAppKontekst = BehandlingFellesData &
+  Readonly<{
+    behandlingTillatteOperasjoner: BehandlingTillatteOperasjoner;
+    brevmaler: Brevmal[];
+    totrinnskontrollÅrsaker: TotrinnskontrollSkjermlenkeContext[];
+    totrinnskontrollReadonly: boolean;
+    risikoAksjonspunkt: Aksjonspunkt;
+    kontrollResultat: Risikoklassifisering;
+    ugunstAksjonspunkt: boolean;
+  }>;
 
 export default BehandlingAppKontekst;

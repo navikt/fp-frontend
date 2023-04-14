@@ -2,7 +2,11 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import {
-  StandardFaktaPanelProps, FamilieHendelseSamling, InntektArbeidYtelse, Personoversikt, Soknad,
+  StandardFaktaPanelProps,
+  FamilieHendelseSamling,
+  InntektArbeidYtelse,
+  Personoversikt,
+  Soknad,
 } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -41,7 +45,9 @@ const OmsorgOgForeldreansvarFaktaIndex: FunctionComponent<OwnProps & StandardFak
       soknad={soknad}
       personoversikt={personoversikt}
       aksjonspunkter={aksjonspunkter}
-      innvilgetRelatertTilgrensendeYtelserForAnnenForelder={inntektArbeidYtelse.innvilgetRelatertTilgrensendeYtelserForAnnenForelder}
+      innvilgetRelatertTilgrensendeYtelserForAnnenForelder={
+        inntektArbeidYtelse.innvilgetRelatertTilgrensendeYtelserForAnnenForelder
+      }
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
       submitCallback={submitCallback}
       readOnly={readOnly}

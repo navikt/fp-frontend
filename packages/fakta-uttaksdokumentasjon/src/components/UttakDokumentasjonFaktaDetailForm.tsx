@@ -2,20 +2,22 @@ import React, { FunctionComponent, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
-import {
-  BodyShort, Button, Label,
-} from '@navikt/ds-react';
+import { BodyShort, Button, Label } from '@navikt/ds-react';
 import { required } from '@navikt/ft-form-validators';
 import { Edit } from '@navikt/ds-icons';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Form, formHooks, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
-  AvsnittSkiller, DateLabel, FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
+  AvsnittSkiller,
+  DateLabel,
+  FlexColumn,
+  FlexContainer,
+  FlexRow,
+  Image,
+  VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
-import {
-  DokumentasjonVurderingBehov, UttakVurdering,
-} from '@navikt/fp-types';
+import { DokumentasjonVurderingBehov, UttakVurdering } from '@navikt/fp-types';
 
 import splitPeriodImageUrl from '../images/splitt.svg';
 import DelOppPeriodeModal from './DelOppPeriodeModal';
@@ -24,7 +26,7 @@ import styles from './uttakDokumentasjonFaktaDetailForm.module.css';
 
 type FormValues = {
   perioder: DokumentasjonVurderingBehov[];
-}
+};
 
 interface OwnProps {
   valgtDokBehov: DokumentasjonVurderingBehov;
@@ -50,9 +52,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
     },
   });
 
-  const {
-    fields, append, update, remove,
-  } = formHooks.useFieldArray({
+  const { fields, append, update, remove } = formHooks.useFieldArray({
     control: formMethods.control,
     name: 'perioder',
   });
@@ -97,13 +97,16 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
     setSistOppdeltPeriodeIndex(valgtPeriodeIndex);
   };
 
-  const vurderingsalternativer = [{
-    value: UttakVurdering.GODKJENT,
-    label: intl.formatMessage({ id: 'UttakDokumentasjonFaktaDetailForm.Godkjent' }),
-  }, {
-    value: UttakVurdering.IKKE_GODKJENT,
-    label: intl.formatMessage({ id: 'UttakDokumentasjonFaktaDetailForm.IkkeGodkjent' }),
-  }];
+  const vurderingsalternativer = [
+    {
+      value: UttakVurdering.GODKJENT,
+      label: intl.formatMessage({ id: 'UttakDokumentasjonFaktaDetailForm.Godkjent' }),
+    },
+    {
+      value: UttakVurdering.IKKE_GODKJENT,
+      label: intl.formatMessage({ id: 'UttakDokumentasjonFaktaDetailForm.IkkeGodkjent' }),
+    },
+  ];
 
   if (valgtDokBehov.årsak.includes('AKTIVITETSKRAV')) {
     vurderingsalternativer.push({
@@ -125,7 +128,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
                 <VerticalSpacer twentyPx />
               </>
             )}
-            {(!readOnly && perioder[index].fom !== perioder[index].tom && fields.length === 1) && (
+            {!readOnly && perioder[index].fom !== perioder[index].tom && fields.length === 1 && (
               <div className={styles.marginBtn}>
                 <Button
                   size="small"
@@ -141,23 +144,34 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
             {fields.length > 1 && (
               <FlexContainer>
                 <Label size="medium">
-                  <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.PeriodeMedIndex" values={{ index: index + 1 }} />
+                  <FormattedMessage
+                    id="UttakDokumentasjonFaktaDetailForm.PeriodeMedIndex"
+                    values={{ index: index + 1 }}
+                  />
                 </Label>
                 <FlexRow>
                   <FlexColumn>
-                    <Label size="small"><FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Fom" /></Label>
+                    <Label size="small">
+                      <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Fom" />
+                    </Label>
                   </FlexColumn>
                   <FlexColumn className={styles.fomDato}>
                     {perioder[index].fom && (
-                      <BodyShort size="small"><DateLabel dateString={perioder[index].fom} /></BodyShort>
+                      <BodyShort size="small">
+                        <DateLabel dateString={perioder[index].fom} />
+                      </BodyShort>
                     )}
                   </FlexColumn>
                   <FlexColumn>
-                    <Label size="small"><FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Tom" /></Label>
+                    <Label size="small">
+                      <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Tom" />
+                    </Label>
                   </FlexColumn>
                   <FlexColumn className={styles.tomDato}>
                     {perioder[index].tom && (
-                      <BodyShort size="small"><DateLabel dateString={perioder[index].tom} /></BodyShort>
+                      <BodyShort size="small">
+                        <DateLabel dateString={perioder[index].tom} />
+                      </BodyShort>
                     )}
                   </FlexColumn>
                   {sistOppdeltPeriodeIndex >= index && (
@@ -175,7 +189,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
                     </FlexColumn>
                   )}
                 </FlexRow>
-                {(perioder[index].fom !== perioder[index].tom && fields.length > 1 && index === fields.length - 1) && (
+                {perioder[index].fom !== perioder[index].tom && fields.length > 1 && index === fields.length - 1 && (
                   <>
                     <VerticalSpacer sixteenPx />
                     <div className={styles.marginBtn}>
@@ -239,7 +253,9 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
         <DelOppPeriodeModal
           periode={perioder[valgtPeriodeIndex]}
           originalTom={valgtDokBehov.tom}
-          submit={(dato) => (valgtPeriodeIndex + 1 < fields.length ? oppdaterOgNullstillPerioder(dato) : lagNyPeriode(dato))}
+          submit={dato =>
+            valgtPeriodeIndex + 1 < fields.length ? oppdaterOgNullstillPerioder(dato) : lagNyPeriode(dato)
+          }
           cancel={() => settValgtPeriodeIndex(undefined)}
           visSlettEtterfølgendePerioder={valgtPeriodeIndex < fields.length - 1}
         />

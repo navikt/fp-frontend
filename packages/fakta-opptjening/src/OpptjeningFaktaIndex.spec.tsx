@@ -5,9 +5,7 @@ import userEvent from '@testing-library/user-event';
 
 import * as stories from './OpptjeningFaktaIndex.stories';
 
-const {
-  MedAksjonspunkt, UtenAksjonspunkt,
-} = composeStories(stories);
+const { MedAksjonspunkt, UtenAksjonspunkt } = composeStories(stories);
 
 describe('<OpptjeningFaktaIndex>', () => {
   it('skal åpne aktivitet automatisk når det har åpent aksjonspunkt og så godkjenne det', async () => {
@@ -52,15 +50,17 @@ describe('<OpptjeningFaktaIndex>', () => {
 
     expect(lagre).toHaveBeenNthCalledWith(1, {
       kode: '5051',
-      opptjeningsaktiviteter: [{
-        arbeidsforholdRef: undefined,
-        arbeidsgiverReferanse: '1',
-        aktivitetType: 'NÆRING',
-        begrunnelse: 'Dette er en begrunnelse',
-        erGodkjent: true,
-        opptjeningFom: '1995-09-14',
-        opptjeningTom: '9999-12-31',
-      }],
+      opptjeningsaktiviteter: [
+        {
+          arbeidsforholdRef: undefined,
+          arbeidsgiverReferanse: '1',
+          aktivitetType: 'NÆRING',
+          begrunnelse: 'Dette er en begrunnelse',
+          erGodkjent: true,
+          opptjeningFom: '1995-09-14',
+          opptjeningTom: '9999-12-31',
+        },
+      ],
     });
   });
 

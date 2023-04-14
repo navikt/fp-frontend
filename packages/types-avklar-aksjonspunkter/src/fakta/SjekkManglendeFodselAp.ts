@@ -9,6 +9,6 @@ type SjekkManglendeFodselAp = {
     fodselsdato: string;
     dodsdato?: string;
   }[];
-} & AksjonspunktTilBekreftelse<AksjonspunktCode.SJEKK_MANGLENDE_FODSEL>
+} & AksjonspunktTilBekreftelse<AksjonspunktCode.SJEKK_MANGLENDE_FODSEL>;
 
 export default SjekkManglendeFodselAp;
