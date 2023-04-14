@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { alleKodeverkLos, withRouter } from '@navikt/fp-storybook-utils';
@@ -20,13 +20,13 @@ const navAnsattDefault = {
   kanBehandleKode6: true,
 } as NavAnsatt;
 
-const Template: Story<{ valgtAvdelingEnhet?: Avdeling, navAnsatt: NavAnsatt }> = ({
-  valgtAvdelingEnhet,
+const Template: StoryFn<{ avdelinger?: Avdeling[], navAnsatt: NavAnsatt }> = ({
+  avdelinger,
   navAnsatt,
 }) => {
   const data = [
     { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
-    { key: RestApiPathsKeys.AVDELINGER.name, data: valgtAvdelingEnhet ? [valgtAvdelingEnhet] : undefined },
+    { key: RestApiPathsKeys.AVDELINGER.name, data: avdelinger },
     { key: RestApiPathsKeys.SAKSBEHANDLERE_FOR_AVDELING.name, data: [] },
     { key: RestApiPathsKeys.OPPGAVE_ANTALL.name, data: 1 },
     { key: RestApiPathsKeys.LAGRE_SAKSLISTE_NAVN.name, data: undefined },
@@ -56,25 +56,46 @@ const Template: Story<{ valgtAvdelingEnhet?: Avdeling, navAnsatt: NavAnsatt }> =
 
 export const Default = Template.bind({});
 Default.args = {
-  valgtAvdelingEnhet: {
+  avdelinger: [{
+    avdelingEnhet: '1234',
+    navn: 'NAV Oslo',
+    kreverKode6: true,
+  }, {
     avdelingEnhet: '123',
     navn: 'NAV Viken',
     kreverKode6: false,
-  },
+  }],
   navAnsatt: navAnsattDefault,
 };
 
 export const LasteIkonFørValgtAvdelingErSatt = Template.bind({});
 LasteIkonFørValgtAvdelingErSatt.args = {
-  valgtAvdelingEnhet: undefined,
+  avdelinger: [],
   navAnsatt: navAnsattDefault,
 };
 
 export const HarIkkeTilgang = Template.bind({});
 HarIkkeTilgang.args = {
-  valgtAvdelingEnhet: undefined,
+  avdelinger: [],
   navAnsatt: {
     kanOppgavestyre: false,
+    kanBehandleKode6: false,
+  } as NavAnsatt,
+};
+
+export const SkalFiltrereBortAvdelingerSomKreverKode6 = Template.bind({});
+SkalFiltrereBortAvdelingerSomKreverKode6.args = {
+  avdelinger: [{
+    avdelingEnhet: '1234',
+    navn: 'NAV Oslo',
+    kreverKode6: true,
+  }, {
+    avdelingEnhet: '123',
+    navn: 'NAV Viken',
+    kreverKode6: false,
+  }],
+  navAnsatt: {
+    kanOppgavestyre: true,
     kanBehandleKode6: false,
   } as NavAnsatt,
 };

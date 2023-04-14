@@ -17,7 +17,6 @@ import {
 } from './data/fplosRestApi';
 import AvdelingslederDashboard from './components/AvdelingslederDashboard';
 import IkkeTilgangTilAvdelingslederPanel from './components/IkkeTilgangTilAvdelingslederPanel';
-import IkkeTilgangTilKode6AvdelingPanel from './components/IkkeTilgangTilKode6AvdelingPanel';
 import Saksbehandler from './typer/saksbehandlerAvdelingTsType';
 import AvdelingslederPanels from './avdelingslederPanels';
 import NokkeltallIndex from './nokkeltall/NokkeltallIndex';
@@ -38,10 +37,10 @@ const EMPTY_ARRAY: Saksbehandler[] = [];
 
 const setAvdeling = (
   setValgtAvdeling: (avdelingEnhet: string) => void,
-  avdelinger?: Avdeling[],
+  avdelinger: Avdeling[],
   valgtAvdelingEnhet?: string,
 ) => {
-  if (avdelinger && avdelinger.length > 0 && !valgtAvdelingEnhet) {
+  if (avdelinger.length > 0 && !valgtAvdelingEnhet) {
     let valgtEnhet = avdelinger[0].avdelingEnhet;
     const lagretAvdelingEnhet = getValueFromLocalStorage('avdelingEnhet');
     if (lagretAvdelingEnhet) {
@@ -137,11 +136,17 @@ const AvdelingslederIndex: FunctionComponent<OwnProps> = ({
 
   const { kanOppgavestyre, kanBehandleKode6 } = navAnsatt;
 
-  const avdelingerData = restApiHooks.useRestApi(RestApiPathsKeys.AVDELINGER, undefined, { isCachingOn: true });
+  const avdelingerData = restApiHooks.useRestApi(RestApiPathsKeys.AVDELINGER, undefined, {
+    isCachingOn: true,
+    suspendRequest: !kanOppgavestyre,
+  });
+
+  const avdelinger = avdelingerData?.data;
+  const filtrerteAvdelinger = avdelinger ? avdelinger.filter((a) => kanBehandleKode6 || !a.kreverKode6) : [];
 
   useEffect(() => {
     if (avdelingerData.state === RestApiState.SUCCESS) {
-      setAvdeling(setValgtAvdelingEnhet, avdelingerData.data, valgtAvdelingEnhet);
+      setAvdeling(setValgtAvdelingEnhet, filtrerteAvdelinger, valgtAvdelingEnhet);
     }
   }, [avdelingerData]);
 
@@ -161,26 +166,18 @@ const AvdelingslederIndex: FunctionComponent<OwnProps> = ({
 
   const navigate = useNavigate();
 
-  if (avdelingerData.state !== RestApiState.SUCCESS) {
-    return null;
-  }
-
-  const avdelinger = avdelingerData.data;
-  const avdeling = avdelinger instanceof Array && avdelinger.find((a) => a.avdelingEnhet === valgtAvdelingEnhet);
-  const erKode6Avdeling = avdeling ? avdeling.kreverKode6 : false;
-
   if (!kanOppgavestyre) {
     return <IkkeTilgangTilAvdelingslederPanel />;
   }
-  if (erKode6Avdeling && !kanBehandleKode6) {
-    return <IkkeTilgangTilKode6AvdelingPanel />;
+  if (avdelingerData.state !== RestApiState.SUCCESS) {
+    return null;
   }
   if (valgtAvdelingEnhet) {
     return (
       <AvdelingslederDashboard key={valgtAvdelingEnhet}>
         <Avdelingsvelger
           valgtAvdelingEnhet={valgtAvdelingEnhet}
-          avdelinger={avdelinger}
+          avdelinger={filtrerteAvdelinger}
           setValgtAvdelingEnhet={setValgtAvdelingEnhet}
         />
         <VerticalSpacer sixteenPx />
