@@ -96,7 +96,9 @@ const ValgtAktivitetSubForm: FunctionComponent<OwnProps> = ({
           <Label size="small">
             <FormattedMessage id="ActivityPanel.Registreringsdato" />
           </Label>
-          <BodyShort size="small">{dayjs(naringRegistreringsdato).format(DDMMYYYY_DATE_FORMAT)}</BodyShort>
+          <BodyShort size="small">
+            {naringRegistreringsdato ? dayjs(naringRegistreringsdato).format(DDMMYYYY_DATE_FORMAT) : '-'}
+          </BodyShort>
         </FlexColumn>
       </FlexRow>
     )}
