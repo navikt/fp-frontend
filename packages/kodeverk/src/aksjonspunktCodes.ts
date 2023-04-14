@@ -43,7 +43,6 @@ enum AksjonspunktCode {
   REGISTRER_PAPIRSOKNAD_FORELDREPENGER = '5040',
   VURDER_ARBEIDSFORHOLD_PERMISJON = '5041',
   VURDER_SOKNADSFRIST_FORELDREPENGER = '5043',
-  VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT = '5044',
   KONTROLLER_AUTOMATISK_BESTEBEREGNING = '5048',
   VURDER_PERIODER_MED_OPPTJENING = '5051',
   AVKLAR_FORTSATT_MEDLEMSKAP = '5053',
@@ -129,10 +128,6 @@ const uttakAksjonspunkter = [
   AksjonspunktCode.KONTROLLER_TILSTØTENDE_YTELSER_OPPHØRT,
 ];
 
-const isVilkarForSykdomOppfyltAksjonspunkter = [
-  AksjonspunktCode.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
-];
-
 const aksjonspunktIsOfType = (
   validAksjonspunktCodes: string[],
 ) => (aksjonspunktCode: string): boolean => validAksjonspunktCodes.includes(aksjonspunktCode);
@@ -155,7 +150,6 @@ type Aksjonspunkt = Readonly<{
 export const hasAksjonspunkt = (aksjonspunktKode: string, aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
   .some((ap) => ap.definisjon === aksjonspunktKode);
 
-export const isVilkarForSykdomOppfylt = aksjonspunktIsOfType(isVilkarForSykdomOppfyltAksjonspunkter);
 export const isUttakAksjonspunkt = aksjonspunktIsOfType(uttakAksjonspunkter);
 
 export default AksjonspunktCode;

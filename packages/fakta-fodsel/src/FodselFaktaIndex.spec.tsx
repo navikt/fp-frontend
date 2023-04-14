@@ -6,7 +6,7 @@ import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './FodselFaktaIndex.stories';
 
-const { AksjonspunktTerminbekreftelse, AksjonspunktSjekkManglendeFødsel, AksjonspunktVurderOmVilkårForSykdomErOppfylt } = composeStories(stories);
+const { AksjonspunktTerminbekreftelse, AksjonspunktSjekkManglendeFødsel } = composeStories(stories);
 
 describe('<FodselFaktaIndex>', () => {
   it('skal bekrefte aksjonspunkt for termin', async () => {
@@ -137,56 +137,6 @@ describe('<FodselFaktaIndex>', () => {
         fodselsdato: '2019-01-01',
       }],
       begrunnelse: 'Dette er en begrunnelse',
-    }]);
-  });
-
-  it('skal bekrefte aksjonspunkt for sykdom der det er dokumentert at den andre forelderen er for syk', async () => {
-    const lagre = vi.fn(() => Promise.resolve());
-
-    const utils = render(<AksjonspunktVurderOmVilkårForSykdomErOppfylt submitCallback={lagre} />);
-
-    expect(await screen.findByText('Vurder om vilkår for sykdom er oppfylt')).toBeInTheDocument();
-    expect(screen.getByText('Sykdom')).toBeInTheDocument();
-
-    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
-
-    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
-
-    expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
-
-    await userEvent.click(screen.getByText('Bekreft og fortsett'));
-
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      begrunnelse: 'Dette er en begrunnelse',
-      erMorForSykVedFodsel: true,
-      kode: '5044',
-    }]);
-  });
-
-  it('skal bekrefte aksjonspunkt for sykdom der det ikke er dokumentert at den andre forelderen er for syk', async () => {
-    const lagre = vi.fn(() => Promise.resolve());
-
-    const utils = render(<AksjonspunktVurderOmVilkårForSykdomErOppfylt submitCallback={lagre} />);
-
-    expect(await screen.findByText('Vurder om vilkår for sykdom er oppfylt')).toBeInTheDocument();
-    expect(screen.getByText('Sykdom')).toBeInTheDocument();
-
-    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
-
-    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
-
-    await userEvent.click(screen.getByText(/ikke/));
-
-    expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
-
-    await userEvent.click(screen.getByText('Bekreft og fortsett'));
-
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      begrunnelse: 'Dette er en begrunnelse',
-      erMorForSykVedFodsel: false,
-      kode: '5044',
     }]);
   });
 });
