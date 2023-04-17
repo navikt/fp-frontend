@@ -87,6 +87,8 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
 
   const onSubmit = useCallback((values: FormValues) => submitCallback(transformValues(values)), [submitCallback]);
 
+  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+
   const validerAtEnKunKanVelgeOppfyltNårEnHarPerioder = useCallback(verdi => {
     if (fastsattOpptjening.fastsattOpptjeningAktivitetList.length === 0 && verdi === true) {
       return intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.KanIkkeVelgeOppfylt' });
@@ -126,10 +128,7 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
           readOnly={readOnly}
           customVilkarOppfyltText={<FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.ErOppfylt" />}
           customVilkarIkkeOppfyltText={
-            <FormattedMessage
-              id="OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt"
-              values={{ b: (chunks: any) => <b>{chunks}</b> }}
-            />
+            <FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt" values={{ b: bTag }} />
           }
           validatorsForRadioOptions={[validerAtEnKunKanVelgeOppfyltNårEnHarPerioder]}
         />

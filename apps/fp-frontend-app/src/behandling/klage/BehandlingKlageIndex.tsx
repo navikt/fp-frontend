@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
@@ -54,6 +54,38 @@ const BehandlingKlageIndex: FunctionComponent<OwnProps & StandardBehandlingProps
 
   useInitBehandlingHandlinger(requestKlageApi, behandlingEventHandler, hentBehandling, setBehandling, behandling);
 
+  const hentFaktaPaneler = useCallback(props => <VergeFaktaInitPanel {...props} />, []);
+
+  const hentProsessPaneler = useCallback(
+    props => (
+      <>
+        <FormKravFamOgPensjonProsessStegInitPanel {...props} alleBehandlinger={alleBehandlinger} />
+        <VurderingFamOgPensjonProsessStegInitPanel
+          {...props}
+          fagsak={fagsak}
+          opneSokeside={opneSokeside}
+          toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
+          oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+        />
+        <FormKravKlageInstansProsessStegInitPanel {...props} alleBehandlinger={alleBehandlinger} />
+        <VurderingKlageInstansProsessStegInitPanel {...props} fagsak={fagsak} />
+        <KlageresultatProsessStegInitPanel
+          {...props}
+          fagsak={fagsak}
+          opneSokeside={opneSokeside}
+          toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
+        />
+      </>
+    ),
+    [
+      alleBehandlinger,
+      fagsak,
+      opneSokeside,
+      toggleOppdateringAvFagsakOgBehandling,
+      oppdaterProsessStegOgFaktaPanelIUrl,
+    ],
+  );
+
   if (!behandling) {
     return <LoadingPanel />;
   }
@@ -81,27 +113,8 @@ const BehandlingKlageIndex: FunctionComponent<OwnProps & StandardBehandlingProps
           valgtFaktaSteg={valgtFaktaSteg}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
           requestApi={requestKlageApi}
-          hentFaktaPaneler={props => <VergeFaktaInitPanel {...props} />}
-          hentProsessPaneler={props => (
-            <>
-              <FormKravFamOgPensjonProsessStegInitPanel {...props} alleBehandlinger={alleBehandlinger} />
-              <VurderingFamOgPensjonProsessStegInitPanel
-                {...props}
-                fagsak={fagsak}
-                opneSokeside={opneSokeside}
-                toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
-                oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-              />
-              <FormKravKlageInstansProsessStegInitPanel {...props} alleBehandlinger={alleBehandlinger} />
-              <VurderingKlageInstansProsessStegInitPanel {...props} fagsak={fagsak} />
-              <KlageresultatProsessStegInitPanel
-                {...props}
-                fagsak={fagsak}
-                opneSokeside={opneSokeside}
-                toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
-              />
-            </>
-          )}
+          hentFaktaPaneler={hentFaktaPaneler}
+          hentProsessPaneler={hentProsessPaneler}
         />
       </StandardPropsProvider>
     </>

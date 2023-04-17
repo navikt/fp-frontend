@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
@@ -39,6 +39,21 @@ const BehandlingInnsynIndex: FunctionComponent<StandardBehandlingProps> = ({
 
   useInitBehandlingHandlinger(requestInnsynApi, behandlingEventHandler, hentBehandling, setBehandling, behandling);
 
+  const hentProsessPaneler = useCallback(
+    props => (
+      <>
+        <BehandleInnsynProsessStegInitPanel {...props} fagsak={fagsak} />
+        <InnsynVedtakProsessStegInitPanel
+          {...props}
+          fagsak={fagsak}
+          opneSokeside={opneSokeside}
+          toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
+        />
+      </>
+    ),
+    [fagsak, opneSokeside, toggleOppdateringAvFagsakOgBehandling],
+  );
+
   if (!behandling) {
     return <LoadingPanel />;
   }
@@ -66,17 +81,7 @@ const BehandlingInnsynIndex: FunctionComponent<StandardBehandlingProps> = ({
           valgtFaktaSteg={valgtFaktaSteg}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
           requestApi={requestInnsynApi}
-          hentProsessPaneler={props => (
-            <>
-              <BehandleInnsynProsessStegInitPanel {...props} fagsak={fagsak} />
-              <InnsynVedtakProsessStegInitPanel
-                {...props}
-                fagsak={fagsak}
-                opneSokeside={opneSokeside}
-                toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
-              />
-            </>
-          )}
+          hentProsessPaneler={hentProsessPaneler}
         />
       </StandardPropsProvider>
     </>

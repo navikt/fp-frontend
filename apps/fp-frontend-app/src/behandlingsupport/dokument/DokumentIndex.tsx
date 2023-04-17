@@ -11,7 +11,6 @@ import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 
 import '@navikt/ft-sak-dokumenter/dist/style.css';
 
-// TODO (hb) lag linker, ikke callback
 const selectDocument =
   (saksNr: string) =>
   (_e: React.SyntheticEvent, _id: number, document: Dokument): void => {

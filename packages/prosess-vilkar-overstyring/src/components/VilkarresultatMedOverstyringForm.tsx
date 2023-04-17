@@ -161,6 +161,8 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
     toggleOverstyring(oldArray => oldArray.filter(code => code !== overstyringApKode));
   }, [toggleOverstyring, overstyringApKode]);
 
+  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+
   const erVilkarOk = formMethods.watch('erVilkarOk');
 
   const customVilkarOppfyltText = useMemo(
@@ -277,7 +279,7 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
                     ? {
                         ...customVilkarOppfyltText.values,
                       }
-                    : { b: (chunks: any) => <b>{chunks}</b> }
+                    : { b: bTag }
                 }
               />
             }
@@ -289,7 +291,7 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
                     ? {
                         ...customVilkarIkkeOppfyltText.values,
                       }
-                    : { b: (chunks: any) => <b>{chunks}</b> }
+                    : { b: bTag }
                 }
               />
             }

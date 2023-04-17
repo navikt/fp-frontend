@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
@@ -62,6 +62,8 @@ const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps> = ({
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
+  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+
   return (
     <Form
       formMethods={formMethods}
@@ -88,14 +90,7 @@ const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps> = ({
               value: OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_BLI_INNHENTET,
             },
             {
-              label: (
-                <FormattedMessage
-                  id="InnhentDokOpptjeningUtlandPanel.InnhentesIkke"
-                  values={{
-                    b: (chunks: any) => <b>{chunks}</b>,
-                  }}
-                />
-              ),
+              label: <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentesIkke" values={{ b: bTag }} />,
               value: OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET,
             },
           ]}

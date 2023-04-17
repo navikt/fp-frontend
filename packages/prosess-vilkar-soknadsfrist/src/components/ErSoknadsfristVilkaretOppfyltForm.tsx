@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import moment from 'moment';
@@ -120,6 +120,8 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
   const dato = useMemo(() => findDate(soknad, gjeldendeFamiliehendelse), [soknad, gjeldendeFamiliehendelse]);
   const textCode = useMemo(() => findTextCode(soknad, gjeldendeFamiliehendelse), [soknad, gjeldendeFamiliehendelse]);
 
+  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+
   const erVilkarOk = formMethods.watch('erVilkarOk');
 
   const antallDagerSoknadLevertForSent = soknad?.søknadsfrist?.dagerOversittetFrist;
@@ -200,25 +202,11 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
               radios={[
                 {
                   value: 'true',
-                  label: (
-                    <FormattedMessage
-                      id={findRadioButtonTextCode(true)}
-                      values={{
-                        b: (chunks: any) => <b>{chunks}</b>,
-                      }}
-                    />
-                  ),
+                  label: <FormattedMessage id={findRadioButtonTextCode(true)} values={{ b: bTag }} />,
                 },
                 {
                   value: 'false',
-                  label: (
-                    <FormattedMessage
-                      id={findRadioButtonTextCode(false)}
-                      values={{
-                        b: (chunks: any) => <b>{chunks}</b>,
-                      }}
-                    />
-                  ),
+                  label: <FormattedMessage id={findRadioButtonTextCode(false)} values={{ b: bTag }} />,
                 },
               ]}
             />

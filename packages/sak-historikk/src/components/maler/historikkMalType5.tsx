@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, { FunctionComponent, ReactNode, useCallback } from 'react';
 import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -164,6 +164,7 @@ const HistorikkMalType5: FunctionComponent<HistorikkMal> = ({
   saksnummer,
 }) => {
   const intl = useIntl();
+  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
   return (
     <>
       {historikkinnslag.historikkinnslagDeler.map((historikkinnslagDel, historikkinnslagDelIndex) => (
@@ -201,7 +202,7 @@ const HistorikkMalType5: FunctionComponent<HistorikkMal> = ({
             historikkinnslagDel.opplysninger.map(opplysning => (
               <FormattedMessage
                 id={findIdForOpplysningCode(opplysning)}
-                values={{ antallBarn: opplysning.tilVerdi, b: (chunks: any) => <b>{chunks}</b>, br: <br /> }}
+                values={{ antallBarn: opplysning.tilVerdi, b: bTag, br: <br /> }}
                 key={`${getKodeverknavn(opplysning.opplysningType, KodeverkType.HISTORIKK_OPPLYSNING_TYPE)}@${
                   opplysning.tilVerdi
                 }`}

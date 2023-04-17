@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, { FunctionComponent, ReactNode, useCallback } from 'react';
 import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 
 import { HistorikkinnslagDel, HistorikkinnslagEndretFelt } from '@navikt/fp-types';
@@ -123,6 +123,8 @@ const HistorikkMalType10: FunctionComponent<HistorikkMal> = ({
   const intl = useIntl();
   const { historikkinnslagDeler, dokumentLinks, type: originType } = historikkinnslag;
 
+  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+
   return (
     <>
       {historikkinnslagDeler.map((historikkinnslagDel, historikkinnslagDelIndex) => (
@@ -145,7 +147,7 @@ const HistorikkMalType10: FunctionComponent<HistorikkMal> = ({
               values={{
                 periodeFom: finnFomOpplysning(historikkinnslagDel.opplysninger),
                 periodeTom: finnTomOpplysning(historikkinnslagDel.opplysninger),
-                b: (chunks: any) => <b>{chunks}</b>,
+                b: bTag,
               }}
             />
           )}
@@ -156,7 +158,7 @@ const HistorikkMalType10: FunctionComponent<HistorikkMal> = ({
               values={{
                 periodeFom: finnFomOpplysning(historikkinnslagDel.opplysninger),
                 periodeTom: finnTomOpplysning(historikkinnslagDel.opplysninger),
-                b: (chunks: any) => <b>{chunks}</b>,
+                b: bTag,
               }}
             />
           )}

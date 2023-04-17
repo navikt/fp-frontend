@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, { FunctionComponent, ReactNode, useCallback } from 'react';
 import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 
@@ -50,6 +50,8 @@ const HistorikkMalType7: FunctionComponent<HistorikkMal> = ({
   const intl = useIntl();
   const { historikkinnslagDeler, dokumentLinks } = historikkinnslag;
 
+  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+
   return (
     <>
       {historikkinnslagDeler.map((historikkinnslagDel, historikkinnslagDelIndex) => (
@@ -86,7 +88,7 @@ const HistorikkMalType7: FunctionComponent<HistorikkMal> = ({
                 id={findIdForOpplysningCode(opplysning)}
                 values={{
                   antallBarn: opplysning.tilVerdi,
-                  b: (chunks: any) => <b>{chunks}</b>,
+                  b: bTag,
                 }}
               />
             ))}

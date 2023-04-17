@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 
@@ -65,6 +65,9 @@ const HistorikkMalTypeTilbakekreving: FunctionComponent<HistorikkMal> = ({
   createLocationForSkjermlenke,
 }) => {
   const { historikkinnslagDeler } = historikkinnslag;
+
+  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+
   if (historikkinnslagDeler.length === 0) {
     return null;
   }
@@ -106,7 +109,7 @@ const HistorikkMalTypeTilbakekreving: FunctionComponent<HistorikkMal> = ({
                 values={{
                   periodeFom: periodeFom || '',
                   periodeTom: periodeTom || '',
-                  b: (chunks: any) => <b>{chunks}</b>,
+                  b: bTag,
                 }}
               />
             </BodyShort>

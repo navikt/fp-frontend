@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import moment from 'moment';
 import { Label, BodyShort } from '@navikt/ds-react';
@@ -132,6 +132,8 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
+  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+
   return (
     <TimeLineDataContainer>
       <FlexContainer>
@@ -177,7 +179,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
             <FlexColumn>
               <FormattedMessage
                 id="TilkjentYtelse.PeriodeData.Dagsats"
-                values={{ dagsatsVerdi: selectedItemData.dagsats, b: (chunks: any) => <b>{chunks}</b> }}
+                values={{ dagsatsVerdi: selectedItemData.dagsats, b: bTag }}
               />
             </FlexColumn>
           </FlexRow>
