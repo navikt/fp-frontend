@@ -7,7 +7,7 @@ import { FagsakStatus } from '@navikt/ft-kodeverk';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { familieHendelseType } from '@navikt/fp-kodeverk';
 import dayjs from 'dayjs';
-import { Clipboard } from '@navikt/ft-plattform-komponenter';
+import { CopyToClipboard } from "@navikt/ds-react-internal";
 import styles from './sakDetaljer.module.css';
 import { finnYtelseTekst } from './VelgSakForm';
 import JournalFagsak, { FamilieHendelse } from '../../../typer/journalFagsakTsType';
@@ -107,9 +107,10 @@ const SakDetaljer: FunctionComponent<OwnProps> = ({ sak }) => {
             </Label>
           </FlexColumn>
           <FlexColumn>
-            <Clipboard>
-              <Label>{sak.saksnummer}</Label>
-            </Clipboard>
+            <Label>{sak.saksnummer}</Label>
+          </FlexColumn>
+          <FlexColumn className={styles.clipBoard}>
+            <CopyToClipboard size="medium" copyText={sak.saksnummer} popoverText="Kopiert" type='button' />
           </FlexColumn>
         </FlexRow>
         <FlexRow>

@@ -1,60 +1,66 @@
 import React, { FunctionComponent, useMemo, ReactElement } from 'react';
 import { BodyShort, Heading } from '@navikt/ds-react';
-import { Clipboard } from '@navikt/ft-plattform-komponenter';
-import { FlexColumn, FlexRow, Image } from '@navikt/ft-ui-komponenter';
-import { Office1 } from '@navikt/ds-icons';
-import { useIntl, FormattedMessage, IntlShape } from 'react-intl';
-import kvinneIkonUrl from '../../../images/kvinne.svg';
-import mannIkonUrl from '../../../images/mann.svg';
-import ukjentIkonUrl from '../../../images/ukjent.svg';
+import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
+import { Office1, Female, Male, Neutral } from '@navikt/ds-icons';
+import { CopyToClipboard } from '@navikt/ds-react-internal';
+import { FormattedMessage } from 'react-intl';
 import styles from './brukerAvsenderPanel.module.css';
 import Journalpost from '../../../typer/journalpostTsType';
 
-const finnKjønnBilde = (journalpost: Journalpost): string => {
+const finnKjønnBilde = (journalpost: Journalpost): ReactElement => {
   const fnr = journalpost.bruker?.fnr;
   if (!fnr || fnr.length !== 11) {
-    return ukjentIkonUrl;
+    return <Neutral className={styles.ikon} />;
   }
   const tall = parseInt(fnr.charAt(8), 10);
-  return tall % 2 === 0 ? kvinneIkonUrl : mannIkonUrl;
+  return tall % 2 === 0 ? <Female className={styles.ikon} /> : <Male className={styles.ikon} />;
 };
 
-const finnAvsenderBilde = (journalpost: Journalpost, intl: IntlShape): ReactElement => {
+const finnAvsenderBilde = (journalpost: Journalpost): ReactElement => {
   const avsenderId = journalpost.avsender?.id;
   if (!avsenderId) {
-    return (
-      <Image
-        alt={intl.formatMessage({ id: 'ValgtOppgave.Avsender' })}
-        tooltip={intl.formatMessage({ id: 'ValgtOppgave.Avsender' })}
-        src={ukjentIkonUrl}
-        className={styles.avsenderBilde}
-      />
-    );
+    return <Neutral className={styles.ikon} />;
   }
   if (avsenderId.length === 9) {
-    return <Office1 className={styles.avsenderBilde} />;
+    return <Office1 className={styles.ikon} />;
   }
   if (avsenderId.length === 11) {
-    const tall = parseInt(avsenderId.charAt(8), 10);
-    const source = tall % 2 === 0 ? kvinneIkonUrl : mannIkonUrl;
-    return (
-      <Image
-        alt={intl.formatMessage({ id: 'ValgtOppgave.Avsender' })}
-        tooltip={intl.formatMessage({ id: 'ValgtOppgave.Avsender' })}
-        src={source}
-        className={styles.avsenderBilde}
-      />
-    );
+    return finnKjønnBilde(journalpost);
   }
-  return (
-    <Image
-      alt={intl.formatMessage({ id: 'ValgtOppgave.Avsender' })}
-      tooltip={intl.formatMessage({ id: 'ValgtOppgave.Avsender' })}
-      src={ukjentIkonUrl}
-      className={styles.avsenderBilde}
-    />
-  );
+  return <Neutral className={styles.ikon} />;
 };
+
+const lagBrukerAvsenderRad = (navn: string, id: string, ikon: ReactElement, title: string): ReactElement => (
+  <FlexColumn className={styles.kolBredde}>
+    <FlexRow>
+      <FlexColumn>
+        <Heading size="small">
+          <FormattedMessage id={title} />
+        </Heading>
+      </FlexColumn>
+    </FlexRow>
+    <FlexRow>
+      <FlexColumn>
+        {ikon}
+      </FlexColumn>
+      <FlexColumn>
+        <FlexRow>
+          <FlexColumn>
+            <BodyShort>{navn}</BodyShort>
+          </FlexColumn>
+        </FlexRow>
+        <FlexRow>
+          <FlexColumn className={styles.kopiTekst}>
+            <BodyShort>{id}</BodyShort>
+          </FlexColumn>
+          <FlexColumn className={styles.clipBoard}>
+            <CopyToClipboard size="small" copyText={id} popoverText="Kopiert" type='button' />
+          </FlexColumn>
+        </FlexRow>
+      </FlexColumn>
+    </FlexRow>
+  </FlexColumn>
+);
 
 type OwnProps = Readonly<{
   journalpost: Journalpost;
@@ -64,57 +70,21 @@ type OwnProps = Readonly<{
  * BrukerAvsenderPanel - Inneholder detaljer om bruker og avsender
  */
 const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({ journalpost }) => {
-  const intl = useIntl();
-  const kjønnBilde = useMemo(() => finnKjønnBilde(journalpost), [journalpost]);
-  const avsenderBilde = useMemo(() => finnAvsenderBilde(journalpost, intl), [journalpost]);
+  const brukerBilde = useMemo(() => finnKjønnBilde(journalpost), [journalpost]);
+  const avsenderBilde = useMemo(() => finnAvsenderBilde(journalpost), [journalpost]);
   return (
-    <>
-      <FlexRow>
-        <FlexColumn className={styles.brukerAvsenderTittel}>
-          <Heading size="small">
-            <FormattedMessage id="ValgtOppgave.Bruker" />
-          </Heading>
-        </FlexColumn>
-        <FlexColumn>
-          <Heading size="small">
-            <FormattedMessage id="ValgtOppgave.Avsender" />
-          </Heading>
-        </FlexColumn>
-      </FlexRow>
+    <FlexRow>
       {journalpost.bruker && (
-        <FlexRow>
-          <FlexColumn className={styles.brukerAvsenderIkon}>
-            <Image
-              alt={intl.formatMessage({ id: 'ValgtOppgave.Bruker' })}
-              tooltip={intl.formatMessage({ id: 'ValgtOppgave.Bruker' })}
-              src={kjønnBilde}
-              className={styles.brukerBilde}
-            />
-          </FlexColumn>
-          <FlexColumn className={styles.brukerAvsenderInnhold}>
-            <FlexRow>
-              <FlexColumn>
-                <BodyShort>{journalpost.bruker.navn}</BodyShort>
-              </FlexColumn>
-            </FlexRow>
-            <FlexRow>
-              <FlexColumn>
-                <Clipboard>
-                  <BodyShort>{journalpost.bruker.fnr}</BodyShort>
-                </Clipboard>
-              </FlexColumn>
-            </FlexRow>
-          </FlexColumn>
-          <FlexColumn className={styles.brukerAvsenderIkon}>{avsenderBilde}</FlexColumn>
-          <FlexColumn className={styles.brukerAvsenderInnhold}>
-            <BodyShort>{journalpost.avsender.navn}</BodyShort>
-            <Clipboard>
-              <BodyShort>{journalpost.avsender.id}</BodyShort>
-            </Clipboard>
-          </FlexColumn>
-        </FlexRow>
+        <>
+          {lagBrukerAvsenderRad(journalpost.bruker.navn, journalpost.bruker.fnr, brukerBilde, 'ValgtOppgave.Bruker')}
+        </>
       )}
-    </>
+      {journalpost.avsender && (
+        <>
+          {lagBrukerAvsenderRad(journalpost.avsender.navn, journalpost.avsender.id, avsenderBilde, 'ValgtOppgave.Avsender')}
+        </>
+      )}
+    </FlexRow>
   );
 };
 export default BrukerAvsenderPanel;
