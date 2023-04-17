@@ -67,6 +67,8 @@ const AleneomsorgForm: FunctionComponent<OwnProps> = ({
     [],
   );
 
+  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+
   return (
     <Form formMethods={formMethods} onSubmit={transformerFeltverdier} setDataOnUnmount={setFormData}>
       <Boks harBorderTop={false}>
@@ -89,14 +91,7 @@ const AleneomsorgForm: FunctionComponent<OwnProps> = ({
                 value: 'true',
               },
               {
-                label: (
-                  <FormattedMessage
-                    id="AleneomsorgForm.HarIkkeAleneomsorg"
-                    values={{
-                      b: (chunks: any) => <b>{chunks}</b>,
-                    }}
-                  />
-                ),
+                label: <FormattedMessage id="AleneomsorgForm.HarIkkeAleneomsorg" values={{ b: bTag }} />,
                 value: 'false',
               },
             ]}

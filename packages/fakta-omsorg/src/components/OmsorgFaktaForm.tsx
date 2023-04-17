@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { required } from '@navikt/ft-form-validators';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
@@ -40,6 +40,7 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
   alleMerknaderFraBeslutter,
 }) => {
   const intl = useIntl();
+  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
 
   return (
     <div className={className || styles.defaultAleneOmsorgFakta}>
@@ -60,14 +61,7 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
                 value: 'true',
               },
               {
-                label: (
-                  <FormattedMessage
-                    id="OmsorgFaktaForm.HarIkkeOmsorg"
-                    values={{
-                      b: (chunks: any) => <b>{chunks}</b>,
-                    }}
-                  />
-                ),
+                label: <FormattedMessage id="OmsorgFaktaForm.HarIkkeOmsorg" values={{ b: bTag }} />,
                 value: 'false',
               },
             ]}

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { KodeverkType, tilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
@@ -33,6 +33,9 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal> = ({
   createLocationForSkjermlenke,
 }) => {
   const intl = useIntl();
+
+  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+
   return (
     <>
       {historikkinnslag.historikkinnslagDeler.map((historikkinnslagDel, historikkinnslagDelIndex) => (
@@ -56,7 +59,7 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal> = ({
                   opprinneligPeriode: historikkinnslagDel.endredeFelter[0].fraVerdi,
                   numberOfPeriods: historikkinnslagDel.endredeFelter.length,
                   splitPeriods: getSplitPeriods(historikkinnslagDel.endredeFelter),
-                  b: (chunks: any) => <b>{chunks}</b>,
+                  b: bTag,
                   br: <br />,
                 }}
               />
@@ -70,7 +73,7 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal> = ({
                     opprinneligPeriode: historikkinnslagDel.endredeFelter[0].fraVerdi,
                     numberOfPeriods: historikkinnslagDel.endredeFelter.length,
                     splitPeriods: getSplitPeriods(historikkinnslagDel.endredeFelter),
-                    b: (chunks: any) => <b>{chunks}</b>,
+                    b: bTag,
                     br: <br />,
                   }}
                 />
@@ -87,7 +90,7 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal> = ({
                       values={{
                         felt: getKodeverknavn(endretFelt.endretFeltNavn, KodeverkType.HISTORIKK_ENDRET_FELT_TYPE),
                         verdi: findEndretFeltVerdi(endretFelt, endretFelt.tilVerdi, intl),
-                        b: (chunks: any) => <b>{chunks}</b>,
+                        b: bTag,
                       }}
                     />
                   </div>
