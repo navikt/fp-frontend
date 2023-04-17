@@ -110,9 +110,9 @@ const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & Prose
     prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Beregning' })}
     skalPanelVisesIMeny={() => true}
     renderPanel={data => (
-      // @ts-ignore TODO Ikkje send med ned heile kodeverket
       <BeregningsgrunnlagProsessIndex
         {...data}
+        kodeverkSamling={data.alleKodeverk}
         beregningsgrunnlagsvilkar={lagBGVilkar(data.vilkar, data.beregningsgrunnlag)}
         beregningsgrunnlagListe={lagFormatertBG(data.beregningsgrunnlag)}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

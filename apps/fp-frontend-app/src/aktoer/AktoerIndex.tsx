@@ -4,6 +4,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { AktorSakIndex } from '@navikt/ft-sak-aktor';
 
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import useTrackRouteParam from '../app/useTrackRouteParam';
 import { restApiHooks, FpsakApiKeys } from '../data/fpsakApi';
@@ -36,7 +37,8 @@ const AktoerIndex: FunctionComponent = () => {
     <AktorSakIndex
       valgtAktorId={selectedAktoerId}
       aktorInfo={data}
-      kodeverkSamling={alleKodeverk}
+      fagsakStatuser={alleKodeverk[KodeverkType.FAGSAK_STATUS]}
+      fagsakYtelseTyper={alleKodeverk[KodeverkType.FAGSAK_YTELSE]}
       renderSomLenke={(className, fagsakKomponent, saksnummer) => (
         <Link to={pathToFagsak(saksnummer)} className={className}>
           {fagsakKomponent}

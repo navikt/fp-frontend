@@ -106,9 +106,9 @@ const FordelingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
       !!props.behandling.aksjonspunkt.some(ap => AKSJONSPUNKT_KODER.some(kode => kode === ap.definisjon))
     }
     renderPanel={data => (
-      // @ts-ignore TODO Ikkje send med ned heile kodeverket
       <FordelBeregningsgrunnlagFaktaIndex
         {...data}
+        kodeverkSamling={data.alleKodeverk}
         beregningsgrunnlagVilkår={lagBGVilkar(data.behandling.vilkår, data.beregningsgrunnlag)}
         beregningsgrunnlagListe={lagFormatertBG(data.beregningsgrunnlag)}
         submitCallback={lagModifisertCallback(data.submitCallback)}
