@@ -90,9 +90,8 @@ const FeilutbetalingFaktaInitPanel: FunctionComponent<OwnProps> = ({
       feilutbetalingAarsak={initData.feilutbetalingAarsak}
       fagsakYtelseTypeKode={fagsakYtelseTypeKode}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-      // @ts-ignore TODO Ikkje send med ned heile kodeverket
-      alleKodeverk={fpsakKodeverk}
-      tilbakekrevingKodeverk={alleKodeverk}
+      kodeverkSamlingFpsak={fpsakKodeverk}
+      kodeverkSamlingFpTilbake={alleKodeverk}
       submitCallback={submitCallback}
       isReadOnly={readOnly}
       formData={formData[FaktaPanelCode.FEILUTBETALING]}

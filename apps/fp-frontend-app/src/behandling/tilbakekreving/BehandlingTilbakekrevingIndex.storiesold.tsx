@@ -13,11 +13,11 @@ import {
   AksjonspunktStatus,
   FagsakYtelseType,
 } from '@navikt/ft-kodeverk';
-import { Aksjonspunkt, AlleKodeverkTilbakekreving, FeilutbetalingPerioderWrapper } from '@navikt/ft-types';
+import { Aksjonspunkt, FeilutbetalingPerioderWrapper } from '@navikt/ft-types';
 import { FeilutbetalingAksjonspunktCode } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import { ForeldelseAksjonspunktCodes } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
 import { RestApiMock } from '@navikt/fp-utils-test'; // eslint-disable-line import/no-extraneous-dependencies
-import { Fagsak, Verge, Behandling } from '@navikt/fp-types';
+import { Fagsak, Verge, Behandling, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils'; // eslint-disable-line import/no-extraneous-dependencies
 import { AksjonspunktCode, VergeType } from '@navikt/fp-kodeverk';
 

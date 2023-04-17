@@ -4,6 +4,7 @@ import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 import { RisikoklassifiseringSakIndex, AvklartRisikoklassifiseringAp } from '@navikt/ft-sak-risikoklassifisering';
 
 import { NavAnsatt, AksessRettigheter } from '@navikt/fp-types';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
 import useTrackRouteParam from '../../app/useTrackRouteParam';
@@ -105,8 +106,7 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({ fagsakData, be
       readOnly={readOnly}
       submitAksjonspunkt={submitAksjonspunkt}
       toggleRiskPanel={toggleRiskPanel}
-      // @ts-ignore TODO Ikkje send med ned heile kodeverket
-      alleKodeverk={alleKodeverk}
+      faresignalVurderinger={alleKodeverk[KodeverkType.FARESIGNAL_VURDERING]}
     />
   );
 };
