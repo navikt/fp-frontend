@@ -3,8 +3,8 @@ import { IntlShape, useIntl } from 'react-intl';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { FlexContainer, FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
-import { Aksjonspunkt, AlleKodeverkTilbakekreving } from '@navikt/ft-types';
-import { Behandling, AksessRettigheter, AlleKodeverk } from '@navikt/fp-types';
+import { Aksjonspunkt } from '@navikt/ft-types';
+import { Behandling, AksessRettigheter, AlleKodeverk, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 import { FeilutbetalingAksjonspunktCode } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';

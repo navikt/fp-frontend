@@ -1,6 +1,6 @@
 import { RestApiConfigBuilder, createRequestApi, RestKey } from '@navikt/fp-rest-api';
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
-import { Behandling } from '@navikt/fp-types';
+import { AlleKodeverkTilbakekreving, Behandling } from '@navikt/fp-types';
 import {
   BeregningsresultatTilbakekreving,
   DetaljerteFeilutbetalingsperioder,
@@ -9,7 +9,6 @@ import {
   FeilutbetalingPerioderWrapper,
   Vedtaksbrev,
   VilkarsVurdertePerioderWrapper,
-  AlleKodeverkTilbakekreving,
 } from '@navikt/ft-types';
 
 import { behandlingFellesEndepunkter } from '../../felles/data/behandlingFellesApi';

@@ -117,9 +117,9 @@ const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'BeregningInfoPanel.Title' })}
     skalPanelVisesIMeny={() => props.requestApi.hasPath(BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG.name)}
     renderPanel={data => (
-      // @ts-ignore TODO Ikkje send med ned heile kodeverket
       <BeregningFaktaIndex
         {...data}
+        kodeverkSamling={data.alleKodeverk}
         vilkar={lagBGVilkar(props.behandling.vilkår, data.beregningsgrunnlag)}
         beregningsgrunnlag={lagFormatertBG(data.beregningsgrunnlag)}
         submitCallback={lagModifisertCallback(data.submitCallback)}

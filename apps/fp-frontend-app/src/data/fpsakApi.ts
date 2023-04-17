@@ -1,4 +1,4 @@
-import { Aktor, AlleKodeverkTilbakekreving, Behandling, Dokument } from '@navikt/ft-types';
+import { Aktor, Behandling, Dokument } from '@navikt/ft-types';
 
 import { RestApiConfigBuilder, createRequestApi, RestKey, Link } from '@navikt/fp-rest-api';
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
@@ -9,6 +9,7 @@ import {
   FagsakDataFpTilbake,
   NavAnsatt,
   AlleKodeverk,
+  AlleKodeverkTilbakekreving,
 } from '@navikt/fp-types';
 
 type BehandlendeEnheter = {
