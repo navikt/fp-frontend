@@ -151,10 +151,6 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
     }
   }, [fagsak.saksnummer, behandlingUuid]);
 
-  if (navAnsatt.kanVeilede) {
-    return null;
-  }
-
   const erPaVent = behandling ? behandling.behandlingPaaVent : false;
   const behandlingTypeKode = behandling?.type;
   const behandlingTillatteOperasjoner = behandling?.behandlingTillatteOperasjoner;
@@ -180,114 +176,164 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
     ? () => behandlingEventHandler.opprettVerge().then(setLocation)
     : undefined;
 
+  const menyTaAvVentFn = useCallback(
+    lukkModal => (
+      <div>
+        {behandling && (
+          <MenyTaAvVentIndex
+            behandlingVersjon={behandling.versjon}
+            taBehandlingAvVent={behandlingEventHandler.taBehandlingAvVent}
+            lukkModal={lukkModal}
+          />
+        )}
+      </div>
+    ),
+    [behandling, behandlingEventHandler],
+  );
+
+  const menySettPåVentFn = useCallback(
+    lukkModal => (
+      <MenySettPaVentIndex
+        behandlingVersjon={behandlingVersjon}
+        settBehandlingPaVent={behandlingEventHandler.settBehandlingPaVent}
+        ventearsaker={menyKodeverk.getKodeverkForValgtBehandling(KodeverkType.VENT_AARSAK)}
+        lukkModal={lukkModal}
+        erTilbakekreving={
+          behandlingTypeKode === BehandlingType.TILBAKEKREVING ||
+          behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING
+        }
+      />
+    ),
+    [behandlingVersjon, behandlingEventHandler, behandlingTypeKode],
+  );
+
+  const menyHenleggFn = useCallback(
+    lukkModal => (
+      <div>
+        {behandling && (
+          <MenyHenleggIndex
+            valgtBehandling={behandling}
+            forhandsvisHenleggBehandling={previewHenleggBehandling}
+            henleggBehandling={behandlingEventHandler.henleggBehandling}
+            ytelseType={fagsak.fagsakYtelseType}
+            behandlingResultatTyper={menyKodeverk.getKodeverkForValgtBehandling(KodeverkType.BEHANDLING_RESULTAT_TYPE)}
+            lukkModal={lukkModal}
+            gaaTilSokeside={gaaTilSokeside}
+          />
+        )}
+      </div>
+    ),
+    [behandling, previewHenleggBehandling, behandlingEventHandler, fagsak, gaaTilSokeside],
+  );
+
+  const menyEndreBehandlendeEnhetFn = useCallback(
+    lukkModal => (
+      <MenyEndreBehandlendeEnhetIndex
+        behandlingVersjon={behandlingVersjon}
+        behandlendeEnhetId={behandling?.behandlendeEnhetId}
+        behandlendeEnhetNavn={behandling?.behandlendeEnhetNavn}
+        nyBehandlendeEnhet={behandlingEventHandler.endreBehandlendeEnhet}
+        behandlendeEnheter={behandlendeEnheter}
+        lukkModal={lukkModal}
+      />
+    ),
+    [behandlingVersjon, behandling, behandlingEventHandler, behandlendeEnheter],
+  );
+
+  const menyÅpneForEndringerFn = useCallback(
+    lukkModal => (
+      <MenyApneForEndringerIndex
+        apneBehandlingForEndringer={behandlingEventHandler.opneBehandlingForEndringer}
+        lukkModal={lukkModal}
+      />
+    ),
+    [behandlingEventHandler],
+  );
+
+  const menyNyBehandlingFn = useCallback(
+    lukkModal => (
+      <MenyNyBehandlingIndex
+        saksnummer={fagsak.saksnummer}
+        behandlingUuid={behandling?.uuid}
+        behandlingVersjon={behandlingVersjon}
+        uuidForSistLukkede={uuidForSistLukkede}
+        behandlingOppretting={fagsakData.getBehandlingOppretting()}
+        kanTilbakekrevingOpprettes={{
+          kanBehandlingOpprettes,
+          kanRevurderingOpprettes,
+        }}
+        behandlingstyper={menyKodeverk.getKodeverkForBehandlingstyper(
+          BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES,
+          KodeverkType.BEHANDLING_TYPE,
+        )}
+        tilbakekrevingRevurderingArsaker={menyKodeverk.getKodeverkForBehandlingstype(
+          KodeverkType.BEHANDLING_AARSAK,
+          BehandlingType.TILBAKEKREVING_REVURDERING,
+        )}
+        revurderingArsaker={menyKodeverk.getKodeverkForBehandlingstype(
+          KodeverkType.BEHANDLING_AARSAK,
+          BehandlingType.REVURDERING,
+        )}
+        ytelseType={fagsak.fagsakYtelseType}
+        lagNyBehandling={lagNyBehandling}
+        lukkModal={lukkModal}
+      />
+    ),
+    [
+      fagsak,
+      behandling,
+      uuidForSistLukkede,
+      fagsakData,
+      kanBehandlingOpprettes,
+      kanRevurderingOpprettes,
+      lagNyBehandling,
+    ],
+  );
+
+  const menyEndretUtlandFn = useCallback(
+    lukkModal => (
+      <MenyEndreUtlandIndex
+        saksnummer={fagsak.saksnummer}
+        fagsakMarkering={fagsak.fagsakMarkering}
+        endreFagsakMarkering={endreFagsakMarkering}
+        lukkModal={lukkModal}
+      />
+    ),
+    [fagsak, endreFagsakMarkering],
+  );
+
+  const menyVergeFn = useCallback(
+    lukkModal => <MenyVergeIndex fjernVerge={fjernVergeFn} opprettVerge={opprettVergeFn} lukkModal={lukkModal} />,
+    [fjernVergeFn, opprettVergeFn],
+  );
+
+  if (navAnsatt.kanVeilede) {
+    return null;
+  }
+
   return (
     <MenySakIndex
       data={[
         new MenyData(behandlingTillatteOperasjoner?.behandlingKanGjenopptas, getTaAvVentMenytekst()).medModal(
-          lukkModal => (
-            <div>
-              {behandling && (
-                <MenyTaAvVentIndex
-                  behandlingVersjon={behandling.versjon}
-                  taBehandlingAvVent={behandlingEventHandler.taBehandlingAvVent}
-                  lukkModal={lukkModal}
-                />
-              )}
-            </div>
-          ),
+          menyTaAvVentFn,
         ),
         new MenyData(behandlingTillatteOperasjoner?.behandlingKanSettesPaVent, getSettPaVentMenytekst()).medModal(
-          lukkModal => (
-            <MenySettPaVentIndex
-              behandlingVersjon={behandlingVersjon}
-              settBehandlingPaVent={behandlingEventHandler.settBehandlingPaVent}
-              ventearsaker={menyKodeverk.getKodeverkForValgtBehandling(KodeverkType.VENT_AARSAK)}
-              lukkModal={lukkModal}
-              erTilbakekreving={
-                behandlingTypeKode === BehandlingType.TILBAKEKREVING ||
-                behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING
-              }
-            />
-          ),
+          menySettPåVentFn,
         ),
         new MenyData(behandlingTillatteOperasjoner?.behandlingKanHenlegges, getHenleggMenytekst()).medModal(
-          lukkModal => (
-            <div>
-              {behandling && (
-                <MenyHenleggIndex
-                  valgtBehandling={behandling}
-                  forhandsvisHenleggBehandling={previewHenleggBehandling}
-                  henleggBehandling={behandlingEventHandler.henleggBehandling}
-                  ytelseType={fagsak.fagsakYtelseType}
-                  behandlingResultatTyper={menyKodeverk.getKodeverkForValgtBehandling(
-                    KodeverkType.BEHANDLING_RESULTAT_TYPE,
-                  )}
-                  lukkModal={lukkModal}
-                  gaaTilSokeside={gaaTilSokeside}
-                />
-              )}
-            </div>
-          ),
+          menyHenleggFn,
         ),
         new MenyData(behandlingTillatteOperasjoner?.behandlingKanBytteEnhet, getEndreEnhetMenytekst()).medModal(
-          lukkModal => (
-            <MenyEndreBehandlendeEnhetIndex
-              behandlingVersjon={behandlingVersjon}
-              behandlendeEnhetId={behandling?.behandlendeEnhetId}
-              behandlendeEnhetNavn={behandling?.behandlendeEnhetNavn}
-              nyBehandlendeEnhet={behandlingEventHandler.endreBehandlendeEnhet}
-              behandlendeEnheter={behandlendeEnheter}
-              lukkModal={lukkModal}
-            />
-          ),
+          menyEndreBehandlendeEnhetFn,
         ),
         new MenyData(
           behandlingTillatteOperasjoner?.behandlingKanOpnesForEndringer,
           getApneForEndringerMenytekst(),
-        ).medModal(lukkModal => (
-          <MenyApneForEndringerIndex
-            apneBehandlingForEndringer={behandlingEventHandler.opneBehandlingForEndringer}
-            lukkModal={lukkModal}
-          />
-        )),
-        new MenyData(!fagsak.sakSkalTilInfotrygd, getNyBehandlingMenytekst()).medModal(lukkModal => (
-          <MenyNyBehandlingIndex
-            saksnummer={fagsak.saksnummer}
-            behandlingUuid={behandling?.uuid}
-            behandlingVersjon={behandlingVersjon}
-            uuidForSistLukkede={uuidForSistLukkede}
-            behandlingOppretting={fagsakData.getBehandlingOppretting()}
-            kanTilbakekrevingOpprettes={{
-              kanBehandlingOpprettes,
-              kanRevurderingOpprettes,
-            }}
-            behandlingstyper={menyKodeverk.getKodeverkForBehandlingstyper(
-              BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES,
-              KodeverkType.BEHANDLING_TYPE,
-            )}
-            tilbakekrevingRevurderingArsaker={menyKodeverk.getKodeverkForBehandlingstype(
-              KodeverkType.BEHANDLING_AARSAK,
-              BehandlingType.TILBAKEKREVING_REVURDERING,
-            )}
-            revurderingArsaker={menyKodeverk.getKodeverkForBehandlingstype(
-              KodeverkType.BEHANDLING_AARSAK,
-              BehandlingType.REVURDERING,
-            )}
-            ytelseType={fagsak.fagsakYtelseType}
-            lagNyBehandling={lagNyBehandling}
-            lukkModal={lukkModal}
-          />
-        )),
-        new MenyData(!fagsak.sakSkalTilInfotrygd, getEndreUtlandMenytekst()).medModal(lukkModal => (
-          <MenyEndreUtlandIndex
-            saksnummer={fagsak.saksnummer}
-            fagsakMarkering={fagsak.fagsakMarkering}
-            endreFagsakMarkering={endreFagsakMarkering}
-            lukkModal={lukkModal}
-          />
-        )),
+        ).medModal(menyÅpneForEndringerFn),
+        new MenyData(!fagsak.sakSkalTilInfotrygd, getNyBehandlingMenytekst()).medModal(menyNyBehandlingFn),
+        new MenyData(!fagsak.sakSkalTilInfotrygd, getEndreUtlandMenytekst()).medModal(menyEndretUtlandFn),
         new MenyData(!erPaVent && (!!opprettVergeFn || !!fjernVergeFn), getVergeMenytekst(!!opprettVergeFn)).medModal(
-          lukkModal => <MenyVergeIndex fjernVerge={fjernVergeFn} opprettVerge={opprettVergeFn} lukkModal={lukkModal} />,
+          menyVergeFn,
         ),
       ]}
     />

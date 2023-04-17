@@ -96,6 +96,22 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
     return null;
   }, []);
 
+  const rendreFakta = useCallback(
+    () => (
+      <>
+        <VerticalSpacer sixteenPx />
+        <OpptjeningVilkarView
+          months={fastsattOpptjening.opptjeningperiode.måneder}
+          days={fastsattOpptjening.opptjeningperiode.dager}
+          fastsattOpptjeningActivities={fastsattOpptjening.fastsattOpptjeningAktivitetList}
+          opptjeningFomDate={fastsattOpptjening.opptjeningFom}
+          opptjeningTomDate={fastsattOpptjening.opptjeningTom}
+        />
+      </>
+    ),
+    [fastsattOpptjening],
+  );
+
   return (
     <Form formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setFormData}>
       <ProsessPanelTemplate
@@ -108,18 +124,7 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
-        rendreFakta={() => (
-          <>
-            <VerticalSpacer sixteenPx />
-            <OpptjeningVilkarView
-              months={fastsattOpptjening.opptjeningperiode.måneder}
-              days={fastsattOpptjening.opptjeningperiode.dager}
-              fastsattOpptjeningActivities={fastsattOpptjening.fastsattOpptjeningAktivitetList}
-              opptjeningFomDate={fastsattOpptjening.opptjeningFom}
-              opptjeningTomDate={fastsattOpptjening.opptjeningTom}
-            />
-          </>
-        )}
+        rendreFakta={rendreFakta}
       >
         <Label size="small">
           <FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.SokerHarVurdertOpptjentRettTilForeldrepenger" />

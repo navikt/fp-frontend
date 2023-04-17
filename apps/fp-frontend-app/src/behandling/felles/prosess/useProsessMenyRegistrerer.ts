@@ -17,7 +17,6 @@ const useProsessMenyRegistrerer = (
   status: string,
   skalMarkeresSomAktiv: boolean,
 ) => {
-  // NOSONAR
   const [erPanelValgt, setPanelValgt] = useState(false);
   useEffect(() => {
     registrerProsessPanel({
