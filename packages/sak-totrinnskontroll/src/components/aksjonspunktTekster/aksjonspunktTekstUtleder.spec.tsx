@@ -899,7 +899,9 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0]).toEqual(<div>Vurder tidsbegrenset arbeidsforhold</div>);
+    expect(message[0]).toEqual(
+      <div key="Vurder tidsbegrenset arbeidsforhold">Vurder tidsbegrenset arbeidsforhold</div>,
+    );
   });
   it('skal vise korrekt tekst for aksjonspunkt 5058 ATFL i samme org', () => {
     const beregningTilfeller = [
@@ -924,7 +926,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0]).toEqual(<div>Vurder at og fl</div>);
+    expect(message[0]).toEqual(<div key="Vurder at og fl">Vurder at og fl</div>);
   });
   it('skal vise korrekte tekster for kombinasjon av aksjonspunkt 5058', () => {
     const beregningTilfeller = [
@@ -959,7 +961,9 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0]).toEqual(<div>Vurder besteberegning</div>);
-    expect(message[1]).toEqual(<div>Vurder tidsbegrenset arbeidsforhold</div>);
+    expect(message[0]).toEqual(<div key="Vurder besteberegning">Vurder besteberegning</div>);
+    expect(message[1]).toEqual(
+      <div key="Vurder tidsbegrenset arbeidsforhold">Vurder tidsbegrenset arbeidsforhold</div>,
+    );
   });
 });
