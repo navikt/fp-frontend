@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
@@ -107,6 +107,8 @@ const ErForeldreansvarVilkaarOppfyltForm: FunctionComponent<OwnProps> = ({
   const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET);
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
 
+  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+
   return (
     <Form
       formMethods={formMethods}
@@ -135,7 +137,7 @@ const ErForeldreansvarVilkaarOppfyltForm: FunctionComponent<OwnProps> = ({
           customVilkarIkkeOppfyltText={
             <FormattedMessage
               id={isEngangsstonad ? 'FodselVilkarForm.IkkeOppfyltEs' : 'FodselVilkarForm.IkkeOppfyltFp'}
-              values={{ b: (chunks: any) => <b>{chunks}</b> }}
+              values={{ b: bTag }}
             />
           }
         />

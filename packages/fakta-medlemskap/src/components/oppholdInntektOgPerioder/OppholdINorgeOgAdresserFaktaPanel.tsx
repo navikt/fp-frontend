@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, useCallback } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { Detail, BodyShort } from '@navikt/ds-react';
@@ -117,6 +117,8 @@ const OppholdINorgeOgAdresserFaktaPanel: FunctionComponent<OwnProps> & StaticFun
 
   const { personopplysningBruker, personopplysningAnnenPart } = valgtPeriode;
 
+  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+
   return (
     <FaktaGruppe merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT]}>
       <FlexContainer>
@@ -188,9 +190,7 @@ const OppholdINorgeOgAdresserFaktaPanel: FunctionComponent<OwnProps> & StaticFun
                       label: (
                         <FormattedMessage
                           id="OppholdINorgeOgAdresserFaktaPanel.NotResidingInNorway"
-                          values={{
-                            b: (chunks: any) => <b>{chunks}</b>,
-                          }}
+                          values={{ b: bTag }}
                         />
                       ),
                       value: 'false',

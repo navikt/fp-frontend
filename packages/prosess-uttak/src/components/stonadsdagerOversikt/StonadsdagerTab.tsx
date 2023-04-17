@@ -57,6 +57,8 @@ const StonadsdagerTab: FunctionComponent<OwnProps> = ({ stønadskonto, visDagerF
 
   const velgKonto = useCallback(() => visDagerForKonto(stønadskonto.stonadskontotype), [stønadskonto]);
 
+  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+
   return (
     <div className={styles.tabs}>
       <li
@@ -91,7 +93,7 @@ const StonadsdagerTab: FunctionComponent<OwnProps> = ({ stønadskonto, visDagerF
                     values={{
                       ukerVerdi: fordelteDager.uker,
                       dagerVerdi: fordelteDager.dager,
-                      b: (chunks: any) => <b>{chunks}</b>,
+                      b: bTag,
                     }}
                   />
                 </BodyShort>
