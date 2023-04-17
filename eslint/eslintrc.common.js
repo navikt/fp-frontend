@@ -72,7 +72,6 @@ const config = {
     'no-unused-vars': OFF,
     '@typescript-eslint/no-unused-vars': [ERROR],
 
-    // TODO (TOR) Ignorert inntil videre grunnet kost/nytte
     'import/named': OFF,
     'react/no-unstable-nested-components': OFF,
     'prefer-regex-literals': OFF,

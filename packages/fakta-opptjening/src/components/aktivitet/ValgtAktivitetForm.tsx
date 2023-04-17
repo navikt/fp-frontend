@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Button, Label, Heading, BodyShort } from '@navikt/ds-react';
@@ -103,6 +103,8 @@ export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
   const opptjeningFom = finnOpptjeningFom(valgtOpptjeningAktivitet.opptjeningFom, opptjeningFomDato, opptjeningTomDato);
   const opptjeningTom = finnOpptjeningTom(valgtOpptjeningAktivitet.opptjeningTom, opptjeningFomDato, opptjeningTomDato);
 
+  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+
   return (
     <Form formMethods={formMethods} onSubmit={(values: FormValues) => oppdaterAktivitet(values)}>
       <FaktaGruppe
@@ -184,14 +186,7 @@ export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
                   value: 'true',
                 },
                 {
-                  label: (
-                    <FormattedMessage
-                      id="ActivityPanel.IkkeGodkjent"
-                      values={{
-                        b: (chunks: any) => <b>{chunks}</b>,
-                      }}
-                    />
-                  ),
+                  label: <FormattedMessage id="ActivityPanel.IkkeGodkjent" values={{ b: bTag }} />,
                   value: 'false',
                 },
               ]}

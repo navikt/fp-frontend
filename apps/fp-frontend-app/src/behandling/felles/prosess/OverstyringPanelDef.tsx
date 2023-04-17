@@ -57,7 +57,6 @@ const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
   const skalVises = skalViseProsessPanel(overstyrteAksjonspunkter, vilkarKoder, vilkar);
 
   const avslagsarsaker = filtrerAvslagsarsaker(
-    // @ts-ignore Avslagsårsaker er ikkje støtta i kodeverk-typen. Fiks!
     standardProps.alleKodeverk[KodeverkType.AVSLAGSARSAK],
     vilkar[0].vilkarType,
   );

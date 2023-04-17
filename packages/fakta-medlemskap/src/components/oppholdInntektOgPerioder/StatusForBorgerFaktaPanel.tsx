@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { formHooks, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
@@ -49,6 +49,8 @@ const StatusForBorgerFaktaPanel: FunctionComponent<OwnProps> & StaticFunctions =
   const aksjonspunkt = aksjonspunkter.find(ap => oppholdAp.includes(ap.definisjon));
   const erAksjonspunktLukket = aksjonspunkt?.status !== AksjonspunktStatus.OPPRETTET;
 
+  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+
   return (
     <FaktaGruppe
       title={intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.ApplicationInformation' })}
@@ -90,14 +92,7 @@ const StatusForBorgerFaktaPanel: FunctionComponent<OwnProps> & StaticFunctions =
                   value: 'true',
                 },
                 {
-                  label: (
-                    <FormattedMessage
-                      id="StatusForBorgerFaktaPanel.HarIkkeOppholdsrett"
-                      values={{
-                        b: (chunks: any) => <b>{chunks}</b>,
-                      }}
-                    />
-                  ),
+                  label: <FormattedMessage id="StatusForBorgerFaktaPanel.HarIkkeOppholdsrett" values={{ b: bTag }} />,
                   value: 'false',
                 },
               ]}
@@ -123,14 +118,7 @@ const StatusForBorgerFaktaPanel: FunctionComponent<OwnProps> & StaticFunctions =
                   value: 'true',
                 },
                 {
-                  label: (
-                    <FormattedMessage
-                      id="StatusForBorgerFaktaPanel.HarIkkeLovligOpphold"
-                      values={{
-                        b: (chunks: any) => <b>{chunks}</b>,
-                      }}
-                    />
-                  ),
+                  label: <FormattedMessage id="StatusForBorgerFaktaPanel.HarIkkeLovligOpphold" values={{ b: bTag }} />,
                   value: 'false',
                 },
               ]}
