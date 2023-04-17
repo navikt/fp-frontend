@@ -44,7 +44,7 @@
     "@navikt/ds-css": "2.8.11",
     "@navikt/fp-storybook-utils": "1.0.0",
     "@storybook/addon-actions": "7.0.4",
-    "@storybook/react": "7.0.4",
+    "@storybook/react": "7.0.5",
     "@storybook/react-vite": "7.0.4",
     "@storybook/testing-react": "2.0.0",
     "@testing-library/react": "14.0.0",
