@@ -33,9 +33,11 @@
   padding-bottom: 8px;
   width: 20%;
 }
+
 .dokLenke {
   width: 10%;
 }
+
 @media all and (max-width: 1350px) {
   .selectField {
     width: 50%;

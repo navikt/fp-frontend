@@ -30,39 +30,37 @@ const finnAvsenderBilde = (journalpost: Journalpost): ReactElement => {
   return <Neutral className={styles.ikon} />;
 };
 
-const lagBrukerAvsenderRad = (navn: string, id: string, ikon: ReactElement, title: string): ReactElement => {
-  return (
-    <FlexColumn className={styles.kolBredde}>
-      <FlexRow>
-        <FlexColumn>
-          <Heading size="small">
-            <FormattedMessage id={title} />
-          </Heading>
-        </FlexColumn>
-      </FlexRow>
-      <FlexRow>
-        <FlexColumn>
-          {ikon}
-        </FlexColumn>
-        <FlexColumn>
-          <FlexRow>
-            <FlexColumn>
-              <BodyShort>{navn}</BodyShort>
-            </FlexColumn>
-          </FlexRow>
-          <FlexRow>
-            <FlexColumn className={styles.kopiTekst}>
-              <BodyShort>{id}</BodyShort>
-            </FlexColumn>
-            <FlexColumn className={styles.clipBoard}>
-              <CopyToClipboard size="small" copyText={id} popoverText="Kopiert" type='button' />
-            </FlexColumn>
-          </FlexRow>
-        </FlexColumn>
-      </FlexRow>
-    </FlexColumn>
-  );
-}
+const lagBrukerAvsenderRad = (navn: string, id: string, ikon: ReactElement, title: string): ReactElement => (
+  <FlexColumn className={styles.kolBredde}>
+    <FlexRow>
+      <FlexColumn>
+        <Heading size="small">
+          <FormattedMessage id={title} />
+        </Heading>
+      </FlexColumn>
+    </FlexRow>
+    <FlexRow>
+      <FlexColumn>
+        {ikon}
+      </FlexColumn>
+      <FlexColumn>
+        <FlexRow>
+          <FlexColumn>
+            <BodyShort>{navn}</BodyShort>
+          </FlexColumn>
+        </FlexRow>
+        <FlexRow>
+          <FlexColumn className={styles.kopiTekst}>
+            <BodyShort>{id}</BodyShort>
+          </FlexColumn>
+          <FlexColumn className={styles.clipBoard}>
+            <CopyToClipboard size="small" copyText={id} popoverText="Kopiert" type='button' />
+          </FlexColumn>
+        </FlexRow>
+      </FlexColumn>
+    </FlexRow>
+  </FlexColumn>
+);
 
 type OwnProps = Readonly<{
   journalpost: Journalpost;
@@ -75,20 +73,18 @@ const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({ journalpost }) => {
   const brukerBilde = useMemo(() => finnKjønnBilde(journalpost), [journalpost]);
   const avsenderBilde = useMemo(() => finnAvsenderBilde(journalpost), [journalpost]);
   return (
-    <>
-      <FlexRow>
-        {journalpost.bruker && (
-          <>
-            {lagBrukerAvsenderRad(journalpost.bruker.navn, journalpost.bruker.fnr, brukerBilde, 'ValgtOppgave.Bruker')}
-          </>
-        )}
-        {journalpost.avsender && (
-          <>
-            {lagBrukerAvsenderRad(journalpost.avsender.navn, journalpost.avsender.id, avsenderBilde, 'ValgtOppgave.Avsender')}
-          </>
-        )}
-      </FlexRow>
-    </>
+    <FlexRow>
+      {journalpost.bruker && (
+        <>
+          {lagBrukerAvsenderRad(journalpost.bruker.navn, journalpost.bruker.fnr, brukerBilde, 'ValgtOppgave.Bruker')}
+        </>
+      )}
+      {journalpost.avsender && (
+        <>
+          {lagBrukerAvsenderRad(journalpost.avsender.navn, journalpost.avsender.id, avsenderBilde, 'ValgtOppgave.Avsender')}
+        </>
+      )}
+    </FlexRow>
   );
 };
 export default BrukerAvsenderPanel;
