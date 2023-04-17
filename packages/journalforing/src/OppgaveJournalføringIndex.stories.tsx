@@ -16,7 +16,6 @@ import JournalKanal from './kodeverk/journalKanal';
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-plattform-komponenter/dist/style.css';
 
 const detaljertJournalpostMal = {
   journalpostId: '986547336994',

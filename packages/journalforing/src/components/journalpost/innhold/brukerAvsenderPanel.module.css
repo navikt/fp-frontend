@@ -1,31 +1,22 @@
-.brukerBilde {
-  padding-top: 8px;
-}
-
-.avsenderBilde {
+.ikon {
   height: 32px;
   width: 32px;
 }
 
-.brukerAvsenderTittel {
-  width: 35%;
+.clipBoard > div > button {
+  padding: 0;
 }
 
-.brukerAvsenderIkon {
-  min-width: 50px;
-  width: 3%;
+.kopiTekst {
+  margin-top: 4px;
 }
 
-.brukerAvsenderInnhold {
-  width: 27%;
+.kolBredde {
+  width: 40%;
 }
 
 @media all and (max-width: 1500px) {
-  .brukerAvsenderInnhold {
-    width: 30%;
-  }
-
-  .brukerAvsenderTittel {
-    width: 40%;
+  .kolBredde {
+    width: 50%;
   }
 }
