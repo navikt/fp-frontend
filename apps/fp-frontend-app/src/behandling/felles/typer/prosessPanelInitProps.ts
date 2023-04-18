@@ -10,7 +10,7 @@ export type ProsessPanelExtraInitProps = {
 
 type ProsessPanelInitProps = {
   behandling: Behandling;
-  valgtProsessSteg: string;
+  valgtProsessSteg?: string;
   registrerProsessPanel: (data: ProsessPanelMenyData) => void;
   requestApi: RequestApi;
 };

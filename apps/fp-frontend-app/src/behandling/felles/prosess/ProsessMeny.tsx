@@ -6,7 +6,7 @@ import '../../arrowForProcessMenu.module.css';
 
 import ProsessPanelMenyData from '../typer/prosessPanelMenyData';
 
-const finnProsessmenyType = (status: string, harApentAksjonspunkt: boolean): ProcessMenuStepType => {
+const finnProsessmenyType = (status?: string, harApentAksjonspunkt?: boolean): ProcessMenuStepType => {
   if (harApentAksjonspunkt) {
     return ProcessMenuStepType.warning;
   }
@@ -30,7 +30,7 @@ const ProsessMeny: FunctionComponent<OwnProps> = ({ menyData, oppdaterProsessPan
       menyData.map(data => {
         const type = finnProsessmenyType(data.status, data.harApentAksjonspunkt);
         return {
-          label: data.tekst,
+          label: data.tekst || '',
           isActive: data.erAktiv,
           isDisabled: false,
           isFinished: type === ProcessMenuStepType.success,

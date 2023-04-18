@@ -11,13 +11,16 @@ class FagsakData {
 
   private $$fpTilbakeFagsakData?: FagsakDataFpTilbake;
 
-  private $$behandlingOppretting?: BehandlingOppretting[];
+  private $$behandlingOppretting: BehandlingOppretting[];
 
-  private $$alleBehandlinger?: BehandlingAppKontekst[];
+  private $$alleBehandlinger: BehandlingAppKontekst[];
 
   constructor(fagsak: Fagsak, fpTilbakeFagsakData?: FagsakDataFpTilbake) {
     this.$$fagsak = fagsak;
     this.$$fpTilbakeFagsakData = fpTilbakeFagsakData;
+
+    this.$$behandlingOppretting = [];
+    this.$$alleBehandlinger = [];
 
     this.slåSammenData();
   }
@@ -47,7 +50,7 @@ class FagsakData {
     return this.$$alleBehandlinger;
   }
 
-  getBehandling(uuid: string): BehandlingAppKontekst | undefined {
+  getBehandling(uuid?: string): BehandlingAppKontekst | undefined {
     return this.$$alleBehandlinger.find(b => b.uuid === uuid);
   }
 
@@ -55,7 +58,7 @@ class FagsakData {
     return this.$$fagsak.historikkinnslag;
   }
 
-  getHistorikkFpTilbake(): Historikkinnslag[] {
+  getHistorikkFpTilbake(): Historikkinnslag[] | undefined {
     return this.$$fpTilbakeFagsakData?.historikkinnslag;
   }
 }

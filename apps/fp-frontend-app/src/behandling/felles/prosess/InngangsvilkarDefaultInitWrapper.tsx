@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useCallback, useState } from 'react';
+import React, { FunctionComponent, ReactElement, useCallback, useState, MouseEvent } from 'react';
 import { useIntl } from 'react-intl';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 import {
@@ -87,8 +87,8 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
   const erIkkeFerdigbehandlet = panelInfo.some(p => p.status === VilkarUtfallType.IKKE_VURDERT);
 
   const oppdaterUrl = useCallback(
-    evt => {
-      oppdaterProsessStegOgFaktaPanelIUrl(undefined, apentFaktaPanelInfo.urlCode);
+    (evt: MouseEvent) => {
+      oppdaterProsessStegOgFaktaPanelIUrl(undefined, apentFaktaPanelInfo?.urlCode);
       evt.preventDefault();
     },
     [apentFaktaPanelInfo],
@@ -104,11 +104,11 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
     RestApiState.SUCCESS,
     ProsessStegCode.INNGANGSVILKAR,
     intl.formatMessage({ id: 'Behandlingspunkt.Inngangsvilkar' }),
-    valgtProsessSteg,
     skalVises,
     harApentAksjonspunkt,
     status,
     !apentFaktaPanelInfo && harApentAksjonspunkt,
+    valgtProsessSteg,
   );
 
   const aksjonspunktTekster = panelInfo.map(p => p.aksjonspunktTekst).filter(tekst => !!tekst);

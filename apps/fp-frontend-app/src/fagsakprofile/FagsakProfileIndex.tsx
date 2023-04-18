@@ -82,7 +82,7 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
 
   const location = useLocation();
   const getBehandlingLocation = useCallback(
-    valgtBehandlingUuid =>
+    (valgtBehandlingUuid: string) =>
       getLocationWithDefaultProsessStegAndFakta({
         ...location,
         pathname: pathToBehandling(fagsak.saksnummer, valgtBehandlingUuid),

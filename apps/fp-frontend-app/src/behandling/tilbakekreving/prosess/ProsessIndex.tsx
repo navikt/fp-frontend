@@ -111,7 +111,7 @@ interface OwnProps {
   fagsakKjønn: string;
   tilbakekrevingKodeverk: AlleKodeverkTilbakekreving;
   valgtProsessSteg?: string;
-  oppdaterProsessPanelIUrl: (faktanavn: string) => void;
+  oppdaterProsessPanelIUrl: (faktanavn: string | undefined) => void;
   bekreftAksjonspunkterMedSideeffekter: (
     lagringSideEffectsCallback?: (aksjonspunktModeller: any) => () => void,
   ) => (aksjonspunkter: any) => Promise<any>;
@@ -174,45 +174,47 @@ const ProsessIndex: FunctionComponent<OwnProps> = ({
       </div>
       {aktivtProsessPanel && (
         <ProsessPanelWrapper
-          erAksjonspunktOpent={aktivtProsessPanel.harApentAksjonspunkt}
+          erAksjonspunktOpent={aktivtProsessPanel.harApentAksjonspunkt || false}
           status={aktivtProsessPanel.status}
           visHenlagt={aktivtProsessPanel.id === ProsessStegCode.VEDTAK && behandling.behandlingHenlagt}
         >
-          {aktivtProsessPanel.id === ProsessStegCode.FORELDELSE && (
-            <ForeldelseProsessInitPanel
-              behandling={behandling}
-              navBrukerKjonn={fagsakKjønn}
-              erReadOnlyFn={erReadOnlyFn}
-              alleKodeverk={tilbakekrevingKodeverk}
-              bekreftAksjonspunkter={bekreftAksjonspunkter}
-              formData={formData}
-              setFormData={setFormData}
-            />
-          )}
-          {aktivtProsessPanel.id === ProsessStegCode.TILBAKEKREVING && (
-            <TilbakekrevingProsessInitPanel
-              behandling={behandling}
-              navBrukerKjonn={fagsakKjønn}
-              alleKodeverk={tilbakekrevingKodeverk}
-              bekreftAksjonspunkter={bekreftAksjonspunkter}
-              erReadOnlyFn={erReadOnlyFn}
-              formData={formData}
-              setFormData={setFormData}
-            />
-          )}
-          {aktivtProsessPanel.id === ProsessStegCode.VEDTAK && !behandling.behandlingHenlagt && (
-            <VedtakTilbakekrevingProsessInitPanel
-              behandling={behandling}
-              harApenRevurdering={harApenRevurdering}
-              bekreftAksjonspunkterMedSideeffekter={bekreftAksjonspunkterMedSideeffekter}
-              opneSokeside={opneSokeside}
-              toggleOppdatereFagsakContext={toggleOppdatereFagsakContext}
-              erReadOnlyFn={erReadOnlyFn}
-              alleKodeverk={tilbakekrevingKodeverk}
-              formData={formData}
-              setFormData={setFormData}
-            />
-          )}
+          <>
+            {aktivtProsessPanel.id === ProsessStegCode.FORELDELSE && (
+              <ForeldelseProsessInitPanel
+                behandling={behandling}
+                navBrukerKjonn={fagsakKjønn}
+                erReadOnlyFn={erReadOnlyFn}
+                alleKodeverk={tilbakekrevingKodeverk}
+                bekreftAksjonspunkter={bekreftAksjonspunkter}
+                formData={formData}
+                setFormData={setFormData}
+              />
+            )}
+            {aktivtProsessPanel.id === ProsessStegCode.TILBAKEKREVING && (
+              <TilbakekrevingProsessInitPanel
+                behandling={behandling}
+                navBrukerKjonn={fagsakKjønn}
+                alleKodeverk={tilbakekrevingKodeverk}
+                bekreftAksjonspunkter={bekreftAksjonspunkter}
+                erReadOnlyFn={erReadOnlyFn}
+                formData={formData}
+                setFormData={setFormData}
+              />
+            )}
+            {aktivtProsessPanel.id === ProsessStegCode.VEDTAK && !behandling.behandlingHenlagt && (
+              <VedtakTilbakekrevingProsessInitPanel
+                behandling={behandling}
+                harApenRevurdering={harApenRevurdering}
+                bekreftAksjonspunkterMedSideeffekter={bekreftAksjonspunkterMedSideeffekter}
+                opneSokeside={opneSokeside}
+                toggleOppdatereFagsakContext={toggleOppdatereFagsakContext}
+                erReadOnlyFn={erReadOnlyFn}
+                alleKodeverk={tilbakekrevingKodeverk}
+                formData={formData}
+                setFormData={setFormData}
+              />
+            )}
+          </>
         </ProsessPanelWrapper>
       )}
     </div>

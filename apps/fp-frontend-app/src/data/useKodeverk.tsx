@@ -8,7 +8,7 @@ import { FpsakApiKeys, restApiHooks } from './fpsakApi';
 /**
  * Hook som henter kodeverk knyttet til behandlingstype
  */
-export function useKodeverk(behandlingType: string): AlleKodeverk | AlleKodeverkTilbakekreving {
+export function useKodeverk(behandlingType?: string): AlleKodeverk | AlleKodeverkTilbakekreving {
   const alleKodeverkFpSak = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
   const alleKodeverkFpTilbake = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
 
@@ -23,6 +23,7 @@ export function useKodeverk(behandlingType: string): AlleKodeverk | AlleKodeverk
  */
 export function useFpSakKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[] {
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
+  // @ts-ignore Fiks
   return alleKodeverk[kodeverkType];
 }
 
@@ -32,6 +33,7 @@ export function useFpSakKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[]
  */
 export function useFpTilbakeKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[] {
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
+  // @ts-ignore Fiks
   return alleKodeverk ? alleKodeverk[kodeverkType] : undefined;
 }
 
@@ -39,7 +41,7 @@ export function useFpTilbakeKodeverk<T = KodeverkMedNavn>(kodeverkType: string):
  * Hook som brukes når en har behov for å slå opp navn-attributtet til et bestemt kodeverk. For å kunne bruke denne
  * må @see useGlobalStateRestApi først brukes for å hente data fra backend
  */
-export function useFpSakKodeverkMedNavn(kode: string, kodeverk: KodeverkType): KodeverkMedNavn {
+export function useFpSakKodeverkMedNavn(kode: string, kodeverk: KodeverkType): KodeverkMedNavn | undefined {
   const kodeverkForType = useFpSakKodeverk<KodeverkMedNavn>(kodeverk);
 
   if (!kodeverkForType || kodeverkForType.length === 0) {
@@ -60,11 +62,12 @@ export function useGetKodeverkFn() {
   return (kode: string, kodeverk: KodeverkType, behandlingType: string = BehandlingType.FORSTEGANGSSOKNAD) => {
     const kodeverkForType =
       behandlingType === BehandlingType.TILBAKEKREVING || behandlingType === BehandlingType.TILBAKEKREVING_REVURDERING
-        ? alleFpTilbakeKodeverk[kodeverk]
+        ? // @ts-ignore Fiks
+          alleFpTilbakeKodeverk[kodeverk]
         : alleFpSakKodeverk[kodeverk];
     if (!kodeverkForType || kodeverkForType.length === 0) {
       throw Error(`Det finnes ingen kodeverk for type ${kodeverk} med kode ${kode}`);
     }
-    return kodeverkForType.find(k => k.kode === kode);
+    return kodeverkForType.find((k: KodeverkMedNavn) => k.kode === kode);
   };
 }

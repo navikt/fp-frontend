@@ -5,26 +5,26 @@ import { KodeverkMedNavn } from '@navikt/fp-types';
 import { behandlingType as BehandlingType, KodeverkType, venteArsakType, dokumentMalType } from '@navikt/fp-kodeverk';
 import { MeldingerSakIndex, MessagesModalSakIndex, FormValues } from '@navikt/fp-sak-meldinger';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
-import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
+import { SettPaVentModalIndex, FormValues as SettPaVentFormValues } from '@navikt/fp-modal-sett-pa-vent';
 
 import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
 import { useFpSakKodeverk } from '../../data/useKodeverk';
 import useVisForhandsvisningAvMelding, { ForhandsvisFunksjon } from '../../data/useVisForhandsvisningAvMelding';
-import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
+import { FpsakApiKeys, SubmitMessageParams, restApiHooks } from '../../data/fpsakApi';
 import FagsakData from '../../fagsak/FagsakData';
 
 const getSubmitCallback =
   (
     setShowMessageModal: (showModal: boolean) => void,
-    behandlingTypeKode: string,
-    behandlingUuid: string,
     submitMessage: (
-      params?: { behandlingUuid?: string; brevmalkode: string; fritekst: string; arsakskode?: string },
-      keepData?: boolean,
-    ) => Promise<void>,
+      params?: SubmitMessageParams | undefined,
+      keepData?: boolean | undefined,
+    ) => Promise<void | undefined>,
     resetMessage: () => void,
     setShowSettPaVentModal: (erInnhentetEllerForlenget: boolean) => void,
     setMeldingForData: (data?: any) => void,
+    behandlingTypeKode?: string,
+    behandlingUuid?: string,
   ) =>
   (values: FormValues) => {
     const isInnhentEllerForlenget =
@@ -58,7 +58,7 @@ const getSubmitCallback =
   };
 
 const getPreviewCallback =
-  (behandlingTypeKode: string, behandlingUuid: string, fagsakYtelseType: string, fetchPreview: ForhandsvisFunksjon) =>
+  (fagsakYtelseType: string, fetchPreview: ForhandsvisFunksjon, behandlingTypeKode?: string, behandlingUuid?: string) =>
   (dokumentMal?: string, fritekst?: string, aarsakskode?: string) => {
     const erTilbakekreving =
       BehandlingType.TILBAKEKREVING === behandlingTypeKode ||
@@ -116,8 +116,6 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
     FpsakApiKeys.SUBMIT_MESSAGE,
   );
 
-  const { uuid, versjon, type } = valgtBehandling;
-
   const resetMessage = () => {
     // FIXME temp fiks for å unngå prod-feil (her skjer det ein oppdatering av behandling, så må oppdatera)
     window.location.reload();
@@ -126,21 +124,21 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   const submitCallback = useCallback(
     getSubmitCallback(
       setShowMessageModal,
-      type,
-      valgtBehandling.uuid,
       submitMessage,
       resetMessage,
       setShowSettPaVentModal,
       setMeldingForData,
+      valgtBehandling?.type,
+      valgtBehandling?.uuid,
     ),
-    [uuid, versjon],
+    [valgtBehandling?.uuid, valgtBehandling?.versjon],
   );
 
   const hideSettPaVentModal = useCallback(() => {
     setShowSettPaVentModal(false);
   }, []);
 
-  const handleSubmitFromModal = useCallback(formValues => {
+  const handleSubmitFromModal = useCallback((formValues: SettPaVentFormValues) => {
     const values = {
       frist: formValues.frist,
       ventearsak: formValues.ventearsak,
@@ -150,11 +148,11 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
     navigate('/');
   }, []);
 
-  const fetchPreview = useVisForhandsvisningAvMelding(type);
+  const fetchPreview = useVisForhandsvisningAvMelding(valgtBehandling?.type);
 
   const previewCallback = useCallback(
-    getPreviewCallback(type, valgtBehandling.uuid, fagsak.fagsakYtelseType, fetchPreview),
-    [uuid, versjon],
+    getPreviewCallback(fagsak.fagsakYtelseType, fetchPreview, valgtBehandling?.type, valgtBehandling?.uuid),
+    [valgtBehandling?.uuid, valgtBehandling?.versjon],
   );
 
   const afterSubmit = useCallback(() => {
@@ -171,11 +169,11 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
 
       <MeldingerSakIndex
         submitCallback={submitCallback}
-        sprakKode={valgtBehandling.sprakkode}
+        sprakKode={valgtBehandling?.sprakkode}
         previewCallback={previewCallback}
         revurderingVarslingArsak={revurderingVarslingArsak}
-        templates={valgtBehandling.brevmaler}
-        isKontrollerRevurderingApOpen={valgtBehandling.ugunstAksjonspunkt}
+        templates={valgtBehandling?.brevmaler}
+        isKontrollerRevurderingApOpen={valgtBehandling?.ugunstAksjonspunkt}
         fagsakYtelseType={fagsak.fagsakYtelseType}
         kanVeilede={initFetchData.innloggetBruker.kanVeilede}
         meldingFormData={meldingFormData}
@@ -192,7 +190,8 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
           ventearsaker={ventearsaker}
           hasManualPaVent={false}
           erTilbakekreving={
-            type === BehandlingType.TILBAKEKREVING || type === BehandlingType.TILBAKEKREVING_REVURDERING
+            valgtBehandling?.type === BehandlingType.TILBAKEKREVING ||
+            valgtBehandling?.type === BehandlingType.TILBAKEKREVING_REVURDERING
           }
         />
       )}

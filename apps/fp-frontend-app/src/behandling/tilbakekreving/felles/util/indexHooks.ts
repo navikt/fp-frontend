@@ -47,7 +47,7 @@ export const useBehandling = (behandlingUuid: string, oppdaterBehandlingVersjon?
   const [skalOppdatereFagsakOgBehandling, toggleOppdateringAvFagsakOgBehandling] = useState(true);
 
   const setBehandling = useCallback(
-    nyBehandling => {
+    (nyBehandling: Behandling) => {
       if (skalOppdatereFagsakOgBehandling) {
         requestTilbakekrevingApi.resetCache();
         requestTilbakekrevingApi.setLinks(nyBehandling.links);

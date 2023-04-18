@@ -92,7 +92,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({ fagsakData, behan
     : defaultSupportPanel;
 
   const changeRouteCallback = useCallback(
-    index => {
+    (index: number) => {
       const supportPanel = synligeSupportPaneler[index];
       const getSupportPanelLocation = getSupportPanelLocationCreator(location);
       navigate(getSupportPanelLocation(supportPanel));
@@ -119,7 +119,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({ fagsakData, behan
             (aktivtSupportPanel === SupportTabs.TIL_BESLUTTER || aktivtSupportPanel === SupportTabs.FRA_BESLUTTER) && (
               <TotrinnskontrollIndex
                 fagsakData={fagsakData}
-                valgtBehandlingUuid={behandlingUuid}
+                valgtBehandlingUuid={behandling.uuid}
                 beslutterFormData={beslutterFormData}
                 setBeslutterForData={setBeslutterForData}
               />
@@ -136,7 +136,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({ fagsakData, behan
           {behandling && aktivtSupportPanel === SupportTabs.MELDINGER && (
             <MeldingIndex
               fagsakData={fagsakData}
-              valgtBehandlingUuid={behandlingUuid}
+              valgtBehandlingUuid={behandling.uuid}
               meldingFormData={meldingFormData}
               setMeldingForData={setMeldingForData}
             />

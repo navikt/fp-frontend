@@ -12,9 +12,9 @@ const useFaktaMenyRegistrerer = (
   dataState: RestApiState,
   id: string,
   tekst: string,
-  valgtFaktaSteg: string,
   skalVisesImeny: boolean,
   harApneAksjonspunkter: boolean,
+  valgtFaktaSteg?: string,
 ) => {
   const [erPanelValgt, setPanelValgt] = useState(false);
   useEffect(() => {

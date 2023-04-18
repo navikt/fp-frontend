@@ -7,7 +7,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { BehandlingStatus, BehandlingType, FagsakYtelseType, FagsakStatus } from '@navikt/ft-kodeverk';
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { Fagsak, BehandlingAppKontekst } from '@navikt/fp-types';
+import { Fagsak, BehandlingAppKontekst, BehandlingOppretting } from '@navikt/fp-types';
 import { RestApiMock } from '@navikt/fp-utils-test';
 
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
@@ -30,8 +30,7 @@ describe('<FagsakProfileIndex>', () => {
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     status: FagsakStatus.OPPRETTET,
     behandlinger: [behandling] as BehandlingAppKontekst[],
-    sakSkalTilInfotrygd: true,
-    behandlingTypeKanOpprettes: [],
+    behandlingTypeKanOpprettes: [] as BehandlingOppretting[],
     brukerManglerAdresse: false,
   };
 

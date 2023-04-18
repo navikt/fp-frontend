@@ -23,8 +23,16 @@ import {
   MenyApneForEndringerIndex,
   getMenytekst as getApneForEndringerMenytekst,
 } from '@navikt/fp-sak-meny-apne-for-endringer';
-import { MenyNyBehandlingIndex, getMenytekst as getNyBehandlingMenytekst } from '@navikt/fp-sak-meny-ny-behandling';
-import { MenyEndreUtlandIndex, getMenytekst as getEndreUtlandMenytekst } from '@navikt/fp-sak-meny-endre-utland';
+import {
+  MenyNyBehandlingIndex,
+  getMenytekst as getNyBehandlingMenytekst,
+  FormValues as NyBehandlingFormValues,
+} from '@navikt/fp-sak-meny-ny-behandling';
+import {
+  MenyEndreUtlandIndex,
+  getMenytekst as getEndreUtlandMenytekst,
+  FormValues as EndreUtlandFormValues,
+} from '@navikt/fp-sak-meny-endre-utland';
 import { VergeBehandlingmenyValg, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import behandlingEventHandler from '../behandling/BehandlingEventHandler';
@@ -123,13 +131,26 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   const { startRequest: lagNyBehandlingFpTilbake } = restApiHooks.useRestApiRunner(
     FpsakApiKeys.NEW_BEHANDLING_FPTILBAKE,
   );
-  const lagNyBehandling = useCallback((isTilbakekreving, params) => {
-    const lagNy = isTilbakekreving ? lagNyBehandlingFpTilbake : lagNyBehandlingFpSak;
-    lagNy(params).then(() => hentFagsakdataPåNytt());
-  }, []);
+
+  const lagNyBehandling = useCallback(
+    (
+      isTilbakekreving: boolean,
+      params: {
+        saksnummer: string;
+        behandlingUuid?: string;
+      } & NyBehandlingFormValues,
+    ): void => {
+      const lagNy = isTilbakekreving ? lagNyBehandlingFpTilbake : lagNyBehandlingFpSak;
+      lagNy(params).then(() => hentFagsakdataPåNytt());
+    },
+    [],
+  );
 
   const { startRequest: endreSaksmerking } = restApiHooks.useRestApiRunner(FpsakApiKeys.ENDRE_SAK_MARKERING);
-  const endreFagsakMarkering = useCallback(params => endreSaksmerking(params).then(() => hentFagsakdataPåNytt()), []);
+  const endreFagsakMarkering = useCallback(
+    (params: EndreUtlandFormValues) => endreSaksmerking(params).then(() => hentFagsakdataPåNytt()),
+    [],
+  );
 
   const uuidForSistLukkede = useMemo(
     () => getUuidForSisteLukkedeForsteEllerRevurd(alleBehandlinger),
@@ -177,7 +198,7 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
     : undefined;
 
   const menyTaAvVentFn = useCallback(
-    lukkModal => (
+    (lukkModal: () => void) => (
       <div>
         {behandling && (
           <MenyTaAvVentIndex
@@ -192,7 +213,7 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   );
 
   const menySettPåVentFn = useCallback(
-    lukkModal => (
+    (lukkModal: () => void) => (
       <MenySettPaVentIndex
         behandlingVersjon={behandlingVersjon}
         settBehandlingPaVent={behandlingEventHandler.settBehandlingPaVent}
@@ -208,7 +229,7 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   );
 
   const menyHenleggFn = useCallback(
-    lukkModal => (
+    (lukkModal: () => void) => (
       <div>
         {behandling && (
           <MenyHenleggIndex
@@ -227,7 +248,7 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   );
 
   const menyEndreBehandlendeEnhetFn = useCallback(
-    lukkModal => (
+    (lukkModal: () => void) => (
       <MenyEndreBehandlendeEnhetIndex
         behandlingVersjon={behandlingVersjon}
         behandlendeEnhetId={behandling?.behandlendeEnhetId}
@@ -241,7 +262,7 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   );
 
   const menyÅpneForEndringerFn = useCallback(
-    lukkModal => (
+    (lukkModal: () => void) => (
       <MenyApneForEndringerIndex
         apneBehandlingForEndringer={behandlingEventHandler.opneBehandlingForEndringer}
         lukkModal={lukkModal}
@@ -251,7 +272,7 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   );
 
   const menyNyBehandlingFn = useCallback(
-    lukkModal => (
+    (lukkModal: () => void) => (
       <MenyNyBehandlingIndex
         saksnummer={fagsak.saksnummer}
         behandlingUuid={behandling?.uuid}
@@ -291,7 +312,7 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   );
 
   const menyEndretUtlandFn = useCallback(
-    lukkModal => (
+    (lukkModal: () => void) => (
       <MenyEndreUtlandIndex
         saksnummer={fagsak.saksnummer}
         fagsakMarkering={fagsak.fagsakMarkering}
@@ -303,7 +324,9 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   );
 
   const menyVergeFn = useCallback(
-    lukkModal => <MenyVergeIndex fjernVerge={fjernVergeFn} opprettVerge={opprettVergeFn} lukkModal={lukkModal} />,
+    (lukkModal: () => void) => (
+      <MenyVergeIndex fjernVerge={fjernVergeFn} opprettVerge={opprettVergeFn} lukkModal={lukkModal} />
+    ),
     [fjernVergeFn, opprettVergeFn],
   );
 

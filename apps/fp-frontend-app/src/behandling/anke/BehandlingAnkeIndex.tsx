@@ -18,6 +18,8 @@ import AnkeBehandlingProsessStegInitPanel from './prosessPaneler/AnkeBehandlingP
 import AnkeResultatProsessStegInitPanel from './prosessPaneler/AnkeResultatProsessStegInitPanel';
 import AnkeTrygderettsbehandlingProsessStegInitPanel from './prosessPaneler/AnkeTrygderettsbehandlingProsessStegInitPanel';
 import VergeFaktaInitPanel from '../felles/fakta/paneler/VergeFaktaInitPanel';
+import FaktaPanelInitProps from '../felles/typer/faktaPanelInitProps';
+import ProsessPanelInitProps from '../felles/typer/prosessPanelInitProps';
 
 interface OwnProps {
   alleBehandlinger: {
@@ -52,10 +54,10 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & StandardBehandlingProps>
 
   useInitBehandlingHandlinger(requestAnkeApi, behandlingEventHandler, hentBehandling, setBehandling, behandling);
 
-  const faktaPaneler = useCallback(props => <VergeFaktaInitPanel {...props} />, []);
+  const faktaPaneler = useCallback((props: FaktaPanelInitProps) => <VergeFaktaInitPanel {...props} />, []);
 
   const prosessPaneler = useCallback(
-    props => (
+    (props: ProsessPanelInitProps) => (
       <>
         <AnkeBehandlingProsessStegInitPanel {...props} alleBehandlinger={alleBehandlinger} />
         <AnkeResultatProsessStegInitPanel {...props} />

@@ -25,7 +25,7 @@ const lagLagreFunksjon =
   (
     behandling: Behandling,
     fagsak: Fagsak,
-    lagreAksjonspunkt: (params?: any, keepData?: boolean) => Promise<Behandling>,
+    lagreAksjonspunkt: (params?: any, keepData?: boolean) => Promise<Behandling | undefined>,
     setAksjonspunktLagret: (erApLagret: boolean) => void,
   ) =>
   (formValues: any, fagsakYtelseType: string, familieHendelseType: string, foreldreType: string) => {
@@ -58,7 +58,7 @@ interface OwnProps {
   kodeverk: AlleKodeverk;
   rettigheter: AksessRettigheter;
   hentBehandling: (keepData: boolean) => Promise<Behandling | undefined>;
-  lagreAksjonspunkt: (params?: any, keepData?: boolean) => Promise<Behandling>;
+  lagreAksjonspunkt: (params?: any, keepData?: boolean) => Promise<Behandling | undefined>;
 }
 
 /**

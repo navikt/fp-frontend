@@ -102,7 +102,7 @@ const HistorikkMalTypeTilbakekreving: FunctionComponent<HistorikkMal> = ({
             : undefined;
 
         return (
-          <div key={periodeFom + periodeTom}>
+          <div key={`${periodeFom}-${periodeTom}`}>
             <BodyShort size="small">
               <FormattedMessage
                 id="Historikk.Template.Tilbakekreving.VurderingAvPerioden"

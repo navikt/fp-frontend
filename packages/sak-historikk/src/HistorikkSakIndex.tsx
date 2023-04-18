@@ -11,8 +11,8 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface OwnProps {
-  historikkFpSak: Historikkinnslag[];
-  historikkFpTilbake: Historikkinnslag[];
+  historikkFpSak?: Historikkinnslag[];
+  historikkFpTilbake?: Historikkinnslag[];
   alleKodeverkFpTilbake?: AlleKodeverkTilbakekreving;
   alleKodeverkFpSak: AlleKodeverk;
   saksnummer?: string;
@@ -33,7 +33,6 @@ const HistorikkSakIndex: FunctionComponent<OwnProps> = ({
 }) => (
   <RawIntlProvider value={intl}>
     <History
-      intl={intl}
       historikkFpSak={historikkFpSak}
       historikkFpTilbake={historikkFpTilbake}
       alleKodeverkFpTilbake={alleKodeverkFpTilbake}

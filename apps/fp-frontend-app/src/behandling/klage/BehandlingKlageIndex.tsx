@@ -20,6 +20,8 @@ import FormKravKlageInstansProsessStegInitPanel from './prosessPaneler/FormKravK
 import VurderingKlageInstansProsessStegInitPanel from './prosessPaneler/VurderingKlageInstansProsessStegInitPanel';
 import KlageresultatProsessStegInitPanel from './prosessPaneler/KlageresultatProsessStegInitPanel';
 import VergeFaktaInitPanel from '../felles/fakta/paneler/VergeFaktaInitPanel';
+import FaktaPanelInitProps from '../felles/typer/faktaPanelInitProps';
+import ProsessPanelInitProps from '../felles/typer/prosessPanelInitProps';
 
 interface OwnProps {
   alleBehandlinger: {
@@ -54,10 +56,10 @@ const BehandlingKlageIndex: FunctionComponent<OwnProps & StandardBehandlingProps
 
   useInitBehandlingHandlinger(requestKlageApi, behandlingEventHandler, hentBehandling, setBehandling, behandling);
 
-  const hentFaktaPaneler = useCallback(props => <VergeFaktaInitPanel {...props} />, []);
+  const hentFaktaPaneler = useCallback((props: FaktaPanelInitProps) => <VergeFaktaInitPanel {...props} />, []);
 
   const hentProsessPaneler = useCallback(
-    props => (
+    (props: ProsessPanelInitProps) => (
       <>
         <FormKravFamOgPensjonProsessStegInitPanel {...props} alleBehandlinger={alleBehandlinger} />
         <VurderingFamOgPensjonProsessStegInitPanel

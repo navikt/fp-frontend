@@ -6,9 +6,9 @@ export const DEFAULT_PROSESS_STEG_KODE = 'default';
 const getBekreftAksjonspunktCallback =
   (
     saksnummer: string,
-    behandling: Behandling,
     oppdaterProsessStegOgFaktaPanelIUrl: (prosessPanel?: string, faktanavn?: string) => void,
     lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<any>,
+    behandling?: Behandling,
   ) =>
   (lagringSideEffectsCallback?: (aksjonspunktModeller: any) => () => void) =>
   (aksjonspunkterSomSkalLagres: any) => {
@@ -22,8 +22,8 @@ const getBekreftAksjonspunktCallback =
 
     const params = {
       saksnummer,
-      behandlingUuid: behandling.uuid,
-      behandlingVersjon: behandling.versjon,
+      behandlingUuid: behandling?.uuid,
+      behandlingVersjon: behandling?.versjon,
     };
 
     const etterLagringCallback = lagringSideEffectsCallback ? lagringSideEffectsCallback(apListe) : undefined;

@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { WrappedComponentProps } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 
 import { decodeHtmlEntity } from '@navikt/ft-utils';
@@ -7,10 +6,7 @@ import { findHendelseText } from './felles/historikkUtils';
 import BubbleText from './felles/bubbleText';
 import HistorikkMal from '../HistorikkMalTsType';
 
-const HistorikkMalType4: FunctionComponent<HistorikkMal & WrappedComponentProps> = ({
-  historikkinnslag,
-  getKodeverknavn,
-}) => (
+const HistorikkMalType4: FunctionComponent<HistorikkMal> = ({ historikkinnslag, getKodeverknavn }) => (
   <>
     {historikkinnslag.historikkinnslagDeler.map((del, delIndex) => (
       <div

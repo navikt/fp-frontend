@@ -12,6 +12,7 @@ import BubbleText from './felles/bubbleText';
 import Skjermlenke from './felles/Skjermlenke';
 import HistorikkMal from '../HistorikkMalTsType';
 
+// @ts-ignore
 const finnKodeverkType = (kodeverk: string): KodeverkType => KodeverkType[kodeverk];
 
 const finnFomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']): string => {

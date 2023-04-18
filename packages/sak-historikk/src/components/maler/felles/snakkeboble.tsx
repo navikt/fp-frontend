@@ -47,7 +47,7 @@ const BAKGRUNNSFARGER = {
   [HistorikkAktor.VEDTAKSLOSNINGEN]: 'var(--a-gray-100)',
   [HistorikkAktor.SOKER]: 'var(--a-orange-100)',
   [HistorikkAktor.ARBEIDSGIVER]: 'var(--a-lightblue-100)',
-};
+} as Record<string, string>;
 
 interface OwnProps {
   dato: string;

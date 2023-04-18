@@ -51,7 +51,7 @@ describe('<BehandlingTilbakekrevingIndex>', () => {
               behandlingEventHandler={{
                 setHandler: () => {},
                 clear: () => {},
-                settBehandlingPaVent: () => undefined,
+                settBehandlingPaVent: () => Promise.resolve(),
               }}
               behandlingUuid="test-uuid"
               oppdaterBehandlingVersjon={() => {}}

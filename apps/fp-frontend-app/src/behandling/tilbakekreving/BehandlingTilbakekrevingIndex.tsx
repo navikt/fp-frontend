@@ -50,7 +50,7 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & StandardBehand
     [valgtProsessSteg, oppdaterProsessStegOgFaktaPanelIUrl],
   );
   const oppdaterProsessPanelIUrl = useCallback(
-    (nyttProsessSteg: string): void => {
+    (nyttProsessSteg: string | undefined): void => {
       oppdaterProsessStegOgFaktaPanelIUrl(nyttProsessSteg, valgtFaktaSteg);
     },
     [valgtFaktaSteg],
@@ -59,9 +59,9 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & StandardBehand
   const bekreftAksjonspunkterMedSideeffekter = useCallback(
     getBekreftAksjonspunktCallback(
       fagsak.saksnummer,
-      behandling,
       oppdaterProsessStegOgFaktaPanelIUrl,
       lagreAksjonspunkter,
+      behandling,
     ),
     [fagsak.saksnummer, behandling, oppdaterProsessStegOgFaktaPanelIUrl],
   );

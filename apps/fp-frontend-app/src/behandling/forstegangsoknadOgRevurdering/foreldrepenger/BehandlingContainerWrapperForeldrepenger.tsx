@@ -33,6 +33,8 @@ import SoknadsfristProsessStegInitPanel from '../paneler/prosess/SoknadsfristPro
 import OmsorgOgRettFaktaInitPanel from './faktaPaneler/OmsorgOgRettFaktaInitPanel';
 import UttakDokumentasjonFaktaInitPanel from './faktaPaneler/UttakDokumentasjonFaktaInitPanel';
 import { BehandlingEventHandler } from '../../felles/typer/standardBehandlingProps';
+import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
+import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from '../../felles/typer/prosessPanelInitProps';
 
 interface OwnProps {
   behandling: Behandling;
@@ -45,7 +47,7 @@ interface OwnProps {
   arbeidsgivere: ArbeidsgiverOpplysningerPerId;
   personoversikt: Personoversikt;
   rettigheter: AksessRettigheter;
-  hentBehandling: (keepData: boolean) => Promise<Behandling>;
+  hentBehandling: (keepData: boolean) => Promise<Behandling | undefined>;
   behandlingEventHandler: BehandlingEventHandler;
 }
 
@@ -64,7 +66,7 @@ const BehandlingContainerWrapperForeldrepenger: FunctionComponent<OwnProps> = ({
   behandlingEventHandler,
 }) => {
   const faktaPaneler = useCallback(
-    props => (
+    (props: FaktaPanelInitProps) => (
       <>
         <SakenFaktaInitPanel {...props} fagsak={fagsak} />
         <ArbeidOgInntektFaktaInitPanel
@@ -107,7 +109,7 @@ const BehandlingContainerWrapperForeldrepenger: FunctionComponent<OwnProps> = ({
   );
 
   const prosessPaneler = useCallback(
-    (props, ekstraProps) => (
+    (props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => (
       <>
         <VarselProsessStegInitPanel
           {...props}
