@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
 import { behandlingType, behandlingStatus, behandlingResultatType } from '@navikt/fp-kodeverk';
@@ -11,7 +11,7 @@ export default {
   component: FatterVedtakTotrinnskontrollModalSakIndex,
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   closeEvent: () => void;
   behandling: BehandlingAppKontekst;
   allAksjonspunktApproved: boolean;

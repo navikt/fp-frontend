@@ -1,6 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
@@ -20,7 +20,7 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   saksliste: Saksliste;
   avdelingensSaksbehandlere: SaksbehandlerAvdeling[];
   hentAvdelingensSakslister: (params: { avdelingEnhet: string }) => void;

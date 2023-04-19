@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
 import { dokumentMalType, fagsakYtelseType as FagsakYtelseType, ugunstAarsakTyper } from '@navikt/fp-kodeverk';
@@ -11,7 +11,7 @@ export default {
   component: MeldingerSakIndex,
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   templates: { kode: string; navn: string; tilgjengelig: boolean }[];
   sprakKode: string;
   fagsakYtelseType: string;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 import { BehandlingType } from '@navikt/ft-kodeverk';
@@ -21,7 +21,7 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{ verdier: Record<string, boolean> }> = ({ verdier }) => {
+const Template: StoryFn<{ verdier: Record<string, boolean> }> = ({ verdier }) => {
   const data = [
     { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
     { key: RestApiPathsKeys.LAGRE_SAKSLISTE_BEHANDLINGSTYPE.name, data: undefined },

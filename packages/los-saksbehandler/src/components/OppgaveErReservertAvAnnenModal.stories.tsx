@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
 import { Modal } from '@navikt/ds-react';
@@ -45,7 +45,7 @@ const oppgaveForResevertAvAnnenModal = {
   href: '',
 };
 
-const Template: Story<{ lukkErReservertModalOgOpneOppgave: (oppgave: Oppgave) => void }> = ({
+const Template: StoryFn<{ lukkErReservertModalOgOpneOppgave: (oppgave: Oppgave) => void }> = ({
   lukkErReservertModalOgOpneOppgave,
 }) => (
   <OppgaveErReservertAvAnnenModal

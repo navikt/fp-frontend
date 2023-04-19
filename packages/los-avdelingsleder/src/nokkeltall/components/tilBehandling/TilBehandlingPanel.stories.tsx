@@ -1,6 +1,6 @@
 import React from 'react';
 import dayjs from 'dayjs';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
 
@@ -21,7 +21,7 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{ oppgaverPerDato: OppgaveForDato[] }> = ({ oppgaverPerDato }) => {
+const Template: StoryFn<{ oppgaverPerDato: OppgaveForDato[] }> = ({ oppgaverPerDato }) => {
   const data = [{ key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true }];
 
   return (

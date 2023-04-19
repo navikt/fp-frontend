@@ -20,7 +20,7 @@ const AdresseVisning: FunctionComponent<OwnProps> = ({ personopplysninger }) => 
     return null;
   }
 
-  const adr = postadr || bostedsadr;
+  const adr = postadr || bostedsadr || {};
 
   return (
     <>

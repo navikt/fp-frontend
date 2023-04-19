@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import { fagsakYtelseType, fagsakStatus } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -14,7 +14,7 @@ export default {
   component: FagsakSokSakIndex,
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   fagsaker: FagsakEnkel[];
   searchResultAccessDenied?: { feilmelding: string };
 }> = ({ fagsaker, searchResultAccessDenied }) => {

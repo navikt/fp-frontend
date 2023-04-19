@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
@@ -31,7 +31,11 @@ interface Props {
   hentAvdelingensSaksbehandlere: (params: { avdelingEnhet: string }) => void;
 }
 
-const Template: Story<Props> = ({ avdelingensSaksbehandlere, funnetSaksbehandler, hentAvdelingensSaksbehandlere }) => {
+const Template: StoryFn<Props> = ({
+  avdelingensSaksbehandlere,
+  funnetSaksbehandler,
+  hentAvdelingensSaksbehandlere,
+}) => {
   const data = [
     { key: RestApiPathsKeys.SAKSBEHANDLER_SOK.name, data: funnetSaksbehandler },
     { key: RestApiPathsKeys.OPPRETT_NY_SAKSBEHANDLER.name, data: undefined },

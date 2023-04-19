@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
@@ -17,7 +17,7 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{ visSlettEtterfølgendePerioder?: boolean }> = ({ visSlettEtterfølgendePerioder = false }) => (
+const Template: StoryFn<{ visSlettEtterfølgendePerioder?: boolean }> = ({ visSlettEtterfølgendePerioder = false }) => (
   <DelOppPeriodeModal
     submit={action('button-click')}
     cancel={action('button-click')}

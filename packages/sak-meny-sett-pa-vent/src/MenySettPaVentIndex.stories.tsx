@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
 import { venteArsakType } from '@navikt/fp-kodeverk';
@@ -11,7 +11,7 @@ export default {
   component: MenySettPaVentIndex,
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   settBehandlingPaVent: () => void;
   lukkModal: () => void;
 }> = ({ settBehandlingPaVent, lukkModal }) => (

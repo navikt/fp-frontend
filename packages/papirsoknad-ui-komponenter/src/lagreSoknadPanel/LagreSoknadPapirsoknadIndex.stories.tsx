@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
@@ -14,7 +14,7 @@ export default {
   decorators: [withRouter],
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   submitCallback: (data?: any) => Promise<void>;
 }> = ({ submitCallback }) => {
   const formMethods = useForm();

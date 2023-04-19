@@ -1,6 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { Modal } from '@navikt/ds-react';
@@ -19,7 +19,7 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{ endreReserverasjonState: () => void }> = ({ endreReserverasjonState }) => (
+const Template: StoryFn<{ endreReserverasjonState: () => void }> = ({ endreReserverasjonState }) => (
   <OppgaveReservasjonEndringDatoModal
     showModal
     closeModal={action('button-click')}

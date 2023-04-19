@@ -1,6 +1,6 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Story } from '@storybook/react';
+import { StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { aksjonspunktStatus, AksjonspunktCode } from '@navikt/fp-kodeverk';
@@ -40,7 +40,7 @@ export default {
   component: BesteberegningFaktaIndex,
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   aksjonspunkter: Aksjonspunkt[];
   beregningsgrunnlag: Beregningsgrunnlag;
   behandling: Behandling;

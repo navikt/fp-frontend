@@ -28,8 +28,8 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]) => FormValues;
-  transformOmsorgValues?: (values: FormValues) => BekreftOmsorgVurderingAp;
+  buildInitialValues: (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]) => FormValues;
+  transformOmsorgValues: (values: FormValues) => BekreftOmsorgVurderingAp;
   validate?: (values: FormValues) => any;
 }
 
@@ -74,7 +74,7 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
 
 OmsorgFaktaForm.buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]): FormValues => {
   const omsorgAp = getAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG, aksjonspunkter);
-  let omsorg = null;
+  let omsorg;
 
   if (omsorgAp.length > 0 && omsorgAp[0].status !== AksjonspunktStatus.OPPRETTET) {
     omsorg = ytelsefordeling.overstyrtOmsorg;
@@ -87,7 +87,7 @@ OmsorgFaktaForm.buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonsp
 
 OmsorgFaktaForm.transformOmsorgValues = (values: FormValues): BekreftOmsorgVurderingAp => ({
   kode: MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
-  omsorg: values.omsorg,
+  omsorg: values.omsorg || false,
 });
 
 export default OmsorgFaktaForm;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
@@ -20,7 +20,7 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{ oppgaverForAvdeling: OppgaverForAvdeling[] }> = ({ oppgaverForAvdeling }) => {
+const Template: StoryFn<{ oppgaverForAvdeling: OppgaverForAvdeling[] }> = ({ oppgaverForAvdeling }) => {
   const data = [{ key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true }];
 
   return (

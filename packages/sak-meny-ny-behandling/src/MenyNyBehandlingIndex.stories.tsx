@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
 import { fagsakYtelseType, behandlingType, behandlingArsakType } from '@navikt/fp-kodeverk';
@@ -68,7 +68,7 @@ const behandlingOppretting = [
   },
 ];
 
-const Template: Story<{
+const Template: StoryFn<{
   tilbakekrevingRevurderingArsaker: KodeverkMedNavn[];
   kanTilbakekrevingOpprettes: {
     kanBehandlingOpprettes: boolean;
