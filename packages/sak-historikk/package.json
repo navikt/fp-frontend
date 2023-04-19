@@ -32,7 +32,7 @@
     "@navikt/fp-konstanter": "1.0.0",
     "@navikt/fp-storybook-utils": "1.0.0",
     "@navikt/fp-types": "1.0.0",
-    "@navikt/ft-fakta-beregning": "4.2.0",
+    "@navikt/ft-fakta-beregning": "4.2.1",
     "@navikt/ft-kodeverk": "2.1.0",
     "@navikt/ft-prosess-beregningsgrunnlag": "6.1.0",
     "@navikt/ft-types": "2.1.0",

@@ -11,7 +11,7 @@ import ErrorFormatter from './feilhandtering/ErrorFormatter';
 import ErrorMessage from './feilhandtering/ErrorMessage';
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 
-import { AVDELINGSLEDER_PATH } from '../paths';
+import { AVDELINGSLEDER_PATH, JOURNALFØRING_PATH } from '../paths';
 
 import '@navikt/ft-sak-dekorator/dist/style.css';
 
@@ -98,6 +98,14 @@ const Dekorator: FunctionComponent<OwnProps> = ({
     [navigate],
   );
 
+  const visJournalføringside = useCallback(
+    (e: React.SyntheticEvent) => {
+      navigate(JOURNALFØRING_PATH);
+      e.preventDefault();
+    },
+    [navigate],
+  );
+
   const errorMessages = useRestApiError();
   const { removeErrorMessages } = useRestApiErrorDispatcher();
 
@@ -111,18 +119,21 @@ const Dekorator: FunctionComponent<OwnProps> = ({
   );
 
   const kanOppgavestyre = navAnsatt?.kanOppgavestyre;
+  const kanJournalføre = false; // Til vi er klare for å åpne for alle saksbehandlere
 
   return (
     <DekoratorMedFeilviserSakIndex
       tittel={intl.formatMessage({ id: 'Dekorator.Foreldrepenger' })}
       visSaksbehandlerside={visSaksbehandlerside}
-      visAvdelingslederside={visAvdelingslederside}
+      visJournalføringside={kanJournalføre ? visJournalføringside : undefined}
+      visAvdelingslederside={kanOppgavestyre ? visAvdelingslederside : undefined}
       navAnsattNavn={navAnsatt?.navn}
       systemrutineUrl={SYSTEMRUTINE_URL}
       feilmeldinger={hideErrorMessages ? EMPTY_ARRAY : resolvedErrorMessages}
       fjernFeilmeldinger={removeErrorMessages}
       setSiteHeight={setSiteHeight}
       kanOppgavestyre={kanOppgavestyre}
+      kanJournalføre={kanJournalføre}
     />
   );
 };

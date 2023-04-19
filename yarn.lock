@@ -3255,7 +3255,7 @@ __metadata:
     "@navikt/fp-types": 1.0.0
     "@navikt/fp-types-avklar-aksjonspunkter": 1.0.0
     "@navikt/fp-utils-test": 1.0.0
-    "@navikt/ft-fakta-beregning": 4.2.0
+    "@navikt/ft-fakta-beregning": 4.2.1
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.2.0
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": 2.1.0
     "@navikt/ft-form-hooks": 4.0.18
@@ -3268,7 +3268,7 @@ __metadata:
     "@navikt/ft-prosess-tilbakekreving-vedtak": 2.1.0
     "@navikt/ft-sak-aktor": 2.1.0
     "@navikt/ft-sak-behandling-velger": 2.0.19
-    "@navikt/ft-sak-dekorator": 2.0.17
+    "@navikt/ft-sak-dekorator": 2.0.18
     "@navikt/ft-sak-dokumenter": 2.0.16
     "@navikt/ft-sak-fagsak-profil": 2.0.17
     "@navikt/ft-sak-infosider": 2.0.16
@@ -4587,7 +4587,7 @@ __metadata:
     "@navikt/fp-storybook-utils": 1.0.0
     "@navikt/fp-types": 1.0.0
     "@navikt/fp-utils-test": 1.0.0
-    "@navikt/ft-fakta-beregning": 4.2.0
+    "@navikt/ft-fakta-beregning": 4.2.1
     "@navikt/ft-kodeverk": 2.1.0
     "@navikt/ft-prosess-beregningsgrunnlag": 6.1.0
     "@navikt/ft-types": 2.1.0
@@ -4861,7 +4861,7 @@ __metadata:
     "@navikt/fp-types": 1.0.0
     "@navikt/fp-types-avklar-aksjonspunkter": 1.0.0
     "@navikt/fp-utils-test": 1.0.0
-    "@navikt/ft-fakta-beregning": 4.2.0
+    "@navikt/ft-fakta-beregning": 4.2.1
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.2.0
     "@navikt/ft-form-hooks": 4.0.18
     "@navikt/ft-form-validators": 2.0.16
@@ -4941,7 +4941,7 @@ __metadata:
   dependencies:
     "@navikt/fp-kodeverk": 1.0.0
     "@navikt/fp-types": 1.0.0
-    "@navikt/ft-fakta-beregning": 4.2.0
+    "@navikt/ft-fakta-beregning": 4.2.1
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.2.0
     "@navikt/ft-prosess-beregningsgrunnlag": 6.1.0
     typescript: 5.0.4
@@ -4976,9 +4976,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ft-fakta-beregning@npm:4.2.0":
-  version: 4.2.0
-  resolution: "@navikt/ft-fakta-beregning@npm:4.2.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-beregning%2F4.2.0%2F55a372a90e8632c5ccb9314508ed58a0284185be"
+"@navikt/ft-fakta-beregning@npm:4.2.1":
+  version: 4.2.1
+  resolution: "@navikt/ft-fakta-beregning@npm:4.2.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-beregning%2F4.2.1%2F5cb55679214903480bb9af3ad34114a8b4b27fac"
   dependencies:
     "@navikt/ds-css": 2.8.12
     "@navikt/ds-icons": 2.8.12
@@ -5015,7 +5015,7 @@ __metadata:
     react-dom: 18.2.0
     react-hook-form: 7.43.9
     react-intl: 6.3.2
-  checksum: 8f45aa4c32e5dde30922cbeda6fa993e059936fbe46d07e81b23e88f024b4b25a072f2371fec7a849f61991a817e41fe44244f11e59e34cf1cd21bc10d00741d
+  checksum: a30a6c88ba1913fcb3dd251cca55b56785ebee8d3a2067342e0ea80b9718381e743336853f4b0a8244a8b4b83e2e9b904c9f9ccac17806bfd8ab4ac418b5f74b
   languageName: node
   linkType: hard
 
@@ -5378,9 +5378,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ft-sak-dekorator@npm:2.0.17":
-  version: 2.0.17
-  resolution: "@navikt/ft-sak-dekorator@npm:2.0.17::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-sak-dekorator%2F2.0.17%2F2b2b59f3e502413c43e42f781a20c7697b441e47"
+"@navikt/ft-sak-dekorator@npm:2.0.18":
+  version: 2.0.18
+  resolution: "@navikt/ft-sak-dekorator@npm:2.0.18::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-sak-dekorator%2F2.0.18%2Ffa2530390cc5338974fe2872bb12ce781723c026"
   dependencies:
     "@navikt/ds-css": 2.8.12
     "@navikt/ds-icons": 2.8.12
@@ -5407,7 +5407,7 @@ __metadata:
     classnames: 2.3.2
     react: 18.2.0
     react-intl: 6.3.2
-  checksum: e8f5beeb5d0e154a87aafc333cec31813030a9c7efe356756a8b59a97154eb8316b33fa92fc9b84663c5a3a80cc4010e148bab048be922648b3878120ed24ee7
+  checksum: 6a62de25f75b8f7591b9b634dcccfb9e122c1f3b9bd61992353709fa2d87f46be9e1c652a596ec8b7a96655983e88831571020ca69907e33dbf8db085b5edebd
   languageName: node
   linkType: hard
 
