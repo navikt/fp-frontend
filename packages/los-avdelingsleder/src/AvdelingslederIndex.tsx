@@ -108,7 +108,7 @@ const messageId = {
 
 interface OwnProps {
   valgtAvdelingEnhet?: string;
-  navAnsatt: NavAnsatt;
+  navAnsatt?: NavAnsatt;
 }
 
 const getPanelFromUrlOrDefault = (location: Location) => {
@@ -127,15 +127,13 @@ const AvdelingslederIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
     isQueryParam: true,
   });
 
-  const { kanOppgavestyre, kanBehandleKode6 } = navAnsatt;
-
   const avdelingerData = restApiHooks.useRestApi(RestApiPathsKeys.AVDELINGER, undefined, {
     isCachingOn: true,
-    suspendRequest: !kanOppgavestyre,
+    suspendRequest: !navAnsatt?.kanOppgavestyre,
   });
 
   const avdelinger = avdelingerData?.data;
-  const filtrerteAvdelinger = avdelinger ? avdelinger.filter(a => kanBehandleKode6 || !a.kreverKode6) : [];
+  const filtrerteAvdelinger = avdelinger ? avdelinger.filter(a => !!navAnsatt?.kanBehandleKode6 || !a.kreverKode6) : [];
 
   useEffect(() => {
     if (avdelingerData.state === RestApiState.SUCCESS) {
@@ -161,7 +159,7 @@ const AvdelingslederIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
 
   const navigate = useNavigate();
 
-  if (!kanOppgavestyre) {
+  if (!navAnsatt?.kanOppgavestyre) {
     return <IkkeTilgangTilAvdelingslederPanel />;
   }
   if (avdelingerData.state !== RestApiState.SUCCESS) {
@@ -235,7 +233,7 @@ const AvdelingslederIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
 
 interface OwnPropsWrapper {
   setLosErIkkeTilgjengelig: () => void;
-  navAnsatt: NavAnsatt;
+  navAnsatt?: NavAnsatt;
 }
 
 const AvdelingslederIndexIntlWrapper: FunctionComponent<OwnPropsWrapper> = ({

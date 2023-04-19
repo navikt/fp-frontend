@@ -19,17 +19,17 @@ const TOM_ARRAY: OppgaveOversikt[] = [];
 const tilatteBrukere = ['H137440', 'A138225', 'J116396', 'W119202', 'S148979', 'R107802', 'V149165', 'D151669'];
 
 // Mildertidig intill tilganger er avklart og testing er ferdig
-const harTilgangTilÅBrukeJournalføring = (navAnsatt: NavAnsatt): boolean => {
+const harTilgangTilÅBrukeJournalføring = (navAnsatt?: NavAnsatt): boolean => {
   const url = window.location.href;
   const erProd = url.includes('fpsak.intern.nav.no');
   if (!erProd) {
     return true;
   }
-  return tilatteBrukere.includes(navAnsatt.brukernavn);
+  return navAnsatt ? tilatteBrukere.includes(navAnsatt.brukernavn) : false;
 };
 
 interface OwnProps {
-  navAnsatt: NavAnsatt;
+  navAnsatt?: NavAnsatt;
 }
 
 /**
@@ -50,10 +50,10 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
   requestApi.setAddErrorMessageHandler(addErrorMessage);
 
   useEffect(() => {
-    if (harTilgangTilÅBrukeJournalføring(navAnsatt)) {
-      innhentAlleOppgaver({ ident: navAnsatt?.brukernavn });
+    if (navAnsatt && harTilgangTilÅBrukeJournalføring(navAnsatt)) {
+      innhentAlleOppgaver({ ident: navAnsatt.brukernavn });
     }
-  }, []);
+  }, [navAnsatt]);
 
   if (status === RestApiState.NOT_STARTED || status === RestApiState.LOADING) {
     return <LoadingPanel />;

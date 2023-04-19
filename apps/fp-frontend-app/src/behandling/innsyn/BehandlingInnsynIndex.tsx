@@ -16,6 +16,7 @@ import {
 import { requestInnsynApi } from './data/innsynBehandlingApi';
 import BehandleInnsynProsessStegInitPanel from './prosessPaneler/BehandleInnsynProsessStegInitPanel';
 import InnsynVedtakProsessStegInitPanel from './prosessPaneler/InnsynVedtakProsessStegInitPanel';
+import ProsessPanelInitProps from '../felles/typer/prosessPanelInitProps';
 
 const BehandlingInnsynIndex: FunctionComponent<StandardBehandlingProps> = ({
   behandlingEventHandler,
@@ -40,7 +41,7 @@ const BehandlingInnsynIndex: FunctionComponent<StandardBehandlingProps> = ({
   useInitBehandlingHandlinger(requestInnsynApi, behandlingEventHandler, hentBehandling, setBehandling, behandling);
 
   const hentProsessPaneler = useCallback(
-    props => (
+    (props: ProsessPanelInitProps) => (
       <>
         <BehandleInnsynProsessStegInitPanel {...props} fagsak={fagsak} />
         <InnsynVedtakProsessStegInitPanel

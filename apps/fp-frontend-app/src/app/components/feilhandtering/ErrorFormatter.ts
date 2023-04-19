@@ -37,8 +37,11 @@ class ErrorFormatter {
           const formatter = formatters.find(f => f.isOfType(e.type));
           return formatter ? formatter.format(e) : undefined;
         })
-        .filter(e => e)
-        .forEach(e => allErrorMessages.push(e));
+        .forEach(e => {
+          if (e !== undefined) {
+            allErrorMessages.push(e);
+          }
+        });
     }
 
     return allErrorMessages;

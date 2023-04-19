@@ -8,7 +8,7 @@ import { FpsakApiKeys, restApiHooks } from './fpsakApi';
 /**
  * Hook som henter kodeverk knyttet til behandlingstype
  */
-export function useKodeverk(behandlingType: string): AlleKodeverk | AlleKodeverkTilbakekreving {
+export function useKodeverk(behandlingType?: string): AlleKodeverk | AlleKodeverkTilbakekreving {
   const alleKodeverkFpSak = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
   const alleKodeverkFpTilbake = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
 
@@ -23,6 +23,7 @@ export function useKodeverk(behandlingType: string): AlleKodeverk | AlleKodeverk
  */
 export function useFpSakKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[] {
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
+  // @ts-ignore Fiks
   return alleKodeverk[kodeverkType];
 }
 
@@ -32,6 +33,7 @@ export function useFpSakKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[]
  */
 export function useFpTilbakeKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[] {
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
+  // @ts-ignore Fiks
   return alleKodeverk ? alleKodeverk[kodeverkType] : undefined;
 }
 
@@ -42,11 +44,16 @@ export function useFpTilbakeKodeverk<T = KodeverkMedNavn>(kodeverkType: string):
 export function useFpSakKodeverkMedNavn(kode: string, kodeverk: KodeverkType): KodeverkMedNavn {
   const kodeverkForType = useFpSakKodeverk<KodeverkMedNavn>(kodeverk);
 
+  const verdi = kodeverkForType.find(k => k.kode === kode);
+
   if (!kodeverkForType || kodeverkForType.length === 0) {
     throw Error(`Det finnes ingen kodeverk for type ${kodeverk} med kode ${kode}`);
   }
+  if (!verdi) {
+    throw Error(`Finner ingen verdi for kodeverk ${kodeverk} med kode ${kode}`);
+  }
 
-  return kodeverkForType.find(k => k.kode === kode);
+  return verdi;
 }
 
 /**
@@ -60,11 +67,12 @@ export function useGetKodeverkFn() {
   return (kode: string, kodeverk: KodeverkType, behandlingType: string = BehandlingType.FORSTEGANGSSOKNAD) => {
     const kodeverkForType =
       behandlingType === BehandlingType.TILBAKEKREVING || behandlingType === BehandlingType.TILBAKEKREVING_REVURDERING
-        ? alleFpTilbakeKodeverk[kodeverk]
+        ? // @ts-ignore Fiks
+          alleFpTilbakeKodeverk[kodeverk]
         : alleFpSakKodeverk[kodeverk];
     if (!kodeverkForType || kodeverkForType.length === 0) {
       throw Error(`Det finnes ingen kodeverk for type ${kodeverk} med kode ${kode}`);
     }
-    return kodeverkForType.find(k => k.kode === kode);
+    return kodeverkForType.find((k: KodeverkMedNavn) => k.kode === kode);
   };
 }

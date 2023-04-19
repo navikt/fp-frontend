@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import { BehandlingType, FagsakStatus, BehandlingStatus, FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
-import { Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
+import { Fagsak, VergeBehandlingmenyValg, BehandlingOppretting } from '@navikt/fp-types';
 
 import BehandlingMenuIndex from './BehandlingMenuIndex';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
@@ -56,7 +56,7 @@ const fagsak = {
   status: FagsakStatus.UNDER_BEHANDLING,
   behandlinger: alleBehandlinger,
   sakSkalTilInfotrygd: false,
-  behandlingTypeKanOpprettes: [],
+  behandlingTypeKanOpprettes: [] as BehandlingOppretting[],
 };
 
 describe('BehandlingMenuIndex', () => {

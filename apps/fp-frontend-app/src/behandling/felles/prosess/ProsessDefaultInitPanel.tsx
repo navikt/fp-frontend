@@ -56,11 +56,11 @@ const ProsessDefaultInitPanel = <PANEL_DATA = void,>({
     RestApiState.SUCCESS,
     prosessPanelKode,
     prosessPanelMenyTekst,
-    valgtProsessSteg,
     skalPanelVisesIMeny(standardPanelProps),
     harApentAksjonspunkt,
     status,
     skalMarkeresSomAktiv || harApentAksjonspunkt,
+    valgtProsessSteg,
   );
 
   const formatertePanelEndepunkter = panelEndepunkter.map((e: any) => (e instanceof RestKey ? { key: e } : e));
@@ -80,6 +80,7 @@ const ProsessDefaultInitPanel = <PANEL_DATA = void,>({
       status={status}
       dataState={formatertePanelEndepunkter.length > 0 ? panelDataState : RestApiState.SUCCESS}
     >
+      {/* @ts-ignore Fiks */}
       {renderPanel({
         ...panelData,
         ...standardPanelProps,

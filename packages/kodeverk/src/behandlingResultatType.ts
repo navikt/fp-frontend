@@ -67,7 +67,7 @@ export const isOpphor = (behandlingResultatTypeKode: string): boolean =>
 export const isKlageOmgjort = (behandlingResultatTypeKode: string): boolean =>
   klageOmgjortResultatTyper.includes(behandlingResultatTypeKode);
 
-export const isKlageAvvist = (behandlingResultatTypeKode: string): boolean =>
+export const isKlageAvvist = (behandlingResultatTypeKode?: string): boolean =>
   behandlingResultatTypeKode === behandlingResultatType.KLAGE_AVVIST;
 
 export default behandlingResultatType;

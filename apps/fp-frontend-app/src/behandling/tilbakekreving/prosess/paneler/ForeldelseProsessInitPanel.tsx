@@ -58,14 +58,14 @@ const ForeldelseProsessInitPanel: FunctionComponent<OwnProps> = ({
 
   const setFormDataForeldelse = useCallback(
     (data: any) =>
-      setFormData(oldData => ({
+      setFormData((oldData: any) => ({
         ...oldData,
         [ProsessStegCode.FORELDELSE]: data,
       })),
     [setFormData],
   );
 
-  if (state !== RestApiState.SUCCESS) {
+  if (state !== RestApiState.SUCCESS || perioderForeldelse === undefined) {
     return <LoadingPanel />;
   }
 

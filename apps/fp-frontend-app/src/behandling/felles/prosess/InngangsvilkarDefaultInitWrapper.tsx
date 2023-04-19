@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useCallback, useState } from 'react';
+import React, { FunctionComponent, ReactElement, useCallback, useState, MouseEvent } from 'react';
 import { useIntl } from 'react-intl';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 import {
@@ -87,8 +87,8 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
   const erIkkeFerdigbehandlet = panelInfo.some(p => p.status === VilkarUtfallType.IKKE_VURDERT);
 
   const oppdaterUrl = useCallback(
-    evt => {
-      oppdaterProsessStegOgFaktaPanelIUrl(undefined, apentFaktaPanelInfo.urlCode);
+    (evt: MouseEvent) => {
+      oppdaterProsessStegOgFaktaPanelIUrl(undefined, apentFaktaPanelInfo?.urlCode);
       evt.preventDefault();
     },
     [apentFaktaPanelInfo],
@@ -104,11 +104,11 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
     RestApiState.SUCCESS,
     ProsessStegCode.INNGANGSVILKAR,
     intl.formatMessage({ id: 'Behandlingspunkt.Inngangsvilkar' }),
-    valgtProsessSteg,
     skalVises,
     harApentAksjonspunkt,
     status,
     !apentFaktaPanelInfo && harApentAksjonspunkt,
+    valgtProsessSteg,
   );
 
   const aksjonspunktTekster = panelInfo.map(p => p.aksjonspunktTekst).filter(tekst => !!tekst);
@@ -121,39 +121,29 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
       dataState={RestApiState.SUCCESS}
       skalSkjulePanel={!erPanelValgt}
     >
-      {erPanelValgt && ((apentFaktaPanelInfo && erIkkeFerdigbehandlet) || aksjonspunktTekster.length > 0) && (
-        <>
-          <AksjonspunktHelpTextHTML>
-            {apentFaktaPanelInfo && erIkkeFerdigbehandlet
-              ? [
-                  <React.Fragment key="1">
-                    {intl.formatMessage({ id: 'InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv' })}
-                    <a href="" onClick={oppdaterUrl}>
-                      {apentFaktaPanelInfo.text}
-                    </a>
-                  </React.Fragment>,
-                ]
-              : aksjonspunktTekster.map(tekst => tekst)}
-          </AksjonspunktHelpTextHTML>
-          <VerticalSpacer thirtyTwoPx />
-        </>
-      )}
-      <FlexContainer>
-        <FlexRow>
-          <FlexColumn className={styles.col}>
-            <div className={styles.panelLeft}>
-              {leftPanels({
-                registrerInngangsvilkarPanel,
-                erPanelValgt,
-                harInngangsvilkarApentAksjonspunkt: harApentAksjonspunkt,
-                requestApi,
-              })}
-            </div>
-          </FlexColumn>
-          {rightPanels && (
+      <>
+        {erPanelValgt && ((apentFaktaPanelInfo && erIkkeFerdigbehandlet) || aksjonspunktTekster.length > 0) && (
+          <>
+            <AksjonspunktHelpTextHTML>
+              {apentFaktaPanelInfo && erIkkeFerdigbehandlet
+                ? [
+                    <React.Fragment key="1">
+                      {intl.formatMessage({ id: 'InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv' })}
+                      <a href="" onClick={oppdaterUrl}>
+                        {apentFaktaPanelInfo.text}
+                      </a>
+                    </React.Fragment>,
+                  ]
+                : aksjonspunktTekster.map(tekst => tekst)}
+            </AksjonspunktHelpTextHTML>
+            <VerticalSpacer thirtyTwoPx />
+          </>
+        )}
+        <FlexContainer>
+          <FlexRow>
             <FlexColumn className={styles.col}>
-              <div className={styles.panelRight}>
-                {rightPanels({
+              <div className={styles.panelLeft}>
+                {leftPanels({
                   registrerInngangsvilkarPanel,
                   erPanelValgt,
                   harInngangsvilkarApentAksjonspunkt: harApentAksjonspunkt,
@@ -161,9 +151,21 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
                 })}
               </div>
             </FlexColumn>
-          )}
-        </FlexRow>
-      </FlexContainer>
+            {rightPanels && (
+              <FlexColumn className={styles.col}>
+                <div className={styles.panelRight}>
+                  {rightPanels({
+                    registrerInngangsvilkarPanel,
+                    erPanelValgt,
+                    harInngangsvilkarApentAksjonspunkt: harApentAksjonspunkt,
+                    requestApi,
+                  })}
+                </div>
+              </FlexColumn>
+            )}
+          </FlexRow>
+        </FlexContainer>
+      </>
     </ProsessPanelWrapper>
   );
 };

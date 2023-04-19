@@ -30,7 +30,7 @@ const behandlingPath = `${behandlingerPath}:behandlingUuid(.*)/`;
 
 export const pathToFagsak = (saksnummer: string): string => buildPath(fagsakPath, { saksnummer });
 export const pathToBehandlinger = (saksnummer: string): string => buildPath(behandlingerPath, { saksnummer });
-export const pathToBehandling = (saksnummer: string, behandlingUuid: string): string =>
+export const pathToBehandling = (saksnummer: string, behandlingUuid?: string): string =>
   buildPath(behandlingPath, { saksnummer, behandlingUuid });
 export const pathToMissingPage = (): string => '/404';
 

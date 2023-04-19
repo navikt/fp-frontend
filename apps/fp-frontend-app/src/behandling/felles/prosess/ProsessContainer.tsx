@@ -90,7 +90,7 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
         },
         {
           apentFaktaPanelInfo,
-          allMenyData: currentData,
+          allMenyData: currentData || [],
         },
       )}
       {behandling.behandlingHenlagt && (

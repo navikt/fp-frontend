@@ -8,7 +8,7 @@ const isDisabled = (
   isDirty: boolean,
   isSubmitting: boolean,
   isSubmittable: boolean,
-  hasEmptyRequiredFields: boolean,
+  hasEmptyRequiredFields?: boolean,
 ): boolean => {
   if (!isSubmittable || isSubmitting) {
     return true;

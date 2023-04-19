@@ -18,7 +18,7 @@ const getBekreftAksjonspunktFaktaCallback =
     behandling: Behandling,
     oppdaterProsessStegOgFaktaPanelIUrl: (prosessPanel?: string, faktanavn?: string) => void,
     lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<Behandling | undefined>,
-    lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<Behandling>,
+    lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<Behandling | undefined>,
     overstyringApCodes?: string[],
   ) =>
   (aksjonspunkter: FaktaAksjonspunkt | FaktaAksjonspunkt[]): Promise<void> => {

@@ -74,7 +74,7 @@ const Home: FunctionComponent<OwnProps> = ({ headerHeight, navAnsatt }) => {
               <SaksbehandlerIndex
                 setLosErIkkeTilgjengelig={setLosErIkkeTilgjengelig}
                 åpneFagsak={åpneFagsak}
-                kanSaksbehandle={navAnsatt?.kanSaksbehandle}
+                kanSaksbehandle={navAnsatt?.kanSaksbehandle || false}
               />
             ) : (
               <FagsakSearchIndex />

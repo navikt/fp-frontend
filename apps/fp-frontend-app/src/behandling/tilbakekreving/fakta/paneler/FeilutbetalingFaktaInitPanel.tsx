@@ -64,7 +64,7 @@ const FeilutbetalingFaktaInitPanel: FunctionComponent<OwnProps> = ({
 
   const setFormDataFeilutbetaling = useCallback(
     (data: any) =>
-      setFormData(oldData => ({
+      setFormData((oldData: any) => ({
         ...oldData,
         [FaktaPanelCode.FEILUTBETALING]: data,
       })),
@@ -80,7 +80,7 @@ const FeilutbetalingFaktaInitPanel: FunctionComponent<OwnProps> = ({
     },
   );
 
-  if (state !== RestApiState.SUCCESS) {
+  if (state !== RestApiState.SUCCESS || initData === undefined) {
     return <LoadingPanel />;
   }
 

@@ -13,7 +13,7 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   innsyn?: Innsyn;
-  alleDokumenter: Dokument[];
+  alleDokumenter?: Dokument[];
   saksnummer: string;
 }
 

@@ -19,9 +19,9 @@ describe('<bekreftAksjonspunkter>', () => {
     const lagreAksjonspunkter = vi.fn(() => Promise.resolve());
     const callback = getBekreftAksjonspunktCallback(
       saksnummer,
-      behandling,
       oppdaterProsessStegOgFaktaPanelIUrl,
       lagreAksjonspunkter,
+      behandling,
     );
     const lagreAp = callback();
 

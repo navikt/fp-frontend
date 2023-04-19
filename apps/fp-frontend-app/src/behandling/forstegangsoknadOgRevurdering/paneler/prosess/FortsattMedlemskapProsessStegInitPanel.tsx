@@ -40,6 +40,7 @@ const FortsattMedlemskapProsessStegInitPanel: FunctionComponent<OwnProps & Prose
       erOverstyrt={erOverstyrt}
       renderPanel={data => (
         <OverstyringPanelDef
+          // @ts-ignore Fiks
           aksjonspunkter={data?.aksjonspunkter}
           aksjonspunktKode={AKSJONSPUNKT_KODE}
           vilkar={data.vilkar}

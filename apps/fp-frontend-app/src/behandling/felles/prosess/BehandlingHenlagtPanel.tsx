@@ -11,7 +11,7 @@ import ProsessPanelMenyData from '../typer/prosessPanelMenyData';
 const ID = 'henlagt';
 
 type OwnProps = {
-  valgtProsessSteg: string;
+  valgtProsessSteg: string | undefined;
   registrerProsessPanel: (data: ProsessPanelMenyData) => void;
 };
 

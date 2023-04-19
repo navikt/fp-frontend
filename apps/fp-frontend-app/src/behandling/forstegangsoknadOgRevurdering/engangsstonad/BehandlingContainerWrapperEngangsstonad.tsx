@@ -18,6 +18,8 @@ import BeregningEsProsessStegInitPanel from './prosessPaneler/BeregningEsProsess
 import SimuleringProsessStegInitPanel from '../paneler/prosess/SimuleringProsessStegInitPanel';
 import VedtakEsProsessStegInitPanel from './prosessPaneler/VedtakEsProsessStegInitPanel';
 import SoknadsfristEsProsessStegInitPanel from './prosessPaneler/SoknadsfristEsProsessStegInitPanel';
+import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
+import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from '../../felles/typer/prosessPanelInitProps';
 
 interface OwnProps {
   behandling: Behandling;
@@ -45,7 +47,7 @@ const BehandlingContainerWrapperEngangsstonad: FunctionComponent<OwnProps> = ({
   rettigheter,
 }) => {
   const faktaPaneler = useCallback(
-    props => (
+    (props: FaktaPanelInitProps) => (
       <>
         <SakenFaktaInitPanel {...props} fagsak={fagsak} />
         <YtelserFaktaInitPanel {...props} />
@@ -60,7 +62,7 @@ const BehandlingContainerWrapperEngangsstonad: FunctionComponent<OwnProps> = ({
   );
 
   const prosessPaneler = useCallback(
-    (props, ekstraProps) => (
+    (props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => (
       <>
         <VarselProsessStegInitPanel
           {...props}

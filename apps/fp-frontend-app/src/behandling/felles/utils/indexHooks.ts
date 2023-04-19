@@ -59,7 +59,7 @@ export const useBehandling = (
   const [skalOppdatereFagsakOgBehandling, toggleOppdateringAvFagsakOgBehandling] = useState(true);
 
   const setBehandling = useCallback(
-    nyBehandling => {
+    (nyBehandling: Behandling) => {
       if (skalOppdatereFagsakOgBehandling) {
         requestApi.resetCache();
         requestApi.setLinks(nyBehandling.links);

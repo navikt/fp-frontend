@@ -52,12 +52,14 @@ const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: Fp
   vilkarStatus: bgVilkar.vilkarStatus,
 });
 
-const lagBGVilkar = (vilkar: FpVilkar[], beregningsgrunnlag: Beregningsgrunnlag): Vilkar | null => {
+const lagBGVilkar = (vilkar?: FpVilkar[], beregningsgrunnlag?: Beregningsgrunnlag): Vilkar => {
   if (!vilkar) {
+    // @ts-ignore BeregningFaktaIndex må kunna ta i mot null
     return null;
   }
   const bgVilkar = vilkar.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkar || !beregningsgrunnlag) {
+    // @ts-ignore BeregningFaktaIndex må kunna ta i mot null
     return null;
   }
   const nyVK = {
@@ -72,8 +74,8 @@ const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): Beregningsgrunn
     return [];
   }
   const nyttBG = {
-    vilkårsperiodeFom: beregningsgrunnlag.skjaeringstidspunktBeregning,
     ...beregningsgrunnlag,
+    vilkårsperiodeFom: beregningsgrunnlag.skjaeringstidspunktBeregning,
   };
   return [nyttBG];
 };
@@ -120,7 +122,7 @@ const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
       <BeregningFaktaIndex
         {...data}
         kodeverkSamling={data.alleKodeverk}
-        vilkar={lagBGVilkar(props.behandling.vilkår, data.beregningsgrunnlag)}
+        vilkar={lagBGVilkar(props.behandling?.vilkår, data.beregningsgrunnlag)}
         beregningsgrunnlag={lagFormatertBG(data.beregningsgrunnlag)}
         submitCallback={lagModifisertCallback(data.submitCallback)}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

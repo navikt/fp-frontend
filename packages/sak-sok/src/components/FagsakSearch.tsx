@@ -12,7 +12,7 @@ import styles from './fagsakSearch.module.css';
 
 interface OwnProps {
   fagsaker: FagsakEnkel[];
-  searchFagsakCallback: (params?: { searchString: string }) => Promise<FagsakEnkel[]>;
+  searchFagsakCallback: (params?: { searchString: string }) => Promise<FagsakEnkel[] | undefined>;
   searchResultReceived: boolean;
   selectFagsakCallback: (e: React.SyntheticEvent, saksnummer?: string) => void;
   searchStarted: boolean;

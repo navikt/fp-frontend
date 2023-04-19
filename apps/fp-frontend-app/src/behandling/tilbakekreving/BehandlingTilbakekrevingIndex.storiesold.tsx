@@ -236,8 +236,8 @@ export default {
 const Template: Story<{
   behandling: Behandling;
 }> = ({ behandling }) => {
-  const [valgtProsessSteg, setProsessSteg] = useState('default');
-  const [valgtFaktaSteg, setFaktaSteg] = useState('default');
+  const [valgtProsessSteg, setProsessSteg] = useState<string | undefined>('default');
+  const [valgtFaktaSteg, setFaktaSteg] = useState<string | undefined>('default');
 
   const oppdaterProsessStegOgFaktaPanelIUrl = (punktnavn?: string, faktanavn?: string) => {
     setProsessSteg(punktnavn);

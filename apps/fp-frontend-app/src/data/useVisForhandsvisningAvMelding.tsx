@@ -4,13 +4,13 @@ import { forhandsvisDokument } from '@navikt/ft-utils';
 import { FpsakApiKeys, restApiHooks } from './fpsakApi';
 
 type ForhandsvisData = {
-  behandlingUuid: string;
+  behandlingUuid?: string;
   fritekst?: string;
   gjelderVedtak?: boolean;
 };
 
 type ForhandsvisDataFormidling = ForhandsvisData & {
-  fagsakYtelseType: string;
+  fagsakYtelseType?: string;
   arsakskode?: string | null;
   mottaker?: string;
   dokumentMal?: string;

@@ -1,6 +1,6 @@
 type ForhåndsvisMeldingParams = Readonly<{
-  fagsakYtelseType: string;
-  behandlingUuid: string;
+  fagsakYtelseType?: string;
+  behandlingUuid?: string;
   automatiskVedtaksbrev?: boolean;
   fritekst?: string;
   dokumentMal?: string;

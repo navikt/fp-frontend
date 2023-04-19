@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo, useState } from 'react';
 import { Location } from 'history';
+import { useIntl } from 'react-intl';
 import moment from 'moment';
-import { WrappedComponentProps } from 'react-intl';
 import { Checkbox } from '@navikt/ds-react';
 
 import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
@@ -216,8 +216,8 @@ const sortAndTagTilbakekreving = (
 };
 
 interface OwnProps {
-  historikkFpSak: Historikkinnslag[];
-  historikkFpTilbake: Historikkinnslag[];
+  historikkFpSak?: Historikkinnslag[];
+  historikkFpTilbake?: Historikkinnslag[];
   alleKodeverkFpTilbake?: AlleKodeverkTilbakekreving;
   alleKodeverkFpSak: AlleKodeverk;
   saksnummer?: string;
@@ -231,8 +231,7 @@ interface OwnProps {
  *
  * Historikken for en behandling
  */
-const History: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const History: FunctionComponent<OwnProps> = ({
   historikkFpSak,
   historikkFpTilbake,
   alleKodeverkFpTilbake,
@@ -242,6 +241,8 @@ const History: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   createLocationForSkjermlenke,
   valgtBehandlingUuid,
 }) => {
+  const intl = useIntl();
+
   const [skalSortertePaValgtBehandling, setSkalSortertePaBehandling] = useState(false);
 
   const alleHistorikkInnslag = useMemo(

@@ -51,12 +51,14 @@ const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: Fp
   vilkarStatus: bgVilkar.vilkarStatus,
 });
 
-const lagBGVilkar = (vilkar: FpVilkar[], beregningsgrunnlag: Beregningsgrunnlag): Vilkar | null => {
+const lagBGVilkar = (vilkar: FpVilkar[], beregningsgrunnlag?: Beregningsgrunnlag): Vilkar => {
   if (!vilkar) {
+    // @ts-ignore FordelBeregningsgrunnlagFaktaIndex må kunna håndtera null
     return null;
   }
   const bgVilkar = vilkar.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkar || !beregningsgrunnlag) {
+    // @ts-ignore FordelBeregningsgrunnlagFaktaIndex må kunna håndtera null
     return null;
   }
   const nyVK = {
@@ -71,8 +73,8 @@ const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): Beregningsgrunn
     return [];
   }
   const nyttBG = {
-    vilkårsperiodeFom: beregningsgrunnlag.skjaeringstidspunktBeregning,
     ...beregningsgrunnlag,
+    vilkårsperiodeFom: beregningsgrunnlag.skjaeringstidspunktBeregning,
   };
   return [nyttBG];
 };
@@ -102,6 +104,7 @@ const FordelingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
     faktaPanelKode={FaktaPanelCode.FORDELING}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FordelBeregningsgrunnlag.Title' })}
     skalPanelVisesIMeny={() =>
+      !!props.behandling &&
       !!props.behandling.aksjonspunkt &&
       !!props.behandling.aksjonspunkt.some(ap => AKSJONSPUNKT_KODER.some(kode => kode === ap.definisjon))
     }

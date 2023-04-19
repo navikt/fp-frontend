@@ -19,7 +19,7 @@ const PanelContainer: FunctionComponent<PanelContainerOwnProps> = ({ children })
 
 interface OwnProps {
   erAksjonspunktOpent: boolean;
-  status: string;
+  status?: string;
   visHenlagt: boolean;
   children: ReactElement | ReactElement[];
 }

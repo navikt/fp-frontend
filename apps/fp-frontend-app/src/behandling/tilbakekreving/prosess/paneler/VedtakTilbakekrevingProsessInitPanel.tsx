@@ -23,7 +23,7 @@ import '@navikt/ft-prosess-tilbakekreving-vedtak/dist/style.css';
 const tilbakekrevingÅrsakTyperKlage = [BehandlingArsakType.RE_KLAGE_KA, BehandlingArsakType.RE_KLAGE_NFP];
 
 const erTilbakekrevingÅrsakKlage = (årsak: string): boolean =>
-  årsak && tilbakekrevingÅrsakTyperKlage.some(å => å === årsak);
+  !!årsak && tilbakekrevingÅrsakTyperKlage.some(å => å === årsak);
 
 const getLagringSideeffekter =
   (
@@ -109,14 +109,14 @@ const VedtakTilbakekrevingProsessInitPanel: FunctionComponent<OwnProps> = ({
 
   const setFormDataVedtak = useCallback(
     (data: any) =>
-      setFormData(oldData => ({
+      setFormData((oldData: any) => ({
         ...oldData,
         [ProsessStegCode.VEDTAK]: data,
       })),
     [setFormData],
   );
 
-  if (state !== RestApiState.SUCCESS) {
+  if (state !== RestApiState.SUCCESS || panelData === undefined) {
     return <LoadingPanel />;
   }
 
@@ -151,8 +151,8 @@ const VedtakTilbakekrevingProsessInitPanel: FunctionComponent<OwnProps> = ({
         vedtaksbrev={panelData.vedtaksbrev}
         kodeverkSamlingFpTilbake={alleKodeverk}
         fetchPreviewVedtaksbrev={fetchPreviewVedtaksbrev}
-        erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage}
-        erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt}
+        erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage || false}
+        erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt || false}
         formData={formData[ProsessStegCode.VEDTAK]}
         setFormData={setFormDataVedtak}
       />

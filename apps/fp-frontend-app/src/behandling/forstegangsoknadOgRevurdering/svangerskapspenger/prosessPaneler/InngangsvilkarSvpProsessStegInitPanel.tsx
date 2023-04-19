@@ -7,6 +7,7 @@ import InngangsvilkarDefaultInitWrapper from '../../../felles/prosess/Inngangsvi
 import SvangerskapInngangsvilkarInitPanel from './inngangsvilkarPaneler/SvangerskapInngangsvilkarInitPanel';
 import MedlemskapInngangsvilkarInitPanel from '../../paneler/prosess/inngangsvilkarPaneler/MedlemskapInngangsvilkarInitPanel';
 import OpptjeningInngangsvilkarInitPanel from './inngangsvilkarPaneler/OpptjeningInngangsvilkarInitPanel';
+import InngangsvilkarPanelInitProps from '../../../felles/typer/inngangsvilkarPanelInitProps';
 
 interface OwnProps {
   apentFaktaPanelInfo?: { urlCode: string; text: string };
@@ -24,7 +25,7 @@ const InngangsvilkarSvpProsessStegInitPanel: FunctionComponent<OwnProps & Proses
   requestApi,
 }) => {
   const leftPanels = useCallback(
-    props => (
+    (props: InngangsvilkarPanelInitProps) => (
       <>
         <SvangerskapInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} {...props} />
         <MedlemskapInngangsvilkarInitPanel
@@ -38,7 +39,7 @@ const InngangsvilkarSvpProsessStegInitPanel: FunctionComponent<OwnProps & Proses
   );
 
   const rightPanels = useCallback(
-    props => (
+    (props: InngangsvilkarPanelInitProps) => (
       <OpptjeningInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} rettigheter={rettigheter} {...props} />
     ),
     [behandling.versjon, rettigheter],

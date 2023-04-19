@@ -4,7 +4,7 @@ import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 import { AlleKodeverk, AlleKodeverkTilbakekreving, Behandling } from '@navikt/fp-types';
 import { RequestApi } from '@navikt/fp-rest-api';
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
-import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
+import { SettPaVentModalIndex, FormValues } from '@navikt/fp-modal-sett-pa-vent';
 import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
 import { BehandlingFellesApiKeys } from '../../data/behandlingFellesApi';
 
@@ -39,7 +39,7 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
   }, [behandling.versjon, skalIkkeViseModal]);
 
   const oppdaterPaVentData = useCallback(
-    (formData: { ventearsak: string; frist?: string }) =>
+    (formData: FormValues) =>
       settPaVent({
         ...formData,
         behandlingUuid: behandling.uuid,

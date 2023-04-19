@@ -95,7 +95,7 @@ interface OwnProps {
   innsynDokumenter: InnsynDokument[];
   innsynResultatType: string;
   vedtaksdokumentasjon: InnsynVedtaksdokument[];
-  alleDokumenter: Dokument[];
+  alleDokumenter?: Dokument[];
   aksjonspunkter: Aksjonspunkt[];
   alleKodeverk: AlleKodeverk;
   submitCallback: (data: VurderInnsynAp) => Promise<void>;
@@ -119,7 +119,7 @@ const InnsynForm: FunctionComponent<OwnProps> = ({
   innsynResultatType,
   fristBehandlingPåVent,
   innsynDokumenter,
-  alleDokumenter,
+  alleDokumenter = [],
   aksjonspunkter,
   submitCallback,
   saksNr,
