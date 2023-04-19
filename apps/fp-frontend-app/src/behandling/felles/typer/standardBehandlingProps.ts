@@ -3,7 +3,7 @@ import { AlleKodeverk, Fagsak, AksessRettigheter } from '@navikt/fp-types';
 export type BehandlingEventHandler = {
   setHandler: (events: { [key: string]: (params: any) => Promise<any> }) => void;
   clear: () => void;
-  settBehandlingPaVent: (params: { frist: string; ventearsak: string }) => Promise<any>;
+  settBehandlingPaVent: (params: { frist?: string; ventearsak: string }) => Promise<any>;
 };
 
 type StandardBehandlingProps = {

@@ -1,9 +1,10 @@
 import { FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { diff } from '@navikt/ft-utils';
 
-const hasValue = (value: string | number | boolean): boolean => value !== null && value !== undefined;
+const hasValue = (value: string | number | boolean | undefined): boolean => value !== null && value !== undefined;
 
-const isNotEqual = (value1: number | string, value2: number | string): boolean => hasValue(value2) && value1 !== value2;
+const isNotEqual = (value1: number | string | undefined, value2: number | string | undefined): boolean =>
+  hasValue(value2) && value1 !== value2;
 
 const getIsUtstedtDatoEdited = (soknad: Soknad, familiehendelse: FamilieHendelse): boolean =>
   isNotEqual(soknad.utstedtdato, familiehendelse.utstedtdato);
@@ -19,7 +20,8 @@ const getIsVilkarTypeEdited = (familiehendelse: FamilieHendelse): boolean => has
 const getIsAdopsjonFodelsedatoerEdited = (
   soknad: Soknad,
   familiehendelse: FamilieHendelse,
-): boolean | Record<string, boolean> => diff(soknad.adopsjonFodelsedatoer, familiehendelse.adopsjonFodelsedatoer);
+  // @ts-ignore diff bør endrast så den gir ein meir forutsigbar output
+): Record<string, boolean> => diff(soknad.adopsjonFodelsedatoer, familiehendelse.adopsjonFodelsedatoer);
 
 const getIsOmsorgsovertakelseDatoEdited = (soknad: Soknad, familiehendelse: FamilieHendelse): boolean =>
   isNotEqual(soknad.omsorgsovertakelseDato, familiehendelse.omsorgsovertakelseDato);
@@ -43,7 +45,7 @@ export type FieldEditedInfo = {
   termindato?: boolean;
   antallBarn?: boolean;
   utstedtdato?: boolean;
-  adopsjonFodelsedatoer?: boolean | Record<string, boolean>;
+  adopsjonFodelsedatoer?: Record<string, boolean>;
   omsorgsovertakelseDato?: boolean;
   barnetsAnkomstTilNorgeDato?: boolean;
   antallBarnOmsorgOgForeldreansvar?: boolean;

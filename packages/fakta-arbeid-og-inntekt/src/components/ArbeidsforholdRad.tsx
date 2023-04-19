@@ -37,7 +37,10 @@ const finnKildekode = (erManueltOpprettet: boolean, harArbeidsforhold: boolean):
   return harArbeidsforhold ? 'ArbeidsforholdRad.AaRegisteret' : 'ArbeidsforholdRad.Inntektsmelding';
 };
 
-const finnPeriode = (arbeidsforhold: AoIArbeidsforhold[], avklaring?: Avklaring): { fom: string; tom?: string } => {
+const finnPeriode = (
+  arbeidsforhold: AoIArbeidsforhold[],
+  avklaring?: Avklaring,
+): { fom?: string; tom?: string } | undefined => {
   if (
     avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER ||
     avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING
@@ -59,16 +62,25 @@ const finnPeriode = (arbeidsforhold: AoIArbeidsforhold[], avklaring?: Avklaring)
   return periode.fom ? periode : undefined;
 };
 
-const finnInntektsmelding = (inntektsmeldinger: Inntektsmelding[], internArbeidsforholdId?: string) => {
+const finnInntektsmelding = (
+  inntektsmeldinger: Inntektsmelding[],
+  internArbeidsforholdId?: string,
+): Inntektsmelding => {
   const harImMedId = inntektsmeldinger.some(i => i.internArbeidsforholdId);
   const harImUtenId = inntektsmeldinger.some(i => !i.internArbeidsforholdId);
   if (harImMedId && harImUtenId) {
     throw Error('Har inntektsmelding både med og uten id');
   }
 
-  return inntektsmeldinger.find(
+  const im = inntektsmeldinger.find(
     i => !i.internArbeidsforholdId || !internArbeidsforholdId || i.internArbeidsforholdId === internArbeidsforholdId,
   );
+
+  if (!im) {
+    throw Error(`Finner ingen inntektsmelding for arbeidsforhold id ${internArbeidsforholdId}`);
+  }
+
+  return im;
 };
 
 interface OwnProps {
@@ -119,7 +131,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
     arbeidsforholdForRad.length > 0 && inntektsmeldingerForRad.length > 0 && !årsak;
   const manglerInntektsmelding = årsak === AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING;
   const manglerArbeidsforhold = årsak === AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD;
-  const harÅpentAksjonspunkt = årsak && !avklaring?.saksbehandlersVurdering;
+  const harÅpentAksjonspunkt = !!årsak && !avklaring?.saksbehandlersVurdering;
   const harArbeidsforholdUtenInntektsmeldingMenIngenÅrsak =
     arbeidsforholdForRad.length > 0 && inntektsmeldingerForRad.length === 0 && !årsak && !erManueltOpprettet;
   const harKunInntektsmeldingOgIkkeÅrsak =
@@ -235,7 +247,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
       </TableColumn>
       <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>
         <BodyShort>
-          {periode && (
+          {periode && periode.fom && (
             <PeriodLabel
               dateStringFom={periode.fom}
               dateStringTom={periode.tom !== TIDENES_ENDE ? periode.tom : undefined}

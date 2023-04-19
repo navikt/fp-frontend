@@ -16,21 +16,21 @@ import styles from './dokumentasjonFaktaForm.module.css';
 
 const findAntallBarnUnder15 = (
   fodselsdatoer: Record<number, string>,
-  omsorgsovertakelseDato: string,
+  omsorgsovertakelseDato?: string,
 ): number | string => {
-  const nrOfNotNullFodselsdatoer = Object.keys(fodselsdatoer).filter(id => fodselsdatoer[id]).length;
+  const nrOfNotNullFodselsdatoer = Object.keys(fodselsdatoer).filter(id => fodselsdatoer[parseInt(id, 10)]).length;
   if (nrOfNotNullFodselsdatoer === 0 || !omsorgsovertakelseDato) {
     return '-';
   }
   const omsorgsdato = moment(omsorgsovertakelseDato).subtract(15, 'years');
   return Object.values(fodselsdatoer)
     .map(fodselsdato => (moment(fodselsdato).isAfter(omsorgsdato) ? 1 : 0))
-    .reduce((a, b) => a + b, 0);
+    .reduce<number>((a, b) => a + b, 0);
 };
 
-const isAgeAbove15 = (fodselsdatoer: Record<number, string>, omsorgsovertakelseDato: string, id: string): boolean =>
-  fodselsdatoer[id] &&
-  omsorgsovertakelseDato &&
+const isAgeAbove15 = (fodselsdatoer: Record<number, string>, id: number, omsorgsovertakelseDato?: string): boolean =>
+  !!fodselsdatoer[id] &&
+  !!omsorgsovertakelseDato &&
   moment(fodselsdatoer[id]).isSameOrBefore(moment(omsorgsovertakelseDato).subtract(15, 'years'));
 
 interface OwnProps {
@@ -48,8 +48,8 @@ export type FormValues = {
 };
 
 interface StaticFunctions {
-  buildInitialValues?: (soknad: Soknad, familiehendelse: FamilieHendelse) => FormValues;
-  transformValues?: (values: FormValues) => BekreftDokumentertDatoAksjonspunktAp;
+  buildInitialValues: (soknad: Soknad, familiehendelse: FamilieHendelse) => FormValues;
+  transformValues: (values: FormValues) => BekreftDokumentertDatoAksjonspunktAp;
 }
 
 /**
@@ -117,11 +117,11 @@ const DokumentasjonFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
                     )}
                     validate={[required, hasValidDate]}
                     isReadOnly={readOnly}
-                    isEdited={editedStatus.adopsjonFodelsedatoer[id]}
+                    isEdited={editedStatus.adopsjonFodelsedatoer ? editedStatus.adopsjonFodelsedatoer[id] : false}
                   />
                 </FlexColumn>
                 <FlexColumn>
-                  {!readOnly && isAgeAbove15(fodselsdatoer, omsorgsovertakelseDato, id) && (
+                  {!readOnly && isAgeAbove15(fodselsdatoer, parseInt(id, 10), omsorgsovertakelseDato) && (
                     <Image
                       className={styles.image}
                       alt={intl.formatMessage({ id: 'DokumentasjonFaktaForm.BarnErOver15Ar' })}
@@ -157,8 +157,9 @@ DokumentasjonFaktaForm.buildInitialValues = (soknad: Soknad, familiehendelse: Fa
 
 DokumentasjonFaktaForm.transformValues = (values: FormValues): BekreftDokumentertDatoAksjonspunktAp => ({
   kode: AksjonspunktCode.ADOPSJONSDOKUMENTAJON,
-  omsorgsovertakelseDato: values.omsorgsovertakelseDato,
-  fodselsdatoer: values.fodselsdatoer,
+  // Desse to variablane skal alltid ha verdi - fix i typescript og fjern ''
+  omsorgsovertakelseDato: values.omsorgsovertakelseDato || '',
+  fodselsdatoer: values.fodselsdatoer || '',
 });
 
 export default DokumentasjonFaktaForm;

@@ -33,7 +33,7 @@ interface PureOwnProps {
   alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
   verge: Verge;
   hasOpenAksjonspunkter: boolean;
-  submittable?: boolean;
+  submittable: boolean;
   readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   formData?: any;

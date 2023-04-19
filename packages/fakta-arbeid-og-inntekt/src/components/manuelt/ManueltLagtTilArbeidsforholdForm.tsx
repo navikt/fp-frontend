@@ -33,15 +33,20 @@ const minValue1 = minValue(1);
 const maxValue100 = maxValue(100);
 
 export type FormValues = {
-  arbeidsgiverNavn: string;
-  fom: string;
-  tom: string;
-  stillingsprosent: number;
-  begrunnelse: string;
+  arbeidsgiverNavn?: string;
+  fom?: string;
+  tom?: string;
+  stillingsprosent?: number;
+  begrunnelse?: string;
 };
 
-const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (tom?: string) =>
-  tom ? dateAfterOrEqual(getValues('fom'))(tom) : null;
+const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (tom?: string) => {
+  const fom = getValues('fom');
+  if (tom && fom) {
+    return dateAfterOrEqual(fom)(tom);
+  }
+  return null;
+};
 
 interface OwnProps {
   behandlingUuid: string;
@@ -98,8 +103,9 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
         vurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
         ...formValues,
       };
+      // @ts-ignore Fiks
       registrerArbeidsforhold(params).then(() => {
-        oppdaterTabell(gammelData => {
+        oppdaterTabell((gammelData: ArbeidsforholdOgInntekt[]) => {
           const rad = {
             arbeidsgiverIdent: MANUELT_ORG_NR,
             arbeidsgiverNavn: formValues.arbeidsgiverNavn,
@@ -111,7 +117,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
               begrunnelse: formValues.begrunnelse,
               saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
             },
-          };
+          } as ArbeidsforholdOgInntekt;
 
           const gammelIndex = gammelData.findIndex(data => data.arbeidsgiverIdent === MANUELT_ORG_NR);
           if (gammelIndex === -1) {
@@ -137,6 +143,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
       vurdering: ArbeidsforholdKomplettVurderingType.FJERN_FRA_BEHANDLINGEN,
       ...formValues,
     };
+    // @ts-ignore Fiks
     registrerArbeidsforhold(params).then(() => {
       oppdaterTabell(oldData => oldData.filter(data => data.arbeidsgiverIdent !== MANUELT_ORG_NR));
       if (erNyttArbeidsforhold) {
@@ -191,8 +198,8 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
               <InputField
                 name="stillingsprosent"
                 label={<FormattedMessage id="LeggTilArbeidsforholdForm.Stillingsprosent" />}
-                parse={(value: string) => {
-                  const parsedValue = parseInt(value, 10);
+                parse={value => {
+                  const parsedValue = parseInt(value.toString(), 10);
                   return Number.isNaN(parsedValue) ? value : parsedValue;
                 }}
                 validate={[required, hasValidInteger, minValue1, maxValue100]}

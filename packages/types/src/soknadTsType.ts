@@ -21,7 +21,7 @@ export type Søknadsfrist = Readonly<{
 type Soknad = Readonly<{
   soknadType: string;
   mottattDato: string;
-  begrunnelseForSenInnsending: string;
+  begrunnelseForSenInnsending: string | undefined;
   antallBarn: number;
   oppgittTilknytning: {
     oppholdNorgeNa: boolean;

@@ -55,6 +55,8 @@ const ArbeidsforholdDetail: FunctionComponent<PureOwnProps> = ({ valgtArbeidsfor
   const skalIkkeBrukePermisjon =
     valgtArbeidsforhold.permisjonOgMangel?.permisjonStatus === BekreftetPermisjonStatus.IKKE_BRUK_PERMISJON;
 
+  const overstyrtTom = finnOverstyrtTom(valgtArbeidsforhold);
+
   return (
     <>
       <VerticalSpacer thirtyTwoPx />
@@ -72,7 +74,8 @@ const ArbeidsforholdDetail: FunctionComponent<PureOwnProps> = ({ valgtArbeidsfor
               <FormattedMessage id="ArbeidsforholdDetail.ArbeidsforholdetAktivTomDato" />
             </BodyShort>
             <BodyShort size="small">
-              <DateLabel dateString={finnOverstyrtTom(valgtArbeidsforhold)} />
+              {overstyrtTom && <DateLabel dateString={overstyrtTom} />}
+              {!overstyrtTom && '-'}
             </BodyShort>
           </>
         )}

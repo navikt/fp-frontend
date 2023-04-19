@@ -16,7 +16,7 @@ interface OwnProps {
   farSokerType?: string;
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-  mannAdoptererAlene: boolean;
+  mannAdoptererAlene?: boolean;
 }
 
 export type FormValues = {
