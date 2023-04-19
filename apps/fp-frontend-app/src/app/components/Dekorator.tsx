@@ -44,7 +44,7 @@ const lagFeilmeldinger = (
     let msg = {
       melding: message.code ? intl.formatMessage({ id: message.code }, message.params) : message.text,
       tilleggsInfo: undefined,
-    };
+    } as Feilmelding;
     if (message.params && message.params.errorDetails) {
       const decodedDetails = decodeHtmlEntity(message.params.errorDetails);
       msg = {
