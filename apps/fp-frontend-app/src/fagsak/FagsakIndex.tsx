@@ -48,12 +48,15 @@ const FagsakIndex: FunctionComponent = () => {
   const [behandlingerTeller, setBehandlingTeller] = useState(0);
   const [requestPendingMessage, setRequestPendingMessage] = useState<string>();
 
-  const [behandlingUuidOgVersjon, setUuidOgVersjon] = useState({
+  const [behandlingUuidOgVersjon, setUuidOgVersjon] = useState<{
+    behandlingUuid: string | undefined;
+    behandlingVersjon: number | undefined;
+  }>({
     behandlingUuid: undefined,
     behandlingVersjon: undefined,
   });
   const setBehandlingUuidOgVersjon = useCallback(
-    (nyBehandlingUuid, nyBehandlingVersjon) =>
+    (nyBehandlingUuid: string, nyBehandlingVersjon: number) =>
       setUuidOgVersjon({
         behandlingUuid: nyBehandlingUuid,
         behandlingVersjon: nyBehandlingVersjon,

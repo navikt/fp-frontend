@@ -12,7 +12,7 @@ import styles from './faktaContainer.module.css';
 export const DEFAULT_FAKTA_KODE = 'default';
 
 interface OwnProps {
-  behandling?: Behandling;
+  behandling: Behandling;
   hentPaneler?: (props: FaktaPanelInitProps) => ReactElement;
   valgtProsessSteg?: string;
   valgtFaktaSteg?: string;
@@ -50,7 +50,7 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
         setApentFaktaPanel(undefined);
       }
       if (nyData.harApneAksjonspunkter && apentFaktaPanelInfo?.urlCode !== nyData.id) {
-        setApentFaktaPanel({ urlCode: nyData.id, text: nyData.tekst });
+        setApentFaktaPanel({ urlCode: nyData.id, text: nyData.tekst || '' });
       }
     },
     [apentFaktaPanelInfo],

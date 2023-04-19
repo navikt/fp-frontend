@@ -96,7 +96,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
   const oppdaterBehandlingVersjon = useCallback(
-    versjon => setBehandlingUuidOgVersjon(behandlingUuid, versjon),
+    (versjon: number) => setBehandlingUuidOgVersjon(behandlingUuid, versjon),
     [behandlingUuid],
   );
 

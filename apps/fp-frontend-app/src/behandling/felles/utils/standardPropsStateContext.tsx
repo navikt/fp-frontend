@@ -7,7 +7,7 @@ type InputValues = {
   rettigheter: AksessRettigheter;
   hasFetchError: boolean;
   lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<Behandling | undefined>;
-  lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<Behandling>;
+  lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<Behandling | undefined>;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   alleKodeverk: AlleKodeverk;
 };

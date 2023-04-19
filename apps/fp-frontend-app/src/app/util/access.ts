@@ -16,7 +16,7 @@ const accessibleFor =
 const enabledFor =
   (validFagsakStauses: string[], validBehandlingStatuses: string[]) =>
   (fagsakStatus: string, isTilbakekrevingBehandling: boolean, behandlingStatus?: string): boolean =>
-    (isTilbakekrevingBehandling || (fagsakStatus && validFagsakStauses.includes(fagsakStatus))) &&
+    (isTilbakekrevingBehandling || (!!fagsakStatus && validFagsakStauses.includes(fagsakStatus))) &&
     !!behandlingStatus &&
     validBehandlingStatuses.includes(behandlingStatus);
 

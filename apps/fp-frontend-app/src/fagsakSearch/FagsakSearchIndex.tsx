@@ -21,8 +21,10 @@ const FagsakSearchIndex: FunctionComponent = () => {
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
 
   const navigate = useNavigate();
-  const goToFagsak = (saksnummer: string) => {
-    navigate(pathToFagsak(saksnummer));
+  const goToFagsak = (saksnummer?: string) => {
+    if (saksnummer) {
+      navigate(pathToFagsak(saksnummer));
+    }
   };
 
   const {

@@ -42,7 +42,7 @@ const HistorikkMalTypeForeldelse: FunctionComponent<HistorikkMal> = ({
         )?.tilVerdi;
 
         return (
-          <div key={periodeFom + periodeTom}>
+          <div key={`${periodeFom}-${periodeTom}`}>
             <BodyShort size="small">
               <FormattedMessage
                 id="Historikk.Template.Foreldelse.VurderingAvPerioden"

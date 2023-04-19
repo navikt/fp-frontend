@@ -13,8 +13,10 @@ import '@navikt/ft-sak-dokumenter/dist/style.css';
 
 const selectDocument =
   (saksNr: string) =>
-  (_e: React.SyntheticEvent, _id: number, document: Dokument): void => {
-    window.open(hentDokumentLenke(saksNr, document.journalpostId, document.dokumentId), '_blank');
+  (_e: React.SyntheticEvent, _id?: number | string, document?: Dokument): void => {
+    if (document) {
+      window.open(hentDokumentLenke(saksNr, document.journalpostId, document.dokumentId), '_blank');
+    }
   };
 
 const sorterDokumenter = (dok1: Dokument, dok2: Dokument): number => {

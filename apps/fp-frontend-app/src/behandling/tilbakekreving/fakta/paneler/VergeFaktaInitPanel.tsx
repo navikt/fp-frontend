@@ -44,7 +44,7 @@ const VergeFaktaInitPanel: FunctionComponent<OwnProps> = ({
 
   const setFormDataVerge = useCallback(
     (data: any) =>
-      setFormData(oldData => ({
+      setFormData((oldData: any) => ({
         ...oldData,
         [FaktaPanelCode.VERGE]: data,
       })),

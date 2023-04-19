@@ -11,11 +11,11 @@ const useProsessMenyRegistrerer = (
   dataState: RestApiState,
   id: string,
   tekst: string,
-  valgtProsessSteg: string,
   skalVisesImeny: boolean,
   harApentAksjonspunkt: boolean,
   status: string,
   skalMarkeresSomAktiv: boolean,
+  valgtProsessSteg?: string,
 ) => {
   const [erPanelValgt, setPanelValgt] = useState(false);
   useEffect(() => {

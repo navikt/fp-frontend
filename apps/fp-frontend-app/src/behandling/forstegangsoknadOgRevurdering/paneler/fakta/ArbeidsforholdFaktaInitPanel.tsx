@@ -37,6 +37,7 @@ const ArbeidsforholdFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
     faktaPanelKode={FaktaPanelCode.ARBEIDSFORHOLD}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'ArbeidsforholdInfoPanel.Title' })}
     skalPanelVisesIMeny={() =>
+      !!props.behandling &&
       props.behandling.aksjonspunkt &&
       props.behandling.aksjonspunkt.some(ap => AKSJONSPUNKT_KODER.some(kode => kode === ap.definisjon))
     }

@@ -15,7 +15,7 @@ class BehandlingEventHandler {
   endreBehandlendeEnhet = (params: { enhetNavn: string; enhetId: string; begrunnelse: string }) =>
     this.handler ? this.handler.endreBehandlendeEnhet(params) : Promise.reject();
 
-  settBehandlingPaVent = (params: { frist: string; ventearsak: string }) =>
+  settBehandlingPaVent = (params: { frist?: string; ventearsak?: string }) =>
     this.handler ? this.handler.settBehandlingPaVent(params) : Promise.reject();
 
   taBehandlingAvVent = () => (this.handler ? this.handler.taBehandlingAvVent() : Promise.reject());

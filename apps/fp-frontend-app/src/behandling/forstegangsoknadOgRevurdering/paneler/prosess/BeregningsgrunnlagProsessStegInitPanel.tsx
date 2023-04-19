@@ -56,9 +56,10 @@ const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: Fp
   vilkarStatus: bgVilkar.vilkarStatus,
 });
 
-const lagBGVilkar = (vilkar: FpVilkar[], beregningsgrunnlag: Beregningsgrunnlag): Vilkar | null => {
+const lagBGVilkar = (vilkar: FpVilkar[], beregningsgrunnlag?: Beregningsgrunnlag): Vilkar => {
   const bgVilkar = vilkar.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkar || !beregningsgrunnlag) {
+    // @ts-ignore Fiks BeregningsgrunnlagProsessIndex så den kan håndtera null
     return null;
   }
   const nyVK = {
@@ -68,13 +69,13 @@ const lagBGVilkar = (vilkar: FpVilkar[], beregningsgrunnlag: Beregningsgrunnlag)
   return nyVK;
 };
 
-const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): Beregningsgrunnlag[] => {
+const lagFormatertBG = (beregningsgrunnlag?: Beregningsgrunnlag): Beregningsgrunnlag[] => {
   if (!beregningsgrunnlag) {
     return [];
   }
   const nyttBG = {
-    vilkårsperiodeFom: beregningsgrunnlag.skjaeringstidspunktBeregning,
     ...beregningsgrunnlag,
+    vilkårsperiodeFom: beregningsgrunnlag.skjaeringstidspunktBeregning,
   };
   return [nyttBG];
 };

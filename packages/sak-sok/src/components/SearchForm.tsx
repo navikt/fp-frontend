@@ -19,7 +19,7 @@ interface OwnProps {
   searchResultAccessDenied?: {
     feilmelding: string;
   };
-  searchFagsakCallback: (params?: { searchString: string }) => Promise<FagsakEnkel[]>;
+  searchFagsakCallback: (params?: { searchString: string }) => Promise<FagsakEnkel[] | undefined>;
 }
 
 /**

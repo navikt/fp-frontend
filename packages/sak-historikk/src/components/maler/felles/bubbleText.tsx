@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import React, { FunctionComponent, useCallback, useState, KeyboardEvent } from 'react';
 import { useIntl } from 'react-intl';
 import { Expand, Collapse } from '@navikt/ds-icons';
 
@@ -26,7 +26,7 @@ const BubbleText: FunctionComponent<OwnProps> = ({ cutOffLength = 83, bodyText =
   const [expanded, setExpanded] = useState(false);
 
   const handleOnClick = useCallback(() => setExpanded(prevState => !prevState), []);
-  const handleKeyDown = useCallback(event => {
+  const handleKeyDown = useCallback((event: KeyboardEvent) => {
     if (event && event.keyCode === 32) {
       setExpanded(prevState => !prevState);
     }

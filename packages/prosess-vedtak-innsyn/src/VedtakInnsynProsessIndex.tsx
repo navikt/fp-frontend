@@ -14,7 +14,7 @@ const intl = createIntl(messages);
 interface OwnProps {
   innsyn: Innsyn;
   saksnummer: string;
-  alleDokumenter: Dokument[];
+  alleDokumenter?: Dokument[];
   previewCallback: (data: ForhandsvisData) => Promise<any>;
 }
 
@@ -23,7 +23,7 @@ const VedtakInnsynProsessIndex: FunctionComponent<OwnProps & StandardProsessPane
   innsyn,
   saksnummer,
   aksjonspunkter,
-  alleDokumenter,
+  alleDokumenter = [],
   submitCallback,
   previewCallback,
   isReadOnly,

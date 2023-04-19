@@ -43,16 +43,16 @@ const FaktaDefaultInitPanel = <PANEL_DATA = void,>({
     RestApiState.SUCCESS,
     faktaPanelKode,
     faktaPanelMenyTekst,
-    valgtFaktaSteg,
     skalPanelVisesIMeny(),
     standardPanelProps.harApneAksjonspunkter,
+    valgtFaktaSteg,
   );
 
   const formatertePanelEndepunkter = panelEndepunkter.map(e => ({ key: e }));
   const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi<PANEL_DATA, any>(
     formatertePanelEndepunkter,
     {
-      updateTriggers: [erPanelValgt, behandling.versjon],
+      updateTriggers: [erPanelValgt, behandling?.versjon],
       suspendRequest: !erPanelValgt || formatertePanelEndepunkter.length === 0,
       isCachingOn: true,
     },
@@ -63,6 +63,7 @@ const FaktaDefaultInitPanel = <PANEL_DATA = void,>({
       erPanelValgt={erPanelValgt}
       dataState={formatertePanelEndepunkter.length > 0 ? panelDataState : RestApiState.SUCCESS}
     >
+      {/* @ts-ignore Fiks */}
       {renderPanel({
         ...panelData,
         ...standardPanelProps,

@@ -95,7 +95,7 @@ export default {
 export const VisKunFaktaPaneler = () => {
   const [valgtFaktaPanel, setValgtFaktaPanel] = useState<string | undefined>('default');
   const faktaPaneler = useCallback(
-    props => (
+    (props: FaktaPanelInitProps) => (
       <>
         <FaktaPanelTest1 {...props} />
         <FaktaPanelTest2 {...props} />
@@ -121,7 +121,7 @@ export const VisKunFaktaPaneler = () => {
 export const VisKunProsessPaneler = () => {
   const [valgtProsessPanel, setValgtProsessPanel] = useState<string | undefined>('default');
   const prosessPaneler = useCallback(
-    props => (
+    (props: ProsessPanelInitProps) => (
       <>
         <ProsessPanelTest1 {...props} />
         <ProsessPanelTest2 {...props} />

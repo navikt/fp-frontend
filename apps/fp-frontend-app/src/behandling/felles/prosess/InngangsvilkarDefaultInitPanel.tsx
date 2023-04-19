@@ -72,6 +72,7 @@ const InngangsvilkarDefaultInitPanel = <PANEL_DATA = void,>({
   }
 
   return renderPanel(
+    /* @ts-ignore Fiks */
     {
       ...panelData,
       ...standardPanelProps,

@@ -1,5 +1,5 @@
 export type SettPaVentParams = {
-  ventearsak: string;
+  ventearsak?: string;
   frist?: string;
   behandlingUuid: string;
   behandlingVersjon: number;

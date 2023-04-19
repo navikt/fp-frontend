@@ -104,7 +104,7 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
       { key: BehandlingFellesApiKeys.PREVIEW_MESSAGE.name, data: undefined },
     ];
 
-    let axiosMock: MockAdapter;
+    let axiosMock = {} as MockAdapter;
     const setApiMock = (mockAdapter: MockAdapter) => {
       axiosMock = mockAdapter;
     };

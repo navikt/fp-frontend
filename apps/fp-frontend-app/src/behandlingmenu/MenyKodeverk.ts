@@ -1,14 +1,14 @@
-import { behandlingType as BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
+import { behandlingType as BehandlingType, KodeverkType, tilbakekrevingKodeverkTyper } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn } from '@navikt/fp-types';
 
 class MenyKodeverk {
-  $$behandlingType?: string;
+  $$behandlingType: string | undefined;
 
-  $$fpSakKodeverk: AlleKodeverk;
+  $$fpSakKodeverk: AlleKodeverk | undefined;
 
-  $$fpTilbakeKodeverk: AlleKodeverkTilbakekreving;
+  $$fpTilbakeKodeverk: AlleKodeverkTilbakekreving | undefined;
 
-  constructor(behandlingType?: string) {
+  constructor(behandlingType: string | undefined) {
     this.$$behandlingType = behandlingType;
   }
 
@@ -22,14 +22,19 @@ class MenyKodeverk {
     return this;
   }
 
-  getKodeverkForBehandlingstype(kodeverkType: KodeverkType, behandlingTypeKode?: string): KodeverkMedNavn[] {
+  getKodeverkForBehandlingstype(
+    kodeverkType: KodeverkType | tilbakekrevingKodeverkTyper,
+    behandlingTypeKode?: string,
+  ): KodeverkMedNavn[] {
     if (
       behandlingTypeKode === BehandlingType.TILBAKEKREVING ||
       behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING
     ) {
+      // @ts-ignore Fiks
       return this.$$fpTilbakeKodeverk ? this.$$fpTilbakeKodeverk[kodeverkType] : undefined;
     }
     if (kodeverkType !== KodeverkType.AVSLAGSARSAK) {
+      // @ts-ignore Fiks
       return this.$$fpSakKodeverk[kodeverkType];
     }
     throw new Error('Avslagsårsak ikke støttet');

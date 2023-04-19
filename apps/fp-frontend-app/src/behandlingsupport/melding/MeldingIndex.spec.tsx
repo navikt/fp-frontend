@@ -117,7 +117,7 @@ describe('<MeldingIndex>', () => {
 
     await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
     await waitFor(() =>
-      expect(axiosMock.history.post.find(a => a.url === '/fpformidling/api/brev/forhaandsvis').data).toBe(
+      expect(axiosMock.history.post.find(a => a.url === '/fpformidling/api/brev/forhaandsvis')?.data).toBe(
         JSON.stringify({
           behandlingUuid: '1',
           fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
@@ -168,7 +168,7 @@ describe('<MeldingIndex>', () => {
     await waitFor(() => expect(axiosMock.history.get.length).toBe(1));
 
     await waitFor(() =>
-      expect(axiosMock.history.get.find(a => a.url === FpsakApiKeys.SUBMIT_MESSAGE.name).params).toStrictEqual({
+      expect(axiosMock.history.get.find(a => a.url === FpsakApiKeys.SUBMIT_MESSAGE.name)?.params).toStrictEqual({
         behandlingUuid: '1',
         arsakskode: undefined,
         fritekst: '',
@@ -219,7 +219,7 @@ describe('<MeldingIndex>', () => {
     await waitFor(() => expect(axiosMock.history.get.length).toBe(1));
 
     await waitFor(() =>
-      expect(axiosMock.history.get.find(a => a.url === FpsakApiKeys.SUBMIT_MESSAGE.name).params).toStrictEqual({
+      expect(axiosMock.history.get.find(a => a.url === FpsakApiKeys.SUBMIT_MESSAGE.name)?.params).toStrictEqual({
         behandlingUuid: '1',
         arsakskode: undefined,
         brevmalkode: dokumentMalType.INNHENTE_OPPLYSNINGER,

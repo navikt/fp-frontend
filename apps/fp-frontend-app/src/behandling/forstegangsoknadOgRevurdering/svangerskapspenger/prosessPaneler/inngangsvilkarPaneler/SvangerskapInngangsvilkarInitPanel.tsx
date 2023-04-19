@@ -22,7 +22,7 @@ type EndepunktPanelData = {
 };
 
 interface OwnProps {
-  behandlingVersjon?: number;
+  behandlingVersjon: number;
 }
 
 const SvangerskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & InngangsvilkarPanelInitProps> = ({

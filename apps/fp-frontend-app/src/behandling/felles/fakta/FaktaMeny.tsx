@@ -16,7 +16,7 @@ const FaktaMeny: FunctionComponent<OwnProps> = ({ menyData, oppdaterFaktaPanelIU
     <SideMenu
       heading={intl.formatMessage({ id: 'FaktaPanel.FaktaOm' })}
       links={menyData.map(data => ({
-        label: data.tekst,
+        label: data.tekst || '',
         active: data.erAktiv,
         iconSrc: data.harApneAksjonspunkter ? advarselIkonUrl : undefined,
         iconAltText: data.harApneAksjonspunkter ? intl.formatMessage({ id: 'HelpText.Aksjonspunkt' }) : undefined,

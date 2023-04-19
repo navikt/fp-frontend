@@ -17,10 +17,10 @@ type BehandlendeEnheter = {
   enhetNavn: string;
 }[];
 
-type SubmitMessageParams = {
+export type SubmitMessageParams = {
   behandlingUuid?: string;
-  brevmalkode: string;
-  fritekst: string;
+  brevmalkode?: string;
+  fritekst?: string;
   arsakskode?: string;
 };
 

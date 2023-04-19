@@ -66,7 +66,7 @@ const TilbakekrevingProsessInitPanel: FunctionComponent<OwnProps> = ({
 
   const setFormDataTilbakekreving = useCallback(
     (data: any) =>
-      setFormData(oldData => ({
+      setFormData((oldData: any) => ({
         ...oldData,
         [ProsessStegCode.TILBAKEKREVING]: data,
       })),
@@ -89,7 +89,7 @@ const TilbakekrevingProsessInitPanel: FunctionComponent<OwnProps> = ({
   );
   const isReadOnly = useMemo(() => erReadOnlyFn(aksjonspunkterForTilbakekreving), [aksjonspunkterForTilbakekreving]);
 
-  if (state !== RestApiState.SUCCESS) {
+  if (state !== RestApiState.SUCCESS || initData === undefined) {
     return <LoadingPanel />;
   }
 

@@ -1,4 +1,3 @@
-import sinon from 'sinon';
 import axios from 'axios';
 
 import { Response } from './ResponseTsType';
@@ -10,19 +9,19 @@ import HttpClientApi from '../HttpClientApiTsType';
 class NotificationHelper {
   mapper: NotificationMapper;
 
-  requestStartedCallback = sinon.spy();
+  requestStartedCallback = vi.fn();
 
-  requestFinishedCallback = sinon.spy();
+  requestFinishedCallback = vi.fn();
 
-  requestErrorCallback = sinon.spy();
+  requestErrorCallback = vi.fn();
 
-  statusRequestStartedCallback = sinon.spy();
+  statusRequestStartedCallback = vi.fn();
 
-  statusRequestFinishedCallback = sinon.spy();
+  statusRequestFinishedCallback = vi.fn();
 
-  updatePollingMessageCallback = sinon.spy();
+  updatePollingMessageCallback = vi.fn();
 
-  addPollingTimeoutEventHandler = sinon.spy();
+  addPollingTimeoutEventHandler = vi.fn();
 
   constructor() {
     const mapper = new NotificationMapper();
@@ -75,10 +74,10 @@ describe('RequestRunner', () => {
     const result = await process.start(params);
 
     expect(result).toStrictEqual({ payload: 'data' });
-    expect(notificationHelper.requestStartedCallback.calledOnce).toBe(true);
-    expect(notificationHelper.requestFinishedCallback.calledOnce).toBe(true);
-    expect(notificationHelper.requestFinishedCallback.getCalls()[0].args[0]).toBe('data');
-    expect(notificationHelper.requestErrorCallback.called).toBe(false);
+    expect(notificationHelper.requestStartedCallback).toHaveBeenCalledTimes(1);
+    expect(notificationHelper.requestFinishedCallback).toHaveBeenCalledTimes(1);
+    expect(notificationHelper.requestFinishedCallback).toHaveBeenCalledWith('data', 'REQUEST_FINISHED', false);
+    expect(notificationHelper.requestErrorCallback).toHaveBeenCalledTimes(0);
   });
 
   it('skal utføre long-polling request som når maks polling-forsøk', async () => {
@@ -139,11 +138,15 @@ describe('RequestRunner', () => {
       message: 'Maximum polling attempts exceeded',
     });
 
-    expect(notificationHelper.requestStartedCallback.calledOnce).toBe(true);
-    expect(notificationHelper.statusRequestStartedCallback.calledOnce).toBe(true);
-    expect(notificationHelper.statusRequestFinishedCallback.calledOnce).toBe(true);
-    expect(notificationHelper.updatePollingMessageCallback.calledOnce).toBe(true);
-    expect(notificationHelper.updatePollingMessageCallback.getCalls()[0].args[0]).toBe('Polling continues');
+    expect(notificationHelper.requestStartedCallback).toHaveBeenCalledTimes(1);
+    expect(notificationHelper.statusRequestStartedCallback).toHaveBeenCalledTimes(1);
+    expect(notificationHelper.statusRequestFinishedCallback).toHaveBeenCalledTimes(1);
+    expect(notificationHelper.updatePollingMessageCallback).toHaveBeenCalledTimes(1);
+    expect(notificationHelper.updatePollingMessageCallback).toHaveBeenCalledWith(
+      'Polling continues',
+      'UPDATE_POLLING_MESSAGE',
+      undefined,
+    );
   });
 
   it('skal utføre long-polling request som en så avbryter manuelt', async () => {
@@ -224,6 +227,6 @@ describe('RequestRunner', () => {
     const result = await process.start(params);
 
     expect(result).toStrictEqual({ payload: undefined });
-    expect(notificationHelper.requestFinishedCallback.getCalls()[0].args[0]).toBe(null);
+    expect(notificationHelper.requestFinishedCallback).toHaveBeenCalledWith(null, 'REQUEST_FINISHED', false);
   });
 });

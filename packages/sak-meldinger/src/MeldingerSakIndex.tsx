@@ -12,7 +12,7 @@ const intl = createIntl(messages);
 interface OwnProps {
   submitCallback: (values: FormValues) => void;
   templates?: Template[];
-  sprakKode: string;
+  sprakKode?: string;
   previewCallback: (brevmalkode?: string, fritekst?: string, arsakskode?: string) => void;
   isKontrollerRevurderingApOpen?: boolean;
   revurderingVarslingArsak: KodeverkMedNavn[];

@@ -21,11 +21,11 @@ type Values = {
 const getLagreFunksjon =
   (
     saksnummer: string,
-    behandlingUuid: string,
-    behandlingVersjon: number,
     setAlleAksjonspunktTilGodkjent: (erGodkjent: boolean) => void,
     setVisBeslutterModal: (visModal: boolean) => void,
     godkjennTotrinnsaksjonspunkter: (params: any) => Promise<any>,
+    behandlingUuid?: string,
+    behandlingVersjon?: number,
   ) =>
   (totrinnskontrollData: Values) => {
     const params = {
@@ -69,36 +69,36 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
   const initFetchData = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.INIT_FETCH);
   const { brukernavn, kanVeilede } = initFetchData.innloggetBruker;
 
-  const alleKodeverk = useKodeverk(valgtBehandling.type);
-
-  const { uuid, versjon, type, totrinnskontrollÅrsaker } = valgtBehandling;
+  const alleKodeverk = useKodeverk(valgtBehandling?.type);
 
   const { startRequest: godkjennTotrinnsaksjonspunkter } = restApiHooks.useRestApiRunner(
     FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT,
   );
 
-  const forhandsvisMelding = useVisForhandsvisningAvMelding(type);
+  const forhandsvisMelding = useVisForhandsvisningAvMelding(valgtBehandling?.type);
 
   const forhandsvisVedtaksbrev = useCallback(() => {
-    forhandsvisMelding(false, {
-      behandlingUuid: uuid,
-      fagsakYtelseType: fagsak.fagsakYtelseType,
-      gjelderVedtak: true,
-    });
-  }, []);
+    if (valgtBehandling) {
+      forhandsvisMelding(false, {
+        behandlingUuid: valgtBehandling.uuid,
+        fagsakYtelseType: fagsak.fagsakYtelseType,
+        gjelderVedtak: true,
+      });
+    }
+  }, [valgtBehandling, fagsak]);
   const onSubmit = useCallback(
     getLagreFunksjon(
       fagsak.saksnummer,
-      uuid,
-      versjon,
       setAlleAksjonspunktTilGodkjent,
       setVisBeslutterModal,
       godkjennTotrinnsaksjonspunkter,
+      valgtBehandling?.uuid,
+      valgtBehandling?.versjon,
     ),
-    [uuid, versjon],
+    [valgtBehandling?.uuid, valgtBehandling?.versjon],
   );
 
-  if (!totrinnskontrollÅrsaker) {
+  if (!valgtBehandling?.totrinnskontrollÅrsaker) {
     return null;
   }
 
