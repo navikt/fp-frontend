@@ -30,9 +30,11 @@ class MenyKodeverk {
       behandlingTypeKode === BehandlingType.TILBAKEKREVING ||
       behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING
     ) {
+      // @ts-ignore Fiks
       return this.$$fpTilbakeKodeverk ? this.$$fpTilbakeKodeverk[kodeverkType] : undefined;
     }
     if (kodeverkType !== KodeverkType.AVSLAGSARSAK) {
+      // @ts-ignore Fiks
       return this.$$fpSakKodeverk[kodeverkType];
     }
     throw new Error('Avslagsårsak ikke støttet');

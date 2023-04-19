@@ -41,14 +41,19 @@ export function useFpTilbakeKodeverk<T = KodeverkMedNavn>(kodeverkType: string):
  * Hook som brukes når en har behov for å slå opp navn-attributtet til et bestemt kodeverk. For å kunne bruke denne
  * må @see useGlobalStateRestApi først brukes for å hente data fra backend
  */
-export function useFpSakKodeverkMedNavn(kode: string, kodeverk: KodeverkType): KodeverkMedNavn | undefined {
+export function useFpSakKodeverkMedNavn(kode: string, kodeverk: KodeverkType): KodeverkMedNavn {
   const kodeverkForType = useFpSakKodeverk<KodeverkMedNavn>(kodeverk);
+
+  const verdi = kodeverkForType.find(k => k.kode === kode);
 
   if (!kodeverkForType || kodeverkForType.length === 0) {
     throw Error(`Det finnes ingen kodeverk for type ${kodeverk} med kode ${kode}`);
   }
+  if (!verdi) {
+    throw Error(`Finner ingen verdi for kodeverk ${kodeverk} med kode ${kode}`);
+  }
 
-  return kodeverkForType.find(k => k.kode === kode);
+  return verdi;
 }
 
 /**

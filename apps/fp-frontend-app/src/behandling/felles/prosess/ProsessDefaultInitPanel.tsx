@@ -80,6 +80,7 @@ const ProsessDefaultInitPanel = <PANEL_DATA = void,>({
       status={status}
       dataState={formatertePanelEndepunkter.length > 0 ? panelDataState : RestApiState.SUCCESS}
     >
+      {/* @ts-ignore Fiks */}
       {renderPanel({
         ...panelData,
         ...standardPanelProps,
