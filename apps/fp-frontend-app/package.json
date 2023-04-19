@@ -19,7 +19,7 @@
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
-    "@formatjs/intl-datetimeformat": "6.6.0",
+    "@formatjs/intl-datetimeformat": "6.7.0",
     "@formatjs/intl-numberformat": "8.4.0",
     "@navikt/ds-css": "2.8.12",
     "@navikt/ds-react": "2.8.12",

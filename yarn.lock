@@ -1799,14 +1799,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/intl-datetimeformat@npm:6.6.0":
-  version: 6.6.0
-  resolution: "@formatjs/intl-datetimeformat@npm:6.6.0"
+"@formatjs/intl-datetimeformat@npm:6.7.0":
+  version: 6.7.0
+  resolution: "@formatjs/intl-datetimeformat@npm:6.7.0"
   dependencies:
     "@formatjs/ecma402-abstract": 1.14.3
     "@formatjs/intl-localematcher": 0.2.32
     tslib: ^2.4.0
-  checksum: 790e86783dc75adf86fff789afe6149a57335030906c04ecf4544c221820b81cad853c697b183fa46793464fdf703e19f0580feaada9590c28048132fd2d02d3
+  checksum: 9eebb8cda1c7ada91b891bb1a9d25bc6c36737da1ec87b2256e44cdaa60968ca644316f023e4a0bb6599fbaf57f520e4f600700a8f61a403941418c4ff68e024
   languageName: node
   linkType: hard
 
@@ -3182,7 +3182,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-frontend-app@workspace:apps/fp-frontend-app"
   dependencies:
-    "@formatjs/intl-datetimeformat": 6.6.0
+    "@formatjs/intl-datetimeformat": 6.7.0
     "@formatjs/intl-numberformat": 8.4.0
     "@navikt/ds-css": 2.8.12
     "@navikt/ds-react": 2.8.12
