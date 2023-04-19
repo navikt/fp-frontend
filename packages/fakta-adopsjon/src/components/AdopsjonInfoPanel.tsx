@@ -81,10 +81,13 @@ const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): Ak
   const aksjonspunkterArray = [] as AksjonspunktData;
   aksjonspunkterArray.push(DokumentasjonFaktaForm.transformValues(values));
 
-  if (hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkter) && !!values.ektefellesBarn) {
+  if (hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkter) && values.ektefellesBarn !== undefined) {
     aksjonspunkterArray.push(EktefelleFaktaForm.transformValues(values.ektefellesBarn));
   }
-  if (hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkter) && !!values.mannAdoptererAlene) {
+  if (
+    hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkter) &&
+    values.mannAdoptererAlene !== undefined
+  ) {
     aksjonspunkterArray.push(MannAdoptererAleneFaktaForm.transformValues(values.mannAdoptererAlene));
   }
 
