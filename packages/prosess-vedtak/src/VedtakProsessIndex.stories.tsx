@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
 import {
@@ -72,7 +72,7 @@ export default {
   component: VedtakProsessIndex,
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   behandling: Behandling;
   beregningresultatForeldrepenger?: BeregningsresultatFp;
   beregningresultatEngangsstonad?: BeregningsresultatEs;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { Kjønnkode, KjønnkodeEnum } from '@navikt/fp-types';
@@ -17,7 +17,7 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{ navn: string; kjønn: Kjønnkode; diskresjonskode?: string; dødsdato?: string }> = ({
+const Template: StoryFn<{ navn: string; kjønn: Kjønnkode; diskresjonskode?: string; dødsdato?: string }> = ({
   navn,
   kjønn,
   diskresjonskode,

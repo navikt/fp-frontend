@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import { ankeOmgjorArsak, ankeVurderingOmgjoer, ankeVurdering as AnkeVurderingKodeverk } from '@navikt/fp-kodeverk';
 import { AnkeVurdering } from '@navikt/fp-types';
@@ -12,7 +12,7 @@ export default {
   component: AnkeProsessIndex,
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   ankeVurdering: AnkeVurdering;
 }> = ({ ankeVurdering }) => (
   <AnkeProsessIndex ankeVurdering={ankeVurdering} behandlinger={[]} alleKodeverk={alleKodeverk as any} />

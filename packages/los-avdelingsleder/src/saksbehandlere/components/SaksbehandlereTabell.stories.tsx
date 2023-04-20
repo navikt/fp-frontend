@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import { Modal } from '@navikt/ds-react';
 import { RestApiMock } from '@navikt/fp-utils-test';
@@ -21,7 +21,7 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   saksbehandlere?: Saksbehandler[];
   hentAvdelingensSaksbehandlere: (params: { avdelingEnhet: string }) => void;
 }> = ({ saksbehandlere, hentAvdelingensSaksbehandlere }) => {

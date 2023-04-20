@@ -31,15 +31,14 @@ export type FormValues = {
 interface OwnProps {
   soknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
-  aksjonspunkt: Aksjonspunkt;
   readOnly: boolean;
   submittable: boolean;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
 interface StaticFunctions {
-  buildInitialValues?: (soknad: Soknad, familiehendelse: FamilieHendelse, aksjonspunkt: Aksjonspunkt) => FormValues;
-  transformValues?: (values: FormValues) => BekreftTerminbekreftelseAp;
+  buildInitialValues: (soknad: Soknad, familiehendelse: FamilieHendelse, aksjonspunkt: Aksjonspunkt) => FormValues;
+  transformValues: (values: FormValues) => BekreftTerminbekreftelseAp;
 }
 
 /**
@@ -99,8 +98,8 @@ export const TermindatoFaktaForm: FunctionComponent<OwnProps> & StaticFunctions 
               <InputField
                 name="antallBarn"
                 label={intl.formatMessage({ id: 'TermindatoFaktaForm.AntallBarn' })}
-                parse={(value: string) => {
-                  const parsedValue = parseInt(value, 10);
+                parse={value => {
+                  const parsedValue = parseInt(value.toString(), 10);
                   return Number.isNaN(parsedValue) ? value : parsedValue;
                 }}
                 validate={[required, hasValidInteger, minValue1, maxValue9]}

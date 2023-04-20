@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import { relatertYtelseType, relatertYtelseTilstand } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -53,7 +53,7 @@ export default {
   component: YtelserFaktaIndex,
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   inntektArbeidYtelse: InntektArbeidYtelse;
 }> = ({ inntektArbeidYtelse }) => (
   <YtelserFaktaIndex inntektArbeidYtelse={inntektArbeidYtelse} alleKodeverk={alleKodeverk as any} />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
 import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
@@ -57,7 +57,7 @@ export default {
   component: UttakDokumentasjonFaktaIndex,
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   aksjonspunkter: Aksjonspunkt[];
   dokumentasjonVurderingBehov: DokumentasjonVurderingBehov[];
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;

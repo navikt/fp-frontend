@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
@@ -18,7 +18,7 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{ behandledeOppgaver?: Oppgave[] }> = ({ behandledeOppgaver }) => {
+const Template: StoryFn<{ behandledeOppgaver?: Oppgave[] }> = ({ behandledeOppgaver }) => {
   const data = [{ key: RestApiPathsKeys.BEHANDLEDE_OPPGAVER.name, data: behandledeOppgaver }];
 
   return (

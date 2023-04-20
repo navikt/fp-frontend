@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import { Modal } from '@navikt/ds-react';
 import { RestApiMock } from '@navikt/fp-utils-test';
@@ -30,7 +30,7 @@ interface Props {
   hentAvdelingensSakslister: () => Saksliste[];
 }
 
-const Template: Story<Props> = ({
+const Template: StoryFn<Props> = ({
   saksliste,
   nyeSakslister,
   valgtSakslisteId,

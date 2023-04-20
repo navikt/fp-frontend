@@ -5,7 +5,7 @@ import isFieldEdited from './isFieldEdited';
 const soknad = {
   soknadType: 'ST-001',
   mottattDato: '2018-07-05',
-  begrunnelseForSenInnsending: null,
+  begrunnelseForSenInnsending: undefined,
   antallBarn: 1,
   oppgittTilknytning: {
     oppholdNorgeNa: true,
@@ -20,7 +20,8 @@ const soknad = {
   },
   utstedtdato: '2018-06-25',
   termindato: '2018-07-27',
-  farSokerType: null,
+  farSokerType: undefined,
+  søknadsfrist: '2018-07-27',
   fodselsdatoer: {
     1: '2018-05-30',
   } as { [key: number]: string },
@@ -126,7 +127,7 @@ describe('isFieldEdited', () => {
         familiehendelse as FamilieHendelse,
       ).adopsjonFodelsedatoer;
 
-      expect(isAdopsjonFodelsedatoerEdited[1]).toBe(true);
+      expect(isAdopsjonFodelsedatoerEdited ? isAdopsjonFodelsedatoerEdited[1] : undefined).toBe(true);
     });
 
     it('skal ikke vise uendret adopsjonFodelsedatoer', () => {
@@ -143,7 +144,7 @@ describe('isFieldEdited', () => {
         familiehendelse as FamilieHendelse,
       ).adopsjonFodelsedatoer;
 
-      expect(isAdopsjonFodelsedatoerEdited[1]).toBe(false);
+      expect(isAdopsjonFodelsedatoerEdited ? isAdopsjonFodelsedatoerEdited[1] : undefined).toBe(false);
     });
   });
 

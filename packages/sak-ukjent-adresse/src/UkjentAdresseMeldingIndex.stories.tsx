@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import UkjentAdresseMelding from './UkjentAdresseMeldingIndex';
 
@@ -11,7 +11,7 @@ export default {
   decorators: [withWidthProvider],
 };
 
-const Template: Story = () => <UkjentAdresseMelding />;
+const Template: StoryFn = () => <UkjentAdresseMelding />;
 
 export const IngenAdresse = Template.bind({});
 IngenAdresse.args = {};

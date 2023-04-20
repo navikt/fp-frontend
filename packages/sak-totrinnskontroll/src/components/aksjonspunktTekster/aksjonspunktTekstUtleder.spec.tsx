@@ -41,7 +41,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Adopsjon.KontrollerOpplysninger');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5005', () => {
@@ -58,7 +57,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Adopsjon.VurderEktefellesBarn');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5006', () => {
@@ -75,7 +73,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Adopsjon.VurderMannAdoptererAlene');
   });
   it('skal vise korrekt tekst for aksjonspunkt 6004', () => {
@@ -92,7 +89,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Adopsjon.VilkarOverstyrt');
   });
 
@@ -110,7 +106,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Omsorgovertagelse.KontrollerOpplysninger');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5011', () => {
@@ -127,7 +122,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Omsorgovertagelse.VurderVilkarForeldreansvarTredjeLedd');
   });
 
@@ -145,7 +139,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Fødsel.VurderSokersRelasjon');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5001', () => {
@@ -162,7 +155,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Fødsel.KontrollerOpplysningerTermin');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5027', () => {
@@ -179,7 +171,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Fødsel.SjekkManglendeFødsel');
   });
   it('skal vise korrekt tekst for aksjonspunkt 6003', () => {
@@ -196,7 +187,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Fødsel.VilkarOverstyrt');
   });
 
@@ -214,7 +204,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarFjerdeLedd');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5013 engangsstønad', () => {
@@ -231,7 +220,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarAndreLeddES');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5013 foreldrepenger', () => {
@@ -248,7 +236,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarAndreLeddFP');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5031', () => {
@@ -265,7 +252,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderTidligereUtbetaling');
   });
 
@@ -283,7 +269,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.InntektFastsatt');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5042', () => {
@@ -300,7 +285,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.InntektFastsatt');
   });
   it('skal vise korrekt tekst for aksjonspunkt 6007', () => {
@@ -317,7 +301,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.VilkarOverstyrt');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5047', () => {
@@ -334,7 +317,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.InntektFastsatt');
   });
 
@@ -352,7 +334,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Soknadsfrist.ManueltVurdert');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5043', () => {
@@ -369,7 +350,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Soknadsfrist.ManueltVurdert');
   });
   it('skal vise korrekt tekst for aksjonspunkt 6006', () => {
@@ -386,7 +366,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Soknadsfrist.VilkarOverstyrt');
   });
 
@@ -404,7 +383,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.VurderGyldigMedlemskap');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5019', () => {
@@ -421,7 +399,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.AvklarLovligOpphold');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5020', () => {
@@ -438,7 +415,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.VurderSokerBosatt');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5023', () => {
@@ -455,7 +431,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.AvklarOppholdsrett');
   });
   it('skal vise korrekt tekst for aksjonspunkt 6005', () => {
@@ -472,7 +447,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.VilkarOverstyrt');
   });
 
@@ -491,7 +465,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.VarigEndring');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5039 ikkje varig endring', () => {
@@ -509,7 +482,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.IkkeVarigEndring');
   });
 
@@ -538,7 +510,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeSlettet');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5071 slettet', () => {
@@ -566,7 +537,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeSlettet');
   });
 
@@ -595,7 +565,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeLagtTil');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5071 lagt til', () => {
@@ -623,7 +592,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeLagtTil');
   });
 
@@ -652,7 +620,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.OverstyrUttak.PeriodeEndret');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5071 endret', () => {
@@ -680,7 +647,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret');
   });
 
@@ -709,7 +675,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeAvklart');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5071 avklart', () => {
@@ -737,7 +702,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeAvklart');
   });
 
@@ -753,7 +717,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       type: behandlingResultatType.KLAGE_MEDHOLD,
     } as Behandlingsresultat;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, behandlingsresultat);
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.OmgjortTilGunst');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5036 medhold', () => {
@@ -774,7 +737,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       aksjonspunkt,
       behandlingsresultat,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.OmgjortTilGunst');
   });
   // Klage avslag
@@ -797,7 +759,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       aksjonspunkt,
       behandlingsresultat,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.OppheveYtelsesVedtak');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5036 avslag ytelsesvedtak opphevet', () => {
@@ -818,7 +779,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       aksjonspunkt,
       behandlingsresultat,
     );
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.OppheveYtelsesVedtak');
   });
   // Klage avvist
@@ -832,7 +792,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, behandlingsresultat);
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.Avvist');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5036 avslag klage avvist', () => {
@@ -845,7 +804,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, behandlingsresultat);
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.Avvist');
   });
   // Ikke fastsatt Engangsstønad
@@ -859,7 +817,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, behandlingsresultat);
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5036 avslag ytelsesvedtak stadfestet', () => {
@@ -872,7 +829,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, behandlingsresultat);
-    // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
   });
 

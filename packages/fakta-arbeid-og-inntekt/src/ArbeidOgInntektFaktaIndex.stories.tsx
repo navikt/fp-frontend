@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
 import {
@@ -34,7 +34,7 @@ export default {
   component: ArbeidOgInntektFaktaIndex,
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   aksjonspunkter?: Aksjonspunkt[];
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -1125,18 +1125,18 @@ FoerRegisterinnhenting.args = {
     inntektsmeldinger: [
       {
         inntektPrMnd: 40000.0,
-        refusjonPrMnd: null,
+        refusjonPrMnd: undefined,
         arbeidsgiverIdent: '947064649',
-        eksternArbeidsforholdId: null,
-        internArbeidsforholdId: null,
+        eksternArbeidsforholdId: undefined,
+        internArbeidsforholdId: undefined,
         kontaktpersonNavn: 'Dolly Dollesen',
         kontaktpersonNummer: '99999999',
         journalpostId: '524975324',
         dokumentId: '549168225',
         motattDato: '2022-02-15',
-        årsak: null,
-        begrunnelse: null,
-        saksbehandlersVurdering: null,
+        årsak: undefined,
+        begrunnelse: undefined,
+        saksbehandlersVurdering: undefined,
       },
     ],
     arbeidsforhold: [],
@@ -1170,9 +1170,9 @@ AutomatiskIgnorertInntektsmelding.args = {
         fom: '2002-02-16',
         tom: '9999-12-31',
         stillingsprosent: 20.0,
-        årsak: null,
-        saksbehandlersVurdering: null,
-        begrunnelse: null,
+        årsak: undefined,
+        saksbehandlersVurdering: undefined,
+        begrunnelse: undefined,
       },
     ],
     inntekter: [],
@@ -1196,21 +1196,21 @@ EtterAtEtterspurtInntektsmeldingErKommet.args = {
       referanse: '342352362',
       identifikator: '342352362',
       navn: 'Lagt til av saksbehandler',
-      fødselsdato: null,
+      fødselsdato: undefined,
       erPrivatPerson: false,
     },
     947064649: {
       referanse: '947064649',
       identifikator: '947064649',
       navn: 'SJOKKERENDE ELEKTRIKER',
-      fødselsdato: null,
+      fødselsdato: undefined,
       erPrivatPerson: false,
     },
     972674818: {
       referanse: '972674818',
       identifikator: '972674818',
       navn: 'PENGELØS SPAREBANK',
-      fødselsdato: null,
+      fødselsdato: undefined,
       erPrivatPerson: false,
     },
   },
@@ -1218,16 +1218,16 @@ EtterAtEtterspurtInntektsmeldingErKommet.args = {
     inntektsmeldinger: [
       {
         inntektPrMnd: 20000.0,
-        refusjonPrMnd: null,
+        refusjonPrMnd: undefined,
         arbeidsgiverIdent: '972674818',
-        eksternArbeidsforholdId: null,
-        internArbeidsforholdId: null,
+        eksternArbeidsforholdId: undefined,
+        internArbeidsforholdId: undefined,
         kontaktpersonNavn: 'Dolly Dollesen',
         kontaktpersonNummer: '99999999',
         journalpostId: '524975527',
         dokumentId: '549168458',
         motattDato: '2022-02-16',
-        årsak: null,
+        årsak: undefined,
         begrunnelse: 'her vil jeg mase på AG',
         saksbehandlersVurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
       },
@@ -1251,7 +1251,7 @@ EtterAtEtterspurtInntektsmeldingErKommet.args = {
         fom: '2000-05-13',
         tom: '9999-12-31',
         stillingsprosent: 100.0,
-        årsak: null,
+        årsak: undefined,
       },
     ],
     inntekter: [
@@ -1302,7 +1302,7 @@ SkalViseFødselsnummerForPrivatperson.args = {
         eksternArbeidsforholdId: 'ARB001-001',
         fom: '2019-12-06',
         internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
-        stillingsprosent: null,
+        stillingsprosent: 100,
         tom: '9999-12-31',
         permisjonOgMangel: {
           permisjonFom: '2022-10-01',

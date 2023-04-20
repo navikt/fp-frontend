@@ -49,51 +49,54 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
   submittable,
   formData,
   setFormData,
-}) => (
-  <>
-    {harApneAksjonspunkter && erMarkertUtenlandssak(aksjonspunkter) && (
-      <>
-        <AksjonspunktHelpTextHTML>
-          {[<FormattedMessage key="OpptjeningUtland" id="SakenFaktaPanel.OpptjeningUtland" />]}
-        </AksjonspunktHelpTextHTML>
-        <VerticalSpacer thirtyTwoPx />
-      </>
-    )}
-    <FlexContainer>
-      <FlexRow>
-        <FlexColumn className={styles.col}>
-          {erMarkertUtenlandssak(aksjonspunkter) && (
-            <InnhentDokOpptjeningUtlandPanel
-              dokStatus={dokStatus}
-              readOnly={readOnly}
-              harApneAksjonspunkter={harApneAksjonspunkter}
-              aksjonspunkt={aksjonspunkter.find(
-                ap => ap.definisjon === AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-              )}
-              submittable={submittable}
-              submitCallback={submitCallback}
-              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-              formData={formData}
-              setFormData={setFormData}
-            />
-          )}
-        </FlexColumn>
-        {!erSvangerskapspenger && !!soknad && (
+}) => {
+  const automatiskMarkeringAvUtenlandssakAp = aksjonspunkter.find(
+    ap => ap.definisjon === AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+  );
+  return (
+    <>
+      {harApneAksjonspunkter && erMarkertUtenlandssak(aksjonspunkter) && (
+        <>
+          <AksjonspunktHelpTextHTML>
+            {[<FormattedMessage key="OpptjeningUtland" id="SakenFaktaPanel.OpptjeningUtland" />]}
+          </AksjonspunktHelpTextHTML>
+          <VerticalSpacer thirtyTwoPx />
+        </>
+      )}
+      <FlexContainer>
+        <FlexRow>
           <FlexColumn className={styles.col}>
-            <StartdatoForForeldrepengerperiodenForm
-              aksjonspunkt={aksjonspunkter.find(ap => ap.definisjon === AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO)}
-              submitCallback={submitCallback}
-              readOnly={readOnly}
-              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-              soknad={soknad}
-              formData={formData}
-              setFormData={setFormData}
-            />
+            {automatiskMarkeringAvUtenlandssakAp && (
+              <InnhentDokOpptjeningUtlandPanel
+                dokStatus={dokStatus}
+                readOnly={readOnly}
+                harApneAksjonspunkter={harApneAksjonspunkter}
+                aksjonspunkt={automatiskMarkeringAvUtenlandssakAp}
+                submittable={submittable}
+                submitCallback={submitCallback}
+                alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+                formData={formData}
+                setFormData={setFormData}
+              />
+            )}
           </FlexColumn>
-        )}
-      </FlexRow>
-    </FlexContainer>
-  </>
-);
+          {!erSvangerskapspenger && !!soknad && (
+            <FlexColumn className={styles.col}>
+              <StartdatoForForeldrepengerperiodenForm
+                aksjonspunkt={aksjonspunkter.find(ap => ap.definisjon === AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO)}
+                submitCallback={submitCallback}
+                readOnly={readOnly}
+                alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+                soknad={soknad}
+                formData={formData}
+                setFormData={setFormData}
+              />
+            </FlexColumn>
+          )}
+        </FlexRow>
+      </FlexContainer>
+    </>
+  );
+};
 
 export default SakenFaktaPanel;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
@@ -15,6 +15,6 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story = () => <IkkeTilgangTilAvdelingslederPanel />;
+const Template: StoryFn = () => <IkkeTilgangTilAvdelingslederPanel />;
 
 export const IkkeTilgangTilAvdelingsleder = Template.bind({});

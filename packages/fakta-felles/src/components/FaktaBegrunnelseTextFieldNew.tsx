@@ -45,8 +45,8 @@ const FaktaBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunctions =
   isSubmittable,
   hasBegrunnelse,
   label,
-  hasVurderingText,
-  name,
+  hasVurderingText = false,
+  name = 'begrunnelse',
 }) => {
   const code = hasVurderingText ? 'FaktaBegrunnelseTextField.Vurdering' : 'FaktaBegrunnelseTextField.BegrunnEndringene';
   const textAreaLabel = label || intl.formatMessage({ id: code });
@@ -67,16 +67,11 @@ const FaktaBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunctions =
   );
 };
 
-FaktaBegrunnelseTextField.defaultProps = {
-  name: 'begrunnelse',
-  hasVurderingText: false,
-};
-
-const getBegrunnelse = (aksjonspunkt: Aksjonspunkt[] | Aksjonspunkt): string => {
+const getBegrunnelse = (aksjonspunkt: Aksjonspunkt[] | Aksjonspunkt): string | undefined => {
   if (aksjonspunkt && Array.isArray(aksjonspunkt)) {
     return aksjonspunkt.length > 0 ? aksjonspunkt[0].begrunnelse : '';
   }
-  return aksjonspunkt && !Array.isArray(aksjonspunkt) ? aksjonspunkt.begrunnelse : '';
+  return !!aksjonspunkt && !Array.isArray(aksjonspunkt) ? aksjonspunkt.begrunnelse : '';
 };
 
 FaktaBegrunnelseTextField.buildInitialValues = (

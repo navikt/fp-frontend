@@ -17,7 +17,7 @@ type OwnProps = {
 };
 
 const VergeFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
-  verge,
+  verge = {},
   aksjonspunkter,
   alleMerknaderFraBeslutter,
   alleKodeverk,
@@ -43,9 +43,5 @@ const VergeFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = (
     />
   </RawIntlProvider>
 );
-
-VergeFaktaIndex.defaultProps = {
-  verge: {},
-};
 
 export default VergeFaktaIndex;

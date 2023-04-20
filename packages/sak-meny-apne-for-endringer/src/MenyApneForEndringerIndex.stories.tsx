@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
 import MenyApneForEndringerIndex from './MenyApneForEndringerIndex';
@@ -9,7 +9,7 @@ export default {
   component: MenyApneForEndringerIndex,
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   apneBehandlingForEndringer: () => void;
   lukkModal: () => void;
 }> = ({ apneBehandlingForEndringer, lukkModal }) => (

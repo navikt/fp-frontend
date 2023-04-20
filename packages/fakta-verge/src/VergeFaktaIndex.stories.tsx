@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
 import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
@@ -32,7 +32,7 @@ export default {
   component: VergeFaktaIndex,
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   behandling: Behandling;
   submitCallback: (aksjonspunktData: any) => Promise<void>;
 }> = ({ behandling, submitCallback }) => (

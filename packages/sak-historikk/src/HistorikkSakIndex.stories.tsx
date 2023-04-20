@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import { skjermlenkeCodes } from '@navikt/fp-konstanter';
 import { Historikkinnslag, HistorikkinnslagDel } from '@navikt/fp-types';
@@ -90,7 +90,7 @@ export default {
   decorators: [withRouter],
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   valgtBehandlingUuid?: string;
   historikkFpSak?: Historikkinnslag[];
   historikkFpTilbake?: Historikkinnslag[];

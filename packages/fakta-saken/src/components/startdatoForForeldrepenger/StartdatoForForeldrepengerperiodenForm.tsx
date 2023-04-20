@@ -25,7 +25,7 @@ type FormValues = {
   begrunnelse?: string;
 };
 
-const buildInitialValues = (aksjonspunkt: Aksjonspunkt, soknad: Soknad): FormValues => ({
+const buildInitialValues = (soknad: Soknad, aksjonspunkt?: Aksjonspunkt): FormValues => ({
   opprinneligDato: soknad.oppgittFordeling?.startDatoForPermisjon,
   startdatoFraSoknad: soknad.oppgittFordeling?.startDatoForPermisjon,
   begrunnelse: (aksjonspunkt && aksjonspunkt.begrunnelse) || '',
@@ -46,7 +46,7 @@ const getValidateIsBefore2019 = (getValues: UseFormGetValues<FormValues>, intl: 
 };
 
 interface OwnProps {
-  aksjonspunkt: Aksjonspunkt;
+  aksjonspunkt?: Aksjonspunkt;
   soknad: Soknad;
   submitCallback: (data: OverstyringAvklarStartdatoForPeriodenAp) => Promise<void>;
   readOnly: boolean;
@@ -71,7 +71,7 @@ const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(aksjonspunkt, soknad),
+    defaultValues: formData || buildInitialValues(soknad, aksjonspunkt),
   });
 
   const [visEditeringsmodus, toggleEdit] = useState(false);

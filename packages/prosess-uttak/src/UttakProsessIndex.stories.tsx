@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 import { AksjonspunktStatus, NavBrukerKjonn } from '@navikt/ft-kodeverk';
 import { Aksjonspunkt } from '@navikt/ft-types';
@@ -175,7 +175,7 @@ export default {
   component: UttakProsessIndex,
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   submitCallback?: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
   stønadskontoer?: UttakStonadskontoer;
   kanOverstyre?: boolean;

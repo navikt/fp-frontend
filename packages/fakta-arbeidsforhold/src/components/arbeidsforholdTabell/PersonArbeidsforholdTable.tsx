@@ -76,8 +76,8 @@ interface OwnProps {
   selectedId?: string;
   selectArbeidsforholdCallback: (
     event: React.MouseEvent | React.KeyboardEvent,
-    id: void,
-    model: AoIArbeidsforhold,
+    id?: void,
+    model?: AoIArbeidsforhold,
   ) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   inntektsmeldinger: Inntektsmelding[];

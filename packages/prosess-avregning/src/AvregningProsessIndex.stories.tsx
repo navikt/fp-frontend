@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
 import { fagsakYtelseType, mottakerTyper, tilbakekrevingVidereBehandling, AksjonspunktCode } from '@navikt/fp-kodeverk';
@@ -116,7 +116,7 @@ export default {
   component: AvregningProsessIndex,
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
   tilbakekrevingvalg?: TilbakekrevingValg;

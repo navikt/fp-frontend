@@ -76,32 +76,31 @@ const PersonYtelserTable: FunctionComponent<OwnProps> = ({ ytelser, relatertYtel
       })
       .reduce((allRows, rows) => allRows.concat(rows), []);
 
+  if (!ytelseRows) {
+    return null;
+  }
+
   return (
     <Table headerTextCodes={HEADER_TEXT_CODES} classNameTable={styles.tableStyle} noHover>
-      {ytelseRows &&
-        ytelseRows.map((ytelse, index) => (
-          <TableRow key={`index${index + 1}`}>
-            <TableColumn>{ytelse.navn ? <BodyShort size="small">{ytelse.navn}</BodyShort> : ''}</TableColumn>
-            <TableColumn>
-              <BodyShort size="small">{ytelse.periode}</BodyShort>
-            </TableColumn>
-            <TableColumn>{ytelse.status ? <BodyShort size="small">{ytelse.status}</BodyShort> : ''}</TableColumn>
-            <TableColumn>
-              {ytelse.saksnummer && ytelse.skalViseLenke && (
-                <BodyShort size="small">
-                  <Link href={`/fagsak/${ytelse.saksnummer}`} target="_blank">
-                    {ytelse.saksnummer}
-                  </Link>
-                </BodyShort>
-              )}
-              {ytelse.saksnummer && !ytelse.skalViseLenke ? (
-                <BodyShort size="small">{ytelse.saksnummer}</BodyShort>
-              ) : (
-                ''
-              )}
-            </TableColumn>
-          </TableRow>
-        ))}
+      {ytelseRows.map((ytelse, index) => (
+        <TableRow key={`index${index + 1}`}>
+          <TableColumn>{ytelse.navn ? <BodyShort size="small">{ytelse.navn}</BodyShort> : ''}</TableColumn>
+          <TableColumn>
+            <BodyShort size="small">{ytelse.periode}</BodyShort>
+          </TableColumn>
+          <TableColumn>{ytelse.status ? <BodyShort size="small">{ytelse.status}</BodyShort> : ''}</TableColumn>
+          <TableColumn>
+            {ytelse.saksnummer && ytelse.skalViseLenke && (
+              <BodyShort size="small">
+                <Link href={`/fagsak/${ytelse.saksnummer}`} target="_blank">
+                  {ytelse.saksnummer}
+                </Link>
+              </BodyShort>
+            )}
+            {ytelse.saksnummer && !ytelse.skalViseLenke ? <BodyShort size="small">{ytelse.saksnummer}</BodyShort> : ''}
+          </TableColumn>
+        </TableRow>
+      ))}
     </Table>
   );
 };
