@@ -18,7 +18,7 @@ type ForenkletInntektspost = {
   fom: string;
 };
 
-const EMPTY_ARRAY = [];
+const EMPTY_ARRAY = [] as Inntektsmelding[];
 
 const behandleInntektsposter = (
   skjæringspunktDato: string,

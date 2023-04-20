@@ -26,7 +26,6 @@ export type FormValues = {
 
 interface OwnProps {
   familiehendelse: FamilieHendelseSamling;
-  aksjonspunkt: Aksjonspunkt;
   soknad: Soknad;
   avklartBarn: AvklartBarn[];
   readOnly: boolean;
@@ -38,8 +37,8 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: (soknad: Soknad, familiehendelse: FamilieHendelse, aksjonspunkt: Aksjonspunkt) => FormValues;
-  transformValues?: (values: FormValues, avklartBarn: AvklartBarn[]) => SjekkManglendeFodselAp;
+  buildInitialValues: (soknad: Soknad, familiehendelse: FamilieHendelse, aksjonspunkt: Aksjonspunkt) => FormValues;
+  transformValues: (values: FormValues, avklartBarn: AvklartBarn[]) => SjekkManglendeFodselAp;
 }
 
 /**
@@ -127,6 +126,7 @@ const lagBarn = (antallBarnFraSoknad: number): AvklartBarn[] => {
   }
   const childrenArray: AvklartBarn[] = [];
   while (antallBarn > 0) {
+    // @ts-ignore Fiks
     childrenArray.push({ fodselsdato: undefined, dodsdato: undefined });
     antallBarn -= 1;
   }

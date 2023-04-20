@@ -3,6 +3,6 @@
     "exclude": ["node_modules", "**.spec.ts", "vite.config.js", "dist"],
     "extends": "../../tsconfig.json",
     "compilerOptions": {
-        "strict": false,
+        "strict": true,
     },
 }

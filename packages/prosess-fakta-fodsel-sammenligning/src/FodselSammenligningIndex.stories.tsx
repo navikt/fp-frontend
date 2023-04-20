@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import { behandlingType } from '@navikt/fp-kodeverk';
 import { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
@@ -39,7 +39,7 @@ export default {
   component: FodselSammenligningIndex,
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   behandlingsTypeKode: string;
   vedtaksDatoSomSvangerskapsuke?: number;
   familiehendelseOriginalBehandling?: FamilieHendelse;

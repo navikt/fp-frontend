@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
@@ -92,7 +92,7 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   detaljertJournalpost: Journalpost;
   oppgave: OppgaveOversikt;
   submitJournalføring: (data: JournalførSubmitValue) => void;

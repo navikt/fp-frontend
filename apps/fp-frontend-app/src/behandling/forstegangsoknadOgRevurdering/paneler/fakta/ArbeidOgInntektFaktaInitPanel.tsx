@@ -24,7 +24,7 @@ interface OwnProps {
   behandlingUuid: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   rettigheter: AksessRettigheter;
-  settBehandlingPåVentCallback: (params: { frist: string; ventearsak: string }) => Promise<any>;
+  settBehandlingPåVentCallback: (params: { frist?: string; ventearsak: string }) => Promise<any>;
   hentBehandling: (keepData: boolean) => Promise<any>;
 }
 

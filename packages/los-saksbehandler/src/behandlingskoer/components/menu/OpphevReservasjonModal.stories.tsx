@@ -1,6 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
@@ -20,7 +20,7 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   oppgave: Oppgave;
   opphevData: any;
   hentReserverteOppgaver: (params: any, keepData: boolean) => void;

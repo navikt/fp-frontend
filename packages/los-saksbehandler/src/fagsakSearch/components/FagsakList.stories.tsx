@@ -1,6 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { BehandlingStatus, BehandlingType, FagsakStatus, FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
@@ -21,7 +21,7 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{ fagsaker: FagsakEnkel[]; fagsakOppgaver: Oppgave[] }> = ({ fagsaker, fagsakOppgaver }) => {
+const Template: StoryFn<{ fagsaker: FagsakEnkel[]; fagsakOppgaver: Oppgave[] }> = ({ fagsaker, fagsakOppgaver }) => {
   const data = [{ key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true }];
 
   return (

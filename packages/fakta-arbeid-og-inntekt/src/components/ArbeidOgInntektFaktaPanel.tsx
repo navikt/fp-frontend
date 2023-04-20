@@ -222,10 +222,14 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   }, [behandling.versjon]);
 
   const settPaVent = useCallback(
-    (params: { frist?: string; ventearsak: string }) => {
+    (params: { frist?: string; ventearsak?: string }) => {
       settKnappTrykket(true);
       settVisSettPåVentModal(false);
-      settBehandlingPåVentCallback(params);
+
+      const { frist, ventearsak } = params;
+      if (ventearsak) {
+        settBehandlingPåVentCallback({ frist, ventearsak });
+      }
     },
     [behandling.versjon],
   );

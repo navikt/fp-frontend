@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
 import { Behandling, KjønnkodeEnum, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
@@ -59,9 +59,9 @@ const defaultPersonoversikt = {
       sivilstand: sivilstandType.UGIFT,
     },
   ],
-};
+} as Personoversikt;
 
-const Template: Story<{
+const Template: StoryFn<{
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
   personoversikt: Personoversikt;

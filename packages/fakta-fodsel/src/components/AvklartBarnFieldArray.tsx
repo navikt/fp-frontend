@@ -38,7 +38,7 @@ export const AvklartBarnFieldArray: FunctionComponent<OwnProps> = ({ readOnly })
       remove={remove}
       append={append}
     >
-      {(field, index, getRemoveButton) => (
+      {(field, index, getRemoveButton = () => '-') => (
         <React.Fragment key={field.id}>
           <VerticalSpacer sixteenPx />
           <FlexContainer>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { withRouter } from '@navikt/fp-storybook-utils';
@@ -109,7 +109,7 @@ const navAnsattDefault = {
   kanBehandleKode6: true,
 } as NavAnsatt;
 
-const Template: Story<{
+const Template: StoryFn<{
   alleOppgaver?: OppgaveOversikt[];
   navAnsatt: NavAnsatt;
   detaljertJournalpost: Journalpost;

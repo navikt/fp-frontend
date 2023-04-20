@@ -1,6 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
 import { Modal } from '@navikt/ds-react';
 import { RestApiMock } from '@navikt/fp-utils-test';
@@ -22,7 +22,7 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{ oppgave: Oppgave }> = ({ oppgave }) => {
+const Template: StoryFn<{ oppgave: Oppgave }> = ({ oppgave }) => {
   const data = [
     { key: RestApiPathsKeys.OPPHEV_OPPGAVERESERVASJON.name, data: {} },
     {

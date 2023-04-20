@@ -48,7 +48,7 @@ interface StaticFunctions {
 const RegistrereVergeFaktaForm: FunctionComponent<OwnProps & WrappedComponentProps> & StaticFunctions = ({
   intl,
   readOnly,
-  vergetyper,
+  vergetyper = [],
   alleMerknaderFraBeslutter,
   valgtVergeType,
 }) => (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
 import { BehandlingAppKontekst } from '@navikt/fp-types';
@@ -17,7 +17,7 @@ interface HenleggParams {
   fritekst?: string;
 }
 
-const Template: Story<{
+const Template: StoryFn<{
   henleggBehandling: (params: HenleggParams) => Promise<any>;
   lukkModal: () => void;
   forhandsvisHenleggBehandling: () => void;

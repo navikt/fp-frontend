@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
 import { behandlingResultatType, behandlingType, behandlingStatus, fagsakYtelseType } from '@navikt/fp-kodeverk';
@@ -34,7 +34,7 @@ export default {
   decorators: [withRouter],
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   lagre: (data: any) => Promise<void>;
   behandling: BehandlingAppKontekst;
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];

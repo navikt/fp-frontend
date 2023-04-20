@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
 import {
@@ -24,7 +24,7 @@ export default {
   component: KlagevurderingProsessIndex,
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   klageVurdering: KlageVurdering;
   submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
   mellomlagre: (aksjonspunktData: any) => Promise<void>;

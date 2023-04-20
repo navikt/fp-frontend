@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import { AksjonspunktÅrsak, ArbeidOgInntektsmelding, Behandling } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
@@ -40,7 +40,7 @@ export default {
   component: ArbeidsforholdFaktaIndex,
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   arbeidOgInntekt: ArbeidOgInntektsmelding;
 }> = ({ arbeidOgInntekt }) => (
   <ArbeidsforholdFaktaIndex
@@ -230,30 +230,30 @@ ArbeidsforholdetErOpprettetBasertPåIM.args = {
     inntektsmeldinger: [
       {
         inntektPrMnd: 25500.0,
-        refusjonPrMnd: null,
+        refusjonPrMnd: undefined,
         arbeidsgiverIdent: '999999999',
-        eksternArbeidsforholdId: null,
-        internArbeidsforholdId: null,
+        eksternArbeidsforholdId: undefined,
+        internArbeidsforholdId: undefined,
         kontaktpersonNavn: 'Dolly Dollesen',
         kontaktpersonNummer: '99999999',
         journalpostId: '524273715',
         dokumentId: '548466069',
         motattDato: '2022-01-19',
-        begrunnelse: null,
-        saksbehandlersVurdering: null,
+        begrunnelse: undefined,
+        saksbehandlersVurdering: undefined,
       },
     ],
     arbeidsforhold: [
       {
         arbeidsgiverIdent: '999999999',
-        internArbeidsforholdId: null,
-        eksternArbeidsforholdId: null,
+        internArbeidsforholdId: undefined,
+        eksternArbeidsforholdId: undefined,
         fom: '2022-01-19',
         tom: '9999-12-31',
         stillingsprosent: 100.0,
-        årsak: null,
+        årsak: undefined,
         saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
-        permisjonOgMangel: null,
+        permisjonOgMangel: undefined,
         begrunnelse: 'Mottatt IM',
       },
     ],

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 import { useForm } from 'react-hook-form';
 import { Button } from '@navikt/ds-react';
@@ -16,7 +16,7 @@ export default {
   component: OppholdINorgePapirsoknadIndex,
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   erAdopsjon: boolean;
   submitCallback: (data: any) => Promise<void>;
 }> = ({ erAdopsjon, submitCallback }) => {

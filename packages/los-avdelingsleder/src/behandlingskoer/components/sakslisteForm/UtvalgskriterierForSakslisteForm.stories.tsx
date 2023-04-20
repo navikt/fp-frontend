@@ -1,6 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
@@ -22,7 +22,7 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: Story<{ sakslisteNavn: string }> = ({ sakslisteNavn }) => {
+const Template: StoryFn<{ sakslisteNavn: string }> = ({ sakslisteNavn }) => {
   const data = [
     { key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true },
     { key: RestApiPathsKeys.OPPGAVE_ANTALL.name, data: 1 },

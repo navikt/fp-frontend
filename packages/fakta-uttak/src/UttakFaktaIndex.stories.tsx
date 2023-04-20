@@ -1,6 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { Fagsak, KontrollerFaktaPeriode, Ytelsefordeling } from '@navikt/fp-types';
@@ -30,7 +30,7 @@ export default {
   component: UttakFaktaIndex,
 };
 
-const Template: Story<{
+const Template: StoryFn<{
   aksjonspunkter: Aksjonspunkt[];
   uttakKontrollerFaktaPerioder: KontrollerFaktaPeriode[];
   ytelsefordeling: Ytelsefordeling;

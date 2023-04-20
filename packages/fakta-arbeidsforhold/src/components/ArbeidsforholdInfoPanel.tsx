@@ -58,8 +58,8 @@ const ArbeidsforholdInfoPanel: FunctionComponent<PureOwnProps> = ({
   const [valgtArbeidsforhold, setValgtArbeidsforhold] = useState<AoIArbeidsforhold>();
 
   const setArbeidsforhold = useCallback(
-    (_event: React.MouseEvent | React.KeyboardEvent, _id: void, af: AoIArbeidsforhold) => {
-      const skalSetteArbeidsforhold = !!af.saksbehandlersVurdering;
+    (_event: React.MouseEvent | React.KeyboardEvent, _id: void, af?: AoIArbeidsforhold) => {
+      const skalSetteArbeidsforhold = !!af?.saksbehandlersVurdering;
       setValgtArbeidsforhold(skalSetteArbeidsforhold ? af : undefined);
     },
     [setValgtArbeidsforhold],
