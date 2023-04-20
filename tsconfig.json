@@ -14,10 +14,6 @@
 		"jsx": "react",
 		"typeRoots": ["./node_modules/@types", "./@types"],
 		"skipLibCheck": true,
-		"baseUrl": "./",
-		"paths": {
-			"@navikt/fp-*": ["packages/*/src"],
-        }
 	},
 	"include": [
 		"packages/**/*",
