@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@navikt/ds-codemod": "2.8.12",
-    "@sentry/cli": "2.17.2",
+    "@sentry/cli": "2.17.3",
     "@storybook/addon-essentials": "7.0.6",
     "@storybook/addon-links": "7.0.6",
     "@storybook/builder-vite": "7.0.6",
