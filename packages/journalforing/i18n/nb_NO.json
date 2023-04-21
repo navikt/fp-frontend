@@ -39,5 +39,8 @@
     "Journal.Sak.Ytelse.Engangsstønad": "Engangsstønad",
     "Journal.Sak.Ytelse.Foreldrepenger": "Foreldrepenger",
     "Journal.Sak.Ytelse.Svangerskapspenger": "Svangerskapspenger",
-    "Journal.Sak.Ytelse.Ukjent": "Ukjent"
+    "Journal.Sak.Ytelse.Ukjent": "Ukjent",
+    "Journalfør.Modal.Ok": "Ok",
+    "Journalfør.Modal.Ferdigstiller": "Ferdigstiller journalføringen...",
+    "Journalfør.Modal.Journalført": "Dokumentet er journalført på saksnummer "
   }

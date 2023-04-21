@@ -3,11 +3,12 @@ import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import JournalførSubmitValue from '../typer/ferdigstillJournalføringSubmit';
 import Journalpost from '../typer/journalpostTsType';
 import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
+import SaksnummerType from '../typer/saksnummerTsType';
 
 export const RestApiPathsKeys = {
   ALLE_JOURNAL_OPPGAVER: new RestKey<OppgaveOversikt[], { ident: string }>('ALLE_JOURNAL_OPPGAVER'),
   HENT_JOURNALPOST_DETALJER: new RestKey<Journalpost, { journalpostId: string }>('HENT_JOURNALPOST_DETALJER'),
-  FERDIGSTILL_JOURNALFØRING: new RestKey<void, JournalførSubmitValue>('FERDIGSTILL_JOURNALFØRING'),
+  FERDIGSTILL_JOURNALFØRING: new RestKey<SaksnummerType, JournalførSubmitValue>('FERDIGSTILL_JOURNALFØRING'),
 };
 
 export const endpoints = new RestApiConfigBuilder()

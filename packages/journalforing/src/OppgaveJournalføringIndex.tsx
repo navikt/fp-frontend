@@ -12,6 +12,8 @@ import JournalføringIndex from './components/JournalføringIndex';
 import { RestApiPathsKeys, restApiHooks, requestApi } from './data/fpfordelRestApi';
 import OppgaveOversikt from './typer/oppgaveOversiktTsType';
 import styles from './oppgaveJournalføringIndex.module.css';
+import JournalførSubmitValue from './typer/ferdigstillJournalføringSubmit';
+import JournalførtSubmitModal from './components/journalpost/modal/JournalførtSubmitModal';
 
 const intl = createIntl(messages);
 const TOM_ARRAY: OppgaveOversikt[] = [];
@@ -37,8 +39,11 @@ interface OwnProps {
  */
 const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
   const [valgtOppgave, setValgtOppgave] = useState<OppgaveOversikt | undefined>(undefined);
-  const [filtrerVekkOppgaver, setFiltrerVekkOppgaver] = useState<boolean>(false);
-  const avbryt = useCallback(() => {
+  const [filtrerVekkOppgaver, setFiltrerVekkOppgaver] = useState(false);
+  const [visModal, setVisModal] = useState(false);
+  const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
+
+  const avbrytVisningAvJournalpost = useCallback(() => {
     setValgtOppgave(undefined);
   }, [valgtOppgave]);
   const {
@@ -49,13 +54,33 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
   const { addErrorMessage } = useRestApiErrorDispatcher();
   requestApi.setAddErrorMessageHandler(addErrorMessage);
 
+  const lukkModal = useCallback(() => {
+    setVisModal(false);
+  }, []);
+
+  const { startRequest: submitJournalføring, data: saksnumerJournalføring } = restApiHooks.useRestApiRunner(
+    RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING,
+  );
+
+  const journalførCallback = useCallback((data: JournalførSubmitValue) => {
+    setIsLoadingSubmit(true);
+    setVisModal(true);
+    submitJournalføring(data).then(() => {
+      if (navAnsatt?.brukernavn) {
+        innhentAlleOppgaver({ ident: navAnsatt.brukernavn });
+      }
+      avbrytVisningAvJournalpost();
+      setIsLoadingSubmit(false);
+    });
+  }, [valgtOppgave]);
+
   useEffect(() => {
     if (navAnsatt && harTilgangTilÅBrukeJournalføring(navAnsatt)) {
       innhentAlleOppgaver({ ident: navAnsatt.brukernavn });
     }
   }, [navAnsatt]);
 
-  if (status === RestApiState.NOT_STARTED || status === RestApiState.LOADING) {
+  if (status === RestApiState.NOT_STARTED) {
     return <LoadingPanel />;
   }
   if (!navAnsatt || !harTilgangTilÅBrukeJournalføring(navAnsatt)) {
@@ -65,10 +90,6 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
       </Heading>
     );
   }
-  if (status !== RestApiState.SUCCESS) {
-    return null;
-  }
-
   const filtrerOppgaveliste = (valg: boolean[]) => {
     if (valg.length < 1) {
       setFiltrerVekkOppgaver(false);
@@ -81,7 +102,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
     <RawIntlProvider value={intl}>
       <div className={styles.header}>
         {valgtOppgave && (
-          <Link onClick={avbryt} className={styles.link}>
+          <Link onClick={avbrytVisningAvJournalpost} className={styles.link}>
             <Back />
             <FormattedMessage id="Journalforing.Oversikt" />
           </Link>
@@ -111,6 +132,14 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
           </FlexRow>
         </FlexContainer>
       </div>
+      {visModal && (
+        <JournalførtSubmitModal
+          isLoading={isLoadingSubmit}
+          lukkModal={lukkModal}
+          showModal={visModal}
+          saksnummer={saksnumerJournalføring}
+        />
+      )}
       <JournalforingPanel>
         <JournalføringIndex
           valgtOppgave={valgtOppgave}
@@ -119,7 +148,8 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
           innhentAlleOppgaver={innhentAlleOppgaver}
           navAnsatt={navAnsatt}
           setValgtOppgave={setValgtOppgave}
-          avbrytVisningAvJournalpost={avbryt}
+          avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
+          submitJournalføring={journalførCallback}
         />
       </JournalforingPanel>
     </RawIntlProvider>
