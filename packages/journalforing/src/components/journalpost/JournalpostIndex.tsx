@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useEffect, useCallback } from 'react';
+import React, { FunctionComponent, useState, useEffect } from 'react';
 
 import { FlexColumn, FlexContainer, FlexRow, LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
@@ -17,6 +17,7 @@ type OwnProps = Readonly<{
   avbrytVisningAvJournalpost: () => void;
   innhentAlleOppgaver: (param: { ident: string }) => Promise<OppgaveOversikt[] | undefined>;
   navAnsatt: NavAnsatt;
+  submitJournalføring: (data: JournalførSubmitValue) => void;
 }>;
 
 /**
@@ -25,24 +26,13 @@ type OwnProps = Readonly<{
 const JournalpostIndex: FunctionComponent<OwnProps> = ({
   oppgave,
   avbrytVisningAvJournalpost,
-  innhentAlleOppgaver,
-  navAnsatt,
+  submitJournalføring,
 }) => {
   const [valgtDokument, setValgtDokument] = useState<JournalDokument | undefined>(undefined);
+
   const journalpostKall = restApiHooks.useRestApi(RestApiPathsKeys.HENT_JOURNALPOST_DETALJER, {
     journalpostId: oppgave.journalpostId,
   });
-
-  const { startRequest: submitJournalføring } = restApiHooks.useRestApiRunner(
-    RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING,
-  );
-
-  const journalførCallback = useCallback((data: JournalførSubmitValue) => {
-    submitJournalføring(data).then(() => {
-      innhentAlleOppgaver({ ident: navAnsatt.brukernavn });
-      avbrytVisningAvJournalpost();
-    });
-  }, []);
 
   // Åpner første dokument som standard valg når vi er ferdig med å laste
   useEffect(() => {
@@ -61,6 +51,7 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
     return <LoadingPanel />;
   }
   const journalpost: Journalpost = journalpostKall.data;
+
   return (
     <FlexContainer>
       <FlexRow>
@@ -69,7 +60,7 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
             avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
             journalpost={journalpost}
             oppgave={oppgave}
-            submitJournalføring={journalførCallback}
+            submitJournalføring={submitJournalføring}
           />
         </FlexColumn>
         {valgtDokument && (

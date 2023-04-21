@@ -5,7 +5,8 @@ import { NavAnsatt } from '@navikt/fp-types';
 
 import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
 import OppgaveTabell from './oppgaver/OppgaveTabell';
-import OppgaveDetaljertIndex from './journalpost/JournalpostIndex';
+import JournalpostIndex from './journalpost/JournalpostIndex';
+import JournalførSubmitValue from '../typer/ferdigstillJournalføringSubmit';
 
 type OwnProps = Readonly<{
   oppgaver: OppgaveOversikt[];
@@ -15,6 +16,7 @@ type OwnProps = Readonly<{
   avbrytVisningAvJournalpost: () => void;
   valgtOppgave?: OppgaveOversikt;
   skjulUløseligeOppgaver: boolean;
+  submitJournalføring: (data: JournalførSubmitValue) => void;
 }>;
 
 /**
@@ -28,6 +30,7 @@ const JournalføringIndex: FunctionComponent<OwnProps> = ({
   setValgtOppgave,
   avbrytVisningAvJournalpost,
   skjulUløseligeOppgaver,
+  submitJournalføring,
 }) => (
   <FlexContainer>
     <VerticalSpacer sixteenPx />
@@ -39,14 +42,14 @@ const JournalføringIndex: FunctionComponent<OwnProps> = ({
       />
     )}
     {valgtOppgave && (
-      <OppgaveDetaljertIndex
+      <JournalpostIndex
         avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
         oppgave={valgtOppgave}
         innhentAlleOppgaver={innhentAlleOppgaver}
         navAnsatt={navAnsatt}
+        submitJournalføring={submitJournalføring}
       />
     )}
   </FlexContainer>
 );
-
 export default JournalføringIndex;

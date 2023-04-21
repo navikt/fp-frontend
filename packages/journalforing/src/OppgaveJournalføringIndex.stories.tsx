@@ -117,7 +117,7 @@ const Template: StoryFn<{
   const data = [
     { key: RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER.name, data: alleOppgaver || undefined },
     { key: RestApiPathsKeys.HENT_JOURNALPOST_DETALJER.name, data: detaljertJournalpost || undefined },
-    { key: RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING.name, data: {} },
+    { key: RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING.name, data: { saksnummer: "12345678" } },
   ];
 
   return (
