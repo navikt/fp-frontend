@@ -11,7 +11,7 @@ describe('<JournalforingIndex>', () => {
     expect(await screen.findByText('Journalføring')).toBeInTheDocument();
 
     // Tabell overskrift
-    expect(screen.getByText('Opprettet')).toBeInTheDocument();
+    expect(await screen.findByText('Opprettet')).toBeInTheDocument();
     expect(screen.getByText('Ytelse')).toBeInTheDocument();
     expect(screen.getByText('Beskrivelse')).toBeInTheDocument();
     expect(screen.getByText('Bruker')).toBeInTheDocument();
