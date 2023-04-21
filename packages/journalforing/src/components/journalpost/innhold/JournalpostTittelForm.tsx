@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
-import { Heading, Button } from '@navikt/ds-react';
+import { Heading, Button, CheckboxGroup, Checkbox } from '@navikt/ds-react';
 import { Edit } from '@navikt/ds-icons';
-import { SelectField } from '@navikt/ft-form-hooks';
-import { required } from '@navikt/ft-form-validators';
+import { SelectField, InputField } from '@navikt/ft-form-hooks';
+import { hasValidText, required } from '@navikt/ft-form-validators';
 import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 import Journalpost from '../../../typer/journalpostTsType';
 import styles from './journalpostTittelForm.module.css';
@@ -17,7 +17,8 @@ type OwnProps = Readonly<{
  * JournalpostTittelForm - Inneholder tittel på journalpost og formkomponent for å endre denne
  */
 const JournalpostTittelForm: FunctionComponent<OwnProps> = ({ journalpost }) => {
-  const [kanRedigereTittel, setKanRedigereTittel] = useState<boolean>(!journalpost.tittel);
+  const [kanRedigereTittel, setKanRedigereTittel] = useState(!journalpost.tittel);
+  const [harToggletFritekst, setHarToggletFritekst] = useState(false)
   const toggleRedigering = useCallback(() => {
     setKanRedigereTittel(!kanRedigereTittel);
   }, [kanRedigereTittel]);
@@ -26,19 +27,46 @@ const JournalpostTittelForm: FunctionComponent<OwnProps> = ({ journalpost }) => 
       {tittel}
     </option>
   ));
+
+  const endreFritekstToggle = useCallback(() => {
+    setHarToggletFritekst(!harToggletFritekst);
+  }, [harToggletFritekst])
   return (
     <FlexRow>
       {kanRedigereTittel && (
-        <FlexColumn>
-          <SelectField
-            readOnly={false}
-            name="journalpostTittel"
-            label={undefined}
-            className={styles.selectField}
-            validate={[required]}
-            selectValues={tittler}
-          />
-        </FlexColumn>
+        <>
+          <FlexColumn className={styles.inputBoks}>
+            {harToggletFritekst && (
+              <InputField
+                name="journalpostTittel"
+                validate={[required, hasValidText]}
+                readOnly={false}
+                maxLength={100}
+                className={styles.inputField}
+              />
+            )}
+            {!harToggletFritekst && (
+              <SelectField
+                readOnly={false}
+                name="journalpostTittel"
+                label={undefined}
+                className={styles.selectField}
+                validate={[required]}
+                selectValues={tittler}
+              />
+            )}
+          </FlexColumn>
+          <FlexColumn>
+            <CheckboxGroup
+              legend="Brukt fritekst"
+              hideLegend
+              onChange={endreFritekstToggle}
+              value={[harToggletFritekst]}
+            >
+              <Checkbox value >Fritekst</Checkbox>
+            </CheckboxGroup>
+          </FlexColumn>
+        </>
       )}
       {!kanRedigereTittel && (
         <FlexColumn className={styles.tittelRad}>

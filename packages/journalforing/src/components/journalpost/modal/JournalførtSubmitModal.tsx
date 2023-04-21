@@ -71,7 +71,7 @@ const JournalførtSubmitModal: FunctionComponent<OwnProps> = ({
       )}
       <FlexRow className={styles.sentrerRad}>
         <FlexColumn>
-          <Button size="small" variant="secondary" onClick={lukkModal} disabled={false} autoFocus type="button">
+          <Button size="small" variant="primary" onClick={lukkModal} disabled={false} autoFocus type="button">
             <FormattedMessage id="Journalfør.Modal.Ok" />
           </Button>
         </FlexColumn>
