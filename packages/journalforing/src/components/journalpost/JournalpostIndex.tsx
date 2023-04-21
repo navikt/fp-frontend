@@ -5,7 +5,7 @@ import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { NavAnsatt } from '@navikt/fp-types';
 import { restApiHooks, RestApiPathsKeys } from '../../data/fpfordelRestApi';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
-import OppgaveDetaljertVisning from './JournalpostDetaljer';
+import JournalpostDetaljer from './JournalpostDetaljer';
 import styles from './journalpostIndex.module.css';
 import Journalpost from '../../typer/journalpostTsType';
 import JournalDokument from '../../typer/journalDokumentTsType';
@@ -56,7 +56,7 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
     <FlexContainer>
       <FlexRow>
         <FlexColumn className={styles.oppgaveKolonne}>
-          <OppgaveDetaljertVisning
+          <JournalpostDetaljer
             avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
             journalpost={journalpost}
             oppgave={oppgave}
