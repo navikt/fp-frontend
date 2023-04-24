@@ -12,6 +12,7 @@ import TilBehandlingPanel from './tilBehandling/TilBehandlingPanel';
 import ManueltPaVentPanel from './manueltSattPaVent/ManueltPaVentPanel';
 import OppgaverPerForsteStonadsdagPanel from './antallBehandlingerPerForsteStonadsdag/OppgaverPerForsteStonadsdagPanel';
 import OppgaverSomErApneEllerPaVentPanel from './apneOgPaVentBehandlinger/OppgaverSomErApneEllerPaVentPanel';
+import BeslutterReturPanel from './beslutterRetur/BeslutterReturPanel';
 
 interface OwnProps {
   oppgaverForAvdeling: OppgaverForAvdeling[];
@@ -37,6 +38,10 @@ const NokkeltallPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <div ref={ref}>
+      <BeslutterReturPanel 
+        height={height} 
+        getValueFromLocalStorage={getValueFromLocalStorage} 
+      />
       <TilBehandlingPanel
         height={height}
         oppgaverPerDato={oppgaverPerDato}
