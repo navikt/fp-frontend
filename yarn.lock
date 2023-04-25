@@ -8082,7 +8082,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:18.0.11, @types/react-dom@npm:^18.0.0":
+"@types/react-dom@npm:18.2.0":
+  version: 18.2.0
+  resolution: "@types/react-dom@npm:18.2.0"
+  dependencies:
+    "@types/react": "*"
+  checksum: 9212b3793707a763f10e2c608f6ccb5f729029da6cb84204f333634d3d7baafbc1b20b7faf7cf788a8fd385050a1fb579902031f9462473ef10607116f33f33c
+  languageName: node
+  linkType: hard
+
+"@types/react-dom@npm:^18.0.0":
   version: 18.0.11
   resolution: "@types/react-dom@npm:18.0.11"
   dependencies:
@@ -12614,7 +12623,7 @@ __metadata:
     "@testing-library/user-event": 14.4.3
     "@types/react": 18.0.38
     "@types/react-collapse": 5.0.1
-    "@types/react-dom": 18.0.11
+    "@types/react-dom": 18.2.0
     "@types/react-responsive": 8.0.5
     "@types/react-router-dom": 5.3.3
     "@types/react-test-renderer": 18.0.0
