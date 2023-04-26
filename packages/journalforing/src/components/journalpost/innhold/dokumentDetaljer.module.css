@@ -8,9 +8,11 @@
 
 .dokumentTittel {
   display: flex;
+  margin-bottom: auto;
   margin-right: 50px;
-  padding-top: 10px;
+  margin-top: auto;
   width: 90%;
+  
 }
 
 .newTabIcon {
@@ -35,7 +37,12 @@
 }
 
 .dokLenke {
+  min-width: 40px;
   width: 10%;
+}
+
+.dokLenke>button {
+  padding: 8px;
 }
 
 .input {

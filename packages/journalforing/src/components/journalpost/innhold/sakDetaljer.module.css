@@ -30,3 +30,7 @@
 .clipBoard > div > button {
   padding: 0;
 }
+
+.sakLenke>button {
+  padding: 8px;
+}

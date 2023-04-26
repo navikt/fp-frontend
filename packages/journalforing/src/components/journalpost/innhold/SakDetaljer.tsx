@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
-import { Label, Detail, Tag } from '@navikt/ds-react';
+import { Label, Detail, Tag, Button } from '@navikt/ds-react';
 import { NewTab } from '@navikt/ds-icons';
 import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
@@ -146,10 +146,8 @@ const SakDetaljer: FunctionComponent<OwnProps> = ({ sak }) => {
       </div>
       <div className={styles.faneFelt}>
         <FlexRow>
-          <FlexColumn>
-            <a href={lenke} target="_blank" rel="noreferrer">
-              <NewTab className={styles.newTabIcon} />
-            </a>
+          <FlexColumn className={styles.sakLenke}>
+            <Button as="a" href={lenke} target="_blank" rel="noreferrer" variant="tertiary" icon={<NewTab className={styles.newTabIcon} />} />
           </FlexColumn>
         </FlexRow>
       </div>
