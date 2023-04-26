@@ -40,7 +40,7 @@ const lagBrukerAvsenderRad = (navn: string, id: string, ikon: ReactElement, titl
       </FlexColumn>
     </FlexRow>
     <FlexRow>
-      <FlexColumn>
+      <FlexColumn className={styles.ikonKol}>
         {ikon}
       </FlexColumn>
       <FlexColumn>
@@ -73,7 +73,7 @@ const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({ journalpost }) => {
   const brukerBilde = useMemo(() => finnKjønnBilde(journalpost), [journalpost]);
   const avsenderBilde = useMemo(() => finnAvsenderBilde(journalpost), [journalpost]);
   return (
-    <FlexRow>
+    <div className={styles.brukerAvsenderRad}>
       {journalpost.bruker && (
         <>
           {lagBrukerAvsenderRad(journalpost.bruker.navn, journalpost.bruker.fnr, brukerBilde, 'ValgtOppgave.Bruker')}
@@ -84,7 +84,7 @@ const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({ journalpost }) => {
           {lagBrukerAvsenderRad(journalpost.avsender.navn, journalpost.avsender.id, avsenderBilde, 'ValgtOppgave.Avsender')}
         </>
       )}
-    </FlexRow>
+    </div>
   );
 };
 export default BrukerAvsenderPanel;
