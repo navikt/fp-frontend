@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import moment from 'moment';
-import { composeStories } from '@storybook/testing-react';
+import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import * as stories from './InnsynProsessIndex.stories';

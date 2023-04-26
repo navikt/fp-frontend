@@ -2537,7 +2537,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -2575,7 +2574,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -2612,7 +2610,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -2648,7 +2645,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -2715,7 +2711,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -2753,7 +2748,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -2790,7 +2784,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -2827,7 +2820,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -2865,7 +2857,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -2904,7 +2895,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -2942,7 +2932,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -2981,7 +2970,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -3019,7 +3007,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3057,7 +3044,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -3094,7 +3080,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3130,7 +3115,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3162,7 +3146,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3331,7 +3314,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3391,7 +3373,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     "@types/lodash.debounce": 4.0.7
@@ -3432,7 +3413,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3476,7 +3456,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3549,7 +3528,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -3588,7 +3566,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3621,7 +3598,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -3653,7 +3629,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -3685,7 +3660,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -3722,7 +3696,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -3760,7 +3733,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3793,7 +3765,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3859,7 +3830,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3898,7 +3868,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -3936,7 +3905,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -3973,7 +3941,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4012,7 +3979,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -4052,7 +4018,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -4093,7 +4058,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -4132,7 +4096,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4166,7 +4129,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -4204,7 +4166,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4240,7 +4201,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4275,7 +4235,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4310,7 +4269,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4345,7 +4303,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4381,7 +4338,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4418,7 +4374,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4455,7 +4410,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4492,7 +4446,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4528,7 +4481,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4596,7 +4548,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -4634,7 +4585,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -4665,7 +4615,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4698,7 +4647,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4732,7 +4680,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4766,7 +4713,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4799,7 +4745,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4833,7 +4778,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4873,7 +4817,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4903,7 +4846,6 @@ __metadata:
     "@storybook/addon-actions": 7.0.7
     "@storybook/react": 7.0.7
     "@storybook/react-vite": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -7519,21 +7461,6 @@ __metadata:
     nanoid: ^3.3.1
     read-pkg-up: ^7.0.1
   checksum: f8a9f2a3299d9707d47ba22e3de1e553cacc0bd968326ff81042e0c51347c165a09b786cd7b52dc24d640d6bb1a5f277497d05238ba1c5471eb02214cee28091
-  languageName: node
-  linkType: hard
-
-"@storybook/testing-react@npm:2.0.1":
-  version: 2.0.1
-  resolution: "@storybook/testing-react@npm:2.0.1"
-  dependencies:
-    "@storybook/csf": ^0.1.0
-  peerDependencies:
-    "@storybook/client-logger": ^7.0.0-beta.0 || ^7.0.0-rc.0 || ^7.0.0
-    "@storybook/preview-api": ^7.0.0-beta.0 || ^7.0.0-rc.0 || ^7.0.0
-    "@storybook/react": ^7.0.0-beta.0 || ^7.0.0-rc.0 || ^7.0.0
-    "@storybook/types": ^7.0.0-beta.0 || ^7.0.0-rc.0 || ^7.0.0
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: efc32621c0b606409b622887832a2c86bc94f1d1012957f59c4d804d4b9414146dae7e50c8419bba1c85c0fc08feafbc4a4179a21cbda05fdb3ca4b891892dac
   languageName: node
   linkType: hard
 
@@ -12607,7 +12534,6 @@ __metadata:
     "@storybook/builder-vite": 7.0.7
     "@storybook/cli": 7.0.7
     "@storybook/react": 7.0.7
-    "@storybook/testing-react": 2.0.1
     "@testing-library/jest-dom": 5.16.5
     "@testing-library/react": 14.0.0
     "@testing-library/react-hooks": 8.0.1
