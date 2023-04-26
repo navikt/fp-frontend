@@ -1,0 +1,10 @@
+name: "Deploy storybook"
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  deploy-storybook:
+   uses: navikt/fp-gha-workflows/.github/workflows/deploy-storybook.yml@action/cleanup
+   secrets: inherit
