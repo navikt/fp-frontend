@@ -26,7 +26,7 @@ export default defineConfig({
     lib: {
       entry: 'index.ts',
       formats: ['es', 'umd'],
-      fileName: (format) => `index.${format}.js`,
+      fileName: format => `index.${format}.js`,
     },
     sourcemap: true,
   },
