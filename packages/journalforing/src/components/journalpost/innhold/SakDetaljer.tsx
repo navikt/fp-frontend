@@ -84,7 +84,7 @@ const SakDetaljer: FunctionComponent<OwnProps> = ({ sak }) => {
             <Label>{sak.saksnummer}</Label>
           </FlexColumn>
           <FlexColumn className={styles.clipBoard}>
-            <CopyToClipboard size="medium" copyText={sak.saksnummer} popoverText="Kopiert" type='button' />
+            <CopyToClipboard size="small" copyText={sak.saksnummer} popoverText="Kopiert" type='button' />
           </FlexColumn>
         </FlexRow>
         <div className={styles.datoRad}>
