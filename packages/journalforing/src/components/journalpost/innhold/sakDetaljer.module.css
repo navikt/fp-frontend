@@ -22,13 +22,13 @@
   width: 10%;
 }
 
+.clipBoard {
+  margin-top: -4px;
+}
+
 .newTabIcon {
   height: 32px;
   width: 32px;
-}
-
-.clipBoard > div > button {
-  padding: 0;
 }
 
 .sakLenke>button {
