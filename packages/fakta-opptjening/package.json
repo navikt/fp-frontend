@@ -25,7 +25,11 @@
     "storybook": "storybook dev --quiet -p 7012"
   },
   "dependencies": {
+    "@navikt/aksel-icons": "2.8.15",
+    "@navikt/ds-css": "2.8.15",
+    "@navikt/ds-css-internal": "^2.8.15",
     "@navikt/ds-react": "2.8.15",
+    "@navikt/ds-react-internal": "^2.8.15",
     "@navikt/fp-kodeverk": "1.0.0",
     "@navikt/fp-types": "1.0.0",
     "@navikt/fp-types-avklar-aksjonspunkter": "1.0.0",
@@ -44,7 +48,6 @@
     "react-intl": "6.4.1"
   },
   "devDependencies": {
-    "@navikt/ds-css": "2.8.15",
     "@navikt/fp-storybook-utils": "1.0.0",
     "@storybook/addon-actions": "7.0.7",
     "@storybook/react": "7.0.7",

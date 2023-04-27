@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState, useEffect, useCallback, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
-import { Button, BodyShort, Detail } from '@navikt/ds-react';
+import { Button, BodyShort, Label } from '@navikt/ds-react';
 
 import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
 import { ISO_DATE_FORMAT, addDaysToDate } from '@navikt/ft-utils';
@@ -184,9 +184,9 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer twentyPx />
         </>
       )}
-      <Detail size="small">
+      <Label size="small">
         <FormattedMessage id="OpptjeningFaktaForm.Skjaringstidspunkt" />
-      </Detail>
+      </Label>
       <BodyShort size="small">
         <DateLabel dateString={findSkjaringstidspunkt(opptjeningTomDato)} />
       </BodyShort>
@@ -202,7 +202,7 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
       />
       {filtrerteOgSorterteOpptjeningsaktiviteter.length > 0 && (
         <>
-          <VerticalSpacer eightPx />
+          <VerticalSpacer thirtyTwoPx />
           <div className={styles.pushRight}>
             <TimeLineNavigation openPeriodInfo={opneInfo} />
           </div>

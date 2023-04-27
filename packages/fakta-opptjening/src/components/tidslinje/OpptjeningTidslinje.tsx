@@ -1,118 +1,108 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { FunctionComponent, useMemo, useCallback } from 'react';
 import moment from 'moment';
 
-import { Timeline } from '@navikt/ft-tidslinje';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { KodeverkMedNavn, OpptjeningAktivitet } from '@navikt/fp-types';
 
+import { Timeline } from '@navikt/ds-react-internal';
+import {
+  WalletIcon,
+  HandHeartIcon,
+  StrollerIcon,
+  PersonPregnantIcon,
+  StethoscopeIcon,
+  EarthIcon,
+  ExclamationmarkTriangleIcon,
+  CheckmarkCircleIcon,
+  XMarkOctagonIcon,
+} from '@navikt/aksel-icons';
+import { BodyShort, Label } from '@navikt/ds-react';
+import { OpptjeningAktivitetType } from '@navikt/ft-kodeverk';
 import { FormValues } from '../aktivitet/ValgtAktivitetForm';
-import DatoPanel from './DatoPanel';
 import { finnOpptjeningFom, finnOpptjeningTom } from '../../utils/opptjeningDatoUtil';
 
-import styles from './opptjeningTidslinje.module.css';
-
-import './globalTidslinje.module.css';
-
-// Desse må alltid vare med for rett skala av tidslinjen då den alltid skall vare 10 månader fra skjæringstidpunkten
-const standardItems = (opptjeningFomDato: string, opptjeningTomDato: string) => [
-  {
-    id: 1000,
-    start: moment(opptjeningFomDato).subtract(1, 'months').startOf('month'),
-    end: moment(opptjeningFomDato).subtract(1, 'months').startOf('month'),
-    group: 1,
-    className: styles.hiddenpast,
-    content: '',
-    data: undefined,
-  },
-  {
-    id: 1001,
-    start: moment(opptjeningTomDato).add(1, 'months').endOf('month'),
-    end: moment(opptjeningTomDato).add(1, 'months').endOf('month'),
-    group: 1,
-    className: styles.hiddenpast,
-    content: '',
-    data: undefined,
-  },
-];
-
-const classNameGenerator = (erGodkjent: boolean): string => {
+const finnStatus = (erGodkjent: boolean): 'success' | 'warning' | 'danger' => {
   if (erGodkjent === false) {
-    return 'avvistPeriode';
+    return 'danger';
   }
   if (erGodkjent === true) {
-    return 'godkjentPeriode';
+    return 'success';
   }
-  return 'undefined';
+  return 'warning';
 };
 
-interface Group {
+const AKTIVITET_TYPE_IKON_MAP = {
+  [OpptjeningAktivitetType.ARBEID]: <WalletIcon width={20} height={20} />,
+  [OpptjeningAktivitetType.AAP]: <HandHeartIcon width={20} height={20} />,
+  [OpptjeningAktivitetType.DAGPENGER]: <HandHeartIcon width={20} height={20} />,
+  [OpptjeningAktivitetType.FORELDREPENGER]: <StrollerIcon width={20} height={20} />,
+  [OpptjeningAktivitetType.FRILANS]: <WalletIcon width={20} height={20} />,
+  [OpptjeningAktivitetType.MILITAR_ELLER_SIVILTJENESTE]: <WalletIcon width={20} height={20} />,
+  [OpptjeningAktivitetType.NARING]: <WalletIcon width={20} height={20} />,
+  [OpptjeningAktivitetType.OMSORGSPENGER]: <HandHeartIcon width={20} height={20} />,
+  [OpptjeningAktivitetType.OPPLARINGSPENGER]: <HandHeartIcon width={20} height={20} />,
+  [OpptjeningAktivitetType.PLEIEPENGER]: <HandHeartIcon width={20} height={20} />,
+  [OpptjeningAktivitetType.SVANGERSKAPSPENGER]: <PersonPregnantIcon width={20} height={20} />,
+  [OpptjeningAktivitetType.SYKEPENGER]: <StethoscopeIcon width={20} height={20} />,
+  [OpptjeningAktivitetType.UTENLANDSK_ARBEIDSFORHOLD]: <EarthIcon width={20} height={20} />,
+  [OpptjeningAktivitetType.ETTERLONN_SLUTTPAKKE]: <WalletIcon width={20} height={20} />,
+};
+
+const PERIODE_STATUS_IKON_MAP = {
+  danger: <XMarkOctagonIcon />,
+  success: <CheckmarkCircleIcon />,
+  warning: <ExclamationmarkTriangleIcon />,
+};
+
+interface Rad {
   id: number;
-  content: string;
+  label: string;
   aktivitetTypeKode: string;
   arbeidsforholdRef: string;
   arbeidsgiverReferanse: string;
 }
 
-const createItems = (
-  opptjeningPeriods: OpptjeningAktivitet[],
+const lagPerioder = (
+  opptjeningperioder: OpptjeningAktivitet[],
   formVerdierForAlleAktiviteter: FormValues[],
-  groups: Group[],
+  rader: Rad[],
   opptjeningFomDato: string,
   opptjeningTomDato: string,
-) => {
-  const items = opptjeningPeriods.map((ap, index) => ({
+) =>
+  opptjeningperioder.map((opptjeningPeriode, index) => ({
     id: index,
-    start: moment(finnOpptjeningFom(ap.opptjeningFom, opptjeningFomDato, opptjeningTomDato)),
-    end: moment(finnOpptjeningTom(ap.opptjeningTom, opptjeningFomDato, opptjeningTomDato)),
-    group: groups.find(
-      g =>
-        g.aktivitetTypeKode === ap.aktivitetType &&
-        g.arbeidsforholdRef === ap.arbeidsforholdRef &&
-        g.arbeidsgiverReferanse === ap.arbeidsgiverReferanse,
+    start: moment(finnOpptjeningFom(opptjeningPeriode.opptjeningFom, opptjeningFomDato, opptjeningTomDato)).toDate(),
+    end: moment(finnOpptjeningTom(opptjeningPeriode.opptjeningTom, opptjeningFomDato, opptjeningTomDato)).toDate(),
+    radId: rader.find(
+      rad =>
+        rad.aktivitetTypeKode === opptjeningPeriode.aktivitetType &&
+        rad.arbeidsforholdRef === opptjeningPeriode.arbeidsforholdRef &&
+        rad.arbeidsgiverReferanse === opptjeningPeriode.arbeidsgiverReferanse,
     ).id,
-    className: classNameGenerator(formVerdierForAlleAktiviteter[index].erGodkjent),
-    content: '',
-    data: ap,
+    status: finnStatus(formVerdierForAlleAktiviteter[index].erGodkjent),
   }));
-  return items.concat(standardItems(opptjeningFomDato, opptjeningTomDato));
-};
 
-const createGroups = (opptjeningPeriods: OpptjeningAktivitet[], opptjeningAktivitetTypes: KodeverkMedNavn[]) => {
-  const duplicatesRemoved = opptjeningPeriods.reduce((accPeriods, period): Group[] => {
+const lagRader = (opptjeningPeriods: OpptjeningAktivitet[], opptjeningAktivitetTypes: KodeverkMedNavn[]): Rad[] => {
+  const duplicatesRemoved = opptjeningPeriods.reduce<OpptjeningAktivitet[]>((accPeriods, period) => {
     const hasPeriod = accPeriods.some(
       p =>
         p.aktivitetType === period.aktivitetType &&
         p.arbeidsforholdRef === period.arbeidsforholdRef &&
-        p.oppdragsgiverOrg === period.arbeidsgiverReferanse,
+        p.arbeidsgiverReferanse === period.arbeidsgiverReferanse,
     );
     if (!hasPeriod) accPeriods.push(period);
     return accPeriods;
   }, []);
-  return duplicatesRemoved.map((activity: OpptjeningAktivitet, index: number) => ({
+  const rader = duplicatesRemoved.map((activity: OpptjeningAktivitet, index: number) => ({
     id: index + 1,
-    content: opptjeningAktivitetTypes.find(oat => oat.kode === activity.aktivitetType).navn,
+    label: opptjeningAktivitetTypes.find(oat => oat.kode === activity.aktivitetType).navn,
     aktivitetTypeKode: activity.aktivitetType,
     arbeidsforholdRef: activity.arbeidsforholdRef,
     arbeidsgiverReferanse: activity.arbeidsgiverReferanse,
   }));
-};
 
-const options = (opptjeningFomDato: string, opptjeningTomDato: string) => ({
-  end: moment(opptjeningTomDato).add(1, 'months').endOf('month').toDate(),
-  locale: moment.locale('nb'),
-  margin: { item: 10 },
-  max: moment(opptjeningTomDato).endOf('month').toDate(),
-  min: moment(opptjeningFomDato).startOf('month').toDate(),
-  moment,
-  moveable: false,
-  orientation: { axis: 'top' },
-  showCurrentTime: false,
-  stack: false,
-  start: moment(opptjeningFomDato).subtract(1, 'months').startOf('month').toDate(),
-  verticalScroll: false,
-  width: '100%',
-  zoomable: false,
-});
+  return [...rader].sort((r1, r2) => r1.label.localeCompare(r2.label));
+};
 
 interface OwnProps {
   opptjeningPerioder: OpptjeningAktivitet[];
@@ -124,11 +114,6 @@ interface OwnProps {
   opptjeningTomDato: string;
 }
 
-/**
- * OpptjeningTimeLine
- *
- * Formatterar tidslinjen for fakta/opptjening
- */
 const OpptjeningTimeLine: FunctionComponent<OwnProps> = ({
   opptjeningPerioder,
   formVerdierForAlleAktiviteter,
@@ -138,44 +123,54 @@ const OpptjeningTimeLine: FunctionComponent<OwnProps> = ({
   opptjeningAktivitetTypes,
   setValgtAktivitetIndex,
 }) => {
-  const groups = useMemo(() => createGroups(opptjeningPerioder, opptjeningAktivitetTypes), [opptjeningPerioder]);
-  const items = useMemo(
-    () => createItems(opptjeningPerioder, formVerdierForAlleAktiviteter, groups, opptjeningFomDato, opptjeningTomDato),
+  const rader = useMemo(() => lagRader(opptjeningPerioder, opptjeningAktivitetTypes), [opptjeningPerioder]);
+  const perioder = useMemo(
+    () => lagPerioder(opptjeningPerioder, formVerdierForAlleAktiviteter, rader, opptjeningFomDato, opptjeningTomDato),
     [formVerdierForAlleAktiviteter],
   );
 
-  const timelineRef = React.createRef();
-
-  const selectHandler = (eventProps: any): void => {
-    const selectedItem = items.find(item => item.id === eventProps.items[0]);
-    if (selectedItem) {
-      setValgtAktivitetIndex(selectedItem.id);
-    }
-  };
+  const velgPeriode = useCallback(
+    (periodeId: number): void => {
+      const valgtPeriode = perioder.find(item => item.id === periodeId);
+      if (valgtPeriode) {
+        setValgtAktivitetIndex(valgtPeriode.id);
+      }
+    },
+    [perioder, setValgtAktivitetIndex],
+  );
 
   return (
-    <div className="opptjening">
-      <DatoPanel
-        opptjeningFomDato={moment(opptjeningFomDato).format(DDMMYYYY_DATE_FORMAT)}
-        opptjeningTomDato={moment(opptjeningTomDato).format(DDMMYYYY_DATE_FORMAT)}
-      />
-      <div className={styles.timelineContainer}>
-        <div className={styles.timeLineWrapper}>
-          <div className={styles.timeLine}>
-            <Timeline
-              ref={timelineRef}
-              options={options(opptjeningFomDato, opptjeningTomDato)}
-              // @ts-ignore Fiks
-              initialItems={items}
-              customTimes={{ currentDate: new Date(opptjeningTomDato) }}
-              selectHandler={selectHandler}
-              initialGroups={groups}
-              selection={[valgtAktivitetIndex]}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
+    <Timeline
+      startDate={moment(opptjeningFomDato).subtract(1, 'months').toDate()}
+      endDate={moment(opptjeningTomDato).add(10, 'days').toDate()}
+    >
+      <Timeline.Pin date={moment(opptjeningFomDato).toDate()}>
+        <Label size="small">Startdato opptjeningsperiode</Label>
+        <BodyShort size="small">{moment(opptjeningFomDato).format(DDMMYYYY_DATE_FORMAT)}</BodyShort>
+      </Timeline.Pin>
+      {rader.map(rad => (
+        <Timeline.Row label={rad.label} icon={AKTIVITET_TYPE_IKON_MAP[rad.aktivitetTypeKode]}>
+          {perioder
+            .filter(periode => periode.radId === rad.id)
+            .map(periode => (
+              <Timeline.Period
+                key={periode.id}
+                start={periode.start}
+                end={periode.end}
+                status={periode.status}
+                icon={PERIODE_STATUS_IKON_MAP[periode.status]}
+                onSelectPeriod={() => velgPeriode(periode.id)}
+                isActive={valgtAktivitetIndex === periode.id}
+                statusLabel={rad.label}
+              />
+            ))}
+        </Timeline.Row>
+      ))}
+      <Timeline.Pin date={moment(opptjeningTomDato).toDate()}>
+        <Label size="small">Sluttdato opptjeningsperiode</Label>
+        <BodyShort size="small">{moment(opptjeningTomDato).format(DDMMYYYY_DATE_FORMAT)}</BodyShort>
+      </Timeline.Pin>
+    </Timeline>
   );
 };
 
