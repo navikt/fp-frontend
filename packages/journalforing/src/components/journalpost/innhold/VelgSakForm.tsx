@@ -9,6 +9,7 @@ import { JournalførSakSubmitValue } from '../../../typer/ferdigstillJournalfør
 import Journalpost from '../../../typer/journalpostTsType';
 import JournalFagsak from '../../../typer/journalFagsakTsType';
 import JournalføringFormValues from '../../../typer/journalføringFormValues';
+import styles from './velgSakForm.module.css';
 
 const TOM_ARRAY: JournalFagsak[] = [];
 
@@ -153,7 +154,7 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({ journalpost, isSubmittable, 
           </>
         )}
         <VerticalSpacer eightPx />
-        <FlexRow>
+        <FlexRow className={styles.knappRad}>
           <FlexColumn>
             <Button size="small" variant="primary" disabled={!isSubmittable} type="submit">
               <FormattedMessage id="ValgtOppgave.Journalfør" />
