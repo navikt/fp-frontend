@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
-import { Label, Detail, Tag, Button } from '@navikt/ds-react';
+import { Label, Detail, Tag, Button, TagProps } from '@navikt/ds-react';
 import { NewTab } from '@navikt/ds-icons';
 import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
@@ -14,18 +14,18 @@ import JournalFagsak, { FamilieHendelse } from '../../../typer/journalFagsakTsTy
 
 const velgSakLenke = (saksnummer: string): string => `/fagsak/${saksnummer}/`;
 
-const finnStatusTekst = (statusKode: string): string => {
+const finnTagProps = (statusKode: string): TagProps | null => {
   switch (statusKode) {
     case FagsakStatus.AVSLUTTET:
-      return 'Journal.Sak.Avsluttet';
+      return { variant: 'neutral', size: 'xsmall', children: <FormattedMessage id="Journal.Sak.Avsluttet" /> };
     case FagsakStatus.LOPENDE:
-      return 'Journal.Sak.Løpende';
+      return { variant: 'warning', size: 'xsmall', children: <FormattedMessage id="Journal.Sak.Løpende" /> };
     case FagsakStatus.OPPRETTET:
-      return 'Journal.Sak.Opprettet';
+      return { variant: 'alt1', size: 'xsmall', children: <FormattedMessage id="Journal.Sak.Opprettet" /> };
     case FagsakStatus.UNDER_BEHANDLING:
-      return 'Journal.Sak.UnderBehandling';
+      return { variant: 'alt2', size: 'xsmall', children: <FormattedMessage id="Journal.Sak.UnderBehandling" /> };
     default:
-      return '';
+      return null;
   }
 };
 
@@ -57,35 +57,9 @@ const utledFamileihendelsetekst = (familieHendelseJf?: FamilieHendelse): ReactEl
   );
 };
 
-const lagEtikett = (fagsakStatus: string): ReactElement => {
-  switch (fagsakStatus) {
-    case FagsakStatus.AVSLUTTET:
-      return (
-        <Tag variant="neutral">
-          <FormattedMessage id={finnStatusTekst(fagsakStatus)} />
-        </Tag>
-      );
-    case FagsakStatus.LOPENDE:
-      return (
-        <Tag variant="warning">
-          <FormattedMessage id={finnStatusTekst(fagsakStatus)} />
-        </Tag>
-      );
-    case FagsakStatus.OPPRETTET:
-      return (
-        <Tag variant="alt1">
-          <FormattedMessage id={finnStatusTekst(fagsakStatus)} />
-        </Tag>
-      );
-    case FagsakStatus.UNDER_BEHANDLING:
-      return (
-        <Tag variant="alt2">
-          <FormattedMessage id={finnStatusTekst(fagsakStatus)} />
-        </Tag>
-      );
-    default:
-      throw new Error(`Ukjent fagsakstatus ${fagsakStatus}`);
-  }
+const lagEtikett = (fagsakStatus: string): ReactElement | null => {
+  const props = finnTagProps(fagsakStatus);
+  return props ? <Tag {...props} /> : null;
 };
 type OwnProps = Readonly<{
   sak: JournalFagsak;
