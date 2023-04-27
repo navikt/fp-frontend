@@ -12572,7 +12572,7 @@ __metadata:
     typescript: 5.0.4
     vite: 4.3.1
     vite-plugin-dts: 2.3.0
-    vite-plugin-externalize-deps: 0.5.0
+    vite-plugin-externalize-deps: 0.6.0
     vite-plugin-html: 3.2.0
     vitest: 0.30.1
   languageName: unknown
@@ -21451,12 +21451,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-externalize-deps@npm:0.5.0":
-  version: 0.5.0
-  resolution: "vite-plugin-externalize-deps@npm:0.5.0"
+"vite-plugin-externalize-deps@npm:0.6.0":
+  version: 0.6.0
+  resolution: "vite-plugin-externalize-deps@npm:0.6.0"
   peerDependencies:
     vite: ^2.0.0 || ^3.0.0 || ^4.0.0
-  checksum: e4ceca99280a2d473f1814bf73df578febc396fe8622fc465c4b96e559a4076316043ecaed13a7dc40993d840f9200cf7681454e10af0e4a18ec26797b1cae7b
+  checksum: 46093ded298be6ed08080d3604cefa679d2188926980739e86410933fa3823b1eee585f4fed22eb67d018fbf6e7301cea5411a47d0c7d88eb6a8b52982f0c8af
   languageName: node
   linkType: hard
 
