@@ -87,8 +87,8 @@ const SakDetaljer: FunctionComponent<OwnProps> = ({ sak }) => {
             <CopyToClipboard size="medium" copyText={sak.saksnummer} popoverText="Kopiert" type='button' />
           </FlexColumn>
         </FlexRow>
-        <FlexRow>
-          <FlexColumn>
+        <div className={styles.datoRad}>
+          <FlexColumn className={styles.datoFelt}>
             <Detail>
               <FormattedMessage
                 id="Journal.Sak.OpprettetDato"
@@ -97,7 +97,7 @@ const SakDetaljer: FunctionComponent<OwnProps> = ({ sak }) => {
             </Detail>
           </FlexColumn>
           {sak.førsteUttaksdato && (
-            <FlexColumn>
+            <FlexColumn className={styles.datoFelt}>
               <Detail>
                 <FormattedMessage
                   id="Journal.Sak.FørsteUttak"
@@ -107,11 +107,11 @@ const SakDetaljer: FunctionComponent<OwnProps> = ({ sak }) => {
             </FlexColumn>
           )}
           {famTekst && (
-            <FlexColumn>
+            <FlexColumn className={styles.datoFelt}>
               <Detail>{famTekst}</Detail>
             </FlexColumn>
           )}
-        </FlexRow>
+        </div>
       </div>
       <div className={styles.etikettFelt}>
         <FlexRow>
