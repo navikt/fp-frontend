@@ -74,12 +74,12 @@ const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({ journalpost }) => {
   const avsenderBilde = useMemo(() => finnAvsenderBilde(journalpost), [journalpost]);
   return (
     <div className={styles.brukerAvsenderRad}>
-      {journalpost.bruker && (
+      {journalpost.bruker?.navn && (
         <>
           {lagBrukerAvsenderRad(journalpost.bruker.navn, journalpost.bruker.fnr, brukerBilde, 'ValgtOppgave.Bruker')}
         </>
       )}
-      {journalpost.avsender && (
+      {journalpost.avsender?.navn && (
         <>
           {lagBrukerAvsenderRad(journalpost.avsender.navn, journalpost.avsender.id, avsenderBilde, 'ValgtOppgave.Avsender')}
         </>

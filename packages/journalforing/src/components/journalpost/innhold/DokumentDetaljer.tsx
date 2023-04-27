@@ -90,9 +90,7 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({ dokument, docFieldIndex
           </FlexColumn>
         )}
         <FlexColumn className={styles.dokLenke}>
-          <a href={dokument.lenke} target="_blank" rel="noreferrer">
-            <NewTab className={styles.newTabIcon} />
-          </a>
+          <Button as="a" href={dokument.lenke} target="_blank" rel="noreferrer" variant="tertiary" icon={<NewTab className={styles.newTabIcon} />} />
         </FlexColumn>
       </FlexRow>
     </div >
