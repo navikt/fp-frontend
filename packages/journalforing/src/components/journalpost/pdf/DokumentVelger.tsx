@@ -1,8 +1,20 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { ToggleGroup } from '@navikt/ds-react';
 import JournalDokument from '../../../typer/journalDokumentTsType';
 import styles from './dokumentVelger.module.css';
+
+const FORKORTET = '...';
+
+const lagForkortetNavn = (dok: JournalDokument): string => {
+  if (!dok.tittel) {
+    return 'Ukjent tittel'
+  }
+  if (dok.tittel.length > 10) {
+    const kortNavn = dok.tittel.substring(0,9);
+    return kortNavn.concat(FORKORTET);
+  }
+  return dok.tittel;
+}
 
 type OwnProps = {
   setValgtDokument: (dok: JournalDokument) => void;
@@ -20,17 +32,13 @@ const DokumentVelger: FunctionComponent<OwnProps> = ({ setValgtDokument, valgtDo
       setValgtDokument(nyttValg);
     }
   };
-  const antallDokumenter = dokumenter.length;
   return (
     <div className={styles.panel}>
       <div className={styles.toggleGroup}>
         <ToggleGroup defaultValue={valgtDokument.dokumentId} onChange={endreValg}>
-          {dokumenter.map((dok, index) => (
+          {dokumenter.map((dok) => (
             <ToggleGroup.Item value={dok.dokumentId} key={dok.dokumentId}>
-              <FormattedMessage
-                id="ValgtOppgave.Dokument.Knapp"
-                values={{ dok: index + 1, antall: antallDokumenter }}
-              />
+              {lagForkortetNavn(dok)}
             </ToggleGroup.Item>
           ))}
         </ToggleGroup>

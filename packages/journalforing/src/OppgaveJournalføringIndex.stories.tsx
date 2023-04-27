@@ -34,19 +34,19 @@ const detaljertJournalpostMal = {
   dokumenter: [
     {
       dokumentId: '999999999',
-      tittel: 'Artikkel 1',
+      tittel: 'Søknad',
       varianter: [],
       lenke: 'https://research.google.com/pubs/archive/44679.pdf',
     },
     {
       dokumentId: '999999998',
-      tittel: 'Artikkel 2',
+      tittel: 'Søknad om foreldrepenger',
       varianter: [],
       lenke: 'https://arxiv.org/pdf/2209.14865.pdf',
     },
     {
       dokumentId: '999999997',
-      tittel: 'Artikkel 3',
+      tittel: 'Inntektsbevis',
       varianter: [],
       lenke: 'https://research.google.com/pubs/archive/44678.pdf',
     },
