@@ -5,6 +5,7 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import JournalDokument from '../../../typer/journalDokumentTsType';
 import PDFVisning from './PDFVisning';
 import DokumentVelger from './DokumentVelger';
+import styles from './dokumentIndex.module.css';
 
 type OwnProps = {
   dokumenter?: JournalDokument[];
@@ -26,7 +27,7 @@ const DokumentIndex: FunctionComponent<OwnProps> = ({ dokumenter }) => {
     );
   }
   return (
-    <div>
+    <div className={styles.pdfContainer}>
       <DokumentVelger setValgtDokument={setValgtDokument} valgtDokument={valgDokument} dokumenter={dokumenter} />
       <VerticalSpacer sixteenPx />
       <PDFVisning dokument={valgDokument} />
