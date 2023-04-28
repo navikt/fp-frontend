@@ -3,7 +3,7 @@
 }
 
 .pdfKolonne {
+  background-color: var(--a-gray-300);
   display: inline-block;
   width: 50%;
-  background-color: var(--a-gray-300);
 }
