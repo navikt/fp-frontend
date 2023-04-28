@@ -1,8 +1,9 @@
 .oppgaveKolonne {
-  width: 35%;
+  width: 50%;
 }
 
 .pdfKolonne {
   display: inline-block;
-  max-width: 65%;
+  width: 50%;
+  background-color: var(--a-gray-300);
 }

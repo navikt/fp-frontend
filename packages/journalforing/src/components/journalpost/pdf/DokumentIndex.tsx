@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import JournalDokument from '../../../typer/journalDokumentTsType';
 import PDFVisning from './PDFVisning';
 import DokumentVelger from './DokumentVelger';
@@ -27,6 +28,7 @@ const DokumentIndex: FunctionComponent<OwnProps> = ({ dokumenter }) => {
   return (
     <div>
       <DokumentVelger setValgtDokument={setValgtDokument} valgtDokument={valgDokument} dokumenter={dokumenter} />
+      <VerticalSpacer sixteenPx />
       <PDFVisning dokument={valgDokument} />
     </div>
   );

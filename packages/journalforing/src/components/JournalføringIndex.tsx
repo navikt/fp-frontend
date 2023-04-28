@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 
-import { FlexContainer, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FlexContainer } from '@navikt/ft-ui-komponenter';
 import { NavAnsatt } from '@navikt/fp-types';
 
 import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
@@ -33,7 +33,6 @@ const JournalføringIndex: FunctionComponent<OwnProps> = ({
   submitJournalføring,
 }) => (
   <FlexContainer>
-    <VerticalSpacer sixteenPx />
     {!valgtOppgave && (
       <OppgaveTabell
         oppgaver={oppgaver}
