@@ -1,6 +1,4 @@
 .container {
-  background-color: var(--a-white);
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-top: 15px;
+  padding-left: 8px;
+  padding-right: 8px;
 }

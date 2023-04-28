@@ -13,7 +13,7 @@
 }
 
 .kolBredde {
-  width: 40%;
+  width: 50%;
 }
 
 .brukerAvsenderRad {
@@ -32,7 +32,7 @@
 @media all and (max-width: 1500px) {
   .kolBredde {
     margin-top: 16px;
-    width: 50%;
+    width: 100%;
   }
   .brukerAvsenderRad {
     display: inline;

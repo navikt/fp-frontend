@@ -1,0 +1,13 @@
+.pdfContainer {
+  display: flex; 
+  flex-direction: column; 
+  height: 100%; 
+  width: 100%;
+}
+
+.iframe {
+  border: none; 
+  flex-grow: 1; 
+  margin: 0;
+  padding: 0;
+}

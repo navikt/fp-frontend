@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 
-import { FlexColumn, FlexContainer, FlexRow, LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, LoadingPanel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { NavAnsatt } from '@navikt/fp-types';
 import { restApiHooks, RestApiPathsKeys } from '../../data/fpfordelRestApi';
@@ -56,6 +56,7 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
     <FlexContainer>
       <FlexRow>
         <FlexColumn className={styles.oppgaveKolonne}>
+          <VerticalSpacer sixteenPx />
           <JournalpostDetaljer
             avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
             journalpost={journalpost}
@@ -65,6 +66,7 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
         </FlexColumn>
         {valgtDokument && (
           <FlexColumn className={styles.pdfKolonne}>
+            <VerticalSpacer sixteenPx />
             <DokumentIndex dokumenter={journalpost.dokumenter} />
           </FlexColumn>
         )}
