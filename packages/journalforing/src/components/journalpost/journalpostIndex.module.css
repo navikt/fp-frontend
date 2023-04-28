@@ -4,6 +4,5 @@
 
 .pdfKolonne {
   background-color: var(--a-gray-300);
-  display: inline-block;
   width: 65%;
 }

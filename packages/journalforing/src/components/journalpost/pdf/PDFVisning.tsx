@@ -10,7 +10,7 @@ type OwnProps = Readonly<{
  */
 const PDFVisning: FunctionComponent<OwnProps> = ({ dokument }) => (
   <div>
-    <iframe id="iframepdf" src={dokument.lenke} width='100%' height='1000px' title={dokument.tittel} />
+    <iframe id="iframepdf" src={dokument.lenke} width='100%' height='1250px' title={dokument.tittel} />
   </div>
 );
 
