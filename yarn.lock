@@ -1769,6 +1769,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@formatjs/ecma402-abstract@npm:1.15.0":
+  version: 1.15.0
+  resolution: "@formatjs/ecma402-abstract@npm:1.15.0"
+  dependencies:
+    "@formatjs/intl-localematcher": 0.2.32
+    tslib: ^2.4.0
+  checksum: c9feca174f9490026ef75b2de363d17fcac57848fb73bc8001a5c6c733db33a6674cdd506d69414067bd4ad670587f721d1e446b134e38e998b5f44b0c1412d3
+  languageName: node
+  linkType: hard
+
 "@formatjs/fast-memoize@npm:2.0.1":
   version: 2.0.1
   resolution: "@formatjs/fast-memoize@npm:2.0.1"
@@ -1799,14 +1809,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/intl-datetimeformat@npm:6.7.0":
-  version: 6.7.0
-  resolution: "@formatjs/intl-datetimeformat@npm:6.7.0"
+"@formatjs/intl-datetimeformat@npm:6.8.0":
+  version: 6.8.0
+  resolution: "@formatjs/intl-datetimeformat@npm:6.8.0"
   dependencies:
-    "@formatjs/ecma402-abstract": 1.14.3
+    "@formatjs/ecma402-abstract": 1.15.0
     "@formatjs/intl-localematcher": 0.2.32
     tslib: ^2.4.0
-  checksum: 9eebb8cda1c7ada91b891bb1a9d25bc6c36737da1ec87b2256e44cdaa60968ca644316f023e4a0bb6599fbaf57f520e4f600700a8f61a403941418c4ff68e024
+  checksum: 1ad7fb6d5a9eb8ae70758f5402c8e4dbdba6ff4282ca08e76cf3f7ed622b5d691343956cc9439dc8c5b4755f232714eb0c8ae25679fe550b36896fb873b00161
   languageName: node
   linkType: hard
 
@@ -3227,7 +3237,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-frontend-app@workspace:apps/fp-frontend-app"
   dependencies:
-    "@formatjs/intl-datetimeformat": 6.7.0
+    "@formatjs/intl-datetimeformat": 6.8.0
     "@formatjs/intl-numberformat": 8.4.1
     "@navikt/ds-css": 2.8.15
     "@navikt/ds-css-internal": ^2.8.15
