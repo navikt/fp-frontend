@@ -12,14 +12,12 @@ describe('<OpptjeningFaktaIndex>', () => {
     const lagre = vi.fn(() => Promise.resolve());
     const utils = render(<MedAksjonspunkt submitCallback={lagre} />);
 
-    expect(await screen.findByText('Vurder om aktiviteten kan godkjennes')).toBeInTheDocument();
+    expect(await screen.findByText('Vurder om aktivitetene kan godkjennes')).toBeInTheDocument();
     expect(screen.getByText('Skjæringstidspunkt for opptjening')).toBeInTheDocument();
     expect(screen.getByText('25.10.2019')).toBeInTheDocument();
-    expect(screen.getByText('25.12.2018')).toBeInTheDocument();
-    expect(screen.getByText('24.10.2019')).toBeInTheDocument();
 
     expect(screen.getByText('Detaljer for valgt aktivitet')).toBeInTheDocument();
-    expect(screen.getByText('(9 mndr. 31 dager)')).toBeInTheDocument();
+    expect(screen.getByText('(7 mndr. 42 dager)')).toBeInTheDocument();
     expect(screen.getAllByText('Næring')).toHaveLength(2);
 
     expect(screen.getByText('Oppdater').closest('button')).toBeDisabled();
@@ -44,6 +42,13 @@ describe('<OpptjeningFaktaIndex>', () => {
 
     await userEvent.click(screen.getByText('Oppdater'));
 
+    expect(await screen.findAllByText('Sykepenger')).toHaveLength(2);
+
+    await userEvent.click(screen.getAllByRole('radio')[1]);
+    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse 2');
+
+    await userEvent.click(screen.getByText('Oppdater'));
+
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
@@ -57,8 +62,17 @@ describe('<OpptjeningFaktaIndex>', () => {
           aktivitetType: 'NÆRING',
           begrunnelse: 'Dette er en begrunnelse',
           erGodkjent: true,
-          opptjeningFom: '1995-09-14',
-          opptjeningTom: '9999-12-31',
+          opptjeningFom: '2019-02-11',
+          opptjeningTom: '2019-10-24',
+        },
+        {
+          arbeidsforholdRef: undefined,
+          arbeidsgiverReferanse: '1',
+          aktivitetType: 'SYKEPENGER',
+          begrunnelse: 'Dette er en begrunnelse 2',
+          erGodkjent: false,
+          opptjeningFom: '2018-12-11',
+          opptjeningTom: '2019-04-24',
         },
       ],
     });
@@ -67,14 +81,14 @@ describe('<OpptjeningFaktaIndex>', () => {
   it('skal bytte og så lukke aktiviteter ved hjelp av pil-ikoner', async () => {
     render(<MedAksjonspunkt />);
 
-    expect(await screen.findByText('Vurder om aktiviteten kan godkjennes')).toBeInTheDocument();
+    expect(await screen.findByText('Vurder om aktivitetene kan godkjennes')).toBeInTheDocument();
 
     expect(screen.getByText('Detaljer for valgt aktivitet')).toBeInTheDocument();
     expect(screen.getAllByText('Næring')).toHaveLength(2);
 
     await userEvent.click(screen.getByAltText('Forrige periode'));
 
-    expect(await screen.findAllByText('Arbeid')).toHaveLength(2);
+    expect(await screen.findByText('Arbeidsavklaringspenger')).toBeInTheDocument();
 
     await userEvent.click(screen.getByAltText('Neste periode'));
 
@@ -88,9 +102,9 @@ describe('<OpptjeningFaktaIndex>', () => {
   it('skal ikke vise aksjonspunkt-tekst og knapper når det ikke finnes aksjonspunkt', async () => {
     render(<UtenAksjonspunkt />);
 
-    expect(await screen.findByText('Detaljer for valgt aktivitet')).toBeInTheDocument();
-    expect(screen.queryByText('Vurder om aktiviteten kan godkjennes')).not.toBeInTheDocument();
-    expect(screen.getAllByText('Arbeid')).toHaveLength(2);
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening')).toBeInTheDocument();
+    expect(screen.getByText('Arbeid')).toBeInTheDocument();
+    expect(screen.getByText('Dagpenger')).toBeInTheDocument();
 
     expect(screen.queryByText('Oppdater')).not.toBeInTheDocument();
     expect(screen.queryByText('Avbryt')).not.toBeInTheDocument();

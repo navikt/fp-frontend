@@ -2429,10 +2429,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:^2.8.15":
+"@navikt/aksel-icons@npm:2.8.15, @navikt/aksel-icons@npm:^2.8.15":
   version: 2.8.15
   resolution: "@navikt/aksel-icons@npm:2.8.15::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F2.8.15%2Fe974e0c9008bd16dfaf62a349ed4d7165169fde0"
   checksum: b94afe0d3d69eb521061af44861715366051f4d1a6541419436a1a846bebfa9948bb84feed9e3fcd28ae5fd945cf31169279800d16d91c4bb75d8be797ebfae7
+  languageName: node
+  linkType: hard
+
+"@navikt/aksel-icons@npm:^2.9.0":
+  version: 2.9.0
+  resolution: "@navikt/aksel-icons@npm:2.9.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F2.9.0%2F5de74b4925840e97d9d76fac2685b5e4899a306b"
+  checksum: ea4c041066e9a91d225c7605db8f085ee76c23cc59a131ae692ef162040dcb477fe27306d7791f1074350145663ee03c670387ccd341da5f18b6b4c043ae165b
   languageName: node
   linkType: hard
 
@@ -2458,6 +2465,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@navikt/ds-css-internal@npm:^2.8.15":
+  version: 2.9.0
+  resolution: "@navikt/ds-css-internal@npm:2.9.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css-internal%2F2.9.0%2F6525c9c1e3c0629fcf6e8614336192e3d280b9c7"
+  checksum: 87e6ab7822be20438b1f66555317a64dee957b34b44b78d7423eb98a6e0cf336243e3aaebdf8401912196c9c4f9885a0e14ea22112c761044f7525076fd0bf96
+  languageName: node
+  linkType: hard
+
 "@navikt/ds-css@npm:2.8.15":
   version: 2.8.15
   resolution: "@navikt/ds-css@npm:2.8.15::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F2.8.15%2F6facd7fc2c7d7d1ff2005957506f86ebefa8f61a"
@@ -2475,6 +2489,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@navikt/ds-icons@npm:^2.9.0":
+  version: 2.9.0
+  resolution: "@navikt/ds-icons@npm:2.9.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-icons%2F2.9.0%2F0b74c60c5843b8c6f54f130e8cdb9d9005a629e9"
+  peerDependencies:
+    "@types/react": ^17.0.30 || ^18.0.0
+    react: ^17.0.0 || ^18.0.0
+  checksum: eed3d36b1e023e8ac3eca1d646e0027114e76c7e15e2fdca267ce1338a1c56a42953b26caa7f73a1a91664805b246d42a6dd85f3f006aede50be9d49d5eba6b0
+  languageName: node
+  linkType: hard
+
 "@navikt/ds-react-internal@npm:2.8.15":
   version: 2.8.15
   resolution: "@navikt/ds-react-internal@npm:2.8.15::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react-internal%2F2.8.15%2F24417dceb95648ae1297f5583709d5c622c3d6a3"
@@ -2487,6 +2511,21 @@ __metadata:
     "@types/react": ^17.0.30 || ^18.0.0
     react: ^17.0.0 || ^18.0.0
   checksum: 974caa13e1d8358e2cb36f412f68fa689609b309a908cc31ba40337664d3066f1e16e1396221a4f237d14b3dc0f5de9d363224b395b49fc97812645611b1be10
+  languageName: node
+  linkType: hard
+
+"@navikt/ds-react-internal@npm:^2.8.15":
+  version: 2.9.0
+  resolution: "@navikt/ds-react-internal@npm:2.9.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react-internal%2F2.9.0%2Fedf3197291f5ad50cac822035f2def844182fa23"
+  dependencies:
+    "@navikt/ds-icons": ^2.9.0
+    "@navikt/ds-react": ^2.9.0
+    clsx: ^1.1.1
+    copy-to-clipboard: ^3.3.1
+  peerDependencies:
+    "@types/react": ^17.0.30 || ^18.0.0
+    react: ^17.0.0 || ^18.0.0
+  checksum: 5b7270a8501db8424d873e3f38e3079c87c432ece5ec81faae9067a94e7c3f30bebfc2becec2c2397d91fc5c58eb0f9cf0d4c7a2061c7c1145184e755cc69102
   languageName: node
   linkType: hard
 
@@ -2507,6 +2546,26 @@ __metadata:
     "@types/react": ^17.0.30 || ^18.0.0
     react: ^17.0.0 || ^18.0.0
   checksum: d88909efa4971c16991b9bd2f34e8e415df59d69a62a986cdfb117ca38d2583d948970944a4a4086c958010b69968c415e345ff8b1d2cdb404fa4a62af628ab9
+  languageName: node
+  linkType: hard
+
+"@navikt/ds-react@npm:^2.9.0":
+  version: 2.9.0
+  resolution: "@navikt/ds-react@npm:2.9.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react%2F2.9.0%2F4264be93b794ab2f5034794603703f2ff698a6ea"
+  dependencies:
+    "@floating-ui/react": 0.17.0
+    "@navikt/aksel-icons": ^2.9.0
+    "@navikt/ds-icons": ^2.9.0
+    "@radix-ui/react-tabs": 1.0.0
+    "@radix-ui/react-toggle-group": 1.0.0
+    clsx: ^1.2.1
+    date-fns: 2.29.3
+    react-day-picker: 8.3.4
+    react-modal: 3.15.1
+  peerDependencies:
+    "@types/react": ^17.0.30 || ^18.0.0
+    react: ^17.0.0 || ^18.0.0
+  checksum: 21b72521355aa59df8738cfe488118821c2b9b0aae5b42214b913b62e2ef4e7e18d7f0041e579be38db1e8a3d9cbd1cb67cca69b7ed0e8cf30322a8da77e20ba
   languageName: node
   linkType: hard
 
@@ -2916,8 +2975,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-opptjening@workspace:packages/fakta-opptjening"
   dependencies:
+    "@navikt/aksel-icons": 2.8.15
     "@navikt/ds-css": 2.8.15
+    "@navikt/ds-css-internal": ^2.8.15
     "@navikt/ds-react": 2.8.15
+    "@navikt/ds-react-internal": ^2.8.15
     "@navikt/fp-kodeverk": 1.0.0
     "@navikt/fp-storybook-utils": 1.0.0
     "@navikt/fp-types": 1.0.0
