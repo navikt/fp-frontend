@@ -162,6 +162,7 @@ export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
             </FlexColumn>
           </FlexRow>
         </FlexContainer>
+        <VerticalSpacer eightPx />
         <ValgtAktivitetSubForm
           valgtAktivitetstype={aktivitetType}
           arbeidsgiverReferanse={arbeidsgiverReferanse}
