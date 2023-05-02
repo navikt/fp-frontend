@@ -25,7 +25,7 @@ const PERIODE_STATUS_IKON_MAP = {
   danger: <XMarkOctagonIcon />,
   success: <CheckmarkCircleIcon />,
   warning: <ExclamationmarkTriangleIcon />,
-};
+} as Record<string, React.ReactElement>;
 
 const getStatus = (klasseKode: string): 'success' | 'danger' | 'info' => {
   if (
@@ -72,15 +72,15 @@ const OpptjeningTimeLineLight: FunctionComponent<OwnProps> = ({
 
   const [valgtPeriod, setValgtPeriode] = useState<Periode>();
 
-  const velgPeriode = (startDato: string): void => {
-    const valg = perioder.find(item => item.opptjeningsperiode.fom === startDato);
+  const velgPeriode = (startDato: string | undefined): void => {
+    const valg = perioder.find(item => item.opptjeningsperiode?.fom === startDato);
     if (valg) {
       setValgtPeriode(valg);
     }
   };
 
   const åpnePeriodeinfo = useCallback(
-    (event: React.MouseEvent): void => {
+    (event: React.MouseEvent | React.KeyboardEvent): void => {
       event.preventDefault();
       if (valgtPeriod) {
         setValgtPeriode(undefined);
@@ -92,10 +92,11 @@ const OpptjeningTimeLineLight: FunctionComponent<OwnProps> = ({
   );
 
   const velgNestePeriode = useCallback(
-    (event: React.MouseEvent): void => {
+    (event: React.MouseEvent | React.KeyboardEvent): void => {
       event.preventDefault();
       if (perioder) {
-        const nyIndex = perioder.findIndex(oa => oa.opptjeningsperiode.fom === valgtPeriod?.opptjeningsperiode.fom) + 1;
+        const nyIndex =
+          perioder.findIndex(oa => oa.opptjeningsperiode?.fom === valgtPeriod?.opptjeningsperiode?.fom) + 1;
         if (nyIndex < perioder.length - 2) {
           setValgtPeriode(perioder[nyIndex]);
         }
@@ -105,10 +106,11 @@ const OpptjeningTimeLineLight: FunctionComponent<OwnProps> = ({
   );
 
   const velgForrigePeriode = useCallback(
-    (event: React.MouseEvent): void => {
+    (event: React.MouseEvent | React.KeyboardEvent): void => {
       event.preventDefault();
       if (perioder) {
-        const nyIndex = perioder.findIndex(oa => oa.opptjeningsperiode.fom === valgtPeriod?.opptjeningsperiode.fom) - 1;
+        const nyIndex =
+          perioder.findIndex(oa => oa.opptjeningsperiode?.fom === valgtPeriod?.opptjeningsperiode?.fom) - 1;
         if (nyIndex >= 0) {
           setValgtPeriode(perioder[nyIndex]);
         }
@@ -135,12 +137,12 @@ const OpptjeningTimeLineLight: FunctionComponent<OwnProps> = ({
         <Timeline.Row label="">
           {perioder.map(periode => (
             <Timeline.Period
-              key={periode.opptjeningsperiode.fom}
+              key={periode.opptjeningsperiode?.fom}
               start={periode.start}
               end={periode.end}
               status={periode.status}
-              onSelectPeriod={() => velgPeriode(periode.opptjeningsperiode.fom)}
-              isActive={valgtPeriod?.opptjeningsperiode?.fom === periode.opptjeningsperiode.fom}
+              onSelectPeriod={() => velgPeriode(periode.opptjeningsperiode?.fom)}
+              isActive={valgtPeriod?.opptjeningsperiode?.fom === periode.opptjeningsperiode?.fom}
               icon={PERIODE_STATUS_IKON_MAP[periode.status]}
             />
           ))}

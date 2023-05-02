@@ -32,8 +32,8 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: (aksjonspunkter: Aksjonspunkt[]) => FormValues;
-  transformValues?: (values: FormValues) => {
+  buildInitialValues: (aksjonspunkter: Aksjonspunkt[]) => FormValues;
+  transformValues: (values: FormValues) => {
     begrunnelse?: string;
   };
 }

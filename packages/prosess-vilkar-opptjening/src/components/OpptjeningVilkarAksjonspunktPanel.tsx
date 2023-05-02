@@ -28,7 +28,7 @@ export const buildInitialValues = (
   status: string,
   behandlingsresultat?: Behandling['behandlingsresultat'],
 ): FormValues => ({
-  ...VilkarResultPicker.buildInitialValues(behandlingsresultat, aksjonspunkter, status),
+  ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
 });
 
@@ -89,8 +89,8 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
 
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
 
-  const validerAtEnKunKanVelgeOppfyltNårEnHarPerioder = useCallback(verdi => {
-    if (fastsattOpptjening.fastsattOpptjeningAktivitetList.length === 0 && verdi === true) {
+  const validerAtEnKunKanVelgeOppfyltNårEnHarPerioder = useCallback((verdi: boolean) => {
+    if (fastsattOpptjening.fastsattOpptjeningAktivitetList?.length === 0 && verdi === true) {
       return intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.KanIkkeVelgeOppfylt' });
     }
     return null;

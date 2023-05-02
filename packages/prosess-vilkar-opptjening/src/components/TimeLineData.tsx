@@ -43,8 +43,8 @@ const isPeriodGodkjent = (period: string): boolean =>
 
 interface OwnProps {
   fastsattOpptjeningAktivitet: FastsattOpptjeningAktivitet;
-  selectNextPeriod: (event: React.MouseEvent) => void;
-  selectPrevPeriod: (event: React.MouseEvent) => void;
+  selectNextPeriod: (event: React.MouseEvent | React.KeyboardEvent) => void;
+  selectPrevPeriod: (event: React.MouseEvent | React.KeyboardEvent) => void;
 }
 
 const TimeLineData: FunctionComponent<OwnProps> = ({

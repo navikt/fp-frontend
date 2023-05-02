@@ -32,14 +32,14 @@ interface OwnProps {
   readOnly: boolean;
   erMedlemskapsPanel?: boolean;
   skalKunneInnvilge?: boolean;
-  validatorsForRadioOptions?: ((value: string | number) => any)[];
+  validatorsForRadioOptions?: ((value: boolean) => any)[];
 }
 
 interface StaticFunctions {
   buildInitialValues: (
-    behandlingsresultat: Behandlingsresultat,
     aksjonspunkter: Aksjonspunkt[],
     status: string,
+    behandlingsresultat?: Behandlingsresultat,
   ) => FormValues;
   transformValues: (values: FormValues) =>
     | {
@@ -94,6 +94,7 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
       {(!readOnly || erVilkarOk === undefined) && (
         <RadioGroupPanel
           name="erVilkarOk"
+          // @ts-ignore Fiks denne!
           validate={radioValidators}
           isReadOnly={readOnly}
           isTrueOrFalseSelection
@@ -144,9 +145,9 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
 };
 
 VilkarResultPicker.buildInitialValues = (
-  behandlingsresultat: Behandlingsresultat,
   aksjonspunkter: Aksjonspunkt[],
   status: string,
+  behandlingsresultat?: Behandlingsresultat,
 ): FormValues => {
   const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
   const erVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
