@@ -7,17 +7,20 @@
   "OpptjeningVilkarView.Days": "dager",
   "OpptjeningVilkarView.MonthsAndDays": "{months} måneder og {days} dager aktivitet i opptjeningsperioden",
   "OpptjeningVilkarView.DetailsForSelectedPeriod": "Detaljer for valgt periode",
-  
+
   "OpptjeningVilkarAksjonspunktPanel.SokerHarVurdertOpptjentRettTilForeldrepenger": "Opptjent rett til foreldrepenger",
   "OpptjeningVilkarAksjonspunktPanel.ErOppfylt": "Søker har oppfylt krav om 6 mnd opptjening, vilkåret er oppfylt.",
   "OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt": "Søker har ikke oppfylt krav om 6 mnd opptjening, vilkåret er <b>ikke</b> oppfylt.",
   "OpptjeningVilkarAksjonspunktPanel.Opptjeningsvilkaret": "Opptjening",
   "OpptjeningVilkarAksjonspunktPanel.KanIkkeVelgeOppfylt": "Du kan ikke velge at opptjeningsvilkåret er oppfylt, fordi det ikke finnes noen aktiviteter å beregne inntekten fra. Kontakt bruker for å avklare om bruker har noen opptjening.",
 
+  "OpptjeningTimeLineLight.StartDato": "Start opptjeningsperiode",
+  "OpptjeningTimeLineLight.SluttDato": "Slutt opptjeningsperiode",
+
   "TimeLineNavigation.openData": "Åpne info om første periode",
   "TimeLineData.nextPeriod": "Neste periode",
   "TimeLineData.prevPeriod": "Forrige periode",
   "Timeline.openData": "Åpne info om første periode",
-  
+
   "ShowVilkarStatus.Check": "Informasjonen er utfylt"
 }

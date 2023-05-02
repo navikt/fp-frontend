@@ -4395,8 +4395,16 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-opptjening@workspace:packages/prosess-vilkar-opptjening"
   dependencies:
+<<<<<<< HEAD
     "@navikt/ds-css": 2.9.5
     "@navikt/ds-react": 2.9.5
+=======
+    "@navikt/aksel-icons": 2.8.15
+    "@navikt/ds-css": 2.8.15
+    "@navikt/ds-css-internal": ^2.8.15
+    "@navikt/ds-react": 2.8.15
+    "@navikt/ds-react-internal": ^2.8.15
+>>>>>>> ce96547b3 (Ta i bruk ny tidslinje fra designsystemet i prosess-vilkar-opptjening)
     "@navikt/fp-kodeverk": 1.0.0
     "@navikt/fp-prosess-felles": 1.0.0
     "@navikt/fp-storybook-utils": 1.0.0
@@ -4414,8 +4422,8 @@ __metadata:
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
+    dayjs: 1.11.7
     eslint: 8.39.0
-    moment: 2.29.4
     react: 18.2.0
     react-dom: 18.2.0
     react-hook-form: 7.43.9

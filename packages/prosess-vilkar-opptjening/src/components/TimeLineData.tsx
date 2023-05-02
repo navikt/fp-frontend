@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { Label } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, Image } from '@navikt/ft-ui-komponenter';
 
@@ -17,7 +17,7 @@ import styles from './timeLineData.module.css';
 const MELLOMLIGGENDE_PERIODE = 'MELLOMLIGGENDE_PERIODE';
 
 const isoToDdMmYyyy = (dato: string): string => {
-  const parsedDate = moment(dato, ISO_DATE_FORMAT, true);
+  const parsedDate = dayjs(dato, ISO_DATE_FORMAT, true);
   return parsedDate.isValid() ? parsedDate.format(DDMMYYYY_DATE_FORMAT) : dato;
 };
 
