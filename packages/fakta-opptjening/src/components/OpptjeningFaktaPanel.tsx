@@ -7,7 +7,13 @@ import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
 import { ISO_DATE_FORMAT, addDaysToDate } from '@navikt/ft-utils';
 import { AksjonspunktHelpTextTemp, DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { TimeLineNavigation } from '@navikt/ft-tidslinje';
-import { ArbeidsgiverOpplysningerPerId, AlleKodeverk, OpptjeningAktivitet, Opptjening } from '@navikt/fp-types';
+import {
+  ArbeidsgiverOpplysningerPerId,
+  AlleKodeverk,
+  OpptjeningAktivitet,
+  Opptjening,
+  KodeverkMedNavn,
+} from '@navikt/fp-types';
 import { AvklarAktivitetsPerioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import OpptjeningTidslinje from './tidslinje/OpptjeningTidslinje';
@@ -36,15 +42,22 @@ const getAksjonspunktHelpTexts = (opptjeningAktiviteter: OpptjeningAktivitet[]):
 
 const findSkjaringstidspunkt = (dato: string): string => moment(dato).add(1, 'days').format(ISO_DATE_FORMAT);
 
-const sorterEtterOpptjeningFom = (opptjeningPerioder: OpptjeningAktivitet[]): OpptjeningAktivitet[] =>
-  [...opptjeningPerioder].sort((o1, o2) => moment(o1.opptjeningFom).diff(moment(o2.opptjeningFom)));
+const sorterEtterOpptjeningFom = (
+  opptjeningPerioder: OpptjeningAktivitet[],
+  opptjeningAktivitetTypes: KodeverkMedNavn[],
+): OpptjeningAktivitet[] =>
+  [...opptjeningPerioder].sort((o1, o2) => {
+    const navn1 = opptjeningAktivitetTypes.find(oat => oat.kode === o1.aktivitetType).navn;
+    const navn2 = opptjeningAktivitetTypes.find(oat => oat.kode === o2.aktivitetType).navn;
+    return navn1.localeCompare(navn2);
+  });
 
 const addDay = (dato: string): string => addDaysToDate(dato, 1);
 
 const filtrerOpptjeningAktiviteter = (
   opptjeningAktiviteter: OpptjeningAktivitet[],
   fastsattOpptjening?: Opptjening['fastsattOpptjening'],
-) =>
+): OpptjeningAktivitet[] =>
   opptjeningAktiviteter
     .filter(oa => moment(fastsattOpptjening.opptjeningFom).isBefore(addDay(oa.opptjeningTom)))
     .filter(oa => moment(oa.opptjeningFom).isBefore(addDay(fastsattOpptjening.opptjeningTom)));
@@ -90,7 +103,10 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
 
   const filtrerteOgSorterteOpptjeningsaktiviteter = useMemo(() => {
     if (!!opptjeningAktiviteter && !!fastsattOpptjening) {
-      return sorterEtterOpptjeningFom(filtrerOpptjeningAktiviteter(opptjeningAktiviteter, fastsattOpptjening));
+      return sorterEtterOpptjeningFom(
+        filtrerOpptjeningAktiviteter(opptjeningAktiviteter, fastsattOpptjening),
+        opptjeningAktivitetTypes,
+      );
     }
     return [];
   }, [opptjeningAktiviteter, fastsattOpptjening]);
@@ -100,10 +116,12 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
     begrunnelse: a.begrunnelse,
   }));
 
-  const førsteAktivitetSomIkkeErGodkjent = filtrerteOgSorterteOpptjeningsaktiviteter.findIndex(a => !a.erGodkjent);
-
   const [formVerdierForAlleAktiviteter, oppdaterFormVerdier] = useState<FormValues[]>(
     formData || formValuesAktiviteter,
+  );
+
+  const førsteAktivitetSomIkkeErGodkjent = filtrerteOgSorterteOpptjeningsaktiviteter.findIndex(
+    a => a.erGodkjent === undefined,
   );
   const defaultAktivitetIndex = filtrerteOgSorterteOpptjeningsaktiviteter.length > 0 ? 0 : undefined;
   const [valgtAktivitetIndex, setValgtAktivitetIndex] = useState<number>(
@@ -118,6 +136,11 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
     },
     [formVerdierForAlleAktiviteter],
   );
+
+  useEffect(() => {
+    const index = formVerdierForAlleAktiviteter.findIndex(a => a.erGodkjent === undefined);
+    setValgtAktivitetIndex(index !== -1 ? index : undefined);
+  }, [formVerdierForAlleAktiviteter]);
 
   const bekreft = useCallback(() => {
     setIsSubmitting(true);
@@ -156,7 +179,6 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
       oppdaterFormVerdier((oldValues: FormValues[]) =>
         Object.assign([], oldValues, { [valgtAktivitetIndex]: formValues }),
       );
-      setValgtAktivitetIndex(undefined);
     },
     [oppdaterFormVerdier, valgtAktivitetIndex],
   );
@@ -212,6 +234,7 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
       {valgtAktivitetIndex !== undefined && (
         <>
           <ValgtAktivitetForm
+            key={valgtAktivitetIndex}
             valgtOpptjeningAktivitet={filtrerteOgSorterteOpptjeningsaktiviteter[valgtAktivitetIndex]}
             valgteFormValues={formVerdierForAlleAktiviteter[valgtAktivitetIndex]}
             readOnly={readOnly}

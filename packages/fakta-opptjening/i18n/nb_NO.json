@@ -23,6 +23,10 @@
   "ActivityPanel.Stillingsandel": "Stillingsandel",
   "ActivityPanel.Registreringsdato": "Registreringsdato",
 
+  "OpptjeningTidslinje.StartDato": "Startdato opptjeningsperiode",
+  "OpptjeningTidslinje.SluttDato": "Sluttdato opptjeningsperiode",
+  "OpptjeningTidslinje.Aap": "AAP",
+
   "Timeline.openData": "Åpne info om første periode",
   "Timeline.nextPeriod": "Neste periode",
   "Timeline.prevPeriod": "Forrige periode"

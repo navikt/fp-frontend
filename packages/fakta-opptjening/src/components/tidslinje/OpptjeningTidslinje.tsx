@@ -1,8 +1,7 @@
 import React, { FunctionComponent, useMemo, useCallback } from 'react';
-import moment from 'moment';
 
-import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { KodeverkMedNavn, OpptjeningAktivitet } from '@navikt/fp-types';
+import dayjs from 'dayjs';
 
 import { Timeline } from '@navikt/ds-react-internal';
 import {
@@ -18,6 +17,8 @@ import {
 } from '@navikt/aksel-icons';
 import { BodyShort, Label } from '@navikt/ds-react';
 import { OpptjeningAktivitetType } from '@navikt/ft-kodeverk';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { FormValues } from '../aktivitet/ValgtAktivitetForm';
 import { finnOpptjeningFom, finnOpptjeningTom } from '../../utils/opptjeningDatoUtil';
 
@@ -71,8 +72,8 @@ const lagPerioder = (
 ) =>
   opptjeningperioder.map((opptjeningPeriode, index) => ({
     id: index,
-    start: moment(finnOpptjeningFom(opptjeningPeriode.opptjeningFom, opptjeningFomDato, opptjeningTomDato)).toDate(),
-    end: moment(finnOpptjeningTom(opptjeningPeriode.opptjeningTom, opptjeningFomDato, opptjeningTomDato)).toDate(),
+    start: dayjs(finnOpptjeningFom(opptjeningPeriode.opptjeningFom, opptjeningFomDato, opptjeningTomDato)).toDate(),
+    end: dayjs(finnOpptjeningTom(opptjeningPeriode.opptjeningTom, opptjeningFomDato, opptjeningTomDato)).toDate(),
     radId: rader.find(
       rad =>
         rad.aktivitetTypeKode === opptjeningPeriode.aktivitetType &&
@@ -82,7 +83,11 @@ const lagPerioder = (
     status: finnStatus(formVerdierForAlleAktiviteter[index].erGodkjent),
   }));
 
-const lagRader = (opptjeningPeriods: OpptjeningAktivitet[], opptjeningAktivitetTypes: KodeverkMedNavn[]): Rad[] => {
+const lagRader = (
+  opptjeningPeriods: OpptjeningAktivitet[],
+  opptjeningAktivitetTypes: KodeverkMedNavn[],
+  intl: IntlShape,
+): Rad[] => {
   const duplicatesRemoved = opptjeningPeriods.reduce<OpptjeningAktivitet[]>((accPeriods, period) => {
     const hasPeriod = accPeriods.some(
       p =>
@@ -93,15 +98,17 @@ const lagRader = (opptjeningPeriods: OpptjeningAktivitet[], opptjeningAktivitetT
     if (!hasPeriod) accPeriods.push(period);
     return accPeriods;
   }, []);
-  const rader = duplicatesRemoved.map((activity: OpptjeningAktivitet, index: number) => ({
-    id: index + 1,
-    label: opptjeningAktivitetTypes.find(oat => oat.kode === activity.aktivitetType).navn,
-    aktivitetTypeKode: activity.aktivitetType,
-    arbeidsforholdRef: activity.arbeidsforholdRef,
-    arbeidsgiverReferanse: activity.arbeidsgiverReferanse,
-  }));
-
-  return [...rader].sort((r1, r2) => r1.label.localeCompare(r2.label));
+  return duplicatesRemoved.map((activity: OpptjeningAktivitet, index: number) => {
+    const type = opptjeningAktivitetTypes.find(oat => oat.kode === activity.aktivitetType);
+    return {
+      id: index + 1,
+      label:
+        type.kode === OpptjeningAktivitetType.AAP ? intl.formatMessage({ id: 'OpptjeningTidslinje.Aap' }) : type.navn,
+      aktivitetTypeKode: activity.aktivitetType,
+      arbeidsforholdRef: activity.arbeidsforholdRef,
+      arbeidsgiverReferanse: activity.arbeidsgiverReferanse,
+    };
+  });
 };
 
 interface OwnProps {
@@ -123,7 +130,8 @@ const OpptjeningTimeLine: FunctionComponent<OwnProps> = ({
   opptjeningAktivitetTypes,
   setValgtAktivitetIndex,
 }) => {
-  const rader = useMemo(() => lagRader(opptjeningPerioder, opptjeningAktivitetTypes), [opptjeningPerioder]);
+  const intl = useIntl();
+  const rader = useMemo(() => lagRader(opptjeningPerioder, opptjeningAktivitetTypes, intl), [opptjeningPerioder]);
   const perioder = useMemo(
     () => lagPerioder(opptjeningPerioder, formVerdierForAlleAktiviteter, rader, opptjeningFomDato, opptjeningTomDato),
     [formVerdierForAlleAktiviteter],
@@ -141,15 +149,19 @@ const OpptjeningTimeLine: FunctionComponent<OwnProps> = ({
 
   return (
     <Timeline
-      startDate={moment(opptjeningFomDato).subtract(1, 'months').toDate()}
-      endDate={moment(opptjeningTomDato).add(10, 'days').toDate()}
+      startDate={dayjs(opptjeningFomDato).subtract(1, 'months').toDate()}
+      endDate={dayjs(opptjeningTomDato).add(10, 'days').toDate()}
     >
-      <Timeline.Pin date={moment(opptjeningFomDato).toDate()}>
-        <Label size="small">Startdato opptjeningsperiode</Label>
-        <BodyShort size="small">{moment(opptjeningFomDato).format(DDMMYYYY_DATE_FORMAT)}</BodyShort>
+      <Timeline.Pin date={dayjs(opptjeningFomDato).toDate()}>
+        <Label size="small">
+          <FormattedMessage id="OpptjeningTidslinje.SluttDato" />
+        </Label>
+        <BodyShort size="small">
+          <DateLabel dateString={opptjeningFomDato} />
+        </BodyShort>
       </Timeline.Pin>
       {rader.map(rad => (
-        <Timeline.Row label={rad.label} icon={AKTIVITET_TYPE_IKON_MAP[rad.aktivitetTypeKode]}>
+        <Timeline.Row key={rad.id} label={rad.label} icon={AKTIVITET_TYPE_IKON_MAP[rad.aktivitetTypeKode]}>
           {perioder
             .filter(periode => periode.radId === rad.id)
             .map(periode => (
@@ -166,9 +178,13 @@ const OpptjeningTimeLine: FunctionComponent<OwnProps> = ({
             ))}
         </Timeline.Row>
       ))}
-      <Timeline.Pin date={moment(opptjeningTomDato).toDate()}>
-        <Label size="small">Sluttdato opptjeningsperiode</Label>
-        <BodyShort size="small">{moment(opptjeningTomDato).format(DDMMYYYY_DATE_FORMAT)}</BodyShort>
+      <Timeline.Pin date={dayjs(opptjeningTomDato).toDate()}>
+        <Label size="small">
+          <FormattedMessage id="OpptjeningTidslinje.StartDato" />
+        </Label>
+        <BodyShort size="small">
+          <DateLabel dateString={opptjeningTomDato} />
+        </BodyShort>
       </Timeline.Pin>
     </Timeline>
   );
