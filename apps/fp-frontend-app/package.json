@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@formatjs/intl-datetimeformat": "6.7.0",
-    "@formatjs/intl-numberformat": "8.4.1",
+    "@formatjs/intl-numberformat": "8.5.0",
     "@navikt/ds-css": "2.8.15",
     "@navikt/ds-css-internal": "^2.8.15",
     "@navikt/ds-react": "2.8.15",
