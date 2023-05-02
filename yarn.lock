@@ -3230,6 +3230,7 @@ __metadata:
     "@formatjs/intl-datetimeformat": 6.7.0
     "@formatjs/intl-numberformat": 8.4.1
     "@navikt/ds-css": 2.8.15
+    "@navikt/ds-css-internal": ^2.8.15
     "@navikt/ds-react": 2.8.15
     "@navikt/fp-fakta-adopsjon": 1.0.0
     "@navikt/fp-fakta-arbeid-og-inntekt": 1.0.0
