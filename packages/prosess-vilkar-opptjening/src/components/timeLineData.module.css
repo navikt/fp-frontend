@@ -1,13 +1,3 @@
-.dataDisplayContainer {
-  border: 1px solid darkgray;
-  border-radius: 4px;
-  padding: 8px;
-}
-
-.timeLineDataContainer {
-  padding: 8px;
-}
-
 .image {
   margin-right: 6px;
 }
@@ -18,10 +8,12 @@
 
 .godkjent {
   background-color: var(--a-green-200);
+  padding: 10px;
   width: 50%;
 }
 
 .avvist {
   background-color: var(--a-red-200);
+  padding: 10px;
   width: 50%;
 }

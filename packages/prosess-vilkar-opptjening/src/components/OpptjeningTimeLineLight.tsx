@@ -2,10 +2,10 @@ import React, { FunctionComponent, useState, useMemo, useCallback } from 'react'
 import { Timeline } from '@navikt/ds-react-internal';
 import dayjs from 'dayjs';
 import { BodyShort, Label } from '@navikt/ds-react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { ExclamationmarkTriangleIcon, CheckmarkCircleIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
 
-import { TimeLineNavigation } from '@navikt/ft-tidslinje';
+import { TimeLineButton, TimeLineNavigation } from '@navikt/ft-tidslinje';
 import { FastsattOpptjeningAktivitet } from '@navikt/fp-types';
 
 import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -64,6 +64,8 @@ const OpptjeningTimeLineLight: FunctionComponent<OwnProps> = ({
   opptjeningFomDate,
   opptjeningTomDate,
 }) => {
+  const intl = useIntl();
+
   const sorterteOpptjeningsperioder = useMemo(
     () => [...opptjeningPeriods].sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom))),
     [opptjeningPeriods],
@@ -121,7 +123,7 @@ const OpptjeningTimeLineLight: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <VerticalSpacer sixteenPx />
+      <VerticalSpacer twentyPx />
       <Timeline
         startDate={dayjs(opptjeningFomDate).subtract(1, 'months').toDate()}
         endDate={dayjs(opptjeningTomDate).add(10, 'days').toDate()}
@@ -144,7 +146,11 @@ const OpptjeningTimeLineLight: FunctionComponent<OwnProps> = ({
               onSelectPeriod={() => velgPeriode(periode.opptjeningsperiode?.fom)}
               isActive={valgtPeriod?.opptjeningsperiode?.fom === periode.opptjeningsperiode?.fom}
               icon={PERIODE_STATUS_IKON_MAP[periode.status]}
-            />
+            >
+              {valgtPeriod?.opptjeningsperiode && (
+                <TimeLineData fastsattOpptjeningAktivitet={valgtPeriod.opptjeningsperiode} />
+              )}
+            </Timeline.Period>
           ))}
         </Timeline.Row>
         <Timeline.Pin date={dayjs(opptjeningTomDate).toDate()}>
@@ -158,15 +164,18 @@ const OpptjeningTimeLineLight: FunctionComponent<OwnProps> = ({
       </Timeline>
       <VerticalSpacer sixteenPx />
       <div className={styles.floatRight}>
+        <TimeLineButton
+          text={intl.formatMessage({ id: 'TimeLineData.prevPeriod' })}
+          type="prev"
+          callback={velgForrigePeriode}
+        />
+        <TimeLineButton
+          text={intl.formatMessage({ id: 'TimeLineData.nextPeriod' })}
+          type="next"
+          callback={velgNestePeriode}
+        />
         <TimeLineNavigation openPeriodInfo={åpnePeriodeinfo} />
       </div>
-      {valgtPeriod?.opptjeningsperiode && (
-        <TimeLineData
-          fastsattOpptjeningAktivitet={valgtPeriod.opptjeningsperiode}
-          selectNextPeriod={velgNestePeriode}
-          selectPrevPeriod={velgForrigePeriode}
-        />
-      )}
     </>
   );
 };
