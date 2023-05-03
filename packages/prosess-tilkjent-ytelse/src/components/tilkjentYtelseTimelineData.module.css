@@ -1,0 +1,11 @@
+.detailsPeriode {
+  background-color: var(--a-green-100);
+  margin-right: 8px;
+  max-width: 370px;
+  padding: 16px;
+  width: 370px;
+}
+
+.ctrlCol {
+  margin-left: auto;
+}

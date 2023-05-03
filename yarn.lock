@@ -3981,8 +3981,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-tilkjent-ytelse@workspace:packages/prosess-tilkjent-ytelse"
   dependencies:
+<<<<<<< HEAD
     "@navikt/ds-css": 2.9.5
     "@navikt/ds-react": 2.9.5
+=======
+    "@navikt/aksel-icons": 2.8.15
+    "@navikt/ds-css": 2.8.15
+    "@navikt/ds-css-internal": ^2.8.15
+    "@navikt/ds-react": 2.8.15
+>>>>>>> 40a1b4488 (Bytta til ny tidslinje i tilkjent-ytelse)
     "@navikt/fp-kodeverk": 1.0.0
     "@navikt/fp-prosess-fakta-fodsel-sammenligning": 1.0.0
     "@navikt/fp-prosess-felles": 1.0.0

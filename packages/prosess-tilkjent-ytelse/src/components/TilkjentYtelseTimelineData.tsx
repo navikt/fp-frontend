@@ -22,9 +22,7 @@ import {
   BeregningsresultatPeriode,
 } from '@navikt/fp-types';
 
-import styles from './tilkjentYtelse.module.css';
-
-export type PeriodeMedId = BeregningsresultatPeriode & { id: number };
+import styles from './tilkjentYtelseTimelineData.module.css';
 
 const getEndCharFromId = (id: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
@@ -103,9 +101,7 @@ const getGradering = (andel?: BeregningsresultatPeriodeAndel): ReactElement | nu
 };
 
 interface OwnProps {
-  selectedItemStartDate: string;
-  selectedItemEndDate: string;
-  selectedItemData?: PeriodeMedId;
+  selectedItemData?: BeregningsresultatPeriode;
   callbackForward: (...args: any[]) => any;
   callbackBackward: (...args: any[]) => any;
   alleKodeverk: AlleKodeverk;
@@ -119,8 +115,6 @@ interface OwnProps {
  * Viser opp data fra valgt periode i tilkjent ytelse-tidslinjen
  */
 const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
-  selectedItemStartDate,
-  selectedItemEndDate,
   selectedItemData,
   callbackForward,
   callbackBackward,
@@ -128,7 +122,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
   isSoknadSvangerskapspenger,
   arbeidsgiverOpplysningerPerId,
 }) => {
-  const numberOfDaysAndWeeks = calcDaysAndWeeks(selectedItemStartDate, selectedItemEndDate);
+  const numberOfDaysAndWeeks = calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom);
   const intl = useIntl();
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
@@ -164,8 +158,8 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
                 <FormattedMessage
                   id="TilkjentYtelse.PeriodeData.Periode"
                   values={{
-                    fomVerdi: moment(selectedItemStartDate).format(DDMMYYYY_DATE_FORMAT).toString(),
-                    tomVerdi: moment(selectedItemEndDate).format(DDMMYYYY_DATE_FORMAT).toString(),
+                    fomVerdi: moment(selectedItemData.fom).format(DDMMYYYY_DATE_FORMAT).toString(),
+                    tomVerdi: moment(selectedItemData.tom).format(DDMMYYYY_DATE_FORMAT).toString(),
                   }}
                 />
               </Label>
