@@ -191,6 +191,7 @@ const TilkjentYtelse: FunctionComponent<OwnProps> = ({
           icon={valgtPeriode ? <ArrowUpIcon aria-hidden /> : <ArrowDownIcon aria-hidden />}
           onClick={openPeriodInfo}
           variant="secondary-neutral"
+          title="Åpne info om første periode"
         />
         <Button size="small" icon={<ArrowLeftIcon aria-hidden />} onClick={goBackward} variant="secondary-neutral" />
         <Button size="small" icon={<ArrowRightIcon aria-hidden />} onClick={goForward} variant="secondary-neutral" />

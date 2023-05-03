@@ -3989,7 +3989,11 @@ __metadata:
     "@navikt/ds-css": 2.8.15
     "@navikt/ds-css-internal": ^2.8.15
     "@navikt/ds-react": 2.8.15
+<<<<<<< HEAD
 >>>>>>> 40a1b4488 (Bytta til ny tidslinje i tilkjent-ytelse)
+=======
+    "@navikt/ds-react-internal": 2.8.15
+>>>>>>> cb2dc84ca (div)
     "@navikt/fp-kodeverk": 1.0.0
     "@navikt/fp-prosess-fakta-fodsel-sammenligning": 1.0.0
     "@navikt/fp-prosess-felles": 1.0.0
@@ -4010,6 +4014,7 @@ __metadata:
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
     cross-env: 7.0.3
+    dayjs: 1.11.7
     eslint: 8.39.0
     moment: 2.29.4
     react: 18.2.0
