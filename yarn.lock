@@ -4074,8 +4074,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-uttak@workspace:packages/prosess-uttak"
   dependencies:
+<<<<<<< HEAD
     "@navikt/ds-css": 2.9.5
     "@navikt/ds-react": 2.9.5
+=======
+    "@navikt/aksel-icons": 2.8.15
+    "@navikt/ds-css-internal": ^2.8.15
+    "@navikt/ds-react": 2.8.15
+    "@navikt/ds-react-internal": ^2.8.15
+>>>>>>> afb201b53 (Ta i bruk ny tidslinje for prosess-uttak)
     "@navikt/fp-kodeverk": 1.0.0
     "@navikt/fp-prosess-felles": 1.0.0
     "@navikt/fp-storybook-utils": 1.0.0

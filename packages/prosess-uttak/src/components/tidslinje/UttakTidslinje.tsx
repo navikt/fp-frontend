@@ -1,30 +1,32 @@
-import React, { useRef, MouseEvent, KeyboardEvent, FunctionComponent, useMemo, useCallback } from 'react';
-import moment from 'moment';
+import React, { MouseEvent, KeyboardEvent, FunctionComponent, useMemo } from 'react';
 import dayjs from 'dayjs';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { Timeline } from '@navikt/ds-react-internal';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import {
+  FigureOutwardIcon,
+  SilhouetteIcon,
+  FigureCombinationIcon,
+  ExclamationmarkTriangleIcon,
+  CheckmarkCircleIcon,
+  XMarkOctagonIcon,
+} from '@navikt/aksel-icons';
+import { BodyShort, Label } from '@navikt/ds-react';
 import { Kjønnkode } from '@navikt/ft-types';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { TimeLineControl, TimeLineSoker, TimeLineSokerEnsamSoker, Timeline } from '@navikt/ft-tidslinje';
+import { DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { TimeLineControl } from '@navikt/ft-tidslinje';
 
-import { PeriodeSoker } from '@navikt/fp-types';
+import { KjønnkodeEnum, PeriodeSoker } from '@navikt/fp-types';
+import { oppholdArsakType, periodeResultatType } from '@navikt/fp-kodeverk';
 
 import styles from './uttakTidslinje.module.css';
-
-import './globalTidslinje.module.css';
-
-export interface EventProps {
-  items: number[];
-  event: Event;
-}
 
 export type PeriodeSøkerMedTidslinjedata = {
   id: number;
   periode: PeriodeSoker;
   tomMoment: dayjs.Dayjs;
-  className: string;
   hovedsoker: boolean;
   group: number;
-  title: string;
 };
 
 export type TidslinjeTimes = {
@@ -34,30 +36,11 @@ export type TidslinjeTimes = {
   dodSoker: string;
 };
 
-const getOptions = (customTimes: TidslinjeTimes, sortedUttakPeriods: PeriodeSøkerMedTidslinjedata[]) => ({
-  end: moment(sortedUttakPeriods[sortedUttakPeriods.length - 1].periode.tom)
-    .add(2, 'days')
-    .toDate(),
-  locale: moment.locale('nb'),
-  margin: { item: 14 },
-  max: moment(customTimes.fodsel).add(4, 'years').toDate(),
-  min: moment
-    .min([moment(customTimes.fodsel), moment(sortedUttakPeriods[0].periode.fom)])
-    .subtract(4, 'weeks')
-    .toDate(),
-  moment,
-  moveable: true,
-  orientation: { axis: 'top' },
-  showCurrentTime: false,
-  stack: false,
-  start: moment(sortedUttakPeriods[0].periode.fom).subtract(1, 'days').toDate(),
-  tooltip: { followMouse: true },
-  verticalScroll: false,
-  width: '100%',
-  zoomable: true,
-  zoomMax: 1000 * 60 * 60 * 24 * 31 * 40,
-  zoomMin: 1000 * 60 * 60 * 24 * 30,
-});
+const PERIODE_STATUS_IKON_MAP = {
+  danger: <XMarkOctagonIcon />,
+  success: <CheckmarkCircleIcon />,
+  warning: <ExclamationmarkTriangleIcon />,
+};
 
 const parseDateString = (dateString: string | dayjs.Dayjs): Date => dayjs(dateString, ISO_DATE_FORMAT).toDate();
 
@@ -74,34 +57,129 @@ const sortByDate = (a: PeriodeSøkerMedTidslinjedata, b: PeriodeSøkerMedTidslin
 type PeriodeMedStartOgSlutt = {
   start: Date;
   end: Date;
+  status: 'success' | 'warning' | 'danger' | 'info' | 'neutral';
 } & PeriodeSøkerMedTidslinjedata;
 
-const formatItems = (perioder: PeriodeSøkerMedTidslinjedata[] = []): PeriodeMedStartOgSlutt[] => {
-  const itemsWithDates = perioder.map(periode => ({
+const getStatus = (
+  periode: PeriodeSoker,
+  tilknyttetStortinget: boolean,
+): 'success' | 'warning' | 'danger' | 'info' | 'neutral' => {
+  const opphold = periode.oppholdÅrsak !== oppholdArsakType.UDEFINERT;
+  if (opphold) {
+    return 'neutral';
+  }
+  if (periode.gradertAktivitet && periode.graderingInnvilget) {
+    return 'info';
+  }
+  if ('erOppfylt' in periode && periode.erOppfylt === false) {
+    return 'danger';
+  }
+  if (
+    ('erOppfylt' in periode && periode.erOppfylt === true) ||
+    (periode.periodeResultatType === periodeResultatType.INNVILGET && !tilknyttetStortinget)
+  ) {
+    return 'success';
+  }
+  if (periode.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING || tilknyttetStortinget) {
+    return 'warning';
+  }
+  return 'danger';
+};
+
+const formatPaneler = (
+  tilknyttetStortinget: boolean,
+  perioder: PeriodeSøkerMedTidslinjedata[] = [],
+): PeriodeMedStartOgSlutt[] =>
+  perioder.map(periode => ({
     ...periode,
     start: parseDateString(periode.periode.fom),
     end: parseDateString(periode.tomMoment),
+    status: getStatus(periode.periode, tilknyttetStortinget),
   }));
-  const formattedItemsArray: PeriodeMedStartOgSlutt[] = [];
-  formattedItemsArray.length = 0;
-  itemsWithDates.forEach(item => {
-    formattedItemsArray.push(item);
-  });
-  return formattedItemsArray;
+
+const lagGruppeIder = (perioder: PeriodeSøkerMedTidslinjedata[] = []) =>
+  perioder
+    .reduce((accPerioder, periode) => {
+      const harPeriode = accPerioder.some(p => p.group === periode.group);
+      if (!harPeriode) accPerioder.push(periode);
+      return accPerioder;
+    }, [])
+    .map(activity => activity.group);
+
+const finnIkonGittKjønnkode = (kjønnKode: Kjønnkode) => {
+  if (kjønnKode === KjønnkodeEnum.KVINNE) {
+    return <FigureOutwardIcon width={20} height={20} />;
+  }
+  if (kjønnKode === KjønnkodeEnum.MANN) {
+    return <SilhouetteIcon width={20} height={20} />;
+  }
+  return <FigureCombinationIcon width={20} height={20} />;
 };
 
-const formatGroups = (perioder: PeriodeSøkerMedTidslinjedata[] = []) => {
-  const duplicatesRemoved = perioder.reduce((accPeriods, period) => {
-    // @ts-ignore Fiks
-    const hasPeriod = accPeriods.some(p => p.group === period.group);
-    if (!hasPeriod) accPeriods.push(period);
-    return accPeriods;
+const finnIkon = (hovedsokerKjonnKode: Kjønnkode, medsokerKjonnKode: Kjønnkode, antallRader: number, radNr: number) =>
+  finnIkonGittKjønnkode(antallRader === 1 || radNr > 0 ? hovedsokerKjonnKode : medsokerKjonnKode);
+
+const finnLabelGittKjønnkode = (kjønnKode: Kjønnkode) => {
+  if (kjønnKode === KjønnkodeEnum.KVINNE) {
+    return 'UttakTidslinje.Kvinne';
+  }
+  if (kjønnKode === KjønnkodeEnum.MANN) {
+    return 'UttakTidslinje.Mann';
+  }
+  return 'UttakTidslinje.Ukjent';
+};
+
+const finnLabel = (hovedsokerKjonnKode: Kjønnkode, medsokerKjonnKode: Kjønnkode, antallRader: number, radNr: number) =>
+  finnLabelGittKjønnkode(antallRader === 1 || radNr > 0 ? hovedsokerKjonnKode : medsokerKjonnKode);
+
+type PinData = {
+  dato: string;
+  tekstIder: string[];
+};
+
+const slåSammenPinDataOmLikDato = (pinData: PinData[]): PinData[] =>
+  pinData.reduce<PinData[]>((accData, data) => {
+    const index = accData.findIndex(d => d.dato === data.dato);
+    if (index !== -1) {
+      return accData
+        .filter((_d, i) => i !== index)
+        .concat({
+          dato: data.dato,
+          tekstIder: data.tekstIder.concat(accData[index].tekstIder),
+        });
+    }
+    return accData.concat(data);
   }, []);
-  return duplicatesRemoved.map(activity => ({
-    // @ts-ignore Fiks
-    id: activity.group,
-    content: '',
-  }));
+
+const lagPinData = (tidslinjeTider: TidslinjeTimes): PinData[] => {
+  const pinData = [] as PinData[];
+
+  if (tidslinjeTider.dodSoker) {
+    pinData.push({
+      dato: tidslinjeTider.dodSoker,
+      tekstIder: ['UttakTidslinje.DodSoker'],
+    });
+  }
+  if (tidslinjeTider.fodsel) {
+    pinData.push({
+      dato: tidslinjeTider.fodsel,
+      tekstIder: ['UttakTidslinje.Fodsel'],
+    });
+  }
+  if (tidslinjeTider.revurdering) {
+    pinData.push({
+      dato: tidslinjeTider.revurdering,
+      tekstIder: ['UttakTidslinje.Revurdering'],
+    });
+  }
+  if (tidslinjeTider.soknad) {
+    pinData.push({
+      dato: tidslinjeTider.soknad,
+      tekstIder: ['UttakTidslinje.Soknad'],
+    });
+  }
+
+  return slåSammenPinDataOmLikDato(pinData);
 };
 
 interface TidslinjeProps {
@@ -110,9 +188,10 @@ interface TidslinjeProps {
   medsokerKjonnKode?: Kjønnkode;
   openPeriodInfo: (event: MouseEvent | KeyboardEvent) => void;
   selectedPeriod?: PeriodeSøkerMedTidslinjedata;
-  selectPeriodCallback: (eventProps: EventProps) => void;
   uttakPerioder: PeriodeSøkerMedTidslinjedata[];
   children?: React.ReactNode;
+  tilknyttetStortinget: boolean;
+  setValgtPeriodeIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 /**
@@ -127,54 +206,19 @@ const UttakTidslinje: FunctionComponent<TidslinjeProps> = ({
   medsokerKjonnKode,
   openPeriodInfo,
   selectedPeriod,
-  selectPeriodCallback,
   uttakPerioder,
+  tilknyttetStortinget,
+  setValgtPeriodeIndex,
 }) => {
-  const timelineRef = useRef<any>();
+  const intl = useIntl();
 
-  const zoomIn = useCallback(() => {
-    if (timelineRef.current) {
-      timelineRef.current.zoomIn(0.5);
-    }
-  }, [timelineRef]);
-
-  const zoomOut = useCallback(() => {
-    if (timelineRef.current) {
-      timelineRef.current.zoomOut(0.5);
-    }
-  }, [timelineRef]);
-
-  const goForward = useCallback(() => {
-    const timeline = timelineRef.current;
-    if (timeline) {
-      const currentWindowTimes = timeline.getWindow();
-      const newWindowTimes = {
-        start: new Date(currentWindowTimes.start).setDate(currentWindowTimes.start.getDate() + 42),
-        end: new Date(currentWindowTimes.end).setDate(currentWindowTimes.end.getDate() + 42),
-      };
-
-      timeline.setWindow(newWindowTimes.start, newWindowTimes.end);
-    }
-  }, [timelineRef]);
-
-  const goBackward = useCallback(() => {
-    const timeline = timelineRef.current;
-    if (timeline) {
-      const currentWindowTimes = timeline.getWindow();
-      const newWindowTimes = {
-        start: new Date(currentWindowTimes.start).setDate(currentWindowTimes.start.getDate() - 42),
-        end: new Date(currentWindowTimes.end).setDate(currentWindowTimes.end.getDate() - 42),
-      };
-      timeline.setWindow(newWindowTimes.start, newWindowTimes.end);
-    }
-  }, [timelineRef]);
-
-  const groups = useMemo(() => formatGroups(uttakPerioder), [uttakPerioder]);
-  const items = useMemo(() => formatItems(uttakPerioder), [uttakPerioder]);
-  const options = useMemo(
-    () => getOptions(tidslinjeTider, [...uttakPerioder].sort(sortByDate)),
-    [tidslinjeTider, uttakPerioder],
+  const radIder = useMemo(() => lagGruppeIder(uttakPerioder), [uttakPerioder]);
+  const perioder = useMemo(
+    () => formatPaneler(tilknyttetStortinget, uttakPerioder),
+    [tilknyttetStortinget, uttakPerioder],
   );
+
+  const sorterteUttaksperioder = [...uttakPerioder].sort(sortByDate);
 
   const valgtPeriode = useMemo(
     () =>
@@ -183,56 +227,78 @@ const UttakTidslinje: FunctionComponent<TidslinjeProps> = ({
             fom: selectedPeriod.periode.fom,
             tom: selectedPeriod.periode.tom,
             id: selectedPeriod.id,
-            className: selectedPeriod.className,
-            hoverText: selectedPeriod.title,
           }
         : undefined,
     [selectedPeriod],
   );
 
+  const pinData = lagPinData(tidslinjeTider);
+
   return (
-    <FlexContainer>
+    <>
       <VerticalSpacer sixteenPx />
-      <FlexRow className={styles.timelineContainer}>
-        <FlexColumn className={styles.sokerContainer}>
-          {medsokerKjonnKode && (
-            <TimeLineSoker soker1KjonnKode={medsokerKjonnKode} soker2KjonnKode={hovedsokerKjonnKode} />
-          )}
-          {!medsokerKjonnKode && <TimeLineSokerEnsamSoker hovedsokerKjonnKode={hovedsokerKjonnKode} />}
-        </FlexColumn>
-        <FlexColumn className={styles.timelineWidth}>
-          <div className={medsokerKjonnKode ? styles.timeLineWrapperTwo : styles.timeLineWrapper}>
-            <div className="uttakTimeline">
-              <Timeline
-                ref={timelineRef}
-                options={options}
-                // @ts-ignore
-                initialItems={items}
-                initialGroups={groups}
-                customTimes={tidslinjeTider}
-                selectHandler={selectPeriodCallback}
-                selection={valgtPeriode ? [valgtPeriode.id] : undefined}
-              />
-            </div>
-          </div>
-        </FlexColumn>
-      </FlexRow>
-      <VerticalSpacer eightPx />
-      <FlexRow>
-        <FlexColumn className={styles.ctrlCol}>
-          <TimeLineControl
-            goBackwardCallback={goBackward}
-            goForwardCallback={goForward}
-            zoomInCallback={zoomIn}
-            zoomOutCallback={zoomOut}
-            openPeriodInfo={openPeriodInfo}
-            selectedPeriod={valgtPeriode}
+      <Timeline
+        startDate={dayjs(sorterteUttaksperioder[0].periode.fom).subtract(1, 'days').toDate()}
+        endDate={dayjs(sorterteUttaksperioder[sorterteUttaksperioder.length - 1].periode.tom)
+          .add(2, 'days')
+          .toDate()}
+      >
+        {pinData.map(data => (
+          <Timeline.Pin date={dayjs(data.dato).toDate()}>
+            <Label size="small">
+              {data.tekstIder.map(id => (
+                <FormattedMessage id={id} />
+              ))}
+            </Label>
+            <BodyShort size="small">
+              <DateLabel dateString={data.dato} />
+            </BodyShort>
+          </Timeline.Pin>
+        ))}
+        {radIder.map((radId, index) => (
+          <Timeline.Row
+            key={radId}
+            label={intl.formatMessage({ id: finnLabel(hovedsokerKjonnKode, medsokerKjonnKode, radIder.length, index) })}
+            icon={finnIkon(hovedsokerKjonnKode, medsokerKjonnKode, radIder.length, index)}
           >
-            {children}
-          </TimeLineControl>
-        </FlexColumn>
-      </FlexRow>
-    </FlexContainer>
+            {perioder
+              .filter(periode => periode.group === radId)
+              .map(periode => (
+                <Timeline.Period
+                  key={periode.id}
+                  start={periode.start}
+                  end={periode.end}
+                  status={periode.status}
+                  onSelectPeriod={() => setValgtPeriodeIndex(periode.id)}
+                  isActive={periode.id === valgtPeriode?.id}
+                  icon={PERIODE_STATUS_IKON_MAP[periode.status]}
+                />
+              ))}
+          </Timeline.Row>
+        ))}
+        <Timeline.Zoom>
+          <Timeline.Zoom.Button label="6 mnd" interval="month" count={6} />
+          <Timeline.Zoom.Button label="1 år" interval="year" count={1} />
+        </Timeline.Zoom>
+      </Timeline>
+      <VerticalSpacer thirtyTwoPx />
+      <FlexContainer>
+        <FlexRow>
+          <FlexColumn className={styles.ctrlCol}>
+            <TimeLineControl
+              goBackwardCallback={() => undefined}
+              goForwardCallback={() => undefined}
+              zoomInCallback={() => undefined}
+              zoomOutCallback={() => undefined}
+              openPeriodInfo={openPeriodInfo}
+              selectedPeriod={valgtPeriode}
+            >
+              {children}
+            </TimeLineControl>
+          </FlexColumn>
+        </FlexRow>
+      </FlexContainer>
+    </>
   );
 };
 

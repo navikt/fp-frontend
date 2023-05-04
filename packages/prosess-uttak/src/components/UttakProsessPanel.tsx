@@ -324,7 +324,6 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
         personoversikt={personoversikt}
         familiehendelse={familiehendelse}
         ytelsefordeling={ytelsefordeling}
-        alleKodeverk={alleKodeverk}
         tilknyttetStortinget={erTilknyttetStortinget}
       />
       {valgtPeriodeIndex !== undefined && (
