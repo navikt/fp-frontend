@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { dateFormat } from '@navikt/ft-utils';
-import { SuccessStroke, Error, FileError } from '@navikt/ds-icons';
+import { CheckmarkIcon, FileXMarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
 import { ExpandableTableRow, Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 
 import { DokumentasjonVurderingBehov, UttakVurdering, UttakÅrsak, UttakType } from '@navikt/fp-types';
@@ -114,7 +114,7 @@ const UttakDokumentasjonFaktaTable: FunctionComponent<OwnProps> = ({
             <TableColumn>
               {behov.vurdering === UttakVurdering.GODKJENT && (
                 <>
-                  <SuccessStroke />
+                  <CheckmarkIcon />
                   <div className={styles.ikon}>
                     <FormattedMessage id="UttakDokumentasjonFaktaTable.Godkjent" />
                   </div>
@@ -122,7 +122,7 @@ const UttakDokumentasjonFaktaTable: FunctionComponent<OwnProps> = ({
               )}
               {behov.vurdering === UttakVurdering.IKKE_GODKJENT && (
                 <>
-                  <Error />
+                  <XMarkOctagonIcon />
                   <div className={styles.ikon}>
                     <FormattedMessage id="UttakDokumentasjonFaktaTable.IkkeGodkjent" />
                   </div>
@@ -130,7 +130,7 @@ const UttakDokumentasjonFaktaTable: FunctionComponent<OwnProps> = ({
               )}
               {behov.vurdering === UttakVurdering.IKKE_DOKUMENTERT && (
                 <>
-                  <FileError />
+                  <FileXMarkIcon />
                   <div className={styles.ikon}>
                     <FormattedMessage id="UttakDokumentasjonFaktaTable.ManglerDok" />
                   </div>

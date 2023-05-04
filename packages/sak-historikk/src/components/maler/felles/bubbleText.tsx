@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useCallback, useState, KeyboardEvent } from 'react';
 import { useIntl } from 'react-intl';
-import { Expand, Collapse } from '@navikt/ds-icons';
+import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
 
 import styles from './bubbleText.module.css';
 
@@ -47,7 +47,7 @@ const BubbleText: FunctionComponent<OwnProps> = ({ cutOffLength = 83, bodyText =
         className={styles.clickableArea}
         title={intl.formatMessage({ id: expanded ? 'BubbleText.LukkeTekstfelt' : 'BubbleText.ApneTekstfelt' })}
       >
-        {expanded ? <Collapse /> : <Expand />}
+        {expanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
       </a>
     </>
   );

@@ -1,7 +1,7 @@
 import React, { useState, useRef, FunctionComponent, useCallback, useMemo, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Label } from '@navikt/ds-react';
-import { Next } from '@navikt/ds-icons';
+import { ChevronRightIcon } from '@navikt/aksel-icons';
 import { getDateAndTime } from '@navikt/ft-utils';
 import { Image, VerticalSpacer, Table, TableRow, TableColumn, DateLabel } from '@navikt/ft-ui-komponenter';
 import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
@@ -230,7 +230,7 @@ const OppgaverTabell: FunctionComponent<OwnProps> = ({
                   )}
                 </TableColumn>
                 <TableColumn className={oppgave.underBehandling ? styles.noPadding : undefined}>
-                  {!oppgave.underBehandling && <Next />}
+                  {!oppgave.underBehandling && <ChevronRightIcon />}
                   {oppgave.underBehandling && (
                     <div
                       ref={el => {

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, Table } from '@navikt/ds-react';
-import { NextFilled } from '@navikt/ds-icons';
+import { ChevronRightIcon } from '@navikt/aksel-icons';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import { finnYtelseTekst } from '../journalpost/innhold/VelgSakForm';
@@ -39,7 +39,7 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
       {!oppgave.journalpostHarMangler && (
         <Table.DataCell>
           <Button size="small" variant="tertiary" disabled={false} onClick={setOppgave} type="button">
-            <NextFilled className={styles.nesteIkon} />
+            <ChevronRightIcon className={styles.nesteIkon} />
           </Button>
         </Table.DataCell>
       )}
