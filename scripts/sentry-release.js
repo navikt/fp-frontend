@@ -33,4 +33,4 @@ async function opprettReleaseTilSentry() {
   }
 }
 
-await opprettReleaseTilSentry().catch(e => console.error('Noe gikk galt under source map-opplasting:', e));
+opprettReleaseTilSentry().catch(e => console.error('Noe gikk galt under source map-opplasting:', e));
