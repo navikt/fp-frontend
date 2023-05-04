@@ -35,6 +35,6 @@ enum DokumentTittel {
 
 export const listeMedTittler = Object.values(DokumentTittel)
   .filter(tittel => Number.isNaN(Number(tittel)))
-  .sort();
+  .sort((t1, t2) => t1.localeCompare(t2));
 
 export default DokumentTittel;
