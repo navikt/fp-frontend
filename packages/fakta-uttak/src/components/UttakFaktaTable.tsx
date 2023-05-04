@@ -160,7 +160,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
               size="small"
               variant="tertiary"
               type="button"
-              icon={<PlusCircleIcon title={intl.formatMessage({ id: 'UttakFaktaForm.LeggTilPeriode' })} />}
+              icon={<PlusCircleIcon />}
               onClick={() => {
                 velgPeriodeFomDato(undefined, true);
                 settVisNyPeriode(true);

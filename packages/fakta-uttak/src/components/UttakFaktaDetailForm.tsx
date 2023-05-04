@@ -229,7 +229,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                   size="small"
                   variant="tertiary"
                   type="button"
-                  icon={<TrashIcon title={intl.formatMessage({ id: 'UttakFaktaDetailForm.Slett' })} />}
+                  icon={<TrashIcon />}
                   onClick={() => settVisSletteDialog(true)}
                 >
                   <FormattedMessage id="UttakFaktaDetailForm.Slett" />
