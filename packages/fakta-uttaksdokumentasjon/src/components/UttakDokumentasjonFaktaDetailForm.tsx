@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
 import { BodyShort, Button, Label } from '@navikt/ds-react';
 import { required } from '@navikt/ft-form-validators';
-import { Edit } from '@navikt/ds-icons';
+import { PencilIcon } from '@navikt/aksel-icons';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Form, formHooks, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
@@ -179,7 +179,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
                       <Button
                         size="small"
                         variant="tertiary"
-                        icon={<Edit aria-hidden />}
+                        icon={<PencilIcon aria-hidden />}
                         onClick={() => settValgtPeriodeIndex(index)}
                         type="button"
                         disabled={!perioder[index].tom}

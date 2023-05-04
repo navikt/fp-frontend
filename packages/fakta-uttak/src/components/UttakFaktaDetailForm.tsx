@@ -5,7 +5,7 @@ import { useForm, UseFormGetValues } from 'react-hook-form';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { Datepicker, RadioGroupPanel, Form, SelectField, CheckboxField } from '@navikt/ft-form-hooks';
 import { FlexColumn, FlexContainer, FlexRow, OkAvbrytModal, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Delete } from '@navikt/ds-icons';
+import { TrashIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Label } from '@navikt/ds-react';
 import { omitMany } from '@navikt/ft-utils';
 
@@ -229,7 +229,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
                   size="small"
                   variant="tertiary"
                   type="button"
-                  icon={<Delete />}
+                  icon={<TrashIcon />}
                   onClick={() => settVisSletteDialog(true)}
                 >
                   <FormattedMessage id="UttakFaktaDetailForm.Slett" />

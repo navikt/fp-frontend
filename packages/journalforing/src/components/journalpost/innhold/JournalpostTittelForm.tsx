@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
 import { Heading, Button, CheckboxGroup, Checkbox } from '@navikt/ds-react';
-import { Edit } from '@navikt/ds-icons';
+import { PencilIcon } from '@navikt/aksel-icons';
 import { SelectField, InputField } from '@navikt/ft-form-hooks';
 import { hasValidText, required } from '@navikt/ft-form-validators';
 import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
@@ -18,7 +18,7 @@ type OwnProps = Readonly<{
  */
 const JournalpostTittelForm: FunctionComponent<OwnProps> = ({ journalpost }) => {
   const [kanRedigereTittel, setKanRedigereTittel] = useState(!journalpost.tittel);
-  const [harToggletFritekst, setHarToggletFritekst] = useState(false)
+  const [harToggletFritekst, setHarToggletFritekst] = useState(false);
   const toggleRedigering = useCallback(() => {
     setKanRedigereTittel(!kanRedigereTittel);
   }, [kanRedigereTittel]);
@@ -30,7 +30,7 @@ const JournalpostTittelForm: FunctionComponent<OwnProps> = ({ journalpost }) => 
 
   const endreFritekstToggle = useCallback(() => {
     setHarToggletFritekst(!harToggletFritekst);
-  }, [harToggletFritekst])
+  }, [harToggletFritekst]);
   return (
     <FlexRow>
       {kanRedigereTittel && (
@@ -63,7 +63,7 @@ const JournalpostTittelForm: FunctionComponent<OwnProps> = ({ journalpost }) => 
               onChange={endreFritekstToggle}
               value={[harToggletFritekst]}
             >
-              <Checkbox value >Fritekst</Checkbox>
+              <Checkbox value>Fritekst</Checkbox>
             </CheckboxGroup>
           </FlexColumn>
         </>
@@ -73,7 +73,7 @@ const JournalpostTittelForm: FunctionComponent<OwnProps> = ({ journalpost }) => 
           <Heading size="large">{journalpost.tittel}</Heading>
           {erKanalSomErÅpenForEndring(journalpost.kanal) && (
             <Button
-              icon={<Edit />}
+              icon={<PencilIcon aria-hidden />}
               className={styles.editButton}
               onClick={toggleRedigering}
               type="button"

@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect, useState, useCallback } from 'reac
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import { Heading, Link } from '@navikt/ds-react';
-import { Back } from '@navikt/ds-icons';
+import { ChevronLeftIcon } from '@navikt/aksel-icons';
 import { NavAnsatt } from '@navikt/fp-types';
 import { FlexColumn, FlexContainer, FlexRow, LoadingPanel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
@@ -61,17 +61,20 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
     RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING,
   );
 
-  const journalførCallback = useCallback((data: JournalførSubmitValue) => {
-    setIsLoadingSubmit(true);
-    setVisModal(true);
-    submitJournalføring(data).then(() => {
-      if (navAnsatt?.brukernavn) {
-        innhentAlleOppgaver({ ident: navAnsatt.brukernavn });
-      }
-      avbrytVisningAvJournalpost();
-      setIsLoadingSubmit(false);
-    });
-  }, [valgtOppgave]);
+  const journalførCallback = useCallback(
+    (data: JournalførSubmitValue) => {
+      setIsLoadingSubmit(true);
+      setVisModal(true);
+      submitJournalføring(data).then(() => {
+        if (navAnsatt?.brukernavn) {
+          innhentAlleOppgaver({ ident: navAnsatt.brukernavn });
+        }
+        avbrytVisningAvJournalpost();
+        setIsLoadingSubmit(false);
+      });
+    },
+    [valgtOppgave],
+  );
 
   useEffect(() => {
     if (navAnsatt && harTilgangTilÅBrukeJournalføring(navAnsatt)) {
@@ -94,7 +97,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
       <div className={styles.header}>
         {valgtOppgave && (
           <Link onClick={avbrytVisningAvJournalpost} className={styles.link}>
-            <Back />
+            <ChevronLeftIcon />
             <FormattedMessage id="Journalforing.Oversikt" />
           </Link>
         )}

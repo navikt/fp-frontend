@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo, ReactElement } from 'react';
 import { BodyShort, Heading } from '@navikt/ds-react';
 import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
-import { Office1, Female, Male, Neutral } from '@navikt/ds-icons';
+import { Buldings3Icon, FigureInwardIcon, SilhouetteIcon, FigureOutwardIcon } from '@navikt/aksel-icons';
 import { CopyToClipboard } from '@navikt/ds-react-internal';
 import { FormattedMessage } from 'react-intl';
 import styles from './brukerAvsenderPanel.module.css';
@@ -10,24 +10,24 @@ import Journalpost from '../../../typer/journalpostTsType';
 const finnKjønnBilde = (journalpost: Journalpost): ReactElement => {
   const fnr = journalpost.bruker?.fnr;
   if (!fnr || fnr.length !== 11) {
-    return <Neutral className={styles.ikon} />;
+    return <SilhouetteIcon className={styles.ikon} />;
   }
   const tall = parseInt(fnr.charAt(8), 10);
-  return tall % 2 === 0 ? <Female className={styles.ikon} /> : <Male className={styles.ikon} />;
+  return tall % 2 === 0 ? <FigureOutwardIcon className={styles.ikon} /> : <FigureInwardIcon className={styles.ikon} />;
 };
 
 const finnAvsenderBilde = (journalpost: Journalpost): ReactElement => {
   const avsenderId = journalpost.avsender?.id;
   if (!avsenderId) {
-    return <Neutral className={styles.ikon} />;
+    return <SilhouetteIcon className={styles.ikon} />;
   }
   if (avsenderId.length === 9) {
-    return <Office1 className={styles.ikon} />;
+    return <Buldings3Icon className={styles.ikon} />;
   }
   if (avsenderId.length === 11) {
     return finnKjønnBilde(journalpost);
   }
-  return <Neutral className={styles.ikon} />;
+  return <SilhouetteIcon className={styles.ikon} />;
 };
 
 const lagBrukerAvsenderRad = (navn: string, id: string, ikon: ReactElement, title: string): ReactElement => (
@@ -40,9 +40,7 @@ const lagBrukerAvsenderRad = (navn: string, id: string, ikon: ReactElement, titl
       </FlexColumn>
     </FlexRow>
     <FlexRow>
-      <FlexColumn className={styles.ikonKol}>
-        {ikon}
-      </FlexColumn>
+      <FlexColumn className={styles.ikonKol}>{ikon}</FlexColumn>
       <FlexColumn>
         <FlexRow>
           <FlexColumn>
@@ -54,7 +52,7 @@ const lagBrukerAvsenderRad = (navn: string, id: string, ikon: ReactElement, titl
             <BodyShort>{id}</BodyShort>
           </FlexColumn>
           <FlexColumn className={styles.clipBoard}>
-            <CopyToClipboard size="small" copyText={id} popoverText="Kopiert" type='button' />
+            <CopyToClipboard size="small" copyText={id} popoverText="Kopiert" type="button" />
           </FlexColumn>
         </FlexRow>
       </FlexColumn>
@@ -75,13 +73,16 @@ const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({ journalpost }) => {
   return (
     <div className={styles.brukerAvsenderRad}>
       {journalpost.bruker?.navn && (
-        <>
-          {lagBrukerAvsenderRad(journalpost.bruker.navn, journalpost.bruker.fnr, brukerBilde, 'ValgtOppgave.Bruker')}
-        </>
+        <>{lagBrukerAvsenderRad(journalpost.bruker.navn, journalpost.bruker.fnr, brukerBilde, 'ValgtOppgave.Bruker')}</>
       )}
       {journalpost.avsender?.navn && (
         <>
-          {lagBrukerAvsenderRad(journalpost.avsender.navn, journalpost.avsender.id, avsenderBilde, 'ValgtOppgave.Avsender')}
+          {lagBrukerAvsenderRad(
+            journalpost.avsender.navn,
+            journalpost.avsender.id,
+            avsenderBilde,
+            'ValgtOppgave.Avsender',
+          )}
         </>
       )}
     </div>

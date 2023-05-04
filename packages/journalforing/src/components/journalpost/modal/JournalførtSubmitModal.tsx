@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Modal, Button, BodyShort, Link } from '@navikt/ds-react';
-import { SuccessFilled } from '@navikt/ds-icons';
+import { CheckmarkCircleIcon } from '@navikt/aksel-icons';
 
 import { FlexColumn, FlexRow, LoadingPanel } from '@navikt/ft-ui-komponenter';
 import SaksnummerType from '../../../typer/saksnummerTsType';
@@ -13,18 +13,13 @@ type OwnProps = Readonly<{
   saksnummer?: SaksnummerType;
   lukkModal: () => void;
   showModal: boolean;
-  isLoading: boolean
+  isLoading: boolean;
 }>;
 
 /**
  * JournalførtSubmitModal - Viser modal som gir saksnummer journalposten ble ført på
  */
-const JournalførtSubmitModal: FunctionComponent<OwnProps> = ({
-  saksnummer,
-  lukkModal,
-  showModal,
-  isLoading
-}) => {
+const JournalførtSubmitModal: FunctionComponent<OwnProps> = ({ saksnummer, lukkModal, showModal, isLoading }) => {
   if (!showModal) {
     return null;
   }
@@ -57,13 +52,16 @@ const JournalførtSubmitModal: FunctionComponent<OwnProps> = ({
         <>
           <FlexRow className={styles.sentrerRad}>
             <FlexColumn>
-              <SuccessFilled className={styles.ferdigIkon} />
+              <CheckmarkCircleIcon className={styles.ferdigIkon} />
             </FlexColumn>
           </FlexRow>
           <FlexRow className={styles.sentrerRad}>
             <FlexColumn>
               <BodyShort>
-                <FormattedMessage id="Journalfør.Modal.Journalført" /> <Link target="_blank" rel="noreferrer" href={lenke}>{saksnummer?.saksnummer}</Link>
+                <FormattedMessage id="Journalfør.Modal.Journalført" />{' '}
+                <Link target="_blank" rel="noreferrer" href={lenke}>
+                  {saksnummer?.saksnummer}
+                </Link>
               </BodyShort>
             </FlexColumn>
           </FlexRow>
