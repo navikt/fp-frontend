@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import { Table, ExpandableTableRow, TableColumn, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
 import { Button, Heading } from '@navikt/ds-react';
-import { AddCircle } from '@navikt/ds-icons';
+import { PlusCircleIcon } from '@navikt/aksel-icons';
 
 import { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
 import { KodeverkType } from '@navikt/fp-kodeverk';
@@ -160,7 +160,7 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
               size="small"
               variant="tertiary"
               type="button"
-              icon={<AddCircle />}
+              icon={<PlusCircleIcon title={intl.formatMessage({ id: 'UttakFaktaForm.LeggTilPeriode' })} />}
               onClick={() => {
                 velgPeriodeFomDato(undefined, true);
                 settVisNyPeriode(true);

@@ -1,6 +1,6 @@
 import React, { Fragment, FunctionComponent, useMemo } from 'react';
 import dayjs from 'dayjs';
-import { Next } from '@navikt/ds-icons';
+import { ChevronRightIcon } from '@navikt/aksel-icons';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Table, TableRow, TableColumn, DateLabel } from '@navikt/ft-ui-komponenter';
 import { FagsakStatus, KodeverkType } from '@navikt/ft-kodeverk';
@@ -94,7 +94,7 @@ const FagsakList: FunctionComponent<OwnProps> = ({ fagsaker, fagsakOppgaver, åp
             </TableColumn>
             <TableColumn>{fagsak.barnFødt ? <DateLabel dateString={fagsak.barnFødt} /> : null}</TableColumn>
             <TableColumn>
-              <Next />
+              <ChevronRightIcon />
             </TableColumn>
           </TableRow>
         ));
@@ -113,7 +113,7 @@ const FagsakList: FunctionComponent<OwnProps> = ({ fagsaker, fagsakOppgaver, åp
               <TableColumn>{fagsakStatusType ? fagsakStatusType.navn : ''}</TableColumn>
               <TableColumn>{fagsak.barnFødt ? <DateLabel dateString={fagsak.barnFødt} /> : null}</TableColumn>
               <TableColumn>
-                <Next />
+                <ChevronRightIcon />
               </TableColumn>
             </TableRow>
             {oppgaver.length > 0 && oppgaver}

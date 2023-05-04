@@ -1,14 +1,15 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
 import { Label, Button, CheckboxGroup, Checkbox } from '@navikt/ds-react';
 import { hasValidText, required } from '@navikt/ft-form-validators';
-import { NewTab, Edit } from '@navikt/ds-icons';
+import { TabsAddIcon, PencilIcon } from '@navikt/aksel-icons';
 import { InputField, SelectField } from '@navikt/ft-form-hooks';
 import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 import JournalDokument from '../../../typer/journalDokumentTsType';
-import styles from './dokumentDetaljer.module.css';
 import { listeMedTittler } from '../../../kodeverk/dokumentTittel';
 import { erKanalSomErÅpenForEndring } from '../../../kodeverk/journalKanal';
 import Journalpost from '../../../typer/journalpostTsType';
+
+import styles from './dokumentDetaljer.module.css';
 
 type OwnProps = Readonly<{
   dokument: JournalDokument;
@@ -21,7 +22,7 @@ type OwnProps = Readonly<{
  */
 const DokumentDetaljer: FunctionComponent<OwnProps> = ({ dokument, docFieldIndex, journalpost }) => {
   const [kanRedigeres, setSkalRedigeres] = useState<boolean>(!dokument.tittel);
-  const [harToggletFritekst, setHarToggletFritekst] = useState(false)
+  const [harToggletFritekst, setHarToggletFritekst] = useState(false);
   const tittler = listeMedTittler.map(tittel => (
     <option value={tittel} key={tittel}>
       {tittel}
@@ -30,7 +31,7 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({ dokument, docFieldIndex
 
   const endreFritekstToggle = useCallback(() => {
     setHarToggletFritekst(!harToggletFritekst);
-  }, [harToggletFritekst])
+  }, [harToggletFritekst]);
 
   const toggleRedigering = useCallback(() => {
     setSkalRedigeres(!kanRedigeres);
@@ -69,7 +70,7 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({ dokument, docFieldIndex
                   onChange={endreFritekstToggle}
                   value={[harToggletFritekst]}
                 >
-                  <Checkbox value >Fritekst</Checkbox>
+                  <Checkbox value>Fritekst</Checkbox>
                 </CheckboxGroup>
               </FlexColumn>
             </FlexColumn>
@@ -80,7 +81,7 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({ dokument, docFieldIndex
             <Label className={styles.dokLab}>{dokument.tittel}</Label>
             {erKanalSomErÅpenForEndring(journalpost.kanal) && (
               <Button
-                icon={<Edit />}
+                icon={<PencilIcon aria-hidden />}
                 className={styles.editButton}
                 onClick={toggleRedigering}
                 type="button"
@@ -90,10 +91,17 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({ dokument, docFieldIndex
           </FlexColumn>
         )}
         <FlexColumn className={styles.dokLenke}>
-          <Button as="a" href={dokument.lenke} target="_blank" rel="noreferrer" variant="tertiary" icon={<NewTab className={styles.newTabIcon} />} />
+          <Button
+            as="a"
+            href={dokument.lenke}
+            target="_blank"
+            rel="noreferrer"
+            variant="tertiary"
+            icon={<TabsAddIcon aria-hidden className={styles.newTabIcon} />}
+          />
         </FlexColumn>
       </FlexRow>
-    </div >
+    </div>
   );
 };
 export default DokumentDetaljer;

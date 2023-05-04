@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link } from '@navikt/ds-react';
-import { Collapse, Expand } from '@navikt/ds-icons';
+import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
 
 import { DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { InnsynVedtaksdokument, KodeverkMedNavn } from '@navikt/fp-types';
@@ -12,11 +12,6 @@ interface OwnProps {
   vedtaksdokumenter: InnsynVedtaksdokument[];
 }
 
-/**
- * VedtakDocuments
- *
- * Presentasjonskomponent.
- */
 const VedtakDocuments: FunctionComponent<OwnProps> = ({ vedtaksdokumenter, behandlingTypes }) => {
   const [showDocuments, setShowDocuments] = useState(false);
   const toggleDocuments = useCallback(
@@ -38,7 +33,7 @@ const VedtakDocuments: FunctionComponent<OwnProps> = ({ vedtaksdokumenter, behan
           id="DocumentListInnsyn.Vedtaksdokumentasjon"
           values={{ numberOfDocuments: vedtaksdokumenter.length }}
         />
-        {showDocuments ? <Expand /> : <Collapse />}
+        {showDocuments ? <ChevronDownIcon /> : <ChevronUpIcon />}
       </Link>
       {showDocuments && (
         <>
