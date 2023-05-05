@@ -78,7 +78,7 @@
     "gh-pages": "5.0.0",
     "husky": "8.0.3",
     "jsdom": "22.0.0",
-    "lerna": "6.6.1",
+    "lerna": "6.6.2",
     "lint-staged": "13.2.2",
     "react-test-renderer": "18.2.0",
     "stylelint": "15.6.1",
