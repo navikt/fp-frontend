@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactElement, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import moment from 'moment';
-import { Label, BodyShort } from '@navikt/ds-react';
+import { Label, BodyShort, Button, Panel } from '@navikt/ds-react';
 
 import { KodeverkType, aktivitetStatus, uttakPeriodeNavn, getKodeverknavnFn } from '@navikt/fp-kodeverk';
 import {
@@ -14,7 +14,6 @@ import {
   FlexColumn,
 } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import { TimeLineButton, TimeLineDataContainer } from '@navikt/ft-tidslinje';
 import {
   ArbeidsgiverOpplysningerPerId,
   BeregningsresultatPeriodeAndel,
@@ -22,9 +21,8 @@ import {
   BeregningsresultatPeriode,
 } from '@navikt/fp-types';
 
-import styles from './tilkjentYtelse.module.css';
-
-export type PeriodeMedId = BeregningsresultatPeriode & { id: number };
+import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
+import styles from './tilkjentYtelseTimelineData.module.css';
 
 const getEndCharFromId = (id: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
@@ -103,14 +101,13 @@ const getGradering = (andel?: BeregningsresultatPeriodeAndel): ReactElement | nu
 };
 
 interface OwnProps {
-  selectedItemStartDate: string;
-  selectedItemEndDate: string;
-  selectedItemData?: PeriodeMedId;
+  selectedItemData?: BeregningsresultatPeriode;
   callbackForward: (...args: any[]) => any;
   callbackBackward: (...args: any[]) => any;
   alleKodeverk: AlleKodeverk;
   isSoknadSvangerskapspenger: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  lukkPeriode: () => void;
 }
 
 /**
@@ -119,23 +116,22 @@ interface OwnProps {
  * Viser opp data fra valgt periode i tilkjent ytelse-tidslinjen
  */
 const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
-  selectedItemStartDate,
-  selectedItemEndDate,
   selectedItemData,
   callbackForward,
   callbackBackward,
   alleKodeverk,
   isSoknadSvangerskapspenger,
   arbeidsgiverOpplysningerPerId,
+  lukkPeriode,
 }) => {
-  const numberOfDaysAndWeeks = calcDaysAndWeeks(selectedItemStartDate, selectedItemEndDate);
+  const numberOfDaysAndWeeks = calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom);
   const intl = useIntl();
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
 
   return (
-    <TimeLineDataContainer>
+    <Panel border>
       <FlexContainer>
         <FlexRow>
           <FlexColumn>
@@ -144,15 +140,32 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
             </Label>
           </FlexColumn>
           <FlexColumn className={styles.ctrlCol}>
-            <TimeLineButton
-              text={intl.formatMessage({ id: 'Timeline.prevPeriod' })}
-              type="prev"
-              callback={callbackBackward}
-            />
-            <TimeLineButton
-              text={intl.formatMessage({ id: 'Timeline.nextPeriod' })}
-              type="next"
-              callback={callbackForward}
+            <Button
+              className={styles.margin}
+              size="small"
+              icon={<ArrowLeftIcon aria-hidden />}
+              onClick={callbackBackward}
+              variant="secondary-neutral"
+              title={intl.formatMessage({ id: 'Timeline.prevPeriod' })}
+            >
+              <FormattedMessage id="Timeline.prevPeriodShort" />
+            </Button>
+            <Button
+              className={styles.margin}
+              size="small"
+              icon={<ArrowRightIcon aria-hidden />}
+              onClick={callbackForward}
+              variant="secondary-neutral"
+              title={intl.formatMessage({ id: 'Timeline.nextPeriod' })}
+            >
+              <FormattedMessage id="Timeline.nextPeriodShort" />
+            </Button>
+            <Button
+              size="small"
+              icon={<XMarkIcon aria-hidden />}
+              onClick={lukkPeriode}
+              variant="secondary-neutral"
+              title={intl.formatMessage({ id: 'Timeline.lukkPeriode' })}
             />
           </FlexColumn>
         </FlexRow>
@@ -164,8 +177,8 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
                 <FormattedMessage
                   id="TilkjentYtelse.PeriodeData.Periode"
                   values={{
-                    fomVerdi: moment(selectedItemStartDate).format(DDMMYYYY_DATE_FORMAT).toString(),
-                    tomVerdi: moment(selectedItemEndDate).format(DDMMYYYY_DATE_FORMAT).toString(),
+                    fomVerdi: moment(selectedItemData.fom).format(DDMMYYYY_DATE_FORMAT).toString(),
+                    tomVerdi: moment(selectedItemData.tom).format(DDMMYYYY_DATE_FORMAT).toString(),
                   }}
                 />
               </Label>
@@ -221,7 +234,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
           ))}
         </Table>
       )}
-    </TimeLineDataContainer>
+    </Panel>
   );
 };
 

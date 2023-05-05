@@ -68,15 +68,29 @@ const beregningresultat = {
           arbeidsforholdType: arbeidsforholdHandlingType.NYTT_ARBEIDSFORHOLD,
         },
       ],
-      fom: '2019-01-01',
+      fom: '2018-01-01',
       tom: '2019-01-10',
       dagsats: 1000,
+    },
+    {
+      andeler: [
+        {
+          uttak: {
+            stonadskontoType: StonadskontoType.FORELDREPENGER,
+          },
+          aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
+          arbeidsforholdType: arbeidsforholdHandlingType.NYTT_ARBEIDSFORHOLD,
+        },
+      ],
+      fom: '2019-02-01',
+      tom: '2019-06-10',
+      dagsats: 100,
     },
   ],
 } as BeregningsresultatFp;
 
 const soknad = {
-  mottattDato: '2019-01-01',
+  mottattDato: '2019-01-10',
   soknadType: soknadType.FODSEL,
   omsorgsovertakelseDato: '2019-01-10',
   fodselsdatoer: {

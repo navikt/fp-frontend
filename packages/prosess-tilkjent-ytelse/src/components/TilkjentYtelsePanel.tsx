@@ -1,15 +1,12 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import moment from 'moment/moment';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 
-import { fagsakYtelseType, soknadType, AksjonspunktCode } from '@navikt/fp-kodeverk';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { fagsakYtelseType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
   BeregningsresultatFp,
-  BeregningsresultatPeriode,
   Feriepengegrunnlag,
   AlleKodeverk,
   Personoversikt,
@@ -23,34 +20,6 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import Tilbaketrekkpanel, { FormValues } from './tilbaketrekk/Tilbaketrekkpanel';
 import FeriepengerIndex from './feriepenger/FeriepengerIndex';
 import TilkjentYtelse from './TilkjentYtelse';
-import { PeriodeMedId } from './TilkjentYtelseTimelineData';
-
-const formatPerioder = (perioder: BeregningsresultatPeriode[]): PeriodeMedId[] =>
-  perioder
-    .filter(periode => periode.andeler[0] && periode.dagsats)
-    .map((periode, index: number) => ({
-      ...periode,
-      id: index,
-    }));
-
-const groups = [
-  { id: 1, content: '' },
-  { id: 2, content: '' },
-];
-
-const parseDateString = (dateString: string): Date => moment(dateString, ISO_DATE_FORMAT).toDate();
-
-const getFamilieHendelseDato = (familieHendelseSamling: FamilieHendelseSamling): Date => {
-  const familieHendelse = familieHendelseSamling.gjeldende || familieHendelseSamling.oppgitt;
-  if (familieHendelse.soknadType === soknadType.FODSEL) {
-    if (familieHendelse.avklartBarn && familieHendelse.avklartBarn.length > 0) {
-      return parseDateString(familieHendelse.avklartBarn[0].fodselsdato);
-    }
-    return parseDateString(familieHendelse.termindato);
-  }
-
-  return parseDateString(familieHendelse.omsorgsovertakelseDato || familieHendelse.adopsjonFodelsedatoer[0]);
-};
 
 const finnTilbaketrekkAksjonspunkt = (alleAksjonspunkter: Aksjonspunkt[]): Aksjonspunkt | undefined =>
   alleAksjonspunkter
@@ -90,8 +59,6 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
   formData,
   setFormData,
 }) => {
-  const intl = useIntl();
-  const familiehendelseDato = useMemo(() => getFamilieHendelseDato(familieHendelseSamling), [familieHendelseSamling]);
   const vurderTilbaketrekkAP = useMemo(() => finnTilbaketrekkAksjonspunkt(aksjonspunkter), [aksjonspunkter]);
   const soknadMottattDato = soknad.søknadsfrist?.mottattDato ? soknad.søknadsfrist?.mottattDato : soknad.mottattDato;
   return (
@@ -102,11 +69,9 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
       <VerticalSpacer thirtyTwoPx />
       {beregningresultat && (
         <TilkjentYtelse
-          intl={intl}
-          items={formatPerioder(beregningresultat.perioder)}
-          groups={groups}
+          beregningsresultatPeriode={beregningresultat.perioder}
           soknadDate={soknadMottattDato}
-          familiehendelseDate={familiehendelseDato}
+          familieHendelseSamling={familieHendelseSamling}
           hovedsokerKjonnKode={personoversikt?.bruker ? (personoversikt.bruker.kjønn as Kjønnkode) : undefined}
           isSoknadSvangerskapspenger={fagsakYtelseTypeKode === fagsakYtelseType.SVANGERSKAPSPENGER}
           alleKodeverk={alleKodeverk}
