@@ -3,16 +3,13 @@ import { Timeline } from '@navikt/ds-react-internal';
 import dayjs from 'dayjs';
 import { BodyShort, Label } from '@navikt/ds-react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { ExclamationmarkTriangleIcon, CheckmarkCircleIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
+import { DoorOpenIcon, CheckmarkCircleIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
 
-import { TimeLineButton, TimeLineNavigation } from '@navikt/ft-tidslinje';
 import { FastsattOpptjeningAktivitet } from '@navikt/fp-types';
 
 import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import opptjeningAktivitetKlassifisering from '../kodeverk/opptjeningAktivitetKlassifisering';
 import TimeLineData from './TimeLineData';
-
-import styles from './opptjeningTimeLineLight.module.css';
 
 type Periode = {
   start: Date;
@@ -24,7 +21,7 @@ type Periode = {
 const PERIODE_STATUS_IKON_MAP = {
   danger: <XMarkOctagonIcon />,
   success: <CheckmarkCircleIcon />,
-  warning: <ExclamationmarkTriangleIcon />,
+  info: <DoorOpenIcon />,
 } as Record<string, React.ReactElement>;
 
 const getStatus = (klasseKode: string): 'success' | 'danger' | 'info' => {
@@ -52,6 +49,13 @@ const lagTidslinjePerioder = (opptjeningsperioder: FastsattOpptjeningAktivitet[]
       opptjeningsperiode,
     }),
   );
+
+const finnTitle = (status: 'success' | 'danger' | 'info'): string => {
+  if (status === 'info') {
+    return 'OpptjeningTimeLineLight.MellomliggendePeriode';
+  }
+  return status === 'success' ? 'OpptjeningTimeLineLight.Godkjent' : 'OpptjeningTimeLineLight.Avslatt';
+};
 
 interface OwnProps {
   opptjeningPeriods: FastsattOpptjeningAktivitet[];
@@ -81,45 +85,27 @@ const OpptjeningTimeLineLight: FunctionComponent<OwnProps> = ({
     }
   };
 
-  const åpnePeriodeinfo = useCallback(
-    (event: React.MouseEvent | React.KeyboardEvent): void => {
-      event.preventDefault();
-      if (valgtPeriod) {
-        setValgtPeriode(undefined);
-      } else if (perioder) {
-        setValgtPeriode(perioder[0]);
-      }
-    },
-    [valgtPeriod, setValgtPeriode, perioder],
-  );
+  const lukkPeriode = useCallback((): void => {
+    setValgtPeriode(undefined);
+  }, []);
 
-  const velgNestePeriode = useCallback(
-    (event: React.MouseEvent | React.KeyboardEvent): void => {
-      event.preventDefault();
-      if (perioder) {
-        const nyIndex =
-          perioder.findIndex(oa => oa.opptjeningsperiode?.fom === valgtPeriod?.opptjeningsperiode?.fom) + 1;
-        if (nyIndex < perioder.length - 2) {
-          setValgtPeriode(perioder[nyIndex]);
-        }
+  const velgNestePeriode = useCallback((): void => {
+    if (perioder) {
+      const nyIndex = perioder.findIndex(oa => oa.opptjeningsperiode?.fom === valgtPeriod?.opptjeningsperiode?.fom) + 1;
+      if (nyIndex < perioder.length) {
+        setValgtPeriode(perioder[nyIndex]);
       }
-    },
-    [perioder, valgtPeriod, setValgtPeriode],
-  );
+    }
+  }, [perioder, valgtPeriod, setValgtPeriode]);
 
-  const velgForrigePeriode = useCallback(
-    (event: React.MouseEvent | React.KeyboardEvent): void => {
-      event.preventDefault();
-      if (perioder) {
-        const nyIndex =
-          perioder.findIndex(oa => oa.opptjeningsperiode?.fom === valgtPeriod?.opptjeningsperiode?.fom) - 1;
-        if (nyIndex >= 0) {
-          setValgtPeriode(perioder[nyIndex]);
-        }
+  const velgForrigePeriode = useCallback((): void => {
+    if (perioder) {
+      const nyIndex = perioder.findIndex(oa => oa.opptjeningsperiode?.fom === valgtPeriod?.opptjeningsperiode?.fom) - 1;
+      if (nyIndex >= 0) {
+        setValgtPeriode(perioder[nyIndex]);
       }
-    },
-    [perioder, valgtPeriod, setValgtPeriode],
-  );
+    }
+  }, [perioder, valgtPeriod, setValgtPeriode]);
 
   return (
     <>
@@ -130,10 +116,18 @@ const OpptjeningTimeLineLight: FunctionComponent<OwnProps> = ({
       >
         <Timeline.Pin date={dayjs(opptjeningFomDate).toDate()}>
           <Label size="small">
-            <FormattedMessage id="OpptjeningTimeLineLight.SluttDato" />
+            <FormattedMessage id="OpptjeningTimeLineLight.StartDato" />
           </Label>
           <BodyShort size="small">
             <DateLabel dateString={opptjeningFomDate} />
+          </BodyShort>
+        </Timeline.Pin>
+        <Timeline.Pin date={dayjs(opptjeningTomDate).toDate()}>
+          <Label size="small">
+            <FormattedMessage id="OpptjeningTimeLineLight.SluttDato" />
+          </Label>
+          <BodyShort size="small">
+            <DateLabel dateString={opptjeningTomDate} />
           </BodyShort>
         </Timeline.Pin>
         <Timeline.Row label="">
@@ -146,36 +140,20 @@ const OpptjeningTimeLineLight: FunctionComponent<OwnProps> = ({
               onSelectPeriod={() => velgPeriode(periode.opptjeningsperiode?.fom)}
               isActive={valgtPeriod?.opptjeningsperiode?.fom === periode.opptjeningsperiode?.fom}
               icon={PERIODE_STATUS_IKON_MAP[periode.status]}
-            >
-              {valgtPeriod?.opptjeningsperiode && (
-                <TimeLineData fastsattOpptjeningAktivitet={valgtPeriod.opptjeningsperiode} />
-              )}
-            </Timeline.Period>
+              title={intl.formatMessage({ id: finnTitle(periode.status) })}
+            />
           ))}
         </Timeline.Row>
-        <Timeline.Pin date={dayjs(opptjeningTomDate).toDate()}>
-          <Label size="small">
-            <FormattedMessage id="OpptjeningTimeLineLight.StartDato" />
-          </Label>
-          <BodyShort size="small">
-            <DateLabel dateString={opptjeningTomDate} />
-          </BodyShort>
-        </Timeline.Pin>
       </Timeline>
       <VerticalSpacer sixteenPx />
-      <div className={styles.floatRight}>
-        <TimeLineButton
-          text={intl.formatMessage({ id: 'TimeLineData.prevPeriod' })}
-          type="prev"
-          callback={velgForrigePeriode}
+      {valgtPeriod?.opptjeningsperiode && (
+        <TimeLineData
+          fastsattOpptjeningAktivitet={valgtPeriod.opptjeningsperiode}
+          lukkPeriode={lukkPeriode}
+          velgNestePeriode={velgNestePeriode}
+          velgForrigePeriode={velgForrigePeriode}
         />
-        <TimeLineButton
-          text={intl.formatMessage({ id: 'TimeLineData.nextPeriod' })}
-          type="next"
-          callback={velgNestePeriode}
-        />
-        <TimeLineNavigation openPeriodInfo={åpnePeriodeinfo} />
-      </div>
+      )}
     </>
   );
 };

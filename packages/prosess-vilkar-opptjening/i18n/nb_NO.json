@@ -16,11 +16,17 @@
 
   "OpptjeningTimeLineLight.StartDato": "Start opptjeningsperiode",
   "OpptjeningTimeLineLight.SluttDato": "Slutt opptjeningsperiode",
+  "OpptjeningTimeLineLight.MellomliggendePeriode": "Mellomliggende periode",
+  "OpptjeningTimeLineLight.Godkjent": "Godkjent",
+  "OpptjeningTimeLineLight.Avslatt": "Avslått",
 
   "TimeLineNavigation.openData": "Åpne info om første periode",
   "TimeLineData.nextPeriod": "Neste periode",
   "TimeLineData.prevPeriod": "Forrige periode",
   "Timeline.openData": "Åpne info om første periode",
+  "TimeLineData.lukkPeriode": "Lukk periode",
+  "TimeLineData.nextPeriodShort": "Neste",
+  "TimeLineData.prevPeriodShort": "Forrige",
 
   "ShowVilkarStatus.Check": "Informasjonen er utfylt"
 }

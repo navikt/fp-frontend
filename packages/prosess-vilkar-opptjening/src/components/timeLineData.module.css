@@ -2,18 +2,6 @@
   margin-right: 6px;
 }
 
-.colWidth {
-  width: 50%;
-}
-
-.godkjent {
-  background-color: var(--a-green-200);
-  padding: 10px;
-  width: 50%;
-}
-
-.avvist {
-  background-color: var(--a-red-200);
-  padding: 10px;
-  width: 50%;
+.margin {
+  margin-right: 5px;
 }

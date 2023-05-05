@@ -127,6 +127,7 @@ const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
                 icon={<ArrowLeftIcon aria-hidden />}
                 onClick={velgForrigeAktivitet}
                 variant="secondary-neutral"
+                type="button"
                 title={intl.formatMessage({ id: 'Timeline.prevPeriod' })}
               >
                 <FormattedMessage id="Timeline.prevPeriodShort" />
@@ -137,6 +138,7 @@ const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
                 icon={<ArrowRightIcon aria-hidden />}
                 onClick={velgNesteAktivitet}
                 variant="secondary-neutral"
+                type="button"
                 title={intl.formatMessage({ id: 'Timeline.nextPeriod' })}
               >
                 <FormattedMessage id="Timeline.nextPeriodShort" />
@@ -146,6 +148,7 @@ const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
                 icon={<XMarkIcon aria-hidden />}
                 onClick={lukkPeriode}
                 variant="secondary-neutral"
+                type="button"
                 title={intl.formatMessage({ id: 'Timeline.lukkPeriode' })}
               />
             </FlexColumn>

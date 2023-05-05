@@ -11,7 +11,7 @@ import {
   ProsessStegBegrunnelseTextFieldNew,
   ProsessPanelTemplate,
 } from '@navikt/fp-prosess-felles';
-import { Aksjonspunkt, Behandling, FastsattOpptjening } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandling, Behandlingsresultat, FastsattOpptjening } from '@navikt/fp-types';
 import { AvklarOpptjeningsvilkaretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import OpptjeningVilkarView from './OpptjeningVilkarView';
@@ -26,7 +26,7 @@ export type FormValues = {
 export const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
   status: string,
-  behandlingsresultat?: Behandling['behandlingsresultat'],
+  behandlingsresultat?: Behandlingsresultat,
 ): FormValues => ({
   ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),

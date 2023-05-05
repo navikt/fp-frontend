@@ -207,6 +207,7 @@ const TilkjentYtelse: FunctionComponent<OwnProps> = ({
           icon={<PlusIcon aria-hidden />}
           onClick={zoomIn}
           variant="primary-neutral"
+          type="button"
           title={intl.formatMessage({ id: 'TilkjentYtelse.ZoomInn' })}
         />
         <Button
@@ -215,6 +216,7 @@ const TilkjentYtelse: FunctionComponent<OwnProps> = ({
           icon={<MinusIcon aria-hidden />}
           onClick={zoomOut}
           variant="primary-neutral"
+          type="button"
           title={intl.formatMessage({ id: 'TilkjentYtelse.ZoomUt' })}
         />
         <Button
@@ -223,6 +225,7 @@ const TilkjentYtelse: FunctionComponent<OwnProps> = ({
           icon={<ArrowLeftIcon aria-hidden />}
           onClick={goBackward}
           variant="primary-neutral"
+          type="button"
           title={intl.formatMessage({ id: 'TilkjentYtelse.ScrollTilVenstre' })}
         />
         <Button
@@ -231,6 +234,7 @@ const TilkjentYtelse: FunctionComponent<OwnProps> = ({
           icon={<ArrowRightIcon aria-hidden />}
           onClick={goForward}
           variant="primary-neutral"
+          type="button"
           title={intl.formatMessage({ id: 'TilkjentYtelse.ScrollTilHogre' })}
         />
       </FloatRight>
