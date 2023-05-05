@@ -2621,7 +2621,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -2659,7 +2659,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -2693,7 +2693,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -2729,7 +2729,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -2758,7 +2758,7 @@ __metadata:
     react-intl: 6.4.2
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -2795,7 +2795,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -2832,7 +2832,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -2868,7 +2868,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -2904,7 +2904,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -2942,7 +2942,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -2980,7 +2980,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3021,7 +3021,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3058,7 +3058,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3094,7 +3094,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3132,7 +3132,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3167,7 +3167,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3201,7 +3201,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3232,7 +3232,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3365,7 +3365,7 @@ __metadata:
     typescript: 5.0.4
     vis-data: 7.1.6
     vis-timeline: 7.7.2
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3404,7 +3404,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3415,7 +3415,7 @@ __metadata:
   dependencies:
     eslint: 8.39.0
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
   languageName: unknown
   linkType: soft
 
@@ -3425,7 +3425,7 @@ __metadata:
   dependencies:
     eslint: 8.39.0
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
   languageName: unknown
   linkType: soft
 
@@ -3467,7 +3467,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3506,7 +3506,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3550,7 +3550,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3581,7 +3581,7 @@ __metadata:
     react-intl: 6.4.2
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3620,7 +3620,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3655,7 +3655,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3686,7 +3686,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3717,7 +3717,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3749,7 +3749,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3786,7 +3786,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3821,7 +3821,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3853,7 +3853,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3882,7 +3882,7 @@ __metadata:
     react-intl: 6.4.2
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3918,7 +3918,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3957,7 +3957,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -3993,7 +3993,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4029,7 +4029,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4072,7 +4072,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4111,7 +4111,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4150,7 +4150,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4186,7 +4186,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4219,7 +4219,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4257,7 +4257,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4291,7 +4291,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4325,7 +4325,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4359,7 +4359,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4393,7 +4393,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4430,7 +4430,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4465,7 +4465,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4501,7 +4501,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4537,7 +4537,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4572,7 +4572,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4587,7 +4587,7 @@ __metadata:
     eslint: 8.39.0
     react: 18.2.0
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4602,7 +4602,7 @@ __metadata:
     cross-env: 7.0.3
     eslint: 8.39.0
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4641,7 +4641,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4676,7 +4676,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4704,7 +4704,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4737,7 +4737,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4770,7 +4770,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4803,7 +4803,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4835,7 +4835,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4868,7 +4868,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4910,7 +4910,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4936,7 +4936,7 @@ __metadata:
     storybook: 7.0.8
     stylelint: 15.6.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vitest: 0.30.1
   languageName: unknown
   linkType: soft
@@ -4953,7 +4953,7 @@ __metadata:
     react-intl: 6.4.2
     react-router-dom: 6.11.1
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
   languageName: unknown
   linkType: soft
 
@@ -4967,7 +4967,7 @@ __metadata:
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.2.6
     "@navikt/ft-prosess-beregningsgrunnlag": 6.2.3
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
   languageName: unknown
   linkType: soft
 
@@ -4977,7 +4977,7 @@ __metadata:
   dependencies:
     "@navikt/fp-kodeverk": 1.0.0
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
   languageName: unknown
   linkType: soft
 
@@ -4994,7 +4994,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.4.2
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
   languageName: unknown
   linkType: soft
 
@@ -12640,7 +12640,7 @@ __metadata:
     stylelint: 15.6.1
     stylelint-order: 6.0.3
     typescript: 5.0.4
-    vite: 4.3.1
+    vite: 4.3.4
     vite-plugin-dts: 2.3.0
     vite-plugin-externalize-deps: 0.5.0
     vite-plugin-html: 3.2.0
@@ -19403,7 +19403,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup@npm:^2.25.0 || ^3.3.0, rollup@npm:^3.20.2, rollup@npm:^3.21.0":
+"rollup@npm:^2.25.0 || ^3.3.0, rollup@npm:^3.21.0":
   version: 3.21.5
   resolution: "rollup@npm:3.21.5"
   dependencies:
@@ -21607,44 +21607,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:4.3.1":
-  version: 4.3.1
-  resolution: "vite@npm:4.3.1"
-  dependencies:
-    esbuild: ^0.17.5
-    fsevents: ~2.3.2
-    postcss: ^8.4.21
-    rollup: ^3.20.2
-  peerDependencies:
-    "@types/node": ">= 14"
-    less: "*"
-    sass: "*"
-    stylus: "*"
-    sugarss: "*"
-    terser: ^5.4.0
-  dependenciesMeta:
-    fsevents:
-      optional: true
-  peerDependenciesMeta:
-    "@types/node":
-      optional: true
-    less:
-      optional: true
-    sass:
-      optional: true
-    stylus:
-      optional: true
-    sugarss:
-      optional: true
-    terser:
-      optional: true
-  bin:
-    vite: bin/vite.js
-  checksum: e58ba33ec10af6167686c1c43c61f31fcbc6b3b6a1f16ed03fb6cc8278700c6edaf4ff394ef454291ee35924054c7772feac159f1acf3af1a33d289fe8494d9c
-  languageName: node
-  linkType: hard
-
-"vite@npm:^3.0.0 || ^4.0.0":
+"vite@npm:4.3.4, vite@npm:^3.0.0 || ^4.0.0":
   version: 4.3.4
   resolution: "vite@npm:4.3.4"
   dependencies:
