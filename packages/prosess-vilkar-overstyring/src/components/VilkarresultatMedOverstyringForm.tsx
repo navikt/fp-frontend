@@ -82,7 +82,7 @@ const buildInitialValues = (
   return {
     isOverstyrt: aksjonspunkt !== undefined,
     begrunnelse: decodeHtmlEntity(aksjonspunkt && aksjonspunkt.begrunnelse ? aksjonspunkt.begrunnelse : ''),
-    ...VilkarResultPicker.buildInitialValues(behandlingsresultat, aksjonspunkter, status),
+    ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
   };
 };
 

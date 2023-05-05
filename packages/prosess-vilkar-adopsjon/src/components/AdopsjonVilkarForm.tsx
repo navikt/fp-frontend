@@ -46,7 +46,7 @@ const buildInitialValues = (
   status: string,
   behandlingsresultat?: Behandling['behandlingsresultat'],
 ): FormValues => ({
-  ...VilkarResultPicker.buildInitialValues(behandlingsresultat, aksjonspunkter, status),
+  ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
 });
 
