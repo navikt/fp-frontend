@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactElement, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import moment from 'moment';
-import { Label, BodyShort } from '@navikt/ds-react';
+import { Label, BodyShort, Button, Panel } from '@navikt/ds-react';
 
 import { KodeverkType, aktivitetStatus, uttakPeriodeNavn, getKodeverknavnFn } from '@navikt/fp-kodeverk';
 import {
@@ -14,7 +14,6 @@ import {
   FlexColumn,
 } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import { TimeLineButton, TimeLineDataContainer } from '@navikt/ft-tidslinje';
 import {
   ArbeidsgiverOpplysningerPerId,
   BeregningsresultatPeriodeAndel,
@@ -22,6 +21,7 @@ import {
   BeregningsresultatPeriode,
 } from '@navikt/fp-types';
 
+import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
 import styles from './tilkjentYtelseTimelineData.module.css';
 
 const getEndCharFromId = (id: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
@@ -107,6 +107,7 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
   isSoknadSvangerskapspenger: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  lukkPeriode: () => void;
 }
 
 /**
@@ -121,6 +122,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   isSoknadSvangerskapspenger,
   arbeidsgiverOpplysningerPerId,
+  lukkPeriode,
 }) => {
   const numberOfDaysAndWeeks = calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom);
   const intl = useIntl();
@@ -129,7 +131,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
 
   return (
-    <TimeLineDataContainer>
+    <Panel border>
       <FlexContainer>
         <FlexRow>
           <FlexColumn>
@@ -138,15 +140,32 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
             </Label>
           </FlexColumn>
           <FlexColumn className={styles.ctrlCol}>
-            <TimeLineButton
-              text={intl.formatMessage({ id: 'Timeline.prevPeriod' })}
-              type="prev"
-              callback={callbackBackward}
-            />
-            <TimeLineButton
-              text={intl.formatMessage({ id: 'Timeline.nextPeriod' })}
-              type="next"
-              callback={callbackForward}
+            <Button
+              className={styles.margin}
+              size="small"
+              icon={<ArrowLeftIcon aria-hidden />}
+              onClick={callbackBackward}
+              variant="secondary-neutral"
+              title={intl.formatMessage({ id: 'Timeline.prevPeriod' })}
+            >
+              <FormattedMessage id="Timeline.prevPeriodShort" />
+            </Button>
+            <Button
+              className={styles.margin}
+              size="small"
+              icon={<ArrowRightIcon aria-hidden />}
+              onClick={callbackForward}
+              variant="secondary-neutral"
+              title={intl.formatMessage({ id: 'Timeline.nextPeriod' })}
+            >
+              <FormattedMessage id="Timeline.nextPeriodShort" />
+            </Button>
+            <Button
+              size="small"
+              icon={<XMarkIcon aria-hidden />}
+              onClick={lukkPeriode}
+              variant="secondary-neutral"
+              title={intl.formatMessage({ id: 'Timeline.lukkPeriode' })}
             />
           </FlexColumn>
         </FlexRow>
@@ -215,7 +234,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
           ))}
         </Table>
       )}
-    </TimeLineDataContainer>
+    </Panel>
   );
 };
 

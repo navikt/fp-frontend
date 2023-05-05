@@ -1,13 +1,15 @@
-import React, { FunctionComponent, useState, useMemo } from 'react';
-import { FormattedMessage } from 'react-intl';
+import React, { FunctionComponent, useState, useMemo, useCallback } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Timeline } from '@navikt/ds-react-internal';
 import {
   FigureOutwardIcon,
   SilhouetteIcon,
   ArrowRightIcon,
   ArrowLeftIcon,
-  ArrowDownIcon,
-  ArrowUpIcon,
+  PlusIcon,
+  MinusIcon,
+  PercentIcon,
+  CheckmarkCircleIcon,
 } from '@navikt/aksel-icons';
 import dayjs from 'dayjs';
 import { BodyShort, Button } from '@navikt/ds-react';
@@ -29,17 +31,14 @@ import styles from './tilkjentYtelse.module.css';
 
 type Periode = {
   id: number;
-  status: 'success' | 'neutral';
   start: Date;
   end: Date;
+  erGradert: boolean;
 };
 
-const gradertKlassenavn = 'neutral';
-const innvilgetKlassenavn = 'success';
-
-const getStatusForPeriode = (periode: BeregningsresultatPeriode): 'neutral' | 'success' => {
+const sjekkOmGradert = (periode: BeregningsresultatPeriode): boolean => {
   const graderteAndeler = periode.andeler.filter(andel => andel.uttak && andel.uttak.gradering === true);
-  return graderteAndeler.length === 0 ? innvilgetKlassenavn : gradertKlassenavn;
+  return graderteAndeler.length > 0;
 };
 
 const getFamilieHendelseData = (familieHendelseSamling: FamilieHendelseSamling): { dato: string; textId: string } => {
@@ -62,7 +61,7 @@ const formatPerioder = (perioder: BeregningsresultatPeriode[]): Periode[] =>
   perioder
     .filter(periode => periode.andeler[0] && periode.dagsats)
     .map<Periode>((periode, index: number) => ({
-      status: getStatusForPeriode(periode),
+      erGradert: sjekkOmGradert(periode),
       start: dayjs(periode.fom).toDate(),
       end: dayjs(periode.tom).add(1, 'days').toDate(),
       id: index,
@@ -92,56 +91,74 @@ const TilkjentYtelse: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
 }) => {
+  const intl = useIntl();
   const [valgtPeriode, setValgtPeriode] = useState<Periode | null>();
 
-  const perioder = formatPerioder(beregningsresultatPeriode);
+  const perioder = useMemo(() => formatPerioder(beregningsresultatPeriode), [beregningsresultatPeriode]);
 
-  const openPeriodInfo = (): void => {
-    if (valgtPeriode) {
-      setValgtPeriode(null);
-    } else {
-      setValgtPeriode(perioder[0]);
-    }
-  };
+  const lukkPeriode = useCallback((): void => {
+    setValgtPeriode(null);
+  }, []);
 
-  const nextPeriod = (): void => {
+  const nextPeriod = useCallback((): void => {
     const newIndex = perioder.findIndex(periode => periode.id === valgtPeriode.id) + 1;
     if (newIndex < perioder.length) {
       setValgtPeriode(perioder[newIndex]);
     }
-  };
+  }, [perioder, valgtPeriode, setValgtPeriode]);
 
-  const prevPeriod = (): void => {
+  const prevPeriod = useCallback((): void => {
     const newIndex = perioder.findIndex(periode => periode.id === valgtPeriode.id) - 1;
     if (newIndex >= 0) {
       setValgtPeriode(perioder[newIndex]);
     }
-  };
+  }, [perioder, valgtPeriode, setValgtPeriode]);
 
-  const selectHandler = (id: number): void => {
-    setValgtPeriode(perioder.find(periode => periode.id === id));
-  };
+  const selectHandler = useCallback(
+    (id: number): void => {
+      setValgtPeriode(perioder.find(periode => periode.id === id));
+    },
+    [setValgtPeriode, perioder],
+  );
 
-  const [startDato, setStartDato] = useState(perioder[0].start);
-  const [endDato, setEndDato] = useState(perioder[perioder.length - 1].end);
+  const originalStartDato = dayjs(perioder[0].start);
+  const originalEndDato = dayjs(perioder[perioder.length - 1].end);
+
+  const [startDato, setStartDato] = useState(originalStartDato);
+  const [endDato, setEndDato] = useState(originalEndDato);
 
   const goBackward = () => {
-    setStartDato(dayjs(startDato).subtract(1, 'month').toDate());
-    setEndDato(dayjs(endDato).subtract(1, 'month').toDate());
+    if (!startDato.subtract(1, 'month').isBefore(originalStartDato)) {
+      setStartDato(startDato.subtract(1, 'month'));
+      setEndDato(endDato.subtract(1, 'month'));
+    }
   };
   const goForward = () => {
-    setStartDato(oldStart => dayjs(oldStart).add(1, 'month').toDate());
-    setEndDato(oldEnd => dayjs(oldEnd).add(1, 'month').toDate());
+    if (!endDato.add(1, 'month').isAfter(originalEndDato)) {
+      setStartDato(startDato.add(1, 'month'));
+      setEndDato(endDato.add(1, 'month'));
+    }
+  };
+
+  const zoomIn = () => {
+    if (!startDato.add(3, 'month').isAfter(endDato)) {
+      setStartDato(startDato.add(1, 'month'));
+      setEndDato(endDato.subtract(1, 'month'));
+    }
+  };
+
+  const zoomOut = () => {
+    if (endDato.add(1, 'month').diff(startDato.subtract(1, 'month'), 'months') < 36) {
+      setStartDato(startDato.subtract(1, 'month'));
+      setEndDato(endDato.add(1, 'month'));
+    }
   };
 
   const familiehendelseData = useMemo(() => getFamilieHendelseData(familieHendelseSamling), [familieHendelseSamling]);
 
   return (
     <>
-      <Timeline
-        startDate={dayjs(startDato).subtract(1, 'days').toDate()}
-        endDate={dayjs(endDato).add(2, 'days').toDate()}
-      >
+      <Timeline startDate={startDato.subtract(1, 'days').toDate()} endDate={endDato.add(2, 'days').toDate()}>
         <Timeline.Pin date={dayjs(soknadDate).toDate()}>
           <BodyShort>
             <FormattedMessage id="TilkjentYtelse.Soknadsdato" />
@@ -159,7 +176,7 @@ const TilkjentYtelse: FunctionComponent<OwnProps> = ({
           </BodyShort>
         </Timeline.Pin>
         <Timeline.Row
-          label={hovedsokerKjonnKode === KjønnkodeEnum.KVINNE ? 'Kvinne' : 'Annen part'}
+          label="-"
           icon={
             hovedsokerKjonnKode === KjønnkodeEnum.KVINNE ? (
               <FigureOutwardIcon width={20} height={20} />
@@ -173,29 +190,51 @@ const TilkjentYtelse: FunctionComponent<OwnProps> = ({
               key={periode.id}
               start={periode.start}
               end={periode.end}
-              status={periode.status}
+              status="success"
               onSelectPeriod={() => selectHandler(periode.id)}
               isActive={valgtPeriode?.id === periode.id}
+              icon={periode.erGradert ? <PercentIcon aria-hidden /> : <CheckmarkCircleIcon aria-hidden />}
+              title={periode.erGradert ? intl.formatMessage({ id: 'TilkjentYtelse.GradertPeriode' }) : ''}
             />
           ))}
         </Timeline.Row>
-        <Timeline.Zoom>
-          <Timeline.Zoom.Button label="6 mnd" interval="month" count={6} />
-          <Timeline.Zoom.Button label="9 mnd" interval="month" count={9} />
-        </Timeline.Zoom>
       </Timeline>
-      <div className={styles.space} />
+      <VerticalSpacer twentyPx />
       <FloatRight>
         <Button
+          className={styles.margin}
           size="small"
-          icon={valgtPeriode ? <ArrowUpIcon aria-hidden /> : <ArrowDownIcon aria-hidden />}
-          onClick={openPeriodInfo}
-          variant="secondary-neutral"
-          title="Åpne info om første periode"
+          icon={<PlusIcon aria-hidden />}
+          onClick={zoomIn}
+          variant="primary-neutral"
+          title={intl.formatMessage({ id: 'TilkjentYtelse.ZoomInn' })}
         />
-        <Button size="small" icon={<ArrowLeftIcon aria-hidden />} onClick={goBackward} variant="secondary-neutral" />
-        <Button size="small" icon={<ArrowRightIcon aria-hidden />} onClick={goForward} variant="secondary-neutral" />
+        <Button
+          className={styles.margin}
+          size="small"
+          icon={<MinusIcon aria-hidden />}
+          onClick={zoomOut}
+          variant="primary-neutral"
+          title={intl.formatMessage({ id: 'TilkjentYtelse.ZoomUt' })}
+        />
+        <Button
+          className={styles.margin}
+          size="small"
+          icon={<ArrowLeftIcon aria-hidden />}
+          onClick={goBackward}
+          variant="primary-neutral"
+          title={intl.formatMessage({ id: 'TilkjentYtelse.ScrollTilVenstre' })}
+        />
+        <Button
+          className={styles.margin}
+          size="small"
+          icon={<ArrowRightIcon aria-hidden />}
+          onClick={goForward}
+          variant="primary-neutral"
+          title={intl.formatMessage({ id: 'TilkjentYtelse.ScrollTilHogre' })}
+        />
       </FloatRight>
+      <div className={styles.space} />
       {valgtPeriode && (
         <>
           <VerticalSpacer eightPx />
@@ -206,6 +245,7 @@ const TilkjentYtelse: FunctionComponent<OwnProps> = ({
             callbackBackward={prevPeriod}
             isSoknadSvangerskapspenger={isSoknadSvangerskapspenger}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+            lukkPeriode={lukkPeriode}
           />
         </>
       )}

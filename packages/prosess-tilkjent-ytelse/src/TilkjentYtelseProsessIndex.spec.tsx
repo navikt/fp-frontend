@@ -12,7 +12,8 @@ describe('<TilkjentYtelseProsessIndex>', () => {
 
     expect(await screen.findByText('Tilkjent ytelse')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByTitle('Åpne info om første periode'));
+    // Trykk på periode i tidslinja
+    await userEvent.click(screen.getAllByRole('button')[2]);
 
     expect(await screen.findByText('Detaljer for valgt periode')).toBeInTheDocument();
     expect(screen.getByText('01.01.2018 - 10.01.2019')).toBeInTheDocument();
