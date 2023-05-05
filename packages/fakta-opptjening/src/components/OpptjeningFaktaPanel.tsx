@@ -1,12 +1,11 @@
 import React, { FunctionComponent, useState, useEffect, useCallback, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { Button, BodyShort, Label } from '@navikt/ds-react';
 
 import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
 import { ISO_DATE_FORMAT, addDaysToDate } from '@navikt/ft-utils';
 import { AksjonspunktHelpTextTemp, DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { TimeLineNavigation } from '@navikt/ft-tidslinje';
 import {
   ArbeidsgiverOpplysningerPerId,
   AlleKodeverk,
@@ -40,7 +39,7 @@ const getAksjonspunktHelpTexts = (opptjeningAktiviteter: OpptjeningAktivitet[]):
   return texts;
 };
 
-const findSkjaringstidspunkt = (dato: string): string => moment(dato).add(1, 'days').format(ISO_DATE_FORMAT);
+const findSkjaringstidspunkt = (dato: string): string => dayjs(dato).add(1, 'days').format(ISO_DATE_FORMAT);
 
 const sorterEtterOpptjeningFom = (
   opptjeningPerioder: OpptjeningAktivitet[],
@@ -59,8 +58,8 @@ const filtrerOpptjeningAktiviteter = (
   fastsattOpptjening?: Opptjening['fastsattOpptjening'],
 ): OpptjeningAktivitet[] =>
   opptjeningAktiviteter
-    .filter(oa => moment(fastsattOpptjening.opptjeningFom).isBefore(addDay(oa.opptjeningTom)))
-    .filter(oa => moment(oa.opptjeningFom).isBefore(addDay(fastsattOpptjening.opptjeningTom)));
+    .filter(oa => dayjs(fastsattOpptjening.opptjeningFom).isBefore(addDay(oa.opptjeningTom)))
+    .filter(oa => dayjs(oa.opptjeningFom).isBefore(addDay(fastsattOpptjening.opptjeningTom)));
 
 interface OwnProps {
   hasAksjonspunkt: boolean;
@@ -184,13 +183,9 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
   );
 
   const avbrytAktivitet = useCallback(() => setValgtAktivitetIndex(undefined), []);
-  const opneInfo = useCallback(() => {
-    if (valgtAktivitetIndex !== undefined) {
-      setValgtAktivitetIndex(undefined);
-    } else {
-      setValgtAktivitetIndex(førsteAktivitetSomIkkeErGodkjent !== -1 ? førsteAktivitetSomIkkeErGodkjent : 0);
-    }
-  }, [valgtAktivitetIndex, setValgtAktivitetIndex, førsteAktivitetSomIkkeErGodkjent]);
+  const lukkPeriode = useCallback(() => {
+    setValgtAktivitetIndex(undefined);
+  }, []);
 
   const harIkkeBehandletAlle = formVerdierForAlleAktiviteter.some(
     a => a.erGodkjent === null || a.erGodkjent === undefined,
@@ -222,15 +217,7 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
         opptjeningFomDato={opptjeningFomDato}
         opptjeningTomDato={opptjeningTomDato}
       />
-      {filtrerteOgSorterteOpptjeningsaktiviteter.length > 0 && (
-        <>
-          <VerticalSpacer thirtyTwoPx />
-          <div className={styles.pushRight}>
-            <TimeLineNavigation openPeriodInfo={opneInfo} />
-          </div>
-        </>
-      )}
-      <VerticalSpacer eightPx />
+      <VerticalSpacer fourtyPx />
       {valgtAktivitetIndex !== undefined && (
         <>
           <ValgtAktivitetForm
@@ -249,6 +236,7 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
             alleKodeverk={alleKodeverk}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+            lukkPeriode={lukkPeriode}
           />
           <VerticalSpacer twentyPx />
         </>

@@ -16,7 +16,7 @@ import {
   XMarkOctagonIcon,
 } from '@navikt/aksel-icons';
 import { BodyShort, Label } from '@navikt/ds-react';
-import { OpptjeningAktivitetType } from '@navikt/ft-kodeverk';
+import { opptjeningAktivitetType as OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { FormValues } from '../aktivitet/ValgtAktivitetForm';
@@ -154,10 +154,18 @@ const OpptjeningTimeLine: FunctionComponent<OwnProps> = ({
     >
       <Timeline.Pin date={dayjs(opptjeningFomDato).toDate()}>
         <Label size="small">
-          <FormattedMessage id="OpptjeningTidslinje.SluttDato" />
+          <FormattedMessage id="OpptjeningTidslinje.StartDato" />
         </Label>
         <BodyShort size="small">
           <DateLabel dateString={opptjeningFomDato} />
+        </BodyShort>
+      </Timeline.Pin>
+      <Timeline.Pin date={dayjs(opptjeningTomDato).toDate()}>
+        <Label size="small">
+          <FormattedMessage id="OpptjeningTidslinje.SluttDato" />
+        </Label>
+        <BodyShort size="small">
+          <DateLabel dateString={opptjeningTomDato} />
         </BodyShort>
       </Timeline.Pin>
       {rader.map(rad => (
@@ -178,14 +186,6 @@ const OpptjeningTimeLine: FunctionComponent<OwnProps> = ({
             ))}
         </Timeline.Row>
       ))}
-      <Timeline.Pin date={dayjs(opptjeningTomDato).toDate()}>
-        <Label size="small">
-          <FormattedMessage id="OpptjeningTidslinje.StartDato" />
-        </Label>
-        <BodyShort size="small">
-          <DateLabel dateString={opptjeningTomDato} />
-        </BodyShort>
-      </Timeline.Pin>
     </Timeline>
   );
 };
