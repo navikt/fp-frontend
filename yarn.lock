@@ -8145,7 +8145,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:16 || 17 || 18, @types/react@npm:>=16":
+"@types/react@npm:*, @types/react@npm:16 || 17 || 18, @types/react@npm:18.2.5, @types/react@npm:>=16":
   version: 18.2.5
   resolution: "@types/react@npm:18.2.5"
   dependencies:
@@ -8153,17 +8153,6 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: 97c4534e849edf991be0820b0911d036e794b8e2599a1544f500c769acbcb4f443ccde1a3f22298f22ce368ee7757f746e4a529e889567fc142a627698e2de39
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:18.2.3":
-  version: 18.2.3
-  resolution: "@types/react@npm:18.2.3"
-  dependencies:
-    "@types/prop-types": "*"
-    "@types/scheduler": "*"
-    csstype: ^3.0.2
-  checksum: 697e5b5a84a9a586e6e5aef01897677efcd4c5586d324e7c2a6219e0ac9dc8e1663e7ced0bdb576cc7f367ebc004cbf576eb142c9dc196b17062843ce1004011
   languageName: node
   linkType: hard
 
@@ -12601,7 +12590,7 @@ __metadata:
     "@testing-library/react": 14.0.0
     "@testing-library/react-hooks": 8.0.1
     "@testing-library/user-event": 14.4.3
-    "@types/react": 18.2.3
+    "@types/react": 18.2.5
     "@types/react-collapse": 5.0.1
     "@types/react-dom": 18.2.3
     "@types/react-responsive": 8.0.5
