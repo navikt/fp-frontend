@@ -146,6 +146,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
               icon={<ArrowLeftIcon aria-hidden />}
               onClick={callbackBackward}
               variant="secondary-neutral"
+              type="button"
               title={intl.formatMessage({ id: 'Timeline.prevPeriod' })}
             >
               <FormattedMessage id="Timeline.prevPeriodShort" />
@@ -156,6 +157,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
               icon={<ArrowRightIcon aria-hidden />}
               onClick={callbackForward}
               variant="secondary-neutral"
+              type="button"
               title={intl.formatMessage({ id: 'Timeline.nextPeriod' })}
             >
               <FormattedMessage id="Timeline.nextPeriodShort" />
@@ -165,6 +167,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
               icon={<XMarkIcon aria-hidden />}
               onClick={lukkPeriode}
               variant="secondary-neutral"
+              type="button"
               title={intl.formatMessage({ id: 'Timeline.lukkPeriode' })}
             />
           </FlexColumn>

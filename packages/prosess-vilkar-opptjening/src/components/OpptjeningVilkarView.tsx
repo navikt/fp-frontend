@@ -28,11 +28,14 @@ const OpptjeningVilkarViewImpl: FunctionComponent<OwnProps> = ({
   opptjeningTomDate,
 }) => (
   <>
-    <FormattedMessage id="OpptjeningVilkarView.MonthsAndDays" values={{ months, days }} />
+    <BodyShort size="small">
+      <FormattedMessage id="OpptjeningVilkarView.MonthsAndDays" values={{ months, days }} />
+    </BodyShort>
+    <VerticalSpacer eightPx />
     <BodyShort size="small">
       <PeriodLabel dateStringFom={opptjeningFomDate} dateStringTom={opptjeningTomDate} />
     </BodyShort>
-    <VerticalSpacer fourPx />
+    <VerticalSpacer sixteenPx />
     {fastsattOpptjeningActivities.length > 0 && (
       <OpptjeningTimeLineLight
         opptjeningPeriods={fastsattOpptjeningActivities}

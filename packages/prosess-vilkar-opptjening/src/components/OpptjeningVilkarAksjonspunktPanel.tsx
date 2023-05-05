@@ -11,7 +11,7 @@ import {
   ProsessStegBegrunnelseTextFieldNew,
   ProsessPanelTemplate,
 } from '@navikt/fp-prosess-felles';
-import { Aksjonspunkt, Behandling, FastsattOpptjening } from '@navikt/fp-types';
+import { Aksjonspunkt, Behandling, Behandlingsresultat, FastsattOpptjening } from '@navikt/fp-types';
 import { AvklarOpptjeningsvilkaretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import OpptjeningVilkarView from './OpptjeningVilkarView';
@@ -26,9 +26,9 @@ export type FormValues = {
 export const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
   status: string,
-  behandlingsresultat?: Behandling['behandlingsresultat'],
+  behandlingsresultat?: Behandlingsresultat,
 ): FormValues => ({
-  ...VilkarResultPicker.buildInitialValues(behandlingsresultat, aksjonspunkter, status),
+  ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
 });
 
@@ -89,8 +89,8 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
 
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
 
-  const validerAtEnKunKanVelgeOppfyltNårEnHarPerioder = useCallback(verdi => {
-    if (fastsattOpptjening.fastsattOpptjeningAktivitetList.length === 0 && verdi === true) {
+  const validerAtEnKunKanVelgeOppfyltNårEnHarPerioder = useCallback((verdi: boolean) => {
+    if (fastsattOpptjening.fastsattOpptjeningAktivitetList?.length === 0 && verdi === true) {
       return intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.KanIkkeVelgeOppfylt' });
     }
     return null;

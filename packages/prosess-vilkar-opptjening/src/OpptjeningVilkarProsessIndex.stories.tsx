@@ -79,6 +79,44 @@ export const ÅpentAksjonspunkt = Template.bind({});
   ] as Aksjonspunkt[],
 };
 
+export const ÅpentAksjonspunktMedOppholdsperiode = Template.bind({});
+ÅpentAksjonspunktMedOppholdsperiode.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  opptjening: {
+    fastsattOpptjening: {
+      opptjeningperiode: {
+        måneder: 2,
+        dager: 3,
+      },
+      fastsattOpptjeningAktivitetList: [
+        {
+          fom: '2018-01-01',
+          tom: '2018-04-04',
+          klasse: opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT,
+        },
+        {
+          fom: '2018-04-05',
+          tom: '2018-04-10',
+        },
+        {
+          fom: '2018-04-11',
+          tom: '2018-06-04',
+          klasse: opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT,
+        },
+      ],
+      opptjeningFom: '2018-01-01',
+      opptjeningTom: '2018-06-04',
+    },
+  } as Opptjening,
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.SVANGERSKAPSVILKARET,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+    },
+  ] as Aksjonspunkt[],
+};
+
 export const ÅpentAksjonspunktMenUtenAktiviteter = Template.bind({});
 ÅpentAksjonspunktMenUtenAktiviteter.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
