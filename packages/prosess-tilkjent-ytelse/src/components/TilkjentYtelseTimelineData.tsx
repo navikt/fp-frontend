@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactElement, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { Label, BodyShort, Button, Panel } from '@navikt/ds-react';
 
 import { KodeverkType, aktivitetStatus, uttakPeriodeNavn, getKodeverknavnFn } from '@navikt/fp-kodeverk';
@@ -177,8 +177,8 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
                 <FormattedMessage
                   id="TilkjentYtelse.PeriodeData.Periode"
                   values={{
-                    fomVerdi: moment(selectedItemData.fom).format(DDMMYYYY_DATE_FORMAT).toString(),
-                    tomVerdi: moment(selectedItemData.tom).format(DDMMYYYY_DATE_FORMAT).toString(),
+                    fomVerdi: dayjs(selectedItemData.fom).format(DDMMYYYY_DATE_FORMAT).toString(),
+                    tomVerdi: dayjs(selectedItemData.tom).format(DDMMYYYY_DATE_FORMAT).toString(),
                   }}
                 />
               </Label>
@@ -227,7 +227,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
               </TableColumn>
               <TableColumn>
                 <BodyShort size="small">
-                  {andel.sisteUtbetalingsdato ? moment(andel.sisteUtbetalingsdato).format(DDMMYYYY_DATE_FORMAT) : ''}
+                  {andel.sisteUtbetalingsdato ? dayjs(andel.sisteUtbetalingsdato).format(DDMMYYYY_DATE_FORMAT) : ''}
                 </BodyShort>
               </TableColumn>
             </TableRow>

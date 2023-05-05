@@ -27,7 +27,10 @@
   "OpptjeningTidslinje.SluttDato": "Slutt opptjeningsperiode",
   "OpptjeningTidslinje.Aap": "AAP",
 
-  "Timeline.openData": "Åpne info om første periode",
+  "Timeline.lukkPeriode": "Lukk periode",
   "Timeline.nextPeriod": "Neste periode",
-  "Timeline.prevPeriod": "Forrige periode"
+  "Timeline.nextPeriodShort": "Neste",
+  "Timeline.prevPeriod": "Forrige periode",
+  "Timeline.prevPeriodShort": "Forrige",
+  "Timeline.openData": "Åpne info om første periode"
 }

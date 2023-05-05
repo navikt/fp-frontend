@@ -86,15 +86,15 @@ describe('<OpptjeningFaktaIndex>', () => {
     expect(screen.getByText('Detaljer for valgt aktivitet')).toBeInTheDocument();
     expect(screen.getAllByText('Næring')).toHaveLength(2);
 
-    await userEvent.click(screen.getByAltText('Forrige periode'));
+    await userEvent.click(screen.getByText('Forrige'));
 
     expect(await screen.findByText('Arbeidsavklaringspenger')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByAltText('Neste periode'));
+    await userEvent.click(screen.getByText('Neste'));
 
     expect(await screen.findAllByText('Næring')).toHaveLength(2);
 
-    await userEvent.click(screen.getByAltText('Åpne info om første periode'));
+    await userEvent.click(screen.getByTitle('Lukk periode'));
 
     expect(await screen.findByText('Næring')).toBeInTheDocument();
   });

@@ -3,13 +3,13 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Button, Label, Heading, BodyShort } from '@navikt/ds-react';
 import dayjs from 'dayjs';
+import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { VerticalSpacer, FaktaGruppe, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import { findDifferenceInMonthsAndDays, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { RadioGroupPanel, TextAreaField, Form } from '@navikt/ft-form-hooks';
-import { TimeLineButton } from '@navikt/ft-tidslinje';
 import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, AlleKodeverk, OpptjeningAktivitet } from '@navikt/fp-types';
 
 import ValgtAktivitetSubForm from './ValgtAktivitetSubForm';
@@ -69,6 +69,7 @@ interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   opptjeningFomDato: string;
   opptjeningTomDato: string;
+  lukkPeriode: () => void;
 }
 
 /**
@@ -76,7 +77,7 @@ interface OwnProps {
  *
  * Viser informasjon om valgt aktivitet
  */
-export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
+const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
   readOnly,
   opptjeningAktivitetTyper,
   avbrytAktivitet,
@@ -90,6 +91,7 @@ export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
   valgteFormValues,
   opptjeningFomDato,
   opptjeningTomDato,
+  lukkPeriode,
 }) => {
   const intl = useIntl();
 
@@ -119,15 +121,32 @@ export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
               </Heading>
             </FlexColumn>
             <FlexColumn>
-              <TimeLineButton
-                text={intl.formatMessage({ id: 'Timeline.prevPeriod' })}
-                type="prev"
-                callback={velgForrigeAktivitet}
-              />
-              <TimeLineButton
-                text={intl.formatMessage({ id: 'Timeline.nextPeriod' })}
-                type="next"
-                callback={velgNesteAktivitet}
+              <Button
+                className={styles.margin}
+                size="small"
+                icon={<ArrowLeftIcon aria-hidden />}
+                onClick={velgForrigeAktivitet}
+                variant="secondary-neutral"
+                title={intl.formatMessage({ id: 'Timeline.prevPeriod' })}
+              >
+                <FormattedMessage id="Timeline.prevPeriodShort" />
+              </Button>
+              <Button
+                className={styles.margin}
+                size="small"
+                icon={<ArrowRightIcon aria-hidden />}
+                onClick={velgNesteAktivitet}
+                variant="secondary-neutral"
+                title={intl.formatMessage({ id: 'Timeline.nextPeriod' })}
+              >
+                <FormattedMessage id="Timeline.nextPeriodShort" />
+              </Button>
+              <Button
+                size="small"
+                icon={<XMarkIcon aria-hidden />}
+                onClick={lukkPeriode}
+                variant="secondary-neutral"
+                title={intl.formatMessage({ id: 'Timeline.lukkPeriode' })}
               />
             </FlexColumn>
           </FlexRow>
