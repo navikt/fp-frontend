@@ -7,7 +7,6 @@ import {
   FlexColumn,
   FlexContainer,
   FlexRow,
-  Image,
   VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { Button, Label, Panel } from '@navikt/ds-react';
@@ -25,9 +24,7 @@ import {
   Ytelsefordeling,
 } from '@navikt/fp-types';
 
-import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
-import splitPeriodImageHoverUrl from '../../images/splitt_hover.svg';
-import splitPeriodImageUrl from '../../images/splitt.svg';
+import { ArrowLeftIcon, ArrowRightIcon, ScissorsIcon, XMarkIcon } from '@navikt/aksel-icons';
 import SplittPeriodeModal from './splitt/SplittPeriodeModal';
 import UttakPeriodeForm from './UttakPeriodeForm';
 
@@ -236,18 +233,17 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
             </FlexColumn>
             {!isReadOnly && erHovedsøkersPeriode && !erRevurderingFørEndringsdato && (
               <FlexColumn>
-                <span className={styles.splitPeriodPosition}>
-                  <Image
-                    tabIndex={0}
-                    className={styles.splitPeriodImage}
-                    src={splitPeriodImageUrl}
-                    srcHover={splitPeriodImageHoverUrl}
-                    alt={intl.formatMessage({ id: 'UttakTimeLineData.PeriodeData.DelOppPerioden' })}
-                    onMouseDown={toggleVisningAvModal}
-                    onKeyDown={e => (e.key === 'Enter' ? toggleVisningAvModal() : null)}
-                  />
+                <Button
+                  className={styles.margin}
+                  size="xsmall"
+                  icon={<ScissorsIcon aria-hidden />}
+                  onClick={toggleVisningAvModal}
+                  variant="tertiary-neutral"
+                  type="button"
+                  title={intl.formatMessage({ id: 'UttakTimeLineData.PeriodeData.DelOppPerioden' })}
+                >
                   <FormattedMessage id="UttakTimeLineData.PeriodeData.DelOppPerioden" />
-                </span>
+                </Button>
                 {visModal && (
                   <SplittPeriodeModal
                     cancel={toggleVisningAvModal}
@@ -261,7 +257,7 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
             <FlexColumn>
               <Button
                 className={styles.margin}
-                size="small"
+                size="xsmall"
                 icon={<ArrowLeftIcon aria-hidden />}
                 onClick={visForrigePeriode}
                 variant="secondary-neutral"
@@ -272,7 +268,7 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
               </Button>
               <Button
                 className={styles.margin}
-                size="small"
+                size="xsmall"
                 icon={<ArrowRightIcon aria-hidden />}
                 onClick={visNestePeriode}
                 variant="secondary-neutral"
@@ -282,10 +278,10 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
                 <FormattedMessage id="UttakPeriodePanel.nextPeriodShort" />
               </Button>
               <Button
-                size="small"
+                size="xsmall"
                 icon={<XMarkIcon aria-hidden />}
                 onClick={lukkPeriode}
-                variant="secondary-neutral"
+                variant="tertiary-neutral"
                 type="button"
                 title={intl.formatMessage({ id: 'UttakPeriodePanel.LukkPeriode' })}
               />

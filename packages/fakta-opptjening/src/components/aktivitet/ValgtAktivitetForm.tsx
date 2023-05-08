@@ -123,7 +123,7 @@ const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
             <FlexColumn>
               <Button
                 className={styles.margin}
-                size="small"
+                size="xsmall"
                 icon={<ArrowLeftIcon aria-hidden />}
                 onClick={velgForrigeAktivitet}
                 variant="secondary-neutral"
@@ -134,7 +134,7 @@ const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
               </Button>
               <Button
                 className={styles.margin}
-                size="small"
+                size="xsmall"
                 icon={<ArrowRightIcon aria-hidden />}
                 onClick={velgNesteAktivitet}
                 variant="secondary-neutral"
@@ -144,10 +144,10 @@ const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
                 <FormattedMessage id="Timeline.nextPeriodShort" />
               </Button>
               <Button
-                size="small"
+                size="xsmall"
                 icon={<XMarkIcon aria-hidden />}
                 onClick={lukkPeriode}
-                variant="secondary-neutral"
+                variant="tertiary-neutral"
                 type="button"
                 title={intl.formatMessage({ id: 'Timeline.lukkPeriode' })}
               />

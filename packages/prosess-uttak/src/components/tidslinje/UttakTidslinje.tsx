@@ -16,7 +16,7 @@ import {
   PercentIcon,
   DoorOpenIcon,
   PersonPencilIcon,
-  TrendFlatIcon,
+  PauseIcon,
 } from '@navikt/aksel-icons';
 import { BodyShort, Button, Label } from '@navikt/ds-react';
 import { DateLabel, FloatRight, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -234,7 +234,7 @@ const finnIkonForPeriode = (periode: PeriodeMedStartOgSlutt, behandlingStatusKod
     return <PersonPencilIcon />;
   }
   if (periode.harUtsettelse) {
-    return <TrendFlatIcon />;
+    return <PauseIcon />;
   }
   return periode.erOpphold ? <DoorOpenIcon /> : PERIODE_TYPE_IKON_MAP[periode.periodeType];
 };
@@ -369,7 +369,7 @@ const UttakTidslinje: FunctionComponent<TidslinjeProps> = ({
           );
         })}
       </Timeline>
-      <VerticalSpacer thirtyTwoPx />
+      <VerticalSpacer twentyPx />
       <FloatRight>
         <Button
           className={styles.margin}

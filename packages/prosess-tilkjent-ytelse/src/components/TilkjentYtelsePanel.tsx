@@ -90,15 +90,18 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
         </>
       )}
       {vurderTilbaketrekkAP && (
-        <Tilbaketrekkpanel
-          readOnly={readOnly}
-          vurderTilbaketrekkAP={vurderTilbaketrekkAP}
-          submitCallback={submitCallback}
-          readOnlySubmitButton={readOnlySubmitButton}
-          beregningsresultat={beregningresultat}
-          formData={formData}
-          setFormData={setFormData}
-        />
+        <>
+          <VerticalSpacer sixteenPx />
+          <Tilbaketrekkpanel
+            readOnly={readOnly}
+            vurderTilbaketrekkAP={vurderTilbaketrekkAP}
+            submitCallback={submitCallback}
+            readOnlySubmitButton={readOnlySubmitButton}
+            beregningsresultat={beregningresultat}
+            formData={formData}
+            setFormData={setFormData}
+          />
+        </>
       )}
     </>
   );
