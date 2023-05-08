@@ -26,7 +26,10 @@ describe('<BehandlingSupportIndex>', () => {
     saksnummer: '123',
     behandlinger: [behandling] as BehandlingAppKontekst[],
     brukerManglerAdresse: false,
-  };
+    bruker: {
+      kjønn: 'K',
+    },
+  } as Fagsak;
 
   const navAnsatt = {
     brukernavn: 'Test',
@@ -47,11 +50,7 @@ describe('<BehandlingSupportIndex>', () => {
       <RawIntlProvider value={intl}>
         <RestApiMock data={data} requestApi={requestApi}>
           <MemoryRouter>
-            <BehandlingSupportIndex
-              fagsakData={new FagsakData(fagsak as Fagsak)}
-              behandlingUuid="1"
-              behandlingVersjon={2}
-            />
+            <BehandlingSupportIndex fagsakData={new FagsakData(fagsak)} behandlingUuid="1" behandlingVersjon={2} />
           </MemoryRouter>
         </RestApiMock>
       </RawIntlProvider>,

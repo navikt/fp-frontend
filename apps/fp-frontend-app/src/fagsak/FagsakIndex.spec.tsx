@@ -42,6 +42,9 @@ describe('<FagsakIndex>', () => {
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     behandlinger: [behandling, behandling2],
     behandlingTypeKanOpprettes: [],
+    bruker: {
+      kjønn: 'K',
+    },
   };
 
   const fagsakFpTilbake = {
