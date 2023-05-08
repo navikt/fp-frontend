@@ -437,6 +437,8 @@
   "HistorikkEndretFeltVerdiType.EosBosattNorge": "EØS bosatt Norge",
   "HistorikkEndretFeltVerdiType.BosattUtland": "Bosatt utland",
   "HistorikkEndretFeltVerdiType.SammensattKontroll": "Sammensatt kontroll",
+  "HistorikkEndretFeltVerdiType.DødDødfødsel": "Død eller dødfødsel",
+  "HistorikkEndretFeltVerdiType.SelvstendigNæring": "Næringsdrivende",
   "HistorikkEndretFeltVerdiType.SøkerErIPermisjon": "Søker er i permisjon",
   "HistorikkEndretFeltVerdiType.SøkerErIkkeIPermisjon": "Søker er ikke i permisjon",
   "HistorikkEndretFeltVerdiType.BrukMedOverstyrtePerioder": "Bruk arbeidsforholdet med overstyrt periode",
