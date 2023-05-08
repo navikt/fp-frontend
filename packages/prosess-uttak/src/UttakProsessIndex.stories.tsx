@@ -1,8 +1,6 @@
 import React from 'react';
 import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
-import { AksjonspunktStatus, NavBrukerKjonn } from '@navikt/ft-kodeverk';
-import { Aksjonspunkt } from '@navikt/ft-types';
 
 import {
   Behandling,
@@ -11,9 +9,16 @@ import {
   Soknad,
   UttaksresultatPeriode,
   UttakStonadskontoer,
+  Aksjonspunkt,
 } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { utsettelseArsakCodes, AksjonspunktCode, aksjonspunktType } from '@navikt/fp-kodeverk';
+import {
+  utsettelseArsakCodes,
+  AksjonspunktCode,
+  aksjonspunktType,
+  aksjonspunktStatus as AksjonspunktStatus,
+  navBrukerKjonn as NavBrukerKjonn,
+} from '@navikt/fp-kodeverk';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import UttakProsessIndex from './UttakProsessIndex';
@@ -182,7 +187,7 @@ const Template: StoryFn<{
   isReadOnly?: boolean;
   uttaksresultatPerioder: UttaksresultatPeriode;
   aksjonspunkter?: Aksjonspunkt[];
-  brukerKjønn?: NavBrukerKjonn;
+  brukerKjønn?: string;
 }> = ({
   submitCallback = action('button-click') as (data: any) => Promise<any>,
   stønadskontoer = uttakStonadskontoer,
