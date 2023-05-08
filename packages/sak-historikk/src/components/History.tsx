@@ -224,6 +224,7 @@ interface OwnProps {
   getBehandlingLocation: (behandlingUuid: string) => Location;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
   valgtBehandlingUuid?: string;
+  kjønn: string;
 }
 
 /**
@@ -240,6 +241,7 @@ const History: FunctionComponent<OwnProps> = ({
   getBehandlingLocation,
   createLocationForSkjermlenke,
   valgtBehandlingUuid,
+  kjønn,
 }) => {
   const intl = useIntl();
 
@@ -300,7 +302,7 @@ const History: FunctionComponent<OwnProps> = ({
             aktoer={historikkinnslag.aktoer}
             rolleNavn={getKodeverknavn(historikkinnslag.aktoer, KodeverkType.HISTORIKK_AKTOER)}
             dato={historikkinnslag.opprettetTidspunkt}
-            kjoenn={historikkinnslag.kjoenn}
+            kjoenn={kjønn}
             opprettetAv={aktorIsSOKER || aktorIsArbeidsgiver || aktorIsVL ? '' : historikkinnslag.opprettetAv}
           >
             <HistorikkMal

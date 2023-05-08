@@ -131,6 +131,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({ fagsakData, behan
               behandlingVersjon={behandlingVersjon}
               historikkinnslagFpSak={fagsakData.getHistorikkFpSak()}
               historikkinnslagFpTilbake={fagsakData.getHistorikkFpTilbake()}
+              kjønn={fagsak.bruker.kjønn}
             />
           )}
           {behandling && aktivtSupportPanel === SupportTabs.MELDINGER && (
