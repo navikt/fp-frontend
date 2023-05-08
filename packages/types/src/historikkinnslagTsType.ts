@@ -62,7 +62,6 @@ type Historikkinnslag = Readonly<{
   opprettetTidspunkt: string;
   type: string;
   behandlingUuid: string;
-  kjoenn: string;
   aktoer: string;
   dokumentLinks?: HistorikkInnslagDokumentLink[];
   historikkinnslagDeler: HistorikkinnslagDel[];

@@ -14,7 +14,6 @@ const historikkInnslag = [
     behandlingUuid: '999951',
     type: 'NYE_REGOPPLYSNINGER',
     aktoer: 'VL',
-    kjoenn: '-',
     opprettetAv: 'Srvengangsstonad',
     opprettetTidspunkt: '2019-09-19T12:16:14.499',
     dokumentLinks: [],
@@ -33,7 +32,6 @@ const historikkInnslag = [
     behandlingUuid: '999951',
     type: 'INNSYN_OPPR',
     aktoer: 'SBH',
-    kjoenn: '-',
     opprettetAv: 'Z991110',
     opprettetTidspunkt: '2019-09-18T15:25:31.291',
     dokumentLinks: [],
@@ -52,7 +50,6 @@ const historikkInnslag = [
     behandlingUuid: '999952',
     type: 'BEH_STARTET',
     aktoer: 'SOKER',
-    kjoenn: 'K',
     opprettetAv: 'Srvengangsstonad',
     opprettetTidspunkt: '2019-09-18T13:12:48.874',
     dokumentLinks: [
@@ -111,6 +108,7 @@ const Template: StoryFn<{
       getBehandlingLocation={() => locationMock}
       createLocationForSkjermlenke={() => locationMock}
       valgtBehandlingUuid={valgtBehandlingUuid}
+      kjønn="K"
     />
   </div>
 );
@@ -133,7 +131,6 @@ HistorikkinnslagAktivitetskrav.args = {
       behandlingUuid: '999951',
       type: historikkinnslagType.AVKLART_AKTIVITETSKRAV,
       aktoer: 'SOKER',
-      kjoenn: 'K',
       opprettetAv: 'Srvengangsstonad',
       opprettetTidspunkt: '2019-09-19T12:16:14.499',
       dokumentLinks: [],
@@ -174,7 +171,6 @@ HistorikkinnslagForeldelse.args = {
       behandlingUuid: '999951',
       type: historikkinnslagType.FORELDELSE,
       aktoer: 'SOKER',
-      kjoenn: 'K',
       opprettetAv: 'Srvengangsstonad',
       opprettetTidspunkt: '2019-09-19T12:16:14.499',
       dokumentLinks: [],
@@ -215,7 +211,6 @@ HistorikkinnslagTilbakekreving.args = {
       behandlingUuid: '999951',
       type: historikkinnslagType.TILBAKEKREVING,
       aktoer: 'SOKER',
-      kjoenn: 'K',
       opprettetAv: 'Srvengangsstonad',
       opprettetTidspunkt: '2019-09-19T12:16:14.499',
       dokumentLinks: [],
