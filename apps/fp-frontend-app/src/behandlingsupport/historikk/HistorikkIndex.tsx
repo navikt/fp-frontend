@@ -13,6 +13,7 @@ interface OwnProps {
   behandlingVersjon?: number;
   historikkinnslagFpSak?: Historikkinnslag[];
   historikkinnslagFpTilbake?: Historikkinnslag[];
+  kjønn: string;
 }
 
 const HistorikkIndex: FunctionComponent<OwnProps> = ({
@@ -20,6 +21,7 @@ const HistorikkIndex: FunctionComponent<OwnProps> = ({
   behandlingUuid,
   historikkinnslagFpSak,
   historikkinnslagFpTilbake,
+  kjønn,
 }) => {
   const alleKodeverkFpSak = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
   const alleKodeverkFpTilbake = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
@@ -43,6 +45,7 @@ const HistorikkIndex: FunctionComponent<OwnProps> = ({
       getBehandlingLocation={getBehandlingLocation}
       createLocationForSkjermlenke={createLocationForSkjermlenke}
       valgtBehandlingUuid={behandlingUuid}
+      kjønn={kjønn}
     />
   );
 };
