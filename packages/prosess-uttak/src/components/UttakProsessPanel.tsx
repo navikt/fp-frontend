@@ -1,6 +1,5 @@
 import React, { useCallback, useState, FunctionComponent, ReactElement, useEffect, useMemo } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 import { Alert, Button, Heading } from '@navikt/ds-react';
 import {
   AksjonspunktHelpTextHTML,
@@ -32,6 +31,7 @@ import {
   uttakPeriodeNavn,
   periodeResultatType,
   aksjonspunktStatus,
+  aksjonspunktStatus as AksjonspunktStatus,
 } from '@navikt/fp-kodeverk';
 
 import DisponibleStonadskontoerPanel from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';

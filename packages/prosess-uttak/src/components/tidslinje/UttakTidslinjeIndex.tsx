@@ -1,7 +1,5 @@
-import React, { useCallback, useMemo, FunctionComponent } from 'react';
+import React, { useMemo, FunctionComponent } from 'react';
 import dayjs from 'dayjs';
-import { BehandlingType, NavBrukerKjonn } from '@navikt/ft-kodeverk';
-import { Kjønnkode } from '@navikt/ft-types';
 import { calcDays, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 import {
@@ -12,11 +10,17 @@ import {
   FamilieHendelse,
   Ytelsefordeling,
   PeriodeSoker,
+  Kjønnkode,
 } from '@navikt/fp-types';
-import { soknadType, oppholdArsakType, oppholdArsakMapper } from '@navikt/fp-kodeverk';
+import {
+  soknadType,
+  oppholdArsakType,
+  oppholdArsakMapper,
+  behandlingType as BehandlingType,
+  navBrukerKjonn as NavBrukerKjonn,
+} from '@navikt/fp-kodeverk';
 
 import UttakTidslinje, { PeriodeSøkerMedTidslinjedata, TidslinjeTimes } from './UttakTidslinje';
-import UttakTidslinjeHjelpetekster from './UttakTidslinjeHjelpetekster';
 
 const finnSøknadsdato = (søknad: Soknad): string => {
   const { mottattDato } = søknad;
@@ -177,23 +181,17 @@ const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
     [behandling, søknad, familiehendelse, ytelsefordeling, personoversikt],
   );
 
-  const åpneFørstePeriodeEllerLukk = useCallback(() => {
-    setValgtPeriodeIndex(index => (index === undefined ? 0 : undefined));
-  }, []);
-
   return (
     <UttakTidslinje
       tidslinjeTider={tidslinjeTider}
       hovedsokerKjonnKode={personoversikt ? (personoversikt.bruker.kjønn as Kjønnkode) : undefined}
       medsokerKjonnKode={medsokerKjonnKode}
-      openPeriodInfo={åpneFørstePeriodeEllerLukk}
       selectedPeriod={valgtPeriodeIndex !== undefined ? alleUttaksperioderMedId[valgtPeriodeIndex] : undefined}
       uttakPerioder={alleUttaksperioderMedId}
       tilknyttetStortinget={tilknyttetStortinget}
       setValgtPeriodeIndex={setValgtPeriodeIndex}
-    >
-      <UttakTidslinjeHjelpetekster />
-    </UttakTidslinje>
+      behandlingStatusKode={behandling.status}
+    />
   );
 };
 

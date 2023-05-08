@@ -1,4 +1,4 @@
-import React, { MouseEvent, KeyboardEvent, FunctionComponent, useMemo } from 'react';
+import React, { FunctionComponent, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Timeline } from '@navikt/ds-react-internal';
@@ -7,17 +7,22 @@ import {
   FigureOutwardIcon,
   SilhouetteIcon,
   FigureCombinationIcon,
-  ExclamationmarkTriangleIcon,
-  CheckmarkCircleIcon,
-  XMarkOctagonIcon,
+  PlusIcon,
+  MinusIcon,
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  PersonPregnantIcon,
+  StrollerIcon,
+  PercentIcon,
+  DoorOpenIcon,
+  PersonPencilIcon,
+  TrendFlatIcon,
 } from '@navikt/aksel-icons';
-import { BodyShort, Label } from '@navikt/ds-react';
-import { Kjønnkode } from '@navikt/ft-types';
-import { DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { TimeLineControl } from '@navikt/ft-tidslinje';
+import { BodyShort, Button, Label } from '@navikt/ds-react';
+import { DateLabel, FloatRight, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { KjønnkodeEnum, PeriodeSoker } from '@navikt/fp-types';
-import { oppholdArsakType, periodeResultatType } from '@navikt/fp-kodeverk';
+import { behandlingStatus, oppholdArsakType, periodeResultatType, uttakPeriodeType } from '@navikt/fp-kodeverk';
 
 import styles from './uttakTidslinje.module.css';
 
@@ -36,10 +41,22 @@ export type TidslinjeTimes = {
   dodSoker: string;
 };
 
-const PERIODE_STATUS_IKON_MAP = {
-  danger: <XMarkOctagonIcon />,
-  success: <CheckmarkCircleIcon />,
-  warning: <ExclamationmarkTriangleIcon />,
+const PERIODE_TYPE_IKON_MAP = {
+  [uttakPeriodeType.MODREKVOTE]: <StrollerIcon />,
+  [uttakPeriodeType.FEDREKVOTE]: <StrollerIcon />,
+  [uttakPeriodeType.FELLESPERIODE]: <StrollerIcon />,
+  [uttakPeriodeType.FORELDREPENGER]: <StrollerIcon />,
+  [uttakPeriodeType.ANNET]: <StrollerIcon />,
+  [uttakPeriodeType.FORELDREPENGER_FOR_FODSEL]: <PersonPregnantIcon />,
+};
+
+const PERIODE_TYPE_LABEL_MAP = {
+  [uttakPeriodeType.MODREKVOTE]: 'UttakTidslinje.Modrekvote',
+  [uttakPeriodeType.FEDREKVOTE]: 'UttakTidslinje.Fedrekvote',
+  [uttakPeriodeType.FELLESPERIODE]: 'UttakTidslinje.Fellesperiode',
+  [uttakPeriodeType.FORELDREPENGER]: 'UttakTidslinje.Foreldrepenger',
+  [uttakPeriodeType.ANNET]: 'UttakTidslinje.Annet',
+  [uttakPeriodeType.FORELDREPENGER_FOR_FODSEL]: 'UttakTidslinje.ForeldrepengerForFodsel',
 };
 
 const parseDateString = (dateString: string | dayjs.Dayjs): Date => dayjs(dateString, ISO_DATE_FORMAT).toDate();
@@ -57,19 +74,17 @@ const sortByDate = (a: PeriodeSøkerMedTidslinjedata, b: PeriodeSøkerMedTidslin
 type PeriodeMedStartOgSlutt = {
   start: Date;
   end: Date;
-  status: 'success' | 'warning' | 'danger' | 'info' | 'neutral';
+  status: 'success' | 'warning' | 'danger';
+  periodeType: string;
+  erGradert: boolean;
+  erOpphold: boolean;
+  harUtsettelse: boolean;
+  begrunnelse?: string;
 } & PeriodeSøkerMedTidslinjedata;
 
-const getStatus = (
-  periode: PeriodeSoker,
-  tilknyttetStortinget: boolean,
-): 'success' | 'warning' | 'danger' | 'info' | 'neutral' => {
-  const opphold = periode.oppholdÅrsak !== oppholdArsakType.UDEFINERT;
-  if (opphold) {
-    return 'neutral';
-  }
+const getStatus = (periode: PeriodeSoker, tilknyttetStortinget: boolean): 'success' | 'warning' | 'danger' => {
   if (periode.gradertAktivitet && periode.graderingInnvilget) {
-    return 'info';
+    return 'success';
   }
   if ('erOppfylt' in periode && periode.erOppfylt === false) {
     return 'danger';
@@ -83,7 +98,13 @@ const getStatus = (
   if (periode.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING || tilknyttetStortinget) {
     return 'warning';
   }
+
   return 'danger';
+};
+
+const finnPeriodeType = (valgtPeriode: PeriodeSoker): string => {
+  const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0].stønadskontoType === '-';
+  return kontoIkkeSatt ? '' : valgtPeriode.aktiviteter[0]?.stønadskontoType;
 };
 
 const formatPaneler = (
@@ -95,6 +116,11 @@ const formatPaneler = (
     start: parseDateString(periode.periode.fom),
     end: parseDateString(periode.tomMoment),
     status: getStatus(periode.periode, tilknyttetStortinget),
+    periodeType: finnPeriodeType(periode.periode),
+    erGradert: periode.periode.gradertAktivitet && periode.periode.graderingInnvilget,
+    erOpphold: periode.periode.oppholdÅrsak !== oppholdArsakType.UDEFINERT,
+    harUtsettelse: periode.periode.utsettelseType !== '-',
+    begrunnelse: periode.periode.begrunnelse,
   }));
 
 const lagGruppeIder = (perioder: PeriodeSøkerMedTidslinjedata[] = []) =>
@@ -106,20 +132,25 @@ const lagGruppeIder = (perioder: PeriodeSøkerMedTidslinjedata[] = []) =>
     }, [])
     .map(activity => activity.group);
 
-const finnIkonGittKjønnkode = (kjønnKode: Kjønnkode) => {
+const finnIkonGittKjønnkode = (kjønnKode: string, label: string) => {
   if (kjønnKode === KjønnkodeEnum.KVINNE) {
-    return <FigureOutwardIcon width={20} height={20} />;
+    return <FigureOutwardIcon width={20} height={20} title={label} />;
   }
   if (kjønnKode === KjønnkodeEnum.MANN) {
-    return <SilhouetteIcon width={20} height={20} />;
+    return <SilhouetteIcon width={20} height={20} title={label} />;
   }
-  return <FigureCombinationIcon width={20} height={20} />;
+  return <FigureCombinationIcon width={20} height={20} title={label} />;
 };
 
-const finnIkon = (hovedsokerKjonnKode: Kjønnkode, medsokerKjonnKode: Kjønnkode, antallRader: number, radNr: number) =>
-  finnIkonGittKjønnkode(antallRader === 1 || radNr > 0 ? hovedsokerKjonnKode : medsokerKjonnKode);
+const finnIkon = (
+  hovedsokerKjonnKode: string,
+  medsokerKjonnKode: string,
+  antallRader: number,
+  radNr: number,
+  label: string,
+) => finnIkonGittKjønnkode(antallRader === 1 || radNr > 0 ? hovedsokerKjonnKode : medsokerKjonnKode, label);
 
-const finnLabelGittKjønnkode = (kjønnKode: Kjønnkode) => {
+const finnLabelGittKjønnkode = (kjønnKode: string) => {
   if (kjønnKode === KjønnkodeEnum.KVINNE) {
     return 'UttakTidslinje.Kvinne';
   }
@@ -129,7 +160,7 @@ const finnLabelGittKjønnkode = (kjønnKode: Kjønnkode) => {
   return 'UttakTidslinje.Ukjent';
 };
 
-const finnLabel = (hovedsokerKjonnKode: Kjønnkode, medsokerKjonnKode: Kjønnkode, antallRader: number, radNr: number) =>
+const finnLabel = (hovedsokerKjonnKode: string, medsokerKjonnKode: string, antallRader: number, radNr: number) =>
   finnLabelGittKjønnkode(antallRader === 1 || radNr > 0 ? hovedsokerKjonnKode : medsokerKjonnKode);
 
 type PinData = {
@@ -182,16 +213,41 @@ const lagPinData = (tidslinjeTider: TidslinjeTimes): PinData[] => {
   return slåSammenPinDataOmLikDato(pinData);
 };
 
+const finnLabelForPeriode = (periode: PeriodeMedStartOgSlutt, behandlingStatusKode: string): string => {
+  if (periode.erGradert) {
+    return 'UttakTidslinje.GradertPeriode';
+  }
+  if (periode.begrunnelse && behandlingStatusKode === behandlingStatus.FATTER_VEDTAK) {
+    return 'UttakTidslinje.ManueltEditert';
+  }
+  if (periode.harUtsettelse) {
+    return 'UttakTidslinje.UtsettelsePeriode';
+  }
+  return periode.erOpphold ? 'UttakTidslinje.OppholdPeriode' : PERIODE_TYPE_LABEL_MAP[periode.periodeType];
+};
+
+const finnIkonForPeriode = (periode: PeriodeMedStartOgSlutt, behandlingStatusKode: string) => {
+  if (periode.erGradert) {
+    return <PercentIcon />;
+  }
+  if (periode.begrunnelse && behandlingStatusKode === behandlingStatus.FATTER_VEDTAK) {
+    return <PersonPencilIcon />;
+  }
+  if (periode.harUtsettelse) {
+    return <TrendFlatIcon />;
+  }
+  return periode.erOpphold ? <DoorOpenIcon /> : PERIODE_TYPE_IKON_MAP[periode.periodeType];
+};
+
 interface TidslinjeProps {
   tidslinjeTider: TidslinjeTimes;
-  hovedsokerKjonnKode: Kjønnkode;
-  medsokerKjonnKode?: Kjønnkode;
-  openPeriodInfo: (event: MouseEvent | KeyboardEvent) => void;
+  hovedsokerKjonnKode: string;
+  medsokerKjonnKode?: string;
   selectedPeriod?: PeriodeSøkerMedTidslinjedata;
   uttakPerioder: PeriodeSøkerMedTidslinjedata[];
-  children?: React.ReactNode;
   tilknyttetStortinget: boolean;
   setValgtPeriodeIndex: React.Dispatch<React.SetStateAction<number>>;
+  behandlingStatusKode: string;
 }
 
 /**
@@ -200,15 +256,14 @@ interface TidslinjeProps {
  * Formaterer tidslinjen for uttak
  */
 const UttakTidslinje: FunctionComponent<TidslinjeProps> = ({
-  children,
   tidslinjeTider,
   hovedsokerKjonnKode,
   medsokerKjonnKode,
-  openPeriodInfo,
   selectedPeriod,
   uttakPerioder,
   tilknyttetStortinget,
   setValgtPeriodeIndex,
+  behandlingStatusKode,
 }) => {
   const intl = useIntl();
 
@@ -234,14 +289,45 @@ const UttakTidslinje: FunctionComponent<TidslinjeProps> = ({
 
   const pinData = lagPinData(tidslinjeTider);
 
+  const originalFomDato = dayjs(sorterteUttaksperioder[0].periode.fom);
+  const originalTomDato = dayjs(sorterteUttaksperioder[sorterteUttaksperioder.length - 1].periode.tom);
+
+  const [fomDato, setFomDato] = useState(originalFomDato);
+  const [tomDato, setTomDato] = useState(originalTomDato);
+
+  const goBackward = () => {
+    if (!fomDato.subtract(1, 'month').isBefore(originalFomDato)) {
+      setFomDato(fomDato.subtract(1, 'month'));
+      setTomDato(tomDato.subtract(1, 'month'));
+    }
+  };
+  const goForward = () => {
+    if (!tomDato.add(1, 'month').isAfter(originalTomDato)) {
+      setFomDato(fomDato.add(1, 'month'));
+      setTomDato(tomDato.add(1, 'month'));
+    }
+  };
+
+  const zoomIn = () => {
+    if (!fomDato.add(3, 'month').isAfter(tomDato)) {
+      setFomDato(fomDato.add(1, 'month'));
+      setTomDato(tomDato.subtract(1, 'month'));
+    }
+  };
+
+  const zoomOut = () => {
+    if (tomDato.add(1, 'month').diff(fomDato.subtract(1, 'month'), 'months') < 36) {
+      setFomDato(fomDato.subtract(1, 'month'));
+      setTomDato(tomDato.add(1, 'month'));
+    }
+  };
+
   return (
     <>
-      <VerticalSpacer sixteenPx />
+      <VerticalSpacer thirtyTwoPx />
       <Timeline
-        startDate={dayjs(sorterteUttaksperioder[0].periode.fom).subtract(1, 'days').toDate()}
-        endDate={dayjs(sorterteUttaksperioder[sorterteUttaksperioder.length - 1].periode.tom)
-          .add(2, 'days')
-          .toDate()}
+        startDate={dayjs(fomDato).subtract(1, 'days').toDate()}
+        endDate={dayjs(tomDato).add(2, 'days').toDate()}
       >
         {pinData.map(data => (
           <Timeline.Pin key={data.dato} date={dayjs(data.dato).toDate()}>
@@ -255,49 +341,73 @@ const UttakTidslinje: FunctionComponent<TidslinjeProps> = ({
             </BodyShort>
           </Timeline.Pin>
         ))}
-        {radIder.map((radId, index) => (
-          <Timeline.Row
-            key={radId}
-            label={intl.formatMessage({ id: finnLabel(hovedsokerKjonnKode, medsokerKjonnKode, radIder.length, index) })}
-            icon={finnIkon(hovedsokerKjonnKode, medsokerKjonnKode, radIder.length, index)}
-          >
-            {perioder
-              .filter(periode => periode.group === radId)
-              .map(periode => (
-                <Timeline.Period
-                  key={periode.id}
-                  start={periode.start}
-                  end={periode.end}
-                  status={periode.status}
-                  onSelectPeriod={() => setValgtPeriodeIndex(periode.id)}
-                  isActive={periode.id === valgtPeriode?.id}
-                  icon={PERIODE_STATUS_IKON_MAP[periode.status]}
-                />
-              ))}
-          </Timeline.Row>
-        ))}
-        <Timeline.Zoom>
-          <Timeline.Zoom.Button label="6 mnd" interval="month" count={6} />
-          <Timeline.Zoom.Button label="1 år" interval="year" count={1} />
-        </Timeline.Zoom>
+        {radIder.map((radId, index) => {
+          const label = intl.formatMessage({
+            id: finnLabel(hovedsokerKjonnKode, medsokerKjonnKode, radIder.length, index),
+          });
+          return (
+            <Timeline.Row
+              key={radId}
+              label="-"
+              icon={finnIkon(hovedsokerKjonnKode, medsokerKjonnKode, radIder.length, index, label)}
+            >
+              {perioder
+                .filter(periode => periode.group === radId)
+                .map(periode => (
+                  <Timeline.Period
+                    key={periode.id}
+                    start={periode.start}
+                    end={periode.end}
+                    status={periode.status}
+                    onSelectPeriod={() => setValgtPeriodeIndex(periode.id)}
+                    isActive={periode.id === valgtPeriode?.id}
+                    icon={finnIkonForPeriode(periode, behandlingStatusKode)}
+                    title={intl.formatMessage({ id: finnLabelForPeriode(periode, behandlingStatusKode) })}
+                  />
+                ))}
+            </Timeline.Row>
+          );
+        })}
       </Timeline>
       <VerticalSpacer thirtyTwoPx />
-      <FlexContainer>
-        <FlexRow>
-          <FlexColumn className={styles.ctrlCol}>
-            <TimeLineControl
-              goBackwardCallback={() => undefined}
-              goForwardCallback={() => undefined}
-              zoomInCallback={() => undefined}
-              zoomOutCallback={() => undefined}
-              openPeriodInfo={openPeriodInfo}
-              selectedPeriod={valgtPeriode}
-            >
-              {children}
-            </TimeLineControl>
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
+      <FloatRight>
+        <Button
+          className={styles.margin}
+          size="small"
+          icon={<PlusIcon aria-hidden />}
+          onClick={zoomIn}
+          variant="primary-neutral"
+          type="button"
+          title={intl.formatMessage({ id: 'UttakTidslinje.ZoomInn' })}
+        />
+        <Button
+          className={styles.margin}
+          size="small"
+          icon={<MinusIcon aria-hidden />}
+          onClick={zoomOut}
+          variant="primary-neutral"
+          type="button"
+          title={intl.formatMessage({ id: 'UttakTidslinje.ZoomUt' })}
+        />
+        <Button
+          className={styles.margin}
+          size="small"
+          icon={<ArrowLeftIcon aria-hidden />}
+          onClick={goBackward}
+          variant="primary-neutral"
+          type="button"
+          title={intl.formatMessage({ id: 'UttakTidslinje.ScrollTilVenstre' })}
+        />
+        <Button
+          className={styles.margin}
+          size="small"
+          icon={<ArrowRightIcon aria-hidden />}
+          onClick={goForward}
+          variant="primary-neutral"
+          type="button"
+          title={intl.formatMessage({ id: 'UttakTidslinje.ScrollTilHogre' })}
+        />
+      </FloatRight>
     </>
   );
 };
