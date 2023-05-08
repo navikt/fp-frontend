@@ -28,7 +28,7 @@
     "react-intl": "6.4.2"
   },
   "devDependencies": {
-    "eslint": "8.39.0",
+    "eslint": "8.40.0",
     "typescript": "5.0.4",
     "vite": "4.3.1"
   },
