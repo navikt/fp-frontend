@@ -76,6 +76,14 @@ const EndreUtlandModal: FunctionComponent<OwnProps> = ({
                 value: FagsakMarkeringKode.BOSATT_UTLAND,
               },
               {
+                label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.SelvstendigNæring' }),
+                value: FagsakMarkeringKode.SELVSTENDIG_NÆRING,
+              },
+              {
+                label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.DødDødfødsel' }),
+                value: FagsakMarkeringKode.DØD_DØDFØDSEL,
+              },
+              {
                 label: intl.formatMessage({ id: 'MenyEndreUtlandIndex.SammensattKontroll' }),
                 value: FagsakMarkeringKode.SAMMENSATT_KONTROLL,
               },

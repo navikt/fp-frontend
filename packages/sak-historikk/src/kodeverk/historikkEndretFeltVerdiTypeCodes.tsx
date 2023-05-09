@@ -821,6 +821,14 @@ const historikkEndretFeltVerdiTypeCodes = {
     kode: 'SAMMENSATT_KONTROLL',
     verdiId: 'HistorikkEndretFeltVerdiType.SammensattKontroll',
   },
+  DØD_DØDFØDSEL: {
+    kode: 'DØD_DØDFØDSEL',
+    verdiId: 'HistorikkEndretFeltVerdiType.DødDødfødsel',
+  },
+  SELVSTENDIG_NÆRING: {
+    kode: 'SELVSTENDIG_NÆRING',
+    verdiId: 'HistorikkEndretFeltVerdiType.SelvstendigNæring',
+  },
   SØKER_ER_I_PERMISJON: {
     kode: 'SØKER_ER_I_PERMISJON',
     verdiId: 'HistorikkEndretFeltVerdiType.SøkerErIPermisjon',
