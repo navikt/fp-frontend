@@ -254,7 +254,7 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
                 )}
               </FlexColumn>
             )}
-            <FlexColumn>
+            <FlexColumn className={styles.fix}>
               <Button
                 className={styles.margin}
                 size="xsmall"
@@ -274,6 +274,7 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
                 variant="secondary-neutral"
                 type="button"
                 title={intl.formatMessage({ id: 'UttakPeriodePanel.nextPeriod' })}
+                iconPosition="right"
               >
                 <FormattedMessage id="UttakPeriodePanel.nextPeriodShort" />
               </Button>

@@ -120,7 +120,7 @@ const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
                 <FormattedMessage id="ActivityPanel.Details" />
               </Heading>
             </FlexColumn>
-            <FlexColumn>
+            <FlexColumn className={styles.fix}>
               <Button
                 className={styles.margin}
                 size="xsmall"
@@ -140,6 +140,7 @@ const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
                 variant="secondary-neutral"
                 type="button"
                 title={intl.formatMessage({ id: 'Timeline.nextPeriod' })}
+                iconPosition="right"
               >
                 <FormattedMessage id="Timeline.nextPeriodShort" />
               </Button>
