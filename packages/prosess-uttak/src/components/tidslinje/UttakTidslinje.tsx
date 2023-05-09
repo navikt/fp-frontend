@@ -16,13 +16,20 @@ import {
   PercentIcon,
   DoorOpenIcon,
   PersonPencilIcon,
-  TrendFlatIcon,
+  PauseIcon,
 } from '@navikt/aksel-icons';
 import { BodyShort, Button, Label } from '@navikt/ds-react';
 import { DateLabel, FloatRight, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { KjønnkodeEnum, PeriodeSoker } from '@navikt/fp-types';
-import { behandlingStatus, oppholdArsakType, periodeResultatType, uttakPeriodeType } from '@navikt/fp-kodeverk';
+import { AlleKodeverk, Fagsak, PeriodeSoker } from '@navikt/fp-types';
+import {
+  KodeverkType,
+  behandlingStatus,
+  oppholdArsakType,
+  periodeResultatType,
+  relasjonsRolleType,
+  uttakPeriodeType,
+} from '@navikt/fp-kodeverk';
 
 import styles from './uttakTidslinje.module.css';
 
@@ -132,36 +139,18 @@ const lagGruppeIder = (perioder: PeriodeSøkerMedTidslinjedata[] = []) =>
     }, [])
     .map(activity => activity.group);
 
-const finnIkonGittKjønnkode = (kjønnKode: string, label: string) => {
-  if (kjønnKode === KjønnkodeEnum.KVINNE) {
-    return <FigureOutwardIcon width={20} height={20} title={label} />;
+const finnIkonGittKjønnkode = (rrType: string) => {
+  if (rrType === relasjonsRolleType.MOR || rrType === relasjonsRolleType.MEDMOR) {
+    return <FigureOutwardIcon width={20} height={20} />;
   }
-  if (kjønnKode === KjønnkodeEnum.MANN) {
-    return <SilhouetteIcon width={20} height={20} title={label} />;
+  if (rrType === relasjonsRolleType.FAR) {
+    return <SilhouetteIcon width={20} height={20} />;
   }
-  return <FigureCombinationIcon width={20} height={20} title={label} />;
+  return <FigureCombinationIcon width={20} height={20} />;
 };
 
-const finnIkon = (
-  hovedsokerKjonnKode: string,
-  medsokerKjonnKode: string,
-  antallRader: number,
-  radNr: number,
-  label: string,
-) => finnIkonGittKjønnkode(antallRader === 1 || radNr > 0 ? hovedsokerKjonnKode : medsokerKjonnKode, label);
-
-const finnLabelGittKjønnkode = (kjønnKode: string) => {
-  if (kjønnKode === KjønnkodeEnum.KVINNE) {
-    return 'UttakTidslinje.Kvinne';
-  }
-  if (kjønnKode === KjønnkodeEnum.MANN) {
-    return 'UttakTidslinje.Mann';
-  }
-  return 'UttakTidslinje.Ukjent';
-};
-
-const finnLabel = (hovedsokerKjonnKode: string, medsokerKjonnKode: string, antallRader: number, radNr: number) =>
-  finnLabelGittKjønnkode(antallRader === 1 || radNr > 0 ? hovedsokerKjonnKode : medsokerKjonnKode);
+const finnIkon = (fagsak: Fagsak, erHovedsøker: boolean) =>
+  finnIkonGittKjønnkode(erHovedsøker ? fagsak.relasjonsRolleType : fagsak.annenpartBehandling.relasjonsRolleType);
 
 type PinData = {
   dato: string;
@@ -234,20 +223,26 @@ const finnIkonForPeriode = (periode: PeriodeMedStartOgSlutt, behandlingStatusKod
     return <PersonPencilIcon />;
   }
   if (periode.harUtsettelse) {
-    return <TrendFlatIcon />;
+    return <PauseIcon />;
   }
   return periode.erOpphold ? <DoorOpenIcon /> : PERIODE_TYPE_IKON_MAP[periode.periodeType];
 };
 
+const finnRolle = (fagsak: Fagsak, alleKodeverk: AlleKodeverk, erHovedsøker: boolean): string | undefined => {
+  const kodeverk = alleKodeverk[KodeverkType.RELASJONSROLLE_TYPE];
+  const rrType = erHovedsøker ? fagsak.relasjonsRolleType : fagsak.annenpartBehandling.relasjonsRolleType;
+  return kodeverk.find(k => k.kode === rrType)?.navn;
+};
+
 interface TidslinjeProps {
   tidslinjeTider: TidslinjeTimes;
-  hovedsokerKjonnKode: string;
-  medsokerKjonnKode?: string;
   selectedPeriod?: PeriodeSøkerMedTidslinjedata;
   uttakPerioder: PeriodeSøkerMedTidslinjedata[];
   tilknyttetStortinget: boolean;
   setValgtPeriodeIndex: React.Dispatch<React.SetStateAction<number>>;
   behandlingStatusKode: string;
+  fagsak: Fagsak;
+  alleKodeverk: AlleKodeverk;
 }
 
 /**
@@ -257,13 +252,13 @@ interface TidslinjeProps {
  */
 const UttakTidslinje: FunctionComponent<TidslinjeProps> = ({
   tidslinjeTider,
-  hovedsokerKjonnKode,
-  medsokerKjonnKode,
   selectedPeriod,
   uttakPerioder,
   tilknyttetStortinget,
   setValgtPeriodeIndex,
   behandlingStatusKode,
+  fagsak,
+  alleKodeverk,
 }) => {
   const intl = useIntl();
 
@@ -342,14 +337,12 @@ const UttakTidslinje: FunctionComponent<TidslinjeProps> = ({
           </Timeline.Pin>
         ))}
         {radIder.map((radId, index) => {
-          const label = intl.formatMessage({
-            id: finnLabel(hovedsokerKjonnKode, medsokerKjonnKode, radIder.length, index),
-          });
+          const erHovedsøker = radIder.length === 1 || index > 0;
           return (
             <Timeline.Row
               key={radId}
-              label="-"
-              icon={finnIkon(hovedsokerKjonnKode, medsokerKjonnKode, radIder.length, index, label)}
+              label={finnRolle(fagsak, alleKodeverk, erHovedsøker)}
+              icon={finnIkon(fagsak, erHovedsøker)}
             >
               {perioder
                 .filter(periode => periode.group === radId)
@@ -369,7 +362,7 @@ const UttakTidslinje: FunctionComponent<TidslinjeProps> = ({
           );
         })}
       </Timeline>
-      <VerticalSpacer thirtyTwoPx />
+      <VerticalSpacer twentyPx />
       <FloatRight>
         <Button
           className={styles.margin}

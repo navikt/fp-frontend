@@ -68,6 +68,7 @@ enum KodeverkType {
   OPPHOLDSTILLATELSE_TYPE = 'OppholdstillatelseType',
   FARESIGNAL_VURDERING = 'FaresignalVurdering',
   FORDELING_PERIODE_KILDE = 'FordelingPeriodeKilde',
+  RELASJONSROLLE_TYPE = 'RelasjonsRolleType',
 }
 
 export default KodeverkType;

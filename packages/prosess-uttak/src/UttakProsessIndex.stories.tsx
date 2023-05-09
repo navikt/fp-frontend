@@ -10,6 +10,7 @@ import {
   UttaksresultatPeriode,
   UttakStonadskontoer,
   Aksjonspunkt,
+  Fagsak,
 } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import {
@@ -18,6 +19,7 @@ import {
   aksjonspunktType,
   aksjonspunktStatus as AksjonspunktStatus,
   navBrukerKjonn as NavBrukerKjonn,
+  relasjonsRolleType,
 } from '@navikt/fp-kodeverk';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -43,6 +45,13 @@ const familiehendelse = {
     ],
   },
 } as FamilieHendelseSamling;
+
+const fagsak = {
+  relasjonsRolleType: relasjonsRolleType.MOR,
+  annenpartBehandling: {
+    relasjonsRolleType: relasjonsRolleType.FAR,
+  },
+} as Fagsak;
 
 const behandling = {
   uuid: '1',
@@ -227,6 +236,7 @@ const Template: StoryFn<{
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     alleMerknaderFraBeslutter={{}}
     setFormData={() => undefined}
+    fagsak={fagsak}
   />
 );
 

@@ -53,7 +53,7 @@ const TimeLineData: FunctionComponent<OwnProps> = ({
           <FlexColumn>
             <Button
               className={styles.margin}
-              size="small"
+              size="xsmall"
               icon={<ArrowLeftIcon aria-hidden />}
               onClick={velgForrigePeriode}
               variant="secondary-neutral"
@@ -64,7 +64,7 @@ const TimeLineData: FunctionComponent<OwnProps> = ({
             </Button>
             <Button
               className={styles.margin}
-              size="small"
+              size="xsmall"
               icon={<ArrowRightIcon aria-hidden />}
               onClick={velgNestePeriode}
               variant="secondary-neutral"
@@ -74,10 +74,10 @@ const TimeLineData: FunctionComponent<OwnProps> = ({
               <FormattedMessage id="TimeLineData.nextPeriodShort" />
             </Button>
             <Button
-              size="small"
+              size="xsmall"
               icon={<XMarkIcon aria-hidden />}
               onClick={lukkPeriode}
-              variant="secondary-neutral"
+              variant="tertiary-neutral"
               type="button"
               title={intl.formatMessage({ id: 'TimeLineData.lukkPeriode' })}
             />

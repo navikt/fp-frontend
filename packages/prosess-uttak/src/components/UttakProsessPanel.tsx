@@ -24,6 +24,7 @@ import {
   Aksjonspunkt,
   AlleKodeverk,
   PeriodeSoker,
+  Fagsak,
 } from '@navikt/fp-types';
 import {
   StonadskontoType,
@@ -167,6 +168,7 @@ interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   formData?: PeriodeSoker[];
   setFormData: (data: PeriodeSoker[]) => void;
+  fagsak: Fagsak;
 }
 
 const sortByDate = (a: PeriodeSoker, b: PeriodeSoker): number => {
@@ -196,6 +198,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   arbeidsgiverOpplysningerPerId,
   formData,
   setFormData,
+  fagsak,
 }) => {
   const intl = useIntl();
 
@@ -325,6 +328,8 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
         familiehendelse={familiehendelse}
         ytelsefordeling={ytelsefordeling}
         tilknyttetStortinget={erTilknyttetStortinget}
+        fagsak={fagsak}
+        alleKodeverk={alleKodeverk}
       />
       {valgtPeriodeIndex !== undefined && (
         <>

@@ -26,6 +26,7 @@ export type FagsakHendelse = Readonly<{
 export type AnnenPartBehandling = {
   saksnummer: string;
   behandlingUuid: string;
+  relasjonsRolleType: string;
 };
 
 type Fagsak = Readonly<{
