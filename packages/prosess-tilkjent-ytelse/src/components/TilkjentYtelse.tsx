@@ -167,14 +167,16 @@ const TilkjentYtelse: FunctionComponent<OwnProps> = ({
             <DateLabel dateString={soknadDate} />
           </BodyShort>
         </Timeline.Pin>
-        <Timeline.Pin date={dayjs(familiehendelseData.dato).toDate()}>
-          <BodyShort>
-            <FormattedMessage id={familiehendelseData.textId} />
-          </BodyShort>
-          <BodyShort>
-            <DateLabel dateString={familiehendelseData.dato} />
-          </BodyShort>
-        </Timeline.Pin>
+        {familiehendelseData.dato && (
+          <Timeline.Pin date={dayjs(familiehendelseData.dato).toDate()}>
+            <BodyShort>
+              <FormattedMessage id={familiehendelseData.textId} />
+            </BodyShort>
+            <BodyShort>
+              <DateLabel dateString={familiehendelseData.dato} />
+            </BodyShort>
+          </Timeline.Pin>
+        )}
         <Timeline.Row
           label="-"
           icon={
