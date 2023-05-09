@@ -254,7 +254,7 @@ describe('<UttakProsessIndex>', () => {
       ),
     ).toBeInTheDocument();
 
-    await userEvent.click(screen.getByAltText('Del opp perioden'));
+    await userEvent.click(screen.getByText('Del opp perioden'));
 
     expect(await screen.findByText('Angi t.o.m. dato for første periode')).toBeInTheDocument();
 

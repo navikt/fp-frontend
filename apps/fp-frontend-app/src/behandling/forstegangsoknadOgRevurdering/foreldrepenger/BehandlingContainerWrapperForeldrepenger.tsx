@@ -129,6 +129,7 @@ const BehandlingContainerWrapperForeldrepenger: FunctionComponent<OwnProps> = ({
         <FortsattMedlemskapProsessStegInitPanel {...props} rettigheter={rettigheter} />
         <UttakProsessStegInitPanel
           {...props}
+          fagsak={fagsak}
           arbeidsgiverOpplysningerPerId={arbeidsgivere}
           personoversikt={personoversikt}
           rettigheter={rettigheter}

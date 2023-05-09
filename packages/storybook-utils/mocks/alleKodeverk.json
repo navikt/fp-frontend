@@ -1,4 +1,21 @@
 {
+  "RelasjonsRolleType": [
+    {
+      "kode": "FARA",
+      "kodeverk": "RELASJONSROLLE_TYPE",
+      "navn": "Far"
+    },
+    {
+      "kode": "MORA",
+      "kodeverk": "RELASJONSROLLE_TYPE",
+      "navn": "Mor"
+    },
+    {
+      "kode": "MMOR",
+      "kodeverk": "RELASJONSROLLE_TYPE",
+      "navn": "Medmor"
+    }
+  ],
   "HistorikkinnslagType": [
     {
       "kode": "REGISTRER_OM_VERGE",
@@ -5912,23 +5929,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11\"}}}",
       "sortering": "14-11-1-a",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4072",
@@ -5937,26 +5941,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-9\"}}}",
       "sortering": "14-09-7",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4037",
@@ -5965,23 +5953,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11\"}}}",
       "sortering": "14-11-1-b",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4085",
@@ -5990,25 +5965,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-10\"}}}",
       "sortering": "14-10-6",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "2035",
@@ -6017,20 +5977,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-14,14-16\"}}}",
       "sortering": "14-14-3",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "4052",
@@ -6039,22 +5989,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-13\"}}}",
       "sortering": "14-13-1-c",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "4032",
@@ -6063,23 +6001,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11\"}}}",
       "sortering": "14-11-1-a",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4013",
@@ -6088,22 +6013,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-10\"}}}",
       "sortering": "14-10-1",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4084",
@@ -6112,26 +6025,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-10\"}}}",
       "sortering": "14-10-6",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4097",
@@ -6140,25 +6037,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-5\"}}}",
       "sortering": "14-05",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4104",
@@ -6167,26 +6049,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-10\"}}}",
       "sortering": "14-10-3",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4086",
@@ -6195,26 +6061,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-10,14-11\"}}}",
       "sortering": "14-10-6",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4002",
@@ -6223,25 +6073,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-9\"}}}",
       "sortering": "14-09",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "2012",
@@ -6250,23 +6085,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11\"}}}",
       "sortering": "14-11-1-c",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4023",
@@ -6275,25 +6097,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-10\"}}}",
       "sortering": "14-10-5",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4031",
@@ -6302,24 +6109,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-9\"}}}",
       "sortering": "14-09",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR"]
     },
     {
       "kode": "4112",
@@ -6328,20 +6121,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11\"}}}",
       "sortering": "14-11",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "FRITT_UTTAK",
-        "MINSTERETT_2022"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "MOR"
-      ]
+      "gyldigForLovendringer": ["FRITT_UTTAK", "MINSTERETT_2022"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["MØDREKVOTE", "FORELDREPENGER"],
+      "synligForRolle": ["MOR"]
     },
     {
       "kode": "2017",
@@ -6350,18 +6133,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11,14-14,14-13\"}}}",
       "sortering": "14-11-1-c",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "2036",
@@ -6370,20 +6145,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-14\"}}}",
       "sortering": "14-14-3",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "4071",
@@ -6392,26 +6157,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-10\"}}}",
       "sortering": "14-10",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4098",
@@ -6420,25 +6169,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-5\"}}}",
       "sortering": "14-05",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4067",
@@ -6447,22 +6181,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-13,21-3\"}}}",
       "sortering": "14-13-1-b",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "4066",
@@ -6471,22 +6193,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-13,21-3\"}}}",
       "sortering": "14-13-1-a",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "2032",
@@ -6495,21 +6205,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-15,14-16\"}}}",
       "sortering": "14-16",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FORELDREPENGER"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "2026",
@@ -6518,20 +6217,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11\"}}}",
       "sortering": "14-11",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "FRITT_UTTAK",
-        "MINSTERETT_2022"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "MOR"
-      ]
+      "gyldigForLovendringer": ["FRITT_UTTAK", "MINSTERETT_2022"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["MØDREKVOTE", "FORELDREPENGER"],
+      "synligForRolle": ["MOR"]
     },
     {
       "kode": "2031",
@@ -6540,22 +6229,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-12,14-16\"}}}",
       "sortering": "14-16",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FEDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["MØDREKVOTE", "FEDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4081",
@@ -6564,23 +6241,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11\"}}}",
       "sortering": "14-11-1-a",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4053",
@@ -6589,22 +6253,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-13\"}}}",
       "sortering": "14-13-1-d",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "2007",
@@ -6613,20 +6265,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-10\"}}}",
       "sortering": "14-10",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FORELDREPENGER"],
+      "synligForRolle": ["MOR"]
     },
     {
       "kode": "2014",
@@ -6635,23 +6277,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11\"}}}",
       "sortering": "14-11-1-c",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4007",
@@ -6660,23 +6289,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-12\"}}}",
       "sortering": "14-12-3",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["MØDREKVOTE", "FORELDREPENGER", "FEDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "2023",
@@ -6685,22 +6301,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-15\"}}}",
       "sortering": "14-15-1",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FEDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["MØDREKVOTE", "FEDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4056",
@@ -6709,22 +6313,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-13\"}}}",
       "sortering": "14-13-1-g",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "2016",
@@ -6733,18 +6325,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11,14-14,14-13\"}}}",
       "sortering": "14-11-1-b",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "2004",
@@ -6753,20 +6337,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-14,14-13\"}}}",
       "sortering": "14-14",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "2018",
@@ -6775,18 +6349,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11,14-14,14-13\"}}}",
       "sortering": "14-11-1-c",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "2024",
@@ -6795,24 +6361,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11\"}}}",
       "sortering": "14-11",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "FRITT_UTTAK",
-        "MINSTERETT_2022"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["FRITT_UTTAK", "MINSTERETT_2022"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4068",
@@ -6821,22 +6373,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-13,21-3\"}}}",
       "sortering": "14-13-1-c",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "4087",
@@ -6845,25 +6385,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-2\"}}}",
       "sortering": "14-02",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4110",
@@ -6872,20 +6397,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11\"}}}",
       "sortering": "14-11",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "FRITT_UTTAK",
-        "MINSTERETT_2022"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "MOR"
-      ]
+      "gyldigForLovendringer": ["FRITT_UTTAK", "MINSTERETT_2022"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["MØDREKVOTE", "FORELDREPENGER"],
+      "synligForRolle": ["MOR"]
     },
     {
       "kode": "4115",
@@ -6894,20 +6409,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11,21-3\"}}}",
       "sortering": "14-11",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "FRITT_UTTAK",
-        "MINSTERETT_2022"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "MOR"
-      ]
+      "gyldigForLovendringer": ["FRITT_UTTAK", "MINSTERETT_2022"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["MØDREKVOTE", "FORELDREPENGER"],
+      "synligForRolle": ["MOR"]
     },
     {
       "kode": "4096",
@@ -6916,25 +6421,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-5\"}}}",
       "sortering": "14-05",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4035",
@@ -6943,18 +6433,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11,14-14,14-13\"}}}",
       "sortering": "14-11-1-b",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "4073",
@@ -6963,22 +6445,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-12\"}}}",
       "sortering": "14-12-1",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["MØDREKVOTE", "FORELDREPENGER", "FEDREKVOTE"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "4069",
@@ -6987,22 +6457,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-13,21-3\"}}}",
       "sortering": "14-13-1-d",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "4062",
@@ -7011,23 +6469,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11,21-3\"}}}",
       "sortering": "14-11-1-b",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4089",
@@ -7036,22 +6481,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-13,21-3\"}}}",
       "sortering": "14-13-1-g",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "4034",
@@ -7060,25 +6493,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11,14-9\"}}}",
       "sortering": "14-11-0",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "2038",
@@ -7087,25 +6505,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-10\"}}}",
       "sortering": "14-10-6",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4075",
@@ -7114,21 +6517,10 @@
       "lovHjemmel": "",
       "sortering": "14-09-1",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FELLESPERIODE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4005",
@@ -7137,25 +6529,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-10\"}}}",
       "sortering": "14-10-7",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "2034",
@@ -7164,20 +6541,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-10,14-16\"}}}",
       "sortering": "14-16",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FORELDREPENGER"],
+      "synligForRolle": ["MOR"]
     },
     {
       "kode": "2028",
@@ -7186,19 +6553,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-14,14-13\"}}}",
       "sortering": "14-14",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "FRITT_UTTAK",
-        "MINSTERETT_2022"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["FRITT_UTTAK", "MINSTERETT_2022"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "4060",
@@ -7207,25 +6565,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-10\"}}}",
       "sortering": "14-10-6",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "2006",
@@ -7234,21 +6577,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-10\"}}}",
       "sortering": "14-10",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FORELDREPENGER_FØR_FØDSEL"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4105",
@@ -7257,25 +6589,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-9\"}}}",
       "sortering": "14-09-6",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4058",
@@ -7284,23 +6601,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-5\"}}}",
       "sortering": "14-05-3",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "2002",
@@ -7309,22 +6613,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-9\"}}}",
       "sortering": "14-09",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4095",
@@ -7333,20 +6625,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-10\"}}}",
       "sortering": "14-10-1",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL"
-      ],
-      "synligForRolle": [
-        "MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FORELDREPENGER_FØR_FØDSEL"],
+      "synligForRolle": ["MOR"]
     },
     {
       "kode": "4116",
@@ -7355,20 +6637,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11,21-3\"}}}",
       "sortering": "14-11",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "FRITT_UTTAK",
-        "MINSTERETT_2022"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "MOR"
-      ]
+      "gyldigForLovendringer": ["FRITT_UTTAK", "MINSTERETT_2022"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["MØDREKVOTE", "FORELDREPENGER"],
+      "synligForRolle": ["MOR"]
     },
     {
       "kode": "4092",
@@ -7377,22 +6649,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-12\"}}}",
       "sortering": "14-12",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FEDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["MØDREKVOTE", "FEDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4038",
@@ -7401,23 +6661,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11\"}}}",
       "sortering": "14-11-1-c",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "2022",
@@ -7426,22 +6673,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-12\"}}}",
       "sortering": "14-12",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FEDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["MØDREKVOTE", "FEDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4008",
@@ -7450,23 +6685,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-12\"}}}",
       "sortering": "14-12-3",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["MØDREKVOTE", "FORELDREPENGER", "FEDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4064",
@@ -7475,23 +6697,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11,21-3\"}}}",
       "sortering": "14-11-1-c",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4111",
@@ -7500,20 +6709,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11\"}}}",
       "sortering": "14-11",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "FRITT_UTTAK",
-        "MINSTERETT_2022"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "MOR"
-      ]
+      "gyldigForLovendringer": ["FRITT_UTTAK", "MINSTERETT_2022"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["MØDREKVOTE", "FORELDREPENGER"],
+      "synligForRolle": ["MOR"]
     },
     {
       "kode": "4054",
@@ -7522,22 +6721,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-13\"}}}",
       "sortering": "14-13-1-e",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "2020",
@@ -7546,22 +6733,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-12\"}}}",
       "sortering": "14-09-1",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FEDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["MØDREKVOTE", "FEDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4077",
@@ -7570,25 +6745,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-10 a\"}}}",
       "sortering": "14-10-0-a",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "2019",
@@ -7597,18 +6757,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11,14-14,14-13\"}}}",
       "sortering": "14-11-1-d",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "2025",
@@ -7617,20 +6769,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11\"}}}",
       "sortering": "14-11",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "FRITT_UTTAK",
-        "MINSTERETT_2022"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "MOR"
-      ]
+      "gyldigForLovendringer": ["FRITT_UTTAK", "MINSTERETT_2022"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["MØDREKVOTE", "FORELDREPENGER"],
+      "synligForRolle": ["MOR"]
     },
     {
       "kode": "4030",
@@ -7639,24 +6781,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-9\"}}}",
       "sortering": "14-09",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR"]
     },
     {
       "kode": "4050",
@@ -7665,22 +6793,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-13\"}}}",
       "sortering": "14-13-1-a",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "2003",
@@ -7689,22 +6805,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-12\"}}}",
       "sortering": "14-12",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FEDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["MØDREKVOTE", "FEDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4082",
@@ -7713,23 +6817,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11\"}}}",
       "sortering": "14-11-1-b",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "2013",
@@ -7738,23 +6829,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11\"}}}",
       "sortering": "14-11-1-d",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "2027",
@@ -7763,20 +6841,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11\"}}}",
       "sortering": "14-11",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "FRITT_UTTAK",
-        "MINSTERETT_2022"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "MOR"
-      ]
+      "gyldigForLovendringer": ["FRITT_UTTAK", "MINSTERETT_2022"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["MØDREKVOTE", "FORELDREPENGER"],
+      "synligForRolle": ["MOR"]
     },
     {
       "kode": "4088",
@@ -7785,22 +6853,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-13,21-3\"}}}",
       "sortering": "14-13-1-f",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "4063",
@@ -7809,23 +6865,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11,21-3\"}}}",
       "sortering": "14-11-1-c",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4099",
@@ -7834,25 +6877,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-6\"}}}",
       "sortering": "14-06",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "2039",
@@ -7861,20 +6889,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-9\"}}}",
       "sortering": "14-09-6",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["MØDREKVOTE"],
+      "synligForRolle": ["MOR"]
     },
     {
       "kode": "4103",
@@ -7883,20 +6901,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-9\"}}}",
       "sortering": "14-09-6",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "FRITT_UTTAK",
-        "MINSTERETT_2022"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "MOR"
-      ]
+      "gyldigForLovendringer": ["FRITT_UTTAK", "MINSTERETT_2022"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["MØDREKVOTE", "FORELDREPENGER"],
+      "synligForRolle": ["MOR"]
     },
     {
       "kode": "4039",
@@ -7905,23 +6913,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11\"}}}",
       "sortering": "14-11-1-c",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "2037",
@@ -7930,20 +6925,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-9\"}}}",
       "sortering": "14-09",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FELLESPERIODE"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "4003",
@@ -7952,24 +6937,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-10\"}}}",
       "sortering": "14-10-4",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR"]
     },
     {
       "kode": "4107",
@@ -7978,20 +6949,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-14\"}}}",
       "sortering": "14-14-3",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "4022",
@@ -8000,26 +6961,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-10\"}}}",
       "sortering": "14-10-3",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4033",
@@ -8028,23 +6973,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11\"}}}",
       "sortering": "14-11-1-a",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4059",
@@ -8053,22 +6985,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-13, 14-9\"}}}",
       "sortering": "14-13-6",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "4025",
@@ -8077,25 +6997,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-16\"}}}",
       "sortering": "14-16-1",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "2021",
@@ -8104,22 +7009,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-12\"}}}",
       "sortering": "14-12",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FEDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["MØDREKVOTE", "FEDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4070",
@@ -8128,22 +7021,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-13,21-3\"}}}",
       "sortering": "14-13-1-e",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "4074",
@@ -8152,22 +7033,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-12,21-3\"}}}",
       "sortering": "14-12-3",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FEDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["MØDREKVOTE", "FEDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "2011",
@@ -8176,23 +7045,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11\"}}}",
       "sortering": "14-11-1-b",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "2030",
@@ -8201,22 +7057,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-9,14-16\"}}}",
       "sortering": "14-16",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4065",
@@ -8225,23 +7069,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11,21-3\"}}}",
       "sortering": "14-11-1-d",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4057",
@@ -8250,21 +7081,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-14\"}}}",
       "sortering": "14-14-3",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "2033",
@@ -8273,20 +7093,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-14,14-13,14-16\"}}}",
       "sortering": "14-14",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "4076",
@@ -8295,22 +7105,10 @@
       "lovHjemmel": "",
       "sortering": "14-09-5",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FEDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["MØDREKVOTE", "FEDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4040",
@@ -8319,23 +7117,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11\"}}}",
       "sortering": "14-11-1-d",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4061",
@@ -8344,23 +7129,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11,21-3\"}}}",
       "sortering": "14-11-1-a",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4041",
@@ -8369,23 +7141,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11\"}}}",
       "sortering": "14-11-1-a",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4020",
@@ -8394,26 +7153,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"22-13\"}}}",
       "sortering": "22-13-3",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4106",
@@ -8422,18 +7165,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-10\"}}}",
       "sortering": "14-10-1",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FEDREKVOTE"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FEDREKVOTE"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "2005",
@@ -8442,21 +7177,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-15\"}}}",
       "sortering": "14-15",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FORELDREPENGER"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4055",
@@ -8465,22 +7189,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-13\"}}}",
       "sortering": "14-13-1-f",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "4093",
@@ -8489,25 +7201,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-16\"}}}",
       "sortering": "14-16",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4102",
@@ -8516,20 +7213,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-14,14-13\"}}}",
       "sortering": "14-14",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "FRITT_UTTAK",
-        "MINSTERETT_2022"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["FRITT_UTTAK", "MINSTERETT_2022"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "4051",
@@ -8538,22 +7225,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-13\"}}}",
       "sortering": "14-13-1-b",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK",
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK", "UTSETTELSE"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "2015",
@@ -8562,18 +7237,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11,14-14,14-13\"}}}",
       "sortering": "14-11-1-a",
       "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["FORELDREPENGER"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "4100",
@@ -8582,25 +7249,10 @@
       "lovHjemmel": "",
       "sortering": "14-10-2",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "MOR",
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["MOR", "IKKE_MOR"]
     },
     {
       "kode": "4012",
@@ -8609,24 +7261,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-10\"}}}",
       "sortering": "14-10-4",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "MINSTERETT_2022",
-        "FRITT_UTTAK",
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE",
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE"
-      ],
-      "synligForRolle": [
-        "IKKE_MOR"
-      ]
+      "gyldigForLovendringer": ["MINSTERETT_2022", "FRITT_UTTAK", "KREVER_SAMMENHENGENDE_UTTAK"],
+      "uttakTyper": ["UTTAK"],
+      "valgbarForKonto": ["FELLESPERIODE", "FORELDREPENGER", "FEDREKVOTE", "FORELDREPENGER_FØR_FØDSEL", "MØDREKVOTE"],
+      "synligForRolle": ["IKKE_MOR"]
     },
     {
       "kode": "4117",
@@ -8635,20 +7273,10 @@
       "lovHjemmel": "{\"fagsakYtelseType\": {\"FP\": {\"lovreferanse\": \"14-11,21-3\"}}}",
       "sortering": "14-11",
       "utfallType": "AVSLÅTT",
-      "gyldigForLovendringer": [
-        "FRITT_UTTAK",
-        "MINSTERETT_2022"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FORELDREPENGER"
-      ],
-      "synligForRolle": [
-        "MOR"
-      ]
+      "gyldigForLovendringer": ["FRITT_UTTAK", "MINSTERETT_2022"],
+      "uttakTyper": ["UTSETTELSE"],
+      "valgbarForKonto": ["MØDREKVOTE", "FORELDREPENGER"],
+      "synligForRolle": ["MOR"]
     }
   ],
   "ForeldreType": [

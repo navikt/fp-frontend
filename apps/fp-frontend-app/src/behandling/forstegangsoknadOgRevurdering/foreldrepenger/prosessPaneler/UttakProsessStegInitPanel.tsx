@@ -9,6 +9,7 @@ import {
   AksessRettigheter,
   ArbeidsgiverOpplysningerPerId,
   Behandling,
+  Fagsak,
   FamilieHendelseSamling,
   Personoversikt,
   Soknad,
@@ -61,12 +62,14 @@ type EndepunktPanelData = {
 };
 
 interface OwnProps {
+  fagsak: Fagsak;
   rettigheter: AksessRettigheter;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   personoversikt: Personoversikt;
 }
 
 const UttakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
+  fagsak,
   rettigheter,
   arbeidsgiverOpplysningerPerId,
   personoversikt,
@@ -91,6 +94,7 @@ const UttakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitPr
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           personoversikt={personoversikt}
           oppdaterStønadskontoer={oppdaterStønadskontoer}
+          fagsak={fagsak}
           {...data}
         />
       )}

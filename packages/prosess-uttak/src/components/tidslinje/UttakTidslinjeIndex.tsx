@@ -10,14 +10,14 @@ import {
   FamilieHendelse,
   Ytelsefordeling,
   PeriodeSoker,
-  Kjønnkode,
+  Fagsak,
+  AlleKodeverk,
 } from '@navikt/fp-types';
 import {
   soknadType,
   oppholdArsakType,
   oppholdArsakMapper,
   behandlingType as BehandlingType,
-  navBrukerKjonn as NavBrukerKjonn,
 } from '@navikt/fp-kodeverk';
 
 import UttakTidslinje, { PeriodeSøkerMedTidslinjedata, TidslinjeTimes } from './UttakTidslinje';
@@ -137,6 +137,8 @@ interface OwnProps {
   ytelsefordeling: Ytelsefordeling;
   tilknyttetStortinget: boolean;
   setValgtPeriodeIndex: React.Dispatch<React.SetStateAction<number>>;
+  fagsak: Fagsak;
+  alleKodeverk: AlleKodeverk;
 }
 
 const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
@@ -150,6 +152,8 @@ const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
   ytelsefordeling,
   tilknyttetStortinget,
   setValgtPeriodeIndex,
+  fagsak,
+  alleKodeverk,
 }) => {
   const uttakMedOpphold = lagUttakMedOpphold(perioderSøker);
 
@@ -167,15 +171,6 @@ const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
     [hovedsøkerPerioder, annenForelderPerioder],
   );
 
-  const viseUttakMedsoker = perioderAnnenpart.length > 0;
-  const medsøkerKjønnKode =
-    viseUttakMedsoker && personoversikt && personoversikt.annenPart
-      ? (personoversikt.annenPart.kjønn as Kjønnkode)
-      : undefined;
-  // hvis ukjent annenpart og annenpart uttak, vis ukjent ikon
-  const medsokerKjonnKode =
-    viseUttakMedsoker && medsøkerKjønnKode === undefined ? NavBrukerKjonn.UDEFINERT : medsøkerKjønnKode;
-
   const tidslinjeTider = useMemo(
     () => finnTidslinjeTider(behandling, søknad, familiehendelse, ytelsefordeling, personoversikt),
     [behandling, søknad, familiehendelse, ytelsefordeling, personoversikt],
@@ -184,13 +179,13 @@ const UttakTidslinjeIndex: FunctionComponent<OwnProps> = ({
   return (
     <UttakTidslinje
       tidslinjeTider={tidslinjeTider}
-      hovedsokerKjonnKode={personoversikt ? (personoversikt.bruker.kjønn as Kjønnkode) : undefined}
-      medsokerKjonnKode={medsokerKjonnKode}
       selectedPeriod={valgtPeriodeIndex !== undefined ? alleUttaksperioderMedId[valgtPeriodeIndex] : undefined}
       uttakPerioder={alleUttaksperioderMedId}
       tilknyttetStortinget={tilknyttetStortinget}
       setValgtPeriodeIndex={setValgtPeriodeIndex}
       behandlingStatusKode={behandling.status}
+      fagsak={fagsak}
+      alleKodeverk={alleKodeverk}
     />
   );
 };

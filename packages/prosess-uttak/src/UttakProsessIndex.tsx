@@ -11,6 +11,7 @@ import {
   UttakStonadskontoer,
   Ytelsefordeling,
   PeriodeSoker,
+  Fagsak,
 } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -32,6 +33,7 @@ interface OwnProps {
   kanOverstyre: boolean;
   oppdaterStønadskontoer: (params: { behandlingUuid: string; perioder: PeriodeSoker[] }) => Promise<any>;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  fagsak: Fagsak;
 }
 
 const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
@@ -51,6 +53,7 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
   arbeidsgiverOpplysningerPerId,
   formData,
   setFormData,
+  fagsak,
 }) => (
   <RawIntlProvider value={intl}>
     <UttakProsessPanel
@@ -70,6 +73,7 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       formData={formData}
       setFormData={setFormData}
+      fagsak={fagsak}
     />
   </RawIntlProvider>
 );

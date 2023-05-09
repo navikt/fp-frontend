@@ -142,7 +142,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
           <FlexColumn className={styles.ctrlCol}>
             <Button
               className={styles.margin}
-              size="small"
+              size="xsmall"
               icon={<ArrowLeftIcon aria-hidden />}
               onClick={callbackBackward}
               variant="secondary-neutral"
@@ -153,7 +153,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
             </Button>
             <Button
               className={styles.margin}
-              size="small"
+              size="xsmall"
               icon={<ArrowRightIcon aria-hidden />}
               onClick={callbackForward}
               variant="secondary-neutral"
@@ -163,10 +163,10 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
               <FormattedMessage id="Timeline.nextPeriodShort" />
             </Button>
             <Button
-              size="small"
+              size="xsmall"
               icon={<XMarkIcon aria-hidden />}
               onClick={lukkPeriode}
-              variant="secondary-neutral"
+              variant="tertiary-neutral"
               type="button"
               title={intl.formatMessage({ id: 'Timeline.lukkPeriode' })}
             />
