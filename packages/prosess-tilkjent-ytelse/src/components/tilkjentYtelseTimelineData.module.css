@@ -6,10 +6,10 @@
   width: 370px;
 }
 
-.ctrlCol {
-  margin-left: auto;
-}
-
 .margin {
   margin-right: 5px;
+}
+
+.fix {
+  display: flex;
 }
