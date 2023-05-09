@@ -13,3 +13,7 @@
 .margin {
   margin-right: 5px;
 }
+
+.fix {
+  display: flex;
+}

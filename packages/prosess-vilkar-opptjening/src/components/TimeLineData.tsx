@@ -50,7 +50,7 @@ const TimeLineData: FunctionComponent<OwnProps> = ({
               <FormattedMessage id="OpptjeningVilkarView.DetailsForSelectedPeriod" />
             </Label>
           </FlexColumn>
-          <FlexColumn>
+          <FlexColumn className={styles.fix}>
             <Button
               className={styles.margin}
               size="xsmall"
@@ -70,6 +70,7 @@ const TimeLineData: FunctionComponent<OwnProps> = ({
               variant="secondary-neutral"
               type="button"
               title={intl.formatMessage({ id: 'TimeLineData.nextPeriod' })}
+              iconPosition="right"
             >
               <FormattedMessage id="TimeLineData.nextPeriodShort" />
             </Button>

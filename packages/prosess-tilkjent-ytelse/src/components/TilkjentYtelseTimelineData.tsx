@@ -133,13 +133,13 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
   return (
     <Panel border>
       <FlexContainer>
-        <FlexRow>
+        <FlexRow spaceBetween>
           <FlexColumn>
             <Label size="small">
               <FormattedMessage id="TilkjentYtelse.PeriodeData.Detaljer" />
             </Label>
           </FlexColumn>
-          <FlexColumn className={styles.ctrlCol}>
+          <FlexColumn className={styles.fix}>
             <Button
               className={styles.margin}
               size="xsmall"
@@ -159,6 +159,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
               variant="secondary-neutral"
               type="button"
               title={intl.formatMessage({ id: 'Timeline.nextPeriod' })}
+              iconPosition="right"
             >
               <FormattedMessage id="Timeline.nextPeriodShort" />
             </Button>
