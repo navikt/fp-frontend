@@ -155,7 +155,6 @@ const TilkjentYtelse: FunctionComponent<OwnProps> = ({
   };
 
   const familiehendelseData = useMemo(() => getFamilieHendelseData(familieHendelseSamling), [familieHendelseSamling]);
-
   return (
     <>
       <Timeline startDate={startDato.subtract(1, 'days').toDate()} endDate={endDato.add(2, 'days').toDate()}>
