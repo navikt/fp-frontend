@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Timeline } from '@navikt/ds-react-internal';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT, calcDaysAndWeeks } from '@navikt/ft-utils';
 import {
   FigureOutwardIcon,
   SilhouetteIcon,
@@ -36,7 +36,6 @@ import styles from './uttakTidslinje.module.css';
 export type PeriodeSøkerMedTidslinjedata = {
   id: number;
   periode: PeriodeSoker;
-  tomMoment: dayjs.Dayjs;
   hovedsoker: boolean;
   group: number;
 };
@@ -66,8 +65,6 @@ const PERIODE_TYPE_LABEL_MAP = {
   [uttakPeriodeType.FORELDREPENGER_FOR_FODSEL]: 'UttakTidslinje.ForeldrepengerForFodsel',
 };
 
-const parseDateString = (dateString: string | dayjs.Dayjs): Date => dayjs(dateString, ISO_DATE_FORMAT).toDate();
-
 const sortByDate = (a: PeriodeSøkerMedTidslinjedata, b: PeriodeSøkerMedTidslinjedata): number => {
   if (a.periode.fom < b.periode.fom) {
     return -1;
@@ -79,8 +76,8 @@ const sortByDate = (a: PeriodeSøkerMedTidslinjedata, b: PeriodeSøkerMedTidslin
 };
 
 type PeriodeMedStartOgSlutt = {
-  start: Date;
-  end: Date;
+  start: string;
+  end: string;
   status: 'success' | 'warning' | 'danger';
   periodeType: string;
   erGradert: boolean;
@@ -120,8 +117,8 @@ const formatPaneler = (
 ): PeriodeMedStartOgSlutt[] =>
   perioder.map(periode => ({
     ...periode,
-    start: parseDateString(periode.periode.fom),
-    end: parseDateString(periode.tomMoment),
+    start: periode.periode.fom,
+    end: periode.periode.tom,
     status: getStatus(periode.periode, tilknyttetStortinget),
     periodeType: finnPeriodeType(periode.periode),
     erGradert: periode.periode.gradertAktivitet && periode.periode.graderingInnvilget,
@@ -202,17 +199,44 @@ const lagPinData = (tidslinjeTider: TidslinjeTimes): PinData[] => {
   return slåSammenPinDataOmLikDato(pinData);
 };
 
-const finnLabelForPeriode = (periode: PeriodeMedStartOgSlutt, behandlingStatusKode: string): string => {
+const finnLabelForPeriode = (
+  periode: PeriodeMedStartOgSlutt,
+  behandlingStatusKode: string,
+  intl: IntlShape,
+): string => {
+  const periodeString = `${dayjs(periode.start).format(DDMMYY_DATE_FORMAT)} - ${dayjs(periode.end).format(
+    DDMMYY_DATE_FORMAT,
+  )}`;
+  const dager = calcDaysAndWeeks(
+    dayjs(periode.start).format(ISO_DATE_FORMAT),
+    dayjs(periode.end).format(ISO_DATE_FORMAT),
+  ).formattedString;
+
+  let periodeType = '';
+  if (periode.periodeType !== '-') {
+    periodeType = intl.formatMessage({ id: PERIODE_TYPE_LABEL_MAP[periode.periodeType] });
+  }
+
+  let type = '';
   if (periode.erGradert) {
-    return 'UttakTidslinje.GradertPeriode';
+    type = intl.formatMessage({ id: 'UttakTidslinje.GradertPeriode' });
+  } else if (periode.harUtsettelse) {
+    type = intl.formatMessage({ id: 'UttakTidslinje.UtsettelsePeriode' });
+  } else if (periode.erOpphold) {
+    type = intl.formatMessage({ id: 'UttakTidslinje.OppholdPeriode' });
   }
-  if (periode.begrunnelse && behandlingStatusKode === behandlingStatus.FATTER_VEDTAK) {
-    return 'UttakTidslinje.ManueltEditert';
-  }
-  if (periode.harUtsettelse) {
-    return 'UttakTidslinje.UtsettelsePeriode';
-  }
-  return periode.erOpphold ? 'UttakTidslinje.OppholdPeriode' : PERIODE_TYPE_LABEL_MAP[periode.periodeType];
+
+  const manueltEndret =
+    periode.begrunnelse && behandlingStatusKode === behandlingStatus.FATTER_VEDTAK
+      ? intl.formatMessage({ id: 'UttakTidslinje.ManueltEditert' })
+      : '';
+
+  // Rar formatering - Fiks når Tidslinja får støtte for formaterte tooltips
+  return `Stønadskonto: ${periodeType}
+Periode: ${periodeString}
+Dager: ${dager}
+${type}
+${manueltEndret}`;
 };
 
 const finnIkonForPeriode = (periode: PeriodeMedStartOgSlutt, behandlingStatusKode: string) => {
@@ -349,13 +373,13 @@ const UttakTidslinje: FunctionComponent<TidslinjeProps> = ({
                 .map(periode => (
                   <Timeline.Period
                     key={periode.id}
-                    start={periode.start}
-                    end={periode.end}
+                    start={dayjs(periode.start).toDate()}
+                    end={dayjs(periode.end).toDate()}
                     status={periode.status}
                     onSelectPeriod={() => setValgtPeriodeIndex(periode.id)}
                     isActive={periode.id === valgtPeriode?.id}
                     icon={finnIkonForPeriode(periode, behandlingStatusKode)}
-                    title={intl.formatMessage({ id: finnLabelForPeriode(periode, behandlingStatusKode) })}
+                    title={finnLabelForPeriode(periode, behandlingStatusKode, intl)}
                   />
                 ))}
             </Timeline.Row>
