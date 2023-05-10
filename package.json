@@ -45,7 +45,7 @@
     "@navikt/ds-codemod": "2.9.5",
     "@sentry/cli": "2.17.5",
     "@storybook/addon-essentials": "7.0.8",
-    "@storybook/addon-links": "7.0.8",
+    "@storybook/addon-links": "7.0.10",
     "@storybook/builder-vite": "7.0.8",
     "@storybook/cli": "7.0.8",
     "@storybook/react": "7.0.8",
