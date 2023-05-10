@@ -4,7 +4,6 @@ import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Timeline } from '@navikt/ds-react-internal';
 import { DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT, calcDaysAndWeeks } from '@navikt/ft-utils';
 import {
-  FigureOutwardIcon,
   SilhouetteIcon,
   FigureCombinationIcon,
   PlusIcon,
@@ -17,6 +16,7 @@ import {
   DoorOpenIcon,
   PersonPencilIcon,
   PauseIcon,
+  FigureOutwardFillIcon,
 } from '@navikt/aksel-icons';
 import { BodyShort, Button, Label } from '@navikt/ds-react';
 import { DateLabel, FloatRight, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -87,6 +87,9 @@ type PeriodeMedStartOgSlutt = {
 } & PeriodeSøkerMedTidslinjedata;
 
 const getStatus = (periode: PeriodeSoker, tilknyttetStortinget: boolean): 'success' | 'warning' | 'danger' => {
+  if (periode.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING || tilknyttetStortinget) {
+    return 'warning';
+  }
   if (periode.gradertAktivitet && periode.graderingInnvilget) {
     return 'success';
   }
@@ -98,9 +101,6 @@ const getStatus = (periode: PeriodeSoker, tilknyttetStortinget: boolean): 'succe
     (periode.periodeResultatType === periodeResultatType.INNVILGET && !tilknyttetStortinget)
   ) {
     return 'success';
-  }
-  if (periode.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING || tilknyttetStortinget) {
-    return 'warning';
   }
 
   return 'danger';
@@ -138,10 +138,10 @@ const lagGruppeIder = (perioder: PeriodeSøkerMedTidslinjedata[] = []) =>
 
 const finnIkonGittKjønnkode = (rrType: string) => {
   if (rrType === relasjonsRolleType.MOR || rrType === relasjonsRolleType.MEDMOR) {
-    return <FigureOutwardIcon width={20} height={20} />;
+    return <FigureOutwardFillIcon width={20} height={20} color="var(--a-red-200)" />;
   }
   if (rrType === relasjonsRolleType.FAR) {
-    return <SilhouetteIcon width={20} height={20} />;
+    return <SilhouetteIcon width={20} height={20} color="var(--a-blue-600)" />;
   }
   return <FigureCombinationIcon width={20} height={20} />;
 };
