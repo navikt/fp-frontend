@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
 
-import { fagsakYtelseType, AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
@@ -13,6 +13,7 @@ import {
   Soknad,
   Kjønnkode,
   FamilieHendelseSamling,
+  Fagsak,
 } from '@navikt/fp-types';
 import { VurderTilbaketrekkAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -31,7 +32,6 @@ interface PureOwnProps {
   familieHendelseSamling: FamilieHendelseSamling;
   personoversikt: Personoversikt;
   soknad: Soknad;
-  fagsakYtelseTypeKode: string;
   aksjonspunkter: Aksjonspunkt[];
   alleKodeverk: AlleKodeverk;
   readOnly: boolean;
@@ -41,6 +41,7 @@ interface PureOwnProps {
   feriepengegrunnlag?: Feriepengegrunnlag;
   formData?: FormValues;
   setFormData: (data: FormValues) => void;
+  fagsak: Fagsak;
 }
 
 const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
@@ -52,12 +53,12 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
   arbeidsgiverOpplysningerPerId,
   feriepengegrunnlag,
   familieHendelseSamling,
-  fagsakYtelseTypeKode,
   personoversikt,
   soknad,
   aksjonspunkter,
   formData,
   setFormData,
+  fagsak,
 }) => {
   const vurderTilbaketrekkAP = useMemo(() => finnTilbaketrekkAksjonspunkt(aksjonspunkter), [aksjonspunkter]);
   const soknadMottattDato = soknad.søknadsfrist?.mottattDato ? soknad.søknadsfrist?.mottattDato : soknad.mottattDato;
@@ -73,9 +74,9 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
           soknadDate={soknadMottattDato}
           familieHendelseSamling={familieHendelseSamling}
           hovedsokerKjonnKode={personoversikt?.bruker ? (personoversikt.bruker.kjønn as Kjønnkode) : undefined}
-          isSoknadSvangerskapspenger={fagsakYtelseTypeKode === fagsakYtelseType.SVANGERSKAPSPENGER}
           alleKodeverk={alleKodeverk}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          fagsak={fagsak}
         />
       )}
       {feriepengegrunnlag && (

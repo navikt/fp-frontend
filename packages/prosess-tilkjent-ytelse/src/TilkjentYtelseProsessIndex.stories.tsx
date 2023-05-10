@@ -11,6 +11,7 @@ import {
   fagsakYtelseType,
   soknadType,
   AksjonspunktCode,
+  relasjonsRolleType,
 } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import {
@@ -30,6 +31,7 @@ import TilkjentYtelseProsessIndex from './TilkjentYtelseProsessIndex';
 
 const fagsak = {
   fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+  relasjonsRolleType: relasjonsRolleType.MOR,
 } as Fagsak;
 
 const behandling = {
