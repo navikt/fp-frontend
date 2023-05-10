@@ -39,7 +39,7 @@ const behandling = {
   versjon: 1,
 } as Behandling;
 
-const familiehendelse = {
+const defaultFamiliehendelse = {
   gjeldende: {
     avklartBarn: [
       {
@@ -91,7 +91,7 @@ const beregningresultat = {
   ],
 } as BeregningsresultatFp;
 
-const soknad = {
+const søknad = {
   mottattDato: '2019-01-10',
   soknadType: soknadType.FODSEL,
   omsorgsovertakelseDato: '2019-01-10',
@@ -121,7 +121,8 @@ const Template: StoryFn<{
   submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
   aksjonspunkter: Aksjonspunkt[];
   feriepengegrunnlag?: Feriepengegrunnlag;
-}> = ({ submitCallback, aksjonspunkter, feriepengegrunnlag }) => (
+  familiehendelse?: FamilieHendelseSamling;
+}> = ({ submitCallback, aksjonspunkter, feriepengegrunnlag, familiehendelse = defaultFamiliehendelse }) => (
   <TilkjentYtelseProsessIndex
     behandling={behandling}
     alleKodeverk={alleKodeverk as any}
@@ -137,7 +138,7 @@ const Template: StoryFn<{
     beregningresultat={beregningresultat}
     familiehendelse={familiehendelse}
     personoversikt={personoversikt}
-    soknad={soknad}
+    soknad={søknad}
     fagsak={fagsak}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     feriepengegrunnlag={feriepengegrunnlag}
@@ -183,5 +184,22 @@ MedFeriepengegrunnlag.args = {
         ytelseperiodeTom: '2022-01-01',
       },
     ],
+  },
+};
+
+export const MedBarnFodtLengeForForstePeriode = Template.bind({});
+MedBarnFodtLengeForForstePeriode.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  aksjonspunkter: [],
+  familiehendelse: {
+    ...defaultFamiliehendelse,
+    gjeldende: {
+      avklartBarn: [
+        {
+          fodselsdato: '2017-01-01',
+        },
+      ],
+      soknadType: soknadType.FODSEL,
+    } as FamilieHendelse,
   },
 };

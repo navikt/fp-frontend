@@ -75,6 +75,11 @@ const finnRolle = (fagsak: Fagsak, alleKodeverk: AlleKodeverk): string | undefin
   return kodeverk.find(k => k.kode === fagsak.relasjonsRolleType)?.navn;
 };
 
+const finnSisteDato = (familiehendelseDato: string, førstePeriodeFom: dayjs.Dayjs): dayjs.Dayjs => {
+  const dato = dayjs(familiehendelseDato);
+  return dato.isBefore(førstePeriodeFom) ? førstePeriodeFom.subtract(5, 'days') : dato;
+};
+
 interface OwnProps {
   beregningsresultatPeriode?: BeregningsresultatPeriode[];
   soknadDate: string;
@@ -163,9 +168,10 @@ const TilkjentYtelse: FunctionComponent<OwnProps> = ({
   };
 
   const familiehendelseData = useMemo(() => getFamilieHendelseData(familieHendelseSamling), [familieHendelseSamling]);
+
   return (
     <>
-      <Timeline startDate={startDato.subtract(1, 'days').toDate()} endDate={endDato.add(2, 'days').toDate()}>
+      <Timeline startDate={startDato.toDate()} endDate={endDato.add(1, 'days').toDate()}>
         <Timeline.Pin date={dayjs(soknadDate).toDate()}>
           <BodyShort>
             <FormattedMessage id="TilkjentYtelse.Soknadsdato" />
@@ -175,7 +181,7 @@ const TilkjentYtelse: FunctionComponent<OwnProps> = ({
           </BodyShort>
         </Timeline.Pin>
         {familiehendelseData.dato && (
-          <Timeline.Pin date={dayjs(familiehendelseData.dato).toDate()}>
+          <Timeline.Pin date={finnSisteDato(familiehendelseData.dato, startDato).toDate()}>
             <BodyShort>
               <FormattedMessage id={familiehendelseData.textId} />
             </BodyShort>

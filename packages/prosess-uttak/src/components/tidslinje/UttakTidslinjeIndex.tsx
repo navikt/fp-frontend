@@ -82,8 +82,8 @@ const finnTidslinjeTider = (
   const customTimesBuilder = {
     soknad: finnSøknadsdato(søknad),
     fodsel: fødselsdato,
-    revurdering: isRevurdering ? endringsdato : '1950-01-01',
-    dodSoker: personoversikt?.bruker?.dødsdato ? personoversikt.bruker.dødsdato : '1950-01-01',
+    revurdering: isRevurdering ? endringsdato : undefined,
+    dodSoker: personoversikt?.bruker?.dødsdato ? personoversikt.bruker.dødsdato : undefined,
   };
 
   dodeBarn.forEach((barn, index: number) => {
