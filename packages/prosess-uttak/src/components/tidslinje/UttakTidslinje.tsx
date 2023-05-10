@@ -4,7 +4,6 @@ import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Timeline } from '@navikt/ds-react-internal';
 import { DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT, calcDaysAndWeeks } from '@navikt/ft-utils';
 import {
-  SilhouetteIcon,
   FigureCombinationIcon,
   PlusIcon,
   MinusIcon,
@@ -17,6 +16,7 @@ import {
   PersonPencilIcon,
   PauseIcon,
   FigureOutwardFillIcon,
+  SilhouetteFillIcon,
 } from '@navikt/aksel-icons';
 import { BodyShort, Button, Label } from '@navikt/ds-react';
 import { DateLabel, FloatRight, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -141,7 +141,7 @@ const finnIkonGittKjønnkode = (rrType: string) => {
     return <FigureOutwardFillIcon width={20} height={20} color="var(--a-red-200)" />;
   }
   if (rrType === relasjonsRolleType.FAR) {
-    return <SilhouetteIcon width={20} height={20} color="var(--a-blue-600)" />;
+    return <SilhouetteFillIcon width={20} height={20} color="var(--a-blue-600)" />;
   }
   return <FigureCombinationIcon width={20} height={20} />;
 };
@@ -350,11 +350,11 @@ const UttakTidslinje: FunctionComponent<TidslinjeProps> = ({
       >
         {pinData.map(data => (
           <Timeline.Pin key={data.dato} date={dayjs(data.dato).toDate()}>
-            <Label size="small">
-              {data.tekstIder.map(id => (
+            {data.tekstIder.map(id => (
+              <Label size="small">
                 <FormattedMessage key={id} id={id} />
-              ))}
-            </Label>
+              </Label>
+            ))}
             <BodyShort size="small">
               <DateLabel dateString={data.dato} />
             </BodyShort>

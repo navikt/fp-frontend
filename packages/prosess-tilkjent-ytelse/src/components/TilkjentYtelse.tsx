@@ -2,20 +2,20 @@ import React, { FunctionComponent, useState, useMemo, useCallback } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Timeline } from '@navikt/ds-react-internal';
 import {
-  FigureOutwardIcon,
-  SilhouetteIcon,
   ArrowRightIcon,
   ArrowLeftIcon,
   PlusIcon,
   MinusIcon,
   PercentIcon,
   CheckmarkCircleIcon,
+  SilhouetteFillIcon,
+  FigureOutwardFillIcon,
 } from '@navikt/aksel-icons';
 import dayjs from 'dayjs';
 import { BodyShort, Button } from '@navikt/ds-react';
 import { DateLabel, FloatRight, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { soknadType } from '@navikt/fp-kodeverk';
+import { KodeverkType, fagsakYtelseType, soknadType } from '@navikt/fp-kodeverk';
 import {
   ArbeidsgiverOpplysningerPerId,
   AlleKodeverk,
@@ -23,6 +23,7 @@ import {
   BeregningsresultatPeriode,
   KjønnkodeEnum,
   FamilieHendelseSamling,
+  Fagsak,
 } from '@navikt/fp-types';
 
 import TilkjentYtelseTimelineData from './TilkjentYtelseTimelineData';
@@ -69,14 +70,19 @@ const formatPerioder = (perioder: BeregningsresultatPeriode[]): Periode[] =>
       periode,
     }));
 
+const finnRolle = (fagsak: Fagsak, alleKodeverk: AlleKodeverk): string | undefined => {
+  const kodeverk = alleKodeverk[KodeverkType.RELASJONSROLLE_TYPE];
+  return kodeverk.find(k => k.kode === fagsak.relasjonsRolleType)?.navn;
+};
+
 interface OwnProps {
   beregningsresultatPeriode?: BeregningsresultatPeriode[];
   soknadDate: string;
   familieHendelseSamling: FamilieHendelseSamling;
   hovedsokerKjonnKode: Kjønnkode;
-  isSoknadSvangerskapspenger: boolean;
   alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  fagsak: Fagsak;
 }
 
 /**
@@ -89,9 +95,9 @@ const TilkjentYtelse: FunctionComponent<OwnProps> = ({
   soknadDate,
   familieHendelseSamling,
   hovedsokerKjonnKode,
-  isSoknadSvangerskapspenger,
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
+  fagsak,
 }) => {
   const intl = useIntl();
   const [valgtPeriode, setValgtPeriode] = useState<Periode | null>();
@@ -179,12 +185,12 @@ const TilkjentYtelse: FunctionComponent<OwnProps> = ({
           </Timeline.Pin>
         )}
         <Timeline.Row
-          label="-"
+          label={finnRolle(fagsak, alleKodeverk)}
           icon={
             hovedsokerKjonnKode === KjønnkodeEnum.KVINNE ? (
-              <FigureOutwardIcon width={20} height={20} />
+              <FigureOutwardFillIcon width={20} height={20} color="var(--a-red-200)" />
             ) : (
-              <SilhouetteIcon width={20} height={20} />
+              <SilhouetteFillIcon width={20} height={20} color="var(--a-blue-600)" />
             )
           }
         >
@@ -250,7 +256,7 @@ const TilkjentYtelse: FunctionComponent<OwnProps> = ({
             selectedItemData={valgtPeriode.periode}
             callbackForward={nextPeriod}
             callbackBackward={prevPeriod}
-            isSoknadSvangerskapspenger={isSoknadSvangerskapspenger}
+            isSoknadSvangerskapspenger={fagsak.fagsakYtelseType === fagsakYtelseType.SVANGERSKAPSPENGER}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             lukkPeriode={lukkPeriode}
           />
