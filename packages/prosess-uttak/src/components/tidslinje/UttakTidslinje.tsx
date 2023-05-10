@@ -151,47 +151,58 @@ const finnIkon = (fagsak: Fagsak, erHovedsøker: boolean) =>
 
 type PinData = {
   dato: string;
+  datoITidslinjen: string;
   tekstIder: string[];
 };
 
+const finnSisteDato = (familiehendelseDato: string, førstePeriodeFom: dayjs.Dayjs): string =>
+  dayjs(familiehendelseDato).isBefore(førstePeriodeFom)
+    ? førstePeriodeFom.subtract(1, 'days').format(ISO_DATE_FORMAT)
+    : familiehendelseDato;
+
 const slåSammenPinDataOmLikDato = (pinData: PinData[]): PinData[] =>
   pinData.reduce<PinData[]>((accData, data) => {
-    const index = accData.findIndex(d => d.dato === data.dato);
+    const index = accData.findIndex(d => d.datoITidslinjen === data.datoITidslinjen);
     if (index !== -1) {
       return accData
         .filter((_d, i) => i !== index)
         .concat({
           dato: data.dato,
+          datoITidslinjen: data.datoITidslinjen,
           tekstIder: data.tekstIder.concat(accData[index].tekstIder),
         });
     }
     return accData.concat(data);
   }, []);
 
-const lagPinData = (tidslinjeTider: TidslinjeTimes): PinData[] => {
+const lagPinData = (tidslinjeTider: TidslinjeTimes, fomDato: dayjs.Dayjs): PinData[] => {
   const pinData = [] as PinData[];
 
   if (tidslinjeTider.dodSoker) {
     pinData.push({
       dato: tidslinjeTider.dodSoker,
+      datoITidslinjen: finnSisteDato(tidslinjeTider.dodSoker, fomDato),
       tekstIder: ['UttakTidslinje.DodSoker'],
     });
   }
   if (tidslinjeTider.fodsel) {
     pinData.push({
       dato: tidslinjeTider.fodsel,
+      datoITidslinjen: finnSisteDato(tidslinjeTider.fodsel, fomDato),
       tekstIder: ['UttakTidslinje.Fodsel'],
     });
   }
   if (tidslinjeTider.revurdering) {
     pinData.push({
       dato: tidslinjeTider.revurdering,
+      datoITidslinjen: finnSisteDato(tidslinjeTider.revurdering, fomDato),
       tekstIder: ['UttakTidslinje.Revurdering'],
     });
   }
   if (tidslinjeTider.soknad) {
     pinData.push({
       dato: tidslinjeTider.soknad,
+      datoITidslinjen: finnSisteDato(tidslinjeTider.soknad, fomDato),
       tekstIder: ['UttakTidslinje.Soknad'],
     });
   }
@@ -306,10 +317,10 @@ const UttakTidslinje: FunctionComponent<TidslinjeProps> = ({
     [selectedPeriod],
   );
 
-  const pinData = lagPinData(tidslinjeTider);
-
   const originalFomDato = dayjs(sorterteUttaksperioder[0].periode.fom);
   const originalTomDato = dayjs(sorterteUttaksperioder[sorterteUttaksperioder.length - 1].periode.tom);
+
+  const pinData = lagPinData(tidslinjeTider, originalFomDato);
 
   const [fomDato, setFomDato] = useState(originalFomDato);
   const [tomDato, setTomDato] = useState(originalTomDato);
@@ -344,16 +355,16 @@ const UttakTidslinje: FunctionComponent<TidslinjeProps> = ({
   return (
     <>
       <VerticalSpacer thirtyTwoPx />
-      <Timeline
-        startDate={dayjs(fomDato).subtract(1, 'days').toDate()}
-        endDate={dayjs(tomDato).add(2, 'days').toDate()}
-      >
+      <Timeline startDate={dayjs(fomDato).toDate()} endDate={dayjs(tomDato).add(1, 'days').toDate()}>
         {pinData.map(data => (
-          <Timeline.Pin key={data.dato} date={dayjs(data.dato).toDate()}>
+          <Timeline.Pin key={data.dato} date={dayjs(data.datoITidslinjen).toDate()}>
             {data.tekstIder.map(id => (
-              <Label key={id} size="small">
-                <FormattedMessage id={id} />
-              </Label>
+              <>
+                <Label key={id} size="small">
+                  <FormattedMessage id={id} />
+                </Label>
+                <VerticalSpacer fourPx />
+              </>
             ))}
             <BodyShort size="small">
               <DateLabel dateString={data.dato} />
