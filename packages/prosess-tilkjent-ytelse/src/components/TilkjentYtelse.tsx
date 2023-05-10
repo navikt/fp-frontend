@@ -34,6 +34,7 @@ type Periode = {
   start: Date;
   end: Date;
   erGradert: boolean;
+  periode: BeregningsresultatPeriode;
 };
 
 const sjekkOmGradert = (periode: BeregningsresultatPeriode): boolean => {
@@ -65,6 +66,7 @@ const formatPerioder = (perioder: BeregningsresultatPeriode[]): Periode[] =>
       start: dayjs(periode.fom).toDate(),
       end: dayjs(periode.tom).add(1, 'days').toDate(),
       id: index,
+      periode,
     }));
 
 interface OwnProps {
@@ -245,7 +247,7 @@ const TilkjentYtelse: FunctionComponent<OwnProps> = ({
           <VerticalSpacer eightPx />
           <TilkjentYtelseTimelineData
             alleKodeverk={alleKodeverk}
-            selectedItemData={beregningsresultatPeriode[valgtPeriode.id]}
+            selectedItemData={valgtPeriode.periode}
             callbackForward={nextPeriod}
             callbackBackward={prevPeriod}
             isSoknadSvangerskapspenger={isSoknadSvangerskapspenger}
