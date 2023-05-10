@@ -351,8 +351,8 @@ const UttakTidslinje: FunctionComponent<TidslinjeProps> = ({
         {pinData.map(data => (
           <Timeline.Pin key={data.dato} date={dayjs(data.dato).toDate()}>
             {data.tekstIder.map(id => (
-              <Label size="small">
-                <FormattedMessage key={id} id={id} />
+              <Label key={id} size="small">
+                <FormattedMessage id={id} />
               </Label>
             ))}
             <BodyShort size="small">
