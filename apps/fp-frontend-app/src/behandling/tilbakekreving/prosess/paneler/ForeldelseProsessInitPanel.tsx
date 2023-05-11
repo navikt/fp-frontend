@@ -8,9 +8,10 @@ import {
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { Behandling, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
+import { Behandling, AlleKodeverkTilbakekreving, AlleKodeverk } from '@navikt/fp-types';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
 import getAlleMerknaderFraBeslutter from '../../felles/util/getAlleMerknaderFraBeslutter';
 
@@ -18,9 +19,10 @@ import '@navikt/ft-prosess-tilbakekreving-foreldelse/dist/style.css';
 
 interface OwnProps {
   behandling: Behandling;
-  navBrukerKjonn: string;
+  relasjonsRolleType: string;
   erReadOnlyFn: (aksjonspunkter: Aksjonspunkt[]) => boolean;
-  alleKodeverk: AlleKodeverkTilbakekreving;
+  fptilbakeAlleKodeverk: AlleKodeverkTilbakekreving;
+  fpsakKodeverk: AlleKodeverk;
   bekreftAksjonspunkter: (aksjonspunktData: VurderForeldelseAp) => Promise<void>;
   formData?: any;
   setFormData: (data: any) => void;
@@ -28,9 +30,10 @@ interface OwnProps {
 
 const ForeldelseProsessInitPanel: FunctionComponent<OwnProps> = ({
   behandling,
-  navBrukerKjonn,
+  relasjonsRolleType,
   erReadOnlyFn,
-  alleKodeverk,
+  fptilbakeAlleKodeverk,
+  fpsakKodeverk,
   bekreftAksjonspunkter,
   formData,
   setFormData,
@@ -76,9 +79,10 @@ const ForeldelseProsessInitPanel: FunctionComponent<OwnProps> = ({
       submitCallback={bekreftAksjonspunkter}
       isReadOnly={isReadOnly}
       aksjonspunkter={aksjonspunkterForForeldelse}
-      navBrukerKjonn={navBrukerKjonn}
+      relasjonsRolleType={relasjonsRolleType}
+      relasjonsRolleTypeKodeverk={fpsakKodeverk[KodeverkType.RELASJONSROLLE_TYPE]}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-      kodeverkSamlingFpTilbake={alleKodeverk}
+      kodeverkSamlingFpTilbake={fptilbakeAlleKodeverk}
       beregnBelop={beregnBelop}
       formData={formData[ProsessStegCode.FORELDELSE]}
       setFormData={setFormDataForeldelse}

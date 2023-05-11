@@ -7,7 +7,13 @@ import { ForeldelseAksjonspunktCodes } from '@navikt/ft-prosess-tilbakekreving-f
 import { VedtakAksjonspunktCode } from '@navikt/ft-prosess-tilbakekreving-vedtak';
 import { ForeldelseAksjonspunktCodes as TilbakekrevingCodes } from '@navikt/ft-prosess-tilbakekreving';
 import { Aksjonspunkt } from '@navikt/ft-types';
-import { Behandling, AksessRettigheter, Behandlingsresultat, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
+import {
+  Behandling,
+  AksessRettigheter,
+  Behandlingsresultat,
+  AlleKodeverkTilbakekreving,
+  AlleKodeverk,
+} from '@navikt/fp-types';
 import { vedtakResultatType as VedtakResultatType } from '@navikt/fp-kodeverk';
 
 import { erReadOnlyCurried } from '../felles/util/readOnlyPanelUtils';
@@ -108,8 +114,9 @@ const utledProsessPaneler = (
 
 interface OwnProps {
   behandling: Behandling;
-  fagsakKjønn: string;
+  relasjonsRolleType: string;
   tilbakekrevingKodeverk: AlleKodeverkTilbakekreving;
+  fpsakKodeverk: AlleKodeverk;
   valgtProsessSteg?: string;
   oppdaterProsessPanelIUrl: (faktanavn: string | undefined) => void;
   bekreftAksjonspunkterMedSideeffekter: (
@@ -124,8 +131,9 @@ interface OwnProps {
 
 const ProsessIndex: FunctionComponent<OwnProps> = ({
   behandling,
-  fagsakKjønn,
+  relasjonsRolleType,
   tilbakekrevingKodeverk,
+  fpsakKodeverk,
   valgtProsessSteg,
   oppdaterProsessPanelIUrl,
   bekreftAksjonspunkterMedSideeffekter,
@@ -182,9 +190,10 @@ const ProsessIndex: FunctionComponent<OwnProps> = ({
             {aktivtProsessPanel.id === ProsessStegCode.FORELDELSE && (
               <ForeldelseProsessInitPanel
                 behandling={behandling}
-                navBrukerKjonn={fagsakKjønn}
+                relasjonsRolleType={relasjonsRolleType}
                 erReadOnlyFn={erReadOnlyFn}
-                alleKodeverk={tilbakekrevingKodeverk}
+                fptilbakeAlleKodeverk={tilbakekrevingKodeverk}
+                fpsakKodeverk={fpsakKodeverk}
                 bekreftAksjonspunkter={bekreftAksjonspunkter}
                 formData={formData}
                 setFormData={setFormData}
@@ -193,8 +202,9 @@ const ProsessIndex: FunctionComponent<OwnProps> = ({
             {aktivtProsessPanel.id === ProsessStegCode.TILBAKEKREVING && (
               <TilbakekrevingProsessInitPanel
                 behandling={behandling}
-                navBrukerKjonn={fagsakKjønn}
-                alleKodeverk={tilbakekrevingKodeverk}
+                relasjonsRolleType={relasjonsRolleType}
+                alleKodeverkTilbake={tilbakekrevingKodeverk}
+                fpsakKodeverk={fpsakKodeverk}
                 bekreftAksjonspunkter={bekreftAksjonspunkter}
                 erReadOnlyFn={erReadOnlyFn}
                 formData={formData}

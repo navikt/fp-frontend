@@ -79,8 +79,9 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & StandardBehand
       <BehandlingPaVent behandling={behandling} hentBehandling={hentBehandling} kodeverk={tilbakekrevingKodeverk} />
       <ProsessIndex
         behandling={behandling}
-        fagsakKjønn={fagsak.bruker.kjønn}
+        relasjonsRolleType={fagsak.relasjonsRolleType}
         tilbakekrevingKodeverk={tilbakekrevingKodeverk}
+        fpsakKodeverk={fpsakKodeverk}
         valgtProsessSteg={valgtProsessSteg}
         oppdaterProsessPanelIUrl={oppdaterProsessPanelIUrl}
         rettigheter={rettigheter}
