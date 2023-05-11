@@ -8,7 +8,8 @@ import {
   VilkarsVurdertePerioderWrapper,
 } from '@navikt/ft-types';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
-import { Behandling, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
+import { Behandling, AlleKodeverkTilbakekreving, AlleKodeverk } from '@navikt/fp-types';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import {
   TilbakekrevingProsessIndex,
@@ -34,8 +35,9 @@ type EndepunktPanelData = {
 
 interface OwnProps {
   behandling: Behandling;
-  navBrukerKjonn: string;
-  alleKodeverk: AlleKodeverkTilbakekreving;
+  relasjonsRolleType: string;
+  alleKodeverkTilbake: AlleKodeverkTilbakekreving;
+  fpsakKodeverk: AlleKodeverk;
   bekreftAksjonspunkter: (aksjonspunktData: VilkarsVurderingAp) => Promise<void>;
   erReadOnlyFn: (aksjonspunkter: Aksjonspunkt[]) => boolean;
   formData?: any;
@@ -44,8 +46,9 @@ interface OwnProps {
 
 const TilbakekrevingProsessInitPanel: FunctionComponent<OwnProps> = ({
   behandling,
-  navBrukerKjonn,
-  alleKodeverk,
+  relasjonsRolleType,
+  alleKodeverkTilbake,
+  fpsakKodeverk,
   bekreftAksjonspunkter,
   erReadOnlyFn,
   formData,
@@ -101,9 +104,10 @@ const TilbakekrevingProsessInitPanel: FunctionComponent<OwnProps> = ({
       vilkarvurdering={initData.vilkarvurdering}
       submitCallback={bekreftAksjonspunkter}
       isReadOnly={isReadOnly}
-      navBrukerKjonn={navBrukerKjonn}
+      relasjonsRolleType={relasjonsRolleType}
+      relasjonsRolleTypeKodeverk={fpsakKodeverk[KodeverkType.RELASJONSROLLE_TYPE]}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-      kodeverkSamlingFpTilbake={alleKodeverk}
+      kodeverkSamlingFpTilbake={alleKodeverkTilbake}
       beregnBelop={beregnBelop}
       formData={formData[ProsessStegCode.TILBAKEKREVING]}
       setFormData={setFormDataTilbakekreving}

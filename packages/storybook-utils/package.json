@@ -19,7 +19,7 @@
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
-    "@navikt/ft-form-hooks": "4.0.27",
+    "@navikt/ft-form-hooks": "4.0.28",
     "history": "5.3.0",
     "react": "18.2.0",
     "react-hook-form": "7.43.9",
