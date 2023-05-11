@@ -53,7 +53,7 @@ describe('<UttakProsessIndex>', () => {
     expect(screen.queryByText('Detaljer for valgt periode')).not.toBeInTheDocument();
 
     // Trykk på første periode i tidslinja
-    await userEvent.click(screen.getAllByRole('button')[4]);
+    await userEvent.click(screen.getAllByRole('button')[3]);
 
     expect(await screen.findByText('Detaljer for valgt periode')).toBeInTheDocument();
     expect(screen.getAllByText('Foreldrepenger før fødsel')).toHaveLength(2);
@@ -77,7 +77,7 @@ describe('<UttakProsessIndex>', () => {
     expect(await screen.findByText('Uttak')).toBeInTheDocument();
 
     // Trykk på første periode i tidslinja
-    await userEvent.click(screen.getAllByRole('button')[4]);
+    await userEvent.click(screen.getAllByRole('button')[3]);
 
     expect(await screen.findByText('11.10.2019 - 31.10.2019')).toBeInTheDocument();
 
