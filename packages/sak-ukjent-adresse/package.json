@@ -26,8 +26,8 @@
     "storybook": "storybook dev --quiet -p 7067"
   },
   "dependencies": {
-    "@navikt/ft-ui-komponenter": "2.0.25",
-    "@navikt/ft-utils": "2.0.23",
+    "@navikt/ft-ui-komponenter": "2.0.26",
+    "@navikt/ft-utils": "2.0.24",
     "react": "18.2.0",
     "react-hook-form": "7.43.9",
     "react-intl": "6.4.2"
