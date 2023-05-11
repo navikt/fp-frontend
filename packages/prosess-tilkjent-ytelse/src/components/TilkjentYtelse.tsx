@@ -51,7 +51,6 @@ const getFamilieHendelseData = (familieHendelseSamling: FamilieHendelseSamling):
     }
     return { dato: familieHendelse.termindato, textId: 'TilkjentYtelse.Termindato' };
   }
-
   if (familieHendelse.omsorgsovertakelseDato) {
     return { dato: familieHendelse.omsorgsovertakelseDato, textId: 'TilkjentYtelse.Omsorgsovertakelsesdato' };
   }
