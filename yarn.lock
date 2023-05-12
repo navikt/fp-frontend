@@ -3252,14 +3252,14 @@ __metadata:
     "@navikt/fp-types": 1.0.0
     "@navikt/fp-types-avklar-aksjonspunkter": 1.0.0
     "@navikt/fp-utils-test": 1.0.0
-    "@navikt/ft-fakta-beregning": 4.2.11
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.2.11
+    "@navikt/ft-fakta-beregning": 4.2.12
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.2.12
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": 2.1.10
     "@navikt/ft-form-hooks": 4.0.28
     "@navikt/ft-form-validators": 2.0.25
     "@navikt/ft-kodeverk": 2.1.7
     "@navikt/ft-plattform-komponenter": 2.0.27
-    "@navikt/ft-prosess-beregningsgrunnlag": 6.2.8
+    "@navikt/ft-prosess-beregningsgrunnlag": 6.2.9
     "@navikt/ft-prosess-tilbakekreving": 3.0.0
     "@navikt/ft-prosess-tilbakekreving-foreldelse": 3.0.0
     "@navikt/ft-prosess-tilbakekreving-vedtak": 2.1.10
@@ -4171,7 +4171,7 @@ __metadata:
     "@navikt/ft-form-hooks": 4.0.28
     "@navikt/ft-form-validators": 2.0.25
     "@navikt/ft-kodeverk": 2.1.7
-    "@navikt/ft-prosess-beregningsgrunnlag": 6.2.8
+    "@navikt/ft-prosess-beregningsgrunnlag": 6.2.9
     "@navikt/ft-types": 2.1.8
     "@navikt/ft-ui-komponenter": 2.0.26
     "@navikt/ft-utils": 2.0.24
@@ -4551,9 +4551,9 @@ __metadata:
     "@navikt/fp-storybook-utils": 1.0.0
     "@navikt/fp-types": 1.0.0
     "@navikt/fp-utils-test": 1.0.0
-    "@navikt/ft-fakta-beregning": 4.2.11
+    "@navikt/ft-fakta-beregning": 4.2.12
     "@navikt/ft-kodeverk": 2.1.7
-    "@navikt/ft-prosess-beregningsgrunnlag": 6.2.8
+    "@navikt/ft-prosess-beregningsgrunnlag": 6.2.9
     "@navikt/ft-types": 2.1.8
     "@navikt/ft-ui-komponenter": 2.0.26
     "@navikt/ft-utils": 2.0.24
@@ -4817,12 +4817,12 @@ __metadata:
     "@navikt/fp-types": 1.0.0
     "@navikt/fp-types-avklar-aksjonspunkter": 1.0.0
     "@navikt/fp-utils-test": 1.0.0
-    "@navikt/ft-fakta-beregning": 4.2.11
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.2.11
+    "@navikt/ft-fakta-beregning": 4.2.12
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.2.12
     "@navikt/ft-form-hooks": 4.0.28
     "@navikt/ft-form-validators": 2.0.25
     "@navikt/ft-kodeverk": 2.1.7
-    "@navikt/ft-prosess-beregningsgrunnlag": 6.2.8
+    "@navikt/ft-prosess-beregningsgrunnlag": 6.2.9
     "@navikt/ft-types": 2.1.8
     "@navikt/ft-ui-komponenter": 2.0.26
     "@navikt/ft-utils": 2.0.24
@@ -4895,9 +4895,9 @@ __metadata:
   dependencies:
     "@navikt/fp-kodeverk": 1.0.0
     "@navikt/fp-types": 1.0.0
-    "@navikt/ft-fakta-beregning": 4.2.11
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.2.11
-    "@navikt/ft-prosess-beregningsgrunnlag": 6.2.8
+    "@navikt/ft-fakta-beregning": 4.2.12
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.2.12
+    "@navikt/ft-prosess-beregningsgrunnlag": 6.2.9
     typescript: 5.0.4
     vite: 4.3.5
   languageName: unknown
@@ -4930,9 +4930,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ft-fakta-beregning@npm:4.2.11":
-  version: 4.2.11
-  resolution: "@navikt/ft-fakta-beregning@npm:4.2.11::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-beregning%2F4.2.11%2F6a04b1d1c87f729722ad6735c9160bdee7fb49f1"
+"@navikt/ft-fakta-beregning@npm:4.2.12":
+  version: 4.2.12
+  resolution: "@navikt/ft-fakta-beregning@npm:4.2.12::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-beregning%2F4.2.12%2F6b65c7b5f3bf84dfcda7f5b4038f6c982076f3b6"
   dependencies:
     "@navikt/aksel-icons": 3.1.2
     "@navikt/ds-css": 3.1.2
@@ -4969,13 +4969,13 @@ __metadata:
     react-dom: 18.2.0
     react-hook-form: 7.43.9
     react-intl: 6.4.2
-  checksum: f3bc72497de598ce2330cb6870d57e13c5597de47a338e9d63316d57f7155cb3cb2176cd90bb875461c9e6efa5d1b2217c39e62527f627b055ca0545e2ddfcb3
+  checksum: 3ce779af7c18ff29c7603c14a629aa35c785c625fb2c48bc229b25eee19eb2df353e3a7a80c81c8fd35a672fce032f0ebe6f6da797adb83eabcb5cb8ded45cf1
   languageName: node
   linkType: hard
 
-"@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:7.2.11":
-  version: 7.2.11
-  resolution: "@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:7.2.11::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-fordel-beregningsgrunnlag%2F7.2.11%2Fc6996d2ea25eaafdcaf017ea6d90146bf3ef5acf"
+"@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:7.2.12":
+  version: 7.2.12
+  resolution: "@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:7.2.12::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-fordel-beregningsgrunnlag%2F7.2.12%2F67e0e3a618793cabaeb5912ec79e7f7aa0768d92"
   dependencies:
     "@navikt/aksel-icons": 3.1.2
     "@navikt/ds-css": 3.1.2
@@ -5008,7 +5008,7 @@ __metadata:
     react: 18.2.0
     react-hook-form: 7.43.9
     react-intl: 6.3.2
-  checksum: baa8ef8b57bf8c69f5b53c9b3e0f925bc6dcf559180d231bd9fbde03179cc11c52cf5e691881f071d274431b07505c0074db8acd7cb8d49bf5ff85f4c5361c56
+  checksum: e673bfaf94b40aa0e100c605c4d079525b224504fe6a4b1f5721fa8c3bbeb12b8bafb88fa2263f6b4dbb7f9e20987814ed1c09dd6bce21604e92be66d2f8fe43
   languageName: node
   linkType: hard
 
@@ -5126,10 +5126,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ft-prosess-beregningsgrunnlag@npm:6.2.8":
-  version: 6.2.8
-  resolution: "@navikt/ft-prosess-beregningsgrunnlag@npm:6.2.8::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-beregningsgrunnlag%2F6.2.8%2F730fb0c97f4b657aba3dc1e3e4047c53a233d637"
+"@navikt/ft-prosess-beregningsgrunnlag@npm:6.2.9":
+  version: 6.2.9
+  resolution: "@navikt/ft-prosess-beregningsgrunnlag@npm:6.2.9::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-beregningsgrunnlag%2F6.2.9%2Fd54a1eb648eafcb289da2163049f56685f6666a4"
   dependencies:
+    "@navikt/aksel-icons": 3.1.2
     "@navikt/ds-css": 3.1.2
     "@navikt/ds-react": 3.1.2
     "@navikt/ft-form-hooks": ^4.0.28
@@ -5147,6 +5148,7 @@ __metadata:
     react-hook-form: 7.43.9
     react-intl: 6.4.2
   peerDependencies:
+    "@navikt/aksel-icons": 3.1.2
     "@navikt/ds-css": 2.8.11
     "@navikt/ds-react": 2.8.11
     "@navikt/ft-form-hooks": 4.x
@@ -5163,7 +5165,7 @@ __metadata:
     react-collapse: 5.1.1
     react-hook-form: 7.43.9
     react-intl: 6.3.2
-  checksum: 970ad5e2bcd4d5cb53ed74b38a984fb8554e5c80b55523d0b03bdeee8a6e9900be9bd07d9e3f77458b5d79ddf1a0513d5f4da0ed87a348f58e5c79860591c117
+  checksum: bb2cbded36a60d89aa08fb96cda73035c4795a69453f8fcee7731da7a1a5a54571d4eafa9e16360a1de0c3266fb324e36254250aa1e19ab465eae052eb41ac5c
   languageName: node
   linkType: hard
 
