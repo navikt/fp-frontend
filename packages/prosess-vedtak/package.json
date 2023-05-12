@@ -34,7 +34,7 @@
     "@navikt/ft-form-hooks": "4.0.28",
     "@navikt/ft-form-validators": "2.0.25",
     "@navikt/ft-kodeverk": "2.1.7",
-    "@navikt/ft-prosess-beregningsgrunnlag": "6.2.8",
+    "@navikt/ft-prosess-beregningsgrunnlag": "6.2.9",
     "@navikt/ft-types": "2.1.8",
     "@navikt/ft-ui-komponenter": "2.0.26",
     "@navikt/ft-utils": "2.0.24",
