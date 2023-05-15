@@ -107,7 +107,7 @@ describe('<UttakDokumentasjonFaktaIndex>', () => {
     expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
-    await userEvent.click(screen.getByAltText('Åpne rad'));
+    await userEvent.click(screen.getByTitle('Åpne rad'));
 
     expect(await screen.findByText('Del opp periode')).toBeInTheDocument();
 
