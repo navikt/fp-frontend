@@ -101,7 +101,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
 
     expect(screen.getAllByText('Dato')).toHaveLength(2);
 
-    await userEvent.click(screen.getByText('Legg til tilretteleggingsbehov'));
+    await userEvent.click(screen.getByTitle('Legg til tilretteleggingsbehov'));
 
     expect(await screen.findAllByText('Dato')).toHaveLength(3);
 

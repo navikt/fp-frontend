@@ -25,12 +25,12 @@ describe('<BeregningsresultatProsessIndex>', () => {
     const utils = render(<SaksbehandlerKanOverstyre submitCallback={lagre} />);
 
     expect(await screen.findByText('Beregning')).toBeInTheDocument();
-    expect(screen.getByAltText('Overstyr')).toBeInTheDocument();
-    expect(screen.queryByAltText('Har overstyrt')).not.toBeInTheDocument();
+    expect(screen.getByTitle('Overstyr')).toBeInTheDocument();
+    expect(screen.queryByTitle('Har overstyrt')).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getByAltText('Overstyr'));
+    await userEvent.click(screen.getByTestId('overstyringsknapp'));
 
-    expect(await screen.findByAltText('Har overstyrt')).toBeInTheDocument();
+    expect(await screen.findByTitle('Har overstyrt')).toBeInTheDocument();
     expect(screen.queryByAltText('Overstyr')).not.toBeInTheDocument();
 
     expect(screen.getByText('Bekreft overstyring').closest('button')).toBeDisabled();
@@ -41,9 +41,9 @@ describe('<BeregningsresultatProsessIndex>', () => {
 
     await userEvent.click(screen.getByText('Avbryt'));
 
-    expect(await screen.findByAltText('Overstyr')).toBeInTheDocument();
+    expect(await screen.findByTitle('Overstyr')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByAltText('Overstyr'));
+    await userEvent.click(screen.getByTitle('Overstyr'));
 
     await userEvent.type(utils.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
 

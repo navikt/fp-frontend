@@ -65,7 +65,7 @@ describe('<FodselFaktaIndex>', () => {
 
     expect(await screen.findByText('Fyll inn dokumenterte opplysninger')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByAltText('Legg til barn'));
+    await userEvent.click(screen.getByTitle('Legg til barn'));
 
     const alleDatofelt = utils.getAllByRole('textbox', { hidden: true });
     const fødselsdatoFelt = alleDatofelt[0];
