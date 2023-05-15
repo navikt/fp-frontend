@@ -69,7 +69,7 @@ describe('<AndreYtelserPapirsoknadIndex>', () => {
     await userEvent.type(tomInput, '15.09.2022');
     fireEvent.blur(tomInput);
 
-    await userEvent.click(screen.getByText('Legg til periode'));
+    await userEvent.click(screen.getAllByText('Legg til periode')[0]);
 
     const datoInputs = await screen.findAllByRole('textbox');
     expect(datoInputs).toHaveLength(4);
