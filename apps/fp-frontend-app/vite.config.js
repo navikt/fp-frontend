@@ -1,5 +1,6 @@
-import { defineConfig } from 'vitest/config'
+import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
+import sourcemaps from 'rollup-plugin-sourcemaps';
 
 export default defineConfig({
   plugins: [
@@ -7,6 +8,7 @@ export default defineConfig({
       // Use React plugin in all *.jsx and *.tsx files
       include: '**/*.{ts,tsx}',
     }),
+    sourcemaps(),
   ],
   css: {
     modules: {
