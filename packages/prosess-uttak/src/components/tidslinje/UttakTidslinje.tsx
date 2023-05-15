@@ -224,7 +224,7 @@ const finnLabelForPeriode = (
   ).formattedString;
 
   let periodeType = '';
-  if (periode.periodeType !== '-') {
+  if (periode.periodeType !== '-' && periode.periodeType !== '') {
     periodeType = intl.formatMessage({ id: PERIODE_TYPE_LABEL_MAP[periode.periodeType] });
   }
 
