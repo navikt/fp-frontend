@@ -30,7 +30,7 @@
     "cross-env": "7.0.3",
     "eslint": "8.40.0",
     "typescript": "5.0.4",
-    "vite": "4.3.5",
+    "vite": "4.3.7",
     "vitest": "0.31.0"
   },
   "exports": {
