@@ -118,6 +118,15 @@ const ValgtAktivitetSubForm: FunctionComponent<OwnProps> = ({
           </FlexColumn>
         </FlexRow>
         {ferdiglignetNæring
+          .sort((a, b) => {
+            if (a.år < b.år) {
+              return 1;
+            }
+            if (a.år > b.år) {
+              return -1;
+            }
+            return 0;
+          })
           .map(inntekt => (
             <FlexRow key={inntekt.år}>
               <FlexColumn className={styles.aarBredde}>
