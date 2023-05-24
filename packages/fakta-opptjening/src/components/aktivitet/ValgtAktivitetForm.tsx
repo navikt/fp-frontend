@@ -10,7 +10,9 @@ import { VerticalSpacer, FaktaGruppe, FlexColumn, FlexContainer, FlexRow } from 
 import { findDifferenceInMonthsAndDays, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { RadioGroupPanel, TextAreaField, Form } from '@navikt/ft-form-hooks';
-import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, AlleKodeverk, OpptjeningAktivitet } from '@navikt/fp-types';
+import {
+  ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, AlleKodeverk, OpptjeningAktivitet, FerdiglignetNæring,
+} from '@navikt/fp-types';
 
 import ValgtAktivitetSubForm from './ValgtAktivitetSubForm';
 import { finnOpptjeningFom, finnOpptjeningTom } from '../../utils/opptjeningDatoUtil';
@@ -67,6 +69,7 @@ interface OwnProps {
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   opptjeningAktivitetTyper: KodeverkMedNavn[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  ferdiglignetNæring: FerdiglignetNæring[];
   opptjeningFomDato: string;
   opptjeningTomDato: string;
   lukkPeriode: () => void;
@@ -87,6 +90,7 @@ const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
   alleMerknaderFraBeslutter,
   arbeidsgiverOpplysningerPerId,
   valgtOpptjeningAktivitet,
+  ferdiglignetNæring,
   oppdaterAktivitet,
   valgteFormValues,
   opptjeningFomDato,
@@ -192,6 +196,7 @@ const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           stillingsandel={stillingsandel}
           naringRegistreringsdato={naringRegistreringsdato}
+          ferdiglignetNæring={ferdiglignetNæring}
         />
         {!skalIkkeKunneEditere(harAksjonspunkt, erGodkjent, erEndret) && (
           <>

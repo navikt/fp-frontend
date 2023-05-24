@@ -82,7 +82,7 @@ export type { default as AnkeVurdering } from './src/ankeVurderingTsType';
 export type { default as KlageVurdering, KlageVurderingResultat } from './src/klageVurderingTsType';
 export type { default as Innsyn, InnsynDokument, InnsynVedtaksdokument } from './src/innsynTsType';
 export type {
-  default as Opptjening, OpptjeningAktivitet, FastsattOpptjening, FastsattOpptjeningAktivitet,
+  default as Opptjening, OpptjeningAktivitet, FastsattOpptjening, FastsattOpptjeningAktivitet, FerdiglignetNæring,
 } from './src/opptjeningTsType';
 export type { default as TilbakekrevingValg } from './src/tilbakekrevingValgTsType';
 export type { default as TotrinnskontrollAksjonspunkt, OpptjeningAktiviteter } from './src/totrinnskontrollAksjonspunktTsType';

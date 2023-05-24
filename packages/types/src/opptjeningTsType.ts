@@ -30,9 +30,15 @@ export type FastsattOpptjening = {
   fastsattOpptjeningAktivitetList?: FastsattOpptjeningAktivitet[];
 };
 
+export type FerdiglignetNæring = {
+  år: string;
+  beløp: number;
+};
+
 type Opptjening = {
   fastsattOpptjening: FastsattOpptjening;
   opptjeningAktivitetList?: OpptjeningAktivitet[];
+  ferdiglignetNæring?: FerdiglignetNæring[];
 };
 
 export default Opptjening;

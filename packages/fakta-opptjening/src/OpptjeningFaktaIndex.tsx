@@ -28,6 +28,7 @@ const OpptjeningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps
 }) => {
   const fastsattOpptjening = opptjening ? opptjening.fastsattOpptjening : undefined;
   const opptjeningAktiviteter = opptjening ? opptjening.opptjeningAktivitetList : undefined;
+  const ferdiglignetNæring = opptjening?.ferdiglignetNæring || [];
   return (
     <RawIntlProvider value={intl}>
       <OpptjeningFaktaPanel
@@ -41,6 +42,7 @@ const OpptjeningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         opptjeningAktiviteter={opptjeningAktiviteter}
         fastsattOpptjening={fastsattOpptjening}
+        ferdiglignetNæring={ferdiglignetNæring}
         submitCallback={submitCallback}
         formData={formData}
         setFormData={setFormData}
