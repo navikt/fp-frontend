@@ -22,6 +22,8 @@
   "ActivityPanel.Oppdragsgiver": "Oppdragsgiver",
   "ActivityPanel.Stillingsandel": "Stillingsandel",
   "ActivityPanel.Registreringsdato": "Registreringsdato",
+  "ActivityPanel.FerdiglignetNæring": "Ferdiglignet næringsinntekt",
+  "ActivityPanel.IngenFerdiglignetNæring": "Ingen ferdiglignet næringsinntekt",
 
   "OpptjeningTidslinje.StartDato": "Start opptjeningsperiode",
   "OpptjeningTidslinje.SluttDato": "Slutt opptjeningsperiode",

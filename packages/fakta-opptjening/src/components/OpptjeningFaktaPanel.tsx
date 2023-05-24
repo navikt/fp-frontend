@@ -12,6 +12,7 @@ import {
   OpptjeningAktivitet,
   Opptjening,
   KodeverkMedNavn,
+  FerdiglignetNæring,
 } from '@navikt/fp-types';
 import { AvklarAktivitetsPerioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -71,6 +72,7 @@ interface OwnProps {
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   opptjeningAktiviteter?: OpptjeningAktivitet[];
+  ferdiglignetNæring: FerdiglignetNæring[];
   fastsattOpptjening?: Opptjening['fastsattOpptjening'];
   submitCallback: (data: AvklarAktivitetsPerioderAp) => Promise<void>;
   formData: any;
@@ -94,6 +96,7 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
   fastsattOpptjening,
+  ferdiglignetNæring,
   submitCallback,
   formData,
   setFormData,
@@ -236,6 +239,7 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
             alleKodeverk={alleKodeverk}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+            ferdiglignetNæring={ferdiglignetNæring}
             lukkPeriode={lukkPeriode}
           />
           <VerticalSpacer twentyPx />

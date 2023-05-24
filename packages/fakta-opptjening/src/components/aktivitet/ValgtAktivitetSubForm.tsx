@@ -3,10 +3,10 @@ import dayjs from 'dayjs';
 import { FormattedMessage } from 'react-intl';
 import { BodyShort, Label } from '@navikt/ds-react';
 
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT, formatCurrencyNoKr } from '@navikt/ft-utils';
+import { FlexColumn, FlexContainer, FlexRow, FloatRight, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { opptjeningAktivitetType as OAType } from '@navikt/fp-kodeverk';
-import { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import { ArbeidsgiverOpplysningerPerId, FerdiglignetNæring } from '@navikt/fp-types';
 
 import styles from './valgtAktivitetSubForm.module.css';
 
@@ -52,6 +52,7 @@ interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   stillingsandel: number;
   naringRegistreringsdato: string;
+  ferdiglignetNæring: FerdiglignetNæring[];
 }
 
 /**
@@ -65,6 +66,7 @@ const ValgtAktivitetSubForm: FunctionComponent<OwnProps> = ({
   arbeidsgiverOpplysningerPerId,
   stillingsandel,
   naringRegistreringsdato,
+  ferdiglignetNæring,
 }) => (
   <FlexContainer>
     {erAvType(valgtAktivitetstype, ...[OAType.ARBEID, OAType.NARING, ...YTELSE_TYPER]) && (
@@ -101,6 +103,40 @@ const ValgtAktivitetSubForm: FunctionComponent<OwnProps> = ({
           </BodyShort>
         </FlexColumn>
       </FlexRow>
+    )}
+    {erAvType(valgtAktivitetstype, OAType.NARING) && ferdiglignetNæring.length === 0 && (
+      <FlexRow>
+        <FlexColumn>
+          <Label size="small">
+            <FormattedMessage id="ActivityPanel.IngenFerdiglignetNæring" />
+          </Label>
+        </FlexColumn>
+      </FlexRow>
+    )}
+    {erAvType(valgtAktivitetstype, OAType.NARING) && ferdiglignetNæring.length > 0 && (
+      <>
+        <VerticalSpacer eightPx />
+        <FlexRow>
+          <FlexColumn>
+            <Label size="small">
+              <FormattedMessage id="ActivityPanel.FerdiglignetNæring" />
+            </Label>
+          </FlexColumn>
+        </FlexRow>
+        {ferdiglignetNæring
+          .map(inntekt => (
+            <FlexRow key={inntekt.år}>
+              <FlexColumn className={styles.aarBredde}>
+                <BodyShort size="small">{inntekt.år}</BodyShort>
+              </FlexColumn>
+              <FlexColumn className={styles.belopBredde}>
+                <FloatRight>
+                  <BodyShort size="small">{formatCurrencyNoKr(inntekt.beløp)}</BodyShort>
+                </FloatRight>
+              </FlexColumn>
+            </FlexRow>
+          ))}
+      </>
     )}
   </FlexContainer>
 );
