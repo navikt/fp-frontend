@@ -1,11 +1,13 @@
-import React, { FunctionComponent, useMemo, ReactElement } from 'react';
-import { BodyShort, Heading } from '@navikt/ds-react';
-import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
+import React, { FunctionComponent, useMemo, ReactElement, useState, useCallback } from 'react';
+import { BodyShort, Heading, Search, Alert } from '@navikt/ds-react';
+import { isValidFodselsnummer } from '@navikt/ft-utils';
+import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Buldings3Icon, FigureInwardIcon, SilhouetteIcon, FigureOutwardIcon } from '@navikt/aksel-icons';
 import { CopyToClipboard } from '@navikt/ds-react-internal';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import styles from './brukerAvsenderPanel.module.css';
 import Journalpost from '../../../typer/journalpostTsType';
+import OppdaterMedBruker from '../../../typer/oppdaterBrukerTsType';
 
 const finnKjønnBilde = (journalpost: Journalpost): ReactElement => {
   const fnr = journalpost.bruker?.fnr;
@@ -62,30 +64,79 @@ const lagBrukerAvsenderRad = (navn: string, id: string, ikon: ReactElement, titl
 
 type OwnProps = Readonly<{
   journalpost: Journalpost;
+  oppdaterJournalpostMedBruker: (params: OppdaterMedBruker) => void;
+  skalKunneEndreSøker: boolean;
 }>;
 
 /**
  * BrukerAvsenderPanel - Inneholder detaljer om bruker og avsender
  */
-const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({ journalpost }) => {
+const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({
+  journalpost,
+  oppdaterJournalpostMedBruker,
+  skalKunneEndreSøker,
+}) => {
+  const intl = useIntl();
+  const [søkerFeilmelding, setSøkerFeilmelding] = useState<string | undefined>(undefined);
   const brukerBilde = useMemo(() => finnKjønnBilde(journalpost), [journalpost]);
   const avsenderBilde = useMemo(() => finnAvsenderBilde(journalpost), [journalpost]);
+  const oppdaterMedSøker = useCallback(
+    (e: any) => {
+      if (e.key === 'Enter') {
+        const fnr = e.target?.value;
+        if (!fnr) {
+          setSøkerFeilmelding(undefined);
+        } else if (!isValidFodselsnummer(fnr)) {
+          setSøkerFeilmelding(intl.formatMessage({ id: 'ValgtOppgave.Søk.BrukerFeil' }, { personnummer: fnr }));
+        } else {
+          setSøkerFeilmelding(undefined);
+          oppdaterJournalpostMedBruker({ journalpostId: journalpost.journalpostId, fødselsnummer: e.target.value });
+        }
+      }
+    },
+    [oppdaterJournalpostMedBruker, søkerFeilmelding],
+  );
+
   return (
-    <div className={styles.brukerAvsenderRad}>
-      {journalpost.bruker?.navn && (
-        <>{lagBrukerAvsenderRad(journalpost.bruker.navn, journalpost.bruker.fnr, brukerBilde, 'ValgtOppgave.Bruker')}</>
-      )}
-      {journalpost.avsender?.navn && (
+    <>
+      {skalKunneEndreSøker && (
         <>
-          {lagBrukerAvsenderRad(
-            journalpost.avsender.navn,
-            journalpost.avsender.id,
-            avsenderBilde,
-            'ValgtOppgave.Avsender',
-          )}
+          <Alert variant="warning">
+            <BodyShort>
+              <FormattedMessage id="ValgtOppgave.Søk.Bruker" />
+            </BodyShort>
+          </Alert>
+          <VerticalSpacer eightPx />
+          <div className={styles.searchBox}>
+            <Search
+              label={intl.formatMessage({ id: 'ValgtOppgave.Søk.Bruker' })}
+              variant="simple"
+              onKeyDown={oppdaterMedSøker}
+            />
+            <VerticalSpacer eightPx />
+            {søkerFeilmelding && <BodyShort className={styles.error}>{søkerFeilmelding}</BodyShort>}
+          </div>
         </>
       )}
-    </div>
+      <VerticalSpacer sixteenPx />
+      <div className={styles.brukerAvsenderRad}>
+        {journalpost.bruker?.navn && (
+          <>
+            {lagBrukerAvsenderRad(journalpost.bruker.navn, journalpost.bruker.fnr, brukerBilde, 'ValgtOppgave.Bruker')}
+          </>
+        )}
+        {journalpost.avsender?.navn && (
+          <>
+            {lagBrukerAvsenderRad(
+              journalpost.avsender.navn,
+              journalpost.avsender.id,
+              avsenderBilde,
+              'ValgtOppgave.Avsender',
+            )}
+          </>
+        )}
+      </div>
+    </>
   );
 };
 export default BrukerAvsenderPanel;

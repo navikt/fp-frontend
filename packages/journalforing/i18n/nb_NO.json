@@ -13,6 +13,8 @@
   "ValgtOppgave.Avbryt": "Avbryt",
   "ValgtOppgave.Journalfør": "Journalfør",
   "ValgtOppgave.Bruker": "Søker",
+  "ValgtOppgave.Søk.Bruker": "Saken mangler søker. Søk på personnummer for å knytte person til saken.",
+  "ValgtOppgave.Søk.BrukerFeil": "{personnummer} er ikke et gyldig fødselsnummer",
   "ValgtOppgave.Avsender": "Avsender",
   "ValgtOppgave.Notat": "Beskrivelse",
   "ValgtOppgave.RelaterteSaker": "Saker som kan være knyttet til innholdet",

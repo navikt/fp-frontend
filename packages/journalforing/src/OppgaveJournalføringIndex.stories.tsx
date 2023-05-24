@@ -17,86 +17,89 @@ import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
 
-const detaljertJournalpostMal = {
-  journalpostId: '986547336994',
-  tittel: 'Inntektsmelding',
-  kanal: JournalKanal.ALLTIN,
-  bruker: {
-    navn: 'Søker Søkersen',
-    fnr: '12048714373',
-    aktørId: '98594685464858',
-  },
-  avsender: {
-    navn: 'Svingen sag og høvleri',
-    id: '999999999',
-  },
-  ytelseType: fagsakYtelseType.FORELDREPENGER,
-  dokumenter: [
-    {
-      dokumentId: '999999999',
-      tittel: 'Søknad',
-      varianter: [],
-      lenke: 'https://research.google.com/pubs/archive/44679.pdf',
+const detaljertJournalpostMal = (medBruker: boolean): Journalpost =>
+  ({
+    journalpostId: '986547336994',
+    tittel: 'Inntektsmelding',
+    kanal: JournalKanal.ALLTIN,
+    bruker: medBruker
+      ? {
+          navn: 'Søker Søkersen',
+          fnr: '12048714373',
+          aktørId: '98594685464858',
+        }
+      : null,
+    avsender: {
+      navn: 'Svingen sag og høvleri',
+      id: '999999999',
     },
-    {
-      dokumentId: '999999998',
-      tittel: 'Søknad om foreldrepenger',
-      varianter: [],
-      lenke: 'https://arxiv.org/pdf/2209.14865.pdf',
-    },
-    {
-      dokumentId: '999999997',
-      tittel: 'Inntektsbevis',
-      varianter: [],
-      lenke: 'https://research.google.com/pubs/archive/44678.pdf',
-    },
-  ],
-  fagsaker: [
-    {
-      saksnummer: '125416592',
-      ytelseType: fagsakYtelseType.FORELDREPENGER,
-      opprettetDato: '2022-01-02',
-      førsteUttaksdato: '2022-05-02',
-      status: fagsakStatus.LOPENDE,
-      familieHendelseJf: {
-        familiehHendelseDato: '2022-04-15',
-        familihendelseType: familieHendelseType.FODSEL,
+    ytelseType: fagsakYtelseType.FORELDREPENGER,
+    dokumenter: [
+      {
+        dokumentId: '999999999',
+        tittel: 'Søknad',
+        varianter: [],
+        lenke: 'https://research.google.com/pubs/archive/44679.pdf',
       },
-    },
-    {
-      saksnummer: '125416597',
-      ytelseType: fagsakYtelseType.FORELDREPENGER,
-      opprettetDato: '2022-01-02',
-      førsteUttaksdato: '2022-05-02',
-      status: fagsakStatus.UNDER_BEHANDLING,
-      familieHendelseJf: {
-        familiehHendelseDato: '2022-04-15',
-        familihendelseType: familieHendelseType.ADOPSJON,
+      {
+        dokumentId: '999999998',
+        tittel: 'Søknad om foreldrepenger',
+        varianter: [],
+        lenke: 'https://arxiv.org/pdf/2209.14865.pdf',
       },
-    },
-    {
-      saksnummer: '155462542',
-      ytelseType: fagsakYtelseType.SVANGERSKAPSPENGER,
-      datoOpprettet: '2022-03-02',
-      status: fagsakStatus.AVSLUTTET,
-      familieHendelseJf: {
-        familiehHendelseDato: '2022-02-01',
-        familihendelseType: familieHendelseType.TERMIN,
+      {
+        dokumentId: '999999997',
+        tittel: 'Inntektsbevis',
+        varianter: [],
+        lenke: 'https://research.google.com/pubs/archive/44678.pdf',
       },
-    },
-    {
-      saksnummer: '175419131',
-      ytelseType: fagsakYtelseType.FORELDREPENGER,
-      datoOpprettet: '2022-01-02',
-      førsteUttaksdato: '2022-02-02',
-      status: fagsakStatus.OPPRETTET,
-      familieHendelseJf: {
-        familiehHendelseDato: '2022-03-01',
-        familihendelseType: familieHendelseType.OMSORG,
+    ],
+    fagsaker: [
+      {
+        saksnummer: '125416592',
+        ytelseType: fagsakYtelseType.FORELDREPENGER,
+        opprettetDato: '2022-01-02',
+        førsteUttaksdato: '2022-05-02',
+        status: fagsakStatus.LOPENDE,
+        familieHendelseJf: {
+          familiehHendelseDato: '2022-04-15',
+          familihendelseType: familieHendelseType.FODSEL,
+        },
       },
-    },
-  ],
-} as Journalpost;
+      {
+        saksnummer: '125416597',
+        ytelseType: fagsakYtelseType.FORELDREPENGER,
+        opprettetDato: '2022-01-02',
+        førsteUttaksdato: '2022-05-02',
+        status: fagsakStatus.UNDER_BEHANDLING,
+        familieHendelseJf: {
+          familiehHendelseDato: '2022-04-15',
+          familihendelseType: familieHendelseType.ADOPSJON,
+        },
+      },
+      {
+        saksnummer: '155462542',
+        ytelseType: fagsakYtelseType.SVANGERSKAPSPENGER,
+        datoOpprettet: '2022-03-02',
+        status: fagsakStatus.AVSLUTTET,
+        familieHendelseJf: {
+          familiehHendelseDato: '2022-02-01',
+          familihendelseType: familieHendelseType.TERMIN,
+        },
+      },
+      {
+        saksnummer: '175419131',
+        ytelseType: fagsakYtelseType.FORELDREPENGER,
+        datoOpprettet: '2022-01-02',
+        førsteUttaksdato: '2022-02-02',
+        status: fagsakStatus.OPPRETTET,
+        familieHendelseJf: {
+          familiehHendelseDato: '2022-03-01',
+          familihendelseType: familieHendelseType.OMSORG,
+        },
+      },
+    ],
+  } as Journalpost);
 
 export default {
   title: 'journalføring/journalføring/JournalforingIndex',
@@ -113,11 +116,16 @@ const Template: StoryFn<{
   alleOppgaver?: OppgaveOversikt[];
   navAnsatt: NavAnsatt;
   detaljertJournalpost: Journalpost;
-}> = ({ alleOppgaver, detaljertJournalpost, navAnsatt }) => {
+  responsFraBrukerSøk: Journalpost | undefined;
+}> = ({ alleOppgaver, detaljertJournalpost, navAnsatt, responsFraBrukerSøk }) => {
   const data = [
     { key: RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER.name, data: alleOppgaver || undefined },
     { key: RestApiPathsKeys.HENT_JOURNALPOST_DETALJER.name, data: detaljertJournalpost || undefined },
     { key: RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING.name, data: { saksnummer: '12345678' } },
+<<<<<<< HEAD
+=======
+    { key: RestApiPathsKeys.OPPDATER_MED_BRUKER.name, data: responsFraBrukerSøk },
+>>>>>>> dceed375d (TFP-5489: GUI for å manuelt legge til søker)
   ];
 
   return (
@@ -127,8 +135,48 @@ const Template: StoryFn<{
   );
 };
 
+const defaultOppgaver = [
+  {
+    id: 600,
+    journalpostId: '12345125',
+    aktørId: '9996923456799',
+    fødselsnummer: '12048714373',
+    opprettetDato: '2022-01-01',
+    frist: '2022-02-01',
+    ytelseType: 'FP',
+    enhetId: '4016',
+    journalpostHarMangler: false,
+    prioritet: OppgavePrioritet.NORM,
+    beskrivelse: 'Inntektsmelding',
+  },
+  {
+    id: 700,
+    journalpostId: '245745871',
+    aktørId: '274572457624',
+    fødselsnummer: '12018847182',
+    opprettetDato: '2022-01-01',
+    frist: '2022-03-01',
+    ytelseType: 'SVP',
+    enhetId: '4008',
+    journalpostHarMangler: false,
+    prioritet: OppgavePrioritet.NORM,
+    beskrivelse: 'Inntektsmelding',
+  },
+  {
+    id: 800,
+    journalpostId: '345681257',
+    opprettetDato: '2022-01-01',
+    frist: '2022-01-01',
+    ytelseType: 'FP',
+    journalpostHarMangler: true,
+    prioritet: OppgavePrioritet.HØY,
+    beskrivelse: 'Søknad',
+  },
+];
+
 export const ViseOppgaverIListe = Template.bind({});
 ViseOppgaverIListe.args = {
+<<<<<<< HEAD
   alleOppgaver: [
     {
       id: 600,
@@ -166,11 +214,25 @@ ViseOppgaverIListe.args = {
     },
   ],
   detaljertJournalpost: detaljertJournalpostMal,
+=======
+  alleOppgaver: defaultOppgaver,
+  detaljertJournalpost: detaljertJournalpostMal(true),
+>>>>>>> dceed375d (TFP-5489: GUI for å manuelt legge til søker)
   navAnsatt: navAnsattDefault,
+  responsFraBrukerSøk: detaljertJournalpostMal(true),
+};
+
+export const ViseOppgaverUtenBruker = Template.bind({});
+ViseOppgaverUtenBruker.args = {
+  alleOppgaver: defaultOppgaver,
+  detaljertJournalpost: detaljertJournalpostMal(false),
+  navAnsatt: navAnsattDefault,
+  responsFraBrukerSøk: detaljertJournalpostMal(true),
 };
 
 export const IngenOppgaver = Template.bind({});
 IngenOppgaver.args = {
   alleOppgaver: [],
   navAnsatt: navAnsattDefault,
+  responsFraBrukerSøk: detaljertJournalpostMal(true),
 };

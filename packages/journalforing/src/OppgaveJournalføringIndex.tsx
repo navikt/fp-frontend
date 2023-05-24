@@ -45,11 +45,13 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
   const avbrytVisningAvJournalpost = useCallback(() => {
     setValgtOppgave(undefined);
   }, [valgtOppgave]);
+
   const {
     startRequest: innhentAlleOppgaver,
     data: alleOppgaver = TOM_ARRAY,
     state: status,
   } = restApiHooks.useRestApiRunner(RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER);
+
   const { addErrorMessage } = useRestApiErrorDispatcher();
   requestApi.setAddErrorMessageHandler(addErrorMessage);
 

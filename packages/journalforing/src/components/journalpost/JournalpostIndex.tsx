@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useEffect } from 'react';
+import React, { FunctionComponent, useState, useEffect, useCallback } from 'react';
 
 import { FlexColumn, FlexContainer, FlexRow, LoadingPanel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
@@ -11,6 +11,7 @@ import Journalpost from '../../typer/journalpostTsType';
 import JournalDokument from '../../typer/journalDokumentTsType';
 import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
 import DokumentIndex from './pdf/DokumentIndex';
+import OppdaterMedBruker from '../../typer/oppdaterBrukerTsType';
 
 type OwnProps = Readonly<{
   oppgave: OppgaveOversikt;
@@ -33,6 +34,16 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
   const journalpostKall = restApiHooks.useRestApi(RestApiPathsKeys.HENT_JOURNALPOST_DETALJER, {
     journalpostId: oppgave.journalpostId,
   });
+  const { startRequest: oppdaterMedBrukerKall, data: journalpostOppdatertMedSøker } = restApiHooks.useRestApiRunner(
+    RestApiPathsKeys.OPPDATER_MED_BRUKER,
+  );
+
+  const oppdaterMedBrukerCallback = useCallback(
+    (data: OppdaterMedBruker) => {
+      oppdaterMedBrukerKall(data);
+    },
+    [oppdaterMedBrukerKall],
+  );
 
   // Åpner første dokument som standard valg når vi er ferdig med å laste
   useEffect(() => {
@@ -59,9 +70,11 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
           <JournalpostDetaljer
             avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
-            journalpost={journalpost}
+            journalpost={journalpostOppdatertMedSøker || journalpost}
             oppgave={oppgave}
             submitJournalføring={submitJournalføring}
+            oppdaterJournalpostMedBruker={oppdaterMedBrukerCallback}
+            skalKunneEndreSøker={!journalpost.bruker}
           />
         </FlexColumn>
         {valgtDokument && (

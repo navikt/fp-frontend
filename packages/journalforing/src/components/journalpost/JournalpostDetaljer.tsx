@@ -19,6 +19,7 @@ import DokumentForm, {
 } from './innhold/DokumentForm';
 import BrukerAvsenderPanel from './innhold/BrukerAvsenderPanel';
 import JournalføringFormValues from '../../typer/journalføringFormValues';
+import OppdaterMedBruker from '../../typer/oppdaterBrukerTsType';
 import JournalpostTittelForm from './innhold/JournalpostTittelForm';
 
 const dokumentTittelSkalStyresAvJournalpost = (jp: Journalpost): boolean => jp.dokumenter?.length === 1;
@@ -88,6 +89,8 @@ type OwnProps = Readonly<{
   oppgave: OppgaveOversikt;
   avbrytVisningAvJournalpost: () => void;
   submitJournalføring: (params: JournalførSubmitValue) => void;
+  oppdaterJournalpostMedBruker: (params: OppdaterMedBruker) => void;
+  skalKunneEndreSøker: boolean;
 }>;
 
 /**
@@ -98,6 +101,8 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
   oppgave,
   avbrytVisningAvJournalpost,
   submitJournalføring,
+  oppdaterJournalpostMedBruker,
+  skalKunneEndreSøker,
 }) => {
   const saker = journalpost.fagsaker || [];
   const formMethods = useForm<JournalføringFormValues>({
@@ -112,7 +117,11 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
     <Form<JournalføringFormValues> formMethods={formMethods} onSubmit={submitJournal}>
       <JournalpostTittelForm journalpost={journalpost} />
       <VerticalSpacer sixteenPx />
-      <BrukerAvsenderPanel journalpost={journalpost} />
+      <BrukerAvsenderPanel
+        journalpost={journalpost}
+        oppdaterJournalpostMedBruker={oppdaterJournalpostMedBruker}
+        skalKunneEndreSøker={skalKunneEndreSøker}
+      />
       <VerticalSpacer twentyPx />
       {oppgave.beskrivelse && (
         <>
