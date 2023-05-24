@@ -136,6 +136,20 @@ MedAksjonspunkt.args = {
         erEndret: false,
       },
     ],
+    ferdiglignetNæring: [
+      {
+        år: '2016',
+        beløp: 100000,
+      },
+      {
+        år: '2017',
+        beløp: 150000,
+      },
+      {
+        år: '2018',
+        beløp: 200000,
+      },
+    ],
   } as Opptjening,
 };
 
@@ -221,6 +235,20 @@ MedToLikePerioderForSammeAktivitetstype.args = {
         naringRegistreringsdato: '1995-09-14',
         erGodkjent: true,
         erEndret: false,
+      },
+    ],
+    ferdiglignetNæring: [
+      {
+        år: '2016',
+        beløp: 100000,
+      },
+      {
+        år: '2017',
+        beløp: 150000,
+      },
+      {
+        år: '2018',
+        beløp: 200000,
       },
     ],
   } as Opptjening,

@@ -3,10 +3,10 @@ import dayjs from 'dayjs';
 import { FormattedMessage } from 'react-intl';
 import { BodyShort, Label } from '@navikt/ds-react';
 
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT, formatCurrencyNoKr } from '@navikt/ft-utils';
+import { FlexColumn, FlexContainer, FlexRow, FloatRight, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { opptjeningAktivitetType as OAType } from '@navikt/fp-kodeverk';
-import { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import { ArbeidsgiverOpplysningerPerId, FerdiglignetNæring } from '@navikt/fp-types';
 
 import styles from './valgtAktivitetSubForm.module.css';
 
@@ -46,12 +46,18 @@ const finnArbeidsgivertekst = (
     : arbeidsgiverOpplysninger.navn;
 };
 
+const finnNæringLabel = (ferdiglignetNæring: FerdiglignetNæring[]): string =>
+  ferdiglignetNæring.length > 0
+    ? 'ActivityPanel.FerdiglignetNæring'
+    : 'ActivityPanel.IngenFerdiglignetNæring';
+
 interface OwnProps {
   valgtAktivitetstype?: string;
   arbeidsgiverReferanse: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   stillingsandel: number;
   naringRegistreringsdato: string;
+  ferdiglignetNæring: FerdiglignetNæring[];
 }
 
 /**
@@ -65,6 +71,7 @@ const ValgtAktivitetSubForm: FunctionComponent<OwnProps> = ({
   arbeidsgiverOpplysningerPerId,
   stillingsandel,
   naringRegistreringsdato,
+  ferdiglignetNæring,
 }) => (
   <FlexContainer>
     {erAvType(valgtAktivitetstype, ...[OAType.ARBEID, OAType.NARING, ...YTELSE_TYPER]) && (
@@ -91,16 +98,39 @@ const ValgtAktivitetSubForm: FunctionComponent<OwnProps> = ({
     )}
     <VerticalSpacer eightPx />
     {erAvType(valgtAktivitetstype, OAType.NARING) && (
-      <FlexRow>
-        <FlexColumn>
-          <Label size="small">
-            <FormattedMessage id="ActivityPanel.Registreringsdato" />
-          </Label>
-          <BodyShort size="small">
-            {naringRegistreringsdato ? dayjs(naringRegistreringsdato).format(DDMMYYYY_DATE_FORMAT) : '-'}
-          </BodyShort>
-        </FlexColumn>
-      </FlexRow>
+      <>
+        <FlexRow>
+          <FlexColumn>
+            <Label size="small">
+              <FormattedMessage id="ActivityPanel.Registreringsdato" />
+            </Label>
+            <BodyShort size="small">
+              {naringRegistreringsdato ? dayjs(naringRegistreringsdato).format(DDMMYYYY_DATE_FORMAT) : '-'}
+            </BodyShort>
+          </FlexColumn>
+        </FlexRow>
+        <VerticalSpacer eightPx />
+        <FlexRow>
+          <FlexColumn>
+            <Label size="small">
+              <FormattedMessage id={finnNæringLabel(ferdiglignetNæring)} />
+            </Label>
+          </FlexColumn>
+        </FlexRow>
+        {ferdiglignetNæring
+          .map(inntekt => (
+            <FlexRow key={inntekt.år}>
+              <FlexColumn className={styles.aarBredde}>
+                <BodyShort size="small">{inntekt.år}</BodyShort>
+              </FlexColumn>
+              <FlexColumn className={styles.belopBredde}>
+                <FloatRight>
+                  <BodyShort size="small">{formatCurrencyNoKr(inntekt.beløp)}</BodyShort>
+                </FloatRight>
+              </FlexColumn>
+            </FlexRow>
+          ))}
+      </>
     )}
   </FlexContainer>
 );
