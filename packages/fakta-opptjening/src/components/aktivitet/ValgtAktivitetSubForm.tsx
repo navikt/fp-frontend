@@ -46,6 +46,11 @@ const finnArbeidsgivertekst = (
     : arbeidsgiverOpplysninger.navn;
 };
 
+const finnNæringLabel = (ferdiglignetNæring: FerdiglignetNæring[]): string =>
+  ferdiglignetNæring.length > 0
+    ? 'ActivityPanel.FerdiglignetNæring'
+    : 'ActivityPanel.IngenFerdiglignetNæring';
+
 interface OwnProps {
   valgtAktivitetstype?: string;
   arbeidsgiverReferanse: string;
@@ -93,33 +98,22 @@ const ValgtAktivitetSubForm: FunctionComponent<OwnProps> = ({
     )}
     <VerticalSpacer eightPx />
     {erAvType(valgtAktivitetstype, OAType.NARING) && (
-      <FlexRow>
-        <FlexColumn>
-          <Label size="small">
-            <FormattedMessage id="ActivityPanel.Registreringsdato" />
-          </Label>
-          <BodyShort size="small">
-            {naringRegistreringsdato ? dayjs(naringRegistreringsdato).format(DDMMYYYY_DATE_FORMAT) : '-'}
-          </BodyShort>
-        </FlexColumn>
-      </FlexRow>
-    )}
-    {erAvType(valgtAktivitetstype, OAType.NARING) && ferdiglignetNæring.length === 0 && (
-      <FlexRow>
-        <FlexColumn>
-          <Label size="small">
-            <FormattedMessage id="ActivityPanel.IngenFerdiglignetNæring" />
-          </Label>
-        </FlexColumn>
-      </FlexRow>
-    )}
-    {erAvType(valgtAktivitetstype, OAType.NARING) && ferdiglignetNæring.length > 0 && (
       <>
+        <FlexRow>
+          <FlexColumn>
+            <Label size="small">
+              <FormattedMessage id="ActivityPanel.Registreringsdato" />
+            </Label>
+            <BodyShort size="small">
+              {naringRegistreringsdato ? dayjs(naringRegistreringsdato).format(DDMMYYYY_DATE_FORMAT) : '-'}
+            </BodyShort>
+          </FlexColumn>
+        </FlexRow>
         <VerticalSpacer eightPx />
         <FlexRow>
           <FlexColumn>
             <Label size="small">
-              <FormattedMessage id="ActivityPanel.FerdiglignetNæring" />
+              <FormattedMessage id={finnNæringLabel(ferdiglignetNæring)} />
             </Label>
           </FlexColumn>
         </FlexRow>
