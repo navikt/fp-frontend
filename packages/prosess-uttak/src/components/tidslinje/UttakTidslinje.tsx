@@ -107,7 +107,9 @@ const getStatus = (periode: PeriodeSoker, tilknyttetStortinget: boolean): 'succe
 };
 
 const finnPeriodeType = (valgtPeriode: PeriodeSoker): string => {
-  const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0].stønadskontoType === '-';
+  const kontoIkkeSatt =
+    valgtPeriode.aktiviteter.length === 0 ||
+    (!valgtPeriode.periodeType && valgtPeriode.aktiviteter[0].stønadskontoType === '-');
   return kontoIkkeSatt ? '' : valgtPeriode.aktiviteter[0]?.stønadskontoType;
 };
 
