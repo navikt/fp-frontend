@@ -80,46 +80,43 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({
   return (
     <div className={styles.dokContainer}>
       <FlexRow>
-        {kanRedigeres ||
-          (dokumentTittelStyresAvJournalpostTittel && (
-            <FlexColumn className={styles.dokumentTittel}>
-              <FlexColumn className={styles.input}>
-                <FlexColumn className={styles.selectField}>
-                  {harToggletFritekst && (
-                    <InputField
-                      name={inputFieldName}
-                      validate={[required, hasValidText]}
-                      readOnly={dokumentTittelStyresAvJournalpostTittel}
-                      maxLength={200}
-                    />
-                  )}
-                  {!harToggletFritekst && (
-                    <SelectField
-                      readOnly={dokumentTittelStyresAvJournalpostTittel}
-                      name={inputFieldName}
-                      label={undefined}
-                      validate={[required]}
-                      selectValues={tittler}
-                    />
-                  )}
-                </FlexColumn>
-                {!dokumentTittelStyresAvJournalpostTittel && (
-                  <FlexColumn>
-                    <CheckboxGroup
-                      legend="Brukt fritekst"
-                      hideLegend
-                      className={styles.checkbox}
-                      onChange={endreFritekstToggle}
-                      value={[harToggletFritekst]}
-                    >
-                      <Checkbox value>Fritekst</Checkbox>
-                    </CheckboxGroup>
-                  </FlexColumn>
+        {kanRedigeres && (
+          <FlexColumn className={styles.dokumentTittel}>
+            <FlexColumn className={styles.input}>
+              <FlexColumn className={styles.selectField}>
+                {harToggletFritekst && (
+                  <InputField
+                    name={`journalpostDokumenter.${docFieldIndex}.tittel`}
+                    validate={[required, hasValidText]}
+                    readOnly={false}
+                    maxLength={100}
+                  />
+                )}
+                {!harToggletFritekst && (
+                  <SelectField
+                    readOnly={false}
+                    name={`journalpostDokumenter.${docFieldIndex}.tittel`}
+                    label={undefined}
+                    validate={[required]}
+                    selectValues={tittler}
+                  />
                 )}
               </FlexColumn>
+              <FlexColumn>
+                <CheckboxGroup
+                  legend="Brukt fritekst"
+                  hideLegend
+                  className={styles.checkbox}
+                  onChange={endreFritekstToggle}
+                  value={[harToggletFritekst]}
+                >
+                  <Checkbox value>Fritekst</Checkbox>
+                </CheckboxGroup>
+              </FlexColumn>
             </FlexColumn>
-          ))}
-        {!kanRedigeres && !dokumentTittelStyresAvJournalpostTittel && (
+          </FlexColumn>
+        )}
+        {!kanRedigeres && (
           <FlexColumn className={styles.dokumentTittel}>
             <Label className={styles.dokLab}>{dokument.tittel}</Label>
             {erKanalSomErÅpenForEndring(journalpost.kanal) && (
@@ -133,7 +130,16 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({
             )}
           </FlexColumn>
         )}
-        {nyFaneKnapp}
+        <FlexColumn className={styles.dokLenke}>
+          <Button
+            as="a"
+            href={dokument.lenke}
+            target="_blank"
+            rel="noreferrer"
+            variant="tertiary"
+            icon={<TabsAddIcon aria-hidden className={styles.newTabIcon} />}
+          />
+        </FlexColumn>
       </FlexRow>
     </div>
   );
