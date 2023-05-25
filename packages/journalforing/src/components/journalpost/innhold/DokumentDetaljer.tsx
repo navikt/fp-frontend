@@ -15,12 +15,18 @@ type OwnProps = Readonly<{
   dokument: JournalDokument;
   docFieldIndex: number;
   journalpost: Journalpost;
+  dokumentTittelStyresAvJournalpostTittel: boolean;
 }>;
 
 /**
  * DokumentDetaljer - Inneholder detaljer om et dokument på journalposten
  */
-const DokumentDetaljer: FunctionComponent<OwnProps> = ({ dokument, docFieldIndex, journalpost }) => {
+const DokumentDetaljer: FunctionComponent<OwnProps> = ({
+  dokument,
+  docFieldIndex,
+  journalpost,
+  dokumentTittelStyresAvJournalpostTittel,
+}) => {
   const [kanRedigeres, setSkalRedigeres] = useState<boolean>(!dokument.tittel);
   const [harToggletFritekst, setHarToggletFritekst] = useState(false);
   const tittler = listeMedTittler.map(tittel => (
@@ -36,7 +42,41 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({ dokument, docFieldIndex
   const toggleRedigering = useCallback(() => {
     setSkalRedigeres(!kanRedigeres);
   }, [kanRedigeres]);
-
+  const inputFieldName = dokumentTittelStyresAvJournalpostTittel
+    ? 'journalpostTittel'
+    : `journalpostDokumenter.${docFieldIndex}.tittel`;
+  const nyFaneKnapp = (
+    <FlexColumn className={styles.dokLenke}>
+      <Button
+        as="a"
+        href={dokument.lenke}
+        target="_blank"
+        rel="noreferrer"
+        variant="tertiary"
+        icon={<TabsAddIcon aria-hidden className={styles.newTabIcon} />}
+      />
+    </FlexColumn>
+  );
+  if (dokumentTittelStyresAvJournalpostTittel) {
+    return (
+      <div className={styles.dokContainer}>
+        <FlexRow>
+          {kanRedigeres ||
+            (dokumentTittelStyresAvJournalpostTittel && (
+              <FlexColumn className={styles.dokumentTittel}>
+                <InputField
+                  name={inputFieldName}
+                  validate={[required, hasValidText]}
+                  readOnly={dokumentTittelStyresAvJournalpostTittel}
+                  maxLength={200}
+                />
+              </FlexColumn>
+            ))}
+          {nyFaneKnapp}
+        </FlexRow>
+      </div>
+    );
+  }
   return (
     <div className={styles.dokContainer}>
       <FlexRow>

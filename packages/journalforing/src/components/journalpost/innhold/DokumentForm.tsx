@@ -49,12 +49,13 @@ export const transformValues = (
 
 type OwnProps = Readonly<{
   journalpost: Journalpost;
+  dokumentTittelStyresAvJournalpostTittel: boolean;
 }>;
 
 /**
  * DokumentForm - Inneholder form behandling av dokumenter og setter opp visning av hvert dokument
  */
-const DokumentForm: FunctionComponent<OwnProps> = ({ journalpost }) => {
+const DokumentForm: FunctionComponent<OwnProps> = ({ journalpost, dokumentTittelStyresAvJournalpostTittel }) => {
   const { control } = formHooks.useFormContext<JournalføringFormValues>();
   const { fields } = formHooks.useFieldArray({
     control,
@@ -68,6 +69,7 @@ const DokumentForm: FunctionComponent<OwnProps> = ({ journalpost }) => {
           key={field.id}
           docFieldIndex={index}
           journalpost={journalpost}
+          dokumentTittelStyresAvJournalpostTittel={dokumentTittelStyresAvJournalpostTittel}
         />
       ))}
     </>
