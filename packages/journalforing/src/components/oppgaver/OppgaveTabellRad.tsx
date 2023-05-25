@@ -18,11 +18,7 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
     setValgtOppgave(oppgave);
   }, []);
   return (
-    <Table.Row
-      onClick={oppgave.journalpostHarMangler ? undefined : setOppgave}
-      shadeOnHover
-      className={oppgave.journalpostHarMangler ? undefined : styles.tabellRad}
-    >
+    <Table.Row onClick={setOppgave} shadeOnHover className={styles.tabellRad}>
       <Table.DataCell>
         <DateLabel dateString={oppgave.opprettetDato} />
       </Table.DataCell>
@@ -36,18 +32,11 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
       </Table.DataCell>
       <Table.DataCell>{oppgave.prioritet}</Table.DataCell>
       <Table.DataCell>{oppgave.enhetId}</Table.DataCell>
-      {!oppgave.journalpostHarMangler && (
-        <Table.DataCell>
-          <Button size="small" variant="tertiary" disabled={false} onClick={setOppgave} type="button">
-            <ChevronRightIcon className={styles.nesteIkon} />
-          </Button>
-        </Table.DataCell>
-      )}
-      {oppgave.journalpostHarMangler && (
-        <Table.DataCell>
-          <FormattedMessage id="Oppgave.Gosys" />
-        </Table.DataCell>
-      )}
+      <Table.DataCell>
+        <Button size="small" variant="tertiary" disabled={false} onClick={setOppgave} type="button">
+          <ChevronRightIcon className={styles.nesteIkon} />
+        </Button>
+      </Table.DataCell>
     </Table.Row>
   );
 };

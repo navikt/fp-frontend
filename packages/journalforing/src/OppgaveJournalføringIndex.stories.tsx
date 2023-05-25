@@ -117,7 +117,7 @@ const Template: StoryFn<{
   const data = [
     { key: RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER.name, data: alleOppgaver || undefined },
     { key: RestApiPathsKeys.HENT_JOURNALPOST_DETALJER.name, data: detaljertJournalpost || undefined },
-    { key: RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING.name, data: { saksnummer: "12345678" } },
+    { key: RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING.name, data: { saksnummer: '12345678' } },
   ];
 
   return (
@@ -139,7 +139,6 @@ ViseOppgaverIListe.args = {
       frist: '2022-02-01',
       ytelseType: 'FP',
       enhetId: '4016',
-      journalpostHarMangler: false,
       prioritet: OppgavePrioritet.NORM,
       beskrivelse: 'Inntektsmelding',
     },
@@ -152,7 +151,6 @@ ViseOppgaverIListe.args = {
       frist: '2022-03-01',
       ytelseType: 'SVP',
       enhetId: '4008',
-      journalpostHarMangler: false,
       prioritet: OppgavePrioritet.NORM,
       beskrivelse: 'Inntektsmelding',
     },
@@ -162,7 +160,7 @@ ViseOppgaverIListe.args = {
       opprettetDato: '2022-01-01',
       frist: '2022-01-01',
       ytelseType: 'FP',
-      journalpostHarMangler: true,
+      enhetId: '4008',
       prioritet: OppgavePrioritet.HØY,
       beskrivelse: 'Søknad',
     },
