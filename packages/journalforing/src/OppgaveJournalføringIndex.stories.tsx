@@ -122,10 +122,7 @@ const Template: StoryFn<{
     { key: RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER.name, data: alleOppgaver || undefined },
     { key: RestApiPathsKeys.HENT_JOURNALPOST_DETALJER.name, data: detaljertJournalpost || undefined },
     { key: RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING.name, data: { saksnummer: '12345678' } },
-<<<<<<< HEAD
-=======
     { key: RestApiPathsKeys.OPPDATER_MED_BRUKER.name, data: responsFraBrukerSøk },
->>>>>>> dceed375d (TFP-5489: GUI for å manuelt legge til søker)
   ];
 
   return (
@@ -145,7 +142,6 @@ const defaultOppgaver = [
     frist: '2022-02-01',
     ytelseType: 'FP',
     enhetId: '4016',
-    journalpostHarMangler: false,
     prioritet: OppgavePrioritet.NORM,
     beskrivelse: 'Inntektsmelding',
   },
@@ -158,7 +154,6 @@ const defaultOppgaver = [
     frist: '2022-03-01',
     ytelseType: 'SVP',
     enhetId: '4008',
-    journalpostHarMangler: false,
     prioritet: OppgavePrioritet.NORM,
     beskrivelse: 'Inntektsmelding',
   },
@@ -168,7 +163,7 @@ const defaultOppgaver = [
     opprettetDato: '2022-01-01',
     frist: '2022-01-01',
     ytelseType: 'FP',
-    journalpostHarMangler: true,
+    enhetId: '4008',
     prioritet: OppgavePrioritet.HØY,
     beskrivelse: 'Søknad',
   },
@@ -176,7 +171,6 @@ const defaultOppgaver = [
 
 export const ViseOppgaverIListe = Template.bind({});
 ViseOppgaverIListe.args = {
-<<<<<<< HEAD
   alleOppgaver: [
     {
       id: 600,
@@ -213,11 +207,7 @@ ViseOppgaverIListe.args = {
       beskrivelse: 'Søknad',
     },
   ],
-  detaljertJournalpost: detaljertJournalpostMal,
-=======
-  alleOppgaver: defaultOppgaver,
   detaljertJournalpost: detaljertJournalpostMal(true),
->>>>>>> dceed375d (TFP-5489: GUI for å manuelt legge til søker)
   navAnsatt: navAnsattDefault,
   responsFraBrukerSøk: detaljertJournalpostMal(true),
 };
