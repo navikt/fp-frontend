@@ -8,24 +8,20 @@ import { Form } from '@navikt/ft-form-hooks';
 import VelgSakForm, { transformValues as transformValuesSak } from './innhold/VelgSakForm';
 import Journalpost from '../../typer/journalpostTsType';
 import JournalførSubmitValue, {
+  DokumentTittelSubmitValue,
   OppdaterJournalførTittlerSubmitValue,
 } from '../../typer/ferdigstillJournalføringSubmit';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import SakDetaljer from './innhold/SakDetaljer';
 import DokumentForm, {
-  transformValues as transformValuesDokumenter,
-  buildInitialValues as buildInitialValuesDokumenter,
+  transformValues as transformValuesFlereDokumenter,
+  buildInitialValues as buildInitialValuesFlereDokumenter,
 } from './innhold/DokumentForm';
 import BrukerAvsenderPanel from './innhold/BrukerAvsenderPanel';
 import JournalføringFormValues from '../../typer/journalføringFormValues';
 import JournalpostTittelForm from './innhold/JournalpostTittelForm';
 
-type OwnProps = Readonly<{
-  journalpost: Journalpost;
-  oppgave: OppgaveOversikt;
-  avbrytVisningAvJournalpost: () => void;
-  submitJournalføring: (params: JournalførSubmitValue) => void;
-}>;
+const dokumentTittelSkalStyresAvJournalpost = (jp: Journalpost): boolean => jp.dokumenter?.length === 1;
 
 const buildInitialValues = (journalpost: Journalpost): JournalføringFormValues => {
   const docs = journalpost.dokumenter || [];
@@ -33,19 +29,37 @@ const buildInitialValues = (journalpost: Journalpost): JournalføringFormValues 
     saksnummerValg: undefined,
     ytelsetypeValg: undefined,
     journalpostTittel: journalpost.tittel,
-    journalpostDokumenter: buildInitialValuesDokumenter(docs),
+    journalpostDokumenter: dokumentTittelSkalStyresAvJournalpost(journalpost)
+      ? [{ dokumentId: docs[0].dokumentId, tittel: journalpost.tittel }]
+      : buildInitialValuesFlereDokumenter(docs),
   };
+};
+
+const transformValuesEttDokument = (journalpost: Journalpost, tittel: string): DokumentTittelSubmitValue[] => {
+  const dokumentId = journalpost.dokumenter?.at(0)?.dokumentId;
+  if (!dokumentId) {
+    throw new Error(`Finner ingen dokumenter på journalpost ${journalpost.journalpostId}`);
+  }
+  return [
+    {
+      dokumentId,
+      tittel,
+    },
+  ];
 };
 
 const transformTittelValues = (
   values: JournalføringFormValues,
   journalpost: Journalpost,
 ): OppdaterJournalførTittlerSubmitValue | undefined => {
-  const nyTittel = journalpost.tittel !== values.journalpostTittel ? values.journalpostTittel : undefined;
-  const endredeDokumenter = transformValuesDokumenter(values, journalpost.dokumenter || []);
-  if (nyTittel || endredeDokumenter.length > 0) {
+  const nyJournalpostTittel = journalpost.tittel !== values.journalpostTittel ? values.journalpostTittel : undefined;
+  const endredeDokumenter =
+    nyJournalpostTittel && dokumentTittelSkalStyresAvJournalpost(journalpost)
+      ? transformValuesEttDokument(journalpost, nyJournalpostTittel)
+      : transformValuesFlereDokumenter(values, journalpost.dokumenter || []);
+  if (nyJournalpostTittel || endredeDokumenter.length > 0) {
     return {
-      journalpostTittel: nyTittel,
+      journalpostTittel: nyJournalpostTittel,
       dokumenter: endredeDokumenter,
     };
   }
@@ -69,6 +83,13 @@ const transformValues = (
   };
 };
 
+type OwnProps = Readonly<{
+  journalpost: Journalpost;
+  oppgave: OppgaveOversikt;
+  avbrytVisningAvJournalpost: () => void;
+  submitJournalføring: (params: JournalførSubmitValue) => void;
+}>;
+
 /**
  * JournalpostDetaljer - Viser detaljer om valgt journalpost
  */
@@ -82,7 +103,6 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
   const formMethods = useForm<JournalføringFormValues>({
     defaultValues: buildInitialValues(journalpost),
   });
-
   const submitJournal = useCallback((values: JournalføringFormValues) => {
     submitJournalføring(transformValues(values, journalpost, oppgave));
   }, []);
@@ -122,7 +142,10 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
       {journalpost.dokumenter && (
         <>
           <VerticalSpacer eightPx />
-          <DokumentForm journalpost={journalpost} />
+          <DokumentForm
+            journalpost={journalpost}
+            dokumentTittelStyresAvJournalpostTittel={dokumentTittelSkalStyresAvJournalpost(journalpost)}
+          />
           <VerticalSpacer thirtyTwoPx />
         </>
       )}
