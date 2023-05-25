@@ -41,7 +41,7 @@ const JournalpostTittelForm: FunctionComponent<OwnProps> = ({ journalpost }) => 
                 name="journalpostTittel"
                 validate={[required, hasValidText]}
                 readOnly={false}
-                maxLength={100}
+                maxLength={200}
                 className={styles.inputField}
               />
             )}
