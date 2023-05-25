@@ -12,7 +12,6 @@ import { Behandling } from '@navikt/ft-types';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
-import { RequestApi } from '@navikt/fp-rest-api';
 
 import ProsessPanelWrapper from './ProsessPanelWrapper';
 import useProsessMenyRegistrerer from './useProsessMenyRegistrerer';
@@ -55,7 +54,6 @@ interface OwnProps {
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   leftPanels: (props: InngangsvilkarPanelInitProps) => ReactElement;
   rightPanels?: (props: InngangsvilkarPanelInitProps) => ReactElement;
-  requestApi: RequestApi;
 }
 
 const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
@@ -66,7 +64,6 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
   oppdaterProsessStegOgFaktaPanelIUrl,
   leftPanels,
   rightPanels,
-  requestApi,
 }) => {
   const intl = useIntl();
 
@@ -147,7 +144,6 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
                   registrerInngangsvilkarPanel,
                   erPanelValgt,
                   harInngangsvilkarApentAksjonspunkt: harApentAksjonspunkt,
-                  requestApi,
                 })}
               </div>
             </FlexColumn>
@@ -158,7 +154,6 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
                     registrerInngangsvilkarPanel,
                     erPanelValgt,
                     harInngangsvilkarApentAksjonspunkt: harApentAksjonspunkt,
-                    requestApi,
                   })}
                 </div>
               </FlexColumn>

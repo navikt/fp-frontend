@@ -25,7 +25,6 @@ const InngangsvilkarFpProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
   apentFaktaPanelInfo,
   oppdaterProsessStegOgFaktaPanelIUrl,
   rettigheter,
-  requestApi,
 }) => {
   const leftPanels = useCallback(
     (props: InngangsvilkarPanelInitProps) => (
@@ -66,7 +65,6 @@ const InngangsvilkarFpProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
       registrerProsessPanel={registrerProsessPanel}
       apentFaktaPanelInfo={apentFaktaPanelInfo}
       oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-      requestApi={requestApi}
       leftPanels={leftPanels}
       rightPanels={rightPanels}
     />

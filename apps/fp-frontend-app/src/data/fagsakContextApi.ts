@@ -1,4 +1,4 @@
-import { Aktor, Behandling, Dokument } from '@navikt/ft-types';
+import { Aktor, Dokument } from '@navikt/ft-types';
 
 import { RestApiConfigBuilder, createRequestApi, RestKey, Link } from '@navikt/fp-rest-api';
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
@@ -8,6 +8,7 @@ import {
   Fagsak,
   FagsakDataFpTilbake,
   NavAnsatt,
+  Behandling,
   AlleKodeverk,
   AlleKodeverkTilbakekreving,
 } from '@navikt/fp-types';
@@ -42,7 +43,7 @@ export enum LinkCategory {
   BEHANDLING = 'BEHANDLING',
 }
 
-export const FpsakApiKeys = {
+export const FagsakApiKeys = {
   INIT_FETCH: new RestKey<InitDataFpSak, void>('INIT_FETCH'),
   INIT_FETCH_FPTILBAKE: new RestKey<InitDataFpTilbake, void>('INIT_FETCH_FPTILBAKE'),
   KODEVERK: new RestKey<AlleKodeverk, void>('KODEVERK'),
@@ -50,8 +51,8 @@ export const FpsakApiKeys = {
   SEARCH_FAGSAK: new RestKey<FagsakEnkel[], { searchString: string }>('SEARCH_FAGSAK'),
   FETCH_FAGSAK: new RestKey<Fagsak, { saksnummer: string }>('FETCH_FAGSAK'),
   FETCH_FAGSAKDATA_FPTILBAKE: new RestKey<FagsakDataFpTilbake, { saksnummer: string }>('FETCH_FAGSAKDATA_FPTILBAKE'),
-  NEW_BEHANDLING_FPSAK: new RestKey<boolean, any>('NEW_BEHANDLING_FPSAK'),
-  NEW_BEHANDLING_FPTILBAKE: new RestKey<boolean, any>('NEW_BEHANDLING_FPTILBAKE'),
+  NEW_BEHANDLING_FPSAK: new RestKey<Behandling, any>('NEW_BEHANDLING_FPSAK'),
+  NEW_BEHANDLING_FPTILBAKE: new RestKey<Behandling, any>('NEW_BEHANDLING_FPTILBAKE'),
   AKTOER_INFO: new RestKey<Aktor, { aktoerId: string }>('AKTOER_INFO'),
   ALL_DOCUMENTS: new RestKey<Dokument[], { saksnummer: string }>('ALL_DOCUMENTS'),
   SAVE_TOTRINNSAKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_TOTRINNSAKSJONSPUNKT'),
@@ -68,44 +69,44 @@ export const FpsakApiKeys = {
   ENDRE_SAK_MARKERING: new RestKey<void, { saksnummer: string; fagsakMarkering: string }>('ENDRE_SAK_MARKERING'),
 };
 
-const endpoints = new RestApiConfigBuilder()
-  .withGet('/fpsak/api/init-fetch', FpsakApiKeys.INIT_FETCH)
-  .withGet('/fptilbake/api/init-fetch', FpsakApiKeys.INIT_FETCH_FPTILBAKE)
+const fagsakEndepunkter = new RestApiConfigBuilder()
+  .withGet('/fpsak/api/init-fetch', FagsakApiKeys.INIT_FETCH)
+  .withGet('/fptilbake/api/init-fetch', FagsakApiKeys.INIT_FETCH_FPTILBAKE)
 
   // Generelle
-  .withRel('kodeverk', FpsakApiKeys.KODEVERK)
-  .withRel('tilbake-kodeverk', FpsakApiKeys.KODEVERK_FPTILBAKE)
+  .withRel('kodeverk', FagsakApiKeys.KODEVERK)
+  .withRel('tilbake-kodeverk', FagsakApiKeys.KODEVERK_FPTILBAKE)
 
   // Fagsak
-  .withRel('fagsak-full', FpsakApiKeys.FETCH_FAGSAK)
-  .withRel('tilbake-fagsak-full', FpsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE)
-  .withRel('sak-dokumentliste', FpsakApiKeys.ALL_DOCUMENTS)
-  .withRel('endre-utland-markering', FpsakApiKeys.ENDRE_SAK_MARKERING)
-  .withRel('tilbake-kan-opprette-behandling', FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES)
-  .withRel('tilbake-kan-opprette-revurdering', FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES)
+  .withRel('fagsak-full', FagsakApiKeys.FETCH_FAGSAK)
+  .withRel('tilbake-fagsak-full', FagsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE)
+  .withRel('sak-dokumentliste', FagsakApiKeys.ALL_DOCUMENTS)
+  .withRel('endre-utland-markering', FagsakApiKeys.ENDRE_SAK_MARKERING)
+  .withRel('tilbake-kan-opprette-behandling', FagsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES)
+  .withRel('tilbake-kan-opprette-revurdering', FagsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES)
 
   // Behandling
-  .withRel('bekreft-totrinnsaksjonspunkt', FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT)
-  .withRel('brev-bestill', FpsakApiKeys.SUBMIT_MESSAGE)
+  .withRel('bekreft-totrinnsaksjonspunkt', FagsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT)
+  .withRel('brev-bestill', FagsakApiKeys.SUBMIT_MESSAGE)
 
-  .withPost('/fptilbake/api/brev/forhandsvis', FpsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING, { isResponseBlob: true })
+  .withPost('/fptilbake/api/brev/forhandsvis', FagsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING, { isResponseBlob: true })
   .withPost(
     '/fptilbake/api/dokument/forhandsvis-henleggelsesbrev',
-    FpsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE,
+    FagsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE,
     { isResponseBlob: true },
   )
-  .withAsyncPost('/fptilbake/api/behandlinger/opprett', FpsakApiKeys.NEW_BEHANDLING_FPTILBAKE)
-  .withAsyncPut('/fpsak/api/behandlinger', FpsakApiKeys.NEW_BEHANDLING_FPSAK)
-  .withGet('/fpsak/api/aktoer-info', FpsakApiKeys.AKTOER_INFO)
+  .withAsyncPost('/fptilbake/api/behandlinger/opprett', FagsakApiKeys.NEW_BEHANDLING_FPTILBAKE)
+  .withAsyncPut('/fpsak/api/behandlinger', FagsakApiKeys.NEW_BEHANDLING_FPSAK)
+  .withGet('/fpsak/api/aktoer-info', FagsakApiKeys.AKTOER_INFO)
 
   // FpFormidling
-  .withPost('/fpformidling/api/brev/forhaandsvis', FpsakApiKeys.PREVIEW_MESSAGE_FORMIDLING, { isResponseBlob: true })
+  .withPost('/fpformidling/api/brev/forhaandsvis', FagsakApiKeys.PREVIEW_MESSAGE_FORMIDLING, { isResponseBlob: true })
 
   // Kun brukt for søk på localhost
-  .withPost('/fpsak/api/fagsak/sok', FpsakApiKeys.SEARCH_FAGSAK)
+  .withPost('/fpsak/api/fagsak/sok', FagsakApiKeys.SEARCH_FAGSAK)
 
   .build();
 
-export const requestApi = createRequestApi(endpoints);
+export const requestFagsakApi = createRequestApi(fagsakEndepunkter);
 
-export const restApiHooks = RestApiHooks.initHooks(requestApi);
+export const restFagsakApiHooks = RestApiHooks.initHooks(requestFagsakApi);

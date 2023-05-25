@@ -9,11 +9,11 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
-import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
+import { BehandlingApiKeys, requestBehandlingApi } from '../../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_UTTAK_DOKUMENTASJON];
 
-const ENDEPUNKTER_PANEL_DATA = [FpBehandlingApiKeys.DOKUMENTASJON_VURDERING_BEHOV];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.DOKUMENTASJON_VURDERING_BEHOV];
 type EndepunktPanelData = {
   dokumentasjonVurderingBehov: DokumentasjonVurderingBehov[];
 };
@@ -28,7 +28,7 @@ const UttakDokumentasjonFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> =
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.UTTAK_DOKUMENTASJON}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'UttakDokumentasjonFaktaInitPanel.FaktaUttakDokumentasjon' })}
-    skalPanelVisesIMeny={() => requestFpApi.hasPath(FpBehandlingApiKeys.DOKUMENTASJON_VURDERING_BEHOV.name)}
+    skalPanelVisesIMeny={() => requestBehandlingApi.hasPath(BehandlingApiKeys.DOKUMENTASJON_VURDERING_BEHOV.name)}
     renderPanel={data => <UttakDokumentasjonFaktaIndex {...data} />}
   />
 );

@@ -14,9 +14,8 @@ import {
 } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
-import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
-import { FpBehandlingApiKeys } from '../data/fpBehandlingApi';
+import { BehandlingApiKeys, requestBehandlingApi } from '../../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktCode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
@@ -29,9 +28,9 @@ const AKSJONSPUNKT_KODER = [
 const OVERSTYRING_AP_CODES = [AksjonspunktCode.OVERSTYR_FAKTA_UTTAK];
 
 const ENDEPUNKTER_PANEL_DATA = [
-  FpBehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER_V2,
-  FpBehandlingApiKeys.FAKTA_ARBEIDSFORHOLD,
-  BehandlingFellesApiKeys.YTELSEFORDELING,
+  BehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER_V2,
+  BehandlingApiKeys.FAKTA_ARBEIDSFORHOLD,
+  BehandlingApiKeys.YTELSEFORDELING,
 ];
 type EndepunktPanelData = {
   uttakKontrollerFaktaPerioderV2: KontrollerFaktaPeriode[];
@@ -63,7 +62,7 @@ const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = (
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'UttakInfoPanel.FaktaUttak' })}
     skalPanelVisesIMeny={() =>
       props.behandling.harSattEndringsdato &&
-      props.requestApi.hasPath(FpBehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER_V2.name)
+      requestBehandlingApi.hasPath(BehandlingApiKeys.UTTAK_KONTROLLER_FAKTA_PERIODER_V2.name)
     }
     renderPanel={data => (
       <UttakFaktaIndex

@@ -4,7 +4,6 @@ import { useIntl } from 'react-intl';
 import { AksjonspunktCode, vilkarUtfallType } from '@navikt/fp-kodeverk';
 import { UttakProsessIndex } from '@navikt/fp-prosess-uttak';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { RequestApi } from '@navikt/fp-rest-api';
 import {
   AksessRettigheter,
   ArbeidsgiverOpplysningerPerId,
@@ -20,12 +19,10 @@ import {
 
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
-import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
+import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../../../../data/behandlingContextApi';
 
-import { restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
-
-const getStatusFromUttakresultat = (behandling: Behandling, requestApi: RequestApi): string => {
-  const harLenke = requestApi.hasPath(FpBehandlingApiKeys.UTTAKSRESULTAT_PERIODER.name);
+const getStatusFromUttakresultat = (behandling: Behandling): string => {
+  const harLenke = requestBehandlingApi.hasPath(BehandlingApiKeys.UTTAKSRESULTAT_PERIODER.name);
   if (!harLenke) {
     return vilkarUtfallType.IKKE_VURDERT;
   }
@@ -47,11 +44,11 @@ const AKSJONSPUNKT_KODER = [
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [
-  FpBehandlingApiKeys.UTTAKSRESULTAT_PERIODER,
-  BehandlingFellesApiKeys.FAMILIEHENDELSE,
-  FpBehandlingApiKeys.UTTAK_STONADSKONTOER,
-  BehandlingFellesApiKeys.SOKNAD,
-  BehandlingFellesApiKeys.YTELSEFORDELING,
+  BehandlingApiKeys.UTTAKSRESULTAT_PERIODER,
+  BehandlingApiKeys.FAMILIEHENDELSE,
+  BehandlingApiKeys.UTTAK_STONADSKONTOER,
+  BehandlingApiKeys.SOKNAD,
+  BehandlingApiKeys.YTELSEFORDELING,
 ];
 type EndepunktPanelData = {
   familiehendelse: FamilieHendelseSamling;
@@ -76,8 +73,8 @@ const UttakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitPr
   ...props
 }) => {
   const intl = useIntl();
-  const { startRequest: oppdaterStønadskontoer } = restApiFpHooks.useRestApiRunner(
-    FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER,
+  const { startRequest: oppdaterStønadskontoer } = restBehandlingApiHooks.useRestApiRunner(
+    BehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER,
   );
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>
@@ -87,7 +84,7 @@ const UttakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitPr
       prosessPanelKode={ProsessStegCode.UTTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Uttak' })}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={() => getStatusFromUttakresultat(props.behandling, props.requestApi)}
+      hentOverstyrtStatus={() => getStatusFromUttakresultat(props.behandling)}
       renderPanel={data => (
         <UttakProsessIndex
           kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}

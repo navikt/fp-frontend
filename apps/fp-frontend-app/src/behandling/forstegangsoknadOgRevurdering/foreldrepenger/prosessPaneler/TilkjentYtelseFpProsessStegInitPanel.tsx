@@ -17,17 +17,16 @@ import {
 
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
-import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
-import { FpBehandlingApiKeys } from '../data/fpBehandlingApi';
+import { BehandlingApiKeys, requestBehandlingApi } from '../../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_TILBAKETREKK];
 
 const ENDEPUNKTER_PANEL_DATA = [
-  BehandlingFellesApiKeys.FAMILIEHENDELSE,
-  BehandlingFellesApiKeys.SOKNAD,
-  BehandlingFellesApiKeys.FERIEPENGEGRUNNLAG,
-  BehandlingFellesApiKeys.BEREGNINGRESULTAT_FORELDREPENGER,
-  FpBehandlingApiKeys.UTTAKSRESULTAT_PERIODER,
+  BehandlingApiKeys.FAMILIEHENDELSE,
+  BehandlingApiKeys.SOKNAD,
+  BehandlingApiKeys.FERIEPENGEGRUNNLAG,
+  BehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER,
+  BehandlingApiKeys.UTTAKSRESULTAT_PERIODER,
 ];
 type EndepunktPanelData = {
   familiehendelse: FamilieHendelseSamling;
@@ -57,7 +56,7 @@ const TilkjentYtelseFpProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
     prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}
     skalPanelVisesIMeny={() => true}
     hentOverstyrtStatus={() =>
-      props.requestApi.hasPath(BehandlingFellesApiKeys.BEREGNINGRESULTAT_FORELDREPENGER.name)
+      requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER.name)
         ? vilkarUtfallType.OPPFYLT
         : vilkarUtfallType.IKKE_VURDERT
     }

@@ -1,17 +1,17 @@
-import React, { ReactElement, useMemo } from 'react';
+import React, { ReactElement } from 'react';
 
-import { RestApiHooks, RestApiState } from '@navikt/fp-rest-api-hooks';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { StandardFaktaPanelProps } from '@navikt/fp-types';
-import { RequestApi, RestKey } from '@navikt/fp-rest-api';
+import { RestKey } from '@navikt/fp-rest-api';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
 import FaktaPanelInitProps from '../typer/faktaPanelInitProps';
 import useStandardFaktaPanelProps from './useStandardFaktaPanelProps';
 import useFaktaMenyRegistrerer from './useFaktaMenyRegistrerer';
 import FaktaPanelWrapper from './FaktaPanelWrapper';
+import { restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 export type OwnProps<PANEL_DATA> = {
-  requestApi: RequestApi;
   panelEndepunkter?: RestKey<any, any>[];
   aksjonspunktKoder?: string[];
   overstyringApKoder?: string[];
@@ -25,7 +25,6 @@ const FaktaDefaultInitPanel = <PANEL_DATA = void,>({
   valgtFaktaSteg,
   behandling,
   registrerFaktaPanel,
-  requestApi,
   panelEndepunkter = [],
   aksjonspunktKoder,
   overstyringApKoder,
@@ -34,8 +33,6 @@ const FaktaDefaultInitPanel = <PANEL_DATA = void,>({
   faktaPanelKode,
   faktaPanelMenyTekst,
 }: OwnProps<PANEL_DATA> & FaktaPanelInitProps) => {
-  const restApiHooks = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
-
   const standardPanelProps = useStandardFaktaPanelProps(aksjonspunktKoder, overstyringApKoder);
 
   const erPanelValgt = useFaktaMenyRegistrerer(
@@ -49,7 +46,7 @@ const FaktaDefaultInitPanel = <PANEL_DATA = void,>({
   );
 
   const formatertePanelEndepunkter = panelEndepunkter.map(e => ({ key: e }));
-  const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi<PANEL_DATA, any>(
+  const { data: panelData, state: panelDataState } = restBehandlingApiHooks.useMultipleRestApi<PANEL_DATA, any>(
     formatertePanelEndepunkter,
     {
       updateTriggers: [erPanelValgt, behandling?.versjon],

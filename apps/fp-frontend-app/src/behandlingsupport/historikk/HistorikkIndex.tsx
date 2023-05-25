@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { HistorikkSakIndex } from '@navikt/fp-sak-historikk';
 import { Historikkinnslag } from '@navikt/fp-types';
 
-import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
+import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 import { pathToBehandling, createLocationForSkjermlenke } from '../../app/paths';
 
 interface OwnProps {
@@ -23,8 +23,8 @@ const HistorikkIndex: FunctionComponent<OwnProps> = ({
   historikkinnslagFpTilbake,
   kjønn,
 }) => {
-  const alleKodeverkFpSak = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
-  const alleKodeverkFpTilbake = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
+  const alleKodeverkFpSak = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
+  const alleKodeverkFpTilbake = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK_FPTILBAKE);
 
   const location = useLocation();
   const getBehandlingLocation = useCallback(

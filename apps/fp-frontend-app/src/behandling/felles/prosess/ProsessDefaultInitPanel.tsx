@@ -1,7 +1,7 @@
-import React, { ReactElement, useMemo } from 'react';
+import React, { ReactElement } from 'react';
 
-import { RestApiHooks, RestApiState } from '@navikt/fp-rest-api-hooks';
-import { RequestApi, RestKey } from '@navikt/fp-rest-api';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { RestKey } from '@navikt/fp-rest-api';
 import { StandardProsessPanelProps } from '@navikt/fp-types';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 
@@ -9,9 +9,9 @@ import ProsessPanelInitProps from '../typer/prosessPanelInitProps';
 import useStandardProsessPanelProps from './useStandardProsessPanelProps';
 import useProsessMenyRegistrerer from './useProsessMenyRegistrerer';
 import ProsessPanelWrapper from './ProsessPanelWrapper';
+import { restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 export type OwnProps<PANEL_DATA> = {
-  requestApi: RequestApi;
   panelEndepunkter?: RestKey<any, any>[] | { key: RestKey<any, any>; params?: any }[];
   aksjonspunktKoder?: string[];
   vilkarKoder?: string[];
@@ -29,7 +29,6 @@ const ProsessDefaultInitPanel = <PANEL_DATA = void,>({
   valgtProsessSteg,
   behandling,
   registrerProsessPanel,
-  requestApi,
   panelEndepunkter = [],
   aksjonspunktKoder,
   vilkarKoder,
@@ -42,8 +41,6 @@ const ProsessDefaultInitPanel = <PANEL_DATA = void,>({
   erOverstyrt = false,
   hentSkalMarkeresSomAktiv,
 }: OwnProps<PANEL_DATA> & ProsessPanelInitProps) => {
-  const restApiHooks = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
-
   const standardPanelProps = useStandardProsessPanelProps(aksjonspunktKoder, vilkarKoder, lagringSideEffekter);
 
   const status = hentOverstyrtStatus ? hentOverstyrtStatus(standardPanelProps) : standardPanelProps.status;
@@ -64,7 +61,7 @@ const ProsessDefaultInitPanel = <PANEL_DATA = void,>({
   );
 
   const formatertePanelEndepunkter = panelEndepunkter.map((e: any) => (e instanceof RestKey ? { key: e } : e));
-  const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi<PANEL_DATA, any>(
+  const { data: panelData, state: panelDataState } = restBehandlingApiHooks.useMultipleRestApi<PANEL_DATA, any>(
     formatertePanelEndepunkter,
     {
       updateTriggers: [erPanelValgt, behandling.versjon],

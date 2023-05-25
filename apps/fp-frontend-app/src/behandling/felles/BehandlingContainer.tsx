@@ -1,7 +1,6 @@
 import React, { FunctionComponent, ReactElement, useState } from 'react';
 
 import { Behandling } from '@navikt/fp-types';
-import { RequestApi } from '@navikt/fp-rest-api';
 
 import ProsessContainer from './prosess/ProsessContainer';
 import FaktaContainer from './fakta/FaktaContainer';
@@ -21,7 +20,6 @@ interface OwnProps {
   valgtProsessSteg?: string;
   valgtFaktaSteg?: string;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
-  requestApi: RequestApi;
 }
 
 const BehandlingContainer: FunctionComponent<OwnProps> = ({
@@ -31,7 +29,6 @@ const BehandlingContainer: FunctionComponent<OwnProps> = ({
   valgtProsessSteg,
   valgtFaktaSteg,
   oppdaterProsessStegOgFaktaPanelIUrl,
-  requestApi,
 }) => {
   const [apentFaktaPanelInfo, setApentFaktaPanel] = useState<FaktaPanelInfo>();
 
@@ -44,7 +41,6 @@ const BehandlingContainer: FunctionComponent<OwnProps> = ({
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         behandling={behandling}
         apentFaktaPanelInfo={apentFaktaPanelInfo}
-        requestApi={requestApi}
       />
       <FaktaContainer
         hentPaneler={hentFaktaPaneler}
@@ -54,7 +50,6 @@ const BehandlingContainer: FunctionComponent<OwnProps> = ({
         behandling={behandling}
         setApentFaktaPanel={setApentFaktaPanel}
         apentFaktaPanelInfo={apentFaktaPanelInfo}
-        requestApi={requestApi}
       />
     </>
   );

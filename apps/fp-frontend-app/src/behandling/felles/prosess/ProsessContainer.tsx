@@ -2,7 +2,6 @@ import React, { FunctionComponent, ReactElement, useCallback, useEffect, useMemo
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 import { Behandling } from '@navikt/fp-types';
-import { RequestApi } from '@navikt/fp-rest-api';
 
 import BehandlingHenlagtPanel from './BehandlingHenlagtPanel';
 import ProsessMeny from './ProsessMeny';
@@ -18,7 +17,6 @@ interface OwnProps {
   valgtFaktaSteg?: string;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   apentFaktaPanelInfo?: { urlCode: string; text: string };
-  requestApi: RequestApi;
 }
 
 const ProsessContainer: FunctionComponent<OwnProps> = ({
@@ -28,7 +26,6 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
   valgtFaktaSteg,
   oppdaterProsessStegOgFaktaPanelIUrl,
   apentFaktaPanelInfo,
-  requestApi,
 }) => {
   const [menyData, setMenyData] = useState<ProsessPanelMenyData[]>([]);
 
@@ -86,7 +83,6 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
           behandling,
           valgtProsessSteg,
           registrerProsessPanel,
-          requestApi,
         },
         {
           apentFaktaPanelInfo,

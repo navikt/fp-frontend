@@ -4,28 +4,21 @@ import { ArbeidsgiverOpplysningerWrapper, Personoversikt } from '@navikt/fp-type
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
-import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import StandardBehandlingProps from '../../felles/typer/standardBehandlingProps';
 import BehandlingPaVent from '../../felles/modaler/paVent/BehandlingPaVent';
 import StandardPropsProvider from '../../felles/utils/standardPropsStateContext';
-import {
-  useBehandling,
-  useInitBehandlingHandlinger,
-  useInitRequestApi,
-  useLagreAksjonspunkt,
-} from '../../felles/utils/indexHooks';
-import { restApiFpHooks, requestFpApi } from './data/fpBehandlingApi';
+import { useInitRequestApi, useLagreAksjonspunkt } from '../../felles/utils/indexHooks';
 import BehandlingContainerWrapperForeldrepenger from './BehandlingContainerWrapperForeldrepenger';
+import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 const endepunkterSomSkalHentesEnGang = [
-  { key: BehandlingFellesApiKeys.ARBEIDSGIVERE_OVERSIKT },
-  { key: BehandlingFellesApiKeys.BEHANDLING_PERSONOVERSIKT },
+  { key: BehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT },
+  { key: BehandlingApiKeys.BEHANDLING_PERSONOVERSIKT },
 ];
 
 const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> = ({
-  behandlingEventHandler,
-  behandlingUuid,
-  oppdaterBehandlingVersjon,
+  setBehandling,
+  behandling,
   kodeverk,
   fagsak,
   rettigheter,
@@ -34,23 +27,13 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
   valgtFaktaSteg,
   opneSokeside,
   setRequestPendingMessage,
+  hentOgSettBehandling,
 }) => {
-  useInitRequestApi(requestFpApi, setRequestPendingMessage);
+  useInitRequestApi(setRequestPendingMessage);
 
-  const { behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling } =
-    useBehandling(requestFpApi, behandlingUuid, oppdaterBehandlingVersjon);
+  const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter } = useLagreAksjonspunkt(setBehandling);
 
-  const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter } = useLagreAksjonspunkt(requestFpApi, setBehandling);
-
-  const skalIkkeViseModal = useInitBehandlingHandlinger(
-    requestFpApi,
-    behandlingEventHandler,
-    hentBehandling,
-    setBehandling,
-    behandling,
-  );
-
-  const { data: opplysningsdata, state: opplysningsdataState } = restApiFpHooks.useMultipleRestApi<
+  const { data: opplysningsdata, state: opplysningsdataState } = restBehandlingApiHooks.useMultipleRestApi<
     {
       arbeidsgivereOversikt: ArbeidsgiverOpplysningerWrapper;
       behandlingPersonoversikt: Personoversikt;
@@ -72,18 +55,12 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
 
   return (
     <>
-      <BehandlingPaVent
-        behandling={behandling}
-        hentBehandling={hentBehandling}
-        kodeverk={kodeverk}
-        requestApi={requestFpApi}
-        skalIkkeViseModal={skalIkkeViseModal}
-      />
+      <BehandlingPaVent behandling={behandling} setBehandling={setBehandling} kodeverk={kodeverk} />
       <StandardPropsProvider
         behandling={behandling}
         fagsak={fagsak}
         rettigheter={rettigheter}
-        hasFetchError={behandlingState === RestApiState.ERROR}
+        hasFetchError={false}
         alleKodeverk={kodeverk}
         lagreAksjonspunkter={lagreAksjonspunkter}
         lagreOverstyrteAksjonspunkter={lagreOverstyrteAksjonspunkter}
@@ -96,12 +73,10 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
           valgtFaktaSteg={valgtFaktaSteg}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
           opneSokeside={opneSokeside}
-          toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
           arbeidsgivere={arbeidsgivere}
           personoversikt={personoversikt}
           rettigheter={rettigheter}
-          hentBehandling={hentBehandling}
-          behandlingEventHandler={behandlingEventHandler}
+          hentOgSettBehandling={hentOgSettBehandling}
         />
       </StandardPropsProvider>
     </>

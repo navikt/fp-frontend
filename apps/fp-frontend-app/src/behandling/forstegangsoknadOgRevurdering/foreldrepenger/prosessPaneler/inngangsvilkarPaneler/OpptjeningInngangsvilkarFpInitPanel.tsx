@@ -7,15 +7,15 @@ import { OpptjeningVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-opptjeni
 import { AksessRettigheter, Opptjening } from '@navikt/fp-types';
 
 import InngangsvilkarPanelInitProps from '../../../../felles/typer/inngangsvilkarPanelInitProps';
-import { BehandlingFellesApiKeys } from '../../../../felles/data/behandlingFellesApi';
 import InngangsvilkarDefaultInitPanel from '../../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import OverstyringPanelDef from '../../../../felles/prosess/OverstyringPanelDef';
+import { BehandlingApiKeys } from '../../../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_OPPTJENINGSVILKARET];
 
 const VILKAR_KODER = [VilkarType.OPPTJENINGSPERIODE, VilkarType.OPPTJENINGSVILKARET];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.OPPTJENING];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.OPPTJENING];
 type EndepunktPanelData = {
   opptjening: Opptjening;
 };

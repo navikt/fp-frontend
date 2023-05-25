@@ -47,6 +47,7 @@ interface OwnProps {
   fagsakData: FagsakData;
   behandlingUuid?: string;
   behandlingVersjon?: number;
+  hentOgSettBehandling: () => void;
 }
 
 /**
@@ -55,7 +56,12 @@ interface OwnProps {
  * Har ansvar for å lage navigasjonsrad med korrekte navigasjonsvalg, og route til rett
  * støttepanelkomponent ihht. gitt parameter i URL-en.
  */
-const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({ fagsakData, behandlingUuid, behandlingVersjon }) => {
+const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
+  fagsakData,
+  behandlingUuid,
+  behandlingVersjon,
+  hentOgSettBehandling,
+}) => {
   const intl = useIntl();
 
   const { selected: valgtSupportPanel, location } = useTrackRouteParam<string>({
@@ -140,6 +146,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({ fagsakData, behan
               valgtBehandlingUuid={behandling.uuid}
               meldingFormData={meldingFormData}
               setMeldingForData={setMeldingForData}
+              hentOgSettBehandling={hentOgSettBehandling}
             />
           )}
           {aktivtSupportPanel === SupportTabs.DOKUMENTER && (

@@ -1,13 +1,13 @@
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
-import { FpsakApiKeys, restApiHooks, requestApi, LinkCategory } from '../data/fpsakApi';
+import { FagsakApiKeys, restFagsakApiHooks, requestFagsakApi, LinkCategory } from '../data/fagsakContextApi';
 
 const useHentInitLenker = (): boolean[] => {
-  const { data: initFetchLinksFpSak, state: initFetchStateFpSak } = restApiHooks.useGlobalStateRestApi(
-    FpsakApiKeys.INIT_FETCH,
+  const { data: initFetchLinksFpSak, state: initFetchStateFpSak } = restFagsakApiHooks.useGlobalStateRestApi(
+    FagsakApiKeys.INIT_FETCH,
   );
-  const { data: initFetchLinksFpTilbake, state: initFetchStateFpTilbake } = restApiHooks.useGlobalStateRestApi(
-    FpsakApiKeys.INIT_FETCH_FPTILBAKE,
+  const { data: initFetchLinksFpTilbake, state: initFetchStateFpTilbake } = restFagsakApiHooks.useGlobalStateRestApi(
+    FagsakApiKeys.INIT_FETCH_FPTILBAKE,
   );
 
   const harFpsakInitKallFeilet = initFetchStateFpSak === RestApiState.ERROR;
@@ -17,11 +17,17 @@ const useHentInitLenker = (): boolean[] => {
 
   if (harHentetFerdigInitLenker && initFetchLinksFpSak) {
     if (initFetchLinksFpTilbake) {
-      requestApi.setLinks(initFetchLinksFpSak.links.concat(initFetchLinksFpTilbake.links), LinkCategory.INIT_DATA);
-      requestApi.setLinks(initFetchLinksFpSak.sakLinks.concat(initFetchLinksFpTilbake.sakLinks), LinkCategory.FAGSAK);
+      requestFagsakApi.setLinks(
+        initFetchLinksFpSak.links.concat(initFetchLinksFpTilbake.links),
+        LinkCategory.INIT_DATA,
+      );
+      requestFagsakApi.setLinks(
+        initFetchLinksFpSak.sakLinks.concat(initFetchLinksFpTilbake.sakLinks),
+        LinkCategory.FAGSAK,
+      );
     } else {
-      requestApi.setLinks(initFetchLinksFpSak.links, LinkCategory.INIT_DATA);
-      requestApi.setLinks(initFetchLinksFpSak.sakLinks, LinkCategory.FAGSAK);
+      requestFagsakApi.setLinks(initFetchLinksFpSak.links, LinkCategory.INIT_DATA);
+      requestFagsakApi.setLinks(initFetchLinksFpSak.sakLinks, LinkCategory.FAGSAK);
     }
   }
 

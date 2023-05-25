@@ -2,17 +2,14 @@ import React, { useState, useMemo, useCallback, FunctionComponent, useEffect } f
 import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 
 import { AlleKodeverk, AlleKodeverkTilbakekreving, Behandling } from '@navikt/fp-types';
-import { RequestApi } from '@navikt/fp-rest-api';
-import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import { SettPaVentModalIndex, FormValues } from '@navikt/fp-modal-sett-pa-vent';
 import { AksjonspunktCode, KodeverkType } from '@navikt/fp-kodeverk';
-import { BehandlingFellesApiKeys } from '../../data/behandlingFellesApi';
+import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../../data/behandlingContextApi';
 
 interface BehandlingPaVentProps {
   behandling: Behandling;
   kodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
-  requestApi: RequestApi;
-  hentBehandling: (keepData: boolean) => Promise<any>;
+  setBehandling: (behandling: Behandling) => void;
   erTilbakekreving?: boolean;
   skalIkkeViseModal?: boolean;
 }
@@ -20,17 +17,14 @@ interface BehandlingPaVentProps {
 const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
   behandling,
   kodeverk,
-  requestApi,
-  hentBehandling,
+  setBehandling,
   erTilbakekreving = false,
   skalIkkeViseModal = false,
 }) => {
-  const restApiHooks = RestApiHooks.initHooks(requestApi);
-
   const [skalViseModal, setVisModal] = useState(!skalIkkeViseModal && behandling.behandlingPaaVent);
   const skjulModal = useCallback(() => setVisModal(false), []);
 
-  const { startRequest: settPaVent } = restApiHooks.useRestApiRunner(BehandlingFellesApiKeys.UPDATE_ON_HOLD);
+  const { startRequest: settPaVent } = restBehandlingApiHooks.useRestApiRunner(BehandlingApiKeys.UPDATE_ON_HOLD);
 
   useEffect(() => {
     if (!skalIkkeViseModal) {
@@ -44,7 +38,11 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
         ...formData,
         behandlingUuid: behandling.uuid,
         behandlingVersjon: behandling.versjon,
-      }).then(() => hentBehandling(false)),
+      }).then(b => {
+        if (b) {
+          setBehandling(b);
+        }
+      }),
     [behandling.versjon],
   );
 

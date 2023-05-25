@@ -8,11 +8,11 @@ import { Verge } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../FaktaDefaultInitPanel';
-import { BehandlingFellesApiKeys } from '../../data/behandlingFellesApi';
+import { BehandlingApiKeys } from '../../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.AVKLAR_VERGE];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.VERGE];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.VERGE];
 type EndepunktPanelData = {
   verge: Verge;
 };
@@ -24,13 +24,11 @@ const VergeFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({
   behandling,
   valgtFaktaSteg,
   registrerFaktaPanel,
-  requestApi,
 }) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
     behandling={behandling}
     valgtFaktaSteg={valgtFaktaSteg}
     registrerFaktaPanel={registrerFaktaPanel}
-    requestApi={requestApi}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.VERGE}

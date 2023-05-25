@@ -3,14 +3,14 @@ import { Navigate, NavLink, useLocation, useMatch } from 'react-router-dom';
 import { Location } from 'history';
 import { useIntl } from 'react-intl';
 import { BehandlingVelgerSakIndex } from '@navikt/ft-sak-behandling-velger';
-import { FagsakProfilSakIndex } from '@navikt/ft-sak-fagsak-profil';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FormValues as EndreUtlandFormValues } from '@navikt/fp-sak-meny-endre-utland';
 import { KodeverkType, FagsakMarkeringKode } from '@navikt/fp-kodeverk';
-import { BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
+import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 
+import FagsakProfilSakIndex from './src/FagsakProfilSakIndex';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling, pathToBehandlinger } from '../app/paths';
 import BehandlingMenuIndex from '../behandlingmenu/BehandlingMenuIndex';
 import RisikoklassifiseringIndex from './risikoklassifisering/RisikoklassifiseringIndex';
@@ -56,14 +56,18 @@ interface OwnProps {
   fagsakData: FagsakData;
   behandlingUuid?: string;
   behandlingVersjon?: number;
-  hentFagsakdataPåNytt: () => void;
+  setBehandling: (behandling: Behandling) => void;
+  hentOgSettBehandling: () => void;
+  endreFagsakMarkering: (params: EndreUtlandFormValues) => Promise<void>;
 }
 
 const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   fagsakData,
   behandlingUuid,
   behandlingVersjon,
-  hentFagsakdataPåNytt,
+  setBehandling,
+  hentOgSettBehandling,
+  endreFagsakMarkering,
 }) => {
   const intl = useIntl();
   const [showAll, setShowAll] = useState(!behandlingUuid);
@@ -101,46 +105,54 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
         <Navigate to={findPathToBehandling(fagsak.saksnummer, location, fagsakData.getAlleBehandlinger())} />
       )}
       {!shouldRedirectToBehandlinger && (
-        <FagsakProfilSakIndex
-          saksnummer={fagsak.saksnummer}
-          fagsakYtelseType={fagsakYtelseTypeMedNavn}
-          fagsakStatus={fagsakStatusMedNavn}
-          dekningsgrad={fagsak.dekningsgrad}
-          fagsakMarkeringTekst={finnFagsakMarkeringTekst(fagsak)}
-          renderBehandlingMeny={() => (
-            <ErrorBoundary
-              errorMessageCallback={addErrorMessage}
-              errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Meny' })}
-            >
-              <BehandlingMenuIndex
-                fagsakData={fagsakData}
-                behandlingUuid={behandlingUuid}
-                behandlingVersjon={behandlingVersjon}
-                hentFagsakdataPåNytt={hentFagsakdataPåNytt}
-              />
-            </ErrorBoundary>
-          )}
-          renderBehandlingVelger={() => (
-            <ErrorBoundary
-              errorMessageCallback={addErrorMessage}
-              errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Behandlingsvelger' })}
-            >
-              <BehandlingVelgerSakIndex
-                behandlinger={fagsakData.getAlleBehandlinger()}
-                behandlingUuid={behandlingUuid}
-                skalViseAlleBehandlinger={showAll}
-                toggleVisAlleBehandlinger={toggleShowAll}
-                renderRadSomLenke={(className, behandlingInfoKomponent, uuid) => (
-                  <NavLink className={className} to={getBehandlingLocation(uuid)} onClick={toggleShowAll}>
-                    {behandlingInfoKomponent}
-                  </NavLink>
-                )}
-                // @ts-ignore TODO Ikkje send med ned heile kodeverket
-                getKodeverkMedNavn={getKodeverkFn}
-              />
-            </ErrorBoundary>
-          )}
-        />
+        <>
+          <FlexContainer>
+            <FlexRow>
+              <FlexColumn>
+                <FagsakProfilSakIndex
+                  saksnummer={fagsak.saksnummer}
+                  fagsakYtelseType={fagsakYtelseTypeMedNavn}
+                  fagsakStatus={fagsakStatusMedNavn}
+                  dekningsgrad={fagsak.dekningsgrad}
+                  fagsakMarkeringTekst={finnFagsakMarkeringTekst(fagsak)}
+                />
+              </FlexColumn>
+              <FlexColumn>
+                <ErrorBoundary
+                  errorMessageCallback={addErrorMessage}
+                  errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Meny' })}
+                >
+                  <BehandlingMenuIndex
+                    fagsakData={fagsakData}
+                    behandlingUuid={behandlingUuid}
+                    behandlingVersjon={behandlingVersjon}
+                    setBehandling={setBehandling}
+                    hentOgSettBehandling={hentOgSettBehandling}
+                    endreFagsakMarkering={endreFagsakMarkering}
+                  />
+                </ErrorBoundary>
+              </FlexColumn>
+            </FlexRow>
+          </FlexContainer>
+          <ErrorBoundary
+            errorMessageCallback={addErrorMessage}
+            errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Behandlingsvelger' })}
+          >
+            <BehandlingVelgerSakIndex
+              behandlinger={fagsakData.getAlleBehandlinger()}
+              behandlingUuid={behandlingUuid}
+              skalViseAlleBehandlinger={showAll}
+              toggleVisAlleBehandlinger={toggleShowAll}
+              renderRadSomLenke={(className, behandlingInfoKomponent, uuid) => (
+                <NavLink className={className} to={getBehandlingLocation(uuid)} onClick={toggleShowAll}>
+                  {behandlingInfoKomponent}
+                </NavLink>
+              )}
+              // @ts-ignore TODO Ikkje send med ned heile kodeverket
+              getKodeverkMedNavn={getKodeverkFn}
+            />
+          </ErrorBoundary>
+        </>
       )}
       <VerticalSpacer sixteenPx />
       <ErrorBoundary
@@ -151,6 +163,7 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
           fagsakData={fagsakData}
           behandlingUuid={behandlingUuid}
           behandlingVersjon={behandlingVersjon}
+          setBehandling={setBehandling}
         />
       </ErrorBoundary>
     </div>

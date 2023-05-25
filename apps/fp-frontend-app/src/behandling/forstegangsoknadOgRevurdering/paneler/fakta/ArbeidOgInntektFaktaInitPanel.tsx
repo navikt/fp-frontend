@@ -9,12 +9,12 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { ArbeidOgInntektsmelding, AksessRettigheter } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
-import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
+import { BehandlingApiKeys } from '../../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.ARBEID_OG_INNTEKT];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.ARBEID_OG_INNTEKT];
 type EndepunktPanelData = {
   arbeidOgInntekt: ArbeidOgInntektsmelding;
 };
@@ -24,8 +24,7 @@ interface OwnProps {
   behandlingUuid: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   rettigheter: AksessRettigheter;
-  settBehandlingPåVentCallback: (params: { frist?: string; ventearsak: string }) => Promise<any>;
-  hentBehandling: (keepData: boolean) => Promise<any>;
+  hentOgSettBehandling: () => void;
 }
 
 const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
@@ -33,8 +32,7 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
   behandlingUuid,
   arbeidsgiverOpplysningerPerId,
   rettigheter,
-  settBehandlingPåVentCallback,
-  hentBehandling,
+  hentOgSettBehandling,
   ...props
 }) => {
   const intl = useIntl();
@@ -43,18 +41,30 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
   const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
 
   const { startRequest: registrerArbeidsforhold } = useRestApiRunner(
-    BehandlingFellesApiKeys.ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD,
+    BehandlingApiKeys.ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD,
   );
-  const { startRequest: lagreVurdering } = useRestApiRunner(BehandlingFellesApiKeys.ARBEID_OG_INNTEKT_LAGRE_VURDERING);
+  const { startRequest: lagreVurdering } = useRestApiRunner(BehandlingApiKeys.ARBEID_OG_INNTEKT_LAGRE_VURDERING);
+  const { startRequest: settBehandlingPåVent } = useRestApiRunner(BehandlingApiKeys.BEHANDLING_ON_HOLD);
   const { startRequest: åpneForNyVurdering } = useRestApiRunner(
-    BehandlingFellesApiKeys.ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING,
+    BehandlingApiKeys.ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING,
   );
   const åpneForNyVurderingOgOppfriskBehandling = useCallback(() => {
     åpneForNyVurdering({
       behandlingUuid,
       behandlingVersjon: props.behandling.versjon,
-    }).then(() => hentBehandling(false));
+    }).then(() => hentOgSettBehandling());
   }, [props.behandling.versjon]);
+
+  const settBehandlingPåVentOgOppfriskBehandling = useCallback(
+    (params: { frist?: string; ventearsak: string }) =>
+      settBehandlingPåVent({
+        frist: params.frist || '',
+        ventearsak: params.ventearsak,
+        behandlingUuid,
+        behandlingVersjon: props.behandling.versjon,
+      }).then(() => hentOgSettBehandling()),
+    [props.behandling.versjon],
+  );
 
   return (
     <FaktaDefaultInitPanel<EndepunktPanelData>
@@ -64,7 +74,7 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
       faktaPanelKode={FaktaPanelCode.ARBEID_OG_INNTEKT}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'ArbeidOgInntektInfoPanel.Title' })}
       skalPanelVisesIMeny={() =>
-        requestApi.hasPath(BehandlingFellesApiKeys.ARBEID_OG_INNTEKT.name) &&
+        requestApi.hasPath(BehandlingApiKeys.ARBEID_OG_INNTEKT.name) &&
         !props.behandling.aksjonspunkt.some(ap => AksjonspunktCode.AVKLAR_ARBEIDSFORHOLD === ap.definisjon)
       }
       renderPanel={data => (
@@ -74,7 +84,7 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
           erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
           registrerArbeidsforhold={registrerArbeidsforhold}
           lagreVurdering={lagreVurdering}
-          settBehandlingPåVentCallback={settBehandlingPåVentCallback}
+          settBehandlingPåVentCallback={settBehandlingPåVentOgOppfriskBehandling}
           åpneForNyVurdering={åpneForNyVurderingOgOppfriskBehandling}
           {...data}
         />

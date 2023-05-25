@@ -7,12 +7,12 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
-import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
+import { BehandlingApiKeys } from '../../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.YTELSEFORDELING];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.YTELSEFORDELING];
 type EndepunktPanelData = {
   ytelsefordeling: Ytelsefordeling;
 };

@@ -1,24 +1,19 @@
 import React, { FunctionComponent, useEffect, useCallback } from 'react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
-import {
-  restApiTilbakekrevingHooks,
-  requestTilbakekrevingApi,
-  TilbakekrevingBehandlingApiKeys,
-} from './data/tilbakekrevingBehandlingApi';
 import FaktaIndex from './fakta/FaktaIndex';
 import ProsessIndex from './prosess/ProsessIndex';
 import BehandlingPaVent from './felles/komponenter/BehandlingPaVent';
 import getBekreftAksjonspunktCallback from './felles/util/bekreftAksjonspunkter';
-import { useLagreAksjonspunkt, useBehandling, useInitBehandlingHandlinger } from './felles/util/indexHooks';
+import { useLagreAksjonspunkt, useBehandling } from './felles/util/indexHooks';
 import StandardBehandlingProps from '../felles/typer/standardBehandlingProps';
+import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../../data/behandlingContextApi';
 
 interface OwnProps {
   harApenRevurdering: boolean;
 }
 
 const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & StandardBehandlingProps> = ({
-  behandlingEventHandler,
   behandlingUuid,
   oppdaterBehandlingVersjon,
   kodeverk: fpsakKodeverk,
@@ -32,16 +27,14 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & StandardBehand
   setRequestPendingMessage,
 }) => {
   useEffect(() => {
-    requestTilbakekrevingApi.setRequestPendingHandler(setRequestPendingMessage);
-    requestTilbakekrevingApi.setAddErrorMessageHandler(setRequestPendingMessage);
+    requestBehandlingApi.setRequestPendingHandler(setRequestPendingMessage);
+    requestBehandlingApi.setAddErrorMessageHandler(setRequestPendingMessage);
   }, []);
 
   const { behandling, hentingHarFeilet, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling } =
     useBehandling(behandlingUuid, oppdaterBehandlingVersjon);
 
   const lagreAksjonspunkter = useLagreAksjonspunkt(setBehandling);
-
-  useInitBehandlingHandlinger(behandlingEventHandler, hentBehandling, setBehandling, behandling);
 
   const oppdaterFaktaPanelIUrl = useCallback(
     (nyttFaktaSteg: string): void => {
@@ -66,9 +59,7 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & StandardBehand
     [fagsak.saksnummer, behandling, oppdaterProsessStegOgFaktaPanelIUrl],
   );
 
-  const { data: tilbakekrevingKodeverk } = restApiTilbakekrevingHooks.useRestApi(
-    TilbakekrevingBehandlingApiKeys.TILBAKE_KODEVERK,
-  );
+  const { data: tilbakekrevingKodeverk } = restBehandlingApiHooks.useRestApi(BehandlingApiKeys.TILBAKE_KODEVERK);
 
   if (!behandling || !tilbakekrevingKodeverk) {
     return <LoadingPanel />;

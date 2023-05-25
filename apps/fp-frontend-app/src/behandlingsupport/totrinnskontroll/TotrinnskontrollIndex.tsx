@@ -8,8 +8,8 @@ import FagsakData from '../../fagsak/FagsakData';
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
 import { createLocationForSkjermlenke } from '../../app/paths';
 import { useKodeverk } from '../../data/useKodeverk';
-import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 import BeslutterModalIndex from './BeslutterModalIndex';
+import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 
 type Values = {
   fatterVedtakAksjonspunktDto: {
@@ -66,13 +66,13 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
   const location = useLocation();
   const navigate = useNavigate();
 
-  const initFetchData = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.INIT_FETCH);
+  const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
   const { brukernavn, kanVeilede } = initFetchData.innloggetBruker;
 
   const alleKodeverk = useKodeverk(valgtBehandling?.type);
 
-  const { startRequest: godkjennTotrinnsaksjonspunkter } = restApiHooks.useRestApiRunner(
-    FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT,
+  const { startRequest: godkjennTotrinnsaksjonspunkter } = restFagsakApiHooks.useRestApiRunner(
+    FagsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT,
   );
 
   const forhandsvisMelding = useVisForhandsvisningAvMelding(valgtBehandling?.type);

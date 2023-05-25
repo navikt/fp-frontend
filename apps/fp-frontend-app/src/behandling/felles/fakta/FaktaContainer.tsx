@@ -1,6 +1,5 @@
 import React, { FunctionComponent, ReactElement, useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
-import { RequestApi } from '@navikt/fp-rest-api';
 import { Behandling } from '@navikt/fp-types';
 
 import FaktaMeny from './FaktaMeny';
@@ -19,7 +18,6 @@ interface OwnProps {
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   setApentFaktaPanel: (panelData?: { urlCode: string; text: string }) => void;
   apentFaktaPanelInfo?: { urlCode: string; text: string };
-  requestApi: RequestApi;
 }
 
 const FaktaContainer: FunctionComponent<OwnProps> = ({
@@ -30,7 +28,6 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
   oppdaterProsessStegOgFaktaPanelIUrl,
   setApentFaktaPanel,
   apentFaktaPanelInfo,
-  requestApi,
 }) => {
   const [menyData, setMenyData] = useState<FaktaPanelMenyData[]>([]);
   const registrerFaktaPanel = useCallback(
@@ -97,7 +94,6 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
               behandling,
               valgtFaktaSteg,
               registrerFaktaPanel,
-              requestApi,
             })}
           </FlexColumn>
         </FlexRow>

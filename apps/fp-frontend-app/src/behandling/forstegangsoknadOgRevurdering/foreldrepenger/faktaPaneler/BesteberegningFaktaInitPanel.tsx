@@ -8,11 +8,10 @@ import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@navikt/fp-ty
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
-import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
-import { FpBehandlingApiKeys } from '../data/fpBehandlingApi';
+import { BehandlingApiKeys, requestBehandlingApi } from '../../../../data/behandlingContextApi';
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.BEREGNINGSGRUNNLAG];
 type EndepunktPanelData = {
   beregningsgrunnlag: Beregningsgrunnlag;
 };
@@ -37,7 +36,7 @@ const BesteberegningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     faktaPanelKode={FaktaPanelCode.BESTEBEREGNING}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'BesteberegningInfoPanel.Title' })}
-    skalPanelVisesIMeny={() => props.requestApi.hasPath(FpBehandlingApiKeys.BEREGNINGSGRUNNLAG_BESTEBEREGNING.name)}
+    skalPanelVisesIMeny={() => requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGSGRUNNLAG_BESTEBEREGNING.name)}
     renderPanel={data => (
       <BesteberegningFaktaIndex arbeidsgiverOpplysninger={arbeidsgiverOpplysningerPerId} {...data} />
     )}

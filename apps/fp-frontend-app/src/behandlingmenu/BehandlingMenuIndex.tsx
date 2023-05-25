@@ -16,6 +16,7 @@ import {
   MenyTaAvVentIndex,
   getTaAvVentMenytekst,
 } from '@navikt/ft-sak-meny';
+import { FormValues } from '@navikt/fp-modal-sett-pa-vent';
 
 import { MenySettPaVentIndex, getMenytekst as getSettPaVentMenytekst } from '@navikt/fp-sak-meny-sett-pa-vent';
 import { MenyHenleggIndex, getMenytekst as getHenleggMenytekst } from '@navikt/fp-sak-meny-henlegg';
@@ -33,18 +34,18 @@ import {
   getMenytekst as getEndreUtlandMenytekst,
   FormValues as EndreUtlandFormValues,
 } from '@navikt/fp-sak-meny-endre-utland';
-import { VergeBehandlingmenyValg, BehandlingAppKontekst } from '@navikt/fp-types';
+import { VergeBehandlingmenyValg, BehandlingAppKontekst, Behandling } from '@navikt/fp-types';
 
-import behandlingEventHandler from '../behandling/BehandlingEventHandler';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../app/paths';
 import useVisForhandsvisningAvMelding from '../data/useVisForhandsvisningAvMelding';
-import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
+import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
 import useGetEnabledApplikasjonContext from '../app/useGetEnabledApplikasjonContext';
 import ApplicationContextPath from '../app/ApplicationContextPath';
 import MenyKodeverk from './MenyKodeverk';
 import FagsakData from '../fagsak/FagsakData';
 
 import '@navikt/ft-sak-meny/dist/style.css';
+import { BehandlingApiKeys } from '../data/behandlingContextApi';
 
 const BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES = [
   BehandlingType.FORSTEGANGSSOKNAD,
@@ -78,18 +79,27 @@ const skalLageVergeFn = (
   behandlingVersjon?: number,
 ): boolean => vergeMenyvalg === vergeType && !!behandlingUuid && !!behandlingVersjon;
 
+const sjekkOgSettBehandling = (setBehandling: (behandling: Behandling) => void) => (behandling?: Behandling) => {
+  if (behandling) {
+    setBehandling(behandling);
+  }
+};
+
 interface OwnProps {
   fagsakData: FagsakData;
   behandlingUuid?: string;
   behandlingVersjon?: number;
-  hentFagsakdataPåNytt: () => void;
+  setBehandling: (behandling: Behandling) => void;
+  hentOgSettBehandling: () => void;
+  endreFagsakMarkering: (params: EndreUtlandFormValues) => Promise<void>;
 }
 
 const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   fagsakData,
   behandlingUuid,
-  behandlingVersjon,
-  hentFagsakdataPåNytt,
+  setBehandling,
+  hentOgSettBehandling,
+  endreFagsakMarkering,
 }) => {
   const fagsak = fagsakData.getFagsak();
   const alleBehandlinger = fagsakData.getAlleBehandlinger();
@@ -110,27 +120,31 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   }, [alleBehandlinger.length]);
 
   const { startRequest: sjekkTilbakeKanOpprettes, data: kanBehandlingOpprettes = false } =
-    restApiHooks.useRestApiRunner(FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES);
+    restFagsakApiHooks.useRestApiRunner(FagsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES);
   const { startRequest: sjekkTilbakeRevurdKanOpprettes, data: kanRevurderingOpprettes = false } =
-    restApiHooks.useRestApiRunner(FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES);
+    restFagsakApiHooks.useRestApiRunner(FagsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES);
 
-  const initFetchData = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.INIT_FETCH);
+  const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
   const { innloggetBruker: navAnsatt, behandlendeEnheter } = initFetchData;
 
   const erTilbakekrevingAktivert = useGetEnabledApplikasjonContext().includes(ApplicationContextPath.FPTILBAKE);
 
-  const alleFpSakKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
-  const alleFpTilbakeKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
+  const alleFpSakKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
+  const alleFpTilbakeKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK_FPTILBAKE);
   const menyKodeverk = new MenyKodeverk(behandling?.type)
     .medFpSakKodeverk(alleFpSakKodeverk)
     .medFpTilbakeKodeverk(alleFpTilbakeKodeverk);
 
   const gaaTilSokeside = useCallback(() => navigate('/'), [navigate]);
 
-  const { startRequest: lagNyBehandlingFpSak } = restApiHooks.useRestApiRunner(FpsakApiKeys.NEW_BEHANDLING_FPSAK);
-  const { startRequest: lagNyBehandlingFpTilbake } = restApiHooks.useRestApiRunner(
-    FpsakApiKeys.NEW_BEHANDLING_FPTILBAKE,
+  const { startRequest: lagNyBehandlingFpSak } = restFagsakApiHooks.useRestApiRunner(
+    FagsakApiKeys.NEW_BEHANDLING_FPSAK,
   );
+  const { startRequest: lagNyBehandlingFpTilbake } = restFagsakApiHooks.useRestApiRunner(
+    FagsakApiKeys.NEW_BEHANDLING_FPTILBAKE,
+  );
+
+  const settBehandling = sjekkOgSettBehandling(setBehandling);
 
   const lagNyBehandling = useCallback(
     (
@@ -141,14 +155,8 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
       } & NyBehandlingFormValues,
     ): void => {
       const lagNy = isTilbakekreving ? lagNyBehandlingFpTilbake : lagNyBehandlingFpSak;
-      lagNy(params).then(() => hentFagsakdataPåNytt());
+      lagNy(params).then(settBehandling);
     },
-    [],
-  );
-
-  const { startRequest: endreSaksmerking } = restApiHooks.useRestApiRunner(FpsakApiKeys.ENDRE_SAK_MARKERING);
-  const endreFagsakMarkering = useCallback(
-    (params: EndreUtlandFormValues) => endreSaksmerking(params).then(() => hentFagsakdataPåNytt()),
     [],
   );
 
@@ -185,16 +193,110 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
       }),
     );
   };
-  const fjernVergeFn = skalLageVergeFn(VergeBehandlingmenyValg.FJERN, vergeMenyvalg, behandlingUuid, behandlingVersjon)
-    ? () => behandlingEventHandler.fjernVerge().then(setLocation)
+
+  const { startRequest: fjernVerge } = restFagsakApiHooks.useRestApiRunner(BehandlingApiKeys.VERGE_FJERN);
+  const { startRequest: opprettVerge } = restFagsakApiHooks.useRestApiRunner(BehandlingApiKeys.VERGE_OPPRETT);
+  const { startRequest: taBehandlingAvVent } = restFagsakApiHooks.useRestApiRunner(BehandlingApiKeys.RESUME_BEHANDLING);
+  const { startRequest: henleggBehandling } = restFagsakApiHooks.useRestApiRunner(BehandlingApiKeys.HENLEGG_BEHANDLING);
+  const { startRequest: åpneForEndringer } = restFagsakApiHooks.useRestApiRunner(
+    BehandlingApiKeys.OPEN_BEHANDLING_FOR_CHANGES,
+  );
+  const { startRequest: nyBehandlendeEnhet } = restFagsakApiHooks.useRestApiRunner(
+    BehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET,
+  );
+  const { startRequest: settBehandlingPåVent } = restFagsakApiHooks.useRestApiRunner(
+    BehandlingApiKeys.BEHANDLING_ON_HOLD,
+  );
+  const taBehandlingAvVentOgOppdaterBehandling = useCallback(() => {
+    if (behandling) {
+      taBehandlingAvVent({
+        behandlingUuid: behandling?.uuid,
+        behandlingVersjon: behandling?.versjon,
+      }).then(settBehandling);
+    }
+  }, [behandling]);
+  const settBehandlingPåVentOgOppdaterBehandling = useCallback(
+    (formValues: FormValues) => {
+      if (behandling) {
+        settBehandlingPåVent({
+          ...formValues,
+          behandlingUuid: behandling?.uuid,
+          behandlingVersjon: behandling?.versjon,
+        }).then(() => {
+          hentOgSettBehandling();
+        });
+      }
+    },
+    [behandling],
+  );
+  const henleggBehandlingOgOppdaterBehandling = useCallback(
+    formValues => {
+      if (behandling) {
+        henleggBehandling({
+          ...formValues,
+          behandlingUuid: behandling?.uuid,
+          behandlingVersjon: behandling?.versjon,
+        });
+      }
+    },
+    [behandling],
+  );
+  const endreBehandlendeEnhet = useCallback(
+    formValues => {
+      if (behandling) {
+        nyBehandlendeEnhet({
+          ...formValues,
+          behandlingUuid: behandling?.uuid,
+          behandlingVersjon: behandling?.versjon,
+        }).then(() => {
+          hentOgSettBehandling();
+        });
+      }
+    },
+    [behandling],
+  );
+  const opneBehandlingForEndringer = useCallback(
+    formValues => {
+      if (behandling) {
+        åpneForEndringer({
+          ...formValues,
+          behandlingUuid: behandling?.uuid,
+          behandlingVersjon: behandling?.versjon,
+        }).then(settBehandling);
+      }
+    },
+    [behandling],
+  );
+
+  const fjernVergeFn = skalLageVergeFn(
+    VergeBehandlingmenyValg.FJERN,
+    vergeMenyvalg,
+    behandlingUuid,
+    behandling?.versjon,
+  )
+    ? () =>
+        fjernVerge({
+          behandlingUuid: behandling?.uuid,
+          behandlingVersjon: behandling?.versjon,
+        }).then(b => {
+          settBehandling(b);
+          setLocation();
+        })
     : undefined;
   const opprettVergeFn = skalLageVergeFn(
     VergeBehandlingmenyValg.OPPRETT,
     vergeMenyvalg,
     behandlingUuid,
-    behandlingVersjon,
+    behandling?.versjon,
   )
-    ? () => behandlingEventHandler.opprettVerge().then(setLocation)
+    ? () =>
+        opprettVerge({
+          behandlingUuid: behandling?.uuid,
+          behandlingVersjon: behandling?.versjon,
+        }).then(b => {
+          settBehandling(b);
+          setLocation();
+        })
     : undefined;
 
   const menyTaAvVentFn = useCallback(
@@ -203,20 +305,20 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
         {behandling && (
           <MenyTaAvVentIndex
             behandlingVersjon={behandling.versjon}
-            taBehandlingAvVent={behandlingEventHandler.taBehandlingAvVent}
+            taBehandlingAvVent={taBehandlingAvVentOgOppdaterBehandling}
             lukkModal={lukkModal}
           />
         )}
       </div>
     ),
-    [behandling, behandlingEventHandler],
+    [behandling, taBehandlingAvVentOgOppdaterBehandling],
   );
 
   const menySettPåVentFn = useCallback(
     (lukkModal: () => void) => (
       <MenySettPaVentIndex
-        behandlingVersjon={behandlingVersjon}
-        settBehandlingPaVent={behandlingEventHandler.settBehandlingPaVent}
+        behandlingVersjon={behandling?.versjon}
+        settBehandlingPaVent={settBehandlingPåVentOgOppdaterBehandling}
         ventearsaker={menyKodeverk.getKodeverkForValgtBehandling(KodeverkType.VENT_AARSAK)}
         lukkModal={lukkModal}
         erTilbakekreving={
@@ -225,7 +327,7 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
         }
       />
     ),
-    [behandlingVersjon, behandlingEventHandler, behandlingTypeKode],
+    [behandling?.versjon, settBehandlingPåVentOgOppdaterBehandling, behandlingTypeKode],
   );
 
   const menyHenleggFn = useCallback(
@@ -235,7 +337,7 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
           <MenyHenleggIndex
             valgtBehandling={behandling}
             forhandsvisHenleggBehandling={previewHenleggBehandling}
-            henleggBehandling={behandlingEventHandler.henleggBehandling}
+            henleggBehandling={henleggBehandlingOgOppdaterBehandling}
             ytelseType={fagsak.fagsakYtelseType}
             behandlingResultatTyper={menyKodeverk.getKodeverkForValgtBehandling(KodeverkType.BEHANDLING_RESULTAT_TYPE)}
             lukkModal={lukkModal}
@@ -244,31 +346,28 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
         )}
       </div>
     ),
-    [behandling, previewHenleggBehandling, behandlingEventHandler, fagsak, gaaTilSokeside],
+    [behandling, previewHenleggBehandling, henleggBehandlingOgOppdaterBehandling, fagsak, gaaTilSokeside],
   );
 
   const menyEndreBehandlendeEnhetFn = useCallback(
     (lukkModal: () => void) => (
       <MenyEndreBehandlendeEnhetIndex
-        behandlingVersjon={behandlingVersjon}
+        behandlingVersjon={behandling?.versjon}
         behandlendeEnhetId={behandling?.behandlendeEnhetId}
         behandlendeEnhetNavn={behandling?.behandlendeEnhetNavn}
-        nyBehandlendeEnhet={behandlingEventHandler.endreBehandlendeEnhet}
+        nyBehandlendeEnhet={endreBehandlendeEnhet}
         behandlendeEnheter={behandlendeEnheter}
         lukkModal={lukkModal}
       />
     ),
-    [behandlingVersjon, behandling, behandlingEventHandler, behandlendeEnheter],
+    [behandling?.versjon, behandling, endreBehandlendeEnhet, behandlendeEnheter],
   );
 
   const menyÅpneForEndringerFn = useCallback(
     (lukkModal: () => void) => (
-      <MenyApneForEndringerIndex
-        apneBehandlingForEndringer={behandlingEventHandler.opneBehandlingForEndringer}
-        lukkModal={lukkModal}
-      />
+      <MenyApneForEndringerIndex apneBehandlingForEndringer={opneBehandlingForEndringer} lukkModal={lukkModal} />
     ),
-    [behandlingEventHandler],
+    [opneBehandlingForEndringer],
   );
 
   const menyNyBehandlingFn = useCallback(
@@ -276,7 +375,7 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
       <MenyNyBehandlingIndex
         saksnummer={fagsak.saksnummer}
         behandlingUuid={behandling?.uuid}
-        behandlingVersjon={behandlingVersjon}
+        behandlingVersjon={behandling?.versjon}
         uuidForSistLukkede={uuidForSistLukkede}
         behandlingOppretting={fagsakData.getBehandlingOppretting()}
         kanTilbakekrevingOpprettes={{

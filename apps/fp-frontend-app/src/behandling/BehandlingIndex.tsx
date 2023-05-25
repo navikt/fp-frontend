@@ -7,11 +7,11 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 
+import { Behandling } from '@navikt/fp-types';
 import useTrackRouteParam from '../app/useTrackRouteParam';
 import getAccessRights from '../app/util/access';
 import { getProsessStegLocation, getFaktaLocation, getLocationWithDefaultProsessStegAndFakta } from '../app/paths';
-import { FpsakApiKeys, requestApi, restApiHooks, LinkCategory } from '../data/fpsakApi';
-import behandlingEventHandler from './BehandlingEventHandler';
+import { FagsakApiKeys, requestFagsakApi, restFagsakApiHooks, LinkCategory } from '../data/fagsakContextApi';
 import ErrorBoundary from '../app/ErrorBoundary';
 import FagsakData from '../fagsak/FagsakData';
 import lazyWithRetry from './lazyUtils';
@@ -61,8 +61,10 @@ const getOppdaterProsessStegOgFaktaPanelIUrl =
   };
 
 interface OwnProps {
-  setBehandlingUuidOgVersjon: (behandlingUuid: string, behandlingVersjon: number) => void;
+  setBehandling: (behandling: Behandling) => void;
+  behandling?: Behandling;
   fagsakData: FagsakData;
+  hentOgSettBehandling: () => void;
   setRequestPendingMessage: (message?: string) => void;
 }
 
@@ -73,8 +75,10 @@ interface OwnProps {
  * relatert til den valgte behandlingen.
  */
 const BehandlingIndex: FunctionComponent<OwnProps> = ({
-  setBehandlingUuidOgVersjon,
+  setBehandling,
+  behandling,
   fagsakData,
+  hentOgSettBehandling,
   setRequestPendingMessage,
 }) => {
   const { selected: behandlingUuid } = useTrackRouteParam<string>({
@@ -84,25 +88,18 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
 
   const fagsak = fagsakData.getFagsak();
   const alleBehandlinger = fagsakData.getAlleBehandlinger();
-  const behandling = alleBehandlinger.find(b => b.uuid === behandlingUuid);
 
   useEffect(() => {
     if (behandling) {
-      requestApi.setLinks(behandling.links, LinkCategory.BEHANDLING);
-      setBehandlingUuidOgVersjon(behandlingUuid, behandling.versjon);
+      requestFagsakApi.setLinks(behandling.links, LinkCategory.BEHANDLING);
     }
   }, [behandling]);
 
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
-  const oppdaterBehandlingVersjon = useCallback(
-    (versjon: number) => setBehandlingUuidOgVersjon(behandlingUuid, versjon),
-    [behandlingUuid],
-  );
+  const kodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
 
-  const kodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
-
-  const initFetchData = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.INIT_FETCH);
+  const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
   const rettigheter = useMemo(
     () => getAccessRights(initFetchData.innloggetBruker, fagsak.status, behandling?.status, behandling?.type),
     [fagsak.status, behandlingUuid, behandling?.status, behandling?.type],
@@ -123,8 +120,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   const defaultProps = {
     key: behandlingUuid,
     behandlingUuid,
-    oppdaterBehandlingVersjon,
-    behandlingEventHandler,
     kodeverk,
     fagsak,
     rettigheter,
@@ -133,6 +128,8 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     oppdaterProsessStegOgFaktaPanelIUrl,
     valgtProsessSteg: query.punkt,
     valgtFaktaSteg: query.fakta,
+    setBehandling,
+    hentOgSettBehandling,
   };
   const behandlingTypeKode = behandling?.type;
 

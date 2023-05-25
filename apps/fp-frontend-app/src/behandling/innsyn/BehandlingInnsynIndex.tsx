@@ -13,7 +13,7 @@ import {
   useInitRequestApi,
   useLagreAksjonspunkt,
 } from '../felles/utils/indexHooks';
-import { requestInnsynApi } from './data/innsynBehandlingApi';
+import { requestBehandlingApi } from '../../data/behandlingContextApi';
 import BehandleInnsynProsessStegInitPanel from './prosessPaneler/BehandleInnsynProsessStegInitPanel';
 import InnsynVedtakProsessStegInitPanel from './prosessPaneler/InnsynVedtakProsessStegInitPanel';
 import ProsessPanelInitProps from '../felles/typer/prosessPanelInitProps';
@@ -31,14 +31,14 @@ const BehandlingInnsynIndex: FunctionComponent<StandardBehandlingProps> = ({
   opneSokeside,
   setRequestPendingMessage,
 }) => {
-  useInitRequestApi(requestInnsynApi, setRequestPendingMessage);
+  useInitRequestApi(requestBehandlingApi, setRequestPendingMessage);
 
   const { behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling } =
-    useBehandling(requestInnsynApi, behandlingUuid, oppdaterBehandlingVersjon);
+    useBehandling(requestBehandlingApi, behandlingUuid, oppdaterBehandlingVersjon);
 
-  const { lagreAksjonspunkter } = useLagreAksjonspunkt(requestInnsynApi, setBehandling);
+  const { lagreAksjonspunkter } = useLagreAksjonspunkt(requestBehandlingApi, setBehandling);
 
-  useInitBehandlingHandlinger(requestInnsynApi, behandlingEventHandler, hentBehandling, setBehandling, behandling);
+  useInitBehandlingHandlinger(requestBehandlingApi, behandlingEventHandler, hentBehandling, setBehandling, behandling);
 
   const hentProsessPaneler = useCallback(
     (props: ProsessPanelInitProps) => (
@@ -65,7 +65,7 @@ const BehandlingInnsynIndex: FunctionComponent<StandardBehandlingProps> = ({
         behandling={behandling}
         hentBehandling={hentBehandling}
         kodeverk={kodeverk}
-        requestApi={requestInnsynApi}
+        requestApi={requestBehandlingApi}
       />
       <StandardPropsProvider
         behandling={behandling}
@@ -81,7 +81,7 @@ const BehandlingInnsynIndex: FunctionComponent<StandardBehandlingProps> = ({
           valgtProsessSteg={valgtProsessSteg}
           valgtFaktaSteg={valgtFaktaSteg}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-          requestApi={requestInnsynApi}
+          requestApi={requestBehandlingApi}
           hentProsessPaneler={hentProsessPaneler}
         />
       </StandardPropsProvider>

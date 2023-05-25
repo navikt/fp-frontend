@@ -4,34 +4,34 @@ import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import useGetEnabledApplikasjonContext from '../app/useGetEnabledApplikasjonContext';
 import ApplicationContextPath from '../app/ApplicationContextPath';
 import useBehandlingEndret from '../behandling/useBehandlingEndret';
-import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
+import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
 import FagsakData from './FagsakData';
 
 const useHentFagsak = (
   saksnummer: string,
+  hentNyFagsakTrigger: number,
   behandlingUuid?: string,
   behandlingVersjon?: number,
-  behandlingerTeller?: number,
 ): [harHentet: boolean, fagsakData: FagsakData | undefined] => {
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingUuid, behandlingVersjon);
   const enabledApplicationContexts = useGetEnabledApplikasjonContext();
   const skalHenteFraFpTilbake = enabledApplicationContexts.includes(ApplicationContextPath.FPTILBAKE);
 
-  const { data: fagsak } = restApiHooks.useRestApi(
-    FpsakApiKeys.FETCH_FAGSAK,
+  const { data: fagsak } = restFagsakApiHooks.useRestApi(
+    FagsakApiKeys.FETCH_FAGSAK,
     { saksnummer },
     {
-      updateTriggers: [behandlingUuid, behandlingVersjon, behandlingerTeller],
+      updateTriggers: [behandlingUuid, behandlingVersjon, hentNyFagsakTrigger],
       suspendRequest: !saksnummer || erBehandlingEndretFraUndefined,
       keepData: true,
     },
   );
 
-  const { data: fagsakDataTilbake, state: fagsakDataTilbakeState } = restApiHooks.useRestApi(
-    FpsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE,
+  const { data: fagsakDataTilbake, state: fagsakDataTilbakeState } = restFagsakApiHooks.useRestApi(
+    FagsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE,
     { saksnummer },
     {
-      updateTriggers: [behandlingUuid, behandlingVersjon, behandlingerTeller],
+      updateTriggers: [behandlingUuid, behandlingVersjon, hentNyFagsakTrigger],
       suspendRequest: !skalHenteFraFpTilbake || !saksnummer || erBehandlingEndretFraUndefined,
       keepData: true,
     },
