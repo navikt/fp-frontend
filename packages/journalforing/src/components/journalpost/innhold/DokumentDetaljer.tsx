@@ -68,7 +68,7 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({
                   name={inputFieldName}
                   validate={[required, hasValidText]}
                   readOnly={dokumentTittelStyresAvJournalpostTittel}
-                  maxLength={100}
+                  maxLength={200}
                 />
               </FlexColumn>
             ))}
@@ -90,7 +90,7 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({
                       name={inputFieldName}
                       validate={[required, hasValidText]}
                       readOnly={dokumentTittelStyresAvJournalpostTittel}
-                      maxLength={100}
+                      maxLength={200}
                     />
                   )}
                   {!harToggletFritekst && (
