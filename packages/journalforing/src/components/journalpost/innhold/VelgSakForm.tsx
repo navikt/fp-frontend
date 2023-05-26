@@ -99,12 +99,18 @@ type OwnProps = Readonly<{
   journalpost: Journalpost;
   isSubmittable: boolean;
   avbrytVisningAvJournalpost: () => void;
+  erKlarForJournalføring: boolean;
 }>;
 
 /**
  * VelgSakForm - Inneholder formen som lar saksbehandler velge en sak og journalføre dokumentet på, evt opprette ny sak.
  */
-const VelgSakForm: FunctionComponent<OwnProps> = ({ journalpost, isSubmittable, avbrytVisningAvJournalpost }) => {
+const VelgSakForm: FunctionComponent<OwnProps> = ({
+  journalpost,
+  isSubmittable,
+  avbrytVisningAvJournalpost,
+  erKlarForJournalføring,
+}) => {
   const intl = useIntl();
   const saksliste = journalpost?.fagsaker || TOM_ARRAY;
   const finnesSaker = saksliste && saksliste.length > 0;
@@ -116,7 +122,7 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({ journalpost, isSubmittable, 
 
   return (
     <>
-      {!finnesSaker && (
+      {!finnesSaker && erKlarForJournalføring && (
         <BodyShort>
           <FormattedMessage id="Journal.Sak.Ingen" />
         </BodyShort>
@@ -125,6 +131,7 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({ journalpost, isSubmittable, 
         <FlexRow>
           <FlexColumn>
             <RadioGroupPanel
+              disabled={!erKlarForJournalføring}
               name={radioFieldName}
               hideLegend
               label={intl.formatMessage({ id: 'ValgtOppgave.RelaterteSaker' })}

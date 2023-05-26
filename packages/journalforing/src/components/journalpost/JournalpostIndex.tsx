@@ -70,11 +70,11 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
           <JournalpostDetaljer
             avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
-            journalpost={journalpostOppdatertMedSøker || journalpost}
+            journalpostFraOppgave={journalpost}
+            oppdatertJournalpost={journalpostOppdatertMedSøker}
             oppgave={oppgave}
             submitJournalføring={submitJournalføring}
-            oppdaterJournalpostMedBruker={oppdaterMedBrukerCallback}
-            skalKunneEndreSøker={!journalpost.bruker}
+            hentOppdatertJournalpostMedBruker={oppdaterMedBrukerCallback}
           />
         </FlexColumn>
         {valgtDokument && (

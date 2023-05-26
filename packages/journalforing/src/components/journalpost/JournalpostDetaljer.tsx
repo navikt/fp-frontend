@@ -1,7 +1,7 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { FunctionComponent, useCallback, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Heading, BodyLong } from '@navikt/ds-react';
+import { Heading, BodyLong, Alert } from '@navikt/ds-react';
 
 import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form } from '@navikt/ft-form-hooks';
@@ -85,42 +85,58 @@ const transformValues = (
 };
 
 type OwnProps = Readonly<{
-  journalpost: Journalpost;
+  journalpostFraOppgave: Journalpost;
   oppgave: OppgaveOversikt;
   avbrytVisningAvJournalpost: () => void;
   submitJournalføring: (params: JournalførSubmitValue) => void;
-  oppdaterJournalpostMedBruker: (params: OppdaterMedBruker) => void;
-  skalKunneEndreSøker: boolean;
+  hentOppdatertJournalpostMedBruker: (params: OppdaterMedBruker) => void;
+  oppdatertJournalpost?: Journalpost;
 }>;
 
 /**
  * JournalpostDetaljer - Viser detaljer om valgt journalpost
  */
 const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
-  journalpost,
+  journalpostFraOppgave,
   oppgave,
   avbrytVisningAvJournalpost,
   submitJournalføring,
-  oppdaterJournalpostMedBruker,
-  skalKunneEndreSøker,
+  hentOppdatertJournalpostMedBruker,
+  oppdatertJournalpost,
 }) => {
-  const saker = journalpost.fagsaker || [];
+  const [gjeldendeJournalpost, setGjeldendeJournalpost] = useState(journalpostFraOppgave);
+  const [skalKunneEndreSøker, setSkalKunneEndreSøker] = useState(!journalpostFraOppgave.bruker);
+  const saker = journalpostFraOppgave.fagsaker || [];
   const formMethods = useForm<JournalføringFormValues>({
-    defaultValues: buildInitialValues(journalpost),
+    defaultValues: buildInitialValues(journalpostFraOppgave),
   });
   const submitJournal = useCallback((values: JournalføringFormValues) => {
-    submitJournalføring(transformValues(values, journalpost, oppgave));
+    submitJournalføring(transformValues(values, journalpostFraOppgave, oppgave));
   }, []);
   const isSubmittable = formMethods.formState.isDirty;
 
+  const knyttSøkerTilJournalpost = useCallback(() => {
+    if (oppdatertJournalpost?.bruker && !journalpostFraOppgave.bruker) {
+      const nyJournalpost = {
+        ...journalpostFraOppgave,
+        bruker: oppdatertJournalpost.bruker,
+        fagsaker: oppdatertJournalpost.fagsaker || [],
+      };
+      setGjeldendeJournalpost(nyJournalpost);
+      setSkalKunneEndreSøker(false);
+    }
+  }, [oppdatertJournalpost]);
+
   return (
     <Form<JournalføringFormValues> formMethods={formMethods} onSubmit={submitJournal}>
-      <JournalpostTittelForm journalpost={journalpost} />
+      <JournalpostTittelForm journalpost={gjeldendeJournalpost} />
       <VerticalSpacer sixteenPx />
       <BrukerAvsenderPanel
-        journalpost={journalpost}
-        oppdaterJournalpostMedBruker={oppdaterJournalpostMedBruker}
+        journalpost={gjeldendeJournalpost}
+        hentOppdatertJournalpostMedBruker={hentOppdatertJournalpostMedBruker}
         skalKunneEndreSøker={skalKunneEndreSøker}
+        hentetSøker={oppdatertJournalpost?.bruker}
+        knyttSøkerTilJournalpost={knyttSøkerTilJournalpost}
       />
       <VerticalSpacer twentyPx />
       {oppgave.beskrivelse && (
@@ -148,12 +164,12 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
           </Heading>
         </FlexColumn>
       </FlexRow>
-      {journalpost.dokumenter && (
+      {gjeldendeJournalpost.dokumenter && (
         <>
           <VerticalSpacer eightPx />
           <DokumentForm
-            journalpost={journalpost}
-            dokumentTittelStyresAvJournalpostTittel={dokumentTittelSkalStyresAvJournalpost(journalpost)}
+            journalpost={gjeldendeJournalpost}
+            dokumentTittelStyresAvJournalpostTittel={dokumentTittelSkalStyresAvJournalpost(journalpostFraOppgave)}
           />
           <VerticalSpacer thirtyTwoPx />
         </>
@@ -166,6 +182,11 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
         </FlexColumn>
       </FlexRow>
       <VerticalSpacer eightPx />
+      {skalKunneEndreSøker && (
+        <Alert variant="info">
+          <FormattedMessage id="ValgtOppgave.RelaterteSaker.ManglerSøker" />
+        </Alert>
+      )}
       {saker.map(sak => (
         <SakDetaljer sak={sak} key={sak.saksnummer} />
       ))}
@@ -180,8 +201,9 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
       <VerticalSpacer eightPx />
       <VelgSakForm
         isSubmittable={isSubmittable}
-        journalpost={journalpost}
+        journalpost={gjeldendeJournalpost}
         avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
+        erKlarForJournalføring={!skalKunneEndreSøker}
       />
     </Form>
   );

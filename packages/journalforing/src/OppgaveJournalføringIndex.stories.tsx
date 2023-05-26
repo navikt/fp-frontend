@@ -25,7 +25,7 @@ const detaljertJournalpostMal = (medBruker: boolean): Journalpost =>
     bruker: medBruker
       ? {
           navn: 'Søker Søkersen',
-          fnr: '12048714373',
+          fnr: '15529115072',
           aktørId: '98594685464858',
         }
       : null,
@@ -54,51 +54,53 @@ const detaljertJournalpostMal = (medBruker: boolean): Journalpost =>
         lenke: 'https://research.google.com/pubs/archive/44678.pdf',
       },
     ],
-    fagsaker: [
-      {
-        saksnummer: '125416592',
-        ytelseType: fagsakYtelseType.FORELDREPENGER,
-        opprettetDato: '2022-01-02',
-        førsteUttaksdato: '2022-05-02',
-        status: fagsakStatus.LOPENDE,
-        familieHendelseJf: {
-          familiehHendelseDato: '2022-04-15',
-          familihendelseType: familieHendelseType.FODSEL,
-        },
-      },
-      {
-        saksnummer: '125416597',
-        ytelseType: fagsakYtelseType.FORELDREPENGER,
-        opprettetDato: '2022-01-02',
-        førsteUttaksdato: '2022-05-02',
-        status: fagsakStatus.UNDER_BEHANDLING,
-        familieHendelseJf: {
-          familiehHendelseDato: '2022-04-15',
-          familihendelseType: familieHendelseType.ADOPSJON,
-        },
-      },
-      {
-        saksnummer: '155462542',
-        ytelseType: fagsakYtelseType.SVANGERSKAPSPENGER,
-        datoOpprettet: '2022-03-02',
-        status: fagsakStatus.AVSLUTTET,
-        familieHendelseJf: {
-          familiehHendelseDato: '2022-02-01',
-          familihendelseType: familieHendelseType.TERMIN,
-        },
-      },
-      {
-        saksnummer: '175419131',
-        ytelseType: fagsakYtelseType.FORELDREPENGER,
-        datoOpprettet: '2022-01-02',
-        førsteUttaksdato: '2022-02-02',
-        status: fagsakStatus.OPPRETTET,
-        familieHendelseJf: {
-          familiehHendelseDato: '2022-03-01',
-          familihendelseType: familieHendelseType.OMSORG,
-        },
-      },
-    ],
+    fagsaker: medBruker
+      ? [
+          {
+            saksnummer: '125416592',
+            ytelseType: fagsakYtelseType.FORELDREPENGER,
+            opprettetDato: '2022-01-02',
+            førsteUttaksdato: '2022-05-02',
+            status: fagsakStatus.LOPENDE,
+            familieHendelseJf: {
+              familiehHendelseDato: '2022-04-15',
+              familihendelseType: familieHendelseType.FODSEL,
+            },
+          },
+          {
+            saksnummer: '125416597',
+            ytelseType: fagsakYtelseType.FORELDREPENGER,
+            opprettetDato: '2022-01-02',
+            førsteUttaksdato: '2022-05-02',
+            status: fagsakStatus.UNDER_BEHANDLING,
+            familieHendelseJf: {
+              familiehHendelseDato: '2022-04-15',
+              familihendelseType: familieHendelseType.ADOPSJON,
+            },
+          },
+          {
+            saksnummer: '155462542',
+            ytelseType: fagsakYtelseType.SVANGERSKAPSPENGER,
+            datoOpprettet: '2022-03-02',
+            status: fagsakStatus.AVSLUTTET,
+            familieHendelseJf: {
+              familiehHendelseDato: '2022-02-01',
+              familihendelseType: familieHendelseType.TERMIN,
+            },
+          },
+          {
+            saksnummer: '175419131',
+            ytelseType: fagsakYtelseType.FORELDREPENGER,
+            datoOpprettet: '2022-01-02',
+            førsteUttaksdato: '2022-02-02',
+            status: fagsakStatus.OPPRETTET,
+            familieHendelseJf: {
+              familiehHendelseDato: '2022-03-01',
+              familihendelseType: familieHendelseType.OMSORG,
+            },
+          },
+        ]
+      : [],
   } as Journalpost);
 
 export default {

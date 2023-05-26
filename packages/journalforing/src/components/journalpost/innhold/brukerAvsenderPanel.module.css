@@ -29,10 +29,6 @@
   width: 48px;
 }
 
-.searchBox {
-  width: 30%;
-}
-
 .error {
   color: var(--a-surface-danger);
 }
@@ -41,9 +37,6 @@
   .kolBredde {
     margin-top: 16px;
     width: 100%;
-  }
-  .searchBox {
-    width: 50%;
   }
   .brukerAvsenderRad {
     display: inline;
