@@ -10,7 +10,7 @@ import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { Fagsak, BehandlingAppKontekst, BehandlingOppretting } from '@navikt/fp-types';
 import { RestApiMock } from '@navikt/fp-utils-test';
 
-import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
+import { requestFagsakApi, FagsakApiKeys } from '../data/fagsakContextApi';
 import FagsakProfileIndex from './FagsakProfileIndex';
 import FagsakData from '../fagsak/FagsakData';
 import messages from '../../i18n/nb_NO.json';
@@ -50,17 +50,22 @@ describe('<FagsakProfileIndex>', () => {
 
   it('skal rendre komponent og vise alle behandlinger når ingen behandling er valgt', async () => {
     const data = [
-      { key: FpsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
-      { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
-      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
+      { key: FagsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
+      { key: FagsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
+      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
     ];
 
     await act(async () => {
       render(
         <RawIntlProvider value={intl}>
-          <RestApiMock data={data} requestApi={requestApi}>
+          <RestApiMock data={data} requestApi={requestFagsakApi}>
             <MemoryRouter>
-              <FagsakProfileIndex fagsakData={new FagsakData(fagsak as Fagsak)} hentFagsakdataPåNytt={vi.fn()} />
+              <FagsakProfileIndex
+                fagsakData={new FagsakData(fagsak as Fagsak)}
+                hentOgSettBehandling={vi.fn()}
+                setBehandling={vi.fn()}
+                endreFagsakMarkering={vi.fn()}
+              />
             </MemoryRouter>
           </RestApiMock>
         </RawIntlProvider>,
@@ -73,19 +78,21 @@ describe('<FagsakProfileIndex>', () => {
 
   it('skal ikke vise alle behandlinger når behandling er valgt', async () => {
     const data = [
-      { key: FpsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
-      { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
-      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
+      { key: FagsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
+      { key: FagsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
+      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
     ];
 
     await act(async () => {
       render(
         <RawIntlProvider value={intl}>
-          <RestApiMock data={data} requestApi={requestApi}>
+          <RestApiMock data={data} requestApi={requestFagsakApi}>
             <MemoryRouter>
               <FagsakProfileIndex
                 fagsakData={new FagsakData(fagsak as Fagsak)}
-                hentFagsakdataPåNytt={vi.fn()}
+                hentOgSettBehandling={vi.fn()}
+                setBehandling={vi.fn()}
+                endreFagsakMarkering={vi.fn()}
                 behandlingUuid="1"
               />
             </MemoryRouter>

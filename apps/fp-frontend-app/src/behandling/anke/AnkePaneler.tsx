@@ -2,7 +2,7 @@ import React, { FunctionComponent, useCallback, useMemo } from 'react';
 
 import { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 
-import VergeFaktaInitPanel from '../felles/fakta/paneler/VergeFaktaInitPanel';
+import VergeFaktaInitPanel from '../fellesPaneler/fakta/VergeFaktaInitPanel';
 import FaktaPanelInitProps from '../felles/typer/faktaPanelInitProps';
 import ProsessPanelInitProps from '../felles/typer/prosessPanelInitProps';
 import BehandlingContainer from '../felles/BehandlingContainer';

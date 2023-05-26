@@ -7,7 +7,7 @@ import VurderingFamOgPensjonProsessStegInitPanel from './prosessPaneler/Vurderin
 import FormKravKlageInstansProsessStegInitPanel from './prosessPaneler/FormKravKlageInstansProsessStegInitPanel';
 import VurderingKlageInstansProsessStegInitPanel from './prosessPaneler/VurderingKlageInstansProsessStegInitPanel';
 import KlageresultatProsessStegInitPanel from './prosessPaneler/KlageresultatProsessStegInitPanel';
-import VergeFaktaInitPanel from '../felles/fakta/paneler/VergeFaktaInitPanel';
+import VergeFaktaInitPanel from '../fellesPaneler/fakta/VergeFaktaInitPanel';
 import FaktaPanelInitProps from '../felles/typer/faktaPanelInitProps';
 import ProsessPanelInitProps from '../felles/typer/prosessPanelInitProps';
 import BehandlingContainer from '../felles/BehandlingContainer';

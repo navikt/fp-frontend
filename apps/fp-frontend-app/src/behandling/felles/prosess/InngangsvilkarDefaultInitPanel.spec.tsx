@@ -3,7 +3,6 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { VilkarUtfallType, BehandlingStatus } from '@navikt/ft-kodeverk';
 
-import { createRequestApi, RestApiConfigBuilder, RestKey } from '@navikt/fp-rest-api';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { Behandling } from '@navikt/fp-types';
@@ -46,18 +45,12 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
       ...defaultProps,
       aksjonspunkter: [] as Aksjonspunkt[],
     }));
-    const BEHANDLING_KEY = new RestKey<Behandling, void>('BEHANDLING_KEY');
-
-    const endpoints = new RestApiConfigBuilder().withRel('behandling', BEHANDLING_KEY).build();
-
-    const requestMock = createRequestApi(endpoints);
 
     render(
       <InngangsvilkarDefaultInitPanel
         erPanelValgt
         behandlingVersjon={1}
         registrerInngangsvilkarPanel={() => {}}
-        requestApi={requestMock}
         renderPanel={() => <div>Dette er komponenten</div>}
         inngangsvilkarPanelKode="test"
         hentInngangsvilkarPanelTekst={() => 'test'}
@@ -70,18 +63,12 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
 
   it('skal vise panel', async () => {
     vi.spyOn(Felles, 'default').mockImplementation(() => defaultProps);
-    const BEHANDLING_KEY = new RestKey<Behandling, void>('BEHANDLING_KEY');
-
-    const endpoints = new RestApiConfigBuilder().withRel('behandling', BEHANDLING_KEY).build();
-
-    const requestMock = createRequestApi(endpoints);
 
     render(
       <InngangsvilkarDefaultInitPanel
         erPanelValgt
         behandlingVersjon={1}
         registrerInngangsvilkarPanel={() => {}}
-        requestApi={requestMock}
         aksjonspunktKoder={[AksjonspunktCode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR]}
         renderPanel={() => <div>Dette er komponenten</div>}
         inngangsvilkarPanelKode="test"

@@ -3,7 +3,6 @@ import { render, screen } from '@testing-library/react';
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { BehandlingStatus } from '@navikt/ft-kodeverk';
 
-import { createRequestApi, RestApiConfigBuilder, RestKey } from '@navikt/fp-rest-api';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Behandling } from '@navikt/fp-types';
@@ -42,18 +41,11 @@ describe('<FaktaDefaultInitPanel>', () => {
   }));
 
   it('skal rendre panel korrekt', async () => {
-    const BEHANDLING_KEY = new RestKey<Behandling, void>('BEHANDLING_KEY');
-
-    const endpoints = new RestApiConfigBuilder().withRel('behandling', BEHANDLING_KEY).build();
-
-    const requestMock = createRequestApi(endpoints);
-
     render(
       <FaktaDefaultInitPanel
         valgtFaktaSteg="default"
         behandling={behandling}
         registrerFaktaPanel={() => {}}
-        requestApi={requestMock}
         skalPanelVisesIMeny={() => true}
         renderPanel={() => <div>Dette er et panel</div>}
         faktaPanelKode={FaktaPanelCode.UTTAK}

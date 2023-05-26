@@ -4,7 +4,7 @@ import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 
 import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import VergeFaktaInitPanel from '../felles/fakta/paneler/VergeFaktaInitPanel';
+import VergeFaktaInitPanel from '../fellesPaneler/fakta/VergeFaktaInitPanel';
 import FaktaPanelInitProps from '../felles/typer/faktaPanelInitProps';
 import ProsessPanelInitProps from '../felles/typer/prosessPanelInitProps';
 import BehandlingContainer from '../felles/BehandlingContainer';

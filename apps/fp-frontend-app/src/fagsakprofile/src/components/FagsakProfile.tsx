@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { Tag, BodyShort, Heading } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, Tooltip, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -16,7 +16,6 @@ interface OwnProps {
   saksnummer: string;
   fagsakYtelseType: KodeverkMedNavn;
   fagsakStatus: KodeverkMedNavn;
-  renderBehandlingVelger: () => ReactNode;
   dekningsgrad?: number;
   fagsakMarkeringTekst?: string;
 }

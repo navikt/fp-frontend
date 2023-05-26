@@ -4,19 +4,19 @@ import { render, screen } from '@testing-library/react';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
 
-import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
+import { requestFagsakApi, FagsakApiKeys } from '../../data/fagsakContextApi';
 import HistorikkIndex from './HistorikkIndex';
 
 describe('<HistorikkIndex>', () => {
   it('skal prøve å hente historikk og så vise historikk-panel', async () => {
     const data = [
-      { key: FpsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
-      { key: FpsakApiKeys.KODEVERK.name, global: true, data: {} },
-      { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
+      { key: FagsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
+      { key: FagsakApiKeys.KODEVERK.name, global: true, data: {} },
+      { key: FagsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
     ];
 
     render(
-      <RestApiMock data={data} requestApi={requestApi}>
+      <RestApiMock data={data} requestApi={requestFagsakApi}>
         <MemoryRouter>
           <HistorikkIndex saksnummer="12345" behandlingUuid="1" behandlingVersjon={2} kjønn="K" />
         </MemoryRouter>

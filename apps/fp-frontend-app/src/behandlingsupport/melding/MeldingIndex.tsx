@@ -161,7 +161,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
 
   const afterSubmit = useCallback(() => {
     setShowMessageModal(false);
-    return resetMessage();
+    return hentOgSettBehandling();
   }, []);
 
   const submitFinished = submitState === RestApiState.SUCCESS;
