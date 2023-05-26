@@ -25,7 +25,6 @@ const defaultOppgave = {
   frist: '2022-02-01',
   ytelseType: 'FP',
   enhetId: '4108',
-  journalpostHarMangler: false,
   prioritet: OppgavePrioritet.NORM,
   beskrivelse: 'Inntektsmelding',
 };
@@ -102,6 +101,8 @@ const Template: StoryFn<{
     oppgave={oppgave}
     journalpost={detaljertJournalpost}
     submitJournalføring={submitJournalføring}
+    oppdaterJournalpostMedBruker={action('button-click') as () => void}
+    skalKunneEndreSøker={false}
   />
 );
 
