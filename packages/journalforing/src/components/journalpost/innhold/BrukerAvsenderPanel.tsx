@@ -33,15 +33,18 @@ const finnAvsenderBilde = (journalpost: Journalpost): ReactElement => {
   return <SilhouetteIcon className={styles.ikon} />;
 };
 
-const lagBrukerAvsenderRad = (navn: string, id: string, ikon: ReactElement, title: string): ReactElement => (
+const lagBrukerAvsenderRad = (navn: string, id: string, ikon: ReactElement, title?: string): ReactElement => (
   <FlexColumn className={styles.kolBredde}>
-    <FlexRow>
-      <FlexColumn>
-        <Heading size="small">
-          <FormattedMessage id={title} />
-        </Heading>
-      </FlexColumn>
-    </FlexRow>
+    {title && (
+      <FlexRow>
+        <FlexColumn>
+          <Heading size="small">
+            <FormattedMessage id={title} />
+          </Heading>
+        </FlexColumn>
+      </FlexRow>
+    )}
+    <VerticalSpacer sixteenPx />
     <FlexRow>
       <FlexColumn className={styles.ikonKol}>{ikon}</FlexColumn>
       <FlexColumn>
@@ -85,21 +88,26 @@ const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({
   const [søkerFeilmelding, setSøkerFeilmelding] = useState<string | undefined>(undefined);
   const brukerBilde = useMemo(() => finnKjønnBilde(journalpost.bruker), [journalpost]);
   const avsenderBilde = useMemo(() => finnAvsenderBilde(journalpost), [journalpost]);
-  const oppdaterMedSøker = useCallback(
+
+  const oppdaterMedSøker = (fnr: string | undefined) => {
+    if (!fnr) {
+      setSøkerFeilmelding(undefined);
+    } else if (!isValidFodselsnummer(fnr)) {
+      setSøkerFeilmelding(intl.formatMessage({ id: 'ValgtOppgave.Søk.BrukerFeil' }, { fødselsnummer: fnr }));
+    } else {
+      setSøkerFeilmelding(undefined);
+      hentOppdatertJournalpostMedBruker({
+        journalpostId: journalpost.journalpostId,
+        fødselsnummer: fnr,
+      });
+    }
+  };
+
+  const oppdaterKlikk = useCallback(
     (e: any) => {
       if (e.key === 'Enter') {
         const fnr = e.target?.value;
-        if (!fnr) {
-          setSøkerFeilmelding(undefined);
-        } else if (!isValidFodselsnummer(fnr)) {
-          setSøkerFeilmelding(intl.formatMessage({ id: 'ValgtOppgave.Søk.BrukerFeil' }, { fødselsnummer: fnr }));
-        } else {
-          setSøkerFeilmelding(undefined);
-          hentOppdatertJournalpostMedBruker({
-            journalpostId: journalpost.journalpostId,
-            fødselsnummer: e.target.value,
-          });
-        }
+        oppdaterMedSøker(fnr);
       }
     },
     [hentOppdatertJournalpostMedBruker, søkerFeilmelding],
@@ -110,6 +118,14 @@ const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({
       <FlexColumn>
         {skalKunneEndreSøker && (
           <>
+            <FlexRow>
+              <FlexColumn>
+                <Heading size="small">
+                  <FormattedMessage id="ValgtOppgave.Bruker" />
+                </Heading>
+              </FlexColumn>
+            </FlexRow>
+            <VerticalSpacer sixteenPx />
             <Alert variant="warning">
               <BodyShort>
                 <FormattedMessage id="ValgtOppgave.Søk.Bruker" />
@@ -119,20 +135,17 @@ const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({
             <div>
               <Search
                 label={intl.formatMessage({ id: 'ValgtOppgave.Søk.FinnBruker' })}
-                variant="simple"
-                onKeyDown={oppdaterMedSøker}
+                onKeyDown={oppdaterKlikk}
+                onSearchClick={oppdaterMedSøker}
                 hideLabel={false}
-              />
+              >
+                <Search.Button type="button" />
+              </Search>
               <VerticalSpacer eightPx />
               {søkerFeilmelding && <BodyShort className={styles.error}>{søkerFeilmelding}</BodyShort>}
               {hentetSøker && (
                 <>
-                  {lagBrukerAvsenderRad(
-                    hentetSøker.navn,
-                    hentetSøker.fnr,
-                    finnKjønnBilde(hentetSøker),
-                    'ValgtOppgave.Bruker',
-                  )}
+                  {lagBrukerAvsenderRad(hentetSøker.navn, hentetSøker.fnr, finnKjønnBilde(hentetSøker), undefined)}
                   <VerticalSpacer sixteenPx />
                   <Button type="button" onClick={knyttSøkerTilJournalpost}>
                     <FormattedMessage id="ValgtOppgave.Søk.KnyttTil" />
