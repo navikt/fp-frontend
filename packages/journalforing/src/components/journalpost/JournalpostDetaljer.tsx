@@ -111,7 +111,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
     defaultValues: buildInitialValues(journalpostFraOppgave),
   });
   const submitJournal = useCallback((values: JournalføringFormValues) => {
-    submitJournalføring(transformValues(values, journalpostFraOppgave, oppgave));
+    submitJournalføring(transformValues(values, gjeldendeJournalpost, oppgave));
   }, []);
   const isSubmittable = formMethods.formState.isDirty;
 
