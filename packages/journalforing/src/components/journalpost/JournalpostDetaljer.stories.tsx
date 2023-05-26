@@ -102,7 +102,6 @@ const Template: StoryFn<{
     journalpostFraOppgave={detaljertJournalpost}
     submitJournalføring={submitJournalføring}
     hentOppdatertJournalpostMedBruker={action('button-click') as () => void}
-    skalKunneEndreSøker={false}
   />
 );
 
