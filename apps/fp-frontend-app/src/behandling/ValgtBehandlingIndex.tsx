@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback, useEffect } from 'react';
 
 import {
   AksessRettigheter,
@@ -11,11 +11,13 @@ import {
 } from '@navikt/fp-types';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { parseQueryString, replaceNorwegianCharacters } from '@navikt/ft-utils';
+import { Location } from 'history';
 
 import { BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
+import { NavigateFunction, useLocation, useNavigate } from 'react-router';
 import BehandlingPaVent from './felles/modaler/paVent/BehandlingPaVent';
 import StandardPropsProvider from './felles/utils/standardPropsStateContext';
-import { useLagreAksjonspunkt } from './felles/utils/indexHooks';
 import BehandlingContainerWrapperForeldrepenger from './forstegangsoknadOgRevurdering/foreldrepenger/BehandlingContainerWrapperForeldrepenger';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../data/behandlingContextApi';
 import BehandlingContainerWrapperEngangsstonad from './forstegangsoknadOgRevurdering/engangsstonad/BehandlingContainerWrapperEngangsstonad';
@@ -23,11 +25,46 @@ import BehandlingContainerWrapperSvangerskapspenger from './forstegangsoknadOgRe
 import BehandlingContainerWrapperKlage from './klage/BehandlingContainerWrapperKlage';
 import BehandlingContainerWrapperInnsyn from './innsyn/BehandlingContainerWrapperInnsyn';
 import BehandlingContainerWrapperAnke from './anke/BehandlingContainerWrapperAnke';
+import { getFaktaLocation, getLocationWithDefaultProsessStegAndFakta, getProsessStegLocation } from '../app/paths';
+import BehandlingContainerWrapperTilbakekreving from './tilbakekreving/BehandlingContainerWrapperTilbakekreving';
 
 const endepunkterSomSkalHentesEnGang = [
   { key: BehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT },
   { key: BehandlingApiKeys.BEHANDLING_PERSONOVERSIKT },
 ];
+
+const formatName = (bpName = ''): string => replaceNorwegianCharacters(bpName.toLowerCase());
+
+const getOppdaterProsessStegOgFaktaPanelIUrl =
+  (location: Location, navigate: NavigateFunction) =>
+  (prosessStegId?: string, faktaPanelId?: string): void => {
+    let newLocation;
+    if (prosessStegId === 'default') {
+      newLocation = getLocationWithDefaultProsessStegAndFakta(location);
+    } else if (prosessStegId) {
+      newLocation = getProsessStegLocation(location)(formatName(prosessStegId));
+    } else {
+      newLocation = getProsessStegLocation(location)();
+    }
+
+    if (faktaPanelId === 'default') {
+      newLocation = getFaktaLocation(newLocation)('default');
+    } else if (faktaPanelId) {
+      newLocation = getFaktaLocation(newLocation)(formatName(faktaPanelId));
+    } else {
+      newLocation = getFaktaLocation(newLocation)();
+    }
+
+    navigate(newLocation);
+  };
+
+const useSetBehandlingVedEndring = (setBehandling: (behandling: Behandling) => void, behandling?: Behandling): void => {
+  useEffect(() => {
+    if (behandling) {
+      setBehandling(behandling);
+    }
+  }, [behandling]);
+};
 
 const erTilbakekreving = (behandlingTypeKode?: string): boolean =>
   behandlingTypeKode === BehandlingType.TILBAKEKREVING ||
@@ -38,11 +75,7 @@ type OwnProps = {
   hentOgSettBehandling: () => void;
   fagsak: Fagsak;
   rettigheter: AksessRettigheter;
-  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
-  valgtProsessSteg?: string;
-  valgtFaktaSteg?: string;
   setBehandling: (behandling: Behandling) => void;
-  opneSokeside: () => void;
   kodeverk: AlleKodeverk;
   alleBehandlinger: BehandlingAppKontekst[];
 };
@@ -53,14 +86,27 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
   kodeverk,
   fagsak,
   rettigheter,
-  oppdaterProsessStegOgFaktaPanelIUrl,
-  valgtProsessSteg,
-  valgtFaktaSteg,
-  opneSokeside,
   hentOgSettBehandling,
   alleBehandlinger,
 }) => {
-  const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter } = useLagreAksjonspunkt(setBehandling);
+  const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restBehandlingApiHooks.useRestApiRunner(
+    BehandlingApiKeys.SAVE_AKSJONSPUNKT,
+  );
+  const { startRequest: lagreOverstyrteAksjonspunkter, data: apOverstyrtBehandlingRes } =
+    restBehandlingApiHooks.useRestApiRunner(BehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT);
+  useSetBehandlingVedEndring(setBehandling, apBehandlingRes);
+  useSetBehandlingVedEndring(setBehandling, apOverstyrtBehandlingRes);
+
+  const navigate = useNavigate();
+  const opneSokeside = useCallback(() => {
+    navigate('/');
+  }, []);
+
+  const location = useLocation();
+  const oppdaterProsessStegOgFaktaPanelIUrl = useCallback(getOppdaterProsessStegOgFaktaPanelIUrl(location, navigate), [
+    location,
+    navigate,
+  ]);
 
   const erFørstegangssøknadEllerRevurdering =
     behandling?.type === BehandlingType.FORSTEGANGSSOKNAD || behandling?.type === BehandlingType.REVURDERING;
@@ -86,6 +132,8 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
   const arbeidsgivere = opplysningsdata?.arbeidsgivereOversikt?.arbeidsgivere;
   const personoversikt = opplysningsdata?.behandlingPersonoversikt;
 
+  const query = parseQueryString(location.search);
+
   const toggleOppdateringAvFagsakOgBehandling = () => false;
 
   return (
@@ -106,8 +154,8 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
             <BehandlingContainerWrapperForeldrepenger
               behandling={behandling}
               fagsak={fagsak}
-              valgtProsessSteg={valgtProsessSteg}
-              valgtFaktaSteg={valgtFaktaSteg}
+              valgtProsessSteg={query.punkt}
+              valgtFaktaSteg={query.fakta}
               oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
               opneSokeside={opneSokeside}
               toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
@@ -121,8 +169,8 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
             <BehandlingContainerWrapperSvangerskapspenger
               behandling={behandling}
               fagsak={fagsak}
-              valgtProsessSteg={valgtProsessSteg}
-              valgtFaktaSteg={valgtFaktaSteg}
+              valgtProsessSteg={query.punkt}
+              valgtFaktaSteg={query.fakta}
               oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
               opneSokeside={opneSokeside}
               toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
@@ -136,8 +184,8 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
             <BehandlingContainerWrapperEngangsstonad
               behandling={behandling}
               fagsak={fagsak}
-              valgtProsessSteg={valgtProsessSteg}
-              valgtFaktaSteg={valgtFaktaSteg}
+              valgtProsessSteg={query.punkt}
+              valgtFaktaSteg={query.fakta}
               oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
               opneSokeside={opneSokeside}
               toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
@@ -150,7 +198,7 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
             <BehandlingContainerWrapperInnsyn
               behandling={behandling}
               fagsak={fagsak}
-              valgtProsessSteg={valgtProsessSteg}
+              valgtProsessSteg={query.punkt}
               oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
               opneSokeside={opneSokeside}
               toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
@@ -159,8 +207,8 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
           {behandling?.type === BehandlingType.ANKE && (
             <BehandlingContainerWrapperAnke
               behandling={behandling}
-              valgtProsessSteg={valgtProsessSteg}
-              valgtFaktaSteg={valgtFaktaSteg}
+              valgtProsessSteg={query.punkt}
+              valgtFaktaSteg={query.fakta}
               oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
               alleBehandlinger={alleBehandlinger}
             />
@@ -169,15 +217,26 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
             <BehandlingContainerWrapperKlage
               behandling={behandling}
               fagsak={fagsak}
-              valgtProsessSteg={valgtProsessSteg}
-              valgtFaktaSteg={valgtFaktaSteg}
+              valgtProsessSteg={query.punkt}
+              valgtFaktaSteg={query.fakta}
               oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
               toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
               opneSokeside={opneSokeside}
               alleBehandlinger={alleBehandlinger}
             />
           )}
-          {erTilbakekreving(behandling?.type) && <div>test</div>}
+          {erTilbakekreving(behandling?.type) && (
+            <BehandlingContainerWrapperTilbakekreving
+              behandling={behandling}
+              fagsak={fagsak}
+              valgtProsessSteg={query.punkt}
+              valgtFaktaSteg={query.fakta}
+              oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+              toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
+              opneSokeside={opneSokeside}
+              alleBehandlinger={alleBehandlinger}
+            />
+          )}
         </>
       </StandardPropsProvider>
     </>

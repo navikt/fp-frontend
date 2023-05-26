@@ -21,8 +21,8 @@ type OwnProps = {
 };
 
 const BehandlingPapirsoknadIndex: FunctionComponent<OwnProps> = ({
-  setBehandling,
   behandling,
+  setBehandling,
   kodeverk,
   fagsak,
   rettigheter,
