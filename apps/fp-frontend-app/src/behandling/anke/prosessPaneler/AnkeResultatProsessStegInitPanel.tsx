@@ -8,7 +8,7 @@ import { AnkeVurdering } from '@navikt/fp-types';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import { requestAnkeApi, AnkeBehandlingApiKeys } from '../data/ankeBehandlingApi';
+import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktCode.FORESLA_VEDTAK,
@@ -17,7 +17,7 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL,
 ];
 
-const ENDEPUNKTER_PANEL_DATA = [AnkeBehandlingApiKeys.ANKE_VURDERING];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.ANKE_VURDERING];
 type EndepunktPanelData = {
   ankeVurdering: AnkeVurdering;
 };
@@ -27,7 +27,6 @@ const AnkeResultatProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps>
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>
       {...props}
-      requestApi={requestAnkeApi}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.ANKE_RESULTAT}

@@ -51,11 +51,7 @@ const FagsakIndex: FunctionComponent = () => {
     paramName: 'saksnummer',
   });
 
-  const { selected: behandlingUuid } = useTrackRouteParam<string>({
-    paramName: 'behandlingUuid',
-    parse: behandlingUuidFromUrl => behandlingUuidFromUrl,
-  });
-
+  const [behandlingUuid, setBehandlingUuid] = useState<string | undefined>();
   const [behandling, setBehandling] = useState<Behandling>();
 
   // 1. Hent opp fagsak gitt saksnr i URL
@@ -80,15 +76,20 @@ const FagsakIndex: FunctionComponent = () => {
     erTilbakekreving ? BehandlingApiKeys.BEHANDLING_TILBAKE : BehandlingApiKeys.BEHANDLING,
   );
 
-  const hentOgSettBehandling = useCallback(() => {
-    hentBehandling({ behandlingUuid }, false).then(b => setBehandling(b));
-  }, [behandlingUuid]);
+  const hentOgSettBehandling = useCallback(
+    (keepData = false) => {
+      if (behandlingUuid) {
+        hentBehandling({ behandlingUuid }, keepData).then(setBehandling);
+      }
+    },
+    [behandlingUuid],
+  );
 
   useEffect(() => {
-    if (behandlingUuid && fagsakData) {
+    if (behandlingUuid) {
       hentOgSettBehandling();
     }
-  }, [behandlingUuid, fagsakData]);
+  }, [behandlingUuid]);
 
   useEffect(
     () => () => {
@@ -134,6 +135,7 @@ const FagsakIndex: FunctionComponent = () => {
                   setBehandling={setBehandling}
                   hentOgSettBehandling={hentOgSettBehandling}
                   setRequestPendingMessage={setRequestPendingMessage}
+                  setBehandlingUuid={setBehandlingUuid}
                 />
               }
             />

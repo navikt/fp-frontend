@@ -9,8 +9,8 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Soknad } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
-import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
+import { BehandlingApiKeys } from '../../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktCode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
@@ -19,7 +19,7 @@ const AKSJONSPUNKT_KODER = [
 
 const OVERSTYRING_AP_CODES = [AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.UTLAND_DOK_STATUS, BehandlingFellesApiKeys.SOKNAD];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.UTLAND_DOK_STATUS, BehandlingApiKeys.SOKNAD];
 type EndepunktPanelData = {
   utlandDokStatus?: {
     dokStatus?: string;

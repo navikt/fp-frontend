@@ -9,10 +9,10 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
 import { BeregningFaktaIndex, FaktaBeregningAvklaringsbehovCode } from '@navikt/ft-fakta-beregning';
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
-import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
 import '@navikt/ft-fakta-beregning/dist/style.css';
+import { BehandlingApiKeys, requestBehandlingApi } from '../../../../data/behandlingContextApi';
 
 const mapBGKodeTilFpsakKode = (bgKode: string): string => {
   switch (bgKode) {
@@ -92,7 +92,7 @@ const OVERSTYRING_AP_CODES = [
   AksjonspunktCode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
 ];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.BEREGNINGSGRUNNLAG];
 type EndepunktPanelData = {
   beregningsgrunnlag: Beregningsgrunnlag;
 };
@@ -117,7 +117,7 @@ const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
     overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={FaktaPanelCode.BEREGNING}
     faktaPanelMenyTekst={useIntl().formatMessage({ id: 'BeregningInfoPanel.Title' })}
-    skalPanelVisesIMeny={() => props.requestApi.hasPath(BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG.name)}
+    skalPanelVisesIMeny={() => requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGSGRUNNLAG.name)}
     renderPanel={data => (
       <BeregningFaktaIndex
         {...data}

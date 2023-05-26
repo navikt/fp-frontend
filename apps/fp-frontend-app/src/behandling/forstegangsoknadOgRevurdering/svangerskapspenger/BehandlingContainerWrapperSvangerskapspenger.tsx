@@ -3,7 +3,6 @@ import React, { FunctionComponent, useCallback } from 'react';
 import { AksessRettigheter, ArbeidsgiverOpplysningerPerId, Behandling, Fagsak, Personoversikt } from '@navikt/fp-types';
 
 import BehandlingContainer from '../../felles/BehandlingContainer';
-import { requestSvpApi } from './data/svpBehandlingApi';
 import SakenFaktaInitPanel from '../paneler/fakta/SakenFaktaInitPanel';
 import ArbeidsforholdFaktaInitPanel from '../paneler/fakta/ArbeidsforholdFaktaInitPanel';
 import ArbeidOgInntektFaktaInitPanel from '../paneler/fakta/ArbeidOgInntektFaktaInitPanel';
@@ -23,7 +22,6 @@ import TilkjentYtelseProsessStegInitPanel from './prosessPaneler/TilkjentYtelseP
 import SimuleringProsessStegInitPanel from '../paneler/prosess/SimuleringProsessStegInitPanel';
 import VedtakSvpProsessStegInitPanel from './prosessPaneler/VedtakSvpProsessStegInitPanel';
 import PermisjonFaktaInitPanel from '../paneler/fakta/PermisjonFaktaInitPanel';
-import { BehandlingEventHandler } from '../../felles/typer/standardBehandlingProps';
 import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from '../../felles/typer/prosessPanelInitProps';
 import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
 
@@ -38,8 +36,7 @@ interface OwnProps {
   arbeidsgivere: ArbeidsgiverOpplysningerPerId;
   personoversikt: Personoversikt;
   rettigheter: AksessRettigheter;
-  hentBehandling: (keepData: boolean) => Promise<Behandling | undefined>;
-  behandlingEventHandler: BehandlingEventHandler;
+  hentOgSettBehandling: () => void;
 }
 
 const BehandlingContainerWrapperSvangerskapspenger: FunctionComponent<OwnProps> = ({
@@ -53,8 +50,7 @@ const BehandlingContainerWrapperSvangerskapspenger: FunctionComponent<OwnProps> 
   arbeidsgivere,
   personoversikt,
   rettigheter,
-  hentBehandling,
-  behandlingEventHandler,
+  hentOgSettBehandling,
 }) => {
   const faktaPaneler = useCallback(
     (props: FaktaPanelInitProps) => (
@@ -66,8 +62,7 @@ const BehandlingContainerWrapperSvangerskapspenger: FunctionComponent<OwnProps> 
           behandlingUuid={behandling.uuid}
           rettigheter={rettigheter}
           arbeidsgiverOpplysningerPerId={arbeidsgivere}
-          settBehandlingPåVentCallback={behandlingEventHandler.settBehandlingPaVent}
-          hentBehandling={hentBehandling}
+          hentOgSettBehandling={hentOgSettBehandling}
         />
         <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <YtelserFaktaInitPanel {...props} />
@@ -88,7 +83,7 @@ const BehandlingContainerWrapperSvangerskapspenger: FunctionComponent<OwnProps> 
         <FordelingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
       </>
     ),
-    [personoversikt, behandling, rettigheter, fagsak, arbeidsgivere, behandlingEventHandler, hentBehandling],
+    [personoversikt, behandling, rettigheter, fagsak, arbeidsgivere, hentOgSettBehandling],
   );
 
   const prosessPaneler = useCallback(
@@ -135,7 +130,6 @@ const BehandlingContainerWrapperSvangerskapspenger: FunctionComponent<OwnProps> 
       valgtProsessSteg={valgtProsessSteg}
       valgtFaktaSteg={valgtFaktaSteg}
       oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-      requestApi={requestSvpApi}
       hentFaktaPaneler={faktaPaneler}
       hentProsessPaneler={prosessPaneler}
     />

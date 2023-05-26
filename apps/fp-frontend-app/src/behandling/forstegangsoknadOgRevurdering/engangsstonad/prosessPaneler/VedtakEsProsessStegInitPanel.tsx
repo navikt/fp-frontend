@@ -29,8 +29,7 @@ import IverksetterVedtakStatusModal from '../../../felles/modaler/vedtak/Iverkse
 import FatterVedtakStatusModal from '../../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 import useStandardProsessPanelProps from '../../../felles/prosess/useStandardProsessPanelProps';
-import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
-import { restApiEsHooks, EsBehandlingApiKeys } from '../data/esBehandlingApi';
+import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../../data/behandlingContextApi';
 
 const hasOnlyClosedAps = (aksjonspunkter: Aksjonspunkt[], vedtakAksjonspunkter: Aksjonspunkt[]): boolean =>
   aksjonspunkter
@@ -128,11 +127,11 @@ const getLagringSideeffekter =
 const AKSJONSPUNKT_KODER = [...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER, ...FATTER_VEDTAK_AKSJONSPUNKT_KODER];
 
 const ENDEPUNKTER_PANEL_DATA = [
-  BehandlingFellesApiKeys.TILBAKEKREVINGVALG,
-  EsBehandlingApiKeys.BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING,
-  BehandlingFellesApiKeys.MEDLEMSKAP,
-  BehandlingFellesApiKeys.SIMULERING_RESULTAT,
-  EsBehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD,
+  BehandlingApiKeys.TILBAKEKREVINGVALG,
+  BehandlingApiKeys.BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING,
+  BehandlingApiKeys.MEDLEMSKAP,
+  BehandlingApiKeys.SIMULERING_RESULTAT,
+  BehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD,
 ];
 type EndepunktPanelData = {
   tilbakekrevingvalg?: TilbakekrevingValg;
@@ -168,7 +167,9 @@ const VedtakEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelIni
 
   const standardPanelProps = useStandardProsessPanelProps();
 
-  const { startRequest: forhandsvisMelding } = restApiEsHooks.useRestApiRunner(BehandlingFellesApiKeys.PREVIEW_MESSAGE);
+  const { startRequest: forhandsvisMelding } = restBehandlingApiHooks.useRestApiRunner(
+    BehandlingApiKeys.PREVIEW_MESSAGE,
+  );
   const previewCallback = useCallback(
     getForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
     [standardPanelProps.behandling.versjon],

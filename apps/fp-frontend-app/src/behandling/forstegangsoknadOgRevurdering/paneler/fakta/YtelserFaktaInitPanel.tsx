@@ -6,10 +6,10 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { InntektArbeidYtelse } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
-import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
+import { BehandlingApiKeys } from '../../../../data/behandlingContextApi';
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.INNTEKT_ARBEID_YTELSE];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.INNTEKT_ARBEID_YTELSE];
 type EndepunktPanelData = {
   inntektArbeidYtelse: InntektArbeidYtelse;
 };

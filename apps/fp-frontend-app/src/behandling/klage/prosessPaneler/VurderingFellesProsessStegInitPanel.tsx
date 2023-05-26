@@ -13,9 +13,8 @@ import { forhandsvisDokument } from '@navikt/ft-utils';
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
-import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
-import { restApiKlageHooks, KlageBehandlingApiKeys, requestKlageApi } from '../data/klageBehandlingApi';
 import KlageBehandlingModal from '../modaler/KlageBehandlingModal';
+import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 const lagForhandsvisCallback =
   (
@@ -70,7 +69,7 @@ const getLagringSideeffekter =
     };
   };
 
-const ENDEPUNKTER_PANEL_DATA = [KlageBehandlingApiKeys.KLAGE_VURDERING];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.KLAGE_VURDERING];
 type EndepunktPanelData = {
   klageVurdering: KlageVurdering;
 };
@@ -103,16 +102,16 @@ const VurderingFellesProsessStegInitPanel: FunctionComponent<OwnProps & ProsessP
     ? getLagringSideeffekter(toggleKlageModal, toggleOppdatereFagsakContext, oppdaterProsessStegOgFaktaPanelIUrl)
     : undefined;
 
-  const { startRequest: forhandsvisMelding } = restApiKlageHooks.useRestApiRunner(
-    BehandlingFellesApiKeys.PREVIEW_MESSAGE,
+  const { startRequest: forhandsvisMelding } = restBehandlingApiHooks.useRestApiRunner(
+    BehandlingApiKeys.PREVIEW_MESSAGE,
   );
   const previewCallback = useCallback(
     lagForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
     [standardPanelProps.behandling.versjon],
   );
 
-  const { startRequest: lagreKlageVurdering } = restApiKlageHooks.useRestApiRunner(
-    KlageBehandlingApiKeys.SAVE_KLAGE_VURDERING,
+  const { startRequest: lagreKlageVurdering } = restBehandlingApiHooks.useRestApiRunner(
+    BehandlingApiKeys.SAVE_KLAGE_VURDERING,
   );
   const lagreKlage = useCallback(lagKlageCallback(lagreKlageVurdering, standardPanelProps.behandling), [
     standardPanelProps.behandling.versjon,
@@ -121,7 +120,6 @@ const VurderingFellesProsessStegInitPanel: FunctionComponent<OwnProps & ProsessP
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>
       {...props}
-      requestApi={requestKlageApi}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={aksjonspunktKoder}
       prosessPanelKode={prosessPanelKode}

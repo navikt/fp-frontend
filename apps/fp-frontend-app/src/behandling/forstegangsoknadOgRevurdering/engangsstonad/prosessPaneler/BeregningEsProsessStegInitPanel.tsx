@@ -6,14 +6,13 @@ import { BeregningsresultatProsessIndex } from '@navikt/fp-prosess-beregningsres
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AksessRettigheter, BeregningsresultatEs } from '@navikt/fp-types';
 
-import { EsBehandlingApiKeys } from '../data/esBehandlingApi';
-
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
+import { BehandlingApiKeys, requestBehandlingApi } from '../../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.OVERSTYR_BEREGNING];
 
-const ENDEPUNKTER_PANEL_DATA = [EsBehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD];
 type EndepunktPanelData = {
   beregningresultatEngangsstonad: BeregningsresultatEs;
 };
@@ -32,14 +31,13 @@ const BeregningEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanel
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>
       {...props}
-      requestApi={props.requestApi}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.BEREGNING}
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Beregning' })}
       skalPanelVisesIMeny={() => true}
       hentOverstyrtStatus={() =>
-        props.requestApi.hasPath(EsBehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD.name)
+        requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGRESULTAT_ENGANGSSTONAD.name)
           ? vilkarUtfallType.OPPFYLT
           : vilkarUtfallType.IKKE_VURDERT
       }

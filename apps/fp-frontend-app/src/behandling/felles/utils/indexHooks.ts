@@ -13,15 +13,6 @@ export type NyBehandlendeEnhetParams = {
   behandlingVersjon: string;
 };
 
-export const useInitRequestApi = (setRequestPendingMessage: (message?: string) => void): void => {
-  const { addErrorMessage } = useRestApiErrorDispatcher();
-
-  useEffect(() => {
-    requestBehandlingApi.setRequestPendingHandler(setRequestPendingMessage);
-    requestBehandlingApi.setAddErrorMessageHandler(addErrorMessage);
-  }, []);
-};
-
 const useSetBehandlingVedEndring = (setBehandling: (behandling: Behandling) => void, behandling?: Behandling): void => {
   useEffect(() => {
     if (behandling) {

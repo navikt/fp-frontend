@@ -1,10 +1,9 @@
-import React, { FunctionComponent, useCallback, useMemo } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktCode, vilkarUtfallType } from '@navikt/fp-kodeverk';
 import { AvregningProsessIndex } from '@navikt/fp-prosess-avregning';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import { Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg } from '@navikt/fp-types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
@@ -12,7 +11,7 @@ import useStandardProsessPanelProps from '../../../felles/prosess/useStandardPro
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelMenyData from '../../../felles/typer/prosessPanelMenyData';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
-import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
+import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../../../../data/behandlingContextApi';
 
 const getForhandsvisFptilbakeCallback =
   (
@@ -31,10 +30,7 @@ const getForhandsvisFptilbakeCallback =
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_FEILUTBETALING];
 
-const ENDEPUNKTER_PANEL_DATA = [
-  BehandlingFellesApiKeys.TILBAKEKREVINGVALG,
-  BehandlingFellesApiKeys.SIMULERING_RESULTAT,
-];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.TILBAKEKREVINGVALG, BehandlingApiKeys.SIMULERING_RESULTAT];
 type EndepunktPanelData = {
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
@@ -50,11 +46,8 @@ const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelI
   fagsak,
   ...props
 }) => {
-  const { requestApi } = props;
-  const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
-
-  const { startRequest: forhandsvisTilbakekrevingMelding } = useRestApiRunner(
-    BehandlingFellesApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE,
+  const { startRequest: forhandsvisTilbakekrevingMelding } = restBehandlingApiHooks.useRestApiRunner(
+    BehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE,
   );
 
   const standardPanelProps = useStandardProsessPanelProps();
@@ -76,10 +69,10 @@ const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelI
           d =>
             d.id === ProsessStegCode.VEDTAK && (d.status !== vilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt),
         );
-        return props.requestApi.hasPath(BehandlingFellesApiKeys.SIMULERING_RESULTAT.name) || !harVedtakspanel;
+        return requestBehandlingApi.hasPath(BehandlingApiKeys.SIMULERING_RESULTAT.name) || !harVedtakspanel;
       }}
       hentOverstyrtStatus={() =>
-        props.requestApi.hasPath(BehandlingFellesApiKeys.SIMULERING_RESULTAT.name)
+        requestBehandlingApi.hasPath(BehandlingApiKeys.SIMULERING_RESULTAT.name)
           ? vilkarUtfallType.OPPFYLT
           : vilkarUtfallType.IKKE_VURDERT
       }

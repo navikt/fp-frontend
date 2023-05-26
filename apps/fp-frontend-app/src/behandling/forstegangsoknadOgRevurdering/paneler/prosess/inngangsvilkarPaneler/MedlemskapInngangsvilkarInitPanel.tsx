@@ -5,15 +5,15 @@ import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
 import { AksessRettigheter, Medlemskap } from '@navikt/fp-types';
 
 import InngangsvilkarPanelInitProps from '../../../../felles/typer/inngangsvilkarPanelInitProps';
-import { BehandlingFellesApiKeys } from '../../../../felles/data/behandlingFellesApi';
 import InngangsvilkarDefaultInitPanel from '../../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import OverstyringPanelDef from '../../../../felles/prosess/OverstyringPanelDef';
+import { BehandlingApiKeys } from '../../../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODE = AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR;
 
 const VILKAR_KODER = [VilkarType.MEDLEMSKAPSVILKARET];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.MEDLEMSKAP];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.MEDLEMSKAP];
 type EndepunktPanelData = {
   medlemskap: Medlemskap;
 };

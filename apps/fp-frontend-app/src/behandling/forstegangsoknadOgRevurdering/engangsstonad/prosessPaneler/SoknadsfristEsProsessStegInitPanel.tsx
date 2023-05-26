@@ -10,13 +10,13 @@ import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitP
 import OverstyringPanelDef from '../../../felles/prosess/OverstyringPanelDef';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 import skalViseProsessPanel from '../../../felles/prosess/skalViseProsessPanel';
-import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
+import { BehandlingApiKeys } from '../../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.SOKNADSFRISTVILKARET, AksjonspunktCode.OVERSTYR_SOKNADSFRISTVILKAR];
 
 const VILKAR_KODER = [VilkarType.SOKNADFRISTVILKARET];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.SOKNAD, BehandlingFellesApiKeys.FAMILIEHENDELSE];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.SOKNAD, BehandlingApiKeys.FAMILIEHENDELSE];
 type EndepunktPanelData = {
   soknad: Soknad;
   familiehendelse: FamilieHendelseSamling;

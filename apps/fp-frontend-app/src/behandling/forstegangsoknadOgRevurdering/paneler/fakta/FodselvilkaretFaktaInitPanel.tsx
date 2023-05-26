@@ -8,16 +8,16 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Soknad } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
-import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
+import { BehandlingApiKeys } from '../../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.TERMINBEKREFTELSE, AksjonspunktCode.SJEKK_MANGLENDE_FODSEL];
 
 const ENDEPUNKTER_PANEL_DATA = [
-  BehandlingFellesApiKeys.FAMILIEHENDELSE,
-  BehandlingFellesApiKeys.FAMILIEHENDELSE_ORIGINAL_BEHANDLING,
-  BehandlingFellesApiKeys.SOKNAD,
-  BehandlingFellesApiKeys.SOKNAD_ORIGINAL_BEHANDLING,
+  BehandlingApiKeys.FAMILIEHENDELSE,
+  BehandlingApiKeys.FAMILIEHENDELSE_ORIGINAL_BEHANDLING,
+  BehandlingApiKeys.SOKNAD,
+  BehandlingApiKeys.SOKNAD_ORIGINAL_BEHANDLING,
 ];
 type EndepunktPanelData = {
   familiehendelse: FamilieHendelseSamling;

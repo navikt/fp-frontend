@@ -10,15 +10,13 @@ import { createIntl } from '@navikt/ft-utils';
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { AksjonspunktCode, dokumentMalType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { RequestApi } from '@navikt/fp-rest-api';
 import { Behandling, Fagsak } from '@navikt/fp-types';
 
-import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import * as Felles from '../../felles/prosess/useStandardProsessPanelProps';
-import { requestInnsynApi, InnsynBehandlingApiKeys } from '../data/innsynBehandlingApi';
 import InnsynVedtakProsessStegInitPanel from './InnsynVedtakProsessStegInitPanel';
 
 import messages from '../../../../i18n/nb_NO.json';
+import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
 
 const intl = createIntl(messages);
 
@@ -72,12 +70,12 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
 
   it('skal rendre komponent korrekt', async () => {
     const data = [
-      { key: InnsynBehandlingApiKeys.INNSYN.name, data: innsyn },
-      { key: InnsynBehandlingApiKeys.INNSYN_DOKUMENTER.name, data: [] },
+      { key: BehandlingApiKeys.INNSYN.name, data: innsyn },
+      { key: BehandlingApiKeys.INNSYN_DOKUMENTER.name, data: [] },
     ];
     render(
       <RawIntlProvider value={intl}>
-        <RestApiMock data={data} requestApi={requestInnsynApi}>
+        <RestApiMock data={data} requestApi={requestBehandlingApi}>
           <InnsynVedtakProsessStegInitPanel
             valgtProsessSteg="default"
             registrerProsessPanel={() => {}}
@@ -88,7 +86,6 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
               ...behandling,
               aksjonspunkt: aksjonspunkter,
             }}
-            requestApi={{} as RequestApi}
           />
         </RestApiMock>
       </RawIntlProvider>,
@@ -99,9 +96,9 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
 
   it('skal vise forhåndsvisning av melding', async () => {
     const data = [
-      { key: InnsynBehandlingApiKeys.INNSYN.name, data: innsyn },
-      { key: InnsynBehandlingApiKeys.INNSYN_DOKUMENTER.name, data: [] },
-      { key: BehandlingFellesApiKeys.PREVIEW_MESSAGE.name, data: undefined },
+      { key: BehandlingApiKeys.INNSYN.name, data: innsyn },
+      { key: BehandlingApiKeys.INNSYN_DOKUMENTER.name, data: [] },
+      { key: BehandlingApiKeys.PREVIEW_MESSAGE.name, data: undefined },
     ];
 
     let axiosMock = {} as MockAdapter;
@@ -111,7 +108,7 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
 
     const utils = render(
       <RawIntlProvider value={intl}>
-        <RestApiMock data={data} requestApi={requestInnsynApi} setApiMock={setApiMock}>
+        <RestApiMock data={data} requestApi={requestBehandlingApi} setApiMock={setApiMock}>
           <InnsynVedtakProsessStegInitPanel
             valgtProsessSteg="default"
             registrerProsessPanel={() => {}}
@@ -122,7 +119,6 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
               ...behandling,
               aksjonspunkt: aksjonspunkter,
             }}
-            requestApi={{} as RequestApi}
           />
         </RestApiMock>
       </RawIntlProvider>,

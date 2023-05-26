@@ -8,7 +8,6 @@ import { AsyncPollingStatus } from '@navikt/fp-rest-api';
 import { RegistrerPapirsoknadPanel, SoknadRegistrertModal } from '@navikt/fp-papirsoknad';
 
 import BehandlingPaVent from '../felles/modaler/paVent/BehandlingPaVent';
-import { requestPapirsoknadApi } from './data/papirsoknadApi';
 
 const getAktivtPapirsoknadApKode = (aksjonspunkter: Aksjonspunkt[]): string =>
   aksjonspunkter
@@ -57,7 +56,7 @@ interface OwnProps {
   behandling: Behandling;
   kodeverk: AlleKodeverk;
   rettigheter: AksessRettigheter;
-  hentBehandling: (keepData: boolean) => Promise<Behandling | undefined>;
+  setBehandling: (behandling: Behandling) => void;
   lagreAksjonspunkt: (params?: any, keepData?: boolean) => Promise<Behandling | undefined>;
 }
 
@@ -73,7 +72,7 @@ const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
   behandling,
   kodeverk,
   rettigheter,
-  hentBehandling,
+  setBehandling,
   lagreAksjonspunkt,
 }) => {
   const [erAksjonspunktLagret, setAksjonspunktLagret] = useState(false);
@@ -99,12 +98,7 @@ const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <BehandlingPaVent
-        behandling={behandling}
-        hentBehandling={hentBehandling}
-        kodeverk={kodeverk}
-        requestApi={requestPapirsoknadApi}
-      />
+      <BehandlingPaVent behandling={behandling} kodeverk={kodeverk} setBehandling={setBehandling} />
       <SoknadRegistrertModal isOpen={erAksjonspunktLagret} />
       <RegistrerPapirsoknadPanel
         fagsak={fagsak}

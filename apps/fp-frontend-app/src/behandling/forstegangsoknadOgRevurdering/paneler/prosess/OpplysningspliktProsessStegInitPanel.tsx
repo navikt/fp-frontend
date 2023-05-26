@@ -9,7 +9,7 @@ import { ArbeidsgiverOpplysningerPerId, Soknad } from '@navikt/fp-types';
 import skalViseProsessPanel from '../../../felles/prosess/skalViseProsessPanel';
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
-import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
+import { BehandlingApiKeys } from '../../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktCode.SOKERS_OPPLYSNINGSPLIKT_OVST,
@@ -18,7 +18,7 @@ const AKSJONSPUNKT_KODER = [
 
 const VILKAR_KODER = [VilkarType.SOKERSOPPLYSNINGSPLIKT];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.SOKNAD];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.SOKNAD];
 type EndepunktPanelData = {
   soknad: Soknad;
 };

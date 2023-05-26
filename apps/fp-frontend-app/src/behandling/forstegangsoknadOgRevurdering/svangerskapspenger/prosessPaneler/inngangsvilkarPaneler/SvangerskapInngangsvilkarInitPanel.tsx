@@ -8,14 +8,13 @@ import { FodselOgTilrettelegging } from '@navikt/fp-types';
 
 import InngangsvilkarPanelInitProps from '../../../../felles/typer/inngangsvilkarPanelInitProps';
 import InngangsvilkarDefaultInitPanel from '../../../../felles/prosess/InngangsvilkarDefaultInitPanel';
-
-import { SvpBehandlingApiKeys } from '../../data/svpBehandlingApi';
+import { BehandlingApiKeys } from '../../../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.SVANGERSKAPSVILKARET];
 
 const VILKAR_KODER = [VilkarType.SVANGERSKAPVILKARET];
 
-const ENDEPUNKTER_PANEL_DATA = [SvpBehandlingApiKeys.SVANGERSKAPSPENGER_TILRETTELEGGING];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.SVANGERSKAPSPENGER_TILRETTELEGGING];
 
 type EndepunktPanelData = {
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;

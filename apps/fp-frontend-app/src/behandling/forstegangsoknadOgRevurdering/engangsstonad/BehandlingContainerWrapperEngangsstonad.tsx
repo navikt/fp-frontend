@@ -3,7 +3,6 @@ import React, { FunctionComponent, useCallback } from 'react';
 import { AksessRettigheter, ArbeidsgiverOpplysningerPerId, Behandling, Fagsak, Personoversikt } from '@navikt/fp-types';
 
 import BehandlingContainer from '../../felles/BehandlingContainer';
-import { requestEsApi } from './data/esBehandlingApi';
 import SakenFaktaInitPanel from '../paneler/fakta/SakenFaktaInitPanel';
 import YtelserFaktaInitPanel from '../paneler/fakta/YtelserFaktaInitPanel';
 import VergeFaktaInitPanel from '../paneler/fakta/VergeFaktaInitPanel';
@@ -104,7 +103,6 @@ const BehandlingContainerWrapperEngangsstonad: FunctionComponent<OwnProps> = ({
       valgtProsessSteg={valgtProsessSteg}
       valgtFaktaSteg={valgtFaktaSteg}
       oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-      requestApi={requestEsApi}
       hentFaktaPaneler={faktaPaneler}
       hentProsessPaneler={prosessPaneler}
     />

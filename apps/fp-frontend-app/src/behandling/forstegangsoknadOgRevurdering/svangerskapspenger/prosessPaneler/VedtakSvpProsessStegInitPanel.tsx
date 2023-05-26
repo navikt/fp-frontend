@@ -25,13 +25,12 @@ import {
 } from '@navikt/fp-types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import { restApiSvpHooks } from '../data/svpBehandlingApi';
-import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 import IverksetterVedtakStatusModal from '../../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
 import FatterVedtakStatusModal from '../../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import useStandardProsessPanelProps from '../../../felles/prosess/useStandardProsessPanelProps';
+import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../../data/behandlingContextApi';
 
 const hasOnlyClosedAps = (aksjonspunkter: Aksjonspunkt[], vedtakAksjonspunkter: Aksjonspunkt[]): boolean =>
   aksjonspunkter
@@ -129,12 +128,12 @@ const getLagringSideeffekter =
 const AKSJONSPUNKT_KODER = [...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER, ...FATTER_VEDTAK_AKSJONSPUNKT_KODER];
 
 const ENDEPUNKTER_PANEL_DATA = [
-  BehandlingFellesApiKeys.TILBAKEKREVINGVALG,
-  BehandlingFellesApiKeys.BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING,
-  BehandlingFellesApiKeys.MEDLEMSKAP,
-  BehandlingFellesApiKeys.SIMULERING_RESULTAT,
-  BehandlingFellesApiKeys.BEREGNINGRESULTAT_FORELDREPENGER,
-  BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG,
+  BehandlingApiKeys.TILBAKEKREVINGVALG,
+  BehandlingApiKeys.BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING,
+  BehandlingApiKeys.MEDLEMSKAP,
+  BehandlingApiKeys.SIMULERING_RESULTAT,
+  BehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER,
+  BehandlingApiKeys.BEREGNINGSGRUNNLAG,
 ];
 type EndepunktPanelData = {
   tilbakekrevingvalg?: TilbakekrevingValg;
@@ -170,8 +169,8 @@ const VedtakSvpProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelIn
 
   const standardPanelProps = useStandardProsessPanelProps();
 
-  const { startRequest: forhandsvisMelding } = restApiSvpHooks.useRestApiRunner(
-    BehandlingFellesApiKeys.PREVIEW_MESSAGE,
+  const { startRequest: forhandsvisMelding } = restBehandlingApiHooks.useRestApiRunner(
+    BehandlingApiKeys.PREVIEW_MESSAGE,
   );
   const previewCallback = useCallback(
     getForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),

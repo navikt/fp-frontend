@@ -8,11 +8,11 @@ import { AnkeTrygderettsbehandlingProsessIndex } from '@navikt/fp-prosess-anke-t
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import { requestAnkeApi, AnkeBehandlingApiKeys } from '../data/ankeBehandlingApi';
+import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.AUTO_VENT_ANKE_OVERSENDT_TIL_TRYGDERETTEN];
 
-const ENDEPUNKTER_PANEL_DATA = [AnkeBehandlingApiKeys.ANKE_VURDERING];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.ANKE_VURDERING];
 type EndepunktPanelData = {
   ankeVurdering: AnkeVurdering;
 };
@@ -22,7 +22,6 @@ const AnkeTrygderettsbehandlingProsessStegInitPanel: FunctionComponent<ProsessPa
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>
       {...props}
-      requestApi={requestAnkeApi}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       prosessPanelKode={ProsessStegCode.ANKE_MERKNADER}

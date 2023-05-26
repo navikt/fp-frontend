@@ -12,10 +12,10 @@ import { ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } from '@navikt/fp-ty
 import { VilkarType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
-import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
 import '@navikt/ft-fakta-fordel-beregningsgrunnlag/dist/style.css';
+import { BehandlingApiKeys } from '../../../../data/behandlingContextApi';
 
 const mapBGKodeTilFpsakKode = (bgKode: string): string => {
   switch (bgKode) {
@@ -81,7 +81,7 @@ const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): Beregningsgrunn
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.FORDEL_BEREGNINGSGRUNNLAG, AksjonspunktCode.VURDER_REFUSJON_BERGRUNN];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.BEREGNINGSGRUNNLAG];
 type EndepunktPanelData = {
   beregningsgrunnlag: Beregningsgrunnlag;
 };

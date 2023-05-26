@@ -1,7 +1,6 @@
 import React, { Suspense, FunctionComponent, useEffect, useCallback, useMemo } from 'react';
 import { useNavigate, useLocation, NavigateFunction } from 'react-router-dom';
 import { Location } from 'history';
-import { BehandlingType, FagsakYtelseType, BehandlingStatus } from '@navikt/ft-kodeverk';
 import { replaceNorwegianCharacters, parseQueryString } from '@navikt/ft-utils';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
@@ -12,28 +11,13 @@ import useTrackRouteParam from '../app/useTrackRouteParam';
 import getAccessRights from '../app/util/access';
 import { getProsessStegLocation, getFaktaLocation, getLocationWithDefaultProsessStegAndFakta } from '../app/paths';
 import { FagsakApiKeys, requestFagsakApi, restFagsakApiHooks, LinkCategory } from '../data/fagsakContextApi';
+import { requestBehandlingApi } from '../data/behandlingContextApi';
 import ErrorBoundary from '../app/ErrorBoundary';
 import FagsakData from '../fagsak/FagsakData';
+import ValgtBehandlingIndex from './ValgtBehandlingIndex';
 import lazyWithRetry from './lazyUtils';
 
-const BehandlingEngangsstonadIndex = lazyWithRetry(
-  () => import('./forstegangsoknadOgRevurdering/engangsstonad/BehandlingEngangsstonadIndex'),
-);
-const BehandlingForeldrepengerIndex = lazyWithRetry(
-  () => import('./forstegangsoknadOgRevurdering/foreldrepenger/BehandlingForeldrepengerIndex'),
-);
-const BehandlingSvangerskapspengerIndex = lazyWithRetry(
-  () => import('./forstegangsoknadOgRevurdering/svangerskapspenger/BehandlingSvangerskapspengerIndex'),
-);
-const BehandlingInnsynIndex = lazyWithRetry(() => import('./innsyn/BehandlingInnsynIndex'));
-const BehandlingKlageIndex = lazyWithRetry(() => import('./klage/BehandlingKlageIndex'));
-const BehandlingTilbakekrevingIndex = lazyWithRetry(() => import('./tilbakekreving/BehandlingTilbakekrevingIndex'));
 const BehandlingPapirsoknadIndex = lazyWithRetry(() => import('./papirsoknad/BehandlingPapirsoknadIndex'));
-const BehandlingAnkeIndex = lazyWithRetry(() => import('./anke/BehandlingAnkeIndex'));
-
-const erTilbakekreving = (behandlingTypeKode?: string): boolean =>
-  behandlingTypeKode === BehandlingType.TILBAKEKREVING ||
-  behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING;
 
 const formatName = (bpName = ''): string => replaceNorwegianCharacters(bpName.toLowerCase());
 
@@ -66,6 +50,7 @@ interface OwnProps {
   fagsakData: FagsakData;
   hentOgSettBehandling: () => void;
   setRequestPendingMessage: (message?: string) => void;
+  setBehandlingUuid: (uuid: string) => void;
 }
 
 /**
@@ -80,11 +65,23 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   fagsakData,
   hentOgSettBehandling,
   setRequestPendingMessage,
+  setBehandlingUuid,
 }) => {
+  const { addErrorMessage } = useRestApiErrorDispatcher();
+
+  useEffect(() => {
+    requestBehandlingApi.setRequestPendingHandler(setRequestPendingMessage);
+    requestBehandlingApi.setAddErrorMessageHandler(addErrorMessage);
+  });
+
   const { selected: behandlingUuid } = useTrackRouteParam<string>({
     paramName: 'behandlingUuid',
     parse: behandlingUuidFromUrl => behandlingUuidFromUrl,
   });
+
+  useEffect(() => {
+    setBehandlingUuid(behandlingUuid);
+  }, [behandlingUuid]);
 
   const fagsak = fagsakData.getFagsak();
   const alleBehandlinger = fagsakData.getAlleBehandlinger();
@@ -94,8 +91,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       requestFagsakApi.setLinks(behandling.links, LinkCategory.BEHANDLING);
     }
   }, [behandling]);
-
-  const { addErrorMessage } = useRestApiErrorDispatcher();
 
   const kodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
 
@@ -117,82 +112,11 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
 
   const query = parseQueryString(location.search);
 
-  const defaultProps = {
-    key: behandlingUuid,
-    behandlingUuid,
-    kodeverk,
-    fagsak,
-    rettigheter,
-    opneSokeside,
-    setRequestPendingMessage,
-    oppdaterProsessStegOgFaktaPanelIUrl,
-    valgtProsessSteg: query.punkt,
-    valgtFaktaSteg: query.fakta,
-    setBehandling,
-    hentOgSettBehandling,
-  };
-  const behandlingTypeKode = behandling?.type;
-
-  const fagsakBehandlingerInfo = useMemo(
-    () =>
-      alleBehandlinger
-        .filter(b => !b.behandlingHenlagt)
-        .map(b => ({
-          uuid: b.uuid,
-          type: b.type,
-          status: b.status,
-          opprettet: b.opprettet,
-          avsluttet: b.avsluttet,
-          resultatType: b.behandlingsresultat?.type,
-        })),
-    [alleBehandlinger],
-  );
-
   if (!behandlingUuid) {
     return <LoadingPanel />;
   }
 
-  if (behandling?.erAktivPapirsoknad) {
-    return (
-      <Suspense fallback={<LoadingPanel />}>
-        <ErrorBoundary errorMessageCallback={addErrorMessage}>
-          <BehandlingPapirsoknadIndex {...defaultProps} />
-        </ErrorBoundary>
-      </Suspense>
-    );
-  }
-
-  if (behandlingTypeKode === BehandlingType.DOKUMENTINNSYN) {
-    return (
-      <Suspense fallback={<LoadingPanel />}>
-        <ErrorBoundary errorMessageCallback={addErrorMessage}>
-          <BehandlingInnsynIndex {...defaultProps} />
-        </ErrorBoundary>
-      </Suspense>
-    );
-  }
-
-  if (behandlingTypeKode === BehandlingType.KLAGE) {
-    return (
-      <Suspense fallback={<LoadingPanel />}>
-        <ErrorBoundary errorMessageCallback={addErrorMessage}>
-          <BehandlingKlageIndex alleBehandlinger={fagsakBehandlingerInfo} {...defaultProps} />
-        </ErrorBoundary>
-      </Suspense>
-    );
-  }
-
-  if (behandlingTypeKode === BehandlingType.ANKE) {
-    return (
-      <Suspense fallback={<LoadingPanel />}>
-        <ErrorBoundary errorMessageCallback={addErrorMessage}>
-          <BehandlingAnkeIndex alleBehandlinger={fagsakBehandlingerInfo} {...defaultProps} />
-        </ErrorBoundary>
-      </Suspense>
-    );
-  }
-
-  if (erTilbakekreving(behandlingTypeKode)) {
+  /* if (erTilbakekreving(behandlingTypeKode)) {
     return (
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
@@ -205,39 +129,43 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
         </ErrorBoundary>
       </Suspense>
     );
-  }
+  } */
 
-  if (!!behandling && fagsak.fagsakYtelseType === FagsakYtelseType.ENGANGSSTONAD) {
-    return (
+  if (behandling) {
+    if (behandling?.erAktivPapirsoknad) {
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
-          <BehandlingEngangsstonadIndex {...defaultProps} />
+          <BehandlingPapirsoknadIndex
+            key={behandlingUuid}
+            behandling={behandling}
+            setBehandling={setBehandling}
+            kodeverk={kodeverk}
+            fagsak={fagsak}
+            rettigheter={rettigheter}
+          />
         </ErrorBoundary>
-      </Suspense>
+      </Suspense>;
+    }
+    return (
+      <ErrorBoundary errorMessageCallback={addErrorMessage}>
+        <ValgtBehandlingIndex
+          key={behandlingUuid}
+          behandling={behandling}
+          kodeverk={kodeverk}
+          fagsak={fagsak}
+          rettigheter={rettigheter}
+          opneSokeside={opneSokeside}
+          oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+          valgtProsessSteg={query.punkt}
+          valgtFaktaSteg={query.fakta}
+          setBehandling={setBehandling}
+          hentOgSettBehandling={hentOgSettBehandling}
+          alleBehandlinger={alleBehandlinger}
+        />
+      </ErrorBoundary>
     );
   }
 
-  if (!!behandling && fagsak.fagsakYtelseType === FagsakYtelseType.FORELDREPENGER) {
-    return (
-      <Suspense fallback={<LoadingPanel />}>
-        <ErrorBoundary errorMessageCallback={addErrorMessage}>
-          <BehandlingForeldrepengerIndex {...defaultProps} />
-        </ErrorBoundary>
-      </Suspense>
-    );
-  }
-
-  if (!!behandling && fagsak.fagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER) {
-    return (
-      <Suspense fallback={<LoadingPanel />}>
-        <ErrorBoundary errorMessageCallback={addErrorMessage}>
-          <BehandlingSvangerskapspengerIndex {...defaultProps} />
-        </ErrorBoundary>
-      </Suspense>
-    );
-  }
-
-  // Not supported
   return null;
 };
 

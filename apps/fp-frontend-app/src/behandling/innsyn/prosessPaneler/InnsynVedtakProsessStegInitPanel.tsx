@@ -13,8 +13,7 @@ import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPane
 import IverksetterVedtakStatusModal from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
-import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
-import { restApiInnsynHooks, requestInnsynApi, InnsynBehandlingApiKeys } from '../data/innsynBehandlingApi';
+import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 const getVedtakStatus = (behandling: Behandling): string => {
   const { aksjonspunkt, behandlingsresultat } = behandling;
@@ -60,8 +59,8 @@ const getLagringSideeffekter =
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.FORESLA_VEDTAK];
 
 const getEndepunkterPanelData = (saksnummer: string) => [
-  { key: InnsynBehandlingApiKeys.INNSYN },
-  { key: InnsynBehandlingApiKeys.INNSYN_DOKUMENTER, params: { saksnummer } },
+  { key: BehandlingApiKeys.INNSYN },
+  { key: BehandlingApiKeys.INNSYN_DOKUMENTER, params: { saksnummer } },
 ];
 
 type EndepunktPanelData = {
@@ -90,8 +89,8 @@ const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
 
   const standardPanelProps = useStandardProsessPanelProps();
 
-  const { startRequest: forhandsvisMelding } = restApiInnsynHooks.useRestApiRunner(
-    BehandlingFellesApiKeys.PREVIEW_MESSAGE,
+  const { startRequest: forhandsvisMelding } = restBehandlingApiHooks.useRestApiRunner(
+    BehandlingApiKeys.PREVIEW_MESSAGE,
   );
   const previewCallback = useCallback(
     hentForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
@@ -101,7 +100,6 @@ const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>
       {...props}
-      requestApi={requestInnsynApi}
       panelEndepunkter={getEndepunkterPanelData(fagsak.saksnummer)}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.VEDTAK}

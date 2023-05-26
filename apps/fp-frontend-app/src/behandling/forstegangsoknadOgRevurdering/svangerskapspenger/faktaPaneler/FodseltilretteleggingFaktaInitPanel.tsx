@@ -12,17 +12,16 @@ import {
 } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
-import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
-import { SvpBehandlingApiKeys } from '../data/svpBehandlingApi';
+import { BehandlingApiKeys } from '../../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.FODSELTILRETTELEGGING];
 
 const OVERSTYRING_AP_CODES = [AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO];
 
 const ENDEPUNKTER_PANEL_DATA = [
-  BehandlingFellesApiKeys.ARBEID_OG_INNTEKT,
-  SvpBehandlingApiKeys.SVANGERSKAPSPENGER_TILRETTELEGGING,
+  BehandlingApiKeys.ARBEID_OG_INNTEKT,
+  BehandlingApiKeys.SVANGERSKAPSPENGER_TILRETTELEGGING,
 ];
 type EndepunktPanelData = {
   arbeidOgInntekt: ArbeidOgInntektsmelding;

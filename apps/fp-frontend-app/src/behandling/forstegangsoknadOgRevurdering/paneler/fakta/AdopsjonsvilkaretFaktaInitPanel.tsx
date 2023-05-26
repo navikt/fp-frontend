@@ -9,8 +9,8 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { Soknad } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
-import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
+import { BehandlingApiKeys } from '../../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktCode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
@@ -18,7 +18,7 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktCode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
 ];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.FAMILIEHENDELSE, BehandlingFellesApiKeys.SOKNAD];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.FAMILIEHENDELSE, BehandlingApiKeys.SOKNAD];
 type EndepunktPanelData = {
   familiehendelse: FamilieHendelseSamling;
   soknad: Soknad;

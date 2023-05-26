@@ -1,7 +1,6 @@
-import React, { FunctionComponent, useCallback, useMemo } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import { useIntl } from 'react-intl';
 
-import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { VarselOmRevurderingProsessIndex } from '@navikt/fp-prosess-varsel-om-revurdering';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
@@ -19,7 +18,7 @@ import skalViseProsessPanel from '../../../felles/prosess/skalViseProsessPanel';
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 import useStandardProsessPanelProps from '../../../felles/prosess/useStandardProsessPanelProps';
-import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
+import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../../data/behandlingContextApi';
 
 const getForhandsvisCallback =
   (
@@ -53,10 +52,10 @@ const AKSJONSPUNKT_KODER = [
 ];
 
 const ENDEPUNKTER_PANEL_DATA = [
-  BehandlingFellesApiKeys.FAMILIEHENDELSE,
-  BehandlingFellesApiKeys.FAMILIEHENDELSE_ORIGINAL_BEHANDLING,
-  BehandlingFellesApiKeys.SOKNAD,
-  BehandlingFellesApiKeys.SOKNAD_ORIGINAL_BEHANDLING,
+  BehandlingApiKeys.FAMILIEHENDELSE,
+  BehandlingApiKeys.FAMILIEHENDELSE_ORIGINAL_BEHANDLING,
+  BehandlingApiKeys.SOKNAD,
+  BehandlingApiKeys.SOKNAD_ORIGINAL_BEHANDLING,
 ];
 type EndepunktPanelData = {
   familiehendelse: FamilieHendelseSamling;
@@ -79,9 +78,9 @@ const VarselProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
 }) => {
   const lagringSideEffekter = getLagringSideeffekter(toggleSkalOppdatereFagsakContext, opneSokeside);
 
-  const { requestApi } = props;
-  const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
-  const { startRequest: forhandsvisMelding } = useRestApiRunner(BehandlingFellesApiKeys.PREVIEW_MESSAGE);
+  const { startRequest: forhandsvisMelding } = restBehandlingApiHooks.useRestApiRunner(
+    BehandlingApiKeys.PREVIEW_MESSAGE,
+  );
 
   const standardPanelProps = useStandardProsessPanelProps();
 

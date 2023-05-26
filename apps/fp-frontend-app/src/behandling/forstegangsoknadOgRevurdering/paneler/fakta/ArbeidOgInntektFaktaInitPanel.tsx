@@ -1,8 +1,7 @@
-import React, { FunctionComponent, useCallback, useMemo } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import { useIntl } from 'react-intl';
 import { ArbeidsgiverOpplysningerPerId } from '@navikt/ft-types';
 
-import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { ArbeidOgInntektFaktaIndex } from '@navikt/fp-fakta-arbeid-og-inntekt';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
@@ -10,7 +9,7 @@ import { ArbeidOgInntektsmelding, AksessRettigheter } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
-import { BehandlingApiKeys } from '../../../../data/behandlingContextApi';
+import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING];
 
@@ -37,15 +36,16 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
 }) => {
   const intl = useIntl();
 
-  const { requestApi } = props;
-  const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
-
-  const { startRequest: registrerArbeidsforhold } = useRestApiRunner(
+  const { startRequest: registrerArbeidsforhold } = restBehandlingApiHooks.useRestApiRunner(
     BehandlingApiKeys.ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD,
   );
-  const { startRequest: lagreVurdering } = useRestApiRunner(BehandlingApiKeys.ARBEID_OG_INNTEKT_LAGRE_VURDERING);
-  const { startRequest: settBehandlingPåVent } = useRestApiRunner(BehandlingApiKeys.BEHANDLING_ON_HOLD);
-  const { startRequest: åpneForNyVurdering } = useRestApiRunner(
+  const { startRequest: lagreVurdering } = restBehandlingApiHooks.useRestApiRunner(
+    BehandlingApiKeys.ARBEID_OG_INNTEKT_LAGRE_VURDERING,
+  );
+  const { startRequest: settBehandlingPåVent } = restBehandlingApiHooks.useRestApiRunner(
+    BehandlingApiKeys.BEHANDLING_ON_HOLD,
+  );
+  const { startRequest: åpneForNyVurdering } = restBehandlingApiHooks.useRestApiRunner(
     BehandlingApiKeys.ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING,
   );
   const åpneForNyVurderingOgOppfriskBehandling = useCallback(() => {
@@ -74,7 +74,7 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
       faktaPanelKode={FaktaPanelCode.ARBEID_OG_INNTEKT}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'ArbeidOgInntektInfoPanel.Title' })}
       skalPanelVisesIMeny={() =>
-        requestApi.hasPath(BehandlingApiKeys.ARBEID_OG_INNTEKT.name) &&
+        requestBehandlingApi.hasPath(BehandlingApiKeys.ARBEID_OG_INNTEKT.name) &&
         !props.behandling.aksjonspunkt.some(ap => AksjonspunktCode.AVKLAR_ARBEIDSFORHOLD === ap.definisjon)
       }
       renderPanel={data => (

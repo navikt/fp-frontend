@@ -9,11 +9,11 @@ import { KlageVurdering } from '@navikt/fp-types';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import { KlageBehandlingApiKeys, requestKlageApi } from '../data/klageBehandlingApi';
+import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_NFP];
 
-const ENDEPUNKTER_PANEL_DATA = [KlageBehandlingApiKeys.KLAGE_VURDERING];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.KLAGE_VURDERING];
 type EndepunktPanelData = {
   klageVurdering?: KlageVurdering;
 };
@@ -48,7 +48,6 @@ const FormKravFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & Pro
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>
       {...props}
-      requestApi={requestKlageApi}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.FORMKRAV_KLAGE_NAV_FAMILIE_OG_PENSJON}

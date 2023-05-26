@@ -13,14 +13,16 @@ interface OwnProps {
   hentOgSettBehandling: () => void;
   behandling?: Behandling;
   setRequestPendingMessage: (message?: string) => void;
+  setBehandlingUuid: (uuid: string) => void;
 }
 
-export const BehandlingerIndex: FunctionComponent<OwnProps> = ({
+const BehandlingerIndex: FunctionComponent<OwnProps> = ({
   fagsakData,
   setBehandling,
   behandling,
   hentOgSettBehandling,
   setRequestPendingMessage,
+  setBehandlingUuid,
 }) => (
   <Routes>
     <Route
@@ -32,6 +34,7 @@ export const BehandlingerIndex: FunctionComponent<OwnProps> = ({
           setBehandling={setBehandling}
           hentOgSettBehandling={hentOgSettBehandling}
           setRequestPendingMessage={setRequestPendingMessage}
+          setBehandlingUuid={setBehandlingUuid}
         />
       }
     />

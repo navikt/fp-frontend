@@ -14,9 +14,9 @@ import {
 
 import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
-import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 
 import '@navikt/ft-prosess-beregningsgrunnlag/dist/style.css';
+import { BehandlingApiKeys } from '../../../../data/behandlingContextApi';
 
 const mapBGKodeTilFpsakKode = (bgKode: string): string => {
   switch (bgKode) {
@@ -89,7 +89,7 @@ const AKSJONSPUNKT_KODER = [
 
 const VILKAR_KODER = [VilkarType.BEREGNINGSGRUNNLAGVILKARET];
 
-const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.BEREGNINGSGRUNNLAG];
 type EndepunktPanelData = {
   beregningsgrunnlag?: Beregningsgrunnlag;
 };
