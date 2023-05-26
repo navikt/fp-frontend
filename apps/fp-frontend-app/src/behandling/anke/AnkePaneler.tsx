@@ -18,7 +18,7 @@ interface OwnProps {
   alleBehandlinger: BehandlingAppKontekst[];
 }
 
-const BehandlingContainerWrapperAnke: FunctionComponent<OwnProps> = ({
+const AnkePaneler: FunctionComponent<OwnProps> = ({
   behandling,
   valgtProsessSteg,
   valgtFaktaSteg,
@@ -65,4 +65,4 @@ const BehandlingContainerWrapperAnke: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default BehandlingContainerWrapperAnke;
+export default AnkePaneler;

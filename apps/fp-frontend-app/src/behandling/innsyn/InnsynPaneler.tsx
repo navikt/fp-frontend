@@ -16,7 +16,7 @@ interface OwnProps {
   toggleOppdateringAvFagsakOgBehandling: (skalHenteFagsak: boolean) => void;
 }
 
-const BehandlingContainerWrapperInnsyn: FunctionComponent<OwnProps> = ({
+const InnsynPaneler: FunctionComponent<OwnProps> = ({
   behandling,
   fagsak,
   valgtProsessSteg,
@@ -49,4 +49,4 @@ const BehandlingContainerWrapperInnsyn: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default BehandlingContainerWrapperInnsyn;
+export default InnsynPaneler;

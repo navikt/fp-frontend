@@ -48,7 +48,7 @@ interface OwnProps {
   hentOgSettBehandling: () => void;
 }
 
-const BehandlingContainerWrapperForeldrepenger: FunctionComponent<OwnProps> = ({
+const ForeldrepengerPaneler: FunctionComponent<OwnProps> = ({
   behandling,
   fagsak,
   valgtProsessSteg,
@@ -167,4 +167,4 @@ const BehandlingContainerWrapperForeldrepenger: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default BehandlingContainerWrapperForeldrepenger;
+export default ForeldrepengerPaneler;

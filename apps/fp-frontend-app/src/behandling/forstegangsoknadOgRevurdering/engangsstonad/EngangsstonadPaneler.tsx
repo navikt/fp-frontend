@@ -33,7 +33,7 @@ interface OwnProps {
   rettigheter: AksessRettigheter;
 }
 
-const BehandlingContainerWrapperEngangsstonad: FunctionComponent<OwnProps> = ({
+const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
   behandling,
   fagsak,
   valgtProsessSteg,
@@ -109,4 +109,4 @@ const BehandlingContainerWrapperEngangsstonad: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default BehandlingContainerWrapperEngangsstonad;
+export default EngangsstonadPaneler;

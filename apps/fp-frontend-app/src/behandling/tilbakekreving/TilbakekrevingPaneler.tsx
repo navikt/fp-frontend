@@ -2,15 +2,17 @@ import React, { FunctionComponent, useCallback, useMemo } from 'react';
 
 import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 
-import FormKravFamOgPensjonProsessStegInitPanel from './prosessPaneler/FormKravFamOgPensjonProsessStegInitPanel';
-import VurderingFamOgPensjonProsessStegInitPanel from './prosessPaneler/VurderingFamOgPensjonProsessStegInitPanel';
-import FormKravKlageInstansProsessStegInitPanel from './prosessPaneler/FormKravKlageInstansProsessStegInitPanel';
-import VurderingKlageInstansProsessStegInitPanel from './prosessPaneler/VurderingKlageInstansProsessStegInitPanel';
-import KlageresultatProsessStegInitPanel from './prosessPaneler/KlageresultatProsessStegInitPanel';
+import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import VergeFaktaInitPanel from '../felles/fakta/paneler/VergeFaktaInitPanel';
 import FaktaPanelInitProps from '../felles/typer/faktaPanelInitProps';
 import ProsessPanelInitProps from '../felles/typer/prosessPanelInitProps';
 import BehandlingContainer from '../felles/BehandlingContainer';
+import ForeldelseProsessInitPanel from './prosessPaneler/ForeldelseProsessInitPanel';
+import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
+import TilbakekrevingProsessInitPanel from './prosessPaneler/TilbakekrevingProsessInitPanel';
+import VedtakTilbakekrevingProsessInitPanel from './prosessPaneler/VedtakTilbakekrevingProsessInitPanel';
+import FeilutbetalingFaktaInitPanel from './faktaPaneler/FeilutbetalingFaktaInitPanel';
 
 interface OwnProps {
   behandling: Behandling;
@@ -23,7 +25,7 @@ interface OwnProps {
   alleBehandlinger: BehandlingAppKontekst[];
 }
 
-const BehandlingContainerWrapperKlage: FunctionComponent<OwnProps> = ({
+const TilbakekrevingPaneler: FunctionComponent<OwnProps> = ({
   behandling,
   fagsak,
   valgtProsessSteg,
@@ -33,7 +35,7 @@ const BehandlingContainerWrapperKlage: FunctionComponent<OwnProps> = ({
   toggleOppdateringAvFagsakOgBehandling,
   alleBehandlinger,
 }) => {
-  const hentFaktaPaneler = useCallback((props: FaktaPanelInitProps) => <VergeFaktaInitPanel {...props} />, []);
+  const { data: tilbakekrevingKodeverk } = restBehandlingApiHooks.useRestApi(BehandlingApiKeys.TILBAKE_KODEVERK);
 
   const fagsakBehandlingerInfo = useMemo(
     () =>
@@ -50,35 +52,58 @@ const BehandlingContainerWrapperKlage: FunctionComponent<OwnProps> = ({
     [alleBehandlinger],
   );
 
+  const harApenRevurdering = fagsakBehandlingerInfo.some(
+    b => b.type === BehandlingType.REVURDERING && b.status !== BehandlingStatus.AVSLUTTET,
+  );
+
+  const hentFaktaPaneler = useCallback(
+    (props: FaktaPanelInitProps) => (
+      <>
+        <FeilutbetalingFaktaInitPanel
+          tilbakekrevingKodeverk={tilbakekrevingKodeverk}
+          fagsakYtelseTypeKode={fagsak.fagsakYtelseType}
+          {...props}
+        />
+        <VergeFaktaInitPanel {...props} />
+      </>
+    ),
+    [tilbakekrevingKodeverk, fagsak],
+  );
+
   const hentProsessPaneler = useCallback(
     (props: ProsessPanelInitProps) => (
       <>
-        <FormKravFamOgPensjonProsessStegInitPanel {...props} alleBehandlinger={fagsakBehandlingerInfo} />
-        <VurderingFamOgPensjonProsessStegInitPanel
+        <ForeldelseProsessInitPanel
           {...props}
-          fagsak={fagsak}
-          opneSokeside={opneSokeside}
-          toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
-          oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+          relasjonsRolleType={fagsak.relasjonsRolleType}
+          tilbakekrevingKodeverk={tilbakekrevingKodeverk}
         />
-        <FormKravKlageInstansProsessStegInitPanel {...props} alleBehandlinger={fagsakBehandlingerInfo} />
-        <VurderingKlageInstansProsessStegInitPanel {...props} fagsak={fagsak} />
-        <KlageresultatProsessStegInitPanel
+        <TilbakekrevingProsessInitPanel
           {...props}
-          fagsak={fagsak}
+          relasjonsRolleType={fagsak.relasjonsRolleType}
+          tilbakekrevingKodeverk={tilbakekrevingKodeverk}
+        />
+        <VedtakTilbakekrevingProsessInitPanel
+          {...props}
+          harApenRevurdering={harApenRevurdering}
           opneSokeside={opneSokeside}
-          toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
+          tilbakekrevingKodeverk={tilbakekrevingKodeverk}
         />
       </>
     ),
     [
-      fagsakBehandlingerInfo,
+      tilbakekrevingKodeverk,
+      harApenRevurdering,
       fagsak,
       opneSokeside,
       toggleOppdateringAvFagsakOgBehandling,
       oppdaterProsessStegOgFaktaPanelIUrl,
     ],
   );
+
+  if (!tilbakekrevingKodeverk) {
+    return <LoadingPanel />;
+  }
 
   return (
     <BehandlingContainer
@@ -92,4 +117,4 @@ const BehandlingContainerWrapperKlage: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default BehandlingContainerWrapperKlage;
+export default TilbakekrevingPaneler;

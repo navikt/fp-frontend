@@ -18,15 +18,15 @@ import { BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
 import { NavigateFunction, useLocation, useNavigate } from 'react-router';
 import BehandlingPaVent from './felles/modaler/paVent/BehandlingPaVent';
 import StandardPropsProvider from './felles/utils/standardPropsStateContext';
-import BehandlingContainerWrapperForeldrepenger from './forstegangsoknadOgRevurdering/foreldrepenger/BehandlingContainerWrapperForeldrepenger';
+import ForeldrepengerPaneler from './forstegangsoknadOgRevurdering/foreldrepenger/ForeldrepengerPaneler';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../data/behandlingContextApi';
-import BehandlingContainerWrapperEngangsstonad from './forstegangsoknadOgRevurdering/engangsstonad/BehandlingContainerWrapperEngangsstonad';
-import BehandlingContainerWrapperSvangerskapspenger from './forstegangsoknadOgRevurdering/svangerskapspenger/BehandlingContainerWrapperSvangerskapspenger';
-import BehandlingContainerWrapperKlage from './klage/BehandlingContainerWrapperKlage';
-import BehandlingContainerWrapperInnsyn from './innsyn/BehandlingContainerWrapperInnsyn';
-import BehandlingContainerWrapperAnke from './anke/BehandlingContainerWrapperAnke';
+import EngangsstonadPaneler from './forstegangsoknadOgRevurdering/engangsstonad/EngangsstonadPaneler';
+import SvangerskapspengerPaneler from './forstegangsoknadOgRevurdering/svangerskapspenger/SvangerskapspengerPaneler';
+import KlagePaneler from './klage/KlagePaneler';
+import InnsynPaneler from './innsyn/InnsynPaneler';
+import AnkePaneler from './anke/AnkePaneler';
 import { getFaktaLocation, getLocationWithDefaultProsessStegAndFakta, getProsessStegLocation } from '../app/paths';
-import BehandlingContainerWrapperTilbakekreving from './tilbakekreving/BehandlingContainerWrapperTilbakekreving';
+import TilbakekrevingPaneler from './tilbakekreving/TilbakekrevingPaneler';
 
 const endepunkterSomSkalHentesEnGang = [
   { key: BehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT },
@@ -151,7 +151,7 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
       >
         <>
           {fagsak.fagsakYtelseType === FagsakYtelseType.FORELDREPENGER && erFørstegangssøknadEllerRevurdering && (
-            <BehandlingContainerWrapperForeldrepenger
+            <ForeldrepengerPaneler
               behandling={behandling}
               fagsak={fagsak}
               valgtProsessSteg={query.punkt}
@@ -166,7 +166,7 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
             />
           )}
           {fagsak.fagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER && erFørstegangssøknadEllerRevurdering && (
-            <BehandlingContainerWrapperSvangerskapspenger
+            <SvangerskapspengerPaneler
               behandling={behandling}
               fagsak={fagsak}
               valgtProsessSteg={query.punkt}
@@ -181,7 +181,7 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
             />
           )}
           {fagsak.fagsakYtelseType === FagsakYtelseType.ENGANGSSTONAD && erFørstegangssøknadEllerRevurdering && (
-            <BehandlingContainerWrapperEngangsstonad
+            <EngangsstonadPaneler
               behandling={behandling}
               fagsak={fagsak}
               valgtProsessSteg={query.punkt}
@@ -195,7 +195,7 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
             />
           )}
           {behandling?.type === BehandlingType.DOKUMENTINNSYN && (
-            <BehandlingContainerWrapperInnsyn
+            <InnsynPaneler
               behandling={behandling}
               fagsak={fagsak}
               valgtProsessSteg={query.punkt}
@@ -205,7 +205,7 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
             />
           )}
           {behandling?.type === BehandlingType.ANKE && (
-            <BehandlingContainerWrapperAnke
+            <AnkePaneler
               behandling={behandling}
               valgtProsessSteg={query.punkt}
               valgtFaktaSteg={query.fakta}
@@ -214,7 +214,7 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
             />
           )}
           {behandling?.type === BehandlingType.KLAGE && (
-            <BehandlingContainerWrapperKlage
+            <KlagePaneler
               behandling={behandling}
               fagsak={fagsak}
               valgtProsessSteg={query.punkt}
@@ -226,7 +226,7 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
             />
           )}
           {erTilbakekreving(behandling?.type) && (
-            <BehandlingContainerWrapperTilbakekreving
+            <TilbakekrevingPaneler
               behandling={behandling}
               fagsak={fagsak}
               valgtProsessSteg={query.punkt}
