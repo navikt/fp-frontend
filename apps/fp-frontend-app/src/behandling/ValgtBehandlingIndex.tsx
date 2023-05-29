@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useEffect } from 'react';
+import React, { FunctionComponent, Suspense, useCallback, useEffect } from 'react';
 
 import {
   AksessRettigheter,
@@ -10,7 +10,7 @@ import {
   Personoversikt,
 } from '@navikt/fp-types';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { parseQueryString, replaceNorwegianCharacters } from '@navikt/ft-utils';
 import { Location } from 'history';
 
@@ -18,15 +18,18 @@ import { BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
 import { NavigateFunction, useLocation, useNavigate } from 'react-router';
 import BehandlingPaVent from './felles/modaler/paVent/BehandlingPaVent';
 import StandardPropsProvider from './felles/utils/standardPropsStateContext';
-import ForeldrepengerPaneler from './foreldrepenger/ForeldrepengerPaneler';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../data/behandlingContextApi';
-import EngangsstonadPaneler from './engangsstonad/EngangsstonadPaneler';
-import SvangerskapspengerPaneler from './svangerskapspenger/SvangerskapspengerPaneler';
-import KlagePaneler from './klage/KlagePaneler';
-import InnsynPaneler from './innsyn/InnsynPaneler';
-import AnkePaneler from './anke/AnkePaneler';
 import { getFaktaLocation, getLocationWithDefaultProsessStegAndFakta, getProsessStegLocation } from '../app/paths';
-import TilbakekrevingPaneler from './tilbakekreving/TilbakekrevingPaneler';
+import lazyWithRetry from './lazyUtils';
+import ErrorBoundary from '../app/ErrorBoundary';
+
+const ForeldrepengerPaneler = lazyWithRetry(() => import('./foreldrepenger/ForeldrepengerPaneler'));
+const EngangsstonadPaneler = lazyWithRetry(() => import('./engangsstonad/EngangsstonadPaneler'));
+const SvangerskapspengerPaneler = lazyWithRetry(() => import('./svangerskapspenger/SvangerskapspengerPaneler'));
+const KlagePaneler = lazyWithRetry(() => import('./klage/KlagePaneler'));
+const InnsynPaneler = lazyWithRetry(() => import('./innsyn/InnsynPaneler'));
+const AnkePaneler = lazyWithRetry(() => import('./anke/AnkePaneler'));
+const TilbakekrevingPaneler = lazyWithRetry(() => import('./tilbakekreving/TilbakekrevingPaneler'));
 
 const endepunkterSomSkalHentesEnGang = [
   { key: BehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT },
@@ -89,6 +92,8 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
   hentOgSettBehandling,
   alleBehandlinger,
 }) => {
+  const { addErrorMessage } = useRestApiErrorDispatcher();
+
   const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restBehandlingApiHooks.useRestApiRunner(
     BehandlingApiKeys.SAVE_AKSJONSPUNKT,
   );
@@ -151,91 +156,119 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
       >
         <>
           {fagsak.fagsakYtelseType === FagsakYtelseType.FORELDREPENGER && erFørstegangssøknadEllerRevurdering && (
-            <ForeldrepengerPaneler
-              behandling={behandling}
-              fagsak={fagsak}
-              valgtProsessSteg={query.punkt}
-              valgtFaktaSteg={query.fakta}
-              oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-              opneSokeside={opneSokeside}
-              toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
-              arbeidsgivere={arbeidsgivere}
-              personoversikt={personoversikt}
-              rettigheter={rettigheter}
-              hentOgSettBehandling={hentOgSettBehandling}
-            />
+            <Suspense fallback={<LoadingPanel />}>
+              <ErrorBoundary errorMessageCallback={addErrorMessage}>
+                <ForeldrepengerPaneler
+                  behandling={behandling}
+                  fagsak={fagsak}
+                  valgtProsessSteg={query.punkt}
+                  valgtFaktaSteg={query.fakta}
+                  oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+                  opneSokeside={opneSokeside}
+                  toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
+                  arbeidsgivere={arbeidsgivere}
+                  personoversikt={personoversikt}
+                  rettigheter={rettigheter}
+                  hentOgSettBehandling={hentOgSettBehandling}
+                />
+              </ErrorBoundary>
+            </Suspense>
           )}
           {fagsak.fagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER && erFørstegangssøknadEllerRevurdering && (
-            <SvangerskapspengerPaneler
-              behandling={behandling}
-              fagsak={fagsak}
-              valgtProsessSteg={query.punkt}
-              valgtFaktaSteg={query.fakta}
-              oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-              opneSokeside={opneSokeside}
-              toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
-              arbeidsgivere={arbeidsgivere}
-              personoversikt={personoversikt}
-              rettigheter={rettigheter}
-              hentOgSettBehandling={hentOgSettBehandling}
-            />
+            <Suspense fallback={<LoadingPanel />}>
+              <ErrorBoundary errorMessageCallback={addErrorMessage}>
+                <SvangerskapspengerPaneler
+                  behandling={behandling}
+                  fagsak={fagsak}
+                  valgtProsessSteg={query.punkt}
+                  valgtFaktaSteg={query.fakta}
+                  oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+                  opneSokeside={opneSokeside}
+                  toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
+                  arbeidsgivere={arbeidsgivere}
+                  personoversikt={personoversikt}
+                  rettigheter={rettigheter}
+                  hentOgSettBehandling={hentOgSettBehandling}
+                />
+              </ErrorBoundary>
+            </Suspense>
           )}
           {fagsak.fagsakYtelseType === FagsakYtelseType.ENGANGSSTONAD && erFørstegangssøknadEllerRevurdering && (
-            <EngangsstonadPaneler
-              behandling={behandling}
-              fagsak={fagsak}
-              valgtProsessSteg={query.punkt}
-              valgtFaktaSteg={query.fakta}
-              oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-              opneSokeside={opneSokeside}
-              toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
-              arbeidsgivere={arbeidsgivere}
-              personoversikt={personoversikt}
-              rettigheter={rettigheter}
-            />
+            <Suspense fallback={<LoadingPanel />}>
+              <ErrorBoundary errorMessageCallback={addErrorMessage}>
+                <EngangsstonadPaneler
+                  behandling={behandling}
+                  fagsak={fagsak}
+                  valgtProsessSteg={query.punkt}
+                  valgtFaktaSteg={query.fakta}
+                  oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+                  opneSokeside={opneSokeside}
+                  toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
+                  arbeidsgivere={arbeidsgivere}
+                  personoversikt={personoversikt}
+                  rettigheter={rettigheter}
+                />
+              </ErrorBoundary>
+            </Suspense>
           )}
           {behandling?.type === BehandlingType.DOKUMENTINNSYN && (
-            <InnsynPaneler
-              behandling={behandling}
-              fagsak={fagsak}
-              valgtProsessSteg={query.punkt}
-              oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-              opneSokeside={opneSokeside}
-              toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
-            />
+            <Suspense fallback={<LoadingPanel />}>
+              <ErrorBoundary errorMessageCallback={addErrorMessage}>
+                <InnsynPaneler
+                  behandling={behandling}
+                  fagsak={fagsak}
+                  valgtProsessSteg={query.punkt}
+                  oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+                  opneSokeside={opneSokeside}
+                  toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
+                />
+              </ErrorBoundary>
+            </Suspense>
           )}
           {behandling?.type === BehandlingType.ANKE && (
-            <AnkePaneler
-              behandling={behandling}
-              valgtProsessSteg={query.punkt}
-              valgtFaktaSteg={query.fakta}
-              oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-              alleBehandlinger={alleBehandlinger}
-            />
+            <Suspense fallback={<LoadingPanel />}>
+              <ErrorBoundary errorMessageCallback={addErrorMessage}>
+                <AnkePaneler
+                  behandling={behandling}
+                  valgtProsessSteg={query.punkt}
+                  valgtFaktaSteg={query.fakta}
+                  oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+                  alleBehandlinger={alleBehandlinger}
+                />
+              </ErrorBoundary>
+            </Suspense>
           )}
           {behandling?.type === BehandlingType.KLAGE && (
-            <KlagePaneler
-              behandling={behandling}
-              fagsak={fagsak}
-              valgtProsessSteg={query.punkt}
-              valgtFaktaSteg={query.fakta}
-              oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-              toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
-              opneSokeside={opneSokeside}
-              alleBehandlinger={alleBehandlinger}
-            />
+            <Suspense fallback={<LoadingPanel />}>
+              <ErrorBoundary errorMessageCallback={addErrorMessage}>
+                <KlagePaneler
+                  behandling={behandling}
+                  fagsak={fagsak}
+                  valgtProsessSteg={query.punkt}
+                  valgtFaktaSteg={query.fakta}
+                  oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+                  toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
+                  opneSokeside={opneSokeside}
+                  alleBehandlinger={alleBehandlinger}
+                />
+              </ErrorBoundary>
+            </Suspense>
           )}
           {erTilbakekreving(behandling?.type) && (
-            <TilbakekrevingPaneler
-              behandling={behandling}
-              fagsak={fagsak}
-              valgtProsessSteg={query.punkt}
-              valgtFaktaSteg={query.fakta}
-              oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-              toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
-              opneSokeside={opneSokeside}
-              alleBehandlinger={alleBehandlinger}
-            />
+            <Suspense fallback={<LoadingPanel />}>
+              <ErrorBoundary errorMessageCallback={addErrorMessage}>
+                <TilbakekrevingPaneler
+                  behandling={behandling}
+                  fagsak={fagsak}
+                  valgtProsessSteg={query.punkt}
+                  valgtFaktaSteg={query.fakta}
+                  oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+                  toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
+                  opneSokeside={opneSokeside}
+                  alleBehandlinger={alleBehandlinger}
+                />
+              </ErrorBoundary>
+            </Suspense>
           )}
         </>
       </StandardPropsProvider>

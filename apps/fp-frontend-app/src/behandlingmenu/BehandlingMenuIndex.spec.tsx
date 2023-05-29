@@ -7,7 +7,7 @@ import { RestApiMock } from '@navikt/fp-utils-test';
 import { Fagsak, VergeBehandlingmenyValg, BehandlingOppretting } from '@navikt/fp-types';
 
 import BehandlingMenuIndex from './BehandlingMenuIndex';
-import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
+import { requestFagsakApi, FagsakApiKeys } from '../data/fagsakContextApi';
 import FagsakData from '../fagsak/FagsakData';
 
 const navAnsatt = {
@@ -62,22 +62,28 @@ const fagsak = {
 describe('BehandlingMenuIndex', () => {
   it('skal vise meny der alle menyhandlinger er synlige', async () => {
     const data = [
-      { key: FpsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
-      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt, behandlendeEnheter: [] } },
-      { key: FpsakApiKeys.KODEVERK.name, global: true, data: {} },
-      { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
-      { key: FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES.name, data: false },
-      { key: FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES.name, data: false },
+      { key: FagsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
+      {
+        key: FagsakApiKeys.INIT_FETCH.name,
+        global: true,
+        data: { innloggetBruker: navAnsatt, behandlendeEnheter: [] },
+      },
+      { key: FagsakApiKeys.KODEVERK.name, global: true, data: {} },
+      { key: FagsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
+      { key: FagsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES.name, data: false },
+      { key: FagsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES.name, data: false },
     ];
 
     render(
-      <RestApiMock data={data} requestApi={requestApi}>
+      <RestApiMock data={data} requestApi={requestFagsakApi}>
         <MemoryRouter>
           <BehandlingMenuIndex
             fagsakData={new FagsakData(fagsak as Fagsak)}
             behandlingUuid="1"
             behandlingVersjon={2}
-            hentFagsakdataPåNytt={vi.fn()}
+            setBehandling={vi.fn()}
+            endreFagsakMarkering={vi.fn()}
+            hentOgSettBehandling={vi.fn()}
           />
         </MemoryRouter>
       </RestApiMock>,

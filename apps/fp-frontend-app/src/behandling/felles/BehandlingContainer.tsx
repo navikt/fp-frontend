@@ -4,7 +4,6 @@ import { Behandling } from '@navikt/fp-types';
 
 import ProsessContainer from './prosess/ProsessContainer';
 import FaktaContainer from './fakta/FaktaContainer';
-
 import ProsessPanelInitProps, { ProsessPanelExtraInitProps } from './typer/prosessPanelInitProps';
 import FaktaPanelInitProps from './typer/faktaPanelInitProps';
 
