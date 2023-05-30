@@ -45,7 +45,7 @@ const lagKlageCallback =
 const getLagringSideeffekter =
   (
     toggleKlageModal: (skalViseModal: boolean) => void,
-    toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
+    setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void,
     oppdaterProsessStegOgFaktaPanelIUrl?: (punktnavn?: string, faktanavn?: string) => void,
   ) =>
   (aksjonspunktModels: { kode: string; klageVurdering?: string }[]) => {
@@ -56,7 +56,7 @@ const getLagringSideeffekter =
     );
 
     if (skalByttTilKlageinstans) {
-      toggleOppdatereFagsakContext(false);
+      setSkalOppdatereEtterBekreftelseAvAp(false);
     }
 
     // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
@@ -76,7 +76,7 @@ type EndepunktPanelData = {
 
 interface OwnProps {
   fagsak: Fagsak;
-  toggleOppdatereFagsakContext?: (skalHenteFagsak: boolean) => void;
+  setSkalOppdatereEtterBekreftelseAvAp?: (skalHenteFagsak: boolean) => void;
   opneSokeside?: () => void;
   oppdaterProsessStegOgFaktaPanelIUrl?: (punktnavn?: string, faktanavn?: string) => void;
   aksjonspunktKoder?: string[];
@@ -86,7 +86,7 @@ interface OwnProps {
 
 const VurderingFellesProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   fagsak,
-  toggleOppdatereFagsakContext,
+  setSkalOppdatereEtterBekreftelseAvAp,
   opneSokeside,
   oppdaterProsessStegOgFaktaPanelIUrl,
   aksjonspunktKoder,
@@ -98,8 +98,12 @@ const VurderingFellesProsessStegInitPanel: FunctionComponent<OwnProps & ProsessP
 
   const standardPanelProps = useStandardProsessPanelProps();
 
-  const lagringSideEffekter = toggleOppdatereFagsakContext
-    ? getLagringSideeffekter(toggleKlageModal, toggleOppdatereFagsakContext, oppdaterProsessStegOgFaktaPanelIUrl)
+  const lagringSideEffekter = setSkalOppdatereEtterBekreftelseAvAp
+    ? getLagringSideeffekter(
+        toggleKlageModal,
+        setSkalOppdatereEtterBekreftelseAvAp,
+        oppdaterProsessStegOgFaktaPanelIUrl,
+      )
     : undefined;
 
   const { startRequest: forhandsvisMelding } = restBehandlingApiHooks.useRestApiRunner(

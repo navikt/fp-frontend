@@ -59,7 +59,7 @@ type NyBehandlendeEnhet = {
   enhetNavn: string;
   enhetId: string;
   begrunnelse: string;
-  behandlingVersjon: string;
+  behandlingVersjon: number;
 };
 
 type StonadskontoGittUttaksPerioderParams = {
@@ -93,7 +93,7 @@ export const BehandlingApiKeys = {
   BEHANDLING_NY_BEHANDLENDE_ENHET: new RestKey<void, NyBehandlendeEnhet>('BEHANDLING_NY_BEHANDLENDE_ENHET'),
   HENLEGG_BEHANDLING: new RestKey<
     void,
-    { behandlingUuid: string; årsakKode: string; begrunnelse: string; behandlingVersjon: string }
+    { behandlingUuid: string; årsakKode: string; begrunnelse: string; behandlingVersjon: number }
   >('HENLEGG_BEHANDLING'),
   RESUME_BEHANDLING: new RestKey<Behandling, { behandlingUuid: string; behandlingVersjon: number }>(
     'RESUME_BEHANDLING',

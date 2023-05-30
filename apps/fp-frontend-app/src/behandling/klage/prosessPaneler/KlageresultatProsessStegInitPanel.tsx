@@ -55,10 +55,10 @@ const getVedtakStatus = (behandlingsresultat?: Behandlingsresultat, aksjonspunkt
 const getLagringSideeffekter =
   (
     toggleFatterVedtakModal: (skalViseModal: boolean) => void,
-    toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
+    setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void,
   ) =>
   () => {
-    toggleOppdatereFagsakContext(false);
+    setSkalOppdatereEtterBekreftelseAvAp(false);
 
     // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
     return () => {
@@ -80,13 +80,13 @@ type EndepunktPanelData = {
 
 interface OwnProps {
   fagsak: Fagsak;
-  toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void;
+  setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
   opneSokeside: () => void;
 }
 
 const KlageresultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   fagsak,
-  toggleOppdatereFagsakContext,
+  setSkalOppdatereEtterBekreftelseAvAp,
   opneSokeside,
   ...props
 }) => {
@@ -96,7 +96,7 @@ const KlageresultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPan
 
   const standardPanelProps = useStandardProsessPanelProps();
 
-  const lagringSideEffekter = getLagringSideeffekter(toggleFatterVedtakModal, toggleOppdatereFagsakContext);
+  const lagringSideEffekter = getLagringSideeffekter(toggleFatterVedtakModal, setSkalOppdatereEtterBekreftelseAvAp);
 
   const { startRequest: forhandsvisMelding } = restBehandlingApiHooks.useRestApiRunner(
     BehandlingApiKeys.PREVIEW_MESSAGE,

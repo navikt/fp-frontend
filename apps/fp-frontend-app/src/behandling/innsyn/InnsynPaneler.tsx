@@ -13,7 +13,7 @@ interface OwnProps {
   valgtProsessSteg?: string;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   opneSokeside: () => void;
-  toggleOppdateringAvFagsakOgBehandling: (skalHenteFagsak: boolean) => void;
+  setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
 }
 
 const InnsynPaneler: FunctionComponent<OwnProps> = ({
@@ -22,7 +22,7 @@ const InnsynPaneler: FunctionComponent<OwnProps> = ({
   valgtProsessSteg,
   oppdaterProsessStegOgFaktaPanelIUrl,
   opneSokeside,
-  toggleOppdateringAvFagsakOgBehandling,
+  setSkalOppdatereEtterBekreftelseAvAp,
 }) => {
   const hentProsessPaneler = useCallback(
     (props: ProsessPanelInitProps) => (
@@ -32,11 +32,11 @@ const InnsynPaneler: FunctionComponent<OwnProps> = ({
           {...props}
           fagsak={fagsak}
           opneSokeside={opneSokeside}
-          toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
+          setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
         />
       </>
     ),
-    [fagsak, opneSokeside, toggleOppdateringAvFagsakOgBehandling],
+    [fagsak, opneSokeside, setSkalOppdatereEtterBekreftelseAvAp],
   );
 
   return (

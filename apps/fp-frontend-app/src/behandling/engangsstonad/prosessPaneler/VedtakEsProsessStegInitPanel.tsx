@@ -109,10 +109,10 @@ const getLagringSideeffekter =
   (
     toggleIverksetterVedtakModal: (visIverksetterModal: boolean) => void,
     toggleFatterVedtakModal: (skalFatterModal: boolean) => void,
-    toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
+    setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void,
   ) =>
   (aksjonspunktModels: { kode: string }[]) => {
-    toggleOppdatereFagsakContext(false);
+    setSkalOppdatereEtterBekreftelseAvAp(false);
 
     // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
     return () => {
@@ -144,13 +144,13 @@ type EndepunktPanelData = {
 };
 
 interface OwnProps {
-  toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void;
+  setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
   fagsak: Fagsak;
   opneSokeside: () => void;
 }
 
 const VedtakEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
-  toggleOppdatereFagsakContext,
+  setSkalOppdatereEtterBekreftelseAvAp,
   fagsak,
   opneSokeside,
   ...props
@@ -162,7 +162,7 @@ const VedtakEsProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelIni
   const lagringSideEffekter = getLagringSideeffekter(
     toggleIverksetterVedtakModal,
     toggleFatterVedtakModal,
-    toggleOppdatereFagsakContext,
+    setSkalOppdatereEtterBekreftelseAvAp,
   );
 
   const standardPanelProps = useStandardProsessPanelProps();

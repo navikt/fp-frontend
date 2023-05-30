@@ -9,7 +9,6 @@ import FagsakData from './FagsakData';
 
 const useHentFagsak = (
   saksnummer: string,
-  hentNyFagsakTrigger: number,
   behandlingUuid?: string,
   behandlingVersjon?: number,
 ): [harHentet: boolean, fagsakData: FagsakData | undefined] => {
@@ -21,7 +20,7 @@ const useHentFagsak = (
     FagsakApiKeys.FETCH_FAGSAK,
     { saksnummer },
     {
-      updateTriggers: [behandlingUuid, behandlingVersjon, hentNyFagsakTrigger],
+      updateTriggers: [behandlingUuid, behandlingVersjon],
       suspendRequest: !saksnummer || erBehandlingEndretFraUndefined,
       keepData: true,
     },
@@ -31,7 +30,7 @@ const useHentFagsak = (
     FagsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE,
     { saksnummer },
     {
-      updateTriggers: [behandlingUuid, behandlingVersjon, hentNyFagsakTrigger],
+      updateTriggers: [behandlingUuid, behandlingVersjon],
       suspendRequest: !skalHenteFraFpTilbake || !saksnummer || erBehandlingEndretFraUndefined,
       keepData: true,
     },

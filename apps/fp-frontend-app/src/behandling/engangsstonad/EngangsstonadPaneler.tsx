@@ -27,7 +27,7 @@ interface OwnProps {
   valgtFaktaSteg?: string;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   opneSokeside: () => void;
-  toggleOppdateringAvFagsakOgBehandling: (skalHenteFagsak: boolean) => void;
+  setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
   arbeidsgivere: ArbeidsgiverOpplysningerPerId;
   personoversikt: Personoversikt;
   rettigheter: AksessRettigheter;
@@ -40,7 +40,7 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
   valgtFaktaSteg,
   oppdaterProsessStegOgFaktaPanelIUrl,
   opneSokeside,
-  toggleOppdateringAvFagsakOgBehandling,
+  setSkalOppdatereEtterBekreftelseAvAp,
   arbeidsgivere,
   personoversikt,
   rettigheter,
@@ -67,7 +67,7 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
           {...props}
           fagsak={fagsak}
           opneSokeside={opneSokeside}
-          toggleSkalOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
+          setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
         />
         <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <InngangsvilkarProsessStegInitPanel
@@ -83,14 +83,14 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
           {...props}
           fagsak={fagsak}
           opneSokeside={opneSokeside}
-          toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
+          setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
         />
       </>
     ),
     [
       fagsak,
       opneSokeside,
-      toggleOppdateringAvFagsakOgBehandling,
+      setSkalOppdatereEtterBekreftelseAvAp,
       arbeidsgivere,
       rettigheter,
       oppdaterProsessStegOgFaktaPanelIUrl,

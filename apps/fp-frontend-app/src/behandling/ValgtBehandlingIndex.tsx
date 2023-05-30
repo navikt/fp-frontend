@@ -1,4 +1,4 @@
-import React, { FunctionComponent, Suspense, useCallback, useEffect } from 'react';
+import React, { FunctionComponent, Suspense, useCallback, useEffect, useState } from 'react';
 
 import {
   AksessRettigheter,
@@ -61,9 +61,13 @@ const getOppdaterProsessStegOgFaktaPanelIUrl =
     navigate(newLocation);
   };
 
-const useSetBehandlingVedEndring = (setBehandling: (behandling: Behandling) => void, behandling?: Behandling): void => {
+const useSetBehandlingVedEndring = (
+  setBehandling: (behandling: Behandling) => void,
+  skalOppdatereEtterBekreftelseAvAp: boolean,
+  behandling?: Behandling,
+): void => {
   useEffect(() => {
-    if (behandling) {
+    if (behandling && skalOppdatereEtterBekreftelseAvAp) {
       setBehandling(behandling);
     }
   }, [behandling]);
@@ -94,13 +98,15 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
 }) => {
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
+  const [skalOppdatereEtterBekreftelseAvAp, setSkalOppdatereEtterBekreftelseAvAp] = useState(true);
+
   const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restBehandlingApiHooks.useRestApiRunner(
     BehandlingApiKeys.SAVE_AKSJONSPUNKT,
   );
   const { startRequest: lagreOverstyrteAksjonspunkter, data: apOverstyrtBehandlingRes } =
     restBehandlingApiHooks.useRestApiRunner(BehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT);
-  useSetBehandlingVedEndring(setBehandling, apBehandlingRes);
-  useSetBehandlingVedEndring(setBehandling, apOverstyrtBehandlingRes);
+  useSetBehandlingVedEndring(setBehandling, skalOppdatereEtterBekreftelseAvAp, apBehandlingRes);
+  useSetBehandlingVedEndring(setBehandling, skalOppdatereEtterBekreftelseAvAp, apOverstyrtBehandlingRes);
 
   const navigate = useNavigate();
   const opneSokeside = useCallback(() => {
@@ -112,6 +118,7 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
     location,
     navigate,
   ]);
+  const query = parseQueryString(location.search);
 
   const erFørstegangssøknadEllerRevurdering =
     behandling?.type === BehandlingType.FORSTEGANGSSOKNAD || behandling?.type === BehandlingType.REVURDERING;
@@ -137,10 +144,6 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
   const arbeidsgivere = opplysningsdata?.arbeidsgivereOversikt?.arbeidsgivere;
   const personoversikt = opplysningsdata?.behandlingPersonoversikt;
 
-  const query = parseQueryString(location.search);
-
-  const toggleOppdateringAvFagsakOgBehandling = () => false;
-
   return (
     <>
       <BehandlingPaVent behandling={behandling} setBehandling={setBehandling} kodeverk={kodeverk} />
@@ -165,7 +168,7 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
                   valgtFaktaSteg={query.fakta}
                   oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
                   opneSokeside={opneSokeside}
-                  toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
+                  setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
                   arbeidsgivere={arbeidsgivere}
                   personoversikt={personoversikt}
                   rettigheter={rettigheter}
@@ -184,7 +187,7 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
                   valgtFaktaSteg={query.fakta}
                   oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
                   opneSokeside={opneSokeside}
-                  toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
+                  toggleOppdateringAvFagsakOgBehandling={setSkalOppdatereEtterBekreftelseAvAp}
                   arbeidsgivere={arbeidsgivere}
                   personoversikt={personoversikt}
                   rettigheter={rettigheter}
@@ -203,7 +206,7 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
                   valgtFaktaSteg={query.fakta}
                   oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
                   opneSokeside={opneSokeside}
-                  toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
+                  setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
                   arbeidsgivere={arbeidsgivere}
                   personoversikt={personoversikt}
                   rettigheter={rettigheter}
@@ -220,7 +223,7 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
                   valgtProsessSteg={query.punkt}
                   oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
                   opneSokeside={opneSokeside}
-                  toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
+                  setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
                 />
               </ErrorBoundary>
             </Suspense>
@@ -247,7 +250,7 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
                   valgtProsessSteg={query.punkt}
                   valgtFaktaSteg={query.fakta}
                   oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-                  toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
+                  toggleOppdateringAvFagsakOgBehandling={setSkalOppdatereEtterBekreftelseAvAp}
                   opneSokeside={opneSokeside}
                   alleBehandlinger={alleBehandlinger}
                 />
@@ -263,7 +266,6 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
                   valgtProsessSteg={query.punkt}
                   valgtFaktaSteg={query.fakta}
                   oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-                  toggleOppdateringAvFagsakOgBehandling={toggleOppdateringAvFagsakOgBehandling}
                   opneSokeside={opneSokeside}
                   alleBehandlinger={alleBehandlinger}
                 />

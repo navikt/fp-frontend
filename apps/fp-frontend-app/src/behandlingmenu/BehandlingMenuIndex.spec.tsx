@@ -82,7 +82,6 @@ describe('BehandlingMenuIndex', () => {
             behandlingUuid="1"
             behandlingVersjon={2}
             setBehandling={vi.fn()}
-            endreFagsakMarkering={vi.fn()}
             hentOgSettBehandling={vi.fn()}
           />
         </MemoryRouter>

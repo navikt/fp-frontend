@@ -5,10 +5,8 @@ import { Location } from 'history';
 import { VisittkortSakIndex } from '@navikt/ft-sak-visittkort';
 import { LoadingPanel, DataFetchPendingModal } from '@navikt/ft-ui-komponenter';
 import { BehandlingType } from '@navikt/ft-kodeverk';
-
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { AnnenPartBehandling, Behandling } from '@navikt/fp-types';
-import { FormValues as EndreUtlandFormValues } from '@navikt/fp-sak-meny-endre-utland';
 
 import BehandlingerIndex from '../behandling/BehandlingerIndex';
 import useTrackRouteParam from '../app/useTrackRouteParam';
@@ -22,12 +20,12 @@ import {
   pathToAnnenPart,
 } from '../app/paths';
 import FagsakGrid from './components/FagsakGrid';
-import { FagsakApiKeys, requestFagsakApi, restFagsakApiHooks } from '../data/fagsakContextApi';
+import { LinkCategory, requestFagsakApi } from '../data/fagsakContextApi';
 import useHentFagsak from './useHentFagsak';
 import ErrorBoundary from '../app/ErrorBoundary';
+import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../data/behandlingContextApi';
 
 import '@navikt/ft-sak-visittkort/dist/style.css';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../data/behandlingContextApi';
 
 const finnLenkeTilAnnenPart = (annenPartBehandling: AnnenPartBehandling): string =>
   pathToAnnenPart(annenPartBehandling.saksnummer, annenPartBehandling.behandlingUuid);
@@ -38,7 +36,7 @@ const finnSkalIkkeHenteData = (location: Location, selectedSaksnummer?: string, 
 /**
  * FagsakIndex
  *
- * Container komponent. Er rot for for fagsakdelen av hovedvinduet, og har ansvar å legge valgt saksnummer fra URL-en i staten.
+ * Er rot for for fagsakdelen av hovedvinduet, og har ansvar å legge valgt saksnummer fra URL-en i staten.
  */
 const FagsakIndex: FunctionComponent = () => {
   const intl = useIntl();
@@ -59,13 +57,7 @@ const FagsakIndex: FunctionComponent = () => {
   // - Ny behandling => sett behandling og hent opp fagsak på nytt gitt uuid. Endre uuid i url manuelt, sjekk da om uuid er lik behandling, det er den her
   // - Lagre aksjonspunkt => hent opp behandling og så ny fagsak gitt versjon
 
-  const [hentFagsakPåNyttTrigger, oppdaterTrigger] = useState(0);
-  const [harHentetFagsak, fagsakData] = useHentFagsak(
-    selectedSaksnummer,
-    hentFagsakPåNyttTrigger,
-    behandlingUuid,
-    behandling?.versjon,
-  );
+  const [harHentetFagsak, fagsakData] = useHentFagsak(selectedSaksnummer, behandlingUuid, behandling?.versjon);
 
   const fagsakBehandling = fagsakData?.getBehandling(behandlingUuid);
   const erTilbakekreving =
@@ -79,7 +71,14 @@ const FagsakIndex: FunctionComponent = () => {
   const hentOgSettBehandling = useCallback(
     (keepData = false) => {
       if (behandlingUuid) {
-        hentBehandling({ behandlingUuid }, keepData).then(setBehandling);
+        hentBehandling({ behandlingUuid }, keepData).then(b => {
+          if (b) {
+            requestFagsakApi.setLinks(b.links, LinkCategory.BEHANDLING);
+            requestBehandlingApi.resetCache();
+            requestBehandlingApi.setLinks(b.links);
+            setBehandling(b);
+          }
+        });
       }
     },
     [behandlingUuid],
@@ -96,12 +95,6 @@ const FagsakIndex: FunctionComponent = () => {
       requestFagsakApi.resetCache();
       requestFagsakApi.resetLinks();
     },
-    [],
-  );
-
-  const { startRequest: endreSaksmerking } = restFagsakApiHooks.useRestApiRunner(FagsakApiKeys.ENDRE_SAK_MARKERING);
-  const endreFagsakMarkering = useCallback(
-    (params: EndreUtlandFormValues) => endreSaksmerking(params).then(() => oppdaterTrigger(oldValue => oldValue + 1)),
     [],
   );
 
@@ -148,7 +141,6 @@ const FagsakIndex: FunctionComponent = () => {
             setBehandling={setBehandling}
             hentOgSettBehandling={hentOgSettBehandling}
             behandlingVersjon={behandling?.versjon}
-            endreFagsakMarkering={endreFagsakMarkering}
           />
         }
         supportContent={

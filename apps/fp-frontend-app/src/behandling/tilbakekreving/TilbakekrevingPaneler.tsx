@@ -21,7 +21,6 @@ interface OwnProps {
   valgtFaktaSteg?: string;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   opneSokeside: () => void;
-  toggleOppdateringAvFagsakOgBehandling: (skalHenteFagsak: boolean) => void;
   alleBehandlinger: BehandlingAppKontekst[];
 }
 
@@ -32,7 +31,6 @@ const TilbakekrevingPaneler: FunctionComponent<OwnProps> = ({
   valgtFaktaSteg,
   oppdaterProsessStegOgFaktaPanelIUrl,
   opneSokeside,
-  toggleOppdateringAvFagsakOgBehandling,
   alleBehandlinger,
 }) => {
   const { data: tilbakekrevingKodeverk } = restBehandlingApiHooks.useRestApi(BehandlingApiKeys.TILBAKE_KODEVERK);
@@ -91,14 +89,7 @@ const TilbakekrevingPaneler: FunctionComponent<OwnProps> = ({
         />
       </>
     ),
-    [
-      tilbakekrevingKodeverk,
-      harApenRevurdering,
-      fagsak,
-      opneSokeside,
-      toggleOppdateringAvFagsakOgBehandling,
-      oppdaterProsessStegOgFaktaPanelIUrl,
-    ],
+    [tilbakekrevingKodeverk, harApenRevurdering, fagsak, opneSokeside, oppdaterProsessStegOgFaktaPanelIUrl],
   );
 
   if (!tilbakekrevingKodeverk) {

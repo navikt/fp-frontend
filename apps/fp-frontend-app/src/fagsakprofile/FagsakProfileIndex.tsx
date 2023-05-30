@@ -4,7 +4,6 @@ import { Location } from 'history';
 import { useIntl } from 'react-intl';
 import { BehandlingVelgerSakIndex } from '@navikt/ft-sak-behandling-velger';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { FormValues as EndreUtlandFormValues } from '@navikt/fp-sak-meny-endre-utland';
 import { KodeverkType, FagsakMarkeringKode } from '@navikt/fp-kodeverk';
 import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
@@ -58,7 +57,6 @@ interface OwnProps {
   behandlingVersjon?: number;
   setBehandling: (behandling: Behandling) => void;
   hentOgSettBehandling: () => void;
-  endreFagsakMarkering: (params: EndreUtlandFormValues) => Promise<void>;
 }
 
 const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
@@ -67,7 +65,6 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   behandlingVersjon,
   setBehandling,
   hentOgSettBehandling,
-  endreFagsakMarkering,
 }) => {
   const intl = useIntl();
   const [showAll, setShowAll] = useState(!behandlingUuid);
@@ -128,7 +125,6 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
                     behandlingVersjon={behandlingVersjon}
                     setBehandling={setBehandling}
                     hentOgSettBehandling={hentOgSettBehandling}
-                    endreFagsakMarkering={endreFagsakMarkering}
                   />
                 </ErrorBoundary>
               </FlexColumn>

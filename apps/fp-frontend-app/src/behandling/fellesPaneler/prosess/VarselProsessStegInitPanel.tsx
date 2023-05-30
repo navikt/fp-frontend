@@ -37,8 +37,8 @@ const getForhandsvisCallback =
   };
 
 const getLagringSideeffekter =
-  (toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void, opneSokeside: () => void) => () => {
-    toggleOppdatereFagsakContext(false);
+  (setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void, opneSokeside: () => void) => () => {
+    setSkalOppdatereEtterBekreftelseAvAp(false);
 
     // Returner funksjon som blir kjørt etter lagring av aksjonspunkt
     return () => {
@@ -65,18 +65,18 @@ type EndepunktPanelData = {
 };
 
 interface OwnProps {
-  toggleSkalOppdatereFagsakContext: (skalHenteFagsak: boolean) => void;
+  setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
   fagsak: Fagsak;
   opneSokeside: () => void;
 }
 
 const VarselProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
-  toggleSkalOppdatereFagsakContext,
+  setSkalOppdatereEtterBekreftelseAvAp,
   fagsak,
   opneSokeside,
   ...props
 }) => {
-  const lagringSideEffekter = getLagringSideeffekter(toggleSkalOppdatereFagsakContext, opneSokeside);
+  const lagringSideEffekter = getLagringSideeffekter(setSkalOppdatereEtterBekreftelseAvAp, opneSokeside);
 
   const { startRequest: forhandsvisMelding } = restBehandlingApiHooks.useRestApiRunner(
     BehandlingApiKeys.PREVIEW_MESSAGE,

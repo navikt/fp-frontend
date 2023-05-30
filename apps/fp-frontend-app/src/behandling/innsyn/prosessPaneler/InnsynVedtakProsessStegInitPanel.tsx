@@ -45,10 +45,10 @@ const hentForhandsvisCallback =
 const getLagringSideeffekter =
   (
     toggleIverksetterVedtakModal: (skalViseModal: boolean) => void,
-    toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
+    setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void,
   ) =>
   () => {
-    toggleOppdatereFagsakContext(false);
+    setSkalOppdatereEtterBekreftelseAvAp(false);
 
     // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
     return () => {
@@ -71,20 +71,20 @@ type EndepunktPanelData = {
 interface OwnProps {
   fagsak: Fagsak;
   opneSokeside: () => void;
-  toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void;
+  setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
 }
 
 const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   fagsak,
   opneSokeside,
-  toggleOppdatereFagsakContext,
+  setSkalOppdatereEtterBekreftelseAvAp,
   ...props
 }) => {
   const intl = useIntl();
   const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
   const lagringSideeffekterCallback = getLagringSideeffekter(
     toggleIverksetterVedtakModal,
-    toggleOppdatereFagsakContext,
+    setSkalOppdatereEtterBekreftelseAvAp,
   );
 
   const standardPanelProps = useStandardProsessPanelProps();

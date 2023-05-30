@@ -19,7 +19,7 @@ interface OwnProps {
   valgtFaktaSteg?: string;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   opneSokeside: () => void;
-  toggleOppdateringAvFagsakOgBehandling: (skalHenteFagsak: boolean) => void;
+  setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
   alleBehandlinger: BehandlingAppKontekst[];
 }
 
@@ -30,7 +30,7 @@ const KlagePaneler: FunctionComponent<OwnProps> = ({
   valgtFaktaSteg,
   oppdaterProsessStegOgFaktaPanelIUrl,
   opneSokeside,
-  toggleOppdateringAvFagsakOgBehandling,
+  setSkalOppdatereEtterBekreftelseAvAp,
   alleBehandlinger,
 }) => {
   const hentFaktaPaneler = useCallback((props: FaktaPanelInitProps) => <VergeFaktaInitPanel {...props} />, []);
@@ -58,7 +58,7 @@ const KlagePaneler: FunctionComponent<OwnProps> = ({
           {...props}
           fagsak={fagsak}
           opneSokeside={opneSokeside}
-          toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
+          setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         />
         <FormKravKlageInstansProsessStegInitPanel {...props} alleBehandlinger={fagsakBehandlingerInfo} />
@@ -67,7 +67,7 @@ const KlagePaneler: FunctionComponent<OwnProps> = ({
           {...props}
           fagsak={fagsak}
           opneSokeside={opneSokeside}
-          toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
+          setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
         />
       </>
     ),
@@ -75,7 +75,7 @@ const KlagePaneler: FunctionComponent<OwnProps> = ({
       fagsakBehandlingerInfo,
       fagsak,
       opneSokeside,
-      toggleOppdateringAvFagsakOgBehandling,
+      setSkalOppdatereEtterBekreftelseAvAp,
       oppdaterProsessStegOgFaktaPanelIUrl,
     ],
   );
