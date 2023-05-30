@@ -92,6 +92,7 @@ type OwnProps = Readonly<{
   knyttJournalpostTilBruker: (params: OppdaterMedBruker) => void;
   forhåndsvisBruker: (fnr: string) => void;
   brukerTilForhåndsvisning?: string;
+  lasterBruker: boolean;
 }>;
 
 /**
@@ -105,6 +106,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
   knyttJournalpostTilBruker,
   forhåndsvisBruker,
   brukerTilForhåndsvisning,
+  lasterBruker,
 }) => {
   const skalKunneEndreSøker = !journalpost.bruker;
   const saker = journalpost.fagsaker || [];
@@ -124,6 +126,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
         journalpost={journalpost}
         hentForhåndsvisningAvSøker={forhåndsvisBruker}
         skalKunneEndreSøker={skalKunneEndreSøker}
+        lasterBruker={lasterBruker}
         brukerTilForhåndsvisning={brukerTilForhåndsvisning}
         knyttSøkerTilJournalpost={knyttJournalpostTilBruker}
       />

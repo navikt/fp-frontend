@@ -70,6 +70,7 @@ type OwnProps = Readonly<{
   skalKunneEndreSøker: boolean;
   brukerTilForhåndsvisning?: string;
   knyttSøkerTilJournalpost: (params: OppdaterMedBruker) => void;
+  lasterBruker: boolean;
 }>;
 
 /**
@@ -81,6 +82,7 @@ const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({
   skalKunneEndreSøker,
   brukerTilForhåndsvisning,
   knyttSøkerTilJournalpost,
+  lasterBruker,
 }) => {
   const intl = useIntl();
   const [søkerFeilmelding, setSøkerFeilmelding] = useState<string | undefined>(undefined);
@@ -145,7 +147,7 @@ const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({
                 onSearchClick={forhåndsvisSøker}
                 hideLabel={false}
               >
-                <Search.Button type="button" />
+                <Search.Button type="button" loading={lasterBruker} />
               </Search>
               <VerticalSpacer eightPx />
               {søkerFeilmelding && <BodyShort className={styles.error}>{søkerFeilmelding}</BodyShort>}

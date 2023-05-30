@@ -39,9 +39,11 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
     RestApiPathsKeys.OPPDATER_MED_BRUKER,
   );
 
-  const { startRequest: hentBrukerKall, data: hentetNavn } = restApiHooks.useRestApiRunner(
-    RestApiPathsKeys.HENT_BRUKER,
-  );
+  const {
+    startRequest: hentBrukerKall,
+    data: hentetNavn,
+    state: hentBrukerState,
+  } = restApiHooks.useRestApiRunner(RestApiPathsKeys.HENT_BRUKER);
 
   const knyttJournalpostTilBruker = useCallback(
     (data: OppdaterMedBruker) => {
@@ -88,6 +90,7 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
             knyttJournalpostTilBruker={knyttJournalpostTilBruker}
             forhåndsvisBruker={hentBrukerCallback}
             brukerTilForhåndsvisning={hentetNavn}
+            lasterBruker={hentBrukerState === RestApiState.LOADING}
           />
         </FlexColumn>
         {valgtDokument && (

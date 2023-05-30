@@ -97,6 +97,7 @@ const Template: StoryFn<{
   submitJournalføring: (data: JournalførSubmitValue) => void;
 }> = ({ detaljertJournalpost, oppgave, submitJournalføring }) => (
   <JournalpostDetaljer
+    lasterBruker={false}
     avbrytVisningAvJournalpost={action('button-click') as () => void}
     oppgave={oppgave}
     journalpost={detaljertJournalpost}
