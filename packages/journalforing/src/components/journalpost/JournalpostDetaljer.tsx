@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Heading, BodyLong } from '@navikt/ds-react';
+import { Heading, BodyLong, Alert } from '@navikt/ds-react';
 
 import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form } from '@navikt/ft-form-hooks';
@@ -19,6 +19,7 @@ import DokumentForm, {
 } from './innhold/DokumentForm';
 import BrukerAvsenderPanel from './innhold/BrukerAvsenderPanel';
 import JournalføringFormValues from '../../typer/journalføringFormValues';
+import OppdaterMedBruker from '../../typer/oppdaterBrukerTsType';
 import JournalpostTittelForm from './innhold/JournalpostTittelForm';
 
 const dokumentTittelSkalStyresAvJournalpost = (jp: Journalpost): boolean => jp.dokumenter?.length === 1;
@@ -88,6 +89,10 @@ type OwnProps = Readonly<{
   oppgave: OppgaveOversikt;
   avbrytVisningAvJournalpost: () => void;
   submitJournalføring: (params: JournalførSubmitValue) => void;
+  knyttJournalpostTilBruker: (params: OppdaterMedBruker) => void;
+  forhåndsvisBruker: (fnr: string) => void;
+  brukerTilForhåndsvisning?: string;
+  lasterBruker: boolean;
 }>;
 
 /**
@@ -98,7 +103,12 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
   oppgave,
   avbrytVisningAvJournalpost,
   submitJournalføring,
+  knyttJournalpostTilBruker,
+  forhåndsvisBruker,
+  brukerTilForhåndsvisning,
+  lasterBruker,
 }) => {
+  const skalKunneEndreSøker = !journalpost.bruker;
   const saker = journalpost.fagsaker || [];
   const formMethods = useForm<JournalføringFormValues>({
     defaultValues: buildInitialValues(journalpost),
@@ -112,7 +122,14 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
     <Form<JournalføringFormValues> formMethods={formMethods} onSubmit={submitJournal}>
       <JournalpostTittelForm journalpost={journalpost} />
       <VerticalSpacer sixteenPx />
-      <BrukerAvsenderPanel journalpost={journalpost} />
+      <BrukerAvsenderPanel
+        journalpost={journalpost}
+        hentForhåndsvisningAvSøker={forhåndsvisBruker}
+        skalKunneEndreSøker={skalKunneEndreSøker}
+        lasterBruker={lasterBruker}
+        brukerTilForhåndsvisning={brukerTilForhåndsvisning}
+        knyttSøkerTilJournalpost={knyttJournalpostTilBruker}
+      />
       <VerticalSpacer twentyPx />
       {oppgave.beskrivelse && (
         <>
@@ -157,6 +174,11 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
         </FlexColumn>
       </FlexRow>
       <VerticalSpacer eightPx />
+      {skalKunneEndreSøker && (
+        <Alert variant="info">
+          <FormattedMessage id="ValgtOppgave.RelaterteSaker.ManglerSøker" />
+        </Alert>
+      )}
       {saker.map(sak => (
         <SakDetaljer sak={sak} key={sak.saksnummer} />
       ))}
@@ -173,6 +195,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
         isSubmittable={isSubmittable}
         journalpost={journalpost}
         avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
+        erKlarForJournalføring={!skalKunneEndreSøker}
       />
     </Form>
   );
