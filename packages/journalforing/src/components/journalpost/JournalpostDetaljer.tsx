@@ -106,7 +106,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
 }) => {
   const [gjeldendeJournalpost, setGjeldendeJournalpost] = useState(journalpostFraOppgave);
   const [skalKunneEndreSøker, setSkalKunneEndreSøker] = useState(!journalpostFraOppgave.bruker);
-  const saker = journalpostFraOppgave.fagsaker || [];
+  const saker = gjeldendeJournalpost.fagsaker || [];
   const formMethods = useForm<JournalføringFormValues>({
     defaultValues: buildInitialValues(journalpostFraOppgave),
   });
