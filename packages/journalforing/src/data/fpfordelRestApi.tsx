@@ -11,6 +11,7 @@ export const RestApiPathsKeys = {
   HENT_JOURNALPOST_DETALJER: new RestKey<Journalpost, { journalpostId: string }>('HENT_JOURNALPOST_DETALJER'),
   FERDIGSTILL_JOURNALFØRING: new RestKey<SaksnummerType, JournalførSubmitValue>('FERDIGSTILL_JOURNALFØRING'),
   OPPDATER_MED_BRUKER: new RestKey<Journalpost, OppdaterMedBruker>('OPPDATER_MED_BRUKER'),
+  HENT_BRUKER: new RestKey<string, string>('HENT_BRUKER'), // input = fnr, output = navn på personen
 };
 
 export const endpoints = new RestApiConfigBuilder()
@@ -18,6 +19,7 @@ export const endpoints = new RestApiConfigBuilder()
   .withGet('/fpfordel/api/journalfoering/oppgave/detaljer', RestApiPathsKeys.HENT_JOURNALPOST_DETALJER)
   .withPost('/fpfordel/api/sak/ferdigstill', RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING)
   .withPost('/fpfordel/api/bruker/oppdater', RestApiPathsKeys.OPPDATER_MED_BRUKER)
+  .withPost('/fpfordel/api/bruker/hent', RestApiPathsKeys.HENT_BRUKER)
   .build();
 
 export const requestApi = createRequestApi(endpoints);

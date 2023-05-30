@@ -34,15 +34,27 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
   const journalpostKall = restApiHooks.useRestApi(RestApiPathsKeys.HENT_JOURNALPOST_DETALJER, {
     journalpostId: oppgave.journalpostId,
   });
+
   const { startRequest: oppdaterMedBrukerKall, data: journalpostOppdatertMedSøker } = restApiHooks.useRestApiRunner(
     RestApiPathsKeys.OPPDATER_MED_BRUKER,
   );
 
-  const oppdaterMedBrukerCallback = useCallback(
+  const { startRequest: hentBrukerKall, data: hentetNavn } = restApiHooks.useRestApiRunner(
+    RestApiPathsKeys.HENT_BRUKER,
+  );
+
+  const knyttJournalpostTilBruker = useCallback(
     (data: OppdaterMedBruker) => {
       oppdaterMedBrukerKall(data);
     },
     [oppdaterMedBrukerKall],
+  );
+
+  const hentBrukerCallback = useCallback(
+    (data: string) => {
+      hentBrukerKall(data);
+    },
+    [hentBrukerKall],
   );
 
   // Åpner første dokument som standard valg når vi er ferdig med å laste
@@ -61,7 +73,7 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
   ) {
     return <LoadingPanel />;
   }
-  const journalpost: Journalpost = journalpostKall.data;
+  const journalpostFraOppgave: Journalpost = journalpostKall.data;
 
   return (
     <FlexContainer>
@@ -70,17 +82,18 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
           <JournalpostDetaljer
             avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
-            journalpostFraOppgave={journalpost}
-            oppdatertJournalpost={journalpostOppdatertMedSøker}
+            journalpost={journalpostOppdatertMedSøker || journalpostFraOppgave}
             oppgave={oppgave}
             submitJournalføring={submitJournalføring}
-            hentOppdatertJournalpostMedBruker={oppdaterMedBrukerCallback}
+            knyttJournalpostTilBruker={knyttJournalpostTilBruker}
+            forhåndsvisBruker={hentBrukerCallback}
+            brukerTilForhåndsvisning={hentetNavn}
           />
         </FlexColumn>
         {valgtDokument && (
           <FlexColumn className={styles.pdfKolonne}>
             <VerticalSpacer sixteenPx />
-            <DokumentIndex dokumenter={journalpost.dokumenter} />
+            <DokumentIndex dokumenter={journalpostFraOppgave.dokumenter} />
           </FlexColumn>
         )}
       </FlexRow>

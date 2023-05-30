@@ -99,9 +99,10 @@ const Template: StoryFn<{
   <JournalpostDetaljer
     avbrytVisningAvJournalpost={action('button-click') as () => void}
     oppgave={oppgave}
-    journalpostFraOppgave={detaljertJournalpost}
+    journalpost={detaljertJournalpost}
     submitJournalføring={submitJournalføring}
-    hentOppdatertJournalpostMedBruker={action('button-click') as () => void}
+    knyttJournalpostTilBruker={action('button-click') as () => void}
+    forhåndsvisBruker={action('button-click') as () => void}
   />
 );
 

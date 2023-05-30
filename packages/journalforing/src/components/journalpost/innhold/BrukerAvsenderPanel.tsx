@@ -8,14 +8,12 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import styles from './brukerAvsenderPanel.module.css';
 import Journalpost from '../../../typer/journalpostTsType';
 import OppdaterMedBruker from '../../../typer/oppdaterBrukerTsType';
-import JournalBruker from '../../../typer/journalBrukerTsType';
 
-const finnKjønnBilde = (bruker: JournalBruker): ReactElement => {
-  const fnr = bruker?.fnr;
-  if (!fnr || fnr.length !== 11) {
+const finnKjønnBilde = (brukerFnr: string): ReactElement => {
+  if (!brukerFnr || brukerFnr.length !== 11) {
     return <SilhouetteIcon className={styles.ikon} />;
   }
-  const tall = parseInt(fnr.charAt(8), 10);
+  const tall = parseInt(brukerFnr.charAt(8), 10);
   return tall % 2 === 0 ? <FigureOutwardIcon className={styles.ikon} /> : <FigureInwardIcon className={styles.ikon} />;
 };
 
@@ -28,7 +26,7 @@ const finnAvsenderBilde = (journalpost: Journalpost): ReactElement => {
     return <Buldings3Icon className={styles.ikon} />;
   }
   if (avsenderId.length === 11) {
-    return finnKjønnBilde(journalpost.bruker);
+    return finnKjønnBilde(journalpost.bruker.fnr);
   }
   return <SilhouetteIcon className={styles.ikon} />;
 };
@@ -68,10 +66,10 @@ const lagBrukerAvsenderRad = (navn: string, id: string, ikon: ReactElement, titl
 
 type OwnProps = Readonly<{
   journalpost: Journalpost;
-  hentOppdatertJournalpostMedBruker: (params: OppdaterMedBruker) => void;
+  hentForhåndsvisningAvSøker: (fnr: string) => void;
   skalKunneEndreSøker: boolean;
-  hentetSøker?: JournalBruker;
-  knyttSøkerTilJournalpost: () => void;
+  brukerTilForhåndsvisning?: string;
+  knyttSøkerTilJournalpost: (params: OppdaterMedBruker) => void;
 }>;
 
 /**
@@ -79,38 +77,46 @@ type OwnProps = Readonly<{
  */
 const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({
   journalpost,
-  hentOppdatertJournalpostMedBruker,
+  hentForhåndsvisningAvSøker,
   skalKunneEndreSøker,
-  hentetSøker,
+  brukerTilForhåndsvisning,
   knyttSøkerTilJournalpost,
 }) => {
   const intl = useIntl();
   const [søkerFeilmelding, setSøkerFeilmelding] = useState<string | undefined>(undefined);
-  const brukerBilde = useMemo(() => finnKjønnBilde(journalpost.bruker), [journalpost]);
+  const [fnrSomSkalForhåndsvises, setFnrSomSkalForhåndsvises] = useState<string | undefined>(undefined);
+  const brukerBilde = useMemo(() => finnKjønnBilde(journalpost.bruker?.fnr), [journalpost]);
   const avsenderBilde = useMemo(() => finnAvsenderBilde(journalpost), [journalpost]);
 
-  const oppdaterMedSøker = (fnr: string | undefined) => {
+  const knyttSøkerTilJP = () => {
+    if (fnrSomSkalForhåndsvises) {
+      knyttSøkerTilJournalpost({
+        journalpostId: journalpost.journalpostId,
+        fødselsnummer: fnrSomSkalForhåndsvises,
+      });
+    }
+  };
+
+  const forhåndsvisSøker = (fnr: string | undefined) => {
     if (!fnr) {
       setSøkerFeilmelding(undefined);
     } else if (!isValidFodselsnummer(fnr)) {
       setSøkerFeilmelding(intl.formatMessage({ id: 'ValgtOppgave.Søk.BrukerFeil' }, { fødselsnummer: fnr }));
     } else {
+      setFnrSomSkalForhåndsvises(fnr);
       setSøkerFeilmelding(undefined);
-      hentOppdatertJournalpostMedBruker({
-        journalpostId: journalpost.journalpostId,
-        fødselsnummer: fnr,
-      });
+      hentForhåndsvisningAvSøker(fnr);
     }
   };
 
-  const oppdaterKlikk = useCallback(
+  const oppdaterMedBrukerKlikk = useCallback(
     (e: any) => {
       if (e.key === 'Enter') {
         const fnr = e.target?.value;
-        oppdaterMedSøker(fnr);
+        forhåndsvisSøker(fnr);
       }
     },
-    [hentOppdatertJournalpostMedBruker, søkerFeilmelding],
+    [hentForhåndsvisningAvSøker, søkerFeilmelding],
   );
 
   return (
@@ -135,19 +141,24 @@ const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({
             <div>
               <Search
                 label={intl.formatMessage({ id: 'ValgtOppgave.Søk.FinnBruker' })}
-                onKeyDown={oppdaterKlikk}
-                onSearchClick={oppdaterMedSøker}
+                onKeyDown={oppdaterMedBrukerKlikk}
+                onSearchClick={forhåndsvisSøker}
                 hideLabel={false}
               >
                 <Search.Button type="button" />
               </Search>
               <VerticalSpacer eightPx />
               {søkerFeilmelding && <BodyShort className={styles.error}>{søkerFeilmelding}</BodyShort>}
-              {hentetSøker && (
+              {brukerTilForhåndsvisning && fnrSomSkalForhåndsvises && (
                 <>
-                  {lagBrukerAvsenderRad(hentetSøker.navn, hentetSøker.fnr, finnKjønnBilde(hentetSøker), undefined)}
+                  {lagBrukerAvsenderRad(
+                    brukerTilForhåndsvisning,
+                    fnrSomSkalForhåndsvises,
+                    finnKjønnBilde(fnrSomSkalForhåndsvises),
+                    undefined,
+                  )}
                   <VerticalSpacer sixteenPx />
-                  <Button type="button" onClick={knyttSøkerTilJournalpost}>
+                  <Button type="button" onClick={knyttSøkerTilJP}>
                     <FormattedMessage id="ValgtOppgave.Søk.KnyttTil" />
                   </Button>
                 </>

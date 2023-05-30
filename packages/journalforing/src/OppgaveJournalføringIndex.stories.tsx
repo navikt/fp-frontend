@@ -124,6 +124,7 @@ const Template: StoryFn<{
     { key: RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER.name, data: alleOppgaver || undefined },
     { key: RestApiPathsKeys.HENT_JOURNALPOST_DETALJER.name, data: detaljertJournalpost || undefined },
     { key: RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING.name, data: { saksnummer: '12345678' } },
+    { key: RestApiPathsKeys.HENT_BRUKER.name, data: 'Søker Søkersen' },
     { key: RestApiPathsKeys.OPPDATER_MED_BRUKER.name, data: responsFraBrukerSøk },
   ];
 
