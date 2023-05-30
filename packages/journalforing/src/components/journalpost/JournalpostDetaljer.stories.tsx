@@ -25,7 +25,6 @@ const defaultOppgave = {
   frist: '2022-02-01',
   ytelseType: 'FP',
   enhetId: '4108',
-  journalpostHarMangler: false,
   prioritet: OppgavePrioritet.NORM,
   beskrivelse: 'Inntektsmelding',
 };
@@ -98,10 +97,13 @@ const Template: StoryFn<{
   submitJournalføring: (data: JournalførSubmitValue) => void;
 }> = ({ detaljertJournalpost, oppgave, submitJournalføring }) => (
   <JournalpostDetaljer
+    lasterBruker={false}
     avbrytVisningAvJournalpost={action('button-click') as () => void}
     oppgave={oppgave}
     journalpost={detaljertJournalpost}
     submitJournalføring={submitJournalføring}
+    knyttJournalpostTilBruker={action('button-click') as () => void}
+    forhåndsvisBruker={action('button-click') as () => void}
   />
 );
 
