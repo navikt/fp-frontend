@@ -54,7 +54,7 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
 
   const hentBrukerCallback = useCallback(
     (data: string) => {
-      hentBrukerKall(data);
+      hentBrukerKall({ fødselsnummer: data });
     },
     [hentBrukerKall],
   );

@@ -120,11 +120,14 @@ const Template: StoryFn<{
   detaljertJournalpost: Journalpost;
   responsFraBrukerSøk: Journalpost | undefined;
 }> = ({ alleOppgaver, detaljertJournalpost, navAnsatt, responsFraBrukerSøk }) => {
+  const responsHentBruker = responsFraBrukerSøk
+    ? { navn: responsFraBrukerSøk.bruker.navn, fødselsnummer: responsFraBrukerSøk.bruker.fnr }
+    : undefined;
   const data = [
     { key: RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER.name, data: alleOppgaver || undefined },
     { key: RestApiPathsKeys.HENT_JOURNALPOST_DETALJER.name, data: detaljertJournalpost || undefined },
     { key: RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING.name, data: { saksnummer: '12345678' } },
-    { key: RestApiPathsKeys.HENT_BRUKER.name, data: 'Søker Søkersen' },
+    { key: RestApiPathsKeys.HENT_BRUKER.name, data: responsHentBruker },
     { key: RestApiPathsKeys.OPPDATER_MED_BRUKER.name, data: responsFraBrukerSøk },
   ];
 

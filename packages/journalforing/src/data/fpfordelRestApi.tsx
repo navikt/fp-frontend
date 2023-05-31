@@ -5,13 +5,14 @@ import Journalpost from '../typer/journalpostTsType';
 import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
 import SaksnummerType from '../typer/saksnummerTsType';
 import OppdaterMedBruker from '../typer/oppdaterBrukerTsType';
+import ForhåndsvisBrukerRespons from '../typer/forhåndsvisBrukerResponsTsType';
 
 export const RestApiPathsKeys = {
   ALLE_JOURNAL_OPPGAVER: new RestKey<OppgaveOversikt[], { ident: string }>('ALLE_JOURNAL_OPPGAVER'),
   HENT_JOURNALPOST_DETALJER: new RestKey<Journalpost, { journalpostId: string }>('HENT_JOURNALPOST_DETALJER'),
   FERDIGSTILL_JOURNALFØRING: new RestKey<SaksnummerType, JournalførSubmitValue>('FERDIGSTILL_JOURNALFØRING'),
   OPPDATER_MED_BRUKER: new RestKey<Journalpost, OppdaterMedBruker>('OPPDATER_MED_BRUKER'),
-  HENT_BRUKER: new RestKey<string, string>('HENT_BRUKER'), // input = fnr, output = navn på personen
+  HENT_BRUKER: new RestKey<ForhåndsvisBrukerRespons, { fødselsnummer: string }>('HENT_BRUKER'),
 };
 
 export const endpoints = new RestApiConfigBuilder()
