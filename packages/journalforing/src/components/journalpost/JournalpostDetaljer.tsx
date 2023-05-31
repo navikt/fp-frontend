@@ -21,6 +21,7 @@ import BrukerAvsenderPanel from './innhold/BrukerAvsenderPanel';
 import JournalføringFormValues from '../../typer/journalføringFormValues';
 import OppdaterMedBruker from '../../typer/oppdaterBrukerTsType';
 import JournalpostTittelForm from './innhold/JournalpostTittelForm';
+import ForhåndsvisBrukerRespons from '../../typer/forhåndsvisBrukerResponsTsType';
 
 const dokumentTittelSkalStyresAvJournalpost = (jp: Journalpost): boolean => jp.dokumenter?.length === 1;
 
@@ -91,7 +92,7 @@ type OwnProps = Readonly<{
   submitJournalføring: (params: JournalførSubmitValue) => void;
   knyttJournalpostTilBruker: (params: OppdaterMedBruker) => void;
   forhåndsvisBruker: (fnr: string) => void;
-  brukerTilForhåndsvisning?: string;
+  brukerTilForhåndsvisning?: ForhåndsvisBrukerRespons;
   lasterBruker: boolean;
 }>;
 
