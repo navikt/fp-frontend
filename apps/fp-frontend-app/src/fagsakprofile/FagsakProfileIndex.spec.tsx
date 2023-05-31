@@ -64,7 +64,7 @@ describe('<FagsakProfileIndex>', () => {
                 fagsakData={new FagsakData(fagsak as Fagsak)}
                 hentOgSettBehandling={vi.fn()}
                 setBehandling={vi.fn()}
-                endreFagsakMarkering={vi.fn()}
+                oppdaterFagsak={vi.fn()}
               />
             </MemoryRouter>
           </RestApiMock>
@@ -92,7 +92,7 @@ describe('<FagsakProfileIndex>', () => {
                 fagsakData={new FagsakData(fagsak as Fagsak)}
                 hentOgSettBehandling={vi.fn()}
                 setBehandling={vi.fn()}
-                endreFagsakMarkering={vi.fn()}
+                oppdaterFagsak={vi.fn()}
                 behandlingUuid="1"
               />
             </MemoryRouter>

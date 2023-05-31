@@ -5,18 +5,17 @@ import { FormValues } from '@navikt/fp-modal-sett-pa-vent';
 import { MenySettPaVentIndex } from '@navikt/fp-sak-meny-sett-pa-vent';
 import { BehandlingAppKontekst } from '@navikt/fp-types';
 
-import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
-import MenyKodeverk from './MenyKodeverk';
-
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../data/behandlingContextApi';
+import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import MenyKodeverk from '../MenyKodeverk';
+import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
 
 interface OwnProps {
   behandling: BehandlingAppKontekst;
   hentOgSettBehandling: () => void;
-  setValgtModal: (index: number | undefined) => void;
+  lukkModal: () => void;
 }
 
-const SettPaVentMenyModal: FunctionComponent<OwnProps> = ({ behandling, hentOgSettBehandling, setValgtModal }) => {
+const SettPaVentMenyModal: FunctionComponent<OwnProps> = ({ behandling, hentOgSettBehandling, lukkModal }) => {
   const alleFpSakKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
   const alleFpTilbakeKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK_FPTILBAKE);
   const menyKodeverk = new MenyKodeverk(behandling.type)
@@ -42,8 +41,6 @@ const SettPaVentMenyModal: FunctionComponent<OwnProps> = ({ behandling, hentOgSe
     },
     [behandling],
   );
-
-  const lukkModal = useCallback(() => setValgtModal(undefined), []);
 
   return (
     <MenySettPaVentIndex

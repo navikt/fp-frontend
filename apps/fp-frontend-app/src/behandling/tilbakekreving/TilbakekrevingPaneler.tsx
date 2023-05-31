@@ -55,40 +55,50 @@ const TilbakekrevingPaneler: FunctionComponent<OwnProps> = ({
   );
 
   const hentFaktaPaneler = useCallback(
-    (props: FaktaPanelInitProps) => (
-      <>
-        <FeilutbetalingFaktaInitPanel
-          tilbakekrevingKodeverk={tilbakekrevingKodeverk}
-          fagsakYtelseTypeKode={fagsak.fagsakYtelseType}
-          {...props}
-        />
-        <VergeFaktaInitPanel {...props} />
-      </>
-    ),
+    (props: FaktaPanelInitProps) => {
+      if (tilbakekrevingKodeverk) {
+        return (
+          <>
+            <FeilutbetalingFaktaInitPanel
+              tilbakekrevingKodeverk={tilbakekrevingKodeverk}
+              fagsakYtelseTypeKode={fagsak.fagsakYtelseType}
+              {...props}
+            />
+            <VergeFaktaInitPanel {...props} />
+          </>
+        );
+      }
+      return <>placeholder</>;
+    },
     [tilbakekrevingKodeverk, fagsak],
   );
 
   const hentProsessPaneler = useCallback(
-    (props: ProsessPanelInitProps) => (
-      <>
-        <ForeldelseProsessInitPanel
-          {...props}
-          relasjonsRolleType={fagsak.relasjonsRolleType}
-          tilbakekrevingKodeverk={tilbakekrevingKodeverk}
-        />
-        <TilbakekrevingProsessInitPanel
-          {...props}
-          relasjonsRolleType={fagsak.relasjonsRolleType}
-          tilbakekrevingKodeverk={tilbakekrevingKodeverk}
-        />
-        <VedtakTilbakekrevingProsessInitPanel
-          {...props}
-          harApenRevurdering={harApenRevurdering}
-          opneSokeside={opneSokeside}
-          tilbakekrevingKodeverk={tilbakekrevingKodeverk}
-        />
-      </>
-    ),
+    (props: ProsessPanelInitProps) => {
+      if (tilbakekrevingKodeverk) {
+        return (
+          <>
+            <ForeldelseProsessInitPanel
+              {...props}
+              relasjonsRolleType={fagsak.relasjonsRolleType}
+              tilbakekrevingKodeverk={tilbakekrevingKodeverk}
+            />
+            <TilbakekrevingProsessInitPanel
+              {...props}
+              relasjonsRolleType={fagsak.relasjonsRolleType}
+              tilbakekrevingKodeverk={tilbakekrevingKodeverk}
+            />
+            <VedtakTilbakekrevingProsessInitPanel
+              {...props}
+              harApenRevurdering={harApenRevurdering}
+              opneSokeside={opneSokeside}
+              tilbakekrevingKodeverk={tilbakekrevingKodeverk}
+            />
+          </>
+        );
+      }
+      return <>placeholder</>;
+    },
     [tilbakekrevingKodeverk, harApenRevurdering, fagsak, opneSokeside, oppdaterProsessStegOgFaktaPanelIUrl],
   );
 

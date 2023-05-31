@@ -20,7 +20,7 @@ import {
   pathToAnnenPart,
 } from '../app/paths';
 import FagsakGrid from './components/FagsakGrid';
-import { LinkCategory, requestFagsakApi } from '../data/fagsakContextApi';
+import { requestFagsakApi } from '../data/fagsakContextApi';
 import useHentFagsak from './useHentFagsak';
 import ErrorBoundary from '../app/ErrorBoundary';
 import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../data/behandlingContextApi';
@@ -50,14 +50,30 @@ const FagsakIndex: FunctionComponent = () => {
   });
 
   const [behandlingUuid, setBehandlingUuid] = useState<string | undefined>();
-  const [behandling, setBehandling] = useState<Behandling>();
+  const [behandling, oppdaterBehandling] = useState<Behandling>();
+  const setBehandling = useCallback(
+    (hentetBehandling: Behandling | undefined) => {
+      if (hentetBehandling) {
+        requestBehandlingApi.resetCache();
+        requestBehandlingApi.resetLinks();
+        requestBehandlingApi.setLinks(hentetBehandling.links);
+
+        oppdaterBehandling(hentetBehandling);
+      }
+    },
+    [requestFagsakApi, requestBehandlingApi],
+  );
 
   // 1. Hent opp fagsak gitt saksnr i URL
   // 2. Hent opp behandling gitt uuid i URL
   // - Ny behandling => sett behandling og hent opp fagsak på nytt gitt uuid. Endre uuid i url manuelt, sjekk da om uuid er lik behandling, det er den her
   // - Lagre aksjonspunkt => hent opp behandling og så ny fagsak gitt versjon
 
-  const [harHentetFagsak, fagsakData] = useHentFagsak(selectedSaksnummer, behandlingUuid, behandling?.versjon);
+  const [harHentetFagsak, fagsakData, oppdaterFagsak] = useHentFagsak(
+    selectedSaksnummer,
+    behandlingUuid,
+    behandling?.versjon,
+  );
 
   const fagsakBehandling = fagsakData?.getBehandling(behandlingUuid);
   const erTilbakekreving =
@@ -71,14 +87,7 @@ const FagsakIndex: FunctionComponent = () => {
   const hentOgSettBehandling = useCallback(
     (keepData = false) => {
       if (behandlingUuid) {
-        hentBehandling({ behandlingUuid }, keepData).then(b => {
-          if (b) {
-            requestFagsakApi.setLinks(b.links, LinkCategory.BEHANDLING);
-            requestBehandlingApi.resetCache();
-            requestBehandlingApi.setLinks(b.links);
-            setBehandling(b);
-          }
-        });
+        hentBehandling({ behandlingUuid }, keepData).then(setBehandling);
       }
     },
     [behandlingUuid],
@@ -94,6 +103,8 @@ const FagsakIndex: FunctionComponent = () => {
     () => () => {
       requestFagsakApi.resetCache();
       requestFagsakApi.resetLinks();
+      requestBehandlingApi.resetCache();
+      requestBehandlingApi.resetLinks();
     },
     [],
   );
@@ -141,6 +152,7 @@ const FagsakIndex: FunctionComponent = () => {
             setBehandling={setBehandling}
             hentOgSettBehandling={hentOgSettBehandling}
             behandlingVersjon={behandling?.versjon}
+            oppdaterFagsak={oppdaterFagsak}
           />
         }
         supportContent={

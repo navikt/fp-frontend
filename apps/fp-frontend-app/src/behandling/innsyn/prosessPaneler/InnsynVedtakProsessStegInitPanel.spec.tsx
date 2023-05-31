@@ -79,7 +79,7 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
           <InnsynVedtakProsessStegInitPanel
             valgtProsessSteg="default"
             registrerProsessPanel={() => {}}
-            toggleOppdatereFagsakContext={() => {}}
+            setSkalOppdatereEtterBekreftelseAvAp={() => {}}
             fagsak={fagsak}
             opneSokeside={() => {}}
             behandling={{
@@ -112,7 +112,7 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
           <InnsynVedtakProsessStegInitPanel
             valgtProsessSteg="default"
             registrerProsessPanel={() => {}}
-            toggleOppdatereFagsakContext={() => {}}
+            setSkalOppdatereEtterBekreftelseAvAp={() => {}}
             fagsak={fagsak}
             opneSokeside={() => {}}
             behandling={{

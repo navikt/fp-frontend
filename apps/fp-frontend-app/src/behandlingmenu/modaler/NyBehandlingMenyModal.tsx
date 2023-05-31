@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useCallback, useMemo, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   behandlingType as BehandlingType,
   behandlingStatus as BehandlingStatus,
@@ -6,13 +7,14 @@ import {
 } from '@navikt/fp-kodeverk';
 
 import { MenyNyBehandlingIndex, FormValues as NyBehandlingFormValues } from '@navikt/fp-sak-meny-ny-behandling';
-import { BehandlingAppKontekst, Behandling } from '@navikt/fp-types';
+import { BehandlingAppKontekst } from '@navikt/fp-types';
 
-import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
-import useGetEnabledApplikasjonContext from '../app/useGetEnabledApplikasjonContext';
-import ApplicationContextPath from '../app/ApplicationContextPath';
-import MenyKodeverk from './MenyKodeverk';
-import FagsakData from '../fagsak/FagsakData';
+import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import useGetEnabledApplikasjonContext from '../../app/useGetEnabledApplikasjonContext';
+import ApplicationContextPath from '../../app/ApplicationContextPath';
+import MenyKodeverk from '../MenyKodeverk';
+import FagsakData from '../../fagsak/FagsakData';
+import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../../app/paths';
 
 const BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES = [
   BehandlingType.FORSTEGANGSSOKNAD,
@@ -24,11 +26,6 @@ const BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES = [
   BehandlingType.TILBAKEKREVING_REVURDERING,
 ];
 
-/* const findNewBehandlingUuid = (alleBehandlinger: BehandlingAppKontekst[]): string => {
-  alleBehandlinger.sort((b1, b2) => moment(b2.opprettet).diff(moment(b1.opprettet)));
-  return alleBehandlinger[0].uuid;
-}; */
-
 const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: BehandlingAppKontekst[] = []): string | undefined => {
   const behandling = behandlinger.find(
     b =>
@@ -39,43 +36,17 @@ const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: BehandlingAppKont
   return behandling ? behandling.uuid : undefined;
 };
 
-const sjekkOgSettBehandling = (setBehandling: (behandling: Behandling) => void) => (behandling?: Behandling) => {
-  if (behandling) {
-    setBehandling(behandling);
-  }
-};
-
 interface OwnProps {
   fagsakData: FagsakData;
   behandlingUuid?: string;
   behandlingVersjon?: number;
-  setBehandling: (behandling: Behandling) => void;
-  setValgtModal: (index: number | undefined) => void;
+  lukkModal: () => void;
 }
 
-const NyBehandlingMenyModal: FunctionComponent<OwnProps> = ({
-  fagsakData,
-  behandlingUuid,
-  setBehandling,
-  setValgtModal,
-}) => {
+const NyBehandlingMenyModal: FunctionComponent<OwnProps> = ({ fagsakData, behandlingUuid, lukkModal }) => {
   const fagsak = fagsakData.getFagsak();
   const alleBehandlinger = fagsakData.getAlleBehandlinger();
   const behandling = fagsakData.getBehandling(behandlingUuid);
-
-  /* const navigate = useNavigate();
-  const location = useLocation();
-
-  const ref = useRef<number>();
-  useEffect(() => {
-    // Når antallet har endret seg er det laget en ny behandling og denne må da velges
-    if (ref.current && ref.current > 0) {
-      const pathname = pathToBehandling(fagsak.saksnummer, findNewBehandlingUuid(alleBehandlinger));
-      navigate(getLocationWithDefaultProsessStegAndFakta({ ...location, pathname }));
-    }
-
-    ref.current = alleBehandlinger.length;
-  }, [alleBehandlinger.length]); */
 
   const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
   const { innloggetBruker: navAnsatt } = initFetchData;
@@ -100,7 +71,8 @@ const NyBehandlingMenyModal: FunctionComponent<OwnProps> = ({
     FagsakApiKeys.NEW_BEHANDLING_FPTILBAKE,
   );
 
-  const settBehandling = sjekkOgSettBehandling(setBehandling);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const lagNyBehandling = useCallback(
     (
@@ -111,7 +83,10 @@ const NyBehandlingMenyModal: FunctionComponent<OwnProps> = ({
       } & NyBehandlingFormValues,
     ): void => {
       const lagNy = isTilbakekreving ? lagNyBehandlingFpTilbake : lagNyBehandlingFpSak;
-      lagNy(params).then(settBehandling);
+      lagNy(params).then(b => {
+        const pathname = pathToBehandling(fagsak.saksnummer, b?.uuid);
+        navigate(getLocationWithDefaultProsessStegAndFakta({ ...location, pathname }));
+      });
     },
     [],
   );
@@ -120,6 +95,7 @@ const NyBehandlingMenyModal: FunctionComponent<OwnProps> = ({
     () => getUuidForSisteLukkedeForsteEllerRevurd(alleBehandlinger),
     [alleBehandlinger],
   );
+
   useEffect(() => {
     if (erTilbakekrevingAktivert && !navAnsatt.kanVeilede) {
       if (uuidForSistLukkede !== undefined) {
@@ -133,8 +109,6 @@ const NyBehandlingMenyModal: FunctionComponent<OwnProps> = ({
       }
     }
   }, [fagsak.saksnummer, behandlingUuid]);
-
-  const lukkModal = useCallback(() => setValgtModal(undefined), []);
 
   return (
     <MenyNyBehandlingIndex

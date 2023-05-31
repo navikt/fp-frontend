@@ -1,26 +1,29 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import useGetEnabledApplikasjonContext from '../app/useGetEnabledApplikasjonContext';
 import ApplicationContextPath from '../app/ApplicationContextPath';
 import useBehandlingEndret from '../behandling/useBehandlingEndret';
-import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
+import { FagsakApiKeys, LinkCategory, requestFagsakApi, restFagsakApiHooks } from '../data/fagsakContextApi';
 import FagsakData from './FagsakData';
 
 const useHentFagsak = (
   saksnummer: string,
   behandlingUuid?: string,
   behandlingVersjon?: number,
-): [harHentet: boolean, fagsakData: FagsakData | undefined] => {
+): [harHentet: boolean, fagsakData: FagsakData | undefined, oppdaterFagsak: () => void] => {
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingUuid, behandlingVersjon);
   const enabledApplicationContexts = useGetEnabledApplikasjonContext();
   const skalHenteFraFpTilbake = enabledApplicationContexts.includes(ApplicationContextPath.FPTILBAKE);
+
+  const [trigger, setTrigger] = useState(0);
+  const oppdaterFagsak = useCallback(() => setTrigger(old => old + 1), []);
 
   const { data: fagsak } = restFagsakApiHooks.useRestApi(
     FagsakApiKeys.FETCH_FAGSAK,
     { saksnummer },
     {
-      updateTriggers: [behandlingUuid, behandlingVersjon],
+      updateTriggers: [behandlingUuid, behandlingVersjon, trigger],
       suspendRequest: !saksnummer || erBehandlingEndretFraUndefined,
       keepData: true,
     },
@@ -30,7 +33,7 @@ const useHentFagsak = (
     FagsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE,
     { saksnummer },
     {
-      updateTriggers: [behandlingUuid, behandlingVersjon],
+      updateTriggers: [behandlingUuid, behandlingVersjon, trigger],
       suspendRequest: !skalHenteFraFpTilbake || !saksnummer || erBehandlingEndretFraUndefined,
       keepData: true,
     },
@@ -46,7 +49,12 @@ const useHentFagsak = (
     [harHentetData, fagsak, fagsakDataTilbake],
   );
 
-  return [harHentetData, fagsakData];
+  const behandling = fagsakData?.getBehandling(behandlingUuid);
+  if (behandling) {
+    requestFagsakApi.setLinks(behandling.links, LinkCategory.BEHANDLING);
+  }
+
+  return [harHentetData, fagsakData, oppdaterFagsak];
 };
 
 export default useHentFagsak;

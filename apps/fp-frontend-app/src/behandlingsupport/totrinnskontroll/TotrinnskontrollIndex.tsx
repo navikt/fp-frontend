@@ -95,7 +95,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
       valgtBehandling?.uuid,
       valgtBehandling?.versjon,
     ),
-    [valgtBehandling?.uuid, valgtBehandling?.versjon],
+    [fagsak, valgtBehandling?.uuid, valgtBehandling?.versjon, setVisBeslutterModal, godkjennTotrinnsaksjonspunkter],
   );
 
   if (!valgtBehandling?.totrinnskontrollÅrsaker) {

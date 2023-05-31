@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import React, { FunctionComponent, useCallback, useMemo, useState } from 'react';
 import { Button } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
 import { Dropdown } from '@navikt/ds-react-internal';
@@ -7,53 +7,36 @@ import { getEndreEnhetMenytekst, getVergeMenytekst, getTaAvVentMenytekst } from 
 import { getMenytekst as getSettPaVentMenytekst } from '@navikt/fp-sak-meny-sett-pa-vent';
 import { getMenytekst as getHenleggMenytekst } from '@navikt/fp-sak-meny-henlegg';
 import { getMenytekst as getApneForEndringerMenytekst } from '@navikt/fp-sak-meny-apne-for-endringer';
-import {
-  MenyEndreUtlandIndex,
-  getMenytekst as getEndreUtlandMenytekst,
-  FormValues as EndreUtlandFormValues,
-} from '@navikt/fp-sak-meny-endre-utland';
-import { Behandling, VergeBehandlingmenyValg } from '@navikt/fp-types';
+import { getMenytekst as getEndreUtlandMenytekst } from '@navikt/fp-sak-meny-endre-utland';
+import { Behandling, BehandlingAppKontekst, Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
 
 import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
 import FagsakData from '../fagsak/FagsakData';
-import NyBehandlingMenyModal from './NyBehandlingMenyModal';
-import ApneForEndringerMenyModal from './ApneForEndringerMenyModal';
-import HenleggMenyModal from './HenleggMenyModal';
-import EndreBehandlendeEnhetMenyModal from './EndreBehandlendeEnhetMenyModal';
-import SettPaVentMenyModal from './SettPaVentMenyModal';
-import TaAvVentMenyModal from './TaAvVentMenyModal';
+import NyBehandlingMenyModal from './modaler/NyBehandlingMenyModal';
+import ApneForEndringerMenyModal from './modaler/ApneForEndringerMenyModal';
+import HenleggMenyModal from './modaler/HenleggMenyModal';
+import EndreBehandlendeEnhetMenyModal from './modaler/EndreBehandlendeEnhetMenyModal';
+import SettPaVentMenyModal from './modaler/SettPaVentMenyModal';
+import TaAvVentMenyModal from './modaler/TaAvVentMenyModal';
+import EndreFagsakMarkeringMenyModal from './modaler/EndreFagsakMarkeringMenyModal';
+import VergeMenyModal from './modaler/VergeMenyModal';
 
 import '@navikt/ft-sak-meny/dist/style.css';
 
-interface OwnProps {
-  fagsakData: FagsakData;
-  behandlingUuid?: string;
-  behandlingVersjon?: number;
-  setBehandling: (behandling: Behandling) => void;
-  hentOgSettBehandling: () => void;
+enum ModalType {
+  NY_BEHANDLING = 'NY_BEHANDLING',
+  VERGE = 'VERGE',
+  ENDRE_FAGSAK_MARKERING = 'ENDRE_FAGSAK_MARKERING',
+  ÅPNE_FOR_ENDRINGER = 'ÅPNE_FOR_ENDRINGER',
+  ENDRE_BEHANDLENDE_ENHET = 'ENDRE_BEHANDLENDE_ENHET',
+  HENLEGG = 'HENLEGG',
+  SETT_PÅ_VENT = 'SETT_PÅ_VENT',
+  TA_AV_VENT = 'TA_AV_VENT',
 }
 
-const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
-  fagsakData,
-  behandlingUuid,
-  setBehandling,
-  hentOgSettBehandling,
-}) => {
-  const fagsak = fagsakData.getFagsak();
-  const behandling = fagsakData.getBehandling(behandlingUuid);
-
-  const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
-  const { innloggetBruker: navAnsatt } = initFetchData;
-
+const hentMenyData = (behandling: BehandlingAppKontekst | undefined, fagsak: Fagsak) => {
   const erPaVent = behandling ? behandling.behandlingPaaVent : false;
   const behandlingTillatteOperasjoner = behandling?.behandlingTillatteOperasjoner;
-
-  const [valgtModal, setValgtModal] = useState<number | undefined>();
-  const lukkModal = useCallback(() => setValgtModal(undefined), []);
-
-  if (navAnsatt.kanVeilede) {
-    return null;
-  }
 
   const vergeMenyvalg = behandlingTillatteOperasjoner?.vergeBehandlingsmeny;
   const skalViseFjernVerge =
@@ -61,98 +44,71 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   const skalViseOpprettVerge =
     vergeMenyvalg === VergeBehandlingmenyValg.OPPRETT && !!behandling?.uuid && !!behandling?.versjon;
 
-  const { startRequest: endreSaksmerking } = restFagsakApiHooks.useRestApiRunner(FagsakApiKeys.ENDRE_SAK_MARKERING);
-  const endreFagsakMarkering = useCallback(
-    (params: EndreUtlandFormValues) => endreSaksmerking(params).then(() => hentOgSettBehandling()),
-    [hentOgSettBehandling],
-  );
-
-  const modalData = [
-    {
+  return {
+    [ModalType.TA_AV_VENT]: {
       disabled: !behandlingTillatteOperasjoner?.behandlingKanGjenopptas,
       text: getTaAvVentMenytekst(),
-      component: () => (
-        <TaAvVentMenyModal behandling={behandling} setBehandling={setBehandling} setValgtModal={setValgtModal} />
-      ),
     },
-    {
+    [ModalType.SETT_PÅ_VENT]: {
       disabled: !behandlingTillatteOperasjoner?.behandlingKanSettesPaVent,
       text: getSettPaVentMenytekst(),
-      component: () => (
-        <SettPaVentMenyModal
-          behandling={behandling}
-          hentOgSettBehandling={hentOgSettBehandling}
-          setValgtModal={setValgtModal}
-        />
-      ),
     },
-    {
+    [ModalType.HENLEGG]: {
       disabled: !behandlingTillatteOperasjoner?.behandlingKanHenlegges,
       text: getHenleggMenytekst(),
-      component: () => (
-        <HenleggMenyModal
-          behandling={behandling}
-          fagsakYtelseType={fagsak.fagsakYtelseType}
-          setValgtModal={setValgtModal}
-        />
-      ),
     },
-    {
+    [ModalType.ENDRE_BEHANDLENDE_ENHET]: {
       disabled: !behandlingTillatteOperasjoner?.behandlingKanBytteEnhet,
       text: getEndreEnhetMenytekst(),
-      component: () => (
-        <EndreBehandlendeEnhetMenyModal
-          behandling={behandling}
-          hentOgSettBehandling={hentOgSettBehandling}
-          setValgtModal={setValgtModal}
-        />
-      ),
     },
-    {
+    [ModalType.ÅPNE_FOR_ENDRINGER]: {
       disabled: !behandlingTillatteOperasjoner?.behandlingKanOpnesForEndringer,
       text: getApneForEndringerMenytekst(),
-      component: () => {
-        if (behandling) {
-          return (
-            <ApneForEndringerMenyModal
-              behandling={behandling}
-              setBehandling={setBehandling}
-              setValgtModal={setValgtModal}
-            />
-          );
-        }
-        return null;
-      },
     },
-    {
+    [ModalType.NY_BEHANDLING]: {
       disabled: fagsak.sakSkalTilInfotrygd,
       text: getNyBehandlingMenytekst(),
-      component: () => (
-        <NyBehandlingMenyModal
-          fagsakData={fagsakData}
-          behandlingUuid={behandlingUuid}
-          setBehandling={setBehandling}
-          setValgtModal={setValgtModal}
-        />
-      ),
     },
-    {
+    [ModalType.ENDRE_FAGSAK_MARKERING]: {
       disabled: fagsak.sakSkalTilInfotrygd,
       text: getEndreUtlandMenytekst(),
-      component: () => (
-        <MenyEndreUtlandIndex
-          saksnummer={fagsak.saksnummer}
-          fagsakMarkering={fagsak.fagsakMarkering}
-          endreFagsakMarkering={endreFagsakMarkering}
-          lukkModal={lukkModal}
-        />
-      ),
     },
-    {
+    [ModalType.VERGE]: {
       disabled: !(!erPaVent && (skalViseOpprettVerge || skalViseFjernVerge)),
       text: getVergeMenytekst(skalViseOpprettVerge),
     },
-  ];
+  } as Record<string, { disabled: boolean; text: string }>;
+};
+
+interface OwnProps {
+  fagsakData: FagsakData;
+  behandlingUuid?: string;
+  setBehandling: (behandling: Behandling | undefined) => void;
+  hentOgSettBehandling: () => void;
+  oppdaterFagsak: () => void;
+}
+
+const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
+  fagsakData,
+  behandlingUuid,
+  setBehandling,
+  hentOgSettBehandling,
+  oppdaterFagsak,
+}) => {
+  const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
+  const { innloggetBruker: navAnsatt } = initFetchData;
+
+  const [valgtModal, setValgtModal] = useState<string | undefined>();
+  const lukkModal = useCallback(() => setValgtModal(undefined), []);
+
+  const fagsak = fagsakData.getFagsak();
+  const behandling = fagsakData.getBehandling(behandlingUuid);
+
+  const menyData = useMemo(() => hentMenyData(behandling, fagsak), [behandling, fagsak]);
+
+  if (navAnsatt.kanVeilede) {
+    return null;
+  }
 
   return (
     <>
@@ -162,20 +118,59 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
         </Button>
         <Dropdown.Menu>
           <Dropdown.Menu.List>
-            {modalData.map((data, index) => (
-              <Dropdown.Menu.List.Item
-                disabled={data.disabled}
-                onClick={() => {
-                  setValgtModal(index);
-                }}
-              >
-                {data.text}
-              </Dropdown.Menu.List.Item>
-            ))}
+            {Object.keys(menyData)
+              .filter(key => !menyData[key].disabled)
+              .map(key => (
+                <Dropdown.Menu.List.Item
+                  key={key}
+                  onClick={() => {
+                    setValgtModal(key);
+                  }}
+                >
+                  {menyData[key].text}
+                </Dropdown.Menu.List.Item>
+              ))}
           </Dropdown.Menu.List>
         </Dropdown.Menu>
       </Dropdown>
-      {valgtModal !== undefined && modalData[valgtModal].component()}
+      {valgtModal === ModalType.NY_BEHANDLING && (
+        <NyBehandlingMenyModal fagsakData={fagsakData} behandlingUuid={behandlingUuid} lukkModal={lukkModal} />
+      )}
+      {valgtModal === ModalType.ENDRE_FAGSAK_MARKERING && (
+        <EndreFagsakMarkeringMenyModal
+          saksnummer={fagsak.saksnummer}
+          fagsakMarkering={fagsak.fagsakMarkering}
+          oppdaterFagsak={oppdaterFagsak}
+          hentOgSettBehandling={hentOgSettBehandling}
+          lukkModal={lukkModal}
+        />
+      )}
+      {valgtModal === ModalType.VERGE && behandling && (
+        <VergeMenyModal fagsak={fagsak} behandling={behandling} setBehandling={setBehandling} lukkModal={lukkModal} />
+      )}
+      {valgtModal === ModalType.ÅPNE_FOR_ENDRINGER && behandling && (
+        <ApneForEndringerMenyModal behandling={behandling} setBehandling={setBehandling} lukkModal={lukkModal} />
+      )}
+      {valgtModal === ModalType.ENDRE_BEHANDLENDE_ENHET && behandling && (
+        <EndreBehandlendeEnhetMenyModal
+          behandling={behandling}
+          hentOgSettBehandling={hentOgSettBehandling}
+          lukkModal={lukkModal}
+        />
+      )}
+      {valgtModal === ModalType.HENLEGG && behandling && (
+        <HenleggMenyModal behandling={behandling} fagsakYtelseType={fagsak.fagsakYtelseType} lukkModal={lukkModal} />
+      )}
+      {valgtModal === ModalType.SETT_PÅ_VENT && behandling && (
+        <SettPaVentMenyModal
+          behandling={behandling}
+          hentOgSettBehandling={hentOgSettBehandling}
+          lukkModal={lukkModal}
+        />
+      )}
+      {valgtModal === ModalType.TA_AV_VENT && behandling && (
+        <TaAvVentMenyModal behandling={behandling} setBehandling={setBehandling} lukkModal={lukkModal} />
+      )}
     </>
   );
 };

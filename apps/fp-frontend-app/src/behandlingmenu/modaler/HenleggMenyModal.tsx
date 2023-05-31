@@ -4,18 +4,18 @@ import { KodeverkType } from '@navikt/fp-kodeverk';
 import { BehandlingAppKontekst } from '@navikt/fp-types';
 import { MenyHenleggIndex } from '@navikt/fp-sak-meny-henlegg';
 
-import useVisForhandsvisningAvMelding from '../data/useVisForhandsvisningAvMelding';
-import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
-import MenyKodeverk from './MenyKodeverk';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../data/behandlingContextApi';
+import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
+import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import MenyKodeverk from '../MenyKodeverk';
+import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
 
 interface OwnProps {
   behandling: BehandlingAppKontekst;
   fagsakYtelseType: string;
-  setValgtModal: (index: number | undefined) => void;
+  lukkModal: () => void;
 }
 
-const HenleggMenyModal: FunctionComponent<OwnProps> = ({ behandling, fagsakYtelseType, setValgtModal }) => {
+const HenleggMenyModal: FunctionComponent<OwnProps> = ({ behandling, fagsakYtelseType, lukkModal }) => {
   const alleFpSakKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
   const alleFpTilbakeKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK_FPTILBAKE);
   const menyKodeverk = new MenyKodeverk(behandling?.type)
@@ -40,8 +40,6 @@ const HenleggMenyModal: FunctionComponent<OwnProps> = ({ behandling, fagsakYtels
       }),
     [behandling],
   );
-
-  const lukkModal = useCallback(() => setValgtModal(undefined), []);
 
   return (
     <MenyHenleggIndex

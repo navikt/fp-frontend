@@ -250,7 +250,7 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
                   valgtProsessSteg={query.punkt}
                   valgtFaktaSteg={query.fakta}
                   oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-                  toggleOppdateringAvFagsakOgBehandling={setSkalOppdatereEtterBekreftelseAvAp}
+                  setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
                   opneSokeside={opneSokeside}
                   alleBehandlinger={alleBehandlinger}
                 />

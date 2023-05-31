@@ -55,8 +55,9 @@ interface OwnProps {
   fagsakData: FagsakData;
   behandlingUuid?: string;
   behandlingVersjon?: number;
-  setBehandling: (behandling: Behandling) => void;
+  setBehandling: (behandling: Behandling | undefined) => void;
   hentOgSettBehandling: () => void;
+  oppdaterFagsak: () => void;
 }
 
 const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
@@ -65,6 +66,7 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   behandlingVersjon,
   setBehandling,
   hentOgSettBehandling,
+  oppdaterFagsak,
 }) => {
   const intl = useIntl();
   const [showAll, setShowAll] = useState(!behandlingUuid);
@@ -122,9 +124,9 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
                   <BehandlingMenuIndex
                     fagsakData={fagsakData}
                     behandlingUuid={behandlingUuid}
-                    behandlingVersjon={behandlingVersjon}
                     setBehandling={setBehandling}
                     hentOgSettBehandling={hentOgSettBehandling}
+                    oppdaterFagsak={oppdaterFagsak}
                   />
                 </ErrorBoundary>
               </FlexColumn>
