@@ -19,8 +19,8 @@ export const endpoints = new RestApiConfigBuilder()
   .withGet('/fpfordel/api/journalfoering/oppgaver', RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER)
   .withGet('/fpfordel/api/journalfoering/oppgave/detaljer', RestApiPathsKeys.HENT_JOURNALPOST_DETALJER)
   .withPost('/fpfordel/api/sak/ferdigstill', RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING)
-  .withPost('/fpfordel/api/bruker/oppdater', RestApiPathsKeys.OPPDATER_MED_BRUKER)
-  .withPost('/fpfordel/api/bruker/hent', RestApiPathsKeys.HENT_BRUKER)
+  .withPost('/fpfordel/api/journalfoering/bruker/oppdater', RestApiPathsKeys.OPPDATER_MED_BRUKER)
+  .withPost('/fpfordel/api/journalfoering/bruker/hent', RestApiPathsKeys.HENT_BRUKER)
   .build();
 
 export const requestApi = createRequestApi(endpoints);
