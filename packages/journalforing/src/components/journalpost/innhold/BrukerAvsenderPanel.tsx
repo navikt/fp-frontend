@@ -8,6 +8,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import styles from './brukerAvsenderPanel.module.css';
 import Journalpost from '../../../typer/journalpostTsType';
 import OppdaterMedBruker from '../../../typer/oppdaterBrukerTsType';
+import ForhåndsvisBrukerRespons from '../../../typer/forhåndsvisBrukerResponsTsType';
 
 const finnKjønnBilde = (brukerFnr: string): ReactElement => {
   if (!brukerFnr || brukerFnr.length !== 11) {
@@ -68,7 +69,7 @@ type OwnProps = Readonly<{
   journalpost: Journalpost;
   hentForhåndsvisningAvSøker: (fnr: string) => void;
   skalKunneEndreSøker: boolean;
-  brukerTilForhåndsvisning?: string;
+  brukerTilForhåndsvisning?: ForhåndsvisBrukerRespons;
   knyttSøkerTilJournalpost: (params: OppdaterMedBruker) => void;
   lasterBruker: boolean;
 }>;
@@ -151,12 +152,12 @@ const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({
               </Search>
               <VerticalSpacer eightPx />
               {søkerFeilmelding && <BodyShort className={styles.error}>{søkerFeilmelding}</BodyShort>}
-              {brukerTilForhåndsvisning && fnrSomSkalForhåndsvises && (
+              {brukerTilForhåndsvisning && (
                 <>
                   {lagBrukerAvsenderRad(
-                    brukerTilForhåndsvisning,
-                    fnrSomSkalForhåndsvises,
-                    finnKjønnBilde(fnrSomSkalForhåndsvises),
+                    brukerTilForhåndsvisning.navn,
+                    brukerTilForhåndsvisning.fødselsnummer,
+                    finnKjønnBilde(brukerTilForhåndsvisning.fødselsnummer),
                     undefined,
                   )}
                   <VerticalSpacer sixteenPx />
