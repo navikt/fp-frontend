@@ -77,11 +77,10 @@ const createColumns = (
   const nextPeriodFormatted = `${dayjs(nextPeriod).format('MMMMYY')}`;
 
   const perioderData = rangeOfMonths.map(monthAndYear => {
-    const periodeExists = perioder.find(periode => {
-      const test = dayjs(periode.periode.tom).format('MMMMYY');
-      debugger;
-      return test.toLowerCase() === `${monthAndYear.month}${monthAndYear.year}`;
-    });
+    const periodeExists = perioder.find(
+      periode =>
+        dayjs(periode.periode.tom).format('MMMMYY').toLowerCase() === `${monthAndYear.month}${monthAndYear.year}`,
+    );
     return periodeExists || { måned: `${monthAndYear.month}${monthAndYear.year}`, beløp: null };
   });
 

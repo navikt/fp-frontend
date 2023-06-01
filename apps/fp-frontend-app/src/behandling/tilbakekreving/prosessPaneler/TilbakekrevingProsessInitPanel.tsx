@@ -15,6 +15,8 @@ import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPane
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
+import '@navikt/ft-prosess-tilbakekreving/dist/style.css';
+
 const AKSJONSPUNKT_KODER = [ForeldelseAksjonspunktCodes.VURDER_TILBAKEKREVING];
 
 const ENDEPUNKTER_PANEL_DATA = [
