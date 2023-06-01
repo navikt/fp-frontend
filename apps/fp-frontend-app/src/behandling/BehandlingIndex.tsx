@@ -66,18 +66,20 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
 
   if (behandling) {
     if (behandling?.erAktivPapirsoknad) {
-      <Suspense fallback={<LoadingPanel />}>
-        <ErrorBoundary errorMessageCallback={addErrorMessage}>
-          <BehandlingPapirsoknadIndex
-            key={behandlingUuid}
-            behandling={behandling}
-            setBehandling={setBehandling}
-            kodeverk={kodeverk}
-            fagsak={fagsak}
-            rettigheter={rettigheter}
-          />
-        </ErrorBoundary>
-      </Suspense>;
+      return (
+        <Suspense fallback={<LoadingPanel />}>
+          <ErrorBoundary errorMessageCallback={addErrorMessage}>
+            <BehandlingPapirsoknadIndex
+              key={behandlingUuid}
+              behandling={behandling}
+              setBehandling={setBehandling}
+              kodeverk={kodeverk}
+              fagsak={fagsak}
+              rettigheter={rettigheter}
+            />
+          </ErrorBoundary>
+        </Suspense>
+      );
     }
     return (
       <ErrorBoundary errorMessageCallback={addErrorMessage}>
