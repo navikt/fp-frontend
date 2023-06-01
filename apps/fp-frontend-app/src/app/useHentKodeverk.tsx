@@ -2,7 +2,7 @@ import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import useGetEnabledApplikasjonContext from './useGetEnabledApplikasjonContext';
 import ApplicationContextPath from './ApplicationContextPath';
-import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
+import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
 
 const NO_PARAMS = undefined;
 
@@ -10,12 +10,12 @@ const useHentKodeverk = (skalHenteKodeverk: boolean): boolean => {
   const enabledApplicationContexts = useGetEnabledApplikasjonContext();
   const skalHenteFraFpTilbake = enabledApplicationContexts.includes(ApplicationContextPath.FPTILBAKE);
 
-  const { state: kodeverkFpSakStatus } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.KODEVERK, NO_PARAMS, {
+  const { state: kodeverkFpSakStatus } = restFagsakApiHooks.useGlobalStateRestApi(FagsakApiKeys.KODEVERK, NO_PARAMS, {
     suspendRequest: !skalHenteKodeverk,
     updateTriggers: [skalHenteKodeverk],
   });
-  const { state: kodeverkFpTilbakeStatus } = restApiHooks.useGlobalStateRestApi(
-    FpsakApiKeys.KODEVERK_FPTILBAKE,
+  const { state: kodeverkFpTilbakeStatus } = restFagsakApiHooks.useGlobalStateRestApi(
+    FagsakApiKeys.KODEVERK_FPTILBAKE,
     NO_PARAMS,
     {
       suspendRequest: !skalHenteFraFpTilbake || !skalHenteKodeverk,

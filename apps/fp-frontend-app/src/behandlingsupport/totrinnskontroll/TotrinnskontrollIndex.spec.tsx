@@ -15,7 +15,7 @@ import {
 } from '@navikt/fp-kodeverk';
 
 import FagsakData from '../../fagsak/FagsakData';
-import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
+import { requestFagsakApi, FagsakApiKeys } from '../../data/fagsakContextApi';
 import TotrinnskontrollIndex from './TotrinnskontrollIndex';
 
 describe('<TotrinnskontrollIndex>', () => {
@@ -95,10 +95,10 @@ describe('<TotrinnskontrollIndex>', () => {
 
   it('skal vise modal når beslutter godkjenner', async () => {
     const data = [
-      { key: FpsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
-      { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: kodeverk },
-      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
-      { key: FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT.name, data: undefined },
+      { key: FagsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
+      { key: FagsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: kodeverk },
+      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
+      { key: FagsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT.name, data: undefined },
     ];
 
     let axiosMock: MockAdapter;
@@ -107,7 +107,7 @@ describe('<TotrinnskontrollIndex>', () => {
     };
 
     render(
-      <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
+      <RestApiMock data={data} requestApi={requestFagsakApi} setApiMock={setApiMock}>
         <MemoryRouter>
           <TotrinnskontrollIndex
             fagsakData={new FagsakData(fagsak as Fagsak)}
@@ -134,7 +134,7 @@ describe('<TotrinnskontrollIndex>', () => {
 
     await waitFor(() =>
       expect(
-        axiosMock.history.get.find(a => a.url === FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT.name)?.params,
+        axiosMock.history.get.find(a => a.url === FagsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT.name)?.params,
       ).toStrictEqual({
         behandlingUuid: '1234',
         saksnummer: '1',

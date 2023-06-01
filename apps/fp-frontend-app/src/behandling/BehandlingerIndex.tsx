@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { IngenBehandlingValgtPanel } from '@navikt/ft-sak-infosider';
+import { Behandling } from '@navikt/fp-types';
 
 import { behandlingRoutePath } from '../app/paths';
 import BehandlingIndex from './BehandlingIndex';
@@ -8,14 +9,20 @@ import FagsakData from '../fagsak/FagsakData';
 
 interface OwnProps {
   fagsakData: FagsakData;
-  setBehandlingUuidOgVersjon: (behandlingUuid: string, behandlingVersjon: number) => void;
+  setBehandling: (behandling: Behandling) => void;
+  hentOgSettBehandling: () => void;
+  behandling?: Behandling;
   setRequestPendingMessage: (message?: string) => void;
+  setBehandlingUuid: (uuid: string) => void;
 }
 
-export const BehandlingerIndex: FunctionComponent<OwnProps> = ({
+const BehandlingerIndex: FunctionComponent<OwnProps> = ({
   fagsakData,
-  setBehandlingUuidOgVersjon,
+  setBehandling,
+  behandling,
+  hentOgSettBehandling,
   setRequestPendingMessage,
+  setBehandlingUuid,
 }) => (
   <Routes>
     <Route
@@ -23,8 +30,11 @@ export const BehandlingerIndex: FunctionComponent<OwnProps> = ({
       element={
         <BehandlingIndex
           fagsakData={fagsakData}
-          setBehandlingUuidOgVersjon={setBehandlingUuidOgVersjon}
+          behandling={behandling}
+          setBehandling={setBehandling}
+          hentOgSettBehandling={hentOgSettBehandling}
           setRequestPendingMessage={setRequestPendingMessage}
+          setBehandlingUuid={setBehandlingUuid}
         />
       }
     />

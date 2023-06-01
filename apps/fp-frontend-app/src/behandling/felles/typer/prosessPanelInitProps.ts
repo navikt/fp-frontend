@@ -1,4 +1,3 @@
-import { RequestApi } from '@navikt/fp-rest-api';
 import { Behandling } from '@navikt/fp-types';
 
 import ProsessPanelMenyData from './prosessPanelMenyData';
@@ -12,7 +11,6 @@ type ProsessPanelInitProps = {
   behandling: Behandling;
   valgtProsessSteg?: string;
   registrerProsessPanel: (data: ProsessPanelMenyData) => void;
-  requestApi: RequestApi;
 };
 
 export default ProsessPanelInitProps;

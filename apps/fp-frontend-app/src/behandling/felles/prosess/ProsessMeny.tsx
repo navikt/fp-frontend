@@ -1,10 +1,9 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { ProcessMenuStepType, ProcessMenu } from '@navikt/ft-plattform-komponenter';
+import { ProcessMenu, ProcessMenuStepType } from '@navikt/ft-plattform-komponenter';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 
-import '../../arrowForProcessMenu.module.css';
-
 import ProsessPanelMenyData from '../typer/prosessPanelMenyData';
+import styles from './arrowForProcessMenu.module.css';
 
 const finnProsessmenyType = (status?: string, harApentAksjonspunkt?: boolean): ProcessMenuStepType => {
   if (harApentAksjonspunkt) {
@@ -40,7 +39,9 @@ const ProsessMeny: FunctionComponent<OwnProps> = ({ menyData, oppdaterProsessPan
     [menyData],
   );
 
-  return <ProcessMenu steps={steg} onClick={oppdaterProsessPanelIUrl} />;
+  return (
+    <ProcessMenu steps={steg} onClick={oppdaterProsessPanelIUrl} stepArrowContainerStyle={styles.stepArrowContainer} />
+  );
 };
 
 export default ProsessMeny;

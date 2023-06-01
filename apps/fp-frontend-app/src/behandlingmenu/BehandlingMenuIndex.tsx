@@ -1,365 +1,177 @@
-import React, { FunctionComponent, useCallback, useMemo, useEffect, useRef } from 'react';
-import moment from 'moment';
-import { useNavigate, useLocation } from 'react-router-dom';
-import {
-  behandlingType as BehandlingType,
-  behandlingStatus as BehandlingStatus,
-  KodeverkType,
-} from '@navikt/fp-kodeverk';
-import {
-  MenySakIndex,
-  MenyData,
-  MenyEndreBehandlendeEnhetIndex,
-  getEndreEnhetMenytekst,
-  MenyVergeIndex,
-  getVergeMenytekst,
-  MenyTaAvVentIndex,
-  getTaAvVentMenytekst,
-} from '@navikt/ft-sak-meny';
+import React, { FunctionComponent, useCallback, useMemo, useState } from 'react';
+import { Button } from '@navikt/ds-react';
+import { FormattedMessage } from 'react-intl';
+import { Dropdown } from '@navikt/ds-react-internal';
+import { getMenytekst as getNyBehandlingMenytekst } from '@navikt/fp-sak-meny-ny-behandling';
+import { getEndreEnhetMenytekst, getVergeMenytekst, getTaAvVentMenytekst } from '@navikt/ft-sak-meny';
+import { getMenytekst as getSettPaVentMenytekst } from '@navikt/fp-sak-meny-sett-pa-vent';
+import { getMenytekst as getHenleggMenytekst } from '@navikt/fp-sak-meny-henlegg';
+import { getMenytekst as getApneForEndringerMenytekst } from '@navikt/fp-sak-meny-apne-for-endringer';
+import { getMenytekst as getEndreUtlandMenytekst } from '@navikt/fp-sak-meny-endre-utland';
+import { Behandling, BehandlingAppKontekst, Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
 
-import { MenySettPaVentIndex, getMenytekst as getSettPaVentMenytekst } from '@navikt/fp-sak-meny-sett-pa-vent';
-import { MenyHenleggIndex, getMenytekst as getHenleggMenytekst } from '@navikt/fp-sak-meny-henlegg';
-import {
-  MenyApneForEndringerIndex,
-  getMenytekst as getApneForEndringerMenytekst,
-} from '@navikt/fp-sak-meny-apne-for-endringer';
-import {
-  MenyNyBehandlingIndex,
-  getMenytekst as getNyBehandlingMenytekst,
-  FormValues as NyBehandlingFormValues,
-} from '@navikt/fp-sak-meny-ny-behandling';
-import {
-  MenyEndreUtlandIndex,
-  getMenytekst as getEndreUtlandMenytekst,
-  FormValues as EndreUtlandFormValues,
-} from '@navikt/fp-sak-meny-endre-utland';
-import { VergeBehandlingmenyValg, BehandlingAppKontekst } from '@navikt/fp-types';
-
-import behandlingEventHandler from '../behandling/BehandlingEventHandler';
-import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../app/paths';
-import useVisForhandsvisningAvMelding from '../data/useVisForhandsvisningAvMelding';
-import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
-import useGetEnabledApplikasjonContext from '../app/useGetEnabledApplikasjonContext';
-import ApplicationContextPath from '../app/ApplicationContextPath';
-import MenyKodeverk from './MenyKodeverk';
+import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
 import FagsakData from '../fagsak/FagsakData';
+import NyBehandlingMenyModal from './modaler/NyBehandlingMenyModal';
+import ApneForEndringerMenyModal from './modaler/ApneForEndringerMenyModal';
+import HenleggMenyModal from './modaler/HenleggMenyModal';
+import EndreBehandlendeEnhetMenyModal from './modaler/EndreBehandlendeEnhetMenyModal';
+import SettPaVentMenyModal from './modaler/SettPaVentMenyModal';
+import TaAvVentMenyModal from './modaler/TaAvVentMenyModal';
+import EndreFagsakMarkeringMenyModal from './modaler/EndreFagsakMarkeringMenyModal';
+import VergeMenyModal from './modaler/VergeMenyModal';
 
 import '@navikt/ft-sak-meny/dist/style.css';
 
-const BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES = [
-  BehandlingType.FORSTEGANGSSOKNAD,
-  BehandlingType.KLAGE,
-  BehandlingType.REVURDERING,
-  BehandlingType.DOKUMENTINNSYN,
-  BehandlingType.ANKE,
-  BehandlingType.TILBAKEKREVING,
-  BehandlingType.TILBAKEKREVING_REVURDERING,
-];
+enum ModalType {
+  NY_BEHANDLING = 'NY_BEHANDLING',
+  VERGE = 'VERGE',
+  ENDRE_FAGSAK_MARKERING = 'ENDRE_FAGSAK_MARKERING',
+  ÅPNE_FOR_ENDRINGER = 'ÅPNE_FOR_ENDRINGER',
+  ENDRE_BEHANDLENDE_ENHET = 'ENDRE_BEHANDLENDE_ENHET',
+  HENLEGG = 'HENLEGG',
+  SETT_PÅ_VENT = 'SETT_PÅ_VENT',
+  TA_AV_VENT = 'TA_AV_VENT',
+}
 
-const findNewBehandlingUuid = (alleBehandlinger: BehandlingAppKontekst[]): string => {
-  alleBehandlinger.sort((b1, b2) => moment(b2.opprettet).diff(moment(b1.opprettet)));
-  return alleBehandlinger[0].uuid;
+const hentMenyData = (behandling: BehandlingAppKontekst | undefined, fagsak: Fagsak) => {
+  const erPaVent = behandling ? behandling.behandlingPaaVent : false;
+  const behandlingTillatteOperasjoner = behandling?.behandlingTillatteOperasjoner;
+
+  const vergeMenyvalg = behandlingTillatteOperasjoner?.vergeBehandlingsmeny;
+  const skalViseFjernVerge =
+    vergeMenyvalg === VergeBehandlingmenyValg.FJERN && !!behandling?.uuid && !!behandling?.versjon;
+  const skalViseOpprettVerge =
+    vergeMenyvalg === VergeBehandlingmenyValg.OPPRETT && !!behandling?.uuid && !!behandling?.versjon;
+
+  return {
+    [ModalType.TA_AV_VENT]: {
+      disabled: !behandlingTillatteOperasjoner?.behandlingKanGjenopptas,
+      text: getTaAvVentMenytekst(),
+    },
+    [ModalType.SETT_PÅ_VENT]: {
+      disabled: !behandlingTillatteOperasjoner?.behandlingKanSettesPaVent,
+      text: getSettPaVentMenytekst(),
+    },
+    [ModalType.HENLEGG]: {
+      disabled: !behandlingTillatteOperasjoner?.behandlingKanHenlegges,
+      text: getHenleggMenytekst(),
+    },
+    [ModalType.ENDRE_BEHANDLENDE_ENHET]: {
+      disabled: !behandlingTillatteOperasjoner?.behandlingKanBytteEnhet,
+      text: getEndreEnhetMenytekst(),
+    },
+    [ModalType.ÅPNE_FOR_ENDRINGER]: {
+      disabled: !behandlingTillatteOperasjoner?.behandlingKanOpnesForEndringer,
+      text: getApneForEndringerMenytekst(),
+    },
+    [ModalType.NY_BEHANDLING]: {
+      disabled: fagsak.sakSkalTilInfotrygd,
+      text: getNyBehandlingMenytekst(),
+    },
+    [ModalType.ENDRE_FAGSAK_MARKERING]: {
+      disabled: fagsak.sakSkalTilInfotrygd,
+      text: getEndreUtlandMenytekst(),
+    },
+    [ModalType.VERGE]: {
+      disabled: !(!erPaVent && (skalViseOpprettVerge || skalViseFjernVerge)),
+      text: getVergeMenytekst(skalViseOpprettVerge),
+    },
+  } as Record<string, { disabled: boolean; text: string }>;
 };
-
-const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: BehandlingAppKontekst[] = []): string | undefined => {
-  const behandling = behandlinger.find(
-    b =>
-      b.gjeldendeVedtak &&
-      b.status === BehandlingStatus.AVSLUTTET &&
-      (b.type === BehandlingType.FORSTEGANGSSOKNAD || b.type === BehandlingType.REVURDERING),
-  );
-  return behandling ? behandling.uuid : undefined;
-};
-
-const skalLageVergeFn = (
-  vergeType: VergeBehandlingmenyValg,
-  vergeMenyvalg?: VergeBehandlingmenyValg,
-  behandlingUuid?: string,
-  behandlingVersjon?: number,
-): boolean => vergeMenyvalg === vergeType && !!behandlingUuid && !!behandlingVersjon;
 
 interface OwnProps {
   fagsakData: FagsakData;
   behandlingUuid?: string;
-  behandlingVersjon?: number;
-  hentFagsakdataPåNytt: () => void;
+  setBehandling: (behandling: Behandling | undefined) => void;
+  hentOgSettBehandling: () => void;
+  oppdaterFagsak: () => void;
 }
 
 const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   fagsakData,
   behandlingUuid,
-  behandlingVersjon,
-  hentFagsakdataPåNytt,
+  setBehandling,
+  hentOgSettBehandling,
+  oppdaterFagsak,
 }) => {
+  const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
+  const { innloggetBruker: navAnsatt } = initFetchData;
+
+  const [valgtModal, setValgtModal] = useState<string | undefined>();
+  const lukkModal = useCallback(() => setValgtModal(undefined), []);
+
   const fagsak = fagsakData.getFagsak();
-  const alleBehandlinger = fagsakData.getAlleBehandlinger();
   const behandling = fagsakData.getBehandling(behandlingUuid);
 
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const ref = useRef<number>();
-  useEffect(() => {
-    // Når antallet har endret seg er det laget en ny behandling og denne må da velges
-    if (ref.current && ref.current > 0) {
-      const pathname = pathToBehandling(fagsak.saksnummer, findNewBehandlingUuid(alleBehandlinger));
-      navigate(getLocationWithDefaultProsessStegAndFakta({ ...location, pathname }));
-    }
-
-    ref.current = alleBehandlinger.length;
-  }, [alleBehandlinger.length]);
-
-  const { startRequest: sjekkTilbakeKanOpprettes, data: kanBehandlingOpprettes = false } =
-    restApiHooks.useRestApiRunner(FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES);
-  const { startRequest: sjekkTilbakeRevurdKanOpprettes, data: kanRevurderingOpprettes = false } =
-    restApiHooks.useRestApiRunner(FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES);
-
-  const initFetchData = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.INIT_FETCH);
-  const { innloggetBruker: navAnsatt, behandlendeEnheter } = initFetchData;
-
-  const erTilbakekrevingAktivert = useGetEnabledApplikasjonContext().includes(ApplicationContextPath.FPTILBAKE);
-
-  const alleFpSakKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
-  const alleFpTilbakeKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
-  const menyKodeverk = new MenyKodeverk(behandling?.type)
-    .medFpSakKodeverk(alleFpSakKodeverk)
-    .medFpTilbakeKodeverk(alleFpTilbakeKodeverk);
-
-  const gaaTilSokeside = useCallback(() => navigate('/'), [navigate]);
-
-  const { startRequest: lagNyBehandlingFpSak } = restApiHooks.useRestApiRunner(FpsakApiKeys.NEW_BEHANDLING_FPSAK);
-  const { startRequest: lagNyBehandlingFpTilbake } = restApiHooks.useRestApiRunner(
-    FpsakApiKeys.NEW_BEHANDLING_FPTILBAKE,
-  );
-
-  const lagNyBehandling = useCallback(
-    (
-      isTilbakekreving: boolean,
-      params: {
-        saksnummer: string;
-        behandlingUuid?: string;
-      } & NyBehandlingFormValues,
-    ): void => {
-      const lagNy = isTilbakekreving ? lagNyBehandlingFpTilbake : lagNyBehandlingFpSak;
-      lagNy(params).then(() => hentFagsakdataPåNytt());
-    },
-    [],
-  );
-
-  const { startRequest: endreSaksmerking } = restApiHooks.useRestApiRunner(FpsakApiKeys.ENDRE_SAK_MARKERING);
-  const endreFagsakMarkering = useCallback(
-    (params: EndreUtlandFormValues) => endreSaksmerking(params).then(() => hentFagsakdataPåNytt()),
-    [],
-  );
-
-  const uuidForSistLukkede = useMemo(
-    () => getUuidForSisteLukkedeForsteEllerRevurd(alleBehandlinger),
-    [alleBehandlinger],
-  );
-  const previewHenleggBehandling = useVisForhandsvisningAvMelding(behandling?.type);
-
-  useEffect(() => {
-    if (erTilbakekrevingAktivert && !navAnsatt.kanVeilede) {
-      if (uuidForSistLukkede !== undefined) {
-        sjekkTilbakeKanOpprettes({ saksnummer: fagsak.saksnummer, uuid: uuidForSistLukkede });
-      }
-      const erTilbakekreving =
-        behandling?.type === BehandlingType.TILBAKEKREVING ||
-        behandling?.type === BehandlingType.TILBAKEKREVING_REVURDERING;
-      if (erTilbakekreving && behandlingUuid) {
-        sjekkTilbakeRevurdKanOpprettes({ uuid: behandlingUuid });
-      }
-    }
-  }, [fagsak.saksnummer, behandlingUuid]);
-
-  const erPaVent = behandling ? behandling.behandlingPaaVent : false;
-  const behandlingTypeKode = behandling?.type;
-  const behandlingTillatteOperasjoner = behandling?.behandlingTillatteOperasjoner;
-
-  const vergeMenyvalg = behandlingTillatteOperasjoner?.vergeBehandlingsmeny;
-  const setLocation = () => {
-    navigate(
-      getLocationWithDefaultProsessStegAndFakta({
-        ...location,
-        pathname: pathToBehandling(fagsak.saksnummer, behandlingUuid),
-      }),
-    );
-  };
-  const fjernVergeFn = skalLageVergeFn(VergeBehandlingmenyValg.FJERN, vergeMenyvalg, behandlingUuid, behandlingVersjon)
-    ? () => behandlingEventHandler.fjernVerge().then(setLocation)
-    : undefined;
-  const opprettVergeFn = skalLageVergeFn(
-    VergeBehandlingmenyValg.OPPRETT,
-    vergeMenyvalg,
-    behandlingUuid,
-    behandlingVersjon,
-  )
-    ? () => behandlingEventHandler.opprettVerge().then(setLocation)
-    : undefined;
-
-  const menyTaAvVentFn = useCallback(
-    (lukkModal: () => void) => (
-      <div>
-        {behandling && (
-          <MenyTaAvVentIndex
-            behandlingVersjon={behandling.versjon}
-            taBehandlingAvVent={behandlingEventHandler.taBehandlingAvVent}
-            lukkModal={lukkModal}
-          />
-        )}
-      </div>
-    ),
-    [behandling, behandlingEventHandler],
-  );
-
-  const menySettPåVentFn = useCallback(
-    (lukkModal: () => void) => (
-      <MenySettPaVentIndex
-        behandlingVersjon={behandlingVersjon}
-        settBehandlingPaVent={behandlingEventHandler.settBehandlingPaVent}
-        ventearsaker={menyKodeverk.getKodeverkForValgtBehandling(KodeverkType.VENT_AARSAK)}
-        lukkModal={lukkModal}
-        erTilbakekreving={
-          behandlingTypeKode === BehandlingType.TILBAKEKREVING ||
-          behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING
-        }
-      />
-    ),
-    [behandlingVersjon, behandlingEventHandler, behandlingTypeKode],
-  );
-
-  const menyHenleggFn = useCallback(
-    (lukkModal: () => void) => (
-      <div>
-        {behandling && (
-          <MenyHenleggIndex
-            valgtBehandling={behandling}
-            forhandsvisHenleggBehandling={previewHenleggBehandling}
-            henleggBehandling={behandlingEventHandler.henleggBehandling}
-            ytelseType={fagsak.fagsakYtelseType}
-            behandlingResultatTyper={menyKodeverk.getKodeverkForValgtBehandling(KodeverkType.BEHANDLING_RESULTAT_TYPE)}
-            lukkModal={lukkModal}
-            gaaTilSokeside={gaaTilSokeside}
-          />
-        )}
-      </div>
-    ),
-    [behandling, previewHenleggBehandling, behandlingEventHandler, fagsak, gaaTilSokeside],
-  );
-
-  const menyEndreBehandlendeEnhetFn = useCallback(
-    (lukkModal: () => void) => (
-      <MenyEndreBehandlendeEnhetIndex
-        behandlingVersjon={behandlingVersjon}
-        behandlendeEnhetId={behandling?.behandlendeEnhetId}
-        behandlendeEnhetNavn={behandling?.behandlendeEnhetNavn}
-        nyBehandlendeEnhet={behandlingEventHandler.endreBehandlendeEnhet}
-        behandlendeEnheter={behandlendeEnheter}
-        lukkModal={lukkModal}
-      />
-    ),
-    [behandlingVersjon, behandling, behandlingEventHandler, behandlendeEnheter],
-  );
-
-  const menyÅpneForEndringerFn = useCallback(
-    (lukkModal: () => void) => (
-      <MenyApneForEndringerIndex
-        apneBehandlingForEndringer={behandlingEventHandler.opneBehandlingForEndringer}
-        lukkModal={lukkModal}
-      />
-    ),
-    [behandlingEventHandler],
-  );
-
-  const menyNyBehandlingFn = useCallback(
-    (lukkModal: () => void) => (
-      <MenyNyBehandlingIndex
-        saksnummer={fagsak.saksnummer}
-        behandlingUuid={behandling?.uuid}
-        behandlingVersjon={behandlingVersjon}
-        uuidForSistLukkede={uuidForSistLukkede}
-        behandlingOppretting={fagsakData.getBehandlingOppretting()}
-        kanTilbakekrevingOpprettes={{
-          kanBehandlingOpprettes,
-          kanRevurderingOpprettes,
-        }}
-        behandlingstyper={menyKodeverk.getKodeverkForBehandlingstyper(
-          BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES,
-          KodeverkType.BEHANDLING_TYPE,
-        )}
-        tilbakekrevingRevurderingArsaker={menyKodeverk.getKodeverkForBehandlingstype(
-          KodeverkType.BEHANDLING_AARSAK,
-          BehandlingType.TILBAKEKREVING_REVURDERING,
-        )}
-        revurderingArsaker={menyKodeverk.getKodeverkForBehandlingstype(
-          KodeverkType.BEHANDLING_AARSAK,
-          BehandlingType.REVURDERING,
-        )}
-        ytelseType={fagsak.fagsakYtelseType}
-        lagNyBehandling={lagNyBehandling}
-        lukkModal={lukkModal}
-      />
-    ),
-    [
-      fagsak,
-      behandling,
-      uuidForSistLukkede,
-      fagsakData,
-      kanBehandlingOpprettes,
-      kanRevurderingOpprettes,
-      lagNyBehandling,
-    ],
-  );
-
-  const menyEndretUtlandFn = useCallback(
-    (lukkModal: () => void) => (
-      <MenyEndreUtlandIndex
-        saksnummer={fagsak.saksnummer}
-        fagsakMarkering={fagsak.fagsakMarkering}
-        endreFagsakMarkering={endreFagsakMarkering}
-        lukkModal={lukkModal}
-      />
-    ),
-    [fagsak, endreFagsakMarkering],
-  );
-
-  const menyVergeFn = useCallback(
-    (lukkModal: () => void) => (
-      <MenyVergeIndex fjernVerge={fjernVergeFn} opprettVerge={opprettVergeFn} lukkModal={lukkModal} />
-    ),
-    [fjernVergeFn, opprettVergeFn],
-  );
+  const menyData = useMemo(() => hentMenyData(behandling, fagsak), [behandling, fagsak]);
 
   if (navAnsatt.kanVeilede) {
     return null;
   }
 
   return (
-    <MenySakIndex
-      data={[
-        new MenyData(behandlingTillatteOperasjoner?.behandlingKanGjenopptas, getTaAvVentMenytekst()).medModal(
-          menyTaAvVentFn,
-        ),
-        new MenyData(behandlingTillatteOperasjoner?.behandlingKanSettesPaVent, getSettPaVentMenytekst()).medModal(
-          menySettPåVentFn,
-        ),
-        new MenyData(behandlingTillatteOperasjoner?.behandlingKanHenlegges, getHenleggMenytekst()).medModal(
-          menyHenleggFn,
-        ),
-        new MenyData(behandlingTillatteOperasjoner?.behandlingKanBytteEnhet, getEndreEnhetMenytekst()).medModal(
-          menyEndreBehandlendeEnhetFn,
-        ),
-        new MenyData(
-          behandlingTillatteOperasjoner?.behandlingKanOpnesForEndringer,
-          getApneForEndringerMenytekst(),
-        ).medModal(menyÅpneForEndringerFn),
-        new MenyData(!fagsak.sakSkalTilInfotrygd, getNyBehandlingMenytekst()).medModal(menyNyBehandlingFn),
-        new MenyData(!fagsak.sakSkalTilInfotrygd, getEndreUtlandMenytekst()).medModal(menyEndretUtlandFn),
-        new MenyData(!erPaVent && (!!opprettVergeFn || !!fjernVergeFn), getVergeMenytekst(!!opprettVergeFn)).medModal(
-          menyVergeFn,
-        ),
-      ]}
-    />
+    <>
+      <Dropdown>
+        <Button size="small" as={Dropdown.Toggle} iconPosition="right">
+          <FormattedMessage id="BehandlingMenuIndex.Behandlingsmeny" />
+        </Button>
+        <Dropdown.Menu>
+          <Dropdown.Menu.List>
+            {Object.keys(menyData)
+              .filter(key => !menyData[key].disabled)
+              .map(key => (
+                <Dropdown.Menu.List.Item
+                  key={key}
+                  onClick={() => {
+                    setValgtModal(key);
+                  }}
+                >
+                  {menyData[key].text}
+                </Dropdown.Menu.List.Item>
+              ))}
+          </Dropdown.Menu.List>
+        </Dropdown.Menu>
+      </Dropdown>
+      {valgtModal === ModalType.NY_BEHANDLING && (
+        <NyBehandlingMenyModal fagsakData={fagsakData} behandlingUuid={behandlingUuid} lukkModal={lukkModal} />
+      )}
+      {valgtModal === ModalType.ENDRE_FAGSAK_MARKERING && (
+        <EndreFagsakMarkeringMenyModal
+          saksnummer={fagsak.saksnummer}
+          fagsakMarkering={fagsak.fagsakMarkering}
+          oppdaterFagsak={oppdaterFagsak}
+          hentOgSettBehandling={hentOgSettBehandling}
+          lukkModal={lukkModal}
+        />
+      )}
+      {valgtModal === ModalType.VERGE && behandling && (
+        <VergeMenyModal fagsak={fagsak} behandling={behandling} setBehandling={setBehandling} lukkModal={lukkModal} />
+      )}
+      {valgtModal === ModalType.ÅPNE_FOR_ENDRINGER && behandling && (
+        <ApneForEndringerMenyModal behandling={behandling} setBehandling={setBehandling} lukkModal={lukkModal} />
+      )}
+      {valgtModal === ModalType.ENDRE_BEHANDLENDE_ENHET && behandling && (
+        <EndreBehandlendeEnhetMenyModal
+          behandling={behandling}
+          hentOgSettBehandling={hentOgSettBehandling}
+          lukkModal={lukkModal}
+        />
+      )}
+      {valgtModal === ModalType.HENLEGG && behandling && (
+        <HenleggMenyModal behandling={behandling} fagsakYtelseType={fagsak.fagsakYtelseType} lukkModal={lukkModal} />
+      )}
+      {valgtModal === ModalType.SETT_PÅ_VENT && behandling && (
+        <SettPaVentMenyModal
+          behandling={behandling}
+          hentOgSettBehandling={hentOgSettBehandling}
+          lukkModal={lukkModal}
+        />
+      )}
+      {valgtModal === ModalType.TA_AV_VENT && behandling && (
+        <TaAvVentMenyModal behandling={behandling} setBehandling={setBehandling} lukkModal={lukkModal} />
+      )}
+    </>
   );
 };
 

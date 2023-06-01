@@ -9,7 +9,7 @@ import { RestApiMock } from '@navikt/fp-utils-test';
 import { BehandlingAppKontekst, Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
 
 import BehandlingSupportIndex, { hentSynligePaneler, hentValgbarePaneler } from './BehandlingSupportIndex';
-import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
+import { requestFagsakApi, FagsakApiKeys } from '../data/fagsakContextApi';
 import FagsakData from '../fagsak/FagsakData';
 import messages from '../../i18n/nb_NO.json';
 
@@ -44,13 +44,18 @@ describe('<BehandlingSupportIndex>', () => {
   };
 
   it('skal vise historikk-panelet som default', async () => {
-    const data = [{ key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } }];
+    const data = [{ key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } }];
 
     render(
       <RawIntlProvider value={intl}>
-        <RestApiMock data={data} requestApi={requestApi}>
+        <RestApiMock data={data} requestApi={requestFagsakApi}>
           <MemoryRouter>
-            <BehandlingSupportIndex fagsakData={new FagsakData(fagsak)} behandlingUuid="1" behandlingVersjon={2} />
+            <BehandlingSupportIndex
+              fagsakData={new FagsakData(fagsak)}
+              behandlingUuid="1"
+              behandlingVersjon={2}
+              hentOgSettBehandling={vi.fn()}
+            />
           </MemoryRouter>
         </RestApiMock>
       </RawIntlProvider>,

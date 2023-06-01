@@ -7,7 +7,7 @@ import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
 
 import useBehandlingEndret from '../../behandling/useBehandlingEndret';
-import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
+import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 
 import '@navikt/ft-sak-dokumenter/dist/style.css';
 
@@ -47,8 +47,8 @@ export const DokumentIndex: FunctionComponent<OwnProps> = ({ behandlingUuid, beh
   const forrigeSaksnummer = usePrevious(saksnummer);
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingUuid, behandlingVersjon);
 
-  const { data: alleDokumenter = EMPTY_ARRAY, state } = restApiHooks.useRestApi(
-    FpsakApiKeys.ALL_DOCUMENTS,
+  const { data: alleDokumenter = EMPTY_ARRAY, state } = restFagsakApiHooks.useRestApi(
+    FagsakApiKeys.ALL_DOCUMENTS,
     { saksnummer },
     {
       updateTriggers: [behandlingUuid, behandlingVersjon],

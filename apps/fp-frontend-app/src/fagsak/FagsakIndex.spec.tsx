@@ -10,7 +10,7 @@ import { RestApiMock } from '@navikt/fp-utils-test';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import * as useTrackRouteParam from '../app/useTrackRouteParam';
-import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
+import { requestFagsakApi, FagsakApiKeys } from '../data/fagsakContextApi';
 import messages from '../../i18n/nb_NO.json';
 import FagsakIndex from './FagsakIndex';
 
@@ -78,15 +78,15 @@ describe('<FagsakIndex>', () => {
   // Se på hvorfor denne feiler
   it.skip('skal vise ventikon', async () => {
     const data = [
-      { key: FpsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
-      { key: FpsakApiKeys.FETCH_FAGSAK.name, data: fagsak },
-      { key: FpsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
-      { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: alleKodeverk },
+      { key: FagsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
+      { key: FagsakApiKeys.FETCH_FAGSAK.name, data: fagsak },
+      { key: FagsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
+      { key: FagsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: alleKodeverk },
     ];
 
     render(
       <RawIntlProvider value={intl}>
-        <RestApiMock data={data} requestApi={requestApi}>
+        <RestApiMock data={data} requestApi={requestFagsakApi}>
           <MemoryRouter>
             <FagsakIndex />
           </MemoryRouter>
@@ -99,18 +99,18 @@ describe('<FagsakIndex>', () => {
 
   it('skal hente alle behandlinger fra fpsak og fptilbake', async () => {
     const data = [
-      { key: FpsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
-      { key: FpsakApiKeys.FETCH_FAGSAK.name, data: fagsak },
-      { key: FpsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
-      { key: FpsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE.name, data: fagsakFpTilbake },
-      { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: alleKodeverk },
-      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
+      { key: FagsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
+      { key: FagsakApiKeys.FETCH_FAGSAK.name, data: fagsak },
+      { key: FagsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
+      { key: FagsakApiKeys.FETCH_FAGSAKDATA_FPTILBAKE.name, data: fagsakFpTilbake },
+      { key: FagsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: alleKodeverk },
+      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } },
     ];
 
     await act(async () => {
       render(
         <RawIntlProvider value={intl}>
-          <RestApiMock data={data} requestApi={requestApi}>
+          <RestApiMock data={data} requestApi={requestFagsakApi}>
             <MemoryRouter initialEntries={['/behandling']}>
               <FagsakIndex />
             </MemoryRouter>

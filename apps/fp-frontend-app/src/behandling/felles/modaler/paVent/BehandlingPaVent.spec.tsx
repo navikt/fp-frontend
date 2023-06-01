@@ -8,10 +8,8 @@ import { Modal } from '@navikt/ds-react';
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { Behandling, AlleKodeverk } from '@navikt/fp-types';
-import { createRequestApi, RestApiConfigBuilder } from '@navikt/fp-rest-api';
 
 import BehandlingPaVent from './BehandlingPaVent';
-import { BehandlingFellesApiKeys } from '../../data/behandlingFellesApi';
 
 describe('<BehandlingPaVent>', () => {
   Modal.setAppElement('body');
@@ -29,12 +27,6 @@ describe('<BehandlingPaVent>', () => {
   // @ts-ignore
   const kodeverk = alleKodeverk as AlleKodeverk;
 
-  const PA_VENT_KEY = BehandlingFellesApiKeys.UPDATE_ON_HOLD;
-
-  const endpoints = new RestApiConfigBuilder().withRel('test_pa', PA_VENT_KEY).build();
-
-  const requestMock = createRequestApi(endpoints);
-
   it('skal ikke vise modal når behandling ikke er på vent', async () => {
     render(
       <BehandlingPaVent
@@ -44,9 +36,8 @@ describe('<BehandlingPaVent>', () => {
             aksjonspunkt: aksjonspunkter,
           } as Behandling
         }
-        requestApi={requestMock}
         kodeverk={kodeverk}
-        hentBehandling={vi.fn()}
+        setBehandling={vi.fn()}
       />,
     );
 
@@ -64,9 +55,8 @@ describe('<BehandlingPaVent>', () => {
               behandlingPaaVent: true,
             } as Behandling
           }
-          requestApi={requestMock}
           kodeverk={kodeverk}
-          hentBehandling={vi.fn()}
+          setBehandling={vi.fn()}
         />,
       );
     });
@@ -84,9 +74,8 @@ describe('<BehandlingPaVent>', () => {
             behandlingPaaVent: true,
           } as Behandling
         }
-        requestApi={requestMock}
         kodeverk={kodeverk}
-        hentBehandling={vi.fn()}
+        setBehandling={vi.fn()}
       />,
     );
 

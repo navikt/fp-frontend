@@ -1,7 +1,7 @@
-import React, { ReactElement, useMemo } from 'react';
+import React, { ReactElement } from 'react';
 
-import { RestApiHooks, RestApiState } from '@navikt/fp-rest-api-hooks';
-import { RequestApi, RestKey } from '@navikt/fp-rest-api';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
+import { RestKey } from '@navikt/fp-rest-api';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { StandardProsessPanelProps } from '@navikt/fp-types';
 
@@ -9,10 +9,10 @@ import InngangsvilkarPanelInitProps from '../typer/inngangsvilkarPanelInitProps'
 import useStandardProsessPanelProps from './useStandardProsessPanelProps';
 import skalViseProsessPanel from './skalViseProsessPanel';
 import useInngangsvilkarRegistrerer from './useInngangsvilkarRegistrerer';
+import { restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 export type OwnProps<PANEL_DATA> = {
   behandlingVersjon: number;
-  requestApi: RequestApi;
   panelEndepunkter?: RestKey<any, any>[];
   aksjonspunktKoder?: string[];
   vilkarKoder?: string[];
@@ -29,7 +29,6 @@ const InngangsvilkarDefaultInitPanel = <PANEL_DATA = void,>({
   erPanelValgt,
   behandlingVersjon,
   registrerInngangsvilkarPanel,
-  requestApi,
   panelEndepunkter = [],
   aksjonspunktKoder,
   vilkarKoder,
@@ -37,8 +36,6 @@ const InngangsvilkarDefaultInitPanel = <PANEL_DATA = void,>({
   inngangsvilkarPanelKode,
   hentInngangsvilkarPanelTekst,
 }: OwnProps<PANEL_DATA> & InngangsvilkarPanelInitProps) => {
-  const restApiHooks = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
-
   const standardPanelProps = useStandardProsessPanelProps(aksjonspunktKoder, vilkarKoder);
 
   const skalVises = skalViseProsessPanel(standardPanelProps.aksjonspunkter, vilkarKoder, standardPanelProps.vilkar);
@@ -54,7 +51,7 @@ const InngangsvilkarDefaultInitPanel = <PANEL_DATA = void,>({
   );
 
   const formatertePanelEndepunkter = panelEndepunkter.map(e => ({ key: e }));
-  const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi<PANEL_DATA, any>(
+  const { data: panelData, state: panelDataState } = restBehandlingApiHooks.useMultipleRestApi<PANEL_DATA, any>(
     formatertePanelEndepunkter,
     {
       updateTriggers: [erPanelValgt, behandlingVersjon],

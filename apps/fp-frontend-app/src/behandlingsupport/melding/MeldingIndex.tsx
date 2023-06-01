@@ -7,11 +7,11 @@ import { MeldingerSakIndex, MessagesModalSakIndex, FormValues } from '@navikt/fp
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { SettPaVentModalIndex, FormValues as SettPaVentFormValues } from '@navikt/fp-modal-sett-pa-vent';
 
-import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
 import { useFpSakKodeverk } from '../../data/useKodeverk';
 import useVisForhandsvisningAvMelding, { ForhandsvisFunksjon } from '../../data/useVisForhandsvisningAvMelding';
-import { FpsakApiKeys, SubmitMessageParams, restApiHooks } from '../../data/fpsakApi';
+import { FagsakApiKeys, SubmitMessageParams, restFagsakApiHooks } from '../../data/fagsakContextApi';
 import FagsakData from '../../fagsak/FagsakData';
+import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
 
 const getSubmitCallback =
   (
@@ -20,7 +20,7 @@ const getSubmitCallback =
       params?: SubmitMessageParams | undefined,
       keepData?: boolean | undefined,
     ) => Promise<void | undefined>,
-    resetMessage: () => void,
+    hentOgSettBehandling: () => void,
     setShowSettPaVentModal: (erInnhentetEllerForlenget: boolean) => void,
     setMeldingForData: (data?: any) => void,
     behandlingTypeKode?: string,
@@ -49,12 +49,11 @@ const getSubmitCallback =
           fritekst: values.fritekst,
           arsakskode: values.arsakskode,
         };
-    return submitMessage(data)
-      .then(() => resetMessage())
-      .then(() => {
-        setMeldingForData();
-        setShowSettPaVentModal(isInnhentEllerForlenget);
-      });
+    return submitMessage(data).then(() => {
+      hentOgSettBehandling();
+      setMeldingForData();
+      setShowSettPaVentModal(isInnhentEllerForlenget);
+    });
   };
 
 const getPreviewCallback =
@@ -84,6 +83,7 @@ interface OwnProps {
   valgtBehandlingUuid: string;
   meldingFormData?: any;
   setMeldingForData: (data?: any) => void;
+  hentOgSettBehandling: () => void;
 }
 
 const EMPTY_ARRAY = [] as KodeverkMedNavn[];
@@ -98,6 +98,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   valgtBehandlingUuid,
   meldingFormData,
   setMeldingForData,
+  hentOgSettBehandling,
 }) => {
   const [showSettPaVentModal, setShowSettPaVentModal] = useState(false);
   const [showMessagesModal, setShowMessageModal] = useState(false);
@@ -107,25 +108,24 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   const fagsak = fagsakData.getFagsak();
   const valgtBehandling = fagsakData.getBehandling(valgtBehandlingUuid);
 
-  const initFetchData = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.INIT_FETCH);
+  const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
 
   const ventearsaker = useFpSakKodeverk(KodeverkType.VENT_AARSAK) || EMPTY_ARRAY;
   const revurderingVarslingArsak = useFpSakKodeverk(KodeverkType.REVURDERING_VARSLING_ÅRSAK);
 
-  const { startRequest: submitMessage, state: submitState } = restApiHooks.useRestApiRunner(
-    FpsakApiKeys.SUBMIT_MESSAGE,
+  const { startRequest: submitMessage, state: submitState } = restFagsakApiHooks.useRestApiRunner(
+    FagsakApiKeys.SUBMIT_MESSAGE,
   );
 
-  const resetMessage = () => {
-    // FIXME temp fiks for å unngå prod-feil (her skjer det ein oppdatering av behandling, så må oppdatera)
-    window.location.reload();
-  };
+  const { startRequest: setBehandlingPåVent } = restBehandlingApiHooks.useRestApiRunner(
+    BehandlingApiKeys.BEHANDLING_ON_HOLD,
+  );
 
   const submitCallback = useCallback(
     getSubmitCallback(
       setShowMessageModal,
       submitMessage,
-      resetMessage,
+      hentOgSettBehandling,
       setShowSettPaVentModal,
       setMeldingForData,
       valgtBehandling?.type,
@@ -139,11 +139,15 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   }, []);
 
   const handleSubmitFromModal = useCallback((formValues: SettPaVentFormValues) => {
-    const values = {
-      frist: formValues.frist,
-      ventearsak: formValues.ventearsak,
-    };
-    behandlingEventHandler.settBehandlingPaVent(values);
+    if (valgtBehandling && formValues.frist && formValues.ventearsak) {
+      const values = {
+        behandlingUuid: valgtBehandling.uuid,
+        behandlingVersjon: valgtBehandling.versjon,
+        frist: formValues.frist,
+        ventearsak: formValues.ventearsak,
+      };
+      setBehandlingPåVent(values);
+    }
     hideSettPaVentModal();
     navigate('/');
   }, []);
@@ -157,7 +161,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
 
   const afterSubmit = useCallback(() => {
     setShowMessageModal(false);
-    return resetMessage();
+    return hentOgSettBehandling();
   }, []);
 
   const submitFinished = submitState === RestApiState.SUCCESS;

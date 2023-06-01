@@ -7,7 +7,7 @@ import { EventType } from '@navikt/fp-rest-api';
 import { RestApiMock } from '@navikt/fp-utils-test';
 
 import Dekorator from './Dekorator';
-import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
+import { requestFagsakApi, FagsakApiKeys } from '../../data/fagsakContextApi';
 import messages from '../../../i18n/nb_NO.json';
 
 const navAnsatt = {
@@ -38,11 +38,11 @@ const intl = createIntl(messages);
 
 describe('<Dekorator>', () => {
   it('skal vise dekorator', async () => {
-    const data = [{ key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } }];
+    const data = [{ key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } }];
 
     render(
       <RawIntlProvider value={intl}>
-        <RestApiMock data={data} requestApi={requestApi}>
+        <RestApiMock data={data} requestApi={requestFagsakApi}>
           <Dekorator queryStrings={{}} setSiteHeight={vi.fn()} />
         </RestApiMock>
       </RawIntlProvider>,
@@ -52,7 +52,7 @@ describe('<Dekorator>', () => {
   });
 
   it('skal vise feilmeldinger', async () => {
-    const data = [{ key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } }];
+    const data = [{ key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } }];
 
     const errors = [
       {
@@ -63,7 +63,7 @@ describe('<Dekorator>', () => {
 
     render(
       <RawIntlProvider value={intl}>
-        <RestApiMock data={data} requestApi={requestApi} errors={errors}>
+        <RestApiMock data={data} requestApi={requestFagsakApi} errors={errors}>
           <Dekorator queryStrings={{}} setSiteHeight={vi.fn()} />
         </RestApiMock>
       </RawIntlProvider>,

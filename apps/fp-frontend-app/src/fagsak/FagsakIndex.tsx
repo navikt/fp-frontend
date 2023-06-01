@@ -5,9 +5,8 @@ import { Location } from 'history';
 import { VisittkortSakIndex } from '@navikt/ft-sak-visittkort';
 import { LoadingPanel, DataFetchPendingModal } from '@navikt/ft-ui-komponenter';
 import { BehandlingType } from '@navikt/ft-kodeverk';
-
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
-import { AnnenPartBehandling } from '@navikt/fp-types';
+import { AnnenPartBehandling, Behandling } from '@navikt/fp-types';
 
 import BehandlingerIndex from '../behandling/BehandlingerIndex';
 import useTrackRouteParam from '../app/useTrackRouteParam';
@@ -21,18 +20,15 @@ import {
   pathToAnnenPart,
 } from '../app/paths';
 import FagsakGrid from './components/FagsakGrid';
-import { requestApi } from '../data/fpsakApi';
+import { requestFagsakApi } from '../data/fagsakContextApi';
 import useHentFagsak from './useHentFagsak';
 import ErrorBoundary from '../app/ErrorBoundary';
+import { BehandlingApiKeys, requestBehandlingApi, restBehandlingApiHooks } from '../data/behandlingContextApi';
 
 import '@navikt/ft-sak-visittkort/dist/style.css';
 
 const finnLenkeTilAnnenPart = (annenPartBehandling: AnnenPartBehandling): string =>
   pathToAnnenPart(annenPartBehandling.saksnummer, annenPartBehandling.behandlingUuid);
-
-const erTilbakekreving = (behandlingType?: string): boolean =>
-  !!behandlingType &&
-  (BehandlingType.TILBAKEKREVING === behandlingType || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType);
 
 const finnSkalIkkeHenteData = (location: Location, selectedSaksnummer?: string, behandlingUuid?: string) =>
   !selectedSaksnummer || erUrlUnderBehandling(location) || (erBehandlingValgt(location) && !behandlingUuid);
@@ -40,50 +36,70 @@ const finnSkalIkkeHenteData = (location: Location, selectedSaksnummer?: string, 
 /**
  * FagsakIndex
  *
- * Container komponent. Er rot for for fagsakdelen av hovedvinduet, og har ansvar å legge valgt saksnummer fra URL-en i staten.
+ * Er rot for for fagsakdelen av hovedvinduet, og har ansvar å legge valgt saksnummer fra URL-en i staten.
  */
 const FagsakIndex: FunctionComponent = () => {
   const intl = useIntl();
 
-  const [behandlingerTeller, setBehandlingTeller] = useState(0);
   const [requestPendingMessage, setRequestPendingMessage] = useState<string>();
 
-  const [behandlingUuidOgVersjon, setUuidOgVersjon] = useState<{
-    behandlingUuid: string | undefined;
-    behandlingVersjon: number | undefined;
-  }>({
-    behandlingUuid: undefined,
-    behandlingVersjon: undefined,
-  });
-  const setBehandlingUuidOgVersjon = useCallback(
-    (nyBehandlingUuid: string, nyBehandlingVersjon: number) =>
-      setUuidOgVersjon({
-        behandlingUuid: nyBehandlingUuid,
-        behandlingVersjon: nyBehandlingVersjon,
-      }),
-    [],
-  );
-  const { behandlingUuid, behandlingVersjon } = behandlingUuidOgVersjon;
-
   const { addErrorMessage } = useRestApiErrorDispatcher();
-
-  const hentFagsakdataPåNytt = useCallback(() => setBehandlingTeller(behandlingerTeller + 1), [behandlingerTeller]);
 
   const { selected: selectedSaksnummer } = useTrackRouteParam<string>({
     paramName: 'saksnummer',
   });
 
-  const [harHentetFagsak, fagsakData] = useHentFagsak(
+  const [behandlingUuid, setBehandlingUuid] = useState<string | undefined>();
+  const [behandling, oppdaterBehandling] = useState<Behandling>();
+  const setBehandling = useCallback(
+    (hentetBehandling: Behandling | undefined) => {
+      if (hentetBehandling) {
+        requestBehandlingApi.resetCache();
+        requestBehandlingApi.resetLinks();
+        requestBehandlingApi.setLinks(hentetBehandling.links);
+
+        oppdaterBehandling(hentetBehandling);
+      }
+    },
+    [requestFagsakApi, requestBehandlingApi],
+  );
+
+  const [harHentetFagsak, fagsakData, oppdaterFagsak] = useHentFagsak(
     selectedSaksnummer,
     behandlingUuid,
-    behandlingVersjon,
-    behandlingerTeller,
+    behandling?.versjon,
   );
+
+  const fagsakBehandling = fagsakData?.getBehandling(behandlingUuid);
+  const erTilbakekreving =
+    fagsakBehandling?.type === BehandlingType.TILBAKEKREVING ||
+    fagsakBehandling?.type === BehandlingType.TILBAKEKREVING_REVURDERING;
+
+  const { startRequest: hentBehandling } = restBehandlingApiHooks.useRestApiRunner(
+    erTilbakekreving ? BehandlingApiKeys.BEHANDLING_TILBAKE : BehandlingApiKeys.BEHANDLING,
+  );
+
+  const hentOgSettBehandling = useCallback(
+    (keepData = false) => {
+      if (behandlingUuid) {
+        hentBehandling({ behandlingUuid }, keepData).then(setBehandling);
+      }
+    },
+    [behandlingUuid],
+  );
+
+  useEffect(() => {
+    if (behandlingUuid) {
+      hentOgSettBehandling();
+    }
+  }, [behandlingUuid]);
 
   useEffect(
     () => () => {
-      requestApi.resetCache();
-      requestApi.resetLinks();
+      requestFagsakApi.resetCache();
+      requestFagsakApi.resetLinks();
+      requestBehandlingApi.resetCache();
+      requestBehandlingApi.resetLinks();
     },
     [],
   );
@@ -103,7 +119,6 @@ const FagsakIndex: FunctionComponent = () => {
   }
 
   const fagsak = fagsakData.getFagsak();
-  const behandling = fagsakData.getBehandling(behandlingUuid);
 
   return (
     <>
@@ -115,8 +130,11 @@ const FagsakIndex: FunctionComponent = () => {
               element={
                 <BehandlingerIndex
                   fagsakData={fagsakData}
-                  setBehandlingUuidOgVersjon={setBehandlingUuidOgVersjon}
+                  behandling={behandling}
+                  setBehandling={setBehandling}
+                  hentOgSettBehandling={hentOgSettBehandling}
                   setRequestPendingMessage={setRequestPendingMessage}
+                  setBehandlingUuid={setBehandlingUuid}
                 />
               }
             />
@@ -126,15 +144,18 @@ const FagsakIndex: FunctionComponent = () => {
           <FagsakProfileIndex
             fagsakData={fagsakData}
             behandlingUuid={behandlingUuid}
-            behandlingVersjon={behandlingVersjon}
-            hentFagsakdataPåNytt={hentFagsakdataPåNytt}
+            setBehandling={setBehandling}
+            hentOgSettBehandling={hentOgSettBehandling}
+            behandlingVersjon={behandling?.versjon}
+            oppdaterFagsak={oppdaterFagsak}
           />
         }
         supportContent={
           <BehandlingSupportIndex
             fagsakData={fagsakData}
             behandlingUuid={behandlingUuid}
-            behandlingVersjon={behandlingVersjon}
+            behandlingVersjon={behandling?.versjon}
+            hentOgSettBehandling={hentOgSettBehandling}
           />
         }
         visittkortContent={() => {
@@ -158,7 +179,7 @@ const FagsakIndex: FunctionComponent = () => {
                   familiehendelse: fagsak.familiehendelse,
                 }}
                 harVerge={behandling?.harVerge}
-                erTilbakekreving={erTilbakekreving(behandling?.type)}
+                erTilbakekreving={erTilbakekreving}
               />
             </ErrorBoundary>
           );

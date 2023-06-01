@@ -4,7 +4,6 @@ import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 import { createIntl } from '@navikt/ft-utils';
 
 import { Behandling } from '@navikt/fp-types';
-import { RequestApi } from '@navikt/fp-rest-api';
 
 import BehandlingContainer from './BehandlingContainer';
 import FaktaPanelInitProps from './typer/faktaPanelInitProps';
@@ -111,7 +110,6 @@ export const VisKunFaktaPaneler = () => {
         oppdaterProsessStegOgFaktaPanelIUrl={(_prosessPanel?: string, faktaPanel?: string) =>
           setValgtFaktaPanel(faktaPanel)
         }
-        requestApi={{} as RequestApi}
         hentFaktaPaneler={faktaPaneler}
       />
     </RawIntlProvider>
@@ -134,7 +132,6 @@ export const VisKunProsessPaneler = () => {
       behandling={{} as Behandling}
       valgtProsessSteg={valgtProsessPanel}
       oppdaterProsessStegOgFaktaPanelIUrl={(prosessPanel?: string) => setValgtProsessPanel(prosessPanel)}
-      requestApi={{} as RequestApi}
       hentProsessPaneler={prosessPaneler}
     />
   );

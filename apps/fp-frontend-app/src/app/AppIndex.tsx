@@ -9,7 +9,7 @@ import { ForbiddenPage, UnauthorizedPage } from '@navikt/ft-sak-infosider';
 import { useRestApiError } from '@navikt/fp-rest-api-hooks';
 import { EventType } from '@navikt/fp-rest-api';
 
-import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
+import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
 import ErrorBoundary from './ErrorBoundary';
 import { redirectToLogin } from './paths';
 import AppConfigResolver from './AppConfigResolver';
@@ -96,7 +96,7 @@ const AppIndex: FunctionComponent = () => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [crashMessage, setCrashMessage] = useState<string>();
 
-  const initFetch = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.INIT_FETCH);
+  const initFetch = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
   const navAnsatt = initFetch?.innloggetBruker;
 
   const location = useLocation();
