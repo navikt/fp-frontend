@@ -90,7 +90,11 @@ const getStatus = (periode: PeriodeSoker, tilknyttetStortinget: boolean): 'succe
   if (periode.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING || tilknyttetStortinget) {
     return 'warning';
   }
-  if (periode.gradertAktivitet && periode.graderingInnvilget) {
+  if (
+    periode.gradertAktivitet &&
+    periode.graderingInnvilget &&
+    periode.periodeResultatType === periodeResultatType.INNVILGET
+  ) {
     return 'success';
   }
   if ('erOppfylt' in periode && periode.erOppfylt === false) {
