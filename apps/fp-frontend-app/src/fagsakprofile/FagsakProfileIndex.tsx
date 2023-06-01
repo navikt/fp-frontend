@@ -8,8 +8,8 @@ import { KodeverkType, FagsakMarkeringKode } from '@navikt/fp-kodeverk';
 import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { FagsakProfilSakIndex } from '@navikt/ft-sak-fagsak-profil';
 
-import FagsakProfilSakIndex from './src/FagsakProfilSakIndex';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling, pathToBehandlinger } from '../app/paths';
 import BehandlingMenuIndex from '../behandlingmenu/BehandlingMenuIndex';
 import RisikoklassifiseringIndex from './risikoklassifisering/RisikoklassifiseringIndex';
