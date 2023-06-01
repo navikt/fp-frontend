@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo, useState } from 'react';
+import React, { FunctionComponent, ReactElement, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Timeline } from '@navikt/ds-react-internal';
@@ -133,14 +133,19 @@ const formatPaneler = (
     begrunnelse: periode.periode.begrunnelse,
   }));
 
-const lagGruppeIder = (perioder: PeriodeSøkerMedTidslinjedata[] = []) =>
-  perioder
+const lagGruppeIder = (perioder: PeriodeSøkerMedTidslinjedata[] = []) => {
+  if (perioder.every(p => !p.hovedsoker)) {
+    return [1, 2];
+  }
+
+  return perioder
     .reduce((accPerioder, periode) => {
       const harPeriode = accPerioder.some(p => p.group === periode.group);
       if (!harPeriode) accPerioder.push(periode);
       return accPerioder;
     }, [])
     .map(activity => activity.group);
+};
 
 const finnIkonGittKjønnkode = (rrType: string) => {
   if (rrType === relasjonsRolleType.MOR || rrType === relasjonsRolleType.MEDMOR) {
@@ -220,7 +225,7 @@ const finnLabelForPeriode = (
   periode: PeriodeMedStartOgSlutt,
   behandlingStatusKode: string,
   intl: IntlShape,
-): string => {
+): ReactElement => {
   const periodeString = `${dayjs(periode.start).format(DDMMYY_DATE_FORMAT)} - ${dayjs(periode.end).format(
     DDMMYY_DATE_FORMAT,
   )}`;
@@ -248,12 +253,22 @@ const finnLabelForPeriode = (
       ? intl.formatMessage({ id: 'UttakTidslinje.ManueltEditert' })
       : '';
 
-  // Rar formatering - Fiks når Tidslinja får støtte for formaterte tooltips
-  return `Stønadskonto: ${periodeType}
-Periode: ${periodeString}
-Dager: ${dager}
-${type}
-${manueltEndret}`;
+  return (
+    <>
+      <BodyShort>
+        <FormattedMessage id="UttakTidslinje.Stonadskonto" values={{ periodeType: periodeType || '-' }} />
+      </BodyShort>
+      <BodyShort>
+        <FormattedMessage id="UttakTidslinje.Periode" values={{ periodeString }} />
+      </BodyShort>
+      <BodyShort>
+        <FormattedMessage id="UttakTidslinje.Dager" values={{ dager }} />
+      </BodyShort>
+      <VerticalSpacer eightPx />
+      {type}
+      {manueltEndret}
+    </>
+  );
 };
 
 const finnIkonForPeriode = (periode: PeriodeMedStartOgSlutt, behandlingStatusKode: string) => {
@@ -396,8 +411,9 @@ const UttakTidslinje: FunctionComponent<TidslinjeProps> = ({
                     onSelectPeriod={() => setValgtPeriodeIndex(periode.id)}
                     isActive={periode.id === valgtPeriode?.id}
                     icon={finnIkonForPeriode(periode, behandlingStatusKode)}
-                    title={finnLabelForPeriode(periode, behandlingStatusKode, intl)}
-                  />
+                  >
+                    {finnLabelForPeriode(periode, behandlingStatusKode, intl)}
+                  </Timeline.Period>
                 ))}
             </Timeline.Row>
           );
