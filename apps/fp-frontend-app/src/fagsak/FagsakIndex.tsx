@@ -64,11 +64,6 @@ const FagsakIndex: FunctionComponent = () => {
     [requestFagsakApi, requestBehandlingApi],
   );
 
-  // 1. Hent opp fagsak gitt saksnr i URL
-  // 2. Hent opp behandling gitt uuid i URL
-  // - Ny behandling => sett behandling og hent opp fagsak på nytt gitt uuid. Endre uuid i url manuelt, sjekk da om uuid er lik behandling, det er den her
-  // - Lagre aksjonspunkt => hent opp behandling og så ny fagsak gitt versjon
-
   const [harHentetFagsak, fagsakData, oppdaterFagsak] = useHentFagsak(
     selectedSaksnummer,
     behandlingUuid,

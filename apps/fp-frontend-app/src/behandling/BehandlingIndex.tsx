@@ -8,7 +8,7 @@ import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
 import { requestBehandlingApi } from '../data/behandlingContextApi';
 import ErrorBoundary from '../app/ErrorBoundary';
 import FagsakData from '../fagsak/FagsakData';
-import ValgtBehandlingIndex from './ValgtBehandlingIndex';
+import BehandlingPanelerIndex from './BehandlingPanelerIndex';
 import lazyWithRetry from './lazyUtils';
 
 const BehandlingPapirsoknadIndex = lazyWithRetry(() => import('./papirsoknad/BehandlingPapirsoknadIndex'));
@@ -81,7 +81,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     }
     return (
       <ErrorBoundary errorMessageCallback={addErrorMessage}>
-        <ValgtBehandlingIndex
+        <BehandlingPanelerIndex
           key={behandlingUuid}
           behandling={behandling}
           kodeverk={kodeverk}

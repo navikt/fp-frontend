@@ -87,7 +87,7 @@ type OwnProps = {
   alleBehandlinger: BehandlingAppKontekst[];
 };
 
-const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
+const BehandlingPanelerIndex: FunctionComponent<OwnProps> = ({
   setBehandling,
   behandling,
   kodeverk,
@@ -278,4 +278,4 @@ const ValgtBehandlingIndex: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default ValgtBehandlingIndex;
+export default BehandlingPanelerIndex;
