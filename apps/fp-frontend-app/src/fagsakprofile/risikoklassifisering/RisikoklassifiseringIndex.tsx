@@ -3,17 +3,17 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 import { RisikoklassifiseringSakIndex, AvklartRisikoklassifiseringAp } from '@navikt/ft-sak-risikoklassifisering';
 
-import { NavAnsatt, AksessRettigheter } from '@navikt/fp-types';
+import { NavAnsatt, AksessRettigheter, Behandling } from '@navikt/fp-types';
 import { KodeverkType } from '@navikt/fp-kodeverk';
 
-import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
 import useTrackRouteParam from '../../app/useTrackRouteParam';
-import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
+import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 import { getRiskPanelLocationCreator } from '../../app/paths';
 import getAccessRights from '../../app/util/access';
 import FagsakData from '../../fagsak/FagsakData';
 
 import '@navikt/ft-sak-risikoklassifisering/dist/style.css';
+import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
 
 const getReadOnly = (navAnsatt: NavAnsatt, rettigheter: AksessRettigheter, erPaaVent: boolean) => {
   if (erPaaVent) {
@@ -27,6 +27,7 @@ interface OwnProps {
   fagsakData: FagsakData;
   behandlingUuid?: string;
   behandlingVersjon?: number;
+  setBehandling: (behandling: Behandling) => void;
 }
 
 /**
@@ -36,7 +37,12 @@ interface OwnProps {
  * Viser en av tre komponenter avhengig av: Om ingen klassifisering er utført,
  * om klassifisering er utført og ingen faresignaler er funnet og om klassifisering er utført og faresignaler er funnet
  */
-const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({ fagsakData, behandlingVersjon, behandlingUuid }) => {
+const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
+  fagsakData,
+  behandlingVersjon,
+  behandlingUuid,
+  setBehandling,
+}) => {
   const fagsak = fagsakData.getFagsak();
   const behandling = fagsakData.getBehandling(behandlingUuid);
   const erPaaVent = behandling ? behandling.behandlingPaaVent : false;
@@ -54,8 +60,8 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({ fagsakData, be
   const navigate = useNavigate();
   const location = useLocation();
 
-  const alleKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
-  const initFetchData = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.INIT_FETCH);
+  const alleKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
+  const initFetchData = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
   const navAnsatt = initFetchData.innloggetBruker;
   const rettigheter = useMemo(
     () => getAccessRights(navAnsatt, fagsak.status, behandlingStatus, behandlingType),
@@ -93,7 +99,14 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({ fagsakData, be
         ],
       };
 
-      return behandlingEventHandler.lagreRisikoklassifiseringAksjonspunkt(params);
+      const { startRequest: lagreRisikoklassifiseringAksjonspunkt } = restBehandlingApiHooks.useRestApiRunner(
+        BehandlingApiKeys.SAVE_AKSJONSPUNKT,
+      );
+      return lagreRisikoklassifiseringAksjonspunkt(params).then(oppdatertBehandling => {
+        if (oppdatertBehandling) {
+          setBehandling(oppdatertBehandling);
+        }
+      });
     },
     [behandlingUuid, behandlingVersjon],
   );

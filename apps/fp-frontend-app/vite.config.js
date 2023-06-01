@@ -8,7 +8,6 @@ export default defineConfig({
       // Use React plugin in all *.jsx and *.tsx files
       include: '**/*.{ts,tsx}',
     }),
-    sourcemaps(),
   ],
   css: {
     modules: {
@@ -42,6 +41,7 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
+      plugins: [sourcemaps()],
       output: {
         sourcemap: true,
       },

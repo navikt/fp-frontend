@@ -13,8 +13,7 @@ import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPane
 import IverksetterVedtakStatusModal from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
-import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
-import { restApiInnsynHooks, requestInnsynApi, InnsynBehandlingApiKeys } from '../data/innsynBehandlingApi';
+import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 const getVedtakStatus = (behandling: Behandling): string => {
   const { aksjonspunkt, behandlingsresultat } = behandling;
@@ -46,10 +45,10 @@ const hentForhandsvisCallback =
 const getLagringSideeffekter =
   (
     toggleIverksetterVedtakModal: (skalViseModal: boolean) => void,
-    toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
+    setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void,
   ) =>
   () => {
-    toggleOppdatereFagsakContext(false);
+    setSkalOppdatereEtterBekreftelseAvAp(false);
 
     // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
     return () => {
@@ -60,8 +59,8 @@ const getLagringSideeffekter =
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.FORESLA_VEDTAK];
 
 const getEndepunkterPanelData = (saksnummer: string) => [
-  { key: InnsynBehandlingApiKeys.INNSYN },
-  { key: InnsynBehandlingApiKeys.INNSYN_DOKUMENTER, params: { saksnummer } },
+  { key: BehandlingApiKeys.INNSYN },
+  { key: BehandlingApiKeys.INNSYN_DOKUMENTER, params: { saksnummer } },
 ];
 
 type EndepunktPanelData = {
@@ -72,26 +71,26 @@ type EndepunktPanelData = {
 interface OwnProps {
   fagsak: Fagsak;
   opneSokeside: () => void;
-  toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void;
+  setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
 }
 
 const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   fagsak,
   opneSokeside,
-  toggleOppdatereFagsakContext,
+  setSkalOppdatereEtterBekreftelseAvAp,
   ...props
 }) => {
   const intl = useIntl();
   const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
   const lagringSideeffekterCallback = getLagringSideeffekter(
     toggleIverksetterVedtakModal,
-    toggleOppdatereFagsakContext,
+    setSkalOppdatereEtterBekreftelseAvAp,
   );
 
   const standardPanelProps = useStandardProsessPanelProps();
 
-  const { startRequest: forhandsvisMelding } = restApiInnsynHooks.useRestApiRunner(
-    BehandlingFellesApiKeys.PREVIEW_MESSAGE,
+  const { startRequest: forhandsvisMelding } = restBehandlingApiHooks.useRestApiRunner(
+    BehandlingApiKeys.PREVIEW_MESSAGE,
   );
   const previewCallback = useCallback(
     hentForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
@@ -101,7 +100,6 @@ const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>
       {...props}
-      requestApi={requestInnsynApi}
       panelEndepunkter={getEndepunkterPanelData(fagsak.saksnummer)}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.VEDTAK}

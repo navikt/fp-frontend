@@ -12,14 +12,14 @@ const AKSJONSPUNKT_KODER = [AksjonspunktCode.BEHANDLE_KLAGE_NFP];
 
 interface OwnProps {
   fagsak: Fagsak;
-  toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void;
+  setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
   opneSokeside: () => void;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
 }
 
 const VurderingFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   fagsak,
-  toggleOppdatereFagsakContext,
+  setSkalOppdatereEtterBekreftelseAvAp,
   opneSokeside,
   oppdaterProsessStegOgFaktaPanelIUrl,
   ...props
@@ -27,7 +27,7 @@ const VurderingFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & Pr
   <VurderingFellesProsessStegInitPanel
     {...props}
     fagsak={fagsak}
-    toggleOppdatereFagsakContext={toggleOppdatereFagsakContext}
+    setSkalOppdatereEtterBekreftelseAvAp={setSkalOppdatereEtterBekreftelseAvAp}
     opneSokeside={opneSokeside}
     oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}

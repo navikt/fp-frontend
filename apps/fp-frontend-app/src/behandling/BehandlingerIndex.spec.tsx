@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react';
 import { Fagsak, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import FagsakData from '../fagsak/FagsakData';
-import { BehandlingerIndex } from './BehandlingerIndex';
+import BehandlingerIndex from './BehandlingerIndex';
 
 describe('BehandlingerIndex', () => {
   it('skal rendre komponent korrekt', async () => {
@@ -22,7 +22,9 @@ describe('BehandlingerIndex', () => {
       <MemoryRouter>
         <BehandlingerIndex
           fagsakData={new FagsakData(fagsak)}
-          setBehandlingUuidOgVersjon={vi.fn()}
+          setBehandling={vi.fn()}
+          setBehandlingUuid={vi.fn()}
+          hentOgSettBehandling={vi.fn()}
           setRequestPendingMessage={vi.fn()}
         />
       </MemoryRouter>,

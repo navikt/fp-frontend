@@ -1,36 +1,36 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
+import { AksessRettigheter, AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
 
-import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-
-import StandardBehandlingProps from '../felles/typer/standardBehandlingProps';
-import {
-  useBehandling,
-  useInitBehandlingHandlinger,
-  useInitRequestApi,
-  useLagreAksjonspunkt,
-} from '../felles/utils/indexHooks';
 import RegistrerPapirsoknad from './RegistrerPapirsoknad';
-import { requestPapirsoknadApi } from './data/papirsoknadApi';
+import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
 
-const BehandlingPapirsoknadIndex: FunctionComponent<StandardBehandlingProps> = ({
-  behandlingEventHandler,
-  behandlingUuid,
+const useSetBehandlingVedEndring = (setBehandling: (behandling: Behandling) => void, behandling?: Behandling): void => {
+  useEffect(() => {
+    if (behandling) {
+      setBehandling(behandling);
+    }
+  }, [behandling]);
+};
+
+type OwnProps = {
+  behandling: Behandling;
+  setBehandling: (behandling: Behandling) => void;
+  kodeverk: AlleKodeverk;
+  fagsak: Fagsak;
+  rettigheter: AksessRettigheter;
+};
+
+const BehandlingPapirsoknadIndex: FunctionComponent<OwnProps> = ({
+  behandling,
+  setBehandling,
   kodeverk,
   fagsak,
   rettigheter,
-  setRequestPendingMessage,
 }) => {
-  useInitRequestApi(requestPapirsoknadApi, setRequestPendingMessage);
-
-  const { behandling, hentBehandling, setBehandling } = useBehandling(requestPapirsoknadApi, behandlingUuid);
-
-  const { lagreAksjonspunkter } = useLagreAksjonspunkt(requestPapirsoknadApi, setBehandling);
-
-  useInitBehandlingHandlinger(requestPapirsoknadApi, behandlingEventHandler, hentBehandling, setBehandling, behandling);
-
-  if (!behandling) {
-    return <LoadingPanel />;
-  }
+  const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restBehandlingApiHooks.useRestApiRunner(
+    BehandlingApiKeys.SAVE_AKSJONSPUNKT,
+  );
+  useSetBehandlingVedEndring(setBehandling, apBehandlingRes);
 
   return (
     <RegistrerPapirsoknad
@@ -38,7 +38,7 @@ const BehandlingPapirsoknadIndex: FunctionComponent<StandardBehandlingProps> = (
       fagsak={fagsak}
       kodeverk={kodeverk}
       rettigheter={rettigheter}
-      hentBehandling={hentBehandling}
+      setBehandling={setBehandling}
       lagreAksjonspunkt={lagreAksjonspunkter}
     />
   );

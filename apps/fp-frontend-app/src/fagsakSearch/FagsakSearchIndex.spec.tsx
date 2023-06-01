@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 import { FagsakEnkel, KjønnkodeEnum } from '@navikt/fp-types';
 import { RestApiMock } from '@navikt/fp-utils-test';
 
-import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
+import { requestFagsakApi, FagsakApiKeys } from '../data/fagsakContextApi';
 import FagsakSearchIndex from './FagsakSearchIndex';
 
 const mockHistoryPush = vi.fn();
@@ -44,12 +44,12 @@ describe('<FagsakSearchIndex>', () => {
 
   it('skal søke opp fagsaker', async () => {
     const data = [
-      { key: FpsakApiKeys.KODEVERK.name, global: true, data: {} },
-      { key: FpsakApiKeys.SEARCH_FAGSAK.name, data: fagsaker },
+      { key: FagsakApiKeys.KODEVERK.name, global: true, data: {} },
+      { key: FagsakApiKeys.SEARCH_FAGSAK.name, data: fagsaker },
     ];
 
     const utils = render(
-      <RestApiMock data={data} requestApi={requestApi}>
+      <RestApiMock data={data} requestApi={requestFagsakApi}>
         <MemoryRouter>
           <FagsakSearchIndex />
         </MemoryRouter>
@@ -72,12 +72,12 @@ describe('<FagsakSearchIndex>', () => {
 
   it('skal gå til valgt fagsak', async () => {
     const data = [
-      { key: FpsakApiKeys.KODEVERK.name, global: true, data: {} },
-      { key: FpsakApiKeys.SEARCH_FAGSAK.name, data: fagsaker },
+      { key: FagsakApiKeys.KODEVERK.name, global: true, data: {} },
+      { key: FagsakApiKeys.SEARCH_FAGSAK.name, data: fagsaker },
     ];
 
     const utils = render(
-      <RestApiMock data={data} requestApi={requestApi}>
+      <RestApiMock data={data} requestApi={requestFagsakApi}>
         <MemoryRouter>
           <FagsakSearchIndex />
         </MemoryRouter>

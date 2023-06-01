@@ -3,7 +3,7 @@ import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 
-import { requestApi } from '../data/fpsakApi';
+import { requestFagsakApi } from '../data/fagsakContextApi';
 import useHentInitLenker from './useHentInitLenker';
 import useHentKodeverk from './useHentKodeverk';
 
@@ -17,7 +17,7 @@ interface OwnProps {
 const AppConfigResolver: FunctionComponent<OwnProps> = ({ children }) => {
   const { addErrorMessage } = useRestApiErrorDispatcher();
   useEffect(() => {
-    requestApi.setAddErrorMessageHandler(addErrorMessage);
+    requestFagsakApi.setAddErrorMessageHandler(addErrorMessage);
   }, []);
 
   const [harHentetFerdigInitLenker, harFpsakInitKallFeilet] = useHentInitLenker();

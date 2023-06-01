@@ -14,7 +14,7 @@ import {
 } from '@navikt/fp-kodeverk';
 import { Fagsak, BehandlingAppKontekst } from '@navikt/fp-types';
 
-import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
+import { requestFagsakApi, FagsakApiKeys } from '../../data/fagsakContextApi';
 import MeldingIndex from './MeldingIndex';
 import FagsakData from '../../fagsak/FagsakData';
 
@@ -62,18 +62,19 @@ describe('<MeldingIndex>', () => {
 
   it('skal vise messages når mottakere og brevmaler har blitt hentet fra server', async () => {
     const data = [
-      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
-      { key: FpsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
-      { key: FpsakApiKeys.SUBMIT_MESSAGE.name, data: undefined },
+      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
+      { key: FagsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
+      { key: FagsakApiKeys.SUBMIT_MESSAGE.name, data: undefined },
     ];
 
     render(
-      <RestApiMock data={data} requestApi={requestApi}>
+      <RestApiMock data={data} requestApi={requestFagsakApi}>
         <MemoryRouter>
           <MeldingIndex
             fagsakData={new FagsakData(fagsak as Fagsak)}
             valgtBehandlingUuid={valgtBehandling.uuid}
             setMeldingForData={() => undefined}
+            hentOgSettBehandling={() => undefined}
           />
         </MemoryRouter>
       </RestApiMock>,
@@ -85,9 +86,9 @@ describe('<MeldingIndex>', () => {
 
   it('skal sette default tom streng ved forhåndsvisning dersom fritekst ikke er fylt ut', async () => {
     const data = [
-      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
-      { key: FpsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
-      { key: FpsakApiKeys.PREVIEW_MESSAGE_FORMIDLING.name, data: {} },
+      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
+      { key: FagsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
+      { key: FagsakApiKeys.PREVIEW_MESSAGE_FORMIDLING.name, data: {} },
     ];
 
     let axiosMock: MockAdapter;
@@ -96,12 +97,13 @@ describe('<MeldingIndex>', () => {
     };
 
     const utils = render(
-      <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
+      <RestApiMock data={data} requestApi={requestFagsakApi} setApiMock={setApiMock}>
         <MemoryRouter>
           <MeldingIndex
             fagsakData={new FagsakData(fagsak as Fagsak)}
             valgtBehandlingUuid={valgtBehandling.uuid}
             setMeldingForData={() => undefined}
+            hentOgSettBehandling={() => undefined}
           />
         </MemoryRouter>
       </RestApiMock>,
@@ -131,9 +133,9 @@ describe('<MeldingIndex>', () => {
 
   it('skal sende melding og så lukke modal', async () => {
     const data = [
-      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
-      { key: FpsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
-      { key: FpsakApiKeys.SUBMIT_MESSAGE.name, data: undefined },
+      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
+      { key: FagsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
+      { key: FagsakApiKeys.SUBMIT_MESSAGE.name, data: undefined },
     ];
 
     let axiosMock: MockAdapter;
@@ -142,12 +144,13 @@ describe('<MeldingIndex>', () => {
     };
 
     const utils = render(
-      <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
+      <RestApiMock data={data} requestApi={requestFagsakApi} setApiMock={setApiMock}>
         <MemoryRouter>
           <MeldingIndex
             fagsakData={new FagsakData(fagsak as Fagsak)}
             valgtBehandlingUuid={valgtBehandling.uuid}
             setMeldingForData={() => undefined}
+            hentOgSettBehandling={() => undefined}
           />
         </MemoryRouter>
       </RestApiMock>,
@@ -168,7 +171,7 @@ describe('<MeldingIndex>', () => {
     await waitFor(() => expect(axiosMock.history.get.length).toBe(1));
 
     await waitFor(() =>
-      expect(axiosMock.history.get.find(a => a.url === FpsakApiKeys.SUBMIT_MESSAGE.name)?.params).toStrictEqual({
+      expect(axiosMock.history.get.find(a => a.url === FagsakApiKeys.SUBMIT_MESSAGE.name)?.params).toStrictEqual({
         behandlingUuid: '1',
         arsakskode: undefined,
         fritekst: '',
@@ -179,9 +182,9 @@ describe('<MeldingIndex>', () => {
 
   it('skal sende melding og sette saken på vent hvis INNHENT_DOK', async () => {
     const data = [
-      { key: FpsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
-      { key: FpsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
-      { key: FpsakApiKeys.SUBMIT_MESSAGE.name, data: undefined },
+      { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },
+      { key: FagsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
+      { key: FagsakApiKeys.SUBMIT_MESSAGE.name, data: undefined },
     ];
 
     let axiosMock: MockAdapter;
@@ -190,12 +193,13 @@ describe('<MeldingIndex>', () => {
     };
 
     const utils = render(
-      <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
+      <RestApiMock data={data} requestApi={requestFagsakApi} setApiMock={setApiMock}>
         <MemoryRouter>
           <MeldingIndex
             fagsakData={new FagsakData(fagsak as Fagsak)}
             valgtBehandlingUuid={valgtBehandling.uuid}
             setMeldingForData={() => undefined}
+            hentOgSettBehandling={() => undefined}
           />
         </MemoryRouter>
       </RestApiMock>,
@@ -219,7 +223,7 @@ describe('<MeldingIndex>', () => {
     await waitFor(() => expect(axiosMock.history.get.length).toBe(1));
 
     await waitFor(() =>
-      expect(axiosMock.history.get.find(a => a.url === FpsakApiKeys.SUBMIT_MESSAGE.name)?.params).toStrictEqual({
+      expect(axiosMock.history.get.find(a => a.url === FagsakApiKeys.SUBMIT_MESSAGE.name)?.params).toStrictEqual({
         behandlingUuid: '1',
         arsakskode: undefined,
         brevmalkode: dokumentMalType.INNHENTE_OPPLYSNINGER,

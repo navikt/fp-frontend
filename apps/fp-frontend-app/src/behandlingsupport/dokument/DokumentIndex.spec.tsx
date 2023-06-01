@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
 
-import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
+import { requestFagsakApi, FagsakApiKeys } from '../../data/fagsakContextApi';
 import { DokumentIndex } from './DokumentIndex';
 
 describe('<DokumentIndex>', () => {
@@ -32,10 +32,10 @@ describe('<DokumentIndex>', () => {
   ];
 
   it('skal vise liste med tre dokumenter', async () => {
-    const data = [{ key: FpsakApiKeys.ALL_DOCUMENTS.name, data: documents }];
+    const data = [{ key: FagsakApiKeys.ALL_DOCUMENTS.name, data: documents }];
 
     render(
-      <RestApiMock data={data} requestApi={requestApi}>
+      <RestApiMock data={data} requestApi={requestFagsakApi}>
         <DokumentIndex behandlingUuid="1" behandlingVersjon={2} saksnummer="123" />
       </RestApiMock>,
     );

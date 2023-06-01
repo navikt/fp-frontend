@@ -9,13 +9,13 @@ import { Innsyn } from '@navikt/fp-types';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import { requestInnsynApi, InnsynBehandlingApiKeys } from '../data/innsynBehandlingApi';
+import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_INNSYN];
 
 const getEndepunkterPanelData = (saksnummer: string) => [
-  { key: InnsynBehandlingApiKeys.INNSYN_DOKUMENTER, params: { saksnummer } },
-  { key: InnsynBehandlingApiKeys.INNSYN },
+  { key: BehandlingApiKeys.INNSYN_DOKUMENTER, params: { saksnummer } },
+  { key: BehandlingApiKeys.INNSYN },
 ];
 type EndepunktPanelData = {
   innsynDokumenter?: Dokument[];
@@ -32,7 +32,6 @@ const BehandleInnsynProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
 }) => (
   <ProsessDefaultInitPanel<EndepunktPanelData>
     {...props}
-    requestApi={requestInnsynApi}
     panelEndepunkter={getEndepunkterPanelData(fagsak.saksnummer)}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     prosessPanelKode={ProsessStegCode.BEHANDLE_INNSYN}

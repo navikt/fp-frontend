@@ -13,9 +13,8 @@ import { forhandsvisDokument } from '@navikt/ft-utils';
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
-import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
-import { restApiKlageHooks, KlageBehandlingApiKeys, requestKlageApi } from '../data/klageBehandlingApi';
 import KlageBehandlingModal from '../modaler/KlageBehandlingModal';
+import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 const lagForhandsvisCallback =
   (
@@ -46,7 +45,7 @@ const lagKlageCallback =
 const getLagringSideeffekter =
   (
     toggleKlageModal: (skalViseModal: boolean) => void,
-    toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
+    setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void,
     oppdaterProsessStegOgFaktaPanelIUrl?: (punktnavn?: string, faktanavn?: string) => void,
   ) =>
   (aksjonspunktModels: { kode: string; klageVurdering?: string }[]) => {
@@ -57,7 +56,7 @@ const getLagringSideeffekter =
     );
 
     if (skalByttTilKlageinstans) {
-      toggleOppdatereFagsakContext(false);
+      setSkalOppdatereEtterBekreftelseAvAp(false);
     }
 
     // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
@@ -70,14 +69,14 @@ const getLagringSideeffekter =
     };
   };
 
-const ENDEPUNKTER_PANEL_DATA = [KlageBehandlingApiKeys.KLAGE_VURDERING];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.KLAGE_VURDERING];
 type EndepunktPanelData = {
   klageVurdering: KlageVurdering;
 };
 
 interface OwnProps {
   fagsak: Fagsak;
-  toggleOppdatereFagsakContext?: (skalHenteFagsak: boolean) => void;
+  setSkalOppdatereEtterBekreftelseAvAp?: (skalHenteFagsak: boolean) => void;
   opneSokeside?: () => void;
   oppdaterProsessStegOgFaktaPanelIUrl?: (punktnavn?: string, faktanavn?: string) => void;
   aksjonspunktKoder?: string[];
@@ -87,7 +86,7 @@ interface OwnProps {
 
 const VurderingFellesProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   fagsak,
-  toggleOppdatereFagsakContext,
+  setSkalOppdatereEtterBekreftelseAvAp,
   opneSokeside,
   oppdaterProsessStegOgFaktaPanelIUrl,
   aksjonspunktKoder,
@@ -99,20 +98,24 @@ const VurderingFellesProsessStegInitPanel: FunctionComponent<OwnProps & ProsessP
 
   const standardPanelProps = useStandardProsessPanelProps();
 
-  const lagringSideEffekter = toggleOppdatereFagsakContext
-    ? getLagringSideeffekter(toggleKlageModal, toggleOppdatereFagsakContext, oppdaterProsessStegOgFaktaPanelIUrl)
+  const lagringSideEffekter = setSkalOppdatereEtterBekreftelseAvAp
+    ? getLagringSideeffekter(
+        toggleKlageModal,
+        setSkalOppdatereEtterBekreftelseAvAp,
+        oppdaterProsessStegOgFaktaPanelIUrl,
+      )
     : undefined;
 
-  const { startRequest: forhandsvisMelding } = restApiKlageHooks.useRestApiRunner(
-    BehandlingFellesApiKeys.PREVIEW_MESSAGE,
+  const { startRequest: forhandsvisMelding } = restBehandlingApiHooks.useRestApiRunner(
+    BehandlingApiKeys.PREVIEW_MESSAGE,
   );
   const previewCallback = useCallback(
     lagForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
     [standardPanelProps.behandling.versjon],
   );
 
-  const { startRequest: lagreKlageVurdering } = restApiKlageHooks.useRestApiRunner(
-    KlageBehandlingApiKeys.SAVE_KLAGE_VURDERING,
+  const { startRequest: lagreKlageVurdering } = restBehandlingApiHooks.useRestApiRunner(
+    BehandlingApiKeys.SAVE_KLAGE_VURDERING,
   );
   const lagreKlage = useCallback(lagKlageCallback(lagreKlageVurdering, standardPanelProps.behandling), [
     standardPanelProps.behandling.versjon,
@@ -121,7 +124,6 @@ const VurderingFellesProsessStegInitPanel: FunctionComponent<OwnProps & ProsessP
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>
       {...props}
-      requestApi={requestKlageApi}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={aksjonspunktKoder}
       prosessPanelKode={prosessPanelKode}

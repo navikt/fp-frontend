@@ -7,7 +7,7 @@ import { FagsakEnkel } from '@navikt/fp-types';
 import { FagsakSokSakIndex } from '@navikt/fp-sak-sok';
 
 import { pathToFagsak } from '../app/paths';
-import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
+import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
 
 const EMPTY_ARRAY = [] as FagsakEnkel[];
 
@@ -18,7 +18,7 @@ const EMPTY_ARRAY = [] as FagsakEnkel[];
  * mot server og lagringen av resultatet i klientens state.
  */
 const FagsakSearchIndex: FunctionComponent = () => {
-  const alleKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
+  const alleKodeverk = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.KODEVERK);
 
   const navigate = useNavigate();
   const goToFagsak = (saksnummer?: string) => {
@@ -32,7 +32,7 @@ const FagsakSearchIndex: FunctionComponent = () => {
     data: fagsaker = EMPTY_ARRAY,
     state: sokeStatus,
     error,
-  } = restApiHooks.useRestApiRunner(FpsakApiKeys.SEARCH_FAGSAK);
+  } = restFagsakApiHooks.useRestApiRunner(FagsakApiKeys.SEARCH_FAGSAK);
 
   const searchResultAccessDenied = useMemo(
     () => (errorOfType(ErrorTypes.MANGLER_TILGANG_FEIL, error) ? getErrorResponseData(error) : undefined),

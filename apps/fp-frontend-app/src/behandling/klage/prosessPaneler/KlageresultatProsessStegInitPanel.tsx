@@ -11,10 +11,9 @@ import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
-import { restApiKlageHooks, KlageBehandlingApiKeys, requestKlageApi } from '../data/klageBehandlingApi';
 import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
 import FatterVedtakStatusModal from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
+import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 const lagForhandsvisCallback =
   (
@@ -56,10 +55,10 @@ const getVedtakStatus = (behandlingsresultat?: Behandlingsresultat, aksjonspunkt
 const getLagringSideeffekter =
   (
     toggleFatterVedtakModal: (skalViseModal: boolean) => void,
-    toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
+    setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void,
   ) =>
   () => {
-    toggleOppdatereFagsakContext(false);
+    setSkalOppdatereEtterBekreftelseAvAp(false);
 
     // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
     return () => {
@@ -74,20 +73,20 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL,
 ];
 
-const ENDEPUNKTER_PANEL_DATA = [KlageBehandlingApiKeys.KLAGE_VURDERING];
+const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.KLAGE_VURDERING];
 type EndepunktPanelData = {
   klageVurdering: KlageVurdering;
 };
 
 interface OwnProps {
   fagsak: Fagsak;
-  toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void;
+  setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void;
   opneSokeside: () => void;
 }
 
 const KlageresultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   fagsak,
-  toggleOppdatereFagsakContext,
+  setSkalOppdatereEtterBekreftelseAvAp,
   opneSokeside,
   ...props
 }) => {
@@ -97,10 +96,10 @@ const KlageresultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPan
 
   const standardPanelProps = useStandardProsessPanelProps();
 
-  const lagringSideEffekter = getLagringSideeffekter(toggleFatterVedtakModal, toggleOppdatereFagsakContext);
+  const lagringSideEffekter = getLagringSideeffekter(toggleFatterVedtakModal, setSkalOppdatereEtterBekreftelseAvAp);
 
-  const { startRequest: forhandsvisMelding } = restApiKlageHooks.useRestApiRunner(
-    BehandlingFellesApiKeys.PREVIEW_MESSAGE,
+  const { startRequest: forhandsvisMelding } = restBehandlingApiHooks.useRestApiRunner(
+    BehandlingApiKeys.PREVIEW_MESSAGE,
   );
   const previewCallback = useCallback(
     lagForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
@@ -112,7 +111,6 @@ const KlageresultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPan
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>
       {...props}
-      requestApi={requestKlageApi}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.KLAGE_RESULTAT}
