@@ -12,6 +12,8 @@ import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlin
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
 import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
 
+import '@navikt/ft-fakta-tilbakekreving-feilutbetaling/dist/style.css';
+
 const AKSJONSPUNKT_KODER = [FeilutbetalingAksjonspunktCode.AVKLAR_FAKTA_FOR_FEILUTBETALING];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.FEILUTBETALING_FAKTA, BehandlingApiKeys.FEILUTBETALING_AARSAK];
