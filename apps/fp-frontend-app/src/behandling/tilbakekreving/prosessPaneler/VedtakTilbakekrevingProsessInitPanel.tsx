@@ -18,6 +18,8 @@ import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 import FatterVedtakStatusModal from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 
+import '@navikt/ft-prosess-tilbakekreving-vedtak/dist/style.css';
+
 const AKSJONSPUNKT_KODER = [VedtakAksjonspunktCode.FORESLA_VEDTAK];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.VEDTAKSBREV, BehandlingApiKeys.BEREGNINGSRESULTAT];

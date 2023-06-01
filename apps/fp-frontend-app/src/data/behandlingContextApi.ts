@@ -35,7 +35,6 @@ import {
   DokumentasjonVurderingBehov,
   BeregningsresultatEs,
   BeregningsresultatTilbakekreving,
-  AlleKodeverkTilbakekreving,
 } from '@navikt/fp-types';
 
 import {
@@ -155,7 +154,6 @@ export const BehandlingApiKeys = {
   VILKARVURDERINGSPERIODER: new RestKey<DetaljerteFeilutbetalingsperioder, void>('VILKARVURDERINGSPERIODER'),
   VILKARVURDERING: new RestKey<VilkarsVurdertePerioderWrapper, void>('VILKARVURDERING'),
   BEREGNE_BELØP: new RestKey<any, any>('BEREGNE_BELØP'),
-  TILBAKE_KODEVERK: new RestKey<AlleKodeverkTilbakekreving, void>('TILBAKE_KODEVERK'),
   PREVIEW_VEDTAKSBREV: new RestKey<any, any>('PREVIEW_VEDTAKSBREV'),
 };
 

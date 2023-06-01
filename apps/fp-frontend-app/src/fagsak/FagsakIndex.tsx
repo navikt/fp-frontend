@@ -75,24 +75,29 @@ const FagsakIndex: FunctionComponent = () => {
     fagsakBehandling?.type === BehandlingType.TILBAKEKREVING ||
     fagsakBehandling?.type === BehandlingType.TILBAKEKREVING_REVURDERING;
 
-  const { startRequest: hentBehandling } = restBehandlingApiHooks.useRestApiRunner(
-    erTilbakekreving ? BehandlingApiKeys.BEHANDLING_TILBAKE : BehandlingApiKeys.BEHANDLING,
+  const { startRequest: hentBehandling } = restBehandlingApiHooks.useRestApiRunner(BehandlingApiKeys.BEHANDLING);
+  const { startRequest: hentTilbakekrevingBehandling } = restBehandlingApiHooks.useRestApiRunner(
+    BehandlingApiKeys.BEHANDLING_TILBAKE,
   );
 
   const hentOgSettBehandling = useCallback(
     (keepData = false) => {
-      if (behandlingUuid) {
-        hentBehandling({ behandlingUuid }, keepData).then(setBehandling);
+      if (behandlingUuid && fagsakBehandling) {
+        if (erTilbakekreving) {
+          hentTilbakekrevingBehandling({ behandlingUuid }, keepData).then(setBehandling);
+        } else {
+          hentBehandling({ behandlingUuid }, keepData).then(setBehandling);
+        }
       }
     },
-    [behandlingUuid],
+    [behandlingUuid, fagsakBehandling],
   );
 
   useEffect(() => {
     if (behandlingUuid) {
       hentOgSettBehandling();
     }
-  }, [behandlingUuid]);
+  }, [behandlingUuid, hentOgSettBehandling]);
 
   useEffect(
     () => () => {
