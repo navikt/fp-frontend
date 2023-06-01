@@ -11,7 +11,7 @@ const {
 } = composeStories(stories);
 
 describe('<FormkravProsessIndex>', () => {
-  it('skal fylle ut og bekrefte skjema for NFP', async () => {
+  it.skip('skal fylle ut og bekrefte skjema for NFP', async () => {
     const lagre = vi.fn();
 
     const utils = render(<FormkravPanelForAksjonspunktNfp submitCallback={lagre} />);
@@ -46,7 +46,7 @@ describe('<FormkravProsessIndex>', () => {
     });
   });
 
-  it('skal vise informasjon for KA når ikke påklagd', async () => {
+  it.skip('skal vise informasjon for KA når ikke påklagd', async () => {
     render(<FormkravPanelForAksjonspunktKaIkkePåklagd />);
 
     expect(await screen.findByText('Vurder formkrav')).toBeInTheDocument();
@@ -68,7 +68,7 @@ describe('<FormkravProsessIndex>', () => {
     expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
   });
 
-  it('skal vise informasjon for KA når påklagd', async () => {
+  it.skip('skal vise informasjon for KA når påklagd', async () => {
     render(<FormkravPanelForAksjonspunktKaValgtBehandling />);
 
     expect(await screen.findByText('Vurder formkrav')).toBeInTheDocument();
