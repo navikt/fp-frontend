@@ -48,7 +48,7 @@
     "stylelint": "15.6.2",
     "typescript": "5.0.4",
     "vite": "4.3.9",
-    "vitest": "0.31.3"
+    "vitest": "0.31.4"
   },
   "exports": {
     ".": {
