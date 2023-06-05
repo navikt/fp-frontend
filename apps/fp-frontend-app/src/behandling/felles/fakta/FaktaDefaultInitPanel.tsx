@@ -37,7 +37,6 @@ const FaktaDefaultInitPanel = <PANEL_DATA = void,>({
 
   const erPanelValgt = useFaktaMenyRegistrerer(
     registrerFaktaPanel,
-    RestApiState.SUCCESS,
     faktaPanelKode,
     faktaPanelMenyTekst,
     skalPanelVisesIMeny(),

@@ -20,7 +20,6 @@ const FaktaPanelTest1: FunctionComponent<FaktaPanelInitProps> = ({ registrerFakt
       tekst: 'Dette er en paneltittel',
       erAktiv: valgtFaktaSteg === '1',
       harApneAksjonspunkter: true,
-      harHentetInitData: true,
     });
   }, []);
 
@@ -37,7 +36,6 @@ const FaktaPanelTest2: FunctionComponent<FaktaPanelInitProps> = ({ registrerFakt
       tekst: 'Annet panel',
       erAktiv: valgtFaktaSteg === '2',
       harApneAksjonspunkter: false,
-      harHentetInitData: true,
     });
   }, [valgtFaktaSteg]);
 
@@ -56,7 +54,6 @@ const ProsessPanelTest1: FunctionComponent<ProsessPanelInitProps> = ({ registrer
       erAktiv: valgtProsessSteg === '1',
       harApentAksjonspunkt: false,
       status: VilkarUtfallType.OPPFYLT,
-      harHentetInitData: true,
     });
   }, []);
 
@@ -75,7 +72,6 @@ const ProsessPanelTest2: FunctionComponent<ProsessPanelInitProps> = ({ registrer
       erAktiv: valgtProsessSteg === '2',
       harApentAksjonspunkt: true,
       status: VilkarUtfallType.IKKE_OPPFYLT,
-      harHentetInitData: true,
     });
   }, []);
 
