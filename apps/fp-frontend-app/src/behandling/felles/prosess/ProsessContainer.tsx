@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useCallback, useEffect, useMemo, useState, useRef } from 'react';
+import React, { FunctionComponent, ReactElement, useCallback, useMemo, useState } from 'react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 import { Behandling } from '@navikt/fp-types';
@@ -42,28 +42,17 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
     });
   }, []);
 
-  const ikkeKlar = menyData.some(d => !d.harHentetInitData);
-
   const menyDataSomVises = useMemo(() => menyData.filter(d => !!d.tekst), [menyData]);
-
-  const forrige = useRef<ProsessPanelMenyData[]>();
-  useEffect(() => {
-    if (!ikkeKlar) {
-      forrige.current = menyDataSomVises;
-    }
-  }, [menyDataSomVises]);
-
-  const currentData = ikkeKlar ? forrige.current : menyDataSomVises;
 
   const oppdaterMenyValg = useCallback(
     (index: number) => {
-      if (currentData) {
-        const panel = currentData[index];
+      if (menyDataSomVises) {
+        const panel = menyDataSomVises[index];
         const nyvalgtProsessSteg = panel.erAktiv ? undefined : panel.id;
         oppdaterProsessStegOgFaktaPanelIUrl(nyvalgtProsessSteg, valgtFaktaSteg);
       }
     },
-    [currentData, valgtFaktaSteg, oppdaterProsessStegOgFaktaPanelIUrl],
+    [menyDataSomVises, valgtFaktaSteg, oppdaterProsessStegOgFaktaPanelIUrl],
   );
 
   if (!hentPaneler) {
@@ -71,13 +60,13 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <div className={currentData && currentData.length > 0 ? styles.container : undefined}>
-      {currentData && currentData.length > 0 && (
+    <div className={menyDataSomVises && menyDataSomVises.length > 0 ? styles.container : undefined}>
+      {menyDataSomVises && menyDataSomVises.length > 0 && (
         <div className={styles.meny}>
-          <ProsessMeny menyData={currentData} oppdaterProsessPanelIUrl={oppdaterMenyValg} />
+          <ProsessMeny menyData={menyDataSomVises} oppdaterProsessPanelIUrl={oppdaterMenyValg} />
         </div>
       )}
-      {(!currentData || currentData.length === 0) && <LoadingPanel />}
+      {(!menyDataSomVises || menyDataSomVises.length === 0) && <LoadingPanel />}
       {hentPaneler(
         {
           behandling,
@@ -86,7 +75,7 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
         },
         {
           apentFaktaPanelInfo,
-          allMenyData: currentData || [],
+          allMenyData: menyDataSomVises || [],
         },
       )}
       {behandling.behandlingHenlagt && (

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement, useState, useCallback, useMemo, useRef, useEffect } from 'react';
+import React, { FunctionComponent, ReactElement, useState, useCallback, useMemo } from 'react';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import { Behandling } from '@navikt/fp-types';
 
@@ -53,27 +53,16 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
     [apentFaktaPanelInfo],
   );
 
-  const ikkeKlar = menyData.some(d => !d.harHentetInitData);
-
   const menyDataSomVises = useMemo(() => menyData.filter(d => !!d.tekst), [menyData]);
-
-  const forrige = useRef<FaktaPanelMenyData[]>();
-  useEffect(() => {
-    if (!ikkeKlar) {
-      forrige.current = menyDataSomVises;
-    }
-  }, [menyDataSomVises]);
-
-  const currentData = ikkeKlar ? forrige.current : menyDataSomVises;
 
   const oppdaterMenyValg = useCallback(
     (index: number) => {
-      if (currentData) {
-        const panel = currentData[index];
+      if (menyDataSomVises) {
+        const panel = menyDataSomVises[index];
         oppdaterProsessStegOgFaktaPanelIUrl(valgtProsessSteg, panel.id);
       }
     },
-    [currentData, valgtProsessSteg, oppdaterProsessStegOgFaktaPanelIUrl],
+    [menyDataSomVises, valgtProsessSteg, oppdaterProsessStegOgFaktaPanelIUrl],
   );
 
   if (!hentPaneler) {
@@ -85,8 +74,8 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
       <FlexContainer fullHeight>
         <FlexRow>
           <FlexColumn className={styles.sideMenu}>
-            {currentData && currentData.length > 0 && (
-              <FaktaMeny menyData={currentData} oppdaterFaktaPanelIUrl={oppdaterMenyValg} />
+            {menyDataSomVises && menyDataSomVises.length > 0 && (
+              <FaktaMeny menyData={menyDataSomVises} oppdaterFaktaPanelIUrl={oppdaterMenyValg} />
             )}
           </FlexColumn>
           <FlexColumn className={styles.content}>

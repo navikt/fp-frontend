@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { usePrevious } from '@navikt/ft-ui-komponenter';
 import ProsessPanelMenyData from '../typer/prosessPanelMenyData';
 
@@ -8,7 +7,6 @@ const DEFAULT_PANEL_VALGT = 'default';
 
 const useProsessMenyRegistrerer = (
   registrerProsessPanel: (data: ProsessPanelMenyData) => void,
-  dataState: RestApiState,
   id: string,
   tekst: string,
   skalVisesImeny: boolean,
@@ -21,9 +19,8 @@ const useProsessMenyRegistrerer = (
   useEffect(() => {
     registrerProsessPanel({
       id,
-      harHentetInitData: dataState === RestApiState.SUCCESS,
     });
-  }, [dataState]);
+  }, []);
 
   const erAktiv =
     skalVisesImeny && (valgtProsessSteg === id || (skalMarkeresSomAktiv && valgtProsessSteg === DEFAULT_PANEL_VALGT));
@@ -31,25 +28,21 @@ const useProsessMenyRegistrerer = (
   const forrigeSkalVisesIMeny = usePrevious(skalVisesImeny);
 
   useEffect(() => {
-    if (dataState === RestApiState.SUCCESS) {
-      if (skalVisesImeny) {
-        registrerProsessPanel({
-          id,
-          tekst,
-          erAktiv,
-          harApentAksjonspunkt,
-          status,
-          harHentetInitData: true,
-        });
-      } else if (!skalVisesImeny && forrigeSkalVisesIMeny) {
-        registrerProsessPanel({
-          id,
-          harHentetInitData: true,
-        });
-      }
-      setPanelValgt(erAktiv);
+    if (skalVisesImeny) {
+      registrerProsessPanel({
+        id,
+        tekst,
+        erAktiv,
+        harApentAksjonspunkt,
+        status,
+      });
+    } else if (!skalVisesImeny && forrigeSkalVisesIMeny) {
+      registrerProsessPanel({
+        id,
+      });
     }
-  }, [dataState, skalVisesImeny, forrigeSkalVisesIMeny, erAktiv, harApentAksjonspunkt, status]);
+    setPanelValgt(erAktiv);
+  }, [skalVisesImeny, forrigeSkalVisesIMeny, erAktiv, harApentAksjonspunkt, status]);
 
   return skalVisesImeny && erPanelValgt;
 };

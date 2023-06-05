@@ -50,7 +50,6 @@ const ProsessDefaultInitPanel = <PANEL_DATA = void,>({
 
   const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
-    RestApiState.SUCCESS,
     prosessPanelKode,
     prosessPanelMenyTekst,
     skalPanelVisesIMeny(standardPanelProps),
