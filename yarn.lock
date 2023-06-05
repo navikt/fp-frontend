@@ -4992,6 +4992,39 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@navikt/fp-sak-notat@1.0.0, @navikt/fp-sak-notat@workspace:packages/sak-notat":
+  version: 0.0.0-use.local
+  resolution: "@navikt/fp-sak-notat@workspace:packages/sak-notat"
+  dependencies:
+    "@navikt/ds-css": 3.4.2
+    "@navikt/ds-react": 3.4.2
+    "@navikt/fp-kodeverk": 1.0.0
+    "@navikt/fp-storybook-utils": 1.0.0
+    "@navikt/fp-types": 1.0.0
+    "@navikt/ft-form-hooks": 4.0.33
+    "@navikt/ft-form-validators": 2.0.28
+    "@navikt/ft-kodeverk": 2.1.9
+    "@navikt/ft-types": 2.1.11
+    "@navikt/ft-ui-komponenter": 2.0.31
+    "@navikt/ft-utils": 2.0.27
+    "@storybook/addon-actions": 7.0.18
+    "@storybook/react": 7.0.18
+    "@storybook/react-vite": 7.0.18
+    "@testing-library/react": 14.0.0
+    "@testing-library/user-event": 14.4.3
+    cross-env: 7.0.3
+    eslint: 8.41.0
+    react: 18.2.0
+    react-hook-form: 7.44.2
+    react-intl: 6.4.2
+    storybook: 7.0.18
+    stylelint: 15.6.2
+    typescript: 5.0.4
+    vite: 4.3.9
+    vitest: 0.31.3
+  languageName: unknown
+  linkType: soft
+
 "@navikt/fp-sak-sok@1.0.0, @navikt/fp-sak-sok@workspace:packages/sak-sok":
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-sok@workspace:packages/sak-sok"
