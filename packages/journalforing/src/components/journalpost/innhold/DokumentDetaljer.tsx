@@ -61,17 +61,16 @@ const DokumentDetaljer: FunctionComponent<OwnProps> = ({
     return (
       <div className={styles.dokContainer}>
         <FlexRow>
-          {kanRedigeres ||
-            (dokumentTittelStyresAvJournalpostTittel && (
-              <FlexColumn className={styles.dokumentTittel}>
-                <InputField
-                  name={inputFieldName}
-                  validate={[required, hasValidText]}
-                  readOnly={dokumentTittelStyresAvJournalpostTittel}
-                  maxLength={200}
-                />
-              </FlexColumn>
-            ))}
+          {kanRedigeres && (
+            <FlexColumn className={styles.dokumentTittel}>
+              <InputField
+                name={inputFieldName}
+                validate={[required, hasValidText]}
+                readOnly={dokumentTittelStyresAvJournalpostTittel}
+                maxLength={200}
+              />
+            </FlexColumn>
+          )}
           {nyFaneKnapp}
         </FlexRow>
       </div>
