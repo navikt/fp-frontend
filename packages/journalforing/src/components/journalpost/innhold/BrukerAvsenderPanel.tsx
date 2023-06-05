@@ -158,7 +158,6 @@ const BrukerAvsenderPanel: FunctionComponent<OwnProps> = ({
                     brukerTilForhåndsvisning.navn,
                     brukerTilForhåndsvisning.fødselsnummer,
                     finnKjønnBilde(brukerTilForhåndsvisning.fødselsnummer),
-                    undefined,
                   )}
                   <VerticalSpacer sixteenPx />
                   <Button type="button" onClick={knyttSøkerTilJP}>
