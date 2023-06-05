@@ -91,6 +91,7 @@
     "@navikt/fp-sak-meny-henlegg": "1.0.0",
     "@navikt/fp-sak-meny-ny-behandling": "1.0.0",
     "@navikt/fp-sak-meny-sett-pa-vent": "1.0.0",
+    "@navikt/fp-sak-notat": "1.0.0",
     "@navikt/fp-sak-sok": "1.0.0",
     "@navikt/fp-sak-totrinnskontroll": "1.0.0",
     "@navikt/fp-sak-ukjent-adresse": "1.0.0",
