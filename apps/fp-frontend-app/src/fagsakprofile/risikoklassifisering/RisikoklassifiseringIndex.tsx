@@ -82,6 +82,10 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
     }
   }, [!!risikoAksjonspunkt, behandlingUuid, behandlingVersjon]);
 
+  const { startRequest: lagreRisikoklassifiseringAksjonspunkt } = restBehandlingApiHooks.useRestApiRunner(
+    BehandlingApiKeys.SAVE_AKSJONSPUNKT,
+  );
+
   const submitAksjonspunkt = useCallback(
     (aksjonspunkt: AvklartRisikoklassifiseringAp) => {
       if (!behandlingUuid || !behandlingVersjon) {
@@ -99,9 +103,6 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
         ],
       };
 
-      const { startRequest: lagreRisikoklassifiseringAksjonspunkt } = restBehandlingApiHooks.useRestApiRunner(
-        BehandlingApiKeys.SAVE_AKSJONSPUNKT,
-      );
       return lagreRisikoklassifiseringAksjonspunkt(params).then(oppdatertBehandling => {
         if (oppdatertBehandling) {
           setBehandling(oppdatertBehandling);
