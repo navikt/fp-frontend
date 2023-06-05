@@ -28,7 +28,6 @@ const BehandlingHenlagtPanel: FunctionComponent<OwnProps> = ({ valgtProsessSteg,
       erAktiv: erValgt,
       harApentAksjonspunkt: false,
       status: VilkarUtfallType.IKKE_VURDERT,
-      harHentetInitData: true,
     });
     setPanelValgt(erValgt);
   }, [valgtProsessSteg]);

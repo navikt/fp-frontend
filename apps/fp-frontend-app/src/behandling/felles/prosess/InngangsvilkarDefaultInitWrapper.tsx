@@ -98,7 +98,6 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
 
   const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
-    RestApiState.SUCCESS,
     ProsessStegCode.INNGANGSVILKAR,
     intl.formatMessage({ id: 'Behandlingspunkt.Inngangsvilkar' }),
     skalVises,
