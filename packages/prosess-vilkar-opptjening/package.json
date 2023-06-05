@@ -37,7 +37,7 @@
     "@navikt/ft-form-hooks": "4.0.33",
     "@navikt/ft-ui-komponenter": "2.0.31",
     "@navikt/ft-utils": "2.0.27",
-    "dayjs": "1.11.7",
+    "dayjs": "1.11.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "7.44.2",
