@@ -81,7 +81,7 @@
     "lerna": "6.6.2",
     "lint-staged": "13.2.2",
     "react-test-renderer": "18.2.0",
-    "stylelint": "15.6.2",
+    "stylelint": "15.6.3",
     "stylelint-order": "6.0.3",
     "typescript": "5.0.4",
     "vite": "4.3.9",
