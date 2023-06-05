@@ -16,6 +16,7 @@ import FagsakData from '../fagsak/FagsakData';
 import ErrorBoundary from '../app/ErrorBoundary';
 
 import styles from './behandlingSupportIndex.module.css';
+import NotatIndex from './notat/NotatIndex';
 
 export const hentSynligePaneler = (behandlingTillatteOperasjoner?: BehandlingTillatteOperasjoner): string[] =>
   Object.values(SupportTabs)
@@ -158,6 +159,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
               behandlingVersjon={behandlingVersjon}
             />
           )}
+          {aktivtSupportPanel === SupportTabs.DOKUMENTER && <NotatIndex fagsak={fagsak} />}
         </div>
       </ErrorBoundary>
     </>
