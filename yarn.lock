@@ -1762,6 +1762,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@formatjs/ecma402-abstract@npm:1.16.0":
+  version: 1.16.0
+  resolution: "@formatjs/ecma402-abstract@npm:1.16.0"
+  dependencies:
+    "@formatjs/intl-localematcher": 0.3.0
+    tslib: ^2.4.0
+  checksum: a3d6016d51b9f9a876e4ad66010ef80b07f54b9bb50f6135267d41203219d38e9b934fc575e65e3556eb89d92640452e03927f50f030906be8919a319d906bd2
+  languageName: node
+  linkType: hard
+
 "@formatjs/fast-memoize@npm:2.0.1":
   version: 2.0.1
   resolution: "@formatjs/fast-memoize@npm:2.0.1"
@@ -1792,14 +1802,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/intl-datetimeformat@npm:6.8.0":
-  version: 6.8.0
-  resolution: "@formatjs/intl-datetimeformat@npm:6.8.0"
+"@formatjs/intl-datetimeformat@npm:6.9.0":
+  version: 6.9.0
+  resolution: "@formatjs/intl-datetimeformat@npm:6.9.0"
   dependencies:
-    "@formatjs/ecma402-abstract": 1.15.0
-    "@formatjs/intl-localematcher": 0.2.32
+    "@formatjs/ecma402-abstract": 1.16.0
+    "@formatjs/intl-localematcher": 0.3.0
     tslib: ^2.4.0
-  checksum: 1ad7fb6d5a9eb8ae70758f5402c8e4dbdba6ff4282ca08e76cf3f7ed622b5d691343956cc9439dc8c5b4755f232714eb0c8ae25679fe550b36896fb873b00161
+  checksum: 3abfab4d8e02e84442b2231e4bd1961e5eaaccbeee895333293babca685f96aac5082005443be3bb7a1343a80bc6b65fe6713ed1bb794d265a04ef570f0fdb09
   languageName: node
   linkType: hard
 
@@ -1831,6 +1841,15 @@ __metadata:
   dependencies:
     tslib: ^2.4.0
   checksum: 477e18aabaf2e6e90fc12952a3cb6c0ebb40ad99414d6b9d2501c6348fbad58cacb433ec6630955cfd1491ea7630f32a9dc280bb27d0fb8a784251404a54140a
+  languageName: node
+  linkType: hard
+
+"@formatjs/intl-localematcher@npm:0.3.0":
+  version: 0.3.0
+  resolution: "@formatjs/intl-localematcher@npm:0.3.0"
+  dependencies:
+    tslib: ^2.4.0
+  checksum: 26fbe20a3187842ea9fd417429dd53af941ad896c783fcc15df25e92c3fe9b9895f9909de9f9731ef75b81e7fb396d3d10d35656e3f5ff3588488521d600ec3a
   languageName: node
   linkType: hard
 
@@ -3171,7 +3190,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-frontend-app@workspace:apps/fp-frontend-app"
   dependencies:
-    "@formatjs/intl-datetimeformat": 6.8.0
+    "@formatjs/intl-datetimeformat": 6.9.0
     "@formatjs/intl-numberformat": 8.5.0
     "@navikt/aksel-icons": 3.4.2
     "@navikt/ds-css": 3.4.2
