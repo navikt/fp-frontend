@@ -1762,6 +1762,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@formatjs/ecma402-abstract@npm:1.16.0":
+  version: 1.16.0
+  resolution: "@formatjs/ecma402-abstract@npm:1.16.0"
+  dependencies:
+    "@formatjs/intl-localematcher": 0.3.0
+    tslib: ^2.4.0
+  checksum: a3d6016d51b9f9a876e4ad66010ef80b07f54b9bb50f6135267d41203219d38e9b934fc575e65e3556eb89d92640452e03927f50f030906be8919a319d906bd2
+  languageName: node
+  linkType: hard
+
 "@formatjs/fast-memoize@npm:2.0.1":
   version: 2.0.1
   resolution: "@formatjs/fast-memoize@npm:2.0.1"
@@ -1834,14 +1844,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/intl-numberformat@npm:8.5.0":
-  version: 8.5.0
-  resolution: "@formatjs/intl-numberformat@npm:8.5.0"
+"@formatjs/intl-localematcher@npm:0.3.0":
+  version: 0.3.0
+  resolution: "@formatjs/intl-localematcher@npm:0.3.0"
   dependencies:
-    "@formatjs/ecma402-abstract": 1.15.0
-    "@formatjs/intl-localematcher": 0.2.32
     tslib: ^2.4.0
-  checksum: 60a9b4f3740ac1d85e932a4585455142a4c152a70a0a2028ab37ddcfd18c3d753b9609ea6984a0d487ad303995485a50cfd6b7ca1db963b5434ca63d62ad0b60
+  checksum: 26fbe20a3187842ea9fd417429dd53af941ad896c783fcc15df25e92c3fe9b9895f9909de9f9731ef75b81e7fb396d3d10d35656e3f5ff3588488521d600ec3a
+  languageName: node
+  linkType: hard
+
+"@formatjs/intl-numberformat@npm:8.6.0":
+  version: 8.6.0
+  resolution: "@formatjs/intl-numberformat@npm:8.6.0"
+  dependencies:
+    "@formatjs/ecma402-abstract": 1.16.0
+    "@formatjs/intl-localematcher": 0.3.0
+    tslib: ^2.4.0
+  checksum: d15a7ef5cc18262f2a02956b4bfe3376f1f6fc2f696a222e5653809bb05060bda9ed45836f47a332fd608ea08e6f52cadd76e75ec6f9723bb6139db23d203399
   languageName: node
   linkType: hard
 
@@ -3172,7 +3191,7 @@ __metadata:
   resolution: "@navikt/fp-frontend-app@workspace:apps/fp-frontend-app"
   dependencies:
     "@formatjs/intl-datetimeformat": 6.8.0
-    "@formatjs/intl-numberformat": 8.5.0
+    "@formatjs/intl-numberformat": 8.6.0
     "@navikt/aksel-icons": 3.4.2
     "@navikt/ds-css": 3.4.2
     "@navikt/ds-css-internal": ^3.4.2

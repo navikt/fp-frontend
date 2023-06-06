@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@formatjs/intl-datetimeformat": "6.8.0",
-    "@formatjs/intl-numberformat": "8.5.0",
+    "@formatjs/intl-numberformat": "8.6.0",
     "@navikt/aksel-icons": "3.4.2",
     "@navikt/ds-css": "3.4.2",
     "@navikt/ds-css-internal": "^3.4.2",
