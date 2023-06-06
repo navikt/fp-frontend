@@ -34,7 +34,7 @@
     "@navikt/fp-types": "1.0.0",
     "@navikt/ft-fakta-beregning": "4.2.17",
     "@navikt/ft-kodeverk": "2.1.9",
-    "@navikt/ft-prosess-beregningsgrunnlag": "6.2.16",
+    "@navikt/ft-prosess-beregningsgrunnlag": "6.2.17",
     "@navikt/ft-types": "2.1.11",
     "@navikt/ft-ui-komponenter": "2.0.31",
     "@navikt/ft-utils": "2.0.27",
