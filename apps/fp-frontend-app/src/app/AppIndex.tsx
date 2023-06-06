@@ -2,7 +2,6 @@ import React, { FunctionComponent, useState, useEffect, useCallback } from 'reac
 import { Link, useLocation } from 'react-router-dom';
 import { RawIntlProvider } from 'react-intl';
 import moment from 'moment';
-import { Modal } from '@navikt/ds-react';
 import { createIntl, parseQueryString } from '@navikt/ft-utils';
 import { ForbiddenPage, UnauthorizedPage } from '@navikt/ft-sak-infosider';
 
@@ -121,11 +120,6 @@ const AppIndex: FunctionComponent = () => {
   const addErrorMessageAndSetAsCrashed = (error: string) => {
     setCrashMessage(error);
   };
-
-  if (import.meta.env.MODE === 'development' || import.meta.env.MODE === 'production') {
-    // For å unngå feilmelding ved åpning av modaler
-    Modal.setAppElement('div#app');
-  }
 
   const errorMessages = useRestApiError() || EMPTY_ARRAY;
   const queryStrings = parseQueryString(location.search);

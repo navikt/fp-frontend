@@ -16,7 +16,7 @@ const messages = {
 const intl = createIntl(messages);
 
 export default {
-  title: 'behandling/vedtak/IverksetterVedtakStatusModal',
+  title: 'app/vedtak/IverksetterVedtakStatusModal',
   component: IverksetterVedtakStatusModal,
 };
 

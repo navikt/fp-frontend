@@ -1,0 +1,67 @@
+{
+  "bruker": {
+    "fnr": "30498029066",
+    "aktoerId": "9930498029066",
+    "diskresjonskode": "UDEF",
+    "navn": "Flaggermus Alexandra",
+    "kjønn": "K",
+    "sivilstand": "GIFT",
+    "dødsdato": null,
+    "fødselsdato": "1973-06-06",
+    "adresser": [
+      {
+        "adresseType": "BOSTEDSADRESSE",
+        "adresselinje1": null,
+        "adresselinje2": null,
+        "adresselinje3": null,
+        "postNummer": "2500",
+        "poststed": "Ukjent",
+        "land": "NOR"
+      }
+    ]
+  },
+  "annenPart": {
+    "fnr": "21478144609",
+    "aktoerId": "9921478144609",
+    "diskresjonskode": "UDEF",
+    "navn": "Flaggermus Ketil",
+    "kjønn": "M",
+    "sivilstand": "UGIF",
+    "dødsdato": null,
+    "fødselsdato": "1973-06-06",
+    "adresser": [
+      {
+        "adresseType": "BOSTEDSADRESSE",
+        "adresselinje1": null,
+        "adresselinje2": null,
+        "adresselinje3": null,
+        "postNummer": "2500",
+        "poststed": "Ukjent",
+        "land": "NOR"
+      }
+    ]
+  },
+  "barn": [
+    {
+      "fnr": "03422390579",
+      "aktoerId": "9903422390579",
+      "diskresjonskode": "UDEF",
+      "navn": "Duck Ole",
+      "kjønn": "M",
+      "sivilstand": "UGIF",
+      "dødsdato": null,
+      "fødselsdato": "2023-06-04",
+      "adresser": [
+        {
+          "adresseType": "BOSTEDSADRESSE",
+          "adresselinje1": null,
+          "adresselinje2": null,
+          "adresselinje3": null,
+          "postNummer": "2500",
+          "poststed": "Ukjent",
+          "land": "NOR"
+        }
+      ]
+    }
+  ]
+}
