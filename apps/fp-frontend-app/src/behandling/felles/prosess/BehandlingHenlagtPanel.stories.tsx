@@ -11,7 +11,7 @@ const messages = {
 const intl = createIntl(messages);
 
 export default {
-  title: 'behandling/prosess/BehandlingHenlagtPanel',
+  title: 'app/prosess/BehandlingHenlagtPanel',
   component: BehandlingHenlagtPanel,
 };
 

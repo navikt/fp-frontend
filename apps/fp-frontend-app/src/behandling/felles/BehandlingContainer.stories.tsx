@@ -83,7 +83,7 @@ const ProsessPanelTest2: FunctionComponent<ProsessPanelInitProps> = ({ registrer
 };
 
 export default {
-  title: 'behandling/behandling-container',
+  title: 'app/behandling-container',
   component: BehandlingContainer,
 };
 

@@ -2,6 +2,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
+import { Modal } from '@navikt/ds-react';
 import { Event, EventHint, init, Integrations } from '@sentry/browser';
 
 import { RestApiErrorProvider, RestApiProvider } from '@navikt/fp-rest-api-hooks';
@@ -45,6 +46,11 @@ init({
     return event;
   },
 });
+
+if (import.meta.env.MODE === 'development' || import.meta.env.MODE === 'production') {
+  // For å unngå feilmelding ved åpning av modaler
+  Modal.setAppElement('div#app');
+}
 
 const root = createRoot(app);
 
