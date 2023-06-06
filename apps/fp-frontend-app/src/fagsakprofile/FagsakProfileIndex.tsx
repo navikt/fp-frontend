@@ -106,7 +106,7 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
       {!shouldRedirectToBehandlinger && (
         <>
           <FlexContainer>
-            <FlexRow>
+            <FlexRow spaceBetween>
               <FlexColumn>
                 <FagsakProfilSakIndex
                   saksnummer={fagsak.saksnummer}
