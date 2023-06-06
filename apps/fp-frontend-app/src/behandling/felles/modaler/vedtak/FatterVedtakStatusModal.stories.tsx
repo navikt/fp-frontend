@@ -9,7 +9,7 @@ import messages from '../../../../../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 export default {
-  title: 'behandling/vedtak/FatterVedtakStatusModal',
+  title: 'app/vedtak/FatterVedtakStatusModal',
   component: FatterVedtakStatusModal,
 };
 

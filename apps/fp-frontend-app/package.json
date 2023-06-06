@@ -16,7 +16,9 @@
     "dev": "vite serve",
     "build": "vite build",
     "preview": "vite preview",
-    "clean": "rm -rf ./dist ./node_modules"
+    "clean": "rm -rf ./dist ./node_modules",
+    "build-storybook": "storybook build -o .storybook-static-build",
+    "storybook": "storybook dev --quiet -p 7001"
   },
   "dependencies": {
     "@formatjs/intl-datetimeformat": "6.8.0",
@@ -140,11 +142,15 @@
   "devDependencies": {
     "@navikt/fp-storybook-utils": "1.0.0",
     "@navikt/fp-utils-test": "1.0.0",
+    "@storybook/addon-actions": "7.0.18",
+    "@storybook/react": "7.0.18",
+    "@storybook/react-vite": "7.0.18",
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.4.3",
     "axios-mock-adapter": "1.21.4",
     "eslint": "8.41.0",
     "react-test-renderer": "18.2.0",
+    "storybook": "7.0.18",
     "stylelint": "15.6.2",
     "typescript": "5.0.4",
     "vite": "4.3.9",

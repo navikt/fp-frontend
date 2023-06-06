@@ -3274,6 +3274,9 @@ __metadata:
     "@navikt/ft-utils": 2.0.27
     "@popperjs/core": 2.11.8
     "@sentry/browser": 7.53.1
+    "@storybook/addon-actions": 7.0.18
+    "@storybook/react": 7.0.18
+    "@storybook/react-vite": 7.0.18
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     axios: 1.4.0
@@ -3293,6 +3296,7 @@ __metadata:
     react-router-dom: 6.11.2
     react-test-renderer: 18.2.0
     rollup-plugin-sourcemaps: 0.6.3
+    storybook: 7.0.18
     stylelint: 15.6.2
     typescript: 5.0.4
     vis-data: 7.1.6

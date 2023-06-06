@@ -3,7 +3,7 @@ const shell = require('shelljs');
 const glob = require('glob');
 const fs = require('fs');
 
-const generateRow = (packageJson) => `
+const generateRow = packageJson => `
   <div class="box">
     <a href="${path.join(packageJson.name, 'index.html')}" class="package-row" target="blank">
       <div class="title">
@@ -16,7 +16,7 @@ const generateRow = (packageJson) => `
   </div>
 `;
 
-const generateHTML = (packages) => `
+const generateHTML = packages => `
   <!DOCTYPE html>
   <html>
   <head>
@@ -30,39 +30,75 @@ const generateHTML = (packages) => `
     <h1 class="main-header">Storybook for FP-FRONTEND</h1>
     <h2 class="header">Faktapaneler:</h3>
     <div class="grid-container">
-      ${packages.filter((p) => p.name.includes('fp-fakta')).map(generateRow).join('')}
+      ${packages
+        .filter(p => p.name.includes('fp-fakta'))
+        .map(generateRow)
+        .join('')}
     </div>
     <br />
     <h2 class="header">Prosesspaneler:</h3>
     <div class="grid-container">
-      ${packages.filter((p) => p.name.includes('fp-prosess')).map(generateRow).join('')}
+      ${packages
+        .filter(p => p.name.includes('fp-prosess'))
+        .map(generateRow)
+        .join('')}
     </div>
     <br />
     <h2 class="header">Sak-paneler:</h3>
     <div class="grid-container">
-      ${packages.filter((p) => p.name.includes('fp-sak')).map(generateRow).join('')}
+      ${packages
+        .filter(p => p.name.includes('fp-sak'))
+        .map(generateRow)
+        .join('')}
     </div>
     <h2 class="header">LOS-paneler:</h3>
     <div class="grid-container">
-      ${packages.filter((p) => p.name.includes('fp-los')).map(generateRow).join('')}
+      ${packages
+        .filter(p => p.name.includes('fp-los'))
+        .map(generateRow)
+        .join('')}
     </div>
     <h2 class="header">Journalføring-paneler:</h3>
     <div class="grid-container">
-      ${packages.filter((p) => p.name.includes('fp-journalforing')).map(generateRow).join('')}
+      ${packages
+        .filter(p => p.name.includes('fp-journalforing'))
+        .map(generateRow)
+        .join('')}
     </div>
     <h2 class="header">Andre:</h3>
     <div class="grid-container">
-      ${packages.filter((p) => !p.name.includes('fp-sak')
-        && !p.name.includes('fp-fakta')
-        && !p.name.includes('fp-prosess')
-        && !p.name.includes('fp-los')
-        && !p.name.includes('fp-journalforing')).map(generateRow).join('')}
+      ${packages
+        .filter(
+          p =>
+            !p.name.includes('fp-sak') &&
+            !p.name.includes('fp-fakta') &&
+            !p.name.includes('fp-prosess') &&
+            !p.name.includes('fp-los') &&
+            !p.name.includes('fp-journalforing'),
+        )
+        .map(generateRow)
+        .join('')}
     </div>
   </body>
   </html>
 `;
 
 const DEPLOY_FOLDER = '../.storybook-static-build';
+
+const copyFiles = subPackage => {
+  shell.cd(subPackage);
+  if (!fs.existsSync('package.json') || !fs.existsSync('.storybook-static-build')) {
+    return null;
+  }
+
+  const packagesJson = JSON.parse(fs.readFileSync(path.resolve('package.json'), 'utf8'));
+
+  const packageDestFolder = path.join(__dirname, DEPLOY_FOLDER, packagesJson.name);
+  shell.mkdir(packageDestFolder);
+  shell.cp('-r', path.join(subPackage, '.storybook-static-build', '*'), packageDestFolder);
+
+  return packagesJson;
+};
 
 const creatIndexHtml = () => {
   // Lag folder-struktur for innholdet som skal deployes
@@ -76,38 +112,27 @@ const creatIndexHtml = () => {
   );
 
   // For å støtte filer med '_' (Skip Jekyll-prosessering)
-  shell.cp(
-    path.join(__dirname, '.nojekyll'),
-    path.join(__dirname, DEPLOY_FOLDER, '.nojekyll'),
-  );
+  shell.cp(path.join(__dirname, '.nojekyll'), path.join(__dirname, DEPLOY_FOLDER, '.nojekyll'));
 
   // Kopier storybook fra pakkene og inn i folder som skal deployes
   const origDir = process.cwd();
-  const packages = glob
-    .sync(path.join(origDir, 'packages', '**/package.json'), {
+  const packagesApps = glob
+    .sync(path.join(origDir, 'apps', '**', 'package.json').split(path.sep).join('/'), {
       ignore: '**/node_modules/**',
     })
     .map(path.dirname)
-    .map((subPackage) => {
-      shell.cd(subPackage);
-      if (!fs.existsSync('package.json') || !fs.existsSync('.storybook-static-build')) {
-        return null;
-      }
-
-      const packagesJson = JSON.parse(
-        fs.readFileSync(path.resolve('package.json'), 'utf8'),
-      );
-
-      const packageDestFolder = path.join(__dirname, DEPLOY_FOLDER, packagesJson.name);
-      shell.mkdir(packageDestFolder);
-      shell.cp('-r', path.join(subPackage, '.storybook-static-build', '*'), packageDestFolder);
-
-      return packagesJson;
+    .map(copyFiles)
+    .filter(subPackage => subPackage);
+  const packagesPackages = glob
+    .sync(path.join(origDir, 'packages', '**', 'package.json').split(path.sep).join('/'), {
+      ignore: '**/node_modules/**',
     })
-    .filter((subPackage) => subPackage);
+    .map(path.dirname)
+    .map(copyFiles)
+    .filter(subPackage => subPackage);
 
   // Lag index-fil
-  const index = generateHTML(packages);
+  const index = generateHTML(packagesApps.concat(packagesPackages));
   fs.writeFileSync(path.join(__dirname, DEPLOY_FOLDER, 'index.html'), index);
 
   console.log('Done copying files');

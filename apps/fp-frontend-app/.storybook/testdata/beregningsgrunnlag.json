@@ -1,0 +1,103 @@
+{
+  "avklaringsbehov": [
+    {
+      "definisjon": "VURDER_FAKTA_ATFL_SN",
+      "status": "OPPR",
+      "kanLoses": true,
+      "erTrukket": false
+    }
+  ],
+  "skjaeringstidspunktBeregning": "2023-06-04",
+  "skjæringstidspunkt": "2023-06-04",
+  "aktivitetStatus": ["KUN_YTELSE"],
+  "beregningsgrunnlagPeriode": [
+    {
+      "beregningsgrunnlagPeriodeFom": "2023-06-04",
+      "beregningsgrunnlagPeriodeTom": "9999-12-31",
+      "beregnetPrAar": 0,
+      "bruttoPrAar": 0,
+      "bruttoInkludertBortfaltNaturalytelsePrAar": 0,
+      "periodeAarsaker": [],
+      "beregningsgrunnlagPrStatusOgAndel": [
+        {
+          "dtoType": "SN",
+          "aktivitetStatus": "BA",
+          "andelsnr": 1,
+          "inntektskategori": "-",
+          "fastsattAvSaksbehandler": false,
+          "lagtTilAvSaksbehandler": false,
+          "erTilkommetAndel": false,
+          "skalFastsetteGrunnlag": false,
+          "pgiVerdier": [],
+          "næringer": []
+        }
+      ]
+    }
+  ],
+  "sammenligningsgrunnlagPrStatus": [],
+  "halvG": 59310.0,
+  "grunnbeløp": 118620,
+  "faktaOmBeregning": {
+    "saksopplysninger": {
+      "arbeidsforholdMedLønnsendring": [],
+      "lønnsendringSaksopplysning": [],
+      "kortvarigeArbeidsforhold": []
+    },
+    "kunYtelse": {
+      "andeler": [
+        {
+          "andelsnr": 1,
+          "inntektskategori": "-",
+          "aktivitetStatus": "BA",
+          "kilde": "PROSESS_START",
+          "lagtTilAvSaksbehandler": false,
+          "fastsattAvSaksbehandler": false,
+          "andelIArbeid": []
+        }
+      ],
+      "fodendeKvinneMedDP": false
+    },
+    "faktaOmBeregningTilfeller": ["FASTSETT_BG_KUN_YTELSE"],
+    "avklarAktiviteter": {
+      "aktiviteterTomDatoMapping": [
+        {
+          "tom": "2023-06-04",
+          "aktiviteter": [
+            {
+              "fom": "2022-09-06",
+              "tom": "2023-06-06",
+              "arbeidsforholdType": "SYKEPENGER"
+            }
+          ]
+        },
+        {
+          "tom": "2023-03-15",
+          "aktiviteter": [
+            {
+              "fom": "2022-06-06",
+              "tom": "2023-03-14",
+              "arbeidsforholdType": "DAGPENGER"
+            }
+          ]
+        }
+      ],
+      "skjæringstidspunkt": "2023-06-04"
+    },
+    "andelerForFaktaOmBeregning": [
+      {
+        "inntektskategori": "-",
+        "aktivitetStatus": "BA",
+        "andelsnr": 1,
+        "skalKunneEndreAktivitet": false,
+        "lagtTilAvSaksbehandler": false
+      }
+    ],
+    "vurderMilitaer": {}
+  },
+  "hjemmel": "-",
+  "dekningsgrad": 100,
+  "ytelsesspesifiktGrunnlag": {
+    "ytelsetype": "FP"
+  },
+  "erOverstyrtInntekt": false
+}
