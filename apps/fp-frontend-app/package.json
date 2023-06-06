@@ -151,7 +151,7 @@
     "eslint": "8.41.0",
     "react-test-renderer": "18.2.0",
     "storybook": "7.0.18",
-    "stylelint": "15.6.2",
+    "stylelint": "15.7.0",
     "typescript": "5.0.4",
     "vite": "4.3.9",
     "vitest": "0.31.3"
