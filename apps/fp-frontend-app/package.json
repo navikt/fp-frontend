@@ -101,7 +101,7 @@
     "@navikt/ft-form-validators": "2.0.28",
     "@navikt/ft-kodeverk": "2.1.9",
     "@navikt/ft-plattform-komponenter": "2.2.0",
-    "@navikt/ft-prosess-beregningsgrunnlag": "6.2.16",
+    "@navikt/ft-prosess-beregningsgrunnlag": "6.2.17",
     "@navikt/ft-prosess-tilbakekreving": "3.0.5",
     "@navikt/ft-prosess-tilbakekreving-foreldelse": "3.0.5",
     "@navikt/ft-prosess-tilbakekreving-vedtak": "2.1.15",
