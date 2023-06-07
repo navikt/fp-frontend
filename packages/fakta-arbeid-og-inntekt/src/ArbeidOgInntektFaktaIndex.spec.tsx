@@ -464,7 +464,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     render(<ArbeidsforholdErOK />);
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
-    expect(screen.getByAltText('Arbeidsforhold er OK')).toBeInTheDocument();
+    expect(screen.getByTitle('Arbeidsforhold er OK')).toBeInTheDocument();
     expect(screen.queryByAltText('Åpent aksjonspunkt')).not.toBeInTheDocument();
     expect(screen.queryByAltText('Lukk rad')).not.toBeInTheDocument();
 
@@ -491,7 +491,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     render(<ArbeidsforholdErOKDerDetErToArbeidsforholdFraSammeVirksomhet />);
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
-    expect(screen.getByAltText('Arbeidsforhold er OK')).toBeInTheDocument();
+    expect(screen.getByTitle('Arbeidsforhold er OK')).toBeInTheDocument();
     expect(screen.queryByAltText('Åpent aksjonspunkt')).not.toBeInTheDocument();
     expect(screen.queryByAltText('Lukk rad')).not.toBeInTheDocument();
 
@@ -646,7 +646,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
 
-    expect(screen.getByAltText('Arbeidsforhold er OK')).toBeInTheDocument();
+    expect(screen.getByTitle('Arbeidsforhold er OK')).toBeInTheDocument();
     expect(screen.queryByAltText('Åpent aksjonspunkt')).not.toBeInTheDocument();
 
     expect(screen.getByTitle('Åpne rad')).toBeInTheDocument();
@@ -657,7 +657,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
 
-    expect(screen.getByAltText('Arbeidsforhold er OK')).toBeInTheDocument();
+    expect(screen.getByTitle('Arbeidsforhold er OK')).toBeInTheDocument();
 
     await userEvent.click(screen.getByTitle('Åpne rad'));
     expect(await screen.findByTitle('Lukk rad')).toBeInTheDocument();
@@ -673,7 +673,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
 
     expect(screen.getByText('Innhent manglende inntektsmeldinger.')).toBeInTheDocument();
-    expect(screen.getAllByAltText('Arbeidsforhold er OK')).toHaveLength(2);
+    expect(screen.getAllByTitle('Arbeidsforhold er OK')).toHaveLength(2);
 
     expect(screen.getByText('Bekreft og fortsett')).toBeInTheDocument();
   });

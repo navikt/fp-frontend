@@ -27,8 +27,15 @@
   width: 300px;
 }
 
-.editIcon,
-.removeIcon {
+.editIcon {
+  color: var(--a-blue-400);
   cursor: pointer;
-  vertical-align: top;
+  height: 20px;
+  width: 20px;
+}
+
+.editIconReadonly {
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
 }

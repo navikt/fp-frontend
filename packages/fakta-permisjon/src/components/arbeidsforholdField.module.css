@@ -36,3 +36,17 @@
   background-color: #d8f9ff;
   border: 1px solid #66cbec;
 }
+
+.exclamationmarkIcon {
+  color: var(--a-orange-600);
+  height: 30px;
+  margin-top: 5px;
+  width: 30px;
+}
+
+.checkmarkIcon {
+  color: var(--a-green-500);
+  height: 30px;
+  margin-top: 5px;
+  width: 30px;
+}

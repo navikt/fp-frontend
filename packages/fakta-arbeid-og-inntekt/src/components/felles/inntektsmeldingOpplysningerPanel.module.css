@@ -5,3 +5,14 @@
 .textMargin {
   margin-top: 4px;
 }
+
+.docIcon {
+  height: 25px;
+  width: 25px;
+}
+
+.phoneIcon {
+  height: 30px;
+  margin-top: 5px;
+  width: 30px;
+}

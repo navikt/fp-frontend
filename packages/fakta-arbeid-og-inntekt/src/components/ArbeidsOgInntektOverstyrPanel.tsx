@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useState, useCallback, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Alert, Link, BodyShort, Heading } from '@navikt/ds-react';
+import { Alert, BodyShort, Heading, Button } from '@navikt/ds-react';
+import { PlusCircleIcon } from '@navikt/aksel-icons';
 
 import { dateFormat } from '@navikt/ft-utils';
 import {
@@ -15,7 +16,6 @@ import {
   AksjonspunktHelpTextHTML,
   FloatRight,
   OverstyringKnapp,
-  Image,
   FlexColumn,
   FlexContainer,
   FlexRow,
@@ -24,7 +24,6 @@ import { ArbeidsforholdKomplettVurderingType, aksjonspunktStatus } from '@navikt
 
 import ManueltLagtTilArbeidsforholdForm, { MANUELT_ORG_NR } from './manuelt/ManueltLagtTilArbeidsforholdForm';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
-import addCircleIcon from '../images/add-circle.svg';
 
 import styles from './arbeidsOgInntektOverstyrPanel.module.css';
 
@@ -146,20 +145,16 @@ const ArbeidsOgInntektOverstyrPanel: FunctionComponent<OwnProps> = ({
       <VerticalSpacer sixteenPx />
       {erOverstyrt && harIngenArbeidsforholdSomErManueltLagtTil && !skalVisePanelForÅLeggeTilArbeidsforhold && (
         <>
-          <VerticalSpacer thirtyTwoPx />
-          <Link
-            onClick={e => {
-              e.preventDefault();
-              toggleVisningAvLeggTilArbeidsforhold(true);
-            }}
-            href=""
+          <VerticalSpacer twentyPx />
+          <Button
+            size="small"
+            variant="tertiary"
+            icon={<PlusCircleIcon aria-hidden />}
+            onClick={() => toggleVisningAvLeggTilArbeidsforhold(true)}
           >
-            <Image src={addCircleIcon} className={styles.leggTilImage} />
-            <span>
-              <FormattedMessage id="ArbeidOgInntektFaktaPanel.LeggTilArbeidsforhold" />
-            </span>
-          </Link>
-          <VerticalSpacer fourtyPx />
+            <FormattedMessage id="ArbeidOgInntektFaktaPanel.LeggTilArbeidsforhold" />
+          </Button>
+          <VerticalSpacer thirtyTwoPx />
         </>
       )}
       <VerticalSpacer thirtyTwoPx />

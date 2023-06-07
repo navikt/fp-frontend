@@ -2,8 +2,21 @@
   background-color: var(--a-gray-900);
   color: var(--a-white);
 }
+
 .col {
   width: 50%;
+}
+
+.exclamationmarkIcon {
+  color: var(--a-orange-600);
+  height: 25px;
+  width: 25px;
+}
+
+.checkmarkIcon {
+  color: var(--a-green-500);
+  height: 25px;
+  width: 25px;
 }
 
 @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {

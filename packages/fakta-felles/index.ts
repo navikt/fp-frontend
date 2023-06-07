@@ -1,4 +1,3 @@
-export { default as MerkePanel } from './src/components/Merkepanel';
 export { default as FaktaBegrunnelseTextFieldNew } from './src/components/FaktaBegrunnelseTextFieldNew';
 export { default as FaktaSubmitButtonNew } from './src/components/FaktaSubmitButtonNew';
 

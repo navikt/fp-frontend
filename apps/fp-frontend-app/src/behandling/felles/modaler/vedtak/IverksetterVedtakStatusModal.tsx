@@ -1,10 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { Modal, Button, BodyShort, Label } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { BehandlingResultatType } from '@navikt/ft-kodeverk';
-
-import innvilgetImageUrl from '../../../../images/innvilget_valgt.svg';
+import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 
 import styles from './iverksetterVedtakStatusModal.module.css';
 
@@ -42,7 +41,7 @@ const IverksetterVedtakStatusModal: FunctionComponent<OwnProps> = ({ lukkModal, 
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Image className={styles.image} alt={imageAltText} src={innvilgetImageUrl} />
+              <CheckmarkCircleFillIcon className={styles.image} />
             </FlexColumn>
             <FlexColumn>
               <Label size="small">

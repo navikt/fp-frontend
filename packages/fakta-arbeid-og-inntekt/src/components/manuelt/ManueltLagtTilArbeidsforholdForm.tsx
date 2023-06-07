@@ -1,8 +1,9 @@
 import React, { FunctionComponent, useCallback, useMemo, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm, UseFormGetValues } from 'react-hook-form';
+import { TrashFillIcon } from '@navikt/aksel-icons';
 import { Heading, Button } from '@navikt/ds-react';
-import { Image, FlexColumn, FlexContainer, FlexRow, VerticalSpacer, OkAvbrytModal } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer, OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import { AoIArbeidsforhold, ManueltArbeidsforhold } from '@navikt/fp-types';
@@ -19,10 +20,8 @@ import {
 } from '@navikt/ft-form-validators';
 import { TextAreaField, Datepicker, InputField, Form } from '@navikt/ft-form-hooks';
 
-import binIcon from '../../images/bin.svg';
 import ArbeidsforholdOgInntekt from '../../types/arbeidsforholdOgInntekt';
 
-import styles from './manueltLagtTilArbeidsforholdForm.module.css';
 import { useSetDirtyForm } from '../../DirtyFormProvider';
 
 export const MANUELT_ORG_NR = '342352362';
@@ -258,11 +257,9 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                     disabled={formMethods.formState.isSubmitting}
                     onClick={() => settVisSletteDialog(true)}
                     type="button"
+                    icon={<TrashFillIcon aria-hidden />}
                   >
-                    <Image src={binIcon} className={styles.buttonImage} />
-                    <span>
-                      <FormattedMessage id="LeggTilArbeidsforholdForm.Slett" />
-                    </span>
+                    <FormattedMessage id="LeggTilArbeidsforholdForm.Slett" />
                   </Button>
                 </FlexColumn>
               )}

@@ -3,6 +3,7 @@
 }
 
 .image {
+  color: var(--a-green-500);
   height: 35px;
   margin-top: 5px;
   width: 35px;

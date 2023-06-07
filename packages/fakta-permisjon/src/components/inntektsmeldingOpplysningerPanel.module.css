@@ -5,3 +5,14 @@
 .topPadding {
   padding-top: 2px;
 }
+
+.phoneIcon {
+  height: 30px;
+  margin-top: 5px;
+  width: 30px;
+}
+
+.docIcon {
+  height: 25px;
+  width: 25px;
+}

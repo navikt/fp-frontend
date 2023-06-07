@@ -1,4 +1,6 @@
 .image {
+  color: var(--a-orange-600);
+  float: left;
   height: 25px;
   width: 25px;
 }

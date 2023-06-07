@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { Modal, Button, Label, BodyShort } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-
-import innvilgetImageUrl from '../../../../images/innvilget_valgt.svg';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 
 import styles from './fatterVedtakStatusModal.module.css';
 
@@ -34,7 +33,7 @@ const FatterVedtakStatusModal: FunctionComponent<OwnProps> = ({ visModal = false
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Image className={styles.image} alt={tekst} src={innvilgetImageUrl} />
+              <CheckmarkCircleFillIcon className={styles.image} />
             </FlexColumn>
             <FlexColumn>
               <Label size="small">{tekst}</Label>

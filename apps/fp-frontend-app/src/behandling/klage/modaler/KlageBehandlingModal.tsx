@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { Button, BodyShort, Modal } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, Image } from '@navikt/ft-ui-komponenter';
-
-import innvilgetImageUrl from '../../../images/innvilget_valgt.svg';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 
 import styles from './klageBehandlingModal.module.css';
 
@@ -34,7 +33,7 @@ const KlageBehandlingModal: FunctionComponent<OwnProps> = ({ visModal = false, l
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Image className={styles.image} src={innvilgetImageUrl} />
+              <CheckmarkCircleFillIcon className={styles.image} />
             </FlexColumn>
             <FlexColumn>
               <BodyShort size="small">{intl.formatMessage({ id: 'KlageVurderingModal.VedtakOversendt' })}</BodyShort>

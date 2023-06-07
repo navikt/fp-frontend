@@ -11,6 +11,7 @@ import {
   PeriodLabel,
   DateLabel,
 } from '@navikt/ft-ui-komponenter';
+import { CheckmarkIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 
 import { required } from '@navikt/ft-form-validators';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
@@ -24,16 +25,14 @@ import {
 } from '@navikt/fp-types';
 import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
 
-import okIkonUrl from '../images/check.svg';
-import advarselIkonUrl from '../images/advarsel2.svg';
 import questionNormalUrl from '../images/question_normal.svg';
 import questionHoverUrl from '../images/question_hover.svg';
 import BekreftetPermisjonStatus from '../kodeverk/BekreftetPermisjonStatus';
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 import ArbeidsforholdBoks from './ArbeidsforholdBoks';
+import InntektsposterPanel from './InntektsposterPanel';
 
 import styles from './arbeidsforholdField.module.css';
-import InntektsposterPanel from './InntektsposterPanel';
 
 const FIELD_ARRAY_NAME = 'arbeidsforhold';
 
@@ -96,10 +95,16 @@ const ArbeidsforholdField: FunctionComponent<OwnProps> = ({
         <FlexRow>
           <FlexColumn>
             {!harÅpentAksjonspunkt && (
-              <Image alt={intl.formatMessage({ id: 'ArbeidsforholdFieldArray.Ok' })} src={okIkonUrl} />
+              <CheckmarkIcon
+                title={intl.formatMessage({ id: 'ArbeidsforholdFieldArray.Ok' })}
+                className={styles.checkmarkIcon}
+              />
             )}
             {harÅpentAksjonspunkt && (
-              <Image alt={intl.formatMessage({ id: 'ArbeidsforholdFieldArray.Aksjonspunkt' })} src={advarselIkonUrl} />
+              <ExclamationmarkTriangleFillIcon
+                title={intl.formatMessage({ id: 'ArbeidsforholdFieldArray.Aksjonspunkt' })}
+                className={styles.exclamationmarkIcon}
+              />
             )}
           </FlexColumn>
           <FlexColumn className={styles.body}>
