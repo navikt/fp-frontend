@@ -5492,9 +5492,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ft-sak-risikoklassifisering@portal:/C:/develop/ft-frontend-saksbehandling/packages/sak-risikoklassifisering::locator=fp-frontend%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@navikt/ft-sak-risikoklassifisering@portal:/C:/develop/ft-frontend-saksbehandling/packages/sak-risikoklassifisering::locator=fp-frontend%40workspace%3A."
+"@navikt/ft-sak-risikoklassifisering@npm:2.1.15":
+  version: 2.1.15
+  resolution: "@navikt/ft-sak-risikoklassifisering@npm:2.1.15::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-sak-risikoklassifisering%2F2.1.15%2F485aaf5780f82485421ec32c46955eb89e25231d"
   dependencies:
     "@navikt/aksel-icons": 3.4.2
     "@navikt/ds-css": 3.4.2
@@ -5525,8 +5525,9 @@ __metadata:
     react-dom: 18.2.0
     react-hook-form: 7.43.9
     react-intl: 6.3.2
+  checksum: 9a46ac655c8166cbc7e0361189650791edc1eaba13abaac8a7303c54f92e2adb17143e3a159c776a1a1b23c2457e73cc538da6b213eadc2868a1fb5ada6304f8
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "@navikt/ft-sak-support-meny@npm:2.0.30":
   version: 2.0.30
