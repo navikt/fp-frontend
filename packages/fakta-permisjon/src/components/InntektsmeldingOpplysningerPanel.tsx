@@ -1,13 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Label, BodyShort, Detail, Link } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { PhoneFillIcon, FileFillIcon } from '@navikt/aksel-icons';
 
 import { Inntektsmelding } from '@navikt/fp-types';
 import { formatCurrencyNoKr } from '@navikt/ft-utils';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
-import dokumentSvg from '../images/dokument_filled.svg';
-import telefonImageUrl from '../images/phone-3.svg';
 
 import styles from './inntektsmeldingOpplysningerPanel.module.css';
 
@@ -74,12 +73,12 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({ saksnum
             <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
           </BodyShort>
         </span>
-        <Image src={dokumentSvg} />
+        <FileFillIcon className={styles.docIcon} />
       </Link>
       <VerticalSpacer sixteenPx />
       <FlexRow>
         <FlexColumn>
-          <Image src={telefonImageUrl} />
+          <PhoneFillIcon className={styles.phoneIcon} />
         </FlexColumn>
         <FlexColumn>
           <FlexRow>

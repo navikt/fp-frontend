@@ -3,6 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import classnames from 'classnames/bind';
 import { BodyShort, Label, Detail } from '@navikt/ds-react';
+import { CheckmarkIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 
 import {
   AoIArbeidsforhold,
@@ -13,7 +14,7 @@ import {
   Inntektsmelding,
   AlleKodeverk,
 } from '@navikt/fp-types';
-import { TableColumn, PeriodLabel, DateLabel, ExpandableTableRow, Image } from '@navikt/ft-ui-komponenter';
+import { TableColumn, PeriodLabel, DateLabel, ExpandableTableRow } from '@navikt/ft-ui-komponenter';
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import ManueltLagtTilArbeidsforholdForm from './manuelt/ManueltLagtTilArbeidsforholdForm';
@@ -23,8 +24,6 @@ import InntektsmeldingerPanel from './felles/InntektsmeldingerPanel';
 import InntektsmeldingOpplysningerPanel from './felles/InntektsmeldingOpplysningerPanel';
 import ManglendeInntektsmeldingForm from './manglendeInntektsmelding/ManglendeInntektsmeldingForm';
 import ArbeidsforholdOgInntekt, { Avklaring } from '../types/arbeidsforholdOgInntekt';
-import advarselIkonUrl from '../images/advarsel2.svg';
-import okIkonUrl from '../images/check.svg';
 
 import styles from './arbeidsforholdRad.module.css';
 
@@ -229,9 +228,14 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
       isApLeftBorder={harÅpentAksjonspunkt}
     >
       <TableColumn className={classNames('ikon', erRadÅpen ? 'imageColTopPadding' : undefined)}>
-        {!harÅpentAksjonspunkt && <Image alt={intl.formatMessage({ id: 'ArbeidsforholdRad.Ok' })} src={okIkonUrl} />}
+        {!harÅpentAksjonspunkt && (
+          <CheckmarkIcon title={intl.formatMessage({ id: 'ArbeidsforholdRad.Ok' })} className={styles.checkmarkIcon} />
+        )}
         {harÅpentAksjonspunkt && (
-          <Image alt={intl.formatMessage({ id: 'ArbeidsforholdRad.Aksjonspunkt' })} src={advarselIkonUrl} />
+          <ExclamationmarkTriangleFillIcon
+            title={intl.formatMessage({ id: 'ArbeidsforholdRad.Aksjonspunkt' })}
+            className={styles.exclamationmarkIcon}
+          />
         )}
       </TableColumn>
       <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>

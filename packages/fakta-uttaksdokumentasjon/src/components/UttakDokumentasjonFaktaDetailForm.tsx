@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
 import { BodyShort, Button, Label } from '@navikt/ds-react';
 import { required } from '@navikt/ft-form-validators';
-import { PencilIcon } from '@navikt/aksel-icons';
+import { PencilIcon, ScissorsIcon } from '@navikt/aksel-icons';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Form, formHooks, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
@@ -13,13 +13,11 @@ import {
   FlexColumn,
   FlexContainer,
   FlexRow,
-  Image,
   VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
 import { DokumentasjonVurderingBehov, UttakVurdering } from '@navikt/fp-types';
 
-import splitPeriodImageUrl from '../images/splitt.svg';
 import DelOppPeriodeModal from './DelOppPeriodeModal';
 
 import styles from './uttakDokumentasjonFaktaDetailForm.module.css';
@@ -135,7 +133,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
                   variant="tertiary"
                   type="button"
                   onClick={() => settValgtPeriodeIndex(index)}
-                  icon={<Image src={splitPeriodImageUrl} />}
+                  icon={<ScissorsIcon />}
                 >
                   <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.DelOppPeriode" />
                 </Button>
@@ -198,7 +196,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
                         variant="tertiary"
                         type="button"
                         onClick={() => settValgtPeriodeIndex(index)}
-                        icon={<Image src={splitPeriodImageUrl} />}
+                        icon={<ScissorsIcon />}
                       >
                         <FormattedMessage id="UttakDokumentasjonFaktaDetailForm.DelOppPeriode" />
                       </Button>

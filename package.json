@@ -101,7 +101,8 @@
     "react-dom": "18.2.0",
     "react-test-renderer": "18.2.0",
     "trim": "0.0.3",
-    "trim-newlines": "3.0.1"
+    "trim-newlines": "3.0.1",
+    "@navikt/ft-sak-risikoklassifisering": "portal:/C:/develop/ft-frontend-saksbehandling/packages/sak-risikoklassifisering"
   },
   "lint-staged": {
     "apps/**/*.{ts,tsx,js,jsx, css}": "prettier --write",

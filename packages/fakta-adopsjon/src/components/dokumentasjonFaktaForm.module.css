@@ -4,6 +4,7 @@
 }
 
 .image {
+  color: var(--a-orange-600);
   height: 35px;
   margin-top: 27px;
   width: 35px;

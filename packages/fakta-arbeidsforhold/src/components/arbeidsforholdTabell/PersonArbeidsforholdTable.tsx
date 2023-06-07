@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
+import { StarFillIcon } from '@navikt/aksel-icons';
 
-import { DateLabel, PeriodLabel, Table, TableColumn, TableRow, Image } from '@navikt/ft-ui-komponenter';
+import { DateLabel, PeriodLabel, Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity, TIDENES_ENDE } from '@navikt/ft-utils';
 import { ArbeidsgiverOpplysningerPerId, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 
-import erIBrukImageUrl from '../../images/stjerne.svg';
 import IngenArbeidsforholdRegistrert from './IngenArbeidsforholdRegistrert';
 
 import styles from './personArbeidsforholdTable.module.css';
@@ -136,13 +136,9 @@ const PersonArbeidsforholdTable: FunctionComponent<OwnProps> = ({
               <TableColumn>
                 {(a.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK ||
                   a.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING) && (
-                  <Image
+                  <StarFillIcon
                     className={styles.image}
-                    src={erIBrukImageUrl}
-                    alt={intl.formatMessage({ id: 'PersonArbeidsforholdTable.ErIBruk' })}
-                    tooltip={<FormattedMessage id="PersonArbeidsforholdTable.ErIBruk" />}
-                    tabIndex={0}
-                    alignTooltipLeft
+                    title={intl.formatMessage({ id: 'PersonArbeidsforholdTable.ErIBruk' })}
                   />
                 )}
               </TableColumn>
