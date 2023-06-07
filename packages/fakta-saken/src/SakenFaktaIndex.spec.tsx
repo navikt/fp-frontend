@@ -69,7 +69,7 @@ describe('<SakenFaktaIndex>', () => {
 
     expect(screen.queryByText('Startdato som skal benyttes (fra søknad eller fødsel)')).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getByAltText('Endre startdato for foreldrepenger'));
+    await userEvent.click(screen.getByTitle('Endre startdato for foreldrepenger'));
 
     const startdato = screen.getByText('Startdato som skal benyttes (fra søknad eller fødsel)');
     await userEvent.type(startdato, '{backspace}{backspace}20');
