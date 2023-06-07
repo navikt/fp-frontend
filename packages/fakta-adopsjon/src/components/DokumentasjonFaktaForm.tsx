@@ -2,15 +2,15 @@ import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import moment from 'moment';
 import { Label, BodyShort } from '@navikt/ds-react';
+import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 
 import { FieldEditedInfo } from '@navikt/fp-fakta-felles';
 import { Datepicker, formHooks } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
-import { VerticalSpacer, FaktaGruppe, Image, FlexContainer, FlexRow, FlexColumn } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer, FaktaGruppe, FlexContainer, FlexRow, FlexColumn } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { BekreftDokumentertDatoAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import advarselImageUrl from '../images/advarsel.svg';
 
 import styles from './dokumentasjonFaktaForm.module.css';
 
@@ -122,11 +122,9 @@ const DokumentasjonFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
                 </FlexColumn>
                 <FlexColumn>
                   {!readOnly && isAgeAbove15(fodselsdatoer, parseInt(id, 10), omsorgsovertakelseDato) && (
-                    <Image
+                    <ExclamationmarkTriangleFillIcon
                       className={styles.image}
-                      alt={intl.formatMessage({ id: 'DokumentasjonFaktaForm.BarnErOver15Ar' })}
-                      tooltip={intl.formatMessage({ id: 'DokumentasjonFaktaForm.BarnErOver15Ar' })}
-                      src={advarselImageUrl}
+                      title={intl.formatMessage({ id: 'DokumentasjonFaktaForm.BarnErOver15Ar' })}
                     />
                   )}
                 </FlexColumn>

@@ -13,3 +13,8 @@
 .inline {
   display: inline;
 }
+
+.arrow {
+  height: 25px;
+  width: 25px;
+}

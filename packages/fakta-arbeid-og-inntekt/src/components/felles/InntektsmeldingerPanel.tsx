@@ -2,7 +2,6 @@ import React, { FunctionComponent, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Link, Label, BodyShort } from '@navikt/ds-react';
 import {
-  Image,
   FlexColumn,
   FlexRow,
   Tooltip,
@@ -13,13 +12,11 @@ import {
   DateLabel,
   FlexContainer,
 } from '@navikt/ft-ui-komponenter';
+import { ChevronDownIcon, ChevronUpIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 
 import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
-import pilOppIkonUrl from '../../images/pil_opp.svg';
-import pilNedIkonUrl from '../../images/pil_ned.svg';
-import advarselIkonUrl from '../../images/advarsel2.svg';
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 
 import styles from './inntektsmeldingerPanel.module.css';
@@ -187,10 +184,11 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                                   />
                                 </BodyShort>
                               </span>
-                              <Image
-                                className={styles.arrow}
-                                src={visInfoOmIm[a.internArbeidsforholdId] ? pilOppIkonUrl : pilNedIkonUrl}
-                              />
+                              {visInfoOmIm[a.internArbeidsforholdId] ? (
+                                <ChevronUpIcon className={styles.arrow} />
+                              ) : (
+                                <ChevronDownIcon className={styles.arrow} />
+                              )}
                             </Link>
                           </>
                         )}
@@ -214,10 +212,9 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                     {!inntektsmelding && (
                       <FlexColumn className={styles.sisteKolonne}>
                         <FloatRight>
-                          <Image
+                          <ExclamationmarkTriangleFillIcon
                             className={styles.aksjonpunktImage}
-                            alt={intl.formatMessage({ id: 'ArbeidsforholdRad.Aksjonspunkt' })}
-                            src={advarselIkonUrl}
+                            title={intl.formatMessage({ id: 'ArbeidsforholdRad.Aksjonspunkt' })}
                           />
                           <div className={styles.ikkeMottatt}>
                             <Label size="small">

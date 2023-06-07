@@ -65,7 +65,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   }
 
   if (behandling) {
-    if (behandling?.erAktivPapirsoknad) {
+    if (behandling.erAktivPapirsoknad) {
       return (
         <Suspense fallback={<LoadingPanel />}>
           <ErrorBoundary errorMessageCallback={addErrorMessage}>

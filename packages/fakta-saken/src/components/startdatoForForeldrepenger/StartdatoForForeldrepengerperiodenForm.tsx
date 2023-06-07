@@ -2,17 +2,16 @@ import React, { FunctionComponent, useCallback, useState } from 'react';
 import dayjs from 'dayjs';
 import { useForm, UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { Label, BodyShort, Heading, Button } from '@navikt/ds-react';
+import { BodyShort, Heading, Button } from '@navikt/ds-react';
 import { hasValidDate, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { Datepicker, TextAreaField, Form } from '@navikt/ft-form-hooks';
-import { FlexColumn, FlexContainer, FlexRow, AksjonspunktBox, VerticalSpacer, Image } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, AksjonspunktBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import { PencilFillIcon } from '@navikt/aksel-icons';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import { OverstyringAvklarStartdatoForPeriodenAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import editUtlandIcon from '../../images/endre.svg';
-import editUtlandDisabledIcon from '../../images/endre_disablet.svg';
 
 import styles from './startdatoForForeldrepengerperiodenForm.module.css';
 
@@ -76,7 +75,7 @@ const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps> = ({
 
   const [visEditeringsmodus, toggleEdit] = useState(false);
   const slåPåEditering = useCallback(() => toggleEdit(true), []);
-  const slaAvEditeringAvUtland = useCallback(() => {
+  const slaAvEditeringAvStartdato = useCallback(() => {
     formMethods.reset();
     toggleEdit(false);
   }, []);
@@ -100,18 +99,17 @@ const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps> = ({
               </BodyShort>
             </FlexColumn>
             <FlexColumn>
-              <Label size="small">
+              <BodyShort size="small">
                 {soknad.oppgittFordeling
                   ? dayjs(soknad.oppgittFordeling.startDatoForPermisjon).format(DDMMYYYY_DATE_FORMAT)
                   : '-'}
-              </Label>
+              </BodyShort>
             </FlexColumn>
             <FlexColumn>
-              <Image
-                className={styles.editIcon}
-                src={readOnly ? editUtlandDisabledIcon : editUtlandIcon}
+              <PencilFillIcon
+                title={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.EndreStartdato' })}
+                className={readOnly ? styles.editIconReadonly : styles.editIcon}
                 onClick={readOnly ? undefined : slåPåEditering}
-                alt={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.EndreStartdato' })}
               />
             </FlexColumn>
           </FlexRow>
@@ -160,7 +158,7 @@ const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps> = ({
                   <FormattedMessage id="UtlandPanel.lagre" />
                 </Button>
               </FlexColumn>
-              <Button variant="secondary" size="small" onClick={slaAvEditeringAvUtland} type="button">
+              <Button variant="secondary" size="small" onClick={slaAvEditeringAvStartdato} type="button">
                 <FormattedMessage id="UtlandPanel.avbryt" />
               </Button>
               <FlexColumn />

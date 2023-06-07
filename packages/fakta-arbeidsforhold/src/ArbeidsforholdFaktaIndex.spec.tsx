@@ -25,7 +25,7 @@ describe('<ArbeidsforholdFaktaIndex>', () => {
     expect(screen.getByText('19.04.2000 -')).toBeInTheDocument();
     expect(screen.getByText('AA-Registeret')).toBeInTheDocument();
     expect(screen.getByText('100.00 %')).toBeInTheDocument();
-    expect(screen.getByAltText('Arbeidsforhold skal brukes')).toBeInTheDocument();
+    expect(screen.getByTitle('Arbeidsforhold skal brukes')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('AA-Registeret')); // Klikk på rad
 
@@ -118,7 +118,7 @@ describe('<ArbeidsforholdFaktaIndex>', () => {
     expect(screen.getByText('REMA 1000(999999998)')).toBeInTheDocument();
     expect(screen.getByText(/12.05.2019/)).toBeInTheDocument();
     expect(screen.getByText('06.12.2021')).toBeInTheDocument();
-    expect(screen.getByAltText('Arbeidsforhold skal brukes')).toBeInTheDocument();
+    expect(screen.getByTitle('Arbeidsforhold skal brukes')).toBeInTheDocument();
 
     expect(screen.getByText('Vy(23232)')).toBeInTheDocument();
     expect(screen.getByText(/06.12.2020/)).toBeInTheDocument();

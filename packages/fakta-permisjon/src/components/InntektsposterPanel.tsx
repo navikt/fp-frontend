@@ -2,13 +2,11 @@ import React, { FunctionComponent, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import dayjs from 'dayjs';
 import { Link, Label, BodyShort } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, Image, FloatRight } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, FloatRight } from '@navikt/ft-ui-komponenter';
+import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
 
 import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Inntektspost } from '@navikt/fp-types';
-
-import pilOppIkonUrl from '../images/pil_opp.svg';
-import pilNedIkonUrl from '../images/pil_ned.svg';
 
 import styles from './inntektsposterPanel.module.css';
 
@@ -93,7 +91,7 @@ const InntektsposterPanel: FunctionComponent<OwnProps> = ({ inntektsposter, skj�
                 />
               </BodyShort>
             </span>
-            <Image src={visAlleMåneder ? pilOppIkonUrl : pilNedIkonUrl} />
+            {visAlleMåneder ? <ChevronUpIcon className={styles.arrow} /> : <ChevronDownIcon className={styles.arrow} />}
           </Link>
         </>
       )}

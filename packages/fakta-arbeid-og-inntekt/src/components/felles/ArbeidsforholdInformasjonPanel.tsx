@@ -2,13 +2,12 @@ import React, { FunctionComponent, useState, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import dayjs from 'dayjs';
 import { Label, BodyShort, Link } from '@navikt/ds-react';
+import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
 
 import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding, Inntektspost } from '@navikt/fp-types';
-import { Image, FlexColumn, FlexContainer, FlexRow, VerticalSpacer, FloatRight } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer, FloatRight } from '@navikt/ft-ui-komponenter';
 
-import pilOppIkonUrl from '../../images/pil_opp.svg';
-import pilNedIkonUrl from '../../images/pil_ned.svg';
 import InntektsmeldingerPanel from './InntektsmeldingerPanel';
 
 import styles from './arbeidsforholdInformasjonPanel.module.css';
@@ -134,7 +133,7 @@ const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
                 />
               </BodyShort>
             </span>
-            <Image className={styles.arrow} src={visAlleMåneder ? pilOppIkonUrl : pilNedIkonUrl} />
+            {visAlleMåneder ? <ChevronUpIcon className={styles.arrow} /> : <ChevronDownIcon className={styles.arrow} />}
           </Link>
         </>
       )}

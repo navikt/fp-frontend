@@ -7,18 +7,16 @@ import {
   PeriodLabel,
   VerticalSpacer,
   FaktaGruppe,
-  Image,
   FlexContainer,
   FlexRow,
   FlexColumn,
 } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
+import { CheckmarkIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 
 import { KodeverkType, AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { MedlemPeriode, Soknad, UtlandsoppholdPeriode, Aksjonspunkt, AlleKodeverk } from '@navikt/fp-types';
 
-import checkImage from '../../images/check.svg';
-import avslaattImage from '../../images/avslaatt.svg';
 import MedlemskapBostedSokerView from './MedlemskapBostedSokerView';
 
 import styles from './oppholdINorgeOgAdresserFaktaPanel.module.css';
@@ -33,16 +31,22 @@ const sjekkOpphold = (opphold: boolean, intl: IntlShape): ReactElement | undefin
     <FlexContainer>
       <FlexRow>
         <FlexColumn>
-          <Image
-            className={styles.imageWidth}
-            src={opphold === true ? checkImage : avslaattImage}
-            alt={intl.formatMessage({
-              id:
-                opphold === true
-                  ? 'OppholdINorgeOgAdresserFaktaPanel.Opphold'
-                  : 'OppholdINorgeOgAdresserFaktaPanel.IkkeOpphold',
-            })}
-          />
+          {opphold === true && (
+            <CheckmarkIcon
+              className={styles.checkmarkIcon}
+              title={intl.formatMessage({
+                id: 'OppholdINorgeOgAdresserFaktaPanel.Opphold',
+              })}
+            />
+          )}
+          {opphold !== true && (
+            <ExclamationmarkTriangleFillIcon
+              className={styles.exclamationmarkIcon}
+              title={intl.formatMessage({
+                id: 'OppholdINorgeOgAdresserFaktaPanel.IkkeOpphold',
+              })}
+            />
+          )}
         </FlexColumn>
         <FlexColumn>
           <BodyShort size="small">

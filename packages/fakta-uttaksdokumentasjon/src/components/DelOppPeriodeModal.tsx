@@ -2,14 +2,13 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import { useForm } from 'react-hook-form';
+import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { Button, BodyShort, Modal, Heading, Label } from '@navikt/ds-react';
 import { Datepicker, Form } from '@navikt/ft-form-hooks';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { FlexColumn, FlexContainer, FlexRow, Image, PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
-
 import { DokumentasjonVurderingBehov } from '@navikt/fp-types';
-import advarselImageUrl from '../images/advarsel.svg';
 
 import styles from './delOppPeriodeModal.module.css';
 
@@ -48,7 +47,7 @@ const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({
       className={styles.modal}
     >
       <Modal.Content>
-        {visSlettEtterfølgendePerioder && (
+        {!visSlettEtterfølgendePerioder && (
           <>
             <Heading size="small">
               <FormattedMessage id="DelOppPeriodeModal.RedigerPeriode" />
@@ -57,10 +56,9 @@ const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({
             <FlexContainer>
               <FlexRow>
                 <FlexColumn>
-                  <Image
-                    alt={intl.formatMessage({ id: 'DelOppPeriodeModal.Nullstilles' })}
-                    src={advarselImageUrl}
+                  <ExclamationmarkTriangleFillIcon
                     className={styles.image}
+                    title={intl.formatMessage({ id: 'DelOppPeriodeModal.Nullstilles' })}
                   />
                 </FlexColumn>
                 <FlexColumn className={styles.text}>
