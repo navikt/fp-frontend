@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
-import { Label, Detail, Tag, Button, TagProps } from '@navikt/ds-react';
+import { Label, Detail, Tag, Button, TagProps, CopyButton } from '@navikt/ds-react';
 import { TabsAddIcon } from '@navikt/aksel-icons';
 import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
@@ -7,7 +7,6 @@ import { FagsakStatus } from '@navikt/ft-kodeverk';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { familieHendelseType } from '@navikt/fp-kodeverk';
 import dayjs from 'dayjs';
-import { CopyToClipboard } from '@navikt/ds-react-internal';
 import { finnYtelseTekst } from './VelgSakForm';
 import JournalFagsak, { FamilieHendelse } from '../../../typer/journalFagsakTsType';
 
@@ -85,7 +84,7 @@ const SakDetaljer: FunctionComponent<OwnProps> = ({ sak }) => {
             <Label>{sak.saksnummer}</Label>
           </FlexColumn>
           <FlexColumn className={styles.clipBoard}>
-            <CopyToClipboard size="small" copyText={sak.saksnummer} popoverText="Kopiert" type="button" />
+            <CopyButton copyText={sak.saksnummer} variant="action" />
           </FlexColumn>
         </FlexRow>
         <div className={styles.datoRad}>
