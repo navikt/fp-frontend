@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useState, useMemo, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Timeline } from '@navikt/ds-react-internal';
 import {
   ArrowRightIcon,
   ArrowLeftIcon,
@@ -12,7 +11,7 @@ import {
   FigureOutwardFillIcon,
 } from '@navikt/aksel-icons';
 import dayjs from 'dayjs';
-import { BodyShort, Button } from '@navikt/ds-react';
+import { BodyShort, Button, Timeline } from '@navikt/ds-react';
 import { DateLabel, FloatRight, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { KodeverkType, fagsakYtelseType, soknadType } from '@navikt/fp-kodeverk';

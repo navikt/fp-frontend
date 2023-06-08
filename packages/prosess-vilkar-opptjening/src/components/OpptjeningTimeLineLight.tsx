@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useState, useMemo, useCallback } from 'react';
-import { Timeline } from '@navikt/ds-react-internal';
 import dayjs from 'dayjs';
-import { BodyShort, Label } from '@navikt/ds-react';
+import { BodyShort, Label, Timeline } from '@navikt/ds-react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { DoorOpenIcon, CheckmarkCircleIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
 
