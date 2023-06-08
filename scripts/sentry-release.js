@@ -22,7 +22,7 @@ async function opprettReleaseTilSentry() {
     console.log('Laster opp source maps');
     await cli.releases.uploadSourceMaps(release, {
       include: ['dist/assets'],
-      urlPrefix: '~/public/',
+      urlPrefix: '~/assets/',
       rewrite: false,
     });
 
