@@ -1,7 +1,6 @@
 import React, { FunctionComponent, ReactElement, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { Timeline } from '@navikt/ds-react-internal';
 import { DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT, calcDaysAndWeeks } from '@navikt/ft-utils';
 import {
   FigureCombinationIcon,
@@ -18,7 +17,7 @@ import {
   FigureOutwardFillIcon,
   SilhouetteFillIcon,
 } from '@navikt/aksel-icons';
-import { BodyShort, Button, Label } from '@navikt/ds-react';
+import { BodyShort, Button, Label, Timeline } from '@navikt/ds-react';
 import { DateLabel, FloatRight, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AlleKodeverk, Fagsak, PeriodeSoker } from '@navikt/fp-types';

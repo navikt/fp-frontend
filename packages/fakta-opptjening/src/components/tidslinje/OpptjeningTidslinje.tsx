@@ -3,7 +3,6 @@ import React, { FunctionComponent, useMemo, useCallback } from 'react';
 import { KodeverkMedNavn, OpptjeningAktivitet } from '@navikt/fp-types';
 import dayjs from 'dayjs';
 
-import { Timeline } from '@navikt/ds-react-internal';
 import {
   WalletIcon,
   HandHeartIcon,
@@ -15,7 +14,7 @@ import {
   CheckmarkCircleIcon,
   XMarkOctagonIcon,
 } from '@navikt/aksel-icons';
-import { BodyShort, Label } from '@navikt/ds-react';
+import { BodyShort, Label, Timeline } from '@navikt/ds-react';
 import { opptjeningAktivitetType as OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
