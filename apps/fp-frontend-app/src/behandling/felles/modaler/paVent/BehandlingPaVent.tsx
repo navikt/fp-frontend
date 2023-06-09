@@ -9,7 +9,7 @@ import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../../data/beha
 interface BehandlingPaVentProps {
   behandling: Behandling;
   kodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
-  setBehandling: (behandling: Behandling) => void;
+  opneSokeside: () => void;
   erTilbakekreving?: boolean;
   skalIkkeViseModal?: boolean;
 }
@@ -17,14 +17,14 @@ interface BehandlingPaVentProps {
 const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
   behandling,
   kodeverk,
-  setBehandling,
+  opneSokeside,
   erTilbakekreving = false,
   skalIkkeViseModal = false,
 }) => {
   const [skalViseModal, setVisModal] = useState(!skalIkkeViseModal && behandling.behandlingPaaVent);
   const skjulModal = useCallback(() => setVisModal(false), []);
 
-  const { startRequest: settPaVent } = restBehandlingApiHooks.useRestApiRunner(BehandlingApiKeys.UPDATE_ON_HOLD);
+  const { startRequest: endrePaVent } = restBehandlingApiHooks.useRestApiRunner(BehandlingApiKeys.UPDATE_ON_HOLD);
 
   useEffect(() => {
     if (!skalIkkeViseModal) {
@@ -34,14 +34,12 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
 
   const oppdaterPaVentData = useCallback(
     (formData: FormValues) =>
-      settPaVent({
+      endrePaVent({
         ...formData,
         behandlingUuid: behandling.uuid,
         behandlingVersjon: behandling.versjon,
-      }).then(b => {
-        if (b) {
-          setBehandling(b);
-        }
+      }).then(() => {
+        opneSokeside();
       }),
     [behandling.versjon],
   );
@@ -58,7 +56,7 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
     <SettPaVentModalIndex
       submitCallback={oppdaterPaVentData}
       cancelEvent={skjulModal}
-      frist={behandling.fristBehandlingPåVent}
+      frist={behandling.fristBehandlingPåVent || behandling.fristBehandlingPaaVent}
       ventearsak={behandling.venteArsakKode}
       hasManualPaVent={erManueltSattPaVent}
       ventearsaker={kodeverk[KodeverkType.VENT_AARSAK]}

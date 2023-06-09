@@ -13,6 +13,7 @@ import TilbakekrevingProsessInitPanel from './prosessPaneler/TilbakekrevingProse
 import VedtakTilbakekrevingProsessInitPanel from './prosessPaneler/VedtakTilbakekrevingProsessInitPanel';
 import FeilutbetalingFaktaInitPanel from './faktaPaneler/FeilutbetalingFaktaInitPanel';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import BehandlingPaVent from '../felles/modaler/paVent/BehandlingPaVent';
 
 interface OwnProps {
   behandling: Behandling;
@@ -22,6 +23,7 @@ interface OwnProps {
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   opneSokeside: () => void;
   alleBehandlinger: BehandlingAppKontekst[];
+  hentOgSettBehandling: () => void;
 }
 
 const TilbakekrevingPaneler: FunctionComponent<OwnProps> = ({
@@ -32,6 +34,7 @@ const TilbakekrevingPaneler: FunctionComponent<OwnProps> = ({
   oppdaterProsessStegOgFaktaPanelIUrl,
   opneSokeside,
   alleBehandlinger,
+  hentOgSettBehandling,
 }) => {
   const { data: tilbakekrevingKodeverk } = restFagsakApiHooks.useRestApi(FagsakApiKeys.KODEVERK_FPTILBAKE);
 
@@ -107,14 +110,22 @@ const TilbakekrevingPaneler: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <BehandlingContainer
-      behandling={behandling}
-      valgtProsessSteg={valgtProsessSteg}
-      valgtFaktaSteg={valgtFaktaSteg}
-      oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-      hentFaktaPaneler={hentFaktaPaneler}
-      hentProsessPaneler={hentProsessPaneler}
-    />
+    <>
+      <BehandlingPaVent
+        behandling={behandling}
+        opneSokeside={opneSokeside}
+        kodeverk={tilbakekrevingKodeverk}
+        erTilbakekreving
+      />
+      <BehandlingContainer
+        behandling={behandling}
+        valgtProsessSteg={valgtProsessSteg}
+        valgtFaktaSteg={valgtFaktaSteg}
+        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+        hentFaktaPaneler={hentFaktaPaneler}
+        hentProsessPaneler={hentProsessPaneler}
+      />
+    </>
   );
 };
 

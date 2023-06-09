@@ -144,9 +144,13 @@ const BehandlingPanelerIndex: FunctionComponent<OwnProps> = ({
   const arbeidsgivere = opplysningsdata?.arbeidsgivereOversikt?.arbeidsgivere;
   const personoversikt = opplysningsdata?.behandlingPersonoversikt;
 
+  const erTilbakekrevingsbehandling = erTilbakekreving(behandling?.type);
+
   return (
     <>
-      <BehandlingPaVent behandling={behandling} setBehandling={setBehandling} kodeverk={kodeverk} />
+      {!erTilbakekreving && (
+        <BehandlingPaVent behandling={behandling} hentOgSettBehandling={hentOgSettBehandling} kodeverk={kodeverk} />
+      )}
       <StandardPropsProvider
         behandling={behandling}
         fagsak={fagsak}
@@ -257,7 +261,7 @@ const BehandlingPanelerIndex: FunctionComponent<OwnProps> = ({
               </ErrorBoundary>
             </Suspense>
           )}
-          {erTilbakekreving(behandling?.type) && (
+          {erTilbakekrevingsbehandling && (
             <Suspense fallback={<LoadingPanel />}>
               <ErrorBoundary errorMessageCallback={addErrorMessage}>
                 <TilbakekrevingPaneler
@@ -268,6 +272,7 @@ const BehandlingPanelerIndex: FunctionComponent<OwnProps> = ({
                   oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
                   opneSokeside={opneSokeside}
                   alleBehandlinger={alleBehandlinger}
+                  hentOgSettBehandling={hentOgSettBehandling}
                 />
               </ErrorBoundary>
             </Suspense>
