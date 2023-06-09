@@ -7,6 +7,7 @@ import { AlleKodeverk, Behandling, AksessRettigheter, Fagsak } from '@navikt/fp-
 import { AsyncPollingStatus } from '@navikt/fp-rest-api';
 import { RegistrerPapirsoknadPanel, SoknadRegistrertModal } from '@navikt/fp-papirsoknad';
 
+import { useNavigate } from 'react-router';
 import BehandlingPaVent from '../felles/modaler/paVent/BehandlingPaVent';
 
 const getAktivtPapirsoknadApKode = (aksjonspunkter: Aksjonspunkt[]): string =>
@@ -56,7 +57,6 @@ interface OwnProps {
   behandling: Behandling;
   kodeverk: AlleKodeverk;
   rettigheter: AksessRettigheter;
-  setBehandling: (behandling: Behandling) => void;
   lagreAksjonspunkt: (params?: any, keepData?: boolean) => Promise<Behandling | undefined>;
 }
 
@@ -72,7 +72,6 @@ const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
   behandling,
   kodeverk,
   rettigheter,
-  setBehandling,
   lagreAksjonspunkt,
 }) => {
   const [erAksjonspunktLagret, setAksjonspunktLagret] = useState(false);
@@ -88,6 +87,11 @@ const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
     [lagre],
   );
 
+  const navigate = useNavigate();
+  const opneSokeside = useCallback(() => {
+    navigate('/');
+  }, []);
+
   if (!behandling.aksjonspunkt) {
     return <LoadingPanel />;
   }
@@ -98,7 +102,7 @@ const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <BehandlingPaVent behandling={behandling} kodeverk={kodeverk} setBehandling={setBehandling} />
+      <BehandlingPaVent behandling={behandling} kodeverk={kodeverk} opneSokeside={opneSokeside} />
       <SoknadRegistrertModal isOpen={erAksjonspunktLagret} />
       <RegistrerPapirsoknadPanel
         fagsak={fagsak}

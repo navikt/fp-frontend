@@ -13,6 +13,7 @@ import TilbakekrevingProsessInitPanel from './prosessPaneler/TilbakekrevingProse
 import VedtakTilbakekrevingProsessInitPanel from './prosessPaneler/VedtakTilbakekrevingProsessInitPanel';
 import FeilutbetalingFaktaInitPanel from './faktaPaneler/FeilutbetalingFaktaInitPanel';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import BehandlingPaVent from '../felles/modaler/paVent/BehandlingPaVent';
 
 interface OwnProps {
   behandling: Behandling;
@@ -107,14 +108,22 @@ const TilbakekrevingPaneler: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <BehandlingContainer
-      behandling={behandling}
-      valgtProsessSteg={valgtProsessSteg}
-      valgtFaktaSteg={valgtFaktaSteg}
-      oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-      hentFaktaPaneler={hentFaktaPaneler}
-      hentProsessPaneler={hentProsessPaneler}
-    />
+    <>
+      <BehandlingPaVent
+        behandling={behandling}
+        opneSokeside={opneSokeside}
+        kodeverk={tilbakekrevingKodeverk}
+        erTilbakekreving
+      />
+      <BehandlingContainer
+        behandling={behandling}
+        valgtProsessSteg={valgtProsessSteg}
+        valgtFaktaSteg={valgtFaktaSteg}
+        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+        hentFaktaPaneler={hentFaktaPaneler}
+        hentProsessPaneler={hentProsessPaneler}
+      />
+    </>
   );
 };
 
