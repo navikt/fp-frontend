@@ -149,7 +149,7 @@ const BehandlingPanelerIndex: FunctionComponent<OwnProps> = ({
   return (
     <>
       {!erTilbakekreving && (
-        <BehandlingPaVent behandling={behandling} hentOgSettBehandling={hentOgSettBehandling} kodeverk={kodeverk} />
+        <BehandlingPaVent behandling={behandling} opneSokeside={opneSokeside} kodeverk={kodeverk} />
       )}
       <StandardPropsProvider
         behandling={behandling}
@@ -272,7 +272,6 @@ const BehandlingPanelerIndex: FunctionComponent<OwnProps> = ({
                   oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
                   opneSokeside={opneSokeside}
                   alleBehandlinger={alleBehandlinger}
-                  hentOgSettBehandling={hentOgSettBehandling}
                 />
               </ErrorBoundary>
             </Suspense>

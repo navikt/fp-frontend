@@ -23,7 +23,6 @@ interface OwnProps {
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   opneSokeside: () => void;
   alleBehandlinger: BehandlingAppKontekst[];
-  hentOgSettBehandling: () => void;
 }
 
 const TilbakekrevingPaneler: FunctionComponent<OwnProps> = ({
@@ -34,7 +33,6 @@ const TilbakekrevingPaneler: FunctionComponent<OwnProps> = ({
   oppdaterProsessStegOgFaktaPanelIUrl,
   opneSokeside,
   alleBehandlinger,
-  hentOgSettBehandling,
 }) => {
   const { data: tilbakekrevingKodeverk } = restFagsakApiHooks.useRestApi(FagsakApiKeys.KODEVERK_FPTILBAKE);
 
