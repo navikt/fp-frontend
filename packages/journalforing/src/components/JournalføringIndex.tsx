@@ -35,6 +35,7 @@ const JournalføringIndex: FunctionComponent<OwnProps> = ({
       <OppgaveTabell
         oppgaver={oppgaver}
         setValgtOppgave={setValgtOppgave}
+        navAnsatt={navAnsatt}
       />
     )}
     {valgtOppgave && (
