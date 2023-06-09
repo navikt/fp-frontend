@@ -25,8 +25,8 @@ describe('<JournalforingIndex>', () => {
     expect(screen.getByText('12048714373')).toBeInTheDocument();
     expect(screen.getByText('01.02.2022')).toBeInTheDocument();
     expect(screen.getAllByText('NORM')).toHaveLength(2);
-    expect(screen.getAllByText('Y654321')).toBeInTheDocument();
-    expect(screen.getAllByText('Meg')).toBeInTheDocument();
+    expect(screen.getByText('Y654321')).toBeInTheDocument();
+    expect(screen.getByText('4016')).toBeInTheDocument();
   });
 
   it('skal vise ingen oppgaver', async () => {
