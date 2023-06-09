@@ -37,7 +37,7 @@ describe('<BehandlingPaVent>', () => {
           } as Behandling
         }
         kodeverk={kodeverk}
-        setBehandling={vi.fn()}
+        opneSokeside={vi.fn()}
       />,
     );
 
@@ -56,7 +56,7 @@ describe('<BehandlingPaVent>', () => {
             } as Behandling
           }
           kodeverk={kodeverk}
-          setBehandling={vi.fn()}
+          opneSokeside={vi.fn()}
         />,
       );
     });
@@ -75,7 +75,7 @@ describe('<BehandlingPaVent>', () => {
           } as Behandling
         }
         kodeverk={kodeverk}
-        setBehandling={vi.fn()}
+        opneSokeside={vi.fn()}
       />,
     );
 

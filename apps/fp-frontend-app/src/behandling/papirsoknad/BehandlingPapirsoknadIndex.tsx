@@ -38,7 +38,6 @@ const BehandlingPapirsoknadIndex: FunctionComponent<OwnProps> = ({
       fagsak={fagsak}
       kodeverk={kodeverk}
       rettigheter={rettigheter}
-      setBehandling={setBehandling}
       lagreAksjonspunkt={lagreAksjonspunkter}
     />
   );
