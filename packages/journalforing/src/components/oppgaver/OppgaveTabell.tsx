@@ -3,7 +3,7 @@ import { BodyShort, Table } from '@navikt/ds-react';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
-import { NavAnsatt } from "@navikt/fp-types";
+import { NavAnsatt } from '@navikt/fp-types';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import OppgaveTabellRad from './OppgaveTabellRad';
 import styles from './oppgaveTabell.module.css';

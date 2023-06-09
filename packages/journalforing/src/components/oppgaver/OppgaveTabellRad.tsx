@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Button, Table, Tag } from '@navikt/ds-react';
 import { ChevronRightIcon } from '@navikt/aksel-icons';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
-import { NavAnsatt } from "@navikt/fp-types";
+import { NavAnsatt } from '@navikt/fp-types';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import { finnYtelseTekst } from '../journalpost/innhold/VelgSakForm';
 
