@@ -17,6 +17,7 @@ describe('<JournalforingIndex>', () => {
     expect(screen.getByText('Bruker')).toBeInTheDocument();
     expect(screen.getByText('Frist')).toBeInTheDocument();
     expect(screen.getByText('Prioritet')).toBeInTheDocument();
+    expect(screen.getByText('Saksbehandler')).toBeInTheDocument();
     // Rad 1
     expect(screen.getAllByText('Inntektsmelding')).toHaveLength(2);
     expect(screen.getAllByText('01.01.2022')).toHaveLength(4);
@@ -24,6 +25,8 @@ describe('<JournalforingIndex>', () => {
     expect(screen.getByText('12048714373')).toBeInTheDocument();
     expect(screen.getByText('01.02.2022')).toBeInTheDocument();
     expect(screen.getAllByText('NORM')).toHaveLength(2);
+    expect(screen.getAllByText('Y654321')).toBeInTheDocument();
+    expect(screen.getAllByText('Meg')).toBeInTheDocument();
   });
 
   it('skal vise ingen oppgaver', async () => {
