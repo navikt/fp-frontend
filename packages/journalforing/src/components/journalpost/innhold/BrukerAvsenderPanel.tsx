@@ -1,9 +1,8 @@
 import React, { FunctionComponent, useMemo, ReactElement, useState, useCallback } from 'react';
-import { BodyShort, Heading, Search, Alert, Button } from '@navikt/ds-react';
+import { BodyShort, Heading, Search, Alert, Button, CopyButton } from '@navikt/ds-react';
 import { isValidFodselsnummer } from '@navikt/ft-utils';
 import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Buldings3Icon, FigureInwardIcon, SilhouetteIcon, FigureOutwardIcon } from '@navikt/aksel-icons';
-import { CopyToClipboard } from '@navikt/ds-react-internal';
 import { FormattedMessage, useIntl } from 'react-intl';
 import styles from './brukerAvsenderPanel.module.css';
 import Journalpost from '../../../typer/journalpostTsType';
@@ -57,7 +56,7 @@ const lagBrukerAvsenderRad = (navn: string, id: string, ikon: ReactElement, titl
             <BodyShort>{id}</BodyShort>
           </FlexColumn>
           <FlexColumn className={styles.clipBoard}>
-            <CopyToClipboard size="small" copyText={id} popoverText="Kopiert" type="button" />
+            <CopyButton copyText={id} variant="action" />
           </FlexColumn>
         </FlexRow>
       </FlexColumn>
