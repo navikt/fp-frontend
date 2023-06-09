@@ -3,6 +3,7 @@ import { BodyShort, Table } from '@navikt/ds-react';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
+import { NavAnsatt } from "@navikt/fp-types";
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import OppgaveTabellRad from './OppgaveTabellRad';
 import styles from './oppgaveTabell.module.css';
@@ -10,12 +11,15 @@ import styles from './oppgaveTabell.module.css';
 type OwnProps = Readonly<{
   oppgaver: OppgaveOversikt[];
   setValgtOppgave: (oppgave: OppgaveOversikt) => void;
+  navAnsatt: NavAnsatt
 }>;
 
 /**
  * OppgaveTabell - Presenterer liste over oppgaver og tar inn callback for å sette valgt oppgave
  */
-const OppgaveTabell: FunctionComponent<OwnProps> = ({ oppgaver, setValgtOppgave }) => {
+const OppgaveTabell: FunctionComponent<OwnProps> = ({ oppgaver,
+                                                      setValgtOppgave,
+                                                      navAnsatt}) => {
   if (oppgaver.length < 1) {
     return (
       <>
@@ -42,6 +46,9 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({ oppgaver, setValgtOppgave 
               <FormattedMessage id="Oppgavetabell.Beskrivelse" />
             </Table.HeaderCell>
             <Table.HeaderCell>
+              <FormattedMessage id="Oppgavetabell.Saksbehandler" />
+            </Table.HeaderCell>
+            <Table.HeaderCell>
               <FormattedMessage id="Oppgavetabell.Bruker" />
             </Table.HeaderCell>
             <Table.HeaderCell>
@@ -58,7 +65,7 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({ oppgaver, setValgtOppgave 
         </Table.Header>
         <Table.Body>
           {oppgaver.map(oppgave => (
-            <OppgaveTabellRad oppgave={oppgave} setValgtOppgave={setValgtOppgave} key={oppgave.id} />
+            <OppgaveTabellRad oppgave={oppgave} setValgtOppgave={setValgtOppgave} key={oppgave.id} navAnsatt={navAnsatt} />
           ))}
         </Table.Body>
       </Table>

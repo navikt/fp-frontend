@@ -112,6 +112,7 @@ export default {
 const navAnsattDefault = {
   kanOppgavestyre: true,
   kanBehandleKode6: true,
+  brukernavn: "X123456",
 } as NavAnsatt;
 
 const Template: StoryFn<{
@@ -150,6 +151,7 @@ const defaultOppgaver = [
     enhetId: '4016',
     prioritet: OppgavePrioritet.NORM,
     beskrivelse: 'Inntektsmelding',
+    reservertAv: 'X123456',
   },
   {
     id: 700,
@@ -162,6 +164,7 @@ const defaultOppgaver = [
     enhetId: '4008',
     prioritet: OppgavePrioritet.NORM,
     beskrivelse: 'Inntektsmelding',
+    reservertAv: 'Y654321',
   },
   {
     id: 800,
@@ -189,6 +192,7 @@ ViseOppgaverIListe.args = {
       enhetId: '4016',
       prioritet: OppgavePrioritet.NORM,
       beskrivelse: 'Inntektsmelding',
+      reservertAv: 'Y654321',
     },
     {
       id: 700,
@@ -201,6 +205,7 @@ ViseOppgaverIListe.args = {
       enhetId: '4008',
       prioritet: OppgavePrioritet.NORM,
       beskrivelse: 'Inntektsmelding',
+
     },
     {
       id: 800,
@@ -211,6 +216,7 @@ ViseOppgaverIListe.args = {
       enhetId: '4008',
       prioritet: OppgavePrioritet.HØY,
       beskrivelse: 'Søknad',
+      reservertAv: 'X123456',
     },
   ],
   detaljertJournalpost: detaljertJournalpostMal(true),
