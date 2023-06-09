@@ -148,7 +148,7 @@ const BehandlingPanelerIndex: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      {!erTilbakekreving && (
+      {!erTilbakekrevingsbehandling && (
         <BehandlingPaVent behandling={behandling} opneSokeside={opneSokeside} kodeverk={kodeverk} />
       )}
       <StandardPropsProvider
