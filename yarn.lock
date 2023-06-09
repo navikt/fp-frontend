@@ -3323,7 +3323,7 @@ __metadata:
     react-popper: 2.3.0
     react-responsive: 9.0.2
     react-router: 6.12.1
-    react-router-dom: 6.12.0
+    react-router-dom: 6.12.1
     react-test-renderer: 18.2.0
     rollup-plugin-sourcemaps: 0.6.3
     storybook: 7.0.20
@@ -3428,7 +3428,7 @@ __metadata:
     react: 18.2.0
     react-hook-form: 7.44.3
     react-intl: 6.4.3
-    react-router-dom: 6.12.0
+    react-router-dom: 6.12.1
     storybook: 7.0.20
     stylelint: 15.7.0
     typescript: 5.0.4
@@ -3467,7 +3467,7 @@ __metadata:
     react: 18.2.0
     react-hook-form: 7.44.3
     react-intl: 6.4.3
-    react-router-dom: 6.12.0
+    react-router-dom: 6.12.1
     storybook: 7.0.20
     stylelint: 15.7.0
     typescript: 5.0.4
@@ -3511,7 +3511,7 @@ __metadata:
     react-dom: 18.2.0
     react-hook-form: 7.44.3
     react-intl: 6.4.3
-    react-router-dom: 6.12.0
+    react-router-dom: 6.12.1
     storybook: 7.0.20
     stylelint: 15.7.0
     typescript: 5.0.4
@@ -3581,7 +3581,7 @@ __metadata:
     react: 18.2.0
     react-hook-form: 7.44.3
     react-intl: 6.4.3
-    react-router-dom: 6.12.0
+    react-router-dom: 6.12.1
     storybook: 7.0.20
     stylelint: 15.7.0
     typescript: 5.0.4
@@ -3616,7 +3616,7 @@ __metadata:
     react: 18.2.0
     react-hook-form: 7.44.3
     react-intl: 6.4.3
-    react-router-dom: 6.12.0
+    react-router-dom: 6.12.1
     storybook: 7.0.20
     stylelint: 15.7.0
     typescript: 5.0.4
@@ -4593,7 +4593,7 @@ __metadata:
     moment: 2.29.4
     react: 18.2.0
     react-intl: 6.4.3
-    react-router-dom: 6.12.0
+    react-router-dom: 6.12.1
     storybook: 7.0.20
     stylelint: 15.7.0
     typescript: 5.0.4
@@ -4862,7 +4862,7 @@ __metadata:
     react: 18.2.0
     react-hook-form: 7.44.3
     react-intl: 6.4.3
-    react-router-dom: 6.12.0
+    react-router-dom: 6.12.1
     storybook: 7.0.20
     stylelint: 15.7.0
     typescript: 5.0.4
@@ -4907,7 +4907,7 @@ __metadata:
     react: 18.2.0
     react-hook-form: 7.44.3
     react-intl: 6.4.3
-    react-router-dom: 6.12.0
+    react-router-dom: 6.12.1
     typescript: 5.0.4
     vite: 4.3.9
   languageName: unknown
@@ -18738,27 +18738,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:6.12.0":
-  version: 6.12.0
-  resolution: "react-router-dom@npm:6.12.0"
+"react-router-dom@npm:6.12.1":
+  version: 6.12.1
+  resolution: "react-router-dom@npm:6.12.1"
   dependencies:
     "@remix-run/router": 1.6.3
-    react-router: 6.12.0
+    react-router: 6.12.1
   peerDependencies:
     react: ">=16.8"
     react-dom: ">=16.8"
-  checksum: e7c620596eb9853dcaeaae337da029fd16dbae2452eed36fbb4746916d23c02efaa4c35e31c2d3c670bd9db51541a985fe093714f0bd82c8a6eca129d6ab5d44
-  languageName: node
-  linkType: hard
-
-"react-router@npm:6.12.0":
-  version: 6.12.0
-  resolution: "react-router@npm:6.12.0"
-  dependencies:
-    "@remix-run/router": 1.6.3
-  peerDependencies:
-    react: ">=16.8"
-  checksum: 3151af8539f89ff41d39c98f6bacdb47769cb661e97fb21cea2f91b27d9b620e0486d67b9ad60c395606401909f1a7fd53e9be6a2361a65b12fcfec055e9838e
+  checksum: 885528986b6e32bde0cc6ff1f318186ce6931cf4a2a36511fe12eafb380576b448a991d43fe473dbb9bc97bb7efa0c87ac179a7470345a1d3534a34b65578677
   languageName: node
   linkType: hard
 
