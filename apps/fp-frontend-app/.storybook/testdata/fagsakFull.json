@@ -1,30 +1,30 @@
 {
-  "saksnummer": "2",
+  "saksnummer": "3",
   "fagsakYtelseType": "FP",
   "relasjonsRolleType": "MORA",
   "status": "UBEH",
-  "aktørId": "9930498029066",
+  "aktørId": "9902439132852",
   "sakSkalTilInfotrygd": false,
   "dekningsgrad": 100,
   "bruker": {
-    "aktørId": "9930498029066",
-    "navn": "Flaggermus Alexandra",
-    "fødselsnummer": "30498029066",
+    "aktørId": "9902439132852",
+    "navn": "Hjort Brit",
+    "fødselsnummer": "02439132852",
     "kjønn": "K",
     "diskresjonskode": "UDEF",
-    "fødselsdato": "1973-06-06",
+    "fødselsdato": "1973-06-09",
     "dødsdato": null,
     "dodsdato": null,
     "språkkode": "NB"
   },
   "brukerManglerAdresse": false,
   "annenPart": {
-    "aktørId": "9921478144609",
-    "navn": "Flaggermus Ketil",
-    "fødselsnummer": "21478144609",
+    "aktørId": "9916488918099",
+    "navn": "Hjort Gabriel",
+    "fødselsnummer": "16488918099",
     "kjønn": "M",
     "diskresjonskode": "UDEF",
-    "fødselsdato": "1973-06-06",
+    "fødselsdato": "1973-06-09",
     "dødsdato": null,
     "dodsdato": null,
     "språkkode": "NB"
@@ -32,7 +32,7 @@
   "annenpartBehandling": null,
   "familiehendelse": {
     "hendelseType": "ADPSJN",
-    "hendelseDato": "2023-06-04",
+    "hendelseDato": "2023-06-07",
     "antallBarn": 1,
     "dødfødsel": false
   },
@@ -62,21 +62,21 @@
   ],
   "behandlinger": [
     {
-      "id": 999953,
-      "uuid": "2cce9c56-ea09-44cc-9003-50697afb28e1",
-      "versjon": 31,
+      "id": 999954,
+      "uuid": "7d198233-b499-4aaf-a01b-be97958e20ce",
+      "versjon": 19,
       "type": "BT-002",
       "status": "UTRED",
-      "fagsakId": 999952,
-      "opprettet": "2023-06-06T09:50:39",
+      "fagsakId": 999953,
+      "opprettet": "2023-06-09T10:49:29",
       "avsluttet": null,
-      "endret": "2023-06-06T09:51:12.509",
-      "endretAvBrukernavn": "saksbeh",
+      "endret": "2023-06-09T10:49:31.474",
+      "endretAvBrukernavn": "srvfpsak",
       "behandlendeEnhetId": "4806",
       "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Drammen",
       "erAktivPapirsoknad": false,
       "førsteÅrsak": null,
-      "behandlingsfristTid": "2023-07-18",
+      "behandlingsfristTid": "2023-07-21",
       "gjeldendeVedtak": false,
       "erPaaVent": false,
       "originalVedtaksDato": null,
@@ -90,10 +90,10 @@
       "sprakkode": "NB",
       "språkkode": "NB",
       "behandlingKøet": false,
-      "ansvarligSaksbehandler": "saksbeh",
+      "ansvarligSaksbehandler": null,
       "toTrinnsBehandling": false,
       "behandlingsresultat": {
-        "id": 999953,
+        "id": 999954,
         "type": "IKKE_FASTSATT",
         "avslagsarsak": null,
         "avslagsarsakFritekst": null,
@@ -104,7 +104,7 @@
         "fritekstbrev": null,
         "erRevurderingMedUendretUtfall": false,
         "skjæringstidspunkt": {
-          "dato": "2023-06-04",
+          "dato": "2023-06-07",
           "kreverSammenhengendeUttak": false,
           "utenMinsterett": false
         }
@@ -120,28 +120,28 @@
         },
         {
           "vilkarType": "FP_VK_21",
-          "vilkarStatus": "OPPFYLT",
+          "vilkarStatus": "IKKE_VURDERT",
           "avslagKode": null,
           "lovReferanse": "§ 14-6 og 14-10",
           "overstyrbar": true
         },
         {
           "vilkarType": "FP_VK_2",
-          "vilkarStatus": "OPPFYLT",
+          "vilkarStatus": "IKKE_VURDERT",
           "avslagKode": null,
           "lovReferanse": "§ 14-2",
           "overstyrbar": true
         },
         {
           "vilkarType": "FP_VK_23",
-          "vilkarStatus": "OPPFYLT",
+          "vilkarStatus": "IKKE_VURDERT",
           "avslagKode": null,
           "lovReferanse": "§ 14-6",
           "overstyrbar": true
         },
         {
           "vilkarType": "FP_VK_16",
-          "vilkarStatus": "OPPFYLT",
+          "vilkarStatus": "IKKE_VURDERT",
           "avslagKode": null,
           "lovReferanse": "§ 14-5, første ledd eller tredje ledd",
           "overstyrbar": true
@@ -156,13 +156,13 @@
       ],
       "links": [
         {
-          "href": "/fpsak/api/behandling/person/personoversikt?uuid=2cce9c56-ea09-44cc-9003-50697afb28e1",
+          "href": "/fpsak/api/behandling/person/personoversikt?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
           "rel": "behandling-personoversikt",
           "requestPayload": null,
           "type": "GET"
         },
         {
-          "href": "/fpsak/api/behandling/familiehendelse/v2?uuid=2cce9c56-ea09-44cc-9003-50697afb28e1",
+          "href": "/fpsak/api/behandling/familiehendelse/v2?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
           "rel": "familiehendelse-v2",
           "requestPayload": null,
           "type": "GET"
@@ -181,7 +181,7 @@
         }
       ],
       "behandlingTillatteOperasjoner": {
-        "uuid": "2cce9c56-ea09-44cc-9003-50697afb28e1",
+        "uuid": "7d198233-b499-4aaf-a01b-be97958e20ce",
         "behandlingKanBytteEnhet": true,
         "behandlingKanHenlegges": true,
         "behandlingKanGjenopptas": false,
@@ -216,30 +216,12 @@
       ],
       "totrinnskontrollÅrsaker": [],
       "totrinnskontrollReadonly": true,
-      "risikoAksjonspunkt": {
-        "definisjon": "5095",
-        "status": "OPPR",
-        "begrunnelse": null,
-        "vilkarType": null,
-        "toTrinnsBehandling": true,
-        "toTrinnsBehandlingGodkjent": null,
-        "vurderPaNyttArsaker": null,
-        "besluttersBegrunnelse": null,
-        "aksjonspunktType": "MANU",
-        "kanLoses": true,
-        "erAktivt": true,
-        "fristTid": null,
-        "endretTidspunkt": null,
-        "endretAv": null
-      },
+      "risikoAksjonspunkt": null,
       "kontrollResultat": {
-        "kontrollresultat": "HOY",
-        "medlFaresignaler": {
-          "faresignaler": ["Faresignal 1"]
-        },
-        "iayFaresignaler": {
-          "faresignaler": ["Faresignal 2", "Faresignal 3", "Faresignal 4"]
-        }
+        "kontrollresultat": "IKKE_HOY",
+        "iayFaresignaler": null,
+        "medlFaresignaler": null,
+        "faresignalVurdering": null
       },
       "ugunstAksjonspunkt": null,
       "behandlingKoet": false
@@ -247,72 +229,12 @@
   ],
   "historikkinnslag": [
     {
-      "behandlingId": 999953,
-      "behandlingUuid": "2cce9c56-ea09-44cc-9003-50697afb28e1",
-      "type": "FAKTA_ENDRET",
-      "aktoer": "SBH",
-      "opprettetAv": "Saksbeh",
-      "opprettetTidspunkt": "2023-06-06T09:51:20.02",
-      "dokumentLinks": [],
-      "historikkinnslagDeler": [
-        {
-          "begrunnelsetekst": null,
-          "begrunnelseFritekst": "asdfasfd",
-          "hendelse": null,
-          "opplysninger": null,
-          "soeknadsperiode": null,
-          "skjermlenke": "FAKTA_OM_MEDLEMSKAP",
-          "årsaktekst": null,
-          "tema": null,
-          "gjeldendeFra": null,
-          "resultat": null,
-          "endredeFelter": [
-            {
-              "endretFeltNavn": "GYLDIG_MEDLEM_FOLKETRYGDEN",
-              "navnVerdi": null,
-              "klNavn": "HISTORIKK_ENDRET_FELT_TYPE",
-              "fraVerdi": null,
-              "tilVerdi": "MEDLEM",
-              "klFraVerdi": null,
-              "klTilVerdi": "MEDLEMSKAP_MANUELL_VURD"
-            }
-          ],
-          "aksjonspunkter": null
-        }
-      ]
-    },
-    {
-      "behandlingId": 999953,
-      "behandlingUuid": "2cce9c56-ea09-44cc-9003-50697afb28e1",
-      "type": "FAKTA_ENDRET",
-      "aktoer": "SBH",
-      "opprettetAv": "Saksbeh",
-      "opprettetTidspunkt": "2023-06-06T09:51:12.529",
-      "dokumentLinks": [],
-      "historikkinnslagDeler": [
-        {
-          "begrunnelsetekst": null,
-          "begrunnelseFritekst": "asdfasfd",
-          "hendelse": null,
-          "opplysninger": null,
-          "soeknadsperiode": null,
-          "skjermlenke": "FAKTA_OM_ADOPSJON",
-          "årsaktekst": null,
-          "tema": null,
-          "gjeldendeFra": null,
-          "resultat": null,
-          "endredeFelter": null,
-          "aksjonspunkter": null
-        }
-      ]
-    },
-    {
-      "behandlingId": 999953,
-      "behandlingUuid": "2cce9c56-ea09-44cc-9003-50697afb28e1",
+      "behandlingId": 999954,
+      "behandlingUuid": "7d198233-b499-4aaf-a01b-be97958e20ce",
       "type": "BYTT_ENHET",
       "aktoer": "VL",
       "opprettetAv": "Srvfpsak",
-      "opprettetTidspunkt": "2023-06-06T09:50:40.265",
+      "opprettetTidspunkt": "2023-06-09T10:49:30.395",
       "dokumentLinks": [],
       "historikkinnslagDeler": [
         {
@@ -345,18 +267,18 @@
       ]
     },
     {
-      "behandlingId": 999953,
-      "behandlingUuid": "2cce9c56-ea09-44cc-9003-50697afb28e1",
+      "behandlingId": 999954,
+      "behandlingUuid": "7d198233-b499-4aaf-a01b-be97958e20ce",
       "type": "BEH_STARTET",
       "aktoer": "SOKER",
       "opprettetAv": "Srvfpsak",
-      "opprettetTidspunkt": "2023-06-06T09:50:39.819",
+      "opprettetTidspunkt": "2023-06-09T10:49:29.627",
       "dokumentLinks": [
         {
           "tag": "Søknad",
-          "url": "http://172.18.0.10:8080/fpsak/api/dokument/hent-dokument?journalpostId=6684207&dokumentId=6684207",
-          "journalpostId": "6684207",
-          "dokumentId": "6684207",
+          "url": "http://172.18.0.11:8080/fpsak/api/dokument/hent-dokument?journalpostId=6982308&dokumentId=6982308",
+          "journalpostId": "6982308",
+          "dokumentId": "6982308",
           "utgått": false
         }
       ],

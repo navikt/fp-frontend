@@ -1,19 +1,19 @@
 {
-  "id": 999953,
-  "uuid": "2cce9c56-ea09-44cc-9003-50697afb28e1",
-  "versjon": 31,
+  "id": 999954,
+  "uuid": "7d198233-b499-4aaf-a01b-be97958e20ce",
+  "versjon": 23,
   "type": "BT-002",
   "status": "UTRED",
-  "fagsakId": 999952,
-  "opprettet": "2023-06-06T09:50:39",
+  "fagsakId": 999953,
+  "opprettet": "2023-06-09T10:49:29",
   "avsluttet": null,
-  "endret": "2023-06-06T09:51:12.509",
+  "endret": "2023-06-09T11:04:19.673",
   "endretAvBrukernavn": "saksbeh",
   "behandlendeEnhetId": "4806",
   "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Drammen",
   "erAktivPapirsoknad": false,
   "førsteÅrsak": null,
-  "behandlingsfristTid": "2023-07-18",
+  "behandlingsfristTid": "2023-07-21",
   "gjeldendeVedtak": false,
   "erPaaVent": false,
   "originalVedtaksDato": null,
@@ -30,7 +30,7 @@
   "ansvarligSaksbehandler": "saksbeh",
   "toTrinnsBehandling": false,
   "behandlingsresultat": {
-    "id": 999953,
+    "id": 999954,
     "type": "IKKE_FASTSATT",
     "avslagsarsak": null,
     "avslagsarsakFritekst": null,
@@ -41,7 +41,7 @@
     "fritekstbrev": null,
     "erRevurderingMedUendretUtfall": false,
     "skjæringstidspunkt": {
-      "dato": "2023-06-04",
+      "dato": "2023-06-07",
       "kreverSammenhengendeUttak": false,
       "utenMinsterett": false
     }
@@ -57,21 +57,21 @@
     },
     {
       "vilkarType": "FP_VK_21",
-      "vilkarStatus": "OPPFYLT",
+      "vilkarStatus": "IKKE_VURDERT",
       "avslagKode": null,
       "lovReferanse": "§ 14-6 og 14-10",
       "overstyrbar": true
     },
     {
       "vilkarType": "FP_VK_2",
-      "vilkarStatus": "OPPFYLT",
+      "vilkarStatus": "IKKE_VURDERT",
       "avslagKode": null,
       "lovReferanse": "§ 14-2",
       "overstyrbar": true
     },
     {
       "vilkarType": "FP_VK_23",
-      "vilkarStatus": "OPPFYLT",
+      "vilkarStatus": "IKKE_VURDERT",
       "avslagKode": null,
       "lovReferanse": "§ 14-6",
       "overstyrbar": true
@@ -93,7 +93,7 @@
   ],
   "links": [
     {
-      "href": "/fpsak/api/fagsak?saksnummer=2",
+      "href": "/fpsak/api/fagsak?saksnummer=3",
       "rel": "fagsak",
       "requestPayload": null,
       "type": "GET"
@@ -203,103 +203,91 @@
       "type": "POST"
     },
     {
-      "href": "/fpsak/api/behandling/aksjonspunkt-v2?uuid=2cce9c56-ea09-44cc-9003-50697afb28e1",
+      "href": "/fpsak/api/behandling/aksjonspunkt-v2?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
       "rel": "aksjonspunkter",
       "requestPayload": null,
       "type": "GET"
     },
     {
-      "href": "/fpsak/api/behandling/soknad?uuid=2cce9c56-ea09-44cc-9003-50697afb28e1",
+      "href": "/fpsak/api/behandling/soknad?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
       "rel": "soknad",
       "requestPayload": null,
       "type": "GET"
     },
     {
-      "href": "/fpsak/api/behandling/soknad-backend?uuid=2cce9c56-ea09-44cc-9003-50697afb28e1",
+      "href": "/fpsak/api/behandling/soknad-backend?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
       "rel": "soknad-backend",
       "requestPayload": null,
       "type": "GET"
     },
     {
-      "href": "/fpsak/api/dokument/hent-mottattdokumentliste?uuid=2cce9c56-ea09-44cc-9003-50697afb28e1",
+      "href": "/fpsak/api/dokument/hent-mottattdokumentliste?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
       "rel": "mottattdokument",
       "requestPayload": null,
       "type": "GET"
     },
     {
-      "href": "/fpsak/api/behandling/familiehendelse/v2?uuid=2cce9c56-ea09-44cc-9003-50697afb28e1",
+      "href": "/fpsak/api/behandling/familiehendelse/v2?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
       "rel": "familiehendelse-v2",
       "requestPayload": null,
       "type": "GET"
     },
     {
-      "href": "/fpsak/api/behandling/person/personoversikt?uuid=2cce9c56-ea09-44cc-9003-50697afb28e1",
+      "href": "/fpsak/api/behandling/person/personoversikt?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
       "rel": "behandling-personoversikt",
       "requestPayload": null,
       "type": "GET"
     },
     {
-      "href": "/fpsak/api/behandling/person/medlemskap-v2?uuid=2cce9c56-ea09-44cc-9003-50697afb28e1",
+      "href": "/fpsak/api/behandling/person/medlemskap-v2?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
       "rel": "soeker-medlemskap-v2",
       "requestPayload": null,
       "type": "GET"
     },
     {
-      "href": "/fpsak/api/behandling/kontrollresultat/resultat?uuid=2cce9c56-ea09-44cc-9003-50697afb28e1",
+      "href": "/fpsak/api/behandling/kontrollresultat/resultat?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
       "rel": "kontrollresultat",
       "requestPayload": null,
       "type": "GET"
     },
     {
-      "href": "/fpsak/api/behandling/inntekt-arbeid-ytelse?uuid=2cce9c56-ea09-44cc-9003-50697afb28e1",
+      "href": "/fpsak/api/behandling/inntekt-arbeid-ytelse?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
       "rel": "inntekt-arbeid-ytelse",
       "requestPayload": null,
       "type": "GET"
     },
     {
-      "href": "/fpsak/api/behandling/arbeidsgivere-opplysninger?uuid=2cce9c56-ea09-44cc-9003-50697afb28e1",
+      "href": "/fpsak/api/behandling/arbeidsgivere-opplysninger?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
       "rel": "arbeidsgivere-oversikt",
       "requestPayload": null,
       "type": "GET"
     },
     {
-      "href": "/fpsak/api/behandling/inntektsmeldinger-alle?uuid=2cce9c56-ea09-44cc-9003-50697afb28e1",
+      "href": "/fpsak/api/behandling/inntektsmeldinger-alle?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
       "rel": "inntektsmeldinger",
       "requestPayload": null,
       "type": "GET"
     },
     {
-      "href": "/fpsak/api/behandling/ytelsefordeling?uuid=2cce9c56-ea09-44cc-9003-50697afb28e1",
+      "href": "/fpsak/api/behandling/ytelsefordeling?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
       "rel": "ytelsefordeling",
       "requestPayload": null,
       "type": "GET"
     },
     {
-      "href": "/fpsak/api/behandling/opptjening?uuid=2cce9c56-ea09-44cc-9003-50697afb28e1",
+      "href": "/fpsak/api/behandling/opptjening?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
       "rel": "opptjening",
       "requestPayload": null,
       "type": "GET"
     },
     {
-      "href": "/fpsak/api/behandling/feriepengegrunnlag?uuid=2cce9c56-ea09-44cc-9003-50697afb28e1",
+      "href": "/fpsak/api/behandling/feriepengegrunnlag?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
       "rel": "feriepengegrunnlag",
       "requestPayload": null,
       "type": "GET"
     },
     {
-      "href": "/fpsak/api/behandling/beregningsgrunnlag?uuid=2cce9c56-ea09-44cc-9003-50697afb28e1",
-      "rel": "beregningsgrunnlag",
-      "requestPayload": null,
-      "type": "GET"
-    },
-    {
-      "href": "/fpsak/api/behandling/uttak/fakta-arbeidsforhold?uuid=2cce9c56-ea09-44cc-9003-50697afb28e1",
-      "rel": "fakta-arbeidsforhold",
-      "requestPayload": null,
-      "type": "GET"
-    },
-    {
-      "href": "/fpsak/api/behandling/arbeid-inntektsmelding?uuid=2cce9c56-ea09-44cc-9003-50697afb28e1",
+      "href": "/fpsak/api/behandling/arbeid-inntektsmelding?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
       "rel": "arbeidsforhold-inntektsmelding",
       "requestPayload": null,
       "type": "GET"
@@ -339,7 +327,7 @@
       "type": "POST"
     },
     {
-      "href": "/fpsak/api/behandling/uttak/kontroller-fakta-perioder-v2?uuid=2cce9c56-ea09-44cc-9003-50697afb28e1",
+      "href": "/fpsak/api/behandling/uttak/kontroller-fakta-perioder-v2?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
       "rel": "uttak-kontroller-fakta-perioder-v2",
       "requestPayload": null,
       "type": "GET"
@@ -348,11 +336,11 @@
   "ansvarligBeslutter": null,
   "aksjonspunkt": [
     {
-      "definisjon": "5058",
+      "definisjon": "5021",
       "status": "OPPR",
       "begrunnelse": null,
-      "vilkarType": null,
-      "toTrinnsBehandling": true,
+      "vilkarType": "FP_VK_2",
+      "toTrinnsBehandling": false,
       "toTrinnsBehandlingGodkjent": null,
       "vurderPaNyttArsaker": null,
       "besluttersBegrunnelse": null,
@@ -364,25 +352,9 @@
       "endretAv": null
     },
     {
-      "definisjon": "5021",
-      "status": "UTFO",
-      "begrunnelse": null,
-      "vilkarType": "FP_VK_2",
-      "toTrinnsBehandling": true,
-      "toTrinnsBehandlingGodkjent": null,
-      "vurderPaNyttArsaker": null,
-      "besluttersBegrunnelse": null,
-      "aksjonspunktType": "MANU",
-      "kanLoses": false,
-      "erAktivt": true,
-      "fristTid": null,
-      "endretTidspunkt": "2023-06-06T09:51:20.017",
-      "endretAv": "saksbeh"
-    },
-    {
       "definisjon": "5004",
       "status": "UTFO",
-      "begrunnelse": "asdfasfd",
+      "begrunnelse": "sdf",
       "vilkarType": "FP_VK_4",
       "toTrinnsBehandling": false,
       "toTrinnsBehandlingGodkjent": null,
@@ -392,7 +364,7 @@
       "kanLoses": false,
       "erAktivt": true,
       "fristTid": null,
-      "endretTidspunkt": "2023-06-06T09:51:12.524",
+      "endretTidspunkt": "2023-06-09T11:04:19.678",
       "endretAv": "saksbeh"
     }
   ],

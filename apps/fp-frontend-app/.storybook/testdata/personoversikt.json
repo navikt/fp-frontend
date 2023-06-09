@@ -1,13 +1,13 @@
 {
   "bruker": {
-    "fnr": "30498029066",
-    "aktoerId": "9930498029066",
+    "fnr": "02439132852",
+    "aktoerId": "9902439132852",
     "diskresjonskode": "UDEF",
-    "navn": "Flaggermus Alexandra",
+    "navn": "Hjort Brit",
     "kjønn": "K",
     "sivilstand": "GIFT",
     "dødsdato": null,
-    "fødselsdato": "1973-06-06",
+    "fødselsdato": "1973-06-09",
     "adresser": [
       {
         "adresseType": "BOSTEDSADRESSE",
@@ -21,14 +21,14 @@
     ]
   },
   "annenPart": {
-    "fnr": "21478144609",
-    "aktoerId": "9921478144609",
+    "fnr": "16488918099",
+    "aktoerId": "9916488918099",
     "diskresjonskode": "UDEF",
-    "navn": "Flaggermus Ketil",
+    "navn": "Hjort Gabriel",
     "kjønn": "M",
     "sivilstand": "UGIF",
     "dødsdato": null,
-    "fødselsdato": "1973-06-06",
+    "fødselsdato": "1973-06-09",
     "adresser": [
       {
         "adresseType": "BOSTEDSADRESSE",
@@ -43,14 +43,14 @@
   },
   "barn": [
     {
-      "fnr": "03422390579",
-      "aktoerId": "9903422390579",
+      "fnr": "26452158468",
+      "aktoerId": "9926452158468",
       "diskresjonskode": "UDEF",
       "navn": "Duck Ole",
-      "kjønn": "M",
+      "kjønn": "K",
       "sivilstand": "UGIF",
       "dødsdato": null,
-      "fødselsdato": "2023-06-04",
+      "fødselsdato": "2023-06-07",
       "adresser": [
         {
           "adresseType": "BOSTEDSADRESSE",

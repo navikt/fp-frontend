@@ -1,0 +1,47 @@
+{
+  "oppgitt": {
+    "@type": "AvklartDataAdopsjonDto",
+    "mannAdoptererAlene": null,
+    "ektefellesBarn": false,
+    "omsorgsovertakelseDato": "2023-06-07",
+    "ankomstNorge": "2023-06-07",
+    "adopsjonFodelsedatoer": {
+      "1": "2023-06-07"
+    },
+    "fødselsdatoer": {
+      "1": "2023-06-07"
+    },
+    "soknadType": "ST-002",
+    "skjaringstidspunkt": null
+  },
+  "gjeldende": {
+    "@type": "AvklartDataAdopsjonDto",
+    "mannAdoptererAlene": null,
+    "ektefellesBarn": false,
+    "omsorgsovertakelseDato": "2023-06-07",
+    "ankomstNorge": "2023-06-07",
+    "adopsjonFodelsedatoer": {
+      "1": "2023-06-07"
+    },
+    "fødselsdatoer": {
+      "1": "2023-06-07"
+    },
+    "soknadType": "ST-002",
+    "skjaringstidspunkt": null
+  },
+  "register": {
+    "@type": "AvklartDataAdopsjonDto",
+    "mannAdoptererAlene": null,
+    "ektefellesBarn": false,
+    "omsorgsovertakelseDato": "2023-06-07",
+    "ankomstNorge": "2023-06-07",
+    "adopsjonFodelsedatoer": {
+      "1": "2023-06-07"
+    },
+    "fødselsdatoer": {
+      "1": "2023-06-07"
+    },
+    "soknadType": "ST-002",
+    "skjaringstidspunkt": null
+  }
+}
