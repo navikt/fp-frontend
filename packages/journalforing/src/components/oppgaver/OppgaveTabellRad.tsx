@@ -1,8 +1,9 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Button, Table } from '@navikt/ds-react';
+import { Button, Table, Tag } from '@navikt/ds-react';
 import { ChevronRightIcon } from '@navikt/aksel-icons';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
+import { NavAnsatt } from '@navikt/fp-types';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import { finnYtelseTekst } from '../journalpost/innhold/VelgSakForm';
 
@@ -11,9 +12,10 @@ import styles from './oppgaveTabellRad.module.css';
 type OwnProps = Readonly<{
   oppgave: OppgaveOversikt;
   setValgtOppgave: (oppgave: OppgaveOversikt) => void;
+  navAnsatt: NavAnsatt
 }>;
 
-const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgave }) => {
+const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgave, navAnsatt }) => {
   const setOppgave = useCallback(() => {
     setValgtOppgave(oppgave);
   }, []);
@@ -26,6 +28,18 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
         <FormattedMessage id={finnYtelseTekst(oppgave.ytelseType)} />
       </Table.DataCell>
       <Table.DataCell>{oppgave.beskrivelse}</Table.DataCell>
+      <Table.DataCell>
+        {oppgave.reservertAv && navAnsatt.brukernavn === oppgave.reservertAv && (
+          <Tag variant="info-moderate">
+            <FormattedMessage id='Oppgavetabell.Meg' />
+          </Tag>
+        )}
+        {oppgave.reservertAv && navAnsatt.brukernavn !== oppgave.reservertAv && (
+          <Tag variant="neutral-moderate">
+            {oppgave.reservertAv}
+          </Tag>
+        )}
+      </Table.DataCell>
       <Table.DataCell>{oppgave.fødselsnummer}</Table.DataCell>
       <Table.DataCell>
         <DateLabel dateString={oppgave.frist} />
