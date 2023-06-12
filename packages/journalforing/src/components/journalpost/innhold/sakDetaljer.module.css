@@ -22,8 +22,8 @@
   width: 10%;
 }
 
-.clipBoard {
-  margin-top: -4px;
+.clipBoard > button {
+  padding: 0;
 }
 
 .newTabIcon {
@@ -31,7 +31,7 @@
   width: 32px;
 }
 
-.sakLenke>button {
+.sakLenke > button {
   padding: 8px;
 }
 

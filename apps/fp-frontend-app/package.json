@@ -133,8 +133,8 @@
     "react-modal": "3.16.1",
     "react-popper": "2.3.0",
     "react-responsive": "9.0.2",
-    "react-router": "6.12.0",
-    "react-router-dom": "6.12.0",
+    "react-router": "6.12.1",
+    "react-router-dom": "6.12.1",
     "rollup-plugin-sourcemaps": "0.6.3",
     "vis-data": "7.1.6",
     "vis-timeline": "7.7.2"
@@ -154,6 +154,6 @@
     "stylelint": "15.7.0",
     "typescript": "5.0.4",
     "vite": "4.3.9",
-    "vitest": "0.31.4"
+    "vitest": "0.32.0"
   }
 }
