@@ -203,8 +203,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
       setTabellData(data);
       // @ts-ignore Fiks
       settÅpneRadIndexer(finnUløstArbeidsforholdIndex(data(tabellRader)));
-      // TODO Fiks denne, kutter bort øverste del av skjermbildet
-      // tableRef?.current?.scrollIntoView();
+      tableRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
     },
     [tabellRader],
   );
