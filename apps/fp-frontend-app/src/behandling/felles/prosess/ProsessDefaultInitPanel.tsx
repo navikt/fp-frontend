@@ -5,7 +5,6 @@ import { RestKey } from '@navikt/fp-rest-api';
 import { StandardProsessPanelProps } from '@navikt/fp-types';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 
-import { vilkarUtfallType } from '@navikt/fp-kodeverk';
 import ProsessPanelInitProps from '../typer/prosessPanelInitProps';
 import useStandardProsessPanelProps from './useStandardProsessPanelProps';
 import useProsessMenyRegistrerer from './useProsessMenyRegistrerer';
@@ -64,9 +63,8 @@ const ProsessDefaultInitPanel = <PANEL_DATA = void,>({
   const { data: panelData, state: panelDataState } = restBehandlingApiHooks.useMultipleRestApi<PANEL_DATA, any>(
     formatertePanelEndepunkter,
     {
-      updateTriggers: [erPanelValgt, behandling.versjon, status],
-      suspendRequest:
-        !erPanelValgt || formatertePanelEndepunkter.length === 0 || status === vilkarUtfallType.IKKE_VURDERT,
+      updateTriggers: [erPanelValgt, behandling.versjon],
+      suspendRequest: !erPanelValgt || formatertePanelEndepunkter.length === 0,
       isCachingOn: true,
     },
   );
