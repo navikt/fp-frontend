@@ -66,9 +66,8 @@ const Snakkeboble: FunctionComponent<OwnProps> = ({ dato, aktoer, kjoenn, rolleN
       position={utledPlassering(aktoer)}
       toptextPosition="left"
       backgroundColor={BAKGRUNNSFARGER[aktoer]}
-      className={styles.width}
     >
-      <Chat.Bubble>{children}</Chat.Bubble>
+      <Chat.Bubble className={styles.width}>{children}</Chat.Bubble>
     </Chat>
   </div>
 );

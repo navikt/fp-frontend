@@ -9,6 +9,6 @@
 .margin {
   margin-bottom: 15px;
 }
-.width :global(.navds-chat__bubble) {
+.width {
   width: 300px;
 }
