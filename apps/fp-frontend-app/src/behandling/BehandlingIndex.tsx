@@ -57,47 +57,44 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   const fagsak = fagsakData.getFagsak();
   const rettigheter = useMemo(
     () => getAccessRights(initFetchData.innloggetBruker, fagsak.status, behandling?.status, behandling?.type),
-    [fagsak.status, behandlingUuid, behandling?.status, behandling?.type],
+    [fagsak.status, behandling?.uuid, behandling?.status, behandling?.type],
   );
 
-  if (!behandlingUuid) {
+  if (!behandling) {
     return <LoadingPanel />;
   }
 
-  if (behandling) {
-    if (behandling.erAktivPapirsoknad) {
-      return (
-        <Suspense fallback={<LoadingPanel />}>
-          <ErrorBoundary errorMessageCallback={addErrorMessage}>
-            <BehandlingPapirsoknadIndex
-              key={behandlingUuid}
-              behandling={behandling}
-              setBehandling={setBehandling}
-              kodeverk={kodeverk}
-              fagsak={fagsak}
-              rettigheter={rettigheter}
-            />
-          </ErrorBoundary>
-        </Suspense>
-      );
-    }
+  if (behandling.erAktivPapirsoknad) {
     return (
-      <ErrorBoundary errorMessageCallback={addErrorMessage}>
-        <BehandlingPanelerIndex
-          key={behandlingUuid}
-          behandling={behandling}
-          kodeverk={kodeverk}
-          fagsak={fagsak}
-          rettigheter={rettigheter}
-          setBehandling={setBehandling}
-          hentOgSettBehandling={hentOgSettBehandling}
-          alleBehandlinger={fagsakData.getAlleBehandlinger()}
-        />
-      </ErrorBoundary>
+      <Suspense fallback={<LoadingPanel />}>
+        <ErrorBoundary errorMessageCallback={addErrorMessage}>
+          <BehandlingPapirsoknadIndex
+            key={behandling.uuid}
+            behandling={behandling}
+            setBehandling={setBehandling}
+            kodeverk={kodeverk}
+            fagsak={fagsak}
+            rettigheter={rettigheter}
+          />
+        </ErrorBoundary>
+      </Suspense>
     );
   }
 
-  return null;
+  return (
+    <ErrorBoundary errorMessageCallback={addErrorMessage}>
+      <BehandlingPanelerIndex
+        key={behandling.uuid}
+        behandling={behandling}
+        kodeverk={kodeverk}
+        fagsak={fagsak}
+        rettigheter={rettigheter}
+        setBehandling={setBehandling}
+        hentOgSettBehandling={hentOgSettBehandling}
+        alleBehandlinger={fagsakData.getAlleBehandlinger()}
+      />
+    </ErrorBoundary>
+  );
 };
 
 export default BehandlingIndex;

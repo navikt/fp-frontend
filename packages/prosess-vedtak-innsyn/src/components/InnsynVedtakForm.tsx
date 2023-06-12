@@ -86,7 +86,7 @@ type FormValues = {
 
 const buildInitialValues = (innsynMottattDato: string, aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   mottattDato: innsynMottattDato,
-  begrunnelse: aksjonspunkter.find(ap => ap.definisjon === AksjonspunktCode.FORESLA_VEDTAK).begrunnelse,
+  begrunnelse: aksjonspunkter.find(ap => ap.definisjon === AksjonspunktCode.FORESLA_VEDTAK)?.begrunnelse,
 });
 
 const transformValues = (values: FormValues): ForeslaVedtakAp => ({
