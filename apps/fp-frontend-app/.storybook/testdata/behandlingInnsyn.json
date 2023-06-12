@@ -1,0 +1,163 @@
+{
+  "id": 999952,
+  "uuid": "2faa241e-7861-4207-991d-eee84443bab4",
+  "versjon": 3,
+  "type": "BT-006",
+  "status": "UTRED",
+  "fagsakId": 999951,
+  "opprettet": "2023-06-12T09:47:06",
+  "avsluttet": null,
+  "endret": "2023-06-12T09:47:07.212",
+  "endretAvBrukernavn": "srvfpsak",
+  "behandlendeEnhetId": "4806",
+  "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Drammen",
+  "erAktivPapirsoknad": false,
+  "førsteÅrsak": null,
+  "behandlingsfristTid": "2023-06-19",
+  "gjeldendeVedtak": false,
+  "erPaaVent": false,
+  "originalVedtaksDato": null,
+  "behandlingHenlagt": false,
+  "behandlingPaaVent": false,
+  "behandlingPåVent": false,
+  "fristBehandlingPåVent": null,
+  "fristBehandlingPaaVent": null,
+  "venteÅrsakKode": null,
+  "venteArsakKode": null,
+  "sprakkode": "NB",
+  "språkkode": "NB",
+  "behandlingKøet": false,
+  "ansvarligSaksbehandler": null,
+  "toTrinnsBehandling": false,
+  "behandlingsresultat": null,
+  "behandlingÅrsaker": [],
+  "vilkår": [],
+  "links": [
+    {
+      "href": "/fpsak/api/fagsak?saksnummer=1",
+      "rel": "fagsak",
+      "requestPayload": null,
+      "type": "GET"
+    },
+    {
+      "href": "/fpsak/api/behandlinger/bytt-enhet",
+      "rel": "bytt-behandlende-enhet",
+      "requestPayload": {
+        "behandlingUuid": null,
+        "enhetNavn": null,
+        "enhetId": null,
+        "begrunnelse": null,
+        "behandlingVersjon": null
+      },
+      "type": "POST"
+    },
+    {
+      "href": "/fpsak/api/behandlinger/henlegg",
+      "rel": "henlegg-behandling",
+      "requestPayload": {
+        "behandlingUuid": null,
+        "årsakKode": null,
+        "begrunnelse": null,
+        "behandlingVersjon": null
+      },
+      "type": "POST"
+    },
+    {
+      "href": "/fpsak/api/behandlinger/gjenoppta",
+      "rel": "gjenoppta-behandling",
+      "requestPayload": {
+        "behandlingUuid": null,
+        "behandlingVersjon": null
+      },
+      "type": "POST"
+    },
+    {
+      "href": "/fpsak/api/behandlinger/sett-pa-vent",
+      "rel": "sett-behandling-pa-vent",
+      "requestPayload": {
+        "behandlingUuid": null,
+        "behandlingVersjon": null,
+        "frist": null,
+        "ventearsak": null
+      },
+      "type": "POST"
+    },
+    {
+      "href": "/fpsak/api/behandlinger/endre-pa-vent",
+      "rel": "endre-pa-vent",
+      "requestPayload": {
+        "behandlingUuid": null,
+        "behandlingVersjon": null,
+        "frist": null,
+        "ventearsak": null
+      },
+      "type": "POST"
+    },
+    {
+      "href": "/fpsak/api/behandling/aksjonspunkt",
+      "rel": "lagre-aksjonspunkter",
+      "requestPayload": {
+        "behandlingUuid": null,
+        "behandlingVersjon": null,
+        "bekreftedeAksjonspunktDtoer": null
+      },
+      "type": "POST"
+    },
+    {
+      "href": "/fpsak/api/verge/opprett",
+      "rel": "opprett-verge",
+      "requestPayload": {},
+      "type": "POST"
+    },
+    {
+      "href": "/fpsak/api/verge/fjern",
+      "rel": "fjern-verge",
+      "requestPayload": {},
+      "type": "POST"
+    },
+    {
+      "href": "/fpsak/api/behandling/aksjonspunkt-v2?uuid=2faa241e-7861-4207-991d-eee84443bab4",
+      "rel": "aksjonspunkter",
+      "requestPayload": null,
+      "type": "GET"
+    },
+    {
+      "href": "/fpsak/api/behandling/innsyn?uuid=2faa241e-7861-4207-991d-eee84443bab4",
+      "rel": "innsyn",
+      "requestPayload": null,
+      "type": "GET"
+    },
+    {
+      "href": "/fpsak/api/dokument/hent-dokumentliste?uuid=2faa241e-7861-4207-991d-eee84443bab4",
+      "rel": "dokumenter",
+      "requestPayload": null,
+      "type": "GET"
+    }
+  ],
+  "ansvarligBeslutter": null,
+  "aksjonspunkt": [
+    {
+      "definisjon": "5037",
+      "status": "OPPR",
+      "begrunnelse": null,
+      "vilkarType": null,
+      "toTrinnsBehandling": false,
+      "toTrinnsBehandlingGodkjent": null,
+      "vurderPaNyttArsaker": null,
+      "besluttersBegrunnelse": null,
+      "aksjonspunktType": "MANU",
+      "kanLoses": true,
+      "erAktivt": true,
+      "fristTid": null,
+      "endretTidspunkt": null,
+      "endretAv": null
+    }
+  ],
+  "harSøknad": false,
+  "harRegisterdata": false,
+  "harSattEndringsdato": false,
+  "alleUttaksperioderAvslått": false,
+  "sjekkSimuleringResultat": false,
+  "taskStatus": null,
+  "behandlingKoet": false
+}

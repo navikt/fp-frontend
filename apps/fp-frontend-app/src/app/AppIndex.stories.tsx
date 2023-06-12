@@ -12,11 +12,15 @@ import fagsakFullData from '../../.storybook/testdata/fagsakFull.json';
 import fagsakFullTilbakeData from '../../.storybook/testdata/fagsakFullTilbake.json';
 import behandlingV1Data from '../../.storybook/testdata/behandlingV1.json';
 import behandlingV2Data from '../../.storybook/testdata/behandlingV2.json';
+import behandlingInnsynData from '../../.storybook/testdata/behandlingInnsyn.json';
 import arbeidsgiverOpplysningerData from '../../.storybook/testdata/arbeidsgiverOpplysninger.json';
 import personoversiktData from '../../.storybook/testdata/personoversikt.json';
 import soknadData from '../../.storybook/testdata/soknad.json';
 import familiehendelseData from '../../.storybook/testdata/familiehendelse.json';
+import arbeidOgInntektData from '../../.storybook/testdata/arbeidOgInntekt.json';
 import dokumenterData from '../../.storybook/testdata/dokumenter.json';
+import medlemskapData from '../../.storybook/testdata/medlemskap.json';
+import inntektArbeidYtelseData from '../../.storybook/testdata/inntektArbeidYtelse.json';
 import { requestFagsakApi } from '../data/fagsakContextApi';
 import { requestBehandlingApi } from '../data/behandlingContextApi';
 
@@ -25,7 +29,13 @@ export default {
   component: AppIndex,
 };
 
-const Template: StoryFn = () => {
+const Template: StoryFn<{
+  bekreftAdopsjon: boolean;
+  nyBehandling: boolean;
+}> = ({ bekreftAdopsjon = false, nyBehandling = false }) => {
+  const fagsakId = '3';
+  const behandlingUuid = '7d198233-b499-4aaf-a01b-be97958e20ce';
+
   const apiMockFagsak = new MockAdapter(requestFagsakApi.getAxios());
   const apiMockBehandling = new MockAdapter(requestBehandlingApi.getAxios());
 
@@ -39,28 +49,44 @@ const Template: StoryFn = () => {
   apiMockFagsak.onGet('/fpsak/api/dokument/hent-dokumentliste').replyOnce(200, dokumenterData);
 
   apiMockBehandling.onPost('/fpsak/api/behandlinger').replyOnce(200, behandlingV1Data);
+
   apiMockBehandling
-    .onGet('/fpsak/api/behandling/arbeidsgivere-opplysninger?uuid=7d198233-b499-4aaf-a01b-be97958e20ce')
+    .onGet(`/fpsak/api/behandling/arbeidsgivere-opplysninger?uuid=${behandlingUuid}`)
     .reply(200, arbeidsgiverOpplysningerData);
   apiMockBehandling
-    .onGet('/fpsak/api/behandling/person/personoversikt?uuid=7d198233-b499-4aaf-a01b-be97958e20ce')
+    .onGet(`/fpsak/api/behandling/person/personoversikt?uuid=${behandlingUuid}`)
     .reply(200, personoversiktData);
   apiMockBehandling
-    .onGet('/fpsak/api/behandling/familiehendelse/v2?uuid=7d198233-b499-4aaf-a01b-be97958e20ce')
+    .onGet(`/fpsak/api/behandling/familiehendelse/v2?uuid=${behandlingUuid}`)
     .reply(200, familiehendelseData);
+  apiMockBehandling.onGet(`/fpsak/api/behandling/soknad?uuid=${behandlingUuid}`).reply(200, soknadData);
   apiMockBehandling
-    .onGet('/fpsak/api/behandling/soknad?uuid=7d198233-b499-4aaf-a01b-be97958e20ce')
-    .reply(200, soknadData);
-  // apiMockBehandling
-  //   .onGet('/fpsak/api/behandling/beregningsgrunnlag?uuid=2cce9c56-ea09-44cc-9003-50697afb28e1')
-  //   .reply(200, beregningsgrunnlagData);
+    .onGet(`/fpsak/api/behandling/arbeid-inntektsmelding?uuid=${behandlingUuid}`)
+    .reply(200, arbeidOgInntektData);
+  apiMockBehandling
+    .onGet(`/fpsak/api/behandling/inntekt-arbeid-ytelse?uuid=${behandlingUuid}`)
+    .reply(200, inntektArbeidYtelseData);
 
-  apiMockBehandling.onPost('/fpsak/api/behandling/aksjonspunkt').replyOnce(200, behandlingV2Data);
-  apiMockFagsak.onGet('/fpsak/api/fagsak/full').replyOnce(200, fagsakFullData);
+  if (bekreftAdopsjon) {
+    // Bekreft Fakta-Adopsjon
+    apiMockBehandling.onPost('/fpsak/api/behandling/aksjonspunkt').replyOnce(200, behandlingV2Data);
+    apiMockBehandling.onPost('/fpsak/api/behandlinger').replyOnce(200, behandlingV2Data);
+    apiMockFagsak.onGet('/fpsak/api/fagsak/full').replyOnce(200, fagsakFullData);
+    apiMockFagsak.onGet('/fptilbake/api/behandlinger/fagsak-full').replyOnce(200, fagsakFullTilbakeData);
+    apiMockBehandling
+      .onGet(`/fpsak/api/behandling/person/medlemskap-v2?uuid=${behandlingUuid}`)
+      .replyOnce(200, medlemskapData);
+  }
+
+  if (nyBehandling) {
+    // Opprett Innsynsbehandling
+    apiMockBehandling.onPut('/fpsak/api/behandlinger').replyOnce(200, behandlingInnsynData);
+    apiMockBehandling.onGet('/fpsak/api/behandlinger').replyOnce(200, behandlingInnsynData);
+  }
 
   return (
     <div>
-      <MemoryRouter initialEntries={['/fagsak/3']}>
+      <MemoryRouter initialEntries={[`/fagsak/${fagsakId}`]}>
         <RestApiProvider>
           <RestApiErrorProvider>
             <AppIndex />
@@ -71,4 +97,12 @@ const Template: StoryFn = () => {
   );
 };
 
-export const Default = Template.bind({});
+export const BekreftAdopsjon = Template.bind({});
+BekreftAdopsjon.args = {
+  bekreftAdopsjon: true,
+};
+
+export const NyBehandling = Template.bind({});
+NyBehandling.args = {
+  nyBehandling: true,
+};
