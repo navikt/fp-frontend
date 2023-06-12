@@ -1,5 +1,6 @@
 module.exports = {
   plugins: ['stylelint-order'],
+  extends: ['@navikt/aksel-stylelint/recommended'],
   rules: {
     'at-rule-empty-line-before': [
       'always',
@@ -8,10 +9,7 @@ module.exports = {
         ignore: ['after-comment'],
       },
     ],
-    'order/order': [
-      'custom-properties',
-      'declarations',
-    ],
+    'order/order': ['custom-properties', 'declarations'],
     'order/properties-alphabetical-order': true,
     'color-hex-length': 'short',
     'comment-empty-line-before': [

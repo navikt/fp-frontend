@@ -2450,6 +2450,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@navikt/aksel-stylelint@npm:^4.1.3":
+  version: 4.1.3
+  resolution: "@navikt/aksel-stylelint@npm:4.1.3::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-stylelint%2F4.1.3%2F536d7287a2034232a3bafc8acaa789539dfe0869"
+  checksum: 5bc6ca80a6420800df08eab6eda51d4442210342a8a254958a475948d473ecb4cb643733e152cdca697a48c932532fd6b8a1743533598697bef8414532867abf
+  languageName: node
+  linkType: hard
+
 "@navikt/ds-codemod@npm:3.4.2":
   version: 3.4.2
   resolution: "@navikt/ds-codemod@npm:3.4.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-codemod%2F3.4.2%2F7dfd27abc895f0e6c224d65799730279c5307b18"
@@ -12655,6 +12662,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "fp-frontend@workspace:."
   dependencies:
+    "@navikt/aksel-stylelint": ^4.1.3
     "@navikt/ds-codemod": 3.4.2
     "@sentry/cli": 2.18.1
     "@storybook/addon-essentials": 7.0.20
@@ -12695,7 +12703,7 @@ __metadata:
     lerna: 6.6.2
     lint-staged: 13.2.2
     react-test-renderer: 18.2.0
-    stylelint: 15.7.0
+    stylelint: ^15.7.0
     stylelint-order: 6.0.3
     typescript: 5.0.4
     vite: 4.3.9
@@ -20324,7 +20332,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint@npm:15.7.0":
+"stylelint@npm:15.7.0, stylelint@npm:^15.7.0":
   version: 15.7.0
   resolution: "stylelint@npm:15.7.0"
   dependencies:
