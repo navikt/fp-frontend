@@ -5,6 +5,7 @@ import { RestKey } from '@navikt/fp-rest-api';
 import { StandardProsessPanelProps } from '@navikt/fp-types';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 
+import { vilkarUtfallType } from '@navikt/fp-kodeverk';
 import ProsessPanelInitProps from '../typer/prosessPanelInitProps';
 import useStandardProsessPanelProps from './useStandardProsessPanelProps';
 import useProsessMenyRegistrerer from './useProsessMenyRegistrerer';
@@ -45,7 +46,9 @@ const ProsessDefaultInitPanel = <PANEL_DATA = void,>({
 
   const status = hentOverstyrtStatus ? hentOverstyrtStatus(standardPanelProps) : standardPanelProps.status;
 
-  const skalMarkeresSomAktiv = hentSkalMarkeresSomAktiv && hentSkalMarkeresSomAktiv(standardPanelProps);
+  const skalMarkeresSomAktiv =
+    hentSkalMarkeresSomAktiv && hentSkalMarkeresSomAktiv(standardPanelProps) && !behandling.behandlingHenlagt;
+
   const harApentAksjonspunkt = erOverstyrt || standardPanelProps.isAksjonspunktOpen;
 
   const erPanelValgt = useProsessMenyRegistrerer(
@@ -60,11 +63,16 @@ const ProsessDefaultInitPanel = <PANEL_DATA = void,>({
   );
 
   const formatertePanelEndepunkter = panelEndepunkter.map((e: any) => (e instanceof RestKey ? { key: e } : e));
+  const skalIkkeHenteData =
+    !erPanelValgt ||
+    formatertePanelEndepunkter.length === 0 ||
+    (status === vilkarUtfallType.IKKE_VURDERT && !harApentAksjonspunkt);
+
   const { data: panelData, state: panelDataState } = restBehandlingApiHooks.useMultipleRestApi<PANEL_DATA, any>(
     formatertePanelEndepunkter,
     {
-      updateTriggers: [erPanelValgt, behandling.versjon],
-      suspendRequest: !erPanelValgt || formatertePanelEndepunkter.length === 0,
+      updateTriggers: [erPanelValgt, behandling.versjon, status, harApentAksjonspunkt],
+      suspendRequest: skalIkkeHenteData,
       isCachingOn: true,
     },
   );
