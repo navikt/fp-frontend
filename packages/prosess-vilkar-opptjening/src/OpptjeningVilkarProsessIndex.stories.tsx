@@ -48,7 +48,8 @@ const Template: StoryFn<{
   submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
   aksjonspunkter: Aksjonspunkt[];
   opptjening: Opptjening;
-}> = ({ submitCallback, aksjonspunkter, opptjening }) => (
+  erSvp?: boolean;
+}> = ({ submitCallback, aksjonspunkter, opptjening, erSvp = false }) => (
   <OpptjeningVilkarProsessIndex
     behandling={behandling}
     alleKodeverk={alleKodeverk as any}
@@ -63,11 +64,26 @@ const Template: StoryFn<{
     opptjening={opptjening}
     aksjonspunkter={aksjonspunkter}
     lovReferanse="§§Dette er en lovreferanse"
+    erSvpFagsak={erSvp}
   />
 );
 
 export const ÅpentAksjonspunkt = Template.bind({});
 ÅpentAksjonspunkt.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  opptjening: defaultOpptjening,
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.SVANGERSKAPSVILKARET,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+    },
+  ] as Aksjonspunkt[],
+};
+
+export const ÅpentAksjonspunktSvangerskapspenger = Template.bind({});
+ÅpentAksjonspunktSvangerskapspenger.args = {
+  erSvp: true,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   opptjening: defaultOpptjening,
   aksjonspunkter: [

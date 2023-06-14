@@ -14,6 +14,7 @@ const intl = createIntl(messages);
 interface OwnProps {
   opptjening: Opptjening;
   lovReferanse?: string;
+  erSvpFagsak?: boolean;
 }
 
 const OpptjeningVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
@@ -29,6 +30,7 @@ const OpptjeningVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsess
   alleMerknaderFraBeslutter,
   formData,
   setFormData,
+  erSvpFagsak = false,
 }) => (
   <RawIntlProvider value={intl}>
     <OpptjeningVilkarForm
@@ -44,6 +46,7 @@ const OpptjeningVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsess
       erIkkeGodkjentAvBeslutter={aksjonspunkter.some(a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted)}
       formData={formData}
       setFormData={setFormData}
+      erSvpFagsak={erSvpFagsak}
     />
   </RawIntlProvider>
 );
