@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 import moment from 'moment/moment';
-import { UseFormGetValues } from 'react-hook-form';
+import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Alert, Label } from '@navikt/ds-react';
 import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow, AvsnittSkiller } from '@navikt/ft-ui-komponenter';
@@ -16,7 +16,7 @@ import {
   maxValue,
   required,
 } from '@navikt/ft-form-validators';
-import { CheckboxField, Datepicker, InputField, SelectField, PeriodFieldArray, formHooks } from '@navikt/ft-form-hooks';
+import { CheckboxField, Datepicker, InputField, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
 import { KodeverkMedNavn } from '@navikt/ft-types';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
@@ -161,13 +161,13 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
     getValues,
     trigger,
     formState: { isSubmitted },
-  } = formHooks.useFormContext<{
+  } = useFormContext<{
     [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
       [GRADERING_PERIODE_FIELD_ARRAY_NAME]: FormValues;
     };
   }>();
 
-  const { fields, remove, append } = formHooks.useFieldArray({
+  const { fields, remove, append } = useFieldArray({
     control,
     name: `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}`,
   });

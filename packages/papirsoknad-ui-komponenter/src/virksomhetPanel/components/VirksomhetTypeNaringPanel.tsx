@@ -2,10 +2,11 @@ import React, { Fragment, FunctionComponent, useEffect, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Label, ErrorMessage } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
+import { CheckboxField } from '@navikt/ft-form-hooks';
 import { AlleKodeverk } from '@navikt/fp-types';
 import { naringsvirksomhetType, KodeverkType } from '@navikt/fp-kodeverk';
 import { isRequiredMessage } from '@navikt/ft-form-validators';
+import { useFormContext } from 'react-hook-form';
 
 const TYPE_VIRKSOMHET_PREFIX = 'typeVirksomhet';
 
@@ -52,7 +53,7 @@ const VirksomhetTypeNaringPanel: FunctionComponent<OwnProps> = ({ readOnly, alle
     [],
   );
 
-  const { watch, setError, formState, clearErrors } = formHooks.useFormContext<FormValues & VirtualErrorField>();
+  const { watch, setError, formState, clearErrors } = useFormContext<FormValues & VirtualErrorField>();
 
   const checkboxVerdier = watch(TYPE_VIRKSOMHET_PREFIX);
 

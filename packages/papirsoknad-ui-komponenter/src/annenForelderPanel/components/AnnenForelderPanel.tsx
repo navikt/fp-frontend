@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactElement, ReactNode, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
-import { CheckboxField, formHooks, InputField, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
+import { CheckboxField, InputField, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
@@ -13,6 +13,7 @@ import {
   sammeFodselsnummerSomSokerMessage,
 } from '@navikt/ft-form-validators';
 
+import { useFormContext } from 'react-hook-form';
 import styles from './annenForelderPanel.module.css';
 
 const ANNEN_FORELDER_NAME_PREFIX = 'annenForelder';
@@ -61,7 +62,7 @@ const AnnenForelderPanel: FunctionComponent<OwnProps> = ({
     watch,
     trigger,
     formState: { isSubmitted },
-  } = formHooks.useFormContext<{ [ANNEN_FORELDER_NAME_PREFIX]: FormValues }>();
+  } = useFormContext<{ [ANNEN_FORELDER_NAME_PREFIX]: FormValues }>();
 
   const kanIkkeOppgiAnnenForelder = watch(`${ANNEN_FORELDER_NAME_PREFIX}.kanIkkeOppgiAnnenForelder`);
   const kanIkkeOppgiBegrunnelse = watch(`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}`);

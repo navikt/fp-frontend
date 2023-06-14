@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { formHooks, InputField, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { InputField, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required, hasValidInteger, hasValidText } from '@navikt/ft-form-validators';
 
+import { useFormContext } from 'react-hook-form';
 import styles from './virksomhetRegnskapPanel.module.css';
 
 export type FormValues = {
@@ -23,7 +24,7 @@ interface OwnProps {
  * søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
 const VirksomhetRegnskapPanel: FunctionComponent<OwnProps> = ({ readOnly = true }) => {
-  const { watch } = formHooks.useFormContext<FormValues>();
+  const { watch } = useFormContext<FormValues>();
   const harRegnskapsforer = watch('harRegnskapsforer') || false;
 
   return (

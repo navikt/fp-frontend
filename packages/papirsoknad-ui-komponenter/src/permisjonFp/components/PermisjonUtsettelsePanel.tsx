@@ -1,12 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Label } from '@navikt/ds-react';
-import { formHooks, CheckboxField } from '@navikt/ft-form-hooks';
+import { CheckboxField } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AlleKodeverk } from '@navikt/fp-types';
 import { KodeverkType } from '@navikt/fp-kodeverk';
 
+import { useFormContext } from 'react-hook-form';
 import RenderUtsettelsePeriodeFieldArray, {
   UTSETTELSE_PERIODE_FIELD_ARRAY_NAME,
   TIDSROM_PERMISJON_FORM_NAME_PREFIX,
@@ -37,7 +38,7 @@ const PermisjonUtsettelsePanel: FunctionComponent<OwnProps> & StaticFunctions = 
   const utsettelseReasons = alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE];
   const utsettelseKvoter = alleKodeverk[KodeverkType.UTSETTELSE_GRADERING_KVOTE];
 
-  const { watch } = formHooks.useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
+  const { watch } = useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
   const skalUtsette = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalUtsette`) || false;
 
   return (

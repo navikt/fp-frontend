@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Label } from '@navikt/ds-react';
-import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
+import { CheckboxField } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { KodeverkType, arbeidskategori } from '@navikt/fp-kodeverk';
 import { AlleKodeverk } from '@navikt/fp-types';
 
+import { useFormContext } from 'react-hook-form';
 import RenderGraderingPeriodeFieldArray, {
   TIDSROM_PERMISJON_FORM_NAME_PREFIX,
   GRADERING_PERIODE_FIELD_ARRAY_NAME,
@@ -37,7 +38,7 @@ const PermisjonGraderingPanel: FunctionComponent<OwnProps> & StaticFunctions = (
   const graderingKvoter = alleKodeverk[KodeverkType.UTSETTELSE_GRADERING_KVOTE];
   const arbeidskategoriTyper = alleKodeverk[KodeverkType.ARBEIDSKATEGORI];
 
-  const { watch } = formHooks.useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
+  const { watch } = useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
   const skalGradere = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalGradere`) || false;
 
   return (

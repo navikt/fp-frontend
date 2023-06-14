@@ -4,11 +4,12 @@ import { Label, BodyShort, Detail } from '@navikt/ds-react';
 
 import { AlleKodeverk, Vilkar, Behandlingsresultat } from '@navikt/fp-types';
 import { vilkarUtfallType, behandlingStatus, getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
-import { TextAreaField, formHooks } from '@navikt/ft-form-hooks';
+import { TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { decodeHtmlEntity, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
+import { useFormContext } from 'react-hook-form';
 import { hasIkkeOppfyltSoknadsfristvilkar } from '../felles/VedtakHelper';
 
 import styles from './vedtakAvslagArsakOgBegrunnelsePanel.module.css';
@@ -57,7 +58,7 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
 }) => {
   const {
     formState: { isDirty },
-  } = formHooks.useFormContext();
+  } = useFormContext();
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
   const isRequiredFn = getIsBegrunnelseRequired(isDirty);

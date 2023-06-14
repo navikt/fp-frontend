@@ -13,28 +13,56 @@
     }
   },
   "namedInputs": {
-    "default": ["{projectRoot}/**/*"],
-    "prod": ["!{projectRoot}/**/*.spec.tsx"]
+    "default": [
+      "{projectRoot}/**/*"
+    ],
+    "prod": [
+      "!{projectRoot}/**/*.spec.tsx"
+    ],
+    "production": [
+      "default"
+    ]
   },
   "targetDefaults": {
     "test": {
-      "inputs": ["default", "^prod", "{workspaceRoot}/jest-config/jest.config.ts"],
-      "dependsOn": ["build"]
+      "inputs": [
+        "default",
+        "^prod",
+        "{workspaceRoot}/jest-config/jest.config.ts"
+      ],
+      "dependsOn": [
+        "build"
+      ]
     },
     "tsc": {
-      "inputs": ["default", "{workspaceRoot}/tsconfig.json"],
-      "dependsOn": ["build"]
+      "inputs": [
+        "default",
+        "{workspaceRoot}/tsconfig.json"
+      ],
+      "dependsOn": [
+        "build"
+      ]
     },
     "eslint": {
-      "inputs": ["default", "{workspaceRoot}/eslint/*.js"],
-      "dependsOn": ["build"]
+      "inputs": [
+        "default",
+        "{workspaceRoot}/eslint/*.js"
+      ],
+      "dependsOn": [
+        "build"
+      ]
     },
     "build": {
-      "inputs": ["prod"],
-      "dependsOn": ["^build"],
+      "inputs": [
+        "prod"
+      ],
+      "dependsOn": [
+        "^build"
+      ],
       "outputs": [
         "{projectRoot}/dist"
       ]
     }
-  }
+  },
+  "$schema": "./node_modules/nx/schemas/nx-schema.json"
 }

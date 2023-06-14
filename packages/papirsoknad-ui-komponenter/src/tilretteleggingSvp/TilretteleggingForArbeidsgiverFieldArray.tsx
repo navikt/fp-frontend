@@ -2,9 +2,10 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button } from '@navikt/ds-react';
 import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
-import { Datepicker, formHooks, InputField } from '@navikt/ft-form-hooks';
+import { Datepicker, InputField } from '@navikt/ft-form-hooks';
 import { required, hasValidOrgNumberOrFodselsnr, hasNoWhiteSpace } from '@navikt/ft-form-validators';
 
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import BehovForTilretteleggingFieldArray, {
   behovForTilretteleggingFieldArrayName,
 } from './BehovForTilretteleggingFieldArray';
@@ -35,10 +36,10 @@ interface OwnProps {
 const TilretteleggingForArbeidsgiverFieldArray: FunctionComponent<OwnProps> = ({ readOnly }) => {
   const intl = useIntl();
 
-  const { control } = formHooks.useFormContext<{
+  const { control } = useFormContext<{
     [TILRETTELEGGING_NAME_PREFIX]: { [tilretteleggingForArbeidsgiverFieldArrayName]: FormValues[] };
   }>();
-  const { fields, append } = formHooks.useFieldArray({
+  const { fields, append } = useFieldArray({
     control,
     name: `${TILRETTELEGGING_NAME_PREFIX}.${tilretteleggingForArbeidsgiverFieldArrayName}`,
   });

@@ -1,8 +1,8 @@
 import React, { FunctionComponent, ReactElement, useEffect, useCallback } from 'react';
 import { useIntl } from 'react-intl';
-import { UseFormGetValues } from 'react-hook-form';
+import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import { AvsnittSkiller, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Datepicker, SelectField, PeriodFieldArray, formHooks } from '@navikt/ft-form-hooks';
+import { Datepicker, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
 import { KodeverkMedNavn } from '@navikt/ft-types';
 
 import {
@@ -109,13 +109,13 @@ const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps> = ({
     getValues,
     trigger,
     formState: { isSubmitted },
-  } = formHooks.useFormContext<{
+  } = useFormContext<{
     [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
       [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: FormValues;
     };
   }>();
 
-  const { fields, remove, append } = formHooks.useFieldArray({
+  const { fields, remove, append } = useFieldArray({
     control,
     name: `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}`,
   });

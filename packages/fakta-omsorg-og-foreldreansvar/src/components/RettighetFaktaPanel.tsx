@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
-import { formHooks } from '@navikt/ft-form-hooks';
 
 import { AksjonspunktCode, relatertYtelseTilstand, KodeverkType } from '@navikt/fp-kodeverk';
 import { DateLabel, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { KodeverkMedNavn, RelatertTilgrensedYtelse, Soknad } from '@navikt/fp-types';
 
+import { useFormContext } from 'react-hook-form';
 import styles from './rettighetFaktaPanel.module.css';
 
 const getLopendeOrAvsluttetYtelser = (
@@ -40,7 +40,7 @@ const RettighetFaktaPanel: FunctionComponent<PureOwnProps> & StaticFunctions = (
   alleMerknaderFraBeslutter,
 }) => {
   const intl = useIntl();
-  const { watch } = formHooks.useFormContext();
+  const { watch } = useFormContext();
 
   const farSokerType = watch('farSokerType');
   const ytelser = watch('ytelser');

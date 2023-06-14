@@ -2,11 +2,12 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
+import { CheckboxField } from '@navikt/ft-form-hooks';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 import { overforingArsak, foreldreType as ForeldreType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
+import { useFormContext } from 'react-hook-form';
 import RenderOverforingAvKvoterFieldArray, {
   FormValues as KvoterPerioderFormValues,
   TIDSROM_PERMISJON_FORM_NAME_PREFIX,
@@ -79,7 +80,7 @@ const PermisjonOverforingAvKvoterPanel: FunctionComponent<OwnProps> & StaticFunc
   const overtaKvoteReasons = alleKodeverk[KodeverkType.OVERFOERING_AARSAK_TYPE];
   const selectValues = mapArsaker(overtaKvoteReasons, foreldreType === ForeldreType.MOR, erEndringssøknad, intl);
 
-  const { watch } = formHooks.useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
+  const { watch } = useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
   const skalOvertaKvote = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalOvertaKvote`) || false;
 
   return (

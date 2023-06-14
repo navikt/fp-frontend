@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { formHooks, Datepicker, InputField, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
+import { Datepicker, InputField, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { ArrowBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
   dateBeforeOrEqualToToday,
@@ -13,6 +13,7 @@ import {
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
+import { useFormContext } from 'react-hook-form';
 import styles from './virksomhetIdentifikasjonPanel.module.css';
 
 const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] =>
@@ -48,7 +49,7 @@ const VirksomhetIdentifikasjonPanel: FunctionComponent<OwnProps> = ({ readOnly =
     .slice()
     .sort((a, b) => a.navn.localeCompare(b.navn));
 
-  const { watch, getValues } = formHooks.useFormContext<FormValues>();
+  const { watch, getValues } = useFormContext<FormValues>();
 
   const virksomhetRegistrertINorge = watch('virksomhetRegistrertINorge');
 

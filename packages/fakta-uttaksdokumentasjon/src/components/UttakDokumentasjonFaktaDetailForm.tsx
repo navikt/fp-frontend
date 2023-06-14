@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { useForm } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
 import { BodyShort, Button, Label } from '@navikt/ds-react';
 import { required } from '@navikt/ft-form-validators';
 import { PencilIcon, ScissorsIcon } from '@navikt/aksel-icons';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { Form, formHooks, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
   AvsnittSkiller,
   DateLabel,
@@ -50,7 +50,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
     },
   });
 
-  const { fields, append, update, remove } = formHooks.useFieldArray({
+  const { fields, append, update, remove } = useFieldArray({
     control: formMethods.control,
     name: 'perioder',
   });
