@@ -3,15 +3,9 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { ErrorMessage, Label } from '@navikt/ds-react';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { hasValidDate, hasValidInteger, required, hasValidText } from '@navikt/ft-form-validators';
-import {
-  CheckboxField,
-  Datepicker,
-  InputField,
-  RadioGroupPanel,
-  TextAreaField,
-  formHooks,
-} from '@navikt/ft-form-hooks';
+import { CheckboxField, Datepicker, InputField, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 
+import { useFormContext } from 'react-hook-form';
 import styles from './virksomhetStartetEndretPanel.module.css';
 
 type VirtuellFeilType = {
@@ -41,7 +35,7 @@ interface OwnProps {
  */
 export const VirksomhetStartetEndretPanel: FunctionComponent<OwnProps> = ({ readOnly }) => {
   const intl = useIntl();
-  const { watch, setError, clearErrors, formState } = formHooks.useFormContext<FormValues & VirtuellFeilType>();
+  const { watch, setError, clearErrors, formState } = useFormContext<FormValues & VirtuellFeilType>();
   const varigEndretEllerStartetSisteFireAr = watch('varigEndretEllerStartetSisteFireAr') || false;
   const harVarigEndring = watch('harVarigEndring') || false;
   const erNyoppstartet = watch('erNyoppstartet') || false;

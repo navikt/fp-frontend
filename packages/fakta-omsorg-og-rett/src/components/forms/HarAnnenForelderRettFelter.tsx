@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { formHooks, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { useFormContext } from 'react-hook-form';
 
 type FormValues = {
   harAnnenForelderRett: boolean;
@@ -17,7 +18,7 @@ interface OwnProps {
 }
 
 const HarAnnenForelderRettFelter: FunctionComponent<OwnProps> = ({ readOnly, avklareUforetrygd, avklareRettEØS }) => {
-  const { watch } = formHooks.useFormContext<FormValues>();
+  const { watch } = useFormContext<FormValues>();
   const harAnnenForelderRett = watch('harAnnenForelderRett');
   const annenForelderRettEØS = watch('annenForelderRettEØS');
 

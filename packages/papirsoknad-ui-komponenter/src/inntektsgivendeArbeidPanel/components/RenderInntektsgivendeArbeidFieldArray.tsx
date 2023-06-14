@@ -2,10 +2,11 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { useIntl } from 'react-intl';
 import { maxLength, hasValidDate } from '@navikt/ft-form-validators';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Datepicker, InputField, SelectField, PeriodFieldArray, formHooks } from '@navikt/ft-form-hooks';
+import { Datepicker, InputField, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
 import { KodeverkType, landkoder as Landkode } from '@navikt/fp-kodeverk';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import styles from './renderInntektsgivendeArbeidFieldArray.module.css';
 
 const maxLength50 = maxLength(50);
@@ -48,8 +49,8 @@ interface OwnProps {
 const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps> = ({ alleKodeverk, readOnly }) => {
   const intl = useIntl();
 
-  const { control } = formHooks.useFormContext<{ [INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME]: FormValues[] }>();
-  const { fields, remove, append } = formHooks.useFieldArray({
+  const { control } = useFormContext<{ [INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME]: FormValues[] }>();
+  const { fields, remove, append } = useFieldArray({
     control,
     name: INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME,
   });

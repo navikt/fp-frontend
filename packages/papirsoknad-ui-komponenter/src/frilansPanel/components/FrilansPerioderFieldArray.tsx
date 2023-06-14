@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import { UseFormGetValues } from 'react-hook-form';
+import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Datepicker, formHooks, PeriodFieldArray } from '@navikt/ft-form-hooks';
+import { Datepicker, PeriodFieldArray } from '@navikt/ft-form-hooks';
 import { required, hasValidDate, dateBeforeOrEqual, dateAfterOrEqual } from '@navikt/ft-form-validators';
 
 import styles from './frilansPerioderFieldArray.module.css';
@@ -39,8 +39,8 @@ const FrilansPerioderFieldArray: FunctionComponent<OwnProps> = ({ readOnly }) =>
     getValues,
     formState: { isSubmitted },
     trigger,
-  } = formHooks.useFormContext<{ [FRILANS_NAME_PREFIX]: FormValues }>();
-  const { fields, remove, append } = formHooks.useFieldArray({
+  } = useFormContext<{ [FRILANS_NAME_PREFIX]: FormValues }>();
+  const { fields, remove, append } = useFieldArray({
     control,
     name: `${FRILANS_NAME_PREFIX}.perioder`,
   });

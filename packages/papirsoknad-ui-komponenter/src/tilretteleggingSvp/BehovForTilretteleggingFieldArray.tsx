@@ -2,10 +2,11 @@ import React, { FunctionComponent, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required, maxValue } from '@navikt/ft-form-validators';
-import { Datepicker, InputField, SelectField, PeriodFieldArray, formHooks } from '@navikt/ft-form-hooks';
+import { Datepicker, InputField, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
 
 import { tilretteleggingType } from '@navikt/fp-kodeverk';
 
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import styles from './behovForTilretteleggingFieldArray.module.css';
 
 const maxValue3 = maxValue(100);
@@ -39,8 +40,8 @@ interface OwnProps {
 const BehovForTilretteleggingFieldArray: FunctionComponent<OwnProps> = ({ readOnly, name }) => {
   const intl = useIntl();
 
-  const { control } = formHooks.useFormContext();
-  const { fields, remove, append } = formHooks.useFieldArray({
+  const { control } = useFormContext();
+  const { fields, remove, append } = useFieldArray({
     control,
     name,
   });

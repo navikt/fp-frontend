@@ -5,12 +5,13 @@ import { Label } from '@navikt/ds-react';
 import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@navikt/fp-fakta-felles';
 import { ArrowBox, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
-import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad, AvklartBarn } from '@navikt/fp-types';
 import { SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
+import { useFormContext } from 'react-hook-form';
 import AvklartBarnFieldArray from './AvklartBarnFieldArray';
 
 import styles from './SjekkFodselDokForm.module.css';
@@ -57,7 +58,7 @@ export const SjekkFodselDokForm: FunctionComponent<OwnProps> & StaticFunctions =
   familiehendelse,
 }) => {
   const intl = useIntl();
-  const { watch } = formHooks.useFormContext<FormValues>();
+  const { watch } = useFormContext<FormValues>();
   const { gjeldende, register } = familiehendelse;
 
   const dokumentasjonForeligger = watch('dokumentasjonForeligger') || false;

@@ -2,9 +2,9 @@ import React, { FunctionComponent, useCallback, useEffect, useState } from 'reac
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Label, BodyShort, Detail, ErrorMessage } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { formHooks } from '@navikt/ft-form-hooks';
 import { AlleKodeverk } from '@navikt/fp-types';
 
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import addCircleIcon from '../../images/add-circle.svg';
 import removeIcon from '../../images/remove.svg';
 
@@ -38,10 +38,10 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({ readOnly = fals
   const intl = useIntl();
   const [virksomhetIndex, setVirksomhetIndex] = useState<number>();
 
-  const { control, setError, formState, clearErrors } = formHooks.useFormContext<{
+  const { control, setError, formState, clearErrors } = useFormContext<{
     [EGEN_VIRKSOMHET_NAME_PREFIX]: FormValues & VirtueltValideringsfeilFelt;
   }>();
-  const { fields, remove, append, update } = formHooks.useFieldArray({
+  const { fields, remove, append, update } = useFieldArray({
     control,
     name: `${EGEN_VIRKSOMHET_NAME_PREFIX}.virksomheter`,
   });

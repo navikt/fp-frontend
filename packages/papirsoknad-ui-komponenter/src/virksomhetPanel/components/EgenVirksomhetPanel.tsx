@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
-import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
 import { AlleKodeverk } from '@navikt/fp-types';
 
+import { useFormContext } from 'react-hook-form';
 import RegistrerVirksomhetPanel, {
   EGEN_VIRKSOMHET_NAME_PREFIX,
   FormValues as VirksomhetFormValues,
@@ -29,7 +30,7 @@ interface OwnProps {
 const EgenVirksomhetPanel: FunctionComponent<OwnProps> = ({ readOnly = true, alleKodeverk }) => {
   const intl = useIntl();
 
-  const { watch } = formHooks.useFormContext<{ [EGEN_VIRKSOMHET_NAME_PREFIX]: FormValues }>();
+  const { watch } = useFormContext<{ [EGEN_VIRKSOMHET_NAME_PREFIX]: FormValues }>();
   const harArbeidetIEgenVirksomhet = watch(`${EGEN_VIRKSOMHET_NAME_PREFIX}.harArbeidetIEgenVirksomhet`) || null;
 
   return (

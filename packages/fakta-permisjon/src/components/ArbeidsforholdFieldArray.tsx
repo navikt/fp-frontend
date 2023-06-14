@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 
-import { formHooks } from '@navikt/ft-form-hooks';
 import {
   ArbeidOgInntektsmelding,
   AoIArbeidsforhold,
@@ -8,6 +7,7 @@ import {
   AlleKodeverk,
 } from '@navikt/fp-types';
 
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import ArbeidsforholdField from './ArbeidsforholdField';
 
 const FIELD_ARRAY_NAME = 'arbeidsforhold';
@@ -39,8 +39,8 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
   skjæringstidspunkt,
   alleKodeverk,
 }) => {
-  const { control } = formHooks.useFormContext<FormValues>();
-  const { fields } = formHooks.useFieldArray({
+  const { control } = useFormContext<FormValues>();
+  const { fields } = useFieldArray({
     control,
     name: FIELD_ARRAY_NAME,
   });

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import classnames from 'classnames/bind';
 import { useIntl } from 'react-intl';
-import { formHooks, Datepicker, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
+import { Datepicker, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
 import { landkoder as Landkode } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn } from '@navikt/ft-types';
 
@@ -12,7 +12,7 @@ import {
   hasValidDate,
   required,
 } from '@navikt/ft-form-validators';
-import { UseFormGetValues } from 'react-hook-form';
+import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import moment from 'moment';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { AvsnittSkiller, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -102,8 +102,8 @@ const UtenlandsOppholdField: FunctionComponent<OwnProps> = ({
     getValues,
     trigger,
     formState: { isSubmitted },
-  } = formHooks.useFormContext<{ [K in Keys]: FormValues[] }>();
-  const { fields, remove, append } = formHooks.useFieldArray({
+  } = useFormContext<{ [K in Keys]: FormValues[] }>();
+  const { fields, remove, append } = useFieldArray({
     control,
     name,
   });

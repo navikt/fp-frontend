@@ -1,11 +1,12 @@
 import React, { useState, useEffect, FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { FlexColumn, FlexContainer, FlexRow, Image } from '@navikt/ft-ui-komponenter';
-import { formHooks, NumberField } from '@navikt/ft-form-hooks';
+import { NumberField } from '@navikt/ft-form-hooks';
 import { ErrorMessage } from '@hookform/error-message';
 import { hasValidDecimal, maxValue, minValue, required } from '@navikt/ft-form-validators';
 import { BodyShort } from '@navikt/ds-react';
 
+import { useFormContext } from 'react-hook-form';
 import endreImage from '../../images/endre.svg';
 import endreDisabletImage from '../../images/endre_disablet.svg';
 
@@ -33,7 +34,7 @@ const TilretteleggingUtbetalingsgrad: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const { formState } = formHooks.useFormContext();
+  const { formState } = useFormContext();
 
   const [erIEditeringsmodus, setEditeres] = useState(false);
 

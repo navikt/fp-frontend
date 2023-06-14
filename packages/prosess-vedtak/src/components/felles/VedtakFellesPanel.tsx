@@ -2,7 +2,6 @@ import React, { FunctionComponent, useMemo, useState, useCallback, ReactNode, Mo
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Label, Button, Link, BodyShort, Heading } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer, OkAvbrytModal } from '@navikt/ft-ui-komponenter';
-import { formHooks } from '@navikt/ft-form-hooks';
 
 import {
   avslagsarsakCodes,
@@ -15,6 +14,7 @@ import {
 import { AsyncPollingStatus } from '@navikt/fp-rest-api';
 import { Behandling, Aksjonspunkt, Behandlingsresultat } from '@navikt/fp-types';
 
+import { useFormContext } from 'react-hook-form';
 import popOutPilSvg from '../../images/pop-out-pil.svg';
 import endreSvg from '../../images/endre.svg';
 import endreDisabletSvg from '../../images/endre_disablet.svg';
@@ -93,7 +93,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
   const {
     setValue,
     formState: { isSubmitting },
-  } = formHooks.useFormContext();
+  } = useFormContext();
 
   const { behandlingsresultat, behandlingPaaVent, sprakkode, status, behandlingHenlagt, taskStatus } = behandling;
 

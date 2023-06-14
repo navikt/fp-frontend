@@ -1,11 +1,12 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import { Heading } from '@navikt/ds-react';
 import { required } from '@navikt/ft-form-validators';
 import { AlleKodeverk } from '@navikt/fp-types';
+import { useFormContext } from 'react-hook-form';
 import UtenlandsOppholdField, { FormValues as FormValuesFieldArray } from './UtenlandsOppholdField';
 
 export type FormValues = {
@@ -47,7 +48,7 @@ const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
     [alleKodeverk],
   );
 
-  const { watch } = formHooks.useFormContext<any>();
+  const { watch } = useFormContext<any>();
   const harTidligereOppholdUtenlands = watch('harTidligereOppholdUtenlands') || false;
   const harFremtidigeOppholdUtenlands = watch('harFremtidigeOppholdUtenlands') || false;
 

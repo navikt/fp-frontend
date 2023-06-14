@@ -1,10 +1,10 @@
 import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 import moment from 'moment';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { UseFormGetValues } from 'react-hook-form';
+import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import { Label, Alert } from '@navikt/ds-react';
 import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
-import { CheckboxField, Datepicker, SelectField, PeriodFieldArray, InputField, formHooks } from '@navikt/ft-form-hooks';
+import { CheckboxField, Datepicker, SelectField, PeriodFieldArray, InputField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -142,13 +142,13 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
     trigger,
     watch,
     formState: { isSubmitted },
-  } = formHooks.useFormContext<{
+  } = useFormContext<{
     [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
       [PERMISJON_PERIODE_FIELD_ARRAY_NAME]: FormValues[];
     };
   }>();
 
-  const { fields, remove, append } = formHooks.useFieldArray({
+  const { fields, remove, append } = useFieldArray({
     control,
     name: `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}`,
   });

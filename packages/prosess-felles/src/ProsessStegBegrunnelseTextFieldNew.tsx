@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
 
-import { TextAreaField, formHooks } from '@navikt/ft-form-hooks';
+import { TextAreaField } from '@navikt/ft-form-hooks';
 import { decodeHtmlEntity, createIntl } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { Aksjonspunkt } from '@navikt/fp-types';
 
+import { useFormContext } from 'react-hook-form';
 import messages from '../i18n/nb_NO.json';
 
 import styles from './prosessStegBegrunnelseTextField.module.css';
@@ -50,7 +51,7 @@ const ProsessStegBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunct
 }) => {
   const {
     formState: { isDirty },
-  } = formHooks.useFormContext();
+  } = useFormContext();
   const isRequiredFn = getIsBegrunnelseRequired(isDirty);
   return (
     <div className={!useAllWidth ? styles.begrunnelseTextField : ''}>

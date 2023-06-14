@@ -3,10 +3,10 @@ import { NavLink } from 'react-router-dom';
 import { Location } from 'history';
 import { BodyShort } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { formHooks } from '@navikt/ft-form-hooks';
 
 import { KodeverkMedNavn, TotrinnskontrollSkjermlenkeContext, BehandlingAppKontekst } from '@navikt/fp-types';
 
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import getAksjonspunkttekst from './aksjonspunktTekster/aksjonspunktTekstUtleder';
 import GodkjenningPanel from './GodkjenningPanel';
 
@@ -48,8 +48,8 @@ const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
   faktaOmBeregningTilfeller,
   lagLenke,
 }) => {
-  const { control, watch } = formHooks.useFormContext();
-  const { fields } = formHooks.useFieldArray({
+  const { control, watch } = useFormContext();
+  const { fields } = useFieldArray({
     control,
     name: FIELD_ARRAY_NAME,
   });

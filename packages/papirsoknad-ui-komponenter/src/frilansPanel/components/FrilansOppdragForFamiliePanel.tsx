@@ -2,9 +2,10 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
+import { useFormContext } from 'react-hook-form';
 import FrilansOppdragForFamilieFieldArray, {
   FRILANS_NAME_PREFIX,
   defaultFrilansPeriode,
@@ -24,7 +25,7 @@ interface OwnProps {
 }
 
 const FrilansOppdragForFamiliePanel: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly }) => {
-  const { watch } = formHooks.useFormContext<{ [FRILANS_NAME_PREFIX]: FormValues }>();
+  const { watch } = useFormContext<{ [FRILANS_NAME_PREFIX]: FormValues }>();
   const harHattOppdragForFamilie = watch(`${FRILANS_NAME_PREFIX}.harHattOppdragForFamilie`);
 
   return (

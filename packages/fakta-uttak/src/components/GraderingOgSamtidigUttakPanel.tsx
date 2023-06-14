@@ -4,12 +4,13 @@ import dayjs from 'dayjs';
 import { required } from '@navikt/ft-form-validators';
 import { DDMMYYYY_DATE_FORMAT, guid } from '@navikt/ft-utils';
 import { ArbeidsgiverOpplysninger } from '@navikt/ft-types';
-import { SelectField, NumberField, formHooks, CheckboxField } from '@navikt/ft-form-hooks';
+import { SelectField, NumberField, CheckboxField } from '@navikt/ft-form-hooks';
 import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Alert } from '@navikt/ds-react';
 import { uttakArbeidType, KodeverkType } from '@navikt/fp-kodeverk';
 
 import { AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold } from '@navikt/fp-types';
+import { useFormContext } from 'react-hook-form';
 import KontrollerFaktaPeriodeMedApMarkering from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 
 import styles from './graderingOgSamtidigUttakPanel.module.css';
@@ -92,7 +93,7 @@ const GraderingOgSamtidigUttakPanel: FunctionComponent<OwnProps> = ({
   const toggleGradering = useCallback(() => setGradering(old => !old), []);
   const toggleSamtidigUttaksprosent = useCallback(() => setSamtidigUttaksgradering(old => !old), []);
 
-  const { unregister } = formHooks.useFormContext<FormValues>();
+  const { unregister } = useFormContext<FormValues>();
 
   useEffect(() => {
     if (!visGradering) {

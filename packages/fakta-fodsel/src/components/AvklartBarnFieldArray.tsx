@@ -4,7 +4,8 @@ import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-u
 
 import { hasValidDate, required, dateBeforeOrEqualToToday } from '@navikt/ft-form-validators';
 import { AvklartBarn } from '@navikt/fp-types';
-import { Datepicker, PeriodFieldArray, formHooks } from '@navikt/ft-form-hooks';
+import { Datepicker, PeriodFieldArray } from '@navikt/ft-form-hooks';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 
 const FIELD_ARRAY_NAME = 'avklartBarn';
 
@@ -20,8 +21,8 @@ interface OwnProps {
 export const AvklartBarnFieldArray: FunctionComponent<OwnProps> = ({ readOnly }) => {
   const intl = useIntl();
 
-  const { control, watch } = formHooks.useFormContext<{ avklartBarn: AvklartBarn[] }>();
-  const { fields, remove, append } = formHooks.useFieldArray({
+  const { control, watch } = useFormContext<{ avklartBarn: AvklartBarn[] }>();
+  const { fields, remove, append } = useFieldArray({
     control,
     name: FIELD_ARRAY_NAME,
   });

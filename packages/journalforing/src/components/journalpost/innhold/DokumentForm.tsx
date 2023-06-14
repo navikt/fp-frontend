@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { formHooks } from '@navikt/ft-form-hooks';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import { DokumentTittelSubmitValue } from '../../../typer/ferdigstillJournalføringSubmit';
 
 import JournalDokument from '../../../typer/journalDokumentTsType';
@@ -56,8 +56,8 @@ type OwnProps = Readonly<{
  * DokumentForm - Inneholder form behandling av dokumenter og setter opp visning av hvert dokument
  */
 const DokumentForm: FunctionComponent<OwnProps> = ({ journalpost, dokumentTittelStyresAvJournalpostTittel }) => {
-  const { control } = formHooks.useFormContext<JournalføringFormValues>();
-  const { fields } = formHooks.useFieldArray({
+  const { control } = useFormContext<JournalføringFormValues>();
+  const { fields } = useFieldArray({
     control,
     name: 'journalpostDokumenter',
   });

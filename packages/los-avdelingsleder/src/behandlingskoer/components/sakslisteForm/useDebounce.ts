@@ -1,12 +1,11 @@
 import { useCallback, useEffect } from 'react';
 import debounce from 'lodash.debounce';
-import { UseFormTrigger } from 'react-hook-form';
-import { formHooks } from '@navikt/ft-form-hooks';
+import { UseFormTrigger, useFormContext } from 'react-hook-form';
 
 export const getTimeoutValue = () => (process.env.NODE_ENV === 'test' ? 0 : 1000);
 
 const useDebounce = <Value>(feltNavn: string, funksjon: (verdier: Value) => void, trigger?: UseFormTrigger<any>) => {
-  const context = formHooks.useFormContext();
+  const context = useFormContext();
   const validationTrigger = trigger || context.trigger;
 
   const lagre = useCallback(

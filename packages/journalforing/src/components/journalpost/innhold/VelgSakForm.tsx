@@ -2,9 +2,10 @@ import React, { FunctionComponent, ReactElement, useCallback, useMemo } from 're
 import { BodyShort, Button } from '@navikt/ds-react';
 import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { RadioGroupPanel, SelectField, formHooks } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { fagsakYtelseType } from '@navikt/fp-kodeverk';
+import { useFormContext } from 'react-hook-form';
 import { JournalførSakSubmitValue } from '../../../typer/ferdigstillJournalføringSubmit';
 import Journalpost from '../../../typer/journalpostTsType';
 import JournalFagsak from '../../../typer/journalFagsakTsType';
@@ -114,7 +115,7 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
   const saksliste = journalpost?.fagsaker || TOM_ARRAY;
   const finnesSaker = saksliste && saksliste.length > 0;
-  const formMethods = formHooks.useFormContext<JournalføringFormValues>();
+  const formMethods = useFormContext<JournalføringFormValues>();
   const sakValg = formMethods.watch(radioFieldName);
   const skalOppretteSak = sakValg === LAG_NY_SAK;
   const fetTekst = useCallback((chunks: any) => <b>{chunks}</b>, []);

@@ -5,13 +5,14 @@ import { Label, BodyShort } from '@navikt/ds-react';
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 
 import { FieldEditedInfo } from '@navikt/fp-fakta-felles';
-import { Datepicker, formHooks } from '@navikt/ft-form-hooks';
+import { Datepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { VerticalSpacer, FaktaGruppe, FlexContainer, FlexRow, FlexColumn } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { BekreftDokumentertDatoAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
+import { useFormContext } from 'react-hook-form';
 import styles from './dokumentasjonFaktaForm.module.css';
 
 const findAntallBarnUnder15 = (
@@ -66,7 +67,7 @@ const DokumentasjonFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
 }) => {
   const intl = useIntl();
 
-  const { watch } = formHooks.useFormContext<FormValues>();
+  const { watch } = useFormContext<FormValues>();
   const fodselsdatoer = watch('fodselsdatoer') || {};
   const omsorgsovertakelseDato = watch('omsorgsovertakelseDato');
   const barnetsAnkomstTilNorgeDato = watch('barnetsAnkomstTilNorgeDato');

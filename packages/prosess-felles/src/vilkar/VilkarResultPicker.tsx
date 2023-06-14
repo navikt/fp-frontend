@@ -4,10 +4,11 @@ import { FlexContainer, FlexRow, FlexColumn, Image, VerticalSpacer } from '@navi
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 import { vilkarUtfallType } from '@navikt/fp-kodeverk';
-import { Datepicker, RadioGroupPanel, SelectField, formHooks } from '@navikt/ft-form-hooks';
+import { Datepicker, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { createIntl } from '@navikt/ft-utils';
 import { hasValidDate, required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@navikt/fp-types';
+import { useFormContext } from 'react-hook-form';
 import avslattImage from '../images/avslaatt.svg';
 import innvilgetImage from '../images/check.svg';
 
@@ -66,7 +67,7 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
   skalKunneInnvilge = true,
   validatorsForRadioOptions,
 }) => {
-  const { getValues, watch } = formHooks.useFormContext();
+  const { getValues, watch } = useFormContext();
   const erVilkarOk = watch('erVilkarOk');
 
   const radioValidators = useMemo(
