@@ -147,7 +147,7 @@
     "@storybook/react-vite": "7.0.20",
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.4.3",
-    "axios-mock-adapter": "1.21.4",
+    "axios-mock-adapter": "1.21.5",
     "eslint": "8.42.0",
     "react-test-renderer": "18.2.0",
     "storybook": "7.0.20",
