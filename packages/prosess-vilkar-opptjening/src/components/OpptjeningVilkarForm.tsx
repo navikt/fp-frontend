@@ -19,6 +19,7 @@ interface OwnProps {
   erIkkeGodkjentAvBeslutter: boolean;
   formData?: FormValues;
   setFormData: (data: FormValues) => void;
+  erSvpFagsak: boolean;
 }
 
 /**
@@ -39,6 +40,7 @@ const OpptjeningVilkarForm: FunctionComponent<OwnProps> = ({
   erIkkeGodkjentAvBeslutter,
   formData,
   setFormData,
+  erSvpFagsak,
 }) => {
   if (aksjonspunkter.length > 0) {
     return (
@@ -55,6 +57,7 @@ const OpptjeningVilkarForm: FunctionComponent<OwnProps> = ({
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         formData={formData}
         setFormData={setFormData}
+        erSvpFagsak={erSvpFagsak}
       />
     );
   }

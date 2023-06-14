@@ -51,6 +51,7 @@ interface OwnProps {
   erIkkeGodkjentAvBeslutter: boolean;
   formData?: FormValues;
   setFormData: (data: FormValues) => void;
+  erSvpFagsak: boolean;
 }
 
 /**
@@ -71,6 +72,7 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
   erIkkeGodkjentAvBeslutter,
   formData,
   setFormData,
+  erSvpFagsak,
 }) => {
   const intl = useIntl();
 
@@ -127,13 +129,34 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
         rendreFakta={rendreFakta}
       >
         <Label size="small">
-          <FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.SokerHarVurdertOpptjentRettTilForeldrepenger" />
+          <FormattedMessage
+            id={
+              erSvpFagsak
+                ? 'OpptjeningVilkarAksjonspunktPanel.SokerHarVurdertOpptjentRettTilSvangerskapspenger'
+                : 'OpptjeningVilkarAksjonspunktPanel.SokerHarVurdertOpptjentRettTilForeldrepenger'
+            }
+          />
         </Label>
         <VilkarResultPicker
           readOnly={readOnly}
-          customVilkarOppfyltText={<FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.ErOppfylt" />}
+          customVilkarOppfyltText={
+            <FormattedMessage
+              id={
+                erSvpFagsak
+                  ? 'OpptjeningVilkarAksjonspunktPanel.ErOppfyltSvp'
+                  : 'OpptjeningVilkarAksjonspunktPanel.ErOppfylt'
+              }
+            />
+          }
           customVilkarIkkeOppfyltText={
-            <FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt" values={{ b: bTag }} />
+            <FormattedMessage
+              id={
+                erSvpFagsak
+                  ? 'OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfyltSvp'
+                  : 'OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt'
+              }
+              values={{ b: bTag }}
+            />
           }
           validatorsForRadioOptions={[validerAtEnKunKanVelgeOppfyltNårEnHarPerioder]}
         />
