@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { UseFormGetValues } from 'react-hook-form';
+import { UseFormGetValues, useFormContext } from 'react-hook-form';
 import moment from 'moment';
 import { Alert, Label, Heading } from '@navikt/ds-react';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { Datepicker, InputField, RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
+import { Datepicker, InputField, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox, VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import {
   dateBeforeOrEqual,
@@ -61,7 +61,7 @@ const TerminFodselDatoPanel: FunctionComponent<OwnProps> = ({ readOnly, erForeld
     getValues,
     trigger,
     formState: { isSubmitted },
-  } = formHooks.useFormContext<FormValues>();
+  } = useFormContext<FormValues>();
 
   const erBarnetFodt = watch('erBarnetFodt');
 

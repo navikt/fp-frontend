@@ -1,8 +1,8 @@
 import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { UseFormGetValues } from 'react-hook-form';
+import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
-import { Datepicker, SelectField, PeriodFieldArray, formHooks } from '@navikt/ft-form-hooks';
+import { Datepicker, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
 import {
   required,
   hasValidDate,
@@ -60,13 +60,13 @@ const RenderOverforingAvKvoterFieldArray: FunctionComponent<OwnProps> = ({ selec
     getValues,
     trigger,
     formState: { isSubmitted },
-  } = formHooks.useFormContext<{
+  } = useFormContext<{
     [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
       [OVERFORING_PERIODE_FIELD_ARRAY_NAME]: FormValues;
     };
   }>();
 
-  const { fields, remove, append } = formHooks.useFieldArray({
+  const { fields, remove, append } = useFieldArray({
     control,
     name: `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFORING_PERIODE_FIELD_ARRAY_NAME}`,
   });

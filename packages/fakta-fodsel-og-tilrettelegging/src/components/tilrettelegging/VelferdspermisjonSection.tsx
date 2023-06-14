@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
+import { useFormContext } from 'react-hook-form';
 import moment from 'moment';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { required } from '@navikt/ft-form-validators';
-import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { Permisjon } from '@navikt/fp-types';
@@ -24,7 +25,7 @@ interface OwnProps {
 const VelferdspermisjonSection: FunctionComponent<OwnProps> = ({ readOnly, permisjon, formSectionName }) => {
   const intl = useIntl();
 
-  const { watch } = formHooks.useFormContext();
+  const { watch } = useFormContext();
 
   const tilretteleggingBehovFom = watch(`${formSectionName}.tilretteleggingBehovFom`);
   const skalTaHensynTilPermisjon = finnSkalTaHensynTilPermisjon(tilretteleggingBehovFom, permisjon);

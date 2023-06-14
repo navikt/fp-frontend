@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect, useMemo } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import moment from 'moment';
 import { Label } from '@navikt/ds-react';
-import { Datepicker, CheckboxField, formHooks } from '@navikt/ft-form-hooks';
+import { Datepicker, CheckboxField } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
@@ -13,6 +13,7 @@ import {
   ArbeidsforholdFodselOgTilrettelegging,
 } from '@navikt/fp-types';
 
+import { useFormContext } from 'react-hook-form';
 import TilretteleggingFieldArray from './TilretteleggingFieldArray';
 import VelferdspermisjonSection, { finnSkalTaHensynTilPermisjon } from './VelferdspermisjonSection';
 
@@ -90,7 +91,7 @@ const TilretteleggingArbeidsforholdSection: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const { watch, getValues, setValue } = formHooks.useFormContext<Record<string, FormValues>>();
+  const { watch, getValues, setValue } = useFormContext<Record<string, FormValues>>();
 
   const visTilrettelegginger = watch(`${formSectionName}.skalBrukes`);
 

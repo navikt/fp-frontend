@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
-import { formHooks, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { useFormContext } from 'react-hook-form';
 
 const ANNEN_FORELDER_NAME_PREFIX = 'annenForelder';
 
@@ -25,7 +26,7 @@ interface OwnProps {
 const PermisjonRettigheterPanel: FunctionComponent<OwnProps> = ({ readOnly, sokerErMor }) => {
   const intl = useIntl();
 
-  const { watch } = formHooks.useFormContext<{ [ANNEN_FORELDER_NAME_PREFIX]: FormValues }>();
+  const { watch } = useFormContext<{ [ANNEN_FORELDER_NAME_PREFIX]: FormValues }>();
   const sokerHarAleneomsorg = watch(`${ANNEN_FORELDER_NAME_PREFIX}.sokerHarAleneomsorg`);
   const annenForelderHarRett = watch(`${ANNEN_FORELDER_NAME_PREFIX}.denAndreForelderenHarRettPaForeldrepenger`);
   const annenForelderRettEØS = watch(`${ANNEN_FORELDER_NAME_PREFIX}.annenForelderRettEØS`);

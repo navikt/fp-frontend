@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
-import { formHooks, SelectField, NumberField } from '@navikt/ft-form-hooks';
+import { SelectField, NumberField } from '@navikt/ft-form-hooks';
 import {
   hasValidDecimal,
   hasValidInteger,
@@ -16,7 +16,7 @@ import { FlexColumn, FlexContainer, FlexRow, Table, TableColumn, TableRow } from
 import { uttakPeriodeType, uttakArbeidType as UttakArbeidType } from '@navikt/fp-kodeverk';
 import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, PeriodeSokerAktivitet } from '@navikt/fp-types';
 
-import { UseFormGetValues } from 'react-hook-form';
+import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';
 import lagVisningsNavn from '../../utils/lagVisningsNavn';
 import { UttakAktivitetType } from './UttakAktivitetType';
@@ -158,8 +158,8 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const { control, getValues } = formHooks.useFormContext<UttakAktivitetType>();
-  const { fields } = formHooks.useFieldArray({
+  const { control, getValues } = useFormContext<UttakAktivitetType>();
+  const { fields } = useFieldArray({
     control,
     name: 'aktiviteter',
   });

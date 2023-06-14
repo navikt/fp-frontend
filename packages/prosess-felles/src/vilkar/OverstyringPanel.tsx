@@ -11,9 +11,10 @@ import {
   AksjonspunktBox,
 } from '@navikt/ft-ui-komponenter';
 
-import { TextAreaField, formHooks } from '@navikt/ft-form-hooks';
+import { TextAreaField } from '@navikt/ft-form-hooks';
 import { createIntl } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
+import { useFormContext } from 'react-hook-form';
 import advarselIkonUrl from '../images/advarsel_ny.svg';
 
 import messages from '../../i18n/nb_NO.json';
@@ -54,7 +55,7 @@ const OverstyringPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const {
     formState: { isDirty },
-  } = formHooks.useFormContext();
+  } = useFormContext();
   const isRequiredFn = getIsBegrunnelseRequired(isDirty);
   return (
     <AksjonspunktBox

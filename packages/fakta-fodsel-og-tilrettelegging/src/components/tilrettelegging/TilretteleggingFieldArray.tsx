@@ -2,13 +2,13 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Alert, Label } from '@navikt/ds-react';
 
-import { Datepicker, SelectField, PeriodFieldArray, formHooks, NumberField } from '@navikt/ft-form-hooks';
+import { Datepicker, SelectField, PeriodFieldArray, NumberField } from '@navikt/ft-form-hooks';
 import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import { hasValidDecimal, maxValue, minValue, required, hasValidDate } from '@navikt/ft-form-validators';
 import { tilretteleggingType } from '@navikt/fp-kodeverk';
 import { Permisjon } from '@navikt/fp-types';
 
-import { UseFormGetValues } from 'react-hook-form';
+import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import TilretteleggingUtbetalingsgrad, { OVERSTYRT_UTBETALINGSGRAD_FIELDNAME } from './TilretteleggingUtbetalingsgrad';
 import { finnSkalTaHensynTilPermisjon } from './VelferdspermisjonSection';
 
@@ -77,8 +77,8 @@ const TilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
 
   const fieldPrefix = `${formSectionName}.tilretteleggingDatoer`;
 
-  const { setValue, control, watch, getValues } = formHooks.useFormContext<Record<string, FormValues[]>>();
-  const { fields, remove, append } = formHooks.useFieldArray({
+  const { setValue, control, watch, getValues } = useFormContext<Record<string, FormValues[]>>();
+  const { fields, remove, append } = useFieldArray({
     control,
     name: fieldPrefix,
   });

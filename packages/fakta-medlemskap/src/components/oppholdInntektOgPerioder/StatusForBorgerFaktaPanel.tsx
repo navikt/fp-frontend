@@ -1,12 +1,13 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { formHooks, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { ArrowBox, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { Aksjonspunkt, MedlemPeriode } from '@navikt/fp-types';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
+import { useFormContext } from 'react-hook-form';
 
 export type FormValues = {
   oppholdsrettVurdering?: boolean;
@@ -38,7 +39,7 @@ const StatusForBorgerFaktaPanel: FunctionComponent<OwnProps> & StaticFunctions =
 }) => {
   const intl = useIntl();
 
-  const { watch } = formHooks.useFormContext<any>();
+  const { watch } = useFormContext<any>();
 
   const erEosBorger = watch('erEosBorger');
 

@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import { UseFormGetValues } from 'react-hook-form';
+import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Datepicker, formHooks, PeriodFieldArray } from '@navikt/ft-form-hooks';
+import { Datepicker, PeriodFieldArray } from '@navikt/ft-form-hooks';
 import { required, hasValidDate, dateAfterOrEqual, dateBeforeOrEqual } from '@navikt/ft-form-validators';
 
 import styles from './renderAndreYtelserPerioderFieldArray.module.css';
@@ -51,8 +51,8 @@ const RenderAndreYtelserPerioderFieldArray: FunctionComponent<OwnProps> & Static
     control,
     trigger,
     formState: { isSubmitted },
-  } = formHooks.useFormContext<{ [ANDRE_YTELSER_NAME_PREFIX]: FormValues }>();
-  const { fields, remove, append } = formHooks.useFieldArray({
+  } = useFormContext<{ [ANDRE_YTELSER_NAME_PREFIX]: FormValues }>();
+  const { fields, remove, append } = useFieldArray({
     control,
     // @ts-ignore Usikker på korleis ein fiksar denne (Dynamisk name basert på verdiar fra backend)
     name: `${ANDRE_YTELSER_NAME_PREFIX}.${name}`,

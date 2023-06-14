@@ -3,8 +3,9 @@ import { FormattedMessage } from 'react-intl';
 import { FlexColumn, FlexContainer, FlexRow, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { hasValidPosOrNegInteger } from '@navikt/ft-form-validators';
 import { Detail } from '@navikt/ds-react';
-import { InputField, formHooks } from '@navikt/ft-form-hooks';
+import { InputField } from '@navikt/ft-form-hooks';
 
+import { useFormContext } from 'react-hook-form';
 import useDebounce from '../useDebounce';
 
 import styles from './sorteringVelger.module.css';
@@ -29,7 +30,7 @@ const BelopSorteringValg: FunctionComponent<OwnProps> = ({
   hentAvdelingensSakslister,
   hentAntallOppgaver,
 }) => {
-  const { watch } = formHooks.useFormContext();
+  const { watch } = useFormContext();
   const fraVerdi = watch('fra');
   const tilVerdi = watch('til');
 

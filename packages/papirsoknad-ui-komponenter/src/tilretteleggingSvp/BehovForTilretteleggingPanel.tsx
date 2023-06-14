@@ -1,11 +1,12 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { RawIntlProvider, FormattedMessage } from 'react-intl';
 import { ErrorMessage, Heading } from '@navikt/ds-react';
-import { RadioGroupPanel, Datepicker, formHooks } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel, Datepicker } from '@navikt/ft-form-hooks';
 import { BorderBox, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
+import { useFormContext } from 'react-hook-form';
 import BehovForTilretteleggingFieldArray, {
   frilansFieldArrayName,
   selvstendigNaringsdrivendeFieldArrayName,
@@ -59,7 +60,7 @@ interface StaticFunctions {
  * Form som brukes for registrere om det er behov for tilrettelegging.
  */
 const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly }) => {
-  const { watch, setError, clearErrors, formState } = formHooks.useFormContext<FormValues>();
+  const { watch, setError, clearErrors, formState } = useFormContext<FormValues>();
 
   const sokForSelvstendigNaringsdrivende = watch(`${TILRETTELEGGING_NAME_PREFIX}.sokForSelvstendigNaringsdrivende`);
   const sokForFrilans = watch(`${TILRETTELEGGING_NAME_PREFIX}.sokForFrilans`);

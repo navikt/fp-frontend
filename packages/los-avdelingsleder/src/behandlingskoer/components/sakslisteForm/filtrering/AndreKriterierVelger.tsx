@@ -2,8 +2,9 @@ import React, { Fragment, FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Label } from '@navikt/ds-react';
 import { VerticalSpacer, ArrowBox } from '@navikt/ft-ui-komponenter';
-import { CheckboxField, RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
+import { CheckboxField, RadioGroupPanel } from '@navikt/ft-form-hooks';
 
+import { useFormContext } from 'react-hook-form';
 import { restApiHooks, RestApiPathsKeys } from '../../../../data/fplosRestApi';
 import useLosKodeverk from '../../../../data/useLosKodeverk';
 
@@ -27,7 +28,7 @@ const AndreKriterierVelger: FunctionComponent<OwnProps> = ({
   hentAvdelingensSakslister,
   hentAntallOppgaver,
 }) => {
-  const { setValue } = formHooks.useFormContext();
+  const { setValue } = useFormContext();
 
   const andreKriterierTyper = useLosKodeverk('AndreKriterierType');
   const { startRequest: lagreSakslisteAndreKriterier } = restApiHooks.useRestApiRunner(

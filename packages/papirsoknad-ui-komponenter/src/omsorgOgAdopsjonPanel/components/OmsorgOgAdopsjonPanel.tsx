@@ -11,10 +11,11 @@ import {
   minValue,
   required,
 } from '@navikt/ft-form-validators';
-import { Datepicker, formHooks, InputField, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { Datepicker, InputField, RadioGroupPanel } from '@navikt/ft-form-hooks';
 
 import { familieHendelseType as fht } from '@navikt/fp-kodeverk';
 
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import styles from './omsorgOgAdopsjonPanel.module.css';
 
 const MAX_ANTALL_BARN = 10;
@@ -68,8 +69,8 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
 }) => {
   const { formatMessage } = useIntl();
 
-  const { control, watch } = formHooks.useFormContext<{ [OMSORG_NAME_PREFIX]: FormValues }>();
-  const { fields, remove, append } = formHooks.useFieldArray({
+  const { control, watch } = useFormContext<{ [OMSORG_NAME_PREFIX]: FormValues }>();
+  const { fields, remove, append } = useFieldArray({
     control,
     name: `${OMSORG_NAME_PREFIX}.foedselsDato`,
   });

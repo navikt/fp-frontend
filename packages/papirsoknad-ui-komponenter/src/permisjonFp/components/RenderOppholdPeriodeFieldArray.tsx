@@ -1,8 +1,8 @@
 import React, { FunctionComponent, ReactElement, useEffect } from 'react';
-import { UseFormGetValues } from 'react-hook-form';
+import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
-import { Datepicker, SelectField, PeriodFieldArray, formHooks } from '@navikt/ft-form-hooks';
+import { Datepicker, SelectField, PeriodFieldArray } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -80,13 +80,13 @@ const RenderOppholdPeriodeFieldArray: FunctionComponent<OwnProps> = ({ oppholdsR
     getValues,
     trigger,
     formState: { isSubmitted },
-  } = formHooks.useFormContext<{
+  } = useFormContext<{
     [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
       [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]: FormValues;
     };
   }>();
 
-  const { fields, remove, append } = formHooks.useFieldArray({
+  const { fields, remove, append } = useFieldArray({
     control,
     name: `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}`,
   });

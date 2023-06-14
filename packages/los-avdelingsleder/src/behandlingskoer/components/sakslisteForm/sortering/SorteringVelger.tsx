@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { formHooks, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { BehandlingType } from '@navikt/ft-kodeverk';
 
+import { useFormContext } from 'react-hook-form';
 import useLosKodeverk from '../../../../data/useLosKodeverk';
 import KoSorteringType from '../../../../typer/koSorteringTsType';
 import { restApiHooks, RestApiPathsKeys } from '../../../../data/fplosRestApi';
@@ -38,7 +39,7 @@ const SorteringVelger: FunctionComponent<OwnProps> = ({
   hentAvdelingensSakslister,
   hentAntallOppgaver,
 }) => {
-  const { resetField } = formHooks.useFormContext();
+  const { resetField } = useFormContext();
 
   const { startRequest: lagreSakslisteSortering } = restApiHooks.useRestApiRunner(
     RestApiPathsKeys.LAGRE_SAKSLISTE_SORTERING,

@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { UseFormGetValues } from 'react-hook-form';
+import { UseFormGetValues, useFormContext } from 'react-hook-form';
 import { ErrorMessage, Label, BodyShort } from '@navikt/ds-react';
 import { ArrowBox, FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { CheckboxField, TextAreaField, RadioGroupPanel, formHooks, useCustomValidation } from '@navikt/ft-form-hooks';
+import { CheckboxField, TextAreaField, RadioGroupPanel, useCustomValidation } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required, isRequiredMessage } from '@navikt/ft-form-validators';
 
 import { TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
@@ -29,7 +29,7 @@ type OwnProps = {
 };
 
 const GodkjenningPanel: FunctionComponent<OwnProps> = ({ index, totrinnskontrollSkjermlenkeContext, readOnly }) => {
-  const { watch, getValues } = formHooks.useFormContext();
+  const { watch, getValues } = useFormContext();
 
   const aksjonspunktGodkjenning = watch('aksjonspunktGodkjenning');
 

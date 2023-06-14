@@ -3,10 +3,10 @@ import { IntlShape, useIntl } from 'react-intl';
 import moment from 'moment';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { Datepicker, formHooks, InputField, PeriodFieldArray } from '@navikt/ft-form-hooks';
+import { Datepicker, InputField, PeriodFieldArray } from '@navikt/ft-form-hooks';
 import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate, maxLength } from '@navikt/ft-form-validators';
 
-import { UseFormGetValues } from 'react-hook-form';
+import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
 import styles from './frilansOppdragForFamilieFieldArray.module.css';
 
 export const FRILANS_NAME_PREFIX = 'frilans';
@@ -87,8 +87,8 @@ export const FrilansOppdragForFamilieFieldArray: FunctionComponent<OwnProps> = (
     watch,
     trigger,
     formState: { isSubmitted },
-  } = formHooks.useFormContext<{ [FRILANS_NAME_PREFIX]: FormValues }>();
-  const { fields, remove, append } = formHooks.useFieldArray({
+  } = useFormContext<{ [FRILANS_NAME_PREFIX]: FormValues }>();
+  const { fields, remove, append } = useFieldArray({
     control,
     name: `${FRILANS_NAME_PREFIX}.oppdragPerioder`,
   });

@@ -6,8 +6,9 @@ import { Detail } from '@navikt/ds-react';
 import { DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { hasValidDate, hasValidPosOrNegInteger } from '@navikt/ft-form-validators';
-import { InputField, CheckboxField, Datepicker, formHooks } from '@navikt/ft-form-hooks';
+import { InputField, CheckboxField, Datepicker } from '@navikt/ft-form-hooks';
 
+import { useFormContext } from 'react-hook-form';
 import { restApiHooks, RestApiPathsKeys } from '../../../../data/fplosRestApi';
 
 import useDebounce from '../useDebounce';
@@ -88,7 +89,7 @@ const DatoSorteringValg: FunctionComponent<OwnProps> = ({
     RestApiPathsKeys.LAGRE_SAKSLISTE_SORTERING_TIDSINTERVALL_DATO,
   );
 
-  const { watch } = formHooks.useFormContext();
+  const { watch } = useFormContext();
   const fraVerdi = watch('fra');
   const tilVerdi = watch('til');
   const fomDatoVerdi = watch('fomDato');

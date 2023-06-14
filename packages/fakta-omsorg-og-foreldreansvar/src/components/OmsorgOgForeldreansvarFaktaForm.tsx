@@ -12,7 +12,7 @@ import {
   FlexColumn,
 } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktCode, VilkarType, KodeverkType } from '@navikt/fp-kodeverk';
-import { SelectField, formHooks } from '@navikt/ft-form-hooks';
+import { SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { isFieldEdited, FieldEditedInfo } from '@navikt/fp-fakta-felles';
 import {
@@ -29,6 +29,7 @@ import {
   AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 
+import { useFormContext } from 'react-hook-form';
 import OmsorgsovertakelseFaktaPanel, { FormValues as OmsorgFormValues } from './OmsorgsovertakelseFaktaPanel';
 import RettighetFaktaPanel, { FormValues as RettighetFormValues } from './RettighetFaktaPanel';
 import BarnPanel from './BarnPanel';
@@ -108,7 +109,7 @@ const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<PureOwnProps> & StaticF
 }) => {
   const intl = useIntl();
 
-  const { watch } = formHooks.useFormContext<FormValues>();
+  const { watch } = useFormContext<FormValues>();
 
   const editedStatus = getEditedStatus(soknad, gjeldendeFamiliehendelse);
   const vilkarType = watch('vilkarType');

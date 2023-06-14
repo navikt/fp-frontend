@@ -1,10 +1,11 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, Detail } from '@navikt/ds-react';
-import { CheckboxField, formHooks, TextAreaField } from '@navikt/ft-form-hooks';
+import { CheckboxField, TextAreaField } from '@navikt/ft-form-hooks';
 import { ariaCheck, hasValidText, maxLength } from '@navikt/ft-form-validators';
 import { BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
+import { useFormContext } from 'react-hook-form';
 import LukkPapirsoknadModal from './LukkPapirsoknadModal';
 
 import styles from './lagreSoknadPanel.module.css';
@@ -28,7 +29,7 @@ const LagreSoknadPanel: FunctionComponent<OwnProps> = ({ submitting, onSubmitUfu
 
   const [showLukkSoknadModal, setShowLukkSoknadModal] = useState(false);
 
-  const { watch } = formHooks.useFormContext<FormValues>();
+  const { watch } = useFormContext<FormValues>();
   const ufullstendigSoeknad = watch('ufullstendigSoeknad') || false;
 
   const toggleLukkPapirsoknadModal = useCallback(() => {

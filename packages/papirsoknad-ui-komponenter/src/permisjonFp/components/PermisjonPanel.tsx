@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { UseFormGetValues } from 'react-hook-form';
+import { UseFormGetValues, useFormContext } from 'react-hook-form';
 import { Label, Heading, ErrorMessage } from '@navikt/ds-react';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
+import { CheckboxField } from '@navikt/ft-form-hooks';
 
 import { AlleKodeverk } from '@navikt/fp-types';
 import { foreldreType as ForeldreType } from '@navikt/fp-kodeverk';
@@ -77,7 +77,7 @@ const PermisjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
 }) => {
   const intl = useIntl();
 
-  const { watch, setError, clearErrors, getValues, formState } = formHooks.useFormContext<FormValues>();
+  const { watch, setError, clearErrors, getValues, formState } = useFormContext<FormValues>();
   const fulltUttak = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`) || false;
 
   const isError = getIsRequired(getValues);

@@ -1,11 +1,12 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Heading } from '@navikt/ds-react';
-import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
+import { CheckboxField } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 import { arbeidType, KodeverkType } from '@navikt/fp-kodeverk';
 
+import { useFormContext } from 'react-hook-form';
 import RenderAndreYtelserPerioderFieldArray, {
   FormValues as PerioderFormValues,
   ANDRE_YTELSER_PERIODE_SUFFIX,
@@ -54,7 +55,7 @@ const AndreYtelserPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   kunMiliterEllerSiviltjeneste = false,
   alleKodeverk,
 }) => {
-  const { watch } = formHooks.useFormContext<{ [ANDRE_YTELSER_NAME_PREFIX]: FormValues }>();
+  const { watch } = useFormContext<{ [ANDRE_YTELSER_NAME_PREFIX]: FormValues }>();
   const selectedYtelser = watch(ANDRE_YTELSER_NAME_PREFIX);
 
   const andreYtelser = alleKodeverk[KodeverkType.ARBEID_TYPE];
