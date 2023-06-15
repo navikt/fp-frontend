@@ -50,10 +50,7 @@ const FodseltilretteleggingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPan
     faktaPanelMenyTekst={useIntl().formatMessage({
       id: 'FodselOgTilretteleggingInfoPanel.FaktaFodselOgTilrettelegging',
     })}
-    skalPanelVisesIMeny={() =>
-      !!props.behandling.aksjonspunkt &&
-      !!props.behandling.aksjonspunkt.some(ap => AKSJONSPUNKT_KODER.some(kode => kode === ap.definisjon))
-    }
+    skalPanelVisesIMeny={() => true}
     renderPanel={data => (
       <FodselOgTilretteleggingFaktaIndex
         erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
