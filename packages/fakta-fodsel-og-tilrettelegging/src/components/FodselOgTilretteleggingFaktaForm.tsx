@@ -48,7 +48,8 @@ type FormValues = {
 const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) => value !== undefined || isDirty;
 
 const getAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]): string =>
-  aksjonspunkter.filter(ap => ap.definisjon === AksjonspunktCode.FODSELTILRETTELEGGING)[0].begrunnelse;
+  aksjonspunkter.some(ap => ap.definisjon === AksjonspunktCode.FODSELTILRETTELEGGING) ?
+    aksjonspunkter.filter(ap => ap.definisjon === AksjonspunktCode.FODSELTILRETTELEGGING)[0].begrunnelse : undefined;
 
 const getAlleArbeidsforhold = (
   tilrettelegging: FodselOgTilrettelegging,
