@@ -56,6 +56,7 @@ const FodseltilretteleggingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPan
         erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...data}
+        readOnly={data.readOnly || !props.behandling.aksjonspunkt.some((ap: { definisjon: any; }) => AKSJONSPUNKT_KODER.some(kode => kode === ap.definisjon))}
       />
     )}
   />
