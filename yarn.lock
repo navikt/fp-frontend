@@ -2876,8 +2876,14 @@ __metadata:
   resolution: "@navikt/fp-fakta-fodsel-og-tilrettelegging@workspace:packages/fakta-fodsel-og-tilrettelegging"
   dependencies:
     "@hookform/error-message": 2.0.1
+<<<<<<< HEAD
     "@navikt/ds-css": 4.5.0
     "@navikt/ds-react": 4.5.0
+=======
+    "@navikt/aksel-icons": 4.1.4
+    "@navikt/ds-css": 4.1.4
+    "@navikt/ds-react": 4.1.4
+>>>>>>> ffd7daaaf (Redisign av fakta-fodsel-og-tilrettelegging)
     "@navikt/fp-fakta-felles": 1.0.0
     "@navikt/fp-kodeverk": 1.0.0
     "@navikt/fp-storybook-utils": 1.0.0

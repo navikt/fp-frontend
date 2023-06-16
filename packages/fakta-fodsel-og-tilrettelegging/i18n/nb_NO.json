@@ -50,5 +50,9 @@
   "VelferdspermisjonSection.PermisjonDetaljer": "Det er registrert {prosent}% velferdspermisjon i perioden {fom} - {tom}. Kontroller om dette er riktig.",
   "VelferdspermisjonSection.PermisjonDetaljerUendeligPeriode": "Det er registrert {prosent}% velferdspermisjon fra og med {fom}. Kontroller om dette er riktig.",
   "VelferdspermisjonSection.ErGyldig": "Permisjonen er gyldig og skal tas hensyn til i utregning av utbetalingsgrad",
-  "VelferdspermisjonSection.ErIkkeGyldig": "Permisjonen er ikke gyldig og skal ikke tas hensyn til i utregning av utbetalingsgrad"
+  "VelferdspermisjonSection.ErIkkeGyldig": "Permisjonen er ikke gyldig og skal ikke tas hensyn til i utregning av utbetalingsgrad",
+
+  "TilretteleggingForArbeidsgiverPanel.FraLegeEllerJordmor": "FRA LEGE ELLER JORDMOR",
+  "TilretteleggingForArbeidsgiverPanel.DatoForTilrettelegging": "Dato for tilrettelegging",
+  "TilretteleggingForArbeidsgiverPanel.FraArbeidsgiver": "FRA ARBEIDSGIVER"
 }

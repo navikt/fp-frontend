@@ -15,6 +15,7 @@ import FodselOgTilretteleggingFaktaForm from './components/FodselOgTilretteleggi
 import messages from '../i18n/nb_NO.json';
 
 import '@navikt/fp-fakta-felles/dist/style.css';
+import TilretteleggingFaktaForm from './componentsNew/TilretteleggingFaktaForm';
 
 const intl = createIntl(messages);
 
@@ -41,6 +42,21 @@ const FodselOgTilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFa
   arbeidOgInntekt,
 }) => (
   <RawIntlProvider value={intl}>
+    <TilretteleggingFaktaForm
+      behandlingVersjon={behandling.versjon}
+      svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
+      arbeidsforhold={arbeidOgInntekt.arbeidsforhold}
+      aksjonspunkter={aksjonspunkter}
+      submitCallback={submitCallback}
+      readOnly={readOnly}
+      hasOpenAksjonspunkter={harApneAksjonspunkter}
+      submittable={submittable}
+      erOverstyrer={erOverstyrer}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      uttakArbeidTyper={alleKodeverk[KodeverkType.UTTAK_ARBEID_TYPE]}
+      formData={formData}
+      setFormData={setFormData}
+    />
     <FodselOgTilretteleggingFaktaForm
       behandlingVersjon={behandling.versjon}
       svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}

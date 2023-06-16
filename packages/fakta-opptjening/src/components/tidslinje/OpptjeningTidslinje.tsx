@@ -135,7 +135,7 @@ const OpptjeningTimeLine: FunctionComponent<OwnProps> = ({
     () => lagPerioder(opptjeningPerioder, formVerdierForAlleAktiviteter, rader, opptjeningFomDato, opptjeningTomDato),
     [formVerdierForAlleAktiviteter],
   );
-
+  console.log('----------------');
   const velgPeriode = useCallback(
     (periodeId: number): void => {
       const valgtPeriode = perioder.find(item => item.id === periodeId);

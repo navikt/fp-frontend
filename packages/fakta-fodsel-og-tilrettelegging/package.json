@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@hookform/error-message": "2.0.1",
+    "@navikt/aksel-icons": "4.5.0",
     "@navikt/ds-react": "4.5.0",
     "@navikt/fp-fakta-felles": "1.0.0",
     "@navikt/fp-kodeverk": "1.0.0",
