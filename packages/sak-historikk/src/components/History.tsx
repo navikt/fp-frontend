@@ -262,11 +262,7 @@ const History: FunctionComponent<OwnProps> = ({
 
   const getKodeverknavnFpSak = useMemo(() => getKodeverknavnFn(alleKodeverkFpSak), [alleKodeverkFpSak]);
   const getKodeverknavnFpTilbake = useMemo(
-    () =>
-      alleKodeverkFpTilbake
-        ? // @ts-ignore Fiks
-          getKodeverknavnFn(alleKodeverkFpTilbake)
-        : undefined,
+    () => (alleKodeverkFpTilbake ? getKodeverknavnFn(alleKodeverkFpTilbake) : undefined),
     [alleKodeverkFpTilbake],
   );
 

@@ -71,8 +71,8 @@ export const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: strin
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
 });
 
-const transformValues = (values: Required<FormValues>): SoknadsfristAp => ({
-  erVilkarOk: values.erVilkarOk,
+const transformValues = (values: FormValues): SoknadsfristAp => ({
+  erVilkarOk: values.erVilkarOk || false,
   kode: AksjonspunktCode.SOKNADSFRISTVILKARET,
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
 });
@@ -129,7 +129,7 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
   return (
     <Form
       formMethods={formMethods}
-      onSubmit={(values: Required<FormValues>) => submitCallback(transformValues(values))}
+      onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setFormData}
     >
       <Heading size="small">{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.Soknadsfrist' })}</Heading>

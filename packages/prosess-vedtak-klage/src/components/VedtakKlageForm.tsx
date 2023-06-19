@@ -12,7 +12,7 @@ import {
   aksjonspunktStatus,
 } from '@navikt/fp-kodeverk';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Aksjonspunkt, Behandling, KlageVurdering, AlleKodeverk } from '@navikt/fp-types';
+import { Aksjonspunkt, KlageVurdering, AlleKodeverk, Behandlingsresultat } from '@navikt/fp-types';
 import {
   BekreftVedtakUtenTotrinnskontrollAp,
   ForeslaVedtakAp,
@@ -28,7 +28,7 @@ const OMGJOER_TEKST_MAP = {
   GUNST_MEDHOLD_I_KLAGE: 'VedtakKlageForm.KlageOmgjortGunst',
   UGUNST_MEDHOLD_I_KLAGE: 'VedtakKlageForm.KlageOmgjortUgunst',
   DELVIS_MEDHOLD_I_KLAGE: 'VedtakKlageForm.KlageOmgjortDelvis',
-};
+} as Record<string, string>;
 
 export type ForhandsvisData = {
   gjelderVedtak: boolean;
@@ -56,13 +56,13 @@ const getAvvisningsAarsaker = (klageVurderingResultat: KlageVurdering): string[]
 const getOmgjortAarsak = (klageVurderingResultat: KlageVurdering, alleKodeverk: AlleKodeverk): string | null => {
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
   if (klageVurderingResultat) {
-    if (klageVurderingResultat.klageVurderingResultatNK) {
+    if (klageVurderingResultat.klageVurderingResultatNK?.klageMedholdArsak) {
       return getKodeverknavn(
         klageVurderingResultat.klageVurderingResultatNK.klageMedholdArsak,
         KodeverkType.KLAGE_MEDHOLD_ARSAK,
       );
     }
-    if (klageVurderingResultat.klageVurderingResultatNFP) {
+    if (klageVurderingResultat.klageVurderingResultatNFP?.klageMedholdArsak) {
       return getKodeverknavn(
         klageVurderingResultat.klageVurderingResultatNFP.klageMedholdArsak,
         KodeverkType.KLAGE_MEDHOLD_ARSAK,
@@ -76,7 +76,7 @@ const getResultatText = (behandlingKlageVurdering: KlageVurdering): string | nul
   const klageResultat = behandlingKlageVurdering.klageVurderingResultatNK
     ? behandlingKlageVurdering.klageVurderingResultatNK
     : behandlingKlageVurdering.klageVurderingResultatNFP;
-  switch (klageResultat.klageVurdering) {
+  switch (klageResultat?.klageVurdering) {
     case klageVurderingCodes.AVVIS_KLAGE:
       return 'VedtakKlageForm.KlageAvvist';
     case klageVurderingCodes.STADFESTE_YTELSESVEDTAK:
@@ -86,14 +86,14 @@ const getResultatText = (behandlingKlageVurdering: KlageVurdering): string | nul
     case klageVurderingCodes.HJEMSENDE_UTEN_Å_OPPHEVE:
       return 'VedtakKlageForm.HjemmsendUtenOpphev';
     case klageVurderingCodes.MEDHOLD_I_KLAGE:
-      return OMGJOER_TEKST_MAP[klageResultat.klageVurderingOmgjoer];
+      return OMGJOER_TEKST_MAP[klageResultat?.klageVurderingOmgjoer || ''];
     default:
       return 'VedtakKlageForm.IkkeFastsatt';
   }
 };
 
 interface OwnProps {
-  behandlingsresultat: Behandling['behandlingsresultat'];
+  behandlingsresultat: Behandlingsresultat;
   behandlingPaaVent: boolean;
   klageVurdering: KlageVurdering;
   aksjonspunkter: Aksjonspunkt[];
@@ -153,9 +153,11 @@ const VedtakKlageForm: FunctionComponent<OwnProps> = ({
       <Label size="small">
         <FormattedMessage id="VedtakKlageForm.Resultat" />
       </Label>
-      <BodyShort size="small">
-        <FormattedMessage id={behandlingsResultatTekst} />
-      </BodyShort>
+      {behandlingsResultatTekst && (
+        <BodyShort size="small">
+          <FormattedMessage id={behandlingsResultatTekst} />
+        </BodyShort>
+      )}
       <VerticalSpacer sixteenPx />
       {behandlingsresultat.type === behandlingResultatType.KLAGE_AVVIST && (
         <>
@@ -188,7 +190,7 @@ const VedtakKlageForm: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
         </>
       )}
-      {klageVurderingResultat.klageVurdertAv === 'NFP' && (
+      {klageVurderingResultat?.klageVurdertAv === 'NFP' && (
         <VedtakKlageSubmitPanel
           previewVedtakCallback={getPreviewVedtakCallback(previewVedtakCallback)}
           readOnly={readOnly}

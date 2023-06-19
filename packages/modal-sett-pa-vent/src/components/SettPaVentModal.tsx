@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { useForm } from 'react-hook-form';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, Modal, Label, BodyShort, Heading } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 import { Datepicker, SelectField, Form } from '@navikt/ft-form-hooks';
 import {
@@ -19,9 +20,9 @@ import { venteArsakType } from '@navikt/fp-kodeverk';
 import styles from './settPaVentModal.module.css';
 
 const initFrist = (): string => {
-  const date = moment().toDate();
+  const date = dayjs().toDate();
   date.setDate(date.getDate() + 28);
-  return date.toISOString().substr(0, 10);
+  return dayjs(date).format(ISO_DATE_FORMAT);
 };
 
 const isButtonDisabled = (

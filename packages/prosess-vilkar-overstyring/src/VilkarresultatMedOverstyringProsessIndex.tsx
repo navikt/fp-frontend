@@ -29,7 +29,7 @@ interface OwnProps {
 
 const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   behandling,
-  medlemskap = {},
+  medlemskap,
   aksjonspunkter,
   submitCallback,
   overrideReadOnly,
@@ -50,7 +50,7 @@ const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & Sta
     <VilkarresultatMedOverstyringForm
       behandlingType={behandling.type}
       behandlingsresultat={behandling.behandlingsresultat}
-      medlemskapFom={medlemskap.fom}
+      medlemskapFom={medlemskap?.fom}
       aksjonspunkter={aksjonspunkter}
       submitCallback={submitCallback}
       overrideReadOnly={overrideReadOnly}

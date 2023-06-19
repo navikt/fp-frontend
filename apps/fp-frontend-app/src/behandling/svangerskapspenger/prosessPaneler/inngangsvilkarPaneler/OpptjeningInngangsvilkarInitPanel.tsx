@@ -64,12 +64,7 @@ const OpptjeningInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvi
           )}
           {data.aksjonspunkter.length > 0 && (
             <>
-              <OpptjeningVilkarProsessIndex
-                erSvpFagsak
-                lovReferanse={data.vilkar[0].lovReferanse}
-                // @ts-ignore fiks
-                {...data}
-              />
+              <OpptjeningVilkarProsessIndex erSvpFagsak lovReferanse={data.vilkar[0].lovReferanse} {...data} />
               <VerticalSpacer thirtyTwoPx />
             </>
           )}

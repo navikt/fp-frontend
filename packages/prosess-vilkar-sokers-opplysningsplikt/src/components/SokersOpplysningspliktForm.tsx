@@ -55,7 +55,7 @@ const capitalizeFirstLetters = (navn: string): string =>
   navn
     .toLowerCase()
     .split(' ')
-    .map((w: string) => w.charAt(0).toUpperCase() + w.substr(1))
+    .map((w: string) => w.charAt(0).toUpperCase() + w.substring(1))
     .join(' ');
 
 const lagArbeidsgiverNavnOgFødselsdatoTekst = (navn: string, fodselsdato?: string): string =>
@@ -129,7 +129,7 @@ const buildInitialValues = (
 };
 
 const transformValues = (
-  values: Required<FormValues>,
+  values: FormValues,
   manglendeVedlegg: ManglendeVedleggSoknad[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   aksjonspunkter: Aksjonspunkt[],
@@ -146,7 +146,7 @@ const transformValues = (
 
   return {
     kode,
-    erVilkarOk: values.erVilkarOk,
+    erVilkarOk: values.erVilkarOk || false,
     inntektsmeldingerSomIkkeKommer: arbeidsgiverReferanser.map(agRef => {
       const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[agRef];
       return {
@@ -155,7 +155,9 @@ const transformValues = (
           ? undefined
           : arbeidsgiverOpplysninger.identifikator,
         aktørId: arbeidsgiverOpplysninger.erPrivatPerson ? arbeidsgiverOpplysninger.referanse : undefined,
-        brukerHarSagtAtIkkeKommer: values.inntektsmeldingerSomIkkeKommer[lagArbeidsgiverKey(arbeidsgiverOpplysninger)],
+        brukerHarSagtAtIkkeKommer: values.inntektsmeldingerSomIkkeKommer
+          ? values.inntektsmeldingerSomIkkeKommer[lagArbeidsgiverKey(arbeidsgiverOpplysninger)]
+          : false,
       };
     }, {}),
     ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
@@ -232,7 +234,7 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
   return (
     <Form
       formMethods={formMethods}
-      onSubmit={(values: Required<FormValues>) =>
+      onSubmit={(values: FormValues) =>
         submitCallback(transformValues(values, sorterteManglendeVedlegg, arbeidsgiverOpplysningerPerId, aksjonspunkter))
       }
       setDataOnUnmount={setFormData}

@@ -25,7 +25,7 @@ export type OwnProps<PANEL_DATA> = {
   hentInngangsvilkarPanelTekst: (data: StandardProsessPanelProps) => string;
 };
 
-const InngangsvilkarDefaultInitPanel = <PANEL_DATA = void,>({
+const InngangsvilkarDefaultInitPanel = <PANEL_DATA,>({
   erPanelValgt,
   behandlingVersjon,
   registrerInngangsvilkarPanel,
@@ -69,9 +69,8 @@ const InngangsvilkarDefaultInitPanel = <PANEL_DATA = void,>({
   }
 
   return renderPanel(
-    /* @ts-ignore Fiks */
     {
-      ...panelData,
+      ...(panelData as PANEL_DATA),
       ...standardPanelProps,
     },
     erOverstyrt,

@@ -26,7 +26,7 @@ export type OwnProps<PANEL_DATA> = {
   hentSkalMarkeresSomAktiv?: (standardData: StandardProsessPanelProps) => boolean;
 };
 
-const ProsessDefaultInitPanel = <PANEL_DATA = void,>({
+const ProsessDefaultInitPanel = <PANEL_DATA,>({
   valgtProsessSteg,
   behandling,
   registrerProsessPanel,
@@ -84,9 +84,8 @@ const ProsessDefaultInitPanel = <PANEL_DATA = void,>({
       status={status}
       dataState={formatertePanelEndepunkter.length > 0 ? panelDataState : RestApiState.SUCCESS}
     >
-      {/* @ts-ignore Fiks */}
       {renderPanel({
-        ...panelData,
+        ...(panelData as PANEL_DATA),
         ...standardPanelProps,
       })}
     </ProsessPanelWrapper>

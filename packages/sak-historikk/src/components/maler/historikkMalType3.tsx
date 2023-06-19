@@ -108,7 +108,6 @@ const formaterAksjonspunkt = (
   );
 };
 
-// @ts-ignore Fiks
 const HistorikkMalType3: FunctionComponent<HistorikkMal> = ({
   historikkinnslag,
   behandlingLocation,
@@ -118,30 +117,34 @@ const HistorikkMalType3: FunctionComponent<HistorikkMal> = ({
 }) => {
   const intl = useIntl();
   if (historikkinnslag.historikkinnslagDeler) {
-    return historikkinnslag.historikkinnslagDeler.map((historikkinnslagDel, index) => (
-      <div key={`totrinnsvurdering${index + 1}`}>
-        {historikkinnslagDel.hendelse && (
-          <>
-            <BodyShort size="small">{findHendelseText(historikkinnslagDel.hendelse, getKodeverknavn)}</BodyShort>
-            <VerticalSpacer fourPx />
-          </>
-        )}
-        <Skjermlenke
-          skjermlenke={historikkinnslagDel.skjermlenke}
-          behandlingLocation={behandlingLocation}
-          getKodeverknavn={getKodeverknavn}
-          scrollUpOnClick
-          createLocationForSkjermlenke={createLocationForSkjermlenke}
-        />
-        {historikkinnslagDel.aksjonspunkter &&
-          historikkinnslagDel.aksjonspunkter.map(aksjonspunkt => (
-            <div key={aksjonspunkt.aksjonspunktKode}>
-              {formaterAksjonspunkt(aksjonspunkt, intl, erTilbakekreving)}
-              <VerticalSpacer fourPx />
-            </div>
-          ))}
-      </div>
-    ));
+    return (
+      <>
+        {historikkinnslag.historikkinnslagDeler.map((historikkinnslagDel, index) => (
+          <div key={`totrinnsvurdering${index + 1}`}>
+            {historikkinnslagDel.hendelse && (
+              <>
+                <BodyShort size="small">{findHendelseText(historikkinnslagDel.hendelse, getKodeverknavn)}</BodyShort>
+                <VerticalSpacer fourPx />
+              </>
+            )}
+            <Skjermlenke
+              skjermlenke={historikkinnslagDel.skjermlenke}
+              behandlingLocation={behandlingLocation}
+              getKodeverknavn={getKodeverknavn}
+              scrollUpOnClick
+              createLocationForSkjermlenke={createLocationForSkjermlenke}
+            />
+            {historikkinnslagDel.aksjonspunkter &&
+              historikkinnslagDel.aksjonspunkter.map(aksjonspunkt => (
+                <div key={aksjonspunkt.aksjonspunktKode}>
+                  {formaterAksjonspunkt(aksjonspunkt, intl, erTilbakekreving)}
+                  <VerticalSpacer fourPx />
+                </div>
+              ))}
+          </div>
+        ))}
+      </>
+    );
   }
   return null;
 };
