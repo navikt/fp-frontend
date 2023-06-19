@@ -1,3 +1,9 @@
 .row {
-  background-color: white;
+  --ac-table-row-selected: white;
+  --ac-table-row-hover: var(--a-surface-neutral-moderate);
+  cursor: pointer;
+}
+
+.table {
+  background-color: var(--a-surface-neutral-moderate);
 }
