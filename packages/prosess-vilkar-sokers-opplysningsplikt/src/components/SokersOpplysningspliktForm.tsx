@@ -55,7 +55,7 @@ const capitalizeFirstLetters = (navn: string): string =>
   navn
     .toLowerCase()
     .split(' ')
-    .map((w: string) => w.charAt(0).toUpperCase() + w.substr(1))
+    .map((w: string) => w.charAt(0).toUpperCase() + w.substring(1))
     .join(' ');
 
 const lagArbeidsgiverNavnOgFødselsdatoTekst = (navn: string, fodselsdato?: string): string =>

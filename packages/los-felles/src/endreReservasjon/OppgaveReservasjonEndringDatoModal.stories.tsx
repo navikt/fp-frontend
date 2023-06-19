@@ -19,11 +19,14 @@ export default {
   decorators: [withIntl],
 };
 
-const Template: StoryFn<{ endreReserverasjonState: () => void }> = ({ endreReserverasjonState }) => (
+const Template: StoryFn<{ endreReserverasjonState: () => void; reserverTilDefault?: string }> = ({
+  endreReserverasjonState,
+  reserverTilDefault,
+}) => (
   <OppgaveReservasjonEndringDatoModal
     showModal
     closeModal={action('button-click')}
-    reserverTilDefault=""
+    reserverTilDefault={reserverTilDefault}
     oppgaveId={1}
     endreReserverasjonState={endreReserverasjonState}
     hentReserverteOppgaver={action('button-click')}
@@ -34,4 +37,10 @@ const Template: StoryFn<{ endreReserverasjonState: () => void }> = ({ endreReser
 export const Default = Template.bind({});
 Default.args = {
   endreReserverasjonState: action('button-click'),
+};
+
+export const MedDefaultverdi = Template.bind({});
+MedDefaultverdi.args = {
+  endreReserverasjonState: action('button-click'),
+  reserverTilDefault: '2017-08-02T00:54:25.455',
 };

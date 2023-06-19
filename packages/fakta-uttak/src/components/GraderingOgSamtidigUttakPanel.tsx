@@ -41,7 +41,7 @@ const lagVisningsNavn = (arbeidsgiverOpplysning: ArbeidsgiverOpplysninger, ekste
     visningsNavn = identifikator ? `${visningsNavn} (${identifikator})` : visningsNavn;
     visningsNavn = `${visningsNavn}${getEndCharFromId(eksternArbeidsforholdId)}`;
   } else {
-    visningsNavn = `${navn.substr(0, 5)}...(${formatDate(fødselsdato)})`;
+    visningsNavn = `${navn.substring(0, 5)}...(${formatDate(fødselsdato)})`;
   }
   return visningsNavn;
 };

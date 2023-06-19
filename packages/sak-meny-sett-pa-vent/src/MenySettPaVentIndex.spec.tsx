@@ -1,17 +1,18 @@
 import React from 'react';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 import { Modal } from '@navikt/ds-react';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import * as stories from './MenySettPaVentIndex.stories';
 
 const { Default } = composeStories(stories);
 
 const initFrist = (): string => {
-  const date = moment().toDate();
+  const date = dayjs().toDate();
   date.setDate(date.getDate() + 28);
-  return date.toISOString().substr(0, 10);
+  return dayjs(date).format(ISO_DATE_FORMAT);
 };
 
 describe('<MenySettPaVentIndex>', () => {
