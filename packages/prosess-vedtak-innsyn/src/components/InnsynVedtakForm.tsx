@@ -32,7 +32,7 @@ export type ForhandsvisData = {
 };
 
 const getPreviewCallback =
-  (begrunnelse: string, previewCallback: (data: ForhandsvisData) => Promise<any>) =>
+  (previewCallback: (data: ForhandsvisData) => Promise<any>, begrunnelse?: string) =>
   (e: React.KeyboardEvent | React.MouseEvent): void => {
     e.preventDefault();
 
@@ -62,7 +62,7 @@ const getDocumenterMedFikkInnsynVerdi = (
     .filter(dokAlle => valgteDokumenter.find(dokValgte => dokValgte.dokumentId === dokAlle.dokumentId))
     .map(dokAlle => ({
       ...dokAlle,
-      fikkInnsyn: valgteDokumenter.find(dokValgte => dokValgte.dokumentId === dokAlle.dokumentId).fikkInnsyn,
+      fikkInnsyn: valgteDokumenter.find(dokValgte => dokValgte.dokumentId === dokAlle.dokumentId)?.fikkInnsyn || false,
     }));
 
 const findResultTypeMessage = (resultat: string): string => {
@@ -147,7 +147,7 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
-  const previewBrev = getPreviewCallback(begrunnelse, previewCallback);
+  const previewBrev = getPreviewCallback(previewCallback, begrunnelse);
 
   return (
     <Form
