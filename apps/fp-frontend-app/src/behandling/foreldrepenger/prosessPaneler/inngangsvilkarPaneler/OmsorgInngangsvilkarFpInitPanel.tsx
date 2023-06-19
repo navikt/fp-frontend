@@ -34,10 +34,7 @@ const OmsorgInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangsvilk
       hentInngangsvilkarPanelTekst={() => intl.formatMessage({ id: 'ErOmsorgVilkaarOppfyltForm.Vurder' })}
       renderPanel={data => (
         <>
-          <OmsorgVilkarProsessIndex
-            // @ts-ignore Eg trur denne feilar grunna feil i typescript-pakka. Sjekk på eit seinare tidspunkt om denne er retta
-            {...data}
-          />
+          <OmsorgVilkarProsessIndex {...data} />
           <VerticalSpacer thirtyTwoPx />
         </>
       )}

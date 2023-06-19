@@ -16,7 +16,7 @@ import VedtakKlageProsessIndex from './VedtakKlageProsessIndex';
 
 const promiseAction =
   () =>
-  (...args) => {
+  (...args: any[]) => {
     action('button-click')(...args);
     return Promise.resolve();
   };

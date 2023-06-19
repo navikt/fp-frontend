@@ -8,7 +8,6 @@ const { Default } = composeStories(stories);
 describe('<NyeOgFerdigstilteOppgaverForSisteSyvPanel>', () => {
   // TODO echarts-testing
   it.skip('skal rendre graf', async () => {
-    // @ts-ignore Ta vekk når fiksa
     render(<Default />);
     expect(await screen.findByText('Siste 7 dager')).toBeInTheDocument();
   });

@@ -6,7 +6,7 @@ import { RestApiState } from '@navikt/fp-rest-api-hooks';
 interface OwnProps {
   erPanelValgt: boolean;
   dataState: RestApiState;
-  children: ReactElement;
+  children: ReactElement | null;
 }
 
 const FaktaPanelWrapper: FunctionComponent<OwnProps> = ({ erPanelValgt, dataState, children }) => {

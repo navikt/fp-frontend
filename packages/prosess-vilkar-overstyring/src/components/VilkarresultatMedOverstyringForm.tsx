@@ -42,9 +42,9 @@ const hentErIkkeOppfyltTekstkode = (customVilkarIkkeOppfyltText?: TextValues) =>
   customVilkarIkkeOppfyltText ? customVilkarIkkeOppfyltText.id : 'VilkarresultatMedOverstyringForm.VilkarIkkeOppfylt';
 
 const getCustomVilkarText = (
-  medlemskapFom: string,
   behandlingType: string,
   erOppfylt: boolean,
+  medlemskapFom?: string,
 ): TextValues | undefined => {
   const isBehandlingRevurderingFortsattMedlemskap = behandlingType === BehandlingType.REVURDERING && !!medlemskapFom;
   if (isBehandlingRevurderingFortsattMedlemskap) {
@@ -58,11 +58,11 @@ const getCustomVilkarText = (
   return undefined;
 };
 
-const getCustomVilkarTextForOppfylt = (medlemskapFom: string, behandlingType: string): TextValues | undefined =>
-  getCustomVilkarText(medlemskapFom, behandlingType, true);
+const getCustomVilkarTextForOppfylt = (behandlingType: string, medlemskapFom?: string): TextValues | undefined =>
+  getCustomVilkarText(behandlingType, true, medlemskapFom);
 
-const getCustomVilkarTextForIkkeOppfylt = (medlemskapFom: string, behandlingType: string): TextValues | undefined =>
-  getCustomVilkarText(medlemskapFom, behandlingType, false);
+const getCustomVilkarTextForIkkeOppfylt = (behandlingType: string, medlemskapFom?: string): TextValues | undefined =>
+  getCustomVilkarText(behandlingType, false, medlemskapFom);
 
 type FormValues = {
   erVilkarOk?: boolean;
@@ -98,7 +98,7 @@ const transformValues = (
 interface OwnProps {
   behandlingType: string;
   behandlingsresultat?: Behandling['behandlingsresultat'];
-  medlemskapFom: string;
+  medlemskapFom?: string;
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (data: OverstyringAp | OverstyringMedlemskapsvilkaretLopendeAp) => Promise<void>;
   overrideReadOnly: boolean;
@@ -166,11 +166,11 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
   const erVilkarOk = formMethods.watch('erVilkarOk');
 
   const customVilkarOppfyltText = useMemo(
-    () => getCustomVilkarTextForOppfylt(medlemskapFom, behandlingType),
+    () => getCustomVilkarTextForOppfylt(behandlingType, medlemskapFom),
     [medlemskapFom, behandlingType],
   );
   const customVilkarIkkeOppfyltText = useMemo(
-    () => getCustomVilkarTextForIkkeOppfylt(medlemskapFom, behandlingType),
+    () => getCustomVilkarTextForIkkeOppfylt(behandlingType, medlemskapFom),
     [medlemskapFom, behandlingType],
   );
 

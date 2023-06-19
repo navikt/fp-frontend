@@ -21,7 +21,7 @@ export type OwnProps<PANEL_DATA> = {
   faktaPanelMenyTekst: string;
 };
 
-const FaktaDefaultInitPanel = <PANEL_DATA = void,>({
+const FaktaDefaultInitPanel = <PANEL_DATA,>({
   valgtFaktaSteg,
   behandling,
   registrerFaktaPanel,
@@ -59,9 +59,8 @@ const FaktaDefaultInitPanel = <PANEL_DATA = void,>({
       erPanelValgt={erPanelValgt}
       dataState={formatertePanelEndepunkter.length > 0 ? panelDataState : RestApiState.SUCCESS}
     >
-      {/* @ts-ignore Fiks */}
       {renderPanel({
-        ...panelData,
+        ...(panelData as PANEL_DATA),
         ...standardPanelProps,
       })}
     </FaktaPanelWrapper>

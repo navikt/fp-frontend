@@ -50,16 +50,6 @@ describe('<MeldingIndex>', () => {
     [KodeverkType.REVURDERING_VARSLING_ÅRSAK]: [],
   };
 
-  const assignMock = vi.fn();
-  // @ts-ignore
-  delete window.location;
-  // @ts-ignore Dette er kun for å unngå warnings med window.location.reload(). (Denne blir brukt som en temp-fiks, så dette skal derfor fjernes)
-  window.location = { reload: assignMock };
-
-  afterEach(() => {
-    assignMock.mockClear();
-  });
-
   it('skal vise messages når mottakere og brevmaler har blitt hentet fra server', async () => {
     const data = [
       { key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: { navn: 'Peder' } } },

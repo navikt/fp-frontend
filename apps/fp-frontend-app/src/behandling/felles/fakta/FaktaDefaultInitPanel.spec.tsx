@@ -18,15 +18,13 @@ const behandling = {
   behandlingPaaVent: false,
 } as Behandling;
 
-// @ts-ignore Fiks
-const kodeverk = alleKodeverk as AlleKodeverk;
-
 describe('<FaktaDefaultInitPanel>', () => {
   const submitCallback = vi.fn();
   vi.spyOn(Felles, 'default').mockImplementation(() => ({
     behandling,
     submitCallback,
-    alleKodeverk: kodeverk,
+    // @ts-ignore Fiks
+    alleKodeverk,
     readOnly: false,
     aksjonspunkter: [
       {

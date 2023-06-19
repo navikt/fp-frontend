@@ -24,19 +24,25 @@ const VedtakKlageProsessIndex: FunctionComponent<OwnProps & StandardProsessPanel
   previewVedtakCallback,
   isReadOnly,
   alleKodeverk,
-}) => (
-  <RawIntlProvider value={intl}>
-    <VedtakKlageForm
-      behandlingsresultat={behandling.behandlingsresultat}
-      behandlingPaaVent={behandling.behandlingPaaVent}
-      klageVurdering={klageVurdering}
-      aksjonspunkter={aksjonspunkter}
-      submitCallback={submitCallback}
-      previewVedtakCallback={previewVedtakCallback}
-      readOnly={isReadOnly}
-      alleKodeverk={alleKodeverk}
-    />
-  </RawIntlProvider>
-);
+}) => {
+  if (!behandling.behandlingsresultat) {
+    throw new Error(`behandlingsresultat finnes ikke for behandling ${behandling.uuid}`);
+  }
+
+  return (
+    <RawIntlProvider value={intl}>
+      <VedtakKlageForm
+        behandlingsresultat={behandling.behandlingsresultat}
+        behandlingPaaVent={behandling.behandlingPaaVent}
+        klageVurdering={klageVurdering}
+        aksjonspunkter={aksjonspunkter}
+        submitCallback={submitCallback}
+        previewVedtakCallback={previewVedtakCallback}
+        readOnly={isReadOnly}
+        alleKodeverk={alleKodeverk}
+      />
+    </RawIntlProvider>
+  );
+};
 
 export default VedtakKlageProsessIndex;
