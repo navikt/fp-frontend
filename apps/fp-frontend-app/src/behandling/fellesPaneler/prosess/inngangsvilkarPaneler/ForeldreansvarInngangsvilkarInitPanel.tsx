@@ -55,7 +55,6 @@ const ForeldreansvarInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngan
           <ForeldreansvarVilkarProsessIndex
             isEngangsstonad
             isForeldreansvar2Ledd={data.vilkar.some(v => v.vilkarType === VilkarType.FORELDREANSVARSVILKARET_2_LEDD)}
-            // @ts-ignore Eg trur denne feilar grunna feil i typescript-pakka. Sjekk på eit seinare tidspunkt om denne er retta
             {...data}
           />
           <VerticalSpacer thirtyTwoPx />

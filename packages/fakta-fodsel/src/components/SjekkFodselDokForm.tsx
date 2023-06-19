@@ -127,7 +127,6 @@ const lagBarn = (antallBarnFraSoknad: number): AvklartBarn[] => {
   }
   const childrenArray: AvklartBarn[] = [];
   while (antallBarn > 0) {
-    // @ts-ignore Fiks
     childrenArray.push({ fodselsdato: undefined, dodsdato: undefined });
     antallBarn -= 1;
   }

@@ -57,11 +57,7 @@ const FodselInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvilkar
           )}
           {data.aksjonspunkter.length > 0 && (
             <>
-              <FodselVilkarProsessIndex
-                ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD}
-                // @ts-ignore Eg trur denne feilar grunna feil i typescript-pakka. Sjekk på eit seinare tidspunkt om denne er retta
-                {...data}
-              />
+              <FodselVilkarProsessIndex ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD} {...data} />
               <VerticalSpacer thirtyTwoPx />
             </>
           )}

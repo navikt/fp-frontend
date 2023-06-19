@@ -59,10 +59,7 @@ const AdopsjonInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvilk
           )}
           {data.aksjonspunkter.length > 0 && (
             <>
-              <AdopsjonVilkarProsessIndex
-                // @ts-ignore Eg trur denne feilar grunna feil i typescript-pakka. Sjekk på eit seinare tidspunkt om denne er retta
-                {...data}
-              />
+              <AdopsjonVilkarProsessIndex {...data} />
               <VerticalSpacer thirtyTwoPx />
             </>
           )}

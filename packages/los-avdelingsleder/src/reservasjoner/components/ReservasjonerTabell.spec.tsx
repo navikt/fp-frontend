@@ -7,7 +7,6 @@ const { ViseAtIngenReservasjonerBleFunnet, VisTabellMedReservasjoner } = compose
 
 describe('<ReservasjonerTabell>', () => {
   it('skal vise tekst som viser at ingen reservasjoner er lagt til', async () => {
-    // @ts-ignore Fiks
     render(<ViseAtIngenReservasjonerBleFunnet />);
 
     expect(await screen.findByText('Reservasjoner for avdelingen')).toBeInTheDocument();
@@ -15,7 +14,6 @@ describe('<ReservasjonerTabell>', () => {
   });
 
   it('skal vise to reservasjoner i tabell', async () => {
-    // @ts-ignore Fiks
     render(<VisTabellMedReservasjoner />);
 
     expect(await screen.findByText('Reservasjoner for avdelingen')).toBeInTheDocument();
