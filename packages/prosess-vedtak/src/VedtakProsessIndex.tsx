@@ -42,7 +42,7 @@ const skalSkriveFritekstGrunnetFastsettingAvBeregning = (
       ap.status === aksjonspunktStatus.UTFORT,
   );
   const førstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode[0];
-  const andelSomErManueltFastsatt = førstePeriode.beregningsgrunnlagPrStatusOgAndel.find(
+  const andelSomErManueltFastsatt = førstePeriode.beregningsgrunnlagPrStatusOgAndel?.find(
     andel => andel.overstyrtPrAar || andel.overstyrtPrAar === 0,
   );
   return !!behandlingHarLøstBGAP || !!andelSomErManueltFastsatt;
@@ -135,7 +135,7 @@ const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
           vilkar={vilkar}
           beregningErManueltFastsatt={beregningErManueltFastsatt}
           resultatstrukturOriginalBehandling={originaltBeregningsresultat}
-          medlemskapFom={medlemskap ? medlemskap.fom : undefined}
+          medlemskapFom={medlemskap?.fom}
           formData={formData}
           setFormData={setFormData}
         />

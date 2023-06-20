@@ -13,10 +13,10 @@ const tilbakekrevingMedInntrekk = (tilbakekrevingKode: string, simuleringResulta
 
 export const getTilbakekrevingText = (
   alleKodeverk: AlleKodeverk,
-  simuleringResultat: SimuleringResultat,
+  simuleringResultat?: SimuleringResultat,
   tilbakekrevingvalg?: TilbakekrevingValg,
 ): string => {
-  if (tilbakekrevingvalg !== null && tilbakekrevingvalg !== undefined) {
+  if (tilbakekrevingvalg !== null && tilbakekrevingvalg !== undefined && simuleringResultat) {
     if (tilbakekrevingMedInntrekk(tilbakekrevingvalg.videreBehandling, simuleringResultat)) {
       return 'VedtakForm.TilbakekrInfotrygdOgInntrekk';
     }

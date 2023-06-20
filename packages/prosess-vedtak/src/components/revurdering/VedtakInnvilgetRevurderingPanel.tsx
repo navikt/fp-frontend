@@ -15,7 +15,7 @@ interface OwnProps {
   isReadOnly: boolean;
   resultatstruktur?: BeregningsresultatFp | BeregningsresultatEs;
   språkKode: string;
-  behandlingsresultat: Behandlingsresultat;
+  behandlingsresultat?: Behandlingsresultat;
   beregningErManueltFastsatt: boolean;
   skalBrukeOverstyrendeFritekstBrev: boolean;
 }

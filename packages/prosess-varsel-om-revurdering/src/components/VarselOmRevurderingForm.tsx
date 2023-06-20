@@ -20,6 +20,7 @@ import {
   FamilieHendelse,
   AlleKodeverk,
   Behandling,
+  KodeverkMedNavn,
 } from '@navikt/fp-types';
 import { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
@@ -54,7 +55,7 @@ const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
 
 const nullSafe = (value: FamilieHendelse): FamilieHendelse => value || ({} as FamilieHendelse);
 
-const EMPTY_ARRAY = [];
+const EMPTY_ARRAY = [] as KodeverkMedNavn[];
 
 interface OwnProps {
   behandlingArsaker: Behandling['behandlingÅrsaker'];
