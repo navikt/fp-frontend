@@ -2292,7 +2292,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -2330,7 +2330,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -2367,7 +2367,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -2402,7 +2402,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -2468,7 +2468,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -2505,7 +2505,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -2542,7 +2542,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -2578,7 +2578,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -2615,7 +2615,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -2653,7 +2653,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -2688,7 +2688,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -2726,7 +2726,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -2764,7 +2764,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -2801,7 +2801,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -2837,7 +2837,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -2872,7 +2872,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -2903,7 +2903,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3028,7 +3028,7 @@ __metadata:
     "@sentry/browser": 7.55.1
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     axios: 1.4.0
@@ -3079,7 +3079,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3137,7 +3137,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     "@types/lodash.debounce": 4.0.7
@@ -3177,7 +3177,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3220,7 +3220,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3292,7 +3292,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -3330,7 +3330,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3362,7 +3362,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -3393,7 +3393,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -3424,7 +3424,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -3460,7 +3460,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -3497,7 +3497,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3529,7 +3529,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3593,7 +3593,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3631,7 +3631,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -3668,7 +3668,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -3704,7 +3704,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3740,7 +3740,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -3777,7 +3777,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -3817,7 +3817,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -3855,7 +3855,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3888,7 +3888,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -3925,7 +3925,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3960,7 +3960,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -3994,7 +3994,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4028,7 +4028,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4062,7 +4062,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4095,7 +4095,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4131,7 +4131,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4167,7 +4167,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4203,7 +4203,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4238,7 +4238,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4305,7 +4305,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -4342,7 +4342,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     classnames: 2.3.2
@@ -4372,7 +4372,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4404,7 +4404,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4437,7 +4437,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4470,7 +4470,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4502,7 +4502,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4535,7 +4535,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4574,7 +4574,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -4603,7 +4603,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.31
     "@storybook/addon-actions": 7.0.20
     "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@storybook/react-vite": 7.0.22
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
@@ -6909,6 +6909,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/core-client@npm:7.0.22":
+  version: 7.0.22
+  resolution: "@storybook/core-client@npm:7.0.22"
+  dependencies:
+    "@storybook/client-logger": 7.0.22
+    "@storybook/preview-api": 7.0.22
+  checksum: 7172ff37c26209ed103d192f0a17158c6b56da15476f1eeee526ec28948f014b91a4696447ca5fb431c6ee0304aa105346191dfe03bc10241871e9d01cfe27ea
+  languageName: node
+  linkType: hard
+
 "@storybook/core-common@npm:7.0.20":
   version: 7.0.20
   resolution: "@storybook/core-common@npm:7.0.20"
@@ -7163,6 +7173,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/docs-tools@npm:7.0.22":
+  version: 7.0.22
+  resolution: "@storybook/docs-tools@npm:7.0.22"
+  dependencies:
+    "@babel/core": ^7.12.10
+    "@storybook/core-common": 7.0.22
+    "@storybook/preview-api": 7.0.22
+    "@storybook/types": 7.0.22
+    "@types/doctrine": ^0.0.3
+    doctrine: ^3.0.0
+    lodash: ^4.17.21
+  checksum: f583ae24e37e46bd06fd31167c49854cddd0853f60cfb30ac522f1e0d523db36018102ce6da26d7e9c270b32ef1b7fdca6d2668b4fa9e7adc1a338a1244ec6b9
+  languageName: node
+  linkType: hard
+
 "@storybook/global@npm:^5.0.0":
   version: 5.0.0
   resolution: "@storybook/global@npm:5.0.0"
@@ -7318,14 +7343,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react-vite@npm:7.0.20":
-  version: 7.0.20
-  resolution: "@storybook/react-vite@npm:7.0.20"
+"@storybook/react-dom-shim@npm:7.0.22":
+  version: 7.0.22
+  resolution: "@storybook/react-dom-shim@npm:7.0.22"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: faa63a5e8e995d6e78a8bc92943e6303888d1da736fc0f233402a08c07582de956f9df2a4a81cfc29a960e63298eb5cebb0c1813f73dfbb8a1f3c3be5a0b6f03
+  languageName: node
+  linkType: hard
+
+"@storybook/react-vite@npm:7.0.22":
+  version: 7.0.22
+  resolution: "@storybook/react-vite@npm:7.0.22"
   dependencies:
     "@joshwooding/vite-plugin-react-docgen-typescript": 0.2.1
     "@rollup/pluginutils": ^4.2.0
-    "@storybook/builder-vite": 7.0.20
-    "@storybook/react": 7.0.20
+    "@storybook/builder-vite": 7.0.22
+    "@storybook/react": 7.0.22
     "@vitejs/plugin-react": ^3.0.1
     ast-types: ^0.14.2
     magic-string: ^0.27.0
@@ -7334,7 +7369,7 @@ __metadata:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     vite: ^3.0.0 || ^4.0.0
-  checksum: 39ae3985e5fbe829c6753bca15766dcab70786dead0d9fd64fadbb078ff6ea9405cea3791ebd90b9d0d41c48b4a51a6b652884c8877c316ac3a07bc19f02a74e
+  checksum: 8c98572a0f8d63eadfce273875f674df16c62f97fd8294681d0c45463dfa044feeb12f2f6a64cbaf37cd209352433940585b44abbaef73c17101bfd664d115f9
   languageName: node
   linkType: hard
 
@@ -7370,6 +7405,41 @@ __metadata:
     typescript:
       optional: true
   checksum: 2fb9a0fa800066f48ea1bc3d92bb23bcf35029258af68933e70d2253abc60be59fbce998bdf04782f1660ed64b7e359f1218597a66e3b66cc1235a6595a7646c
+  languageName: node
+  linkType: hard
+
+"@storybook/react@npm:7.0.22":
+  version: 7.0.22
+  resolution: "@storybook/react@npm:7.0.22"
+  dependencies:
+    "@storybook/client-logger": 7.0.22
+    "@storybook/core-client": 7.0.22
+    "@storybook/docs-tools": 7.0.22
+    "@storybook/global": ^5.0.0
+    "@storybook/preview-api": 7.0.22
+    "@storybook/react-dom-shim": 7.0.22
+    "@storybook/types": 7.0.22
+    "@types/escodegen": ^0.0.6
+    "@types/estree": ^0.0.51
+    "@types/node": ^16.0.0
+    acorn: ^7.4.1
+    acorn-jsx: ^5.3.1
+    acorn-walk: ^7.2.0
+    escodegen: ^2.0.0
+    html-tags: ^3.1.0
+    lodash: ^4.17.21
+    prop-types: ^15.7.2
+    react-element-to-jsx-string: ^15.0.0
+    ts-dedent: ^2.0.0
+    type-fest: ^2.19.0
+    util-deprecate: ^1.0.2
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: eee9719d282258158e0bd006c0a2e0dce4025e59efb7bcd98ca015e02ed2d45a1e048159ffa30cbf0eaeeed12f38d89e96297cbcd322fca066a769e1505dbac7
   languageName: node
   linkType: hard
 
