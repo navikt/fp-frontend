@@ -6615,6 +6615,46 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/builder-vite@npm:7.0.22":
+  version: 7.0.22
+  resolution: "@storybook/builder-vite@npm:7.0.22"
+  dependencies:
+    "@storybook/channel-postmessage": 7.0.22
+    "@storybook/channel-websocket": 7.0.22
+    "@storybook/client-logger": 7.0.22
+    "@storybook/core-common": 7.0.22
+    "@storybook/csf-plugin": 7.0.22
+    "@storybook/mdx2-csf": ^1.0.0
+    "@storybook/node-logger": 7.0.22
+    "@storybook/preview": 7.0.22
+    "@storybook/preview-api": 7.0.22
+    "@storybook/types": 7.0.22
+    browser-assert: ^1.2.1
+    es-module-lexer: ^0.9.3
+    express: ^4.17.3
+    fs-extra: ^11.1.0
+    glob: ^8.1.0
+    glob-promise: ^6.0.2
+    magic-string: ^0.27.0
+    remark-external-links: ^8.0.0
+    remark-slug: ^6.0.0
+    rollup: ^2.25.0 || ^3.3.0
+  peerDependencies:
+    "@preact/preset-vite": "*"
+    typescript: ">= 4.3.x"
+    vite: ^3.0.0 || ^4.0.0
+    vite-plugin-glimmerx: "*"
+  peerDependenciesMeta:
+    "@preact/preset-vite":
+      optional: true
+    typescript:
+      optional: true
+    vite-plugin-glimmerx:
+      optional: true
+  checksum: 6cc471aea5cd110985efbf832f8890b0f9d55b2a013adca3198fe6ab2d074fcc8be07e62b526a9b4a12a891cde3c4237bced122b9e2eaa9073aa2b605edf0bbf
+  languageName: node
+  linkType: hard
+
 "@storybook/channel-postmessage@npm:7.0.20":
   version: 7.0.20
   resolution: "@storybook/channel-postmessage@npm:7.0.20"
@@ -6652,6 +6692,18 @@ __metadata:
     "@storybook/global": ^5.0.0
     telejson: ^7.0.3
   checksum: b2d8842f122a34e9c6c7985ac27fc3fad49752bd174fca1906edc07d3fac296034880a4d81ceece764e8de6d419738bddf6c1101c4f7d8003ddefa6bc42df149
+  languageName: node
+  linkType: hard
+
+"@storybook/channel-websocket@npm:7.0.22":
+  version: 7.0.22
+  resolution: "@storybook/channel-websocket@npm:7.0.22"
+  dependencies:
+    "@storybook/channels": 7.0.22
+    "@storybook/client-logger": 7.0.22
+    "@storybook/global": ^5.0.0
+    telejson: ^7.0.3
+  checksum: 75447d41a5cbab2bb8d8207f308dc3da6bb35632dd14fca2344d586822fa49c345553f462d0a9f798c84ae8290eca03d6084dceaf502b4b0b0e3f6e884674128
   languageName: node
   linkType: hard
 
@@ -7036,6 +7088,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/csf-plugin@npm:7.0.22":
+  version: 7.0.22
+  resolution: "@storybook/csf-plugin@npm:7.0.22"
+  dependencies:
+    "@storybook/csf-tools": 7.0.22
+    unplugin: ^0.10.2
+  checksum: 3ef4367a53795e60940b8fe081b5fcba1804e2fa31ee25068bacdd4f6f7b3291d8670492c2844f6b9eab85fe80620ba64c320eeea034709cd6569841917b31bc
+  languageName: node
+  linkType: hard
+
 "@storybook/csf-tools@npm:7.0.20":
   version: 7.0.20
   resolution: "@storybook/csf-tools@npm:7.0.20"
@@ -7236,6 +7298,13 @@ __metadata:
   version: 7.0.20
   resolution: "@storybook/preview@npm:7.0.20"
   checksum: c9b87393765eefe1e18982cbacdbfecd450e49f52e7ad6a2da89fce548cb2a493c02dbcf8915815c1662fb4c72cbfe571577fdd68056c68506990e5215dca78a
+  languageName: node
+  linkType: hard
+
+"@storybook/preview@npm:7.0.22":
+  version: 7.0.22
+  resolution: "@storybook/preview@npm:7.0.22"
+  checksum: a756e5a05edcfec9ef5fd49a42ebef543fc19ef0833c2887eb3651cccae2ff905691dd7a43c0c7e1c7c056a8d111a77dea0a476556026e4f5d73fd967aec228e
   languageName: node
   linkType: hard
 
@@ -11940,7 +12009,7 @@ __metadata:
     "@sentry/cli": 2.19.0
     "@storybook/addon-essentials": 7.0.20
     "@storybook/addon-links": 7.0.20
-    "@storybook/builder-vite": 7.0.20
+    "@storybook/builder-vite": 7.0.22
     "@storybook/cli": 7.0.20
     "@storybook/react": 7.0.20
     "@testing-library/jest-dom": 5.16.5
