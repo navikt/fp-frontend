@@ -19,9 +19,9 @@
   "dependencies": {
     "@navikt/fp-kodeverk": "1.0.0",
     "@navikt/fp-types": "1.0.0",
-    "@navikt/ft-fakta-beregning": "4.2.22",
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "7.2.26",
-    "@navikt/ft-prosess-beregningsgrunnlag": "6.2.22"
+    "@navikt/ft-fakta-beregning": "4.2.23",
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "7.2.28",
+    "@navikt/ft-prosess-beregningsgrunnlag": "6.2.25"
   },
   "devDependencies": {
     "typescript": "5.0.4",
