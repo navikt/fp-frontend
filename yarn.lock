@@ -6154,9 +6154,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/cli@npm:2.19.0":
-  version: 2.19.0
-  resolution: "@sentry/cli@npm:2.19.0"
+"@sentry/cli@npm:2.19.1":
+  version: 2.19.1
+  resolution: "@sentry/cli@npm:2.19.1"
   dependencies:
     https-proxy-agent: ^5.0.0
     node-fetch: ^2.6.7
@@ -6165,7 +6165,7 @@ __metadata:
     which: ^2.0.2
   bin:
     sentry-cli: bin/sentry-cli
-  checksum: 2dcf288606a96a4f00535d5d4fa7389afb9e75356129299bbe4e1bf1ec32f8002dd137726ff1b7afe4b143c30e6636908304864bdb62de3091b476c286387feb
+  checksum: d598e85974e8a02f3c2b07525d3fff12a6a1db96b3281da62d9b8adcb05de65d1a4e82288df4590d17735a2e207d04ec132b92c4085e7f327d3780942cffd058
   languageName: node
   linkType: hard
 
@@ -6575,46 +6575,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/builder-vite@npm:7.0.20":
-  version: 7.0.20
-  resolution: "@storybook/builder-vite@npm:7.0.20"
-  dependencies:
-    "@storybook/channel-postmessage": 7.0.20
-    "@storybook/channel-websocket": 7.0.20
-    "@storybook/client-logger": 7.0.20
-    "@storybook/core-common": 7.0.20
-    "@storybook/csf-plugin": 7.0.20
-    "@storybook/mdx2-csf": ^1.0.0
-    "@storybook/node-logger": 7.0.20
-    "@storybook/preview": 7.0.20
-    "@storybook/preview-api": 7.0.20
-    "@storybook/types": 7.0.20
-    browser-assert: ^1.2.1
-    es-module-lexer: ^0.9.3
-    express: ^4.17.3
-    fs-extra: ^11.1.0
-    glob: ^8.1.0
-    glob-promise: ^6.0.2
-    magic-string: ^0.27.0
-    remark-external-links: ^8.0.0
-    remark-slug: ^6.0.0
-    rollup: ^2.25.0 || ^3.3.0
-  peerDependencies:
-    "@preact/preset-vite": "*"
-    typescript: ">= 4.3.x"
-    vite: ^3.0.0 || ^4.0.0
-    vite-plugin-glimmerx: "*"
-  peerDependenciesMeta:
-    "@preact/preset-vite":
-      optional: true
-    typescript:
-      optional: true
-    vite-plugin-glimmerx:
-      optional: true
-  checksum: 36b1a10c69057f41c4fc98ee225283adb1504eb2f0b46e414ba44b013626c8ac47b5619a2ad5e6d03a6343d931a43be91803ec52f95c988c48bec4f40312c07a
-  languageName: node
-  linkType: hard
-
 "@storybook/builder-vite@npm:7.0.22":
   version: 7.0.22
   resolution: "@storybook/builder-vite@npm:7.0.22"
@@ -6680,18 +6640,6 @@ __metadata:
     qs: ^6.10.0
     telejson: ^7.0.3
   checksum: cbca15c9ab1e9286412b302657a9e2faa2c57d0b698b6d6db50ba51e417d24f1578504b0cf555bc41b638d4405acec1aeb6327839254fe4a4835a54206331834
-  languageName: node
-  linkType: hard
-
-"@storybook/channel-websocket@npm:7.0.20":
-  version: 7.0.20
-  resolution: "@storybook/channel-websocket@npm:7.0.20"
-  dependencies:
-    "@storybook/channels": 7.0.20
-    "@storybook/client-logger": 7.0.20
-    "@storybook/global": ^5.0.0
-    telejson: ^7.0.3
-  checksum: b2d8842f122a34e9c6c7985ac27fc3fad49752bd174fca1906edc07d3fac296034880a4d81ceece764e8de6d419738bddf6c1101c4f7d8003ddefa6bc42df149
   languageName: node
   linkType: hard
 
@@ -7316,13 +7264,6 @@ __metadata:
     ts-dedent: ^2.0.0
     util-deprecate: ^1.0.2
   checksum: d4af5770d1fc9fd2d120a54bf3e8c6d846af1a5cd8978c9ab64cb30dd16c570a4b9464dcc57f67ef1554f3e009d7659fe59853ec870b2a87046a2a4ffa22647f
-  languageName: node
-  linkType: hard
-
-"@storybook/preview@npm:7.0.20":
-  version: 7.0.20
-  resolution: "@storybook/preview@npm:7.0.20"
-  checksum: c9b87393765eefe1e18982cbacdbfecd450e49f52e7ad6a2da89fce548cb2a493c02dbcf8915815c1662fb4c72cbfe571577fdd68056c68506990e5215dca78a
   languageName: node
   linkType: hard
 
@@ -12076,7 +12017,7 @@ __metadata:
   resolution: "fp-frontend@workspace:."
   dependencies:
     "@navikt/aksel-stylelint": 4.1.4
-    "@sentry/cli": 2.19.0
+    "@sentry/cli": 2.19.1
     "@storybook/addon-essentials": 7.0.20
     "@storybook/addon-links": 7.0.20
     "@storybook/builder-vite": 7.0.22
