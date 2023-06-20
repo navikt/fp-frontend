@@ -40,7 +40,7 @@
     "classnames": "2.3.2",
     "moment": "2.29.4",
     "react": "18.2.0",
-    "react-hook-form": "7.44.3",
+    "react-hook-form": "7.45.0",
     "react-intl": "6.4.4"
   },
   "devDependencies": {
