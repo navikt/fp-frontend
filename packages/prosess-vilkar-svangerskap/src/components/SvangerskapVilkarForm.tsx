@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useMemo } from 'react';
+import React, { FunctionComponent, useCallback, useEffect, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import moment from 'moment';
@@ -117,6 +117,14 @@ const SvangerskapVilkarForm: FunctionComponent<OwnProps> = ({
     defaultValues: formData || initialValues,
   });
 
+  const erVilkarOk = formMethods.watch('erVilkarOk');
+
+  useEffect(() => {
+    if (erVilkarOk) {
+      formMethods.clearErrors();
+    }
+  }, [erVilkarOk]);
+
   const avslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.SVANGERSKAPVILKARET];
 
   const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET);
@@ -158,7 +166,7 @@ const SvangerskapVilkarForm: FunctionComponent<OwnProps> = ({
           customVilkarOppfyltText={<FormattedMessage id="SvangerskapVilkarForm.Oppfylt" />}
           customVilkarIkkeOppfyltText={<FormattedMessage id="SvangerskapVilkarForm.IkkeOppfylt" values={{ b: bTag }} />}
         />
-        <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />
+        <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} notRequired={erVilkarOk} />
       </ProsessPanelTemplate>
     </Form>
   );
