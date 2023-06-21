@@ -517,6 +517,10 @@ const historikkEndretFeltVerdiTypeCodes = {
     kode: '4074',
     verdiId: 'HistorikkEndretFelt.AvslagOverforingKvoteSykdomIkkeDok',
   },
+  4075: {
+    kode: '4075',
+    verdiId: 'HistorikkEndretFelt.FarIkkeRettPåFellesperiodeFordiMorIkkeRett',
+  },
   4076: {
     kode: '4076',
     verdiId: 'HistorikkEndretFelt.AvslagOverforingAnnenForelderRett',
@@ -617,6 +621,50 @@ const historikkEndretFeltVerdiTypeCodes = {
     kode: '4102',
     verdiId: 'HistorikkEndretFelt.BareFarRettManglerDokAktivitet',
   },
+  4103: {
+    kode: '4103',
+    verdiId: 'HistorikkEndretFelt.MorFørsteSeksUkerIkkeSøkt',
+  },
+  4104: {
+    kode: '4104',
+    verdiId: 'HistorikkEndretFelt.StønadsperiodeNyttBarn',
+  },
+  4105: {
+    kode: '4105',
+    verdiId: 'HistorikkEndretFelt.FarSøktFørFødsel',
+  },
+  4106: {
+    kode: '4106',
+    verdiId: 'HistorikkEndretFelt.FarMerEnnTiDagerFedrekvoteIfmFødsel',
+  },
+  4107: {
+    kode: '4107',
+    verdiId: 'HistorikkEndretFelt.BareFarRettManglerMorsAktivitet',
+  },
+  4110: {
+    kode: '4110',
+    verdiId: 'HistorikkEndretFelt.SøkersSykdomSkadeSeksUkerIkkeOppfylt',
+  },
+  4111: {
+    kode: '4111',
+    verdiId: 'HistorikkEndretFelt.SøkersInnleggelseSeksUkerIkkeOppfylt',
+  },
+  4112: {
+    kode: '4112',
+    verdiId: 'HistorikkEndretFelt.BarnetsInnleggelseSeksUkerIkkeOppfylt',
+  },
+  4115: {
+    kode: '4115',
+    verdiId: 'HistorikkEndretFelt.SøkersSykdomEllerSkadeSeksUkerIkkeDokumentert',
+  },
+  4116: {
+    kode: '4116',
+    verdiId: 'HistorikkEndretFelt.SøkersInnleggelseSeksUkerIkkeDokumentert',
+  },
+  4117: {
+    kode: '4117',
+    verdiId: 'HistorikkEndretFelt.BarnetsInnleggelseSeksUkerIkkeDokumentert',
+  },
   MØDREKVOTE: {
     kode: 'MØDREKVOTE',
     verdiId: 'HistorikkEndretFeltVerdiType.Modrekvote',
@@ -665,6 +713,26 @@ const historikkEndretFeltVerdiTypeCodes = {
     kode: '2023',
     verdiId: 'HistorikkEndretFeltVerdiType.OverforingOppfyltAleneomsorg',
   },
+  2024: {
+    kode: '2024',
+    verdiId: 'HistorikkEndretFeltVerdiType.UtsettelseGyldig',
+  },
+  2025: {
+    kode: '2025',
+    verdiId: 'HistorikkEndretFeltVerdiType.UtsettelseGyldigSeksukerInnleggelse',
+  },
+  2026: {
+    kode: '2026',
+    verdiId: 'HistorikkEndretFeltVerdiType.UtsettelseGyldigSeksukerFriBarnInnlagt',
+  },
+  2027: {
+    kode: '2027',
+    verdiId: 'HistorikkEndretFeltVerdiType.UtsettelseGyldigSeksukerFriSykdom',
+  },
+  2028: {
+    kode: '2028',
+    verdiId: 'HistorikkEndretFeltVerdiType.UtsettelseGyldigBfrAktkravOppfylt',
+  },
   2037: {
     kode: '2037',
     verdiId: 'HistorikkEndretFeltVerdiType.InnvilgetFellesperiodeTilFar',
@@ -672,6 +740,10 @@ const historikkEndretFeltVerdiTypeCodes = {
   2038: {
     kode: '2038',
     verdiId: 'HistorikkEndretFeltVerdiType.RedusertUttaksgradPgaAndreForeldresUttak',
+  },
+  2039: {
+    kode: '2039',
+    verdiId: 'HistorikkEndretFeltVerdiType.MspInnvilgetFørsteSeksukene',
   },
   2022: {
     kode: '2022',
