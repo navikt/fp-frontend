@@ -30,6 +30,7 @@ interface OwnProps {
   readOnly: boolean;
   text?: string;
   useAllWidth?: boolean;
+  notRequired?: boolean;
 }
 
 interface StaticFunctions {
@@ -48,11 +49,12 @@ const ProsessStegBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunct
   readOnly,
   text,
   useAllWidth = false,
+  notRequired = false,
 }) => {
   const {
     formState: { isDirty },
   } = useFormContext();
-  const isRequiredFn = getIsBegrunnelseRequired(isDirty);
+  const isRequiredFn = notRequired ? () => false : getIsBegrunnelseRequired(isDirty);
   return (
     <div className={!useAllWidth ? styles.begrunnelseTextField : ''}>
       <TextAreaField
