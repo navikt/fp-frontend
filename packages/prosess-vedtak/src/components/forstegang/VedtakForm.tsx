@@ -11,6 +11,7 @@ import {
   Aksjonspunkt,
   SimuleringResultat,
   TilbakekrevingValg,
+  Behandlingsresultat,
 } from '@navikt/fp-types';
 import {
   isAvslag,
@@ -77,7 +78,7 @@ export const finnInnvilgetResultatText = (behandlingResultatTypeKode: string, yt
 };
 
 export type ForhandsvisData = {
-  fritekst: string;
+  fritekst?: string;
   dokumentMal?: string;
   tittel?: string;
   gjelderVedtak: boolean;
@@ -86,17 +87,17 @@ export type ForhandsvisData = {
 
 const hentForhåndsvisManueltBrevCallback =
   (
-    begrunnelse: string,
-    brodtekst: string,
-    overskrift: string,
     skalOverstyre: boolean,
     forhåndsvisCallback: (data: ForhandsvisData) => Promise<any>,
     trigger: () => void,
+    begrunnelse?: string,
+    brodtekst?: string,
+    overskrift?: string,
   ) =>
   (e: React.MouseEvent): void => {
     e.preventDefault();
 
-    const erFeltUtfylt = skalOverstyre ? brodtekst?.length > 0 && overskrift?.length > 0 : begrunnelse?.length > 0;
+    const erFeltUtfylt = skalOverstyre ? !!brodtekst && !!overskrift : !!begrunnelse;
     trigger();
 
     if (!skalOverstyre || erFeltUtfylt) {
@@ -122,17 +123,14 @@ const erÅrsakTypeBehandlingEtterKlage = (behandlingArsakTyper: Behandling['beha
     );
 
 const finnVedtakstatusTekst = (
-  behandlingsresultat: Behandling['behandlingsresultat'],
   intl: IntlShape,
   ytelseTypeKode: string,
+  behandlingsresultat?: Behandlingsresultat,
 ): string => {
-  const erInnvilget = isInnvilget(behandlingsresultat.type);
-  const erAvslatt = isAvslag(behandlingsresultat.type);
-
-  if (erInnvilget) {
+  if (behandlingsresultat && isInnvilget(behandlingsresultat.type)) {
     return intl.formatMessage({ id: finnInnvilgetResultatText(behandlingsresultat.type, ytelseTypeKode) });
   }
-  if (erAvslatt) {
+  if (behandlingsresultat && isAvslag(behandlingsresultat.type)) {
     return intl.formatMessage({ id: finnAvslagResultatText(behandlingsresultat.type, ytelseTypeKode) });
   }
   return '';
@@ -170,8 +168,8 @@ const buildInitialValues = (
 ): FormValues => ({
   beregningErManueltFastsatt,
   aksjonspunktKoder: aksjonspunkter.filter(ap => ap.kanLoses).map(ap => ap.definisjon),
-  overskrift: decodeHtmlEntity(behandling.behandlingsresultat.overskrift),
-  brødtekst: decodeHtmlEntity(behandling.behandlingsresultat.fritekstbrev),
+  overskrift: decodeHtmlEntity(behandling.behandlingsresultat?.overskrift),
+  brødtekst: decodeHtmlEntity(behandling.behandlingsresultat?.fritekstbrev),
   begrunnelse: finnBegrunnelse(behandling, beregningErManueltFastsatt),
 });
 
@@ -184,7 +182,7 @@ type VedtakAksjonspunkter =
 
 type FormValues = {
   beregningErManueltFastsatt?: boolean;
-  aksjonspunktKoder?: string[];
+  aksjonspunktKoder: string[];
   overskrift?: string;
   brødtekst?: string;
   begrunnelse?: string;
@@ -246,25 +244,25 @@ const VedtakForm: FunctionComponent<OwnProps> = ({
     [simuleringResultat, tilbakekrevingvalg],
   );
   const vedtakstatusTekst = useMemo(
-    () => finnVedtakstatusTekst(behandlingsresultat, intl, ytelseTypeKode),
+    () => finnVedtakstatusTekst(intl, ytelseTypeKode, behandlingsresultat),
     [behandlingsresultat],
   );
 
   const forhåndsvisOverstyrtBrev = hentForhåndsvisManueltBrevCallback(
-    begrunnelse,
-    brødtekst,
-    overskrift,
     true,
     previewCallback,
     trigger,
-  );
-  const forhåndsvisDefaultBrev = hentForhåndsvisManueltBrevCallback(
     begrunnelse,
     brødtekst,
     overskrift,
+  );
+  const forhåndsvisDefaultBrev = hentForhåndsvisManueltBrevCallback(
     false,
     previewCallback,
     trigger,
+    begrunnelse,
+    brødtekst,
+    overskrift,
   );
 
   return (

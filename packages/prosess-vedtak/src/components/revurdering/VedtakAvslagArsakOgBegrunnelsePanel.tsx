@@ -18,13 +18,17 @@ const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
 
 const getAvslagArsak = (
-  vilkar: Vilkar[],
-  behandlingsresultat: Behandlingsresultat,
   getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType, undertype?: string) => string,
+  vilkar: Vilkar[],
+  behandlingsresultat?: Behandlingsresultat,
 ): string | ReactElement => {
   const avslatteVilkar = vilkar.filter(v => v.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT);
   if (avslatteVilkar.length === 0) {
     return <FormattedMessage id="VedtakForm.UttaksperioderIkkeGyldig" />;
+  }
+
+  if (!behandlingsresultat?.avslagsarsak) {
+    throw new Error('Ingen behandlingsresultat eller avslagsårsak finnes');
   }
 
   const vilkarType = getKodeverkNavn(avslatteVilkar[0].vilkarType, KodeverkType.VILKAR_TYPE);
@@ -35,12 +39,10 @@ const getAvslagArsak = (
   )}`;
 };
 
-const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) => value !== undefined || isDirty;
-
 interface OwnProps {
   behandlingStatusKode: string;
-  vilkar?: Vilkar[];
-  behandlingsresultat: Behandlingsresultat;
+  vilkar: Vilkar[];
+  behandlingsresultat?: Behandlingsresultat;
   språkKode: string;
   erReadOnly: boolean;
   alleKodeverk: AlleKodeverk;
@@ -61,8 +63,8 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
   } = useFormContext();
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
-  const isRequiredFn = getIsBegrunnelseRequired(isDirty);
-  const avslagsårsak = getAvslagArsak(vilkar, behandlingsresultat, getKodeverknavn);
+  const isRequiredFn = (value?: string) => value !== undefined || isDirty;
+  const avslagsårsak = getAvslagArsak(getKodeverknavn, vilkar, behandlingsresultat);
 
   return (
     <>
@@ -83,6 +85,7 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
             <TextAreaField
               name="begrunnelse"
               label={<FormattedMessage id="VedtakForm.Fritekst" />}
+              // @ts-ignore Fiks denne
               validate={[requiredIfCustomFunctionIsTrueNew(isRequiredFn), minLength3, maxLength1500, hasValidText]}
               maxLength={1500}
               readOnly={erReadOnly}
@@ -95,7 +98,7 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
             />
           </>
         )}
-      {erReadOnly && behandlingsresultat.avslagsarsakFritekst && (
+      {erReadOnly && behandlingsresultat?.avslagsarsakFritekst && (
         <span>
           <VerticalSpacer twentyPx />
           <Detail size="small">

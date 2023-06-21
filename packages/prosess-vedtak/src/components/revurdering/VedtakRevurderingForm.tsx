@@ -54,7 +54,7 @@ type RevurderingVedtakAksjonspunkter =
   | KontrollAvManueltOpprettetRevurderingsbehandlingAp;
 
 type ForhandsvisData = {
-  fritekst: string;
+  fritekst?: string;
   dokumentMal?: string;
   tittel?: string;
   gjelderVedtak: boolean;
@@ -63,16 +63,16 @@ type ForhandsvisData = {
 
 const hentForhåndsvisManueltBrevCallback =
   (
-    begrunnelse: string,
-    brodtekst: string,
-    overskrift: string,
     skalOverstyre: boolean,
     forhåndsvisCallback: (data: ForhandsvisData) => void,
+    overskrift?: string,
+    brodtekst?: string,
+    begrunnelse?: string,
   ) =>
   (e: React.MouseEvent): void => {
     e.preventDefault();
 
-    const erFeltUtfylt = skalOverstyre ? brodtekst?.length > 0 && overskrift?.length > 0 : begrunnelse?.length > 0;
+    const erFeltUtfylt = skalOverstyre ? !!brodtekst && !!overskrift : !!begrunnelse;
 
     if (!skalOverstyre || erFeltUtfylt) {
       const data = {
@@ -130,7 +130,7 @@ const erNyttBehandlingResult = (
 
 export const lagKonsekvensForYtelsenTekst = (
   getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
-  konsekvenser?: Behandling['behandlingsresultat']['konsekvenserForYtelsen'],
+  konsekvenser?: string[],
 ): string => {
   if (!konsekvenser || konsekvenser.length < 1) {
     return '';
@@ -188,7 +188,7 @@ const finnInvilgetRevurderingTekst = (
   ytelseTypeKode: string,
   getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
   tilbakekrevingText: string,
-  konsekvenserForYtelsen?: Behandling['behandlingsresultat']['konsekvenserForYtelsen'],
+  konsekvenserForYtelsen?: string[],
   beregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
   originaltBeregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
 ): string => {
@@ -210,7 +210,7 @@ const getOpphorsdato = (
   if (medlemskapFom) {
     return medlemskapFom;
   }
-  return behandlingsresultat.skjæringstidspunkt ? behandlingsresultat.skjæringstidspunkt.dato : '';
+  return behandlingsresultat?.skjæringstidspunkt ? behandlingsresultat.skjæringstidspunkt.dato : '';
 };
 
 const transformValues = (values: FormValues): RevurderingVedtakAksjonspunkter[] =>
@@ -233,12 +233,12 @@ const transformValues = (values: FormValues): RevurderingVedtakAksjonspunkter[] 
 
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], behandling: Behandling): FormValues => ({
   aksjonspunktKoder: aksjonspunkter.filter(ap => ap.kanLoses).map(ap => ap.definisjon),
-  overskrift: decodeHtmlEntity(behandling.behandlingsresultat.overskrift),
-  brødtekst: decodeHtmlEntity(behandling.behandlingsresultat.fritekstbrev),
+  overskrift: decodeHtmlEntity(behandling.behandlingsresultat?.overskrift),
+  brødtekst: decodeHtmlEntity(behandling.behandlingsresultat?.fritekstbrev),
 });
 
 interface FormValues {
-  aksjonspunktKoder?: string[];
+  aksjonspunktKoder: string[];
   begrunnelse?: string;
   brødtekst?: string;
   overskrift?: string;
@@ -248,13 +248,13 @@ interface OwnProps {
   behandling: Behandling;
   readOnly: boolean;
   aksjonspunkter: Aksjonspunkt[];
-  previewCallback: (data: ForhandsvisData) => void;
+  previewCallback: (data: ForhandsvisData) => Promise<any>;
   ytelseTypeKode: string;
   resultatstruktur?: BeregningsresultatFp | BeregningsresultatEs;
   alleKodeverk: AlleKodeverk;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
-  vilkar?: Vilkar[];
+  vilkar: Vilkar[];
   beregningErManueltFastsatt: boolean;
   medlemskapFom?: string;
   resultatstrukturOriginalBehandling?: BeregningsresultatFp | BeregningsresultatEs;
@@ -311,7 +311,7 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
   );
 
   let vedtakstatusTekst = '';
-  if (isInnvilget(behandlingsresultat.type)) {
+  if (behandlingsresultat && isInnvilget(behandlingsresultat.type)) {
     const konsekvenserForYtelsen =
       behandlingsresultat !== undefined ? behandlingsresultat.konsekvenserForYtelsen : undefined;
     vedtakstatusTekst = finnInvilgetRevurderingTekst(
@@ -324,12 +324,12 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
       resultatstrukturOriginalBehandling,
     );
   }
-  if (isAvslag(behandlingsresultat.type)) {
+  if (behandlingsresultat && isAvslag(behandlingsresultat.type)) {
     vedtakstatusTekst = intl.formatMessage({
       id: hentResultattekst(false, resultatstruktur, resultatstrukturOriginalBehandling),
     });
   }
-  if (isOpphor(behandlingsresultat.type)) {
+  if (behandlingsresultat && isOpphor(behandlingsresultat.type)) {
     vedtakstatusTekst = intl.formatMessage(
       {
         id:
@@ -344,18 +344,18 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
   }
 
   const forhåndsvisOverstyrtBrev = hentForhåndsvisManueltBrevCallback(
-    begrunnelse,
-    brødtekst,
-    overskrift,
     true,
     previewCallback,
+    overskrift,
+    brødtekst,
+    begrunnelse,
   );
   const forhåndsvisDefaultBrev = hentForhåndsvisManueltBrevCallback(
-    begrunnelse,
-    brødtekst,
-    overskrift,
     false,
     previewCallback,
+    overskrift,
+    brødtekst,
+    begrunnelse,
   );
 
   return (

@@ -17,12 +17,16 @@ import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
 
 export const getAvslagArsak = (
   vilkar: Vilkar[],
-  behandlingsresultat: Behandlingsresultat,
   getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType, undertype?: string) => string,
+  behandlingsresultat?: Behandlingsresultat,
 ): ReactElement | string => {
   const avslatteVilkar = vilkar.filter(v => v.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT);
   if (avslatteVilkar.length === 0) {
     return <FormattedMessage id="VedtakForm.UttaksperioderIkkeGyldig" />;
+  }
+
+  if (!behandlingsresultat?.avslagsarsak) {
+    throw new Error('Behandlingsresultat eller avslagsårsak finnes ikke');
   }
 
   const vilkarType = getKodeverkNavn(avslatteVilkar[0].vilkarType, KodeverkType.VILKAR_TYPE);
@@ -35,8 +39,8 @@ export const getAvslagArsak = (
 
 interface OwnProps {
   behandlingStatusKode: string;
-  vilkar: Vilkar[];
-  behandlingsresultat: Behandlingsresultat;
+  vilkar?: Vilkar[];
+  behandlingsresultat?: Behandlingsresultat;
   språkKode: string;
   isReadOnly: boolean;
   ytelseTypeKode: string;
@@ -45,9 +49,11 @@ interface OwnProps {
   skalBrukeOverstyrendeFritekstBrev: boolean;
 }
 
+const EMPTY_ARRAY = [] as Vilkar[];
+
 const VedtakAvslagPanel: FunctionComponent<OwnProps> = ({
   behandlingStatusKode,
-  vilkar,
+  vilkar = EMPTY_ARRAY,
   behandlingsresultat,
   språkKode,
   isReadOnly,
@@ -65,15 +71,15 @@ const VedtakAvslagPanel: FunctionComponent<OwnProps> = ({
   const textCode = beregningErManueltFastsatt ? 'VedtakForm.Fritekst.Beregningsgrunnlag' : 'VedtakForm.Fritekst';
   return (
     <>
-      {getAvslagArsak(vilkar, behandlingsresultat, getKodeverknavn) && (
+      {getAvslagArsak(vilkar, getKodeverknavn, behandlingsresultat) && (
         <div>
           <Label size="small">{intl.formatMessage({ id: 'VedtakForm.ArsakTilAvslag' })}</Label>
-          <BodyShort size="small">{getAvslagArsak(vilkar, behandlingsresultat, getKodeverknavn)}</BodyShort>
+          <BodyShort size="small">{getAvslagArsak(vilkar, getKodeverknavn, behandlingsresultat)}</BodyShort>
           <VerticalSpacer sixteenPx />
         </div>
       )}
       {!skalBrukeOverstyrendeFritekstBrev &&
-        (fritekstfeltForSoknadsfrist || behandlingsresultat.avslagsarsakFritekst || beregningErManueltFastsatt) && (
+        (fritekstfeltForSoknadsfrist || behandlingsresultat?.avslagsarsakFritekst || beregningErManueltFastsatt) && (
           <VedtakFritekstPanel
             isReadOnly={isReadOnly}
             språkKode={språkKode}

@@ -11,9 +11,9 @@ import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
 
 interface OwnProps {
   resultatstruktur?: BeregningsresultatFp | BeregningsresultatEs;
-  behandlingsresultat: Behandlingsresultat;
+  behandlingsresultat?: Behandlingsresultat;
   ytelseTypeKode: string;
-  språkKode?: string;
+  språkKode: string;
   isReadOnly: boolean;
   skalBrukeOverstyrendeFritekstBrev: boolean;
   beregningErManueltFastsatt: boolean;
