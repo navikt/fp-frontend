@@ -42,9 +42,12 @@ const finnKnappetekstkode = (aksjonspunkter: Aksjonspunkt[]): string => {
   return 'VedtakForm.FattVedtak';
 };
 
-const finnSkalViseLink = (behandlingsresultat: Behandlingsresultat): boolean =>
-  !behandlingsresultat.avslagsarsak ||
-  (behandlingsresultat.avslagsarsak && behandlingsresultat.avslagsarsak !== avslagsarsakCodes.INGEN_BEREGNINGSREGLER);
+const finnSkalViseLink = (behandlingsresultat: Behandlingsresultat): boolean => {
+  if (!behandlingsresultat.avslagsarsak) {
+    return true;
+  }
+  return behandlingsresultat.avslagsarsak !== avslagsarsakCodes.INGEN_BEREGNINGSREGLER;
+};
 
 const harIkkeKonsekvenserForYtelsen = (
   konsekvenserForYtelsenKoder: string[],
@@ -95,13 +98,17 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
     formState: { isSubmitting },
   } = useFormContext();
 
-  const { behandlingsresultat, behandlingPaaVent, sprakkode, status, behandlingHenlagt, taskStatus } = behandling;
+  const { behandlingsresultat, behandlingPaaVent, sprakkode, status, behandlingHenlagt, uuid, taskStatus } = behandling;
+
+  if (!behandlingsresultat) {
+    throw new Error(`behandlingsresultat finnes ikke på behandling ${uuid}`);
+  }
 
   const [skalBrukeManueltBrev, toggleSkalBrukeManueltBrev] = useState(
-    behandlingsresultat.vedtaksbrev && behandlingsresultat.vedtaksbrev === 'FRITEKST',
+    !!behandlingsresultat.vedtaksbrev && behandlingsresultat.vedtaksbrev === 'FRITEKST',
   );
   const [skalViseModal, toggleVisModal] = useState(false);
-  const onToggleOverstyring = useCallback(e => {
+  const onToggleOverstyring = useCallback((e: React.MouseEvent) => {
     toggleSkalBrukeManueltBrev(true);
     e.preventDefault();
   }, []);

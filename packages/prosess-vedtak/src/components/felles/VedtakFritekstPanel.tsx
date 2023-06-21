@@ -14,7 +14,7 @@ const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
 
 interface OwnProps {
-  behandlingsresultat: Behandlingsresultat;
+  behandlingsresultat?: Behandlingsresultat;
   språkKode: string;
   isReadOnly: boolean;
   labelTextCode: string;
@@ -48,7 +48,7 @@ const VedtakFritekstPanel: FunctionComponent<OwnProps> = ({
           />
         </>
       )}
-      {isReadOnly && behandlingsresultat.avslagsarsakFritekst !== null && (
+      {isReadOnly && behandlingsresultat?.avslagsarsakFritekst && (
         <span>
           <VerticalSpacer twentyPx />
           <Detail size="small">{intl.formatMessage({ id: labelTextCode })}</Detail>

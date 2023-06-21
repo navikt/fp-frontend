@@ -1,8 +1,8 @@
 {
-    "include": ["./", "../../@types/externals.d.ts"],
-    "exclude": ["node_modules", "**.spec.ts", "vite.config.js", "dist"],
-    "extends": "../../tsconfig.json",
-    "compilerOptions": {
-        "strict": false,
-    },
+  "include": ["./", "../../@types/externals.d.ts"],
+  "exclude": ["node_modules", "**.spec.ts", "vite.config.js", "dist"],
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "strict": false
+  }
 }
