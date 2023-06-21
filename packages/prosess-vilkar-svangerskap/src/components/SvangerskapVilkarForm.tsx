@@ -117,8 +117,6 @@ const SvangerskapVilkarForm: FunctionComponent<OwnProps> = ({
     defaultValues: formData || initialValues,
   });
 
-  const erVilkarOk = formMethods.watch('erVilkarOk');
-
   const avslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.SVANGERSKAPVILKARET];
 
   const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === aksjonspunktStatus.OPPRETTET);
@@ -160,7 +158,7 @@ const SvangerskapVilkarForm: FunctionComponent<OwnProps> = ({
           customVilkarOppfyltText={<FormattedMessage id="SvangerskapVilkarForm.Oppfylt" />}
           customVilkarIkkeOppfyltText={<FormattedMessage id="SvangerskapVilkarForm.IkkeOppfylt" values={{ b: bTag }} />}
         />
-        {erVilkarOk === false && <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />}
+        <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />
       </ProsessPanelTemplate>
     </Form>
   );

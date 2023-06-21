@@ -39,7 +39,7 @@ describe('<SvangerskapVilkarProsessIndex>', () => {
   it('skal kunne bestemme at vilkåret er oppfylt når en har perioder som kan innvilges', async () => {
     const lagre = vi.fn();
 
-    render(<ÅpentAksjonspunktSkalKunneInnvilge submitCallback={lagre} />);
+    const utils = render(<ÅpentAksjonspunktSkalKunneInnvilge submitCallback={lagre} />);
 
     expect(await screen.findByText('Svangerskap')).toBeInTheDocument();
     expect(screen.getByText('Rett til svangerskapspenger')).toBeInTheDocument();
@@ -49,12 +49,15 @@ describe('<SvangerskapVilkarProsessIndex>', () => {
 
     await userEvent.click(screen.getByText('Mor har rett til svangerskapspenger, vilkåret er oppfylt'));
 
+    const vurderingInput = utils.getByLabelText('Vurdering');
+    await userEvent.type(vurderingInput, 'Dette er en vurdering');
+
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      begrunnelse: '',
       erVilkarOk: true,
+      begrunnelse: 'Dette er en vurdering',
       kode: '5092',
     });
   });
