@@ -140,7 +140,6 @@ const Dekorator: FunctionComponent<OwnProps> = ({
 
   const arbeidstakerHref = sakLinks ? sakLinks.find(l => l.rel === 'arbeidstaker-redirect')?.href : undefined;
   const ainntektHref = sakLinks ? sakLinks.find(l => l.rel === 'ainntekt-redirect')?.href : undefined;
-  const ainntektPgiHref = sakLinks ? sakLinks.find(l => l.rel === 'ainntekt-pgi-redirect')?.href : undefined;
 
   const eksterneLenker = useMemo(
     () => [
@@ -160,12 +159,8 @@ const Dekorator: FunctionComponent<OwnProps> = ({
         tekst: intl.formatMessage({ id: 'Dekorator.AInntekt' }),
         href: `${ainntektHref}?saksnummer=${saksnummer}`,
       },
-      {
-        tekst: intl.formatMessage({ id: 'Dekorator.AInntektPgi' }),
-        href: `${ainntektPgiHref}?saksnummer=${saksnummer}`,
-      },
     ],
-    [arbeidstakerHref, ainntektPgiHref, ainntektHref, saksnummer],
+    [arbeidstakerHref, ainntektHref, saksnummer],
   );
 
   return (
