@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo, useCallback } from 'react';
 import { useIntl, IntlShape } from 'react-intl';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { DekoratorMedFeilviserSakIndex, Feilmelding } from '@navikt/ft-sak-dekorator';
 
 import { useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
@@ -73,9 +73,11 @@ const Dekorator: FunctionComponent<OwnProps> = ({
   hideErrorMessages = false,
 }) => {
   const intl = useIntl();
+  const location = useLocation();
+  const saksnummer = location.pathname.split('/fagsak/')[1]?.split('/')[0];
 
   const initFetch = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
-  const navAnsatt = initFetch?.innloggetBruker;
+  const { innloggetBruker: navAnsatt, sakLinks } = initFetch;
 
   const navigate = useNavigate();
   const visLos = useCallback(
@@ -142,6 +144,20 @@ const Dekorator: FunctionComponent<OwnProps> = ({
       </Link>,
       <Link href={SYSTEMRUTINE_URL} target="_blank">
         {intl.formatMessage({ id: 'Dekorator.Systemrutine' })}
+        <ExternalLinkIcon title="Ekstern lenke" />
+      </Link>,
+      <Link
+        href={`${sakLinks.find(l => l.rel === 'arbeidstaker-redirect')?.href}?saksnummer=${saksnummer}`}
+        target="_blank"
+      >
+        {intl.formatMessage({ id: 'Dekorator.AaReg' })}
+        <ExternalLinkIcon title="Ekstern lenke" />
+      </Link>,
+      <Link
+        href={`${sakLinks.find(l => l.rel === 'ainntekt-redirect')?.href}?saksnummer=${saksnummer}`}
+        target="_blank"
+      >
+        {intl.formatMessage({ id: 'Dekorator.AInntekt' })}
         <ExternalLinkIcon title="Ekstern lenke" />
       </Link>,
     ],
