@@ -4,7 +4,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import MockAdapter from 'axios-mock-adapter';
 import { Modal } from '@navikt/ds-react';
-
+import { createIntl } from '@navikt/ft-utils';
 import { RestApiMock } from '@navikt/fp-utils-test';
 import {
   fagsakYtelseType as FagsakYtelseType,
@@ -14,9 +14,13 @@ import {
 } from '@navikt/fp-kodeverk';
 import { Fagsak, BehandlingAppKontekst } from '@navikt/fp-types';
 
+import { RawIntlProvider } from 'react-intl';
 import { requestFagsakApi, FagsakApiKeys } from '../../data/fagsakContextApi';
 import MeldingIndex from './MeldingIndex';
 import FagsakData from '../../fagsak/FagsakData';
+import messages from '../../../i18n/nb_NO.json';
+
+const intl = createIntl(messages);
 
 describe('<MeldingIndex>', () => {
   Modal.setAppElement('body');
@@ -58,16 +62,18 @@ describe('<MeldingIndex>', () => {
     ];
 
     render(
-      <RestApiMock data={data} requestApi={requestFagsakApi}>
-        <MemoryRouter>
-          <MeldingIndex
-            fagsakData={new FagsakData(fagsak as Fagsak)}
-            valgtBehandlingUuid={valgtBehandling.uuid}
-            setMeldingForData={() => undefined}
-            hentOgSettBehandling={() => undefined}
-          />
-        </MemoryRouter>
-      </RestApiMock>,
+      <RawIntlProvider value={intl}>
+        <RestApiMock data={data} requestApi={requestFagsakApi}>
+          <MemoryRouter>
+            <MeldingIndex
+              fagsakData={new FagsakData(fagsak as Fagsak)}
+              valgtBehandlingUuid={valgtBehandling.uuid}
+              setMeldingForData={() => undefined}
+              hentOgSettBehandling={() => undefined}
+            />
+          </MemoryRouter>
+        </RestApiMock>{' '}
+      </RawIntlProvider>,
     );
     expect(await screen.findByText('Mal 1')).toBeInTheDocument();
     expect(screen.getByText('Mal 2')).toBeInTheDocument();
@@ -87,16 +93,18 @@ describe('<MeldingIndex>', () => {
     };
 
     const utils = render(
-      <RestApiMock data={data} requestApi={requestFagsakApi} setApiMock={setApiMock}>
-        <MemoryRouter>
-          <MeldingIndex
-            fagsakData={new FagsakData(fagsak as Fagsak)}
-            valgtBehandlingUuid={valgtBehandling.uuid}
-            setMeldingForData={() => undefined}
-            hentOgSettBehandling={() => undefined}
-          />
-        </MemoryRouter>
-      </RestApiMock>,
+      <RawIntlProvider value={intl}>
+        <RestApiMock data={data} requestApi={requestFagsakApi} setApiMock={setApiMock}>
+          <MemoryRouter>
+            <MeldingIndex
+              fagsakData={new FagsakData(fagsak as Fagsak)}
+              valgtBehandlingUuid={valgtBehandling.uuid}
+              setMeldingForData={() => undefined}
+              hentOgSettBehandling={() => undefined}
+            />
+          </MemoryRouter>
+        </RestApiMock>{' '}
+      </RawIntlProvider>,
     );
 
     expect(await screen.findByText('Mal 1')).toBeInTheDocument();
@@ -134,16 +142,18 @@ describe('<MeldingIndex>', () => {
     };
 
     const utils = render(
-      <RestApiMock data={data} requestApi={requestFagsakApi} setApiMock={setApiMock}>
-        <MemoryRouter>
-          <MeldingIndex
-            fagsakData={new FagsakData(fagsak as Fagsak)}
-            valgtBehandlingUuid={valgtBehandling.uuid}
-            setMeldingForData={() => undefined}
-            hentOgSettBehandling={() => undefined}
-          />
-        </MemoryRouter>
-      </RestApiMock>,
+      <RawIntlProvider value={intl}>
+        <RestApiMock data={data} requestApi={requestFagsakApi} setApiMock={setApiMock}>
+          <MemoryRouter>
+            <MeldingIndex
+              fagsakData={new FagsakData(fagsak as Fagsak)}
+              valgtBehandlingUuid={valgtBehandling.uuid}
+              setMeldingForData={() => undefined}
+              hentOgSettBehandling={() => undefined}
+            />
+          </MemoryRouter>
+        </RestApiMock>
+      </RawIntlProvider>,
     );
 
     expect(await screen.findByText('Mal 1')).toBeInTheDocument();
@@ -183,16 +193,18 @@ describe('<MeldingIndex>', () => {
     };
 
     const utils = render(
-      <RestApiMock data={data} requestApi={requestFagsakApi} setApiMock={setApiMock}>
-        <MemoryRouter>
-          <MeldingIndex
-            fagsakData={new FagsakData(fagsak as Fagsak)}
-            valgtBehandlingUuid={valgtBehandling.uuid}
-            setMeldingForData={() => undefined}
-            hentOgSettBehandling={() => undefined}
-          />
-        </MemoryRouter>
-      </RestApiMock>,
+      <RawIntlProvider value={intl}>
+        <RestApiMock data={data} requestApi={requestFagsakApi} setApiMock={setApiMock}>
+          <MemoryRouter>
+            <MeldingIndex
+              fagsakData={new FagsakData(fagsak as Fagsak)}
+              valgtBehandlingUuid={valgtBehandling.uuid}
+              setMeldingForData={() => undefined}
+              hentOgSettBehandling={() => undefined}
+            />
+          </MemoryRouter>
+        </RestApiMock>{' '}
+      </RawIntlProvider>,
     );
 
     expect(await screen.findByText('Mal 1')).toBeInTheDocument();
@@ -208,7 +220,7 @@ describe('<MeldingIndex>', () => {
 
     expect(await screen.findByText('Behandlingen er satt på vent')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('OK'));
+    await userEvent.click(screen.getByText('Gå til forsiden'));
 
     await waitFor(() => expect(axiosMock.history.get.length).toBe(1));
 
