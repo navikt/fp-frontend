@@ -15,6 +15,7 @@ ssh.exe.stackdump
 .eslintcache
 /server/node_modules
 /server/package-lock.json
+/server/.yarn
 .pnp.*
 .yarn/*
 !.yarn/patches
