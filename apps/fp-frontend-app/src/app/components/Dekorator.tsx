@@ -7,8 +7,6 @@ import { DekoratorMedFeilviserSakIndex, Feilmelding } from '@navikt/ft-sak-dekor
 import { useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { SYSTEMRUTINE_URL, RETTSKILDE_URL } from '@navikt/fp-konstanter';
 
-import { Link } from '@navikt/ds-react';
-import { ExternalLinkIcon } from '@navikt/aksel-icons';
 import ErrorFormatter from './feilhandtering/ErrorFormatter';
 import ErrorMessage from './feilhandtering/ErrorMessage';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
@@ -126,39 +124,48 @@ const Dekorator: FunctionComponent<OwnProps> = ({
   const interneLenker = useMemo(() => {
     const lenker = [];
     if (kanOppgavestyre) {
-      lenker.push(
-        <Link onClick={visAvdelingslederside}>{intl.formatMessage({ id: 'Dekorator.Avdelingsleder' })}</Link>,
-      );
+      lenker.push({
+        tekst: intl.formatMessage({ id: 'Dekorator.Avdelingsleder' }),
+        callback: (e: React.SyntheticEvent) => visAvdelingslederside(e),
+      });
     }
     if (kanJournalføre) {
-      lenker.push(<Link onClick={visJournalføringside}>{intl.formatMessage({ id: 'Dekorator.Journalforing' })}</Link>);
+      lenker.push({
+        tekst: intl.formatMessage({ id: 'Dekorator.Journalforing' }),
+        callback: (e: React.SyntheticEvent) => visJournalføringside(e),
+      });
     }
     return lenker;
   }, [kanOppgavestyre, kanJournalføre]);
 
   const arbeidstakerHref = sakLinks ? sakLinks.find(l => l.rel === 'arbeidstaker-redirect')?.href : undefined;
   const ainntektHref = sakLinks ? sakLinks.find(l => l.rel === 'ainntekt-redirect')?.href : undefined;
+  const ainntektPgiHref = sakLinks ? sakLinks.find(l => l.rel === 'ainntekt-pgi-redirect')?.href : undefined;
 
   const eksterneLenker = useMemo(
     () => [
-      <Link href={RETTSKILDE_URL} target="_blank">
-        {intl.formatMessage({ id: 'Dekorator.Rettskilde' })}
-        <ExternalLinkIcon title="Ekstern lenke" />
-      </Link>,
-      <Link href={SYSTEMRUTINE_URL} target="_blank">
-        {intl.formatMessage({ id: 'Dekorator.Systemrutine' })}
-        <ExternalLinkIcon title="Ekstern lenke" />
-      </Link>,
-      <Link href={`${arbeidstakerHref}?saksnummer=${saksnummer}`} target="_blank">
-        {intl.formatMessage({ id: 'Dekorator.AaReg' })}
-        <ExternalLinkIcon title="Ekstern lenke" />
-      </Link>,
-      <Link href={`${ainntektHref}?saksnummer=${saksnummer}`} target="_blank">
-        {intl.formatMessage({ id: 'Dekorator.AInntekt' })}
-        <ExternalLinkIcon title="Ekstern lenke" />
-      </Link>,
+      {
+        tekst: intl.formatMessage({ id: 'Dekorator.Rettskilde' }),
+        href: RETTSKILDE_URL,
+      },
+      {
+        tekst: intl.formatMessage({ id: 'Dekorator.Systemrutine' }),
+        href: SYSTEMRUTINE_URL,
+      },
+      {
+        tekst: intl.formatMessage({ id: 'Dekorator.AaReg' }),
+        href: `${arbeidstakerHref}?saksnummer=${saksnummer}`,
+      },
+      {
+        tekst: intl.formatMessage({ id: 'Dekorator.AInntekt' }),
+        href: `${ainntektHref}?saksnummer=${saksnummer}`,
+      },
+      {
+        tekst: intl.formatMessage({ id: 'Dekorator.AInntektPgi' }),
+        href: `${ainntektPgiHref}?saksnummer=${saksnummer}`,
+      },
     ],
-    [arbeidstakerHref, ainntektHref, saksnummer],
+    [arbeidstakerHref, ainntektPgiHref, ainntektHref, saksnummer],
   );
 
   return (
