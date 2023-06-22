@@ -78,6 +78,7 @@ import '@navikt/fp-sak-sok/dist/style.css';
 import '@navikt/fp-sak-totrinnskontroll/dist/style.css';
 import '@navikt/fp-sak-ukjent-adresse/dist/style.css';
 import '@navikt/ft-sak-support-meny/dist/style.css';
+import '@navikt/ft-sak-dekorator/dist/style.css';
 
 import '../globalCss/global.module.css';
 
