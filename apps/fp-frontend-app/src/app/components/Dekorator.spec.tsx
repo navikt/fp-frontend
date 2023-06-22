@@ -6,6 +6,7 @@ import { render, screen } from '@testing-library/react';
 import { EventType } from '@navikt/fp-rest-api';
 import { RestApiMock } from '@navikt/fp-utils-test';
 
+import { MemoryRouter } from 'react-router';
 import Dekorator from './Dekorator';
 import { requestFagsakApi, FagsakApiKeys } from '../../data/fagsakContextApi';
 import messages from '../../../i18n/nb_NO.json';
@@ -41,11 +42,13 @@ describe('<Dekorator>', () => {
     const data = [{ key: FagsakApiKeys.INIT_FETCH.name, global: true, data: { innloggetBruker: navAnsatt } }];
 
     render(
-      <RawIntlProvider value={intl}>
-        <RestApiMock data={data} requestApi={requestFagsakApi}>
-          <Dekorator queryStrings={{}} setSiteHeight={vi.fn()} />
-        </RestApiMock>
-      </RawIntlProvider>,
+      <MemoryRouter initialEntries={[`/fagsak/1/`]}>
+        <RawIntlProvider value={intl}>
+          <RestApiMock data={data} requestApi={requestFagsakApi}>
+            <Dekorator queryStrings={{}} setSiteHeight={vi.fn()} />
+          </RestApiMock>
+        </RawIntlProvider>
+      </MemoryRouter>,
     );
 
     expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
@@ -62,11 +65,13 @@ describe('<Dekorator>', () => {
     ];
 
     render(
-      <RawIntlProvider value={intl}>
-        <RestApiMock data={data} requestApi={requestFagsakApi} errors={errors}>
-          <Dekorator queryStrings={{}} setSiteHeight={vi.fn()} />
-        </RestApiMock>
-      </RawIntlProvider>,
+      <MemoryRouter initialEntries={[`/fagsak/1/`]}>
+        <RawIntlProvider value={intl}>
+          <RestApiMock data={data} requestApi={requestFagsakApi} errors={errors}>
+            <Dekorator queryStrings={{}} setSiteHeight={vi.fn()} />
+          </RestApiMock>
+        </RawIntlProvider>
+      </MemoryRouter>,
     );
 
     expect(await screen.findByText('Dette er en feilmelding')).toBeInTheDocument();
