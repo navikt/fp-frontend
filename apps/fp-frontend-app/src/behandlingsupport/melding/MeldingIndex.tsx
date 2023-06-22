@@ -5,13 +5,12 @@ import { KodeverkMedNavn } from '@navikt/fp-types';
 import { behandlingType as BehandlingType, KodeverkType, venteArsakType, dokumentMalType } from '@navikt/fp-kodeverk';
 import { MeldingerSakIndex, MessagesModalSakIndex, FormValues } from '@navikt/fp-sak-meldinger';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
-import { SettPaVentModalIndex, FormValues as SettPaVentFormValues } from '@navikt/fp-modal-sett-pa-vent';
 
 import { useFpSakKodeverk } from '../../data/useKodeverk';
 import useVisForhandsvisningAvMelding, { ForhandsvisFunksjon } from '../../data/useVisForhandsvisningAvMelding';
 import { FagsakApiKeys, SubmitMessageParams, restFagsakApiHooks } from '../../data/fagsakContextApi';
 import FagsakData from '../../fagsak/FagsakData';
-import { BehandlingApiKeys, restBehandlingApiHooks } from '../../data/behandlingContextApi';
+import SettPaVentReadOnlyModal from './SettPaVentReadOnlyModal';
 
 const getSubmitCallback =
   (
@@ -22,20 +21,21 @@ const getSubmitCallback =
     ) => Promise<void | undefined>,
     hentOgSettBehandling: () => void,
     setShowSettPaVentModal: (erInnhentetEllerForlenget: boolean) => void,
+    showSettPaVentModal: boolean,
     setMeldingForData: (data?: any) => void,
     behandlingTypeKode?: string,
     behandlingUuid?: string,
   ) =>
   (values: FormValues) => {
-    const isInnhentEllerForlenget =
+    const skalSettePåVent =
       values.brevmalkode === dokumentMalType.INNHENTE_OPPLYSNINGER ||
-      values.brevmalkode === dokumentMalType.FORLENGET_SAKSBEHANDLINGSTID ||
-      values.brevmalkode === dokumentMalType.FORLENGET_SAKSBEHANDLINGSTID_MEDL;
+      values.brevmalkode === dokumentMalType.VARSEL_OM_REVURDERING ||
+      values.brevmalkode === dokumentMalType.ETTERLYS_INNTEKTSMELDING;
     const erTilbakekreving =
       BehandlingType.TILBAKEKREVING === behandlingTypeKode ||
       BehandlingType.TILBAKEKREVING_REVURDERING === behandlingTypeKode;
 
-    setShowMessageModal(!isInnhentEllerForlenget);
+    setShowMessageModal(!skalSettePåVent);
 
     const data = erTilbakekreving
       ? {
@@ -50,9 +50,12 @@ const getSubmitCallback =
           arsakskode: values.arsakskode,
         };
     return submitMessage(data).then(() => {
-      hentOgSettBehandling();
       setMeldingForData();
-      setShowSettPaVentModal(isInnhentEllerForlenget);
+      if (skalSettePåVent) {
+        setShowSettPaVentModal(true);
+      } else {
+        hentOgSettBehandling();
+      }
     });
   };
 
@@ -91,7 +94,7 @@ const EMPTY_ARRAY = [] as KodeverkMedNavn[];
 /**
  * MeldingIndex
  *
- * Container komponent. Har ansvar for å hente mottakere og brevmaler fra serveren.
+ * Har ansvar for å hente mottakere og brevmaler fra serveren.
  */
 const MeldingIndex: FunctionComponent<OwnProps> = ({
   fagsakData,
@@ -117,16 +120,13 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
     FagsakApiKeys.SUBMIT_MESSAGE,
   );
 
-  const { startRequest: setBehandlingPåVent } = restBehandlingApiHooks.useRestApiRunner(
-    BehandlingApiKeys.BEHANDLING_ON_HOLD,
-  );
-
   const submitCallback = useCallback(
     getSubmitCallback(
       setShowMessageModal,
       submitMessage,
       hentOgSettBehandling,
       setShowSettPaVentModal,
+      showSettPaVentModal,
       setMeldingForData,
       valgtBehandling?.type,
       valgtBehandling?.uuid,
@@ -134,21 +134,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
     [valgtBehandling?.uuid, valgtBehandling?.versjon],
   );
 
-  const hideSettPaVentModal = useCallback(() => {
-    setShowSettPaVentModal(false);
-  }, []);
-
-  const handleSubmitFromModal = useCallback((formValues: SettPaVentFormValues) => {
-    if (valgtBehandling && formValues.frist && formValues.ventearsak) {
-      const values = {
-        behandlingUuid: valgtBehandling.uuid,
-        behandlingVersjon: valgtBehandling.versjon,
-        frist: formValues.frist,
-        ventearsak: formValues.ventearsak,
-      };
-      setBehandlingPåVent(values);
-    }
-    hideSettPaVentModal();
+  const handleSubmitFromModal = useCallback(() => {
     navigate('/');
   }, []);
 
@@ -186,17 +172,10 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
       />
 
       {submitFinished && showSettPaVentModal && (
-        <SettPaVentModalIndex
-          showModal={submitFinished && showSettPaVentModal}
-          cancelEvent={hideSettPaVentModal}
-          submitCallback={handleSubmitFromModal}
+        <SettPaVentReadOnlyModal
+          lukkCallback={handleSubmitFromModal}
           ventearsak={venteArsakType.AVV_DOK}
           ventearsaker={ventearsaker}
-          hasManualPaVent={false}
-          erTilbakekreving={
-            valgtBehandling?.type === BehandlingType.TILBAKEKREVING ||
-            valgtBehandling?.type === BehandlingType.TILBAKEKREVING_REVURDERING
-          }
         />
       )}
     </>
