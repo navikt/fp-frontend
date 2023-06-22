@@ -109,7 +109,7 @@
     "@navikt/ft-prosess-tilbakekreving-vedtak": "2.1.21",
     "@navikt/ft-sak-aktor": "2.1.23",
     "@navikt/ft-sak-behandling-velger": "2.0.42",
-    "@navikt/ft-sak-dekorator": "3.0.0",
+    "@navikt/ft-sak-dekorator": "4.0.0",
     "@navikt/ft-sak-dokumenter": "2.0.36",
     "@navikt/ft-sak-fagsak-profil": "3.0.6",
     "@navikt/ft-sak-infosider": "2.0.34",
