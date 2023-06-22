@@ -1,6 +1,5 @@
 import cors from 'cors';
 import express from 'express';
-import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import timeout from 'connect-timeout';
 import * as headers from './headers.js';
@@ -23,9 +22,6 @@ async function startApp() {
 
     // Logging i json format
     server.use(logger.morganMiddleware);
-
-    server.use(bodyParser.json());
-    server.use(bodyParser.urlencoded({ extended: true }));
 
     server.set('trust proxy', 1);
 
