@@ -5,6 +5,7 @@ export { default as skjermlenkeCodes } from './src/skjermlenkeCodes';
 export {
   LINK_TIL_BESTE_BEREGNING_REGNEARK,
   SYSTEMRUTINE_URL,
+  RETTSKILDE_URL,
   hentDokumentLenke,
   hentVedtakDokumentLenke,
 } from './src/eksterneLenker';

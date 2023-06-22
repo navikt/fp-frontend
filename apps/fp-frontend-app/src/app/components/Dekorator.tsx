@@ -5,15 +5,15 @@ import { useNavigate } from 'react-router-dom';
 import { DekoratorMedFeilviserSakIndex, Feilmelding } from '@navikt/ft-sak-dekorator';
 
 import { useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
-import { SYSTEMRUTINE_URL } from '@navikt/fp-konstanter';
+import { SYSTEMRUTINE_URL, RETTSKILDE_URL } from '@navikt/fp-konstanter';
 
+import { Link } from '@navikt/ds-react';
+import { ExternalLinkIcon } from '@navikt/aksel-icons';
 import ErrorFormatter from './feilhandtering/ErrorFormatter';
 import ErrorMessage from './feilhandtering/ErrorMessage';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 
 import { AVDELINGSLEDER_PATH, JOURNALFØRING_PATH } from '../paths';
-
-import '@navikt/ft-sak-dekorator/dist/style.css';
 
 type QueryStrings = {
   errorcode?: string;
@@ -78,7 +78,7 @@ const Dekorator: FunctionComponent<OwnProps> = ({
   const navAnsatt = initFetch?.innloggetBruker;
 
   const navigate = useNavigate();
-  const visSaksbehandlerside = useCallback(
+  const visLos = useCallback(
     (e: React.SyntheticEvent) => {
       if (e.type === 'click') {
         navigate('/');
@@ -119,21 +119,45 @@ const Dekorator: FunctionComponent<OwnProps> = ({
   );
 
   const kanOppgavestyre = navAnsatt?.kanOppgavestyre;
-  const kanJournalføre = false; // Til vi er klare for å åpne for alle saksbehandlere
+  const kanJournalføre = false; // TODO Til vi er klare for å åpne for alle saksbehandlere
+
+  const interneLenker = useMemo(() => {
+    const lenker = [];
+    if (kanOppgavestyre) {
+      lenker.push(
+        <Link onClick={visAvdelingslederside}>{intl.formatMessage({ id: 'Dekorator.Avdelingsleder' })}</Link>,
+      );
+    }
+    if (kanJournalføre) {
+      lenker.push(<Link onClick={visJournalføringside}>{intl.formatMessage({ id: 'Dekorator.Journalforing' })}</Link>);
+    }
+    return lenker;
+  }, [kanOppgavestyre, kanJournalføre]);
+
+  const eksterneLenker = useMemo(
+    () => [
+      <Link href={RETTSKILDE_URL} target="_blank">
+        {intl.formatMessage({ id: 'Dekorator.Rettskilde' })}
+        <ExternalLinkIcon title="Ekstern lenke" />
+      </Link>,
+      <Link href={SYSTEMRUTINE_URL} target="_blank">
+        {intl.formatMessage({ id: 'Dekorator.Systemrutine' })}
+        <ExternalLinkIcon title="Ekstern lenke" />
+      </Link>,
+    ],
+    [],
+  );
 
   return (
     <DekoratorMedFeilviserSakIndex
       tittel={intl.formatMessage({ id: 'Dekorator.Foreldrepenger' })}
-      visSaksbehandlerside={visSaksbehandlerside}
-      visJournalføringside={kanJournalføre ? visJournalføringside : undefined}
-      visAvdelingslederside={kanOppgavestyre ? visAvdelingslederside : undefined}
+      tittelCallback={visLos}
       navAnsattNavn={navAnsatt?.navn}
-      systemrutineUrl={SYSTEMRUTINE_URL}
       feilmeldinger={hideErrorMessages ? EMPTY_ARRAY : resolvedErrorMessages}
       fjernFeilmeldinger={removeErrorMessages}
       setSiteHeight={setSiteHeight}
-      kanOppgavestyre={kanOppgavestyre}
-      kanJournalføre={kanJournalføre}
+      interneLenker={interneLenker}
+      eksterneLenker={eksterneLenker}
     />
   );
 };
