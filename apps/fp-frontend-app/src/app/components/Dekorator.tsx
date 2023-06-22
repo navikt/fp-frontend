@@ -136,6 +136,9 @@ const Dekorator: FunctionComponent<OwnProps> = ({
     return lenker;
   }, [kanOppgavestyre, kanJournalføre]);
 
+  const arbeidstakerHref = sakLinks ? sakLinks.find(l => l.rel === 'arbeidstaker-redirect')?.href : undefined;
+  const ainntektHref = sakLinks ? sakLinks.find(l => l.rel === 'ainntekt-redirect')?.href : undefined;
+
   const eksterneLenker = useMemo(
     () => [
       <Link href={RETTSKILDE_URL} target="_blank">
@@ -146,22 +149,16 @@ const Dekorator: FunctionComponent<OwnProps> = ({
         {intl.formatMessage({ id: 'Dekorator.Systemrutine' })}
         <ExternalLinkIcon title="Ekstern lenke" />
       </Link>,
-      <Link
-        href={`${sakLinks.find(l => l.rel === 'arbeidstaker-redirect')?.href}?saksnummer=${saksnummer}`}
-        target="_blank"
-      >
+      <Link href={`${arbeidstakerHref}?saksnummer=${saksnummer}`} target="_blank">
         {intl.formatMessage({ id: 'Dekorator.AaReg' })}
         <ExternalLinkIcon title="Ekstern lenke" />
       </Link>,
-      <Link
-        href={`${sakLinks.find(l => l.rel === 'ainntekt-redirect')?.href}?saksnummer=${saksnummer}`}
-        target="_blank"
-      >
+      <Link href={`${ainntektHref}?saksnummer=${saksnummer}`} target="_blank">
         {intl.formatMessage({ id: 'Dekorator.AInntekt' })}
         <ExternalLinkIcon title="Ekstern lenke" />
       </Link>,
     ],
-    [],
+    [arbeidstakerHref, ainntektHref, saksnummer],
   );
 
   return (
