@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { DekoratorMedFeilviserSakIndex, Feilmelding } from '@navikt/ft-sak-dekorator';
 
 import { useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
-import { SYSTEMRUTINE_URL, RETTSKILDE_URL } from '@navikt/fp-konstanter';
+import { SYSTEMRUTINE_URL, RETTSKILDE_URL, AAREG_URL, AINNTEKT_URL } from '@navikt/fp-konstanter';
 
 import ErrorFormatter from './feilhandtering/ErrorFormatter';
 import ErrorMessage from './feilhandtering/ErrorMessage';
@@ -73,6 +73,7 @@ const Dekorator: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
   const location = useLocation();
   const saksnummer = location.pathname.split('/fagsak/')[1]?.split('/')[0];
+  const erSaksnummerGyldig = saksnummer?.match(/^[a-zA-Z0-9]{1,19}$/);
 
   const initFetch = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
   const { innloggetBruker: navAnsatt, sakLinks } = initFetch;
@@ -138,9 +139,8 @@ const Dekorator: FunctionComponent<OwnProps> = ({
     return lenker;
   }, [kanOppgavestyre, kanJournalføre]);
 
-  const arbeidstakerHref = sakLinks ? sakLinks.find(l => l.rel === 'arbeidstaker-redirect')?.href : undefined;
-  const ainntektHref = sakLinks ? sakLinks.find(l => l.rel === 'ainntekt-redirect')?.href : undefined;
-  const ainntektPgiHref = sakLinks ? sakLinks.find(l => l.rel === 'ainntekt-pgi-redirect')?.href : undefined;
+  const arbeidstakerHref = sakLinks?.find(l => l.rel === 'arbeidstaker-redirect')?.href;
+  const ainntektHref = sakLinks?.find(l => l.rel === 'ainntekt-redirect')?.href;
 
   const eksterneLenker = useMemo(
     () => [
@@ -154,18 +154,14 @@ const Dekorator: FunctionComponent<OwnProps> = ({
       },
       {
         tekst: intl.formatMessage({ id: 'Dekorator.AaReg' }),
-        href: `${arbeidstakerHref}?saksnummer=${saksnummer}`,
+        href: arbeidstakerHref && erSaksnummerGyldig ? `${arbeidstakerHref}?saksnummer=${saksnummer}` : AAREG_URL,
       },
       {
         tekst: intl.formatMessage({ id: 'Dekorator.AInntekt' }),
-        href: `${ainntektHref}?saksnummer=${saksnummer}`,
-      },
-      {
-        tekst: intl.formatMessage({ id: 'Dekorator.AInntektPgi' }),
-        href: `${ainntektPgiHref}?saksnummer=${saksnummer}`,
+        href: ainntektHref && erSaksnummerGyldig ? `${ainntektHref}?saksnummer=${saksnummer}` : AINNTEKT_URL,
       },
     ],
-    [arbeidstakerHref, ainntektPgiHref, ainntektHref, saksnummer],
+    [arbeidstakerHref, ainntektHref, saksnummer, erSaksnummerGyldig],
   );
 
   return (

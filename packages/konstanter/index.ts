@@ -6,6 +6,8 @@ export {
   LINK_TIL_BESTE_BEREGNING_REGNEARK,
   SYSTEMRUTINE_URL,
   RETTSKILDE_URL,
+  AINNTEKT_URL,
+  AAREG_URL,
   hentDokumentLenke,
   hentVedtakDokumentLenke,
 } from './src/eksterneLenker';
