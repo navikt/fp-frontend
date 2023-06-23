@@ -2558,7 +2558,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -2597,7 +2597,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -2632,7 +2632,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -2668,7 +2668,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -2697,7 +2697,7 @@ __metadata:
     eslint: 8.43.0
     react: 18.2.0
     react-intl: 6.4.4
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -2734,7 +2734,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -2771,7 +2771,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -2808,7 +2808,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -2844,7 +2844,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -2882,7 +2882,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -2920,7 +2920,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -2955,7 +2955,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -2993,7 +2993,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3030,7 +3030,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3068,7 +3068,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3103,7 +3103,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3137,7 +3137,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3168,7 +3168,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3306,7 +3306,7 @@ __metadata:
     react-test-renderer: 18.2.0
     rollup-plugin-sourcemaps: 0.6.3
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vis-data: 7.1.6
     vis-timeline: 7.7.2
@@ -3346,7 +3346,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3409,7 +3409,7 @@ __metadata:
     react-intl: 6.4.4
     react-router-dom: 6.13.0
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3448,7 +3448,7 @@ __metadata:
     react-intl: 6.4.4
     react-router-dom: 6.13.0
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3492,7 +3492,7 @@ __metadata:
     react-intl: 6.4.4
     react-router-dom: 6.13.0
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3523,7 +3523,7 @@ __metadata:
     react: 18.2.0
     react-hook-form: 7.45.0
     react-intl: 6.4.4
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3562,7 +3562,7 @@ __metadata:
     react-intl: 6.4.4
     react-router-dom: 6.13.0
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3597,7 +3597,7 @@ __metadata:
     react-intl: 6.4.4
     react-router-dom: 6.13.0
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3628,7 +3628,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3659,7 +3659,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3691,7 +3691,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3728,7 +3728,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3763,7 +3763,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3795,7 +3795,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3824,7 +3824,7 @@ __metadata:
     react: 18.2.0
     react-hook-form: 7.45.0
     react-intl: 6.4.4
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3860,7 +3860,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3899,7 +3899,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3935,7 +3935,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -3971,7 +3971,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4009,7 +4009,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4046,7 +4046,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4085,7 +4085,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4121,7 +4121,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4154,7 +4154,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4192,7 +4192,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4226,7 +4226,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4260,7 +4260,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4294,7 +4294,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4328,7 +4328,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4363,7 +4363,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4398,7 +4398,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4434,7 +4434,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4470,7 +4470,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4505,7 +4505,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4574,7 +4574,7 @@ __metadata:
     react-intl: 6.4.4
     react-router-dom: 6.13.0
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4609,7 +4609,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4637,7 +4637,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4670,7 +4670,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4703,7 +4703,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4736,7 +4736,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4768,7 +4768,7 @@ __metadata:
     react: 18.2.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4801,7 +4801,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4843,7 +4843,7 @@ __metadata:
     react-intl: 6.4.4
     react-router-dom: 6.13.0
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -4869,7 +4869,7 @@ __metadata:
     react-hook-form: 7.45.0
     react-intl: 6.4.4
     storybook: 7.0.23
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.2
@@ -11967,7 +11967,7 @@ __metadata:
     lerna: 7.0.2
     lint-staged: 13.2.2
     react-test-renderer: 18.2.0
-    stylelint: 15.8.0
+    stylelint: 15.9.0
     stylelint-order: 6.0.3
     typescript: 5.0.4
     vite: 4.3.9
@@ -18209,9 +18209,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint@npm:15.8.0":
-  version: 15.8.0
-  resolution: "stylelint@npm:15.8.0"
+"stylelint@npm:15.9.0":
+  version: 15.9.0
+  resolution: "stylelint@npm:15.9.0"
   dependencies:
     "@csstools/css-parser-algorithms": ^2.2.0
     "@csstools/css-tokenizer": ^2.1.1
@@ -18256,7 +18256,7 @@ __metadata:
     write-file-atomic: ^5.0.1
   bin:
     stylelint: bin/stylelint.js
-  checksum: 3598f604393162c63f79f5696e24af871818f1422b4a0184deea054450a90434273d27bf8bf3f3e27d45c6850d29cbd0ed810f1092700b98c7fe4135fda6266c
+  checksum: 554165854bad5db90f5e325546940cae8f47f324a2d8ce27d809e1f5ad2d3de8fa4b1eaded97b0c456e2a7f1d714779876b021c432cc39dc40473aea1a05e8b2
   languageName: node
   linkType: hard
 
