@@ -15,6 +15,11 @@ import { validateAuthorization } from './azure/validate.js';
 const server = express();
 const { port } = config.server;
 
+const globalErrorHandler = (err, req, res) => {
+  logger.warning(err.stack);
+  res.status(err.status || 500).send({ error: err });
+}
+
 async function startApp() {
   try {
     server.use(timeout('10m'));
@@ -131,6 +136,8 @@ async function startApp() {
     server.use(/^\/(?!.*dist).*$/, (req, res) => {
       res.sendFile('index.html', { root: rootDir });
     });
+
+    server.use(globalErrorHandler)
 
     server.listen(port, () => logger.info(`Listening on port ${port}`));
   } catch (error) {
