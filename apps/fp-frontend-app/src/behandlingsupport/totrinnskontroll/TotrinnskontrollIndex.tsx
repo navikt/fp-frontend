@@ -4,12 +4,15 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { TotrinnskontrollSakIndex } from '@navikt/fp-sak-totrinnskontroll';
 import { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { useIntl } from 'react-intl';
 import FagsakData from '../../fagsak/FagsakData';
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
 import { createLocationForSkjermlenke } from '../../app/paths';
 import { useKodeverk } from '../../data/useKodeverk';
 import BeslutterModalIndex from './BeslutterModalIndex';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import SupportHeader from '../SupportHeader';
 
 type Values = {
   fatterVedtakAksjonspunktDto: {
@@ -57,6 +60,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
   beslutterFormData,
   setBeslutterForData,
 }) => {
+  const intl = useIntl();
   const [visBeslutterModal, setVisBeslutterModal] = useState(false);
   const [erAlleAksjonspunktGodkjent, setAlleAksjonspunktTilGodkjent] = useState(false);
 
@@ -104,6 +108,8 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
 
   return (
     <>
+      <SupportHeader tekst={intl.formatMessage({ id: 'TotrinnskontrollIndex.Godjenning' })} />
+      <VerticalSpacer sixteenPx />
       <TotrinnskontrollSakIndex
         behandling={valgtBehandling}
         location={location}

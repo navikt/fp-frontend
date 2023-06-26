@@ -53,7 +53,7 @@ type Fagsak = Readonly<{
   behandlinger: BehandlingAppKontekst[];
   brukerManglerAdresse: boolean;
   historikkinnslag: Historikkinnslag[];
-  saksnotat: Saksnotat[];
+  notater: Saksnotat[];
 }>;
 
 export default Fagsak;

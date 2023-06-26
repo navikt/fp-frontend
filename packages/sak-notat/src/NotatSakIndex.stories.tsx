@@ -12,8 +12,12 @@ export default {
 
 const Template: StoryFn<{
   fagsak: Fagsak;
-  lagreNotat: (beskrivelse: string) => void;
-}> = ({ fagsak, lagreNotat }) => <NotatSakIndex fagsak={fagsak} lagreNotat={lagreNotat} />;
+  lagreNotat: (params: { saksnummer: string; notat: string }) => Promise<any>;
+}> = ({ fagsak, lagreNotat }) => (
+  <div style={{ height: '400px', width: '600px' }}>
+    <NotatSakIndex fagsak={fagsak} lagreNotat={lagreNotat} />
+  </div>
+);
 
 export const Default = Template.bind({});
 Default.args = {

@@ -1,0 +1,18 @@
+.circle {
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  border-radius: 50%;
+  color: #000;
+  text-align: center;
+  background: var(--a-gray-300);
+}
+
+.bubble {
+  --ac-chat-avatar-bg: white;
+  margin-left: -65px;
+}
+
+.overflow {
+  overflow-y: auto;
+}

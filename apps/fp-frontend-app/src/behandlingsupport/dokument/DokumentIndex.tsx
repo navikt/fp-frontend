@@ -1,15 +1,17 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { DokumenterSakIndex } from '@navikt/ft-sak-dokumenter';
-import { LoadingPanel, usePrevious } from '@navikt/ft-ui-komponenter';
+import { LoadingPanel, VerticalSpacer, usePrevious } from '@navikt/ft-ui-komponenter';
 import { Dokument } from '@navikt/ft-types';
 
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
 
+import { useIntl } from 'react-intl';
 import useBehandlingEndret from '../../behandling/useBehandlingEndret';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 
 import '@navikt/ft-sak-dokumenter/dist/style.css';
+import SupportHeader from '../SupportHeader';
 
 const selectDocument =
   (saksNr: string) =>
@@ -43,7 +45,8 @@ const EMPTY_ARRAY = [] as Dokument[];
  *
  * Container komponent. Har ansvar for å hente sakens dokumenter fra state og rendre det i en liste.
  */
-export const DokumentIndex: FunctionComponent<OwnProps> = ({ behandlingUuid, behandlingVersjon, saksnummer }) => {
+const DokumentIndex: FunctionComponent<OwnProps> = ({ behandlingUuid, behandlingVersjon, saksnummer }) => {
+  const intl = useIntl();
   const forrigeSaksnummer = usePrevious(saksnummer);
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingUuid, behandlingVersjon);
 
@@ -64,11 +67,18 @@ export const DokumentIndex: FunctionComponent<OwnProps> = ({ behandlingUuid, beh
   }
 
   return (
-    <DokumenterSakIndex
-      documents={sorterteDokumenter}
-      selectDocumentCallback={selectDocument(saksnummer)}
-      behandlingUuid={behandlingUuid}
-    />
+    <>
+      <SupportHeader
+        tekst={intl.formatMessage({ id: 'DokumentIndex.Dokumenter' })}
+        antall={sorterteDokumenter.length}
+      />
+      <VerticalSpacer sixteenPx />
+      <DokumenterSakIndex
+        documents={sorterteDokumenter}
+        selectDocumentCallback={selectDocument(saksnummer)}
+        behandlingUuid={behandlingUuid}
+      />
+    </>
   );
 };
 
