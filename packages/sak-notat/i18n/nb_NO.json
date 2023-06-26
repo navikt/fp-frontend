@@ -1,6 +1,5 @@
 {
-  "NotatPanel.Notat": "Notat",
   "NotatPanel.SkrivEtNotat": "Skriv et notat",
-  "NotatPanel.ErSynlig": "Obs! Notater vil være synlig for bruker ved innsyn",
-  "NotatPanel.LeggTilNotat": "Legg til notat"
+  "NotatPanel.KunForSaksbehandler": "Kun saksbehandlere får se notatet",
+  "NotatPanel.Send": "Send"
 }

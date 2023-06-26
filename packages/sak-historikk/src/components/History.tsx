@@ -1,8 +1,8 @@
-import React, { FunctionComponent, useMemo, useState } from 'react';
+import React, { FunctionComponent, useMemo, useState, useRef, useEffect } from 'react';
 import { Location } from 'history';
 import { useIntl } from 'react-intl';
 import moment from 'moment';
-import { Checkbox } from '@navikt/ds-react';
+import { Checkbox, Heading } from '@navikt/ds-react';
 
 import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
@@ -266,52 +266,81 @@ const History: FunctionComponent<OwnProps> = ({
     [alleKodeverkFpTilbake],
   );
 
+  const [top, setTop] = useState<number>();
+
   return (
     <>
-      {valgtBehandlingUuid && (
+      <div className={styles.header}>
         <FlexContainer>
-          <FlexRow>
-            <FlexColumn className={styles.pushRight}>
-              <Checkbox size="small" onChange={() => setSkalSortertePaBehandling(!skalSortertePaValgtBehandling)}>
-                {intl.formatMessage({ id: 'History.FiltrerPaBehandling' })}
-              </Checkbox>
+          <FlexRow spaceBetween>
+            <FlexColumn>
+              <Heading size="small">{intl.formatMessage({ id: 'History.Historikk' })}</Heading>
+            </FlexColumn>
+            <FlexColumn>
+              <FlexContainer>
+                <FlexRow>
+                  {valgtBehandlingUuid && (
+                    <FlexColumn className={styles.marginFilter}>
+                      <Checkbox
+                        size="small"
+                        onChange={() => setSkalSortertePaBehandling(!skalSortertePaValgtBehandling)}
+                      >
+                        {intl.formatMessage({ id: 'History.FiltrerPaBehandling' })}
+                      </Checkbox>
+                    </FlexColumn>
+                  )}
+                  <FlexColumn>
+                    <div className={styles.circle}>{filtrerteInnslag.length}</div>
+                  </FlexColumn>
+                </FlexRow>
+              </FlexContainer>
             </FlexColumn>
           </FlexRow>
         </FlexContainer>
-      )}
-      <VerticalSpacer sixteenPx />
-      {filtrerteInnslag.map(historikkinnslag => {
-        const HistorikkMal = velgHistorikkMal(historikkinnslag.type);
-        const aktorIsVL = historikkinnslag.aktoer === HistorikkAktor.VEDTAKSLOSNINGEN;
-        const aktorIsSOKER = historikkinnslag.aktoer === HistorikkAktor.SOKER;
-        const aktorIsArbeidsgiver = historikkinnslag.aktoer === HistorikkAktor.ARBEIDSGIVER;
+      </div>
+      <div
+        style={{ height: `calc(100vh - ${top}px)` }}
+        className={styles.overflow}
+        ref={el => {
+          if (el) {
+            setTop(el.getBoundingClientRect().top);
+          }
+        }}
+      >
+        {filtrerteInnslag.map((historikkinnslag, index) => {
+          const HistorikkMal = velgHistorikkMal(historikkinnslag.type);
+          const aktorIsVL = historikkinnslag.aktoer === HistorikkAktor.VEDTAKSLOSNINGEN;
+          const aktorIsSOKER = historikkinnslag.aktoer === HistorikkAktor.SOKER;
+          const aktorIsArbeidsgiver = historikkinnslag.aktoer === HistorikkAktor.ARBEIDSGIVER;
 
-        const getKodeverknavn = historikkinnslag.erTilbakekreving ? getKodeverknavnFpTilbake : getKodeverknavnFpSak;
+          const getKodeverknavn = historikkinnslag.erTilbakekreving ? getKodeverknavnFpTilbake : getKodeverknavnFpSak;
 
-        if (!getKodeverknavn) {
-          return null;
-        }
+          if (!getKodeverknavn) {
+            return null;
+          }
 
-        return (
-          <Snakkeboble
-            key={historikkinnslag.opprettetTidspunkt + historikkinnslag.type}
-            aktoer={historikkinnslag.aktoer}
-            rolleNavn={getKodeverknavn(historikkinnslag.aktoer, KodeverkType.HISTORIKK_AKTOER)}
-            dato={historikkinnslag.opprettetTidspunkt}
-            kjoenn={kjønn}
-            opprettetAv={aktorIsSOKER || aktorIsArbeidsgiver || aktorIsVL ? '' : historikkinnslag.opprettetAv}
-          >
-            <HistorikkMal
-              historikkinnslag={historikkinnslag}
-              behandlingLocation={getBehandlingLocation(historikkinnslag.behandlingUuid)}
-              saksnummer={saksnummer}
-              getKodeverknavn={getKodeverknavn}
-              createLocationForSkjermlenke={createLocationForSkjermlenke}
-              erTilbakekreving={!!historikkinnslag.erTilbakekreving}
-            />
-          </Snakkeboble>
-        );
-      })}
+          return (
+            <Snakkeboble
+              key={historikkinnslag.opprettetTidspunkt + historikkinnslag.type}
+              aktoer={historikkinnslag.aktoer}
+              rolleNavn={getKodeverknavn(historikkinnslag.aktoer, KodeverkType.HISTORIKK_AKTOER)}
+              dato={historikkinnslag.opprettetTidspunkt}
+              kjoenn={kjønn}
+              opprettetAv={aktorIsSOKER || aktorIsArbeidsgiver || aktorIsVL ? '' : historikkinnslag.opprettetAv}
+              erFørsteBoble={index === 0}
+            >
+              <HistorikkMal
+                historikkinnslag={historikkinnslag}
+                behandlingLocation={getBehandlingLocation(historikkinnslag.behandlingUuid)}
+                saksnummer={saksnummer}
+                getKodeverknavn={getKodeverknavn}
+                createLocationForSkjermlenke={createLocationForSkjermlenke}
+                erTilbakekreving={!!historikkinnslag.erTilbakekreving}
+              />
+            </Snakkeboble>
+          );
+        })}
+      </div>
     </>
   );
 };

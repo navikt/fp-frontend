@@ -2436,6 +2436,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@navikt/aksel-icons@npm:4.4.0, @navikt/aksel-icons@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "@navikt/aksel-icons@npm:4.4.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F4.4.0%2Fc5a5086226e7a738da887f253b0d37675db0e2ac"
+  checksum: d1ebf290c55e5a7e875323df8b0314eab9b386e961d6a3374d3929c6f6105269b46d78b66997c8067ec139c0a706b072fba362cea48fb52cb84d8a62dfa1ede4
+  languageName: node
+  linkType: hard
+
 "@navikt/aksel-icons@npm:^3.4.2":
   version: 3.4.2
   resolution: "@navikt/aksel-icons@npm:3.4.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F3.4.2%2Ffa858e1a5fb0557d61b62ad7cdf0d75e26fc89d7"
@@ -2461,6 +2468,13 @@ __metadata:
   version: 4.1.7
   resolution: "@navikt/ds-css@npm:4.1.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F4.1.7%2F531ff46edd0e967f74695105135f1740bd1a5771"
   checksum: ead21bc3fda7f6364f9c7c4f4c97e9e3314cfe69fb7995bb0b32868cdc7a5849da298b94812cb6d920da7edf75e9524eb64310401168e9c24729e8d1faaa372a
+  languageName: node
+  linkType: hard
+
+"@navikt/ds-css@npm:4.4.0":
+  version: 4.4.0
+  resolution: "@navikt/ds-css@npm:4.4.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F4.4.0%2Ff8793291536f0e8ff8a6a28a58b7173efccb4254"
+  checksum: 155414092e2f99d14305d2d36c84f4586a36866b4fabe21ff33af5feb01b6609e92024154604d71232d05553a5d1d4479a444f9b07b8227e6a8644e3f98eb63c
   languageName: node
   linkType: hard
 
@@ -2506,6 +2520,25 @@ __metadata:
     "@types/react": ^17.0.30 || ^18.0.0
     react: ^17.0.0 || ^18.0.0
   checksum: 7b453fdc377181f46bfa36a8cc2fd85a70aee2af859157dfb84a1c123ae3a1c4923bfb1ea52213d083db7670699e1712ea67cca575e2c89d32d58c85071d4bbf
+  languageName: node
+  linkType: hard
+
+"@navikt/ds-react@npm:4.4.0":
+  version: 4.4.0
+  resolution: "@navikt/ds-react@npm:4.4.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react%2F4.4.0%2F60db7c5c41fc26d467ce184704191191b744a33a"
+  dependencies:
+    "@floating-ui/react": 0.24.1
+    "@navikt/aksel-icons": ^4.4.0
+    "@radix-ui/react-tabs": 1.0.0
+    "@radix-ui/react-toggle-group": 1.0.0
+    clsx: ^1.2.1
+    date-fns: 2.29.3
+    react-day-picker: 8.3.4
+    react-modal: 3.15.1
+  peerDependencies:
+    "@types/react": ^17.0.30 || ^18.0.0
+    react: ^17.0.0 || ^18.0.0
+  checksum: dbe38c80736111862673862d04423cc601723772db9f1fb40ae1ef97fe54556224da68c2b027ba7ba186c5c91eaa6c48c24fa13f7f327ea0db6b3338a35aefd4
   languageName: node
   linkType: hard
 
@@ -4780,33 +4813,33 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-notat@workspace:packages/sak-notat"
   dependencies:
-    "@navikt/ds-css": 4.1.4
-    "@navikt/ds-react": 4.1.4
+    "@navikt/ds-css": 4.1.7
+    "@navikt/ds-react": 4.1.7
     "@navikt/fp-kodeverk": 1.0.0
     "@navikt/fp-storybook-utils": 1.0.0
     "@navikt/fp-types": 1.0.0
-    "@navikt/ft-form-hooks": 4.1.0
-    "@navikt/ft-form-validators": 2.0.32
-    "@navikt/ft-kodeverk": 2.1.12
-    "@navikt/ft-types": 2.1.14
-    "@navikt/ft-ui-komponenter": 2.0.35
-    "@navikt/ft-utils": 2.0.31
-    "@storybook/addon-actions": 7.0.20
-    "@storybook/react": 7.0.20
-    "@storybook/react-vite": 7.0.20
+    "@navikt/ft-form-hooks": 4.1.1
+    "@navikt/ft-form-validators": 2.0.33
+    "@navikt/ft-kodeverk": 2.1.13
+    "@navikt/ft-types": 2.1.15
+    "@navikt/ft-ui-komponenter": 2.0.36
+    "@navikt/ft-utils": 2.0.32
+    "@storybook/addon-actions": 7.0.23
+    "@storybook/react": 7.0.23
+    "@storybook/react-vite": 7.0.23
     "@testing-library/react": 14.0.0
     "@testing-library/user-event": 14.4.3
     cross-env: 7.0.3
     dayjs: 1.11.8
-    eslint: 8.42.0
+    eslint: 8.43.0
     react: 18.2.0
-    react-hook-form: 7.44.3
+    react-hook-form: 7.45.0
     react-intl: 6.4.4
-    storybook: 7.0.20
-    stylelint: 15.7.0
+    storybook: 7.0.23
+    stylelint: 15.8.0
     typescript: 5.0.4
     vite: 4.3.9
-    vitest: 0.32.0
+    vitest: 0.32.2
   languageName: unknown
   linkType: soft
 
@@ -5390,13 +5423,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ft-sak-dekorator@npm:4.0.0":
-  version: 4.0.0
-  resolution: "@navikt/ft-sak-dekorator@npm:4.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-sak-dekorator%2F4.0.0%2F1c62cd7dbd96f0093d1e39608d7c44238ddb22ec"
+"@navikt/ft-sak-dekorator@portal:/C:/develop/ft-frontend-saksbehandling/packages/sak-dekorator::locator=fp-frontend%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@navikt/ft-sak-dekorator@portal:/C:/develop/ft-frontend-saksbehandling/packages/sak-dekorator::locator=fp-frontend%40workspace%3A."
   dependencies:
-    "@navikt/aksel-icons": 4.1.7
-    "@navikt/ds-css": 4.1.7
-    "@navikt/ds-react": 4.1.7
+    "@navikt/aksel-icons": 4.4.0
+    "@navikt/ds-css": 4.4.0
+    "@navikt/ds-react": 4.4.0
     "@navikt/ft-kodeverk": ^2.1.13
     "@navikt/ft-konstanter": ^2.0.23
     "@navikt/ft-plattform-komponenter": ^2.2.7
@@ -5419,9 +5452,8 @@ __metadata:
     classnames: 2.3.2
     react: 18.2.0
     react-intl: 6.3.2
-  checksum: 7965ac8d2ab4ee4375c88a581422c2bc97ebd798efc4bbf68283bb735f8e0b892037aa69ad291185ea5ad332588de04e2d13249d6560c23baf03fe50fc0bbf48
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "@navikt/ft-sak-dokumenter@npm:2.0.36":
   version: 2.0.36

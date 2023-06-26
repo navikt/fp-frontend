@@ -121,7 +121,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
         errorMessageCallback={addErrorMessage}
         errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Support' })}
       >
-        <div className={aktivtSupportPanel === SupportTabs.HISTORIKK ? styles.containerHistorikk : styles.container}>
+        <div className={styles.container}>
           {behandling &&
             (aktivtSupportPanel === SupportTabs.TIL_BESLUTTER || aktivtSupportPanel === SupportTabs.FRA_BESLUTTER) && (
               <TotrinnskontrollIndex
@@ -157,7 +157,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
               behandlingVersjon={behandlingVersjon}
             />
           )}
-          {aktivtSupportPanel === SupportTabs.DOKUMENTER && <NotatIndex fagsak={fagsak} />}
+          {aktivtSupportPanel === SupportTabs.NOTATER && <NotatIndex fagsak={fagsak} />}
         </div>
       </ErrorBoundary>
     </>

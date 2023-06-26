@@ -17,10 +17,6 @@
   width: 33%;
 }
 
-.rightColumn > div {
-  margin-bottom: 16px;
-}
-
 @media all and (max-width: 1350px) {
   .leftColumn {
     width: 100%;
