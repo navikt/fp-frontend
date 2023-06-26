@@ -24,22 +24,22 @@
     "storybook": "storybook dev --quiet -p 7046"
   },
   "dependencies": {
-    "@navikt/ds-react": "4.1.7",
+    "@navikt/ds-react": "4.4.0",
     "@navikt/fp-kodeverk": "1.0.0",
     "@navikt/fp-prosess-felles": "1.0.0",
     "@navikt/fp-types": "1.0.0",
     "@navikt/fp-types-avklar-aksjonspunkter": "1.0.0",
-    "@navikt/ft-form-hooks": "4.1.1",
-    "@navikt/ft-kodeverk": "2.1.13",
-    "@navikt/ft-types": "2.1.15",
-    "@navikt/ft-ui-komponenter": "2.0.36",
-    "@navikt/ft-utils": "2.0.32",
+    "@navikt/ft-form-hooks": "4.1.2",
+    "@navikt/ft-kodeverk": "2.1.14",
+    "@navikt/ft-types": "2.1.16",
+    "@navikt/ft-ui-komponenter": "2.0.37",
+    "@navikt/ft-utils": "2.0.33",
     "react": "18.2.0",
     "react-hook-form": "7.45.0",
     "react-intl": "6.4.4"
   },
   "devDependencies": {
-    "@navikt/ds-css": "4.1.7",
+    "@navikt/ds-css": "4.4.0",
     "@navikt/fp-storybook-utils": "1.0.0",
     "@storybook/addon-actions": "7.0.23",
     "@storybook/react": "7.0.23",
@@ -49,7 +49,7 @@
     "cross-env": "7.0.3",
     "eslint": "8.43.0",
     "storybook": "7.0.23",
-    "stylelint": "15.8.0",
+    "stylelint": "15.9.0",
     "typescript": "5.0.4",
     "vite": "4.3.9",
     "vitest": "0.32.2"
