@@ -18,16 +18,18 @@ import ErrorBoundary from '../app/ErrorBoundary';
 import styles from './behandlingSupportIndex.module.css';
 
 export const hentSynligePaneler = (behandlingTillatteOperasjoner?: BehandlingTillatteOperasjoner): string[] =>
-  Object.values(SupportTabs).filter(supportPanel => {
-    switch (supportPanel) {
-      case SupportTabs.TIL_BESLUTTER:
-        return behandlingTillatteOperasjoner && behandlingTillatteOperasjoner.behandlingTilGodkjenning;
-      case SupportTabs.FRA_BESLUTTER:
-        return behandlingTillatteOperasjoner && behandlingTillatteOperasjoner.behandlingFraBeslutter;
-      default:
-        return true;
-    }
-  });
+  Object.values(SupportTabs)
+    .filter(s => s !== SupportTabs.NOTATER)
+    .filter(supportPanel => {
+      switch (supportPanel) {
+        case SupportTabs.TIL_BESLUTTER:
+          return behandlingTillatteOperasjoner && behandlingTillatteOperasjoner.behandlingTilGodkjenning;
+        case SupportTabs.FRA_BESLUTTER:
+          return behandlingTillatteOperasjoner && behandlingTillatteOperasjoner.behandlingFraBeslutter;
+        default:
+          return true;
+      }
+    });
 
 export const hentValgbarePaneler = (
   synligePaneler: string[],
