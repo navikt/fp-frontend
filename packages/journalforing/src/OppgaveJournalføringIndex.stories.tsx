@@ -1,24 +1,20 @@
 import React from 'react';
 import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
-
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { withRouter } from '@navikt/fp-storybook-utils';
 import { NavAnsatt } from '@navikt/fp-types';
 
-import { fagsakYtelseType, fagsakStatus, familieHendelseType } from '@navikt/fp-kodeverk';
-import { RestApiPathsKeys, requestApi } from './data/fpfordelRestApi';
+import { fagsakStatus, fagsakYtelseType, familieHendelseType } from '@navikt/fp-kodeverk';
+import { requestApi, RestApiPathsKeys } from './data/fpfordelRestApi';
 import JournalforingIndex from './OppgaveJournalføringIndex';
 import OppgaveOversikt from './typer/oppgaveOversiktTsType';
 import OppgavePrioritet from './kodeverk/oppgavePrioritet';
 import Journalpost from './typer/journalpostTsType';
 import JournalKanal from './kodeverk/journalKanal';
-import ReserverOppgaveType from './typer/reserverOppgaveType';
 
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
-import {action} from "@storybook/addon-actions";
-import JournalførSubmitValue from "./typer/ferdigstillJournalføringSubmit";
 
 const detaljertJournalpostMal = (medBruker: boolean): Journalpost =>
   ({
@@ -115,7 +111,7 @@ export default {
 const navAnsattDefault = {
   kanOppgavestyre: true,
   kanBehandleKode6: true,
-  brukernavn: "X123456",
+  brukernavn: 'X123456',
 } as NavAnsatt;
 
 const Template: StoryFn<{
