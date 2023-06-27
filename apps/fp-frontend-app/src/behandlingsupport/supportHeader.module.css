@@ -13,3 +13,8 @@
   text-align: center;
   background: var(--a-gray-300);
 }
+
+.container {
+  padding-left: 16px;
+  padding-right: 16px;
+}

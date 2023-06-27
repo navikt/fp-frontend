@@ -11,7 +11,7 @@ import useBehandlingEndret from '../../behandling/useBehandlingEndret';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 
 import '@navikt/ft-sak-dokumenter/dist/style.css';
-import SupportHeader from '../SupportHeader';
+import SupportHeaderAndContent from '../SupportHeader';
 
 const selectDocument =
   (saksNr: string) =>
@@ -67,18 +67,17 @@ const DokumentIndex: FunctionComponent<OwnProps> = ({ behandlingUuid, behandling
   }
 
   return (
-    <>
-      <SupportHeader
-        tekst={intl.formatMessage({ id: 'DokumentIndex.Dokumenter' })}
-        antall={sorterteDokumenter.length}
-      />
+    <SupportHeaderAndContent
+      tekst={intl.formatMessage({ id: 'DokumentIndex.Dokumenter' })}
+      antall={sorterteDokumenter.length}
+    >
       <VerticalSpacer sixteenPx />
       <DokumenterSakIndex
         documents={sorterteDokumenter}
         selectDocumentCallback={selectDocument(saksnummer)}
         behandlingUuid={behandlingUuid}
       />
-    </>
+    </SupportHeaderAndContent>
   );
 };
 

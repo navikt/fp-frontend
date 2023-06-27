@@ -13,7 +13,7 @@ import useVisForhandsvisningAvMelding, { ForhandsvisFunksjon } from '../../data/
 import { FagsakApiKeys, SubmitMessageParams, restFagsakApiHooks } from '../../data/fagsakContextApi';
 import FagsakData from '../../fagsak/FagsakData';
 import SettPaVentReadOnlyModal from './SettPaVentReadOnlyModal';
-import SupportHeader from '../SupportHeader';
+import SupportHeaderAndContent from '../SupportHeader';
 
 const getSubmitCallback =
   (
@@ -161,22 +161,22 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
         <MessagesModalSakIndex showModal={submitFinished && showMessagesModal} closeEvent={afterSubmit} />
       )}
 
-      <SupportHeader tekst={intl.formatMessage({ id: 'MeldingIndex.Meldinger' })} />
-      <VerticalSpacer sixteenPx />
-      <MeldingerSakIndex
-        submitCallback={submitCallback}
-        sprakKode={valgtBehandling?.sprakkode}
-        previewCallback={previewCallback}
-        revurderingVarslingArsak={revurderingVarslingArsak}
-        templates={valgtBehandling?.brevmaler}
-        isKontrollerRevurderingApOpen={valgtBehandling?.ugunstAksjonspunkt}
-        fagsakYtelseType={fagsak.fagsakYtelseType}
-        kanVeilede={initFetchData.innloggetBruker.kanVeilede}
-        meldingFormData={meldingFormData}
-        setMeldingForData={setMeldingForData}
-        brukerManglerAdresse={fagsak.brukerManglerAdresse}
-      />
-
+      <SupportHeaderAndContent tekst={intl.formatMessage({ id: 'MeldingIndex.Meldinger' })}>
+        <VerticalSpacer sixteenPx />
+        <MeldingerSakIndex
+          submitCallback={submitCallback}
+          sprakKode={valgtBehandling?.sprakkode}
+          previewCallback={previewCallback}
+          revurderingVarslingArsak={revurderingVarslingArsak}
+          templates={valgtBehandling?.brevmaler}
+          isKontrollerRevurderingApOpen={valgtBehandling?.ugunstAksjonspunkt}
+          fagsakYtelseType={fagsak.fagsakYtelseType}
+          kanVeilede={initFetchData.innloggetBruker.kanVeilede}
+          meldingFormData={meldingFormData}
+          setMeldingForData={setMeldingForData}
+          brukerManglerAdresse={fagsak.brukerManglerAdresse}
+        />
+      </SupportHeaderAndContent>
       {submitFinished && showSettPaVentModal && (
         <SettPaVentReadOnlyModal
           lukkCallback={handleSubmitFromModal}

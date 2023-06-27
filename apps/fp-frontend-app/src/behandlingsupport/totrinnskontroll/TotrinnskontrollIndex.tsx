@@ -12,7 +12,7 @@ import { createLocationForSkjermlenke } from '../../app/paths';
 import { useKodeverk } from '../../data/useKodeverk';
 import BeslutterModalIndex from './BeslutterModalIndex';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
-import SupportHeader from '../SupportHeader';
+import SupportHeaderAndContent from '../SupportHeader';
 
 type Values = {
   fatterVedtakAksjonspunktDto: {
@@ -108,20 +108,21 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <SupportHeader tekst={intl.formatMessage({ id: 'TotrinnskontrollIndex.Godjenning' })} />
-      <VerticalSpacer sixteenPx />
-      <TotrinnskontrollSakIndex
-        behandling={valgtBehandling}
-        location={location}
-        readOnly={brukernavn === valgtBehandling.ansvarligSaksbehandler || kanVeilede}
-        onSubmit={onSubmit}
-        forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
-        fagsakYtelseType={fagsak.fagsakYtelseType}
-        alleKodeverk={alleKodeverk}
-        createLocationForSkjermlenke={createLocationForSkjermlenke}
-        beslutterFormData={beslutterFormData}
-        setBeslutterForData={setBeslutterForData}
-      />
+      <SupportHeaderAndContent tekst={intl.formatMessage({ id: 'TotrinnskontrollIndex.Godjenning' })}>
+        <VerticalSpacer sixteenPx />
+        <TotrinnskontrollSakIndex
+          behandling={valgtBehandling}
+          location={location}
+          readOnly={brukernavn === valgtBehandling.ansvarligSaksbehandler || kanVeilede}
+          onSubmit={onSubmit}
+          forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
+          fagsakYtelseType={fagsak.fagsakYtelseType}
+          alleKodeverk={alleKodeverk}
+          createLocationForSkjermlenke={createLocationForSkjermlenke}
+          beslutterFormData={beslutterFormData}
+          setBeslutterForData={setBeslutterForData}
+        />
+      </SupportHeaderAndContent>
       {visBeslutterModal && (
         <BeslutterModalIndex
           behandling={valgtBehandling}

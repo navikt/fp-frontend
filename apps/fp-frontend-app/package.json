@@ -116,7 +116,7 @@
     "@navikt/ft-sak-infosider": "2.0.35",
     "@navikt/ft-sak-meny": "3.0.8",
     "@navikt/ft-sak-risikoklassifisering": "2.1.22",
-    "@navikt/ft-sak-support-meny": "3.0.0",
+    "@navikt/ft-sak-support-meny": "3.0.1",
     "@navikt/ft-sak-visittkort": "2.0.43",
     "@navikt/ft-types": "2.1.16",
     "@navikt/ft-ui-komponenter": "2.0.37",

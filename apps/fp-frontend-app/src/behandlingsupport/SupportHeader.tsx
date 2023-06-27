@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { Heading } from '@navikt/ds-react';
@@ -8,23 +8,27 @@ import styles from './supportHeader.module.css';
 type OwnProps = {
   tekst: string;
   antall?: number;
+  children: ReactNode;
 };
 
-const SupportHeader: FunctionComponent<OwnProps> = ({ tekst, antall }) => (
-  <div className={styles.header}>
-    <FlexContainer>
-      <FlexRow spaceBetween>
-        <FlexColumn>
-          <Heading size="small">{tekst}</Heading>
-        </FlexColumn>
-        {antall && (
+const SupportHeaderAndContent: FunctionComponent<OwnProps> = ({ tekst, antall, children }) => (
+  <>
+    <div className={styles.header}>
+      <FlexContainer>
+        <FlexRow spaceBetween>
           <FlexColumn>
-            <div className={styles.circle}>{antall}</div>
+            <Heading size="small">{tekst}</Heading>
           </FlexColumn>
-        )}
-      </FlexRow>
-    </FlexContainer>
-  </div>
+          {!!antall && antall > 0 && (
+            <FlexColumn>
+              <div className={styles.circle}>{antall}</div>
+            </FlexColumn>
+          )}
+        </FlexRow>
+      </FlexContainer>
+    </div>
+    <div className={styles.container}>{children}</div>
+  </>
 );
 
-export default SupportHeader;
+export default SupportHeaderAndContent;

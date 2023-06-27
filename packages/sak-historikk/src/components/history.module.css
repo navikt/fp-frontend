@@ -20,6 +20,8 @@
 
 .overflow {
   overflow-y: auto;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .marginFilter {

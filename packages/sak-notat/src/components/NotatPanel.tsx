@@ -1,8 +1,8 @@
-import React, { FunctionComponent, useCallback, useMemo, useState } from 'react';
+import React, { FunctionComponent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
-import { Button, Chat } from '@navikt/ds-react';
+import { BodyShort, Button, Chat } from '@navikt/ds-react';
 
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
@@ -39,6 +39,9 @@ const NotatPanel: FunctionComponent<OwnProps> = ({ saksnummer, notater, lagreNot
 
   const [alleNotater, leggTilNotat] = useState(sorterteNotater);
 
+  const bottomEl = useRef<HTMLDivElement | null>(null);
+  const [top, setTop] = useState<number>();
+
   const lagre = useCallback(
     (values: FormValues) => {
       lagreNotat({ saksnummer, notat: values.beskrivelse });
@@ -46,19 +49,23 @@ const NotatPanel: FunctionComponent<OwnProps> = ({ saksnummer, notater, lagreNot
         eksisterendeNotater.concat({
           notat: values.beskrivelse,
           opprettetAv: saksbehandlerNavn,
-          opprettetTidspunkt: '',
+          opprettetTidspunkt: dayjs().format('YYYY-MM-DD HH:mm'),
         }),
       );
+
       formMethods.reset();
     },
     [notater],
   );
 
-  const [top, setTop] = useState<number>();
+  useEffect(() => {
+    const lastChildElement = bottomEl.current?.lastElementChild;
+    lastChildElement?.scrollIntoView({ behavior: 'smooth' });
+  }, [alleNotater, top]);
 
   return (
     <div
-      className={styles.overflow}
+      className={styles.container}
       style={{ height: `calc(100vh - ${top}px)` }}
       ref={el => {
         if (el) {
@@ -66,37 +73,51 @@ const NotatPanel: FunctionComponent<OwnProps> = ({ saksnummer, notater, lagreNot
         }
       }}
     >
-      <div>
-        {alleNotater.map(notat => (
-          <>
+      <div className={styles.thechats} ref={bottomEl}>
+        {alleNotater.map((notat, index) => (
+          <div key={notat.opprettetTidspunkt} className={index === 0 ? styles.marginTop : undefined}>
             <Chat
-              avatar=""
-              name={notat.opprettetAv}
+              className={styles.chat}
+              name={
+                saksbehandlerNavn === notat.opprettetAv
+                  ? intl.formatMessage({ id: 'NotatPanel.Du' })
+                  : saksbehandlerNavn
+              }
               timestamp={formatTimestamp(intl, notat.opprettetTidspunkt)}
-              className={styles.bubble}
               position={saksbehandlerNavn === notat.opprettetAv ? 'right' : 'left'}
+              variant={saksbehandlerNavn === notat.opprettetAv ? 'info' : 'subtle'}
             >
-              <Chat.Bubble>{notat.notat}</Chat.Bubble>
+              <Chat.Bubble className={styles.bubble}>{notat.notat}</Chat.Bubble>
             </Chat>
             <VerticalSpacer sixteenPx />
-          </>
+          </div>
         ))}
       </div>
-      <Form formMethods={formMethods} onSubmit={lagre}>
+      {alleNotater.length === 0 && (
+        <div className={styles.textAlign}>
+          <BodyShort className={styles.ingen}>
+            <FormattedMessage id="NotatPanel.Ingen" />
+          </BodyShort>
+        </div>
+      )}
+      <div className={styles.form}>
+        <Form formMethods={formMethods} onSubmit={lagre}>
+          <VerticalSpacer sixteenPx />
+          <TextAreaField name="beskrivelse" label="" maxLength={100} validate={[required]} />
+          <VerticalSpacer sixteenPx />
+          <FlexContainer>
+            <FlexRow spaceBetween>
+              <FlexColumn>{intl.formatMessage({ id: 'NotatPanel.KunForSaksbehandler' })}</FlexColumn>
+              <FlexColumn>
+                <Button size="small">
+                  <FormattedMessage id="NotatPanel.Send" />
+                </Button>
+              </FlexColumn>
+            </FlexRow>
+          </FlexContainer>
+        </Form>
         <VerticalSpacer thirtyTwoPx />
-        <TextAreaField name="beskrivelse" label="" maxLength={100} validate={[required]} />
-        <VerticalSpacer sixteenPx />
-        <FlexContainer>
-          <FlexRow spaceBetween>
-            <FlexColumn>{intl.formatMessage({ id: 'NotatPanel.KunForSaksbehandler' })}</FlexColumn>
-            <FlexColumn>
-              <Button size="small">
-                <FormattedMessage id="NotatPanel.Send" />
-              </Button>
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
-      </Form>
+      </div>
     </div>
   );
 };

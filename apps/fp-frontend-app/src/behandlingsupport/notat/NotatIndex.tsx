@@ -3,10 +3,9 @@ import React, { FunctionComponent } from 'react';
 import { Fagsak } from '@navikt/fp-types';
 import { NotatSakIndex } from '@navikt/fp-sak-notat';
 
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { useIntl } from 'react-intl';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
-import SupportHeader from '../SupportHeader';
+import SupportHeaderAndContent from '../SupportHeader';
 
 interface OwnProps {
   fagsak: Fagsak;
@@ -20,16 +19,14 @@ const NotatIndex: FunctionComponent<OwnProps> = ({ fagsak }) => {
   const { innloggetBruker } = initFetch;
 
   return (
-    <>
-      <SupportHeader tekst={intl.formatMessage({ id: 'NotatIndex.Notater' })} antall={fagsak.notater.length} />
-      <VerticalSpacer sixteenPx />
+    <SupportHeaderAndContent tekst={intl.formatMessage({ id: 'NotatIndex.Notater' })} antall={fagsak.notater.length}>
       <NotatSakIndex
         saksnummer={fagsak.saksnummer}
         notater={fagsak.notater}
         lagreNotat={lagreNotat}
         saksbehandlerNavn={innloggetBruker.brukernavn}
       />
-    </>
+    </SupportHeaderAndContent>
   );
 };
 

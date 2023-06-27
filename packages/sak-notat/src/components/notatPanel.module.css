@@ -8,11 +8,42 @@
   background: var(--a-gray-300);
 }
 
-.bubble {
-  --ac-chat-avatar-bg: white;
-  margin-left: -65px;
+.container {
+  display: flex;
+  flex-direction: column;
 }
 
-.overflow {
+.thechats {
+  max-width: 100% !important;
   overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+}
+.thechats::-webkit-scrollbar {
+  /* WebKit */
+  width: 0;
+  height: 0;
+}
+
+.bubble {
+  max-width: 100% !important;
+}
+
+.form {
+  margin-top: auto;
+}
+
+.marginTop {
+  margin-top: 16px;
+}
+
+.width {
+  width: 600px;
+}
+
+.ingen {
+  color: var(--a-gray-600);
+}
+
+.textAlign {
+  margin: auto;
 }
