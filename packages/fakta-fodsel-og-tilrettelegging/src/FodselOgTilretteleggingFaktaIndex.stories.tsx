@@ -69,6 +69,7 @@ const tilretteleggingPermisjon = {
           erGyldig: true,
         },
       ],
+      avklarteOppholdPerioder: [],
     },
   ],
   saksbehandlet: true,
@@ -90,6 +91,7 @@ const svangerskapspengerTilretteleggingForFrilanser = {
       arbeidsgiverReferanse: '1',
       skalBrukes: true,
       velferdspermisjoner: [],
+      avklarteOppholdPerioder: [],
     },
     {
       tilretteleggingId: 1008654,
@@ -104,6 +106,7 @@ const svangerskapspengerTilretteleggingForFrilanser = {
       uttakArbeidType: 'ORDINÆRT_ARBEID',
       skalBrukes: true,
       velferdspermisjoner: [],
+      avklarteOppholdPerioder: [],
     },
   ] as ArbeidsforholdFodselOgTilrettelegging[],
 };
@@ -246,6 +249,59 @@ ErOverstyrer.args = {
     },
   ],
   svangerskapspengerTilrettelegging: tilretteleggingPermisjon,
+  arbeidOgInntekt: spesiellArbeidOgInntekt,
+  erOverstyrer: true,
+};
+
+export const HarOpphold = Template.bind({});
+HarOpphold.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+      kanLoses: true,
+    },
+  ],
+  svangerskapspengerTilrettelegging: {
+    ...tilretteleggingPermisjon,
+    arbeidsforholdListe: [
+      {
+        tilretteleggingId: 1116961,
+        tilretteleggingBehovFom: '2020-03-17',
+        tilretteleggingDatoer: [
+          {
+            fom: '2020-03-17',
+            type: 'INGEN_TILRETTELEGGING',
+          },
+          {
+            fom: '2020-10-15',
+            type: 'HEL_TILRETTELEGGING',
+          },
+        ],
+        arbeidsgiverReferanse: '999999999',
+        uttakArbeidType: 'FRILANS',
+        skalBrukes: true,
+        kanTilrettelegges: true,
+        velferdspermisjoner: [],
+        avklarteOppholdPerioder: [
+          {
+            fom: '2020-09-15',
+            tom: '2020-09-20',
+            oppholdÅrsak: 'SYKEPENGER',
+            forVisning: false,
+          },
+          {
+            fom: '2020-09-25',
+            tom: '2020-09-30',
+            oppholdÅrsak: 'FERIE',
+            forVisning: true,
+          },
+        ],
+      },
+    ],
+  },
   arbeidOgInntekt: spesiellArbeidOgInntekt,
   erOverstyrer: true,
 };
