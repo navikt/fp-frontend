@@ -16,12 +16,6 @@
 .thechats {
   max-width: 100% !important;
   overflow-y: auto;
-  scrollbar-width: none; /* Firefox */
-}
-.thechats::-webkit-scrollbar {
-  /* WebKit */
-  width: 0;
-  height: 0;
 }
 
 .bubble {

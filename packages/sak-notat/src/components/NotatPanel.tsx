@@ -7,9 +7,11 @@ import { BodyShort, Button, Chat } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { Saksnotat } from '@navikt/fp-types';
-import { required } from '@navikt/ft-form-validators';
+import { maxLength, required } from '@navikt/ft-form-validators';
 
 import styles from './notatPanel.module.css';
+
+const maxLength1000 = maxLength(1000);
 
 const formatTimestamp = (intl: IntlShape, opprettetTidspunkt: string): string => {
   const dato = intl.formatDate(opprettetTidspunkt, { day: '2-digit', month: 'long', year: 'numeric' });
@@ -37,21 +39,12 @@ const NotatPanel: FunctionComponent<OwnProps> = ({ saksnummer, notater, lagreNot
     [notater],
   );
 
-  const [alleNotater, leggTilNotat] = useState(sorterteNotater);
-
   const bottomEl = useRef<HTMLDivElement | null>(null);
   const [top, setTop] = useState<number>();
 
   const lagre = useCallback(
     (values: FormValues) => {
       lagreNotat({ saksnummer, notat: values.beskrivelse });
-      leggTilNotat(eksisterendeNotater =>
-        eksisterendeNotater.concat({
-          notat: values.beskrivelse,
-          opprettetAv: saksbehandlerNavn,
-          opprettetTidspunkt: dayjs().format('YYYY-MM-DD HH:mm'),
-        }),
-      );
 
       formMethods.reset();
     },
@@ -61,7 +54,7 @@ const NotatPanel: FunctionComponent<OwnProps> = ({ saksnummer, notater, lagreNot
   useEffect(() => {
     const lastChildElement = bottomEl.current?.lastElementChild;
     lastChildElement?.scrollIntoView({ behavior: 'smooth' });
-  }, [alleNotater, top]);
+  }, [sorterteNotater, top]);
 
   return (
     <div
@@ -74,7 +67,7 @@ const NotatPanel: FunctionComponent<OwnProps> = ({ saksnummer, notater, lagreNot
       }}
     >
       <div className={styles.thechats} ref={bottomEl}>
-        {alleNotater.map((notat, index) => (
+        {sorterteNotater.map((notat, index) => (
           <div key={notat.opprettetTidspunkt} className={index === 0 ? styles.marginTop : undefined}>
             <Chat
               className={styles.chat}
@@ -93,7 +86,7 @@ const NotatPanel: FunctionComponent<OwnProps> = ({ saksnummer, notater, lagreNot
           </div>
         ))}
       </div>
-      {alleNotater.length === 0 && (
+      {sorterteNotater.length === 0 && (
         <div className={styles.textAlign}>
           <BodyShort className={styles.ingen}>
             <FormattedMessage id="NotatPanel.Ingen" />
@@ -103,7 +96,7 @@ const NotatPanel: FunctionComponent<OwnProps> = ({ saksnummer, notater, lagreNot
       <div className={styles.form}>
         <Form formMethods={formMethods} onSubmit={lagre}>
           <VerticalSpacer sixteenPx />
-          <TextAreaField name="beskrivelse" label="" maxLength={100} validate={[required]} />
+          <TextAreaField name="beskrivelse" label="" maxLength={1000} validate={[required, maxLength1000]} />
           <VerticalSpacer sixteenPx />
           <FlexContainer>
             <FlexRow spaceBetween>

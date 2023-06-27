@@ -16,7 +16,7 @@ interface OwnProps {
   saksbehandlerNavn: string;
 }
 
-const FagsakSokSakIndex: FunctionComponent<OwnProps> = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn }) => (
+const NotatSakIndex: FunctionComponent<OwnProps> = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn }) => (
   <RawIntlProvider value={intl}>
     <NotatPanel
       saksnummer={saksnummer}
@@ -27,4 +27,4 @@ const FagsakSokSakIndex: FunctionComponent<OwnProps> = ({ saksnummer, notater, l
   </RawIntlProvider>
 );
 
-export default FagsakSokSakIndex;
+export default NotatSakIndex;

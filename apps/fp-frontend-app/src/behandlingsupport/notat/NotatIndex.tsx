@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 
 import { Fagsak } from '@navikt/fp-types';
 import { NotatSakIndex } from '@navikt/fp-sak-notat';
@@ -9,11 +9,16 @@ import SupportHeaderAndContent from '../SupportHeader';
 
 interface OwnProps {
   fagsak: Fagsak;
+  oppdaterFagsak: () => void;
 }
 
-const NotatIndex: FunctionComponent<OwnProps> = ({ fagsak }) => {
+const NotatIndex: FunctionComponent<OwnProps> = ({ fagsak, oppdaterFagsak }) => {
   const intl = useIntl();
   const { startRequest: lagreNotat } = restFagsakApiHooks.useRestApiRunner(FagsakApiKeys.LAGRE_NOTAT);
+  const lagre = useCallback(
+    (params: { saksnummer: string; notat: string }) => lagreNotat(params).then(() => oppdaterFagsak()),
+    [],
+  );
 
   const initFetch = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
   const { innloggetBruker } = initFetch;
@@ -23,7 +28,7 @@ const NotatIndex: FunctionComponent<OwnProps> = ({ fagsak }) => {
       <NotatSakIndex
         saksnummer={fagsak.saksnummer}
         notater={fagsak.notater}
-        lagreNotat={lagreNotat}
+        lagreNotat={lagre}
         saksbehandlerNavn={innloggetBruker.brukernavn}
       />
     </SupportHeaderAndContent>

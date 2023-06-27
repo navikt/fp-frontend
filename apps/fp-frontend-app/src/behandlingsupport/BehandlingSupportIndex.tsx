@@ -49,6 +49,7 @@ interface OwnProps {
   behandlingUuid?: string;
   behandlingVersjon?: number;
   hentOgSettBehandling: () => void;
+  oppdaterFagsak: () => void;
 }
 
 /**
@@ -62,6 +63,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   behandlingUuid,
   behandlingVersjon,
   hentOgSettBehandling,
+  oppdaterFagsak,
 }) => {
   const intl = useIntl();
 
@@ -157,7 +159,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
               behandlingVersjon={behandlingVersjon}
             />
           )}
-          {aktivtSupportPanel === SupportTabs.NOTATER && <NotatIndex fagsak={fagsak} />}
+          {aktivtSupportPanel === SupportTabs.NOTATER && <NotatIndex fagsak={fagsak} oppdaterFagsak={oppdaterFagsak} />}
         </div>
       </ErrorBoundary>
     </>
