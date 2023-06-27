@@ -26,7 +26,7 @@ import {
   Fagsak,
 } from '@navikt/fp-types';
 import { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { AksjonspunktCode } from '@navikt/fp-kodeverk';
+import { AksjonspunktCode, relasjonsRolleType } from '@navikt/fp-kodeverk';
 
 import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
 import UttakFaktaTable from './UttakFaktaTable';
@@ -80,8 +80,11 @@ const leggTilAksjonspunktMarkering = (
     };
   });
 
+const periodeSkalVurderesIftFørsteDato = (periode: KontrollerFaktaPeriode): boolean => !(periode.utsettelseÅrsak || periode.oppholdÅrsak);
+
 const validerPerioder = (
   uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[],
+  erMor: boolean,
   aksjonspunkter: Aksjonspunkt[],
   førsteUttaksdato: string,
   intl: IntlShape,
@@ -99,7 +102,7 @@ const validerPerioder = (
     );
   }
 
-  if (uttakPerioder.some(up => dayjs(up.fom).isBefore(førsteUttaksdato))) {
+  if (uttakPerioder.filter(up => erMor || periodeSkalVurderesIftFørsteDato(up)).some(up => dayjs(up.fom).isBefore(førsteUttaksdato))) {
     return intl.formatMessage(
       { id: 'UttakFaktaDetailForm.ErFørFørsteUttaktsdato' },
       { dato: dayjs(førsteUttaksdato).format(DDMMYYYY_DATE_FORMAT) },
@@ -210,7 +213,8 @@ const UttakFaktaForm: FunctionComponent<OwnProps> = ({
 
   const feilmelding = useMemo(() => {
     if (isDirty || formMethods.formState.isDirty) {
-      return validerPerioder(uttakPerioder, aksjonspunkter, ytelsefordeling.førsteUttaksdato, intl);
+      const erMor = fagsak.relasjonsRolleType === relasjonsRolleType.MOR;
+      return validerPerioder(uttakPerioder, erMor, aksjonspunkter, ytelsefordeling.førsteUttaksdato, intl);
     }
     return null;
   }, [uttakPerioder, isDirty, formMethods.formState.isDirty]);
