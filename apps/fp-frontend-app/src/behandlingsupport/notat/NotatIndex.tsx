@@ -24,7 +24,11 @@ const NotatIndex: FunctionComponent<OwnProps> = ({ fagsak, oppdaterFagsak }) => 
   const { innloggetBruker } = initFetch;
 
   return (
-    <SupportHeaderAndContent tekst={intl.formatMessage({ id: 'NotatIndex.Notater' })} antall={fagsak.notater.length}>
+    <SupportHeaderAndContent
+      tekst={intl.formatMessage({ id: 'NotatIndex.Notater' })}
+      antall={fagsak.notater.length}
+      brukPadding={false}
+    >
       <NotatSakIndex
         saksnummer={fagsak.saksnummer}
         notater={fagsak.notater}

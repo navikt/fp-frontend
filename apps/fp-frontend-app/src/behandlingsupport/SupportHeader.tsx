@@ -9,9 +9,10 @@ type OwnProps = {
   tekst: string;
   antall?: number;
   children: ReactNode;
+  brukPadding?: boolean;
 };
 
-const SupportHeaderAndContent: FunctionComponent<OwnProps> = ({ tekst, antall, children }) => (
+const SupportHeaderAndContent: FunctionComponent<OwnProps> = ({ tekst, antall, children, brukPadding = true }) => (
   <>
     <div className={styles.header}>
       <FlexContainer>
@@ -27,7 +28,7 @@ const SupportHeaderAndContent: FunctionComponent<OwnProps> = ({ tekst, antall, c
         </FlexRow>
       </FlexContainer>
     </div>
-    <div className={styles.container}>{children}</div>
+    <div className={brukPadding ? styles.container : undefined}>{children}</div>
   </>
 );
 
