@@ -1,0 +1,43 @@
+.circle {
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  border-radius: 50%;
+  color: #000;
+  text-align: center;
+  background: var(--a-gray-300);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.thechats {
+  max-width: 100% !important;
+  overflow-y: auto;
+}
+
+.bubble {
+  max-width: 100% !important;
+}
+
+.form {
+  margin-top: auto;
+}
+
+.marginTop {
+  margin-top: 16px;
+}
+
+.width {
+  width: 600px;
+}
+
+.ingen {
+  color: var(--a-gray-600);
+}
+
+.textAlign {
+  margin: auto;
+}

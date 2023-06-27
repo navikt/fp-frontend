@@ -57,6 +57,7 @@ export const FagsakApiKeys = {
   ALL_DOCUMENTS: new RestKey<Dokument[], { saksnummer: string }>('ALL_DOCUMENTS'),
   SAVE_TOTRINNSAKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_TOTRINNSAKSJONSPUNKT'),
   SUBMIT_MESSAGE: new RestKey<void, SubmitMessageParams>('SUBMIT_MESSAGE'),
+  LAGRE_NOTAT: new RestKey<void, { saksnummer: string; notat: string }>('LAGRE_NOTAT'),
   KAN_TILBAKEKREVING_OPPRETTES: new RestKey<boolean, { saksnummer: string; uuid: string }>(
     'KAN_TILBAKEKREVING_OPPRETTES',
   ),
@@ -84,6 +85,7 @@ const fagsakEndepunkter = new RestApiConfigBuilder()
   .withRel('endre-utland-markering', FagsakApiKeys.ENDRE_SAK_MARKERING)
   .withRel('tilbake-kan-opprette-behandling', FagsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES)
   .withRel('tilbake-kan-opprette-revurdering', FagsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES)
+  .withRel('lagre-notat', FagsakApiKeys.LAGRE_NOTAT)
 
   // Behandling
   .withRel('bekreft-totrinnsaksjonspunkt', FagsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT)

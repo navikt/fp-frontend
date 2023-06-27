@@ -3271,6 +3271,7 @@ __metadata:
     "@navikt/fp-sak-meny-henlegg": 1.0.0
     "@navikt/fp-sak-meny-ny-behandling": 1.0.0
     "@navikt/fp-sak-meny-sett-pa-vent": 1.0.0
+    "@navikt/fp-sak-notat": 1.0.0
     "@navikt/fp-sak-sok": 1.0.0
     "@navikt/fp-sak-totrinnskontroll": 1.0.0
     "@navikt/fp-sak-ukjent-adresse": 1.0.0
@@ -4794,6 +4795,40 @@ __metadata:
     typescript: 5.0.4
     vite: 4.3.9
     vitest: 0.32.3
+  languageName: unknown
+  linkType: soft
+
+"@navikt/fp-sak-notat@1.0.0, @navikt/fp-sak-notat@workspace:packages/sak-notat":
+  version: 0.0.0-use.local
+  resolution: "@navikt/fp-sak-notat@workspace:packages/sak-notat"
+  dependencies:
+    "@navikt/ds-css": 4.4.0
+    "@navikt/ds-react": 4.4.0
+    "@navikt/fp-kodeverk": 1.0.0
+    "@navikt/fp-storybook-utils": 1.0.0
+    "@navikt/fp-types": 1.0.0
+    "@navikt/ft-form-hooks": 4.1.2
+    "@navikt/ft-form-validators": 2.0.34
+    "@navikt/ft-kodeverk": 2.1.14
+    "@navikt/ft-types": 2.1.16
+    "@navikt/ft-ui-komponenter": 2.0.37
+    "@navikt/ft-utils": 2.0.33
+    "@storybook/addon-actions": 7.0.23
+    "@storybook/react": 7.0.23
+    "@storybook/react-vite": 7.0.23
+    "@testing-library/react": 14.0.0
+    "@testing-library/user-event": 14.4.3
+    cross-env: 7.0.3
+    dayjs: 1.11.8
+    eslint: 8.43.0
+    react: 18.2.0
+    react-hook-form: 7.45.0
+    react-intl: 6.4.4
+    storybook: 7.0.23
+    stylelint: 15.9.0
+    typescript: 5.0.4
+    vite: 4.3.9
+    vitest: 0.32.2
   languageName: unknown
   linkType: soft
 

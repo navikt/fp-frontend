@@ -16,20 +16,19 @@ import FagsakData from '../fagsak/FagsakData';
 import ErrorBoundary from '../app/ErrorBoundary';
 
 import styles from './behandlingSupportIndex.module.css';
+import NotatIndex from './notat/NotatIndex';
 
 export const hentSynligePaneler = (behandlingTillatteOperasjoner?: BehandlingTillatteOperasjoner): string[] =>
-  Object.values(SupportTabs)
-    .filter(s => s !== SupportTabs.NOTATER)
-    .filter(supportPanel => {
-      switch (supportPanel) {
-        case SupportTabs.TIL_BESLUTTER:
-          return behandlingTillatteOperasjoner && behandlingTillatteOperasjoner.behandlingTilGodkjenning;
-        case SupportTabs.FRA_BESLUTTER:
-          return behandlingTillatteOperasjoner && behandlingTillatteOperasjoner.behandlingFraBeslutter;
-        default:
-          return true;
-      }
-    });
+  Object.values(SupportTabs).filter(supportPanel => {
+    switch (supportPanel) {
+      case SupportTabs.TIL_BESLUTTER:
+        return behandlingTillatteOperasjoner && behandlingTillatteOperasjoner.behandlingTilGodkjenning;
+      case SupportTabs.FRA_BESLUTTER:
+        return behandlingTillatteOperasjoner && behandlingTillatteOperasjoner.behandlingFraBeslutter;
+      default:
+        return true;
+    }
+  });
 
 export const hentValgbarePaneler = (
   synligePaneler: string[],
@@ -50,6 +49,7 @@ interface OwnProps {
   behandlingUuid?: string;
   behandlingVersjon?: number;
   hentOgSettBehandling: () => void;
+  oppdaterFagsak: () => void;
 }
 
 /**
@@ -63,6 +63,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   behandlingUuid,
   behandlingVersjon,
   hentOgSettBehandling,
+  oppdaterFagsak,
 }) => {
   const intl = useIntl();
 
@@ -122,7 +123,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
         errorMessageCallback={addErrorMessage}
         errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Support' })}
       >
-        <div className={aktivtSupportPanel === SupportTabs.HISTORIKK ? styles.containerHistorikk : styles.container}>
+        <div className={styles.container}>
           {behandling &&
             (aktivtSupportPanel === SupportTabs.TIL_BESLUTTER || aktivtSupportPanel === SupportTabs.FRA_BESLUTTER) && (
               <TotrinnskontrollIndex
@@ -158,6 +159,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
               behandlingVersjon={behandlingVersjon}
             />
           )}
+          {aktivtSupportPanel === SupportTabs.NOTATER && <NotatIndex fagsak={fagsak} oppdaterFagsak={oppdaterFagsak} />}
         </div>
       </ErrorBoundary>
     </>

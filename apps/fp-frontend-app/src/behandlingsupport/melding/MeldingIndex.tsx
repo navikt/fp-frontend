@@ -6,11 +6,14 @@ import { behandlingType as BehandlingType, KodeverkType, venteArsakType, dokumen
 import { MeldingerSakIndex, MessagesModalSakIndex, FormValues } from '@navikt/fp-sak-meldinger';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { useIntl } from 'react-intl';
 import { useFpSakKodeverk } from '../../data/useKodeverk';
 import useVisForhandsvisningAvMelding, { ForhandsvisFunksjon } from '../../data/useVisForhandsvisningAvMelding';
 import { FagsakApiKeys, SubmitMessageParams, restFagsakApiHooks } from '../../data/fagsakContextApi';
 import FagsakData from '../../fagsak/FagsakData';
 import SettPaVentReadOnlyModal from './SettPaVentReadOnlyModal';
+import SupportHeaderAndContent from '../SupportHeader';
 
 const getSubmitCallback =
   (
@@ -103,6 +106,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   setMeldingForData,
   hentOgSettBehandling,
 }) => {
+  const intl = useIntl();
   const [showSettPaVentModal, setShowSettPaVentModal] = useState(false);
   const [showMessagesModal, setShowMessageModal] = useState(false);
 
@@ -157,20 +161,22 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
         <MessagesModalSakIndex showModal={submitFinished && showMessagesModal} closeEvent={afterSubmit} />
       )}
 
-      <MeldingerSakIndex
-        submitCallback={submitCallback}
-        sprakKode={valgtBehandling?.sprakkode}
-        previewCallback={previewCallback}
-        revurderingVarslingArsak={revurderingVarslingArsak}
-        templates={valgtBehandling?.brevmaler}
-        isKontrollerRevurderingApOpen={valgtBehandling?.ugunstAksjonspunkt}
-        fagsakYtelseType={fagsak.fagsakYtelseType}
-        kanVeilede={initFetchData.innloggetBruker.kanVeilede}
-        meldingFormData={meldingFormData}
-        setMeldingForData={setMeldingForData}
-        brukerManglerAdresse={fagsak.brukerManglerAdresse}
-      />
-
+      <SupportHeaderAndContent tekst={intl.formatMessage({ id: 'MeldingIndex.Meldinger' })}>
+        <VerticalSpacer sixteenPx />
+        <MeldingerSakIndex
+          submitCallback={submitCallback}
+          sprakKode={valgtBehandling?.sprakkode}
+          previewCallback={previewCallback}
+          revurderingVarslingArsak={revurderingVarslingArsak}
+          templates={valgtBehandling?.brevmaler}
+          isKontrollerRevurderingApOpen={valgtBehandling?.ugunstAksjonspunkt}
+          fagsakYtelseType={fagsak.fagsakYtelseType}
+          kanVeilede={initFetchData.innloggetBruker.kanVeilede}
+          meldingFormData={meldingFormData}
+          setMeldingForData={setMeldingForData}
+          brukerManglerAdresse={fagsak.brukerManglerAdresse}
+        />
+      </SupportHeaderAndContent>
       {submitFinished && showSettPaVentModal && (
         <SettPaVentReadOnlyModal
           lukkCallback={handleSubmitFromModal}
