@@ -12,10 +12,13 @@ import OppgaveOversikt from './typer/oppgaveOversiktTsType';
 import OppgavePrioritet from './kodeverk/oppgavePrioritet';
 import Journalpost from './typer/journalpostTsType';
 import JournalKanal from './kodeverk/journalKanal';
+import ReserverOppgaveType from './typer/reserverOppgaveType';
 
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
+import {action} from "@storybook/addon-actions";
+import JournalførSubmitValue from "./typer/ferdigstillJournalføringSubmit";
 
 const detaljertJournalpostMal = (medBruker: boolean): Journalpost =>
   ({
@@ -152,6 +155,7 @@ const defaultOppgaver = [
     prioritet: OppgavePrioritet.NORM,
     beskrivelse: 'Inntektsmelding',
     reservertAv: 'X123456',
+    versjon: 1,
   },
   {
     id: 700,
@@ -165,6 +169,7 @@ const defaultOppgaver = [
     prioritet: OppgavePrioritet.NORM,
     beskrivelse: 'Inntektsmelding',
     reservertAv: 'Y654321',
+    versjon: 2,
   },
   {
     id: 800,
@@ -175,6 +180,7 @@ const defaultOppgaver = [
     enhetId: '4008',
     prioritet: OppgavePrioritet.HØY,
     beskrivelse: 'Søknad',
+    versjon: 3,
   },
 ];
 
@@ -193,6 +199,7 @@ ViseOppgaverIListe.args = {
       prioritet: OppgavePrioritet.NORM,
       beskrivelse: 'Inntektsmelding',
       reservertAv: 'Y654321',
+      versjon: 1,
     },
     {
       id: 700,
@@ -205,7 +212,7 @@ ViseOppgaverIListe.args = {
       enhetId: '4008',
       prioritet: OppgavePrioritet.NORM,
       beskrivelse: 'Inntektsmelding',
-
+      versjon: 2,
     },
     {
       id: 800,
@@ -217,6 +224,7 @@ ViseOppgaverIListe.args = {
       prioritet: OppgavePrioritet.HØY,
       beskrivelse: 'Søknad',
       reservertAv: 'X123456',
+      versjon: 3,
     },
   ],
   detaljertJournalpost: detaljertJournalpostMal(true),

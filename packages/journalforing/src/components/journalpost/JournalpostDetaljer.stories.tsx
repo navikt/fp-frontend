@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { fagsakYtelseType, fagsakStatus } from '@navikt/fp-kodeverk';
+import { NavAnsatt } from '@navikt/fp-types';
 import JournalpostDetaljer from './JournalpostDetaljer';
 import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
 import OppgavePrioritet from '../../kodeverk/oppgavePrioritet';
@@ -13,8 +14,15 @@ import Journalpost from '../../typer/journalpostTsType';
 import messages from '../../../i18n/nb_NO.json';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import DokumentTittel from '../../kodeverk/dokumentTittel';
+import ReserverOppgaveType from '../../typer/reserverOppgaveType';
 
 const withIntl = getIntlDecorator(messages);
+
+const saksbehandler = 'Z123343';
+
+const navAnsattDefault = {
+  brukernavn: saksbehandler,
+} as NavAnsatt;
 
 const defaultOppgave = {
   id: 600,
@@ -27,6 +35,7 @@ const defaultOppgave = {
   enhetId: '4108',
   prioritet: OppgavePrioritet.NORM,
   beskrivelse: 'Inntektsmelding',
+  versjon: 1,
 };
 
 const detaljertJournalpostMal = {
@@ -35,7 +44,7 @@ const detaljertJournalpostMal = {
   kanal: JournalKanal.EESSI,
   bruker: {
     navn: 'Søker Søkersen',
-    fnr: '12048714373',
+    fnr: '12048714374',
     aktørId: '98594685464858',
   },
   avsender: {
@@ -95,7 +104,9 @@ const Template: StoryFn<{
   detaljertJournalpost: Journalpost;
   oppgave: OppgaveOversikt;
   submitJournalføring: (data: JournalførSubmitValue) => void;
-}> = ({ detaljertJournalpost, oppgave, submitJournalføring }) => (
+  reserverOppgave: (data: ReserverOppgaveType) => void;
+  navAnsatt: NavAnsatt;
+}> = ({ detaljertJournalpost, oppgave, submitJournalføring, reserverOppgave, navAnsatt }) => (
   <JournalpostDetaljer
     lasterBruker={false}
     avbrytVisningAvJournalpost={action('button-click') as () => void}
@@ -104,12 +115,38 @@ const Template: StoryFn<{
     submitJournalføring={submitJournalføring}
     knyttJournalpostTilBruker={action('button-click') as () => void}
     forhåndsvisBruker={action('button-click') as () => void}
+    reserverOppgave={reserverOppgave}
+    navAnsatt={navAnsatt}
   />
 );
 
-export const VisOppgaveForSubmit = Template.bind({});
-VisOppgaveForSubmit.args = {
+export const VisOppgaveForSubmitReservertAvMeg = Template.bind({});
+VisOppgaveForSubmitReservertAvMeg.args = {
+  oppgave: { ...defaultOppgave, reservertAv: saksbehandler },
+  detaljertJournalpost: detaljertJournalpostMal,
+  submitJournalføring: action('button-click') as (data: JournalførSubmitValue) => void,
+  reserverOppgave: action('button-click') as (data: ReserverOppgaveType) => void,
+  navAnsatt: navAnsattDefault,
+};
+
+export const VisOppgaveReservertAvAndre = Template.bind({});
+VisOppgaveReservertAvAndre.args = {
+  oppgave: { ...defaultOppgave, reservertAv: saksbehandler },
+  detaljertJournalpost: detaljertJournalpostMal,
+  submitJournalføring: action('button-click') as (data: JournalførSubmitValue) => void,
+  reserverOppgave: action('button-click') as (data: ReserverOppgaveType) => void,
+  navAnsatt: {
+    brukernavn: 'X123456',
+  } as NavAnsatt,
+};
+
+export const VisOppgaveIkkeReservert = Template.bind({});
+VisOppgaveIkkeReservert.args = {
   oppgave: defaultOppgave,
   detaljertJournalpost: detaljertJournalpostMal,
   submitJournalføring: action('button-click') as (data: JournalførSubmitValue) => void,
+  reserverOppgave: action('button-click') as (data: ReserverOppgaveType) => void,
+  navAnsatt: {
+    brukernavn: 'X123456',
+  } as NavAnsatt,
 };

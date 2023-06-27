@@ -12,5 +12,6 @@ type OppgaveOversikt = Readonly<{
   prioritet?: OppgavePrioritet;
   enhetId?: string;
   reservertAv?: string;
+  versjon: number;
 }>;
 export default OppgaveOversikt;

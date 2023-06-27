@@ -1,10 +1,11 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Heading, BodyLong, Alert } from '@navikt/ds-react';
+import { Button, Heading, BodyLong, Alert, Tag } from '@navikt/ds-react';
 
 import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form } from '@navikt/ft-form-hooks';
+import { NavAnsatt } from '@navikt/fp-types';
 import VelgSakForm, { transformValues as transformValuesSak } from './innhold/VelgSakForm';
 import Journalpost from '../../typer/journalpostTsType';
 import JournalførSubmitValue, {
@@ -22,6 +23,7 @@ import JournalføringFormValues from '../../typer/journalføringFormValues';
 import OppdaterMedBruker from '../../typer/oppdaterBrukerTsType';
 import JournalpostTittelForm from './innhold/JournalpostTittelForm';
 import ForhåndsvisBrukerRespons from '../../typer/forhåndsvisBrukerResponsTsType';
+import ReserverOppgaveType from '../../typer/reserverOppgaveType';
 
 const dokumentTittelSkalStyresAvJournalpost = (jp: Journalpost): boolean => jp.dokumenter?.length === 1;
 
@@ -94,6 +96,8 @@ type OwnProps = Readonly<{
   forhåndsvisBruker: (fnr: string) => void;
   brukerTilForhåndsvisning?: ForhåndsvisBrukerRespons;
   lasterBruker: boolean;
+  navAnsatt: NavAnsatt;
+  reserverOppgave: (data: ReserverOppgaveType) => void;
 }>;
 
 /**
@@ -108,6 +112,8 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
   forhåndsvisBruker,
   brukerTilForhåndsvisning,
   lasterBruker,
+  reserverOppgave,
+  navAnsatt,
 }) => {
   const skalKunneEndreSøker = !journalpost.bruker;
   const saker = journalpost.fagsaker || [];
@@ -119,9 +125,54 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
   }, []);
   const isSubmittable = formMethods.formState.isDirty;
 
+  const reserverOppgaveAction = useCallback(() => {
+    reserverOppgave({
+      oppgaveId: oppgave.id.toString(),
+      versjon: oppgave.versjon,
+      reserverFor: !oppgave.reservertAv ? navAnsatt.brukernavn : '',
+    });
+  }, []);
+
   return (
     <Form<JournalføringFormValues> formMethods={formMethods} onSubmit={submitJournal}>
       <JournalpostTittelForm journalpost={journalpost} />
+      <VerticalSpacer sixteenPx />
+      {oppgave.reservertAv && navAnsatt.brukernavn === oppgave.reservertAv && (
+        <FlexRow>
+          <FlexColumn>
+            <BodyLong>
+              <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
+              <Tag variant="info-moderate">
+                <FormattedMessage id="Oppgavetabell.Meg" />
+              </Tag>
+              <Button variant="tertiary" onClick={reserverOppgaveAction}>
+                <FormattedMessage id="Oppgavetabell.FjernMeg" />
+              </Button>
+            </BodyLong>
+          </FlexColumn>
+        </FlexRow>
+      )}
+      {oppgave.reservertAv && navAnsatt.brukernavn !== oppgave.reservertAv && (
+        <FlexRow>
+          <FlexColumn>
+            <BodyLong>
+              <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
+              <Tag variant="neutral-moderate">{oppgave.reservertAv}</Tag>
+            </BodyLong>
+          </FlexColumn>
+        </FlexRow>
+      )}
+      {!oppgave.reservertAv && (
+        <FlexRow>
+          <FlexColumn>
+            <BodyLong>
+              <Button variant="tertiary" onClick={reserverOppgaveAction}>
+                <FormattedMessage id="Oppgavetabell.SettPåMeg" />
+              </Button>
+            </BodyLong>
+          </FlexColumn>
+        </FlexRow>
+      )}
       <VerticalSpacer sixteenPx />
       <BrukerAvsenderPanel
         journalpost={journalpost}
