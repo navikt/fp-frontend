@@ -7,6 +7,11 @@
   "Dekorator.AaReg": "AA-reg",
   "Dekorator.AInntekt": "A-inntekt",
 
+  "DokumentIndex.Dokumenter": "Dokumenter",
+  "MeldingIndex.Meldinger": "Meldinger",
+  "NotatIndex.Notater": "Notater",
+  "TotrinnskontrollIndex.Godjenning": "Godjenning",
+
   "Behandlingspunkt.AnkeResultat": "Resultat",
   "Behandlingspunkt.AnkeMerknader": "Trygderetten",
   "Behandlingspunkt.Ankebehandling": "Ankebehandling",

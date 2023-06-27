@@ -56,10 +56,19 @@ interface OwnProps {
   rolleNavn?: string;
   opprettetAv?: string;
   children: React.ReactElement;
+  erFørsteBoble: boolean;
 }
 
-const Snakkeboble: FunctionComponent<OwnProps> = ({ dato, aktoer, kjoenn, rolleNavn = '', opprettetAv, children }) => (
-  <div className={styles.margin} data-testid={`snakkeboble-${dato}`}>
+const Snakkeboble: FunctionComponent<OwnProps> = ({
+  dato,
+  aktoer,
+  kjoenn,
+  rolleNavn = '',
+  opprettetAv,
+  children,
+  erFørsteBoble,
+}) => (
+  <div className={erFørsteBoble ? styles.marginForste : styles.margin} data-testid={`snakkeboble-${dato}`}>
     <Chat
       avatar={<Image className={styles.image} src={utledIkon(aktoer, kjoenn)} />}
       timestamp={`${formatDate(dato)} // ${rolleNavn} ${opprettetAv || ''}`}

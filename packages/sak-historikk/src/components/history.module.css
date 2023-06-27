@@ -1,3 +1,29 @@
 .pushRight {
   margin-left: auto;
 }
+
+.header {
+  background-color: var(--a-gray-100);
+  padding: 20px;
+  border-bottom: solid var(--a-gray-300) 2px;
+}
+
+.circle {
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  border-radius: 50%;
+  color: #000;
+  text-align: center;
+  background: var(--a-gray-300);
+}
+
+.overflow {
+  overflow-y: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.marginFilter {
+  margin-right: 30px;
+}

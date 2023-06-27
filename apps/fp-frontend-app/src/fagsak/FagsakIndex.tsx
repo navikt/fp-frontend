@@ -161,6 +161,7 @@ const FagsakIndex: FunctionComponent = () => {
             behandlingUuid={behandlingUuid}
             behandlingVersjon={behandling?.versjon}
             hentOgSettBehandling={hentOgSettBehandling}
+            oppdaterFagsak={oppdaterFagsak}
           />
         }
         visittkortContent={() => {

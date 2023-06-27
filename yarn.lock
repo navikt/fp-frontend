@@ -3279,6 +3279,7 @@ __metadata:
     "@navikt/fp-types": 1.0.0
     "@navikt/fp-types-avklar-aksjonspunkter": 1.0.0
     "@navikt/fp-utils-test": 1.0.0
+<<<<<<< HEAD
     "@navikt/ft-fakta-beregning": 4.2.28
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.2.31
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": 2.1.23
@@ -3303,6 +3304,32 @@ __metadata:
     "@navikt/ft-types": 2.1.17
     "@navikt/ft-ui-komponenter": 2.0.38
     "@navikt/ft-utils": 2.0.34
+=======
+    "@navikt/ft-fakta-beregning": 4.2.25
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.2.29
+    "@navikt/ft-fakta-tilbakekreving-feilutbetaling": 2.1.22
+    "@navikt/ft-form-hooks": 4.1.2
+    "@navikt/ft-form-validators": 2.0.34
+    "@navikt/ft-kodeverk": 2.1.14
+    "@navikt/ft-plattform-komponenter": 2.2.8
+    "@navikt/ft-prosess-beregningsgrunnlag": 6.2.26
+    "@navikt/ft-prosess-tilbakekreving": 3.0.12
+    "@navikt/ft-prosess-tilbakekreving-foreldelse": 3.0.12
+    "@navikt/ft-prosess-tilbakekreving-vedtak": 2.1.22
+    "@navikt/ft-sak-aktor": 2.1.24
+    "@navikt/ft-sak-behandling-velger": 2.0.43
+    "@navikt/ft-sak-dekorator": 4.0.1
+    "@navikt/ft-sak-dokumenter": 2.0.37
+    "@navikt/ft-sak-fagsak-profil": 3.0.7
+    "@navikt/ft-sak-infosider": 2.0.35
+    "@navikt/ft-sak-meny": 3.0.8
+    "@navikt/ft-sak-risikoklassifisering": 2.1.22
+    "@navikt/ft-sak-support-meny": 3.0.1
+    "@navikt/ft-sak-visittkort": 2.0.43
+    "@navikt/ft-types": 2.1.16
+    "@navikt/ft-ui-komponenter": 2.0.37
+    "@navikt/ft-utils": 2.0.33
+>>>>>>> 2548df0ea (div)
     "@popperjs/core": 2.11.8
     "@sentry/browser": 7.57.0
     "@storybook/addon-actions": 7.0.24

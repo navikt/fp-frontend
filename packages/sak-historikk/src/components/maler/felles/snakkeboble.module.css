@@ -8,6 +8,12 @@
 }
 .margin {
   margin-bottom: 15px;
+  padding-right: 15px;
+}
+.marginForste {
+  margin-bottom: 15px;
+  padding-right: 15px;
+  margin-top: 15px;
 }
 .width {
   width: 300px;
