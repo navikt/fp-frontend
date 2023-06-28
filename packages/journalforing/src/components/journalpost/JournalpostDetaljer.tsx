@@ -123,6 +123,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
   const submitJournal = useCallback((values: JournalføringFormValues) => {
     submitJournalføring(transformValues(values, journalpost, oppgave));
   }, []);
+
   const isSubmittable = formMethods.formState.isDirty;
 
   const reserverOppgaveAction = useCallback(() => {
@@ -131,7 +132,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
       versjon: oppgave.versjon,
       reserverFor: !oppgave.reservertAv ? navAnsatt.brukernavn : '',
     });
-  }, []);
+  }, [oppgave]);
 
   return (
     <Form<JournalføringFormValues> formMethods={formMethods} onSubmit={submitJournal}>
