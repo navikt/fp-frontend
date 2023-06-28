@@ -44,7 +44,7 @@ const detaljertJournalpostMal = {
   kanal: JournalKanal.EESSI,
   bruker: {
     navn: 'Søker Søkersen',
-    fnr: '12048714374',
+    fnr: '12048714373',
     aktørId: '98594685464858',
   },
   avsender: {
