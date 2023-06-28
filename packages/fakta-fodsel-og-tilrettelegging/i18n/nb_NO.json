@@ -28,6 +28,7 @@
   "AvklarteOppholdPerioderFieldArray.SlettOpphold": "Slett opphold",
   "AvklarteOppholdPerioderFieldArray.LeggTil": "Legg til opphold",
   "AvklarteOppholdPerioderFieldArray.Inntektsmelding": "Periode fra inntektsmelding",
+  "AvklarteOppholdPerioderFieldArray.IngenPerioder": "Det finnes ingen oppholdsperioder",
 
   "OppholdPeriodePanel.TomForFom": "Dato kan ikke være før fra og med",
   "OppholdPeriodePanel.EtterTermindato": "Dato kan ikke være etter tre uker før termindato",
