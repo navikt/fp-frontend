@@ -6412,9 +6412,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/cli@npm:2.19.1":
-  version: 2.19.1
-  resolution: "@sentry/cli@npm:2.19.1"
+"@sentry/cli@npm:2.19.4":
+  version: 2.19.4
+  resolution: "@sentry/cli@npm:2.19.4"
   dependencies:
     https-proxy-agent: ^5.0.0
     node-fetch: ^2.6.7
@@ -6423,7 +6423,7 @@ __metadata:
     which: ^2.0.2
   bin:
     sentry-cli: bin/sentry-cli
-  checksum: d598e85974e8a02f3c2b07525d3fff12a6a1db96b3281da62d9b8adcb05de65d1a4e82288df4590d17735a2e207d04ec132b92c4085e7f327d3780942cffd058
+  checksum: 1f2442857a5eec2bc6f872a633d88fc2f11ed7f434db36627a034d904390f4cbbb4dccc33c571a8815e423cd36b863c72621298d49a1541b28370c7f7308f0dc
   languageName: node
   linkType: hard
 
@@ -11922,7 +11922,7 @@ __metadata:
   resolution: "fp-frontend@workspace:."
   dependencies:
     "@navikt/aksel-stylelint": 4.4.0
-    "@sentry/cli": 2.19.1
+    "@sentry/cli": 2.19.4
     "@storybook/addon-essentials": 7.0.23
     "@storybook/addon-links": 7.0.23
     "@storybook/builder-vite": 7.0.23
