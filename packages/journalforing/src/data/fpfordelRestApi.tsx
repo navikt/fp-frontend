@@ -13,7 +13,7 @@ export const RestApiPathsKeys = {
   FERDIGSTILL_JOURNALFØRING: new RestKey<SaksnummerType, JournalførSubmitValue>('FERDIGSTILL_JOURNALFØRING'),
   OPPDATER_MED_BRUKER: new RestKey<Journalpost, OppdaterMedBruker>('OPPDATER_MED_BRUKER'),
   HENT_BRUKER: new RestKey<ForhåndsvisBrukerRespons, { fødselsnummer: string }>('HENT_BRUKER'),
-  RESERVER_OPPGAVE: new RestKey<void, { oppgaveId: string, versjon: number, reserverFor: string }>('HENT_BRUKER'),
+  RESERVER_OPPGAVE: new RestKey<void, { oppgaveId: string; versjon: number; reserverFor: string }>('RESERVER_OPPGAVE'),
 };
 
 export const endpoints = new RestApiConfigBuilder()
