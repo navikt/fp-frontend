@@ -61,7 +61,7 @@
     "eslint": "8.43.0",
     "storybook": "7.0.24",
     "stylelint": "15.9.0",
-    "typescript": "5.0.4",
+    "typescript": "5.1.5",
     "vite": "4.3.9",
     "vitest": "0.32.2"
   },
