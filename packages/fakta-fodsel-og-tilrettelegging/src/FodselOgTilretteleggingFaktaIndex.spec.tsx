@@ -59,6 +59,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
           'permisjon2020-02-17': true,
           skalBrukes: true,
           tilretteleggingBehovFom: '2020-03-17',
+          avklarteOppholdPerioder: [],
           tilretteleggingDatoer: [
             {
               fom: '2020-10-16',
@@ -139,6 +140,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
           'permisjon2020-02-17': true,
           skalBrukes: true,
           tilretteleggingBehovFom: '2020-03-17',
+          avklarteOppholdPerioder: [],
           tilretteleggingDatoer: [
             {
               fom: '2020-03-17',
@@ -222,6 +224,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
           'permisjon2020-02-17': true,
           skalBrukes: true,
           tilretteleggingBehovFom: '2020-03-17',
+          avklarteOppholdPerioder: [],
           tilretteleggingDatoer: [
             {
               fom: '2020-03-17',
@@ -288,6 +291,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
           arbeidsgiverReferanse: '1',
           skalBrukes: undefined,
           tilretteleggingBehovFom: '2019-10-01',
+          avklarteOppholdPerioder: [],
           tilretteleggingDatoer: [
             {
               fom: '2019-10-01',
@@ -303,6 +307,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
           arbeidsgiverReferanse: '2',
           skalBrukes: undefined,
           tilretteleggingBehovFom: '2019-10-01',
+          avklarteOppholdPerioder: [],
           tilretteleggingDatoer: [
             {
               fom: '2019-10-01',
