@@ -132,12 +132,12 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
       versjon: oppgave.versjon,
       reserverFor: !oppgave.reservertAv ? navAnsatt.brukernavn : '',
     });
-  }, [oppgave]);
+  }, []);
 
   return (
     <Form<JournalføringFormValues> formMethods={formMethods} onSubmit={submitJournal}>
       <JournalpostTittelForm journalpost={journalpost} />
-      <VerticalSpacer sixteenPx />
+      <VerticalSpacer eightPx />
       {oppgave.reservertAv && navAnsatt.brukernavn === oppgave.reservertAv && (
         <FlexRow>
           <FlexColumn>
@@ -146,7 +146,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
               <Tag variant="info-moderate">
                 <FormattedMessage id="Oppgavetabell.Meg" />
               </Tag>
-              <Button variant="tertiary" onClick={reserverOppgaveAction}>
+              <Button variant="tertiary" size="small" onClick={reserverOppgaveAction}>
                 <FormattedMessage id="Oppgavetabell.FjernMeg" />
               </Button>
             </BodyLong>
@@ -167,7 +167,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
         <FlexRow>
           <FlexColumn>
             <BodyLong>
-              <Button variant="tertiary" onClick={reserverOppgaveAction}>
+              <Button variant="tertiary" size="small" onClick={reserverOppgaveAction}>
                 <FormattedMessage id="Oppgavetabell.SettPåMeg" />
               </Button>
             </BodyLong>
