@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useFieldArray, useFormContext } from 'react-hook-form';
-import { Button, Table } from '@navikt/ds-react';
+import { BodyShort, Button, Table } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ArbeidsforholdTilretteleggingDato, SvpAvklartOppholdPeriode } from '@navikt/fp-types';
 
@@ -47,39 +47,49 @@ const AvklarteOppholdPerioderFieldArray: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <Table style={{ minWidth: '600px' }}>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell scope="col">
-              <FormattedMessage id="AvklarteOppholdPerioderFieldArray.Fom" />
-            </Table.HeaderCell>
-            <Table.HeaderCell scope="col">
-              <FormattedMessage id="AvklarteOppholdPerioderFieldArray.Tom" />
-            </Table.HeaderCell>
-            <Table.HeaderCell scope="col">
-              <FormattedMessage id="AvklarteOppholdPerioderFieldArray.OppholdArsak" />
-            </Table.HeaderCell>
-            <Table.HeaderCell />
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {fields.map((field, index) => {
-            const data = perioder[index];
-            return (
-              <OppholdPeriodePanel
-                fieldId={field.id}
-                index={index}
-                readOnly={readOnly}
-                periode={data}
-                fieldPrefix={fieldPrefix}
-                remove={remove}
-                erNyPeriode={erNyPeriode && perioder.length - 1 === index}
-                tilrettelegginger={tilrettelegginger}
-              />
-            );
-          })}
-        </Table.Body>
-      </Table>
+      {perioder.length > 0 && (
+        <Table style={{ minWidth: '600px' }}>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="AvklarteOppholdPerioderFieldArray.Fom" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="AvklarteOppholdPerioderFieldArray.Tom" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="AvklarteOppholdPerioderFieldArray.OppholdArsak" />
+              </Table.HeaderCell>
+              <Table.HeaderCell />
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {fields.map((field, index) => {
+              const data = perioder[index];
+              return (
+                <OppholdPeriodePanel
+                  fieldId={field.id}
+                  index={index}
+                  readOnly={readOnly}
+                  periode={data}
+                  fieldPrefix={fieldPrefix}
+                  remove={remove}
+                  erNyPeriode={erNyPeriode && perioder.length - 1 === index}
+                  tilrettelegginger={tilrettelegginger}
+                />
+              );
+            })}
+          </Table.Body>
+        </Table>
+      )}
+      {perioder.length === 0 && (
+        <>
+          <VerticalSpacer twentyPx />
+          <BodyShort>
+            <FormattedMessage id="AvklarteOppholdPerioderFieldArray.IngenPerioder" />
+          </BodyShort>
+        </>
+      )}
       <VerticalSpacer twentyPx />
       {!readOnly && (
         <Button size="small" type="button" variant="secondary" onClick={leggTilNyPeriode}>
