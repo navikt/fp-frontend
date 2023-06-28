@@ -4,13 +4,13 @@ import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './JournalpostDetaljer.stories';
 
-const { VisOppgaveForSubmit } = composeStories(stories);
+const { VisOppgaveForSubmitReservertAvMeg } = composeStories(stories);
 
 describe('<JournalforingIndex>', () => {
   it('skal kunne journalføre på eksisterende sak', async () => {
     const journalfør = vi.fn();
 
-    render(<VisOppgaveForSubmit submitJournalføring={journalfør} />);
+    render(<VisOppgaveForSubmitReservertAvMeg submitJournalføring={journalfør} />);
     expect(await screen.findByText('Søker Søkersen')).toBeInTheDocument();
 
     expect(screen.getByText('12048714373')).toBeInTheDocument();
@@ -52,7 +52,7 @@ describe('<JournalforingIndex>', () => {
   it('skal kunne journalføre på ny sak', async () => {
     const journalfør = vi.fn();
 
-    render(<VisOppgaveForSubmit submitJournalføring={journalfør} />);
+    render(<VisOppgaveForSubmitReservertAvMeg submitJournalføring={journalfør} />);
     expect(await screen.findByText('Søker Søkersen')).toBeInTheDocument();
 
     expect(screen.getByText('12048714373')).toBeInTheDocument();

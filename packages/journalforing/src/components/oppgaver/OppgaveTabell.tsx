@@ -7,11 +7,13 @@ import { NavAnsatt } from '@navikt/fp-types';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import OppgaveTabellRad from './OppgaveTabellRad';
 import styles from './oppgaveTabell.module.css';
+import ReserverOppgaveType from "../../typer/reserverOppgaveType";
 
 type OwnProps = Readonly<{
   oppgaver: OppgaveOversikt[];
   setValgtOppgave: (oppgave: OppgaveOversikt) => void;
   navAnsatt: NavAnsatt
+  reserverOppgave: (data: ReserverOppgaveType) => void;
 }>;
 
 /**
@@ -19,7 +21,8 @@ type OwnProps = Readonly<{
  */
 const OppgaveTabell: FunctionComponent<OwnProps> = ({ oppgaver,
                                                       setValgtOppgave,
-                                                      navAnsatt}) => {
+                                                      navAnsatt,
+                                                      reserverOppgave}) => {
   if (oppgaver.length < 1) {
     return (
       <>
@@ -65,7 +68,11 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({ oppgaver,
         </Table.Header>
         <Table.Body>
           {oppgaver.map(oppgave => (
-            <OppgaveTabellRad oppgave={oppgave} setValgtOppgave={setValgtOppgave} key={oppgave.id} navAnsatt={navAnsatt} />
+            <OppgaveTabellRad oppgave={oppgave}
+                              setValgtOppgave={setValgtOppgave}
+                              key={oppgave.id}
+                              navAnsatt={navAnsatt}
+                              reserverOppgave={reserverOppgave}/>
           ))}
         </Table.Body>
       </Table>

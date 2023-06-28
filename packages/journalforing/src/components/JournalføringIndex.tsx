@@ -7,6 +7,7 @@ import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
 import OppgaveTabell from './oppgaver/OppgaveTabell';
 import JournalpostIndex from './journalpost/JournalpostIndex';
 import JournalførSubmitValue from '../typer/ferdigstillJournalføringSubmit';
+import ReserverOppgaveType from '../typer/reserverOppgaveType';
 
 type OwnProps = Readonly<{
   oppgaver: OppgaveOversikt[];
@@ -16,6 +17,7 @@ type OwnProps = Readonly<{
   avbrytVisningAvJournalpost: () => void;
   valgtOppgave?: OppgaveOversikt;
   submitJournalføring: (data: JournalførSubmitValue) => void;
+  reserverOppgave: (data: ReserverOppgaveType) => void;
 }>;
 
 /**
@@ -29,6 +31,7 @@ const JournalføringIndex: FunctionComponent<OwnProps> = ({
   setValgtOppgave,
   avbrytVisningAvJournalpost,
   submitJournalføring,
+  reserverOppgave,
 }) => (
   <FlexContainer>
     {!valgtOppgave && (
@@ -36,6 +39,7 @@ const JournalføringIndex: FunctionComponent<OwnProps> = ({
         oppgaver={oppgaver}
         setValgtOppgave={setValgtOppgave}
         navAnsatt={navAnsatt}
+        reserverOppgave={reserverOppgave}
       />
     )}
     {valgtOppgave && (
@@ -45,6 +49,7 @@ const JournalføringIndex: FunctionComponent<OwnProps> = ({
         innhentAlleOppgaver={innhentAlleOppgaver}
         navAnsatt={navAnsatt}
         submitJournalføring={submitJournalføring}
+        reserverOppgave={reserverOppgave}
       />
     )}
   </FlexContainer>

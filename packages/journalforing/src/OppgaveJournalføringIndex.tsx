@@ -14,6 +14,7 @@ import OppgaveOversikt from './typer/oppgaveOversiktTsType';
 import styles from './oppgaveJournalføringIndex.module.css';
 import JournalførSubmitValue from './typer/ferdigstillJournalføringSubmit';
 import JournalførtSubmitModal from './components/journalpost/modal/JournalførtSubmitModal';
+import ReserverOppgaveType from './typer/reserverOppgaveType';
 
 const intl = createIntl(messages);
 const TOM_ARRAY: OppgaveOversikt[] = [];
@@ -50,6 +51,16 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
   const { startRequest: submitJournalføring, data: saksnumerJournalføring } = restApiHooks.useRestApiRunner(
     RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING,
   );
+
+  const { startRequest: reserverOppgave } = restApiHooks.useRestApiRunner(RestApiPathsKeys.RESERVER_OPPGAVE);
+
+  const reserverCallback = useCallback((data: ReserverOppgaveType) => {
+    reserverOppgave(data).then(() => {
+      if (navAnsatt?.brukernavn) {
+        innhentAlleOppgaver({ ident: navAnsatt.brukernavn });
+      }
+    });
+  }, []);
 
   const journalførCallback = useCallback(
     (data: JournalførSubmitValue) => {
@@ -119,6 +130,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
           setValgtOppgave={setValgtOppgave}
           avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
           submitJournalføring={journalførCallback}
+          reserverOppgave={reserverCallback}
         />
       </JournalforingPanel>
     </RawIntlProvider>

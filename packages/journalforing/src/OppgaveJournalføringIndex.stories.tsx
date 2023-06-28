@@ -1,12 +1,11 @@
 import React from 'react';
 import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
-
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { withRouter } from '@navikt/fp-storybook-utils';
 import { NavAnsatt } from '@navikt/fp-types';
 
-import { fagsakYtelseType, fagsakStatus, familieHendelseType } from '@navikt/fp-kodeverk';
-import { RestApiPathsKeys, requestApi } from './data/fpfordelRestApi';
+import { fagsakStatus, fagsakYtelseType, familieHendelseType } from '@navikt/fp-kodeverk';
+import { requestApi, RestApiPathsKeys } from './data/fpfordelRestApi';
 import JournalforingIndex from './OppgaveJournalføringIndex';
 import OppgaveOversikt from './typer/oppgaveOversiktTsType';
 import OppgavePrioritet from './kodeverk/oppgavePrioritet';
@@ -112,7 +111,7 @@ export default {
 const navAnsattDefault = {
   kanOppgavestyre: true,
   kanBehandleKode6: true,
-  brukernavn: "X123456",
+  brukernavn: 'X123456',
 } as NavAnsatt;
 
 const Template: StoryFn<{
@@ -152,6 +151,7 @@ const defaultOppgaver = [
     prioritet: OppgavePrioritet.NORM,
     beskrivelse: 'Inntektsmelding',
     reservertAv: 'X123456',
+    versjon: 1,
   },
   {
     id: 700,
@@ -165,6 +165,7 @@ const defaultOppgaver = [
     prioritet: OppgavePrioritet.NORM,
     beskrivelse: 'Inntektsmelding',
     reservertAv: 'Y654321',
+    versjon: 2,
   },
   {
     id: 800,
@@ -175,6 +176,7 @@ const defaultOppgaver = [
     enhetId: '4008',
     prioritet: OppgavePrioritet.HØY,
     beskrivelse: 'Søknad',
+    versjon: 3,
   },
 ];
 
@@ -193,6 +195,7 @@ ViseOppgaverIListe.args = {
       prioritet: OppgavePrioritet.NORM,
       beskrivelse: 'Inntektsmelding',
       reservertAv: 'Y654321',
+      versjon: 1,
     },
     {
       id: 700,
@@ -205,7 +208,7 @@ ViseOppgaverIListe.args = {
       enhetId: '4008',
       prioritet: OppgavePrioritet.NORM,
       beskrivelse: 'Inntektsmelding',
-
+      versjon: 2,
     },
     {
       id: 800,
@@ -217,6 +220,7 @@ ViseOppgaverIListe.args = {
       prioritet: OppgavePrioritet.HØY,
       beskrivelse: 'Søknad',
       reservertAv: 'X123456',
+      versjon: 3,
     },
   ],
   detaljertJournalpost: detaljertJournalpostMal(true),

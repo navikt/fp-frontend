@@ -12,6 +12,7 @@ import JournalDokument from '../../typer/journalDokumentTsType';
 import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
 import DokumentIndex from './pdf/DokumentIndex';
 import OppdaterMedBruker from '../../typer/oppdaterBrukerTsType';
+import ReserverOppgaveType from "../../typer/reserverOppgaveType";
 
 type OwnProps = Readonly<{
   oppgave: OppgaveOversikt;
@@ -19,6 +20,7 @@ type OwnProps = Readonly<{
   innhentAlleOppgaver: (param: { ident: string }) => Promise<OppgaveOversikt[] | undefined>;
   navAnsatt: NavAnsatt;
   submitJournalføring: (data: JournalførSubmitValue) => void;
+  reserverOppgave: (data: ReserverOppgaveType) => void;
 }>;
 
 /**
@@ -28,6 +30,8 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
   oppgave,
   avbrytVisningAvJournalpost,
   submitJournalføring,
+  navAnsatt,
+  reserverOppgave,
 }) => {
   const [valgtDokument, setValgtDokument] = useState<JournalDokument | undefined>(undefined);
 
@@ -91,6 +95,8 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
             forhåndsvisBruker={hentBrukerCallback}
             brukerTilForhåndsvisning={hentetNavn}
             lasterBruker={hentBrukerState === RestApiState.LOADING}
+            reserverOppgave={reserverOppgave}
+            navAnsatt={navAnsatt}
           />
         </FlexColumn>
         {valgtDokument && (
