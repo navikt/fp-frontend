@@ -15,15 +15,17 @@
 
 .thechats {
   overflow-y: auto;
-  padding-left: 16px;
+  padding-left: 25px;
 }
 
 .bubble {
   --ac-chat-bubble-bg: var(--a-gray-50);
+  width: 600px;
 }
 
 .bubbleSelf {
   --ac-chat-bubble-bg: var(--a-blue-50);
+  width: 600px;
 }
 
 .form {
