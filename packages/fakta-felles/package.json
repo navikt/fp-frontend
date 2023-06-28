@@ -23,7 +23,7 @@
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
-    "@navikt/ds-react": "4.4.0",
+    "@navikt/ds-react": "4.4.2",
     "@navikt/fp-kodeverk": "1.0.0",
     "@navikt/fp-types": "1.0.0",
     "@navikt/ft-form-hooks": "4.1.2",
@@ -36,7 +36,7 @@
     "react-intl": "6.4.4"
   },
   "devDependencies": {
-    "@navikt/ds-css": "4.4.0",
+    "@navikt/ds-css": "4.4.2",
     "@navikt/fp-storybook-utils": "1.0.0",
     "@navikt/fp-utils-test": "1.0.0",
     "@testing-library/react": "14.0.0",
