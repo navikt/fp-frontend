@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useMemo } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import moment from 'moment';
-import { Label } from '@navikt/ds-react';
+import { Heading, Label } from '@navikt/ds-react';
 import { Datepicker, CheckboxField } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
@@ -18,6 +18,7 @@ import TilretteleggingFieldArray from './TilretteleggingFieldArray';
 import VelferdspermisjonSection, { finnSkalTaHensynTilPermisjon } from './VelferdspermisjonSection';
 
 import styles from './tilretteleggingArbeidsforholdSection.module.css';
+import AvklarteOppholdPerioderFieldArray from './AvklarteOppholdPerioderFieldArray';
 
 const validerTidligereEnn = (intl: IntlShape, getValues, formSectionName: string) => (): string | null => {
   const tilretteleggingBehovFom = getValues(`${formSectionName}.tilretteleggingBehovFom`);
@@ -166,6 +167,22 @@ const TilretteleggingArbeidsforholdSection: FunctionComponent<OwnProps> = ({
               />
             </FlexColumn>
           </FlexRow>
+          {arbeidsforhold.avklarteOppholdPerioder.length > 0 && (
+            <FlexRow>
+              <FlexColumn>
+                <VerticalSpacer twentyPx />
+                <Heading size="xsmall">
+                  <FormattedMessage id="TilretteleggingArbeidsforholdSection.OppholdPerioder" />
+                </Heading>
+                <AvklarteOppholdPerioderFieldArray
+                  readOnly={readOnly}
+                  formSectionName={formSectionName}
+                  tilrettelegginger={arbeidsforhold.tilretteleggingDatoer}
+                />
+              </FlexColumn>
+            </FlexRow>
+          )}
+          <VerticalSpacer thirtyTwoPx />
         </FlexContainer>
       )}
       {arbeidsforhold.velferdspermisjoner.map(permisjon => (

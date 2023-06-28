@@ -18,6 +18,20 @@
   "TilretteleggingArbeidsforholdSection.Checkbox.SoekerSkalhaTilrettelegging": "Søker har søkt svangerskapspenger for dette arbeidsforholdet",
   "TilretteleggingArbeidsforholdSection.OppgitteNoedvendigeTilrettelegginger": "Arbeidsgiver oppgir nødvendig tilrettelegging",
   "TilretteleggingArbeidsforholdSection.OppgitteNoedvendigeTilrettelegginger.Dato": "Dato",
+  "TilretteleggingArbeidsforholdSection.OppholdPerioder": "Opphold i svangerskapspengene",
+
+  "AvklarteOppholdPerioderFieldArray.Fom": "Fra og med",
+  "AvklarteOppholdPerioderFieldArray.Tom": "Til og med",
+  "AvklarteOppholdPerioderFieldArray.OppholdArsak": "Oppholdsårsak",
+  "AvklarteOppholdPerioderFieldArray.Sykepenger": "Sykepenger",
+  "AvklarteOppholdPerioderFieldArray.Ferie": "Ferie",
+  "AvklarteOppholdPerioderFieldArray.SlettOpphold": "Slett opphold",
+  "AvklarteOppholdPerioderFieldArray.LeggTil": "Legg til opphold",
+  "AvklarteOppholdPerioderFieldArray.Inntektsmelding": "Periode fra inntektsmelding",
+
+  "OppholdPeriodePanel.TomForFom": "Dato kan ikke være før fra og med",
+  "OppholdPeriodePanel.EtterTermindato": "Dato kan ikke være etter tre uker før termindato",
+  "OppholdPeriodePanel.ForForsteDato": "Dato kan ikke være før første tilrettelegging",
 
   "TilretteleggingFieldArray.VelgTilretteleggingPlaceholder": "- Velg tilretteleggingsbehov -",
   "TilretteleggingFieldArray.Stillingsprosent": "Stillingsprosent",

@@ -13,6 +13,13 @@ export type ArbeidsforholdTilretteleggingDato = Readonly<{
   overstyrtUtbetalingsgrad?: number;
 }>;
 
+export type SvpAvklartOppholdPeriode = Readonly<{
+  fom: string;
+  tom: string;
+  oppholdÅrsak: string;
+  forVisning?: boolean;
+}>;
+
 export type ArbeidsforholdFodselOgTilrettelegging = Readonly<{
   tilretteleggingId: number;
   tilretteleggingBehovFom: string;
@@ -27,6 +34,7 @@ export type ArbeidsforholdFodselOgTilrettelegging = Readonly<{
   kanTilrettelegges: boolean;
   begrunnelse?: string;
   velferdspermisjoner: Permisjon[];
+  avklarteOppholdPerioder: SvpAvklartOppholdPeriode[];
 }>;
 
 type FodselOgTilrettelegging = Readonly<{
