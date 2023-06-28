@@ -26,7 +26,7 @@
     "storybook": "storybook dev --quiet -p 7067"
   },
   "dependencies": {
-    "@navikt/ds-react": "4.4.0",
+    "@navikt/ds-react": "4.4.2",
     "@navikt/fp-kodeverk": "1.0.0",
     "@navikt/fp-konstanter": "1.0.0",
     "@navikt/fp-types": "1.0.0",
@@ -48,17 +48,17 @@
     "react-router-dom": "6.14.0"
   },
   "devDependencies": {
-    "@navikt/ds-css": "4.4.0",
+    "@navikt/ds-css": "4.4.2",
     "@navikt/fp-storybook-utils": "1.0.0",
     "@navikt/fp-utils-test": "1.0.0",
-    "@storybook/addon-actions": "7.0.23",
-    "@storybook/react": "7.0.23",
-    "@storybook/react-vite": "7.0.23",
+    "@storybook/addon-actions": "7.0.24",
+    "@storybook/react": "7.0.24",
+    "@storybook/react-vite": "7.0.24",
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.4.3",
     "cross-env": "7.0.3",
     "eslint": "8.43.0",
-    "storybook": "7.0.23",
+    "storybook": "7.0.24",
     "stylelint": "15.9.0",
     "typescript": "5.0.4",
     "vite": "4.3.9",
