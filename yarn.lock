@@ -3324,7 +3324,6 @@ __metadata:
     "@navikt/ft-sak-infosider": 2.0.35
     "@navikt/ft-sak-meny": 3.0.8
     "@navikt/ft-sak-risikoklassifisering": 2.1.22
-    "@navikt/ft-sak-support-meny": 3.0.1
     "@navikt/ft-sak-visittkort": 2.0.43
     "@navikt/ft-types": 2.1.16
     "@navikt/ft-ui-komponenter": 2.0.37
@@ -5609,6 +5608,7 @@ __metadata:
   languageName: node
   linkType: hard
 
+<<<<<<< HEAD
 "@navikt/ft-sak-support-meny@npm:3.0.1":
   version: 3.0.1
   resolution: "@navikt/ft-sak-support-meny@npm:3.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-sak-support-meny%2F3.0.1%2Fba406a44a243398789ad641885d3e734a136b48f"
@@ -5637,6 +5637,11 @@ __metadata:
 "@navikt/ft-sak-visittkort@npm:2.0.44, @navikt/ft-sak-visittkort@npm:^2.0.44":
   version: 2.0.44
   resolution: "@navikt/ft-sak-visittkort@npm:2.0.44::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-sak-visittkort%2F2.0.44%2F4db81ed4c23c709867cbc7c80eb3c0d144c73e82"
+=======
+"@navikt/ft-sak-visittkort@npm:2.0.43, @navikt/ft-sak-visittkort@npm:^2.0.43":
+  version: 2.0.43
+  resolution: "@navikt/ft-sak-visittkort@npm:2.0.43::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-sak-visittkort%2F2.0.43%2Fe10845a29a8b746faa2e6f1477617b1f22cd09ce"
+>>>>>>> 9bbd4219d (div)
   dependencies:
     "@navikt/aksel-icons": 4.5.0
     "@navikt/ds-css": 4.5.0

@@ -1,18 +1,9 @@
-.container {
-  min-width: 100%;
+.tab {
   width: 100%;
 }
 
-.columnMarginMedGodkjenning {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.columnMargin {
-  margin-left: 35px;
-  margin-right: 35px;
-}
-
-.meny {
-  width: 100%;
+.tabContainer {
+  padding-left: 40px;
+  padding-right: 40px;
+  flex-grow: 1;
 }

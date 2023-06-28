@@ -10,7 +10,8 @@
   "DokumentIndex.Dokumenter": "Dokumenter",
   "MeldingIndex.Meldinger": "Meldinger",
   "NotatIndex.Notater": "Notater",
-  "TotrinnskontrollIndex.Godjenning": "Godjenning",
+  "TotrinnskontrollIndex.Godkjenning": "Godkjenning",
+  "TotrinnskontrollIndex.FraBeslutter": "Fra beslutter",
 
   "Behandlingspunkt.AnkeResultat": "Resultat",
   "Behandlingspunkt.AnkeMerknader": "Trygderetten",
@@ -47,6 +48,13 @@
   "IverksetterVedtakStatusModal.Avslatt": "Avslått",
   "IverksetterVedtakStatusModal.Innvilget": "Innvilget",
   "IverksetterVedtakStatusModal.GoToSearchPage": "Du kommer nå til forsiden",
+
+  "BehandlingSupportIndex.Godkjenning": "Godkjenning",
+  "BehandlingSupportIndex.FraBeslutter": "Fra beslutter",
+  "BehandlingSupportIndex.Historikk": "Historikk",
+  "BehandlingSupportIndex.Melding": "Send melding",
+  "BehandlingSupportIndex.Dokumenter": "Dokumenter",
+  "BehandlingSupportIndex.Notater": "Notater",
 
   "Los.IkkeTilgjengelig": "FPLOS er ikke tilgjengelig",
 

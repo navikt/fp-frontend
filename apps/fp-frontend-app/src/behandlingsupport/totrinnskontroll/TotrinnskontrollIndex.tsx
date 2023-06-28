@@ -6,6 +6,7 @@ import { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { useIntl } from 'react-intl';
+import { behandlingStatus } from '@navikt/fp-kodeverk';
 import FagsakData from '../../fagsak/FagsakData';
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
 import { createLocationForSkjermlenke } from '../../app/paths';
@@ -106,9 +107,15 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
     return null;
   }
 
+  const erStatusFatterVedtak = valgtBehandling.status === behandlingStatus.FATTER_VEDTAK;
+
   return (
     <>
-      <SupportHeaderAndContent tekst={intl.formatMessage({ id: 'TotrinnskontrollIndex.Godjenning' })}>
+      <SupportHeaderAndContent
+        tekst={intl.formatMessage({
+          id: erStatusFatterVedtak ? 'TotrinnskontrollIndex.Godkjenning' : 'TotrinnskontrollIndex.FraBeslutter',
+        })}
+      >
         <VerticalSpacer sixteenPx />
         <TotrinnskontrollSakIndex
           behandling={valgtBehandling}

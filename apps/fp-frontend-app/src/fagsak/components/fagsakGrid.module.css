@@ -7,14 +7,12 @@
 }
 
 .leftColumn {
-  float: left;
   overflow: hidden;
-  width: 67%;
+  flex-grow: 1;
 }
 
 .rightColumn {
-  float: right;
-  width: 33%;
+  width: 45rem;
 }
 
 @media all and (max-width: 1350px) {

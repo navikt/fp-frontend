@@ -14,9 +14,16 @@
 }
 
 .thechats {
-  max-width: 100% !important;
   overflow-y: auto;
   padding-left: 16px;
+}
+
+.bubble {
+  --ac-chat-bubble-bg: var(--a-gray-50);
+}
+
+.bubbleSelf {
+  --ac-chat-bubble-bg: var(--a-blue-50);
 }
 
 .form {

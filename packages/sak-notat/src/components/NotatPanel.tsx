@@ -78,9 +78,10 @@ const NotatPanel: FunctionComponent<OwnProps> = ({ saksnummer, notater, lagreNot
               }
               timestamp={formatTimestamp(intl, notat.opprettetTidspunkt)}
               position={saksbehandlerNavn === notat.opprettetAv ? 'right' : 'left'}
-              variant={saksbehandlerNavn === notat.opprettetAv ? 'info' : 'subtle'}
             >
-              <Chat.Bubble>{notat.notat}</Chat.Bubble>
+              <Chat.Bubble className={saksbehandlerNavn === notat.opprettetAv ? styles.bubbleSelf : styles.bubble}>
+                {notat.notat}
+              </Chat.Bubble>
             </Chat>
             <VerticalSpacer sixteenPx />
           </div>
