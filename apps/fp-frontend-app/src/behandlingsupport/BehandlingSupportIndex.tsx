@@ -23,6 +23,23 @@ import SupportTabs from './supportTabs';
 
 import styles from './behandlingSupportIndex.module.css';
 
+const utledAktivtPanel = (
+  skalViseFraBeslutter: boolean,
+  skalViseTilGodkjenning: boolean,
+  valgtSupportPanel: string,
+): string => {
+  if (valgtSupportPanel) {
+    return valgtSupportPanel;
+  }
+  if (skalViseFraBeslutter) {
+    return SupportTabs.FRA_BESLUTTER;
+  }
+  if (skalViseTilGodkjenning) {
+    return SupportTabs.TIL_BESLUTTER;
+  }
+  return SupportTabs.HISTORIKK;
+};
+
 interface OwnProps {
   fagsakData: FagsakData;
   behandlingUuid?: string;
@@ -63,7 +80,10 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   const behandlingTillatteOperasjoner = behandling?.behandlingTillatteOperasjoner;
   const erSendMeldingRelevant = fagsakData && !erPaVent;
 
-  const aktivtSupportPanel = valgtSupportPanel || SupportTabs.HISTORIKK;
+  const skalViseFraBeslutter = !!behandlingTillatteOperasjoner?.behandlingFraBeslutter;
+  const skalViseTilGodkjenning = !!behandlingTillatteOperasjoner?.behandlingTilGodkjenning;
+
+  const aktivtSupportPanel = utledAktivtPanel(skalViseFraBeslutter, skalViseTilGodkjenning, valgtSupportPanel);
 
   const changeRouteCallback = useCallback(
     (supportPanel: string) => {
@@ -76,14 +96,14 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   return (
     <Tabs value={aktivtSupportPanel} onChange={changeRouteCallback}>
       <Tabs.List className={styles.tabContainer}>
-        {behandlingTillatteOperasjoner && behandlingTillatteOperasjoner.behandlingFraBeslutter && (
+        {skalViseFraBeslutter && (
           <Tabs.Tab
             className={styles.tab}
             value={SupportTabs.FRA_BESLUTTER}
             icon={<ArrowUndoIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.FraBeslutter' })} />}
           />
         )}
-        {behandlingTillatteOperasjoner && behandlingTillatteOperasjoner.behandlingTilGodkjenning && (
+        {skalViseTilGodkjenning && (
           <Tabs.Tab
             className={styles.tab}
             value={SupportTabs.TIL_BESLUTTER}
