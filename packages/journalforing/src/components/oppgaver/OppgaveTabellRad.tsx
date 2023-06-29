@@ -20,11 +20,10 @@ type OwnProps = Readonly<{
 const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgave, navAnsatt, reserverOppgave }) => {
   const setOppgave = useCallback(() => {
     setValgtOppgave(oppgave);
-  }, []);
+  }, [oppgave]);
 
   // @ts-ignore
-  const reserverHandler = function (e) {
-    e.stopPropagation();
+  const reserverHandler = () => {
     reserverOppgave({ oppgaveId: oppgave.id.toString(), versjon: oppgave.versjon, reserverFor: navAnsatt.brukernavn });
   };
 
@@ -49,7 +48,7 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
           <Tag variant="neutral-moderate">{oppgave.reservertAv}</Tag>
         )}
         {!oppgave.reservertAv && (
-          <Button variant="tertiary" size="small" onClick={reserverOppgaveAction}>
+          <Button variant="tertiary" size="small" onClick={reserverOppgaveAction} type="button">
             <FormattedMessage id="Oppgavetabell.SettPåMeg" />
           </Button>
         )}

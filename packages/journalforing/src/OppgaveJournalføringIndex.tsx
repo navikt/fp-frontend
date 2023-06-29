@@ -35,11 +35,9 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
     setValgtOppgave(undefined);
   }, [valgtOppgave]);
 
-  const {
-    startRequest: innhentAlleOppgaver,
-    data: alleOppgaver = TOM_ARRAY,
-    state: status,
-  } = restApiHooks.useRestApiRunner(RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER);
+  const { startRequest: innhentAlleOppgaver, data: alleOppgaver = TOM_ARRAY } = restApiHooks.useRestApiRunner(
+    RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER,
+  );
 
   const { addErrorMessage } = useRestApiErrorDispatcher();
   requestApi.setAddErrorMessageHandler(addErrorMessage);
@@ -57,7 +55,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
   const reserverCallback = useCallback((data: ReserverOppgaveType) => {
     reserverOppgave(data).then(() => {
       if (navAnsatt?.brukernavn) {
-        innhentAlleOppgaver({ ident: navAnsatt.brukernavn });
+        innhentAlleOppgaver({ ident: navAnsatt.brukernavn }, true);
       }
     });
   }, []);
@@ -83,7 +81,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
     }
   }, [navAnsatt]);
 
-  if (status === RestApiState.NOT_STARTED || status === RestApiState.LOADING) {
+  if (!alleOppgaver) {
     return <LoadingPanel />;
   }
   if (!navAnsatt) {
