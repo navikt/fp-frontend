@@ -3349,9 +3349,14 @@ __metadata:
     react-intl: 6.4.4
     react-modal: 3.16.1
     react-popper: 2.3.0
+<<<<<<< HEAD
     react-responsive: 9.0.2
     react-router: 6.14.1
     react-router-dom: 6.14.1
+=======
+    react-router: 6.14.0
+    react-router-dom: 6.14.0
+>>>>>>> d64d2cd38 (div)
     react-test-renderer: 18.2.0
     rollup-plugin-sourcemaps: 0.6.3
     storybook: 7.0.24
@@ -10234,13 +10239,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-mediaquery@npm:^0.1.2":
-  version: 0.1.2
-  resolution: "css-mediaquery@npm:0.1.2"
-  checksum: 8e26ae52d8aaaa71893f82fc485363ff0fab494b7d3b3464572aaed50714b8b538d33dbdaa69f0c02cf7f80d1f4d9a77519306c0492223ce91b3987475031a69
-  languageName: node
-  linkType: hard
-
 "css-select@npm:^4.2.1":
   version: 4.3.0
   resolution: "css-select@npm:4.3.0"
@@ -12979,13 +12977,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hyphenate-style-name@npm:^1.0.0":
-  version: 1.0.4
-  resolution: "hyphenate-style-name@npm:1.0.4"
-  checksum: 4f5bf4b055089754924babebaa23c17845937bcca6aee95d5d015f8fa1e6814279002bd6a9e541e3fac2cd02519fc76305396727066c57c8e21a7e73e7a12137
-  languageName: node
-  linkType: hard
-
 "iconv-lite@npm:0.4.24, iconv-lite@npm:^0.4.24":
   version: 0.4.24
   resolution: "iconv-lite@npm:0.4.24"
@@ -14665,15 +14656,6 @@ __metadata:
   peerDependencies:
     react: ">= 0.14.0"
   checksum: ea417e684d7eec9f1beebc9423aba377116ef77c3cd83a2d622df1b9030ffef99aa9b3f431192b94f3237943a33560e6dda9be8a4c1d25187518d09986dad22f
-  languageName: node
-  linkType: hard
-
-"matchmediaquery@npm:^0.3.0":
-  version: 0.3.1
-  resolution: "matchmediaquery@npm:0.3.1"
-  dependencies:
-    css-mediaquery: ^0.1.2
-  checksum: 154e1650f79d78858424d7086093756ad2fdb1cd9ad19230b99a47c363a1da9c6692d6ca56ea49447fb516f580c59fd60d8b9a06247e088d8e1a658e6e5604d7
   languageName: node
   linkType: hard
 
@@ -16571,7 +16553,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.6.1, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -16964,6 +16946,7 @@ __metadata:
   languageName: node
   linkType: hard
 
+<<<<<<< HEAD
 "react-responsive@npm:9.0.2":
   version: 9.0.2
   resolution: "react-responsive@npm:9.0.2"
@@ -16981,6 +16964,11 @@ __metadata:
 "react-router-dom@npm:6.14.1":
   version: 6.14.1
   resolution: "react-router-dom@npm:6.14.1"
+=======
+"react-router-dom@npm:6.14.0":
+  version: 6.14.0
+  resolution: "react-router-dom@npm:6.14.0"
+>>>>>>> d64d2cd38 (div)
   dependencies:
     "@remix-run/router": 1.7.1
     react-router: 6.14.1
@@ -17753,13 +17741,6 @@ __metadata:
   dependencies:
     kind-of: ^6.0.2
   checksum: 39b3dd9630a774aba288a680e7d2901f5c0eae7b8387fc5c8ea559918b29b3da144b7bdb990d7ccd9e11be05508ac9e459ce51d01fd65e583282f6ffafcba2e7
-  languageName: node
-  linkType: hard
-
-"shallow-equal@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "shallow-equal@npm:1.2.1"
-  checksum: 4f1645cc516e7754c4438db687e1da439a5f29a7dba2ba90c5f88e5708aeb17bc4355ba45cad805b0e95dc898e37d8bf6d77d854919c7512f89939986cff8cd1
   languageName: node
   linkType: hard
 

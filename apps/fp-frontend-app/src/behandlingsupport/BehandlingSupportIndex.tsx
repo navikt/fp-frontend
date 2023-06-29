@@ -93,6 +93,11 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
     [location],
   );
 
+  const erMeldingAktiv =
+    behandlingTillatteOperasjoner && erSendMeldingRelevant
+      ? behandlingTillatteOperasjoner.behandlingKanSendeMelding
+      : false;
+
   return (
     <Tabs value={aktivtSupportPanel} onChange={changeRouteCallback}>
       <Tabs.List className={styles.tabContainer}>
@@ -119,11 +124,6 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
           className={styles.tab}
           value={SupportTabs.MELDINGER}
           icon={<PaperplaneIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Melding' })} />}
-          hidden={
-            behandlingTillatteOperasjoner && erSendMeldingRelevant
-              ? behandlingTillatteOperasjoner.behandlingKanSendeMelding
-              : false
-          }
         />
         <Tabs.Tab
           className={styles.tab}
@@ -174,6 +174,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
             meldingFormData={meldingFormData}
             setMeldingForData={setMeldingForData}
             hentOgSettBehandling={hentOgSettBehandling}
+            erMeldingAktiv={erMeldingAktiv}
           />
         )}
       </Tabs.Panel>

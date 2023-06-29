@@ -42,11 +42,11 @@ const utledPlassering = (aktoer: string): 'right' | 'left' =>
     : 'left';
 
 const BAKGRUNNSFARGER = {
-  [HistorikkAktor.SAKSBEHANDLER]: 'var(--a-purple-100)',
-  [HistorikkAktor.BESLUTTER]: 'var(--a-green-100)',
-  [HistorikkAktor.VEDTAKSLOSNINGEN]: 'var(--a-gray-100)',
-  [HistorikkAktor.SOKER]: 'var(--a-orange-100)',
-  [HistorikkAktor.ARBEIDSGIVER]: 'var(--a-lightblue-100)',
+  [HistorikkAktor.SAKSBEHANDLER]: styles.bubbleSaksbehandler,
+  [HistorikkAktor.BESLUTTER]: styles.bubbleBeslutter,
+  [HistorikkAktor.VEDTAKSLOSNINGEN]: styles.bubbleVedtakslosningen,
+  [HistorikkAktor.SOKER]: styles.bubbleSoker,
+  [HistorikkAktor.ARBEIDSGIVER]: styles.bubbleArbeidsgiver,
 } as Record<string, string>;
 
 interface OwnProps {
@@ -74,9 +74,8 @@ const Snakkeboble: FunctionComponent<OwnProps> = ({
       timestamp={`${formatDate(dato)} // ${rolleNavn} ${opprettetAv || ''}`}
       position={utledPlassering(aktoer)}
       toptextPosition="left"
-      backgroundColor={BAKGRUNNSFARGER[aktoer]}
     >
-      <Chat.Bubble className={styles.width}>{children}</Chat.Bubble>
+      <Chat.Bubble className={BAKGRUNNSFARGER[aktoer]}>{children}</Chat.Bubble>
     </Chat>
   </div>
 );

@@ -1,6 +1,5 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { Context as ResponsiveContext } from 'react-responsive';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { composeStories } from '@storybook/react';
@@ -51,11 +50,7 @@ describe('<AppIndex>', () => {
   });
 
   it('skal rendre app med korrekt informasjon', async () => {
-    render(
-      <ResponsiveContext.Provider value={{ width: 1000 }}>
-        <BekreftAdopsjon />
-      </ResponsiveContext.Provider>,
-    );
+    render(<BekreftAdopsjon />);
 
     expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
     expect(screen.getByText('Sara Saksbehandler')).toBeInTheDocument();
@@ -105,11 +100,7 @@ describe('<AppIndex>', () => {
   });
 
   it.skip('skal bekrefte aksjonspunkt', async () => {
-    const utils = await render(
-      <ResponsiveContext.Provider value={{ width: 1000 }}>
-        <BekreftAdopsjon />
-      </ResponsiveContext.Provider>,
-    );
+    const utils = await render(<BekreftAdopsjon />);
 
     expect(await screen.findByText('Adopsjonsopplysninger fra søknad')).toBeInTheDocument();
 

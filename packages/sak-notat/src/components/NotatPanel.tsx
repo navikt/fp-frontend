@@ -53,8 +53,17 @@ const NotatPanel: FunctionComponent<OwnProps> = ({ saksnummer, notater, lagreNot
 
   useEffect(() => {
     const lastChildElement = bottomEl.current?.lastElementChild;
-    lastChildElement?.scrollIntoView({ behavior: 'smooth' });
+    lastChildElement?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [sorterteNotater, top]);
+
+  /* const scrollReset = useCallback((e) => setTop(0), []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', scrollReset);
+    return () => {
+      window.removeEventListener('scroll', scrollReset);
+    };
+  }, []); */
 
   return (
     <div
@@ -66,27 +75,30 @@ const NotatPanel: FunctionComponent<OwnProps> = ({ saksnummer, notater, lagreNot
         }
       }}
     >
-      <div className={styles.thechats} ref={bottomEl}>
-        {sorterteNotater.map((notat, index) => (
-          <div key={notat.opprettetTidspunkt} className={index === 0 ? styles.marginTop : undefined}>
-            <Chat
-              className={styles.chat}
-              name={
-                saksbehandlerNavn === notat.opprettetAv
-                  ? intl.formatMessage({ id: 'NotatPanel.Du' })
-                  : saksbehandlerNavn
-              }
-              timestamp={formatTimestamp(intl, notat.opprettetTidspunkt)}
-              position={saksbehandlerNavn === notat.opprettetAv ? 'right' : 'left'}
-            >
-              <Chat.Bubble className={saksbehandlerNavn === notat.opprettetAv ? styles.bubbleSelf : styles.bubble}>
-                {notat.notat}
-              </Chat.Bubble>
-            </Chat>
-            <VerticalSpacer sixteenPx />
-          </div>
-        ))}
-      </div>
+      {sorterteNotater.length > 0 && (
+        <div className={styles.thechats} ref={bottomEl}>
+          {sorterteNotater.map((notat, index) => (
+            <div key={notat.opprettetTidspunkt} className={index === 0 ? styles.marginTop : undefined}>
+              <Chat
+                className={styles.chat}
+                name={
+                  saksbehandlerNavn === notat.opprettetAv
+                    ? intl.formatMessage({ id: 'NotatPanel.Du' })
+                    : saksbehandlerNavn
+                }
+                timestamp={formatTimestamp(intl, notat.opprettetTidspunkt)}
+                position={saksbehandlerNavn === notat.opprettetAv ? 'right' : 'left'}
+              >
+                <Chat.Bubble className={saksbehandlerNavn === notat.opprettetAv ? styles.bubbleSelf : styles.bubble}>
+                  {notat.notat}
+                </Chat.Bubble>
+                {index < sorterteNotater.length - 1 && <VerticalSpacer fourPx />}
+                {index === sorterteNotater.length - 1 && <VerticalSpacer eightPx />}
+              </Chat>
+            </div>
+          ))}
+        </div>
+      )}
       {sorterteNotater.length === 0 && (
         <div className={styles.textAlign}>
           <BodyShort className={styles.ingen}>

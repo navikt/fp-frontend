@@ -1,5 +1,4 @@
 import React, { FunctionComponent, ReactNode } from 'react';
-import MediaQuery from 'react-responsive';
 
 import styles from './fagsakGrid.module.css';
 
@@ -21,23 +20,16 @@ const FagsakGrid: FunctionComponent<OwnProps> = ({
   supportContent,
   visittkortContent,
 }) => (
-  <>
-    <MediaQuery maxWidth={1718}>
-      <>{visittkortContent()}</>
-    </MediaQuery>
-    <div className={styles.gridContainer}>
-      <div className={styles.leftColumn}>
-        <MediaQuery minWidth={1719}>
-          <>{visittkortContent()}</>
-        </MediaQuery>
-        {behandlingContent}
-      </div>
-      <div className={styles.rightColumn}>
-        <div>{profileAndNavigationContent}</div>
-        <div>{supportContent}</div>
-      </div>
+  <div className={styles.gridContainer}>
+    <div className={styles.leftColumn}>
+      {visittkortContent()}
+      {behandlingContent}
     </div>
-  </>
+    <div className={styles.rightColumn}>
+      <div>{profileAndNavigationContent}</div>
+      <div>{supportContent}</div>
+    </div>
+  </div>
 );
 
 export default FagsakGrid;

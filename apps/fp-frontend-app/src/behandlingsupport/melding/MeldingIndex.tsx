@@ -7,13 +7,16 @@ import { MeldingerSakIndex, MessagesModalSakIndex, FormValues } from '@navikt/fp
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { Alert } from '@navikt/ds-react';
 import { useFpSakKodeverk } from '../../data/useKodeverk';
 import useVisForhandsvisningAvMelding, { ForhandsvisFunksjon } from '../../data/useVisForhandsvisningAvMelding';
 import { FagsakApiKeys, SubmitMessageParams, restFagsakApiHooks } from '../../data/fagsakContextApi';
 import FagsakData from '../../fagsak/FagsakData';
 import SettPaVentReadOnlyModal from './SettPaVentReadOnlyModal';
 import SupportHeaderAndContent from '../SupportHeader';
+
+import styles from './MeldingIndex.module.css';
 
 const getSubmitCallback =
   (
@@ -90,6 +93,7 @@ interface OwnProps {
   meldingFormData?: any;
   setMeldingForData: (data?: any) => void;
   hentOgSettBehandling: () => void;
+  erMeldingAktiv: boolean;
 }
 
 const EMPTY_ARRAY = [] as KodeverkMedNavn[];
@@ -105,6 +109,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   meldingFormData,
   setMeldingForData,
   hentOgSettBehandling,
+  erMeldingAktiv,
 }) => {
   const intl = useIntl();
   const [showSettPaVentModal, setShowSettPaVentModal] = useState(false);
@@ -163,19 +168,29 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
 
       <SupportHeaderAndContent tekst={intl.formatMessage({ id: 'MeldingIndex.Meldinger' })}>
         <VerticalSpacer sixteenPx />
-        <MeldingerSakIndex
-          submitCallback={submitCallback}
-          sprakKode={valgtBehandling?.sprakkode}
-          previewCallback={previewCallback}
-          revurderingVarslingArsak={revurderingVarslingArsak}
-          templates={valgtBehandling?.brevmaler}
-          isKontrollerRevurderingApOpen={valgtBehandling?.ugunstAksjonspunkt}
-          fagsakYtelseType={fagsak.fagsakYtelseType}
-          kanVeilede={initFetchData.innloggetBruker.kanVeilede}
-          meldingFormData={meldingFormData}
-          setMeldingForData={setMeldingForData}
-          brukerManglerAdresse={fagsak.brukerManglerAdresse}
-        />
+        {!erMeldingAktiv && (
+          <div className={styles.textAlign}>
+            <VerticalSpacer fourtyPx />
+            <Alert variant="info">
+              <FormattedMessage id="MeldingIndex.IkkeTilgjengelig" />
+            </Alert>
+          </div>
+        )}
+        {erMeldingAktiv && (
+          <MeldingerSakIndex
+            submitCallback={submitCallback}
+            sprakKode={valgtBehandling?.sprakkode}
+            previewCallback={previewCallback}
+            revurderingVarslingArsak={revurderingVarslingArsak}
+            templates={valgtBehandling?.brevmaler}
+            isKontrollerRevurderingApOpen={valgtBehandling?.ugunstAksjonspunkt}
+            fagsakYtelseType={fagsak.fagsakYtelseType}
+            kanVeilede={initFetchData.innloggetBruker.kanVeilede}
+            meldingFormData={meldingFormData}
+            setMeldingForData={setMeldingForData}
+            brukerManglerAdresse={fagsak.brukerManglerAdresse}
+          />
+        )}
       </SupportHeaderAndContent>
       {submitFinished && showSettPaVentModal && (
         <SettPaVentReadOnlyModal

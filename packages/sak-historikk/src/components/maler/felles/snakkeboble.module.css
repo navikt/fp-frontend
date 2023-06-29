@@ -15,6 +15,28 @@
   padding-right: 15px;
   margin-top: 15px;
 }
-.width {
-  width: 300px;
+.bubbleSaksbehandler {
+  --ac-chat-bubble-bg: var(--a-purple-100);
+  min-width: 300px;
+  max-width: 500px;
+}
+.bubbleBeslutter {
+  --ac-chat-bubble-bg: var(--a-green-100);
+  min-width: 300px;
+  max-width: 500px;
+}
+.bubbleVedtakslosningen {
+  --ac-chat-bubble-bg: var(--a-gray-100);
+  min-width: 300px;
+  max-width: 500px;
+}
+.bubbleSoker {
+  --ac-chat-bubble-bg: var(--a-orange-100);
+  min-width: 300px;
+  max-width: 500px;
+}
+.bubbleArbeidsgiver {
+  --ac-chat-bubble-bg: var(--a-lightblue-100);
+  min-width: 300px;
+  max-width: 500px;
 }

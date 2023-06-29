@@ -19,6 +19,7 @@
 }
 
 .overflow {
+  min-height: 250px;
   overflow-y: auto;
   padding-left: 16px;
   padding-right: 16px;

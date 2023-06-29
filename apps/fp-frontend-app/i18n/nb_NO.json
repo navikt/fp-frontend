@@ -9,6 +9,7 @@
 
   "DokumentIndex.Dokumenter": "Dokumenter",
   "MeldingIndex.Meldinger": "Meldinger",
+  "MeldingIndex.IkkeTilgjengelig": "Det er ikke mulig å skrive melding til bruker nå",
   "NotatIndex.Notater": "Notater",
   "TotrinnskontrollIndex.Godkjenning": "Godkjenning",
   "TotrinnskontrollIndex.FraBeslutter": "Fra beslutter",

@@ -14,6 +14,7 @@
 }
 
 .thechats {
+  min-height: 250px;
   overflow-y: auto;
   padding-left: 25px;
 }
@@ -29,6 +30,8 @@
 }
 
 .form {
+  background-color: var(--a-gray-50);
+  border-top: 2px solid var(--a-grayalpha-300);
   margin-top: auto;
   padding-left: 16px;
   padding-right: 16px;
