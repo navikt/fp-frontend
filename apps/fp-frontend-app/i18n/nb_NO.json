@@ -9,7 +9,9 @@
 
   "DokumentIndex.Dokumenter": "Dokumenter",
   "MeldingIndex.Meldinger": "Meldinger",
-  "MeldingIndex.IkkeTilgjengelig": "Det er ikke mulig å skrive melding til bruker nå",
+  "MeldingIndex.IkkeTilgjengeligPaVent": "Det er ikke mulig å skrive melding til bruker når behandlingen er på vent",
+  "MeldingIndex.IkkeTilgjengeligAvsluttet": "Det er ikke mulig å skrive melding til bruker når fagsaken er avsluttet",
+  "MeldingIndex.IkkeTilgjengeligVeileder": "Det er ikke mulig å skrive melding til bruker for veiledere",
   "NotatIndex.Notater": "Notater",
   "TotrinnskontrollIndex.Godkjenning": "Godkjenning",
   "TotrinnskontrollIndex.FraBeslutter": "Fra beslutter",

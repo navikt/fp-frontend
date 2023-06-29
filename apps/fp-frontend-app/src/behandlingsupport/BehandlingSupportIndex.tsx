@@ -76,9 +76,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
 
   const navigate = useNavigate();
 
-  const erPaVent = behandling ? behandling.behandlingPaaVent : false;
   const behandlingTillatteOperasjoner = behandling?.behandlingTillatteOperasjoner;
-  const erSendMeldingRelevant = fagsakData && !erPaVent;
 
   const skalViseFraBeslutter = !!behandlingTillatteOperasjoner?.behandlingFraBeslutter;
   const skalViseTilGodkjenning = !!behandlingTillatteOperasjoner?.behandlingTilGodkjenning;
@@ -92,11 +90,6 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
     },
     [location],
   );
-
-  const erMeldingAktiv =
-    behandlingTillatteOperasjoner && erSendMeldingRelevant
-      ? behandlingTillatteOperasjoner.behandlingKanSendeMelding
-      : false;
 
   return (
     <Tabs value={aktivtSupportPanel} onChange={changeRouteCallback}>
@@ -174,7 +167,6 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
             meldingFormData={meldingFormData}
             setMeldingForData={setMeldingForData}
             hentOgSettBehandling={hentOgSettBehandling}
-            erMeldingAktiv={erMeldingAktiv}
           />
         )}
       </Tabs.Panel>

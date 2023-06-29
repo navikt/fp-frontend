@@ -2,7 +2,13 @@ import React, { FunctionComponent, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { KodeverkMedNavn } from '@navikt/fp-types';
-import { behandlingType as BehandlingType, KodeverkType, venteArsakType, dokumentMalType } from '@navikt/fp-kodeverk';
+import {
+  behandlingType as BehandlingType,
+  KodeverkType,
+  venteArsakType,
+  dokumentMalType,
+  fagsakStatus,
+} from '@navikt/fp-kodeverk';
 import { MeldingerSakIndex, MessagesModalSakIndex, FormValues } from '@navikt/fp-sak-meldinger';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
@@ -93,7 +99,6 @@ interface OwnProps {
   meldingFormData?: any;
   setMeldingForData: (data?: any) => void;
   hentOgSettBehandling: () => void;
-  erMeldingAktiv: boolean;
 }
 
 const EMPTY_ARRAY = [] as KodeverkMedNavn[];
@@ -109,7 +114,6 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   meldingFormData,
   setMeldingForData,
   hentOgSettBehandling,
-  erMeldingAktiv,
 }) => {
   const intl = useIntl();
   const [showSettPaVentModal, setShowSettPaVentModal] = useState(false);
@@ -160,6 +164,13 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   }, []);
 
   const submitFinished = submitState === RestApiState.SUCCESS;
+
+  const behandlingTillatteOperasjoner = valgtBehandling?.behandlingTillatteOperasjoner;
+  const kanSendeMelding =
+    !initFetchData.innloggetBruker.kanVeilede &&
+    fagsak.status !== fagsakStatus.AVSLUTTET &&
+    behandlingTillatteOperasjoner?.behandlingKanSendeMelding;
+
   return (
     <>
       {showMessagesModal && (
@@ -168,15 +179,23 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
 
       <SupportHeaderAndContent tekst={intl.formatMessage({ id: 'MeldingIndex.Meldinger' })}>
         <VerticalSpacer sixteenPx />
-        {!erMeldingAktiv && (
+        {!kanSendeMelding && (
           <div className={styles.textAlign}>
             <VerticalSpacer fourtyPx />
             <Alert variant="info">
-              <FormattedMessage id="MeldingIndex.IkkeTilgjengelig" />
+              {!behandlingTillatteOperasjoner?.behandlingKanSendeMelding && (
+                <FormattedMessage id="MeldingIndex.IkkeTilgjengeligPaVent" />
+              )}
+              {fagsak.status === fagsakStatus.AVSLUTTET && (
+                <FormattedMessage id="MeldingIndex.IkkeTilgjengeligAvsluttet" />
+              )}
+              {initFetchData.innloggetBruker.kanVeilede && (
+                <FormattedMessage id="MeldingIndex.IkkeTilgjengeligVeileder" />
+              )}
             </Alert>
           </div>
         )}
-        {erMeldingAktiv && (
+        {kanSendeMelding && (
           <MeldingerSakIndex
             submitCallback={submitCallback}
             sprakKode={valgtBehandling?.sprakkode}
