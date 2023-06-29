@@ -19,7 +19,7 @@
   "dependencies": {
     "@navikt/fp-kodeverk": "1.0.0",
     "@navikt/fp-types": "1.0.0",
-    "@navikt/ft-fakta-beregning": "4.2.25",
+    "@navikt/ft-fakta-beregning": "4.2.26",
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": "7.2.29",
     "@navikt/ft-prosess-beregningsgrunnlag": "6.2.26"
   },
