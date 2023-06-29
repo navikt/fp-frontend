@@ -12,7 +12,7 @@ import JournalDokument from '../../typer/journalDokumentTsType';
 import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
 import DokumentIndex from './pdf/DokumentIndex';
 import OppdaterMedBruker from '../../typer/oppdaterBrukerTsType';
-import ReserverOppgaveType from "../../typer/reserverOppgaveType";
+import ReserverOppgaveType from '../../typer/reserverOppgaveType';
 
 type OwnProps = Readonly<{
   oppgave: OppgaveOversikt;
@@ -21,6 +21,7 @@ type OwnProps = Readonly<{
   navAnsatt: NavAnsatt;
   submitJournalføring: (data: JournalførSubmitValue) => void;
   reserverOppgave: (data: ReserverOppgaveType) => void;
+  oppdaterValgtOppgave: (oppgave: OppgaveOversikt) => void;
 }>;
 
 /**
@@ -32,6 +33,7 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
   submitJournalføring,
   navAnsatt,
   reserverOppgave,
+  oppdaterValgtOppgave,
 }) => {
   const [valgtDokument, setValgtDokument] = useState<JournalDokument | undefined>(undefined);
 
@@ -90,6 +92,7 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
             avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
             journalpost={journalpostOppdatertMedSøker || journalpostFraOppgave}
             oppgave={oppgave}
+            oppdaterValgtOppgave={oppdaterValgtOppgave}
             submitJournalføring={submitJournalføring}
             knyttJournalpostTilBruker={knyttJournalpostTilBruker}
             forhåndsvisBruker={hentBrukerCallback}

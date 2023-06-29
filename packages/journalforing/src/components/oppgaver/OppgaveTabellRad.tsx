@@ -24,7 +24,7 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
 
   const reserverOppgaveAction = useCallback(
     (e: React.SyntheticEvent) => {
-      e.preventDefault(); // prevent click i selve raden.
+      e.stopPropagation();
       reserverOppgave({
         oppgaveId: oppgave.id.toString(),
         versjon: oppgave.versjon,
@@ -53,7 +53,7 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
           <Tag variant="neutral-moderate">{oppgave.reservertAv}</Tag>
         )}
         {!oppgave.reservertAv && (
-          <Button variant="tertiary" size="small" onClick={reserverOppgaveAction} type="button">
+          <Button size="small" variant="tertiary" onClick={reserverOppgaveAction} type="button">
             <FormattedMessage id="Oppgavetabell.SettPåMeg" />
           </Button>
         )}
