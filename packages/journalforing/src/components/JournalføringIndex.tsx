@@ -49,6 +49,7 @@ const JournalføringIndex: FunctionComponent<OwnProps> = ({
         innhentAlleOppgaver={innhentAlleOppgaver}
         navAnsatt={navAnsatt}
         submitJournalføring={submitJournalføring}
+        oppdaterValgtOppgave={setValgtOppgave}
         reserverOppgave={reserverOppgave}
       />
     )}

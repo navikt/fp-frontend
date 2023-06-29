@@ -98,6 +98,7 @@ type OwnProps = Readonly<{
   lasterBruker: boolean;
   navAnsatt: NavAnsatt;
   reserverOppgave: (data: ReserverOppgaveType) => void;
+  oppdaterValgtOppgave: (oppgave: OppgaveOversikt) => void;
 }>;
 
 /**
@@ -114,6 +115,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
   lasterBruker,
   reserverOppgave,
   navAnsatt,
+  oppdaterValgtOppgave,
 }) => {
   const skalKunneEndreSøker = !journalpost.bruker;
   const saker = journalpost.fagsaker || [];
@@ -128,12 +130,12 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
 
   const reserverOppgaveAction = useCallback(() => {
     const reservasjonFor = !oppgave.reservertAv ? navAnsatt.brukernavn : '';
-
     reserverOppgave({
       oppgaveId: oppgave.id.toString(),
       versjon: oppgave.versjon,
       reserverFor: reservasjonFor,
     });
+    oppdaterValgtOppgave({ ...oppgave, reservertAv: reservasjonFor, versjon: oppgave.versjon + 1 });
   }, [reserverOppgave]);
 
   return (
