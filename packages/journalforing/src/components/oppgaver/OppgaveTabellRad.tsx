@@ -22,13 +22,17 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
     setValgtOppgave(oppgave);
   }, [oppgave]);
 
-  // @ts-ignore
-  const reserverHandler = e => {
-    e.stopPropagation();
-    reserverOppgave({ oppgaveId: oppgave.id.toString(), versjon: oppgave.versjon, reserverFor: navAnsatt.brukernavn });
-  };
-
-  const reserverOppgaveAction = useCallback(reserverHandler, [oppgave]);
+  const reserverOppgaveAction = useCallback(
+    (e: React.SyntheticEvent) => {
+      e.preventDefault(); // prevent click i selve raden.
+      reserverOppgave({
+        oppgaveId: oppgave.id.toString(),
+        versjon: oppgave.versjon,
+        reserverFor: navAnsatt.brukernavn,
+      });
+    },
+    [oppgave],
+  );
 
   return (
     <Table.Row onClick={setOppgave} shadeOnHover className={styles.tabellRad}>

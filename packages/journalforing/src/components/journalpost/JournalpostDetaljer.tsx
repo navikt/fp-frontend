@@ -127,12 +127,14 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
   const isSubmittable = formMethods.formState.isDirty;
 
   const reserverOppgaveAction = useCallback(() => {
+    const reservasjonFor = !oppgave.reservertAv ? navAnsatt.brukernavn : '';
+
     reserverOppgave({
       oppgaveId: oppgave.id.toString(),
       versjon: oppgave.versjon,
-      reserverFor: !oppgave.reservertAv ? navAnsatt.brukernavn : '',
+      reserverFor: reservasjonFor,
     });
-  }, []);
+  }, [reserverOppgave]);
 
   return (
     <Form<JournalføringFormValues> formMethods={formMethods} onSubmit={submitJournal}>

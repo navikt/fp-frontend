@@ -52,13 +52,16 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
 
   const { startRequest: reserverOppgave } = restApiHooks.useRestApiRunner(RestApiPathsKeys.RESERVER_OPPGAVE);
 
-  const reserverCallback = useCallback((data: ReserverOppgaveType) => {
-    reserverOppgave(data).then(() => {
-      if (navAnsatt?.brukernavn) {
-        innhentAlleOppgaver({ ident: navAnsatt.brukernavn }, true);
-      }
-    });
-  }, []);
+  const reserverCallback = useCallback(
+    (data: ReserverOppgaveType) => {
+      reserverOppgave(data).then(() => {
+        if (navAnsatt?.brukernavn) {
+          innhentAlleOppgaver({ ident: navAnsatt.brukernavn }, true);
+        }
+      });
+    },
+    [valgtOppgave],
+  );
 
   const journalførCallback = useCallback(
     (data: JournalførSubmitValue) => {
