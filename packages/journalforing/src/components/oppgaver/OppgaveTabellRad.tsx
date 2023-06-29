@@ -23,7 +23,8 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
   }, [oppgave]);
 
   // @ts-ignore
-  const reserverHandler = () => {
+  const reserverHandler = e => {
+    e.stopPropagation();
     reserverOppgave({ oppgaveId: oppgave.id.toString(), versjon: oppgave.versjon, reserverFor: navAnsatt.brukernavn });
   };
 

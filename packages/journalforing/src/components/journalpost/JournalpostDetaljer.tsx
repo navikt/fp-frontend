@@ -132,7 +132,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
       versjon: oppgave.versjon,
       reserverFor: !oppgave.reservertAv ? navAnsatt.brukernavn : '',
     });
-  }, [oppgave]);
+  }, []);
 
   return (
     <Form<JournalføringFormValues> formMethods={formMethods} onSubmit={submitJournal}>
