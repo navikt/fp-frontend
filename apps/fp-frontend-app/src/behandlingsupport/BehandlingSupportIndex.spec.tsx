@@ -61,6 +61,12 @@ describe('<BehandlingSupportIndex>', () => {
         </RestApiMock>
       </RawIntlProvider>,
     );
-    expect(await screen.findByText('Filtrer på behandling')).toBeInTheDocument();
+
+    expect(await screen.findAllByText('Historikk')).toHaveLength(2);
+    expect(screen.getByText('Filtrer på behandling')).toBeInTheDocument();
+
+    expect(screen.getByText('Send melding')).toBeInTheDocument();
+    expect(screen.getByText('Dokumenter')).toBeInTheDocument();
+    expect(screen.getByText('Notater')).toBeInTheDocument();
   });
 });
