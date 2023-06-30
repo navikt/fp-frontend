@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo, useState } from 'react';
+import React, { FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react';
 import { Location } from 'history';
 import { useIntl } from 'react-intl';
 import moment from 'moment';
@@ -267,6 +267,15 @@ const History: FunctionComponent<OwnProps> = ({
   );
 
   const [top, setTop] = useState<number>();
+
+  const scrollReset = useCallback(() => setTop(0), []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', scrollReset);
+    return () => {
+      window.removeEventListener('scroll', scrollReset);
+    };
+  }, []);
 
   return (
     <>

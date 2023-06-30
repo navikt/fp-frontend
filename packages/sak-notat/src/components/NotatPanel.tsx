@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
 import { BodyShort, Button, Chat } from '@navikt/ds-react';
 
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer, usePrevious } from '@navikt/ft-ui-komponenter';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { Saksnotat } from '@navikt/fp-types';
 import { maxLength, required } from '@navikt/ft-form-validators';
@@ -51,21 +51,28 @@ const NotatPanel: FunctionComponent<OwnProps> = ({ saksnummer, notater, lagreNot
     [notater],
   );
 
+  const isInitialMount = useRef(true);
   useEffect(() => {
     const lastChildElement = bottomEl.current?.lastElementChild;
-    if (lastChildElement?.scrollIntoView) {
-      lastChildElement.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      if (lastChildElement?.scrollIntoView) {
+        // FIXME Denne scroller ytre scrollbar (Må i tillegg putte top i dep)
+        lastChildElement.scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
+      }
+    } else if (lastChildElement?.scrollIntoView) {
+      lastChildElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
-  }, [sorterteNotater, top]);
+  }, [sorterteNotater]);
 
-  /* const scrollReset = useCallback((e) => setTop(0), []);
+  const scrollReset = useCallback(() => setTop(0), []);
 
   useEffect(() => {
     window.addEventListener('scroll', scrollReset);
     return () => {
       window.removeEventListener('scroll', scrollReset);
     };
-  }, []); */
+  }, []);
 
   return (
     <div
