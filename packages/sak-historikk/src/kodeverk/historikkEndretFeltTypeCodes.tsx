@@ -452,6 +452,10 @@ const historikkEndretFeltTypeCodes = {
     kode: 'DELVIS_TILRETTELEGGING_FOM',
     feltId: 'HistorikkEndretFelt.DelvisTilretteleggingFom',
   },
+  SVP_OPPHOLD_PERIODE: {
+    kode: 'SVP_OPPHOLD_PERIODE',
+    feltId: 'HistorikkEndretFelt.SvpOppholdPeriode',
+  },
   STILLINGSPROSENT: {
     kode: 'STILLINGSPROSENT',
     feltId: 'HistorikkEndretFelt.Stillingsprosent',
