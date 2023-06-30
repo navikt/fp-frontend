@@ -5,7 +5,7 @@ import { Heading, Link } from '@navikt/ds-react';
 import { ChevronLeftIcon } from '@navikt/aksel-icons';
 import { NavAnsatt } from '@navikt/fp-types';
 import { FlexColumn, FlexContainer, FlexRow, LoadingPanel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import messages from '../i18n/nb_NO.json';
 import JournalforingPanel from './components/JournalforingPanel';
 import JournalføringIndex from './components/JournalføringIndex';

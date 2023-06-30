@@ -7,22 +7,19 @@ import { NavAnsatt } from '@navikt/fp-types';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import OppgaveTabellRad from './OppgaveTabellRad';
 import styles from './oppgaveTabell.module.css';
-import ReserverOppgaveType from "../../typer/reserverOppgaveType";
+import ReserverOppgaveType from '../../typer/reserverOppgaveType';
 
 type OwnProps = Readonly<{
   oppgaver: OppgaveOversikt[];
   setValgtOppgave: (oppgave: OppgaveOversikt) => void;
-  navAnsatt: NavAnsatt
+  navAnsatt: NavAnsatt;
   reserverOppgave: (data: ReserverOppgaveType) => void;
 }>;
 
 /**
  * OppgaveTabell - Presenterer liste over oppgaver og tar inn callback for å sette valgt oppgave
  */
-const OppgaveTabell: FunctionComponent<OwnProps> = ({ oppgaver,
-                                                      setValgtOppgave,
-                                                      navAnsatt,
-                                                      reserverOppgave}) => {
+const OppgaveTabell: FunctionComponent<OwnProps> = ({ oppgaver, setValgtOppgave, navAnsatt, reserverOppgave }) => {
   if (oppgaver.length < 1) {
     return (
       <>
@@ -39,28 +36,28 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({ oppgaver,
       <Table>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>
+            <Table.HeaderCell className={styles.headerText}>
               <FormattedMessage id="Oppgavetabell.Opprettet" />
             </Table.HeaderCell>
-            <Table.HeaderCell>
+            <Table.HeaderCell className={styles.headerText}>
               <FormattedMessage id="Oppgavetabell.YtelseType" />
             </Table.HeaderCell>
-            <Table.HeaderCell>
+            <Table.HeaderCell className={styles.headerText}>
               <FormattedMessage id="Oppgavetabell.Beskrivelse" />
             </Table.HeaderCell>
-            <Table.HeaderCell>
+            <Table.HeaderCell className={styles.headerText}>
               <FormattedMessage id="Oppgavetabell.Saksbehandler" />
             </Table.HeaderCell>
-            <Table.HeaderCell>
+            <Table.HeaderCell className={styles.headerText}>
               <FormattedMessage id="Oppgavetabell.Bruker" />
             </Table.HeaderCell>
-            <Table.HeaderCell>
+            <Table.HeaderCell className={styles.headerText}>
               <FormattedMessage id="Oppgavetabell.Frist" />
             </Table.HeaderCell>
-            <Table.HeaderCell>
+            <Table.HeaderCell className={styles.headerText}>
               <FormattedMessage id="Oppgavetabell.Prioritet" />
             </Table.HeaderCell>
-            <Table.HeaderCell>
+            <Table.HeaderCell className={styles.headerText}>
               <FormattedMessage id="Oppgavetabell.Enhet" />
             </Table.HeaderCell>
             <Table.HeaderCell />
@@ -68,11 +65,13 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({ oppgaver,
         </Table.Header>
         <Table.Body>
           {oppgaver.map(oppgave => (
-            <OppgaveTabellRad oppgave={oppgave}
-                              setValgtOppgave={setValgtOppgave}
-                              key={oppgave.id}
-                              navAnsatt={navAnsatt}
-                              reserverOppgave={reserverOppgave}/>
+            <OppgaveTabellRad
+              oppgave={oppgave}
+              setValgtOppgave={setValgtOppgave}
+              key={oppgave.id}
+              navAnsatt={navAnsatt}
+              reserverOppgave={reserverOppgave}
+            />
           ))}
         </Table.Body>
       </Table>
