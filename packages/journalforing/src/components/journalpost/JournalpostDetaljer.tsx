@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Button, Heading, BodyLong, Alert, Tag } from '@navikt/ds-react';
+import { Alert, BodyLong, Button, Heading, Tag } from '@navikt/ds-react';
 
 import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form } from '@navikt/ft-form-hooks';
@@ -15,8 +15,8 @@ import JournalførSubmitValue, {
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import SakDetaljer from './innhold/SakDetaljer';
 import DokumentForm, {
-  transformValues as transformValuesFlereDokumenter,
   buildInitialValues as buildInitialValuesFlereDokumenter,
+  transformValues as transformValuesFlereDokumenter,
 } from './innhold/DokumentForm';
 import BrukerAvsenderPanel from './innhold/BrukerAvsenderPanel';
 import JournalføringFormValues from '../../typer/journalføringFormValues';
@@ -147,10 +147,10 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
           <FlexColumn>
             <BodyLong>
               <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
-              <Tag variant="info-moderate">
+              <Tag size="small" variant="info-moderate" style={{ marginLeft: '0.5rem' }}>
                 <FormattedMessage id="Oppgavetabell.Meg" />
               </Tag>
-              <Button variant="tertiary" size="small" onClick={reserverOppgaveAction}>
+              <Button variant="tertiary" size="small" onClick={reserverOppgaveAction} style={{ marginLeft: '0.5rem' }}>
                 <FormattedMessage id="Oppgavetabell.FjernMeg" />
               </Button>
             </BodyLong>
@@ -162,7 +162,9 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
           <FlexColumn>
             <BodyLong>
               <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
-              <Tag variant="neutral-moderate">{oppgave.reservertAv}</Tag>
+              <Tag size="small" variant="neutral-moderate" style={{ marginLeft: '0.5rem' }}>
+                {oppgave.reservertAv}
+              </Tag>
             </BodyLong>
           </FlexColumn>
         </FlexRow>

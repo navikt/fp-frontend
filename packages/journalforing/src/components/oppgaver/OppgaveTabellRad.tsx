@@ -45,12 +45,14 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
       <Table.DataCell>{oppgave.beskrivelse}</Table.DataCell>
       <Table.DataCell>
         {oppgave.reservertAv && navAnsatt.brukernavn === oppgave.reservertAv && (
-          <Tag variant="info-moderate">
+          <Tag size="small" variant="info-moderate">
             <FormattedMessage id="Oppgavetabell.Meg" />
           </Tag>
         )}
         {oppgave.reservertAv && navAnsatt.brukernavn !== oppgave.reservertAv && (
-          <Tag variant="neutral-moderate">{oppgave.reservertAv}</Tag>
+          <Tag size="small" variant="neutral-moderate">
+            {oppgave.reservertAv}
+          </Tag>
         )}
         {!oppgave.reservertAv && (
           <Button size="small" variant="tertiary" onClick={reserverOppgaveAction} type="button">

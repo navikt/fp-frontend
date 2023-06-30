@@ -117,6 +117,7 @@ const Template: StoryFn<{
     forhåndsvisBruker={action('button-click') as () => void}
     reserverOppgave={reserverOppgave}
     navAnsatt={navAnsatt}
+    oppdaterValgtOppgave={action('button-click') as () => void}
   />
 );
 
