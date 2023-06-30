@@ -53,7 +53,9 @@ const NotatPanel: FunctionComponent<OwnProps> = ({ saksnummer, notater, lagreNot
 
   useEffect(() => {
     const lastChildElement = bottomEl.current?.lastElementChild;
-    lastChildElement?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    if (lastChildElement?.scrollIntoView) {
+      lastChildElement.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
   }, [sorterteNotater, top]);
 
   /* const scrollReset = useCallback((e) => setTop(0), []);
@@ -84,7 +86,7 @@ const NotatPanel: FunctionComponent<OwnProps> = ({ saksnummer, notater, lagreNot
                 name={
                   saksbehandlerNavn === notat.opprettetAv
                     ? intl.formatMessage({ id: 'NotatPanel.Du' })
-                    : saksbehandlerNavn
+                    : notat.opprettetAv
                 }
                 timestamp={formatTimestamp(intl, notat.opprettetTidspunkt)}
                 position={saksbehandlerNavn === notat.opprettetAv ? 'right' : 'left'}
