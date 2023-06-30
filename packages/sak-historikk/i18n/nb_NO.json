@@ -120,6 +120,7 @@
   "HistorikkBegrunnelse.ReTilstøtendeYtelseInnvilget": "Tilstøtende ytelse innvilget",
   "HistorikkBegrunnelse.ReEndrinBeregningsgrunnlag": "Endring i beregningsgrunnlag",
   "HistorikkBegrunnelse.ReTilstøtendeYtelseOpphørt": "Tilstøtende ytelse opphørt",
+  "HistorikkEndretFelt.SvpOppholdPeriode": "Periode med opphold",
   "HistorikkEndretFelt.Adopsjonsvilkaret": "Adopsjonsvilkåret",
   "HistorikkEndretFelt.Arbeidsforhold": "Arbeidsforhold hos {value}",
   "HistorikkEndretFelt.Aktivitet": "Aktivitet {value}",
