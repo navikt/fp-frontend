@@ -4900,8 +4900,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-totrinnskontroll@workspace:packages/sak-totrinnskontroll"
   dependencies:
+<<<<<<< HEAD
     "@navikt/ds-css": 4.5.0
     "@navikt/ds-react": 4.5.0
+=======
+    "@navikt/aksel-icons": 4.4.0
+    "@navikt/ds-css": 4.4.0
+    "@navikt/ds-react": 4.4.0
+>>>>>>> 31edcc6d3 (div)
     "@navikt/fp-kodeverk": 1.0.0
     "@navikt/fp-konstanter": 1.0.0
     "@navikt/fp-storybook-utils": 1.0.0
