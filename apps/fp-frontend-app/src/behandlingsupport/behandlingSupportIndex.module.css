@@ -3,7 +3,7 @@
 }
 
 .tabContainer {
+  flex-grow: 1;
   padding-left: 40px;
   padding-right: 40px;
-  flex-grow: 1;
 }

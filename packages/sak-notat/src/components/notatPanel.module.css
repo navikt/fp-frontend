@@ -1,11 +1,11 @@
 .circle {
-  width: 25px;
-  height: 25px;
-  line-height: 25px;
+  background: var(--a-gray-300);
   border-radius: 50%;
   color: #000;
+  height: 25px;
+  line-height: 25px;
   text-align: center;
-  background: var(--a-gray-300);
+  width: 25px;
 }
 
 .container {
@@ -21,11 +21,13 @@
 
 .bubble {
   --ac-chat-bubble-bg: var(--a-gray-50);
+
   width: 600px;
 }
 
 .bubbleSelf {
   --ac-chat-bubble-bg: var(--a-blue-50);
+
   width: 600px;
 }
 

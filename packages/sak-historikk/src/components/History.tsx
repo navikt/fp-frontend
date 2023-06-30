@@ -1,10 +1,10 @@
-import React, { FunctionComponent, useMemo, useState, useRef, useEffect } from 'react';
+import React, { FunctionComponent, useMemo, useState } from 'react';
 import { Location } from 'history';
 import { useIntl } from 'react-intl';
 import moment from 'moment';
 import { Checkbox, Heading } from '@navikt/ds-react';
 
-import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
 import { KodeverkType, getKodeverknavnFn, historikkAktor as HistorikkAktor } from '@navikt/fp-kodeverk';

@@ -7,8 +7,8 @@
 }
 
 .leftColumn {
-  overflow: hidden;
   flex-grow: 1;
+  overflow: hidden;
 }
 
 .rightColumn {

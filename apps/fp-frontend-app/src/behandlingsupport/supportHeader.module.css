@@ -1,17 +1,17 @@
 .header {
   background-color: var(--a-gray-50);
-  padding: 20px;
   border-bottom: solid var(--a-gray-300) 2px;
+  padding: 20px;
 }
 
 .circle {
-  width: 25px;
-  height: 25px;
-  line-height: 25px;
+  background: var(--a-gray-200);
   border-radius: 50%;
   color: #000;
+  height: 25px;
+  line-height: 25px;
   text-align: center;
-  background: var(--a-gray-200);
+  width: 25px;
 }
 
 .container {
