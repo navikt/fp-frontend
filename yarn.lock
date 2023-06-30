@@ -3291,7 +3291,7 @@ __metadata:
     "@navikt/fp-types-avklar-aksjonspunkter": 1.0.0
     "@navikt/fp-utils-test": 1.0.0
     "@navikt/ft-fakta-beregning": 4.2.25
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.2.29
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.2.30
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": 2.1.22
     "@navikt/ft-form-hooks": 4.1.2
     "@navikt/ft-form-validators": 2.0.34
@@ -4855,7 +4855,7 @@ __metadata:
     "@navikt/fp-types-avklar-aksjonspunkter": 1.0.0
     "@navikt/fp-utils-test": 1.0.0
     "@navikt/ft-fakta-beregning": 4.2.25
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.2.29
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.2.30
     "@navikt/ft-form-hooks": 4.1.2
     "@navikt/ft-form-validators": 2.0.34
     "@navikt/ft-kodeverk": 2.1.14
@@ -4933,7 +4933,7 @@ __metadata:
     "@navikt/fp-kodeverk": 1.0.0
     "@navikt/fp-types": 1.0.0
     "@navikt/ft-fakta-beregning": 4.2.25
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.2.29
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 7.2.30
     "@navikt/ft-prosess-beregningsgrunnlag": 6.2.26
     typescript: 5.0.4
     vite: 4.3.9
@@ -5010,9 +5010,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:7.2.29":
-  version: 7.2.29
-  resolution: "@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:7.2.29::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-fordel-beregningsgrunnlag%2F7.2.29%2F88c25f81c2fe802f5d152e76aa3926d29ac1a6cc"
+"@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:7.2.30":
+  version: 7.2.30
+  resolution: "@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:7.2.30::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-fordel-beregningsgrunnlag%2F7.2.30%2F598c9316a49c594a832bf0e2a7919dc54a3edf99"
   dependencies:
     "@navikt/aksel-icons": 4.4.0
     "@navikt/ds-css": 4.4.0
@@ -5046,7 +5046,7 @@ __metadata:
     react: 18.2.0
     react-hook-form: 7.43.9
     react-intl: 6.3.2
-  checksum: c22d8a5a57b078bd0458d92172c1a8d7a5df2e4e67912a9a675a86f10d3d900c9ef506f27b8b71ab347d31330328bea95eff10501221680d536c6641a3cb72cf
+  checksum: 97b2989c833266fcf3c2e7a3dd849014f675e33c655b90cbd439d73b5fb2a9cfce3550ee51674f1f0b98dabb15c0dbc032918c484a70e7770b0e3c4f5648f9c4
   languageName: node
   linkType: hard
 
