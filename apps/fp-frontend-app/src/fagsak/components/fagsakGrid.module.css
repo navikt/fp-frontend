@@ -7,21 +7,15 @@
 }
 
 .leftColumn {
-  float: left;
+  flex-grow: 1;
   overflow: hidden;
-  width: 67%;
 }
 
 .rightColumn {
-  float: right;
-  width: 33%;
+  width: 45rem;
 }
 
-.rightColumn > div {
-  margin-bottom: 16px;
-}
-
-@media all and (max-width: 1350px) {
+@media all and (max-width: 1697px) {
   .leftColumn {
     width: 100%;
   }
@@ -32,7 +26,7 @@
   }
 }
 
-@media all and (min-width: 1350px) {
+@media all and (min-width: 1697px) {
   .rightColumn {
     border-left-color: var(--a-gray-300);
     border-left-style: solid;
@@ -40,7 +34,7 @@
   }
 }
 
-@media all and (max-width: 1350px) {
+@media all and (max-width: 1697px) {
   .rightColumn {
     border-top-color: var(--a-gray-300);
     border-top-style: solid;

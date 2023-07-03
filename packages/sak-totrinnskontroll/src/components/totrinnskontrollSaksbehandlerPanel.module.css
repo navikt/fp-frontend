@@ -1,9 +1,3 @@
-.image {
-  margin-right: 8px;
-  max-width: 16px;
-  padding-bottom: 4px;
-}
-
 .approvalItem {
   font-family: 'Source Sans Pro', Arial, sans-serif;
   margin-bottom: 16px;
@@ -25,4 +19,24 @@
 
 .lenke {
   color: #0067c5;
+}
+
+.checkmarkIcon {
+  color: var(--a-green-500);
+  height: 35px;
+  width: 35px;
+}
+
+.xmark {
+  color: var(--a-red-600);
+  height: 30px;
+  width: 30px;
+}
+
+.textMarginCheck {
+  margin-top: 7px;
+}
+
+.textMarginXmark {
+  margin-top: 4px;
 }

@@ -7,6 +7,15 @@
   "Dekorator.AaReg": "AA-reg",
   "Dekorator.AInntekt": "A-inntekt",
 
+  "DokumentIndex.Dokumenter": "Dokumenter",
+  "MeldingIndex.Meldinger": "Meldinger",
+  "MeldingIndex.IkkeTilgjengeligPaVent": "Det er ikke mulig å skrive melding til bruker når behandlingen er på vent",
+  "MeldingIndex.IkkeTilgjengeligAvsluttet": "Det er ikke mulig å skrive melding til bruker når fagsaken er avsluttet",
+  "MeldingIndex.IkkeTilgjengeligVeileder": "Det er ikke mulig å skrive melding til bruker for veiledere",
+  "NotatIndex.Notatblokk": "Notatblokk",
+  "TotrinnskontrollIndex.Godkjenning": "Godkjenning",
+  "TotrinnskontrollIndex.FraBeslutter": "Fra beslutter",
+
   "Behandlingspunkt.AnkeResultat": "Resultat",
   "Behandlingspunkt.AnkeMerknader": "Trygderetten",
   "Behandlingspunkt.Ankebehandling": "Ankebehandling",
@@ -42,6 +51,13 @@
   "IverksetterVedtakStatusModal.Avslatt": "Avslått",
   "IverksetterVedtakStatusModal.Innvilget": "Innvilget",
   "IverksetterVedtakStatusModal.GoToSearchPage": "Du kommer nå til forsiden",
+
+  "BehandlingSupportIndex.Godkjenning": "Godkjenning",
+  "BehandlingSupportIndex.FraBeslutter": "Fra beslutter",
+  "BehandlingSupportIndex.Historikk": "Historikk",
+  "BehandlingSupportIndex.Melding": "Send melding",
+  "BehandlingSupportIndex.Dokumenter": "Dokumenter",
+  "BehandlingSupportIndex.Notatblokk": "Notatblokk",
 
   "Los.IkkeTilgjengelig": "FPLOS er ikke tilgjengelig",
 

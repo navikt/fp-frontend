@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import MockAdapter from 'axios-mock-adapter';
 import { Modal } from '@navikt/ds-react';
-
+import { createIntl } from '@navikt/ft-utils';
 import { Fagsak, BehandlingAppKontekst, TotrinnskontrollAksjonspunkt, BehandlingÅrsak } from '@navikt/fp-types';
 import { RestApiMock } from '@navikt/fp-utils-test';
 import {
@@ -14,9 +14,14 @@ import {
   AksjonspunktCode,
 } from '@navikt/fp-kodeverk';
 
+import { RawIntlProvider } from 'react-intl';
 import FagsakData from '../../fagsak/FagsakData';
 import { requestFagsakApi, FagsakApiKeys } from '../../data/fagsakContextApi';
 import TotrinnskontrollIndex from './TotrinnskontrollIndex';
+
+import messages from '../../../i18n/nb_NO.json';
+
+const intl = createIntl(messages);
 
 describe('<TotrinnskontrollIndex>', () => {
   Modal.setAppElement('body');
@@ -107,15 +112,17 @@ describe('<TotrinnskontrollIndex>', () => {
     };
 
     render(
-      <RestApiMock data={data} requestApi={requestFagsakApi} setApiMock={setApiMock}>
-        <MemoryRouter>
-          <TotrinnskontrollIndex
-            fagsakData={new FagsakData(fagsak as Fagsak)}
-            valgtBehandlingUuid={valgtBehandling.uuid}
-            setBeslutterForData={() => undefined}
-          />
-        </MemoryRouter>
-      </RestApiMock>,
+      <RawIntlProvider value={intl}>
+        <RestApiMock data={data} requestApi={requestFagsakApi} setApiMock={setApiMock}>
+          <MemoryRouter>
+            <TotrinnskontrollIndex
+              fagsakData={new FagsakData(fagsak as Fagsak)}
+              valgtBehandlingUuid={valgtBehandling.uuid}
+              setBeslutterForData={() => undefined}
+            />
+          </MemoryRouter>
+        </RestApiMock>{' '}
+      </RawIntlProvider>,
     );
 
     expect(await screen.findByText('Kontroller endrede opplysninger og faglige vurderinger')).toBeInTheDocument();

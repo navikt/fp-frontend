@@ -40,6 +40,9 @@ describe('<MeldingIndex>', () => {
     sprakkode: 'nb',
     brevmaler: templates,
     ugunstAksjonspunkt: true,
+    behandlingTillatteOperasjoner: {
+      behandlingKanSendeMelding: true,
+    },
   } as BehandlingAppKontekst;
 
   const fagsak = {

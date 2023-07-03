@@ -1,15 +1,14 @@
 import React, { FunctionComponent, ReactNode, useCallback } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { NavLink } from 'react-router-dom';
 import { BodyShort } from '@navikt/ds-react';
 import { Location } from 'history';
-import { Image } from '@navikt/ft-ui-komponenter';
+import { XMarkOctagonIcon, CheckmarkIcon } from '@navikt/aksel-icons';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 
 import { KodeverkMedNavn, BehandlingAppKontekst, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
-import checkImg from '../images/check.svg';
-import avslattImg from '../images/avslaatt.svg';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import getAksjonspunkttekst from './aksjonspunktTekster/aksjonspunktTekstUtleder';
 
 import styles from './totrinnskontrollSaksbehandlerPanel.module.css';
@@ -37,6 +36,7 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
   faktaOmBeregningTilfeller,
   lagLenke,
 }) => {
+  const intl = useIntl();
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
 
   return (
@@ -85,26 +85,36 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
                         <BodyShort size="small">{formattedMessage}</BodyShort>
                       </div>
                     ))}
+                    <VerticalSpacer eightPx />
                     <div className={styles.approvalItem}>
                       {aksjonspunkt.totrinnskontrollGodkjent ? (
-                        <div>
-                          <span>
-                            <Image src={checkImg} className={styles.image} />
-                          </span>
-                          <span>
-                            <FormattedMessage id="ToTrinnsForm.Godkjent" />
-                          </span>
-                        </div>
+                        <FlexContainer>
+                          <FlexRow>
+                            <FlexColumn>
+                              <CheckmarkIcon
+                                title={intl.formatMessage({ id: 'ToTrinnsForm.Godkjent' })}
+                                className={styles.checkmarkIcon}
+                              />
+                            </FlexColumn>
+                            <FlexColumn className={styles.textMarginCheck}>
+                              <FormattedMessage id="ToTrinnsForm.Godkjent" />
+                            </FlexColumn>
+                          </FlexRow>
+                        </FlexContainer>
                       ) : (
                         <div className={styles.approvalItem}>
                           {aksjonspunkt.vurderPaNyttArsaker &&
                             aksjonspunkt.vurderPaNyttArsaker.map(item => (
-                              <div key={`${item}${aksjonspunkt.aksjonspunktKode}`}>
-                                <span>
-                                  <Image src={avslattImg} className={styles.image} />
-                                </span>
-                                <span>{vurderArsaker.find(arsak => item === arsak.kode)?.navn}</span>
-                              </div>
+                              <FlexContainer key={`${item}${aksjonspunkt.aksjonspunktKode}`}>
+                                <FlexRow>
+                                  <FlexColumn>
+                                    <XMarkOctagonIcon className={styles.xmark} />
+                                  </FlexColumn>
+                                  <FlexColumn className={styles.textMarginXmark}>
+                                    {vurderArsaker.find(arsak => item === arsak.kode)?.navn}
+                                  </FlexColumn>
+                                </FlexRow>
+                              </FlexContainer>
                             ))}
                         </div>
                       )}

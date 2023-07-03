@@ -29,6 +29,12 @@ export type AnnenPartBehandling = {
   relasjonsRolleType: string;
 };
 
+export type Saksnotat = {
+  opprettetTidspunkt: string;
+  opprettetAv: string;
+  notat: string;
+};
+
 type Fagsak = Readonly<{
   saksnummer: string;
   fagsakYtelseType: string;
@@ -47,6 +53,7 @@ type Fagsak = Readonly<{
   behandlinger: BehandlingAppKontekst[];
   brukerManglerAdresse: boolean;
   historikkinnslag: Historikkinnslag[];
+  notater: Saksnotat[];
 }>;
 
 export default Fagsak;

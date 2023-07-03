@@ -6,9 +6,9 @@ import { render, screen } from '@testing-library/react';
 import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
-import { BehandlingAppKontekst, Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
+import { BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 
-import BehandlingSupportIndex, { hentSynligePaneler, hentValgbarePaneler } from './BehandlingSupportIndex';
+import BehandlingSupportIndex from './BehandlingSupportIndex';
 import { requestFagsakApi, FagsakApiKeys } from '../data/fagsakContextApi';
 import FagsakData from '../fagsak/FagsakData';
 import messages from '../../i18n/nb_NO.json';
@@ -55,92 +55,18 @@ describe('<BehandlingSupportIndex>', () => {
               behandlingUuid="1"
               behandlingVersjon={2}
               hentOgSettBehandling={vi.fn()}
+              oppdaterFagsak={vi.fn()}
             />
           </MemoryRouter>
         </RestApiMock>
       </RawIntlProvider>,
     );
-    expect(await screen.findByText('Filtrer på behandling')).toBeInTheDocument();
-  });
 
-  describe('hentSynligePaneler', () => {
-    it('skal kunne aksessere alle support-paneler', () => {
-      const behandlingRettigheter = {
-        behandlingFraBeslutter: true,
-        behandlingKanSendeMelding: true,
-        behandlingTilGodkjenning: true,
-        behandlingKanBytteEnhet: true,
-        behandlingKanHenlegges: true,
-        behandlingKanGjenopptas: false,
-        behandlingKanOpnesForEndringer: true,
-        behandlingKanSettesPaVent: true,
-        vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
-      };
+    expect(await screen.findAllByText('Historikk')).toHaveLength(2);
+    expect(screen.getByText('Filtrer på behandling')).toBeInTheDocument();
 
-      const accessiblePanels = hentSynligePaneler(behandlingRettigheter);
-
-      expect(accessiblePanels).toEqual(['TIL_BESLUTTER', 'FRA_BESLUTTER', 'HISTORIKK', 'MELDINGER', 'DOKUMENTER']);
-    });
-
-    it('skal kunne aksessere kun supportpanelene som alltid vises; historikk og dokumenter', () => {
-      const behandlingRettigheter = {
-        behandlingFraBeslutter: false,
-        behandlingKanSendeMelding: false,
-        behandlingTilGodkjenning: false,
-        behandlingKanBytteEnhet: true,
-        behandlingKanHenlegges: true,
-        behandlingKanGjenopptas: false,
-        behandlingKanOpnesForEndringer: false,
-        behandlingKanSettesPaVent: true,
-        vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
-      };
-
-      const accessiblePanels = hentSynligePaneler(behandlingRettigheter);
-
-      expect(accessiblePanels).toEqual(['HISTORIKK', 'MELDINGER', 'DOKUMENTER']);
-    });
-  });
-
-  describe('hentValgbarePaneler', () => {
-    it('skal vise alle support-panelene som valgbare', () => {
-      const accessibleSupportPanels = ['TIL_BESLUTTER', 'FRA_BESLUTTER', 'HISTORIKK', 'MELDINGER', 'DOKUMENTER'];
-      const sendMessageIsRelevant = true;
-
-      const behandlingRettigheter = {
-        behandlingFraBeslutter: true,
-        behandlingKanSendeMelding: true,
-        behandlingTilGodkjenning: false,
-        behandlingKanBytteEnhet: true,
-        behandlingKanHenlegges: true,
-        behandlingKanGjenopptas: false,
-        behandlingKanOpnesForEndringer: true,
-        behandlingKanSettesPaVent: true,
-        vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
-      };
-
-      const enabledPanels = hentValgbarePaneler(accessibleSupportPanels, sendMessageIsRelevant, behandlingRettigheter);
-
-      expect(enabledPanels).toEqual(['TIL_BESLUTTER', 'FRA_BESLUTTER', 'HISTORIKK', 'MELDINGER', 'DOKUMENTER']);
-    });
-
-    it('skal ikke vise meldingspanel som valgbart', () => {
-      const accessibleSupportPanels = ['TIL_BESLUTTER', 'FRA_BESLUTTER', 'HISTORIKK', 'MELDINGER', 'DOKUMENTER'];
-      const sendMessageIsRelevant = false;
-      const behandlingRettigheter = {
-        behandlingFraBeslutter: false,
-        behandlingKanSendeMelding: false,
-        behandlingTilGodkjenning: false,
-        behandlingKanBytteEnhet: true,
-        behandlingKanHenlegges: true,
-        behandlingKanGjenopptas: false,
-        behandlingKanOpnesForEndringer: true,
-        behandlingKanSettesPaVent: true,
-        vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
-      };
-
-      const enabledPanels = hentValgbarePaneler(accessibleSupportPanels, sendMessageIsRelevant, behandlingRettigheter);
-
-      expect(enabledPanels).toEqual(['TIL_BESLUTTER', 'FRA_BESLUTTER', 'HISTORIKK', 'DOKUMENTER']);
-    });
+    expect(screen.getByText('Send melding')).toBeInTheDocument();
+    expect(screen.getByText('Dokumenter')).toBeInTheDocument();
+    expect(screen.getByText('Notatblokk')).toBeInTheDocument();
   });
 });

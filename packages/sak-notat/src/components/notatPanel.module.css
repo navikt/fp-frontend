@@ -1,0 +1,56 @@
+.circle {
+  background: var(--a-gray-300);
+  border-radius: 50%;
+  color: #000;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  width: 25px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.thechats {
+  min-height: 250px;
+  overflow-y: auto;
+  padding-left: 25px;
+}
+
+.bubble {
+  --ac-chat-bubble-bg: var(--a-gray-50);
+
+  width: 600px;
+}
+
+.bubbleSelf {
+  --ac-chat-bubble-bg: var(--a-blue-50);
+
+  width: 600px;
+}
+
+.form {
+  background-color: var(--a-gray-50);
+  border-top: 2px solid var(--a-grayalpha-300);
+  margin-top: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.marginTop {
+  margin-top: 16px;
+}
+
+.width {
+  width: 600px;
+}
+
+.ingen {
+  color: var(--a-gray-600);
+}
+
+.textAlign {
+  margin: auto;
+}

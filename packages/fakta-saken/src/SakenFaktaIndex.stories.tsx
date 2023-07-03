@@ -53,8 +53,8 @@ const Template: StoryFn<{
   />
 );
 
-export const EndringAvUtland = Template.bind({});
-EndringAvUtland.args = {
+export const StartdatoForForeldrepenger = Template.bind({});
+StartdatoForForeldrepenger.args = {
   aksjonspunkter: [],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };

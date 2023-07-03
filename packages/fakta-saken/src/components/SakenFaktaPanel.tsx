@@ -65,8 +65,8 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
       )}
       <FlexContainer>
         <FlexRow>
-          <FlexColumn className={styles.col}>
-            {automatiskMarkeringAvUtenlandssakAp && (
+          {automatiskMarkeringAvUtenlandssakAp && (
+            <FlexColumn className={styles.col}>
               <InnhentDokOpptjeningUtlandPanel
                 dokStatus={dokStatus}
                 readOnly={readOnly}
@@ -78,8 +78,8 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
                 formData={formData}
                 setFormData={setFormData}
               />
-            )}
-          </FlexColumn>
+            </FlexColumn>
+          )}
           {!erSvangerskapspenger && !!soknad && (
             <FlexColumn className={styles.col}>
               <StartdatoForForeldrepengerperiodenForm
