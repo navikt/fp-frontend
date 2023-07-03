@@ -34,6 +34,7 @@ const NotatIndex: FunctionComponent<OwnProps> = ({ fagsak, oppdaterFagsak }) => 
         notater={fagsak.notater}
         lagreNotat={lagre}
         saksbehandlerNavn={innloggetBruker.brukernavn}
+        kanSaksbehandle={innloggetBruker.kanSaksbehandle}
       />
     </SupportHeaderAndContent>
   );
