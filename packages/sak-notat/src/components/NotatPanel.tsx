@@ -72,7 +72,7 @@ const NotatPanel: FunctionComponent<OwnProps> = ({ saksnummer, notater, lagreNot
     }
   }, [sorterteNotater]);
 
-  // Denne er kun her for å få repaint på komponent ved scrolling
+  // Denne er kun her for å få komponent-repaint ved scrolling
   const scrollReset = useCallback(() => setTop(0), []);
   useEffect(() => {
     window.addEventListener('scroll', scrollReset);
