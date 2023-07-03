@@ -59,7 +59,7 @@
     "stylelint": "15.9.0",
     "typescript": "5.0.4",
     "vite": "4.3.9",
-    "vitest": "0.32.3"
+    "vitest": "0.32.4"
   },
   "exports": {
     ".": {
