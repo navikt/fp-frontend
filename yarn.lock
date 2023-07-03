@@ -8365,9 +8365,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/coverage-c8@npm:0.32.3":
-  version: 0.32.3
-  resolution: "@vitest/coverage-c8@npm:0.32.3"
+"@vitest/coverage-c8@npm:0.32.4":
+  version: 0.32.4
+  resolution: "@vitest/coverage-c8@npm:0.32.4"
   dependencies:
     "@ampproject/remapping": ^2.2.1
     c8: ^7.14.0
@@ -8376,7 +8376,7 @@ __metadata:
     std-env: ^3.3.3
   peerDependencies:
     vitest: ">=0.30.0 <1"
-  checksum: e338753eea08106b63c1be111f27882c5e44a474aa3cc269391fdcf1a1e57c04774f7b971818fde45dc46d3da1154ec2f5b9370d4ef2c32fe5f6d66ee374cc4e
+  checksum: 5e394cbbeabfbe0ff47afce43434fb0b26706c6d9c5ad51bafd02309e39598b8405a02fed3c122c54b98e0b349ecdf25b3f6a5011f0804135aba6b2bb333dd6b
   languageName: node
   linkType: hard
 
@@ -11995,7 +11995,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": 5.60.1
     "@typescript-eslint/parser": 5.60.1
     "@vitejs/plugin-react": 4.0.1
-    "@vitest/coverage-c8": 0.32.3
+    "@vitest/coverage-c8": 0.32.4
     axios-mock-adapter: 1.21.5
     cross-env: 7.0.3
     dotenv: 16.3.1
