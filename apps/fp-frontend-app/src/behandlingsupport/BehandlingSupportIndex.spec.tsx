@@ -67,6 +67,6 @@ describe('<BehandlingSupportIndex>', () => {
 
     expect(screen.getByText('Send melding')).toBeInTheDocument();
     expect(screen.getByText('Dokumenter')).toBeInTheDocument();
-    expect(screen.getByText('Notater')).toBeInTheDocument();
+    expect(screen.getByText('Notatblokk')).toBeInTheDocument();
   });
 });
