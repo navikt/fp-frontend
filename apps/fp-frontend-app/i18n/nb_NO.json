@@ -12,7 +12,7 @@
   "MeldingIndex.IkkeTilgjengeligPaVent": "Det er ikke mulig å skrive melding til bruker når behandlingen er på vent",
   "MeldingIndex.IkkeTilgjengeligAvsluttet": "Det er ikke mulig å skrive melding til bruker når fagsaken er avsluttet",
   "MeldingIndex.IkkeTilgjengeligVeileder": "Det er ikke mulig å skrive melding til bruker for veiledere",
-  "NotatIndex.Notater": "Notater",
+  "NotatIndex.Notatblokk": "Notatblokk",
   "TotrinnskontrollIndex.Godkjenning": "Godkjenning",
   "TotrinnskontrollIndex.FraBeslutter": "Fra beslutter",
 
@@ -57,7 +57,7 @@
   "BehandlingSupportIndex.Historikk": "Historikk",
   "BehandlingSupportIndex.Melding": "Send melding",
   "BehandlingSupportIndex.Dokumenter": "Dokumenter",
-  "BehandlingSupportIndex.Notater": "Notater",
+  "BehandlingSupportIndex.Notatblokk": "Notatblokk",
 
   "Los.IkkeTilgjengelig": "FPLOS er ikke tilgjengelig",
 

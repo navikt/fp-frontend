@@ -25,7 +25,7 @@ const NotatIndex: FunctionComponent<OwnProps> = ({ fagsak, oppdaterFagsak }) => 
 
   return (
     <SupportHeaderAndContent
-      tekst={intl.formatMessage({ id: 'NotatIndex.Notater' })}
+      tekst={intl.formatMessage({ id: 'NotatIndex.Notatblokk' })}
       antall={fagsak.notater.length}
       brukPadding={false}
     >

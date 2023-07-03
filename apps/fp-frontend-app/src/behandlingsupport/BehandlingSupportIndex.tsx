@@ -126,7 +126,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
         <Tabs.Tab
           className={styles.tab}
           value={SupportTabs.NOTATER}
-          icon={<PencilWritingIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Notater' })} />}
+          icon={<PencilWritingIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Notatblokk' })} />}
         />
       </Tabs.List>
       <Tabs.Panel value={SupportTabs.TIL_BESLUTTER}>
