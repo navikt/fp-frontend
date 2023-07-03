@@ -14,7 +14,8 @@ export default {
 const Template: StoryFn<{
   saksnotater: Saksnotat[];
   lagreNotat: (params: { saksnummer: string; notat: string }) => Promise<any>;
-}> = ({ saksnotater, lagreNotat }) => {
+  kanSaksbehandle: boolean;
+}> = ({ saksnotater, lagreNotat, kanSaksbehandle }) => {
   const [notater, setNotater] = useState(saksnotater);
 
   const lagre = (params: { saksnummer: string; notat: string }) => {
@@ -35,6 +36,7 @@ const Template: StoryFn<{
         saksnummer="12343432"
         notater={notater}
         lagreNotat={lagre}
+        kanSaksbehandle={kanSaksbehandle}
       />
     </div>
   );
@@ -60,4 +62,28 @@ Default.args = {
     },
   ],
   lagreNotat: action('button-click') as (data: any) => Promise<any>,
+  kanSaksbehandle: true,
+};
+
+export const ErVeileder = Template.bind({});
+ErVeileder.args = {
+  saksnotater: [
+    {
+      notat: 'Dette er et notat skrevet av Espen som nå er innlogget',
+      opprettetAv: 'Saksbehandler Espen',
+      opprettetTidspunkt: '2022-08-02T00:54:25.455',
+    },
+    {
+      notat: 'Dette er et tredje notat',
+      opprettetAv: 'Saksbehandler Eva',
+      opprettetTidspunkt: '2022-09-02T11:12:25.455',
+    },
+    {
+      notat: 'Dette er et annet notat',
+      opprettetAv: 'Saksbehandler Eva',
+      opprettetTidspunkt: '2022-09-02T00:23:25.455',
+    },
+  ],
+  lagreNotat: action('button-click') as (data: any) => Promise<any>,
+  kanSaksbehandle: false,
 };
