@@ -14,15 +14,23 @@ interface OwnProps {
   notater: Saksnotat[];
   lagreNotat: (params: { saksnummer: string; notat: string }) => Promise<any>;
   saksbehandlerNavn: string;
+  kanSaksbehandle: boolean;
 }
 
-const NotatSakIndex: FunctionComponent<OwnProps> = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn }) => (
+const NotatSakIndex: FunctionComponent<OwnProps> = ({
+  saksnummer,
+  notater,
+  lagreNotat,
+  saksbehandlerNavn,
+  kanSaksbehandle,
+}) => (
   <RawIntlProvider value={intl}>
     <NotatPanel
       saksnummer={saksnummer}
       notater={notater}
       lagreNotat={lagreNotat}
       saksbehandlerNavn={saksbehandlerNavn}
+      kanSaksbehandle={kanSaksbehandle}
     />
   </RawIntlProvider>
 );

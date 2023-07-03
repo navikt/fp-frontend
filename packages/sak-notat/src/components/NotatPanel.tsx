@@ -28,9 +28,16 @@ interface OwnProps {
   notater: Saksnotat[];
   lagreNotat: (params: { saksnummer: string; notat: string }) => Promise<any>;
   saksbehandlerNavn: string;
+  kanSaksbehandle: boolean;
 }
 
-const NotatPanel: FunctionComponent<OwnProps> = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn }) => {
+const NotatPanel: FunctionComponent<OwnProps> = ({
+  saksnummer,
+  notater,
+  lagreNotat,
+  saksbehandlerNavn,
+  kanSaksbehandle,
+}) => {
   const intl = useIntl();
   const formMethods = useForm<FormValues>();
 
@@ -125,13 +132,19 @@ const NotatPanel: FunctionComponent<OwnProps> = ({ saksnummer, notater, lagreNot
       <div className={styles.form}>
         <Form formMethods={formMethods} onSubmit={lagre}>
           <VerticalSpacer sixteenPx />
-          <TextAreaField name="beskrivelse" label="" maxLength={1000} validate={[required, maxLength1000]} />
+          <TextAreaField
+            name="beskrivelse"
+            label=""
+            maxLength={1000}
+            validate={[required, maxLength1000]}
+            readOnly={!kanSaksbehandle}
+          />
           <VerticalSpacer sixteenPx />
           <FlexContainer>
             <FlexRow spaceBetween>
               <FlexColumn>{intl.formatMessage({ id: 'NotatPanel.KunForSaksbehandler' })}</FlexColumn>
               <FlexColumn>
-                <Button size="small">
+                <Button size="small" disabled={!kanSaksbehandle}>
                   <FormattedMessage id="NotatPanel.Send" />
                 </Button>
               </FlexColumn>
