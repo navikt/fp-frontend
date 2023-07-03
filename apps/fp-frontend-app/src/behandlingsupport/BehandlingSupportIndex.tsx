@@ -7,9 +7,9 @@ import {
   ClockDashedIcon,
   PersonCheckmarkFillIcon,
   ArrowUndoIcon,
-  PencilWritingIcon,
   FolderIcon,
   PaperplaneIcon,
+  DocPencilIcon,
 } from '@navikt/aksel-icons';
 import { getSupportPanelLocationCreator } from '../app/paths';
 import HistorikkIndex from './historikk/HistorikkIndex';
@@ -126,7 +126,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
         <Tabs.Tab
           className={styles.tab}
           value={SupportTabs.NOTATER}
-          icon={<PencilWritingIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Notatblokk' })} />}
+          icon={<DocPencilIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Notatblokk' })} />}
         />
       </Tabs.List>
       <Tabs.Panel value={SupportTabs.TIL_BESLUTTER}>
