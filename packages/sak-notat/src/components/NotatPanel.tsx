@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
 import { BodyShort, Button, Chat } from '@navikt/ds-react';
 
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer, usePrevious } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import { Saksnotat } from '@navikt/fp-types';
 import { maxLength, required } from '@navikt/ft-form-validators';
@@ -39,9 +39,6 @@ const NotatPanel: FunctionComponent<OwnProps> = ({ saksnummer, notater, lagreNot
     [notater],
   );
 
-  const bottomEl = useRef<HTMLDivElement | null>(null);
-  const [top, setTop] = useState<number>();
-
   const lagre = useCallback(
     (values: FormValues) => {
       lagreNotat({ saksnummer, notat: values.beskrivelse });
@@ -51,22 +48,32 @@ const NotatPanel: FunctionComponent<OwnProps> = ({ saksnummer, notater, lagreNot
     [notater],
   );
 
-  const isInitialMount = useRef(true);
+  const bottomEl = useRef<HTMLDivElement | null>(null);
+  const [top, setTop] = useState<number>();
+
+  // Denne for å scrolle innerste scrollbar ved bytte til notat-fane
+  const isInitialMount = useRef(0);
   useEffect(() => {
     const lastChildElement = bottomEl.current?.lastElementChild;
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-      if (lastChildElement?.scrollIntoView) {
-        // FIXME Denne scroller ytre scrollbar (Må i tillegg putte top i dep)
-        lastChildElement.scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
-      }
+    isInitialMount.current += 1;
+    if (isInitialMount.current === 2 && lastChildElement?.scrollIntoView) {
+      lastChildElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [top]);
+
+  // Denne for å scrolle innerste scrollbar når en legger til notat
+  const isInitialMount2 = useRef(true);
+  useEffect(() => {
+    const lastChildElement = bottomEl.current?.lastElementChild;
+    if (isInitialMount2.current) {
+      isInitialMount2.current = false;
     } else if (lastChildElement?.scrollIntoView) {
       lastChildElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   }, [sorterteNotater]);
 
+  // Denne er kun her for å få repaint på komponent ved scrolling
   const scrollReset = useCallback(() => setTop(0), []);
-
   useEffect(() => {
     window.addEventListener('scroll', scrollReset);
     return () => {
