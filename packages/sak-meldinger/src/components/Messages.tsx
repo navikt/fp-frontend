@@ -9,7 +9,7 @@ import { KodeverkMedNavn } from '@navikt/fp-types';
 import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { SelectField, TextAreaField, Form } from '@navikt/ft-form-hooks';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FlexContainer, FlexRow, FlexColumn, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 
 import styles from './messages.module.css';
@@ -196,26 +196,43 @@ const Messages: FunctionComponent<OwnProps> = ({
           />
         </>
       )}
-      <div className={styles.buttonRow}>{brukerManglerAdresse && <UkjentAdresseMeldingIndex />}</div>
-      <div className={styles.buttonRow}>
-        <Button
-          size="small"
-          variant="primary"
-          loading={formState.isSubmitting}
-          disabled={formState.isSubmitting || kanVeilede}
-          onClick={ariaCheck}
-        >
-          {intl.formatMessage({ id: 'Messages.Submit' })}
-        </Button>
-        <a
-          href=""
-          onClick={previewMessage}
-          onKeyDown={e => (e.key === 'Enter' ? previewMessage(e) : null)}
-          className={classNames(styles.previewLink, 'lenke lenke--frittstaende')}
-        >
-          {intl.formatMessage({ id: 'Messages.Preview' })}
-        </a>
-      </div>
+
+      <FlexContainer>
+        {brukerManglerAdresse && (
+          <>
+            <VerticalSpacer sixteenPx />
+            <FlexRow>
+              <FlexColumn>
+                <UkjentAdresseMeldingIndex />
+              </FlexColumn>
+            </FlexRow>
+          </>
+        )}
+        <VerticalSpacer sixteenPx />
+        <FlexRow spaceBetween>
+          <FlexColumn>
+            <a
+              href=""
+              onClick={previewMessage}
+              onKeyDown={e => (e.key === 'Enter' ? previewMessage(e) : null)}
+              className={classNames(styles.previewLink, 'lenke lenke--frittstaende')}
+            >
+              {intl.formatMessage({ id: 'Messages.Preview' })}
+            </a>
+          </FlexColumn>
+          <FlexColumn>
+            <Button
+              size="small"
+              variant="primary"
+              loading={formState.isSubmitting}
+              disabled={formState.isSubmitting || kanVeilede}
+              onClick={ariaCheck}
+            >
+              {intl.formatMessage({ id: 'Messages.Submit' })}
+            </Button>
+          </FlexColumn>
+        </FlexRow>
+      </FlexContainer>
     </Form>
   );
 };

@@ -8,7 +8,40 @@
 }
 .margin {
   margin-bottom: 15px;
+  padding-right: 15px;
 }
-.width {
-  width: 300px;
+.marginForste {
+  margin-bottom: 15px;
+  margin-top: 15px;
+  padding-right: 15px;
+}
+.bubbleSaksbehandler {
+  --ac-chat-bubble-bg: var(--a-purple-100);
+
+  max-width: 500px;
+  min-width: 300px;
+}
+.bubbleBeslutter {
+  --ac-chat-bubble-bg: var(--a-green-100);
+
+  max-width: 500px;
+  min-width: 300px;
+}
+.bubbleVedtakslosningen {
+  --ac-chat-bubble-bg: var(--a-gray-100);
+
+  max-width: 500px;
+  min-width: 300px;
+}
+.bubbleSoker {
+  --ac-chat-bubble-bg: var(--a-orange-100);
+
+  max-width: 500px;
+  min-width: 300px;
+}
+.bubbleArbeidsgiver {
+  --ac-chat-bubble-bg: var(--a-lightblue-100);
+
+  max-width: 500px;
+  min-width: 300px;
 }

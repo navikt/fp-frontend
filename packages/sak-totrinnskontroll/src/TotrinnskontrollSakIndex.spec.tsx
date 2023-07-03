@@ -131,6 +131,6 @@ describe('<TotrinnskontrollSakIndex>', () => {
     expect(screen.getByText('Denne er ikke godkjent fordi...')).toBeInTheDocument();
 
     expect(screen.getByText('Klageresultat Vedtaksinstans')).toBeInTheDocument();
-    expect(screen.getByText('Godkjent')).toBeInTheDocument();
+    expect(screen.getAllByText('Godkjent')).toHaveLength(2);
   });
 });

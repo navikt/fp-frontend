@@ -2,15 +2,27 @@ import React, { FunctionComponent, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { KodeverkMedNavn } from '@navikt/fp-types';
-import { behandlingType as BehandlingType, KodeverkType, venteArsakType, dokumentMalType } from '@navikt/fp-kodeverk';
+import {
+  behandlingType as BehandlingType,
+  KodeverkType,
+  venteArsakType,
+  dokumentMalType,
+  fagsakStatus,
+} from '@navikt/fp-kodeverk';
 import { MeldingerSakIndex, MessagesModalSakIndex, FormValues } from '@navikt/fp-sak-meldinger';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { Alert } from '@navikt/ds-react';
 import { useFpSakKodeverk } from '../../data/useKodeverk';
 import useVisForhandsvisningAvMelding, { ForhandsvisFunksjon } from '../../data/useVisForhandsvisningAvMelding';
 import { FagsakApiKeys, SubmitMessageParams, restFagsakApiHooks } from '../../data/fagsakContextApi';
 import FagsakData from '../../fagsak/FagsakData';
 import SettPaVentReadOnlyModal from './SettPaVentReadOnlyModal';
+import SupportHeaderAndContent from '../SupportHeader';
+
+import styles from './MeldingIndex.module.css';
 
 const getSubmitCallback =
   (
@@ -103,6 +115,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   setMeldingForData,
   hentOgSettBehandling,
 }) => {
+  const intl = useIntl();
   const [showSettPaVentModal, setShowSettPaVentModal] = useState(false);
   const [showMessagesModal, setShowMessageModal] = useState(false);
 
@@ -151,26 +164,53 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   }, []);
 
   const submitFinished = submitState === RestApiState.SUCCESS;
+
+  const behandlingTillatteOperasjoner = valgtBehandling?.behandlingTillatteOperasjoner;
+  const kanSendeMelding =
+    !initFetchData.innloggetBruker.kanVeilede &&
+    fagsak.status !== fagsakStatus.AVSLUTTET &&
+    behandlingTillatteOperasjoner?.behandlingKanSendeMelding;
+
   return (
     <>
       {showMessagesModal && (
         <MessagesModalSakIndex showModal={submitFinished && showMessagesModal} closeEvent={afterSubmit} />
       )}
 
-      <MeldingerSakIndex
-        submitCallback={submitCallback}
-        sprakKode={valgtBehandling?.sprakkode}
-        previewCallback={previewCallback}
-        revurderingVarslingArsak={revurderingVarslingArsak}
-        templates={valgtBehandling?.brevmaler}
-        isKontrollerRevurderingApOpen={valgtBehandling?.ugunstAksjonspunkt}
-        fagsakYtelseType={fagsak.fagsakYtelseType}
-        kanVeilede={initFetchData.innloggetBruker.kanVeilede}
-        meldingFormData={meldingFormData}
-        setMeldingForData={setMeldingForData}
-        brukerManglerAdresse={fagsak.brukerManglerAdresse}
-      />
-
+      <SupportHeaderAndContent tekst={intl.formatMessage({ id: 'MeldingIndex.Meldinger' })}>
+        <VerticalSpacer sixteenPx />
+        {!kanSendeMelding && (
+          <div className={styles.textAlign}>
+            <VerticalSpacer fourtyPx />
+            <Alert variant="info">
+              {!behandlingTillatteOperasjoner?.behandlingKanSendeMelding && (
+                <FormattedMessage id="MeldingIndex.IkkeTilgjengeligPaVent" />
+              )}
+              {fagsak.status === fagsakStatus.AVSLUTTET && (
+                <FormattedMessage id="MeldingIndex.IkkeTilgjengeligAvsluttet" />
+              )}
+              {initFetchData.innloggetBruker.kanVeilede && (
+                <FormattedMessage id="MeldingIndex.IkkeTilgjengeligVeileder" />
+              )}
+            </Alert>
+          </div>
+        )}
+        {kanSendeMelding && (
+          <MeldingerSakIndex
+            submitCallback={submitCallback}
+            sprakKode={valgtBehandling?.sprakkode}
+            previewCallback={previewCallback}
+            revurderingVarslingArsak={revurderingVarslingArsak}
+            templates={valgtBehandling?.brevmaler}
+            isKontrollerRevurderingApOpen={valgtBehandling?.ugunstAksjonspunkt}
+            fagsakYtelseType={fagsak.fagsakYtelseType}
+            kanVeilede={initFetchData.innloggetBruker.kanVeilede}
+            meldingFormData={meldingFormData}
+            setMeldingForData={setMeldingForData}
+            brukerManglerAdresse={fagsak.brukerManglerAdresse}
+          />
+        )}
+      </SupportHeaderAndContent>
       {submitFinished && showSettPaVentModal && (
         <SettPaVentReadOnlyModal
           lukkCallback={handleSubmitFromModal}

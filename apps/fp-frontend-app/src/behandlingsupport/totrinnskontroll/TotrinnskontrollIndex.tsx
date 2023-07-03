@@ -4,12 +4,16 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { TotrinnskontrollSakIndex } from '@navikt/fp-sak-totrinnskontroll';
 import { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { useIntl } from 'react-intl';
+import { behandlingStatus } from '@navikt/fp-kodeverk';
 import FagsakData from '../../fagsak/FagsakData';
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
 import { createLocationForSkjermlenke } from '../../app/paths';
 import { useKodeverk } from '../../data/useKodeverk';
 import BeslutterModalIndex from './BeslutterModalIndex';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
+import SupportHeaderAndContent from '../SupportHeader';
 
 type Values = {
   fatterVedtakAksjonspunktDto: {
@@ -57,6 +61,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
   beslutterFormData,
   setBeslutterForData,
 }) => {
+  const intl = useIntl();
   const [visBeslutterModal, setVisBeslutterModal] = useState(false);
   const [erAlleAksjonspunktGodkjent, setAlleAksjonspunktTilGodkjent] = useState(false);
 
@@ -102,20 +107,29 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
     return null;
   }
 
+  const erStatusFatterVedtak = valgtBehandling.status === behandlingStatus.FATTER_VEDTAK;
+
   return (
     <>
-      <TotrinnskontrollSakIndex
-        behandling={valgtBehandling}
-        location={location}
-        readOnly={brukernavn === valgtBehandling.ansvarligSaksbehandler || kanVeilede}
-        onSubmit={onSubmit}
-        forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
-        fagsakYtelseType={fagsak.fagsakYtelseType}
-        alleKodeverk={alleKodeverk}
-        createLocationForSkjermlenke={createLocationForSkjermlenke}
-        beslutterFormData={beslutterFormData}
-        setBeslutterForData={setBeslutterForData}
-      />
+      <SupportHeaderAndContent
+        tekst={intl.formatMessage({
+          id: erStatusFatterVedtak ? 'TotrinnskontrollIndex.Godkjenning' : 'TotrinnskontrollIndex.FraBeslutter',
+        })}
+      >
+        <VerticalSpacer sixteenPx />
+        <TotrinnskontrollSakIndex
+          behandling={valgtBehandling}
+          location={location}
+          readOnly={brukernavn === valgtBehandling.ansvarligSaksbehandler || kanVeilede}
+          onSubmit={onSubmit}
+          forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
+          fagsakYtelseType={fagsak.fagsakYtelseType}
+          alleKodeverk={alleKodeverk}
+          createLocationForSkjermlenke={createLocationForSkjermlenke}
+          beslutterFormData={beslutterFormData}
+          setBeslutterForData={setBeslutterForData}
+        />
+      </SupportHeaderAndContent>
       {visBeslutterModal && (
         <BeslutterModalIndex
           behandling={valgtBehandling}
