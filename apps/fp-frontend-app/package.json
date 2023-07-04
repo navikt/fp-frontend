@@ -152,7 +152,7 @@
     "axios-mock-adapter": "1.21.5",
     "eslint": "8.44.0",
     "react-test-renderer": "18.2.0",
-    "storybook": "7.0.24",
+    "storybook": "7.0.25",
     "stylelint": "15.9.0",
     "typescript": "5.0.4",
     "vite": "4.3.9",
