@@ -51,6 +51,13 @@
   padding-right: 16px;
 }
 
+.alert {
+  --ac-alert-info-border: var(--a-surface-info-subtle);
+
+  background-color: var(--a-surface-info-subtle);
+  margin-top: auto;
+}
+
 .marginTop {
   margin-top: 16px;
 }
