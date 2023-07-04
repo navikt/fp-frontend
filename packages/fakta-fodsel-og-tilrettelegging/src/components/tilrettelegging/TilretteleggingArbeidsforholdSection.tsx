@@ -167,21 +167,19 @@ const TilretteleggingArbeidsforholdSection: FunctionComponent<OwnProps> = ({
               />
             </FlexColumn>
           </FlexRow>
-          {false && (
-            <FlexRow>
-              <FlexColumn>
-                <VerticalSpacer twentyPx />
-                <Heading size="xsmall">
-                  <FormattedMessage id="TilretteleggingArbeidsforholdSection.OppholdPerioder" />
-                </Heading>
-                <AvklarteOppholdPerioderFieldArray
-                  readOnly={readOnly}
-                  formSectionName={formSectionName}
-                  tilrettelegginger={arbeidsforhold.tilretteleggingDatoer}
-                />
-              </FlexColumn>
-            </FlexRow>
-          )}
+          <FlexRow>
+            <FlexColumn>
+              <VerticalSpacer twentyPx />
+              <Heading size="xsmall">
+                <FormattedMessage id="TilretteleggingArbeidsforholdSection.OppholdPerioder" />
+              </Heading>
+              <AvklarteOppholdPerioderFieldArray
+                readOnly={readOnly}
+                formSectionName={formSectionName}
+                tilrettelegginger={arbeidsforhold.tilretteleggingDatoer}
+              />
+            </FlexColumn>
+          </FlexRow>
           <VerticalSpacer thirtyTwoPx />
         </FlexContainer>
       )}
