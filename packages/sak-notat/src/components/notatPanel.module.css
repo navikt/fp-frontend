@@ -31,6 +31,18 @@
   width: 600px;
 }
 
+@media all and (max-width: 1569px) {
+  .bubble {
+    margin-right: 25px;
+    width: 480px;
+  }
+
+  .bubbleSelf {
+    margin-right: 25px;
+    width: 480px;
+  }
+}
+
 .form {
   background-color: var(--a-gray-50);
   border-top: 2px solid var(--a-grayalpha-300);
