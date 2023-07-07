@@ -11,7 +11,9 @@ import TilretteleggingsbehovForm from './TilretteleggingsbehovForm';
 
 import styles from './expandableRowWrapper.module.css';
 
-export type TilretteleggingEllerOpphold = ArbeidsforholdTilretteleggingDato | SvpAvklartOppholdPeriode;
+export type TilretteleggingEllerOpphold = {
+  radType: 'tilrettelegging' | 'opphold';
+} & (ArbeidsforholdTilretteleggingDato | SvpAvklartOppholdPeriode);
 
 interface WrapperProps {
   sorterteArbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[];
@@ -43,7 +45,7 @@ const ExpandableRowWrapper: FunctionComponent<WrapperProps> = ({ radInfo, arrayN
       key={radInfo.fom}
       content={
         <>
-          {(radInfo as ArbeidsforholdTilretteleggingDato).type && (
+          {radInfo.radType === 'tilrettelegging' && (
             <TilretteleggingsbehovForm
               tilrettelegging={radInfo as ArbeidsforholdTilretteleggingDato}
               index={index}
@@ -52,16 +54,14 @@ const ExpandableRowWrapper: FunctionComponent<WrapperProps> = ({ radInfo, arrayN
               readOnly={readOnly}
             />
           )}
-          {(radInfo as SvpAvklartOppholdPeriode).oppholdÅrsak && <div>test</div>}
+          {radInfo.radType === 'opphold' && <div>test</div>}
         </>
       }
       togglePlacement="right"
       className={open ? styles.openRow : styles.row}
     >
       <Table.DataCell>{radInfo.fom}</Table.DataCell>
-      <Table.DataCell>
-        {(radInfo as ArbeidsforholdTilretteleggingDato).type ? 'Tilrettelegging' : 'Opphold'}
-      </Table.DataCell>
+      <Table.DataCell>{radInfo.radType === 'tilrettelegging' ? 'Tilrettelegging' : 'Opphold'}</Table.DataCell>
     </Table.ExpandableRow>
   );
 };

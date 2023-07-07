@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState, useMemo } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import { useFormContext } from 'react-hook-form';
 import {
   ArbeidsforholdFodselOgTilrettelegging,
@@ -20,8 +20,18 @@ const lagRader = (
 ): TilretteleggingEllerOpphold[] => {
   const rader = [] as TilretteleggingEllerOpphold[];
   return rader
-    .concat(tilretteleggingDatoer)
-    .concat(oppholdsperioder)
+    .concat(
+      tilretteleggingDatoer.map(td => ({
+        radType: 'tilrettelegging',
+        ...td,
+      })),
+    )
+    .concat(
+      oppholdsperioder.map(td => ({
+        radType: 'opphold',
+        ...td,
+      })),
+    )
     .sort((r1, r2) => dayjs(r1.fom).diff(dayjs(r2.fom)));
 };
 
@@ -32,11 +42,11 @@ interface OwnProps {
   stateIndex: number;
 }
 
-const TilretteleggingFieldArray: FunctionComponent<OwnProps> = ({ stateIndex, readOnly }) => {
+const TilretteleggingTabell: FunctionComponent<OwnProps> = ({ stateIndex, readOnly }) => {
   const tilretteleggingStateName = `arbeidsforhold.${stateIndex}.tilretteleggingDatoer`;
   const oppholdPerioderStateName = `arbeidsforhold.${stateIndex}.avklarteOppholdPerioder`;
 
-  const { watch } = useFormContext();
+  const { watch, setValue } = useFormContext();
 
   const tilretteleggingDatoer = watch(tilretteleggingStateName);
   const oppholdsperioder = watch(oppholdPerioderStateName);
@@ -45,35 +55,25 @@ const TilretteleggingFieldArray: FunctionComponent<OwnProps> = ({ stateIndex, re
     [tilretteleggingDatoer, oppholdsperioder],
   );
 
-  const [alleRader, setRader] = useState(rader);
-
-  useEffect(() => {
-    setRader(rader);
-  }, [rader]);
-
   const leggTilOpphold = () => {
-    setRader(old =>
-      old.concat({
-        fom: undefined,
-        tom: undefined,
-        oppholdÅrsak: undefined,
-      }),
-    );
+    setValue(`${oppholdPerioderStateName}.${oppholdsperioder.length}`, {
+      fom: undefined,
+      tom: undefined,
+      oppholdÅrsak: undefined,
+    });
   };
   const leggTilTilrettelegging = () => {
-    setRader(old =>
-      old.concat({
-        fom: undefined,
-        type: undefined,
-      }),
-    );
+    setValue(`${tilretteleggingStateName}.${tilretteleggingDatoer.length}`, {
+      fom: undefined,
+      type: undefined,
+    });
   };
 
   return (
     <>
       <Table size="small">
         <Table.Body>
-          {alleRader.map((radInfo, index: number) => (
+          {rader.map((radInfo, index: number) => (
             // @ts-ignore fixme
             <ExpandableRowWrapper
               key={radInfo.fom}
@@ -117,4 +117,4 @@ const TilretteleggingFieldArray: FunctionComponent<OwnProps> = ({ stateIndex, re
   );
 };
 
-export default TilretteleggingFieldArray;
+export default TilretteleggingTabell;
