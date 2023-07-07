@@ -6,13 +6,14 @@ import minMax from 'dayjs/plugin/minMax';
 import { Datepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import { AvsnittSkiller, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { BodyShort } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Label } from '@navikt/ds-react';
 import { ArbeidsforholdFodselOgTilrettelegging } from '@navikt/fp-types';
 import TilretteleggingFieldArray from './TilretteleggingFieldArray';
 
 dayjs.extend(minMax);
 
+// @ts-ignore fixme
 const validerTidligereEnn = (intl: IntlShape, getValues, stateName: string) => (): string | null => {
   const tilretteleggingBehovFom = getValues(`${stateName}.tilretteleggingBehovFom`);
   const termindato = getValues('termindato');
@@ -22,10 +23,10 @@ const validerTidligereEnn = (intl: IntlShape, getValues, stateName: string) => (
   const treUkerFørTermindato = dayjs(termindato).subtract(3, 'week');
   const tidligsteTidspunkt = fødselsdato ? dayjs.min(treUkerFørTermindato, dayjs(fødselsdato)) : treUkerFørTermindato;
 
-  if (tilretteleggingFomDato.isValid() && !tilretteleggingFomDato.isBefore(tidligsteTidspunkt)) {
+  if (tidligsteTidspunkt && tilretteleggingFomDato.isValid() && !tilretteleggingFomDato.isBefore(tidligsteTidspunkt)) {
     return intl.formatMessage(
       {
-        id: 'FodselOgTilretteleggingFaktaForm.TilretteleggingTidligereEnn',
+        id: 'TilretteleggingForArbeidsgiverPanel.TilretteleggingTidligereEnn',
       },
       {
         dato: tidligsteTidspunkt.format(DDMMYYYY_DATE_FORMAT),
@@ -52,10 +53,6 @@ const TilretteleggingForArbeidsgiverPanel: FunctionComponent<OwnProps> = ({
   return (
     <>
       <VerticalSpacer sixteenPx />
-      <BodyShort size="small">
-        <FormattedMessage id="TilretteleggingForArbeidsgiverPanel.FraLegeEllerJordmor" />
-      </BodyShort>
-      <VerticalSpacer sixteenPx />
       <Datepicker
         name={`arbeidsforhold.${stateIndex}.tilretteleggingBehovFom`}
         label={intl.formatMessage({
@@ -65,12 +62,11 @@ const TilretteleggingForArbeidsgiverPanel: FunctionComponent<OwnProps> = ({
         isReadOnly={readOnly}
       />
       <VerticalSpacer thirtyTwoPx />
-      <AvsnittSkiller dividerParagraf className="" />
+      <Label size="small">
+        <FormattedMessage id="TilretteleggingForArbeidsgiverPanel.Perioder" />
+      </Label>
       <VerticalSpacer sixteenPx />
-      <BodyShort size="small">
-        <FormattedMessage id="TilretteleggingForArbeidsgiverPanel.FraArbeidsgiver" />
-      </BodyShort>
-      <VerticalSpacer sixteenPx />
+      {/* @ts-ignore fixme */}
       <TilretteleggingFieldArray stateIndex={stateIndex} sorterteArbeidsforhold={sorterteArbeidsforhold} />
     </>
   );

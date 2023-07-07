@@ -10,7 +10,7 @@ import {
   ArbeidOgInntektsmelding,
 } from '@navikt/fp-types';
 
-import FodselOgTilretteleggingFaktaForm from './components/FodselOgTilretteleggingFaktaForm';
+import TilretteleggingFaktaForm from './components/TilretteleggingFaktaForm';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -25,7 +25,7 @@ interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-const FodselOgTilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
+const TilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
   behandling,
   svangerskapspengerTilrettelegging,
   aksjonspunkter,
@@ -41,9 +41,10 @@ const FodselOgTilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFa
   arbeidOgInntekt,
 }) => (
   <RawIntlProvider value={intl}>
-    <FodselOgTilretteleggingFaktaForm
+    <TilretteleggingFaktaForm
       behandlingVersjon={behandling.versjon}
       svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
+      // @ts-ignore fixme
       arbeidsforhold={arbeidOgInntekt.arbeidsforhold}
       aksjonspunkter={aksjonspunkter}
       submitCallback={submitCallback}
@@ -59,4 +60,4 @@ const FodselOgTilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFa
   </RawIntlProvider>
 );
 
-export default FodselOgTilretteleggingFaktaIndex;
+export default TilretteleggingFaktaIndex;
