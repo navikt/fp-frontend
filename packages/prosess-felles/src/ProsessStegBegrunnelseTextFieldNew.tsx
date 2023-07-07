@@ -63,6 +63,8 @@ const ProsessStegBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunct
         validate={[requiredIfCustomFunctionIsTrueNew(isRequiredFn), minLength3, maxLength1500, hasValidText]}
         maxLength={1500}
         readOnly={readOnly}
+        // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
+        parse={(value: string) => value.replaceAll('‑', '-')}
       />
     </div>
   );
