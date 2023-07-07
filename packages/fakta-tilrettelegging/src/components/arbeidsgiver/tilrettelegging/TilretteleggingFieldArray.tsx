@@ -1,55 +1,28 @@
-import React, { FunctionComponent, useState } from 'react';
-import { FieldValues, UseFieldArrayUpdate, useFieldArray, useFormContext } from 'react-hook-form';
+import React, { FunctionComponent, useEffect, useState, useMemo } from 'react';
+import { useFormContext } from 'react-hook-form';
 import {
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsforholdTilretteleggingDato,
   ArbeidsgiverOpplysningerPerId,
+  SvpAvklartOppholdPeriode,
 } from '@navikt/fp-types';
 
 import { Button, Table } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
 import { PlusIcon } from '@navikt/aksel-icons';
-import styles from './tilretteleggingFieldArray.module.css';
-import TilretteleggingsbehovForm from './TilretteleggingsbehovForm';
+import dayjs from 'dayjs';
+import ExpandableRowWrapper, { TilretteleggingEllerOpphold } from './ExpandableRowWrapper';
 
-interface WrapperProps {
-  sorterteArbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[];
-  tilrettelegingInfo: ArbeidsforholdTilretteleggingDato;
-  index: number;
-  update: UseFieldArrayUpdate<FieldValues, string>;
-  readOnly: boolean;
-}
-
-const ExpandableRowWrapper: FunctionComponent<WrapperProps> = ({ tilrettelegingInfo, index, update, readOnly }) => {
-  const [open, setOpen] = useState(false);
-
-  const oppdaterTilrettelegging = (values: ArbeidsforholdTilretteleggingDato) => update(index, values);
-  const avbrytEditering = () => {
-    setOpen(false);
-  };
-
-  return (
-    <Table.ExpandableRow
-      open={open}
-      onClick={() => setOpen(!open)}
-      key={tilrettelegingInfo.fom}
-      content={
-        <TilretteleggingsbehovForm
-          tilrettelegging={tilrettelegingInfo}
-          index={index}
-          oppdaterTilrettelegging={oppdaterTilrettelegging}
-          avbrytEditering={avbrytEditering}
-          readOnly={readOnly}
-        />
-      }
-      togglePlacement="right"
-      className={open ? styles.openRow : styles.row}
-    >
-      <Table.DataCell>{tilrettelegingInfo.fom}</Table.DataCell>
-      <Table.DataCell>{tilrettelegingInfo.type}</Table.DataCell>
-    </Table.ExpandableRow>
-  );
+const lagRader = (
+  tilretteleggingDatoer: ArbeidsforholdTilretteleggingDato[],
+  oppholdsperioder: SvpAvklartOppholdPeriode[],
+): TilretteleggingEllerOpphold[] => {
+  const rader = [] as TilretteleggingEllerOpphold[];
+  return rader
+    .concat(tilretteleggingDatoer)
+    .concat(oppholdsperioder)
+    .sort((r1, r2) => dayjs(r1.fom).diff(dayjs(r2.fom)));
 };
 
 interface OwnProps {
@@ -60,38 +33,57 @@ interface OwnProps {
 }
 
 const TilretteleggingFieldArray: FunctionComponent<OwnProps> = ({ stateIndex, readOnly }) => {
-  const arrayName = `arbeidsforhold.${stateIndex}.tilretteleggingDatoer`;
+  const tilretteleggingStateName = `arbeidsforhold.${stateIndex}.tilretteleggingDatoer`;
+  const oppholdPerioderStateName = `arbeidsforhold.${stateIndex}.avklarteOppholdPerioder`;
 
-  const { control, watch } = useFormContext();
-  const { fields, update } = useFieldArray({
-    control,
-    name: arrayName,
-  });
+  const { watch } = useFormContext();
 
-  const tilretteleggingDatoer = watch(arrayName);
+  const tilretteleggingDatoer = watch(tilretteleggingStateName);
+  const oppholdsperioder = watch(oppholdPerioderStateName);
+  const rader = useMemo(
+    () => lagRader(tilretteleggingDatoer, oppholdsperioder),
+    [tilretteleggingDatoer, oppholdsperioder],
+  );
 
-  const leggTilOpphold = () => undefined;
-  const leggTilTilrettelegging = () => undefined;
+  const [alleRader, setRader] = useState(rader);
 
-  // const { tilretteleggingDatoer } = sorterteArbeidsforhold[stateIndex];
+  useEffect(() => {
+    setRader(rader);
+  }, [rader]);
+
+  const leggTilOpphold = () => {
+    setRader(old =>
+      old.concat({
+        fom: undefined,
+        tom: undefined,
+        oppholdÅrsak: undefined,
+      }),
+    );
+  };
+  const leggTilTilrettelegging = () => {
+    setRader(old =>
+      old.concat({
+        fom: undefined,
+        type: undefined,
+      }),
+    );
+  };
 
   return (
     <>
       <Table size="small">
         <Table.Body>
-          {fields.map((field, index: number) => {
-            const t = tilretteleggingDatoer[index];
-            return (
-              // @ts-ignore fixme
-              <ExpandableRowWrapper
-                key={field.id}
-                index={index}
-                tilrettelegingInfo={t}
-                update={update}
-                readOnly={readOnly}
-              />
-            );
-          })}
+          {alleRader.map((radInfo, index: number) => (
+            // @ts-ignore fixme
+            <ExpandableRowWrapper
+              key={radInfo.fom}
+              arrayName={`${tilretteleggingStateName}.${index}`}
+              radInfo={radInfo}
+              readOnly={readOnly}
+              index={index}
+              openRad={radInfo.fom === undefined}
+            />
+          ))}
         </Table.Body>
       </Table>
       <VerticalSpacer thirtyTwoPx />
