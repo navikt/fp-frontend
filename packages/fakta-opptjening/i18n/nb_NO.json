@@ -1,0 +1,38 @@
+{
+  "OpptjeningFaktaForm.Skjaringstidspunkt": "Skjæringstidspunkt for opptjening",
+  "OpptjeningFaktaForm.EttArbeidKanGodkjennes": "Vurder om aktiviteten kan godkjennes",
+  "OpptjeningFaktaForm.FlereArbeidKanGodkjennes": "Vurder om aktivitetene kan godkjennes",
+  "OpptjeningFaktaForm.AktivitetenErTimeAvslonnet": "Arbeidet er timeavlønnet. Slå opp i A-ordningen for å vurdere opptjeningen",
+  "OpptjeningFaktaForm.DetErInnhentetDok": "Det er innhentet dokumentasjon på opptjening i utlandet",
+  "OpptjeningFaktaForm.DetErIkkeInnhentetDok": "Det er <b>ikke</b> innhentet dokumentasjon på opptjening i utlandet",
+  "OpptjeningFaktaForm.Confirm": "Bekreft og fortsett",
+
+  "ActivityPanel.Details": "Detaljer for valgt aktivitet",
+  "ActivityPanel.Period": "Periode",
+  "ActivityPanel.Activity": "Aktivitet",
+  "ActivityPanel.Godkjent": "Aktiviteten godkjennes",
+  "ActivityPanel.IkkeGodkjent": "Aktiviteten godkjennes <b>ikke</b>",
+  "ActivityPanel.BegrunnEndringene": "Begrunn endringene",
+  "ActivityPanel.Begrunnelse": "Begrunnelse",
+  "ActivityPanel.Oppdater": "Oppdater",
+  "ActivityPanel.Avbryt": "Avbryt",
+  "ActivityPanel.MonthsAndDays": "({months} mndr. {days} dager)",
+  "ActivityPanel.Days": "({days} dager)",
+  "ActivityPanel.Arbeidsgiver": "Arbeidsgiver",
+  "ActivityPanel.Oppdragsgiver": "Oppdragsgiver",
+  "ActivityPanel.Stillingsandel": "Stillingsandel",
+  "ActivityPanel.Registreringsdato": "Registreringsdato",
+  "ActivityPanel.FerdiglignetNæring": "Ferdiglignet næringsinntekt",
+  "ActivityPanel.IngenFerdiglignetNæring": "Ingen ferdiglignet næringsinntekt",
+
+  "OpptjeningTidslinje.StartDato": "Start opptjeningsperiode",
+  "OpptjeningTidslinje.SluttDato": "Slutt opptjeningsperiode",
+  "OpptjeningTidslinje.Aap": "AAP",
+
+  "Timeline.lukkPeriode": "Lukk periode",
+  "Timeline.nextPeriod": "Neste periode",
+  "Timeline.nextPeriodShort": "Neste",
+  "Timeline.prevPeriod": "Forrige periode",
+  "Timeline.prevPeriodShort": "Forrige",
+  "Timeline.openData": "Åpne info om første periode"
+}

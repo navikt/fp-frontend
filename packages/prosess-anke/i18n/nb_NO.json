@@ -1,0 +1,37 @@
+{
+  "Ankebehandling.Title": "Ankebehandling",
+  "Ankebehandling.HelpText": "Fastsett resultatet av ankebehandlingen",
+  "Ankebehandling.KabalText": "Fortsett ankebehandlingen i KABAL: Kryss av, velg hjemmel og klagebehandling, trykk deretter send",
+  "Ankebehandling.SeKabalText": "Anken behandles i KABAL",
+  "Ankebehandling.SendTilKabal": "Send til KABAL",
+  "Ankebehandling.BehandletKabal": "Anken er behandlet i KABAL",
+  "Ankebehandling.Hjemmel": "Hjemmel",
+  "Ankebehandling.Resultat": "Resultat",
+  "Ankebehandling.Resultat.Stadfest": "Stadfest",
+  "Ankebehandling.Resultat.Omgjør": "Omgjør",
+  "Ankebehandling.Resultat.Avvis": "Avvis",
+  "Ankebehandling.Resultat.OpphevHjemsend": "Opphev",
+  "Ankebehandling.Resultat.Hjemsend": "Hjemsend",
+  "Ankebehandling.Resultat.Vedtak": "Vedtaket som er anket",
+  "Ankebehandling.Avvisning": "Avvisningsårsaker",
+  "Ankebehandling.OmgjoeringArsak": "Årsak",
+  "Ankebehandling.TempSaveButton": "Lagre",
+  "Ankebehandling.VurderingOmgjoer.Delvis": "Delvis omgjøring, til gunst",
+  "Ankebehandling.VurderingOmgjoer.Gunst": "Til gunst",
+  "Ankebehandling.VurderingOmgjoer.Ugunst": "Til ugunst",
+  "Ankebehandling.Avvisning.IkkePart": "Den som anker er ikke part i saken",
+  "Ankebehandling.Avvisning.IkkeKonkret": "Det ankes ikke på konkrete elementer i vedtaket",
+  "Ankebehandling.Avvisning.IkkeFrist": "Ankefristen er ikke overholdt",
+  "Ankebehandling.Avvisning.IkkeSignert": "Anken er ikke signert",
+  "Ankebehandling.Realitetsbehandles": "Skal anken subsidiært realitetsbehandles?",
+  "Ankebehandling.Realitetsbehandles.Ja": "Ja",
+  "Ankebehandling.Realitetsbehandles.Nei": "Nei",
+  "Ankebehandling.Resultat.IkkePaaAnketVedtak": "Ikke påanket vedtak",
+  "Ankebehandling.Begrunnelse": "Begrunnelse",
+
+  "FritekstAnkeBrevTextField.Fritekst": "Fritekst til brev",
+
+  "PreviewAnkeLink.ForhandvisBrev": "Forhåndsvis brev",
+
+  "Malform.Beskrivelse": "Foretrukket språk"
+}

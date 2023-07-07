@@ -1,0 +1,31 @@
+{
+  "@type": "SoknadAdopsjonDto",
+  "soknadType": "ST-002",
+  "mottattDato": "2023-06-09",
+  "begrunnelseForSenInnsending": null,
+  "antallBarn": 1,
+  "oppgittTilknytning": {
+    "oppholdNorgeNa": true,
+    "oppholdSistePeriode": true,
+    "oppholdNestePeriode": true,
+    "utlandsoppholdFor": [],
+    "utlandsoppholdEtter": []
+  },
+  "manglendeVedlegg": [],
+  "oppgittFordeling": {
+    "startDatoForPermisjon": "2023-06-07"
+  },
+  "søknadsfrist": {
+    "mottattDato": "2023-06-09",
+    "utledetSøknadsfrist": "2023-09-30",
+    "søknadsperiodeStart": "2023-06-07",
+    "søknadsperiodeSlutt": "2023-08-16",
+    "dagerOversittetFrist": 0
+  },
+  "omsorgsovertakelseDato": "2023-06-07",
+  "barnetsAnkomstTilNorgeDato": "2023-06-07",
+  "adopsjonFodelsedatoer": {
+    "1": "2023-06-07"
+  },
+  "farSokerType": null
+}

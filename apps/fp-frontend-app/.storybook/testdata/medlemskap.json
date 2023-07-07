@@ -1,0 +1,65 @@
+{
+  "medlemskapPerioder": [
+    {
+      "fom": "2022-06-09",
+      "tom": "2026-06-09",
+      "medlemskapType": "ENDELIG",
+      "dekningType": "IHT_AVTALE",
+      "kildeType": "ANNEN",
+      "beslutningsdato": "2022-06-09"
+    }
+  ],
+  "perioder": [
+    {
+      "vurderingsdato": "2023-06-07",
+      "aksjonspunkter": ["5021"],
+      "årsaker": ["SKJÆRINGSTIDSPUNKT"],
+      "oppholdsrettVurdering": null,
+      "erEosBorger": null,
+      "lovligOppholdVurdering": null,
+      "bosattVurdering": null,
+      "medlemskapManuellVurderingType": null,
+      "begrunnelse": null,
+      "personopplysningBruker": {
+        "fnr": "02439132852",
+        "aktoerId": "9902439132852",
+        "diskresjonskode": "UDEF",
+        "navn": "Hjort Brit",
+        "personstatus": "BOSA",
+        "region": "NORDEN",
+        "adresser": [
+          {
+            "adresseType": "BOSTEDSADRESSE",
+            "adresselinje1": null,
+            "adresselinje2": null,
+            "adresselinje3": null,
+            "postNummer": "2500",
+            "poststed": "Ukjent",
+            "land": "NOR"
+          }
+        ]
+      },
+      "personopplysningAnnenPart": {
+        "fnr": "16488918099",
+        "aktoerId": "9916488918099",
+        "diskresjonskode": "UDEF",
+        "navn": "Hjort Gabriel",
+        "personstatus": "BOSA",
+        "region": "NORDEN",
+        "adresser": [
+          {
+            "adresseType": "BOSTEDSADRESSE",
+            "adresselinje1": null,
+            "adresselinje2": null,
+            "adresselinje3": null,
+            "postNummer": "2500",
+            "poststed": "Ukjent",
+            "land": "NOR"
+          }
+        ]
+      }
+    }
+  ],
+  "opphold": [],
+  "fom": null
+}

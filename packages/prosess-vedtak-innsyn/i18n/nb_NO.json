@@ -1,0 +1,18 @@
+{
+  "InnsynVedtakForm.ForslagVedtak": "Forslag til vedtak",
+  "InnsynVedtakForm.Vedtak": "Vedtak",
+  "InnsynVedtakForm.Innvilget": "Krav om innsyn innvilget",
+  "InnsynVedtakForm.Delvis": "Krav om innsyn delvis innvilget",
+  "InnsynVedtakForm.Avslatt": "Krav om innsyn avslått",
+  "InnsynVedtakForm.Resultat": "Resultat",
+  "InnsynVedtakForm.Vurdering": "Vurdering",
+  "InnsynVedtakForm.Fritekst": "Fritekst i brev",
+  "InnsynVedtakForm.ForhåndsvisBrev": "Forhåndsvis brev",
+  "InnsynVedtakForm.VisVedtaksbrev": "Vis vedtaksbrev",
+
+  "DocumentListVedtakInnsyn.Dokument": "Dokument",
+  "DocumentListVedtakInnsyn.InnsynsDok": "Innsynsdokumentasjon til søker",
+  "DocumentListVedtakInnsyn.NoDocuments": "Det finnes ingen dokumenter på saken",
+
+  "Malform.Beskrivelse": "Foretrukket språk"
+}

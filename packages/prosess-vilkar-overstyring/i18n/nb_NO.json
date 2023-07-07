@@ -1,0 +1,18 @@
+{
+  "VilkarresultatMedOverstyringForm.ErOppfylt": "Vilkåret er oppfylt",
+  "VilkarresultatMedOverstyringForm.ErIkkeOppfylt": "Vilkåret er avslått",
+  "VilkarresultatMedOverstyringForm.IkkeBehandlet": "Ikke behandlet",
+  "VilkarresultatMedOverstyringForm.VilkarOppfyltRevurderingFom": "Vilkåret er  oppfylt f.o.m. {fom}",
+  "VilkarresultatMedOverstyringForm.VilkarIkkeOppfyltRevurderingFom": "Vilkåret er <b>ikke</b> oppfylt f.o.m. {fom}",
+  "VilkarresultatMedOverstyringForm.VilkarIkkeOppfylt": "Vilkåret er <b>ikke</b> oppfylt",
+
+  "Behandlingspunkt.FortsattMedlemskap": "Fortsatt medlem",
+  "Inngangsvilkar.Adopsjonsvilkaret": "Adopsjon",
+  "Inngangsvilkar.Fodselsvilkaret": "Fødsel",
+  "Inngangsvilkar.Omsorgsvilkaret": "Omsorg",
+  "Inngangsvilkar.Foreldreansvar": "Foreldreansvar",
+  "Inngangsvilkar.Opptjeningsvilkaret": "Opptjening",
+  "Inngangsvilkar.Medlemskapsvilkaret": "Medlemskap",
+  "Inngangsvilkar.Svangerskapsvilkaret": "Svangerskap",
+  "Behandlingspunkt.Soknadsfristvilkaret": "Søknadsfrist"
+}

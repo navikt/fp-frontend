@@ -1,0 +1,19 @@
+{
+  "VarselOmRevurderingForm.VarselOmRevurdering": "Varsel om revurdering",
+  "VarselOmRevurderingForm.VarselOmRevurderingVurder": "Vurder om varsel om revurdering skal sendes til søker",
+  "VarselOmRevurderingForm.Etterkontroll": "Etterkontroll",
+  "VarselOmRevurderingForm.Manuell": "Manuell",
+  "VarselOmRevurderingForm.Bekreft": "Bekreft og fortsett",
+  "VarselOmRevurderingForm.IkkeSendVarsel": "Ikke send varsel til søker",
+  "VarselOmRevurderingForm.SendVarsel": "Send varsel til søker",
+  "VarselOmRevurderingForm.FritekstIBrev": "Fritekst i brev",
+  "VarselOmRevurderingForm.BegrunnelseForSvar": "Begrunnelse",
+  "VarselOmRevurderingForm.BrevBlirBestilt": "Brevet blir bestilt",
+  "VarselOmRevurderingForm.Begrunnelse": "Begrunnelse",
+  "VarselOmRevurderingForm.UtstedDato": "Utstedt dato",
+  "VarselOmRevurderingForm.Ytelsesvedtak": "Vedtak",
+  "VarselOmRevurderingForm.OpplysningerISoknad": "Opplysninger om fødsel i søknaden",
+  "VarselOmRevurderingForm.Preview": "Forhåndsvis",
+
+  "Malform.Beskrivelse": "Foretrukket språk"
+}

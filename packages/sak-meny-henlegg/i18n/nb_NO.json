@@ -1,0 +1,27 @@
+{
+  "MenyHenleggIndex.HenleggBehandling": "Henlegg behandlingen og avslutt",
+
+  "HenleggBehandlingModal.ModalDescription": "Behandlingen henlegges",
+  "HenleggBehandlingModal.HenleggBehandling": "Henlegg behandling",
+  "HenleggBehandlingModal.ArsakField": "Velg årsak",
+  "HenleggBehandlingModal.BegrunnelseField": "Begrunnelse",
+  "HenleggBehandlingModal.Fritekst": "Fritekst til brev",
+  "HenleggBehandlingModal.HenleggBehandlingSubmit": "Henlegg behandling",
+  "HenleggBehandlingModal.Avbryt": "Avbryt",
+  "HenleggBehandlingModal.SokerInformeres": "Informer søker",
+  "HenleggBehandlingModal.ForhandsvisBrev": "Forhåndsvis brev",
+
+  "HenlagtBehandlingModal.ModalDescription": "Behandlingen er henlagt",
+  "HenlagtBehandlingModal.Henlagt": "Henlagt",
+  "HenlagtBehandlingModal.BehandlingenErHenlagt": "Behandlingen er henlagt",
+  "HenlagtBehandlingModal.RutetTilForsiden": "Du kommer nå til forsiden",
+  "HenlagtBehandlingModal.Ok": "OK",
+
+  "HENLAGT_SØKNAD_TRUKKET": "Søknaden er trukket",
+  "HENLAGT_FEILOPPRETTET": "Behandlingen er feilaktig opprettet",
+  "HENLAGT_FEILOPPRETTET_MED_BREV": "Feilaktig opprettet - med henleggelsesbrev",
+  "HENLAGT_FEILOPPRETTET_UTEN_BREV": "Feilaktig opprettet - uten henleggelsesbrev",
+  "HENLAGT_KLAGE_TRUKKET": "Klagen er trukket",
+  "HENLAGT_INNSYN_TRUKKET": "Innsynskrav er trukket",
+  "HENLAGT_SØKNAD_MANGLER": "Søknad mangler"
+}

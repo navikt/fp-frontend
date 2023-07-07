@@ -1,0 +1,32 @@
+{
+  "OmsorgOgForeldreansvarInfoPanel.BegrunnelseTitleEs": "Begrunn valg av vilkår",
+  "OmsorgOgForeldreansvarInfoPanel.BegrunnelseTitleFp": "Begrunn endringene",
+
+  "OmsorgOgForeldreansvarFaktaForm.OmsorgInfo": "Opplysninger om omsorg",
+  "OmsorgOgForeldreansvarFaktaForm.CheckInformationForeldreansvar": "Kontroller opplysninger om foreldreansvar og omsorg",
+  "OmsorgOgForeldreansvarFaktaForm.ForeldreansvarInfo": "Foreldreansvar og omsorg",
+  "OmsorgOgForeldreansvarFaktaForm.ApplicationInformation": "Omsorgsvilkåret",
+  "OmsorgOgForeldreansvarFaktaForm.OmsorgsovertakelseDate": "Dato for omsorgsovertakelse",
+  "OmsorgOgForeldreansvarFaktaForm.ForeldreansvarDato": "Dato for foreldreansvar",
+  "OmsorgOgForeldreansvarFaktaForm.NrOfChildren": "Antall barn",
+  "OmsorgOgForeldreansvarFaktaForm.AndreYtelseTilMor": "Andre ytelser til mor",
+  "OmsorgOgForeldreansvarFaktaForm.VelgVilkaarSomSkalAnvendes": "Velg vilkår som skal anvendes",
+  "OmsorgOgForeldreansvarFaktaForm.CheckInformation": "Kontroller opplysningene om omsorgsovertakelse",
+  "OmsorgOgForeldreansvarFaktaForm.ChooseVilkar": "Velg vilkår som skal anvendes",
+  "OmsorgOgForeldreansvarFaktaForm.Rettighet": "Rettighet",
+  "OmsorgOgForeldreansvarFaktaForm.YtelseIverksatt": "{ytelseType} iverksatt ",
+  "OmsorgOgForeldreansvarFaktaForm.ChooseVilkarToSeeDescription": "Velg vilkår for å se beskrivelsesteksten",
+  "OmsorgOgForeldreansvarFaktaForm.HelpTextOmsorgTredjeLedd": "Dersom mor dør i forbindelse med fødselen eller omsorgsovertakelsen, har faren rett til engangsstønad. Det er et vilkår at han har omsorgen for barnet og at stønaden ikke allerede er utbetalt til moren",
+  "OmsorgOgForeldreansvarFaktaForm.HelpTextForeldreAndreLedd": "Engangsstønad kan ytes også til person som har foreldreansvar når den andre av foreldrene dør, eller får tildelt foreldreansvaret i medhold av barneloven §§ 38 og 63, såfremt vedkommende har hatt mindre samvær enn tilsvarende barneloven § 43 andre ledd",
+  "OmsorgOgForeldreansvarFaktaForm.HelpTextForeldreFjerdeLedd": "Faren har rett til engangsstønad også dersom han i stønadsperioden har overtatt omsorgen for barnet med sikte på å overta foreldreansvaret alene etter barneloven kapittel 5. Retten gjelder selv om moren har fått utbetalt engangsstønad",
+
+  "BarnPanel.BarnDetSøkesOm": "Barn søknaden gjelder for",
+  "BarnPanel.Address": "Adresse",
+  "BarnPanel.ChildNumberBornData": "Barn {childNumber} fødselsdato",
+  "BarnPanel.DodsDato" : "Barnets dødsdato",
+
+  "ForeldrePanel.Foreldre": "Søkere",
+  "ForeldrePanel.Address": "Adresse",
+  "ForeldrePanel.MotherDeathDate": "Dato for mors død",
+  "ForeldrePanel.FatherDeathDate": "Dato for fars død"
+}

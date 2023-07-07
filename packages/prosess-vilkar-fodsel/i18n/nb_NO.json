@@ -1,0 +1,8 @@
+{
+  "FodselVilkarForm.Fodsel": "Fødsel",
+  "FodselVilkarForm.TidligereUtbetaltStonad": "Tidligere utbetalte foreldrepenger eller engangsstønad",
+  "FodselVilkarForm.Oppfylt": "Er utbetalt for et annet barn, vilkåret er oppfylt",
+  "FodselVilkarForm.IkkeOppfylt": "Er utbetalt for dette barnet, vilkåret er <b>ikke</b> oppfylt",
+  
+  "ShowVilkarStatus.Check": "Informasjonen er utfylt"
+}

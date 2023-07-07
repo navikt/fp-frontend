@@ -1,0 +1,64 @@
+{
+  "innloggetBruker": {
+    "brukernavn": "saksbeh",
+    "navn": "Sara Saksbehandler",
+    "kanSaksbehandle": true,
+    "kanVeilede": false,
+    "kanBeslutte": false,
+    "kanOverstyre": false,
+    "kanOppgavestyre": false,
+    "kanBehandleKodeEgenAnsatt": false,
+    "kanBehandleKode6": false,
+    "kanBehandleKode7": false,
+    "skalViseDetaljerteFeilmeldinger": true,
+    "funksjonellTid": "2023-06-09T10:49:51.447269271"
+  },
+  "behandlendeEnheter": [
+    {
+      "enhetId": "2103",
+      "enhetNavn": "NAV Vikafossen"
+    },
+    {
+      "enhetId": "4867",
+      "enhetNavn": "NAV Familie- og pensjonsytelser Foreldrepenger"
+    },
+    {
+      "enhetId": "4883",
+      "enhetNavn": "NAV Familie- og pensjonsytelser Egne ansatte"
+    }
+  ],
+  "links": [
+    {
+      "href": "/fpsak/api/kodeverk",
+      "rel": "kodeverk",
+      "requestPayload": null,
+      "type": "GET"
+    },
+    {
+      "href": "/fpsak/api/fagsak/sok",
+      "rel": "søk-fagsak",
+      "requestPayload": null,
+      "type": "POST"
+    }
+  ],
+  "sakLinks": [
+    {
+      "href": "/fpsak/api/fagsak/full",
+      "rel": "fagsak-full",
+      "requestPayload": null,
+      "type": "GET"
+    },
+    {
+      "href": "/fpsak/api/dokument/hent-dokumentliste",
+      "rel": "sak-dokumentliste",
+      "requestPayload": null,
+      "type": "GET"
+    },
+    {
+      "href": "/fpsak/api/fagsak/endre-utland",
+      "rel": "endre-utland-markering",
+      "requestPayload": null,
+      "type": "POST"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "@navikt/fp-kodeverk",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "tsc": "tsc --pretty",
+    "eslint": "eslint \"src/**/*.ts*\" --color",
+    "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
+    "prettier": "prettier --write src",
+    "dev": "vite build --mode development --watch",
+    "build": "vite build",
+    "clean": "rm -rf ./dist ./node_modules"
+  },
+  "devDependencies": {
+    "eslint": "8.44.0",
+    "typescript": "5.1.6",
+    "vite": "4.3.9"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "bruker": {
+    "fnr": "02439132852",
+    "aktoerId": "9902439132852",
+    "diskresjonskode": "UDEF",
+    "navn": "Hjort Brit",
+    "kjønn": "K",
+    "sivilstand": "GIFT",
+    "dødsdato": null,
+    "fødselsdato": "1973-06-09",
+    "adresser": [
+      {
+        "adresseType": "BOSTEDSADRESSE",
+        "adresselinje1": null,
+        "adresselinje2": null,
+        "adresselinje3": null,
+        "postNummer": "2500",
+        "poststed": "Ukjent",
+        "land": "NOR"
+      }
+    ]
+  },
+  "annenPart": {
+    "fnr": "16488918099",
+    "aktoerId": "9916488918099",
+    "diskresjonskode": "UDEF",
+    "navn": "Hjort Gabriel",
+    "kjønn": "M",
+    "sivilstand": "UGIF",
+    "dødsdato": null,
+    "fødselsdato": "1973-06-09",
+    "adresser": [
+      {
+        "adresseType": "BOSTEDSADRESSE",
+        "adresselinje1": null,
+        "adresselinje2": null,
+        "adresselinje3": null,
+        "postNummer": "2500",
+        "poststed": "Ukjent",
+        "land": "NOR"
+      }
+    ]
+  },
+  "barn": [
+    {
+      "fnr": "26452158468",
+      "aktoerId": "9926452158468",
+      "diskresjonskode": "UDEF",
+      "navn": "Duck Ole",
+      "kjønn": "K",
+      "sivilstand": "UGIF",
+      "dødsdato": null,
+      "fødselsdato": "2023-06-07",
+      "adresser": [
+        {
+          "adresseType": "BOSTEDSADRESSE",
+          "adresselinje1": null,
+          "adresselinje2": null,
+          "adresselinje3": null,
+          "postNummer": "2500",
+          "poststed": "Ukjent",
+          "land": "NOR"
+        }
+      ]
+    }
+  ]
+}

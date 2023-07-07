@@ -1,0 +1,23 @@
+{
+  "AdopsjonInfoPanel.KontrollerMotDok": "Kontroller mot opplysningene fra adopsjonsdokumentasjonen",
+  "AdopsjonInfoPanel.VurderOmEktefellesBarn": "Vurder om det er ektefelles/samboers barn som adopteres",
+  "AdopsjonInfoPanel.VurderOmMannAdoptererAlene": "Vurder om mann adopterer alene",
+
+  "DokumentasjonFaktaForm.ApplicationInformation": "Adopsjonsopplysninger fra søknad",
+  "DokumentasjonFaktaForm.Omsorgsovertakelsesdato": "Dato for omsorgsovertakelse",
+  "DokumentasjonFaktaForm.Stebarnsadopsjon": "Dato for stebarnsadopsjon",
+  "DokumentasjonFaktaForm.Fodselsdato": "Fødselsdato for barn {number}",
+  "DokumentasjonFaktaForm.AntallBarnSomFyllerVilkaret": "Antall barn som fyller vilkåret",
+  "DokumentasjonFaktaForm.BarnErOver15Ar": "Barnet er over 15 år ved omsorgsovertakelsen",
+  "DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge": "Dato for barnets ankomst til Norge (ved utenlandsadopsjon)",
+
+  "MannAdoptererAleneFaktaForm.ApplicationInformation": "Mann adopterer",
+  "MannAdoptererAleneFaktaForm.Opplysninger": "Opplysninger oppgitt i søknaden",
+  "MannAdoptererAleneFaktaForm.AdoptererIkkeAlene": "Adopterer ikke alene",
+  "MannAdoptererAleneFaktaForm.AdoptererAlene": "Adopterer alene",
+  
+  "EktefelleFaktaForm.ApplicationInformation": "Ektefelles/samboers barn",
+  "EktefelleFaktaForm.EktefellesBarn": "Vurder om det er ektefelles/samboers barn som adopteres",
+  "EktefelleFaktaForm.ErIkkeValg": "Ikke ektefelles/samboers barn",
+  "EktefelleFaktaForm.ErValg": "Ektefelles/samboers barn"
+}

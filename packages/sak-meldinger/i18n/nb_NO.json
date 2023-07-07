@@ -1,0 +1,16 @@
+{
+  "Messages.Årsak": "Årsak",
+  "Messages.Fritekst": "Fritekst",
+  "Messages.Template": "Mal",
+  "Messages.DocumentList": "Liste over dokumenter (skriv ett dokument pr. linje)",
+  "Messages.Submit": "Send brev",
+  "Messages.Preview": "Forhåndsvis",
+  "Messages.PreviewText": "Forhåndsvis varselbrev",
+  "Messages.Beskrivelse": "Foretrukket språk",
+
+  "MessagesModal.description": "Brevet er bestilt",
+  "MessagesModal.text": "Brevet er bestilt",
+  "MessagesModal.OK": "OK",
+
+  "Malform.Beskrivelse": "Foretrukket språk"
+}

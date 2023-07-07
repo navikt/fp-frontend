@@ -1,0 +1,21 @@
+{
+  "TilretteleggingFaktaForm.Aksjonspunkt": "Kontroller opplysninger fra jordmor og arbeidsgiver",
+  "TilretteleggingFaktaForm.Termindato": "Termindato",
+  "TilretteleggingFaktaForm.Fodselsdato": "Fødselsdato",
+  "TilretteleggingFaktaForm.BegrunnEndringene": "Begrunn endringene",
+
+  "TilretteleggingForArbeidsgiverPanel.TilretteleggingTidligereEnn": "Tilrettelegging fra og med må være tidligere enn {dato}",
+  "TilretteleggingForArbeidsgiverPanel.DatoForTilrettelegging": "Dato for tilrettelegging fra lege eller jordmor",
+  "TilretteleggingForArbeidsgiverPanel.Perioder": "Perioder",
+
+  "TilretteleggingsbehovForm.Tilretteleggingsbehov": "Tilretteleggingsbehov",
+  "TilretteleggingsbehovForm.FraOgMed": "Fra og med",
+  "TilretteleggingsbehovForm.KanGjennomfores": "Arbeidstakeren kan fortsette i samme stilling",
+  "TilretteleggingsbehovForm.RedusertArbeid": "Arbeidstakeren kan fortsette med redusert arbeidstid",
+  "TilretteleggingsbehovForm.KanIkkeGjennomfores": "Arbeidstakeren må midlertidig gå ut av sitt arbeid",
+  "TilretteleggingsbehovForm.Oppdater": "Oppdater",
+  "TilretteleggingsbehovForm.Avbryt": "Avbryt",
+
+  "TilretteleggingFieldArray.LeggTilTilrettelegging": "Periode med svangerskapspenger",
+  "TilretteleggingFieldArray.LeggTilOpphold": "Opphold"
+}

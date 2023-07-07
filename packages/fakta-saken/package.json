@@ -1,0 +1,68 @@
+{
+  "name": "@navikt/fp-fakta-saken",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "vitest",
+    "test:watch": "vitest --watch=true",
+    "test:coverage": "vitest --coverage",
+    "tsc": "tsc --pretty",
+    "eslint": "eslint \"src/**/*.ts*\" --color",
+    "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
+    "stylelint": "stylelint \"src/**/*.module.css\"",
+    "prettier": "prettier --write src",
+    "dev": "vite build --mode development --watch",
+    "build": "vite build",
+    "clean": "rm -rf ./dist ./node_modules ./coverage ./.storybook-static-build",
+    "build-storybook": "storybook build -o .storybook-static-build",
+    "storybook": "storybook dev --quiet -p 7014"
+  },
+  "dependencies": {
+    "@navikt/aksel-icons": "4.5.0",
+    "@navikt/ds-css": "4.5.0",
+    "@navikt/ds-react": "4.5.0",
+    "@navikt/fp-fakta-felles": "1.0.0",
+    "@navikt/fp-kodeverk": "1.0.0",
+    "@navikt/fp-types": "1.0.0",
+    "@navikt/fp-types-avklar-aksjonspunkter": "1.0.0",
+    "@navikt/ft-form-hooks": "4.1.4",
+    "@navikt/ft-form-validators": "2.0.36",
+    "@navikt/ft-kodeverk": "2.1.16",
+    "@navikt/ft-types": "2.1.18",
+    "@navikt/ft-ui-komponenter": "2.0.39",
+    "@navikt/ft-utils": "2.0.35",
+    "dayjs": "1.11.9",
+    "react": "18.2.0",
+    "react-hook-form": "7.45.1",
+    "react-intl": "6.4.4"
+  },
+  "devDependencies": {
+    "@navikt/fp-storybook-utils": "1.0.0",
+    "@storybook/addon-actions": "7.0.26",
+    "@storybook/react": "7.0.26",
+    "@storybook/react-vite": "7.0.26",
+    "@testing-library/react": "14.0.0",
+    "@testing-library/user-event": "14.4.3",
+    "cross-env": "7.0.3",
+    "eslint": "8.44.0",
+    "storybook": "7.0.26",
+    "stylelint": "15.10.1",
+    "typescript": "5.1.6",
+    "vite": "4.3.9",
+    "vitest": "0.32.4"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    },
+    "./dist/style.css": "./dist/style.css"
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "relatertTilgrensendeYtelserForSoker": [
+    {
+      "relatertYtelseType": "FORELDREPENGER",
+      "tilgrensendeYtelserListe": [
+        {
+          "relatertYtelseType": "FORELDREPENGER",
+          "periodeFraDato": "2023-06-09",
+          "periodeTilDato": "2023-06-09",
+          "status": "UBEH",
+          "saksNummer": "3"
+        }
+      ]
+    },
+    {
+      "relatertYtelseType": "ENGANGSSTØNAD",
+      "tilgrensendeYtelserListe": []
+    },
+    {
+      "relatertYtelseType": "SYKEPENGER",
+      "tilgrensendeYtelserListe": [
+        {
+          "relatertYtelseType": "SYKEPENGER",
+          "periodeFraDato": "2022-09-09",
+          "periodeTilDato": "2023-06-09",
+          "status": "AVSLUTTET",
+          "saksNummer": null
+        }
+      ]
+    },
+    {
+      "relatertYtelseType": "DAGPENGER",
+      "tilgrensendeYtelserListe": [
+        {
+          "relatertYtelseType": "DAGPENGER",
+          "periodeFraDato": "2022-06-09",
+          "periodeTilDato": "2023-03-17",
+          "status": "LØPENDE",
+          "saksNummer": "999"
+        }
+      ]
+    },
+    {
+      "relatertYtelseType": "ARBEIDSAVKLARINGSPENGER",
+      "tilgrensendeYtelserListe": []
+    },
+    {
+      "relatertYtelseType": "SVANGERSKAPSPENGER",
+      "tilgrensendeYtelserListe": []
+    },
+    {
+      "relatertYtelseType": "OMP",
+      "tilgrensendeYtelserListe": []
+    },
+    {
+      "relatertYtelseType": "OLP",
+      "tilgrensendeYtelserListe": []
+    },
+    {
+      "relatertYtelseType": "PSB",
+      "tilgrensendeYtelserListe": []
+    },
+    {
+      "relatertYtelseType": "PPN",
+      "tilgrensendeYtelserListe": []
+    },
+    {
+      "relatertYtelseType": "FRISINN",
+      "tilgrensendeYtelserListe": []
+    }
+  ],
+  "relatertTilgrensendeYtelserForAnnenForelder": [
+    {
+      "relatertYtelseType": "FORELDREPENGER",
+      "tilgrensendeYtelserListe": []
+    },
+    {
+      "relatertYtelseType": "ENGANGSSTØNAD",
+      "tilgrensendeYtelserListe": []
+    }
+  ],
+  "innvilgetRelatertTilgrensendeYtelserForAnnenForelder": [
+    {
+      "relatertYtelseType": "FORELDREPENGER",
+      "tilgrensendeYtelserListe": []
+    },
+    {
+      "relatertYtelseType": "ENGANGSSTØNAD",
+      "tilgrensendeYtelserListe": []
+    }
+  ]
+}

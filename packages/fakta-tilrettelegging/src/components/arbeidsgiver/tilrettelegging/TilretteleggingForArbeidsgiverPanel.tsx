@@ -9,7 +9,7 @@ import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Label } from '@navikt/ds-react';
 import { ArbeidsforholdFodselOgTilrettelegging } from '@navikt/fp-types';
-import TilretteleggingFieldArray from './TilretteleggingFieldArray';
+import TilretteleggingTabell from './TilretteleggingTabell';
 
 dayjs.extend(minMax);
 
@@ -67,7 +67,7 @@ const TilretteleggingForArbeidsgiverPanel: FunctionComponent<OwnProps> = ({
       </Label>
       <VerticalSpacer sixteenPx />
       {/* @ts-ignore fixme */}
-      <TilretteleggingFieldArray stateIndex={stateIndex} sorterteArbeidsforhold={sorterteArbeidsforhold} />
+      <TilretteleggingTabell stateIndex={stateIndex} sorterteArbeidsforhold={sorterteArbeidsforhold} />
     </>
   );
 };

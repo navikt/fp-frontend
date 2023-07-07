@@ -1,0 +1,69 @@
+{
+  "MedlemskapInfoPanel.ErSokerBosattINorge": "Vurder om søker er bosatt i Norge",
+  "MedlemskapInfoPanel.GyldigMedlemFolketrygden": "Vurder om søker har gyldig medlemskap i perioden",
+  "MedlemskapInfoPanel.EOSBorgerMedOppholdsrett": "Vurder om søker er EØS-borger med oppholdsrett",
+  "MedlemskapInfoPanel.IkkeEOSBorgerMedLovligOpphold": "Avklar om søker har lovlig opphold",
+  "MedlemskapInfoPanel.HarFortsattMedlemskap": "Vurder om søker fortsatt har gyldig medlemskap i perioden",
+  
+  "StartdatoForForeldrepengerperiodenForm.StartdatoFør2019": "Startdato kan ikke være før 01.01.2019",
+  "StartdatoForForeldrepengerperiodenForm.StartdatoForPerioden": "Startdato for foreldrepengeperioden",
+  "StartdatoForForeldrepengerperiodenForm.Vurdering": "Vurdering",
+  "StartdatoForForeldrepengerperiodenForm.Startdato": "Startdato som skal benyttes (fra søknad eller fødsel)",
+  "StartdatoForForeldrepengerperiodenForm.Oppdater": "Oppdater",
+
+  "OppholdINorgeOgAdresserFaktaPanel.BosattAdresser": "Bostedsadresse fra folkeregisteret",
+  "OppholdINorgeOgAdresserFaktaPanel.Parent": "Den andre forelderen",
+  "OppholdINorgeOgAdresserFaktaPanel.ResidingInNorway": "Søker er bosatt i Norge",
+  "OppholdINorgeOgAdresserFaktaPanel.NotResidingInNorway": "Søker er <b>ikke</b> bosatt i Norge",
+  "OppholdINorgeOgAdresserFaktaPanel.OppholdINorge": "Opplysninger oppgitt i søknaden",
+  "OppholdINorgeOgAdresserFaktaPanel.StayingInNorway": "Opphold i Norge nå",
+  "OppholdINorgeOgAdresserFaktaPanel.StayingInNorwayLast12": "Opphold i Norge de siste 12 månedene",
+  "OppholdINorgeOgAdresserFaktaPanel.StayingInNorwayNext12": "Opphold i Norge de neste 12 månedene",
+  "OppholdINorgeOgAdresserFaktaPanel.Opphold": "Har opphold",
+  "OppholdINorgeOgAdresserFaktaPanel.IkkeOpphold": "Har ikke opphold",
+  "OppholdINorgeOgAdresserFaktaPanel.Yes": "Ja",
+  "OppholdINorgeOgAdresserFaktaPanel.No": "Nei",
+
+  "PerioderMedMedlemskapFaktaPanel.ApplicationInformation": "Perioder med medlemskap",
+  "PerioderMedMedlemskapFaktaPanel.Period": "Periode",
+  "PerioderMedMedlemskapFaktaPanel.Coverage": "Dekning",
+  "PerioderMedMedlemskapFaktaPanel.Status": "Status",
+  "PerioderMedMedlemskapFaktaPanel.Date": "Beslutningsdato",
+  "PerioderMedMedlemskapFaktaPanel.Fodselsdato": "Fødselsdato: {dato}",
+  "PerioderMedMedlemskapFaktaPanel.Termindato": "Termindato: {dato}",
+  "PerioderMedMedlemskapFaktaPanel.Omsorgsovertakelse": "Dato for omsorgsovertakelse: {dato}",
+  "PerioderMedMedlemskapFaktaPanel.NoInformation": "Ingen registrerte opplysninger om medlemskap",
+
+  "OppholdInntektOgPerioder.Bekreft": "Bekreft og fortsett",
+  "OppholdInntektOgPerioder.Overskrift": "Fakta om medlemskap",
+  "OppholdInntektOgPeriode.Oppdater": "Oppdater",
+  "OppholdInntektOgPeriode.Avbryt": "Avbryt",
+
+  "MedlemskapEndringerTabell.GjeldeneFom": "Gjeldende f.o.m",
+  "MedlemskapEndringerTabell.Opplysning": "Opplysning",
+
+  "StatusForBorgerFaktaPanel.ApplicationInformation": "Status for søker",
+  "StatusForBorgerFaktaPanel.CitizenEEA": "EØS borger",
+  "StatusForBorgerFaktaPanel.CitizenOutsideEEA": "Utenlandsk borger utenfor EØS",
+  "StatusForBorgerFaktaPanel.Oppholdsrett": "Oppholdsrett",
+  "StatusForBorgerFaktaPanel.HarOppholdsrett": "Søker har oppholdsrett",
+  "StatusForBorgerFaktaPanel.HarIkkeOppholdsrett": "Søker har <b>ikke</b> oppholdsrett",
+  "StatusForBorgerFaktaPanel.LovligOpphold": "Lovlig opphold",
+  "StatusForBorgerFaktaPanel.HarLovligOpphold": "Søker har lovlig opphold",
+  "StatusForBorgerFaktaPanel.HarIkkeLovligOpphold": "Søker har <b>ikke</b> lovlig opphold",
+
+  "OppholdstillatelseTabell.Overskrift": "Oppholdstillatelser",
+  "OppholdstillatelseTabell.Periode": "Periode",
+  "OppholdstillatelseTabell.Type": "Type",
+  "OppholdstillatelseTabell.Ukjent": "UKJENT",
+
+  "OppholdInntektOgPeriodeForm.Periode": "Periode - {dato}",
+
+  "BostedSokerView.ForeignAddresse": "Utenlandsadresse",
+  "BostedSokerView.Region": "Region",
+
+  "BostedSokerFaktaIndex.Soker": "Søker",
+
+  "Personstatus.Hjelpetekst": "Personstatus",
+  "Personstatus.Ukjent": "Ukjent"
+}

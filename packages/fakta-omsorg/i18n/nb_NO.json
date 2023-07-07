@@ -1,0 +1,22 @@
+{
+  "OmsorgInfoPanel.VurderOmsorg": "Vurder om søker har omsorg for barnet i søknadsperioden",
+  "OmsorgInfoPanel.Overskrift": "Fakta om omsorg",
+
+  "OmsorgFaktaForm.HarOmsorg": "Søker har omsorg for barnet",
+  "OmsorgFaktaForm.HarIkkeOmsorg": "Søker har <b>ikke</b> omsorg for barnet",
+  "OmsorgFaktaForm.OppgittOmsorg": "Søker har oppgitt å ha omsorg for barnet",
+
+  "Personstatus.Hjelpetekst": "Personstatus",
+  "Personstatus.Ukjent": "Ukjent",
+  "Sivilstand.Hjelpetekst": "Sivilstand",
+
+  "ForelderPanel.Soker": "Søker",
+  "ForelderPanel.AnnenForelder": "Annen forelder",
+
+  "AdresseVisning.Adresse": "Adresse",
+
+  "AlleBarnPanel.Barn": "Barn",
+  "AlleBarnPanel.BarnNr": "Barn {nummer}",
+  "AlleBarnPanel.Fodt": "Født",
+  "AlleBarnPanel.Dod": "Død"
+}

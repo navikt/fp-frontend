@@ -1,0 +1,34 @@
+{
+  "ArbeidsforholdInfoPanel.ArbeidsforholdHeader": "Arbeidsforhold som er aktive ved permisjonsstart",
+
+  "PersonArbeidsforholdTable.Arbeidsforhold": "{br}Arbeidsforhold",
+  "PersonArbeidsforholdTable.Periode": "{br}Periode",
+  "PersonArbeidsforholdTable.Kilde": "{br}Kilde",
+  "PersonArbeidsforholdTable.Stillingsprosent": "{br}Stillingsprosent",
+  "PersonArbeidsforholdTable.MottattDato": "Inntektsmeld.{br}mottatt dato",
+  "PersonArbeidsforholdTable.ErIBruk": "Arbeidsforhold skal brukes",
+  "PersonArbeidsforholdTable.IngenArbeidsforhold": "Det finnes ingen arbeidsforhold",
+  "PersonArbeidsforholdTable.IngenArbeidsforholdRegistrert": "Ingen arbeidsforhold registrert",
+  "PersonArbeidsforholdTable.LeggTilArbeidsforhold": "Legg til arbeidsforhold",
+  
+  "ArbeidsforholdDetail.Header": "Detaljer",
+  "ArbeidsforholdDetail.ArbeidsforholdErAktivt": "Arbeidsforholdet er aktivt og skal benyttes i behandlingen. Nødvendig inntektsmelding er ikke mottatt.",
+  "ArbeidsforholdDetail.OppdaterArbeidsforhold": "Arbeidsforhold er manuelt opprettet av saksbehandler",
+  "ArbeidsforholdDetail.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon": "Søker er ikke i permisjon. Arbeidsforholdet er aktivt og skal benyttes i behandlingen.",
+  "ArbeidsforholdDetail.FjernArbeidsforholdet": "Fjern arbeidsforholdet for denne behandlingen",
+  "ArbeidsforholdDetail.IMIkkeRelevant": "Inntektsmeldingen er ikke relevant, gå videre uten disse opplysningene",
+  "ArbeidsforholdDetail.ArbeidsforholdetErIkkeAktivt": "Arbeidsforholdet er ikke aktivt. Inntektsmelding er ikke nødvendig.",
+  "ArbeidsforholdDetail.ArbeidsforholdetAktivTomDato": "Arbeidsforhold aktivt tom. dato",
+  "ArbeidsforholdDetail.AvslaYtelseManglendeOpplysninger": "Ytelsen kan avslås på grunn av manglende opplysninger.",
+  "ArbeidsforholdDetail.BenyttAInntektIBeregningsgrunnlag": "Fortsett behandling uten inntektsmelding, inntekt fra A-inntekt benyttes i beregningsgrunnlaget.",
+  "ArbeidsforholdDetail.Begrunnelse": "Begrunn endringene",
+  "ArbeidsforholdDetail.SokerErIPermisjon": "Søker er i permisjon. Inntektsmelding er ikke nødvendig.",
+  "ArbeidsforholdDetail.OppdatertGittIm": "Arbeidsforholdet er opprettet basert på motatt inntektsmelding",
+  "PersonArbeidsforholdTable.Inntektsmelding": "Inntektsmelding",
+  "PersonArbeidsforholdTable.Saksbehandler": "Saksbehandler",
+  "PersonArbeidsforholdTable.AaRegisteret": "AA-Registeret",
+
+
+  "PermisjonPeriode.Permisjon": "Permisjon",
+  "PermisjonPeriode.Permisjoner": "Permisjoner"
+}

@@ -1,0 +1,15 @@
+{
+  "saksnummer": "3",
+  "behandlingTypeKanOpprettes": [
+    {
+      "behandlingType": "BT-007",
+      "kanOppretteBehandling": true
+    },
+    {
+      "behandlingType": "BT-009",
+      "kanOppretteBehandling": false
+    }
+  ],
+  "behandlinger": [],
+  "historikkinnslag": []
+}

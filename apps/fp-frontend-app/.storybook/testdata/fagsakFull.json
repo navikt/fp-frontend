@@ -1,0 +1,306 @@
+{
+  "saksnummer": "3",
+  "fagsakYtelseType": "FP",
+  "relasjonsRolleType": "MORA",
+  "status": "UBEH",
+  "aktørId": "9902439132852",
+  "sakSkalTilInfotrygd": false,
+  "dekningsgrad": 100,
+  "bruker": {
+    "aktørId": "9902439132852",
+    "navn": "Hjort Brit",
+    "fødselsnummer": "02439132852",
+    "kjønn": "K",
+    "diskresjonskode": "UDEF",
+    "fødselsdato": "1973-06-09",
+    "dødsdato": null,
+    "dodsdato": null,
+    "språkkode": "NB"
+  },
+  "brukerManglerAdresse": false,
+  "annenPart": {
+    "aktørId": "9916488918099",
+    "navn": "Hjort Gabriel",
+    "fødselsnummer": "16488918099",
+    "kjønn": "M",
+    "diskresjonskode": "UDEF",
+    "fødselsdato": "1973-06-09",
+    "dødsdato": null,
+    "dodsdato": null,
+    "språkkode": "NB"
+  },
+  "annenpartBehandling": null,
+  "familiehendelse": {
+    "hendelseType": "ADPSJN",
+    "hendelseDato": "2023-06-07",
+    "antallBarn": 1,
+    "dødfødsel": false
+  },
+  "utlandMarkering": "BOSATT_UTLAND",
+  "fagsakMarkering": "BOSATT_UTLAND",
+  "behandlingTypeKanOpprettes": [
+    {
+      "behandlingType": "BT-002",
+      "kanOppretteBehandling": false
+    },
+    {
+      "behandlingType": "BT-004",
+      "kanOppretteBehandling": false
+    },
+    {
+      "behandlingType": "BT-008",
+      "kanOppretteBehandling": false
+    },
+    {
+      "behandlingType": "BT-003",
+      "kanOppretteBehandling": false
+    },
+    {
+      "behandlingType": "BT-006",
+      "kanOppretteBehandling": true
+    }
+  ],
+  "behandlinger": [
+    {
+      "id": 999954,
+      "uuid": "7d198233-b499-4aaf-a01b-be97958e20ce",
+      "versjon": 19,
+      "type": "BT-002",
+      "status": "UTRED",
+      "fagsakId": 999953,
+      "opprettet": "2023-06-09T10:49:29",
+      "avsluttet": null,
+      "endret": "2023-06-09T10:49:31.474",
+      "endretAvBrukernavn": "srvfpsak",
+      "behandlendeEnhetId": "4806",
+      "behandlendeEnhetNavn": "NAV Familie- og pensjonsytelser Drammen",
+      "erAktivPapirsoknad": false,
+      "førsteÅrsak": null,
+      "behandlingsfristTid": "2023-07-21",
+      "gjeldendeVedtak": false,
+      "erPaaVent": false,
+      "originalVedtaksDato": null,
+      "behandlingHenlagt": false,
+      "behandlingPaaVent": false,
+      "behandlingPåVent": false,
+      "fristBehandlingPåVent": null,
+      "fristBehandlingPaaVent": null,
+      "venteÅrsakKode": null,
+      "venteArsakKode": null,
+      "sprakkode": "NB",
+      "språkkode": "NB",
+      "behandlingKøet": false,
+      "ansvarligSaksbehandler": null,
+      "toTrinnsBehandling": false,
+      "behandlingsresultat": {
+        "id": 999954,
+        "type": "IKKE_FASTSATT",
+        "avslagsarsak": null,
+        "avslagsarsakFritekst": null,
+        "rettenTil": "-",
+        "konsekvenserForYtelsen": [],
+        "vedtaksbrev": "-",
+        "overskrift": null,
+        "fritekstbrev": null,
+        "erRevurderingMedUendretUtfall": false,
+        "skjæringstidspunkt": {
+          "dato": "2023-06-07",
+          "kreverSammenhengendeUttak": false,
+          "utenMinsterett": false
+        }
+      },
+      "behandlingÅrsaker": [],
+      "vilkår": [
+        {
+          "vilkarType": "FP_VK_41",
+          "vilkarStatus": "IKKE_VURDERT",
+          "avslagKode": null,
+          "lovReferanse": "§ 14-7",
+          "overstyrbar": true
+        },
+        {
+          "vilkarType": "FP_VK_21",
+          "vilkarStatus": "IKKE_VURDERT",
+          "avslagKode": null,
+          "lovReferanse": "§ 14-6 og 14-10",
+          "overstyrbar": true
+        },
+        {
+          "vilkarType": "FP_VK_2",
+          "vilkarStatus": "IKKE_VURDERT",
+          "avslagKode": null,
+          "lovReferanse": "§ 14-2",
+          "overstyrbar": true
+        },
+        {
+          "vilkarType": "FP_VK_23",
+          "vilkarStatus": "IKKE_VURDERT",
+          "avslagKode": null,
+          "lovReferanse": "§ 14-6",
+          "overstyrbar": true
+        },
+        {
+          "vilkarType": "FP_VK_16",
+          "vilkarStatus": "IKKE_VURDERT",
+          "avslagKode": null,
+          "lovReferanse": "§ 14-5, første ledd eller tredje ledd",
+          "overstyrbar": true
+        },
+        {
+          "vilkarType": "FP_VK_34",
+          "vilkarStatus": "OPPFYLT",
+          "avslagKode": null,
+          "lovReferanse": "§§ 21-3",
+          "overstyrbar": true
+        }
+      ],
+      "links": [
+        {
+          "href": "/fpsak/api/behandling/person/personoversikt?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
+          "rel": "behandling-personoversikt",
+          "requestPayload": null,
+          "type": "GET"
+        },
+        {
+          "href": "/fpsak/api/behandling/familiehendelse/v2?uuid=7d198233-b499-4aaf-a01b-be97958e20ce",
+          "rel": "familiehendelse-v2",
+          "requestPayload": null,
+          "type": "GET"
+        },
+        {
+          "href": "/fpsak/api/brev/bestill",
+          "rel": "brev-bestill",
+          "requestPayload": {
+            "behandlingId": null,
+            "behandlingUuid": null,
+            "brevmalkode": null,
+            "fritekst": null,
+            "arsakskode": null
+          },
+          "type": "POST"
+        }
+      ],
+      "behandlingTillatteOperasjoner": {
+        "uuid": "7d198233-b499-4aaf-a01b-be97958e20ce",
+        "behandlingKanBytteEnhet": true,
+        "behandlingKanHenlegges": true,
+        "behandlingKanGjenopptas": false,
+        "behandlingKanOpnesForEndringer": false,
+        "behandlingKanSettesPaVent": true,
+        "behandlingKanSendeMelding": true,
+        "behandlingFraBeslutter": false,
+        "behandlingTilGodkjenning": false,
+        "vergeBehandlingsmeny": "OPPRETT"
+      },
+      "brevmaler": [
+        {
+          "kode": "INNOPP",
+          "navn": "Innhente opplysninger",
+          "tilgjengelig": true
+        },
+        {
+          "kode": "FORSAK",
+          "navn": "Forlenget saksbehandlingstid",
+          "tilgjengelig": true
+        },
+        {
+          "kode": "FORMED",
+          "navn": "Forlenget saksbehandlingstid - medlemskap",
+          "tilgjengelig": true
+        },
+        {
+          "kode": "ELYSIM",
+          "navn": "Etterlys inntektsmelding",
+          "tilgjengelig": true
+        }
+      ],
+      "totrinnskontrollÅrsaker": [],
+      "totrinnskontrollReadonly": true,
+      "risikoAksjonspunkt": null,
+      "kontrollResultat": {
+        "kontrollresultat": "IKKE_HOY",
+        "iayFaresignaler": null,
+        "medlFaresignaler": null,
+        "faresignalVurdering": null
+      },
+      "ugunstAksjonspunkt": null,
+      "behandlingKoet": false
+    }
+  ],
+  "historikkinnslag": [
+    {
+      "behandlingId": 999954,
+      "behandlingUuid": "7d198233-b499-4aaf-a01b-be97958e20ce",
+      "type": "BYTT_ENHET",
+      "aktoer": "VL",
+      "opprettetAv": "Srvfpsak",
+      "opprettetTidspunkt": "2023-06-09T10:49:30.395",
+      "dokumentLinks": [],
+      "historikkinnslagDeler": [
+        {
+          "begrunnelsetekst": null,
+          "begrunnelseFritekst": "Personopplysning",
+          "hendelse": {
+            "navn": "BYTT_ENHET",
+            "verdi": null
+          },
+          "opplysninger": null,
+          "soeknadsperiode": null,
+          "skjermlenke": null,
+          "årsaktekst": null,
+          "tema": null,
+          "gjeldendeFra": null,
+          "resultat": null,
+          "endredeFelter": [
+            {
+              "endretFeltNavn": "BEHANDLENDE_ENHET",
+              "navnVerdi": null,
+              "klNavn": "HISTORIKK_ENDRET_FELT_TYPE",
+              "fraVerdi": "4867 NAV Familie- og pensjonsytelser Foreldrepenger",
+              "tilVerdi": "4806 NAV Familie- og pensjonsytelser Drammen",
+              "klFraVerdi": null,
+              "klTilVerdi": null
+            }
+          ],
+          "aksjonspunkter": null
+        }
+      ]
+    },
+    {
+      "behandlingId": 999954,
+      "behandlingUuid": "7d198233-b499-4aaf-a01b-be97958e20ce",
+      "type": "BEH_STARTET",
+      "aktoer": "SOKER",
+      "opprettetAv": "Srvfpsak",
+      "opprettetTidspunkt": "2023-06-09T10:49:29.627",
+      "dokumentLinks": [
+        {
+          "tag": "Søknad",
+          "url": "http://172.18.0.11:8080/fpsak/api/dokument/hent-dokument?journalpostId=6982308&dokumentId=6982308",
+          "journalpostId": "6982308",
+          "dokumentId": "6982308",
+          "utgått": false
+        }
+      ],
+      "historikkinnslagDeler": [
+        {
+          "begrunnelsetekst": null,
+          "begrunnelseFritekst": null,
+          "hendelse": {
+            "navn": "BEH_STARTET",
+            "verdi": null
+          },
+          "opplysninger": null,
+          "soeknadsperiode": null,
+          "skjermlenke": null,
+          "årsaktekst": null,
+          "tema": null,
+          "gjeldendeFra": null,
+          "resultat": null,
+          "endredeFelter": null,
+          "aksjonspunkter": null
+        }
+      ]
+    }
+  ]
+}

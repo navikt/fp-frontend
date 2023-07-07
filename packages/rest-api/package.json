@@ -1,0 +1,42 @@
+{
+  "name": "@navikt/fp-rest-api",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "vitest",
+    "test:watch": "vitest --watch=true",
+    "test:coverage": "vitest --coverage",
+    "tsc": "tsc --pretty",
+    "eslint": "eslint \"src/**/*.ts*\" --color",
+    "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
+    "prettier": "prettier --write src",
+    "dev": "vite build --mode development --watch",
+    "build": "vite build",
+    "clean": "rm -rf ./dist ./node_modules"
+  },
+  "dependencies": {
+    "@sentry/browser": "7.57.0",
+    "axios": "1.4.0"
+  },
+  "devDependencies": {
+    "axios-mock-adapter": "1.21.5",
+    "cross-env": "7.0.3",
+    "eslint": "8.44.0",
+    "typescript": "5.1.6",
+    "vite": "4.3.9",
+    "vitest": "0.32.4"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "SakenFaktaPanel.OpptjeningUtland": "Se søknad for informasjon om oppgitt rettighet fra EØS. Innhent dokumentasjon fra utenlandsk trygdemyndighet ved behov",
+
+  "UtlandPanel.lagre": "Lagre",
+  "UtlandPanel.avbryt": "Avbryt",
+
+  "InnhentDokOpptjeningUtlandPanel.OpptjeningUtland": "Vurder om SED skal innhentes",
+  "InnhentDokOpptjeningUtlandPanel.InnhentelseDok": "Innhentelse av dokumentasjon",
+  "InnhentDokOpptjeningUtlandPanel.Innhentes": "Dokumentasjon vil bli innhentet",
+  "InnhentDokOpptjeningUtlandPanel.InnhentesIkke": "Dokumentasjon vil <b>ikke</b> bli innhentet",
+  "InnhentDokOpptjeningUtlandPanel.Begrunnelse": "Begrunnelse",
+
+  "StartdatoForForeldrepengerperiodenForm.StartdatoFør2019": "Startdato kan ikke være før 01.01.2019",
+  "StartdatoForForeldrepengerperiodenForm.StartdatoForPerioden": "Startdato for foreldrepengeperioden",
+  "StartdatoForForeldrepengerperiodenForm.Vurdering": "Vurdering",
+  "StartdatoForForeldrepengerperiodenForm.Startdato": "Startdato som skal benyttes (fra søknad eller fødsel)",
+  "StartdatoForForeldrepengerperiodenForm.Oppdater": "Oppdater",
+  "StartdatoForForeldrepengerperiodenForm.StartdatoSomBenyttes": "Startdato som benyttes",
+  "StartdatoForForeldrepengerperiodenForm.EndreStartdato": "Endre startdato for foreldrepenger"
+}

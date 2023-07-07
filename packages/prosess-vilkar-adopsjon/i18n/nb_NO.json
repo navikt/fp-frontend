@@ -1,0 +1,8 @@
+{
+  "AdopsjonVilkarForm.Adopsjon": "Adopsjon",
+  "AdopsjonVilkarForm.TidligereUtbetaltStonad": "Tidligere utbetalte foreldrepenger eller engangsstønad",
+  "AdopsjonVilkarForm.Oppfylt": "Er utbetalt for et annet barn, vilkåret er oppfylt",
+  "AdopsjonVilkarForm.IkkeOppfylt": "Er utbetalt for dette barnet, vilkåret er <b>ikke</b> oppfylt",
+
+  "ShowVilkarStatus.Check": "Informasjonen er utfylt"
+}

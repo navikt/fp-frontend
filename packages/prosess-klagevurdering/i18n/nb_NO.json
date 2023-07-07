@@ -1,0 +1,22 @@
+{
+  "Klage.ResolveKlage.Title": "Behandle klage",
+  "Klage.ResolveKlage.HelpText": "Vurder om klagen skal tas til følge",
+  "Klage.ResolveKlage.KeepVedtakNk": "Stadfest vedtaket",
+  "Klage.ResolveKlage.KeepVedtakNfp": "Oppretthold vedtaket",
+  "Klage.ResolveKlage.ChangeVedtak": "Omgjør vedtaket",
+  "Klage.ResolveKlage.Hjemmel": "Hjemmel",
+  "Klage.Behandle.Omgjort": "Til gunst",
+  "Klage.Behandle.DelvisOmgjort": "Delvis omgjør, til gunst",
+  "Klage.Behandle.Hjemsendt": "Hjemsend vedtaket",
+  "Klage.Behandle.Ugunst": "Til ugunst",
+  "Klage.ResolveKlage.NullifyVedtak": "Opphev og hjemsend vedtaket",
+  "Klage.ResolveKlage.Cause": "Årsak",
+  "Klage.ResolveKlage.TempSaveButton": "Lagre",
+  "KlageVurderingRadioOptionsKa.VurderingForKlage": "Vurdering",
+  "FritekstKlageBrevTextField.Fritekst": "Fritekst til brev",
+  "BehandleKlageFormNfp.BegrunnelseForKlage": "Begrunnelse",
+  "PreviewKlageLink.ForhandvisBrev": "Forhåndsvis brev",
+  "KlageVurderingRadioOptionsKa.Begrunnelse": "Begrunnelse",
+
+  "Malform.Beskrivelse": "Foretrukket språk"
+}
