@@ -8535,18 +8535,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/coverage-c8@npm:0.32.4":
-  version: 0.32.4
-  resolution: "@vitest/coverage-c8@npm:0.32.4"
+"@vitest/coverage-c8@npm:0.33.0":
+  version: 0.33.0
+  resolution: "@vitest/coverage-c8@npm:0.33.0"
   dependencies:
     "@ampproject/remapping": ^2.2.1
     c8: ^7.14.0
-    magic-string: ^0.30.0
+    magic-string: ^0.30.1
     picocolors: ^1.0.0
     std-env: ^3.3.3
   peerDependencies:
     vitest: ">=0.30.0 <1"
-  checksum: 5e394cbbeabfbe0ff47afce43434fb0b26706c6d9c5ad51bafd02309e39598b8405a02fed3c122c54b98e0b349ecdf25b3f6a5011f0804135aba6b2bb333dd6b
+  checksum: 67573fa400995871fa8f615411d21dd9937a78fac13bc6789427a7857fa780e71188ff43a35e19bb31e6393f9334d4376456ff24b7bb0591c64357036ff6a594
   languageName: node
   linkType: hard
 
@@ -12258,7 +12258,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": 5.61.0
     "@typescript-eslint/parser": 5.61.0
     "@vitejs/plugin-react": 4.0.1
-    "@vitest/coverage-c8": 0.32.4
+    "@vitest/coverage-c8": 0.33.0
     axios-mock-adapter: 1.21.5
     cross-env: 7.0.3
     dotenv: 16.3.1
@@ -14738,7 +14738,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-string@npm:^0.30.0":
+"magic-string@npm:^0.30.0, magic-string@npm:^0.30.1":
   version: 0.30.1
   resolution: "magic-string@npm:0.30.1"
   dependencies:
