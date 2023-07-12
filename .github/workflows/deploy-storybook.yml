@@ -1,14 +1,17 @@
 name: "Deploy storybook"
 
 on:
-  schedule:
-    - cron: '0 12 * * *'
+  push:
+    branches: [ "master" ]
 
 jobs:
   deploy-storybook:
    permissions:
-     actions: read
-     contents: read
+     actions: write
+     pull-requests: write
+     contents: write
      pages: write
    uses: navikt/fp-gha-workflows/.github/workflows/deploy-storybook.yml@main
+   with:
+     package-manager: pnpm
    secrets: inherit
