@@ -6,5 +6,9 @@ on:
 
 jobs:
   deploy-storybook:
+   permissions:
+     actions: read
+     contents: read
+     pages: write
    uses: navikt/fp-gha-workflows/.github/workflows/deploy-storybook.yml@main
    secrets: inherit
