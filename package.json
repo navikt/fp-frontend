@@ -46,7 +46,7 @@
     "@sentry/cli": "2.19.4",
     "@storybook/addon-essentials": "7.0.26",
     "@storybook/addon-links": "7.0.26",
-    "@storybook/builder-vite": "7.0.26",
+    "@storybook/builder-vite": "7.0.27",
     "@storybook/cli": "7.0.26",
     "@storybook/react": "7.0.26",
     "@testing-library/jest-dom": "5.16.5",
