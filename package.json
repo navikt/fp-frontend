@@ -44,7 +44,7 @@
   "devDependencies": {
     "@navikt/aksel-stylelint": "4.5.0",
     "@sentry/cli": "2.19.4",
-    "@storybook/addon-essentials": "7.0.26",
+    "@storybook/addon-essentials": "7.1.0",
     "@storybook/addon-links": "7.0.26",
     "@storybook/builder-vite": "7.0.26",
     "@storybook/cli": "7.0.26",
