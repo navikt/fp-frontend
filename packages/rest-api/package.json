@@ -22,7 +22,7 @@
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
-    "@sentry/browser": "7.57.0",
+    "@sentry/browser": "7.59.2",
     "axios": "1.4.0"
   },
   "devDependencies": {
