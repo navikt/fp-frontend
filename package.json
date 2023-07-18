@@ -60,7 +60,7 @@
     "@types/react-router-dom": "5.3.3",
     "@types/react-test-renderer": "18.0.0",
     "@typescript-eslint/eslint-plugin": "5.61.0",
-    "@typescript-eslint/parser": "5.61.0",
+    "@typescript-eslint/parser": "6.1.0",
     "@vitejs/plugin-react": "4.0.1",
     "@vitest/coverage-c8": "0.32.4",
     "axios-mock-adapter": "1.21.5",
