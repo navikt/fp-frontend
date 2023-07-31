@@ -65,7 +65,7 @@
     "@vitest/coverage-c8": "0.32.4",
     "axios-mock-adapter": "1.21.5",
     "cross-env": "7.0.3",
-    "eslint": "8.44.0",
+    "eslint": "8.46.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-prettier": "8.8.0",
     "eslint-import-resolver-lerna": "2.0.0",
