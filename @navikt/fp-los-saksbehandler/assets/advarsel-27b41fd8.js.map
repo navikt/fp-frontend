@@ -1,1 +1,1 @@
-{"version":3,"file":"advarsel-27b41fd8.js","sources":["../../src/images/advarsel.svg"],"sourcesContent":["export default \"__VITE_ASSET__2ab0f43a__\""],"names":["advarselIcon"],"mappings":"AAAA,MAAeA,EAAA,GAAA,IAAA,IAAA,wBAAA,YAAA,GAAA,EAAA"}
+{"version":3,"file":"advarsel-27b41fd8.js","sources":["../../src/images/advarsel.svg"],"sourcesContent":["export default \"__VITE_ASSET__2ab0f43a__\""],"names":["advarselImageUrl"],"mappings":"AAAA,MAAeA,EAAA,GAAA,IAAA,IAAA,wBAAA,YAAA,GAAA,EAAA"}

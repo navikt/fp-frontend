@@ -1,0 +1,8 @@
+import{t as u,j as a,P as i}from"./index.es-cf8b7a99.js";import{W as I}from"./index.es-bf42e136.js";import{I as s}from"./IverksetterVedtakStatusModal-4b14f9a1.js";import"./index-6d8bab86.js";import"./index-e9aed0d1.js";const c={"IverksetterVedtakStatusModal.Avslatt":"Avslått","IverksetterVedtakStatusModal.VedtakAvslatt":"Vedtak avslått","IverksetterVedtakStatusModal.Innvilget":"Innvilget","IverksetterVedtakStatusModal.VedtakInnvilet":"Vedtak innvilget","IverksetterVedtakStatusModal.GoToSearchPage":"Gå til søkeside","IverksetterVedtakStatusModal.Ok":"OK"},k=u(c),g={title:"app/vedtak/IverksetterVedtakStatusModal",component:s},t=()=>a.jsx(i,{value:k,children:a.jsx(s,{visModal:!0,lukkModal:()=>{}})}),e=()=>a.jsx(i,{value:k,children:a.jsx(s,{visModal:!0,lukkModal:()=>{},behandlingsresultat:{type:I.AVSLATT}})});var r,d,o;t.parameters={...t.parameters,docs:{...(r=t.parameters)==null?void 0:r.docs,source:{originalSource:`() => <RawIntlProvider value={intl}>
+    <IverksetterVedtakStatusModal visModal lukkModal={() => undefined} />
+  </RawIntlProvider>`,...(o=(d=t.parameters)==null?void 0:d.docs)==null?void 0:o.source}}};var l,n,v;e.parameters={...e.parameters,docs:{...(l=e.parameters)==null?void 0:l.docs,source:{originalSource:`() => <RawIntlProvider value={intl}>
+    <IverksetterVedtakStatusModal visModal lukkModal={() => undefined} behandlingsresultat={{
+    type: BehandlingResultatType.AVSLATT
+  }} />
+  </RawIntlProvider>`,...(v=(n=e.parameters)==null?void 0:n.docs)==null?void 0:v.source}}};const A=["visIverksetterVedtakInnvilget","visIverksetterVedtakAvslatt"];export{A as __namedExportsOrder,g as default,e as visIverksetterVedtakAvslatt,t as visIverksetterVedtakInnvilget};
+//# sourceMappingURL=IverksetterVedtakStatusModal.stories-66cf0098.js.map
