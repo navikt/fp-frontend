@@ -81,6 +81,7 @@
     "lerna": "7.1.4",
     "lint-staged": "13.2.3",
     "react-test-renderer": "18.2.0",
+    "shelljs": "0.8.5",
     "stylelint": "15.10.2",
     "stylelint-order": "6.0.3",
     "typescript": "5.1.6",
