@@ -2,7 +2,6 @@
 enum ProsessStegCode {
   DEFAULT = 'default',
   INNGANGSVILKAR = 'inngangsvilkar',
-  AVREGNING = 'simulering',
   BEHANDLE_INNSYN = 'behandle_innsyn',
   BEREGNING = 'beregning',
   BEREGNINGSGRUNNLAG = 'beregningsgrunnlag',

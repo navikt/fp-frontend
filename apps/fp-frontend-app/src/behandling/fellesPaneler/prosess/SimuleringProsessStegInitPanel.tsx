@@ -62,7 +62,7 @@ const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelI
       {...props}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
-      prosessPanelKode={ProsessStegCode.AVREGNING}
+      prosessPanelKode={ProsessStegCode.SIMULERING}
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Avregning' })}
       skalPanelVisesIMeny={() => {
         const harVedtakspanel = menyData.some(
