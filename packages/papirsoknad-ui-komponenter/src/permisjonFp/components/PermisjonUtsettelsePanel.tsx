@@ -36,7 +36,7 @@ interface StaticFunctions {
  */
 const PermisjonUtsettelsePanel: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly, alleKodeverk }) => {
   const utsettelseReasons = alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE];
-  const utsettelseKvoter = alleKodeverk[KodeverkType.UTSETTELSE_GRADERING_KVOTE];
+  const utsettelseKvoter = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE];
 
   const { watch } = useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
   const skalUtsette = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalUtsette`) || false;

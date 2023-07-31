@@ -35,7 +35,7 @@ interface StaticFunctions {
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent
  */
 const PermisjonGraderingPanel: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly, alleKodeverk }) => {
-  const graderingKvoter = alleKodeverk[KodeverkType.UTSETTELSE_GRADERING_KVOTE];
+  const graderingKvoter = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE];
   const arbeidskategoriTyper = alleKodeverk[KodeverkType.ARBEIDSKATEGORI];
 
   const { watch } = useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();

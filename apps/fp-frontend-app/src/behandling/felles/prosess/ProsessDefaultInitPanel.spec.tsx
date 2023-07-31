@@ -50,7 +50,7 @@ describe('<ProsessDefaultInitPanel>', () => {
         registrerProsessPanel={() => {}}
         skalPanelVisesIMeny={() => true}
         renderPanel={() => <div>Dette er komponenten</div>}
-        prosessPanelKode={ProsessStegCode.AVREGNING}
+        prosessPanelKode={ProsessStegCode.SIMULERING}
         prosessPanelMenyTekst="Dette er en tekst"
       />,
     );

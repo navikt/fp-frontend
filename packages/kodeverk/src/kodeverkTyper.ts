@@ -24,7 +24,6 @@ enum KodeverkType {
   BEHANDLING_TYPE = 'BehandlingType',
   OPPHOLD_ARSAK = 'OppholdÅrsak',
   UTSETTELSE_AARSAK_TYPE = 'UtsettelseÅrsak',
-  UTSETTELSE_GRADERING_KVOTE = 'UttakPeriodeType',
   OPPTJENING_AKTIVITET_TYPE = 'OpptjeningAktivitetType',
   UTTAK_PERIODE_TYPE = 'UttakPeriodeType',
   REVURDERING_VARSLING_ÅRSAK = 'RevurderingVarslingÅrsak',
