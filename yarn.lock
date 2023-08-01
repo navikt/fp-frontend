@@ -2638,7 +2638,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -2676,7 +2676,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -2713,7 +2713,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -2748,7 +2748,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -2814,7 +2814,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -2852,7 +2852,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -2889,7 +2889,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -2925,7 +2925,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -2962,7 +2962,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3000,7 +3000,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3035,7 +3035,7 @@ __metadata:
     "@navikt/ft-form-validators": 2.0.39
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3073,7 +3073,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3111,7 +3111,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3149,7 +3149,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3188,7 +3188,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3224,7 +3224,7 @@ __metadata:
     "@navikt/ft-form-validators": 2.0.39
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3259,7 +3259,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3290,7 +3290,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3416,7 +3416,7 @@ __metadata:
     "@navikt/ft-utils": 2.0.38
     "@popperjs/core": 2.11.8
     "@sentry/browser": 7.60.1
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3468,7 +3468,7 @@ __metadata:
     "@navikt/ft-kodeverk": 2.1.19
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3526,7 +3526,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3566,7 +3566,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3609,7 +3609,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3681,7 +3681,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3719,7 +3719,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3751,7 +3751,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3782,7 +3782,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3813,7 +3813,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3849,7 +3849,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3886,7 +3886,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3918,7 +3918,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -3982,7 +3982,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4020,7 +4020,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4057,7 +4057,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4093,7 +4093,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4129,7 +4129,7 @@ __metadata:
     "@navikt/ft-form-validators": 2.0.39
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4166,7 +4166,7 @@ __metadata:
     "@navikt/ft-form-validators": 2.0.39
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4206,7 +4206,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4244,7 +4244,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4277,7 +4277,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4314,7 +4314,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4349,7 +4349,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4383,7 +4383,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4417,7 +4417,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4451,7 +4451,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4484,7 +4484,7 @@ __metadata:
     "@navikt/ft-form-hooks": 4.1.7
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4520,7 +4520,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4556,7 +4556,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4592,7 +4592,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4627,7 +4627,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4694,7 +4694,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4731,7 +4731,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4761,7 +4761,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4793,7 +4793,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4826,7 +4826,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4859,7 +4859,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4891,7 +4891,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4924,7 +4924,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4958,7 +4958,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -4998,7 +4998,7 @@ __metadata:
     "@navikt/ft-types": 2.1.21
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -5027,7 +5027,7 @@ __metadata:
     "@navikt/fp-storybook-utils": 1.0.0
     "@navikt/ft-ui-komponenter": 2.0.42
     "@navikt/ft-utils": 2.0.38
-    "@storybook/addon-actions": 7.1.1
+    "@storybook/addon-actions": 7.2.0
     "@storybook/react": 7.1.1
     "@storybook/react-vite": 7.1.1
     "@testing-library/react": 14.0.0
@@ -6241,12 +6241,50 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/number@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/number@npm:1.0.1"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+  checksum: 621ea8b7d4195d1a65a9c0aee918e8335e7f198088eec91577512c89c2ba3a3bab4a767cfb872a2b9c3092a78ff41cad9a924845a939f6bb87fe9356241ea0ea
+  languageName: node
+  linkType: hard
+
 "@radix-ui/primitive@npm:1.0.0":
   version: 1.0.0
   resolution: "@radix-ui/primitive@npm:1.0.0"
   dependencies:
     "@babel/runtime": ^7.13.10
   checksum: 72996afaf346ec4f4c73422f14f6cb2d0de994801ba7cbb9a4a67b0050e0cd74625182c349ef8017ccae1406579d4b74a34a225ef2efe61e8e5337decf235deb
+  languageName: node
+  linkType: hard
+
+"@radix-ui/primitive@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/primitive@npm:1.0.1"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+  checksum: 2b93e161d3fdabe9a64919def7fa3ceaecf2848341e9211520c401181c9eaebb8451c630b066fad2256e5c639c95edc41de0ba59c40eff37e799918d019822d1
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-arrow@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@radix-ui/react-arrow@npm:1.0.3"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@radix-ui/react-primitive": 1.0.3
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 8cca086f0dbb33360e3c0142adf72f99fc96352d7086d6c2356dbb2ea5944cfb720a87d526fc48087741c602cd8162ca02b0af5e6fdf5f56d20fddb44db8b4c3
   languageName: node
   linkType: hard
 
@@ -6266,6 +6304,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/react-collection@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@radix-ui/react-collection@npm:1.0.3"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@radix-ui/react-compose-refs": 1.0.1
+    "@radix-ui/react-context": 1.0.1
+    "@radix-ui/react-primitive": 1.0.3
+    "@radix-ui/react-slot": 1.0.2
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: acfbc9b0b2c553d343c22f02c9f098bc5cfa99e6e48df91c0d671855013f8b877ade9c657b7420a7aa523b5aceadea32a60dd72c23b1291f415684fb45d00cff
+  languageName: node
+  linkType: hard
+
 "@radix-ui/react-compose-refs@npm:1.0.0":
   version: 1.0.0
   resolution: "@radix-ui/react-compose-refs@npm:1.0.0"
@@ -6274,6 +6335,21 @@ __metadata:
   peerDependencies:
     react: ^16.8 || ^17.0 || ^18.0
   checksum: fb98be2e275a1a758ccac647780ff5b04be8dcf25dcea1592db3b691fecf719c4c0700126da605b2f512dd89caa111352b9fad59528d736b4e0e9a0e134a74a1
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-compose-refs@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-compose-refs@npm:1.0.1"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+  peerDependencies:
+    "@types/react": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 2b9a613b6db5bff8865588b6bf4065f73021b3d16c0a90b2d4c23deceeb63612f1f15de188227ebdc5f88222cab031be617a9dd025874c0487b303be3e5cc2a8
   languageName: node
   linkType: hard
 
@@ -6288,6 +6364,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/react-context@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-context@npm:1.0.1"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+  peerDependencies:
+    "@types/react": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 60e9b81d364f40c91a6213ec953f7c64fcd9d75721205a494a5815b3e5ae0719193429b62ee6c7002cd6aaf70f8c0e2f08bdbaba9ffcc233044d32b56d2127d1
+  languageName: node
+  linkType: hard
+
 "@radix-ui/react-direction@npm:1.0.0":
   version: 1.0.0
   resolution: "@radix-ui/react-direction@npm:1.0.0"
@@ -6296,6 +6387,82 @@ __metadata:
   peerDependencies:
     react: ^16.8 || ^17.0 || ^18.0
   checksum: 92a40de4087b161a56957872daf204a7735bd21f2fccbd42deff322d759977d085ad3dcdae05af437b7e64e628e939e0d67e5bc468a3027e1b02e0a7dc90c485
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-direction@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-direction@npm:1.0.1"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+  peerDependencies:
+    "@types/react": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 5336a8b0d4f1cde585d5c2b4448af7b3d948bb63a1aadb37c77771b0e5902dc6266e409cf35fd0edaca7f33e26424be19e64fb8f9d7f7be2d6f1714ea2764210
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-dismissable-layer@npm:1.0.4":
+  version: 1.0.4
+  resolution: "@radix-ui/react-dismissable-layer@npm:1.0.4"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@radix-ui/primitive": 1.0.1
+    "@radix-ui/react-compose-refs": 1.0.1
+    "@radix-ui/react-primitive": 1.0.3
+    "@radix-ui/react-use-callback-ref": 1.0.1
+    "@radix-ui/react-use-escape-keydown": 1.0.3
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: ea86004ed56a10609dd84eef39dc1e57b400d687a35be41bb4aaa06dc7ad6dbd0a8da281e08c8c077fdbd523122e4d860cb7438a60c664f024f77c8b41299ec6
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-focus-guards@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-focus-guards@npm:1.0.1"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+  peerDependencies:
+    "@types/react": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 1f8ca8f83b884b3612788d0742f3f054e327856d90a39841a47897dbed95e114ee512362ae314177de226d05310047cabbf66b686ae86ad1b65b6b295be24ef7
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-focus-scope@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@radix-ui/react-focus-scope@npm:1.0.3"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@radix-ui/react-compose-refs": 1.0.1
+    "@radix-ui/react-primitive": 1.0.3
+    "@radix-ui/react-use-callback-ref": 1.0.1
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: e5b1a089071fbe77aca11124a4ad9623fc2bcaf4c019759b0cd044bf0878ecc924131ee09c6a22d38a3f094684ef68ed18fa65c8d891918412e0afc685a464e0
   languageName: node
   linkType: hard
 
@@ -6308,6 +6475,71 @@ __metadata:
   peerDependencies:
     react: ^16.8 || ^17.0 || ^18.0
   checksum: ba323cedd6a6df6f6e51ed1f7f7747988ce432b47fd94d860f962b14b342dcf049eae33f8ad0b72fd7df6329a7375542921132271fba64ab0a271c93f09c48d1
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-id@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-id@npm:1.0.1"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@radix-ui/react-use-layout-effect": 1.0.1
+  peerDependencies:
+    "@types/react": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 446a453d799cc790dd2a1583ff8328da88271bff64530b5a17c102fa7fb35eece3cf8985359d416f65e330cd81aa7b8fe984ea125fc4f4eaf4b3801d698e49fe
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-popper@npm:1.1.2":
+  version: 1.1.2
+  resolution: "@radix-ui/react-popper@npm:1.1.2"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@floating-ui/react-dom": ^2.0.0
+    "@radix-ui/react-arrow": 1.0.3
+    "@radix-ui/react-compose-refs": 1.0.1
+    "@radix-ui/react-context": 1.0.1
+    "@radix-ui/react-primitive": 1.0.3
+    "@radix-ui/react-use-callback-ref": 1.0.1
+    "@radix-ui/react-use-layout-effect": 1.0.1
+    "@radix-ui/react-use-rect": 1.0.1
+    "@radix-ui/react-use-size": 1.0.1
+    "@radix-ui/rect": 1.0.1
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 4929daa0d1cccada3cff50de0e00c0d186ffea97a5f28545c77fa85ff9bc5c105a54dddac400c2e2dcac631f0f7ea88e59f2e5ad0f80bb2cb7b62cc7cd30400f
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-portal@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@radix-ui/react-portal@npm:1.0.3"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@radix-ui/react-primitive": 1.0.3
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: d352bcd6ad65eb43c9e0d72d0755c2aae85e03fb287770866262be3a2d5302b2885aee3cd99f2bbf62ecd14fcb1460703f1dcdc40351f77ad887b931c6f0012a
   languageName: node
   linkType: hard
 
@@ -6338,6 +6570,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/react-primitive@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@radix-ui/react-primitive@npm:1.0.3"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@radix-ui/react-slot": 1.0.2
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 9402bc22923c8e5c479051974a721c301535c36521c0237b83e5fa213d013174e77f3ad7905e6d60ef07e14f88ec7f4ea69891dc7a2b39047f8d3640e8f8d713
+  languageName: node
+  linkType: hard
+
 "@radix-ui/react-roving-focus@npm:1.0.0":
   version: 1.0.0
   resolution: "@radix-ui/react-roving-focus@npm:1.0.0"
@@ -6359,6 +6611,46 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/react-select@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "@radix-ui/react-select@npm:1.2.2"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@radix-ui/number": 1.0.1
+    "@radix-ui/primitive": 1.0.1
+    "@radix-ui/react-collection": 1.0.3
+    "@radix-ui/react-compose-refs": 1.0.1
+    "@radix-ui/react-context": 1.0.1
+    "@radix-ui/react-direction": 1.0.1
+    "@radix-ui/react-dismissable-layer": 1.0.4
+    "@radix-ui/react-focus-guards": 1.0.1
+    "@radix-ui/react-focus-scope": 1.0.3
+    "@radix-ui/react-id": 1.0.1
+    "@radix-ui/react-popper": 1.1.2
+    "@radix-ui/react-portal": 1.0.3
+    "@radix-ui/react-primitive": 1.0.3
+    "@radix-ui/react-slot": 1.0.2
+    "@radix-ui/react-use-callback-ref": 1.0.1
+    "@radix-ui/react-use-controllable-state": 1.0.1
+    "@radix-ui/react-use-layout-effect": 1.0.1
+    "@radix-ui/react-use-previous": 1.0.1
+    "@radix-ui/react-visually-hidden": 1.0.3
+    aria-hidden: ^1.1.1
+    react-remove-scroll: 2.5.5
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: af7b63cc9e2c6006ec08163392d244941e9e03534e7add1b7c5a86059d0eb8a0398d4f3e80d43ff22126874a02b985e44f1722d1de9218922f7aa653d09412e3
+  languageName: node
+  linkType: hard
+
 "@radix-ui/react-slot@npm:1.0.0":
   version: 1.0.0
   resolution: "@radix-ui/react-slot@npm:1.0.0"
@@ -6368,6 +6660,22 @@ __metadata:
   peerDependencies:
     react: ^16.8 || ^17.0 || ^18.0
   checksum: 60c0190ebdca21785b4f8b58a0c52717600c98953fc49da9580870519c60f52d5cf873dffa05446f4bb539066326ccec0827f4ca252b02ec4ff1a4ae203f59d7
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-slot@npm:1.0.2":
+  version: 1.0.2
+  resolution: "@radix-ui/react-slot@npm:1.0.2"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@radix-ui/react-compose-refs": 1.0.1
+  peerDependencies:
+    "@types/react": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: edf5edf435ff594bea7e198bf16d46caf81b6fb559493acad4fa8c308218896136acb16f9b7238c788fd13e94a904f2fd0b6d834e530e4cae94522cdb8f77ce9
   languageName: node
   linkType: hard
 
@@ -6436,6 +6744,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/react-use-callback-ref@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-use-callback-ref@npm:1.0.1"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+  peerDependencies:
+    "@types/react": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: b9fd39911c3644bbda14a84e4fca080682bef84212b8d8931fcaa2d2814465de242c4cfd8d7afb3020646bead9c5e539d478cea0a7031bee8a8a3bb164f3bc4c
+  languageName: node
+  linkType: hard
+
 "@radix-ui/react-use-controllable-state@npm:1.0.0":
   version: 1.0.0
   resolution: "@radix-ui/react-use-controllable-state@npm:1.0.0"
@@ -6448,6 +6771,38 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/react-use-controllable-state@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-use-controllable-state@npm:1.0.1"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@radix-ui/react-use-callback-ref": 1.0.1
+  peerDependencies:
+    "@types/react": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: dee2be1937d293c3a492cb6d279fc11495a8f19dc595cdbfe24b434e917302f9ac91db24e8cc5af9a065f3f209c3423115b5442e65a5be9fd1e9091338972be9
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-use-escape-keydown@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@radix-ui/react-use-escape-keydown@npm:1.0.3"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@radix-ui/react-use-callback-ref": 1.0.1
+  peerDependencies:
+    "@types/react": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: c6ed0d9ce780f67f924980eb305af1f6cce2a8acbaf043a58abe0aa3cc551d9aa76ccee14531df89bbee302ead7ecc7fce330886f82d4672c5eda52f357ef9b8
+  languageName: node
+  linkType: hard
+
 "@radix-ui/react-use-layout-effect@npm:1.0.0":
   version: 1.0.0
   resolution: "@radix-ui/react-use-layout-effect@npm:1.0.0"
@@ -6456,6 +6811,97 @@ __metadata:
   peerDependencies:
     react: ^16.8 || ^17.0 || ^18.0
   checksum: fcdc8cfa79bd45766ebe3de11039c58abe3fed968cb39c12b2efce5d88013c76fe096ea4cee464d42576d02fe7697779b682b4268459bca3c4e48644f5b4ac5e
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-use-layout-effect@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-use-layout-effect@npm:1.0.1"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+  peerDependencies:
+    "@types/react": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: bed9c7e8de243a5ec3b93bb6a5860950b0dba359b6680c84d57c7a655e123dec9b5891c5dfe81ab970652e7779fe2ad102a23177c7896dde95f7340817d47ae5
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-use-previous@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-use-previous@npm:1.0.1"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+  peerDependencies:
+    "@types/react": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 66b4312e857c58b75f3bf62a2048ef090b79a159e9da06c19a468c93e62336969c33dbef60ff16969f00b20386cc25d138f6a353f1658b35baac0a6eff4761b9
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-use-rect@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-use-rect@npm:1.0.1"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@radix-ui/rect": 1.0.1
+  peerDependencies:
+    "@types/react": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 433f07e61e04eb222349825bb05f3591fca131313a1d03709565d6226d8660bd1d0423635553f95ee4fcc25c8f2050972d848808d753c388e2a9ae191ebf17f3
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-use-size@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/react-use-size@npm:1.0.1"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@radix-ui/react-use-layout-effect": 1.0.1
+  peerDependencies:
+    "@types/react": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 6cc150ad1e9fa85019c225c5a5d50a0af6cdc4653dad0c21b4b40cd2121f36ee076db326c43e6bc91a69766ccff5a84e917d27970176b592577deea3c85a3e26
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-visually-hidden@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@radix-ui/react-visually-hidden@npm:1.0.3"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+    "@radix-ui/react-primitive": 1.0.3
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 2e9d0c8253f97e7d6ffb2e52a5cfd40ba719f813b39c3e2e42c496d54408abd09ef66b5aec4af9b8ab0553215e32452a5d0934597a49c51dd90dc39181ed0d57
+  languageName: node
+  linkType: hard
+
+"@radix-ui/rect@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@radix-ui/rect@npm:1.0.1"
+  dependencies:
+    "@babel/runtime": ^7.13.10
+  checksum: aeec13b234a946052512d05239067d2d63422f9ec70bf2fe7acfd6b9196693fc33fbaf43c2667c167f777d90a095c6604eb487e0bce79e230b6df0f6cacd6a55
   languageName: node
   linkType: hard
 
@@ -6680,6 +7126,38 @@ __metadata:
     react-dom:
       optional: true
   checksum: 7be3a89c4e1e243c32099825fc8e1fcfbc4550c50407ef8afcda6d4e99b00b5cceb06fb5581d1ea3947cbaa6488151f91017c8769ccf6f35be111daf4a6c042f
+  languageName: node
+  linkType: hard
+
+"@storybook/addon-actions@npm:7.2.0":
+  version: 7.2.0
+  resolution: "@storybook/addon-actions@npm:7.2.0"
+  dependencies:
+    "@storybook/client-logger": 7.2.0
+    "@storybook/components": 7.2.0
+    "@storybook/core-events": 7.2.0
+    "@storybook/global": ^5.0.0
+    "@storybook/manager-api": 7.2.0
+    "@storybook/preview-api": 7.2.0
+    "@storybook/theming": 7.2.0
+    "@storybook/types": 7.2.0
+    dequal: ^2.0.2
+    lodash: ^4.17.21
+    polished: ^4.2.2
+    prop-types: ^15.7.2
+    react-inspector: ^6.0.0
+    telejson: ^7.0.3
+    ts-dedent: ^2.0.0
+    uuid: ^9.0.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 53a7aa40a81f45c429b6bbd512346379c28f44e223802af1b034ffd2501983b45dfaf2cac76d9fe022b3527d51bf7375012748e33a631871b1eddc8e4732f365
   languageName: node
   linkType: hard
 
@@ -7044,6 +7522,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/channels@npm:7.2.0":
+  version: 7.2.0
+  resolution: "@storybook/channels@npm:7.2.0"
+  dependencies:
+    "@storybook/channels": 7.2.0
+    "@storybook/client-logger": 7.2.0
+    "@storybook/core-events": 7.2.0
+    "@storybook/global": ^5.0.0
+    qs: ^6.10.0
+    telejson: ^7.0.3
+    tiny-invariant: ^1.3.1
+  checksum: 2ec3202722eb36488c58b6954e9a81f68494616982e7ecc9c915de6f44f7a1e9eb3a01a761ee8eaa457217d6681fc101ca97134f39a2ef6b5516e144ad724429
+  languageName: node
+  linkType: hard
+
 "@storybook/cli@npm:7.1.1":
   version: 7.1.1
   resolution: "@storybook/cli@npm:7.1.1"
@@ -7104,6 +7597,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/client-logger@npm:7.2.0":
+  version: 7.2.0
+  resolution: "@storybook/client-logger@npm:7.2.0"
+  dependencies:
+    "@storybook/global": ^5.0.0
+  checksum: 8484aac2d42d09c3634fdc7c7ab75c19c83f1a5509d5ffbf7a047cd2f3862cda9bed05976756a41d6abadb126f005d66498acbcee895869481ef0cd06b66f0c0
+  languageName: node
+  linkType: hard
+
 "@storybook/codemod@npm:7.1.1":
   version: 7.1.1
   resolution: "@storybook/codemod@npm:7.1.1"
@@ -7142,6 +7644,26 @@ __metadata:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
   checksum: 26df0551902404dd55c91fa883e42417c8770385161dcb336ed56d1c40edd7c2ac0d91fb64f00ae324f6d8e401252e7cea2bf0658dd5e4a4562bf02f6e19ff8c
+  languageName: node
+  linkType: hard
+
+"@storybook/components@npm:7.2.0":
+  version: 7.2.0
+  resolution: "@storybook/components@npm:7.2.0"
+  dependencies:
+    "@radix-ui/react-select": ^1.2.2
+    "@storybook/client-logger": 7.2.0
+    "@storybook/csf": ^0.1.0
+    "@storybook/global": ^5.0.0
+    "@storybook/theming": 7.2.0
+    "@storybook/types": 7.2.0
+    memoizerific: ^1.11.3
+    use-resize-observer: ^9.1.0
+    util-deprecate: ^1.0.2
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 38859754800bdcc726b55c4a560c9ed8d10740cc85996acd0638c7164429ef2428171d930cb506a8902aa968b2ff27dcae1d1657f7b9306822aefd1b5e519fb6
   languageName: node
   linkType: hard
 
@@ -7189,6 +7711,13 @@ __metadata:
   version: 7.1.1
   resolution: "@storybook/core-events@npm:7.1.1"
   checksum: 7df4f3bda05c53585234f29698563b04e7859639d2b4f23114186c4a83aa5c50434b4284101b8daea9536488a7331dbd2df0c42b4a627bee0c8ebd200cb0d59d
+  languageName: node
+  linkType: hard
+
+"@storybook/core-events@npm:7.2.0":
+  version: 7.2.0
+  resolution: "@storybook/core-events@npm:7.2.0"
+  checksum: a88cc651153cbb897567f4071f7738e2589a79e6692e9afdcf348c35aa3ea497fe8851004e670b9fba059b3d105bf8ecb53f20cca98c86e1025d6a9235904e63
   languageName: node
   linkType: hard
 
@@ -7332,6 +7861,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/manager-api@npm:7.2.0":
+  version: 7.2.0
+  resolution: "@storybook/manager-api@npm:7.2.0"
+  dependencies:
+    "@storybook/channels": 7.2.0
+    "@storybook/client-logger": 7.2.0
+    "@storybook/core-events": 7.2.0
+    "@storybook/csf": ^0.1.0
+    "@storybook/global": ^5.0.0
+    "@storybook/router": 7.2.0
+    "@storybook/theming": 7.2.0
+    "@storybook/types": 7.2.0
+    dequal: ^2.0.2
+    lodash: ^4.17.21
+    memoizerific: ^1.11.3
+    semver: ^7.3.7
+    store2: ^2.14.2
+    telejson: ^7.0.3
+    ts-dedent: ^2.0.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 54e99fa6dbcf046d8441978d283db4ced2c3043b2af51f23cbae7ecf0a4bd37d6a8861b9b09465dc7940296dba1a217a47492eaa3852394d40bb77f103a0da6c
+  languageName: node
+  linkType: hard
+
 "@storybook/manager@npm:7.1.1":
   version: 7.1.1
   resolution: "@storybook/manager@npm:7.1.1"
@@ -7380,6 +7935,28 @@ __metadata:
     ts-dedent: ^2.0.0
     util-deprecate: ^1.0.2
   checksum: 6753e0f104762ae7c70fb8e4db23e5f83ae9b629f6a51f5703bffdc2f3a6d14e4c8d9242806fe6fbb6deefea7e6b5984c81ba6834bb4db034d009c7855a304f0
+  languageName: node
+  linkType: hard
+
+"@storybook/preview-api@npm:7.2.0":
+  version: 7.2.0
+  resolution: "@storybook/preview-api@npm:7.2.0"
+  dependencies:
+    "@storybook/channels": 7.2.0
+    "@storybook/client-logger": 7.2.0
+    "@storybook/core-events": 7.2.0
+    "@storybook/csf": ^0.1.0
+    "@storybook/global": ^5.0.0
+    "@storybook/types": 7.2.0
+    "@types/qs": ^6.9.5
+    dequal: ^2.0.2
+    lodash: ^4.17.21
+    memoizerific: ^1.11.3
+    qs: ^6.10.0
+    synchronous-promise: ^2.0.15
+    ts-dedent: ^2.0.0
+    util-deprecate: ^1.0.2
+  checksum: 6e57e6ab435c011e1d260a39a519a5cb0da8254ddb4299d38392b2972ad8f958c713b8487380787ffaa3548f01af410392149830c57e70dff9b4efdcb4a6bdcd
   languageName: node
   linkType: hard
 
@@ -7470,6 +8047,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/router@npm:7.2.0":
+  version: 7.2.0
+  resolution: "@storybook/router@npm:7.2.0"
+  dependencies:
+    "@storybook/client-logger": 7.2.0
+    memoizerific: ^1.11.3
+    qs: ^6.10.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 2f879c399b5024d62b70012216f40b7f8b1fac808820b7e1223ffb5f6096cf00e03f883d436a8a29462ccdeeaf5dbd75b0207bebfe460ac834335caad59c98a4
+  languageName: node
+  linkType: hard
+
 "@storybook/telemetry@npm:7.1.1":
   version: 7.1.1
   resolution: "@storybook/telemetry@npm:7.1.1"
@@ -7501,6 +8092,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/theming@npm:7.2.0":
+  version: 7.2.0
+  resolution: "@storybook/theming@npm:7.2.0"
+  dependencies:
+    "@emotion/use-insertion-effect-with-fallbacks": ^1.0.0
+    "@storybook/client-logger": 7.2.0
+    "@storybook/global": ^5.0.0
+    memoizerific: ^1.11.3
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: c1ce1e48757d59626beb175dd3329e746e42ff2a398accdfb6ad43b6768d6caf4f5d2a8463c467c7eec08f44861cc0179374b5143432247d35de2ad98ec118e3
+  languageName: node
+  linkType: hard
+
 "@storybook/types@npm:7.1.1":
   version: 7.1.1
   resolution: "@storybook/types@npm:7.1.1"
@@ -7510,6 +8116,18 @@ __metadata:
     "@types/express": ^4.7.0
     file-system-cache: 2.3.0
   checksum: 10268ae95cb86c0eed05924aa68ab1746b93cbb0e08135d3d28ba4b11c010733af1e1a303c941ed2aa999da0bd2ececec85ed52f76a410518a499adb4805cac7
+  languageName: node
+  linkType: hard
+
+"@storybook/types@npm:7.2.0":
+  version: 7.2.0
+  resolution: "@storybook/types@npm:7.2.0"
+  dependencies:
+    "@storybook/channels": 7.2.0
+    "@types/babel__core": ^7.0.0
+    "@types/express": ^4.7.0
+    file-system-cache: 2.3.0
+  checksum: af845fc2cc2b76e47be912caa4e63ed1d42adff115290f533cf15f82b6e7351e053d4a96902ee9cfd740e4228b0e8f7c5ee182a21345fee1c34131a1aad88d1f
   languageName: node
   linkType: hard
 
@@ -8797,7 +9415,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aria-hidden@npm:^1.1.3":
+"aria-hidden@npm:^1.1.1, aria-hidden@npm:^1.1.3":
   version: 1.2.3
   resolution: "aria-hidden@npm:1.2.3"
   dependencies:
@@ -10586,6 +11204,13 @@ __metadata:
   version: 6.1.0
   resolution: "detect-indent@npm:6.1.0"
   checksum: ab953a73c72dbd4e8fc68e4ed4bfd92c97eb6c43734af3900add963fd3a9316f3bc0578b018b24198d4c31a358571eff5f0656e81a1f3b9ad5c547d58b2d093d
+  languageName: node
+  linkType: hard
+
+"detect-node-es@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "detect-node-es@npm:1.1.0"
+  checksum: e46307d7264644975b71c104b9f028ed1d3d34b83a15b8a22373640ce5ea630e5640b1078b8ea15f202b54641da71e4aa7597093bd4b91f113db520a26a37449
   languageName: node
   linkType: hard
 
@@ -12402,6 +13027,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"get-nonce@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "get-nonce@npm:1.0.1"
+  checksum: e2614e43b4694c78277bb61b0f04583d45786881289285c73770b07ded246a98be7e1f78b940c80cbe6f2b07f55f0b724e6db6fd6f1bcbd1e8bdac16521074ed
+  languageName: node
+  linkType: hard
+
 "get-npm-tarball-url@npm:^2.0.3":
   version: 2.0.3
   resolution: "get-npm-tarball-url@npm:2.0.3"
@@ -13290,6 +13922,15 @@ __metadata:
     "@formatjs/icu-messageformat-parser": 2.6.0
     tslib: ^2.4.0
   checksum: 164c49028b8bf2685f57f8f018d9a2c1d827e94b1c300ebf9df50b6aef25adedb3bf511b3cf603364d67257634b57926935066b2f3715ccb6c2af683cc0815a6
+  languageName: node
+  linkType: hard
+
+"invariant@npm:^2.2.4":
+  version: 2.2.4
+  resolution: "invariant@npm:2.2.4"
+  dependencies:
+    loose-envify: ^1.0.0
+  checksum: cc3182d793aad82a8d1f0af697b462939cb46066ec48bbf1707c150ad5fad6406137e91a262022c269702e01621f35ef60269f6c0d7fd178487959809acdfb14
   languageName: node
   linkType: hard
 
@@ -16993,6 +17634,41 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-remove-scroll-bar@npm:^2.3.3":
+  version: 2.3.4
+  resolution: "react-remove-scroll-bar@npm:2.3.4"
+  dependencies:
+    react-style-singleton: ^2.2.1
+    tslib: ^2.0.0
+  peerDependencies:
+    "@types/react": ^16.8.0 || ^17.0.0 || ^18.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: b5ce5f2f98d65c97a3e975823ae4043a4ba2a3b63b5ba284b887e7853f051b5cd6afb74abde6d57b421931c52f2e1fdbb625dc858b1cb5a32c27c14ab85649d4
+  languageName: node
+  linkType: hard
+
+"react-remove-scroll@npm:2.5.5":
+  version: 2.5.5
+  resolution: "react-remove-scroll@npm:2.5.5"
+  dependencies:
+    react-remove-scroll-bar: ^2.3.3
+    react-style-singleton: ^2.2.1
+    tslib: ^2.1.0
+    use-callback-ref: ^1.3.0
+    use-sidecar: ^1.1.2
+  peerDependencies:
+    "@types/react": ^16.8.0 || ^17.0.0 || ^18.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 2c7fe9cbd766f5e54beb4bec2e2efb2de3583037b23fef8fa511ab426ed7f1ae992382db5acd8ab5bfb030a4b93a06a2ebca41377d6eeaf0e6791bb0a59616a4
+  languageName: node
+  linkType: hard
+
 "react-responsive@npm:9.0.2":
   version: 9.0.2
   resolution: "react-responsive@npm:9.0.2"
@@ -17040,6 +17716,23 @@ __metadata:
   peerDependencies:
     react: ^16.0.0 || ^17.0.0 || ^18.0.0
   checksum: 6052c7e3e9627485120ebd8257f128aad8f56386fe8d42374b7743eac1be457c33506d153c7886b4e32923c0c352d402ab805ef9ca02dbcd8393b2bdeb6e5af8
+  languageName: node
+  linkType: hard
+
+"react-style-singleton@npm:^2.2.1":
+  version: 2.2.1
+  resolution: "react-style-singleton@npm:2.2.1"
+  dependencies:
+    get-nonce: ^1.0.0
+    invariant: ^2.2.4
+    tslib: ^2.0.0
+  peerDependencies:
+    "@types/react": ^16.8.0 || ^17.0.0 || ^18.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 7ee8ef3aab74c7ae1d70ff34a27643d11ba1a8d62d072c767827d9ff9a520905223e567002e0bf6c772929d8ea1c781a3ba0cc4a563e92b1e3dc2eaa817ecbe8
   languageName: node
   linkType: hard
 
@@ -19351,6 +20044,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"use-callback-ref@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "use-callback-ref@npm:1.3.0"
+  dependencies:
+    tslib: ^2.0.0
+  peerDependencies:
+    "@types/react": ^16.8.0 || ^17.0.0 || ^18.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 7913df383a5a6fcb399212eedefaac2e0c6f843555202d4e3010bac3848afe38ecaa3d0d6500ad1d936fbeffd637e6c517e68edb024af5e6beca7f27f3ce7b21
+  languageName: node
+  linkType: hard
+
 "use-resize-observer@npm:^9.1.0":
   version: 9.1.0
   resolution: "use-resize-observer@npm:9.1.0"
@@ -19360,6 +20068,22 @@ __metadata:
     react: 16.8.0 - 18
     react-dom: 16.8.0 - 18
   checksum: 92be0ac34a3b3cf884cd55847c90792b5b44833dc258e96d650152815ad246afe45825aa223332203004d836535a927ab74f18dc0313229e2c7c69510eddf382
+  languageName: node
+  linkType: hard
+
+"use-sidecar@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "use-sidecar@npm:1.1.2"
+  dependencies:
+    detect-node-es: ^1.1.0
+    tslib: ^2.0.0
+  peerDependencies:
+    "@types/react": ^16.9.0 || ^17.0.0 || ^18.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 925d1922f9853e516eaad526b6fed1be38008073067274f0ecc3f56b17bb8ab63480140dd7c271f94150027c996cea4efe83d3e3525e8f3eda22055f6a39220b
   languageName: node
   linkType: hard
 
