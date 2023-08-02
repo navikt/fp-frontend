@@ -21,7 +21,7 @@ import { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunk
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
-import ArbeidsgiverFieldArray from './arbeidsgiver/ArbeidsgiverFieldArray';
+import ArbeidsforholdFieldArray from './arbeidsgiver/ArbeidsforholdFieldArray';
 
 const maxLength1500 = maxLength(1500);
 
@@ -101,6 +101,8 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
 
   const isRequiredFn = getIsBegrunnelseRequired(formMethods.formState.isDirty);
 
+  const arbeidsforhold = formMethods.watch('arbeidsforhold');
+
   return (
     // @ts-ignore fixme
     <Form formMethods={formMethods} setDataOnUnmount={setFormData} onSubmit={values => submitCallback(values)}>
@@ -135,8 +137,8 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
         </FlexRow>
       </FlexContainer>
       <VerticalSpacer fourtyPx />
-      <ArbeidsgiverFieldArray
-        sorterteArbeidsforhold={sorterteArbeidsforhold}
+      <ArbeidsforholdFieldArray
+        sorterteArbeidsforhold={arbeidsforhold}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         readOnly={readOnly}
       />

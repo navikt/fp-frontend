@@ -1,4 +1,7 @@
 {
+  "ArbeidsgiverFieldArray.SkalHaSvp": "Skal ha svangerskapspenger",
+  "ArbeidsgiverFieldArray.SkalIkkeHaSvp": "Skal ikke ha svangerskapspenger",
+
   "TilretteleggingFaktaForm.Aksjonspunkt": "Kontroller opplysninger fra jordmor og arbeidsgiver",
   "TilretteleggingFaktaForm.Termindato": "Termindato",
   "TilretteleggingFaktaForm.Fodselsdato": "Fødselsdato",
@@ -7,14 +10,27 @@
   "TilretteleggingForArbeidsgiverPanel.TilretteleggingTidligereEnn": "Tilrettelegging fra og med må være tidligere enn {dato}",
   "TilretteleggingForArbeidsgiverPanel.DatoForTilrettelegging": "Dato for tilrettelegging fra lege eller jordmor",
   "TilretteleggingForArbeidsgiverPanel.Perioder": "Perioder",
+  "TilretteleggingForArbeidsgiverPanel.SkalHaSvpForArbeidsforhold": "Skal ha svangerskapspenger for arbeidsforholdet",
 
   "TilretteleggingsbehovForm.Tilretteleggingsbehov": "Tilretteleggingsbehov",
   "TilretteleggingsbehovForm.FraOgMed": "Fra og med",
   "TilretteleggingsbehovForm.KanGjennomfores": "Arbeidstakeren kan fortsette i samme stilling",
   "TilretteleggingsbehovForm.RedusertArbeid": "Arbeidstakeren kan fortsette med redusert arbeidstid",
   "TilretteleggingsbehovForm.KanIkkeGjennomfores": "Arbeidstakeren må midlertidig gå ut av sitt arbeid",
+  "TilretteleggingsbehovForm.LeggTil": "Legg til ny periode",
+  "TilretteleggingsbehovForm.AvsluttOgSlett": "Avslutt og slett",
   "TilretteleggingsbehovForm.Oppdater": "Oppdater",
   "TilretteleggingsbehovForm.Avbryt": "Avbryt",
+
+  "OppholdForm.LeggTil": "Legg til nytt opphold",
+  "OppholdForm.AvsluttOgSlett": "Avslutt og slett",
+  "OppholdForm.Oppdater": "Oppdater",
+  "OppholdForm.Avbryt": "Avbryt",
+  "OppholdForm.FraOgMed": "Fra og med",
+  "OppholdForm.TilOgMed": "Til og med",
+  "OppholdForm.GrunnTilOpphold": "Grunn til opphold",
+  "OppholdForm.Sykepenger": "Sykepenger 100% i perioden med svangerskapspenger",
+  "OppholdForm.Ferie": "Ferie",
 
   "TilretteleggingFieldArray.LeggTilTilrettelegging": "Periode med svangerskapspenger",
   "TilretteleggingFieldArray.LeggTilOpphold": "Opphold"

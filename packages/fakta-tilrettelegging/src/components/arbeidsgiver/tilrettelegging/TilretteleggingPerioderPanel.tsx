@@ -1,9 +1,8 @@
-import React, { FunctionComponent, useMemo } from 'react';
-import { useFormContext } from 'react-hook-form';
+import React, { FunctionComponent } from 'react';
+import { useFieldArray } from 'react-hook-form';
 import {
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsforholdTilretteleggingDato,
-  ArbeidsgiverOpplysningerPerId,
   SvpAvklartOppholdPeriode,
 } from '@navikt/fp-types';
 
@@ -12,7 +11,7 @@ import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-u
 import { FormattedMessage } from 'react-intl';
 import { PlusIcon } from '@navikt/aksel-icons';
 import dayjs from 'dayjs';
-import ExpandableRowWrapper, { TilretteleggingEllerOpphold } from './ExpandableRowWrapper';
+import TilretteleggingPerioderTabellRad, { TilretteleggingEllerOpphold } from './TilretteleggingPerioderTabellRad';
 
 const lagRader = (
   tilretteleggingDatoer: ArbeidsforholdTilretteleggingDato[],
@@ -32,41 +31,58 @@ const lagRader = (
         ...td,
       })),
     )
-    .sort((r1, r2) => dayjs(r1.fom).diff(dayjs(r2.fom)));
+    .sort((r1, r2) => {
+      if (!r1.fom) {
+        return 1;
+      }
+      if (!r2.fom) {
+        return -1;
+      }
+      return dayjs(r1.fom).diff(dayjs(r2.fom));
+    });
 };
 
 interface OwnProps {
+  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
+  arbeidsforholdIndex: number;
   readOnly: boolean;
-  sorterteArbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[];
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  stateIndex: number;
 }
 
-const TilretteleggingTabell: FunctionComponent<OwnProps> = ({ stateIndex, readOnly }) => {
-  const tilretteleggingStateName = `arbeidsforhold.${stateIndex}.tilretteleggingDatoer`;
-  const oppholdPerioderStateName = `arbeidsforhold.${stateIndex}.avklarteOppholdPerioder`;
+const TilretteleggingPerioderPanel: FunctionComponent<OwnProps> = ({
+  arbeidsforhold,
+  arbeidsforholdIndex,
+  readOnly,
+}) => {
+  const tilretteleggingStateName = `arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingDatoer`;
+  const oppholdPerioderStateName = `arbeidsforhold.${arbeidsforholdIndex}.avklarteOppholdPerioder`;
 
-  const { watch, setValue } = useFormContext();
+  const { append: appendTilrettelegging, remove: removeTilrettelegging } = useFieldArray({
+    name: tilretteleggingStateName,
+  });
+  const { append: appendOpphold, remove: removeOpphold } = useFieldArray({ name: oppholdPerioderStateName });
 
-  const tilretteleggingDatoer = watch(tilretteleggingStateName);
-  const oppholdsperioder = watch(oppholdPerioderStateName);
-  const rader = useMemo(
-    () => lagRader(tilretteleggingDatoer, oppholdsperioder),
-    [tilretteleggingDatoer, oppholdsperioder],
-  );
+  const rader = lagRader(arbeidsforhold.tilretteleggingDatoer, arbeidsforhold.avklarteOppholdPerioder);
 
   const leggTilOpphold = () => {
-    setValue(`${oppholdPerioderStateName}.${oppholdsperioder.length}`, {
+    appendOpphold({
       fom: undefined,
       tom: undefined,
       oppholdÅrsak: undefined,
     });
   };
   const leggTilTilrettelegging = () => {
-    setValue(`${tilretteleggingStateName}.${tilretteleggingDatoer.length}`, {
+    appendTilrettelegging({
       fom: undefined,
       type: undefined,
     });
+  };
+
+  const fjernTilretteleggingEllerOpphold = (erTilrettelegging: boolean) => {
+    if (erTilrettelegging) {
+      removeTilrettelegging(arbeidsforhold.tilretteleggingDatoer.length - 1);
+    } else {
+      removeOpphold(arbeidsforhold.avklarteOppholdPerioder.length - 1);
+    }
   };
 
   return (
@@ -74,14 +90,15 @@ const TilretteleggingTabell: FunctionComponent<OwnProps> = ({ stateIndex, readOn
       <Table size="small">
         <Table.Body>
           {rader.map((radInfo, index: number) => (
-            // @ts-ignore fixme
-            <ExpandableRowWrapper
+            <TilretteleggingPerioderTabellRad
               key={radInfo.fom}
-              arrayName={`${tilretteleggingStateName}.${index}`}
+              tilretteleggingNavn={`${tilretteleggingStateName}.${index}`}
+              oppholdNavn={`${oppholdPerioderStateName}.${index}`}
               radInfo={radInfo}
               readOnly={readOnly}
-              index={index}
+              index={arbeidsforholdIndex + index}
               openRad={radInfo.fom === undefined}
+              fjernTilretteleggingEllerOpphold={fjernTilretteleggingEllerOpphold}
             />
           ))}
         </Table.Body>
@@ -117,4 +134,4 @@ const TilretteleggingTabell: FunctionComponent<OwnProps> = ({ stateIndex, readOn
   );
 };
 
-export default TilretteleggingTabell;
+export default TilretteleggingPerioderPanel;

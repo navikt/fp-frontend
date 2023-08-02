@@ -19,7 +19,7 @@ interface OwnProps {
   avbrytEditering: () => void;
 }
 
-const TilretteleggingsbehovForm: FunctionComponent<OwnProps> = ({
+const TilretteleggingForm: FunctionComponent<OwnProps> = ({
   tilrettelegging,
   index,
   readOnly,
@@ -27,6 +27,8 @@ const TilretteleggingsbehovForm: FunctionComponent<OwnProps> = ({
   avbrytEditering,
 }) => {
   const intl = useIntl();
+
+  const erNyPeriode = !tilrettelegging.fom;
 
   const formMethods = useForm<FormValues>({
     defaultValues: {
@@ -37,6 +39,7 @@ const TilretteleggingsbehovForm: FunctionComponent<OwnProps> = ({
   const lagreIForm = (values: FormValues) => {
     // @ts-ignore fixme
     oppdaterTilrettelegging(values[index]);
+    return Promise.resolve();
   };
 
   const avbryt = () => {
@@ -97,12 +100,16 @@ const TilretteleggingsbehovForm: FunctionComponent<OwnProps> = ({
                 loading={false}
                 onClick={formMethods.handleSubmit((values: FormValues) => lagreIForm(values))}
               >
-                <FormattedMessage id="TilretteleggingsbehovForm.Oppdater" />
+                <FormattedMessage
+                  id={erNyPeriode ? 'TilretteleggingsbehovForm.LeggTil' : 'TilretteleggingsbehovForm.Oppdater'}
+                />
               </Button>
             </FlexColumn>
             <FlexColumn>
               <Button size="small" variant="secondary" onClick={avbryt} type="button">
-                <FormattedMessage id="TilretteleggingsbehovForm.Avbryt" />
+                <FormattedMessage
+                  id={erNyPeriode ? 'TilretteleggingsbehovForm.AvsluttOgSlett' : 'TilretteleggingsbehovForm.Avbryt'}
+                />
               </Button>
             </FlexColumn>
           </FlexRow>
@@ -112,4 +119,4 @@ const TilretteleggingsbehovForm: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default TilretteleggingsbehovForm;
+export default TilretteleggingForm;

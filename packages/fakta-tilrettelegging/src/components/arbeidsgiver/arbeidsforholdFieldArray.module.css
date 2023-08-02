@@ -5,3 +5,7 @@
   --ac-expansioncard-border-radius: 0;
   --ac-expansioncard-border-color: var(--a-grayalpha-200);
 }
+
+.tagMargin {
+  margin-left: 30px;
+}

@@ -1,12 +1,13 @@
 import React, { FunctionComponent } from 'react';
-import { BodyShort, ExpansionCard, Heading } from '@navikt/ds-react';
+import { BodyShort, ExpansionCard, Heading, Tag } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Buldings3Icon } from '@navikt/aksel-icons';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { ArbeidsforholdFodselOgTilrettelegging, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
-import styles from './arbeidsgiverFieldArray.module.css';
-import TilretteleggingForArbeidsgiverPanel from './tilrettelegging/TilretteleggingForArbeidsgiverPanel';
+import { FormattedMessage } from 'react-intl';
+import styles from './arbeidsforholdFieldArray.module.css';
+import ArbeidsforholdPanel from './tilrettelegging/ArbeidsforholdPanel';
 
 interface OwnProps {
   readOnly: boolean;
@@ -14,7 +15,7 @@ interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-const ArbeidsgiverFieldArray: FunctionComponent<OwnProps> = ({
+const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
   sorterteArbeidsforhold,
   arbeidsgiverOpplysningerPerId,
   readOnly,
@@ -28,7 +29,8 @@ const ArbeidsgiverFieldArray: FunctionComponent<OwnProps> = ({
   return (
     <>
       {fields.map((field, index: number) => {
-        const opplysning = arbeidsgiverOpplysningerPerId[sorterteArbeidsforhold[index].arbeidsgiverReferanse];
+        const arbeidsforhold = sorterteArbeidsforhold[index];
+        const arbeidsgiverOpplysning = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse];
         return (
           <React.Fragment key={field.id}>
             <ExpansionCard aria-label="arbeidsgiver" defaultOpen className={styles.card}>
@@ -40,21 +42,31 @@ const ArbeidsgiverFieldArray: FunctionComponent<OwnProps> = ({
                         <Buldings3Icon />
                       </FlexColumn>
                       <FlexColumn>
-                        <Heading size="small">{opplysning.navn}</Heading>
+                        <Heading size="small">{arbeidsgiverOpplysning.navn}</Heading>
                       </FlexColumn>
                       <FlexColumn>
-                        <BodyShort size="small">{opplysning.identifikator}</BodyShort>
+                        <BodyShort size="small">{arbeidsgiverOpplysning.identifikator}</BodyShort>
+                      </FlexColumn>
+                      <FlexColumn className={styles.tagMargin}>
+                        <Tag variant="neutral">100% stilling</Tag>
+                      </FlexColumn>
+                      <FlexColumn>
+                        <Tag variant="neutral">
+                          <FormattedMessage
+                            id={
+                              arbeidsforhold.skalBrukes
+                                ? 'ArbeidsgiverFieldArray.SkalHaSvp'
+                                : 'ArbeidsgiverFieldArray.SkalIkkeHaSvp'
+                            }
+                          />
+                        </Tag>
                       </FlexColumn>
                     </FlexRow>
                   </FlexContainer>
                 </ExpansionCard.Title>
               </ExpansionCard.Header>
               <ExpansionCard.Content>
-                <TilretteleggingForArbeidsgiverPanel
-                  stateIndex={index}
-                  readOnly={readOnly}
-                  sorterteArbeidsforhold={sorterteArbeidsforhold}
-                />
+                <ArbeidsforholdPanel arbeidsforhold={arbeidsforhold} arbeidsforholdIndex={index} readOnly={readOnly} />
               </ExpansionCard.Content>
             </ExpansionCard>
             <VerticalSpacer thirtyTwoPx />
@@ -65,4 +77,4 @@ const ArbeidsgiverFieldArray: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default ArbeidsgiverFieldArray;
+export default ArbeidsforholdFieldArray;
