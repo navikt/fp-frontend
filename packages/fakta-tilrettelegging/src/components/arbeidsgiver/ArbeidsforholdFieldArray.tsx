@@ -48,10 +48,12 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                         <BodyShort size="small">{arbeidsgiverOpplysning.identifikator}</BodyShort>
                       </FlexColumn>
                       <FlexColumn className={styles.tagMargin}>
-                        <Tag variant="neutral">100% stilling</Tag>
+                        <Tag size="small" variant="neutral">
+                          100% stilling
+                        </Tag>
                       </FlexColumn>
                       <FlexColumn>
-                        <Tag variant="neutral">
+                        <Tag size="small" variant="neutral">
                           <FormattedMessage
                             id={
                               arbeidsforhold.skalBrukes

@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { Table } from '@navikt/ds-react';
+import { Table, Tag } from '@navikt/ds-react';
 import { ArbeidsforholdTilretteleggingDato, SvpAvklartOppholdPeriode } from '@navikt/fp-types';
 
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
@@ -9,14 +9,10 @@ import TilretteleggingForm from './TilretteleggingForm';
 import styles from './tilretteleggingPerioderTabellRad.module.css';
 import OppholdForm from './OppholdForm';
 
-export type TilretteleggingEllerOpphold = {
-  radType: 'tilrettelegging' | 'opphold';
-} & (ArbeidsforholdTilretteleggingDato | SvpAvklartOppholdPeriode);
-
 interface WrapperProps {
-  radInfo: TilretteleggingEllerOpphold;
-  tilretteleggingNavn: string;
-  oppholdNavn: string;
+  navn: string;
+  tilrettelegging?: ArbeidsforholdTilretteleggingDato;
+  opphold?: SvpAvklartOppholdPeriode;
   readOnly: boolean;
   index: number;
   openRad: boolean;
@@ -24,9 +20,9 @@ interface WrapperProps {
 }
 
 const TilretteleggingPerioderTabellRad: FunctionComponent<WrapperProps> = ({
-  radInfo,
-  tilretteleggingNavn,
-  oppholdNavn,
+  navn,
+  tilrettelegging,
+  opphold,
   index,
   readOnly,
   openRad,
@@ -36,19 +32,22 @@ const TilretteleggingPerioderTabellRad: FunctionComponent<WrapperProps> = ({
 
   const { setValue } = useFormContext();
 
+  const fom = tilrettelegging ? tilrettelegging.fom : opphold?.fom;
+  const tom = tilrettelegging ? tilrettelegging.fom : opphold?.tom;
+
   const oppdaterTilrettelegging = (values: ArbeidsforholdTilretteleggingDato) => {
     setOpen(false);
     // TODO Om ein endrar tom så lukkar rada seg for fort
-    setValue(tilretteleggingNavn, values);
+    setValue(navn, values);
   };
   const oppdaterOpphold = (values: SvpAvklartOppholdPeriode) => {
     setOpen(false);
     // TODO Om ein endrar tom så lukkar rada seg for fort
-    setValue(oppholdNavn, values);
+    setValue(navn, values);
   };
   const avbrytEditering = () => {
-    if (!radInfo.fom) {
-      fjernTilretteleggingEllerOpphold(radInfo.radType === 'tilrettelegging');
+    if (!fom) {
+      fjernTilretteleggingEllerOpphold(!!tilrettelegging);
     }
     setOpen(false);
   };
@@ -57,21 +56,20 @@ const TilretteleggingPerioderTabellRad: FunctionComponent<WrapperProps> = ({
     <Table.ExpandableRow
       open={open}
       onClick={() => setOpen(!open)}
-      key={radInfo.fom}
       content={
         <>
-          {open && radInfo.radType === 'tilrettelegging' && (
+          {open && tilrettelegging && (
             <TilretteleggingForm
-              tilrettelegging={radInfo as ArbeidsforholdTilretteleggingDato}
+              tilrettelegging={tilrettelegging}
               index={index}
               oppdaterTilrettelegging={oppdaterTilrettelegging}
               avbrytEditering={avbrytEditering}
               readOnly={readOnly}
             />
           )}
-          {open && radInfo.radType === 'opphold' && (
+          {open && opphold && (
             <OppholdForm
-              opphold={radInfo as SvpAvklartOppholdPeriode}
+              opphold={opphold}
               index={index}
               oppdaterOpphold={oppdaterOpphold}
               avbrytEditering={avbrytEditering}
@@ -83,11 +81,13 @@ const TilretteleggingPerioderTabellRad: FunctionComponent<WrapperProps> = ({
       togglePlacement="right"
       className={open ? styles.openRow : styles.row}
     >
+      <Table.DataCell>{fom ? <PeriodLabel dateStringFom={fom} dateStringTom={tom} /> : 'Periode'}</Table.DataCell>
+      <Table.DataCell>{tilrettelegging ? 'Tilrettelegging' : 'Opphold'}</Table.DataCell>
       <Table.DataCell>
-        {radInfo.fom ? <PeriodLabel dateStringFom={radInfo.fom} dateStringTom={radInfo.tom} /> : 'Periode'}
+        <Tag size="small" variant="neutral">
+          {fom ? 'test' : 'Saksbehandler'}
+        </Tag>
       </Table.DataCell>
-      <Table.DataCell>{radInfo.radType === 'tilrettelegging' ? 'Tilrettelegging' : 'Opphold'}</Table.DataCell>
-      <Table.DataCell>{radInfo.fom ? 'Test' : 'Saksbehandler'}</Table.DataCell>
     </Table.ExpandableRow>
   );
 };

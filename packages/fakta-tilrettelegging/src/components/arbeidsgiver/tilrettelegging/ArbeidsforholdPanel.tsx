@@ -8,8 +8,9 @@ import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Label } from '@navikt/ds-react';
-import { ArbeidsforholdFodselOgTilrettelegging } from '@navikt/fp-types';
+import { ArbeidsforholdFodselOgTilrettelegging, Permisjon } from '@navikt/fp-types';
 import TilretteleggingPerioderPanel from './TilretteleggingPerioderPanel';
+import VelferdspermisjonPanel from './VelferdspermisjonPanel';
 
 dayjs.extend(minMax);
 
@@ -40,6 +41,13 @@ const validerTidligereEnn =
     return null;
   };
 
+const filtrerVelferdspermisjoner = (velferdspermisjoner: Permisjon[], tilretteleggingBehovFom: string): Permisjon[] =>
+  velferdspermisjoner.filter(
+    permisjon =>
+      !dayjs(permisjon.permisjonFom).isAfter(tilretteleggingBehovFom) &&
+      (permisjon.permisjonTom == null || !dayjs(permisjon.permisjonTom).isBefore(tilretteleggingBehovFom)),
+  );
+
 interface OwnProps {
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
   arbeidsforholdIndex: number;
@@ -49,7 +57,14 @@ interface OwnProps {
 const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({ arbeidsforhold, arbeidsforholdIndex, readOnly }) => {
   const intl = useIntl();
 
-  const { getValues } = useFormContext();
+  const { getValues, watch } = useFormContext();
+
+  const tilretteleggingBehovFom = watch(`arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingBehovFom`);
+
+  const filtrerteVelferdspermisjoner = filtrerVelferdspermisjoner(
+    arbeidsforhold.velferdspermisjoner,
+    tilretteleggingBehovFom,
+  );
 
   return (
     <>
@@ -68,6 +83,16 @@ const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({ arbeidsforhold, arbe
         validate={[required, hasValidDate, validerTidligereEnn(intl, getValues, `arbeidsgiver.${arbeidsforholdIndex}`)]}
         isReadOnly={readOnly}
       />
+      {filtrerteVelferdspermisjoner.length > 0 && (
+        <>
+          <VerticalSpacer thirtyTwoPx />
+          <Label size="small">
+            <FormattedMessage id="TilretteleggingForArbeidsgiverPanel.Velferdspermisjon" />
+          </Label>
+          <VerticalSpacer sixteenPx />
+          <VelferdspermisjonPanel readOnly={readOnly} />
+        </>
+      )}
       <VerticalSpacer thirtyTwoPx />
       <Label size="small">
         <FormattedMessage id="TilretteleggingForArbeidsgiverPanel.Perioder" />
