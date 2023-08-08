@@ -33,10 +33,12 @@ const tilretteleggingPermisjon = {
       tilretteleggingDatoer: [
         {
           fom: '2020-03-17',
+          tom: '2020-05-20',
           type: 'INGEN_TILRETTELEGGING',
         },
         {
           fom: '2020-10-15',
+          tom: '2020-10-16',
           type: 'HEL_TILRETTELEGGING',
         },
       ],

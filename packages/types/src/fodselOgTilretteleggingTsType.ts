@@ -8,6 +8,7 @@ export type Permisjon = Readonly<{
 
 export type ArbeidsforholdTilretteleggingDato = Readonly<{
   fom: string;
+  tom?: string;
   type: string;
   stillingsprosent?: number;
   overstyrtUtbetalingsgrad?: number;
