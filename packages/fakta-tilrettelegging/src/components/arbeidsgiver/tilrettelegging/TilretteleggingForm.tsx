@@ -8,11 +8,25 @@ import { tilretteleggingType } from '@navikt/fp-kodeverk';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Button } from '@navikt/ds-react';
+import dayjs from 'dayjs';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import TilretteleggingInfoPanel from './TilretteleggingInfoPanel';
 
-type FormValues = ArbeidsforholdTilretteleggingDato;
+import styles from './tilretteleggingForm.module.css';
+
+type FormValues = Record<
+  number,
+  {
+    skalVelgeDato: boolean;
+  } & ArbeidsforholdTilretteleggingDato
+>;
+
+const sjekkOmTomDatoErTreUkerFørTermin = (termindato: string, tom?: string): boolean =>
+  dayjs(termindato).subtract(3, 'week').isSame(dayjs(tom));
 
 interface OwnProps {
   tilrettelegging: ArbeidsforholdTilretteleggingDato;
+  termindato: string;
   index: number;
   readOnly: boolean;
   oppdaterTilrettelegging: (values: ArbeidsforholdTilretteleggingDato) => void;
@@ -21,6 +35,7 @@ interface OwnProps {
 
 const TilretteleggingForm: FunctionComponent<OwnProps> = ({
   tilrettelegging,
+  termindato,
   index,
   readOnly,
   oppdaterTilrettelegging,
@@ -30,15 +45,29 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
 
   const erNyPeriode = !tilrettelegging.fom;
 
+  const erTomDatoTreUkerFørTermin = sjekkOmTomDatoErTreUkerFørTermin(termindato, tilrettelegging.tom);
+
   const formMethods = useForm<FormValues>({
     defaultValues: {
-      [index]: tilrettelegging,
+      [index]: {
+        ...tilrettelegging,
+        skalVelgeDato: !erTomDatoTreUkerFørTermin,
+      },
     },
   });
 
   const lagreIForm = (values: FormValues) => {
-    // @ts-ignore fixme
-    oppdaterTilrettelegging(values[index]);
+    const formValues = values[index];
+    const tomDato = formValues.skalVelgeDato
+      ? formValues.tom
+      : dayjs(termindato).subtract(3, 'week').format(ISO_DATE_FORMAT);
+    oppdaterTilrettelegging({
+      fom: formValues.fom,
+      type: formValues.type,
+      overstyrtUtbetalingsgrad: formValues.overstyrtUtbetalingsgrad,
+      stillingsprosent: formValues.stillingsprosent,
+      tom: tomDato,
+    });
     return Promise.resolve();
   };
 
@@ -46,6 +75,9 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
     avbrytEditering();
     formMethods.reset();
   };
+
+  // @ts-ignore Fiks type
+  const skalVelgeDato = formMethods.watch(`${index}.skalVelgeDato`);
 
   return (
     <FormProvider {...formMethods}>
@@ -59,14 +91,48 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
           padding: '30px',
         }}
       >
-        <Datepicker
-          name={`${index}.fom`}
-          label={intl.formatMessage({
-            id: 'TilretteleggingsbehovForm.FraOgMed',
-          })}
-          validate={[required, hasValidDate]}
-          isReadOnly={readOnly}
+        <TilretteleggingInfoPanel
+          tilrettelegging={tilrettelegging}
+          termindato={termindato}
+          erTomDatoTreUkerFørTermin={erTomDatoTreUkerFørTermin}
         />
+        <VerticalSpacer twentyPx />
+        <FlexContainer>
+          <FlexRow>
+            <FlexColumn>
+              <Datepicker
+                name={`${index}.fom`}
+                label={intl.formatMessage({
+                  id: 'TilretteleggingsbehovForm.FraOgMed',
+                })}
+                validate={[required, hasValidDate]}
+                isReadOnly={readOnly}
+              />
+            </FlexColumn>
+            <FlexColumn className={styles.dateMargin}>
+              <RadioGroupPanel
+                name={`${index}.skalVelgeDato`}
+                label={intl.formatMessage({ id: 'TilretteleggingsbehovForm.TilOgMed' })}
+                validate={[required]}
+                isReadOnly={readOnly}
+                isTrueOrFalseSelection
+                radios={[
+                  {
+                    label: intl.formatMessage({ id: 'TilretteleggingsbehovForm.TreUker' }),
+                    value: 'false',
+                  },
+                  {
+                    label: intl.formatMessage({ id: 'TilretteleggingsbehovForm.VelgDato' }),
+                    value: 'true',
+                  },
+                ]}
+              />
+              {skalVelgeDato && (
+                <Datepicker name={`${index}.tom`} validate={[required, hasValidDate]} isReadOnly={readOnly} />
+              )}
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
         <VerticalSpacer thirtyTwoPx />
         <RadioGroupPanel
           name={`${index}.type`}

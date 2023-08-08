@@ -44,13 +44,13 @@ const TilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanel
     <TilretteleggingFaktaForm
       behandlingVersjon={behandling.versjon}
       svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
-      // @ts-ignore fixme
-      arbeidsforhold={arbeidOgInntekt.arbeidsforhold}
+      aoiArbeidsforhold={arbeidOgInntekt.arbeidsforhold}
       aksjonspunkter={aksjonspunkter}
       submitCallback={submitCallback}
       readOnly={readOnly}
       hasOpenAksjonspunkter={harApneAksjonspunkter}
       submittable={submittable}
+      // @ts-ignore Fiks
       erOverstyrer={erOverstyrer}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       uttakArbeidTyper={alleKodeverk[KodeverkType.UTTAK_ARBEID_TYPE]}

@@ -16,11 +16,13 @@ import {
   ArbeidsgiverOpplysningerPerId,
   FodselOgTilrettelegging,
   ArbeidsforholdFodselOgTilrettelegging,
+  AoIArbeidsforhold,
 } from '@navikt/fp-types';
 import { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
+import dayjs from 'dayjs';
 import ArbeidsforholdFieldArray from './arbeidsgiver/ArbeidsforholdFieldArray';
 
 const maxLength1500 = maxLength(1500);
@@ -44,6 +46,25 @@ const sorterArbeidsforhold = (
       : 0;
   });
 
+const erInnenforIntervall = (tilretteleggingBehovFom: string, fomDato?: string, tomDato?: string): boolean => {
+  const dato = dayjs(tilretteleggingBehovFom);
+  return !(dato.isBefore(dayjs(fomDato)) || dato.isAfter(dayjs(tomDato)));
+};
+
+const skalViseInfoAlert = (
+  iayArbeidsforhold: AoIArbeidsforhold[],
+  tilretteleggingArbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[],
+): boolean =>
+  !tilretteleggingArbeidsforhold
+    .filter(ta => ta.arbeidsgiverReferanse)
+    .every(ta =>
+      iayArbeidsforhold.some(
+        ia =>
+          ta.arbeidsgiverReferanse === ia.arbeidsgiverIdent &&
+          erInnenforIntervall(ta.tilretteleggingBehovFom, ia.fom, ia.tom),
+      ),
+    );
+
 const getAksjonspunktBegrunnelse = (aksjonspunkter: Aksjonspunkt[]): string | undefined => {
   const aksjonpunkt = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktCode.FODSELTILRETTELEGGING);
   return aksjonpunkt ? aksjonpunkt.begrunnelse : undefined;
@@ -57,6 +78,7 @@ interface OwnProps {
   hasOpenAksjonspunkter: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
+  aoiArbeidsforhold: AoIArbeidsforhold[];
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (data: BekreftSvangerskapspengerAp) => Promise<void>;
   formData: FormValues;
@@ -76,6 +98,7 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
   arbeidsgiverOpplysningerPerId,
   aksjonspunkter,
   svangerskapspengerTilrettelegging,
+  aoiArbeidsforhold,
   submitCallback,
   formData,
   setFormData,
@@ -88,9 +111,13 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
     [behandlingVersjon],
   );
 
+  const visInfoAlert = useMemo(() => skalViseInfoAlert(aoiArbeidsforhold, sorterteArbeidsforhold), [behandlingVersjon]);
+
+  const arbeidsforholdSomKanTilrettelegges = sorterteArbeidsforhold.filter(a => a.kanTilrettelegges);
+
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {
-      arbeidsforhold: sorterteArbeidsforhold,
+      arbeidsforhold: arbeidsforholdSomKanTilrettelegges,
       termindato: svangerskapspengerTilrettelegging ? svangerskapspengerTilrettelegging.termindato : '',
       fødselsdato: svangerskapspengerTilrettelegging ? svangerskapspengerTilrettelegging.fødselsdato : '',
       begrunnelse: getAksjonspunktBegrunnelse(aksjonspunkter),
@@ -110,6 +137,14 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
         <>
           <AksjonspunktHelpTextHTML>
             {[<FormattedMessage id="TilretteleggingFaktaForm.Aksjonspunkt" key="svangerskapspengerAp" />]}
+          </AksjonspunktHelpTextHTML>
+          {visInfoAlert ? <VerticalSpacer sixteenPx /> : <VerticalSpacer thirtyTwoPx />}
+        </>
+      )}
+      {visInfoAlert && (
+        <>
+          <AksjonspunktHelpTextHTML>
+            {[<FormattedMessage id="TilretteleggingFaktaForm.UndersokNarmere" key="svangerskapspengerAp" />]}
           </AksjonspunktHelpTextHTML>
           <VerticalSpacer thirtyTwoPx />
         </>
@@ -139,6 +174,7 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
       <VerticalSpacer fourtyPx />
       <ArbeidsforholdFieldArray
         sorterteArbeidsforhold={arbeidsforhold}
+        aoiArbeidsforhold={aoiArbeidsforhold}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         readOnly={readOnly}
       />

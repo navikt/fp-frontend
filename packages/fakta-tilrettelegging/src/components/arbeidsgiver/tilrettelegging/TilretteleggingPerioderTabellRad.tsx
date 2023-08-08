@@ -5,9 +5,9 @@ import { ArbeidsforholdTilretteleggingDato, SvpAvklartOppholdPeriode } from '@na
 
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 import TilretteleggingForm from './TilretteleggingForm';
+import OppholdForm from './OppholdForm';
 
 import styles from './tilretteleggingPerioderTabellRad.module.css';
-import OppholdForm from './OppholdForm';
 
 interface WrapperProps {
   navn: string;
@@ -30,10 +30,10 @@ const TilretteleggingPerioderTabellRad: FunctionComponent<WrapperProps> = ({
 }) => {
   const [open, setOpen] = useState(openRad);
 
-  const { setValue } = useFormContext();
+  const { setValue, watch } = useFormContext();
 
   const fom = tilrettelegging ? tilrettelegging.fom : opphold?.fom;
-  const tom = tilrettelegging ? tilrettelegging.fom : opphold?.tom;
+  const tom = tilrettelegging ? tilrettelegging.tom : opphold?.tom;
 
   const oppdaterTilrettelegging = (values: ArbeidsforholdTilretteleggingDato) => {
     setOpen(false);
@@ -52,6 +52,8 @@ const TilretteleggingPerioderTabellRad: FunctionComponent<WrapperProps> = ({
     setOpen(false);
   };
 
+  const termindato = watch('termindato');
+
   return (
     <Table.ExpandableRow
       open={open}
@@ -61,6 +63,7 @@ const TilretteleggingPerioderTabellRad: FunctionComponent<WrapperProps> = ({
           {open && tilrettelegging && (
             <TilretteleggingForm
               tilrettelegging={tilrettelegging}
+              termindato={termindato}
               index={index}
               oppdaterTilrettelegging={oppdaterTilrettelegging}
               avbrytEditering={avbrytEditering}
