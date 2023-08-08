@@ -1,9 +1,0 @@
-import{j as p}from"./jsx-runtime-9c4ae004.js";import{a as o}from"./chunk-AY7I2SME-c7b6cf8a.js";import{Y as v,b as l,z as i}from"./index.es-a3c6219c.js";import{B as d,m}from"./nb_NO-b3de1938.js";import{O as n}from"./OppgaveErReservertAvAnnenModal-5ed86fc0.js";import{M as g}from"./Provider-b4f55e87.js";import"./index-1b03fe98.js";import"./index-6fd5a17b.js";import"./advarsel-27b41fd8.js";import"./index-f6b105ee.js";const u=d(m);g.setAppElement("body");const N={title:"los/saksbehandler/OppgaveErReservertAvAnnenModal",component:n,decorators:[u]},E={id:1,status:{erReservert:!1,flyttetReservasjon:{tidspunkt:"2019-02-02",uid:"23423",navn:"Espen Utvikler",begrunnelse:"Flyttet"}},saksnummer:1234,personnummer:"1212",navn:"Espen Utvikler",system:"SAK",behandlingstype:v.FORSTEGANGSSOKNAD,behandlingStatus:l.BEHANDLING_UTREDES,opprettetTidspunkt:"2019-01-01",behandlingsfrist:"2019-01-01",fagsakYtelseType:i.FORELDREPENGER,erTilSaksbehandling:!0,behandlingId:"1",href:""},k=({lukkErReservertModalOgOpneOppgave:a})=>p.jsx(n,{lukkErReservertModalOgOpneOppgave:a,oppgave:E,oppgaveStatus:{erReservert:!1,reservertAvNavn:"Espen Utvikler",reservertAvUid:"E232323",reservertTilTidspunkt:"2020-01-01"}}),e=k.bind({});e.args={lukkErReservertModalOgOpneOppgave:o("button-click")};var r,t,s;e.parameters={...e.parameters,docs:{...(r=e.parameters)==null?void 0:r.docs,source:{originalSource:`({
-  lukkErReservertModalOgOpneOppgave
-}) => <OppgaveErReservertAvAnnenModal lukkErReservertModalOgOpneOppgave={lukkErReservertModalOgOpneOppgave} oppgave={oppgaveForResevertAvAnnenModal} oppgaveStatus={{
-  erReservert: false,
-  reservertAvNavn: 'Espen Utvikler',
-  reservertAvUid: 'E232323',
-  reservertTilTidspunkt: '2020-01-01'
-}} />`,...(s=(t=e.parameters)==null?void 0:t.docs)==null?void 0:s.source}}};const U=["Default"];export{e as Default,U as __namedExportsOrder,N as default};
-//# sourceMappingURL=OppgaveErReservertAvAnnenModal.stories-6ee6bbc3.js.map
