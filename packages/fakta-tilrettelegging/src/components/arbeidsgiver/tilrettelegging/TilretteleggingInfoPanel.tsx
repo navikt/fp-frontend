@@ -30,7 +30,7 @@ const TilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
 
   // @ts-ignore FIKS obligatorisk tom
   const dagerOgUker = calcDaysAndWeeks(tilrettelegging.fom, tilrettelegging.tom);
-  const s = erTomDatoTreUkerFørTermin
+  const fremTilTidspunkt = erTomDatoTreUkerFørTermin
     ? intl.formatMessage({ id: 'TilretteleggingInfoPanel.TreUker' })
     : finnTekst(intl, termindato, tilrettelegging.tom);
   return (
@@ -76,7 +76,7 @@ const TilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
                       }}
                     />
                   </BodyShort>
-                  <Detail>{s}</Detail>
+                  <Detail>{fremTilTidspunkt}</Detail>
                 </FlexColumn>
               </FlexRow>
             </FlexContainer>
@@ -88,7 +88,10 @@ const TilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
                   <BranchingIcon title="a11y-title" fontSize="1.5rem" />
                 </FlexColumn>
                 <FlexColumn>
-                  <BodyShort size="small">Fra søknad</BodyShort>
+                  <BodyShort size="small">
+                    {' '}
+                    <FormattedMessage id="TilretteleggingInfoPanel.FraSoknad" />
+                  </BodyShort>
                   <Detail>Sendt...</Detail>
                 </FlexColumn>
               </FlexRow>

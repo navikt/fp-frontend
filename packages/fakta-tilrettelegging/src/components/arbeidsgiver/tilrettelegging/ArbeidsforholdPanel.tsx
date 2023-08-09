@@ -6,9 +6,16 @@ import minMax from 'dayjs/plugin/minMax';
 import { CheckboxField, Datepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Label } from '@navikt/ds-react';
+import {
+  AksjonspunktHelpTextHTML,
+  FlexColumn,
+  FlexContainer,
+  FlexRow,
+  VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
+import { Label, Table } from '@navikt/ds-react';
 import { ArbeidsforholdFodselOgTilrettelegging, Permisjon } from '@navikt/fp-types';
+import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import TilretteleggingPerioderPanel from './TilretteleggingPerioderPanel';
 import VelferdspermisjonPanel from './VelferdspermisjonPanel';
 
@@ -52,9 +59,15 @@ interface OwnProps {
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
   arbeidsforholdIndex: number;
   readOnly: boolean;
+  visInfoAlert: boolean;
 }
 
-const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({ arbeidsforhold, arbeidsforholdIndex, readOnly }) => {
+const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({
+  arbeidsforhold,
+  arbeidsforholdIndex,
+  readOnly,
+  visInfoAlert,
+}) => {
   const intl = useIntl();
 
   const { getValues, watch } = useFormContext();
@@ -68,6 +81,15 @@ const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({ arbeidsforhold, arbe
 
   return (
     <>
+      {visInfoAlert && (
+        <>
+          <VerticalSpacer eightPx />
+          <AksjonspunktHelpTextHTML>
+            {[<FormattedMessage id="TilretteleggingFaktaForm.UndersokNarmere" key="svangerskapspengerAp" />]}
+          </AksjonspunktHelpTextHTML>
+          <VerticalSpacer thirtyTwoPx />
+        </>
+      )}
       <VerticalSpacer sixteenPx />
       <CheckboxField
         readOnly={readOnly}
@@ -86,11 +108,36 @@ const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({ arbeidsforhold, arbe
       {filtrerteVelferdspermisjoner.length > 0 && (
         <>
           <VerticalSpacer thirtyTwoPx />
-          <Label size="small">
-            <FormattedMessage id="TilretteleggingForArbeidsgiverPanel.Velferdspermisjon" />
-          </Label>
+          <FlexContainer>
+            <FlexRow>
+              <FlexColumn>
+                <Label size="small">
+                  <FormattedMessage id="TilretteleggingForArbeidsgiverPanel.Velferdspermisjon" />
+                </Label>
+              </FlexColumn>
+              {filtrerteVelferdspermisjoner.some(permisjon => permisjon.erGyldig === undefined) && (
+                <FlexColumn>
+                  <ExclamationmarkTriangleFillIcon
+                    title={intl.formatMessage({ id: 'TilretteleggingForArbeidsgiverPanel.ErPermisjonGyldg' })}
+                    color="var(--a-orange-600)"
+                  />
+                </FlexColumn>
+              )}
+            </FlexRow>
+          </FlexContainer>
           <VerticalSpacer sixteenPx />
-          <VelferdspermisjonPanel readOnly={readOnly} />
+          <Table size="small">
+            <Table.Body>
+              {filtrerteVelferdspermisjoner.map((permisjon, index) => (
+                <VelferdspermisjonPanel
+                  velferdspermisjon={permisjon}
+                  readOnly={readOnly}
+                  arbeidsforholdIndex={arbeidsforholdIndex}
+                  permisjonIndex={index}
+                />
+              ))}
+            </Table.Body>
+          </Table>
         </>
       )}
       <VerticalSpacer thirtyTwoPx />
