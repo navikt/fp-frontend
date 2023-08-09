@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
+import dayjs from 'dayjs';
 import { BodyShort, ExpansionCard, Heading, Tag } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { Buldings3Icon } from '@navikt/aksel-icons';
+import { Buldings3Icon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import {
   AoIArbeidsforhold,
@@ -9,7 +10,7 @@ import {
   ArbeidsgiverOpplysningerPerId,
 } from '@navikt/fp-types';
 
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import styles from './arbeidsforholdFieldArray.module.css';
 import ArbeidsforholdPanel from './tilrettelegging/ArbeidsforholdPanel';
 
@@ -21,6 +22,18 @@ const finnArbeidsforhold = (
     return alleIafAf.find(iafAf => iafAf.internArbeidsforholdId === internArbeidsforholdReferanse);
   }
   return alleIafAf.length === 1 ? alleIafAf[0] : undefined;
+};
+
+const erInnenforIntervall = (tilretteleggingBehovFom: string, fomDato?: string, tomDato?: string): boolean => {
+  const dato = dayjs(tilretteleggingBehovFom);
+  return !(dato.isBefore(dayjs(fomDato)) || dato.isAfter(dayjs(tomDato)));
+};
+
+const finnSvpTagTekst = (skalBrukes: boolean, visInfoAlert: boolean) => {
+  if (skalBrukes) {
+    return 'ArbeidsforholdFieldArray.SkalHaSvp';
+  }
+  return visInfoAlert ? 'ArbeidsforholdFieldArray.SvpIkkeBeregnet' : 'ArbeidsforholdFieldArray.SkalIkkeHaSvp';
 };
 
 interface OwnProps {
@@ -36,6 +49,8 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
   arbeidsgiverOpplysningerPerId,
   readOnly,
 }) => {
+  const intl = useIntl();
+
   const { control } = useFormContext();
   const { fields } = useFieldArray({
     control,
@@ -53,15 +68,17 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
         );
         const af = finnArbeidsforhold(alleIafAf, arbeidsforhold.internArbeidsforholdReferanse);
 
+        const visInfoAlert = !erInnenforIntervall(arbeidsforhold.tilretteleggingBehovFom, af?.fom, af?.tom);
+
         return (
           <React.Fragment key={field.id}>
             <ExpansionCard aria-label="arbeidsgiver" defaultOpen className={styles.card}>
               <ExpansionCard.Header>
-                <ExpansionCard.Title size="small">
+                <div className={styles.padding}>
                   <FlexContainer>
                     <FlexRow alignItemsToBaseline>
                       <FlexColumn>
-                        <Buldings3Icon />
+                        <Buldings3Icon color="var(--a-blue-600)" />
                       </FlexColumn>
                       <FlexColumn>
                         <Heading size="small">{arbeidsgiverOpplysning.navn}</Heading>
@@ -70,7 +87,7 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                         <BodyShort size="small">{arbeidsgiverOpplysning.identifikator}</BodyShort>
                       </FlexColumn>
                       <FlexColumn className={styles.tagMargin}>
-                        <Tag size="small" variant="neutral">
+                        <Tag size="small" variant="neutral-moderate">
                           <FormattedMessage
                             id="ArbeidsforholdFieldArray.Stillingsprosent"
                             values={{ stillingsprosent: af ? af.stillingsprosent : 100 }}
@@ -78,25 +95,32 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                         </Tag>
                       </FlexColumn>
                       <FlexColumn>
-                        <Tag size="small" variant="neutral">
-                          <FormattedMessage
-                            id={
-                              arbeidsforhold.skalBrukes
-                                ? 'ArbeidsforholdFieldArray.SkalHaSvp'
-                                : 'ArbeidsforholdFieldArray.SkalIkkeHaSvp'
-                            }
-                          />
+                        <Tag size="small" variant="neutral-moderate">
+                          <FormattedMessage id={finnSvpTagTekst(arbeidsforhold.skalBrukes, visInfoAlert)} />
                         </Tag>
                       </FlexColumn>
+                      {!arbeidsforhold.skalBrukes && visInfoAlert && (
+                        <FlexColumn>
+                          <ExclamationmarkTriangleFillIcon
+                            title={intl.formatMessage({ id: 'ArbeidsforholdFieldArray.SvpIkkeBeregnet' })}
+                            color="var(--a-orange-600)"
+                          />
+                        </FlexColumn>
+                      )}
                     </FlexRow>
                   </FlexContainer>
-                </ExpansionCard.Title>
+                </div>
               </ExpansionCard.Header>
               <ExpansionCard.Content>
-                <ArbeidsforholdPanel arbeidsforhold={arbeidsforhold} arbeidsforholdIndex={index} readOnly={readOnly} />
+                <ArbeidsforholdPanel
+                  arbeidsforhold={arbeidsforhold}
+                  arbeidsforholdIndex={index}
+                  readOnly={readOnly}
+                  visInfoAlert={!arbeidsforhold.skalBrukes && visInfoAlert}
+                />
               </ExpansionCard.Content>
             </ExpansionCard>
-            <VerticalSpacer thirtyTwoPx />
+            <VerticalSpacer twentyPx />
           </React.Fragment>
         );
       })}

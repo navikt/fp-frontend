@@ -1,15 +1,16 @@
 import React, { FunctionComponent } from 'react';
+import dayjs from 'dayjs';
+import { FormProvider, useForm } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { Button } from '@navikt/ds-react';
 
 import { ArbeidsforholdTilretteleggingDato } from '@navikt/fp-types';
 import { Datepicker, RadioGroupPanel } from '@navikt/ft-form-hooks';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { tilretteleggingType } from '@navikt/fp-kodeverk';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { FormProvider, useForm } from 'react-hook-form';
-import { Button } from '@navikt/ds-react';
-import dayjs from 'dayjs';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+
 import TilretteleggingInfoPanel from './TilretteleggingInfoPanel';
 
 import styles from './tilretteleggingForm.module.css';
@@ -67,6 +68,8 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
       overstyrtUtbetalingsgrad: formValues.overstyrtUtbetalingsgrad,
       stillingsprosent: formValues.stillingsprosent,
       tom: tomDato,
+      manueltEndret: !erNyPeriode,
+      manueltLagtTil: erNyPeriode,
     });
     return Promise.resolve();
   };

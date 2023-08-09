@@ -1,19 +1,21 @@
 {
   "ArbeidsforholdFieldArray.SkalHaSvp": "Skal ha svangerskapspenger",
   "ArbeidsforholdFieldArray.SkalIkkeHaSvp": "Skal ikke ha svangerskapspenger",
+  "ArbeidsforholdFieldArray.SvpIkkeBeregnet": "Svangerskapspenger ikke beregnet",
   "ArbeidsforholdFieldArray.Stillingsprosent": "{stillingsprosent}% stilling",
 
   "TilretteleggingFaktaForm.Aksjonspunkt": "Kontroller opplysninger fra jordmor og arbeidsgiver",
   "TilretteleggingFaktaForm.Termindato": "Termindato",
   "TilretteleggingFaktaForm.Fodselsdato": "Fødselsdato",
   "TilretteleggingFaktaForm.BegrunnEndringene": "Begrunn endringene",
-  "TilretteleggingFaktaForm.UndersokNarmere": "Det er søkt for et org.nr. eller fødselsnummer der søker ikke var ansatt da behovet for tilrettelegging oppsto. Vurder om du skal kontakte arbeidsgiver eller søker for avklaring. Hvis du innvilger behandlingen nå, vil bruker få 0 kroner utbetalt.",
+  "TilretteleggingFaktaForm.UndersokNarmere": "Søker var ikke ansatt da behovet for tilrettelegging oppsto. Vurder om du skal kontakte arbeidsgiver eller søker for avklaring. Hvis du innvilger behandlingen nå, vil bruker få 0 kroner utbetalt.",
 
   "TilretteleggingForArbeidsgiverPanel.TilretteleggingTidligereEnn": "Tilrettelegging fra og med må være tidligere enn {dato}",
   "TilretteleggingForArbeidsgiverPanel.DatoForTilrettelegging": "Dato for tilrettelegging fra lege eller jordmor",
   "TilretteleggingForArbeidsgiverPanel.Perioder": "Perioder",
   "TilretteleggingForArbeidsgiverPanel.SkalHaSvpForArbeidsforhold": "Skal ha svangerskapspenger for arbeidsforholdet",
-  "TilretteleggingForArbeidsgiverPanel.Velferdspermisjon": "Registrert velferdspermisjon",
+  "TilretteleggingForArbeidsgiverPanel.Velferdspermisjon": "Registrerte velferdspermisjoner",
+  "TilretteleggingForArbeidsgiverPanel.ErPermisjonGyldg": "Er permisjon gyldig",
 
   "TilretteleggingsbehovForm.Tilretteleggingsbehov": "Tilretteleggingsbehov",
   "TilretteleggingsbehovForm.FraOgMed": "Fra og med",
@@ -22,7 +24,7 @@
   "TilretteleggingsbehovForm.RedusertArbeid": "Arbeidstakeren kan fortsette med redusert arbeidstid",
   "TilretteleggingsbehovForm.KanIkkeGjennomfores": "Arbeidstakeren må midlertidig gå ut av sitt arbeid",
   "TilretteleggingsbehovForm.LeggTil": "Legg til ny periode",
-  "TilretteleggingsbehovForm.AvsluttOgSlett": "Avslutt og slett",
+  "TilretteleggingsbehovForm.AvsluttOgSlett": "Avbryt",
   "TilretteleggingsbehovForm.Oppdater": "Oppdater",
   "TilretteleggingsbehovForm.Avbryt": "Avbryt",
   "TilretteleggingsbehovForm.TreUker": "Tre uker før termin",
@@ -31,9 +33,10 @@
   "TilretteleggingInfoPanel.Periode": "Periode på {periode}",
   "TilretteleggingInfoPanel.TreUker": "Frem til tre uker før termin",
   "TilretteleggingInfoPanel.Dager": "Frem til {dager} dager før termin",
+  "TilretteleggingInfoPanel.FraSoknad": "Fra søknaden",
 
-  "OppholdForm.LeggTil": "Legg til nytt opphold",
-  "OppholdForm.AvsluttOgSlett": "Avslutt og slett",
+  "OppholdForm.LeggTil": "Legg til ny periode",
+  "OppholdForm.AvsluttOgSlett": "Avbryt",
   "OppholdForm.Oppdater": "Oppdater",
   "OppholdForm.Avbryt": "Avbryt",
   "OppholdForm.FraOgMed": "Fra og med",
@@ -43,5 +46,24 @@
   "OppholdForm.Ferie": "Ferie",
 
   "TilretteleggingFieldArray.LeggTilTilrettelegging": "Periode med svangerskapspenger",
-  "TilretteleggingFieldArray.LeggTilOpphold": "Opphold"
+  "TilretteleggingFieldArray.LeggTilOpphold": "Opphold",
+
+  "VelferdspermisjonPanel.Permisjon": "{permisjon}% {type}",
+  "VelferdspermisjonPanel.PermisjonGyldig": "Er permisjon gyldig?",
+  "VelferdspermisjonPanel.Ja": "Ja",
+  "VelferdspermisjonPanel.Nei": "Nei",
+  "VelferdspermisjonPanel.Oppdater": "Oppdater",
+  "VelferdspermisjonPanel.AAregisteret": "AA-registeret",
+
+  "TilretteleggingPerioderTabellRad.Periode": "Periode",
+  "TilretteleggingPerioderTabellRad.Saksbehandler": "Saksbehandler",
+  "TilretteleggingPerioderTabellRad.EndretAvSaksbehandler": "Endret av saksbehandler",
+  "TilretteleggingPerioderTabellRad.Inntektsmelding": "Inntektsmelding",
+  "TilretteleggingPerioderTabellRad.Soknad": "Søknad",
+  "TilretteleggingPerioderTabellRad.Tilrettelegging": "Tilrettelegging",
+  "TilretteleggingPerioderTabellRad.Opphold": "Opphold",
+  "TilretteleggingPerioderTabellRad.Vedtatt": "Vedtatt",
+  "TilretteleggingPerioderTabellRad.Ny": "Ny",
+  "TilretteleggingPerioderTabellRad.Sykepenger": "Sykepenger 100%",
+  "TilretteleggingPerioderTabellRad.Ferie": "Ferie"
 }

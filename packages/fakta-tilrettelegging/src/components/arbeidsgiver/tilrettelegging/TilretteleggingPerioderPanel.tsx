@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { useState, FunctionComponent } from 'react';
 import { useFieldArray } from 'react-hook-form';
 import { ArbeidsforholdFodselOgTilrettelegging } from '@navikt/fp-types';
 
@@ -23,6 +23,8 @@ const TilretteleggingPerioderPanel: FunctionComponent<OwnProps> = ({
   const tilretteleggingStateName = `arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingDatoer`;
   const oppholdPerioderStateName = `arbeidsforhold.${arbeidsforholdIndex}.avklarteOppholdPerioder`;
 
+  const [erLeggTilKnapperDisablet, setLeggTilKnapperDisablet] = useState(false);
+
   const { append: appendTilrettelegging, remove: removeTilrettelegging } = useFieldArray({
     name: tilretteleggingStateName,
   });
@@ -31,6 +33,7 @@ const TilretteleggingPerioderPanel: FunctionComponent<OwnProps> = ({
   const { tilretteleggingDatoer, avklarteOppholdPerioder } = arbeidsforhold;
 
   const leggTilOpphold = () => {
+    setLeggTilKnapperDisablet(true);
     appendOpphold({
       fom: undefined,
       tom: undefined,
@@ -38,6 +41,7 @@ const TilretteleggingPerioderPanel: FunctionComponent<OwnProps> = ({
     });
   };
   const leggTilTilrettelegging = () => {
+    setLeggTilKnapperDisablet(true);
     appendTilrettelegging({
       fom: undefined,
       type: undefined,
@@ -88,6 +92,7 @@ const TilretteleggingPerioderPanel: FunctionComponent<OwnProps> = ({
                 index={arbeidsforholdIndex + index}
                 openRad={fomDato === undefined}
                 fjernTilretteleggingEllerOpphold={fjernTilretteleggingEllerOpphold}
+                setLeggTilKnapperDisablet={setLeggTilKnapperDisablet}
               />
             );
           })}
@@ -103,6 +108,7 @@ const TilretteleggingPerioderPanel: FunctionComponent<OwnProps> = ({
               type="button"
               icon={<PlusIcon aria-hidden />}
               onClick={leggTilTilrettelegging}
+              disabled={erLeggTilKnapperDisablet}
             >
               <FormattedMessage id="TilretteleggingFieldArray.LeggTilTilrettelegging" />
             </Button>
@@ -114,6 +120,7 @@ const TilretteleggingPerioderPanel: FunctionComponent<OwnProps> = ({
               onClick={leggTilOpphold}
               icon={<PlusIcon aria-hidden />}
               type="button"
+              disabled={erLeggTilKnapperDisablet}
             >
               <FormattedMessage id="TilretteleggingFieldArray.LeggTilOpphold" />
             </Button>

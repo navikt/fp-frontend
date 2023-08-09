@@ -2,7 +2,7 @@ export type Permisjon = Readonly<{
   permisjonFom: string;
   permisjonTom: string;
   permisjonsprosent: number;
-  erGyldig: boolean;
+  erGyldig?: boolean;
   type: string;
 }>;
 
@@ -12,6 +12,9 @@ export type ArbeidsforholdTilretteleggingDato = Readonly<{
   type: string;
   stillingsprosent?: number;
   overstyrtUtbetalingsgrad?: number;
+  manueltLagtTil?: boolean;
+  manueltEndret?: boolean;
+  erVedtatt?: boolean;
 }>;
 
 export type SvpAvklartOppholdPeriode = Readonly<{
@@ -19,6 +22,7 @@ export type SvpAvklartOppholdPeriode = Readonly<{
   tom: string;
   oppholdÅrsak: string;
   forVisning?: boolean;
+  erVedtatt?: boolean;
 }>;
 
 export type ArbeidsforholdFodselOgTilrettelegging = Readonly<{
