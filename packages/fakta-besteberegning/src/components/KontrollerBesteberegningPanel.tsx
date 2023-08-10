@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Aksjonspunkt } from '@navikt/fp-types';
 import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
@@ -57,14 +57,16 @@ const KontrollerBesteberegningPanel: FunctionComponent<OwnProps> = ({
   const begrunnelse = formMethods.watch('begrunnelse');
   return (
     <>
-      <AksjonspunktHelpTextTemp isAksjonspunktOpen={aksjonspunkt.status === AksjonspunktStatus.OPPRETTET}>
-        {[
-          <FormattedMessage
-            key="BesteberegningAksjonspunktTekst"
-            id="BesteberegningProsessPanel.Aksjonspunkt.HelpTextKontroll"
-          />,
-        ]}
-      </AksjonspunktHelpTextTemp>
+      {aksjonspunkt.status === AksjonspunktStatus.OPPRETTET && (
+        <AksjonspunktHelpTextHTML>
+          {[
+            <FormattedMessage
+              key="BesteberegningAksjonspunktTekst"
+              id="BesteberegningProsessPanel.Aksjonspunkt.HelpTextKontroll"
+            />,
+          ]}
+        </AksjonspunktHelpTextHTML>
+      )}
       <VerticalSpacer twentyPx />
       <Form
         formMethods={formMethods}

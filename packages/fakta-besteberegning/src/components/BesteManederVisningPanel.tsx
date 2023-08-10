@@ -181,18 +181,12 @@ const BesteManederVisningPanel: FunctionComponent<BesteMånederProps> = ({
       <VerticalSpacer twentyPx />
       {lagRadMedMåneder(sorterteMåneder.slice(4, 6), arbeidsgiverOpplysninger, getKodeverkNavn)}
       <VerticalSpacer twentyPx />
-      <Table noHover>
-        <TableRow>
-          <TableColumn>
-            <BodyShort size="small">
-              <FormattedMessage id="Inntekttabell.BeregnetÅrsinntekt" />
-            </BodyShort>
-          </TableColumn>
-          <TableColumn>
-            <BodyShort size="small">{formatCurrencyNoKr(finnÅrsinntekt(besteMåneder))}</BodyShort>
-          </TableColumn>
-        </TableRow>
-      </Table>
+      <Label size="small">
+        <FormattedMessage
+          id="Inntekttabell.BeregnetÅrsinntekt"
+          values={{ inntekt: formatCurrencyNoKr(finnÅrsinntekt(besteMåneder)) }}
+        />
+      </Label>
     </>
   );
 };
