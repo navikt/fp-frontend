@@ -5,10 +5,10 @@ import { ArbeidsforholdTilretteleggingDato, SvpAvklartOppholdPeriode } from '@na
 
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import TilretteleggingForm from './TilretteleggingForm';
-import OppholdForm from './OppholdForm';
+import TilretteleggingForm from './tilrettelegging/TilretteleggingForm';
+import OppholdForm from './opphold/OppholdForm';
 
-import styles from './tilretteleggingPerioderTabellRad.module.css';
+import styles from './tilretteleggingOgOppholdPerioderTabellRad.module.css';
 
 const utledTypeTekst = (
   intl: IntlShape,
@@ -70,7 +70,7 @@ interface WrapperProps {
   setLeggTilKnapperDisablet: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const TilretteleggingPerioderTabellRad: FunctionComponent<WrapperProps> = ({
+const TilretteleggingOgOppholdPerioderTabellRad: FunctionComponent<WrapperProps> = ({
   navn,
   tilrettelegging,
   opphold,
@@ -91,13 +91,11 @@ const TilretteleggingPerioderTabellRad: FunctionComponent<WrapperProps> = ({
   const oppdaterTilrettelegging = (values: ArbeidsforholdTilretteleggingDato) => {
     setOpen(false);
     setLeggTilKnapperDisablet(false);
-    // TODO Om ein endrar tom så lukkar rada seg for fort
     setValue(navn, values);
   };
   const oppdaterOpphold = (values: SvpAvklartOppholdPeriode) => {
     setOpen(false);
     setLeggTilKnapperDisablet(false);
-    // TODO Om ein endrar tom så lukkar rada seg for fort
     setValue(navn, values);
   };
   const avbrytEditering = () => {
@@ -166,4 +164,4 @@ const TilretteleggingPerioderTabellRad: FunctionComponent<WrapperProps> = ({
   );
 };
 
-export default TilretteleggingPerioderTabellRad;
+export default TilretteleggingOgOppholdPerioderTabellRad;

@@ -10,10 +10,15 @@
   margin-left: 30px;
 }
 
+.idMargin {
+  margin-top: 5px;
+}
+
 .padding {
   padding-top: 10px;
 }
 
 .image {
-  margin-top: 20px;
+  height: 25px;
+  width: 25px;
 }

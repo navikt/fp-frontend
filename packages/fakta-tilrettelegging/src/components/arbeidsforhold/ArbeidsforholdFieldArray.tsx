@@ -76,14 +76,14 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
               <ExpansionCard.Header>
                 <div className={styles.padding}>
                   <FlexContainer>
-                    <FlexRow alignItemsToBaseline>
+                    <FlexRow>
                       <FlexColumn>
-                        <Buldings3Icon color="var(--a-blue-600)" />
+                        <Buldings3Icon color="var(--a-blue-600)" className={styles.image} />
                       </FlexColumn>
                       <FlexColumn>
                         <Heading size="small">{arbeidsgiverOpplysning.navn}</Heading>
                       </FlexColumn>
-                      <FlexColumn>
+                      <FlexColumn className={styles.idMargin}>
                         <BodyShort size="small">{arbeidsgiverOpplysning.identifikator}</BodyShort>
                       </FlexColumn>
                       <FlexColumn className={styles.tagMargin}>
@@ -99,11 +99,12 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                           <FormattedMessage id={finnSvpTagTekst(arbeidsforhold.skalBrukes, visInfoAlert)} />
                         </Tag>
                       </FlexColumn>
-                      {!arbeidsforhold.skalBrukes && visInfoAlert && (
+                      {arbeidsforhold.skalBrukes && visInfoAlert && (
                         <FlexColumn>
                           <ExclamationmarkTriangleFillIcon
                             title={intl.formatMessage({ id: 'ArbeidsforholdFieldArray.SvpIkkeBeregnet' })}
                             color="var(--a-orange-600)"
+                            className={styles.image}
                           />
                         </FlexColumn>
                       )}
@@ -116,7 +117,7 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                   arbeidsforhold={arbeidsforhold}
                   arbeidsforholdIndex={index}
                   readOnly={readOnly}
-                  visInfoAlert={!arbeidsforhold.skalBrukes && visInfoAlert}
+                  visInfoAlert={arbeidsforhold.skalBrukes && visInfoAlert}
                 />
               </ExpansionCard.Content>
             </ExpansionCard>

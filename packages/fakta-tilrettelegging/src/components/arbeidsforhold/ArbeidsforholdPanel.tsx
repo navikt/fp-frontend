@@ -11,7 +11,7 @@ import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ArbeidsforholdFodselOgTilrettelegging, Permisjon } from '@navikt/fp-types';
 
-import TilretteleggingPerioderPanel from './tilretteleggingOgOpphold/TilretteleggingPerioderPanel';
+import TilretteleggingOgOppholdPerioderPanel from './tilretteleggingOgOpphold/TilretteleggingOgOppholdPerioderPanel';
 import VelferdspermisjonPanel from './velferdspermisjon/VelferdspermisjonPanel';
 
 dayjs.extend(minMax);
@@ -113,8 +113,8 @@ const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({
       <Label size="small">
         <FormattedMessage id="TilretteleggingForArbeidsgiverPanel.Perioder" />
       </Label>
-      <VerticalSpacer sixteenPx />
-      <TilretteleggingPerioderPanel
+      <VerticalSpacer eightPx />
+      <TilretteleggingOgOppholdPerioderPanel
         arbeidsforhold={arbeidsforhold}
         arbeidsforholdIndex={arbeidsforholdIndex}
         readOnly={readOnly}

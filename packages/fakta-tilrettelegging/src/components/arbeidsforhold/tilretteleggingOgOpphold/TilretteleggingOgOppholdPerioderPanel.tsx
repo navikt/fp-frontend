@@ -7,7 +7,7 @@ import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-u
 import { FormattedMessage } from 'react-intl';
 import { PlusIcon } from '@navikt/aksel-icons';
 import dayjs from 'dayjs';
-import TilretteleggingPerioderTabellRad from './TilretteleggingPerioderTabellRad';
+import TilretteleggingOgOppholdPerioderTabellRad from './TilretteleggingOgOppholdPerioderTabellRad';
 
 interface OwnProps {
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
@@ -15,7 +15,7 @@ interface OwnProps {
   readOnly: boolean;
 }
 
-const TilretteleggingPerioderPanel: FunctionComponent<OwnProps> = ({
+const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
   arbeidsforhold,
   arbeidsforholdIndex,
   readOnly,
@@ -83,7 +83,7 @@ const TilretteleggingPerioderPanel: FunctionComponent<OwnProps> = ({
                 ? `${tilretteleggingStateName}.${tilretteleggingIndex}`
                 : `${oppholdPerioderStateName}.${oppholdIndex}`;
             return (
-              <TilretteleggingPerioderTabellRad
+              <TilretteleggingOgOppholdPerioderTabellRad
                 key={navn}
                 navn={navn}
                 tilrettelegging={tilretteleggingDatoer[tilretteleggingIndex]}
@@ -131,4 +131,4 @@ const TilretteleggingPerioderPanel: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default TilretteleggingPerioderPanel;
+export default TilretteleggingOgOppholdPerioderPanel;

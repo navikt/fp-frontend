@@ -8,6 +8,8 @@ import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 
 import VelferdspermisjonTabellRad from './VelferdspermisjonTabellRad';
 
+import styles from './velferdspermisjonPanel.module.css';
+
 interface OwnProps {
   velferdspermisjoner: Permisjon[];
   arbeidsforholdIndex: number;
@@ -34,13 +36,13 @@ const VelferdspermisjonPanel: FunctionComponent<OwnProps> = ({
             <FlexColumn>
               <ExclamationmarkTriangleFillIcon
                 title={intl.formatMessage({ id: 'TilretteleggingForArbeidsgiverPanel.ErPermisjonGyldg' })}
-                color="var(--a-orange-600)"
+                className={styles.image}
               />
             </FlexColumn>
           )}
         </FlexRow>
       </FlexContainer>
-      <VerticalSpacer sixteenPx />
+      <VerticalSpacer eightPx />
       <Table size="small">
         <Table.Body>
           {velferdspermisjoner.map((permisjon, index) => (
