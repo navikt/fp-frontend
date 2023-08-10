@@ -8,7 +8,12 @@ import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-u
 import { FormProvider, useForm } from 'react-hook-form';
 import { Button } from '@navikt/ds-react';
 
-type FormValues = SvpAvklartOppholdPeriode;
+type FormValues = Record<
+  number,
+  {
+    skalVelgeDato: boolean;
+  } & SvpAvklartOppholdPeriode
+>;
 
 interface OwnProps {
   opphold: SvpAvklartOppholdPeriode;
@@ -30,7 +35,6 @@ const OppholdForm: FunctionComponent<OwnProps> = ({ opphold, index, readOnly, op
   });
 
   const lagreIForm = (values: FormValues) => {
-    // @ts-ignore fixme
     oppdaterOpphold(values[index]);
     formMethods.reset(values);
     return Promise.resolve();

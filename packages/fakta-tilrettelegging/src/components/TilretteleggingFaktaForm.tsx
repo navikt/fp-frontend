@@ -129,8 +129,13 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
           skalViseFeil(true);
           return Promise.resolve();
         }
-        // @ts-ignore fixme
-        return submitCallback(values);
+        return submitCallback({
+          kode: AksjonspunktCode.FODSELTILRETTELEGGING,
+          termindato: values.termindato,
+          fødselsdato: values.fødselsdato,
+          begrunnelse: values.begrunnelse,
+          bekreftetSvpArbeidsforholdList: values.arbeidsforhold,
+        });
       }}
     >
       {hasOpenAksjonspunkter && (

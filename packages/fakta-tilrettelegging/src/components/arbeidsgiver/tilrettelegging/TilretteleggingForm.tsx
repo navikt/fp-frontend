@@ -80,7 +80,7 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
     formMethods.reset();
   };
 
-  // @ts-ignore Fiks type
+  // @ts-ignore
   const skalVelgeDato = formMethods.watch(`${index}.skalVelgeDato`);
 
   return (

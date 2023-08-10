@@ -28,7 +28,8 @@ const TilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  // @ts-ignore FIKS obligatorisk tom
+  // FIXME Avklar tom
+  // @ts-ignore
   const dagerOgUker = calcDaysAndWeeks(tilrettelegging.fom, tilrettelegging.tom);
   const fremTilTidspunkt = erTomDatoTreUkerFørTermin
     ? intl.formatMessage({ id: 'TilretteleggingInfoPanel.TreUker' })
