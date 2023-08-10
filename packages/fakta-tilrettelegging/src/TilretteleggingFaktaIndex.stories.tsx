@@ -35,11 +35,13 @@ const tilretteleggingPermisjon = {
           fom: '2020-03-17',
           tom: '2020-05-20',
           type: 'INGEN_TILRETTELEGGING',
+          mottattDato: '2020-05-20',
         },
         {
           fom: '2020-10-15',
           tom: '2020-10-16',
           type: 'HEL_TILRETTELEGGING',
+          mottattDato: '2020-05-20',
         },
       ],
       arbeidsgiverReferanse: '999999999',
@@ -89,7 +91,7 @@ const svangerskapspengerTilretteleggingForFrilanser = {
         },
       ],
       arbeidsgiverReferanse: '1',
-      skalBrukes: true,
+      skalBrukes: undefined,
       velferdspermisjoner: [],
       avklarteOppholdPerioder: [],
     },
@@ -104,7 +106,7 @@ const svangerskapspengerTilretteleggingForFrilanser = {
       ],
       arbeidsgiverReferanse: '2',
       uttakArbeidType: 'ORDINÆRT_ARBEID',
-      skalBrukes: true,
+      skalBrukes: undefined,
       velferdspermisjoner: [],
       avklarteOppholdPerioder: [],
     },
@@ -223,8 +225,8 @@ TilretteleggingMedVelferdspermisjon.args = {
   arbeidOgInntekt: spesiellArbeidOgInntekt,
 };
 
-export const AksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigNæringsdrivende = Template.bind({});
-AksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigNæringsdrivende.args = {
+export const SokerVarIkkeAnsattDaBehovetForTilretteleggingOppsto = Template.bind({});
+SokerVarIkkeAnsattDaBehovetForTilretteleggingOppsto.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [
     {
@@ -236,22 +238,6 @@ AksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigNæringsdrivende.
   ],
   svangerskapspengerTilrettelegging: svangerskapspengerTilretteleggingForFrilanser,
   arbeidOgInntekt: defaultArbeidOgInntekt,
-};
-
-export const ErOverstyrer = Template.bind({});
-ErOverstyrer.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [
-    {
-      definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
-      status: aksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: true,
-    },
-  ],
-  svangerskapspengerTilrettelegging: tilretteleggingPermisjon,
-  arbeidOgInntekt: spesiellArbeidOgInntekt,
-  erOverstyrer: true,
 };
 
 export const HarOpphold = Template.bind({});

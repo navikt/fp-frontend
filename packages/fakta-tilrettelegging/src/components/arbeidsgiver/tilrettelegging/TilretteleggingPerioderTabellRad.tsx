@@ -118,7 +118,7 @@ const TilretteleggingPerioderTabellRad: FunctionComponent<WrapperProps> = ({
       onClick={() => setOpen(!open)}
       content={
         <>
-          {open && tilrettelegging && (
+          {tilrettelegging && (
             <TilretteleggingForm
               tilrettelegging={tilrettelegging}
               termindato={termindato}
@@ -128,7 +128,7 @@ const TilretteleggingPerioderTabellRad: FunctionComponent<WrapperProps> = ({
               readOnly={readOnly}
             />
           )}
-          {open && opphold && (
+          {opphold && (
             <OppholdForm
               opphold={opphold}
               index={index}

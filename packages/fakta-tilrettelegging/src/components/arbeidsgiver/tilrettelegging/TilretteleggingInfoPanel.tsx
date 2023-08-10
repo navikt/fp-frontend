@@ -6,7 +6,7 @@ import { ArbeidsforholdTilretteleggingDato } from '@navikt/fp-types';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import { BranchingIcon, CalendarIcon, PersonPregnantIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail } from '@navikt/ds-react';
-import { calcDaysAndWeeks } from '@navikt/ft-utils';
+import { DDMMYYYY_DATE_FORMAT, calcDaysAndWeeks } from '@navikt/ft-utils';
 
 import styles from './tilretteleggingInfoPanel.module.css';
 
@@ -28,7 +28,8 @@ const TilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  // @ts-ignore FIKS obligatorisk tom
+  // FIXME Avklar tom
+  // @ts-ignore
   const dagerOgUker = calcDaysAndWeeks(tilrettelegging.fom, tilrettelegging.tom);
   const fremTilTidspunkt = erTomDatoTreUkerFørTermin
     ? intl.formatMessage({ id: 'TilretteleggingInfoPanel.TreUker' })
@@ -89,10 +90,18 @@ const TilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
                 </FlexColumn>
                 <FlexColumn>
                   <BodyShort size="small">
-                    {' '}
                     <FormattedMessage id="TilretteleggingInfoPanel.FraSoknad" />
                   </BodyShort>
-                  <Detail>Sendt...</Detail>
+                  <Detail>
+                    <FormattedMessage
+                      id="TilretteleggingInfoPanel.Sendt"
+                      values={{
+                        dato: tilrettelegging.mottattDato
+                          ? dayjs(tilrettelegging.mottattDato).format(DDMMYYYY_DATE_FORMAT)
+                          : '',
+                      }}
+                    />
+                  </Detail>
                 </FlexColumn>
               </FlexRow>
             </FlexContainer>

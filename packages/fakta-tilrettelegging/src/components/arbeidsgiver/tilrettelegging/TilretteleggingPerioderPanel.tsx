@@ -78,14 +78,14 @@ const TilretteleggingPerioderPanel: FunctionComponent<OwnProps> = ({
             const fomDato = alleFomDatoerSortert[index];
             const tilretteleggingIndex = tilretteleggingDatoer.findIndex(t => t.fom === fomDato);
             const oppholdIndex = avklarteOppholdPerioder.findIndex(t => t.fom === fomDato);
+            const navn =
+              tilretteleggingIndex !== -1
+                ? `${tilretteleggingStateName}.${tilretteleggingIndex}`
+                : `${oppholdPerioderStateName}.${oppholdIndex}`;
             return (
               <TilretteleggingPerioderTabellRad
-                key={fomDato}
-                navn={
-                  tilretteleggingIndex !== -1
-                    ? `${tilretteleggingStateName}.${tilretteleggingIndex}`
-                    : `${oppholdPerioderStateName}.${oppholdIndex}`
-                }
+                key={navn}
+                navn={navn}
                 tilrettelegging={tilretteleggingDatoer[tilretteleggingIndex]}
                 opphold={avklarteOppholdPerioder[oppholdIndex]}
                 readOnly={readOnly}

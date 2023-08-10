@@ -52,6 +52,7 @@ const VelferdspermisjonPanel: FunctionComponent<OwnProps> = ({
     const formValues = values[permisjonIndex];
     setValue(`arbeidsforhold.${arbeidsforholdIndex}.velferdspermisjoner.${permisjonIndex}`, formValues);
     setOpen(false);
+    formMethods.reset(values);
     return Promise.resolve();
   };
 
@@ -74,6 +75,7 @@ const VelferdspermisjonPanel: FunctionComponent<OwnProps> = ({
             <RadioGroupPanel
               name={`${permisjonIndex}.erGyldig`}
               label={intl.formatMessage({ id: 'VelferdspermisjonPanel.PermisjonGyldig' })}
+              description={intl.formatMessage({ id: 'VelferdspermisjonPanel.PermisjonGyldigDetaljer' })}
               validate={[required]}
               isReadOnly={readOnly}
               isTrueOrFalseSelection

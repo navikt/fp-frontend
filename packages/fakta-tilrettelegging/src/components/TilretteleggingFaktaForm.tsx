@@ -1,4 +1,4 @@
-import React, { useMemo, FunctionComponent } from 'react';
+import React, { useMemo, FunctionComponent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Datepicker, Form, TextAreaField } from '@navikt/ft-form-hooks';
@@ -22,7 +22,9 @@ import { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunk
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
+import { Alert } from '@navikt/ds-react';
 import ArbeidsforholdFieldArray from './arbeidsgiver/ArbeidsforholdFieldArray';
+import { filtrerVelferdspermisjoner } from './arbeidsgiver/tilrettelegging/ArbeidsforholdPanel';
 
 const maxLength1500 = maxLength(1500);
 
@@ -51,6 +53,13 @@ const getAksjonspunktBegrunnelse = (aksjonspunkter: Aksjonspunkt[]): string | un
 };
 
 const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) => value !== undefined || isDirty;
+
+const utledOmEnSkalVurdereVelferdspermisjoner = (alleArbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[]) =>
+  alleArbeidsforhold.some(arbeidsforhold =>
+    filtrerVelferdspermisjoner(arbeidsforhold.velferdspermisjoner, arbeidsforhold.tilretteleggingBehovFom).some(
+      p => p.erGyldig === undefined,
+    ),
+  );
 
 interface OwnProps {
   behandlingVersjon: number;
@@ -106,13 +115,40 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
 
   const arbeidsforhold = formMethods.watch('arbeidsforhold');
 
+  const skalVurdereVelferdspermisjoner = utledOmEnSkalVurdereVelferdspermisjoner(sorterteArbeidsforhold);
+  const harIkkeVurdertAlleVelferdspermisjoner = utledOmEnSkalVurdereVelferdspermisjoner(arbeidsforhold);
+
+  const [visFeil, skalViseFeil] = useState(false);
+
   return (
-    // @ts-ignore fixme
-    <Form formMethods={formMethods} setDataOnUnmount={setFormData} onSubmit={values => submitCallback(values)}>
+    <Form
+      formMethods={formMethods}
+      setDataOnUnmount={setFormData}
+      onSubmit={values => {
+        if (harIkkeVurdertAlleVelferdspermisjoner) {
+          skalViseFeil(true);
+          return Promise.resolve();
+        }
+        return submitCallback({
+          kode: AksjonspunktCode.FODSELTILRETTELEGGING,
+          termindato: values.termindato,
+          fødselsdato: values.fødselsdato,
+          begrunnelse: values.begrunnelse,
+          bekreftetSvpArbeidsforholdList: values.arbeidsforhold,
+        });
+      }}
+    >
       {hasOpenAksjonspunkter && (
         <>
           <AksjonspunktHelpTextHTML>
-            {[<FormattedMessage id="TilretteleggingFaktaForm.Aksjonspunkt" key="svangerskapspengerAp" />]}
+            {skalVurdereVelferdspermisjoner
+              ? [
+                  <FormattedMessage
+                    id="TilretteleggingFaktaForm.AksjonspunktOgVelferdspermisjoner"
+                    key="svangerskapspengerAp"
+                  />,
+                ]
+              : [<FormattedMessage id="TilretteleggingFaktaForm.Aksjonspunkt" key="svangerskapspengerAp" />]}
           </AksjonspunktHelpTextHTML>
           <VerticalSpacer thirtyTwoPx />
         </>
@@ -146,6 +182,14 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         readOnly={readOnly}
       />
+      {harIkkeVurdertAlleVelferdspermisjoner && visFeil && (
+        <>
+          <VerticalSpacer sixteenPx />
+          <Alert variant="error">
+            <FormattedMessage id="TilretteleggingFaktaForm.IkkeAllePermisjonerVurdert" />
+          </Alert>
+        </>
+      )}
       <VerticalSpacer fourtyPx />
       <TextAreaField
         name="begrunnelse"

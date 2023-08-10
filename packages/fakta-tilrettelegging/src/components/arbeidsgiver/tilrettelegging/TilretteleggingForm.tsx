@@ -71,6 +71,7 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
       manueltEndret: !erNyPeriode,
       manueltLagtTil: erNyPeriode,
     });
+    formMethods.reset(values);
     return Promise.resolve();
   };
 
@@ -79,7 +80,7 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
     formMethods.reset();
   };
 
-  // @ts-ignore Fiks type
+  // @ts-ignore
   const skalVelgeDato = formMethods.watch(`${index}.skalVelgeDato`);
 
   return (
