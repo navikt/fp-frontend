@@ -3,7 +3,7 @@
   "BesteberegningProsessPanel.Måned.Inntekt.Inntekt": "Inntekt",
   "Inntekttabell.Tittel": "Inntektsgrunnlag for besteberegning",
   "Inntekttabell.Sum": "Total for måned",
-  "Inntekttabell.BeregnetÅrsinntekt": "Beregnet årsinntekt",
+  "Inntekttabell.BeregnetÅrsinntekt": "Beregnet årsinntekt: {inntekt}",
   "ResultatGrunnlag.BruttoBeregningsgrunnlag": "Brutto beregningsgrunnlag",
   "ResultatGrunnlag.BeregningEtterBesteberegning": "Beregning etter §14-7, 3. ledd",
   "ResultatGrunnlag.BeregningEtterKap8": "Beregning etter §14-7, 1. ledd",
