@@ -1,23 +1,18 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
+import { Label } from '@navikt/ds-react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { UseFormGetValues, useFormContext } from 'react-hook-form';
 import dayjs from 'dayjs';
 import minMax from 'dayjs/plugin/minMax';
+
 import { CheckboxField, Datepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import {
-  AksjonspunktHelpTextHTML,
-  FlexColumn,
-  FlexContainer,
-  FlexRow,
-  VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
-import { Label, Table } from '@navikt/ds-react';
+import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ArbeidsforholdFodselOgTilrettelegging, Permisjon } from '@navikt/fp-types';
-import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import TilretteleggingPerioderPanel from './TilretteleggingPerioderPanel';
-import VelferdspermisjonPanel from './VelferdspermisjonPanel';
+
+import TilretteleggingPerioderPanel from './tilretteleggingOgOpphold/TilretteleggingPerioderPanel';
+import VelferdspermisjonPanel from './velferdspermisjon/VelferdspermisjonPanel';
 
 dayjs.extend(minMax);
 
@@ -76,9 +71,9 @@ const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({
 
   const tilretteleggingBehovFom = watch(`arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingBehovFom`);
 
-  const filtrerteVelferdspermisjoner = filtrerVelferdspermisjoner(
-    arbeidsforhold.velferdspermisjoner,
-    tilretteleggingBehovFom,
+  const filtrerteVelferdspermisjoner = useMemo(
+    () => filtrerVelferdspermisjoner(arbeidsforhold.velferdspermisjoner, tilretteleggingBehovFom),
+    [arbeidsforhold.velferdspermisjoner, tilretteleggingBehovFom],
   );
 
   return (
@@ -108,40 +103,11 @@ const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({
         isReadOnly={readOnly}
       />
       {filtrerteVelferdspermisjoner.length > 0 && (
-        <>
-          <VerticalSpacer thirtyTwoPx />
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <Label size="small">
-                  <FormattedMessage id="TilretteleggingForArbeidsgiverPanel.Velferdspermisjon" />
-                </Label>
-              </FlexColumn>
-              {filtrerteVelferdspermisjoner.some(permisjon => permisjon.erGyldig === undefined) && (
-                <FlexColumn>
-                  <ExclamationmarkTriangleFillIcon
-                    title={intl.formatMessage({ id: 'TilretteleggingForArbeidsgiverPanel.ErPermisjonGyldg' })}
-                    color="var(--a-orange-600)"
-                  />
-                </FlexColumn>
-              )}
-            </FlexRow>
-          </FlexContainer>
-          <VerticalSpacer sixteenPx />
-          <Table size="small">
-            <Table.Body>
-              {filtrerteVelferdspermisjoner.map((permisjon, index) => (
-                <VelferdspermisjonPanel
-                  key={permisjon.permisjonFom}
-                  velferdspermisjon={permisjon}
-                  readOnly={readOnly}
-                  arbeidsforholdIndex={arbeidsforholdIndex}
-                  permisjonIndex={index}
-                />
-              ))}
-            </Table.Body>
-          </Table>
-        </>
+        <VelferdspermisjonPanel
+          velferdspermisjoner={filtrerteVelferdspermisjoner}
+          arbeidsforholdIndex={arbeidsforholdIndex}
+          readOnly={readOnly}
+        />
       )}
       <VerticalSpacer thirtyTwoPx />
       <Label size="small">

@@ -1,4 +1,4 @@
-import React, { useMemo, FunctionComponent, useState } from 'react';
+import React, { useMemo, FunctionComponent, useState, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Datepicker, Form, TextAreaField } from '@navikt/ft-form-hooks';
@@ -23,8 +23,8 @@ import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import { Alert } from '@navikt/ds-react';
-import ArbeidsforholdFieldArray from './arbeidsgiver/ArbeidsforholdFieldArray';
-import { filtrerVelferdspermisjoner } from './arbeidsgiver/tilrettelegging/ArbeidsforholdPanel';
+import ArbeidsforholdFieldArray from './arbeidsforhold/ArbeidsforholdFieldArray';
+import { filtrerVelferdspermisjoner } from './arbeidsforhold/ArbeidsforholdPanel';
 
 const maxLength1500 = maxLength(1500);
 
@@ -120,24 +120,25 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
 
   const [visFeil, skalViseFeil] = useState(false);
 
+  const onSubmit = useCallback(
+    (values: FormValues) => {
+      if (harIkkeVurdertAlleVelferdspermisjoner) {
+        skalViseFeil(true);
+        return Promise.resolve();
+      }
+      return submitCallback({
+        kode: AksjonspunktCode.FODSELTILRETTELEGGING,
+        termindato: values.termindato,
+        fødselsdato: values.fødselsdato,
+        begrunnelse: values.begrunnelse,
+        bekreftetSvpArbeidsforholdList: values.arbeidsforhold,
+      });
+    },
+    [harIkkeVurdertAlleVelferdspermisjoner, submitCallback],
+  );
+
   return (
-    <Form
-      formMethods={formMethods}
-      setDataOnUnmount={setFormData}
-      onSubmit={values => {
-        if (harIkkeVurdertAlleVelferdspermisjoner) {
-          skalViseFeil(true);
-          return Promise.resolve();
-        }
-        return submitCallback({
-          kode: AksjonspunktCode.FODSELTILRETTELEGGING,
-          termindato: values.termindato,
-          fødselsdato: values.fødselsdato,
-          begrunnelse: values.begrunnelse,
-          bekreftetSvpArbeidsforholdList: values.arbeidsforhold,
-        });
-      }}
-    >
+    <Form formMethods={formMethods} setDataOnUnmount={setFormData} onSubmit={onSubmit}>
       {hasOpenAksjonspunkter && (
         <>
           <AksjonspunktHelpTextHTML>

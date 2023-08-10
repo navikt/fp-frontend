@@ -12,7 +12,7 @@ import {
 
 import { FormattedMessage, useIntl } from 'react-intl';
 import styles from './arbeidsforholdFieldArray.module.css';
-import ArbeidsforholdPanel from './tilrettelegging/ArbeidsforholdPanel';
+import ArbeidsforholdPanel from './ArbeidsforholdPanel';
 
 const finnArbeidsforhold = (
   alleIafAf: AoIArbeidsforhold[],
