@@ -32,6 +32,7 @@ const OppholdForm: FunctionComponent<OwnProps> = ({ opphold, index, readOnly, op
   const lagreIForm = (values: FormValues) => {
     // @ts-ignore fixme
     oppdaterOpphold(values[index]);
+    formMethods.reset(values);
     return Promise.resolve();
   };
 

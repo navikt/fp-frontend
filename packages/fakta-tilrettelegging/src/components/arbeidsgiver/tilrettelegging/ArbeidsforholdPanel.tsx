@@ -22,8 +22,7 @@ import VelferdspermisjonPanel from './VelferdspermisjonPanel';
 dayjs.extend(minMax);
 
 const validerTidligereEnn =
-  (intl: IntlShape, getValues: UseFormGetValues<any>, stateName: string) => (): string | null => {
-    const tilretteleggingBehovFom = getValues(`${stateName}.tilretteleggingBehovFom`);
+  (intl: IntlShape, getValues: UseFormGetValues<any>, tilretteleggingBehovFom: string) => (): string | null => {
     const termindato = getValues('termindato');
     const fødselsdato = getValues('fødselsdato');
 
@@ -48,7 +47,10 @@ const validerTidligereEnn =
     return null;
   };
 
-const filtrerVelferdspermisjoner = (velferdspermisjoner: Permisjon[], tilretteleggingBehovFom: string): Permisjon[] =>
+export const filtrerVelferdspermisjoner = (
+  velferdspermisjoner: Permisjon[],
+  tilretteleggingBehovFom: string,
+): Permisjon[] =>
   velferdspermisjoner.filter(
     permisjon =>
       !dayjs(permisjon.permisjonFom).isAfter(tilretteleggingBehovFom) &&
@@ -102,7 +104,7 @@ const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({
         label={intl.formatMessage({
           id: 'TilretteleggingForArbeidsgiverPanel.DatoForTilrettelegging',
         })}
-        validate={[required, hasValidDate, validerTidligereEnn(intl, getValues, `arbeidsgiver.${arbeidsforholdIndex}`)]}
+        validate={[required, hasValidDate, validerTidligereEnn(intl, getValues, tilretteleggingBehovFom)]}
         isReadOnly={readOnly}
       />
       {filtrerteVelferdspermisjoner.length > 0 && (
@@ -130,6 +132,7 @@ const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({
             <Table.Body>
               {filtrerteVelferdspermisjoner.map((permisjon, index) => (
                 <VelferdspermisjonPanel
+                  key={permisjon.permisjonFom}
                   velferdspermisjon={permisjon}
                   readOnly={readOnly}
                   arbeidsforholdIndex={arbeidsforholdIndex}

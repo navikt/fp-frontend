@@ -71,6 +71,7 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
       manueltEndret: !erNyPeriode,
       manueltLagtTil: erNyPeriode,
     });
+    formMethods.reset(values);
     return Promise.resolve();
   };
 

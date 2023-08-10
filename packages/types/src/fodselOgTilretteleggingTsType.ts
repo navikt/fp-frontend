@@ -15,6 +15,7 @@ export type ArbeidsforholdTilretteleggingDato = Readonly<{
   manueltLagtTil?: boolean;
   manueltEndret?: boolean;
   erVedtatt?: boolean;
+  mottattDato?: string;
 }>;
 
 export type SvpAvklartOppholdPeriode = Readonly<{

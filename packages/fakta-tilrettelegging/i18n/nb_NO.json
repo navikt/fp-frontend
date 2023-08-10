@@ -5,10 +5,12 @@
   "ArbeidsforholdFieldArray.Stillingsprosent": "{stillingsprosent}% stilling",
 
   "TilretteleggingFaktaForm.Aksjonspunkt": "Kontroller opplysninger fra jordmor og arbeidsgiver",
+  "TilretteleggingFaktaForm.AksjonspunktOgVelferdspermisjoner": "Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer",
   "TilretteleggingFaktaForm.Termindato": "Termindato",
   "TilretteleggingFaktaForm.Fodselsdato": "Fødselsdato",
   "TilretteleggingFaktaForm.BegrunnEndringene": "Begrunn endringene",
   "TilretteleggingFaktaForm.UndersokNarmere": "Søker var ikke ansatt da behovet for tilrettelegging oppsto. Vurder om du skal kontakte arbeidsgiver eller søker for avklaring. Hvis du innvilger behandlingen nå, vil bruker få 0 kroner utbetalt.",
+  "TilretteleggingFaktaForm.IkkeAllePermisjonerVurdert": "Ikke alle velferdspermisjoner er vurdert",
 
   "TilretteleggingForArbeidsgiverPanel.TilretteleggingTidligereEnn": "Tilrettelegging fra og med må være tidligere enn {dato}",
   "TilretteleggingForArbeidsgiverPanel.DatoForTilrettelegging": "Dato for tilrettelegging fra lege eller jordmor",
@@ -34,6 +36,7 @@
   "TilretteleggingInfoPanel.TreUker": "Frem til tre uker før termin",
   "TilretteleggingInfoPanel.Dager": "Frem til {dager} dager før termin",
   "TilretteleggingInfoPanel.FraSoknad": "Fra søknaden",
+  "TilretteleggingInfoPanel.Sendt": "Sendt {dato}",
 
   "OppholdForm.LeggTil": "Legg til ny periode",
   "OppholdForm.AvsluttOgSlett": "Avbryt",
@@ -50,6 +53,7 @@
 
   "VelferdspermisjonPanel.Permisjon": "{permisjon}% {type}",
   "VelferdspermisjonPanel.PermisjonGyldig": "Er permisjon gyldig?",
+  "VelferdspermisjonPanel.PermisjonGyldigDetaljer": "Hvis den er gyldig vil utbetalingsgraden for alle perioder for denne arbeidsgiveren reduseres med permisjonsprosent.",
   "VelferdspermisjonPanel.Ja": "Ja",
   "VelferdspermisjonPanel.Nei": "Nei",
   "VelferdspermisjonPanel.Oppdater": "Oppdater",
