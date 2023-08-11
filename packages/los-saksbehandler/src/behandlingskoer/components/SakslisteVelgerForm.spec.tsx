@@ -10,8 +10,6 @@ describe('<SakslisteVelgerForm>', () => {
   it('skal vise dropdown med en saksliste', async () => {
     const { getByText } = render(<Default />);
 
-    expect(await screen.findByText('Utvalgskriterier')).toBeInTheDocument();
-
     expect(await screen.findByText('Saksliste 1')).toBeInTheDocument();
     expect(screen.queryByText('Saksliste 2')).not.toBeInTheDocument();
 
@@ -35,9 +33,8 @@ describe('<SakslisteVelgerForm>', () => {
   it('skal vise dropdown med to saksliste og så bytte valgt liste', async () => {
     const { getByLabelText, getByText } = render(<MedToSakslister />);
 
-    expect(await screen.findByText('Utvalgskriterier')).toBeInTheDocument();
+    expect(await screen.findByText('Saksliste 1')).toBeInTheDocument();
 
-    expect(screen.getByText('Saksliste 1')).toBeInTheDocument();
     expect(screen.getByText('Saksliste 2')).toBeInTheDocument();
 
     expect((getByText('Saksliste 1') as HTMLOptionElement).selected).toBeTruthy();

@@ -40,6 +40,7 @@ const SakslistePanel: FunctionComponent<OwnProps> = ({
       <Heading size="small">
         <FormattedMessage id="SakslistePanel.StartBehandling" />
       </Heading>
+      <VerticalSpacer sixteenPx />
       <SakslisteVelgerForm
         sakslister={sakslister}
         setValgtSakslisteId={setValgtSakslisteId}

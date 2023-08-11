@@ -30,7 +30,7 @@
 
   "NyeOgFerdigstilteOppgaverForIdagPanel.NyeOgFerdigstilte": "Nye og ferdigstilte behandlinger",
   "NyeOgFerdigstilteOppgaverForIdagPanel.IDag": "I dag",
-  
+
   "OppgaveErReservertAvAnnenModal.ReservertAv": "{saksbehandlernavn} ({saksbehandlerid}) arbeider nå med denne behandlingen (reservert fram t.o.m {date} - {time})",
   "OppgaveErReservertAvAnnenModal.ReservertAvEnkel": "En annen saksbehandler arbeider nå med denne behandlingen",
   "OppgaveErReservertAvAnnenModal.Ok": "OK",
@@ -61,9 +61,9 @@
   "BehandlingPollingTimoutModal.TimeoutMelding": "Din økt er gått ut på tid, trykk Fortsett",
   "BehandlingPollingTimoutModal.Oppfrisk": "Fortsett",
 
-  "OpphevReservasjonModal.Begrunnelse":"Angi begrunnelse",
-  "OpphevReservasjonModal.Hjelpetekst":"Når en reservert sak frigjøres er begrunnelse obligatorisk",
-  "OpphevReservasjonModal.Ok":"OK",
+  "OpphevReservasjonModal.Begrunnelse": "Angi begrunnelse",
+  "OpphevReservasjonModal.Hjelpetekst": "Når en reservert sak frigjøres er begrunnelse obligatorisk",
+  "OpphevReservasjonModal.Ok": "OK",
   "OpphevReservasjonModal.Avbryt": "Avbryt",
 
   "FagsakSearch.ZeroSearchResults": "Søket ga ingen treff eller du mangler tilgang til saken",
@@ -102,7 +102,6 @@
   "BehandlingskoerIndex.IngenKø": "Du er ikke lagt til i noen behandlingskøer",
 
   "SakslisteVelgerForm.Saksliste": "Behandlingskø",
-  "SakslisteVelgerForm.Utvalgskriterier": "Utvalgskriterier",
   "SakslisteVelgerForm.Stonadstype": "Stønadstype",
   "SakslisteVelgerForm.Behandlingstype": "Behandlingstype",
   "SakslisteVelgerForm.Sortering": "Sortering",
