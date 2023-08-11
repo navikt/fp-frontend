@@ -112,12 +112,15 @@ const getLagringSideeffekter =
     toggleFatterVedtakModal: (skalFatterModal: boolean) => void,
     setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void,
   ) =>
-  (aksjonspunktModels: { kode: string }[]) => {
+  (aksjonspunktModels: { kode: string; skalBrukeOverstyrendeFritekstBrev: boolean }[]) => {
     setSkalOppdatereEtterBekreftelseAvAp(false);
 
     // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
     return () => {
-      if (aksjonspunktModels.some(ap => ap.kode === AksjonspunktCode.FORESLA_VEDTAK)) {
+      const skalTilTotrinnskontroll = aksjonspunktModels.some(
+        ap => ap.kode === AksjonspunktCode.FORESLA_VEDTAK || ap.skalBrukeOverstyrendeFritekstBrev,
+      );
+      if (skalTilTotrinnskontroll) {
         toggleFatterVedtakModal(true);
       } else {
         toggleIverksetterVedtakModal(true);
@@ -125,7 +128,7 @@ const getLagringSideeffekter =
     };
   };
 
-const AKSJONSPUNKT_KODER = [...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER, ...[AksjonspunktCode.FORESLA_VEDTAK]];
+const AKSJONSPUNKT_KODER = [...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER, AksjonspunktCode.FORESLA_VEDTAK];
 
 const ENDEPUNKTER_PANEL_DATA = [
   BehandlingApiKeys.TILBAKEKREVINGVALG,
