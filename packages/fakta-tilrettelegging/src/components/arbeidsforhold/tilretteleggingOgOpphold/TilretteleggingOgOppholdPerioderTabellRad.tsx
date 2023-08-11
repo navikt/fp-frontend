@@ -88,16 +88,14 @@ const TilretteleggingOgOppholdPerioderTabellRad: FunctionComponent<WrapperProps>
   const fom = tilrettelegging ? tilrettelegging.fom : opphold?.fom;
   const tom = tilrettelegging ? tilrettelegging.tom : opphold?.tom;
 
-  const oppdaterTilrettelegging = (values: ArbeidsforholdTilretteleggingDato) => {
+  const oppdaterTilretteleggingEllerOpphold = (
+    values: ArbeidsforholdTilretteleggingDato | SvpAvklartOppholdPeriode,
+  ) => {
     setOpen(false);
     setLeggTilKnapperDisablet(false);
     setValue(navn, values);
   };
-  const oppdaterOpphold = (values: SvpAvklartOppholdPeriode) => {
-    setOpen(false);
-    setLeggTilKnapperDisablet(false);
-    setValue(navn, values);
-  };
+
   const avbrytEditering = () => {
     if (!fom) {
       fjernTilretteleggingEllerOpphold(!!tilrettelegging);
@@ -121,7 +119,7 @@ const TilretteleggingOgOppholdPerioderTabellRad: FunctionComponent<WrapperProps>
               tilrettelegging={tilrettelegging}
               termindato={termindato}
               index={index}
-              oppdaterTilrettelegging={oppdaterTilrettelegging}
+              oppdaterTilrettelegging={oppdaterTilretteleggingEllerOpphold}
               avbrytEditering={avbrytEditering}
               readOnly={readOnly}
             />
@@ -130,7 +128,7 @@ const TilretteleggingOgOppholdPerioderTabellRad: FunctionComponent<WrapperProps>
             <OppholdForm
               opphold={opphold}
               index={index}
-              oppdaterOpphold={oppdaterOpphold}
+              oppdaterOpphold={oppdaterTilretteleggingEllerOpphold}
               avbrytEditering={avbrytEditering}
               readOnly={readOnly}
             />

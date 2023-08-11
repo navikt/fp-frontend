@@ -68,6 +68,7 @@ const AvklarteOppholdPerioderFieldArray: FunctionComponent<OwnProps> = ({
               const data = perioder[index];
               return (
                 <OppholdPeriodePanel
+                  key={field.id}
                   fieldId={field.id}
                   index={index}
                   readOnly={readOnly}

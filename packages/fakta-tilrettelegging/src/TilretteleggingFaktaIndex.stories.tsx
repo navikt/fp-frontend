@@ -79,11 +79,11 @@ const tilretteleggingPermisjon = {
 const svangerskapspengerTilretteleggingForFrilanser = {
   termindato: '2020-02-27',
   saksbehandlet: false,
-  // @ts-ignore fixme
   arbeidsforholdListe: [
     {
       tilretteleggingId: 1008653,
       tilretteleggingBehovFom: '2019-10-01',
+      kanTilrettelegges: false,
       tilretteleggingDatoer: [
         {
           fom: '2019-10-01',
@@ -98,6 +98,7 @@ const svangerskapspengerTilretteleggingForFrilanser = {
     {
       tilretteleggingId: 1008654,
       tilretteleggingBehovFom: '2019-10-01',
+      kanTilrettelegges: false,
       tilretteleggingDatoer: [
         {
           fom: '2019-10-01',
@@ -175,7 +176,6 @@ const arbeidsgiverOpplysningerPerId = {
     referanse: '342352362',
     identifikator: '342352362',
     navn: 'Lagt til av saksbehandler',
-    fødselsdato: null,
     erPrivatPerson: false,
   },
 };
@@ -203,7 +203,6 @@ const Template: StoryFn<{
     svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
     aksjonspunkter={aksjonspunkter}
     erOverstyrer={erOverstyrer}
-    // @ts-ignore fixme
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     alleKodeverk={alleKodeverk as any}
     arbeidOgInntekt={arbeidOgInntekt}
