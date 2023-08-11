@@ -30,10 +30,10 @@ const erInnenforIntervall = (tilretteleggingBehovFom: string, fomDato?: string, 
 };
 
 const finnSvpTagTekst = (skalBrukes: boolean, visInfoAlert: boolean) => {
-  if (skalBrukes) {
-    return 'ArbeidsforholdFieldArray.SkalHaSvp';
+  if (visInfoAlert && skalBrukes) {
+    return 'ArbeidsforholdFieldArray.SvpIkkeBeregnet';
   }
-  return visInfoAlert ? 'ArbeidsforholdFieldArray.SvpIkkeBeregnet' : 'ArbeidsforholdFieldArray.SkalIkkeHaSvp';
+  return skalBrukes ? 'ArbeidsforholdFieldArray.SkalHaSvp' : 'ArbeidsforholdFieldArray.SkalIkkeHaSvp';
 };
 
 interface OwnProps {
