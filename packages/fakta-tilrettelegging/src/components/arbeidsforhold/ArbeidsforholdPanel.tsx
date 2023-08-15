@@ -57,6 +57,7 @@ interface OwnProps {
   arbeidsforholdIndex: number;
   readOnly: boolean;
   visInfoAlert: boolean;
+  stillingsprosentArbeidsforhold: number;
 }
 
 const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({
@@ -64,6 +65,7 @@ const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({
   arbeidsforholdIndex,
   readOnly,
   visInfoAlert,
+  stillingsprosentArbeidsforhold,
 }) => {
   const intl = useIntl();
 
@@ -75,6 +77,8 @@ const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({
     () => filtrerVelferdspermisjoner(arbeidsforhold.velferdspermisjoner, tilretteleggingBehovFom),
     [arbeidsforhold.velferdspermisjoner, tilretteleggingBehovFom],
   );
+
+  const termindato = watch('termindato');
 
   return (
     <>
@@ -118,6 +122,8 @@ const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({
         arbeidsforhold={arbeidsforhold}
         arbeidsforholdIndex={arbeidsforholdIndex}
         readOnly={readOnly}
+        stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
+        termindato={termindato}
       />
     </>
   );

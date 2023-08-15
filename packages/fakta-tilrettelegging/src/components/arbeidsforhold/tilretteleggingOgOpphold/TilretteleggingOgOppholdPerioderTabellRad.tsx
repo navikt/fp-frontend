@@ -1,23 +1,41 @@
 import React, { FunctionComponent, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import { Table, Tag } from '@navikt/ds-react';
-import { ArbeidsforholdTilretteleggingDato, SvpAvklartOppholdPeriode } from '@navikt/fp-types';
+import {
+  ArbeidsforholdFodselOgTilrettelegging,
+  ArbeidsforholdTilretteleggingDato,
+  SvpAvklartOppholdPeriode,
+  SvpTilretteleggingFomKilde,
+} from '@navikt/fp-types';
 
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import TilretteleggingForm from './tilrettelegging/TilretteleggingForm';
+import { tilretteleggingType } from '@navikt/fp-kodeverk';
+import TilretteleggingForm, {
+  finnVelferdspermisjonprosent,
+  finnProsentSvangerskapspenger,
+} from './tilrettelegging/TilretteleggingForm';
 import OppholdForm from './opphold/OppholdForm';
 
 import styles from './tilretteleggingOgOppholdPerioderTabellRad.module.css';
 
 const utledTypeTekst = (
   intl: IntlShape,
+  stillingsprosentArbeidsforhold: number,
+  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging,
   tilrettelegging?: ArbeidsforholdTilretteleggingDato,
   opphold?: SvpAvklartOppholdPeriode,
 ) => {
   if (tilrettelegging) {
+    const velferdspermisjonsprosent = finnVelferdspermisjonprosent(arbeidsforhold);
+    const stillingsprosent =
+      tilrettelegging.type === tilretteleggingType.INGEN_TILRETTELEGGING ? 100 : tilrettelegging.stillingsprosent;
+    const prosent =
+      tilrettelegging.fom && stillingsprosent
+        ? finnProsentSvangerskapspenger(tilrettelegging, stillingsprosentArbeidsforhold, velferdspermisjonsprosent)
+        : 0;
     return tilrettelegging.fom
-      ? 'Svangerskapspenger'
+      ? intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.SVPprosent' }, { prosent })
       : intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Tilrettelegging' });
   }
 
@@ -39,15 +57,19 @@ const utledKilde = (
   opphold?: SvpAvklartOppholdPeriode,
 ) => {
   if (tilrettelegging) {
-    if (tilrettelegging.manueltLagtTil || tilrettelegging.fom === undefined) {
+    if (
+      tilrettelegging.kilde === SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER ||
+      tilrettelegging.fom === undefined
+    ) {
       return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Saksbehandler' });
     }
-
-    return intl.formatMessage({
-      id: tilrettelegging.manueltEndret
-        ? 'TilretteleggingPerioderTabellRad.EndretAvSaksbehandler'
-        : 'TilretteleggingPerioderTabellRad.Soknad',
-    });
+    if (tilrettelegging.kilde === SvpTilretteleggingFomKilde.ENDRET_AV_SAKSBEHANDLER) {
+      return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.EndretAvSaksbehandler' });
+    }
+    if (tilrettelegging.kilde === SvpTilretteleggingFomKilde.TIDLIGERE_VEDTAK) {
+      return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.TidligereVedtak' });
+    }
+    return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Soknad' });
   }
   if (opphold?.oppholdÅrsak === 'FERIE') {
     return intl.formatMessage({
@@ -59,7 +81,7 @@ const utledKilde = (
   return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Saksbehandler' });
 };
 
-interface WrapperProps {
+interface OwnProps {
   navn: string;
   tilrettelegging?: ArbeidsforholdTilretteleggingDato;
   opphold?: SvpAvklartOppholdPeriode;
@@ -68,9 +90,13 @@ interface WrapperProps {
   openRad: boolean;
   fjernTilretteleggingEllerOpphold: (erTilrettelegging: boolean) => void;
   setLeggTilKnapperDisablet: React.Dispatch<React.SetStateAction<boolean>>;
+  stillingsprosentArbeidsforhold: number;
+  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
+  tomDatoForTilrettelegging: string;
+  termindato: string;
 }
 
-const TilretteleggingOgOppholdPerioderTabellRad: FunctionComponent<WrapperProps> = ({
+const TilretteleggingOgOppholdPerioderTabellRad: FunctionComponent<OwnProps> = ({
   navn,
   tilrettelegging,
   opphold,
@@ -79,14 +105,22 @@ const TilretteleggingOgOppholdPerioderTabellRad: FunctionComponent<WrapperProps>
   openRad,
   fjernTilretteleggingEllerOpphold,
   setLeggTilKnapperDisablet,
+  stillingsprosentArbeidsforhold,
+  arbeidsforhold,
+  tomDatoForTilrettelegging,
+  termindato,
 }) => {
   const intl = useIntl();
   const [open, setOpen] = useState(openRad);
 
-  const { setValue, watch } = useFormContext();
+  const { setValue, control } = useFormContext();
+  const { remove } = useFieldArray({
+    control,
+    name: navn,
+  });
 
   const fom = tilrettelegging ? tilrettelegging.fom : opphold?.fom;
-  const tom = tilrettelegging ? tilrettelegging.tom : opphold?.tom;
+  const tom = tilrettelegging ? tomDatoForTilrettelegging : opphold?.tom;
 
   const oppdaterTilretteleggingEllerOpphold = (
     values: ArbeidsforholdTilretteleggingDato | SvpAvklartOppholdPeriode,
@@ -104,9 +138,9 @@ const TilretteleggingOgOppholdPerioderTabellRad: FunctionComponent<WrapperProps>
     setOpen(false);
   };
 
-  const termindato = watch('termindato');
-
-  const erVedtatt = tilrettelegging ? tilrettelegging.erVedtatt : opphold?.erVedtatt;
+  const slettOpphold = () => {
+    remove(index);
+  };
 
   return (
     <Table.ExpandableRow
@@ -122,6 +156,9 @@ const TilretteleggingOgOppholdPerioderTabellRad: FunctionComponent<WrapperProps>
               oppdaterTilrettelegging={oppdaterTilretteleggingEllerOpphold}
               avbrytEditering={avbrytEditering}
               readOnly={readOnly}
+              stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
+              arbeidsforhold={arbeidsforhold}
+              tomDatoForTilrettelegging={tomDatoForTilrettelegging}
             />
           )}
           {opphold && (
@@ -131,6 +168,10 @@ const TilretteleggingOgOppholdPerioderTabellRad: FunctionComponent<WrapperProps>
               oppdaterOpphold={oppdaterTilretteleggingEllerOpphold}
               avbrytEditering={avbrytEditering}
               readOnly={readOnly}
+              alleTilrettelegginger={arbeidsforhold.tilretteleggingDatoer}
+              alleOpphold={arbeidsforhold.avklarteOppholdPerioder}
+              termindato={termindato}
+              slettOpphold={slettOpphold}
             />
           )}
         </>
@@ -145,13 +186,8 @@ const TilretteleggingOgOppholdPerioderTabellRad: FunctionComponent<WrapperProps>
           <FormattedMessage id="TilretteleggingPerioderTabellRad.Periode" />
         )}
       </Table.DataCell>
-      <Table.DataCell>{utledTypeTekst(intl, tilrettelegging, opphold)}</Table.DataCell>
       <Table.DataCell>
-        <Tag size="small" variant={erVedtatt ? 'success-moderate' : 'neutral-moderate'}>
-          <FormattedMessage
-            id={erVedtatt ? 'TilretteleggingPerioderTabellRad.Vedtatt' : 'TilretteleggingPerioderTabellRad.Ny'}
-          />
-        </Tag>
+        {utledTypeTekst(intl, stillingsprosentArbeidsforhold, arbeidsforhold, tilrettelegging, opphold)}
       </Table.DataCell>
       <Table.DataCell>
         <Tag size="small" variant="neutral-moderate">

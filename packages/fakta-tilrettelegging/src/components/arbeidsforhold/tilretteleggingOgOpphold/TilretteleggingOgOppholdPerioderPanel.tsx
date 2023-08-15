@@ -7,18 +7,23 @@ import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-u
 import { FormattedMessage } from 'react-intl';
 import { PlusIcon } from '@navikt/aksel-icons';
 import dayjs from 'dayjs';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import TilretteleggingOgOppholdPerioderTabellRad from './TilretteleggingOgOppholdPerioderTabellRad';
 
 interface OwnProps {
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
   arbeidsforholdIndex: number;
   readOnly: boolean;
+  stillingsprosentArbeidsforhold: number;
+  termindato: string;
 }
 
 const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
   arbeidsforhold,
   arbeidsforholdIndex,
   readOnly,
+  stillingsprosentArbeidsforhold,
+  termindato,
 }) => {
   const tilretteleggingStateName = `arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingDatoer`;
   const oppholdPerioderStateName = `arbeidsforhold.${arbeidsforholdIndex}.avklarteOppholdPerioder`;
@@ -82,6 +87,12 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
               tilretteleggingIndex !== -1
                 ? `${tilretteleggingStateName}.${tilretteleggingIndex}`
                 : `${oppholdPerioderStateName}.${oppholdIndex}`;
+
+            const nesteTilrettelegging = tilretteleggingDatoer[tilretteleggingIndex + 1];
+            const tomDatoForTilrettelegging = nesteTilrettelegging
+              ? dayjs(nesteTilrettelegging.fom).subtract(1, 'day').format(ISO_DATE_FORMAT)
+              : dayjs(termindato).subtract(3, 'week').format(ISO_DATE_FORMAT);
+
             return (
               <TilretteleggingOgOppholdPerioderTabellRad
                 key={navn}
@@ -93,6 +104,10 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
                 openRad={fomDato === undefined}
                 fjernTilretteleggingEllerOpphold={fjernTilretteleggingEllerOpphold}
                 setLeggTilKnapperDisablet={setLeggTilKnapperDisablet}
+                stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
+                arbeidsforhold={arbeidsforhold}
+                tomDatoForTilrettelegging={tomDatoForTilrettelegging}
+                termindato={termindato}
               />
             );
           })}

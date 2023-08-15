@@ -1,26 +1,66 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import dayjs from 'dayjs';
 import { FormProvider, useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button } from '@navikt/ds-react';
 
-import { ArbeidsforholdTilretteleggingDato } from '@navikt/fp-types';
-import { Datepicker, RadioGroupPanel } from '@navikt/ft-form-hooks';
-import { hasValidDate, required } from '@navikt/ft-form-validators';
+import {
+  ArbeidsforholdFodselOgTilrettelegging,
+  ArbeidsforholdTilretteleggingDato,
+  SvpTilretteleggingFomKilde,
+} from '@navikt/fp-types';
+import { Datepicker, NumberField, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { hasValidDate, hasValidDecimal, maxValue, minValue, required } from '@navikt/ft-form-validators';
 import { tilretteleggingType } from '@navikt/fp-kodeverk';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 import TilretteleggingInfoPanel from './TilretteleggingInfoPanel';
 
 import styles from './tilretteleggingForm.module.css';
 
-type FormValues = Record<
-  number,
-  {
-    skalVelgeDato: boolean;
-  } & ArbeidsforholdTilretteleggingDato
->;
+const maxValue100 = maxValue(100);
+const minValue0 = minValue(0);
+
+type FormValues = Record<number, ArbeidsforholdTilretteleggingDato>;
+
+export const finnVelferdspermisjonprosent = (arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging) =>
+  arbeidsforhold.velferdspermisjoner
+    .filter(p => p.erGyldig)
+    .map(p => p.permisjonsprosent)
+    .reduce((sum, prosent) => sum + prosent, 0);
+
+const finnUtbetalingsgradForTilrettelegging = (
+  stillingsprosentArbeidsforhold: number,
+  velferdspermisjonprosent: number,
+  stillingsprosent: number,
+): number => {
+  const effektivStillingsprosent = stillingsprosentArbeidsforhold - velferdspermisjonprosent;
+  const defaultUtbetalingsgrad =
+    effektivStillingsprosent <= 0 ? 0 : 100 * (1 - stillingsprosent / effektivStillingsprosent);
+  return defaultUtbetalingsgrad > 0 ? defaultUtbetalingsgrad : 0;
+};
+
+export const finnProsentSvangerskapspenger = (
+  tilrettelegging: ArbeidsforholdTilretteleggingDato,
+  stillingsprosentArbeidsforhold: number,
+  velferdspermisjonprosent: number,
+): number | undefined => {
+  if (tilrettelegging.type === tilretteleggingType.HEL_TILRETTELEGGING) {
+    return undefined;
+  }
+  if (tilrettelegging.overstyrtUtbetalingsgrad) {
+    return tilrettelegging.overstyrtUtbetalingsgrad;
+  }
+
+  return tilrettelegging.type === tilretteleggingType.INGEN_TILRETTELEGGING
+    ? 100
+    : finnUtbetalingsgradForTilrettelegging(
+        stillingsprosentArbeidsforhold,
+        velferdspermisjonprosent,
+        // Har alltid stillingsprosent her. Bør fikse sjekk mot type så || 0 er unødvendig
+        tilrettelegging.stillingsprosent || 0,
+      );
+};
 
 const sjekkOmTomDatoErTreUkerFørTermin = (termindato: string, tom?: string): boolean =>
   dayjs(termindato).subtract(3, 'week').isSame(dayjs(tom));
@@ -32,6 +72,9 @@ interface OwnProps {
   readOnly: boolean;
   oppdaterTilrettelegging: (values: ArbeidsforholdTilretteleggingDato) => void;
   avbrytEditering: () => void;
+  stillingsprosentArbeidsforhold: number;
+  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
+  tomDatoForTilrettelegging: string;
 }
 
 const TilretteleggingForm: FunctionComponent<OwnProps> = ({
@@ -41,37 +84,50 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
   readOnly,
   oppdaterTilrettelegging,
   avbrytEditering,
+  stillingsprosentArbeidsforhold,
+  arbeidsforhold,
+  tomDatoForTilrettelegging,
 }) => {
   const intl = useIntl();
 
   const erNyPeriode = !tilrettelegging.fom;
 
-  const erTomDatoTreUkerFørTermin = sjekkOmTomDatoErTreUkerFørTermin(termindato, tilrettelegging.tom);
+  const erTomDatoTreUkerFørTermin = sjekkOmTomDatoErTreUkerFørTermin(termindato, tomDatoForTilrettelegging);
+
+  const velferdspermisjonprosent = finnVelferdspermisjonprosent(arbeidsforhold);
+
+  const prosentSvangerskapspenger = useMemo(
+    () => finnProsentSvangerskapspenger(tilrettelegging, stillingsprosentArbeidsforhold, velferdspermisjonprosent),
+    [tilrettelegging, stillingsprosentArbeidsforhold, velferdspermisjonprosent],
+  );
 
   const formMethods = useForm<FormValues>({
     defaultValues: {
       [index]: {
         ...tilrettelegging,
-        skalVelgeDato: !erTomDatoTreUkerFørTermin,
+        overstyrtUtbetalingsgrad: prosentSvangerskapspenger,
       },
     },
   });
 
   const lagreIForm = (values: FormValues) => {
     const formValues = values[index];
-    const tomDato = formValues.skalVelgeDato
-      ? formValues.tom
-      : dayjs(termindato).subtract(3, 'week').format(ISO_DATE_FORMAT);
-    oppdaterTilrettelegging({
+    const kilde =
+      formValues.kilde === SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER || erNyPeriode
+        ? SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER
+        : SvpTilretteleggingFomKilde.ENDRET_AV_SAKSBEHANDLER;
+    const v = {
       fom: formValues.fom,
       type: formValues.type,
-      overstyrtUtbetalingsgrad: formValues.overstyrtUtbetalingsgrad,
+      overstyrtUtbetalingsgrad:
+        formValues.overstyrtUtbetalingsgrad !== prosentSvangerskapspenger
+          ? formValues.overstyrtUtbetalingsgrad
+          : undefined,
       stillingsprosent: formValues.stillingsprosent,
-      tom: tomDato,
-      manueltEndret: !erNyPeriode,
-      manueltLagtTil: erNyPeriode,
-    });
-    formMethods.reset(values);
+      kilde,
+    };
+    oppdaterTilrettelegging(v);
+    formMethods.reset({ [index]: v });
     return Promise.resolve();
   };
 
@@ -80,8 +136,7 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
     formMethods.reset();
   };
 
-  // @ts-ignore
-  const skalVelgeDato = formMethods.watch(`${index}.skalVelgeDato`);
+  const formValues = formMethods.watch();
 
   return (
     <FormProvider {...formMethods}>
@@ -99,65 +154,69 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
           tilrettelegging={tilrettelegging}
           termindato={termindato}
           erTomDatoTreUkerFørTermin={erTomDatoTreUkerFørTermin}
+          stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
+          prosentSvangerskapspenger={prosentSvangerskapspenger}
+          tomDato={tomDatoForTilrettelegging}
         />
         <VerticalSpacer twentyPx />
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <Datepicker
-                name={`${index}.fom`}
-                label={intl.formatMessage({
-                  id: 'TilretteleggingsbehovForm.FraOgMed',
-                })}
-                validate={[required, hasValidDate]}
-                isReadOnly={readOnly}
-              />
-            </FlexColumn>
-            <FlexColumn className={styles.dateMargin}>
-              <RadioGroupPanel
-                name={`${index}.skalVelgeDato`}
-                label={intl.formatMessage({ id: 'TilretteleggingsbehovForm.TilOgMed' })}
-                validate={[required]}
-                isReadOnly={readOnly}
-                isTrueOrFalseSelection
-                radios={[
-                  {
-                    label: intl.formatMessage({ id: 'TilretteleggingsbehovForm.TreUker' }),
-                    value: 'false',
-                  },
-                  {
-                    label: intl.formatMessage({ id: 'TilretteleggingsbehovForm.VelgDato' }),
-                    value: 'true',
-                  },
-                ]}
-              />
-              {skalVelgeDato && (
-                <Datepicker name={`${index}.tom`} validate={[required, hasValidDate]} isReadOnly={readOnly} />
-              )}
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
+        <Datepicker
+          name={`${index}.fom`}
+          label={intl.formatMessage({
+            id: 'TilretteleggingForm.FraOgMed',
+          })}
+          validate={[required, hasValidDate]}
+          isReadOnly={readOnly}
+        />
         <VerticalSpacer thirtyTwoPx />
         <RadioGroupPanel
           name={`${index}.type`}
-          label={intl.formatMessage({ id: 'TilretteleggingsbehovForm.Tilretteleggingsbehov' })}
+          label={intl.formatMessage({ id: 'TilretteleggingForm.Tilretteleggingsbehov' })}
           validate={[required]}
           isReadOnly={readOnly}
           radios={[
             {
-              label: intl.formatMessage({ id: 'TilretteleggingsbehovForm.KanGjennomfores' }),
+              label: intl.formatMessage({ id: 'TilretteleggingForm.KanGjennomfores' }),
               value: tilretteleggingType.HEL_TILRETTELEGGING,
             },
             {
-              label: intl.formatMessage({ id: 'TilretteleggingsbehovForm.RedusertArbeid' }),
+              label: intl.formatMessage({ id: 'TilretteleggingForm.RedusertArbeid' }),
               value: tilretteleggingType.DELVIS_TILRETTELEGGING,
             },
             {
-              label: intl.formatMessage({ id: 'TilretteleggingsbehovForm.KanIkkeGjennomfores' }),
+              label: intl.formatMessage({ id: 'TilretteleggingForm.KanIkkeGjennomfores' }),
               value: tilretteleggingType.INGEN_TILRETTELEGGING,
             },
           ]}
+          onChange={value => {
+            if (value === tilretteleggingType.INGEN_TILRETTELEGGING) {
+              // @ts-ignore Fiks
+              formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, 100);
+            }
+            if (value === tilretteleggingType.DELVIS_TILRETTELEGGING) {
+              const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(
+                stillingsprosentArbeidsforhold,
+                velferdspermisjonprosent,
+                // Har alltid stillingsprosent her. Bør fikse sjekk mot type så || 0 er unødvendig
+                tilrettelegging.stillingsprosent || 0,
+              );
+              // @ts-ignore Fiks
+              formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad);
+            }
+          }}
         />
+        {formValues[index].type !== tilretteleggingType.HEL_TILRETTELEGGING && (
+          <>
+            <VerticalSpacer sixteenPx />
+            <NumberField
+              name={`${index}.overstyrtUtbetalingsgrad`}
+              className={styles.utbetalingsgrad}
+              readOnly={readOnly}
+              label={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvp' })}
+              validate={[required, minValue0, maxValue100, hasValidDecimal]}
+              disabled={formValues[index].type === tilretteleggingType.INGEN_TILRETTELEGGING}
+            />
+          </>
+        )}
         <VerticalSpacer thirtyTwoPx />
         <FlexContainer>
           <FlexRow>
@@ -170,15 +229,13 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
                 loading={false}
                 onClick={formMethods.handleSubmit((values: FormValues) => lagreIForm(values))}
               >
-                <FormattedMessage
-                  id={erNyPeriode ? 'TilretteleggingsbehovForm.LeggTil' : 'TilretteleggingsbehovForm.Oppdater'}
-                />
+                <FormattedMessage id={erNyPeriode ? 'TilretteleggingForm.LeggTil' : 'TilretteleggingForm.Oppdater'} />
               </Button>
             </FlexColumn>
             <FlexColumn>
               <Button size="small" variant="secondary" onClick={avbryt} type="button">
                 <FormattedMessage
-                  id={erNyPeriode ? 'TilretteleggingsbehovForm.AvsluttOgSlett' : 'TilretteleggingsbehovForm.Avbryt'}
+                  id={erNyPeriode ? 'TilretteleggingForm.AvsluttOgSlett' : 'TilretteleggingForm.Avbryt'}
                 />
               </Button>
             </FlexColumn>

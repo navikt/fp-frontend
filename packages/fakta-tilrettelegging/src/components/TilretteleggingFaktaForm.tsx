@@ -118,11 +118,16 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
   const skalVurdereVelferdspermisjoner = utledOmEnSkalVurdereVelferdspermisjoner(sorterteArbeidsforhold);
   const harIkkeVurdertAlleVelferdspermisjoner = utledOmEnSkalVurdereVelferdspermisjoner(arbeidsforhold);
 
+  const harIkkeValgtNoenArbeidsforhold = !arbeidsforhold.some(a => a.skalBrukes);
+  const harPeriodeSomIkkeErFerdig = arbeidsforhold.some(
+    a => a.tilretteleggingDatoer.some(td => !td.fom) || a.avklarteOppholdPerioder.some(td => !td.fom),
+  );
+
   const [visFeil, skalViseFeil] = useState(false);
 
   const onSubmit = useCallback(
     (values: FormValues) => {
-      if (harIkkeVurdertAlleVelferdspermisjoner) {
+      if (harIkkeVurdertAlleVelferdspermisjoner || harIkkeValgtNoenArbeidsforhold || harPeriodeSomIkkeErFerdig) {
         skalViseFeil(true);
         return Promise.resolve();
       }
@@ -188,6 +193,22 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
           <Alert variant="error">
             <FormattedMessage id="TilretteleggingFaktaForm.IkkeAllePermisjonerVurdert" />
+          </Alert>
+        </>
+      )}
+      {harIkkeValgtNoenArbeidsforhold && visFeil && (
+        <>
+          <VerticalSpacer sixteenPx />
+          <Alert variant="error">
+            <FormattedMessage id="TilretteleggingFaktaForm.HarIkkeValgtArbeidsforhold" />
+          </Alert>
+        </>
+      )}
+      {harPeriodeSomIkkeErFerdig && visFeil && (
+        <>
+          <VerticalSpacer sixteenPx />
+          <Alert variant="error">
+            <FormattedMessage id="TilretteleggingFaktaForm.PeriodeIkkeLagtTil" />
           </Alert>
         </>
       )}

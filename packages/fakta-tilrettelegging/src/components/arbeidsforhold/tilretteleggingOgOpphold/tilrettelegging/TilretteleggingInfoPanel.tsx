@@ -8,6 +8,7 @@ import { BranchingIcon, CalendarIcon, PersonPregnantIcon } from '@navikt/aksel-i
 import { BodyShort, Detail } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT, calcDaysAndWeeks } from '@navikt/ft-utils';
 
+import { tilretteleggingType } from '@navikt/fp-kodeverk';
 import styles from './tilretteleggingInfoPanel.module.css';
 
 const finnTekst = (intl: IntlShape, termindato: string, fom?: string): string => {
@@ -19,21 +20,25 @@ interface OwnProps {
   tilrettelegging: ArbeidsforholdTilretteleggingDato;
   termindato: string;
   erTomDatoTreUkerFørTermin: boolean;
+  stillingsprosentArbeidsforhold: number;
+  prosentSvangerskapspenger?: number;
+  tomDato: string;
 }
 
 const TilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
   tilrettelegging,
   termindato,
   erTomDatoTreUkerFørTermin,
+  stillingsprosentArbeidsforhold,
+  prosentSvangerskapspenger,
+  tomDato,
 }) => {
   const intl = useIntl();
 
-  // FIXME Avklar tom
-  // @ts-ignore
-  const dagerOgUker = calcDaysAndWeeks(tilrettelegging.fom, tilrettelegging.tom);
+  const dagerOgUker = calcDaysAndWeeks(tilrettelegging.fom, tomDato);
   const fremTilTidspunkt = erTomDatoTreUkerFørTermin
     ? intl.formatMessage({ id: 'TilretteleggingInfoPanel.TreUker' })
-    : finnTekst(intl, termindato, tilrettelegging.tom);
+    : finnTekst(intl, termindato, tomDato);
   return (
     <div
       style={{
@@ -56,8 +61,28 @@ const TilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
                   <PersonPregnantIcon title="a11y-title" fontSize="1.5rem" />
                 </FlexColumn>
                 <FlexColumn>
-                  <BodyShort size="small">Svangerskapspenger...</BodyShort>
-                  <Detail>Av stillingsprosenten på...</Detail>
+                  <BodyShort size="small">
+                    <FormattedMessage
+                      id="TilretteleggingInfoPanel.SvpOgArbeid"
+                      values={{
+                        svp: prosentSvangerskapspenger || 0,
+                        arbeid:
+                          tilrettelegging.type === tilretteleggingType.HEL_TILRETTELEGGING
+                            ? 100
+                            : tilrettelegging.stillingsprosent,
+                      }}
+                    />
+                  </BodyShort>
+                  {stillingsprosentArbeidsforhold && (
+                    <Detail>
+                      <FormattedMessage
+                        id="TilretteleggingInfoPanel.AvStillingsprosent"
+                        values={{
+                          stillingsprosent: stillingsprosentArbeidsforhold,
+                        }}
+                      />
+                    </Detail>
+                  )}
                 </FlexColumn>
               </FlexRow>
             </FlexContainer>
