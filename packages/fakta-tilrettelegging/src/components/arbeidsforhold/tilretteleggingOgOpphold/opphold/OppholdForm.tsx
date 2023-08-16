@@ -1,12 +1,15 @@
 import React, { FunctionComponent } from 'react';
-
-import { SvpAvklartOppholdPeriode } from '@navikt/fp-types';
-import { Datepicker, RadioGroupPanel } from '@navikt/ft-form-hooks';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { hasValidDate, required } from '@navikt/ft-form-validators';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { FormProvider, useForm, UseFormGetValues } from 'react-hook-form';
+import dayjs from 'dayjs';
 import { Button } from '@navikt/ds-react';
+
+import { ArbeidsforholdTilretteleggingDato, SvpAvklartOppholdPeriode } from '@navikt/fp-types';
+import { Datepicker, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { dateRangesNotOverlapping, hasValidDate, required } from '@navikt/ft-form-validators';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import styles from './oppholdForm.module.css';
 
 type FormValues = Record<
   number,
@@ -15,15 +18,85 @@ type FormValues = Record<
   } & SvpAvklartOppholdPeriode
 >;
 
+const validerAtDatoErUnik =
+  (
+    intl: IntlShape,
+    oppholdPerioder: SvpAvklartOppholdPeriode[],
+    alleTilrettelegginger: ArbeidsforholdTilretteleggingDato[],
+    opphold: SvpAvklartOppholdPeriode,
+  ) =>
+  (dato: string) => {
+    const oppholdMinusEditert = oppholdPerioder.filter(alle => alle.fom !== opphold.fom);
+    const harDuplikatFomOpphold = oppholdMinusEditert.some(t => t.fom === dato);
+    const harDuplikatFomTilrettelegging = alleTilrettelegginger.some(t => t.fom === dato);
+
+    return harDuplikatFomTilrettelegging || harDuplikatFomOpphold
+      ? intl.formatMessage({ id: 'TilretteleggingForm.DuplikateDatoer' })
+      : null;
+  };
+
+const validerTomEtterFom = (intl: IntlShape, index: number, getValues: UseFormGetValues<any>) => (tom?: string) =>
+  dayjs(tom).isBefore(getValues(`${index}.fom`)) ? intl.formatMessage({ id: 'OppholdForm.TomForFom' }) : null;
+
+const validerAtPeriodeErGyldig =
+  (intl: IntlShape, tilrettelegginger: ArbeidsforholdTilretteleggingDato[], termindato: string) => (dato?: string) => {
+    if (dayjs(dato).isAfter(dayjs(termindato).subtract(3, 'weeks').subtract(1, 'day'))) {
+      return intl.formatMessage({ id: 'OppholdForm.EtterTermindato' });
+    }
+    const førsteDato = tilrettelegginger.reduce<string | undefined>((a, t) => {
+      if (a === undefined || dayjs(t.fom).isBefore(a)) {
+        return t.fom;
+      }
+      return a;
+    }, undefined);
+    if (dayjs(dato).isBefore(førsteDato)) {
+      return intl.formatMessage({ id: 'OppholdForm.ForForsteDato' });
+    }
+    return null;
+  };
+
+const validerAtPeriodeIkkeOverlapper =
+  (
+    getValues: UseFormGetValues<any>,
+    index: number,
+    valgtOpphold: SvpAvklartOppholdPeriode,
+    alleOpphold: SvpAvklartOppholdPeriode[],
+  ) =>
+  () => {
+    const fomDato = getValues(`${index}.fom`);
+    const tomDato = getValues(`${index}.tom`);
+    const periodeMap = alleOpphold
+      .filter(p => p.fom !== valgtOpphold.fom)
+      .map(({ fom, tom }) => [fom, tom])
+      .concat([[fomDato, tomDato]]);
+    return periodeMap.length > 0 && dayjs(fomDato).isBefore(dayjs(tomDato))
+      ? dateRangesNotOverlapping(periodeMap)
+      : undefined;
+  };
+
 interface OwnProps {
   opphold: SvpAvklartOppholdPeriode;
   index: number;
   readOnly: boolean;
   oppdaterOpphold: (values: SvpAvklartOppholdPeriode) => void;
+  slettOpphold: (fomDato: string) => void;
   avbrytEditering: () => void;
+  alleTilrettelegginger: ArbeidsforholdTilretteleggingDato[];
+  alleOpphold: SvpAvklartOppholdPeriode[];
+  termindato: string;
 }
 
-const OppholdForm: FunctionComponent<OwnProps> = ({ opphold, index, readOnly, oppdaterOpphold, avbrytEditering }) => {
+const OppholdForm: FunctionComponent<OwnProps> = ({
+  opphold,
+  index,
+  readOnly,
+  oppdaterOpphold,
+  avbrytEditering,
+  slettOpphold,
+  alleTilrettelegginger,
+  alleOpphold,
+  termindato,
+}) => {
   const intl = useIntl();
 
   const erNyPeriode = !opphold.fom;
@@ -37,6 +110,11 @@ const OppholdForm: FunctionComponent<OwnProps> = ({ opphold, index, readOnly, op
   const lagreIForm = (values: FormValues) => {
     oppdaterOpphold(values[index]);
     formMethods.reset(values);
+    return Promise.resolve();
+  };
+
+  const slett = () => {
+    slettOpphold(opphold.fom);
     return Promise.resolve();
   };
 
@@ -65,7 +143,12 @@ const OppholdForm: FunctionComponent<OwnProps> = ({ opphold, index, readOnly, op
                 label={intl.formatMessage({
                   id: 'OppholdForm.FraOgMed',
                 })}
-                validate={[required, hasValidDate]}
+                validate={[
+                  required,
+                  hasValidDate,
+                  validerAtDatoErUnik(intl, alleOpphold, alleTilrettelegginger, opphold),
+                  validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
+                ]}
                 isReadOnly={readOnly || opphold.forVisning}
               />
             </FlexColumn>
@@ -75,7 +158,13 @@ const OppholdForm: FunctionComponent<OwnProps> = ({ opphold, index, readOnly, op
                 label={intl.formatMessage({
                   id: 'OppholdForm.TilOgMed',
                 })}
-                validate={[required, hasValidDate]}
+                validate={[
+                  required,
+                  hasValidDate,
+                  validerTomEtterFom(intl, index, formMethods.getValues),
+                  validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
+                  validerAtPeriodeIkkeOverlapper(formMethods.getValues, index, opphold, alleOpphold),
+                ]}
                 isReadOnly={readOnly || opphold.forVisning}
               />
             </FlexColumn>
@@ -119,6 +208,13 @@ const OppholdForm: FunctionComponent<OwnProps> = ({ opphold, index, readOnly, op
                   <FormattedMessage id={erNyPeriode ? 'OppholdForm.AvsluttOgSlett' : 'OppholdForm.Avbryt'} />
                 </Button>
               </FlexColumn>
+              {!erNyPeriode && (
+                <FlexColumn className={styles.pushRight}>
+                  <Button size="small" variant="secondary" onClick={slett} type="button">
+                    <FormattedMessage id="OppholdForm.SlettPeriode" />
+                  </Button>
+                </FlexColumn>
+              )}
             </FlexRow>
           </FlexContainer>
         )}

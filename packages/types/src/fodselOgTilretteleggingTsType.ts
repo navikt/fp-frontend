@@ -1,3 +1,10 @@
+export enum SvpTilretteleggingFomKilde {
+  ENDRET_AV_SAKSBEHANDLER = 'ENDRET_AV_SAKSBEHANDLER',
+  REGISTRERT_AV_SAKSBEHANDLER = 'REGISTRERT_AV_SAKSBEHANDLER',
+  TIDLIGERE_VEDTAK = 'TIDLIGERE_VEDTAK',
+  SØKNAD = 'SØKNAD',
+}
+
 export type Permisjon = Readonly<{
   permisjonFom: string;
   permisjonTom: string;
@@ -8,13 +15,10 @@ export type Permisjon = Readonly<{
 
 export type ArbeidsforholdTilretteleggingDato = Readonly<{
   fom: string;
-  tom?: string;
   type: string;
   stillingsprosent?: number;
   overstyrtUtbetalingsgrad?: number;
-  manueltLagtTil?: boolean;
-  manueltEndret?: boolean;
-  erVedtatt?: boolean;
+  kilde: SvpTilretteleggingFomKilde;
   mottattDato?: string;
 }>;
 
@@ -23,7 +27,6 @@ export type SvpAvklartOppholdPeriode = Readonly<{
   tom: string;
   oppholdÅrsak: string;
   forVisning?: boolean;
-  erVedtatt?: boolean;
 }>;
 
 export type ArbeidsforholdFodselOgTilrettelegging = Readonly<{

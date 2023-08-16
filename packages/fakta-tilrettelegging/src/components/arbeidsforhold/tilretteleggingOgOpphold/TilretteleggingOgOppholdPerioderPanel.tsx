@@ -7,18 +7,24 @@ import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-u
 import { FormattedMessage } from 'react-intl';
 import { PlusIcon } from '@navikt/aksel-icons';
 import dayjs from 'dayjs';
-import TilretteleggingOgOppholdPerioderTabellRad from './TilretteleggingOgOppholdPerioderTabellRad';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import TilretteleggingPeriodeTabellRad from './tilrettelegging/TilretteleggingPeriodeTabellRad';
+import OppholdPeriodeTabellRad from './opphold/OppholdPeriodeTabellRad';
 
 interface OwnProps {
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
   arbeidsforholdIndex: number;
   readOnly: boolean;
+  stillingsprosentArbeidsforhold: number;
+  termindato: string;
 }
 
 const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
   arbeidsforhold,
   arbeidsforholdIndex,
   readOnly,
+  stillingsprosentArbeidsforhold,
+  termindato,
 }) => {
   const tilretteleggingStateName = `arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingDatoer`;
   const oppholdPerioderStateName = `arbeidsforhold.${arbeidsforholdIndex}.avklarteOppholdPerioder`;
@@ -48,12 +54,15 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
     });
   };
 
-  const fjernTilretteleggingEllerOpphold = (erTilrettelegging: boolean) => {
-    if (erTilrettelegging) {
-      removeTilrettelegging(tilretteleggingDatoer.length - 1);
-    } else {
-      removeOpphold(avklarteOppholdPerioder.length - 1);
-    }
+  const fjernTilrettelegging = (fomDato?: string) => {
+    removeTilrettelegging(
+      fomDato ? tilretteleggingDatoer.findIndex(t => t.fom === fomDato) : tilretteleggingDatoer.length - 1,
+    );
+  };
+  const fjernOpphold = (fomDato?: string) => {
+    removeOpphold(
+      fomDato ? avklarteOppholdPerioder.findIndex(t => t.fom === fomDato) : avklarteOppholdPerioder.length - 1,
+    );
   };
 
   const antallRader = tilretteleggingDatoer.length + avklarteOppholdPerioder.length;
@@ -77,22 +86,46 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
           {[...Array(antallRader)].map((_d, index) => {
             const fomDato = alleFomDatoerSortert[index];
             const tilretteleggingIndex = tilretteleggingDatoer.findIndex(t => t.fom === fomDato);
+            if (tilretteleggingIndex !== -1) {
+              const navn = `${tilretteleggingStateName}.${tilretteleggingIndex}`;
+              const nesteTilrettelegging = tilretteleggingDatoer[tilretteleggingIndex + 1];
+              const tomDatoForTilrettelegging = nesteTilrettelegging
+                ? dayjs(nesteTilrettelegging.fom).subtract(1, 'day').format(ISO_DATE_FORMAT)
+                : dayjs(termindato).subtract(3, 'week').format(ISO_DATE_FORMAT);
+
+              return (
+                <TilretteleggingPeriodeTabellRad
+                  key={navn}
+                  navn={navn}
+                  tilrettelegging={tilretteleggingDatoer[tilretteleggingIndex]}
+                  readOnly={readOnly}
+                  index={arbeidsforholdIndex + tilretteleggingIndex}
+                  openRad={fomDato === undefined}
+                  fjernTilrettelegging={fjernTilrettelegging}
+                  setLeggTilKnapperDisablet={setLeggTilKnapperDisablet}
+                  stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
+                  arbeidsforhold={arbeidsforhold}
+                  tomDatoForTilrettelegging={tomDatoForTilrettelegging}
+                  termindato={termindato}
+                />
+              );
+            }
+
             const oppholdIndex = avklarteOppholdPerioder.findIndex(t => t.fom === fomDato);
-            const navn =
-              tilretteleggingIndex !== -1
-                ? `${tilretteleggingStateName}.${tilretteleggingIndex}`
-                : `${oppholdPerioderStateName}.${oppholdIndex}`;
+            const navn = `${oppholdPerioderStateName}.${oppholdIndex}`;
+
             return (
-              <TilretteleggingOgOppholdPerioderTabellRad
+              <OppholdPeriodeTabellRad
                 key={navn}
                 navn={navn}
-                tilrettelegging={tilretteleggingDatoer[tilretteleggingIndex]}
                 opphold={avklarteOppholdPerioder[oppholdIndex]}
                 readOnly={readOnly}
-                index={arbeidsforholdIndex + index}
+                index={arbeidsforholdIndex + oppholdIndex}
                 openRad={fomDato === undefined}
-                fjernTilretteleggingEllerOpphold={fjernTilretteleggingEllerOpphold}
+                fjernOpphold={fjernOpphold}
                 setLeggTilKnapperDisablet={setLeggTilKnapperDisablet}
+                arbeidsforhold={arbeidsforhold}
+                termindato={termindato}
               />
             );
           })}

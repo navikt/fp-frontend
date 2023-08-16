@@ -9,6 +9,7 @@ import {
   Behandling,
   FodselOgTilrettelegging,
   ArbeidOgInntektsmelding,
+  SvpTilretteleggingFomKilde,
 } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -33,17 +34,19 @@ const tilretteleggingPermisjon = {
       tilretteleggingDatoer: [
         {
           fom: '2020-03-17',
-          tom: '2020-05-20',
-          type: 'INGEN_TILRETTELEGGING',
-          mottattDato: '2020-05-20',
+          type: 'DELVIS_TILRETTELEGGING',
+          mottattDato: '2020-02-20',
+          kilde: SvpTilretteleggingFomKilde.SØKNAD,
+          stillingsprosent: 50,
         },
         {
-          fom: '2020-10-15',
-          tom: '2020-10-16',
+          fom: '2020-08-15',
           type: 'HEL_TILRETTELEGGING',
-          mottattDato: '2020-05-20',
+          mottattDato: '2020-02-20',
+          kilde: SvpTilretteleggingFomKilde.SØKNAD,
         },
       ],
+      eksternArbeidsforholdReferanse: '23422323',
       arbeidsgiverReferanse: '999999999',
       uttakArbeidType: 'FRILANS',
       kopiertFraTidligereBehandling: true,
@@ -88,12 +91,15 @@ const svangerskapspengerTilretteleggingForFrilanser = {
         {
           fom: '2019-10-01',
           type: tilretteleggingType.INGEN_TILRETTELEGGING,
+          kilde: SvpTilretteleggingFomKilde.SØKNAD,
+          mottattDato: '2020-02-20',
         },
       ],
       arbeidsgiverReferanse: '1',
       skalBrukes: true,
       velferdspermisjoner: [],
       avklarteOppholdPerioder: [],
+      eksternArbeidsforholdReferanse: '23422323',
     },
     {
       tilretteleggingId: 1008654,
@@ -103,6 +109,8 @@ const svangerskapspengerTilretteleggingForFrilanser = {
         {
           fom: '2019-10-01',
           type: tilretteleggingType.INGEN_TILRETTELEGGING,
+          kilde: SvpTilretteleggingFomKilde.SØKNAD,
+          mottattDato: '2020-02-20',
         },
       ],
       arbeidsgiverReferanse: '2',
@@ -110,6 +118,7 @@ const svangerskapspengerTilretteleggingForFrilanser = {
       skalBrukes: true,
       velferdspermisjoner: [],
       avklarteOppholdPerioder: [],
+      eksternArbeidsforholdReferanse: '23422323',
     },
   ] as ArbeidsforholdFodselOgTilrettelegging[],
 };
@@ -260,10 +269,14 @@ HarOpphold.args = {
           {
             fom: '2020-03-17',
             type: 'INGEN_TILRETTELEGGING',
+            kilde: SvpTilretteleggingFomKilde.SØKNAD,
+            mottattDato: '2020-02-20',
           },
           {
             fom: '2020-10-15',
             type: 'HEL_TILRETTELEGGING',
+            kilde: SvpTilretteleggingFomKilde.SØKNAD,
+            mottattDato: '2020-02-20',
           },
         ],
         arbeidsgiverReferanse: '999999999',

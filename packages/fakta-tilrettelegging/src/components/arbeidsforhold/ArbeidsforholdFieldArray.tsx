@@ -14,6 +14,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import styles from './arbeidsforholdFieldArray.module.css';
 import ArbeidsforholdPanel from './ArbeidsforholdPanel';
 
+const getEndCharFromId = (id?: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
+
 const finnArbeidsforhold = (
   alleIafAf: AoIArbeidsforhold[],
   internArbeidsforholdReferanse?: string,
@@ -70,6 +72,8 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
 
         const visInfoAlert = !erInnenforIntervall(arbeidsforhold.tilretteleggingBehovFom, af?.fom, af?.tom);
 
+        const stillingsprosentArbeidsforhold = af ? af.stillingsprosent : 100;
+
         return (
           <React.Fragment key={field.id}>
             <ExpansionCard aria-label="arbeidsgiver" defaultOpen className={styles.card}>
@@ -86,11 +90,18 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                       <FlexColumn className={styles.idMargin}>
                         <BodyShort size="small">{arbeidsgiverOpplysning.identifikator}</BodyShort>
                       </FlexColumn>
+                      {arbeidsforhold.eksternArbeidsforholdReferanse && (
+                        <FlexColumn className={styles.idMargin}>
+                          <BodyShort size="small">
+                            {getEndCharFromId(arbeidsforhold.eksternArbeidsforholdReferanse)}
+                          </BodyShort>
+                        </FlexColumn>
+                      )}
                       <FlexColumn className={styles.tagMargin}>
                         <Tag size="small" variant="neutral-moderate">
                           <FormattedMessage
                             id="ArbeidsforholdFieldArray.Stillingsprosent"
-                            values={{ stillingsprosent: af ? af.stillingsprosent : 100 }}
+                            values={{ stillingsprosent: stillingsprosentArbeidsforhold }}
                           />
                         </Tag>
                       </FlexColumn>
@@ -118,6 +129,7 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                   arbeidsforholdIndex={index}
                   readOnly={readOnly}
                   visInfoAlert={arbeidsforhold.skalBrukes && visInfoAlert}
+                  stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
                 />
               </ExpansionCard.Content>
             </ExpansionCard>

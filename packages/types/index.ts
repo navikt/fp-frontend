@@ -174,3 +174,4 @@ export type {
   Permisjon,
   SvpAvklartOppholdPeriode,
 } from './src/fodselOgTilretteleggingTsType';
+export { SvpTilretteleggingFomKilde } from './src/fodselOgTilretteleggingTsType';
