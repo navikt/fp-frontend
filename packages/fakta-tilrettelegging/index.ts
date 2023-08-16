@@ -1,2 +1,2 @@
 // eslint-disable-next-line import/prefer-default-export
-export { default as FodselOgTilretteleggingFaktaIndex } from './src/TilretteleggingFaktaIndex';
+export { default as TilretteleggingFaktaIndex } from './src/TilretteleggingFaktaIndex';

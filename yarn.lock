@@ -2847,7 +2847,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-fodsel-og-tilrettelegging@1.0.0, @navikt/fp-fakta-fodsel-og-tilrettelegging@workspace:packages/fakta-fodsel-og-tilrettelegging":
+"@navikt/fp-fakta-fodsel-og-tilrettelegging@workspace:packages/fakta-fodsel-og-tilrettelegging":
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-fodsel-og-tilrettelegging@workspace:packages/fakta-fodsel-og-tilrettelegging"
   dependencies:
@@ -3181,7 +3181,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-tilrettelegging@workspace:packages/fakta-tilrettelegging":
+"@navikt/fp-fakta-tilrettelegging@1.0.0, @navikt/fp-fakta-tilrettelegging@workspace:packages/fakta-tilrettelegging":
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-tilrettelegging@workspace:packages/fakta-tilrettelegging"
   dependencies:
@@ -3377,7 +3377,6 @@ __metadata:
     "@navikt/fp-fakta-besteberegning": 1.0.0
     "@navikt/fp-fakta-felles": 1.0.0
     "@navikt/fp-fakta-fodsel": 1.0.0
-    "@navikt/fp-fakta-fodsel-og-tilrettelegging": 1.0.0
     "@navikt/fp-fakta-medlemskap": 1.0.0
     "@navikt/fp-fakta-omsorg": 1.0.0
     "@navikt/fp-fakta-omsorg-og-foreldreansvar": 1.0.0
@@ -3385,6 +3384,7 @@ __metadata:
     "@navikt/fp-fakta-opptjening": 1.0.0
     "@navikt/fp-fakta-permisjon": 1.0.0
     "@navikt/fp-fakta-saken": 1.0.0
+    "@navikt/fp-fakta-tilrettelegging": 1.0.0
     "@navikt/fp-fakta-uttak": 1.0.0
     "@navikt/fp-fakta-uttaksdokumentasjon": 1.0.0
     "@navikt/fp-fakta-verge": 1.0.0

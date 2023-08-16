@@ -200,7 +200,7 @@ const Template: StoryFn<{
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   erOverstyrer?: boolean;
-}> = ({ aksjonspunkter, submitCallback, svangerskapspengerTilrettelegging, arbeidOgInntekt, erOverstyrer = false }) => (
+}> = ({ aksjonspunkter, submitCallback, svangerskapspengerTilrettelegging, arbeidOgInntekt }) => (
   <TilretteleggingFaktaIndex
     submitCallback={submitCallback}
     readOnly={false}
@@ -211,7 +211,6 @@ const Template: StoryFn<{
     behandling={behandling}
     svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
     aksjonspunkter={aksjonspunkter}
-    erOverstyrer={erOverstyrer}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     alleKodeverk={alleKodeverk as any}
     arbeidOgInntekt={arbeidOgInntekt}
