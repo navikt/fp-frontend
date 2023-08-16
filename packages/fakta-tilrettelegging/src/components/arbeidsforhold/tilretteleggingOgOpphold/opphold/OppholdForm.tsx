@@ -18,6 +18,23 @@ type FormValues = Record<
   } & SvpAvklartOppholdPeriode
 >;
 
+const validerAtDatoErUnik =
+  (
+    intl: IntlShape,
+    oppholdPerioder: SvpAvklartOppholdPeriode[],
+    alleTilrettelegginger: ArbeidsforholdTilretteleggingDato[],
+    opphold: SvpAvklartOppholdPeriode,
+  ) =>
+  (dato: string) => {
+    const oppholdMinusEditert = oppholdPerioder.filter(alle => alle.fom !== opphold.fom);
+    const harDuplikatFomOpphold = oppholdMinusEditert.some(t => t.fom === dato);
+    const harDuplikatFomTilrettelegging = alleTilrettelegginger.some(t => t.fom === dato);
+
+    return harDuplikatFomTilrettelegging || harDuplikatFomOpphold
+      ? intl.formatMessage({ id: 'TilretteleggingForm.DuplikateDatoer' })
+      : null;
+  };
+
 const validerTomEtterFom = (intl: IntlShape, index: number, getValues: UseFormGetValues<any>) => (tom?: string) =>
   dayjs(tom).isBefore(getValues(`${index}.fom`)) ? intl.formatMessage({ id: 'OppholdForm.TomForFom' }) : null;
 
@@ -126,7 +143,12 @@ const OppholdForm: FunctionComponent<OwnProps> = ({
                 label={intl.formatMessage({
                   id: 'OppholdForm.FraOgMed',
                 })}
-                validate={[required, hasValidDate, validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato)]}
+                validate={[
+                  required,
+                  hasValidDate,
+                  validerAtDatoErUnik(intl, alleOpphold, alleTilrettelegginger, opphold),
+                  validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
+                ]}
                 isReadOnly={readOnly || opphold.forVisning}
               />
             </FlexColumn>

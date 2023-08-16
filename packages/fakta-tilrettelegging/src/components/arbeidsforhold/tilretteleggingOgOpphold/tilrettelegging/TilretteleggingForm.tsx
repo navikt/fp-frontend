@@ -1,12 +1,13 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import dayjs from 'dayjs';
 import { FormProvider, useForm } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Button } from '@navikt/ds-react';
 
 import {
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsforholdTilretteleggingDato,
+  SvpAvklartOppholdPeriode,
   SvpTilretteleggingFomKilde,
 } from '@navikt/fp-types';
 import { Datepicker, NumberField, RadioGroupPanel } from '@navikt/ft-form-hooks';
@@ -22,6 +23,34 @@ const maxValue100 = maxValue(100);
 const minValue0 = minValue(0);
 
 type FormValues = Record<number, ArbeidsforholdTilretteleggingDato>;
+
+const validerAtDatoErUnik =
+  (
+    intl: IntlShape,
+    alleTilrettelegginger: ArbeidsforholdTilretteleggingDato[],
+    oppholdPerioder: SvpAvklartOppholdPeriode[],
+    tilrettelegging: ArbeidsforholdTilretteleggingDato,
+  ) =>
+  (dato: string) => {
+    const tilretteleggingerMinusEditert = alleTilrettelegginger.filter(alle => alle.fom !== tilrettelegging.fom);
+    const harDuplikatFomTilrettelegging = tilretteleggingerMinusEditert.some(t => t.fom === dato);
+    const harDuplikatFomOpphold = oppholdPerioder.some(t => t.fom === dato);
+
+    return harDuplikatFomTilrettelegging || harDuplikatFomOpphold
+      ? intl.formatMessage({ id: 'TilretteleggingForm.DuplikateDatoer' })
+      : null;
+  };
+
+const validerAtPeriodeErGyldig =
+  (intl: IntlShape, tomDatoForTilrettelegging: string, termindato: string) => (dato?: string) => {
+    if (dayjs(dato).isAfter(dayjs(termindato).subtract(3, 'weeks').subtract(1, 'day'))) {
+      return intl.formatMessage({ id: 'TilretteleggingForm.EtterTermindato' });
+    }
+    if (dayjs(dato).isBefore(tomDatoForTilrettelegging)) {
+      return intl.formatMessage({ id: 'TilretteleggingForm.ForForsteDato' });
+    }
+    return null;
+  };
 
 export const finnVelferdspermisjonprosent = (arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging) =>
   arbeidsforhold.velferdspermisjoner
@@ -171,7 +200,17 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
           label={intl.formatMessage({
             id: 'TilretteleggingForm.FraOgMed',
           })}
-          validate={[required, hasValidDate]}
+          validate={[
+            required,
+            hasValidDate,
+            validerAtDatoErUnik(
+              intl,
+              arbeidsforhold.tilretteleggingDatoer,
+              arbeidsforhold.avklarteOppholdPerioder,
+              tilrettelegging,
+            ),
+            validerAtPeriodeErGyldig(intl, tomDatoForTilrettelegging, termindato),
+          ]}
           isReadOnly={readOnly}
         />
         <VerticalSpacer thirtyTwoPx />

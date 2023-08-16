@@ -32,6 +32,9 @@
   "TilretteleggingForm.Avbryt": "Avbryt",
   "TilretteleggingForm.ProsentSvp": "Prosent svangerskapspenger",
   "TilretteleggingForm.SlettPeriode": "Slett periode",
+  "TilretteleggingForm.DuplikateDatoer": "Flere perioder med samme Fra og med",
+  "TilretteleggingForm.EtterTermindato": "Dato kan ikke være senere enn tre uker før termindato",
+  "TilretteleggingForm.ForForsteDato": "Dato kan ikke være før dato for tilrettelegging fra lege eller jordmor",
 
   "TilretteleggingInfoPanel.Periode": "Periode på {periode}",
   "TilretteleggingInfoPanel.TreUker": "Frem til tre uker før termin",

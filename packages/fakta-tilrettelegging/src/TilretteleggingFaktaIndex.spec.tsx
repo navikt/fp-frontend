@@ -29,8 +29,8 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
     expect(screen.getByText('AA-registeret')).toBeInTheDocument();
 
     expect(screen.getByText('Perioder')).toBeInTheDocument();
-    expect(screen.getByText('17.03.2020 - 20.05.2020')).toBeInTheDocument();
-    expect(screen.getByText('15.10.2020 - 16.10.2020')).toBeInTheDocument();
+    expect(screen.getByText('17.03.2020 - 14.08.2020')).toBeInTheDocument();
+    expect(screen.getByText('15.08.2020 - 16.10.2020')).toBeInTheDocument();
 
     await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
@@ -54,6 +54,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
         {
           arbeidsgiverReferanse: '999999999',
           avklarteOppholdPerioder: [],
+          eksternArbeidsforholdReferanse: '23422323',
           kanTilrettelegges: true,
           kopiertFraTidligereBehandling: true,
           mottattTidspunkt: '2020-03-11T16:21:48.532298',
@@ -62,14 +63,15 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
           tilretteleggingDatoer: [
             {
               fom: '2020-03-17',
-              mottattDato: '2020-05-20',
-              tom: '2020-05-20',
-              type: 'INGEN_TILRETTELEGGING',
+              kilde: 'SØKNAD',
+              mottattDato: '2020-02-20',
+              stillingsprosent: 50,
+              type: 'DELVIS_TILRETTELEGGING',
             },
             {
-              fom: '2020-10-15',
-              mottattDato: '2020-05-20',
-              tom: '2020-10-16',
+              fom: '2020-08-15',
+              kilde: 'SØKNAD',
+              mottattDato: '2020-02-20',
               type: 'HEL_TILRETTELEGGING',
             },
           ],
