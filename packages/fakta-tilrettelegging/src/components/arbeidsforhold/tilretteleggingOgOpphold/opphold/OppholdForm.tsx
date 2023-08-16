@@ -9,6 +9,8 @@ import { Datepicker, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping, hasValidDate, required } from '@navikt/ft-form-validators';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
+import styles from './oppholdForm.module.css';
+
 type FormValues = Record<
   number,
   {
@@ -60,7 +62,7 @@ interface OwnProps {
   index: number;
   readOnly: boolean;
   oppdaterOpphold: (values: SvpAvklartOppholdPeriode) => void;
-  slettOpphold: () => void;
+  slettOpphold: (fomDato: string) => void;
   avbrytEditering: () => void;
   alleTilrettelegginger: ArbeidsforholdTilretteleggingDato[];
   alleOpphold: SvpAvklartOppholdPeriode[];
@@ -95,7 +97,7 @@ const OppholdForm: FunctionComponent<OwnProps> = ({
   };
 
   const slett = () => {
-    slettOpphold();
+    slettOpphold(opphold.fom);
     return Promise.resolve();
   };
 
@@ -185,7 +187,7 @@ const OppholdForm: FunctionComponent<OwnProps> = ({
                 </Button>
               </FlexColumn>
               {!erNyPeriode && (
-                <FlexColumn>
+                <FlexColumn className={styles.pushRight}>
                   <Button size="small" variant="secondary" onClick={slett} type="button">
                     <FormattedMessage id="OppholdForm.SlettPeriode" />
                   </Button>

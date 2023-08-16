@@ -31,6 +31,7 @@
   "TilretteleggingForm.Oppdater": "Oppdater",
   "TilretteleggingForm.Avbryt": "Avbryt",
   "TilretteleggingForm.ProsentSvp": "Prosent svangerskapspenger",
+  "TilretteleggingForm.SlettPeriode": "Slett periode",
 
   "TilretteleggingInfoPanel.Periode": "Periode på {periode}",
   "TilretteleggingInfoPanel.TreUker": "Frem til tre uker før termin",

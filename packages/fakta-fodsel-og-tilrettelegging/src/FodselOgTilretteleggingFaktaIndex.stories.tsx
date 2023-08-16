@@ -9,6 +9,7 @@ import {
   Behandling,
   FodselOgTilrettelegging,
   ArbeidOgInntektsmelding,
+  SvpTilretteleggingFomKilde,
 } from '@navikt/fp-types';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -34,10 +35,12 @@ const tilretteleggingPermisjon = {
         {
           fom: '2020-03-17',
           type: 'INGEN_TILRETTELEGGING',
+          kilde: SvpTilretteleggingFomKilde.SØKNAD,
         },
         {
           fom: '2020-10-15',
           type: 'HEL_TILRETTELEGGING',
+          kilde: SvpTilretteleggingFomKilde.SØKNAD,
         },
       ],
       arbeidsgiverReferanse: '999999999',
@@ -274,10 +277,12 @@ HarOpphold.args = {
           {
             fom: '2020-03-17',
             type: 'INGEN_TILRETTELEGGING',
+            kilde: SvpTilretteleggingFomKilde.SØKNAD,
           },
           {
             fom: '2020-10-15',
             type: 'HEL_TILRETTELEGGING',
+            kilde: SvpTilretteleggingFomKilde.SØKNAD,
           },
         ],
         arbeidsgiverReferanse: '999999999',

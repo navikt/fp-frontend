@@ -75,6 +75,7 @@ interface OwnProps {
   stillingsprosentArbeidsforhold: number;
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
   tomDatoForTilrettelegging: string;
+  slettTilrettelegging: (fomDato: string) => void;
 }
 
 const TilretteleggingForm: FunctionComponent<OwnProps> = ({
@@ -87,6 +88,7 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
   stillingsprosentArbeidsforhold,
   arbeidsforhold,
   tomDatoForTilrettelegging,
+  slettTilrettelegging,
 }) => {
   const intl = useIntl();
 
@@ -134,6 +136,11 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
   const avbryt = () => {
     avbrytEditering();
     formMethods.reset();
+  };
+
+  const slett = () => {
+    slettTilrettelegging(tilrettelegging.fom);
+    return Promise.resolve();
   };
 
   const formValues = formMethods.watch();
@@ -239,6 +246,13 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
                 />
               </Button>
             </FlexColumn>
+            {!erNyPeriode && (
+              <FlexColumn className={styles.pushRight}>
+                <Button size="small" variant="secondary" onClick={slett} type="button">
+                  <FormattedMessage id="TilretteleggingForm.SlettPeriode" />
+                </Button>
+              </FlexColumn>
+            )}
           </FlexRow>
         </FlexContainer>
       </div>
