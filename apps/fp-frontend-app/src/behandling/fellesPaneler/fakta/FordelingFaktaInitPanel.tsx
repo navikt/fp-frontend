@@ -5,7 +5,7 @@ import {
   FordelBeregningsgrunnlagFaktaIndex,
   FaktaFordelBeregningAvklaringsbehovCode,
 } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
-import { Beregningsgrunnlag, BeregningsgrunnlagMedId, Vilkar, Vilkarperiode } from '@navikt/ft-types';
+import { Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/ft-types';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } from '@navikt/fp-types';
@@ -68,7 +68,7 @@ const lagBGVilkar = (vilkar: FpVilkar[], beregningsgrunnlag?: Beregningsgrunnlag
   return nyVK;
 };
 
-const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): BeregningsgrunnlagMedId[] => {
+const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): Beregningsgrunnlag[] => {
   if (!beregningsgrunnlag) {
     return [];
   }
