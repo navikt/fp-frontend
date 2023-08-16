@@ -98,7 +98,7 @@
     "@navikt/fp-types": "1.0.0",
     "@navikt/fp-types-avklar-aksjonspunkter": "1.0.0",
     "@navikt/ft-fakta-beregning": "4.2.34",
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "7.2.37",
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "7.2.40",
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": "2.1.29",
     "@navikt/ft-form-hooks": "4.1.9",
     "@navikt/ft-form-validators": "2.0.41",
