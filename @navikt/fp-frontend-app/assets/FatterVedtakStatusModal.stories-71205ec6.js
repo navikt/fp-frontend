@@ -1,0 +1,4 @@
+import{t as d,j as e,P as l}from"./index.es-b729e326.js";import{F as o}from"./FatterVedtakStatusModal-11cb06bf.js";import{m as i}from"./nb_NO-e803aba2.js";import"./index-1b78688b.js";import"./tslib.es6-29a31495.js";import"./index-844e0f67.js";const n=d(i),M={title:"app/vedtak/FatterVedtakStatusModal",component:o},t=()=>e.jsx(l,{value:n,children:e.jsx(o,{visModal:!0,lukkModal:()=>{},tekst:"Forslag til vedtak er sendt til beslutter"})});var a,r,s;t.parameters={...t.parameters,docs:{...(a=t.parameters)==null?void 0:a.docs,source:{originalSource:`() => <RawIntlProvider value={intl}>
+    <FatterVedtakStatusModal visModal lukkModal={() => undefined} tekst="Forslag til vedtak er sendt til beslutter" />
+  </RawIntlProvider>`,...(s=(r=t.parameters)==null?void 0:r.docs)==null?void 0:s.source}}};const F=["visFatterVedtakModal"];export{F as __namedExportsOrder,M as default,t as visFatterVedtakModal};
+//# sourceMappingURL=FatterVedtakStatusModal.stories-71205ec6.js.map
