@@ -32,13 +32,13 @@ const VelferdspermisjonTabellRad: FunctionComponent<OwnProps> = ({
 
   const [open, setOpen] = useState(erIkkeValgt);
   const lukkRad = useCallback(() => setOpen(false), []);
-  const radOnClick = useCallback(() => setOpen(oldValue => !oldValue), []);
 
   return (
     <Table.ExpandableRow
       open={open}
       expandOnRowClick
-      onOpenChange={radOnClick}
+      onOpenChange={() => setOpen(!open)}
+      onClick={() => setOpen(!open)}
       content={
         <VelferdspermisjonForm
           velferdspermisjon={velferdspermisjon}

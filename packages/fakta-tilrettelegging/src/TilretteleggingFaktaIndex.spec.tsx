@@ -237,4 +237,51 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
 
     expect(await screen.findByText('Flere perioder med samme Fra og med')).toBeInTheDocument();
   });
+
+  it('skal legge til ny tilretteleggingsperiode', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+
+    expect(
+      await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
+    ).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Periode med svangerskapspenger'));
+
+    expect(await screen.findByText('Periode')).toBeInTheDocument();
+    expect(screen.getByText('Tilrettelegging')).toBeInTheDocument();
+    expect(screen.getByText('Saksbehandler')).toBeInTheDocument();
+    expect(screen.getByText('Legg til ny periode')).toBeInTheDocument();
+    expect(screen.getAllByText('Avbryt')).toHaveLength(3);
+
+    await userEvent.click(screen.getAllByText('Arbeidstakeren kan fortsette med redusert arbeidstid')[2]);
+
+    await userEvent.click(screen.getByText('Legg til ny periode'));
+
+    expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
+
+    const dato = screen.getAllByText('Fra og med')[2];
+    await userEvent.type(dato, lagNyDato('15.09.2020'));
+    fireEvent.blur(dato);
+
+    await userEvent.click(screen.getByText('Legg til ny periode'));
+
+    expect(await screen.findByText('15.08.2020 - 14.09.2020')).toBeInTheDocument();
+    expect(screen.getByText('15.09.2020 - 15.10.2020')).toBeInTheDocument();
+  });
+
+  it('skal slette tilretteleggingsperiode og da endre sluttdato for perioden som er igjen', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+
+    expect(
+      await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
+    ).toBeInTheDocument();
+
+    await userEvent.click(screen.getAllByText('Slett periode')[1]);
+
+    expect(await screen.findByText('17.03.2020 - 15.10.2020')).toBeInTheDocument();
+  });
 });
