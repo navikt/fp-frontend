@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { composeStories } from '@storybook/react';
 import * as stories from './TilretteleggingFaktaIndex.stories';
@@ -101,6 +101,120 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
         },
       ],
     });
+  });
+
+  it('skal validere at en må velge minst ett arbeidsforhold og at alle velferdspermisjoner er vurdert', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    const utils = render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+
+    expect(
+      await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
+    ).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Skal ha svangerskapspenger for arbeidsforholdet'));
+
+    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    expect(await screen.findByText('Ikke alle velferdspermisjoner er vurdert')).toBeInTheDocument();
+    expect(screen.getByText('Minst ett arbeidsforhold må brukes')).toBeInTheDocument();
+  });
+
+  it('skal validere at en må ferdigstille tilretteleggingsperiode som er lagt til', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    const utils = render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+
+    expect(
+      await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
+    ).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Periode med svangerskapspenger'));
+
+    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    expect(await screen.findByText('Det er minst en periode som er lagt til men ikke ferdigstilt')).toBeInTheDocument();
+  });
+
+  it('skal validere at en må ferdigstille oppholdsperiode som er lagt til', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    const utils = render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+
+    expect(
+      await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
+    ).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Opphold'));
+
+    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    expect(await screen.findByText('Det er minst en periode som er lagt til men ikke ferdigstilt')).toBeInTheDocument();
+  });
+
+  it('skal validere at dato for tilrettelegging fra lege eller jordmor må være før termindato', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    const utils = render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+
+    expect(
+      await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
+    ).toBeInTheDocument();
+
+    const dato = screen.getByText('Dato for tilrettelegging fra lege eller jordmor');
+    await userEvent.type(dato, '{backspace}1');
+    fireEvent.blur(dato);
+
+    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    expect(await screen.findByText('Tilrettelegging fra og med må være tidligere enn 16.10.2020')).toBeInTheDocument();
+  });
+
+  it('skal validere at dato for tilrettelegging må være minst tre uker før termindato', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+
+    expect(
+      await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
+    ).toBeInTheDocument();
+
+    const dato = screen.getAllByText('Fra og med')[0];
+    await userEvent.type(dato, '{backspace}1');
+    fireEvent.blur(dato);
+
+    await userEvent.click(screen.getAllByText('Oppdater')[1]);
+
+    expect(await screen.findByText('Dato kan ikke være senere enn tre uker før termindato')).toBeInTheDocument();
+  });
+
+  it.skip('skal validere at dato for tilrettelegging må være lik eller etter dato for tilrettelegging fra lege eller jordmor', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+
+    expect(
+      await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
+    ).toBeInTheDocument();
+
+    const dato = screen.getAllByText('Fra og med')[0];
+    userEvent.clear(dato);
+    await userEvent.type(dato, '16.03.2020');
+    fireEvent.blur(dato);
+
+    await userEvent.click(screen.getAllByText('Oppdater')[1]);
+
+    expect(
+      await screen.findByText('Dato kan ikke være før dato for tilrettelegging fra lege eller jordmor'),
+    ).toBeInTheDocument();
   });
 
   it('skal legge til tilretteleggingsbehov', async () => {

@@ -100,7 +100,8 @@ const TilretteleggingPeriodeTabellRad: FunctionComponent<OwnProps> = ({
   return (
     <Table.ExpandableRow
       open={open}
-      onClick={() => setOpen(!open)}
+      expandOnRowClick
+      onOpenChange={() => setOpen(!open)}
       content={
         <TilretteleggingForm
           tilrettelegging={tilrettelegging}

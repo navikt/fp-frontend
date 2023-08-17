@@ -78,7 +78,8 @@ const OppholdPeriodeTabellRad: FunctionComponent<OwnProps> = ({
   return (
     <Table.ExpandableRow
       open={open}
-      onClick={() => setOpen(!open)}
+      expandOnRowClick
+      onOpenChange={() => setOpen(!open)}
       content={
         <OppholdForm
           opphold={opphold}

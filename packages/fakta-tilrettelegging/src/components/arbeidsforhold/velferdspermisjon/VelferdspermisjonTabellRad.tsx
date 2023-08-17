@@ -37,7 +37,8 @@ const VelferdspermisjonTabellRad: FunctionComponent<OwnProps> = ({
   return (
     <Table.ExpandableRow
       open={open}
-      onClick={radOnClick}
+      expandOnRowClick
+      onOpenChange={radOnClick}
       content={
         <VelferdspermisjonForm
           velferdspermisjon={velferdspermisjon}

@@ -42,11 +42,11 @@ const validerAtDatoErUnik =
   };
 
 const validerAtPeriodeErGyldig =
-  (intl: IntlShape, tomDatoForTilrettelegging: string, termindato: string) => (dato?: string) => {
+  (intl: IntlShape, tilretteleggingBehovFom: string, termindato: string) => (dato?: string) => {
     if (dayjs(dato).isAfter(dayjs(termindato).subtract(3, 'weeks').subtract(1, 'day'))) {
       return intl.formatMessage({ id: 'TilretteleggingForm.EtterTermindato' });
     }
-    if (dayjs(dato).isBefore(tomDatoForTilrettelegging)) {
+    if (dayjs(dato).isBefore(tilretteleggingBehovFom)) {
       return intl.formatMessage({ id: 'TilretteleggingForm.ForForsteDato' });
     }
     return null;
@@ -209,7 +209,7 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
               arbeidsforhold.avklarteOppholdPerioder,
               tilrettelegging,
             ),
-            validerAtPeriodeErGyldig(intl, tomDatoForTilrettelegging, termindato),
+            validerAtPeriodeErGyldig(intl, arbeidsforhold.tilretteleggingBehovFom, termindato),
           ]}
           isReadOnly={readOnly}
         />
