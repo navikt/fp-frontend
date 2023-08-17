@@ -91,7 +91,7 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
               const nesteTilrettelegging = tilretteleggingDatoer[tilretteleggingIndex + 1];
               const tomDatoForTilrettelegging = nesteTilrettelegging?.fom
                 ? dayjs(nesteTilrettelegging.fom).subtract(1, 'day').format(ISO_DATE_FORMAT)
-                : dayjs(termindato).subtract(3, 'week').format(ISO_DATE_FORMAT);
+                : dayjs(termindato).subtract(3, 'week').subtract(1, 'day').format(ISO_DATE_FORMAT);
 
               return (
                 <TilretteleggingPeriodeTabellRad

@@ -92,7 +92,7 @@ export const finnProsentSvangerskapspenger = (
 };
 
 const sjekkOmTomDatoErTreUkerFørTermin = (termindato: string, tom?: string): boolean =>
-  dayjs(termindato).subtract(3, 'week').isSame(dayjs(tom));
+  dayjs(termindato).subtract(3, 'week').subtract(1, 'day').isSame(dayjs(tom));
 
 interface OwnProps {
   tilrettelegging: ArbeidsforholdTilretteleggingDato;
