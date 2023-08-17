@@ -148,13 +148,11 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
         ? SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER
         : SvpTilretteleggingFomKilde.ENDRET_AV_SAKSBEHANDLER;
     const v = {
-      fom: formValues.fom,
-      type: formValues.type,
+      ...formValues,
       overstyrtUtbetalingsgrad:
         formValues.overstyrtUtbetalingsgrad !== prosentSvangerskapspenger
           ? formValues.overstyrtUtbetalingsgrad
           : undefined,
-      stillingsprosent: formValues.stillingsprosent,
       kilde,
     };
     oppdaterTilrettelegging(v);
@@ -186,15 +184,19 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
           padding: '30px',
         }}
       >
-        <TilretteleggingInfoPanel
-          tilrettelegging={tilrettelegging}
-          termindato={termindato}
-          erTomDatoTreUkerFørTermin={erTomDatoTreUkerFørTermin}
-          stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
-          prosentSvangerskapspenger={prosentSvangerskapspenger}
-          tomDato={tomDatoForTilrettelegging}
-        />
-        <VerticalSpacer twentyPx />
+        {!erNyPeriode && (
+          <>
+            <TilretteleggingInfoPanel
+              tilrettelegging={tilrettelegging}
+              termindato={termindato}
+              erTomDatoTreUkerFørTermin={erTomDatoTreUkerFørTermin}
+              stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
+              prosentSvangerskapspenger={prosentSvangerskapspenger}
+              tomDato={tomDatoForTilrettelegging}
+            />
+            <VerticalSpacer twentyPx />
+          </>
+        )}
         <Datepicker
           name={`${index}.fom`}
           label={intl.formatMessage({

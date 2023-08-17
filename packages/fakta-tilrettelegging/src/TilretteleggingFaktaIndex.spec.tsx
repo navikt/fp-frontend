@@ -206,8 +206,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
     ).toBeInTheDocument();
 
     const dato = screen.getAllByText('Fra og med')[0];
-    userEvent.clear(dato);
-    await userEvent.type(dato, '16.03.2020');
+    await userEvent.type(dato, '{selectall}{backspace}16.03.2020');
     fireEvent.blur(dato);
 
     await userEvent.click(screen.getAllByText('Oppdater')[1]);
@@ -215,6 +214,24 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
     expect(
       await screen.findByText('Dato kan ikke være før dato for tilrettelegging fra lege eller jordmor'),
     ).toBeInTheDocument();
+  });
+
+  it.skip('skal validere alle tilrettelegginger har unike fra og med datoer', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+
+    expect(
+      await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
+    ).toBeInTheDocument();
+
+    const dato = screen.getAllByText('Fra og med')[0];
+    await userEvent.type(dato, '{selectall}{backspace}15.08.2020');
+    fireEvent.blur(dato);
+
+    await userEvent.click(screen.getAllByText('Oppdater')[1]);
+
+    expect(await screen.findByText('Flere perioder med samme Fra og med')).toBeInTheDocument();
   });
 
   it('skal legge til tilretteleggingsbehov', async () => {

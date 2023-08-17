@@ -89,7 +89,7 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
             if (tilretteleggingIndex !== -1) {
               const navn = `${tilretteleggingStateName}.${tilretteleggingIndex}`;
               const nesteTilrettelegging = tilretteleggingDatoer[tilretteleggingIndex + 1];
-              const tomDatoForTilrettelegging = nesteTilrettelegging
+              const tomDatoForTilrettelegging = nesteTilrettelegging?.fom
                 ? dayjs(nesteTilrettelegging.fom).subtract(1, 'day').format(ISO_DATE_FORMAT)
                 : dayjs(termindato).subtract(3, 'week').format(ISO_DATE_FORMAT);
 

@@ -43,6 +43,7 @@
   "TilretteleggingInfoPanel.Sendt": "Sendt {dato}",
   "TilretteleggingInfoPanel.SvpOgArbeid": "Svangerskapspenger {svp}% og arbeide {arbeid}%",
   "TilretteleggingInfoPanel.AvStillingsprosent": "Av stillingsprosent {stillingsprosent}%",
+  "TilretteleggingInfoPanel.Saksbehandler": "Saksbehandler",
 
   "OppholdForm.SlettPeriode": "Slett periode",
   "OppholdForm.LeggTil": "Legg til ny periode",
