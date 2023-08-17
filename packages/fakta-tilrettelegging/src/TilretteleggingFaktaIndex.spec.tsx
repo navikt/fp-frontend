@@ -271,7 +271,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
     expect(screen.getByText('15.09.2020 - 15.10.2020')).toBeInTheDocument();
   });
 
-  it('skal slette tilretteleggingsperiode og da endre sluttdato for perioden som er igjen', async () => {
+  it('skal slette tilretteleggingsperiode og da endre sluttdato for den perioden som er igjen', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
     render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
@@ -283,5 +283,41 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
     await userEvent.click(screen.getAllByText('Slett periode')[1]);
 
     expect(await screen.findByText('17.03.2020 - 15.10.2020')).toBeInTheDocument();
+  });
+
+  it('skal legge til ny oppholdsperiode', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+
+    expect(
+      await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
+    ).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Opphold'));
+
+    expect(await screen.findByText('Periode')).toBeInTheDocument();
+    expect(screen.getAllByText('Opphold')).toHaveLength(2);
+    expect(screen.getByText('Saksbehandler')).toBeInTheDocument();
+    expect(screen.getByText('Legg til ny periode')).toBeInTheDocument();
+    expect(screen.getAllByText('Avbryt')).toHaveLength(3);
+
+    await userEvent.click(screen.getByText('Ferie'));
+
+    await userEvent.click(screen.getByText('Legg til ny periode'));
+
+    expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
+
+    const fomDato = screen.getAllByText('Fra og med')[2];
+    await userEvent.type(fomDato, lagNyDato('15.09.2020'));
+    fireEvent.blur(fomDato);
+
+    const tomDato = screen.getByText('Til og med');
+    await userEvent.type(tomDato, lagNyDato('25.09.2020'));
+    fireEvent.blur(tomDato);
+
+    await userEvent.click(screen.getByText('Legg til ny periode'));
+
+    expect(await screen.findByText('15.09.2020 - 25.09.2020')).toBeInTheDocument();
   });
 });
