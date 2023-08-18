@@ -28,11 +28,11 @@ spec:
     cpuThresholdPercentage: 80
   resources:
     limits:
-      cpu: 500m
-      memory: 128Mi
+      cpu: 1000m
+      memory: 512Mi
     requests:
-      cpu: 300m
-      memory: 64Mi
+      cpu: 600m
+      memory: 256Mi
   azure:
     application:
       enabled: true
