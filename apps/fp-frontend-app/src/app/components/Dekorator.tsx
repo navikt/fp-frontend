@@ -120,7 +120,7 @@ const Dekorator: FunctionComponent<OwnProps> = ({
   );
 
   const kanOppgavestyre = navAnsatt?.kanOppgavestyre;
-  const kanJournalføre = false; // TODO Til vi er klare for å åpne for alle saksbehandlere
+  const kanJournalføre = navAnsatt?.kanSaksbehandle;
 
   const interneLenker = useMemo(() => {
     const lenker = [];
