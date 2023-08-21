@@ -10,6 +10,7 @@ import {
   isAvslag,
   isInnvilget,
   isOpphor,
+  AksjonspunktCode,
 } from '@navikt/fp-kodeverk';
 import { AsyncPollingStatus } from '@navikt/fp-rest-api';
 import { Behandling, Aksjonspunkt, Behandlingsresultat } from '@navikt/fp-types';
@@ -34,20 +35,16 @@ export const finnTekstkodeFraBehandlingstatus = (behandlingStatus: string): stri
 const kanSendesTilGodkjenning = (behandlingStatusKode: string): boolean =>
   behandlingStatusKode === behandlingStatusCode.BEHANDLING_UTREDES;
 
-const finnKnappetekstkode = (aksjonspunkter: Aksjonspunkt[]): string => {
-  if (aksjonspunkter && aksjonspunkter.some(ap => ap.toTrinnsBehandling)) {
-    return 'VedtakForm.TilGodkjenning';
-  }
+const finnKnappetekstkode = (aksjonspunkter: Aksjonspunkt[], skalBrukeManueltBrev: boolean): string =>
+  (aksjonspunkter && aksjonspunkter.some(ap => ap.definisjon === AksjonspunktCode.FORESLA_VEDTAK)) ||
+  skalBrukeManueltBrev
+    ? 'VedtakForm.TilGodkjenning'
+    : 'VedtakForm.FattVedtak';
 
-  return 'VedtakForm.FattVedtak';
-};
-
-const finnSkalViseLink = (behandlingsresultat: Behandlingsresultat): boolean => {
-  if (!behandlingsresultat.avslagsarsak) {
-    return true;
-  }
-  return behandlingsresultat.avslagsarsak !== avslagsarsakCodes.INGEN_BEREGNINGSREGLER;
-};
+const finnSkalViseLink = (behandlingsresultat: Behandlingsresultat): boolean =>
+  behandlingsresultat.avslagsarsak
+    ? behandlingsresultat.avslagsarsak !== avslagsarsakCodes.INGEN_BEREGNINGSREGLER
+    : true;
 
 const harIkkeKonsekvenserForYtelsen = (
   konsekvenserForYtelsenKoder: string[],
@@ -241,7 +238,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
                     disabled={behandlingPaaVent || isSubmitting}
                     loading={isSubmitting}
                   >
-                    <FormattedMessage id={finnKnappetekstkode(aksjonspunkter)} />
+                    <FormattedMessage id={finnKnappetekstkode(aksjonspunkter, skalBrukeManueltBrev)} />
                   </Button>
                 )}
               </FlexColumn>

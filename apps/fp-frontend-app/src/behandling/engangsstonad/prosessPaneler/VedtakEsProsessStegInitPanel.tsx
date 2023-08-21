@@ -97,13 +97,13 @@ const getForhandsvisCallback =
 
 const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
   AksjonspunktCode.FATTER_VEDTAK,
+  AksjonspunktCode.FORESLA_VEDTAK_MANUELT,
   AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL,
   AksjonspunktCode.VURDERE_ANNEN_YTELSE,
   AksjonspunktCode.VURDERE_DOKUMENT,
   AksjonspunktCode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
   AksjonspunktCode.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING,
 ];
-const FATTER_VEDTAK_AKSJONSPUNKT_KODER = [AksjonspunktCode.FORESLA_VEDTAK, AksjonspunktCode.FORESLA_VEDTAK_MANUELT];
 
 const getLagringSideeffekter =
   (
@@ -111,12 +111,15 @@ const getLagringSideeffekter =
     toggleFatterVedtakModal: (skalFatterModal: boolean) => void,
     setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void,
   ) =>
-  (aksjonspunktModels: { kode: string }[]) => {
+  (aksjonspunktModels: { kode: string; skalBrukeOverstyrendeFritekstBrev: boolean }[]) => {
     setSkalOppdatereEtterBekreftelseAvAp(false);
 
     // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
     return () => {
-      if (FATTER_VEDTAK_AKSJONSPUNKT_KODER.some(kode => kode === aksjonspunktModels[0].kode)) {
+      const skalTilTotrinnskontroll = aksjonspunktModels.some(
+        ap => ap.kode === AksjonspunktCode.FORESLA_VEDTAK || ap.skalBrukeOverstyrendeFritekstBrev,
+      );
+      if (skalTilTotrinnskontroll) {
         toggleFatterVedtakModal(true);
       } else {
         toggleIverksetterVedtakModal(true);
@@ -124,7 +127,7 @@ const getLagringSideeffekter =
     };
   };
 
-const AKSJONSPUNKT_KODER = [...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER, ...FATTER_VEDTAK_AKSJONSPUNKT_KODER];
+const AKSJONSPUNKT_KODER = [...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER, AksjonspunktCode.FORESLA_VEDTAK];
 
 const ENDEPUNKTER_PANEL_DATA = [
   BehandlingApiKeys.TILBAKEKREVINGVALG,
