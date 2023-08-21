@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { composeStories } from '@storybook/react';
 import * as stories from './TilretteleggingFaktaIndex.stories';
 
-const { TilretteleggingMedVelferdspermisjon } = composeStories(stories);
+const { TilretteleggingMedVelferdspermisjon, HarOpphold } = composeStories(stories);
 
 const lagNyDato = (nyDato: string) => {
   const backspace = [...Array(10)].reduce(prev => `${prev}{backspace}`, '');
@@ -241,7 +241,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   it('skal legge til ny tilretteleggingsperiode', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
-    render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+    const utils = render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
 
     expect(
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
@@ -259,11 +259,13 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
 
     await userEvent.click(screen.getByText('Legg til ny periode'));
 
-    expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
+    expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
 
     const dato = screen.getAllByText('Fra og med')[2];
     await userEvent.type(dato, lagNyDato('15.09.2020'));
     fireEvent.blur(dato);
+
+    await userEvent.type(utils.getByLabelText('Arbeidsprosent'), '40');
 
     await userEvent.click(screen.getByText('Legg til ny periode'));
 
@@ -288,7 +290,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   it('skal legge til ny oppholdsperiode', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
-    render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+    const utils = render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
 
     expect(
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
@@ -309,15 +311,156 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
 
     const fomDato = screen.getAllByText('Fra og med')[2];
-    await userEvent.type(fomDato, lagNyDato('15.09.2020'));
+    await userEvent.type(fomDato, lagNyDato('14.07.2020'));
     fireEvent.blur(fomDato);
 
     const tomDato = screen.getByText('Til og med');
-    await userEvent.type(tomDato, lagNyDato('25.09.2020'));
+    await userEvent.type(tomDato, lagNyDato('25.07.2020'));
     fireEvent.blur(tomDato);
 
     await userEvent.click(screen.getByText('Legg til ny periode'));
 
-    expect(await screen.findByText('15.09.2020 - 25.09.2020')).toBeInTheDocument();
+    expect(await screen.findByText('14.07.2020 - 25.07.2020')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Ja'));
+
+    await userEvent.click(screen.getAllByText('Oppdater')[0]);
+
+    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+    expect(lagre).toHaveBeenNthCalledWith(1, {
+      kode: '5091',
+      begrunnelse: 'Dette er en begrunnelse',
+      fødselsdato: undefined,
+      termindato: '2020-11-06',
+      bekreftetSvpArbeidsforholdList: [
+        {
+          arbeidsgiverReferanse: '999999999',
+          avklarteOppholdPerioder: [
+            {
+              fom: '2020-07-14',
+              oppholdÅrsak: 'FERIE',
+              tom: '2020-07-25',
+            },
+          ],
+          eksternArbeidsforholdReferanse: '23422323',
+          kanTilrettelegges: true,
+          kopiertFraTidligereBehandling: true,
+          mottattTidspunkt: '2020-03-11T16:21:48.532298',
+          skalBrukes: true,
+          tilretteleggingBehovFom: '2020-03-17',
+          tilretteleggingDatoer: [
+            {
+              fom: '2020-03-17',
+              kilde: 'SØKNAD',
+              mottattDato: '2020-02-20',
+              stillingsprosent: 50,
+              type: 'DELVIS_TILRETTELEGGING',
+            },
+            {
+              fom: '2020-08-15',
+              kilde: 'SØKNAD',
+              mottattDato: '2020-02-20',
+              type: 'HEL_TILRETTELEGGING',
+            },
+          ],
+          tilretteleggingId: 1116961,
+          uttakArbeidType: 'FRILANS',
+          velferdspermisjoner: [
+            {
+              erGyldig: true,
+              permisjonFom: '2020-02-17',
+              permisjonTom: '2020-07-12',
+              permisjonsprosent: 50,
+              type: 'VELFERDSPERMISJON',
+            },
+            {
+              permisjonFom: '2019-08-06',
+              permisjonTom: '2019-08-06',
+              permisjonsprosent: 50,
+              type: 'VELFERDSPERMISJON',
+            },
+            {
+              permisjonFom: '2019-10-03',
+              permisjonTom: '2019-10-03',
+              permisjonsprosent: 50,
+              type: 'VELFERDSPERMISJON',
+            },
+          ],
+        },
+      ],
+    });
+  });
+
+  it('skal slette oppholdsperiode', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    render(<HarOpphold submitCallback={lagre} />);
+
+    expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
+
+    await userEvent.click(screen.getAllByText('Slett periode')[1]);
+
+    await waitFor(() => expect(screen.queryByText('15.09.2020 - 20.09.2020')).not.toBeInTheDocument());
+  });
+
+  it('skal validere at opphold ikke har overlappende fom-dato med andre perioder', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    render(<HarOpphold submitCallback={lagre} />);
+
+    expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
+
+    const dato = screen.getAllByText('Fra og med')[1];
+    await userEvent.type(dato, lagNyDato('17.03.2020'));
+    fireEvent.blur(dato);
+
+    await userEvent.click(screen.getAllByText('Oppdater')[1]);
+
+    expect(await screen.findByText('Flere perioder med samme Fra og med')).toBeInTheDocument();
+
+    await userEvent.type(dato, lagNyDato('25.09.2020'));
+    fireEvent.blur(dato);
+
+    await userEvent.click(screen.getAllByText('Oppdater')[1]);
+
+    expect(await screen.findByText('Flere perioder med samme Fra og med')).toBeInTheDocument();
+  });
+
+  it('skal validere at dato for opphold må være minst tre uker før termindato', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    render(<HarOpphold submitCallback={lagre} />);
+
+    expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
+
+    const dato = screen.getAllByText('Fra og med')[1];
+    await userEvent.type(dato, '{backspace}1');
+    fireEvent.blur(dato);
+
+    await userEvent.click(screen.getAllByText('Oppdater')[1]);
+
+    expect(await screen.findByText('Dato kan ikke være senere enn tre uker før termindato')).toBeInTheDocument();
+  });
+
+  it.skip('skal validere at dato for opphold må være lik eller etter dato for tilrettelegging fra lege eller jordmor', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    render(<HarOpphold submitCallback={lagre} />);
+
+    expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
+
+    const dato = screen.getAllByText('Fra og med')[1];
+    await userEvent.type(dato, lagNyDato('16.03.2020'));
+    fireEvent.blur(dato);
+
+    await userEvent.click(screen.getAllByText('Oppdater')[1]);
+
+    expect(
+      await screen.findByText('Dato kan ikke være før dato for tilrettelegging fra lege eller jordmor'),
+    ).toBeInTheDocument();
   });
 });

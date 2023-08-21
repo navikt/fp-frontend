@@ -16,12 +16,31 @@ const finnTekst = (intl: IntlShape, termindato: string, fom?: string): string =>
   return intl.formatMessage({ id: 'TilretteleggingInfoPanel.Dager' }, { dager });
 };
 
+const finnProsentSvangerskapspenger = (tilrettelegging: ArbeidsforholdTilretteleggingDato) => {
+  if (tilrettelegging.type === tilretteleggingType.HEL_TILRETTELEGGING) {
+    return 0;
+  }
+  if (tilrettelegging.type === tilretteleggingType.INGEN_TILRETTELEGGING) {
+    return 100;
+  }
+  return tilrettelegging.overstyrtUtbetalingsgrad || 0;
+};
+
+const finnProsentArbeid = (tilrettelegging: ArbeidsforholdTilretteleggingDato) => {
+  if (tilrettelegging.type === tilretteleggingType.HEL_TILRETTELEGGING) {
+    return 100;
+  }
+  if (tilrettelegging.type === tilretteleggingType.INGEN_TILRETTELEGGING) {
+    return 0;
+  }
+  return tilrettelegging.stillingsprosent || 0;
+};
+
 interface OwnProps {
   tilrettelegging: ArbeidsforholdTilretteleggingDato;
   termindato: string;
   erTomDatoTreUkerFørTermin: boolean;
   stillingsprosentArbeidsforhold: number;
-  prosentSvangerskapspenger?: number;
   tomDato: string;
 }
 
@@ -30,7 +49,6 @@ const TilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
   termindato,
   erTomDatoTreUkerFørTermin,
   stillingsprosentArbeidsforhold,
-  prosentSvangerskapspenger,
   tomDato,
 }) => {
   const intl = useIntl();
@@ -68,11 +86,8 @@ const TilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
                     <FormattedMessage
                       id="TilretteleggingInfoPanel.SvpOgArbeid"
                       values={{
-                        svp: prosentSvangerskapspenger || 0,
-                        arbeid:
-                          tilrettelegging.type === tilretteleggingType.HEL_TILRETTELEGGING
-                            ? 100
-                            : tilrettelegging.stillingsprosent,
+                        svp: finnProsentSvangerskapspenger(tilrettelegging),
+                        arbeid: finnProsentArbeid(tilrettelegging),
                       }}
                     />
                   </BodyShort>

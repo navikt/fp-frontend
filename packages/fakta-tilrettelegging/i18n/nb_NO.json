@@ -19,7 +19,7 @@
   "TilretteleggingForArbeidsgiverPanel.Perioder": "Perioder",
   "TilretteleggingForArbeidsgiverPanel.SkalHaSvpForArbeidsforhold": "Skal ha svangerskapspenger for arbeidsforholdet",
   "TilretteleggingForArbeidsgiverPanel.Velferdspermisjon": "Registrerte velferdspermisjoner",
-  "TilretteleggingForArbeidsgiverPanel.ErPermisjonGyldg": "Er permisjon gyldig",
+  "TilretteleggingForArbeidsgiverPanel.ErPermisjonGyldg": "Er permisjoner gyldige?",
 
   "TilretteleggingForm.Tilretteleggingsbehov": "Tilretteleggingsbehov",
   "TilretteleggingForm.FraOgMed": "Fra og med",
@@ -35,6 +35,9 @@
   "TilretteleggingForm.DuplikateDatoer": "Flere perioder med samme Fra og med",
   "TilretteleggingForm.EtterTermindato": "Dato kan ikke være senere enn tre uker før termindato",
   "TilretteleggingForm.ForForsteDato": "Dato kan ikke være før dato for tilrettelegging fra lege eller jordmor",
+  "TilretteleggingForm.Arbeidsprosent": "Arbeidsprosent",
+  "TilretteleggingForm.ArbeidsprosentBeskrivelse": "Dette er prosenten arbeidstaker skal jobbe mens hen mottar svangerskapspenger",
+  "TilretteleggingForm.ProsentSvpBeskrivelse": "Basert på arbeidsprosent",
 
   "TilretteleggingInfoPanel.Periode": "Periode på {periode}",
   "TilretteleggingInfoPanel.TreUker": "Frem til tre uker før termin",

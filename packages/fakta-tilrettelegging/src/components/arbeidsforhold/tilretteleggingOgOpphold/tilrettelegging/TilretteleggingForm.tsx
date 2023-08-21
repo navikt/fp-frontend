@@ -141,17 +141,20 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
     },
   });
 
+  const formValuesRecord = formMethods.watch();
+  const formValues = formValuesRecord[index];
+
   const lagreIForm = (values: FormValues) => {
-    const formValues = values[index];
+    const lagreFormValues = values[index];
     const kilde =
-      formValues.kilde === SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER || erNyPeriode
+      lagreFormValues.kilde === SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER || erNyPeriode
         ? SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER
         : SvpTilretteleggingFomKilde.ENDRET_AV_SAKSBEHANDLER;
     const v = {
-      ...formValues,
+      ...lagreFormValues,
       overstyrtUtbetalingsgrad:
-        formValues.overstyrtUtbetalingsgrad !== prosentSvangerskapspenger
-          ? formValues.overstyrtUtbetalingsgrad
+        lagreFormValues.overstyrtUtbetalingsgrad !== prosentSvangerskapspenger
+          ? lagreFormValues.overstyrtUtbetalingsgrad
           : undefined,
       kilde,
     };
@@ -170,8 +173,6 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
     return Promise.resolve();
   };
 
-  const formValues = formMethods.watch();
-
   return (
     <FormProvider {...formMethods}>
       <div
@@ -187,11 +188,10 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
         {!erNyPeriode && (
           <>
             <TilretteleggingInfoPanel
-              tilrettelegging={tilrettelegging}
+              tilrettelegging={formValues}
               termindato={termindato}
               erTomDatoTreUkerFørTermin={erTomDatoTreUkerFørTermin}
               stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
-              prosentSvangerskapspenger={prosentSvangerskapspenger}
               tomDato={tomDatoForTilrettelegging}
             />
             <VerticalSpacer twentyPx />
@@ -235,7 +235,7 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
               value: tilretteleggingType.INGEN_TILRETTELEGGING,
             },
           ]}
-          onChange={value => {
+          /* onChange={value => {
             if (value === tilretteleggingType.INGEN_TILRETTELEGGING) {
               // @ts-ignore Fiks
               formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, 100);
@@ -250,18 +250,45 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
               // @ts-ignore Fiks
               formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad);
             }
-          }}
+          }} */
         />
-        {formValues[index].type !== tilretteleggingType.HEL_TILRETTELEGGING && (
+        {formValues.type === tilretteleggingType.DELVIS_TILRETTELEGGING && (
           <>
+            {(tilrettelegging.stillingsprosent === undefined ||
+              erNyPeriode ||
+              formValues.kilde === SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER) && (
+              <>
+                <VerticalSpacer sixteenPx />
+                <NumberField
+                  name={`${index}.stillingsprosent`}
+                  className={styles.arbeidsprosent}
+                  readOnly={readOnly}
+                  label={intl.formatMessage({ id: 'TilretteleggingForm.Arbeidsprosent' })}
+                  description={intl.formatMessage({ id: 'TilretteleggingForm.ArbeidsprosentBeskrivelse' })}
+                  validate={[required, minValue0, maxValue100, hasValidDecimal]}
+                  forceTwoDecimalDigits
+                  onChange={value => {
+                    const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(
+                      stillingsprosentArbeidsforhold,
+                      velferdspermisjonprosent,
+                      value,
+                    );
+                    // @ts-ignore Fiks
+                    formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad);
+                  }}
+                />
+              </>
+            )}
             <VerticalSpacer sixteenPx />
             <NumberField
               name={`${index}.overstyrtUtbetalingsgrad`}
               className={styles.utbetalingsgrad}
               readOnly={readOnly}
               label={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvp' })}
+              description={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvpBeskrivelse' })}
               validate={[required, minValue0, maxValue100, hasValidDecimal]}
-              disabled={formValues[index].type === tilretteleggingType.INGEN_TILRETTELEGGING}
+              forceTwoDecimalDigits
+              disabled={formValues.stillingsprosent === undefined}
             />
           </>
         )}
