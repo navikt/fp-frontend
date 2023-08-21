@@ -112,11 +112,7 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                       </FlexColumn>
                       {arbeidsforhold.skalBrukes && visInfoAlert && (
                         <FlexColumn>
-                          <ExclamationmarkTriangleFillIcon
-                            title={intl.formatMessage({ id: 'ArbeidsforholdFieldArray.SvpIkkeBeregnet' })}
-                            color="var(--a-orange-600)"
-                            className={styles.image}
-                          />
+                          <ExclamationmarkTriangleFillIcon color="var(--a-orange-600)" className={styles.image} />
                         </FlexColumn>
                       )}
                     </FlexRow>

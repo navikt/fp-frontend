@@ -4,7 +4,8 @@ import userEvent from '@testing-library/user-event';
 import { composeStories } from '@storybook/react';
 import * as stories from './TilretteleggingFaktaIndex.stories';
 
-const { TilretteleggingMedVelferdspermisjon, HarOpphold } = composeStories(stories);
+const { TilretteleggingMedVelferdspermisjon, HarOpphold, SokerVarIkkeAnsattDaBehovetForTilretteleggingOppsto } =
+  composeStories(stories);
 
 const lagNyDato = (nyDato: string) => {
   const backspace = [...Array(10)].reduce(prev => `${prev}{backspace}`, '');
@@ -108,9 +109,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   });
 
   it('skal validere at en må velge minst ett arbeidsforhold og at alle velferdspermisjoner er vurdert', async () => {
-    const lagre = vi.fn(() => Promise.resolve());
-
-    const utils = render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+    const utils = render(<TilretteleggingMedVelferdspermisjon />);
 
     expect(
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
@@ -127,9 +126,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   });
 
   it('skal validere at en må ferdigstille tilretteleggingsperiode som er lagt til', async () => {
-    const lagre = vi.fn(() => Promise.resolve());
-
-    const utils = render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+    const utils = render(<TilretteleggingMedVelferdspermisjon />);
 
     expect(
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
@@ -145,9 +142,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   });
 
   it('skal validere at en må ferdigstille oppholdsperiode som er lagt til', async () => {
-    const lagre = vi.fn(() => Promise.resolve());
-
-    const utils = render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+    const utils = render(<TilretteleggingMedVelferdspermisjon />);
 
     expect(
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
@@ -163,9 +158,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   });
 
   it('skal validere at dato for tilrettelegging fra lege eller jordmor må være før termindato', async () => {
-    const lagre = vi.fn(() => Promise.resolve());
-
-    const utils = render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+    const utils = render(<TilretteleggingMedVelferdspermisjon />);
 
     expect(
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
@@ -183,9 +176,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   });
 
   it('skal validere at dato for tilrettelegging må være minst tre uker før termindato', async () => {
-    const lagre = vi.fn(() => Promise.resolve());
-
-    render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+    render(<TilretteleggingMedVelferdspermisjon />);
 
     expect(
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
@@ -201,9 +192,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   });
 
   it('skal validere at dato for tilrettelegging må være lik eller etter dato for tilrettelegging fra lege eller jordmor', async () => {
-    const lagre = vi.fn(() => Promise.resolve());
-
-    render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+    render(<TilretteleggingMedVelferdspermisjon />);
 
     expect(
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
@@ -221,9 +210,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   });
 
   it('skal validere alle tilrettelegginger har unike fra og med datoer', async () => {
-    const lagre = vi.fn(() => Promise.resolve());
-
-    render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+    render(<TilretteleggingMedVelferdspermisjon />);
 
     expect(
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
@@ -239,9 +226,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   });
 
   it('skal legge til ny tilretteleggingsperiode', async () => {
-    const lagre = vi.fn(() => Promise.resolve());
-
-    const utils = render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+    const utils = render(<TilretteleggingMedVelferdspermisjon />);
 
     expect(
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
@@ -274,9 +259,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   });
 
   it('skal slette tilretteleggingsperiode og da endre sluttdato for den perioden som er igjen', async () => {
-    const lagre = vi.fn(() => Promise.resolve());
-
-    render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+    render(<TilretteleggingMedVelferdspermisjon />);
 
     expect(
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
@@ -396,9 +379,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   });
 
   it('skal slette oppholdsperiode', async () => {
-    const lagre = vi.fn(() => Promise.resolve());
-
-    render(<HarOpphold submitCallback={lagre} />);
+    render(<HarOpphold />);
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
@@ -408,9 +389,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   });
 
   it('skal validere at opphold ikke har overlappende fom-dato med andre perioder', async () => {
-    const lagre = vi.fn(() => Promise.resolve());
-
-    render(<HarOpphold submitCallback={lagre} />);
+    render(<HarOpphold />);
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
@@ -431,9 +410,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   });
 
   it('skal validere at dato for opphold må være minst tre uker før termindato', async () => {
-    const lagre = vi.fn(() => Promise.resolve());
-
-    render(<HarOpphold submitCallback={lagre} />);
+    render(<HarOpphold />);
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
@@ -446,10 +423,8 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
     expect(await screen.findByText('Dato kan ikke være senere enn tre uker før termindato')).toBeInTheDocument();
   });
 
-  it.skip('skal validere at dato for opphold må være lik eller etter dato for tilrettelegging fra lege eller jordmor', async () => {
-    const lagre = vi.fn(() => Promise.resolve());
-
-    render(<HarOpphold submitCallback={lagre} />);
+  it('skal validere at dato for opphold må være lik eller etter dato for første tilrettelegging', async () => {
+    render(<HarOpphold />);
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
@@ -459,8 +434,65 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
 
     await userEvent.click(screen.getAllByText('Oppdater')[1]);
 
+    expect(await screen.findByText('Dato kan ikke være før første tilrettelegging')).toBeInTheDocument();
+  });
+
+  it('skal validere at opphold ikke overlapper med annet opphold', async () => {
+    render(<HarOpphold />);
+
+    expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
+
+    const tomDato = screen.getAllByText('Til og med')[0];
+    await userEvent.type(tomDato, lagNyDato('26.09.2020'));
+    fireEvent.blur(tomDato);
+
+    await userEvent.click(screen.getAllByText('Oppdater')[1]);
+
+    expect(await screen.findByText('Perioder kan ikke overlappe i tid')).toBeInTheDocument();
+  });
+
+  it('skal validere at tom-datoen til opphold er etter fom-datoen', async () => {
+    render(<HarOpphold />);
+
+    expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
+
+    const dato = screen.getAllByText('Fra og med')[1];
+    await userEvent.type(dato, lagNyDato('21.09.2020'));
+    fireEvent.blur(dato);
+
+    await userEvent.click(screen.getAllByText('Oppdater')[1]);
+
+    expect(await screen.findByText('Dato kan ikke være før fra og med')).toBeInTheDocument();
+  });
+
+  it('skal ikke kunne endre eller slette opphold som kommer fra søknaden', async () => {
+    render(<HarOpphold />);
+
+    expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
+
+    // Kun for manuelt lagt til opphold kan en velge "sykepenger...". Derfor kun ett innslag i DOM
+    expect(screen.getByText('Sykepenger 100% i perioden med svangerskapspenger')).toBeInTheDocument();
+
+    // Kun for tilretteleggingene og manuelt lagt til opphold kan en slette.
+    expect(screen.getAllByText('Slett periode')).toHaveLength(3);
+  });
+
+  it('skal vise advarsel når søker ikke var ansatt da behovet for tilrettelegging oppstod', async () => {
+    render(<SokerVarIkkeAnsattDaBehovetForTilretteleggingOppsto />);
+
+    expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
+
+    expect(screen.getAllByText('Svangerskapspenger kan ikke beregnes')).toHaveLength(2);
     expect(
-      await screen.findByText('Dato kan ikke være før dato for tilrettelegging fra lege eller jordmor'),
-    ).toBeInTheDocument();
+      screen.getAllByText(
+        'Søker var ikke ansatt da behovet for tilrettelegging oppsto. Vurder om du skal kontakte arbeidsgiver ' +
+          'eller søker for avklaring. Hvis du innvilger behandlingen nå, vil bruker få 0 kroner utbetalt.',
+      ),
+    ).toHaveLength(2);
+
+    await userEvent.click(screen.getAllByText('Skal ha svangerskapspenger for arbeidsforholdet')[0]);
+
+    expect(await screen.findByText('Skal ikke ha svangerskapspenger')).toBeInTheDocument();
+    expect(screen.getByText('Svangerskapspenger kan ikke beregnes')).toBeInTheDocument();
   });
 });
