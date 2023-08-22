@@ -8,12 +8,28 @@ import { DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@
 import { ArbeidsforholdTilretteleggingDato, SvpAvklartOppholdPeriode } from '@navikt/fp-types';
 import { dateRangesNotOverlapping, hasValidDate, required } from '@navikt/ft-form-validators';
 
-const validerTomEtterFom = (intl: IntlShape, getValues: UseFormGetValues<any>, fomState) => (tom?: string) =>
-  dayjs(tom).isBefore(getValues(fomState)) ? intl.formatMessage({ id: 'OppholdPeriodePanel.TomForFom' }) : null;
+const validerTomEtterFom =
+  (intl: IntlShape, getValues: UseFormGetValues<any>, fomState, forVisning: boolean) => (tom?: string) => {
+    if (forVisning) {
+      return null;
+    }
+
+    return dayjs(tom).isBefore(getValues(fomState))
+      ? intl.formatMessage({ id: 'OppholdPeriodePanel.TomForFom' })
+      : null;
+  };
 
 const validerAtPeriodeErGyldig =
-  (intl: IntlShape, getValues: UseFormGetValues<any>, tilrettelegginger: ArbeidsforholdTilretteleggingDato[]) =>
+  (
+    intl: IntlShape,
+    getValues: UseFormGetValues<any>,
+    tilrettelegginger: ArbeidsforholdTilretteleggingDato[],
+    forVisning: boolean,
+  ) =>
   (dato?: string) => {
+    if (forVisning) {
+      return null;
+    }
     const termindato = getValues('termindato');
     if (dayjs(dato).isAfter(dayjs(termindato).subtract(3, 'weeks').subtract(1, 'day'))) {
       return intl.formatMessage({ id: 'OppholdPeriodePanel.EtterTermindato' });
@@ -30,11 +46,15 @@ const validerAtPeriodeErGyldig =
     return null;
   };
 
-const validerAtPeriodeIkkeOverlapper = (getValues: UseFormGetValues<any>, fieldPrefix: string) => () => {
-  const perioder = getValues(fieldPrefix);
-  const periodeMap = perioder.map(({ fom, tom }) => [fom, tom]);
-  return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
-};
+const validerAtPeriodeIkkeOverlapper =
+  (getValues: UseFormGetValues<any>, fieldPrefix: string, forVisning: boolean) => () => {
+    if (forVisning) {
+      return null;
+    }
+    const perioder = getValues(fieldPrefix);
+    const periodeMap = perioder.map(({ fom, tom }) => [fom, tom]);
+    return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
+  };
 
 export const defaultFormValues = {
   type: undefined,
@@ -73,6 +93,8 @@ const OppholdPeriodePanel: FunctionComponent<OwnProps> = ({
 
   const [erRadÅpen, setErRadÅpen] = useState(erNyPeriode);
 
+  const { forVisning } = periode;
+
   return (
     <Table.ExpandableRow
       key={fieldId}
@@ -100,8 +122,8 @@ const OppholdPeriodePanel: FunctionComponent<OwnProps> = ({
                 validate={[
                   hasValidDate,
                   required,
-                  validerAtPeriodeErGyldig(intl, getValues, tilrettelegginger),
-                  validerAtPeriodeIkkeOverlapper(getValues, fieldPrefix),
+                  validerAtPeriodeErGyldig(intl, getValues, tilrettelegginger, forVisning),
+                  validerAtPeriodeIkkeOverlapper(getValues, fieldPrefix, forVisning),
                 ]}
                 onChange={() => (isSubmitted ? trigger() : undefined)}
               />
@@ -114,9 +136,9 @@ const OppholdPeriodePanel: FunctionComponent<OwnProps> = ({
                 validate={[
                   hasValidDate,
                   required,
-                  validerTomEtterFom(intl, getValues, `${fieldPrefix}.${index}.fom`),
-                  validerAtPeriodeErGyldig(intl, getValues, tilrettelegginger),
-                  validerAtPeriodeIkkeOverlapper(getValues, fieldPrefix),
+                  validerTomEtterFom(intl, getValues, `${fieldPrefix}.${index}.fom`, forVisning),
+                  validerAtPeriodeErGyldig(intl, getValues, tilrettelegginger, forVisning),
+                  validerAtPeriodeIkkeOverlapper(getValues, fieldPrefix, forVisning),
                 ]}
                 onChange={() => (isSubmitted ? trigger() : undefined)}
               />
