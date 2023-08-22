@@ -56,7 +56,7 @@ const VelferdspermisjonForm: FunctionComponent<OwnProps> = ({
           marginTop: '-8px',
           marginBottom: '-8px',
           marginRight: '-48px',
-          padding: '30px',
+          padding: '24px',
         }}
       >
         <RadioGroupPanel

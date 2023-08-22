@@ -10,7 +10,7 @@ import {
   ArbeidsgiverOpplysningerPerId,
 } from '@navikt/fp-types';
 
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import styles from './arbeidsforholdFieldArray.module.css';
 import ArbeidsforholdPanel from './ArbeidsforholdPanel';
 
@@ -51,8 +51,6 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
   arbeidsgiverOpplysningerPerId,
   readOnly,
 }) => {
-  const intl = useIntl();
-
   const { control } = useFormContext();
   const { fields } = useFieldArray({
     control,

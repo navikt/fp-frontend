@@ -113,11 +113,11 @@ const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({
           readOnly={readOnly}
         />
       )}
-      <VerticalSpacer thirtyTwoPx />
+      <VerticalSpacer fourtyPx />
       <Label size="small">
         <FormattedMessage id="TilretteleggingForArbeidsgiverPanel.Perioder" />
       </Label>
-      <VerticalSpacer eightPx />
+      <VerticalSpacer sixteenPx />
       <TilretteleggingOgOppholdPerioderPanel
         arbeidsforhold={arbeidsforhold}
         arbeidsforholdIndex={arbeidsforholdIndex}

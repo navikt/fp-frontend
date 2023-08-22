@@ -156,7 +156,7 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
                 ]
               : [<FormattedMessage id="TilretteleggingFaktaForm.Aksjonspunkt" key="svangerskapspengerAp" />]}
           </AksjonspunktHelpTextHTML>
-          <VerticalSpacer thirtyTwoPx />
+          <VerticalSpacer fourtyPx />
         </>
       )}
       <FlexContainer wrap>

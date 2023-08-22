@@ -64,11 +64,11 @@ const TilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
     <div
       style={{
         background: '#E5E5E5',
-        marginLeft: '-30px',
-        marginTop: '-30px',
-        marginRight: '-30px',
+        marginLeft: '-24px',
+        marginTop: '-24px',
+        marginRight: '-24px',
         paddingBottom: '10px',
-        paddingLeft: '20px',
+        paddingLeft: '20x',
         paddingRight: '50px',
         paddingTop: '10px',
       }}

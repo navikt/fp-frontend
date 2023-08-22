@@ -133,7 +133,7 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
       </Table>
       {!readOnly && (
         <>
-          <VerticalSpacer thirtyTwoPx />
+          <VerticalSpacer fourtyPx />
           <FlexContainer>
             <FlexRow>
               <FlexColumn>
