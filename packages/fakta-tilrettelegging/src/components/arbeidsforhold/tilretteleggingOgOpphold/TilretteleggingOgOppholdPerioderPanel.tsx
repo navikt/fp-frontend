@@ -131,35 +131,39 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
           })}
         </Table.Body>
       </Table>
-      <VerticalSpacer thirtyTwoPx />
-      <FlexContainer>
-        <FlexRow>
-          <FlexColumn>
-            <Button
-              size="small"
-              variant="secondary"
-              type="button"
-              icon={<PlusIcon aria-hidden />}
-              onClick={leggTilTilrettelegging}
-              disabled={erLeggTilKnapperDisablet}
-            >
-              <FormattedMessage id="TilretteleggingFieldArray.LeggTilTilrettelegging" />
-            </Button>
-          </FlexColumn>
-          <FlexColumn>
-            <Button
-              size="small"
-              variant="secondary"
-              onClick={leggTilOpphold}
-              icon={<PlusIcon aria-hidden />}
-              type="button"
-              disabled={erLeggTilKnapperDisablet}
-            >
-              <FormattedMessage id="TilretteleggingFieldArray.LeggTilOpphold" />
-            </Button>
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
+      {!readOnly && (
+        <>
+          <VerticalSpacer thirtyTwoPx />
+          <FlexContainer>
+            <FlexRow>
+              <FlexColumn>
+                <Button
+                  size="small"
+                  variant="secondary"
+                  type="button"
+                  icon={<PlusIcon aria-hidden />}
+                  onClick={leggTilTilrettelegging}
+                  disabled={erLeggTilKnapperDisablet}
+                >
+                  <FormattedMessage id="TilretteleggingFieldArray.LeggTilTilrettelegging" />
+                </Button>
+              </FlexColumn>
+              <FlexColumn>
+                <Button
+                  size="small"
+                  variant="secondary"
+                  onClick={leggTilOpphold}
+                  icon={<PlusIcon aria-hidden />}
+                  type="button"
+                  disabled={erLeggTilKnapperDisablet}
+                >
+                  <FormattedMessage id="TilretteleggingFieldArray.LeggTilOpphold" />
+                </Button>
+              </FlexColumn>
+            </FlexRow>
+          </FlexContainer>
+        </>
+      )}
     </>
   );
 };

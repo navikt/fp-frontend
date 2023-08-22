@@ -64,7 +64,7 @@ const OppholdPeriodeTabellRad: FunctionComponent<OwnProps> = ({
   const oppdaterOpphold = (values: SvpAvklartOppholdPeriode) => {
     setOpen(false);
     setLeggTilKnapperDisablet(false);
-    setValue(navn, values);
+    setValue(navn, values, { shouldDirty: true });
   };
 
   const avbrytEditering = () => {

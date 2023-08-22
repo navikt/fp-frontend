@@ -86,7 +86,7 @@ const TilretteleggingPeriodeTabellRad: FunctionComponent<OwnProps> = ({
   const oppdaterTilrettelegging = (values: ArbeidsforholdTilretteleggingDato) => {
     setOpen(false);
     setLeggTilKnapperDisablet(false);
-    setValue(navn, values);
+    setValue(navn, values, { shouldDirty: true });
   };
 
   const avbrytEditering = () => {

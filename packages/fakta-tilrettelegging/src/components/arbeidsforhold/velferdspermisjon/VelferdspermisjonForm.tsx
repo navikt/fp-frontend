@@ -39,7 +39,9 @@ const VelferdspermisjonForm: FunctionComponent<OwnProps> = ({
 
   const lagreForm = (values: FormValues) => {
     const formValues = values[permisjonIndex];
-    setValue(`arbeidsforhold.${arbeidsforholdIndex}.velferdspermisjoner.${permisjonIndex}`, formValues);
+    setValue(`arbeidsforhold.${arbeidsforholdIndex}.velferdspermisjoner.${permisjonIndex}`, formValues, {
+      shouldDirty: true,
+    });
     formMethods.reset(values);
     lukkRad();
     return Promise.resolve();

@@ -235,22 +235,6 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
               value: tilretteleggingType.INGEN_TILRETTELEGGING,
             },
           ]}
-          /* onChange={value => {
-            if (value === tilretteleggingType.INGEN_TILRETTELEGGING) {
-              // @ts-ignore Fiks
-              formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, 100);
-            }
-            if (value === tilretteleggingType.DELVIS_TILRETTELEGGING) {
-              const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(
-                stillingsprosentArbeidsforhold,
-                velferdspermisjonprosent,
-                // Har alltid stillingsprosent her. Bør fikse sjekk mot type så || 0 er unødvendig
-                tilrettelegging.stillingsprosent || 0,
-              );
-              // @ts-ignore Fiks
-              formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad);
-            }
-          }} */
         />
         {formValues.type === tilretteleggingType.DELVIS_TILRETTELEGGING && (
           <>
@@ -274,7 +258,7 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
                       value,
                     );
                     // @ts-ignore Fiks
-                    formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad);
+                    formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad, { shouldDirty: true });
                   }}
                 />
               </>
@@ -293,36 +277,38 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
           </>
         )}
         <VerticalSpacer thirtyTwoPx />
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <Button
-                size="small"
-                variant="primary"
-                type="button"
-                disabled={!formMethods.formState.isDirty || false}
-                loading={false}
-                onClick={formMethods.handleSubmit((values: FormValues) => lagreIForm(values))}
-              >
-                <FormattedMessage id={erNyPeriode ? 'TilretteleggingForm.LeggTil' : 'TilretteleggingForm.Oppdater'} />
-              </Button>
-            </FlexColumn>
-            <FlexColumn>
-              <Button size="small" variant="secondary" onClick={avbryt} type="button">
-                <FormattedMessage
-                  id={erNyPeriode ? 'TilretteleggingForm.AvsluttOgSlett' : 'TilretteleggingForm.Avbryt'}
-                />
-              </Button>
-            </FlexColumn>
-            {!erNyPeriode && (
-              <FlexColumn className={styles.pushRight}>
-                <Button size="small" variant="secondary" onClick={slett} type="button">
-                  <FormattedMessage id="TilretteleggingForm.SlettPeriode" />
+        {!readOnly && (
+          <FlexContainer>
+            <FlexRow>
+              <FlexColumn>
+                <Button
+                  size="small"
+                  variant="primary"
+                  type="button"
+                  disabled={!formMethods.formState.isDirty || false}
+                  loading={false}
+                  onClick={formMethods.handleSubmit((values: FormValues) => lagreIForm(values))}
+                >
+                  <FormattedMessage id={erNyPeriode ? 'TilretteleggingForm.LeggTil' : 'TilretteleggingForm.Oppdater'} />
                 </Button>
               </FlexColumn>
-            )}
-          </FlexRow>
-        </FlexContainer>
+              <FlexColumn>
+                <Button size="small" variant="secondary" onClick={avbryt} type="button">
+                  <FormattedMessage
+                    id={erNyPeriode ? 'TilretteleggingForm.AvsluttOgSlett' : 'TilretteleggingForm.Avbryt'}
+                  />
+                </Button>
+              </FlexColumn>
+              {!erNyPeriode && (
+                <FlexColumn className={styles.pushRight}>
+                  <Button size="small" variant="secondary" onClick={slett} type="button">
+                    <FormattedMessage id="TilretteleggingForm.SlettPeriode" />
+                  </Button>
+                </FlexColumn>
+              )}
+            </FlexRow>
+          </FlexContainer>
+        )}
       </div>
     </FormProvider>
   );

@@ -188,7 +188,7 @@ const OppholdForm: FunctionComponent<OwnProps> = ({
           ]}
         />
         <VerticalSpacer thirtyTwoPx />
-        {!opphold.forVisning && (
+        {!opphold.forVisning && !readOnly && (
           <FlexContainer>
             <FlexRow>
               <FlexColumn>
