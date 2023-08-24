@@ -280,7 +280,7 @@
       "dokumentLinks": [
         {
           "tag": "Søknad",
-          "url": "http://172.18.0.11:8080/fpsak/api/dokument/hent-dokument/v2?journalpostId=6982308&dokumentId=6982308",
+          "url": "http://172.18.0.11:8080/fpsak/api/dokument/hent-dokument?journalpostId=6982308&dokumentId=6982308",
           "journalpostId": "6982308",
           "dokumentId": "6982308",
           "utgått": false

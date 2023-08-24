@@ -6,7 +6,7 @@ import { HistorikkInnslagDokumentLink } from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import styles from './historikkDokumentLenke.module.css';
 
-const DOCUMENT_SERVER_URL = '/fpsak/api/dokument/hent-dokument/v2';
+const DOCUMENT_SERVER_URL = '/fpsak/api/dokument/hent-dokument';
 
 interface OwnProps {
   dokumentLenke: HistorikkInnslagDokumentLink;

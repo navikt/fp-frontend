@@ -10,7 +10,7 @@ export const AINNTEKT_URL = 'https://arbeid-og-inntekt.nais.adeo.no'; // /?0#!em
 export const AAREG_URL = 'https://arbeid-og-inntekt.nais.adeo.no/';
 
 export const hentDokumentLenke = (saksnummer: string, journalpostId: string, dokumentId: string): string =>
-  `/fpsak/api/dokument/hent-dokument/v2?saksnummer=${saksnummer}&journalpostId=${journalpostId}&dokumentId=${dokumentId}`;
+  `/fpsak/api/dokument/hent-dokument?saksnummer=${saksnummer}&journalpostId=${journalpostId}&dokumentId=${dokumentId}`;
 
 export const hentVedtakDokumentLenke = (behandlingUuid: string): string =>
   `/fpsak/api/vedtak/hent-vedtaksdokument?behandlingId=${behandlingUuid}`;
