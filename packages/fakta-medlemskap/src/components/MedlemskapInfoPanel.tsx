@@ -144,9 +144,12 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps> = ({
     perioder.length > 1 ? finnFørstePeriodeMedUløstAp(perioder) : perioder[0],
   );
 
-  const velgPeriodeCallback = useCallback((_p, _id, periode: MedlemPeriode): void => {
-    setValgtPeriode(periode);
-  }, []);
+  const velgPeriodeCallback = useCallback(
+    (_p: React.KeyboardEvent | React.MouseEvent, _id?: string, periode?: MedlemPeriode): void => {
+      setValgtPeriode(periode);
+    },
+    [],
+  );
 
   const updateOppholdInntektPeriode = useCallback(
     (vurderingsdato: string, values: OppholdFormValues): void => {

@@ -22,7 +22,7 @@ import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import questionNormalUrl from '../../images/question_normal.svg';
 import questionHoverUrl from '../../images/question_hover.svg';
 import InntektsmeldingOpplysningerPanel from '../felles/InntektsmeldingOpplysningerPanel';
-import ArbeidsforholdOgInntekt from '../../types/arbeidsforholdOgInntekt';
+import ArbeidsforholdOgInntektRadData from '../../types/arbeidsforholdOgInntekt';
 
 import styles from './manglendeArbeidsforholdForm.module.css';
 import { useSetDirtyForm } from '../../DirtyFormProvider';
@@ -40,20 +40,22 @@ type FormValues = {
   begrunnelse?: string;
 };
 
-const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (tom?: string) =>
-  tom ? dateAfterOrEqual(getValues('fom'))(tom) : null;
+const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (tom?: string) => {
+  const fom = getValues('fom');
+  return fom && tom ? dateAfterOrEqual(fom)(tom) : null;
+};
 
 interface OwnProps {
   saksnummer: string;
   behandlingUuid: string;
   arbeidsgiverNavn: string;
   inntektsmelding: Inntektsmelding;
-  radData: ArbeidsforholdOgInntekt;
+  radData: ArbeidsforholdOgInntektRadData;
   isReadOnly: boolean;
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   lukkArbeidsforholdRad: () => void;
-  oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>;
+  oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void;
   skalViseArbeidsforholdId: boolean;
 }
 
@@ -137,18 +139,18 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
           arbeidsgiverNavn,
           arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
           vurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
-          begrunnelse: formValues.begrunnelse,
-          fom: formValues.fom,
+          begrunnelse: formValues.begrunnelse!,
+          fom: formValues.fom!,
           tom: formValues.tom,
-          stillingsprosent: formValues.stillingsprosent,
+          stillingsprosent: formValues.stillingsprosent!,
         })
           .then(oppdater)
           .finally(() => formMethods.reset(formValues));
       } else {
         lagreVurdering({
           behandlingUuid,
-          vurdering: formValues.saksbehandlersVurdering,
-          begrunnelse: formValues.begrunnelse,
+          vurdering: formValues.saksbehandlersVurdering!,
+          begrunnelse: formValues.begrunnelse!,
           arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
           internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
         })
@@ -255,8 +257,8 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                   <InputField
                     name="stillingsprosent"
                     label={<FormattedMessage id="ManglendeOpplysningerForm.Stillingsprosent" />}
-                    parse={(value: string) => {
-                      const parsedValue = parseInt(value, 10);
+                    parse={value => {
+                      const parsedValue = parseInt(value.toString(), 10);
                       return Number.isNaN(parsedValue) ? value : parsedValue;
                     }}
                     validate={[required, hasValidInteger, minValue1, maxValue100]}

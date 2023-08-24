@@ -6,7 +6,7 @@ type AvklarVergeAp = {
   navn: string;
   fnr: string;
   gyldigFom: string;
-  gyldigTom: string;
+  gyldigTom?: string;
   vergeType: string;
   organisasjonsnummer: string;
 } & AksjonspunktTilBekreftelse<AksjonspunktCode.AVKLAR_VERGE>;

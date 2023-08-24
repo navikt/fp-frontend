@@ -115,7 +115,7 @@ const ArbeidsforholdField: FunctionComponent<OwnProps> = ({
                   {arbeidsforhold.arbeidsgiverIdent && (
                     <Detail size="small">
                       (
-                      {arbeidsgiverOpplysinger.erPrivatPerson ? (
+                      {arbeidsgiverOpplysinger.erPrivatPerson && arbeidsgiverOpplysinger.fødselsdato ? (
                         <DateLabel dateString={arbeidsgiverOpplysinger.fødselsdato} />
                       ) : (
                         arbeidsforhold.arbeidsgiverIdent
@@ -165,7 +165,7 @@ const ArbeidsforholdField: FunctionComponent<OwnProps> = ({
               <VerticalSpacer sixteenPx />
               <FlexRow>
                 <FlexColumn className={styles.firstCol}>
-                  {visArbeidsforholdId && (
+                  {visArbeidsforholdId && arbeidsforhold.eksternArbeidsforholdId && (
                     <>
                       <FlexRow>
                         <FlexColumn>
@@ -217,19 +217,23 @@ const ArbeidsforholdField: FunctionComponent<OwnProps> = ({
                   )}
                 </FlexColumn>
                 <FlexColumn>
-                  <Label size="small">
-                    {`${getKodeverknavnFraKode(
-                      alleKodeverk,
-                      KodeverkType.PERMISJONSBESKRIVELSE_TYPE,
-                      arbeidsforhold.permisjonOgMangel.type,
-                    )} 100%`}
-                  </Label>
-                  <BodyShort size="small">
-                    <PeriodLabel
-                      dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom}
-                      dateStringTom={undefined}
-                    />
-                  </BodyShort>
+                  {arbeidsforhold.permisjonOgMangel && (
+                    <>
+                      <Label size="small">
+                        {`${getKodeverknavnFraKode(
+                          alleKodeverk,
+                          KodeverkType.PERMISJONSBESKRIVELSE_TYPE,
+                          arbeidsforhold.permisjonOgMangel.type,
+                        )} 100%`}
+                      </Label>
+                      <BodyShort size="small">
+                        <PeriodLabel
+                          dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom}
+                          dateStringTom={undefined}
+                        />
+                      </BodyShort>
+                    </>
+                  )}
                 </FlexColumn>
               </FlexRow>
             </FlexContainer>

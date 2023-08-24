@@ -22,12 +22,12 @@ export type MedlemPeriode = Readonly<{
   personopplysningAnnenPart?: PersonopplysningMedlem;
   aksjonspunkter: string[];
   årsaker: string[];
-  oppholdsrettVurdering: boolean;
-  erEosBorger: boolean;
-  lovligOppholdVurdering: boolean;
-  bosattVurdering: boolean;
-  medlemskapManuellVurderingType: string;
-  begrunnelse: string;
+  oppholdsrettVurdering?: boolean;
+  erEosBorger?: boolean;
+  lovligOppholdVurdering?: boolean;
+  bosattVurdering?: boolean;
+  medlemskapManuellVurderingType?: string;
+  begrunnelse?: string;
 }>;
 
 export type Oppholdstillatelse = Readonly<{

@@ -42,7 +42,7 @@ const Template: StoryFn<{
   lagreVurdering: (data: any) => Promise<void>;
   registrerArbeidsforhold: (data: any) => Promise<void>;
   åpneForNyVurdering: (data: any) => Promise<void>;
-  settBehandlingPåVentCallback: (params: { frist: string; ventearsak: string }) => Promise<any>;
+  settBehandlingPåVentCallback: (params: { frist?: string; ventearsak: string }) => Promise<any>;
   erOverstyrer?: boolean;
   readOnly?: boolean;
 }> = ({

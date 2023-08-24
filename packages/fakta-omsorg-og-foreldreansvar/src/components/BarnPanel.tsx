@@ -30,15 +30,18 @@ const BarnPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
       title={intl.formatMessage({ id: 'BarnPanel.BarnDetSøkesOm' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.OMSORGSOVERTAKELSE]}
     >
-      {Object.keys(adopsjonFodelsedatoer).map(key => (
-        <React.Fragment key={`${key}`}>
-          <Label size="small">
-            <FormattedMessage id="BarnPanel.ChildNumberBornData" values={{ childNumber: key }} />
-          </Label>
-          <BodyShort size="small">{moment(adopsjonFodelsedatoer[key]).format(DDMMYYYY_DATE_FORMAT)}</BodyShort>
-          <VerticalSpacer eightPx />
-        </React.Fragment>
-      ))}
+      {adopsjonFodelsedatoer &&
+        Object.keys(adopsjonFodelsedatoer).map(key => (
+          <React.Fragment key={`${key}`}>
+            <Label size="small">
+              <FormattedMessage id="BarnPanel.ChildNumberBornData" values={{ childNumber: key }} />
+            </Label>
+            <BodyShort size="small">
+              {moment(adopsjonFodelsedatoer[parseInt(key, 10)]).format(DDMMYYYY_DATE_FORMAT)}
+            </BodyShort>
+            <VerticalSpacer eightPx />
+          </React.Fragment>
+        ))}
     </FaktaGruppe>
   );
 };

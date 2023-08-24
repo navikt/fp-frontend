@@ -78,7 +78,7 @@ export const VisUttaksperiodeUtenAksjonspunkt = Template.bind({});
 VisUttaksperiodeUtenAksjonspunkt.args = {
   aksjonspunkter: [],
   ytelsefordeling: {
-    overstyrtOmsorg: null,
+    overstyrtOmsorg: undefined,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
       skalAvklareAnnenForelderRettEØS: false,
@@ -92,7 +92,7 @@ VisUttaksperiodeUtenAksjonspunkt.args = {
       fom: '2022-11-12',
       tom: '2022-12-01',
       uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
-      arbeidsforhold: null,
+      arbeidsforhold: undefined,
       flerbarnsdager: false,
       periodeKilde: 'SØKNAD',
     },
@@ -105,7 +105,7 @@ export const VisUttaksperiodeUtenAksjonspunktKanOverstyre = Template.bind({});
 VisUttaksperiodeUtenAksjonspunktKanOverstyre.args = {
   aksjonspunkter: [],
   ytelsefordeling: {
-    overstyrtOmsorg: null,
+    overstyrtOmsorg: undefined,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
       skalAvklareAnnenForelderRettEØS: false,
@@ -119,7 +119,7 @@ VisUttaksperiodeUtenAksjonspunktKanOverstyre.args = {
       fom: '2022-11-12',
       tom: '2022-12-01',
       uttakPeriodeType: uttakPeriodeType.MODREKVOTE,
-      arbeidsforhold: null,
+      arbeidsforhold: undefined,
       flerbarnsdager: false,
       periodeKilde: 'SØKNAD',
     },
@@ -139,7 +139,7 @@ VisUttaksperiodeMedAksjonspunkt.args = {
     },
   ],
   ytelsefordeling: {
-    overstyrtOmsorg: null,
+    overstyrtOmsorg: undefined,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
       skalAvklareAnnenForelderRettEØS: false,
@@ -202,7 +202,7 @@ VisUtsettelseperiodeMedAksjonspunkt.args = {
     },
   ],
   ytelsefordeling: {
-    overstyrtOmsorg: null,
+    overstyrtOmsorg: undefined,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
       skalAvklareAnnenForelderRettEØS: false,
@@ -234,7 +234,7 @@ VisOverføringsperiodeMedAksjonspunkt.args = {
     },
   ],
   ytelsefordeling: {
-    overstyrtOmsorg: null,
+    overstyrtOmsorg: undefined,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
       skalAvklareAnnenForelderRettEØS: false,
@@ -267,7 +267,7 @@ VisAksjonspunktDerIngenPerioderFinnes.args = {
     },
   ],
   ytelsefordeling: {
-    overstyrtOmsorg: null,
+    overstyrtOmsorg: undefined,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
       skalAvklareAnnenForelderRettEØS: false,
@@ -292,7 +292,7 @@ VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering.args = {
     },
   ],
   ytelsefordeling: {
-    overstyrtOmsorg: null,
+    overstyrtOmsorg: undefined,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
       skalAvklareAnnenForelderRettEØS: false,
@@ -330,7 +330,7 @@ VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering.args = {
     },
   ],
   ytelsefordeling: {
-    overstyrtOmsorg: null,
+    overstyrtOmsorg: undefined,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
       skalAvklareAnnenForelderRettEØS: false,
@@ -368,7 +368,7 @@ VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet.args = {
     },
   ],
   ytelsefordeling: {
-    overstyrtOmsorg: null,
+    overstyrtOmsorg: undefined,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
       skalAvklareAnnenForelderRettEØS: false,
@@ -409,7 +409,7 @@ VisBegrunnelseFraTidligereUtgaveAvPanel.args = {
     },
   ],
   ytelsefordeling: {
-    overstyrtOmsorg: null,
+    overstyrtOmsorg: undefined,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
       skalAvklareAnnenForelderRettEØS: false,
@@ -451,7 +451,7 @@ VisUttaksperiodeMedAksjonspunktForFar.args = {
     },
   ],
   ytelsefordeling: {
-    overstyrtOmsorg: null,
+    overstyrtOmsorg: undefined,
     rettigheterAnnenforelder: {
       skalAvklareAnnenforelderUføretrygd: false,
       skalAvklareAnnenForelderRettEØS: false,

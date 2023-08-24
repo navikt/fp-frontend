@@ -172,7 +172,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   const [visSettPåVentModal, settVisSettPåVentModal] = useState(false);
   const [erOverstyrt, setErOverstyrt] = useState(false);
 
-  const [tabellRader, setTabellData] = useState(
+  const [tabellRader, setTabellData] = useState<ArbeidsforholdOgInntektRadData[]>(
     formData || byggTabellStruktur(arbeidOgInntekt, arbeidsgiverOpplysningerPerId),
   );
   const [åpneRadIndexer, settÅpneRadIndexer] = useState(finnUløstArbeidsforholdIndex(tabellRader));
@@ -199,9 +199,8 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
 
   const tableRef = useRef<HTMLTableElement>(null);
   const oppdaterTabellData = useCallback(
-    (data: ArbeidsforholdOgInntektRadData[]) => {
+    (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => {
       setTabellData(data);
-      // @ts-ignore Fiks
       settÅpneRadIndexer(finnUløstArbeidsforholdIndex(data(tabellRader)));
       tableRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
     },

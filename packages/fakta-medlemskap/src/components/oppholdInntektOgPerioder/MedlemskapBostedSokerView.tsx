@@ -71,7 +71,7 @@ export const MedlemskapBostedSokerView: FunctionComponent<OwnProps> = ({
             {personopplysninger.region && personopplysninger.region !== region.UDEFINERT && (
               <div className={styles.etikettMargin}>
                 <Tooltip content={intl.formatMessage({ id: 'BostedSokerView.Region' })} alignBottom>
-                  <Tag variant="warning">{regionTypes.find(r => r.kode === personopplysninger.region).navn}</Tag>
+                  <Tag variant="warning">{regionTypes.find(r => r.kode === personopplysninger.region)?.navn}</Tag>
                 </Tooltip>
               </div>
             )}

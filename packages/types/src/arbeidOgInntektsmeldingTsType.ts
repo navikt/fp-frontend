@@ -21,7 +21,7 @@ export type Inntektsmelding = Readonly<{
   kontaktpersonNavn: string;
   kontaktpersonNummer: string;
   journalpostId: string;
-  dokumentId?: string;
+  dokumentId: string;
   motattDato: string;
   årsak?: AksjonspunktÅrsak;
   saksbehandlersVurdering?: string;

@@ -14,9 +14,9 @@ export type IAYInntektsmelding = Readonly<{
 }>;
 
 type InntektArbeidYtelse = Readonly<{
-  relatertTilgrensendeYtelserForSoker?: RelatertTilgrensedYtelse[];
-  relatertTilgrensendeYtelserForAnnenForelder?: RelatertTilgrensedYtelse[];
-  innvilgetRelatertTilgrensendeYtelserForAnnenForelder?: RelatertTilgrensedYtelse[];
+  relatertTilgrensendeYtelserForSoker: RelatertTilgrensedYtelse[];
+  relatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[];
+  innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[];
 }>;
 
 export default InntektArbeidYtelse;

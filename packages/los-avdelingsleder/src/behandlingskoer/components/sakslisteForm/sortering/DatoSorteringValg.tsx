@@ -194,31 +194,27 @@ const DatoSorteringValg: FunctionComponent<OwnProps> = ({
             </FlexContainer>
           )}
           {!erDynamiskPeriode && (
-            <FlexContainer>
-              <FlexRow>
-                <FlexColumn>
-                  <Datepicker
-                    name="fomDato"
-                    label={intl.formatMessage({ id: 'SorteringVelger.Fom' })}
-                    validate={[hasValidDate]}
-                    onChange={lagreFomDatoDebounce}
-                  />
-                </FlexColumn>
-                <FlexColumn>
-                  <Detail size="small" className={styles.dager}>
-                    <FormattedMessage id="SorteringVelger.Bindestrek" />
-                  </Detail>
-                </FlexColumn>
-                <FlexColumn className={styles.tomDato}>
-                  <Datepicker
-                    name="tomDato"
-                    label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
-                    validate={[hasValidDate]}
-                    onChange={lagreTomDatoDebounce}
-                  />
-                </FlexColumn>
-              </FlexRow>
-            </FlexContainer>
+            <>
+              <VerticalSpacer sixteenPx />
+              <Datepicker
+                name="fomDato"
+                label={intl.formatMessage({ id: 'SorteringVelger.Fom' })}
+                validate={[hasValidDate]}
+                onChange={lagreFomDatoDebounce}
+              />
+              <VerticalSpacer fourPx />
+              <Detail size="small">
+                <FormattedMessage id="SorteringVelger.Bindestrek" />
+              </Detail>
+              <VerticalSpacer fourPx />
+              <Datepicker
+                name="tomDato"
+                label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
+                validate={[hasValidDate]}
+                onChange={lagreTomDatoDebounce}
+              />
+              <VerticalSpacer eightPx />
+            </>
           )}
           <VerticalSpacer eightPx />
           <CheckboxField

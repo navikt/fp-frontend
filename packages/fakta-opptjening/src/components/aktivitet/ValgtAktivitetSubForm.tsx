@@ -19,7 +19,7 @@ const YTELSE_TYPER = [
 ];
 
 const erAvType = (valgtAktivitetstype?: string, ...opptjeningAktivitetType: string[]): boolean =>
-  valgtAktivitetstype && opptjeningAktivitetType.includes(valgtAktivitetstype);
+  !!valgtAktivitetstype && opptjeningAktivitetType.includes(valgtAktivitetstype);
 
 const formatDato = (dato: string): string => (dato ? dayjs(dato, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
@@ -36,7 +36,7 @@ const finnArbeidsgivertekst = (
     return '-';
   }
 
-  if (arbeidsgiverOpplysninger.erPrivatPerson) {
+  if (arbeidsgiverOpplysninger.erPrivatPerson && arbeidsgiverOpplysninger.fødselsdato) {
     const fodselsdato = formatDato(arbeidsgiverOpplysninger.fødselsdato);
     return `${arbeidsgiverOpplysninger.navn} (${fodselsdato})`;
   }
@@ -47,9 +47,7 @@ const finnArbeidsgivertekst = (
 };
 
 const finnNæringLabel = (ferdiglignetNæring: FerdiglignetNæring[]): string =>
-  ferdiglignetNæring.length > 0
-    ? 'ActivityPanel.FerdiglignetNæring'
-    : 'ActivityPanel.IngenFerdiglignetNæring';
+  ferdiglignetNæring.length > 0 ? 'ActivityPanel.FerdiglignetNæring' : 'ActivityPanel.IngenFerdiglignetNæring';
 
 interface OwnProps {
   valgtAktivitetstype?: string;

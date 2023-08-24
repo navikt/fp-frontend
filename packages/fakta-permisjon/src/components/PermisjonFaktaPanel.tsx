@@ -85,7 +85,7 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
   const defaultValues = useMemo(
     () => ({
       arbeidsforhold: sorterteArbeidsforhold.map(a => ({
-        permisjonStatus: a.permisjonOgMangel.permisjonStatus,
+        permisjonStatus: a.permisjonOgMangel?.permisjonStatus,
       })),
       begrunnelse: aksjonspunkter[0].begrunnelse,
     }),
@@ -98,9 +98,9 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
 
   useEffect(
     () => () => {
-      setFormData(undefined);
+      setFormData(formMethods.getValues());
     },
-    [],
+    [formMethods.getValues()],
   );
 
   const harÅpentAksjonspunkt = aksjonspunkter.some(a => a.status === aksjonspunktStatus.OPPRETTET);

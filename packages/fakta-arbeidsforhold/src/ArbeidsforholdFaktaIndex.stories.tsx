@@ -100,6 +100,7 @@ ManueltOpprettetArbeidsforhold.args = {
         kontaktpersonNummer: '99999999',
         journalpostId: '510870400',
         motattDato: '2021-12-13',
+        dokumentId: '1',
       },
     ],
     inntekter: [],

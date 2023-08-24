@@ -58,41 +58,45 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
   const perioder = formMethods.watch('perioder');
 
   const lagNyPeriode = (dato: string) => {
-    const periode = perioder[valgtPeriodeIndex];
-    const nyPeriode = {
-      ...periode,
-      tom: dato,
-    };
-    update(valgtPeriodeIndex, nyPeriode);
-    append({
-      ...periode,
-      fom: dayjs(dato).add(1, 'day').format(ISO_DATE_FORMAT),
-      tom: periode.tom,
-      vurdering: null,
-    });
+    if (valgtPeriodeIndex) {
+      const periode = perioder[valgtPeriodeIndex];
+      const nyPeriode = {
+        ...periode,
+        tom: dato,
+      };
+      update(valgtPeriodeIndex, nyPeriode);
+      append({
+        ...periode,
+        fom: dayjs(dato).add(1, 'day').format(ISO_DATE_FORMAT),
+        tom: periode.tom,
+        vurdering: undefined,
+      });
 
-    settValgtPeriodeIndex(undefined);
-    setSistOppdeltPeriodeIndex(valgtPeriodeIndex);
+      settValgtPeriodeIndex(undefined);
+      setSistOppdeltPeriodeIndex(valgtPeriodeIndex);
+    }
   };
 
   const oppdaterOgNullstillPerioder = (dato: string) => {
-    settValgtPeriodeIndex(undefined);
+    if (valgtPeriodeIndex) {
+      settValgtPeriodeIndex(undefined);
 
-    for (let i = fields.length - 1; i > valgtPeriodeIndex + 1; i -= 1) {
-      remove(i);
+      for (let i = fields.length - 1; i > valgtPeriodeIndex + 1; i -= 1) {
+        remove(i);
+      }
+
+      update(valgtPeriodeIndex, {
+        ...perioder[valgtPeriodeIndex],
+        tom: dato,
+      });
+      update(valgtPeriodeIndex + 1, {
+        ...perioder[valgtPeriodeIndex + 1],
+        fom: dayjs(dato).add(1, 'day').format(ISO_DATE_FORMAT),
+        tom: valgtDokBehov.tom,
+      });
+
+      setSistOppdeltPeriodeIndex(valgtPeriodeIndex);
     }
-
-    update(valgtPeriodeIndex, {
-      ...perioder[valgtPeriodeIndex],
-      tom: dato,
-    });
-    update(valgtPeriodeIndex + 1, {
-      ...perioder[valgtPeriodeIndex + 1],
-      fom: dayjs(dato).add(1, 'day').format(ISO_DATE_FORMAT),
-      tom: valgtDokBehov.tom,
-    });
-
-    setSistOppdeltPeriodeIndex(valgtPeriodeIndex);
   };
 
   const vurderingsalternativer = [
@@ -172,7 +176,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
                       </BodyShort>
                     )}
                   </FlexColumn>
-                  {sistOppdeltPeriodeIndex >= index && (
+                  {sistOppdeltPeriodeIndex && sistOppdeltPeriodeIndex >= index && (
                     <FlexColumn className={styles.redigerKnapp}>
                       <Button
                         size="small"

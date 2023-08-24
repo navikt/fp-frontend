@@ -20,7 +20,7 @@ import {
 } from '@navikt/ft-form-validators';
 import { TextAreaField, Datepicker, InputField, Form } from '@navikt/ft-form-hooks';
 
-import ArbeidsforholdOgInntekt from '../../types/arbeidsforholdOgInntekt';
+import ArbeidsforholdOgInntektRadData from '../../types/arbeidsforholdOgInntekt';
 
 import { useSetDirtyForm } from '../../DirtyFormProvider';
 
@@ -51,11 +51,11 @@ interface OwnProps {
   behandlingUuid: string;
   isReadOnly: boolean;
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
-  radData?: ArbeidsforholdOgInntekt;
+  radData?: ArbeidsforholdOgInntektRadData;
   arbeidsforhold?: AoIArbeidsforhold;
   lukkArbeidsforholdRad: () => void;
   erOverstyrt: boolean;
-  oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>;
+  oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void;
   erNyttArbeidsforhold?: boolean;
 }
 
@@ -104,7 +104,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
       };
       // @ts-ignore Fiks
       registrerArbeidsforhold(params).then(() => {
-        oppdaterTabell((gammelData: ArbeidsforholdOgInntekt[]) => {
+        oppdaterTabell((gammelData: ArbeidsforholdOgInntektRadData[]) => {
           const rad = {
             arbeidsgiverIdent: MANUELT_ORG_NR,
             arbeidsgiverNavn: formValues.arbeidsgiverNavn,
@@ -116,7 +116,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
               begrunnelse: formValues.begrunnelse,
               saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
             },
-          } as ArbeidsforholdOgInntekt;
+          } as ArbeidsforholdOgInntektRadData;
 
           const gammelIndex = gammelData.findIndex(data => data.arbeidsgiverIdent === MANUELT_ORG_NR);
           if (gammelIndex === -1) {

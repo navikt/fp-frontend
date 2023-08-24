@@ -23,7 +23,7 @@ export enum Årsakstype {
 }
 
 export type FormValues = KontrollerFaktaPeriodeMedApMarkering & {
-  arbeidsgiverId: string;
+  arbeidsgiverId?: string;
   harGradering?: boolean;
   harSamtidigUttaksprosent?: boolean;
 };
@@ -41,7 +41,7 @@ const lagVisningsNavn = (arbeidsgiverOpplysning: ArbeidsgiverOpplysninger, ekste
     visningsNavn = identifikator ? `${visningsNavn} (${identifikator})` : visningsNavn;
     visningsNavn = `${visningsNavn}${getEndCharFromId(eksternArbeidsforholdId)}`;
   } else {
-    visningsNavn = `${navn.substring(0, 5)}...(${formatDate(fødselsdato)})`;
+    visningsNavn = `${navn.substring(0, 5)}...(${fødselsdato ? formatDate(fødselsdato) : '-'})`;
   }
   return visningsNavn;
 };
@@ -54,12 +54,14 @@ const mapArbeidsforhold = (
   faktaArbeidsforhold.map(andel => {
     const { arbeidType, arbeidsgiverReferanse } = andel;
 
-    const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
+    const arbeidsgiverOpplysninger = arbeidsgiverReferanse
+      ? arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse]
+      : undefined;
 
     let periodeArbeidsforhold = '';
     if (arbeidType && arbeidType !== uttakArbeidType.ORDINÆRT_ARBEID) {
-      periodeArbeidsforhold = alleKodeverk[KodeverkType.UTTAK_ARBEID_TYPE].find(k => k.kode === arbeidType)?.navn;
-    } else {
+      periodeArbeidsforhold = alleKodeverk[KodeverkType.UTTAK_ARBEID_TYPE].find(k => k.kode === arbeidType)?.navn || '';
+    } else if (arbeidsgiverOpplysninger) {
       periodeArbeidsforhold = lagVisningsNavn(arbeidsgiverOpplysninger);
     }
 

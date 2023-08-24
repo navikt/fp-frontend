@@ -56,7 +56,7 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
   alleKodeverk,
 }) => {
   const intl = useIntl();
-  const [visInfoOmIm, toggleInfoOmIm] = useState({});
+  const [visInfoOmIm, toggleInfoOmIm] = useState<Record<string, boolean>>({});
 
   const harEttArbeidsforhold = arbeidsforholdForRad.length === 1;
 
@@ -152,7 +152,7 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                         )}
                         {inntektsmelding && (
                           <>
-                            {visInfoOmIm[a.internArbeidsforholdId] && (
+                            {a.internArbeidsforholdId && visInfoOmIm[a.internArbeidsforholdId] && (
                               <InntektsmeldingOpplysningerPanel
                                 saksnummer={saksnummer}
                                 inntektsmelding={inntektsmelding}
@@ -164,6 +164,9 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                               onClick={e => {
                                 e.preventDefault();
                                 toggleInfoOmIm(info => {
+                                  if (!a.internArbeidsforholdId) {
+                                    return info;
+                                  }
                                   const status = info[a.internArbeidsforholdId];
                                   return {
                                     ...info,
@@ -177,14 +180,14 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                                 <BodyShort size="small" className={styles.inline}>
                                   <FormattedMessage
                                     id={
-                                      !visInfoOmIm[a.internArbeidsforholdId]
+                                      !a.internArbeidsforholdId || !visInfoOmIm[a.internArbeidsforholdId]
                                         ? 'ArbeidsforholdInformasjonPanel.ApneImInfo'
                                         : 'ArbeidsforholdInformasjonPanel.LukkeImInfo'
                                     }
                                   />
                                 </BodyShort>
                               </span>
-                              {visInfoOmIm[a.internArbeidsforholdId] ? (
+                              {a.internArbeidsforholdId && visInfoOmIm[a.internArbeidsforholdId] ? (
                                 <ChevronUpIcon className={styles.arrow} />
                               ) : (
                                 <ChevronDownIcon className={styles.arrow} />

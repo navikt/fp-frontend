@@ -85,7 +85,7 @@ const FodselSammenligningPanel: FunctionComponent<OwnProps> = ({
                     <BodyShort size="small">{formatDate(barn.fodselsdato)}</BodyShort>
                   </TableColumn>
                   <TableColumn>
-                    <BodyShort size="small">{formatDate(barn.dodsdato)}</BodyShort>
+                    <BodyShort size="small">{barn.dodsdato ? formatDate(barn.dodsdato) : '-'}</BodyShort>
                   </TableColumn>
                   <TableColumn>
                     {barn.dodsdato && (

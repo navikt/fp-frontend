@@ -26,8 +26,8 @@ const capitalizeFirstLetter = (landNavn: string): string => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-const sjekkOpphold = (opphold: boolean, intl: IntlShape): ReactElement | undefined =>
-  opphold !== undefined && (
+const sjekkOpphold = (opphold: boolean, intl: IntlShape): ReactElement | null =>
+  opphold !== undefined ? (
     <FlexContainer>
       <FlexRow>
         <FlexColumn>
@@ -57,7 +57,7 @@ const sjekkOpphold = (opphold: boolean, intl: IntlShape): ReactElement | undefin
         </FlexColumn>
       </FlexRow>
     </FlexContainer>
-  );
+  ) : null;
 
 const lagOppholdIUtland = (utlandsOpphold: UtlandsoppholdPeriode[]): ReactElement[] | undefined =>
   utlandsOpphold &&
@@ -92,7 +92,7 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: (periode: MedlemPeriode) => FormValues;
+  buildInitialValues: (periode: MedlemPeriode) => FormValues;
 }
 
 /**

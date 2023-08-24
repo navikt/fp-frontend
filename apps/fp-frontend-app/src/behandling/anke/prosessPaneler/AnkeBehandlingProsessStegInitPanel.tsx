@@ -20,6 +20,8 @@ interface OwnProps {
     uuid: string;
     type: string;
     avsluttet?: string;
+    opprettet: string;
+    status: string;
   }[];
 }
 

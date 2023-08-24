@@ -45,7 +45,7 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: (periode: MedlemPeriode, medlemskapPerioder: Medlemskap['medlemskapPerioder']) => FormValues;
+  buildInitialValues: (periode: MedlemPeriode, medlemskapPerioder: Medlemskap['medlemskapPerioder']) => FormValues;
 }
 
 /**

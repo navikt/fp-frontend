@@ -1,5 +1,5 @@
 type FaktaArbeidsforhold = Readonly<{
-  arbeidsgiverReferanse: string;
+  arbeidsgiverReferanse?: string;
   arbeidType: string;
 }>;
 

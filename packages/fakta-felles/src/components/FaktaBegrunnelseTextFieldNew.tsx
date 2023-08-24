@@ -33,7 +33,7 @@ type TransformedValues = {
 };
 
 interface StaticFunctions {
-  buildInitialValues: (aksjonspunkt: Aksjonspunkt[] | Aksjonspunkt, begrunnelseFieldName?: string) => FormValues;
+  buildInitialValues: (aksjonspunkt?: Aksjonspunkt[] | Aksjonspunkt, begrunnelseFieldName?: string) => FormValues;
   transformValues: (values: FormValues, name?: string) => TransformedValues;
 }
 
@@ -67,7 +67,7 @@ const FaktaBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunctions =
   );
 };
 
-const getBegrunnelse = (aksjonspunkt: Aksjonspunkt[] | Aksjonspunkt): string | undefined => {
+const getBegrunnelse = (aksjonspunkt?: Aksjonspunkt[] | Aksjonspunkt): string | undefined => {
   if (aksjonspunkt && Array.isArray(aksjonspunkt)) {
     return aksjonspunkt.length > 0 ? aksjonspunkt[0].begrunnelse : '';
   }
@@ -75,7 +75,7 @@ const getBegrunnelse = (aksjonspunkt: Aksjonspunkt[] | Aksjonspunkt): string | u
 };
 
 FaktaBegrunnelseTextField.buildInitialValues = (
-  aksjonspunkt: Aksjonspunkt[] | Aksjonspunkt,
+  aksjonspunkt?: Aksjonspunkt[] | Aksjonspunkt,
   begrunnelseFieldName = 'begrunnelse',
 ): FormValues => ({
   [begrunnelseFieldName]: decodeHtmlEntity(getBegrunnelse(aksjonspunkt)),

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useEffect, useCallback, useMemo } from 'react';
+import React, { FunctionComponent, useState, useEffect, useCallback, useMemo, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import dayjs from 'dayjs';
 import { Button, BodyShort, Label } from '@navikt/ds-react';
@@ -21,8 +21,8 @@ import ValgtAktivitetForm, { FormValues } from './aktivitet/ValgtAktivitetForm';
 
 import styles from './opptjeningFaktaPanel.module.css';
 
-const getAksjonspunktHelpTexts = (opptjeningAktiviteter: OpptjeningAktivitet[]): string[] => {
-  const texts = [];
+const getAksjonspunktHelpTexts = (opptjeningAktiviteter: OpptjeningAktivitet[]): ReactElement[] => {
+  const texts = [] as ReactElement[];
   if (opptjeningAktiviteter.some(a => a.stillingsandel === 0)) {
     texts.push(
       <FormattedMessage id="OpptjeningFaktaForm.AktivitetenErTimeAvslonnet" key="AktivitetenErTimeAvslonnet" />,
@@ -40,16 +40,16 @@ const getAksjonspunktHelpTexts = (opptjeningAktiviteter: OpptjeningAktivitet[]):
   return texts;
 };
 
-const findSkjaringstidspunkt = (dato: string): string => dayjs(dato).add(1, 'days').format(ISO_DATE_FORMAT);
+const findSkjaringstidspunkt = (dato?: string): string => dayjs(dato).add(1, 'days').format(ISO_DATE_FORMAT);
 
 const sorterEtterOpptjeningFom = (
   opptjeningPerioder: OpptjeningAktivitet[],
   opptjeningAktivitetTypes: KodeverkMedNavn[],
 ): OpptjeningAktivitet[] =>
   [...opptjeningPerioder].sort((o1, o2) => {
-    const navn1 = opptjeningAktivitetTypes.find(oat => oat.kode === o1.aktivitetType).navn;
-    const navn2 = opptjeningAktivitetTypes.find(oat => oat.kode === o2.aktivitetType).navn;
-    return navn1.localeCompare(navn2);
+    const navn1 = opptjeningAktivitetTypes.find(oat => oat.kode === o1.aktivitetType)?.navn;
+    const navn2 = opptjeningAktivitetTypes.find(oat => oat.kode === o2.aktivitetType)?.navn;
+    return navn1 && navn2 ? navn1.localeCompare(navn2) : 0;
   });
 
 const addDay = (dato: string): string => addDaysToDate(dato, 1);
@@ -57,16 +57,18 @@ const addDay = (dato: string): string => addDaysToDate(dato, 1);
 const filtrerOpptjeningAktiviteter = (
   opptjeningAktiviteter: OpptjeningAktivitet[],
   fastsattOpptjening?: Opptjening['fastsattOpptjening'],
-): OpptjeningAktivitet[] =>
-  opptjeningAktiviteter
+): OpptjeningAktivitet[] => {
+  if (!fastsattOpptjening) {
+    return [];
+  }
+  return opptjeningAktiviteter
     .filter(oa => dayjs(fastsattOpptjening.opptjeningFom).isBefore(addDay(oa.opptjeningTom)))
     .filter(oa => dayjs(oa.opptjeningFom).isBefore(addDay(fastsattOpptjening.opptjeningTom)));
+};
 
 interface OwnProps {
   hasAksjonspunkt: boolean;
   hasOpenAksjonspunkter: boolean;
-  opptjeningFomDato: string;
-  opptjeningTomDato: string;
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
@@ -89,8 +91,6 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
   hasAksjonspunkt,
   hasOpenAksjonspunkter,
   opptjeningAktiviteter,
-  opptjeningFomDato,
-  opptjeningTomDato,
   readOnly,
   alleMerknaderFraBeslutter,
   alleKodeverk,
@@ -126,7 +126,7 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
     a => a.erGodkjent === undefined,
   );
   const defaultAktivitetIndex = filtrerteOgSorterteOpptjeningsaktiviteter.length > 0 ? 0 : undefined;
-  const [valgtAktivitetIndex, setValgtAktivitetIndex] = useState<number>(
+  const [valgtAktivitetIndex, setValgtAktivitetIndex] = useState<number | undefined>(
     førsteAktivitetSomIkkeErGodkjent !== -1 ? førsteAktivitetSomIkkeErGodkjent : defaultAktivitetIndex,
   );
 
@@ -166,21 +166,26 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
   }, [filtrerteOgSorterteOpptjeningsaktiviteter, formVerdierForAlleAktiviteter]);
 
   const velgNesteAktivitet = useCallback(() => {
-    if (valgtAktivitetIndex < filtrerteOgSorterteOpptjeningsaktiviteter.length - 1) {
+    if (
+      valgtAktivitetIndex !== undefined &&
+      valgtAktivitetIndex < filtrerteOgSorterteOpptjeningsaktiviteter.length - 1
+    ) {
       setValgtAktivitetIndex(valgtAktivitetIndex + 1);
     }
   }, [valgtAktivitetIndex]);
   const velgForrigeAktivitet = useCallback(() => {
-    if (valgtAktivitetIndex > 0) {
+    if (valgtAktivitetIndex !== undefined && valgtAktivitetIndex > 0) {
       setValgtAktivitetIndex(valgtAktivitetIndex - 1);
     }
   }, [valgtAktivitetIndex]);
 
   const oppdaterAktivitet = useCallback(
     (formValues: FormValues) => {
-      oppdaterFormVerdier((oldValues: FormValues[]) =>
-        Object.assign([], oldValues, { [valgtAktivitetIndex]: formValues }),
-      );
+      if (valgtAktivitetIndex !== undefined) {
+        oppdaterFormVerdier((oldValues: FormValues[]) =>
+          Object.assign([], oldValues, { [valgtAktivitetIndex]: formValues }),
+        );
+      }
     },
     [oppdaterFormVerdier, valgtAktivitetIndex],
   );
@@ -208,7 +213,7 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
         <FormattedMessage id="OpptjeningFaktaForm.Skjaringstidspunkt" />
       </Label>
       <BodyShort size="small">
-        <DateLabel dateString={findSkjaringstidspunkt(opptjeningTomDato)} />
+        <DateLabel dateString={findSkjaringstidspunkt(fastsattOpptjening?.opptjeningTom)} />
       </BodyShort>
       <VerticalSpacer twentyPx />
       <OpptjeningTidslinje
@@ -217,8 +222,7 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
         opptjeningAktivitetTypes={opptjeningAktivitetTypes}
         setValgtAktivitetIndex={setValgtAktivitetIndex}
         valgtAktivitetIndex={valgtAktivitetIndex}
-        opptjeningFomDato={opptjeningFomDato}
-        opptjeningTomDato={opptjeningTomDato}
+        fastsattOpptjening={fastsattOpptjening}
       />
       <VerticalSpacer fourtyPx />
       {valgtAktivitetIndex !== undefined && (
@@ -231,8 +235,7 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
             opptjeningAktivitetTyper={opptjeningAktivitetTypes}
             avbrytAktivitet={avbrytAktivitet}
             oppdaterAktivitet={oppdaterAktivitet}
-            opptjeningFomDato={opptjeningFomDato}
-            opptjeningTomDato={opptjeningTomDato}
+            fastsattOpptjening={fastsattOpptjening}
             velgNesteAktivitet={velgNesteAktivitet}
             velgForrigeAktivitet={velgForrigeAktivitet}
             harAksjonspunkt={hasAksjonspunkt}

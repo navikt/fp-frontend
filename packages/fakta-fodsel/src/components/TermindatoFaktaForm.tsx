@@ -162,9 +162,9 @@ TermindatoFaktaForm.buildInitialValues = (soknad, familiehendelse, aksjonspunkt)
 
 TermindatoFaktaForm.transformValues = (values: FormValues): BekreftTerminbekreftelseAp => ({
   kode: AksjonspunktCode.TERMINBEKREFTELSE,
-  utstedtdato: values.utstedtdato,
-  termindato: values.termindato,
-  antallBarn: values.antallBarn,
+  utstedtdato: values.utstedtdato!,
+  termindato: values.termindato!,
+  antallBarn: values.antallBarn!,
   ...FaktaBegrunnelseTextFieldNew.transformValues(values),
 });
 

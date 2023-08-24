@@ -20,20 +20,18 @@ const maxLength1500 = maxLength(1500);
 
 type FormValues = {
   startdatoFraSoknad?: string;
-  opprinneligDato?: string;
   begrunnelse?: string;
 };
 
 const buildInitialValues = (soknad: Soknad, aksjonspunkt?: Aksjonspunkt): FormValues => ({
-  opprinneligDato: soknad.oppgittFordeling?.startDatoForPermisjon,
   startdatoFraSoknad: soknad.oppgittFordeling?.startDatoForPermisjon,
   begrunnelse: (aksjonspunkt && aksjonspunkt.begrunnelse) || '',
 });
 
-const transformValues = (values: FormValues): OverstyringAvklarStartdatoForPeriodenAp => ({
+const transformValues = (soknad: Soknad, values: FormValues): OverstyringAvklarStartdatoForPeriodenAp => ({
   kode: AksjonspunktCode.OVERSTYR_AVKLAR_STARTDATO,
-  opprinneligDato: values.opprinneligDato,
-  startdatoFraSoknad: values.startdatoFraSoknad,
+  opprinneligDato: soknad.oppgittFordeling?.startDatoForPermisjon,
+  startdatoFraSoknad: values.startdatoFraSoknad!,
   begrunnelse: values.begrunnelse,
 });
 
@@ -83,7 +81,7 @@ const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps> = ({
   return (
     <Form
       formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
+      onSubmit={(values: FormValues) => submitCallback(transformValues(soknad, values))}
       setDataOnUnmount={setFormData}
     >
       <Heading size="small">

@@ -37,7 +37,7 @@ const ÅRSAKSTYPE_TEKST_KODER = {
   [Årsakstype.OVERFØRING]: 'UttakFaktaDetailForm.Overføring',
   [Årsakstype.UTSETTELSE]: 'UttakFaktaDetailForm.Utsettelse',
   [Årsakstype.OPPHOLD]: 'UttakFaktaDetailForm.Opphold',
-};
+} as Record<string, string>;
 
 export const utledÅrsakstype = (valgtPeriode: KontrollerFaktaPeriodeMedApMarkering): Årsakstype => {
   if (valgtPeriode.utsettelseÅrsak) {
@@ -62,12 +62,12 @@ const lagDefaultVerdier = (
     valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse !== 'null'
       ? valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse
       : undefined;
-  const aOpplysninger = arbeidsgiverOpplysningerPerId[aRef];
+  const aOpplysninger = aRef ? arbeidsgiverOpplysningerPerId[aRef] : undefined;
 
   let arbeidsgiverId;
 
   if ((!!aRef && aOpplysninger) || (valgtPeriode.arbeidsforhold && !aRef)) {
-    arbeidsgiverId = `${valgtPeriode.arbeidsforhold.arbeidsgiverReferanse}-${valgtPeriode.arbeidsforhold.arbeidType}`;
+    arbeidsgiverId = `${valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse}-${valgtPeriode.arbeidsforhold?.arbeidType}`;
   }
 
   return {
@@ -84,7 +84,7 @@ const transformValues = (values: FormValues): KontrollerFaktaPeriodeMedApMarkeri
   arbeidsforhold: values.arbeidsgiverId
     ? {
         arbeidsgiverReferanse:
-          values.arbeidsgiverId.split('-')[0] === 'null' ? null : values.arbeidsgiverId.split('-')[0],
+          values.arbeidsgiverId.split('-')[0] === 'null' ? undefined : values.arbeidsgiverId.split('-')[0],
         arbeidType: values.arbeidsgiverId.split('-')[1],
       }
     : undefined,
@@ -136,7 +136,9 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
   const [visSletteDialog, settVisSletteDialog] = useState(false);
   const slettUttaksperiode = useCallback(() => {
     settVisSletteDialog(false);
-    slettPeriode();
+    if (slettPeriode) {
+      slettPeriode();
+    }
   }, []);
 
   const sorterteUttakPeriodeTyper = useMemo(
@@ -183,7 +185,7 @@ const UttakFaktaDetailForm: FunctionComponent<OwnProps> = ({
     }
   }, [årsakstype]);
 
-  const onSubmit = useCallback(values => oppdaterPeriode(transformValues(values)), [oppdaterPeriode]);
+  const onSubmit = useCallback((values: FormValues) => oppdaterPeriode(transformValues(values)), [oppdaterPeriode]);
 
   const erUttakOgFellesperiodeEllerForeldrepenger =
     årsakstype === Årsakstype.UTTAK &&
