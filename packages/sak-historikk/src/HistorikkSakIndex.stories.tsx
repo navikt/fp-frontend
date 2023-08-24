@@ -55,7 +55,7 @@ const historikkInnslag = [
     dokumentLinks: [
       {
         tag: 'Søknad',
-        url: 'http://127.0.0.1:8080/fpsak/api/dokument/hent-dokument?journalpostId=453471722&dokumentId=470153809',
+        url: 'http://127.0.0.1:8080/fpsak/api/dokument/hent-dokument/v2?journalpostId=453471722&dokumentId=470153809',
         journalpostId: '453471722',
         dokumentId: '470153809',
         utgått: false,
