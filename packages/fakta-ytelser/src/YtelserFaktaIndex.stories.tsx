@@ -45,6 +45,8 @@ const defaultInntektArbeidYtelse = {
       ],
     },
   ],
+  relatertTilgrensendeYtelserForAnnenForelder: [],
+  innvilgetRelatertTilgrensendeYtelserForAnnenForelder: [],
   skalKunneLeggeTilNyeArbeidsforhold: true,
 };
 
@@ -93,5 +95,7 @@ UtenTilgrensedeYtelser.args = {
         tilgrensendeYtelserListe: [],
       },
     ],
+    relatertTilgrensendeYtelserForAnnenForelder: [],
+    innvilgetRelatertTilgrensendeYtelserForAnnenForelder: [],
   },
 };
