@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useMemo, useCallback } from 'react';
 
-import { KodeverkMedNavn, OpptjeningAktivitet } from '@navikt/fp-types';
+import { KodeverkMedNavn, Opptjening, OpptjeningAktivitet } from '@navikt/fp-types';
 import dayjs from 'dayjs';
 
 import {
@@ -66,8 +66,8 @@ const lagPerioder = (
   opptjeningperioder: OpptjeningAktivitet[],
   formVerdierForAlleAktiviteter: FormValues[],
   rader: Rad[],
-  opptjeningFomDato: string,
-  opptjeningTomDato: string,
+  opptjeningFomDato?: string,
+  opptjeningTomDato?: string,
 ) =>
   opptjeningperioder.map((opptjeningPeriode, index) => ({
     id: index,
@@ -78,7 +78,7 @@ const lagPerioder = (
         rad.aktivitetTypeKode === opptjeningPeriode.aktivitetType &&
         rad.arbeidsforholdRef === opptjeningPeriode.arbeidsforholdRef &&
         rad.arbeidsgiverReferanse === opptjeningPeriode.arbeidsgiverReferanse,
-    ).id,
+    )?.id,
     status: finnStatus(formVerdierForAlleAktiviteter[index].erGodkjent),
   }));
 
@@ -99,10 +99,11 @@ const lagRader = (
   }, []);
   return duplicatesRemoved.map((activity: OpptjeningAktivitet, index: number) => {
     const type = opptjeningAktivitetTypes.find(oat => oat.kode === activity.aktivitetType);
+    const label =
+      type?.kode === OpptjeningAktivitetType.AAP ? intl.formatMessage({ id: 'OpptjeningTidslinje.Aap' }) : type?.navn;
     return {
       id: index + 1,
-      label:
-        type.kode === OpptjeningAktivitetType.AAP ? intl.formatMessage({ id: 'OpptjeningTidslinje.Aap' }) : type.navn,
+      label: label || '',
       aktivitetTypeKode: activity.aktivitetType,
       arbeidsforholdRef: activity.arbeidsforholdRef,
       arbeidsgiverReferanse: activity.arbeidsgiverReferanse,
@@ -116,20 +117,22 @@ interface OwnProps {
   valgtAktivitetIndex?: number;
   opptjeningAktivitetTypes: KodeverkMedNavn[];
   setValgtAktivitetIndex: (periodeIndex: number) => void;
-  opptjeningFomDato: string;
-  opptjeningTomDato: string;
+  fastsattOpptjening?: Opptjening['fastsattOpptjening'];
 }
 
 const OpptjeningTimeLine: FunctionComponent<OwnProps> = ({
   opptjeningPerioder,
   formVerdierForAlleAktiviteter,
-  opptjeningFomDato,
-  opptjeningTomDato,
+  fastsattOpptjening,
   valgtAktivitetIndex,
   opptjeningAktivitetTypes,
   setValgtAktivitetIndex,
 }) => {
   const intl = useIntl();
+
+  const opptjeningFomDato = fastsattOpptjening?.opptjeningFom;
+  const opptjeningTomDato = fastsattOpptjening?.opptjeningTom;
+
   const rader = useMemo(() => lagRader(opptjeningPerioder, opptjeningAktivitetTypes, intl), [opptjeningPerioder]);
   const perioder = useMemo(
     () => lagPerioder(opptjeningPerioder, formVerdierForAlleAktiviteter, rader, opptjeningFomDato, opptjeningTomDato),
@@ -145,6 +148,10 @@ const OpptjeningTimeLine: FunctionComponent<OwnProps> = ({
     },
     [perioder, setValgtAktivitetIndex],
   );
+
+  if (!opptjeningFomDato || !opptjeningTomDato) {
+    return null;
+  }
 
   return (
     <Timeline

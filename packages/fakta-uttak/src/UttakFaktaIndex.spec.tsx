@@ -40,7 +40,7 @@ describe('<UttakFaktaIndex>', () => {
 
     expect(await screen.getByTitle('Åpne rad')).toBeInTheDocument();
 
-    await userEvent.click(screen.queryByTitle('Åpne rad'));
+    await userEvent.click(screen.getByTitle('Åpne rad'));
 
     const periodeFra = utils.getByLabelText('Periode fra');
     await userEvent.clear(periodeFra);

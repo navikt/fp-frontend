@@ -31,7 +31,7 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: (soknad: Soknad, familiehendelse: FamilieHendelse) => FormValues;
+  buildInitialValues: (soknad: Soknad, familiehendelse: FamilieHendelse) => FormValues;
 }
 
 /**

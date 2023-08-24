@@ -5,7 +5,7 @@ type ManueltArbeidsforhold = Readonly<{
   internArbeidsforholdRef?: string;
   arbeidsgiverNavn: string;
   fom: string;
-  tom: string;
+  tom?: string;
   stillingsprosent: number;
   vurdering: string;
 }>;

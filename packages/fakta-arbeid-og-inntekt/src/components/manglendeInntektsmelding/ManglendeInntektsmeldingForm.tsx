@@ -17,7 +17,7 @@ import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 
 import questionNormalUrl from '../../images/question_normal.svg';
 import questionHoverUrl from '../../images/question_hover.svg';
-import ArbeidsforholdOgInntekt from '../../types/arbeidsforholdOgInntekt';
+import ArbeidsforholdOgInntektRadData from '../../types/arbeidsforholdOgInntekt';
 import ArbeidsforholdInformasjonPanel from '../felles/ArbeidsforholdInformasjonPanel';
 import { useSetDirtyForm } from '../../DirtyFormProvider';
 
@@ -39,10 +39,10 @@ interface OwnProps {
   isReadOnly: boolean;
   arbeidsforholdForRad: AoIArbeidsforhold[];
   inntektsmeldingerForRad: Inntektsmelding[];
-  radData: ArbeidsforholdOgInntekt;
+  radData: ArbeidsforholdOgInntektRadData;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   lukkArbeidsforholdRad: () => void;
-  oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>;
+  oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void;
   alleKodeverk: AlleKodeverk;
 }
 
@@ -87,10 +87,10 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
     (formValues: FormValues) => {
       const params = {
         behandlingUuid,
-        vurdering: formValues.saksbehandlersVurdering,
+        vurdering: formValues.saksbehandlersVurdering!,
         arbeidsgiverIdent: radData.arbeidsgiverIdent,
         internArbeidsforholdRef: erEttArbeidsforhold ? arbeidsforholdForRad[0].internArbeidsforholdId : undefined,
-        begrunnelse: formValues.begrunnelse,
+        begrunnelse: formValues.begrunnelse!,
       };
       lagreVurdering(params)
         .then(() => {

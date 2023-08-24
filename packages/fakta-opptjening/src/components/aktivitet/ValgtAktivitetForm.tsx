@@ -11,7 +11,12 @@ import { findDifferenceInMonthsAndDays, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { RadioGroupPanel, TextAreaField, Form } from '@navikt/ft-form-hooks';
 import {
-  ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, AlleKodeverk, OpptjeningAktivitet, FerdiglignetNæring,
+  ArbeidsgiverOpplysningerPerId,
+  KodeverkMedNavn,
+  AlleKodeverk,
+  OpptjeningAktivitet,
+  FerdiglignetNæring,
+  Opptjening,
 } from '@navikt/fp-types';
 
 import ValgtAktivitetSubForm from './ValgtAktivitetSubForm';
@@ -70,8 +75,7 @@ interface OwnProps {
   opptjeningAktivitetTyper: KodeverkMedNavn[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   ferdiglignetNæring: FerdiglignetNæring[];
-  opptjeningFomDato: string;
-  opptjeningTomDato: string;
+  fastsattOpptjening?: Opptjening['fastsattOpptjening'];
   lukkPeriode: () => void;
 }
 
@@ -93,8 +97,7 @@ const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
   ferdiglignetNæring,
   oppdaterAktivitet,
   valgteFormValues,
-  opptjeningFomDato,
-  opptjeningTomDato,
+  fastsattOpptjening,
   lukkPeriode,
 }) => {
   const intl = useIntl();
@@ -106,8 +109,16 @@ const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
   const { arbeidsgiverReferanse, erGodkjent, erEndret, aktivitetType, stillingsandel, naringRegistreringsdato } =
     valgtOpptjeningAktivitet;
 
-  const opptjeningFom = finnOpptjeningFom(valgtOpptjeningAktivitet.opptjeningFom, opptjeningFomDato, opptjeningTomDato);
-  const opptjeningTom = finnOpptjeningTom(valgtOpptjeningAktivitet.opptjeningTom, opptjeningFomDato, opptjeningTomDato);
+  const opptjeningFom = finnOpptjeningFom(
+    valgtOpptjeningAktivitet.opptjeningFom,
+    fastsattOpptjening?.opptjeningFom,
+    fastsattOpptjening?.opptjeningTom,
+  );
+  const opptjeningTom = finnOpptjeningTom(
+    valgtOpptjeningAktivitet.opptjeningTom,
+    fastsattOpptjening?.opptjeningFom,
+    fastsattOpptjening?.opptjeningTom,
+  );
 
   const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
 
@@ -165,18 +176,20 @@ const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
                 <FormattedMessage id="ActivityPanel.Period" />
               </Label>
               <FlexContainer>
-                <FlexRow>
-                  <FlexColumn>
-                    <BodyShort size="small">
-                      {`${dayjs(opptjeningFom).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(opptjeningTom).format(
-                        DDMMYYYY_DATE_FORMAT,
-                      )}`}
-                    </BodyShort>
-                  </FlexColumn>
-                  <FlexColumn>
-                    <BodyShort size="small">{finnMånederOgDager(opptjeningFom, opptjeningTom)}</BodyShort>
-                  </FlexColumn>
-                </FlexRow>
+                {opptjeningFom && opptjeningTom && (
+                  <FlexRow>
+                    <FlexColumn>
+                      <BodyShort size="small">
+                        {`${dayjs(opptjeningFom).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(opptjeningTom).format(
+                          DDMMYYYY_DATE_FORMAT,
+                        )}`}
+                      </BodyShort>
+                    </FlexColumn>
+                    <FlexColumn>
+                      <BodyShort size="small">{finnMånederOgDager(opptjeningFom, opptjeningTom)}</BodyShort>
+                    </FlexColumn>
+                  </FlexRow>
+                )}
               </FlexContainer>
             </FlexColumn>
             <FlexColumn>

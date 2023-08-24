@@ -15,7 +15,7 @@ const getTermindatoEllerFodselsdato = (
   isTermin: boolean,
   originalSoknad?: Soknad,
   orginalFamiliehendelse?: FamilieHendelse,
-): string => {
+): string | undefined => {
   if (!originalSoknad && !orginalFamiliehendelse) {
     return '';
   }
@@ -23,34 +23,39 @@ const getTermindatoEllerFodselsdato = (
   const famHendelse = orginalFamiliehendelse || { termindato: undefined, avklartBarn: [] };
 
   if (isTermin) {
-    return formatDate(famHendelse.termindato ? famHendelse.termindato : originalSoknad.termindato);
+    const termDato = famHendelse.termindato ? famHendelse.termindato : originalSoknad?.termindato;
+    return termDato ? formatDate(termDato) : undefined;
   }
 
-  return formatDate(
-    famHendelse.avklartBarn?.length > 0
-      ? famHendelse.avklartBarn[0].fodselsdato
-      : Object.values(originalSoknad.fodselsdatoer)[0],
-  );
+  if (famHendelse.avklartBarn && famHendelse.avklartBarn.length > 0) {
+    return formatDate(famHendelse.avklartBarn[0].fodselsdato);
+  }
+  if (!originalSoknad?.fodselsdatoer) {
+    return '-';
+  }
+  return formatDate(Object.values(originalSoknad.fodselsdatoer)[0]);
 };
 
 const getAntallBarn = (
   isTermin: boolean,
   originalSoknad?: Soknad,
   orginalFamiliehendelse?: FamilieHendelse,
-): number => {
+): number | undefined => {
   if (!originalSoknad && !orginalFamiliehendelse) {
     return 0;
   }
   const famHendelse = orginalFamiliehendelse || { termindato: undefined, antallBarnTermin: undefined, avklartBarn: [] };
 
   if (isTermin) {
-    return famHendelse.termindato ? famHendelse.antallBarnTermin : originalSoknad.antallBarn;
+    return famHendelse.termindato ? famHendelse.antallBarnTermin : originalSoknad?.antallBarn;
   }
-  return famHendelse.avklartBarn?.length > 0 ? famHendelse.avklartBarn.length : originalSoknad.antallBarn;
+  return famHendelse.avklartBarn && famHendelse.avklartBarn.length > 0
+    ? famHendelse.avklartBarn.length
+    : originalSoknad?.antallBarn;
 };
 
 interface OwnProps {
-  soknadOriginalBehandling: Soknad;
+  soknadOriginalBehandling?: Soknad;
   familiehendelseOriginalBehandling?: FamilieHendelse;
   vedtaksDatoSomSvangerskapsuke?: number;
 }
@@ -103,13 +108,13 @@ const FodselSammenligningRevurderingPanel: FunctionComponent<OwnProps> = ({
             <Label size="small">
               <FormattedMessage id={terminOrFodselLabel} />
             </Label>
-            <BodyShort size="small">{terminOrFodselDate}</BodyShort>
+            <BodyShort size="small">{terminOrFodselDate || '-'}</BodyShort>
           </FlexColumn>
           <FlexColumn>
             <Label size="small">
               <FormattedMessage id="FodselsammenligningPanel.AntallBarn" />
             </Label>
-            <BodyShort size="small">{antallBarn}</BodyShort>
+            <BodyShort size="small">{antallBarn || '-'}</BodyShort>
           </FlexColumn>
         </FlexRow>
       </FlexContainer>

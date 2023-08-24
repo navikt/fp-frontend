@@ -23,7 +23,7 @@ import ArbeidsforholdInformasjonPanel from './felles/ArbeidsforholdInformasjonPa
 import InntektsmeldingerPanel from './felles/InntektsmeldingerPanel';
 import InntektsmeldingOpplysningerPanel from './felles/InntektsmeldingOpplysningerPanel';
 import ManglendeInntektsmeldingForm from './manglendeInntektsmelding/ManglendeInntektsmeldingForm';
-import ArbeidsforholdOgInntekt, { Avklaring } from '../types/arbeidsforholdOgInntekt';
+import ArbeidsforholdOgInntektRadData, { Avklaring } from '../types/arbeidsforholdOgInntekt';
 
 import styles from './arbeidsforholdRad.module.css';
 
@@ -50,7 +50,7 @@ const finnPeriode = (
     };
   }
 
-  const periode = arbeidsforhold.reduce(
+  const periode = arbeidsforhold.reduce<{ fom: string | undefined; tom: string | undefined }>(
     (res, a) => ({
       fom: res.fom && dayjs(res.fom).isBefore(a.fom) ? res.fom : a.fom,
       tom: res.tom && dayjs(res.tom).isAfter(a.tom) ? res.tom : a.tom,
@@ -86,10 +86,10 @@ interface OwnProps {
   saksnummer: string;
   behandlingUuid: string;
   arbeidOgInntekt: ArbeidOgInntektsmelding;
-  radData: ArbeidsforholdOgInntekt;
+  radData: ArbeidsforholdOgInntektRadData;
   isReadOnly: boolean;
   erOverstyrt: boolean;
-  oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>;
+  oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void;
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   toggleÅpenRad: () => void;

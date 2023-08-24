@@ -8,18 +8,27 @@ const getOpptjeningsperiodeIfEqual = (activityDate: string, opptjeningsperiodeDa
 
 export const finnOpptjeningFom = (
   opptjeningFom: string,
-  opptjeningsperiodeFom: string,
-  opptjeningsperiodeTom: string,
-) =>
-  dayjs(opptjeningFom).isBefore(opptjeningsperiodeFom)
+  opptjeningsperiodeFom?: string,
+  opptjeningsperiodeTom?: string,
+): string | undefined => {
+  if (!opptjeningsperiodeFom || !opptjeningsperiodeTom) {
+    return undefined;
+  }
+
+  return dayjs(opptjeningFom).isBefore(opptjeningsperiodeFom)
     ? opptjeningsperiodeFom
     : getOpptjeningsperiodeIfEqual(opptjeningFom, opptjeningsperiodeTom);
+};
 
 export const finnOpptjeningTom = (
   opptjeningTom: string,
-  opptjeningsperiodeFom: string,
-  opptjeningsperiodeTom: string,
-) =>
-  dayjs(opptjeningTom).isAfter(opptjeningsperiodeTom)
+  opptjeningsperiodeFom?: string,
+  opptjeningsperiodeTom?: string,
+) => {
+  if (!opptjeningsperiodeFom || !opptjeningsperiodeTom) {
+    return undefined;
+  }
+  return dayjs(opptjeningTom).isAfter(opptjeningsperiodeTom)
     ? opptjeningsperiodeTom
     : getOpptjeningsperiodeIfEqual(opptjeningTom, opptjeningsperiodeFom);
+};

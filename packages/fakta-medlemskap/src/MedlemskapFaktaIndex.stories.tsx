@@ -145,12 +145,12 @@ AvklarOmBrukerHarGyldigPeriode.args = {
         vurderingsdato: '2022-06-28',
         aksjonspunkter: [AksjonspunktCode.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE],
         årsaker: ['SKJÆRINGSTIDSPUNKT'],
-        oppholdsrettVurdering: null,
-        erEosBorger: null,
-        lovligOppholdVurdering: null,
-        bosattVurdering: null,
-        medlemskapManuellVurderingType: null,
-        begrunnelse: null,
+        oppholdsrettVurdering: undefined,
+        erEosBorger: undefined,
+        lovligOppholdVurdering: undefined,
+        bosattVurdering: undefined,
+        medlemskapManuellVurderingType: undefined,
+        begrunnelse: undefined,
         personopplysningBruker: {
           navn: 'Papegøye Margaret',
           personstatus: 'BOSA',
@@ -180,7 +180,7 @@ AvklarOmBrukerHarGyldigPeriode.args = {
       },
     ],
     opphold: [],
-    fom: null,
+    fom: undefined,
   },
   aksjonspunkter: [
     {

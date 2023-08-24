@@ -32,8 +32,6 @@ const OpptjeningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps
   return (
     <RawIntlProvider value={intl}>
       <OpptjeningFaktaPanel
-        opptjeningFomDato={fastsattOpptjening ? fastsattOpptjening.opptjeningFom : undefined}
-        opptjeningTomDato={fastsattOpptjening ? fastsattOpptjening.opptjeningTom : undefined}
         readOnly={readOnly}
         hasOpenAksjonspunkter={harApneAksjonspunkter}
         hasAksjonspunkt={aksjonspunkter[0] !== undefined}

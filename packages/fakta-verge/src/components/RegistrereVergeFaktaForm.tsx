@@ -24,7 +24,7 @@ export type TransformedValues = {
   fnr: string;
   organisasjonsnummer: string;
   gyldigFom: string;
-  gyldigTom: string;
+  gyldigTom?: string;
   kode: AksjonspunktCode.AVKLAR_VERGE;
 };
 
@@ -136,11 +136,11 @@ RegistrereVergeFaktaForm.buildInitialValues = (verge: Verge): FormValues => ({
 });
 
 RegistrereVergeFaktaForm.transformValues = (values: FormValues): TransformedValues => ({
-  vergeType: values.vergeType,
-  navn: values.navn,
-  fnr: values.fnr,
-  organisasjonsnummer: values.organisasjonsnummer,
-  gyldigFom: values.gyldigFom,
+  vergeType: values.vergeType!,
+  navn: values.navn!,
+  fnr: values.fnr!,
+  organisasjonsnummer: values.organisasjonsnummer!,
+  gyldigFom: values.gyldigFom!,
   gyldigTom: values.gyldigTom,
   kode: AksjonspunktCode.AVKLAR_VERGE,
 });

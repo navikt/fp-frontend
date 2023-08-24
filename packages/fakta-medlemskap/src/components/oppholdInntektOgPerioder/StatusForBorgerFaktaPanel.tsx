@@ -23,7 +23,7 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: (periode: MedlemPeriode, aksjonspunkter: Aksjonspunkt[]) => FormValues;
+  buildInitialValues: (periode: MedlemPeriode, aksjonspunkter: Aksjonspunkt[]) => FormValues;
 }
 
 /**
@@ -55,7 +55,7 @@ const StatusForBorgerFaktaPanel: FunctionComponent<OwnProps> & StaticFunctions =
   return (
     <FaktaGruppe
       title={intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.ApplicationInformation' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunkt?.definisjon]}
+      merknaderFraBeslutter={aksjonspunkt?.definisjon ? alleMerknaderFraBeslutter[aksjonspunkt.definisjon] : undefined}
     >
       <RadioGroupPanel
         name="erEosBorger"

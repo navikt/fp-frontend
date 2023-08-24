@@ -69,7 +69,7 @@ interface OwnProps {
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   submittable: boolean;
   soknad: Soknad;
-  lagreEnkeltPeriode: (periode: MedlemPeriode) => void;
+  lagreEnkeltPeriode?: (periode: MedlemPeriode) => void;
   setValgtPeriode: (periode?: MedlemPeriode) => void;
 }
 

@@ -9,10 +9,10 @@ import { ankeVurdering as ankeVurderingKodeverk, ankeVurderingOmgjoer, KodeverkT
 import { AlleKodeverk, AnkeVurdering } from '@navikt/fp-types';
 
 export type BehandlingInfo = {
-  uuid?: string;
-  opprettet?: string;
-  type?: string;
-  status?: string;
+  uuid: string;
+  opprettet: string;
+  type: string;
+  status: string;
 };
 
 const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
@@ -26,7 +26,7 @@ const formatId = (id?: string): string => {
   return id;
 };
 
-const formatBehandlingId = (vedtak: string, behandlinger: BehandlingInfo[], alleKodeverk: AlleKodeverk): string => {
+const formatBehandlingId = (behandlinger: BehandlingInfo[], alleKodeverk: AlleKodeverk, vedtak?: string): string => {
   const info = behandlinger.find(b => b.uuid === vedtak);
   const behandlingTyper = alleKodeverk[KodeverkType.BEHANDLING_TYPE];
   const behandlingStatuser = alleKodeverk[KodeverkType.BEHANDLING_STATUS];
@@ -48,7 +48,7 @@ interface OwnProps {
  */
 const BehandleAnkeForm: FunctionComponent<OwnProps> = ({ ankeVurdering, behandlinger, alleKodeverk }) => {
   const avr = ankeVurdering.ankeVurderingResultat;
-  const vedtak = avr ? formatId(avr.påAnketKlageBehandlingUuid) : null;
+  const vedtak = avr ? formatId(avr.påAnketKlageBehandlingUuid) : undefined;
 
   const ankeOmgorArsaker = alleKodeverk[KodeverkType.ANKE_OMGJOER_AARSAK];
 
@@ -86,51 +86,51 @@ const BehandleAnkeForm: FunctionComponent<OwnProps> = ({ ankeVurdering, behandli
             {vedtak === IKKE_PAA_ANKET_BEHANDLING_ID && (
               <FormattedMessage id="Ankebehandling.Resultat.IkkePaaAnketVedtak" />
             )}
-            {vedtak !== IKKE_PAA_ANKET_BEHANDLING_ID && formatBehandlingId(vedtak, behandlinger, alleKodeverk)}
+            {vedtak !== IKKE_PAA_ANKET_BEHANDLING_ID && formatBehandlingId(behandlinger, alleKodeverk, vedtak)}
           </BodyShort>
           <VerticalSpacer sixteenPx />
           <Label size="small">
             <FormattedMessage id="Ankebehandling.Resultat" />
           </Label>
           <BodyShort size="small">
-            {avr.ankeVurdering === ankeVurderingKodeverk.ANKE_OMGJOER && (
+            {avr?.ankeVurdering === ankeVurderingKodeverk.ANKE_OMGJOER && (
               <FormattedMessage id="Ankebehandling.Resultat.Omgjør" />
             )}
-            {avr.ankeVurdering === ankeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE && (
+            {avr?.ankeVurdering === ankeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE && (
               <FormattedMessage id="Ankebehandling.Resultat.OpphevHjemsend" />
             )}
-            {avr.ankeVurdering === ankeVurderingKodeverk.ANKE_HJEMSENDE_UTEN_OPPHEV && (
+            {avr?.ankeVurdering === ankeVurderingKodeverk.ANKE_HJEMSENDE_UTEN_OPPHEV && (
               <FormattedMessage id="Ankebehandling.Resultat.Hjemsend" />
             )}
-            {avr.ankeVurdering === ankeVurderingKodeverk.ANKE_AVVIS && (
+            {avr?.ankeVurdering === ankeVurderingKodeverk.ANKE_AVVIS && (
               <FormattedMessage id="Ankebehandling.Resultat.Avvis" />
             )}
-            {avr.ankeVurdering === ankeVurderingKodeverk.ANKE_STADFESTE_YTELSESVEDTAK && (
+            {avr?.ankeVurdering === ankeVurderingKodeverk.ANKE_STADFESTE_YTELSESVEDTAK && (
               <FormattedMessage id="Ankebehandling.Resultat.Stadfest" />
             )}
           </BodyShort>
-          {ankeVurderingKodeverk.ANKE_AVVIS === avr.ankeVurdering && !behandletKabal && (
+          {ankeVurderingKodeverk.ANKE_AVVIS === avr?.ankeVurdering && !behandletKabal && (
             <>
               <VerticalSpacer sixteenPx />
               <Label size="small">
                 <FormattedMessage id="Ankebehandling.Avvisning" />
               </Label>
-              {avr.erAnkerIkkePart && (
+              {avr?.erAnkerIkkePart && (
                 <BodyShort size="small">
                   <FormattedMessage id="Ankebehandling.Avvisning.IkkePart" />
                 </BodyShort>
               )}
-              {avr.erIkkeKonkret && (
+              {avr?.erIkkeKonkret && (
                 <BodyShort size="small">
                   <FormattedMessage id="Ankebehandling.Avvisning.IkkeKonkret" />
                 </BodyShort>
               )}
-              {avr.erFristIkkeOverholdt && (
+              {avr?.erFristIkkeOverholdt && (
                 <BodyShort size="small">
                   <FormattedMessage id="Ankebehandling.Avvisning.IkkeFrist" />
                 </BodyShort>
               )}
-              {avr.erIkkeSignert && (
+              {avr?.erIkkeSignert && (
                 <BodyShort size="small">
                   <FormattedMessage id="Ankebehandling.Avvisning.IkkeSignert" />
                 </BodyShort>
@@ -140,7 +140,7 @@ const BehandleAnkeForm: FunctionComponent<OwnProps> = ({ ankeVurdering, behandli
                 <FormattedMessage id="Ankebehandling.Realitetsbehandles" />
               </Label>
               <BodyShort size="small">
-                {avr.erSubsidiartRealitetsbehandles ? (
+                {avr?.erSubsidiartRealitetsbehandles ? (
                   <FormattedMessage id="Ankebehandling.Realitetsbehandles.Ja" />
                 ) : (
                   <FormattedMessage id="Ankebehandling.Realitetsbehandles.Nei" />
@@ -148,31 +148,31 @@ const BehandleAnkeForm: FunctionComponent<OwnProps> = ({ ankeVurdering, behandli
               </BodyShort>
             </>
           )}
-          {ankeVurderingKodeverk.ANKE_OMGJOER === avr.ankeVurdering && (
+          {ankeVurderingKodeverk.ANKE_OMGJOER === avr?.ankeVurdering && (
             <>
               <VerticalSpacer sixteenPx />
               <Label size="small">
                 <FormattedMessage id="Ankebehandling.Avvisning" />
               </Label>
               <BodyShort size="small">
-                {ankeOmgorArsaker.find(aoa => aoa.kode === avr.ankeOmgjoerArsak)?.navn}
+                {ankeOmgorArsaker.find(aoa => aoa.kode === avr?.ankeOmgjoerArsak)?.navn}
               </BodyShort>
               <VerticalSpacer sixteenPx />
               <BodyShort size="small">
-                {avr.ankeVurderingOmgjoer === ankeVurderingOmgjoer.ANKE_TIL_GUNST && (
+                {avr?.ankeVurderingOmgjoer === ankeVurderingOmgjoer.ANKE_TIL_GUNST && (
                   <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Gunst" />
                 )}
-                {avr.ankeVurderingOmgjoer === ankeVurderingOmgjoer.ANKE_TIL_UGUNST && (
+                {avr?.ankeVurderingOmgjoer === ankeVurderingOmgjoer.ANKE_TIL_UGUNST && (
                   <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Ugunst" />
                 )}
-                {avr.ankeVurderingOmgjoer === ankeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST && (
+                {avr?.ankeVurderingOmgjoer === ankeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST && (
                   <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Delvis" />
                 )}
               </BodyShort>
             </>
           )}
-          {(ankeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE === avr.ankeVurdering ||
-            ankeVurderingKodeverk.ANKE_HJEMSENDE_UTEN_OPPHEV === avr.ankeVurdering) &&
+          {(ankeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE === avr?.ankeVurdering ||
+            ankeVurderingKodeverk.ANKE_HJEMSENDE_UTEN_OPPHEV === avr?.ankeVurdering) &&
             !behandletKabal && (
               <>
                 <VerticalSpacer sixteenPx />
@@ -188,12 +188,12 @@ const BehandleAnkeForm: FunctionComponent<OwnProps> = ({ ankeVurdering, behandli
           <Label size="small">
             <FormattedMessage id="Ankebehandling.Begrunnelse" />
           </Label>
-          <BodyShort size="small">{avr.begrunnelse}</BodyShort>
+          <BodyShort size="small">{avr?.begrunnelse}</BodyShort>
           <VerticalSpacer sixteenPx />
           <Label size="small">
             <FormattedMessage id="FritekstAnkeBrevTextField.Fritekst" />
           </Label>
-          <BodyShort size="small">{avr.fritekstTilBrev}</BodyShort>
+          <BodyShort size="small">{avr?.fritekstTilBrev}</BodyShort>
           <VerticalSpacer sixteenPx />
         </>
       )}

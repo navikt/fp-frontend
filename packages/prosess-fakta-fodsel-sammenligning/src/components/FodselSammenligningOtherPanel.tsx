@@ -13,7 +13,7 @@ const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMA
 
 interface OwnProps {
   soknad: Soknad;
-  termindato: string;
+  termindato?: string;
 }
 
 export const getTerminEllerFodselsdato = (
@@ -31,7 +31,7 @@ export const getTerminEllerFodselsdato = (
   if (!hasSoknad) {
     return null;
   }
-  return formatDate(termindatoSoknad);
+  return termindatoSoknad ? formatDate(termindatoSoknad) : '-';
 };
 
 /**

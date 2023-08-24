@@ -75,7 +75,7 @@ const hentToggleDetaljer =
 
 const transformValues = (values: FormValues): VurderFeilutbetalingAp => {
   const { videreBehandling, varseltekst, begrunnelse } = values;
-  if (videreBehandling.endsWith(IKKE_SEND)) {
+  if (videreBehandling && videreBehandling.endsWith(IKKE_SEND)) {
     return {
       kode: AksjonspunktCode.VURDER_FEILUTBETALING,
       begrunnelse,
@@ -86,12 +86,15 @@ const transformValues = (values: FormValues): VurderFeilutbetalingAp => {
   return {
     kode: AksjonspunktCode.VURDER_FEILUTBETALING,
     begrunnelse,
-    videreBehandling,
+    videreBehandling: videreBehandling!,
     varseltekst,
   };
 };
 
-const buildInitialValues = (aksjonspunkt: Aksjonspunkt, tilbakekrevingvalg?: TilbakekrevingValg): FormValues => {
+const buildInitialValues = (
+  aksjonspunkt?: Aksjonspunkt,
+  tilbakekrevingvalg?: TilbakekrevingValg,
+): FormValues | undefined => {
   if (!aksjonspunkt || !tilbakekrevingvalg) {
     return undefined;
   }

@@ -127,6 +127,7 @@ const lagBarn = (antallBarnFraSoknad: number): AvklartBarn[] => {
   }
   const childrenArray: AvklartBarn[] = [];
   while (antallBarn > 0) {
+    // @ts-ignore Fiks
     childrenArray.push({ fodselsdato: undefined, dodsdato: undefined });
     antallBarn -= 1;
   }
@@ -152,9 +153,9 @@ SjekkFodselDokForm.buildInitialValues = (soknad, familiehendelse, aksjonspunkt):
 
 SjekkFodselDokForm.transformValues = (values: FormValues, avklartBarn: AvklartBarn[]): SjekkManglendeFodselAp => ({
   kode: AksjonspunktCode.SJEKK_MANGLENDE_FODSEL,
-  dokumentasjonForeligger: values.dokumentasjonForeligger,
-  uidentifiserteBarn: ryddOppIAvklarteBarn(values.avklartBarn),
-  brukAntallBarnITps: avklartBarn && !!avklartBarn.length ? values.brukAntallBarnITps : false,
+  dokumentasjonForeligger: values.dokumentasjonForeligger!,
+  uidentifiserteBarn: ryddOppIAvklarteBarn(values.avklartBarn!),
+  brukAntallBarnITps: avklartBarn && !!avklartBarn.length ? values.brukAntallBarnITps! : false,
   ...FaktaBegrunnelseTextFieldNew.transformValues(values),
 });
 

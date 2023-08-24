@@ -31,7 +31,7 @@ const UTTAK_ÅRSAK_TEKSTER = {
   [UttakÅrsak.TIDLIG_OPPSTART_FAR]: 'UttakDokumentasjonFaktaTable.TidligOppstartFar',
 };
 
-const finnType = type => {
+const finnType = (type: UttakType) => {
   if (type === UttakType.UTSETTELSE) {
     return <FormattedMessage id="UttakDokumentasjonFaktaTable.Utsettelse" />;
   }
@@ -68,10 +68,12 @@ const UttakDokumentasjonFaktaTable: FunctionComponent<OwnProps> = ({
 
   const velgDokBehovFomDato = useCallback(
     (fom?: string) => {
-      if (valgtDokBehovFomDatoer.includes(fom)) {
-        setDokBehovFomDatoer(foms => foms.filter(f => f !== fom));
-      } else {
-        setDokBehovFomDatoer(foms => foms.concat(fom));
+      if (fom) {
+        if (valgtDokBehovFomDatoer.includes(fom)) {
+          setDokBehovFomDatoer(foms => foms.filter(f => f !== fom));
+        } else {
+          setDokBehovFomDatoer(foms => foms.concat(fom));
+        }
       }
     },
     [valgtDokBehovFomDatoer, setDokBehovFomDatoer],

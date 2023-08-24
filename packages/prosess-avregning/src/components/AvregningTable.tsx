@@ -64,7 +64,7 @@ const skalViseCollapseButton = (mottakerResultatPerFag: SimuleringResultatPerFag
 
 const rowToggable = (fagOmråde: SimuleringResultatPerFagområde, rowIsFeilUtbetalt: boolean): boolean => {
   const fagFeilUtbetalt = fagOmråde.rader.find(rad => rad.feltnavn === avregningCodes.DIFFERANSE);
-  return fagFeilUtbetalt && !rowIsFeilUtbetalt;
+  return !!fagFeilUtbetalt && !rowIsFeilUtbetalt;
 };
 
 const rowIsHidden = (isRowToggable: boolean, showDetails: boolean): boolean => isRowToggable && !showDetails;
@@ -84,21 +84,20 @@ const createColumns = (
     return periodeExists || { måned: `${monthAndYear.month}${monthAndYear.year}`, beløp: null };
   });
 
-  return perioderData.map(
-    (måned: { måned?: string; beløp?: number; periode?: { tom: string } }, månedIndex: number) => (
-      <TableColumn
-        key={`columnIndex${månedIndex + 1}`}
-        className={classNames({
-          rodTekst: måned.beløp < 0,
-          lastColumn: måned.måned
+  return perioderData.map((måned, månedIndex) => (
+    <TableColumn
+      key={`columnIndex${månedIndex + 1}`}
+      className={classNames({
+        rodTekst: !måned.beløp || måned.beløp < 0,
+        lastColumn:
+          'måned' in måned
             ? måned.måned === nextPeriodFormatted
             : dayjs(måned.periode.tom).format('MMMMYY') === nextPeriodFormatted,
-        })}
-      >
-        {formatCurrencyNoKr(måned.beløp)}
-      </TableColumn>
-    ),
-  );
+      })}
+    >
+      {måned.beløp ? formatCurrencyNoKr(måned.beløp) : '-'}
+    </TableColumn>
+  ));
 };
 
 const tableTitle = (mottaker: Mottaker): ReactElement | null =>
@@ -160,6 +159,7 @@ const AvregningTable: FunctionComponent<OwnProps> = ({
       const rangeOfMonths = getPeriod(ingenPerioderMedAvvik, simuleringResultat.periodeFom, mottaker);
       const nesteMåned = mottaker.nestUtbPeriodeTom;
       const visDetaljer = showDetails.find(d => d.id === mottakerIndex);
+      const array = [] as ReactElement[];
       return (
         <div className={styles.tableWrapper} key={`tableIndex${mottakerIndex + 1}`}>
           {tableTitle(mottaker)}
@@ -173,7 +173,7 @@ const AvregningTable: FunctionComponent<OwnProps> = ({
             key={`tableIndex${mottakerIndex + 1}`}
             classNameTable={styles.simuleringTable}
           >
-            {[]
+            {array
               .concat(
                 ...mottaker.resultatPerFagområde.map((fagOmråde, fagIndex) =>
                   fagOmråde.rader

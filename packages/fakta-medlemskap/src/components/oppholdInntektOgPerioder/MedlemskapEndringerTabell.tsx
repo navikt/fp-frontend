@@ -10,7 +10,7 @@ const headerTextCodes = ['MedlemskapEndringerTabell.GjeldeneFom', 'MedlemskapEnd
 interface OwnProps {
   perioder: MedlemPeriode[];
   valgtPeriodeVurderingsdato?: string;
-  velgPeriodeCallback: (_p, id: string, periode: MedlemPeriode) => void;
+  velgPeriodeCallback: (_p: React.KeyboardEvent | React.MouseEvent, id?: string, periode?: MedlemPeriode) => void;
   aksjonspunkter: Aksjonspunkt[];
 }
 

@@ -29,13 +29,13 @@ const buildInitialValues = (
   const aksjonspunkt = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktCode.OVERSTYR_BEREGNING);
   return {
     begrunnelse: decodeHtmlEntity(aksjonspunkt && aksjonspunkt.begrunnelse ? aksjonspunkt.begrunnelse : ''),
-    beregnetTilkjentYtelse: behandlingResultatstruktur.beregnetTilkjentYtelse,
+    beregnetTilkjentYtelse: behandlingResultatstruktur?.beregnetTilkjentYtelse,
   };
 };
 
 const transformValues = (values: FormValues): OverstyringBeregningAp => ({
   kode: AksjonspunktCode.OVERSTYR_BEREGNING,
-  beregnetTilkjentYtelse: values.beregnetTilkjentYtelse,
+  beregnetTilkjentYtelse: values.beregnetTilkjentYtelse!,
   begrunnelse: values.begrunnelse,
 });
 
@@ -114,7 +114,9 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
             </Detail>
           </FlexColumn>
           <FlexColumn>
-            <Label size="small">{formatCurrencyWithKr(behandlingResultatstruktur.satsVerdi)}</Label>
+            <Label size="small">
+              {behandlingResultatstruktur?.satsVerdi ? formatCurrencyWithKr(behandlingResultatstruktur.satsVerdi) : '-'}
+            </Label>
           </FlexColumn>
         </FlexRow>
         <FlexRow>
@@ -124,7 +126,9 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
             </Detail>
           </FlexColumn>
           <FlexColumn>
-            <Label size="small">{behandlingResultatstruktur.antallBarn}</Label>
+            <Label size="small">
+              {behandlingResultatstruktur?.antallBarn ? behandlingResultatstruktur.antallBarn : '-'}
+            </Label>
           </FlexColumn>
         </FlexRow>
         {!erIOverstyringsmodus && !harOverstyringAksjonspunkt && (
@@ -141,7 +145,11 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
                 </Detail>
               </FlexColumn>
               <FlexColumn>
-                <Label size="small">{formatCurrencyWithKr(behandlingResultatstruktur.beregnetTilkjentYtelse)}</Label>
+                <Label size="small">
+                  {behandlingResultatstruktur?.beregnetTilkjentYtelse
+                    ? formatCurrencyWithKr(behandlingResultatstruktur.beregnetTilkjentYtelse)
+                    : '-'}
+                </Label>
               </FlexColumn>
             </FlexRow>
           </>

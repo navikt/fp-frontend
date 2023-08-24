@@ -23,11 +23,14 @@ import {
 import { ArbeidsforholdKomplettVurderingType, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 
 import ManueltLagtTilArbeidsforholdForm, { MANUELT_ORG_NR } from './manuelt/ManueltLagtTilArbeidsforholdForm';
-import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
+import ArbeidsforholdOgInntektRadData from '../types/arbeidsforholdOgInntekt';
 
 import styles from './arbeidsOgInntektOverstyrPanel.module.css';
 
-const finnAksjonspunktTekstKoder = (tabellData: ArbeidsforholdOgInntekt[], aksjonspunkt?: Aksjonspunkt): string[] => {
+const finnAksjonspunktTekstKoder = (
+  tabellData: ArbeidsforholdOgInntektRadData[],
+  aksjonspunkt?: Aksjonspunkt,
+): string[] => {
   const harManglendeInntektsmeldinger = tabellData.some(d => d.årsak === AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING);
   const harManglandeOpplysninger = tabellData.some(
     d => d.årsak === AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
@@ -51,10 +54,10 @@ interface OwnProps {
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   erOverstyrer: boolean;
-  tabellData: ArbeidsforholdOgInntekt[];
+  tabellData: ArbeidsforholdOgInntektRadData[];
   settÅpneRadIndexer: React.Dispatch<React.SetStateAction<number[]>>;
   setErOverstyrt: React.Dispatch<React.SetStateAction<boolean>>;
-  oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>;
+  oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void;
 }
 
 const ArbeidsOgInntektOverstyrPanel: FunctionComponent<OwnProps> = ({

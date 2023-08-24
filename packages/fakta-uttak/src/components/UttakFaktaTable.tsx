@@ -26,15 +26,17 @@ const getTypeTekst = (
   alleKodeverk: AlleKodeverk,
   periode: KontrollerFaktaPeriodeMedApMarkering,
   intl: IntlShape,
-): string => {
+): string | undefined => {
   const årsaktype = utledÅrsakstype(periode);
   if (årsaktype === Årsakstype.UTTAK || årsaktype === Årsakstype.OVERFØRING) {
     const tekst = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE].find(k => k.kode === periode.uttakPeriodeType)?.navn;
-    return periode.arbeidstidsprosent > 0 ? `${tekst} - Gradert ${periode.arbeidstidsprosent}%` : tekst;
+    return periode.arbeidstidsprosent && periode.arbeidstidsprosent > 0
+      ? `${tekst} - Gradert ${periode.arbeidstidsprosent}%`
+      : tekst;
   }
   if (årsaktype === Årsakstype.OPPHOLD) {
     const navn = alleKodeverk[KodeverkType.OPPHOLD_ARSAK].find(k => k.kode === periode.oppholdÅrsak)?.navn;
-    return intl.formatMessage({ id: 'UttakFaktaTabel.Opphold' }, { arsak: navn.replace('har uttak av', '') });
+    return intl.formatMessage({ id: 'UttakFaktaTabel.Opphold' }, { arsak: navn?.replace('har uttak av', '') });
   }
   if (årsaktype === Årsakstype.UTSETTELSE) {
     const navn = alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE].find(k => k.kode === periode.utsettelseÅrsak)?.navn;
@@ -78,11 +80,13 @@ const UttakFaktaTable: FunctionComponent<OwnProps> = ({
 
   const velgPeriodeFomDato = useCallback(
     (fom?: string, lukkAlleAndre = false) => {
-      if (valgteFomDatoer.includes(fom)) {
+      if (fom && valgteFomDatoer.includes(fom)) {
         setValgteFomDatoer(foms => foms.filter(f => f !== fom));
-      } else {
+      } else if (lukkAlleAndre) {
         const nye = fom ? [fom] : [];
-        setValgteFomDatoer(foms => (lukkAlleAndre ? nye : foms.concat(fom)));
+        setValgteFomDatoer(() => nye);
+      } else if (fom) {
+        setValgteFomDatoer(foms => foms.concat(fom));
       }
     },
     [valgteFomDatoer, setValgteFomDatoer],

@@ -47,7 +47,7 @@ const TrygderettsbehandlingForm: FunctionComponent<OwnProps> = ({ ankeVurdering,
             <FormattedMessage id="Ankebehandling.Merknad.Merknader" />
           </Label>
           <BodyShort size="small">
-            {avr.erMerknaderMottatt ? (
+            {avr?.erMerknaderMottatt ? (
               <FormattedMessage id="Ankebehandling.Merknad.Merknader.Ja" />
             ) : (
               <FormattedMessage id="Ankebehandling.Merknad.Merknader.Nei" />
@@ -57,38 +57,38 @@ const TrygderettsbehandlingForm: FunctionComponent<OwnProps> = ({ ankeVurdering,
           <Label size="small">
             <FormattedMessage id="Ankebehandling.Fritekst" />
           </Label>
-          <BodyShort size="small">{avr.merknadKommentar}</BodyShort>
+          <BodyShort size="small">{avr?.merknadKommentar}</BodyShort>
           <VerticalSpacer sixteenPx />
           <Label size="small">
             <FormattedMessage id="Ankebehandling.Resultat" />
           </Label>
           <BodyShort size="small">
-            {avr.trygderettVurdering === ankeVurderingType.ANKE_OMGJOER && (
+            {avr?.trygderettVurdering === ankeVurderingType.ANKE_OMGJOER && (
               <FormattedMessage id="Ankebehandling.Resultat.Omgjør" />
             )}
-            {avr.trygderettVurdering === ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE && (
+            {avr?.trygderettVurdering === ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE && (
               <FormattedMessage id="Ankebehandling.Resultat.Opphev" />
             )}
-            {avr.trygderettVurdering === ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV && (
+            {avr?.trygderettVurdering === ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV && (
               <FormattedMessage id="Ankebehandling.Resultat.Hjemsend" />
             )}
-            {avr.trygderettVurdering === ankeVurderingType.ANKE_AVVIS && (
+            {avr?.trygderettVurdering === ankeVurderingType.ANKE_AVVIS && (
               <FormattedMessage id="Ankebehandling.Resultat.Avvis" />
             )}
-            {avr.trygderettVurdering === ankeVurderingType.ANKE_STADFESTE_YTELSESVEDTAK && (
+            {avr?.trygderettVurdering === ankeVurderingType.ANKE_STADFESTE_YTELSESVEDTAK && (
               <FormattedMessage id="Ankebehandling.Resultat.Stadfest" />
             )}
           </BodyShort>
         </>
       )}
-      {ankeVurderingType.ANKE_OMGJOER === avr.trygderettVurdering && (
+      {ankeVurderingType.ANKE_OMGJOER === avr?.trygderettVurdering && (
         <>
           <VerticalSpacer sixteenPx />
           <Label size="small">
             <FormattedMessage id="Ankebehandling.OmgjoeringArsak" />
           </Label>
           <BodyShort size="small">
-            {ankeOmgorArsaker.find(aoa => aoa.kode === avr.trygderettOmgjoerArsak)?.navn}
+            {ankeOmgorArsaker.find(aoa => aoa.kode === avr?.trygderettOmgjoerArsak)?.navn}
           </BodyShort>
           <VerticalSpacer sixteenPx />
           <BodyShort size="small">
@@ -104,8 +104,8 @@ const TrygderettsbehandlingForm: FunctionComponent<OwnProps> = ({ ankeVurdering,
           </BodyShort>
         </>
       )}
-      {(ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE === avr.trygderettVurdering ||
-        ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV === avr.trygderettVurdering) &&
+      {(ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE === avr?.trygderettVurdering ||
+        ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV === avr?.trygderettVurdering) &&
         !behandletKabal && (
           <>
             <VerticalSpacer sixteenPx />

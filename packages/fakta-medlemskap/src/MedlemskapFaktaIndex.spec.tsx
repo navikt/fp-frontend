@@ -91,10 +91,10 @@ describe('<MedlemskapFaktaIndex>', () => {
             aksjonspunkter: [AksjonspunktCode.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE],
             begrunnelse: 'Dette er en begrunnelse',
             bosattVurdering: undefined,
-            erEosBorger: null,
-            lovligOppholdVurdering: null,
+            erEosBorger: undefined,
+            lovligOppholdVurdering: undefined,
             medlemskapManuellVurderingType: 'MEDLEM',
-            oppholdsrettVurdering: null,
+            oppholdsrettVurdering: undefined,
             personopplysningAnnenPart: {
               adresser: [
                 {

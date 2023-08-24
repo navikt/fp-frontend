@@ -37,7 +37,7 @@ import ForeldrePanel from './ForeldrePanel';
 
 import styles from './omsorgOgForeldreansvarFaktaForm.module.css';
 
-const getDescriptionText = (vilkarCode: string): ReactElement => {
+const getDescriptionText = (vilkarCode?: string): ReactElement => {
   if (vilkarCode === VilkarType.OMSORGSVILKARET) {
     return <FormattedMessage id="OmsorgOgForeldreansvarFaktaForm.HelpTextOmsorgTredjeLedd" />;
   }
@@ -79,13 +79,13 @@ interface PureOwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: (
+  buildInitialValues: (
     soknad: Soknad,
     familiehendelse: FamilieHendelse,
     innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[],
     getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
   ) => FormValues;
-  transformValues?: (
+  transformValues: (
     values: FormValues,
     aksjonspunkt: Aksjonspunkt,
   ) => AvklarFaktaForForeldreansvarAksjonspunktAp | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp;

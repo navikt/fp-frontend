@@ -15,7 +15,7 @@ const getLopendeOrAvsluttetYtelser = (
   ytelse.tilgrensendeYtelserListe.filter(y => y.status !== relatertYtelseTilstand.APEN);
 
 export type FormValues = {
-  ytelser?: RelatertTilgrensedYtelse[];
+  ytelser: RelatertTilgrensedYtelse[];
   farSokerType?: string;
 };
 
@@ -25,7 +25,7 @@ interface PureOwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: (
+  buildInitialValues: (
     soknad: Soknad,
     innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[],
     getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
@@ -40,7 +40,7 @@ const RettighetFaktaPanel: FunctionComponent<PureOwnProps> & StaticFunctions = (
   alleMerknaderFraBeslutter,
 }) => {
   const intl = useIntl();
-  const { watch } = useFormContext();
+  const { watch } = useFormContext<FormValues>();
 
   const farSokerType = watch('farSokerType');
   const ytelser = watch('ytelser');
@@ -58,14 +58,11 @@ const RettighetFaktaPanel: FunctionComponent<PureOwnProps> & StaticFunctions = (
       >
         {ytelser.map(ytelse =>
           getLopendeOrAvsluttetYtelser(ytelse).map(y => (
-            <div
-              className={styles.wrapper}
-              key={`${relatertYtelseTypes[ytelse.relatertYtelseType]}-${y.periodeFraDato}`}
-            >
+            <div className={styles.wrapper} key={`${ytelse.relatertYtelseType}-${y.periodeFraDato}`}>
               <BodyShort size="small" className={styles.iverksatt}>
                 <FormattedMessage
                   id="OmsorgOgForeldreansvarFaktaForm.YtelseIverksatt"
-                  values={{ ytelseType: relatertYtelseTypes.find(r => r.kode === ytelse.relatertYtelseType).navn }}
+                  values={{ ytelseType: relatertYtelseTypes.find(r => r.kode === ytelse.relatertYtelseType)?.navn }}
                 />
                 <DateLabel dateString={y.periodeFraDato} />
               </BodyShort>
@@ -84,7 +81,7 @@ RettighetFaktaPanel.buildInitialValues = (
   getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
 ): FormValues => ({
   ytelser: innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
-  farSokerType: getKodeverknavn(soknad.farSokerType, KodeverkType.FAR_SOEKER_TYPE),
+  farSokerType: soknad.farSokerType ? getKodeverknavn(soknad.farSokerType, KodeverkType.FAR_SOEKER_TYPE) : undefined,
 });
 
 export default RettighetFaktaPanel;
