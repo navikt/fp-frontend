@@ -3496,7 +3496,7 @@ __metadata:
     "@navikt/ft-sak-behandling-velger": 2.0.53
     "@navikt/ft-sak-dekorator": 4.0.11
     "@navikt/ft-sak-dokumenter": 2.0.47
-    "@navikt/ft-sak-fagsak-profil": 3.0.17
+    "@navikt/ft-sak-fagsak-profil": 3.0.18
     "@navikt/ft-sak-infosider": 2.0.45
     "@navikt/ft-sak-meny": 3.0.18
     "@navikt/ft-sak-risikoklassifisering": 2.1.32
@@ -5682,9 +5682,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ft-sak-fagsak-profil@npm:3.0.17":
-  version: 3.0.17
-  resolution: "@navikt/ft-sak-fagsak-profil@npm:3.0.17::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-sak-fagsak-profil%2F3.0.17%2F69c1f31f592f378b485108bb1792e3829a44a000"
+"@navikt/ft-sak-fagsak-profil@npm:3.0.18":
+  version: 3.0.18
+  resolution: "@navikt/ft-sak-fagsak-profil@npm:3.0.18::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-sak-fagsak-profil%2F3.0.18%2F548ac62575991e52779cee23a617cf95db43897a"
   dependencies:
     "@navikt/ds-css": 4.11.0
     "@navikt/ds-react": 4.11.0
@@ -5703,7 +5703,7 @@ __metadata:
     "@navikt/ft-utils": 2.x
     react: 18.2.0
     react-intl: 6.3.2
-  checksum: 98ea18ccfd956116ebe5516336f84ac88ad7da95a77def8aad920f918c45c39b18094126b02bd0ada3294c06c8e1c3486a8901a6641bf4cea8e19999a8ffc634
+  checksum: 7918b030cdc32457128c81f2ba47a48cf66b547804855df8657f43005d7a7c8838fc34cee2a0fb0716ce020379838b80f5701240e69529e79d34e57257ac29de
   languageName: node
   linkType: hard
 
