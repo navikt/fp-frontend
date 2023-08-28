@@ -135,7 +135,7 @@
     "react-modal": "3.16.1",
     "react-popper": "2.3.0",
     "react-responsive": "9.0.2",
-    "react-router": "6.14.2",
+    "react-router": "6.15.0",
     "react-router-dom": "6.14.2",
     "rollup-plugin-sourcemaps": "0.6.3",
     "vis-data": "7.1.6",
