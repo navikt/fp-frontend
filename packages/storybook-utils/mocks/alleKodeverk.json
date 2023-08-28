@@ -4264,6 +4264,11 @@
       "navn": "Nytt refusjonskrav"
     },
     {
+      "kode": "DODSDATO",
+      "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE",
+      "navn": "Dødsdato"
+    },
+    {
       "kode": "DOKUMENTASJON_FORELIGGER",
       "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE",
       "navn": "Dokumentasjon foreligger"

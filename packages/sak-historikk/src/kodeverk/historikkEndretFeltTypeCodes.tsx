@@ -48,6 +48,10 @@ const historikkEndretFeltTypeCodes = {
     kode: 'BRUTTO_NAERINGSINNTEKT',
     feltId: 'HistorikkEndretFelt.FastsettSelvstendigNaeringForm.BruttoBerGr',
   },
+  DODSDATO: {
+    kode: 'DODSDATO',
+    feltId: 'Historikk.Fodsel.Dødsdato',
+  },
   DOKUMENTASJON_FORELIGGER: {
     kode: 'DOKUMENTASJON_FORELIGGER',
     feltId: 'Historikk.Fodsel.DokumentasjonForeligger',
