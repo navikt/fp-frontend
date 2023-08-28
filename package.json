@@ -75,7 +75,7 @@
     "eslint-plugin-react": "7.33.1",
     "eslint-plugin-testing-library": "5.11.0",
     "eslint-plugin-vitest": "0.2.8",
-    "gh-pages": "5.0.0",
+    "gh-pages": "6.0.0",
     "husky": "8.0.3",
     "jsdom": "22.1.0",
     "lerna": "7.1.5",
