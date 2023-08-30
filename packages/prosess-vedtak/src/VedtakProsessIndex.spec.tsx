@@ -131,7 +131,7 @@ describe('<VedtakProsessIndex>', () => {
 
     await waitFor(() => expect(screen.queryByText('Feltet må fylles ut')).not.toBeInTheDocument());
 
-    await userEvent.click(screen.getByText('Forkast manuelt brev'));
+    await userEvent.click(screen.getAllByText('Forkast manuelt brev')[0]);
 
     expect(
       await screen.findByText(
