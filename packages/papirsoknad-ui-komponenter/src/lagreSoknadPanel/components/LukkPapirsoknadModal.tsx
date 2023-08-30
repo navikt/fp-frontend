@@ -24,14 +24,11 @@ const LukkPapirSoknadModal: FunctionComponent<OwnProps> = ({ showModal, handleSu
   const intl = useIntl();
   return (
     <Modal
-      className={styles.modal}
       open={showModal}
-      closeButton={false}
       aria-label={intl.formatMessage({ id: 'ModalLukkPapirSoknad.ModalDescription' })}
       onClose={cancelEvent}
-      shouldCloseOnOverlayClick={false}
     >
-      <Modal.Content>
+      <Modal.Body>
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
@@ -47,23 +44,18 @@ const LukkPapirSoknadModal: FunctionComponent<OwnProps> = ({ showModal, handleSu
               <BodyShort size="small">{intl.formatMessage({ id: 'ModalLukkPapirSoknad.BekreftAvslag' })}</BodyShort>
             </FlexColumn>
           </FlexRow>
-          <VerticalSpacer sixteenPx />
-          <FlexRow>
-            <FlexColumn className={styles.flowRight}>
-              <Link to="/">
-                <Button size="small" variant="primary" onClick={() => handleSubmit()} type="button">
-                  {intl.formatMessage({ id: 'ModalLukkPapirSoknad.Ok' })}
-                </Button>
-              </Link>
-            </FlexColumn>
-            <FlexColumn>
-              <Button size="small" variant="secondary" onClick={cancelEvent} type="button">
-                {intl.formatMessage({ id: 'ModalLukkPapirSoknad.Avbryt' })}
-              </Button>
-            </FlexColumn>
-          </FlexRow>
         </FlexContainer>
-      </Modal.Content>
+      </Modal.Body>
+      <Modal.Footer>
+        <Link to="/">
+          <Button size="small" variant="primary" onClick={() => handleSubmit()} type="button">
+            {intl.formatMessage({ id: 'ModalLukkPapirSoknad.Ok' })}
+          </Button>
+        </Link>
+        <Button size="small" variant="secondary" onClick={cancelEvent} type="button">
+          {intl.formatMessage({ id: 'ModalLukkPapirSoknad.Avbryt' })}
+        </Button>
+      </Modal.Footer>
     </Modal>
   );
 };

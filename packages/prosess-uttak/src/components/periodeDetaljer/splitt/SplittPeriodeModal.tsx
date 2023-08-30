@@ -2,9 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
-import { Detail, Label, BodyShort, Modal, Button } from '@navikt/ds-react';
+import { Detail, BodyShort, Modal, Button, Heading } from '@navikt/ds-react';
 import { Datepicker, Form } from '@navikt/ft-form-hooks';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
@@ -50,36 +50,32 @@ const SplittPeriodeModal: FunctionComponent<OwnProps> = ({ fomDato, tomDato, sub
   const numberOfDaysAndWeeks = calcDaysAndWeeks(fomDato, dato);
 
   return (
-    <Modal
-      open
-      aria-label={intl.formatMessage({ id: 'DelOppPeriodeModalImpl.ModalDescription' })}
-      onClose={cancel}
-      closeButton={false}
-      className={styles.modal}
-      shouldCloseOnOverlayClick={false}
-    >
-      <Modal.Content>
-        <FlexContainer wrap>
-          <FlexRow wrap>
-            <FlexColumn>
-              <Label size="small" className={styles.marginTop}>
-                <FormattedMessage id="DelOppPeriodeModalImpl.DelOppPerioden" />
-              </Label>
-            </FlexColumn>
-          </FlexRow>
-          <FlexRow wrap className={styles.marginTop}>
-            <FlexColumn>
-              <Detail>
-                <FormattedMessage id="DelOppPeriodeModalImpl.Periode" />
-              </Detail>
-              <BodyShort size="small">
-                {`${dayjs(fomDato.toString()).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(tomDato.toString()).format(
-                  DDMMYYYY_DATE_FORMAT,
-                )}`}
-              </BodyShort>
-            </FlexColumn>
-          </FlexRow>
-          <Form formMethods={formMethods} onSubmit={values => submit(values.dato)}>
+    <Form formMethods={formMethods} onSubmit={values => submit(values.dato)}>
+      <Modal
+        open
+        aria-label={intl.formatMessage({ id: 'DelOppPeriodeModalImpl.ModalDescription' })}
+        onClose={cancel}
+        className={styles.modal}
+      >
+        <Modal.Header>
+          <Heading size="small">
+            <FormattedMessage id="DelOppPeriodeModalImpl.DelOppPerioden" />
+          </Heading>
+        </Modal.Header>
+        <Modal.Body>
+          <FlexContainer wrap>
+            <FlexRow wrap className={styles.marginTop}>
+              <FlexColumn>
+                <Detail>
+                  <FormattedMessage id="DelOppPeriodeModalImpl.Periode" />
+                </Detail>
+                <BodyShort size="small">
+                  {`${dayjs(fomDato.toString()).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(tomDato.toString()).format(
+                    DDMMYYYY_DATE_FORMAT,
+                  )}`}
+                </BodyShort>
+              </FlexColumn>
+            </FlexRow>
             <FlexRow wrap className={styles.marginTop}>
               <FlexColumn>
                 <Datepicker
@@ -88,28 +84,22 @@ const SplittPeriodeModal: FunctionComponent<OwnProps> = ({ fomDato, tomDato, sub
                   validate={[required, hasValidDate, validerInnenforIntervall(fomDato, tomDato, intl)]}
                   defaultMonth={new Date(fomDato)}
                   disabledDays={{ fromDate: dayjs(fomDato).toDate(), toDate: dayjs(tomDato).toDate() }}
-                  strategy="fixed"
                 />
               </FlexColumn>
               {dato && <FlexColumn className={styles.dager}>{numberOfDaysAndWeeks.formattedString}</FlexColumn>}
             </FlexRow>
-            <VerticalSpacer sixteenPx />
-            <FlexRow wrap>
-              <FlexColumn>
-                <Button size="small" variant="primary">
-                  <FormattedMessage id="DelOppPeriodeModalImpl.Ok" />
-                </Button>
-              </FlexColumn>
-              <FlexColumn>
-                <Button size="small" variant="secondary" onClick={cancel} type="button">
-                  <FormattedMessage id="DelOppPeriodeModalImpl.Avbryt" />
-                </Button>
-              </FlexColumn>
-            </FlexRow>
-          </Form>
-        </FlexContainer>
-      </Modal.Content>
-    </Modal>
+          </FlexContainer>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button size="small" variant="primary">
+            <FormattedMessage id="DelOppPeriodeModalImpl.Ok" />
+          </Button>
+          <Button size="small" variant="secondary" onClick={cancel} type="button">
+            <FormattedMessage id="DelOppPeriodeModalImpl.Avbryt" />
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </Form>
   );
 };
 

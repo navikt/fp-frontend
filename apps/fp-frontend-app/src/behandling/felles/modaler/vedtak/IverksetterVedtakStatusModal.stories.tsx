@@ -1,18 +1,12 @@
 import React from 'react';
 import { RawIntlProvider } from 'react-intl';
+import { action } from '@storybook/addon-actions';
 import { createIntl } from '@navikt/ft-utils';
 import { BehandlingResultatType } from '@navikt/ft-kodeverk';
 
 import IverksetterVedtakStatusModal from './IverksetterVedtakStatusModal';
+import messages from '../../../../../i18n/nb_NO.json';
 
-const messages = {
-  'IverksetterVedtakStatusModal.Avslatt': 'Avslått',
-  'IverksetterVedtakStatusModal.VedtakAvslatt': 'Vedtak avslått',
-  'IverksetterVedtakStatusModal.Innvilget': 'Innvilget',
-  'IverksetterVedtakStatusModal.VedtakInnvilet': 'Vedtak innvilget',
-  'IverksetterVedtakStatusModal.GoToSearchPage': 'Gå til søkeside',
-  'IverksetterVedtakStatusModal.Ok': 'OK',
-};
 const intl = createIntl(messages);
 
 export default {
@@ -22,7 +16,7 @@ export default {
 
 export const visIverksetterVedtakInnvilget = () => (
   <RawIntlProvider value={intl}>
-    <IverksetterVedtakStatusModal visModal lukkModal={() => undefined} />
+    <IverksetterVedtakStatusModal visModal lukkModal={action('button-click')} />
   </RawIntlProvider>
 );
 
@@ -30,7 +24,7 @@ export const visIverksetterVedtakAvslatt = () => (
   <RawIntlProvider value={intl}>
     <IverksetterVedtakStatusModal
       visModal
-      lukkModal={() => undefined}
+      lukkModal={action('button-click')}
       behandlingsresultat={{
         type: BehandlingResultatType.AVSLATT,
       }}

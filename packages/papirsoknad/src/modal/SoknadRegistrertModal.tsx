@@ -22,11 +22,9 @@ const SoknadRegistrertModal: FunctionComponent<OwnProps> = ({ isOpen = false }) 
     className={styles.modalStyle}
     open={isOpen}
     aria-label={intl.formatMessage({ id: 'SoknadRegistrertModal.ContentLabel' })}
-    closeButton={false}
     onClose={() => undefined}
-    shouldCloseOnOverlayClick={false}
   >
-    <Modal.Content>
+    <Modal.Body>
       <Alert size="small" variant="success" className={styles.alertStyle}>
         <div className={styles.left}>
           <p className={styles.reduceMargin}>{intl.formatMessage({ id: 'SoknadRegistrertModal.InfoTextOne' })}</p>
@@ -40,7 +38,7 @@ const SoknadRegistrertModal: FunctionComponent<OwnProps> = ({ isOpen = false }) 
           </Link>
         </div>
       </Alert>
-    </Modal.Content>
+    </Modal.Body>
   </Modal>
 );
 

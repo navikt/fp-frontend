@@ -1,5 +1,6 @@
 import React from 'react';
 import { RawIntlProvider } from 'react-intl';
+import { action } from '@storybook/addon-actions';
 import { createIntl } from '@navikt/ft-utils';
 
 import FatterVedtakStatusModal from './FatterVedtakStatusModal';
@@ -15,6 +16,10 @@ export default {
 
 export const visFatterVedtakModal = () => (
   <RawIntlProvider value={intl}>
-    <FatterVedtakStatusModal visModal lukkModal={() => undefined} tekst="Forslag til vedtak er sendt til beslutter" />
+    <FatterVedtakStatusModal
+      visModal
+      lukkModal={action('button-click')}
+      tekst="Forslag til vedtak er sendt til beslutter"
+    />
   </RawIntlProvider>
 );

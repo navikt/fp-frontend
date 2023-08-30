@@ -132,15 +132,8 @@ const FatterVedtakApprovalModal: FunctionComponent<OwnProps> = ({
   );
 
   return (
-    <Modal
-      className={styles.modal}
-      open
-      closeButton={false}
-      aria-label={intl.formatMessage({ id: modalDescriptionTextCode })}
-      onClose={closeEvent}
-      shouldCloseOnOverlayClick={false}
-    >
-      <Modal.Content>
+    <Modal width="small" open aria-label={intl.formatMessage({ id: modalDescriptionTextCode })} onClose={closeEvent}>
+      <Modal.Body>
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
@@ -165,7 +158,7 @@ const FatterVedtakApprovalModal: FunctionComponent<OwnProps> = ({
             </FlexColumn>
           </FlexRow>
         </FlexContainer>
-      </Modal.Content>
+      </Modal.Body>
     </Modal>
   );
 };

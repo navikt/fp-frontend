@@ -26,14 +26,14 @@
     "storybook": "storybook dev --quiet -p 7067"
   },
   "dependencies": {
-    "@navikt/ft-ui-komponenter": "2.0.47",
-    "@navikt/ft-utils": "2.0.43",
+    "@navikt/ft-ui-komponenter": "2.1.0",
+    "@navikt/ft-utils": "2.1.0",
     "react": "18.2.0",
     "react-hook-form": "7.45.4",
     "react-intl": "6.4.4"
   },
   "devDependencies": {
-    "@navikt/ds-css": "4.10.2",
+    "@navikt/ds-css": "5.2.1",
     "@navikt/fp-storybook-utils": "1.0.0",
     "@storybook/addon-actions": "7.4.0",
     "@storybook/react": "7.4.0",

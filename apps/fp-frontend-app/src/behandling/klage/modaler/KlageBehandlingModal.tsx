@@ -22,14 +22,12 @@ const KlageBehandlingModal: FunctionComponent<OwnProps> = ({ visModal = false, l
   const intl = useIntl();
   return (
     <Modal
-      className={styles.modal}
+      width="small"
       open={visModal}
       aria-label={intl.formatMessage({ id: 'KlageVurderingModal.ModalDescription' })}
       onClose={lukkModal}
-      closeButton={false}
-      shouldCloseOnOverlayClick={false}
     >
-      <Modal.Content>
+      <Modal.Body>
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
@@ -46,7 +44,7 @@ const KlageBehandlingModal: FunctionComponent<OwnProps> = ({ visModal = false, l
             </FlexColumn>
           </FlexRow>
         </FlexContainer>
-      </Modal.Content>
+      </Modal.Body>
     </Modal>
   );
 };

@@ -139,16 +139,13 @@ const SettPaVentModal: FunctionComponent<PureOwnProps> = ({
 
   return (
     <Modal
-      className={styles.modal}
       open={showModal}
-      closeButton={false}
       aria-label={intl.formatMessage({
         id: ventearsak ? 'SettPaVentModal.ModalDescriptionErPaVent' : 'SettPaVentModal.ModalDescription',
       })}
       onClose={cancelEvent}
-      shouldCloseOnOverlayClick={false}
     >
-      <Modal.Content>
+      <Modal.Body>
         <Form formMethods={formMethods} onSubmit={submitCallback}>
           <FlexContainer>
             <FlexRow spaceBetween>
@@ -246,7 +243,7 @@ const SettPaVentModal: FunctionComponent<PureOwnProps> = ({
             </FlexContainer>
           </FlexContainer>
         </Form>
-      </Modal.Content>
+      </Modal.Body>
     </Modal>
   );
 };
