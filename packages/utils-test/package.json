@@ -22,15 +22,15 @@
     "@navikt/fp-rest-api": "1.0.0",
     "@navikt/fp-rest-api-hooks": "1.0.0",
     "@navikt/ft-ui-komponenter": "2.0.47",
-    "@testing-library/jest-dom": "5.17.0",
+    "@testing-library/jest-dom": "6.1.2",
     "axios-mock-adapter": "1.21.5",
     "react": "18.2.0",
     "react-intl": "6.4.4"
   },
   "devDependencies": {
-    "eslint": "8.46.0",
-    "typescript": "5.1.6",
-    "vite": "4.4.7"
+    "eslint": "8.48.0",
+    "typescript": "5.2.2",
+    "vite": "4.4.9"
   },
   "exports": {
     ".": {
