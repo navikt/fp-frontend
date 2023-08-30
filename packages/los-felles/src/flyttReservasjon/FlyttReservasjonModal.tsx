@@ -93,11 +93,10 @@ const FlyttReservasjonModal: FunctionComponent<OwnProps> = ({
     <NavModal
       className={styles.modal}
       open={showModal}
-      closeButton={false}
       aria-label={intl.formatMessage({ id: 'FlyttReservasjonModal.FlyttReservasjon' })}
       onClose={closeModal}
     >
-      <NavModal.Content>
+      <NavModal.Body>
         <Form<SøkFormValues> formMethods={søkFormMethods} onSubmit={values => finnSaksbehandler(values.brukerIdent)}>
           <Label size="small">
             <FormattedMessage id="FlyttReservasjonModal.FlyttReservasjon" />
@@ -174,7 +173,7 @@ const FlyttReservasjonModal: FunctionComponent<OwnProps> = ({
             </FlexRow>
           </FlexContainer>
         </Form>
-      </NavModal.Content>
+      </NavModal.Body>
     </NavModal>
   );
 };

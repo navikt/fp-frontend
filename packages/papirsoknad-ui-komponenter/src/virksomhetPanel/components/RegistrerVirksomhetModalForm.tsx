@@ -50,52 +50,50 @@ const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps> = ({
   });
 
   return (
-    <Modal
-      className={styles.modal}
-      open={showModal}
-      aria-label={intl.formatMessage({ id: 'Registrering.RegistrerVirksomhetModalForm.ModalDescription' })}
-      onClose={closeEvent}
-      closeButton={false}
-      shouldCloseOnOverlayClick={false}
-    >
-      <Modal.Content>
-        <div className={styles.form}>
-          <Form formMethods={formMethods}>
-            <Heading size="small">
-              <FormattedMessage id="Registrering.RegistrerVirksomhetModalForm.Title" />
-            </Heading>
-            <VerticalSpacer twentyPx />
-            <VirksomhetIdentifikasjonPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
-            <VirksomhetTypeNaringPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
-            <VirksomhetStartetEndretPanel readOnly={readOnly} />
-            <VirksomhetRegnskapPanel readOnly={readOnly} />
-            <VerticalSpacer sixteenPx />
-            <VirksomhetRelasjonPanel readOnly={readOnly} />
-            <VerticalSpacer sixteenPx />
-            <Button
-              size="small"
-              variant="primary"
-              onClick={formMethods.handleSubmit(onSubmit)}
-              disabled={readOnly}
-              className={styles.savebutton}
-              type="button"
-            >
-              <FormattedMessage id="Registrering.RegistrerVirksomhetModalForm.Save" />
-            </Button>
-            <Button
-              size="small"
-              variant="secondary"
-              onClick={closeEvent}
-              disabled={readOnly}
-              className={styles.cancelbutton}
-              type="button"
-            >
-              <FormattedMessage id="Registrering.RegistrerVirksomhetModalForm.Cancel" />
-            </Button>
-          </Form>
-        </div>
-      </Modal.Content>
-    </Modal>
+    <Form formMethods={formMethods}>
+      <Modal
+        open={showModal}
+        aria-label={intl.formatMessage({ id: 'Registrering.RegistrerVirksomhetModalForm.ModalDescription' })}
+        onClose={closeEvent}
+      >
+        <Modal.Header>
+          <Heading size="small">
+            <FormattedMessage id="Registrering.RegistrerVirksomhetModalForm.Title" />
+          </Heading>
+        </Modal.Header>
+        <Modal.Body>
+          <VirksomhetIdentifikasjonPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
+          <VirksomhetTypeNaringPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
+          <VirksomhetStartetEndretPanel readOnly={readOnly} />
+          <VirksomhetRegnskapPanel readOnly={readOnly} />
+          <VerticalSpacer sixteenPx />
+          <VirksomhetRelasjonPanel readOnly={readOnly} />
+          <VerticalSpacer sixteenPx />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            size="small"
+            variant="primary"
+            onClick={formMethods.handleSubmit(onSubmit)}
+            disabled={readOnly}
+            className={styles.savebutton}
+            type="button"
+          >
+            <FormattedMessage id="Registrering.RegistrerVirksomhetModalForm.Save" />
+          </Button>
+          <Button
+            size="small"
+            variant="secondary"
+            onClick={closeEvent}
+            disabled={readOnly}
+            className={styles.cancelbutton}
+            type="button"
+          >
+            <FormattedMessage id="Registrering.RegistrerVirksomhetModalForm.Cancel" />
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </Form>
   );
 };
 

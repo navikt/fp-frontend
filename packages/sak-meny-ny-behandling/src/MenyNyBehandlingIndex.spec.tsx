@@ -2,17 +2,11 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
-import { Modal } from '@navikt/ds-react';
-
 import * as stories from './MenyNyBehandlingIndex.stories';
 
 const { Default } = composeStories(stories);
 
 describe('<MenyNyBehandlingIndex>', () => {
-  if (Modal.setAppElement) {
-    Modal.setAppElement('body');
-  }
-
   it('skal opprette ny ankebehandling', async () => {
     const lagNyBehandling = vi.fn();
     const lukkModal = vi.fn();

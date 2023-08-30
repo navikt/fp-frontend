@@ -1,6 +1,5 @@
 import React from 'react';
 import moment from 'moment';
-import { Modal } from '@navikt/ds-react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
@@ -12,7 +11,6 @@ import * as stories from './VarselOmRevurderingProsessIndex.stories';
 const { ForFørstegangsbehandling, ForRevurdering } = composeStories(stories);
 
 describe('<VarselOmRevurderingProsessIndex>', () => {
-  Modal.setAppElement('body');
   it('skal for førstegangsbehandling velge å ikke sende varsel til søker og så bekrefte', async () => {
     const lagre = vi.fn();
 

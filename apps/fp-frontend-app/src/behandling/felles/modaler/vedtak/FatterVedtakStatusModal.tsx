@@ -21,15 +21,8 @@ interface OwnProps {
 const FatterVedtakStatusModal: FunctionComponent<OwnProps> = ({ visModal = false, lukkModal, tekst }) => {
   const intl = useIntl();
   return (
-    <Modal
-      className={styles.modal}
-      open={visModal}
-      closeButton={false}
-      aria-label={tekst}
-      onClose={lukkModal}
-      shouldCloseOnOverlayClick={false}
-    >
-      <Modal.Content>
+    <Modal width="small" open={visModal} aria-label={tekst} onClose={lukkModal}>
+      <Modal.Body>
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
@@ -47,7 +40,7 @@ const FatterVedtakStatusModal: FunctionComponent<OwnProps> = ({ visModal = false
             </FlexColumn>
           </FlexRow>
         </FlexContainer>
-      </Modal.Content>
+      </Modal.Body>
     </Modal>
   );
 };

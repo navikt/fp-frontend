@@ -160,18 +160,17 @@ const HenleggBehandlingModal: FunctionComponent<PureOwnProps> = ({
   );
 
   return (
-    <Modal
-      className={styles.modal}
-      open
-      closeButton
-      aria-label={intl.formatMessage({ id: 'HenleggBehandlingModal.ModalDescription' })}
-      onClose={cancelEvent}
-      shouldCloseOnOverlayClick={false}
-    >
-      <Modal.Content>
-        <Form formMethods={formMethods} onSubmit={handleSubmit}>
+    <Form formMethods={formMethods} onSubmit={handleSubmit}>
+      <Modal
+        className={styles.modal}
+        open
+        aria-label={intl.formatMessage({ id: 'HenleggBehandlingModal.ModalDescription' })}
+        onClose={cancelEvent}
+      >
+        <Modal.Header>
           <Heading size="small">{intl.formatMessage({ id: 'HenleggBehandlingModal.HenleggBehandling' })}</Heading>
-          <VerticalSpacer sixteenPx />
+        </Modal.Header>
+        <Modal.Body>
           <SelectField
             name="årsakKode"
             className={styles.selectWidth}
@@ -203,61 +202,52 @@ const HenleggBehandlingModal: FunctionComponent<PureOwnProps> = ({
               </div>
             </>
           )}
-          <FlexContainer>
-            <FlexRow spaceBetween>
-              <FlexColumn>
-                <VerticalSpacer sixteenPx />
-                <FlexContainer>
-                  <FlexRow>
-                    <FlexColumn>
-                      <Button
-                        variant="primary"
-                        size="small"
-                        className={styles.button}
-                        disabled={disableHovedKnapp(behandlingType, årsakKode, begrunnelse, fritekst)}
-                      >
-                        {intl.formatMessage({ id: 'HenleggBehandlingModal.HenleggBehandlingSubmit' })}
-                      </Button>
-                    </FlexColumn>
-                    <FlexColumn>
-                      <Button variant="secondary" size="small" onClick={cancelEvent} type="button">
-                        {intl.formatMessage({ id: 'HenleggBehandlingModal.Avbryt' })}
-                      </Button>
-                    </FlexColumn>
-                  </FlexRow>
-                </FlexContainer>
-              </FlexColumn>
-              <FlexColumn>
-                {showLink && (
-                  <div className={styles.forhandsvis}>
-                    <Label size="small">{intl.formatMessage({ id: 'HenleggBehandlingModal.SokerInformeres' })}</Label>
-                    <VerticalSpacer fourPx />
-                    <a
-                      href=""
-                      onClick={previewHenleggBehandlingDoc(
-                        previewHenleggBehandling,
-                        ytelseType,
-                        fritekst,
-                        behandlingUuid,
-                      )}
-                      onKeyDown={previewHenleggBehandlingDoc(
-                        previewHenleggBehandling,
-                        ytelseType,
-                        fritekst,
-                        behandlingUuid,
-                      )}
-                      className="lenke lenke--frittstaende"
-                    >
-                      {intl.formatMessage({ id: 'HenleggBehandlingModal.ForhandsvisBrev' })}
-                    </a>
-                  </div>
-                )}
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
-        </Form>
-      </Modal.Content>
-    </Modal>
+          {showLink && (
+            <FlexContainer>
+              <VerticalSpacer sixteenPx />
+              <FlexRow spaceBetween>
+                <FlexColumn>
+                  <Label size="small">{intl.formatMessage({ id: 'HenleggBehandlingModal.SokerInformeres' })}</Label>
+                </FlexColumn>
+                <FlexColumn>
+                  <a
+                    href=""
+                    onClick={previewHenleggBehandlingDoc(
+                      previewHenleggBehandling,
+                      ytelseType,
+                      fritekst,
+                      behandlingUuid,
+                    )}
+                    onKeyDown={previewHenleggBehandlingDoc(
+                      previewHenleggBehandling,
+                      ytelseType,
+                      fritekst,
+                      behandlingUuid,
+                    )}
+                    className="lenke lenke--frittstaende"
+                  >
+                    {intl.formatMessage({ id: 'HenleggBehandlingModal.ForhandsvisBrev' })}
+                  </a>
+                </FlexColumn>
+              </FlexRow>
+            </FlexContainer>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="primary"
+            size="small"
+            className={styles.button}
+            disabled={disableHovedKnapp(behandlingType, årsakKode, begrunnelse, fritekst)}
+          >
+            {intl.formatMessage({ id: 'HenleggBehandlingModal.HenleggBehandlingSubmit' })}
+          </Button>
+          <Button variant="secondary" size="small" onClick={cancelEvent} type="button">
+            {intl.formatMessage({ id: 'HenleggBehandlingModal.Avbryt' })}
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </Form>
   );
 };
 

@@ -2,7 +2,6 @@ import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
-import { Modal } from '@navikt/ds-react';
 
 import * as stories from './UttakProsessIndex.stories';
 
@@ -15,8 +14,6 @@ const {
 } = composeStories(stories);
 
 describe('<UttakProsessIndex>', () => {
-  Modal.setAppElement('body');
-
   it('skal vise periode med gradering', async () => {
     const lagre = vi.fn();
 

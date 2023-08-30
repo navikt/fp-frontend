@@ -39,51 +39,53 @@ const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({
   const formMethods = useForm<{ dato: string }>();
 
   return (
-    <Modal
-      closeButton={false}
-      open
-      aria-label={intl.formatMessage({ id: 'DelOppPeriodeModal.Periode' })}
-      onClose={cancel}
-      className={styles.modal}
-    >
-      <Modal.Content>
-        {!visSlettEtterfølgendePerioder && (
-          <>
+    <Form formMethods={formMethods} onSubmit={values => submit(values.dato)}>
+      <Modal
+        open
+        aria-label={intl.formatMessage({ id: 'DelOppPeriodeModal.Periode' })}
+        onClose={cancel}
+        className={styles.modal}
+      >
+        <Modal.Header>
+          {!visSlettEtterfølgendePerioder && (
             <Heading size="small">
               <FormattedMessage id="DelOppPeriodeModal.RedigerPeriode" />
             </Heading>
-            <VerticalSpacer sixteenPx />
-            <FlexContainer>
-              <FlexRow>
-                <FlexColumn>
-                  <ExclamationmarkTriangleFillIcon
-                    className={styles.image}
-                    title={intl.formatMessage({ id: 'DelOppPeriodeModal.Nullstilles' })}
-                  />
-                </FlexColumn>
-                <FlexColumn className={styles.text}>
-                  <BodyShort size="small">
-                    <FormattedMessage id="DelOppPeriodeModal.Nullstilles" />
-                  </BodyShort>
-                </FlexColumn>
-              </FlexRow>
-            </FlexContainer>
-            <VerticalSpacer sixteenPx />
-          </>
-        )}
-        <Label size="small">
-          <FormattedMessage id="DelOppPeriodeModal.Periode" />
-        </Label>
-        <VerticalSpacer fourPx />
-        <BodyShort size="small">
-          <PeriodLabel dateStringFom={periode.fom} dateStringTom={periode.tom} />
-        </BodyShort>
-        <VerticalSpacer twentyPx />
-        <BodyShort size="small">
-          <FormattedMessage id="DelOppPeriodeModal.Splitt" />
-        </BodyShort>
-        <VerticalSpacer sixteenPx />
-        <Form formMethods={formMethods} onSubmit={values => submit(values.dato)}>
+          )}
+        </Modal.Header>
+        <Modal.Body>
+          {!visSlettEtterfølgendePerioder && (
+            <>
+              <FlexContainer>
+                <FlexRow>
+                  <FlexColumn>
+                    <ExclamationmarkTriangleFillIcon
+                      className={styles.image}
+                      title={intl.formatMessage({ id: 'DelOppPeriodeModal.Nullstilles' })}
+                    />
+                  </FlexColumn>
+                  <FlexColumn className={styles.text}>
+                    <BodyShort size="small">
+                      <FormattedMessage id="DelOppPeriodeModal.Nullstilles" />
+                    </BodyShort>
+                  </FlexColumn>
+                </FlexRow>
+              </FlexContainer>
+              <VerticalSpacer sixteenPx />
+            </>
+          )}
+          <Label size="small">
+            <FormattedMessage id="DelOppPeriodeModal.Periode" />
+          </Label>
+          <VerticalSpacer fourPx />
+          <BodyShort size="small">
+            <PeriodLabel dateStringFom={periode.fom} dateStringTom={periode.tom} />
+          </BodyShort>
+          <VerticalSpacer twentyPx />
+          <BodyShort size="small">
+            <FormattedMessage id="DelOppPeriodeModal.Splitt" />
+          </BodyShort>
+          <VerticalSpacer sixteenPx />
           <Datepicker
             name="dato"
             label={<FormattedMessage id="DelOppPeriodeModal.Dato" />}
@@ -92,26 +94,18 @@ const DelOppPeriodeModal: FunctionComponent<OwnProps> = ({
               fromDate: dayjs(periode.fom, ISO_DATE_FORMAT).toDate(),
               toDate: dayjs(originalTom, ISO_DATE_FORMAT).subtract(1, 'day').toDate(),
             }}
-            strategy="fixed"
           />
-          <VerticalSpacer sixteenPx />
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <Button size="small" variant="primary">
-                  <FormattedMessage id="DelOppPeriodeModal.Oppdater" />
-                </Button>
-              </FlexColumn>
-              <FlexColumn>
-                <Button size="small" variant="secondary" onClick={cancel} type="button">
-                  <FormattedMessage id="DelOppPeriodeModal.Avbryt" />
-                </Button>
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
-        </Form>
-      </Modal.Content>
-    </Modal>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button size="small" variant="primary">
+            <FormattedMessage id="DelOppPeriodeModal.Oppdater" />
+          </Button>
+          <Button size="small" variant="secondary" onClick={cancel} type="button">
+            <FormattedMessage id="DelOppPeriodeModal.Avbryt" />
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </Form>
   );
 };
 

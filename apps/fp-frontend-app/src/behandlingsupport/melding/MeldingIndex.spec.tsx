@@ -3,7 +3,6 @@ import { MemoryRouter } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import MockAdapter from 'axios-mock-adapter';
-import { Modal } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 import { RestApiMock } from '@navikt/fp-utils-test';
 import {
@@ -23,8 +22,6 @@ import messages from '../../../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 describe('<MeldingIndex>', () => {
-  Modal.setAppElement('body');
-
   const templates = [
     { kode: 'Mal1', navn: 'Mal 1', tilgjengelig: true },
     { kode: 'Mal2', navn: 'Mal 2', tilgjengelig: true },

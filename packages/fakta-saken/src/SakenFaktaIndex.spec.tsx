@@ -1,5 +1,4 @@
 import React from 'react';
-import { Modal } from '@navikt/ds-react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
@@ -8,8 +7,6 @@ import * as stories from './SakenFaktaIndex.stories';
 const { StartdatoForForeldrepenger, ApentAksjonspunktForInnhentingAvDokumentasjon } = composeStories(stories);
 
 describe('<SakenFaktaIndex>', () => {
-  Modal.setAppElement('body');
-
   it('skal få aksjonspunkt om innehenting av dokumentasjon, svar at vil bli innhentet og bekreft', async () => {
     const lagre = vi.fn();
 

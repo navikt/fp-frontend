@@ -23,13 +23,12 @@ const OppgaveReservasjonForlengetModal: FunctionComponent<OwnProps> = ({ oppgave
   const intl = useIntl();
   return (
     <NavModal
-      className={styles.modal}
+      width="small"
       open={showModal}
-      closeButton={false}
       aria-label={intl.formatMessage({ id: 'OppgaveReservasjonForlengetModal.Reservert' })}
       onClose={closeModal as () => void}
     >
-      <NavModal.Content>
+      <NavModal.Body>
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
@@ -57,7 +56,7 @@ const OppgaveReservasjonForlengetModal: FunctionComponent<OwnProps> = ({ oppgave
             </FlexColumn>
           </FlexRow>
         </FlexContainer>
-      </NavModal.Content>
+      </NavModal.Body>
     </NavModal>
   );
 };

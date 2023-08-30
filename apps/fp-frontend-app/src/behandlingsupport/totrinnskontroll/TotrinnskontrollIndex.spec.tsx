@@ -3,7 +3,6 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import MockAdapter from 'axios-mock-adapter';
-import { Modal } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 import { Fagsak, BehandlingAppKontekst, TotrinnskontrollAksjonspunkt, BehandlingÅrsak } from '@navikt/fp-types';
 import { RestApiMock } from '@navikt/fp-utils-test';
@@ -24,8 +23,6 @@ import messages from '../../../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 describe('<TotrinnskontrollIndex>', () => {
-  Modal.setAppElement('body');
-
   const createAksjonspunkt = (aksjonspunktKode: string) =>
     ({
       aksjonspunktKode,

@@ -2,7 +2,6 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
-import { Modal } from '@navikt/ds-react';
 import { FagsakMarkeringKode } from '@navikt/fp-kodeverk';
 
 import * as stories from './MenyEndreUtlandIndex.stories';
@@ -10,10 +9,6 @@ import * as stories from './MenyEndreUtlandIndex.stories';
 const { Default } = composeStories(stories);
 
 describe('<MenyEndreUtlandIndex>', () => {
-  if (Modal.setAppElement) {
-    Modal.setAppElement('body');
-  }
-
   it('skal endre fra ingenting til eøs', async () => {
     const endreFagsakMarkering = vi.fn();
     const lukkModal = vi.fn();

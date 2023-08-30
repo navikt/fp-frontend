@@ -24,12 +24,10 @@ const MessagesModal: FunctionComponent<OwnProps> = ({ showModal, closeEvent }) =
     <Modal
       className={styles.modal}
       open={showModal}
-      closeButton={false}
       aria-label={intl.formatMessage({ id: 'MessagesModal.description' })}
       onClose={closeEvent}
-      shouldCloseOnOverlayClick={false}
     >
-      <Modal.Content>
+      <Modal.Body>
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
@@ -51,7 +49,7 @@ const MessagesModal: FunctionComponent<OwnProps> = ({ showModal, closeEvent }) =
             </FlexColumn>
           </FlexRow>
         </FlexContainer>
-      </Modal.Content>
+      </Modal.Body>
     </Modal>
   );
 };

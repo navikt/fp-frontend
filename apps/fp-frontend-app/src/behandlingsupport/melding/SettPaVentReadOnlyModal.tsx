@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Button, Modal, Heading, Label, BodyShort } from '@navikt/ds-react';
-import { DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { DateLabel, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { KodeverkMedNavn } from '@navikt/fp-types';
 
@@ -33,18 +33,17 @@ const SettPaVentReadOnlyModal: FunctionComponent<PureOwnProps> = ({ lukkCallback
     <Modal
       className={styles.modal}
       open
-      closeButton={false}
       aria-label={intl.formatMessage({
         id: 'SettPaVentReadOnlyModal.ModalDescriptionErPaVent',
       })}
       onClose={lukkCallback}
-      shouldCloseOnOverlayClick={false}
     >
-      <Modal.Content>
+      <Modal.Header>
         <Heading size="small">
           <FormattedMessage id="SettPaVentReadOnlyModal.ModalDescriptionErPaVent" />
         </Heading>
-        <VerticalSpacer sixteenPx />
+      </Modal.Header>
+      <Modal.Body>
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
@@ -63,11 +62,12 @@ const SettPaVentReadOnlyModal: FunctionComponent<PureOwnProps> = ({ lukkCallback
             </FlexColumn>
           </FlexRow>
         </FlexContainer>
-        <VerticalSpacer twentyPx />
+      </Modal.Body>
+      <Modal.Footer>
         <Button size="small" variant="primary" onClick={lukkCallback}>
           <FormattedMessage id="SettPaVentReadOnlyModal.Forsiden" />
         </Button>
-      </Modal.Content>
+      </Modal.Footer>
     </Modal>
   );
 };

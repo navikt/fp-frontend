@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Modal, Button, Heading } from '@navikt/ds-react';
 
-import { VerticalSpacer, FlexContainer, FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { CheckboxField, SelectField, Form } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { fagsakYtelseType, behandlingType as bType, behandlingArsakType } from '@navikt/fp-kodeverk';
@@ -189,20 +189,19 @@ const NyBehandlingModal: FunctionComponent<OwnProps> = ({
   );
 
   return (
-    <Modal
-      className={styles.modal}
-      open
-      closeButton
-      aria-label={intl.formatMessage({ id: 'MenyNyBehandlingIndex.ModalDescription' })}
-      onClose={cancelEvent}
-      shouldCloseOnOverlayClick={false}
-    >
-      <Modal.Content>
-        <Form formMethods={formMethods} onSubmit={onSubmit}>
+    <Form formMethods={formMethods} onSubmit={onSubmit}>
+      <Modal
+        className={styles.modal}
+        open
+        aria-label={intl.formatMessage({ id: 'MenyNyBehandlingIndex.ModalDescription' })}
+        onClose={cancelEvent}
+      >
+        <Modal.Header>
           <Heading size="small">
             <FormattedMessage id="MenyNyBehandlingIndex.OpprettNyForstegangsbehandling" />
           </Heading>
-          <VerticalSpacer sixteenPx />
+        </Modal.Header>
+        <Modal.Body>
           <SelectField
             name="behandlingType"
             label=""
@@ -221,39 +220,30 @@ const NyBehandlingModal: FunctionComponent<OwnProps> = ({
             </>
           )}
           {behandlingArsakTyper.length > 0 && (
-            <>
-              <SelectField
-                name="behandlingArsakType"
-                label=""
-                hideLabel
-                validate={[required]}
-                className={styles.arsakBredde}
-                selectValues={behandlingArsakTyper.map(b => (
-                  <option key={b.kode} value={b.kode}>
-                    {b.navn}
-                  </option>
-                ))}
-              />
-              <VerticalSpacer sixteenPx />
-            </>
+            <SelectField
+              name="behandlingArsakType"
+              label=""
+              hideLabel
+              validate={[required]}
+              className={styles.arsakBredde}
+              selectValues={behandlingArsakTyper.map(b => (
+                <option key={b.kode} value={b.kode}>
+                  {b.navn}
+                </option>
+              ))}
+            />
           )}
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <Button size="small" variant="primary">
-                  <FormattedMessage id="MenyNyBehandlingIndex.Ok" />
-                </Button>
-              </FlexColumn>
-              <FlexColumn>
-                <Button size="small" variant="secondary" onClick={cancelEvent} type="button">
-                  <FormattedMessage id="MenyNyBehandlingIndex.Avbryt" />
-                </Button>
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
-        </Form>
-      </Modal.Content>
-    </Modal>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button size="small" variant="primary">
+            <FormattedMessage id="MenyNyBehandlingIndex.Ok" />
+          </Button>
+          <Button size="small" variant="secondary" onClick={cancelEvent} type="button">
+            <FormattedMessage id="MenyNyBehandlingIndex.Avbryt" />
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </Form>
   );
 };
 

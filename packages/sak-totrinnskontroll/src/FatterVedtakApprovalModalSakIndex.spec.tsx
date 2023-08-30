@@ -1,17 +1,12 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
-import { Modal } from '@navikt/ds-react';
 import * as stories from './FatterVedtakApprovalModalSakIndex.stories';
 
 const { EtterGodkjenning, EtterGodkjenningAvKlage, EtterTilbakesendingTilSaksbehandler, EtterFatterVedtakOgGodkjent } =
   composeStories(stories);
 
 describe('<FatterVedtakApprovalModalSakIndex>', () => {
-  if (Modal.setAppElement) {
-    Modal.setAppElement('body');
-  }
-
   it('skal vise modal etter godkjenning', async () => {
     render(<EtterGodkjenning />);
 

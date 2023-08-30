@@ -18,11 +18,10 @@ const BehandlingPollingTimoutModal: FunctionComponent = () => {
     <NavModal
       className={styles.modal}
       open
-      closeButton={false}
       aria-label={intl.formatMessage({ id: 'BehandlingPollingTimoutModal.TimeoutMelding' })}
       onClose={() => window.location.reload()}
     >
-      <NavModal.Content>
+      <NavModal.Body>
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
@@ -53,7 +52,7 @@ const BehandlingPollingTimoutModal: FunctionComponent = () => {
           </Button>
           <VerticalSpacer sixteenPx />
         </FloatRight>
-      </NavModal.Content>
+      </NavModal.Body>
     </NavModal>
   );
 };

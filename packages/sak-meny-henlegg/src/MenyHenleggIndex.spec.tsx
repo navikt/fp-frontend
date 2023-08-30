@@ -2,7 +2,6 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
-import { Modal } from '@navikt/ds-react';
 import { dokumentMalType } from '@navikt/fp-kodeverk';
 import * as stories from './MenyHenleggIndex.stories';
 
@@ -10,10 +9,6 @@ const { ForFørstegangssøknad, ForKlage, ForInnsyn, ForTilbakekreving, ForTilba
   composeStories(stories);
 
 describe('<MenyHenleggIndex>', () => {
-  if (Modal.setAppElement) {
-    Modal.setAppElement('body');
-  }
-
   it('skal velge henlegge behandling og så vise modal som viser at behandling er henlagt', async () => {
     const henleggBehandling = vi.fn(() => Promise.resolve());
     const utils = render(<ForFørstegangssøknad henleggBehandling={henleggBehandling} />);

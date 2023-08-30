@@ -25,55 +25,51 @@ const JournalførtSubmitModal: FunctionComponent<OwnProps> = ({ saksnummer, lukk
   }
   const lenke = saksnummer?.saksnummer ? velgSakLenke(saksnummer?.saksnummer) : undefined;
   return (
-    <Modal
-      open={showModal}
-      className={styles.modal}
-      closeButton={false}
-      onClose={lukkModal}
-      shouldCloseOnOverlayClick={false}
-    >
-      {isLoading && (
-        <>
-          <FlexRow className={styles.sentrerRad}>
-            <FlexColumn>
-              <LoadingPanel />
-            </FlexColumn>
-          </FlexRow>
-          <FlexRow className={styles.sentrerRad}>
-            <FlexColumn>
-              <BodyShort>
-                <FormattedMessage id="Journalfør.Modal.Ferdigstiller" />
-              </BodyShort>
-            </FlexColumn>
-          </FlexRow>
-        </>
-      )}
-      {!isLoading && lenke && (
-        <>
-          <FlexRow className={styles.sentrerRad}>
-            <FlexColumn>
-              <CheckmarkCircleIcon className={styles.ferdigIkon} />
-            </FlexColumn>
-          </FlexRow>
-          <FlexRow className={styles.sentrerRad}>
-            <FlexColumn>
-              <BodyShort>
-                <FormattedMessage id="Journalfør.Modal.Journalført" />{' '}
-                <Link target="_blank" rel="noreferrer" href={lenke}>
-                  {saksnummer?.saksnummer}
-                </Link>
-              </BodyShort>
-            </FlexColumn>
-          </FlexRow>
-        </>
-      )}
-      <FlexRow className={styles.sentrerRad}>
-        <FlexColumn>
-          <Button size="small" variant="primary" onClick={lukkModal} disabled={false} autoFocus type="button">
-            <FormattedMessage id="Journalfør.Modal.Ok" />
-          </Button>
-        </FlexColumn>
-      </FlexRow>
+    <Modal width="small" open={showModal} onClose={lukkModal}>
+      <Modal.Body>
+        {isLoading && (
+          <>
+            <FlexRow className={styles.sentrerRad}>
+              <FlexColumn>
+                <LoadingPanel />
+              </FlexColumn>
+            </FlexRow>
+            <FlexRow className={styles.sentrerRad}>
+              <FlexColumn>
+                <BodyShort>
+                  <FormattedMessage id="Journalfør.Modal.Ferdigstiller" />
+                </BodyShort>
+              </FlexColumn>
+            </FlexRow>
+          </>
+        )}
+        {!isLoading && lenke && (
+          <>
+            <FlexRow className={styles.sentrerRad}>
+              <FlexColumn>
+                <CheckmarkCircleIcon className={styles.ferdigIkon} />
+              </FlexColumn>
+            </FlexRow>
+            <FlexRow className={styles.sentrerRad}>
+              <FlexColumn>
+                <BodyShort>
+                  <FormattedMessage id="Journalfør.Modal.Journalført" />{' '}
+                  <Link target="_blank" rel="noreferrer" href={lenke}>
+                    {saksnummer?.saksnummer}
+                  </Link>
+                </BodyShort>
+              </FlexColumn>
+            </FlexRow>
+          </>
+        )}
+        <FlexRow className={styles.sentrerRad}>
+          <FlexColumn>
+            <Button size="small" variant="primary" onClick={lukkModal} disabled={false} autoFocus type="button">
+              <FormattedMessage id="Journalfør.Modal.Ok" />
+            </Button>
+          </FlexColumn>
+        </FlexRow>
+      </Modal.Body>
     </Modal>
   );
 };

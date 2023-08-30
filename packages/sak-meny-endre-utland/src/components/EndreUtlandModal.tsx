@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Modal, Button, Heading } from '@navikt/ds-react';
 
-import { VerticalSpacer, FlexContainer, FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 import { RadioGroupPanel, Form } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { FagsakMarkeringKode } from '@navikt/fp-kodeverk';
@@ -44,20 +43,19 @@ const EndreUtlandModal: FunctionComponent<OwnProps> = ({
   });
 
   return (
-    <Modal
-      className={styles.modal}
-      open
-      closeButton
-      aria-label={intl.formatMessage({ id: 'MenyEndreUtlandIndex.UtlandTittel' })}
-      onClose={cancelEvent}
-      shouldCloseOnOverlayClick={false}
-    >
-      <Modal.Content>
-        <Form formMethods={formMethods} onSubmit={submitCallback}>
+    <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <Modal
+        className={styles.modal}
+        open
+        aria-label={intl.formatMessage({ id: 'MenyEndreUtlandIndex.UtlandTittel' })}
+        onClose={cancelEvent}
+      >
+        <Modal.Header>
           <Heading size="small">
             <FormattedMessage id="MenyEndreUtlandIndex.UtlandTittel" />
           </Heading>
-          <VerticalSpacer sixteenPx />
+        </Modal.Header>
+        <Modal.Body>
           <RadioGroupPanel
             name="fagsakMarkering"
             hideLegend
@@ -89,24 +87,17 @@ const EndreUtlandModal: FunctionComponent<OwnProps> = ({
               },
             ]}
           />
-          <VerticalSpacer sixteenPx />
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <Button size="small" variant="primary">
-                  <FormattedMessage id="MenyEndreUtlandIndex.Ok" />
-                </Button>
-              </FlexColumn>
-              <FlexColumn>
-                <Button size="small" variant="secondary" onClick={cancelEvent} type="button">
-                  <FormattedMessage id="MenyEndreUtlandIndex.Avbryt" />
-                </Button>
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
-        </Form>
-      </Modal.Content>
-    </Modal>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button size="small" variant="primary">
+            <FormattedMessage id="MenyEndreUtlandIndex.Ok" />
+          </Button>
+          <Button size="small" variant="secondary" onClick={cancelEvent} type="button">
+            <FormattedMessage id="MenyEndreUtlandIndex.Avbryt" />
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </Form>
   );
 };
 

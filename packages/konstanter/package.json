@@ -19,9 +19,9 @@
     "clean": "rm -rf ./dist ./node_modules"
   },
   "devDependencies": {
-    "eslint": "8.46.0",
-    "typescript": "5.1.6",
-    "vite": "4.4.7"
+    "eslint": "8.48.0",
+    "typescript": "5.2.2",
+    "vite": "4.4.9"
   },
   "exports": {
     ".": {

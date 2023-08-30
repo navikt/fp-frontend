@@ -3,7 +3,6 @@ import dayjs from 'dayjs';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
-import { Modal } from '@navikt/ds-react';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import * as stories from './MenySettPaVentIndex.stories';
 
@@ -16,10 +15,6 @@ const initFrist = (): string => {
 };
 
 describe('<MenySettPaVentIndex>', () => {
-  if (Modal.setAppElement) {
-    Modal.setAppElement('body');
-  }
-
   it('skal velge årsak for sett på vent og så fortsette', async () => {
     const settBehandlingPaVent = vi.fn();
     const lukkModal = vi.fn();

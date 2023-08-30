@@ -29,15 +29,8 @@ const IverksetterVedtakStatusModal: FunctionComponent<OwnProps> = ({ lukkModal, 
   });
 
   return (
-    <Modal
-      className={styles.modal}
-      open={visModal}
-      closeButton={false}
-      aria-label={imageAltText}
-      onClose={lukkModal}
-      shouldCloseOnOverlayClick={false}
-    >
-      <Modal.Content>
+    <Modal open={visModal} aria-label={imageAltText} onClose={lukkModal}>
+      <Modal.Body>
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
@@ -63,7 +56,7 @@ const IverksetterVedtakStatusModal: FunctionComponent<OwnProps> = ({ lukkModal, 
             </FlexColumn>
           </FlexRow>
         </FlexContainer>
-      </Modal.Content>
+      </Modal.Body>
     </Modal>
   );
 };

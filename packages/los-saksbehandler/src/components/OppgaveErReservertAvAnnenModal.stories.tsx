@@ -2,7 +2,6 @@ import React from 'react';
 import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
-import { Modal } from '@navikt/ds-react';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 import { Oppgave } from '@navikt/fp-los-felles';
 
@@ -11,8 +10,6 @@ import OppgaveErReservertAvAnnenModal from './OppgaveErReservertAvAnnenModal';
 import messages from '../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
-
-Modal.setAppElement('body');
 
 export default {
   title: 'los/saksbehandler/OppgaveErReservertAvAnnenModal',

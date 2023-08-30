@@ -1,7 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/ft-kodeverk';
-import { Modal } from '@navikt/ds-react';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import OppgaveReservasjonForlengetModal from './OppgaveReservasjonForlengetModal';
@@ -9,8 +8,6 @@ import OppgaveReservasjonForlengetModal from './OppgaveReservasjonForlengetModal
 import messages from '../../../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
-
-Modal.setAppElement('body');
 
 export default {
   title: 'los/saksbehandler/behandlingskoer/OppgaveReservasjonForlengetModal',

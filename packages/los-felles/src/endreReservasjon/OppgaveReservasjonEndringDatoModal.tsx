@@ -2,11 +2,10 @@ import React, { MouseEvent, FunctionComponent, useCallback, useMemo } from 'reac
 import { useIntl, FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
-import { Panel, Button, Modal as NavModal, Heading } from '@navikt/ds-react';
+import { Button, Modal as NavModal, Heading } from '@navikt/ds-react';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate } from '@navikt/ft-form-validators';
 import { Form, Datepicker } from '@navikt/ft-form-hooks';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import Oppgave from '../typer/oppgaveTsType';
 
@@ -65,48 +64,36 @@ const OppgaveReservasjonEndringDatoModal: FunctionComponent<OwnProps> = ({
   });
 
   return (
-    <NavModal
-      open={showModal}
-      closeButton={false}
-      aria-label={intl.formatMessage({ id: 'OppgaveReservasjonEndringDatoModal.Header' })}
-      onClose={closeModal as () => void}
-    >
-      <NavModal.Content>
-        <Form<FormValues>
-          formMethods={søkFormMethods}
-          onSubmit={values => endreOppgaveReservasjonFn(values.reserverTil)}
-        >
-          <Panel>
-            <Heading size="small">
-              <FormattedMessage id="OppgaveReservasjonEndringDatoModal.Header" />
-            </Heading>
-            <VerticalSpacer eightPx />
-            <Datepicker
-              label=""
-              name="reserverTil"
-              validate={[hasValidDate, dateAfterOrEqual(new Date()), dateBeforeOrEqual(thirtyDaysFromNow())]}
-              disabledDays={{ fromDate: new Date(), toDate: thirtyDaysFromNow() }}
-              strategy="fixed"
-            />
-            <VerticalSpacer sixteenPx />
-            <FlexContainer>
-              <FlexRow>
-                <FlexColumn>
-                  <Button size="small" variant="secondary" autoFocus>
-                    <FormattedMessage id="OppgaveReservasjonEndringDatoModal.Ok" />
-                  </Button>
-                </FlexColumn>
-                <FlexColumn>
-                  <Button size="small" variant="secondary" onClick={closeModal} type="button">
-                    <FormattedMessage id="OppgaveReservasjonEndringDatoModal.Avbryt" />
-                  </Button>
-                </FlexColumn>
-              </FlexRow>
-            </FlexContainer>
-          </Panel>
-        </Form>
-      </NavModal.Content>
-    </NavModal>
+    <Form<FormValues> formMethods={søkFormMethods} onSubmit={values => endreOppgaveReservasjonFn(values.reserverTil)}>
+      <NavModal
+        width="small"
+        open={showModal}
+        aria-label={intl.formatMessage({ id: 'OppgaveReservasjonEndringDatoModal.Header' })}
+        onClose={closeModal as () => void}
+      >
+        <NavModal.Header>
+          <Heading size="small">
+            <FormattedMessage id="OppgaveReservasjonEndringDatoModal.Header" />
+          </Heading>
+        </NavModal.Header>
+        <NavModal.Body>
+          <Datepicker
+            label=""
+            name="reserverTil"
+            validate={[hasValidDate, dateAfterOrEqual(new Date()), dateBeforeOrEqual(thirtyDaysFromNow())]}
+            disabledDays={{ fromDate: new Date(), toDate: thirtyDaysFromNow() }}
+          />
+        </NavModal.Body>
+        <NavModal.Footer>
+          <Button size="small">
+            <FormattedMessage id="OppgaveReservasjonEndringDatoModal.Ok" />
+          </Button>
+          <Button size="small" variant="secondary" onClick={closeModal} type="button">
+            <FormattedMessage id="OppgaveReservasjonEndringDatoModal.Avbryt" />
+          </Button>
+        </NavModal.Footer>
+      </NavModal>
+    </Form>
   );
 };
 

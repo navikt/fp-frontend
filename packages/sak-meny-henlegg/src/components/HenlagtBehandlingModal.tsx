@@ -25,12 +25,10 @@ const HenlagtBehandlingModal: FunctionComponent<OwnProps> = ({ showModal, closeE
     <Modal
       className={styles.modal}
       open={showModal}
-      closeButton={false}
       aria-label={intl.formatMessage({ id: 'HenlagtBehandlingModal.ModalDescription' })}
       onClose={closeEvent}
-      shouldCloseOnOverlayClick={false}
     >
-      <Modal.Content>
+      <Modal.Body>
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
@@ -55,7 +53,7 @@ const HenlagtBehandlingModal: FunctionComponent<OwnProps> = ({ showModal, closeE
             </FlexColumn>
           </FlexRow>
         </FlexContainer>
-      </Modal.Content>
+      </Modal.Body>
     </Modal>
   );
 };
