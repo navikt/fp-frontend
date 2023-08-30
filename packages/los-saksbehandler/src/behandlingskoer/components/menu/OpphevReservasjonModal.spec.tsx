@@ -2,12 +2,9 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
-import { Modal } from '@navikt/ds-react';
 import * as stories from './OpphevReservasjonModal.stories';
 
 const { Default } = composeStories(stories);
-
-Modal.setAppElement('body');
 
 describe('<OpphevReservasjonModal>', () => {
   it('skal vise modal for oppheving av reservasjon', async () => {

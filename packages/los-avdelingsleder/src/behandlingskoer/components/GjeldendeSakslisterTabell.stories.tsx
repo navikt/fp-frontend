@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import { Modal } from '@navikt/ds-react';
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';
 
@@ -11,8 +10,6 @@ import Saksliste from '../../typer/sakslisteAvdelingTsType';
 import { GjeldendeSakslisterTabell } from './GjeldendeSakslisterTabell';
 
 import messages from '../../../i18n/nb_NO.json';
-
-Modal.setAppElement('body');
 
 const withIntl = getIntlDecorator(messages);
 

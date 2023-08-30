@@ -1,34 +1,8 @@
-.modal {
-  width: 600px;
-}
-
 .submitButton {
   margin-right: 10px;
   margin-top: 10px;
 }
 
 .cancelButton {
-  margin-top: 10px;
-}
-
-.divider {
-  border-left: 1px solid #b7b1a9;
-  border-right: 0 solid #b7b1a9;
-  display: inline;
-  float: right;
-  height: 47px;
-  margin-left: 23px;
-  position: absolute;
-  top: 10px;
-}
-
-.image {
-  height: 25px;
-  margin-top: 10px;
-  width: 25px;
-}
-
-.text {
-  margin-left: 20px;
   margin-top: 10px;
 }

@@ -3,7 +3,6 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import dayjs from 'dayjs';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
-import { Modal } from '@navikt/ds-react';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import * as stories from './ArbeidOgInntektFaktaIndex.stories';
 
@@ -33,8 +32,6 @@ const scrollIntoViewMock = vi.fn();
 window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
 
 describe('<ArbeidOgInntektFaktaIndex>', () => {
-  Modal.setAppElement('body');
-
   it('skal avklare arbeidsforhold som mangler inntektsmelding og så sette på vent', async () => {
     const settPåVent = vi.fn(() => Promise.resolve());
     const lagreVurdering = vi.fn(() => Promise.resolve());

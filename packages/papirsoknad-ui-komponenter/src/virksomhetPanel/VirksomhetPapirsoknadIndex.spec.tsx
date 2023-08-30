@@ -2,15 +2,12 @@ import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
-import { Modal } from '@navikt/ds-react';
 
 import * as stories from './VirksomhetPapirsoknadIndex.stories';
 
 const { Default } = composeStories(stories);
 
 describe('<VirksomhetPapirsoknadIndex>', () => {
-  Modal.setAppElement('body');
-
   it('skal velge at søker ikke har arbeidet i egen næringsvirksomhet', async () => {
     const lagre = vi.fn();
 

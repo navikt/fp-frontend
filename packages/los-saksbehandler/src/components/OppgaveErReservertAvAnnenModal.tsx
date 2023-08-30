@@ -32,11 +32,10 @@ const OppgaveErReservertAvAnnenModal: FunctionComponent<OwnProps> = ({
     <NavModal
       className={styles.modal}
       open
-      closeButton={false}
       aria-label={intl.formatMessage({ id: 'OppgaveErReservertAvAnnenModal.ReservertAvEnkel' })}
       onClose={lukk}
     >
-      <NavModal.Content>
+      <NavModal.Body>
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
@@ -65,7 +64,7 @@ const OppgaveErReservertAvAnnenModal: FunctionComponent<OwnProps> = ({
             </FlexColumn>
           </FlexRow>
         </FlexContainer>
-      </NavModal.Content>
+      </NavModal.Body>
     </NavModal>
   );
 };

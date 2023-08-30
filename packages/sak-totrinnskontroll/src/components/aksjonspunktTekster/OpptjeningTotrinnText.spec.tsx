@@ -2,7 +2,6 @@ import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { render, screen } from '@testing-library/react';
 import { OpptjeningAktiviteter } from '@navikt/fp-types';
-import { Modal } from '@navikt/ds-react';
 import { getIntlMock } from '@navikt/fp-utils-test';
 
 import OpptjeningTotrinnText from './OpptjeningTotrinnText';
@@ -35,10 +34,6 @@ const lagOpptjeningAktivitet = (resultat: string): OpptjeningAktiviteter => ({
 });
 
 describe('<OpptjeningTotrinnnText>', () => {
-  if (Modal.setAppElement) {
-    Modal.setAppElement('body');
-  }
-
   it('skal vise korrekt tekst for opptjening med endring av arbeid med navn', async () => {
     render(
       <RawIntlProvider value={intlMock}>

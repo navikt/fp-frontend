@@ -2,15 +2,12 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
-import { Modal } from '@navikt/ds-react';
 
 import * as stories from './LagreSoknadPapirsoknadIndex.stories';
 
 const { Default } = composeStories(stories);
 
 describe('<LagreSoknadPapirsoknadIndex>', () => {
-  Modal.setAppElement('body');
-
   it('skal bekrefte opplysninger', async () => {
     const lagre = vi.fn();
 

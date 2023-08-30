@@ -1,5 +1,4 @@
 import React from 'react';
-import { Modal } from '@navikt/ds-react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
@@ -16,7 +15,6 @@ const {
 } = composeStories(stories);
 
 describe('<VedtakProsessIndex>', () => {
-  Modal.setAppElement('body');
   it('skal forhåndsvise innvilget vedtaksbrev og så fatte vedtak', async () => {
     const lagre = vi.fn();
     const forhåndsvis = vi.fn();
