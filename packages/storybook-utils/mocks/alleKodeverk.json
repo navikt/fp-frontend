@@ -1379,7 +1379,7 @@
     {
       "kode": "PUNKT_FOR_SVANGERSKAPSPENGER",
       "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Punkt for svangerskapspenger"
+      "navn": "Svangerskapspenger"
     },
     {
       "kode": "FAKTA_OM_FORDELING",
@@ -1429,7 +1429,7 @@
     {
       "kode": "PUNKT_FOR_SVP_INNGANG",
       "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Punkt for svangerskapspenger inngang"
+      "navn": "Fakta om fødsel og tilrettelegging"
     },
     {
       "kode": "SOEKNADSFRIST",
@@ -1479,7 +1479,7 @@
     {
       "kode": "PUNKT_FOR_MEDLEMSKAP_LØPENDE",
       "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Punkt for medlemskap løpende"
+      "navn": "Løpende medlemskap"
     },
     {
       "kode": "FAKTA_UTTAK",
@@ -1544,7 +1544,7 @@
     {
       "kode": "PUNKT_FOR_OMSORG",
       "kodeverk": "SKJERMLENKE_TYPE",
-      "navn": "Fakta om omsorg"
+      "navn": "Omsorg"
     },
     {
       "kode": "BEREGNING_ENGANGSSTOENAD",
