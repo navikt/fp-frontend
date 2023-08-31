@@ -3185,7 +3185,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-tilrettelegging@workspace:packages/fakta-tilrettelegging"
   dependencies:
-    "@hookform/error-message": 2.0.1
     "@navikt/aksel-icons": 5.2.1
     "@navikt/ds-css": 5.2.1
     "@navikt/ds-react": 5.2.1
@@ -3208,7 +3207,6 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.9
     eslint: 8.48.0
-    moment: 2.29.4
     react: 18.2.0
     react-dom: 18.2.0
     react-hook-form: 7.45.4

@@ -66,7 +66,7 @@ const finnUtbetalingsgradForTilrettelegging = (
   const effektivStillingsprosent = stillingsprosentArbeidsforhold - velferdspermisjonprosent;
   const defaultUtbetalingsgrad =
     effektivStillingsprosent <= 0 ? 0 : 100 * (1 - stillingsprosent / effektivStillingsprosent);
-  return defaultUtbetalingsgrad > 0 ? defaultUtbetalingsgrad : 0;
+  return defaultUtbetalingsgrad > 0 ? +defaultUtbetalingsgrad.toFixed(2) : 0;
 };
 
 export const finnProsentSvangerskapspenger = (
