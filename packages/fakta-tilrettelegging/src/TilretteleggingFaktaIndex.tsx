@@ -8,6 +8,7 @@ import {
   FodselOgTilrettelegging,
   ArbeidOgInntektsmelding,
 } from '@navikt/fp-types';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import TilretteleggingFaktaForm from './components/TilretteleggingFaktaForm';
 
@@ -35,6 +36,7 @@ const TilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanel
   formData,
   setFormData,
   arbeidOgInntekt,
+  alleKodeverk,
 }) => (
   <RawIntlProvider value={intl}>
     <TilretteleggingFaktaForm
@@ -49,6 +51,7 @@ const TilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanel
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       formData={formData}
       setFormData={setFormData}
+      uttakArbeidTyper={alleKodeverk[KodeverkType.UTTAK_ARBEID_TYPE]}
     />
   </RawIntlProvider>
 );

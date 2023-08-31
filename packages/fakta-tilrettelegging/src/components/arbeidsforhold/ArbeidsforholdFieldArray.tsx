@@ -8,6 +8,7 @@ import {
   AoIArbeidsforhold,
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsgiverOpplysningerPerId,
+  KodeverkMedNavn,
 } from '@navikt/fp-types';
 
 import { FormattedMessage } from 'react-intl';
@@ -43,6 +44,7 @@ interface OwnProps {
   sorterteArbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[];
   aoiArbeidsforhold: AoIArbeidsforhold[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  uttakArbeidTyper: KodeverkMedNavn[];
 }
 
 const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
@@ -50,6 +52,7 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
   aoiArbeidsforhold,
   arbeidsgiverOpplysningerPerId,
   readOnly,
+  uttakArbeidTyper,
 }) => {
   const { control } = useFormContext();
   const { fields } = useFieldArray({
@@ -72,6 +75,8 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
 
         const stillingsprosentArbeidsforhold = af ? af.stillingsprosent : 100;
 
+        const arbeidType = uttakArbeidTyper.find(type => type.kode === arbeidsforhold.uttakArbeidType);
+
         return (
           <React.Fragment key={field.id}>
             <ExpansionCard aria-label="arbeidsgiver" defaultOpen className={styles.card}>
@@ -83,11 +88,13 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                         <Buldings3Icon color="var(--a-blue-600)" className={styles.image} />
                       </FlexColumn>
                       <FlexColumn>
-                        <Heading size="small">{arbeidsgiverOpplysning.navn}</Heading>
+                        <Heading size="small">{arbeidsgiverOpplysning?.navn || arbeidType?.navn}</Heading>
                       </FlexColumn>
-                      <FlexColumn className={styles.idMargin}>
-                        <BodyShort size="small">{arbeidsgiverOpplysning.identifikator}</BodyShort>
-                      </FlexColumn>
+                      {arbeidsgiverOpplysning?.identifikator && (
+                        <FlexColumn className={styles.idMargin}>
+                          <BodyShort size="small">{arbeidsgiverOpplysning.identifikator}</BodyShort>
+                        </FlexColumn>
+                      )}
                       {arbeidsforhold.eksternArbeidsforholdReferanse && (
                         <FlexColumn className={styles.idMargin}>
                           <BodyShort size="small">

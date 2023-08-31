@@ -17,6 +17,7 @@ import {
   FodselOgTilrettelegging,
   ArbeidsforholdFodselOgTilrettelegging,
   AoIArbeidsforhold,
+  KodeverkMedNavn,
 } from '@navikt/fp-types';
 import { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
@@ -73,6 +74,7 @@ interface OwnProps {
   formData: FormValues;
   setFormData: (data: FormValues) => void;
   submittable: boolean;
+  uttakArbeidTyper: KodeverkMedNavn[];
 }
 
 /**
@@ -92,6 +94,7 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
   formData,
   setFormData,
   submittable,
+  uttakArbeidTyper,
 }) => {
   const intl = useIntl();
 
@@ -187,6 +190,7 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
         aoiArbeidsforhold={aoiArbeidsforhold}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         readOnly={readOnly}
+        uttakArbeidTyper={uttakArbeidTyper}
       />
       {harIkkeVurdertAlleVelferdspermisjoner && visFeil && (
         <>
