@@ -239,6 +239,7 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
         {formValues.type === tilretteleggingType.DELVIS_TILRETTELEGGING && (
           <>
             {(tilrettelegging.stillingsprosent === undefined ||
+              tilrettelegging.type !== tilretteleggingType.DELVIS_TILRETTELEGGING ||
               erNyPeriode ||
               formValues.kilde === SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER) && (
               <>
