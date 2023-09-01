@@ -138,15 +138,15 @@ const SettPaVentModal: FunctionComponent<PureOwnProps> = ({
   const showFristenTekst = skalViseFristenTekst(erTilbakekreving, fristFraFelt, frist, ventearsakFraFelt);
 
   return (
-    <Modal
-      open={showModal}
-      aria-label={intl.formatMessage({
-        id: ventearsak ? 'SettPaVentModal.ModalDescriptionErPaVent' : 'SettPaVentModal.ModalDescription',
-      })}
-      onClose={cancelEvent}
-    >
-      <Modal.Body>
-        <Form formMethods={formMethods} onSubmit={submitCallback}>
+    <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <Modal
+        open={showModal}
+        aria-label={intl.formatMessage({
+          id: ventearsak ? 'SettPaVentModal.ModalDescriptionErPaVent' : 'SettPaVentModal.ModalDescription',
+        })}
+        onClose={cancelEvent}
+      >
+        <Modal.Body>
           <FlexContainer>
             <FlexRow spaceBetween>
               <FlexColumn>
@@ -242,9 +242,9 @@ const SettPaVentModal: FunctionComponent<PureOwnProps> = ({
               </FlexRow>
             </FlexContainer>
           </FlexContainer>
-        </Form>
-      </Modal.Body>
-    </Modal>
+        </Modal.Body>
+      </Modal>
+    </Form>
   );
 };
 
