@@ -86,7 +86,7 @@ const getPreviewCallback =
     fetchPreview(false, data);
   };
 
-const finnKanIkkeLagreNotatMelding = (kanVeilede: boolean, behandlingKanSendeMelding?: boolean) => {
+const finnKanIkkeLagreMeldingTekst = (kanVeilede: boolean, behandlingKanSendeMelding?: boolean) => {
   if (!behandlingKanSendeMelding) {
     return 'MeldingIndex.IkkeTilgjengeligPaVent';
   }
@@ -170,7 +170,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   const behandlingTillatteOperasjoner = valgtBehandling?.behandlingTillatteOperasjoner;
   const kanSendeMelding =
     !initFetchData.innloggetBruker.kanVeilede &&
-    fagsakData.getAlleBehandlinger().some(b => b.avsluttet === undefined) &&
+    fagsakData.getAlleBehandlinger().some(b => !b.avsluttet) &&
     behandlingTillatteOperasjoner?.behandlingKanSendeMelding;
 
   return (
@@ -186,7 +186,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
             <VerticalSpacer fourtyPx />
             <Alert variant="info">
               <FormattedMessage
-                id={finnKanIkkeLagreNotatMelding(
+                id={finnKanIkkeLagreMeldingTekst(
                   initFetchData.innloggetBruker.kanVeilede,
                   behandlingTillatteOperasjoner?.behandlingKanSendeMelding,
                 )}
