@@ -13,6 +13,7 @@
   "TilretteleggingFaktaForm.IkkeAllePermisjonerVurdert": "Ikke alle velferdspermisjoner er vurdert",
   "TilretteleggingFaktaForm.HarIkkeValgtArbeidsforhold": "Minst ett arbeidsforhold må brukes",
   "TilretteleggingFaktaForm.PeriodeIkkeLagtTil": "Det er minst en periode som er lagt til men ikke ferdigstilt",
+  "TilretteleggingFaktaForm.ArbeidsforholdUtenTilrettelegging": "Alle arbeidsforhold med svangerskapspenger må ha minst en tilretteleggingsperiode",
 
   "TilretteleggingForArbeidsgiverPanel.TilretteleggingTidligereEnn": "Tilrettelegging fra og med må være tidligere enn {dato}",
   "TilretteleggingForArbeidsgiverPanel.DatoForTilrettelegging": "Dato for tilrettelegging fra lege eller jordmor",

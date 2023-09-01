@@ -68,7 +68,7 @@ const TilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
         marginTop: '-24px',
         marginRight: '-24px',
         paddingBottom: '10px',
-        paddingLeft: '20x',
+        paddingLeft: '20px',
         paddingRight: '50px',
         paddingTop: '10px',
       }}
