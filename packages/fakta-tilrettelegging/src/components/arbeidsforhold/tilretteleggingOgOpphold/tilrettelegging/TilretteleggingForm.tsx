@@ -178,10 +178,10 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
       <div
         style={{
           backgroundColor: 'white',
-          marginLeft: '-48px',
-          marginTop: '-8px',
+          marginLeft: '-56px',
+          marginTop: '-9px',
           marginBottom: '-8px',
-          marginRight: '-48px',
+          marginRight: '-56px',
           padding: '24px',
         }}
       >
