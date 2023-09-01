@@ -2,13 +2,7 @@ import React, { FunctionComponent, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { KodeverkMedNavn } from '@navikt/fp-types';
-import {
-  behandlingType as BehandlingType,
-  KodeverkType,
-  venteArsakType,
-  dokumentMalType,
-  fagsakStatus,
-} from '@navikt/fp-kodeverk';
+import { behandlingType as BehandlingType, KodeverkType, venteArsakType, dokumentMalType } from '@navikt/fp-kodeverk';
 import { MeldingerSakIndex, MessagesModalSakIndex, FormValues } from '@navikt/fp-sak-meldinger';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
@@ -92,6 +86,16 @@ const getPreviewCallback =
     fetchPreview(false, data);
   };
 
+const finnKanIkkeLagreNotatMelding = (kanVeilede: boolean, behandlingKanSendeMelding?: boolean) => {
+  if (!behandlingKanSendeMelding) {
+    return 'MeldingIndex.IkkeTilgjengeligPaVent';
+  }
+  if (kanVeilede) {
+    return 'MeldingIndex.IkkeTilgjengeligVeileder';
+  }
+  return 'MeldingIndex.IkkeTilgjengeligAvsluttet';
+};
+
 interface OwnProps {
   fagsakData: FagsakData;
   valgtBehandlingUuid: string;
@@ -166,7 +170,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   const behandlingTillatteOperasjoner = valgtBehandling?.behandlingTillatteOperasjoner;
   const kanSendeMelding =
     !initFetchData.innloggetBruker.kanVeilede &&
-    fagsak.status !== fagsakStatus.AVSLUTTET &&
+    fagsakData.getAlleBehandlinger().some(b => b.avsluttet === undefined) &&
     behandlingTillatteOperasjoner?.behandlingKanSendeMelding;
 
   return (
@@ -181,15 +185,12 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
           <div className={styles.textAlign}>
             <VerticalSpacer fourtyPx />
             <Alert variant="info">
-              {!behandlingTillatteOperasjoner?.behandlingKanSendeMelding && (
-                <FormattedMessage id="MeldingIndex.IkkeTilgjengeligPaVent" />
-              )}
-              {fagsak.status === fagsakStatus.AVSLUTTET && (
-                <FormattedMessage id="MeldingIndex.IkkeTilgjengeligAvsluttet" />
-              )}
-              {initFetchData.innloggetBruker.kanVeilede && (
-                <FormattedMessage id="MeldingIndex.IkkeTilgjengeligVeileder" />
-              )}
+              <FormattedMessage
+                id={finnKanIkkeLagreNotatMelding(
+                  initFetchData.innloggetBruker.kanVeilede,
+                  behandlingTillatteOperasjoner?.behandlingKanSendeMelding,
+                )}
+              />
             </Alert>
           </div>
         )}
