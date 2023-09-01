@@ -23,7 +23,7 @@ export const visModal = () => (
       submitCallback={action('button-click')}
       cancelEvent={action('button-click')}
       erTilbakekreving={false}
-      hasManualPaVent={false}
+      hasManualPaVent
     />
   </RawIntlProvider>
 );

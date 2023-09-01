@@ -2,8 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Button, Modal, Label, BodyShort, Heading } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Button, Modal, BodyShort, Heading } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 import { Datepicker, SelectField, Form } from '@navikt/ft-form-hooks';
@@ -35,13 +35,6 @@ const isButtonDisabled = (
   const dateNotValid = !frist || !!hasValidDate(frist) || !!dateAfterOrEqualToToday(frist);
   const defaultOptions = (!hasManualPaVent || showAvbryt) && !venteArsakHasChanged && !fristHasChanged;
   return defaultOptions || dateNotValid;
-};
-
-const getPaVentText = (hasManualPaVent: boolean, originalVentearsak?: string, frist?: string): string => {
-  if (originalVentearsak) {
-    return hasManualPaVent || frist ? 'SettPaVentModal.ErSettPaVent' : 'SettPaVentModal.ErPaVentUtenFrist';
-  }
-  return hasManualPaVent || frist ? 'SettPaVentModal.SettesPaVent' : 'SettPaVentModal.SettesPaVentUtenFrist';
 };
 
 const buildInitialValues = (hasManualPaVent: boolean, ventearsak?: string, frist?: string): FormValues => ({
@@ -146,103 +139,92 @@ const SettPaVentModal: FunctionComponent<PureOwnProps> = ({
         })}
         onClose={cancelEvent}
       >
+        <Modal.Header>
+          <Heading size="small">
+            <FormattedMessage id={ventearsak ? 'SettPaVentModal.ErSettPaVent' : 'SettPaVentModal.SettesPaVent'} />
+          </Heading>
+        </Modal.Header>
         <Modal.Body>
-          <FlexContainer>
-            <FlexRow spaceBetween>
-              <FlexColumn>
-                <Heading size="small" className={styles.label}>
-                  <FormattedMessage id={getPaVentText(hasManualPaVent, ventearsak, fristFraFelt)} />
-                </Heading>
-              </FlexColumn>
-              {(hasManualPaVent || fristFraFelt) && (
-                <FlexColumn>
-                  <Datepicker name="frist" validate={[required, hasValidDate, dateAfterOrEqualToToday]} />
-                </FlexColumn>
-              )}
-            </FlexRow>
-            <VerticalSpacer sixteenPx />
-            <SelectField
-              name="ventearsak"
-              className={styles.select}
-              label={
-                <Label size="small">
-                  <FormattedMessage id="SettPaVentModal.Arsak" />
-                </Label>
-              }
-              validate={[required]}
-              selectValues={ventearsaker
-                .filter(
-                  va =>
-                    !hasManualPaVent ||
-                    (erTilbakekreving
-                      ? inkluderVentearsak(va, ventearsakFraFelt)
-                      : manuelleVenteArsaker.includes(va.kode)),
-                )
-                .sort((v1, v2) => v1.navn.localeCompare(v2.navn))
-                .map(va => (
-                  <option key={va.kode} value={va.kode}>
-                    {va.navn}
-                  </option>
-                ))}
-              readOnly={!hasManualPaVent}
-            />
-            <VerticalSpacer sixteenPx />
-            {visBrevErBestilt && (
+          {(hasManualPaVent || fristFraFelt) && (
+            <>
+              <Datepicker
+                label={<FormattedMessage id="SettPaVentModal.Frist" />}
+                name="frist"
+                validate={[required, hasValidDate, dateAfterOrEqualToToday]}
+              />
+              <VerticalSpacer sixteenPx />
+            </>
+          )}
+          <SelectField
+            name="ventearsak"
+            className={styles.select}
+            label={<FormattedMessage id="SettPaVentModal.Arsak" />}
+            validate={[required]}
+            selectValues={ventearsaker
+              .filter(
+                va =>
+                  !hasManualPaVent ||
+                  (erTilbakekreving
+                    ? inkluderVentearsak(va, ventearsakFraFelt)
+                    : manuelleVenteArsaker.includes(va.kode)),
+              )
+              .sort((v1, v2) => v1.navn.localeCompare(v2.navn))
+              .map(va => (
+                <option key={va.kode} value={va.kode}>
+                  {va.navn}
+                </option>
+              ))}
+            readOnly={!hasManualPaVent}
+          />
+          <VerticalSpacer sixteenPx />
+          {visBrevErBestilt && (
+            <BodyShort size="small">
+              <FormattedMessage id="SettPaVentModal.BrevBlirBestilt" />
+            </BodyShort>
+          )}
+          {hasManualPaVent && (
+            <BodyShort size="small">{intl.formatMessage({ id: 'SettPaVentModal.EndreFrist' })}</BodyShort>
+          )}
+          {!hasManualPaVent && showFristenTekst && (
+            <>
               <BodyShort size="small">
-                <FormattedMessage id="SettPaVentModal.BrevBlirBestilt" />
+                <FormattedMessage id="SettPaVentModal.UtløptFrist" />
               </BodyShort>
-            )}
-            {hasManualPaVent && (
-              <BodyShort size="small">{intl.formatMessage({ id: 'SettPaVentModal.EndreFrist' })}</BodyShort>
-            )}
-            {!hasManualPaVent && showFristenTekst && (
-              <>
-                <BodyShort size="small">
-                  <FormattedMessage id="SettPaVentModal.UtløptFrist" />
-                </BodyShort>
-                <VerticalSpacer eightPx />
-                <BodyShort size="small">
-                  <FormattedMessage id="SettPaVentModal.HenleggeSaken" />
-                </BodyShort>
-              </>
-            )}
-            <VerticalSpacer sixteenPx />
-            <FlexContainer>
-              <FlexRow>
-                <FlexColumn>
-                  <Button
-                    size="small"
-                    variant="primary"
-                    className={styles.button}
-                    onClick={showAvbryt ? ariaCheck : cancelEvent}
-                    disabled={isButtonDisabled(
-                      showAvbryt,
-                      venteArsakHasChanged,
-                      fristHasChanged,
-                      hasManualPaVent,
-                      fristFraFelt,
-                    )}
-                  >
-                    <FormattedMessage id="SettPaVentModal.Ok" />
-                  </Button>
-                </FlexColumn>
-                {(!hasManualPaVent || showAvbryt || !visBrevErBestilt) && (
-                  <FlexColumn>
-                    <Button
-                      size="small"
-                      variant="secondary"
-                      onClick={cancelEvent}
-                      className={styles.cancelButton}
-                      type="button"
-                    >
-                      <FormattedMessage id={hasManualPaVent ? 'SettPaVentModal.Avbryt' : 'SettPaVentModal.Lukk'} />
-                    </Button>
-                  </FlexColumn>
-                )}
-              </FlexRow>
-            </FlexContainer>
-          </FlexContainer>
+              <VerticalSpacer eightPx />
+              <BodyShort size="small">
+                <FormattedMessage id="SettPaVentModal.HenleggeSaken" />
+              </BodyShort>
+            </>
+          )}
         </Modal.Body>
+        <Modal.Footer>
+          <Button
+            size="small"
+            variant="primary"
+            className={styles.button}
+            onClick={showAvbryt ? ariaCheck : cancelEvent}
+            disabled={isButtonDisabled(
+              showAvbryt,
+              venteArsakHasChanged,
+              fristHasChanged,
+              hasManualPaVent,
+              fristFraFelt,
+            )}
+          >
+            <FormattedMessage id="SettPaVentModal.Ok" />
+          </Button>
+          {(!hasManualPaVent || showAvbryt || !visBrevErBestilt) && (
+            <Button
+              size="small"
+              variant="secondary"
+              onClick={cancelEvent}
+              className={styles.cancelButton}
+              type="button"
+            >
+              <FormattedMessage id={hasManualPaVent ? 'SettPaVentModal.Avbryt' : 'SettPaVentModal.Lukk'} />
+            </Button>
+          )}
+        </Modal.Footer>
       </Modal>
     </Form>
   );

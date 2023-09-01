@@ -14,7 +14,7 @@ describe('<SettPaVentModal>', () => {
     const cancelEventCallback = vi.fn();
     const submitCallback = vi.fn();
 
-    const utils = render(
+    render(
       <RawIntlProvider value={intlMock}>
         <SettPaVentModal
           submitCallback={submitCallback}
@@ -28,8 +28,7 @@ describe('<SettPaVentModal>', () => {
       </RawIntlProvider>,
     );
 
-    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
-    expect(utils.getByLabelText('Behandlingen settes på vent med frist')).toBeEnabled();
+    expect(await screen.findByText('Behandlingen settes på vent')).toBeInTheDocument();
     expect(screen.getByText('OK')).toBeEnabled();
   });
 
@@ -51,7 +50,7 @@ describe('<SettPaVentModal>', () => {
       </RawIntlProvider>,
     );
 
-    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
+    expect(await screen.findByText('Behandlingen settes på vent')).toBeInTheDocument();
     expect(utils.getByText('OK').closest('button')).toBeDisabled();
   });
 
@@ -102,7 +101,7 @@ describe('<SettPaVentModal>', () => {
       </RawIntlProvider>,
     );
 
-    expect(await screen.findByText('Behandlingen er satt på vent med frist')).toBeInTheDocument();
+    expect(await screen.findByText('Behandlingen er satt på vent')).toBeInTheDocument();
     expect(screen.getByText('Venter på kravgrunnlag')).toBeInTheDocument();
     expect(screen.getByText(/OBS! Fristen på denne behandlingen er utløpt!/)).toBeInTheDocument();
   });
