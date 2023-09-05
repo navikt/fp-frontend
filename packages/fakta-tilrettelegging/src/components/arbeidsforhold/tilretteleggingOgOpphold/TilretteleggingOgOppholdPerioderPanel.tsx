@@ -89,9 +89,9 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
             if (tilretteleggingIndex !== -1) {
               const navn = `${tilretteleggingStateName}.${tilretteleggingIndex}`;
               const nesteTilrettelegging = tilretteleggingDatoer[tilretteleggingIndex + 1];
-              const tomDatoForTilrettelegging = nesteTilrettelegging
+              const tomDatoForTilrettelegging = nesteTilrettelegging?.fom
                 ? dayjs(nesteTilrettelegging.fom).subtract(1, 'day').format(ISO_DATE_FORMAT)
-                : dayjs(termindato).subtract(3, 'week').format(ISO_DATE_FORMAT);
+                : dayjs(termindato).subtract(3, 'week').subtract(1, 'day').format(ISO_DATE_FORMAT);
 
               return (
                 <TilretteleggingPeriodeTabellRad
@@ -131,35 +131,39 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
           })}
         </Table.Body>
       </Table>
-      <VerticalSpacer thirtyTwoPx />
-      <FlexContainer>
-        <FlexRow>
-          <FlexColumn>
-            <Button
-              size="small"
-              variant="secondary"
-              type="button"
-              icon={<PlusIcon aria-hidden />}
-              onClick={leggTilTilrettelegging}
-              disabled={erLeggTilKnapperDisablet}
-            >
-              <FormattedMessage id="TilretteleggingFieldArray.LeggTilTilrettelegging" />
-            </Button>
-          </FlexColumn>
-          <FlexColumn>
-            <Button
-              size="small"
-              variant="secondary"
-              onClick={leggTilOpphold}
-              icon={<PlusIcon aria-hidden />}
-              type="button"
-              disabled={erLeggTilKnapperDisablet}
-            >
-              <FormattedMessage id="TilretteleggingFieldArray.LeggTilOpphold" />
-            </Button>
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
+      {!readOnly && (
+        <>
+          <VerticalSpacer fourtyPx />
+          <FlexContainer>
+            <FlexRow>
+              <FlexColumn>
+                <Button
+                  size="small"
+                  variant="secondary"
+                  type="button"
+                  icon={<PlusIcon aria-hidden />}
+                  onClick={leggTilTilrettelegging}
+                  disabled={erLeggTilKnapperDisablet}
+                >
+                  <FormattedMessage id="TilretteleggingFieldArray.LeggTilTilrettelegging" />
+                </Button>
+              </FlexColumn>
+              <FlexColumn>
+                <Button
+                  size="small"
+                  variant="secondary"
+                  onClick={leggTilOpphold}
+                  icon={<PlusIcon aria-hidden />}
+                  type="button"
+                  disabled={erLeggTilKnapperDisablet}
+                >
+                  <FormattedMessage id="TilretteleggingFieldArray.LeggTilOpphold" />
+                </Button>
+              </FlexColumn>
+            </FlexRow>
+          </FlexContainer>
+        </>
+      )}
     </>
   );
 };

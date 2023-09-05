@@ -24,7 +24,7 @@ const VelferdspermisjonPanel: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
   return (
     <>
-      <VerticalSpacer thirtyTwoPx />
+      <VerticalSpacer fourtyPx />
       <FlexContainer>
         <FlexRow>
           <FlexColumn>
@@ -42,7 +42,7 @@ const VelferdspermisjonPanel: FunctionComponent<OwnProps> = ({
           )}
         </FlexRow>
       </FlexContainer>
-      <VerticalSpacer eightPx />
+      <VerticalSpacer sixteenPx />
       <Table size="small">
         <Table.Body>
           {velferdspermisjoner.map((permisjon, index) => (

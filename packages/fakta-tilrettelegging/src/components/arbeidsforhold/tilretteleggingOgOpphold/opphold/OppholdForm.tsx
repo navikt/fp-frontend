@@ -128,11 +128,11 @@ const OppholdForm: FunctionComponent<OwnProps> = ({
       <div
         style={{
           backgroundColor: 'white',
-          marginLeft: '-48px',
-          marginTop: '-8px',
+          marginLeft: '-56px',
+          marginTop: '-9px',
           marginBottom: '-8px',
-          marginRight: '-48px',
-          padding: '30px',
+          marginRight: '-56px',
+          padding: '24px',
         }}
       >
         <FlexContainer>
@@ -188,7 +188,7 @@ const OppholdForm: FunctionComponent<OwnProps> = ({
           ]}
         />
         <VerticalSpacer thirtyTwoPx />
-        {!opphold.forVisning && (
+        {!opphold.forVisning && !readOnly && (
           <FlexContainer>
             <FlexRow>
               <FlexColumn>

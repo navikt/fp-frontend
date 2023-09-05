@@ -39,7 +39,9 @@ const VelferdspermisjonForm: FunctionComponent<OwnProps> = ({
 
   const lagreForm = (values: FormValues) => {
     const formValues = values[permisjonIndex];
-    setValue(`arbeidsforhold.${arbeidsforholdIndex}.velferdspermisjoner.${permisjonIndex}`, formValues);
+    setValue(`arbeidsforhold.${arbeidsforholdIndex}.velferdspermisjoner.${permisjonIndex}`, formValues, {
+      shouldDirty: true,
+    });
     formMethods.reset(values);
     lukkRad();
     return Promise.resolve();
@@ -50,11 +52,11 @@ const VelferdspermisjonForm: FunctionComponent<OwnProps> = ({
       <div
         style={{
           backgroundColor: 'white',
-          marginLeft: '-48px',
-          marginTop: '-8px',
+          marginLeft: '-56px',
+          marginTop: '-9px',
           marginBottom: '-8px',
-          marginRight: '-48px',
-          padding: '30px',
+          marginRight: '-56px',
+          padding: '24px',
         }}
       >
         <RadioGroupPanel

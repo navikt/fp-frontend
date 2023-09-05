@@ -31,7 +31,7 @@ import '@navikt/fp-fakta-arbeidsforhold/dist/style.css';
 import '@navikt/fp-fakta-besteberegning/dist/style.css';
 import '@navikt/fp-fakta-felles/dist/style.css';
 import '@navikt/fp-fakta-fodsel/dist/style.css';
-import '@navikt/fp-fakta-fodsel-og-tilrettelegging/dist/style.css';
+import '@navikt/fp-fakta-tilrettelegging/dist/style.css';
 import '@navikt/fp-fakta-medlemskap/dist/style.css';
 import '@navikt/fp-fakta-omsorg/dist/style.css';
 import '@navikt/fp-fakta-omsorg-og-foreldreansvar/dist/style.css';

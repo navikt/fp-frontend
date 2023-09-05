@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import { createIntl } from '@navikt/ft-utils';
 
 import {
@@ -9,6 +8,7 @@ import {
   FodselOgTilrettelegging,
   ArbeidOgInntektsmelding,
 } from '@navikt/fp-types';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 
 import TilretteleggingFaktaForm from './components/TilretteleggingFaktaForm';
 
@@ -21,7 +21,6 @@ const intl = createIntl(messages);
 interface OwnProps {
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
   arbeidOgInntekt: ArbeidOgInntektsmelding;
-  erOverstyrer: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
@@ -33,12 +32,11 @@ const TilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanel
   readOnly,
   harApneAksjonspunkter,
   submittable,
-  erOverstyrer,
   arbeidsgiverOpplysningerPerId,
-  alleKodeverk,
   formData,
   setFormData,
   arbeidOgInntekt,
+  alleKodeverk,
 }) => (
   <RawIntlProvider value={intl}>
     <TilretteleggingFaktaForm
@@ -50,12 +48,10 @@ const TilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanel
       readOnly={readOnly}
       hasOpenAksjonspunkter={harApneAksjonspunkter}
       submittable={submittable}
-      // @ts-ignore Fiks
-      erOverstyrer={erOverstyrer}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      uttakArbeidTyper={alleKodeverk[KodeverkType.UTTAK_ARBEID_TYPE]}
       formData={formData}
       setFormData={setFormData}
+      uttakArbeidTyper={alleKodeverk[KodeverkType.UTTAK_ARBEID_TYPE]}
     />
   </RawIntlProvider>
 );

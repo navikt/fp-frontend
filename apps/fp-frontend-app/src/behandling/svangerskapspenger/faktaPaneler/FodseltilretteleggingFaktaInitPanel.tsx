@@ -2,14 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import { FodselOgTilretteleggingFaktaIndex } from '@navikt/fp-fakta-fodsel-og-tilrettelegging';
+import { TilretteleggingFaktaIndex } from '@navikt/fp-fakta-tilrettelegging';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import {
-  AksessRettigheter,
-  ArbeidOgInntektsmelding,
-  ArbeidsgiverOpplysningerPerId,
-  FodselOgTilrettelegging,
-} from '@navikt/fp-types';
+import { ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, FodselOgTilrettelegging } from '@navikt/fp-types';
 
 import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
 import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
@@ -30,7 +25,6 @@ type EndepunktPanelData = {
 
 interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  rettigheter: AksessRettigheter;
 }
 
 /**
@@ -38,7 +32,6 @@ interface OwnProps {
  */
 const FodseltilretteleggingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
   arbeidsgiverOpplysningerPerId,
-  rettigheter,
   ...props
 }) => (
   <FaktaDefaultInitPanel<EndepunktPanelData>
@@ -52,11 +45,15 @@ const FodseltilretteleggingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPan
     })}
     skalPanelVisesIMeny={() => true}
     renderPanel={data => (
-      <FodselOgTilretteleggingFaktaIndex
-        erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
+      <TilretteleggingFaktaIndex
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...data}
-        readOnly={data.readOnly || !props.behandling.aksjonspunkt.some((ap: { definisjon: any; }) => AKSJONSPUNKT_KODER.some(kode => kode === ap.definisjon))}
+        readOnly={
+          data.readOnly ||
+          !props.behandling.aksjonspunkt.some((ap: { definisjon: any }) =>
+            AKSJONSPUNKT_KODER.some(kode => kode === ap.definisjon),
+          )
+        }
       />
     )}
   />

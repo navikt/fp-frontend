@@ -17,6 +17,7 @@ import {
   FodselOgTilrettelegging,
   ArbeidsforholdFodselOgTilrettelegging,
   AoIArbeidsforhold,
+  KodeverkMedNavn,
 } from '@navikt/fp-types';
 import { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
@@ -73,6 +74,7 @@ interface OwnProps {
   formData: FormValues;
   setFormData: (data: FormValues) => void;
   submittable: boolean;
+  uttakArbeidTyper: KodeverkMedNavn[];
 }
 
 /**
@@ -92,6 +94,7 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
   formData,
   setFormData,
   submittable,
+  uttakArbeidTyper,
 }) => {
   const intl = useIntl();
 
@@ -122,12 +125,21 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
   const harPeriodeSomIkkeErFerdig = arbeidsforhold.some(
     a => a.tilretteleggingDatoer.some(td => !td.fom) || a.avklarteOppholdPerioder.some(td => !td.fom),
   );
+  const harArbeidsforholdUtenTilrettelegging = arbeidsforhold.some(
+    a => a.skalBrukes && a.tilretteleggingDatoer.length === 0,
+  );
 
   const [visFeil, skalViseFeil] = useState(false);
 
+  const harFeil =
+    harIkkeVurdertAlleVelferdspermisjoner ||
+    harIkkeValgtNoenArbeidsforhold ||
+    harPeriodeSomIkkeErFerdig ||
+    harArbeidsforholdUtenTilrettelegging;
+
   const onSubmit = useCallback(
     (values: FormValues) => {
-      if (harIkkeVurdertAlleVelferdspermisjoner || harIkkeValgtNoenArbeidsforhold || harPeriodeSomIkkeErFerdig) {
+      if (harFeil) {
         skalViseFeil(true);
         return Promise.resolve();
       }
@@ -139,7 +151,7 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
         bekreftetSvpArbeidsforholdList: values.arbeidsforhold,
       });
     },
-    [harIkkeVurdertAlleVelferdspermisjoner, submitCallback],
+    [harFeil, submitCallback],
   );
 
   return (
@@ -156,7 +168,7 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
                 ]
               : [<FormattedMessage id="TilretteleggingFaktaForm.Aksjonspunkt" key="svangerskapspengerAp" />]}
           </AksjonspunktHelpTextHTML>
-          <VerticalSpacer thirtyTwoPx />
+          <VerticalSpacer fourtyPx />
         </>
       )}
       <FlexContainer wrap>
@@ -187,6 +199,7 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
         aoiArbeidsforhold={aoiArbeidsforhold}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         readOnly={readOnly}
+        uttakArbeidTyper={uttakArbeidTyper}
       />
       {harIkkeVurdertAlleVelferdspermisjoner && visFeil && (
         <>
@@ -209,6 +222,14 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
           <Alert variant="error">
             <FormattedMessage id="TilretteleggingFaktaForm.PeriodeIkkeLagtTil" />
+          </Alert>
+        </>
+      )}
+      {harArbeidsforholdUtenTilrettelegging && visFeil && (
+        <>
+          <VerticalSpacer sixteenPx />
+          <Alert variant="error">
+            <FormattedMessage id="TilretteleggingFaktaForm.ArbeidsforholdUtenTilrettelegging" />
           </Alert>
         </>
       )}

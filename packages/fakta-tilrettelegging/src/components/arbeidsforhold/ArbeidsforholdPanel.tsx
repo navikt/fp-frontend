@@ -22,7 +22,7 @@ const validerTidligereEnn =
     const fødselsdato = getValues('fødselsdato');
 
     const tilretteleggingFomDato = dayjs(tilretteleggingBehovFom);
-    const treUkerFørTermindato = dayjs(termindato).subtract(3, 'week');
+    const treUkerFørTermindato = dayjs(termindato).subtract(3, 'week').subtract(1, 'day');
     const tidligsteTidspunkt = fødselsdato ? dayjs.min(treUkerFørTermindato, dayjs(fødselsdato)) : treUkerFørTermindato;
 
     if (
@@ -113,11 +113,11 @@ const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({
           readOnly={readOnly}
         />
       )}
-      <VerticalSpacer thirtyTwoPx />
+      <VerticalSpacer fourtyPx />
       <Label size="small">
         <FormattedMessage id="TilretteleggingForArbeidsgiverPanel.Perioder" />
       </Label>
-      <VerticalSpacer eightPx />
+      <VerticalSpacer sixteenPx />
       <TilretteleggingOgOppholdPerioderPanel
         arbeidsforhold={arbeidsforhold}
         arbeidsforholdIndex={arbeidsforholdIndex}

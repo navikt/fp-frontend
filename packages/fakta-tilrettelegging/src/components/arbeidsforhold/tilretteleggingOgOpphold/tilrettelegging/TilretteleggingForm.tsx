@@ -42,11 +42,11 @@ const validerAtDatoErUnik =
   };
 
 const validerAtPeriodeErGyldig =
-  (intl: IntlShape, tomDatoForTilrettelegging: string, termindato: string) => (dato?: string) => {
+  (intl: IntlShape, tilretteleggingBehovFom: string, termindato: string) => (dato?: string) => {
     if (dayjs(dato).isAfter(dayjs(termindato).subtract(3, 'weeks').subtract(1, 'day'))) {
       return intl.formatMessage({ id: 'TilretteleggingForm.EtterTermindato' });
     }
-    if (dayjs(dato).isBefore(tomDatoForTilrettelegging)) {
+    if (dayjs(dato).isBefore(tilretteleggingBehovFom)) {
       return intl.formatMessage({ id: 'TilretteleggingForm.ForForsteDato' });
     }
     return null;
@@ -66,7 +66,7 @@ const finnUtbetalingsgradForTilrettelegging = (
   const effektivStillingsprosent = stillingsprosentArbeidsforhold - velferdspermisjonprosent;
   const defaultUtbetalingsgrad =
     effektivStillingsprosent <= 0 ? 0 : 100 * (1 - stillingsprosent / effektivStillingsprosent);
-  return defaultUtbetalingsgrad > 0 ? defaultUtbetalingsgrad : 0;
+  return defaultUtbetalingsgrad > 0 ? +defaultUtbetalingsgrad.toFixed(2) : 0;
 };
 
 export const finnProsentSvangerskapspenger = (
@@ -92,7 +92,7 @@ export const finnProsentSvangerskapspenger = (
 };
 
 const sjekkOmTomDatoErTreUkerFørTermin = (termindato: string, tom?: string): boolean =>
-  dayjs(termindato).subtract(3, 'week').isSame(dayjs(tom));
+  dayjs(termindato).subtract(3, 'week').subtract(1, 'day').isSame(dayjs(tom));
 
 interface OwnProps {
   tilrettelegging: ArbeidsforholdTilretteleggingDato;
@@ -141,20 +141,21 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
     },
   });
 
+  const formValuesRecord = formMethods.watch();
+  const formValues = formValuesRecord[index];
+
   const lagreIForm = (values: FormValues) => {
-    const formValues = values[index];
+    const lagreFormValues = values[index];
     const kilde =
-      formValues.kilde === SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER || erNyPeriode
+      lagreFormValues.kilde === SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER || erNyPeriode
         ? SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER
         : SvpTilretteleggingFomKilde.ENDRET_AV_SAKSBEHANDLER;
     const v = {
-      fom: formValues.fom,
-      type: formValues.type,
+      ...lagreFormValues,
       overstyrtUtbetalingsgrad:
-        formValues.overstyrtUtbetalingsgrad !== prosentSvangerskapspenger
-          ? formValues.overstyrtUtbetalingsgrad
+        lagreFormValues.overstyrtUtbetalingsgrad !== prosentSvangerskapspenger
+          ? lagreFormValues.overstyrtUtbetalingsgrad
           : undefined,
-      stillingsprosent: formValues.stillingsprosent,
       kilde,
     };
     oppdaterTilrettelegging(v);
@@ -172,29 +173,30 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
     return Promise.resolve();
   };
 
-  const formValues = formMethods.watch();
-
   return (
     <FormProvider {...formMethods}>
       <div
         style={{
           backgroundColor: 'white',
-          marginLeft: '-48px',
-          marginTop: '-8px',
+          marginLeft: '-56px',
+          marginTop: '-9px',
           marginBottom: '-8px',
-          marginRight: '-48px',
-          padding: '30px',
+          marginRight: '-56px',
+          padding: '24px',
         }}
       >
-        <TilretteleggingInfoPanel
-          tilrettelegging={tilrettelegging}
-          termindato={termindato}
-          erTomDatoTreUkerFørTermin={erTomDatoTreUkerFørTermin}
-          stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
-          prosentSvangerskapspenger={prosentSvangerskapspenger}
-          tomDato={tomDatoForTilrettelegging}
-        />
-        <VerticalSpacer twentyPx />
+        {!erNyPeriode && (
+          <>
+            <TilretteleggingInfoPanel
+              tilrettelegging={formValues}
+              termindato={termindato}
+              erTomDatoTreUkerFørTermin={erTomDatoTreUkerFørTermin}
+              stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
+              tomDato={tomDatoForTilrettelegging}
+            />
+            <VerticalSpacer twentyPx />
+          </>
+        )}
         <Datepicker
           name={`${index}.fom`}
           label={intl.formatMessage({
@@ -209,7 +211,7 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
               arbeidsforhold.avklarteOppholdPerioder,
               tilrettelegging,
             ),
-            validerAtPeriodeErGyldig(intl, tomDatoForTilrettelegging, termindato),
+            validerAtPeriodeErGyldig(intl, arbeidsforhold.tilretteleggingBehovFom, termindato),
           ]}
           isReadOnly={readOnly}
         />
@@ -233,67 +235,81 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
               value: tilretteleggingType.INGEN_TILRETTELEGGING,
             },
           ]}
-          onChange={value => {
-            if (value === tilretteleggingType.INGEN_TILRETTELEGGING) {
-              // @ts-ignore Fiks
-              formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, 100);
-            }
-            if (value === tilretteleggingType.DELVIS_TILRETTELEGGING) {
-              const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(
-                stillingsprosentArbeidsforhold,
-                velferdspermisjonprosent,
-                // Har alltid stillingsprosent her. Bør fikse sjekk mot type så || 0 er unødvendig
-                tilrettelegging.stillingsprosent || 0,
-              );
-              // @ts-ignore Fiks
-              formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad);
-            }
-          }}
         />
-        {formValues[index].type !== tilretteleggingType.HEL_TILRETTELEGGING && (
+        {formValues.type === tilretteleggingType.DELVIS_TILRETTELEGGING && (
           <>
+            {(tilrettelegging.stillingsprosent === undefined ||
+              tilrettelegging.type !== tilretteleggingType.DELVIS_TILRETTELEGGING ||
+              erNyPeriode ||
+              formValues.kilde === SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER) && (
+              <>
+                <VerticalSpacer sixteenPx />
+                <NumberField
+                  name={`${index}.stillingsprosent`}
+                  className={styles.arbeidsprosent}
+                  readOnly={readOnly}
+                  label={intl.formatMessage({ id: 'TilretteleggingForm.Arbeidsprosent' })}
+                  description={intl.formatMessage({ id: 'TilretteleggingForm.ArbeidsprosentBeskrivelse' })}
+                  validate={[required, minValue0, maxValue100, hasValidDecimal]}
+                  forceTwoDecimalDigits
+                  onChange={value => {
+                    const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(
+                      stillingsprosentArbeidsforhold,
+                      velferdspermisjonprosent,
+                      value,
+                    );
+                    // @ts-ignore Fiks
+                    formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad, { shouldDirty: true });
+                  }}
+                />
+              </>
+            )}
             <VerticalSpacer sixteenPx />
             <NumberField
               name={`${index}.overstyrtUtbetalingsgrad`}
               className={styles.utbetalingsgrad}
               readOnly={readOnly}
               label={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvp' })}
+              description={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvpBeskrivelse' })}
               validate={[required, minValue0, maxValue100, hasValidDecimal]}
-              disabled={formValues[index].type === tilretteleggingType.INGEN_TILRETTELEGGING}
+              forceTwoDecimalDigits
+              disabled={formValues.stillingsprosent === undefined}
             />
           </>
         )}
         <VerticalSpacer thirtyTwoPx />
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <Button
-                size="small"
-                variant="primary"
-                type="button"
-                disabled={!formMethods.formState.isDirty || false}
-                loading={false}
-                onClick={formMethods.handleSubmit((values: FormValues) => lagreIForm(values))}
-              >
-                <FormattedMessage id={erNyPeriode ? 'TilretteleggingForm.LeggTil' : 'TilretteleggingForm.Oppdater'} />
-              </Button>
-            </FlexColumn>
-            <FlexColumn>
-              <Button size="small" variant="secondary" onClick={avbryt} type="button">
-                <FormattedMessage
-                  id={erNyPeriode ? 'TilretteleggingForm.AvsluttOgSlett' : 'TilretteleggingForm.Avbryt'}
-                />
-              </Button>
-            </FlexColumn>
-            {!erNyPeriode && (
-              <FlexColumn className={styles.pushRight}>
-                <Button size="small" variant="secondary" onClick={slett} type="button">
-                  <FormattedMessage id="TilretteleggingForm.SlettPeriode" />
+        {!readOnly && (
+          <FlexContainer>
+            <FlexRow>
+              <FlexColumn>
+                <Button
+                  size="small"
+                  variant="primary"
+                  type="button"
+                  disabled={!formMethods.formState.isDirty || false}
+                  loading={false}
+                  onClick={formMethods.handleSubmit((values: FormValues) => lagreIForm(values))}
+                >
+                  <FormattedMessage id={erNyPeriode ? 'TilretteleggingForm.LeggTil' : 'TilretteleggingForm.Oppdater'} />
                 </Button>
               </FlexColumn>
-            )}
-          </FlexRow>
-        </FlexContainer>
+              <FlexColumn>
+                <Button size="small" variant="secondary" onClick={avbryt} type="button">
+                  <FormattedMessage
+                    id={erNyPeriode ? 'TilretteleggingForm.AvsluttOgSlett' : 'TilretteleggingForm.Avbryt'}
+                  />
+                </Button>
+              </FlexColumn>
+              {!erNyPeriode && (
+                <FlexColumn className={styles.pushRight}>
+                  <Button size="small" variant="secondary" onClick={slett} type="button">
+                    <FormattedMessage id="TilretteleggingForm.SlettPeriode" />
+                  </Button>
+                </FlexColumn>
+              )}
+            </FlexRow>
+          </FlexContainer>
+        )}
       </div>
     </FormProvider>
   );
