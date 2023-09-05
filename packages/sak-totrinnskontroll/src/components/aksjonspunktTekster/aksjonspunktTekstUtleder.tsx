@@ -8,6 +8,7 @@ import {
   behandlingResultatType,
   behandlingStatus as behandlingStatusCode,
   isUttakAksjonspunkt,
+  isFaktaUttakAksjonspunkt,
 } from '@navikt/fp-kodeverk';
 import { KodeverkMedNavn, TotrinnskontrollAksjonspunkt, Behandlingsresultat } from '@navikt/fp-types';
 
@@ -45,6 +46,11 @@ const buildUttakText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactElemen
         } else if (
           uttakperiode.erEndret &&
           aksjonspunkt.aksjonspunktKode === AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER
+        ) {
+          id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
+        } else if (
+          uttakperiode.erEndret &&
+          aksjonspunkt.aksjonspunktKode === AksjonspunktCode.OVERSTYR_FAKTA_UTTAK
         ) {
           id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
         } else if (uttakperiode.erEndret) {
@@ -163,6 +169,13 @@ const getAksjonspunkttekst = (
   }
   if (
     isUttakAksjonspunkt(aksjonspunkt.aksjonspunktKode) &&
+    aksjonspunkt.uttakPerioder &&
+    aksjonspunkt.uttakPerioder.length > 0
+  ) {
+    return buildUttakText(aksjonspunkt);
+  }
+  if (
+    isFaktaUttakAksjonspunkt(aksjonspunkt.aksjonspunktKode) &&
     aksjonspunkt.uttakPerioder &&
     aksjonspunkt.uttakPerioder.length > 0
   ) {

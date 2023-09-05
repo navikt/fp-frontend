@@ -83,6 +83,11 @@
       "navn": "Dekningsgrad er endret"
     },
     {
+      "kode": "OPPGAVE_VEDTAK",
+      "kodeverk": "HISTORIKKINNSLAG_TYPE",
+      "navn": "Oppgave før vedtak"
+    },
+    {
       "kode": "IVERKSETTELSE_VENT",
       "kodeverk": "HISTORIKKINNSLAG_TYPE",
       "navn": "Behandlingen venter på iverksettelse"
@@ -4167,6 +4172,11 @@
       "kode": "FNR",
       "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE",
       "navn": "Fødselsnummer"
+    },
+    {
+      "kode": "TERMINBEKREFTELSE",
+      "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE",
+      "navn": "Terminbekreftelse"
     },
     {
       "kode": "TERMINDATO",
