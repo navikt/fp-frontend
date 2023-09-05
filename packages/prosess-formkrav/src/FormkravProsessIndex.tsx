@@ -20,7 +20,7 @@ interface OwnProps {
 }
 
 const FormkravProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
-  klageVurdering,
+  klageVurdering = {},
   avsluttedeBehandlinger,
   aksjonspunkter,
   submitCallback,
@@ -52,9 +52,5 @@ const FormkravProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelPro
     )}
   </RawIntlProvider>
 );
-
-FormkravProsessIndex.defaultProps = {
-  klageVurdering: {},
-};
 
 export default FormkravProsessIndex;

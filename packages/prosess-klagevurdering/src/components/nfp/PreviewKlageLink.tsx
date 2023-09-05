@@ -6,7 +6,7 @@ import { dokumentMalType, klageVurdering as klageVurderingType } from '@navikt/f
 
 import styles from './previewKlageLink.module.css';
 
-const getBrevKode = (klageVurdering: string, klageVurdertAvKa: boolean): string | null => {
+const getBrevKode = (klageVurdertAvKa: boolean, klageVurdering?: string): string | undefined => {
   switch (klageVurdering) {
     case klageVurderingType.STADFESTE_YTELSESVEDTAK:
       return klageVurdertAvKa ? dokumentMalType.KLAGE_STADFESTET : dokumentMalType.KLAGE_OVERSENDT;
@@ -17,7 +17,7 @@ const getBrevKode = (klageVurdering: string, klageVurdertAvKa: boolean): string 
     case klageVurderingType.MEDHOLD_I_KLAGE:
       return dokumentMalType.KLAGE_OMGJORING;
     default:
-      return null;
+      return undefined;
   }
 };
 
@@ -27,9 +27,9 @@ export type BrevData = {
   erOpphevetKlage: boolean;
 };
 
-const getBrevData = (klageVurdering: string, fritekstTilBrev?: string): BrevData => ({
+const getBrevData = (klageVurdering?: string, fritekstTilBrev?: string): BrevData => ({
   fritekst: fritekstTilBrev || '',
-  dokumentMal: getBrevKode(klageVurdering, false),
+  dokumentMal: getBrevKode(false, klageVurdering),
   erOpphevetKlage: klageVurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK,
 });
 

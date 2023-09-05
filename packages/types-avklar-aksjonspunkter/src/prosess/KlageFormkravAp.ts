@@ -8,7 +8,7 @@ type KlageFormkravBasic = {
   erKonkret: boolean;
   erSignert: boolean;
   erTilbakekreving?: boolean;
-  tilbakekrevingInfo: {
+  tilbakekrevingInfo?: {
     tilbakekrevingUuid?: string;
     tilbakekrevingVedtakDato?: string;
     tilbakekrevingBehandlingType?: string;

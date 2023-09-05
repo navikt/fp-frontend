@@ -28,24 +28,23 @@ const buildInitialValues = (klageVurdering: KlageVurdering): FormValues => {
   const klageFormkavResultatNfp = klageVurdering ? klageVurdering.klageFormkravResultatNFP : null;
   return {
     vedtak: klageFormkavResultatNfp ? getPaKlagdVedtak(klageFormkavResultatNfp) : '',
-    begrunnelse: klageFormkavResultatNfp ? klageFormkavResultatNfp.begrunnelse : null,
-    erKlagerPart: klageFormkavResultatNfp ? klageFormkavResultatNfp.erKlagerPart : null,
-    erKonkret: klageFormkavResultatNfp ? klageFormkavResultatNfp.erKlageKonkret : null,
-    erFristOverholdt: klageFormkavResultatNfp ? klageFormkavResultatNfp.erKlagefirstOverholdt : null,
-    erSignert: klageFormkavResultatNfp ? klageFormkavResultatNfp.erSignert : null,
+    begrunnelse: klageFormkavResultatNfp ? klageFormkavResultatNfp.begrunnelse : undefined,
+    erKlagerPart: klageFormkavResultatNfp ? klageFormkavResultatNfp.erKlagerPart : undefined,
+    erKonkret: klageFormkavResultatNfp ? klageFormkavResultatNfp.erKlageKonkret : undefined,
+    erFristOverholdt: klageFormkavResultatNfp ? klageFormkavResultatNfp.erKlagefirstOverholdt : undefined,
+    erSignert: klageFormkavResultatNfp ? klageFormkavResultatNfp.erSignert : undefined,
   };
 };
 
 const getPåklagdBehandling = (
   avsluttedeBehandlinger: AvsluttetBehandling[],
   påklagdVedtak: string,
-): AvsluttetBehandling =>
-  avsluttedeBehandlinger.find((behandling: AvsluttetBehandling) => behandling.uuid === påklagdVedtak);
+): AvsluttetBehandling | undefined => avsluttedeBehandlinger.find(behandling => behandling.uuid === påklagdVedtak);
 
 export const erTilbakekreving = (avsluttedeBehandlinger: AvsluttetBehandling[], påklagdVedtak: string): boolean => {
   const behandling = getPåklagdBehandling(avsluttedeBehandlinger, påklagdVedtak);
   return (
-    behandling &&
+    !!behandling &&
     (behandling.type === BehandlingType.TILBAKEKREVING || behandling.type === BehandlingType.TILBAKEKREVING_REVURDERING)
   );
 };
@@ -53,28 +52,28 @@ export const erTilbakekreving = (avsluttedeBehandlinger: AvsluttetBehandling[], 
 export const påklagdTilbakekrevingInfo = (
   avsluttedeBehandlinger: AvsluttetBehandling[],
   påklagdVedtak: string,
-): TilbakekrevingInfo | null => {
+): TilbakekrevingInfo | undefined => {
   const erTilbakekrevingVedtak = erTilbakekreving(avsluttedeBehandlinger, påklagdVedtak);
   const behandling = getPåklagdBehandling(avsluttedeBehandlinger, påklagdVedtak);
-  return erTilbakekrevingVedtak
+  return behandling && erTilbakekrevingVedtak
     ? {
         tilbakekrevingUuid: behandling.uuid,
         tilbakekrevingVedtakDato: behandling.avsluttet,
         tilbakekrevingBehandlingType: behandling.type,
       }
-    : null;
+    : undefined;
 };
 
 const transformValues = (values: FormValues, avsluttedeBehandlinger: AvsluttetBehandling[]): KlageFormkravAp => ({
-  erKlagerPart: values.erKlagerPart,
-  erFristOverholdt: values.erFristOverholdt,
-  erKonkret: values.erKonkret,
-  erSignert: values.erSignert,
+  erKlagerPart: values.erKlagerPart!,
+  erFristOverholdt: values.erFristOverholdt!,
+  erKonkret: values.erKonkret!,
+  erSignert: values.erSignert!,
   begrunnelse: values.begrunnelse,
   kode: AksjonspunktCode.VURDERING_AV_FORMKRAV_KLAGE_NFP,
-  vedtakBehandlingUuid: values.vedtak === IKKE_PA_KLAGD_VEDTAK ? null : values.vedtak,
-  erTilbakekreving: erTilbakekreving(avsluttedeBehandlinger, values.vedtak),
-  tilbakekrevingInfo: påklagdTilbakekrevingInfo(avsluttedeBehandlinger, values.vedtak),
+  vedtakBehandlingUuid: values.vedtak === IKKE_PA_KLAGD_VEDTAK ? undefined : values.vedtak,
+  erTilbakekreving: erTilbakekreving(avsluttedeBehandlinger, values.vedtak!),
+  tilbakekrevingInfo: påklagdTilbakekrevingInfo(avsluttedeBehandlinger, values.vedtak!),
 });
 
 interface OwnProps {
@@ -83,7 +82,7 @@ interface OwnProps {
   readOnlySubmitButton?: boolean;
   alleKodeverk: AlleKodeverk;
   avsluttedeBehandlinger: AvsluttetBehandling[];
-  readOnly?: boolean;
+  readOnly: boolean;
   formData?: FormValues;
   setFormData: (data: FormValues) => void;
 }

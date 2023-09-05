@@ -71,7 +71,7 @@ describe('<VarselOmRevurderingProsessIndex>', () => {
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
-    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
+    expect(await screen.findByText('Behandlingen settes på vent')).toBeInTheDocument();
 
     await userEvent.selectOptions(utils.getByLabelText('Årsak'), 'AVV_DOK');
 

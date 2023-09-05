@@ -13,7 +13,7 @@ import { KodeverkMedNavn } from '@navikt/fp-types';
 import styles from './klageVurderingRadioOptionsNfp.module.css';
 
 interface OwnProps {
-  readOnly?: boolean;
+  readOnly: boolean;
   medholdReasons: KodeverkMedNavn[];
   alleHjemler: KodeverkMedNavn[];
   alleAktuelleHjemler: string[];
@@ -24,7 +24,7 @@ const lagHjemler = (kodeverkNavn: KodeverkMedNavn[], kodeverkVerdier: string[]):
   kodeverkNavn.filter(({ kode }) => kodeverkVerdier.includes(kode)).sort((a, b) => a.kode.localeCompare(b.kode));
 const lagHjemmelsKoder = (kodeverkVerdier: string[]): string[] => kodeverkVerdier.map(kode => kode);
 
-export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps> = ({
+const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps> = ({
   readOnly,
   medholdReasons,
   alleHjemler,

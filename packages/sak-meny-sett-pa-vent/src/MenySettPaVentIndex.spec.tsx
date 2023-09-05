@@ -19,7 +19,7 @@ describe('<MenySettPaVentIndex>', () => {
     const settBehandlingPaVent = vi.fn();
     const lukkModal = vi.fn();
     const utils = render(<Default settBehandlingPaVent={settBehandlingPaVent} lukkModal={lukkModal} />);
-    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
+    expect(await screen.findByText('Behandlingen settes på vent')).toBeInTheDocument();
 
     await userEvent.selectOptions(utils.getByLabelText('Årsak'), 'AVV_DOK');
 

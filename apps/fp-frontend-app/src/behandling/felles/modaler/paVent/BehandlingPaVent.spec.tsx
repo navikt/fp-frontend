@@ -1,6 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
+import { render, screen } from '@testing-library/react';
 import { Aksjonspunkt } from '@navikt/ft-types';
 import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
 
@@ -38,26 +37,7 @@ describe('<BehandlingPaVent>', () => {
       />,
     );
 
-    await waitFor(() => expect(screen.queryByText('Behandlingen settes på vent')).not.toBeInTheDocument());
-  });
-
-  it('skal vise modal når behandling er på vent', async () => {
-    await act(async () => {
-      render(
-        <BehandlingPaVent
-          behandling={
-            {
-              ...behandling,
-              aksjonspunkt: aksjonspunkter,
-              behandlingPaaVent: true,
-            } as Behandling
-          }
-          kodeverk={kodeverk}
-          opneSokeside={vi.fn()}
-        />,
-      );
-    });
-
-    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
+    expect(await screen.findByText('Behandlingen settes på vent')).toBeInTheDocument();
+    expect(screen.getByText('Frist')).toBeInTheDocument();
   });
 });

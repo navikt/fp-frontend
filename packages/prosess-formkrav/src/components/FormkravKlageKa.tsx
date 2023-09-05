@@ -27,10 +27,12 @@ const FormkravKlageKa: FunctionComponent<OwnProps> = ({ klageVurdering, alleKode
   const { klageFormkravResultatKA, underBehandlingKabal, behandletAvKabal } = klageVurdering;
 
   let vedtak = intl.formatMessage({ id: 'Klage.Formkrav.IkkePåklagdVedtak' });
-  if (klageFormkravResultatKA.paKlagdBehandlingUuid) {
+  if (klageFormkravResultatKA?.paKlagdBehandlingUuid) {
     const behandling = avsluttedeBehandlinger.find(b => b.uuid === klageFormkravResultatKA.paKlagdBehandlingUuid);
-    const navn = alleKodeverk[KodeverkType.BEHANDLING_TYPE].find(k => k.kode === behandling.type)?.navn;
-    vedtak = `${navn} ${moment(behandling.avsluttet).format(DATE_TIME_FORMAT)}`;
+    if (behandling) {
+      const navn = alleKodeverk[KodeverkType.BEHANDLING_TYPE].find(k => k.kode === behandling.type)?.navn;
+      vedtak = `${navn} ${moment(behandling.avsluttet).format(DATE_TIME_FORMAT)}`;
+    }
   }
 
   return (
@@ -60,7 +62,7 @@ const FormkravKlageKa: FunctionComponent<OwnProps> = ({ klageVurdering, alleKode
           </Label>
           <VerticalSpacer fourPx />
           <BodyShort size="small">
-            {klageFormkravResultatKA.erKlagerPart ? (
+            {klageFormkravResultatKA?.erKlagerPart ? (
               <FormattedMessage id="Klage.Formkrav.Ja" />
             ) : (
               <FormattedMessage id="Klage.Formkrav.Nei" />
@@ -72,7 +74,7 @@ const FormkravKlageKa: FunctionComponent<OwnProps> = ({ klageVurdering, alleKode
           </Label>
           <VerticalSpacer fourPx />
           <BodyShort size="small">
-            {klageFormkravResultatKA.erKlageKonkret ? (
+            {klageFormkravResultatKA?.erKlageKonkret ? (
               <FormattedMessage id="Klage.Formkrav.Ja" />
             ) : (
               <FormattedMessage id="Klage.Formkrav.Nei" />
@@ -84,7 +86,7 @@ const FormkravKlageKa: FunctionComponent<OwnProps> = ({ klageVurdering, alleKode
           </Label>
           <VerticalSpacer fourPx />
           <BodyShort size="small">
-            {klageFormkravResultatKA.erKlagefirstOverholdt ? (
+            {klageFormkravResultatKA?.erKlagefirstOverholdt ? (
               <FormattedMessage id="Klage.Formkrav.Ja" />
             ) : (
               <FormattedMessage id="Klage.Formkrav.Nei" />
@@ -96,7 +98,7 @@ const FormkravKlageKa: FunctionComponent<OwnProps> = ({ klageVurdering, alleKode
           </Label>
           <VerticalSpacer fourPx />
           <BodyShort size="small">
-            {klageFormkravResultatKA.erSignert ? (
+            {klageFormkravResultatKA?.erSignert ? (
               <FormattedMessage id="Klage.Formkrav.Ja" />
             ) : (
               <FormattedMessage id="Klage.Formkrav.Nei" />
@@ -107,7 +109,7 @@ const FormkravKlageKa: FunctionComponent<OwnProps> = ({ klageVurdering, alleKode
             <FormattedMessage id="Klage.Formkrav.Vurdering" />
           </Label>
           <VerticalSpacer fourPx />
-          <BodyShort size="small">{klageFormkravResultatKA.begrunnelse}</BodyShort>
+          <BodyShort size="small">{klageFormkravResultatKA?.begrunnelse}</BodyShort>
         </>
       )}
     </>
