@@ -25,18 +25,6 @@ const initFrist = (): string => {
   return dayjs(date).format(ISO_DATE_FORMAT);
 };
 
-const isButtonDisabled = (
-  showAvbryt: boolean,
-  venteArsakHasChanged: boolean,
-  fristHasChanged: boolean,
-  hasManualPaVent: boolean,
-  frist?: string,
-): boolean => {
-  const dateNotValid = !frist || !!hasValidDate(frist) || !!dateAfterOrEqualToToday(frist);
-  const defaultOptions = (!hasManualPaVent || showAvbryt) && !venteArsakHasChanged && !fristHasChanged;
-  return defaultOptions || dateNotValid;
-};
-
 const buildInitialValues = (hasManualPaVent: boolean, ventearsak?: string, frist?: string): FormValues => ({
   ventearsak,
   frist: frist || hasManualPaVent === false ? frist : initFrist(),
@@ -203,13 +191,7 @@ const SettPaVentModal: FunctionComponent<PureOwnProps> = ({
             variant="primary"
             className={styles.button}
             onClick={showAvbryt ? ariaCheck : cancelEvent}
-            disabled={isButtonDisabled(
-              showAvbryt,
-              venteArsakHasChanged,
-              fristHasChanged,
-              hasManualPaVent,
-              fristFraFelt,
-            )}
+            disabled={!venteArsakHasChanged && !fristHasChanged}
           >
             <FormattedMessage id="SettPaVentModal.Ok" />
           </Button>
@@ -221,7 +203,9 @@ const SettPaVentModal: FunctionComponent<PureOwnProps> = ({
               className={styles.cancelButton}
               type="button"
             >
-              <FormattedMessage id={hasManualPaVent ? 'SettPaVentModal.Avbryt' : 'SettPaVentModal.Lukk'} />
+              <FormattedMessage
+                id={venteArsakHasChanged || fristHasChanged ? 'SettPaVentModal.Avbryt' : 'SettPaVentModal.Lukk'}
+              />
             </Button>
           )}
         </Modal.Footer>
