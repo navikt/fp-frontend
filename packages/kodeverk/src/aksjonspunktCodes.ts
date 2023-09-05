@@ -128,6 +128,15 @@ const uttakAksjonspunkter = [
   AksjonspunktCode.KONTROLLER_TILSTØTENDE_YTELSER_OPPHØRT,
 ];
 
+const faktaUttakAksjonspunkter = [
+  AksjonspunktCode.OVERSTYR_FAKTA_UTTAK,
+  AksjonspunktCode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
+  AksjonspunktCode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
+  AksjonspunktCode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
+  AksjonspunktCode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
+];
+
+
 const aksjonspunktIsOfType =
   (validAksjonspunktCodes: string[]) =>
   (aksjonspunktCode: string): boolean =>
@@ -152,5 +161,7 @@ export const hasAksjonspunkt = (aksjonspunktKode: string, aksjonspunkter: Aksjon
   aksjonspunkter.some(ap => ap.definisjon === aksjonspunktKode);
 
 export const isUttakAksjonspunkt = aksjonspunktIsOfType(uttakAksjonspunkter);
+
+export const isFaktaUttakAksjonspunkt = aksjonspunktIsOfType(faktaUttakAksjonspunkter);
 
 export default AksjonspunktCode;

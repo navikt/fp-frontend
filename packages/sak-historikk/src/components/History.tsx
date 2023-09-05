@@ -146,6 +146,7 @@ const velgHistorikkMal = (histType: string) => {
     case historikkinnslagType.ANKEBEH_STARTET:
     case historikkinnslagType.KLAGEBEH_STARTET:
     case historikkinnslagType.ENDRET_DEKNINGSGRAD:
+    case historikkinnslagType.OPPGAVE_VEDTAK:
       return HistorikkMalType1;
     case historikkinnslagType.FORSLAG_VEDTAK:
     case historikkinnslagType.FORSLAG_VEDTAK_UTEN_TOTRINN:

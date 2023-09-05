@@ -204,6 +204,10 @@ const historikkEndretFeltTypeCodes = {
     kode: 'STARTDATO_FRA_SOKNAD',
     feltId: 'HistorikkEndretFelt.StartdatoFraSoknad',
   },
+  TERMINBEKREFTELSE: {
+    kode: 'TERMINBEKREFTELSE',
+    feltId: 'HistorikkEndretFelt.Terminbekreftelse',
+  },
   TERMINDATO: {
     kode: 'TERMINDATO',
     feltId: 'HistorikkEndretFelt.Termindato',
