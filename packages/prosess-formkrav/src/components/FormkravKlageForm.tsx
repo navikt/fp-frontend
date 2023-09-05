@@ -23,7 +23,7 @@ import styles from './formkravKlageForm.module.css';
 export const IKKE_PA_KLAGD_VEDTAK = 'ikkePaklagdVedtak';
 
 export const getPaKlagdVedtak = (klageFormkavResultat?: KlageVurdering['klageFormkravResultatKA']): string =>
-  klageFormkavResultat.paKlagdBehandlingUuid ? `${klageFormkavResultat.paKlagdBehandlingUuid}` : IKKE_PA_KLAGD_VEDTAK;
+  klageFormkavResultat?.paKlagdBehandlingUuid ? `${klageFormkavResultat.paKlagdBehandlingUuid}` : IKKE_PA_KLAGD_VEDTAK;
 
 const getKlagBareVedtak = (
   avsluttedeBehandlinger: AvsluttetBehandling[],
@@ -54,7 +54,7 @@ const getLovHjemmeler = (aksjonspunktCode: string): string =>
 interface OwnProps {
   avsluttedeBehandlinger: AvsluttetBehandling[];
   aksjonspunktCode: string;
-  readOnly?: boolean;
+  readOnly: boolean;
   readOnlySubmitButton?: boolean;
   alleKodeverk: AlleKodeverk;
   isSubmitting: boolean;
@@ -66,7 +66,7 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for formkrav klage (NFP og KA).
  */
-export const FormkravKlageForm: FunctionComponent<OwnProps> = ({
+const FormkravKlageForm: FunctionComponent<OwnProps> = ({
   readOnly,
   readOnlySubmitButton,
   aksjonspunktCode,

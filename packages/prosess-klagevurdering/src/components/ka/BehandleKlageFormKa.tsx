@@ -24,14 +24,12 @@ const BehandleKlageFormKa: FunctionComponent<OwnProps> = ({ klageVurdering, alle
   const intl = useIntl();
 
   const {
-    klageVurderingResultatNK: {
-      begrunnelse,
-      fritekstTilBrev,
-      klageVurdering: vurdering,
-      klageMedholdArsak,
-      klageVurderingOmgjoer,
-    },
-  } = klageVurdering;
+    begrunnelse,
+    fritekstTilBrev,
+    klageVurdering: vurdering,
+    klageMedholdArsak,
+    klageVurderingOmgjoer,
+  } = klageVurdering.klageVurderingResultatNK || {};
 
   const medholdReasons = alleKodeverk[KodeverkType.KLAGE_MEDHOLD_ARSAK];
 

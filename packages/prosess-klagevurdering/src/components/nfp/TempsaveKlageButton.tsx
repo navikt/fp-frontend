@@ -31,13 +31,13 @@ const transformValues = (values: FormValues, aksjonspunktCode: string): Transfor
     values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ||
     values.klageVurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK
       ? values.klageMedholdArsak
-      : null,
+      : undefined,
   klageVurderingOmgjoer:
-    values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
+    values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : undefined,
   klageHjemmel: values.klageHjemmel,
-  fritekstTilBrev: values.fritekstTilBrev,
-  begrunnelse: values.begrunnelse,
-  klageVurdering: values.klageVurdering,
+  fritekstTilBrev: values.fritekstTilBrev!,
+  begrunnelse: values.begrunnelse!,
+  klageVurdering: values.klageVurdering!,
 });
 
 interface OwnProps {

@@ -26,11 +26,12 @@ import TempsaveKlageButton, { TransformedValues } from './TempsaveKlageButton';
 import styles from './behandleKlageFormNfp.module.css';
 
 const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
-  klageMedholdArsak: values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageMedholdArsak : null,
+  klageMedholdArsak:
+    values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageMedholdArsak : undefined,
   klageVurderingOmgjoer:
-    values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
+    values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : undefined,
   klageHjemmel: values.klageHjemmel,
-  klageVurdering: values.klageVurdering,
+  klageVurdering: values.klageVurdering!,
   fritekstTilBrev: values.fritekstTilBrev,
   begrunnelse: values.begrunnelse,
   kode: AksjonspunktCode.BEHANDLE_KLAGE_NFP,
@@ -38,17 +39,17 @@ const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
 
 const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): KlageFormType => ({
   klageMedholdArsak: klageVurderingResultat ? klageVurderingResultat.klageMedholdArsak : '',
-  klageVurderingOmgjoer: klageVurderingResultat ? klageVurderingResultat.klageVurderingOmgjoer : null,
+  klageVurderingOmgjoer: klageVurderingResultat ? klageVurderingResultat.klageVurderingOmgjoer : undefined,
   klageHjemmel: klageVurderingResultat ? klageVurderingResultat.klageHjemmel : '',
-  klageVurdering: klageVurderingResultat ? klageVurderingResultat.klageVurdering : null,
-  begrunnelse: klageVurderingResultat ? klageVurderingResultat.begrunnelse : null,
-  fritekstTilBrev: klageVurderingResultat ? klageVurderingResultat.fritekstTilBrev : null,
+  klageVurdering: klageVurderingResultat ? klageVurderingResultat.klageVurdering : undefined,
+  begrunnelse: klageVurderingResultat ? klageVurderingResultat.begrunnelse : undefined,
+  fritekstTilBrev: klageVurderingResultat ? klageVurderingResultat.fritekstTilBrev : undefined,
 });
 
 interface OwnProps {
   previewCallback: (data: BrevData) => Promise<any>;
   saveKlage: (data: TransformedValues) => Promise<any>;
-  readOnly?: boolean;
+  readOnly: boolean;
   readOnlySubmitButton?: boolean;
   sprakkode: string;
   alleKodeverk: AlleKodeverk;
