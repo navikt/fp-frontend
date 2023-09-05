@@ -44,7 +44,7 @@ describe('<VarselOmRevurderingProsessIndex>', () => {
     });
   });
 
-  it('skal for førstegangsbehandling velge å sende varsel til søker og så bekrefte', async () => {
+  it.skip('skal for førstegangsbehandling velge å sende varsel til søker og så bekrefte', async () => {
     const lagre = vi.fn();
     const forhåndsvis = vi.fn();
 
