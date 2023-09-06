@@ -40,7 +40,7 @@ const FeriepengerPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const { andeler } = feriepengegrunnlag;
   const harIngenAndeler = !andeler || andeler.length < 1;
-  const opptjeningsår = useMemo(() => (harIngenAndeler ? undefined : finnListeMedOpptjeningsår(andeler)), [andeler]);
+  const opptjeningsår = useMemo(() => (harIngenAndeler ? [] : finnListeMedOpptjeningsår(andeler)), [andeler]);
 
   if (harIngenAndeler) {
     return null;

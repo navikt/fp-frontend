@@ -111,9 +111,9 @@ const isInnvilgetText = (valgtPeriode: PeriodeSoker, alleKodeverk: AlleKodeverk)
 const stonadskonto = (valgtPeriode: PeriodeSoker, alleKodeverk: AlleKodeverk, kontoIkkeSatt?: boolean): string => {
   let returnText = '';
   if (!kontoIkkeSatt) {
-    returnText = alleKodeverk[KodeverkType.STOENADSKONTOTYPE].find(
-      k => k.kode === valgtPeriode.aktiviteter[0]?.stønadskontoType,
-    )?.navn;
+    returnText =
+      alleKodeverk[KodeverkType.STOENADSKONTOTYPE].find(k => k.kode === valgtPeriode.aktiviteter[0]?.stønadskontoType)
+        ?.navn || '';
   }
   return returnText;
 };
@@ -140,7 +140,7 @@ const visGraderingIkkeInnvilget = (
   graderingInnvilget?: boolean,
 ): boolean =>
   valgtPeriode.periodeResultatType === periodeResultatType.INNVILGET &&
-  valgtPeriode.gradertAktivitet &&
+  !!valgtPeriode.gradertAktivitet &&
   graderingInnvilget === false &&
   readOnly;
 

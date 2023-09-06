@@ -101,7 +101,7 @@ const getGradering = (andel?: BeregningsresultatPeriodeAndel): ReactElement | nu
 };
 
 interface OwnProps {
-  selectedItemData?: BeregningsresultatPeriode;
+  selectedItemData: BeregningsresultatPeriode;
   callbackForward: (...args: any[]) => any;
   callbackBackward: (...args: any[]) => any;
   alleKodeverk: AlleKodeverk;
@@ -203,7 +203,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
         </div>
       </FlexContainer>
       <VerticalSpacer sixteenPx />
-      {selectedItemData.andeler.length !== 0 && (
+      {selectedItemData.andeler && selectedItemData.andeler.length !== 0 && (
         <Table headerTextCodes={tableHeaderTextCodes(isSoknadSvangerskapspenger)}>
           {selectedItemData.andeler.map((andel, index: number) => (
             <TableRow key={`index${index + 1}`}>

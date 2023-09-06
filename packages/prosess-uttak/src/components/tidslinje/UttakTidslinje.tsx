@@ -41,9 +41,9 @@ export type PeriodeSøkerMedTidslinjedata = {
 
 export type TidslinjeTimes = {
   soknad: string;
-  fodsel: string;
-  revurdering: string;
-  dodSoker: string;
+  fodsel?: string;
+  revurdering?: string;
+  dodSoker?: string;
 };
 
 const PERIODE_TYPE_IKON_MAP = {
@@ -113,7 +113,9 @@ const finnPeriodeType = (valgtPeriode: PeriodeSoker): string => {
   const kontoIkkeSatt =
     valgtPeriode.aktiviteter.length === 0 ||
     (!valgtPeriode.periodeType && valgtPeriode.aktiviteter[0].stønadskontoType === '-');
-  return kontoIkkeSatt ? '' : valgtPeriode.aktiviteter[0]?.stønadskontoType;
+  return !kontoIkkeSatt && valgtPeriode.aktiviteter[0]?.stønadskontoType
+    ? valgtPeriode.aktiviteter[0]?.stønadskontoType
+    : '';
 };
 
 const formatPaneler = (
@@ -126,7 +128,7 @@ const formatPaneler = (
     end: periode.periode.tom,
     status: getStatus(periode.periode, tilknyttetStortinget),
     periodeType: finnPeriodeType(periode.periode),
-    erGradert: periode.periode.gradertAktivitet && periode.periode.graderingInnvilget,
+    erGradert: !!periode.periode.gradertAktivitet && !!periode.periode.graderingInnvilget,
     erOpphold: periode.periode.oppholdÅrsak !== oppholdArsakType.UDEFINERT,
     harUtsettelse: periode.periode.utsettelseType !== '-',
     begrunnelse: periode.periode.begrunnelse,
@@ -138,7 +140,7 @@ const lagGruppeIder = (perioder: PeriodeSøkerMedTidslinjedata[] = []) => {
   }
 
   return perioder
-    .reduce((accPerioder, periode) => {
+    .reduce<PeriodeSøkerMedTidslinjedata[]>((accPerioder, periode) => {
       const harPeriode = accPerioder.some(p => p.group === periode.group);
       if (!harPeriode) accPerioder.push(periode);
       return accPerioder;
@@ -283,10 +285,10 @@ const finnIkonForPeriode = (periode: PeriodeMedStartOgSlutt, behandlingStatusKod
   return periode.erOpphold ? <DoorOpenIcon /> : PERIODE_TYPE_IKON_MAP[periode.periodeType];
 };
 
-const finnRolle = (fagsak: Fagsak, alleKodeverk: AlleKodeverk, erHovedsøker: boolean): string | undefined => {
+const finnRolle = (fagsak: Fagsak, alleKodeverk: AlleKodeverk, erHovedsøker: boolean): string => {
   const kodeverk = alleKodeverk[KodeverkType.RELASJONSROLLE_TYPE];
   const rrType = erHovedsøker ? fagsak.relasjonsRolleType : fagsak.annenpartBehandling.relasjonsRolleType;
-  return kodeverk.find(k => k.kode === rrType)?.navn;
+  return kodeverk.find(k => k.kode === rrType)?.navn || '-';
 };
 
 interface TidslinjeProps {
@@ -294,7 +296,7 @@ interface TidslinjeProps {
   selectedPeriod?: PeriodeSøkerMedTidslinjedata;
   uttakPerioder: PeriodeSøkerMedTidslinjedata[];
   tilknyttetStortinget: boolean;
-  setValgtPeriodeIndex: React.Dispatch<React.SetStateAction<number>>;
+  setValgtPeriodeIndex: React.Dispatch<React.SetStateAction<number | undefined>>;
   behandlingStatusKode: string;
   fagsak: Fagsak;
   alleKodeverk: AlleKodeverk;

@@ -15,7 +15,7 @@ interface OwnProps {
 const VedtakDocuments: FunctionComponent<OwnProps> = ({ vedtaksdokumenter, behandlingTypes }) => {
   const [showDocuments, setShowDocuments] = useState(false);
   const toggleDocuments = useCallback(
-    evt => {
+    (evt: React.MouseEvent) => {
       setShowDocuments(!showDocuments);
       evt.preventDefault();
     },
@@ -46,7 +46,7 @@ const VedtakDocuments: FunctionComponent<OwnProps> = ({ vedtaksdokumenter, behan
                 </FlexColumn>
                 <FlexColumn>
                   <Link href={hentVedtakDokumentLenke(document.behandlingUuid)} target="_blank">
-                    {behandlingTypes.find(bt => bt.kode === document.tittel).navn}
+                    {behandlingTypes.find(bt => bt.kode === document.tittel)?.navn || '-'}
                   </Link>
                 </FlexColumn>
               </FlexRow>

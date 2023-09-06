@@ -31,7 +31,7 @@ const finnSøknadsdato = (søknad: Soknad): string => {
   return søknadsdato;
 };
 
-const getFodselTerminDato = (søknad: Soknad, gjeldendeFamiliehendelse: FamilieHendelse): string => {
+const getFodselTerminDato = (søknad: Soknad, gjeldendeFamiliehendelse: FamilieHendelse): string | undefined => {
   if (
     gjeldendeFamiliehendelse &&
     gjeldendeFamiliehendelse.avklartBarn &&
@@ -136,7 +136,7 @@ interface OwnProps {
   familiehendelse: FamilieHendelseSamling;
   ytelsefordeling: Ytelsefordeling;
   tilknyttetStortinget: boolean;
-  setValgtPeriodeIndex: React.Dispatch<React.SetStateAction<number>>;
+  setValgtPeriodeIndex: React.Dispatch<React.SetStateAction<number | undefined>>;
   fagsak: Fagsak;
   alleKodeverk: AlleKodeverk;
 }

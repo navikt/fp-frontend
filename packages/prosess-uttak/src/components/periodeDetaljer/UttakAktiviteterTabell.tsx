@@ -74,7 +74,7 @@ const sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent =
   (utbetalingsgrad: string): string | null => {
     const samtidigUttak = getValues('samtidigUttak');
     const samtidigUttaksprosent = getValues('samtidigUttaksprosent');
-    if (samtidigUttak && samtidigUttaksprosent < utbetalingsgrad) {
+    if (samtidigUttak && samtidigUttaksprosent && samtidigUttaksprosent < utbetalingsgrad) {
       return intl.formatMessage({
         id: 'ValidationMessage.utbetalingsgradErMerSamtidigUttaksprosent',
       });
@@ -144,7 +144,7 @@ interface OwnProps {
   isReadOnly: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   aktiviteter: PeriodeSokerAktivitet[];
-  erOppfylt: boolean;
+  erOppfylt?: boolean;
   utsettelseType: string;
 }
 
@@ -247,9 +247,13 @@ const UttakAktiviteterTabell: FunctionComponent<OwnProps> = ({
                         minValue0,
                         maxProsentValue100,
                         hasValidDecimal,
+                        // @ts-ignore Fiks typen til utbetalingsgrad. Bør vera number
                         sjekkOmUtbetalingsgradEr0OmAvslått(intl, erOppfylt, utsettelseType),
+                        // @ts-ignore Fiks typen til utbetalingsgrad. Bør vera number
                         sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0(intl, getValues, index),
+                        // @ts-ignore Fiks typen til utbetalingsgrad. Bør vera number
                         sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent(intl, getValues),
+                        // @ts-ignore Fiks typen til utbetalingsgrad. Bør vera number
                         (utbetalingsgrad: string) => {
                           const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
                           return harUtsettelsestype && getValues('erOppfylt') && parseFloat(utbetalingsgrad) > 0

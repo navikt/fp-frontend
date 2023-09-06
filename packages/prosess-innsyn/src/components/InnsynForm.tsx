@@ -22,13 +22,14 @@ import { VurderInnsynAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import DocumentListInnsyn from './DocumentListInnsyn';
 import VedtakDocuments from './VedtakDocuments';
 
-const EMPTY_ARRAY = [];
+const EMPTY_ARRAY = [] as InnsynVedtaksdokument[];
 
 type FormValues = {
   mottattDato: string;
-  innsynResultatType: string;
+  innsynResultatType?: string;
   fristDato?: string;
   sattPaVent?: boolean;
+  begrunnelse?: string;
 };
 
 const hentDokumenterMedNavnOgFikkInnsyn = (dokumenter: InnsynDokument[]): Record<string, boolean> =>
@@ -59,6 +60,7 @@ const getDocumentsStatus = (values: FormValues, documents: Dokument[]) =>
   documents.map(document => ({
     dokumentId: document.dokumentId,
     journalpostId: document.journalpostId,
+    // @ts-ignore Fiks
     fikkInnsyn: !!values[`dokument_${document.dokumentId}`],
   }));
 
@@ -68,11 +70,13 @@ const getFilteredValues = (values: FormValues) =>
     .reduce(
       (acc, valueKey) => ({
         ...acc,
+        // @ts-ignore Fiks
         [valueKey]: values[valueKey],
       }),
       {},
     );
 
+// @ts-ignore Fiks
 const transformValues = (values: FormValues, documents: Dokument[]): VurderInnsynAp => ({
   kode: AksjonspunktCode.VURDER_INNSYN,
   innsynDokumenter: getDocumentsStatus(values, documents),

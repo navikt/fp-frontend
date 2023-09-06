@@ -20,7 +20,7 @@ const lagVisningsnavn = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   alleKodeverk: AlleKodeverk,
 ) => {
-  const agOpplysning = arbeidsgiverOpplysningerPerId[ferieAndel.arbeidsgiverId];
+  const agOpplysning = ferieAndel.arbeidsgiverId ? arbeidsgiverOpplysningerPerId[ferieAndel.arbeidsgiverId] : undefined;
   if (agOpplysning) {
     if (agOpplysning.erPrivatPerson) {
       return agOpplysning.fødselsdato
@@ -57,12 +57,12 @@ const lagAndelerPrIdMap = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   alleKodeverk: AlleKodeverk,
 ): AndelerPrId[] => {
-  const listeMedAndelerPrId = [];
+  const listeMedAndelerPrId = [] as AndelerPrId[];
   andeler.forEach(ferieAndel => {
     const andelTilSøker = ferieAndel.erBrukerMottaker ? ferieAndel.årsbeløp : 0;
     const andelTilRefusjon = !ferieAndel.erBrukerMottaker ? ferieAndel.årsbeløp : 0;
     const id = lagIdentifikator(ferieAndel);
-    const eksisterendeAndelPrId = listeMedAndelerPrId.find(andel => andel.identifikator === id) as AndelerPrId;
+    const eksisterendeAndelPrId = listeMedAndelerPrId.find(andel => andel.identifikator === id);
     if (eksisterendeAndelPrId) {
       eksisterendeAndelPrId.utbetaltTilSøker += andelTilSøker;
       eksisterendeAndelPrId.utbetaltIRefusjon += andelTilRefusjon;
@@ -100,9 +100,7 @@ const FeriepengerPrAar: FunctionComponent<OwnProps> = ({
   );
   const andelerPrId = useMemo(
     () =>
-      alleAndelerForÅret
-        ? lagAndelerPrIdMap(alleAndelerForÅret, arbeidsgiverOpplysningerPerId, alleKodeverk)
-        : undefined,
+      alleAndelerForÅret ? lagAndelerPrIdMap(alleAndelerForÅret, arbeidsgiverOpplysningerPerId, alleKodeverk) : [],
     [alleAndelerForÅret],
   );
 

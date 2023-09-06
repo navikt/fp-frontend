@@ -10,7 +10,7 @@ import {
   VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { Button, Label, Panel } from '@navikt/ds-react';
-import { behandlingType as BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
+import { behandlingType as BehandlingType, KodeverkType, StonadskontoType } from '@navikt/fp-kodeverk';
 import { calcDays } from '@navikt/ft-utils';
 
 import {
@@ -33,15 +33,18 @@ import styles from './uttakPeriodePanel.module.css';
 const getCorrectEmptyArbeidsForhold = (
   alleKodeverk: AlleKodeverk,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  periodeTypeKode?: string,
-  stonadskonto?: UttakStonadskontoer,
+  periodeTypeKode: string,
+  stonadskonto: UttakStonadskontoer,
 ): string[] => {
   const arbeidsForholdMedNullDagerIgjenArray: string[] = [];
 
   let arbeidsforholdMedPositivSaldoFinnes = false;
 
-  if (stonadskonto?.stonadskontoer[periodeTypeKode]?.aktivitetSaldoDtoList) {
-    stonadskonto.stonadskontoer[periodeTypeKode].aktivitetSaldoDtoList.forEach(item => {
+  const konto = stonadskonto?.stonadskontoer
+    ? stonadskonto?.stonadskontoer[periodeTypeKode as StonadskontoType]
+    : undefined;
+  if (konto?.aktivitetSaldoDtoList) {
+    konto.aktivitetSaldoDtoList.forEach(item => {
       if (item.saldo === 0) {
         if (item.aktivitetIdentifikator.arbeidsgiverReferanse) {
           const arbeidsgiverOpplysninger =
@@ -51,7 +54,9 @@ const getCorrectEmptyArbeidsForhold = (
           const navn = alleKodeverk[KodeverkType.UTTAK_ARBEID_TYPE].find(
             k => k.kode === item.aktivitetIdentifikator.uttakArbeidType,
           )?.navn;
-          arbeidsForholdMedNullDagerIgjenArray.push(navn);
+          if (navn) {
+            arbeidsForholdMedNullDagerIgjenArray.push(navn);
+          }
         }
       } else {
         arbeidsforholdMedPositivSaldoFinnes = true;
@@ -66,8 +71,8 @@ const hentApTekst = (
   manuellBehandlingÅrsak: string,
   alleKodeverk: AlleKodeverk,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  stonadskonto?: UttakStonadskontoer,
-  periodeTypeKode?: string,
+  stonadskonto: UttakStonadskontoer,
+  periodeTypeKode: string,
 ): ReactElement[] => {
   const aksjonspunktTekster = [];
 
@@ -120,8 +125,8 @@ const kalkulerTrekkdager = (
   samtidigUttak?: boolean,
   samtidigUttaksprosent?: number,
 ): number => {
-  let uttaksgrad = aktivitet.gradering ? (100 - aktivitet.prosentArbeid) / 100 : 1;
-  uttaksgrad = samtidigUttak ? samtidigUttaksprosent / 100 : uttaksgrad;
+  let uttaksgrad = aktivitet.gradering && !!aktivitet.prosentArbeid ? (100 - aktivitet.prosentArbeid) / 100 : 1;
+  uttaksgrad = samtidigUttak && !!samtidigUttaksprosent ? samtidigUttaksprosent / 100 : uttaksgrad;
   const trekkdager = uttaksgrad * virkedager;
   return parseFloat(trekkdager.toFixed(1));
 };
@@ -131,7 +136,7 @@ const lagPeriode = (valgtPeriode: PeriodeSoker, fom: string, tom: string): Perio
 
   const virkedager = calcDays(fom, tom);
   const oppdaterteAktiviteter = aktiviteter.map(aktivitet =>
-    aktivitet.trekkdagerDesimaler > 0
+    aktivitet.trekkdagerDesimaler && aktivitet.trekkdagerDesimaler > 0
       ? {
           ...aktivitet,
           trekkdagerDesimaler: kalkulerTrekkdager(aktivitet, virkedager, samtidigUttak, samtidigUttaksprosent),
@@ -153,13 +158,13 @@ interface OwnProps {
   behandling: Behandling;
   ytelsefordeling: Ytelsefordeling;
   uttaksresultatPeriode: UttaksresultatPeriode;
-  valgtPeriodeIndex: number | undefined;
+  valgtPeriodeIndex: number;
   oppdaterPeriode: (perioder: PeriodeSoker[]) => void;
   isReadOnly: boolean;
   alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   uttakStonadskontoer: UttakStonadskontoer;
-  setValgtPeriodeIndex: React.Dispatch<React.SetStateAction<number>>;
+  setValgtPeriodeIndex: React.Dispatch<React.SetStateAction<number | undefined>>;
   erTilknyttetStortinget: boolean;
   harÅpneAksjonspunkter: boolean;
 }
@@ -208,15 +213,15 @@ const UttakPeriodePanel: FunctionComponent<OwnProps> = ({
     : perioderAnnenpart.some(p => p.flerbarnsdager === true);
 
   const erRevurderingFørEndringsdato =
-    ytelsefordeling.endringsdato &&
+    !!ytelsefordeling.endringsdato &&
     behandling.type === BehandlingType.REVURDERING &&
     valgtPeriode.tom < ytelsefordeling.endringsdato;
 
   const visForrigePeriode = useCallback(() => {
-    setValgtPeriodeIndex(index => (index === 0 ? index : index - 1));
+    setValgtPeriodeIndex(index => (index === 0 || index === undefined ? index : index - 1));
   }, []);
   const visNestePeriode = useCallback(() => {
-    setValgtPeriodeIndex(index => (index === allePerioder.length - 1 ? index : index + 1));
+    setValgtPeriodeIndex(index => (index === allePerioder.length - 1 || index === undefined ? index : index + 1));
   }, [allePerioder.length]);
 
   return (

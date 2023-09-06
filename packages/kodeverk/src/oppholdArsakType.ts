@@ -5,7 +5,7 @@ const oppholdArsakType = {
   UTTAK_FELLESP_ANNEN_FORELDER: 'UTTAK_FELLESP_ANNEN_FORELDER',
   UTTAK_FORELDREPENGER_ANNEN_FORELDER: 'UTTAK_FORELDREPENGER_ANNEN_FORELDER',
   UDEFINERT: '-',
-};
+} as Record<string, string>;
 
 export const oppholdArsakKontoNavn = {
   INGEN: 'Ingen årsak',
@@ -14,7 +14,7 @@ export const oppholdArsakKontoNavn = {
   UTTAK_FELLESP_ANNEN_FORELDER: 'Fellesperiode',
   UTTAK_FORELDREPENGER_ANNEN_FORELDER: 'Foreldrepenger',
   UDEFINERT: '-',
-};
+} as Record<string, string>;
 
 export const oppholdArsakMapper = {
   INGEN: 'UDEFINERT',
@@ -22,6 +22,6 @@ export const oppholdArsakMapper = {
   UTTAK_FEDREKVOTE_ANNEN_FORELDER: 'FEDREKVOTE',
   UTTAK_FELLESP_ANNEN_FORELDER: 'FELLESPERIODE',
   UTTAK_FORELDREPENGER_ANNEN_FORELDER: 'FORELDREPENGER',
-};
+} as Record<string, string>;
 
 export default oppholdArsakType;

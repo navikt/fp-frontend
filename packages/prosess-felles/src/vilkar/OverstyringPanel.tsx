@@ -29,7 +29,7 @@ const maxLength1500 = maxLength(1500);
 const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) => value !== undefined || isDirty;
 
 interface OwnProps {
-  erOverstyrt?: boolean;
+  erOverstyrt: boolean;
   isSolvable: boolean;
   erVilkarOk?: boolean;
   hasAksjonspunkt: boolean;
