@@ -25,7 +25,7 @@ export type FormValues = {
   begrunnelseVurderTilbaketrekk?: string;
 };
 
-const buildInitialValues = (ap?: Aksjonspunkt, beregningsresultat?: BeregningsresultatFp): FormValues => {
+const buildInitialValues = (ap?: Aksjonspunkt, beregningsresultat?: BeregningsresultatFp): FormValues | undefined => {
   const tidligereValgt = beregningsresultat?.skalHindreTilbaketrekk;
   if (tidligereValgt === undefined || tidligereValgt === null || !ap || !ap.begrunnelse) {
     return undefined;
@@ -109,7 +109,7 @@ const Tilbaketrekkpanel: FunctionComponent<OwnProps> = ({
         name={radioFieldName}
         validate={[required]}
         isReadOnly={readOnly}
-        isEdited={vurderTilbaketrekkAP.status !== aksjonspunktStatus.OPPRETTET}
+        isEdited={vurderTilbaketrekkAP?.status !== aksjonspunktStatus.OPPRETTET}
         isHorizontal
         radios={[
           {

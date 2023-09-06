@@ -18,7 +18,7 @@ import styles from './vilkarResultPicker.module.css';
 
 const intl = createIntl(messages);
 
-const getIsAvslagCodeRequired = (erVilkarOk: boolean, avslagCode) => () => erVilkarOk === false && !avslagCode;
+const getIsAvslagCodeRequired = (erVilkarOk: boolean, avslagCode?: string) => () => erVilkarOk === false && !avslagCode;
 
 type FormValues = {
   erVilkarOk?: boolean;
@@ -161,11 +161,11 @@ VilkarResultPicker.buildInitialValues = (
   };
 };
 
-VilkarResultPicker.transformValues = (values: Required<FormValues>) =>
+VilkarResultPicker.transformValues = values =>
   values.erVilkarOk
-    ? { erVilkarOk: values.erVilkarOk }
+    ? { erVilkarOk: values.erVilkarOk! }
     : {
-        erVilkarOk: values.erVilkarOk,
+        erVilkarOk: values.erVilkarOk!,
         avslagskode: values.avslagCode,
         avslagDato: values.avslagDato,
       };

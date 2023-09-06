@@ -24,7 +24,8 @@ type FormValues = {
   begrunnelse?: string;
 };
 
-const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) => value !== undefined || isDirty;
+const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string | number | boolean) =>
+  value !== undefined || isDirty;
 
 interface OwnProps {
   readOnly: boolean;
@@ -64,7 +65,7 @@ const ProsessStegBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunct
         maxLength={1500}
         readOnly={readOnly}
         // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
-        parse={(value: string) => value.replaceAll('‑', '-')}
+        parse={value => value.toString().replaceAll('‑', '-')}
       />
     </div>
   );

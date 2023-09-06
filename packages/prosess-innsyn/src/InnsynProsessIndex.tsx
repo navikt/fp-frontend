@@ -3,6 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { Dokument, Innsyn, StandardProsessPanelProps } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 import InnsynForm from './components/InnsynForm';
 import messages from '../i18n/nb_NO.json';
@@ -19,7 +20,7 @@ interface OwnProps {
 
 const InnsynProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   behandling,
-  innsyn = {},
+  innsyn,
   alleDokumenter,
   saksnummer,
   aksjonspunkter,
@@ -31,22 +32,25 @@ const InnsynProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
   setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <InnsynForm
-      saksNr={saksnummer}
-      fristBehandlingPåVent={behandling.fristBehandlingPåVent}
-      innsynMottattDato={innsyn?.innsynMottattDato}
-      innsynDokumenter={innsyn?.dokumenter}
-      innsynResultatType={innsyn?.innsynResultatType}
-      vedtaksdokumentasjon={innsyn?.vedtaksdokumentasjon}
-      alleDokumenter={alleDokumenter}
-      aksjonspunkter={aksjonspunkter}
-      alleKodeverk={alleKodeverk}
-      submitCallback={submitCallback}
-      readOnly={isReadOnly}
-      readOnlySubmitButton={readOnlySubmitButton}
-      formData={formData}
-      setFormData={setFormData}
-    />
+    {!innsyn && <LoadingPanel />}
+    {innsyn && (
+      <InnsynForm
+        saksNr={saksnummer}
+        fristBehandlingPåVent={behandling.fristBehandlingPåVent}
+        innsynMottattDato={innsyn.innsynMottattDato}
+        innsynDokumenter={innsyn.dokumenter}
+        innsynResultatType={innsyn.innsynResultatType}
+        vedtaksdokumentasjon={innsyn.vedtaksdokumentasjon}
+        alleDokumenter={alleDokumenter}
+        aksjonspunkter={aksjonspunkter}
+        alleKodeverk={alleKodeverk}
+        submitCallback={submitCallback}
+        readOnly={isReadOnly}
+        readOnlySubmitButton={readOnlySubmitButton}
+        formData={formData}
+        setFormData={setFormData}
+      />
+    )}
   </RawIntlProvider>
 );
 

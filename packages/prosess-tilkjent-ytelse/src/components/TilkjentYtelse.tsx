@@ -38,11 +38,11 @@ type Periode = {
 };
 
 const sjekkOmGradert = (periode: BeregningsresultatPeriode): boolean => {
-  const graderteAndeler = periode.andeler.filter(andel => andel.uttak && andel.uttak.gradering === true);
+  const graderteAndeler = (periode.andeler || []).filter(andel => andel.uttak && andel.uttak.gradering === true);
   return graderteAndeler.length > 0;
 };
 
-const getFamilieHendelseData = (familieHendelseSamling: FamilieHendelseSamling): { dato: string; textId: string } => {
+const getFamilieHendelseData = (familieHendelseSamling: FamilieHendelseSamling): { dato?: string; textId: string } => {
   const familieHendelse = familieHendelseSamling.gjeldende || familieHendelseSamling.oppgitt;
   if (familieHendelse.soknadType === soknadType.FODSEL) {
     if (familieHendelse.avklartBarn && familieHendelse.avklartBarn.length > 0) {
@@ -54,12 +54,15 @@ const getFamilieHendelseData = (familieHendelseSamling: FamilieHendelseSamling):
     return { dato: familieHendelse.omsorgsovertakelseDato, textId: 'TilkjentYtelse.Omsorgsovertakelsesdato' };
   }
 
-  return { dato: familieHendelse.adopsjonFodelsedatoer[0], textId: 'TilkjentYtelse.Fodselsdato' };
+  return {
+    dato: familieHendelse.adopsjonFodelsedatoer ? familieHendelse.adopsjonFodelsedatoer[0] : undefined,
+    textId: 'TilkjentYtelse.Fodselsdato',
+  };
 };
 
-const formatPerioder = (perioder: BeregningsresultatPeriode[]): Periode[] =>
+const formatPerioder = (perioder: BeregningsresultatPeriode[] = []): Periode[] =>
   perioder
-    .filter(periode => periode.andeler[0] && periode.dagsats)
+    .filter(periode => periode.andeler && periode.andeler[0] && periode.dagsats)
     .map<Periode>((periode, index: number) => ({
       erGradert: sjekkOmGradert(periode),
       start: dayjs(periode.fom).toDate(),
@@ -68,9 +71,9 @@ const formatPerioder = (perioder: BeregningsresultatPeriode[]): Periode[] =>
       periode,
     }));
 
-const finnRolle = (fagsak: Fagsak, alleKodeverk: AlleKodeverk): string | undefined => {
+const finnRolle = (fagsak: Fagsak, alleKodeverk: AlleKodeverk): string => {
   const kodeverk = alleKodeverk[KodeverkType.RELASJONSROLLE_TYPE];
-  return kodeverk.find(k => k.kode === fagsak.relasjonsRolleType)?.navn;
+  return kodeverk.find(k => k.kode === fagsak.relasjonsRolleType)?.navn || '';
 };
 
 const finnSisteDato = (familiehendelseDato: string, førstePeriodeFom: dayjs.Dayjs): dayjs.Dayjs => {
@@ -82,7 +85,7 @@ interface OwnProps {
   beregningsresultatPeriode?: BeregningsresultatPeriode[];
   soknadDate: string;
   familieHendelseSamling: FamilieHendelseSamling;
-  hovedsokerKjonnKode: Kjønnkode;
+  hovedsokerKjonnKode?: Kjønnkode;
   alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   fagsak: Fagsak;
@@ -112,14 +115,14 @@ const TilkjentYtelse: FunctionComponent<OwnProps> = ({
   }, []);
 
   const nextPeriod = useCallback((): void => {
-    const newIndex = perioder.findIndex(periode => periode.id === valgtPeriode.id) + 1;
+    const newIndex = perioder.findIndex(periode => periode.id === valgtPeriode?.id) + 1;
     if (newIndex < perioder.length) {
       setValgtPeriode(perioder[newIndex]);
     }
   }, [perioder, valgtPeriode, setValgtPeriode]);
 
   const prevPeriod = useCallback((): void => {
-    const newIndex = perioder.findIndex(periode => periode.id === valgtPeriode.id) - 1;
+    const newIndex = perioder.findIndex(periode => periode.id === valgtPeriode?.id) - 1;
     if (newIndex >= 0) {
       setValgtPeriode(perioder[newIndex]);
     }

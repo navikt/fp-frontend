@@ -18,6 +18,6 @@ export const uttakPeriodeNavn = {
   FLERBARNSDAGER: 'Flerbarnsdager',
   ANNET: 'Annet',
   UDEFINERT: '-',
-};
+} as Record<string, string>;
 
 export default uttakPeriodeType;

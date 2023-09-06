@@ -51,7 +51,7 @@ const UTTAK_PANEL_AKSJONSPUNKT_KODER = {
   5078: 'UttakPanel.Aksjonspunkt.5078',
   5079: 'UttakPanel.Aksjonspunkt.5079',
   5098: 'UttakPanel.Aksjonspunkt.5098',
-};
+} as Record<string, string>;
 
 const hentApTekster = (uttaksresultat: UttaksresultatPeriode, aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   const filtrerteAksjonspunkter = aksjonspunkter.filter(
@@ -85,16 +85,19 @@ const hentApTekster = (uttaksresultat: UttaksresultatPeriode, aksjonspunkter: Ak
 };
 
 const validerPerioder = (perioder: PeriodeSoker[], stønadskonto: UttakStonadskontoer, intl: IntlShape) => {
-  const feil = [];
+  const feil = [] as string[];
 
   perioder.forEach(p => {
     const ikkeGyldigeAktiviteter = p.aktiviteter.filter(
-      a => stønadskonto.stonadskontoer[a.stønadskontoType] === undefined && a.trekkdagerDesimaler > 0,
+      a =>
+        stønadskonto.stonadskontoer[a.stønadskontoType as StonadskontoType] === undefined &&
+        !!a.trekkdagerDesimaler &&
+        a.trekkdagerDesimaler > 0,
     );
     if (p.periodeResultatType === periodeResultatType.INNVILGET && ikkeGyldigeAktiviteter.length > 0) {
       const feilmelding = intl.formatMessage(
         { id: 'UttakPanel.InvalidStonadskonto' },
-        { konto: uttakPeriodeNavn[ikkeGyldigeAktiviteter[0].stønadskontoType] },
+        { konto: uttakPeriodeNavn[ikkeGyldigeAktiviteter[0].stønadskontoType as StonadskontoType] },
       );
       if (!feil.includes(feilmelding)) {
         feil.push(feilmelding);
@@ -114,6 +117,8 @@ const validerPerioder = (perioder: PeriodeSoker[], stønadskonto: UttakStonadsko
     }
   }
 
+  // TODO Dette ser feil ut. Burde det vera const konto = stønadskonto.stonadskontoer[StonadskontoType.FLERBARNSDAGER];
+  // @ts-ignore Fiks
   const konto = stønadskonto[StonadskontoType.FLERBARNSDAGER];
   if (feil.length === 0 && konto && !konto.gyldigForbruk) {
     feil.push(intl.formatMessage({ id: 'UttakPanel.InvalidTrekkDagerFlerbarnsdager' }, { maxDays: konto.maxDager }));
@@ -219,7 +224,7 @@ const UttakProsessPanel: FunctionComponent<OwnProps> = ({
   const allePerioder = uttaksresultatPeriode.perioderAnnenpart.concat(perioder);
 
   const visPeriode = useCallback(
-    per => {
+    (per: PeriodeSoker[]) => {
       const index = per.findIndex(period => period.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING);
       if (index !== -1) {
         setValgtPeriodeIndex(index);

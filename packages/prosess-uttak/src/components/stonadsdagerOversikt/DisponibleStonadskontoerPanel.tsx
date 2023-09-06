@@ -24,7 +24,7 @@ const STØNADSKONTOER_SORTERINGSREKKEFØLGE = {
   [StonadskontoType.MINSTERETT]: 6,
   [StonadskontoType.MINSTERETT_NESTE_STØNADSPERIODE]: 7,
   [StonadskontoType.FLERBARNSDAGER]: 8,
-};
+} as Record<string, number>;
 
 const sorterKontoer = (s1: Stonadskonto, s2: Stonadskonto): number =>
   STØNADSKONTOER_SORTERINGSREKKEFØLGE[s1.stonadskontotype] - STØNADSKONTOER_SORTERINGSREKKEFØLGE[s2.stonadskontotype];
@@ -46,7 +46,11 @@ const lagTabellRadKey = (
   return `${arbKey} ${arbeidsforhold.saldo}`;
 };
 
-const finnTilgjengeligeUker = (stønadskontoer: Stonadskonto[]): number => {
+const finnTilgjengeligeUker = (stønadskontoer?: Stonadskonto[]): number => {
+  if (!stønadskontoer) {
+    return 0;
+  }
+
   const sumDager = stønadskontoer.reduce((sum, konto) => {
     const type = konto.stonadskontotype;
     if (
@@ -96,7 +100,10 @@ const DisponibleStonadskontoerPanel: FunctionComponent<OwnProps> = ({
     setValgtKontoType(forrigeKontoType => (forrigeKontoType === stonadskontotype ? undefined : stonadskontotype));
   }, []);
 
-  const stønadskontoerMedNavn = useMemo(() => Object.values(stønadskontoer).sort(sorterKontoer), [stønadskontoer]);
+  const stønadskontoerMedNavn = useMemo(
+    () => (stønadskontoer ? Object.values(stønadskontoer).sort(sorterKontoer) : []),
+    [stønadskontoer],
+  );
 
   const tilgjengeligeUker = useMemo(() => finnTilgjengeligeUker(stønadskontoer), [stønadskontoer]);
 
@@ -104,12 +111,13 @@ const DisponibleStonadskontoerPanel: FunctionComponent<OwnProps> = ({
     if (!valgtKontoType) {
       return undefined;
     }
-    const aktiviteterMedNavn = stønadskontoerMedNavn
-      .find(s => s.stonadskontotype === valgtKontoType)
-      .aktivitetSaldoDtoList.map(aktivitet => ({
-        ...aktivitet,
-        navn: utledNavn(aktivitet.aktivitetIdentifikator, arbeidsgiverOpplysningerPerId, intl),
-      }));
+
+    const konto = stønadskontoerMedNavn.find(s => s.stonadskontotype === valgtKontoType);
+
+    const aktiviteterMedNavn = (konto?.aktivitetSaldoDtoList || []).map(aktivitet => ({
+      ...aktivitet,
+      navn: utledNavn(aktivitet.aktivitetIdentifikator, arbeidsgiverOpplysningerPerId, intl),
+    }));
     return aktiviteterMedNavn.sort((akt1, akt2) => akt1.navn.localeCompare(akt2.navn));
   }, [valgtKontoType, stønadskontoerMedNavn]);
 
@@ -143,7 +151,7 @@ const DisponibleStonadskontoerPanel: FunctionComponent<OwnProps> = ({
           ))}
         </ul>
       </div>
-      {valgtKontoType && sorterteAktiviteter.length > 0 && (
+      {valgtKontoType && sorterteAktiviteter && sorterteAktiviteter.length > 0 && (
         <div className={styles.visKonto}>
           <Table headerTextCodes={HEADER_TEXT_CODES}>
             {sorterteAktiviteter.map(arbforhold => {

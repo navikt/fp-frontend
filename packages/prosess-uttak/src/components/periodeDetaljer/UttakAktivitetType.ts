@@ -6,8 +6,8 @@ export type UttakAktivitet = {
 };
 
 export type UttakAktivitetType = {
-  begrunnelse: string;
-  erOppfylt: boolean;
+  begrunnelse?: string;
+  erOppfylt?: boolean;
   periodeAarsak: string;
   graderingInnvilget: boolean;
   graderingAvslagAarsak: string;

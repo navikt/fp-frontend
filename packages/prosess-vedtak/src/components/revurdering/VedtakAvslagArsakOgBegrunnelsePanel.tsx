@@ -63,7 +63,7 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
   } = useFormContext();
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
-  const isRequiredFn = (value?: string) => value !== undefined || isDirty;
+  const isRequiredFn = (value?: string | number | boolean) => value !== undefined || isDirty;
   const avslagsårsak = getAvslagArsak(getKodeverknavn, vilkar, behandlingsresultat);
 
   return (
@@ -85,7 +85,6 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
             <TextAreaField
               name="begrunnelse"
               label={<FormattedMessage id="VedtakForm.Fritekst" />}
-              // @ts-ignore Fiks denne
               validate={[requiredIfCustomFunctionIsTrueNew(isRequiredFn), minLength3, maxLength1500, hasValidText]}
               maxLength={1500}
               readOnly={erReadOnly}

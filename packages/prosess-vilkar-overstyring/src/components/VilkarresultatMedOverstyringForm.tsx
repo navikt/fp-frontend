@@ -108,7 +108,7 @@ interface OwnProps {
   toggleOverstyring: (fn: (oldArray: []) => void) => void;
   avslagsarsaker: KodeverkMedNavn[];
   status: string;
-  erOverstyrt?: boolean;
+  erOverstyrt: boolean;
   panelTittelKode: string;
   overstyringApKode: OverstyringAksjonspunkter;
   lovReferanse?: string;

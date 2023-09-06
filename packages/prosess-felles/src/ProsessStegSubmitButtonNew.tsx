@@ -9,10 +9,10 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 const isDisabled = (
-  isDirty: boolean,
   isSubmitting: boolean,
   isSubmittable: boolean,
-  hasEmptyRequiredFields: boolean,
+  isDirty?: boolean,
+  hasEmptyRequiredFields?: boolean,
 ): boolean => {
   if ((!isDirty && !isSubmittable) || isSubmitting) {
     return true;
@@ -27,7 +27,7 @@ interface OwnProps {
   isReadOnly: boolean;
   isSubmittable: boolean;
   isSubmitting: boolean;
-  isDirty: boolean;
+  isDirty?: boolean;
   text?: string;
   onClick?: (event: React.MouseEvent) => void;
   hasEmptyRequiredFields?: boolean;
@@ -51,7 +51,7 @@ const ProsessStegSubmitButton: FunctionComponent<OwnProps> = ({
         size="small"
         variant="primary"
         loading={isSubmitting}
-        disabled={isDisabled(isDirty, isSubmitting, isSubmittable, hasEmptyRequiredFields)}
+        disabled={isDisabled(isSubmitting, isSubmittable, isDirty, hasEmptyRequiredFields)}
         onClick={onClick || ariaCheck}
         type={onClick ? 'button' : 'submit'}
       >

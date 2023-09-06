@@ -34,7 +34,7 @@ export type ArsakKodeverk = {
   synligForRolle?: string[];
 } & KodeverkMedNavn;
 
-const erPeriodeOppfylt = (valgtPeriode: PeriodeSoker, utfallKoder: ArsakKodeverk[]): boolean => {
+const erPeriodeOppfylt = (valgtPeriode: PeriodeSoker, utfallKoder: ArsakKodeverk[]): boolean | undefined => {
   if (valgtPeriode.periodeResultatType && valgtPeriode.periodeResultatType === periodeResultatType.INNVILGET) {
     return true;
   }
@@ -116,20 +116,20 @@ const lagOptionsTilPeriodeÅrsakSelect = (
     .filter(getFiltrerPåGyldighetForLovendringer(aarsakFilter))
     .filter(getFiltrerPåSynlighet(aarsakFilter));
 
-  const mapTilOption = ({ kode, navn }) => (
-    <option value={kode} key={kode}>
-      {navn}
+  const mapTilOption = (kodeverk: KodeverkMedNavn) => (
+    <option value={kodeverk.kode} key={kodeverk.kode}>
+      {kodeverk.navn}
     </option>
   );
 
   if (skalFiltrere && utsettelseType) {
     if (utsettelseType !== utsettelseArsakCodes.UDEFINERT) {
-      return filteredNyKodeArray.filter(kv => kv.uttakTyper.includes('UTSETTELSE')).map(mapTilOption);
+      return filteredNyKodeArray.filter(kv => kv.uttakTyper?.includes('UTSETTELSE')).map(mapTilOption);
     }
     if (periodeType && utsettelseType === utsettelseArsakCodes.UDEFINERT) {
       return filteredNyKodeArray
-        .filter(kv => kv.uttakTyper.includes('UTTAK'))
-        .filter(kv => kv.valgbarForKonto.includes(periodeType))
+        .filter(kv => kv.uttakTyper?.includes('UTTAK'))
+        .filter(kv => kv.valgbarForKonto?.includes(periodeType))
         .map(mapTilOption);
     }
   }
@@ -149,7 +149,7 @@ const finnUker = (aktivitet: PeriodeSokerAktivitet, valgtPeriode: PeriodeSoker):
   if (aktivitet.trekkdagerDesimaler && aktivitet.trekkdagerDesimaler < 0) {
     return '0';
   }
-  return Math.floor(aktivitet.trekkdagerDesimaler / 5).toString();
+  return aktivitet.trekkdagerDesimaler ? Math.floor(aktivitet.trekkdagerDesimaler / 5).toString() : '0';
 };
 
 const finnDager = (aktivitet: PeriodeSokerAktivitet, valgtPeriode: PeriodeSoker): string => {
@@ -163,7 +163,7 @@ const finnDager = (aktivitet: PeriodeSokerAktivitet, valgtPeriode: PeriodeSoker)
   if (aktivitet.trekkdagerDesimaler && aktivitet.trekkdagerDesimaler < 0) {
     return '0';
   }
-  return parseFloat((aktivitet.trekkdagerDesimaler % 5).toFixed(1)).toString();
+  return aktivitet.trekkdagerDesimaler ? parseFloat((aktivitet.trekkdagerDesimaler % 5).toFixed(1)).toString() : '0';
 };
 
 const lagOptionsTilGraderingAvslagsårsakerSelect = (alleKodeverk: AlleKodeverk): ReactElement[] => {
@@ -177,28 +177,28 @@ const lagOptionsTilGraderingAvslagsårsakerSelect = (alleKodeverk: AlleKodeverk)
 
 const hentTekstForÅVurdereUtsettelseVedMindreEnn100ProsentStilling = (
   utsettelseType: string,
-  erOppfylt: boolean,
   aktiviteter: PeriodeSokerAktivitet[],
   intl: IntlShape,
-): string => {
+  erOppfylt?: boolean,
+): string | undefined => {
   if (utsettelseType && utsettelseType === utsettelseArsakCodes.ARBEID && erOppfylt && aktiviteter) {
-    const prosentIArbeid = aktiviteter.reduce((total, aktivitet): number => total + aktivitet.prosentArbeid, 0);
+    const prosentIArbeid = aktiviteter.reduce((total, aktivitet): number => total + (aktivitet.prosentArbeid || 0), 0);
     if (prosentIArbeid < 100) {
       return intl.formatMessage({ id: 'UttakActivity.MerEn100ProsentOgOgyldigUtsettlse' });
     }
   }
-  return null;
+  return undefined;
 };
 
 const hentTekstNårUtbetalingPlusArbeidsprosentMerEn100 = (
   formAktiviteter: UttakAktivitet[],
   aktiviteter: PeriodeSokerAktivitet[],
   intl: IntlShape,
-): string => {
+): string | undefined => {
   const harMerEnn100 = formAktiviteter.some(
-    (aktivitet, index) => parseFloat(aktivitet.utbetalingsgrad) + aktiviteter[index].prosentArbeid > 100,
+    (aktivitet, index) => parseFloat(aktivitet.utbetalingsgrad) + (aktiviteter[index].prosentArbeid || 0) > 100,
   );
-  return harMerEnn100 ? intl.formatMessage({ id: 'UttakActivity.MerEn100Prosent' }) : null;
+  return harMerEnn100 ? intl.formatMessage({ id: 'UttakActivity.MerEn100Prosent' }) : undefined;
 };
 
 const hentSorterAktiviteterFn =
@@ -229,10 +229,10 @@ const byggDefaultValues = (
     flerbarnsdager: valgtPeriode.flerbarnsdager,
     oppholdArsak: valgtPeriode.oppholdÅrsak,
     aktiviteter: sorterteAktiviteter.map(a => ({
-      stønadskontoType: a.stønadskontoType,
+      stønadskontoType: a.stønadskontoType!,
       weeks: finnUker(a, valgtPeriode),
       days: finnDager(a, valgtPeriode),
-      utbetalingsgrad: !kontoIkkeSatt ? a.utbetalingsgrad?.toString() : '0',
+      utbetalingsgrad: !kontoIkkeSatt && a.utbetalingsgrad ? a.utbetalingsgrad.toString() : '0',
     })),
   };
 };
@@ -341,9 +341,9 @@ const UttakPeriodeForm: FunctionComponent<OwnProps> = ({
 
   const warning1 = hentTekstForÅVurdereUtsettelseVedMindreEnn100ProsentStilling(
     valgtPeriode.utsettelseType,
-    erOppfylt,
     valgtPeriode.aktiviteter,
     intl,
+    erOppfylt,
   );
   const warning2 = hentTekstNårUtbetalingPlusArbeidsprosentMerEn100(aktiviteter, sorterteAktiviteter, intl);
   const warning = warning1 || warning2;
