@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
+    "strict": true,
     "target": "esnext",
     "module": "es2020",
     "moduleResolution": "node",
     "types": ["node", "vite/client", "vitest/globals", "@testing-library/jest-dom"],
     "allowJs": true,
     "noEmit": true,
-    "strict": false,
     "strictBindCallApply": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
