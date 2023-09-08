@@ -41,7 +41,7 @@
     "lodash.debounce": "4.0.8",
     "react": "18.2.0",
     "react-hook-form": "7.45.4",
-    "react-intl": "6.4.4",
+    "react-intl": "6.4.5",
     "react-router-dom": "6.15.0"
   },
   "devDependencies": {
