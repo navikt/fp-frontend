@@ -17,7 +17,7 @@ export type FormValues = {
 } & FieldArrayFormValues;
 
 interface StaticFunctions {
-  buildInitialValues?: () => FormValues;
+  buildInitialValues: () => FormValues;
 }
 
 interface OwnProps {

@@ -16,7 +16,7 @@ import RenderOppholdPeriodeFieldArray, {
 
 export type FormValues = {
   skalHaOpphold?: boolean;
-  [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]: PeriodeFormValues;
+  [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]?: PeriodeFormValues;
 };
 
 interface OwnProps {

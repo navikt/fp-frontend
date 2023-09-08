@@ -86,7 +86,7 @@ const getValiderArbeidsgiverIdNårRequired =
     getValues: UseFormGetValues<{ tidsromPermisjon: { [GRADERING_PERIODE_FIELD_ARRAY_NAME]: FormValues } }>,
     index: number,
   ) =>
-  arbeidsgiverIdentifikator => {
+  (arbeidsgiverIdentifikator: string) => {
     const arbeidsgiverIdentifikatorRequired =
       getValues(
         `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.arbeidskategoriType`,
@@ -94,7 +94,7 @@ const getValiderArbeidsgiverIdNårRequired =
     return arbeidsgiverIdentifikatorRequired ? required(arbeidsgiverIdentifikator) : undefined;
   };
 
-const validerAtArbeidsgiverIdErGyldig = arbeidsgiverIdentifikator => {
+const validerAtArbeidsgiverIdErGyldig = (arbeidsgiverIdentifikator: string) => {
   if (!arbeidsgiverIdentifikator) {
     return undefined;
   }
@@ -242,7 +242,7 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                     label={<FormattedMessage id="Registrering.Permisjon.Gradering.Prosentandel" />}
                     name={`${namePart1}.prosentandelArbeid`}
                     validate={[required, hasValidDecimal, maxValue100]}
-                    normalizeOnBlur={(value: string) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
+                    normalizeOnBlur={value => (Number.isNaN(value) ? value : parseFloat(value.toString()).toFixed(2))}
                   />
                 </FlexColumn>
                 <FlexColumn>

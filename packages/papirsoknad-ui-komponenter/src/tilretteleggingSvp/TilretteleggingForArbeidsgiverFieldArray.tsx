@@ -60,7 +60,12 @@ const TilretteleggingForArbeidsgiverFieldArray: FunctionComponent<OwnProps> = ({
                   readOnly={readOnly}
                   name={`${namePart1}.${index}.organisasjonsnummer`}
                   label={intl.formatMessage({ id: 'TilretteleggingForArbeidsgiverFieldArray.OrgNr' })}
-                  validate={[required, hasNoWhiteSpace, hasValidOrgNumberOrFodselsnr]}
+                  validate={[
+                    required,
+                    // TODO verdi her bør vel vera string?
+                    (value: number) => hasNoWhiteSpace(value.toString()),
+                    hasValidOrgNumberOrFodselsnr,
+                  ]}
                   maxLength={99}
                 />
               </FlexColumn>

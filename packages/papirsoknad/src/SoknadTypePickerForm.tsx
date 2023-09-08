@@ -47,8 +47,8 @@ const SoknadTypePickerForm: FunctionComponent<OwnProps> = ({ setSoknadData, fags
   const selectedFagsakYtelseType = formMethods.watch('fagsakYtelseType');
 
   const onSubmit = useCallback(
-    (values: Required<FormValues>) =>
-      setSoknadData(new SoknadData(values.fagsakYtelseType, values.familieHendelseType, values.foreldreType)),
+    (values: FormValues) =>
+      setSoknadData(new SoknadData(values.fagsakYtelseType!, values.familieHendelseType, values.foreldreType!)),
     [setSoknadData],
   );
 
@@ -66,7 +66,7 @@ const SoknadTypePickerForm: FunctionComponent<OwnProps> = ({ setSoknadData, fags
         <FlexContainer>
           <FlexRow>
             <FlexColumn className={styles.colWidth}>
-              <Detail size="small">
+              <Detail>
                 <FormattedMessage id="Registrering.Omsoknaden.soknadstype" />
               </Detail>
               <VerticalSpacer fourPx />
@@ -81,7 +81,7 @@ const SoknadTypePickerForm: FunctionComponent<OwnProps> = ({ setSoknadData, fags
               />
             </FlexColumn>
             <FlexColumn className={styles.colWidth}>
-              <Detail size="small">
+              <Detail>
                 <FormattedMessage id="Registrering.Omsoknaden.Tema" />
               </Detail>
               <VerticalSpacer fourPx />
@@ -98,7 +98,7 @@ const SoknadTypePickerForm: FunctionComponent<OwnProps> = ({ setSoknadData, fags
               />
             </FlexColumn>
             <FlexColumn className={styles.colWidth}>
-              <Detail size="small">
+              <Detail>
                 <FormattedMessage id="Registrering.Omsoknaden.Soker" />
               </Detail>
               <VerticalSpacer fourPx />

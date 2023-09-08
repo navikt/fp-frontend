@@ -43,19 +43,25 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
   const [soknadData, setSoknadData] = useState<SoknadData>();
 
   const lagre = useCallback(
-    (formValues: any) =>
-      lagreFullstendig(
-        formValues,
-        soknadData.fagsakYtelseType,
-        soknadData.familieHendelseType,
-        soknadData.foreldreType,
-      ),
+    (formValues: any) => {
+      if (soknadData) {
+        lagreFullstendig(
+          formValues,
+          soknadData.fagsakYtelseType,
+          soknadData.familieHendelseType,
+          soknadData.foreldreType,
+        );
+      }
+      return Promise.resolve();
+    },
     [soknadData],
   );
-  const lagreOgAvslutt = useCallback(
-    () => lagreUfullstendig(soknadData.fagsakYtelseType, soknadData.familieHendelseType, soknadData.foreldreType),
-    [soknadData],
-  );
+  const lagreOgAvslutt = useCallback(() => {
+    if (soknadData) {
+      lagreUfullstendig(soknadData.fagsakYtelseType, soknadData.familieHendelseType, soknadData.foreldreType);
+    }
+    return Promise.resolve();
+  }, [soknadData]);
 
   return (
     <RawIntlProvider value={intl}>

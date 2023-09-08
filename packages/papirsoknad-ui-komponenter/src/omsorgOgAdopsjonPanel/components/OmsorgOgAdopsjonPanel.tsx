@@ -34,7 +34,7 @@ export type FormValues = {
 export type TransformedFormValues = {
   omsorgsovertakelsesdato?: string;
   antallBarn?: string;
-  foedselsDato?: string[];
+  foedselsDato?: (string | undefined)[];
 };
 
 const getValideringMotAnnenFødselsdato = (index: number, fodselsdato?: string | string[]) => (fDato?: string) => {
@@ -170,8 +170,8 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
                   ? [required, hasValidInteger, minAntall, maxAntall]
                   : [
                       hasValidInteger,
-                      value => (value ? minAntall(value) : undefined),
-                      value => (value ? maxAntall(value) : undefined),
+                      (value: string) => (value ? minAntall(parseInt(value, 10)) : undefined),
+                      (value: string) => (value ? maxAntall(parseInt(value, 10)) : undefined),
                     ]
               }
             />

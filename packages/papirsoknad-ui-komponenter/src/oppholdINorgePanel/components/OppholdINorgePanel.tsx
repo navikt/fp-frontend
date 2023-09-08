@@ -25,8 +25,8 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: () => FormValues;
-  transformValues?: (formValues: FormValues) => FormValues;
+  buildInitialValues: () => FormValues;
+  transformValues: (formValues: FormValues) => FormValues;
 }
 
 /**

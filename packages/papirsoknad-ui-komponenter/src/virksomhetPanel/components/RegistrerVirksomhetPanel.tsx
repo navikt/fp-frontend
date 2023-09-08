@@ -67,7 +67,7 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({ readOnly = fals
 
       if (virksomhetIndex === -1) {
         append(justertVirksomhet);
-      } else {
+      } else if (virksomhetIndex !== undefined) {
         update(virksomhetIndex, justertVirksomhet);
       }
 

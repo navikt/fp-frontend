@@ -122,7 +122,13 @@ const VirksomhetIdentifikasjonPanel: FunctionComponent<OwnProps> = ({ readOnly =
                 <FlexColumn>
                   <Datepicker
                     isReadOnly={readOnly}
-                    validate={[hasValidDate, fomDato => validPeriodeFomTom(getValues('fom'), fomDato)]}
+                    validate={[
+                      hasValidDate,
+                      tomDato => {
+                        const fom = getValues('fom');
+                        return fom ? validPeriodeFomTom(fom, tomDato) : null;
+                      },
+                    ]}
                     name="tom"
                     label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeTom' })}
                   />

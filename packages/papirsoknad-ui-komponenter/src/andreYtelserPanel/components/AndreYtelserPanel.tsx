@@ -81,6 +81,7 @@ const AndreYtelserPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
               label={ay.navn}
               readOnly={readOnly}
             />
+            {/* @ts-ignore TODO Er dette korrekt? Burde det vore selectedYtelser[ANDRE_YTELSER_NAME_PREFIX][ay.kode] */}
             {selectedYtelser && selectedYtelser[ay.kode] && (
               <>
                 <VerticalSpacer eightPx />
@@ -97,23 +98,27 @@ const AndreYtelserPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
 };
 
 AndreYtelserPanel.buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => {
-  const ytelseInitialValues = {};
+  const ytelseInitialValues = {} as Record<string, PerioderFormValues[]>;
   removeArbeidstyper(andreYtelser).forEach(ay => {
     const ytelsePeriodeFieldName = `${ay.kode}_${ANDRE_YTELSER_PERIODE_SUFFIX}`;
-    ytelseInitialValues[ytelsePeriodeFieldName] = [{}];
+    ytelseInitialValues[ytelsePeriodeFieldName] = [{} as PerioderFormValues];
   });
   return { [ANDRE_YTELSER_NAME_PREFIX]: ytelseInitialValues };
 };
 
 AndreYtelserPanel.transformValues = (values: FormValues, andreYtelser: KodeverkMedNavn[]): any => {
   const ytelseValues = values[ANDRE_YTELSER_NAME_PREFIX];
-  const newValues = [];
+  const newValues = [] as {
+    ytelseType: string;
+    periodeFom: string;
+    periodeTom: string;
+  }[];
 
   andreYtelser
     .filter(ay => ytelseValues && ytelseValues[ay.kode])
     .forEach(ay => {
       const ytelsePerioderFieldName = `${ay.kode}_${ANDRE_YTELSER_PERIODE_SUFFIX}`;
-      const ytelsePerioder = ytelseValues[ytelsePerioderFieldName];
+      const ytelsePerioder = ytelseValues ? ytelseValues[ytelsePerioderFieldName] : undefined;
       if (ytelsePerioder) {
         RenderAndreYtelserPerioderFieldArray.transformValues(ytelsePerioder, ay.kode).forEach(tv => newValues.push(tv));
       }

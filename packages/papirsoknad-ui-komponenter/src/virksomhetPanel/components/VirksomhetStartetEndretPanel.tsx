@@ -140,8 +140,8 @@ export const VirksomhetStartetEndretPanel: FunctionComponent<OwnProps> = ({ read
               readOnly={readOnly}
               validate={[hasValidInteger, required]}
               className={styles.inntektBredde}
-              parse={(value: string) => {
-                const parsedValue = parseInt(value, 10);
+              parse={value => {
+                const parsedValue = parseInt(value.toString(), 10);
                 return Number.isNaN(parsedValue) ? value : parsedValue;
               }}
             />

@@ -89,7 +89,7 @@ const RegistreringAdopsjonOgOmsorgGrid: FunctionComponent<OwnProps> & StaticFunc
 
 RegistreringAdopsjonOgOmsorgGrid.transformValues = (values: FormValues): TransformedFormValues => ({
   ...OppholdINorgePapirsoknadIndex.transformValues(values),
-  [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values[OMSORG_FORM_NAME_PREFIX]),
+  [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values[OMSORG_FORM_NAME_PREFIX]!),
 });
 
 RegistreringAdopsjonOgOmsorgGrid.buildInitialValues = () => ({

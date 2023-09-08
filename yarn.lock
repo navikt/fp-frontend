@@ -2204,17 +2204,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hookform/error-message@npm:2.0.1":
-  version: 2.0.1
-  resolution: "@hookform/error-message@npm:2.0.1"
-  peerDependencies:
-    react: ">=16.8.0"
-    react-dom: ">=16.8.0"
-    react-hook-form: ^7.0.0
-  checksum: eb3c33ab3fd2fe02b9bb1686f3d1ef2504ee2bb4e8e848797e2c68d957e53b1150f5f13946c65e386ed3b6e95e3b3fba29480bab1e0f60c4972e225248c8c68e
-  languageName: node
-  linkType: hard
-
 "@humanwhocodes/config-array@npm:^0.11.10":
   version: 0.11.10
   resolution: "@humanwhocodes/config-array@npm:0.11.10"
@@ -2840,44 +2829,6 @@ __metadata:
     eslint: 8.48.0
     react: 18.2.0
     react-intl: 6.4.4
-    stylelint: 15.10.3
-    typescript: 5.2.2
-    vite: 4.4.9
-    vitest: 0.34.3
-  languageName: unknown
-  linkType: soft
-
-"@navikt/fp-fakta-fodsel-og-tilrettelegging@workspace:packages/fakta-fodsel-og-tilrettelegging":
-  version: 0.0.0-use.local
-  resolution: "@navikt/fp-fakta-fodsel-og-tilrettelegging@workspace:packages/fakta-fodsel-og-tilrettelegging"
-  dependencies:
-    "@hookform/error-message": 2.0.1
-    "@navikt/ds-css": 5.2.1
-    "@navikt/ds-react": 5.2.1
-    "@navikt/fp-fakta-felles": 1.0.0
-    "@navikt/fp-kodeverk": 1.0.0
-    "@navikt/fp-storybook-utils": 1.0.0
-    "@navikt/fp-types": 1.0.0
-    "@navikt/fp-types-avklar-aksjonspunkter": 1.0.0
-    "@navikt/ft-form-hooks": 4.2.0
-    "@navikt/ft-form-validators": 2.1.0
-    "@navikt/ft-kodeverk": 2.2.0
-    "@navikt/ft-types": 2.2.0
-    "@navikt/ft-ui-komponenter": 2.1.0
-    "@navikt/ft-utils": 2.1.0
-    "@storybook/addon-actions": 7.4.0
-    "@storybook/react": 7.4.0
-    "@storybook/react-vite": 7.4.0
-    "@testing-library/react": 14.0.0
-    "@testing-library/user-event": 14.4.3
-    cross-env: 7.0.3
-    dayjs: 1.11.9
-    eslint: 8.48.0
-    moment: 2.29.4
-    react: 18.2.0
-    react-hook-form: 7.45.4
-    react-intl: 6.4.4
-    storybook: 7.4.0
     stylelint: 15.10.3
     typescript: 5.2.2
     vite: 4.4.9

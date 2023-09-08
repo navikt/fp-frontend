@@ -33,7 +33,7 @@ const getValue = (
   // @ts-ignore
 ): string => getValues(fieldName);
 
-const sortFomDates = (perioder: Periode[]) =>
+const sortFomDates = (perioder: Periode[] = []) =>
   perioder
     .map(p => p.periodeFom)
     .filter(p => p && p !== '')
