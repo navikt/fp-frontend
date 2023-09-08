@@ -65,6 +65,9 @@ const PermisjonGraderingPanel: FunctionComponent<OwnProps> & StaticFunctions = (
 
 PermisjonGraderingPanel.transformValues = (formValues: FormValues) => {
   const perioder = formValues[GRADERING_PERIODE_FIELD_ARRAY_NAME];
+  if (!perioder) {
+    return [];
+  }
   return perioder.map(periode => {
     if (periode.arbeidskategoriType) {
       return {

@@ -79,7 +79,7 @@ const AnnenForelderPanel: FunctionComponent<OwnProps> = ({
       <InputField
         name={`${ANNEN_FORELDER_NAME_PREFIX}.foedselsnummer`}
         label={formatMessage({ id: 'Registrering.TheOtherParent.Fodselsnummer' })}
-        parse={(value: string) => (value ? value.replace(/\s/g, '') : value)}
+        parse={value => (value ? value.toString().replace(/\s/g, '') : value)}
         readOnly={readOnly}
         className={styles.inputBredde}
         validate={
@@ -89,7 +89,8 @@ const AnnenForelderPanel: FunctionComponent<OwnProps> = ({
                 required,
                 hasValidFodselsnummerFormat,
                 hasValidFodselsnummer,
-                foedselsnummer => (foedselsnummer === fagsakPersonnummer ? sammeFodselsnummerSomSokerMessage() : null),
+                (foedselsnummer: string) =>
+                  foedselsnummer === fagsakPersonnummer ? sammeFodselsnummerSomSokerMessage() : null,
               ]
         }
         disabled={kanIkkeOppgiAnnenForelder}

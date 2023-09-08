@@ -51,7 +51,7 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: () => FormValues;
+  buildInitialValues: () => FormValues;
 }
 
 /*

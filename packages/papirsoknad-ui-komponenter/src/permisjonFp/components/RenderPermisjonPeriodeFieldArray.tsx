@@ -59,7 +59,7 @@ export const PERIODS_WITH_NO_MORS_AKTIVITET = [
 const getLabel = (erForsteRad: boolean, text: string): string => (erForsteRad ? text : '');
 
 const erPeriodeFormFør01012019 = (periodeFom: string | undefined): boolean =>
-  periodeFom && moment(periodeFom, ISO_DATE_FORMAT).isBefore(moment('2019-01-01'));
+  !!periodeFom && moment(periodeFom, ISO_DATE_FORMAT).isBefore(moment('2019-01-01'));
 
 export type FormValues = {
   periodeType: string;
@@ -255,7 +255,7 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                       name={`${namePart1}.samtidigUttaksprosent`}
                       validate={[hasValidDecimal, maxValue100]}
                       label={intl.formatMessage({ id: 'Registrering.Permisjon.SamtidigUttaksprosent' })}
-                      normalizeOnBlur={(value: string) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
+                      normalizeOnBlur={value => (Number.isNaN(value) ? value : parseFloat(value.toString()).toFixed(2))}
                     />
                   </FlexColumn>
                 )}

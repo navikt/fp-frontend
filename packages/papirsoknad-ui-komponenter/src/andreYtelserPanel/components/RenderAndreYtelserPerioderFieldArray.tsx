@@ -105,7 +105,7 @@ const RenderAndreYtelserPerioderFieldArray: FunctionComponent<OwnProps> & Static
                       onChange={() => (isSubmitted ? trigger() : undefined)}
                     />
                   </FlexColumn>
-                  <FlexColumn>{getRemoveButton()}</FlexColumn>
+                  {getRemoveButton && <FlexColumn>{getRemoveButton()}</FlexColumn>}
                 </FlexRow>
               </FlexContainer>
             </div>

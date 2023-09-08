@@ -30,7 +30,7 @@ export type FormValues = {
 
 const getToday = (): moment.Moment => moment().startOf('day');
 const getEarliestTerminDato = (): moment.Moment => getToday().subtract(3, 'weeks');
-const getLatestTerminbekreftelseDato = (termindato: string): moment.Moment => {
+const getLatestTerminbekreftelseDato = (termindato?: string): moment.Moment => {
   const earliestTerminDato = getEarliestTerminDato();
   const actualTermindato = termindato ? moment(termindato, ISO_DATE_FORMAT) : undefined;
   const today = getToday();

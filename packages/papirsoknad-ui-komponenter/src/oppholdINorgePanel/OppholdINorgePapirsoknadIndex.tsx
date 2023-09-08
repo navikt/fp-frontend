@@ -18,7 +18,7 @@ interface OwnProps {
 
 interface StaticFunctions {
   buildInitialValues: () => FormValues;
-  transformValues?: (formValues: FormValues) => FormValues;
+  transformValues: (formValues: FormValues) => FormValues;
 }
 
 const OppholdINorgePapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = ({

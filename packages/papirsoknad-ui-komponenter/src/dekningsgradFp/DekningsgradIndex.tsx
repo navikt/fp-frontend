@@ -10,7 +10,7 @@ import messages from '../../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 export type FormValues = {
-  dekningsgrad;
+  dekningsgrad: string;
 };
 
 interface OwnProps {

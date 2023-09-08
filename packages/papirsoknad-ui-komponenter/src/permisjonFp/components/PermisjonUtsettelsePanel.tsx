@@ -16,7 +16,7 @@ import RenderUtsettelsePeriodeFieldArray, {
 
 export type FormValues = {
   skalUtsette?: boolean;
-  [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: UtsettelsePeriodeFormValues;
+  [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]?: UtsettelsePeriodeFormValues;
 };
 
 interface OwnProps {

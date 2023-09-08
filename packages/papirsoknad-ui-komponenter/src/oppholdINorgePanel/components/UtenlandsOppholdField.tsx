@@ -28,8 +28,8 @@ const defaultUtenlandsOpphold = {
 
 export type FormValues = {
   land?: string;
-  periodeFom: string;
-  periodeTom: string;
+  periodeFom?: string;
+  periodeTom?: string;
 };
 
 type Keys = 'tidligereOppholdUtenlands' | 'fremtidigeOppholdUtenlands';
@@ -45,6 +45,7 @@ const getOverlappingValidator = (getValues: UseFormGetValues<{ [K in Keys]: Form
   const periodeMap = perioder
     .filter(({ periodeFom, periodeTom }) => periodeFom && periodeFom !== '' && periodeTom && periodeTom !== '')
     .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
+  // @ts-ignore Fiks
   return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
 };
 
@@ -182,7 +183,7 @@ const UtenlandsOppholdField: FunctionComponent<OwnProps> = ({
                   onChange={() => (isSubmitted ? trigger() : undefined)}
                 />
               </FlexColumn>
-              <FlexColumn>{getRemoveButton()}</FlexColumn>
+              {getRemoveButton && <FlexColumn>{getRemoveButton()}</FlexColumn>}
             </FlexRow>
           </FlexContainer>
           <VerticalSpacer sixteenPx />

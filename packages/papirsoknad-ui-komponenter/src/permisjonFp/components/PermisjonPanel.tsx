@@ -141,30 +141,30 @@ const PermisjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
 };
 
 PermisjonPanel.transformValues = (values: FormValues) => {
-  const permisjonValues = values[TIDSROM_PERMISJON_FORM_NAME_PREFIX];
+  const permisjonValues = values[TIDSROM_PERMISJON_FORM_NAME_PREFIX]!;
   const newValues = permisjonValues;
   const permisjonsdata = permisjonValues[PERMISJON_PERIODE_FIELD_ARRAY_NAME];
-  if (values.tidsromPermisjon.fulltUttak && permisjonsdata) {
+  if (values.tidsromPermisjon?.fulltUttak && permisjonsdata) {
     newValues[PERMISJON_PERIODE_FIELD_ARRAY_NAME] = RenderPermisjonPeriodeFieldArray.transformValues(permisjonsdata);
   }
   const graderingdata = permisjonValues[GRADERING_PERIODE_FIELD_ARRAY_NAME];
-  if (values.tidsromPermisjon.skalGradere && graderingdata) {
+  if (values.tidsromPermisjon?.skalGradere && graderingdata) {
     newValues[GRADERING_PERIODE_FIELD_ARRAY_NAME] = PermisjonGraderingPanel.transformValues(permisjonValues);
   }
 
-  if (!values.tidsromPermisjon.fulltUttak) {
+  if (!values.tidsromPermisjon?.fulltUttak) {
     newValues[PERMISJON_PERIODE_FIELD_ARRAY_NAME] = undefined;
   }
-  if (!values.tidsromPermisjon.skalGradere) {
+  if (!values.tidsromPermisjon?.skalGradere) {
     newValues[GRADERING_PERIODE_FIELD_ARRAY_NAME] = undefined;
   }
-  if (!values.tidsromPermisjon.skalUtsette) {
+  if (!values.tidsromPermisjon?.skalUtsette) {
     newValues[UTSETTELSE_PERIODE_FIELD_ARRAY_NAME] = undefined;
   }
-  if (!values.tidsromPermisjon.skalOvertaKvote) {
+  if (!values.tidsromPermisjon?.skalOvertaKvote) {
     newValues[OVERFORING_PERIODE_FIELD_ARRAY_NAME] = undefined;
   }
-  if (!values.tidsromPermisjon.skalHaOpphold) {
+  if (!values.tidsromPermisjon?.skalHaOpphold) {
     newValues[OPPHOLD_PERIODE_FIELD_ARRAY_NAME] = undefined;
   }
 

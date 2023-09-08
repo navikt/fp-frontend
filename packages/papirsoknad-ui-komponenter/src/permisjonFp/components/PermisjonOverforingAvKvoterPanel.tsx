@@ -49,7 +49,7 @@ const mapArsaker = (
 
 export type FormValues = {
   skalOvertaKvote: boolean;
-  [OVERFORING_PERIODE_FIELD_ARRAY_NAME]: KvoterPerioderFormValues;
+  [OVERFORING_PERIODE_FIELD_ARRAY_NAME]?: KvoterPerioderFormValues;
 };
 
 interface OwnProps {
@@ -60,7 +60,7 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: () => any;
+  buildInitialValues: () => any;
 }
 
 /**
