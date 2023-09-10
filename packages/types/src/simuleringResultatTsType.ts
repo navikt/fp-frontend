@@ -1,10 +1,12 @@
+export type SimuleringPeriode = Readonly<{
+  fom: string;
+  tom: string;
+}>;
+
 export type SimuleringResultatRad = Readonly<{
   feltnavn: string;
   resultaterPerMåned: {
-    periode: {
-      fom: string;
-      tom: string;
-    };
+    periode: SimuleringPeriode;
     beløp: number;
   }[];
 }>;
@@ -19,15 +21,13 @@ export type Mottaker = Readonly<{
   mottakerNummer: string;
   mottakerNavn: string;
   mottakerIdentifikator: string;
-  nesteUtbPeriodeFom: string;
-  nestUtbPeriodeTom: string;
+  nesteUtbPeriode?: SimuleringPeriode;
   resultatPerFagområde: SimuleringResultatPerFagområde[];
   resultatOgMotregningRader: SimuleringResultatRad[];
 }>;
 
 export type DetaljertSimuleringResultat = Readonly<{
-  periodeFom: string;
-  periodeTom: string;
+  periode?: SimuleringPeriode;
   sumEtterbetaling: number;
   sumFeilutbetaling: number;
   sumInntrekk: number;

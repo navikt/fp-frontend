@@ -12,6 +12,7 @@ import {
   Mottaker,
   SimuleringResultatPerFagområde,
   SimuleringResultatRad,
+  SimuleringPeriode,
 } from '@navikt/fp-types';
 
 import CollapseButton from './CollapseButton';
@@ -131,9 +132,9 @@ const getPeriod = (
   mottaker: Mottaker,
 ): { month: string; year: string }[] => {
   const fomDato = avvikBruker(ingenPerioderMedAvvik, mottaker.mottakerType)
-    ? dayjs(mottaker.nestUtbPeriodeTom).subtract(1, 'months').format()
-    : getPeriodeFom(periodeFom, mottaker.nesteUtbPeriodeFom);
-  return getRangeOfMonths(fomDato, mottaker.nestUtbPeriodeTom);
+    ? dayjs(mottaker.nesteUtbetPeriode?.tom).subtract(1, 'months').format()
+    : getPeriodeFom(periodeFom, mottaker.nesteUtbetPeriode?.fom);
+  return getRangeOfMonths(fomDato, mottaker.nesteUtbetPeriode?.tom);
 };
 
 type Details = {
@@ -156,8 +157,8 @@ const AvregningTable: FunctionComponent<OwnProps> = ({
 }) => (
   <>
     {simuleringResultat.perioderPerMottaker.map((mottaker, mottakerIndex) => {
-      const rangeOfMonths = getPeriod(ingenPerioderMedAvvik, simuleringResultat.periodeFom, mottaker);
-      const nesteMåned = mottaker.nestUtbPeriodeTom;
+      const rangeOfMonths = getPeriod(ingenPerioderMedAvvik, simuleringResultat.periode?.fom, mottaker);
+      const nesteMåned = mottaker.nesteUtbPeriode?.tom;
       const visDetaljer = showDetails.find(d => d.id === mottakerIndex);
       const array = [] as ReactElement[];
       return (

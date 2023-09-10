@@ -70,6 +70,7 @@ export type {
   Mottaker,
   SimuleringResultatRad,
   SimuleringResultatPerFagområde,
+  SimuleringPeriode,
 } from './src/simuleringResultatTsType';
 export type {
   default as Soknad,
