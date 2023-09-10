@@ -12,7 +12,6 @@ import {
   Mottaker,
   SimuleringResultatPerFagområde,
   SimuleringResultatRad,
-  SimuleringPeriode,
 } from '@navikt/fp-types';
 
 import CollapseButton from './CollapseButton';
