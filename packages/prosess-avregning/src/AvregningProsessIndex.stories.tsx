@@ -105,7 +105,7 @@ const simuleringResultat = {
             ],
           },
         ],
-        nesteUtbetPeriode: {
+        nesteUtbPeriode: {
           fom: '2019-10-01',
           tom: '2019-10-31',
         },
