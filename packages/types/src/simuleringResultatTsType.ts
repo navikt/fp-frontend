@@ -27,7 +27,7 @@ export type Mottaker = Readonly<{
 }>;
 
 export type DetaljertSimuleringResultat = Readonly<{
-  periode?: SimuleringPeriode;
+  periode: SimuleringPeriode;
   sumEtterbetaling: number;
   sumFeilutbetaling: number;
   sumInntrekk: number;

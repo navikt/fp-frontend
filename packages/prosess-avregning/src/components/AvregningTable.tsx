@@ -156,7 +156,7 @@ const AvregningTable: FunctionComponent<OwnProps> = ({
 }) => (
   <>
     {simuleringResultat.perioderPerMottaker.map((mottaker, mottakerIndex) => {
-      const rangeOfMonths = getPeriod(ingenPerioderMedAvvik, simuleringResultat.periode?.fom, mottaker);
+      const rangeOfMonths = getPeriod(ingenPerioderMedAvvik, simuleringResultat.periode.fom, mottaker);
       const nesteMåned = mottaker.nesteUtbPeriode?.tom;
       const visDetaljer = showDetails.find(d => d.id === mottakerIndex);
       const array = [] as ReactElement[];

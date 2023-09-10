@@ -188,8 +188,8 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
             </>
           )}
           <AvregningSummary
-            fom={simuleringResultatOption.periode?.fom || null}
-            tom={simuleringResultatOption.periode?.tom || null}
+            fom={simuleringResultatOption.periode.fom}
+            tom={simuleringResultatOption.periode.tom}
             feilutbetaling={simuleringResultatOption.sumFeilutbetaling}
             etterbetaling={simuleringResultatOption.sumEtterbetaling}
             inntrekk={simuleringResultatOption.sumInntrekk}
