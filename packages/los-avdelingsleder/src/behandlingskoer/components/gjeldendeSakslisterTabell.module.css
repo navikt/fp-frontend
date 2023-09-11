@@ -24,6 +24,6 @@
 }
 
 .removeImage {
-  margin-top: 5px;
   color: var(--a-red-400);
+  margin-top: 5px;
 }
