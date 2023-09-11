@@ -21,7 +21,7 @@ export type Mottaker = Readonly<{
   mottakerNummer: string;
   mottakerNavn: string;
   mottakerIdentifikator: string;
-  nesteUtbPeriode?: SimuleringPeriode;
+  nesteUtbPeriode: SimuleringPeriode;
   resultatPerFagområde: SimuleringResultatPerFagområde[];
   resultatOgMotregningRader: SimuleringResultatRad[];
 }>;
