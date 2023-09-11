@@ -101,10 +101,15 @@ const createColumns = (
   ));
 };
 
+const lagVisningsNavn = (mottaker: Mottaker, arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId): string => {
+  const agOpplysning = mottaker.mottakerIdentifikator ? arbeidsgiverOpplysninger[mottaker.mottakerIdentifikator] : undefined;
+  return agOpplysning ? `${agOpplysning.navn} (${mottaker.mottakerNummer})` : `${mottaker.mottakerNummer}`;
+};
+
 const tableTitle = (mottaker: Mottaker, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement | null =>
   mottaker.mottakerType === mottakerTyper.ARBG || mottaker.mottakerType === mottakerTyper.ARBGP ? (
     <BodyShort size="small" className={styles.tableTitle}>
-      {`${arbeidsgiverOpplysningerPerId[mottaker.mottakerIdentifikator]} (${mottaker.mottakerNummer})`}
+      {lagVisningsNavn(mottaker, arbeidsgiverOpplysningerPerId)}
     </BodyShort>
   ) : null;
 
