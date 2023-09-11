@@ -80,7 +80,12 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
         />
         <SoknadsfristEsProsessStegInitPanel {...props} rettigheter={rettigheter} />
         <BeregningEsProsessStegInitPanel {...props} rettigheter={rettigheter} />
-        <SimuleringProsessStegInitPanel {...props} fagsak={fagsak} menyData={ekstraProps.allMenyData} arbeidsgiverOpplysningerPerId={emptyArbeidsgiverOpplysningerPerId}/>
+        <SimuleringProsessStegInitPanel
+          {...props}
+          fagsak={fagsak}
+          menyData={ekstraProps.allMenyData}
+          arbeidsgiverOpplysningerPerId={emptyArbeidsgiverOpplysningerPerId}
+        />
         <VedtakEsProsessStegInitPanel
           {...props}
           fagsak={fagsak}
