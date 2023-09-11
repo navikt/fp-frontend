@@ -8,7 +8,7 @@ const { Default } = composeStories(stories);
 describe('<BehandlingPollingTimoutModal>', () => {
   it('skal rendre modal', async () => {
     render(<Default />);
-    expect(await screen.findByText('Din økt er gått ut på tid, trykk Fortsett')).toBeInTheDocument();
+    expect(await screen.findAllByText('Din økt er gått ut på tid, trykk Fortsett')).toHaveLength(2);
     expect(screen.getByText('Fortsett')).toBeInTheDocument();
   });
 });

@@ -43,7 +43,7 @@ describe('<OppgaveHandlingerMenu>', () => {
 
     await userEvent.click(screen.getAllByRole('button')[1]);
 
-    expect(await screen.findByText('Behandlingen er reservert på deg')).toBeInTheDocument();
+    expect(await screen.findAllByText('Behandlingen er reservert på deg')).toHaveLength(2);
   });
 
   it('skal åpne modal for å reservere med dato', async () => {
