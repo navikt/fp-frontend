@@ -1,17 +1,13 @@
 import React, { useState, useRef, FunctionComponent, useCallback, useMemo, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Label } from '@navikt/ds-react';
-import { ChevronRightIcon } from '@navikt/aksel-icons';
+import { ChatElipsisIcon, ChevronRightIcon, MenuHamburgerIcon } from '@navikt/aksel-icons';
 import { getDateAndTime } from '@navikt/ft-utils';
-import { Image, VerticalSpacer, Table, TableRow, TableColumn, DateLabel } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer, Table, TableRow, TableColumn, DateLabel, Tooltip } from '@navikt/ft-ui-komponenter';
 import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
 import { TimeoutError } from '@navikt/fp-rest-api';
 import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
 
-import menuIconBlueUrl from '../../images/ic-menu-18px_blue.svg';
-import menuIconBlackUrl from '../../images/ic-menu-18px_black.svg';
-import bubbletextUrl from '../../images/bubbletext.svg';
-import bubbletextFilledUrl from '../../images/bubbletext_filled.svg';
 import BehandlingPollingTimoutModal from './BehandlingPollingTimoutModal';
 import OppgaveHandlingerMenu from './menu/OppgaveHandlingerMenu';
 import {
@@ -220,28 +216,22 @@ const OppgaverTabell: FunctionComponent<OwnProps> = ({
                 </TableColumn>
                 <TableColumn>
                   {oppgave.status.flyttetReservasjon && (
-                    <Image
-                      src={bubbletextUrl}
-                      srcHover={bubbletextFilledUrl}
-                      alt={intl.formatMessage({ id: 'OppgaverTabell.OverfortReservasjon' })}
-                      tooltip={createTooltip(oppgave.status)}
-                      alignTooltipLeft
-                    />
+                    <Tooltip content={createTooltip(oppgave.status)} alignLeft>
+                      <ChatElipsisIcon className={styles.bubbleIcon} />
+                    </Tooltip>
                   )}
                 </TableColumn>
                 <TableColumn className={oppgave.underBehandling ? styles.noPadding : undefined}>
-                  {!oppgave.underBehandling && <ChevronRightIcon />}
+                  {!oppgave.underBehandling && <ChevronRightIcon className={styles.chevronImage} />}
                   {oppgave.underBehandling && (
                     <div
                       ref={el => {
                         ref.current = { ...ref.current, [oppgave.id]: el };
                       }}
                     >
-                      <Image
+                      <MenuHamburgerIcon
                         className={styles.image}
-                        src={menuIconBlackUrl}
-                        srcHover={menuIconBlueUrl}
-                        alt={intl.formatMessage({ id: 'OppgaverTabell.OppgaveHandlinger' })}
+                        title={intl.formatMessage({ id: 'OppgaverTabell.OppgaveHandlinger' })}
                         onMouseDown={getToggleMenuEvent(oppgave, toggleMenu)}
                         onKeyDown={getToggleMenuEvent(oppgave, toggleMenu)}
                       />

@@ -2,6 +2,7 @@ import React, { FunctionComponent, useMemo, useCallback, useRef, useState } from
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Alert, BodyShort, Button, Popover } from '@navikt/ds-react';
+import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
 
 import { required, hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
 import { TextAreaField, RadioGroupPanel, Form } from '@navikt/ft-form-hooks';
@@ -12,11 +13,9 @@ import {
   Inntektspost,
   ManglendeInntektsmeldingVurdering,
 } from '@navikt/fp-types';
-import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 
-import questionNormalUrl from '../../images/question_normal.svg';
-import questionHoverUrl from '../../images/question_hover.svg';
 import ArbeidsforholdOgInntektRadData from '../../types/arbeidsforholdOgInntekt';
 import ArbeidsforholdInformasjonPanel from '../felles/ArbeidsforholdInformasjonPanel';
 import { useSetDirtyForm } from '../../DirtyFormProvider';
@@ -114,7 +113,7 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
     [arbeidsforholdForRad, radData, oppdaterTabell],
   );
 
-  const imageRef = useRef<HTMLImageElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const [openState, setOpenState] = useState(false);
   const toggleHjelpetekst = useCallback(() => setOpenState(gammelVerdi => !gammelVerdi), []);
 
@@ -145,21 +144,22 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
                 <FlexColumn className={styles.radioHeader}>
                   <FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" />
                 </FlexColumn>
-                <FlexColumn>
-                  <Image
-                    src={questionNormalUrl}
-                    srcHover={questionHoverUrl}
-                    ref={imageRef}
+                <FlexColumn className={styles.image}>
+                  <Button
+                    ref={buttonRef}
+                    type="button"
+                    variant="tertiary"
                     onClick={toggleHjelpetekst}
-                    onKeyDown={toggleHjelpetekst}
-                    tabIndex={0}
-                    alt={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.AltHjelpetekst' })}
-                    className={styles.image}
+                    icon={
+                      <QuestionmarkDiamondIcon
+                        title={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.AltHjelpetekst' })}
+                      />
+                    }
                   />
                   <Popover
                     open={openState}
                     onClose={toggleHjelpetekst}
-                    anchorEl={imageRef.current}
+                    anchorEl={buttonRef.current}
                     className={styles.hjelpetekst}
                   >
                     <Popover.Content className={styles.hjelpetekstInnhold}>

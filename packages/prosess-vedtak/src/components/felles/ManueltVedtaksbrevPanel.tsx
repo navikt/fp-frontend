@@ -50,7 +50,7 @@ const ManueltVedtaksbrevPanel: FunctionComponent<OwnProps> = ({
             </Label>
           </FlexColumn>
           <FlexColumn className={styles.space}>
-            <Detail size="small">{getLanguageFromSprakkode(språkKode)}</Detail>
+            <Detail>{getLanguageFromSprakkode(språkKode)}</Detail>
           </FlexColumn>
           <FlexColumn>
             {!isReadOnly && skalViseLink && (

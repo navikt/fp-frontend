@@ -10,16 +10,19 @@
 
 .addCircleIcon,
 .imageText {
-  display: inline-block;
-  margin-right: 1ex;
-  vertical-align: text-bottom;
+  color: var(--a-blue-500);
+  cursor: pointer;
 }
 
-.addVirksomhet,
-.customLink,
-.removeButton {
+.customLink {
   cursor: pointer;
   display: inline-block;
+}
+
+.removeButton {
+  color: var(--a-red-500);
+  cursor: pointer;
+  margin-top: 4px;
 }
 
 .customLink {

@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, Modal, Label } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, Image } from '@navikt/ft-ui-komponenter';
-
-import innvilgetImageUrl from '../images/innvilget_valgt.svg';
+import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import styles from './MessagesModal.module.css';
 
@@ -31,10 +30,9 @@ const MessagesModal: FunctionComponent<OwnProps> = ({ showModal, closeEvent }) =
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Image
+              <CheckmarkCircleFillIcon
                 className={styles.image}
-                alt={intl.formatMessage({ id: 'MessagesModal.description' })}
-                src={innvilgetImageUrl}
+                title={intl.formatMessage({ id: 'MessagesModal.description' })}
               />
             </FlexColumn>
             <FlexColumn className={styles.text}>

@@ -1,17 +1,16 @@
 import React, { FunctionComponent, useCallback, useState, useRef } from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
-import { Label, BodyShort, Detail, Popover } from '@navikt/ds-react';
+import { Label, BodyShort, Detail, Popover, Button } from '@navikt/ds-react';
 import {
   FlexColumn,
   FlexContainer,
   FlexRow,
-  Image,
   Tooltip,
   VerticalSpacer,
   PeriodLabel,
   DateLabel,
 } from '@navikt/ft-ui-komponenter';
-import { CheckmarkIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
+import { CheckmarkIcon, ExclamationmarkTriangleFillIcon, QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
 
 import { required } from '@navikt/ft-form-validators';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
@@ -25,8 +24,6 @@ import {
 } from '@navikt/fp-types';
 import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
 
-import questionNormalUrl from '../images/question_normal.svg';
-import questionHoverUrl from '../images/question_hover.svg';
 import BekreftetPermisjonStatus from '../kodeverk/BekreftetPermisjonStatus';
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 import ArbeidsforholdBoks from './ArbeidsforholdBoks';
@@ -85,7 +82,7 @@ const ArbeidsforholdField: FunctionComponent<OwnProps> = ({
     sorterteArbeidsforhold.filter(a => a.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent).length > 1;
   const arbeidsgiverOpplysinger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
 
-  const imageRef = useRef<HTMLImageElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const [openState, setOpenState] = useState(false);
   const toggleHjelpetekst = useCallback(() => setOpenState(gammelVerdi => !gammelVerdi), []);
 
@@ -113,7 +110,7 @@ const ArbeidsforholdField: FunctionComponent<OwnProps> = ({
                 <FlexColumn className={styles.firstCol}>
                   <Label size="small">{arbeidsgiverOpplysinger.navn}</Label>
                   {arbeidsforhold.arbeidsgiverIdent && (
-                    <Detail size="small">
+                    <Detail>
                       (
                       {arbeidsgiverOpplysinger.erPrivatPerson && arbeidsgiverOpplysinger.fødselsdato ? (
                         <DateLabel dateString={arbeidsgiverOpplysinger.fødselsdato} />
@@ -245,21 +242,22 @@ const ArbeidsforholdField: FunctionComponent<OwnProps> = ({
                     <FlexColumn>
                       <FormattedMessage id="ArbeidsforholdFieldArray.SkalArbeidsforholdetTasMed" />
                     </FlexColumn>
-                    <FlexColumn>
-                      <Image
-                        src={questionNormalUrl}
-                        srcHover={questionHoverUrl}
-                        ref={imageRef}
+                    <FlexColumn className={styles.image}>
+                      <Button
+                        ref={buttonRef}
+                        type="button"
+                        variant="tertiary"
                         onClick={toggleHjelpetekst}
-                        onKeyDown={toggleHjelpetekst}
-                        tabIndex={0}
-                        alt={intl.formatMessage({ id: 'ArbeidsforholdFieldArray.AltHjelpetekst' })}
-                        className={styles.image}
+                        icon={
+                          <QuestionmarkDiamondIcon
+                            title={intl.formatMessage({ id: 'ArbeidsforholdFieldArray.AltHjelpetekst' })}
+                          />
+                        }
                       />
                       <Popover
                         open={openState}
                         onClose={toggleHjelpetekst}
-                        anchorEl={imageRef.current}
+                        anchorEl={buttonRef.current}
                         className={styles.hjelpetekst}
                       >
                         <Popover.Content className={styles.hjelpetekstInnhold}>

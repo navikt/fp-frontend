@@ -1,12 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 import { Modal as NavModal, Button, BodyShort, Label } from '@navikt/ds-react';
 import { getDateAndTime } from '@navikt/ft-utils';
-import { FlexColumn, FlexContainer, FlexRow, Image } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { Oppgave } from '@navikt/fp-los-felles';
-
-import innvilgetImageUrl from '../../../../images/innvilget_valgt.svg';
 
 import styles from './oppgaveReservasjonForlengetModal.module.css';
 
@@ -32,10 +31,9 @@ const OppgaveReservasjonForlengetModal: FunctionComponent<OwnProps> = ({ oppgave
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Image
+              <CheckmarkCircleFillIcon
                 className={styles.image}
-                alt={intl.formatMessage({ id: 'OppgaveReservasjonForlengetModal.Reservert' })}
-                src={innvilgetImageUrl}
+                title={intl.formatMessage({ id: 'OppgaveReservasjonForlengetModal.Reservert' })}
               />
             </FlexColumn>
             <FlexColumn>

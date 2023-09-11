@@ -156,12 +156,12 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
           </FlexRow>
           <FlexRow>
             <FlexColumn>
-              <Detail size="small">{inntektsmelding.kontaktpersonNavn}</Detail>
+              <Detail>{inntektsmelding.kontaktpersonNavn}</Detail>
             </FlexColumn>
           </FlexRow>
           <FlexRow>
             <FlexColumn>
-              <Detail size="small">
+              <Detail>
                 <FormattedMessage
                   id="InntektsmeldingOpplysningerPanel.Tlf"
                   values={{ nr: inntektsmelding.kontaktpersonNummer }}

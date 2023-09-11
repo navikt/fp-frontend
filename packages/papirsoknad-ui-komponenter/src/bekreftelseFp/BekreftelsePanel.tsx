@@ -21,7 +21,7 @@ const BekreftelsePanel: FunctionComponent<OwnProps> = ({ readOnly, annenForelder
   <BorderBox>
     <Heading size="small">{intl.formatMessage({ id: 'Registrering.TheOtherParent.Confirmation' })}</Heading>
     <VerticalSpacer sixteenPx />
-    <Detail size="small">{intl.formatMessage({ id: 'Registrering.TheOtherParent.OtherParentKnowPeriods' })}</Detail>
+    <Detail>{intl.formatMessage({ id: 'Registrering.TheOtherParent.OtherParentKnowPeriods' })}</Detail>
     <VerticalSpacer eightPx />
     <RadioGroupPanel
       name="annenForelderInformert"

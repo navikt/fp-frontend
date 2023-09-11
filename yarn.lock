@@ -2597,16 +2597,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-icons@npm:3.4.3":
-  version: 3.4.3
-  resolution: "@navikt/ds-icons@npm:3.4.3::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-icons%2F3.4.3%2Feaa8fc38f6d184806d3405a5efbc9d137c2b8d27"
-  peerDependencies:
-    "@types/react": ^17.0.30 || ^18.0.0
-    react: ^17.0.0 || ^18.0.0
-  checksum: 3b5f917c65ea4ca6296075dcc5b91e4c2ebdd8146731fc58ab6ea2d7fcad7f6dfa8b63d550717c862a0dc889c6dc1a7dd04bf8ac84b6b88c6d75b94d4127f199
-  languageName: node
-  linkType: hard
-
 "@navikt/ds-react-internal@npm:3.4.3, @navikt/ds-react-internal@npm:^3.4.3":
   version: 3.4.3
   resolution: "@navikt/ds-react-internal@npm:3.4.3::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react-internal%2F3.4.3%2Fb085cf08ed4b0f450c55ec394f08077739e4fccb"
@@ -3317,7 +3307,6 @@ __metadata:
     "@navikt/aksel-icons": 5.2.1
     "@navikt/ds-css": 5.2.1
     "@navikt/ds-css-internal": ^3.4.3
-    "@navikt/ds-icons": 3.4.3
     "@navikt/ds-react": 5.2.1
     "@navikt/ds-react-internal": ^3.4.3
     "@navikt/fp-fakta-adopsjon": 1.0.0
@@ -3511,6 +3500,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-los-avdelingsleder@workspace:packages/los-avdelingsleder"
   dependencies:
+    "@navikt/aksel-icons": 5.2.1
     "@navikt/ds-css": 5.2.1
     "@navikt/ds-react": 5.2.1
     "@navikt/fp-kodeverk": 1.0.0
@@ -3672,6 +3662,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-papirsoknad-ui-komponenter@workspace:packages/papirsoknad-ui-komponenter"
   dependencies:
+    "@navikt/aksel-icons": 5.2.1
     "@navikt/ds-css": 5.2.1
     "@navikt/ds-react": 5.2.1
     "@navikt/fp-kodeverk": 1.0.0
@@ -4723,6 +4714,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meldinger@workspace:packages/sak-meldinger"
   dependencies:
+    "@navikt/aksel-icons": 5.2.1
     "@navikt/ds-css": 5.2.1
     "@navikt/ds-react": 5.2.1
     "@navikt/fp-kodeverk": 1.0.0
@@ -4819,6 +4811,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meny-henlegg@workspace:packages/sak-meny-henlegg"
   dependencies:
+    "@navikt/aksel-icons": 5.2.1
     "@navikt/ds-css": 5.2.1
     "@navikt/ds-react": 5.2.1
     "@navikt/fp-kodeverk": 1.0.0
@@ -4951,6 +4944,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-sok@workspace:packages/sak-sok"
   dependencies:
+    "@navikt/aksel-icons": 5.2.1
     "@navikt/ds-css": 5.2.1
     "@navikt/ds-react": 5.2.1
     "@navikt/fp-kodeverk": 1.0.0

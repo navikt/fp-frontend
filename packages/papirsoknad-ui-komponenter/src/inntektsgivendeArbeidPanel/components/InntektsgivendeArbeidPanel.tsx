@@ -32,12 +32,12 @@ const InntektsgivendeArbeidPanel: FunctionComponent<OwnProps> & StaticFunctions 
       <FormattedMessage id="Registrering.InntektsgivendeArbeid.ArbeidINorge.Title" />
     </Heading>
     <VerticalSpacer eightPx />
-    <Detail size="small">
+    <Detail>
       <FormattedMessage id="Registrering.InntektsgivendeArbeid.ArbeidINorge.SkalIkkeRegistrereArbeidsforhold" />
     </Detail>
     <VerticalSpacer sixteenPx />
     <VerticalSpacer sixteenPx />
-    <Detail size="small">
+    <Detail>
       <FormattedMessage id="Registrering.InntektsgivendeArbeid.ArbeidIUtlandet.Title" />
     </Detail>
     <VerticalSpacer eightPx />

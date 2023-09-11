@@ -96,12 +96,13 @@ const FlyttReservasjonModal: FunctionComponent<OwnProps> = ({
       aria-label={intl.formatMessage({ id: 'FlyttReservasjonModal.FlyttReservasjon' })}
       onClose={closeModal}
     >
+      <NavModal.Header>
+        <Label size="small">
+          <FormattedMessage id="FlyttReservasjonModal.FlyttReservasjon" />
+        </Label>
+      </NavModal.Header>
       <NavModal.Body>
         <Form<SøkFormValues> formMethods={søkFormMethods} onSubmit={values => finnSaksbehandler(values.brukerIdent)}>
-          <Label size="small">
-            <FormattedMessage id="FlyttReservasjonModal.FlyttReservasjon" />
-          </Label>
-          <VerticalSpacer eightPx />
           <FlexContainer>
             <FlexRow>
               <FlexColumn>
@@ -147,31 +148,19 @@ const FlyttReservasjonModal: FunctionComponent<OwnProps> = ({
             maxLength={500}
           />
           <VerticalSpacer sixteenPx />
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <Button
-                  className={styles.submitButton}
-                  size="small"
-                  variant="primary"
-                  disabled={!saksbehandler || !begrunnelseValue || begrunnelseValue.length < 3}
-                >
-                  <FormattedMessage id="FlyttReservasjonModal.Ok" />
-                </Button>
-              </FlexColumn>
-              <FlexColumn>
-                <Button
-                  className={styles.cancelButton}
-                  size="small"
-                  variant="primary"
-                  onClick={closeModal}
-                  type="button"
-                >
-                  <FormattedMessage id="FlyttReservasjonModal.Avbryt" />
-                </Button>
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
+          <NavModal.Footer>
+            <Button
+              className={styles.submitButton}
+              size="small"
+              variant="primary"
+              disabled={!saksbehandler || !begrunnelseValue || begrunnelseValue.length < 3}
+            >
+              <FormattedMessage id="FlyttReservasjonModal.Ok" />
+            </Button>
+            <Button className={styles.cancelButton} size="small" variant="secondary" onClick={closeModal} type="button">
+              <FormattedMessage id="FlyttReservasjonModal.Avbryt" />
+            </Button>
+          </NavModal.Footer>
         </Form>
       </NavModal.Body>
     </NavModal>

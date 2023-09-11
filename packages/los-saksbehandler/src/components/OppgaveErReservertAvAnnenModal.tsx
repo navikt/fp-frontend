@@ -1,12 +1,11 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { Button, Label, Modal as NavModal } from '@navikt/ds-react';
+import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { getDateAndTime } from '@navikt/ft-utils';
-import { FlexColumn, FlexContainer, FlexRow, Image } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
-
-import advarselImageUrl from '../images/advarsel.svg';
 
 import styles from './oppgaveErReservertAvAnnenModal.module.css';
 
@@ -39,10 +38,9 @@ const OppgaveErReservertAvAnnenModal: FunctionComponent<OwnProps> = ({
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Image
+              <ExclamationmarkTriangleFillIcon
                 className={styles.image}
-                alt={intl.formatMessage({ id: 'OppgaveErReservertAvAnnenModal.ReservertAvEnkel' })}
-                src={advarselImageUrl}
+                title={intl.formatMessage({ id: 'OppgaveErReservertAvAnnenModal.ReservertAvEnkel' })}
               />
             </FlexColumn>
             <FlexColumn className={styles.text}>

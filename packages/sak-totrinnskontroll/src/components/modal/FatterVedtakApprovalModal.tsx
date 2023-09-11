@@ -1,12 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Modal, Button, Label } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, Image } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { behandlingType as BehandlingType, behandlingResultatType, behandlingStatus } from '@navikt/fp-kodeverk';
 import { Behandling } from '@navikt/ft-types';
-
-import innvilgetImageUrl from '../../images/innvilget_valgt.svg';
 
 import styles from './fatterVedtakApprovalModal.module.css';
 
@@ -137,11 +136,7 @@ const FatterVedtakApprovalModal: FunctionComponent<OwnProps> = ({
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Image
-                className={styles.image}
-                alt={intl.formatMessage({ id: altImgTextCode })}
-                src={innvilgetImageUrl}
-              />
+              <CheckmarkCircleFillIcon className={styles.image} title={intl.formatMessage({ id: altImgTextCode })} />
             </FlexColumn>
             <FlexColumn>
               <Label size="small">

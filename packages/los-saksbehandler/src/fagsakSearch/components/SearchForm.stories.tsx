@@ -20,12 +20,14 @@ const Template: StoryFn<{
   kanSaksbehandle: boolean;
   searchStarted: boolean;
   onSubmit: (values: { searchString: string; skalReservere: boolean }) => void;
-}> = ({ kanSaksbehandle, searchStarted, onSubmit }) => (
+  feilmelding?: string;
+}> = ({ kanSaksbehandle, searchStarted, onSubmit, feilmelding }) => (
   <SearchForm
     onSubmit={onSubmit}
     searchStarted={searchStarted}
     resetSearch={action('button-click')}
     kanSaksbehandle={kanSaksbehandle}
+    searchResultAccessDenied={feilmelding ? { feilmelding } : undefined}
   />
 );
 
@@ -48,4 +50,12 @@ SøkeskjemaNårSøkPågår.args = {
   onSubmit: action('button-click'),
   kanSaksbehandle: true,
   searchStarted: true,
+};
+
+export const SøkeskjemaMedFeilmelding = Template.bind({});
+SøkeskjemaMedFeilmelding.args = {
+  onSubmit: action('button-click'),
+  kanSaksbehandle: true,
+  searchStarted: true,
+  feilmelding: 'Dette er en feilmelding',
 };

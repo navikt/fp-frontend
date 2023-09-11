@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { Detail } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, Image } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 
-import advarselImageUrl from '../images/advarsel-sirkel-fyll.svg';
 import Driftsmelding from '../typer/driftsmeldingTsType';
 
 import styles from './driftsmeldingPanel.module.css';
@@ -27,12 +27,10 @@ const DriftsmeldingPanel: FunctionComponent<OwnProps> = ({ driftsmeldinger }) =>
         <FlexContainer key={message.id}>
           <FlexRow>
             <FlexColumn>
-              <Image className={styles.driftsInfo} src={advarselImageUrl} />
+              <ExclamationmarkTriangleFillIcon className={styles.driftsInfo} />
             </FlexColumn>
             <FlexColumn>
-              <Detail size="small" className={styles.wordWrap}>
-                {`${message.melding}`}
-              </Detail>
+              <Detail className={styles.wordWrap}>{`${message.melding}`}</Detail>
             </FlexColumn>
           </FlexRow>
         </FlexContainer>

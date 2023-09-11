@@ -1,11 +1,33 @@
-.image {
-  background-size: contain;
-  border-radius: 50%;
-  flex-shrink: 0;
+.imageSaksbehandler {
+  color: var(--a-purple-400);
   height: 45px;
-  margin-top: 2px;
   width: 45px;
 }
+.imageMann {
+  color: var(--a-blue-300);
+  height: 45px;
+  width: 45px;
+}
+.imageKvinne {
+  color: var(--a-red-300);
+  height: 45px;
+  width: 45px;
+}
+.imageBeslutter {
+  color: var(--a-green-600);
+  height: 45px;
+  width: 45px;
+}
+.imageArbeidsgiver {
+  color: var(--a-lightblue-600);
+  height: 45px;
+  width: 45px;
+}
+.imageVedtak {
+  height: 45px;
+  width: 45px;
+}
+
 .margin {
   margin-bottom: 15px;
   padding-right: 15px;

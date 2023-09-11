@@ -83,7 +83,7 @@ const FormkravKlageForm: FunctionComponent<OwnProps> = ({
     <>
       <Heading size="small">{intl.formatMessage({ id: 'Klage.Formkrav.Title' })}</Heading>
       <VerticalSpacer fourPx />
-      <Detail size="small">{intl.formatMessage({ id: getLovHjemmeler(aksjonspunktCode) })}</Detail>
+      <Detail>{intl.formatMessage({ id: getLovHjemmeler(aksjonspunktCode) })}</Detail>
       <VerticalSpacer fourPx />
       <AksjonspunktHelpTextTemp isAksjonspunktOpen={!readOnlySubmitButton}>
         {[<FormattedMessage id="Klage.Formkrav.HelpText" key={aksjonspunktCode} />]}

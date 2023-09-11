@@ -47,7 +47,7 @@ const MannAdoptererAleneFaktaForm: FunctionComponent<OwnProps> & StaticFunctions
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]}
     >
       <div className={styles.container}>
-        <Detail size="small">
+        <Detail>
           <FormattedMessage id="MannAdoptererAleneFaktaForm.Opplysninger" />
         </Detail>
         <VerticalSpacer fourPx />

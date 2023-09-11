@@ -1,19 +1,16 @@
 import React, { FunctionComponent, useState, useCallback, useMemo } from 'react';
 import { Label, BodyShort } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
-import { Table, TableRow, TableColumn, Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Table, TableRow, TableColumn, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { getDateAndTime } from '@navikt/ft-utils';
+import { PersonGroupIcon, CalendarIcon, XMarkIcon } from '@navikt/aksel-icons';
 
 import { AlleKodeverk } from '@navikt/fp-types';
 import { OppgaveReservasjonEndringDatoModal, FlyttReservasjonModal } from '@navikt/fp-los-felles';
 import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
-import removeIcon from '../../images/remove.svg';
-import gruppeHoverUrl from '../../images/gruppe_hover.svg';
-import gruppeUrl from '../../images/gruppe.svg';
 
 import { restApiHooks, RestApiPathsKeys } from '../../data/fplosRestApi';
 import Reservasjon from '../../typer/reservasjonTsType';
-import CalendarToggleButton from './CalendarToggleButton';
 
 import styles from './reservasjonerTabell.module.css';
 
@@ -113,20 +110,13 @@ const ReservasjonerTabell: FunctionComponent<OwnProps> = ({
                 />
               </TableColumn>
               <TableColumn>
-                <CalendarToggleButton
-                  toggleShowCalendar={() => showReservasjonEndringDato(reservasjon)}
-                  className={styles.calendarToggleButton}
-                />
+                <CalendarIcon className={styles.calendarIcon} onClick={() => showReservasjonEndringDato(reservasjon)} />
               </TableColumn>
               <TableColumn>
-                <Image src={gruppeUrl} srcHover={gruppeHoverUrl} onMouseDown={() => showFlytteModal(reservasjon)} />
+                <PersonGroupIcon className={styles.flyttIcon} onClick={() => showFlytteModal(reservasjon)} />
               </TableColumn>
               <TableColumn>
-                <Image
-                  src={removeIcon}
-                  className={styles.removeImage}
-                  onMouseDown={() => opphevReservasjon(reservasjon.oppgaveId)}
-                />
+                <XMarkIcon className={styles.removeIcon} onClick={() => opphevReservasjon(reservasjon.oppgaveId)} />
               </TableColumn>
             </TableRow>
           ))}

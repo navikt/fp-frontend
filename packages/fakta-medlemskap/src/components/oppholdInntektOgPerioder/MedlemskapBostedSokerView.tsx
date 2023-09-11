@@ -43,12 +43,12 @@ export const MedlemskapBostedSokerView: FunctionComponent<OwnProps> = ({
       <FlexContainer>
         <FlexRow spaceBetween>
           <FlexColumn>
-            <Detail size="small">{sokerTypeText}</Detail>
+            <Detail>{sokerTypeText}</Detail>
             <Label size="small">{personopplysninger.navn ? personopplysninger.navn : '-'}</Label>
             <BodyShort size="small" className={styles.paddingBottom}>
               {getAdresse(personopplysninger.adresser)}
             </BodyShort>
-            <Detail size="small">
+            <Detail>
               <FormattedMessage id="BostedSokerView.ForeignAddresse" />
             </Detail>
             <BodyShort size="small">{getUtlandsadresse(personopplysninger.adresser)}</BodyShort>

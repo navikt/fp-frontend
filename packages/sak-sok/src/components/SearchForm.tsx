@@ -2,12 +2,12 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Button, BodyShort } from '@navikt/ds-react';
+import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 
-import { VerticalSpacer, Image, FlexContainer, FlexRow, FlexColumn } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer, FlexContainer, FlexRow, FlexColumn } from '@navikt/ft-ui-komponenter';
 import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validators';
 import { Form, InputField } from '@navikt/ft-form-hooks';
 import { FagsakEnkel } from '@navikt/fp-types';
-import advarselIcon from '../images/advarsel.svg';
 
 import styles from './searchForm.module.css';
 
@@ -65,8 +65,18 @@ const SearchForm: FunctionComponent<OwnProps> = ({ searchStarted, searchResultAc
       {searchResultAccessDenied && (
         <>
           <VerticalSpacer fourPx />
-          <Image className={styles.advarselIcon} src={advarselIcon} />
-          <FormattedMessage id={searchResultAccessDenied.feilmelding} />
+          <FlexContainer>
+            <FlexRow>
+              <FlexColumn>
+                <ExclamationmarkTriangleFillIcon className={styles.advarselIcon} />
+              </FlexColumn>
+              <FlexColumn className={styles.feilmelding}>
+                <BodyShort size="small">
+                  <FormattedMessage id={searchResultAccessDenied.feilmelding} />
+                </BodyShort>
+              </FlexColumn>
+            </FlexRow>
+          </FlexContainer>
         </>
       )}
     </Form>

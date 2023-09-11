@@ -145,7 +145,7 @@ const DatoSorteringValg: FunctionComponent<OwnProps> = ({
       <VerticalSpacer eightPx />
       <div className={styles.arrowBoxWidth}>
         <ArrowBox>
-          <Detail size="small">
+          <Detail>
             <FormattedMessage id="SorteringVelger.FiltrerPaTidsintervall" />
           </Detail>
 
@@ -161,13 +161,13 @@ const DatoSorteringValg: FunctionComponent<OwnProps> = ({
                     onChange={lagreFraDebounce}
                   />
                   {(fraVerdi || fraVerdi === 0) && (
-                    <Detail size="small">
+                    <Detail>
                       <DateLabel dateString={finnDato(fraVerdi)} />
                     </Detail>
                   )}
                 </FlexColumn>
                 <FlexColumn>
-                  <Detail size="small" className={styles.dager}>
+                  <Detail className={styles.dager}>
                     <FormattedMessage id="SorteringVelger.DagerMedBindestrek" />
                   </Detail>
                 </FlexColumn>
@@ -180,13 +180,13 @@ const DatoSorteringValg: FunctionComponent<OwnProps> = ({
                     onChange={lagreTilDebounce}
                   />
                   {(tilVerdi || tilVerdi === 0) && (
-                    <Detail size="small">
+                    <Detail>
                       <DateLabel dateString={finnDato(tilVerdi)} />
                     </Detail>
                   )}
                 </FlexColumn>
                 <FlexColumn>
-                  <Detail size="small" className={styles.dagerMedBindestrek}>
+                  <Detail className={styles.dagerMedBindestrek}>
                     <FormattedMessage id="SorteringVelger.Dager" />
                   </Detail>
                 </FlexColumn>
@@ -203,7 +203,7 @@ const DatoSorteringValg: FunctionComponent<OwnProps> = ({
                 onChange={lagreFomDatoDebounce}
               />
               <VerticalSpacer fourPx />
-              <Detail size="small">
+              <Detail>
                 <FormattedMessage id="SorteringVelger.Bindestrek" />
               </Detail>
               <VerticalSpacer fourPx />

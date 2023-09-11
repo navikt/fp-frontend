@@ -1,10 +1,12 @@
-.icon {
-  float: left;
-  margin-left: 5px;
+.kvinneIcon {
+  color: var(--a-red-300);
+  height: 30px;
   margin-top: 7px;
+  width: 30px;
 }
-
-.infoPlaceholder {
-  display: flex;
-  margin-left: 50px;
+.MannIcon {
+  color: var(--a-blue-400);
+  height: 30px;
+  margin-top: 7px;
+  width: 30px;
 }

@@ -35,7 +35,7 @@ const VedtakInnvilgetRevurderingPanel: FunctionComponent<OwnProps> = ({
       <FlexContainer>
         <FlexRow>
           <FlexColumn>
-            <Detail size="small">
+            <Detail>
               <FormattedMessage id="VedtakForm.beregnetTilkjentYtelse" />
             </Detail>
             <Label size="small">
@@ -43,7 +43,7 @@ const VedtakInnvilgetRevurderingPanel: FunctionComponent<OwnProps> = ({
             </Label>
           </FlexColumn>
           <FlexColumn>
-            <Detail size="small">
+            <Detail>
               <FormattedMessage id="VedtakForm.AntallBarn" />
             </Detail>
             <Label size="small">{resultatstruktur.antallBarn}</Label>

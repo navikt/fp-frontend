@@ -169,20 +169,18 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
               <FlexContainer>
                 <FlexRow>
                   <FlexColumn className={styles.col}>
-                    <Detail size="small">
-                      {intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.MottattDato' })}
-                    </Detail>
+                    <Detail>{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.MottattDato' })}</Detail>
                     <span className="typo-normal">
                       {soknad.mottattDato && <DateLabel dateString={soknad.mottattDato} />}
                     </span>
                   </FlexColumn>
                   <FlexColumn className={styles.col}>
-                    {textCode && <Detail size="small">{intl.formatMessage({ id: textCode })}</Detail>}
+                    {textCode && <Detail>{intl.formatMessage({ id: textCode })}</Detail>}
                     <span className="typo-normal">{dato && <DateLabel dateString={dato} />}</span>
                   </FlexColumn>
                 </FlexRow>
                 <VerticalSpacer twentyPx />
-                <Detail size="small">
+                <Detail>
                   {intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.ExplanationFromApplication' })}
                 </Detail>
                 <span className="typo-normal">{soknad.begrunnelseForSenInnsending || '-'}</span>

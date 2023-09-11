@@ -12,46 +12,46 @@ interface OwnPropsResultat {
 
 const ResultatEnkel: FunctionComponent<OwnPropsResultat> = ({ ankeVurderingResultat }): ReactElement => (
   <>
-    <Detail size="small">
+    <Detail>
       <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Stadfest" />
     </Detail>
     <VerticalSpacer sixteenPx />
     <Label size="small">
       <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" />
     </Label>
-    <Detail size="small">{ankeVurderingResultat?.begrunnelse}</Detail>
+    <Detail>{ankeVurderingResultat?.begrunnelse}</Detail>
   </>
 );
 
 const ResultatOpphev: FunctionComponent<OwnPropsResultat> = ({ ankeVurderingResultat }): ReactElement => (
   <>
-    <Detail size="small">
+    <Detail>
       <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Oppheves" />
     </Detail>
     <VerticalSpacer sixteenPx />
     <Label size="small">
       <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" />
     </Label>
-    <Detail size="small">{ankeVurderingResultat?.begrunnelse}</Detail>
+    <Detail>{ankeVurderingResultat?.begrunnelse}</Detail>
   </>
 );
 
 const ResultatHjemsend: FunctionComponent<OwnPropsResultat> = ({ ankeVurderingResultat }): ReactElement => (
   <>
-    <Detail size="small">
+    <Detail>
       <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Hjemsendes" />
     </Detail>
     <VerticalSpacer sixteenPx />
     <Label size="small">
       <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" />
     </Label>
-    <Detail size="small">{ankeVurderingResultat?.begrunnelse}</Detail>
+    <Detail>{ankeVurderingResultat?.begrunnelse}</Detail>
   </>
 );
 
 const ResultatAvvise: FunctionComponent<OwnPropsResultat> = ({ ankeVurderingResultat }): ReactElement => (
   <>
-    <Detail size="small">
+    <Detail>
       {ankeVurderingResultat?.påAnketKlageBehandlingUuid && (
         <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Avvises" />
       )}
@@ -66,28 +66,28 @@ const ResultatAvvise: FunctionComponent<OwnPropsResultat> = ({ ankeVurderingResu
     <ul>
       {ankeVurderingResultat?.erAnkerIkkePart && (
         <li>
-          <Detail size="small">
+          <Detail>
             <FormattedMessage id="Ankebehandling.Avvisning.IkkePart" />
           </Detail>
         </li>
       )}
       {ankeVurderingResultat?.erIkkeKonkret && (
         <li>
-          <Detail size="small">
+          <Detail>
             <FormattedMessage id="Ankebehandling.Avvisning.IkkeKonkret" />
           </Detail>
         </li>
       )}
       {ankeVurderingResultat?.erFristIkkeOverholdt && (
         <li>
-          <Detail size="small">
+          <Detail>
             <FormattedMessage id="Ankebehandling.Avvisning.IkkeFrist" />
           </Detail>
         </li>
       )}
       {ankeVurderingResultat?.erIkkeSignert && (
         <li>
-          <Detail size="small">
+          <Detail>
             <FormattedMessage id="Ankebehandling.Avvisning.IkkeSignert" />
           </Detail>
         </li>
@@ -96,7 +96,7 @@ const ResultatAvvise: FunctionComponent<OwnPropsResultat> = ({ ankeVurderingResu
     <Label size="small">
       <FormattedMessage id="Ankebehandling.Realitetsbehandles" />
     </Label>
-    <Detail size="small">
+    <Detail>
       <FormattedMessage
         id={
           ankeVurderingResultat?.erSubsidiartRealitetsbehandles
@@ -109,7 +109,7 @@ const ResultatAvvise: FunctionComponent<OwnPropsResultat> = ({ ankeVurderingResu
     <Label size="small">
       <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" />
     </Label>
-    <Detail size="small">{ankeVurderingResultat?.begrunnelse}</Detail>
+    <Detail>{ankeVurderingResultat?.begrunnelse}</Detail>
   </>
 );
 
@@ -131,16 +131,16 @@ const ResultatOmgjores: FunctionComponent<OwnPropsResultat & { alleKodeverk: All
   alleKodeverk,
 }): ReactElement => (
   <>
-    <Detail size="small">
+    <Detail>
       <FormattedMessage id={hentSprakKode(ankeVurderingResultat?.ankeVurderingOmgjoer)} />
     </Detail>
     <VerticalSpacer sixteenPx />
     {ankeVurderingResultat?.ankeOmgjoerArsak && (
       <>
-        <Detail size="small">
+        <Detail>
           <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Arsak" />
         </Detail>
-        <Detail size="small">
+        <Detail>
           {getKodeverknavnFn(alleKodeverk)(ankeVurderingResultat.ankeOmgjoerArsak, KodeverkType.ANKE_OMGJOER_AARSAK)}
         </Detail>
         <VerticalSpacer sixteenPx />
@@ -149,7 +149,7 @@ const ResultatOmgjores: FunctionComponent<OwnPropsResultat & { alleKodeverk: All
     <Label size="small">
       <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" />
     </Label>
-    <Detail size="small">{ankeVurderingResultat?.begrunnelse}</Detail>
+    <Detail>{ankeVurderingResultat?.begrunnelse}</Detail>
   </>
 );
 

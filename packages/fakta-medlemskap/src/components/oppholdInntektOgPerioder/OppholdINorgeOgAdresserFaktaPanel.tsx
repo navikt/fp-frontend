@@ -132,13 +132,13 @@ const OppholdINorgeOgAdresserFaktaPanel: FunctionComponent<OwnProps> & StaticFun
               withoutBorder
               title={intl.formatMessage({ id: 'OppholdINorgeOgAdresserFaktaPanel.OppholdINorge' })}
             >
-              <Detail size="small">
+              <Detail>
                 <FormattedMessage id="OppholdINorgeOgAdresserFaktaPanel.StayingInNorway" />
               </Detail>
               <VerticalSpacer fourPx />
               {sjekkOpphold(soknad?.oppgittTilknytning?.oppholdNorgeNa, intl)}
               <VerticalSpacer sixteenPx />
-              <Detail size="small">
+              <Detail>
                 <FormattedMessage id="OppholdINorgeOgAdresserFaktaPanel.StayingInNorwayLast12" />
               </Detail>
               <VerticalSpacer fourPx />
@@ -146,7 +146,7 @@ const OppholdINorgeOgAdresserFaktaPanel: FunctionComponent<OwnProps> & StaticFun
               <VerticalSpacer eightPx />
               {lagOppholdIUtland(soknad?.oppgittTilknytning?.utlandsoppholdFor)}
               <VerticalSpacer sixteenPx />
-              <Detail size="small">
+              <Detail>
                 <FormattedMessage id="OppholdINorgeOgAdresserFaktaPanel.StayingInNorwayNext12" />
               </Detail>
               <VerticalSpacer fourPx />

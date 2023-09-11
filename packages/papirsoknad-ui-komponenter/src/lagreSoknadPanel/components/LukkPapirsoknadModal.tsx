@@ -1,10 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
+import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { Label, BodyShort, Button, Modal } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-
-import advarselImageUrl from '../../images/advarsel.svg';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import styles from './lukkPapirsoknadModal.module.css';
 
@@ -32,10 +31,9 @@ const LukkPapirSoknadModal: FunctionComponent<OwnProps> = ({ showModal, handleSu
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Image
+              <ExclamationmarkTriangleFillIcon
                 className={styles.image}
-                alt={intl.formatMessage({ id: 'ModalLukkPapirSoknad.Avslutt' })}
-                src={advarselImageUrl}
+                title={intl.formatMessage({ id: 'ModalLukkPapirSoknad.Avslutt' })}
               />
             </FlexColumn>
             <FlexColumn>
