@@ -1,0 +1,4 @@
+import{j as r}from"./jsx-runtime-9c4ae004.js";import{o as t,s as o,D as a,e as l}from"./nb_NO-92d94ea2.js";import{E as d}from"./ExclamationmarkTriangleFill-750622c9.js";const c="_container_upajp_1",p="_wordWrap_upajp_15",m="_driftsInfo_upajp_19",e={container:c,wordWrap:p,driftsInfo:m},i=({driftsmeldinger:n})=>n===void 0||n.length===0?null:r.jsx("div",{className:e.container,children:n.map(s=>r.jsx(t,{children:r.jsxs(o,{children:[r.jsx(a,{children:r.jsx(d,{className:e.driftsInfo})}),r.jsx(a,{children:r.jsx(l,{className:e.wordWrap,children:`${s.melding}`})})]})},s.id))}),j=i;try{i.displayName="DriftsmeldingPanel",i.__docgenInfo={description:`DriftsmeldingPanel
+
+Definerer hvordan driftsmeldinger vises.`,displayName:"DriftsmeldingPanel",props:{driftsmeldinger:{defaultValue:null,description:"",name:"driftsmeldinger",required:!0,type:{name:"Readonly<{ id: string; melding: string; }>[]"}}}}}catch{}export{j as D};
+//# sourceMappingURL=DriftsmeldingPanel-55072db3.js.map
