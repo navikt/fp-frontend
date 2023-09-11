@@ -131,9 +131,9 @@ const getPeriod = (
   mottaker: Mottaker,
 ): { month: string; year: string }[] => {
   const fomDato = avvikBruker(ingenPerioderMedAvvik, mottaker.mottakerType)
-    ? dayjs(mottaker.nesteUtbPeriode?.tom).subtract(1, 'months').format()
-    : getPeriodeFom(periodeFom, mottaker.nesteUtbPeriode?.fom);
-  return getRangeOfMonths(fomDato, mottaker.nesteUtbPeriode?.tom);
+    ? dayjs(mottaker.nesteUtbPeriode.tom).subtract(1, 'months').format()
+    : getPeriodeFom(periodeFom, mottaker.nesteUtbPeriode.fom);
+  return getRangeOfMonths(fomDato, mottaker.nesteUtbPeriode.tom);
 };
 
 type Details = {
@@ -157,7 +157,7 @@ const AvregningTable: FunctionComponent<OwnProps> = ({
   <>
     {simuleringResultat.perioderPerMottaker.map((mottaker, mottakerIndex) => {
       const rangeOfMonths = getPeriod(ingenPerioderMedAvvik, simuleringResultat.periode.fom, mottaker);
-      const nesteMåned = mottaker.nesteUtbPeriode?.tom;
+      const nesteMåned = mottaker.nesteUtbPeriode.tom;
       const visDetaljer = showDetails.find(d => d.id === mottakerIndex);
       const array = [] as ReactElement[];
       return (
