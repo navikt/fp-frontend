@@ -21,6 +21,12 @@
   "BubbleText.LukkeTekstfelt": "Lukke tekstfelt",
   "BubbleText.ApneTekstfelt": "Åpne tekstfelt",
 
+  "Snakkeboble.Soker": "Søker",
+  "Snakkeboble.Saksbehandler": "Saksbehandler",
+  "Snakkeboble.Beslutter": "Beslutter",
+  "Snakkeboble.Vedtakslosninger": "Vedtaksløsningen",
+  "Snakkeboble.Arbeidsgiver": "Arbeidsgiver",
+
   "Historikk.Utgått": "{tag} (utgått)",
   "Historikk.Template.5.ChangedFromTo": "<b>{fieldName}</b> endret fra {fromValue} til <b>{toValue}</b>",
   "Historikk.Template.5.FieldSetTo": "<b>{fieldName}</b> er satt til <b>{value}</b>.",
