@@ -35,13 +35,13 @@ const VedtakInnvilgetPanel: FunctionComponent<OwnProps> = ({
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Detail size="small">{intl.formatMessage({ id: 'VedtakForm.beregnetTilkjentYtelse' })}</Detail>
+              <Detail>{intl.formatMessage({ id: 'VedtakForm.beregnetTilkjentYtelse' })}</Detail>
               <Label size="small">
                 {formatCurrencyWithKr((resultatstruktur as BeregningsresultatEs).beregnetTilkjentYtelse)}
               </Label>
             </FlexColumn>
             <FlexColumn>
-              <Detail size="small">{intl.formatMessage({ id: 'VedtakForm.AntallBarn' })}</Detail>
+              <Detail>{intl.formatMessage({ id: 'VedtakForm.AntallBarn' })}</Detail>
               <Label size="small">{resultatstruktur.antallBarn}</Label>
             </FlexColumn>
           </FlexRow>

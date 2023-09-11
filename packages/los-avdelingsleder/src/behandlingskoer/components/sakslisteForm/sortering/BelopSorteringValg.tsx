@@ -60,7 +60,7 @@ const BelopSorteringValg: FunctionComponent<OwnProps> = ({
 
   return (
     <ArrowBox>
-      <Detail size="small">
+      <Detail>
         <FormattedMessage id="SorteringVelger.FiltrerPaHeltall" />
       </Detail>
       <FlexContainer>
@@ -74,7 +74,7 @@ const BelopSorteringValg: FunctionComponent<OwnProps> = ({
             />
           </FlexColumn>
           <FlexColumn>
-            <Detail size="small" className={styles.beløp}>
+            <Detail className={styles.beløp}>
               <FormattedMessage id="SorteringVelger.Valuta" />
             </Detail>
           </FlexColumn>
@@ -87,7 +87,7 @@ const BelopSorteringValg: FunctionComponent<OwnProps> = ({
             />
           </FlexColumn>
           <FlexColumn>
-            <Detail size="small" className={styles.beløp}>
+            <Detail className={styles.beløp}>
               <FormattedMessage id="SorteringVelger.Valuta" />
             </Detail>
           </FlexColumn>

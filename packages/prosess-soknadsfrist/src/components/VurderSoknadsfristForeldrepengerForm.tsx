@@ -142,7 +142,7 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
             <FlexContainer>
               <FlexRow className={styles.marginBottom}>
                 <FlexColumn className={styles.colWidth}>
-                  <Detail size="small">
+                  <Detail>
                     <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.SoknadMottatt" />
                   </Detail>
                   {mottattDato && (
@@ -151,7 +151,7 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
                 </FlexColumn>
                 {soknadsperiodeStart && soknadsperiodeSlutt && (
                   <FlexColumn className={styles.colWidth}>
-                    <Detail size="small">
+                    <Detail>
                       <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.SoknadPeriode" />
                     </Detail>
                     <BodyShort size="small">

@@ -204,9 +204,7 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
           </FlexColumn>
           {lovReferanse && (
             <FlexColumn>
-              <Detail size="small" className={styles.vilkar}>
-                {lovReferanse}
-              </Detail>
+              <Detail className={styles.vilkar}>{lovReferanse}</Detail>
             </FlexColumn>
           )}
         </FlexRow>

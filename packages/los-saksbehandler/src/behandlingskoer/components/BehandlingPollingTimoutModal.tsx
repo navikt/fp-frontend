@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { Button, Label, Modal as NavModal } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, FloatRight, Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-
-import advarselImageUrl from '../../images/advarsel.svg';
+import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import styles from './behandlingPollingTimoutModal.module.css';
 
@@ -25,10 +24,9 @@ const BehandlingPollingTimoutModal: FunctionComponent = () => {
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Image
+              <ExclamationmarkTriangleFillIcon
                 className={styles.image}
-                alt={intl.formatMessage({ id: 'BehandlingPollingTimoutModal.TimeoutMelding' })}
-                src={advarselImageUrl}
+                title={intl.formatMessage({ id: 'BehandlingPollingTimoutModal.TimeoutMelding' })}
               />
             </FlexColumn>
             <FlexColumn className={styles.text}>
@@ -38,21 +36,19 @@ const BehandlingPollingTimoutModal: FunctionComponent = () => {
             </FlexColumn>
           </FlexRow>
         </FlexContainer>
-        <VerticalSpacer sixteenPx />
-        <FloatRight>
-          <Button
-            className={styles.submitButton}
-            size="small"
-            variant="secondary"
-            onClick={() => window.location.reload()}
-            autoFocus
-            type="button"
-          >
-            {intl.formatMessage({ id: 'BehandlingPollingTimoutModal.Oppfrisk' })}
-          </Button>
-          <VerticalSpacer sixteenPx />
-        </FloatRight>
       </NavModal.Body>
+      <NavModal.Footer>
+        <Button
+          className={styles.submitButton}
+          size="small"
+          variant="secondary"
+          onClick={() => window.location.reload()}
+          autoFocus
+          type="button"
+        >
+          {intl.formatMessage({ id: 'BehandlingPollingTimoutModal.Oppfrisk' })}
+        </Button>
+      </NavModal.Footer>
     </NavModal>
   );
 };

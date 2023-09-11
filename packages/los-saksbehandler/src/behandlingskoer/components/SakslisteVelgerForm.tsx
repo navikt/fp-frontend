@@ -4,14 +4,13 @@ import { useForm } from 'react-hook-form';
 import { useIntl, FormattedMessage, IntlShape } from 'react-intl';
 import { Label, BodyShort } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import { Image, FlexContainer, FlexRow, FlexColumn, LabelWithHeader } from '@navikt/ft-ui-komponenter';
+import { FlexContainer, FlexRow, FlexColumn, LabelWithHeader, Tooltip } from '@navikt/ft-ui-komponenter';
 import { Form, SelectField } from '@navikt/ft-form-hooks';
 
 import { AlleKodeverk } from '@navikt/fp-types';
 import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
 
-import gruppeHoverUrl from '../../images/gruppe_hover.svg';
-import gruppeUrl from '../../images/gruppe.svg';
+import { PersonGroupIcon } from '@navikt/aksel-icons';
 import Saksliste from '../../typer/sakslisteTsType';
 import Saksbehandler from '../../typer/saksbehandlerTsType';
 import { RestApiPathsKeys, RestApiGlobalStatePathsKeys, restApiHooks } from '../../data/fplosSaksbehandlerRestApi';
@@ -246,12 +245,9 @@ const SakslisteVelgerForm: FunctionComponent<OwnProps> = ({
             <>
               <FlexColumn>
                 <div className={styles.saksbehandlerIkon} />
-                <Image
-                  alt={intl.formatMessage({ id: 'SakslisteVelgerForm.Saksbehandlere' })}
-                  src={gruppeUrl}
-                  srcHover={gruppeHoverUrl}
-                  tooltip={tooltip}
-                />
+                <Tooltip content={tooltip} alignBottom>
+                  <PersonGroupIcon className={styles.personIcon} />
+                </Tooltip>
               </FlexColumn>
               <FlexColumn className={styles.marginFilters}>
                 <LabelWithHeader

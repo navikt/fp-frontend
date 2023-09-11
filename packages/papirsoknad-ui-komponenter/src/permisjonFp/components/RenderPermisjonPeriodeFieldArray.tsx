@@ -2,7 +2,8 @@ import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 import moment from 'moment';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { UseFormGetValues, useFieldArray, useFormContext } from 'react-hook-form';
-import { Label, Alert } from '@navikt/ds-react';
+import { Label, Alert, Button } from '@navikt/ds-react';
+import { XMarkIcon } from '@navikt/aksel-icons';
 import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import { CheckboxField, Datepicker, SelectField, PeriodFieldArray, InputField } from '@navikt/ft-form-hooks';
 import {
@@ -261,9 +262,11 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                 )}
                 <FlexColumn>
                   {!readOnly && (
-                    <button
+                    <Button
                       className={erForsteRad ? styles.buttonRemoveFirst : styles.buttonRemove}
                       type="button"
+                      variant="tertiary-neutral"
+                      icon={<XMarkIcon />}
                       onClick={() => {
                         remove(index);
                       }}

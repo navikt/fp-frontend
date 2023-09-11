@@ -242,7 +242,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
         {erRadÅpen && (
           <>
             <Label size="small">{arbeidsgiverNavn}</Label>
-            <Detail size="small">
+            <Detail>
               ({arbeidsgiverFødselsdato ? <DateLabel dateString={arbeidsgiverFødselsdato} /> : arbeidsgiverIdent})
             </Detail>
           </>

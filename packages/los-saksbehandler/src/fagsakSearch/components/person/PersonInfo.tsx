@@ -2,12 +2,10 @@ import React, { FunctionComponent } from 'react';
 import dayjs from 'dayjs';
 import { useIntl } from 'react-intl';
 import { Heading, Detail } from '@navikt/ds-react';
-import { FlexContainer, FlexRow, FlexColumn, Image } from '@navikt/ft-ui-komponenter';
+import { FlexContainer, FlexRow, FlexColumn } from '@navikt/ft-ui-komponenter';
 
 import { KjønnkodeEnum, Person } from '@navikt/fp-types';
-
-import urlKvinne from '../../../images/kvinne.svg';
-import urlMann from '../../../images/mann.svg';
+import { FigureInwardFillIcon, FigureOutwardFillIcon } from '@navikt/aksel-icons';
 
 import AlderVisning from './Aldervisning';
 import MerkePanel from './Merkepanel';
@@ -39,17 +37,21 @@ const PersonInfo: FunctionComponent<OwnProps> = ({ person }) => {
     <FlexContainer>
       <FlexRow>
         <FlexColumn>
-          <Image
-            className={styles.icon}
-            src={kjønn === KjønnkodeEnum.KVINNE ? urlKvinne : urlMann}
-            alt={intl.formatMessage({ id: 'Person.ImageText' })}
-          />
+          {kjønn === KjønnkodeEnum.KVINNE && (
+            <FigureOutwardFillIcon
+              className={styles.kvinneIcon}
+              title={intl.formatMessage({ id: 'Person.ImageText' })}
+            />
+          )}
+          {kjønn === KjønnkodeEnum.MANN && (
+            <FigureInwardFillIcon className={styles.MannIcon} title={intl.formatMessage({ id: 'Person.ImageText' })} />
+          )}
         </FlexColumn>
         <FlexColumn>
           <Heading size="small">
             {navn} <AlderVisning erDod={!!dødsdato} alder={alder} dodsdato={dødsdato} />
           </Heading>
-          <Detail size="small">{fødselsnummer}</Detail>
+          <Detail>{fødselsnummer}</Detail>
         </FlexColumn>
         <FlexColumn>
           <MerkePanel erDod={!!dødsdato} diskresjonskode={diskresjonskode} />

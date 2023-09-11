@@ -109,7 +109,7 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
       <FlexContainer>
         <FlexRow>
           <FlexColumn className={styles.firstColWidth}>
-            <Detail size="small">
+            <Detail>
               <FormattedMessage id="BeregningEngangsstonadForm.Sats" />
             </Detail>
           </FlexColumn>
@@ -121,7 +121,7 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
         </FlexRow>
         <FlexRow>
           <FlexColumn className={styles.firstColWidth}>
-            <Detail size="small">
+            <Detail>
               <FormattedMessage id="BeregningEngangsstonadForm.AntallBarn" />
             </Detail>
           </FlexColumn>
@@ -140,7 +140,7 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
             </FlexRow>
             <FlexRow>
               <FlexColumn className={styles.firstColWidth}>
-                <Detail size="small">
+                <Detail>
                   <FormattedMessage id="BeregningEngangsstonadForm.BeregnetEngangsstonad" />
                 </Detail>
               </FlexColumn>

@@ -17,11 +17,8 @@
 }
 
 .driftsInfo {
+  color: var(--a-orange-600);
   height: 20px;
   margin-right: 10px;
   width: 20px;
-}
-
-.column {
-  display: flex;
 }

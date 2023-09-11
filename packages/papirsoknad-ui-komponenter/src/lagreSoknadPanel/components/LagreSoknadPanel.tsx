@@ -41,7 +41,7 @@ const LagreSoknadPanel: FunctionComponent<OwnProps> = ({ submitting, onSubmitUfu
       <FlexContainer>
         <FlexRow>
           <FlexColumn className={styles.fullWidth}>
-            <Detail size="small">{intl.formatMessage({ id: 'Registrering.SaveApplication.Title' })}</Detail>
+            <Detail>{intl.formatMessage({ id: 'Registrering.SaveApplication.Title' })}</Detail>
             <VerticalSpacer sixteenPx />
             <FlexRow>
               <FlexColumn className={styles.halfWidth}>

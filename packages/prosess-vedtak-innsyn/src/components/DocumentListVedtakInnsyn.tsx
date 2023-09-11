@@ -34,7 +34,7 @@ const DocumentListVedtakInnsyn: FunctionComponent<OwnProps> = ({ documents, saks
 
   return (
     <>
-      <Detail size="small" className={styles.noDocuments}>
+      <Detail className={styles.noDocuments}>
         <FormattedMessage id="DocumentListVedtakInnsyn.InnsynsDok" />
       </Detail>
       <Table noHover headerTextCodes={headerTextCodes}>

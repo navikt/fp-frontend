@@ -8,10 +8,10 @@ import {
   AksjonspunktHelpTextTemp,
   ArrowBox,
   VerticalSpacer,
-  Image,
   FlexContainer,
   FlexRow,
   FlexColumn,
+  Tooltip,
 } from '@navikt/ft-ui-komponenter';
 import { getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
@@ -19,8 +19,7 @@ import { fagsakYtelseType, AksjonspunktCode, tilbakekrevingVidereBehandling } fr
 import { Aksjonspunkt, Fagsak, SimuleringResultat, TilbakekrevingValg } from '@navikt/fp-types';
 import { VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import questionNormalUrl from '../images/question_normal.svg';
-import questionHoverUrl from '../images/question_hover.svg';
+import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
 import AvregningSummary from './AvregningSummary';
 import AvregningTable from './AvregningTable';
 
@@ -250,13 +249,9 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
                                   </BodyShort>
                                 </FlexColumn>
                                 <FlexColumn>
-                                  <Image
-                                    tabIndex={0}
-                                    src={questionNormalUrl}
-                                    srcHover={questionHoverUrl}
-                                    alt={intl.formatMessage({ id: 'Avregning.HjelpetekstForeldrepenger' })}
-                                    tooltip={lagHjelpetekstTooltip(isForeldrepenger)}
-                                  />
+                                  <Tooltip content={lagHjelpetekstTooltip(isForeldrepenger)}>
+                                    <QuestionmarkDiamondIcon className={styles.helpTextImage} />
+                                  </Tooltip>
                                 </FlexColumn>
                               </FlexRow>
                             </FlexContainer>

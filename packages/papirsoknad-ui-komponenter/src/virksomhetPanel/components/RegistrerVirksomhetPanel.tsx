@@ -1,12 +1,11 @@
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Label, BodyShort, Detail, ErrorMessage } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { PlusCircleIcon, XMarkIcon } from '@navikt/aksel-icons';
+import { Label, BodyShort, Detail, ErrorMessage, Link } from '@navikt/ds-react';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk } from '@navikt/fp-types';
 
 import { useFieldArray, useFormContext } from 'react-hook-form';
-import addCircleIcon from '../../images/add-circle.svg';
-import removeIcon from '../../images/remove.svg';
 
 import RegistrerVirksomhetModalForm, { FormValues as ModalFormValues } from './RegistrerVirksomhetModalForm';
 
@@ -100,33 +99,16 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({ readOnly = fals
             <FlexContainer key={field.id}>
               <FlexRow>
                 <FlexColumn>
-                  {
-                    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-                  }
-                  <a
-                    onClick={() => visModal(index)}
-                    onKeyDown={() => visModal(index)}
-                    className={styles.customLink}
-                    role="link"
-                    tabIndex={0}
-                  >
+                  <Link className={styles.customLink} onClick={() => visModal(index)} onKeyDown={() => visModal(index)}>
                     <BodyShort size="small">{field.navn}</BodyShort>
-                  </a>
+                  </Link>
                 </FlexColumn>
                 <FlexColumn>
-                  {
-                    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-                  }
-                  <div
+                  <XMarkIcon
                     className={styles.removeButton}
                     onClick={() => remove(index)}
                     onKeyDown={() => remove(index)}
-                    id="removebutton"
-                    role="button"
-                    tabIndex={0}
-                  >
-                    <Image src={removeIcon} />
-                  </div>
+                  />
                 </FlexColumn>
               </FlexRow>
               <hr className={styles.divider} />
@@ -135,22 +117,12 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({ readOnly = fals
           ))}
         </React.Fragment>
       )}
-      {
-        // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-      }
-      <div
-        id="addbutton"
-        className={styles.addVirksomhet}
-        onClick={() => visModal()}
-        onKeyDown={e => (e.nativeEvent.code === 'Space' ? visModal() : false)}
-        role="button"
-        tabIndex={0}
-      >
-        <Image className={styles.addCircleIcon} src={addCircleIcon} />
-        <Detail size="small" className={styles.imageText}>
+      <Link onClick={() => visModal()} onKeyDown={e => (e.nativeEvent.code === 'Space' ? visModal() : false)}>
+        <PlusCircleIcon className={styles.addCircleIcon} />
+        <Detail className={styles.imageText}>
           <FormattedMessage id="Registrering.RegistrerVirksomhetPanel.Add" />
         </Detail>
-      </div>
+      </Link>
       {formState.isSubmitted && formState.errors[EGEN_VIRKSOMHET_NAME_PREFIX]?.notRegisteredInput?.message && (
         <ErrorMessage>{formState.errors[EGEN_VIRKSOMHET_NAME_PREFIX]?.notRegisteredInput?.message}</ErrorMessage>
       )}

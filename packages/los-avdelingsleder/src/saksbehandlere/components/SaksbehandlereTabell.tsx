@@ -1,10 +1,9 @@
 import React, { FunctionComponent, useState, useCallback, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { BodyShort, Label } from '@navikt/ds-react';
+import { XMarkIcon } from '@navikt/aksel-icons';
+import { Table, TableRow, TableColumn, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { Table, TableRow, TableColumn, Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-
-import removeIcon from '../../images/remove.svg';
 import Saksbehandler from '../../typer/saksbehandlerAvdelingTsType';
 import SletteSaksbehandlerModal from './SletteSaksbehandlerModal';
 import { RestApiPathsKeys, restApiHooks } from '../../data/fplosRestApi';
@@ -73,9 +72,8 @@ const SaksbehandlereTabell: FunctionComponent<OwnProps> = ({
               <TableColumn>{saksbehandler.brukerIdent}</TableColumn>
               <TableColumn>{saksbehandler.avdelingsnavn.join(', ')}</TableColumn>
               <TableColumn>
-                <Image
-                  src={removeIcon}
-                  className={styles.removeImage}
+                <XMarkIcon
+                  className={styles.removeIcon}
                   onMouseDown={() => setValgtSaksbehandler(saksbehandler)}
                   onKeyDown={() => setValgtSaksbehandler(saksbehandler)}
                 />

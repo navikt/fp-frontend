@@ -7,9 +7,8 @@
   margin-top: 28px;
 }
 
-.advarselIcon,
-.feilmelding {
-  display: inline-block;
-  margin-right: 1ex;
-  vertical-align: text-bottom;
+.advarselIcon {
+  color: var(--a-orange-500);
+  height: 25px;
+  width: 25px;
 }

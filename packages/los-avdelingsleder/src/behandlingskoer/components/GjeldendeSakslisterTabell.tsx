@@ -1,9 +1,8 @@
 import React, { useState, KeyboardEvent, FunctionComponent, useEffect, useRef, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { BodyShort, Detail, Label, Heading } from '@navikt/ds-react';
+import { BodyShort, Detail, Label, Heading, Link } from '@navikt/ds-react';
 import { KodeverkMedNavn } from '@navikt/ft-types';
 import {
-  Image,
   VerticalSpacer,
   Table,
   TableRow,
@@ -14,9 +13,8 @@ import {
   FlexColumn,
 } from '@navikt/ft-ui-komponenter';
 import { KodeverkType } from '@navikt/ft-kodeverk';
+import { PlusCircleIcon, XMarkIcon } from '@navikt/aksel-icons';
 
-import addCircleIcon from '../../images/add-circle.svg';
-import removeIcon from '../../images/remove.svg';
 import { restApiHooks, RestApiPathsKeys } from '../../data/fplosRestApi';
 import useLosKodeverk from '../../data/useLosKodeverk';
 import SletteSakslisteModal from './SletteSakslisteModal';
@@ -205,8 +203,7 @@ export const GjeldendeSakslisterTabell: FunctionComponent<OwnProps> = ({
                     tabRef.current[index] = el;
                   }}
                 >
-                  <Image
-                    src={removeIcon}
+                  <XMarkIcon
                     className={styles.removeImage}
                     onMouseDown={() => visFjernSakslisteModal(saksliste)}
                     onKeyDown={() => visFjernSakslisteModal(saksliste)}
@@ -217,19 +214,12 @@ export const GjeldendeSakslisterTabell: FunctionComponent<OwnProps> = ({
           ))}
         </Table>
       )}
-      <div
-        id="leggTilListe"
-        role="button"
-        tabIndex={0}
-        className={styles.addPeriode}
-        onClick={() => lagNySaksliste(valgtAvdelingEnhet)}
-        onKeyDown={lagNySakslisteFn}
-      >
-        <Image className={styles.addCircleIcon} src={addCircleIcon} />
-        <Detail size="small" className={styles.imageText}>
+      <Link onClick={() => lagNySaksliste(valgtAvdelingEnhet)} onKeyDown={lagNySakslisteFn}>
+        <Detail className={styles.imageText}>
           <FormattedMessage id="GjeldendeSakslisterTabell.LeggTilListe" />
         </Detail>
-      </div>
+        <PlusCircleIcon />
+      </Link>
       {valgtSaksliste && (
         <SletteSakslisteModal valgtSaksliste={valgtSaksliste} cancel={closeSletteModal} submit={fjernSakslisteFn} />
       )}

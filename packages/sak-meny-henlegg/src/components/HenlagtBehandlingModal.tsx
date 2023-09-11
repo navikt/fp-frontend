@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Modal, Button, Label } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, Image } from '@navikt/ft-ui-komponenter';
-
-import innvilgetImageUrl from '../images/innvilget_valgt.svg';
+import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import styles from './henlagtBehandlingModal.module.css';
 
@@ -32,10 +31,9 @@ const HenlagtBehandlingModal: FunctionComponent<OwnProps> = ({ showModal, closeE
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Image
+              <CheckmarkCircleFillIcon
                 className={styles.image}
-                alt={intl.formatMessage({ id: 'HenlagtBehandlingModal.Henlagt' })}
-                src={innvilgetImageUrl}
+                title={intl.formatMessage({ id: 'HenlagtBehandlingModal.Henlagt' })}
               />
             </FlexColumn>
             <FlexColumn>

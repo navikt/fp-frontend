@@ -1,19 +1,17 @@
-.buttonRemove,
-.buttonRemoveFirst {
-  background: var(--a-white) url('../../images/remove.svg') no-repeat;
-  background-size: 100% 100%;
-  border: 0;
+.buttonRemove {
+  color: var(--a-red-600);
   cursor: pointer;
-  display: inline-block;
-  height: 17px;
-  margin-top: 20px;
-  padding: 0;
-  vertical-align: top;
-  width: 17px;
+  height: 25px;
+  margin-top: 10px;
+  width: 25px;
 }
 
 .buttonRemoveFirst {
-  margin-top: 42px;
+  color: var(--a-red-600);
+  cursor: pointer;
+  height: 25px;
+  margin-top: 30px;
+  width: 25px;
 }
 
 .notLastRow {

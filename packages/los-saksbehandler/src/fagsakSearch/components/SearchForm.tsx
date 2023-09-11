@@ -2,12 +2,11 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Heading, Button } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer, Image } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validators';
 import { Form, InputField, CheckboxField } from '@navikt/ft-form-hooks';
 
-import advarselIcon from '../../images/advarsel.svg';
-
+import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import styles from './searchForm.module.css';
 
 const isButtonDisabled = (
@@ -91,7 +90,7 @@ const SearchForm: FunctionComponent<OwnProps> = ({
               <VerticalSpacer eightPx />
               <FlexRow>
                 <FlexColumn>
-                  <Image className={styles.advarselIcon} src={advarselIcon} />
+                  <ExclamationmarkTriangleFillIcon className={styles.advarselIcon} />
                 </FlexColumn>
                 <FlexColumn>
                   <FormattedMessage id={searchResultAccessDenied.feilmelding} />

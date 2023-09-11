@@ -52,7 +52,7 @@ const FrilansPanel: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly 
             <>
               <VerticalSpacer eightPx />
               <ArrowBox>
-                <Detail size="small">
+                <Detail>
                   <FormattedMessage id="Registrering.Frilans.OppgiPeriode" />
                 </Detail>
                 <VerticalSpacer eightPx />

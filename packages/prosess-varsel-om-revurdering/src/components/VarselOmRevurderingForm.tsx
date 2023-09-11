@@ -230,7 +230,7 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
         )}
         {(readOnly || aksjonspunkter[0].status !== AksjonspunktStatus.OPPRETTET) && (
           <>
-            <Detail size="small">
+            <Detail>
               <FormattedMessage id="VarselOmRevurderingForm.Begrunnelse" />
             </Detail>
             <BodyShort size="small">{formVerdier.begrunnelse}</BodyShort>

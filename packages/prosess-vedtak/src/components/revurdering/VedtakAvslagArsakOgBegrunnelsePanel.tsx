@@ -100,7 +100,7 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
       {erReadOnly && behandlingsresultat?.avslagsarsakFritekst && (
         <span>
           <VerticalSpacer twentyPx />
-          <Detail size="small">
+          <Detail>
             <FormattedMessage id="VedtakForm.Fritekst" />
           </Detail>
           <VerticalSpacer eightPx />

@@ -24,5 +24,6 @@
 }
 
 .removeImage {
-  padding: 5px;
+  margin-top: 5px;
+  color: var(--a-red-400);
 }

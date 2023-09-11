@@ -1,37 +1,19 @@
-.removeImage {
+.removeIcon {
+  color: var(--a-red-400);
   cursor: pointer;
-  padding: 5px;
+  height: 25px;
+  width: 25px;
 }
-.calendarToggleButton {
-  background: transparent;
-  border: 1px solid transparent;
-  box-sizing: content-box;
+.calendarIcon {
+  color: var(--a-blue-600);
   cursor: pointer;
-  display: inline-block;
-  height: 22px;
-  left: 0;
-  margin: 0;
-  top: 0;
-  width: 22px;
+  height: 25px;
+  width: 25px;
 }
-.calendarToggleButton:after {
-  content: url('../../images/kalender.svg');
-}
-.calendarToggleButton:hover,
-.calendarToggleButton:focus {
-  border-color: transparent;
-  box-shadow: none;
-  outline: none;
-}
-.calendarToggleButton:hover:after,
-.calendarToggleButton:focus:after {
-  content: url('../../images/kalender_hover.svg');
-}
-.calendarToggleButton:disabled {
-  background: transparent;
-  border-color: transparent;
-  cursor: initial;
-}
-.calendarToggleButton:disabled:after {
-  content: url('../../images/kalender_disabled.svg');
+
+.flyttIcon {
+  color: var(--a-blue-600);
+  cursor: pointer;
+  height: 25px;
+  width: 25px;
 }

@@ -2,6 +2,7 @@ import React, { useCallback, FunctionComponent, useMemo, useState, useRef } from
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm, UseFormGetValues } from 'react-hook-form';
 import { Alert, BodyShort, Button, Popover } from '@navikt/ds-react';
+import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
 
 import {
   hasValidText,
@@ -16,11 +17,9 @@ import {
 } from '@navikt/ft-form-validators';
 import { TextAreaField, RadioGroupPanel, Datepicker, InputField, Form } from '@navikt/ft-form-hooks';
 import { Inntektsmelding, ManueltArbeidsforhold, ManglendeInntektsmeldingVurdering } from '@navikt/fp-types';
-import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 
-import questionNormalUrl from '../../images/question_normal.svg';
-import questionHoverUrl from '../../images/question_hover.svg';
 import InntektsmeldingOpplysningerPanel from '../felles/InntektsmeldingOpplysningerPanel';
 import ArbeidsforholdOgInntektRadData from '../../types/arbeidsforholdOgInntekt';
 
@@ -161,7 +160,7 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
     [inntektsmelding, oppdaterTabell],
   );
 
-  const imageRef = useRef<HTMLImageElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const [openState, setOpenState] = useState(false);
   const toggleHjelpetekst = useCallback(() => setOpenState(gammelVerdi => !gammelVerdi), []);
 
@@ -188,21 +187,22 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" />
                 </FlexColumn>
-                <FlexColumn>
-                  <Image
-                    src={questionNormalUrl}
-                    srcHover={questionHoverUrl}
-                    ref={imageRef}
+                <FlexColumn className={styles.image}>
+                  <Button
+                    ref={buttonRef}
+                    type="button"
+                    variant="tertiary"
                     onClick={toggleHjelpetekst}
-                    onKeyDown={toggleHjelpetekst}
-                    tabIndex={0}
-                    alt={intl.formatMessage({ id: 'ManglendeOpplysningerForm.AltHjelpetekst' })}
-                    className={styles.image}
+                    icon={
+                      <QuestionmarkDiamondIcon
+                        title={intl.formatMessage({ id: 'ManglendeOpplysningerForm.AltHjelpetekst' })}
+                      />
+                    }
                   />
                   <Popover
                     open={openState}
                     onClose={toggleHjelpetekst}
-                    anchorEl={imageRef.current}
+                    anchorEl={buttonRef.current}
                     className={styles.hjelpetekst}
                   >
                     <Popover.Content className={styles.hjelpetekstInnhold}>

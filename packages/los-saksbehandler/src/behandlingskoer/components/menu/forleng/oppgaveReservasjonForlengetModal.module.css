@@ -4,6 +4,7 @@
 }
 
 .image {
+  color: var(--a-surface-success);
   height: 35px;
   margin-top: 5px;
   width: 35px;

@@ -51,7 +51,7 @@ const VedtakFritekstPanel: FunctionComponent<OwnProps> = ({
       {isReadOnly && behandlingsresultat?.avslagsarsakFritekst && (
         <span>
           <VerticalSpacer twentyPx />
-          <Detail size="small">{intl.formatMessage({ id: labelTextCode })}</Detail>
+          <Detail>{intl.formatMessage({ id: labelTextCode })}</Detail>
           <VerticalSpacer eightPx />
           <div className={styles.fritekstItem}>{decodeHtmlEntity(behandlingsresultat.avslagsarsakFritekst)}</div>
         </span>
