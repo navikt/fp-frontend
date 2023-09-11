@@ -19,7 +19,6 @@ export type SimuleringResultatPerFagområde = Readonly<{
 export type Mottaker = Readonly<{
   mottakerType: string;
   mottakerNummer: string;
-  mottakerNavn: string;
   mottakerIdentifikator: string;
   nesteUtbPeriode: SimuleringPeriode;
   resultatPerFagområde: SimuleringResultatPerFagområde[];

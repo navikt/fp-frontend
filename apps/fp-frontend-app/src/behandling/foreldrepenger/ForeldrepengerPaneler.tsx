@@ -135,7 +135,7 @@ const ForeldrepengerPaneler: FunctionComponent<OwnProps> = ({
           arbeidsgiverOpplysningerPerId={arbeidsgivere}
           personoversikt={personoversikt}
         />
-        <SimuleringProsessStegInitPanel {...props} fagsak={fagsak} menyData={ekstraProps.allMenyData} />
+        <SimuleringProsessStegInitPanel {...props} fagsak={fagsak} menyData={ekstraProps.allMenyData} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <VedtakFpProsessStegInitPanel
           {...props}
           fagsak={fagsak}

@@ -12,6 +12,7 @@ import {
   Mottaker,
   SimuleringResultatPerFagområde,
   SimuleringResultatRad,
+  ArbeidsgiverOpplysningerPerId,
 } from '@navikt/fp-types';
 
 import CollapseButton from './CollapseButton';
@@ -100,10 +101,10 @@ const createColumns = (
   ));
 };
 
-const tableTitle = (mottaker: Mottaker): ReactElement | null =>
-  mottaker.mottakerType === mottakerTyper.ARBG ? (
+const tableTitle = (mottaker: Mottaker, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement | null =>
+  mottaker.mottakerType === mottakerTyper.ARBG || mottaker.mottakerType === mottakerTyper.ARBGP ? (
     <BodyShort size="small" className={styles.tableTitle}>
-      {`${mottaker.mottakerNavn} (${mottaker.mottakerNummer})`}
+      {`${arbeidsgiverOpplysningerPerId[mottaker.mottakerIdentifikator]} (${mottaker.mottakerNummer})`}
     </BodyShort>
   ) : null;
 
@@ -146,6 +147,7 @@ interface OwnProps {
   showDetails: Details[];
   simuleringResultat: DetaljertSimuleringResultat;
   ingenPerioderMedAvvik: boolean;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 const AvregningTable: FunctionComponent<OwnProps> = ({
@@ -153,6 +155,7 @@ const AvregningTable: FunctionComponent<OwnProps> = ({
   toggleDetails,
   showDetails,
   ingenPerioderMedAvvik,
+  arbeidsgiverOpplysningerPerId,
 }) => (
   <>
     {simuleringResultat.perioderPerMottaker.map((mottaker, mottakerIndex) => {
@@ -162,7 +165,7 @@ const AvregningTable: FunctionComponent<OwnProps> = ({
       const array = [] as ReactElement[];
       return (
         <div className={styles.tableWrapper} key={`tableIndex${mottakerIndex + 1}`}>
-          {tableTitle(mottaker)}
+          {tableTitle(mottaker, arbeidsgiverOpplysningerPerId)}
           <Table
             headerColumnContent={getHeaderCodes(
               skalViseCollapseButton(mottaker.resultatPerFagområde),

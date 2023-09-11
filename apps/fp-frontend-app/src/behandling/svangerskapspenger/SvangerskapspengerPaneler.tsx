@@ -100,7 +100,7 @@ const SvangerskapspengerPaneler: FunctionComponent<OwnProps> = ({
           arbeidsgiverOpplysningerPerId={arbeidsgivere}
           personoversikt={personoversikt}
         />
-        <SimuleringProsessStegInitPanel {...props} fagsak={fagsak} menyData={ekstraProps.allMenyData} />
+        <SimuleringProsessStegInitPanel {...props} fagsak={fagsak} menyData={ekstraProps.allMenyData} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <VedtakSvpProsessStegInitPanel
           {...props}
           fagsak={fagsak}

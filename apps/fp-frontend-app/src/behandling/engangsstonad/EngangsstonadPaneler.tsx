@@ -59,6 +59,8 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
     ),
     [personoversikt, fagsak],
   );
+  const emptyArbeidsgiverOpplysningerPerId = {
+  };
 
   const prosessPaneler = useCallback(
     (props: ProsessPanelInitProps, ekstraProps: ProsessPanelExtraInitProps) => (
@@ -78,7 +80,7 @@ const EngangsstonadPaneler: FunctionComponent<OwnProps> = ({
         />
         <SoknadsfristEsProsessStegInitPanel {...props} rettigheter={rettigheter} />
         <BeregningEsProsessStegInitPanel {...props} rettigheter={rettigheter} />
-        <SimuleringProsessStegInitPanel {...props} fagsak={fagsak} menyData={ekstraProps.allMenyData} />
+        <SimuleringProsessStegInitPanel {...props} fagsak={fagsak} menyData={ekstraProps.allMenyData} arbeidsgiverOpplysningerPerId={emptyArbeidsgiverOpplysningerPerId}/>
         <VedtakEsProsessStegInitPanel
           {...props}
           fagsak={fagsak}

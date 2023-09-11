@@ -1,7 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { Fagsak, SimuleringResultat, TilbakekrevingValg, StandardProsessPanelProps } from '@navikt/fp-types';
+import {
+  Fagsak,
+  SimuleringResultat,
+  TilbakekrevingValg,
+  StandardProsessPanelProps,
+  ArbeidsgiverOpplysningerPerId,
+} from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import AvregningPanel from './components/AvregningPanel';
@@ -11,6 +17,7 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   fagsak: Fagsak;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   simuleringResultat?: SimuleringResultat;
   tilbakekrevingvalg?: TilbakekrevingValg;
   previewFptilbakeCallback: (mottaker: string, fritekst: string) => Promise<any>;
@@ -22,6 +29,7 @@ const AvregningProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelPr
   aksjonspunkter,
   simuleringResultat,
   tilbakekrevingvalg,
+  arbeidsgiverOpplysningerPerId,
   submitCallback,
   isReadOnly,
   readOnlySubmitButton,
@@ -33,6 +41,7 @@ const AvregningProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelPr
   <RawIntlProvider value={intl}>
     <AvregningPanel
       fagsak={fagsak}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       sprakkode={behandling.sprakkode}
       aksjonspunkter={aksjonspunkter}
       simuleringResultat={simuleringResultat}

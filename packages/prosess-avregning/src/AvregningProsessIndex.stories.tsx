@@ -20,6 +20,14 @@ const behandling = {
   sprakkode: 'NO',
 } as Behandling;
 
+const arbeidsgiverOpplysningerPerId = {
+  123: {
+    erPrivatPerson: false,
+    identifikator: '123',
+    navn: 'test',
+  },
+};
+
 const simuleringResultat = {
   simuleringResultat: {
     periode: {
@@ -35,7 +43,6 @@ const simuleringResultat = {
         mottakerType: mottakerTyper.ARBG,
         mottakerIdentifikator: '123',
         mottakerNummer: 'test',
-        mottakerNavn: 'test',
         resultatPerFagområde: [
           {
             fagOmrådeKode: 'FP',
@@ -139,6 +146,7 @@ const Template: StoryFn<{
     setFormData={() => undefined}
     fagsak={fagsak}
     aksjonspunkter={aksjonspunkter}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     simuleringResultat={simuleringResultat}
     tilbakekrevingvalg={tilbakekrevingvalg}
     previewFptilbakeCallback={action('button-click') as (data: any) => Promise<any>}

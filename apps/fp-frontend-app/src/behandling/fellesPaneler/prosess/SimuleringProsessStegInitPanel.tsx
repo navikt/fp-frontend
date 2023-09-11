@@ -4,7 +4,13 @@ import { useIntl } from 'react-intl';
 import { AksjonspunktCode, vilkarUtfallType } from '@navikt/fp-kodeverk';
 import { AvregningProsessIndex } from '@navikt/fp-prosess-avregning';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg } from '@navikt/fp-types';
+import {
+  Behandling,
+  Fagsak,
+  SimuleringResultat,
+  TilbakekrevingValg,
+  ArbeidsgiverOpplysningerPerId,
+} from '@navikt/fp-types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
@@ -39,11 +45,13 @@ type EndepunktPanelData = {
 interface OwnProps {
   menyData: ProsessPanelMenyData[];
   fagsak: Fagsak;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   menyData,
   fagsak,
+  arbeidsgiverOpplysningerPerId,
   ...props
 }) => {
   const { startRequest: forhandsvisTilbakekrevingMelding } = restBehandlingApiHooks.useRestApiRunner(
@@ -77,7 +85,11 @@ const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelI
           : vilkarUtfallType.IKKE_VURDERT
       }
       renderPanel={data => (
-        <AvregningProsessIndex fagsak={fagsak} previewFptilbakeCallback={previewFptilbakeCallback} {...data} />
+        <AvregningProsessIndex
+          fagsak={fagsak}
+          previewFptilbakeCallback={previewFptilbakeCallback}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          {...data} />
       )}
     />
   );
