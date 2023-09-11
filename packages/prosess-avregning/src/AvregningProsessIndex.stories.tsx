@@ -20,10 +20,20 @@ const behandling = {
   sprakkode: 'NO',
 } as Behandling;
 
+const arbeidsgiverOpplysningerPerId = {
+  123: {
+    erPrivatPerson: false,
+    identifikator: '123',
+    navn: 'test',
+  },
+};
+
 const simuleringResultat = {
   simuleringResultat: {
-    periodeFom: '2019-01-01',
-    periodeTom: '2019-03-31',
+    periode: {
+      fom: '2019-01-01',
+      tom: '2019-03-31',
+    },
     sumEtterbetaling: 0,
     sumFeilutbetaling: -49863,
     sumInntrekk: -10899,
@@ -33,7 +43,6 @@ const simuleringResultat = {
         mottakerType: mottakerTyper.ARBG,
         mottakerIdentifikator: '123',
         mottakerNummer: 'test',
-        mottakerNavn: 'test',
         resultatPerFagområde: [
           {
             fagOmrådeKode: 'FP',
@@ -103,8 +112,10 @@ const simuleringResultat = {
             ],
           },
         ],
-        nesteUtbPeriodeFom: '2019-10-01',
-        nestUtbPeriodeTom: '2019-10-31',
+        nesteUtbPeriode: {
+          fom: '2019-10-01',
+          tom: '2019-10-31',
+        },
       },
     ],
   },
@@ -135,6 +146,7 @@ const Template: StoryFn<{
     setFormData={() => undefined}
     fagsak={fagsak}
     aksjonspunkter={aksjonspunkter}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     simuleringResultat={simuleringResultat}
     tilbakekrevingvalg={tilbakekrevingvalg}
     previewFptilbakeCallback={action('button-click') as (data: any) => Promise<any>}

@@ -16,7 +16,13 @@ import {
 import { getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { fagsakYtelseType, AksjonspunktCode, tilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
-import { Aksjonspunkt, Fagsak, SimuleringResultat, TilbakekrevingValg } from '@navikt/fp-types';
+import {
+  Aksjonspunkt,
+  Fagsak,
+  SimuleringResultat,
+  TilbakekrevingValg,
+  ArbeidsgiverOpplysningerPerId,
+} from '@navikt/fp-types';
 import { VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
@@ -113,6 +119,7 @@ const buildInitialValues = (
 
 interface OwnProps {
   fagsak: Fagsak;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   sprakkode: string;
   aksjonspunkter: Aksjonspunkt[];
   simuleringResultat?: SimuleringResultat;
@@ -138,6 +145,7 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
   tilbakekrevingvalg,
   aksjonspunkter,
   fagsak,
+  arbeidsgiverOpplysningerPerId,
 }) => {
   const intl = useIntl();
 
@@ -188,14 +196,15 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
             </>
           )}
           <AvregningSummary
-            fom={simuleringResultatOption.periodeFom}
-            tom={simuleringResultatOption.periodeTom}
+            fom={simuleringResultatOption.periode.fom}
+            tom={simuleringResultatOption.periode.tom}
             feilutbetaling={simuleringResultatOption.sumFeilutbetaling}
             etterbetaling={simuleringResultatOption.sumEtterbetaling}
             inntrekk={simuleringResultatOption.sumInntrekk}
             ingenPerioderMedAvvik={simuleringResultatOption.ingenPerioderMedAvvik}
           />
           <AvregningTable
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             showDetails={showDetails}
             toggleDetails={toggleDetaljer}
             simuleringResultat={simuleringResultatOption}

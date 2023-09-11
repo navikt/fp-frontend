@@ -12,6 +12,7 @@ import {
   Mottaker,
   SimuleringResultatPerFagområde,
   SimuleringResultatRad,
+  ArbeidsgiverOpplysningerPerId,
 } from '@navikt/fp-types';
 
 import CollapseButton from './CollapseButton';
@@ -100,10 +101,15 @@ const createColumns = (
   ));
 };
 
-const tableTitle = (mottaker: Mottaker): ReactElement | null =>
-  mottaker.mottakerType === mottakerTyper.ARBG ? (
+const lagVisningsNavn = (mottaker: Mottaker, arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId): string => {
+  const agOpplysning = mottaker.mottakerIdentifikator ? arbeidsgiverOpplysninger[mottaker.mottakerIdentifikator] : undefined;
+  return agOpplysning ? `${agOpplysning.navn} (${mottaker.mottakerNummer})` : `${mottaker.mottakerNummer}`;
+};
+
+const tableTitle = (mottaker: Mottaker, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement | null =>
+  mottaker.mottakerType === mottakerTyper.ARBG || mottaker.mottakerType === mottakerTyper.ARBGP ? (
     <BodyShort size="small" className={styles.tableTitle}>
-      {`${mottaker.mottakerNavn} (${mottaker.mottakerNummer})`}
+      {lagVisningsNavn(mottaker, arbeidsgiverOpplysningerPerId)}
     </BodyShort>
   ) : null;
 
@@ -131,9 +137,9 @@ const getPeriod = (
   mottaker: Mottaker,
 ): { month: string; year: string }[] => {
   const fomDato = avvikBruker(ingenPerioderMedAvvik, mottaker.mottakerType)
-    ? dayjs(mottaker.nestUtbPeriodeTom).subtract(1, 'months').format()
-    : getPeriodeFom(periodeFom, mottaker.nesteUtbPeriodeFom);
-  return getRangeOfMonths(fomDato, mottaker.nestUtbPeriodeTom);
+    ? dayjs(mottaker.nesteUtbPeriode.tom).subtract(1, 'months').format()
+    : getPeriodeFom(periodeFom, mottaker.nesteUtbPeriode.fom);
+  return getRangeOfMonths(fomDato, mottaker.nesteUtbPeriode.tom);
 };
 
 type Details = {
@@ -146,6 +152,7 @@ interface OwnProps {
   showDetails: Details[];
   simuleringResultat: DetaljertSimuleringResultat;
   ingenPerioderMedAvvik: boolean;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 const AvregningTable: FunctionComponent<OwnProps> = ({
@@ -153,16 +160,17 @@ const AvregningTable: FunctionComponent<OwnProps> = ({
   toggleDetails,
   showDetails,
   ingenPerioderMedAvvik,
+  arbeidsgiverOpplysningerPerId,
 }) => (
   <>
     {simuleringResultat.perioderPerMottaker.map((mottaker, mottakerIndex) => {
-      const rangeOfMonths = getPeriod(ingenPerioderMedAvvik, simuleringResultat.periodeFom, mottaker);
-      const nesteMåned = mottaker.nestUtbPeriodeTom;
+      const rangeOfMonths = getPeriod(ingenPerioderMedAvvik, simuleringResultat.periode.fom, mottaker);
+      const nesteMåned = mottaker.nesteUtbPeriode.tom;
       const visDetaljer = showDetails.find(d => d.id === mottakerIndex);
       const array = [] as ReactElement[];
       return (
         <div className={styles.tableWrapper} key={`tableIndex${mottakerIndex + 1}`}>
-          {tableTitle(mottaker)}
+          {tableTitle(mottaker, arbeidsgiverOpplysningerPerId)}
           <Table
             headerColumnContent={getHeaderCodes(
               skalViseCollapseButton(mottaker.resultatPerFagområde),
