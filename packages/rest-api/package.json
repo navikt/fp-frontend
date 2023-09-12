@@ -22,13 +22,13 @@
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
-    "@sentry/browser": "7.66.0",
+    "@sentry/browser": "7.68.0",
     "axios": "1.5.0"
   },
   "devDependencies": {
-    "axios-mock-adapter": "1.21.5",
+    "axios-mock-adapter": "1.22.0",
     "cross-env": "7.0.3",
-    "eslint": "8.48.0",
+    "eslint": "8.49.0",
     "typescript": "5.2.2",
     "vite": "4.4.9",
     "vitest": "0.34.3"
