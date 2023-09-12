@@ -3,43 +3,35 @@ import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { BodyShort, Heading } from '@navikt/ds-react';
 
 import { CheckboxField } from '@navikt/ft-form-hooks';
-import { DateTimeLabel, Table, TableColumn, TableRow, Image } from '@navikt/ft-ui-komponenter';
+import { DateTimeLabel, Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { Dokument } from '@navikt/fp-types';
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
-import sendDokumentImageUrl from '../images/send_dokument.svg';
-import mottaDokumentImageUrl from '../images/motta_dokument.svg';
-import internDokumentImageUrl from '../images/intern_dokument.svg';
+import { ChevronDownDoubleIcon, ChevronLeftDoubleIcon, ChevronRightDoubleIcon } from '@navikt/aksel-icons';
 
 import styles from './documentListInnsyn.module.css';
 
 const getDirectionImage = (document: Dokument, intl: IntlShape): ReactElement => {
   if (document.kommunikasjonsretning === kommunikasjonsretning.INN) {
     return (
-      <Image
-        className={styles.image}
-        src={mottaDokumentImageUrl}
-        alt={intl.formatMessage({ id: 'DocumentListInnsyn.Motta' })}
-        tooltip={intl.formatMessage({ id: 'DocumentListInnsyn.Motta' })}
+      <ChevronRightDoubleIcon
+        title={intl.formatMessage({ id: 'DocumentListInnsyn.Motta' })}
+        className={styles.imageInn}
       />
     );
   }
   if (document.kommunikasjonsretning === kommunikasjonsretning.UT) {
     return (
-      <Image
-        className={styles.image}
-        src={sendDokumentImageUrl}
-        alt={intl.formatMessage({ id: 'DocumentListInnsyn.Send' })}
-        tooltip={intl.formatMessage({ id: 'DocumentListInnsyn.Send' })}
+      <ChevronLeftDoubleIcon
+        title={intl.formatMessage({ id: 'DocumentListInnsyn.Send' })}
+        className={styles.imageSend}
       />
     );
   }
   return (
-    <Image
-      className={styles.image}
-      src={internDokumentImageUrl}
-      alt={intl.formatMessage({ id: 'DocumentListInnsyn.Intern' })}
-      tooltip={intl.formatMessage({ id: 'DocumentListInnsyn.Intern' })}
+    <ChevronDownDoubleIcon
+      title={intl.formatMessage({ id: 'DocumentListInnsyn.Intern' })}
+      className={styles.imageIntern}
     />
   );
 };

@@ -1,13 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { BodyShort, Button, Label, Panel } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, Image, PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
+import { BodyShort, Button, HStack, Label, Panel } from '@navikt/ds-react';
+import { FlexColumn, FlexContainer, FlexRow, PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { ArrowLeftIcon, ArrowRightIcon, CheckmarkIcon, XMarkIcon } from '@navikt/aksel-icons';
 
 import { FastsattOpptjeningAktivitet } from '@navikt/fp-types';
 
-import checkImg from '../images/check.svg';
-import advarselImg from '../images/remove.svg';
 import opptjeningAktivitetKlassifisering from '../kodeverk/opptjeningAktivitetKlassifisering';
 
 import styles from './timeLineData.module.css';
@@ -90,17 +88,11 @@ const TimeLineData: FunctionComponent<OwnProps> = ({
         <PeriodLabel dateStringFom={fastsattOpptjeningAktivitet.fom} dateStringTom={fastsattOpptjeningAktivitet.tom} />
       </BodyShort>
       <VerticalSpacer sixteenPx />
-      {isPeriodGodkjent(fastsattOpptjeningAktivitet.klasse) && (
-        <span className={styles.image}>
-          <Image src={checkImg} className={styles.image} />
-        </span>
-      )}
-      {!isPeriodGodkjent(fastsattOpptjeningAktivitet.klasse) && (
-        <span className={styles.image}>
-          <Image src={advarselImg} className={styles.image} />
-        </span>
-      )}
-      <FormattedMessage id={periodStatus(fastsattOpptjeningAktivitet.klasse)} />
+      <HStack>
+        {isPeriodGodkjent(fastsattOpptjeningAktivitet.klasse) && <CheckmarkIcon className={styles.godkjentImage} />}
+        {!isPeriodGodkjent(fastsattOpptjeningAktivitet.klasse) && <XMarkIcon className={styles.avslattImage} />}
+        <FormattedMessage id={periodStatus(fastsattOpptjeningAktivitet.klasse)} />
+      </HStack>
     </Panel>
   );
 };

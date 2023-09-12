@@ -1,6 +1,7 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { BodyShort } from '@navikt/ds-react';
-import { FlexContainer, FlexRow, FlexColumn, Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { CheckmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
+import { FlexContainer, FlexRow, FlexColumn, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 import { vilkarUtfallType } from '@navikt/fp-kodeverk';
@@ -9,8 +10,6 @@ import { createIntl } from '@navikt/ft-utils';
 import { hasValidDate, required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@navikt/fp-types';
 import { useFormContext } from 'react-hook-form';
-import avslattImage from '../images/avslaatt.svg';
-import innvilgetImage from '../images/check.svg';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -82,7 +81,8 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Image className={styles.image} src={erVilkarOk ? innvilgetImage : avslattImage} />
+              {erVilkarOk && <CheckmarkIcon className={styles.godkjentImage} />}
+              {!erVilkarOk && <XMarkOctagonIcon className={styles.avslattImage} />}
             </FlexColumn>
             <FlexColumn>
               {erVilkarOk && <BodyShort size="small">{customVilkarOppfyltText}</BodyShort>}

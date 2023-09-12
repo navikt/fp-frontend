@@ -1,13 +1,12 @@
-import { FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { FigureOutwardIcon, FigureInwardIcon } from '@navikt/aksel-icons';
 import { Label, BodyShort } from '@navikt/ds-react';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk, KjønnkodeEnum, PersonopplysningerBasis } from '@navikt/fp-types';
 import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
 
 import Boks from '../Boks';
-import kvinneIkonUrl from '../../images/female.svg';
-import mannIkonUrl from '../../images/male.svg';
 import AdresseVisning from './AdresseVisning';
 
 import styles from './forelderPanel.module.css';
@@ -32,10 +31,18 @@ const ForelderPanel: FunctionComponent<OwnProps> = ({ forelder, erSøker, alleKo
             <FlexContainer>
               <FlexRow>
                 <FlexColumn>
-                  <Image
-                    alt={intl.formatMessage({ id: 'ForelderPanel.Soker' })}
-                    src={erKvinne ? kvinneIkonUrl : mannIkonUrl}
-                  />
+                  {erKvinne && (
+                    <FigureOutwardIcon
+                      className={styles.imageKvinne}
+                      title={intl.formatMessage({ id: 'ForelderPanel.Soker' })}
+                    />
+                  )}
+                  {!erKvinne && (
+                    <FigureInwardIcon
+                      className={styles.imageMann}
+                      title={intl.formatMessage({ id: 'ForelderPanel.Soker' })}
+                    />
+                  )}
                 </FlexColumn>
                 <FlexColumn>
                   <FlexContainer>

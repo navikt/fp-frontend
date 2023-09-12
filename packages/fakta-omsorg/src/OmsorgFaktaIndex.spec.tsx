@@ -22,7 +22,7 @@ describe('<OmsorgFaktaIndex>', () => {
     expect(screen.getByText('Død')).toBeInTheDocument();
     expect(screen.getByText('01.01.2019')).toBeInTheDocument();
 
-    expect(screen.getByText('Søker')).toBeInTheDocument();
+    expect(screen.getAllByText('Søker')).toHaveLength(3);
     expect(screen.getByText('Espen Utvikler')).toBeInTheDocument();
 
     expect(screen.getByText('Annen forelder')).toBeInTheDocument();

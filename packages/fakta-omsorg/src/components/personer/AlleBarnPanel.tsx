@@ -1,13 +1,14 @@
-import { DateLabel, FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import React, { FunctionComponent } from 'react';
+import { ChildEyesIcon } from '@navikt/aksel-icons';
 import { Label, BodyShort } from '@navikt/ds-react';
+import { DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { PersonopplysningerBasis } from '@navikt/fp-types';
-import barnIkonUrl from '../../images/child.svg';
+
 import Boks from '../Boks';
+import AdresseVisning from './AdresseVisning';
 
 import styles from './alleBarnPanel.module.css';
-import AdresseVisning from './AdresseVisning';
 
 interface OwnProps {
   alleBarn: PersonopplysningerBasis[];
@@ -25,7 +26,10 @@ const AlleBarnPanel: FunctionComponent<OwnProps> = ({ alleBarn }) => {
                 <FlexContainer>
                   <FlexRow>
                     <FlexColumn>
-                      <Image alt={intl.formatMessage({ id: 'AlleBarnPanel.Barn' })} src={barnIkonUrl} />
+                      <ChildEyesIcon
+                        className={styles.image}
+                        title={intl.formatMessage({ id: 'AlleBarnPanel.Barn' })}
+                      />
                     </FlexColumn>
                     <FlexColumn>
                       <FlexContainer>

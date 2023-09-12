@@ -1,11 +1,12 @@
 import React, { ReactNode, FunctionComponent } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { BodyShort, Label, Button } from '@navikt/ds-react';
+import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 
 import {
   FlexContainer,
   FlexRow,
   FlexColumn,
-  Image,
   EditedIcon,
   VerticalSpacer,
   AksjonspunktBox,
@@ -14,8 +15,6 @@ import {
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import { createIntl } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
-import { useFormContext } from 'react-hook-form';
-import advarselIkonUrl from '../images/advarsel_ny.svg';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -96,7 +95,7 @@ const OverstyringPanel: FunctionComponent<OwnProps> = ({
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Image src={advarselIkonUrl} />
+              <ExclamationmarkTriangleFillIcon className={styles.exclamationmarkIcon} />
             </FlexColumn>
             <FlexColumn>
               <BodyShort size="small">{intl.formatMessage({ id: 'OverstyringPanel.Unntakstilfeller' })}</BodyShort>

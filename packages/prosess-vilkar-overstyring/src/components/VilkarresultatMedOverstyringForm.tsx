@@ -2,8 +2,9 @@ import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { useForm } from 'react-hook-form';
+import { CheckmarkCircleFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
 import { Heading, Label, Detail, BodyShort } from '@navikt/ds-react';
-import { FlexContainer, FlexRow, FlexColumn, Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FlexContainer, FlexRow, FlexColumn, VerticalSpacer, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
 import { Form } from '@navikt/ft-form-hooks';
 import { KodeverkMedNavn, Aksjonspunkt, Behandling } from '@navikt/fp-types';
@@ -16,10 +17,6 @@ import {
 import { OverstyringPanel, VilkarResultPicker } from '@navikt/fp-prosess-felles';
 import { DDMMYYYY_DATE_FORMAT, decodeHtmlEntity } from '@navikt/ft-utils';
 import { OverstyringAp, OverstyringMedlemskapsvilkaretLopendeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import avslattImage from '../images/avslaatt_hover.svg';
-import innvilgetImage from '../images/innvilget_hover.svg';
-import keyImage from '../images/key-1-rotert.svg';
-import keyUtgraetImage from '../images/key-1-rotert-utgraet.svg';
 
 import styles from './vilkarresultatMedOverstyringForm.module.css';
 
@@ -194,7 +191,8 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
         <FlexRow>
           {!erOverstyrt && originalErVilkarOk !== undefined && (
             <FlexColumn>
-              <Image className={styles.status} src={originalErVilkarOk ? innvilgetImage : avslattImage} />
+              {originalErVilkarOk && <CheckmarkCircleFillIcon className={styles.godkjentImage} />}
+              {!originalErVilkarOk && <XMarkOctagonFillIcon className={styles.avslattImage} />}
             </FlexColumn>
           )}
           <FlexColumn>
@@ -237,20 +235,10 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
           </FlexColumn>
           {originalErVilkarOk !== undefined &&
             !isHidden(kanOverstyreAccess.isEnabled, aksjonspunkter, overstyringApKode) && (
-              <>
-                {!erOverstyrt && !overrideReadOnly && (
-                  <FlexColumn>
-                    <VerticalSpacer eightPx />
-                    <Image className={styles.key} src={keyImage} onClick={togglePa} />
-                  </FlexColumn>
-                )}
-                {(erOverstyrt || overrideReadOnly) && (
-                  <FlexColumn>
-                    <VerticalSpacer eightPx />
-                    <Image className={styles.keyWithoutCursor} src={keyUtgraetImage} />
-                  </FlexColumn>
-                )}
-              </>
+              <FlexColumn>
+                <VerticalSpacer eightPx />
+                <OverstyringKnapp onClick={togglePa} erOverstyrt={erOverstyrt || overrideReadOnly} />
+              </FlexColumn>
             )}
         </FlexRow>
       </FlexContainer>

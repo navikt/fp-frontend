@@ -5,3 +5,9 @@
 .leftCol {
   width: 40%;
 }
+
+.arrow {
+  color: var(--a-gray-400);
+  height: 35px;
+  width: 35px;
+}

@@ -17,7 +17,7 @@ describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
     expect(screen.getByText('Vilkåret er oppfylt')).toBeInTheDocument();
     expect(screen.queryByText('Manuell overstyring av automatisk vurdering')).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByRole('img')[1]);
+    await userEvent.click(screen.getByRole('button'));
 
     expect(await screen.findByText('Manuell overstyring av automatisk vurdering')).toBeInTheDocument();
     expect(screen.queryByText('Avslagsårsak')).not.toBeInTheDocument();
@@ -48,13 +48,13 @@ describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
 
     expect(await screen.findByText('Fødsel')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByRole('img')[1]);
+    await userEvent.click(screen.getByRole('button'));
 
     expect(await screen.findByText('Manuell overstyring av automatisk vurdering')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Avbryt'));
 
-    expect(await screen.getAllByRole('img')).toHaveLength(2);
+    expect(await screen.getAllByRole('button')).toHaveLength(1);
   });
 
   it('skal overstyre og fylle ut medlemskapsvilkåret ikke er oppfylt og så lagre', async () => {
@@ -66,7 +66,7 @@ describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
     expect(screen.getByText('Vilkåret er oppfylt')).toBeInTheDocument();
     expect(screen.queryByText('Manuell overstyring av automatisk vurdering')).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByRole('img')[1]);
+    await userEvent.click(screen.getByRole('button'));
 
     expect(await screen.findByText('Manuell overstyring av automatisk vurdering')).toBeInTheDocument();
     expect(screen.queryByText('Avslagsårsak')).not.toBeInTheDocument();

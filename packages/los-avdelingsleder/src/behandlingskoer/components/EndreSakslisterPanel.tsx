@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useCallback, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import pilNedUrl from '../../images/pil_ned2.svg';
+import { ArrowDownIcon } from '@navikt/aksel-icons';
 import { restApiHooks, RestApiPathsKeys } from '../../data/fplosRestApi';
 import Saksliste from '../../typer/sakslisteAvdelingTsType';
 import Saksbehandler from '../../typer/saksbehandlerAvdelingTsType';
@@ -86,7 +86,10 @@ const EndreSakslisterPanel: FunctionComponent<OwnProps> = ({
             <FlexRow>
               <FlexColumn className={styles.leftCol} />
               <FlexColumn>
-                <Image alt={intl.formatMessage({ id: 'EndreSakslisterPanel.Saksbehandlere' })} src={pilNedUrl} />
+                <ArrowDownIcon
+                  className={styles.arrow}
+                  title={intl.formatMessage({ id: 'EndreSakslisterPanel.Saksbehandlere' })}
+                />
               </FlexColumn>
               <FlexColumn className={styles.text}>
                 <FormattedMessage id="EndreSakslisterPanel.KnyttetMotSaksbehandlere" />

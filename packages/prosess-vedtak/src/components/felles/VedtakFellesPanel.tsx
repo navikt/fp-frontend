@@ -1,7 +1,8 @@
 import React, { FunctionComponent, useMemo, useState, useCallback, ReactNode, MouseEvent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Label, Button, Link, BodyShort, Heading } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer, OkAvbrytModal } from '@navikt/ft-ui-komponenter';
+import { ArrowForwardIcon, CheckmarkCircleFillIcon, PencilIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer, OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
 import {
   avslagsarsakCodes,
@@ -16,11 +17,6 @@ import { AsyncPollingStatus } from '@navikt/fp-rest-api';
 import { Behandling, Aksjonspunkt, Behandlingsresultat } from '@navikt/fp-types';
 
 import { useFormContext } from 'react-hook-form';
-import popOutPilSvg from '../../images/pop-out-pil.svg';
-import endreSvg from '../../images/endre.svg';
-import endreDisabletSvg from '../../images/endre_disablet.svg';
-import avslattImage from '../../images/avslaatt_hover.svg';
-import innvilgetImage from '../../images/innvilget_hover.svg';
 
 import ManueltVedtaksbrevPanel from './ManueltVedtaksbrevPanel';
 import VedtakHelpTextPanel from './VedtakHelpTextPanel';
@@ -148,7 +144,8 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
         <FlexRow>
           {status === behandlingStatusCode.AVSLUTTET && (
             <FlexColumn>
-              <Image className={styles.status} src={erInnvilget ? innvilgetImage : avslattImage} />
+              {erInnvilget && <CheckmarkCircleFillIcon className={styles.innvilgetImage} />}
+              {!erInnvilget && <XMarkOctagonFillIcon className={styles.avslattImage} />}
             </FlexColumn>
           )}
           <FlexColumn>
@@ -179,7 +176,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
                     }
                   />
                 </span>
-                <Image src={popOutPilSvg} className={styles.pil} />
+                <ArrowForwardIcon className={styles.pil} />
               </Link>
             )}
             {skalViseLink && harIkkeKonsekvensForYtelse && !kanBehandles && (
@@ -197,7 +194,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
           <FlexColumn>
             {!readOnly && !skalBrukeManueltBrev && (
               <Link href="#" onClick={onToggleOverstyring}>
-                <Image src={endreSvg} className={styles.blyant} />
+                <PencilIcon className={styles.blyant} />
                 <span>
                   <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
                 </span>
@@ -205,7 +202,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
             )}
             {(readOnly || skalBrukeManueltBrev) && (
               <>
-                <Image src={endreDisabletSvg} className={styles.blyant} />
+                <PencilIcon className={styles.blyantDisablet} />
                 <BodyShort size="small" className={styles.disabletLink}>
                   <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
                 </BodyShort>

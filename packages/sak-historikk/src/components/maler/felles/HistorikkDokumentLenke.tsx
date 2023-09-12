@@ -4,6 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import { HistorikkInnslagDokumentLink } from '@navikt/fp-types';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FileIcon } from '@navikt/aksel-icons';
+import { HStack } from '@navikt/ds-react';
 import styles from './historikkDokumentLenke.module.css';
 
 const DOCUMENT_SERVER_URL = '/fpsak/api/dokument/hent-dokument';
@@ -18,10 +20,10 @@ const HistorikkDokumentLenke: FunctionComponent<OwnProps> = ({ dokumentLenke, sa
 
   if (utgått) {
     return (
-      <span className={styles.dokumentLenke}>
-        <i className={styles.dokumentIkon} title={tag} />
+      <HStack>
+        <FileIcon title={tag} className={styles.ikon} />
         <FormattedMessage id="Historikk.Utgått" values={{ tag }} />
-      </span>
+      </HStack>
     );
   }
   return (
@@ -33,8 +35,10 @@ const HistorikkDokumentLenke: FunctionComponent<OwnProps> = ({ dokumentLenke, sa
         target="_blank"
         rel="noopener noreferrer"
       >
-        <i className={styles.dokumentIkon} title={tag} />
-        {tag}
+        <HStack>
+          <FileIcon title={tag} className={styles.ikon} />
+          {tag}
+        </HStack>
       </a>
     </>
   );

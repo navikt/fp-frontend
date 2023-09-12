@@ -1,8 +1,8 @@
 import React, { FunctionComponent, MouseEvent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Label, Alert, Link, Detail } from '@navikt/ds-react';
+import { ArrowForwardIcon } from '@navikt/aksel-icons';
 import {
-  Image,
   FlexContainer,
   FlexRow,
   FlexColumn,
@@ -14,8 +14,6 @@ import {
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { getLanguageFromSprakkode } from '@navikt/ft-utils';
-
-import popOutPilSvg from '../../images/pop-out-pil.svg';
 
 import styles from './manueltVedtaksbrevPanel.module.css';
 
@@ -58,7 +56,7 @@ const ManueltVedtaksbrevPanel: FunctionComponent<OwnProps> = ({
                 <span>
                   <FormattedMessage id="FritekstBrevPanel.ForhandsvisManueltVedtaksbrev" />
                 </span>
-                <Image src={popOutPilSvg} className={styles.pil} />
+                <ArrowForwardIcon className={styles.pil} />
               </Link>
             )}
           </FlexColumn>

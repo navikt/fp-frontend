@@ -1,10 +1,8 @@
 import React, { ReactNode, FunctionComponent } from 'react';
 import { Heading, Detail, Label, BodyShort } from '@navikt/ds-react';
-import { FlexContainer, FlexRow, FlexColumn, Image, VerticalSpacer, AksjonspunktBox } from '@navikt/ft-ui-komponenter';
-
+import { CheckmarkCircleFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
+import { FlexContainer, FlexRow, FlexColumn, VerticalSpacer, AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
-import avslattImage from '../images/avslaatt_hover.svg';
-import innvilgetImage from '../images/innvilget_hover.svg';
 
 import ProsessStegSubmitButton from '../ProsessStegSubmitButtonNew';
 import messages from '../../i18n/nb_NO.json';
@@ -50,7 +48,8 @@ const ProsessPanelTemplate: FunctionComponent<OwnProps> = ({
       <FlexRow>
         {originalErVilkarOk !== undefined && (
           <FlexColumn>
-            <Image className={styles.status} src={originalErVilkarOk ? innvilgetImage : avslattImage} />
+            {originalErVilkarOk && <CheckmarkCircleFillIcon className={styles.godkjentImage} />}
+            {!originalErVilkarOk && <XMarkOctagonFillIcon className={styles.avslattImage} />}
           </FlexColumn>
         )}
         <FlexColumn>
