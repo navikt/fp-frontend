@@ -37,11 +37,6 @@ export default defineConfig({
         changeOrigin: false,
         secure: false,
       },
-      '/fpoppdrag/api': {
-        target: 'http://127.0.0.1:9000',
-        changeOrigin: false,
-        secure: false,
-      },
       '/fpfordel/api': {
         target: 'http://127.0.0.1:9000',
         changeOrigin: false,

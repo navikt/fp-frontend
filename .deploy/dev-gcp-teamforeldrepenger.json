@@ -12,7 +12,6 @@
     "fpsak-api.dev-fss-pub.nais.io",
     "fplos.dev-fss-pub.nais.io",
     "fpformidling.dev-fss-pub.nais.io",
-    "fpoppdrag.dev-fss-pub.nais.io",
     "fptilbake.dev-fss-pub.nais.io"
   ],
   "proxyRedirects": [
@@ -25,11 +24,6 @@
       "path": "/fptilbake/api",
       "url": "https://fptilbake.dev-fss-pub.nais.io",
       "scope": "api://dev-fss.teamforeldrepenger.fptilbake/.default"
-    },
-    {
-      "path": "/fpoppdrag/api",
-      "url": "https://fpoppdrag.dev-fss-pub.nais.io",
-      "scope": "api://dev-fss.teamforeldrepenger.fpoppdrag/.default"
     },
     {
       "path": "/fpformidling/api",
