@@ -27,7 +27,7 @@ const AlleBarnPanel: FunctionComponent<OwnProps> = ({ alleBarn }) => {
                     <FlexColumn>
                       <ChildEyesIcon
                         className={styles.image}
-                        title={intl.formatMessage({ id: 'AlleBarnPanel.Barn' })}
+                        title={intl.formatMessage({ id: 'PersonInfoPanel.Barn' })}
                       />
                     </FlexColumn>
                     <FlexColumn>
