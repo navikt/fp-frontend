@@ -121,7 +121,7 @@
     "@navikt/ft-ui-komponenter": "2.1.0",
     "@navikt/ft-utils": "2.1.0",
     "@popperjs/core": "2.11.8",
-    "@sentry/browser": "7.66.0",
+    "@sentry/browser": "7.68.0",
     "axios": "1.5.0",
     "classnames": "2.3.2",
     "core-js": "3.32.1",
