@@ -1,4 +1,0 @@
-import{t as l,j as n,P as o}from"./index.es-06072f7f.js";import{B as t}from"./BehandlingHenlagtPanel-b9cfc918.js";import"./index-6d8bab86.js";import"./index.es-bf42e136.js";import"./index.es-672d9717.js";const i={"BehandlingHenlagtPanel.Henlagt":"Behandling er henlagt"},g=l(i),h={title:"app/prosess/BehandlingHenlagtPanel",component:t},e=()=>n.jsx(o,{value:g,children:n.jsx(t,{valgtProsessSteg:"henlagt",registrerProsessPanel:()=>{}})});var s,a,r;e.parameters={...e.parameters,docs:{...(s=e.parameters)==null?void 0:s.docs,source:{originalSource:`() => <RawIntlProvider value={intl}>
-    <BehandlingHenlagtPanel valgtProsessSteg="henlagt" registrerProsessPanel={() => undefined} />
-  </RawIntlProvider>`,...(r=(a=e.parameters)==null?void 0:a.docs)==null?void 0:r.source}}};const v=["visBehandlingErHenlagtProsessPanel"];export{v as __namedExportsOrder,h as default,e as visBehandlingErHenlagtProsessPanel};
-//# sourceMappingURL=BehandlingHenlagtPanel.stories-01a862a9.js.map
