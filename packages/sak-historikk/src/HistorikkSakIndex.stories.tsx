@@ -16,7 +16,15 @@ const historikkInnslag = [
     aktoer: 'VL',
     opprettetAv: 'Srvengangsstonad',
     opprettetTidspunkt: '2019-09-19T12:16:14.499',
-    dokumentLinks: [],
+    dokumentLinks: [
+      {
+        dokumentId: '1',
+        journalpostId: '2',
+        tag: 'Vedlegg',
+        url: 'www.test.no',
+        utgått: false,
+      },
+    ],
     historikkinnslagDeler: [
       {
         begrunnelsetekst: 'Dette er en tekst',

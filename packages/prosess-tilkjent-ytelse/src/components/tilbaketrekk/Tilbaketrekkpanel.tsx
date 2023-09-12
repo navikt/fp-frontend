@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Label } from '@navikt/ds-react';
-import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
@@ -10,8 +10,8 @@ import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { Aksjonspunkt, BeregningsresultatFp } from '@navikt/fp-types';
 import { VurderTilbaketrekkAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import behandleImageURL from '../../images/advarsel.svg';
 
+import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import styles from './tilbaketrekkpanel.module.css';
 
 const radioFieldName = 'radioVurderTilbaketrekk';
@@ -85,10 +85,9 @@ const Tilbaketrekkpanel: FunctionComponent<OwnProps> = ({
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Image
+              <ExclamationmarkTriangleFillIcon
                 className={styles.image}
-                alt={intl.formatMessage({ id: 'HelpText.Aksjonspunkt' })}
-                src={behandleImageURL}
+                title={intl.formatMessage({ id: 'HelpText.Aksjonspunkt' })}
               />
             </FlexColumn>
             <FlexColumn>

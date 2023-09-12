@@ -12,6 +12,7 @@
 }
 
 .image {
+  color: var(--a-orange-500);
   height: 30px;
   margin-top: 8px;
   width: 30px;

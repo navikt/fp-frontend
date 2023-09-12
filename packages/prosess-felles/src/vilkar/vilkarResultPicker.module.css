@@ -2,10 +2,16 @@
   padding-right: 15px;
 }
 
-.image {
-  height: 16px;
-  margin-top: -2px;
-  width: 16px;
+.godkjentImage {
+  color: var(--a-surface-success);
+  height: 20px;
+  width: 20px;
+}
+
+.avslattImage {
+  color: var(--a-red-300);
+  height: 20px;
+  width: 20px;
 }
 
 .selectBredde {

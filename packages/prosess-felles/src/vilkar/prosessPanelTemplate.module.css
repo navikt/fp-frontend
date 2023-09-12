@@ -7,7 +7,14 @@
   min-width: 400px;
 }
 
-.status {
-  height: 20px;
-  width: 20px;
+.godkjentImage {
+  color: var(--a-surface-success);
+  height: 25px;
+  width: 25px;
+}
+
+.avslattImage {
+  color: var(--a-red-300);
+  height: 25px;
+  width: 25px;
 }

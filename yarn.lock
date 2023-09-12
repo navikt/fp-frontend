@@ -2940,6 +2940,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-omsorg-og-rett@workspace:packages/fakta-omsorg-og-rett"
   dependencies:
+    "@navikt/aksel-icons": 5.2.1
     "@navikt/ds-css": 5.2.1
     "@navikt/ds-react": 5.2.1
     "@navikt/fp-fakta-felles": 1.0.0
@@ -2978,6 +2979,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-omsorg@workspace:packages/fakta-omsorg"
   dependencies:
+    "@navikt/aksel-icons": 5.2.1
     "@navikt/ds-css": 5.2.1
     "@navikt/ds-react": 5.2.1
     "@navikt/fp-fakta-felles": 1.0.0
@@ -3935,6 +3937,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-felles@workspace:packages/prosess-felles"
   dependencies:
+    "@navikt/aksel-icons": 5.2.1
     "@navikt/ds-css": 5.2.1
     "@navikt/ds-react": 5.2.1
     "@navikt/fp-kodeverk": 1.0.0
@@ -4294,6 +4297,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vedtak@workspace:packages/prosess-vedtak"
   dependencies:
+    "@navikt/aksel-icons": 5.2.1
     "@navikt/ds-css": 5.2.1
     "@navikt/ds-react": 5.2.1
     "@navikt/fp-kodeverk": 1.0.0
@@ -4503,6 +4507,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-overstyring@workspace:packages/prosess-vilkar-overstyring"
   dependencies:
+    "@navikt/aksel-icons": 5.2.1
     "@navikt/ds-css": 5.2.1
     "@navikt/ds-react": 5.2.1
     "@navikt/fp-kodeverk": 1.0.0

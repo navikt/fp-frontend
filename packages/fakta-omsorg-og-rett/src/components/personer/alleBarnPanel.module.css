@@ -5,3 +5,9 @@
 .leftCol {
   width: 45%;
 }
+
+.image {
+  color: var(--a-purple-400);
+  height: 45px;
+  width: 45px;
+}

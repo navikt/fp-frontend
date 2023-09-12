@@ -2,3 +2,9 @@
   margin-left: -20px;
   min-width: 400px;
 }
+
+.exclamationmarkIcon {
+  color: var(--a-orange-600);
+  height: 25px;
+  width: 25px;
+}
