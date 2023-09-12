@@ -45,7 +45,7 @@
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.4.3",
     "cross-env": "7.0.3",
-    "eslint": "8.48.0",
+    "eslint": "8.49.0",
     "storybook": "7.4.0",
     "stylelint": "15.10.3",
     "typescript": "5.2.2",
