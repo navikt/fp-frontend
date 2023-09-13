@@ -58,7 +58,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
   const perioder = formMethods.watch('perioder');
 
   const lagNyPeriode = (dato: string) => {
-    if (valgtPeriodeIndex) {
+    if (valgtPeriodeIndex !== undefined) {
       const periode = perioder[valgtPeriodeIndex];
       const nyPeriode = {
         ...periode,
@@ -78,7 +78,7 @@ const UttakDokumentasjonFaktaDetailForm: FunctionComponent<OwnProps> = ({
   };
 
   const oppdaterOgNullstillPerioder = (dato: string) => {
-    if (valgtPeriodeIndex) {
+    if (valgtPeriodeIndex !== undefined) {
       settValgtPeriodeIndex(undefined);
 
       for (let i = fields.length - 1; i > valgtPeriodeIndex + 1; i -= 1) {
