@@ -1,6 +1,6 @@
 import React, { useState, FunctionComponent } from 'react';
 import { useFieldArray } from 'react-hook-form';
-import { ArbeidsforholdFodselOgTilrettelegging } from '@navikt/fp-types';
+import { ArbeidsforholdFodselOgTilrettelegging, ArbeidsforholdTilretteleggingDato } from '@navikt/fp-types';
 
 import { Button, Table } from '@navikt/ds-react';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -10,6 +10,19 @@ import dayjs from 'dayjs';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import TilretteleggingPeriodeTabellRad from './tilrettelegging/TilretteleggingPeriodeTabellRad';
 import OppholdPeriodeTabellRad from './opphold/OppholdPeriodeTabellRad';
+
+const finnTilrettelegging = (
+  alleFomDatoerSortert: string[],
+  tilretteleggingDatoer: ArbeidsforholdTilretteleggingDato[],
+  index: number,
+): ArbeidsforholdTilretteleggingDato | undefined => {
+  const nesteFomDato = alleFomDatoerSortert[index + 1];
+  if (!nesteFomDato) {
+    return undefined;
+  }
+  const nesteTilrettelegging = tilretteleggingDatoer.find(t => t.fom === nesteFomDato);
+  return nesteTilrettelegging || finnTilrettelegging(alleFomDatoerSortert, tilretteleggingDatoer, index + 1);
+};
 
 interface OwnProps {
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
@@ -88,7 +101,9 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
             const tilretteleggingIndex = tilretteleggingDatoer.findIndex(t => t.fom === fomDato);
             if (tilretteleggingIndex !== -1) {
               const navn = `${tilretteleggingStateName}.${tilretteleggingIndex}`;
-              const nesteTilrettelegging = tilretteleggingDatoer[tilretteleggingIndex + 1];
+
+              const nesteTilrettelegging = finnTilrettelegging(alleFomDatoerSortert, tilretteleggingDatoer, index);
+
               const tomDatoForTilrettelegging = nesteTilrettelegging?.fom
                 ? dayjs(nesteTilrettelegging.fom).subtract(1, 'day').format(ISO_DATE_FORMAT)
                 : dayjs(termindato).subtract(3, 'week').subtract(1, 'day').format(ISO_DATE_FORMAT);

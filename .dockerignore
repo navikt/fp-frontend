@@ -1,4 +1,4 @@
 *
-!./apps
+!./apps/fp-frontend-app/dist
 !server
 server/yarn.lock

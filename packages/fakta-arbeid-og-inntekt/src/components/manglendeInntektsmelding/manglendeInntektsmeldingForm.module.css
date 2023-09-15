@@ -1,13 +1,5 @@
-.radioHeader {
-  padding-right: 0;
-}
-
 .alertStripe {
   max-width: 40rem;
-}
-
-.image {
-  margin-top: -14px;
 }
 
 .hjelpetekst {
@@ -17,4 +9,11 @@
 .hjelpetekstInnhold {
   background-color: #d8f9ff;
   border: 1px solid #66cbec;
+}
+
+.svg {
+  color: var(--a-blue-400);
+  height: 25px;
+  margin-top: -5px;
+  width: 25px;
 }

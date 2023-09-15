@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import moment from 'moment';
-import { Label, BodyShort } from '@navikt/ds-react';
+import { Label, BodyShort, VStack, HStack } from '@navikt/ds-react';
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 
 import { FieldEditedInfo } from '@navikt/fp-fakta-felles';
 import { Datepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
-import { VerticalSpacer, FaktaGruppe, FlexContainer, FlexRow, FlexColumn } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { BekreftDokumentertDatoAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -102,37 +102,33 @@ const DokumentasjonFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
             />
           </>
         )}
-        {Object.keys(fodselsdatoer).map((id, i) => (
-          <div key={`div-${AksjonspunktCode.ADOPSJONSDOKUMENTAJON}-${id}`}>
-            <VerticalSpacer sixteenPx />
-            <FlexContainer>
-              <FlexRow>
-                <FlexColumn>
-                  <Datepicker
-                    name={`fodselsdatoer.${id}`}
-                    label={intl.formatMessage(
-                      {
-                        id: 'DokumentasjonFaktaForm.Fodselsdato',
-                      },
-                      { number: i + 1 },
-                    )}
-                    validate={[required, hasValidDate]}
-                    isReadOnly={readOnly}
-                    isEdited={editedStatus.adopsjonFodelsedatoer ? editedStatus.adopsjonFodelsedatoer[id] : false}
-                  />
-                </FlexColumn>
-                <FlexColumn>
-                  {!readOnly && isAgeAbove15(fodselsdatoer, parseInt(id, 10), omsorgsovertakelseDato) && (
-                    <ExclamationmarkTriangleFillIcon
-                      className={styles.image}
-                      title={intl.formatMessage({ id: 'DokumentasjonFaktaForm.BarnErOver15Ar' })}
-                    />
+        <VStack>
+          {Object.keys(fodselsdatoer).map((id, i) => (
+            <div key={`div-${AksjonspunktCode.ADOPSJONSDOKUMENTAJON}-${id}`}>
+              <VerticalSpacer sixteenPx />
+              <HStack gap="4">
+                <Datepicker
+                  name={`fodselsdatoer.${id}`}
+                  label={intl.formatMessage(
+                    {
+                      id: 'DokumentasjonFaktaForm.Fodselsdato',
+                    },
+                    { number: i + 1 },
                   )}
-                </FlexColumn>
-              </FlexRow>
-            </FlexContainer>
-          </div>
-        ))}
+                  validate={[required, hasValidDate]}
+                  isReadOnly={readOnly}
+                  isEdited={editedStatus.adopsjonFodelsedatoer ? editedStatus.adopsjonFodelsedatoer[id] : false}
+                />
+                {!readOnly && isAgeAbove15(fodselsdatoer, parseInt(id, 10), omsorgsovertakelseDato) && (
+                  <ExclamationmarkTriangleFillIcon
+                    className={styles.image}
+                    title={intl.formatMessage({ id: 'DokumentasjonFaktaForm.BarnErOver15Ar' })}
+                  />
+                )}
+              </HStack>
+            </div>
+          ))}
+        </VStack>
         <VerticalSpacer twentyPx />
         <Label size="small">{intl.formatMessage({ id: 'DokumentasjonFaktaForm.AntallBarnSomFyllerVilkaret' })}</Label>
         <BodyShort size="small">{findAntallBarnUnder15(fodselsdatoer, omsorgsovertakelseDato)}</BodyShort>
