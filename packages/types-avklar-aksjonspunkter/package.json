@@ -20,7 +20,7 @@
     "@navikt/fp-kodeverk": "1.0.0",
     "@navikt/fp-types": "1.0.0",
     "@navikt/ft-fakta-beregning": "4.3.1",
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "7.3.1",
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "7.3.2",
     "@navikt/ft-prosess-beregningsgrunnlag": "6.3.1"
   },
   "devDependencies": {
