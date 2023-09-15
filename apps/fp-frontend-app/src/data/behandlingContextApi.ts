@@ -163,7 +163,7 @@ export const behandlingEndepunkter = new RestApiConfigBuilder()
 
   // behandlingsdata
   .withRel('soeker-verge', BehandlingApiKeys.VERGE)
-  .withRel('simuleringResultat', BehandlingApiKeys.SIMULERING_RESULTAT)
+  .withRel('simulering-resultat', BehandlingApiKeys.SIMULERING_RESULTAT)
   .withRel('tilbakekrevingvalg', BehandlingApiKeys.TILBAKEKREVINGVALG)
   .withRel('familiehendelse-v2', BehandlingApiKeys.FAMILIEHENDELSE)
   .withRel('beregningsgrunnlag', BehandlingApiKeys.BEREGNINGSGRUNNLAG)
