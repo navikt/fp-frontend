@@ -7,7 +7,7 @@ import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { FieldEditedInfo } from '@navikt/fp-fakta-felles';
 import { Datepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
-import { VerticalSpacer, FaktaGruppe, FlexContainer, FlexRow, FlexColumn } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import { FamilieHendelse, Soknad } from '@navikt/fp-types';
 import { BekreftDokumentertDatoAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
