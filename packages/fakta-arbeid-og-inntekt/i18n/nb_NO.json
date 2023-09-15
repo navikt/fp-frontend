@@ -85,6 +85,8 @@
   "ArbeidsforholdInformasjonPanel.ÅpneInntektsmelding": "Åpne inntektsmelding (PDF)",
   "ArbeidsforholdInformasjonPanel.ApneImInfo": "Vis mer",
   "ArbeidsforholdInformasjonPanel.LukkeImInfo": "Vis mindre",
+  "ArbeidsforholdInformasjonPanel.Orgnr": "Org.nr.",
+  "ArbeidsforholdInformasjonPanel.Fodselsdato": "Fødselsdato",
 
   "LeggTilArbeidsforholdForm.LeggTilArbeidsforhold": "Legg til arbeidsforhold",
   "LeggTilArbeidsforholdForm.Arbeidsgiver": "Navn på arbeidsgiver",

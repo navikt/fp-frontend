@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import { Modal, Button, BodyShort, Label } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Modal, Button, BodyShort, Label, HStack } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { BehandlingResultatType } from '@navikt/ft-kodeverk';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 
@@ -31,31 +31,25 @@ const IverksetterVedtakStatusModal: FunctionComponent<OwnProps> = ({ lukkModal, 
   return (
     <Modal open={visModal} aria-label={imageAltText} onClose={lukkModal}>
       <Modal.Body>
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <CheckmarkCircleFillIcon className={styles.image} />
-            </FlexColumn>
-            <FlexColumn>
-              <Label size="small">
-                {intl.formatMessage({
-                  id: erVedtakAvslatt
-                    ? 'IverksetterVedtakStatusModal.VedtakAvslatt'
-                    : 'IverksetterVedtakStatusModal.VedtakInnvilet',
-                })}
-              </Label>
-              <VerticalSpacer fourPx />
-              <BodyShort size="small">
-                {intl.formatMessage({ id: 'IverksetterVedtakStatusModal.GoToSearchPage' })}
-              </BodyShort>
-            </FlexColumn>
-            <FlexColumn className={styles.button}>
-              <Button size="small" variant="primary" onClick={lukkModal} autoFocus type="button">
-                {intl.formatMessage({ id: 'IverksetterVedtakStatusModal.Ok' })}
-              </Button>
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
+        <HStack gap="6">
+          <CheckmarkCircleFillIcon className={styles.image} />
+          <div>
+            <Label size="small">
+              {intl.formatMessage({
+                id: erVedtakAvslatt
+                  ? 'IverksetterVedtakStatusModal.VedtakAvslatt'
+                  : 'IverksetterVedtakStatusModal.VedtakInnvilet',
+              })}
+            </Label>
+            <VerticalSpacer fourPx />
+            <BodyShort size="small">
+              {intl.formatMessage({ id: 'IverksetterVedtakStatusModal.GoToSearchPage' })}
+            </BodyShort>
+          </div>
+          <Button size="small" variant="primary" onClick={lukkModal} autoFocus type="button">
+            {intl.formatMessage({ id: 'IverksetterVedtakStatusModal.Ok' })}
+          </Button>
+        </HStack>
       </Modal.Body>
     </Modal>
   );

@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import classnames from 'classnames/bind';
-import { BodyShort, Label, Detail } from '@navikt/ds-react';
+import { BodyShort, Label } from '@navikt/ds-react';
 import { CheckmarkIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 
 import {
@@ -167,6 +167,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               arbeidsforholdForRad={arbeidsforholdForRad}
               inntektsmeldingerForRad={inntektsmeldingerForRad}
               alleKodeverk={alleKodeverk}
+              arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
             />
           )}
           {harKunInntektsmeldingOgIkkeÅrsak && (
@@ -179,6 +180,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               )}
               skalViseArbeidsforholdId={false}
               alleKodeverk={alleKodeverk}
+              arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
             />
           )}
           {manglerInntektsmelding && (
@@ -195,6 +197,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               lukkArbeidsforholdRad={toggleÅpenRad}
               oppdaterTabell={oppdaterTabell}
               alleKodeverk={alleKodeverk}
+              arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
             />
           )}
           {manglerArbeidsforhold && (
@@ -219,6 +222,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               inntektsposter={inntektsposter}
               arbeidsforholdForRad={arbeidsforholdForRad}
               alleKodeverk={alleKodeverk}
+              arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
             />
           )}
         </>
@@ -239,14 +243,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
         )}
       </TableColumn>
       <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>
-        {erRadÅpen && (
-          <>
-            <Label size="small">{arbeidsgiverNavn}</Label>
-            <Detail>
-              ({arbeidsgiverFødselsdato ? <DateLabel dateString={arbeidsgiverFødselsdato} /> : arbeidsgiverIdent})
-            </Detail>
-          </>
-        )}
+        {erRadÅpen && <Label size="small">{arbeidsgiverNavn}</Label>}
         {!erRadÅpen && <BodyShort size="small">{arbeidsgiverNavn}</BodyShort>}
       </TableColumn>
       <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>
