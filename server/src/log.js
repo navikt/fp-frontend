@@ -38,15 +38,15 @@ const stdoutLogger = winston.createLogger({
 });
 
 const debug = (msg) => {
-  stdoutLogger.debug(msg.replace(/\n|\r/g, ""));
+  stdoutLogger.debug(msg.replace(/[\n\r]/g, ""));
 };
 
 const info = (msg) => {
-  stdoutLogger.info(msg.replace(/\n|\r/g, ""));
+  stdoutLogger.info(msg.replace(/[\n\r]/g, ""));
 };
 
 const warning = (msg) => {
-  stdoutLogger.warn(msg.replace(/\n|\r/g, ""));
+  stdoutLogger.warn(msg.replace(/[\n\r]/g, ""));
 };
 
 const error = (msg, err) => {
