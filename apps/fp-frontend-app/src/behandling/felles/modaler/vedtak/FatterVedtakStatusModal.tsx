@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import { Modal, Button, Label, BodyShort } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Modal, Button, Label, BodyShort, HStack } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 
 import styles from './fatterVedtakStatusModal.module.css';
@@ -23,23 +23,17 @@ const FatterVedtakStatusModal: FunctionComponent<OwnProps> = ({ visModal = false
   return (
     <Modal width="small" open={visModal} aria-label={tekst} onClose={lukkModal}>
       <Modal.Body>
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <CheckmarkCircleFillIcon className={styles.image} />
-            </FlexColumn>
-            <FlexColumn>
-              <Label size="small">{tekst}</Label>
-              <VerticalSpacer fourPx />
-              <BodyShort size="small">{intl.formatMessage({ id: 'FatterVedtakStatusModal.GoToSearchPage' })}</BodyShort>
-            </FlexColumn>
-            <FlexColumn className={styles.button}>
-              <Button size="small" variant="primary" onClick={lukkModal} autoFocus type="button">
-                {intl.formatMessage({ id: 'FatterVedtakStatusModal.Ok' })}
-              </Button>
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
+        <HStack gap="6">
+          <CheckmarkCircleFillIcon className={styles.image} />
+          <div>
+            <Label size="small">{tekst}</Label>
+            <VerticalSpacer fourPx />
+            <BodyShort size="small">{intl.formatMessage({ id: 'FatterVedtakStatusModal.GoToSearchPage' })}</BodyShort>
+          </div>
+          <Button size="small" variant="primary" onClick={lukkModal} autoFocus type="button">
+            {intl.formatMessage({ id: 'FatterVedtakStatusModal.Ok' })}
+          </Button>
+        </HStack>
       </Modal.Body>
     </Modal>
   );

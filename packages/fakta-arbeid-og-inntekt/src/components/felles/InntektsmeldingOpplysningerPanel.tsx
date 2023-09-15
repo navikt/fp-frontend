@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Link, Label, BodyShort, Detail } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Link, Label, BodyShort, Detail, VStack, HStack } from '@navikt/ds-react';
+import { DateLabel, PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FileFillIcon, PhoneFillIcon } from '@navikt/aksel-icons';
 
 import { Inntektsmelding, AoIArbeidsforhold, AlleKodeverk } from '@navikt/fp-types';
@@ -17,6 +17,8 @@ interface OwnProps {
   inntektsmelding: Inntektsmelding;
   skalViseArbeidsforholdId: boolean;
   alleKodeverk?: AlleKodeverk;
+  arbeidsgiverFødselsdato?: string;
+  ikkeVisInfo?: boolean;
 }
 
 const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
@@ -25,153 +27,136 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
   inntektsmelding,
   skalViseArbeidsforholdId,
   alleKodeverk,
+  arbeidsgiverFødselsdato,
+  ikkeVisInfo,
 }) => (
   <>
     <VerticalSpacer eightPx />
-    <FlexContainer>
-      {skalViseArbeidsforholdId && (
-        <>
-          <FlexRow>
-            <FlexColumn>
-              <Label size="small">
-                <FormattedMessage id="InntektsmeldingOpplysningerPanel.ArbeidsforholdId" />
-              </Label>
-            </FlexColumn>
-            <FlexColumn className={styles.textMargin}>
-              <BodyShort size="small">{inntektsmelding.eksternArbeidsforholdId}</BodyShort>
-            </FlexColumn>
-          </FlexRow>
-          <VerticalSpacer eightPx />
-        </>
-      )}
-      {arbeidsforhold && (
-        <>
-          <FlexRow>
-            <FlexColumn>
-              <Label size="small">
-                <FormattedMessage id="InntektsmeldingOpplysningerPanel.Stillingsprosent" />
-              </Label>
-            </FlexColumn>
-            <FlexColumn className={styles.textMargin}>
-              <BodyShort size="small">
-                {arbeidsforhold.stillingsprosent ? `${arbeidsforhold.stillingsprosent}%` : '-'}
-              </BodyShort>
-            </FlexColumn>
-          </FlexRow>
-          {arbeidsforhold.permisjonOgMangel && (
-            <>
-              <VerticalSpacer eightPx />
-              <FlexRow>
-                <FlexColumn>
-                  <Label size="small">
-                    {getKodeverknavnFraKode(
-                      alleKodeverk,
-                      KodeverkType.PERMISJONSBESKRIVELSE_TYPE,
-                      arbeidsforhold.permisjonOgMangel.type,
-                    )}
-                  </Label>
-                </FlexColumn>
-                <FlexColumn className={styles.textMargin}>
-                  <BodyShort size="small">
-                    <PeriodLabel
-                      dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom}
-                      dateStringTom={arbeidsforhold.permisjonOgMangel.permisjonTom}
-                    />
-                  </BodyShort>
-                </FlexColumn>
-              </FlexRow>
-            </>
-          )}
-          <VerticalSpacer eightPx />
-        </>
-      )}
-      <FlexRow>
-        <FlexColumn>
+    {!ikkeVisInfo && arbeidsgiverFødselsdato && (
+      <HStack gap="4">
+        <Label size="small">
+          <FormattedMessage id="ArbeidsforholdInformasjonPanel.Fodselsdato" />
+        </Label>
+        <Detail>
+          <DateLabel dateString={arbeidsgiverFødselsdato} />
+        </Detail>
+      </HStack>
+    )}
+    {!ikkeVisInfo && !arbeidsgiverFødselsdato && (
+      <HStack gap="4">
+        <Label size="small">
+          <FormattedMessage id="ArbeidsforholdInformasjonPanel.Orgnr" />
+        </Label>
+        <Detail>{inntektsmelding.arbeidsgiverIdent}</Detail>
+      </HStack>
+    )}
+    <VerticalSpacer eightPx />
+    {skalViseArbeidsforholdId && (
+      <>
+        <HStack gap="4">
           <Label size="small">
-            <FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" />
+            <FormattedMessage id="InntektsmeldingOpplysningerPanel.ArbeidsforholdId" />
           </Label>
-        </FlexColumn>
-        <FlexColumn className={styles.textMargin}>
-          <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</BodyShort>
-        </FlexColumn>
-      </FlexRow>
-      <VerticalSpacer eightPx />
-      <FlexRow>
-        <FlexColumn>
+          <BodyShort size="small">{inntektsmelding.eksternArbeidsforholdId}</BodyShort>
+        </HStack>
+        <VerticalSpacer eightPx />
+      </>
+    )}
+    {arbeidsforhold && (
+      <>
+        <HStack gap="4">
           <Label size="small">
-            <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjon" />
+            <FormattedMessage id="InntektsmeldingOpplysningerPanel.Stillingsprosent" />
           </Label>
-        </FlexColumn>
-        <FlexColumn className={styles.textMargin}>
           <BodyShort size="small">
-            <FormattedMessage
-              id={
-                inntektsmelding.refusjonPrMnd
-                  ? 'InntektsmeldingOpplysningerPanel.Ja'
-                  : 'InntektsmeldingOpplysningerPanel.Nei'
-              }
-            />
+            {arbeidsforhold.stillingsprosent ? `${arbeidsforhold.stillingsprosent}%` : '-'}
           </BodyShort>
-        </FlexColumn>
-      </FlexRow>
-      <VerticalSpacer eightPx />
-      {inntektsmelding.refusjonPrMnd !== undefined && inntektsmelding.refusjonPrMnd !== null && (
-        <>
-          <FlexRow>
-            <FlexColumn>
+        </HStack>
+        {arbeidsforhold.permisjonOgMangel && (
+          <>
+            <VerticalSpacer eightPx />
+            <HStack gap="4">
               <Label size="small">
-                <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" />
+                {getKodeverknavnFraKode(
+                  alleKodeverk,
+                  KodeverkType.PERMISJONSBESKRIVELSE_TYPE,
+                  arbeidsforhold.permisjonOgMangel.type,
+                )}
               </Label>
-            </FlexColumn>
-            <FlexColumn className={styles.textMargin}>
-              <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd)}</BodyShort>
-            </FlexColumn>
-          </FlexRow>
-          <VerticalSpacer eightPx />
-        </>
-      )}
-      <Link
-        href={hentDokumentLenke(saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId)}
-        target="_blank"
-      >
-        <span>
-          <BodyShort size="small" className={styles.inline}>
-            <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
-          </BodyShort>
-        </span>
-        <FileFillIcon className={styles.docIcon} />
-      </Link>
-      <VerticalSpacer sixteenPx />
-      <FlexRow>
-        <FlexColumn>
-          <PhoneFillIcon className={styles.phoneIcon} />
-        </FlexColumn>
-        <FlexColumn>
-          <FlexRow>
-            <FlexColumn>
-              <Label size="small">
-                <FormattedMessage id="InntektsmeldingOpplysningerPanel.Kontaktinfo" />
-              </Label>
-            </FlexColumn>
-          </FlexRow>
-          <FlexRow>
-            <FlexColumn>
-              <Detail>{inntektsmelding.kontaktpersonNavn}</Detail>
-            </FlexColumn>
-          </FlexRow>
-          <FlexRow>
-            <FlexColumn>
-              <Detail>
-                <FormattedMessage
-                  id="InntektsmeldingOpplysningerPanel.Tlf"
-                  values={{ nr: inntektsmelding.kontaktpersonNummer }}
+              <BodyShort size="small">
+                <PeriodLabel
+                  dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom}
+                  dateStringTom={arbeidsforhold.permisjonOgMangel.permisjonTom}
                 />
-              </Detail>
-            </FlexColumn>
-          </FlexRow>
-        </FlexColumn>
-      </FlexRow>
-    </FlexContainer>
+              </BodyShort>
+            </HStack>
+          </>
+        )}
+        <VerticalSpacer eightPx />
+      </>
+    )}
+    <HStack gap="4">
+      <Label size="small">
+        <FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" />
+      </Label>
+      <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</BodyShort>
+    </HStack>
+    <VerticalSpacer eightPx />
+    <HStack gap="4">
+      <Label size="small">
+        <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjon" />
+      </Label>
+      <BodyShort size="small">
+        <FormattedMessage
+          id={
+            inntektsmelding.refusjonPrMnd
+              ? 'InntektsmeldingOpplysningerPanel.Ja'
+              : 'InntektsmeldingOpplysningerPanel.Nei'
+          }
+        />
+      </BodyShort>
+    </HStack>
+    <VerticalSpacer eightPx />
+    {inntektsmelding.refusjonPrMnd !== undefined && inntektsmelding.refusjonPrMnd !== null && (
+      <>
+        <HStack gap="4">
+          <Label size="small">
+            <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" />
+          </Label>
+          <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd)}</BodyShort>
+        </HStack>
+        <VerticalSpacer eightPx />
+      </>
+    )}
+    <Link
+      href={hentDokumentLenke(saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId)}
+      target="_blank"
+    >
+      <span>
+        <BodyShort size="small" className={styles.inline}>
+          <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
+        </BodyShort>
+      </span>
+      <FileFillIcon className={styles.docIcon} />
+    </Link>
+    <VerticalSpacer sixteenPx />
+    <HStack gap="4">
+      <PhoneFillIcon className={styles.phoneIcon} />
+      <div>
+        <VStack>
+          <Label size="small">
+            <FormattedMessage id="InntektsmeldingOpplysningerPanel.Kontaktinfo" />
+          </Label>
+          <Detail>{inntektsmelding.kontaktpersonNavn}</Detail>
+          <Detail>
+            <FormattedMessage
+              id="InntektsmeldingOpplysningerPanel.Tlf"
+              values={{ nr: inntektsmelding.kontaktpersonNummer }}
+            />
+          </Detail>
+        </VStack>
+      </div>
+    </HStack>
     <VerticalSpacer thirtyTwoPx />
   </>
 );

@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, useCallback, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Alert, BodyShort, Heading, Button } from '@navikt/ds-react';
+import { Alert, BodyShort, Heading, Button, HStack, Spacer } from '@navikt/ds-react';
 import { PlusCircleIcon } from '@navikt/aksel-icons';
 
 import { dateFormat } from '@navikt/ft-utils';
@@ -11,15 +11,7 @@ import {
   ManueltArbeidsforhold,
   AksjonspunktÅrsak,
 } from '@navikt/fp-types';
-import {
-  VerticalSpacer,
-  AksjonspunktHelpTextHTML,
-  FloatRight,
-  OverstyringKnapp,
-  FlexColumn,
-  FlexContainer,
-  FlexRow,
-} from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer, AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import { ArbeidsforholdKomplettVurderingType, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 
 import ManueltLagtTilArbeidsforholdForm, { MANUELT_ORG_NR } from './manuelt/ManueltLagtTilArbeidsforholdForm';
@@ -102,36 +94,19 @@ const ArbeidsOgInntektOverstyrPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <FlexContainer>
-        <FlexRow spaceBetween>
-          <FlexColumn>
-            <FlexContainer>
-              <FlexRow>
-                <FlexColumn>
-                  <Heading size="small">
-                    <FormattedMessage id="ArbeidOgInntektFaktaPanel.Overskrift" />
-                  </Heading>
-                </FlexColumn>
-                {erOverstyrer && erAksjonspunktÅpent && !readOnly && (
-                  <FlexColumn>
-                    <OverstyringKnapp onClick={toggleOverstyring} />
-                  </FlexColumn>
-                )}
-              </FlexRow>
-            </FlexContainer>
-          </FlexColumn>
-          <FlexColumn>
-            <FloatRight>
-              <BodyShort size="small">
-                <FormattedMessage
-                  id="ArbeidOgInntektFaktaPanel.Skjaringstidspunkt"
-                  values={{ skjæringspunktDato: dateFormat(arbeidOgInntekt.skjæringstidspunkt) }}
-                />
-              </BodyShort>
-            </FloatRight>
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
+      <HStack gap="4">
+        <Heading size="small">
+          <FormattedMessage id="ArbeidOgInntektFaktaPanel.Overskrift" />
+        </Heading>
+        {erOverstyrer && erAksjonspunktÅpent && !readOnly && <OverstyringKnapp onClick={toggleOverstyring} />}
+        <Spacer />
+        <BodyShort size="small">
+          <FormattedMessage
+            id="ArbeidOgInntektFaktaPanel.Skjaringstidspunkt"
+            values={{ skjæringspunktDato: dateFormat(arbeidOgInntekt.skjæringstidspunkt) }}
+          />
+        </BodyShort>
+      </HStack>
       <VerticalSpacer thirtyTwoPx />
       {aksjonspunktTekstKoder.length > 0 && (
         <AksjonspunktHelpTextHTML>

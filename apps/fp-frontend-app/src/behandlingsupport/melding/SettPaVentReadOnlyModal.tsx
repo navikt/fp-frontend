@@ -2,8 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { Button, Modal, Heading, Label, BodyShort } from '@navikt/ds-react';
-import { DateLabel, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import { Button, Modal, Heading, Label, BodyShort, HStack } from '@navikt/ds-react';
+import { DateLabel } from '@navikt/ft-ui-komponenter';
 
 import { KodeverkMedNavn } from '@navikt/fp-types';
 
@@ -44,24 +44,22 @@ const SettPaVentReadOnlyModal: FunctionComponent<PureOwnProps> = ({ lukkCallback
         </Heading>
       </Modal.Header>
       <Modal.Body>
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <Label>
-                <FormattedMessage id="SettPaVentReadOnlyModal.Arsak" />
-              </Label>
-              <BodyShort>{ventearsaker.find(v => v.kode === ventearsak)?.navn}</BodyShort>
-            </FlexColumn>
-            <FlexColumn>
-              <Label>
-                <FormattedMessage id="SettPaVentReadOnlyModal.Frist" />
-              </Label>
-              <BodyShort>
-                <DateLabel dateString={finnFrist()} />
-              </BodyShort>
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
+        <HStack gap="6">
+          <div>
+            <Label>
+              <FormattedMessage id="SettPaVentReadOnlyModal.Arsak" />
+            </Label>
+            <BodyShort>{ventearsaker.find(v => v.kode === ventearsak)?.navn}</BodyShort>
+          </div>
+          <div>
+            <Label>
+              <FormattedMessage id="SettPaVentReadOnlyModal.Frist" />
+            </Label>
+            <BodyShort>
+              <DateLabel dateString={finnFrist()} />
+            </BodyShort>
+          </div>
+        </HStack>
       </Modal.Body>
       <Modal.Footer>
         <Button size="small" variant="primary" onClick={lukkCallback}>

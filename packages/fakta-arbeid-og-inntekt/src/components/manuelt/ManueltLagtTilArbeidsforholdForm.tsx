@@ -2,8 +2,8 @@ import React, { FunctionComponent, useCallback, useMemo, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm, UseFormGetValues } from 'react-hook-form';
 import { TrashFillIcon } from '@navikt/aksel-icons';
-import { Heading, Button } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer, OkAvbrytModal } from '@navikt/ft-ui-komponenter';
+import { Heading, Button, Spacer, HStack } from '@navikt/ds-react';
+import { VerticalSpacer, OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import { AoIArbeidsforhold, ManueltArbeidsforhold } from '@navikt/fp-types';
@@ -163,51 +163,41 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
       )}
       <VerticalSpacer eightPx />
       <Form formMethods={formMethods} onSubmit={lagreArbeidsforhold}>
-        <FlexContainer>
-          <FlexRow>
-            {erOverstyrt && (
-              <>
-                <FlexColumn>
-                  <InputField
-                    name="arbeidsgiverNavn"
-                    label={<FormattedMessage id="LeggTilArbeidsforholdForm.Arbeidsgiver" />}
-                    validate={[required]}
-                    readOnly={isReadOnly || !erOverstyrt}
-                  />
-                </FlexColumn>
-                <FlexColumn>
-                  <Datepicker
-                    name="fom"
-                    label={<FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeFra" />}
-                    validate={[required, hasValidDate]}
-                    isReadOnly={isReadOnly || !erOverstyrt}
-                  />
-                </FlexColumn>
-                <FlexColumn>
-                  <Datepicker
-                    name="tom"
-                    label={<FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeTil" />}
-                    validate={[hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
-                    isReadOnly={isReadOnly || !erOverstyrt}
-                  />
-                </FlexColumn>
-              </>
-            )}
-            <FlexColumn>
+        <HStack gap="4">
+          {erOverstyrt && (
+            <>
               <InputField
-                name="stillingsprosent"
-                label={<FormattedMessage id="LeggTilArbeidsforholdForm.Stillingsprosent" />}
-                parse={value => {
-                  const parsedValue = parseInt(value.toString(), 10);
-                  return Number.isNaN(parsedValue) ? value : parsedValue;
-                }}
-                validate={[required, hasValidInteger, minValue1, maxValue100]}
+                name="arbeidsgiverNavn"
+                label={<FormattedMessage id="LeggTilArbeidsforholdForm.Arbeidsgiver" />}
+                validate={[required]}
                 readOnly={isReadOnly || !erOverstyrt}
-                maxLength={3}
               />
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
+              <Datepicker
+                name="fom"
+                label={<FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeFra" />}
+                validate={[required, hasValidDate]}
+                isReadOnly={isReadOnly || !erOverstyrt}
+              />
+              <Datepicker
+                name="tom"
+                label={<FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeTil" />}
+                validate={[hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
+                isReadOnly={isReadOnly || !erOverstyrt}
+              />
+            </>
+          )}
+          <InputField
+            name="stillingsprosent"
+            label={<FormattedMessage id="LeggTilArbeidsforholdForm.Stillingsprosent" />}
+            parse={value => {
+              const parsedValue = parseInt(value.toString(), 10);
+              return Number.isNaN(parsedValue) ? value : parsedValue;
+            }}
+            validate={[required, hasValidInteger, minValue1, maxValue100]}
+            readOnly={isReadOnly || !erOverstyrt}
+            maxLength={3}
+          />
+        </HStack>
         <VerticalSpacer twentyPx />
         <TextAreaField
           label={<FormattedMessage id="LeggTilArbeidsforholdForm.Begrunn" />}
@@ -218,53 +208,42 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
         />
         <VerticalSpacer twentyPx />
         {erOverstyrt && (
-          <FlexContainer>
-            <FlexRow spaceBetween>
-              <FlexColumn>
-                <FlexContainer>
-                  <FlexRow>
-                    <FlexColumn>
-                      <Button
-                        size="small"
-                        variant="secondary"
-                        loading={formMethods.formState.isSubmitting}
-                        disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-                      >
-                        <FormattedMessage id="LeggTilArbeidsforholdForm.Lagre" />
-                      </Button>
-                    </FlexColumn>
-                    <FlexColumn>
-                      <Button
-                        size="small"
-                        variant="tertiary"
-                        loading={false}
-                        disabled={formMethods.formState.isSubmitting}
-                        onClick={lukkRadOgResetForm}
-                        type="button"
-                      >
-                        <FormattedMessage id="LeggTilArbeidsforholdForm.Avbryt" />
-                      </Button>
-                    </FlexColumn>
-                  </FlexRow>
-                </FlexContainer>
-              </FlexColumn>
-              {radData && (
-                <FlexColumn>
-                  <Button
-                    size="small"
-                    variant="tertiary"
-                    loading={false}
-                    disabled={formMethods.formState.isSubmitting}
-                    onClick={() => settVisSletteDialog(true)}
-                    type="button"
-                    icon={<TrashFillIcon aria-hidden />}
-                  >
-                    <FormattedMessage id="LeggTilArbeidsforholdForm.Slett" />
-                  </Button>
-                </FlexColumn>
-              )}
-            </FlexRow>
-          </FlexContainer>
+          <HStack gap="4">
+            <Button
+              size="small"
+              variant="secondary"
+              loading={formMethods.formState.isSubmitting}
+              disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+            >
+              <FormattedMessage id="LeggTilArbeidsforholdForm.Lagre" />
+            </Button>
+            <Button
+              size="small"
+              variant="tertiary"
+              loading={false}
+              disabled={formMethods.formState.isSubmitting}
+              onClick={lukkRadOgResetForm}
+              type="button"
+            >
+              <FormattedMessage id="LeggTilArbeidsforholdForm.Avbryt" />
+            </Button>
+            {radData && (
+              <>
+                <Spacer />
+                <Button
+                  size="small"
+                  variant="tertiary"
+                  loading={false}
+                  disabled={formMethods.formState.isSubmitting}
+                  onClick={() => settVisSletteDialog(true)}
+                  type="button"
+                  icon={<TrashFillIcon aria-hidden />}
+                >
+                  <FormattedMessage id="LeggTilArbeidsforholdForm.Slett" />
+                </Button>
+              </>
+            )}
+          </HStack>
         )}
         <VerticalSpacer fourtyPx />
       </Form>

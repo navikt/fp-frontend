@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useState, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import dayjs from 'dayjs';
-import { Label, BodyShort, Link } from '@navikt/ds-react';
+import { Label, BodyShort, Link, VStack, HStack, Spacer } from '@navikt/ds-react';
 import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
 
 import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding, Inntektspost } from '@navikt/fp-types';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer, FloatRight } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import InntektsmeldingerPanel from './InntektsmeldingerPanel';
 
@@ -51,6 +51,7 @@ interface OwnProps {
   arbeidsforholdForRad: AoIArbeidsforhold[];
   inntektsmeldingerForRad?: Inntektsmelding[];
   alleKodeverk: AlleKodeverk;
+  arbeidsgiverFødselsdato?: string;
 }
 
 const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
@@ -60,6 +61,7 @@ const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
   arbeidsforholdForRad,
   inntektsmeldingerForRad = EMPTY_ARRAY,
   alleKodeverk,
+  arbeidsgiverFødselsdato,
 }) => {
   const [visAlleMåneder, toggleMånedvisning] = useState(false);
 
@@ -79,6 +81,7 @@ const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
         arbeidsforholdForRad={arbeidsforholdForRad}
         inntektsmeldingerForRad={inntektsmeldingerForRad}
         alleKodeverk={alleKodeverk}
+        arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
       />
       <VerticalSpacer thirtyTwoPx />
       {visInntektsposter && (
@@ -93,27 +96,20 @@ const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
             />
           </Label>
           <VerticalSpacer fourPx />
-          <FlexContainer>
+          <VStack>
             {sorterteInntektsposter
               .filter((_inntekt, index) => (visAlleMåneder ? true : index < 3))
               .map(inntekt => (
-                <FlexRow key={inntekt.fom}>
-                  <FlexColumn className={styles.maanedBredde}>
-                    <BodyShort size="small">
-                      <FormattedMessage id={`ArbeidsforholdInformasjonPanel.${dayjs(inntekt.fom).month() + 1}`} />
-                    </BodyShort>
-                  </FlexColumn>
-                  <FlexColumn className={styles.aarBredde}>
-                    <BodyShort size="small">{dayjs(inntekt.fom).year()}</BodyShort>
-                  </FlexColumn>
-                  <FlexColumn className={styles.belopBredde}>
-                    <FloatRight>
-                      <BodyShort size="small">{formatCurrencyNoKr(inntekt.beløp)}</BodyShort>
-                    </FloatRight>
-                  </FlexColumn>
-                </FlexRow>
+                <HStack gap="2" className={styles.bredde} key={inntekt.fom}>
+                  <BodyShort size="small">
+                    <FormattedMessage id={`ArbeidsforholdInformasjonPanel.${dayjs(inntekt.fom).month() + 1}`} />
+                  </BodyShort>
+                  <BodyShort size="small">{dayjs(inntekt.fom).year()}</BodyShort>
+                  <Spacer />
+                  <BodyShort size="small">{formatCurrencyNoKr(inntekt.beløp)}</BodyShort>
+                </HStack>
               ))}
-          </FlexContainer>
+          </VStack>
           <VerticalSpacer fourPx />
           <Link
             onClick={e => {
