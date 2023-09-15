@@ -31,15 +31,15 @@ __metadata:
     connect-timeout: ^1.9.0
     cors: ^2.8.5
     dotenv: ^10.0.0
-    express: ^4.17.1
-    express-http-proxy: ^1.6.0
+    express: ^4.18.2
+    express-http-proxy: ^1.6.3
     helmet: ^4.1.0
-    jose: ^4.9.3
-    morgan: ^1.9.1
+    jose: ^4.14.6
+    morgan: ^1.10.0
     node-cache: ^5.1.2
-    npm: ^8.19.1
-    openid-client: ^4.0.2
-    winston: ^3.8.2
+    npm: ^8.19.4
+    openid-client: ^4.9.1
+    winston: ^3.10.0
   languageName: unknown
   linkType: soft
 
@@ -1083,7 +1083,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express-http-proxy@npm:^1.6.0":
+"express-http-proxy@npm:^1.6.3":
   version: 1.6.3
   resolution: "express-http-proxy@npm:1.6.3"
   dependencies:
@@ -1094,7 +1094,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express@npm:^4.17.1":
+"express@npm:^4.18.2":
   version: 4.18.2
   resolution: "express@npm:4.18.2"
   dependencies:
@@ -1611,10 +1611,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jose@npm:^4.9.3":
-  version: 4.13.1
-  resolution: "jose@npm:4.13.1"
-  checksum: 89be959573beee69bd443493887d78799fd42340b45afa2c6681beda30314bcdfa5575f6977203c199e4c3e0ec2fc18d3c94745e7f0d59db51dedfae0efee63d
+"jose@npm:^4.14.6":
+  version: 4.14.6
+  resolution: "jose@npm:4.14.6"
+  checksum: eae81a234e7bf1446b1bd80722b3462b014e3835b155c3a7799c1c5043163a53a0dc28d347004151b031e6b7b863403aabf8814d9cc217ce21f8c2f3ebd4b335
   languageName: node
   linkType: hard
 
@@ -2064,7 +2064,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"morgan@npm:^1.9.1":
+"morgan@npm:^1.10.0":
   version: 1.10.0
   resolution: "morgan@npm:1.10.0"
   dependencies:
@@ -2291,7 +2291,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"npm@npm:^8.19.1":
+"npm@npm:^8.19.4":
   version: 8.19.4
   resolution: "npm@npm:8.19.4"
   dependencies:
@@ -2467,7 +2467,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"openid-client@npm:^4.0.2":
+"openid-client@npm:^4.9.1":
   version: 4.9.1
   resolution: "openid-client@npm:4.9.1"
   dependencies:
@@ -3217,9 +3217,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"winston@npm:^3.8.2":
-  version: 3.8.2
-  resolution: "winston@npm:3.8.2"
+"winston@npm:^3.10.0":
+  version: 3.10.0
+  resolution: "winston@npm:3.10.0"
   dependencies:
     "@colors/colors": 1.5.0
     "@dabh/diagnostics": ^2.0.2
@@ -3232,7 +3232,7 @@ __metadata:
     stack-trace: 0.0.x
     triple-beam: ^1.3.0
     winston-transport: ^4.5.0
-  checksum: f7b901798b92ab9e93c850110bf6e98500e9a0e762b62dab410cf928b2a4145533dfa6d3d2b24f7bf0dc94b53808d5bd28aaaeff9a4b43b89ea4c798cce308ea
+  checksum: 47df0361220d12b46d1b3c98a1c380a3718321739d527a182ce7984fc20715e5b0b55db0bcd3fd076d1b1d3261903b890b053851cfd4bc028bda7951fa8ca2e0
   languageName: node
   linkType: hard
 
