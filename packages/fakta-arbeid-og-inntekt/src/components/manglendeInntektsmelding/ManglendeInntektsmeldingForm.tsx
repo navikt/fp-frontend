@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo, useCallback, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Alert, BodyShort, Button, Popover } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, HStack, Popover } from '@navikt/ds-react';
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
 
 import { required, hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
@@ -13,7 +13,7 @@ import {
   Inntektspost,
   ManglendeInntektsmeldingVurdering,
 } from '@navikt/fp-types';
-import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 
 import ArbeidsforholdOgInntektRadData from '../../types/arbeidsforholdOgInntekt';
@@ -43,6 +43,7 @@ interface OwnProps {
   lukkArbeidsforholdRad: () => void;
   oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void;
   alleKodeverk: AlleKodeverk;
+  arbeidsgiverFødselsdato?: string;
 }
 
 const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
@@ -58,6 +59,7 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
   lukkArbeidsforholdRad,
   oppdaterTabell,
   alleKodeverk,
+  arbeidsgiverFødselsdato,
 }) => {
   const intl = useIntl();
 
@@ -113,7 +115,7 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
     [arbeidsforholdForRad, radData, oppdaterTabell],
   );
 
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
   const [openState, setOpenState] = useState(false);
   const toggleHjelpetekst = useCallback(() => setOpenState(gammelVerdi => !gammelVerdi), []);
 
@@ -126,6 +128,7 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
         arbeidsforholdForRad={arbeidsforholdForRad}
         inntektsmeldingerForRad={inntektsmeldingerForRad}
         alleKodeverk={alleKodeverk}
+        arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
       />
       <Form formMethods={formMethods} onSubmit={lagre}>
         {!erEttArbeidsforhold && inntektsmeldingerForRad.length > 0 && (
@@ -139,46 +142,35 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
         <RadioGroupPanel
           name="saksbehandlersVurdering"
           label={
-            <FlexContainer>
-              <FlexRow>
-                <FlexColumn className={styles.radioHeader}>
-                  <FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" />
-                </FlexColumn>
-                <FlexColumn className={styles.image}>
-                  <Button
-                    ref={buttonRef}
-                    type="button"
-                    variant="tertiary"
-                    onClick={toggleHjelpetekst}
-                    icon={
-                      <QuestionmarkDiamondIcon
-                        title={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.AltHjelpetekst' })}
-                      />
-                    }
-                  />
-                  <Popover
-                    open={openState}
-                    onClose={toggleHjelpetekst}
-                    anchorEl={buttonRef.current}
-                    className={styles.hjelpetekst}
-                  >
-                    <Popover.Content className={styles.hjelpetekstInnhold}>
-                      <BodyShort>
-                        <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel1" />
-                      </BodyShort>
-                      <VerticalSpacer eightPx />
-                      <BodyShort>
-                        <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel2" />
-                      </BodyShort>
-                      <VerticalSpacer eightPx />
-                      <BodyShort>
-                        <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel3" />
-                      </BodyShort>
-                    </Popover.Content>
-                  </Popover>
-                </FlexColumn>
-              </FlexRow>
-            </FlexContainer>
+            <HStack gap="2">
+              <FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" />
+              <QuestionmarkDiamondIcon
+                ref={svgRef}
+                onClick={toggleHjelpetekst}
+                className={styles.svg}
+                title={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.AltHjelpetekst' })}
+              />
+              <Popover
+                open={openState}
+                onClose={toggleHjelpetekst}
+                anchorEl={svgRef.current}
+                className={styles.hjelpetekst}
+              >
+                <Popover.Content className={styles.hjelpetekstInnhold}>
+                  <BodyShort>
+                    <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel1" />
+                  </BodyShort>
+                  <VerticalSpacer eightPx />
+                  <BodyShort>
+                    <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel2" />
+                  </BodyShort>
+                  <VerticalSpacer eightPx />
+                  <BodyShort>
+                    <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel3" />
+                  </BodyShort>
+                </Popover.Content>
+              </Popover>
+            </HStack>
           }
           validate={[required]}
           isReadOnly={isReadOnly}
@@ -209,32 +201,26 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
         />
         <VerticalSpacer twentyPx />
         {!isReadOnly && (
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <Button
-                  size="small"
-                  variant="secondary"
-                  loading={formMethods.formState.isSubmitting}
-                  disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-                >
-                  <FormattedMessage id="InntektsmeldingInnhentesForm.Lagre" />
-                </Button>
-              </FlexColumn>
-              <FlexColumn>
-                <Button
-                  size="small"
-                  variant="tertiary"
-                  loading={false}
-                  disabled={formMethods.formState.isSubmitting}
-                  onClick={avbryt}
-                  type="button"
-                >
-                  <FormattedMessage id="InntektsmeldingInnhentesForm.Avbryt" />
-                </Button>
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
+          <HStack gap="4">
+            <Button
+              size="small"
+              variant="secondary"
+              loading={formMethods.formState.isSubmitting}
+              disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+            >
+              <FormattedMessage id="InntektsmeldingInnhentesForm.Lagre" />
+            </Button>
+            <Button
+              size="small"
+              variant="tertiary"
+              loading={false}
+              disabled={formMethods.formState.isSubmitting}
+              onClick={avbryt}
+              type="button"
+            >
+              <FormattedMessage id="InntektsmeldingInnhentesForm.Avbryt" />
+            </Button>
+          </HStack>
         )}
         <VerticalSpacer fourtyPx />
       </Form>

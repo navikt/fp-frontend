@@ -1,7 +1,7 @@
 import React, { useCallback, FunctionComponent, useMemo, useState, useRef } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm, UseFormGetValues } from 'react-hook-form';
-import { Alert, BodyShort, Button, Popover } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, HStack, Popover } from '@navikt/ds-react';
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
 
 import {
@@ -17,7 +17,7 @@ import {
 } from '@navikt/ft-form-validators';
 import { TextAreaField, RadioGroupPanel, Datepicker, InputField, Form } from '@navikt/ft-form-hooks';
 import { Inntektsmelding, ManueltArbeidsforhold, ManglendeInntektsmeldingVurdering } from '@navikt/fp-types';
-import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 
 import InntektsmeldingOpplysningerPanel from '../felles/InntektsmeldingOpplysningerPanel';
@@ -56,6 +56,7 @@ interface OwnProps {
   lukkArbeidsforholdRad: () => void;
   oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void;
   skalViseArbeidsforholdId: boolean;
+  arbeidsgiverFødselsdato?: string;
 }
 
 const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
@@ -70,6 +71,7 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   lukkArbeidsforholdRad,
   oppdaterTabell,
   skalViseArbeidsforholdId,
+  arbeidsgiverFødselsdato,
 }) => {
   const intl = useIntl();
 
@@ -160,7 +162,7 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
     [inntektsmelding, oppdaterTabell],
   );
 
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const buttonRef = useRef<SVGSVGElement>(null);
   const [openState, setOpenState] = useState(false);
   const toggleHjelpetekst = useCallback(() => setOpenState(gammelVerdi => !gammelVerdi), []);
 
@@ -170,6 +172,7 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
         saksnummer={saksnummer}
         inntektsmelding={inntektsmelding}
         skalViseArbeidsforholdId={skalViseArbeidsforholdId}
+        arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
       />
       <VerticalSpacer fourtyPx />
       <div className={styles.alertStripe}>
@@ -182,38 +185,27 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
         <RadioGroupPanel
           name="saksbehandlersVurdering"
           label={
-            <FlexContainer>
-              <FlexRow>
-                <FlexColumn>
-                  <FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" />
-                </FlexColumn>
-                <FlexColumn className={styles.image}>
-                  <Button
-                    ref={buttonRef}
-                    type="button"
-                    variant="tertiary"
-                    onClick={toggleHjelpetekst}
-                    icon={
-                      <QuestionmarkDiamondIcon
-                        title={intl.formatMessage({ id: 'ManglendeOpplysningerForm.AltHjelpetekst' })}
-                      />
-                    }
-                  />
-                  <Popover
-                    open={openState}
-                    onClose={toggleHjelpetekst}
-                    anchorEl={buttonRef.current}
-                    className={styles.hjelpetekst}
-                  >
-                    <Popover.Content className={styles.hjelpetekstInnhold}>
-                      <BodyShort>
-                        <FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" />
-                      </BodyShort>
-                    </Popover.Content>
-                  </Popover>
-                </FlexColumn>
-              </FlexRow>
-            </FlexContainer>
+            <HStack gap="2">
+              <FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" />
+              <QuestionmarkDiamondIcon
+                className={styles.svg}
+                ref={buttonRef}
+                onClick={toggleHjelpetekst}
+                title={intl.formatMessage({ id: 'ManglendeOpplysningerForm.AltHjelpetekst' })}
+              />
+              <Popover
+                open={openState}
+                onClose={toggleHjelpetekst}
+                anchorEl={buttonRef.current}
+                className={styles.hjelpetekst}
+              >
+                <Popover.Content className={styles.hjelpetekstInnhold}>
+                  <BodyShort>
+                    <FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" />
+                  </BodyShort>
+                </Popover.Content>
+              </Popover>
+            </HStack>
           }
           validate={[required]}
           isReadOnly={isReadOnly}
@@ -234,40 +226,32 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
         />
         {saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING && (
           <>
-            <FlexContainer>
-              <VerticalSpacer eightPx />
-              <FlexRow>
-                <FlexColumn>
-                  <Datepicker
-                    name="fom"
-                    label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeFra" />}
-                    validate={[required, hasValidDate]}
-                    isReadOnly={isReadOnly}
-                  />
-                </FlexColumn>
-                <FlexColumn>
-                  <Datepicker
-                    name="tom"
-                    label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeTil" />}
-                    validate={[hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
-                    isReadOnly={isReadOnly}
-                  />
-                </FlexColumn>
-                <FlexColumn>
-                  <InputField
-                    name="stillingsprosent"
-                    label={<FormattedMessage id="ManglendeOpplysningerForm.Stillingsprosent" />}
-                    parse={value => {
-                      const parsedValue = parseInt(value.toString(), 10);
-                      return Number.isNaN(parsedValue) ? value : parsedValue;
-                    }}
-                    validate={[required, hasValidInteger, minValue1, maxValue100]}
-                    readOnly={isReadOnly}
-                    maxLength={3}
-                  />
-                </FlexColumn>
-              </FlexRow>
-            </FlexContainer>
+            <VerticalSpacer eightPx />
+            <HStack gap="4">
+              <Datepicker
+                name="fom"
+                label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeFra" />}
+                validate={[required, hasValidDate]}
+                isReadOnly={isReadOnly}
+              />
+              <Datepicker
+                name="tom"
+                label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeTil" />}
+                validate={[hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
+                isReadOnly={isReadOnly}
+              />
+              <InputField
+                name="stillingsprosent"
+                label={<FormattedMessage id="ManglendeOpplysningerForm.Stillingsprosent" />}
+                parse={value => {
+                  const parsedValue = parseInt(value.toString(), 10);
+                  return Number.isNaN(parsedValue) ? value : parsedValue;
+                }}
+                validate={[required, hasValidInteger, minValue1, maxValue100]}
+                readOnly={isReadOnly}
+                maxLength={3}
+              />
+            </HStack>
             <VerticalSpacer fourPx />
           </>
         )}
@@ -281,32 +265,26 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
         />
         <VerticalSpacer twentyPx />
         {!isReadOnly && (
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <Button
-                  size="small"
-                  variant="secondary"
-                  loading={formMethods.formState.isSubmitting}
-                  disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-                >
-                  <FormattedMessage id="ManglendeOpplysningerForm.Lagre" />
-                </Button>
-              </FlexColumn>
-              <FlexColumn>
-                <Button
-                  size="small"
-                  variant="tertiary"
-                  loading={false}
-                  disabled={formMethods.formState.isSubmitting}
-                  onClick={avbryt}
-                  type="button"
-                >
-                  <FormattedMessage id="ManglendeOpplysningerForm.Avbryt" />
-                </Button>
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
+          <HStack gap="4">
+            <Button
+              size="small"
+              variant="secondary"
+              loading={formMethods.formState.isSubmitting}
+              disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+            >
+              <FormattedMessage id="ManglendeOpplysningerForm.Lagre" />
+            </Button>
+            <Button
+              size="small"
+              variant="tertiary"
+              loading={false}
+              disabled={formMethods.formState.isSubmitting}
+              onClick={avbryt}
+              type="button"
+            >
+              <FormattedMessage id="ManglendeOpplysningerForm.Avbryt" />
+            </Button>
+          </HStack>
         )}
         <VerticalSpacer fourtyPx />
       </Form>
