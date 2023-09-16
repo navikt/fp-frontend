@@ -1,4 +1,7 @@
 *
 !./apps/fp-frontend-app/dist
-!server
-server/yarn.lock
+!./server/server.js
+!./server/package.json
+!./server/src
+!./server/dist
+!./server/node_modules
