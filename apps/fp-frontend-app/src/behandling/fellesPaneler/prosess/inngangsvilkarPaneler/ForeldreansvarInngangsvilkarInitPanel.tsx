@@ -21,9 +21,9 @@ const AKSJONSPUNKT_TEKST_PER_KODE = {
     'ErForeldreansvarVilkaarOppfyltForm.2LeddParagrafEngangsStonad',
   [AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD]:
     'ErForeldreansvarVilkaarOppfyltForm.4LeddParagraf',
-  [AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'ErForeldreansvarVilkaarOppfyltForm.Vurder',
+  [AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderSammeBarn',
   [AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN]:
-    'ErForeldreansvarVilkaarOppfyltForm.Vurder',
+    'SRBVilkarForm.VurderAnnenForelderSammeBarn',
 } as Record<string, string>;
 
 const hentAksjonspunktTekst = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[] = []): string =>

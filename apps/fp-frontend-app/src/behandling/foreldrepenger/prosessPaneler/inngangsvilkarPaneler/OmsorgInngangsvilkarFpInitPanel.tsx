@@ -31,7 +31,7 @@ const OmsorgInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangsvilk
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="OMSORG"
-      hentInngangsvilkarPanelTekst={() => intl.formatMessage({ id: 'ErOmsorgVilkaarOppfyltForm.Vurder' })}
+      hentInngangsvilkarPanelTekst={() => intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
       renderPanel={data => (
         <>
           <OmsorgVilkarProsessIndex {...data} />

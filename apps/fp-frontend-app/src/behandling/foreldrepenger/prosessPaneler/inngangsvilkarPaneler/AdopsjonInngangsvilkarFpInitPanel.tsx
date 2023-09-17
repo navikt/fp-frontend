@@ -35,7 +35,7 @@ const AdopsjonInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangsvi
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="ADOPSJON"
-      hentInngangsvilkarPanelTekst={() => intl.formatMessage({ id: 'AdopsjonVilkarForm.VurderGjelderSammeBarn' })}
+      hentInngangsvilkarPanelTekst={() => intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
       renderPanel={(data, erOverstyrt, toggleOverstyring) => (
         <>
           {data.aksjonspunkter.length === 0 && (
