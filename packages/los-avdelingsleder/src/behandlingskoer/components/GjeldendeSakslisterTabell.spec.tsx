@@ -23,7 +23,7 @@ describe('<GjeldendeSakslisterTabell>', () => {
     render(<TabellNårDetFinnesEnBehandlingskø hentAvdelingensSakslister={hentAvdelingensSakslister} />);
     expect(await screen.findByText('Navn')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByRole('img')[0]);
+    await userEvent.click(screen.getAllByRole('img')[1]);
 
     expect(await screen.findByText('Ønsker du å slette Saksliste 1?')).toBeInTheDocument();
 

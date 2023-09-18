@@ -1,17 +1,8 @@
-import React, { useState, KeyboardEvent, FunctionComponent, useEffect, useRef, useCallback } from 'react';
+import React, { useState, KeyboardEvent, FunctionComponent, useEffect, useRef, useCallback, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { BodyShort, Detail, Label, Heading, Link } from '@navikt/ds-react';
+import { BodyShort, Detail, Label, Heading, Link, Table, HStack } from '@navikt/ds-react';
 import { KodeverkMedNavn } from '@navikt/ft-types';
-import {
-  VerticalSpacer,
-  Table,
-  TableRow,
-  TableColumn,
-  DateLabel,
-  FlexContainer,
-  FlexRow,
-  FlexColumn,
-} from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer, DateLabel } from '@navikt/ft-ui-komponenter';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 import { PlusCircleIcon, XMarkIcon } from '@navikt/aksel-icons';
 
@@ -29,7 +20,6 @@ const headerTextCodes = [
   'GjeldendeSakslisterTabell.AntallSaksbehandlere',
   'GjeldendeSakslisterTabell.AntallBehandlinger',
   'GjeldendeSakslisterTabell.SistEndret',
-  'EMPTY_1',
 ];
 
 const formatStonadstyper = (fagsakYtelseTyper: KodeverkMedNavn[], valgteFagsakYtelseTyper?: string[]) => {
@@ -64,13 +54,14 @@ const formatBehandlingstyper = (behandlingTyper: KodeverkMedNavn[], valgteBehand
 
 interface OwnProps {
   sakslister: Saksliste[];
-  setValgtSakslisteId: (sakslisteId: number) => void;
+  setValgtSakslisteId: (sakslisteId?: number) => void;
   valgtSakslisteId?: number;
   valgtAvdelingEnhet: string;
   oppgaverForAvdelingAntall?: number;
   lagNySaksliste: (avdelingEnhet: string) => void;
   resetValgtSakslisteId: () => void;
   hentAvdelingensSakslister: (params: { avdelingEnhet: string }) => void;
+  content: ReactElement;
 }
 
 const wait = (ms: number): Promise<any> =>
@@ -81,7 +72,7 @@ const wait = (ms: number): Promise<any> =>
 /**
  * GjeldendeSakslisterTabell
  */
-export const GjeldendeSakslisterTabell: FunctionComponent<OwnProps> = ({
+const GjeldendeSakslisterTabell: FunctionComponent<OwnProps> = ({
   sakslister,
   valgtAvdelingEnhet,
   setValgtSakslisteId,
@@ -90,6 +81,7 @@ export const GjeldendeSakslisterTabell: FunctionComponent<OwnProps> = ({
   lagNySaksliste,
   resetValgtSakslisteId,
   hentAvdelingensSakslister,
+  content,
 }) => {
   const [valgtSaksliste, setValgtSakslisteTemp] = useState<Saksliste>();
   const tabRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -103,22 +95,15 @@ export const GjeldendeSakslisterTabell: FunctionComponent<OwnProps> = ({
     tabRef.current = tabRef.current.slice(0, sakslister.length);
   }, [sakslister]);
 
-  const setValgtSaksliste = async (
-    event: React.MouseEvent | React.KeyboardEvent,
-    id?: number,
-  ): Promise<string | undefined> => {
-    // @ts-ignore Fiks
-    if (tabRef.current.some(node => node && node.contains(event.target))) {
-      return;
-    }
-
+  const setValgtSaksliste = async (isOpen: boolean, id: number): Promise<void> => {
     // Må vente 100 ms før en byttar behandlingskø i tabell. Dette fordi lagring av navn skjer som blur-event. Så i tilfellet
     // der en endrer navn og så trykker direkte på en annen behandlingskø vil ikke lagringen skje før etter at ny kø er valgt.
     await wait(100);
 
     if (id) {
-      setValgtSakslisteId(id);
+      setValgtSakslisteId(isOpen ? id : undefined);
     }
+    return Promise.resolve();
   };
 
   const lagNySakslisteFn = useCallback(
@@ -151,23 +136,19 @@ export const GjeldendeSakslisterTabell: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <FlexContainer>
-        <FlexRow>
-          <FlexColumn>
-            <Label size="small">
-              <FormattedMessage id="GjeldendeSakslisterTabell.GjeldendeLister" />
-            </Label>
-          </FlexColumn>
-          <FlexColumn className={styles.margin}>
-            <div className={styles.grayBox}>
-              <BodyShort size="small">
-                <FormattedMessage id="GjeldendeSakslisterTabell.OppgaverForAvdeling" />
-              </BodyShort>
-              <Heading size="small">{oppgaverForAvdelingAntall || '0'}</Heading>
-            </div>
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
+      <VerticalSpacer sixteenPx />
+      <HStack justify="space-between">
+        <Label size="small">
+          <FormattedMessage id="GjeldendeSakslisterTabell.GjeldendeLister" />
+        </Label>
+        <div className={styles.grayBox}>
+          <BodyShort size="small">
+            <FormattedMessage id="GjeldendeSakslisterTabell.OppgaverForAvdeling" />
+          </BodyShort>
+          <Heading size="small">{oppgaverForAvdelingAntall || '0'}</Heading>
+        </div>
+      </HStack>
+      <VerticalSpacer sixteenPx />
       {sakslister.length === 0 && (
         <>
           <VerticalSpacer eightPx />
@@ -178,42 +159,56 @@ export const GjeldendeSakslisterTabell: FunctionComponent<OwnProps> = ({
         </>
       )}
       {sakslister.length > 0 && (
-        <Table headerTextCodes={headerTextCodes}>
-          {sakslister.map((saksliste, index) => (
-            <TableRow
-              key={saksliste.sakslisteId}
-              className={saksliste.sakslisteId === valgtSakslisteId ? styles.isSelected : undefined}
-              id={saksliste.sakslisteId}
-              onMouseDown={setValgtSaksliste}
-              onKeyDown={setValgtSaksliste}
-            >
-              <TableColumn>{saksliste.navn}</TableColumn>
-              <TableColumn>{formatStonadstyper(fagsakYtelseTyper, saksliste.fagsakYtelseTyper)}</TableColumn>
-              <TableColumn>{formatBehandlingstyper(behandlingTyper, saksliste.behandlingTyper)}</TableColumn>
-              <TableColumn>
-                {saksliste.saksbehandlerIdenter.length > 0 ? saksliste.saksbehandlerIdenter.length : ''}
-              </TableColumn>
-              <TableColumn>{saksliste.antallBehandlinger}</TableColumn>
-              <TableColumn>
-                <DateLabel dateString={saksliste.sistEndret} />
-              </TableColumn>
-              <TableColumn>
-                <div
-                  ref={el => {
-                    tabRef.current[index] = el;
-                  }}
-                >
-                  <XMarkIcon
-                    className={styles.removeImage}
-                    onMouseDown={() => visFjernSakslisteModal(saksliste)}
-                    onKeyDown={() => visFjernSakslisteModal(saksliste)}
-                  />
-                </div>
-              </TableColumn>
-            </TableRow>
-          ))}
+        <Table size="small">
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell scope="col" />
+              {headerTextCodes.map(code => (
+                <Table.HeaderCell key={code} scope="col">
+                  <FormattedMessage id={code} />
+                </Table.HeaderCell>
+              ))}
+              <Table.HeaderCell scope="col" />
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {sakslister.map((saksliste, index) => (
+              <Table.ExpandableRow
+                key={saksliste.sakslisteId}
+                className={saksliste.sakslisteId === valgtSakslisteId ? styles.isSelected : undefined}
+                onOpenChange={isOpen => setValgtSaksliste(isOpen, saksliste.sakslisteId)}
+                content={content}
+                open={saksliste.sakslisteId === valgtSakslisteId}
+              >
+                <Table.DataCell>{saksliste.navn}</Table.DataCell>
+                <Table.DataCell>{formatStonadstyper(fagsakYtelseTyper, saksliste.fagsakYtelseTyper)}</Table.DataCell>
+                <Table.DataCell>{formatBehandlingstyper(behandlingTyper, saksliste.behandlingTyper)}</Table.DataCell>
+                <Table.DataCell>
+                  {saksliste.saksbehandlerIdenter.length > 0 ? saksliste.saksbehandlerIdenter.length : ''}
+                </Table.DataCell>
+                <Table.DataCell>{saksliste.antallBehandlinger}</Table.DataCell>
+                <Table.DataCell>
+                  <DateLabel dateString={saksliste.sistEndret} />
+                </Table.DataCell>
+                <Table.DataCell>
+                  <div
+                    ref={el => {
+                      tabRef.current[index] = el;
+                    }}
+                  >
+                    <XMarkIcon
+                      className={styles.removeImage}
+                      onMouseDown={() => visFjernSakslisteModal(saksliste)}
+                      onKeyDown={() => visFjernSakslisteModal(saksliste)}
+                    />
+                  </div>
+                </Table.DataCell>
+              </Table.ExpandableRow>
+            ))}
+          </Table.Body>
         </Table>
       )}
+      <VerticalSpacer eightPx />
       <Link onClick={() => lagNySaksliste(valgtAvdelingEnhet)} onKeyDown={lagNySakslisteFn}>
         <Detail className={styles.imageText}>
           <FormattedMessage id="GjeldendeSakslisterTabell.LeggTilListe" />

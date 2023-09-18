@@ -1,8 +1,9 @@
 import React, { FunctionComponent, useCallback, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { ArrowDownIcon } from '@navikt/aksel-icons';
+import { HStack } from '@navikt/ds-react';
 import { restApiHooks, RestApiPathsKeys } from '../../data/fplosRestApi';
 import Saksliste from '../../typer/sakslisteAvdelingTsType';
 import Saksbehandler from '../../typer/saksbehandlerAvdelingTsType';
@@ -15,7 +16,7 @@ import styles from './endreSakslisterPanel.module.css';
 const EMPTY_ARRAY: Saksliste[] = [];
 
 interface OwnProps {
-  setValgtSakslisteId: (sakslisteId: number) => void;
+  setValgtSakslisteId: (sakslisteId?: number) => void;
   valgtSakslisteId?: number;
   valgtAvdelingEnhet: string;
   avdelingensSaksbehandlere: Saksbehandler[];
@@ -62,49 +63,51 @@ const EndreSakslisterPanel: FunctionComponent<OwnProps> = ({
   const valgtSaksliste = sakslister.find(s => s.sakslisteId === valgtSakId);
 
   return (
-    <>
-      <GjeldendeSakslisterTabell
-        sakslister={sakslister}
-        setValgtSakslisteId={setValgtSakslisteId}
-        valgtSakslisteId={valgtSakId}
-        valgtAvdelingEnhet={valgtAvdelingEnhet}
-        oppgaverForAvdelingAntall={oppgaverForAvdelingAntall}
-        lagNySaksliste={lagNySakslisteOgHentAvdelingensSakslisterPåNytt}
-        resetValgtSakslisteId={resetValgtSakslisteId}
-        hentAvdelingensSakslister={hentAvdelingensSakslister}
-      />
-      <VerticalSpacer sixteenPx />
-      {valgtSakId && valgtSaksliste && (
-        <React.Fragment key={valgtSaksliste.sakslisteId}>
-          <UtvalgskriterierForSakslisteForm
-            valgtSaksliste={valgtSaksliste}
-            valgtAvdelingEnhet={valgtAvdelingEnhet}
-            hentAvdelingensSakslister={hentAvdelingensSakslister}
-            hentOppgaverForAvdelingAntall={hentOppgaverForAvdelingAntall}
-          />
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn className={styles.leftCol} />
-              <FlexColumn>
+    <GjeldendeSakslisterTabell
+      sakslister={sakslister}
+      setValgtSakslisteId={setValgtSakslisteId}
+      valgtSakslisteId={valgtSakId}
+      valgtAvdelingEnhet={valgtAvdelingEnhet}
+      oppgaverForAvdelingAntall={oppgaverForAvdelingAntall}
+      lagNySaksliste={lagNySakslisteOgHentAvdelingensSakslisterPåNytt}
+      resetValgtSakslisteId={resetValgtSakslisteId}
+      hentAvdelingensSakslister={hentAvdelingensSakslister}
+      content={
+        <div
+          style={{
+            marginBottom: '20px',
+            marginLeft: '-55px',
+            marginTop: '-25px',
+            marginRight: '-55px',
+          }}
+        >
+          <VerticalSpacer sixteenPx />
+          {valgtSakId && valgtSaksliste && (
+            <React.Fragment key={valgtSaksliste.sakslisteId}>
+              <UtvalgskriterierForSakslisteForm
+                valgtSaksliste={valgtSaksliste}
+                valgtAvdelingEnhet={valgtAvdelingEnhet}
+                hentAvdelingensSakslister={hentAvdelingensSakslister}
+                hentOppgaverForAvdelingAntall={hentOppgaverForAvdelingAntall}
+              />
+              <HStack gap="4" justify="center">
                 <ArrowDownIcon
                   className={styles.arrow}
                   title={intl.formatMessage({ id: 'EndreSakslisterPanel.Saksbehandlere' })}
                 />
-              </FlexColumn>
-              <FlexColumn className={styles.text}>
                 <FormattedMessage id="EndreSakslisterPanel.KnyttetMotSaksbehandlere" />
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
-          <SaksbehandlereForSakslisteForm
-            valgtSaksliste={valgtSaksliste}
-            valgtAvdelingEnhet={valgtAvdelingEnhet}
-            avdelingensSaksbehandlere={avdelingensSaksbehandlere}
-            hentAvdelingensSakslister={hentAvdelingensSakslister}
-          />
-        </React.Fragment>
-      )}
-    </>
+              </HStack>
+              <SaksbehandlereForSakslisteForm
+                valgtSaksliste={valgtSaksliste}
+                valgtAvdelingEnhet={valgtAvdelingEnhet}
+                avdelingensSaksbehandlere={avdelingensSaksbehandlere}
+                hentAvdelingensSakslister={hentAvdelingensSakslister}
+              />
+            </React.Fragment>
+          )}
+        </div>
+      }
+    />
   );
 };
 
