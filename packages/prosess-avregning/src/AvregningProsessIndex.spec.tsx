@@ -21,7 +21,9 @@ describe('<AvregningProsessIndex>', () => {
     expect(screen.getByText('Resultat')).toBeInTheDocument();
     expect(screen.getByText('−26 486')).toBeInTheDocument();
 
-    const begrunnelseInput = utils.getByLabelText('Begrunn hvordan feilutbetalingen skal behandles videre');
+    const begrunnelseInput = utils.getByLabelText(
+      'Beskriv hvorfor det har oppstått en feilutbetaling og hvordan den skal behandles videre',
+    );
     await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Avvent samordning, ingen tilbakekreving'));
@@ -44,7 +46,9 @@ describe('<AvregningProsessIndex>', () => {
 
     expect(await screen.findByText('Simulering')).toBeInTheDocument();
 
-    const begrunnelseInput = utils.getByLabelText('Begrunn hvordan feilutbetalingen skal behandles videre');
+    const begrunnelseInput = utils.getByLabelText(
+      'Beskriv hvorfor det har oppstått en feilutbetaling og hvordan den skal behandles videre',
+    );
     await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Opprett tilbakekreving, send varsel'));
@@ -89,7 +93,9 @@ describe('<AvregningProsessIndex>', () => {
 
     expect(await screen.findByText('Simulering')).toBeInTheDocument();
     expect(screen.queryByText('Vurder videre behandling av tilbakekreving')).not.toBeInTheDocument();
-    expect(utils.queryByLabelText('Begrunn hvordan feilutbetalingen skal behandles videre')).not.toBeInTheDocument();
+    expect(
+      utils.queryByLabelText('Beskriv hvorfor det har oppstått en feilutbetaling og hvordan den skal behandles videre'),
+    ).not.toBeInTheDocument();
     expect(screen.queryByText('Opprett tilbakekreving, send varsel')).not.toBeInTheDocument();
 
     expect(
