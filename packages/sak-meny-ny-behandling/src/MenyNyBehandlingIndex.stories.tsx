@@ -42,11 +42,6 @@ const behandlingstyper = [
     kodeverk: 'BEHANDLING_TYPE',
     navn: 'Tilbakekreving revurdering',
   },
-  {
-    kode: behandlingType.ANKE,
-    kodeverk: 'BEHANDLING_TYPE',
-    navn: 'Anke',
-  },
 ];
 
 const behandlingOppretting = [
@@ -56,10 +51,6 @@ const behandlingOppretting = [
   },
   {
     behandlingType: behandlingType.REVURDERING,
-    kanOppretteBehandling: true,
-  },
-  {
-    behandlingType: behandlingType.ANKE,
     kanOppretteBehandling: true,
   },
   {

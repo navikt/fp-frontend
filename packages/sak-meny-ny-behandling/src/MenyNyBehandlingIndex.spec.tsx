@@ -7,20 +7,20 @@ import * as stories from './MenyNyBehandlingIndex.stories';
 const { Default } = composeStories(stories);
 
 describe('<MenyNyBehandlingIndex>', () => {
-  it('skal opprette ny ankebehandling', async () => {
+  it('skal opprette ny klagebehandling', async () => {
     const lagNyBehandling = vi.fn();
     const lukkModal = vi.fn();
     const utils = render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-008');
+    await userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-003');
 
     await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(lagNyBehandling).toHaveBeenCalledTimes(1));
     expect(lagNyBehandling).toHaveBeenNthCalledWith(1, false, {
-      behandlingType: 'BT-008',
+      behandlingType: 'BT-003',
       eksternUuid: undefined,
       fagsakYtelseType: 'FP',
       saksnummer: '123',
