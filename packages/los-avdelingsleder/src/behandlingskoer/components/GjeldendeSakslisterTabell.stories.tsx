@@ -7,7 +7,7 @@ import { alleKodeverkLos, getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { RestApiGlobalStatePathsKeys, RestApiPathsKeys, requestApi } from '../../data/fplosRestApi';
 import Saksliste from '../../typer/sakslisteAvdelingTsType';
-import { GjeldendeSakslisterTabell } from './GjeldendeSakslisterTabell';
+import GjeldendeSakslisterTabell from './GjeldendeSakslisterTabell';
 
 import messages from '../../../i18n/nb_NO.json';
 
@@ -52,6 +52,7 @@ const Template: StoryFn<Props> = ({
         hentAvdelingensSakslister={hentAvdelingensSakslister}
         valgtSakslisteId={valgtSakslisteId}
         oppgaverForAvdelingAntall={oppgaverForAvdelingAntall}
+        content={<div>test</div>}
       />
     </RestApiMock>
   );
