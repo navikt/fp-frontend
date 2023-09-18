@@ -17,7 +17,12 @@ const selectDocument =
   (saksNr: string) =>
   (_e: React.SyntheticEvent, _id?: number | string, document?: Dokument): void => {
     if (document) {
-      window.open(hentDokumentLenke(saksNr, document.journalpostId, document.dokumentId), '_blank');
+      const newWindow = window.open(hentDokumentLenke(saksNr, document.journalpostId, document.dokumentId), '_blank');
+      if (newWindow) {
+        newWindow.addEventListener('load', () => {
+          newWindow.document.title = document.tittel || 'Dokument';
+        });
+      }
     }
   };
 
