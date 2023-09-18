@@ -1,0 +1,13 @@
+import{j as l}from"./jsx-runtime-9c4ae004.js";import{B as E,d as a,N as n,j as g,m as h}from"./nb_NO-91e99ecf.js";import{Y as t}from"./index.es-657e045f.js";import{k as V}from"./index.es-28aae904.js";import{O as m,B as e}from"./OppgaverSomErApneEllerPaVentPanel-622a4b1d.js";import{a as u,r as A}from"./fplosRestApi-beda4f04.js";import"./index-1b03fe98.js";import"./index-6fd5a17b.js";import"./index.es-dcafba10.js";import"./index.es-30e2a5f8.js";import"./index.es-efd3830f.js";import"./Provider-c82db7e7.js";import"./Detail-a958125f.js";import"./Heading-39bd052b.js";import"./Panel-b15c2a27.js";import"./StoreValuesInLocalStorage-6ed602ef.js";import"./useLosKodeverk-3c749e2b.js";const S=E(h),j={title:"los/avdelingsleder/nokkeltall/OppgaverSomErApneEllerPaVentPanel",component:m,decorators:[S]},f=({oppgaverApneEllerPaVent:i})=>{const d=[{key:u.KODEVERK_LOS.name,data:g,global:!0}];return l.jsx(V,{data:d,requestApi:A,children:l.jsx(m,{height:300,oppgaverApneEllerPaVent:i,getValueFromLocalStorage:()=>""})})},r=f.bind({});r.args={oppgaverApneEllerPaVent:[{behandlingVenteStatus:e.PA_VENT,behandlingType:t.FORSTEGANGSSOKNAD,førsteUttakMåned:a().startOf("month").format(n),antall:2},{behandlingVenteStatus:e.IKKE_PA_VENT,behandlingType:t.FORSTEGANGSSOKNAD,førsteUttakMåned:a().startOf("month").format(n),antall:5},{behandlingVenteStatus:e.IKKE_PA_VENT,behandlingType:t.REVURDERING,førsteUttakMåned:a().startOf("month").subtract(4,"M").format(n),antall:2},{behandlingVenteStatus:e.IKKE_PA_VENT,behandlingType:t.KLAGE,antall:2},{behandlingVenteStatus:e.PA_VENT,behandlingType:t.KLAGE,antall:6},{behandlingVenteStatus:e.PA_VENT,behandlingType:t.REVURDERING,førsteUttakMåned:a().startOf("month").subtract(4,"M").format(n),antall:6},{behandlingVenteStatus:e.PA_VENT,behandlingType:t.DOKUMENTINNSYN,førsteUttakMåned:a().startOf("month").subtract(10,"M").format(n),antall:3},{behandlingVenteStatus:e.IKKE_PA_VENT,behandlingType:t.DOKUMENTINNSYN,førsteUttakMåned:a().startOf("month").subtract(10,"M").format(n),antall:5}]};var o,s,p;r.parameters={...r.parameters,docs:{...(o=r.parameters)==null?void 0:o.docs,source:{originalSource:`({
+  oppgaverApneEllerPaVent
+}) => {
+  const data = [{
+    key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name,
+    data: alleKodeverkLos,
+    global: true
+  }];
+  return <RestApiMock data={data} requestApi={requestApi}>
+      <OppgaverSomErApneEllerPaVentPanel height={300} oppgaverApneEllerPaVent={oppgaverApneEllerPaVent} getValueFromLocalStorage={() => ''} />
+    </RestApiMock>;
+}`,...(p=(s=r.parameters)==null?void 0:s.docs)==null?void 0:p.source}}};const L=["Default"];export{r as Default,L as __namedExportsOrder,j as default};
+//# sourceMappingURL=OppgaverSomErApneEllerPaVentPanel.stories-6e1d253b.js.map
