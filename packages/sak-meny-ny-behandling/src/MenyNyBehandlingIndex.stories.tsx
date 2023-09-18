@@ -55,7 +55,7 @@ const behandlingOppretting = [
   },
   {
     behandlingType: behandlingType.KLAGE,
-    kanOppretteBehandling: false,
+    kanOppretteBehandling: true,
   },
 ];
 
