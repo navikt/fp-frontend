@@ -110,6 +110,7 @@ const TilbakekrevingPaneler: FunctionComponent<OwnProps> = ({
   return (
     <>
       <BehandlingPaVent
+        key={behandling.versjon}
         behandling={behandling}
         opneSokeside={opneSokeside}
         kodeverk={tilbakekrevingKodeverk}

@@ -48,6 +48,13 @@ const getVedtakStatus = (beregningsresultat?: Behandlingsresultat): string => {
     : VilkarUtfallType.IKKE_VURDERT;
 };
 
+const getLagringSideeffekter =
+  (toggleFatterVedtakModal: (skalFatterModal: boolean) => void) =>
+  () =>
+  // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
+  () => {
+    toggleFatterVedtakModal(true);
+  };
 interface OwnProps {
   tilbakekrevingKodeverk: AlleKodeverkTilbakekreving;
   opneSokeside: () => void;
@@ -64,8 +71,9 @@ const VedtakTilbakekrevingProsessInitPanel: FunctionComponent<OwnProps & Prosess
 
   const [visApenRevurderingModal, toggleApenRevurderingModal] = useState(harApenRevurdering);
   const lukkApenRevurderingModal = useCallback(() => toggleApenRevurderingModal(false), []);
-
   const [visFatterVedtakModal, toggleFatterVedtakModal] = useState(false);
+
+  const lagringSideEffekter = getLagringSideeffekter(toggleFatterVedtakModal);
 
   const { startRequest: forhandsvisVedtaksbrev } = restBehandlingApiHooks.useRestApiRunner(
     BehandlingApiKeys.PREVIEW_VEDTAKSBREV,
@@ -107,6 +115,7 @@ const VedtakTilbakekrevingProsessInitPanel: FunctionComponent<OwnProps & Prosess
         prosessPanelKode={ProsessStegCode.VEDTAK}
         prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
         skalPanelVisesIMeny={() => true}
+        lagringSideEffekter={lagringSideEffekter}
         hentOverstyrtStatus={data => getVedtakStatus(data.behandling.behandlingsresultat)}
         renderPanel={data => (
           <VedtakTilbakekrevingProsessIndex

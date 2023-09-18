@@ -2,8 +2,8 @@ import React, { useState, FunctionComponent } from 'react';
 import { useFieldArray } from 'react-hook-form';
 import { ArbeidsforholdFodselOgTilrettelegging, ArbeidsforholdTilretteleggingDato } from '@navikt/fp-types';
 
-import { Button, Table } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { Button, HStack, Table } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
 import { PlusIcon } from '@navikt/aksel-icons';
 import dayjs from 'dayjs';
@@ -149,34 +149,28 @@ const TilretteleggingOgOppholdPerioderPanel: FunctionComponent<OwnProps> = ({
       {!readOnly && (
         <>
           <VerticalSpacer fourtyPx />
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <Button
-                  size="small"
-                  variant="secondary"
-                  type="button"
-                  icon={<PlusIcon aria-hidden />}
-                  onClick={leggTilTilrettelegging}
-                  disabled={erLeggTilKnapperDisablet}
-                >
-                  <FormattedMessage id="TilretteleggingFieldArray.LeggTilTilrettelegging" />
-                </Button>
-              </FlexColumn>
-              <FlexColumn>
-                <Button
-                  size="small"
-                  variant="secondary"
-                  onClick={leggTilOpphold}
-                  icon={<PlusIcon aria-hidden />}
-                  type="button"
-                  disabled={erLeggTilKnapperDisablet}
-                >
-                  <FormattedMessage id="TilretteleggingFieldArray.LeggTilOpphold" />
-                </Button>
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
+          <HStack gap="4">
+            <Button
+              size="small"
+              variant="secondary"
+              type="button"
+              icon={<PlusIcon aria-hidden />}
+              onClick={leggTilTilrettelegging}
+              disabled={erLeggTilKnapperDisablet}
+            >
+              <FormattedMessage id="TilretteleggingFieldArray.LeggTilTilrettelegging" />
+            </Button>
+            <Button
+              size="small"
+              variant="secondary"
+              onClick={leggTilOpphold}
+              icon={<PlusIcon aria-hidden />}
+              type="button"
+              disabled={erLeggTilKnapperDisablet}
+            >
+              <FormattedMessage id="TilretteleggingFieldArray.LeggTilOpphold" />
+            </Button>
+          </HStack>
         </>
       )}
     </>
