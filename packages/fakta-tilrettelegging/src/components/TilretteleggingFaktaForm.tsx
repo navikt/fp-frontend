@@ -2,13 +2,7 @@ import React, { useMemo, FunctionComponent, useState, useCallback } from 'react'
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Datepicker, Form, TextAreaField } from '@navikt/ft-form-hooks';
-import {
-  AksjonspunktHelpTextHTML,
-  FlexColumn,
-  FlexContainer,
-  FlexRow,
-  VerticalSpacer,
-} from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { hasValidDate, hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 
 import {
@@ -23,7 +17,7 @@ import { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunk
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 
 import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
-import { Alert } from '@navikt/ds-react';
+import { Alert, HStack } from '@navikt/ds-react';
 import ArbeidsforholdFieldArray from './arbeidsforhold/ArbeidsforholdFieldArray';
 import { filtrerVelferdspermisjoner } from './arbeidsforhold/ArbeidsforholdPanel';
 
@@ -171,28 +165,22 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
           <VerticalSpacer fourtyPx />
         </>
       )}
-      <FlexContainer wrap>
-        <FlexRow>
-          <FlexColumn>
-            <Datepicker
-              name="termindato"
-              label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Termindato' })}
-              validate={[required, hasValidDate]}
-              isReadOnly={readOnly}
-            />
-          </FlexColumn>
-          {fødselsdato && (
-            <FlexColumn>
-              <Datepicker
-                name="fødselsdato"
-                label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Fodselsdato' })}
-                validate={[required, hasValidDate]}
-                isReadOnly={readOnly}
-              />
-            </FlexColumn>
-          )}
-        </FlexRow>
-      </FlexContainer>
+      <HStack wrap>
+        <Datepicker
+          name="termindato"
+          label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Termindato' })}
+          validate={[required, hasValidDate]}
+          isReadOnly={readOnly}
+        />
+        {fødselsdato && (
+          <Datepicker
+            name="fødselsdato"
+            label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Fodselsdato' })}
+            validate={[required, hasValidDate]}
+            isReadOnly={readOnly}
+          />
+        )}
+      </HStack>
       <VerticalSpacer fourtyPx />
       <ArbeidsforholdFieldArray
         sorterteArbeidsforhold={arbeidsforhold}
