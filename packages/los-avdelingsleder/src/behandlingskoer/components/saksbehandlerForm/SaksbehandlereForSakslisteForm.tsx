@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useMemo, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Label, Panel } from '@navikt/ds-react';
+import { HStack, Label, Panel, VStack } from '@navikt/ds-react';
 import { Form, CheckboxField } from '@navikt/ft-form-hooks';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosRestApi';
 import Saksbehandler from '../../../typer/saksbehandlerAvdelingTsType';
@@ -74,48 +74,42 @@ const SaksbehandlereForSakslisteForm: FunctionComponent<OwnProps> = ({
           <FormattedMessage id="SaksbehandlereForSakslisteForm.IngenSaksbehandlere" />
         )}
         {sorterteAvdelingensSaksbehandlere.length > 0 && (
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn className={styles.colLeft}>
-                {avdelingensSaksbehandlereVenstreListe.map(s => (
-                  <React.Fragment key={s.brukerIdent}>
-                    <CheckboxField
-                      name={s.brukerIdent}
-                      label={s.navn}
-                      onChange={isChecked =>
-                        knyttSaksbehandlerTilSaksliste({
-                          sakslisteId: valgtSaksliste.sakslisteId,
-                          brukerIdent: s.brukerIdent,
-                          checked: isChecked,
-                          avdelingEnhet: valgtAvdelingEnhet,
-                        }).then(() => hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet }))
-                      }
-                    />
-                    <VerticalSpacer fourPx />
-                  </React.Fragment>
-                ))}
-              </FlexColumn>
-              <FlexColumn>
-                {avdelingensSaksbehandlereHoyreListe.map(s => (
-                  <React.Fragment key={s.brukerIdent}>
-                    <CheckboxField
-                      name={s.brukerIdent}
-                      label={s.navn}
-                      onChange={isChecked =>
-                        knyttSaksbehandlerTilSaksliste({
-                          sakslisteId: valgtSaksliste.sakslisteId,
-                          brukerIdent: s.brukerIdent,
-                          checked: isChecked,
-                          avdelingEnhet: valgtAvdelingEnhet,
-                        }).then(() => hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet }))
-                      }
-                    />
-                    <VerticalSpacer fourPx />
-                  </React.Fragment>
-                ))}
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
+          <HStack>
+            <VStack gap="2" className={styles.colLeft}>
+              {avdelingensSaksbehandlereVenstreListe.map(s => (
+                <CheckboxField
+                  key={s.brukerIdent}
+                  name={s.brukerIdent}
+                  label={s.navn}
+                  onChange={isChecked =>
+                    knyttSaksbehandlerTilSaksliste({
+                      sakslisteId: valgtSaksliste.sakslisteId,
+                      brukerIdent: s.brukerIdent,
+                      checked: isChecked,
+                      avdelingEnhet: valgtAvdelingEnhet,
+                    }).then(() => hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet }))
+                  }
+                />
+              ))}
+            </VStack>
+            <VStack gap="2">
+              {avdelingensSaksbehandlereHoyreListe.map(s => (
+                <CheckboxField
+                  key={s.brukerIdent}
+                  name={s.brukerIdent}
+                  label={s.navn}
+                  onChange={isChecked =>
+                    knyttSaksbehandlerTilSaksliste({
+                      sakslisteId: valgtSaksliste.sakslisteId,
+                      brukerIdent: s.brukerIdent,
+                      checked: isChecked,
+                      avdelingEnhet: valgtAvdelingEnhet,
+                    }).then(() => hentAvdelingensSakslister({ avdelingEnhet: valgtAvdelingEnhet }))
+                  }
+                />
+              ))}
+            </VStack>
+          </HStack>
         )}
       </Panel>
     </Form>

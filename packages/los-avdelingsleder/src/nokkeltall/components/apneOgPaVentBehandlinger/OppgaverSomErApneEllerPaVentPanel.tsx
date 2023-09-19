@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Label } from '@navikt/ds-react';
-import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import { HStack, Label } from '@navikt/ds-react';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form, CheckboxField } from '@navikt/ft-form-hooks';
 import { BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
 
@@ -64,15 +64,11 @@ const OppgaverSomErApneEllerPaVentPanel: FunctionComponent<OwnProps> = ({
         <FormattedMessage id="OppgaverSomErApneEllerPaVentPanel.Apne" />
       </Label>
       <VerticalSpacer sixteenPx />
-      <FlexContainer>
-        <FlexRow>
-          {filtrerteBehandlingstyper.map(type => (
-            <FlexColumn key={type.kode}>
-              <CheckboxField name={type.kode} label={type.navn} />
-            </FlexColumn>
-          ))}
-        </FlexRow>
-      </FlexContainer>
+      <HStack gap="4">
+        {filtrerteBehandlingstyper.map(type => (
+          <CheckboxField key={type.kode} name={type.kode} label={type.navn} />
+        ))}
+      </HStack>
       <VerticalSpacer sixteenPx />
       <OppgaverSomErApneEllerPaVentGraf
         height={height}
