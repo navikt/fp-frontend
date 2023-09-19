@@ -233,7 +233,7 @@ const VedtakForm: FunctionComponent<OwnProps> = ({
 
   const { trigger } = formMethods;
 
-  const { behandlingsresultat, sprakkode, status } = behandling;
+  const { behandlingsresultat, sprakkode } = behandling;
 
   const erBehandlingEtterKlage = useMemo(
     () => erÅrsakTypeBehandlingEtterKlage(behandling.behandlingÅrsaker),
@@ -297,10 +297,8 @@ const VedtakForm: FunctionComponent<OwnProps> = ({
 
           return erAvslatt ? (
             <VedtakAvslagPanel
-              behandlingStatusKode={status}
               behandlingsresultat={behandlingsresultat}
               isReadOnly={readOnly}
-              ytelseTypeKode={ytelseTypeKode}
               språkKode={sprakkode}
               alleKodeverk={alleKodeverk}
               vilkar={vilkar}

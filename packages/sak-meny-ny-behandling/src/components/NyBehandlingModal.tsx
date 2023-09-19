@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Modal, Button, Heading } from '@navikt/ds-react';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -14,14 +14,9 @@ import styles from './nyBehandlingModal.module.css';
 const createOptions = (
   bt: KodeverkMedNavn,
   enabledBehandlingstyper: KodeverkMedNavn[],
-  intl: IntlShape,
 ): ReactElement => {
-  // TODO Burde retta opp navn for behandlingstype i DB
-  const navn =
-    bt.kode === bType.REVURDERING ? intl.formatMessage({ id: 'MenyNyBehandlingIndex.OpprettRevurdering' }) : bt.navn;
-
   const isEnabled = enabledBehandlingstyper.some(b => b.kode === bt.kode);
-  return <option key={bt.kode} value={bt.kode} disabled={!isEnabled}>{` ${navn} `}</option>;
+  return <option key={bt.kode} value={bt.kode} disabled={!isEnabled}>{` ${bt.navn} `}</option>;
 };
 
 // TODO Denne inndelinga burde vel flyttast til DB (KODELISTE.EKSTRA_DATA)?
@@ -206,7 +201,7 @@ const NyBehandlingModal: FunctionComponent<OwnProps> = ({
             name="behandlingType"
             label=""
             validate={[required]}
-            selectValues={behandlingTyper.map(bt => createOptions(bt, enabledBehandlingstyper, intl))}
+            selectValues={behandlingTyper.map(bt => createOptions(bt, enabledBehandlingstyper))}
             className={styles.typeBredde}
           />
           <VerticalSpacer sixteenPx />

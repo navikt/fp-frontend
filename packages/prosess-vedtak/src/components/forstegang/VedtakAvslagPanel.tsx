@@ -4,15 +4,8 @@ import { Label, BodyShort } from '@navikt/ds-react';
 
 import { AlleKodeverk, Vilkar, Behandlingsresultat } from '@navikt/fp-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import {
-  behandlingStatus,
-  fagsakYtelseType,
-  getKodeverknavnFn,
-  vilkarUtfallType,
-  KodeverkType,
-} from '@navikt/fp-kodeverk';
+import { getKodeverknavnFn, vilkarUtfallType, KodeverkType } from '@navikt/fp-kodeverk';
 
-import { hasIkkeOppfyltSoknadsfristvilkar } from '../felles/VedtakHelper';
 import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
 
 export const getAvslagArsak = (
@@ -38,12 +31,10 @@ export const getAvslagArsak = (
 };
 
 interface OwnProps {
-  behandlingStatusKode: string;
   vilkar?: Vilkar[];
   behandlingsresultat?: Behandlingsresultat;
   språkKode: string;
   isReadOnly: boolean;
-  ytelseTypeKode: string;
   alleKodeverk: AlleKodeverk;
   beregningErManueltFastsatt: boolean;
   skalBrukeOverstyrendeFritekstBrev: boolean;
@@ -52,22 +43,16 @@ interface OwnProps {
 const EMPTY_ARRAY = [] as Vilkar[];
 
 const VedtakAvslagPanel: FunctionComponent<OwnProps> = ({
-  behandlingStatusKode,
   vilkar = EMPTY_ARRAY,
   behandlingsresultat,
   språkKode,
   isReadOnly,
-  ytelseTypeKode,
   alleKodeverk,
   beregningErManueltFastsatt,
   skalBrukeOverstyrendeFritekstBrev,
 }) => {
   const intl = useIntl();
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
-  const fritekstfeltForSoknadsfrist =
-    behandlingStatusKode === behandlingStatus.BEHANDLING_UTREDES &&
-    hasIkkeOppfyltSoknadsfristvilkar(vilkar) &&
-    ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD;
   const textCode = beregningErManueltFastsatt ? 'VedtakForm.Fritekst.Beregningsgrunnlag' : 'VedtakForm.Fritekst';
   return (
     <>
@@ -78,15 +63,14 @@ const VedtakAvslagPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
         </div>
       )}
-      {!skalBrukeOverstyrendeFritekstBrev &&
-        (fritekstfeltForSoknadsfrist || behandlingsresultat?.avslagsarsakFritekst || beregningErManueltFastsatt) && (
-          <VedtakFritekstPanel
-            isReadOnly={isReadOnly}
-            språkKode={språkKode}
-            behandlingsresultat={behandlingsresultat}
-            labelTextCode={textCode}
-          />
-        )}
+      {!skalBrukeOverstyrendeFritekstBrev && (
+        <VedtakFritekstPanel
+          isReadOnly={isReadOnly}
+          språkKode={språkKode}
+          behandlingsresultat={behandlingsresultat}
+          labelTextCode={textCode}
+        />
+      )}
     </>
   );
 };

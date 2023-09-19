@@ -291,7 +291,7 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
   const overskrift = formMethods.watch('overskrift');
   const brødtekst = formMethods.watch('brødtekst');
 
-  const { behandlingsresultat, sprakkode, status, behandlingÅrsaker } = behandling;
+  const { behandlingsresultat, sprakkode, behandlingÅrsaker } = behandling;
 
   const erBehandlingEtterKlage = useMemo(
     () => erÅrsakTypeBehandlingEtterKlage(behandling.behandlingÅrsaker),
@@ -392,7 +392,6 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
           if (erAvslatt) {
             return (
               <VedtakAvslagArsakOgBegrunnelsePanel
-                behandlingStatusKode={status}
                 vilkar={vilkar}
                 behandlingsresultat={behandlingsresultat}
                 språkKode={sprakkode}
