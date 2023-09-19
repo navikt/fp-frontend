@@ -2,11 +2,11 @@ import React, { FunctionComponent } from 'react';
 import dayjs from 'dayjs';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Label } from '@navikt/ds-react';
+import { HStack, Label } from '@navikt/ds-react';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import { KodeverkMedNavn } from '@navikt/ft-types';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FagsakYtelseType, KodeverkType } from '@navikt/ft-kodeverk';
 import { Form, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 
@@ -103,45 +103,39 @@ const TilBehandlingPanel: FunctionComponent<OwnProps> = ({ height, oppgaverPerDa
         <FormattedMessage id="TilBehandlingPanel.TilBehandling" />
       </Label>
       <VerticalSpacer eightPx />
-      <FlexContainer>
-        <FlexRow>
-          <FlexColumn>
-            <SelectField
-              name="ukevalg"
-              label=""
-              selectValues={uker.map(u => (
-                <option key={u.kode} value={u.kode}>
-                  {intl.formatMessage({ id: u.tekstKode })}
-                </option>
-              ))}
-            />
-          </FlexColumn>
-          <FlexColumn>
-            <RadioGroupPanel
-              name="ytelseType"
-              isHorizontal
-              radios={[
-                {
-                  value: FagsakYtelseType.FORELDREPENGER,
-                  label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.FORELDREPENGER),
-                },
-                {
-                  value: FagsakYtelseType.ENGANGSSTONAD,
-                  label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.ENGANGSSTONAD),
-                },
-                {
-                  value: FagsakYtelseType.SVANGERSKAPSPENGER,
-                  label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.SVANGERSKAPSPENGER),
-                },
-                {
-                  value: ALLE_YTELSETYPER_VALGT,
-                  label: <FormattedMessage id="TilBehandlingPanel.Alle" />,
-                },
-              ]}
-            />
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
+      <HStack gap="4">
+        <SelectField
+          name="ukevalg"
+          label=""
+          selectValues={uker.map(u => (
+            <option key={u.kode} value={u.kode}>
+              {intl.formatMessage({ id: u.tekstKode })}
+            </option>
+          ))}
+        />
+        <RadioGroupPanel
+          name="ytelseType"
+          isHorizontal
+          radios={[
+            {
+              value: FagsakYtelseType.FORELDREPENGER,
+              label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.FORELDREPENGER),
+            },
+            {
+              value: FagsakYtelseType.ENGANGSSTONAD,
+              label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.ENGANGSSTONAD),
+            },
+            {
+              value: FagsakYtelseType.SVANGERSKAPSPENGER,
+              label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.SVANGERSKAPSPENGER),
+            },
+            {
+              value: ALLE_YTELSETYPER_VALGT,
+              label: <FormattedMessage id="TilBehandlingPanel.Alle" />,
+            },
+          ]}
+        />
+      </HStack>
       <VerticalSpacer sixteenPx />
       <TilBehandlingGraf
         height={height}

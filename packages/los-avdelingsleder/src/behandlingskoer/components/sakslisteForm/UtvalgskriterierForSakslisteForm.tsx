@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useEffect, useCallback, useMemo } from 'react';
 import { useIntl, FormattedMessage, IntlShape } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Heading, BodyShort, Panel } from '@navikt/ds-react';
+import { Heading, BodyShort, Panel, VStack, HStack } from '@navikt/ds-react';
 import { required, minLength, maxLength, hasValidName } from '@navikt/ft-form-validators';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form, InputField } from '@navikt/ft-form-hooks';
 
 import { restApiHooks, RestApiPathsKeys } from '../../../data/fplosRestApi';
@@ -125,28 +125,24 @@ const UtvalgskriterierForSakslisteForm: FunctionComponent<OwnProps> = ({
           <FormattedMessage id="UtvalgskriterierForSakslisteForm.Utvalgskriterier" />
         </Heading>
         <VerticalSpacer eightPx />
-        <FlexContainer>
-          <FlexRow className={styles.utvalgskriterieRad}>
-            <FlexColumn>
-              <InputField
-                name="navn"
-                label={intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.Navn' })}
-                validate={[required, minLength3, maxLength100, hasValidName]}
-                onChange={lagreNavn}
-                className={styles.bredde}
-              />
-            </FlexColumn>
-            <FlexColumn className={styles.colRight}>
-              <div className={styles.grayBox}>
-                <BodyShort size="small">
-                  <FormattedMessage id="UtvalgskriterierForSakslisteForm.AntallSaker" />
-                </BodyShort>
-                <Heading size="small">{antallOppgaver ? `${antallOppgaver}` : '0'}</Heading>
-              </div>
-            </FlexColumn>
-          </FlexRow>
-          <FlexRow spaceBetween>
-            <FlexColumn>
+        <VStack gap="4">
+          <HStack justify="space-between">
+            <InputField
+              name="navn"
+              label={intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.Navn' })}
+              validate={[required, minLength3, maxLength100, hasValidName]}
+              onChange={lagreNavn}
+              className={styles.bredde}
+            />
+            <div className={styles.grayBox}>
+              <BodyShort size="small">
+                <FormattedMessage id="UtvalgskriterierForSakslisteForm.AntallSaker" />
+              </BodyShort>
+              <Heading size="small">{antallOppgaver ? `${antallOppgaver}` : '0'}</Heading>
+            </div>
+          </HStack>
+          <HStack justify="space-between">
+            <div>
               <FagsakYtelseTypeVelger
                 valgtSakslisteId={valgtSaksliste.sakslisteId}
                 valgtAvdelingEnhet={valgtAvdelingEnhet}
@@ -159,8 +155,8 @@ const UtvalgskriterierForSakslisteForm: FunctionComponent<OwnProps> = ({
                 hentAvdelingensSakslister={hentAvdelingensSakslister}
                 hentAntallOppgaver={hentAntallOppgaver}
               />
-            </FlexColumn>
-            <FlexColumn>
+            </div>
+            <div>
               <AndreKriterierVelger
                 valgtSakslisteId={valgtSaksliste.sakslisteId}
                 valgtAvdelingEnhet={valgtAvdelingEnhet}
@@ -168,8 +164,8 @@ const UtvalgskriterierForSakslisteForm: FunctionComponent<OwnProps> = ({
                 hentAvdelingensSakslister={hentAvdelingensSakslister}
                 hentAntallOppgaver={hentAntallOppgaver}
               />
-            </FlexColumn>
-            <FlexColumn>
+            </div>
+            <div>
               <SorteringVelger
                 valgtSakslisteId={valgtSaksliste.sakslisteId}
                 valgteBehandlingtyper={valgtSaksliste.behandlingTyper}
@@ -178,9 +174,10 @@ const UtvalgskriterierForSakslisteForm: FunctionComponent<OwnProps> = ({
                 hentAvdelingensSakslister={hentAvdelingensSakslister}
                 hentAntallOppgaver={hentAntallOppgaver}
               />
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
+            </div>
+          </HStack>
+        </VStack>
+        <VerticalSpacer sixteenPx />
       </Panel>
     </Form>
   );

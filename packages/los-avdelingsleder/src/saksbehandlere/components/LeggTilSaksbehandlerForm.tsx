@@ -1,10 +1,10 @@
 import React, { FunctionComponent, useState, useMemo } from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { BodyShort, Button, Label } from '@navikt/ds-react';
+import { BodyShort, Button, HStack, Label } from '@navikt/ds-react';
 import { Form, InputField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { FlexContainer, FlexRow, FlexColumn, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import Saksbehandler from '../../typer/saksbehandlerAvdelingTsType';
@@ -100,61 +100,52 @@ const LeggTilSaksbehandlerForm: FunctionComponent<OwnProps> = ({
         <FormattedMessage id="LeggTilSaksbehandlerForm.LeggTil" />
       </Label>
       <VerticalSpacer eightPx />
-      <FlexContainer>
-        <FlexRow>
-          <FlexColumn>
-            <InputField
-              name="brukerIdent"
-              label={intl.formatMessage({ id: 'LeggTilSaksbehandlerForm.Brukerident' })}
-              validate={[required]}
-            />
-          </FlexColumn>
-          <FlexColumn className={styles.button}>
+      <HStack gap="4">
+        <InputField
+          name="brukerIdent"
+          label={intl.formatMessage({ id: 'LeggTilSaksbehandlerForm.Brukerident' })}
+          validate={[required]}
+        />
+        <div className={styles.button}>
+          <Button
+            size="small"
+            variant="secondary"
+            loading={formMethods.formState.isSubmitting}
+            disabled={formMethods.formState.isSubmitting || leggerTilNySaksbehandler}
+            tabIndex={0}
+          >
+            <FormattedMessage id="LeggTilSaksbehandlerForm.Sok" />
+          </Button>
+        </div>
+      </HStack>
+      {state === RestApiState.SUCCESS && (
+        <>
+          <VerticalSpacer eightPx />
+          <BodyShort size="small">{formattedText}</BodyShort>
+          <VerticalSpacer sixteenPx />
+          <HStack gap="4">
+            <Button
+              size="small"
+              variant="primary"
+              autoFocus
+              onClick={() => leggTilSaksbehandlerFn(formMethods.reset)}
+              loading={leggerTilNySaksbehandler}
+              disabled={leggerTilNySaksbehandler || erLagtTilAllerede || !saksbehandler}
+              type="button"
+            >
+              <FormattedMessage id="LeggTilSaksbehandlerForm.LeggTilIListen" />
+            </Button>
             <Button
               size="small"
               variant="secondary"
-              loading={formMethods.formState.isSubmitting}
-              disabled={formMethods.formState.isSubmitting || leggerTilNySaksbehandler}
               tabIndex={0}
+              disabled={leggerTilNySaksbehandler}
+              onClick={() => resetSaksbehandlerSokFn(formMethods.reset)}
+              type="button"
             >
-              <FormattedMessage id="LeggTilSaksbehandlerForm.Sok" />
+              <FormattedMessage id="LeggTilSaksbehandlerForm.Nullstill" />
             </Button>
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
-      {state === RestApiState.SUCCESS && (
-        <>
-          <BodyShort size="small">{formattedText}</BodyShort>
-          <VerticalSpacer sixteenPx />
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <Button
-                  size="small"
-                  variant="primary"
-                  autoFocus
-                  onClick={() => leggTilSaksbehandlerFn(formMethods.reset)}
-                  loading={leggerTilNySaksbehandler}
-                  disabled={leggerTilNySaksbehandler || erLagtTilAllerede || !saksbehandler}
-                  type="button"
-                >
-                  <FormattedMessage id="LeggTilSaksbehandlerForm.LeggTilIListen" />
-                </Button>
-              </FlexColumn>
-              <FlexColumn>
-                <Button
-                  size="small"
-                  variant="secondary"
-                  tabIndex={0}
-                  disabled={leggerTilNySaksbehandler}
-                  onClick={() => resetSaksbehandlerSokFn(formMethods.reset)}
-                  type="button"
-                >
-                  <FormattedMessage id="LeggTilSaksbehandlerForm.Nullstill" />
-                </Button>
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
+          </HStack>
         </>
       )}
     </Form>
