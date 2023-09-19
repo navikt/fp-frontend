@@ -1,15 +1,15 @@
 .orangeDetailsPeriod {
-  background-color: #ffeccc;
+  background-color: var(--a-orange-100);
   padding: 12px;
 }
 
 .greenDetailsPeriod {
-  background-color: #ccf1d6;
+  background-color: var(--a-green-100);
   padding: 12px;
 }
 
 .redDetailsPeriod {
-  background-color: mix(#c30000, #fff, 20%);
+  background-color: var(--a-red-100);
   padding: 12px;
 }
 

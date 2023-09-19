@@ -165,7 +165,7 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
           <VerticalSpacer fourtyPx />
         </>
       )}
-      <HStack wrap>
+      <HStack gap="4" wrap>
         <Datepicker
           name="termindato"
           label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Termindato' })}

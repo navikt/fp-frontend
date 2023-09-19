@@ -2,8 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
-import { Detail } from '@navikt/ds-react';
-import { DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer, ArrowBox } from '@navikt/ft-ui-komponenter';
+import { Detail, HStack } from '@navikt/ds-react';
+import { DateLabel, VerticalSpacer, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { hasValidDate, hasValidPosOrNegInteger } from '@navikt/ft-form-validators';
 import { InputField, CheckboxField, Datepicker } from '@navikt/ft-form-hooks';
@@ -135,8 +135,6 @@ const DatoSorteringValg: FunctionComponent<OwnProps> = ({
     fomDatoVerdi,
   );
 
-  const lagreFraDebounce = useDebounce<number>('fra', lagreFra);
-  const lagreTilDebounce = useDebounce<number>('til', lagreTil);
   const lagreFomDatoDebounce = useDebounce<string>('fomDato', lagreFomDato);
   const lagreTomDatoDebounce = useDebounce<string>('tomDato', lagreTomDato);
 
@@ -148,50 +146,43 @@ const DatoSorteringValg: FunctionComponent<OwnProps> = ({
           <Detail>
             <FormattedMessage id="SorteringVelger.FiltrerPaTidsintervall" />
           </Detail>
-
           {erDynamiskPeriode && (
-            <FlexContainer>
-              <FlexRow>
-                <FlexColumn>
-                  <InputField
-                    name="fra"
-                    className={styles.dato}
-                    label={intl.formatMessage({ id: 'SorteringVelger.Fom' })}
-                    validate={[hasValidPosOrNegInteger]}
-                    onChange={lagreFraDebounce}
-                  />
-                  {(fraVerdi || fraVerdi === 0) && (
-                    <Detail>
-                      <DateLabel dateString={finnDato(fraVerdi)} />
-                    </Detail>
-                  )}
-                </FlexColumn>
-                <FlexColumn>
-                  <Detail className={styles.dager}>
-                    <FormattedMessage id="SorteringVelger.DagerMedBindestrek" />
+            <HStack gap="4">
+              <div>
+                <InputField
+                  name="fra"
+                  className={styles.dato}
+                  label={intl.formatMessage({ id: 'SorteringVelger.Fom' })}
+                  validate={[hasValidPosOrNegInteger]}
+                  onBlur={lagreFra}
+                />
+                {(fraVerdi || fraVerdi === 0) && (
+                  <Detail>
+                    <DateLabel dateString={finnDato(fraVerdi)} />
                   </Detail>
-                </FlexColumn>
-                <FlexColumn>
-                  <InputField
-                    name="til"
-                    className={styles.dato}
-                    label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
-                    validate={[hasValidPosOrNegInteger]}
-                    onChange={lagreTilDebounce}
-                  />
-                  {(tilVerdi || tilVerdi === 0) && (
-                    <Detail>
-                      <DateLabel dateString={finnDato(tilVerdi)} />
-                    </Detail>
-                  )}
-                </FlexColumn>
-                <FlexColumn>
-                  <Detail className={styles.dagerMedBindestrek}>
-                    <FormattedMessage id="SorteringVelger.Dager" />
+                )}
+              </div>
+              <Detail className={styles.dager}>
+                <FormattedMessage id="SorteringVelger.DagerMedBindestrek" />
+              </Detail>
+              <div>
+                <InputField
+                  name="til"
+                  className={styles.dato}
+                  label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
+                  validate={[hasValidPosOrNegInteger]}
+                  onBlur={lagreTil}
+                />
+                {(tilVerdi || tilVerdi === 0) && (
+                  <Detail>
+                    <DateLabel dateString={finnDato(tilVerdi)} />
                   </Detail>
-                </FlexColumn>
-              </FlexRow>
-            </FlexContainer>
+                )}
+              </div>
+              <Detail className={styles.dagerMedBindestrek}>
+                <FormattedMessage id="SorteringVelger.Dager" />
+              </Detail>
+            </HStack>
           )}
           {!erDynamiskPeriode && (
             <>
