@@ -38,12 +38,11 @@ const OpplysningspliktProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
     vilkarKoder={VILKAR_KODER}
     prosessPanelKode={ProsessStegCode.OPPLYSNINGSPLIKT}
     prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' })}
-    skalPanelVisesIMeny={data => {
-      const defaultSkalVises = skalViseProsessPanel(data.aksjonspunkter, VILKAR_KODER, data.vilkar);
-      const isRevurdering = behandlingType.REVURDERING === data.behandling.type;
-      const hasAp = data.aksjonspunkter.some(ap => ap.definisjon === AksjonspunktCode.SOKERS_OPPLYSNINGSPLIKT_MANU);
-      return !(isRevurdering && !hasAp) || defaultSkalVises;
-    }}
+    skalPanelVisesIMeny={data =>
+      data.behandling.type !== behandlingType.REVURDERING
+        ? skalViseProsessPanel(data.aksjonspunkter, VILKAR_KODER, data.vilkar)
+        : false
+    }
     renderPanel={data => (
       <SokersOpplysningspliktVilkarProsessIndex
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
