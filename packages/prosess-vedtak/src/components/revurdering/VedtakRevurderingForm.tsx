@@ -397,6 +397,7 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
                 språkKode={sprakkode}
                 erReadOnly={readOnly}
                 alleKodeverk={alleKodeverk}
+                skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
               />
             );
           }

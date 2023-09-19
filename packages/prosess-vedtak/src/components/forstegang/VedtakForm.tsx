@@ -303,6 +303,7 @@ const VedtakForm: FunctionComponent<OwnProps> = ({
               alleKodeverk={alleKodeverk}
               vilkar={vilkar}
               beregningErManueltFastsatt={beregningErManueltFastsatt}
+              skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
             />
           ) : null;
         }}

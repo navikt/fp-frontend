@@ -1,6 +1,5 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { useFormContext } from 'react-hook-form';
 import { Label, BodyShort, Detail } from '@navikt/ds-react';
 
 import { AlleKodeverk, Vilkar, Behandlingsresultat } from '@navikt/fp-types';
@@ -9,6 +8,8 @@ import { TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { decodeHtmlEntity, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import { useFormContext } from 'react-hook-form';
 
 import styles from './vedtakAvslagArsakOgBegrunnelsePanel.module.css';
 
@@ -43,6 +44,7 @@ interface OwnProps {
   språkKode: string;
   erReadOnly: boolean;
   alleKodeverk: AlleKodeverk;
+  skalBrukeOverstyrendeFritekstBrev: boolean;
 }
 
 const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
@@ -51,6 +53,7 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
   språkKode,
   erReadOnly,
   alleKodeverk,
+  skalBrukeOverstyrendeFritekstBrev,
 }) => {
   const {
     formState: { isDirty },
@@ -71,20 +74,24 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
         </>
       )}
-      <VerticalSpacer sixteenPx />
-      <TextAreaField
-        name="begrunnelse"
-        label={<FormattedMessage id="VedtakForm.Fritekst" />}
-        validate={[requiredIfCustomFunctionIsTrueNew(isRequiredFn), minLength3, maxLength1500, hasValidText]}
-        maxLength={1500}
-        readOnly={erReadOnly}
-        badges={[
-          {
-            type: 'info',
-            titleText: getLanguageFromSprakkode(språkKode),
-          },
-        ]}
-      />
+      {!skalBrukeOverstyrendeFritekstBrev && (
+        <>
+          <VerticalSpacer sixteenPx />
+          <TextAreaField
+            name="begrunnelse"
+            label={<FormattedMessage id="VedtakForm.Fritekst" />}
+            validate={[requiredIfCustomFunctionIsTrueNew(isRequiredFn), minLength3, maxLength1500, hasValidText]}
+            maxLength={1500}
+            readOnly={erReadOnly}
+            badges={[
+              {
+                type: 'info',
+                titleText: getLanguageFromSprakkode(språkKode),
+              },
+            ]}
+          />
+        </>
+      )}
       {erReadOnly && behandlingsresultat?.avslagsarsakFritekst && (
         <span>
           <VerticalSpacer twentyPx />

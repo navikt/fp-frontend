@@ -37,6 +37,7 @@ interface OwnProps {
   isReadOnly: boolean;
   alleKodeverk: AlleKodeverk;
   beregningErManueltFastsatt: boolean;
+  skalBrukeOverstyrendeFritekstBrev: boolean;
 }
 
 const EMPTY_ARRAY = [] as Vilkar[];
@@ -48,6 +49,7 @@ const VedtakAvslagPanel: FunctionComponent<OwnProps> = ({
   isReadOnly,
   alleKodeverk,
   beregningErManueltFastsatt,
+  skalBrukeOverstyrendeFritekstBrev,
 }) => {
   const intl = useIntl();
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
@@ -61,12 +63,14 @@ const VedtakAvslagPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
         </div>
       )}
-      <VedtakFritekstPanel
-        isReadOnly={isReadOnly}
-        språkKode={språkKode}
-        behandlingsresultat={behandlingsresultat}
-        labelTextCode={textCode}
-      />
+      {!skalBrukeOverstyrendeFritekstBrev && (
+        <VedtakFritekstPanel
+          isReadOnly={isReadOnly}
+          språkKode={språkKode}
+          behandlingsresultat={behandlingsresultat}
+          labelTextCode={textCode}
+        />
+      )}
     </>
   );
 };
