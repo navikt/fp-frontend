@@ -21,7 +21,6 @@ const BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES = [
   BehandlingType.KLAGE,
   BehandlingType.REVURDERING,
   BehandlingType.DOKUMENTINNSYN,
-  BehandlingType.ANKE,
   BehandlingType.TILBAKEKREVING,
   BehandlingType.TILBAKEKREVING_REVURDERING,
 ];
