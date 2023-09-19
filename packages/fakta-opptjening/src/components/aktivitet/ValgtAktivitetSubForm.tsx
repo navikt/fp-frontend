@@ -1,14 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import dayjs from 'dayjs';
 import { FormattedMessage } from 'react-intl';
-import { BodyShort, Label } from '@navikt/ds-react';
+import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT, formatCurrencyNoKr } from '@navikt/ft-utils';
-import { FlexColumn, FlexContainer, FlexRow, FloatRight, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { opptjeningAktivitetType as OAType } from '@navikt/fp-kodeverk';
 import { ArbeidsgiverOpplysningerPerId, FerdiglignetNæring } from '@navikt/fp-types';
-
-import styles from './valgtAktivitetSubForm.module.css';
 
 const YTELSE_TYPER = [
   OAType.SYKEPENGER,
@@ -71,10 +69,10 @@ const ValgtAktivitetSubForm: FunctionComponent<OwnProps> = ({
   naringRegistreringsdato,
   ferdiglignetNæring,
 }) => (
-  <FlexContainer>
+  <VStack gap="4">
     {erAvType(valgtAktivitetstype, ...[OAType.ARBEID, OAType.NARING, ...YTELSE_TYPER]) && (
-      <FlexRow>
-        <FlexColumn className={styles.colMargin}>
+      <HStack gap="4">
+        <div>
           <VerticalSpacer eightPx />
           <Label size="small">
             <FormattedMessage id={getOppdragsgiverIntlId(valgtAktivitetstype)} />
@@ -82,64 +80,52 @@ const ValgtAktivitetSubForm: FunctionComponent<OwnProps> = ({
           <BodyShort size="small">
             {finnArbeidsgivertekst(arbeidsgiverReferanse, arbeidsgiverOpplysningerPerId)}
           </BodyShort>
-        </FlexColumn>
+        </div>
         {erAvType(valgtAktivitetstype, OAType.ARBEID) && (
-          <FlexColumn>
+          <div>
             <VerticalSpacer eightPx />
             <Label size="small">
               <FormattedMessage id="ActivityPanel.Stillingsandel" />
             </Label>
             <BodyShort size="small">{stillingsandel}</BodyShort>
-          </FlexColumn>
+          </div>
         )}
-      </FlexRow>
+      </HStack>
     )}
-    <VerticalSpacer eightPx />
     {erAvType(valgtAktivitetstype, OAType.NARING) && (
       <>
-        <FlexRow>
-          <FlexColumn>
-            <Label size="small">
-              <FormattedMessage id="ActivityPanel.Registreringsdato" />
-            </Label>
-            <BodyShort size="small">
-              {naringRegistreringsdato ? dayjs(naringRegistreringsdato).format(DDMMYYYY_DATE_FORMAT) : '-'}
-            </BodyShort>
-          </FlexColumn>
-        </FlexRow>
-        <VerticalSpacer eightPx />
-        <FlexRow>
-          <FlexColumn>
-            <Label size="small">
-              <FormattedMessage id={finnNæringLabel(ferdiglignetNæring)} />
-            </Label>
-          </FlexColumn>
-        </FlexRow>
-        {ferdiglignetNæring
-          .sort((a, b) => {
-            if (a.år < b.år) {
-              return 1;
-            }
-            if (a.år > b.år) {
-              return -1;
-            }
-            return 0;
-          })
-          .map(inntekt => (
-            <FlexRow key={inntekt.år}>
-              <FlexColumn className={styles.aarBredde}>
+        <div>
+          <Label size="small">
+            <FormattedMessage id="ActivityPanel.Registreringsdato" />
+          </Label>
+          <BodyShort size="small">
+            {naringRegistreringsdato ? dayjs(naringRegistreringsdato).format(DDMMYYYY_DATE_FORMAT) : '-'}
+          </BodyShort>
+        </div>
+        <div>
+          <Label size="small">
+            <FormattedMessage id={finnNæringLabel(ferdiglignetNæring)} />
+          </Label>
+          {ferdiglignetNæring
+            .sort((a, b) => {
+              if (a.år < b.år) {
+                return 1;
+              }
+              if (a.år > b.år) {
+                return -1;
+              }
+              return 0;
+            })
+            .map(inntekt => (
+              <HStack gap="5" key={inntekt.år}>
                 <BodyShort size="small">{inntekt.år}</BodyShort>
-              </FlexColumn>
-              <FlexColumn className={styles.belopBredde}>
-                <FloatRight>
-                  <BodyShort size="small">{formatCurrencyNoKr(inntekt.beløp)}</BodyShort>
-                </FloatRight>
-              </FlexColumn>
-            </FlexRow>
-          ))}
+                <BodyShort size="small">{formatCurrencyNoKr(inntekt.beløp)}</BodyShort>
+              </HStack>
+            ))}
+        </div>
       </>
     )}
-  </FlexContainer>
+  </VStack>
 );
 
 export default ValgtAktivitetSubForm;

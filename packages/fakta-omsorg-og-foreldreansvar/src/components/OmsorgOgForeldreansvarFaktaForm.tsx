@@ -1,16 +1,8 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Label, BodyShort } from '@navikt/ds-react';
+import { Label, BodyShort, HStack, VStack } from '@navikt/ds-react';
 
-import {
-  AksjonspunktHelpTextTemp,
-  VerticalSpacer,
-  FaktaGruppe,
-  EditedIcon,
-  FlexContainer,
-  FlexRow,
-  FlexColumn,
-} from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextTemp, VerticalSpacer, FaktaGruppe, EditedIcon } from '@navikt/ft-ui-komponenter';
 import { AksjonspunktCode, VilkarType, KodeverkType } from '@navikt/fp-kodeverk';
 import { SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
@@ -119,9 +111,9 @@ const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<PureOwnProps> & StaticF
       <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
         {findAksjonspunktHelpTexts(erAksjonspunktForeldreansvar)}
       </AksjonspunktHelpTextTemp>
-      <FlexContainer>
-        <FlexRow>
-          <FlexColumn className={erAksjonspunktForeldreansvar ? styles.oneCol : styles.cols}>
+      <VStack gap="2">
+        <HStack gap="5">
+          <div className={erAksjonspunktForeldreansvar ? styles.oneCol : styles.cols}>
             <OmsorgsovertakelseFaktaPanel
               readOnly={readOnly}
               erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
@@ -130,62 +122,62 @@ const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<PureOwnProps> & StaticF
               soknad={soknad}
               familiehendelse={gjeldendeFamiliehendelse}
             />
-          </FlexColumn>
+          </div>
           {!erAksjonspunktForeldreansvar && (
-            <FlexColumn className={styles.cols}>
+            <div className={styles.cols}>
               <RettighetFaktaPanel
                 relatertYtelseTypes={relatertYtelseTypes}
                 alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
               />
-            </FlexColumn>
+            </div>
           )}
-        </FlexRow>
-        <FlexRow>
-          <FlexColumn className={styles.cols}>
+        </HStack>
+        <HStack gap="5">
+          <div className={styles.cols}>
             <BarnPanel soknad={soknad} alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} intl={intl} />
-          </FlexColumn>
-          <FlexColumn className={styles.cols}>
+          </div>
+          <div className={styles.cols}>
             <ForeldrePanel
               personoversikt={personoversikt}
               alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
               intl={intl}
             />
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
-      {!erAksjonspunktForeldreansvar && (
-        <FaktaGruppe
-          title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.VelgVilkaarSomSkalAnvendes' })}
-          merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.OMSORGSOVERTAKELSE]}
-        >
-          {!readOnly && (
-            <SelectField
-              name="vilkarType"
-              validate={[required]}
-              hideLabel
-              label=""
-              selectValues={vilkarTypes.map(d => (
-                <option key={d.kode} value={d.kode}>
-                  {d.navn}
-                </option>
-              ))}
-              className={styles.breddeSelect}
-              readOnly={readOnly}
-              disabled={readOnly}
-            />
-          )}
-          {readOnly && vilkarType && (
-            <div className={styles.vilkarTypeReadOnly}>
-              <Label size="small" as="span">
-                {(vilkarTypes.find(d => d.kode === vilkarType) || {}).navn}
-              </Label>
-              {editedStatus.vilkarType && <EditedIcon />}
-            </div>
-          )}
-          <VerticalSpacer eightPx />
-          <BodyShort size="small">{getDescriptionText(vilkarType)}</BodyShort>
-        </FaktaGruppe>
-      )}
+          </div>
+        </HStack>
+        {!erAksjonspunktForeldreansvar && (
+          <FaktaGruppe
+            title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.VelgVilkaarSomSkalAnvendes' })}
+            merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.OMSORGSOVERTAKELSE]}
+          >
+            {!readOnly && (
+              <SelectField
+                name="vilkarType"
+                validate={[required]}
+                hideLabel
+                label=""
+                selectValues={vilkarTypes.map(d => (
+                  <option key={d.kode} value={d.kode}>
+                    {d.navn}
+                  </option>
+                ))}
+                className={styles.breddeSelect}
+                readOnly={readOnly}
+                disabled={readOnly}
+              />
+            )}
+            {readOnly && vilkarType && (
+              <div className={styles.vilkarTypeReadOnly}>
+                <Label size="small" as="span">
+                  {(vilkarTypes.find(d => d.kode === vilkarType) || {}).navn}
+                </Label>
+                {editedStatus.vilkarType && <EditedIcon />}
+              </div>
+            )}
+            <VerticalSpacer eightPx />
+            <BodyShort size="small">{getDescriptionText(vilkarType)}</BodyShort>
+          </FaktaGruppe>
+        )}
+      </VStack>
     </>
   );
 };

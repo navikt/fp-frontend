@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useCallback, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
-import { Button, Label } from '@navikt/ds-react';
+import { Button, HStack, Label } from '@navikt/ds-react';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { Aksjonspunkt } from '@navikt/ft-types';
-import { VerticalSpacer, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextFieldNew } from '@navikt/fp-fakta-felles';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
@@ -167,29 +167,23 @@ const OppholdInntektOgPeriodeForm: FunctionComponent<OwnProps> = ({
         )}
         <VerticalSpacer twentyPx />
         {!readOnly && harAksjonspunkt && (
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <Button
-                  size="small"
-                  variant="primary"
-                  disabled={!formMethods.formState.isDirty || isSubmitting}
-                  loading={isSubmitting}
-                >
-                  <FormattedMessage
-                    id={lagreEnkeltPeriode ? 'OppholdInntektOgPerioder.Bekreft' : 'OppholdInntektOgPeriode.Oppdater'}
-                  />
-                </Button>
-              </FlexColumn>
-              {!lagreEnkeltPeriode && (
-                <FlexColumn>
-                  <Button size="small" variant="secondary" onClick={avbryt} type="button">
-                    <FormattedMessage id="OppholdInntektOgPeriode.Avbryt" />
-                  </Button>
-                </FlexColumn>
-              )}
-            </FlexRow>
-          </FlexContainer>
+          <HStack gap="4">
+            <Button
+              size="small"
+              variant="primary"
+              disabled={!formMethods.formState.isDirty || isSubmitting}
+              loading={isSubmitting}
+            >
+              <FormattedMessage
+                id={lagreEnkeltPeriode ? 'OppholdInntektOgPerioder.Bekreft' : 'OppholdInntektOgPeriode.Oppdater'}
+              />
+            </Button>
+            {!lagreEnkeltPeriode && (
+              <Button size="small" variant="secondary" onClick={avbryt} type="button">
+                <FormattedMessage id="OppholdInntektOgPeriode.Avbryt" />
+              </Button>
+            )}
+          </HStack>
         )}
       </div>
     </Form>

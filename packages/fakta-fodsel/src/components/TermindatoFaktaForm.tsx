@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Alert, Label, BodyShort } from '@navikt/ds-react';
+import { Alert, Label, BodyShort, HStack } from '@navikt/ds-react';
 
-import { DateLabel, VerticalSpacer, FaktaGruppe, FlexContainer, FlexRow, FlexColumn } from '@navikt/ft-ui-komponenter';
+import { DateLabel, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { Datepicker, InputField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidInteger, maxValue, minValue, required } from '@navikt/ft-form-validators';
 import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@navikt/fp-fakta-felles';
@@ -75,65 +75,55 @@ export const TermindatoFaktaForm: FunctionComponent<OwnProps> & StaticFunctions 
         title={intl.formatMessage({ id: 'TermindatoFaktaForm.ApplicationInformation' })}
         merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.TERMINBEKREFTELSE]}
       >
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <Datepicker
-                name="utstedtdato"
-                label={intl.formatMessage({ id: 'TermindatoFaktaForm.UtstedtDato' })}
-                validate={[required, hasValidDate]}
-                isReadOnly={readOnly}
-                isEdited={editedStatus.utstedtdato}
-              />
-            </FlexColumn>
-            <FlexColumn>
-              <Datepicker
-                name="termindato"
-                label={intl.formatMessage({ id: 'TermindatoFaktaForm.Termindato' })}
-                validate={[required, hasValidDate]}
-                isReadOnly={readOnly}
-                isEdited={editedStatus.termindato}
-              />
-            </FlexColumn>
-            <FlexColumn>
-              <InputField
-                name="antallBarn"
-                label={intl.formatMessage({ id: 'TermindatoFaktaForm.AntallBarn' })}
-                parse={value => {
-                  const parsedValue = parseInt(value.toString(), 10);
-                  return Number.isNaN(parsedValue) ? value : parsedValue;
-                }}
-                validate={[required, hasValidInteger, minValue1, maxValue9]}
-                readOnly={readOnly}
-                className={styles.bredde}
-                isEdited={editedStatus.antallBarn}
-              />
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
+        <HStack gap="4">
+          <Datepicker
+            name="utstedtdato"
+            label={intl.formatMessage({ id: 'TermindatoFaktaForm.UtstedtDato' })}
+            validate={[required, hasValidDate]}
+            isReadOnly={readOnly}
+            isEdited={editedStatus.utstedtdato}
+          />
+          <Datepicker
+            name="termindato"
+            label={intl.formatMessage({ id: 'TermindatoFaktaForm.Termindato' })}
+            validate={[required, hasValidDate]}
+            isReadOnly={readOnly}
+            isEdited={editedStatus.termindato}
+          />
+          <InputField
+            name="antallBarn"
+            label={intl.formatMessage({ id: 'TermindatoFaktaForm.AntallBarn' })}
+            parse={value => {
+              const parsedValue = parseInt(value.toString(), 10);
+              return Number.isNaN(parsedValue) ? value : parsedValue;
+            }}
+            validate={[required, hasValidInteger, minValue1, maxValue9]}
+            readOnly={readOnly}
+            className={styles.bredde}
+            isEdited={editedStatus.antallBarn}
+          />
+        </HStack>
       </FaktaGruppe>
       {fodselsdatoTps && !isOverridden && (
         <FaktaGruppe title={intl.formatMessage({ id: 'TermindatoFaktaForm.OpplysningerTPS' })}>
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn className={styles.leftCol}>
-                <Label size="small">
-                  <FormattedMessage id="TermindatoFaktaForm.FodselsdatoTps" />
-                </Label>
-                <VerticalSpacer fourPx />
-                <BodyShort size="small">
-                  <DateLabel dateString={fodselsdatoTps} />
-                </BodyShort>
-              </FlexColumn>
-              <FlexColumn>
-                <Label size="small">
-                  <FormattedMessage id="TermindatoFaktaForm.AntallBarnTps" />
-                </Label>
-                <VerticalSpacer fourPx />
-                <BodyShort size="small">{antallBarnTps}</BodyShort>
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
+          <HStack gap="10">
+            <div>
+              <Label size="small">
+                <FormattedMessage id="TermindatoFaktaForm.FodselsdatoTps" />
+              </Label>
+              <VerticalSpacer fourPx />
+              <BodyShort size="small">
+                <DateLabel dateString={fodselsdatoTps} />
+              </BodyShort>
+            </div>
+            <div>
+              <Label size="small">
+                <FormattedMessage id="TermindatoFaktaForm.AntallBarnTps" />
+              </Label>
+              <VerticalSpacer fourPx />
+              <BodyShort size="small">{antallBarnTps}</BodyShort>
+            </div>
+          </HStack>
         </FaktaGruppe>
       )}
       <VerticalSpacer sixteenPx />

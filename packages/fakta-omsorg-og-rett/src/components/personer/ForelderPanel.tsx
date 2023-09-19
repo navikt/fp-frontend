@@ -1,10 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Label, BodyShort } from '@navikt/ds-react';
+import { Label, BodyShort, HStack } from '@navikt/ds-react';
 import { FigureOutwardIcon, FigureInwardIcon } from '@navikt/aksel-icons';
 import { AlleKodeverk, KjønnkodeEnum, PersonopplysningerBasis } from '@navikt/fp-types';
 import { KodeverkType, getKodeverknavnFraKode } from '@navikt/fp-kodeverk';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import Boks from '../Boks';
 
@@ -26,49 +25,31 @@ const ForelderPanel: FunctionComponent<OwnProps> = ({ forelder, erSøker, alleKo
 
   return (
     <Boks harBorderTop={false}>
-      <FlexContainer>
-        <FlexRow>
-          <FlexColumn className={styles.leftCol}>
-            <FlexContainer>
-              <FlexRow>
-                <FlexColumn>
-                  {erKvinne && (
-                    <FigureOutwardIcon
-                      className={styles.imageKvinne}
-                      title={intl.formatMessage({ id: 'ForelderPanel.Soker' })}
-                    />
-                  )}
-                  {!erKvinne && (
-                    <FigureInwardIcon
-                      className={styles.imageMann}
-                      title={intl.formatMessage({ id: 'ForelderPanel.Soker' })}
-                    />
-                  )}
-                </FlexColumn>
-                <FlexColumn>
-                  <FlexContainer>
-                    <FlexRow>
-                      <FlexColumn>
-                        <Label size="small">
-                          <FormattedMessage id={erSøker ? 'ForelderPanel.Soker' : 'ForelderPanel.AnnenForelder'} />
-                        </Label>
-                        <BodyShort size="small">{forelder.navn}</BodyShort>
-                        <BodyShort size="small">
-                          {getKodeverknavnFraKode(alleKodeverk, KodeverkType.SIVILSTAND_TYPE, forelder.sivilstand)}
-                        </BodyShort>
-                      </FlexColumn>
-                    </FlexRow>
-                    <VerticalSpacer sixteenPx />
-                  </FlexContainer>
-                </FlexColumn>
-              </FlexRow>
-            </FlexContainer>
-          </FlexColumn>
-          <FlexColumn>
-            <AdresseVisning personopplysninger={forelder} />
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
+      <HStack>
+        <HStack gap="5" className={styles.leftCol}>
+          {erKvinne && (
+            <FigureOutwardIcon
+              className={styles.imageKvinne}
+              title={intl.formatMessage({ id: 'ForelderPanel.Soker' })}
+            />
+          )}
+          {!erKvinne && (
+            <FigureInwardIcon className={styles.imageMann} title={intl.formatMessage({ id: 'ForelderPanel.Soker' })} />
+          )}
+          <div>
+            <Label size="small">
+              <FormattedMessage id={erSøker ? 'ForelderPanel.Soker' : 'ForelderPanel.AnnenForelder'} />
+            </Label>
+            <BodyShort size="small">{forelder.navn}</BodyShort>
+            <BodyShort size="small">
+              {getKodeverknavnFraKode(alleKodeverk, KodeverkType.SIVILSTAND_TYPE, forelder.sivilstand)}
+            </BodyShort>
+          </div>
+        </HStack>
+        <div>
+          <AdresseVisning personopplysninger={forelder} />
+        </div>
+      </HStack>
     </Boks>
   );
 };

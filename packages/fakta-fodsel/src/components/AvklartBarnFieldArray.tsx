@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { hasValidDate, required, dateBeforeOrEqualToToday } from '@navikt/ft-form-validators';
 import { AvklartBarn } from '@navikt/fp-types';
 import { Datepicker, PeriodFieldArray } from '@navikt/ft-form-hooks';
 import { useFieldArray, useFormContext } from 'react-hook-form';
+import { HStack } from '@navikt/ds-react';
 
 const FIELD_ARRAY_NAME = 'avklartBarn';
 
@@ -42,27 +43,21 @@ export const AvklartBarnFieldArray: FunctionComponent<OwnProps> = ({ readOnly })
       {(field, index, getRemoveButton = () => '-') => (
         <React.Fragment key={field.id}>
           <VerticalSpacer sixteenPx />
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <Datepicker
-                  name={`${FIELD_ARRAY_NAME}.${index}.fodselsdato`}
-                  label={intl.formatMessage({ id: 'AvklartBarnFieldArray.Title' })}
-                  validate={[hasValidDate, required, dateBeforeOrEqualToToday]}
-                  isReadOnly={readOnly}
-                />
-              </FlexColumn>
-              <FlexColumn>
-                <Datepicker
-                  name={`${FIELD_ARRAY_NAME}.${index}.dodsdato`}
-                  label={intl.formatMessage({ id: 'AvklartBarnFieldArray.Dodsdato' })}
-                  validate={[hasValidDate, dateBeforeOrEqualToToday]}
-                  isReadOnly={readOnly}
-                />
-              </FlexColumn>
-              {!readOnly && <FlexColumn>{getRemoveButton()}</FlexColumn>}
-            </FlexRow>
-          </FlexContainer>
+          <HStack gap="4" align="end">
+            <Datepicker
+              name={`${FIELD_ARRAY_NAME}.${index}.fodselsdato`}
+              label={intl.formatMessage({ id: 'AvklartBarnFieldArray.Title' })}
+              validate={[hasValidDate, required, dateBeforeOrEqualToToday]}
+              isReadOnly={readOnly}
+            />
+            <Datepicker
+              name={`${FIELD_ARRAY_NAME}.${index}.dodsdato`}
+              label={intl.formatMessage({ id: 'AvklartBarnFieldArray.Dodsdato' })}
+              validate={[hasValidDate, dateBeforeOrEqualToToday]}
+              isReadOnly={readOnly}
+            />
+            {!readOnly && getRemoveButton()}
+          </HStack>
         </React.Fragment>
       )}
     </PeriodFieldArray>

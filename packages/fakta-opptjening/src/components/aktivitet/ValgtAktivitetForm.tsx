@@ -1,12 +1,12 @@
 import React, { FunctionComponent, ReactElement, useCallback } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Button, Label, Heading, BodyShort } from '@navikt/ds-react';
+import { Button, Label, Heading, BodyShort, HStack, VStack } from '@navikt/ds-react';
 import dayjs from 'dayjs';
 import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-import { VerticalSpacer, FaktaGruppe, FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { findDifferenceInMonthsAndDays, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { RadioGroupPanel, TextAreaField, Form } from '@navikt/ft-form-hooks';
@@ -128,14 +128,12 @@ const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
         className={styles.panel}
         merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.VURDER_PERIODER_MED_OPPTJENING]}
       >
-        <FlexContainer>
-          <FlexRow spaceBetween>
-            <FlexColumn>
-              <Heading size="small">
-                <FormattedMessage id="ActivityPanel.Details" />
-              </Heading>
-            </FlexColumn>
-            <FlexColumn className={styles.fix}>
+        <VStack gap="2">
+          <HStack justify="space-between">
+            <Heading size="small">
+              <FormattedMessage id="ActivityPanel.Details" />
+            </Heading>
+            <HStack gap="2">
               <Button
                 className={styles.margin}
                 size="xsmall"
@@ -167,41 +165,34 @@ const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
                 type="button"
                 title={intl.formatMessage({ id: 'Timeline.lukkPeriode' })}
               />
-            </FlexColumn>
-          </FlexRow>
-          <VerticalSpacer sixteenPx />
-          <FlexRow>
-            <FlexColumn className={styles.colMargin}>
+            </HStack>
+          </HStack>
+          <HStack>
+            <div className={styles.colMargin}>
               <Label size="small">
                 <FormattedMessage id="ActivityPanel.Period" />
               </Label>
-              <FlexContainer>
-                {opptjeningFom && opptjeningTom && (
-                  <FlexRow>
-                    <FlexColumn>
-                      <BodyShort size="small">
-                        {`${dayjs(opptjeningFom).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(opptjeningTom).format(
-                          DDMMYYYY_DATE_FORMAT,
-                        )}`}
-                      </BodyShort>
-                    </FlexColumn>
-                    <FlexColumn>
-                      <BodyShort size="small">{finnMånederOgDager(opptjeningFom, opptjeningTom)}</BodyShort>
-                    </FlexColumn>
-                  </FlexRow>
-                )}
-              </FlexContainer>
-            </FlexColumn>
-            <FlexColumn>
+              {opptjeningFom && opptjeningTom && (
+                <HStack gap="2">
+                  <BodyShort size="small">
+                    {`${dayjs(opptjeningFom).format(DDMMYYYY_DATE_FORMAT)} - ${dayjs(opptjeningTom).format(
+                      DDMMYYYY_DATE_FORMAT,
+                    )}`}
+                  </BodyShort>
+                  <BodyShort size="small">{finnMånederOgDager(opptjeningFom, opptjeningTom)}</BodyShort>
+                </HStack>
+              )}
+            </div>
+            <div>
               <Label size="small">
                 <FormattedMessage id="ActivityPanel.Activity" />
               </Label>
               <BodyShort size="small">
                 {opptjeningAktivitetTyper.find(oat => oat.kode === aktivitetType)?.navn}
               </BodyShort>
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
+            </div>
+          </HStack>
+        </VStack>
         <VerticalSpacer eightPx />
         <ValgtAktivitetSubForm
           valgtAktivitetstype={aktivitetType}
@@ -246,20 +237,14 @@ const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
         {!skalIkkeKunneEditere(harAksjonspunkt, erGodkjent, erEndret) && (
           <>
             <VerticalSpacer sixteenPx />
-            <FlexContainer>
-              <FlexRow>
-                <FlexColumn>
-                  <Button size="small" variant="primary" disabled={!formMethods.formState.isDirty}>
-                    <FormattedMessage id="ActivityPanel.Oppdater" />
-                  </Button>
-                </FlexColumn>
-                <FlexColumn>
-                  <Button size="small" variant="secondary" onClick={avbrytAktivitet} type="button">
-                    <FormattedMessage id="ActivityPanel.Avbryt" />
-                  </Button>
-                </FlexColumn>
-              </FlexRow>
-            </FlexContainer>
+            <HStack gap="4">
+              <Button size="small" variant="primary" disabled={!formMethods.formState.isDirty}>
+                <FormattedMessage id="ActivityPanel.Oppdater" />
+              </Button>
+              <Button size="small" variant="secondary" onClick={avbrytAktivitet} type="button">
+                <FormattedMessage id="ActivityPanel.Avbryt" />
+              </Button>
+            </HStack>
           </>
         )}
       </FaktaGruppe>

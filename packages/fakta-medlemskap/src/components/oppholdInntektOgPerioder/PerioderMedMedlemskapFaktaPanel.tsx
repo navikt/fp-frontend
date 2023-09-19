@@ -1,20 +1,9 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { BodyShort } from '@navikt/ds-react';
+import { BodyShort, HStack, VStack } from '@navikt/ds-react';
 import moment from 'moment';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
-import {
-  DateLabel,
-  PeriodLabel,
-  Table,
-  TableColumn,
-  TableRow,
-  VerticalSpacer,
-  FaktaGruppe,
-  FlexColumn,
-  FlexContainer,
-  FlexRow,
-} from '@navikt/ft-ui-komponenter';
+import { DateLabel, PeriodLabel, Table, TableColumn, TableRow, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { required } from '@navikt/ft-form-validators';
 import { Aksjonspunkt } from '@navikt/ft-types';
@@ -118,49 +107,44 @@ const PerioderMedMedlemskapFaktaPanel: FunctionComponent<OwnProps> & StaticFunct
           );
         })}
       </Table>
-      <FlexContainer>
-        {aksjonspunktKode && (
-          <FlexRow>
-            <FlexColumn>
-              <RadioGroupPanel
-                name="medlemskapManuellVurderingType"
-                hideLegend
-                isEdited={erAksjonspunktLukket}
-                validate={[required]}
-                isReadOnly={readOnly}
-                isHorizontal
-                radios={sorterteVurderingstyper.map(type => ({
-                  label: type.navn,
-                  value: type.kode,
-                }))}
-              />
-            </FlexColumn>
-          </FlexRow>
-        )}
-        <VerticalSpacer sixteenPx />
-        <FlexRow className="justifyItemsToFlexEnd">
-          <FlexColumn>
-            {fodselsdato && (
-              <FormattedMessage
-                id="PerioderMedMedlemskapFaktaPanel.Fodselsdato"
-                values={{ dato: moment(fodselsdato).format(DDMMYYYY_DATE_FORMAT) }}
-              />
-            )}
-            {termindato && (
-              <FormattedMessage
-                id="PerioderMedMedlemskapFaktaPanel.Termindato"
-                values={{ dato: moment(termindato).format(DDMMYYYY_DATE_FORMAT) }}
-              />
-            )}
-            {omsorgsovertakelseDato && (
-              <FormattedMessage
-                id="PerioderMedMedlemskapFaktaPanel.Omsorgsovertakelse"
-                values={{ dato: moment(omsorgsovertakelseDato).format(DDMMYYYY_DATE_FORMAT) }}
-              />
-            )}
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
+      <VStack>
+        <HStack>
+          {aksjonspunktKode && (
+            <RadioGroupPanel
+              name="medlemskapManuellVurderingType"
+              hideLegend
+              isEdited={erAksjonspunktLukket}
+              validate={[required]}
+              isReadOnly={readOnly}
+              isHorizontal
+              radios={sorterteVurderingstyper.map(type => ({
+                label: type.navn,
+                value: type.kode,
+              }))}
+            />
+          )}
+        </HStack>
+        <HStack justify="end">
+          {fodselsdato && (
+            <FormattedMessage
+              id="PerioderMedMedlemskapFaktaPanel.Fodselsdato"
+              values={{ dato: moment(fodselsdato).format(DDMMYYYY_DATE_FORMAT) }}
+            />
+          )}
+          {termindato && (
+            <FormattedMessage
+              id="PerioderMedMedlemskapFaktaPanel.Termindato"
+              values={{ dato: moment(termindato).format(DDMMYYYY_DATE_FORMAT) }}
+            />
+          )}
+          {omsorgsovertakelseDato && (
+            <FormattedMessage
+              id="PerioderMedMedlemskapFaktaPanel.Omsorgsovertakelse"
+              values={{ dato: moment(omsorgsovertakelseDato).format(DDMMYYYY_DATE_FORMAT) }}
+            />
+          )}
+        </HStack>
+      </VStack>
     </FaktaGruppe>
   );
 };
