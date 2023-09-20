@@ -27,7 +27,7 @@ const finnArbeidsforhold = (
   return alleIafAf.length === 1 ? alleIafAf[0] : undefined;
 };
 
-const erInnenforIntervall = (tilretteleggingBehovFom: string, fomDato?: string, tomDato?: string): boolean => {
+const erInnenforIntervall = (tilretteleggingBehovFom: string, fomDato: string, tomDato: string): boolean => {
   const dato = dayjs(tilretteleggingBehovFom);
   return !(dato.isBefore(dayjs(fomDato)) || dato.isAfter(dayjs(tomDato)));
 };
@@ -69,9 +69,13 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
         const alleIafAf = aoiArbeidsforhold.filter(
           iaya => iaya.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverReferanse,
         );
-        const af = finnArbeidsforhold(alleIafAf, arbeidsforhold.internArbeidsforholdReferanse);
 
-        const visInfoAlert = !erInnenforIntervall(arbeidsforhold.tilretteleggingBehovFom, af?.fom, af?.tom);
+        const af = finnArbeidsforhold(alleIafAf, arbeidsforhold.internArbeidsforholdReferanse);
+        const alleAf = alleIafAf.filter(a => a.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverReferanse);
+
+        const visInfoAlert = af
+          ? !erInnenforIntervall(arbeidsforhold.tilretteleggingBehovFom, af.fom, af.tom)
+          : alleAf.every(a => !erInnenforIntervall(arbeidsforhold.tilretteleggingBehovFom, a.fom, a.tom));
 
         const stillingsprosentArbeidsforhold = af ? af.stillingsprosent : 100;
 
