@@ -2,14 +2,12 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { FormProvider, useForm, UseFormGetValues } from 'react-hook-form';
 import dayjs from 'dayjs';
-import { Button } from '@navikt/ds-react';
+import { Button, HStack, Spacer } from '@navikt/ds-react';
 
 import { ArbeidsforholdTilretteleggingDato, SvpAvklartOppholdPeriode } from '@navikt/fp-types';
 import { Datepicker, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping, hasValidDate, required } from '@navikt/ft-form-validators';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-
-import styles from './oppholdForm.module.css';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 type FormValues = Record<
   number,
@@ -135,41 +133,35 @@ const OppholdForm: FunctionComponent<OwnProps> = ({
           padding: '24px',
         }}
       >
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <Datepicker
-                name={`${index}.fom`}
-                label={intl.formatMessage({
-                  id: 'OppholdForm.FraOgMed',
-                })}
-                validate={[
-                  required,
-                  hasValidDate,
-                  validerAtDatoErUnik(intl, alleOpphold, alleTilrettelegginger, opphold),
-                  validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
-                ]}
-                isReadOnly={readOnly || opphold.forVisning}
-              />
-            </FlexColumn>
-            <FlexColumn>
-              <Datepicker
-                name={`${index}.tom`}
-                label={intl.formatMessage({
-                  id: 'OppholdForm.TilOgMed',
-                })}
-                validate={[
-                  required,
-                  hasValidDate,
-                  validerTomEtterFom(intl, index, formMethods.getValues),
-                  validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
-                  validerAtPeriodeIkkeOverlapper(formMethods.getValues, index, opphold, alleOpphold),
-                ]}
-                isReadOnly={readOnly || opphold.forVisning}
-              />
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
+        <HStack gap="4">
+          <Datepicker
+            name={`${index}.fom`}
+            label={intl.formatMessage({
+              id: 'OppholdForm.FraOgMed',
+            })}
+            validate={[
+              required,
+              hasValidDate,
+              validerAtDatoErUnik(intl, alleOpphold, alleTilrettelegginger, opphold),
+              validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
+            ]}
+            isReadOnly={readOnly || opphold.forVisning}
+          />
+          <Datepicker
+            name={`${index}.tom`}
+            label={intl.formatMessage({
+              id: 'OppholdForm.TilOgMed',
+            })}
+            validate={[
+              required,
+              hasValidDate,
+              validerTomEtterFom(intl, index, formMethods.getValues),
+              validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
+              validerAtPeriodeIkkeOverlapper(formMethods.getValues, index, opphold, alleOpphold),
+            ]}
+            isReadOnly={readOnly || opphold.forVisning}
+          />
+        </HStack>
         <VerticalSpacer thirtyTwoPx />
         <RadioGroupPanel
           name={`${index}.oppholdÅrsak`}
@@ -189,34 +181,29 @@ const OppholdForm: FunctionComponent<OwnProps> = ({
         />
         <VerticalSpacer thirtyTwoPx />
         {!opphold.forVisning && !readOnly && (
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <Button
-                  size="small"
-                  variant="primary"
-                  type="button"
-                  disabled={!formMethods.formState.isDirty || false}
-                  loading={false}
-                  onClick={formMethods.handleSubmit((values: FormValues) => lagreIForm(values))}
-                >
-                  <FormattedMessage id={erNyPeriode ? 'OppholdForm.LeggTil' : 'OppholdForm.Oppdater'} />
+          <HStack gap="2">
+            <Button
+              size="small"
+              variant="primary"
+              type="button"
+              disabled={!formMethods.formState.isDirty || false}
+              loading={false}
+              onClick={formMethods.handleSubmit((values: FormValues) => lagreIForm(values))}
+            >
+              <FormattedMessage id={erNyPeriode ? 'OppholdForm.LeggTil' : 'OppholdForm.Oppdater'} />
+            </Button>
+            <Button size="small" variant="secondary" onClick={avbryt} type="button">
+              <FormattedMessage id={erNyPeriode ? 'OppholdForm.AvsluttOgSlett' : 'OppholdForm.Avbryt'} />
+            </Button>
+            {!erNyPeriode && (
+              <>
+                <Spacer />
+                <Button size="small" variant="secondary" onClick={slett} type="button">
+                  <FormattedMessage id="OppholdForm.SlettPeriode" />
                 </Button>
-              </FlexColumn>
-              <FlexColumn>
-                <Button size="small" variant="secondary" onClick={avbryt} type="button">
-                  <FormattedMessage id={erNyPeriode ? 'OppholdForm.AvsluttOgSlett' : 'OppholdForm.Avbryt'} />
-                </Button>
-              </FlexColumn>
-              {!erNyPeriode && (
-                <FlexColumn className={styles.pushRight}>
-                  <Button size="small" variant="secondary" onClick={slett} type="button">
-                    <FormattedMessage id="OppholdForm.SlettPeriode" />
-                  </Button>
-                </FlexColumn>
-              )}
-            </FlexRow>
-          </FlexContainer>
+              </>
+            )}
+          </HStack>
         )}
       </div>
     </FormProvider>

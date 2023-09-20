@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 import dayjs from 'dayjs';
 import { FormProvider, useForm } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { Button } from '@navikt/ds-react';
+import { Button, HStack, Spacer } from '@navikt/ds-react';
 
 import {
   ArbeidsforholdFodselOgTilrettelegging,
@@ -13,7 +13,7 @@ import {
 import { Datepicker, NumberField, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidDecimal, maxValue, minValue, required } from '@navikt/ft-form-validators';
 import { tilretteleggingType } from '@navikt/fp-kodeverk';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import TilretteleggingInfoPanel from './TilretteleggingInfoPanel';
 
@@ -271,7 +271,16 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
               readOnly={readOnly}
               label={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvp' })}
               description={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvpBeskrivelse' })}
-              validate={[required, minValue0, maxValue100, hasValidDecimal]}
+              validate={[
+                required,
+                minValue0,
+                maxValue100,
+                hasValidDecimal,
+                (verdi: number) =>
+                  !stillingsprosentArbeidsforhold && verdi === 0
+                    ? intl.formatMessage({ id: 'TilretteleggingForm.AngiUtbetalingsgrad' })
+                    : null,
+              ]}
               forceTwoDecimalDigits
               disabled={formValues.stillingsprosent === undefined}
             />
@@ -279,36 +288,31 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
         )}
         <VerticalSpacer thirtyTwoPx />
         {!readOnly && (
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <Button
-                  size="small"
-                  variant="primary"
-                  type="button"
-                  disabled={!formMethods.formState.isDirty || false}
-                  loading={false}
-                  onClick={formMethods.handleSubmit((values: FormValues) => lagreIForm(values))}
-                >
-                  <FormattedMessage id={erNyPeriode ? 'TilretteleggingForm.LeggTil' : 'TilretteleggingForm.Oppdater'} />
+          <HStack gap="2">
+            <Button
+              size="small"
+              variant="primary"
+              type="button"
+              disabled={!formMethods.formState.isDirty || false}
+              loading={false}
+              onClick={formMethods.handleSubmit((values: FormValues) => lagreIForm(values))}
+            >
+              <FormattedMessage id={erNyPeriode ? 'TilretteleggingForm.LeggTil' : 'TilretteleggingForm.Oppdater'} />
+            </Button>
+            <Button size="small" variant="secondary" onClick={avbryt} type="button">
+              <FormattedMessage
+                id={erNyPeriode ? 'TilretteleggingForm.AvsluttOgSlett' : 'TilretteleggingForm.Avbryt'}
+              />
+            </Button>
+            {!erNyPeriode && (
+              <>
+                <Spacer />
+                <Button size="small" variant="secondary" onClick={slett} type="button">
+                  <FormattedMessage id="TilretteleggingForm.SlettPeriode" />
                 </Button>
-              </FlexColumn>
-              <FlexColumn>
-                <Button size="small" variant="secondary" onClick={avbryt} type="button">
-                  <FormattedMessage
-                    id={erNyPeriode ? 'TilretteleggingForm.AvsluttOgSlett' : 'TilretteleggingForm.Avbryt'}
-                  />
-                </Button>
-              </FlexColumn>
-              {!erNyPeriode && (
-                <FlexColumn className={styles.pushRight}>
-                  <Button size="small" variant="secondary" onClick={slett} type="button">
-                    <FormattedMessage id="TilretteleggingForm.SlettPeriode" />
-                  </Button>
-                </FlexColumn>
-              )}
-            </FlexRow>
-          </FlexContainer>
+              </>
+            )}
+          </HStack>
         )}
       </div>
     </FormProvider>
