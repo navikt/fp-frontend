@@ -39,6 +39,7 @@
   "TilretteleggingForm.Arbeidsprosent": "Arbeidsprosent",
   "TilretteleggingForm.ArbeidsprosentBeskrivelse": "Dette er prosenten arbeidstaker skal jobbe i perioden",
   "TilretteleggingForm.ProsentSvpBeskrivelse": "Utbetalingsgrad i perioden",
+  "TilretteleggingForm.AngiUtbetalingsgrad": "Utbetalingsgrad må være større enn 0 når stillingsprosenten er 0",
 
   "TilretteleggingInfoPanel.Periode": "Periode på {periode}",
   "TilretteleggingInfoPanel.TreUker": "Frem til tre uker før termin",
