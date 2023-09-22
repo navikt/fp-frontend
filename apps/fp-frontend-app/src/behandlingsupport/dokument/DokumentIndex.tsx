@@ -19,9 +19,9 @@ const selectDocument =
     if (document) {
       const newWindow = window.open(hentDokumentLenke(saksNr, document.journalpostId, document.dokumentId), '_blank');
       if (newWindow) {
-        newWindow.addEventListener('load', () => {
+        setTimeout(() => {
           newWindow.document.title = document.tittel || 'Dokument';
-        });
+        }, 500);
       }
     }
   };
