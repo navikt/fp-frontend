@@ -1,2 +1,0 @@
-import{_ as t}from"./iframe-251f7038.js";import"../sb-preview/runtime.js";var _={docs:{renderer:async()=>{let{DocsRenderer:r}=await t(()=>import("./DocsRenderer-3PUGWF3O-5c67d275.js").then(e=>e.D),["./DocsRenderer-3PUGWF3O-5c67d275.js","./iframe-251f7038.js","./index-1b03fe98.js","./_getPrototype-de4bc711.js","./index-d37d4223.js","./index-356e4a49.js"],import.meta.url);return new r}}};export{_ as parameters};
-//# sourceMappingURL=preview-1b6c5b17.js.map
