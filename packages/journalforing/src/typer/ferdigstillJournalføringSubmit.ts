@@ -1,11 +1,14 @@
+import Sakstype from '../kodeverk/sakstype';
+
 export type DokumentTittelSubmitValue = Readonly<{
   dokumentId: string;
   tittel: string;
 }>;
 
 export type OpprettSakSubmitValue = Readonly<{
-  ytelseType: string;
+  ytelseType?: string;
   aktørId: string;
+  sakstype: Sakstype;
 }>;
 
 export type JournalførSakSubmitValue = Readonly<{

@@ -35,6 +35,7 @@
   "Journal.Sak.Ny": "Opprett ny sak",
   "Journal.Sak.VelgYtelse": "Ytelse",
   "Journal.Sak.Opprettet": "Opprettet",
+  "Journal.Sak.Generell": "Journalfør på generell sak",
   "Journal.Sak.OpprettetDato": "OPPRETTET {opprettetDato}",
   "Journal.Sak.FørsteUttak": "FØRSTE UTTAK {førsteUttak}",
   "Journal.Sak.FamAdopsjon": "ADOPSJON {famDato}",

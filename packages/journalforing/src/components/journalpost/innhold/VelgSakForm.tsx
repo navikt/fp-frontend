@@ -11,10 +11,12 @@ import Journalpost from '../../../typer/journalpostTsType';
 import JournalFagsak from '../../../typer/journalFagsakTsType';
 import JournalføringFormValues from '../../../typer/journalføringFormValues';
 import styles from './velgSakForm.module.css';
+import Sakstype from '../../../kodeverk/sakstype';
 
 const TOM_ARRAY: JournalFagsak[] = [];
 
 const LAG_NY_SAK = 'LAG_NY_SAK'; // Value for en av radioknappene som skal lede til ekstra inputfelt
+const LAG_GENERELL_SAK = 'LAG_GENERELL_SAK';
 const radioFieldName = 'saksnummerValg';
 const selectFieldName = 'ytelsetypeValg';
 
@@ -61,6 +63,14 @@ export const transformValues = (
   journalpost: Journalpost,
 ): JournalførSakSubmitValue => {
   const saksnummerValg = values[radioFieldName];
+  if (saksnummerValg === LAG_GENERELL_SAK) {
+    return {
+      opprettSak: {
+        aktørId: journalpost.bruker.aktørId,
+        sakstype: Sakstype.GENERELL,
+      },
+    };
+  }
   if (saksnummerValg === LAG_NY_SAK) {
     const valgtYtelse = values[selectFieldName];
     if (!valgtYtelse) {
@@ -70,6 +80,7 @@ export const transformValues = (
       opprettSak: {
         ytelseType: valgtYtelse,
         aktørId: journalpost.bruker.aktørId,
+        sakstype: Sakstype.FAGSAK,
       },
     };
   }
@@ -93,6 +104,7 @@ const lagRadioOptions = (saksliste: JournalFagsak[], intl: IntlShape, fetTekst: 
     value: sak.saksnummer,
   }));
   radioOptions.push({ label: <FormattedMessage id="Journal.Sak.Ny" />, value: LAG_NY_SAK });
+  radioOptions.push({ label: <FormattedMessage id="Journal.Sak.Generell" />, value: LAG_GENERELL_SAK });
   return radioOptions;
 };
 
