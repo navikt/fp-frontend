@@ -76,7 +76,7 @@ describe('<JournalforingIndex>', () => {
     expect(screen.getAllByRole('radio')[1]).not.toBeChecked();
     expect(screen.getAllByRole('radio')[2]).not.toBeChecked();
     expect(screen.getAllByRole('radio')[3]).not.toBeChecked();
-    expect(screen.getAllByRole('radio')[5]).not.toBeChecked();
+    expect(screen.getAllByRole('radio')[4]).not.toBeChecked();
     expect(screen.queryByLabelText('Ytelse')).not.toBeInTheDocument;
     await userEvent.click(screen.getAllByRole('radio')[0]);
     expect(screen.getByText('Journalfør').closest('button')).toBeEnabled();
