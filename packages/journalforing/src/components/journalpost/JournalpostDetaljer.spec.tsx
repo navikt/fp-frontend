@@ -24,7 +24,7 @@ describe('<JournalforingIndex>', () => {
     expect(screen.getByLabelText('125416597 Foreldrepenger')).toBeInTheDocument();
     expect(screen.getByLabelText('155462542 Svangerskapspenger')).toBeInTheDocument();
     expect(screen.getByLabelText('175419131 Foreldrepenger')).toBeInTheDocument();
-    expect(screen.getByLabelText('Opprett ny sak')).toBeInTheDocument();
+    expect(screen.getByLabelText('Journalfør på ny sak')).toBeInTheDocument();
 
     expect(screen.getByText('Journalfør').closest('button')).toBeDisabled();
     expect(screen.getByText('Avbryt').closest('button')).toBeEnabled();
@@ -67,7 +67,8 @@ describe('<JournalforingIndex>', () => {
     expect(screen.getByLabelText('125416597 Foreldrepenger')).toBeInTheDocument();
     expect(screen.getByLabelText('155462542 Svangerskapspenger')).toBeInTheDocument();
     expect(screen.getByLabelText('175419131 Foreldrepenger')).toBeInTheDocument();
-    expect(screen.getByLabelText('Opprett ny sak')).toBeInTheDocument();
+    expect(screen.getByLabelText('Journalfør på ny sak')).toBeInTheDocument();
+    expect(screen.getByLabelText('Journalfør på generell sak')).toBeInTheDocument();
 
     expect(screen.getByText('Journalfør').closest('button')).toBeDisabled();
     expect(screen.getByText('Avbryt').closest('button')).toBeEnabled();
@@ -104,7 +105,7 @@ describe('<JournalforingIndex>', () => {
     });
   });
 
-  it('skal kunne journalføre på ny sak', async () => {
+  it('skal kunne journalføre på generell sak', async () => {
     const journalfør = vi.fn();
 
     render(<VisOppgaveForSubmitReservertAvMeg submitJournalføring={journalfør} />);
@@ -120,7 +121,8 @@ describe('<JournalforingIndex>', () => {
     expect(screen.getByLabelText('125416597 Foreldrepenger')).toBeInTheDocument();
     expect(screen.getByLabelText('155462542 Svangerskapspenger')).toBeInTheDocument();
     expect(screen.getByLabelText('175419131 Foreldrepenger')).toBeInTheDocument();
-    expect(screen.getByLabelText('Opprett ny sak')).toBeInTheDocument();
+    expect(screen.getByLabelText('Journalfør på ny sak')).toBeInTheDocument();
+    expect(screen.getByLabelText('Journalfør på generell sak')).toBeInTheDocument();
 
     expect(screen.getByText('Journalfør').closest('button')).toBeDisabled();
     expect(screen.getByText('Avbryt').closest('button')).toBeEnabled();
@@ -135,8 +137,18 @@ describe('<JournalforingIndex>', () => {
     await userEvent.click(screen.getAllByRole('radio')[0]);
     expect(screen.getByText('Journalfør').closest('button')).toBeEnabled();
     expect(screen.queryByLabelText('Ytelse')).not.toBeInTheDocument;
+    expect(
+      screen.queryByLabelText(
+        'Det vil ikke opprettes sak når du journalfører på generell sak. Innholdet vil bli knyttet direkte til personen.',
+      ),
+    ).not.toBeInTheDocument;
     await userEvent.click(screen.getAllByRole('radio')[4]);
     expect(screen.queryByLabelText('Ytelse')).not.toBeInTheDocument;
+    expect(
+      screen.queryByLabelText(
+        'Det vil ikke opprettes sak når du journalfører på generell sak. Innholdet vil bli knyttet direkte til personen.',
+      ),
+    ).toBeInTheDocument;
     await userEvent.click(screen.getByText('Journalfør'));
     await waitFor(() => expect(journalfør).toHaveBeenCalledTimes(1));
 

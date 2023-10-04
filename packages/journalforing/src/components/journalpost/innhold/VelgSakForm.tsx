@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactElement, useCallback, useMemo } from 'react';
-import { BodyShort, Button } from '@navikt/ds-react';
+import { Alert, BodyShort, Button } from '@navikt/ds-react';
 import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
@@ -130,6 +130,7 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
   const formMethods = useFormContext<JournalføringFormValues>();
   const sakValg = formMethods.watch(radioFieldName);
   const skalOppretteSak = sakValg === LAG_NY_SAK;
+  const skalFørePåGenerellSak = sakValg === LAG_GENERELL_SAK;
   const fetTekst = useCallback((chunks: any) => <b>{chunks}</b>, []);
   const radioOptions = useMemo(() => lagRadioOptions(saksliste, intl, fetTekst), [saksliste]);
 
@@ -173,7 +174,15 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
             <VerticalSpacer twentyPx />
           </>
         )}
-        <VerticalSpacer eightPx />
+        {skalFørePåGenerellSak && (
+          <>
+            <VerticalSpacer eightPx />
+            <Alert variant="info">
+              <FormattedMessage id="Journal.Sak.Generell.Info" />
+            </Alert>
+          </>
+        )}
+        <VerticalSpacer fourtyPx />
         <FlexRow className={styles.knappRad}>
           <FlexColumn>
             <Button size="small" variant="primary" disabled={!isSubmittable} type="submit">
