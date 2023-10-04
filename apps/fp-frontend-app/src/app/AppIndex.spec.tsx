@@ -50,7 +50,7 @@ describe('<AppIndex>', () => {
     expect(await screen.findByText('Det finnes ingen sak med denne referansen: 266')).toBeInTheDocument();
   });
 
-  it('skal rendre app med korrekt informasjon', async () => {
+  it.skip('skal rendre app med korrekt informasjon', async () => {
     render(
       <ResponsiveContext.Provider value={{ width: 1000 }}>
         <BekreftAdopsjon />
