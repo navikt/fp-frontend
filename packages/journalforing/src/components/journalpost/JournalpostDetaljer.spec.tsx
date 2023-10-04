@@ -28,11 +28,12 @@ describe('<JournalforingIndex>', () => {
     expect(screen.getByText('Journalfør').closest('button')).toBeDisabled();
     expect(screen.getByText('Avbryt').closest('button')).toBeEnabled();
 
-    expect(screen.getAllByRole('radio')).toHaveLength(4);
+    expect(screen.getAllByRole('radio')).toHaveLength(5);
     expect(screen.getAllByRole('radio')[0]).not.toBeChecked();
     expect(screen.getAllByRole('radio')[1]).not.toBeChecked();
     expect(screen.getAllByRole('radio')[2]).not.toBeChecked();
     expect(screen.getAllByRole('radio')[3]).not.toBeChecked();
+    expect(screen.getAllByRole('radio')[4]).not.toBeChecked();
     expect(screen.queryByLabelText('Ytelse')).not.toBeInTheDocument;
     await userEvent.click(screen.getAllByRole('radio')[0]);
     expect(screen.getByText('Journalfør').closest('button')).toBeEnabled();
@@ -70,11 +71,12 @@ describe('<JournalforingIndex>', () => {
     expect(screen.getByText('Journalfør').closest('button')).toBeDisabled();
     expect(screen.getByText('Avbryt').closest('button')).toBeEnabled();
 
-    expect(screen.getAllByRole('radio')).toHaveLength(4);
+    expect(screen.getAllByRole('radio')).toHaveLength(5);
     expect(screen.getAllByRole('radio')[0]).not.toBeChecked();
     expect(screen.getAllByRole('radio')[1]).not.toBeChecked();
     expect(screen.getAllByRole('radio')[2]).not.toBeChecked();
     expect(screen.getAllByRole('radio')[3]).not.toBeChecked();
+    expect(screen.getAllByRole('radio')[5]).not.toBeChecked();
     expect(screen.queryByLabelText('Ytelse')).not.toBeInTheDocument;
     await userEvent.click(screen.getAllByRole('radio')[0]);
     expect(screen.getByText('Journalfør').closest('button')).toBeEnabled();
