@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactElement, useCallback, useMemo } from 'react';
-import { BodyShort, Button } from '@navikt/ds-react';
+import { Alert, BodyShort, Button } from '@navikt/ds-react';
 import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
@@ -11,10 +11,12 @@ import Journalpost from '../../../typer/journalpostTsType';
 import JournalFagsak from '../../../typer/journalFagsakTsType';
 import JournalføringFormValues from '../../../typer/journalføringFormValues';
 import styles from './velgSakForm.module.css';
+import Sakstype from '../../../kodeverk/sakstype';
 
 const TOM_ARRAY: JournalFagsak[] = [];
 
 const LAG_NY_SAK = 'LAG_NY_SAK'; // Value for en av radioknappene som skal lede til ekstra inputfelt
+const LAG_GENERELL_SAK = 'LAG_GENERELL_SAK';
 const radioFieldName = 'saksnummerValg';
 const selectFieldName = 'ytelsetypeValg';
 
@@ -61,6 +63,14 @@ export const transformValues = (
   journalpost: Journalpost,
 ): JournalførSakSubmitValue => {
   const saksnummerValg = values[radioFieldName];
+  if (saksnummerValg === LAG_GENERELL_SAK) {
+    return {
+      opprettSak: {
+        aktørId: journalpost.bruker.aktørId,
+        sakstype: Sakstype.GENERELL,
+      },
+    };
+  }
   if (saksnummerValg === LAG_NY_SAK) {
     const valgtYtelse = values[selectFieldName];
     if (!valgtYtelse) {
@@ -70,6 +80,7 @@ export const transformValues = (
       opprettSak: {
         ytelseType: valgtYtelse,
         aktørId: journalpost.bruker.aktørId,
+        sakstype: Sakstype.FAGSAK,
       },
     };
   }
@@ -93,6 +104,7 @@ const lagRadioOptions = (saksliste: JournalFagsak[], intl: IntlShape, fetTekst: 
     value: sak.saksnummer,
   }));
   radioOptions.push({ label: <FormattedMessage id="Journal.Sak.Ny" />, value: LAG_NY_SAK });
+  radioOptions.push({ label: <FormattedMessage id="Journal.Sak.Generell" />, value: LAG_GENERELL_SAK });
   return radioOptions;
 };
 
@@ -118,6 +130,7 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
   const formMethods = useFormContext<JournalføringFormValues>();
   const sakValg = formMethods.watch(radioFieldName);
   const skalOppretteSak = sakValg === LAG_NY_SAK;
+  const skalFørePåGenerellSak = sakValg === LAG_GENERELL_SAK;
   const fetTekst = useCallback((chunks: any) => <b>{chunks}</b>, []);
   const radioOptions = useMemo(() => lagRadioOptions(saksliste, intl, fetTekst), [saksliste]);
 
@@ -161,7 +174,15 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
             <VerticalSpacer twentyPx />
           </>
         )}
-        <VerticalSpacer eightPx />
+        {skalFørePåGenerellSak && (
+          <>
+            <VerticalSpacer eightPx />
+            <Alert variant="info">
+              <FormattedMessage id="Journal.Sak.Generell.Info" />
+            </Alert>
+          </>
+        )}
+        <VerticalSpacer fourtyPx />
         <FlexRow className={styles.knappRad}>
           <FlexColumn>
             <Button size="small" variant="primary" disabled={!isSubmittable} type="submit">
