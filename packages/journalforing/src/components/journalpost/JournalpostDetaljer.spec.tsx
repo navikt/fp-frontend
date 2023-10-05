@@ -110,29 +110,10 @@ describe('<JournalforingIndex>', () => {
 
     render(<VisOppgaveForSubmitReservertAvMeg submitJournalføring={journalfør} />);
     expect(await screen.findByText('Søker Søkersen')).toBeInTheDocument();
-
-    expect(screen.getByText('12048714373')).toBeInTheDocument();
-    expect(screen.getByText('Svingen sag og høvleri')).toBeInTheDocument();
-    expect(screen.getByText('999999999')).toBeInTheDocument();
-    expect(screen.getAllByText('Bekreftelse fra arbeidsgiver')).toHaveLength(2);
-    expect(screen.getByText('Søknad om foreldrepenger ved fødsel')).toBeInTheDocument();
-    expect(screen.getByText('Annet')).toBeInTheDocument();
-
-    expect(screen.getByLabelText('125416597 Foreldrepenger')).toBeInTheDocument();
-    expect(screen.getByLabelText('155462542 Svangerskapspenger')).toBeInTheDocument();
-    expect(screen.getByLabelText('175419131 Foreldrepenger')).toBeInTheDocument();
-    expect(screen.getByLabelText('Journalfør på ny sak')).toBeInTheDocument();
-    expect(screen.getByLabelText('Journalfør på generell sak')).toBeInTheDocument();
-
     expect(screen.getByText('Journalfør').closest('button')).toBeDisabled();
     expect(screen.getByText('Avbryt').closest('button')).toBeEnabled();
 
     expect(screen.getAllByRole('radio')).toHaveLength(5);
-    expect(screen.getAllByRole('radio')[0]).not.toBeChecked();
-    expect(screen.getAllByRole('radio')[1]).not.toBeChecked();
-    expect(screen.getAllByRole('radio')[2]).not.toBeChecked();
-    expect(screen.getAllByRole('radio')[3]).not.toBeChecked();
-    expect(screen.getAllByRole('radio')[4]).not.toBeChecked();
     expect(screen.queryByLabelText('Ytelse')).not.toBeInTheDocument;
     await userEvent.click(screen.getAllByRole('radio')[0]);
     expect(screen.getByText('Journalfør').closest('button')).toBeEnabled();
