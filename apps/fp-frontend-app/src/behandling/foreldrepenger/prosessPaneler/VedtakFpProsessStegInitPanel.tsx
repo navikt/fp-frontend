@@ -145,7 +145,7 @@ type EndepunktPanelData = {
   };
   medlemskap: Medlemskap;
   simuleringResultat: SimuleringResultat;
-  beregningresultatForeldrepenger?: BeregningsresultatFp;
+  beregningresultatDagytelse?: BeregningsresultatFp;
   beregningsgrunnlag?: Beregningsgrunnlag;
 };
 

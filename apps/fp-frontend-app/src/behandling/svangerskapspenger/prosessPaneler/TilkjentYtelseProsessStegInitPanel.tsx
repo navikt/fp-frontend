@@ -30,7 +30,7 @@ type EndepunktPanelData = {
   familiehendelse: FamilieHendelseSamling;
   soknad: Soknad;
   feriepengegrunnlag: Feriepengegrunnlag;
-  beregningresultatForeldrepenger: BeregningsresultatFp;
+  beregningresultatDagytelse: BeregningsresultatFp;
 };
 
 interface OwnProps {
@@ -62,7 +62,7 @@ const TilkjentYtelseProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
         fagsak={fagsak}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         personoversikt={personoversikt}
-        beregningresultat={data?.beregningresultatForeldrepenger}
+        beregningresultat={data?.beregningresultatDagytelse}
         {...data}
       />
     )}

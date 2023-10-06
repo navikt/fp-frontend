@@ -32,7 +32,7 @@ type EndepunktPanelData = {
   familiehendelse: FamilieHendelseSamling;
   soknad: Soknad;
   feriepengegrunnlag: Feriepengegrunnlag;
-  beregningresultatForeldrepenger: BeregningsresultatFp;
+  beregningresultatDagytelse: BeregningsresultatFp;
   uttaksresultatPerioder: UttaksresultatPeriode;
 };
 
@@ -65,7 +65,7 @@ const TilkjentYtelseFpProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
         fagsak={fagsak}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         personoversikt={personoversikt}
-        beregningresultat={data?.beregningresultatForeldrepenger}
+        beregningresultat={data?.beregningresultatDagytelse}
         {...data}
       />
     )}

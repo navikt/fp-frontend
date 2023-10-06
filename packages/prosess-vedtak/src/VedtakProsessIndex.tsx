@@ -49,7 +49,7 @@ const skalSkriveFritekstGrunnetFastsettingAvBeregning = (
 };
 
 interface OwnProps {
-  beregningresultatForeldrepenger?: BeregningsresultatFp;
+  beregningresultatDagytelse?: BeregningsresultatFp;
   beregningresultatEngangsstonad?: BeregningsresultatEs;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
@@ -66,7 +66,7 @@ interface OwnProps {
 
 const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   behandling,
-  beregningresultatForeldrepenger,
+  beregningresultatDagytelse,
   beregningresultatEngangsstonad,
   tilbakekrevingvalg,
   simuleringResultat,
@@ -88,9 +88,7 @@ const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
     beregningsgrunnlag,
   );
   const resultatstruktur =
-    ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD
-      ? beregningresultatEngangsstonad
-      : beregningresultatForeldrepenger;
+    ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD ? beregningresultatEngangsstonad : beregningresultatDagytelse;
 
   let originaltBeregningsresultat;
   if (beregningsresultatOriginalBehandling) {
