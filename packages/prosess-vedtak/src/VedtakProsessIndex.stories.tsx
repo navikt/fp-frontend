@@ -61,7 +61,7 @@ const defaultAksjonspunkter = [
   },
 ] as Aksjonspunkt[];
 
-const defaultBeregningresultatForeldrepenger = {
+const defaultberegningresultatDagytelse = {
   antallBarn: 1,
   beregnetTilkjentYtelse: 10000,
   sokerErMor: true,
@@ -74,7 +74,7 @@ export default {
 
 const Template: StoryFn<{
   behandling: Behandling;
-  beregningresultatForeldrepenger?: BeregningsresultatFp;
+  beregningresultatDagytelse?: BeregningsresultatFp;
   beregningresultatEngangsstonad?: BeregningsresultatEs;
   ytelseTypeKode: string;
   isReadOnly: boolean;
@@ -89,7 +89,7 @@ const Template: StoryFn<{
   previewCallback?: (data: any) => Promise<any>;
 }> = ({
   behandling,
-  beregningresultatForeldrepenger,
+  beregningresultatDagytelse,
   beregningresultatEngangsstonad,
   ytelseTypeKode,
   isReadOnly,
@@ -111,7 +111,7 @@ const Template: StoryFn<{
     vilkar={vilkar || defaultVilkar}
     alleMerknaderFraBeslutter={{}}
     setFormData={() => undefined}
-    beregningresultatForeldrepenger={beregningresultatForeldrepenger}
+    beregningresultatDagytelse={beregningresultatDagytelse}
     beregningresultatEngangsstonad={beregningresultatEngangsstonad}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
     previewCallback={previewCallback || (action('button-click') as any)}
@@ -129,7 +129,7 @@ const Template: StoryFn<{
 export const InnvilgetForeldrepengerTilGodkjenningForSaksbehandler = Template.bind({});
 InnvilgetForeldrepengerTilGodkjenningForSaksbehandler.args = {
   behandling: defaultBehandling,
-  beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
+  beregningresultatDagytelse: defaultberegningresultatDagytelse,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   isReadOnly: false,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -141,7 +141,7 @@ GodkjentForeldrepengerForSaksbehandler.args = {
     ...defaultBehandling,
     status: behandlingStatus.AVSLUTTET,
   } as Behandling,
-  beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
+  beregningresultatDagytelse: defaultberegningresultatDagytelse,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   isReadOnly: true,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -159,7 +159,7 @@ GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring.args = {
       type: behandlingResultatType.INNVILGET,
     },
   } as Behandling,
-  beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
+  beregningresultatDagytelse: defaultberegningresultatDagytelse,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   isReadOnly: true,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -174,7 +174,7 @@ AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring.args = {
       avslagsarsakFritekst: 'Dette er ein fritekst',
     },
   } as Behandling,
-  beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
+  beregningresultatDagytelse: defaultberegningresultatDagytelse,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   isReadOnly: false,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -189,7 +189,7 @@ GodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring.args = {
       type: behandlingResultatType.AVSLATT,
     },
   } as Behandling,
-  beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
+  beregningresultatDagytelse: defaultberegningresultatDagytelse,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   isReadOnly: true,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -198,7 +198,7 @@ GodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring.args = {
 export const InnvilgetForeldrepengerDerBeregningErManueltFastsatt = Template.bind({});
 InnvilgetForeldrepengerDerBeregningErManueltFastsatt.args = {
   behandling: defaultBehandling,
-  beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
+  beregningresultatDagytelse: defaultberegningresultatDagytelse,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   beregningsgrunnlag: {
     beregningsgrunnlagPeriode: [
@@ -224,7 +224,7 @@ AvslåttForeldrepengerDerBeregningErManueltFastsatt.args = {
       avslagsarsakFritekst: 'Dette er ein fritekst',
     },
   } as Behandling,
-  beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
+  beregningresultatDagytelse: defaultberegningresultatDagytelse,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   beregningsgrunnlag: {
     beregningsgrunnlagPeriode: [
@@ -244,7 +244,7 @@ AvslåttForeldrepengerDerBeregningErManueltFastsatt.args = {
 export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil = Template.bind({});
 TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil.args = {
   behandling: defaultBehandling,
-  beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
+  beregningresultatDagytelse: defaultberegningresultatDagytelse,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   beregningsgrunnlag: {
     beregningsgrunnlagPeriode: [
@@ -397,7 +397,7 @@ InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUtenOverstyring.
       ],
     },
   } as Behandling,
-  beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
+  beregningresultatDagytelse: defaultberegningresultatDagytelse,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   isReadOnly: false,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -417,7 +417,7 @@ GodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring.args = {
       ],
     },
   } as Behandling,
-  beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
+  beregningresultatDagytelse: defaultberegningresultatDagytelse,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   isReadOnly: false,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -436,7 +436,7 @@ InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring.a
       ],
     },
   } as Behandling,
-  beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
+  beregningresultatDagytelse: defaultberegningresultatDagytelse,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   isReadOnly: false,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -456,7 +456,7 @@ GodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring.args = {
       ],
     },
   } as Behandling,
-  beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
+  beregningresultatDagytelse: defaultberegningresultatDagytelse,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   isReadOnly: true,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -476,7 +476,7 @@ GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring.ar
       konsekvenserForYtelsen: [konsekvensForYtelsen.FORELDREPENGER_OPPHORER],
     },
   } as Behandling,
-  beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
+  beregningresultatDagytelse: defaultberegningresultatDagytelse,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   isReadOnly: true,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -494,7 +494,7 @@ AvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring.ar
   } as Behandling,
   beregningsresultatOriginalBehandling: {
     'beregningsresultat-foreldrepenger': {
-      ...defaultBeregningresultatForeldrepenger,
+      ...defaultberegningresultatDagytelse,
     },
   },
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
@@ -514,7 +514,7 @@ GodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOverstyring.args = 
   } as Behandling,
   beregningsresultatOriginalBehandling: {
     'beregningsresultat-foreldrepenger': {
-      ...defaultBeregningresultatForeldrepenger,
+      ...defaultberegningresultatDagytelse,
     },
   },
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
@@ -531,7 +531,7 @@ OpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyring.args = {
       type: behandlingResultatType.OPPHOR,
     },
   } as Behandling,
-  beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
+  beregningresultatDagytelse: defaultberegningresultatDagytelse,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   isReadOnly: true,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -547,7 +547,7 @@ InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt.args = {
       konsekvenserForYtelsen: [konsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK],
     },
   } as Behandling,
-  beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
+  beregningresultatDagytelse: defaultberegningresultatDagytelse,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   beregningsgrunnlag: {
     beregningsgrunnlagPeriode: [
@@ -575,7 +575,7 @@ AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeErOppfylt.args 
       avslagsarsak: '1007',
     },
   } as Behandling,
-  beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
+  beregningresultatDagytelse: defaultberegningresultatDagytelse,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   beregningsgrunnlag: {
     beregningsgrunnlagPeriode: [
@@ -609,7 +609,7 @@ OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt.args = {
       type: behandlingResultatType.OPPHOR,
     },
   } as Behandling,
-  beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
+  beregningresultatDagytelse: defaultberegningresultatDagytelse,
   ytelseTypeKode: fagsakYtelseType.FORELDREPENGER,
   beregningsgrunnlag: {
     beregningsgrunnlagPeriode: [
