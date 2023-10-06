@@ -77,6 +77,13 @@ export const BehandlingApiKeys = {
   SOKNAD_ORIGINAL_BEHANDLING: new RestKey<Soknad, void>('SOKNAD_ORIGINAL_BEHANDLING'),
   YTELSEFORDELING: new RestKey<Ytelsefordeling, void>('YTELSEFORDELING'),
   OPPTJENING: new RestKey<Opptjening, void>('OPPTJENING'),
+  BEREGNINGRESULTAT_DAGYTELSE: new RestKey<{ 'beregningsresultat-dagytelse'?: BeregningsresultatFp }, void>(
+    'BEREGNINGRESULTAT_DAGYTELSE',
+  ),
+  BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING: new RestKey<
+    { 'beregningsresultat-dagytelse-original-behandling'?: BeregningsresultatFp },
+    void
+  >('BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING'),
   BEREGNINGRESULTAT_FORELDREPENGER: new RestKey<{ 'beregningsresultat-foreldrepenger'?: BeregningsresultatFp }, void>(
     'BEREGNINGRESULTAT_FORELDREPENGER',
   ),
@@ -168,6 +175,11 @@ export const behandlingEndepunkter = new RestApiConfigBuilder()
   .withRel('familiehendelse-v2', BehandlingApiKeys.FAMILIEHENDELSE)
   .withRel('beregningsgrunnlag', BehandlingApiKeys.BEREGNINGSGRUNNLAG)
   .withRel('feriepengegrunnlag', BehandlingApiKeys.FERIEPENGEGRUNNLAG)
+  .withRel('beregningsresultat-dagytelse', BehandlingApiKeys.BEREGNINGRESULTAT_DAGYTELSE)
+  .withRel(
+    'beregningsresultat-dagytelse-original-behandling',
+    BehandlingApiKeys.BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING,
+  )
   .withRel('beregningsresultat-foreldrepenger', BehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER)
   .withRel(
     'beregningsresultat-foreldrepenger-original-behandling',

@@ -21,7 +21,7 @@ import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlin
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_TILBAKETREKK];
 
 const ENDEPUNKTER_PANEL_DATA = [
-  BehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER,
+  BehandlingApiKeys.BEREGNINGRESULTAT_DAGYTELSE,
   BehandlingApiKeys.FAMILIEHENDELSE,
   BehandlingApiKeys.SOKNAD,
   BehandlingApiKeys.FERIEPENGEGRUNNLAG,
@@ -53,7 +53,7 @@ const TilkjentYtelseProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
     prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}
     skalPanelVisesIMeny={() => true}
     hentOverstyrtStatus={() =>
-      requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER.name)
+      requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGRESULTAT_DAGYTELSE.name)
         ? vilkarUtfallType.OPPFYLT
         : vilkarUtfallType.IKKE_VURDERT
     }

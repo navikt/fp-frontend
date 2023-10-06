@@ -25,7 +25,7 @@ const ENDEPUNKTER_PANEL_DATA = [
   BehandlingApiKeys.FAMILIEHENDELSE,
   BehandlingApiKeys.SOKNAD,
   BehandlingApiKeys.FERIEPENGEGRUNNLAG,
-  BehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER,
+  BehandlingApiKeys.BEREGNINGRESULTAT_DAGYTELSE,
   BehandlingApiKeys.UTTAKSRESULTAT_PERIODER,
 ];
 type EndepunktPanelData = {
@@ -56,7 +56,7 @@ const TilkjentYtelseFpProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
     prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}
     skalPanelVisesIMeny={() => true}
     hentOverstyrtStatus={() =>
-      requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER.name)
+      requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGRESULTAT_DAGYTELSE.name)
         ? vilkarUtfallType.OPPFYLT
         : vilkarUtfallType.IKKE_VURDERT
     }
