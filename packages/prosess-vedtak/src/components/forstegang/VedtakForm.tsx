@@ -5,7 +5,7 @@ import { IntlShape, useIntl } from 'react-intl';
 import {
   AlleKodeverk,
   Behandling,
-  BeregningsresultatFp,
+  BeregningsresultatDagytelse,
   BeregningsresultatEs,
   Vilkar,
   Aksjonspunkt,
@@ -194,7 +194,7 @@ interface OwnProps {
   aksjonspunkter: Aksjonspunkt[];
   previewCallback: (data: ForhandsvisData) => Promise<any>;
   ytelseTypeKode: string;
-  resultatstruktur?: BeregningsresultatFp | BeregningsresultatEs;
+  resultatstruktur?: BeregningsresultatDagytelse | BeregningsresultatEs;
   alleKodeverk: AlleKodeverk;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;

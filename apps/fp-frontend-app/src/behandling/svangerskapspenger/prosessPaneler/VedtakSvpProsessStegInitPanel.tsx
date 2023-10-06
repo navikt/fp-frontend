@@ -15,7 +15,7 @@ import {
   Behandling,
   Behandlingsresultat,
   Beregningsgrunnlag,
-  BeregningsresultatFp,
+  BeregningsresultatDagytelse,
   Fagsak,
   ForhåndsvisMeldingParams,
   Medlemskap,
@@ -141,11 +141,11 @@ const ENDEPUNKTER_PANEL_DATA = [
 type EndepunktPanelData = {
   tilbakekrevingvalg?: TilbakekrevingValg;
   beregningsresultatOriginalBehandling?: {
-    'beregningsresultat-foreldrepenger'?: BeregningsresultatFp;
+    'beregningsresultat-foreldrepenger'?: BeregningsresultatDagytelse;
   };
   medlemskap: Medlemskap;
   simuleringResultat: SimuleringResultat;
-  beregningresultatDagytelse?: BeregningsresultatFp;
+  beregningresultatDagytelse?: BeregningsresultatDagytelse;
   beregningsgrunnlag?: Beregningsgrunnlag;
 };
 

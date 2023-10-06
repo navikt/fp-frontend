@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { Label, Detail } from '@navikt/ds-react';
 
-import { Behandlingsresultat, BeregningsresultatFp, BeregningsresultatEs } from '@navikt/fp-types';
+import { Behandlingsresultat, BeregningsresultatDagytelse, BeregningsresultatEs } from '@navikt/fp-types';
 import { fagsakYtelseType } from '@navikt/fp-kodeverk';
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -10,7 +10,7 @@ import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-u
 import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
 
 interface OwnProps {
-  resultatstruktur?: BeregningsresultatFp | BeregningsresultatEs;
+  resultatstruktur?: BeregningsresultatDagytelse | BeregningsresultatEs;
   behandlingsresultat?: Behandlingsresultat;
   ytelseTypeKode: string;
   språkKode: string;

@@ -6,7 +6,7 @@ import { TilkjentYtelseProsessIndex } from '@navikt/fp-prosess-tilkjent-ytelse';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
   ArbeidsgiverOpplysningerPerId,
-  BeregningsresultatFp,
+  BeregningsresultatDagytelse,
   Fagsak,
   FamilieHendelseSamling,
   Feriepengegrunnlag,
@@ -32,7 +32,7 @@ type EndepunktPanelData = {
   familiehendelse: FamilieHendelseSamling;
   soknad: Soknad;
   feriepengegrunnlag: Feriepengegrunnlag;
-  beregningresultatDagytelse: BeregningsresultatFp;
+  beregningresultatDagytelse: BeregningsresultatDagytelse;
   uttaksresultatPerioder: UttaksresultatPeriode;
 };
 

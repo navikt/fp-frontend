@@ -4,7 +4,7 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import {
   ArbeidsgiverOpplysningerPerId,
-  BeregningsresultatFp,
+  BeregningsresultatDagytelse,
   Fagsak,
   FamilieHendelseSamling,
   Feriepengegrunnlag,
@@ -19,7 +19,7 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface OwnProps {
-  beregningresultat: BeregningsresultatFp;
+  beregningresultat: BeregningsresultatDagytelse;
   familiehendelse: FamilieHendelseSamling;
   personoversikt: Personoversikt;
   soknad: Soknad;

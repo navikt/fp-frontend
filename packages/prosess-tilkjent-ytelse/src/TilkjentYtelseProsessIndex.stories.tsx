@@ -17,7 +17,7 @@ import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import {
   Aksjonspunkt,
   Behandling,
-  BeregningsresultatFp,
+  BeregningsresultatDagytelse,
   Fagsak,
   FamilieHendelse,
   FamilieHendelseSamling,
@@ -89,7 +89,7 @@ const beregningresultat = {
       dagsats: 100,
     },
   ],
-} as BeregningsresultatFp;
+} as BeregningsresultatDagytelse;
 
 const søknad = {
   mottattDato: '2019-01-10',

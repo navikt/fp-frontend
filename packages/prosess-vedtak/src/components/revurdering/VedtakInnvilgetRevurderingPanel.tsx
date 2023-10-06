@@ -4,7 +4,7 @@ import { Label, BodyShort, Detail } from '@navikt/ds-react';
 
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
 import { fagsakYtelseType } from '@navikt/fp-kodeverk';
-import { Behandlingsresultat, BeregningsresultatFp, BeregningsresultatEs } from '@navikt/fp-types';
+import { Behandlingsresultat, BeregningsresultatDagytelse, BeregningsresultatEs } from '@navikt/fp-types';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
@@ -13,7 +13,7 @@ interface OwnProps {
   ytelseTypeKode: string;
   revurderingsÅrsakString?: string;
   isReadOnly: boolean;
-  resultatstruktur?: BeregningsresultatFp | BeregningsresultatEs;
+  resultatstruktur?: BeregningsresultatDagytelse | BeregningsresultatEs;
   språkKode: string;
   behandlingsresultat?: Behandlingsresultat;
   beregningErManueltFastsatt: boolean;

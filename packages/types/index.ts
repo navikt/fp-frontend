@@ -49,7 +49,7 @@ export type {
 export type { default as Feriepengegrunnlag, FeriepengegrunnlagAndel } from './src/feriepengegrunnlagTsType';
 export type { default as BeregningsresultatEs } from './src/beregningsresultatEsTsType';
 export type {
-  default as BeregningsresultatFp,
+  default as BeregningsresultatDagytelse,
   BeregningsresultatPeriode,
   BeregningsresultatPeriodeAndel,
 } from './src/beregningsresultatFpTsType';

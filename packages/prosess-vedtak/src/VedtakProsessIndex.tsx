@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { AksjonspunktCode, behandlingType, aksjonspunktStatus, fagsakYtelseType } from '@navikt/fp-kodeverk';
 import {
-  BeregningsresultatFp,
+  BeregningsresultatDagytelse,
   BeregningsresultatEs,
   Vilkar,
   TilbakekrevingValg,
@@ -49,14 +49,14 @@ const skalSkriveFritekstGrunnetFastsettingAvBeregning = (
 };
 
 interface OwnProps {
-  beregningresultatDagytelse?: BeregningsresultatFp;
+  beregningresultatDagytelse?: BeregningsresultatDagytelse;
   beregningresultatEngangsstonad?: BeregningsresultatEs;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
   beregningsgrunnlag?: Beregningsgrunnlag;
   beregningsresultatOriginalBehandling?: {
     'beregningsresultat-engangsstonad'?: BeregningsresultatEs;
-    'beregningsresultat-foreldrepenger'?: BeregningsresultatFp;
+    'beregningsresultat-foreldrepenger'?: BeregningsresultatDagytelse;
   };
   medlemskap: Medlemskap;
   vilkar: Vilkar[];

@@ -6,7 +6,7 @@ import {
   Behandling,
   BeregningsresultatEs,
   Beregningsgrunnlag,
-  BeregningsresultatFp,
+  BeregningsresultatDagytelse,
   Medlemskap,
   Vilkar,
   Aksjonspunkt,
@@ -65,7 +65,7 @@ const defaultberegningresultatDagytelse = {
   antallBarn: 1,
   beregnetTilkjentYtelse: 10000,
   sokerErMor: true,
-} as BeregningsresultatFp;
+} as BeregningsresultatDagytelse;
 
 export default {
   title: 'prosess/prosess-vedtak',
@@ -74,7 +74,7 @@ export default {
 
 const Template: StoryFn<{
   behandling: Behandling;
-  beregningresultatDagytelse?: BeregningsresultatFp;
+  beregningresultatDagytelse?: BeregningsresultatDagytelse;
   beregningresultatEngangsstonad?: BeregningsresultatEs;
   ytelseTypeKode: string;
   isReadOnly: boolean;
@@ -83,7 +83,7 @@ const Template: StoryFn<{
   aksjonspunkter?: Aksjonspunkt[];
   beregningsresultatOriginalBehandling?: {
     'beregningsresultat-engangsstonad'?: BeregningsresultatEs;
-    'beregningsresultat-foreldrepenger'?: BeregningsresultatFp;
+    'beregningsresultat-foreldrepenger'?: BeregningsresultatDagytelse;
   };
   vilkar?: Vilkar[];
   previewCallback?: (data: any) => Promise<any>;
