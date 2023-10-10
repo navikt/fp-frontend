@@ -5,7 +5,7 @@ import {
   Behandling,
   ArbeidsgiverOpplysningerWrapper,
   Beregningsgrunnlag,
-  BeregningsresultatFp,
+  BeregningsresultatDagytelse,
   Feriepengegrunnlag,
   ForhåndsvisMeldingParams,
   InntektArbeidYtelse,
@@ -77,13 +77,13 @@ export const BehandlingApiKeys = {
   SOKNAD_ORIGINAL_BEHANDLING: new RestKey<Soknad, void>('SOKNAD_ORIGINAL_BEHANDLING'),
   YTELSEFORDELING: new RestKey<Ytelsefordeling, void>('YTELSEFORDELING'),
   OPPTJENING: new RestKey<Opptjening, void>('OPPTJENING'),
-  BEREGNINGRESULTAT_FORELDREPENGER: new RestKey<{ 'beregningsresultat-foreldrepenger'?: BeregningsresultatFp }, void>(
-    'BEREGNINGRESULTAT_FORELDREPENGER',
+  BEREGNINGRESULTAT_DAGYTELSE: new RestKey<{ 'beregningsresultat-dagytelse'?: BeregningsresultatDagytelse }, void>(
+    'BEREGNINGRESULTAT_DAGYTELSE',
   ),
-  BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING: new RestKey<
-    { 'beregningsresultat-foreldrepenger'?: BeregningsresultatFp },
+  BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING: new RestKey<
+    { 'beregningsresultat-dagytelse-original-behandling'?: BeregningsresultatDagytelse },
     void
-  >('BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING'),
+  >('BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING'),
   FAMILIEHENDELSE_ORIGINAL_BEHANDLING: new RestKey<FamilieHendelse, void>('FAMILIEHENDELSE_ORIGINAL_BEHANDLING'),
   MEDLEMSKAP: new RestKey<Medlemskap, void>('MEDLEMSKAP'),
   INNTEKT_ARBEID_YTELSE: new RestKey<InntektArbeidYtelse, void>('INNTEKT_ARBEID_YTELSE'),
@@ -168,10 +168,10 @@ export const behandlingEndepunkter = new RestApiConfigBuilder()
   .withRel('familiehendelse-v2', BehandlingApiKeys.FAMILIEHENDELSE)
   .withRel('beregningsgrunnlag', BehandlingApiKeys.BEREGNINGSGRUNNLAG)
   .withRel('feriepengegrunnlag', BehandlingApiKeys.FERIEPENGEGRUNNLAG)
-  .withRel('beregningsresultat-foreldrepenger', BehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER)
+  .withRel('beregningsresultat-dagytelse', BehandlingApiKeys.BEREGNINGRESULTAT_DAGYTELSE)
   .withRel(
-    'beregningsresultat-foreldrepenger-original-behandling',
-    BehandlingApiKeys.BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING,
+    'beregningsresultat-dagytelse-original-behandling',
+    BehandlingApiKeys.BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING,
   )
   .withRel('soknad', BehandlingApiKeys.SOKNAD)
   .withRel('soknad-original-behandling', BehandlingApiKeys.SOKNAD_ORIGINAL_BEHANDLING)

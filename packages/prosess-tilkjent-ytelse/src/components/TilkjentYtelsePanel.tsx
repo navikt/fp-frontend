@@ -6,7 +6,7 @@ import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
-  BeregningsresultatFp,
+  BeregningsresultatDagytelse,
   Feriepengegrunnlag,
   AlleKodeverk,
   Personoversikt,
@@ -28,7 +28,7 @@ const finnTilbaketrekkAksjonspunkt = (alleAksjonspunkter: Aksjonspunkt[]): Aksjo
     : undefined;
 
 interface PureOwnProps {
-  beregningresultat: BeregningsresultatFp;
+  beregningresultat: BeregningsresultatDagytelse;
   familieHendelseSamling: FamilieHendelseSamling;
   personoversikt: Personoversikt;
   soknad: Soknad;

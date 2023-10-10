@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { AksjonspunktCode, behandlingType, aksjonspunktStatus, fagsakYtelseType } from '@navikt/fp-kodeverk';
 import {
-  BeregningsresultatFp,
+  BeregningsresultatDagytelse,
   BeregningsresultatEs,
   Vilkar,
   TilbakekrevingValg,
@@ -49,14 +49,14 @@ const skalSkriveFritekstGrunnetFastsettingAvBeregning = (
 };
 
 interface OwnProps {
-  beregningresultatForeldrepenger?: BeregningsresultatFp;
+  beregningresultatDagytelse?: BeregningsresultatDagytelse;
   beregningresultatEngangsstonad?: BeregningsresultatEs;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
   beregningsgrunnlag?: Beregningsgrunnlag;
   beregningsresultatOriginalBehandling?: {
     'beregningsresultat-engangsstonad'?: BeregningsresultatEs;
-    'beregningsresultat-foreldrepenger'?: BeregningsresultatFp;
+    'beregningsresultat-foreldrepenger'?: BeregningsresultatDagytelse;
   };
   medlemskap: Medlemskap;
   vilkar: Vilkar[];
@@ -66,7 +66,7 @@ interface OwnProps {
 
 const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   behandling,
-  beregningresultatForeldrepenger,
+  beregningresultatDagytelse,
   beregningresultatEngangsstonad,
   tilbakekrevingvalg,
   simuleringResultat,
@@ -88,9 +88,7 @@ const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
     beregningsgrunnlag,
   );
   const resultatstruktur =
-    ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD
-      ? beregningresultatEngangsstonad
-      : beregningresultatForeldrepenger;
+    ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD ? beregningresultatEngangsstonad : beregningresultatDagytelse;
 
   let originaltBeregningsresultat;
   if (beregningsresultatOriginalBehandling) {

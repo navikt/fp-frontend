@@ -23,7 +23,7 @@ export type BeregningsresultatPeriode = Readonly<{
   andeler?: BeregningsresultatPeriodeAndel[];
 }>;
 
-type BeregningsresultatFp = Readonly<{
+type BeregningsresultatDagytelse = Readonly<{
   sokerErMor: boolean;
   opphoersdato?: string;
   perioder?: BeregningsresultatPeriode[];
@@ -31,4 +31,4 @@ type BeregningsresultatFp = Readonly<{
   skalHindreTilbaketrekk?: boolean;
 }>;
 
-export default BeregningsresultatFp;
+export default BeregningsresultatDagytelse;

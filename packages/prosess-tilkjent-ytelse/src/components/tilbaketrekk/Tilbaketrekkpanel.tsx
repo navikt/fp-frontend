@@ -8,7 +8,7 @@ import { AksjonspunktCode, aksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import { Aksjonspunkt, BeregningsresultatFp } from '@navikt/fp-types';
+import { Aksjonspunkt, BeregningsresultatDagytelse } from '@navikt/fp-types';
 import { VurderTilbaketrekkAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
@@ -25,7 +25,10 @@ export type FormValues = {
   begrunnelseVurderTilbaketrekk?: string;
 };
 
-const buildInitialValues = (ap?: Aksjonspunkt, beregningsresultat?: BeregningsresultatFp): FormValues | undefined => {
+const buildInitialValues = (
+  ap?: Aksjonspunkt,
+  beregningsresultat?: BeregningsresultatDagytelse,
+): FormValues | undefined => {
   const tidligereValgt = beregningsresultat?.skalHindreTilbaketrekk;
   if (tidligereValgt === undefined || tidligereValgt === null || !ap || !ap.begrunnelse) {
     return undefined;
@@ -51,7 +54,7 @@ interface OwnProps {
   vurderTilbaketrekkAP?: Aksjonspunkt;
   submitCallback: (data: VurderTilbaketrekkAp) => Promise<void>;
   readOnlySubmitButton: boolean;
-  beregningsresultat?: BeregningsresultatFp;
+  beregningsresultat?: BeregningsresultatDagytelse;
   formData?: FormValues;
   setFormData: (data: FormValues) => void;
 }

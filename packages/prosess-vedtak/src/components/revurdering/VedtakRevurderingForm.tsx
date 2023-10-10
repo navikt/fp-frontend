@@ -19,7 +19,7 @@ import { Form } from '@navikt/ft-form-hooks';
 import {
   AlleKodeverk,
   Behandling,
-  BeregningsresultatFp,
+  BeregningsresultatDagytelse,
   BeregningsresultatEs,
   Vilkar,
   Aksjonspunkt,
@@ -120,8 +120,8 @@ const lagÅrsakString = (
 };
 
 const erNyttBehandlingResult = (
-  beregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
-  originaltBeregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
+  beregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
+  originaltBeregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
 ): boolean => {
   const vedtakResult = beregningResultat ? VedtakResultType.INNVILGET : VedtakResultType.AVSLAG;
   const vedtakResultOriginal = originaltBeregningResultat ? VedtakResultType.INNVILGET : VedtakResultType.AVSLAG;
@@ -140,8 +140,8 @@ export const lagKonsekvensForYtelsenTekst = (
 
 const erTilkjentYtelseEllerAntallBarnEndret = (
   erInnvilget: boolean,
-  beregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
-  originaltBeregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
+  beregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
+  originaltBeregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
 ): boolean => {
   if (!beregningResultat) {
     return false;
@@ -167,8 +167,8 @@ const erTilkjentYtelseEllerAntallBarnEndret = (
 
 const hentResultattekst = (
   erInnvilget: boolean,
-  beregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
-  originaltBeregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
+  beregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
+  originaltBeregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
 ): string => {
   if (erNyttBehandlingResult(beregningResultat, originaltBeregningResultat)) {
     return beregningResultat ? 'VedtakForm.Resultat.EndretTilInnvilget' : 'VedtakForm.Resultat.EndretTilAvslag';
@@ -189,8 +189,8 @@ const finnInvilgetRevurderingTekst = (
   getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
   tilbakekrevingText: string,
   konsekvenserForYtelsen?: string[],
-  beregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
-  originaltBeregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
+  beregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
+  originaltBeregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
 ): string => {
   if (ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD) {
     return intl.formatMessage({ id: hentResultattekst(true, beregningResultat, originaltBeregningResultat) });
@@ -200,7 +200,7 @@ const finnInvilgetRevurderingTekst = (
 };
 
 const getOpphorsdato = (
-  resultatstruktur?: BeregningsresultatFp | BeregningsresultatEs,
+  resultatstruktur?: BeregningsresultatDagytelse | BeregningsresultatEs,
   medlemskapFom?: string,
   behandlingsresultat?: Behandling['behandlingsresultat'],
 ): string => {
@@ -250,14 +250,14 @@ interface OwnProps {
   aksjonspunkter: Aksjonspunkt[];
   previewCallback: (data: ForhandsvisData) => Promise<any>;
   ytelseTypeKode: string;
-  resultatstruktur?: BeregningsresultatFp | BeregningsresultatEs;
+  resultatstruktur?: BeregningsresultatDagytelse | BeregningsresultatEs;
   alleKodeverk: AlleKodeverk;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
   vilkar: Vilkar[];
   beregningErManueltFastsatt: boolean;
   medlemskapFom?: string;
-  resultatstrukturOriginalBehandling?: BeregningsresultatFp | BeregningsresultatEs;
+  resultatstrukturOriginalBehandling?: BeregningsresultatDagytelse | BeregningsresultatEs;
   submitCallback: (data: RevurderingVedtakAksjonspunkter[]) => Promise<void>;
   formData?: FormValues;
   setFormData: (data: FormValues) => void;

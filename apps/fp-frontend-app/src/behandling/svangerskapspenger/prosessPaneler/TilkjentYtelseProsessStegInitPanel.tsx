@@ -6,7 +6,7 @@ import { TilkjentYtelseProsessIndex } from '@navikt/fp-prosess-tilkjent-ytelse';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
   ArbeidsgiverOpplysningerPerId,
-  BeregningsresultatFp,
+  BeregningsresultatDagytelse,
   Fagsak,
   FamilieHendelseSamling,
   Feriepengegrunnlag,
@@ -21,7 +21,7 @@ import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlin
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_TILBAKETREKK];
 
 const ENDEPUNKTER_PANEL_DATA = [
-  BehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER,
+  BehandlingApiKeys.BEREGNINGRESULTAT_DAGYTELSE,
   BehandlingApiKeys.FAMILIEHENDELSE,
   BehandlingApiKeys.SOKNAD,
   BehandlingApiKeys.FERIEPENGEGRUNNLAG,
@@ -30,7 +30,7 @@ type EndepunktPanelData = {
   familiehendelse: FamilieHendelseSamling;
   soknad: Soknad;
   feriepengegrunnlag: Feriepengegrunnlag;
-  beregningresultatForeldrepenger: BeregningsresultatFp;
+  beregningresultatDagytelse: BeregningsresultatDagytelse;
 };
 
 interface OwnProps {
@@ -53,7 +53,7 @@ const TilkjentYtelseProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
     prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}
     skalPanelVisesIMeny={() => true}
     hentOverstyrtStatus={() =>
-      requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER.name)
+      requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGRESULTAT_DAGYTELSE.name)
         ? vilkarUtfallType.OPPFYLT
         : vilkarUtfallType.IKKE_VURDERT
     }
@@ -62,7 +62,7 @@ const TilkjentYtelseProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
         fagsak={fagsak}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         personoversikt={personoversikt}
-        beregningresultat={data?.beregningresultatForeldrepenger}
+        beregningresultat={data?.beregningresultatDagytelse}
         {...data}
       />
     )}
