@@ -1,17 +1,15 @@
-import OppgavePrioritet from '../kodeverk/oppgavePrioritet';
+import OppgaveKilde from '../kodeverk/oppgaveKilde';
 
 type OppgaveOversikt = Readonly<{
-  id: number;
-  opprettetDato: string;
-  frist: string;
   journalpostId: string;
   aktørId?: string;
   fødselsnummer?: string;
   ytelseType: string;
+  frist: string;
   beskrivelse?: string;
-  prioritet?: OppgavePrioritet;
+  opprettetDato: string;
   enhetId?: string;
   reservertAv?: string;
-  versjon: number;
+  kilde?: OppgaveKilde;
 }>;
 export default OppgaveOversikt;

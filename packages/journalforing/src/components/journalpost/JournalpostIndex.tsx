@@ -22,6 +22,7 @@ type OwnProps = Readonly<{
   submitJournalføring: (data: JournalførSubmitValue) => void;
   reserverOppgave: (data: ReserverOppgaveType) => void;
   oppdaterValgtOppgave: (oppgave: OppgaveOversikt) => void;
+  flyttTilGosys: (data: string) => void;
 }>;
 
 /**
@@ -34,6 +35,7 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
   navAnsatt,
   reserverOppgave,
   oppdaterValgtOppgave,
+  flyttTilGosys,
 }) => {
   const [valgtDokument, setValgtDokument] = useState<JournalDokument | undefined>(undefined);
 
@@ -100,6 +102,7 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
             lasterBruker={hentBrukerState === RestApiState.LOADING}
             reserverOppgave={reserverOppgave}
             navAnsatt={navAnsatt}
+            flyttTilGosys={flyttTilGosys}
           />
         </FlexColumn>
         {valgtDokument && (

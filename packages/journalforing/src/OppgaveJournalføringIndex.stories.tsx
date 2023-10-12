@@ -8,13 +8,13 @@ import { fagsakStatus, fagsakYtelseType, familieHendelseType } from '@navikt/fp-
 import { requestApi, RestApiPathsKeys } from './data/fpfordelRestApi';
 import JournalforingIndex from './OppgaveJournalføringIndex';
 import OppgaveOversikt from './typer/oppgaveOversiktTsType';
-import OppgavePrioritet from './kodeverk/oppgavePrioritet';
 import Journalpost from './typer/journalpostTsType';
 import JournalKanal from './kodeverk/journalKanal';
 
 import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
+import OppgaveKilde from './kodeverk/oppgaveKilde';
 
 const detaljertJournalpostMal = (medBruker: boolean): Journalpost =>
   ({
@@ -140,7 +140,6 @@ const Template: StoryFn<{
 
 const defaultOppgaver = [
   {
-    id: 600,
     journalpostId: '12345125',
     aktørId: '9996923456799',
     fødselsnummer: '12048714373',
@@ -148,13 +147,11 @@ const defaultOppgaver = [
     frist: '2022-02-01',
     ytelseType: 'FP',
     enhetId: '4016',
-    prioritet: OppgavePrioritet.NORM,
     beskrivelse: 'Inntektsmelding',
     reservertAv: 'X123456',
-    versjon: 1,
+    kilde: OppgaveKilde.GOSYS
   },
   {
-    id: 700,
     journalpostId: '245745871',
     aktørId: '274572457624',
     fødselsnummer: '12018847182',
@@ -162,21 +159,19 @@ const defaultOppgaver = [
     frist: '2022-03-01',
     ytelseType: 'SVP',
     enhetId: '4008',
-    prioritet: OppgavePrioritet.NORM,
     beskrivelse: 'Inntektsmelding',
     reservertAv: 'Y654321',
-    versjon: 2,
+    kilde: OppgaveKilde.LOKAL
+
   },
   {
-    id: 800,
     journalpostId: '345681257',
     opprettetDato: '2022-01-01',
     frist: '2022-01-01',
     ytelseType: 'FP',
     enhetId: '4008',
-    prioritet: OppgavePrioritet.HØY,
     beskrivelse: 'Søknad',
-    versjon: 3,
+    kilde: OppgaveKilde.GOSYS
   },
 ];
 
@@ -184,7 +179,6 @@ export const ViseOppgaverIListe = Template.bind({});
 ViseOppgaverIListe.args = {
   alleOppgaver: [
     {
-      id: 600,
       journalpostId: '12345125',
       aktørId: '9996923456799',
       fødselsnummer: '12048714373',
@@ -192,13 +186,11 @@ ViseOppgaverIListe.args = {
       frist: '2022-02-01',
       ytelseType: 'FP',
       enhetId: '4016',
-      prioritet: OppgavePrioritet.NORM,
       beskrivelse: 'Inntektsmelding',
       reservertAv: 'Y654321',
-      versjon: 1,
+      kilde: OppgaveKilde.LOKAL,
     },
     {
-      id: 700,
       journalpostId: '245745871',
       aktørId: '274572457624',
       fødselsnummer: '12018847182',
@@ -206,21 +198,18 @@ ViseOppgaverIListe.args = {
       frist: '2022-03-01',
       ytelseType: 'SVP',
       enhetId: '4008',
-      prioritet: OppgavePrioritet.NORM,
       beskrivelse: 'Inntektsmelding',
-      versjon: 2,
+      kilde: OppgaveKilde.GOSYS,
     },
     {
-      id: 800,
       journalpostId: '345681257',
       opprettetDato: '2022-01-01',
       frist: '2022-01-01',
       ytelseType: 'FP',
       enhetId: '4008',
-      prioritet: OppgavePrioritet.HØY,
       beskrivelse: 'Søknad',
       reservertAv: 'X123456',
-      versjon: 3,
+      kilde: OppgaveKilde.GOSYS,
     },
   ],
   detaljertJournalpost: detaljertJournalpostMal(true),

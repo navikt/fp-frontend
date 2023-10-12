@@ -5,7 +5,7 @@ import { Heading, Link } from '@navikt/ds-react';
 import { ChevronLeftIcon } from '@navikt/aksel-icons';
 import { NavAnsatt } from '@navikt/fp-types';
 import { FlexColumn, FlexContainer, FlexRow, LoadingPanel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
+import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import messages from '../i18n/nb_NO.json';
 import JournalforingPanel from './components/JournalforingPanel';
 import JournalføringIndex from './components/JournalføringIndex';
@@ -35,7 +35,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
     setValgtOppgave(undefined);
   }, [valgtOppgave]);
 
-  const { startRequest: innhentAlleOppgaver, data: alleOppgaver = TOM_ARRAY } = restApiHooks.useRestApiRunner(
+  const { startRequest: innhentAlleOppgaver, data: alleOppgaver = TOM_ARRAY, state: status } = restApiHooks.useRestApiRunner(
     RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER,
   );
 
@@ -51,6 +51,8 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
   );
 
   const { startRequest: reserverOppgave } = restApiHooks.useRestApiRunner(RestApiPathsKeys.RESERVER_OPPGAVE);
+
+  const { startRequest: flyttTilGosys } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FLYTT_OPPGAVE_TIL_GOSYS);
 
   const reserverCallback = useCallback(
     (data: ReserverOppgaveType) => {
@@ -78,13 +80,24 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
     [valgtOppgave],
   );
 
+  const flyttOppgaveTilGosysCallback = useCallback((data: string) => {
+      flyttTilGosys({ journalpostId: data })
+        .then(() => {
+          if (navAnsatt?.brukernavn) {
+            innhentAlleOppgaver({ ident: navAnsatt.brukernavn }, true);
+          }
+        });
+    },
+    [valgtOppgave],
+  );
+
   useEffect(() => {
     if (navAnsatt) {
       innhentAlleOppgaver({ ident: navAnsatt.brukernavn });
     }
   }, [navAnsatt]);
 
-  if (!alleOppgaver) {
+  if (status === RestApiState.NOT_STARTED || status === RestApiState.LOADING ) {
     return <LoadingPanel />;
   }
   if (!navAnsatt) {
@@ -132,6 +145,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
           avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
           submitJournalføring={journalførCallback}
           reserverOppgave={reserverCallback}
+          flyttTilGosys={flyttOppgaveTilGosysCallback}
         />
       </JournalforingPanel>
     </RawIntlProvider>

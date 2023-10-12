@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import * as stories from './JournalpostDetaljer.stories';
 import Sakstype from '../../kodeverk/sakstype';
 
-const { VisOppgaveForSubmitReservertAvMeg } = composeStories(stories);
+const { VisOppgaveForSubmitReservertAvMeg, VisFlyttTilGosysOmKildeGosys } = composeStories(stories);
 
 describe('<JournalforingIndex>', () => {
   it('skal kunne journalføre på eksisterende sak', async () => {
@@ -44,7 +44,6 @@ describe('<JournalforingIndex>', () => {
 
     expect(journalfør).toHaveBeenNthCalledWith(1, {
       enhetId: '4108',
-      oppgaveId: 600,
       oppdaterTitlerDto: undefined,
       journalpostId: '986547336994',
       saksnummer: '125416597',
@@ -94,7 +93,6 @@ describe('<JournalforingIndex>', () => {
 
     expect(journalfør).toHaveBeenNthCalledWith(1, {
       enhetId: '4108',
-      oppgaveId: 600,
       oppdaterTitlerDto: undefined,
       journalpostId: '986547336994',
       opprettSak: {
@@ -135,7 +133,6 @@ describe('<JournalforingIndex>', () => {
 
     expect(journalfør).toHaveBeenNthCalledWith(1, {
       enhetId: '4108',
-      oppgaveId: 600,
       oppdaterTitlerDto: undefined,
       journalpostId: '986547336994',
       opprettSak: {
@@ -143,5 +140,27 @@ describe('<JournalforingIndex>', () => {
         sakstype: Sakstype.GENERELL,
       },
     });
+  });
+
+  it('skal ikke kunne flytte oppgaven til gosys om det er allerede en gosys oppgave', async () => {
+    const journalfør = vi.fn();
+
+    render(<VisOppgaveForSubmitReservertAvMeg submitJournalføring={journalfør} />);
+    expect(await screen.findByText('Søker Søkersen')).toBeInTheDocument();
+    expect(screen.getByText('Journalfør').closest('button')).toBeDisabled();
+    expect(screen.getByText('Avbryt').closest('button')).toBeEnabled();
+
+    expect(screen.queryByLabelText('Flytt Til Gosys')).not.toBeInTheDocument;
+  });
+
+  it('skal kunne flytte oppgaven til gosys', async () => {
+    const journalfør = vi.fn();
+
+    render(<VisFlyttTilGosysOmKildeGosys submitJournalføring={journalfør} />);
+    expect(await screen.findByText('Søker Søkersen')).toBeInTheDocument();
+    expect(screen.getByText('Journalfør').closest('button')).toBeDisabled();
+    expect(screen.getByText('Avbryt').closest('button')).toBeEnabled();
+
+    expect(screen.queryByLabelText('Flytt Til Gosys')).toBeInTheDocument;
   });
 });
