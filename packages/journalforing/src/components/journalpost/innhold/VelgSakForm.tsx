@@ -113,6 +113,7 @@ type OwnProps = Readonly<{
   isSubmittable: boolean;
   avbrytVisningAvJournalpost: () => void;
   erKlarForJournalføring: boolean;
+  erLokalOppgave: boolean;
 }>;
 
 /**
@@ -123,6 +124,7 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
   isSubmittable,
   avbrytVisningAvJournalpost,
   erKlarForJournalføring,
+  erLokalOppgave,
 }) => {
   const intl = useIntl();
   const saksliste = journalpost?.fagsaker || TOM_ARRAY;
@@ -200,6 +202,13 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
               <FormattedMessage id="ValgtOppgave.Avbryt" />
             </Button>
           </FlexColumn>
+          {erLokalOppgave && (
+          <FlexColumn className={styles.colMargin}>
+            <Button size="small" variant="primary" type="button">
+              <FormattedMessage id="ValgtOppgave.Flytt.Til.Gosys" />
+            </Button>
+          </FlexColumn>
+          )}
         </FlexRow>
       </>
     </>

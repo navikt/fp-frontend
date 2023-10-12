@@ -3,11 +3,10 @@ import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-ext
 import { action } from '@storybook/addon-actions';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
-import { fagsakYtelseType, fagsakStatus } from '@navikt/fp-kodeverk';
+import { fagsakStatus, fagsakYtelseType } from '@navikt/fp-kodeverk';
 import { NavAnsatt } from '@navikt/fp-types';
 import JournalpostDetaljer from './JournalpostDetaljer';
 import JournalførSubmitValue from '../../typer/ferdigstillJournalføringSubmit';
-import OppgavePrioritet from '../../kodeverk/oppgavePrioritet';
 import JournalKanal from '../../kodeverk/journalKanal';
 import Journalpost from '../../typer/journalpostTsType';
 
@@ -15,31 +14,31 @@ import messages from '../../../i18n/nb_NO.json';
 import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
 import DokumentTittel from '../../kodeverk/dokumentTittel';
 import ReserverOppgaveType from '../../typer/reserverOppgaveType';
+import OppgaveKilde from '../../kodeverk/oppgaveKilde';
 
 const withIntl = getIntlDecorator(messages);
 
 const saksbehandler = 'Z123343';
+const journalpost = 986547336994;
 
 const navAnsattDefault = {
   brukernavn: saksbehandler,
 } as NavAnsatt;
 
 const defaultOppgave = {
-  id: 600,
-  journalpostId: '12345125',
+  journalpostId: journalpost.toString(),
   aktørId: '9996923456799',
   fødselsnummer: '12048714373',
   opprettetDato: '2022-01-01',
   frist: '2022-02-01',
   ytelseType: 'FP',
   enhetId: '4108',
-  prioritet: OppgavePrioritet.NORM,
   beskrivelse: 'Inntektsmelding',
-  versjon: 1,
+  kilde: OppgaveKilde.GOSYS,
 };
 
 const detaljertJournalpostMal = {
-  journalpostId: '986547336994',
+  journalpostId: journalpost.toString(),
   tittel: DokumentTittel.BEKREFTELSE_ARBEIDSGIVER,
   kanal: JournalKanal.EESSI,
   bruker: {
@@ -144,6 +143,17 @@ VisOppgaveReservertAvAndre.args = {
 export const VisOppgaveIkkeReservert = Template.bind({});
 VisOppgaveIkkeReservert.args = {
   oppgave: defaultOppgave,
+  detaljertJournalpost: detaljertJournalpostMal,
+  submitJournalføring: action('button-click') as (data: JournalførSubmitValue) => void,
+  reserverOppgave: action('button-click') as (data: ReserverOppgaveType) => void,
+  navAnsatt: {
+    brukernavn: 'X123456',
+  } as NavAnsatt,
+};
+
+export const VisFlyttTilGosysOmKildeGosys = Template.bind({});
+VisFlyttTilGosysOmKildeGosys.args = {
+  oppgave: { ...defaultOppgave, kilde: OppgaveKilde.LOKAL },
   detaljertJournalpost: detaljertJournalpostMal,
   submitJournalføring: action('button-click') as (data: JournalførSubmitValue) => void,
   reserverOppgave: action('button-click') as (data: ReserverOppgaveType) => void,

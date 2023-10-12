@@ -26,8 +26,7 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
     (e: React.SyntheticEvent) => {
       e.stopPropagation();
       reserverOppgave({
-        oppgaveId: oppgave.id.toString(),
-        versjon: oppgave.versjon,
+        journalpostId: oppgave.journalpostId,
         reserverFor: navAnsatt.brukernavn,
       });
     },
@@ -64,7 +63,6 @@ const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgav
       <Table.DataCell>
         <DateLabel dateString={oppgave.frist} />
       </Table.DataCell>
-      <Table.DataCell>{oppgave.prioritet}</Table.DataCell>
       <Table.DataCell>{oppgave.enhetId}</Table.DataCell>
       <Table.DataCell>
         <Button size="small" variant="tertiary" disabled={false} onClick={setOppgave} type="button">
