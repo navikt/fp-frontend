@@ -1,6 +1,5 @@
 import React from 'react';
 import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
-import { action } from '@storybook/addon-actions';
 
 import {
   aktivitetStatus,
@@ -25,7 +24,6 @@ import {
   Personoversikt,
   Soknad,
 } from '@navikt/fp-types';
-import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import TilkjentYtelseProsessIndex from './TilkjentYtelseProsessIndex';
 
@@ -117,19 +115,18 @@ export default {
 };
 
 const Template: StoryFn<{
-  submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
   aksjonspunkter: Aksjonspunkt[];
   feriepengegrunnlag?: Feriepengegrunnlag;
   familiehendelse?: FamilieHendelseSamling;
-}> = ({ submitCallback, aksjonspunkter, feriepengegrunnlag, familiehendelse = defaultFamiliehendelse }) => (
+}> = ({ aksjonspunkter, feriepengegrunnlag, familiehendelse = defaultFamiliehendelse }) => (
   <TilkjentYtelseProsessIndex
+    submitCallback={vi.fn()}
+    readOnlySubmitButton
     behandling={behandling}
     alleKodeverk={alleKodeverk as any}
     aksjonspunkter={aksjonspunkter}
-    submitCallback={submitCallback}
     isReadOnly={false}
     isAksjonspunktOpen
-    readOnlySubmitButton={false}
     status=""
     vilkar={[]}
     alleMerknaderFraBeslutter={{}}
@@ -146,13 +143,11 @@ const Template: StoryFn<{
 
 export const UtenAksjonspunkt = Template.bind({});
 UtenAksjonspunkt.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [],
 };
 
-export const ÅpentAksjonspunkt = Template.bind({});
-ÅpentAksjonspunkt.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+export const UtførtAksjonspunkt = Template.bind({});
+UtførtAksjonspunkt.args = {
   aksjonspunkter: [
     {
       begrunnelse: 'Dette er en begrunnelse saksbehandler tidligere har gjort.',
@@ -164,7 +159,6 @@ export const ÅpentAksjonspunkt = Template.bind({});
 
 export const MedFeriepengegrunnlag = Template.bind({});
 MedFeriepengegrunnlag.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [
     {
       definisjon: AksjonspunktCode.VURDER_TILBAKETREKK,
@@ -189,7 +183,6 @@ MedFeriepengegrunnlag.args = {
 
 export const MedBarnFodtLengeForForstePeriode = Template.bind({});
 MedBarnFodtLengeForForstePeriode.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [],
   familiehendelse: {
     ...defaultFamiliehendelse,
