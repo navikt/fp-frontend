@@ -4,16 +4,13 @@ export type BeregningsresultatPeriodeAndel = Readonly<{
   tilSoker: number;
   uttak: {
     stonadskontoType: string;
-    periodeResultatType: string;
     gradering: boolean;
   };
   utbetalingsgrad: number;
   sisteUtbetalingsdato: string;
   aktivitetStatus: string;
-  arbeidsforholdId: string;
   eksternArbeidsforholdId: string;
   arbeidsforholdType: string;
-  stillingsprosent: number;
 }>;
 
 export type BeregningsresultatPeriode = Readonly<{
@@ -24,11 +21,8 @@ export type BeregningsresultatPeriode = Readonly<{
 }>;
 
 type BeregningsresultatDagytelse = Readonly<{
-  sokerErMor: boolean;
   opphoersdato?: string;
   perioder?: BeregningsresultatPeriode[];
-  utbetPerioder?: BeregningsresultatPeriode[];
-  skalHindreTilbaketrekk?: boolean;
 }>;
 
 export default BeregningsresultatDagytelse;

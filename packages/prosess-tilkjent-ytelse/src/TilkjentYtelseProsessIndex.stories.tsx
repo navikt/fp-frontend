@@ -25,7 +25,6 @@ import {
   Personoversikt,
   Soknad,
 } from '@navikt/fp-types';
-import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import TilkjentYtelseProsessIndex from './TilkjentYtelseProsessIndex';
 
@@ -58,7 +57,6 @@ const personoversikt = {
 } as Personoversikt;
 
 const beregningresultat = {
-  sokerErMor: true,
   perioder: [
     {
       andeler: [
@@ -118,19 +116,18 @@ export default {
 };
 
 const Template: StoryFn<{
-  submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
   aksjonspunkter: Aksjonspunkt[];
   feriepengegrunnlag?: Feriepengegrunnlag;
   familiehendelse?: FamilieHendelseSamling;
-}> = ({ submitCallback, aksjonspunkter, feriepengegrunnlag, familiehendelse = defaultFamiliehendelse }) => (
+}> = ({ aksjonspunkter, feriepengegrunnlag, familiehendelse = defaultFamiliehendelse }) => (
   <TilkjentYtelseProsessIndex
+    submitCallback={action('button-click') as (data: any) => Promise<any>}
+    readOnlySubmitButton
     behandling={behandling}
     alleKodeverk={alleKodeverk as any}
     aksjonspunkter={aksjonspunkter}
-    submitCallback={submitCallback}
     isReadOnly={false}
     isAksjonspunktOpen
-    readOnlySubmitButton={false}
     status=""
     vilkar={[]}
     alleMerknaderFraBeslutter={{}}
@@ -147,24 +144,22 @@ const Template: StoryFn<{
 
 export const UtenAksjonspunkt = Template.bind({});
 UtenAksjonspunkt.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [],
 };
 
-export const ÅpentAksjonspunkt = Template.bind({});
-ÅpentAksjonspunkt.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
+export const UtførtAksjonspunkt = Template.bind({});
+UtførtAksjonspunkt.args = {
   aksjonspunkter: [
     {
+      begrunnelse: 'Dette er en begrunnelse saksbehandler tidligere har gjort.',
       definisjon: AksjonspunktCode.VURDER_TILBAKETREKK,
-      status: aksjonspunktStatus.OPPRETTET,
+      status: aksjonspunktStatus.UTFORT,
     },
   ] as Aksjonspunkt[],
 };
 
 export const MedFeriepengegrunnlag = Template.bind({});
 MedFeriepengegrunnlag.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [
     {
       definisjon: AksjonspunktCode.VURDER_TILBAKETREKK,
@@ -189,7 +184,6 @@ MedFeriepengegrunnlag.args = {
 
 export const MedBarnFodtLengeForForstePeriode = Template.bind({});
 MedBarnFodtLengeForForstePeriode.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [],
   familiehendelse: {
     ...defaultFamiliehendelse,

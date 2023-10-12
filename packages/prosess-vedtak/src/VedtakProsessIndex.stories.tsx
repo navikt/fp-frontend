@@ -64,7 +64,6 @@ const defaultAksjonspunkter = [
 const defaultberegningresultatDagytelse = {
   antallBarn: 1,
   beregnetTilkjentYtelse: 10000,
-  sokerErMor: true,
 } as BeregningsresultatDagytelse;
 
 export default {

@@ -52,7 +52,7 @@ export type {
   default as BeregningsresultatDagytelse,
   BeregningsresultatPeriode,
   BeregningsresultatPeriodeAndel,
-} from './src/beregningsresultatFpTsType';
+} from './src/beregningsresultatDagytelseTsType';
 export type { default as Dokument } from './src/dokumentTsType';
 export type { default as FaktaArbeidsforhold } from './src/faktaArbeidsforholdTsType';
 export type {

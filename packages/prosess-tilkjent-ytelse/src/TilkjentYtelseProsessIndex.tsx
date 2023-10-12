@@ -36,13 +36,8 @@ const TilkjentYtelseProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
   fagsak,
   aksjonspunkter,
   alleKodeverk,
-  isReadOnly,
-  submitCallback,
-  readOnlySubmitButton,
   arbeidsgiverOpplysningerPerId,
   feriepengegrunnlag,
-  formData,
-  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
     <TilkjentYtelsePanel
@@ -53,13 +48,8 @@ const TilkjentYtelseProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
       fagsak={fagsak}
       aksjonspunkter={aksjonspunkter}
       alleKodeverk={alleKodeverk}
-      readOnly={isReadOnly}
-      submitCallback={submitCallback}
-      readOnlySubmitButton={readOnlySubmitButton}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       feriepengegrunnlag={feriepengegrunnlag}
-      formData={formData}
-      setFormData={setFormData}
     />
   </RawIntlProvider>
 );

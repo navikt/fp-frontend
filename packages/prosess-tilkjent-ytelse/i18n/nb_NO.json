@@ -1,8 +1,6 @@
 {
   "TilkjentYtelse.Title": "Tilkjent ytelse",
-  "TilkjentYtelse.VurderTilbaketrekk.Aksjonspunkttekst": "Pengene er utbetalt til søker, arbeidsgiver krever nå refusjon fra startdato. Vurder om beløpet som er feilutbetalt skal tilbakekreves fra søker eller om dette er en sak mellom arbeidstaker og arbeidsgiver.",
-  "TilkjentYtelse.VurderTilbaketrekk.Utfør": "Tilbakekrev fra søker",
-  "TilkjentYtelse.VurderTilbaketrekk.Hindre": "Ikke tilbakekrev fra søker",
+  "TilkjentYtelse.VurderTilbaketrekk.Beskrivelse": "Saksbehandler har vurdert om ytelsen skal endres fra direkte utbetaling til refusjon til arbeidsgiver, og tilbakekreves fra bruker, eller om det er en sak mellom arbeidstaker og arbeidsgiver.",
   "TilkjentYtelse.Stonadinfo.Stonadsdager": "Stønadsdager",
   "TilkjentYtelse.PeriodeData.Detaljer": "Detaljer for valgt periode",
   "TilkjentYtelse.PeriodeData.UkerDager": "{weeks} uker {days} dager",
@@ -41,9 +39,7 @@
   "TilkjentYtelse.Omsorgsovertakelsesdato": "Omsorgsovertakelsesdato",
   "Timeline.lukkPeriode": "Lukk periode",
 
-  "HelpText.Aksjonspunkt": "Aksjonspunkt",
   "Malform.Beskrivelse": "Foretrukket språk",
-  "Beregningsgrunnlag.Forms.Vurdering": "Vurdering",
   "Timeline.closeData": "Lukke info om periode",
   "Timeline.nextPeriod": "Neste periode",
   "Timeline.nextPeriodShort": "Neste",
