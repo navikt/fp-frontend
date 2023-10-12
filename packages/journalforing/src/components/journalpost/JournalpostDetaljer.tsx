@@ -24,6 +24,7 @@ import OppdaterMedBruker from '../../typer/oppdaterBrukerTsType';
 import JournalpostTittelForm from './innhold/JournalpostTittelForm';
 import ForhåndsvisBrukerRespons from '../../typer/forhåndsvisBrukerResponsTsType';
 import ReserverOppgaveType from '../../typer/reserverOppgaveType';
+import OppgaveKilde from '../../kodeverk/oppgaveKilde';
 
 const dokumentTittelSkalStyresAvJournalpost = (jp: Journalpost): boolean => jp.dokumenter?.length === 1;
 
@@ -81,7 +82,6 @@ const transformValues = (
   return {
     journalpostId: journalpost.journalpostId,
     enhetId: oppgave.enhetId,
-    oppgaveId: oppgave.id,
     oppdaterTitlerDto: transformTittelValues(values, journalpost),
     ...transformValuesSak(values, journalpost),
   };
@@ -99,6 +99,7 @@ type OwnProps = Readonly<{
   navAnsatt: NavAnsatt;
   reserverOppgave: (data: ReserverOppgaveType) => void;
   oppdaterValgtOppgave: (oppgave: OppgaveOversikt) => void;
+  flyttTilGosys: (data: string) => void;
 }>;
 
 /**
@@ -116,8 +117,11 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
   reserverOppgave,
   navAnsatt,
   oppdaterValgtOppgave,
+  flyttTilGosys,
 }) => {
   const skalKunneEndreSøker = !journalpost.bruker;
+  const erLokalOppgave: boolean = oppgave.kilde === OppgaveKilde.LOKAL;
+
   const saker = journalpost.fagsaker || [];
   const formMethods = useForm<JournalføringFormValues>({
     defaultValues: buildInitialValues(journalpost),
@@ -131,11 +135,10 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
   const reserverOppgaveAction = useCallback(() => {
     const reservasjonFor = !oppgave.reservertAv ? navAnsatt.brukernavn : '';
     reserverOppgave({
-      oppgaveId: oppgave.id.toString(),
-      versjon: oppgave.versjon,
+      journalpostId: oppgave.journalpostId,
       reserverFor: reservasjonFor,
     });
-    oppdaterValgtOppgave({ ...oppgave, reservertAv: reservasjonFor, versjon: oppgave.versjon + 1 });
+    oppdaterValgtOppgave({ ...oppgave, reservertAv: reservasjonFor });
   }, [reserverOppgave]);
 
   return (
@@ -255,6 +258,8 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
         journalpost={journalpost}
         avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
         erKlarForJournalføring={!skalKunneEndreSøker}
+        erLokalOppgave={erLokalOppgave}
+        flyttTilGosys={flyttTilGosys}
       />
     </Form>
   );

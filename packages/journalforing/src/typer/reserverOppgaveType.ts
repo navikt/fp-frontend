@@ -1,6 +1,5 @@
 type ReserverOppgaveType = Readonly<{
-  oppgaveId: string;
-  versjon: number;
+  journalpostId: string;
   reserverFor: string;
 }>;
 

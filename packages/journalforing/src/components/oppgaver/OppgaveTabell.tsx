@@ -55,9 +55,6 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({ oppgaver, setValgtOppgave,
               <FormattedMessage id="Oppgavetabell.Frist" />
             </Table.HeaderCell>
             <Table.HeaderCell className={styles.headerText}>
-              <FormattedMessage id="Oppgavetabell.Prioritet" />
-            </Table.HeaderCell>
-            <Table.HeaderCell className={styles.headerText}>
               <FormattedMessage id="Oppgavetabell.Enhet" />
             </Table.HeaderCell>
             <Table.HeaderCell />
@@ -68,7 +65,7 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({ oppgaver, setValgtOppgave,
             <OppgaveTabellRad
               oppgave={oppgave}
               setValgtOppgave={setValgtOppgave}
-              key={oppgave.id}
+              key={oppgave.journalpostId}
               navAnsatt={navAnsatt}
               reserverOppgave={reserverOppgave}
             />

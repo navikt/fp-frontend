@@ -24,7 +24,6 @@ export type OppdaterJournalførTittlerSubmitValue = Readonly<{
 export type JournalførSubmitValue = JournalførSakSubmitValue &
   Readonly<{
     journalpostId: string;
-    oppgaveId: number;
     enhetId: string;
     oppdaterTitlerDto?: OppdaterJournalførTittlerSubmitValue;
   }>;
