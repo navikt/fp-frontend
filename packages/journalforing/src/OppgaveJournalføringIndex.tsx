@@ -88,7 +88,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
           }
         });
     },
-    [valgtOppgave, flyttTilGosys],
+    [valgtOppgave],
   );
 
   useEffect(() => {
