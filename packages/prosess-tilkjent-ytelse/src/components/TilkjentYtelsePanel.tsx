@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Heading } from '@navikt/ds-react';
+import { BodyShort, Heading, Label } from '@navikt/ds-react';
 
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
 import {
@@ -15,16 +15,15 @@ import {
   FamilieHendelseSamling,
   Fagsak,
 } from '@navikt/fp-types';
-import { VurderTilbaketrekkAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import Tilbaketrekkpanel, { FormValues } from './tilbaketrekk/Tilbaketrekkpanel';
+import { EditedIcon, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import FeriepengerIndex from './feriepenger/FeriepengerIndex';
 import TilkjentYtelse from './TilkjentYtelse';
+import styles from './tilkjentYtelse.module.css';
 
-const finnTilbaketrekkAksjonspunkt = (alleAksjonspunkter: Aksjonspunkt[]): Aksjonspunkt | undefined =>
+const finnTilbaketrekkAksjonspunktBegrunnelse = (alleAksjonspunkter: Aksjonspunkt[]): string | undefined =>
   alleAksjonspunkter
-    ? alleAksjonspunkter.find(ap => ap.definisjon === AksjonspunktCode.VURDER_TILBAKETREKK)
+    ? alleAksjonspunkter.find(ap => ap.definisjon === AksjonspunktCode.VURDER_TILBAKETREKK)?.begrunnelse
     : undefined;
 
 interface PureOwnProps {
@@ -34,21 +33,13 @@ interface PureOwnProps {
   soknad: Soknad;
   aksjonspunkter: Aksjonspunkt[];
   alleKodeverk: AlleKodeverk;
-  readOnly: boolean;
-  submitCallback: (data: VurderTilbaketrekkAp) => Promise<void>;
-  readOnlySubmitButton: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   feriepengegrunnlag?: Feriepengegrunnlag;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
   fagsak: Fagsak;
 }
 
 const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
   beregningresultat,
-  readOnly,
-  submitCallback,
-  readOnlySubmitButton,
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
   feriepengegrunnlag,
@@ -56,11 +47,14 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
   personoversikt,
   soknad,
   aksjonspunkter,
-  formData,
-  setFormData,
   fagsak,
 }) => {
-  const vurderTilbaketrekkAP = useMemo(() => finnTilbaketrekkAksjonspunkt(aksjonspunkter), [aksjonspunkter]);
+  // Utgått aksjonspunkt, viser kun begrunnelse hvis det er løst tidligere
+  const vurderTilbaketrekkAPBegrunnelse = useMemo(
+    () => finnTilbaketrekkAksjonspunktBegrunnelse(aksjonspunkter),
+    [aksjonspunkter],
+  );
+
   const soknadMottattDato = soknad.søknadsfrist?.mottattDato ? soknad.søknadsfrist?.mottattDato : soknad.mottattDato;
   return (
     <>
@@ -90,18 +84,15 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
           <VerticalSpacer thirtyTwoPx />
         </>
       )}
-      {vurderTilbaketrekkAP && (
+      {vurderTilbaketrekkAPBegrunnelse && (
         <>
+          <Label>
+            <FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Beskrivelse" />
+          </Label>
           <VerticalSpacer sixteenPx />
-          <Tilbaketrekkpanel
-            readOnly={readOnly}
-            vurderTilbaketrekkAP={vurderTilbaketrekkAP}
-            submitCallback={submitCallback}
-            readOnlySubmitButton={readOnlySubmitButton}
-            beregningsresultat={beregningresultat}
-            formData={formData}
-            setFormData={setFormData}
-          />
+          <BodyShort className={styles.readOnlyBlokk}>
+            {vurderTilbaketrekkAPBegrunnelse} <EditedIcon />
+          </BodyShort>
         </>
       )}
     </>

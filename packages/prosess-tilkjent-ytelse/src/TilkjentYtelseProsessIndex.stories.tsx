@@ -58,7 +58,6 @@ const personoversikt = {
 } as Personoversikt;
 
 const beregningresultat = {
-  sokerErMor: true,
   perioder: [
     {
       andeler: [
@@ -156,8 +155,9 @@ export const ÅpentAksjonspunkt = Template.bind({});
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [
     {
+      begrunnelse: 'Dette er en begrunnelse saksbehandler tidligere har gjort.',
       definisjon: AksjonspunktCode.VURDER_TILBAKETREKK,
-      status: aksjonspunktStatus.OPPRETTET,
+      status: aksjonspunktStatus.UTFORT,
     },
   ] as Aksjonspunkt[],
 };

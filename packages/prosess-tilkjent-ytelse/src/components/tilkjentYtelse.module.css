@@ -5,3 +5,8 @@
 .margin {
   margin-right: 5px;
 }
+
+.readOnlyBlokk {
+  border-left: 4px solid var(--a-gray-300);
+  padding-left: 14px;
+}
