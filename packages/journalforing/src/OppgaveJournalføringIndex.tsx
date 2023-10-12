@@ -97,7 +97,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
     }
   }, [navAnsatt]);
 
-  if (status === RestApiState.NOT_STARTED || status === RestApiState.LOADING) {
+  if (status === RestApiState.NOT_STARTED || status === RestApiState.LOADING ) {
     return <LoadingPanel />;
   }
   if (!navAnsatt) {
