@@ -1,5 +1,6 @@
 import React from 'react';
 import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { action } from '@storybook/addon-actions';
 
 import {
   aktivitetStatus,
@@ -120,7 +121,7 @@ const Template: StoryFn<{
   familiehendelse?: FamilieHendelseSamling;
 }> = ({ aksjonspunkter, feriepengegrunnlag, familiehendelse = defaultFamiliehendelse }) => (
   <TilkjentYtelseProsessIndex
-    submitCallback={vi.fn()}
+    submitCallback={action('button-click') as (data: any) => Promise<any>}
     readOnlySubmitButton
     behandling={behandling}
     alleKodeverk={alleKodeverk as any}
