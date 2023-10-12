@@ -186,14 +186,14 @@ const UttakPeriodeInfo: FunctionComponent<OwnProps> = ({
                 <CheckboxField
                   name="flerbarnsdager"
                   label={intl.formatMessage({ id: 'UttakActivity.Flerbarnsdager' })}
-                  disabled={isReadOnly}
+                  readOnly={isReadOnly}
                 />
               )}
               <CheckboxField
                 key="samtidigUttak"
                 name="samtidigUttak"
                 label={intl.formatMessage({ id: 'UttakActivity.SamtidigUttak' })}
-                disabled={isReadOnly}
+                readOnly={isReadOnly}
               />
               {erSamtidigUttak && (
                 <FlexContainer>

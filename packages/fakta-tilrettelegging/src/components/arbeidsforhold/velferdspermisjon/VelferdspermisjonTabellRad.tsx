@@ -28,7 +28,7 @@ const VelferdspermisjonTabellRad: FunctionComponent<OwnProps> = ({
   arbeidsforholdIndex,
   readOnly,
 }) => {
-  const erIkkeValgt = velferdspermisjon.erGyldig === undefined;
+  const erIkkeValgt = velferdspermisjon.erGyldig === undefined || velferdspermisjon.erGyldig === null;
 
   const [open, setOpen] = useState(erIkkeValgt);
   const lukkRad = useCallback(() => setOpen(false), []);

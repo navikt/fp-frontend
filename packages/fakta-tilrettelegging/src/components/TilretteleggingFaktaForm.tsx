@@ -52,7 +52,7 @@ const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) => value
 const utledOmEnSkalVurdereVelferdspermisjoner = (alleArbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[]) =>
   alleArbeidsforhold.some(arbeidsforhold =>
     filtrerVelferdspermisjoner(arbeidsforhold.velferdspermisjoner, arbeidsforhold.tilretteleggingBehovFom).some(
-      p => p.erGyldig === undefined,
+      p => p.erGyldig === undefined || p.erGyldig === null,
     ),
   );
 

@@ -29,7 +29,7 @@ const VelferdspermisjonPanel: FunctionComponent<OwnProps> = ({
         <Label size="small">
           <FormattedMessage id="TilretteleggingForArbeidsgiverPanel.Velferdspermisjon" />
         </Label>
-        {velferdspermisjoner.some(permisjon => permisjon.erGyldig === undefined) && (
+        {velferdspermisjoner.some(permisjon => permisjon.erGyldig === undefined || permisjon.erGyldig === null) && (
           <ExclamationmarkTriangleFillIcon
             title={intl.formatMessage({ id: 'TilretteleggingForArbeidsgiverPanel.ErPermisjonGyldg' })}
             className={styles.image}
