@@ -18,6 +18,7 @@ type OwnProps = Readonly<{
   valgtOppgave?: OppgaveOversikt;
   submitJournalføring: (data: JournalførSubmitValue) => void;
   reserverOppgave: (data: ReserverOppgaveType) => void;
+  flyttTilGosys: (data: string) => void;
 }>;
 
 /**
@@ -32,6 +33,7 @@ const JournalføringIndex: FunctionComponent<OwnProps> = ({
   avbrytVisningAvJournalpost,
   submitJournalføring,
   reserverOppgave,
+  flyttTilGosys,
 }) => (
   <FlexContainer>
     {!valgtOppgave && (
@@ -51,6 +53,7 @@ const JournalføringIndex: FunctionComponent<OwnProps> = ({
         submitJournalføring={submitJournalføring}
         oppdaterValgtOppgave={setValgtOppgave}
         reserverOppgave={reserverOppgave}
+        flyttTilGosys={flyttTilGosys}
       />
     )}
   </FlexContainer>

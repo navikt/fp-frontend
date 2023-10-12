@@ -149,6 +149,7 @@ const defaultOppgaver = [
     enhetId: '4016',
     beskrivelse: 'Inntektsmelding',
     reservertAv: 'X123456',
+    kilde: OppgaveKilde.GOSYS
   },
   {
     journalpostId: '245745871',
@@ -160,6 +161,8 @@ const defaultOppgaver = [
     enhetId: '4008',
     beskrivelse: 'Inntektsmelding',
     reservertAv: 'Y654321',
+    kilde: OppgaveKilde.LOKAL
+
   },
   {
     journalpostId: '345681257',
@@ -168,6 +171,7 @@ const defaultOppgaver = [
     ytelseType: 'FP',
     enhetId: '4008',
     beskrivelse: 'Søknad',
+    kilde: OppgaveKilde.GOSYS
   },
 ];
 
@@ -184,7 +188,7 @@ ViseOppgaverIListe.args = {
       enhetId: '4016',
       beskrivelse: 'Inntektsmelding',
       reservertAv: 'Y654321',
-      kilde: OppgaveKilde.GOSYS,
+      kilde: OppgaveKilde.LOKAL,
     },
     {
       journalpostId: '245745871',

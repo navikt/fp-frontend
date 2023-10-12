@@ -99,6 +99,7 @@ type OwnProps = Readonly<{
   navAnsatt: NavAnsatt;
   reserverOppgave: (data: ReserverOppgaveType) => void;
   oppdaterValgtOppgave: (oppgave: OppgaveOversikt) => void;
+  flyttTilGosys: (data: string) => void;
 }>;
 
 /**
@@ -116,6 +117,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
   reserverOppgave,
   navAnsatt,
   oppdaterValgtOppgave,
+  flyttTilGosys,
 }) => {
   const skalKunneEndreSøker = !journalpost.bruker;
   const erLokalOppgave: boolean = oppgave.kilde === OppgaveKilde.LOKAL;
@@ -257,6 +259,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
         avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
         erKlarForJournalføring={!skalKunneEndreSøker}
         erLokalOppgave={erLokalOppgave}
+        flyttTilGosys={flyttTilGosys}
       />
     </Form>
   );

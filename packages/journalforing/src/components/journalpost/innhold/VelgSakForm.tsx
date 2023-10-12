@@ -114,6 +114,7 @@ type OwnProps = Readonly<{
   avbrytVisningAvJournalpost: () => void;
   erKlarForJournalføring: boolean;
   erLokalOppgave: boolean;
+  flyttTilGosys: (data: string) => void;
 }>;
 
 /**
@@ -125,6 +126,7 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
   avbrytVisningAvJournalpost,
   erKlarForJournalføring,
   erLokalOppgave,
+  flyttTilGosys,
 }) => {
   const intl = useIntl();
   const saksliste = journalpost?.fagsaker || TOM_ARRAY;
@@ -135,6 +137,10 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
   const skalFørePåGenerellSak = sakValg === LAG_GENERELL_SAK;
   const fetTekst = useCallback((chunks: any) => <b>{chunks}</b>, []);
   const radioOptions = useMemo(() => lagRadioOptions(saksliste, intl, fetTekst), [saksliste]);
+
+  const flyttOppgaveTilGosysAction = useCallback(() => {
+    flyttTilGosys(journalpost.journalpostId);
+  }, [flyttTilGosys]);
 
   return (
     <>
@@ -204,7 +210,7 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
           </FlexColumn>
           {erLokalOppgave && (
           <FlexColumn className={styles.colMargin}>
-            <Button size="small" variant="primary" type="button">
+            <Button size="small" variant="primary" type="button" onClick={flyttOppgaveTilGosysAction}>
               <FormattedMessage id="ValgtOppgave.Flytt.Til.Gosys" />
             </Button>
           </FlexColumn>

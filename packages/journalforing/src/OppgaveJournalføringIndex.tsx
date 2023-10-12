@@ -52,6 +52,8 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
 
   const { startRequest: reserverOppgave } = restApiHooks.useRestApiRunner(RestApiPathsKeys.RESERVER_OPPGAVE);
 
+  const { startRequest: flyttTilGosys } = restApiHooks.useRestApiRunner(RestApiPathsKeys.FLYTT_OPPGAVE_TIL_GOSYS);
+
   const reserverCallback = useCallback(
     (data: ReserverOppgaveType) => {
       reserverOppgave(data).then(() => {
@@ -76,6 +78,17 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
       });
     },
     [valgtOppgave],
+  );
+
+  const flyttOppgaveTilGosysCallback = useCallback((data: string) => {
+      flyttTilGosys({ journalpostId: data })
+        .then(() => {
+          if (navAnsatt?.brukernavn) {
+            innhentAlleOppgaver({ ident: navAnsatt.brukernavn }, true);
+          }
+        });
+    },
+    [valgtOppgave, flyttTilGosys],
   );
 
   useEffect(() => {
@@ -132,6 +145,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
           avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
           submitJournalføring={journalførCallback}
           reserverOppgave={reserverCallback}
+          flyttTilGosys={flyttOppgaveTilGosysCallback}
         />
       </JournalforingPanel>
     </RawIntlProvider>
