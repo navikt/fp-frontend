@@ -7,27 +7,31 @@ import { Permisjon } from '@navikt/fp-types';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import TilretteleggingFormValues from '../../../types/TilretteleggingFormValues';
 
 type FormValues = Record<number, Permisjon>;
 
 interface OwnProps {
   velferdspermisjon: Permisjon;
   arbeidsforholdIndex: number;
-  permisjonIndex: number;
   readOnly: boolean;
   lukkRad: () => void;
 }
 
 const VelferdspermisjonForm: FunctionComponent<OwnProps> = ({
   velferdspermisjon,
-  permisjonIndex,
   arbeidsforholdIndex,
   readOnly,
   lukkRad,
 }) => {
   const intl = useIntl();
 
-  const { setValue } = useFormContext();
+  const { setValue, getValues } = useFormContext<TilretteleggingFormValues>();
+
+  const alleVelferdpermisjoner = getValues(`arbeidsforhold.${arbeidsforholdIndex}.velferdspermisjoner`);
+  const permisjonIndex = alleVelferdpermisjoner.findIndex(
+    v => v.permisjonFom === velferdspermisjon.permisjonFom && v.permisjonTom === velferdspermisjon.permisjonTom,
+  );
 
   const formMethods = useForm<FormValues>({
     defaultValues: {

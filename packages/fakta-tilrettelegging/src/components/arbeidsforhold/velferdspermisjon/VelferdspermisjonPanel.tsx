@@ -39,13 +39,12 @@ const VelferdspermisjonPanel: FunctionComponent<OwnProps> = ({
       <VerticalSpacer sixteenPx />
       <Table size="small">
         <Table.Body>
-          {velferdspermisjoner.map((permisjon, index) => (
+          {velferdspermisjoner.map(permisjon => (
             <VelferdspermisjonTabellRad
               key={permisjon.permisjonFom}
               velferdspermisjon={permisjon}
               readOnly={readOnly}
               arbeidsforholdIndex={arbeidsforholdIndex}
-              permisjonIndex={index}
             />
           ))}
         </Table.Body>

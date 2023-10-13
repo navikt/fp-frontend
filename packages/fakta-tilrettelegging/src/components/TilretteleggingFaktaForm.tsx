@@ -15,20 +15,14 @@ import {
 } from '@navikt/fp-types';
 import { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { AksjonspunktCode } from '@navikt/fp-kodeverk';
-
 import { FaktaSubmitButtonNew } from '@navikt/fp-fakta-felles';
 import { Alert, HStack } from '@navikt/ds-react';
+
 import ArbeidsforholdFieldArray from './arbeidsforhold/ArbeidsforholdFieldArray';
 import { filtrerVelferdspermisjoner } from './arbeidsforhold/ArbeidsforholdPanel';
+import TilretteleggingFormValues from '../types/TilretteleggingFormValues';
 
 const maxLength1500 = maxLength(1500);
-
-type FormValues = {
-  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[];
-  termindato: string;
-  fødselsdato: string;
-  begrunnelse: string;
-};
 
 const sorterArbeidsforhold = (
   alleArbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[],
@@ -65,8 +59,8 @@ interface OwnProps {
   aoiArbeidsforhold: AoIArbeidsforhold[];
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (data: BekreftSvangerskapspengerAp) => Promise<void>;
-  formData: FormValues;
-  setFormData: (data: FormValues) => void;
+  formData: TilretteleggingFormValues;
+  setFormData: (data: TilretteleggingFormValues) => void;
   submittable: boolean;
   uttakArbeidTyper: KodeverkMedNavn[];
 }
@@ -97,7 +91,7 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
     [behandlingVersjon],
   );
 
-  const formMethods = useForm<FormValues>({
+  const formMethods = useForm<TilretteleggingFormValues>({
     defaultValues: formData || {
       arbeidsforhold: sorterteArbeidsforhold,
       termindato: svangerskapspengerTilrettelegging ? svangerskapspengerTilrettelegging.termindato : '',
@@ -132,7 +126,7 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
     harArbeidsforholdUtenTilrettelegging;
 
   const onSubmit = useCallback(
-    (values: FormValues) => {
+    (values: TilretteleggingFormValues) => {
       if (harFeil) {
         skalViseFeil(true);
         return Promise.resolve();

@@ -18,13 +18,11 @@ const utledStyleForRad = (open: boolean, erIkkeValgt: boolean) => {
 interface OwnProps {
   velferdspermisjon: Permisjon;
   arbeidsforholdIndex: number;
-  permisjonIndex: number;
   readOnly: boolean;
 }
 
 const VelferdspermisjonTabellRad: FunctionComponent<OwnProps> = ({
   velferdspermisjon,
-  permisjonIndex,
   arbeidsforholdIndex,
   readOnly,
 }) => {
@@ -42,7 +40,6 @@ const VelferdspermisjonTabellRad: FunctionComponent<OwnProps> = ({
       content={
         <VelferdspermisjonForm
           velferdspermisjon={velferdspermisjon}
-          permisjonIndex={permisjonIndex}
           arbeidsforholdIndex={arbeidsforholdIndex}
           readOnly={readOnly}
           lukkRad={lukkRad}
