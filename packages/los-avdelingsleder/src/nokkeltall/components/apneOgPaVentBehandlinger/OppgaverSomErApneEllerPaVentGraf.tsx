@@ -73,6 +73,8 @@ const fyllInnManglendeDatoerOgSorterEtterDato = (
   const koordinaterPaVent: (number | Date)[][] = [];
   const koordinaterIkkePaVent: (number | Date)[][] = [];
 
+  // For å unngå kollisjon med Y-akse
+  koordinaterPaVent.push([periodeStart.subtract(1, 'months').startOf('month').toDate(), 0]);
   let dato = dayjs(periodeStart);
   do {
     koordinaterPaVent.push(lagKoordinatForDato(dato, oppgaverPaVent));
