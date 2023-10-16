@@ -90,17 +90,6 @@ const valider = (
   dato: string,
   erFørsteUttaktsdato: boolean,
 ) => {
-  if (uttakPerioder.every(up => !dayjs(up.fom).isSame(dato))) {
-    return intl.formatMessage(
-      {
-        id: erFørsteUttaktsdato
-          ? 'UttakFaktaDetailForm.ErIkkeLikForsteUttaksdato'
-          : 'UttakFaktaDetailForm.ErIkkeLikFødselsdato',
-      },
-      { dato: dayjs(dato).format(DDMMYYYY_DATE_FORMAT) },
-    );
-  }
-
   if (
     uttakPerioder.filter(up => erMor || periodeSkalVurderesIftFørsteDato(up)).some(up => dayjs(up.fom).isBefore(dato))
   ) {
@@ -137,6 +126,15 @@ const validerPerioder = (
       : undefined;
   const brukFødselsdato = erMor && !!fødselsdato && dayjs(fødselsdato).isBefore(førsteUttaksdato);
   const tidligsteDato = brukFødselsdato ? fødselsdato : førsteUttaksdato;
+
+  if (uttakPerioder.every(up => !dayjs(up.fom).isSame(førsteUttaksdato))) {
+    return intl.formatMessage(
+      {
+        id: 'UttakFaktaDetailForm.ErIkkeLikForsteUttaksdato',
+      },
+      { dato: dayjs(førsteUttaksdato).format(DDMMYYYY_DATE_FORMAT) },
+    );
+  }
 
   const feilmelding = valider(uttakPerioder, erMor, intl, tidligsteDato, brukFødselsdato);
   if (feilmelding) {
