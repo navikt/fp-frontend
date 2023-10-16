@@ -18,7 +18,8 @@ interface KoordinatDatoEllerUkjent {
 }
 
 const finnGrafPeriode = (oppgaverSomErApneEllerPaVent: OppgaverSomErApneEllerPaVent[]): dayjs.Dayjs[] => {
-  let periodeStart = dayjs().subtract(9, 'M');
+  // Data er garantert å gå inntil 6 mnd tilbake og 10 mnd fram i tid. Utliggerne havner på første/siste mnd
+  let periodeStart = dayjs().subtract(6, 'M');
   let periodeSlutt = dayjs().add(1, 'M');
 
   oppgaverSomErApneEllerPaVent
@@ -33,9 +34,9 @@ const finnGrafPeriode = (oppgaverSomErApneEllerPaVent: OppgaverSomErApneEllerPaV
       }
     });
 
-  // Eksta kolonne mellom y-akse og første stolpe + Ekstra kolonne for data med ukjent dato
+  // Ekstra kolonne for data med ukjent dato
   return [
-    dayjs(periodeStart.subtract(1, 'months').startOf('month')),
+    dayjs(periodeStart.startOf('month')),
     dayjs(periodeSlutt.add(1, 'months').startOf('month')),
   ];
 };
