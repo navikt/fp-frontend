@@ -10,7 +10,6 @@ import { EventType } from '@navikt/fp-rest-api';
 
 import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
 import ErrorBoundary from './ErrorBoundary';
-import { redirectToLogin } from './paths';
 import AppConfigResolver from './AppConfigResolver';
 import Home from './components/Home';
 import Dekorator from './components/Dekorator';
@@ -142,8 +141,7 @@ const AppIndex: FunctionComponent = () => {
             />
             {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
             {forbiddenErrors.length > 0 && <ForbiddenPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
-            {unauthorizedErrors.length > 0 &&
-              (redirectToLogin() || <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />)}
+            {unauthorizedErrors.length > 0 && <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
           </>
         </AppConfigResolver>
       </ErrorBoundary>
