@@ -82,7 +82,7 @@
     "lint-staged": "14.0.1",
     "react-test-renderer": "18.2.0",
     "shelljs": "0.8.5",
-    "stylelint": "15.10.3",
+    "stylelint": "15.11.0",
     "stylelint-order": "6.0.3",
     "typescript": "5.2.2",
     "vite": "4.4.10",
