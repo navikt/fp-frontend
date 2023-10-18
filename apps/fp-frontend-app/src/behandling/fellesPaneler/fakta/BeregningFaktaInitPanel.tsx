@@ -6,6 +6,7 @@ import { AksessRettigheter, ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } 
 
 import { Vilkar, Vilkarperiode, Beregningsgrunnlag } from '@navikt/ft-types';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
+import { BeregningFaktaIndex as BeregningFaktaIndexRedesign } from '@navikt/ft-fakta-beregning-redesign';
 import { AksjonspunktCode, VilkarType } from '@navikt/fp-kodeverk';
 import { BeregningFaktaIndex, FaktaBeregningAvklaringsbehovCode } from '@navikt/ft-fakta-beregning';
 import FaktaPanelInitProps from '../../felles/typer/faktaPanelInitProps';
@@ -109,28 +110,57 @@ const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
   arbeidsgiverOpplysningerPerId,
   rettigheter,
   ...props
-}) => (
-  <FaktaDefaultInitPanel<EndepunktPanelData>
-    {...props}
-    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-    aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    overstyringApKoder={OVERSTYRING_AP_CODES}
-    faktaPanelKode={FaktaPanelCode.BEREGNING}
-    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'BeregningInfoPanel.Title' })}
-    skalPanelVisesIMeny={() => requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGSGRUNNLAG.name)}
-    renderPanel={data => (
-      <BeregningFaktaIndex
-        {...data}
-        kodeverkSamling={data.alleKodeverk}
-        vilkar={lagBGVilkar(props.behandling?.vilkår, data.beregningsgrunnlag)}
-        beregningsgrunnlag={lagFormatertBG(data.beregningsgrunnlag)}
-        submitCallback={lagModifisertCallback(data.submitCallback)}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
-        skalKunneOverstyreAktiviteter
+}) => {
+  const url = window.location.href;
+  const erProd = url.includes('fpsak.intern.nav.no');
+  if (erProd) {
+    return (
+      <FaktaDefaultInitPanel<EndepunktPanelData>
+        {...props}
+        panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
+        aksjonspunktKoder={AKSJONSPUNKT_KODER}
+        overstyringApKoder={OVERSTYRING_AP_CODES}
+        faktaPanelKode={FaktaPanelCode.BEREGNING}
+        faktaPanelMenyTekst={useIntl().formatMessage({ id: 'BeregningInfoPanel.Title' })}
+        skalPanelVisesIMeny={() => requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGSGRUNNLAG.name)}
+        renderPanel={data => (
+          <BeregningFaktaIndex
+            {...data}
+            kodeverkSamling={data.alleKodeverk}
+            vilkar={lagBGVilkar(props.behandling?.vilkår, data.beregningsgrunnlag)}
+            beregningsgrunnlag={lagFormatertBG(data.beregningsgrunnlag)}
+            submitCallback={lagModifisertCallback(data.submitCallback)}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+            erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
+            skalKunneOverstyreAktiviteter
+          />
+        )}
       />
-    )}
-  />
-);
+    );
+  }
+  return (
+    <FaktaDefaultInitPanel<EndepunktPanelData>
+      {...props}
+      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
+      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      overstyringApKoder={OVERSTYRING_AP_CODES}
+      faktaPanelKode={FaktaPanelCode.BEREGNING}
+      faktaPanelMenyTekst={useIntl().formatMessage({ id: 'BeregningInfoPanel.Title' })}
+      skalPanelVisesIMeny={() => requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGSGRUNNLAG.name)}
+      renderPanel={data => (
+        <BeregningFaktaIndexRedesign
+          {...data}
+          kodeverkSamling={data.alleKodeverk}
+          vilkar={lagBGVilkar(props.behandling?.vilkår, data.beregningsgrunnlag)}
+          beregningsgrunnlag={lagFormatertBG(data.beregningsgrunnlag)}
+          submitCallback={lagModifisertCallback(data.submitCallback)}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
+          skalKunneOverstyreAktiviteter
+        />
+      )}
+    />
+  );
+};
 
 export default BeregningFaktaInitPanel;
