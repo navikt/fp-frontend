@@ -1978,14 +1978,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/intl-numberformat@npm:8.7.2":
-  version: 8.7.2
-  resolution: "@formatjs/intl-numberformat@npm:8.7.2"
+"@formatjs/intl-numberformat@npm:8.8.0":
+  version: 8.8.0
+  resolution: "@formatjs/intl-numberformat@npm:8.8.0"
   dependencies:
     "@formatjs/ecma402-abstract": 1.17.2
     "@formatjs/intl-localematcher": 0.4.2
     tslib: ^2.4.0
-  checksum: 5d2247ebc4e64cf57feb510674874acefd171459e314345e3b1b00c4f74dbe7b15572b57419905964000093460f04f5611ad2550cac5250d8958dbd1e7dbab1d
+  checksum: 2df9781f79d756c4c9cad9c659b6ab9d11c2672d04f7325308ee479069af8c645b3fed8f2397ff452c8639c1867872d027a9d7fa96e9a67e44c9d0d06b5e21f8
   languageName: node
   linkType: hard
 
@@ -3164,7 +3164,7 @@ __metadata:
   resolution: "@navikt/fp-frontend-app@workspace:apps/fp-frontend-app"
   dependencies:
     "@formatjs/intl-datetimeformat": 6.10.3
-    "@formatjs/intl-numberformat": 8.7.2
+    "@formatjs/intl-numberformat": 8.8.0
     "@navikt/aksel-icons": 5.6.1
     "@navikt/ds-css": 5.6.1
     "@navikt/ds-css-internal": ^3.4.3
