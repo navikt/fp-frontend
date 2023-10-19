@@ -131,7 +131,7 @@
   "SaksbehandlereTabell.Saksbehandlere": "Tilgjengelige saksbehandlere",
   "SaksbehandlereTabell.IngenSaksbehandlere": "Ingen saksbehandlere lagt til",
 
-  "OppgaverPerForsteStonadsdagPanel.FordeltPaForsteStonadsdag": "Antall åpne oppgaver for førstegangsbehandlinger fordelt ukesvis på første stønadsdag - alle ytelser",
+  "OppgaverPerForsteStonadsdagPanel.FordeltPaForsteStonadsdag": "Antall åpne oppgaver for førstegangsbehandlinger fordelt på første stønadsdag - alle ytelser",
 
   "SletteSakslisteModal.SletteModal": "Ønsker du å slette behandlingskøen?",
   "SletteSakslisteModal.SletteSaksliste": "Ønsker du å slette {sakslisteNavn}?",
