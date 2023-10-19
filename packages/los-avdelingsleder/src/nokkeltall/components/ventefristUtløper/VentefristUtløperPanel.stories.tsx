@@ -24,14 +24,14 @@ export default {
 // https://github.com/storybookjs/storybook/issues/12208
 const FIVE = 5;
 
-const Template: StoryFn<{ oppgaverManueltPaVent: OppgaverManueltPaVent[] }> = ({ oppgaverManueltPaVent }) => {
+const Template: StoryFn<{ behandlingerPaVent: OppgaverManueltPaVent[] }> = ({ behandlingerPaVent }) => {
   const data = [{ key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true }];
 
   return (
     <RestApiMock data={data} requestApi={requestApi}>
       <VentefristUtløperPanel
         height={300}
-        oppgaverManueltPaVent={oppgaverManueltPaVent}
+        behandlingerPaVent={behandlingerPaVent}
         getValueFromLocalStorage={() => ''}
       />
     </RestApiMock>
