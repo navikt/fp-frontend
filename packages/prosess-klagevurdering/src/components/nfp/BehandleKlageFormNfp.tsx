@@ -37,11 +37,18 @@ const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
   kode: AksjonspunktCode.BEHANDLE_KLAGE_NFP,
 });
 
+const definertKodeverdiEllerUndefined = (kode: string | undefined): string | undefined => {
+  if (kode && kode !== '-') {
+    return kode;
+  }
+  return undefined;
+};
+
 const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): KlageFormType => ({
-  klageMedholdArsak: klageVurderingResultat ? klageVurderingResultat.klageMedholdArsak : '',
-  klageVurderingOmgjoer: klageVurderingResultat ? klageVurderingResultat.klageVurderingOmgjoer : undefined,
-  klageHjemmel: klageVurderingResultat ? klageVurderingResultat.klageHjemmel : '',
-  klageVurdering: klageVurderingResultat ? klageVurderingResultat.klageVurdering : undefined,
+  klageMedholdArsak: definertKodeverdiEllerUndefined(klageVurderingResultat?.klageMedholdArsak),
+  klageVurderingOmgjoer: definertKodeverdiEllerUndefined(klageVurderingResultat?.klageVurderingOmgjoer),
+  klageHjemmel: definertKodeverdiEllerUndefined(klageVurderingResultat?.klageHjemmel),
+  klageVurdering: definertKodeverdiEllerUndefined(klageVurderingResultat?.klageVurdering),
   begrunnelse: klageVurderingResultat ? klageVurderingResultat.begrunnelse : undefined,
   fritekstTilBrev: klageVurderingResultat ? klageVurderingResultat.fritekstTilBrev : undefined,
 });
