@@ -16,7 +16,7 @@ import VentefristUtløperPanel from "./VentefristUtløperPanel";
 const withIntl = getIntlDecorator(messages);
 
 export default {
-  title: 'los/avdelingsleder/nokkeltall/ManueltPaVentPanel',
+  title: 'los/avdelingsleder/nokkeltall/VentefristUtløperPanel',
   component: VentefristUtløperPanel,
   decorators: [withIntl],
 };
@@ -24,14 +24,14 @@ export default {
 // https://github.com/storybookjs/storybook/issues/12208
 const FIVE = 5;
 
-const Template: StoryFn<{ behandlingerPaVent: OppgaverManueltPaVent[] }> = ({ behandlingerPaVent }) => {
+const Template: StoryFn<{ oppgaverManueltPaVent: OppgaverManueltPaVent[] }> = ({ oppgaverManueltPaVent }) => {
   const data = [{ key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true }];
 
   return (
     <RestApiMock data={data} requestApi={requestApi}>
       <VentefristUtløperPanel
         height={300}
-        behandlingerPaVent={behandlingerPaVent}
+        behandlingerPaVent={oppgaverManueltPaVent}
         getValueFromLocalStorage={() => ''}
       />
     </RestApiMock>
