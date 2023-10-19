@@ -29,6 +29,8 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
+const nasjonalEnhet = '4867';
+
 const EMPTY_ARRAY: Saksbehandler[] = [];
 
 const setAvdeling = (
@@ -37,7 +39,7 @@ const setAvdeling = (
   valgtAvdelingEnhet?: string,
 ) => {
   if (avdelinger.length > 0 && !valgtAvdelingEnhet) {
-    let valgtEnhet = avdelinger[0].avdelingEnhet;
+    let valgtEnhet = avdelinger.some(a => a.avdelingEnhet === nasjonalEnhet) ? nasjonalEnhet : avdelinger[0].avdelingEnhet;
     const lagretAvdelingEnhet = getValueFromLocalStorage('avdelingEnhet');
     if (lagretAvdelingEnhet) {
       if (avdelinger.some(a => a.avdelingEnhet === lagretAvdelingEnhet)) {

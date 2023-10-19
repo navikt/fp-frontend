@@ -67,12 +67,12 @@
   "SletteSaksbehandlerModal.Ja": "Ja",
   "SletteSaksbehandlerModal.Nei": "Nei",
 
-  "FordelingAvBehandlingstypePanel.Fordeling": "Antall åpne behandlinger",
+  "FordelingAvBehandlingstypePanel.Fordeling": "Antall åpne oppgaver nå",
   "FordelingAvBehandlingstypePanel.Alle": "Alle",
   "FordelingAvBehandlingstypeGraf.TilBehandling": "Til behandling",
   "FordelingAvBehandlingstypeGraf.TilBeslutter": "Til beslutter",
 
-  "TilBehandlingPanel.TilBehandling": "Antall til behandling",
+  "TilBehandlingPanel.TilBehandling": "Antall åpne oppgaver pr dato",
   "TilBehandlingPanel.ToSisteUker": "2 siste uker",
   "TilBehandlingPanel.FireSisteUker": "4 siste uker",
   "TilBehandlingPanel.Alle": "Alle",
@@ -82,7 +82,7 @@
   "ManueltPaVentPanel.SattPaVent": "Antall behandlinger satt på vent manuelt",
   "ManueltPaVentPanel.Alle": "Alle",
 
-  "OppgaverSomErApneEllerPaVentPanel.Apne": "Status - åpne behandlinger",
+  "OppgaverSomErApneEllerPaVentPanel.Apne": "Åpne behandlinger foreldrepenger fordelt på første uttaksdag fra søknad",
   "OppgaverSomErApneEllerPaVentGraf.PaVent": "På vent",
   "OppgaverSomErApneEllerPaVentGraf.IkkePaVent": "Ikke på vent",
   "OppgaverSomErApneEllerPaVentGraf.AntallPaVent": "På vent: {antall}",
@@ -131,7 +131,7 @@
   "SaksbehandlereTabell.Saksbehandlere": "Tilgjengelige saksbehandlere",
   "SaksbehandlereTabell.IngenSaksbehandlere": "Ingen saksbehandlere lagt til",
 
-  "OppgaverPerForsteStonadsdagPanel.FordeltPaForsteStonadsdag": "Antall førstegangsbehandlinger fordelt på første stønadsdag",
+  "OppgaverPerForsteStonadsdagPanel.FordeltPaForsteStonadsdag": "Antall åpne oppgaver for førstegangsbehandlinger fordelt ukesvis på første stønadsdag - alle ytelser",
 
   "SletteSakslisteModal.SletteModal": "Ønsker du å slette behandlingskøen?",
   "SletteSakslisteModal.SletteSaksliste": "Ønsker du å slette {sakslisteNavn}?",

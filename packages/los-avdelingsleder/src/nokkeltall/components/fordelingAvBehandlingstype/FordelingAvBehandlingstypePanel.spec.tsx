@@ -9,7 +9,7 @@ describe('<FordelingAvBehandlingstypePanel>', () => {
   // TODO echarts-testing
   it.skip('skal vise graffilter', async () => {
     const { getByLabelText } = render(<Default />);
-    expect(await screen.findByText('Antall åpne behandlinger')).toBeInTheDocument();
+    expect(await screen.findByText('Antall åpne oppgaver nå')).toBeInTheDocument();
 
     expect(getByLabelText('Foreldrepenger')).not.toBeChecked();
     expect(getByLabelText('Engangsstønad')).not.toBeChecked();
