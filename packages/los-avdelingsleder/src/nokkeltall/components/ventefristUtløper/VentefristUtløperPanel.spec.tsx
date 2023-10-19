@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
-import * as stories from './VenManueltPaVentPanel.stories';
+import * as stories from './VentefristUtløperPanel.stories';
 
 const { Default } = composeStories(stories);
 
