@@ -9,7 +9,7 @@ describe('<TilBehandlingPanel>', () => {
   // TODO echarts-testing
   it.skip('skal vise graffilter', async () => {
     const { getByLabelText } = render(<Default />);
-    expect(await screen.findByText('Antall til behandling')).toBeInTheDocument();
+    expect(await screen.findByText('Antall åpne oppgaver pr dato')).toBeInTheDocument();
 
     expect((screen.getByText('2 siste uker') as HTMLOptionElement).selected).toBeTruthy();
     expect((screen.getByText('4 siste uker') as HTMLOptionElement).selected).toBeFalsy();

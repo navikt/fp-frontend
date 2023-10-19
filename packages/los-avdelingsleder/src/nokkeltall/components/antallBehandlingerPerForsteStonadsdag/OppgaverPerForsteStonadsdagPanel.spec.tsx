@@ -9,6 +9,6 @@ describe('<OppgaverPerForsteStonadsdagPanel>', () => {
   // TODO echarts-testing
   it.skip('skal rendre graf', async () => {
     render(<Default />);
-    expect(await screen.findByText('Antall førstegangsbehandlinger fordelt på første stønadsdag')).toBeInTheDocument();
+    expect(await screen.findByText('Antall åpne oppgaver for førstegangsbehandlinger fordelt ukesvis på første stønadsdag - alle ytelser')).toBeInTheDocument();
   });
 });
