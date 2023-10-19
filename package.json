@@ -79,7 +79,7 @@
     "husky": "8.0.3",
     "jsdom": "22.1.0",
     "lerna": "7.3.0",
-    "lint-staged": "14.0.1",
+    "lint-staged": "15.0.2",
     "react-test-renderer": "18.2.0",
     "shelljs": "0.8.5",
     "stylelint": "15.10.3",
