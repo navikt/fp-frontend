@@ -14,6 +14,7 @@ import FaktaDefaultInitPanel from '../../felles/fakta/FaktaDefaultInitPanel';
 import { BehandlingApiKeys, requestBehandlingApi } from '../../../data/behandlingContextApi';
 
 import '@navikt/ft-fakta-beregning/dist/style.css';
+import '@navikt/ft-fakta-beregning-redesign/dist/style.css';
 
 const mapBGKodeTilFpsakKode = (bgKode: string): string => {
   switch (bgKode) {
