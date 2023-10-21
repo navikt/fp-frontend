@@ -12,11 +12,13 @@ import TilBehandlingPanel from './tilBehandling/TilBehandlingPanel';
 import ManueltPaVentPanel from './manueltSattPaVent/ManueltPaVentPanel';
 import OppgaverPerForsteStonadsdagPanel from './antallBehandlingerPerForsteStonadsdag/OppgaverPerForsteStonadsdagPanel';
 import OppgaverSomErApneEllerPaVentPanel from './apneOgPaVentBehandlinger/OppgaverSomErApneEllerPaVentPanel';
+import VentefristUtløperPanel from "./ventefristUtløper/VentefristUtløperPanel";
 
 interface OwnProps {
   oppgaverForAvdeling: OppgaverForAvdeling[];
   oppgaverPerDato: OppgaveForDato[];
   oppgaverManueltPaVent: OppgaverManueltPaVent[];
+  behandlingerPaVent: OppgaverManueltPaVent[];
   oppgaverPerForsteStonadsdag: OppgaverForForsteStonadsdag[];
   oppgaverApneEllerPaVent: OppgaverSomErApneEllerPaVent[];
 }
@@ -28,6 +30,7 @@ const NokkeltallPanel: FunctionComponent<OwnProps> = ({
   oppgaverForAvdeling,
   oppgaverPerDato,
   oppgaverManueltPaVent,
+  behandlingerPaVent,
   oppgaverPerForsteStonadsdag,
   oppgaverApneEllerPaVent,
 }) => {
@@ -52,6 +55,12 @@ const NokkeltallPanel: FunctionComponent<OwnProps> = ({
       <ManueltPaVentPanel
         height={height}
         oppgaverManueltPaVent={oppgaverManueltPaVent}
+        getValueFromLocalStorage={getValueFromLocalStorage}
+      />
+      <VerticalSpacer twentyPx />
+      <VentefristUtløperPanel
+        height={height}
+        behandlingerPaVent={behandlingerPaVent}
         getValueFromLocalStorage={getValueFromLocalStorage}
       />
       <VerticalSpacer twentyPx />

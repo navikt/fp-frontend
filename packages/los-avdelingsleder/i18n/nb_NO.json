@@ -82,6 +82,9 @@
   "ManueltPaVentPanel.SattPaVent": "Antall behandlinger satt på vent manuelt",
   "ManueltPaVentPanel.Alle": "Alle",
 
+  "VentefristUtløperPanel.SattPaVent": "Førstegangsbehandlinger på vent fordelt på utløp av ventefrist",
+  "VentefristUtløperPanel.Alle": "Alle",
+
   "OppgaverSomErApneEllerPaVentPanel.Apne": "Åpne behandlinger foreldrepenger fordelt på første uttaksdag fra søknad",
   "OppgaverSomErApneEllerPaVentGraf.PaVent": "På vent",
   "OppgaverSomErApneEllerPaVentGraf.IkkePaVent": "Ikke på vent",

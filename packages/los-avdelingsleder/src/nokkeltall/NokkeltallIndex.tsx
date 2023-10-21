@@ -11,6 +11,7 @@ import NokkeltallPanel from './components/NokkeltallPanel';
 const EMPTY_ARRAY_AVDELING: OppgaverForAvdeling[] = [];
 const EMPTY_ARRAY_DATO: OppgaveForDato[] = [];
 const EMPTY_ARRAY_PA_VENT: OppgaverManueltPaVent[] = [];
+const EMPTY_ARRAY_VENTEFRIST: OppgaverManueltPaVent[] = [];
 const EMPTY_ARRAY_STONADSDAG: OppgaverForForsteStonadsdag[] = [];
 const EMPTY_ARRAY_APNE_ELLER_PA_VENT: OppgaverSomErApneEllerPaVent[] = [];
 
@@ -34,6 +35,10 @@ const NokkeltallIndex: FunctionComponent<OwnProps> = ({ valgtAvdelingEnhet }) =>
     RestApiPathsKeys.HENT_OPPGAVER_MANUELT_PA_VENT,
     { avdelingEnhet: valgtAvdelingEnhet },
   );
+  const { data: behandlingerPaVent = EMPTY_ARRAY_VENTEFRIST } = restApiHooks.useRestApi(
+    RestApiPathsKeys.HENT_BEHANDLINGER_FRISTUTLOP,
+    { avdelingEnhet: valgtAvdelingEnhet },
+  );
   const { data: oppgaverPerForsteStonadsdag = EMPTY_ARRAY_STONADSDAG } = restApiHooks.useRestApi(
     RestApiPathsKeys.HENT_OPPGAVER_PER_FORSTE_STONADSDAG,
     { avdelingEnhet: valgtAvdelingEnhet },
@@ -48,6 +53,7 @@ const NokkeltallIndex: FunctionComponent<OwnProps> = ({ valgtAvdelingEnhet }) =>
       oppgaverForAvdeling={oppgaverForAvdeling}
       oppgaverPerDato={oppgaverPerDato}
       oppgaverManueltPaVent={oppgaverManueltPaVent}
+      behandlingerPaVent={behandlingerPaVent}
       oppgaverPerForsteStonadsdag={oppgaverPerForsteStonadsdag}
       oppgaverApneEllerPaVent={oppgaverApneEllerPaVent}
     />
