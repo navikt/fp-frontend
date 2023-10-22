@@ -7,7 +7,7 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FagsakYtelseType, KodeverkType } from '@navikt/ft-kodeverk';
 import { KodeverkMedNavn } from '@navikt/fp-types';
 
-import OppgaverManueltPaVent from '../../../typer/oppgaverManueltPaVentTsType';
+import BehandlingVentefrist from '../../../typer/behandlingVentefristTsType';
 import StoreValuesInLocalStorage from '../../../data/StoreValuesInLocalStorage';
 import useLosKodeverk from '../../../data/useLosKodeverk';
 import VentefristUtløperGraf from './VentefristUtløperGraf';
@@ -21,7 +21,7 @@ export const ALLE_YTELSETYPER_VALGT = 'ALLE';
 
 interface OwnProps {
   height: number;
-  behandlingerPaVent: OppgaverManueltPaVent[];
+  behandlingerPaVent: BehandlingVentefrist[];
   getValueFromLocalStorage: (key: string) => string | undefined;
 }
 

@@ -77,11 +77,6 @@
   "TilBehandlingPanel.FireSisteUker": "4 siste uker",
   "TilBehandlingPanel.Alle": "Alle",
 
-  "ManueltPaVentPanel.FireSisteUker": "4 uker frem",
-  "ManueltPaVentPanel.AtteSisteUker": "8 uker frem",
-  "ManueltPaVentPanel.SattPaVent": "Antall behandlinger satt på vent manuelt",
-  "ManueltPaVentPanel.Alle": "Alle",
-
   "VentefristUtløperPanel.SattPaVent": "Førstegangsbehandlinger på vent fordelt på utløp av ventefrist",
   "VentefristUtløperPanel.Alle": "Alle",
 
