@@ -35,8 +35,11 @@ const lagDatastruktur = (koordinater: Koordinat[]): (number | Date)[][] => {
     .toDate();
 
   for (let dato = dayjs(periodeStart); dato.isSameOrBefore(periodeSlutt); dato = dato.add(1, 'days')) {
-    const funnetKoordinat = koordinater.find(k => dayjs(k.x).isSame(dato));
-    nyeKoordinater.push([dato.toDate(), funnetKoordinat ? funnetKoordinat.y : 0]);
+    const sumY = koordinater
+      .filter(k => dayjs(k.x).isSame(dato))
+      .map(k => k.y)
+      .reduce((sum, y)  => sum + y, 0);
+    nyeKoordinater.push([dato.toDate(), sumY]);
   }
 
   return nyeKoordinater;
