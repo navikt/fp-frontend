@@ -5,11 +5,10 @@ import { getValueFromLocalStorage } from '../../data/localStorageHelper';
 import OppgaverForAvdeling from '../../typer/oppgaverForAvdelingTsType';
 import OppgaveForDato from '../../typer/oppgaverForDatoTsType';
 import OppgaverForForsteStonadsdag from '../../typer/oppgaverForForsteStonadsdagTsType';
-import OppgaverManueltPaVent from '../../typer/oppgaverManueltPaVentTsType';
+import BehandlingVentefrist from '../../typer/behandlingVentefristTsType';
 import OppgaverSomErApneEllerPaVent from '../../typer/oppgaverSomErApneEllerPaVentTsType';
 import FordelingAvBehandlingstypePanel from './fordelingAvBehandlingstype/FordelingAvBehandlingstypePanel';
 import TilBehandlingPanel from './tilBehandling/TilBehandlingPanel';
-import ManueltPaVentPanel from './manueltSattPaVent/ManueltPaVentPanel';
 import OppgaverPerForsteStonadsdagPanel from './antallBehandlingerPerForsteStonadsdag/OppgaverPerForsteStonadsdagPanel';
 import OppgaverSomErApneEllerPaVentPanel from './apneOgPaVentBehandlinger/OppgaverSomErApneEllerPaVentPanel';
 import VentefristUtløperPanel from "./ventefristUtløper/VentefristUtløperPanel";
@@ -17,8 +16,7 @@ import VentefristUtløperPanel from "./ventefristUtløper/VentefristUtløperPane
 interface OwnProps {
   oppgaverForAvdeling: OppgaverForAvdeling[];
   oppgaverPerDato: OppgaveForDato[];
-  oppgaverManueltPaVent: OppgaverManueltPaVent[];
-  behandlingerPaVent: OppgaverManueltPaVent[];
+  behandlingerPaVent: BehandlingVentefrist[];
   oppgaverPerForsteStonadsdag: OppgaverForForsteStonadsdag[];
   oppgaverApneEllerPaVent: OppgaverSomErApneEllerPaVent[];
 }
@@ -29,7 +27,6 @@ interface OwnProps {
 const NokkeltallPanel: FunctionComponent<OwnProps> = ({
   oppgaverForAvdeling,
   oppgaverPerDato,
-  oppgaverManueltPaVent,
   behandlingerPaVent,
   oppgaverPerForsteStonadsdag,
   oppgaverApneEllerPaVent,
@@ -49,12 +46,6 @@ const NokkeltallPanel: FunctionComponent<OwnProps> = ({
       <FordelingAvBehandlingstypePanel
         height={height}
         oppgaverForAvdeling={oppgaverForAvdeling}
-        getValueFromLocalStorage={getValueFromLocalStorage}
-      />
-      <VerticalSpacer twentyPx />
-      <ManueltPaVentPanel
-        height={height}
-        oppgaverManueltPaVent={oppgaverManueltPaVent}
         getValueFromLocalStorage={getValueFromLocalStorage}
       />
       <VerticalSpacer twentyPx />

@@ -7,7 +7,7 @@ import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { getIntlDecorator, alleKodeverkLos } from '@navikt/fp-storybook-utils';
 
-import OppgaverManueltPaVent from '../../../typer/oppgaverManueltPaVentTsType';
+import BehandlingVentefrist from '../../../typer/behandlingVentefristTsType';
 import { RestApiGlobalStatePathsKeys, requestApi } from '../../../data/fplosRestApi';
 
 import messages from '../../../../i18n/nb_NO.json';
@@ -24,7 +24,7 @@ export default {
 // https://github.com/storybookjs/storybook/issues/12208
 const FIVE = 5;
 
-const Template: StoryFn<{ oppgaverManueltPaVent: OppgaverManueltPaVent[] }> = ({ oppgaverManueltPaVent }) => {
+const Template: StoryFn<{ oppgaverManueltPaVent: BehandlingVentefrist[] }> = ({ oppgaverManueltPaVent }) => {
   const data = [{ key: RestApiGlobalStatePathsKeys.KODEVERK_LOS.name, data: alleKodeverkLos, global: true }];
 
   return (

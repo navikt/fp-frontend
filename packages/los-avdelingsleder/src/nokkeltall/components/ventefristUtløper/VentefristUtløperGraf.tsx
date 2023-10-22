@@ -5,7 +5,7 @@ import { Panel } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { ReactECharts } from '@navikt/fp-los-felles';
 
-import OppgaverManueltPaVent from '../../../typer/oppgaverManueltPaVentTsType';
+import BehandlingVentefrist from '../../../typer/behandlingVentefristTsType';
 
 dayjs.extend(isSameOrBefore);
 
@@ -14,7 +14,7 @@ interface Koordinat {
   y: number;
 }
 
-const lagKoordinater = (oppgaverManueltPaVent: OppgaverManueltPaVent[]): Koordinat[] =>
+const lagKoordinater = (oppgaverManueltPaVent: BehandlingVentefrist[]): Koordinat[] =>
   oppgaverManueltPaVent.map(o => ({
     x: dayjs(o.behandlingFrist).startOf('day').toDate().getTime(),
     y: o.antall,
@@ -47,7 +47,7 @@ const lagDatastruktur = (koordinater: Koordinat[]): (number | Date)[][] => {
 
 interface OwnProps {
   height: number;
-  behandlingerPaVent: OppgaverManueltPaVent[];
+  behandlingerPaVent: BehandlingVentefrist[];
 }
 
 /**
