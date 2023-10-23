@@ -7,8 +7,6 @@ import { createIntl } from '@navikt/ft-utils';
 import ErOmsorgVilkaarOppfyltForm from './components/ErOmsorgVilkaarOppfyltForm';
 import messages from '../i18n/nb_NO.json';
 
-import '@navikt/fp-prosess-felles/dist/style.css';
-
 const intl = createIntl(messages);
 
 const OmsorgVilkarProsessIndex: FunctionComponent<StandardProsessPanelProps> = ({

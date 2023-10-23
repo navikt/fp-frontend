@@ -16,8 +16,6 @@ import messages from '../i18n/nb_NO.json';
 import BesteberegningPanel from './components/BesteberegningPanel';
 import { FormValues } from './components/KontrollerBesteberegningPanel';
 
-import '@navikt/fp-fakta-felles/dist/style.css';
-
 const intl = createIntl(messages);
 
 interface OwnProps {

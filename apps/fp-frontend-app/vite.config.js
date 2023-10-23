@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
-import sourcemaps from 'rollup-plugin-sourcemaps';
+// import sourcemaps from 'rollup-plugin-sourcemaps';
 
 export default defineConfig({
   plugins: [
@@ -45,12 +45,13 @@ export default defineConfig({
     },
   },
   build: {
-    rollupOptions: {
-      plugins: [sourcemaps()],
-      output: {
-        sourcemap: false,
-      },
-    },
+    sourcemap: true,
+    // rollupOptions: {
+    //   plugins: [sourcemaps()],
+    //   output: {
+    //     sourcemap: false,
+    //   },
+    // },
   },
   test: {
     environment: 'jsdom',

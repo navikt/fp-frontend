@@ -1,29 +1,22 @@
 {
   "name": "@navikt/fp-prosess-felles",
-  "version": "1.0.0",
   "license": "MIT",
   "private": true,
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "main": "index.ts",
+  "types": "index.ts",
   "scripts": {
     "tsc": "tsc --pretty",
     "eslint": "eslint \"src/**/*.ts*\" --color",
     "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
     "stylelint": "stylelint \"src/**/*.module.css\"",
     "prettier": "prettier --write src",
-    "dev": "vite build --mode development --watch",
-    "build": "vite build",
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
     "@navikt/aksel-icons": "5.7.6",
     "@navikt/ds-react": "5.7.6",
-    "@navikt/fp-kodeverk": "1.0.0",
-    "@navikt/fp-types": "1.0.0",
+    "@navikt/fp-kodeverk": "workspace:*",
+    "@navikt/fp-types": "workspace:*",
     "@navikt/ft-form-hooks": "4.2.11",
     "@navikt/ft-form-validators": "2.1.4",
     "@navikt/ft-kodeverk": "2.2.4",
@@ -36,7 +29,7 @@
   },
   "devDependencies": {
     "@navikt/ds-css": "5.7.6",
-    "@navikt/fp-storybook-utils": "1.0.0",
+    "@navikt/fp-storybook-utils": "workspace:*",
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.5.1",
     "cross-env": "7.0.3",
@@ -45,12 +38,5 @@
     "typescript": "5.2.2",
     "vite": "4.4.10",
     "vitest": "0.34.3"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js"
-    },
-    "./dist/style.css": "./dist/style.css"
   }
 }

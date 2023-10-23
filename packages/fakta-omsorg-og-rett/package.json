@@ -1,14 +1,9 @@
 {
   "name": "@navikt/fp-fakta-omsorg-og-rett",
-  "version": "1.0.0",
   "license": "MIT",
   "private": true,
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "main": "index.ts",
+  "types": "index.ts",
   "scripts": {
     "test": "vitest",
     "test:watch": "vitest --watch=true",
@@ -18,8 +13,6 @@
     "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
     "stylelint": "stylelint \"src/**/*.module.css\"",
     "prettier": "prettier --write src",
-    "dev": "vite build --mode development --watch",
-    "build": "vite build",
     "clean": "rm -rf ./dist ./node_modules ./coverage ./.storybook-static-build",
     "build-storybook": "storybook build -o .storybook-static-build",
     "storybook": "storybook dev --quiet -p 7011"
@@ -27,11 +20,11 @@
   "dependencies": {
     "@navikt/aksel-icons": "5.7.6",
     "@navikt/ds-react": "5.7.6",
-    "@navikt/fp-fakta-felles": "1.0.0",
-    "@navikt/fp-kodeverk": "1.0.0",
-    "@navikt/fp-storybook-utils": "1.0.0",
-    "@navikt/fp-types": "1.0.0",
-    "@navikt/fp-types-avklar-aksjonspunkter": "1.0.0",
+    "@navikt/fp-fakta-felles": "workspace:*",
+    "@navikt/fp-kodeverk": "workspace:*",
+    "@navikt/fp-storybook-utils": "workspace:*",
+    "@navikt/fp-types": "workspace:*",
+    "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
     "@navikt/ft-form-hooks": "4.2.11",
     "@navikt/ft-form-validators": "2.1.4",
     "@navikt/ft-kodeverk": "2.2.4",
@@ -46,8 +39,8 @@
   },
   "devDependencies": {
     "@navikt/ds-css": "5.7.6",
-    "@navikt/fp-storybook-utils": "1.0.0",
-    "@navikt/fp-utils-test": "1.0.0",
+    "@navikt/fp-storybook-utils": "workspace:*",
+    "@navikt/fp-utils-test": "workspace:*",
     "@storybook/addon-actions": "7.5.1",
     "@storybook/react": "7.5.1",
     "@storybook/react-vite": "7.5.1",
@@ -60,12 +53,5 @@
     "typescript": "5.2.2",
     "vite": "4.4.10",
     "vitest": "0.34.3"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js"
-    },
-    "./dist/style.css": "./dist/style.css"
   }
 }

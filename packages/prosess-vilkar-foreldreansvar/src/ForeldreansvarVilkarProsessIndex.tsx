@@ -7,8 +7,6 @@ import { createIntl } from '@navikt/ft-utils';
 import ErForeldreansvarVilkaarOppfyltForm from './components/ErForeldreansvarVilkaarOppfyltForm';
 import messages from '../i18n/nb_NO.json';
 
-import '@navikt/fp-prosess-felles/dist/style.css';
-
 const intl = createIntl(messages);
 
 interface OwnProps {
