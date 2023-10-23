@@ -48,7 +48,7 @@ export default defineConfig({
     rollupOptions: {
       plugins: [sourcemaps()],
       output: {
-        sourcemap: true,
+        sourcemap: false,
       },
     },
   },
