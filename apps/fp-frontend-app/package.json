@@ -150,7 +150,7 @@
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.5.1",
     "axios-mock-adapter": "1.22.0",
-    "eslint": "8.50.0",
+    "eslint": "8.52.0",
     "react-test-renderer": "18.2.0",
     "storybook": "7.4.6",
     "stylelint": "15.10.3",

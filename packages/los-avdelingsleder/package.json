@@ -58,7 +58,7 @@
     "@testing-library/user-event": "14.5.1",
     "@types/lodash.debounce": "4.0.7",
     "cross-env": "7.0.3",
-    "eslint": "8.50.0",
+    "eslint": "8.52.0",
     "storybook": "7.4.6",
     "stylelint": "15.10.3",
     "typescript": "5.2.2",
