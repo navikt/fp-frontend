@@ -1,18 +1,10 @@
 import React, { FunctionComponent, ReactElement, useState, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Label, BodyShort, Heading, Button } from '@navikt/ds-react';
+import { Label, BodyShort, Heading, Button, HStack, VStack } from '@navikt/ds-react';
 
 import { RadioGroupPanel, TextAreaField, Form } from '@navikt/ft-form-hooks';
-import {
-  AksjonspunktHelpTextTemp,
-  ArrowBox,
-  VerticalSpacer,
-  FlexContainer,
-  FlexRow,
-  FlexColumn,
-  Tooltip,
-} from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer, Tooltip } from '@navikt/ft-ui-komponenter';
 import { getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { fagsakYtelseType, AksjonspunktCode, tilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
@@ -225,96 +217,78 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
           onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
           setDataOnUnmount={setFormData}
         >
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn className={styles.col}>
-                <TextAreaField
-                  name="begrunnelse"
-                  label={intl.formatMessage({ id: 'Avregning.vurdering' })}
-                  validate={[required, minLength3, maxLength1500, hasValidText]}
-                  maxLength={1500}
-                  readOnly={readOnly}
-                />
-              </FlexColumn>
-              <FlexColumn className={styles.col}>
-                <RadioGroupPanel
-                  name="videreBehandling"
-                  label={<FormattedMessage id="Avregning.videreBehandling" />}
-                  validate={[required]}
-                  isReadOnly={readOnly}
-                  radios={[
-                    {
-                      value: tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD,
-                      label: <FormattedMessage id="Avregning.gjennomfør" />,
-                      element: (
-                        <div className={styles.varsel}>
-                          <VerticalSpacer eightPx />
-                          <ArrowBox alignOffset={20}>
-                            <FlexContainer>
-                              <FlexRow>
-                                <FlexColumn>
-                                  <BodyShort size="small" className={styles.bold}>
-                                    <FormattedMessage id="Avregning.varseltekst" />
-                                  </BodyShort>
-                                </FlexColumn>
-                                <FlexColumn>
-                                  <Tooltip content={lagHjelpetekstTooltip(isForeldrepenger)}>
-                                    <QuestionmarkDiamondIcon className={styles.helpTextImage} />
-                                  </Tooltip>
-                                </FlexColumn>
-                              </FlexRow>
-                            </FlexContainer>
-                            <VerticalSpacer eightPx />
-                            <TextAreaField
-                              name="varseltekst"
-                              label={intl.formatMessage({ id: 'Avregning.fritekst' })}
-                              validate={[required, minLength3, maxLength1500, hasValidText]}
-                              maxLength={1500}
-                              readOnly={readOnly}
-                              badges={[
-                                {
-                                  type: 'info',
-                                  titleText: getLanguageFromSprakkode(sprakkode),
-                                },
-                              ]}
-                            />
-                            {!readOnly && (
-                              <>
-                                <VerticalSpacer fourPx />
-                                <a href="" onClick={previewMessage} className={styles.previewLink}>
-                                  <FormattedMessage id="Messages.PreviewText" />
-                                </a>
-                              </>
-                            )}
-                          </ArrowBox>
-                        </div>
-                      ),
-                    },
-                    {
-                      value: `${tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD}${IKKE_SEND}`,
-                      label: <FormattedMessage id="Avregning.OpprettMenIkkeSendVarsel" />,
-                    },
-                    {
-                      value: tilbakekrevingVidereBehandling.TILBAKEKR_IGNORER,
-                      label: <FormattedMessage id="Avregning.avvent" />,
-                    },
-                  ]}
-                />
-              </FlexColumn>
-            </FlexRow>
-            <FlexRow>
-              <FlexColumn>
-                <Button
-                  size="small"
-                  variant="primary"
-                  disabled={!formState.isDirty || formState.isSubmitting || readOnly}
-                  loading={formState.isSubmitting}
-                >
-                  <FormattedMessage id="SubmitButton.ConfirmInformation" />
-                </Button>
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
+          <VStack gap="10" align="start">
+            <TextAreaField
+              name="begrunnelse"
+              label={intl.formatMessage({ id: 'Avregning.vurdering' })}
+              validate={[required, minLength3, maxLength1500, hasValidText]}
+              maxLength={1500}
+              readOnly={readOnly}
+            />
+            <RadioGroupPanel
+              name="videreBehandling"
+              label={<FormattedMessage id="Avregning.videreBehandling" />}
+              validate={[required]}
+              isReadOnly={readOnly}
+              radios={[
+                {
+                  value: tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD,
+                  label: <FormattedMessage id="Avregning.gjennomfør" />,
+                  element: (
+                    <div className={styles.varsel}>
+                      <VerticalSpacer eightPx />
+                      <ArrowBox alignOffset={20}>
+                        <VStack gap="4">
+                          <HStack gap="2">
+                            <BodyShort size="small" className={styles.bold}>
+                              <FormattedMessage id="Avregning.varseltekst" />
+                            </BodyShort>
+                            <Tooltip content={lagHjelpetekstTooltip(isForeldrepenger)}>
+                              <QuestionmarkDiamondIcon className={styles.helpTextImage} />
+                            </Tooltip>
+                          </HStack>
+                          <TextAreaField
+                            name="varseltekst"
+                            label={intl.formatMessage({ id: 'Avregning.fritekst' })}
+                            validate={[required, minLength3, maxLength1500, hasValidText]}
+                            maxLength={1500}
+                            readOnly={readOnly}
+                            badges={[
+                              {
+                                type: 'info',
+                                titleText: getLanguageFromSprakkode(sprakkode),
+                              },
+                            ]}
+                          />
+                          {!readOnly && (
+                            <a href="" onClick={previewMessage} className={styles.previewLink}>
+                              <FormattedMessage id="Messages.PreviewText" />
+                            </a>
+                          )}
+                        </VStack>
+                      </ArrowBox>
+                    </div>
+                  ),
+                },
+                {
+                  value: `${tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD}${IKKE_SEND}`,
+                  label: <FormattedMessage id="Avregning.OpprettMenIkkeSendVarsel" />,
+                },
+                {
+                  value: tilbakekrevingVidereBehandling.TILBAKEKR_IGNORER,
+                  label: <FormattedMessage id="Avregning.avvent" />,
+                },
+              ]}
+            />
+            <Button
+              size="small"
+              variant="primary"
+              disabled={!formState.isDirty || formState.isSubmitting || readOnly}
+              loading={formState.isSubmitting}
+            >
+              <FormattedMessage id="SubmitButton.ConfirmInformation" />
+            </Button>
+          </VStack>
         </Form>
       )}
     </>
