@@ -11,7 +11,7 @@ const {
 } = composeStories(stories);
 
 describe('<FormkravProsessIndex>', () => {
-  it.skip('skal fylle ut og bekrefte skjema for NFP', async () => {
+  it('skal fylle ut og bekrefte skjema for NFP', async () => {
     const lagre = vi.fn();
 
     const utils = render(<FormkravPanelForAksjonspunktNfp submitCallback={lagre} />);
@@ -30,6 +30,8 @@ describe('<FormkravProsessIndex>', () => {
     await userEvent.click(screen.getAllByText('Ja')[2]);
     await userEvent.click(screen.getAllByText('Ja')[3]);
 
+    expect(screen.queryByText('Fritekst')).not.toBeInTheDocument();
+
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
@@ -40,13 +42,52 @@ describe('<FormkravProsessIndex>', () => {
       erKonkret: true,
       erSignert: true,
       erTilbakekreving: false,
+      fritekstTilBrev: undefined,
       kode: '5082',
-      tilbakekrevingInfo: null,
+      tilbakekrevingInfo: undefined,
       vedtakBehandlingUuid: '1',
     });
   });
 
-  it.skip('skal vise informasjon for KA når ikke påklagd', async () => {
+  it('skal kunne fylle ut fritekst og mellomlagre når en velger nei på et spørsmål', async () => {
+    const mellomlagre = vi.fn();
+
+    const utils = render(<FormkravPanelForAksjonspunktNfp lagreFormkravVurdering={mellomlagre} />);
+
+    expect(await screen.findByText('Vurder formkrav')).toBeInTheDocument();
+
+    await userEvent.selectOptions(utils.getByLabelText('Vedtaket som er påklagd'), '1');
+
+    await userEvent.click(screen.getAllByText('Nei')[0]);
+    await userEvent.click(screen.getAllByText('Ja')[1]);
+    await userEvent.click(screen.getAllByText('Ja')[2]);
+    await userEvent.click(screen.getAllByText('Ja')[3]);
+
+    const vurderingInput = utils.getByLabelText('Vurdering');
+    await userEvent.type(vurderingInput, 'Dette er en vurdering');
+
+    const fritekstInput = utils.getByLabelText('Fritekst');
+    await userEvent.type(fritekstInput, 'Dette er en fritekst');
+
+    await userEvent.click(screen.getByText('Lagre'));
+
+    await waitFor(() => expect(mellomlagre).toHaveBeenCalledTimes(1));
+    expect(mellomlagre).toHaveBeenNthCalledWith(1, {
+      begrunnelse: 'Dette er en vurdering',
+      behandlingUuid: '1',
+      erFristOverholdt: true,
+      erKlagerPart: false,
+      erKonkret: true,
+      erSignert: true,
+      erTilbakekreving: false,
+      fritekstTilBrev: 'Dette er en fritekst',
+      kode: '5082',
+      klageTilbakekreving: undefined,
+      paKlagdBehandlingUuid: '1',
+    });
+  });
+
+  it('skal vise informasjon for KA når ikke påklagd', async () => {
     render(<FormkravPanelForAksjonspunktKaIkkePåklagd />);
 
     expect(await screen.findByText('Vurder formkrav')).toBeInTheDocument();
@@ -68,7 +109,7 @@ describe('<FormkravProsessIndex>', () => {
     expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
   });
 
-  it.skip('skal vise informasjon for KA når påklagd', async () => {
+  it('skal vise informasjon for KA når påklagd', async () => {
     render(<FormkravPanelForAksjonspunktKaValgtBehandling />);
 
     expect(await screen.findByText('Vurder formkrav')).toBeInTheDocument();

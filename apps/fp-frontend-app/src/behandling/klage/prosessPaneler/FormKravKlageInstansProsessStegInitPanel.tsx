@@ -10,7 +10,7 @@ import { AksjonspunktCode, isKlageAvvist } from '@navikt/fp-kodeverk';
 
 import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
 import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
-import { BehandlingApiKeys } from '../../../data/behandlingContextApi';
+import { BehandlingApiKeys, restBehandlingApiHooks } from '../../../data/behandlingContextApi';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_FORMKRAV_NK];
 
@@ -45,6 +45,10 @@ const FormKravKlageInstansProsessStegInitPanel: FunctionComponent<OwnProps & Pro
     [alleBehandlinger],
   );
 
+  const { startRequest: lagreFormkravVurdering } = restBehandlingApiHooks.useRestApiRunner(
+    BehandlingApiKeys.SAVE_FORMKRAV_VURDERING,
+  );
+
   return (
     <ProsessDefaultInitPanel<EndepunktPanelData>
       {...props}
@@ -53,7 +57,13 @@ const FormKravKlageInstansProsessStegInitPanel: FunctionComponent<OwnProps & Pro
       prosessPanelKode={ProsessStegCode.FORMKRAV_KLAGE_NAV_KLAGEINSTANS}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.FormkravKlageKA' })}
       skalPanelVisesIMeny={() => true}
-      renderPanel={data => <FormkravProsessIndex avsluttedeBehandlinger={avsluttedeBehandlinger} {...data} />}
+      renderPanel={data => (
+        <FormkravProsessIndex
+          avsluttedeBehandlinger={avsluttedeBehandlinger}
+          lagreFormkravVurdering={lagreFormkravVurdering}
+          {...data}
+        />
+      )}
     />
   );
 };
