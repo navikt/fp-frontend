@@ -1,21 +1,14 @@
 {
   "name": "@navikt/fp-storybook-utils",
-  "version": "1.0.0",
   "license": "MIT",
   "private": true,
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "main": "index.ts",
+  "types": "index.ts",
   "scripts": {
     "tsc": "tsc --pretty",
     "eslint": "eslint \"decorators/**/*.ts*\" --color",
     "eslint:fix": "eslint --fix \"decorators/**/*.ts*\" --color",
     "prettier": "prettier --write decorators",
-    "dev": "vite build --mode development --watch",
-    "build": "vite build",
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
@@ -30,11 +23,5 @@
     "eslint": "8.52.0",
     "typescript": "5.2.2",
     "vite": "4.4.10"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js"
-    }
   }
 }

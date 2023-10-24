@@ -19,8 +19,6 @@ import VedtakForm, { ForhandsvisData } from './components/forstegang/VedtakForm'
 import VedtakRevurderingForm from './components/revurdering/VedtakRevurderingForm';
 import messages from '../i18n/nb_NO.json';
 
-import '@navikt/fp-prosess-felles/dist/style.css';
-
 const intl = createIntl(messages);
 
 const BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT = [

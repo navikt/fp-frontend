@@ -11,8 +11,6 @@ import BehandleKlageFormNfp from './components/nfp/BehandleKlageFormNfp';
 import { BrevData } from './components/nfp/PreviewKlageLink';
 import { TransformedValues } from './components/nfp/TempsaveKlageButton';
 
-import '@navikt/fp-prosess-felles/dist/style.css';
-
 const intl = createIntl(messages);
 
 interface OwnProps {

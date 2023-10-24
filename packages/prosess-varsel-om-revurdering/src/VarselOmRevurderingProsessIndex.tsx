@@ -7,10 +7,6 @@ import { createIntl } from '@navikt/ft-utils';
 import VarselOmRevurderingForm, { ForhandsvisData } from './components/VarselOmRevurderingForm';
 import messages from '../i18n/nb_NO.json';
 
-import '@navikt/fp-prosess-felles/dist/style.css';
-import '@navikt/fp-modal-sett-pa-vent/dist/style.css';
-import '@navikt/fp-prosess-fakta-fodsel-sammenligning/dist/style.css';
-
 const intl = createIntl(messages);
 
 interface OwnProps {

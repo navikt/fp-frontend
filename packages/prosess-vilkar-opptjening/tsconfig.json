@@ -1,5 +1,5 @@
 {
   "include": ["./", "../../@types/externals.d.ts"],
-  "exclude": ["node_modules", "**.spec.ts", "vite.config.js", "dist"],
+  "exclude": ["node_modules", "**.spec.ts"],
   "extends": "../../tsconfig.json"
 }

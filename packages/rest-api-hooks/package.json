@@ -1,14 +1,9 @@
 {
   "name": "@navikt/fp-rest-api-hooks",
-  "version": "1.0.0",
   "license": "MIT",
   "private": true,
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "main": "index.ts",
+  "types": "index.ts",
   "scripts": {
     "test": "vitest",
     "test:watch": "vitest --watch=true",
@@ -17,12 +12,10 @@
     "eslint": "eslint \"src/**/*.ts*\" --color",
     "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
     "prettier": "prettier --write src",
-    "dev": "vite build --mode development --watch",
-    "build": "vite build",
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
-    "@navikt/fp-rest-api": "1.0.0",
+    "@navikt/fp-rest-api": "workspace:*",
     "react": "18.2.0"
   },
   "devDependencies": {
@@ -32,11 +25,5 @@
     "typescript": "5.2.2",
     "vite": "4.4.10",
     "vitest": "0.34.3"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js"
-    }
   }
 }
