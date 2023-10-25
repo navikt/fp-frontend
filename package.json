@@ -91,19 +91,6 @@
     "vite-plugin-html": "3.2.0",
     "vitest": "0.34.3"
   },
-  "resolutions": {
-    "decode-uri-component": "0.2.1",
-    "esquery": "1.4.0",
-    "glob-parent": "5.1.2",
-    "got": "11.8.5",
-    "json5": "2.2.3",
-    "parse-url": "8.1.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-test-renderer": "18.2.0",
-    "trim": "0.0.3",
-    "trim-newlines": "3.0.1"
-  },
   "lint-staged": {
     "apps/**/*.{ts,tsx,js,jsx, css}": "prettier --write",
     "packages/**/*.{ts,tsx,js,jsx, css}": "prettier --write"
