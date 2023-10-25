@@ -112,6 +112,7 @@ const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
   rettigheter,
   ...props
 }) => {
+  const intl = useIntl();
   const url = window.location.href;
   const erProd = url.includes('fpsak.intern.nav.no');
   if (erProd) {
@@ -122,7 +123,7 @@ const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
         aksjonspunktKoder={AKSJONSPUNKT_KODER}
         overstyringApKoder={OVERSTYRING_AP_CODES}
         faktaPanelKode={FaktaPanelCode.BEREGNING}
-        faktaPanelMenyTekst={useIntl().formatMessage({ id: 'BeregningInfoPanel.Title' })}
+        faktaPanelMenyTekst={intl.formatMessage({ id: 'BeregningInfoPanel.Title' })}
         skalPanelVisesIMeny={() => requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGSGRUNNLAG.name)}
         renderPanel={data => (
           <BeregningFaktaIndex
@@ -146,7 +147,7 @@ const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       overstyringApKoder={OVERSTYRING_AP_CODES}
       faktaPanelKode={FaktaPanelCode.BEREGNING}
-      faktaPanelMenyTekst={useIntl().formatMessage({ id: 'BeregningInfoPanel.Title' })}
+      faktaPanelMenyTekst={intl.formatMessage({ id: 'BeregningInfoPanel.Title' })}
       skalPanelVisesIMeny={() => requestBehandlingApi.hasPath(BehandlingApiKeys.BEREGNINGSGRUNNLAG.name)}
       renderPanel={data => (
         <BeregningFaktaIndexRedesign
