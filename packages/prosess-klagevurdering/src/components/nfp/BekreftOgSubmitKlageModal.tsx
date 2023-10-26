@@ -5,16 +5,6 @@ import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-reac
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 
-export type TransformedValues = {
-  kode: string;
-  klageMedholdArsak?: string;
-  klageVurderingOmgjoer?: string;
-  klageHjemmel?: string;
-  fritekstTilBrev: string;
-  begrunnelse: string;
-  klageVurdering: string;
-};
-
 interface OwnProps {
   erModalÅpen: boolean;
   lukkModal: () => void;
@@ -26,7 +16,7 @@ interface OwnProps {
   valgtHjemmel?: string;
 }
 
-const BekreftOgSubmitModal: FunctionComponent<OwnProps> = ({
+const BekreftOgSubmitKlageModal: FunctionComponent<OwnProps> = ({
   erModalÅpen,
   lukkModal,
   isSubmittable,
@@ -91,4 +81,4 @@ const BekreftOgSubmitModal: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default BekreftOgSubmitModal;
+export default BekreftOgSubmitKlageModal;

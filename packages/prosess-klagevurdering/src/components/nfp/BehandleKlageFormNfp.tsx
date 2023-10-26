@@ -24,7 +24,7 @@ import PreviewKlageLink, { BrevData } from './PreviewKlageLink';
 import TempsaveKlageButton, { TransformedValues } from './TempsaveKlageButton';
 
 import styles from './behandleKlageFormNfp.module.css';
-import BekreftOgSubmitModal from './BekreftOgSubmitModal';
+import BekreftOgSubmitKlageModal from './BekreftOgSubmitKlageModal';
 
 const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
   klageMedholdArsak:
@@ -144,7 +144,7 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
                   <Button variant="primary" type="button" size="small" onClick={() => åpneModal()} disabled={readOnly}>
                     <FormattedMessage id="Klage.Behandle.Bekreft" />
                   </Button>
-                  <BekreftOgSubmitModal
+                  <BekreftOgSubmitKlageModal
                     erModalÅpen={visSubmitModal}
                     lukkModal={lukkModal}
                     opprettholdVedtak={
