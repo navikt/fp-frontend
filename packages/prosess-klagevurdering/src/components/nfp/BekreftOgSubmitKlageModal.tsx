@@ -12,7 +12,6 @@ interface OwnProps {
   isSubmitting: boolean;
   isDirty: boolean;
   readOnly: boolean;
-  opprettholdVedtak?: boolean;
   valgtHjemmel?: string;
 }
 
@@ -23,7 +22,6 @@ const BekreftOgSubmitKlageModal: FunctionComponent<OwnProps> = ({
   isSubmitting,
   isDirty,
   readOnly,
-  opprettholdVedtak,
   valgtHjemmel,
 }) => {
   const intl = useIntl();
@@ -49,11 +47,9 @@ const BekreftOgSubmitKlageModal: FunctionComponent<OwnProps> = ({
               <FormattedMessage id="Klage.Modal.Valg" />
             </BodyShort>
             <VerticalSpacer eightPx />
-            {opprettholdVedtak !== undefined && (
-              <BodyShort>
-                <FormattedMessage id={opprettholdVedtak ? 'Klage.Modal.Oppretthold' : 'Klage.Modal.Omgjør'} />
-              </BodyShort>
-            )}
+            <BodyShort>
+              <FormattedMessage id="Klage.Modal.Oppretthold" />
+            </BodyShort>
             <VerticalSpacer fourPx />
             {valgtHjemmel && (
               <BodyShort>

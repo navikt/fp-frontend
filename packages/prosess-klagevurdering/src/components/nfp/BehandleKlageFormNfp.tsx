@@ -147,11 +147,6 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
                   <BekreftOgSubmitKlageModal
                     erModalÅpen={visSubmitModal}
                     lukkModal={lukkModal}
-                    opprettholdVedtak={
-                      formValues.klageVurdering === undefined
-                        ? undefined
-                        : formValues.klageVurdering === klageVurderingType.STADFESTE_YTELSESVEDTAK
-                    }
                     valgtHjemmel={hjemmlerMedNavn.find(hj => hj.kode === formValues.klageHjemmel)?.navn}
                     readOnly={readOnly}
                     isSubmittable={!readOnlySubmitButton}
