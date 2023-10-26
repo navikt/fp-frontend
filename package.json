@@ -89,7 +89,7 @@
     "vite-plugin-dts": "3.6.0",
     "vite-plugin-externalize-deps": "0.7.0",
     "vite-plugin-html": "3.2.0",
-    "vitest": "0.34.3"
+    "vitest": "0.34.6"
   },
   "resolutions": {
     "@babel/traverse": "7.23.2"
