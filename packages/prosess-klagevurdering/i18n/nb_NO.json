@@ -12,7 +12,7 @@
   "Klage.ResolveKlage.NullifyVedtak": "Opphev og hjemsend vedtaket",
   "Klage.Behandle.Bekreft": "Bekreft og fortsett",
   "Klage.Modal.Overskrift": "Oppsummering",
-  "Klage.Modal.SendTilKlageinstans": "Du er i ferdig med å sende klagen over til NAV Klageinstans",
+  "Klage.Modal.SendTilKlageinstans": "Du vil nå sende klagen over til NAV Klageinstans",
   "Klage.Modal.Oppretthold": "Oppretthold vedtaket",
   "Klage.Modal.Omgjør": "Omgjør vedtaket",
   "Klage.Modal.Hjemmel": "Lovhjemmel {hjemmel}",

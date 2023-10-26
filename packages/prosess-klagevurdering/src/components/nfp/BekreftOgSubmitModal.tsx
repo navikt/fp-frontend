@@ -59,16 +59,17 @@ const BekreftOgSubmitModal: FunctionComponent<OwnProps> = ({
               <BodyShort>
                 <FormattedMessage id="Klage.Modal.Valg" />
               </BodyShort>
+              <VerticalSpacer eightPx />
               {opprettholdVedtak !== undefined && (
-                <Label>
+                <BodyShort>
                   <FormattedMessage id={opprettholdVedtak ? 'Klage.Modal.Oppretthold' : 'Klage.Modal.Omgjør'} />
-                </Label>
+                </BodyShort>
               )}
               <VerticalSpacer fourPx />
               {valgtHjemmel && (
-                <Label>
+                <BodyShort>
                   <FormattedMessage id="Klage.Modal.Hjemmel" values={{ hjemmel: valgtHjemmel }} />
-                </Label>
+                </BodyShort>
               )}
               <VerticalSpacer fourPx />
             </div>
