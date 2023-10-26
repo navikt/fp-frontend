@@ -13,7 +13,7 @@ import {
   FlexRow,
   VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import { ProsessStegBegrunnelseTextFieldNew } from '@navikt/fp-prosess-felles';
+import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import { KlageVurdering, AlleKodeverk, KlageVurderingResultat, KodeverkMedNavn } from '@navikt/fp-types';
 import { KlageVurderingResultatAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -107,7 +107,7 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
     setVisSubmitModal(false);
   }, []);
 
-  const valider = useCallback(() => {
+  const åpneModal = useCallback(() => {
     setVisSubmitModal(true);
   }, []);
 
@@ -139,20 +139,30 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
         <FlexContainer>
           <FlexRow spaceBetween>
             <FlexColumn>
-              <Button variant="primary" type="button" size="small" onClick={() => valider()} disabled={readOnly}>
-                <FormattedMessage id="Klage.Behandle.Bekreft" />
-              </Button>
-              {visSubmitModal && (
-                <BekreftOgSubmitModal
-                  erModalÅpen={visSubmitModal}
-                  lukkModal={lukkModal}
-                  opprettholdVedtak={
-                    formValues.klageVurdering === undefined
-                      ? undefined
-                      : formValues.klageVurdering === klageVurderingType.STADFESTE_YTELSESVEDTAK
-                  }
-                  valgtHjemmel={hjemmlerMedNavn.find(hj => hj.kode === formValues.klageHjemmel)?.navn}
-                  readOnly={readOnly}
+              {formValues.klageVurdering === klageVurderingType.STADFESTE_YTELSESVEDTAK && (
+                <>
+                  <Button variant="primary" type="button" size="small" onClick={() => åpneModal()} disabled={readOnly}>
+                    <FormattedMessage id="Klage.Behandle.Bekreft" />
+                  </Button>
+                  <BekreftOgSubmitModal
+                    erModalÅpen={visSubmitModal}
+                    lukkModal={lukkModal}
+                    opprettholdVedtak={
+                      formValues.klageVurdering === undefined
+                        ? undefined
+                        : formValues.klageVurdering === klageVurderingType.STADFESTE_YTELSESVEDTAK
+                    }
+                    valgtHjemmel={hjemmlerMedNavn.find(hj => hj.kode === formValues.klageHjemmel)?.navn}
+                    readOnly={readOnly}
+                    isSubmittable={!readOnlySubmitButton}
+                    isSubmitting={formMethods.formState.isSubmitting}
+                    isDirty={formMethods.formState.isDirty}
+                  />
+                </>
+              )}
+              {formValues.klageVurdering !== klageVurderingType.STADFESTE_YTELSESVEDTAK && (
+                <ProsessStegSubmitButtonNew
+                  isReadOnly={readOnly}
                   isSubmittable={!readOnlySubmitButton}
                   isSubmitting={formMethods.formState.isSubmitting}
                   isDirty={formMethods.formState.isDirty}

@@ -37,61 +37,58 @@ const BekreftOgSubmitModal: FunctionComponent<OwnProps> = ({
   valgtHjemmel,
 }) => {
   const intl = useIntl();
-  if (erModalÅpen) {
-    return (
-      <Modal
-        width="500px"
-        open={erModalÅpen}
-        aria-label={intl.formatMessage({ id: 'Klage.Modal.Overskrift' })}
-        onClose={lukkModal}
-      >
-        <Modal.Body>
-          <VStack gap="3">
-            <div>
-              <Label size="medium">
-                <FormattedMessage id="Klage.Modal.Overskrift" />
-              </Label>
-              <VerticalSpacer fourPx />
+  return (
+    <Modal
+      width="500px"
+      open={erModalÅpen}
+      aria-label={intl.formatMessage({ id: 'Klage.Modal.Overskrift' })}
+      onClose={lukkModal}
+    >
+      <Modal.Body>
+        <VStack gap="3">
+          <div>
+            <Label size="medium">
+              <FormattedMessage id="Klage.Modal.Overskrift" />
+            </Label>
+            <VerticalSpacer fourPx />
+            <BodyShort>
+              <FormattedMessage id="Klage.Modal.SendTilKlageinstans" />
+            </BodyShort>
+            <VerticalSpacer sixteenPx />
+            <BodyShort>
+              <FormattedMessage id="Klage.Modal.Valg" />
+            </BodyShort>
+            <VerticalSpacer eightPx />
+            {opprettholdVedtak !== undefined && (
               <BodyShort>
-                <FormattedMessage id="Klage.Modal.SendTilKlageinstans" />
+                <FormattedMessage id={opprettholdVedtak ? 'Klage.Modal.Oppretthold' : 'Klage.Modal.Omgjør'} />
               </BodyShort>
-              <VerticalSpacer sixteenPx />
+            )}
+            <VerticalSpacer fourPx />
+            {valgtHjemmel && (
               <BodyShort>
-                <FormattedMessage id="Klage.Modal.Valg" />
+                <FormattedMessage id="Klage.Modal.Hjemmel" values={{ hjemmel: valgtHjemmel }} />
               </BodyShort>
-              <VerticalSpacer eightPx />
-              {opprettholdVedtak !== undefined && (
-                <BodyShort>
-                  <FormattedMessage id={opprettholdVedtak ? 'Klage.Modal.Oppretthold' : 'Klage.Modal.Omgjør'} />
-                </BodyShort>
-              )}
-              <VerticalSpacer fourPx />
-              {valgtHjemmel && (
-                <BodyShort>
-                  <FormattedMessage id="Klage.Modal.Hjemmel" values={{ hjemmel: valgtHjemmel }} />
-                </BodyShort>
-              )}
-              <VerticalSpacer fourPx />
-            </div>
-            <div>
-              <HStack gap="2">
-                <ProsessStegSubmitButtonNew
-                  isReadOnly={readOnly}
-                  isSubmittable={isSubmittable}
-                  isSubmitting={isSubmitting}
-                  isDirty={isDirty}
-                />
-                <Button size="small" variant="primary" onClick={lukkModal} autoFocus type="button">
-                  <FormattedMessage id="Klage.Modal.Avbryt" />
-                </Button>
-              </HStack>
-            </div>
-          </VStack>
-        </Modal.Body>
-      </Modal>
-    );
-  }
-  return null;
+            )}
+            <VerticalSpacer fourPx />
+          </div>
+          <div>
+            <HStack gap="2">
+              <ProsessStegSubmitButtonNew
+                isReadOnly={readOnly}
+                isSubmittable={isSubmittable}
+                isSubmitting={isSubmitting}
+                isDirty={isDirty}
+              />
+              <Button size="small" variant="primary" onClick={lukkModal} autoFocus type="button">
+                <FormattedMessage id="Klage.Modal.Avbryt" />
+              </Button>
+            </HStack>
+          </div>
+        </VStack>
+      </Modal.Body>
+    </Modal>
+  );
 };
 
 export default BekreftOgSubmitModal;
