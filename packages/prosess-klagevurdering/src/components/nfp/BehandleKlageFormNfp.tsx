@@ -1,7 +1,7 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { FunctionComponent, useCallback, useMemo, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Heading } from '@navikt/ds-react';
+import { Heading, Button } from '@navikt/ds-react';
 
 import { Form } from '@navikt/ft-form-hooks';
 
@@ -13,8 +13,8 @@ import {
   FlexRow,
   VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import { KlageVurdering, AlleKodeverk, KlageVurderingResultat } from '@navikt/fp-types';
+import { ProsessStegBegrunnelseTextFieldNew } from '@navikt/fp-prosess-felles';
+import { KlageVurdering, AlleKodeverk, KlageVurderingResultat, KodeverkMedNavn } from '@navikt/fp-types';
 import { KlageVurderingResultatAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import KlageFormType from '../../types/klageFormType';
@@ -24,6 +24,7 @@ import PreviewKlageLink, { BrevData } from './PreviewKlageLink';
 import TempsaveKlageButton, { TransformedValues } from './TempsaveKlageButton';
 
 import styles from './behandleKlageFormNfp.module.css';
+import BekreftOgSubmitModal from './BekreftOgSubmitModal';
 
 const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
   klageMedholdArsak:
@@ -43,6 +44,10 @@ const definertKodeverdiEllerUndefined = (kode: string | undefined): string | und
   }
   return undefined;
 };
+
+const lagHjemlerMedNavn = (kodeverkNavn: KodeverkMedNavn[], kodeverkVerdier: string[]): KodeverkMedNavn[] =>
+  kodeverkNavn.filter(({ kode }) => kodeverkVerdier.includes(kode)).sort((a, b) => a.kode.localeCompare(b.kode));
+const lagHjemmelsKoder = (kodeverkVerdier: string[]): string[] => kodeverkVerdier.map(kode => kode);
 
 const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): KlageFormType => ({
   klageMedholdArsak: definertKodeverdiEllerUndefined(klageVurderingResultat?.klageMedholdArsak),
@@ -85,13 +90,26 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
   formData,
   setFormData,
 }) => {
+  const hjemmlerMedNavn = lagHjemlerMedNavn(
+    alleKodeverk[KodeverkType.KLAGE_HJEMMEL],
+    lagHjemmelsKoder(alleAktuelleHjemler),
+  );
   const intl = useIntl();
+  const [visSubmitModal, setVisSubmitModal] = useState<boolean>(false);
   const initialValues = useMemo(() => buildInitialValues(klageVurdering.klageVurderingResultatNFP), [klageVurdering]);
   const formMethods = useForm<KlageFormType>({
     defaultValues: formData || initialValues,
   });
 
   const formValues = formMethods.watch();
+
+  const lukkModal = useCallback(() => {
+    setVisSubmitModal(false);
+  }, []);
+
+  const valider = useCallback(() => {
+    setVisSubmitModal(true);
+  }, []);
 
   return (
     <Form
@@ -108,8 +126,7 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
         readOnly={readOnly}
         klageVurdering={formValues.klageVurdering}
         medholdReasons={alleKodeverk[KodeverkType.KLAGE_MEDHOLD_ARSAK]}
-        alleHjemler={alleKodeverk[KodeverkType.KLAGE_HJEMMEL]}
-        alleAktuelleHjemler={alleAktuelleHjemler}
+        alleHjemmlerMedNavn={hjemmlerMedNavn}
       />
       <div className={styles.confirmVilkarForm}>
         <ProsessStegBegrunnelseTextFieldNew
@@ -122,12 +139,25 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
         <FlexContainer>
           <FlexRow spaceBetween>
             <FlexColumn>
-              <ProsessStegSubmitButtonNew
-                isReadOnly={readOnly}
-                isSubmittable={!readOnlySubmitButton}
-                isSubmitting={formMethods.formState.isSubmitting}
-                isDirty={formMethods.formState.isDirty}
-              />
+              <Button variant="primary" type="button" size="small" onClick={() => valider()} disabled={readOnly}>
+                <FormattedMessage id="Klage.Behandle.Bekreft" />
+              </Button>
+              {visSubmitModal && (
+                <BekreftOgSubmitModal
+                  erModalÅpen={visSubmitModal}
+                  lukkModal={lukkModal}
+                  opprettholdVedtak={
+                    formValues.klageVurdering === undefined
+                      ? undefined
+                      : formValues.klageVurdering === klageVurderingType.STADFESTE_YTELSESVEDTAK
+                  }
+                  valgtHjemmel={hjemmlerMedNavn.find(hj => hj.kode === formValues.klageHjemmel)?.navn}
+                  readOnly={readOnly}
+                  isSubmittable={!readOnlySubmitButton}
+                  isSubmitting={formMethods.formState.isSubmitting}
+                  isDirty={formMethods.formState.isDirty}
+                />
+              )}
               {!readOnly &&
                 formValues.klageVurdering &&
                 formValues.fritekstTilBrev &&

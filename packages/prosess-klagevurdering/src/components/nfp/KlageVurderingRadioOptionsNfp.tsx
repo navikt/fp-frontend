@@ -15,20 +15,14 @@ import styles from './klageVurderingRadioOptionsNfp.module.css';
 interface OwnProps {
   readOnly: boolean;
   medholdReasons: KodeverkMedNavn[];
-  alleHjemler: KodeverkMedNavn[];
-  alleAktuelleHjemler: string[];
+  alleHjemmlerMedNavn: KodeverkMedNavn[];
   klageVurdering?: string;
 }
-
-const lagHjemler = (kodeverkNavn: KodeverkMedNavn[], kodeverkVerdier: string[]): KodeverkMedNavn[] =>
-  kodeverkNavn.filter(({ kode }) => kodeverkVerdier.includes(kode)).sort((a, b) => a.kode.localeCompare(b.kode));
-const lagHjemmelsKoder = (kodeverkVerdier: string[]): string[] => kodeverkVerdier.map(kode => kode);
 
 const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps> = ({
   readOnly,
   medholdReasons,
-  alleHjemler,
-  alleAktuelleHjemler,
+  alleHjemmlerMedNavn,
   klageVurdering,
 }) => {
   const intl = useIntl();
@@ -37,7 +31,7 @@ const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps> = ({
       {mo.navn}
     </option>
   ));
-  const hjemmelOptions = lagHjemler(alleHjemler, lagHjemmelsKoder(alleAktuelleHjemler)).map((mo: KodeverkMedNavn) => (
+  const hjemmelOptions = alleHjemmlerMedNavn.map((mo: KodeverkMedNavn) => (
     <option key={mo.kode} value={mo.kode}>
       {mo.navn}
     </option>
