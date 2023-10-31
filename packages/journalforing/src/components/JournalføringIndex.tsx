@@ -8,6 +8,7 @@ import OppgaveTabell from './oppgaver/OppgaveTabell';
 import JournalpostIndex from './journalpost/JournalpostIndex';
 import JournalførSubmitValue from '../typer/ferdigstillJournalføringSubmit';
 import ReserverOppgaveType from '../typer/reserverOppgaveType';
+import Journalpost from '../typer/journalpostTsType';
 
 type OwnProps = Readonly<{
   oppgaver: Oppgave[];
@@ -15,6 +16,7 @@ type OwnProps = Readonly<{
   velgOppgaveOgHentJournalpost: (oppgave: Oppgave) => void;
   avbrytVisningAvJournalpost: () => void;
   valgtOppgave?: Oppgave;
+  valgtJournalpost?: Journalpost;
   submitJournalføring: (data: JournalførSubmitValue) => void;
   reserverOppgave: (data: ReserverOppgaveType) => void;
   flyttTilGosys: (data: string) => void;
@@ -27,6 +29,7 @@ const JournalføringIndex: FunctionComponent<OwnProps> = ({
   oppgaver,
   navAnsatt,
   valgtOppgave,
+  valgtJournalpost,
   velgOppgaveOgHentJournalpost,
   avbrytVisningAvJournalpost,
   submitJournalføring,
@@ -42,10 +45,11 @@ const JournalføringIndex: FunctionComponent<OwnProps> = ({
         reserverOppgave={reserverOppgave}
       />
     )}
-    {valgtOppgave && (
+    {valgtJournalpost && valgtOppgave && (
       <JournalpostIndex
         avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
         oppgave={valgtOppgave}
+        journalpost={valgtJournalpost}
         navAnsatt={navAnsatt}
         submitJournalføring={submitJournalføring}
         reserverOppgave={reserverOppgave}

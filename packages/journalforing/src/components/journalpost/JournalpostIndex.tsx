@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, useEffect, useCallback } from 'react';
 
-import { FlexColumn, FlexContainer, FlexRow, LoadingPanel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { NavAnsatt } from '@navikt/fp-types';
 import { restApiHooks, RestApiPathsKeys } from '../../data/fpfordelRestApi';
@@ -16,6 +16,7 @@ import ReserverOppgaveType from '../../typer/reserverOppgaveType';
 
 type OwnProps = Readonly<{
   oppgave: OppgaveOversikt;
+  journalpost: Journalpost;
   avbrytVisningAvJournalpost: () => void;
   navAnsatt: NavAnsatt;
   submitJournalføring: (data: JournalførSubmitValue) => void;
@@ -28,6 +29,7 @@ type OwnProps = Readonly<{
  */
 const JournalpostIndex: FunctionComponent<OwnProps> = ({
   oppgave,
+  journalpost,
   avbrytVisningAvJournalpost,
   submitJournalføring,
   navAnsatt,
@@ -35,10 +37,6 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
   flyttTilGosys,
 }) => {
   const [valgtDokument, setValgtDokument] = useState<JournalDokument | undefined>(undefined);
-
-  const journalpostKall = restApiHooks.useRestApi(RestApiPathsKeys.HENT_JOURNALPOST_DETALJER, {
-    journalpostId: oppgave.journalpostId,
-  });
 
   const { startRequest: oppdaterMedBrukerKall, data: journalpostOppdatertMedSøker } = restApiHooks.useRestApiRunner(
     RestApiPathsKeys.OPPDATER_MED_BRUKER,
@@ -66,21 +64,10 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
 
   // Åpner første dokument som standard valg når vi er ferdig med å laste
   useEffect(() => {
-    if (journalpostKall.state === RestApiState.SUCCESS) {
-      const doks = journalpostKall.data?.dokumenter;
-      const dok = doks && doks.length > 0 ? doks[0] : undefined;
-      setValgtDokument(dok);
-    }
-  }, [journalpostKall]);
-
-  if (
-    journalpostKall.state === RestApiState.NOT_STARTED ||
-    journalpostKall.state === RestApiState.LOADING ||
-    !journalpostKall.data
-  ) {
-    return <LoadingPanel />;
-  }
-  const journalpostFraOppgave: Journalpost = journalpostKall.data;
+    const doks = journalpost.dokumenter;
+    const dok = doks && doks.length > 0 ? doks[0] : undefined;
+    setValgtDokument(dok);
+  }, [journalpost]);
 
   return (
     <FlexContainer>
@@ -89,7 +76,7 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
           <JournalpostDetaljer
             avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
-            journalpost={journalpostOppdatertMedSøker || journalpostFraOppgave}
+            journalpost={journalpostOppdatertMedSøker || journalpost}
             oppgave={oppgave}
             submitJournalføring={submitJournalføring}
             knyttJournalpostTilBruker={knyttJournalpostTilBruker}
@@ -104,7 +91,7 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
         {valgtDokument && (
           <FlexColumn className={styles.pdfKolonne}>
             <VerticalSpacer sixteenPx />
-            <DokumentIndex dokumenter={journalpostFraOppgave.dokumenter} />
+            <DokumentIndex dokumenter={journalpost.dokumenter} />
           </FlexColumn>
         )}
       </FlexRow>

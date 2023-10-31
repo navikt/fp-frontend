@@ -174,6 +174,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
       <JournalforingPanel>
         <JournalføringIndex
           valgtOppgave={valgtOppgave}
+          valgtJournalpost={valgtJournalpost}
           oppgaver={alleOppgaver}
           navAnsatt={navAnsatt}
           velgOppgaveOgHentJournalpost={velgOppgaveOgHentJournalpost}
