@@ -1,6 +1,6 @@
 import OppgaveKilde from '../kodeverk/oppgaveKilde';
 
-type OppgaveOversikt = Readonly<{
+type Oppgave = Readonly<{
   journalpostId: string;
   aktørId?: string;
   fødselsnummer?: string;
@@ -12,4 +12,4 @@ type OppgaveOversikt = Readonly<{
   reservertAv?: string;
   kilde?: OppgaveKilde;
 }>;
-export default OppgaveOversikt;
+export default Oppgave;

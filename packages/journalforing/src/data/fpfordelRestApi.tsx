@@ -2,14 +2,14 @@ import { createRequestApi, RestApiConfigBuilder, RestKey } from '@navikt/fp-rest
 import { RestApiHooks } from '@navikt/fp-rest-api-hooks';
 import JournalførSubmitValue from '../typer/ferdigstillJournalføringSubmit';
 import Journalpost from '../typer/journalpostTsType';
-import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
+import Oppgave from '../typer/oppgaveTsType';
 import SaksnummerType from '../typer/saksnummerTsType';
 import OppdaterMedBruker from '../typer/oppdaterBrukerTsType';
 import ForhåndsvisBrukerRespons from '../typer/forhåndsvisBrukerResponsTsType';
 import ReserverOppgaveType from '../typer/reserverOppgaveType';
 
 export const RestApiPathsKeys = {
-  ALLE_JOURNAL_OPPGAVER: new RestKey<OppgaveOversikt[], { ident: string }>('ALLE_JOURNAL_OPPGAVER'),
+  ALLE_JOURNAL_OPPGAVER: new RestKey<Oppgave[], { ident: string }>('ALLE_JOURNAL_OPPGAVER'),
   HENT_JOURNALPOST_DETALJER: new RestKey<Journalpost, { journalpostId: string }>('HENT_JOURNALPOST_DETALJER'),
   FERDIGSTILL_JOURNALFØRING: new RestKey<SaksnummerType, JournalførSubmitValue>('FERDIGSTILL_JOURNALFØRING'),
   OPPDATER_MED_BRUKER: new RestKey<Journalpost, OppdaterMedBruker>('OPPDATER_MED_BRUKER'),

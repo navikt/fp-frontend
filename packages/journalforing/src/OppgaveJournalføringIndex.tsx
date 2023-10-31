@@ -10,14 +10,15 @@ import messages from '../i18n/nb_NO.json';
 import JournalforingPanel from './components/JournalforingPanel';
 import JournalføringIndex from './components/JournalføringIndex';
 import { requestApi, restApiHooks, RestApiPathsKeys } from './data/fpfordelRestApi';
-import OppgaveOversikt from './typer/oppgaveOversiktTsType';
+import Oppgave from './typer/oppgaveTsType';
 import styles from './oppgaveJournalføringIndex.module.css';
 import JournalførSubmitValue from './typer/ferdigstillJournalføringSubmit';
 import JournalførtSubmitModal from './components/journalpost/modal/JournalførtSubmitModal';
 import ReserverOppgaveType from './typer/reserverOppgaveType';
+import Journalpost from './typer/journalpostTsType';
 
 const intl = createIntl(messages);
-const TOM_ARRAY: OppgaveOversikt[] = [];
+const TOM_ARRAY: Oppgave[] = [];
 
 interface OwnProps {
   navAnsatt?: NavAnsatt;
@@ -27,17 +28,21 @@ interface OwnProps {
  * JournalforingIndex - Toppkomponent, orkestrerer restkall for journalføring
  */
 const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
-  const [valgtOppgave, setValgtOppgave] = useState<OppgaveOversikt | undefined>(undefined);
+  const [valgtOppgave, setValgtOppgave] = useState<Oppgave | undefined>(undefined);
+  const [valgtJournalpost, setValgtJournalpost] = useState<Journalpost | undefined>(undefined);
   const [visModal, setVisModal] = useState(false);
   const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
 
   const avbrytVisningAvJournalpost = useCallback(() => {
     setValgtOppgave(undefined);
+    setValgtJournalpost(undefined);
   }, [valgtOppgave]);
 
-  const { startRequest: innhentAlleOppgaver, data: alleOppgaver = TOM_ARRAY, state: status } = restApiHooks.useRestApiRunner(
-    RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER,
-  );
+  const {
+    startRequest: innhentAlleOppgaver,
+    data: alleOppgaver = TOM_ARRAY,
+    state: innhentOppgaverState,
+  } = restApiHooks.useRestApiRunner(RestApiPathsKeys.ALLE_JOURNAL_OPPGAVER);
 
   const { addErrorMessage } = useRestApiErrorDispatcher();
   requestApi.setAddErrorMessageHandler(addErrorMessage);
@@ -45,6 +50,12 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
   const lukkModal = useCallback(() => {
     setVisModal(false);
   }, []);
+
+  const {
+    startRequest: hentJournalpostKall,
+    data: hentetJournalpost,
+    state: hentJournalpostState,
+  } = restApiHooks.useRestApiRunner(RestApiPathsKeys.HENT_JOURNALPOST_DETALJER);
 
   const { startRequest: submitJournalføring, data: saksnumerJournalføring } = restApiHooks.useRestApiRunner(
     RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING,
@@ -61,9 +72,24 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
           innhentAlleOppgaver({ ident: navAnsatt.brukernavn }, true);
         }
       });
+      if (valgtOppgave) {
+        setValgtOppgave({ ...valgtOppgave, reservertAv: data.reserverFor });
+      }
     },
     [valgtOppgave],
   );
+
+  const hentJournalpost = useCallback(
+    (journalpostId: string) => {
+      hentJournalpostKall({ journalpostId });
+    },
+    [valgtJournalpost],
+  );
+
+  const velgOppgaveOgHentJournalpost = useCallback((oppgave: Oppgave) => {
+    setValgtOppgave(oppgave);
+    hentJournalpost(oppgave.journalpostId);
+  }, []);
 
   const journalførCallback = useCallback(
     (data: JournalførSubmitValue) => {
@@ -80,13 +106,13 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
     [valgtOppgave],
   );
 
-  const flyttOppgaveTilGosysCallback = useCallback((data: string) => {
-      flyttTilGosys({ journalpostId: data })
-        .then(() => {
-          if (navAnsatt?.brukernavn) {
-            innhentAlleOppgaver({ ident: navAnsatt.brukernavn }, true);
-          }
-        });
+  const flyttOppgaveTilGosysCallback = useCallback(
+    (data: string) => {
+      flyttTilGosys({ journalpostId: data }).then(() => {
+        if (navAnsatt?.brukernavn) {
+          innhentAlleOppgaver({ ident: navAnsatt.brukernavn }, true);
+        }
+      });
     },
     [valgtOppgave],
   );
@@ -97,7 +123,17 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
     }
   }, [navAnsatt]);
 
-  if (status === RestApiState.NOT_STARTED || status === RestApiState.LOADING ) {
+  useEffect(() => {
+    if (hentJournalpostState === RestApiState.SUCCESS) {
+      setValgtJournalpost(hentetJournalpost);
+    }
+  }, [hentJournalpostState]);
+
+  if (
+    innhentOppgaverState === RestApiState.NOT_STARTED ||
+    innhentOppgaverState === RestApiState.LOADING ||
+    hentJournalpostState === RestApiState.LOADING
+  ) {
     return <LoadingPanel />;
   }
   if (!navAnsatt) {
@@ -110,7 +146,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
   return (
     <RawIntlProvider value={intl}>
       <div className={styles.header}>
-        {valgtOppgave && (
+        {valgtJournalpost && (
           <Link onClick={avbrytVisningAvJournalpost} className={styles.link}>
             <ChevronLeftIcon />
             <FormattedMessage id="Journalforing.Oversikt" />
@@ -138,10 +174,10 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
       <JournalforingPanel>
         <JournalføringIndex
           valgtOppgave={valgtOppgave}
+          valgtJournalpost={valgtJournalpost}
           oppgaver={alleOppgaver}
-          innhentAlleOppgaver={innhentAlleOppgaver}
           navAnsatt={navAnsatt}
-          setValgtOppgave={setValgtOppgave}
+          velgOppgaveOgHentJournalpost={velgOppgaveOgHentJournalpost}
           avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
           submitJournalføring={journalførCallback}
           reserverOppgave={reserverCallback}

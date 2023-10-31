@@ -4,14 +4,14 @@ import { BodyShort, Table } from '@navikt/ds-react';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
 import { NavAnsatt } from '@navikt/fp-types';
-import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
+import Oppgave from '../../typer/oppgaveTsType';
 import OppgaveTabellRad from './OppgaveTabellRad';
 import styles from './oppgaveTabell.module.css';
 import ReserverOppgaveType from '../../typer/reserverOppgaveType';
 
 type OwnProps = Readonly<{
-  oppgaver: OppgaveOversikt[];
-  setValgtOppgave: (oppgave: OppgaveOversikt) => void;
+  oppgaver: Oppgave[];
+  velgOppgaveOgHentJournalpost: (oppgave: Oppgave) => void;
   navAnsatt: NavAnsatt;
   reserverOppgave: (data: ReserverOppgaveType) => void;
 }>;
@@ -19,7 +19,12 @@ type OwnProps = Readonly<{
 /**
  * OppgaveTabell - Presenterer liste over oppgaver og tar inn callback for å sette valgt oppgave
  */
-const OppgaveTabell: FunctionComponent<OwnProps> = ({ oppgaver, setValgtOppgave, navAnsatt, reserverOppgave }) => {
+const OppgaveTabell: FunctionComponent<OwnProps> = ({
+  oppgaver,
+  velgOppgaveOgHentJournalpost,
+  navAnsatt,
+  reserverOppgave,
+}) => {
   if (oppgaver.length < 1) {
     return (
       <>
@@ -64,7 +69,7 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({ oppgaver, setValgtOppgave,
           {oppgaver.map(oppgave => (
             <OppgaveTabellRad
               oppgave={oppgave}
-              setValgtOppgave={setValgtOppgave}
+              velgOppgaveOgHentJournalpost={velgOppgaveOgHentJournalpost}
               key={oppgave.journalpostId}
               navAnsatt={navAnsatt}
               reserverOppgave={reserverOppgave}

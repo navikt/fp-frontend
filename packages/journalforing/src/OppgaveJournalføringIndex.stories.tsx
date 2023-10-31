@@ -7,7 +7,7 @@ import { NavAnsatt } from '@navikt/fp-types';
 import { fagsakStatus, fagsakYtelseType, familieHendelseType } from '@navikt/fp-kodeverk';
 import { requestApi, RestApiPathsKeys } from './data/fpfordelRestApi';
 import JournalforingIndex from './OppgaveJournalføringIndex';
-import OppgaveOversikt from './typer/oppgaveOversiktTsType';
+import Oppgave from './typer/oppgaveTsType';
 import Journalpost from './typer/journalpostTsType';
 import JournalKanal from './kodeverk/journalKanal';
 
@@ -115,7 +115,7 @@ const navAnsattDefault = {
 } as NavAnsatt;
 
 const Template: StoryFn<{
-  alleOppgaver?: OppgaveOversikt[];
+  alleOppgaver?: Oppgave[];
   navAnsatt: NavAnsatt;
   detaljertJournalpost: Journalpost;
   responsFraBrukerSøk: Journalpost | undefined;
@@ -149,7 +149,7 @@ const defaultOppgaver = [
     enhetId: '4016',
     beskrivelse: 'Inntektsmelding',
     reservertAv: 'X123456',
-    kilde: OppgaveKilde.GOSYS
+    kilde: OppgaveKilde.GOSYS,
   },
   {
     journalpostId: '245745871',
@@ -161,8 +161,7 @@ const defaultOppgaver = [
     enhetId: '4008',
     beskrivelse: 'Inntektsmelding',
     reservertAv: 'Y654321',
-    kilde: OppgaveKilde.LOKAL
-
+    kilde: OppgaveKilde.LOKAL,
   },
   {
     journalpostId: '345681257',
@@ -171,7 +170,7 @@ const defaultOppgaver = [
     ytelseType: 'FP',
     enhetId: '4008',
     beskrivelse: 'Søknad',
-    kilde: OppgaveKilde.GOSYS
+    kilde: OppgaveKilde.GOSYS,
   },
 ];
 

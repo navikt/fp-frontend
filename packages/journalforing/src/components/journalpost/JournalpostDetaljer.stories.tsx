@@ -11,7 +11,7 @@ import JournalKanal from '../../kodeverk/journalKanal';
 import Journalpost from '../../typer/journalpostTsType';
 
 import messages from '../../../i18n/nb_NO.json';
-import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
+import Oppgave from '../../typer/oppgaveTsType';
 import DokumentTittel from '../../kodeverk/dokumentTittel';
 import ReserverOppgaveType from '../../typer/reserverOppgaveType';
 import OppgaveKilde from '../../kodeverk/oppgaveKilde';
@@ -101,7 +101,7 @@ export default {
 
 const Template: StoryFn<{
   detaljertJournalpost: Journalpost;
-  oppgave: OppgaveOversikt;
+  oppgave: Oppgave;
   submitJournalføring: (data: JournalførSubmitValue) => void;
   reserverOppgave: (data: ReserverOppgaveType) => void;
   navAnsatt: NavAnsatt;
@@ -116,7 +116,6 @@ const Template: StoryFn<{
     forhåndsvisBruker={action('button-click') as () => void}
     reserverOppgave={reserverOppgave}
     navAnsatt={navAnsatt}
-    oppdaterValgtOppgave={action('button-click') as () => void}
     flyttTilGosys={action('button-click') as () => void}
   />
 );
