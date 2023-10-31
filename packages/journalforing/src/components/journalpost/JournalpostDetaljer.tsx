@@ -12,7 +12,7 @@ import JournalførSubmitValue, {
   DokumentTittelSubmitValue,
   OppdaterJournalførTittlerSubmitValue,
 } from '../../typer/ferdigstillJournalføringSubmit';
-import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
+import Oppgave from '../../typer/oppgaveTsType';
 import SakDetaljer from './innhold/SakDetaljer';
 import DokumentForm, {
   buildInitialValues as buildInitialValuesFlereDokumenter,
@@ -74,7 +74,7 @@ const transformTittelValues = (
 const transformValues = (
   values: JournalføringFormValues,
   journalpost: Journalpost,
-  oppgave: OppgaveOversikt,
+  oppgave: Oppgave,
 ): JournalførSubmitValue => {
   if (!oppgave.enhetId) {
     throw Error('Kan ikke journalføre uten at enhet er satt');
@@ -89,7 +89,7 @@ const transformValues = (
 
 type OwnProps = Readonly<{
   journalpost: Journalpost;
-  oppgave: OppgaveOversikt;
+  oppgave: Oppgave;
   avbrytVisningAvJournalpost: () => void;
   submitJournalføring: (params: JournalførSubmitValue) => void;
   knyttJournalpostTilBruker: (params: OppdaterMedBruker) => void;
@@ -98,7 +98,6 @@ type OwnProps = Readonly<{
   lasterBruker: boolean;
   navAnsatt: NavAnsatt;
   reserverOppgave: (data: ReserverOppgaveType) => void;
-  oppdaterValgtOppgave: (oppgave: OppgaveOversikt) => void;
   flyttTilGosys: (data: string) => void;
 }>;
 
@@ -116,7 +115,6 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
   lasterBruker,
   reserverOppgave,
   navAnsatt,
-  oppdaterValgtOppgave,
   flyttTilGosys,
 }) => {
   const skalKunneEndreSøker = !journalpost.bruker;
@@ -138,7 +136,6 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
       journalpostId: oppgave.journalpostId,
       reserverFor: reservasjonFor,
     });
-    oppdaterValgtOppgave({ ...oppgave, reservertAv: reservasjonFor });
   }, [reserverOppgave]);
 
   return (

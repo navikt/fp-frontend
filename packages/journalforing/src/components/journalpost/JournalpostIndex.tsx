@@ -4,7 +4,7 @@ import { FlexColumn, FlexContainer, FlexRow, LoadingPanel, VerticalSpacer } from
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { NavAnsatt } from '@navikt/fp-types';
 import { restApiHooks, RestApiPathsKeys } from '../../data/fpfordelRestApi';
-import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
+import OppgaveOversikt from '../../typer/oppgaveTsType';
 import JournalpostDetaljer from './JournalpostDetaljer';
 import styles from './journalpostIndex.module.css';
 import Journalpost from '../../typer/journalpostTsType';
@@ -17,11 +17,9 @@ import ReserverOppgaveType from '../../typer/reserverOppgaveType';
 type OwnProps = Readonly<{
   oppgave: OppgaveOversikt;
   avbrytVisningAvJournalpost: () => void;
-  innhentAlleOppgaver: (param: { ident: string }) => Promise<OppgaveOversikt[] | undefined>;
   navAnsatt: NavAnsatt;
   submitJournalføring: (data: JournalførSubmitValue) => void;
   reserverOppgave: (data: ReserverOppgaveType) => void;
-  oppdaterValgtOppgave: (oppgave: OppgaveOversikt) => void;
   flyttTilGosys: (data: string) => void;
 }>;
 
@@ -34,7 +32,6 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
   submitJournalføring,
   navAnsatt,
   reserverOppgave,
-  oppdaterValgtOppgave,
   flyttTilGosys,
 }) => {
   const [valgtDokument, setValgtDokument] = useState<JournalDokument | undefined>(undefined);
@@ -94,7 +91,6 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
             avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
             journalpost={journalpostOppdatertMedSøker || journalpostFraOppgave}
             oppgave={oppgave}
-            oppdaterValgtOppgave={oppdaterValgtOppgave}
             submitJournalføring={submitJournalføring}
             knyttJournalpostTilBruker={knyttJournalpostTilBruker}
             forhåndsvisBruker={hentBrukerCallback}

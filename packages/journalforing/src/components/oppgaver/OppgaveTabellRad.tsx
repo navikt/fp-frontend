@@ -4,22 +4,27 @@ import { Button, Table, Tag } from '@navikt/ds-react';
 import { ChevronRightIcon } from '@navikt/aksel-icons';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { NavAnsatt } from '@navikt/fp-types';
-import OppgaveOversikt from '../../typer/oppgaveOversiktTsType';
+import Oppgave from '../../typer/oppgaveTsType';
 import ReserverOppgaveType from '../../typer/reserverOppgaveType';
 import { finnYtelseTekst } from '../journalpost/innhold/VelgSakForm';
 
 import styles from './oppgaveTabellRad.module.css';
 
 type OwnProps = Readonly<{
-  oppgave: OppgaveOversikt;
-  setValgtOppgave: (oppgave: OppgaveOversikt) => void;
+  oppgave: Oppgave;
+  velgOppgaveOgHentJournalpost: (oppgave: Oppgave) => void;
   navAnsatt: NavAnsatt;
   reserverOppgave: (data: ReserverOppgaveType) => void;
 }>;
 
-const OppgaveTabellRad: FunctionComponent<OwnProps> = ({ oppgave, setValgtOppgave, navAnsatt, reserverOppgave }) => {
+const OppgaveTabellRad: FunctionComponent<OwnProps> = ({
+  oppgave,
+  velgOppgaveOgHentJournalpost,
+  navAnsatt,
+  reserverOppgave,
+}) => {
   const setOppgave = useCallback(() => {
-    setValgtOppgave(oppgave);
+    velgOppgaveOgHentJournalpost(oppgave);
   }, [oppgave]);
 
   const reserverOppgaveAction = useCallback(

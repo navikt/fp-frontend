@@ -3,19 +3,18 @@ import React, { FunctionComponent } from 'react';
 import { FlexContainer } from '@navikt/ft-ui-komponenter';
 import { NavAnsatt } from '@navikt/fp-types';
 
-import OppgaveOversikt from '../typer/oppgaveOversiktTsType';
+import Oppgave from '../typer/oppgaveTsType';
 import OppgaveTabell from './oppgaver/OppgaveTabell';
 import JournalpostIndex from './journalpost/JournalpostIndex';
 import JournalførSubmitValue from '../typer/ferdigstillJournalføringSubmit';
 import ReserverOppgaveType from '../typer/reserverOppgaveType';
 
 type OwnProps = Readonly<{
-  oppgaver: OppgaveOversikt[];
-  innhentAlleOppgaver: (param: { ident: string }) => Promise<OppgaveOversikt[] | undefined>;
+  oppgaver: Oppgave[];
   navAnsatt: NavAnsatt;
-  setValgtOppgave: (oppgave: OppgaveOversikt) => void;
+  velgOppgaveOgHentJournalpost: (oppgave: Oppgave) => void;
   avbrytVisningAvJournalpost: () => void;
-  valgtOppgave?: OppgaveOversikt;
+  valgtOppgave?: Oppgave;
   submitJournalføring: (data: JournalførSubmitValue) => void;
   reserverOppgave: (data: ReserverOppgaveType) => void;
   flyttTilGosys: (data: string) => void;
@@ -26,10 +25,9 @@ type OwnProps = Readonly<{
  */
 const JournalføringIndex: FunctionComponent<OwnProps> = ({
   oppgaver,
-  innhentAlleOppgaver,
   navAnsatt,
   valgtOppgave,
-  setValgtOppgave,
+  velgOppgaveOgHentJournalpost,
   avbrytVisningAvJournalpost,
   submitJournalføring,
   reserverOppgave,
@@ -39,7 +37,7 @@ const JournalføringIndex: FunctionComponent<OwnProps> = ({
     {!valgtOppgave && (
       <OppgaveTabell
         oppgaver={oppgaver}
-        setValgtOppgave={setValgtOppgave}
+        velgOppgaveOgHentJournalpost={velgOppgaveOgHentJournalpost}
         navAnsatt={navAnsatt}
         reserverOppgave={reserverOppgave}
       />
@@ -48,10 +46,8 @@ const JournalføringIndex: FunctionComponent<OwnProps> = ({
       <JournalpostIndex
         avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
         oppgave={valgtOppgave}
-        innhentAlleOppgaver={innhentAlleOppgaver}
         navAnsatt={navAnsatt}
         submitJournalføring={submitJournalføring}
-        oppdaterValgtOppgave={setValgtOppgave}
         reserverOppgave={reserverOppgave}
         flyttTilGosys={flyttTilGosys}
       />
