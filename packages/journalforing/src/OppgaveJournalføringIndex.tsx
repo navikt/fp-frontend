@@ -83,7 +83,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
     (journalpostId: string) => {
       hentJournalpostKall({ journalpostId });
     },
-    [valgtOppgave],
+    [valgtJournalpost],
   );
 
   const velgOppgaveOgHentJournalpost = useCallback((oppgave: Oppgave) => {
