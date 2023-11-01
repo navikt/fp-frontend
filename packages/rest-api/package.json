@@ -15,15 +15,15 @@
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
-    "@sentry/browser": "7.75.0",
-    "axios": "1.5.1"
+    "@sentry/browser": "7.77.0",
+    "axios": "1.6.0"
   },
   "devDependencies": {
     "axios-mock-adapter": "1.22.0",
     "cross-env": "7.0.3",
     "eslint": "8.52.0",
     "typescript": "5.2.2",
-    "vite": "4.4.10",
-    "vitest": "0.34.3"
+    "vite": "4.5.0",
+    "vitest": "0.34.6"
   }
 }
