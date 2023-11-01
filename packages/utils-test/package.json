@@ -14,7 +14,7 @@
   "dependencies": {
     "@navikt/fp-rest-api": "workspace:*",
     "@navikt/fp-rest-api-hooks": "workspace:*",
-    "@navikt/ft-ui-komponenter": "2.1.11",
+    "@navikt/ft-ui-komponenter": "2.1.12",
     "@testing-library/jest-dom": "6.1.2",
     "axios-mock-adapter": "1.22.0",
     "react": "18.2.0",
@@ -23,6 +23,6 @@
   "devDependencies": {
     "eslint": "8.52.0",
     "typescript": "5.2.2",
-    "vite": "4.4.10"
+    "vite": "4.5.0"
   }
 }
