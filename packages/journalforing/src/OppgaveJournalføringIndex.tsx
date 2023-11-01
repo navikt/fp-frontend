@@ -178,6 +178,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
           oppgaver={alleOppgaver}
           navAnsatt={navAnsatt}
           velgOppgaveOgHentJournalpost={velgOppgaveOgHentJournalpost}
+          hentJournalpost={hentJournalpost}
           avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
           submitJournalføring={journalførCallback}
           reserverOppgave={reserverCallback}

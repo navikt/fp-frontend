@@ -37,7 +37,7 @@ const OppgaveTabell: FunctionComponent<OwnProps> = ({
     );
   }
   return (
-    <div className={styles.oppgaverTabell}>
+    <div>
       <Table>
         <Table.Header>
           <Table.Row>

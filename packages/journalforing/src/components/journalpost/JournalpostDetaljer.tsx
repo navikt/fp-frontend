@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Alert, BodyLong, Button, Heading, Tag } from '@navikt/ds-react';
+import { Alert, BodyLong, Heading } from '@navikt/ds-react';
 
 import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form } from '@navikt/ft-form-hooks';
@@ -25,6 +25,7 @@ import JournalpostTittelForm from './innhold/JournalpostTittelForm';
 import ForhåndsvisBrukerRespons from '../../typer/forhåndsvisBrukerResponsTsType';
 import ReserverOppgaveType from '../../typer/reserverOppgaveType';
 import OppgaveKilde from '../../kodeverk/oppgaveKilde';
+import Reservasjonspanel from './innhold/Reservasjonspanel';
 
 const dokumentTittelSkalStyresAvJournalpost = (jp: Journalpost): boolean => jp.dokumenter?.length === 1;
 
@@ -89,7 +90,7 @@ const transformValues = (
 
 type OwnProps = Readonly<{
   journalpost: Journalpost;
-  oppgave: Oppgave;
+  oppgave?: Oppgave;
   avbrytVisningAvJournalpost: () => void;
   submitJournalføring: (params: JournalførSubmitValue) => void;
   knyttJournalpostTilBruker: (params: OppdaterMedBruker) => void;
@@ -118,68 +119,26 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
   flyttTilGosys,
 }) => {
   const skalKunneEndreSøker = !journalpost.bruker;
-  const erLokalOppgave: boolean = oppgave.kilde === OppgaveKilde.LOKAL;
+  const erLokalOppgave: boolean = oppgave?.kilde === OppgaveKilde.LOKAL;
 
   const saker = journalpost.fagsaker || [];
   const formMethods = useForm<JournalføringFormValues>({
     defaultValues: buildInitialValues(journalpost),
   });
   const submitJournal = useCallback((values: JournalføringFormValues) => {
+    if (!oppgave) {
+      throw new Error('Prøver å journalføre en journalpost uten oppgave, ugyldig tilstand!');
+    }
     submitJournalføring(transformValues(values, journalpost, oppgave));
   }, []);
 
   const isSubmittable = formMethods.formState.isDirty;
 
-  const reserverOppgaveAction = useCallback(() => {
-    const reservasjonFor = !oppgave.reservertAv ? navAnsatt.brukernavn : '';
-    reserverOppgave({
-      journalpostId: oppgave.journalpostId,
-      reserverFor: reservasjonFor,
-    });
-  }, [reserverOppgave]);
-
   return (
     <Form<JournalføringFormValues> formMethods={formMethods} onSubmit={submitJournal}>
       <JournalpostTittelForm journalpost={journalpost} />
       <VerticalSpacer eightPx />
-      {oppgave.reservertAv && navAnsatt.brukernavn === oppgave.reservertAv && (
-        <FlexRow>
-          <FlexColumn>
-            <BodyLong>
-              <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
-              <Tag size="small" variant="info-moderate" style={{ marginLeft: '0.5rem' }}>
-                <FormattedMessage id="Oppgavetabell.Meg" />
-              </Tag>
-              <Button variant="tertiary" size="small" onClick={reserverOppgaveAction} style={{ marginLeft: '0.5rem' }}>
-                <FormattedMessage id="Oppgavetabell.FjernMeg" />
-              </Button>
-            </BodyLong>
-          </FlexColumn>
-        </FlexRow>
-      )}
-      {oppgave.reservertAv && navAnsatt.brukernavn !== oppgave.reservertAv && (
-        <FlexRow>
-          <FlexColumn>
-            <BodyLong>
-              <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
-              <Tag size="small" variant="neutral-moderate" style={{ marginLeft: '0.5rem' }}>
-                {oppgave.reservertAv}
-              </Tag>
-            </BodyLong>
-          </FlexColumn>
-        </FlexRow>
-      )}
-      {!oppgave.reservertAv && (
-        <FlexRow>
-          <FlexColumn>
-            <BodyLong>
-              <Button variant="tertiary" size="small" onClick={reserverOppgaveAction}>
-                <FormattedMessage id="Oppgavetabell.SettPåMeg" />
-              </Button>
-            </BodyLong>
-          </FlexColumn>
-        </FlexRow>
-      )}
+      {oppgave && <Reservasjonspanel oppgave={oppgave} reserverOppgave={reserverOppgave} navAnsatt={navAnsatt} />}
       <VerticalSpacer sixteenPx />
       <BrukerAvsenderPanel
         journalpost={journalpost}
@@ -190,7 +149,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
         knyttSøkerTilJournalpost={knyttJournalpostTilBruker}
       />
       <VerticalSpacer twentyPx />
-      {oppgave.beskrivelse && (
+      {oppgave?.beskrivelse && (
         <>
           <FlexRow>
             <FlexColumn>
