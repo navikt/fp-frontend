@@ -15,11 +15,14 @@ import '@navikt/ds-css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import OppgaveKilde from './kodeverk/oppgaveKilde';
+import JournalpostTilstand, { erEndeligJournalført } from './kodeverk/journalpostTilstand';
 
-const detaljertJournalpostMal = (medBruker: boolean): Journalpost =>
+const detaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTilstand): Journalpost =>
   ({
     journalpostId: '986547336994',
     tittel: 'Inntektsmelding',
+    eksisterendeSaksnummer: erEndeligJournalført(tilstand) ? '125416597' : undefined,
+    tilstand,
     kanal: JournalKanal.ALLTIN,
     bruker: medBruker
       ? {
@@ -211,22 +214,29 @@ ViseOppgaverIListe.args = {
       kilde: OppgaveKilde.GOSYS,
     },
   ],
-  detaljertJournalpost: detaljertJournalpostMal(true),
+  detaljertJournalpost: detaljertJournalpostMal(true, JournalpostTilstand.MOTTATT),
   navAnsatt: navAnsattDefault,
-  responsFraBrukerSøk: detaljertJournalpostMal(true),
+  responsFraBrukerSøk: detaljertJournalpostMal(true, JournalpostTilstand.MOTTATT),
 };
 
 export const ViseOppgaverUtenBruker = Template.bind({});
 ViseOppgaverUtenBruker.args = {
   alleOppgaver: defaultOppgaver,
-  detaljertJournalpost: detaljertJournalpostMal(false),
+  detaljertJournalpost: detaljertJournalpostMal(false, JournalpostTilstand.MOTTATT),
   navAnsatt: navAnsattDefault,
-  responsFraBrukerSøk: detaljertJournalpostMal(true),
+  responsFraBrukerSøk: detaljertJournalpostMal(true, JournalpostTilstand.MOTTATT),
+};
+
+export const SøkeOppJournalpostSomLiggerPåAnnenSak = Template.bind({});
+SøkeOppJournalpostSomLiggerPåAnnenSak.args = {
+  alleOppgaver: [],
+  detaljertJournalpost: detaljertJournalpostMal(true, JournalpostTilstand.JOURNALFOERT),
+  navAnsatt: navAnsattDefault,
 };
 
 export const IngenOppgaver = Template.bind({});
 IngenOppgaver.args = {
   alleOppgaver: [],
   navAnsatt: navAnsattDefault,
-  responsFraBrukerSøk: detaljertJournalpostMal(true),
+  responsFraBrukerSøk: detaljertJournalpostMal(true, JournalpostTilstand.MOTTATT),
 };

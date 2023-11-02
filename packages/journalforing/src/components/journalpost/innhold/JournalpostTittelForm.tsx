@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
 import { Heading, Button, CheckboxGroup, Checkbox } from '@navikt/ds-react';
+import { FormattedMessage } from 'react-intl';
 import { PencilIcon } from '@navikt/aksel-icons';
 import { SelectField, InputField } from '@navikt/ft-form-hooks';
 import { hasValidText, required } from '@navikt/ft-form-validators';
@@ -11,12 +12,13 @@ import { erKanalSomErÅpenForEndring } from '../../../kodeverk/journalKanal';
 
 type OwnProps = Readonly<{
   journalpost: Journalpost;
+  readOnly: boolean;
 }>;
 
 /**
  * JournalpostTittelForm - Inneholder tittel på journalpost og formkomponent for å endre denne
  */
-const JournalpostTittelForm: FunctionComponent<OwnProps> = ({ journalpost }) => {
+const JournalpostTittelForm: FunctionComponent<OwnProps> = ({ journalpost, readOnly }) => {
   const [kanRedigereTittel, setKanRedigereTittel] = useState(!journalpost.tittel);
   const [harToggletFritekst, setHarToggletFritekst] = useState(false);
   const toggleRedigering = useCallback(() => {
@@ -40,14 +42,14 @@ const JournalpostTittelForm: FunctionComponent<OwnProps> = ({ journalpost }) => 
               <InputField
                 name="journalpostTittel"
                 validate={[required, hasValidText]}
-                readOnly={false}
+                readOnly={readOnly}
                 maxLength={200}
                 className={styles.inputField}
               />
             )}
             {!harToggletFritekst && (
               <SelectField
-                readOnly={false}
+                readOnly={readOnly}
                 name="journalpostTittel"
                 label={undefined}
                 className={styles.selectField}
@@ -63,7 +65,9 @@ const JournalpostTittelForm: FunctionComponent<OwnProps> = ({ journalpost }) => 
               onChange={endreFritekstToggle}
               value={[harToggletFritekst]}
             >
-              <Checkbox value>Fritekst</Checkbox>
+              <Checkbox value>
+                <FormattedMessage id="Journal.Tittel.Fritekst" />
+              </Checkbox>
             </CheckboxGroup>
           </FlexColumn>
         </>
@@ -71,7 +75,7 @@ const JournalpostTittelForm: FunctionComponent<OwnProps> = ({ journalpost }) => 
       {!kanRedigereTittel && (
         <FlexColumn className={styles.tittelRad}>
           <Heading size="large">{journalpost.tittel}</Heading>
-          {erKanalSomErÅpenForEndring(journalpost.kanal) && (
+          {!readOnly && erKanalSomErÅpenForEndring(journalpost.kanal) && (
             <Button
               icon={<PencilIcon aria-hidden />}
               className={styles.editButton}

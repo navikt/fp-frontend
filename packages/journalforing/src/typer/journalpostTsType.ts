@@ -12,6 +12,7 @@ type Journalpost = Readonly<{
   kanal?: JournalKanal;
   bruker: JournalBruker;
   tilstand?: JournalpostTilstand;
+  eksisterendeSaksnummer?: string;
   avsender: JournalAvsender;
   ytelseType: FagsakYtelseType;
   dokumenter?: JournalDokument[];

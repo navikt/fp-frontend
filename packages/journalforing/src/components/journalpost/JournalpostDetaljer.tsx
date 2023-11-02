@@ -26,8 +26,18 @@ import ForhåndsvisBrukerRespons from '../../typer/forhåndsvisBrukerResponsTsTy
 import ReserverOppgaveType from '../../typer/reserverOppgaveType';
 import OppgaveKilde from '../../kodeverk/oppgaveKilde';
 import Reservasjonspanel from './innhold/Reservasjonspanel';
+import { erEndeligJournalført } from '../../kodeverk/journalpostTilstand';
+import JournalFagsak from '../../typer/journalFagsakTsType';
 
 const dokumentTittelSkalStyresAvJournalpost = (jp: Journalpost): boolean => jp.dokumenter?.length === 1;
+
+const finnSakMedSaksnummer = (saksnummer: string, saker: JournalFagsak[]): JournalFagsak => {
+  const match = saker.find(sak => sak.saksnummer === saksnummer);
+  if (!match) {
+    throw new Error(`Finner ikke sak med saksnummer ${saksnummer} i listen over journalpostens saker`);
+  }
+  return match;
+};
 
 const buildInitialValues = (journalpost: Journalpost): JournalføringFormValues => {
   const docs = journalpost.dokumenter || [];
@@ -120,6 +130,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
 }) => {
   const skalKunneEndreSøker = !journalpost.bruker;
   const erLokalOppgave: boolean = oppgave?.kilde === OppgaveKilde.LOKAL;
+  const skalBareKunneEndreSak = erEndeligJournalført(journalpost.tilstand);
 
   const saker = journalpost.fagsaker || [];
   const formMethods = useForm<JournalføringFormValues>({
@@ -136,7 +147,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
 
   return (
     <Form<JournalføringFormValues> formMethods={formMethods} onSubmit={submitJournal}>
-      <JournalpostTittelForm journalpost={journalpost} />
+      <JournalpostTittelForm journalpost={journalpost} readOnly={skalBareKunneEndreSak} />
       <VerticalSpacer eightPx />
       {oppgave && <Reservasjonspanel oppgave={oppgave} reserverOppgave={reserverOppgave} navAnsatt={navAnsatt} />}
       <VerticalSpacer sixteenPx />
@@ -184,6 +195,22 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
           <VerticalSpacer thirtyTwoPx />
         </>
       )}
+      {journalpost.eksisterendeSaksnummer && (
+        <div>
+          <FlexRow>
+            <FlexColumn>
+              <Heading size="small">
+                <FormattedMessage id="ValgtOppgave.TilknyttetSak" />
+              </Heading>
+            </FlexColumn>
+          </FlexRow>
+          <SakDetaljer
+            sak={finnSakMedSaksnummer(journalpost.eksisterendeSaksnummer, saker)}
+            key={journalpost.eksisterendeSaksnummer}
+          />
+          <VerticalSpacer thirtyTwoPx />
+        </div>
+      )}
       <FlexRow>
         <FlexColumn>
           <Heading size="small">
@@ -197,14 +224,16 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
           <FormattedMessage id="ValgtOppgave.RelaterteSaker.ManglerSøker" />
         </Alert>
       )}
-      {saker.map(sak => (
-        <SakDetaljer sak={sak} key={sak.saksnummer} />
-      ))}
+      {saker
+        .filter(sak => sak.saksnummer !== journalpost.eksisterendeSaksnummer)
+        .map(sak => (
+          <SakDetaljer sak={sak} key={sak.saksnummer} />
+        ))}
       <VerticalSpacer thirtyTwoPx />
       <FlexRow>
         <FlexColumn>
           <Heading size="small">
-            <FormattedMessage id="ValgtOppgave.KnyttTilSak" />
+            <FormattedMessage id={skalBareKunneEndreSak ? 'ValgtOppgave.FlyttTilSak' : 'ValgtOppgave.KnyttTilSak'} />
           </Heading>
         </FlexColumn>
       </FlexRow>
