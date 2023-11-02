@@ -1,21 +1,20 @@
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
-import { Heading, Link } from '@navikt/ds-react';
-import { ChevronLeftIcon } from '@navikt/aksel-icons';
+import { Heading } from '@navikt/ds-react';
 import { NavAnsatt } from '@navikt/fp-types';
-import { FlexColumn, FlexContainer, FlexRow, LoadingPanel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import messages from '../i18n/nb_NO.json';
 import JournalforingPanel from './components/JournalforingPanel';
 import JournalføringIndex from './components/JournalføringIndex';
 import { requestApi, restApiHooks, RestApiPathsKeys } from './data/fpfordelRestApi';
 import Oppgave from './typer/oppgaveTsType';
-import styles from './oppgaveJournalføringIndex.module.css';
 import JournalførSubmitValue from './typer/ferdigstillJournalføringSubmit';
 import JournalførtSubmitModal from './components/journalpost/modal/JournalførtSubmitModal';
 import ReserverOppgaveType from './typer/reserverOppgaveType';
 import Journalpost from './typer/journalpostTsType';
+import Header from './components/header/Header';
 
 const intl = createIntl(messages);
 const TOM_ARRAY: Oppgave[] = [];
@@ -145,24 +144,11 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
   }
   return (
     <RawIntlProvider value={intl}>
-      <div className={styles.header}>
-        {valgtJournalpost && (
-          <Link onClick={avbrytVisningAvJournalpost} className={styles.link}>
-            <ChevronLeftIcon />
-            <FormattedMessage id="Journalforing.Oversikt" />
-          </Link>
-        )}
-        <VerticalSpacer eightPx />
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn className={styles.tittelKol}>
-              <Heading size="medium">
-                <FormattedMessage id="Journalforing.Tittel" />
-              </Heading>
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
-      </div>
+      <Header
+        avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
+        valgtJournalpost={valgtJournalpost}
+        hentJournalpost={hentJournalpost}
+      />
       {visModal && (
         <JournalførtSubmitModal
           isLoading={isLoadingSubmit}
