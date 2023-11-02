@@ -1,2 +1,0 @@
-import{S as l,c as n,s as d}from"./DocsRenderer-NNNQARDV-21d88118.js";import"./iframe-96018781.js";import"../sb-preview/runtime.js";import"./index-1b03fe98.js";import"./_getPrototype-4216c796.js";import"./index-6fd5a17b.js";import"./_commonjs-dynamic-modules-302442b1.js";import"./index-d37d4223.js";import"./index-356e4a49.js";export{l as SyntaxHighlighter,n as createCopyToClipboardFunction,d as default};
-//# sourceMappingURL=syntaxhighlighter-NMPM6SWI-e2f8fc8b.js.map
