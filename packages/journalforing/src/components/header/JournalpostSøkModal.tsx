@@ -4,7 +4,7 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { hasValidInteger, minLength, required } from '@navikt/ft-form-validators';
 import { Form, InputField } from '@navikt/ft-form-hooks';
 
-import { Button, Modal, BodyLong, Heading, VStack } from '@navikt/ds-react';
+import { Button, Modal, BodyLong, Heading, HStack } from '@navikt/ds-react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 type Formvalues = {
@@ -41,12 +41,14 @@ const JournalpostSøkModal: FunctionComponent<OwnProps> = ({ hentJournalpost, lu
       </Modal.Header>
       <Modal.Body>
         <Form<Formvalues> formMethods={formMethods} onSubmit={submit}>
-          <VStack gap="3" justify="start">
+          <HStack gap="1" justify="start">
             <div>
               <BodyLong>
                 <FormattedMessage id="Journalpost.Søk.Label" />
               </BodyLong>
             </div>
+          </HStack>
+          <HStack gap="2">
             <InputField
               name="journalpostId"
               validate={[required, hasValidInteger, minLength9]}
@@ -55,12 +57,10 @@ const JournalpostSøkModal: FunctionComponent<OwnProps> = ({ hentJournalpost, lu
               label={intl.formatMessage({ id: 'Journalpost.Søk.Label' })}
             />
             <Button>Søk</Button>
-          </VStack>
+          </HStack>
         </Form>
         <VerticalSpacer sixteenPx />
-        <BodyLong>
-          En journalpostId må inneholde minst 9 tegn, og kan kun inneholde tall. Den kan finnes i for eksempel GOSYS.
-        </BodyLong>
+        43{' '}
       </Modal.Body>
     </Modal>
   );

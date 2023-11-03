@@ -21,7 +21,6 @@ type OwnProps = Readonly<{
 const Header: FunctionComponent<OwnProps> = ({ valgtJournalpost, hentJournalpost, avbrytVisningAvJournalpost }) => {
   const [åpenSøkemodal, setÅpenSøkemodal] = useState<boolean>(false);
   const åpneModal = useCallback(() => {
-    console.log('KLIKK');
     setÅpenSøkemodal(true);
   }, [åpenSøkemodal]);
   const lukkModal = useCallback(() => {

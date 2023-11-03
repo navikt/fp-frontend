@@ -11,6 +11,7 @@
 }
 .tittelKol {
   width: 5%;
+  min-width: 150px;
 }
 .søkeKol {
   width: 90%;

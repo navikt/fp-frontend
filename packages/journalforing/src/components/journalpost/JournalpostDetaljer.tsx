@@ -85,14 +85,14 @@ const transformTittelValues = (
 const transformValues = (
   values: JournalføringFormValues,
   journalpost: Journalpost,
-  oppgave: Oppgave,
+  enhet?: string,
 ): JournalførSubmitValue => {
-  if (!oppgave.enhetId) {
+  if (!enhet) {
     throw Error('Kan ikke journalføre uten at enhet er satt');
   }
   return {
     journalpostId: journalpost.journalpostId,
-    enhetId: oppgave.enhetId,
+    enhetId: enhet,
     oppdaterTitlerDto: transformTittelValues(values, journalpost),
     ...transformValuesSak(values, journalpost),
   };
@@ -102,7 +102,7 @@ type OwnProps = Readonly<{
   journalpost: Journalpost;
   oppgave?: Oppgave;
   avbrytVisningAvJournalpost: () => void;
-  submitJournalføring: (params: JournalførSubmitValue) => void;
+  submitJournalføring: (params: JournalførSubmitValue, erAlleredeJournalført: boolean) => void;
   knyttJournalpostTilBruker: (params: OppdaterMedBruker) => void;
   forhåndsvisBruker: (fnr: string) => void;
   brukerTilForhåndsvisning?: ForhåndsvisBrukerRespons;
@@ -140,7 +140,11 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
     if (!oppgave) {
       throw new Error('Prøver å journalføre en journalpost uten oppgave, ugyldig tilstand!');
     }
-    submitJournalføring(transformValues(values, journalpost, oppgave));
+    if (erEndeligJournalført(journalpost.tilstand)) {
+      submitJournalføring(transformValues(values, journalpost, journalpost.journalførendeEnhet), true);
+    } else {
+      submitJournalføring(transformValues(values, journalpost, oppgave.enhetId), false);
+    }
   }, []);
 
   const isSubmittable = formMethods.formState.isDirty;
@@ -204,6 +208,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
               </Heading>
             </FlexColumn>
           </FlexRow>
+          <VerticalSpacer eightPx />
           <SakDetaljer
             sak={finnSakMedSaksnummer(journalpost.eksisterendeSaksnummer, saker)}
             key={journalpost.eksisterendeSaksnummer}

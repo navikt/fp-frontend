@@ -19,7 +19,7 @@ type OwnProps = Readonly<{
   avbrytVisningAvJournalpost: () => void;
   valgtOppgave?: Oppgave;
   valgtJournalpost?: Journalpost;
-  submitJournalføring: (data: JournalførSubmitValue) => void;
+  submitJournalføring: (data: JournalførSubmitValue, erAlleredeJournalført: boolean) => void;
   reserverOppgave: (data: ReserverOppgaveType) => void;
   flyttTilGosys: (data: string) => void;
 }>;

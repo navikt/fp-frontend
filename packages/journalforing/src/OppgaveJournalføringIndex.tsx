@@ -56,8 +56,12 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
     state: hentJournalpostState,
   } = restApiHooks.useRestApiRunner(RestApiPathsKeys.HENT_JOURNALPOST_DETALJER);
 
-  const { startRequest: submitJournalføring, data: saksnumerJournalføring } = restApiHooks.useRestApiRunner(
+  const { startRequest: submitJournalføringNySak, data: saksnumerJournalføringNySak } = restApiHooks.useRestApiRunner(
     RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING,
+  );
+
+  const { startRequest: knyttTilAnnenSak, data: saksnummerNySakKnyttAnnenSak } = restApiHooks.useRestApiRunner(
+    RestApiPathsKeys.KNYTT_JOURNALPOST_TIL_ANNEN_SAK,
   );
 
   const { startRequest: reserverOppgave } = restApiHooks.useRestApiRunner(RestApiPathsKeys.RESERVER_OPPGAVE);
@@ -91,16 +95,26 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
   }, []);
 
   const journalførCallback = useCallback(
-    (data: JournalførSubmitValue) => {
+    (data: JournalførSubmitValue, erAlleredeJournalført: boolean) => {
       setIsLoadingSubmit(true);
       setVisModal(true);
-      submitJournalføring(data).then(() => {
-        if (navAnsatt?.brukernavn) {
-          innhentAlleOppgaver({ ident: navAnsatt.brukernavn });
-        }
-        avbrytVisningAvJournalpost();
-        setIsLoadingSubmit(false);
-      });
+      if (erAlleredeJournalført) {
+        knyttTilAnnenSak(data).then(() => {
+          if (navAnsatt?.brukernavn) {
+            innhentAlleOppgaver({ ident: navAnsatt.brukernavn });
+            avbrytVisningAvJournalpost();
+            setIsLoadingSubmit(false);
+          }
+        });
+      } else {
+        submitJournalføringNySak(data).then(() => {
+          if (navAnsatt?.brukernavn) {
+            innhentAlleOppgaver({ ident: navAnsatt.brukernavn });
+            avbrytVisningAvJournalpost();
+            setIsLoadingSubmit(false);
+          }
+        });
+      }
     },
     [valgtOppgave],
   );
@@ -154,7 +168,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
           isLoading={isLoadingSubmit}
           lukkModal={lukkModal}
           showModal={visModal}
-          saksnummer={saksnumerJournalføring}
+          saksnummer={saksnumerJournalføringNySak || saksnummerNySakKnyttAnnenSak}
         />
       )}
       <JournalforingPanel>
