@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
-
-import { FlexContainer } from '@navikt/ft-ui-komponenter';
+import { FlexContainer, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { NavAnsatt } from '@navikt/fp-types';
 
 import Oppgave from '../typer/oppgaveTsType';
@@ -10,14 +9,17 @@ import JournalførSubmitValue from '../typer/ferdigstillJournalføringSubmit';
 import ReserverOppgaveType from '../typer/reserverOppgaveType';
 import Journalpost from '../typer/journalpostTsType';
 
+import styles from './journalføringIndex.module.css';
+
 type OwnProps = Readonly<{
   oppgaver: Oppgave[];
   navAnsatt: NavAnsatt;
   velgOppgaveOgHentJournalpost: (oppgave: Oppgave) => void;
+  hentJournalpost: (journalpostId: string) => void;
   avbrytVisningAvJournalpost: () => void;
   valgtOppgave?: Oppgave;
   valgtJournalpost?: Journalpost;
-  submitJournalføring: (data: JournalførSubmitValue) => void;
+  submitJournalføring: (data: JournalførSubmitValue, erAlleredeJournalført: boolean) => void;
   reserverOppgave: (data: ReserverOppgaveType) => void;
   flyttTilGosys: (data: string) => void;
 }>;
@@ -37,15 +39,18 @@ const JournalføringIndex: FunctionComponent<OwnProps> = ({
   flyttTilGosys,
 }) => (
   <FlexContainer>
-    {!valgtOppgave && (
-      <OppgaveTabell
-        oppgaver={oppgaver}
-        velgOppgaveOgHentJournalpost={velgOppgaveOgHentJournalpost}
-        navAnsatt={navAnsatt}
-        reserverOppgave={reserverOppgave}
-      />
+    <VerticalSpacer sixteenPx />
+    {!valgtJournalpost && (
+      <div className={styles.sentrertInnhold}>
+        <OppgaveTabell
+          oppgaver={oppgaver}
+          velgOppgaveOgHentJournalpost={velgOppgaveOgHentJournalpost}
+          navAnsatt={navAnsatt}
+          reserverOppgave={reserverOppgave}
+        />
+      </div>
     )}
-    {valgtJournalpost && valgtOppgave && (
+    {valgtJournalpost && (
       <JournalpostIndex
         avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
         oppgave={valgtOppgave}

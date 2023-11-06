@@ -15,11 +15,11 @@ import OppdaterMedBruker from '../../typer/oppdaterBrukerTsType';
 import ReserverOppgaveType from '../../typer/reserverOppgaveType';
 
 type OwnProps = Readonly<{
-  oppgave: OppgaveOversikt;
+  oppgave?: OppgaveOversikt;
   journalpost: Journalpost;
   avbrytVisningAvJournalpost: () => void;
   navAnsatt: NavAnsatt;
-  submitJournalføring: (data: JournalførSubmitValue) => void;
+  submitJournalføring: (data: JournalførSubmitValue, erAlleredeJournalført: boolean) => void;
   reserverOppgave: (data: ReserverOppgaveType) => void;
   flyttTilGosys: (data: string) => void;
 }>;

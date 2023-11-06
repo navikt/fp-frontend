@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Alert, BodyLong, Button, Heading, Tag } from '@navikt/ds-react';
+import { Alert, BodyLong, Heading } from '@navikt/ds-react';
 
 import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form } from '@navikt/ft-form-hooks';
@@ -25,8 +25,19 @@ import JournalpostTittelForm from './innhold/JournalpostTittelForm';
 import ForhåndsvisBrukerRespons from '../../typer/forhåndsvisBrukerResponsTsType';
 import ReserverOppgaveType from '../../typer/reserverOppgaveType';
 import OppgaveKilde from '../../kodeverk/oppgaveKilde';
+import Reservasjonspanel from './innhold/Reservasjonspanel';
+import { erEndeligJournalført } from '../../kodeverk/journalpostTilstand';
+import JournalFagsak from '../../typer/journalFagsakTsType';
 
 const dokumentTittelSkalStyresAvJournalpost = (jp: Journalpost): boolean => jp.dokumenter?.length === 1;
+
+const finnSakMedSaksnummer = (saksnummer: string, saker: JournalFagsak[]): JournalFagsak => {
+  const match = saker.find(sak => sak.saksnummer === saksnummer);
+  if (!match) {
+    throw new Error(`Finner ikke sak med saksnummer ${saksnummer} i listen over journalpostens saker`);
+  }
+  return match;
+};
 
 const buildInitialValues = (journalpost: Journalpost): JournalføringFormValues => {
   const docs = journalpost.dokumenter || [];
@@ -74,14 +85,14 @@ const transformTittelValues = (
 const transformValues = (
   values: JournalføringFormValues,
   journalpost: Journalpost,
-  oppgave: Oppgave,
+  enhet?: string,
 ): JournalførSubmitValue => {
-  if (!oppgave.enhetId) {
+  if (!enhet) {
     throw Error('Kan ikke journalføre uten at enhet er satt');
   }
   return {
     journalpostId: journalpost.journalpostId,
-    enhetId: oppgave.enhetId,
+    enhetId: enhet,
     oppdaterTitlerDto: transformTittelValues(values, journalpost),
     ...transformValuesSak(values, journalpost),
   };
@@ -89,9 +100,9 @@ const transformValues = (
 
 type OwnProps = Readonly<{
   journalpost: Journalpost;
-  oppgave: Oppgave;
+  oppgave?: Oppgave;
   avbrytVisningAvJournalpost: () => void;
-  submitJournalføring: (params: JournalførSubmitValue) => void;
+  submitJournalføring: (params: JournalførSubmitValue, erAlleredeJournalført: boolean) => void;
   knyttJournalpostTilBruker: (params: OppdaterMedBruker) => void;
   forhåndsvisBruker: (fnr: string) => void;
   brukerTilForhåndsvisning?: ForhåndsvisBrukerRespons;
@@ -118,68 +129,31 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
   flyttTilGosys,
 }) => {
   const skalKunneEndreSøker = !journalpost.bruker;
-  const erLokalOppgave: boolean = oppgave.kilde === OppgaveKilde.LOKAL;
+  const erLokalOppgave: boolean = oppgave?.kilde === OppgaveKilde.LOKAL;
+  const skalBareKunneEndreSak = erEndeligJournalført(journalpost.tilstand);
 
   const saker = journalpost.fagsaker || [];
   const formMethods = useForm<JournalføringFormValues>({
     defaultValues: buildInitialValues(journalpost),
   });
   const submitJournal = useCallback((values: JournalføringFormValues) => {
-    submitJournalføring(transformValues(values, journalpost, oppgave));
+    if (!oppgave) {
+      throw new Error('Prøver å journalføre en journalpost uten oppgave, ugyldig tilstand!');
+    }
+    if (erEndeligJournalført(journalpost.tilstand)) {
+      submitJournalføring(transformValues(values, journalpost, journalpost.journalførendeEnhet), true);
+    } else {
+      submitJournalføring(transformValues(values, journalpost, oppgave.enhetId), false);
+    }
   }, []);
 
   const isSubmittable = formMethods.formState.isDirty;
 
-  const reserverOppgaveAction = useCallback(() => {
-    const reservasjonFor = !oppgave.reservertAv ? navAnsatt.brukernavn : '';
-    reserverOppgave({
-      journalpostId: oppgave.journalpostId,
-      reserverFor: reservasjonFor,
-    });
-  }, [reserverOppgave]);
-
   return (
     <Form<JournalføringFormValues> formMethods={formMethods} onSubmit={submitJournal}>
-      <JournalpostTittelForm journalpost={journalpost} />
+      <JournalpostTittelForm journalpost={journalpost} readOnly={skalBareKunneEndreSak} />
       <VerticalSpacer eightPx />
-      {oppgave.reservertAv && navAnsatt.brukernavn === oppgave.reservertAv && (
-        <FlexRow>
-          <FlexColumn>
-            <BodyLong>
-              <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
-              <Tag size="small" variant="info-moderate" style={{ marginLeft: '0.5rem' }}>
-                <FormattedMessage id="Oppgavetabell.Meg" />
-              </Tag>
-              <Button variant="tertiary" size="small" onClick={reserverOppgaveAction} style={{ marginLeft: '0.5rem' }}>
-                <FormattedMessage id="Oppgavetabell.FjernMeg" />
-              </Button>
-            </BodyLong>
-          </FlexColumn>
-        </FlexRow>
-      )}
-      {oppgave.reservertAv && navAnsatt.brukernavn !== oppgave.reservertAv && (
-        <FlexRow>
-          <FlexColumn>
-            <BodyLong>
-              <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
-              <Tag size="small" variant="neutral-moderate" style={{ marginLeft: '0.5rem' }}>
-                {oppgave.reservertAv}
-              </Tag>
-            </BodyLong>
-          </FlexColumn>
-        </FlexRow>
-      )}
-      {!oppgave.reservertAv && (
-        <FlexRow>
-          <FlexColumn>
-            <BodyLong>
-              <Button variant="tertiary" size="small" onClick={reserverOppgaveAction}>
-                <FormattedMessage id="Oppgavetabell.SettPåMeg" />
-              </Button>
-            </BodyLong>
-          </FlexColumn>
-        </FlexRow>
-      )}
+      {oppgave && <Reservasjonspanel oppgave={oppgave} reserverOppgave={reserverOppgave} navAnsatt={navAnsatt} />}
       <VerticalSpacer sixteenPx />
       <BrukerAvsenderPanel
         journalpost={journalpost}
@@ -190,7 +164,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
         knyttSøkerTilJournalpost={knyttJournalpostTilBruker}
       />
       <VerticalSpacer twentyPx />
-      {oppgave.beskrivelse && (
+      {oppgave?.beskrivelse && (
         <>
           <FlexRow>
             <FlexColumn>
@@ -225,6 +199,23 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
           <VerticalSpacer thirtyTwoPx />
         </>
       )}
+      {journalpost.eksisterendeSaksnummer && (
+        <div>
+          <FlexRow>
+            <FlexColumn>
+              <Heading size="small">
+                <FormattedMessage id="ValgtOppgave.TilknyttetSak" />
+              </Heading>
+            </FlexColumn>
+          </FlexRow>
+          <VerticalSpacer eightPx />
+          <SakDetaljer
+            sak={finnSakMedSaksnummer(journalpost.eksisterendeSaksnummer, saker)}
+            key={journalpost.eksisterendeSaksnummer}
+          />
+          <VerticalSpacer thirtyTwoPx />
+        </div>
+      )}
       <FlexRow>
         <FlexColumn>
           <Heading size="small">
@@ -238,14 +229,16 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
           <FormattedMessage id="ValgtOppgave.RelaterteSaker.ManglerSøker" />
         </Alert>
       )}
-      {saker.map(sak => (
-        <SakDetaljer sak={sak} key={sak.saksnummer} />
-      ))}
+      {saker
+        .filter(sak => sak.saksnummer !== journalpost.eksisterendeSaksnummer)
+        .map(sak => (
+          <SakDetaljer sak={sak} key={sak.saksnummer} />
+        ))}
       <VerticalSpacer thirtyTwoPx />
       <FlexRow>
         <FlexColumn>
           <Heading size="small">
-            <FormattedMessage id="ValgtOppgave.KnyttTilSak" />
+            <FormattedMessage id={skalBareKunneEndreSak ? 'Journal.Sak.AnnenSak' : 'ValgtOppgave.KnyttTilSak'} />
           </Heading>
         </FlexColumn>
       </FlexRow>

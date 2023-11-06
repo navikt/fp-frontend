@@ -1,21 +1,20 @@
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
-import { Heading, Link } from '@navikt/ds-react';
-import { ChevronLeftIcon } from '@navikt/aksel-icons';
+import { Heading } from '@navikt/ds-react';
 import { NavAnsatt } from '@navikt/fp-types';
-import { FlexColumn, FlexContainer, FlexRow, LoadingPanel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState, useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import messages from '../i18n/nb_NO.json';
 import JournalforingPanel from './components/JournalforingPanel';
 import JournalføringIndex from './components/JournalføringIndex';
 import { requestApi, restApiHooks, RestApiPathsKeys } from './data/fpfordelRestApi';
 import Oppgave from './typer/oppgaveTsType';
-import styles from './oppgaveJournalføringIndex.module.css';
 import JournalførSubmitValue from './typer/ferdigstillJournalføringSubmit';
 import JournalførtSubmitModal from './components/journalpost/modal/JournalførtSubmitModal';
 import ReserverOppgaveType from './typer/reserverOppgaveType';
 import Journalpost from './typer/journalpostTsType';
+import Header from './components/header/Header';
 
 const intl = createIntl(messages);
 const TOM_ARRAY: Oppgave[] = [];
@@ -57,8 +56,12 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
     state: hentJournalpostState,
   } = restApiHooks.useRestApiRunner(RestApiPathsKeys.HENT_JOURNALPOST_DETALJER);
 
-  const { startRequest: submitJournalføring, data: saksnumerJournalføring } = restApiHooks.useRestApiRunner(
+  const { startRequest: submitJournalføringNySak, data: saksnumerJournalføringNySak } = restApiHooks.useRestApiRunner(
     RestApiPathsKeys.FERDIGSTILL_JOURNALFØRING,
+  );
+
+  const { startRequest: knyttTilAnnenSak, data: saksnummerNySakKnyttAnnenSak } = restApiHooks.useRestApiRunner(
+    RestApiPathsKeys.KNYTT_JOURNALPOST_TIL_ANNEN_SAK,
   );
 
   const { startRequest: reserverOppgave } = restApiHooks.useRestApiRunner(RestApiPathsKeys.RESERVER_OPPGAVE);
@@ -92,16 +95,26 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
   }, []);
 
   const journalførCallback = useCallback(
-    (data: JournalførSubmitValue) => {
+    (data: JournalførSubmitValue, erAlleredeJournalført: boolean) => {
       setIsLoadingSubmit(true);
       setVisModal(true);
-      submitJournalføring(data).then(() => {
-        if (navAnsatt?.brukernavn) {
-          innhentAlleOppgaver({ ident: navAnsatt.brukernavn });
-        }
-        avbrytVisningAvJournalpost();
-        setIsLoadingSubmit(false);
-      });
+      if (erAlleredeJournalført) {
+        knyttTilAnnenSak(data).then(() => {
+          if (navAnsatt?.brukernavn) {
+            innhentAlleOppgaver({ ident: navAnsatt.brukernavn });
+            avbrytVisningAvJournalpost();
+            setIsLoadingSubmit(false);
+          }
+        });
+      } else {
+        submitJournalføringNySak(data).then(() => {
+          if (navAnsatt?.brukernavn) {
+            innhentAlleOppgaver({ ident: navAnsatt.brukernavn });
+            avbrytVisningAvJournalpost();
+            setIsLoadingSubmit(false);
+          }
+        });
+      }
     },
     [valgtOppgave],
   );
@@ -145,30 +158,17 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
   }
   return (
     <RawIntlProvider value={intl}>
-      <div className={styles.header}>
-        {valgtJournalpost && (
-          <Link onClick={avbrytVisningAvJournalpost} className={styles.link}>
-            <ChevronLeftIcon />
-            <FormattedMessage id="Journalforing.Oversikt" />
-          </Link>
-        )}
-        <VerticalSpacer eightPx />
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn className={styles.tittelKol}>
-              <Heading size="medium">
-                <FormattedMessage id="Journalforing.Tittel" />
-              </Heading>
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
-      </div>
+      <Header
+        avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
+        valgtJournalpost={valgtJournalpost}
+        hentJournalpost={hentJournalpost}
+      />
       {visModal && (
         <JournalførtSubmitModal
           isLoading={isLoadingSubmit}
           lukkModal={lukkModal}
           showModal={visModal}
-          saksnummer={saksnumerJournalføring}
+          saksnummer={saksnumerJournalføringNySak || saksnummerNySakKnyttAnnenSak}
         />
       )}
       <JournalforingPanel>
@@ -178,6 +178,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
           oppgaver={alleOppgaver}
           navAnsatt={navAnsatt}
           velgOppgaveOgHentJournalpost={velgOppgaveOgHentJournalpost}
+          hentJournalpost={hentJournalpost}
           avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
           submitJournalføring={journalførCallback}
           reserverOppgave={reserverCallback}
