@@ -4,13 +4,14 @@ import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 import { foreldreType, familieHendelseType } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withRouter } from '@navikt/fp-storybook-utils';
 
 import ForeldrepengerPapirsoknadIndex from './ForeldrepengerPapirsoknadIndex';
 
 export default {
   title: 'papirsoknad/papirsoknad-fp',
   component: ForeldrepengerPapirsoknadIndex,
+  decorators: [withRouter],
 };
 
 export const visPapirsoknadForMorVedFødsel = () => (

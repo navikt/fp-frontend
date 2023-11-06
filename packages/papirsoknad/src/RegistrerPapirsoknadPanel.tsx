@@ -89,7 +89,6 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
             readOnly={readOnly}
             soknadData={soknadData}
             alleKodeverk={kodeverk}
-            fagsakPersonnummer={fagsak.bruker.fødselsnummer}
           />
         )}
         {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.FORELDREPENGER && (
