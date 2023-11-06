@@ -238,7 +238,7 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
       <FlexRow>
         <FlexColumn>
           <Heading size="small">
-            <FormattedMessage id={skalBareKunneEndreSak ? 'ValgtOppgave.FlyttTilSak' : 'ValgtOppgave.KnyttTilSak'} />
+            <FormattedMessage id={skalBareKunneEndreSak ? 'Journal.Sak.AnnenSak' : 'ValgtOppgave.KnyttTilSak'} />
           </Heading>
         </FlexColumn>
       </FlexRow>
