@@ -4,7 +4,7 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { hasValidInteger, minLength, required } from '@navikt/ft-form-validators';
 import { Form, InputField } from '@navikt/ft-form-hooks';
 
-import { Button, Modal, BodyLong, Heading, HStack } from '@navikt/ds-react';
+import { Button, Modal, Heading, VStack, HStack, Label, BodyShort } from '@navikt/ds-react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 type Formvalues = {
@@ -41,26 +41,28 @@ const JournalpostSøkModal: FunctionComponent<OwnProps> = ({ hentJournalpost, lu
       </Modal.Header>
       <Modal.Body>
         <Form<Formvalues> formMethods={formMethods} onSubmit={submit}>
-          <HStack gap="1" justify="start">
-            <div>
-              <BodyLong>
-                <FormattedMessage id="Journalpost.Søk.Label" />
-              </BodyLong>
-            </div>
-          </HStack>
+          <VStack gap="1" justify="start">
+            <Label>
+              <FormattedMessage id="Journalpost.Søk.JournalpostID" />
+            </Label>
+            <BodyShort>
+              <FormattedMessage id="Journalpost.Søk.KunTall" />
+            </BodyShort>
+          </VStack>
           <HStack gap="2">
             <InputField
               name="journalpostId"
               validate={[required, hasValidInteger, minLength9]}
               size="medium"
               hideLabel
-              label={intl.formatMessage({ id: 'Journalpost.Søk.Label' })}
+              label={intl.formatMessage({ id: 'Journalpost.Søk.JournalpostID' })}
             />
-            <Button>Søk</Button>
+            <Button size="xsmall">
+              <FormattedMessage id="Journalpost.Søk.Finn" />
+            </Button>
           </HStack>
         </Form>
         <VerticalSpacer sixteenPx />
-        43{' '}
       </Modal.Body>
     </Modal>
   );

@@ -158,6 +158,15 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
           <FormattedMessage id="Journal.Sak.Ingen" />
         </BodyShort>
       )}
+      {erEndeligJournalført(journalpost.tilstand) && (
+        <>
+          <VerticalSpacer eightPx />
+          <Alert variant="info">
+            <FormattedMessage id="Journalpost.Søk.Forklaring" />
+          </Alert>
+          <VerticalSpacer eightPx />
+        </>
+      )}
       <>
         <FlexRow>
           <FlexColumn>
@@ -203,7 +212,9 @@ const VelgSakForm: FunctionComponent<OwnProps> = ({
         <FlexRow className={styles.knappRad}>
           <FlexColumn>
             <Button size="small" variant="primary" disabled={!isSubmittable} type="submit">
-              <FormattedMessage id="ValgtOppgave.Journalfør" />
+              <FormattedMessage
+                id={erEndeligJournalført(journalpost.tilstand) ? 'Journal.Sak.AnnenSak' : 'ValgtOppgave.Journalfør'}
+              />
             </Button>
           </FlexColumn>
           <FlexColumn>

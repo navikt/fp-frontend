@@ -10,8 +10,8 @@
   cursor: pointer;
 }
 .tittelKol {
+  min-width: 170px;
   width: 5%;
-  min-width: 150px;
 }
 .søkeKol {
   width: 90%;
@@ -19,8 +19,8 @@
 
 @media all and (max-width: 1600px) {
   .tittelKol {
+    min-width: 170px;
     width: 13%;
-    min-width: 150px;
   }
   .søkeKol {
     width: 70%;
