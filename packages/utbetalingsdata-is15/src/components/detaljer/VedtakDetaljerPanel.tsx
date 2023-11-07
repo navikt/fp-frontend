@@ -11,7 +11,7 @@ interface OwnProps {
 }
 
 const VedtakDetaljerPanel: FunctionComponent<OwnProps> = ({ vedtak }) => (
-  <Tabs defaultValue="arbeidshforhold">
+  <Tabs defaultValue="utbetalinger">
     <Tabs.List>
       <Tabs.Tab value="arbeidshforhold" label={<FormattedMessage id="VedtakDetaljerPanel.Arbeidsforhold" />} />
       <Tabs.Tab value="utbetalinger" label={<FormattedMessage id="VedtakDetaljerPanel.Utbetalinger" />} />
