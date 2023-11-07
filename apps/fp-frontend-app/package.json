@@ -96,6 +96,7 @@
     "@navikt/fp-sak-ukjent-adresse": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
+    "@navikt/fp-utbetalingsdata-is15": "workspace:*",
     "@navikt/ft-fakta-beregning": "5.0.10",
     "@navikt/ft-fakta-beregning-redesign": "1.0.11",
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": "7.3.12",

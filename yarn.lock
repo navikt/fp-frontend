@@ -3345,6 +3345,7 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
+    "@navikt/fp-utbetalingsdata-is15": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
     "@navikt/ft-fakta-beregning": 5.0.10
     "@navikt/ft-fakta-beregning-redesign": 1.0.11
@@ -5049,6 +5050,44 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     typescript: 5.2.2
     vite: 4.5.0
+  languageName: unknown
+  linkType: soft
+
+"@navikt/fp-utbetalingsdata-is15@workspace:*, @navikt/fp-utbetalingsdata-is15@workspace:packages/utbetalingsdata-is15":
+  version: 0.0.0-use.local
+  resolution: "@navikt/fp-utbetalingsdata-is15@workspace:packages/utbetalingsdata-is15"
+  dependencies:
+    "@navikt/aksel-icons": 5.8.0
+    "@navikt/ds-css": 5.8.0
+    "@navikt/ds-react": 5.8.0
+    "@navikt/ds-react-internal": 3.4.3
+    "@navikt/fp-kodeverk": "workspace:*"
+    "@navikt/fp-rest-api": "workspace:*"
+    "@navikt/fp-rest-api-hooks": "workspace:*"
+    "@navikt/fp-storybook-utils": "workspace:*"
+    "@navikt/fp-types": "workspace:*"
+    "@navikt/fp-utils-test": "workspace:*"
+    "@navikt/ft-form-hooks": 4.2.12
+    "@navikt/ft-form-validators": 2.1.5
+    "@navikt/ft-kodeverk": 2.2.5
+    "@navikt/ft-ui-komponenter": 2.1.12
+    "@navikt/ft-utils": 2.1.5
+    "@storybook/addon-actions": 7.5.2
+    "@storybook/react": 7.5.2
+    "@storybook/react-vite": 7.5.2
+    "@testing-library/react": 14.0.0
+    "@testing-library/user-event": 14.5.1
+    cross-env: 7.0.3
+    dayjs: 1.11.10
+    eslint: 8.52.0
+    react: 18.2.0
+    react-hook-form: 7.47.0
+    react-intl: 6.5.1
+    storybook: 7.5.2
+    stylelint: 15.11.0
+    typescript: 5.2.2
+    vite: 4.5.0
+    vitest: 0.34.6
   languageName: unknown
   linkType: soft
 

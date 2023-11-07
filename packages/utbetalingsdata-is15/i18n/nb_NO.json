@@ -1,0 +1,11 @@
+{
+  "UtbetalingsdataPanel.Gruppe": "Gruppe",
+  "UtbetalingsdataPanel.Ytelse": "Ytelse",
+
+  "VedtakPanel.Identdato": "Identdato",
+  "VedtakPanel.Ytelse": "Ytelse",
+  "VedtakPanel.Dekningsgrad": "Dekningsgrad",
+  "VedtakPanel.Periode": "Periode",
+  "VedtakPanel.Arbeidskategori": "Arbeidskategori",
+  "VedtakPanel.OpphorFom": "Opphørsdato"
+}

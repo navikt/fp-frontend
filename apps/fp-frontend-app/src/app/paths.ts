@@ -5,6 +5,7 @@ import { skjermlenkeCodes } from '@navikt/fp-konstanter';
 
 export const AVDELINGSLEDER_PATH = 'avdelingsleder';
 export const JOURNALFØRING_PATH = 'journalforing';
+export const UTBETALINGSDATA_PATH = 'utbetalingsdata';
 
 const DEFAULT_FAKTA = 'default';
 const DEFAULT_PROSESS_STEG = 'default';
@@ -19,6 +20,7 @@ type QueryParams = {
 const DEV_LOGIN_URL = 'http://localhost:8080/fpsak/resource/login';
 
 export const journalføringRoutePath = `/${JOURNALFØRING_PATH}`;
+export const utbetalingsdataIs15RoutePath = `/${UTBETALINGSDATA_PATH}`;
 export const avdelingslederRoutePath = `/${AVDELINGSLEDER_PATH}`;
 export const fagsakRoutePath = '/fagsak/:saksnummer//*';
 export const aktoerRoutePath = '/aktoer/:aktoerId';

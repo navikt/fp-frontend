@@ -6,6 +6,7 @@ import { NotFoundPage } from '@navikt/ft-sak-infosider';
 
 import { SaksbehandlerIndex } from '@navikt/fp-los-saksbehandler';
 import { OppgaveJournalføringIndex } from '@navikt/fp-journalforing';
+import { UtbetalingsdataIs15Index } from '@navikt/fp-utbetalingsdata-is15';
 import { AvdelingslederIndex } from '@navikt/fp-los-avdelingsleder';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { NavAnsatt } from '@navikt/fp-types';
@@ -16,6 +17,7 @@ import {
   getFagsakHref,
   journalføringRoutePath,
   avdelingslederRoutePath,
+  utbetalingsdataIs15RoutePath,
 } from '../paths';
 import FagsakIndex from '../../fagsak/FagsakIndex';
 import AktoerIndex from '../../aktoer/AktoerIndex';
@@ -94,6 +96,7 @@ const Home: FunctionComponent<OwnProps> = ({ headerHeight, navAnsatt }) => {
           }
         />
         <Route path={journalføringRoutePath} element={<OppgaveJournalføringIndex navAnsatt={navAnsatt} />} />
+        <Route path={utbetalingsdataIs15RoutePath} element={<UtbetalingsdataIs15Index navAnsatt={navAnsatt} />} />
         <Route path={fagsakRoutePath} element={<FagsakIndex />} />
         <Route path={aktoerRoutePath} element={<AktoerIndex />} />
         <Route path="*" element={<NotFoundPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />} />
