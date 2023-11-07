@@ -176,3 +176,9 @@ export type {
   SvpAvklartOppholdPeriode,
 } from './src/fodselOgTilretteleggingTsType';
 export { SvpTilretteleggingFomKilde } from './src/fodselOgTilretteleggingTsType';
+export type {
+  default as InfotrygdVedtak,
+  Vedtak,
+  VedtakArbeidsforhold,
+  VedtakUtbetaling,
+} from './src/infotrygdVedtakTsType';

@@ -107,6 +107,15 @@ const Dekorator: FunctionComponent<OwnProps> = ({
     [navigate],
   );
 
+  // TODO Fjern utkommentering når testing er over
+  // const visUtbetalingsdataSide = useCallback(
+  //   (e: React.SyntheticEvent) => {
+  //     navigate(UTBETALINGSDATA_PATH);
+  //     e.preventDefault();
+  //   },
+  //   [navigate],
+  // );
+
   const errorMessages = useRestApiError();
   const { removeErrorMessages } = useRestApiErrorDispatcher();
 
@@ -136,6 +145,10 @@ const Dekorator: FunctionComponent<OwnProps> = ({
         callback: (e: React.SyntheticEvent) => visJournalføringside(e),
       });
     }
+    // lenker.push({
+    //   tekst: intl.formatMessage({ id: 'Dekorator.Utbetalingsdata' }),
+    //   callback: (e: React.SyntheticEvent) => visUtbetalingsdataSide(e),
+    // });
     return lenker;
   }, [kanOppgavestyre, kanJournalføre]);
 

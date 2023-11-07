@@ -11,6 +11,7 @@ import {
   Behandling,
   AlleKodeverk,
   AlleKodeverkTilbakekreving,
+  InfotrygdVedtak,
 } from '@navikt/fp-types';
 
 type BehandlendeEnheter = {
@@ -48,6 +49,7 @@ export const FagsakApiKeys = {
   INIT_FETCH_FPTILBAKE: new RestKey<InitDataFpTilbake, void>('INIT_FETCH_FPTILBAKE'),
   KODEVERK: new RestKey<AlleKodeverk, void>('KODEVERK'),
   KODEVERK_FPTILBAKE: new RestKey<AlleKodeverkTilbakekreving, void>('KODEVERK_FPTILBAKE'),
+  SEARCH_UTBETALINGSDATA_IS15: new RestKey<InfotrygdVedtak, { searchString: string }>('SEARCH_UTBETALINGSDATA_IS15'),
   SEARCH_FAGSAK: new RestKey<FagsakEnkel[], { searchString: string }>('SEARCH_FAGSAK'),
   FETCH_FAGSAK: new RestKey<Fagsak, { saksnummer: string }>('FETCH_FAGSAK'),
   FETCH_FAGSAKDATA_FPTILBAKE: new RestKey<FagsakDataFpTilbake, { saksnummer: string }>('FETCH_FAGSAKDATA_FPTILBAKE'),
@@ -77,6 +79,7 @@ const fagsakEndepunkter = new RestApiConfigBuilder()
   // Generelle
   .withRel('kodeverk', FagsakApiKeys.KODEVERK)
   .withRel('tilbake-kodeverk', FagsakApiKeys.KODEVERK_FPTILBAKE)
+  .withRel('infotrygd-søk', FagsakApiKeys.SEARCH_UTBETALINGSDATA_IS15)
 
   // Fagsak
   .withRel('fagsak-full', FagsakApiKeys.FETCH_FAGSAK)

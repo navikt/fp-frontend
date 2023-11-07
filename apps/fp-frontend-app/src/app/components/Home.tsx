@@ -6,6 +6,7 @@ import { NotFoundPage } from '@navikt/ft-sak-infosider';
 
 import { SaksbehandlerIndex } from '@navikt/fp-los-saksbehandler';
 import { OppgaveJournalføringIndex } from '@navikt/fp-journalforing';
+import { UtbetalingsdataIs15Index } from '@navikt/fp-utbetalingsdata-is15';
 import { AvdelingslederIndex } from '@navikt/fp-los-avdelingsleder';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { NavAnsatt } from '@navikt/fp-types';
@@ -16,12 +17,14 @@ import {
   getFagsakHref,
   journalføringRoutePath,
   avdelingslederRoutePath,
+  utbetalingsdataIs15RoutePath,
 } from '../paths';
 import FagsakIndex from '../../fagsak/FagsakIndex';
 import AktoerIndex from '../../aktoer/AktoerIndex';
 import FagsakSearchIndex from '../../fagsakSearch/FagsakSearchIndex';
 
 import styles from './home.module.css';
+import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 
 interface OwnProps {
   headerHeight: number;
@@ -64,6 +67,10 @@ const Home: FunctionComponent<OwnProps> = ({ headerHeight, navAnsatt }) => {
     }
   }, [location]);
 
+  const { startRequest: søkInfotrygVedtak, data: infotrygdVedtak } = restFagsakApiHooks.useRestApiRunner(
+    FagsakApiKeys.SEARCH_UTBETALINGSDATA_IS15,
+  );
+
   return (
     <div className={styles.content} style={{ margin: `${headerHeight}px auto 0` }}>
       <Routes>
@@ -94,6 +101,12 @@ const Home: FunctionComponent<OwnProps> = ({ headerHeight, navAnsatt }) => {
           }
         />
         <Route path={journalføringRoutePath} element={<OppgaveJournalføringIndex navAnsatt={navAnsatt} />} />
+        <Route
+          path={utbetalingsdataIs15RoutePath}
+          element={
+            <UtbetalingsdataIs15Index søkInfotrygdVedtak={søkInfotrygVedtak} infotrygdVedtak={infotrygdVedtak} />
+          }
+        />
         <Route path={fagsakRoutePath} element={<FagsakIndex />} />
         <Route path={aktoerRoutePath} element={<AktoerIndex />} />
         <Route path="*" element={<NotFoundPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />} />
