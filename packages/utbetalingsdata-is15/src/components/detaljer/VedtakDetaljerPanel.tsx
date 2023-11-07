@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
-
-import { Vedtak } from '@navikt/fp-types';
+import { FormattedMessage } from 'react-intl';
 import { Tabs } from '@navikt/ds-react';
+import { Vedtak } from '@navikt/fp-types';
+
 import ArbeidsforholdPanel from './ArbeidsforholdPanel';
 import UtbetalingerPanel from './UtbetalingerPanel';
 
@@ -10,15 +11,15 @@ interface OwnProps {
 }
 
 const VedtakDetaljerPanel: FunctionComponent<OwnProps> = ({ vedtak }) => (
-  <Tabs defaultValue="logg">
+  <Tabs defaultValue="arbeidshforhold">
     <Tabs.List>
-      <Tabs.Tab value="logg" label="Arbeidsforhold" />
-      <Tabs.Tab value="inbox" label="Utbetalinger" />
+      <Tabs.Tab value="arbeidshforhold" label={<FormattedMessage id="VedtakDetaljerPanel.Arbeidsforhold" />} />
+      <Tabs.Tab value="utbetalinger" label={<FormattedMessage id="VedtakDetaljerPanel.Utbetalinger" />} />
     </Tabs.List>
-    <Tabs.Panel value="logg" className="h-24 w-full bg-gray-50 p-4">
+    <Tabs.Panel value="arbeidshforhold">
       <ArbeidsforholdPanel alleArbeidsforhold={vedtak.arbeidsforhold} />
     </Tabs.Panel>
-    <Tabs.Panel value="inbox" className="h-24 w-full bg-gray-50 p-4">
+    <Tabs.Panel value="utbetalinger">
       <UtbetalingerPanel utbetalinger={vedtak.utbetalinger} />
     </Tabs.Panel>
   </Tabs>

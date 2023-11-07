@@ -24,6 +24,7 @@ import AktoerIndex from '../../aktoer/AktoerIndex';
 import FagsakSearchIndex from '../../fagsakSearch/FagsakSearchIndex';
 
 import styles from './home.module.css';
+import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 
 interface OwnProps {
   headerHeight: number;
@@ -66,6 +67,10 @@ const Home: FunctionComponent<OwnProps> = ({ headerHeight, navAnsatt }) => {
     }
   }, [location]);
 
+  const { startRequest: søkInfotrygVedtak, data: infotrygdVedtak } = restFagsakApiHooks.useRestApiRunner(
+    FagsakApiKeys.SEARCH_UTBETALINGSDATA_IS15,
+  );
+
   return (
     <div className={styles.content} style={{ margin: `${headerHeight}px auto 0` }}>
       <Routes>
@@ -96,7 +101,12 @@ const Home: FunctionComponent<OwnProps> = ({ headerHeight, navAnsatt }) => {
           }
         />
         <Route path={journalføringRoutePath} element={<OppgaveJournalføringIndex navAnsatt={navAnsatt} />} />
-        <Route path={utbetalingsdataIs15RoutePath} element={<UtbetalingsdataIs15Index navAnsatt={navAnsatt} />} />
+        <Route
+          path={utbetalingsdataIs15RoutePath}
+          element={
+            <UtbetalingsdataIs15Index søkInfotrygdVedtak={søkInfotrygVedtak} infotrygdVedtak={infotrygdVedtak} />
+          }
+        />
         <Route path={fagsakRoutePath} element={<FagsakIndex />} />
         <Route path={aktoerRoutePath} element={<AktoerIndex />} />
         <Route path="*" element={<NotFoundPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />} />

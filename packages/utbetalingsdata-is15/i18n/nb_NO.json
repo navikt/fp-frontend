@@ -1,11 +1,30 @@
 {
+  "UtbetalingsdataPanel.Heading": "Søk i Infotrygd",
+  "UtbetalingsdataPanel.Sok": "Fødselsnummer",
   "UtbetalingsdataPanel.Gruppe": "Gruppe",
   "UtbetalingsdataPanel.Ytelse": "Ytelse",
+  "UtbetalingsdataPanel.UgyldigFnr": "Oppgitt fødselsnummer er ikke gyldig",
+  "UtbetalingsdataPanel.Resultat": "Søkeresultat:",
 
   "VedtakPanel.Identdato": "Identdato",
   "VedtakPanel.Ytelse": "Ytelse",
   "VedtakPanel.Dekningsgrad": "Dekningsgrad",
   "VedtakPanel.Periode": "Periode",
   "VedtakPanel.Arbeidskategori": "Arbeidskategori",
-  "VedtakPanel.OpphorFom": "Opphørsdato"
+  "VedtakPanel.OpphorFom": "Opphørsdato",
+
+  "VedtakDetaljerPanel.Arbeidsforhold": "Arbeidsforhold",
+  "VedtakDetaljerPanel.Utbetalinger": "Utbetalinger",
+
+  "ArbeidsforholdPanel.Arbeidsgiver": "Arbeidsgiver",
+  "ArbeidsforholdPanel.Inntekt": "Inntekt",
+  "ArbeidsforholdPanel.Inntektsperiode": "Inntektsperiode",
+  "ArbeidsforholdPanel.Refusjon": "Refusjon",
+  "ArbeidsforholdPanel.IngenArbeidsforhold": "Ingen arbeidsforhold",
+
+  "UtbetalingerPanel.Periode": "Periode",
+  "UtbetalingerPanel.Utbetalingsgrad": "Utbetalingsgrad",
+  "UtbetalingerPanel.Dagsats": "Dagsats",
+  "UtbetalingerPanel.Refusjon": "Refusjon",
+  "UtbetalingerPanel.IngenUtbetalinger": "Ingen utbetalinger"
 }

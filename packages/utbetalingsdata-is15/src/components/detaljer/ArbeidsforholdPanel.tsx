@@ -1,23 +1,37 @@
 import React, { FunctionComponent } from 'react';
 
 import { VedtakArbeidsforhold } from '@navikt/fp-types';
-import { Table } from '@navikt/ds-react';
+import { BodyShort, Table, VStack } from '@navikt/ds-react';
+import { FormattedMessage } from 'react-intl';
 
 interface OwnProps {
   alleArbeidsforhold?: VedtakArbeidsforhold[];
 }
 
 const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({ alleArbeidsforhold }) => (
-  <>
-    {!alleArbeidsforhold && <>Ingen arbeidsforhold</>}
+  <VStack gap="4">
+    <div />
+    {!alleArbeidsforhold && (
+      <BodyShort size="small">
+        <FormattedMessage id="ArbeidsforholdPanel.IngenArbeidsforhold" />
+      </BodyShort>
+    )}
     {alleArbeidsforhold && (
       <Table size="small">
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell scope="col">arbeidsgiver</Table.HeaderCell>
-            <Table.HeaderCell scope="col">inntekt</Table.HeaderCell>
-            <Table.HeaderCell scope="col">inntektsperiode.termnavn</Table.HeaderCell>
-            <Table.HeaderCell scope="col">refusjon</Table.HeaderCell>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="ArbeidsforholdPanel.Arbeidsgiver" />
+            </Table.HeaderCell>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="ArbeidsforholdPanel.Inntekt" />
+            </Table.HeaderCell>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="ArbeidsforholdPanel.Inntektsperiode" />
+            </Table.HeaderCell>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="ArbeidsforholdPanel.Refusjon" />
+            </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -32,7 +46,7 @@ const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({ alleArbeidsforhold }
         </Table.Body>
       </Table>
     )}
-  </>
+  </VStack>
 );
 
 export default ArbeidsforholdPanel;

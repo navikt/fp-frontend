@@ -9,12 +9,13 @@ import UtbetalingsdataPanel from './components/UtbetalingsdataPanel';
 const intl = createIntl(messages);
 
 interface OwnProps {
-  infotrygdVedtak: InfotrygdVedtak;
+  søkInfotrygdVedtak: (params: { searchString: string }) => Promise<InfotrygdVedtak | undefined>;
+  infotrygdVedtak?: InfotrygdVedtak;
 }
 
-const UtbetalingsdataIs15Index: FunctionComponent<OwnProps> = ({ infotrygdVedtak }) => (
+const UtbetalingsdataIs15Index: FunctionComponent<OwnProps> = ({ infotrygdVedtak, søkInfotrygdVedtak }) => (
   <RawIntlProvider value={intl}>
-    <UtbetalingsdataPanel infotrygdVedtak={infotrygdVedtak} />
+    <UtbetalingsdataPanel infotrygdVedtak={infotrygdVedtak} søkInfotrygdVedtak={søkInfotrygdVedtak} />
   </RawIntlProvider>
 );
 

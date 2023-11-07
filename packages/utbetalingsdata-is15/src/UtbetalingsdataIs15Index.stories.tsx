@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { InfotrygdVedtak } from '@navikt/fp-types';
 
+import { VStack } from '@navikt/ds-react';
 import UtbetalingsdataIs15Index from './UtbetalingsdataIs15Index';
 
 export default {
@@ -11,7 +12,23 @@ export default {
 
 const Template: StoryFn<{
   infotrygdVedtak: InfotrygdVedtak;
-}> = ({ infotrygdVedtak }) => <UtbetalingsdataIs15Index infotrygdVedtak={infotrygdVedtak} />;
+}> = ({ infotrygdVedtak }) => {
+  const [visResultat, setVisResultat] = useState(false);
+  const søkInfotrygdVedtak = () => {
+    setVisResultat(true);
+    return Promise.resolve<InfotrygdVedtak | undefined>(undefined);
+  };
+
+  return (
+    <VStack gap="5">
+      <div style={{ color: 'red' }}>Gyldig fødselsnummer for testing: 07078518434</div>
+      <UtbetalingsdataIs15Index
+        søkInfotrygdVedtak={søkInfotrygdVedtak}
+        infotrygdVedtak={visResultat ? infotrygdVedtak : undefined}
+      />
+    </VStack>
+  );
+};
 
 export const Default = Template.bind({});
 Default.args = {

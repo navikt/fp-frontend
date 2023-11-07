@@ -18,28 +18,15 @@
     "storybook": "storybook dev --quiet -p 7019"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "5.8.0",
     "@navikt/ds-react": "5.8.0",
-    "@navikt/ds-react-internal": "3.4.3",
-    "@navikt/fp-kodeverk": "workspace:*",
-    "@navikt/fp-rest-api": "workspace:*",
-    "@navikt/fp-rest-api-hooks": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-form-hooks": "4.2.12",
-    "@navikt/ft-form-validators": "2.1.5",
-    "@navikt/ft-kodeverk": "2.2.5",
     "@navikt/ft-ui-komponenter": "2.1.12",
     "@navikt/ft-utils": "2.1.5",
-    "dayjs": "1.11.10",
     "react": "18.2.0",
-    "react-hook-form": "7.47.0",
     "react-intl": "6.5.1"
   },
   "devDependencies": {
     "@navikt/ds-css": "5.8.0",
-    "@navikt/fp-storybook-utils": "workspace:*",
-    "@navikt/fp-utils-test": "workspace:*",
-    "@storybook/addon-actions": "7.5.2",
     "@storybook/react": "7.5.2",
     "@storybook/react-vite": "7.5.2",
     "@testing-library/react": "14.0.0",

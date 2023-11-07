@@ -4,7 +4,7 @@ import { Vedtak } from '@navikt/fp-types';
 import { PeriodLabel, DateLabel } from '@navikt/ft-ui-komponenter';
 import { Table, VStack } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
-import VedtakDetaljerPanel from './VedtakDetaljerPanel';
+import VedtakDetaljerPanel from './detaljer/VedtakDetaljerPanel';
 
 interface OwnProps {
   alleVedtak: Vedtak[];
@@ -40,7 +40,11 @@ const VedtakPanel: FunctionComponent<OwnProps> = ({ alleVedtak }) => {
         </Table.Header>
         <Table.Body>
           {alleVedtak.map(vedtak => (
-            <Table.Row key={vedtak.identdato} onClick={() => setValgtVedtak(vedtak)}>
+            <Table.Row
+              key={vedtak.identdato}
+              onClick={() => setValgtVedtak(vedtak)}
+              selected={vedtak.identdato === valgtVedtak?.identdato}
+            >
               <Table.DataCell>
                 <DateLabel dateString={vedtak.identdato} />
               </Table.DataCell>

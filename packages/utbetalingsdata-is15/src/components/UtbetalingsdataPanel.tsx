@@ -1,43 +1,70 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useCallback, useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { VStack, ExpansionCard, HStack, Search, Heading } from '@navikt/ds-react';
 
-import { InfotrygdVedtak, Vedtak } from '@navikt/fp-types';
-import { VStack, Table } from '@navikt/ds-react';
-import { DateLabel } from '@navikt/ft-ui-komponenter';
-import { FormattedMessage } from 'react-intl';
+import { isValidFodselsnummer } from '@navikt/ft-utils';
+import { InfotrygdVedtak } from '@navikt/fp-types';
+import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
 import VedtakPanel from './VedtakPanel';
 
 interface OwnProps {
-  infotrygdVedtak: InfotrygdVedtak;
+  søkInfotrygdVedtak: (params: { searchString: string }) => Promise<InfotrygdVedtak | undefined>;
+  infotrygdVedtak?: InfotrygdVedtak;
 }
 
-const UtbetalingsdataPanel: FunctionComponent<OwnProps> = ({ infotrygdVedtak }) => {
-  const [valgtVedtak, setValgtVedtak] = useState<Vedtak[]>();
+const UtbetalingsdataPanel: FunctionComponent<OwnProps> = ({ søkInfotrygdVedtak, infotrygdVedtak }) => {
+  const intl = useIntl();
+
+  const [error, setError] = useState<string>();
+
+  const startSøk = useCallback((value: string) => {
+    if (value && isValidFodselsnummer(value)) {
+      setError(undefined);
+      søkInfotrygdVedtak({ searchString: value });
+    } else {
+      setError(intl.formatMessage({ id: 'UtbetalingsdataPanel.UgyldigFnr' }));
+    }
+  }, []);
 
   return (
-    <VStack gap="10">
-      <Table size="small">
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell scope="col">
-              <FormattedMessage id="UtbetalingsdataPanel.Gruppe" />
-            </Table.HeaderCell>
-            <Table.HeaderCell scope="col">
-              <FormattedMessage id="UtbetalingsdataPanel.Ytelse" />
-            </Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
+    <VStack gap="5">
+      <Heading size="large">
+        <FormattedMessage id="UtbetalingsdataPanel.Heading" />
+      </Heading>
+      <div>
+        <Search
+          label={<FormattedMessage id="UtbetalingsdataPanel.Sok" />}
+          hideLabel={false}
+          variant="primary"
+          htmlSize="12"
+          onSearchClick={startSøk}
+          error={error}
+        />
+      </div>
+      {infotrygdVedtak && !error && (
+        <>
+          <VerticalSpacer sixteenPx />
+          <Heading size="small">
+            <FormattedMessage id="UtbetalingsdataPanel.Resultat" />
+          </Heading>
           {Object.values(infotrygdVedtak.vedtakKjedeForIdentdato).map(v => (
-            <Table.Row key={v.opprinneligIdentdato} onClick={() => setValgtVedtak(v.vedtak)}>
-              <Table.DataCell>
-                <DateLabel dateString={v.opprinneligIdentdato} />
-              </Table.DataCell>
-              <Table.DataCell>{v.vedtak[0].behandlingstema.termnavn}</Table.DataCell>
-            </Table.Row>
+            <ExpansionCard size="small" aria-label="default-demo" key={v.opprinneligIdentdato}>
+              <ExpansionCard.Header>
+                <ExpansionCard.Title size="small">
+                  <HStack gap="4" align="center">
+                    <DateLabel dateString={v.opprinneligIdentdato} />
+                    <div>{v.vedtak[0].behandlingstema.termnavn}</div>
+                  </HStack>
+                </ExpansionCard.Title>
+              </ExpansionCard.Header>
+              <ExpansionCard.Content>
+                <VedtakPanel alleVedtak={v.vedtak} />
+              </ExpansionCard.Content>
+            </ExpansionCard>
           ))}
-        </Table.Body>
-      </Table>
-      {valgtVedtak && <VedtakPanel alleVedtak={valgtVedtak} />}
+        </>
+      )}
     </VStack>
   );
 };
