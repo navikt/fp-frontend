@@ -8,6 +8,8 @@ import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import VedtakPanel from './VedtakPanel';
 
+import styles from './utbetalingsdataPanel.module.css';
+
 interface OwnProps {
   søkInfotrygdVedtak: (params: { searchString: string }) => Promise<InfotrygdVedtak | undefined>;
   infotrygdVedtak?: InfotrygdVedtak;
@@ -49,10 +51,10 @@ const UtbetalingsdataPanel: FunctionComponent<OwnProps> = ({ søkInfotrygdVedtak
             <FormattedMessage id="UtbetalingsdataPanel.Resultat" />
           </Heading>
           {Object.values(infotrygdVedtak.vedtakKjedeForIdentdato).map(v => (
-            <ExpansionCard size="small" aria-label="default-demo" key={v.opprinneligIdentdato}>
+            <ExpansionCard size="small" aria-label="default-demo" key={v.opprinneligIdentdato} className={styles.card}>
               <ExpansionCard.Header>
                 <ExpansionCard.Title size="small">
-                  <HStack gap="4" align="center">
+                  <HStack gap="5">
                     <DateLabel dateString={v.opprinneligIdentdato} />
                     <div>{v.vedtak[0].behandlingstema.termnavn}</div>
                   </HStack>

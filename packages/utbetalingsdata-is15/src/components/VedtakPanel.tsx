@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 
 import { Vedtak } from '@navikt/fp-types';
-import { PeriodLabel, DateLabel } from '@navikt/ft-ui-komponenter';
+import { PeriodLabel, DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Table, VStack } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
 import VedtakDetaljerPanel from './detaljer/VedtakDetaljerPanel';
@@ -44,6 +44,7 @@ const VedtakPanel: FunctionComponent<OwnProps> = ({ alleVedtak }) => {
               key={vedtak.identdato}
               onClick={() => setValgtVedtak(vedtak)}
               selected={vedtak.identdato === valgtVedtak?.identdato}
+              style={{ cursor: 'pointer' }}
             >
               <Table.DataCell>
                 <DateLabel dateString={vedtak.identdato} />
@@ -62,6 +63,7 @@ const VedtakPanel: FunctionComponent<OwnProps> = ({ alleVedtak }) => {
         </Table.Body>
       </Table>
       {valgtVedtak && <VedtakDetaljerPanel vedtak={valgtVedtak} />}
+      <VerticalSpacer thirtyTwoPx />
     </VStack>
   );
 };
