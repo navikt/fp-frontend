@@ -25,6 +25,7 @@
     "react-intl": "6.5.1"
   },
   "devDependencies": {
+    "@formatjs/cli-lib": "6.3.0",
     "@navikt/ds-css": "5.8.0",
     "@storybook/react": "7.5.2",
     "@storybook/react-vite": "7.5.2",
@@ -32,6 +33,7 @@
     "@testing-library/user-event": "14.5.1",
     "cross-env": "7.0.3",
     "eslint": "8.52.0",
+    "fast-glob": "^3.3.1",
     "storybook": "7.5.2",
     "stylelint": "15.11.0",
     "typescript": "5.2.2",

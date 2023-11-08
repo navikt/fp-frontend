@@ -30,7 +30,7 @@ const UtbetalingsdataPanel: FunctionComponent<OwnProps> = ({ søkInfotrygdVedtak
   }, []);
 
   return (
-    <VStack gap="5">
+    <VStack gap="5" className={styles.container}>
       <Heading size="large">
         <FormattedMessage id="UtbetalingsdataPanel.Heading" />
       </Heading>
@@ -39,6 +39,7 @@ const UtbetalingsdataPanel: FunctionComponent<OwnProps> = ({ søkInfotrygdVedtak
           label={<FormattedMessage id="UtbetalingsdataPanel.Sok" />}
           hideLabel={false}
           variant="primary"
+          size="small"
           htmlSize="12"
           onSearchClick={startSøk}
           error={error}

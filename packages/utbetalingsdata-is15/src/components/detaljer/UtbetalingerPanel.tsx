@@ -43,7 +43,13 @@ const UtbetalingerPanel: FunctionComponent<OwnProps> = ({ utbetalinger }) => (
               </Table.DataCell>
               <Table.DataCell>{utbetaling.utbetalingsgrad}</Table.DataCell>
               <Table.DataCell>{utbetaling.dagsats}</Table.DataCell>
-              <Table.DataCell>{utbetaling.erRefusjon}</Table.DataCell>
+              <Table.DataCell>
+                {utbetaling.erRefusjon ? (
+                  <FormattedMessage id="UtbetalingerPanel.Ja" />
+                ) : (
+                  <FormattedMessage id="UtbetalingerPanel.Nei" />
+                )}
+              </Table.DataCell>
             </Table.Row>
           ))}
         </Table.Body>

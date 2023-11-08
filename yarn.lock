@@ -5057,6 +5057,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-utbetalingsdata-is15@workspace:packages/utbetalingsdata-is15"
   dependencies:
+    "@formatjs/cli-lib": 6.3.0
     "@navikt/ds-css": 5.8.0
     "@navikt/ds-react": 5.8.0
     "@navikt/fp-types": "workspace:*"
@@ -5068,6 +5069,7 @@ __metadata:
     "@testing-library/user-event": 14.5.1
     cross-env: 7.0.3
     eslint: 8.52.0
+    fast-glob: ^3.3.1
     react: 18.2.0
     react-intl: 6.5.1
     storybook: 7.5.2

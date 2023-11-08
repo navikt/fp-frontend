@@ -40,7 +40,13 @@ const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({ alleArbeidsforhold }
               <Table.DataCell>{arbeidsforhold.arbeidsgiverOrgnr}</Table.DataCell>
               <Table.DataCell>{arbeidsforhold.inntekt}</Table.DataCell>
               <Table.DataCell>{arbeidsforhold.inntektsperiode.termnavn}</Table.DataCell>
-              <Table.DataCell>{arbeidsforhold.refusjon}</Table.DataCell>
+              <Table.DataCell>
+                {arbeidsforhold.refusjon ? (
+                  <FormattedMessage id="ArbeidsforholdPanel.Ja" />
+                ) : (
+                  <FormattedMessage id="ArbeidsforholdPanel.Nei" />
+                )}
+              </Table.DataCell>
             </Table.Row>
           ))}
         </Table.Body>
