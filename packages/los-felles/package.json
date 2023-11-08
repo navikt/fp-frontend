@@ -33,7 +33,7 @@
     "history": "5.3.0",
     "lodash.debounce": "4.0.8",
     "react": "18.2.0",
-    "react-hook-form": "7.47.0",
+    "react-hook-form": "7.48.2",
     "react-intl": "6.5.1",
     "react-router-dom": "6.18.0"
   },
