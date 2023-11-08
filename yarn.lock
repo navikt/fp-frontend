@@ -3093,6 +3093,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-tilrettelegging@workspace:packages/fakta-tilrettelegging"
   dependencies:
+    "@formatjs/cli-lib": 6.3.0
     "@navikt/aksel-icons": 5.8.0
     "@navikt/ds-css": 5.8.0
     "@navikt/ds-react": 5.8.0
@@ -3115,6 +3116,7 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.10
     eslint: 8.52.0
+    fast-glob: ^3.3.1
     react: 18.2.0
     react-dom: 18.2.0
     react-hook-form: 7.47.0

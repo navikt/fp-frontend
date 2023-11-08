@@ -14,6 +14,7 @@
   "TilretteleggingFaktaForm.HarIkkeValgtArbeidsforhold": "Minst ett arbeidsforhold må brukes",
   "TilretteleggingFaktaForm.PeriodeIkkeLagtTil": "Det er minst en periode som er lagt til men ikke ferdigstilt",
   "TilretteleggingFaktaForm.ArbeidsforholdUtenTilrettelegging": "Alle arbeidsforhold med svangerskapspenger må ha minst en tilretteleggingsperiode",
+  "TilretteleggingFaktaForm.ValgtSvpVedGyldig100Permisjon": "Arbeidsforhold med gyldig permisjon på 100% kan ikke ha svangerskapspenger",
 
   "TilretteleggingForArbeidsgiverPanel.TilretteleggingTidligereEnn": "Tilrettelegging fra og med må være tidligere enn {dato}",
   "TilretteleggingForArbeidsgiverPanel.DatoForTilrettelegging": "Dato for tilrettelegging fra lege eller jordmor",
@@ -74,6 +75,7 @@
   "VelferdspermisjonPanel.Nei": "Nei",
   "VelferdspermisjonPanel.Oppdater": "Oppdater",
   "VelferdspermisjonPanel.AAregisteret": "AA-registeret",
+  "VelferdspermisjonPanel.Permisjon100ProsentOgGyldig": "Permisjonen på 100% er satt som gyldig, og dette fører til at søker ikke får svangerskapsenger for arbeidsforholdet.",
 
   "TilretteleggingPerioderTabellRad.Periode": "Periode",
   "TilretteleggingPerioderTabellRad.Saksbehandler": "Saksbehandler",

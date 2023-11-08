@@ -297,12 +297,18 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
               loading={false}
               onClick={formMethods.handleSubmit((values: FormValues) => lagreIForm(values))}
             >
-              <FormattedMessage id={erNyPeriode ? 'TilretteleggingForm.LeggTil' : 'TilretteleggingForm.Oppdater'} />
+              {erNyPeriode ? (
+                <FormattedMessage id="TilretteleggingForm.LeggTil" />
+              ) : (
+                <FormattedMessage id="TilretteleggingForm.Oppdater" />
+              )}
             </Button>
             <Button size="small" variant="secondary" onClick={avbryt} type="button">
-              <FormattedMessage
-                id={erNyPeriode ? 'TilretteleggingForm.AvsluttOgSlett' : 'TilretteleggingForm.Avbryt'}
-              />
+              {erNyPeriode ? (
+                <FormattedMessage id="TilretteleggingForm.AvsluttOgSlett" />
+              ) : (
+                <FormattedMessage id="TilretteleggingForm.Avbryt" />
+              )}
             </Button>
             {!erNyPeriode && (
               <>
