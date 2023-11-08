@@ -34,9 +34,13 @@ const erInnenforIntervall = (tilretteleggingBehovFom: string, fomDato: string, t
 
 const finnSvpTagTekst = (skalBrukes: boolean, visInfoAlert: boolean) => {
   if (visInfoAlert && skalBrukes) {
-    return 'ArbeidsforholdFieldArray.SvpIkkeBeregnet';
+    return <FormattedMessage id="ArbeidsforholdFieldArray.SvpIkkeBeregnet" />;
   }
-  return skalBrukes ? 'ArbeidsforholdFieldArray.SkalHaSvp' : 'ArbeidsforholdFieldArray.SkalIkkeHaSvp';
+  return skalBrukes ? (
+    <FormattedMessage id="ArbeidsforholdFieldArray.SkalHaSvp" />
+  ) : (
+    <FormattedMessage id="ArbeidsforholdFieldArray.SkalIkkeHaSvp" />
+  );
 };
 
 interface OwnProps {
@@ -116,7 +120,7 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                       </FlexColumn>
                       <FlexColumn>
                         <Tag size="small" variant="neutral-moderate">
-                          <FormattedMessage id={finnSvpTagTekst(arbeidsforhold.skalBrukes, visInfoAlert)} />
+                          {finnSvpTagTekst(arbeidsforhold.skalBrukes, visInfoAlert)}
                         </Tag>
                       </FlexColumn>
                       {arbeidsforhold.skalBrukes && visInfoAlert && (

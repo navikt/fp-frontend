@@ -79,6 +79,61 @@ const tilretteleggingPermisjon = {
   saksbehandlet: true,
 };
 
+const tilretteleggingMed100ProsentPermisjon = {
+  termindato: '2020-11-06',
+  arbeidsforholdListe: [
+    {
+      tilretteleggingId: 1116961,
+      tilretteleggingBehovFom: '2020-03-17',
+      tilretteleggingDatoer: [
+        {
+          fom: '2020-03-17',
+          type: 'DELVIS_TILRETTELEGGING',
+          mottattDato: '2020-02-20',
+          kilde: SvpTilretteleggingFomKilde.SØKNAD,
+          stillingsprosent: 50,
+        },
+      ],
+      eksternArbeidsforholdReferanse: '23422323',
+      arbeidsgiverReferanse: '999999999',
+      uttakArbeidType: 'FRILANS',
+      kopiertFraTidligereBehandling: true,
+      mottattTidspunkt: '2020-03-11T16:21:48.532298',
+      skalBrukes: true,
+      kanTilrettelegges: true,
+      velferdspermisjoner: [
+        {
+          permisjonFom: '2020-02-17',
+          permisjonTom: '2020-07-12',
+          permisjonsprosent: 100.0,
+          type: 'VELFERDSPERMISJON',
+        },
+      ],
+      avklarteOppholdPerioder: [],
+    },
+    {
+      tilretteleggingId: 1008654,
+      tilretteleggingBehovFom: '2019-10-01',
+      kanTilrettelegges: false,
+      tilretteleggingDatoer: [
+        {
+          fom: '2019-10-01',
+          type: tilretteleggingType.INGEN_TILRETTELEGGING,
+          kilde: SvpTilretteleggingFomKilde.SØKNAD,
+          mottattDato: '2020-02-20',
+        },
+      ],
+      arbeidsgiverReferanse: '2',
+      uttakArbeidType: 'ORDINÆRT_ARBEID',
+      skalBrukes: true,
+      velferdspermisjoner: [],
+      avklarteOppholdPerioder: [],
+      eksternArbeidsforholdReferanse: '23422323',
+    },
+  ],
+  saksbehandlet: true,
+};
+
 const svangerskapspengerTilretteleggingForFrilanser = {
   termindato: '2020-02-27',
   saksbehandlet: false,
@@ -229,6 +284,21 @@ TilretteleggingMedVelferdspermisjon.args = {
     },
   ],
   svangerskapspengerTilrettelegging: tilretteleggingPermisjon,
+  arbeidOgInntekt: spesiellArbeidOgInntekt,
+};
+
+export const TilretteleggingMed100ProsentVelferdspermisjon = Template.bind({});
+TilretteleggingMed100ProsentVelferdspermisjon.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.FODSELTILRETTELEGGING,
+      status: aksjonspunktStatus.OPPRETTET,
+      begrunnelse: undefined,
+      kanLoses: true,
+    },
+  ],
+  svangerskapspengerTilrettelegging: tilretteleggingMed100ProsentPermisjon,
   arbeidOgInntekt: spesiellArbeidOgInntekt,
 };
 
