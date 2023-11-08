@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { VStack, ExpansionCard, HStack, Search, Heading } from '@navikt/ds-react';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import { isValidFodselsnummer } from '@navikt/ft-utils';
 import { InfotrygdVedtak } from '@navikt/fp-types';
@@ -12,10 +13,15 @@ import styles from './utbetalingsdataPanel.module.css';
 
 interface OwnProps {
   søkInfotrygdVedtak: (params: { searchString: string }) => Promise<InfotrygdVedtak | undefined>;
+  infotrygdVedtakState: RestApiState;
   infotrygdVedtak?: InfotrygdVedtak;
 }
 
-const UtbetalingsdataPanel: FunctionComponent<OwnProps> = ({ søkInfotrygdVedtak, infotrygdVedtak }) => {
+const UtbetalingsdataPanel: FunctionComponent<OwnProps> = ({
+  søkInfotrygdVedtak,
+  infotrygdVedtakState,
+  infotrygdVedtak,
+}) => {
   const intl = useIntl();
 
   const [error, setError] = useState<string>();
@@ -37,13 +43,15 @@ const UtbetalingsdataPanel: FunctionComponent<OwnProps> = ({ søkInfotrygdVedtak
       <div>
         <Search
           label={<FormattedMessage id="UtbetalingsdataPanel.Sok" />}
-          hideLabel={false}
           variant="primary"
+          hideLabel={false}
           size="small"
           htmlSize="12"
-          onSearchClick={startSøk}
           error={error}
-        />
+          onSearchClick={startSøk}
+        >
+          <Search.Button type="button" loading={infotrygdVedtakState === RestApiState.LOADING} />
+        </Search>
       </div>
       {infotrygdVedtak && !error && (
         <>

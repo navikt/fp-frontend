@@ -67,9 +67,11 @@ const Home: FunctionComponent<OwnProps> = ({ headerHeight, navAnsatt }) => {
     }
   }, [location]);
 
-  const { startRequest: søkInfotrygVedtak, data: infotrygdVedtak } = restFagsakApiHooks.useRestApiRunner(
-    FagsakApiKeys.SEARCH_UTBETALINGSDATA_IS15,
-  );
+  const {
+    startRequest: søkInfotrygVedtak,
+    state: infotrygdVedtakState,
+    data: infotrygdVedtak,
+  } = restFagsakApiHooks.useRestApiRunner(FagsakApiKeys.SEARCH_UTBETALINGSDATA_IS15);
 
   return (
     <div className={styles.content} style={{ margin: `${headerHeight}px auto 0` }}>
@@ -104,7 +106,11 @@ const Home: FunctionComponent<OwnProps> = ({ headerHeight, navAnsatt }) => {
         <Route
           path={utbetalingsdataIs15RoutePath}
           element={
-            <UtbetalingsdataIs15Index søkInfotrygdVedtak={søkInfotrygVedtak} infotrygdVedtak={infotrygdVedtak} />
+            <UtbetalingsdataIs15Index
+              søkInfotrygdVedtak={søkInfotrygVedtak}
+              infotrygdVedtakState={infotrygdVedtakState}
+              infotrygdVedtak={infotrygdVedtak}
+            />
           }
         />
         <Route path={fagsakRoutePath} element={<FagsakIndex />} />

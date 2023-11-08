@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StoryFn } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { InfotrygdVedtak } from '@navikt/fp-types';
+import { RestApiState } from '@navikt/fp-rest-api-hooks';
 
 import { VStack } from '@navikt/ds-react';
 import UtbetalingsdataIs15Index from './UtbetalingsdataIs15Index';
@@ -24,6 +25,7 @@ const Template: StoryFn<{
       <div style={{ color: 'red' }}>Gyldig fødselsnummer for testing: 07078518434</div>
       <UtbetalingsdataIs15Index
         søkInfotrygdVedtak={søkInfotrygdVedtak}
+        infotrygdVedtakState={RestApiState.NOT_STARTED}
         infotrygdVedtak={visResultat ? infotrygdVedtak : undefined}
       />
     </VStack>
