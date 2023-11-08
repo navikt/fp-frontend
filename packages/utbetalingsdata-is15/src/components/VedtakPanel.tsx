@@ -62,7 +62,7 @@ const VedtakPanel: FunctionComponent<OwnProps> = ({ alleVedtak }) => {
           ))}
         </Table.Body>
       </Table>
-      {valgtVedtak && <VedtakDetaljerPanel vedtak={valgtVedtak} />}
+      {valgtVedtak && <VedtakDetaljerPanel key={valgtVedtak.identdato} vedtak={valgtVedtak} />}
       <VerticalSpacer thirtyTwoPx />
     </VStack>
   );
