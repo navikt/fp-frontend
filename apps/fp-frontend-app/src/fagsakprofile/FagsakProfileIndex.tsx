@@ -1,7 +1,8 @@
 import React, { FunctionComponent, useState, useEffect, useCallback } from 'react';
 import { Navigate, NavLink, useLocation, useMatch } from 'react-router-dom';
 import { Location } from 'history';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { Box, HStack, Spacer, Tag, Link } from '@navikt/ds-react';
 import { BehandlingVelgerSakIndex } from '@navikt/ft-sak-behandling-velger';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { KodeverkType, FagsakMarkeringKode } from '@navikt/fp-kodeverk';
@@ -9,7 +10,9 @@ import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { FagsakProfilSakIndex } from '@navikt/ft-sak-fagsak-profil';
+import { AAREG_URL, AINNTEKT_URL, GOSYS_URL, MODIA_URL } from '@navikt/fp-konstanter';
 
+import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling, pathToBehandlinger } from '../app/paths';
 import BehandlingMenuIndex from '../behandlingmenu/BehandlingMenuIndex';
 import RisikoklassifiseringIndex from './risikoklassifisering/RisikoklassifiseringIndex';
@@ -78,6 +81,13 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   const fagsakStatusMedNavn = useFpSakKodeverkMedNavn(fagsak.status, KodeverkType.FAGSAK_STATUS);
   const fagsakYtelseTypeMedNavn = useFpSakKodeverkMedNavn(fagsak.fagsakYtelseType, KodeverkType.FAGSAK_YTELSE);
 
+  const { sakLinks } = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
+
+  const location = useLocation();
+
+  const arbeidstakerHref = sakLinks?.find(l => l.rel === 'arbeidstaker-redirect')?.href;
+  const ainntektHref = sakLinks?.find(l => l.rel === 'ainntekt-redirect')?.href;
+
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
   useEffect(() => {
@@ -87,7 +97,6 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   const match = useMatch('/fagsak/:saksnummer/');
   const shouldRedirectToBehandlinger = !!match;
 
-  const location = useLocation();
   const getBehandlingLocation = useCallback(
     (valgtBehandlingUuid: string) =>
       getLocationWithDefaultProsessStegAndFakta({
@@ -164,6 +173,36 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
           setBehandling={setBehandling}
         />
       </ErrorBoundary>
+      <VerticalSpacer sixteenPx />
+      <Box padding="4" background="bg-subtle" borderRadius="medium medium medium medium">
+        <HStack gap="2">
+          <FormattedMessage id="FagsakProfileIndex.Lenke" />
+          <Spacer />
+          <Link href={MODIA_URL} target="_blank">
+            <Tag size="small" variant="neutral-filled">
+              <FormattedMessage id="FagsakProfileIndex.Modia" />
+            </Tag>
+          </Link>
+          <Link href={GOSYS_URL} target="_blank">
+            <Tag size="small" variant="neutral-filled">
+              <FormattedMessage id="FagsakProfileIndex.Gosys" />
+            </Tag>
+          </Link>
+          <Link href={ainntektHref ? `${ainntektHref}?saksnummer=${fagsak.saksnummer}` : AINNTEKT_URL} target="_blank">
+            <Tag size="small" variant="neutral-filled">
+              <FormattedMessage id="FagsakProfileIndex.AInntekt" />
+            </Tag>
+          </Link>
+          <Link
+            href={arbeidstakerHref ? `${arbeidstakerHref}?saksnummer=${fagsak.saksnummer}` : AAREG_URL}
+            target="_blank"
+          >
+            <Tag size="small" variant="neutral-filled">
+              <FormattedMessage id="FagsakProfileIndex.AAreg" />
+            </Tag>
+          </Link>
+        </HStack>
+      </Box>
     </div>
   );
 };
