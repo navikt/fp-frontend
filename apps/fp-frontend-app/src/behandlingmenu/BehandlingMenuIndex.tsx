@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useCallback, useMemo, useState } from 'react';
 import { Button } from '@navikt/ds-react';
+import { ChevronDownIcon } from '@navikt/aksel-icons';
 import { FormattedMessage } from 'react-intl';
 import { Dropdown } from '@navikt/ds-react-internal';
 import { getMenytekst as getNyBehandlingMenytekst } from '@navikt/fp-sak-meny-ny-behandling';
@@ -113,7 +114,13 @@ const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   return (
     <>
       <Dropdown>
-        <Button size="small" as={Dropdown.Toggle} iconPosition="right">
+        <Button
+          size="small"
+          as={Dropdown.Toggle}
+          iconPosition="right"
+          variant="secondary"
+          icon={<ChevronDownIcon aria-hidden />}
+        >
           <FormattedMessage id="BehandlingMenuIndex.Behandlingsmeny" />
         </Button>
         <Dropdown.Menu>

@@ -1,15 +1,18 @@
 import React, { FunctionComponent, useState, useEffect, useCallback } from 'react';
 import { Navigate, NavLink, useLocation, useMatch } from 'react-router-dom';
 import { Location } from 'history';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { Box, HStack, Spacer, Tag, Link, Label, VStack } from '@navikt/ds-react';
 import { BehandlingVelgerSakIndex } from '@navikt/ft-sak-behandling-velger';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { KodeverkType, FagsakMarkeringKode } from '@navikt/fp-kodeverk';
 import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { FagsakProfilSakIndex } from '@navikt/ft-sak-fagsak-profil';
+import { AAREG_URL, AINNTEKT_URL, GOSYS_URL, MODIA_URL } from '@navikt/fp-konstanter';
 
+import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling, pathToBehandlinger } from '../app/paths';
 import BehandlingMenuIndex from '../behandlingmenu/BehandlingMenuIndex';
 import RisikoklassifiseringIndex from './risikoklassifisering/RisikoklassifiseringIndex';
@@ -78,6 +81,13 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   const fagsakStatusMedNavn = useFpSakKodeverkMedNavn(fagsak.status, KodeverkType.FAGSAK_STATUS);
   const fagsakYtelseTypeMedNavn = useFpSakKodeverkMedNavn(fagsak.fagsakYtelseType, KodeverkType.FAGSAK_YTELSE);
 
+  const { sakLinks } = restFagsakApiHooks.useGlobalStateRestApiData(FagsakApiKeys.INIT_FETCH);
+
+  const location = useLocation();
+
+  const arbeidstakerHref = sakLinks?.find(l => l.rel === 'arbeidstaker-redirect')?.href;
+  const ainntektHref = sakLinks?.find(l => l.rel === 'ainntekt-redirect')?.href;
+
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
   useEffect(() => {
@@ -87,7 +97,6 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   const match = useMatch('/fagsak/:saksnummer/');
   const shouldRedirectToBehandlinger = !!match;
 
-  const location = useLocation();
   const getBehandlingLocation = useCallback(
     (valgtBehandlingUuid: string) =>
       getLocationWithDefaultProsessStegAndFakta({
@@ -103,11 +112,11 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
       {shouldRedirectToBehandlinger && (
         <Navigate to={findPathToBehandling(fagsak.saksnummer, location, fagsakData.getAlleBehandlinger())} />
       )}
-      {!shouldRedirectToBehandlinger && (
-        <>
-          <FlexContainer>
-            <FlexRow spaceBetween>
-              <FlexColumn>
+      <VStack gap="5">
+        {!shouldRedirectToBehandlinger && (
+          <>
+            <HStack justify="space-between" align="start">
+              <div>
                 <FagsakProfilSakIndex
                   saksnummer={fagsak.saksnummer}
                   fagsakYtelseType={fagsakYtelseTypeMedNavn}
@@ -115,55 +124,89 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
                   dekningsgrad={fagsak.dekningsgrad}
                   fagsakMarkeringTekst={finnFagsakMarkeringTekst(fagsak)}
                 />
-              </FlexColumn>
-              <FlexColumn>
-                <ErrorBoundary
-                  errorMessageCallback={addErrorMessage}
-                  errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Meny' })}
-                >
-                  <BehandlingMenuIndex
-                    fagsakData={fagsakData}
-                    behandlingUuid={behandlingUuid}
-                    setBehandling={setBehandling}
-                    hentOgSettBehandling={hentOgSettBehandling}
-                    oppdaterFagsak={oppdaterFagsak}
-                  />
-                </ErrorBoundary>
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
-          <ErrorBoundary
-            errorMessageCallback={addErrorMessage}
-            errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Behandlingsvelger' })}
-          >
-            <BehandlingVelgerSakIndex
-              behandlinger={fagsakData.getAlleBehandlinger()}
-              behandlingUuid={behandlingUuid}
-              skalViseAlleBehandlinger={showAll}
-              toggleVisAlleBehandlinger={toggleShowAll}
-              renderRadSomLenke={(className, behandlingInfoKomponent, uuid) => (
-                <NavLink className={className} to={getBehandlingLocation(uuid)} onClick={toggleShowAll}>
-                  {behandlingInfoKomponent}
-                </NavLink>
-              )}
-              // @ts-ignore TODO Ikkje send med ned heile kodeverket
-              getKodeverkMedNavn={getKodeverkFn}
-            />
-          </ErrorBoundary>
-        </>
-      )}
+              </div>
+              <ErrorBoundary
+                errorMessageCallback={addErrorMessage}
+                errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Meny' })}
+              >
+                <BehandlingMenuIndex
+                  fagsakData={fagsakData}
+                  behandlingUuid={behandlingUuid}
+                  setBehandling={setBehandling}
+                  hentOgSettBehandling={hentOgSettBehandling}
+                  oppdaterFagsak={oppdaterFagsak}
+                />
+              </ErrorBoundary>
+            </HStack>
+            <ErrorBoundary
+              errorMessageCallback={addErrorMessage}
+              errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Behandlingsvelger' })}
+            >
+              <BehandlingVelgerSakIndex
+                behandlinger={fagsakData.getAlleBehandlinger()}
+                behandlingUuid={behandlingUuid}
+                skalViseAlleBehandlinger={showAll}
+                toggleVisAlleBehandlinger={toggleShowAll}
+                renderRadSomLenke={(className, behandlingInfoKomponent, uuid) => (
+                  <NavLink className={className} to={getBehandlingLocation(uuid)} onClick={toggleShowAll}>
+                    {behandlingInfoKomponent}
+                  </NavLink>
+                )}
+                // @ts-ignore TODO Ikkje send med ned heile kodeverket
+                getKodeverkMedNavn={getKodeverkFn}
+              />
+            </ErrorBoundary>
+          </>
+        )}
+        <ErrorBoundary
+          errorMessageCallback={addErrorMessage}
+          errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Risikoklassifisering' })}
+        >
+          <RisikoklassifiseringIndex
+            fagsakData={fagsakData}
+            behandlingUuid={behandlingUuid}
+            behandlingVersjon={behandlingVersjon}
+            setBehandling={setBehandling}
+          />
+        </ErrorBoundary>
+        <Box padding="4" background="bg-subtle" borderRadius="large">
+          <HStack gap="6" align="center" wrap={false}>
+            <Label size="small">
+              <FormattedMessage id="FagsakProfileIndex.Lenke" />
+            </Label>
+            <Spacer />
+            <HStack gap="4">
+              <Link href={MODIA_URL} target="_blank">
+                <Tag size="small" variant="neutral-filled">
+                  <FormattedMessage id="FagsakProfileIndex.Modia" />
+                </Tag>
+              </Link>
+              <Link href={GOSYS_URL} target="_blank">
+                <Tag size="small" variant="neutral-filled">
+                  <FormattedMessage id="FagsakProfileIndex.Gosys" />
+                </Tag>
+              </Link>
+              <Link
+                href={ainntektHref ? `${ainntektHref}?saksnummer=${fagsak.saksnummer}` : AINNTEKT_URL}
+                target="_blank"
+              >
+                <Tag size="small" variant="neutral-filled">
+                  <FormattedMessage id="FagsakProfileIndex.AInntekt" />
+                </Tag>
+              </Link>
+              <Link
+                href={arbeidstakerHref ? `${arbeidstakerHref}?saksnummer=${fagsak.saksnummer}` : AAREG_URL}
+                target="_blank"
+              >
+                <Tag size="small" variant="neutral-filled">
+                  <FormattedMessage id="FagsakProfileIndex.AAreg" />
+                </Tag>
+              </Link>
+            </HStack>
+          </HStack>
+        </Box>
+      </VStack>
       <VerticalSpacer sixteenPx />
-      <ErrorBoundary
-        errorMessageCallback={addErrorMessage}
-        errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Risikoklassifisering' })}
-      >
-        <RisikoklassifiseringIndex
-          fagsakData={fagsakData}
-          behandlingUuid={behandlingUuid}
-          behandlingVersjon={behandlingVersjon}
-          setBehandling={setBehandling}
-        />
-      </ErrorBoundary>
     </div>
   );
 };

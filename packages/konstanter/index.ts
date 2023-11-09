@@ -8,6 +8,8 @@ export {
   RETTSKILDE_URL,
   AINNTEKT_URL,
   AAREG_URL,
+  GOSYS_URL,
+  MODIA_URL,
   hentDokumentLenke,
   hentVedtakDokumentLenke,
 } from './src/eksterneLenker';
