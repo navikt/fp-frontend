@@ -9,20 +9,3 @@
 .link {
   cursor: pointer;
 }
-.tittelKol {
-  min-width: 170px;
-  width: 5%;
-}
-.søkeKol {
-  width: 90%;
-}
-
-@media all and (max-width: 1600px) {
-  .tittelKol {
-    min-width: 170px;
-    width: 13%;
-  }
-  .søkeKol {
-    width: 70%;
-  }
-}

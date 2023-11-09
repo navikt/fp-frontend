@@ -1,9 +1,9 @@
 .dokContainer {
   background-color: var(--a-blue-50);
+  display: flex;
   margin-bottom: 8px;
   padding: 16px;
   width: 100%;
-  display: flex;
 }
 
 .dokumentTittel {
@@ -34,9 +34,9 @@
 }
 
 .checkbox {
-  margin-top: auto;
-  margin-bottom: auto;
   display: flex;
+  margin-bottom: auto;
+  margin-top: auto;
 }
 
 .input {
