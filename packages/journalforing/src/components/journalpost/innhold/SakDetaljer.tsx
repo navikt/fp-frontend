@@ -74,10 +74,11 @@ const SakDetaljer: FunctionComponent<OwnProps> = ({ sak }) => {
     <div className={styles.sakContainer}>
       <div className={styles.sakDataFelt}>
         <VStack>
-          <HStack gap="3">
+          <HStack gap="3" className={styles.sakRad}>
             <Label>
               <FormattedMessage id={finnYtelseTekst(sak.ytelseType)} />
             </Label>
+            <div>{lagEtikett(sak.status)}</div>
             <Label>{sak.saksnummer}</Label>
             <div className={styles.clipBoard}>
               <CopyButton copyText={sak.saksnummer} variant="action" />
@@ -112,7 +113,6 @@ const SakDetaljer: FunctionComponent<OwnProps> = ({ sak }) => {
           </div>
         </VStack>
       </div>
-      <div className={styles.etikettFelt}>{lagEtikett(sak.status)}</div>
       <div className={styles.faneFelt}>
         <div>
           <Button
