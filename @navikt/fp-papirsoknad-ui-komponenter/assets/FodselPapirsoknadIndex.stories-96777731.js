@@ -1,0 +1,26 @@
+import{j as n,a as e,F as f}from"./jsx-runtime-f8e698f3.js";import{a as D}from"./chunk-AY7I2SME-5eb1ab46.js";import{l as i,d as L,R as q,H as j,g as o,T as w,e as k,F as y,M as p,B as s,b as l,C as x,f as H,N as K,t as U,m as $,a as G,O as J,c as Q}from"./nb_NO-bd1cc92f.js";import{r as d,b as m,R,_ as W,y as X,N as Y,I as Z,h as S}from"./index.es-bd381c2f.js";import{A as ee}from"./Alert-79cb9a4a.js";import"./index-f1f2c4b1.js";import"./index-c74c9f7f.js";import"./ExclamationmarkTriangleFill-07793789.js";const M=X(1),v=Y(9),C=()=>S().startOf("day"),re=()=>C().subtract(3,"weeks"),ae=r=>{const t=re(),a=r?S(r,K):void 0,g=C();return a&&a.isSameOrBefore(g)?(a.isAfter(t)?a:t).subtract(1,"days"):g},te=r=>t=>Z(ae(r("termindato")))(t),F=({readOnly:r,erForeldrepenger:t=!1})=>{const a=i.useIntl(),{watch:g,getValues:N,trigger:E,formState:{isSubmitted:A}}=L(),h=g("erBarnetFodt");return n(q,{children:[e(j,{size:"small",children:a.formatMessage({id:"Registrering.TerminOgFodsel"})}),e(o,{sixteenPx:!0}),e(w,{name:"erBarnetFodt",label:e(i.FormattedMessage,{id:"Registrering.Termin.Fodt"}),validate:[d],isReadOnly:r,isHorizontal:!0,isTrueOrFalseSelection:!0,radios:[{label:e(i.FormattedMessage,{id:"Registrering.Fodsel.ErFodt"}),value:"true"},{label:e(i.FormattedMessage,{id:"Registrering.Fodsel.ErIkkeFodt"}),value:"false"}]}),h===!1&&n(f,{children:[e(o,{eightPx:!0}),e(k,{alignOffset:64,children:n(y,{children:[n(p,{children:[e(s,{children:e(l,{name:"termindato",label:a.formatMessage({id:"Registrering.Termindato"}),isReadOnly:r,validate:[d,m],onChange:()=>A?E():void 0})}),e(s,{children:e(x,{name:"antallBarnFraTerminbekreftelse",label:a.formatMessage({id:"Registrering.AntallBarn"}),readOnly:r,validate:[d,R,M,v]})})]}),e(o,{sixteenPx:!0}),e(p,{children:e(s,{children:e(l,{name:"terminbekreftelseDato",label:a.formatMessage({id:"Registrering.UtstedtDato"}),isReadOnly:r,validate:[m,te(N)]})})})]})})]}),h&&n(f,{children:[e(o,{eightPx:!0}),e(k,{alignOffset:0,children:n(y,{children:[n(p,{children:[e(s,{children:e(l,{name:"foedselsDato",label:a.formatMessage({id:"Registrering.Fodselsdato"}),isReadOnly:r,validate:[d,m,W]})}),e(s,{children:e(x,{name:"antallBarn",label:a.formatMessage({id:"Registrering.AntallBarn"}),readOnly:r,validate:[d,R,M,v]})})]}),t&&n(f,{children:[e(o,{sixteenPx:!0}),e(ee,{size:"small",variant:"info",children:e(H,{size:"small",children:e(i.FormattedMessage,{id:"Registrering.RettTilPrematuruker"})})}),e(o,{sixteenPx:!0}),n(p,{children:[e(s,{children:e(l,{name:"termindato",label:a.formatMessage({id:"Registrering.Termindato"}),isReadOnly:r,validate:[m]})}),e(s,{children:e(l,{name:"terminbekreftelseDato",label:a.formatMessage({id:"Registrering.UtstedtDato"}),isReadOnly:r,validate:[m]})})]})]})]})})]})]})};try{F.displayName="TerminFodselDatoPanel",F.__docgenInfo={description:"",displayName:"TerminFodselDatoPanel",props:{readOnly:{defaultValue:null,description:"",name:"readOnly",required:!0,type:{name:"boolean"}},erForeldrepenger:{defaultValue:{value:"false"},description:"",name:"erForeldrepenger",required:!1,type:{name:"boolean"}}}}}catch{}const ne=U($),b=({readOnly:r,erForeldrepenger:t})=>e(i.RawIntlProvider,{value:ne,children:e(F,{readOnly:r,erForeldrepenger:t})}),V=b;try{b.displayName="FodselPapirsoknadIndex",b.__docgenInfo={description:"",displayName:"FodselPapirsoknadIndex",props:{readOnly:{defaultValue:null,description:"",name:"readOnly",required:!0,type:{name:"boolean"}},erForeldrepenger:{defaultValue:null,description:"",name:"erForeldrepenger",required:!1,type:{name:"boolean"}}}}}catch{}const ge={title:"papirsoknad/ui-komponenter/fodsel",component:V},z=({submitCallback:r,erForeldrepenger:t})=>{const a=G();return n(J,{formMethods:a,onSubmit:r,children:[e(V,{readOnly:!1,erForeldrepenger:t}),e(o,{fourtyPx:!0}),e(Q,{size:"small",variant:"primary",children:"Lagreknapp (Kun for test)"})]})},c=z.bind({});c.args={submitCallback:D("button-click"),erForeldrepenger:!0};const u=z.bind({});u.args={submitCallback:D("button-click"),erForeldrepenger:!1};var P,_,T;c.parameters={...c.parameters,docs:{...(P=c.parameters)==null?void 0:P.docs,source:{originalSource:`({
+  submitCallback,
+  erForeldrepenger
+}) => {
+  const formMethods = useForm();
+  return <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <FodselPapirsoknadIndex readOnly={false} erForeldrepenger={erForeldrepenger} />
+      <VerticalSpacer fourtyPx />
+      <Button size="small" variant="primary">
+        Lagreknapp (Kun for test)
+      </Button>
+    </Form>;
+}`,...(T=(_=c.parameters)==null?void 0:_.docs)==null?void 0:T.source}}};var B,I,O;u.parameters={...u.parameters,docs:{...(B=u.parameters)==null?void 0:B.docs,source:{originalSource:`({
+  submitCallback,
+  erForeldrepenger
+}) => {
+  const formMethods = useForm();
+  return <Form formMethods={formMethods} onSubmit={submitCallback}>
+      <FodselPapirsoknadIndex readOnly={false} erForeldrepenger={erForeldrepenger} />
+      <VerticalSpacer fourtyPx />
+      <Button size="small" variant="primary">
+        Lagreknapp (Kun for test)
+      </Button>
+    </Form>;
+}`,...(O=(I=u.parameters)==null?void 0:I.docs)==null?void 0:O.source}}};const pe=["Default","ErIkkeForeldrepenger"];export{c as Default,u as ErIkkeForeldrepenger,pe as __namedExportsOrder,ge as default};
+//# sourceMappingURL=FodselPapirsoknadIndex.stories-96777731.js.map
