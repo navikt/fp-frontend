@@ -14,21 +14,24 @@ const utledTypeTekst = (intl: IntlShape, opphold: SvpAvklartOppholdPeriode) => {
     return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Opphold' });
   }
 
-  return intl.formatMessage({
-    id:
-      opphold.oppholdÅrsak === 'FERIE'
-        ? 'TilretteleggingPerioderTabellRad.Ferie'
-        : 'TilretteleggingPerioderTabellRad.Sykepenger',
-  });
+  return opphold.oppholdÅrsak === 'FERIE'
+    ? intl.formatMessage({
+        id: 'TilretteleggingPerioderTabellRad.Ferie',
+      })
+    : intl.formatMessage({
+        id: 'TilretteleggingPerioderTabellRad.Sykepenger',
+      });
 };
 
 const utledKilde = (intl: IntlShape, opphold: SvpAvklartOppholdPeriode) => {
   if (opphold.oppholdÅrsak === 'FERIE') {
-    return intl.formatMessage({
-      id: opphold.forVisning
-        ? 'TilretteleggingPerioderTabellRad.Inntektsmelding'
-        : 'TilretteleggingPerioderTabellRad.Saksbehandler',
-    });
+    return opphold.forVisning
+      ? intl.formatMessage({
+          id: 'TilretteleggingPerioderTabellRad.Inntektsmelding',
+        })
+      : intl.formatMessage({
+          id: 'TilretteleggingPerioderTabellRad.Saksbehandler',
+        });
   }
   return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Saksbehandler' });
 };

@@ -116,6 +116,9 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
   const harArbeidsforholdUtenTilrettelegging = arbeidsforhold.some(
     a => a.skalBrukes && a.tilretteleggingDatoer.length === 0,
   );
+  const harGyldig100PermisjonDerEnHarValgtSvp = arbeidsforhold.some(
+    a => a.skalBrukes && a.velferdspermisjoner.some(vp => vp.erGyldig && vp.permisjonsprosent === 100),
+  );
 
   const [visFeil, skalViseFeil] = useState(false);
 
@@ -123,7 +126,8 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
     harIkkeVurdertAlleVelferdspermisjoner ||
     harIkkeValgtNoenArbeidsforhold ||
     harPeriodeSomIkkeErFerdig ||
-    harArbeidsforholdUtenTilrettelegging;
+    harArbeidsforholdUtenTilrettelegging ||
+    harGyldig100PermisjonDerEnHarValgtSvp;
 
   const onSubmit = useCallback(
     (values: TilretteleggingFormValues) => {
@@ -212,6 +216,14 @@ const TilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
           <Alert variant="error">
             <FormattedMessage id="TilretteleggingFaktaForm.ArbeidsforholdUtenTilrettelegging" />
+          </Alert>
+        </>
+      )}
+      {harGyldig100PermisjonDerEnHarValgtSvp && visFeil && (
+        <>
+          <VerticalSpacer sixteenPx />
+          <Alert variant="error">
+            <FormattedMessage id="TilretteleggingFaktaForm.ValgtSvpVedGyldig100Permisjon" />
           </Alert>
         </>
       )}

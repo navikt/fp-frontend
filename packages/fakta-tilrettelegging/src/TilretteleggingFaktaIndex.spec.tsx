@@ -4,8 +4,12 @@ import userEvent from '@testing-library/user-event';
 import { composeStories } from '@storybook/react';
 import * as stories from './TilretteleggingFaktaIndex.stories';
 
-const { TilretteleggingMedVelferdspermisjon, HarOpphold, SokerVarIkkeAnsattDaBehovetForTilretteleggingOppsto } =
-  composeStories(stories);
+const {
+  TilretteleggingMedVelferdspermisjon,
+  HarOpphold,
+  SokerVarIkkeAnsattDaBehovetForTilretteleggingOppsto,
+  TilretteleggingMed100ProsentVelferdspermisjon,
+} = composeStories(stories);
 
 const lagNyDato = (nyDato: string) => {
   const backspace = [...Array(10)].reduce(prev => `${prev}{backspace}`, '');
@@ -49,7 +53,6 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       kode: '5091',
       begrunnelse: 'Dette er en begrunnelse',
@@ -494,5 +497,41 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
 
     expect(await screen.findByText('Skal ikke ha svangerskapspenger')).toBeInTheDocument();
     expect(screen.getByText('Svangerskapspenger kan ikke beregnes')).toBeInTheDocument();
+  });
+
+  it('skal vise infoboks når en velger at en 100% permisjon er gyldig og feilmelding om en bekrefter ved å velge arbeidsforhold på ny', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    render(<TilretteleggingMed100ProsentVelferdspermisjon submitCallback={lagre} />);
+
+    expect(
+      await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
+    ).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Ja'));
+
+    expect(
+      await screen.findByText(
+        'Permisjonen på 100% er satt som gyldig, og dette fører til at søker ikke får svangerskapsenger for arbeidsforholdet.',
+      ),
+    ).toBeInTheDocument();
+
+    await userEvent.click(screen.getAllByText('Oppdater')[0]);
+
+    await userEvent.click(screen.getAllByText('Skal ha svangerskapspenger for arbeidsforholdet')[0]);
+
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    expect(
+      await screen.findByText('Arbeidsforhold med gyldig permisjon på 100% kan ikke ha svangerskapspenger'),
+    ).toBeInTheDocument();
+
+    await userEvent.click(screen.getAllByText('Skal ha svangerskapspenger for arbeidsforholdet')[0]);
+
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
   });
 });
