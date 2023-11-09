@@ -3488,7 +3488,7 @@ __metadata:
     "@navikt/ft-prosess-tilbakekreving-foreldelse": 3.1.13
     "@navikt/ft-prosess-tilbakekreving-vedtak": 2.2.13
     "@navikt/ft-sak-aktor": 2.2.13
-    "@navikt/ft-sak-behandling-velger": 2.1.13
+    "@navikt/ft-sak-behandling-velger": 2.1.14
     "@navikt/ft-sak-dekorator": 4.1.13
     "@navikt/ft-sak-dokumenter": 2.1.13
     "@navikt/ft-sak-fagsak-profil": 3.1.13
@@ -5656,9 +5656,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ft-sak-behandling-velger@npm:2.1.13":
-  version: 2.1.13
-  resolution: "@navikt/ft-sak-behandling-velger@npm:2.1.13::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-sak-behandling-velger%2F2.1.13%2Ff0061bb54bbb643b80fc13ad8e71bf91f3b22e64"
+"@navikt/ft-sak-behandling-velger@npm:2.1.14":
+  version: 2.1.14
+  resolution: "@navikt/ft-sak-behandling-velger@npm:2.1.14::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-sak-behandling-velger%2F2.1.14%2Fc1ff3fd767172ff197056da8736a48f3ff86006d"
   dependencies:
     "@navikt/aksel-icons": 5.10.0
     "@navikt/ds-css": 5.10.0
@@ -5687,7 +5687,7 @@ __metadata:
     moment: 2.29.4
     react: 18.2.0
     react-intl: 6.3.2
-  checksum: 968048cc826b03b4f76bf6d0cba1f1ec1e9bab4994f694a8738f912650de07440ce1a0f7a72a91caf441edbca00279920e3f0c22ef2c72cc7233fc1246165ab8
+  checksum: eae2408d017cc0ede0bfa56f12db8da3e972a2d336c5f68fe29bace7430c07220a8f005b0fe91e6caa20e942b0f675018cf61552c935b231bc9181bc4b704b34
   languageName: node
   linkType: hard
 

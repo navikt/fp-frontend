@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState, useEffect, useCallback } from 'reac
 import { Navigate, NavLink, useLocation, useMatch } from 'react-router-dom';
 import { Location } from 'history';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Box, HStack, Spacer, Tag, Link, Heading } from '@navikt/ds-react';
+import { Box, HStack, Spacer, Tag, Link, Heading, Detail, Label } from '@navikt/ds-react';
 import { BehandlingVelgerSakIndex } from '@navikt/ft-sak-behandling-velger';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { KodeverkType, FagsakMarkeringKode } from '@navikt/fp-kodeverk';
@@ -174,11 +174,11 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
         />
       </ErrorBoundary>
       <VerticalSpacer sixteenPx />
-      <Box padding="4" background="bg-subtle" borderRadius="medium medium medium medium">
-        <HStack gap="2">
-          <Heading size="xsmall">
+      <Box padding="4" background="bg-subtle" borderRadius="large">
+        <HStack gap="4" align="center">
+          <Label size="small">
             <FormattedMessage id="FagsakProfileIndex.Lenke" />
-          </Heading>
+          </Label>
           <Spacer />
           <Link href={MODIA_URL} target="_blank">
             <Tag size="small" variant="neutral-filled">
@@ -205,6 +205,7 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
           </Link>
         </HStack>
       </Box>
+      <VerticalSpacer sixteenPx />
     </div>
   );
 };

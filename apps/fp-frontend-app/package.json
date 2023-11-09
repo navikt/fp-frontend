@@ -110,7 +110,7 @@
     "@navikt/ft-prosess-tilbakekreving-foreldelse": "3.1.13",
     "@navikt/ft-prosess-tilbakekreving-vedtak": "2.2.13",
     "@navikt/ft-sak-aktor": "2.2.13",
-    "@navikt/ft-sak-behandling-velger": "2.1.13",
+    "@navikt/ft-sak-behandling-velger": "2.1.14",
     "@navikt/ft-sak-dekorator": "4.1.13",
     "@navikt/ft-sak-dokumenter": "2.1.13",
     "@navikt/ft-sak-fagsak-profil": "3.1.13",
