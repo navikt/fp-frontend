@@ -1,18 +1,20 @@
 .dokContainer {
   background-color: var(--a-blue-50);
-  display: flex;
   margin-bottom: 8px;
   padding: 16px;
   width: 100%;
+  display: flex;
 }
 
 .dokumentTittel {
-  display: flex;
   margin-bottom: auto;
-  margin-right: 50px;
+  margin-right: 16px;
   margin-top: auto;
   width: 90%;
-  
+}
+
+.knappKol {
+  width: 10%;
 }
 
 .newTabIcon {
@@ -31,27 +33,13 @@
   margin-left: 16px;
 }
 
-.selectField {
-  padding-bottom: 8px;
-  width: 100%;
-}
-
-.dokLenke {
-  min-width: 40px;
-  width: 10%;
-}
-
-.dokLenke>button {
-  padding: 8px;
+.checkbox {
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
 }
 
 .input {
   display: flex;
   width: 600px;
-}
-
-@media all and (max-width: 1350px) {
-  .selectField {
-    width: 50%;
-  }
 }
