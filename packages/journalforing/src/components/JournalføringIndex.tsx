@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { FlexContainer, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { NavAnsatt } from '@navikt/fp-types';
 
 import Oppgave from '../typer/oppgaveTsType';
@@ -38,7 +38,7 @@ const JournalføringIndex: FunctionComponent<OwnProps> = ({
   reserverOppgave,
   flyttTilGosys,
 }) => (
-  <FlexContainer>
+  <>
     <VerticalSpacer sixteenPx />
     {!valgtJournalpost && (
       <div className={styles.sentrertInnhold}>
@@ -61,6 +61,6 @@ const JournalføringIndex: FunctionComponent<OwnProps> = ({
         flyttTilGosys={flyttTilGosys}
       />
     )}
-  </FlexContainer>
+  </>
 );
 export default JournalføringIndex;

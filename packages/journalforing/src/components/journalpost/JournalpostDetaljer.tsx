@@ -1,9 +1,8 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Alert, BodyLong, Heading } from '@navikt/ds-react';
+import { Alert, BodyLong, Heading, VStack } from '@navikt/ds-react';
 
-import { FlexColumn, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Form } from '@navikt/ft-form-hooks';
 import { NavAnsatt } from '@navikt/fp-types';
 import VelgSakForm, { transformValues as transformValuesSak } from './innhold/VelgSakForm';
@@ -151,106 +150,76 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
 
   return (
     <Form<JournalføringFormValues> formMethods={formMethods} onSubmit={submitJournal}>
-      <JournalpostTittelForm journalpost={journalpost} readOnly={skalBareKunneEndreSak} />
-      <VerticalSpacer eightPx />
-      {oppgave && <Reservasjonspanel oppgave={oppgave} reserverOppgave={reserverOppgave} navAnsatt={navAnsatt} />}
-      <VerticalSpacer sixteenPx />
-      <BrukerAvsenderPanel
-        journalpost={journalpost}
-        hentForhåndsvisningAvSøker={forhåndsvisBruker}
-        skalKunneEndreSøker={skalKunneEndreSøker}
-        lasterBruker={lasterBruker}
-        brukerTilForhåndsvisning={brukerTilForhåndsvisning}
-        knyttSøkerTilJournalpost={knyttJournalpostTilBruker}
-      />
-      <VerticalSpacer twentyPx />
-      {oppgave?.beskrivelse && (
-        <>
-          <FlexRow>
-            <FlexColumn>
-              <Heading size="small">
-                <FormattedMessage id="ValgtOppgave.Notat" />
-              </Heading>
-            </FlexColumn>
-          </FlexRow>
-          <FlexRow>
-            <FlexColumn>
-              <BodyLong>{oppgave.beskrivelse}</BodyLong>
-            </FlexColumn>
-          </FlexRow>
-          <VerticalSpacer twentyPx />
-        </>
-      )}
-      <VerticalSpacer sixteenPx />
-      <FlexRow>
-        <FlexColumn>
+      <VStack gap="5">
+        <JournalpostTittelForm journalpost={journalpost} readOnly={skalBareKunneEndreSak} />
+        {oppgave && <Reservasjonspanel oppgave={oppgave} reserverOppgave={reserverOppgave} navAnsatt={navAnsatt} />}
+        <BrukerAvsenderPanel
+          journalpost={journalpost}
+          hentForhåndsvisningAvSøker={forhåndsvisBruker}
+          skalKunneEndreSøker={skalKunneEndreSøker}
+          lasterBruker={lasterBruker}
+          brukerTilForhåndsvisning={brukerTilForhåndsvisning}
+          knyttSøkerTilJournalpost={knyttJournalpostTilBruker}
+        />
+        {oppgave?.beskrivelse && (
+          <>
+            <Heading size="small">
+              <FormattedMessage id="ValgtOppgave.Notat" />
+            </Heading>
+            <BodyLong>{oppgave.beskrivelse}</BodyLong>
+          </>
+        )}
+        <div>
           <Heading size="small">
             <FormattedMessage id="ValgtOppgave.Dokumenter" />
           </Heading>
-        </FlexColumn>
-      </FlexRow>
-      {journalpost.dokumenter && (
-        <>
-          <VerticalSpacer eightPx />
-          <DokumentForm
-            journalpost={journalpost}
-            dokumentTittelStyresAvJournalpostTittel={dokumentTittelSkalStyresAvJournalpost(journalpost)}
-          />
-          <VerticalSpacer thirtyTwoPx />
-        </>
-      )}
-      {journalpost.eksisterendeSaksnummer && (
-        <div>
-          <FlexRow>
-            <FlexColumn>
-              <Heading size="small">
-                <FormattedMessage id="ValgtOppgave.TilknyttetSak" />
-              </Heading>
-            </FlexColumn>
-          </FlexRow>
-          <VerticalSpacer eightPx />
-          <SakDetaljer
-            sak={finnSakMedSaksnummer(journalpost.eksisterendeSaksnummer, saker)}
-            key={journalpost.eksisterendeSaksnummer}
-          />
-          <VerticalSpacer thirtyTwoPx />
+          {journalpost.dokumenter && (
+            <DokumentForm
+              journalpost={journalpost}
+              dokumentTittelStyresAvJournalpostTittel={dokumentTittelSkalStyresAvJournalpost(journalpost)}
+            />
+          )}
         </div>
-      )}
-      <FlexRow>
-        <FlexColumn>
+        {journalpost.eksisterendeSaksnummer && (
+          <div>
+            <Heading size="small">
+              <FormattedMessage id="ValgtOppgave.TilknyttetSak" />
+            </Heading>
+            <SakDetaljer
+              sak={finnSakMedSaksnummer(journalpost.eksisterendeSaksnummer, saker)}
+              key={journalpost.eksisterendeSaksnummer}
+            />
+          </div>
+        )}
+        <div>
           <Heading size="small">
             <FormattedMessage id="ValgtOppgave.RelaterteSaker" />
           </Heading>
-        </FlexColumn>
-      </FlexRow>
-      <VerticalSpacer eightPx />
-      {skalKunneEndreSøker && (
-        <Alert variant="info">
-          <FormattedMessage id="ValgtOppgave.RelaterteSaker.ManglerSøker" />
-        </Alert>
-      )}
-      {saker
-        .filter(sak => sak.saksnummer !== journalpost.eksisterendeSaksnummer)
-        .map(sak => (
-          <SakDetaljer sak={sak} key={sak.saksnummer} />
-        ))}
-      <VerticalSpacer thirtyTwoPx />
-      <FlexRow>
-        <FlexColumn>
+          {skalKunneEndreSøker && (
+            <Alert variant="info">
+              <FormattedMessage id="ValgtOppgave.RelaterteSaker.ManglerSøker" />
+            </Alert>
+          )}
+          {saker
+            .filter(sak => sak.saksnummer !== journalpost.eksisterendeSaksnummer)
+            .map(sak => (
+              <SakDetaljer sak={sak} key={sak.saksnummer} />
+            ))}
+        </div>
+        <div>
           <Heading size="small">
             <FormattedMessage id={skalBareKunneEndreSak ? 'Journal.Sak.AnnenSak' : 'ValgtOppgave.KnyttTilSak'} />
           </Heading>
-        </FlexColumn>
-      </FlexRow>
-      <VerticalSpacer eightPx />
-      <VelgSakForm
-        isSubmittable={isSubmittable}
-        journalpost={journalpost}
-        avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
-        erKlarForJournalføring={!skalKunneEndreSøker}
-        erLokalOppgave={erLokalOppgave}
-        flyttTilGosys={flyttTilGosys}
-      />
+          <VelgSakForm
+            isSubmittable={isSubmittable}
+            journalpost={journalpost}
+            avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
+            erKlarForJournalføring={!skalKunneEndreSøker}
+            erLokalOppgave={erLokalOppgave}
+            flyttTilGosys={flyttTilGosys}
+          />
+        </div>
+      </VStack>
     </Form>
   );
 };
