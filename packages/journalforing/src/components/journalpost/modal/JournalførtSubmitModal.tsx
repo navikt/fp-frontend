@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Modal, Button, BodyShort, Link } from '@navikt/ds-react';
+import { Modal, Button, BodyShort, Link, HStack, VStack } from '@navikt/ds-react';
 import { CheckmarkCircleIcon } from '@navikt/aksel-icons';
 
-import { FlexColumn, FlexRow, LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import SaksnummerType from '../../../typer/saksnummerTsType';
 import styles from './journalførtSubmitModal.module.css';
 
@@ -27,48 +27,40 @@ const JournalførtSubmitModal: FunctionComponent<OwnProps> = ({ saksnummer, lukk
   return (
     <Modal width="small" open={showModal} onClose={lukkModal}>
       <Modal.Body>
-        {isLoading && (
-          <>
-            <FlexRow className={styles.sentrerRad}>
-              <FlexColumn>
+        <VStack gap="4">
+          {isLoading && (
+            <>
+              <HStack justify="center">
                 <LoadingPanel />
-              </FlexColumn>
-            </FlexRow>
-            <FlexRow className={styles.sentrerRad}>
-              <FlexColumn>
+              </HStack>
+              <HStack justify="center">
                 <BodyShort>
                   <FormattedMessage id="Journalfør.Modal.Ferdigstiller" />
                 </BodyShort>
-              </FlexColumn>
-            </FlexRow>
-          </>
-        )}
-        {!isLoading && lenke && (
-          <>
-            <FlexRow className={styles.sentrerRad}>
-              <FlexColumn>
+              </HStack>
+            </>
+          )}
+          {!isLoading && lenke && (
+            <>
+              <HStack justify="center">
                 <CheckmarkCircleIcon className={styles.ferdigIkon} />
-              </FlexColumn>
-            </FlexRow>
-            <FlexRow className={styles.sentrerRad}>
-              <FlexColumn>
+              </HStack>
+              <HStack justify="center">
                 <BodyShort>
                   <FormattedMessage id="Journalfør.Modal.Journalført" />{' '}
                   <Link target="_blank" rel="noreferrer" href={lenke}>
                     {saksnummer?.saksnummer}
                   </Link>
                 </BodyShort>
-              </FlexColumn>
-            </FlexRow>
-          </>
-        )}
-        <FlexRow className={styles.sentrerRad}>
-          <FlexColumn>
+              </HStack>
+            </>
+          )}
+          <HStack justify="center">
             <Button size="small" variant="primary" onClick={lukkModal} disabled={false} autoFocus type="button">
               <FormattedMessage id="Journalfør.Modal.Ok" />
             </Button>
-          </FlexColumn>
-        </FlexRow>
+          </HStack>
+        </VStack>
       </Modal.Body>
     </Modal>
   );

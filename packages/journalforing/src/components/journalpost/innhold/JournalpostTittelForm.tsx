@@ -1,10 +1,9 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
-import { Heading, Button, CheckboxGroup, Checkbox } from '@navikt/ds-react';
+import { Heading, Button, CheckboxGroup, Checkbox, HStack } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
 import { PencilIcon } from '@navikt/aksel-icons';
 import { SelectField, InputField } from '@navikt/ft-form-hooks';
 import { hasValidText, required } from '@navikt/ft-form-validators';
-import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 import Journalpost from '../../../typer/journalpostTsType';
 import styles from './journalpostTittelForm.module.css';
 import { listeMedTittler } from '../../../kodeverk/dokumentTittel';
@@ -34,10 +33,10 @@ const JournalpostTittelForm: FunctionComponent<OwnProps> = ({ journalpost, readO
     setHarToggletFritekst(!harToggletFritekst);
   }, [harToggletFritekst]);
   return (
-    <FlexRow>
+    <div className={styles.container}>
       {kanRedigereTittel && (
         <>
-          <FlexColumn className={styles.inputBoks}>
+          <HStack className={styles.inputBoks}>
             {harToggletFritekst && (
               <InputField
                 name="journalpostTittel"
@@ -57,8 +56,8 @@ const JournalpostTittelForm: FunctionComponent<OwnProps> = ({ journalpost, readO
                 selectValues={tittler}
               />
             )}
-          </FlexColumn>
-          <FlexColumn>
+          </HStack>
+          <HStack>
             <CheckboxGroup
               legend="Brukt fritekst"
               hideLegend
@@ -69,24 +68,18 @@ const JournalpostTittelForm: FunctionComponent<OwnProps> = ({ journalpost, readO
                 <FormattedMessage id="Journal.Tittel.Fritekst" />
               </Checkbox>
             </CheckboxGroup>
-          </FlexColumn>
+          </HStack>
         </>
       )}
       {!kanRedigereTittel && (
-        <FlexColumn className={styles.tittelRad}>
+        <HStack className={styles.inputBoks}>
           <Heading size="large">{journalpost.tittel}</Heading>
           {!readOnly && erKanalSomErÅpenForEndring(journalpost.kanal) && (
-            <Button
-              icon={<PencilIcon aria-hidden />}
-              className={styles.editButton}
-              onClick={toggleRedigering}
-              type="button"
-              variant="tertiary"
-            />
+            <Button icon={<PencilIcon aria-hidden />} onClick={toggleRedigering} type="button" variant="tertiary" />
           )}
-        </FlexColumn>
+        </HStack>
       )}
-    </FlexRow>
+    </div>
   );
 };
 export default JournalpostTittelForm;

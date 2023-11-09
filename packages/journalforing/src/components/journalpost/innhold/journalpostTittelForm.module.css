@@ -1,12 +1,5 @@
-.tittelRad {
+.container {
   display: flex;
-}
-
-.editIcon {
-  color: var(--a-blue-600);
-  height: 20px;
-  margin-top: 8px;
-  width: 20px;
 }
 
 .selectField {
@@ -20,5 +13,6 @@
 }
 
 .inputBoks {
+  margin-right: 50px;
   width: 600px;
 }

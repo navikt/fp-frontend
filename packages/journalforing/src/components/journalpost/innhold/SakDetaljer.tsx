@@ -1,7 +1,6 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
-import { Label, Detail, Tag, Button, TagProps, CopyButton } from '@navikt/ds-react';
+import { Label, Detail, Tag, Button, TagProps, CopyButton, HStack, VStack } from '@navikt/ds-react';
 import { TabsAddIcon } from '@navikt/aksel-icons';
-import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
 import { FagsakStatus } from '@navikt/ft-kodeverk';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
@@ -74,63 +73,57 @@ const SakDetaljer: FunctionComponent<OwnProps> = ({ sak }) => {
   return (
     <div className={styles.sakContainer}>
       <div className={styles.sakDataFelt}>
-        <FlexRow>
-          <FlexColumn>
+        <VStack>
+          <HStack gap="3">
             <Label>
               <FormattedMessage id={finnYtelseTekst(sak.ytelseType)} />
             </Label>
-          </FlexColumn>
-          <FlexColumn>
             <Label>{sak.saksnummer}</Label>
-          </FlexColumn>
-          <FlexColumn className={styles.clipBoard}>
-            <CopyButton copyText={sak.saksnummer} variant="action" />
-          </FlexColumn>
-        </FlexRow>
-        <div className={styles.datoRad}>
-          <FlexColumn className={styles.datoFelt}>
-            <Detail>
-              <FormattedMessage
-                id="Journal.Sak.OpprettetDato"
-                values={{ opprettetDato: dayjs(sak.opprettetDato).format(DDMMYYYY_DATE_FORMAT) }}
-              />
-            </Detail>
-          </FlexColumn>
-          {sak.førsteUttaksdato && (
-            <FlexColumn className={styles.datoFelt}>
-              <Detail>
-                <FormattedMessage
-                  id="Journal.Sak.FørsteUttak"
-                  values={{ førsteUttak: dayjs(sak.førsteUttaksdato).format(DDMMYYYY_DATE_FORMAT) }}
-                />
-              </Detail>
-            </FlexColumn>
-          )}
-          {famTekst && (
-            <FlexColumn className={styles.datoFelt}>
-              <Detail>{famTekst}</Detail>
-            </FlexColumn>
-          )}
-        </div>
+            <div className={styles.clipBoard}>
+              <CopyButton copyText={sak.saksnummer} variant="action" />
+            </div>
+          </HStack>
+          <div className={styles.datoRad}>
+            <HStack gap="2">
+              <div className={styles.datoFelt}>
+                <Detail>
+                  <FormattedMessage
+                    id="Journal.Sak.OpprettetDato"
+                    values={{ opprettetDato: dayjs(sak.opprettetDato).format(DDMMYYYY_DATE_FORMAT) }}
+                  />
+                </Detail>
+              </div>
+              {sak.førsteUttaksdato && (
+                <div className={styles.datoFelt}>
+                  <Detail>
+                    <FormattedMessage
+                      id="Journal.Sak.FørsteUttak"
+                      values={{ førsteUttak: dayjs(sak.førsteUttaksdato).format(DDMMYYYY_DATE_FORMAT) }}
+                    />
+                  </Detail>
+                </div>
+              )}
+              {famTekst && (
+                <div className={styles.datoFelt}>
+                  <Detail>{famTekst}</Detail>
+                </div>
+              )}
+            </HStack>
+          </div>
+        </VStack>
       </div>
-      <div className={styles.etikettFelt}>
-        <FlexRow>
-          <FlexColumn>{lagEtikett(sak.status)}</FlexColumn>
-        </FlexRow>
-      </div>
+      <div className={styles.etikettFelt}>{lagEtikett(sak.status)}</div>
       <div className={styles.faneFelt}>
-        <FlexRow>
-          <FlexColumn className={styles.sakLenke}>
-            <Button
-              as="a"
-              href={lenke}
-              target="_blank"
-              rel="noreferrer"
-              variant="tertiary"
-              icon={<TabsAddIcon aria-hidden className={styles.newTabIcon} />}
-            />
-          </FlexColumn>
-        </FlexRow>
+        <div>
+          <Button
+            as="a"
+            href={lenke}
+            target="_blank"
+            rel="noreferrer"
+            variant="tertiary"
+            icon={<TabsAddIcon aria-hidden className={styles.newTabIcon} />}
+          />
+        </div>
       </div>
     </div>
   );

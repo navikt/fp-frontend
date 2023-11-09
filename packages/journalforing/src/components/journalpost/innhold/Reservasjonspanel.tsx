@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useCallback } from 'react';
-import { BodyLong, Tag, Button } from '@navikt/ds-react';
-import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
+import { BodyLong, Tag, Button, HStack } from '@navikt/ds-react';
 import { FormattedMessage } from 'react-intl';
 import { NavAnsatt } from '@navikt/fp-types';
 import ReserverOppgaveType from '../../../typer/reserverOppgaveType';
@@ -31,42 +30,36 @@ const Reservasjonspanel: FunctionComponent<OwnProps> = ({ oppgave, reserverOppga
   return (
     <div>
       {oppgave.reservertAv && navAnsatt.brukernavn === oppgave?.reservertAv && (
-        <FlexRow>
-          <FlexColumn>
-            <BodyLong>
-              <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
-              <Tag size="small" variant="info-moderate" style={{ marginLeft: '0.5rem' }}>
-                <FormattedMessage id="Oppgavetabell.Meg" />
-              </Tag>
-              <Button variant="tertiary" size="small" onClick={reserverOppgaveAction} style={{ marginLeft: '0.5rem' }}>
-                <FormattedMessage id="Oppgavetabell.FjernMeg" />
-              </Button>
-            </BodyLong>
-          </FlexColumn>
-        </FlexRow>
+        <HStack>
+          <BodyLong>
+            <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
+            <Tag size="small" variant="info-moderate" style={{ marginLeft: '0.5rem' }}>
+              <FormattedMessage id="Oppgavetabell.Meg" />
+            </Tag>
+            <Button variant="tertiary" size="small" onClick={reserverOppgaveAction} style={{ marginLeft: '0.5rem' }}>
+              <FormattedMessage id="Oppgavetabell.FjernMeg" />
+            </Button>
+          </BodyLong>
+        </HStack>
       )}
       {oppgave.reservertAv && navAnsatt.brukernavn !== oppgave.reservertAv && (
-        <FlexRow>
-          <FlexColumn>
-            <BodyLong>
-              <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
-              <Tag size="small" variant="neutral-moderate" style={{ marginLeft: '0.5rem' }}>
-                {oppgave.reservertAv}
-              </Tag>
-            </BodyLong>
-          </FlexColumn>
-        </FlexRow>
+        <HStack>
+          <BodyLong>
+            <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
+            <Tag size="small" variant="neutral-moderate" style={{ marginLeft: '0.5rem' }}>
+              {oppgave.reservertAv}
+            </Tag>
+          </BodyLong>
+        </HStack>
       )}
       {!oppgave.reservertAv && (
-        <FlexRow>
-          <FlexColumn>
-            <BodyLong>
-              <Button variant="tertiary" size="small" onClick={reserverOppgaveAction}>
-                <FormattedMessage id="Oppgavetabell.SettPåMeg" />
-              </Button>
-            </BodyLong>
-          </FlexColumn>
-        </FlexRow>
+        <HStack>
+          <BodyLong>
+            <Button variant="tertiary" size="small" onClick={reserverOppgaveAction}>
+              <FormattedMessage id="Oppgavetabell.SettPåMeg" />
+            </Button>
+          </BodyLong>
+        </HStack>
       )}
     </div>
   );

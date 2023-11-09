@@ -1,4 +1,9 @@
+.container {
+  display: flex;
+}
+
 .oppgaveKolonne {
+  padding-right: 16px;
   width: 35%;
 }
 

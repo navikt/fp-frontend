@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, useEffect, useCallback } from 'react';
 
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@navikt/fp-rest-api-hooks';
 import { NavAnsatt } from '@navikt/fp-types';
 import { restApiHooks, RestApiPathsKeys } from '../../data/fpfordelRestApi';
@@ -70,32 +70,30 @@ const JournalpostIndex: FunctionComponent<OwnProps> = ({
   }, [journalpost]);
 
   return (
-    <FlexContainer>
-      <FlexRow>
-        <FlexColumn className={styles.oppgaveKolonne}>
+    <div className={styles.container}>
+      <div className={styles.oppgaveKolonne}>
+        <VerticalSpacer sixteenPx />
+        <JournalpostDetaljer
+          avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
+          journalpost={journalpostOppdatertMedSøker || journalpost}
+          oppgave={oppgave}
+          submitJournalføring={submitJournalføring}
+          knyttJournalpostTilBruker={knyttJournalpostTilBruker}
+          forhåndsvisBruker={hentBrukerCallback}
+          brukerTilForhåndsvisning={hentetNavn}
+          lasterBruker={hentBrukerState === RestApiState.LOADING}
+          reserverOppgave={reserverOppgave}
+          navAnsatt={navAnsatt}
+          flyttTilGosys={flyttTilGosys}
+        />
+      </div>
+      {valgtDokument && (
+        <div className={styles.pdfKolonne}>
           <VerticalSpacer sixteenPx />
-          <JournalpostDetaljer
-            avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
-            journalpost={journalpostOppdatertMedSøker || journalpost}
-            oppgave={oppgave}
-            submitJournalføring={submitJournalføring}
-            knyttJournalpostTilBruker={knyttJournalpostTilBruker}
-            forhåndsvisBruker={hentBrukerCallback}
-            brukerTilForhåndsvisning={hentetNavn}
-            lasterBruker={hentBrukerState === RestApiState.LOADING}
-            reserverOppgave={reserverOppgave}
-            navAnsatt={navAnsatt}
-            flyttTilGosys={flyttTilGosys}
-          />
-        </FlexColumn>
-        {valgtDokument && (
-          <FlexColumn className={styles.pdfKolonne}>
-            <VerticalSpacer sixteenPx />
-            <DokumentIndex dokumenter={journalpost.dokumenter} />
-          </FlexColumn>
-        )}
-      </FlexRow>
-    </FlexContainer>
+          <DokumentIndex dokumenter={journalpost.dokumenter} />
+        </div>
+      )}
+    </div>
   );
 };
 

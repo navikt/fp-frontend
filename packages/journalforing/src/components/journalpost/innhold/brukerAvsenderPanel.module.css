@@ -33,7 +33,7 @@
   color: var(--a-surface-danger);
 }
 
-@media all and (max-width: 1500px) {
+@media all and (max-width: 1600px) {
   .kolBredde {
     margin-top: 16px;
     width: 100%;
