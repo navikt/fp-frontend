@@ -2,9 +2,9 @@ import React, { FunctionComponent, useState, useEffect, useCallback } from 'reac
 import { Navigate, NavLink, useLocation, useMatch } from 'react-router-dom';
 import { Location } from 'history';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Box, HStack, Spacer, Tag, Link, Heading, Detail, Label, VStack } from '@navikt/ds-react';
+import { Box, HStack, Spacer, Tag, Link, Label, VStack } from '@navikt/ds-react';
 import { BehandlingVelgerSakIndex } from '@navikt/ft-sak-behandling-velger';
-import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { KodeverkType, FagsakMarkeringKode } from '@navikt/fp-kodeverk';
 import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
