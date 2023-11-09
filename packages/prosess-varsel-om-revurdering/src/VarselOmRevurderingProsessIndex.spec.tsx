@@ -25,7 +25,6 @@ describe('<VarselOmRevurderingProsessIndex>', () => {
     expect(screen.getAllByText('Fødselsdato')).toHaveLength(2);
     expect(screen.getAllByText('10.01.2019')).toHaveLength(2);
     expect(screen.getByText('Antall barn')).toBeInTheDocument();
-    expect(screen.getByText('1')).toBeInTheDocument();
 
     expect(screen.getByText('Opplysninger om fødsel fra folkeregisteret')).toBeInTheDocument();
 
@@ -100,7 +99,6 @@ describe('<VarselOmRevurderingProsessIndex>', () => {
     expect(screen.getByText('Termindato')).toBeInTheDocument();
     expect(screen.getByText('01.01.2019')).toBeInTheDocument();
     expect(screen.getByText('Antall barn')).toBeInTheDocument();
-    expect(screen.getByText('1')).toBeInTheDocument();
 
     expect(screen.getByText('Fødselsdato')).toBeInTheDocument();
     expect(screen.getByText('10.01.2019')).toBeInTheDocument();

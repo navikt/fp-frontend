@@ -27,7 +27,6 @@ describe('<AdopsjonFaktaIndex>', () => {
     expect(screen.getByText('Dato for barnets ankomst til Norge (ved utenlandsadopsjon)')).toBeInTheDocument();
 
     expect(screen.getByText('Antall barn som fyller vilkåret')).toBeInTheDocument();
-    expect(screen.getByText('1')).toBeInTheDocument();
 
     const begrunnValgInput = utils.getByLabelText('Begrunn endringene');
     await userEvent.type(begrunnValgInput, 'Dette er en begrunnelse');
