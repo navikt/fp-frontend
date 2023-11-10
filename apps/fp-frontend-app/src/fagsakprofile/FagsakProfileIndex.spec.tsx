@@ -32,7 +32,13 @@ describe('<FagsakProfileIndex>', () => {
     behandlinger: [behandling] as BehandlingAppKontekst[],
     behandlingTypeKanOpprettes: [] as BehandlingOppretting[],
     brukerManglerAdresse: false,
-  };
+    bruker: {
+      navn: 'Espen Utvikler',
+      fødselsnummer: '123456',
+      kjønn: 'M',
+      fødselsdato: '2000-01-01',
+    },
+  } as Fagsak;
 
   const navAnsatt = {
     brukernavn: 'Peder',
@@ -61,7 +67,7 @@ describe('<FagsakProfileIndex>', () => {
           <RestApiMock data={data} requestApi={requestFagsakApi}>
             <MemoryRouter>
               <FagsakProfileIndex
-                fagsakData={new FagsakData(fagsak as Fagsak)}
+                fagsakData={new FagsakData(fagsak)}
                 hentOgSettBehandling={vi.fn()}
                 setBehandling={vi.fn()}
                 oppdaterFagsak={vi.fn()}
@@ -89,7 +95,7 @@ describe('<FagsakProfileIndex>', () => {
           <RestApiMock data={data} requestApi={requestFagsakApi}>
             <MemoryRouter>
               <FagsakProfileIndex
-                fagsakData={new FagsakData(fagsak as Fagsak)}
+                fagsakData={new FagsakData(fagsak)}
                 hentOgSettBehandling={vi.fn()}
                 setBehandling={vi.fn()}
                 oppdaterFagsak={vi.fn()}
