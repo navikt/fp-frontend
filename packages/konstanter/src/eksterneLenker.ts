@@ -9,7 +9,9 @@ export const RETTSKILDE_URL = 'https://lovdata.no/pro/sso/login/nav';
 export const AINNTEKT_URL = 'https://arbeid-og-inntekt.nais.adeo.no'; // /?0#!empty';
 export const AAREG_URL = 'https://arbeid-og-inntekt.nais.adeo.no/';
 export const GOSYS_URL = 'https://gosys.intern.nav.no/gosys/bruker/brukeroversikt.jsf?execution=e3s1';
-export const MODIA_URL = 'https://app.adeo.no/modiapersonoversikt/';
+
+export const getModiaUrl = (fødselsnummer: string) =>
+  `https://app.adeo.no/modiapersonoversikt/person/${fødselsnummer}/meldinger/`;
 
 export const hentDokumentLenke = (saksnummer: string, journalpostId: string, dokumentId: string): string =>
   `/fpsak/api/dokument/hent-dokument?saksnummer=${saksnummer}&journalpostId=${journalpostId}&dokumentId=${dokumentId}`;

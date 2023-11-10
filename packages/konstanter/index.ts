@@ -9,7 +9,7 @@ export {
   AINNTEKT_URL,
   AAREG_URL,
   GOSYS_URL,
-  MODIA_URL,
+  getModiaUrl,
   hentDokumentLenke,
   hentVedtakDokumentLenke,
 } from './src/eksterneLenker';
