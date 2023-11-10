@@ -10,7 +10,7 @@ import { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import { useRestApiErrorDispatcher } from '@navikt/fp-rest-api-hooks';
 import { FagsakProfilSakIndex } from '@navikt/ft-sak-fagsak-profil';
-import { AAREG_URL, AINNTEKT_URL, GOSYS_URL, MODIA_URL } from '@navikt/fp-konstanter';
+import { AAREG_URL, AINNTEKT_URL, GOSYS_URL, getModiaUrl } from '@navikt/fp-konstanter';
 
 import { FagsakApiKeys, restFagsakApiHooks } from '../data/fagsakContextApi';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling, pathToBehandlinger } from '../app/paths';
@@ -176,7 +176,7 @@ const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
             </Label>
             <Spacer />
             <HStack gap="4">
-              <Link href={MODIA_URL} target="_blank">
+              <Link href={getModiaUrl(fagsak.bruker.fødselsnummer)} target="_blank">
                 <Tag size="small" variant="neutral-filled">
                   <FormattedMessage id="FagsakProfileIndex.Modia" />
                 </Tag>
