@@ -35,15 +35,15 @@ const Template: StoryFn<{
 export const Default = Template.bind({});
 Default.args = {
   infotrygdVedtak: {
-    vedtakKjedeForIdentdato: {
-      '2015-06-01': {
+    vedtakKjeder: [
+      {
         opprinneligIdentdato: '2015-06-01',
+        behandlingstema: {
+          kode: 'SV',
+          termnavn: 'Svangerskapspenger',
+        },
         vedtak: [
           {
-            behandlingstema: {
-              kode: 'SV',
-              termnavn: 'Svangerskapspenger',
-            },
             identdato: '2015-06-01',
             opphørFom: '2015-08-20',
             opprinneligIdentdato: '2015-06-01',
@@ -109,14 +109,14 @@ Default.args = {
           },
         ],
       },
-      '2015-08-20': {
+      {
         opprinneligIdentdato: '2015-08-20',
+        behandlingstema: {
+          kode: 'FØ',
+          termnavn: 'Foreldrepenger m/ fødsel',
+        },
         vedtak: [
           {
-            behandlingstema: {
-              kode: 'FØ',
-              termnavn: 'Foreldrepenger m/ fødsel',
-            },
             identdato: '2015-08-20',
             opphørFom: '2015-10-09',
             opprinneligIdentdato: '2015-08-20',
@@ -132,12 +132,9 @@ Default.args = {
             },
             dekningsgrad: 100,
             fødselsdatoBarn: '2015-08-20',
+            gradering: 50,
           },
           {
-            behandlingstema: {
-              kode: 'FØ',
-              termnavn: 'Foreldrepenger m/ fødsel',
-            },
             identdato: '2015-12-18',
             opphørFom: '2016-01-07',
             opprinneligIdentdato: '2015-08-20',
@@ -155,10 +152,6 @@ Default.args = {
             fødselsdatoBarn: '2015-08-20',
           },
           {
-            behandlingstema: {
-              kode: 'FØ',
-              termnavn: 'Foreldrepenger m/ fødsel',
-            },
             identdato: '2016-01-07',
             opphørFom: '2016-07-07',
             opprinneligIdentdato: '2015-08-20',
@@ -177,6 +170,6 @@ Default.args = {
           },
         ],
       },
-    },
+    ],
   },
 };

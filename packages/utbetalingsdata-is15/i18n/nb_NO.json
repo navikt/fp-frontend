@@ -5,11 +5,12 @@
   "UtbetalingsdataPanel.Resultat": "Søkeresultat:",
 
   "VedtakPanel.Identdato": "Identdato",
-  "VedtakPanel.Ytelse": "Ytelse",
   "VedtakPanel.Dekningsgrad": "Dekningsgrad",
   "VedtakPanel.Periode": "Periode",
   "VedtakPanel.Arbeidskategori": "Arbeidskategori",
   "VedtakPanel.OpphorFom": "Opphørsdato",
+  "VedtakPanel.FødselsdatoBarn": "Fødselsdato barn",
+  "VedtakPanel.Gradering": "Gradering",
 
   "VedtakDetaljerPanel.Arbeidsforhold": "Arbeidsforhold",
   "VedtakDetaljerPanel.Utbetalinger": "Utbetalinger",

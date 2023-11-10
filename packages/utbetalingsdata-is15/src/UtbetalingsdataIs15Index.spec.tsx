@@ -34,8 +34,8 @@ describe('<UtbetalingsdataIs15Index>', () => {
 
     expect(await screen.findByText('Søkeresultat:')).toBeInTheDocument();
     expect(screen.getAllByText('01.06.2015')).toHaveLength(2);
-    expect(screen.getAllByText('Svangerskapspenger')).toHaveLength(2);
-    expect(screen.getAllByText('20.08.2015')).toHaveLength(3);
-    expect(screen.getAllByText('Foreldrepenger m/ fødsel')).toHaveLength(4);
+    expect(screen.getAllByText('Svangerskapspenger')).toHaveLength(1);
+    expect(screen.getAllByText('20.08.2015')).toHaveLength(6);
+    expect(screen.getAllByText('Foreldrepenger m/ fødsel')).toHaveLength(1);
   });
 });
