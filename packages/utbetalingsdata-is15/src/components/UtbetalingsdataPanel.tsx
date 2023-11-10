@@ -72,7 +72,7 @@ const UtbetalingsdataPanel: FunctionComponent<OwnProps> = ({
                 <ExpansionCard.Title size="small">
                   <HStack gap="5">
                     <DateLabel dateString={vedtakKjede.opprinneligIdentdato} />
-                    <div>{vedtakKjede.behandlingstema.termnavn.replace('m/', '-')}</div>
+                    <div>{vedtakKjede.behandlingstema.termnavn}</div>
                   </HStack>
                 </ExpansionCard.Title>
               </ExpansionCard.Header>
