@@ -10,7 +10,7 @@ import { SYSTEMRUTINE_URL, RETTSKILDE_URL } from '@navikt/fp-konstanter';
 import ErrorFormatter from './feilhandtering/ErrorFormatter';
 import ErrorMessage from './feilhandtering/ErrorMessage';
 
-import { AVDELINGSLEDER_PATH, JOURNALFØRING_PATH } from '../paths';
+import { AVDELINGSLEDER_PATH, JOURNALFØRING_PATH, UTBETALINGSDATA_PATH } from '../paths';
 import { FagsakApiKeys, restFagsakApiHooks } from '../../data/fagsakContextApi';
 
 type QueryStrings = {
@@ -88,30 +88,20 @@ const Dekorator: FunctionComponent<OwnProps> = ({
     },
     [navigate],
   );
-  const visAvdelingslederside = useCallback(
-    (e: React.SyntheticEvent) => {
-      navigate(AVDELINGSLEDER_PATH);
-      e.preventDefault();
-    },
-    [navigate],
-  );
+  const visAvdelingslederside = useCallback((e: React.SyntheticEvent) => {
+    navigate(AVDELINGSLEDER_PATH);
+    e.preventDefault();
+  }, []);
 
-  const visJournalføringside = useCallback(
-    (e: React.SyntheticEvent) => {
-      navigate(JOURNALFØRING_PATH);
-      e.preventDefault();
-    },
-    [navigate],
-  );
+  const visJournalføringside = useCallback((e: React.SyntheticEvent) => {
+    navigate(JOURNALFØRING_PATH);
+    e.preventDefault();
+  }, []);
 
-  // TODO Fjern utkommentering når testing er over
-  // const visUtbetalingsdataSide = useCallback(
-  //   (e: React.SyntheticEvent) => {
-  //     navigate(UTBETALINGSDATA_PATH);
-  //     e.preventDefault();
-  //   },
-  //   [navigate],
-  // );
+  const visUtbetalingsdataSide = useCallback((e: React.SyntheticEvent) => {
+    navigate(UTBETALINGSDATA_PATH);
+    e.preventDefault();
+  }, []);
 
   const errorMessages = useRestApiError();
   const { removeErrorMessages } = useRestApiErrorDispatcher();
@@ -142,10 +132,10 @@ const Dekorator: FunctionComponent<OwnProps> = ({
         callback: (e: React.SyntheticEvent) => visJournalføringside(e),
       });
     }
-    // lenker.push({
-    //   tekst: intl.formatMessage({ id: 'Dekorator.Utbetalingsdata' }),
-    //   callback: (e: React.SyntheticEvent) => visUtbetalingsdataSide(e),
-    // });
+    lenker.push({
+      tekst: intl.formatMessage({ id: 'Dekorator.Utbetalingsdata' }),
+      callback: (e: React.SyntheticEvent) => visUtbetalingsdataSide(e),
+    });
     return lenker;
   }, [kanOppgavestyre, kanJournalføre]);
 

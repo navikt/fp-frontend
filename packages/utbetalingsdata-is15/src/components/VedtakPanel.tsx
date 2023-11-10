@@ -8,9 +8,10 @@ import VedtakDetaljerPanel from './detaljer/VedtakDetaljerPanel';
 
 interface OwnProps {
   alleVedtak: Vedtak[];
+  erForeldrepenger: boolean;
 }
 
-const VedtakPanel: FunctionComponent<OwnProps> = ({ alleVedtak }) => {
+const VedtakPanel: FunctionComponent<OwnProps> = ({ alleVedtak, erForeldrepenger }) => {
   const [valgtVedtak, setValgtVedtak] = useState<Vedtak>();
 
   return (
@@ -20,9 +21,6 @@ const VedtakPanel: FunctionComponent<OwnProps> = ({ alleVedtak }) => {
           <Table.Row>
             <Table.HeaderCell scope="col">
               <FormattedMessage id="VedtakPanel.Identdato" />
-            </Table.HeaderCell>
-            <Table.HeaderCell scope="col">
-              <FormattedMessage id="VedtakPanel.Ytelse" />
             </Table.HeaderCell>
             <Table.HeaderCell scope="col">
               <FormattedMessage id="VedtakPanel.Dekningsgrad" />
@@ -36,6 +34,16 @@ const VedtakPanel: FunctionComponent<OwnProps> = ({ alleVedtak }) => {
             <Table.HeaderCell scope="col">
               <FormattedMessage id="VedtakPanel.OpphorFom" />
             </Table.HeaderCell>
+            {erForeldrepenger && (
+              <>
+                <Table.HeaderCell scope="col">
+                  <FormattedMessage id="VedtakPanel.FødselsdatoBarn" />
+                </Table.HeaderCell>
+                <Table.HeaderCell scope="col">
+                  <FormattedMessage id="VedtakPanel.Gradering" />
+                </Table.HeaderCell>
+              </>
+            )}
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -49,7 +57,6 @@ const VedtakPanel: FunctionComponent<OwnProps> = ({ alleVedtak }) => {
               <Table.DataCell>
                 <DateLabel dateString={vedtak.identdato} />
               </Table.DataCell>
-              <Table.DataCell>{vedtak.behandlingstema.termnavn}</Table.DataCell>
               <Table.DataCell>{vedtak.dekningsgrad}</Table.DataCell>
               <Table.DataCell>
                 <PeriodLabel dateStringFom={vedtak.periode.fom} dateStringTom={vedtak.periode.tom} />
@@ -58,6 +65,14 @@ const VedtakPanel: FunctionComponent<OwnProps> = ({ alleVedtak }) => {
               <Table.DataCell>
                 <DateLabel dateString={vedtak.opphørFom} />
               </Table.DataCell>
+              {erForeldrepenger && (
+                <>
+                  <Table.DataCell>
+                    {vedtak.fødselsdatoBarn && <DateLabel dateString={vedtak.fødselsdatoBarn} />}
+                  </Table.DataCell>
+                  <Table.DataCell>{vedtak.gradering}</Table.DataCell>
+                </>
+              )}
             </Table.Row>
           ))}
         </Table.Body>

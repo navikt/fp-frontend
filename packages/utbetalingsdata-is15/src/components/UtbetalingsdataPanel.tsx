@@ -11,6 +11,8 @@ import VedtakPanel from './VedtakPanel';
 
 import styles from './utbetalingsdataPanel.module.css';
 
+const FORELDREPENGER_KODER = ['AP', 'FØ'];
+
 interface OwnProps {
   søkInfotrygdVedtak: (params: { searchString: string }) => Promise<InfotrygdVedtak | undefined>;
   infotrygdVedtakState: RestApiState;
@@ -59,18 +61,26 @@ const UtbetalingsdataPanel: FunctionComponent<OwnProps> = ({
           <Heading size="small">
             <FormattedMessage id="UtbetalingsdataPanel.Resultat" />
           </Heading>
-          {Object.values(infotrygdVedtak.vedtakKjedeForIdentdato).map(v => (
-            <ExpansionCard size="small" aria-label="default-demo" key={v.opprinneligIdentdato} className={styles.card}>
+          {infotrygdVedtak.vedtakKjeder.map(vedtakKjede => (
+            <ExpansionCard
+              size="small"
+              aria-label="default-demo"
+              key={vedtakKjede.opprinneligIdentdato}
+              className={styles.card}
+            >
               <ExpansionCard.Header>
                 <ExpansionCard.Title size="small">
                   <HStack gap="5">
-                    <DateLabel dateString={v.opprinneligIdentdato} />
-                    <div>{v.vedtak[0].behandlingstema.termnavn}</div>
+                    <DateLabel dateString={vedtakKjede.opprinneligIdentdato} />
+                    <div>{vedtakKjede.behandlingstema.termnavn.replace('m/', '-')}</div>
                   </HStack>
                 </ExpansionCard.Title>
               </ExpansionCard.Header>
               <ExpansionCard.Content>
-                <VedtakPanel alleVedtak={v.vedtak} />
+                <VedtakPanel
+                  alleVedtak={vedtakKjede.vedtak}
+                  erForeldrepenger={FORELDREPENGER_KODER.includes(vedtakKjede.behandlingstema.kode)}
+                />
               </ExpansionCard.Content>
             </ExpansionCard>
           ))}

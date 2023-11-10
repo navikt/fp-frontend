@@ -23,10 +23,6 @@ export type VedtakUtbetaling = {
 };
 
 export type Vedtak = {
-  behandlingstema: {
-    kode: string;
-    termnavn: string;
-  };
   identdato: string;
   opphørFom: string;
   opprinneligIdentdato: string;
@@ -44,16 +40,18 @@ export type Vedtak = {
   dekningsgrad: number;
   fødselsdatoBarn?: string;
   utbetalinger?: VedtakUtbetaling[];
+  gradering?: number;
 };
 
 type InfotrygdVedtak = {
-  vedtakKjedeForIdentdato: Record<
-    string,
-    {
-      opprinneligIdentdato: string;
-      vedtak: Vedtak[];
-    }
-  >;
+  vedtakKjeder: {
+    opprinneligIdentdato: string;
+    behandlingstema: {
+      kode: string;
+      termnavn: string;
+    };
+    vedtak: Vedtak[];
+  }[];
 };
 
 export default InfotrygdVedtak;
