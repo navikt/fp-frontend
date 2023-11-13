@@ -26,7 +26,7 @@
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
     "@navikt/ft-fakta-beregning": "5.0.11",
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "7.3.13",
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "7.3.14",
     "@navikt/ft-form-hooks": "4.2.13",
     "@navikt/ft-form-validators": "2.1.6",
     "@navikt/ft-kodeverk": "2.2.6",
