@@ -13,7 +13,7 @@
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/ft-fakta-beregning": "5.0.11",
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "7.3.13",
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "7.3.14",
     "@navikt/ft-prosess-beregningsgrunnlag": "6.3.15"
   },
   "devDependencies": {
