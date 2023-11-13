@@ -15,7 +15,7 @@
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
-    "@sentry/browser": "7.79.0",
+    "@sentry/browser": "7.80.0",
     "axios": "1.6.1"
   },
   "devDependencies": {
