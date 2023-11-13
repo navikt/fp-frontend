@@ -13,7 +13,7 @@ type OwnProps = Readonly<{
   hentJournalpost: (journalpostId: string) => void;
   avbrytVisningAvJournalpost: () => void;
   valgtJournalpost?: Journalpost;
-  journalpostsøkFullført: boolean;
+  harSøktOgFunnetIngenMatch: boolean;
 }>;
 
 /**
@@ -23,7 +23,7 @@ const JournalføringHeader: FunctionComponent<OwnProps> = ({
   valgtJournalpost,
   hentJournalpost,
   avbrytVisningAvJournalpost,
-  journalpostsøkFullført,
+  harSøktOgFunnetIngenMatch,
 }) => {
   const [åpenSøkemodal, setÅpenSøkemodal] = useState<boolean>(false);
   const åpneModal = useCallback(() => {
@@ -52,24 +52,26 @@ const JournalføringHeader: FunctionComponent<OwnProps> = ({
         <Heading size="medium">
           <FormattedMessage id="Journalforing.Tittel" />
         </Heading>
-        <Button
-          size="xsmall"
-          variant="secondary-neutral"
-          type="button"
-          onClick={åpneModal}
-          icon={<MagnifyingGlassIcon height="32px" width="32px" />}
-        >
-          Søk
-        </Button>
+        {!valgtJournalpost && (
+          <>
+            <Button
+              size="xsmall"
+              variant="secondary-neutral"
+              type="button"
+              onClick={åpneModal}
+              icon={<MagnifyingGlassIcon height="32px" width="32px" />}
+            >
+              Søk
+            </Button>
+            <JournalpostSøkModal
+              hentJournalpost={hentJournalpost}
+              lukkModal={lukkModal}
+              erÅpen={åpenSøkemodal}
+              harSøktOgFunnetIngenMatch={harSøktOgFunnetIngenMatch}
+            />
+          </>
+        )}
       </HStack>
-      {!valgtJournalpost && (
-        <JournalpostSøkModal
-          hentJournalpost={hentJournalpost}
-          lukkModal={lukkModal}
-          erÅpen={åpenSøkemodal}
-          fantIkkeJournalpost={journalpostsøkFullført}
-        />
-      )}
     </div>
   );
 };

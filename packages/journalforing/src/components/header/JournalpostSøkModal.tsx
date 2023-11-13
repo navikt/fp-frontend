@@ -15,7 +15,7 @@ type OwnProps = Readonly<{
   hentJournalpost: (journalpostId: string) => void;
   lukkModal: () => void;
   erÅpen: boolean;
-  fantIkkeJournalpost: boolean;
+  harSøktOgFunnetIngenMatch: boolean;
 }>;
 
 /**
@@ -25,7 +25,7 @@ const JournalpostSøkModal: FunctionComponent<OwnProps> = ({
   hentJournalpost,
   lukkModal,
   erÅpen,
-  fantIkkeJournalpost,
+  harSøktOgFunnetIngenMatch,
 }) => {
   const intl = useIntl();
   const formMethods = useForm({
@@ -69,7 +69,7 @@ const JournalpostSøkModal: FunctionComponent<OwnProps> = ({
           </HStack>
         </Form>
         <VerticalSpacer sixteenPx />
-        {fantIkkeJournalpost && (
+        {harSøktOgFunnetIngenMatch && (
           <BodyShort>
             <FormattedMessage id="Journalpost.Søk.IngenTreff" />
           </BodyShort>

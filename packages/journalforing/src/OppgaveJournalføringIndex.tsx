@@ -30,10 +30,12 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
   const [valgtOppgave, setValgtOppgave] = useState<Oppgave | undefined>(undefined);
   const [valgtJournalpost, setValgtJournalpost] = useState<Journalpost | undefined>(undefined);
   const [visModal, setVisModal] = useState(false);
+  const [harSøktOgFunnetIngenMatch, setharSøktOgFunnetIngenMatch] = useState(false);
   const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
 
   const avbrytVisningAvJournalpost = useCallback(() => {
     setValgtOppgave(undefined);
+    setharSøktOgFunnetIngenMatch(false);
     setValgtJournalpost(undefined);
   }, [valgtOppgave]);
 
@@ -139,6 +141,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
   useEffect(() => {
     if (hentJournalpostState === RestApiState.SUCCESS) {
       setValgtJournalpost(hentetJournalpost);
+      setharSøktOgFunnetIngenMatch(!valgtJournalpost);
     }
   }, [hentJournalpostState]);
 
@@ -156,7 +159,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
     <RawIntlProvider value={intl}>
       <JournalføringHeader
         avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
-        journalpostsøkFullført={hentJournalpostState === RestApiState.SUCCESS}
+        harSøktOgFunnetIngenMatch={harSøktOgFunnetIngenMatch}
         valgtJournalpost={valgtJournalpost}
         hentJournalpost={hentJournalpost}
       />
