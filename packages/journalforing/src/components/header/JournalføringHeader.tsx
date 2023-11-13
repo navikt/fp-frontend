@@ -19,7 +19,7 @@ type OwnProps = Readonly<{
 /**
  * Header - Journalføringsheader, inneholder tittel, tilbakeknapp og søkeknapp for journalpost
  */
-const Header: FunctionComponent<OwnProps> = ({
+const JournalføringHeader: FunctionComponent<OwnProps> = ({
   valgtJournalpost,
   hentJournalpost,
   avbrytVisningAvJournalpost,
@@ -62,13 +62,15 @@ const Header: FunctionComponent<OwnProps> = ({
           Søk
         </Button>
       </HStack>
-      <JournalpostSøkModal
-        hentJournalpost={hentJournalpost}
-        lukkModal={lukkModal}
-        erÅpen={åpenSøkemodal}
-        fantIkkeJournalpost={journalpostsøkFullført && !valgtJournalpost}
-      />
+      {!valgtJournalpost && (
+        <JournalpostSøkModal
+          hentJournalpost={hentJournalpost}
+          lukkModal={lukkModal}
+          erÅpen={åpenSøkemodal}
+          fantIkkeJournalpost={journalpostsøkFullført}
+        />
+      )}
     </div>
   );
 };
-export default Header;
+export default JournalføringHeader;

@@ -14,7 +14,7 @@ import JournalførSubmitValue from './typer/ferdigstillJournalføringSubmit';
 import JournalførtSubmitModal from './components/journalpost/modal/JournalførtSubmitModal';
 import ReserverOppgaveType from './typer/reserverOppgaveType';
 import Journalpost from './typer/journalpostTsType';
-import Header from './components/header/Header';
+import JournalføringHeader from './components/header/JournalføringHeader';
 
 const intl = createIntl(messages);
 const TOM_ARRAY: Oppgave[] = [];
@@ -154,7 +154,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
   }
   return (
     <RawIntlProvider value={intl}>
-      <Header
+      <JournalføringHeader
         avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
         journalpostsøkFullført={hentJournalpostState === RestApiState.SUCCESS}
         valgtJournalpost={valgtJournalpost}
