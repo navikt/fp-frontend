@@ -15,12 +15,18 @@ type OwnProps = Readonly<{
   hentJournalpost: (journalpostId: string) => void;
   lukkModal: () => void;
   erÅpen: boolean;
+  fantIkkeJournalpost: boolean;
 }>;
 
 /**
  * JournalpostSøkModal - Modal for å søke etter en journalpost ved ID
  */
-const JournalpostSøkModal: FunctionComponent<OwnProps> = ({ hentJournalpost, lukkModal, erÅpen }) => {
+const JournalpostSøkModal: FunctionComponent<OwnProps> = ({
+  hentJournalpost,
+  lukkModal,
+  erÅpen,
+  fantIkkeJournalpost,
+}) => {
   const intl = useIntl();
   const formMethods = useForm({
     defaultValues: {} as Formvalues,
@@ -63,6 +69,11 @@ const JournalpostSøkModal: FunctionComponent<OwnProps> = ({ hentJournalpost, lu
           </HStack>
         </Form>
         <VerticalSpacer sixteenPx />
+        {fantIkkeJournalpost && (
+          <BodyShort>
+            <FormattedMessage id="Journalpost.Søk.IngenTreff" />
+          </BodyShort>
+        )}
       </Modal.Body>
     </Modal>
   );

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useCallback } from 'react';
+import React, { FunctionComponent, useState, useCallback, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -13,12 +13,18 @@ type OwnProps = Readonly<{
   hentJournalpost: (journalpostId: string) => void;
   avbrytVisningAvJournalpost: () => void;
   valgtJournalpost?: Journalpost;
+  journalpostsøkFullført: boolean;
 }>;
 
 /**
  * Header - Journalføringsheader, inneholder tittel, tilbakeknapp og søkeknapp for journalpost
  */
-const Header: FunctionComponent<OwnProps> = ({ valgtJournalpost, hentJournalpost, avbrytVisningAvJournalpost }) => {
+const Header: FunctionComponent<OwnProps> = ({
+  valgtJournalpost,
+  hentJournalpost,
+  avbrytVisningAvJournalpost,
+  journalpostsøkFullført,
+}) => {
   const [åpenSøkemodal, setÅpenSøkemodal] = useState<boolean>(false);
   const åpneModal = useCallback(() => {
     setÅpenSøkemodal(true);
@@ -26,6 +32,13 @@ const Header: FunctionComponent<OwnProps> = ({ valgtJournalpost, hentJournalpost
   const lukkModal = useCallback(() => {
     setÅpenSøkemodal(false);
   }, []);
+
+  useEffect(() => {
+    if (valgtJournalpost) {
+      lukkModal();
+    }
+  }, [valgtJournalpost]);
+
   return (
     <div className={styles.header}>
       {valgtJournalpost && (
@@ -49,7 +62,12 @@ const Header: FunctionComponent<OwnProps> = ({ valgtJournalpost, hentJournalpost
           Søk
         </Button>
       </HStack>
-      <JournalpostSøkModal hentJournalpost={hentJournalpost} lukkModal={lukkModal} erÅpen={åpenSøkemodal} />
+      <JournalpostSøkModal
+        hentJournalpost={hentJournalpost}
+        lukkModal={lukkModal}
+        erÅpen={åpenSøkemodal}
+        fantIkkeJournalpost={journalpostsøkFullført && !valgtJournalpost}
+      />
     </div>
   );
 };

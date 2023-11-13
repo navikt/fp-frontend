@@ -142,11 +142,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
     }
   }, [hentJournalpostState]);
 
-  if (
-    innhentOppgaverState === RestApiState.NOT_STARTED ||
-    innhentOppgaverState === RestApiState.LOADING ||
-    hentJournalpostState === RestApiState.LOADING
-  ) {
+  if (innhentOppgaverState === RestApiState.NOT_STARTED || innhentOppgaverState === RestApiState.LOADING) {
     return <LoadingPanel />;
   }
   if (!navAnsatt) {
@@ -160,6 +156,7 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
     <RawIntlProvider value={intl}>
       <Header
         avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
+        journalpostsøkFullført={hentJournalpostState === RestApiState.SUCCESS}
         valgtJournalpost={valgtJournalpost}
         hentJournalpost={hentJournalpost}
       />
