@@ -14,7 +14,7 @@ import JournalførSubmitValue from './typer/ferdigstillJournalføringSubmit';
 import JournalførtSubmitModal from './components/journalpost/modal/JournalførtSubmitModal';
 import ReserverOppgaveType from './typer/reserverOppgaveType';
 import Journalpost from './typer/journalpostTsType';
-import Header from './components/header/Header';
+import JournalføringHeader from './components/header/JournalføringHeader';
 
 const intl = createIntl(messages);
 const TOM_ARRAY: Oppgave[] = [];
@@ -30,10 +30,12 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
   const [valgtOppgave, setValgtOppgave] = useState<Oppgave | undefined>(undefined);
   const [valgtJournalpost, setValgtJournalpost] = useState<Journalpost | undefined>(undefined);
   const [visModal, setVisModal] = useState(false);
+  const [harSøktOgFunnetIngenMatch, setharSøktOgFunnetIngenMatch] = useState(false);
   const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
 
   const avbrytVisningAvJournalpost = useCallback(() => {
     setValgtOppgave(undefined);
+    setharSøktOgFunnetIngenMatch(false);
     setValgtJournalpost(undefined);
   }, [valgtOppgave]);
 
@@ -139,14 +141,11 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
   useEffect(() => {
     if (hentJournalpostState === RestApiState.SUCCESS) {
       setValgtJournalpost(hentetJournalpost);
+      setharSøktOgFunnetIngenMatch(!valgtJournalpost);
     }
   }, [hentJournalpostState]);
 
-  if (
-    innhentOppgaverState === RestApiState.NOT_STARTED ||
-    innhentOppgaverState === RestApiState.LOADING ||
-    hentJournalpostState === RestApiState.LOADING
-  ) {
+  if (innhentOppgaverState === RestApiState.NOT_STARTED || innhentOppgaverState === RestApiState.LOADING) {
     return <LoadingPanel />;
   }
   if (!navAnsatt) {
@@ -158,8 +157,9 @@ const JournalforingIndex: FunctionComponent<OwnProps> = ({ navAnsatt }) => {
   }
   return (
     <RawIntlProvider value={intl}>
-      <Header
+      <JournalføringHeader
         avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
+        harSøktOgFunnetIngenMatch={harSøktOgFunnetIngenMatch}
         valgtJournalpost={valgtJournalpost}
         hentJournalpost={hentJournalpost}
       />

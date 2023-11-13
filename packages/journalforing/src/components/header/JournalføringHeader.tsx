@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useCallback } from 'react';
+import React, { FunctionComponent, useState, useCallback, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -13,12 +13,18 @@ type OwnProps = Readonly<{
   hentJournalpost: (journalpostId: string) => void;
   avbrytVisningAvJournalpost: () => void;
   valgtJournalpost?: Journalpost;
+  harSøktOgFunnetIngenMatch: boolean;
 }>;
 
 /**
  * Header - Journalføringsheader, inneholder tittel, tilbakeknapp og søkeknapp for journalpost
  */
-const Header: FunctionComponent<OwnProps> = ({ valgtJournalpost, hentJournalpost, avbrytVisningAvJournalpost }) => {
+const JournalføringHeader: FunctionComponent<OwnProps> = ({
+  valgtJournalpost,
+  hentJournalpost,
+  avbrytVisningAvJournalpost,
+  harSøktOgFunnetIngenMatch,
+}) => {
   const [åpenSøkemodal, setÅpenSøkemodal] = useState<boolean>(false);
   const åpneModal = useCallback(() => {
     setÅpenSøkemodal(true);
@@ -26,6 +32,13 @@ const Header: FunctionComponent<OwnProps> = ({ valgtJournalpost, hentJournalpost
   const lukkModal = useCallback(() => {
     setÅpenSøkemodal(false);
   }, []);
+
+  useEffect(() => {
+    if (valgtJournalpost) {
+      lukkModal();
+    }
+  }, [valgtJournalpost]);
+
   return (
     <div className={styles.header}>
       {valgtJournalpost && (
@@ -39,18 +52,27 @@ const Header: FunctionComponent<OwnProps> = ({ valgtJournalpost, hentJournalpost
         <Heading size="medium">
           <FormattedMessage id="Journalforing.Tittel" />
         </Heading>
-        <Button
-          size="xsmall"
-          variant="secondary-neutral"
-          type="button"
-          onClick={åpneModal}
-          icon={<MagnifyingGlassIcon height="32px" width="32px" />}
-        >
-          Søk
-        </Button>
+        {!valgtJournalpost && (
+          <>
+            <Button
+              size="xsmall"
+              variant="secondary-neutral"
+              type="button"
+              onClick={åpneModal}
+              icon={<MagnifyingGlassIcon height="32px" width="32px" />}
+            >
+              Søk
+            </Button>
+            <JournalpostSøkModal
+              hentJournalpost={hentJournalpost}
+              lukkModal={lukkModal}
+              erÅpen={åpenSøkemodal}
+              harSøktOgFunnetIngenMatch={harSøktOgFunnetIngenMatch}
+            />
+          </>
+        )}
       </HStack>
-      <JournalpostSøkModal hentJournalpost={hentJournalpost} lukkModal={lukkModal} erÅpen={åpenSøkemodal} />
     </div>
   );
 };
-export default Header;
+export default JournalføringHeader;

@@ -121,7 +121,7 @@ const navAnsattDefault = {
 const Template: StoryFn<{
   alleOppgaver?: Oppgave[];
   navAnsatt: NavAnsatt;
-  detaljertJournalpost: Journalpost;
+  detaljertJournalpost: Journalpost | undefined;
   responsFraBrukerSøk: Journalpost | undefined;
 }> = ({ alleOppgaver, detaljertJournalpost, navAnsatt, responsFraBrukerSøk }) => {
   const responsHentBruker = responsFraBrukerSøk
@@ -232,6 +232,13 @@ export const SøkeOppJournalpostSomLiggerPåAnnenSak = Template.bind({});
 SøkeOppJournalpostSomLiggerPåAnnenSak.args = {
   alleOppgaver: [],
   detaljertJournalpost: detaljertJournalpostMal(true, JournalpostTilstand.JOURNALFOERT),
+  navAnsatt: navAnsattDefault,
+};
+
+export const FinnerIkkeJournalpostVedSøkOgIngenOppgaver = Template.bind({});
+FinnerIkkeJournalpostVedSøkOgIngenOppgaver.args = {
+  alleOppgaver: [],
+  detaljertJournalpost: undefined,
   navAnsatt: navAnsattDefault,
 };
 
