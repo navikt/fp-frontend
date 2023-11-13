@@ -18,7 +18,7 @@
     "@testing-library/jest-dom": "6.1.4",
     "axios-mock-adapter": "1.22.0",
     "react": "18.2.0",
-    "react-intl": "6.5.2"
+    "react-intl": "6.5.4"
   },
   "devDependencies": {
     "eslint": "8.53.0",
