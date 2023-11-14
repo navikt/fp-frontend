@@ -77,7 +77,7 @@ interface OwnProps {
   forhandsvisVedtaksbrev: () => void;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
   beslutterFormData?: any;
-  setBeslutterForData: (data?: any) => void;
+  setBeslutterFormData: (data?: any) => void;
 }
 
 const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
@@ -90,7 +90,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   createLocationForSkjermlenke,
   beslutterFormData,
-  setBeslutterForData,
+  setBeslutterFormData,
 }) => {
   const erTilbakekreving =
     BehandlingType.TILBAKEKREVING === behandling.type || BehandlingType.TILBAKEKREVING_REVURDERING === behandling.type;
@@ -174,7 +174,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
           erTilbakekreving={erTilbakekreving}
           lagLenke={lagLenke}
           beslutterFormData={beslutterFormData}
-          setBeslutterForData={setBeslutterForData}
+          setBeslutterFormData={setBeslutterFormData}
         />
       )}
       {!erStatusFatterVedtak && (

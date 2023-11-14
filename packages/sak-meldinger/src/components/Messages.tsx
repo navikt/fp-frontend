@@ -97,7 +97,7 @@ interface OwnProps {
   fagsakYtelseType: string;
   kanVeilede: boolean;
   meldingFormData?: any;
-  setMeldingForData: (data?: any) => void;
+  setMeldingFormData: (data?: any) => void;
   brukerManglerAdresse: boolean;
 }
 
@@ -116,7 +116,7 @@ const Messages: FunctionComponent<OwnProps> = ({
   fagsakYtelseType,
   kanVeilede,
   meldingFormData,
-  setMeldingForData,
+  setMeldingFormData,
   isKontrollerRevurderingApOpen,
   brukerManglerAdresse,
 }) => {
@@ -155,7 +155,7 @@ const Messages: FunctionComponent<OwnProps> = ({
     <Form
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
-      setDataOnUnmount={setMeldingForData}
+      setDataOnUnmount={setMeldingFormData}
     >
       <SelectField
         name="brevmalkode"

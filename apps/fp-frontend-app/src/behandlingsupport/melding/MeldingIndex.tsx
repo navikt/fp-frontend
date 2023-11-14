@@ -27,7 +27,7 @@ const getSubmitCallback =
     ) => Promise<void | undefined>,
     hentOgSettBehandling: () => void,
     setShowSettPaVentModal: (erInnhentetEllerForlenget: boolean) => void,
-    setMeldingForData: (data?: any) => void,
+    setMeldingFormData: (data?: any) => void,
     behandlingTypeKode?: string,
     behandlingUuid?: string,
   ) =>
@@ -55,7 +55,7 @@ const getSubmitCallback =
           arsakskode: values.arsakskode,
         };
     return submitMessage(data).then(() => {
-      setMeldingForData();
+      setMeldingFormData();
       if (skalSettePåVent) {
         setShowSettPaVentModal(true);
       } else {
@@ -100,7 +100,7 @@ interface OwnProps {
   fagsakData: FagsakData;
   valgtBehandlingUuid: string;
   meldingFormData?: any;
-  setMeldingForData: (data?: any) => void;
+  setMeldingFormData: (data?: any) => void;
   hentOgSettBehandling: () => void;
 }
 
@@ -115,7 +115,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   fagsakData,
   valgtBehandlingUuid,
   meldingFormData,
-  setMeldingForData,
+  setMeldingFormData,
   hentOgSettBehandling,
 }) => {
   const intl = useIntl();
@@ -142,7 +142,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
       submitMessage,
       hentOgSettBehandling,
       setShowSettPaVentModal,
-      setMeldingForData,
+      setMeldingFormData,
       valgtBehandling?.type,
       valgtBehandling?.uuid,
     ),
@@ -205,7 +205,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
             fagsakYtelseType={fagsak.fagsakYtelseType}
             kanVeilede={initFetchData.innloggetBruker.kanVeilede}
             meldingFormData={meldingFormData}
-            setMeldingForData={setMeldingForData}
+            setMeldingFormData={setMeldingFormData}
             brukerManglerAdresse={fagsak.brukerManglerAdresse}
           />
         )}
