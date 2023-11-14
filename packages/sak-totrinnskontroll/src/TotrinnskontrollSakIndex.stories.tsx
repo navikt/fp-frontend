@@ -57,7 +57,7 @@ const Template: StoryFn<{
       fagsakYtelseType={fagsakYtelseType.FORELDREPENGER}
       alleKodeverk={alleKodeverk as any}
       createLocationForSkjermlenke={() => location}
-      setBeslutterForData={() => undefined}
+      setBeslutterFormData={() => undefined}
     />
   </div>
 );

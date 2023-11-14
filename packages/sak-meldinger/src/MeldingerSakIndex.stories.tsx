@@ -46,7 +46,7 @@ const Template: StoryFn<{
           kodeverk: 'UGUNST',
         },
       ]}
-      setMeldingForData={() => undefined}
+      setMeldingFormData={() => undefined}
       brukerManglerAdresse={brukerManglerAdresse}
     />
   </div>
