@@ -9,6 +9,7 @@ import { createIntl } from '@navikt/ft-utils';
 import { RestApiMock } from '@navikt/fp-utils-test';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
+import { Saksnotat } from '@navikt/fp-types';
 import * as useTrackRouteParam from '../app/useTrackRouteParam';
 import { requestFagsakApi, FagsakApiKeys } from '../data/fagsakContextApi';
 import messages from '../../i18n/nb_NO.json';
@@ -45,6 +46,7 @@ describe('<FagsakIndex>', () => {
     bruker: {
       kjønn: 'K',
     },
+    notater: [] as Saksnotat[],
   };
 
   const fagsakFpTilbake = {

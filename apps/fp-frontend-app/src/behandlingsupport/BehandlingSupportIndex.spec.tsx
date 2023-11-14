@@ -6,7 +6,7 @@ import { render, screen } from '@testing-library/react';
 import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
 
 import { RestApiMock } from '@navikt/fp-utils-test';
-import { BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
+import { BehandlingAppKontekst, Fagsak, Saksnotat } from '@navikt/fp-types';
 
 import BehandlingSupportIndex from './BehandlingSupportIndex';
 import { requestFagsakApi, FagsakApiKeys } from '../data/fagsakContextApi';
@@ -29,6 +29,7 @@ describe('<BehandlingSupportIndex>', () => {
     bruker: {
       kjønn: 'K',
     },
+    notater: [] as Saksnotat[],
   } as Fagsak;
 
   const navAnsatt = {
