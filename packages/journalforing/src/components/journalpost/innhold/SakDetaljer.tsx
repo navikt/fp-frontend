@@ -1,6 +1,7 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { Label, Detail, Tag, Button, TagProps, CopyButton, HStack, VStack } from '@navikt/ds-react';
 import { TabsAddIcon } from '@navikt/aksel-icons';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FormattedMessage } from 'react-intl';
 import { FagsakStatus } from '@navikt/ft-kodeverk';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
@@ -78,39 +79,40 @@ const SakDetaljer: FunctionComponent<OwnProps> = ({ sak }) => {
             <Label>
               <FormattedMessage id={finnYtelseTekst(sak.ytelseType)} />
             </Label>
-            <div>{lagEtikett(sak.status)}</div>
             <Label>{sak.saksnummer}</Label>
             <div className={styles.clipBoard}>
               <CopyButton copyText={sak.saksnummer} variant="action" />
             </div>
           </HStack>
-          <div className={styles.datoRad}>
-            <HStack gap="2">
+          <HStack gap="2">
+            <div className={styles.datoFelt}>
+              <Detail>
+                <FormattedMessage
+                  id="Journal.Sak.OpprettetDato"
+                  values={{ opprettetDato: dayjs(sak.opprettetDato).format(DDMMYYYY_DATE_FORMAT) }}
+                />
+              </Detail>
+            </div>
+            {sak.førsteUttaksdato && (
               <div className={styles.datoFelt}>
                 <Detail>
                   <FormattedMessage
-                    id="Journal.Sak.OpprettetDato"
-                    values={{ opprettetDato: dayjs(sak.opprettetDato).format(DDMMYYYY_DATE_FORMAT) }}
+                    id="Journal.Sak.FørsteUttak"
+                    values={{ førsteUttak: dayjs(sak.førsteUttaksdato).format(DDMMYYYY_DATE_FORMAT) }}
                   />
                 </Detail>
               </div>
-              {sak.førsteUttaksdato && (
-                <div className={styles.datoFelt}>
-                  <Detail>
-                    <FormattedMessage
-                      id="Journal.Sak.FørsteUttak"
-                      values={{ førsteUttak: dayjs(sak.førsteUttaksdato).format(DDMMYYYY_DATE_FORMAT) }}
-                    />
-                  </Detail>
-                </div>
-              )}
-              {famTekst && (
-                <div className={styles.datoFelt}>
-                  <Detail>{famTekst}</Detail>
-                </div>
-              )}
-            </HStack>
-          </div>
+            )}
+            {famTekst && (
+              <div className={styles.datoFelt}>
+                <Detail>{famTekst}</Detail>
+              </div>
+            )}
+          </HStack>
+          <VerticalSpacer eightPx />
+          <HStack>
+            <div>{lagEtikett(sak.status)}</div>
+          </HStack>
         </VStack>
       </div>
       <div className={styles.faneFelt}>

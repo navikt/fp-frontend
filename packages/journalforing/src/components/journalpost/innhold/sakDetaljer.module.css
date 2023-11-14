@@ -29,25 +29,12 @@
   margin-bottom: 8px;
 }
 
-.datoRad {
-  display: flex;
-}
-
 .datoFelt {
   width: 30%;
 }
 
 @media all and (max-width: 1500px) {
-  .datoRad {
-    display: inline;
-  }
   .datoFelt {
     margin-top: 16px;
-  }
-  .sakDataFelt {
-    width: 50%;
-  }
-  .etikettFelt {
-    width: 40%;
   }
 }
