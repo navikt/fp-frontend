@@ -68,7 +68,7 @@ describe('<MeldingIndex>', () => {
             <MeldingIndex
               fagsakData={new FagsakData(fagsak as Fagsak)}
               valgtBehandlingUuid={valgtBehandling.uuid}
-              setMeldingForData={() => undefined}
+              setMeldingFormData={() => undefined}
               hentOgSettBehandling={() => undefined}
             />
           </MemoryRouter>
@@ -100,7 +100,7 @@ describe('<MeldingIndex>', () => {
             <MeldingIndex
               fagsakData={new FagsakData(fagsak as Fagsak)}
               valgtBehandlingUuid={valgtBehandling.uuid}
-              setMeldingForData={() => undefined}
+              setMeldingFormData={() => undefined}
               hentOgSettBehandling={() => undefined}
             />
           </MemoryRouter>
@@ -149,7 +149,7 @@ describe('<MeldingIndex>', () => {
             <MeldingIndex
               fagsakData={new FagsakData(fagsak as Fagsak)}
               valgtBehandlingUuid={valgtBehandling.uuid}
-              setMeldingForData={() => undefined}
+              setMeldingFormData={() => undefined}
               hentOgSettBehandling={() => undefined}
             />
           </MemoryRouter>
@@ -200,7 +200,7 @@ describe('<MeldingIndex>', () => {
             <MeldingIndex
               fagsakData={new FagsakData(fagsak as Fagsak)}
               valgtBehandlingUuid={valgtBehandling.uuid}
-              setMeldingForData={() => undefined}
+              setMeldingFormData={() => undefined}
               hentOgSettBehandling={() => undefined}
             />
           </MemoryRouter>
