@@ -60,6 +60,18 @@
       "kanOppretteBehandling": true
     }
   ],
+  "notater": [
+    {
+      "opprettetTidspunkt": "2022-02-02",
+      "opprettetAv": "Espen Utvikler",
+      "notat": "Dette er et notat"
+    },
+    {
+      "opprettetTidspunkt": "2022-02-04",
+      "opprettetAv": "Espen Utvikler",
+      "notat": "Dette er et annet notat"
+    }
+  ],
   "behandlinger": [
     {
       "id": 999954,

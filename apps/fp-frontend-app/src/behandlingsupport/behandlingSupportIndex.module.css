@@ -7,3 +7,21 @@
   padding-left: 40px;
   padding-right: 40px;
 }
+
+.ulesteNotater {
+  position: absolute;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 9999px;
+  background-color: #c30000;
+  left: calc(50% + 7px);
+  top: -0.4375rem;
+  color: white;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+}
+
+.pencilSvgContainer {
+  position: relative;
+}

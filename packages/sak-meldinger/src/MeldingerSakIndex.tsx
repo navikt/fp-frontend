@@ -19,7 +19,7 @@ interface OwnProps {
   fagsakYtelseType: string;
   kanVeilede: boolean;
   meldingFormData?: any;
-  setMeldingForData: (data?: any) => void;
+  setMeldingFormData: (data?: any) => void;
   brukerManglerAdresse: boolean;
 }
 
@@ -33,7 +33,7 @@ const MeldingerSakIndex: FunctionComponent<OwnProps> = ({
   fagsakYtelseType,
   kanVeilede,
   meldingFormData,
-  setMeldingForData,
+  setMeldingFormData,
   brukerManglerAdresse,
 }) => (
   <RawIntlProvider value={intl}>
@@ -47,7 +47,7 @@ const MeldingerSakIndex: FunctionComponent<OwnProps> = ({
       fagsakYtelseType={fagsakYtelseType}
       kanVeilede={kanVeilede}
       meldingFormData={meldingFormData}
-      setMeldingForData={setMeldingForData}
+      setMeldingFormData={setMeldingFormData}
       brukerManglerAdresse={brukerManglerAdresse}
     />
   </RawIntlProvider>
