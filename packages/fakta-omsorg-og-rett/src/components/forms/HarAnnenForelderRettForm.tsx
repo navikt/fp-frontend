@@ -20,7 +20,7 @@ const maxLength1500 = maxLength(1500);
 export type FormValues = {
   harAnnenForelderRett: boolean;
   mottarAnnenForelderUforetrygd?: boolean;
-  annenForelderRettEØS?: boolean;
+  harAnnenForelderRettEØS?: boolean;
   begrunnelse: string;
 };
 
@@ -47,7 +47,7 @@ const HarAnnenForelderRettForm: FunctionComponent<OwnProps> = ({
     defaultValues: formData || {
       harAnnenForelderRett: ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenforelderRett,
       mottarAnnenForelderUforetrygd: ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenforelderUføretrygd,
-      annenForelderRettEØS: ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenForelderRettEØS,
+      harAnnenForelderRettEØS: ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenForelderRettEØS,
       begrunnelse: aksjonspunkt.begrunnelse ? decodeHtmlEntity(aksjonspunkt.begrunnelse) : undefined,
     },
   });
@@ -65,7 +65,7 @@ const HarAnnenForelderRettForm: FunctionComponent<OwnProps> = ({
         kode: AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT,
         annenforelderHarRett: feltVerdier.harAnnenForelderRett,
         annenforelderMottarUføretrygd: feltVerdier.mottarAnnenForelderUforetrygd,
-        annenForelderHarRettEØS: feltVerdier.annenForelderRettEØS,
+        annenForelderHarRettEØS: feltVerdier.harAnnenForelderRettEØS,
         begrunnelse: feltVerdier.begrunnelse,
       }),
     [],
