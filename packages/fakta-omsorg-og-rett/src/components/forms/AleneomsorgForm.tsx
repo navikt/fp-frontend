@@ -20,6 +20,7 @@ export type FormValues = {
   harAleneomsorg: boolean;
   harAnnenForelderRett?: boolean;
   mottarAnnenForelderUforetrygd?: boolean;
+  harAnnenForelderRettEØS?: boolean;
   begrunnelse: string;
 };
 
@@ -47,6 +48,7 @@ const AleneomsorgForm: FunctionComponent<OwnProps> = ({
       harAleneomsorg: ytelsefordeling?.bekreftetAleneomsorg,
       harAnnenForelderRett: ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenforelderRett,
       mottarAnnenForelderUforetrygd: ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenforelderUføretrygd,
+      harAnnenForelderRettEØS: ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenForelderRettEØS,
       begrunnelse: aksjonspunkt.begrunnelse ? decodeHtmlEntity(aksjonspunkt.begrunnelse) : undefined,
     },
   });
@@ -62,6 +64,7 @@ const AleneomsorgForm: FunctionComponent<OwnProps> = ({
         aleneomsorg: feltVerdier.harAleneomsorg,
         annenforelderHarRett: feltVerdier.harAnnenForelderRett,
         annenforelderMottarUføretrygd: feltVerdier.mottarAnnenForelderUforetrygd,
+        annenForelderHarRettEØS: feltVerdier.harAnnenForelderRettEØS,
         begrunnelse: feltVerdier.begrunnelse,
       }),
     [],

@@ -8,7 +8,7 @@ import { useFormContext } from 'react-hook-form';
 type FormValues = {
   harAnnenForelderRett: boolean;
   mottarAnnenForelderUforetrygd: boolean;
-  annenForelderRettEØS: boolean;
+  harAnnenForelderRettEØS: boolean;
 };
 
 interface OwnProps {
@@ -20,7 +20,7 @@ interface OwnProps {
 const HarAnnenForelderRettFelter: FunctionComponent<OwnProps> = ({ readOnly, avklareUforetrygd, avklareRettEØS }) => {
   const { watch } = useFormContext<FormValues>();
   const harAnnenForelderRett = watch('harAnnenForelderRett');
-  const annenForelderRettEØS = watch('annenForelderRettEØS');
+  const harAnnenForelderRettEØS = watch('harAnnenForelderRettEØS');
 
   return (
     <>
@@ -44,7 +44,7 @@ const HarAnnenForelderRettFelter: FunctionComponent<OwnProps> = ({ readOnly, avk
       <VerticalSpacer thirtyTwoPx />
       {harAnnenForelderRett === false && avklareRettEØS && (
         <RadioGroupPanel
-          name="annenForelderRettEØS"
+          name="harAnnenForelderRettEØS"
           label={<FormattedMessage id="HarAnnenForelderRettFelter.AnnenForelderRettEØS" />}
           validate={[required]}
           isReadOnly={readOnly}
@@ -61,7 +61,7 @@ const HarAnnenForelderRettFelter: FunctionComponent<OwnProps> = ({ readOnly, avk
           ]}
         />
       )}
-      {harAnnenForelderRett === false && (!avklareRettEØS || annenForelderRettEØS === false) && avklareUforetrygd && (
+      {harAnnenForelderRett === false && (!avklareRettEØS || harAnnenForelderRettEØS === false) && avklareUforetrygd && (
         <>
           <VerticalSpacer thirtyTwoPx />
           <RadioGroupPanel
