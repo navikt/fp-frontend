@@ -136,12 +136,12 @@ const JournalpostDetaljer: FunctionComponent<OwnProps> = ({
     defaultValues: buildInitialValues(journalpost),
   });
   const submitJournal = useCallback((values: JournalføringFormValues) => {
-    if (!oppgave) {
-      throw new Error('Prøver å journalføre en journalpost uten oppgave, ugyldig tilstand!');
-    }
     if (erEndeligJournalført(journalpost.tilstand)) {
       submitJournalføring(transformValues(values, journalpost, journalpost.journalførendeEnhet), true);
     } else {
+      if (!oppgave) {
+        throw new Error('Prøver å journalføre en journalpost uten oppgave, ugyldig tilstand!');
+      }
       submitJournalføring(transformValues(values, journalpost, oppgave.enhetId), false);
     }
   }, []);
