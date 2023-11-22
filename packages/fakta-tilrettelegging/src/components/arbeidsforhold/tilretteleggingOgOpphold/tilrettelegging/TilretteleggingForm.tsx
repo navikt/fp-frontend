@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { FunctionComponent, useEffect, useMemo } from 'react';
 import dayjs from 'dayjs';
 import { FormProvider, useForm } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
@@ -73,11 +73,12 @@ export const finnProsentSvangerskapspenger = (
   tilrettelegging: ArbeidsforholdTilretteleggingDato,
   stillingsprosentArbeidsforhold: number,
   velferdspermisjonprosent: number,
+  brukOverstyrtUtbetalingsgrad = true,
 ): number | undefined => {
   if (tilrettelegging.type === tilretteleggingType.HEL_TILRETTELEGGING) {
     return undefined;
   }
-  if (tilrettelegging.overstyrtUtbetalingsgrad) {
+  if (brukOverstyrtUtbetalingsgrad && tilrettelegging.overstyrtUtbetalingsgrad) {
     return tilrettelegging.overstyrtUtbetalingsgrad;
   }
 
@@ -140,6 +141,16 @@ const TilretteleggingForm: FunctionComponent<OwnProps> = ({
       },
     },
   });
+
+  useEffect(() => {
+    // Denne er nødvendig i tilfelle der en endrer en permisjons gyldighet
+    formMethods.reset({
+      [index]: {
+        ...tilrettelegging,
+        overstyrtUtbetalingsgrad: prosentSvangerskapspenger,
+      },
+    });
+  }, [prosentSvangerskapspenger]);
 
   const formValuesRecord = formMethods.watch();
   const formValues = formValuesRecord[index];

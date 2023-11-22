@@ -14,12 +14,14 @@ interface OwnProps {
   velferdspermisjoner: Permisjon[];
   arbeidsforholdIndex: number;
   readOnly: boolean;
+  oppdaterOverstyrtUtbetalingsgrad: (velferdspermisjonprosent: number) => void;
 }
 
 const VelferdspermisjonPanel: FunctionComponent<OwnProps> = ({
   velferdspermisjoner,
   arbeidsforholdIndex,
   readOnly,
+  oppdaterOverstyrtUtbetalingsgrad,
 }) => {
   const intl = useIntl();
   return (
@@ -45,6 +47,7 @@ const VelferdspermisjonPanel: FunctionComponent<OwnProps> = ({
               velferdspermisjon={permisjon}
               readOnly={readOnly}
               arbeidsforholdIndex={arbeidsforholdIndex}
+              oppdaterOverstyrtUtbetalingsgrad={oppdaterOverstyrtUtbetalingsgrad}
             />
           ))}
         </Table.Body>
