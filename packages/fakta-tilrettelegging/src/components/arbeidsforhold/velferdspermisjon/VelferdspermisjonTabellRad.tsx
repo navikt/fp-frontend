@@ -19,12 +19,14 @@ interface OwnProps {
   velferdspermisjon: Permisjon;
   arbeidsforholdIndex: number;
   readOnly: boolean;
+  oppdaterOverstyrtUtbetalingsgrad: (velferdspermisjonprosent: number) => void;
 }
 
 const VelferdspermisjonTabellRad: FunctionComponent<OwnProps> = ({
   velferdspermisjon,
   arbeidsforholdIndex,
   readOnly,
+  oppdaterOverstyrtUtbetalingsgrad,
 }) => {
   const erIkkeValgt = velferdspermisjon.erGyldig === undefined || velferdspermisjon.erGyldig === null;
 
@@ -43,6 +45,7 @@ const VelferdspermisjonTabellRad: FunctionComponent<OwnProps> = ({
           arbeidsforholdIndex={arbeidsforholdIndex}
           readOnly={readOnly}
           lukkRad={lukkRad}
+          oppdaterOverstyrtUtbetalingsgrad={oppdaterOverstyrtUtbetalingsgrad}
         />
       }
       togglePlacement="right"

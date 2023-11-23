@@ -13,6 +13,7 @@ import { ArbeidsforholdFodselOgTilrettelegging, Permisjon } from '@navikt/fp-typ
 
 import TilretteleggingOgOppholdPerioderPanel from './tilretteleggingOgOpphold/TilretteleggingOgOppholdPerioderPanel';
 import VelferdspermisjonPanel from './velferdspermisjon/VelferdspermisjonPanel';
+import { finnProsentSvangerskapspenger } from './tilretteleggingOgOpphold/tilrettelegging/TilretteleggingForm';
 
 dayjs.extend(minMax);
 
@@ -69,7 +70,7 @@ const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const { getValues, watch } = useFormContext();
+  const { getValues, watch, setValue } = useFormContext();
 
   const tilretteleggingBehovFom = watch(`arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingBehovFom`);
 
@@ -79,6 +80,27 @@ const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({
   );
 
   const termindato = watch('termindato');
+
+  const harUavklartVelferdspermisjon = filtrerteVelferdspermisjoner.some(
+    permisjon => permisjon.erGyldig === undefined || permisjon.erGyldig === null,
+  );
+
+  const oppdaterOverstyrtUtbetalingsgrad = (velferdspermisjonprosent: number) => {
+    arbeidsforhold.tilretteleggingDatoer.forEach((tilrettelegging, index) => {
+      const prosentSvangerskapspenger = finnProsentSvangerskapspenger(
+        tilrettelegging,
+        stillingsprosentArbeidsforhold,
+        velferdspermisjonprosent,
+        false,
+      );
+      if (prosentSvangerskapspenger !== undefined) {
+        setValue(`arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingDatoer.${index}`, {
+          ...tilrettelegging,
+          overstyrtUtbetalingsgrad: prosentSvangerskapspenger,
+        });
+      }
+    });
+  };
 
   return (
     <>
@@ -111,6 +133,7 @@ const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({
           velferdspermisjoner={filtrerteVelferdspermisjoner}
           arbeidsforholdIndex={arbeidsforholdIndex}
           readOnly={readOnly}
+          oppdaterOverstyrtUtbetalingsgrad={oppdaterOverstyrtUtbetalingsgrad}
         />
       )}
       <VerticalSpacer fourtyPx />
@@ -121,7 +144,7 @@ const ArbeidsforholdPanel: FunctionComponent<OwnProps> = ({
       <TilretteleggingOgOppholdPerioderPanel
         arbeidsforhold={arbeidsforhold}
         arbeidsforholdIndex={arbeidsforholdIndex}
-        readOnly={readOnly}
+        readOnly={readOnly || harUavklartVelferdspermisjon}
         stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
         termindato={termindato}
       />

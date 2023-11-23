@@ -73,6 +73,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
               fom: '2020-03-17',
               kilde: 'SØKNAD',
               mottattDato: '2020-02-20',
+              overstyrtUtbetalingsgrad: 0,
               stillingsprosent: 50,
               type: 'DELVIS_TILRETTELEGGING',
             },
@@ -129,11 +130,9 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   });
 
   it('skal validere at en må ferdigstille tilretteleggingsperiode som er lagt til', async () => {
-    const utils = render(<TilretteleggingMedVelferdspermisjon />);
+    const utils = render(<HarOpphold />);
 
-    expect(
-      await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
-    ).toBeInTheDocument();
+    expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Periode med svangerskapspenger'));
 
@@ -145,11 +144,9 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   });
 
   it('skal validere at en må ferdigstille oppholdsperiode som er lagt til', async () => {
-    const utils = render(<TilretteleggingMedVelferdspermisjon />);
+    const utils = render(<HarOpphold />);
 
-    expect(
-      await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
-    ).toBeInTheDocument();
+    expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Opphold'));
 
@@ -185,6 +182,9 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
     ).toBeInTheDocument();
 
+    await userEvent.click(screen.getByText('Ja'));
+    await userEvent.click(screen.getByText('Oppdater'));
+
     const dato = screen.getAllByText('Fra og med')[0];
     await userEvent.type(dato, '{backspace}1');
     fireEvent.blur(dato);
@@ -200,6 +200,9 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
     expect(
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
     ).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Ja'));
+    await userEvent.click(screen.getByText('Oppdater'));
 
     const dato = screen.getAllByText('Fra og med')[0];
     await userEvent.type(dato, lagNyDato('16.03.2020'));
@@ -219,6 +222,9 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
     ).toBeInTheDocument();
 
+    await userEvent.click(screen.getByText('Ja'));
+    await userEvent.click(screen.getByText('Oppdater'));
+
     const dato = screen.getAllByText('Fra og med')[0];
     await userEvent.type(dato, lagNyDato('15.08.2020'));
     fireEvent.blur(dato);
@@ -234,6 +240,9 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
     expect(
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
     ).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Ja'));
+    await userEvent.click(screen.getByText('Oppdater'));
 
     await userEvent.click(screen.getByText('Periode med svangerskapspenger'));
 
@@ -268,6 +277,9 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
     ).toBeInTheDocument();
 
+    await userEvent.click(screen.getByText('Ja'));
+    await userEvent.click(screen.getByText('Oppdater'));
+
     await userEvent.click(screen.getAllByText('Slett periode')[1]);
 
     expect(await screen.findByText('17.03.2020 - 15.10.2020')).toBeInTheDocument();
@@ -281,6 +293,9 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
     expect(
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
     ).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Ja'));
+    await userEvent.click(screen.getByText('Oppdater'));
 
     await userEvent.click(screen.getByText('Opphold'));
 
@@ -341,6 +356,7 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
           tilretteleggingDatoer: [
             {
               fom: '2020-03-17',
+              overstyrtUtbetalingsgrad: 0,
               kilde: 'SØKNAD',
               mottattDato: '2020-02-20',
               stillingsprosent: 50,

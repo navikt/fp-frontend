@@ -15,6 +15,7 @@ interface OwnProps {
   arbeidsforholdIndex: number;
   readOnly: boolean;
   lukkRad: () => void;
+  oppdaterOverstyrtUtbetalingsgrad: (velferdspermisjonprosent: number) => void;
 }
 
 const VelferdspermisjonForm: FunctionComponent<OwnProps> = ({
@@ -22,6 +23,7 @@ const VelferdspermisjonForm: FunctionComponent<OwnProps> = ({
   arbeidsforholdIndex,
   readOnly,
   lukkRad,
+  oppdaterOverstyrtUtbetalingsgrad,
 }) => {
   const intl = useIntl();
 
@@ -51,6 +53,16 @@ const VelferdspermisjonForm: FunctionComponent<OwnProps> = ({
         shouldDirty: true,
       });
     }
+
+    const velferdspermisjoner = alleVelferdpermisjoner
+      .filter((_v, index) => permisjonIndex !== index)
+      .concat(formValues);
+    const velferdsprosent = velferdspermisjoner
+      .filter(p => p.erGyldig)
+      .map(p => p.permisjonsprosent)
+      .reduce((sum, prosent) => sum + prosent, 0);
+
+    oppdaterOverstyrtUtbetalingsgrad(velferdsprosent);
 
     formMethods.reset(values);
     lukkRad();
