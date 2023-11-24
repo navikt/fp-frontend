@@ -21,7 +21,7 @@
     "storybook": "storybook dev --quiet -p 7001"
   },
   "dependencies": {
-    "@formatjs/intl-datetimeformat": "6.11.2",
+    "@formatjs/intl-datetimeformat": "6.12.0",
     "@formatjs/intl-numberformat": "8.8.1",
     "@navikt/aksel-icons": "5.10.0",
     "@navikt/ds-css": "5.10.0",
