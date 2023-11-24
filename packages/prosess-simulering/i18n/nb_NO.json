@@ -90,6 +90,8 @@
   "Simulering.HjelpetekstEngangsstonad": "Her skal du oppgi hvorfor brukeren ikke skulle fått utbetalt ytelsen i perioden(e). Du må også oppgi hvordan feilutbetalingen ble oppdaget, hvem som oppdaget den og når den ble oppdaget eller meldt til NAV.",
   "Simulering.ApenTilbakekrevingsbehandling": "Det foreligger en åpen tilbakekrevingsbehandling, endringer i vedtaket vil automatisk oppdatere eksisterende feilutbetalte perioder og beløp.",
   "Simulering.Etterbetaling.Tittel": "Ny inntektsmelding vil føre til en høy etterbetaling til bruker for en innvilget periode. Kontroller om dette er riktig",
+  "Simulering.Etterbetaling.ReadMoreTittel": "Dette bør undersøkes rundt etterbetalingen",
+  "Simulering.Etterbetaling.ReadMoreInnhold": "Saken stopper i simulering fordi arbeidsgiver har endret fra refusjonskrav til direkte utbetaling, i en periode som allerede har blitt utbetalt til bruker. I tillegg er etterbetalingen høy. Du må kontrollerer om dette er riktig. Dette kan gjøres ved kontakte arbeidsgiver. Er det feil, må de sende inn ny inntektsmelding. Får du ikke tak i arbeidsgiver, kan du kontakte søker og høre om de kan spørre arbeidsgiveren sin.",
   "Simulering.Etterbetaling.Vurdering": "Begrunn hvorfor etterbetaling til søker er korrekt.",
   "SubmitButton.ConfirmInformation": "Bekreft og fortsett",
 

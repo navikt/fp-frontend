@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { useIntl } from 'react-intl';
-import { Alert, VStack } from '@navikt/ds-react';
+import { useIntl, FormattedMessage } from 'react-intl';
+import { ReadMore, VStack } from '@navikt/ds-react';
 
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
@@ -9,6 +9,7 @@ import { Aksjonspunkt } from '@navikt/fp-types';
 import { KontrollerEtterbetalingTilSøkerAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import FormValues, { EtterbetalingSøkerFormValues } from '../../types/FormValues';
+import styles from './etterbetalingSøkerForm.module.css';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -41,12 +42,9 @@ const TilbakekrevSøkerForm: FunctionComponent<OwnProps> = ({ readOnly, aksjonsp
 
   return (
     <VStack gap="4">
-      <Alert variant="info">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu augue nec lorem tempor aliquam in vitae
-        massa. Mauris eget sapien quis lorem hendrerit mollis eu ut dolor. Vestibulum molestie a dolor vitae
-        condimentum. Nunc eu felis sed enim semper gravida. Suspendisse nulla diam, commodo at odio eget, consectetur
-        maximus nisl. Sed nec magna ex. Aliquam molestie vehicula mauris, a tincidunt tellus rhoncus eu.
-      </Alert>
+      <ReadMore header={<FormattedMessage id="Simulering.Etterbetaling.ReadMoreTittel" />} className={styles.readMore}>
+        <FormattedMessage id="Simulering.Etterbetaling.ReadMoreInnhold" />
+      </ReadMore>
       <TextAreaField
         name="begrunnelseEtterbetaling"
         label={intl.formatMessage({ id: 'Simulering.Etterbetaling.Vurdering' })}

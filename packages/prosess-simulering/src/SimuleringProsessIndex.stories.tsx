@@ -165,6 +165,18 @@ AksjonspunktVurderFeilutbetaling.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
+export const AksjonspunktKontrollerEtterbetaling = Template.bind({});
+AksjonspunktKontrollerEtterbetaling.args = {
+  aksjonspunkter: [
+    {
+      definisjon: AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER,
+      begrunnelse: undefined,
+    },
+  ] as Aksjonspunkt[],
+  isAksjonspunktOpen: true,
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+};
+
 export const AksjonspunktVurderFeilutbetalingOgEtterbetaling = Template.bind({});
 AksjonspunktVurderFeilutbetalingOgEtterbetaling.args = {
   aksjonspunkter: [
