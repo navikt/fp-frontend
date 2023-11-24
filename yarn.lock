@@ -3507,7 +3507,7 @@ __metadata:
     "@storybook/react-vite": 7.5.3
     "@testing-library/react": 14.1.0
     "@testing-library/user-event": 14.5.1
-    axios: 1.6.1
+    axios: 1.6.2
     axios-mock-adapter: 1.22.0
     classnames: 2.3.2
     core-js: 3.33.2
@@ -4759,7 +4759,7 @@ __metadata:
   resolution: "@navikt/fp-rest-api@workspace:packages/rest-api"
   dependencies:
     "@sentry/browser": 7.79.0
-    axios: 1.6.1
+    axios: 1.6.2
     axios-mock-adapter: 1.22.0
     cross-env: 7.0.3
     eslint: 8.53.0
