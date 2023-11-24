@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@formatjs/intl-datetimeformat": "6.11.2",
-    "@formatjs/intl-numberformat": "8.8.1",
+    "@formatjs/intl-numberformat": "8.9.0",
     "@navikt/aksel-icons": "5.10.0",
     "@navikt/ds-css": "5.10.0",
     "@navikt/ds-css-internal": "^3.4.3",
