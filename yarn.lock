@@ -4130,9 +4130,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-simulering@workspace:*, @navikt/fp-prosess-simulering@workspace:packages/prosess-avregning":
+"@navikt/fp-prosess-simulering@workspace:*, @navikt/fp-prosess-simulering@workspace:packages/prosess-simulering":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-simulering@workspace:packages/prosess-avregning"
+  resolution: "@navikt/fp-prosess-simulering@workspace:packages/prosess-simulering"
   dependencies:
     "@navikt/aksel-icons": 5.10.0
     "@navikt/ds-css": 5.10.0
