@@ -2,7 +2,7 @@ import React, { FunctionComponent, useCallback } from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktCode, vilkarUtfallType } from '@navikt/fp-kodeverk';
-import { AvregningProsessIndex } from '@navikt/fp-prosess-avregning';
+import { SimuleringProsessIndex } from '@navikt/fp-prosess-simulering';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
   Behandling,
@@ -85,11 +85,12 @@ const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelI
           : vilkarUtfallType.IKKE_VURDERT
       }
       renderPanel={data => (
-        <AvregningProsessIndex
+        <SimuleringProsessIndex
           fagsak={fagsak}
           previewFptilbakeCallback={previewFptilbakeCallback}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          {...data} />
+          {...data}
+        />
       )}
     />
   );
