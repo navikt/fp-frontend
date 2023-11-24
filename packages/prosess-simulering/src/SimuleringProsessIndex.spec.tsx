@@ -31,12 +31,14 @@ describe('<SimuleringProsessIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
-      begrunnelse: 'Dette er en begrunnelse',
-      kode: '5084',
-      varseltekst: undefined,
-      videreBehandling: 'TILBAKEKR_IGNORER',
-    });
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: 'Dette er en begrunnelse',
+        kode: '5084',
+        varseltekst: undefined,
+        videreBehandling: 'TILBAKEKR_IGNORER',
+      },
+    ]);
   });
 
   it('skal velge å opprett tilbakekreving, sende varsel og så bekrefte', async () => {
@@ -61,12 +63,14 @@ describe('<SimuleringProsessIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
-      begrunnelse: 'Dette er en begrunnelse',
-      kode: '5084',
-      varseltekst: 'Dette er en fritekst',
-      videreBehandling: 'TILBAKEKR_INFOTRYGD',
-    });
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: 'Dette er en begrunnelse',
+        kode: '5084',
+        varseltekst: 'Dette er en fritekst',
+        videreBehandling: 'TILBAKEKR_INFOTRYGD',
+      },
+    ]);
   });
 
   it('skal vise og så skjule verdier i tabell', async () => {
