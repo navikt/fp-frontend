@@ -169,10 +169,10 @@ const SimuleringPanel: FunctionComponent<OwnProps> = ({
         <>
           {aksjonspunktTittler.length > 0 &&
             aksjonspunktTittler.map(tittel => (
-              <>
-                <AksjonspunktHelpTextHTML>{tittel}</AksjonspunktHelpTextHTML>
+              <div key={tittel.key}>
+                <AksjonspunktHelpTextHTML>{[tittel]}</AksjonspunktHelpTextHTML>
                 <VerticalSpacer sixteenPx />
-              </>
+              </div>
             ))}
           <SimuleringSummary
             fom={simuleringResultatOption.periode.fom}
