@@ -126,7 +126,7 @@
     "@sentry/browser": "7.79.0",
     "axios": "1.6.1",
     "classnames": "2.3.2",
-    "core-js": "3.33.2",
+    "core-js": "3.33.3",
     "dayjs": "1.11.10",
     "history": "5.3.0",
     "moment": "2.29.4",
