@@ -6,7 +6,7 @@ import { Label, BodyShort } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr } from '@navikt/ft-utils';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import styles from './avregningSummary.module.css';
+import styles from './simuleringSummary.module.css';
 
 interface OwnProps {
   fom: string;
@@ -18,9 +18,9 @@ interface OwnProps {
 }
 
 /**
- * Avregning oppsummering
+ * Simulering oppsummering
  */
-const AvregningSummary: FunctionComponent<OwnProps> = ({
+const SimuleringSummary: FunctionComponent<OwnProps> = ({
   fom,
   tom,
   feilutbetaling,
@@ -30,13 +30,13 @@ const AvregningSummary: FunctionComponent<OwnProps> = ({
 }) => (
   <>
     <BodyShort size="small" className={styles.summaryTitle}>
-      <FormattedMessage id="Avregning.bruker" />
+      <FormattedMessage id="Simulering.bruker" />
     </BodyShort>
     <VerticalSpacer eightPx />
     <div className={styles.infoSummary}>
       {ingenPerioderMedAvvik && (
         <div className={styles.ingenPerioder}>
-          <FormattedMessage id="Avregning.ingenPerioder" />
+          <FormattedMessage id="Simulering.ingenPerioder" />
         </div>
       )}
       {!ingenPerioderMedAvvik && (
@@ -49,7 +49,7 @@ const AvregningSummary: FunctionComponent<OwnProps> = ({
             <FlexRow>
               <FlexColumn className={styles.resultName}>
                 <BodyShort size="small">
-                  <FormattedMessage id="Avregning.etterbetaling" />:
+                  <FormattedMessage id="Simulering.etterbetaling" />:
                 </BodyShort>
               </FlexColumn>
               <FlexColumn>
@@ -59,7 +59,7 @@ const AvregningSummary: FunctionComponent<OwnProps> = ({
             <FlexRow>
               <FlexColumn className={styles.resultName}>
                 <BodyShort size="small">
-                  <FormattedMessage id="Avregning.tilbakekreving" />:
+                  <FormattedMessage id="Simulering.tilbakekreving" />:
                 </BodyShort>
               </FlexColumn>
               <FlexColumn>
@@ -72,7 +72,7 @@ const AvregningSummary: FunctionComponent<OwnProps> = ({
               {inntrekk !== null && (
                 <FlexColumn>
                   <BodyShort size="small">
-                    <FormattedMessage id="Avregning.inntrekk" />:
+                    <FormattedMessage id="Simulering.inntrekk" />:
                     <span className={inntrekk ? styles.redNumber : styles.positivNumber}>
                       {formatCurrencyNoKr(inntrekk)}
                     </span>
@@ -87,4 +87,4 @@ const AvregningSummary: FunctionComponent<OwnProps> = ({
   </>
 );
 
-export default AvregningSummary;
+export default SimuleringSummary;

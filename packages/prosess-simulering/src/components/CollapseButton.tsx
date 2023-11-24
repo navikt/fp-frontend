@@ -5,7 +5,7 @@ import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
 import styles from './collapseButton.module.css';
 
 const buttonText = (showDetails: boolean): string =>
-  showDetails ? 'Avregning.headerText.VisFærreDetaljer' : 'Avregning.headerText.VisFlereDetaljer';
+  showDetails ? 'Simulering.headerText.VisFærreDetaljer' : 'Simulering.headerText.VisFlereDetaljer';
 
 interface OwnProps {
   toggleDetails: (id: number) => void;

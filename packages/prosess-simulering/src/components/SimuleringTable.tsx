@@ -17,11 +17,11 @@ import {
 
 import CollapseButton from './CollapseButton';
 
-import styles from './avregningTable.module.css';
+import styles from './simuleringTable.module.css';
 
 const classNames = classnames.bind(styles);
 
-export const avregningCodes = {
+export const simuleringCodes = {
   DIFFERANSE: 'differanse',
   INNTREKK: 'inntrekk',
   FEILUTBETALING: 'feilutbetaling',
@@ -54,7 +54,7 @@ const getHeaderCodes = (
         })}
         key={`${monthAndYear.month}-${monthAndYear.year}`}
       >
-        <FormattedMessage id={`Avregning.headerText.${monthAndYear.month}`} />
+        <FormattedMessage id={`Simulering.headerText.${monthAndYear.month}`} />
       </span>
     )),
   ];
@@ -64,7 +64,7 @@ const skalViseCollapseButton = (mottakerResultatPerFag: SimuleringResultatPerFag
   mottakerResultatPerFag.some(fag => fag.rader.length > 1);
 
 const rowToggable = (fagOmråde: SimuleringResultatPerFagområde, rowIsFeilUtbetalt: boolean): boolean => {
-  const fagFeilUtbetalt = fagOmråde.rader.find(rad => rad.feltnavn === avregningCodes.DIFFERANSE);
+  const fagFeilUtbetalt = fagOmråde.rader.find(rad => rad.feltnavn === simuleringCodes.DIFFERANSE);
   return !!fagFeilUtbetalt && !rowIsFeilUtbetalt;
 };
 
@@ -102,11 +102,16 @@ const createColumns = (
 };
 
 const lagVisningsNavn = (mottaker: Mottaker, arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId): string => {
-  const agOpplysning = mottaker.mottakerIdentifikator ? arbeidsgiverOpplysninger[mottaker.mottakerIdentifikator] : undefined;
+  const agOpplysning = mottaker.mottakerIdentifikator
+    ? arbeidsgiverOpplysninger[mottaker.mottakerIdentifikator]
+    : undefined;
   return agOpplysning ? `${agOpplysning.navn} (${mottaker.mottakerNummer})` : `${mottaker.mottakerNummer}`;
 };
 
-const tableTitle = (mottaker: Mottaker, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement | null =>
+const tableTitle = (
+  mottaker: Mottaker,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+): ReactElement | null =>
   mottaker.mottakerType === mottakerTyper.ARBG || mottaker.mottakerType === mottakerTyper.ARBGP ? (
     <BodyShort size="small" className={styles.tableTitle}>
       {lagVisningsNavn(mottaker, arbeidsgiverOpplysningerPerId)}
@@ -122,7 +127,7 @@ const getResultatRadene = (
     return resultatOgMotregningRader;
   }
   return resultatPerFagområde.length > 1
-    ? resultatOgMotregningRader.filter(resultat => resultat.feltnavn !== avregningCodes.INNTREKKNESTEMÅNED)
+    ? resultatOgMotregningRader.filter(resultat => resultat.feltnavn !== simuleringCodes.INNTREKKNESTEMÅNED)
     : [];
 };
 
@@ -155,7 +160,7 @@ interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-const AvregningTable: FunctionComponent<OwnProps> = ({
+const SimuleringTable: FunctionComponent<OwnProps> = ({
   simuleringResultat,
   toggleDetails,
   showDetails,
@@ -186,12 +191,12 @@ const AvregningTable: FunctionComponent<OwnProps> = ({
                 ...mottaker.resultatPerFagområde.map((fagOmråde, fagIndex) =>
                   fagOmråde.rader
                     .filter(rad => {
-                      const isFeilUtbetalt = rad.feltnavn === avregningCodes.DIFFERANSE;
+                      const isFeilUtbetalt = rad.feltnavn === simuleringCodes.DIFFERANSE;
                       const isRowToggable = rowToggable(fagOmråde, isFeilUtbetalt);
                       return !rowIsHidden(isRowToggable, visDetaljer ? visDetaljer.show : false);
                     })
                     .map((rad, rowIndex) => {
-                      const isFeilUtbetalt = rad.feltnavn === avregningCodes.DIFFERANSE;
+                      const isFeilUtbetalt = rad.feltnavn === simuleringCodes.DIFFERANSE;
                       const isRowToggable = rowToggable(fagOmråde, isFeilUtbetalt);
                       return (
                         <TableRow
@@ -201,7 +206,7 @@ const AvregningTable: FunctionComponent<OwnProps> = ({
                           key={`rowIndex${fagIndex + 1}${rowIndex + 1}`}
                         >
                           <TableColumn>
-                            <FormattedMessage id={`Avregning.${fagOmråde.fagOmrådeKode}.${rad.feltnavn}`} />
+                            <FormattedMessage id={`Simulering.${fagOmråde.fagOmrådeKode}.${rad.feltnavn}`} />
                           </TableColumn>
                           {createColumns(rad.resultaterPerMåned, rangeOfMonths, nesteMåned)}
                         </TableRow>
@@ -216,12 +221,12 @@ const AvregningTable: FunctionComponent<OwnProps> = ({
                   mottaker.resultatOgMotregningRader,
                 ).map((resultat, resultatIndex) => (
                   <TableRow
-                    isBold={resultat.feltnavn !== avregningCodes.INNTREKKNESTEMÅNED}
+                    isBold={resultat.feltnavn !== simuleringCodes.INNTREKKNESTEMÅNED}
                     isSolidBottomBorder
                     key={`rowIndex${resultatIndex + 1}`}
                   >
                     <TableColumn>
-                      <FormattedMessage id={`Avregning.${resultat.feltnavn}`} />
+                      <FormattedMessage id={`Simulering.${resultat.feltnavn}`} />
                     </TableColumn>
                     {createColumns(resultat.resultaterPerMåned, rangeOfMonths, nesteMåned)}
                   </TableRow>
@@ -234,4 +239,4 @@ const AvregningTable: FunctionComponent<OwnProps> = ({
   </>
 );
 
-export default AvregningTable;
+export default SimuleringTable;
