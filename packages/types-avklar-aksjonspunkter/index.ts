@@ -20,9 +20,15 @@ export type { default as VurderArbeidsforholdPermisjonAp } from './src/fakta/Vur
 export type { default as OverstyringAvklarStartdatoForPeriodenAp } from './src/fakta/OverstyringAvklarStartdatoForPeriodenAp';
 export type { default as AvklarFaktaForForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForForeldreansvarAksjonspunktAp';
 export type { default as AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp';
-export type { default as AvklarAktivitetsPerioderAp, OpptjeningAktivitetAp } from './src/fakta/AvklarAktivitetsPerioderAp';
+export type {
+  default as AvklarAktivitetsPerioderAp,
+  OpptjeningAktivitetAp,
+} from './src/fakta/AvklarAktivitetsPerioderAp';
 export type { default as VurderDokumentasjonAp } from './src/fakta/VurderDokumentasjonAp';
-export type { default as BesteberegningAP, ManuellKontrollBesteberegningAP } from './src/fakta/KontrollerBesteberegningAP';
+export type {
+  default as BesteberegningAP,
+  ManuellKontrollBesteberegningAP,
+} from './src/fakta/KontrollerBesteberegningAP';
 
 export type { default as ProsessAksjonspunkt } from './src/ProsessAksjonspunkt';
 export type { default as BekreftSvangerskapspengervilkarAp } from './src/prosess/BekreftSvangerskapspengervilkarAp';
@@ -39,6 +45,7 @@ export type { default as ForeslaVedtakManueltAp } from './src/prosess/ForeslaVed
 export type { default as BekreftVedtakUtenTotrinnskontrollAp } from './src/prosess/BekreftVedtakUtenTotrinnskontrollAp';
 export type { default as OverstyringBeregningAp } from './src/prosess/OverstyringBeregningAp';
 export type { default as VurderFeilutbetalingAp } from './src/prosess/VurderFeilutbetalingAp';
+export type { default as KontrollerEtterbetalingTilSøker } from './src/prosess/KontrollerEtterbetalingTilSøkerAp';
 export type { default as KlageFormkravAp } from './src/prosess/KlageFormkravAp';
 export type { default as VurderInnsynAp } from './src/prosess/VurderInnsynAp';
 export type { default as KlageVurderingResultatAp } from './src/prosess/KlageVurderingResultatAp';

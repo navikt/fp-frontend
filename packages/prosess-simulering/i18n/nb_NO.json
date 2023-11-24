@@ -89,7 +89,8 @@
   "Avregning.HjelpetekstForeldrepenger": "Her skal du oppgi hvorfor brukeren ikke skulle fått utbetalt ytelsen i perioden(e). Du må også oppgi hvordan feilutbetalingen ble oppdaget, hvem som oppdaget den og når den ble oppdaget eller meldt til NAV. Eksempel på tekst: «Vi mottok melding fra deg [dato]om at du hadde jobbet heltid. Du kan ikke jobbe og motta foreldrepenger samtidig. Da vi mottok meldingen fra deg, var det allerede utbetalt foreldrenger for perioden du har jobbet.",
   "Avregning.HjelpetekstEngangsstonad": "Her skal du oppgi hvorfor brukeren ikke skulle fått utbetalt ytelsen i perioden(e). Du må også oppgi hvordan feilutbetalingen ble oppdaget, hvem som oppdaget den og når den ble oppdaget eller meldt til NAV.",
   "Avregning.ApenTilbakekrevingsbehandling": "Det foreligger en åpen tilbakekrevingsbehandling, endringer i vedtaket vil automatisk oppdatere eksisterende feilutbetalte perioder og beløp.",
-
+  "Etterbetaling.Vurdering": "Begrunn hvorfor etterbetalingen til søker er korrekt.",
+  "Etterbetaling.Tittel": "Vedtaket vil føre til at søker vil få en høy etterbetaling. Kontroller om dette er korrekt.",
   "SubmitButton.ConfirmInformation": "Bekreft og fortsett",
 
   "Malform.Beskrivelse": "Foretrukket språk",

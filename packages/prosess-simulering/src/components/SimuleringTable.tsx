@@ -17,7 +17,7 @@ import {
 
 import CollapseButton from './CollapseButton';
 
-import styles from './avregningTable.module.css';
+import styles from './simuleringTable.module.css';
 
 const classNames = classnames.bind(styles);
 
@@ -102,11 +102,16 @@ const createColumns = (
 };
 
 const lagVisningsNavn = (mottaker: Mottaker, arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId): string => {
-  const agOpplysning = mottaker.mottakerIdentifikator ? arbeidsgiverOpplysninger[mottaker.mottakerIdentifikator] : undefined;
+  const agOpplysning = mottaker.mottakerIdentifikator
+    ? arbeidsgiverOpplysninger[mottaker.mottakerIdentifikator]
+    : undefined;
   return agOpplysning ? `${agOpplysning.navn} (${mottaker.mottakerNummer})` : `${mottaker.mottakerNummer}`;
 };
 
-const tableTitle = (mottaker: Mottaker, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement | null =>
+const tableTitle = (
+  mottaker: Mottaker,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+): ReactElement | null =>
   mottaker.mottakerType === mottakerTyper.ARBG || mottaker.mottakerType === mottakerTyper.ARBGP ? (
     <BodyShort size="small" className={styles.tableTitle}>
       {lagVisningsNavn(mottaker, arbeidsgiverOpplysningerPerId)}
@@ -155,7 +160,7 @@ interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
-const AvregningTable: FunctionComponent<OwnProps> = ({
+const SimuleringTable: FunctionComponent<OwnProps> = ({
   simuleringResultat,
   toggleDetails,
   showDetails,
@@ -234,4 +239,4 @@ const AvregningTable: FunctionComponent<OwnProps> = ({
   </>
 );
 
-export default AvregningTable;
+export default SimuleringTable;

@@ -6,7 +6,7 @@ import { Label, BodyShort } from '@navikt/ds-react';
 import { DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr } from '@navikt/ft-utils';
 import { FlexColumn, FlexContainer, FlexRow, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import styles from './avregningSummary.module.css';
+import styles from './simuleringSummary.module.css';
 
 interface OwnProps {
   fom: string;
@@ -18,9 +18,9 @@ interface OwnProps {
 }
 
 /**
- * Avregning oppsummering
+ * Simulering oppsummering
  */
-const AvregningSummary: FunctionComponent<OwnProps> = ({
+const SimuleringSummary: FunctionComponent<OwnProps> = ({
   fom,
   tom,
   feilutbetaling,
@@ -87,4 +87,4 @@ const AvregningSummary: FunctionComponent<OwnProps> = ({
   </>
 );
 
-export default AvregningSummary;
+export default SimuleringSummary;

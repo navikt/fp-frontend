@@ -2,7 +2,7 @@ import React, { FunctionComponent, useCallback } from 'react';
 import { useIntl } from 'react-intl';
 
 import { AksjonspunktCode, vilkarUtfallType } from '@navikt/fp-kodeverk';
-import { AvregningProsessIndex } from '@navikt/fp-prosess-avregning';
+import { SimuleringProsessIndex } from '@navikt/fp-prosess-simulering';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
   Behandling,
@@ -34,7 +34,10 @@ const getForhandsvisFptilbakeCallback =
     return forhandsvisTilbakekrevingMelding(data).then(response => forhandsvisDokument(response));
   };
 
-const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_FEILUTBETALING];
+const AKSJONSPUNKT_KODER = [
+  AksjonspunktCode.VURDER_FEILUTBETALING,
+  AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER,
+];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.TILBAKEKREVINGVALG, BehandlingApiKeys.SIMULERING_RESULTAT];
 type EndepunktPanelData = {
@@ -85,11 +88,12 @@ const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelI
           : vilkarUtfallType.IKKE_VURDERT
       }
       renderPanel={data => (
-        <AvregningProsessIndex
+        <SimuleringProsessIndex
           fagsak={fagsak}
           previewFptilbakeCallback={previewFptilbakeCallback}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          {...data} />
+          {...data}
+        />
       )}
     />
   );

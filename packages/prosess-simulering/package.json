@@ -1,8 +1,9 @@
 {
-  "name": "@navikt/fp-prosess-avregning",
+  "name": "@navikt/fp-prosess-simulering",
   "license": "MIT",
   "private": true,
   "main": "index.ts",
+  "description": "Panel som viser resultat av simulering mot økonomi, og har lar saksbehandler ta stilling til etterbetaling til søker og tilbakekreving fra søker",
   "types": "index.ts",
   "scripts": {
     "test": "vitest",

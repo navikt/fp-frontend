@@ -7,7 +7,7 @@ import { Aksjonspunkt, Behandling, Fagsak, SimuleringResultat, TilbakekrevingVal
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import AvregningProsessIndex from './AvregningProsessIndex';
+import SimuleringProsessIndex from './SimuleringProsessIndex';
 
 const fagsak = {
   saksnummer: '123',
@@ -124,7 +124,7 @@ const simuleringResultat = {
 
 export default {
   title: 'prosess/prosess-avregning',
-  component: AvregningProsessIndex,
+  component: SimuleringProsessIndex,
 };
 
 const Template: StoryFn<{
@@ -133,7 +133,7 @@ const Template: StoryFn<{
   tilbakekrevingvalg?: TilbakekrevingValg;
   isAksjonspunktOpen: boolean;
 }> = ({ aksjonspunkter, submitCallback, tilbakekrevingvalg, isAksjonspunktOpen }) => (
-  <AvregningProsessIndex
+  <SimuleringProsessIndex
     behandling={behandling}
     alleKodeverk={alleKodeverk as any}
     submitCallback={submitCallback}
