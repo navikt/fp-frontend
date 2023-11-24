@@ -1,2 +1,2 @@
 // eslint-disable-next-line import/prefer-default-export
-export { default as AvregningProsessIndex } from './src/AvregningProsessIndex';
+export { default as SimuleringProsessIndex } from './src/SimuleringProsessIndex';

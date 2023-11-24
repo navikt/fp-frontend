@@ -18,10 +18,10 @@ import {
 import { VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
-import AvregningSummary from './AvregningSummary';
-import AvregningTable from './AvregningTable';
+import SimuleringSummary from './SimuleringSummary';
+import SimuleringTable from './SimuleringTable';
 
-import styles from './avregningPanel.module.css';
+import styles from './simuleringPanel.module.css';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -29,7 +29,7 @@ const IKKE_SEND = 'IKKE_SEND';
 
 const lagHjelpetekstTooltip = (isForeldrepenger: boolean): ReactElement => (
   <FormattedMessage
-    id={isForeldrepenger ? 'Avregning.HjelpetekstForeldrepenger' : 'Avregning.HjelpetekstEngangsstonad'}
+    id={isForeldrepenger ? 'Simulering.HjelpetekstForeldrepenger' : 'Simulering.HjelpetekstEngangsstonad'}
   />
 );
 
@@ -125,7 +125,7 @@ interface OwnProps {
   setFormData: (data: FormValues) => void;
 }
 
-const AvregningPanel: FunctionComponent<OwnProps> = ({
+const SimuleringPanel: FunctionComponent<OwnProps> = ({
   simuleringResultat,
   isApOpen,
   readOnly,
@@ -174,7 +174,7 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
   return (
     <>
       <Heading size="small">
-        <FormattedMessage id="Avregning.Title" />
+        <FormattedMessage id="Simulering.Title" />
       </Heading>
       <VerticalSpacer twentyPx />
       {simuleringResultatOption && (
@@ -182,12 +182,12 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
           {aksjonspunkt && (
             <>
               <AksjonspunktHelpTextTemp isAksjonspunktOpen={isApOpen}>
-                {[<FormattedMessage id="Avregning.AksjonspunktHelpText.5084" key="vurderFeilutbetaling" />]}
+                {[<FormattedMessage id="Simulering.AksjonspunktHelpText.5084" key="vurderFeilutbetaling" />]}
               </AksjonspunktHelpTextTemp>
               <VerticalSpacer twentyPx />
             </>
           )}
-          <AvregningSummary
+          <SimuleringSummary
             fom={simuleringResultatOption.periode.fom}
             tom={simuleringResultatOption.periode.tom}
             feilutbetaling={simuleringResultatOption.sumFeilutbetaling}
@@ -195,7 +195,7 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
             inntrekk={simuleringResultatOption.sumInntrekk}
             ingenPerioderMedAvvik={simuleringResultatOption.ingenPerioderMedAvvik}
           />
-          <AvregningTable
+          <SimuleringTable
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             showDetails={showDetails}
             toggleDetails={toggleDetaljer}
@@ -205,12 +205,12 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer twentyPx />
           {hasOpenTilbakekrevingsbehandling && (
             <Label size="small">
-              <FormattedMessage id="Avregning.ApenTilbakekrevingsbehandling" />
+              <FormattedMessage id="Simulering.ApenTilbakekrevingsbehandling" />
             </Label>
           )}
         </>
       )}
-      {!simuleringResultat && <FormattedMessage id="Avregning.ingenData" />}
+      {!simuleringResultat && <FormattedMessage id="Simulering.ingenData" />}
       {aksjonspunkt && (
         <Form
           formMethods={formMethods}
@@ -220,20 +220,20 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
           <VStack gap="10" align="start">
             <TextAreaField
               name="begrunnelse"
-              label={intl.formatMessage({ id: 'Avregning.vurdering' })}
+              label={intl.formatMessage({ id: 'Simulering.vurdering' })}
               validate={[required, minLength3, maxLength1500, hasValidText]}
               maxLength={1500}
               readOnly={readOnly}
             />
             <RadioGroupPanel
               name="videreBehandling"
-              label={<FormattedMessage id="Avregning.videreBehandling" />}
+              label={<FormattedMessage id="Simulering.videreBehandling" />}
               validate={[required]}
               isReadOnly={readOnly}
               radios={[
                 {
                   value: tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD,
-                  label: <FormattedMessage id="Avregning.gjennomfør" />,
+                  label: <FormattedMessage id="Simulering.gjennomfør" />,
                   element: (
                     <div className={styles.varsel}>
                       <VerticalSpacer eightPx />
@@ -241,7 +241,7 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
                         <VStack gap="4">
                           <HStack gap="2">
                             <BodyShort size="small" className={styles.bold}>
-                              <FormattedMessage id="Avregning.varseltekst" />
+                              <FormattedMessage id="Simulering.varseltekst" />
                             </BodyShort>
                             <Tooltip content={lagHjelpetekstTooltip(isForeldrepenger)}>
                               <QuestionmarkDiamondIcon className={styles.helpTextImage} />
@@ -249,7 +249,7 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
                           </HStack>
                           <TextAreaField
                             name="varseltekst"
-                            label={intl.formatMessage({ id: 'Avregning.fritekst' })}
+                            label={intl.formatMessage({ id: 'Simulering.fritekst' })}
                             validate={[required, minLength3, maxLength1500, hasValidText]}
                             maxLength={1500}
                             readOnly={readOnly}
@@ -272,11 +272,11 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
                 },
                 {
                   value: `${tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD}${IKKE_SEND}`,
-                  label: <FormattedMessage id="Avregning.OpprettMenIkkeSendVarsel" />,
+                  label: <FormattedMessage id="Simulering.OpprettMenIkkeSendVarsel" />,
                 },
                 {
                   value: tilbakekrevingVidereBehandling.TILBAKEKR_IGNORER,
-                  label: <FormattedMessage id="Avregning.avvent" />,
+                  label: <FormattedMessage id="Simulering.avvent" />,
                 },
               ]}
             />
@@ -295,4 +295,4 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default AvregningPanel;
+export default SimuleringPanel;

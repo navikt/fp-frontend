@@ -1,5 +1,5 @@
 {
-  "name": "@navikt/fp-prosess-avregning",
+  "name": "@navikt/fp-prosess-simulering",
   "license": "MIT",
   "private": true,
   "main": "index.ts",

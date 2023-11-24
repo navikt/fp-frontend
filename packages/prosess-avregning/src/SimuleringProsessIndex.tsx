@@ -10,7 +10,7 @@ import {
 } from '@navikt/fp-types';
 import { createIntl } from '@navikt/ft-utils';
 
-import AvregningPanel from './components/AvregningPanel';
+import SimuleringPanel from './components/SimuleringPanel';
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
@@ -23,7 +23,7 @@ interface OwnProps {
   previewFptilbakeCallback: (mottaker: string, fritekst: string) => Promise<any>;
 }
 
-const AvregningProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
+const SimuleringProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   fagsak,
   behandling,
   aksjonspunkter,
@@ -39,7 +39,7 @@ const AvregningProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelPr
   setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <AvregningPanel
+    <SimuleringPanel
       fagsak={fagsak}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       sprakkode={behandling.sprakkode}
@@ -57,4 +57,4 @@ const AvregningProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelPr
   </RawIntlProvider>
 );
 
-export default AvregningProsessIndex;
+export default SimuleringProsessIndex;

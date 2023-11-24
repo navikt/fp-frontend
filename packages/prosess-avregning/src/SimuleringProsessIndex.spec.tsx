@@ -2,11 +2,11 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
-import * as stories from './AvregningProsessIndex.stories';
+import * as stories from './SimuleringProsessIndex.stories';
 
 const { AksjonspunktVurderFeilutbetaling, SimuleringspanelUtenAksjonspunkt } = composeStories(stories);
 
-describe('<AvregningProsessIndex>', () => {
+describe('<SimuleringProsessIndex>', () => {
   it('skal velge ingen tilbakebetaling og så bekrefte', async () => {
     const lagre = vi.fn();
 
