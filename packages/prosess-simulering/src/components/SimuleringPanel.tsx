@@ -44,6 +44,9 @@ type SimuleringAksjonspunkt = VurderFeilutbetalingAp | KontrollerEtterbetalingTi
 const finnAksjonspunkt = (aksjonspunkter: Aksjonspunkt[], kode: string) =>
   aksjonspunkter.find(ap => ap.definisjon === kode);
 
+const harAksjonspunkt = (aksjonspunkter: Aksjonspunkt[], kode: string): boolean =>
+  aksjonspunkter.some(ap => ap.definisjon === kode);
+
 const hentToggleDetaljer =
   (showDetails: Details[], setShowDetails: (details: Details[]) => void) =>
   (id: number): void => {
@@ -72,10 +75,10 @@ const hentToggleDetaljer =
 
 const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): SimuleringAksjonspunkt[] => {
   const aksjonspunkterTilSubmit: SimuleringAksjonspunkt[] = [];
-  if (finnAksjonspunkt(aksjonspunkter, AksjonspunktCode.VURDER_FEILUTBETALING)) {
+  if (harAksjonspunkt(aksjonspunkter, AksjonspunktCode.VURDER_FEILUTBETALING)) {
     aksjonspunkterTilSubmit.push(transformValuesTilbakekrev(values));
   }
-  if (finnAksjonspunkt(aksjonspunkter, AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER)) {
+  if (harAksjonspunkt(aksjonspunkter, AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER)) {
     aksjonspunkterTilSubmit.push(transformValuesEtterbetaling(values));
   }
   return aksjonspunkterTilSubmit;
@@ -101,10 +104,10 @@ const buildInitialValues = (
 
 const lagAksjonspunktTitler = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   const elementer: ReactElement[] = [];
-  if (finnAksjonspunkt(aksjonspunkter, AksjonspunktCode.VURDER_FEILUTBETALING)) {
+  if (harAksjonspunkt(aksjonspunkter, AksjonspunktCode.VURDER_FEILUTBETALING)) {
     elementer.push(<FormattedMessage id="Simulering.AksjonspunktHelpText.5084" key="vurderFeilutbetaling" />);
   }
-  if (finnAksjonspunkt(aksjonspunkter, AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER)) {
+  if (harAksjonspunkt(aksjonspunkter, AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER)) {
     elementer.push(<FormattedMessage id="Simulering.Etterbetaling.Tittel" key="kontrollerFeilutbetaling" />);
   }
   return elementer;
@@ -156,8 +159,8 @@ const SimuleringPanel: FunctionComponent<OwnProps> = ({
 
   const simuleringResultatOption = simuleringResultat?.simuleringResultat;
   const skalHaForm =
-    finnAksjonspunkt(aksjonspunkter, AksjonspunktCode.VURDER_FEILUTBETALING) ||
-    finnAksjonspunkt(aksjonspunkter, AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER);
+    harAksjonspunkt(aksjonspunkter, AksjonspunktCode.VURDER_FEILUTBETALING) ||
+    harAksjonspunkt(aksjonspunkter, AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER);
   const aksjonspunktTittler = isApOpen ? lagAksjonspunktTitler(aksjonspunkter) : [];
   return (
     <>

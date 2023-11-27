@@ -4,7 +4,8 @@ import { composeStories } from '@storybook/react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './SimuleringProsessIndex.stories';
 
-const { AksjonspunktVurderFeilutbetaling, SimuleringspanelUtenAksjonspunkt } = composeStories(stories);
+const { AksjonspunktVurderFeilutbetaling, SimuleringspanelUtenAksjonspunkt, AksjonspunktKontrollerEtterbetaling } =
+  composeStories(stories);
 
 describe('<SimuleringProsessIndex>', () => {
   it('skal velge ingen tilbakebetaling og så bekrefte', async () => {
@@ -107,5 +108,30 @@ describe('<SimuleringProsessIndex>', () => {
         'Det foreligger en åpen tilbakekrevingsbehandling, endringer i vedtaket vil automatisk oppdatere eksisterende feilutbetalte perioder og beløp.',
       ),
     ).toBeInTheDocument();
+  });
+
+  it('skal kunne løse aksjonspunkt for stor etterbetaling til søker', async () => {
+    const lagre = vi.fn();
+
+    const utils = render(<AksjonspunktKontrollerEtterbetaling submitCallback={lagre} />);
+
+    expect(await screen.findByText('Simulering')).toBeInTheDocument();
+    expect(
+      await screen.findByText(
+        'Ny inntektsmelding vil føre til en høy etterbetaling til bruker i en tidligere innvilget periode. Kontroller om dette er riktig',
+      ),
+    ).toBeInTheDocument();
+    const begrunnelse = utils.getByLabelText('Begrunn hvorfor du går videre med denne behandlingen.');
+    await userEvent.type(begrunnelse, 'Dette er en begrunnelse');
+
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+    expect(lagre).toHaveBeenNthCalledWith(1, [
+      {
+        begrunnelse: 'Dette er en begrunnelse',
+        kode: '5029',
+      },
+    ]);
   });
 });
