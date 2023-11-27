@@ -1,13 +1,11 @@
-import React, { FunctionComponent, ReactElement, useState, useCallback } from 'react';
+import React, { FunctionComponent, useState, ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { Label, BodyShort, Heading, Button, HStack, VStack } from '@navikt/ds-react';
+import { FormattedMessage } from 'react-intl';
+import { Label, Heading, Button } from '@navikt/ds-react';
 
-import { RadioGroupPanel, TextAreaField, Form } from '@navikt/ft-form-hooks';
-import { AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer, Tooltip } from '@navikt/ft-ui-komponenter';
-import { getLanguageFromSprakkode } from '@navikt/ft-utils';
-import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { fagsakYtelseType, AksjonspunktCode, tilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
+import { Form } from '@navikt/ft-form-hooks';
+import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktCode, tilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
 import {
   Aksjonspunkt,
   Fagsak,
@@ -15,23 +13,20 @@ import {
   TilbakekrevingValg,
   ArbeidsgiverOpplysningerPerId,
 } from '@navikt/fp-types';
-import { VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { KontrollerEtterbetalingTilSøkerAP, VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
 import SimuleringSummary from './SimuleringSummary';
 import SimuleringTable from './SimuleringTable';
 
-import styles from './simuleringPanel.module.css';
+import TilbakekrevSøkerForm, {
+  buildInitialValues as buildInitialValuesTilbakekrev,
+  transformValues as transformValuesTilbakekrev,
+} from './TilbakekrevSøkerForm';
 
-const minLength3 = minLength(3);
-const maxLength1500 = maxLength(1500);
-const IKKE_SEND = 'IKKE_SEND';
-
-const lagHjelpetekstTooltip = (isForeldrepenger: boolean): ReactElement => (
-  <FormattedMessage
-    id={isForeldrepenger ? 'Simulering.HjelpetekstForeldrepenger' : 'Simulering.HjelpetekstEngangsstonad'}
-  />
-);
+import EtterbetalingSøkerForm, {
+  buildInitialValues as buildInitialValuesEtterbetaling,
+  transformValues as transformValuesEtterbetaling,
+} from './EtterbetalingSøkerForm';
 
 type Details = {
   id: number;
@@ -43,6 +38,14 @@ type FormValues = {
   varseltekst?: string;
   begrunnelse?: string;
 };
+
+type SimuleringAksjonspunkt = VurderFeilutbetalingAp | KontrollerEtterbetalingTilSøkerAP;
+
+const finnAksjonspunkt = (aksjonspunkter: Aksjonspunkt[], kode: string) =>
+  aksjonspunkter.find(ap => ap.definisjon === kode);
+
+const harAksjonspunkt = (aksjonspunkter: Aksjonspunkt[], kode: string): boolean =>
+  aksjonspunkter.some(ap => ap.definisjon === kode);
 
 const hentToggleDetaljer =
   (showDetails: Details[], setShowDetails: (details: Details[]) => void) =>
@@ -70,43 +73,44 @@ const hentToggleDetaljer =
     setShowDetails(newShowDetailsArray);
   };
 
-const transformValues = (values: FormValues): VurderFeilutbetalingAp => {
-  const { videreBehandling, varseltekst, begrunnelse } = values;
-  if (videreBehandling && videreBehandling.endsWith(IKKE_SEND)) {
-    return {
-      kode: AksjonspunktCode.VURDER_FEILUTBETALING,
-      begrunnelse,
-      videreBehandling: tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD,
-    };
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): SimuleringAksjonspunkt[] => {
+  const aksjonspunkterTilSubmit: SimuleringAksjonspunkt[] = [];
+  if (harAksjonspunkt(aksjonspunkter, AksjonspunktCode.VURDER_FEILUTBETALING)) {
+    aksjonspunkterTilSubmit.push(transformValuesTilbakekrev(values));
   }
-
-  return {
-    kode: AksjonspunktCode.VURDER_FEILUTBETALING,
-    begrunnelse,
-    videreBehandling: videreBehandling!,
-    varseltekst,
-  };
+  if (harAksjonspunkt(aksjonspunkter, AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER)) {
+    aksjonspunkterTilSubmit.push(transformValuesEtterbetaling(values));
+  }
+  return aksjonspunkterTilSubmit;
 };
 
 const buildInitialValues = (
-  aksjonspunkt?: Aksjonspunkt,
+  aksjonspunkter: Aksjonspunkt[],
   tilbakekrevingvalg?: TilbakekrevingValg,
 ): FormValues | undefined => {
-  if (!aksjonspunkt || !tilbakekrevingvalg) {
+  if (aksjonspunkter.length === 0) {
     return undefined;
   }
-
-  const harTypeIkkeSendt =
-    !tilbakekrevingvalg.varseltekst &&
-    tilbakekrevingvalg.videreBehandling === tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD;
-
   return {
-    videreBehandling: harTypeIkkeSendt
-      ? tilbakekrevingvalg.videreBehandling + IKKE_SEND
-      : tilbakekrevingvalg.videreBehandling,
-    varseltekst: tilbakekrevingvalg.varseltekst,
-    begrunnelse: aksjonspunkt.begrunnelse,
+    ...buildInitialValuesTilbakekrev(
+      finnAksjonspunkt(aksjonspunkter, AksjonspunktCode.VURDER_FEILUTBETALING),
+      tilbakekrevingvalg,
+    ),
+    ...buildInitialValuesEtterbetaling(
+      finnAksjonspunkt(aksjonspunkter, AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER),
+    ),
   };
+};
+
+const lagAksjonspunktTitler = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
+  const elementer: ReactElement[] = [];
+  if (harAksjonspunkt(aksjonspunkter, AksjonspunktCode.VURDER_FEILUTBETALING)) {
+    elementer.push(<FormattedMessage id="Simulering.AksjonspunktHelpText.5084" key="vurderFeilutbetaling" />);
+  }
+  if (harAksjonspunkt(aksjonspunkter, AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER)) {
+    elementer.push(<FormattedMessage id="Simulering.Etterbetaling.Tittel" key="kontrollerFeilutbetaling" />);
+  }
+  return elementer;
 };
 
 interface OwnProps {
@@ -116,10 +120,10 @@ interface OwnProps {
   aksjonspunkter: Aksjonspunkt[];
   simuleringResultat?: SimuleringResultat;
   tilbakekrevingvalg?: TilbakekrevingValg;
-  submitCallback: (data: VurderFeilutbetalingAp) => Promise<void>;
+  submitCallback: (data: SimuleringAksjonspunkt[]) => Promise<void>;
   readOnly: boolean;
-  readOnlySubmitButton: boolean;
   isApOpen: boolean;
+  readOnlySubmitButton: boolean;
   previewCallback: (mottaker: string, fritekst: string) => Promise<any>;
   formData?: FormValues;
   setFormData: (data: FormValues) => void;
@@ -127,50 +131,37 @@ interface OwnProps {
 
 const SimuleringPanel: FunctionComponent<OwnProps> = ({
   simuleringResultat,
-  isApOpen,
   readOnly,
   sprakkode,
   previewCallback,
   formData,
   setFormData,
   submitCallback,
+  isApOpen,
   tilbakekrevingvalg,
   aksjonspunkter,
   fagsak,
   arbeidsgiverOpplysningerPerId,
 }) => {
-  const intl = useIntl();
-
-  const aksjonspunkt = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktCode.VURDER_FEILUTBETALING);
-
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(aksjonspunkt, tilbakekrevingvalg),
+    defaultValues: formData || buildInitialValues(aksjonspunkter, tilbakekrevingvalg),
   });
-
-  const varseltekst = formMethods.watch('varseltekst');
 
   const { formState } = formMethods;
 
   const [showDetails, setShowDetails] = useState<Details[]>([]);
 
-  const isForeldrepenger = fagsak.fagsakYtelseType === fagsakYtelseType.FORELDREPENGER;
-
   const hasOpenTilbakekrevingsbehandling =
     tilbakekrevingvalg !== undefined &&
     tilbakekrevingvalg.videreBehandling === tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER;
 
-  const previewMessage = useCallback(
-    (e: React.MouseEvent): void => {
-      previewCallback('', varseltekst || ' ');
-      e.preventDefault();
-    },
-    [varseltekst],
-  );
-
   const toggleDetaljer = hentToggleDetaljer(showDetails, setShowDetails);
 
   const simuleringResultatOption = simuleringResultat?.simuleringResultat;
-
+  const skalHaForm =
+    harAksjonspunkt(aksjonspunkter, AksjonspunktCode.VURDER_FEILUTBETALING) ||
+    harAksjonspunkt(aksjonspunkter, AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER);
+  const aksjonspunktTittler = isApOpen ? lagAksjonspunktTitler(aksjonspunkter) : [];
   return (
     <>
       <Heading size="small">
@@ -179,14 +170,13 @@ const SimuleringPanel: FunctionComponent<OwnProps> = ({
       <VerticalSpacer twentyPx />
       {simuleringResultatOption && (
         <>
-          {aksjonspunkt && (
-            <>
-              <AksjonspunktHelpTextTemp isAksjonspunktOpen={isApOpen}>
-                {[<FormattedMessage id="Simulering.AksjonspunktHelpText.5084" key="vurderFeilutbetaling" />]}
-              </AksjonspunktHelpTextTemp>
-              <VerticalSpacer twentyPx />
-            </>
-          )}
+          {aksjonspunktTittler.length > 0 &&
+            aksjonspunktTittler.map(tittel => (
+              <div key={tittel.key}>
+                <AksjonspunktHelpTextHTML>{[tittel]}</AksjonspunktHelpTextHTML>
+                <VerticalSpacer sixteenPx />
+              </div>
+            ))}
           <SimuleringSummary
             fom={simuleringResultatOption.periode.fom}
             tom={simuleringResultatOption.periode.tom}
@@ -211,84 +201,35 @@ const SimuleringPanel: FunctionComponent<OwnProps> = ({
         </>
       )}
       {!simuleringResultat && <FormattedMessage id="Simulering.ingenData" />}
-      {aksjonspunkt && (
+      {skalHaForm && (
         <Form
           formMethods={formMethods}
-          onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
+          onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkter))}
           setDataOnUnmount={setFormData}
         >
-          <VStack gap="10" align="start">
-            <TextAreaField
-              name="begrunnelse"
-              label={intl.formatMessage({ id: 'Simulering.vurdering' })}
-              validate={[required, minLength3, maxLength1500, hasValidText]}
-              maxLength={1500}
-              readOnly={readOnly}
-            />
-            <RadioGroupPanel
-              name="videreBehandling"
-              label={<FormattedMessage id="Simulering.videreBehandling" />}
-              validate={[required]}
-              isReadOnly={readOnly}
-              radios={[
-                {
-                  value: tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD,
-                  label: <FormattedMessage id="Simulering.gjennomfør" />,
-                  element: (
-                    <div className={styles.varsel}>
-                      <VerticalSpacer eightPx />
-                      <ArrowBox alignOffset={20}>
-                        <VStack gap="4">
-                          <HStack gap="2">
-                            <BodyShort size="small" className={styles.bold}>
-                              <FormattedMessage id="Simulering.varseltekst" />
-                            </BodyShort>
-                            <Tooltip content={lagHjelpetekstTooltip(isForeldrepenger)}>
-                              <QuestionmarkDiamondIcon className={styles.helpTextImage} />
-                            </Tooltip>
-                          </HStack>
-                          <TextAreaField
-                            name="varseltekst"
-                            label={intl.formatMessage({ id: 'Simulering.fritekst' })}
-                            validate={[required, minLength3, maxLength1500, hasValidText]}
-                            maxLength={1500}
-                            readOnly={readOnly}
-                            badges={[
-                              {
-                                type: 'info',
-                                titleText: getLanguageFromSprakkode(sprakkode),
-                              },
-                            ]}
-                          />
-                          {!readOnly && (
-                            <a href="" onClick={previewMessage} className={styles.previewLink}>
-                              <FormattedMessage id="Messages.PreviewText" />
-                            </a>
-                          )}
-                        </VStack>
-                      </ArrowBox>
-                    </div>
-                  ),
-                },
-                {
-                  value: `${tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD}${IKKE_SEND}`,
-                  label: <FormattedMessage id="Simulering.OpprettMenIkkeSendVarsel" />,
-                },
-                {
-                  value: tilbakekrevingVidereBehandling.TILBAKEKR_IGNORER,
-                  label: <FormattedMessage id="Simulering.avvent" />,
-                },
-              ]}
-            />
-            <Button
-              size="small"
-              variant="primary"
-              disabled={!formState.isDirty || formState.isSubmitting || readOnly}
-              loading={formState.isSubmitting}
-            >
-              <FormattedMessage id="SubmitButton.ConfirmInformation" />
-            </Button>
-          </VStack>
+          <TilbakekrevSøkerForm
+            aksjonspunkt={finnAksjonspunkt(aksjonspunkter, AksjonspunktCode.VURDER_FEILUTBETALING)}
+            fagsak={fagsak}
+            previewCallback={previewCallback}
+            readOnly={readOnly}
+            sprakkode={sprakkode}
+            formData={formData}
+            tilbakekrevingvalg={tilbakekrevingvalg}
+          />
+          <VerticalSpacer sixteenPx />
+          <EtterbetalingSøkerForm
+            readOnly={readOnly}
+            aksjonspunkt={finnAksjonspunkt(aksjonspunkter, AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER)}
+          />
+          <VerticalSpacer sixteenPx />
+          <Button
+            size="small"
+            variant="primary"
+            disabled={!formState.isDirty || formState.isSubmitting || readOnly}
+            loading={formState.isSubmitting}
+          >
+            <FormattedMessage id="SubmitButton.ConfirmInformation" />
+          </Button>
         </Form>
       )}
     </>

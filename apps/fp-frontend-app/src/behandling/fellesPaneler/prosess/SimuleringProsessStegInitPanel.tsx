@@ -34,7 +34,10 @@ const getForhandsvisFptilbakeCallback =
     return forhandsvisTilbakekrevingMelding(data).then(response => forhandsvisDokument(response));
   };
 
-const AKSJONSPUNKT_KODER = [AksjonspunktCode.VURDER_FEILUTBETALING];
+const AKSJONSPUNKT_KODER = [
+  AksjonspunktCode.VURDER_FEILUTBETALING,
+  AksjonspunktCode.KONTROLLER_STOR_ETTERBETALING_SØKER,
+];
 
 const ENDEPUNKTER_PANEL_DATA = [BehandlingApiKeys.TILBAKEKREVINGVALG, BehandlingApiKeys.SIMULERING_RESULTAT];
 type EndepunktPanelData = {
