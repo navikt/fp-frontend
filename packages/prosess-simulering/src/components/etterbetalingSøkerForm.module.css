@@ -1,3 +1,9 @@
 .readMore {
-  width: 50%;
+  width: 70%;
+}
+
+@media all and (max-width: 1350px) {
+  .readMore {
+    width: 90%;
+  }
 }
