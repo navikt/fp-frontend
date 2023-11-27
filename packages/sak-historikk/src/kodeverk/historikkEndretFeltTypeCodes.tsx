@@ -504,6 +504,10 @@ const historikkEndretFeltTypeCodes = {
     kode: 'DELVIS_REFUSJON_FØR_STARTDATO',
     feltId: 'HistorikkEndretFelt.DelvisRefusjonFørStardato',
   },
+  VURDERT_ETTERBETALING_TIL_SØKER: {
+    kode: 'VURDERT_ETTERBETALING_TIL_SØKER',
+    feltId: 'HistorikkEndretFelt.Kontroll.Etterbetaling',
+  },
   KONTROLL_AV_BESTEBEREGNING: {
     kode: 'KONTROLL_AV_BESTEBEREGNING',
     feltId: 'HistorikkEndretFelt.Kontroll.Besteberegning',
