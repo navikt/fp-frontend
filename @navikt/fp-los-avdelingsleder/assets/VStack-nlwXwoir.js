@@ -1,0 +1,1 @@
+import{r as a,R as e}from"./index-DogsOklH.js";import{S as o}from"./nb_NO-OML_0A-C.js";const f=a.forwardRef((r,t)=>e.createElement(o,Object.assign({},r,{ref:t,direction:"column",wrap:!1})));export{f as V};

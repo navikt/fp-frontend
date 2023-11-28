@@ -1,4 +1,0 @@
-import{t as s,j as o,l as i}from"./index.es-200de3ec.js";import{a as n}from"./chunk-AY7I2SME-5eb1ab46.js";import{m as d}from"./nb_NO-d43674a7.js";import{K as r}from"./KlageBehandlingModal-98e917e9.js";import"./index-6d8bab86.js";const c=s(d),v={title:"app/klage/KlageBehandlingModal",component:r},a=()=>o.jsx(i.RawIntlProvider,{value:c,children:o.jsx(r,{visModal:!0,lukkModal:n("button-click")})});var e,t,l;a.parameters={...a.parameters,docs:{...(e=a.parameters)==null?void 0:e.docs,source:{originalSource:`() => <RawIntlProvider value={intl}>
-    <KlageBehandlingModal visModal lukkModal={action('button-click')} />
-  </RawIntlProvider>`,...(l=(t=a.parameters)==null?void 0:t.docs)==null?void 0:l.source}}};const k=["visModal"];export{k as __namedExportsOrder,v as default,a as visModal};
-//# sourceMappingURL=KlageBehandlingModal.stories-5faf60e5.js.map

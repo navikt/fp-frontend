@@ -1,6 +1,0 @@
-import{j as g}from"./jsx-runtime-86dfebf6.js";import{g as f,m as c}from"./nb_NO-31758bbb.js";import{D as o}from"./DriftsmeldingPanel-7f5e1f2d.js";import"./index-1b03fe98.js";import"./index-6fd5a17b.js";import"./ExclamationmarkTriangleFill-7f9177aa.js";const p=f(c),T={title:"los/saksbehandler/DriftsmeldingPanel",component:o,decorators:[p]},a=({driftsmeldinger:l})=>g(o,{driftsmeldinger:l}),e=a.bind({});e.args={driftsmeldinger:[{id:"1",melding:"Dette er en driftsmelding"}]};const r=a.bind({});r.args={driftsmeldinger:[{id:"1",melding:"Dette er en driftsmelding"},{id:"2",melding:"Dette er en annen driftsmelding"}]};var s,i,t;e.parameters={...e.parameters,docs:{...(s=e.parameters)==null?void 0:s.docs,source:{originalSource:`({
-  driftsmeldinger
-}) => <DriftsmeldingPanel driftsmeldinger={driftsmeldinger} />`,...(t=(i=e.parameters)==null?void 0:i.docs)==null?void 0:t.source}}};var n,d,m;r.parameters={...r.parameters,docs:{...(n=r.parameters)==null?void 0:n.docs,source:{originalSource:`({
-  driftsmeldinger
-}) => <DriftsmeldingPanel driftsmeldinger={driftsmeldinger} />`,...(m=(d=r.parameters)==null?void 0:d.docs)==null?void 0:m.source}}};const _=["EnDriftsmelding","ToDriftsmelding"];export{e as EnDriftsmelding,r as ToDriftsmelding,_ as __namedExportsOrder,T as default};
-//# sourceMappingURL=DriftsmeldingPanel.stories-63bb1175.js.map

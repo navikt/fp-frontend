@@ -1,1 +1,0 @@
-{"version":3,"file":"landkoder-d4e281fc.js","sources":["../../../kodeverk/src/landkoder.ts"],"sourcesContent":["const landkoder = {\n  NORGE: 'NOR',\n};\n\nexport default landkoder;\n"],"names":["landkoder"],"mappings":"AAAA,MAAMA,EAAY,CAChB,MAAO,KACT"}
