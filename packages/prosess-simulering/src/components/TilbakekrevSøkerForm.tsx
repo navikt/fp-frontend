@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactElement, useCallback } from 'react';
-import { useForm } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, HStack, VStack } from '@navikt/ds-react';
 
@@ -69,28 +69,22 @@ interface OwnProps {
   fagsak: Fagsak;
   sprakkode: string;
   aksjonspunkt?: Aksjonspunkt;
-  tilbakekrevingvalg?: TilbakekrevingValg;
   readOnly: boolean;
   previewCallback: (mottaker: string, fritekst: string) => Promise<any>;
-  formData?: FormValues;
 }
 
 const TilbakekrevSøkerForm: FunctionComponent<OwnProps> = ({
   readOnly,
   sprakkode,
   previewCallback,
-  formData,
-  tilbakekrevingvalg,
   aksjonspunkt,
   fagsak,
 }) => {
   const intl = useIntl();
 
-  const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(aksjonspunkt, tilbakekrevingvalg),
-  });
+  const { watch } = useFormContext<FormValues>();
 
-  const varseltekst = formMethods.watch('varseltekst');
+  const varseltekst = watch('varseltekst');
 
   const isForeldrepenger = fagsak.fagsakYtelseType === fagsakYtelseType.FORELDREPENGER;
 
