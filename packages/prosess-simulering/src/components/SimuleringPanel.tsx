@@ -213,8 +213,6 @@ const SimuleringPanel: FunctionComponent<OwnProps> = ({
             previewCallback={previewCallback}
             readOnly={readOnly}
             sprakkode={sprakkode}
-            formData={formData}
-            tilbakekrevingvalg={tilbakekrevingvalg}
           />
           <VerticalSpacer sixteenPx />
           <EtterbetalingSøkerForm
