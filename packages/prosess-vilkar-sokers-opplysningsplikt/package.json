@@ -37,7 +37,7 @@
     "@navikt/ds-css": "5.11.2",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@storybook/addon-actions": "7.6.0",
-    "@storybook/react": "7.6.0",
+    "@storybook/react": "7.6.2",
     "@storybook/react-vite": "7.6.0",
     "@testing-library/react": "14.1.2",
     "@testing-library/user-event": "14.5.1",
