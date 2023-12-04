@@ -144,7 +144,7 @@
     "@navikt/fp-storybook-utils": "workspace:*",
     "@navikt/fp-utils-test": "workspace:*",
     "@storybook/addon-actions": "7.6.0",
-    "@storybook/react": "7.6.0",
+    "@storybook/react": "7.6.3",
     "@storybook/react-vite": "7.6.0",
     "@testing-library/react": "14.1.2",
     "@testing-library/user-event": "14.5.1",
