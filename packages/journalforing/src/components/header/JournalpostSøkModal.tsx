@@ -71,7 +71,7 @@ const JournalpostSøkModal: FunctionComponent<OwnProps> = ({
         <VerticalSpacer sixteenPx />
         {harSøktOgFunnetIngenMatch && (
           <BodyShort>
-            <FormattedMessage id="Journalpost.Søk.IngenTreff" />
+            <FormattedMessage id="Journalpost.Søk.IngenTreffEllerManglerTilgang" />
           </BodyShort>
         )}
       </Modal.Body>

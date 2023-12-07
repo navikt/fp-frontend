@@ -18,7 +18,7 @@
   "Journalpost.Søk.Finn": "Finn journalpost",
   "Journalpost.Søk.Forklaring": "Hvis du trenger å knytte en allerede journalført journalpost til en annen sak, kan du bruke denne funksjonaliteten. Journalposten vil da kopieres til den nye saken du legger til.",
   "Journalpost.Søk.JournalpostID": "Journalpost-ID",
-  "Journalpost.Søk.IngenTreff": "Finner ingen journalpost med denne IDen",
+  "Journalpost.Søk.IngenTreffEllerManglerTilgang": "Søket ga ingen treff eller du mangler tilgang til denne journalposten",
   "Journalpost.Søk.KunTall": "Kan kun inneholde tall",
   "ValgtOppgave.Avbryt": "Avbryt",
   "ValgtOppgave.Journalfør": "Journalfør",
