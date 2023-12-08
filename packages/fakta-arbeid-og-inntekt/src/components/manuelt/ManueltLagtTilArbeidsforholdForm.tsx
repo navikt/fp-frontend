@@ -103,7 +103,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
         ...formValues,
       };
       // @ts-ignore Fiks
-      registrerArbeidsforhold(params).then(() => {
+      return registrerArbeidsforhold(params).then(() => {
         oppdaterTabell((gammelData: ArbeidsforholdOgInntektRadData[]) => {
           const rad = {
             arbeidsgiverIdent: MANUELT_ORG_NR,
