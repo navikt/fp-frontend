@@ -13409,7 +13409,7 @@ __metadata:
     stylelint-order: 6.0.3
     typescript: 5.3.2
     vite: 5.0.2
-    vite-plugin-dts: 3.6.3
+    vite-plugin-dts: 3.6.4
     vite-plugin-externalize-deps: 0.7.0
     vite-plugin-html: 3.2.0
     vitest: 0.34.6
@@ -20803,9 +20803,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-dts@npm:3.6.3":
-  version: 3.6.3
-  resolution: "vite-plugin-dts@npm:3.6.3"
+"vite-plugin-dts@npm:3.6.4":
+  version: 3.6.4
+  resolution: "vite-plugin-dts@npm:3.6.4"
   dependencies:
     "@microsoft/api-extractor": ^7.38.0
     "@rollup/pluginutils": ^5.0.5
@@ -20819,7 +20819,7 @@ __metadata:
   peerDependenciesMeta:
     vite:
       optional: true
-  checksum: cf44bfd8551081be04bbd89cf87841d185217e0a841ceafcec756ef8658159d6169370880a1fa19f2da2ac50cf487dad884e31be269c9512eaf89d5a5bb567c2
+  checksum: 94930e89d0d0daca2f7bb411d5c08dbde151c309c713b3a9d2a9f4a0a4b5aef048fdd63d84a8828703a754dccc934e6a309dcc45b51bc58bb6b77f9da6e3b800
   languageName: node
   linkType: hard
 
