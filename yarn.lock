@@ -13400,7 +13400,7 @@ __metadata:
     eslint-plugin-vitest: 0.3.10
     gh-pages: 6.1.0
     husky: 8.0.3
-    jsdom: 23.0.0
+    jsdom: 23.0.1
     lerna: 8.0.0
     lint-staged: 15.1.0
     react-test-renderer: 18.2.0
@@ -15241,9 +15241,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsdom@npm:23.0.0":
-  version: 23.0.0
-  resolution: "jsdom@npm:23.0.0"
+"jsdom@npm:23.0.1":
+  version: 23.0.1
+  resolution: "jsdom@npm:23.0.1"
   dependencies:
     cssstyle: ^3.0.0
     data-urls: ^5.0.0
@@ -15267,11 +15267,11 @@ __metadata:
     ws: ^8.14.2
     xml-name-validator: ^5.0.0
   peerDependencies:
-    canvas: ^3.0.0
+    canvas: ^2.11.2
   peerDependenciesMeta:
     canvas:
       optional: true
-  checksum: 51c787b6cee1add7a60b5a32faafbff60e29b246568c3c87c0ed766105b2b286dbe4e5bd31d63dc575c1f3eaaa124f1fb02a6b0923780cf95f98faadf33ad1b1
+  checksum: 1f4f21549bf3cb787521adb466dcba269187109a84ea5ad42446b5fc11336c4a303670dc51b742b1692e75ca76f41a9d8fc72e8fc2f7cb53e372441e6e3ce1dd
   languageName: node
   linkType: hard
 
