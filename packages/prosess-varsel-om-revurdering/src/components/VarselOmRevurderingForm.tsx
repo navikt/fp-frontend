@@ -28,7 +28,7 @@ import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import styles from './varselOmRevurderingForm.module.css';
 
 const minLength3 = minLength(3);
-const maxLength6000 = maxLength(6000);
+const maxLength10000 = maxLength(10000);
 
 export type ForhandsvisData = {
   mottaker: string;
@@ -194,8 +194,8 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
                     badges={[{ type: 'info', titleText: language }]}
                     name="fritekst"
                     label={intl.formatMessage({ id: 'VarselOmRevurderingForm.FritekstIBrev' })}
-                    validate={[required, minLength3, maxLength6000, hasValidText]}
-                    maxLength={6000}
+                    validate={[required, minLength3, maxLength10000, hasValidText]}
+                    maxLength={10000}
                   />
                   <VerticalSpacer fourPx />
                   <a
