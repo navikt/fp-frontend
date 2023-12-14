@@ -3726,7 +3726,7 @@ __metadata:
     react-popper: 2.3.0
     react-responsive: 9.0.2
     react-router: 6.20.0
-    react-router-dom: 6.20.0
+    react-router-dom: 6.21.0
     react-test-renderer: 18.2.0
     rollup-plugin-sourcemaps: 0.6.3
     storybook: 7.6.0
@@ -3830,7 +3830,7 @@ __metadata:
     react: 18.2.0
     react-hook-form: 7.48.2
     react-intl: 6.5.5
-    react-router-dom: 6.20.0
+    react-router-dom: 6.21.0
     storybook: 7.6.0
     stylelint: 15.11.0
     typescript: 5.3.2
@@ -3869,7 +3869,7 @@ __metadata:
     react: 18.2.0
     react-hook-form: 7.48.2
     react-intl: 6.5.5
-    react-router-dom: 6.20.0
+    react-router-dom: 6.21.0
     storybook: 7.6.0
     stylelint: 15.11.0
     typescript: 5.3.2
@@ -3913,7 +3913,7 @@ __metadata:
     react-dom: 18.2.0
     react-hook-form: 7.48.2
     react-intl: 6.5.5
-    react-router-dom: 6.20.0
+    react-router-dom: 6.21.0
     storybook: 7.6.0
     stylelint: 15.11.0
     typescript: 5.3.2
@@ -3988,7 +3988,7 @@ __metadata:
     react: 18.2.0
     react-hook-form: 7.48.2
     react-intl: 6.5.5
-    react-router-dom: 6.20.0
+    react-router-dom: 6.21.0
     storybook: 7.6.0
     stylelint: 15.11.0
     typescript: 5.3.2
@@ -4023,7 +4023,7 @@ __metadata:
     react: 18.2.0
     react-hook-form: 7.48.2
     react-intl: 6.5.5
-    react-router-dom: 6.20.0
+    react-router-dom: 6.21.0
     storybook: 7.6.0
     stylelint: 15.11.0
     typescript: 5.3.2
@@ -5003,7 +5003,7 @@ __metadata:
     moment: 2.29.4
     react: 18.2.0
     react-intl: 6.5.5
-    react-router-dom: 6.20.0
+    react-router-dom: 6.21.0
     storybook: 7.6.0
     stylelint: 15.11.0
     typescript: 5.3.2
@@ -5310,7 +5310,7 @@ __metadata:
     react: 18.2.0
     react-hook-form: 7.48.2
     react-intl: 6.5.5
-    react-router-dom: 6.20.0
+    react-router-dom: 6.21.0
     storybook: 7.6.0
     stylelint: 15.11.0
     typescript: 5.3.2
@@ -5355,7 +5355,7 @@ __metadata:
     react: 18.2.0
     react-hook-form: 7.48.2
     react-intl: 6.5.5
-    react-router-dom: 6.20.0
+    react-router-dom: 6.21.0
     typescript: 5.3.2
     vite: 5.0.2
   languageName: unknown
@@ -7483,6 +7483,13 @@ __metadata:
   version: 1.13.0
   resolution: "@remix-run/router@npm:1.13.0"
   checksum: 076f42f691f526e01d62504a2270ed0ea865a83a965574fa583898f758b51dd4a9fb3336c78884efb9746700f9239e25eafca2e27a5efa2595f02aac69c6c855
+  languageName: node
+  linkType: hard
+
+"@remix-run/router@npm:1.14.0":
+  version: 1.14.0
+  resolution: "@remix-run/router@npm:1.14.0"
+  checksum: 573138c1f5d93130bf950fa1abf209280abf831a065eecb70965d55239ffda3a53a75a0e15c79cea408734efefcac03041fc07a29e98adaca9aa309a1d1c9656
   languageName: node
   linkType: hard
 
@@ -18277,16 +18284,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:6.20.0":
-  version: 6.20.0
-  resolution: "react-router-dom@npm:6.20.0"
+"react-router-dom@npm:6.21.0":
+  version: 6.21.0
+  resolution: "react-router-dom@npm:6.21.0"
   dependencies:
-    "@remix-run/router": 1.13.0
-    react-router: 6.20.0
+    "@remix-run/router": 1.14.0
+    react-router: 6.21.0
   peerDependencies:
     react: ">=16.8"
     react-dom: ">=16.8"
-  checksum: ee7c0c4ca82abe21cf2739d238533056fba389fd57641b9b7da5a89eaa6280ad819afe62b66168ab8b8ec4118fd58d49486c8d99651e46c467894e54cd0988f2
+  checksum: ea9dfc1e089c0623c7cb45f2a1da807a3505e8c816d5a7021d3d0d04a7a9541850b45f00195b8fa3cc5f981d59170bc27f1ba81407f0d39346642e9759a2c059
   languageName: node
   linkType: hard
 
@@ -18298,6 +18305,17 @@ __metadata:
   peerDependencies:
     react: ">=16.8"
   checksum: 38bd986cb14355d5dc648e704190aa4d29935eee44423d93f13245472cf857a71a59b330c1f57395c9dffe8f243c846ebc8cc4149a44d520c96e99af90d6382b
+  languageName: node
+  linkType: hard
+
+"react-router@npm:6.21.0":
+  version: 6.21.0
+  resolution: "react-router@npm:6.21.0"
+  dependencies:
+    "@remix-run/router": 1.14.0
+  peerDependencies:
+    react: ">=16.8"
+  checksum: e9e50767cf85e7e216aed97dcc280a8b0b83e4f0790274096991823046bb86aa1aaab3ba10a4de11bd89d73c9eeb880df1d50055e6e4f44fcdfad38adcd6c1b8
   languageName: node
   linkType: hard
 
