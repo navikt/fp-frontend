@@ -17,8 +17,6 @@ type QueryParams = {
   risiko?: boolean;
 };
 
-const DEV_LOGIN_URL = 'http://localhost:8080/fpsak/resource/login';
-
 export const journalføringRoutePath = `/${JOURNALFØRING_PATH}`;
 export const utbetalingsdataIs15RoutePath = `/${UTBETALINGSDATA_PATH}`;
 export const avdelingslederRoutePath = `/${AVDELINGSLEDER_PATH}`;
@@ -96,10 +94,3 @@ export const erUrlUnderBehandling = (location: Location): boolean => !location.p
 
 export const erBehandlingValgt = (location: Location): boolean =>
   location.pathname.includes('behandling') && !location.pathname.endsWith('behandling/');
-
-export const redirectToLogin = () => {
-  if (import.meta.env.MODE === 'development') {
-    window.location.assign(DEV_LOGIN_URL);
-  }
-  return undefined;
-};
